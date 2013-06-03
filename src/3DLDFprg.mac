@@ -1,0 +1,287 @@
+%%%% 3DLDFprg.mac
+ 
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013 The Free Software Foundation
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+  
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+
+\def\docname{3DLDF: The Program}
+
+\newlinechar=`^^J
+
+\def\MP/{METAPOST} %% LDF 2002.04.10.  Added this definition.
+                  %% !! It needs to defined correctly, using the
+                  %% proper font.
+
+\def\MF/{METAFONT} %% LDF 2002.10.13.   Added this definition.
+                  %% !! It needs to defined correctly, using the
+                  %% proper font.
+
+\def\PERIOD{.}
+
+\def\AMP{\char`\&}
+
+\def\WEB/{{\tt WEB}}
+\def\CWEB/{{\tt CWEB}}
+\def\weave/{{\tt weave}}
+\def\cweave/{{\tt cweave}}
+\def\tangle/{{\tt tangle}}
+\def\ctangle/{{\tt ctangle}}
+
+\def\TDLDF{3DLDF}
+\def\GTDLDF{GNU 3DLDF}
+
+\def\newline{\hfil\break}
+%\def\9#1{{\bf #1}}  %% Commented-out.  LDF 2004.02.11.
+\def\filename{\bgroup\catcode`\_=12\def\A##1{{\tt ##1}\egroup}\A}
+
+%% *** (3) 
+%% The contents of these functions _cannot_ be put into the
+%% corresponding functions that write code for the Texinfo manual
+%% because they are used in indexing commands.
+%% LDF 2008.02.12.
+
+%% Class Functions
+\def\cfunc#1#2{\&{#1}::\\{#2}}
+
+%% Class Operator Functions
+\def\cofunc#1#2{\&{#1}::\\{operator#2}}
+
+%% Non-Class Operator Functions
+\def\ofunc#1{\\{operator#1}}
+
+\def\<#1>{$\langle${\it #1\/}$\rangle$}
+
+%% It is unfortunately not possible to redefine `\§' so that `_' is
+%% replaced by `\space'.  It doesn't work when `\§' is used in a
+%% section heading.  LDF 2004.05.05.
+
+\def\§#1>{$\langle${\rm #1}$\rangle$}  %% For syntax rules.
+
+\def\rcslog#1{\begingroup\par\noindent
+\catcode`\$=12
+\catcode`\_=12
+\tt
+\obeyspaces
+}
+
+\def\endrcslog{\endgroup\par}
+
+
+\newif\ifdoinitials
+
+\doinitialstrue
+%\doinitialsfalse
+
+\ifdoinitials
+\message{^^JPrinting initials and date.}\else
+\message{^^JNot printing initials and date, except in log entries.}
+\fi
+
+\def\initials#1{\ifdoinitials\leavevmode
+\hbox{{\ninerm $\lbrack$#1$\rbrack$\hskip .375em plus .5pt minus .5pt}}\fi}
+
+%% LDF 2002.10.27.  These macros are for my log comments.  Log
+%% comments describe changes I've made and 
+%% contain other information.  It may not always be desirable to print
+%% them, so they can be suppressed by setting \dologfalse.
+
+\newif\ifdolog
+
+\dologtrue
+%\dologfalse
+
+\ifdolog
+\message{^^JPrinting log entries.}
+\def\SUBLOG#1{\setbox1=\hbox{{\bf\kern1em #1\kern1em}}%
+\dimen0=1ex
+\dimen1=1ex\advance\dimen1 by -.375pt
+\dimen2=\hsize
+\advance\dimen2 by -\wd1
+\skip0=3pt}
+
+\def\LOG{\begingroup\doinitialstrue
+   \SUBLOG{Log}%
+   \medskip\par\noindent
+   \vbox{\line{\vrule height \dimen0 width .5\dimen2 depth -\dimen1
+   \copy1\vrule height \dimen0 width .5\dimen2 depth -\dimen1}%
+   \vskip\skip0}\nobreak\par\nobreak}
+
+\def\ENDLOG{\nobreak\par
+   \nobreak
+   \vskip\skip0
+   \vbox{\line{\vrule height \dimen0 width \hsize depth -\dimen1}}%
+   \endgroup}
+
+\else
+
+\message{^^JNot printing log entries.}
+\long\def\LOG#1{\ifx#1\ENDLOG\let\SUBLOG=\relax\else\def\SUBLOG{\LOG}\fi
+\SUBLOG}
+\fi
+
+\def\SUBTODO#1{\setbox1=\hbox{{\bf\kern1em #1\kern1em}}%
+\dimen0=1ex
+\dimen1=1ex\advance\dimen1 by -.375pt
+\dimen2=\hsize
+\advance\dimen2 by -\wd1
+\skip0=3pt}
+
+\def\TODO{\begingroup\doinitialstrue
+   \SUBTODO{To Do}%
+   \medskip\par\noindent
+   \vbox{\line{\vrule height \dimen0 width .5\dimen2 depth -\dimen1
+   \copy1\vrule height \dimen0 width .5\dimen2 depth -\dimen1}%
+   \vskip\skip0}\nobreak\par\nobreak}
+
+\def\ENDTODO{\nobreak\par
+   \nobreak
+   \vskip\skip0
+   \vbox{\line{\vrule height \dimen0 width \hsize depth -\dimen1}}%
+   \endgroup}
+
+
+%% Added.  LDF 2005.01.28.
+
+\def\SUBUNDERCONSTRUCTION#1{\setbox1=\hbox{{\bf\kern1em #1\kern1em}}%
+\dimen0=1ex
+\dimen1=1ex\advance\dimen1 by -.375pt
+\dimen2=\hsize
+\advance\dimen2 by -\wd1
+\skip0=3pt}
+
+\def\UNDERCONSTRUCTION{\begingroup\doinitialstrue
+   \SUBUNDERCONSTRUCTION{To Do}%
+   \medskip\par\noindent
+   \vbox{\line{\vrule height \dimen0 width .5\dimen2 depth -\dimen1
+   \copy1\vrule height \dimen0 width .5\dimen2 depth -\dimen1}%
+   \vskip\skip0}\nobreak\par\nobreak}
+
+\def\ENDUNDERCONSTRUCTION{\nobreak\par
+   \nobreak
+   \vskip\skip0
+   \vbox{\line{\vrule height \dimen0 width \hsize depth -\dimen1}}%
+   \endgroup}
+
+%% End of added code.  LDF 2005.01.28.
+
+\def\VRB{\bgroup\tt
+\catcode`\\=12
+\catcode`\#=12
+\catcode`\_=12
+\catcode`\$=12
+\catcode`\§=0}
+
+\def\EVRB{\catcode`\\=0
+\catcode`\#=6
+\catcode`\_=8
+\catcode`\$=3
+\catcode`\§=12
+\egroup}
+
+%%% LDF 2002.10.27. Added \BARGS (begin arguments), \EARGS (end
+%%% arguments) and \ARG for typesetting explanations of the arguments
+%%% to functions.
+
+\def\BARGS#1{\par\bgroup\parindent=0pt  %% Begin arguments.
+  \leftskip=0pt
+  \setbox0=\hbox{#1\hskip2pc}\dimen0=\wd0}
+
+\def\EARGS{\par\medskip\egroup}  %% End arguments.
+
+%%% LDF 2002.11.12.  The argument to \ARG should be followed by \relax
+%%% in order to suppress a space at the beginning of the first line of
+%%% the following indented paragraph.  I couldn't figure out a way of
+%%% suppressing the space within the definition of \ARG.
+
+\def\ARG#1{\medskip
+\hangindent=\dimen0
+\hangafter=1
+\leavevmode
+\hbox to \dimen0{#1\hfil}}
+
+%% LDF 2002.11.05.  Added \BRVS (begin return values), 
+%% \ERVS (end return values), and \RV (return value) for typesetting
+%% explanations of the return values of functions.
+
+\let\BRVS=\BARGS
+\let\ERVS=\EARGS
+\let\RV=\ARG
+
+
+%% LDF 2002.10.27.  Added.
+%% For footnotes.
+
+\newcount\fntctr %% Footnote counter.
+\fntctr=0
+\def\fnote{\advance\fntctr by 1\footnote{${}^{\the\fntctr}$}}
+
+%% LDF 2003.08.25.  Added for the GNU GENERAL PUBLIC LICENSE (in file gpl.tex),
+%% and the GNU Free Documentation License (in file fdl.tex).
+\newskip\narrowskip
+\narrowskip=1cm
+
+\def\beginnarrow{\bgroup\leftskip=\narrowskip
+\rightskip=\narrowskip
+\parindent=0pt}
+
+\def\endnarrow{\par\egroup}
+
+%% *** (3) Parentheses
+
+\def\LP{(}
+\def\RP{)}
+
+
+%% ** (2) 
+
+%% * (1) End of 3DLDFprg.mac
+
+%% Local Variables:
+%% mode:TeX
+%% eval:(local-set-key "\C-cw" 'cweave)
+%% run-cweave-on-file:"3DLDFprg.web"
+%% End:
+
