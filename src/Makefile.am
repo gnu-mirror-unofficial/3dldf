@@ -285,6 +285,8 @@ conicsct.o: conicsct.c++ conicsct.h++ colors.h++ complex.h++ creatnew.h++ curves
                          pspglb.h++ rectangs.h++ shapes.h++ transfor.h++ triangle.h++
 
 
+crclslc.o: crclslc.c++ crclslc.h++ 
+
 #### !! START HERE:  LDF 2013.04.23.  Make rules for the '.o' files.
 
 #     
