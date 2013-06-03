@@ -1,0 +1,260 @@
+@q * (1) Sphere_Set_Option_Struct.@> 
+@* {\bf Sphere\_Set\_Option\_Struct}.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this section.
+\ENDLOG
+
+@q ** (2) Struct definition.@> 
+@*1 Struct definition.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this |struct| definition.
+
+\initials{LDF 2005.10.19.}
+Added the |unsigned ints| |divisions|, 
+|divisions_horizontal|, and |divisions_vertical|.
+
+\initials{LDF 2005.10.20.}
+Added |real diameter| and |Transform* transform|.
+
+\initials{LDF 2005.10.20.}
+Added |unsigned int circle_point_count|.
+
+\initials{LDF 2005.10.25.}
+Changed |unsigned short type| to |sphere_type|.
+
+\initials{LDF 2005.10.25.}
+Removed |unsigned int divisions|.
+
+\initials{LDF 2005.10.28.}
+Changed |diameter| to |radius|  
+Changed accordingly everywhere else without comment.
+\ENDLOG
+
+@<Define |struct Sphere_Set_Option_Struct|@>=
+  
+struct
+Sphere_Set_Option_Struct
+{
+   Point* center;
+   unsigned short sphere_type;
+   unsigned int divisions_horizontal;
+   unsigned int divisions_vertical;
+   real radius;
+   unsigned int circle_point_count;
+   Transform* transform;
+
+   @<Declare |Sphere_Set_Option_Struct| functions@>@;
+
+};
+
+@q ** (2) |Sphere_Set_Option_Struct| functions.@> 
+@*1 {\bf Sphere\_Set\_Option\_Struct} functions.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this section.
+\ENDLOG
+
+
+@q *** (3) Constructors.  @>
+@*2 Constructors.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this section.
+\ENDLOG
+
+@q **** (4) Default constructor.@>   
+@*3 Default constructor.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this function.
+
+\initials{LDF 2005.10.19.}
+Now setting |divisions|, |divisions_vertical|, and 
+|divisions_horizontal| to 0.
+
+\initials{LDF 2005.10.25.}
+Changed |unsigned short type| to |sphere_type|.
+Now setting |sphere_type = Sphere::GLOBE_TYPE|.
+
+\initials{LDF 2005.10.25.}
+Now setting |divisions|, |divisions_vertical|, and
+|divisions_horizontal| to |Sphere::DEFAULT_DIVISIONS|.
+
+\initials{LDF 2005.10.25.}
+Removed |unsigned int divisions|.
+\ENDLOG
+
+@q ***** (5) Declaration.@>  
+
+@<Declare |Sphere_Set_Option_Struct| functions@>=
+
+Sphere_Set_Option_Struct(void);
+
+@q ***** (5) Definition.@>  
+
+@
+@<Define |Sphere_Set_Option_Struct| functions@>=
+
+Sphere_Set_Option_Struct::Sphere_Set_Option_Struct(void) 
+{
+    center               = 0;
+    sphere_type          = Sphere::GLOBE_TYPE;
+    divisions_vertical   = Sphere::DEFAULT_DIVISIONS;
+    divisions_horizontal = Sphere::DEFAULT_DIVISIONS;
+}
+
+@q *** (3) Destructor.@> 
+@*2 Destructor.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@>  
+
+@<Declare |Sphere_Set_Option_Struct| functions@>=
+
+~Sphere_Set_Option_Struct(void); 
+
+@q **** (4) Definition.@>  
+
+@
+@<Define |Sphere_Set_Option_Struct| functions@>=
+
+Sphere_Set_Option_Struct::~Sphere_Set_Option_Struct(void) 
+{
+    delete center;
+
+    return;
+}
+
+@q *** (3) Clear.@> 
+@*2 Clear.
+\initials{LDF 2005.05.26.}
+
+\LOG
+\initials{LDF 2005.05.26.}
+Added this function.
+
+\initials{LDF 2005.10.25.}
+Changed |unsigned short type| to |sphere_type|.
+Now setting |sphere_type = SPHERE_NULL_TYPE|.
+\ENDLOG
+
+@q **** (4) Declaration.@>  
+
+@<Declare |Sphere_Set_Option_Struct| functions@>=
+
+int 
+clear(void); 
+
+@q **** (4) Definition.@>  
+
+@
+@<Define |Sphere_Set_Option_Struct| functions@>=
+
+int
+Sphere_Set_Option_Struct::clear(void) 
+{
+    delete center;
+    center = 0;
+
+    sphere_type = Sphere::SPHERE_NULL_TYPE;
+
+    return 0;
+
+}  /* End of |Sphere_Set_Option_Struct::clear()| definition.  */
+
+
+@q *** (3) Show.@> 
+@*2 Show.
+\initials{LDF 2005.10.19.}
+
+\LOG
+\initials{LDF 2005.10.19.}
+Added this function.
+
+\initials{LDF 2005.10.19.}
+Now showing the |unsigned ints| |divisions|, |divisions_vertical|, and 
+|divisions_horizontal|.
+
+\initials{LDF 2005.10.20.}
+Now showing |real diameter|.
+
+\initials{LDF 2005.10.20.}
+Now showing |unsigned int circle_point_count|.
+
+\initials{LDF 2005.10.25.}
+Now showing |unsigned short sphere_type|.
+
+\initials{LDF 2005.10.25.}
+Removed |unsigned int divisions|.
+\ENDLOG
+
+@q **** (4) Declaration.@>  
+
+@<Declare |Sphere_Set_Option_Struct| functions@>=
+
+int 
+show(string text = ""); 
+
+@q **** (4) Definition.@>  
+
+@
+@<Define |Sphere_Set_Option_Struct| functions@>=
+
+int
+Sphere_Set_Option_Struct::show(string text) 
+{
+    
+   if (text == "")
+      text = "Sphere_Set_Option_Struct";
+
+   cerr << text << ":" << endl;
+
+@q ***** (5) |sphere_type|.@> 
+
+   cerr << "sphere_type == ";
+
+   if (sphere_type == Sphere::SPHERE_NULL_TYPE)
+      cerr << "Sphere::SPHERE_NULL_TYPE";
+   else if (sphere_type == Sphere::GLOBE_TYPE)
+      cerr << "Sphere::GLOBE_TYPE";
+   else if (sphere_type == Sphere::PANEL_TYPE)
+      cerr << "Sphere::PANEL_TYPE";
+   else
+      cerr << "?? (Invalid type)";
+   
+   cerr << endl;
+
+
+@q ***** (5).@> 
+
+   if (center == 0)
+      cerr << "center == 0" << endl;
+   else
+      center->show("center");
+
+   cerr << "radius == " << radius 
+        << endl
+        << "circle_point_count == " << circle_point_count
+        << endl 
+        << "divisions_vertical == " << divisions_vertical << endl;
+
+    return 0;
+
+}  /* End of |Sphere_Set_Option_Struct::show()| definition.  */
