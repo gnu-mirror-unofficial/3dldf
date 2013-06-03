@@ -75,22 +75,12 @@ bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT)
 
 lib_LTLIBRARIES = lib3dldflb.la 
 
-3dldflb_CWEB_files = arc.web
-
-3dldflb_c_files = $(3dldflb_CWEB_files:.web=.c)
-3dldflb_cpp_files = $(3dldflb_CWEB_files:.web=.c++)
-3dldflb_h_files = $(3dldflb_CWEB_files:.web=.h)
-3dldflb_hpp_files = $(3dldflb_CWEB_files:.web=.h++)
-3dldflb_lo_files = $(3dldflb_CWEB_files:.web=.lo)
-
-3dldf_LDADD = lib3dldflb.la 
-
-3dldf_SOURCES = circles.web cncsctlt.web colall.web colors.web complex.web \
+3dldflb_CWEB_files = arc.web circles.web cncsctlt.web colall.web colors.web complex.web \
                 cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
                 ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
-                imetfncs.web intro.web io.web lines.web loader.web main.web \
+                imetfncs.web intro.web io.web lines.web \
                 matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
                 parahypr.web parser2.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
@@ -100,6 +90,16 @@ lib_LTLIBRARIES = lib3dldflb.la
                 spheres.web sphrdevl.web transfor.web triangle.web \
                 utility.web
 
+
+3dldflb_c_files = $(3dldflb_CWEB_files:.web=.c)
+3dldflb_cpp_files = $(3dldflb_CWEB_files:.web=.c++)
+3dldflb_h_files = $(3dldflb_CWEB_files:.web=.h)
+3dldflb_hpp_files = $(3dldflb_CWEB_files:.web=.h++) loader.h++
+3dldflb_lo_files = $(3dldflb_CWEB_files:.web=.lo)
+
+3dldf_LDADD = lib3dldflb.la 
+
+3dldf_SOURCES = main.web
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
 3dldf_c_files = $(3dldf_SOURCES:.web=.c)
@@ -152,16 +152,17 @@ dummy_SOURCES = dummy.cxx
 EXTRA_DIST = check_scan_parse_output.sh patterns.web prelims.web
 
 CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_files) \
-              $(3dldf_OBJECTS) $(3dldf_rpo_files)
-
-
+              $(3dldf_OBJECTS) $(3dldf_rpo_files) \
+              $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
+              $(3dldflb_hpp_files) $(3dldflb_lo_files)
+ 
 # AM_CXXFLAGS =
 
 #### ** (2) Rules
 
 #### *** (3) Link 3dldf
 
-3dldf: $(3dldf_obj_files)
+3dldf: $(3dldf_obj_files) $(3dldf_LDADD) 
 	@echo "Linking 3dldf"
 	$(CXXLINK) $(3dldf_obj_files) -pthread $(3dldf_LDADD) $(LIBS)
 
@@ -234,11 +235,6 @@ lib3dldflb.la: $(3dldflb_hpp_files) $(3dldflb_lo_files)
         fi; 
 	@rm -f diff_c.res diff_h.res 
 
-#### *** (3) 
-
-%.o: %.c++
-	$(CXXCOMPILE) -c -o $@ $<
-
 #### *** (3) prbsnflx
 
 ## 'prbsnflx' is a trivial Flex program that removes the '#line'
@@ -300,8 +296,6 @@ parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
                      utility.h++
-
-
 
 scanner2.o: scanner2.c++ scanner2.h++ io.h++  loader.h++ parser2.h++ pspglb.h++
 
@@ -394,6 +388,7 @@ crclslc.o: crclslc.c++ crclslc.h++ circles.h++ colors.h++ complex.h++ \
 #### 'create_new'.  Then get rid of 'creatnew.web'.
 
 creatnew.o: creatnew.c++ creatnew.h++ io.h++ loader.h++ pspglb.h++
+
 
 cuboid.o: cuboid.c++ cuboid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -516,8 +511,6 @@ io.o: io.c++ io.h++ loader.h++ pspglb.h++ io.h++
 lines.o: lines.c++ lines.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                    transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++
-
-loader.o: loader.c++ loader.h++ loader.h++
 
 matrices.o: matrices.c++ matrices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++

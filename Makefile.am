@@ -62,6 +62,8 @@ EXTRA_DIST =  ChangeLog
 
 SUBDIRS = $(SRCDIR) 
 
+ACLOCAL_AMFLAGS = -I m4 
+
 
 ## Local Variables:
 ## mode:Makefile
