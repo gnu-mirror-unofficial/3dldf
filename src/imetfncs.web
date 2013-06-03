@@ -1753,7 +1753,7 @@ where this isn't allowed.
        cerr_strm << thread_name 
                  << "ERROR! In `Id_Map_Entry_Type' destructor:" 
                  << endl
-                 << "`type' == " << Shape::type_name_map[type] << " (" << type << ") " 
+                 << "`type' == " << name_map[type] << " (" << type << ") " 
                  << "and `object' is non-null." << endl
                  << "This isn't allowed. "
                  << "Returning.";
@@ -1777,8 +1777,8 @@ where this isn't allowed.
        cerr_strm << thread_name 
                  << "ERROR! In `Id_Map_Entry_Type' destructor:" 
                  << endl
-                 << "`type' == " << Shape::type_name_map[type] << " (" << type << "), " 
-                 << "`category' == " << Shape::type_name_map[category] 
+                 << "`type' == " << name_map[type] << " (" << type << "), " 
+                 << "`category' == " << name_map[category] 
                  << " (" << category << "), " 
                  << "and `object' is null." << endl
                  << "Haven't accounted for this case, "
@@ -2187,7 +2187,7 @@ Id_Map_Entry_Type::set_entry(string nname,
       cerr << "name == " << name << endl; 
 
       cerr << "In set_entry():  type == " << type << " == " 
-           << Shape::type_name_map[type] << endl << flush;
+           << name_map[type] << endl << flush;
 
       if (category == SPARK)
         cerr << "category == SPARK" << endl;
@@ -2208,7 +2208,7 @@ Id_Map_Entry_Type::set_entry(string nname,
 
       cerr << "const_flag == " << const_flag << endl
            << "array_flag == " << array_flag << endl
-           << "type == " << Shape::type_name_map[type] << endl;
+           << "type == " << name_map[type] << endl;
 
 
 
@@ -3282,7 +3282,7 @@ and error output.
 
               cerr_strm << thread_name 
                         << "ERROR! In `Id_Map_Entry_Type::set_superordinate_vector()':"
-                        << endl << "Invalid `type': `" << Shape::type_name_map[type] 
+                        << endl << "Invalid `type': `" << name_map[type] 
                         << "'. Exiting function with return value 1.";
 
               log_message(cerr_strm);
@@ -3750,7 +3750,7 @@ and error output.
 
                cerr_strm << thread_name 
                         << "ERROR! In `Id_Map_Entry_Type::set_subordinate_array()':"
-                        << endl << "Invalid `type': `" << Shape::type_name_map[type] 
+                        << endl << "Invalid `type': `" << name_map[type] 
                         << "'. Exiting function with return value 1.";
 
                log_message(cerr_strm);
@@ -3808,9 +3808,9 @@ Added this section.
 \LOG
 \initials{LDF 2004.09.29.}
 Added this function.  It's used in the parser rule
-\§transformation command> $\longrightarrow$ \.{ROTATE} \§any variable> 
-\.{AROUND} \.{LEFT\_PARENTHESIS} \§point expression> \.{COMMA} 
-\§point expression> \.{RIGHT\_PARENTHESIS} \§optional by numeric expression> in 
+\<transformation command> $\longrightarrow$ \.{ROTATE} \<any variable> 
+\.{AROUND} \.{LEFT\_PARENTHESIS} \<point expression> \.{COMMA} 
+\<point expression> \.{RIGHT\_PARENTHESIS} \<optional by numeric expression> in 
 \filename{ptrfcmnd.w}.
 \ENDLOG
 
@@ -3931,7 +3931,7 @@ Id_Map_Entry_Type::operator*=(const Transform& t)
       cerr_strm << thread_name 
                 << "ERROR! In `Id_Map_Entry_Type::operator(const Transform&)':"
                 << endl << "`Id_Map_Entry_Type' has invalid type: `"
-                << Shape::type_name_map[type] << "'." 
+                << name_map[type] << "'." 
                 << "Exiting function with return value `INVALID_TRANSFORM'.";
 
       log_message(cerr_strm);
@@ -4511,7 +4511,7 @@ Id_Map_Entry_Type::show(string s,
  
          cerr_strm << s << endl
                    << "name == " << name << endl
-                   << "type == " << Shape::type_name_map[type];
+                   << "type == " << name_map[type];
 
          log_message(cerr_strm); 
          cerr << cerr_strm.str() << endl;
@@ -5887,7 +5887,7 @@ Added this section.  It's currently commented-out.
 
       else
         {
-          cerr_strm << "Can't show " << Shape::type_name_map[type] << " yet.";
+          cerr_strm << "Can't show " << name_map[type] << " yet.";
 
           log_message(cerr_strm); 
           cerr << cerr_strm.str() << endl;
