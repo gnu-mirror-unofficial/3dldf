@@ -75,12 +75,14 @@ bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT)
 
 lib_LTLIBRARIES = lib3dldflb.la 
 
-3dldflb_CWEB_files = arc.web circles.web cncsctlt.web colall.web colors.web complex.web \
+# colall.web intro.web
+
+3dldflb_CWEB_files = arc.web circles.web cncsctlt.web colors.web complex.web \
                 cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
                 ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
-                imetfncs.web intro.web io.web lines.web \
+                imetfncs.web io.web lines.web \
                 matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
                 parahypr.web parser2.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
@@ -92,8 +94,8 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 
 3dldflb_c_files = $(3dldflb_CWEB_files:.web=.c)
-3dldflb_cpp_files = $(3dldflb_CWEB_files:.web=.c++)
-3dldflb_h_files = $(3dldflb_CWEB_files:.web=.h)
+3dldflb_cpp_files = $(3dldflb_CWEB_files:.web=.c++) 
+3dldflb_h_files = $(3dldflb_CWEB_files:.web=.h) 
 3dldflb_hpp_files = $(3dldflb_CWEB_files:.web=.h++) loader.h++
 3dldflb_lo_files = $(3dldflb_CWEB_files:.web=.lo)
 
@@ -103,7 +105,7 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
 3dldf_c_files = $(3dldf_SOURCES:.web=.c)
-3dldf_hpp_files = $(3dldf_SOURCES:.web=.h++)
+3dldf_hpp_files = $(3dldf_SOURCES:.web=.h++) parser.h++ parser.hh
 3dldf_h_files = $(3dldf_SOURCES:.web=.h)
 3dldf_rpo_files = $(3dldf_SOURCES:.web=.rpo)
 
@@ -154,7 +156,11 @@ EXTRA_DIST = check_scan_parse_output.sh patterns.web prelims.web
 CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_files) \
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
               $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
-              $(3dldflb_hpp_files) $(3dldflb_lo_files)
+              $(3dldflb_hpp_files) $(3dldflb_lo_files) \
+              loader.c loader.c++ loader.h loader.h++ \
+              parser.c parser.c++ prbsnflx.c++ \
+              examples.h layers.h layers.h++ parser.h++ parser.hh parser2.y++ parser.y++ \
+              ldf_1.log scanner2.l++
  
 # AM_CXXFLAGS =
 
@@ -162,11 +168,11 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 
 #### *** (3) Link 3dldf
 
-3dldf: $(3dldf_obj_files) $(3dldf_LDADD) 
+3dldf: $(3dldf_obj_files) $(3dldf_LDADD) parser.hh parser.h++
 	@echo "Linking 3dldf"
 	$(CXXLINK) $(3dldf_obj_files) -pthread $(3dldf_LDADD) $(LIBS)
 
-lib3dldflb.la: $(3dldflb_hpp_files) $(3dldflb_lo_files)
+lib3dldflb.la: $(3dldflb_hpp_files) parser.hh parser.h++ $(3dldflb_lo_files) 
 	$(CXXLINK) -rpath $(libdir) $(3dldflb_lo_files) $(LIBS)
 
 
@@ -249,7 +255,7 @@ parser.y++ : parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 	./prbsnflx$(EXEEXT) parser.c parser.y
 	check_scan_parse_output.sh parser.y parser.y++
 
-parser.c++ parser.h++ parser.hxx : parser.y++ 
+parser.c++ parser.h++ parser.hh : parser.y++ 
 	$(YACC) --debug -d -o parser.cxx $<
 	check_scan_parse_output.sh parser.cxx parser.c++
 	check_scan_parse_output.sh parser.hxx parser.h++
@@ -424,17 +430,23 @@ ddchdrn.o: ddchdrn.c++ ddchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++
 
-deftfncs.o: deftfncs.c++ deftfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
-                         creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
-                         transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
-                         conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
-                         hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
-                         solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
-                         cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++ scanprsf.h++ \
-                         imetfncs.h++ deftfncs.h++
+deftfncs.o: deftfncs.c++ deftfncs.h++ arc.h++ circles.h++ cncsctlt.h++ \
+                         colors.h++ complex.h++ cones.h++ conicsct.h++ \
+			 crclslc.h++ creatnew.h++ cuboid.h++ curves.h++ \
+			 cylinder.h++ dashptrn.h++ ddchdrn.h++ ellipses.h++ \
+			 ellpsoid.h++ ellpsslc.h++ figures.h++ glyphs.h++ \
+			 gsltmplt.h++ helices.h++ hyprbola.h++ imetfncs.h++ \
+			 io.h++ lines.h++ loader.h++ matrices.h++ nurbs.h++ \
+			 origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
+			 parahypr.h++ parser.hh parser.h++ paths.h++ pctfncs0.h++ \
+			 pens.h++ pictures.h++ planes.h++ plyhdslc.h++ \
+			 pntrvcf0.h++ pntrvctr.h++ points.h++ polygons.h++ \
+			 polyhed.h++ predctes.h++ primes.h++ pspglb.h++ \
+			 rectangs.h++ rhtchdrn.h++ scan.h++ scanprse.h++ \
+			 scanprsf.h++ shapes.h++ solfaced.h++ solids.h++ \
+			 spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
+			 utility.h++
+                         
 
 ellipses.o: ellipses.c++ ellipses.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -503,7 +515,7 @@ imetfncs.o: imetfncs.c++ imetfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++ scanprsf.h++ \
+                         predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++             
 
 io.o: io.c++ io.h++ loader.h++ pspglb.h++ io.h++
@@ -651,7 +663,7 @@ prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ spheres.h++ sphrdevl.h++ parabold.h++ paraellp.h++ \
                        parahypr.h++ glyphs.h++ ellpsoid.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                       predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++ scanprsf.h++ \
+                       predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ 
 
 pspglb.o: pspglb.c++ pspglb.h++ loader.h++ pspglb.h++
@@ -678,7 +690,7 @@ scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++
                  solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                  cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                  paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                 predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++
+                 predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++
 
 scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -700,7 +712,7 @@ scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++ scanprsf.h++
+                         predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++
 
 sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -711,7 +723,7 @@ sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                       predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++ scanprsf.h++ \
+                       predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++
 
 sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -723,7 +735,7 @@ sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.h++ scan.h++ scanprsf.h++ \
+                         predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++
 
 shapes.o: shapes.c++ shapes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -797,10 +809,14 @@ tags:
 .PHONY: query
 
 query:
-	echo "CXXCOMPILE == $(CXXCOMPILE)"
-	echo "CXX == $(CXX)"
-	echo "CXXLINK == $(CXXLINK)"
-	echo "CXXFLAGS == $(CXXFLAGS)"
+	@echo "3dldflb_c_files == $(3dldflb_c_files)"
+	@echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
+	@echo "CLEANFILES == $(CLEANFILES)"
+
+# @echo "CXXCOMPILE == $(CXXCOMPILE)"
+# @echo "CXX == $(CXX)"
+# @echo "CXXLINK == $(CXXLINK)"
+# @echo "CXXFLAGS == $(CXXFLAGS)"
 
 ## Local Variables:
 ## mode:Makefile
