@@ -127,7 +127,7 @@ Added this file.
 #include "scanprse.h++"   
 #include "figures.h++"   
 #include "parser.h++"   
-#include "parser.h++"   
+#include "parser.hh"   
 #include "scan.h++"
 #include "scanprsf.h++"
 #include "imetfncs.h++"
@@ -4934,7 +4934,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
            else if (c->type == Shape::CIRCULAR_CONE_TYPE)
            {
-               Circle* k = new Circle(c->circles.back());
+               Circle* k = new Circle(*c->circles.back());
                delete c;
                c = 0;
                object = 0;
@@ -4978,7 +4978,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
           else if (arg_0 <  c->circles.size())
           {
-              Circle* k = new Circle(c->circles[arg_0]);
+              Circle* k = new Circle(*c->circles[arg_0]);
               delete c;
               c = 0;
               object = 0;

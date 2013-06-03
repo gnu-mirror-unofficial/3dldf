@@ -5196,10 +5196,6 @@ dummy_func(void)
 @<Define |Cond_Var_Type| functions@>@;
 @<Define |Thread_Info_Type| functions@>@;
 @<Define |dummy_func|@>@;
-namespace Scan_Parse
-{
-   map<int, string> name_map;
-};
 
 @q ** (2) This is what's written to \filename{pspglb.h}.@>
 @ This is what's written to the \filename{pspglb.h}.
@@ -5223,11 +5219,6 @@ namespace Scan_Parse
 @<|extern| declaration of namespace |Sorting|@>@;
 @<|extern| declarations for global |Run_State| variables@>@;
 @<Declare |dummy_func|@>@;
-namespace Scan_Parse
-{
-   extern map<int, string> name_map;
-};
-
 #endif 
 
 /* This doesn't work, apparently because it's incompatible with the

@@ -102,7 +102,7 @@ an ``unknown |circle|''.
 
   else /* |entry != 0 && entry->object != 0|  */
 
-    @=$$@> = static_cast<void*>(new Circle(static_cast<Circle*>(entry->object))); 
+    @=$$@> = static_cast<void*>(new Circle(*static_cast<Circle*>(entry->object))); 
 
 };
 
@@ -182,7 +182,7 @@ Changed |@=$2@>| from \.{INTEGER} to \§numeric primary>.
   else /* |t != 0|  */
      {
 
-         c = new Circle(t);
+         c = new Circle(*t);
 
 
 @q **** (4) Delete |s|, set |circle_primary| to                 @>   
@@ -300,8 +300,7 @@ Added this rule.
 
    Circle* c;
 
-
-         c = new Circle;
+   c = new Circle;
 
    *c = r->out_circle();
    
@@ -328,8 +327,7 @@ Added this rule.
 { 
    Circle* c;
 
-
-         c = new Circle;
+   c = new Circle;
 
    Pointer_Vector<Circle>* pv 
       = static_cast<Pointer_Vector<Circle>*>(@=$2@>);

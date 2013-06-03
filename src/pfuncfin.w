@@ -227,7 +227,7 @@ Before, the files that loaded \filename{parser.h} had the value
 set for parser input files.
 \ENDLOG 
 
-@(parser.h@>=
+@(parser.hh@>=
 
 #undef YYLTYPE
 @<Declare location type@>@;

@@ -79,13 +79,12 @@ when I tried to build 3DLDF from scratch.
 \ENDLOG 
 
 @<Include files@>=
+
 #include "config.h"
 
-#include <string.h>
+#include <time.h>
 
 #include "loader.h++"
-
-#include <time.h>
  
 #include "pspglb.h++"
 #include "io.h++"
