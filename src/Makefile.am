@@ -73,7 +73,19 @@
 
 bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) 
 
-3dldf_SOURCES = arc.web circles.web cncsctlt.web colall.web colors.web complex.web \
+lib_LTLIBRARIES = lib3dldflb.la 
+
+3dldflb_CWEB_files = arc.web
+
+3dldflb_c_files = $(3dldflb_CWEB_files:.web=.c)
+3dldflb_cpp_files = $(3dldflb_CWEB_files:.web=.c++)
+3dldflb_h_files = $(3dldflb_CWEB_files:.web=.h)
+3dldflb_hpp_files = $(3dldflb_CWEB_files:.web=.h++)
+3dldflb_lo_files = $(3dldflb_CWEB_files:.web=.lo)
+
+3dldf_LDADD = lib3dldflb.la 
+
+3dldf_SOURCES = circles.web cncsctlt.web colall.web colors.web complex.web \
                 cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
                 ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web \
@@ -132,6 +144,8 @@ bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT)
                       reverse.w setarc.w setmatrx.w spdvexpr.w spdvvexp.w
 
 
+prbsnflx_SOURCES = prbsnflx.l++
+
 dummy_SOURCES = dummy.cxx
 
 
@@ -149,8 +163,10 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 
 3dldf: $(3dldf_obj_files)
 	@echo "Linking 3dldf"
-	$(CXXLINK) $(3dldf_obj_files) -pthread $(LIBS)
+	$(CXXLINK) $(3dldf_obj_files) -pthread $(3dldf_LDADD) $(LIBS)
 
+lib3dldflb.la: $(3dldflb_hpp_files) $(3dldflb_lo_files)
+	$(CXXLINK) -rpath $(libdir) $(3dldflb_lo_files) $(LIBS)
 
 
 
