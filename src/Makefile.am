@@ -278,10 +278,17 @@ cones.o: cones.c++ cones.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ complex
 		   transfor.h++ triangle.h++
  
 
+conicsct.o: conicsct.c++ conicsct.h++ colors.h++ complex.h++ creatnew.h++ curves.h++ \
+                         dashptrn.h++ io.h++ lines.h++ loader.h++ matrices.h++ \
+                         nurbs.h++ paths.h++ pens.h++ pictures.h++ planes.h++ \
+                         pntrvctr.h++ points.h++ polygons.h++ primes.h++ \
+                         pspglb.h++ rectangs.h++ shapes.h++ transfor.h++ triangle.h++
+
+
 #### !! START HERE:  LDF 2013.04.23.  Make rules for the '.o' files.
 
 #     
-# cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web 
+#  crclslc.web creatnew.web cuboid.web curves.web 
 # cwebbisn.web cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web 
 # ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web 
 # helices.web hyprbola.web \
