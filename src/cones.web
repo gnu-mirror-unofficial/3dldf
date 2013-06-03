@@ -621,7 +621,7 @@ Added code for creating double-napped circular cones.
 
 @q ****** (6)@> 
 
-        Circle* c = create_new<Circle>(0);
+        Circle* c = new Circle;
         Point p(0, 0, 0);
         c->set(p, 2 * radius, 0, 0, 0, base_point_count);
         base = static_cast<Path*>(c); 
@@ -641,7 +641,7 @@ Added code for creating double-napped circular cones.
 
         if (nap_type == Cone::DOUBLE_NAPPED_TYPE)
         { 
-             c = create_new<Circle>(0);
+             c = new Circle;
              p.set(0, 2 * axis_y, 0);
              c->set(p, 2 * radius, 0, 0, 0, base_point_count);
              cap = static_cast<Path*>(c); 
@@ -683,14 +683,14 @@ Added code for creating double-napped circular cones.
 
                 temp_radius  = (radius / axis_y) * (axis_y - distance);
                 
-                c = create_new<Circle>(0);
+                c = new Circle;
                 p.set(0, distance, 0);
                 c->set(p, 2 * temp_radius, 0, 0, 0, base_point_count);                 
                 circles.push_back(c);
 
                 if (nap_type == DOUBLE_NAPPED_TYPE)
                 {
-                     c = create_new<Circle>(0);
+                     c = new Circle;
                      p.set(0, (2 * axis_y) - distance, 0);
                      c->set(p, 2 * temp_radius, 0, 0, 0, base_point_count);
                      temp_circles.push_front(c);                 

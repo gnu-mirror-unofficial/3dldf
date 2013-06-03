@@ -1837,7 +1837,7 @@ is cast to |Path*|.
                    else if (entry->type == ELLIPSE)
                       q = static_cast<Path*>(create_new<Ellipse>(0)); 
                    else if (entry->type == CIRCLE)
-                      q = static_cast<Path*>(create_new<Circle>(0)); 
+                      q = static_cast<Path*>(new Circle); 
                       
                 }  /* |try|  */
 
@@ -2066,7 +2066,7 @@ indicated by |entry->type|.
                    else if (entry->type == ELLIPSE)
                       p = create_new<Ellipse>(0);      
                    else if (entry->type == CIRCLE)
-                      p = create_new<Circle>(0);      
+                      p = new Circle;
                    else 
                       {
 

@@ -102,9 +102,7 @@ an ``unknown |circle|''.
 
   else /* |entry != 0 && entry->object != 0|  */
 
-    @=$$@> = static_cast<void*>(create_new<Circle>(
-                                  static_cast<Circle*>(
-                                     entry->object))); 
+    @=$$@> = static_cast<void*>(new Circle(static_cast<Circle*>(entry->object))); 
 
 };
 
@@ -184,7 +182,7 @@ Changed |@=$2@>| from \.{INTEGER} to \§numeric primary>.
   else /* |t != 0|  */
      {
 
-         c = create_new<Circle>(t, static_cast<Scanner_Node>(parameter));
+         c = new Circle(t);
 
 
 @q **** (4) Delete |s|, set |circle_primary| to                 @>   
@@ -274,7 +272,7 @@ Added this rule.
 
    Circle* c;
 
-   c = create_new<Circle>(0);
+   c = new Circle;
 
    *c = r->in_circle();
    
@@ -303,7 +301,7 @@ Added this rule.
    Circle* c;
 
 
-         c = create_new<Circle>(0);
+         c = new Circle;
 
    *c = r->out_circle();
    
@@ -331,7 +329,7 @@ Added this rule.
    Circle* c;
 
 
-         c = create_new<Circle>(0);
+         c = new Circle;
 
    Pointer_Vector<Circle>* pv 
       = static_cast<Pointer_Vector<Circle>*>(@=$2@>);

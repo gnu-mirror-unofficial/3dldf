@@ -4880,7 +4880,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
            if (c->type == Shape::CIRCULAR_CONE_TYPE)
            {
-               Circle* k = create_new<Circle>(c->circles[0]);
+               Circle* k = new Circle;
                delete c;
                c = 0;
                object = 0;
@@ -4922,7 +4922,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
            else if (c->type == Shape::CIRCULAR_CONE_TYPE)
            {
-               Circle* k = create_new<Circle>(c->circles.back());
+               Circle* k = new Circle(c->circles.back());
                delete c;
                c = 0;
                object = 0;
@@ -4966,7 +4966,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
           else if (arg_0 <  c->circles.size())
           {
-              Circle* k = create_new<Circle>(c->circles[arg_0]);
+              Circle* k = new Circle(c->circles[arg_0]);
               delete c;
               c = 0;
               object = 0;

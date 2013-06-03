@@ -210,7 +210,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 #### *** (3) 
 
 %.o: %.c++
-	$(CXXCOMPILE) -c -o $@ $<	
+	$(CXXCOMPILE) -c -o $@ $<
 
 ## *** prbsnflx
 
@@ -285,12 +285,20 @@ conicsct.o: conicsct.c++ conicsct.h++ colors.h++ complex.h++ creatnew.h++ curves
                          pspglb.h++ rectangs.h++ shapes.h++ transfor.h++ triangle.h++
 
 
-crclslc.o: crclslc.c++ crclslc.h++ 
+crclslc.o: crclslc.c++ crclslc.h++ circles.h++ colors.h++ complex.h++ \
+                       conicsct.h++ creatnew.h++ curves.h++ dashptrn.h++ \
+                       ellipses.h++ ellpsslc.h++ io.h++ lines.h++ loader.h++ \
+                       matrices.h++ nurbs.h++ paths.h++ pens.h++ pictures.h++ \
+                       planes.h++ pntrvctr.h++ points.h++ polygons.h++ \
+                       primes.h++ pspglb.h++ rectangs.h++ shapes.h++ \
+                       transfor.h++ triangle.h++
+
 
 #### !! START HERE:  LDF 2013.04.23.  Make rules for the '.o' files.
 
+
 #     
-#  crclslc.web creatnew.web cuboid.web curves.web 
+#  creatnew.web cuboid.web curves.web 
 # cwebbisn.web cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web 
 # ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web 
 # helices.web hyprbola.web \

@@ -502,7 +502,7 @@ Added code to this section.
         if (base_point_count == 0)
            base_point_count = 32;
 
-        Circle* c = create_new<Circle>(0);
+        Circle* c = new Circle;
         Point p(0, 0, 0);
         c->set(p, 2 * radius, 0, 0, 0, base_point_count);
         base = static_cast<Path*>(c); 
@@ -521,7 +521,7 @@ Added code to this section.
             for (int i = 1; i < divisions; ++i)
             {
                 distance = i * axis_y /divisions;
-                c = create_new<Circle>(0);
+                c = new Circle;
                 p.set(0, distance, 0);
                 c->set(p, 2 * radius, 0, 0, 0, base_point_count);                 
                 circles.push_back(c);
@@ -531,7 +531,7 @@ Added code to this section.
          }  /* |if|  */
 
         p.set(0, axis_y, 0);
-        c =  create_new<Circle>(0);
+        c =  new Circle;
         c->set(p, 2 * radius, 0, 0, 0, base_point_count);
         cap = static_cast<Path*>(c); 
         circles.push_back(c);

@@ -780,7 +780,7 @@ Added this section.
                 angle *= PI / 180;
                 temp_radius = radius * cos(angle);
 
-                c = create_new<Circle>(0);
+                c = new Circle;
                 c->set(origin, 2 * temp_radius, 0, 0, 0, circle_point_count);
    
                 c->shift(0, -radius * sin(angle));
@@ -790,7 +790,7 @@ Added this section.
              }  /* |for|  */  
 
 
-          c = create_new<Circle>(0);
+          c = new Circle;
           c->set(origin, 2 * radius, 0, 0, 0, circle_point_count);
           c->shift(center);
           circles.push_back(c);
@@ -802,7 +802,7 @@ Added this section.
                 angle *= PI / 180;
                 temp_radius = radius * cos(angle);
 
-                c = create_new<Circle>(0);
+                c = new Circle;
                 c->set(origin, 2 * temp_radius, 0, 0, 0, circle_point_count);
                 c->shift(0, radius * sin(angle));
                 c->shift(center);
@@ -878,7 +878,7 @@ Added this section.
 
           for (int i = 0; i < divisions_vertical / 2; ++i)
              {
-                c = create_new<Circle>(0);
+                c = new Circle;
                 c->set(origin, 2 * radius, 90, i * 360.0 / divisions_vertical, 
                        0, circle_point_count);
                 c->shift(center);
@@ -897,7 +897,7 @@ Added this section.
 
 @q ********** (10).@>
 
-          c = create_new<Circle>(0);
+          c = new Circle;
           c->set(origin, 2 * radius, 90, 0, 0, circle_point_count);
           c->shift(center);
           circles.push_back(c);
@@ -909,7 +909,7 @@ Added this section.
                 angle *= PI / 180;
                 temp_radius = radius * sin(angle);
 
-                c = create_new<Circle>(0);
+                c = new Circle;
                 c->set(origin, 2 * temp_radius, 90, 90, 0, circle_point_count);
    
                 c->shift(-radius * cos(angle));
@@ -918,7 +918,7 @@ Added this section.
              }  /* |for|  */  
 
 
-          c = create_new<Circle>(0);
+          c = new Circle;
           c->set(origin, 2 * radius, 90, 90, 0, circle_point_count);
           c->shift(center);
           circles.push_back(c);
@@ -930,7 +930,7 @@ Added this section.
                 angle *= PI / 180;
                 temp_radius = radius * sin(angle);
 
-                c = create_new<Circle>(0);
+                c = new Circle;
                 c->set(origin, 2 * temp_radius, 90, 90, 0, circle_point_count);
                 c->shift(radius * cos(angle));
                 c->shift(center);
@@ -1075,7 +1075,7 @@ Sphere::operator=(const Sphere& s)
     for (vector<Circle*>::const_iterator iter = s.circles.begin();
          iter != s.circles.end(); ++iter)
     {
-      circles.push_back(create_new<Circle>(0));
+      circles.push_back(new Circle);
       *(circles.back()) = **iter;
     }
 
@@ -1935,7 +1935,7 @@ Sphere::intersection(const Plane& p, Scanner_Node scanner_node) const
 
     real temp_radius = radius * cos(asin(y_mag / radius));
 
-    Circle* circle = create_new<Circle>(0);
+    Circle* circle = new Circle;
   
     temp_center.shift(0, -y);
 

@@ -365,7 +365,7 @@ Solid::Solid(const Solid& s)
   for (vector<Circle*>::const_iterator iter = s.circles.begin();
        iter != s.circles.end(); ++iter)
     {
-      circles.push_back(create_new<Circle>(0));
+      circles.push_back(new Circle);
       *(circles.back()) = **iter;
     }
 
@@ -623,7 +623,7 @@ and |vector<Hyperbola*> s.hyperbolae|.
   for (vector<Circle*>::const_iterator iter = s.circles.begin();
        iter != s.circles.end(); ++iter)
     {
-      circles.push_back(create_new<Circle>(0));
+      circles.push_back(new Circle);
       *(circles.back()) = **iter;
     }
 
@@ -3468,14 +3468,14 @@ Solid::reflect_in(const Plane& p,
        iter++)
     {
 
-@q ***** (5) Call |create_new<Circle>()|.@> 
+@q ***** (5) Call |new Circle|.@> 
 
-@ Call |create_new<Circle>()|.
+@ Call |new Circle|.
 \initials{LDF 2004.10.11.}
 
 @<Define |Solid| functions@>=
 
-            circle_reflection = create_new<Circle>(0, scanner_node);
+            circle_reflection = new Circle;
 
 @q ***** (5) Call |Circle::reflect_in()|.@> 
 

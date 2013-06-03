@@ -212,10 +212,10 @@ Removed debugging code.
 
     PV* pv = new PV;
 
-    *pv += create_new<Circle>(0, scanner_node);
-    *pv += create_new<Circle>(0, scanner_node);
-    *pv += create_new<Circle>(0, scanner_node);
-    *pv += create_new<Circle>(0, scanner_node);
+    *pv += new Circle;
+    *pv += new Circle;
+    *pv += new Circle;
+    *pv += new Circle;
 
 
 @q ******* (7) Call |Scan_Parse::reflect_off_func<Circle>()|.@> 

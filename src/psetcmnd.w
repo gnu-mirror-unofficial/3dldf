@@ -732,7 +732,7 @@ Added this rule.
           if (c == 0)
              {
 
-                    c = create_new<Circle>(0);
+                    c = new Circle;
 
              }  /* |if (c == 0)|  */
 
