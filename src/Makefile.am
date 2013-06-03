@@ -84,11 +84,11 @@ lib_LTLIBRARIES = lib3dldflb.la
                 helices.web hyprbola.web \
                 imetfncs.web io.web lines.web \
                 matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
-                parahypr.web parser2.web paths.web pctfncs0.web pens.web \
+                parahypr.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
-                pspglb.web rectangs.web rhtchdrn.web scanner2.web scanprse.web scanprsf.web \
-                scan.web sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
+                pspglb.web rectangs.web rhtchdrn.web scanprse.web scanprsf.web \
+                sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
                 spheres.web sphrdevl.web transfor.web triangle.web \
                 utility.web
 
@@ -101,7 +101,7 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 3dldf_LDADD = lib3dldflb.la 
 
-3dldf_SOURCES = main.web
+3dldf_SOURCES = main.web parser2.web scanner2.web scan.web
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
 3dldf_c_files = $(3dldf_SOURCES:.web=.c)
@@ -168,11 +168,11 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 
 #### *** (3) Link 3dldf
 
-3dldf: $(3dldf_obj_files) $(3dldf_LDADD) parser.hh parser.h++
+3dldf: $(3dldf_obj_files) $(3dldf_LDADD) 
 	@echo "Linking 3dldf"
 	$(CXXLINK) $(3dldf_obj_files) -pthread $(3dldf_LDADD) $(LIBS)
 
-lib3dldflb.la: $(3dldflb_hpp_files) parser.hh parser.h++ $(3dldflb_lo_files) 
+lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser.hh parser.h++ $(3dldflb_lo_files) 
 	$(CXXLINK) -rpath $(libdir) $(3dldflb_lo_files) $(LIBS)
 
 

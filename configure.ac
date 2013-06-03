@@ -70,6 +70,10 @@ AC_SUBST([LIBTOOL_DEPS])
 #### 'make' doesn't get confused and think they're C sources.
 #### LDF 2013.06.03.
 
+#### !! START HERE:  Commenting out 'AC_PROG_CC' didn't work.  Comment it back
+#### and try to solve the problem another way.  See '/src/00TODO'.
+#### \initials{LDF 2013.06.03.}
+
 # Checks for programs.
 AC_PROG_CXX
 #AC_PROG_CC
