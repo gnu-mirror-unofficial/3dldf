@@ -149,7 +149,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 
 3dldf: $(3dldf_obj_files)
 	@echo "Linking 3dldf"
-	$(CXXLINK) $(3dldf_obj_files) $(LIBS)
+	$(CXXLINK) $(3dldf_obj_files) -pthread $(LIBS)
 
 
 
