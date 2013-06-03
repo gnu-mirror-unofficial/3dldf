@@ -1,0 +1,89 @@
+INSTALL
+
+This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
+
+* (1) Copyright and License.
+
+This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013 The Free Software Foundation  
+
+GNU 3DLDF is free software; you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation; either version 3 of the License, or 
+(at your option) any later version.  
+
+GNU 3DLDF is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details.  
+
+You should have received a copy of the GNU General Public License 
+along with GNU 3DLDF; if not, write to the Free Software 
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+GNU 3DLDF is a GNU package.  
+It is part of the GNU Project of the  
+Free Software Foundation 
+and is published under the GNU General Public License. 
+See the website http://www.gnu.org 
+for more information.   
+GNU 3DLDF is available for downloading from 
+http://www.gnu.org/software/3dldf/LDF.html.
+
+Please send bug reports to Laurence.Finston@gmx.de
+The mailing list help-3dldf@gnu.org is available for people to 
+ask other users for help.  
+The mailing list info-3dldf@gnu.org is for sending 
+announcements to users. To subscribe to these mailing lists, send an 
+email with ``subscribe <email-address>'' as the subject.  
+
+The author can be contacted at: 
+
+Laurence D. Finston 
+c/o Free Software Foundation, Inc. 
+51 Franklin St, Fifth Floor 
+Boston, MA  02110-1301  
+USA
+
+Laurence.Finston@gmx.de
+
+
+
+To install 3DLDF, decompress 3DLDF-1.2.0.tar.gz using gzip, or a
+compatible program, e.g., 
+`gunzip 3DLDF-1.2.0.tar.gz'.
+Then, expand 3DLDF-1.2.0.tar using the tar command, typically:
+`tar xvpf 3DLDF-1.2.0.tar'
+The exact syntax of the tar command may differ, depending on what
+system you're using.
+
+3DLDF unpacks into the directory /3DLDF-1.2.0/.  
+
+Change your working directory to /3DLDF-1.2.0/ and run 
+`configure --prefix=<your path>/3DLDF-1.2.0/' 
+to generate the Makefiles.  There is one each in /3DLDF-1.2.0/, 
+/3DLDF-1.2.0/CWEB, /3DLDF-1.2.0/DOC, and /3DLDF-1.2.0/DOC/TEXINFO.  
+`<your path>' must be the absolute path of the directory where you
+want to put the /3DLDF-1.2.0/ subdirectory. For example, if you want
+to put 3DLDF into /usr/local/mydirectory/, enter
+ `configure --prefix=/usr/local/mydirectory/3DLDF-1.2.0/' 
+
+Since 3DLDF currently does not have an input routine, the executable
+3dldf will need to be regenerated each time the user code changes.
+For this reason, it might as well reside in the same directory as the
+C++ source files.  However, it can be put in 
+another directory, e.g., /usr/local/bin/, if desired.  In this case,
+`configure' can be called with a different `prefix' argument, or the
+default (/usr/local/bin/) can be used.
+
+Change the working directory to /3DLDF-1.2.0/ and 
+call `make install' from the command line of a shell.
+This creates the executable file `3dldf'.
+
+For information on running 3dldf, see the README file in this directory, and
+the _3DLDF User and Reference Manual_, which is included in this
+distribution as the PostScript file /3DLDF-1.2.0/DOC/TEXINFO/3DLDF.ps.
+
+
+End of INSTALL
+
