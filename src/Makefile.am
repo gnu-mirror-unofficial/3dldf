@@ -1,0 +1,320 @@
+#### 3DLDF-2.0/src/Makefile.am
+#### Created by Laurence D. Finston (LDF).
+
+#### * Copyright and License.
+
+#### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
+#### Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013 The Free Software Foundation
+
+#### GNU 3DLDF is free software; you can redistribute it and/or modify 
+#### it under the terms of the GNU General Public License as published by 
+#### the Free Software Foundation; either version 3 of the License, or 
+#### (at your option) any later version. 
+
+#### GNU 3DLDF is distributed in the hope that it will be useful, 
+#### but WITHOUT ANY WARRANTY; without even the implied warranty of 
+#### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+#### GNU General Public License for more details. 
+
+#### You should have received a copy of the GNU General Public License 
+#### along with GNU 3DLDF; if not, write to the Free Software 
+#### Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+#### GNU 3DLDF is a GNU package.  
+#### It is part of the GNU Project of the  
+#### Free Software Foundation 
+#### and is published under the GNU General Public License. 
+#### See the website http://www.gnu.org 
+#### for more information.   
+#### GNU 3DLDF is available for downloading from 
+#### http://www.gnu.org/software/3dldf/LDF.html. 
+
+#### Please send bug reports to Laurence.Finston@@gmx.de
+#### The mailing list help-3dldf@gnu.org is available for people to 
+#### ask other users for help.  
+#### The mailing list info-3dldf@gnu.org is for sending 
+#### announcements to users. To subscribe to these mailing lists, send an 
+#### email with "subscribe <email-address>" as the subject.  
+
+#### The author can be contacted at: 
+
+#### Laurence D. Finston 
+#### c/o Free Software Foundation, Inc. 
+#### 51 Franklin St, Fifth Floor 
+#### Boston, MA  02110-1301  
+#### USA
+
+#### Laurence.Finston@gmx.de 
+
+
+
+
+## * Top.
+
+# ** Variables.
+
+#### Automatic Variables.  For more, see Section 10.5.3, "Automatic Variables"
+#### of the Make info manual.
+#### LDF 2009.12.29.
+
+#### $@:  Target
+#### $<:  First prerequisite
+#### $^:  The names of all the prerequisites, with spaces between them.
+#### $*:  The stem with which an implicit rule matches
+
+
+
+## * (1) Top.
+
+# ** (2) Variables.
+
+#### !! START HERE:  LDF 2013.04.23.  Add a dummy C++ file in order to have
+#### 'CXXCOMPILE' and 'CXXLINK' set.
+
+bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) 
+
+3dldf_SOURCES = arc.web circles.web cncsctlt.web colall.web colors.web complex.web \
+                cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
+                cwebbisn.web cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
+                ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web \
+                helices.web hyprbola.web \
+                imetfncs.web intro.web io.web layers.web lines.web loader.web main.web \
+                matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
+                parahypr.web parser2.web paths.web patterns.web pctfncs0.web pens.web \
+                pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
+                polygons.web polyhed.web predctes.web prelims.web primes.web prrfnc0.web \
+                pspglb.web rectangs.web rhtchdrn.web scanner2.web scanprse.web scanprsf.web \
+                scan.web sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
+                spheres.web sphrdevl.web subex1.web subex2.web transfor.web triangle.web \
+                utility.web
+
+
+3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
+3dldf_c_files = $(3dldf_SOURCES:.web=.c)
+3dldf_hpp_files = $(3dldf_SOURCES:.web=.h++)
+3dldf_h_files = $(3dldf_SOURCES:.web=.h)
+3dldf_rpo_files = $(3dldf_SOURCES:.web=.rpo)
+
+3dldf_PARSER_FILES := arcexpr.w arcvexpr.w cmpxassn.w cmpxexpr.w cmpxvxpr.w \
+                      cslcmnd.w cslexpr.w cslvexpr.w \
+                      fcscmnd.w \
+                      mtrxassn.w mtrxexpr.w mtrxvxpr.w \
+                      parser.w passign.w pblexpr.w \
+                      pblvexpr.w pbpexpr.w \
+                      pbpvexpr.w pbsndecl.w pcbvexpr.w pcirexpr.w \
+		      pclrcmnd.w pclvexpr.w pcnvexpr.w pcolexpr.w pcommand.w \
+		      pcondit.w pconexpr.w pcrclslc.w pcrvexpr.w pcubexpr.w \
+                      pcylexpr.w pcyvexpr.w pdpvexpr.w \
+                      pdrwcmnd.w pdshexpr.w pedvexpr.w peldexpr.w \
+                      pellexpr.w pellpslc.w pelvexpr.w peqexpr.w \
+                      pfcvexpr.w pfgopcmd.w pfocexpr.w pfuncfin.w \
+                      pglvexpr.w pglyexpr.w pgrpcmnd.w \
+                      phlxexpr.w phpvexpr.w phxvexpr.w phypexpr.w \
+                      pinptcmd.w \
+                      plblcmnd.w pldfdcl.w \
+                      ploops.w pmacros.w pnbvexpr.w pnmvexpr.w \
+                      pnrbexpr.w pnumexpr.w \
+		      popassgn.w poptions.w porgexpr.w porvexpr.w ppbvexpr.w ppdvexpr.w \
+                      ppenexpr.w \
+                      ppgvexpr.w pphdexpr.w pphvexpr.w ppicexpr.w pplhdslc.w \
+                      pplnexpr.w pplnvxpr.w pplvexpr.w ppntexpr.w ppnvexpr.w \
+                      pprbexpr.w pprdexpr.w pprgstmt.w ppthexpr.w pptvexpr.w \
+                      ppygexpr.w \
+                      prcvexpr.w \
+		      precexpr.w prpvexpr.w prplexpr.w psetcmnd.w \
+                      pshowcmd.w psphexpr.w pspvexpr.w pstrexpr.w \
+                      pstvexpr.w ptfvexpr.w \
+                      ptglexpr.w ptgvexpr.w \
+                      ptokdecl.w ptrfcmnd.w \
+                      ptrnexpr.w pullexpr.w pullvxpr.w pvariabl.w pvcmncmd.w \
+                      reverse.w setarc.w setmatrx.w spdvexpr.w spdvvexp.w
+
+
+dummy_SOURCES = dummy.cxx
+
+
+CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_files) \
+              $(3dldf_OBJECTS) $(3dldf_rpo_files)
+
+
+# AM_CXXFLAGS =
+
+#### ** (2) Rules
+
+#### *** (3) 
+
+#### The following implicit rule generates C++ source code and header files 
+#### from the '.web' files.
+#### This rule calls 'ctangle' and then compares the resulting '.c' and '.h' files
+#### with the existing '.c++' and '.h++' files (if present).  Changes only
+#### affecting whitespace, comments, and or "#line" directives are ignored.
+#### If the '.c' file is otherwise identical to the '.c++' file, nothing further is
+#### done with it and the '.c++' file remains unchanged.  
+#### The same applies to the '.h' and '.h++' file.  
+#### In addition, if the '.c' file has changed, the '.o' files is "touched" to 
+#### update its timestamp, so that the '.web' file won't be tested again unless
+#### it is changed.  However, it does seem that some unnecessary testing is performed.
+####
+#### If, however, a change is recognized, the '.c' file is renamed to '.c++'
+#### and the '.h' file is renamed to '.h++'.
+####
+#### Please note that this "algorithm" has the unfortunate consequence
+#### that changes to whitespace within strings are also ignored.  In this case, 
+#### the corresponding '.o' file must be deleted or
+#### some other change must be made to the '.web' file in order to force recompilation.
+####
+#### LDF 2013.04.11.
+
+%.c++ %.h++ : %.web
+	ctangle $<
+	@if test -e $*.c++; \
+        then \
+        echo "$*.c++ exists"; \
+        diff -q -w -B -I '^[[:space:]]*\(#line\|/\*\)' \
+        $*.c++ $*.c > diff_c.res; \
+           if test -s diff_c.res; \
+           then \
+              echo "$*.c++ has changed."; \
+              mv $*.c $*.c++; \
+           else \
+              echo "$*.c++ is unchanged."; \
+	      if test -s $*.o; \
+	         then \
+	         touch $*.o; \
+	      fi; \
+           fi; \
+        else \
+        echo "$*.c++ does not exist"; \
+        mv $*.c $*.c++; \
+        fi; 
+####
+	@if test -e $*.h++; \
+        then \
+        echo "$*.h++ exists"; \
+        diff -q -w -B -I '^[[:space:]]*\(#line\|/\*\)' \
+        $*.h++ $*.h > diff_h.res; \
+           if test -s diff_h.res; \
+           then \
+              echo "$*.h++ has changed."; \
+              mv $*.h $*.h++; \
+           else \
+              echo "$*.h++ is unchanged."; \
+           fi; \
+        else \
+        echo "$*.h++ does not exist"; \
+        if test -e $*.h; then \
+        mv $*.h $*.h++; fi; \
+        fi; 
+	@rm -f diff_c.res diff_h.res 
+
+#### *** (3) 
+
+%.o: %.c++
+	$(CXXCOMPILE) -c -o $@ $<	
+
+## *** prbsnflx
+
+## 'prbsnflx' is a trivial Flex program that removes the '#line'
+## preprocessor commands and the comments that 'ctangle' writes to
+## 'parser.c'.  It's called in
+## 'tstbison'.
+## LDF 2004.03.26.
+
+prbsnflx$(EXEEXT): prbsnflx.c++ 
+	$(CXXCOMPILE) -o $@ $<
+
+prbsnflx.c++: prbsnflx.l++
+	flex -o $@ $<
+	@cat cpyrtcpp.txt > AAAtmp.txt
+	@echo >> AAAtmp.txt
+	@cat prbsnflx.c++ >> AAAtmp.txt
+	@mv AAAtmp.txt prbsnflx.c++
+
+
+#### *** (3) 
+
+arc.o: arc.c++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ conicsct.h++ crclslc.h++ \
+               creatnew.h++ curves.h++ dashptrn.h++ ellipses.h++ ellpsslc.h++ \
+               hyprbola.h++ io.h++ lines.h++ loader.h++ nurbs.h++ parabola.h++ \
+               paths.h++ pens.h++ pictures.h++ planes.h++ pntrvctr.h++ \
+               points.h++ polygons.h++ primes.h++ pspglb.h++ rectangs.h++ \
+               shapes.h++ transfor.h++ triangle.h++
+
+circles.o: circles.c++ circles.h++ colors.h++ complex.h++ conicsct.h++ creatnew.h++ \
+                       curves.h++ dashptrn.h++ ellipses.h++ io.h++ lines.h++ loader.h++ \
+                       matrices.h++ nurbs.h++ paths.h++ pens.h++ pictures.h++ planes.h++ \
+                       pntrvctr.h++ points.h++ polygons.h++ primes.h++ pspglb.h++ \
+                       rectangs.h++ shapes.h++ transfor.h++ triangle.h++
+
+
+cncsctlt.o: cncsctlt.c++ cncsctlt.h++ circles.h++ colors.h++ complex.h++ \
+                         conicsct.h++ crclslc.h++ creatnew.h++ curves.h++ \
+                         dashptrn.h++ ellipses.h++ ellpsslc.h++ hyprbola.h++ \
+                         io.h++ lines.h++ loader.h++ matrices.h++ nurbs.h++ \
+                         parabola.h++ paths.h++ pens.h++ pictures.h++ \
+                         planes.h++ pntrvctr.h++ points.h++ polygons.h++ \
+                         primes.h++ pspglb.h++ rectangs.h++ shapes.h++ \
+                         transfor.h++ triangle.h++
+
+
+
+colors.o: colors.c++ colors.h++ complex.h++ creatnew.h++ io.h++ loader.h++ \
+                     matrices.h++ pntrvctr.h++ primes.h++ pspglb.h++
+
+
+complex.o: complex.c++ complex.h++ creatnew.h++ io.h++ loader.h++ pntrvctr.h++ \
+                       primes.h++ pspglb.h++
+
+
+cones.o: cones.c++ cones.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ complex.h++ \
+                   conicsct.h++ crclslc.h++ creatnew.h++ cuboid.h++ \
+		   curves.h++ dashptrn.h++ ddchdrn.h++ ellipses.h++ \
+		   ellpsslc.h++ helices.h++ hyprbola.h++ io.h++ lines.h++ \
+		   loader.h++ matrices.h++ nurbs.h++ origami.h++ \
+		   parabola.h++ paths.h++ pens.h++ pictures.h++ planes.h++ \
+		   plyhdslc.h++ pntrvctr.h++ points.h++ polygons.h++ \
+		   polyhed.h++ primes.h++ pspglb.h++ rectangs.h++ \
+		   rhtchdrn.h++ shapes.h++ solfaced.h++ solids.h++ \
+		   transfor.h++ triangle.h++
+ 
+
+#### !! START HERE:  LDF 2013.04.23.  Make rules for the '.o' files.
+
+#     
+# cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web 
+# cwebbisn.web cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web 
+# ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web 
+# helices.web hyprbola.web \
+# imetfncs.web intro.web io.web layers.web lines.web loader.web main.web 
+# matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web 
+# parahypr.web parser2.web paths.web patterns.web pctfncs0.web pens.web 
+# pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web 
+# polygons.web polyhed.web predctes.web prelims.web primes.web prrfnc0.web 
+# pspglb.web rectangs.web rhtchdrn.web scanner2.web scanprse.web scanprsf.web 
+# scan.web sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web 
+# spheres.web sphrdevl.web subex1.web subex2.web transfor.web triangle.web 
+# utility.web
+
+.PHONY: tags
+
+tags:
+	etags $(3dldf_SOURCES) $(3dldf_PARSER_FILES)
+ 
+
+
+
+
+.PHONY: query
+
+query:
+	echo "CXXCOMPILE == $(CXXCOMPILE)"
+	echo "CXX == $(CXX)"
+	echo "CXXLINK == $(CXXLINK)"
+	echo "CXXFLAGS == $(CXXFLAGS)"
+
+## Local Variables:
+## mode:Makefile
+## outline-minor-mode:t
+## outline-regexp:"## *\\*+"
+## abbrev-mode:t
+## End:
