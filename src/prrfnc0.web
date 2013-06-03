@@ -135,8 +135,8 @@ Added this file.
 #include "sctpcrt.h++"  
 #include "sctpfncs.h++"  
 
-@q * (1) Initialize |name_map| and |type_name_map|. @>
-@* Initialize {\bf name\_map} and {\bf type\_name\_map}. 
+@q * (1) Initialize |name_map| and |Shape::type_name_map|. @>
+@* Initialize {\bf name\_map} and {\bf Shape::type\_name\_map}. 
 
 \LOG
 \initials{LDF Undated.}  
@@ -161,12 +161,21 @@ Moved this function definition from \filename{pbsndecl.w} to this
 file (\filename{prrfnc0.web}).
 \ENDLOG 
 
-@q ** (2) Definition. @>
+@q ** (2) Declaration  @>
 
+@<Declare functions@>=
+int
+initialize_name_map(void);
+
+
+@q ** (2) Definition. @>
+@
 @<Define functions@>=
 int
 initialize_name_map(void)
 {
+
+  using namespace Scan_Parse;
 
   name_map[NULL_VALUE] = "NULL_VALUE";
 
@@ -200,6 +209,9 @@ Added entry for |ULONG_LONG_TYPE|.
 @q **** (4) Code.@> 
 
 @<Define functions@>=
+ 
+  using namespace Scan_Parse;
+
   name_map[END] = "END";
   name_map[INPUT] = "INPUT";
   name_map[END_INPUT] = "END_INPUT";
@@ -326,7 +338,7 @@ Added entries for
 |FOCUS_VECTOR|.
 
 \initials{LDF 2004.12.21.}
-Added |type_name_map| entries for 
+Added |Shape::type_name_map| entries for 
 |BOOLEAN_VECTOR_DECLARATOR|,
 |STRING_VECTOR_DECLARATOR|, 
 |NUMERIC_VECTOR_DECLARATOR|,
@@ -436,15 +448,15 @@ Added entries for |ULONG_LONG|, |ULONG_LONG_VECTOR|, and
    name_map[FOCUS_VECTOR_DECLARATOR] = "FOCUS_VECTOR_DECLARATOR";
    name_map[PICTURE_VECTOR_DECLARATOR] = "PICTURE_VECTOR_DECLARATOR";
 
-   type_name_map[BOOLEAN_VECTOR_DECLARATOR] = "boolean_vector";
-   type_name_map[STRING_VECTOR_DECLARATOR] = "string_vector";
-   type_name_map[NUMERIC_VECTOR_DECLARATOR] = "numeric_vector";
-   type_name_map[ULONG_LONG_VECTOR_DECLARATOR] = "ulong_long_vector";
-   type_name_map[TRANSFORM_VECTOR_DECLARATOR] = "transform_vector";
-   type_name_map[PEN_VECTOR_DECLARATOR] = "pen_vector";
-   type_name_map[DASH_PATTERN_VECTOR_DECLARATOR] = "dash_pattern_vector";
-   type_name_map[FOCUS_VECTOR_DECLARATOR] = "focus_vector";
-   type_name_map[PICTURE_VECTOR_DECLARATOR] = "picture_vector";
+   Shape::type_name_map[BOOLEAN_VECTOR_DECLARATOR] = "boolean_vector";
+   Shape::type_name_map[STRING_VECTOR_DECLARATOR] = "string_vector";
+   Shape::type_name_map[NUMERIC_VECTOR_DECLARATOR] = "numeric_vector";
+   Shape::type_name_map[ULONG_LONG_VECTOR_DECLARATOR] = "ulong_long_vector";
+   Shape::type_name_map[TRANSFORM_VECTOR_DECLARATOR] = "transform_vector";
+   Shape::type_name_map[PEN_VECTOR_DECLARATOR] = "pen_vector";
+   Shape::type_name_map[DASH_PATTERN_VECTOR_DECLARATOR] = "dash_pattern_vector";
+   Shape::type_name_map[FOCUS_VECTOR_DECLARATOR] = "focus_vector";
+   Shape::type_name_map[PICTURE_VECTOR_DECLARATOR] = "picture_vector";
 
 
 
@@ -476,24 +488,24 @@ Added entries for |PATH_VECTOR_DECLARATOR|,
 and |TRUNC_OCTAHEDRON_VECTOR_DECLARATOR|.
 
 \initials{LDF 2005.01.26.}
-Added entries in |name_map| and |type_name_map|
+Added entries in |name_map| and |Shape::type_name_map|
 for |NURB_DECLARATOR| and |NURB_VECTOR_DECLARATOR|.
 
 \initials{LDF 2005.02.03.}
-Added entries in |name_map| and |type_name_map|
+Added entries in |name_map| and |Shape::type_name_map|
 for |ORIGAMI_FIGURE_DECLARATOR| and |ORIGAMI_FIGURE_VECTOR_DECLARATOR|.
 
 \initials{LDF 2005.02.11.}
-Added entries in |name_map| and |type_name_map|
+Added entries in |name_map| and |Shape::type_name_map|
 for |POLYGON_DECLARATOR| and |POLYGON_VECTOR_DECLARATOR|.
 
 \initials{LDF 2005.05.18.}
-Added entries in |name_map| and |type_name_map|
+Added entries in |name_map| and |Shape::type_name_map|
 for |HELIX_DECLARATOR| and |HELIX_VECTOR_DECLARATOR|.  
 
 
 \initials{LDF 2005.05.24.}
-Added |type_name_map| entries for 
+Added |Shape::type_name_map| entries for 
 |HELIX_SLICE_DECLARATOR|, 
 |HELIX_SLICE_VECTOR_DECLARATOR|, 
 |CONE_DECLARATOR|, 
@@ -515,12 +527,12 @@ and
 |SPHERE_SLICE_VECTOR_DECLARATOR|. 
 
 \initials{LDF 2005.06.08.}
-Added |type_name_map| entries for 
+Added |Shape::type_name_map| entries for 
 |GLYPH_DECLARATOR|, |GLYPH_VECTOR_DECLARATOR|, 
 |GLYPH_SLICE_DECLARATOR|, and |GLYPH_SLICE_VECTOR_DECLARATOR|. 
 
 \initials{LDF 2005.10.30.}
-Added |type_name_map| entries for 
+Added |Shape::type_name_map| entries for 
 |PLANE_DECLARATOR| and |PLANE_VECTOR_DECLARATOR|, 
 
 \initials{LDF 2005.12.05.}
@@ -590,90 +602,90 @@ Added entries for |ULONG_LONG_DECLARATOR|.
   name_map[ORIGAMI_FIGURE_VECTOR_DECLARATOR]
      = "ORIGAMI_FIGURE_VECTOR_DECLARATOR";
 
-  type_name_map[BOOLEAN_DECLARATOR] = "boolean";
+  Shape::type_name_map[BOOLEAN_DECLARATOR] = "boolean";
 
-  type_name_map[STRING_DECLARATOR] = "string";
-  type_name_map[COLOR_DECLARATOR] = "color";
-  type_name_map[NUMERIC_DECLARATOR] = "numeric";
-  type_name_map[ULONG_LONG_DECLARATOR] = "ulong_long";
-  type_name_map[TRANSFORM_DECLARATOR] = "transform";
-  type_name_map[POINT_DECLARATOR] = "point";
-  type_name_map[BOOL_POINT_DECLARATOR] = "bool_point";
-  type_name_map[FOCUS_DECLARATOR] = "focus";
-  type_name_map[NURB_DECLARATOR] = "nurb";
-  type_name_map[PATH_DECLARATOR] = "path";
-  type_name_map[TRIANGLE_DECLARATOR] = "triangle";
-  type_name_map[POLYGON_DECLARATOR] = "polygon";
-  type_name_map[REG_POLYGON_DECLARATOR] = "reg_polygon";
-  type_name_map[RECTANGLE_DECLARATOR] = "rectangle";
-  type_name_map[SQUARE_DECLARATOR] = "square";
-  type_name_map[ELLIPSE_DECLARATOR] = "ellipse";
-  type_name_map[CIRCLE_DECLARATOR] = "circle";
-  type_name_map[HELIX_DECLARATOR] = "helix";
-  type_name_map[CUBOID_DECLARATOR] = "cuboid";
-  type_name_map[POLYHEDRON_DECLARATOR] = "polyhedron";
+  Shape::type_name_map[STRING_DECLARATOR] = "string";
+  Shape::type_name_map[COLOR_DECLARATOR] = "color";
+  Shape::type_name_map[NUMERIC_DECLARATOR] = "numeric";
+  Shape::type_name_map[ULONG_LONG_DECLARATOR] = "ulong_long";
+  Shape::type_name_map[TRANSFORM_DECLARATOR] = "transform";
+  Shape::type_name_map[POINT_DECLARATOR] = "point";
+  Shape::type_name_map[BOOL_POINT_DECLARATOR] = "bool_point";
+  Shape::type_name_map[FOCUS_DECLARATOR] = "focus";
+  Shape::type_name_map[NURB_DECLARATOR] = "nurb";
+  Shape::type_name_map[PATH_DECLARATOR] = "path";
+  Shape::type_name_map[TRIANGLE_DECLARATOR] = "triangle";
+  Shape::type_name_map[POLYGON_DECLARATOR] = "polygon";
+  Shape::type_name_map[REG_POLYGON_DECLARATOR] = "reg_polygon";
+  Shape::type_name_map[RECTANGLE_DECLARATOR] = "rectangle";
+  Shape::type_name_map[SQUARE_DECLARATOR] = "square";
+  Shape::type_name_map[ELLIPSE_DECLARATOR] = "ellipse";
+  Shape::type_name_map[CIRCLE_DECLARATOR] = "circle";
+  Shape::type_name_map[HELIX_DECLARATOR] = "helix";
+  Shape::type_name_map[CUBOID_DECLARATOR] = "cuboid";
+  Shape::type_name_map[POLYHEDRON_DECLARATOR] = "polyhedron";
 
-  type_name_map[ELLIPSE_SLICE_DECLARATOR] = "ellipse_slice";
-  type_name_map[CIRCLE_SLICE_DECLARATOR] = "circle_slice";
-  type_name_map[POLYHEDRON_SLICE_DECLARATOR] = "polyhedron_slice";
+  Shape::type_name_map[ELLIPSE_SLICE_DECLARATOR] = "ellipse_slice";
+  Shape::type_name_map[CIRCLE_SLICE_DECLARATOR] = "circle_slice";
+  Shape::type_name_map[POLYHEDRON_SLICE_DECLARATOR] = "polyhedron_slice";
 
-  type_name_map[ELLIPSE_SLICE_VECTOR_DECLARATOR] 
+  Shape::type_name_map[ELLIPSE_SLICE_VECTOR_DECLARATOR] 
      = "ellipse_slice_vector";
 
-  type_name_map[CIRCLE_SLICE_VECTOR_DECLARATOR] 
+  Shape::type_name_map[CIRCLE_SLICE_VECTOR_DECLARATOR] 
      = "circle_slice_vector";
 
-  type_name_map[POLYHEDRON_SLICE_VECTOR_DECLARATOR] 
+  Shape::type_name_map[POLYHEDRON_SLICE_VECTOR_DECLARATOR] 
      = "polyhedron_slice_vector";
 
-  type_name_map[ORIGAMI_FIGURE_DECLARATOR] = "origami_figure";
+  Shape::type_name_map[ORIGAMI_FIGURE_DECLARATOR] = "origami_figure";
 
 
-  type_name_map[COLOR_VECTOR_DECLARATOR] = "color_vector";
-  type_name_map[POINT_VECTOR_DECLARATOR] = "point_vector";
-  type_name_map[BOOL_POINT_VECTOR_DECLARATOR] = "bool_point_vector";
-  type_name_map[NURB_VECTOR_DECLARATOR] = "nurb_vector";
-  type_name_map[PATH_VECTOR_DECLARATOR] = "path_vector";
-  type_name_map[TRIANGLE_VECTOR_DECLARATOR] = "triangle_vector";
-  type_name_map[POLYGON_VECTOR_DECLARATOR] = "polygon_vector";
-  type_name_map[REG_POLYGON_VECTOR_DECLARATOR] = "reg_polygon_vector";
-  type_name_map[RECTANGLE_VECTOR_DECLARATOR] = "rectangle_vector";
-  type_name_map[SQUARE_VECTOR_DECLARATOR] = "square_vector";
-  type_name_map[ELLIPSE_VECTOR_DECLARATOR] = "ellipse_vector";
-  type_name_map[CIRCLE_VECTOR_DECLARATOR] = "circle_vector";
-  type_name_map[HELIX_VECTOR_DECLARATOR] = "helix_vector";
-  type_name_map[CUBOID_VECTOR_DECLARATOR] = "cuboid_vector";
-  type_name_map[POLYHEDRON_VECTOR_DECLARATOR] = "polyhedron_vector";
+  Shape::type_name_map[COLOR_VECTOR_DECLARATOR] = "color_vector";
+  Shape::type_name_map[POINT_VECTOR_DECLARATOR] = "point_vector";
+  Shape::type_name_map[BOOL_POINT_VECTOR_DECLARATOR] = "bool_point_vector";
+  Shape::type_name_map[NURB_VECTOR_DECLARATOR] = "nurb_vector";
+  Shape::type_name_map[PATH_VECTOR_DECLARATOR] = "path_vector";
+  Shape::type_name_map[TRIANGLE_VECTOR_DECLARATOR] = "triangle_vector";
+  Shape::type_name_map[POLYGON_VECTOR_DECLARATOR] = "polygon_vector";
+  Shape::type_name_map[REG_POLYGON_VECTOR_DECLARATOR] = "reg_polygon_vector";
+  Shape::type_name_map[RECTANGLE_VECTOR_DECLARATOR] = "rectangle_vector";
+  Shape::type_name_map[SQUARE_VECTOR_DECLARATOR] = "square_vector";
+  Shape::type_name_map[ELLIPSE_VECTOR_DECLARATOR] = "ellipse_vector";
+  Shape::type_name_map[CIRCLE_VECTOR_DECLARATOR] = "circle_vector";
+  Shape::type_name_map[HELIX_VECTOR_DECLARATOR] = "helix_vector";
+  Shape::type_name_map[CUBOID_VECTOR_DECLARATOR] = "cuboid_vector";
+  Shape::type_name_map[POLYHEDRON_VECTOR_DECLARATOR] = "polyhedron_vector";
 
-  type_name_map[ORIGAMI_FIGURE_VECTOR_DECLARATOR] = "origami_figure_vector";
+  Shape::type_name_map[ORIGAMI_FIGURE_VECTOR_DECLARATOR] = "origami_figure_vector";
 
-  type_name_map[HELIX_SLICE_DECLARATOR] = "helix_slice";
-  type_name_map[HELIX_SLICE_VECTOR_DECLARATOR] = "helix_slice_vector";
-  type_name_map[CONE_DECLARATOR] = "cone";
-  type_name_map[CONE_VECTOR_DECLARATOR] = "cone_vector";
-  type_name_map[CONE_SLICE_DECLARATOR] = "cone_slice";
-  type_name_map[CONE_SLICE_VECTOR_DECLARATOR] = "cone_slice_vector";
-  type_name_map[CYLINDER_DECLARATOR] = "cylinder";
-  type_name_map[CYLINDER_VECTOR_DECLARATOR] = "cylinder_vector";
-  type_name_map[CYLINDER_SLICE_DECLARATOR] = "cylinder_slice";
-  type_name_map[CYLINDER_SLICE_VECTOR_DECLARATOR] = "cylinder_slice_vector";
-  type_name_map[ELLIPSOID_DECLARATOR] = "ellipsoid";
-  type_name_map[ELLIPSOID_VECTOR_DECLARATOR] = "ellipsoid_vector";
-  type_name_map[ELLIPSOID_SLICE_DECLARATOR] = "ellipsoid_slice";
-  type_name_map[ELLIPSOID_SLICE_VECTOR_DECLARATOR] = "ellipsoid_slice_vector";
+  Shape::type_name_map[HELIX_SLICE_DECLARATOR] = "helix_slice";
+  Shape::type_name_map[HELIX_SLICE_VECTOR_DECLARATOR] = "helix_slice_vector";
+  Shape::type_name_map[CONE_DECLARATOR] = "cone";
+  Shape::type_name_map[CONE_VECTOR_DECLARATOR] = "cone_vector";
+  Shape::type_name_map[CONE_SLICE_DECLARATOR] = "cone_slice";
+  Shape::type_name_map[CONE_SLICE_VECTOR_DECLARATOR] = "cone_slice_vector";
+  Shape::type_name_map[CYLINDER_DECLARATOR] = "cylinder";
+  Shape::type_name_map[CYLINDER_VECTOR_DECLARATOR] = "cylinder_vector";
+  Shape::type_name_map[CYLINDER_SLICE_DECLARATOR] = "cylinder_slice";
+  Shape::type_name_map[CYLINDER_SLICE_VECTOR_DECLARATOR] = "cylinder_slice_vector";
+  Shape::type_name_map[ELLIPSOID_DECLARATOR] = "ellipsoid";
+  Shape::type_name_map[ELLIPSOID_VECTOR_DECLARATOR] = "ellipsoid_vector";
+  Shape::type_name_map[ELLIPSOID_SLICE_DECLARATOR] = "ellipsoid_slice";
+  Shape::type_name_map[ELLIPSOID_SLICE_VECTOR_DECLARATOR] = "ellipsoid_slice_vector";
 
-  type_name_map[SPHERE_DECLARATOR] = "sphere";
-  type_name_map[SPHERE_VECTOR_DECLARATOR] = "sphere_vector";
-  type_name_map[SPHERE_SLICE_DECLARATOR] = "sphere_slice";
-  type_name_map[SPHERE_SLICE_VECTOR_DECLARATOR] = "sphere_slice_vector";
+  Shape::type_name_map[SPHERE_DECLARATOR] = "sphere";
+  Shape::type_name_map[SPHERE_VECTOR_DECLARATOR] = "sphere_vector";
+  Shape::type_name_map[SPHERE_SLICE_DECLARATOR] = "sphere_slice";
+  Shape::type_name_map[SPHERE_SLICE_VECTOR_DECLARATOR] = "sphere_slice_vector";
 
-  type_name_map[GLYPH_DECLARATOR] = "glyph";
-  type_name_map[GLYPH_VECTOR_DECLARATOR] = "glyph_vector";
-  type_name_map[GLYPH_SLICE_DECLARATOR] = "glyph_slice";
-  type_name_map[GLYPH_SLICE_VECTOR_DECLARATOR] = "glyph_slice_vector";
+  Shape::type_name_map[GLYPH_DECLARATOR] = "glyph";
+  Shape::type_name_map[GLYPH_VECTOR_DECLARATOR] = "glyph_vector";
+  Shape::type_name_map[GLYPH_SLICE_DECLARATOR] = "glyph_slice";
+  Shape::type_name_map[GLYPH_SLICE_VECTOR_DECLARATOR] = "glyph_slice_vector";
 
-  type_name_map[PLANE_DECLARATOR] = "plane";
-  type_name_map[PLANE_VECTOR_DECLARATOR] = "plane_vector";
+  Shape::type_name_map[PLANE_DECLARATOR] = "plane";
+  Shape::type_name_map[PLANE_VECTOR_DECLARATOR] = "plane_vector";
 
 
 @q **** (4) Types for conic sections, quadric surfaces, and related types.@> 
@@ -693,7 +705,7 @@ Added this section with entries for
 and |HYPERBOLOID_SLICE_DECLARATOR|.
 
 \initials{LDF 2007.07.29.}
-Added |type_name_map| entries for |CONIC_SECTION_LATTICE_DECLARATOR| and
+Added |Shape::type_name_map| entries for |CONIC_SECTION_LATTICE_DECLARATOR| and
 |CONIC_SECTION_LATTICE_VECTOR_DECLARATOR|.  Added |_DECLARATOR| in several 
 places where it was missing.
 
@@ -705,28 +717,28 @@ Added entries for |ARC_DECLARATOR| and |ARC_VECTOR_DECLARATOR|.
 
 @<Define functions@>=
 
-   type_name_map[PARABOLA_DECLARATOR]                 = "parabola";
-   type_name_map[HYPERBOLA_DECLARATOR]                = "hyperbola";
+   Shape::type_name_map[PARABOLA_DECLARATOR]                 = "parabola";
+   Shape::type_name_map[HYPERBOLA_DECLARATOR]                = "hyperbola";
 
-   type_name_map[ARC_DECLARATOR]                      = "arc";
+   Shape::type_name_map[ARC_DECLARATOR]                      = "arc";
 
-   type_name_map[PARABOLOID_DECLARATOR]               = "paraboloid";
-   type_name_map[HYPERBOLOID_DECLARATOR]              = "hyperboloid";
-   type_name_map[PARABOLA_VECTOR_DECLARATOR]          = "parabola_vector";
-   type_name_map[HYPERBOLA_VECTOR_DECLARATOR]         = "hyperbola_vector";
+   Shape::type_name_map[PARABOLOID_DECLARATOR]               = "paraboloid";
+   Shape::type_name_map[HYPERBOLOID_DECLARATOR]              = "hyperboloid";
+   Shape::type_name_map[PARABOLA_VECTOR_DECLARATOR]          = "parabola_vector";
+   Shape::type_name_map[HYPERBOLA_VECTOR_DECLARATOR]         = "hyperbola_vector";
 
-   type_name_map[ARC_VECTOR_DECLARATOR]               = "arc_vector";
+   Shape::type_name_map[ARC_VECTOR_DECLARATOR]               = "arc_vector";
 
-   type_name_map[PARABOLOID_VECTOR_DECLARATOR]        = "paraboloid_vector";
-   type_name_map[HYPERBOLOID_VECTOR_DECLARATOR]       = "hyperboloid_vector";
-   type_name_map[PARABOLA_SLICE_DECLARATOR]           = "parabola_slice";
-   type_name_map[HYPERBOLA_SLICE_DECLARATOR]          = "hyperbola_slice";
-   type_name_map[PARABOLOID_SLICE_DECLARATOR]         = "paraboloid_slice";
-   type_name_map[HYPERBOLOID_SLICE_DECLARATOR]        = "hyperboloid_slice";
-   type_name_map[PARABOLA_SLICE_VECTOR_DECLARATOR]    = "parabola_slice_vector";
-   type_name_map[HYPERBOLA_SLICE_VECTOR_DECLARATOR]   = "hyperbola_slice_vector";
-   type_name_map[PARABOLOID_SLICE_VECTOR_DECLARATOR]  = "paraboloid_slice_vector"; 
-   type_name_map[HYPERBOLOID_SLICE_VECTOR_DECLARATOR] = "hyperboloid_slice_vector";
+   Shape::type_name_map[PARABOLOID_VECTOR_DECLARATOR]        = "paraboloid_vector";
+   Shape::type_name_map[HYPERBOLOID_VECTOR_DECLARATOR]       = "hyperboloid_vector";
+   Shape::type_name_map[PARABOLA_SLICE_DECLARATOR]           = "parabola_slice";
+   Shape::type_name_map[HYPERBOLA_SLICE_DECLARATOR]          = "hyperbola_slice";
+   Shape::type_name_map[PARABOLOID_SLICE_DECLARATOR]         = "paraboloid_slice";
+   Shape::type_name_map[HYPERBOLOID_SLICE_DECLARATOR]        = "hyperboloid_slice";
+   Shape::type_name_map[PARABOLA_SLICE_VECTOR_DECLARATOR]    = "parabola_slice_vector";
+   Shape::type_name_map[HYPERBOLA_SLICE_VECTOR_DECLARATOR]   = "hyperbola_slice_vector";
+   Shape::type_name_map[PARABOLOID_SLICE_VECTOR_DECLARATOR]  = "paraboloid_slice_vector"; 
+   Shape::type_name_map[HYPERBOLOID_SLICE_VECTOR_DECLARATOR] = "hyperboloid_slice_vector";
 
 
 @q *** (3) System information.@>
@@ -6607,7 +6619,7 @@ the definition of |initialize_name_map|, which I've moved from
 @(prrfnc0.h@>=
 #ifndef LDF_PRRFNC0_H_KNOWN
 #define LDF_PRRFNC0_H_KNOWN
-@=/* Nothing.  */@>@/
+@<Declare functions@>@;@/
 #endif
 
 
