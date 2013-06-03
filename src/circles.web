@@ -257,70 +257,6 @@ Circle::set(const Point& ccenter, const real ddiameter, const real angle_x,
   return;
 }
 
-
-@q * (1) Pseudo-constructor for dynamic allocation.@>
-@* Pseudo-constructor for dynamic allocation.
-
-@q ** (2) Pointer argument.@>
-@*1 Pointer argument.
-@^\cfunc{Circle}{create\_new\_circle}@>
-
-\LOG
-\initials{LDF 2003.07.27.}  
-Made non-inline.  Made argument |p| |const Circle*|. 
-
-\initials{LDF 2003.08.10.}  
-Removed redefinition of the default argument |const
-Circle* p = 0| from the definition.  The DEC compiler complained, 
-but GCC didn't.
-
-\initials{LDF 2003.12.30.}  
-Replaced |Circle::create_new_circle|
-with a specialization of |template <class C> C* create_new| for
-|Circle|. 
-
-\initials{LDF 2003.12.30.}  
-Changed the argument.  It's now a |const Circle*|. 
-
-\initials{LDF 2003.12.30.}  
-Removed default argument ``0'', because
-this caused a compiler error when using the DEC \CPLUSPLUS/ compiler.
-Apparently, it suffices to declare a default argument in the template
-declaration. 
-
-\initials{LDF 2004.10.11.}
-Added |Scanner_Node scanner_node| argument.
-\ENDLOG 
-
-@q *** (3) Declaration.@> 
-
-@<Declare non-member template functions for |Circle|@>=
-Circle* 
-create_new(const Circle* c, Scanner_Node scanner_node);
-
-@q ** (2) Reference argument.@>
-@*1 Reference argument.
-
-\LOG
-\initials{LDF 2003.07.27.}  
-Made non-inline.
-
-\initials{LDF 2003.12.30.}  
-Replaced |Circle::create_new_circle|
-with a specialization of |template <class C> C* create_new| for
-|Circle|. 
-
-\initials{LDF 2003.12.30.}  
-Changed argument from |Circle| to |const Circle&|.
-\ENDLOG 
-
-@q *** (3) Declaration.@> 
-
-@<Declare non-member template functions for |Circle|@>=
-Circle* 
-create_new(const Circle& c, Scanner_Node scanner_node);
-
-
 @q * Destructor. @>
 @* Destructor. 
 \initials{LDF 2002.10.09.}  Removed the destructor.  |Path::~Path| or
@@ -454,7 +390,7 @@ get_copy() const;
 Shape*
 Circle::get_copy() const
 {
-  Circle* p = create_new<Circle>(0);
+  Circle* p = new Circle;
   *p = *this;
   return static_cast<Shape*>(p);
 }
@@ -687,7 +623,7 @@ on the free store for it.
  {
   try
      {
-       circle_reflection = create_new<Circle>(0, scanner_node);
+       circle_reflection = new Circle;
      }
 
 @q **** (4) Error handling:  |new Circle| failed.  Rethrow |bad_alloc|.@> 
@@ -703,7 +639,7 @@ on the free store for it.
 
        cerr_strm << thread_name << "ERROR! In `Point::reflect_in()':" 
                  << endl
-                 << "`create_new<Circle>()' failed. "
+                 << "`new Circle>' failed. "
                  << "Rethrowing `bad_alloc'.";
 
        log_message(cerr_strm);
