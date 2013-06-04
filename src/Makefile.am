@@ -158,8 +158,8 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
               loader.c loader.c++ loader.h loader.h++ \
-              parser.c parser.c++ prbsnflx.c++ \
-              examples.h layers.h layers.h++ parser.h++ parser.hh parser2.y++ parser.y++ \
+              parser.c parser.c++ parser.hh parser.h++  parser.output parser.y++ \
+              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.hh parser2.y++ parser.y++ \
               ldf_1.log scanner2.l++
  
 # AM_CXXFLAGS =
@@ -250,12 +250,13 @@ lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser.hh parser.h++ $(3d
 
 #### *** (3) parser
 
-parser.y++ : parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
+parser.y++ parser.hh : parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 	ctangle $<
 	./prbsnflx$(EXEEXT) parser.c parser.y
+	rm parser.c
 	check_scan_parse_output.sh parser.y parser.y++
 
-parser.c++ parser.h++ parser.hh : parser.y++ 
+parser.c++ parser.h++ : parser.y++ 
 	$(YACC) --debug -d -o parser.cxx $<
 	check_scan_parse_output.sh parser.cxx parser.c++
 	check_scan_parse_output.sh parser.hxx parser.h++
@@ -274,6 +275,7 @@ parser.o: parser.c++ parser.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
                      utility.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 
 #### *** (3) parser2
@@ -809,11 +811,13 @@ tags:
 .PHONY: query
 
 query:
-	@echo "3dldflb_c_files == $(3dldflb_c_files)"
-	@echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
-	@echo "CLEANFILES == $(CLEANFILES)"
+	@echo "CXXCOMPILE == $(CXXCOMPILE)"
 
-# @echo "CXXCOMPILE == $(CXXCOMPILE)"
+# @echo "3dldflb_c_files == $(3dldflb_c_files)"
+# @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
+# @echo "CLEANFILES == $(CLEANFILES)"
+
+# 
 # @echo "CXX == $(CXX)"
 # @echo "CXXLINK == $(CXXLINK)"
 # @echo "CXXFLAGS == $(CXXFLAGS)"
