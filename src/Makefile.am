@@ -62,18 +62,15 @@
 #### $^:  The names of all the prerequisites, with spaces between them.
 #### $*:  The stem with which an implicit rule matches
 
-
-
 ## * (1) Top.
 
 # ** (2) Variables.
 
-#### !! START HERE:  LDF 2013.04.23.  Add a dummy C++ file in order to have
-#### 'CXXCOMPILE' and 'CXXLINK' set.
-
 bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) 
 
-lib_LTLIBRARIES = lib3dldflb.la 
+lib_LTLIBRARIES = lib3dldflb.la # lib3dldfsp.la
+
+
 
 # colall.web intro.web
 
@@ -99,9 +96,18 @@ lib_LTLIBRARIES = lib3dldflb.la
 3dldflb_hpp_files = $(3dldflb_CWEB_files:.web=.h++) loader.h++
 3dldflb_lo_files = $(3dldflb_CWEB_files:.web=.lo)
 
-3dldf_LDADD = lib3dldflb.la 
 
-3dldf_SOURCES = main.web parser2.web scanner2.web scan.web
+3dldfsp_CWEB_files = parser.web parser2.web scanner2.web scan.web
+
+3dldfsp_c_files = $(3dldfsp_CWEB_files:.web=.c)
+3dldfsp_cpp_files = $(3dldfsp_CWEB_files:.web=.c++) 
+3dldfsp_h_files = $(3dldfsp_CWEB_files:.web=.h) 
+3dldfsp_hpp_files = $(3dldfsp_CWEB_files:.web=.h++) parser.hh
+3dldfsp_lo_files = $(3dldfsp_CWEB_files:.web=.lo)
+
+3dldf_LDADD = lib3dldflb.la lib3dldfsp.la
+
+3dldf_SOURCES = main.web 
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
 3dldf_c_files = $(3dldf_SOURCES:.web=.c)
@@ -175,6 +181,8 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser.hh parser.h++ $(3dldflb_lo_files) 
 	$(CXXLINK) -rpath $(libdir) $(3dldflb_lo_files) $(LIBS)
 
+lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files) 
+	$(CXXLINK) -rpath $(libdir) $(3dldfsp_lo_files) $(LIBS)
 
 
 #### The following implicit rule generates C++ source code and header files 
@@ -283,6 +291,7 @@ parser.o: parser.c++ parser.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
 parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
 	ctangle $<
 	./prbsnflx$(EXEEXT) parser2.c parser2.y
+	rm parser2.c
 	check_scan_parse_output.sh parser2.y parser2.y++
 
 parser2.c++ parser2.h++ : parser2.y++ 
@@ -304,8 +313,10 @@ parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
                      utility.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 scanner2.o: scanner2.c++ scanner2.h++ io.h++  loader.h++ parser2.h++ pspglb.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 scanner2.c++ scanner2.h++ : scanner2.l++ 
 	$(LEX) -o scanner2.cxx $<
@@ -315,6 +326,7 @@ scanner2.c++ scanner2.h++ : scanner2.l++
 scanner2.l++ : scanner2.web prbsnflx$(EXEEXT)
 	ctangle scanner2.web
 	./prbsnflx$(EXEEXT) scanner2.c scanner2.l
+	rm scanner2.c
 	check_scan_parse_output.sh scanner2.l scanner2.l++
 
 prbsnflx$(EXEEXT): prbsnflx.c++ 
