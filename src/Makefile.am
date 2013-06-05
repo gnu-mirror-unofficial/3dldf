@@ -281,6 +281,7 @@ parser.o: parser.c++ parser.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
                      utility.h++
+	@echo "Compiling 'parser.c++'.  This may take awhile ... "
 	$(CXXCOMPILE) -c -o $@ $<
 
 
