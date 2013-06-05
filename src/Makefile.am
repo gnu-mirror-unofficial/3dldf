@@ -68,9 +68,7 @@
 
 bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) 
 
-lib_LTLIBRARIES = lib3dldflb.la # lib3dldfsp.la
-
-
+lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 
 # colall.web intro.web
 
@@ -185,7 +183,7 @@ lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files)
 	$(CXXLINK) -rpath $(libdir) $(3dldfsp_lo_files) $(LIBS)
 
 
-#### The following implicit rule generates C++ source code and header files 
+#### The following implicit (pattern) rule generates C++ source code and header files 
 #### from the '.web' files.
 #### This rule calls 'ctangle' and then compares the resulting '.c' and '.h' files
 #### with the existing '.c++' and '.h++' files (if present).  Changes only
@@ -681,6 +679,7 @@ prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ 
 
 pspglb.o: pspglb.c++ pspglb.h++ loader.h++ pspglb.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 rectangs.o: rectangs.c++ rectangs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
