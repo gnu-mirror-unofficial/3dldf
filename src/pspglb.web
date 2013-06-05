@@ -791,11 +791,16 @@ Added this function.
 
 
 @<Declare |Mutex_Type| functions@>=
-inline
 int 
-lock(void)
+Mutex_Type::lock(void);
+
+@
+@<Define |Mutex_Type| functions@>=
+
+int 
+Mutex_Type::lock(void)
 {
-  return pthread_mutex_lock(&inner_mutex);
+  return pthread_mutex_lock(&ldf3d::inner_mutex);
 }
 
 
@@ -812,11 +817,15 @@ Added this function.
 @q ***** (5) Declaration.@> 
 
 @<Declare |Mutex_Type| functions@>=
-inline
 int 
-unlock(void)
+unlock(void);
+
+@
+@<Define |Mutex_Type| functions@>=
+int 
+Mutex_Type::unlock(void)
 {
-  return pthread_mutex_unlock(&inner_mutex);
+  return pthread_mutex_unlock(&ldf3d::inner_mutex);
 }
 
 @q **** (4) Trylock |inner_mutex|.@>
@@ -833,12 +842,15 @@ Added this function.
 @q ***** (5) Declaration.@> 
 
 @<Declare |Mutex_Type| functions@>=
-
-inline
 int 
-trylock(void)
+trylock(void);
+
+@
+@<Define |Mutex_Type| functions@>=
+int 
+Mutex_Type::trylock(void)
 {
-  return pthread_mutex_trylock(&inner_mutex);
+  return pthread_mutex_trylock(&ldf3d::inner_mutex);
 }
 
 @q *** Global |Mutex_Type| variables.@> 
@@ -5178,8 +5190,13 @@ dummy_func(void)
 @<Declare |static Thread_Info_Type| member variables@>@;
 @<Declare |struct Bad_Assignment_Type|@>@;
 @<Declare |struct Parser_Error_Type|@>@;
-@<Global variables@>@; 
-@<Global constants@>@; 
+namespace ldf3d
+{
+   @<Global variables@>@; 
+   @<Global constants@>@; 
+}
+using namespace ldf3d;
+
 @<Define |Real_Triple| functions@>@;
 @<Define utility functions@>@;
 @<Declare |namespace System|@>@;
@@ -5206,13 +5223,18 @@ dummy_func(void)
 @<Forward declarations@>@;
 @<Utility classes@>@;
 @<Declare |namespace Scan_Parse|@>@;
+namespace ldf3d {extern pthread_mutex_t inner_mutex;}
 @<Declare |struct Mutex_Type|@>@;
 @<Declare |struct Cond_Var_Type|@>@;
 @<|extern| declarations for global |Mutex_Type| variables@>@;
 @<Declare |struct Thread_Info_Type|@>@;
 @<Declare |struct Bad_Assignment_Type|@>@;
 @<Declare |struct Parser_Error_Type|@>@;
-@<Declarations for the header file@>@;
+namespace ldf3d
+{
+   @<Declarations for the header file@>@;
+}
+using namespace ldf3d;
 @<Declare |namespace System|@>@;
 @<Declare |struct Run_State|@>@;
 @<|extern| declaration of namespace |Projections|@>@;
