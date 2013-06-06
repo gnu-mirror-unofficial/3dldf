@@ -82,7 +82,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
                 parahypr.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
-                pspglb.web rectangs.web rhtchdrn.web scanprse.web scanprsf.web \
+                rectangs.web rhtchdrn.web scanprse.web scanprsf.web \
                 sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
                 spheres.web sphrdevl.web transfor.web triangle.web \
                 utility.web
@@ -105,7 +105,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 
 3dldf_LDADD = lib3dldflb.la lib3dldfsp.la
 
-3dldf_SOURCES = main.web 
+3dldf_SOURCES = main.web pspglb.web 
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
 3dldf_c_files = $(3dldf_SOURCES:.web=.c)
