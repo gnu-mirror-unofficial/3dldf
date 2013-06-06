@@ -9,14 +9,13 @@
 #include <iostream>
 #include <iterator>
 
-namespace ldf_3d
+namespace ldf3d
 {
   int xxx;
 }
 
-
 using namespace std;
-using namespace ldf_3d;
+using namespace ldf3d;
 
 int 
 main(int argc, char *argv[])
