@@ -46,24 +46,21 @@
 
 
 
+
 SRCDIR     := src
 
-export SRCDIR
+DOCDIR     := doc
 
-vpath %.web $(SRCDIR)
-vpath %.h $(SRCDIR)
-vpath %.c $(SRCDIR)
-vpath %.o $(SRCDIR)
-
+export SRCDIR 
+export DOCDIR
 
 EXTRA_DIST =  ChangeLog 
 
-.DELETE_ON_ERROR :
+# .DELETE_ON_ERROR :
 
-SUBDIRS = $(SRCDIR) 
+SUBDIRS = $(SRCDIR) $(DOCDIR) 
 
 ACLOCAL_AMFLAGS = -I m4 
-
 
 ## Local Variables:
 ## mode:Makefile
