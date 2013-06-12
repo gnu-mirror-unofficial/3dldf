@@ -62,8 +62,8 @@
 
 #SUBDIRS = $(OLDDOCDIR) 
 
-3DLDF_TEXINFO := 3DLDF.texi concidx.texi dttypidx.texi fdl.texi funcidx.texi \
-                 intro.texi invoking.texi varidx.texi
+3DLDF_TEXINFO := 3DLDF.texi cmndidx.texi concidx.texi dttypidx.texi examples.texi fdl.texi \
+                 getstart.texi intro.texi invoking.texi varidx.texi
 
 
 .PHONY: all
