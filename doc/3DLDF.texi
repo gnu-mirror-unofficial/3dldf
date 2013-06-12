@@ -9,67 +9,17 @@
 
 \font\logofont=logo10 % font used for the METAFONT logo, etc.
 
-\newlinechar=`^^J
-
-%% Kludge!!  Actually, Kludges.  LDF 2002.11.19.
-%% How do I define new macros for 
-%% math mode??  Also, I'm not sure that these are the best 
-%% symbols.
-
-\newbox\PPbox % symbol for ++
-\setbox\PPbox=\hbox{\kern.5pt\raise1pt\hbox{\sevenrm+\kern-1pt+}\kern.5pt}
-\def\PP{\copy\PPbox}
-%%\let\mc=\ninerm % medium caps
-\let\mc=\tenrm % LDF 2002.11.16.  Trying this out. 
-\def\CPLUSPLUS{{\mc C\PP\spacefactor1000}}
-
-\newskip\displayskip
-
-
-\font\manual=manfnt % font used for the METAFONT logo, etc.
-
-
 %% `\MetaPost' is defined here so that it can be used in the 
 %% `@copying' section.  `@MP' is defined below the latter.
 %% LDF 2004.10.29.
 
 \def\MetaPost{{\logofont META}\-{\logofont POST}}
 
-\def\DEGREES#1{$#1^\circ$}
-
-%% Macros and declarations for syntax rules.
-%% LDF 2004.12.03.
-
-\def\<#1>{$\langle$\rm{#1}$\rangle$}
-
-\def\lra{$\longrightarrow$}
-
-\def\vrt{$\vert$}
-\def\uscr{{\tt \char`\_}}
-
-
-\newskip\syntaxhskip
-\syntaxhskip=3pc 
-
-\newskip\preruleskip
-\newskip\interruleskip
-\newskip\postruleskip
-
-\preruleskip=.5\baselineskip
-
-\interruleskip=.5\baselineskip
-
-\postruleskip=.5\baselineskip
-
-
-%% End of macros and declarations for syntax rules.
-%% LDF 2004.12.03.
-
 \input texinfo   @c -*-texinfo-*-
 
 @c %**start of header
 @setfilename 3DLDF.info
-@settitle GNU 3DLDF User and Reference Manual
+@settitle GNU 3DLDF User Manual
 
 @defindex cb      @c Combined Index
 @defcodeindex cm  @c 3DLDF Command Index
@@ -87,7 +37,7 @@
 @c *********************
 
 @copying
-This is the GNU 3DLDF User and Reference Manual, edition @value{EDITION} for
+This is the GNU 3DLDF User Manual, edition @value{EDITION} for
 GNU 3DLDF @value{VERSION}.  This manual was last updated on
 @value{UPDATED}. 
 GNU 3DLDF is a package for three-dimensional drawing with 
@@ -128,7 +78,7 @@ Texts.  A copy of the license is included in the section entitled
 @c *********************
 
 @titlepage
-@title GNU 3DLDF User and Reference Manual
+@title GNU 3DLDF User Manual
 @subtitle Three-dimensional drawing with MetaPost output.
 @subtitle Manual edition @value{EDITION} for GNU 3DLDF Version @value{VERSION}
 @subtitle @value{UPDATE-MONTH}
