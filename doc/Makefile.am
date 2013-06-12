@@ -47,11 +47,37 @@
 #### Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)
 
 
+#### Automatic Variables.  For more, see Section 10.5.3, "Automatic Variables"
+#### of the Make info manual.
+#### LDF 2009.12.29.
+
+#### $@:  Target
+#### $<:  First prerequisite
+#### $^:  The names of all the prerequisites, with spaces between them.
+#### $*:  The stem with which an implicit rule matches
+
 #OLDDOCDIR := olddoc
 
 #export OLDDOCDIR
 
 #SUBDIRS = $(OLDDOCDIR) 
 
+3DLDF_TEXINFO := 3DLDF.texi concidx.texi dttypidx.texi fdl.texi funcidx.texi \
+                 intro.texi invoking.texi varidx.texi
 
+3DLDF.dvi: $(3DLDF_TEXINFO)
+	env LATEX=tex texi2dvi 3DLDF.texi
 
+3DLDF.ps: 3DLDF.dvi
+	dvips -o $@ $<
+
+3DLDF.pdf: 3DLDF.ps
+	ps2pdf -o $@ $<
+
+.PHONY: dvi ps pdf
+
+dvi: 3DLDF.dvi
+
+ps: 3DLDF.ps
+
+pdf: 3DLDF.pdf
