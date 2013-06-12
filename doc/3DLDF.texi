@@ -1,0 +1,181 @@
+%%%% 3DLDF.texi
+   
+%% This file is part of the GNU 3DLDF User Manual.
+
+%% Copyright (C) 2013 The Free Software Foundation
+
+%% See the section "GNU Free Documentation License" in the file 
+%% fdl.texi for copying conditions.
+
+\font\logofont=logo10 % font used for the METAFONT logo, etc.
+
+\newlinechar=`^^J
+
+%% Kludge!!  Actually, Kludges.  LDF 2002.11.19.
+%% How do I define new macros for 
+%% math mode??  Also, I'm not sure that these are the best 
+%% symbols.
+
+\newbox\PPbox % symbol for ++
+\setbox\PPbox=\hbox{\kern.5pt\raise1pt\hbox{\sevenrm+\kern-1pt+}\kern.5pt}
+\def\PP{\copy\PPbox}
+%%\let\mc=\ninerm % medium caps
+\let\mc=\tenrm % LDF 2002.11.16.  Trying this out. 
+\def\CPLUSPLUS{{\mc C\PP\spacefactor1000}}
+
+\newskip\displayskip
+
+
+\font\manual=manfnt % font used for the METAFONT logo, etc.
+
+
+%% `\MetaPost' is defined here so that it can be used in the 
+%% `@copying' section.  `@MP' is defined below the latter.
+%% LDF 2004.10.29.
+
+\def\MetaPost{{\logofont META}\-{\logofont POST}}
+
+\def\DEGREES#1{$#1^\circ$}
+
+%% Macros and declarations for syntax rules.
+%% LDF 2004.12.03.
+
+\def\<#1>{$\langle$\rm{#1}$\rangle$}
+
+\def\lra{$\longrightarrow$}
+
+\def\vrt{$\vert$}
+\def\uscr{{\tt \char`\_}}
+
+
+\newskip\syntaxhskip
+\syntaxhskip=3pc 
+
+\newskip\preruleskip
+\newskip\interruleskip
+\newskip\postruleskip
+
+\preruleskip=.5\baselineskip
+
+\interruleskip=.5\baselineskip
+
+\postruleskip=.5\baselineskip
+
+
+%% End of macros and declarations for syntax rules.
+%% LDF 2004.12.03.
+
+\input texinfo   @c -*-texinfo-*-
+
+@c %**start of header
+@setfilename 3DLDF.info
+@settitle GNU 3DLDF User and Reference Manual
+
+@defindex cb      @c Combined Index
+@defcodeindex cm  @c 3DLDF Command Index
+@defcodeindex ct  @c C++ Data Type Index
+@defcodeindex cv  @c C++ Variable Index
+
+@c %**end of header
+
+@set EDITION 1.2.0
+@set VERSION 1.2.0
+@set UPDATED 1 February 2008
+@set UPDATE-MONTH February 2008
+
+
+@c *********************
+
+@copying
+This is the GNU 3DLDF User and Reference Manual, edition @value{EDITION} for
+GNU 3DLDF @value{VERSION}.  This manual was last updated on
+@value{UPDATED}. 
+GNU 3DLDF is a package for three-dimensional drawing with 
+MetaPost output. 
+The author is Laurence D. Finston.
+
+Copyright @copyright{} 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013 The Free Software Association
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.  A copy of the license is included in the section entitled 
+``GNU Free Documentation License''.
+@end quotation
+@end copying
+
+@c *********************
+
+@c Added @dircategory and @direntry at the suggestion of 
+@c Andreas Voegele.  LDF 2003.12.01.
+
+@dircategory GNU packages
+@direntry
+* GNU 3DLDF: (GNU 3DLDF).            3D drawing with MetaPost output.
+@end direntry
+
+
+@c *********************
+
+
+@c @setchapternewpage odd
+@c @setchapternewpage off  @c For saving paper.  LDF 2003.08.20.
+
+
+
+@c *********************
+
+@titlepage
+@title GNU 3DLDF User and Reference Manual
+@subtitle Three-dimensional drawing with MetaPost output.
+@subtitle Manual edition @value{EDITION} for GNU 3DLDF Version @value{VERSION}
+@subtitle @value{UPDATE-MONTH}
+@author Laurence D. Finston
+
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@headings on
+
+
+@c Comment-out to save paper.
+@shortcontents
+
+@contents
+
+@node Top, Introduction, (dir), (dir)
+
+@ifnottex
+@insertcopying
+
+Please note that the figures cannot be shown in the Info output
+format.  
+@end ifnottex
+
+
+@menu
+* Introduction::                
+* Concept Index::               
+@end menu
+
+@include intro.texi
+
+@page
+@include fdl.texi
+
+@page
+@c Concept Index      (c)
+@include concidx.texi
+
+@bye
+
+@c Local Variables:
+@c abbrev-mode:t
+@c eval:(outline-minor-mode t)
+@c eval:(auto-fill-mode t)
+@c End:
+
