@@ -349,12 +349,14 @@ arc.o: arc.c++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ conicsct.h++ crclslc.
                paths.h++ pens.h++ pictures.h++ planes.h++ pntrvctr.h++ \
                points.h++ polygons.h++ primes.h++ pspglb.h++ rectangs.h++ \
                shapes.h++ transfor.h++ triangle.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 circles.o: circles.c++ circles.h++ colors.h++ complex.h++ conicsct.h++ creatnew.h++ \
                        curves.h++ dashptrn.h++ ellipses.h++ io.h++ lines.h++ loader.h++ \
                        matrices.h++ nurbs.h++ paths.h++ pens.h++ pictures.h++ planes.h++ \
                        pntrvctr.h++ points.h++ polygons.h++ primes.h++ pspglb.h++ \
                        rectangs.h++ shapes.h++ transfor.h++ triangle.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 
 cncsctlt.o: cncsctlt.c++ cncsctlt.h++ circles.h++ colors.h++ complex.h++ \
@@ -365,15 +367,18 @@ cncsctlt.o: cncsctlt.c++ cncsctlt.h++ circles.h++ colors.h++ complex.h++ \
                          planes.h++ pntrvctr.h++ points.h++ polygons.h++ \
                          primes.h++ pspglb.h++ rectangs.h++ shapes.h++ \
                          transfor.h++ triangle.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 
 
 colors.o: colors.c++ colors.h++ complex.h++ creatnew.h++ io.h++ loader.h++ \
                      matrices.h++ pntrvctr.h++ primes.h++ pspglb.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 
 complex.o: complex.c++ complex.h++ creatnew.h++ io.h++ loader.h++ pntrvctr.h++ \
                        primes.h++ pspglb.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 
 cones.o: cones.c++ cones.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ complex.h++ \
@@ -386,14 +391,14 @@ cones.o: cones.c++ cones.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ complex
 		   polyhed.h++ primes.h++ pspglb.h++ rectangs.h++ \
 		   rhtchdrn.h++ shapes.h++ solfaced.h++ solids.h++ \
 		   transfor.h++ triangle.h++
- 
+	$(CXXCOMPILE) -c -o $@ $<
 
 conicsct.o: conicsct.c++ conicsct.h++ colors.h++ complex.h++ creatnew.h++ curves.h++ \
                          dashptrn.h++ io.h++ lines.h++ loader.h++ matrices.h++ \
                          nurbs.h++ paths.h++ pens.h++ pictures.h++ planes.h++ \
                          pntrvctr.h++ points.h++ polygons.h++ primes.h++ \
                          pspglb.h++ rectangs.h++ shapes.h++ transfor.h++ triangle.h++
-
+	$(CXXCOMPILE) -c -o $@ $<
 
 crclslc.o: crclslc.c++ crclslc.h++ circles.h++ colors.h++ complex.h++ \
                        conicsct.h++ creatnew.h++ curves.h++ dashptrn.h++ \
@@ -402,12 +407,13 @@ crclslc.o: crclslc.c++ crclslc.h++ circles.h++ colors.h++ complex.h++ \
                        planes.h++ pntrvctr.h++ points.h++ polygons.h++ \
                        primes.h++ pspglb.h++ rectangs.h++ shapes.h++ \
                        transfor.h++ triangle.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 #### TODO:  LDF 2013.06.03.  Get rid of references to the template function 
 #### 'create_new'.  Then get rid of 'creatnew.web'.
 
 creatnew.o: creatnew.c++ creatnew.h++ io.h++ loader.h++ pspglb.h++
-
+	$(CXXCOMPILE) -c -o $@ $<
 
 cuboid.o: cuboid.c++ cuboid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -416,11 +422,13 @@ cuboid.o: cuboid.c++ cuboid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                      hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                      solfaced.h++ cuboid.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 curves.o: curves.c++ curves.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                      planes.h++ nurbs.h++ paths.h++ curves.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 cylinder.o: cylinder.c++ cylinder.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -430,10 +438,12 @@ cylinder.o: cylinder.c++ cylinder.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++   
+	$(CXXCOMPILE) -c -o $@ $<
 
 dashptrn.o: dashptrn.c++ dashptrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 ddchdrn.o: ddchdrn.c++ ddchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -442,6 +452,7 @@ ddchdrn.o: ddchdrn.c++ ddchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 deftfncs.o: deftfncs.c++ deftfncs.h++ arc.h++ circles.h++ cncsctlt.h++ \
                          colors.h++ complex.h++ cones.h++ conicsct.h++ \
@@ -459,6 +470,7 @@ deftfncs.o: deftfncs.c++ deftfncs.h++ arc.h++ circles.h++ cncsctlt.h++ \
 			 scanprsf.h++ shapes.h++ solfaced.h++ solids.h++ \
 			 spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
 			 utility.h++
+	$(CXXCOMPILE) -c -o $@ $<
                          
 
 ellipses.o: ellipses.c++ ellipses.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -466,6 +478,7 @@ ellipses.o: ellipses.c++ ellipses.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ 
+	$(CXXCOMPILE) -c -o $@ $<
 
 ellpsoid.o: ellpsoid.c++ ellpsoid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -475,12 +488,14 @@ ellpsoid.o: ellpsoid.c++ ellpsoid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 ellpsslc.o: ellpsslc.c++ ellpsslc.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 figures.o: figures.c++ figures.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -492,6 +507,7 @@ figures.o: figures.c++ figures.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 glyphs.o: glyphs.c++ glyphs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -502,8 +518,10 @@ glyphs.o: glyphs.c++ glyphs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                      cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                      paraellp.h++ parahypr.h++ glyphs.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 gsltmplt.o: gsltmplt.c++ gsltmplt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 helices.o: helices.c++ helices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -511,6 +529,7 @@ helices.o: helices.c++ helices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 hyprbola.o: hyprbola.c++ hyprbola.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -518,6 +537,7 @@ hyprbola.o: hyprbola.c++ hyprbola.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++             
+	$(CXXCOMPILE) -c -o $@ $<
 
 imetfncs.o: imetfncs.c++ imetfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -530,20 +550,25 @@ imetfncs.o: imetfncs.c++ imetfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++             
+	$(CXXCOMPILE) -c -o $@ $<
 
 io.o: io.c++ io.h++ loader.h++ pspglb.h++ io.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 lines.o: lines.c++ lines.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                    transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 matrices.o: matrices.c++ matrices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 nurbs.o: nurbs.c++ nurbs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                    transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                    planes.h++ nurbs.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 origami.o: origami.c++ origami.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -551,12 +576,14 @@ origami.o: origami.c++ origami.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 parabola.o: parabola.c++ parabola.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 parabold.o: parabold.c++ parabold.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -566,6 +593,7 @@ parabold.o: parabold.c++ parabold.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 paraellp.o: paraellp.c++ paraellp.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -576,6 +604,7 @@ paraellp.o: paraellp.c++ paraellp.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++             
+	$(CXXCOMPILE) -c -o $@ $<
 
 parahypr.o: parahypr.c++ parahypr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -586,11 +615,13 @@ parahypr.o: parahypr.c++ parahypr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 paths.o: paths.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                    transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                    planes.h++ nurbs.h++ paths.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 pctfncs0.o: pctfncs0.c++ pctfncs0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -601,19 +632,23 @@ pctfncs0.o: pctfncs0.c++ pctfncs0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 pens.o: pens.c++ pens.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ \
                  pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ transfor.h++ \
                  pens.h++         
+	$(CXXCOMPILE) -c -o $@ $<
 
 pictures.o: pictures.c++ pictures.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 planes.o: planes.c++ planes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                      planes.h++           
+	$(CXXCOMPILE) -c -o $@ $<
 
 plyhdslc.o: plyhdslc.c++ plyhdslc.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -622,6 +657,7 @@ plyhdslc.o: plyhdslc.c++ plyhdslc.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 pntrvcf0.o: pntrvcf0.c++ pntrvcf0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -632,18 +668,22 @@ pntrvcf0.o: pntrvcf0.c++ pntrvcf0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 pntrvctr.o: pntrvctr.c++ pntrvctr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 points.o: points.c++ points.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 polygons.o: polygons.c++ polygons.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 polyhed.o: polyhed.c++ polyhed.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -652,6 +692,7 @@ polyhed.o: polyhed.c++ polyhed.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 predctes.o: predctes.c++ predctes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -663,9 +704,11 @@ predctes.o: predctes.c++ predctes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++             
+	$(CXXCOMPILE) -c -o $@ $<
 
 primes.o: primes.c++ primes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -678,6 +721,7 @@ prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        parahypr.h++ glyphs.h++ ellpsoid.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ 
+	$(CXXCOMPILE) -c -o $@ $<
 
 pspglb.o: pspglb.c++ pspglb.h++ loader.h++ pspglb.h++
 	$(CXXCOMPILE) -c -o $@ $<
@@ -686,6 +730,7 @@ rectangs.o: rectangs.c++ rectangs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 rhtchdrn.o: rhtchdrn.c++ rhtchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -694,6 +739,7 @@ rhtchdrn.o: rhtchdrn.c++ rhtchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ \
                  pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ transfor.h++ \
@@ -705,6 +751,7 @@ scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++
                  cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                  paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                  predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -716,6 +763,7 @@ scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -727,6 +775,7 @@ scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -739,6 +788,7 @@ sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -751,10 +801,12 @@ sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 shapes.o: shapes.c++ shapes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 solfaced.o: solfaced.c++ solfaced.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -763,6 +815,7 @@ solfaced.o: solfaced.c++ solfaced.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++             
+	$(CXXCOMPILE) -c -o $@ $<
 
 solids.o: solids.c++ solids.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -770,6 +823,7 @@ solids.o: solids.c++ solids.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                      conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                      hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ 
+	$(CXXCOMPILE) -c -o $@ $<
 
 spheres.o: spheres.c++ spheres.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -779,6 +833,7 @@ spheres.o: spheres.c++ spheres.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 sphrdevl.o: sphrdevl.c++ sphrdevl.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -788,15 +843,18 @@ sphrdevl.o: sphrdevl.c++ sphrdevl.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ 
+	$(CXXCOMPILE) -c -o $@ $<
 
 transfor.o: transfor.c++ transfor.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ primes.h++ complex.h++ matrices.h++ \
                          colors.h++ transfor.h++   
+	$(CXXCOMPILE) -c -o $@ $<
 
 triangle.o: triangle.c++ triangle.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ polygons.h++ triangle.h++
+	$(CXXCOMPILE) -c -o $@ $<
 
 utility.o: utility.c++ utility.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
@@ -807,7 +865,7 @@ utility.o: utility.c++ utility.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++
-
+	$(CXXCOMPILE) -c -o $@ $<
 
 
 
@@ -815,10 +873,6 @@ utility.o: utility.c++ utility.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 tags:
 	etags $(3dldf_SOURCES) $(3dldf_PARSER_FILES)
- 
-
-
-
 
 .PHONY: query
 
