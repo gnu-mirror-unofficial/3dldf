@@ -65,6 +65,11 @@
 3DLDF_TEXINFO := 3DLDF.texi concidx.texi dttypidx.texi fdl.texi funcidx.texi \
                  intro.texi invoking.texi varidx.texi
 
+
+.PHONY: all
+
+all: 3DLDF.dvi 3DLDF.ps 3DLDF.pdf 3DLDF.html 3DLDF.info
+
 3DLDF.dvi: $(3DLDF_TEXINFO)
 	env LATEX=tex texi2dvi 3DLDF.texi
 
@@ -72,7 +77,7 @@
 	dvips -o $@ $<
 
 3DLDF.pdf: 3DLDF.ps
-	ps2pdf -o $@ $<
+	ps2pdf $< 2>/dev/null
 
 .PHONY: dvi ps pdf
 
@@ -81,3 +86,33 @@ dvi: 3DLDF.dvi
 ps: 3DLDF.ps
 
 pdf: 3DLDF.pdf
+
+3DLDF.info: $(3DLDF_TEXINFO)
+	makeinfo 3DLDF.texi
+
+.PHONY: info
+
+info: 3DLDF.info
+
+3DLDF.html: $(3DLDF_TEXINFO)
+	makeinfo --html --no-split 3DLDF.texi
+
+
+.PHONY: html
+
+html: 3DLDF.html
+
+
+PURGEFILES = 3DLDF.aux 3DLDF.cb 3DLDF.cm 3DLDF.cp 3DLDF.ct 3DLDF.cv \
+             3DLDF.fn 3DLDF.ky 3DLDF.log 3DLDF.pg 3DLDF.toc 3DLDF.tp \
+             3DLDF.vr
+
+CLEANFILES = $(PURGEFILES) 3DLDF.dvi 3DLDF.html 3DLDF.info 3DLDF.ps 3DLDF.pdf 
+
+.PHONY: purge
+
+purge: 
+	rm -f $(PURGEFILES)
+
+
+
