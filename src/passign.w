@@ -2441,7 +2441,7 @@ Added this rule.
   
   Point* p;
 
-  p = create_new<Point>(bp->pt);
+  p = new Point(bp->pt);
 
   Int_Void_Ptr ivp = assign_simple<Point>(static_cast<Scanner_Node>(parameter),
                                           "Point",

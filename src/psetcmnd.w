@@ -2238,7 +2238,7 @@ Added this rule.
 
       Point* p;
 
-           p = create_new<Point>(0);
+           p = new Point;
 
      p->set(0, 0, 0);
 
@@ -2570,7 +2570,7 @@ Added this rule.
 
       Point* p;
 
-           p = create_new<Point>(0);
+           p = new Point;
  
 
      p->set(0, 1, 0);

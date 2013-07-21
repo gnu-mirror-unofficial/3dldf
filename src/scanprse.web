@@ -91,7 +91,7 @@ file \filename{map} here.  It's now included in
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "gsltmplt.h++"
@@ -5375,7 +5375,7 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 
 
   if (entry->object == 0)
-    entry->object = static_cast<void*>(create_new<Point>(0));
+    entry->object = static_cast<void*>(new Point);
 
 
 @q ***** (5)  Look up |curr_y| and |curr_z|.  @>
@@ -5942,7 +5942,7 @@ Int_Void_Ptr
 #endif /* |DEBUG_COMPILE|  */@; 
 
   if (entry->object == 0)
-    entry->object = static_cast<void*>(create_new<Focus>(0));
+    entry->object = static_cast<void*>(new Focus);
 
   f = static_cast<Focus*>(entry->object); 
 
@@ -10333,7 +10333,7 @@ void*
 Scan_Parse::get_point_func(real r, C* c, void* parameter)
 {
 
-    Point* p = create_new<Point>(0, static_cast<Scanner_Node>(parameter));
+    Point* p = new Point;
 
     *p = (r == MAX_REAL) ?   c->get_last_point() 
                            : c->get_point(
@@ -10597,7 +10597,7 @@ void*
 Scan_Parse::get_center_func(C* c, void* parameter)
 {
 
-    Point* p  = create_new<Point>(0);
+    Point* p  = new Point;
 
     *p = c->get_center(); 
 
@@ -10716,7 +10716,7 @@ Scan_Parse::normal_func(C* c, Scanner_Node scanner_node)
   else /* |c && c->is_planar|  */
     {
  
-      Point* p = create_new<Point>(0, scanner_node);
+      Point* p = new Point;
       
       *p = c->get_normal();
 
@@ -10796,7 +10796,7 @@ void*
 Scan_Parse::get_focus_func(C* c, const unsigned short s, void* parameter)
 {
 
-    Point* p  = create_new<Point>(0);
+    Point* p  = new Point;
 
     *p = c->get_focus(s, static_cast<Scanner_Node>(parameter)); 
 
@@ -10872,7 +10872,7 @@ void*
 Scan_Parse::get_vertex_func(C* c, const unsigned short s, void* parameter)
 {
 
-    Point* p  = create_new<Point>(0);
+    Point* p  = new Point;
 
     *p = c->get_vertex(s, static_cast<Scanner_Node>(parameter)); 
 
@@ -11378,14 +11378,14 @@ Scan_Parse::ellipse_like_plane_intersection_func(C* c, void* w, void* parameter)
 
     if (bpp.first.pt != INVALID_POINT)
        {
-           q = create_new<Point>(0);
+           q = new Point;
            *q = bpp.first.pt;
            *pv += q;
        }
 
     if (bpp.second.pt != INVALID_POINT)
        {
-           q = create_new<Point>(0);
+           q = new Point;
            *q = bpp.second.pt;
            *pv += q;
        }

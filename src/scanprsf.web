@@ -63,7 +63,7 @@ Added this file.
 @ Include files.
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include <string.h>
 
 #include "pspglb.h++"
@@ -14435,8 +14435,8 @@ Added this section.
    }  /* |if (DEBUG)|  */
 #endif /* |DEBUG_COMPILE|  */@;       
 
-     Point* p0 = create_new<Point>(p->get_point(0));
-     Point* p1 = create_new<Point>(p->get_last_point());
+     Point* p0 = new Point(p->get_point(0));
+     Point* p1 = new Point(p->get_last_point());
 
      delete p;
      p = 0;
@@ -16868,7 +16868,7 @@ Scan_Parse::point_primary_rule_func_0(void* v, void* parameter)
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  Point* p = create_new<Point>(0);
+  Point* p = new Point;
 
   real x;
   real y;
@@ -17703,7 +17703,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 
 @q ****** (6)@> 
 
-    p = create_new<Point>(lattice[0]);
+    p = new Point(lattice[0]);
     s = new string;
     *s = "$A$";
 
@@ -17726,7 +17726,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 
 @q ****** (6)@> 
 
-    p = create_new<Point>(lattice[1]);
+    p = new Point(lattice[1]);
     s = new string;
     *s = "$B$";
 
@@ -17750,7 +17750,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 
 @q ****** (6)@>
 
-    p = create_new<Point>(lattice[2]);
+    p = new Point(lattice[2]);
     s = new string;
     *s = "$C$";
 
@@ -17770,7 +17770,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 
 @q ****** (6)@>
 
-    p = create_new<Point>(lattice[3]);
+    p = new Point(lattice[3]);
     s = new string;
     *s = "$D$";
 
@@ -17792,7 +17792,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 @  
 @<Define |Conic_Section_Lattice| functions@>=
 
-    p = create_new<Point>(lattice[4]);
+    p = new Point(lattice[4]);
     s = new string;
     *s = "$E$";
 
@@ -17815,7 +17815,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 @  
 @<Define |Conic_Section_Lattice| functions@>=
 
-    p = create_new<Point>(lattice[4]);
+    p = new Point(lattice[4]);
     s = new string;
     *s = "$E$";
 
@@ -17916,7 +17916,7 @@ failed, returning 0.
 @ |X|.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    p = create_new<Point>(pv->v[0]);
+    p = new Point(pv->v[0]);
     s = new string;
     *s = "$X$";
 
@@ -17941,7 +17941,7 @@ failed, returning 0.
 @ |Y|.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    p = create_new<Point>(pv->v[1]);
+    p = new Point(pv->v[1]);
     s = new string;
     *s = "$Y$";
 
@@ -17966,7 +17966,7 @@ failed, returning 0.
 
     if (increment != 0)
     {
-        p = create_new<Point>(pv->v[2]);
+        p = new Point(pv->v[2]);
         s = new string;
         *s = "$Z$";
 

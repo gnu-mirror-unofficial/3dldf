@@ -93,7 +93,7 @@ versions are now in their own RCS repository.
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -706,7 +706,7 @@ Changed |Pointer_Vector<Point>* bpv| to |Pointer_Vector<Bool_Point>* bpv|.
                                  if ((**b_iter).pt != INVALID_POINT)
                                     {
 
-                                        *pv += create_new<Point>((**b_iter).pt);
+                                        *pv += new Point((**b_iter).pt);
                                     }
 
                              } /* End of second inner |for|  */

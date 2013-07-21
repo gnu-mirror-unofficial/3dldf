@@ -65,7 +65,7 @@ Added this file.
 
 @<Include files@>=
 
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "gsltmplt.h++"
@@ -3297,7 +3297,7 @@ Scan_Parse::label_bool_point_func(void* parameter,
                   
                    Point* p; 
 
-                   p = create_new<Point>(bool_pt->pt);
+                   p = new Point(bool_pt->pt);
 
                    delete bool_pt;
                    bool_pt = 0;
@@ -4872,7 +4872,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
        if (command == GET_APEX)
        {
-           Point* p = create_new<Point>(0);
+           Point* p = new Point;
            *p = c->apex;
            delete c;
            c = 0;

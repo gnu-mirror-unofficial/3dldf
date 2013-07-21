@@ -63,7 +63,7 @@ Created this file.
 
 @<Include files@>=
 
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -635,7 +635,7 @@ Conic_Section_Lattice::get_point(Scanner_Node scanner_node,
 @q ******* (7)@> 
 
    int status;
-   Point* p = create_new<Point>(0);
+   Point* p = new Point;
 
 @q ******* (7) Shift |lattice| according to |cycle_value|.@>       
 @ Shift |lattice| according to |cycle_value|.
@@ -895,7 +895,7 @@ Conic_Section_Lattice::get_point(Scanner_Node scanner_node,
    if (p == INVALID_POINT)
       return 0;
    else 
-      return create_new<Point>(p);
+      return new Point(p);
        
 } /* End of |Conic_Section_Lattice::get_point| definition.  */
 
@@ -1163,15 +1163,15 @@ Conic_Section_Lattice::get_pascal_point(real r,
 
    if (s == 0)
    {
-       return create_new<Point>(X);
+       return new Point(X);
    }  
    else if (s == 1)
    {
-       return create_new<Point>(Y);
+       return new Point(Y);
    }  
    else if (s == 2)
    {
-       return create_new<Point>(Z);
+       return new Point(Z);
    }  
    else
    {
@@ -1325,9 +1325,9 @@ Conic_Section_Lattice::get_pascal_points(real increment, Scanner_Node scanner_no
 
    Pointer_Vector<Point>* pv = new Pointer_Vector<Point>;
 
-   *pv += create_new<Point>(X);
-   *pv += create_new<Point>(Y);
-   *pv += create_new<Point>(Z);
+   *pv += new Point(X);
+   *pv += new Point(Y);
+   *pv += new Point(Z);
 
    return pv;
 
@@ -2196,7 +2196,7 @@ Added this section.
 #endif /* |DEBUG_COMPILE|  */@;
 
              p = *(lattice[0]);
-             *pv += create_new<Point>(p);
+             *pv += new Point(p);
 
              start_temp += increment;
              start += increment;

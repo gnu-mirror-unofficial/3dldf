@@ -1,4 +1,4 @@
-@q loader.web @>
+@q inclhdrs.web @>
       
 @q * (1) Copyright and License.@>
 
@@ -50,7 +50,7 @@
 
 
 @q * (1) Preprocessor variables and library files.@>
-@** Preprocessor variables and library files\quad ({\tt loader\PERIOD web}).\hfil
+@** Preprocessor variables and library files\quad ({\tt inclhdrs\PERIOD web}).\hfil
 \initials{LDF 2002.10.15.}
 It would, of course, be possible to put this code into a \.{.h} file
 directly, but it's convenient to have a \CWEB/ file so that it can be
@@ -327,8 +327,8 @@ GCC 2.95 or the DEC C++ compiler.
 @<Include files@>=
 using namespace std;
 
-@q * Putting loader together.@>
-@ Putting {\tt loader} together.
+@q * Putting inclhdrs together.@>
+@ Putting {\tt inclhdrs} together.
 
 @q ** This is what's compiled.@>
 @ This is what's compiled.
@@ -338,7 +338,7 @@ but I think it's safer.
 
 \LOG
 \initials{LDF 2004.01.06.}  Added this section.  It simplifies the
-rules for building the executable \.{3dldf} if \filename{loader.c} is
+rules for building the executable \.{3dldf} if \filename{inclhdrs.c} is
 compiled. 
 \ENDLOG 
 @c
@@ -351,15 +351,17 @@ compiled.
                     
 using namespace std;
 
-@q ** This is what's written to \filename{loader.h}.@>
-@ This is what's written to the \filename{loader.h}.
+@q ** This is what's written to \filename{inclhdrs.h}.@>
+@ This is what's written to the \filename{inclhdrs.h}.
 \LOG
 \initials{LDF 2004.01.06.}  Added this section.
 \ENDLOG 
-@(loader.h@>=
+@(inclhdrs.h@>=
+#ifndef INCLHDRS_H
+#define INCLHDRS_H 1
 @<Include files@>@;
 using namespace std;
-
+#endif 
 
       
 @q * Local variables for Emacs.@>

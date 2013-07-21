@@ -83,7 +83,7 @@ versions are now in their own RCS repository.
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -743,12 +743,12 @@ Point::reflect_in(const Plane& p,
 
         try
           {
-             reflection = create_new<Point>(0, scanner_node);
+             reflection = new Point;
           }
 
-@q ***** (5) Error handling:  |create_new<Point>| failed.@>   
+@q ***** (5) Error handling:  |new Point| failed.@>   
 
-@ Error handling:  |create_new<Point>| failed.
+@ Error handling:  |new Point| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Point| functions@>=
@@ -758,7 +758,7 @@ Point::reflect_in(const Plane& p,
              
               cerr_strm << thread_name 
                         << "ERROR! In `Point::reflect_in()':"
-                        << endl << "`create_new<Point>()' failed. "
+                        << endl << "`new Point()' failed. "
                         << "Rethrowing `bad_alloc'.";
 
 
@@ -771,9 +771,9 @@ Point::reflect_in(const Plane& p,
 
           } /* |catch (bad_alloc)|  */
 
-@q ***** (5) |create_new<Point>| succeeded.@>           
+@q ***** (5) |new Point| succeeded.@>           
 
-@ |create_new<Point>| succeeded.
+@ |new Point| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Point| functions@>=
@@ -783,7 +783,7 @@ Point::reflect_in(const Plane& p,
      {
          cerr_strm << thread_name 
                    << "In `Point::reflect_in()':"
-                   << endl << "`create_new<Point>()' succeeded.";
+                   << endl << "`new Point()' succeeded.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);

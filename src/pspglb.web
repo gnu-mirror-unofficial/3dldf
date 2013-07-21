@@ -79,7 +79,7 @@ It's included in \filename{loader.web} instead.
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 
 @q * (1) Type definitions.@>
 @* Type definitions.
@@ -5206,11 +5206,12 @@ dummy_func(void)
 @<Define |Thread_Info_Type| functions@>@;
 @<Define |dummy_func|@>@;
 
+
 @q ** (2) This is what's written to \filename{pspglb.h}.@>
 @ This is what's written to the \filename{pspglb.h}.
 @(pspglb.h@>=
-#ifndef LDF_PSPGLB_H_KNOWN
-#define LDF_PSPGLB_H_KNOWN
+#ifndef PSPGLB_H 
+#define PSPGLB_H 1
 @<Type definitions@>@;
 @<Forward declarations@>@;
 @<Utility classes@>@;
@@ -5228,14 +5229,6 @@ dummy_func(void)
 @<|extern| declaration of namespace |Sorting|@>@;
 @<|extern| declarations for global |Run_State| variables@>@;
 @<Declare |dummy_func|@>@;
-#endif 
-
-/* This doesn't work, apparently because it's incompatible with the
-use of \filename{sstream}. */
-#if 0 
-#ifdef __DECCXX /* Using the DEC \CPLUSPLUS/ Compiler.  */
-  const real PI = __CXXL_PI;   
-#endif
 #endif 
 
 @<Declare utility functions@>@;

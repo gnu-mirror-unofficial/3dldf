@@ -66,7 +66,7 @@ code.
 
 @<Include files@>=
 
-#include "loader.h++" 
+#include "inclhdrs.h++" 
 #include "pspglb.h++" 
 #include "io.h++" 
 #include "creatnew.h++"
@@ -613,7 +613,7 @@ Sphere_Development::map_point(real latitude,
 
    try 
    {
-       p      = create_new<Point>(0);
+       p      = new Point;
 
    }
 
@@ -622,7 +622,7 @@ Sphere_Development::map_point(real latitude,
    
        cerr_strm << thread_name << "ERROR! In `Sphere_Development::map_point':" 
                  << endl 
-                 << "`create_new<Point>' failed. "
+                 << "`new Point' failed. "
                  << "Rethrowing `bad_alloc'.";
 
        log_message(cerr_strm);

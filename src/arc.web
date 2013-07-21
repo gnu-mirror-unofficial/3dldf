@@ -63,7 +63,7 @@ Created this file.
 @ Include files.
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -350,7 +350,7 @@ Arc::operator=(const Arc& c)
     }
     else if (!center && c.center)
     {
-        center = create_new<Point>(c.center);
+        center = new Point(c.center);
         *center = *c.center;
     }
 
@@ -365,7 +365,7 @@ Arc::operator=(const Arc& c)
     }
     else if (!focus_0 && c.focus_0)
     {
-        focus_0 = create_new<Point>(c.focus_0);
+        focus_0 = new Point(c.focus_0);
         *focus_0 = *c.focus_0;
     }
 
@@ -381,7 +381,7 @@ Arc::operator=(const Arc& c)
     }
     else if (!focus_1 && c.focus_1)
     {
-        focus_1 = create_new<Point>(c.focus_1);
+        focus_1 = new Point(c.focus_1);
         *focus_1 = *c.focus_1;
     }
 

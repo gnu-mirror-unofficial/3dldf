@@ -84,7 +84,7 @@ versions are now in their own RCS repository.
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -256,13 +256,13 @@ make_perspective_frame(Picture& picture,
 @<Define perspective functions@>=
 
   vector<Point*> points; 
-  points.push_back(create_new<Point>(f));
-  points.push_back(create_new<Point>(cv));
-  points.push_back(create_new<Point>(origin_pt));
-  points.push_back(create_new<Point>(horizon_l));
-  points.push_back(create_new<Point>(horizon_r));
-  points.push_back(create_new<Point>(gl_l));
-  points.push_back(create_new<Point>(gl_r));                   
+  points.push_back(new Point(f));
+  points.push_back(new Point(cv));
+  points.push_back(new Point(origin_pt));
+  points.push_back(new Point(horizon_l));
+  points.push_back(new Point(horizon_r));
+  points.push_back(new Point(gl_l));
+  points.push_back(new Point(gl_r));                   
 
 
 @ Calculate the vanishing points on the right side, and put them onto
@@ -290,7 +290,7 @@ make_perspective_frame(Picture& picture,
            << "]. Angle = " << *iter <<". x = " 
            << q.get_x() << endl << flush;
 #endif 
-      points.push_back(create_new<Point>(q));                   
+      points.push_back(new Point(q));                   
       if (*iter == 60 || *iter == 80) /* KLUDGE.  \initials{LDF 2003.05.14.}  */
         {
           q_super = q;

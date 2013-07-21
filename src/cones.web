@@ -64,7 +64,7 @@ Created this file.
 @ Include files.
 
 @<Include files@>=
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -1032,7 +1032,7 @@ Cone::get_base_center(void* v)
    
     if (type == CIRCULAR_CONE_TYPE && base != 0)
     {
-         p = create_new<Point>(0);
+         p = new Point;
      
          *p = static_cast<Circle*>(base)->get_center();
 
@@ -1044,7 +1044,7 @@ Cone::get_base_center(void* v)
 
     else if (type == ELLIPTICAL_CONE_TYPE && base != 0)
     {
-         p = create_new<Point>(0);
+         p = new Point;
      
          *p = static_cast<Ellipse*>(base)->get_center();
 
@@ -1084,7 +1084,7 @@ Cone::get_cap_center(void* v)
 
     if (type == CIRCULAR_CONE_TYPE && cap != 0)
     {
-         p = create_new<Point>(0);
+         p = new Point;
      
          *p = static_cast<Circle*>(cap)->get_center();
          return static_cast<void*>(p);
@@ -1095,7 +1095,7 @@ Cone::get_cap_center(void* v)
 
     else if (type == ELLIPTICAL_CONE_TYPE && cap != 0)
     {
-         p = create_new<Point>(0);
+         p = new Point;
      
          *p = static_cast<Ellipse*>(cap)->get_center();
 

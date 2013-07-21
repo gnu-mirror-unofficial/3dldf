@@ -63,7 +63,7 @@ Created this file.
 
 @<Include files@>=
 
-#include "loader.h++"
+#include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -318,22 +318,22 @@ y-axis, if |*this| is left untransformed.
                                   
                  z = b_over_a * x * sqrt(1 - ((a * a) / (x * x)));
 
-                 p = create_new<Point>(0);
+                 p = new Point;
                  p->set(x, 0, z);
                  p->shift(center);
                  d.push_back(p);
                  
-                 p = create_new<Point>(0);
+                 p = new Point;
                  p->set(x, 0, -z);
                  p->shift(center);
                  d.push_front(p);
 
-                 p = create_new<Point>(0);
+                 p = new Point;
                  p->set(-x, 0, z);
                  p->shift(center);
                  e.push_back(p);
                  
-                 p = create_new<Point>(0);
+                 p = new Point;
                  p->set(-x, 0, -z);
                  p->shift(center);
                  e.push_front(p);

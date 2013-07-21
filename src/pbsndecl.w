@@ -84,7 +84,7 @@ when I tried to build 3DLDF from scratch.
 
 #include <time.h>
 
-#include "loader.h++"
+#include "inclhdrs.h++"
  
 #include "pspglb.h++"
 #include "io.h++"
