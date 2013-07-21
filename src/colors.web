@@ -384,6 +384,54 @@ Color::set(const real r, const real g, const real b)
 } /* End of |Color::set(const real r, const real g, const real b)|
      definition.  */
 
+@q *** (3) Constructor with |Color *| argument.  @>
+@ Constructor with |Color *| argument.
+\initials{LDF 2013.07.21.}
+
+\LOG
+\initials{LDF 2013.07.21.}
+Added this function.
+\ENDLOG
+
+@<Declare |Color| functions@>=
+Color(Color *c);
+
+@ 
+@<Define |Color| functions@>=
+Color::Color(Color *c)
+{
+
+   *this = *c;
+
+   return;
+
+}    
+
+
+@q *** (3) Constructor with |const Color *| argument.  @>
+@ Constructor with |const Color *| argument.
+\initials{LDF 2013.07.21.}
+
+\LOG
+\initials{LDF 2013.07.21.}
+Added this function.
+\ENDLOG
+
+@<Declare |Color| functions@>=
+Color(const Color *c);
+
+@ 
+@<Define |Color| functions@>=
+Color::Color(const Color *c)
+{
+
+   *this = *c;
+
+   return;
+
+}    
+
+
 @q * (1) Pseudo-constructor for dynamic allocation. @>
 @* Pseudo-constructor for dynamic allocation. 
 \initials{LDF Undated.} 
