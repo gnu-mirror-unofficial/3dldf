@@ -82,6 +82,7 @@ Now including \filename{nurbs.h}.
 #include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
+#include "creatnew.h++"
 #include "pntrvctr.h++"
 #include "primes.h++"
 #include "complex.h++"
@@ -461,7 +462,7 @@ Added code for handling copying |draw_color_vector|.
         {
             cerr_strm << thread_name << "ERROR!  In `Path::operator=(const Path&)':"
                       << endl 
-                      << "`create_new<Color>' or `new Pointer_Vector<Color>' "
+                      << "`new Color' or `new Pointer_Vector<Color>' "
                       << "failed, throwing `bad_alloc'."
                       << endl  
                       << "Rethrowing.";
@@ -2012,7 +2013,7 @@ Path::push_draw_color(Color*& c, bool copy)
    Color* d;
 
    if (copy == true)
-      d = create_new<Color>(c);
+      d = new Color(c);
 
    else
       {
@@ -2062,7 +2063,7 @@ Path::push_fill_color(Color*& c, bool copy)
    Color* d;
 
    if (copy == true)
-      d = create_new<Color>(c);
+      d = new Color(c);
 
    else
      {
@@ -2114,12 +2115,12 @@ Path::push_color(Color*& c, bool copy)
 
    Color* d;
 
-   d = create_new<Color>(c);
+   d = new Color(c);
 
    *draw_color_vector += d;
 
    if (copy == true)
-      d = create_new<Color>(c);
+      d = new Color(c);
    else
       {
          d = c;
@@ -4969,7 +4970,7 @@ am now using |Pointer_Vector<Pen>* Shape::pen_vector| instead.
           cerr_strm << thread_name << "ERROR!  In `Path::draw':"
                     << endl 
                     << "`Path::get_copy', `new Pointer_Vector<Color>', "
-                    << "`create_new<Color>', "
+                    << "`new Color', "
                     << "`new Pointer_Vector<Dash_Pattern>',"
                     << endl 
                     << "or `new Pointer_Vector<Pen>' failed, "
@@ -12169,7 +12170,7 @@ Path::adjust_draw_color_vector(void)
 
    while (j < k)
       {
-         c = create_new<Color>(draw_color_vector->v[i++]);
+         c = new Color(draw_color_vector->v[i++]);
          *draw_color_vector += c;
          ++j;
       }
