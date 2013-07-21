@@ -5543,7 +5543,7 @@ for |nullpath|.
 
 @<Define |Scanner_Type::create|@>=          
   {
-    Path* p = create_new<Path>(0);
+    Path* p = new Path;
     v = static_cast<void*>(p); 
     scanner_node->add_entry("null_path", PATH, 
                             regular, is_constant,

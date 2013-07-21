@@ -189,7 +189,7 @@ Put the following code inside an |else| clause.
          
               try 
                 {
-                   q = create_new<Path>(p);
+                   q = new Path(p);
                 }             
               
               catch (bad_alloc)
@@ -198,7 +198,7 @@ Put the following code inside an |else| clause.
                     cerr_strm << "ERROR! In yyparse(), rule " 
                               << "`path_primary --> path_variable':"
                               << endl 
-                              << "`create_new<Path>()' failed. "
+                              << "`new Path()' failed. "
                               << "Rethrowing `bad_alloc'.";
 
                     log_message(cerr_strm);
@@ -328,7 +328,7 @@ of the points on the path is the same.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  Path* p = create_new<Path>(0);
+  Path* p = new Path;
   Path* q = static_cast<Path*>(@=$4@>); 
   
   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$2@>); 
@@ -454,7 +454,7 @@ Removed debugging code.
 
    Ellipse* e = static_cast<Ellipse*>(@=$2@>);
 
-   Path* p = create_new<Path>(0);
+   Path* p = new Path;
 
    bool b = (@=$7@>) ? true : false;
 
@@ -507,7 +507,7 @@ Removed debugging code.
 
    Ellipse* e = static_cast<Ellipse*>(@=$2@>);
 
-   Path* p = create_new<Path>(0);
+   Path* p = new Path;
 
    bool b = (@=$3@>) ? true : false;
 
@@ -552,7 +552,7 @@ Removed debugging code.
 
    Ellipse* e = static_cast<Ellipse*>(@=$2@>);
 
-   Path* p = create_new<Path>(0);
+   Path* p = new Path;
       
    bool b = (@=$3@>) ? true : false;
 
@@ -593,7 +593,7 @@ Added this rule.
 
    Circle* c = static_cast<Circle*>(@=$2@>);
 
-   Path* p = create_new<Path>(0);
+   Path* p = new Path;
 
    bool b = (@=$3@>) ? true : false;
 
@@ -634,7 +634,7 @@ Added this rule.
 
    Circle* c = static_cast<Circle*>(@=$2@>);
 
-   Path* p = create_new<Path>(0);
+   Path* p = new Path;
       
    bool b = (@=$3@>) ? true : false;
 
@@ -923,13 +923,13 @@ Replaced |solid_like_primary| with |cuboid_primary|.
      {
         try
           {
-            p = create_new<Path>(t, scanner_node);
+            p = new Path(t);
           }
 
 
-@q ***** (5) Error handling:  |create_new<Path>()| failed.@> 
+@q ***** (5) Error handling:  |new Path()| failed.@> 
 
-@ Error handling:  |create_new<Path>()| failed.
+@ Error handling:  |new Path()| failed.
 \initials{LDF 2004.10.13.}
 
 @<Define rules@>=
@@ -1083,7 +1083,7 @@ Added this rule.
 
    try 
       {
-         p = create_new<Path>(0);
+         p = new Path;
       }
 
    catch (bad_alloc)
@@ -1091,7 +1091,7 @@ Added this rule.
          cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                    << "`path_primary "
                    << "--> LAST path_vector_expression':"
-                   << endl << "`create_new<Path>()' failed.  "
+                   << endl << "`new Path()' failed.  "
                    << "Rethrowing `bad_alloc'.";
 
          log_message(cerr_strm);
@@ -1254,7 +1254,7 @@ Added this rule.
 
           try 
              {
-                 p = create_new<Path>(0);
+                 p = new Path;
              }
 
 @q ******* (7) @> 
@@ -1267,7 +1267,7 @@ Added this rule.
                            << endl 
                            << "nurb_expression WITH_POWER numeric_expression "
                            << "WITH_TIME_PARAMETER numeric_expression':"
-                           << endl << "`create_new<Path>() failed.  "
+                           << endl << "`new Path() failed.  "
                            << "Deleting `nurb_expression' and rethrowing "
                            << "`bad_alloc'.";
 
@@ -1804,7 +1804,7 @@ Removed debugging code.
 {
 
    Point* p = static_cast<Point*>(@=$1@>);  
-   Path* q = create_new<Path>(0);
+   Path* q = new Path;
 
    if (p)
       {

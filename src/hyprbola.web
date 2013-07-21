@@ -1098,7 +1098,7 @@ Hyperbola::get_branch(const unsigned short a, Scanner_Node scanner_node) const
 
     if (a == 0 || a == 1)
     {
-        Path* p = create_new<Path>(0);
+        Path* p = new Path;
 
         if (a == 0)
            *p = *static_cast<const Path*>(this); 

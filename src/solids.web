@@ -351,7 +351,7 @@ Solid::Solid(const Solid& s)
   for (vector<Path*>::const_iterator iter = s.paths.begin();
        iter != s.paths.end(); ++iter)
     {
-      paths.push_back(create_new<Path>(0));
+      paths.push_back(new Path);
       *(paths.back()) = **iter;
     }
 
@@ -608,7 +608,7 @@ and |vector<Hyperbola*> s.hyperbolae|.
    for (vector<Path*>::const_iterator iter = s.paths.begin();
        iter != s.paths.end(); ++iter)
     {
-      p = create_new<Path>(0);
+      p = new Path;
       paths.push_back(p);
       *(paths.back()) = **iter;
     }
@@ -3761,22 +3761,22 @@ Solid::reflect_in(const Plane& p,
        iter++)
     {
 
-@q ***** (5) Call |create_new<Path>()|.@> 
+@q ***** (5) Call |new Path()|.@> 
 
-@ Call |create_new<Path>()|.
+@ Call |new Path()|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
 
        try 
          {
-            path_reflection = create_new<Path>(0, scanner_node);
+            path_reflection = new Path;
          }
 
 
-@q ****** (6) Error handling:  |create_new<Path>()| failed.@> 
+@q ****** (6) Error handling:  |new Path()| failed.@> 
 
-@ Error handling:  |create_new<Path>()| failed.
+@ Error handling:  |new Path()| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3786,7 +3786,7 @@ Solid::reflect_in(const Plane& p,
 
               cerr_strm << thread_name 
                         << "ERROR! In `Solid::reflect_in()':"
-                        << endl << "`create_new<Path>()' failed. "
+                        << endl << "`new Path()' failed. "
                         << "Deleting `solid_reflection' and "
                         << "rethrowing `bad_alloc'.";
 
@@ -3802,9 +3802,9 @@ Solid::reflect_in(const Plane& p,
            }  /* |catch (bad_alloc)|  */
 
 
-@q ****** (6) |create_new<Path>()| succeeded.@> 
+@q ****** (6) |new Path()| succeeded.@> 
 
-@ |create_new<Path>()| succeeded.
+@ |new Path()| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3814,7 +3814,7 @@ Solid::reflect_in(const Plane& p,
      {
          cerr_strm << thread_name 
                    << "In `Solid::reflect_in()':"
-                   << endl << "`create_new<Path>()' succeeded.";
+                   << endl << "`new Path()' succeeded.";
          
          log_message(cerr_strm);
          cerr_message(cerr_strm);

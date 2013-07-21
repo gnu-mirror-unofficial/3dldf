@@ -328,10 +328,10 @@ Removed debugging code.
 
 
 
-    *pv += create_new<Path>(0, scanner_node);
-    *pv += create_new<Path>(0, scanner_node);
-    *pv += create_new<Path>(0, scanner_node);
-    *pv += create_new<Path>(0, scanner_node);
+    *pv += new Path;
+    *pv += new Path;
+    *pv += new Path;
+    *pv += new Path;
 
 
 @q ******* (7) Call |Scan_Parse::reflect_off_func<Path>()|.@> 

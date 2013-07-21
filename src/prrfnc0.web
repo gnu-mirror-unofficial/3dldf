@@ -5047,7 +5047,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 
            if (arg_0 < c->paths.size())
            {
-               Path* p = create_new<Path>(c->paths[arg_0]);
+               Path* p = new Path(c->paths[arg_0]);
                delete c;
                c = 0;
                object = 0;

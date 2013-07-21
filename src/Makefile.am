@@ -70,12 +70,12 @@ bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT)
 
 lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 
-# colall.web intro.web
+# colall.web intro.web format.web 
 
 3dldflb_CWEB_files = arc.web circles.web cncsctlt.web colors.web complex.web \
                 cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
-                ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web \
+                ellpsoid.web ellpsslc.web figures.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
                 imetfncs.web io.web lines.web \
                 matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
@@ -154,7 +154,8 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 dummy_SOURCES = dummy.cxx
 
-.DELETE_ON_ERROR: $(3dldf_obj_files)
+.DELETE_ON_ERROR: $(3dldf_obj_files) \
+                  $(3dldflb_cpp_files) $(3dldflb_hpp_files) $(3dldflb_lo_files)
 
 
 EXTRA_DIST = check_scan_parse_output.sh patterns.web prelims.web
