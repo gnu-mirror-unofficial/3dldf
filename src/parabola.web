@@ -1402,7 +1402,7 @@ standardize(Scanner_Node scanner_node = 0) const;
 Transform*
 Parabola::standardize(Scanner_Node scanner_node) const
 {
-    Transform* t = create_new<Transform>(0);
+    Transform* t = new Transform;
 
     Plane q = get_plane();
 
@@ -1643,7 +1643,7 @@ Parabola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
            real half_parameter = parameter / 2;
 
-           Transform* t = create_new<Transform>(0);
+           Transform* t = new Transform;
 
            Real_Triple r = get_discriminant(*p, t, scanner_node);
 

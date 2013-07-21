@@ -46,15 +46,13 @@
 
 #### Laurence.Finston@gmx.de
 
-#### $Id: configure.ac 3857 2013-04-23 15:09:10Z lfinsto $
-
 
   
 .# Process this file with autoconf to produce a configure script.
 AC_INIT(src/main.web)
 AM_INIT_AUTOMAKE(3DLDF, 2.0, Laurence.Finston@gmx.de)
 AC_CONFIG_SRCDIR([src/main.web])
-AC_CONFIG_HEADERS(src/config.h)
+AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 AC_SUBST([LIBTOOL_DEPS])

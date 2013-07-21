@@ -344,7 +344,7 @@ prbsnflx.c++: prbsnflx.l++
 
 #### *** (3) 
 
-main.o: main.c++ $(3dldf_hpp_files) parser.h++ parser2.h++ parser.hh
+main.o: main.c++ $(3dldf_hpp_files) $(3dldflb_hpp_files) parser.h++ parser2.h++ parser.hh
 
 arc.o: arc.c++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ conicsct.h++ crclslc.h++ \
                creatnew.h++ curves.h++ dashptrn.h++ ellipses.h++ ellpsslc.h++ \
@@ -871,6 +871,11 @@ utility.o: utility.c++ utility.h++ inclhdrs.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 	$(CXXCOMPILE) -c -o $@ $<
 
 
+.PHONY: prog
+
+prog: 
+	-rm *.h *.c
+	$(MAKE) 3dldf$(EXEEXT)
 
 .PHONY: tags
 

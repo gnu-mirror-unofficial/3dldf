@@ -1557,7 +1557,7 @@ Hyperbola::standardize(Scanner_Node scanner_node) const
 
 @q **** (4).@>
 
-    Transform* t = create_new<Transform>(0);
+    Transform* t = new Transform;
 
     Point normal = get_normal();
     normal.shift(center);
@@ -1793,7 +1793,7 @@ Hyperbola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-            Transform* t = create_new<Transform>(0);
+            Transform* t = new Transform;
 
             real a = axis_h / 2;
             real b = axis_v / 2;

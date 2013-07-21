@@ -84,20 +84,23 @@ Added this rule.
 @<Define rules@>=
 @=arc_primary: arc_variable@>@/
 {
-  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-  if (entry == 0 || entry->object == 0)
+    if (entry == 0 || entry->object == 0)
     {
 
-      @=$$@> = static_cast<void*>(0);
+        @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
-  else /* |entry != 0 && entry->object != 0|  */
+    else /* |entry != 0 && entry->object != 0|  */
+    {
 
-    @=$$@> = static_cast<void*>(create_new<Arc>(
-                                  static_cast<Arc*>(
-                                     entry->object))); 
+       Arc *curr_arc = new Arc(*static_cast<Arc*>(entry->object));
+
+       @=$$@> = static_cast<void*>(curr_arc);
+
+    }
 
 };
 
@@ -139,9 +142,7 @@ Added this rule.
 @=arc_primary: LAST arc_vector_expression@>@/
 { 
 
-   Arc* c;
-
-         c = create_new<Arc>(0);
+   Arc* c = new Arc;
 
    Pointer_Vector<Arc>* pv 
       = static_cast<Pointer_Vector<Arc>*>(@=$2@>);

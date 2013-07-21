@@ -8544,7 +8544,7 @@ Scan_Parse::align_path_func(void* v, int ax, void* parameter)
       {
           delete p;
           
-          return static_cast<void*>(create_new<Transform>(t)); 
+          return static_cast<void*>(new Transform(t)); 
       }  
 
 @q ***** (5)@>
@@ -17673,7 +17673,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
        s = new string;
        *s = "$F$";
 
-       t  = (transform)  ? create_new<Transform>(transform) : 0;
+       t  = (transform)  ? new Transform(transform) : 0;
        tc = (text_color) ? create_new<Color>(text_color)    : 0;
        dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17707,7 +17707,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     s = new string;
     *s = "$A$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17730,7 +17730,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     s = new string;
     *s = "$B$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17754,7 +17754,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     s = new string;
     *s = "$C$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17774,7 +17774,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     s = new string;
     *s = "$D$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17796,7 +17796,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     s = new string;
     *s = "$E$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17819,7 +17819,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     s = new string;
     *s = "$E$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17920,7 +17920,7 @@ failed, returning 0.
     s = new string;
     *s = "$X$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17945,7 +17945,7 @@ failed, returning 0.
     s = new string;
     *s = "$Y$";
 
-    t  = (transform)  ? create_new<Transform>(transform) : 0;
+    t  = (transform)  ? new Transform(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
@@ -17970,7 +17970,7 @@ failed, returning 0.
         s = new string;
         *s = "$Z$";
 
-        t  = (transform)  ? create_new<Transform>(transform) : 0;
+        t  = (transform)  ? new Transform(transform) : 0;
         tc = (text_color) ? create_new<Color>(text_color)    : 0;
         dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 

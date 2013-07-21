@@ -352,7 +352,7 @@ Conic_Section_Lattice::operator=(const Conic_Section_Lattice& c)
 
     if (c.transform)
     {
-       transform = create_new<Transform>(c.transform);
+       transform = new Transform(c.transform);
        
     }   
 
@@ -445,7 +445,7 @@ set_transform(const Transform& t, Scanner_Node scanner_node = 0)
 {
 
    if (!transform)
-      transform = create_new<Transform>(0);
+      transform = new Transform;
 
    *transform = t;
 
@@ -471,7 +471,7 @@ reset_transform(Scanner_Node scanner_node = 0)
 {
 
    if (!transform)
-      transform = create_new<Transform>(0);
+      transform = new Transform;
 
    transform->reset();
 
@@ -983,7 +983,7 @@ get_transform(Scanner_Node scanner_node = 0)
 {
 
    if (transform)
-      return create_new<Transform>(transform);
+      return new Transform(transform);
    else
       return 0;
 
