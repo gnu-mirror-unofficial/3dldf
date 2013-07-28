@@ -1,8 +1,6 @@
 ## Makefile.am
 # Created by Laurence Finston.
    
-# $Id: Makefile.am 3857 2013-04-23 15:09:10Z lfinsto $
-       
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
 #### Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 The Free Software Foundation
 
@@ -49,14 +47,8 @@
 
 
 CWEBDIR     := CWEB
-DOCDIR      := DOC
-TEXINFODIR  := TEXINFO
-TEXIPPDIR   := TEXIPP
 
 export CWEBDIR
-export DOCDIR      
-export TEXINFODIR  
-export TEXIPPDIR  
 
 vpath %.web $(CWEBDIR)
 vpath %.h $(CWEBDIR)
@@ -68,7 +60,7 @@ EXTRA_DIST =  00NEWS 00README ChangeLog
 
 .DELETE_ON_ERROR :
 
-SUBDIRS = $(CWEBDIR) $(DOCDIR) 
+SUBDIRS = $(CWEBDIR) 
 
 
 .PHONY: dummy
