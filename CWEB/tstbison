@@ -1,0 +1,321 @@
+#!/bin/sh
+
+#### tstbison
+#### Created by Laurence D. Finston (LDF).
+
+# $Id: tstbison 3905 2013-06-03 14:19:19Z lfinsto $
+   
+#### * (1) Copyright and License.
+
+#### This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+#### Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013 The Free Software Foundation  
+
+#### GNU 3DLDF is free software; you can redistribute it and/or modify 
+#### it under the terms of the GNU General Public License as published by 
+#### the Free Software Foundation; either version 3 of the License, or 
+#### (at your option) any later version.  
+
+#### GNU 3DLDF is distributed in the hope that it will be useful, 
+#### but WITHOUT ANY WARRANTY; without even the implied warranty of 
+#### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+#### GNU General Public License for more details.  
+
+#### You should have received a copy of the GNU General Public License 
+#### along with GNU 3DLDF; if not, write to the Free Software 
+#### Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+#### GNU 3DLDF is a GNU package.  
+#### It is part of the GNU Project of the  
+#### Free Software Foundation 
+#### and is published under the GNU General Public License. 
+#### See the website http://www.gnu.org 
+#### for more information.   
+#### GNU 3DLDF is available for downloading from 
+#### http://www.gnu.org/software/3dldf/LDF.html.
+
+#### Please send bug reports to Laurence.Finston@gmx.de
+#### The mailing list help-3dldf@gnu.org is available for people to 
+#### ask other users for help.  
+#### The mailing list info-3dldf@gnu.org is for sending 
+#### announcements to users. To subscribe to these mailing lists, send an 
+#### email with ``subscribe <email-address>'' as the subject.  
+
+#### The author can be contacted at: 
+
+#### Laurence D. Finston 		   
+#### c/o Free Software Foundation, Inc. 
+#### 51 Franklin St, Fifth Floor 	   
+#### Boston, MA  02110-1301  	   
+#### USA                                
+
+#### Laurence.Finston@gmx.de
+
+## * (1) Top
+
+## tstbison is a shell script that controls rebuilding the object 
+## file generated from 
+## a CWEB file used for creating a Bison input file.  In 3DLDF, the
+## CWEB file is called 'parser.w'. 
+## tstbison is called in './Makefile.am'.  
+##
+## Running Bison on 'parser.y++' creates the header file
+## 'parser.h++'.  This is different from what happens with the CWEB
+## files containing C++ code or Flex input code, where running
+## 'ctangle' generates the header file from the CWEB file.  Therefore,
+## 'tsthdweb' cannot be used for processing 'parser.w'.  
+##   
+## LDF 2004.03.21.
+
+## First argument:   Filename, without extension, e.g., 'parser'.
+## Second argument:  'ctangle' command, normally 'ctangle'.
+## Third argument:   'bison' command, normally 'bison'.
+## Fourth argument:  Options to 'bison' command, currently '-y'.  Not
+##                   used in this shell script.
+## Fifth argument:   '3dldf_PARSER_FILES' from 'Makefile.am'.
+##                   Touched below, under certain circumstances.
+
+
+
+
+
+DEBUG=0
+
+
+if test $DEBUG -eq 1
+   then
+      echo "Arg 1 = $1" 
+      echo "Arg 2 = $2" 
+      echo "Arg 3 = $3" 
+      echo "Arg 4 = $4"
+      echo  
+      echo "Arg 5 = $5" 
+      echo  
+fi
+
+FILENAME=$1
+CTANGLE=$2
+BISON=$3
+PARSER_FILES=$5
+
+if test $DEBUG -eq 1
+   then
+     echo "Filename = $FILENAME" 
+     echo "CTANGLE = $CTANGLE" 
+     echo "BISON = $BISON" 
+     echo "PARSER_FILES" = $PARSER_FILES
+fi
+
+rm -f -r diff_res
+
+## If the timer for the Bison input file doesn't exist, 
+## touch it, e.g., 'parser.tby'.
+##
+if test ! -e $FILENAME.tby 
+   then
+      echo "$FILENAME.tby doesn't exist.  Touching $FILENAME.tby."
+      touch $FILENAME.tby
+fi
+
+
+## If the timer for the header files doesn't exist, 
+## touch it, e.g., 'parser.tbh'.
+##
+if test ! -e $FILENAME.tbh
+   then
+      echo "$FILENAME.tbh doesn't exist.  Touching $FILENAME.tbh."
+      touch $FILENAME.tbh
+fi
+
+if test -e $FILENAME.h
+   then 
+      mv -f $FILENAME.h $FILENAME.hhb
+fi
+
+## Run ctangle on $FILENAME.w
+##
+echo "Running $CTANGLE $FILENAME.w"
+$CTANGLE +s $FILENAME.w
+if test $? -eq 0
+then
+   echo "In tstbison: ctangle succeeded."
+else
+   echo "In tstbison: ctangle failed. Exiting with exit status 1."
+   exit 1
+fi
+
+if test ! -e $FILENAME.hhb
+   then
+      echo "$FILENAME.hhb doesn't exist.  Touching $FILENAME.tbh"
+      touch $FILENAME.tbh
+   else
+      diff -q -w -B -I '^[[:space:]]*\(#line\|/\*\)' $FILENAME.h $FILENAME.hhb > diff_res
+      if test -s diff_res 
+         then
+            echo "$FILENAME.h has changed."
+            echo "Touching $FILENAME.tbh." 
+	    touch $FILENAME.tbh
+         else
+            echo "$FILENAME.h hasn't changed."
+      fi
+   rm -f $FILENAME.hhb
+fi
+
+
+input_file_changed=0
+
+## If the Bison input file, '$FILENAME.y++', doesn't exist, or if
+## it differs from the newly-generated '$FILENAME.c', 'bison' will
+## have to be run.  First, 'prbsnflx' copies '$FILENAME.c' to
+## '$FILENAME.y++', while removing the '#line' preprocessing commands and
+## comments that 'ctangle' writes to it.
+## '$FILENAME.c' is subsequently deleted, 'bison' is run on
+## '$FILENAME.y++', and the timer file '$FILENAME.tby' is touched.
+##
+if test ! -e $FILENAME.y++
+   then
+      echo "$FILENAME.y++ doesn't exist." 
+      echo "Will regenerate $FILENAME.y++." 
+      regenerate_input_file=1
+   else
+      ## Test whether input file's changed.
+      ##
+      echo "Testing whether $FILENAME.c and $FILENAME.y++ differ."
+      diff -q -w -B -I '^[[:space:]]*\(#line\|/\*\)' $FILENAME.c $FILENAME.y++ > diff_res
+
+      if test -s diff_res 
+         then
+            echo "$FILENAME.c has changed."
+            echo "Will regenerate $FILENAME.y++." 
+	    regenerate_input_file=1
+         else
+            echo "$FILENAME.c hasn't changed. Deleting $FILENAME.c."
+	    echo "Won't regenerate $FILENAME.y++." 
+            rm -f -r $FILENAME.c
+            #touch $FILENAME.tby --reference=$FILENAME.y++
+            regenerate_input_file=0
+      fi
+fi
+
+if test $regenerate_input_file -eq 1
+   then
+      echo "Regenerating $FILENAME.y++."
+      echo "Running \`prbsnflx' on $FILENAME.c"
+      echo "to create $FILENAME.y++, deleting $FILENAME.c, touching $FILENAME.tby, "
+      echo "and setting \`input_file_changed' to 1."
+      echo "Will run $BISON."
+      rm -f $FILENAME.y++
+      ./prbsnflx $FILENAME.c $FILENAME.y++ 
+      cat cpyrtc.txt > AAAtmp.txt
+      echo >> AAAtmp.txt
+      cat $FILENAME.y++ >> AAAtmp.txt
+      mv AAAtmp.txt $FILENAME.y++
+      touch $FILENAME.tby
+      rm -f $FILENAME.c
+      input_file_changed=1
+fi
+
+
+## If the header file '$FILENAME.h++' doesn't exist, Bison must be run
+## to generate it.  In this case, we can just run Bison, update the
+## timer file '$FILENAME.tbh', remove 'diff_res', and exit. 
+##
+if test ! -e $FILENAME.h++
+   then
+     echo "$FILENAME.h++ doesn't exist."
+     echo "Running $BISON"
+     $BISON --output=$FILENAME.c++ $FILENAME.y++   
+
+     if test $? -eq 0
+       then 
+          echo "In tstbison: Bison succeeded."
+      else 
+          echo "In tstbison: Bison exited with status: $?. Exiting with exit status 1."
+          exit 1
+      fi
+
+      echo "In tstbison: Touching \`$FILENAME.tbh' and exiting with exit status 0."
+
+      touch $FILENAME.tbh
+      rm -f diff_res
+      exit 0
+fi
+
+## This code is only reached if '$FILENAME.h++' exists.  It's backed
+## up to '$FILENAME.hbk', Bison is run, and the newly-generated
+## '$FILENAME.h++' is compared with '$FILENAME.hbk'.  If it differs,
+## '$FILENAME.tbh' is touched.
+##
+if test $input_file_changed -eq 1 
+   then
+    echo "Backing up $FILENAME.h++ to $FILENAME.hbk."
+    mv -f $FILENAME.h++ $FILENAME.hbk
+    echo "Running Bison."
+    $BISON -d --output=$FILENAME.c++ $FILENAME.y++
+    
+    if test $? -eq 0
+       then 
+          echo "In tstbison: Bison succeeded."
+    else 
+          echo "In tstbison: Bison exited with status: $?. Exiting with exit status 1."
+          exit 1
+    fi
+
+    echo "Comparing $FILENAME.hbk and $FILENAME.h++"
+    diff -q -w -B -I '^[[:space:]]*\(#line\|/\*\)' $FILENAME.hbk $FILENAME.h++ > diff_res
+    ##
+    ## Test whether header file's changed.  
+    ##
+    if test -s diff_res 
+       then 
+	  echo "$FILENAME.h++ has changed."
+	  echo "Deleting $FILENAME.hbk, running \`prbsnflx' on $FILENAME.h++, "
+	  echo "touching $FILENAME.tbh, and exiting with exit status 0."
+     	  rm -f $FILENAME.hbk
+     	  mv -f $FILENAME.h++ $FILENAME.tmp
+     	  ./prbsnflx $FILENAME.tmp $FILENAME.h++ 
+	  touch $FILENAME.tbh
+     	  rm -f diff_res
+	  exit 0
+       else
+          echo "$FILENAME.h++ hasn't changed."
+      	  echo "Renaming $FILENAME.hbk to $FILENAME.h++"
+      	  echo "and exiting with exit status 0."
+      	  mv -f $FILENAME.hbk $FILENAME.h++
+      	  rm -f diff_res
+      	  exit 0
+    fi    
+fi
+
+
+## This code will only be reached if the input file '$FILENAME.y++'
+## hasn't changed and '$FILENAME.h++' existed before the call to 'tstbison'.
+##
+## Set timestamp of all of the '.w' files to the oldest of the timer files for the 
+## input file and the header file.
+##
+if test $FILENAME.tby -ot $FILENAME.tbh
+   then
+       echo "Setting timestamp of the parser input files to that of $FILENAME.tby."
+       touch $5 --reference=$FILENAME.tby
+   else
+       echo "Setting timestamp of the parser input files to that of $FILENAME.tbh."
+       touch $5_FILES --reference=$FILENAME.tbh
+fi
+
+echo "You will have to revert the buffers of the parser input files"
+echo "if you're currently working on them, because this changes them on disk."
+
+
+rm -f diff_res
+
+exit 0
+
+
+## * Local Variables for Emacs.
+
+## Local Variables:
+## mode:Shell-script
+## outline-minor-mode:t
+## outline-regexp:"## *\\*+"
+## End:
+
