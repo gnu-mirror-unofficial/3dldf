@@ -1413,7 +1413,7 @@ Ellipsoid::standardize(Scanner_Node scanner_node) const
     Point y = main_ellipses[1]->get_point(ctr);
     Point z = main_ellipses[2]->get_point(ctr);
 
-    Transform* t = new Transform;
+    Transform* t = create_new<Transform>(0);
 
     x *= y *= z *= t->align_with_axis(center, y, 'y');
 
@@ -1583,7 +1583,7 @@ Ellipsoid::intersection_points(Path* p,
 
     if (use_transform)
        {
-           new Transform(use_transform);
+           create_new<Transform>(use_transform);
        }
  
     if (!t)
@@ -1811,7 +1811,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
     Pointer_Vector<Path>* pv = new  Pointer_Vector<Path>;
     Path* new_path = 0;
 
-    Transform* t = new Transform;
+    Transform* t = create_new<Transform>(0);
 
     Cuboid* c = out_cuboid(scanner_node, 0, t);  /* |t| is |save_transform| argument.  */
 
@@ -3152,7 +3152,7 @@ Ellipsoid::out_cuboid(Scanner_Node scanner_node,
 
     if (use_transform)
        {
-           t = new Transform(use_transform);
+           t = create_new<Transform>(use_transform);
        }
 
 

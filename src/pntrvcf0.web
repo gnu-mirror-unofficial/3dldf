@@ -749,7 +749,7 @@ Pointer_Vector<Point, Point>::get_conic_section_lattice(
 #endif 
 
     if (do_transform && t == 0 )
-       t = new Transform;
+       t = create_new<Transform>(0);
 
     status = rectify(scanner_node,
                      do_test,

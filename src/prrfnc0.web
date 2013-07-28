@@ -4539,7 +4539,7 @@ Scan_Parse::transform_primary_rule_func_0(void* ffocus,
 
    Focus* f = static_cast<Focus*>(ffocus);
 
-   Transform* t = new Transform(f->get_transform());
+   Transform* t = create_new<Transform>(f->get_transform());
 
    delete f;
 
@@ -5520,7 +5520,7 @@ Scan_Parse::set_arc_rule_func_0(void* curr_var,
 
     if (curr_arc == 0)
     {
-        curr_arc = new Arc; 
+        curr_arc = create_new<Arc>(0); 
         entry->object = static_cast<void*>(curr_arc);
     }
 

@@ -80,7 +80,7 @@ when I tried to build 3DLDF from scratch.
 
 @<Include files@>=
 
-#include "../config.h"
+#include "config.h"
 
 #include <time.h>
 

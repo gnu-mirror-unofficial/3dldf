@@ -102,10 +102,11 @@ an ``unknown |transform|''.
     } /* |if (entry == 0 || entry->object == 0)|  */
 
   else /* |entry != 0 && entry->object != 0|  */
-  {
+
     @=$$@>
-      = static_cast<void*>(new Transform(*static_cast<Transform*>(entry->object))); 
-  }
+      = static_cast<void*>(
+            create_new<Transform>(
+                 static_cast<Transform*>(entry->object))); 
 
 };
 
@@ -150,7 +151,7 @@ Added this rule.
 
    Transform* p;
 
-   p = new Transform;
+   p = create_new<Transform>(0);
 
    Pointer_Vector<Transform>* pv 
       = static_cast<Pointer_Vector<Transform>*>(@=$2@>);
@@ -245,7 +246,7 @@ Added this rule.
     if (@=$2@>)
     {
        Focus* f = static_cast<Focus*>(@=$2@>); 
-       @=$$@> = static_cast<void*>(new Transform(f->get_persp())); 
+       @=$$@> = static_cast<void*>(create_new<Transform>(f->get_persp())); 
        delete f;
     }
     else

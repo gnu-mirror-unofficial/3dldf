@@ -157,7 +157,7 @@ not defined in \filename{config.h}, it's defined and set to 1 here.
 @<Include files@>=
 
 #ifndef __DECCXX
-#include "../config.h"
+#include "config.h"
 #endif 
 
 #ifndef DEBUG_COMPILE
@@ -257,8 +257,13 @@ Now including \filename{limits}.
 #include <map>   
 
 #include <math.h>
+#ifdef LDF_GCC_3_3
 #include <new>
-
+#else
+#ifdef LDF_GCC_2_95
+#include <new.h>
+#endif
+#endif 
 
 #include <pthread.h>   
 
