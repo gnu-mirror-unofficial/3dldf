@@ -131,60 +131,12 @@ Transform();
 
 @ 
 @<Define |Transform| functions@>=
-Transform::Transform(void)
+Transform::Transform()
 {
 
   reset();
 
 }    
-
-@q *** (3) Constructor with |Transform *| argument.  @>
-@ Constructor with |Transform *| argument.
-\initials{LDF 2013.07.21.}
-
-\LOG
-\initials{LDF 2013.07.21.}
-Added this function.
-\ENDLOG
-
-@<Declare |Transform| functions@>=
-Transform(Transform *t);
-
-@ 
-@<Define |Transform| functions@>=
-Transform::Transform(Transform *t)
-{
-
-   *this = *t;
-
-   return;
-
-}    
-
-@q *** (3) Constructor with |const Transform *| argument.  @>
-@ Constructor with |const Transform *| argument.
-\initials{LDF 2013.07.21.}
-
-\LOG
-\initials{LDF 2013.07.21.}
-Added this function.
-\ENDLOG
-
-@<Declare |Transform| functions@>=
-Transform(const Transform *t);
-
-@ 
-@<Define |Transform| functions@>=
-Transform::Transform(const Transform *t)
-{
-
-   *this = *t;
-
-   return;
-
-}    
-
-
 
 @q *** (3) Constructor with one {\bf real} argument.@>
 @*2 Constructor with one {\bf real} argument.  
