@@ -1,0 +1,4 @@
+(global-query-replace '(
+
+))
+
