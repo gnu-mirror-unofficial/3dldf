@@ -1825,7 +1825,7 @@ is cast to |Path*|.
               try 
                 {
                    if (entry->type == PATH)
-                      q = new Path;     
+                      q = create_new<Path>(0);     
                    else if (entry->type == POLYGON)
                       q = static_cast<Path*>(create_new<Polygon>(0)); 
                    else if (entry->type == TRIANGLE)
@@ -2054,7 +2054,7 @@ indicated by |entry->type|.
 
      
                    if (entry->type == PATH)
-                      p = new Path;     
+                      p = create_new<Path>(0);     
                    else if (entry->type == POLYGON)
                       p = create_new<Polygon>(0);      
                    else if (entry->type == TRIANGLE)

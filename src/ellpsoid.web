@@ -465,7 +465,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
           temp_axis_h = (bpp.first.pt - bpp.second.pt).magnitude();
 
 #if 0 
-          ppath = new Path;
+          ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
           paths.push_back(ppath); 
 #endif 
@@ -475,7 +475,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
           temp_axis_v = (bpp.first.pt - bpp.second.pt).magnitude();
 
 #if 0 
-          ppath = new Path;
+          ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
           paths.push_back(ppath); 
 #endif 
@@ -513,7 +513,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
           temp_axis_h = (bpp.first.pt - bpp.second.pt).magnitude();
 
 #if 0 
-          ppath = new Path;
+          ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
           paths.push_back(ppath); 
 #endif 
@@ -523,7 +523,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
 
 
 #if 0 
-          ppath = new Path;
+          ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
           paths.push_back(ppath); 
 #endif 
@@ -564,7 +564,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
           temp_axis_h = (bpp.first.pt - bpp.second.pt).magnitude();
 
 #if 0 
-          ppath = new Path;
+          ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
           paths.push_back(ppath); 
 #endif 
@@ -574,7 +574,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
           temp_axis_v = (bpp.first.pt - bpp.second.pt).magnitude();
 
 #if 0
-          ppath = new Path;
+          ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
           paths.push_back(ppath); 
 #endif
@@ -2023,7 +2023,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 #if TESTING 
              *pv += polygon;
 
-             new_path = new Path(isect_path[0]);
+             new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
              return pv;
@@ -2170,13 +2170,13 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 #if TESTING 
              *pv += polygon;
 
-             new_path = new Path(isect_path[0]);
+             new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[1]);
+             new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[2]);
+             new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
 
              return pv;
@@ -2234,14 +2234,14 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
              *pv += polygon;
 
-             new_path = new Path(isect_path[0]);
+             new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
 
-             new_path = new Path(isect_path[1]);
+             new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[2]);
+             new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
              
 
@@ -2315,18 +2315,18 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
              *pv += polygon;
 
-             new_path = new Path(isect_path[0]);
+             new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
 
-             new_path = new Path(isect_path[1]);
+             new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[2]);
+             new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
 
 
-             new_path = new Path(isect_path[3]);
+             new_path = create_new<Path>(isect_path[3]);
              *pv += new_path;
              
              return pv;
@@ -2627,17 +2627,17 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
              *pv += polygon;
 
-             new_path = new Path(isect_path[0]);
+             new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
 
-             new_path = new Path(isect_path[1]);
+             new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[2]);
+             new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
              
-             new_path = new Path(isect_path[3]);
+             new_path = create_new<Path>(isect_path[3]);
              *pv += new_path;
 
              return pv;
@@ -2869,26 +2869,26 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 #if TESTING 
              *pv += polygon;
 
-             new_path = new Path(isect_path[0]);
+             new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[1]);
+             new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[2]);
+             new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[3]);
+             new_path = create_new<Path>(isect_path[3]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[4]);
+             new_path = create_new<Path>(isect_path[4]);
              *pv += new_path;
 
-             new_path = new Path(isect_path[5]);
+             new_path = create_new<Path>(isect_path[5]);
              *pv += new_path;
 
 
-             new_path = new Path(isect_path[6]);
+             new_path = create_new<Path>(isect_path[6]);
              *pv += new_path;
 
              *pv += e;

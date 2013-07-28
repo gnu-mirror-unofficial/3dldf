@@ -15953,7 +15953,7 @@ Scan_Parse::plane_intersection_func(void* v, void* w, void* parameter)
    
    else /* |L != INVALID_LINE|  */
 
-      return static_cast<void*>(new Path(L.get_path())); 
+      return static_cast<void*>(create_new<Path>(L.get_path())); 
 
 }  /* End of |Scan_Parse::plane_intersection_func| definition.  */
 
@@ -17276,7 +17276,7 @@ below.
 
     if (p != 0)
     {
-       q = new Path;
+       q = create_new<Path>(0);
 
        q->set(*(lattice[2]), *p);
 
@@ -17293,7 +17293,7 @@ below.
     if (p != 0)
     {
 
-        q = new Path;
+        q = create_new<Path>(0);
 
         q->set(*(lattice[3]), *p);
 
@@ -17311,7 +17311,7 @@ below.
 @ $AC$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    q = new Path;
+    q = create_new<Path>(0);
 
     q->set(*(lattice[0]), *(lattice[2]));
 
@@ -17324,7 +17324,7 @@ below.
 @ $AE$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    q = new Path;
+    q = create_new<Path>(0);
 
     q->set(*(lattice[0]), *(lattice[4]));
 
@@ -17336,7 +17336,7 @@ below.
 @ $BD$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    q = new Path;
+    q = create_new<Path>(0);
 
     q->set(*(lattice[1]), *(lattice[3]));
 
@@ -17348,7 +17348,7 @@ below.
 @ $BE$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    q = new Path;
+    q = create_new<Path>(0);
 
     q->set(*(lattice[1]), *(lattice[4]));
 
@@ -17360,7 +17360,7 @@ below.
 @ $BE$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    q = new Path;
+    q = create_new<Path>(0);
 
     q->set(*(lattice[1]), *(lattice[4]));
 

@@ -1441,7 +1441,7 @@ Conic_Section_Lattice::get_pascal_line(real increment, Scanner_Node scanner_node
    real XZ_mag = XZ.magnitude();
    real YZ_mag = YZ.magnitude();
 
-   Path* q = new Path;
+   Path* q = create_new<Path>(0);
 
    if (   XY_mag >= XZ_mag
        && XY_mag >= YZ_mag)
