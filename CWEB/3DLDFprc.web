@@ -1,0 +1,696 @@
+@q 3DLDFprc.web @>
+@q This file is included in 3DLDFcpl.web. @>
+
+@q * Copyright and License.@>
+
+@q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
+@q Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, @>
+@q 2011, 2012 The Free Software Foundation @>
+
+@q GNU 3DLDF is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version. @>
+
+@q GNU 3DLDF is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details. @>
+
+@q You should have received a copy of the GNU General Public License @>
+@q along with GNU 3DLDF; if not, write to the Free Software @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
+
+@q GNU 3DLDF is a GNU package.  @>
+@q It is part of the GNU Project of the  @>
+@q Free Software Foundation @>
+@q and is published under the GNU General Public License. @>
+@q See the website http://www.gnu.org @>
+@q for more information.   @>
+@q GNU 3DLDF is available for downloading from @>
+@q http://www.gnu.org/software/3dldf/LDF.html. @>
+ 
+@q (``@@'' stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de @>
+@q The mailing list help-3dldf@@gnu.org is available for people to @>
+@q ask other users for help.  @>
+@q The mailing list info-3dldf@@gnu.org is for sending @>
+@q announcements to users. To subscribe to these mailing lists, send an @>
+@q email with ``subscribe <email-address>'' as the subject.  @>
+
+@q The author can be contacted at: @>
+
+@q Laurence D. Finston                 @> 
+@q c/o Free Software Foundation, Inc.  @>
+@q 51 Franklin St, Fifth Floor         @> 
+@q Boston, MA  02110-1301              @>
+@q USA                                 @>
+
+@q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
+
+
+@
+@<Version control identifier@>=
+static string rcs_id_prc
+   = "$Id: 3DLDFprc.web,v 1.6 2008/12/29 16:16:24 lfinsto1 Exp $";
+
+@q * Process file.@>
+@* Process file\quad ({\tt 3DLDFprc\PERIOD web}).\hfil
+
+@:!! TO DO@> TO DO:  Clean up the conditionally compiled code.  I
+think it could be neater.  LDF 2003.08.18.
+
+\LOG
+LDF 2003.04.27.  Replaced |tmpnam()| with |mkstemp()|.  The latter
+returns a file descriptor, and opens a temporary file.  Since I want
+to use the file stream facilities of \CPLUSPLUS/, I have to close the
+temporary file that |mkstemp()| opens.  This is a bit awkward, but the
+GNU \CPLUSPLUS/ compiler says that |tmpnam()| is dangerous, so it
+seemed best to me to handle the problem this way.
+
+LDF 2003.04.27.  Now ``unlinking'' the temporary files.  Now that I'm
+using |mkstemp()|, they don't disappear automatically.  I must  use 
+|unlink()| to get rid of them.
+
+LDF 2003.04.30.  @: BUG FIX@> BUG FIX:  Now calling 
+|unlink(return_value_file_name)| before |exit(1)| when I break off
+execution because ctangling or compilation failed.  Previously, the
+temporary file was not deleted in these cases.
+
+LDF 2003.08.18.  Combined \filename{procLIN.web} and
+\filename{procDEC.web} into this file, and renamed it
+\filename{3DLDFprc.web}.  It contains conditionally compiled code, so
+that it can be used for compiling with the DEC \CPLUSPLUS/ compiler
+under Compaq Tru64, and with both GCC 2.95 and GCC 3.3 under Linux.
+\ENDLOG 
+@q ** Definition.@>
+@<Define |process_file()|@>=
+void 
+process_file(string name_string, size_t compile_and_link_position,
+             bool writes_header, bool do_not_compile = false)
+{
+  bool DEBUG = false; /* |true| */
+
+  if (DEBUG == true)
+    cout << "**********\n\n" << flush;
+
+  int local_comparison_value;
+
+  string system_string;
+  
+  ifstream c_file_stream;
+  ifstream o_file_stream;
+  ifstream h_file_stream;
+  ifstream hld_file_stream;
+
+
+@ LDF 2002.4.7.
+Added the |compile|$\ldots$ variables and the
+code below where it's used.  The latter checks whether
+compilation succeeded or not.  If it did, {\tt cmpl} continues;
+if not, it exits.  This is what I want most of the time.  It
+could possibly be convenient to have it continue compiling so
+that I can see all of the errors, but in practice, this is not
+usually helpful, since compiler errors in one compilation unit
+often cause compiler errors in the others.  Also, even when the
+following compilation units are not recompiled, {\tt cmpl} tries
+to relink, which is time consuming.  
+
+It's so long since I wrote this function, that I'm not clear in my
+mind about how it's nested.  If I was, I'd put the |compile|$\ldots$ 
+variables closer to where they're used.
+
+
+It would be nice to have a command line option that would determine
+whether \.{cmpl} exits or not when a compiler error occurs.  However,
+even if it doesn't, relinking should be suppressed if one does occur.
+@:!!@> !! If I add such a command line option, I must define a 
+|bool suppress_relinking|.
+
+
+@<Define |process_file()|@>+=
+
+#ifdef __GNUC__
+  int fd; 
+  char return_value_file_name[] = "aXXXXXX";
+  fd = mkstemp(return_value_file_name);
+  close(fd);
+#else
+#ifdef __DECCXX
+  char* return_value_file_name = (char*) malloc(L_tmpnam);
+  tmpnam(return_value_file_name);
+#endif 
+#endif 
+  ifstream return_value_stream;
+  int sc_return_value; /* LDF 2002.11.10.  System call return value.  */
+
+
+  string web_string = name_string + ".web";
+
+#ifdef __GNUC__ 
+  string c_string = name_string + ".c";
+#else
+#ifdef __DECCXX 
+  string c_string = name_string + ".c";
+#endif 
+#endif 
+
+  c_file_stream.open(c_string.c_str());
+
+  string o_string = name_string + ".o";
+  o_file_stream.open(o_string.c_str());
+
+@  Make sure the program is relinked. 
+@<Define |process_file()|@>+=
+  if (!o_file_stream)
+    compile_and_link_flags.set(0); 
+
+  string h_string = name_string + ".h";  
+  h_file_stream.open(h_string.c_str());
+
+  string hld_string = name_string + ".hld";  
+
+@  Files always depend on themselves, so |dependencies| has to have
+the bit |compile_and_link_position| set. This causes the
+\CPLUSPLUS/ file to be recompiled if the \CWEB/ file is
+retangled. Otherwise, this wouldn't happen, or I'd have to make it
+happen in another way. 
+
+Run \ctangle/ in the following cases:
+\item{$\bullet$} The \CWEB/ file is younger than the \CPLUSPLUS/ file.
+\item{$\bullet$} The \CWEB/ file and the \CPLUSPLUS/ file are
+                 exactly the same age. Since this shouldn't be
+                 possible, we'll assume 
+                 something has gone wrong and retangle. 
+                 LDF 2002.11.10.  Note that the \CPLUSPLUS/ files are
+                 not checked into the RCS archive.
+\item{$\bullet$} The \CPLUSPLUS/ file doesn't exist.
+\item{$\bullet$} The \filename{.h} file doesn't exist.
+
+@:!! TO DO@> TO DO:  Check why I need |const_cast|.
+
+
+@<Define |process_file()|@>+=
+
+  dependencies.set(compile_and_link_position); 
+
+  local_comparison_value = file_age(const_cast<char *>(web_string.c_str()),
+                            const_cast<char *>(c_string.c_str()));
+
+if (DEBUG)
+{
+  cout << "local_comparison_value == " << local_comparison_value
+    << endl << flush;
+
+  if (h_file_stream)
+    cout << h_string << " is open.\n" << flush;
+  else 
+    cout << h_string << " is not open.\n" << flush;
+
+
+  if (o_file_stream)
+    cout << o_string << " is open.\n" << flush;
+  else 
+    cout << o_string << " is not open.\n" << flush;
+
+  if (c_file_stream)
+    cout << c_string << " is open.\n" << flush;
+  else 
+    cout << c_string << " is not open.\n" << flush;
+}
+
+
+if (local_comparison_value == 1 /* The \CWEB/ file is younger than the 
+                              \CPLUSPLUS/ file. */
+   
+    || local_comparison_value == 4 /* The \CPLUSPLUS/ file doesn't exist. */
+   
+    || (!h_file_stream && writes_header == true)   /* The
+                                                   \filename{.h} file
+                                                   couldn't be opened, 
+                                                   so presumably it
+                                                   doesn't exist. */
+    )
+{
+
+@ If the \CWEB/ file writes a header file, copy it, so we can compare
+the old version to the new one that will be written when we run
+\ctangle/. NOTE: This is only done if the \CWEB/ file needs to be
+retangled. 
+
+@<Define |process_file()|@>+=
+
+
+  if (writes_header == true && h_file_stream) 
+    {
+      if (DEBUG == true)
+        cout << "Copying " << h_string << " to " << hld_string << ".\n"
+          << flush;
+      system_string = "cp " + h_string + " " + hld_string;
+      if (SILENT == false)
+        cout << "Running " << system_string << ".\n" << flush;
+      system(system_string.c_str());
+    }
+  else if (!h_file_stream && writes_header == true && DEBUG == true)
+     cout << h_string << " doesn't exist, so I'm not copying anything.\n"
+          << flush;
+
+  else if (writes_header == false && DEBUG == true)
+      cout << web_string << " doesn't write a header file, "
+           << "so I'm not copying anything.\n" << flush;
+
+
+
+@
+\LOG
+LDF 2003.08.20.  No longer changing the extension of the
+\filename{.cxx} files to \filename{.c}, because GCC 2.95 does have a
+language option.
+\ENDLOG 
+@<Define |process_file()|@>+=
+ system_string = "ctangle " + web_string;
+
+if (SILENT == false)
+     cout << "Running " << system_string << ".\n" << flush;
+
+/* LDF 2002.04.10.  Added error handling code.  Now, if
+   \ctangle/ fails, \.{cmpl} exits.  */
+
+system_string += "; echo $? > "
+   + static_cast<string>(return_value_file_name);
+
+system(system_string.c_str());
+
+return_value_stream.open(return_value_file_name);
+return_value_stream >> sc_return_value;
+return_value_stream.close();
+
+if (DEBUG)
+{
+  cout << "sc_return_value == " << sc_return_value
+    << endl << flush;
+  getchar();
+}
+
+if (sc_return_value != 0)
+{
+  cerr << "ERROR! ctangle " << web_string << " failed.\n"
+    << "Exiting.\n" << flush;
+#ifdef __GNUC__ 
+  unlink(return_value_file_name);
+#endif 
+
+  exit(1);
+}
+else if (DEBUG)
+{
+  cout << "ctangle " << web_string << " succeeded.\n" << flush;
+  getchar();
+}
+ 
+/* LDF 2002.04.10.  End of the error handling code I've added today.  */
+
+
+compile_and_link_flags.set(compile_and_link_position);
+}
+
+else if (local_comparison_value == 0 /* The \CWEB/ file is older than the 
+                                  \CPLUSPLUS/ file. This means we're
+                                  finished with this file. */
+    || local_comparison_value == 2) /* The \CWEB/ file and the 
+                              \CPLUSPLUS/ file. are exactly the
+                              same age. This can happen when 
+                              the source files are checked
+                              out of the archive. We'll assume
+                              the \CWEB/ is up-to-date. 
+                              */
+{
+  if (SILENT == false)
+    cout << web_string << " is up-to-date.\n" << flush;
+}
+
+@ We recompile in the following cases:
+\item{$\bullet$} if \ctangle/ has been run on the \CWEB/ file.
+\item{$\bullet$} if a header file, upon which this compilation unit
+depends, has changed.    
+\item{$\bullet$} if the \filename{.o} file is missing.
+
+Setting the bit at |compile_and_link_position| in
+|compile_and_link_flags| to 1 
+after testing the \CWEB/ file (LDF 2002.11.12.  @:??@> ??  Is this
+correct?  I wrote this correction on the printout from 2002.09.03.)
+was a good way of making sure the
+\CPLUSPLUS/ file was recompiled. However, any other compilation unit
+that depends on it will only depend on the header file, which may not
+have changed. So if it hasn't, we reset the bit at
+|compile_and_link_position| in |compile_and_link_flags| to 0 after
+we've compiled. 
+
+\LOG
+LDF 2002.4.7.  Added compiler option ``-O5'' to try to get 3DLDF to
+run faster.  Did the same thing in \filename{cmplLIN.web}
+LDF 2002.08.30.  Changed ``-O5'' to ``-g'' in order to be 
+able to debug.  Did the same thing in \filename{cmplLIN.web}.
+\ENDLOG 
+@<Define |process_file()|@>+=
+  
+if (!o_file_stream && SILENT == false && DEBUG == true)
+     cout << o_string << " is missing. Will recompile "
+     << c_string << ".\n" << flush;
+     
+if (do_not_compile == false
+    && ((dependencies & compile_and_link_flags).any()
+    || !o_file_stream)
+    )
+{  
+
+#ifdef __GNUC__ 
+  system_string = "g++ -c -g -x c++ " + c_string;
+#else
+#ifdef __DECCXX 
+  system_string = "cxx -c -g -x cxx " + c_string;
+#endif 
+#endif 
+    
+@
+@<Define |process_file()|@>+=
+  if (SILENT == false)
+    cout << "Running " << system_string << ".\n" << flush;
+
+  system_string += "; echo $? > "
+    + static_cast<string>(return_value_file_name);
+
+  system(system_string.c_str());
+
+  return_value_stream.open(return_value_file_name);
+  return_value_stream >> sc_return_value;
+  return_value_stream.close();
+
+  if (DEBUG)
+    {
+      cout << "sc_return_value == " << sc_return_value
+           << endl << flush;
+      getchar();
+    }
+  if (sc_return_value != 0)
+    {
+      cerr << "ERROR! Compilation of " << c_string << " failed.\n"
+           << "Exiting.\n" << flush;
+#ifdef __GNUC__ 
+      unlink(return_value_file_name);
+#endif 
+      exit(1);
+    }
+  else if (DEBUG)
+    {
+      cout << "Compilation of " << c_string << " succeeded.\n" << flush;
+      getchar();
+    }
+
+  compile_and_link_flags.set(0); /* Make sure the program is
+                                    relinked. */
+}
+else if (do_not_compile == true)
+{
+    if (SILENT == false)
+      cout << web_string << " doesn't write C++ code. "
+        << "Not bothering to compile.\n" << flush;
+
+}
+
+@ LDF Date?  Must be reset here, to prevent compilation units that are processed
+subsequently from being considered dependent on this unit
+erroneously.
+
+\LOG
+LDF 2002.04.15.  Added code to remove the ``\filename{.hld}'' file.  
+\ENDLOG 
+@<Define |process_file()|@>+=
+dependencies.reset(compile_and_link_position);  
+
+c_file_stream.close();
+o_file_stream.close();
+
+if (writes_header == true  
+    && compile_and_link_flags[compile_and_link_position]
+    == true)  /* LDF Date?  Test header files {\it only\/}
+                 if \ctangle/ has been run.  */
+
+{
+  cout << "Will test header file.\n" << flush;
+  @<Test header file@>@;
+
+  system_string = "rm -f " + hld_string;
+  cout << "Deleting " << hld_string << ".\n";
+  system(system_string.c_str());
+
+}
+else
+{
+  if (DEBUG == true)
+    cout << "Won't test header file\n" << flush;
+}
+
+if (DEBUG == true)
+     cout << "**********\n\n" << flush;
+
+#ifdef __GNUC__ 
+     unlink(return_value_file_name);
+#endif 
+     return;
+   }
+
+
+
+@q ** Test header file.@>
+@*1 Test header file.
+@<Test header file@>=
+  if (!h_file_stream)
+    {
+      if (SILENT == false)
+        cout << h_string << " isn't open. Will assume it's changed.\n"
+          << flush;
+      local_comparison_value = 1;
+      h_file_stream.close();
+    }
+
+  else
+    {
+      if (SILENT == false)
+        cout << "Opening " << hld_string << endl << flush;
+      hld_file_stream.open(hld_string.c_str());
+      if (!hld_file_stream)
+        {
+          cerr << hld_string << " couldn't be opened. "
+            << "Assuming header file has changed.\n" << flush;
+          local_comparison_value = 1;
+        }
+      else
+        {
+          if (DEBUG == true)
+            cout << "Calling check_header_file(" << h_string
+              << ", " << hld_string
+                << ")\n" << flush;
+          local_comparison_value
+            = check_header_file(h_file_stream, hld_file_stream);
+        }
+    }
+   
+@ LDF 2002.11.12.  Check whether the header file has changed. 
+If it hasn't, don't recompile files that depend on it, unless they've
+changed.  
+If it has, don't reset the bit. 
+@<Test header file@>=  
+
+  if(local_comparison_value == 0) /* LDF 2002.11.12.  Header file
+                                     hasn't changed.  */
+    {
+     
+     if (SILENT == false)  /* LDF 2002.04.10.  Changed message.  */
+        cout << h_string << " hasn't changed.\n" << flush;
+      compile_and_link_flags.reset(compile_and_link_position);
+    }
+
+
+  else if(local_comparison_value == 1) /* LDF 2002.11.12.  Header file
+                                          has changed.  */
+    {  
+
+     if (SILENT == false)  /* LDF 2002.04.10.  Changed message.  */
+        cout << h_string << " has changed.\n" << flush;
+      if(DEBUG == true)
+        cout << h_string << " and " << hld_string
+          << " are different. Will recompile dependent compilation units.\n"
+          << flush;
+    }
+  else if (local_comparison_value > 1)
+    {
+      if(SILENT == false)
+        cerr << "Error! Problem with " << h_string << " or "
+          << hld_string << ".\n"
+            << "Exiting with return value 1.\n" << flush;
+#ifdef __GNUC__ 
+      unlink(return_value_file_name);
+#endif 
+      exit(1);
+    }
+
+@q ** Check header file.@>
+@*1 Check header file.
+@<Define |check_header_file()|@>=
+unsigned short check_header_file(ifstream&  local_h_file_stream,
+                                 ifstream& local_hld_file_stream)
+{
+  bool DEBUG = false;
+  if (DEBUG) 
+    cout << "Entering check_header_file()" << endl << flush;
+
+    /* For temporarily copying the \filename{.h} file. */
+
+#ifdef __GNUC__ 
+  int fd; 
+  char h_copy_name[] = "bXXXXXX";
+  fd = mkstemp(h_copy_name);
+  close(fd);
+  ofstream h_copy_stream;
+  char hld_copy_name[] = "cXXXXXX";
+  fd = mkstemp(hld_copy_name);
+  close(fd);
+  ofstream hld_copy_stream;
+
+  string system_string;
+
+  
+  h_copy_stream.open(h_copy_name);  
+  hld_copy_stream.open(hld_copy_name); 
+  char val_file_name[] = "dXXXXXX";
+  fd = mkstemp(val_file_name);
+  close(fd);
+#else
+#ifdef __DECCXX 
+    char* h_copy_name = (char*) malloc(L_tmpnam);
+    ofstream h_copy_stream;
+    char* hld_copy_name = (char*) malloc(L_tmpnam);
+    ofstream hld_copy_stream;
+    string system_string;
+    tmpnam(h_copy_name);
+    tmpnam(hld_copy_name);
+    h_copy_stream.open(h_copy_name);  
+    hld_copy_stream.open(hld_copy_name); 
+    /* I can't get the return value of a shell command executed by
+      |system()|, so I write the return value to a temporary file and
+        read the value in through |val_stream|. */
+    char* val_file_name = (char*) malloc(L_tmpnam);
+    tmpnam(val_file_name);
+#endif 
+#endif 
+
+
+@ Copy the two versions of the header file, the old and the new,
+removing the comments and |@[#line@]| commands.
+This assumes that no comments or |@[#line@]| commands extend over more
+than one line, which is a reasonable assumption, considering that
+\ctangle/ removes comments.
+@<Define |check_header_file()|@>+=
+
+
+string curr_string;
+string::size_type position;
+
+ while (getline(local_h_file_stream, curr_string))
+   {
+     
+     position = curr_string.find("/*");
+
+     if (position != 0)
+       position = curr_string.find("#line");
+
+     if(position != 0)
+         h_copy_stream << curr_string << endl;
+     else if (DEBUG)
+       cout << "Discarding " << curr_string << endl;
+     
+   }
+
+ h_copy_stream << flush;
+ h_copy_stream.close();
+ local_h_file_stream.close();         
+
+
+/* Now, do the same thing for the backup of the header file. */
+
+ while (getline(local_hld_file_stream, curr_string))
+   {
+     
+     position = curr_string.find("/*");
+
+     if (position != 0)
+       position = curr_string.find("#line");
+
+     if(position != 0)
+         hld_copy_stream << curr_string << endl;
+     else if (DEBUG) 
+       cout << "Discarding " << curr_string << endl;
+     
+   }
+
+
+
+ hld_copy_stream << flush;
+ hld_copy_stream.close() ; 
+
+
+@  Use \.{diff} to compare the copies of the old and new header files, with the
+comments and |@[#line@]| commands removed using \.{diff} and write the
+result to a temporary file. Write \.{diff}'s output to
+\.{/dev/null}, so it doesn't appear on the screen. 
+@<Define |check_header_file()|@>+=
+
+    system_string = "diff -h -w " + static_cast<string>(h_copy_name) 
+                     + " " + static_cast<string>(hld_copy_name)
+    + " > /dev/null; echo $? > " + static_cast<string>(val_file_name);
+   if (DEBUG) 
+     cout << "Running " << system_string << endl << flush;
+  system(system_string.c_str());
+
+  ifstream val_stream;
+  val_stream.open(val_file_name);
+  int return_value;
+  val_stream >> return_value;
+  val_stream.close();
+
+
+  system_string = "rm -f " + static_cast<string>(h_copy_name) 
+                  + "; rm -f " 
+                  + static_cast<string>(hld_copy_name) 
+                  + "; rm -f " + static_cast<string>(val_file_name);
+  if (DEBUG)
+    cout << "Running: " << system_string << endl << flush;
+
+  system(system_string.c_str());
+
+
+  if (DEBUG)
+    {
+      cout << "return_value == " << return_value << endl << flush;
+      cout << "Exiting check_header_file()" << endl << flush;
+    }
+#ifdef __GNUC__ 
+  unlink(h_copy_name);
+  unlink(hld_copy_name);
+  unlink(val_file_name);
+#endif 
+  return return_value;
+
+}
+
+
+@q Local Variables: @>
+@q mode:CWEB @>
+@q eval:(read-abbrev-file) @>
+@q run-cweb-on-file:"3DLDFcpl.web" @>
+@q run-cweave-on-file:"3DLDF.web" @>
+@q use-g++:t @>
+@q executable-name:"3DLDFcpl" @>
+@q End: @>

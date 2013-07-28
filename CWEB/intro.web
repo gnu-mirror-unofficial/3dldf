@@ -1,0 +1,186 @@
+@q intro.web @>
+
+@q * (0) Copyright and License.@>
+
+@q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
+@q Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, @>
+@q 2011, 2012 The Free Software Foundation @>
+
+@q GNU 3DLDF is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version. @>
+
+@q GNU 3DLDF is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details. @>
+
+@q You should have received a copy of the GNU General Public License @>
+@q along with GNU 3DLDF; if not, write to the Free Software @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
+
+@q GNU 3DLDF is a GNU package.  @>
+@q It is part of the GNU Project of the  @>
+@q Free Software Foundation @>
+@q and is published under the GNU General Public License. @>
+@q See the website http://www.gnu.org @>
+@q for more information.   @>
+@q GNU 3DLDF is available for downloading from @>
+@q http://www.gnu.org/software/3dldf/LDF.html. @>
+
+@q (``@@'' stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de @>
+@q The mailing list help-3dldf@@gnu.org is available for people to @>
+@q ask other users for help.  @>
+@q The mailing list info-3dldf@@gnu.org is for sending @>
+@q announcements to users. To subscribe to these mailing lists, send an @>
+@q email with ``subscribe <email-address>'' as the subject.  @>
+
+@q The author can be contacted at: @>
+
+@q Laurence D. Finston                 @> 
+@q c/o Free Software Foundation, Inc.  @>
+@q 51 Franklin St, Fifth Floor         @> 
+@q Boston, MA  02110-1301              @>
+@q USA                                 @>
+
+@q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
+
+
+@q $Id: intro.web,v 1.10 2008/12/29 16:16:37 lfinsto1 Exp $ @>
+
+
+@q * (1) Copyright and License.@>
+@* Copyright and License.\hfil\break
+\begingroup
+\parskip=10pt
+Copyright \copyright{} 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 
+2011, 2012 The Free Software Foundation
+
+See the section |@<GNU Free Documentation License@>| for the copying
+conditions that apply {\bf to this document}.
+
+{\bf The program} GNU 3DLDF documented here
+is free software; you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation; either version 3 of the License, or 
+(at your option) any later version. 
+%%
+See the section |@<GNU General Public License@>| in this document.
+
+GNU 3DLDF is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with 3DLDF; if not, write to the Free Software 
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+GNU 3DLDF is a GNU package. 
+It is part of the GNU Project of the 
+Free Software Foundation
+and is published under the GNU General Public License.
+See the website {\tt http://www.gnu.org}
+for more information.  
+GNU 3DLDF is available for downloading from
+{\tt http://www.gnu.org/software/3dldf/LDF.html}.
+
+Please send bug reports to:\hfil\break
+{\tt Laurence.Finston@@gmx.de}
+
+The mailing list {\tt help-3DLDF@@gnu.org} is available for people to
+ask other users for help. 
+The mailing list {\tt info-3DLDF@@gnu.org} is for sending
+announcements to users. To subscribe to these mailing lists, send an
+email with ``subscribe \<email-address>'' as the subject. 
+
+The author can be contacted at: 
+
+\begingroup
+\obeylines
+\parskip=0pt
+Laurence D. Finston 
+Kreuzbergring 41 
+D-37075 Goettingen 
+Germany 
+\vskip5pt
+Laurence.Finston@@gmx.de 
+\vskip5pt
+\endgroup
+\endgroup
+
+@q * (0) Introduction.@>   
+@** Introduction\quad ({\tt 3DLDF\PERIOD web}).\hfil
+
+This book contains the program code of GNU 3DLDF, along with
+explanations.  For information on {\it using\/} 3DLDF see
+the {\it 3DLDF User and Reference Manual\/}, which should have been in
+the distribution along with this book.
+
+GNU 3DLDF is a free software package for three-dimensional drawing written by
+Laurence D. Finston, who is also the author of this manual.
+It is written in \CPLUSPLUS/ using CWEB and it outputs MetaPost code. 
+
+In the text sections of the \CWEB/ documentation, I note
+things about \CPLUSPLUS/ that may be of interest even if they are
+obvious to people with experience. 
+  
+The various files that make up 3DLDF are ctangled and compiled
+separately (see the chapter ``Compiling'' in the 
+{\it 3DLDF User and Reference Manual\/}) and the resulting object 
+files are then linked.  However, the file \filename{3DLDF.web}, which
+contains no \CPLUSPLUS/ code and is not ctangled, includes the other
+\.{.web} files, so that cweave processes them as if they were all one
+file. 
+
+To write my \.{.web} files, I wrote a \.{cweb-mode} for Emacs and a
+number of Emacs-Lisp functions to go with it.  It is not currently
+included in the 3DLDF distribution (Version 1.1.4), but I may include it in a
+later version.  However, GNU is at work at an official cweb-mode of
+its own, so you might want to use it instead, if it's available.
+
+@q  Mention changes to\filename{cwebmac.tex} and what @>
+@q  \filename{3DLDF.macs} does.      @>
+
+@q  Mention problems with \CPLUSPLUS/ and \CWEB/, how the latter is not @>
+@q  really set up for the former. @>
+
+Plurals of types are typeset with the ``s'' in the same font as the
+type, e.g., ``|Points|'' and not ``|Point|s''.  It's not considered
+good typographical practice to typeset words with letters from
+different fonts.  
+@q @@:!!@@> !! Look for reference!@>
+The second example does have the advantage that it's
+somewhat clearer what the actual name of the type is, but I think the
+first argument is weightier.
+
+@q Go into Stroustrup's recommendations and his objections to the @>
+@q preprocessor.@>
+
+See {\tt http://www-cs-faculty.stanford.edu/knuth/cweb.html} for
+more information about CWEB.  The WEB (for Pascal) and CWEB packages are
+available from the CTAN archive, {\tt ftp.dante.de}  
+and\hfil\break
+{\tt http:://www.dante.de}.
+
+Donald Knuth's books 
+{\it {\TeX}: The Program\/} and {\it \MF/: The Program\/} each  
+include a section ``How to read a WEB'', which may
+be helpful.
+
+\LOG
+\initials{LDF 2002.11.18.}  Changed name of this file from
+\filename{cweavedriver.web} to \filename{cwdriver.web}.  It now has
+fewer than 8 letters and can be used under DOS.
+
+\initials{LDF 2003.08.16.}  Changed name of this file from
+\filename{cwdriver.web} to \filename{3DLDF.web} sometime since
+2002.11.18.  Forgot to note it here.
+
+\initials{LDF 2003.11.12.}  Removed the version control identifiers from the CWEB
+files for the distribution of 3DLDF 1.1.  They're still used in my
+development versions.
+\ENDLOG 

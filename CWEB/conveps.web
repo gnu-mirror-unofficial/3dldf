@@ -1,0 +1,3268 @@
+@q conveps.web @>
+
+@q Created by Laurence Finston (LDF) Do Apr 21 13:53:10 CEST 2005 @>
+
+@q * (0) Copyright and License.@>
+
+@q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
+@q Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, @>
+@q 2011, 2012 The Free Software Foundation @>
+
+@q GNU 3DLDF is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version. @>
+
+@q GNU 3DLDF is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details. @>
+
+@q You should have received a copy of the GNU General Public License @>
+@q along with GNU 3DLDF; if not, write to the Free Software @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
+
+@q GNU 3DLDF is a GNU package.  @>
+@q It is part of the GNU Project of the  @>
+@q Free Software Foundation @>
+@q and is published under the GNU General Public License. @>
+@q See the website http://www.gnu.org @>
+@q for more information.   @>
+@q GNU 3DLDF is available for downloading from @>
+@q http://www.gnu.org/software/3dldf/LDF.html. @>
+ 
+@q (``@@'' stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de @>
+@q The mailing list help-3dldf@@gnu.org is available for people to @>
+@q ask other users for help.  @>
+@q The mailing list info-3dldf@@gnu.org is for sending @>
+@q announcements to users. To subscribe to these mailing lists, send an @>
+@q email with ``subscribe <email-address>'' as the subject.  @>
+
+@q The author can be contacted at:     @>
+
+@q Laurence D. Finston                 @> 
+@q c/o Free Software Foundation, Inc.  @>
+@q 51 Franklin St, Fifth Floor         @> 
+@q Boston, MA  02110-1301              @>
+@q USA                                 @>
+
+@q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
+
+
+\def\title{conveps}
+
+\def\topofcontents{\centerline{\titlefont conveps}%
+\medskip
+\centerline{\titlefont Version 1.2.0}%
+\medskip
+\centerline{\titlefont by Laurence D. Finston}%
+\medskip
+\centerline{{\rm December 2005}}%
+\vskip.7in
+  \vfill} % this material will start the table of contents page
+
+\input 3DLDFprg.mac
+
+@q * (0) conveps.web.@>
+@** \.{conveps}.  
+Convert Encapsulated PostScript to structured PostScript 
+and PNG\quad ({\tt conveps\PERIOD web}).\hfil
+
+\LOG
+\initials{LDF 2005.04.22.}
+This program now works.  It could be refined, though.
+\ENDLOG 
+
+@<Version control identifier@>=
+static char rcs_id[]    
+   = "$Id: conveps.web,v 1.32 2009/08/20 11:24:17 lfinsto1 Exp $";
+
+
+@q * (1) Copyright and License.@>
+@* Copyright and License.\hfil\break
+\begingroup
+\parskip=10pt
+Copyright \copyright{} 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
+2011, 2012 The Free Software Foundation
+
+See the section |@<GNU Free Documentation License@>| for the copying
+conditions that apply {\bf to this document}.
+
+{\tt conveps} is part of GNU 3DLDF.
+
+{\bf The program} GNU 3DLDF documented here
+is free software; you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation; either version 3 of the License, or 
+(at your option) any later version. 
+%%
+See the section |@<GNU General Public License@>| in this document.
+
+GNU 3DLDF is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with 3DLDF; if not, write to the Free Software 
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+GNU 3DLDF is a GNU package. 
+It is part of the GNU Project of the 
+Free Software Foundation
+and is published under the GNU General Public License.
+See the website {\tt http://www.gnu.org}
+for more information.  
+GNU 3DLDF is available for downloading from
+{\tt http://www.gnu.org/software/3dldf/LDF.html}.
+
+Please send bug reports to:\hfil\break
+{\tt Laurence.Finston@@gmx.de}
+
+The mailing list {\tt help-3DLDF@@gnu.org} is available for people to
+ask other users for help. 
+The mailing list {\tt info-3DLDF@@gnu.org} is for sending
+announcements to users. To subscribe to these mailing lists, send an
+email with ``subscribe \<email-address>'' as the subject. 
+
+The author can be contacted at: 
+
+\begingroup
+\obeylines
+\parskip=0pt
+Laurence D. Finston                  
+c/o Free Software Foundation, Inc.  
+51 Franklin St, Fifth Floor          
+Boston, MA  02110-1301              
+USA                                 
+\vskip5pt
+Laurence.Finston@@gmx.de 
+\vskip5pt
+Web site: {\tt http:://wwwuser.gwdg.de/\char`\~lfinsto1}
+\endgroup
+\endgroup
+
+@q * (1) Instructions for use.@>
+@* Instructions for use.
+\initials{LDF 2005.05.02.}
+
+\LOG
+\initials{LDF 2005.05.02.}
+Copied the text in this section from 
+\filename{\char`\~/EXAMPLES/CROPPING/00README} and edited it.
+\ENDLOG
+
+\.{conveps} takes one required argument, the filename without extension 
+of the Encapsulated PostScript (EPS) files.  This argument can be followed 
+by one or two numbers indicating the first and last EPS files that should 
+be processed.  The defaults for the first and last files are 0 and 100, respectively. 
+If these arguments aren't used, and \<filename>\.{.0} doesn't exist, \.{conveps}
+tries to process \<filename>\.{.1}.  If a file fails to exist for a larger number, 
+\.{conveps} will exit.
+
+Given the files \.{3DLDFmp.1}, \.{3DLDFmp.2}, and \.{3DLDFmp.3},
+``\.{conveps 3DLDFmp 1 3}'' will generate the files 
+\.{3DLDFmp\_1.pnm}, \.{3DLDFmp\_2.pnm}, and \.{3DLDFmp\_3.pnm}.
+
+\.{conveps} can be invoked using the options in the following list.  
+Options can take no argument, a required argument, or an optional argument.
+Optional arguments must be passed as follows:
+\.{--}\<option>\.{=}\<argument>.  Required arguments can be passed like this,
+but in this case, a space can be substituted for the equals sign.
+
+Color arguments must be specified as required by 
+the ImageMagick programs.  See the ImageMagick manual (``man pages'') 
+for more information.  Color arguments containing parentheses should be quoted, 
+to prevent the shell from treating them as special characters.
+
+\begingroup
+\parindent=0pt
+\parskip=\baselineskip
+
+\dimen0=4cm
+
+\def\A#1#2{\hangindent=\dimen0
+\hangafter=1
+\leavevmode
+\hbox to \dimen0{\.{--#1}\hfil}#2}
+
+\A{border} Optional numerical argument.  If $n$ is the argument, 
+a border of $n$ pixels is added to the image.  If no argument is used,
+the default value of 10 is used.  
+
+\A{bordercolor} Required color argument.  Used together with the 
+\.{--border},\hfil\break
+\.{--horizontal-border}, or \.{--vertical-border} options.
+If not used, the border will be white.
+
+\A{coerce} Optional argument.  If no argument is used, the image is coerced to 
+$640\times 480$ pixels.  If the argument ``\.{s}'' (for ``small'') is used, 
+it is coerced to $320\times 240$ pixels.  If any other argument is used,
+\.{conveps} issues a warning and coerces the image to $640\times 480$ pixels.
+
+\A{end} Required numerical argument.  
+The number of the last file EPS to be processed.
+
+\A{fill} Required color argument.  This option is used in combination with the 
+\.{--opaque} argument.  When replacing colors in an image, the \.{--fill} color
+ replaces the \.{--opaque} color.
+
+\A{force} No argument.  If no \.{--end} argument is used, 
+\.{--force} will cause \.{conveps} to continue trying to find 
+files to convert until it reaches the default value (currently 100).
+
+\A{gray-negate} No argument.  Grayscale pixel values are negated.  See also the 
+\.{--negate} option.
+
+\A{height} Required numerical argument.  Currently not used for anything.
+
+\A{help} No argument.  Prints information about \.{conveps} to standard output
+and exits.
+
+\A{horizontal-border} Optional numerical argument.  If $n$ is the argument, 
+a border of $n$ pixels  is added to the left and right sides of the image.  
+If no argument is used, the default value of 10 is used.  
+
+\A{landscape} The {\TeX} files that include the images will be in
+DIN A3 landscape format, i.e., width 420mm and height 297mm.
+
+\A{large} The {\TeX} files that include the images will be in
+DIN A3 format, i.e., width 420mm and height 297mm.
+
+\A{new-filename} Required string argument.  The files created by 
+\.{conveps} will have names beginning with this string.  It will be followed 
+by an underline character and a number, possibly preceded by one or more zeroes.  
+The extension will indicate the file format.
+
+\A{no-zeroes} No argument.  Suppresses the use of leading zeroes in the 
+output filenames.
+
+\A{opaque} Required argument.  This option is used in combination with the 
+\.{--fill} argument.  When replacing colors in an image, the \.{--fill} color
+ replaces the \.{--opaque} color.
+
+\A{negate} No argument.  Pixel values are negated.  See also the 
+\.{--gray-negate} option.
+
+\A{output-format} Required string argument.  The argument can be ``\.{eps}'',
+``\.{jpeg}'', ``\.{jpg}'', ``\.{png}'', ``\.{pnm}'', or ``\.{ps}''.  Case is 
+ignored, so ``\.{JPG}'' or ``\.{jPg}'' is equivalent to ``\.{jpg}''.  
+PNM is the default output format.
+
+\A{portrait} The {\TeX} files that include the images will be in
+DIN A3 portrait format, i.e., width 297mm and height 420mm.
+
+\A{quiet} No argument.  Suppresses some terminal output.
+
+\A{renumber} Required argument.  The output files will be numbered starting with the 
+argument.
+
+\A{silent} No argument.  Suppresses more terminal output than the ``\.{--quiet}'' 
+option.
+
+\A{start} Required argument.  The starting number for the input files.
+
+\A{threads-limit} Required argument.  The greatest number of threads created by
+\.{conveps} that can be active at one time.  The default is 100.
+
+\A{transparent} Required color argument.  This color will be made transparent in 
+the output files, provided their format supports transparency.
+
+\A{verbose} No argument.  Enables more terminal output than normal.
+
+\A{version} No argument.  Prints out the version number of \.{conveps} and exits.
+
+\A{vertical-border} Optional numerical argument.  If $n$ is the argument, 
+a border of $n$ pixels  is added to the top and bottom of the image.  
+If no argument is used, the default value of 10 is used.  
+
+\A{width} Required numerical argument.  Currently not used for anything.
+
+\A{zeroes} Required argument.  Specifies the minimum number of leading zeroes
+used in the numbers included in the names of the output files.
+
+\endgroup
+
+@q ** (2) Generating the executable 'conveps'.@> 
+@*1 Generating the executable \.{conveps}.
+\initials{LDF 2005.04.26.}
+
+\LOG
+\initials{LDF 2005.08.24.}
+Revised.
+\ENDLOG 
+
+To generate the executable \.{conveps}, call\hfil\break
+`\.{make conveps}' from a shell.  Alternatively, you can 
+call `\.{ctangle conveps.web}' and
+`\.{gcc -o conveps -g -pthread conveps.c}'.
+
+@q ** (2) Invoking \.{conveps}.@> 
+@*1 Invoking \filename{conveps}.
+\initials{LDF 2005.08.24.}
+
+
+@q * (1) Include files.@> 
+
+@ Include files.
+\initials{LDF 2005.04.21.}
+
+@<Include files@>=
+
+#include "config.h"
+#include <ctype.h>
+#include <getopt.h>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <math.h>
+#include <new>
+#include <pthread.h>
+#include <sstream>   
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
+
+using namespace std;
+
+@q * (1) Preprocessor macros.@> 
+@* Preprocessor macros.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+@<Preprocessor macros@>=
+
+#define DEBUG_COMPILE 1 
+
+@q * (1) Type declarations.@> 
+@* Type declarations.
+\initials{LDF 2005.04.21.}
+
+@<Type declarations@>=
+
+typedef char Byte;
+typedef Byte Signed_Byte;
+typedef unsigned char Unsigned_Byte;
+
+
+@q * (1)@> 
+@* Declare {\bf Thread\_Func\_Arg\_Type}.@>=
+
+\LOG
+\initials{LDF 2005.08.26.}
+Added this section.
+\ENDLOG
+
+@<Declare |Thread_Func_Arg_Type|@>=
+
+struct 
+Thread_Func_Arg_Type
+{
+      int eps_file_number;
+      int thread_ctr;
+      char zeroes_string[MAX_ZEROES_STRING];
+
+};
+
+
+
+@q * (1) Global constants.@> 
+@ Global constants.
+\initials{LDF 2005.04.21.}
+
+\LOG
+\initials{LDF 2005.09.02.}
+Added |const unsigned short DEFAULT_END_VALUE = 100|. 
+
+\initials{2009.01.14.}
+Changed |DEFAULT_BORDER_VALUE| from 10 to 0.
+\ENDLOG 
+
+@<Global constants@>=
+
+   const Unsigned_Byte  MAX_FILENAME         =   32;  /* $2^5$  */
+   const unsigned short MAX_SYSTEM_STRING    = 1024;  /* $2^10$  */
+   const unsigned short MAX_TEX_FILE_HEADER  = 1024;  
+   const unsigned short MAX_DATESTAMP        =  128;  /* $2^7$  */
+   const unsigned short MAX_BORDER_STRING    =  128;
+
+   const unsigned short DEFAULT_BORDER_VALUE =  0;
+   const unsigned short DEFAULT_END_VALUE    = 100;
+
+   const unsigned short MAX_COLOR_STRING  =  128;
+   const unsigned short MAX_ZEROES_STRING =  16;
+
+   const unsigned short DEFAULT_ZEROES =     2;
+
+   const unsigned short MAX_COERCE_STRING    =  32;
+   const unsigned short MAX_OUTPUT_EXTENSION =   8;
+
+
+   const unsigned short DEFAULT_THREADS_LIMIT = 100;
+
+   const Unsigned_Byte SILENT             =   0;
+   const Unsigned_Byte QUIET              =   1;
+   const Unsigned_Byte NORMAL             =   2;
+   const Unsigned_Byte VERBOSE            =   3;
+
+   const Unsigned_Byte PORTRAIT           =   0;
+   const Unsigned_Byte LANDSCAPE          =   1;
+
+
+
+
+
+@q * (1) Global variables.@> 
+@ Global variables.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.09.02.}
+Added |bool force_switch = false|.
+
+\initials{LDF 2005.12.16.}
+Added |Unsigned_Byte* default_output|.
+
+\initials{LDF 2008.12.29.}
+Replaced |PTHREAD_THREADS_MAX| with 8192 ($2^13$).  |PTHREAD_THREADS_MAX| 
+should be defined in \filename{limits.h}, but I can't find a definition on the
+machine I'm currently using.  On another machine, it was 
+$16384 = 2^{14}$. 
+\ENDLOG 
+
+@<Global variables@>=
+
+   Unsigned_Byte VERBOSITY;
+
+   char filename_stem[MAX_FILENAME];
+   char new_filename_stem[MAX_FILENAME];
+
+   int start_value = -1;
+   int end_value   = -1;
+
+   char border_string[MAX_BORDER_STRING];
+   char vertical_border_string[MAX_BORDER_STRING];
+   char horizontal_border_string[MAX_BORDER_STRING];
+   char default_border_string[MAX_BORDER_STRING];
+
+   char border_color_string[MAX_COLOR_STRING];
+   char default_border_color_string[MAX_COLOR_STRING];
+
+   Unsigned_Byte eps_output  = 0;
+   Unsigned_Byte jpeg_output = 0;
+   Unsigned_Byte pnm_output  = 0;
+   Unsigned_Byte png_output  = 0;
+   Unsigned_Byte ps_output   = 0;
+
+   Unsigned_Byte* default_output = 0;
+
+   bool force_switch         = false;
+
+   char fill_string[MAX_COLOR_STRING];
+   char opaque_string[MAX_COLOR_STRING];
+   char transparent_string[MAX_COLOR_STRING];
+   char negate_string[16] = "";
+
+   signed int zeroes = -1;
+
+
+   unsigned int height_value = 0;
+   unsigned int width_value  = 0;
+   
+   unsigned int renumber_value = 0;
+
+   Unsigned_Byte coerce_value = 0;
+   Unsigned_Byte portrait_or_landscape = PORTRAIT;
+
+   
+
+   char coerce_string[MAX_COERCE_STRING];
+   char output_extension[MAX_OUTPUT_EXTENSION];
+
+   pthread_t* thread_array[8192];  /* Formerly |PTHREAD_THREADS_MAX|.  See log entry above.  
+                                      \initials{LDF 2008.12.29.}  */
+   Thread_Func_Arg_Type* thread_func_args[8192];  /* As above.   \initials{LDF 2008.12.29.}  */
+
+   pthread_mutex_t stdio_mutex;
+
+   unsigned short threads_limit = DEFAULT_THREADS_LIMIT;
+
+   char tex_file_header[MAX_TEX_FILE_HEADER];
+
+@q * (1) Local variables for |main()|@> 
+@* Local variables for {\bf main()}.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+@<Local variables for |main()|@>=
+
+   bool DEBUG = false; /* |true|  */
+
+   int status;
+
+   char zeroes_string[MAX_ZEROES_STRING];
+
+@q * (1) Command line options.@> 
+@* Command line options.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+
+@q * (1) Declarations for command line options.@> 
+@* Declarations for command line options.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+@<Declarations for command line options@>=
+
+  int option_ctr;
+  int digit_optind = 0;
+
+  const unsigned short BORDER_INDEX             =  0;
+  const unsigned short BORDER_COLOR_INDEX       =  1;
+  const unsigned short COERCE_INDEX             =  2;  
+  const unsigned short END_INDEX                =  3;  
+  const unsigned short FILL_INDEX               =  4;   
+  const unsigned short FORCE_INDEX              =  5;
+  const unsigned short GRAY_NEGATE_INDEX        =  6;
+  const unsigned short HEIGHT_INDEX             =  7;  
+  const unsigned short HELP_INDEX               =  8;  
+  const unsigned short HORIZONTAL_BORDER_INDEX  =  9;  
+  const unsigned short LANDSCAPE_INDEX          = 10;
+  const unsigned short NEGATE_INDEX             = 11;
+  const unsigned short NEW_FILENAME_INDEX       = 12;
+  const unsigned short NO_ZEROES_INDEX          = 13;  
+  const unsigned short OPAQUE_INDEX             = 14;  
+  const unsigned short OUTPUT_FORMAT_INDEX      = 15;  
+  const unsigned short PORTRAIT_INDEX           = 16;
+  const unsigned short QUIET_INDEX              = 17;  
+  const unsigned short RENUMBER_INDEX           = 18;  
+  const unsigned short SILENT_INDEX             = 19;  
+  const unsigned short START_INDEX              = 20;  
+  const unsigned short THREADS_LIMIT_INDEX      = 21;  
+  const unsigned short TRANSPARENT_INDEX        = 22;  
+  const unsigned short VERBOSE_INDEX            = 23;  
+  const unsigned short VERSION_INDEX            = 24;  
+  const unsigned short VERTICAL_BORDER_INDEX    = 25;  
+  const unsigned short WIDTH_INDEX              = 26;  
+  const unsigned short ZEROES_INDEX             = 27;      
+
+  static struct option long_options[] = {
+    {"border", 2, 0, 0},
+    {"bordercolor", 1, 0, 0},
+    {"coerce", 2, 0, 0},
+    {"end", 1, 0, 0},
+    {"fill", 1, 0, 0},
+    {"force", 0, 0, 0},
+    {"gray-negate", 0, 0, 0},
+    {"height", 1, 0, 0},
+    {"help", 0, 0, 0},
+    {"horizontal-border", 2, 0, 0},
+    {"landscape", 0, 0, 0},
+    {"negate", 0, 0, 0},
+    {"new-filename", 1, 0, 0},
+    {"no-zeroes", 0, 0, 0},
+    {"opaque", 1, 0, 0},
+    {"output-format", 1, 0, 0},
+    {"portrait", 0, 0, 0},
+    {"quiet", 0, 0, 0},
+    {"renumber", 1, 0, 0},
+    {"silent", 0, 0, 0},
+    {"start", 1, 0, 0},
+    {"threads-limit", 1, 0, 0},
+    {"transparent", 1, 0, 0},
+    {"verbose", 0, 0, 0},
+    {"version", 0, 0, 0},
+    {"vertical-border", 2, 0, 0},
+    {"width", 1, 0, 0},
+    {"zeroes", 1, 0, 0},
+    {0, 0, 0, 0}
+  };
+  
+  int option_index = 0;
+  int this_option_optind = optind ? optind : 1;  
+
+
+@q * (1) Process command line options.@> 
+@* Process command line options.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+
+@<Process command line options@>=
+
+   DEBUG = false; /* |true|  */;  
+
+   while (1) 
+      {
+
+
+    option_ctr = getopt_long_only (argc, argv, "cefghlnopqrstvwz",
+                          long_options, &option_index);
+
+@q ** (2)@> 
+
+    if (option_ctr == -1)
+       {
+          if (DEBUG)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 cerr << "No more option arguments." << endl;
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+          break;
+       }
+
+@q ** (2)@> 
+
+    if (option_ctr == 0)
+      {
+        if (DEBUG)
+          {
+            pthread_mutex_lock(&stdio_mutex);
+            cerr << "option " << long_options[option_index].name;
+            if (optarg)
+               cerr << " with arg " << optarg << endl;
+            else
+               cerr << " with no arguments" << endl;
+            cerr << "`option_index' == " << option_index << endl;
+            pthread_mutex_unlock(&stdio_mutex);
+          }
+
+
+@q *** (3) border.@> 
+@*2 Border.
+\initials{LDF 2005.08.24.}
+
+\LOG
+\initials{LDF 2005.08.24.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        if (option_index == BORDER_INDEX)
+          {
+
+               if (optarg)
+                  strcpy(border_string, optarg);
+
+               else
+                  sprintf(border_string, "%d", DEFAULT_BORDER_VALUE);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting border_string to %s.\n", 
+                            border_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == BORDER_INDEX)|  */
+
+@q *** (3) bordercolor.@> 
+@*2 Bordercolor.
+\initials{LDF 2005.08.24.}
+
+\LOG
+\initials{LDF 2005.08.24.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == BORDER_COLOR_INDEX)
+          {
+
+
+               sprintf(border_color_string, "%s", 
+                       optarg);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting border_color_string to %s.\n", 
+                            border_color_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == BORDER_COLOR_INDEX)|  */
+
+
+
+@q *** (3) coerce.@> 
+@*2 coerce.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == COERCE_INDEX)
+          {
+
+#if DEBUG_COMPILE
+              if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Coercing.");
+                     if (optarg)
+                        fprintf(stderr, "'optarg' == %s\n", optarg);
+                     else 
+                        fprintf(stderr, "'optarg' == 0\n");
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }           
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>   
+
+               if (optarg && !strcasecmp(optarg, "s"))
+                  {
+#if DEBUG_COMPILE
+                           pthread_mutex_lock(&stdio_mutex); 
+                           fprintf(stderr, "Coercing to 320x240 pixels\n");
+                           pthread_mutex_unlock(&stdio_mutex);
+                                      
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+                     coerce_value = 1;
+                  }
+
+
+@q **** (4) @>   
+
+               else if (optarg && !strcasecmp(optarg, "l"))
+                  {
+#if DEBUG_COMPILE
+
+                           pthread_mutex_lock(&stdio_mutex);
+                           fprintf(stderr, "Coercing to 640x480 pixels\n");
+                           pthread_mutex_unlock(&stdio_mutex);
+                                      
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+                     coerce_value = 2;
+                  }
+
+
+
+@q **** (4) @>   
+
+               else if (optarg)
+                  {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "WARNING!  Invalid argument for the '--coerce'\
+option:  %s\nWill coerce to 640x480 pixels.\n", optarg);
+                     pthread_mutex_unlock(&stdio_mutex);
+
+                     coerce_value = 2;
+                  }
+
+@q **** (4) @>   
+
+               else 
+                  {
+#if DEBUG_COMPILE     
+                         if (DEBUG)
+                           {
+                               pthread_mutex_lock(&stdio_mutex);
+                               cerr << "`optarg' == 0.  "
+                               << "Coercing to 640x480 pixels" << endl;
+                               pthread_mutex_unlock(&stdio_mutex);
+                           }                
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+                     coerce_value = 2;
+
+                  }
+
+@q **** (4) @>   
+
+          } /* |if (option_index == COERCE_INDEX)|  */
+
+
+
+@q *** (3) end.@> 
+@ end.
+\initials{LDF 2005.08.19.}
+
+\LOG
+\initials{LDF 2005.08.19.}
+Added this section.
+
+\initials{LDF 2005.09.02.}
+Now setting |force_switch = true|.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == END_INDEX)
+          {
+
+               sscanf(optarg, "%d", &end_value);
+               force_switch = true;
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting end_value to %d.\n", 
+                            end_value);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == END_INDEX)|  */
+
+
+
+@q *** (3) fill.@> 
+@ fill.
+\initials{LDF 2005.08.22.}
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == FILL_INDEX)
+          {
+
+               sprintf(fill_string, "-fill \"%s\"", optarg);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `fill_string' to %s.\n", 
+                            fill_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == FILL_INDEX)|  */
+
+
+@q *** (3) force.@> 
+@ force.
+\initials{LDF 2005.09.02.}
+
+\LOG
+\initials{LDF 2005.09.02.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == FORCE_INDEX)
+          {
+
+               force_switch = true;
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     cerr << "Setting `force_switch' to " << force_switch 
+                          << "." << endl; 
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == FORCE_INDEX)|  */
+
+@q *** (3) gray-negate.@> 
+@*2 gray-negate.
+\initials{LDF 2005.09.01.}
+
+\LOG
+\initials{LDF 2005.09.01.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == GRAY_NEGATE_INDEX)
+          {
+
+               strcpy(negate_string, "+negate");
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `negate_string' to %s.\n", 
+                            negate_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == GRAY_NEGATE_INDEX)|  */
+
+@q *** (3) height.@> 
+@ height.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == HEIGHT_INDEX)
+          {
+
+
+               sscanf(optarg, "%d", &height_value);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting height to %d pixels.\n", height_value);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == HEIGHT_INDEX)|  */
+
+
+@q *** (3) help.@>
+@ help.
+
+
+@<Process command line options@>=
+
+       else if (option_index == HELP_INDEX)
+          {
+            pthread_mutex_lock(&stdio_mutex);
+            fprintf(stderr, 
+               "conveps.\nCopyright (C) 2012 The Free Software Foundation\n");
+            pthread_mutex_unlock(&stdio_mutex);
+
+            exit(0);
+
+          } /* |if (option_index == HELP_INDEX)|  */
+
+@q *** (3) horizontal_border.@> 
+@*2 Horizontal Border.
+\initials{LDF 2005.08.19.}
+
+\LOG
+\initials{LDF 2005.08.19.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == HORIZONTAL_BORDER_INDEX)
+          {
+
+               if (optarg)
+                  strcpy(horizontal_border_string, optarg);
+
+               else
+                  sprintf(horizontal_border_string, "%d",
+                          DEFAULT_BORDER_VALUE);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting horizontal border_string to %s.\n", 
+                            horizontal_border_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == HORIZONTAL_BORDER_INDEX)|  */
+
+
+@q *** (3) landscape.@>
+@*2 landscape.
+\initials{LDF 2005.09.01.}
+
+\LOG
+\initials{LDF 2005.09.01.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+       else if (option_index == LANDSCAPE_INDEX)
+          {
+              portrait_or_landscape = LANDSCAPE;
+
+          } /* |if (option_index == LANDSCAPE_INDEX)|  */
+
+
+
+@q *** (3) negate.@> 
+@ negate.
+\initials{LDF 2005.09.01.}
+
+\LOG
+\initials{LDF 2005.09.01.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == NEGATE_INDEX)
+          {
+
+               strcpy(negate_string, "-negate");
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `negate_string' to %s.\n", 
+                            negate_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == NEGATE_INDEX)|  */
+
+@q *** (3) new-filename.@> 
+@ new-filename.
+\initials{LDF 2005.08.26.}
+
+\LOG
+\initials{LDF 2005.08.26.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == NEW_FILENAME_INDEX)
+          {
+
+
+               sscanf(optarg, "%s", &new_filename_stem);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting new filename stem to `%s'.\n", 
+                            new_filename_stem);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == NEW_FILENAME_INDEX)|  */
+
+
+
+
+
+@q *** (3) no-zeroes.@> 
+@ no-zeroes.
+\initials{LDF 2005.08.22.}
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == NO_ZEROES_INDEX)
+          {
+
+               zeroes = 0;
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `zeroes' to %d.\n", 
+                            zeroes);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == NO_ZEROES_INDEX)|  */
+
+
+
+@q *** (3) opaque.@> 
+@ opaque.
+\initials{LDF 2005.08.22.}
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == OPAQUE_INDEX)
+          {
+
+               sprintf(opaque_string, "-opaque \"%s\"", optarg);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `opaque_string' to %s.\n", 
+                            opaque_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == OPAQUE_INDEX)|  */
+
+
+@q *** (3) output.@> 
+@ output.
+\initials{LDF 2005.08.19.}
+
+\LOG
+\initials{LDF 2005.08.19.}
+Added this section.
+
+\initials{LDF 2005.12.17.}
+@:BUG FIX@> BUG FIX: Now setting |*default_output %= 2| in the case
+that |optarg| is \.{"pnm"}.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == OUTPUT_FORMAT_INDEX)
+          {
+
+@q **** (4) @>   
+
+               if (!strcasecmp(optarg, "eps"))
+                  {
+
+                      eps_output = 1;                   
+                      *default_output %= 2; 
+                  }
+
+@q **** (4) @>   
+
+               else if (   !strcasecmp(optarg, "jpeg") 
+                        || !strcasecmp(optarg, "jpg"))
+
+                  {
+
+                      jpeg_output = 1;
+                      *default_output %= 2; 
+                  }
+
+@q **** (4) @>   
+
+               else if (!strcasecmp(optarg, "png"))
+                  {
+
+                      png_output = 1;
+                      *default_output %= 2; 
+                  }
+                  
+@q **** (4) @>   
+
+               else if (!strcasecmp(optarg, "pnm"))
+                  {
+                      pnm_output = 1;
+                      *default_output %= 2; 
+                  }
+
+
+@q **** (4) @>   
+
+               else if (!strcasecmp(optarg, "ps"))
+                  {
+                      ps_output = 1;
+                      *default_output %= 2; 
+                  }
+
+@q **** (4) @>   
+
+               else
+                  {
+                      pthread_mutex_lock(&stdio_mutex);
+                      fprintf(stderr, "WARNING!  Invalid `-output-format' argument:\
+%s\nIgnoring.\n", optarg);
+                      pthread_mutex_unlock(&stdio_mutex);
+                  }
+
+@q **** (4) @>   
+
+
+          } /* |if (option_index == OUTPUT_FORMAT_INDEX)|  */
+
+
+@q *** (3) portrait.@>
+@*2 portrait.
+\initials{LDF 2005.09.01.}
+
+\LOG
+\initials{LDF 2005.09.01.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+       else if (option_index == PORTRAIT_INDEX)
+          {
+              portrait_or_landscape = PORTRAIT;
+
+          } /* |if (option_index == PORTRAIT_INDEX)|  */
+
+
+@q *** (3) quiet.@>
+@*2 quiet.
+
+@<Process command line options@>=
+
+        else if (option_index == QUIET_INDEX)
+          {
+
+#if DEBUG_COMPILE
+              if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Will run quietly.\n");
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+              VERBOSITY = QUIET;
+ 
+          }
+
+
+@q *** (3) renumber.@> 
+@ renumber.
+\initials{LDF 2005.08.26.}
+
+\LOG
+\initials{LDF 2005.08.26.}
+Added this section.
+
+\initials{LDF 2005.10.30.}
+@:BUG FIX@> BUG FIX:  Now decrementing |renumber_value|.n
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == RENUMBER_INDEX)
+          {
+
+
+               sscanf(optarg, "%d", &renumber_value);
+               --renumber_value;
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Renumbering starting with %d.\n", 
+                            renumber_value);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == RENUMBER_INDEX)|  */
+
+
+@q *** (3) silent.@>
+@*2 silent.
+
+@<Process command line options@>=
+
+        else if (option_index == SILENT_INDEX)
+          {
+#if DEBUG_COMPILE
+             if (DEBUG)
+                {
+                   if (DEBUG)
+                      {
+                          pthread_mutex_lock(&stdio_mutex);
+                          fprintf(stderr, "Will run silently.\n");
+                          pthread_mutex_unlock(&stdio_mutex);
+                      }
+
+                }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+              VERBOSITY = SILENT;
+
+          }
+
+
+@q *** (3) start.@> 
+@ start.
+\initials{LDF 2005.08.19.}
+
+\LOG
+\initials{LDF 2005.08.19.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == START_INDEX)
+          {
+
+               sscanf(optarg, "%d", &start_value);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting start_value to %d.\n", 
+                            start_value);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |else if (option_index == START_INDEX)|  */
+
+
+@q *** (3) Threads Limit.@> 
+@ Threads Limit.
+\initials{LDF 2005.08.27.}
+
+\LOG
+\initials{LDF 2005.08.27.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == THREADS_LIMIT_INDEX)
+          {
+
+               sscanf(optarg, "%d", &threads_limit);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting threads_limit to %d.\n", 
+                            threads_limit);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |else if (option_index == THREADS_LIMIT_INDEX)|  */
+
+
+@q *** (3) transparent.@> 
+@ transparent.
+\initials{LDF 2005.08.22.}
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == TRANSPARENT_INDEX)
+          {
+
+               sprintf(transparent_string, "-transparent \"%s\"", optarg);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `transparent_string' to %s.\n", 
+                            transparent_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |else if (option_index == TRANSPARENT_INDEX)|  */
+
+
+@q *** (3) verbose.@>
+@*2 verbose.
+@<Process command line options@>=
+
+        else if (option_index == VERBOSE_INDEX)
+          {
+#if DEBUG_COMPILE
+             if (DEBUG)
+                {
+                   if (DEBUG)
+                       {
+                           pthread_mutex_lock(&stdio_mutex);
+                           fprintf(stderr, "Will run verbosely.\n");
+                           pthread_mutex_unlock(&stdio_mutex);
+                       } 
+
+                }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+              VERBOSITY = VERBOSE;
+
+          }
+
+@q *** (3) version.@>
+@ version.
+
+@<Process command line options@>=
+
+        else if (option_index == VERSION_INDEX)
+          {
+               pthread_mutex_lock(&stdio_mutex);
+               fprintf(stderr, "conveps 1.2.0\n");
+               pthread_mutex_unlock(&stdio_mutex);
+
+            exit(0);
+          }
+
+
+@q *** (3) vertical_border.@> 
+@ Vertical Border.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.19.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == VERTICAL_BORDER_INDEX)
+          {
+
+               if (optarg)
+                  strcpy(vertical_border_string, optarg);
+
+               else
+                  sprintf(vertical_border_string, "%d",
+                          DEFAULT_BORDER_VALUE);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting vertical border_string to %s.\n", 
+                            vertical_border_string);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == VERTICAL_BORDER_INDEX)|  */
+
+
+@q *** (3) width.@> 
+@ width.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == WIDTH_INDEX)
+          {
+
+
+               sscanf(optarg, "%d", &width_value);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting width to %d pixels.\n", width_value);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == WIDTH_INDEX)|  */
+
+
+@q *** (3) zeroes.@> 
+@ zeroes.
+\initials{LDF 2005.08.22.}
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+@<Process command line options@>=
+
+        else if (option_index == ZEROES_INDEX)
+          {
+
+               sscanf(optarg, "%d", &zeroes);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     pthread_mutex_lock(&stdio_mutex);
+                     fprintf(stderr, "Setting `zeroes' to %d.\n", 
+                            zeroes);
+                     pthread_mutex_unlock(&stdio_mutex);
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+          } /* |if (option_index == ZEROES_INDEX)|  */
+
+
+@q **** (4) Invalid option_index value.@>
+@ Invalid |option_index| value.
+
+@<Process command line options@>=
+
+        else 
+          {
+              pthread_mutex_lock(&stdio_mutex);
+              fprintf(stderr, "ERROR!  In `main()':\n`option_index' has invalid value: %d\n\
+Will try to continue.\n", option_index);
+              pthread_mutex_unlock(&stdio_mutex);
+          }
+
+@q *** (3)@> 
+
+      } /* |if (option_ctr == 0)|  */
+
+@q ** (2) Ambiguous option.@>
+@*1 Ambiguous option.
+
+@<Process command line options@>=
+
+    else if (option_ctr == '?')
+      {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "ERROR!  In `main()':  `getopt_long()' returned "
+              << "ambiguous match. Breaking." << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+      }
+
+@q **** (4) Invalid option.@>
+@*3 Invalid option.
+
+@<Process command line options@>=
+
+    else
+      {
+        pthread_mutex_lock(&stdio_mutex);
+        fprintf(stderr, "getopt_long() returned invalid option.\n");
+        pthread_mutex_unlock(&stdio_mutex);
+      }
+
+@q **** (4) End of while loop.@>
+@ End of while loop.
+
+@<Process command line options@>=
+
+
+    } /* |while|  */
+  
+
+    if (DEBUG)
+        {
+            pthread_mutex_lock(&stdio_mutex);
+            fprintf(stderr, "In `main()':  End of command line processing.\n");
+            pthread_mutex_unlock(&stdio_mutex);
+        } 
+
+
+@q ** (2) Process filenames.@> 
+@*1 Process filenames.
+\initials{LDF 2005.08.18.}
+
+\LOG
+\initials{LDF 2005.08.18.}
+Added this section.
+\ENDLOG
+
+
+@<Process filenames@>=
+
+   Unsigned_Byte arg_ctr = optind;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "arg_ctr == %d\nargc == %d\n", arg_ctr, argc);  
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+
+   if (argc - arg_ctr < 1)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "ERROR!  In `main()':  Not enough arguments.\n\
+Exiting `conveps' with return value 1.\n");
+         pthread_mutex_unlock(&stdio_mutex);
+
+         return 1;
+
+     }  /* |if|  */
+
+
+@q *** (3)@> 
+
+   if (argc - arg_ctr >= 1)
+      strcpy(filename_stem, argv[arg_ctr]);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "filename_stem == %s\n", filename_stem);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+     
+@q *** (3)@> 
+
+@q **** (4) @>   
+
+   ++arg_ctr;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "Before start value arg:  arg_ctr == %d\n", arg_ctr);
+         fprintf(stderr, "Before start value arg:  start_value == %d\n", start_value);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+   if (argc - arg_ctr >= 1 && start_value != -1)
+      {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "WARNING:  `start_value' already set using an optional argument.\n\
+`start_value' == %d.  Not resetting to %s\n", start_value, argv[arg_ctr]);
+         pthread_mutex_unlock(&stdio_mutex);
+
+      }
+
+@q **** (4) @>   
+
+   else if (argc - arg_ctr >= 1 && start_value == -1)
+      sscanf(argv[arg_ctr], "%d", &start_value);
+
+@q **** (4) @>   
+
+   else if (start_value == -1)
+      start_value = 0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "After start value arg:  arg_ctr == %d\n", arg_ctr);
+         fprintf(stderr, "After start value arg:  start_value == %d\n", start_value);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+
+
+@q **** (4) @>   
+
+   ++arg_ctr;
+
+@q *** (3)@> 
+
+@q **** (4) @>   
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "Before end value arg:  arg_ctr == %d\n", arg_ctr);
+         fprintf(stderr, "Before end value arg:  end_value == %d\n", end_value);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+
+   if (argc - arg_ctr >= 1 && end_value != -1)
+      {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "WARNING:  `end_value' already set using an optional argument.\n\
+`end_value' == %d.  Not resetting to %s\n", end_value, argv[arg_ctr]);
+         pthread_mutex_unlock(&stdio_mutex);
+
+      }
+
+@q **** (4) @>   
+@
+\LOG
+\initials{LDF 2005.09.02.}
+Now setting |force_switch = true|.
+\ENDLOG 
+
+
+**********
+*************
+@<Process filenames@>=
+
+   else if (argc - arg_ctr >= 1 && end_value == -1)
+      {
+          sscanf(argv[arg_ctr], "%d", &end_value);
+          force_switch = true;
+      }
+
+@q **** (4) @>   
+
+   else if (end_value == -1)
+      end_value = DEFAULT_END_VALUE;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "After end value arg:  arg_ctr == %d\n", arg_ctr);
+         fprintf(stderr, "After end value arg:  end_value == %d\n", end_value);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+
+
+@q **** (4) @>   
+
+   ++arg_ctr;
+
+
+@q * (1) Main.@> 
+
+@* Main.
+\initials{LDF 2005.04.21.}
+
+@q ** (2) Definition.@> 
+
+@<Main@>=
+
+int
+main(int argc, char** argv)
+{
+
+   VERBOSITY = NORMAL;
+
+   @<Local variables for |main()|@>@;
+
+   @<Declarations for command line options@>@;
+
+   pthread_mutex_init(&stdio_mutex, 0);
+
+   strcpy(border_string, "");
+   strcpy(horizontal_border_string, "");
+   strcpy(vertical_border_string, "");
+
+   sprintf(default_border_string, "%d", DEFAULT_BORDER_VALUE);
+
+   strcpy(border_color_string, "");
+   strcpy(default_border_color_string, "white");
+
+   strcpy(fill_string, "");
+   strcpy(opaque_string, "");
+   strcpy(transparent_string, "");
+
+   strcpy(new_filename_stem, "");
+
+@q *** (3)@> 
+@
+\LOG
+\initials{LDF 2005.12.16.}
+Added this section.  Now setting |Unsigned_Byte* default_output| according 
+to the value of the environment variable \.{"CONVEPS\_DEFAULT\_OUTPUT\_FORMAT"}, 
+if present and valid.  Otherwise, it's set to point to 
+|Unsigned_Byte png_output|.
+
+\initials{LDF 2005.12.17.}
+@:BUG FIX@> BUG FIX:  Fixed the way I use the return value of 
+|getenv()|.
+\ENDLOG
+
+@<Main@>=
+
+   char* default_output_env_var;
+
+   default_output_env_var = getenv("CONVEPS_DEFAULT_OUTPUT_FORMAT");
+ 
+   if (!default_output_env_var || !strlen(default_output_env_var))
+      default_output = &png_output;
+
+   else if (!(strncasecmp(default_output_env_var, "eps", 10)))
+      default_output = &eps_output;
+
+   else if (!(strncasecmp(default_output_env_var, "jpeg", 10)))
+      default_output = &jpeg_output;
+
+   else if (!(strncasecmp(default_output_env_var, "jpg", 10)))
+      default_output = &jpeg_output;
+
+   else if (!(strncasecmp(default_output_env_var, "pnm", 10)))
+      default_output = &pnm_output;
+
+   else if (!(strncasecmp(default_output_env_var, "png", 10)))
+      default_output = &png_output;
+
+   else if (!(strncasecmp(default_output_env_var, "ps", 10)))
+      default_output = &ps_output;
+
+   else
+      {
+          pthread_mutex_lock(&stdio_mutex);
+          cerr << "WARNING!  In `main()':  The environment variable "
+               << "`CONVEPS_DEFAULT_OUTPUT_FORMAT'"
+               << endl 
+               << "has invalid value:  " 
+               << default_output_env_var
+               << endl
+               << "Will use PNG format instead."
+               << endl;
+          cerr << "Type <RETURN> to continue: ";
+          getchar(); 
+          pthread_mutex_unlock(&stdio_mutex);
+
+         default_output = &png_output;
+      }
+
+   *default_output = 2;
+
+   default_output_env_var = 0;
+
+   @<Process command line options@>@;
+
+@q *** (3)@> 
+@
+@<Main@>=
+
+   if (VERBOSITY >= NORMAL)
+      {
+          cerr << "conveps Version 1.2.0"
+               << endl 
+               << "conveps is part of GNU 3DLDF Version 1.2.0"
+               << endl 
+               << "Copyright (C) 2012 The Free Software Foundation"
+               << endl 
+               << "Author:  Laurence D. Finston"
+               << endl 
+               << "conveps and GNU 3DLDF come with ABSOLUTELY NO WARRANTY;"
+               << endl 
+               << "for details see the file COPYING,"
+               << endl 
+               << "which you should have received"
+               << endl 
+               << "in the distribution of GNU 3DLDF 1.2.0."
+               << endl 
+               << "This is Free Software, and you are welcome"
+               << endl 
+               << "to redistribute it under certain conditions;"
+               << endl 
+               << "for details, again, see the file COPYING."
+               << endl << endl 
+               << "Please send bug reports to Laurence.Finston@@gmx.de"
+               << endl 
+               << "Web site:  http://www.gnu.org/software/3dldf/LDF.html"
+               << endl << endl; 
+
+      } /* |if (VERBOSITY >= NORMAL)|  */
+
+
+@q *** (3) Set |tex_file_header|.@> 
+@*2 Set {\bf tex\_file\_header}.
+\initials{LDF 2005.09.01.}
+
+\LOG
+\initials{LDF 2005.09.01.}
+Added this section.
+\ENDLOG
+
+@<Main@>=
+
+   {  /* Beginning of group.  */
+
+      stringstream tex_stringstream;
+
+      tex_stringstream << "\\batchmode\\input epsf" 
+                       << endl 
+                       << "\\def\\epsfsize#1#2{#1}" 
+                       << endl 
+                       << "\\nopagenumbers"
+                       << endl 
+                       << "\\parindent=0pt"
+                       << endl;
+#if 0 /* 1 */ 
+      if (portrait_or_landscape == LANDSCAPE)
+        tex_stringstream << "\\hsize=420mm"
+                         << endl 
+                         << "\\vsize=297mm"
+                         << endl 
+                         << "\\special{papersize=420mm, 297mm}"
+                         << endl;
+
+      else  /* (|portrait_or_landscape == PORTRAIT|)  */
+        tex_stringstream << "\\hsize=297mm"
+                         << endl 
+                         << "\\vsize=420mm"
+                         << endl;
+#endif 
+
+
+     tex_stringstream << "\\advance\\voffset by -1in"
+                      << endl 
+                      << "\\advance\\hoffset by -1in"
+                      << endl;
+
+
+     strcpy(tex_file_header, tex_stringstream.str().c_str());
+
+   }  /* End of group.  */
+
+
+
+
+@q *** (3)@> 
+@
+@<Main@>=
+
+   if (!(   strlen(border_string) == 0 
+         && strlen(horizontal_border_string) == 0
+         && strlen(vertical_border_string) == 0))
+      {
+          if (strlen(horizontal_border_string) == 0)
+             strcpy(horizontal_border_string, border_string);
+
+          if (strlen(vertical_border_string) == 0)
+             strcpy(vertical_border_string, border_string);
+
+          if (strlen(border_color_string) == 0)
+             strcpy(border_color_string, default_border_color_string);
+
+
+          sprintf(border_string, "-border %sx%s -bordercolor %s",
+                  horizontal_border_string, vertical_border_string,
+                  border_color_string);
+
+      }
+
+@q *** (3)@> 
+
+
+   if (!(eps_output || jpeg_output || png_output || pnm_output || ps_output))
+      {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "ERROR!  Command line arguments suppress all output.\n\
+Exiting `conveps' with return value 1.\n");
+         pthread_mutex_unlock(&stdio_mutex);
+
+         return 1;
+      }
+
+   @<Process filenames@>@;
+
+@q *** (3)@> 
+#if DEBUG_COMPILE
+
+   if (DEBUG)
+      {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "`filename_stem': %s\n", filename_stem);
+
+         fprintf(stderr, "`start_value': %d\n", start_value);
+         fprintf(stderr, "`end_value': %d\n", end_value);
+
+         if (strlen(horizontal_border_string))
+            fprintf(stderr, "`horizontal_border_string': %s\n",
+                   horizontal_border_string);
+         else
+            fprintf(stderr, "`horizontal_border_string' is empty.\n");
+
+         if (strlen(vertical_border_string))
+            fprintf(stderr, "`vertical_border_string': %s\n", 
+                   vertical_border_string);
+         else
+            fprintf(stderr, "`vertical_border_string' is empty.\n");
+
+         if (strlen(border_string))
+            fprintf(stderr, "`border_string': %s\n",
+                   border_string);
+         else
+            fprintf(stderr, "`border_string' is empty.\n");
+
+         if (eps_output)
+            fprintf(stderr, "Producing EPS output.\n");
+         else 
+            fprintf(stderr, "Not producing EPS output.\n");
+
+         if (jpeg_output)
+            fprintf(stderr, "Producing JPEG output.\n");
+         else 
+            fprintf(stderr, "Not producing JPEG output.\n");
+
+         if (png_output)
+            fprintf(stderr, "Producing PNG output.\n");
+         else 
+            fprintf(stderr, "Not producing PNG output.\n");
+
+         if (pnm_output)
+            fprintf(stderr, "Producing PNM output.\n");
+         else 
+            fprintf(stderr, "Not producing PNM output.\n");
+
+         if (ps_output)
+            fprintf(stderr, "Producing PS output.\n");
+         else 
+            fprintf(stderr, "Not producing PS output.\n");
+
+         pthread_mutex_unlock(&stdio_mutex);
+
+      }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+@q *** (3) Write code for including EPS files to |tex_file|.@>
+
+@ Write code for including EPS files to |tex_file|.
+\initials{LDF 2005.04.22.}
+
+\LOG
+\initials{LDF 2005.04.22.}
+@:BUG FIX@> BUG FIX:  Now checking to see if |temp_file| exists.  
+If it doesn't, |break| is called.
+
+\initials{LDF 2005.04.22.}
+Now running {\TeX} and \.{dvips} on individual files.  
+There were problems using the \.{-i} and \.{-S} options 
+to \.{dvips}.
+\ENDLOG 
+
+@<Main@>=
+
+   int i;
+
+   float width;
+   float height;
+
+@q ***** (5) Set |zeroes|.@>
+@ Set |zeroes|.
+\initials{LDF 2005.08.22.}o
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+\TODO
+@q { @>
+@:TO DO}{{\bf TO DO}@>
+@q } @> 
+@q !! TO DO:  @>
+Find out how to use natural logarithms to find out how many places I need 
+for zeroes.
+\ENDTODO 
+
+@<Main@>=
+
+   if (zeroes == 0)
+      zeroes_string[0] = '\0';
+
+   else if ((end_value + renumber_value) > 10000)
+      {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, 
+                 "ERROR!  (`end_value' + `renumber_value') == %d > 10,000.\n\
+Can't handle this case yet.\nExiting `conveps' with return value 1.\n", 
+                end_value + renumber_value);
+         pthread_mutex_unlock(&stdio_mutex);
+
+         return 1;
+
+      }  /* |if (end_value > 10000)|  */
+
+   else if ((end_value + renumber_value) >= 1000 && zeroes <= 4)
+      {
+          zeroes = 4;    
+      }
+
+   else if ((end_value + renumber_value) >= 100 && zeroes <= 3)
+      {
+          zeroes = 3;    
+      }
+
+   else if ((end_value + renumber_value) >= 10 && zeroes <= 2)
+      {
+          zeroes = 2;    
+      }
+
+   else if (zeroes < 0)
+      {
+          zeroes = DEFAULT_ZEROES;    
+      }
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "zeroes == " << zeroes << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+
+   {
+       int i;
+       for (i = 0; i < zeroes; ++i)
+          zeroes_string[i] = '0';
+       zeroes_string[i] = '\0';
+   }
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "zeroes_string == " << zeroes_string << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+
+@q ***** (5)@>    
+@
+\LOG
+\initials{LDF 2005.08.22.}
+Now continuing if |i == 0| and |filename_stem.0|
+doesn't exist.
+\initials{LDF 2005.08.22.}
+\ENDLOG 
+
+@<Main@>=
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, 
+                 "start_value == %d, end_value == %d, renumber_value == %d\n", 
+                start_value, end_value, renumber_value);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+   int thread_ctr = 0;
+
+   char temp_eps_file_name[MAX_FILENAME];
+   FILE* temp_eps_file;
+
+@q ***** (5)@>  
+
+@
+\LOG
+\initials{LDF 2005.08.27.}
+Added code for limiting the number of threads 
+that can be active at one time.  This is controlled by the global 
+variable |unsigned short threads_limit|, whose default value 
+is |const unsigned short DEFAULT_THREADS_LIMIT = 100|.  It can be
+reset by the command-line option \.{--threads-limit}.
+\ENDLOG 
+
+@<Main@>=
+
+   {   /* Beginning of group.  */
+
+      int i = start_value;
+
+      for (int k = 0;; ++k)
+         {   
+          
+            if (i > end_value)
+               break;
+      
+            for (i = start_value + (k * threads_limit); 
+                 i < start_value + (k * threads_limit) + threads_limit;
+                  ++i)
+                {
+
+@q ****** (6)@> 
+@
+@<Main@>=
+
+              if (i > end_value)
+                 break;
+
+              sprintf(temp_eps_file_name, "%s.%d", filename_stem, i);   
+
+              if (DEBUG)
+                {
+                    pthread_mutex_lock(&stdio_mutex);
+                    cerr << "`temp_eps_file_name' == " 
+                         << "`" << temp_eps_file_name << "'." << endl;
+                    pthread_mutex_unlock(&stdio_mutex);
+                }
+
+               temp_eps_file = fopen(temp_eps_file_name, "r");
+
+@q ****** (6)@> 
+@
+\LOG
+\initials{LDF 2005.09.02.}
+Now continuing if |force_switch == true|.
+\ENDLOG 
+@<Main@>=
+
+               if (temp_eps_file == 0 && (force_switch || i == 0))
+                  {
+
+#if DEBUG_COMPILE
+                      if (DEBUG)
+                         {
+                             pthread_mutex_lock(&stdio_mutex);
+                             cerr << filename_stem << "." << i 
+                                  << "doesn't exist.  Continuing."
+                                  << endl;
+                             pthread_mutex_unlock(&stdio_mutex);
+                         }          
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+                      continue;
+                  }
+
+@q ****** (6)@> 
+@
+\LOG
+\initials{LDF 2005.08.27.}
+@:BUG FIX@> BUG FIX:  Now setting |i = end_value + 1| before 
+breaking.
+\ENDLOG 
+@<Main@>=
+                else if (temp_eps_file == 0)
+                  {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << filename_stem << "." << i << " doesn't exist.  "
+                           << "Won't create any more threads." << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+                      
+                      i = end_value + 1;
+                      break;
+                  }
+
+
+               else
+                   fclose(temp_eps_file);
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                  {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "About to create thread." << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+                  }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+              thread_array[thread_ctr] = (pthread_t*) malloc(sizeof(pthread_t));
+
+              thread_func_args[thread_ctr] = new Thread_Func_Arg_Type;
+              thread_func_args[thread_ctr]->eps_file_number = i;
+              thread_func_args[thread_ctr]->thread_ctr = thread_ctr;   
+              strcpy(thread_func_args[thread_ctr]->zeroes_string, zeroes_string);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "zeroes_string == " << zeroes_string << endl;
+         cerr << "thread_func_args[" << thread_ctr << "]->zeroes_string  == " 
+              << thread_func_args[thread_ctr]->zeroes_string 
+              << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+         do {
+          
+                status = pthread_create(thread_array[thread_ctr], 0,
+                                        thread_func, thread_func_args[thread_ctr]);
+                if (status != 0)
+                   {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "ERROR!  In `main()':\n"
+                           << "`pthread_create()' failed, returning " << status
+                           << "." << endl << "Going to sleep and will retry."
+                           << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+
+                      sleep(1);
+                   }
+
+            }
+         while (status != 0);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "After creating thread." << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+         ++thread_ctr;
+
+      }  /* First inner |for|.  Create threads.  */ 
+
+@q ***** (5)@>  
+
+   
+   for (int j = 0 + (k * threads_limit) ; j < thread_ctr; ++j)
+      {
+
+            pthread_join(*(thread_array[j]), 0);
+ 
+            if (VERBOSITY >= VERBOSE)
+               {
+                  pthread_mutex_lock(&stdio_mutex);
+                  fprintf(stderr, "Joined with thread %d.\n", j);
+                  pthread_mutex_unlock(&stdio_mutex);
+               }
+
+         }  /* Second inner |for|.  Join threads.  */ 
+
+      }  /* Outer |for|  */
+
+   }  /* End of group.  */  
+
+@q ***** (5)@>  
+
+@q *** (3) End of |main()|.@> 
+@ End of |main()|.
+Exit successfully
+with return value 0.
+\initials{LDF 2005.04.22.}
+
+@<Main@>=
+
+    if (VERBOSITY >= NORMAL)
+       {
+           pthread_mutex_lock(&stdio_mutex);
+           fprintf(stderr, "Exiting `conveps' successfully with return value 0.\n");
+           pthread_mutex_unlock(&stdio_mutex);
+       }
+
+
+   return 0;
+
+} /* End of |main()| definition.  */
+
+
+@q ** (2)@> 
+@
+
+@q *** (3) Declaration.@> 
+
+@<Declare thread function@>=
+void*
+thread_func(void* v);
+
+
+@q *** (3) Definition.@> 
+@
+@<Define thread function@>=
+void*
+thread_func(void* v)
+{
+
+@q **** (4)@>
+
+   bool DEBUG = false;  /* |true|  */
+
+   char system_string[MAX_SYSTEM_STRING];
+
+   char out_filename_stem[MAX_FILENAME];
+
+   if (strlen(new_filename_stem))
+      strcpy(out_filename_stem, new_filename_stem);
+   else
+      strcpy(out_filename_stem, filename_stem);
+
+   int status;
+
+   Thread_Func_Arg_Type* arg_ptr = (Thread_Func_Arg_Type*) v;
+
+   int i = arg_ptr->eps_file_number;
+   int thread_ctr = arg_ptr->thread_ctr;
+
+@q **** (4)@>
+@
+\LOG
+Added the variables
+|int width_pixels|, |int height_pixels|, |float width_cm|,
+|float height_cm|.
+\ENDLOG 
+
+@<Define thread function@>=
+
+   FILE* tex_file;
+   FILE* dvi_file;
+   FILE* eps_file;
+   FILE* ps_file;
+
+   char temp_file_name[MAX_FILENAME];
+   char tex_file_name[MAX_FILENAME];
+   char dvi_file_name[MAX_FILENAME];
+   char ps_file_name[MAX_FILENAME];
+   char pnm_file_name[MAX_FILENAME];
+   char eps_file_name[MAX_FILENAME];
+   char log_file_name[MAX_FILENAME];
+
+   int width_pixels = 0;
+   int height_pixels = 0;
+
+   float width_cm = 0;
+   float height_cm = 0;
+
+@q **** (4) @>   
+@
+@<Define thread function@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         fprintf(stderr, "Thread %d:  Entering `thread_func()'.\n", thread_ctr);
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>   
+
+
+@q ****** (6) Set |arg_ptr->zeroes_string|.@> 
+@ Set |arg_ptr->zeroes_string|.
+
+\LOG
+\initials{LDF 2005.08.22.}
+Added this section.
+\ENDLOG
+
+@<Define thread function@>=
+
+
+   int temp_ctr = zeroes;
+
+   if ((i + renumber_value) < 10)
+      temp_ctr -= 1;
+
+   else if ((i + renumber_value) < 100)
+      temp_ctr -= 2;
+
+   else if ((i + renumber_value) < 1000)
+      temp_ctr -= 3;
+
+   else 
+      temp_ctr = 0;
+       
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "temp_ctr == " << temp_ctr
+              << endl 
+              << "Before:  arg_ptr->zeroes_string  == " 
+              << arg_ptr->zeroes_string
+              << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+   arg_ptr->zeroes_string[temp_ctr] = '\0';
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "After:  arg_ptr->zeroes_string  == " 
+              << arg_ptr->zeroes_string
+              << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+
+
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+        pthread_mutex_lock(&stdio_mutex);
+        cerr << "Thread " << thread_ctr 
+             << ":  `arg_ptr->zeroes_string' == "
+             << arg_ptr->zeroes_string << "." << endl;
+        pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6)@> 
+@
+\LOG
+\initials{2009.01.14.}
+Changed the {\TeX} code written to the output file.  The argument \.{-crop 0x0} 
+to \.{mogrify} no longer works.  It wasn't documented, so this program 
+was apparently depending on unintended behavior of the \.{mogrify} program.  
+It did provide a simple way of cropping empty parts of an image surrounding 
+the desired parts.
+\ENDLOG 
+
+@<Define thread function@>=
+
+         sprintf(eps_file_name, "%s.%d", filename_stem,
+                 i);   
+
+         sprintf(tex_file_name, "%s_%s%d.tex", out_filename_stem,
+                 arg_ptr->zeroes_string, (i + renumber_value));   
+
+         sprintf(dvi_file_name, "%s_%s%d.dvi", out_filename_stem, 
+                 arg_ptr->zeroes_string, (i + renumber_value));   
+
+         sprintf(log_file_name, "%s_%s%d.log", out_filename_stem, 
+                 arg_ptr->zeroes_string, (i + renumber_value));   
+
+         sprintf(ps_file_name, "%s_%s%d.ps",   out_filename_stem, 
+                 arg_ptr->zeroes_string, (i + renumber_value));   
+
+         sprintf(pnm_file_name, "%s_%s%d.pnm", out_filename_stem, 
+                 arg_ptr->zeroes_string, (i + renumber_value));   
+
+         tex_file = fopen(tex_file_name, "w");
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+            {
+               pthread_mutex_lock(&stdio_mutex);
+               fprintf(stderr, "Thread %d:  `eps_file_name' == %s\n", 
+                       thread_ctr, eps_file_name);
+               fprintf(stderr, "Thread %d:  `tex_file_name' == %s\n", 
+                       thread_ctr, tex_file_name);
+               fprintf(stderr, "Thread %d:  `dvi_file_name' == %s\n", 
+                       thread_ctr, dvi_file_name);
+               fprintf(stderr, "Thread %d:  `log_file_name' == %s\n", 
+                       thread_ctr, log_file_name);
+               fprintf(stderr, "Thread %d:  `ps_file_name' == %s\n",  
+                       thread_ctr, ps_file_name);
+               fprintf(stderr, "Thread %d:  `pnm_file_name' == %s\n",  
+                       thread_ctr, pnm_file_name);
+               pthread_mutex_unlock(&stdio_mutex);
+            }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
+@
+\LOG
+\initials{LDF 2009.11.02.}
+!! TODO:  Change so that \.{identify} isn't used for finding the size of the
+image.  I'm getting an error when \TeX/ fonts are used.  Put the image into a
+box instead and measure the box.  The problem can be avoided by setting
+\.{prologues} to 3 in the \MP/ file (possibly by means of \.{verbatim\_metapost}
+in the 3DLDF input file).x
+\ENDLOG
+
+@<Define thread function@>=
+
+            strcpy(system_string, "identify ");
+            strcat(system_string, eps_file_name);
+
+            FILE* fp = popen(system_string, "r");
+
+            /* This is the output of `identify 3DLDFmp.1' when the image
+               contains a square one square cm in area:
+
+               3DLDFmp.1 PS 29x29 29x29+0+0 PseudoClass 256c 16-bit 906b  
+
+               LDF 2009.01.14.
+
+            */
+
+            fscanf(fp, "%*s %*s %dx%d", &width_pixels, &height_pixels);
+
+            pclose(fp);
+
+            fp = 0;
+
+            width_cm  = width_pixels  / 29.0;
+            height_cm = height_pixels / 29.0;
+
+            strcpy(system_string, "");
+
+         fprintf(tex_file, "%s\n\\setbox0=\\vbox{\\hbox{\\epsffile{%s}\
+\\hskip5pt}\\vskip5pt}\n\
+\\vsize=\\ht0\n\\hsize=\\wd0\n\
+\\special{papersize=%.3fcm, %.3fcm}\n\n\
+\\box0\n\\bye\n",
+                 tex_file_header, 
+                 eps_file_name,
+                 width_cm,
+                 height_cm);
+
+          fclose(tex_file);
+
+          sprintf(system_string, "tex %s > /dev/null", tex_file_name);
+
+          if (VERBOSITY >= VERBOSE)
+             {
+                pthread_mutex_lock(&stdio_mutex);
+                fprintf(stderr, "Thread %d:  Executing `%s'.\n", 
+                        thread_ctr, system_string);
+                pthread_mutex_unlock(&stdio_mutex);
+             }
+
+         do {
+          
+                status = system(system_string);
+                if (status != 0)
+                   {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "Thread " << thread_ctr 
+                           << ":  ERROR!  In `thread_func':\n"
+                           << "`system()' failed, returning " << status
+                           << "." << endl << "Going to sleep and will retry."
+                           << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+
+                      sleep(1);
+                   }
+
+            }
+         while (status != 0);
+ 
+          if (VERBOSITY >= VERBOSE)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 cerr << "Thread " << thread_ctr << ":  `" 
+                      << system_string << "' returned " 
+                      << status 
+                      << "." << endl;
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+@q ****** (6)@> 
+@
+\LOG
+\initials{LDF 2005.04.25.}
+Now calling |remove()| rather than using ``\.{rm}'' in a call to 
+|system()|.
+
+\initials{LDF 2005.08.31.}
+Now using ``\.{rm -f}'' in a call to |system()| rather than 
+calling |remove()|.  Removed the loop that tried to remove the PostScript 
+file, and went to sleep upon failure.
+\ENDLOG 
+
+@<Define thread function@>=
+
+
+          sprintf(system_string, "rm -f %s", ps_file_name);
+
+          if (VERBOSITY >= VERBOSE)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 cerr << "Thread " << thread_ctr << ":  Executing `"
+                      << system_string << "'." << endl;
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+           status = system(system_string);
+
+           if (status != 0 && VERBOSITY >= NORMAL)
+              {
+                  pthread_mutex_lock(&stdio_mutex);
+                  cerr << "Thread " << thread_ctr 
+                       << ":  WARNING!  In `thread_func':\n"
+                       << "Failed to delete `" << ps_file_name << "'."
+                       << "  Continuing." << endl;
+                  pthread_mutex_unlock(&stdio_mutex);
+
+              }  /* |if (status != 0 && VERBOSITY >= NORMAL)|  */
+
+          sprintf(system_string, "dvips -q -o %s %s", 
+                  ps_file_name, dvi_file_name);
+
+          if (VERBOSITY >= VERBOSE)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 fprintf(stderr, "Thread %d:  Executing `%s'.\n", 
+                         thread_ctr, system_string);
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+         do {
+          
+                status = system(system_string);
+                if (status != 0)
+                   {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "Thread " << thread_ctr 
+                           << ":  ERROR!  In `thread_func':\n"
+                           << "`system()' failed, returning " << status
+                           << "." << endl 
+                           << "Going to sleep and will retry."
+                           << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+
+                      sleep(1);
+                   }
+
+            }
+         while (status != 0);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+          pthread_mutex_lock(&stdio_mutex);
+          cerr << "Thread " << thread_ctr << ":  `" 
+               << system_string << "' returned " 
+               << status 
+               << "." << endl;
+          pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+@q ****** (6)@> 
+@
+\LOG
+\initials{LDF 2005.09.02.}
+Added this section.
+
+\initials{LDF 2005.09.02.}
+@:BUG FIX@> BUG FIX:  Added \.{+antialias} option.
+
+\initials{2009.01.14.}
+Now using |width_pixels| and |height_pixels| in the argument to the \.{-crop} 
+option.  For some reason, I'm losing a pixel in each dimension.
+@:??@> ??  Find out why.
+\ENDLOG 
+
+@<Define thread function@>=
+
+          sprintf(system_string, 
+                  "mogrify +antialias -crop %dx%d %s", 
+                  width_pixels, height_pixels, ps_file_name);
+
+ 
+          if (VERBOSITY >= NORMAL)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 cerr << "Thread " << thread_ctr << ":  Executing `" 
+                      << system_string << "'." << endl;
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+          status = system(system_string);
+
+@q ****** (6)@> 
+@
+\LOG
+\initials{LDF 2005.09.01.}
+Added this section.
+@:BUG FIX@> BUG FIX:  Now rotating the image in a separate call
+to \.{mogrify}.  Doing it in combination with other options had 
+been working, but then I started getting incorrect results.
+
+\initials{LDF 2005.09.02.}
+@:BUG FIX@> BUG FIX:  Added \.{+antialias} option.
+
+\initials{2009.01.14.}
+Commented-out this code.
+\ENDLOG 
+
+@<Define thread function@>=
+
+#if 0 /* 1 */ 
+
+         if (portrait_or_landscape == LANDSCAPE)
+            {
+               sprintf(system_string, 
+                     "mogrify +antialias -rotate -90 %s", ps_file_name);
+
+ 
+               if (VERBOSITY >= NORMAL)
+                  {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "Thread " << thread_ctr << ":  Executing `" 
+                           << system_string << "'." << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+                  }
+
+               status = system(system_string);
+
+            }  /* |if (portrait_or_landscape == LANDSCAPE)|  */
+#endif 
+
+
+@q ****** (6)@> 
+
+         if (coerce_value == 0)
+            strcpy(coerce_string, "");  
+
+         else if (coerce_value == 1)
+            strcpy(coerce_string, "-geometry 320x240!");  
+
+         else if (coerce_value == 2)
+            strcpy(coerce_string, "-geometry 640x480!");  
+
+         else 
+            {
+               pthread_mutex_lock(&stdio_mutex);
+               fprintf(stderr, 
+                       "Thread %d:  ERROR!  In `main()':  Invalid value for \
+`coerce_value':  %d\nSetting `coerce_string' to \"\" and continuing.\n",
+                      thread_ctr, coerce_value);
+               pthread_mutex_unlock(&stdio_mutex);
+
+               strcpy(coerce_string, "");  
+            }
+ 
+@q ****** (6)@> 
+@
+
+\LOG
+\initials{LDF 2005.10.30.}
+@:BUG FIX@> BUG FIX:  No longer including |border_color_string| 
+in |system_string|.  It's already included in |border_string|.
+\ENDLOG 
+
+@<Define thread function@>=
+
+
+          if (   strlen(coerce_string)
+              || strlen(opaque_string) 
+              || strlen(border_string)
+              || strlen(negate_string)
+             )
+             {
+
+                 sprintf(system_string, 
+                         "mogrify +antialias %s %s %s %s %s %s", 
+                         border_string, 
+                         fill_string, opaque_string, 
+                         coerce_string, 
+                         negate_string,
+                         ps_file_name);
+
+
+                 if (VERBOSITY >= NORMAL)
+                    {
+                        pthread_mutex_lock(&stdio_mutex);
+                        cerr << "Thread " << thread_ctr << ":  Executing `" 
+                             << system_string << "'." << endl;
+                        pthread_mutex_unlock(&stdio_mutex);
+                    }
+
+
+         do {
+          
+                status = system(system_string);
+                if (status != 0)
+                   {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "Thread " << thread_ctr 
+                           << ":  ERROR!  In `thread_func':\n"
+                           << "`system()' failed, returning " << status
+                           << "." << endl << "Going to sleep and will retry."
+                           << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+
+                      sleep(1);
+                   }
+
+            }
+         while (status != 0);
+
+                 
+
+#if DEBUG_COMPILE
+                 if (DEBUG)
+                    {
+                       pthread_mutex_lock(&stdio_mutex);
+                       cerr << "Thread " << thread_ctr << ":  `" << system_string 
+                            << "' returned " << status 
+                            << "." << endl;
+                       pthread_mutex_unlock(&stdio_mutex);
+                    }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+             } /* |if (   strlen(coerce_string) 
+                       || strlen(opaque_string) 
+                       || strlen(border_string))|  */
+
+@q ****** (6)@> 
+@
+\LOG
+\initials{LDF 2005.04.25.}
+Now calling |remove()| rather than using ``\.{rm}'' in calls to 
+|system()|.
+
+\initials{LDF 2005.05.08.}
+Commented-out the code that converts the EPS files to PNG.
+
+\initials{LDF 2005.08.31.}
+Now using ``\.{rm -f}'' in calls to |system()| instead of 
+calling |remove()|.     
+Removed the loops that tried to remove the files and put 
+the thread to sleep upon failure.
+\ENDLOG 
+
+
+\TODO
+@:TO DO}{{\bf TO DO}@>
+@:!! TO DO@> TO DO:  
+Change the way the return value of |system| is checked elsewhere.
+I've fixed it here.
+\ENDTODO
+
+@<Define thread function@>=
+
+          if (eps_output)
+             {
+                 strcpy(output_extension, "eps");
+                 @<Convert PS file@>@;
+             }
+
+          if (jpeg_output)
+             {
+                 strcpy(output_extension, "jpg");
+                 @<Convert PS file@>@;
+             }
+
+
+          if (pnm_output)
+             {
+                 strcpy(output_extension, "pnm");
+                 @<Convert PS file@>@;
+             }
+
+
+          if (png_output)
+             {
+                 strcpy(output_extension, "png");
+                 @<Convert PS file@>@;
+             }
+
+
+          if (VERBOSITY >= VERBOSE)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 fprintf(stderr, "Thread %d:  Removing %s\n", 
+                         thread_ctr, tex_file_name);
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+
+          sprintf(system_string, "rm -f %s", tex_file_name);
+
+          status = system(system_string);
+ 
+          if ((!WIFEXITED(status) || WEXITSTATUS(status) || status) && VERBOSITY >= NORMAL)
+          {
+                pthread_mutex_lock(&stdio_mutex);
+                cerr << "Thread " << thread_ctr 
+                     << ":  WARNING!  In `thread_func()':"
+                     << endl 
+                     << "Failed to delete `" << tex_file_name 
+                     << "'.  Continuing." << endl;
+                pthread_mutex_unlock(&stdio_mutex);
+
+          }  /* |if (!WIFEXITED(status) || WEXITSTATUS(status) || status)|  */
+
+
+          if (VERBOSITY >= VERBOSE)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 fprintf(stderr, "Thread %d:  Removing %s\n", 
+                         thread_ctr, dvi_file_name);
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+          sprintf(system_string, "rm -f %s", dvi_file_name);
+
+          status = system(system_string);
+
+          if (status != 0 && VERBOSITY >= NORMAL)
+             {
+                pthread_mutex_lock(&stdio_mutex);
+                cerr << "Thread " << thread_ctr 
+                     << ":  WARNING!  In `thread_func':"
+                     << endl 
+                     << "Failed to delete `" << dvi_file_name 
+                     << "'.  Continuing." << endl;
+
+                pthread_mutex_unlock(&stdio_mutex);
+
+             }  /* |if (status != 0 && VERBOSITY >= NORMAL)|  */
+
+@q ****** (6)@>  
+@
+@<Convert PS file@>=
+
+    sprintf(system_string, "convert +antialias %s %s %s %s_%s%d.%s", 
+            transparent_string, coerce_string,
+            ps_file_name, 
+            out_filename_stem, arg_ptr->zeroes_string, (i + renumber_value), 
+            output_extension);
+
+    if (VERBOSITY >= NORMAL)
+       {
+           pthread_mutex_lock(&stdio_mutex);
+           fprintf(stderr, "Thread %d:  Executing `%s'.\n", 
+                   thread_ctr, system_string);
+           pthread_mutex_unlock(&stdio_mutex);
+       }
+
+         do {
+          
+                status = system(system_string);
+                if (status != 0)
+                   {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "Thread " << thread_ctr 
+                           << ":  ERROR!  In `thread_func':\n"
+                           << "`system()' failed, returning " << status
+                           << "." << endl << "Going to sleep and will retry."
+                           << endl;
+                      pthread_mutex_unlock(&stdio_mutex);
+
+                      sleep(1);
+                   }
+
+            }
+         while (status != 0);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "Thread " << thread_ctr << ":  `" << system_string << "' returned " << status 
+              << "." << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+
+@q ******* (7) PS file.@> 
+@ PS file.  Don't delete if |ps_output != 0|.
+\initials{LDF 2005.08.19.}
+
+\LOG
+\initials{LDF 2005.08.31.}
+Removed the loops that tried to remove files and put the 
+thread to sleep upon failure.
+\ENDLOG 
+
+@<Define thread function@>=
+
+          if (!ps_output)  
+            {
+    
+               if (VERBOSITY >= VERBOSE)
+                  {
+                      pthread_mutex_lock(&stdio_mutex);
+                      fprintf(stderr, "Thread %d:  Removing %s\n", 
+                              thread_ctr, ps_file_name);
+                      pthread_mutex_unlock(&stdio_mutex);
+                  }
+        
+
+               status = remove(ps_file_name);
+
+               if (status != 0 && VERBOSITY >= NORMAL)
+                  {
+                      pthread_mutex_lock(&stdio_mutex);
+                      cerr << "Thread " << thread_ctr 
+                           << ":  WARNING:  Failed to remove " 
+                           << ps_file_name << ".  Continuing." 
+                           << endl; 
+                      pthread_mutex_unlock(&stdio_mutex);
+
+                  }  /* |if (status != 0)|  */
+
+               
+            }  /* |if (!ps_output)|  */
+
+#if DEBUG_COMPILE
+          else if (DEBUG)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 cerr << "Thread " << thread_ctr 
+                      << ":  Not removing " << ps_file_name << "." 
+                      << endl; 
+                 pthread_mutex_unlock(&stdio_mutex);
+             }       
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @> 
+@ 
+@<Define thread function@>=
+
+          if (VERBOSITY >= VERBOSE)
+             {
+                 pthread_mutex_lock(&stdio_mutex);
+                 fprintf(stderr, "Thread %d:  Removing %s\n", 
+                         thread_ctr, log_file_name);
+                 pthread_mutex_unlock(&stdio_mutex);
+             }
+
+            status = remove(log_file_name);
+
+            if (status != 0 && VERBOSITY >= NORMAL)
+               {
+                   pthread_mutex_lock(&stdio_mutex);
+                   cerr << "Thread " << thread_ctr 
+                        << ":  WARNING:  Failed to remove " 
+                        << log_file_name << ".  Continuing." 
+                        << endl; 
+                   pthread_mutex_unlock(&stdio_mutex);
+
+               }
+
+@q ****** (6)@> 
+
+@q **** (4) @>   
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         pthread_mutex_lock(&stdio_mutex);
+         cerr << "Thread " << thread_ctr 
+              << ":  Exiting `thread_func()' successfully with return value 0."
+              << endl;
+         pthread_mutex_unlock(&stdio_mutex);
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+ 
+   delete arg_ptr;
+   arg_ptr = 0;
+
+   return 0;   
+
+}  /* End of |thread_func()| definition.  */
+
+
+@q * (1) GNU Free Documentation License.@>
+@*  GNU Free Documentation License.
+The GNU Free Documentation License, which follows, applies to this
+document. 
+
+\input fdl.txt
+
+@<GNU Free Documentation License@>=
+
+/* This section contains no \CPLUSPLUS/ code.  */
+
+@q * (1) GNU General Public License.@>
+@* GNU General Public License.
+The GNU General Public License, which follows, applies
+to the program 3DLDF described in this document.
+
+\input gpl.tex 
+
+@<GNU General Public License@>=
+
+/* This section contains no \CPLUSPLUS/ code.  */
+
+
+@q * (1) Putting conveps together.@> 
+@* Putting conveps together.
+
+@q ** (2) This is what's compiled.@> 
+@ This is what's compiled.
+@c
+@<Version control identifier@>@;
+@<Include files@>@;
+@<Preprocessor macros@>@;
+@<Type declarations@>@;
+@<Global constants@>@;
+@<Declare |Thread_Func_Arg_Type|@>@;
+@<Global variables@>@;
+@<Declare thread function@>@;
+@<Main@>@;
+@<GNU Free Documentation License@>@;
+@<GNU General Public License@>@;
+@<Define thread function@>@;
+
+@q * Emacs-Lisp code for use in indirect buffers when using the          @>
+@q   GNU Emacs editor.  The local variable list is not evaluated when an @>
+@q   indirect buffer is visited, so it's necessary to evaluate the       @>
+@q   following s-expression in order to use the facilities normally      @>
+@q   accessed via the local variables list.                              @>
+@q   \initials{LDF 2004.02.12}.                                          @>
+@q   (progn (cweb-mode) (outline-minor-mode t))                          @>
+
+  
+@q * Local variables for Emacs.@>
+@q Local Variables: @>
+@q mode:CWEB @>
+@q eval:(display-time) @>
+@q eval:(read-abbrev-file abbrev-file-name) @>
+@q indent-tabs-mode:nil @>
+@q eval:(outline-minor-mode) @>
+@q fill-column:80 @>
+@q End: @>
+
