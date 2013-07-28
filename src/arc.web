@@ -66,6 +66,7 @@ Created this file.
 #include "inclhdrs.h++"
 #include "pspglb.h++"
 #include "io.h++"
+#include "creatnew.h++"
 #include "pntrvctr.h++"
 #include "primes.h++"
 #include "colors.h++"
@@ -257,6 +258,41 @@ Arc::~Arc(void)
 
    return;
 }
+
+@q ** (2) Pseudo-constructor for dynamic allocation.@>
+@*1 Pseudo-constructor for dynamic allocation.
+
+@q *** (3) Pointer argument.@>
+@*2 Pointer argument.
+@^\cfunc{Arc}{create\_new\_cone}@>
+\initials{LDF 2007.10.13.}
+
+\LOG
+\initials{LDF 2007.10.13.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare non-member template functions for |Arc|@>=
+Arc* 
+create_new(const Arc* c, Scanner_Node scanner_node);
+
+@q *** (3) Reference argument.@>
+@*2 Reference argument.
+\initials{LDF 2007.10.13.}
+
+\LOG
+\initials{LDF 2007.10.13.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare non-member template functions for |Arc|@>=
+Arc* 
+create_new(const Arc& c, Scanner_Node scanner_node);
+
 
 @q ** (2) Assignment.@> 
 @*1 Assignment.
@@ -1023,6 +1059,7 @@ This is what's compiled.
 @<Include files@>@;
 @<Declare |class Arc|@>@;
 @<Initialize |static const| |Arc| data members@>@;
+@<Declare non-member template functions for |Arc|@>@;
 @<Declare |struct Arc_Options|@>@;
 @<Define |Arc| functions@>@;
 @<Define |Arc_Options| functions@>@;
@@ -1031,6 +1068,7 @@ This is what's compiled.
 @(arc.h@>=
 @<Declare |class Arc|@>@;
 @<Declare |struct Arc_Options|@>@;
+@<Declare non-member template functions for |Arc|@>@;
 
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
