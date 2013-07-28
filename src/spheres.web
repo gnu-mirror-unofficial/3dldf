@@ -65,7 +65,7 @@ code.
 
 @<Include files@>=
 
-#include "inclhdrs.h++" 
+#include "loader.h++" 
 #include "pspglb.h++" 
 #include "io.h++" 
 #include "creatnew.h++"
@@ -2065,7 +2065,7 @@ Sphere::develop(real rad,
 
    try 
    {
-       origin = new Point;
+       origin = create_new<Point>(0);
    }
 
    catch (bad_alloc)
@@ -2073,7 +2073,7 @@ Sphere::develop(real rad,
    
        cerr_strm << thread_name << "ERROR! In `Sphere::develop':" 
                  << endl 
-                 << "`new Point' failed. "
+                 << "`create_new<Point>' failed. "
                  << "Rethrowing `bad_alloc'.";
 
        log_message(cerr_strm);

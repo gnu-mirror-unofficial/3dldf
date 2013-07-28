@@ -1128,40 +1128,16 @@ Added this function.
 
 @<Declare |Point| constructors@>=
 
-Point(Point* p);
+Point(const Point*& p);
 
 @
 @<Define |Point| constructors@>=
-Point::Point(Point* p)
+Point::Point(const Point*& p)
 {
 
     *this = *p;
 
 }
-
-@q ** (2) Constructor with |const Point *| argument.@>
-@ Constructor with |const Point *| argument.
-@^\cfunc{Point}{Point}@>
-\initials{LDF 2013.07.21.}
-
-\LOG
-\initials{LDF 2013.07.21.}
-Added this function.
-\ENDLOG
-
-@<Declare |Point| constructors@>=
-
-Point(const Point* p);
-
-@
-@<Define |Point| constructors@>=
-Point::Point(const Point* p)
-{
-
-    *this = *p;
-
-}
-
 
 
 @q * (1) Destructor.@>
@@ -5010,8 +4986,8 @@ Now locking and unlocking |picture.mutex| if Autoconf has defined the
 preprocessor variable |HAVE_PTHREAD_H|.
 
 \initials{LDF 2004.06.21.}
-Now calling |new Point(this)| to create |pt| instead of 
-calling |new Point| and setting |*pt = *this| afterwards. 
+Now calling |create_new<Point>(this)| to create |pt| instead of 
+calling |create_new<Point>(0)| and setting |*pt = *this| afterwards. 
 
 \initials{LDF 2004.06.21.}
 @:BUG FIX@> BUG FIX: 
@@ -5019,7 +4995,7 @@ Now only allocating memory and calling
 |create_new<Color>| for |pt->drawdot_color| if |ddrawdot_color| 
 is a non-null pointer.  Otherwise, setting |pt->drawdot_color| to 0.  This is
 just for insurance, since it's set to 0 in the |Point| constructor called by
-|new Point|.
+|create_new<Point>|.
 This prevents erroneous |withcolor| clauses from being
 written to the MetaPost output file.
 
@@ -5030,7 +5006,7 @@ Now only allocating memory and calling
 is a non-null pointer.
 Otherwise, setting |pt->pen| to 0.  This is
 just for insurance, since it's set to 0 in the |Point| constructor called by
-|new Point|.  
+|create_new<Point>|.  
 This prevents erroneous |withpen| clauses from being
 written to the MetaPost output file.
 
@@ -5202,8 +5178,8 @@ Now locking and unlocking |picture.mutex| if Autoconf has defined the
 preprocessor variable |HAVE_PTHREAD_H|.
 
 \initials{LDF 2004.06.21.}
-Now calling |new Point(this)| to create |pt| instead of 
-calling |new Point| and setting |*pt = *this| afterwards. 
+Now calling |create_new<Point>(this)| to create |pt| instead of 
+calling |create_new<Point>(0)| and setting |*pt = *this| afterwards. 
 
 \initials{LDF 2004.06.21.}
 @:BUG FIX@> BUG FIX: 
@@ -5212,12 +5188,12 @@ Now only allocating memory and calling
 is a non-null pointer.
 Otherwise, setting |pt->pen| to 0.  This is
 just for insurance, since it's set to 0 in the |Point| constructor called by
-|new Point|.  This prevents erroneous |withpen| clauses from being
+|create_new<Point>|.  This prevents erroneous |withpen| clauses from being
 written to the MetaPost output file.
 
 \initials{LDF 2004.06.21.}
-Now calling |new Point(this)| to create |pt| instead of 
-calling |new Point| and setting |*pt = *this| afterwards. 
+Now calling |create_new<Point>(this)| to create |pt| instead of 
+calling |create_new<Point>(0)| and setting |*pt = *this| afterwards. 
 
 \initials{LDF 2005.03.17.}
 Removed code for setting |pt->drawdot_color| to 0.
@@ -8303,7 +8279,7 @@ Now copying |Transform* transform|.
 Now copying |Pen* pen|.
 
 \initials{LDF 2006.11.08.}
-Now calling |new Point| with 0 as its argument and then
+Now calling |create_new<Point>| with 0 as its argument and then
 setting |*lbl->pt = *pt|.  Trying to fix a bug.
 \ENDLOG 
 

@@ -65,7 +65,7 @@ Created this file.
 
 
 @<Include files@>=
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -534,7 +534,7 @@ Helix::operator=(const Helix& h)
     if (h.center != 0)
        {
           if (center == 0)
-             center = new Point;
+             center = create_new<Point>(0);
  
           *center = *(h.center);
        }
@@ -542,7 +542,7 @@ Helix::operator=(const Helix& h)
     if (h.direction != 0)
        {
           if (direction == 0)
-             direction = new Point;
+             direction = create_new<Point>(0);
  
           *direction = *(h.direction);
        }

@@ -84,7 +84,7 @@ Now including \filename{pens.web}.
 
 @<Include files@>=
 
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -252,7 +252,7 @@ Rectangle::Rectangle(const Point& ccenter, const real aaxis_h, const real aaxis_
   top_rt.shift(center); 
 
   for(int i = 0; i < 4; i++)
-    points.push_back(new Point); 
+    points.push_back(create_new<Point>(0)); 
   
   *points[0] = bot_lft;
   *points[1] = bot_rt;
@@ -344,10 +344,10 @@ Rectangle::Rectangle(const Point& pt0, const Point& pt1,
           axis_h = (pt1 - pt0).magnitude();
           axis_v = (pt2 - pt1).magnitude();
 
-          points.push_back(new Point(pt0));
-          points.push_back(new Point(pt1));
-          points.push_back(new Point(pt2));
-          points.push_back(new Point(pt3));
+          points.push_back(create_new<Point>(pt0));
+          points.push_back(create_new<Point>(pt1));
+          points.push_back(create_new<Point>(pt2));
+          points.push_back(create_new<Point>(pt3));
 
           connectors.push_back("--");
       }

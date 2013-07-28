@@ -94,7 +94,7 @@ an ``unknown |focus|''.
   else /* |entry != 0 && entry->object != 0|  */@;
 
   {
-    Focus* s = new Focus(*static_cast<Focus*>(entry->object));
+    Focus* s = create_new<Focus>(static_cast<Focus*>(entry->object));
   
   
     @=$$@> = static_cast<void*>(s);
@@ -133,7 +133,7 @@ Added this rule.
 { 
    Focus* p;
 
-         p = new Focus;
+         p = create_new<Focus>(0);
 
    Pointer_Vector<Focus>* pv 
       = static_cast<Pointer_Vector<Focus>*>(@=$2@>);

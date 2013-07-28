@@ -277,10 +277,10 @@ Removed debugging code.
     PV* pv = new PV;
 
 
-    *pv += new Focus;
-    *pv += new Focus;
-    *pv += new Focus;
-    *pv += new Focus;
+    *pv += create_new<Focus>(0, scanner_node);
+    *pv += create_new<Focus>(0, scanner_node);
+    *pv += create_new<Focus>(0, scanner_node);
+    *pv += create_new<Focus>(0, scanner_node);
 
 
     int status = reflect_off_func<Focus>(scanner_node,

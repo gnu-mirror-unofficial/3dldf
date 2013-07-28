@@ -162,7 +162,7 @@ This condition occurs legitimately when one tries to show an
 
          try 
            {
-             q = new Point(static_cast<Point*>(entry->object));
+             q = create_new<Point>(static_cast<Point*>(entry->object));
            }
 
          catch (bad_alloc)
@@ -171,7 +171,7 @@ This condition occurs legitimately when one tries to show an
                  cerr_strm << "ERROR! In yyparse(), rule " 
                            << "`point_primary --> point_variable':"
                            << endl 
-                           << "`new Point()' failed. "
+                           << "`create_new<Point>()' failed. "
                            << "Rethrowing `bad_alloc'.";
 
                     log_message(cerr_strm);
@@ -508,7 +508,7 @@ Added this rule.
    else
    {
 
-       Point* base = new Point;
+       Point* base = create_new<Point>(0);
 
        int status = p->get_perpendicular_base(*q, 
                                               base, 
@@ -549,7 +549,7 @@ Added this rule.
 
        Plane q = r->get_plane();
 
-       Point* base = new Point;
+       Point* base = create_new<Point>(0);
 
        int status = p->get_perpendicular_base(q, 
                                               base, 
@@ -583,7 +583,7 @@ Added this rule.
    if (@=$2@>)
    {
       Focus* f = static_cast<Focus*>(@=$2@>);
-      @=$$@> = static_cast<void*>(new Point(
+      @=$$@> = static_cast<void*>(create_new<Point>(
                                      f->get_position())); 
       delete f;
    }
@@ -610,7 +610,7 @@ Added this rule.
    if (@=$2@>)
    {
       Focus* f = static_cast<Focus*>(@=$2@>);
-      @=$$@> = static_cast<void*>(new Point(
+      @=$$@> = static_cast<void*>(create_new<Point>(
                                      f->get_direction())); 
       delete f;
    }
@@ -638,7 +638,7 @@ Added this rule.
    if (@=$2@>)
    {
       Focus* f = static_cast<Focus*>(@=$2@>);
-      @=$$@> = static_cast<void*>(new Point(
+      @=$$@> = static_cast<void*>(create_new<Point>(
                                      f->get_up())); 
       delete f;
    }
@@ -831,7 +831,7 @@ Added this rule.
        if (p == INVALID_POINT)
           @=$$@> = 0;
        else
-          @=$$@> = static_cast<void*>(new Point(p));
+          @=$$@> = static_cast<void*>(create_new<Point>(p));
 
        delete f;
    }
@@ -1037,7 +1037,7 @@ Added this rule.
       @=$$@> = 0;
    else
    {
-       Point* p = new Point(c->get_approx_center());
+       Point* p = create_new<Point>(c->get_approx_center());
        @=$$@> = static_cast<void*>(p); 
    }  
 
@@ -1065,7 +1065,7 @@ Added this rule.
       @=$$@> = 0;
    else
    {
-       Point* p = new Point(c->get_true_center());
+       Point* p = create_new<Point>(c->get_true_center());
        @=$$@> = static_cast<void*>(p); 
    }  
 
@@ -1093,7 +1093,7 @@ Added this rule.
       @=$$@> = 0;
    else
    {
-       Point* p = new Point(c->get_point_6());
+       Point* p = create_new<Point>(c->get_point_6());
        @=$$@> = static_cast<void*>(p); 
    }  
 
@@ -2573,7 +2573,7 @@ Added this rule.
 
    try 
       {
-         p = new Point;
+         p = create_new<Point>(0);
       }
 @q ******* (7) @> 
 @
@@ -2591,7 +2591,7 @@ Added this rule.
          cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                    << "`point_primary "
                    << "--> LAST point_vector_expression':"
-                   << endl << "`new Point()' failed.  "
+                   << endl << "`create_new<Point>()' failed.  "
                    << "Rethrowing `bad_alloc'.";
 
          log_message(cerr_strm);
@@ -2711,7 +2711,7 @@ Added this rule.
    else
    {
    
-      Point* p = new Point;
+      Point* p = create_new<Point>(0);
       Point q = e->angle_point(@=$2@>);
 
       *p = q;
@@ -2826,7 +2826,7 @@ Added {\TeX} text and edited the formatting.
        cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");
 
-       p = new Point(&INVALID_POINT);
+       p = create_new<Point>(&INVALID_POINT);
 
      }  /* |if (p == 0)|  */@;
 
@@ -3047,7 +3047,7 @@ Added this rule.
          cerr_message(cerr_strm, error_stop_value);
          cerr_strm.str("");
        
-         p = new Point(&INVALID_POINT);
+         p = create_new<Point>(&INVALID_POINT);
 
      }  /* |if (p == 0)|  */@;
 
@@ -3113,7 +3113,7 @@ Added this rule.
        
          try 
             {
-                p = new Point(&INVALID_POINT);
+                p = create_new<Point>(&INVALID_POINT);
             }
 
          catch (bad_alloc)
@@ -3122,7 +3122,7 @@ Added this rule.
                          << "`point_secondary --> numeric_secondary "
                          << "point_primary':"
                          << endl 
-                         << "`new Point()' failed.  "
+                         << "`create_new<Point>()' failed.  "
                          << "Rethrowing `bad_alloc'.";
 
                log_message(cerr_strm);
@@ -3544,7 +3544,7 @@ Added this rule.
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
        
-        @=$$@> = static_cast<void*>(new Point(&INVALID_POINT));
+        @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT));
 
         if (q != 0)
            delete q;
@@ -3571,7 +3571,7 @@ Added this rule.
        cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");       
 
-       @=$$@> = static_cast<void*>(new Point(&INVALID_POINT)); 
+       @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT)); 
 
        if (p != 0)
          delete p;
@@ -3650,7 +3650,7 @@ Added this rule.
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
        
-        @=$$@> = static_cast<void*>(new Point(&INVALID_POINT));
+        @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT));
 
         if (q != 0)
            delete q;
@@ -3677,7 +3677,7 @@ Added this rule.
        cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");       
 
-       @=$$@> = static_cast<void*>(new Point(&INVALID_POINT)); 
+       @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT)); 
 
        if (p != 0)
          delete p;

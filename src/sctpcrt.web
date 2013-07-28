@@ -68,7 +68,7 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 
 
 @<Include files@>=
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "gsltmplt.h++"
@@ -5516,7 +5516,7 @@ Added this section.
   {
 
     Point p(0, 0, 0);
-    Point* q = new Point(p);
+    Point* q = create_new<Point>(p);
     v = static_cast<void*>(q); 
     scanner_node->add_entry("origin", POINT, 
                             regular, is_constant,
@@ -5582,7 +5582,7 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
   {
 
     Focus a(0, 0, -10, 0, 0, 10, 20); 
-    Focus* f = new Focus(a);
+    Focus* f = create_new<Focus>(a);
     v = static_cast<void*>(f); 
     scanner_node->add_entry("default_focus", FOCUS, 
                             regular, not_constant,

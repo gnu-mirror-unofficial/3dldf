@@ -93,7 +93,7 @@ versions are now in their own RCS repository.
 \ENDLOG 
 
 @<Include files@>=
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -849,7 +849,7 @@ if |Line L == INVALID_LINE|.
                                  if ((**b_iter).pt != INVALID_POINT)
                                     {
                                         curr_pt = (**b_iter).pt;
-                                        *pv += new Point(curr_pt);
+                                        *pv += create_new<Point>(curr_pt);
                                     }
 
                              } /* End of second inner |for|  */

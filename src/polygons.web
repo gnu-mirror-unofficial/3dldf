@@ -81,7 +81,7 @@ Now including \filename{pens.web}.
 
 @<Include files@>=
 
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -2530,7 +2530,7 @@ Polygon::disentangle(void* v,
     for (vector<Point>::iterator iter = pv.begin();
          iter != pv.end(); ++iter)
        {
-          new_pt = new Point(*iter);
+          new_pt = create_new<Point>(*iter);
           *new_pt *= t_inverse;
           *poly += new_pt;
        }
@@ -3577,8 +3577,8 @@ wasn't derived from |class Polygon|.
 
           Line isect_line = get_plane().intersection_line(p->get_plane());
 
-          Point* pt0 = new Point;
-          Point* pt1 = new Point;
+          Point* pt0 = create_new<Point>(0);
+          Point* pt1 = create_new<Point>(0);
 
           *pt0 = *pt1 = isect_line.position; 
 
@@ -4128,7 +4128,7 @@ z-axis, if |angle_x|, |angle_y|, and |angle_z| are all 0).
 @<Define |Reg_Polygon| functions@>=
   for (int i = 0; i < sides; i++)
     {
-      Point* vertex = new Point; 
+      Point* vertex = create_new<Point>(0); 
       vertex->set(0, 0, radius);
 
       if (sides % 2 == 0)

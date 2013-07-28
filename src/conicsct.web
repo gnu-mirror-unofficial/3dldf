@@ -64,7 +64,7 @@ Created this file.
 
 @<Include files@>=
 
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -621,7 +621,7 @@ Added this section.
       X = bp.pt;
 
       if (isect_pv != 0)
-         *isect_pv += new Point(X);
+         *isect_pv += create_new<Point>(X);
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -672,7 +672,7 @@ Added this section.
       Y = bp.pt;
 
       if (isect_pv != 0)
-         *isect_pv += new Point(Y);
+         *isect_pv += create_new<Point>(Y);
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -723,7 +723,7 @@ Added this section.
       Z = bp.pt;
 
       if (isect_pv != 0)
-         *isect_pv += new Point(Z);
+         *isect_pv += create_new<Point>(Z);
 
 #if DEBUG_COMPILE
       if (DEBUG)

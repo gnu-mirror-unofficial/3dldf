@@ -1069,7 +1069,7 @@ Not drawing or undrawing dot.
 
   else  /* |!(bp == 0 || bp->pt == INVALID_POINT)|  */
     {
-      p = new Point(bp->pt);
+      p = create_new<Point>(bp->pt);
 
       drawdot_command(static_cast<Scanner_Node>(parameter),
                       @=$1@>,
@@ -1151,7 +1151,7 @@ Added this rule.
    if (condition)
       {
        
-      p = new Point(bp->pt);
+      p = create_new<Point>(bp->pt);
 
       int status = drawdot_command(static_cast<Scanner_Node>(parameter),
                                    command,

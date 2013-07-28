@@ -64,7 +64,7 @@ Created this file.
 @ Include files.
 
 @<Include files@>=
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -851,7 +851,7 @@ Cylinder::get_base_center(void* v)
    
     if (type == CIRCULAR_CYLINDER_TYPE && base != 0)
     {
-         p = new Point;
+         p = create_new<Point>(0);
      
          *p = static_cast<Circle*>(base)->get_center();
 
@@ -863,7 +863,7 @@ Cylinder::get_base_center(void* v)
 
     else if (type == ELLIPTICAL_CYLINDER_TYPE && base != 0)
     {
-         p = new Point;
+         p = create_new<Point>(0);
      
          *p = static_cast<Ellipse*>(base)->get_center();
 
@@ -906,7 +906,7 @@ Cylinder::get_cap_center(void* v)
 
     if (type == CIRCULAR_CYLINDER_TYPE && cap != 0)
     {
-         p = new Point;
+         p = create_new<Point>(0);
      
          *p = static_cast<Circle*>(cap)->get_center();
          return static_cast<void*>(p);
@@ -917,7 +917,7 @@ Cylinder::get_cap_center(void* v)
 
     else if (type == ELLIPTICAL_CYLINDER_TYPE && cap != 0)
     {
-         p = new Point;
+         p = create_new<Point>(0);
      
          *p = static_cast<Ellipse*>(cap)->get_center();
 

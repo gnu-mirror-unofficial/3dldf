@@ -73,7 +73,7 @@ versions are now in their own RCS repository.
 \ENDLOG 
 
 @<Include files@>=
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -339,7 +339,7 @@ Ellipse::Ellipse(const Point& ccenter,
           curr_angle = 2*i*PI/number_of_points;
           curr_x = axis_h/2 * cos(curr_angle);
           curr_z = axis_v/2 * sin(curr_angle);
-          points.push_back(new Point);
+          points.push_back(create_new<Point>(0));
           points.back()->set(curr_x, 0, curr_z);
           *(points.back()) *= t;  /* Rotate |*(points.back())| around the 
             x, y, and z-axes and shift it to

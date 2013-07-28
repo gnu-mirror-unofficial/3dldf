@@ -498,10 +498,10 @@ Removed debugging code.
 
     Pointer_Vector<Point>* pv = new Pointer_Vector<Point>;
 
-    *pv += new Point;
-    *pv += new Point;
-    *pv += new Point;
-    *pv += new Point;
+    *pv += create_new<Point>(0, scanner_node);
+    *pv += create_new<Point>(0, scanner_node);
+    *pv += create_new<Point>(0, scanner_node);
+    *pv += create_new<Point>(0, scanner_node);
 
 @q ******* (7) Call |Scan_Parse::reflect_off_func()|.@> 
 

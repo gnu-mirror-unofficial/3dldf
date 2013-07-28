@@ -63,7 +63,7 @@ Created this file.
 
 @<Include files@>=
 
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -403,7 +403,7 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
 
 @<Define |Parabola| functions@>= 
 
-    curr_pt = new Point(ORIGIN);
+    curr_pt = create_new<Point>(ORIGIN);
 
     if (!(vertex_0 == INVALID_POINT || vertex_0 == ORIGIN))
        curr_pt->shift(vertex_0);
@@ -435,7 +435,7 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
 
            curr_z = t;
 
-           curr_pt = new Point;
+           curr_pt = create_new<Point>(0);
            curr_pt->set(curr_x, 0, curr_z);
 
            if (!(vertex_0 == INVALID_POINT || vertex_0 == ORIGIN))
@@ -446,7 +446,7 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
                        
            curr_deque.push_front(curr_pt);
 
-           curr_pt = new Point;
+           curr_pt = create_new<Point>(0);
            curr_pt->set(curr_x, 0, -curr_z);
 
            if (!(vertex_0 == INVALID_POINT || vertex_0 == ORIGIN))
@@ -1925,10 +1925,10 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
       {
          adjust_connectors();
          connectors.push_back("..");
-         Point* p = new Point(points[points.size() - 1]);
+         Point* p = create_new<Point>(points[points.size() - 1]);
          points.push_back(p);
          connectors.push_back("--");
-         p = new Point(points[0]);
+         p = create_new<Point>(points[0]);
          points.push_back(p);
          connectors.push_back("..");
          Path::set_cycle(true);

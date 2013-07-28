@@ -79,7 +79,7 @@ Now including \filename{nurbs.h}.
 \ENDLOG 
 
 @<Include files@>=
-#include "inclhdrs.h++"
+#include "loader.h++"
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -593,7 +593,7 @@ and subsequently resizing it, if necessary.
   for (vector <Point*>::const_iterator p_iter = p.points.begin();
        p_iter != p.points.end();
        p_iter++)
-    points.push_back(new Point(*p_iter));      
+    points.push_back(create_new<Point>(*p_iter));      
     
   for (vector <string>::const_iterator c_iter = p.connectors.begin();
        c_iter != p.connectors.end();
@@ -834,9 +834,9 @@ Path::Path(const Point& p0, const Point& p1)
   surface_hiding_ctr = 0;
   decomposition_level = 0;
 
-  points.push_back(new Point(p0));
+  points.push_back(create_new<Point>(p0));
 
-  points.push_back(new Point(p1));
+  points.push_back(create_new<Point>(p1));
 
   connectors.push_back("--");
   if (DEBUG)
@@ -943,8 +943,8 @@ Path::set(const Point& p0, const Point& p1)
 
   projective_extremes = 0; /* LDF 2002.09.18.  Added this line.  */
 
-  points.push_back(new Point(p0));
-  points.push_back(new Point(p1));
+  points.push_back(create_new<Point>(p0));
+  points.push_back(create_new<Point>(p1));
   connectors.push_back("--");
   line_switch = true;
 }
@@ -1066,7 +1066,7 @@ Path::Path(string connector, bool@,@, cycle ... )
   Point* arg_ptr;
 
   while ((arg_ptr = va_arg(ap, Point*)) != static_cast<Point*>(0))
-    points.push_back(new Point(arg_ptr));
+    points.push_back(create_new<Point>(arg_ptr));
 
   va_end(ap);
   if (DEBUG)
@@ -1179,7 +1179,7 @@ Path::set(string connector, bool cycle ... )
     Point* arg_ptr;
 
     while ((arg_ptr = va_arg(ap, Point*)) != static_cast<Point*>(0))
-      points.push_back(new Point(arg_ptr));
+      points.push_back(create_new<Point>(arg_ptr));
     
     va_end(ap);
 
@@ -1286,7 +1286,7 @@ Path::Path(Point* first_point_ptr ... )
 
   arrow = NO_ARROW;
 
-  points.push_back(new Point(first_point_ptr));
+  points.push_back(create_new<Point>(first_point_ptr));
 
   va_list ap;  /* For the variable length argument list. */
   va_start(ap, first_point_ptr);
@@ -1304,7 +1304,7 @@ Path::Path(Point* first_point_ptr ... )
           cycle_switch = true;
           break;
         }
-      points.push_back(new Point(point_ptr));
+      points.push_back(create_new<Point>(point_ptr));
     }
 
   va_end(ap);
@@ -1410,7 +1410,7 @@ Path::set(Point* first_point_ptr ... )
 
     arrow = NO_ARROW;
 
-    points.push_back(new Point(first_point_ptr));
+    points.push_back(create_new<Point>(first_point_ptr));
 
     va_list ap;  /* For the variable length argument list. */
     va_start(ap, first_point_ptr);
@@ -1428,7 +1428,7 @@ Path::set(Point* first_point_ptr ... )
                 cycle_switch = true;
                 break;
             }
-          points.push_back(new Point(point_ptr));
+          points.push_back(create_new<Point>(point_ptr));
       }
     va_end(ap);
 }
@@ -3556,12 +3556,12 @@ the |Points|.
 
         try 
           {
-             point_reflection = new Point;
+             point_reflection = create_new<Point>(0, scanner_node);
           }
 
 
-@q ***** (5) Error handling:  |new Point()| failed.@> 
-@ Error handling:  |new Point()| failed.
+@q ***** (5) Error handling:  |create_new<Point>()| failed.@> 
+@ Error handling:  |create_new<Point>()| failed.
 \initials{LDF 2004.10.11.}
 
 @<Define |Path| functions@>=
@@ -3570,7 +3570,7 @@ the |Points|.
           {
             
               cerr_strm << thread_name << "ERROR! In `Path::reflect_in':" 
-                        << "`new Point' failed."
+                        << "`create_new<Point>' failed."
                         << endl
                         << "Deleting `path_reflection' and "
                         << "rethrowing `bad_alloc'.";
@@ -3859,10 +3859,10 @@ Added this section.
       {
           point_ptr_vector = new Pointer_Vector<Point>;
 
-          *point_ptr_vector += new Point;
-          *point_ptr_vector += new Point;
-          *point_ptr_vector += new Point;
-          *point_ptr_vector += new Point;
+          *point_ptr_vector += create_new<Point>(0, scanner_node);
+          *point_ptr_vector += create_new<Point>(0, scanner_node);
+          *point_ptr_vector += create_new<Point>(0, scanner_node);
+          *point_ptr_vector += create_new<Point>(0, scanner_node);
 
       } /* |try|  */
 
@@ -3878,7 +3878,7 @@ Added this section.
          cerr_strm << thread_name << "ERROR! In `Path::reflect_off':"
                        << endl 
                        << "`new Pointer_Vector<Point>' or "
-                       << "`new Point' failed, "
+                       << "`create_new<Point>' failed, "
                        << "throwing `bad_alloc'."
                        << endl 
                        << "Deleting `path_ptr_vector', setting it to 0,"
@@ -4198,7 +4198,7 @@ operator+=(const Point& p);
 void
 Path::operator+=(const Point& p)
 {
-  points.push_back(new Point(p));
+  points.push_back(create_new<Point>(p));
   return;
 }
 
@@ -4251,7 +4251,7 @@ Path
 Path::operator+(const Point& pt) const
 {
   Path pa(*this);
-  pa.points.push_back(new Point(pt));
+  pa.points.push_back(create_new<Point>(pt));
   return pa;
 }
 
@@ -4491,7 +4491,7 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
                                copies onto |points|.  */
       iter != pa.points.end();
       iter++)
-    points.push_back(new Point(*iter));
+    points.push_back(create_new<Point>(*iter));
 
 @  \initials{LDF 2002.4.6.} 
 Put the connectors from |pa| onto the new |Path|.  Since they're
@@ -4611,7 +4611,7 @@ will be at the wrong place.
   for(vector<Point*>::const_iterator iter = p.points.begin();
       iter != p.points.end();
       iter++)
-    r.points.push_back(new Point(*iter));
+    r.points.push_back(create_new<Point>(*iter));
 
 @q **** (4) @>   
    
@@ -11192,7 +11192,7 @@ put |connector| onto |p.connectors|, and return |p|.
                << "Breaking out of loop.\n\n" << flush;
               break;
             }
-          p.points.push_back(new Point(points[i]));
+          p.points.push_back(create_new<Point>(points[i]));
         }
       p.connectors.push_back(connector);
       p.set_cycle(cycle);
@@ -11232,7 +11232,7 @@ that add or remove connectors, so it's best to have this routine.
   
   for (size_t i = start; i < end; i++)
     {
-      q.points.push_back(new Point(p.points[i]));
+      q.points.push_back(create_new<Point>(p.points[i]));
       if (i < p.connectors.size())
           q.connectors.push_back(p.connectors[i]);
     }
@@ -13654,7 +13654,7 @@ such that |*r == 1|.
 
           try
              {
-                C_of_u = new Point;
+                C_of_u = create_new<Point>(0);
              }
 
 @q ***** (5).@> 
@@ -13663,7 +13663,7 @@ such that |*r == 1|.
              {
                  cerr_strm << thread_name 
                            << "ERROR!  In `Nurb::generate':"
-                           << endl << "`new Point' failed, "
+                           << endl << "`create_new<Point>' failed, "
                            << "throwing `bad_alloc'.  Rethrowing.";
 
                  log_message(cerr_strm);
