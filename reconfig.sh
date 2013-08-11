@@ -12,10 +12,10 @@ then
       echo "Not building  shared libraries"
       CONF_STATIC="--disable-shared " 
    else
-      echo "Building  shared libraries'"
+      echo "Building  shared libraries"
    fi
    else
-      echo "Building  shared libraries'"
+      echo "Building  shared libraries"
 fi
 
 configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
