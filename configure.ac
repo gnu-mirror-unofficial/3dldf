@@ -49,9 +49,9 @@
 
   
 .# Process this file with autoconf to produce a configure script.
-AC_INIT(CWEB/main.web)
+AC_INIT(src/main.web)
 AM_INIT_AUTOMAKE(3DLDF, 2.0, Laurence.Finston@gmx.de)
-AC_CONFIG_SRCDIR([CWEB/main.web])
+AC_CONFIG_SRCDIR([src/main.web])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -108,13 +108,13 @@ AC_CHECK_TYPES([unsigned long long, unsigned long, unsigned int])
 AC_SEARCH_LIBS(trunc, m)
 AC_CHECK_FUNCS([floor sqrt trunc])
 
-AC_CONFIG_FILES([Makefile CWEB/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile])
 
 
 # Checks for endianness.
 AC_C_BIGENDIAN
 
-bindir=CWEB
+bindir=src
 
 AC_ARG_ENABLE([dummy],
 AC_HELP_STRING([--enable-debug-compile],
