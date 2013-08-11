@@ -5,6 +5,25 @@
 
 #### Created by Laurence D. Finston (LDF) Sun Aug  4 18:59:09 CEST 2013
 
-./configure --prefix=/home/lfinsto/3dldf_local LIBS="-lgsl -lgslcblas -lm"
+if test $# -gt 0 
+then
+   if test $1 -ne 0 
+   then
+      echo "Not building  shared libraries'"
+      CONF_STATIC="--disable-shared " 
+   else
+      echo "Building  shared libraries'"
+   fi
+   else
+      echo "Building  shared libraries'"
+fi
+
+configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
+
+if test $# -gt 1
+then
+   echo "Calling make"
+   make
+fi
 
 exit 0
