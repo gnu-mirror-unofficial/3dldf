@@ -75,7 +75,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 3dldflb_CWEB_files = arc.web circles.web cncsctlt.web colors.web complex.web \
                 cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
-                ellpsoid.web ellpsslc.web figures.web format.web glyphs.web gsltmplt.web \
+                ellpsoid.web ellpsslc.web figures.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
                 imetfncs.web io.web lines.web \
                 matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
@@ -93,6 +93,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 3dldflb_h_files = $(3dldflb_CWEB_files:.web=.h) 
 3dldflb_hpp_files = $(3dldflb_CWEB_files:.web=.h++) loader.h++
 3dldflb_lo_files = $(3dldflb_CWEB_files:.web=.lo)
+3dldflb_obj_files = $(3dldflb_CWEB_files:.web=.o)
 
 
 3dldfsp_CWEB_files = parser.web parser2.web scanner2.web scan.web
@@ -100,7 +101,8 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 3dldfsp_c_files = $(3dldfsp_CWEB_files:.web=.c)
 3dldfsp_cpp_files = $(3dldfsp_CWEB_files:.web=.c++) 
 3dldfsp_h_files = $(3dldfsp_CWEB_files:.web=.h) 
-3dldfsp_hpp_files = $(3dldfsp_CWEB_files:.web=.h++) parser.hh
+3dldfsp_hpp_files = $(3dldfsp_CWEB_files:.web=.h++) parser_1.h++
+3dldfsp_obj_files = $(3dldfsp_CWEB_files:.web=.o)
 3dldfsp_lo_files = $(3dldfsp_CWEB_files:.web=.lo)
 
 3dldf_LDADD = lib3dldflb.la lib3dldfsp.la
@@ -109,7 +111,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
 3dldf_c_files = $(3dldf_SOURCES:.web=.c)
-3dldf_hpp_files = $(3dldf_SOURCES:.web=.h++) parser.h++ parser.hh
+3dldf_hpp_files = $(3dldf_SOURCES:.web=.h++) parser.h++ parser_1.h++
 3dldf_h_files = $(3dldf_SOURCES:.web=.h)
 3dldf_rpo_files = $(3dldf_SOURCES:.web=.rpo)
 
@@ -155,28 +157,36 @@ prbsnflx_SOURCES = prbsnflx.l++
 dummy_SOURCES = dummy.cxx
 
 
-EXTRA_DIST = check_scan_parse_output.sh patterns.web prelims.web
+EXTRA_DIST = check_scan_parse_output.sh format.web patterns.web prelims.web runit
 
 CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_files) \
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
               $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
               loader.c loader.c++ loader.h loader.h++ \
-              parser.c parser.c++ parser.hh parser.h++  parser.output parser.y++ \
-              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.hh parser2.y++ parser.y++ \
+              parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
+              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser2.y++ parser.y++ \
               ldf_1.log scanner2.l++
  
 # AM_CXXFLAGS =
 
 #### ** (2) Rules
 
+.PHONY : touch
+
+touch:
+	touch 3dldf$(EXEEXT) $(3dldf_obj_files) $(3dldflb_obj_files) $(3dldfsp_obj_files) \
+               $(3dldf_LDADD)
+
 #### *** (3) Link 3dldf
 
-3dldf: $(3dldf_obj_files) $(3dldf_LDADD) 
+3dldf$(EXEEXT): $(3dldf_obj_files) $(3dldf_LDADD) 
 	@echo "Linking 3dldf"
 	$(CXXLINK) $(3dldf_obj_files) -pthread $(3dldf_LDADD) $(LIBS)
+	@touch $(3dldf_obj_files) $(3dldflb_obj_files) $(3dldfsp_obj_files) \
+               $(3dldf_LDADD) 3dldf$(EXEEXT) 
 
-lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser.hh parser.h++ $(3dldflb_lo_files) 
+lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser_1.h++ parser.h++ $(3dldflb_lo_files) 
 	$(CXXLINK) -rpath $(libdir) $(3dldflb_lo_files) $(LIBS)
 
 lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files) 
@@ -218,6 +228,7 @@ lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files)
               mv $*.c $*.c++; \
            else \
               echo "$*.c++ is unchanged."; \
+              rm $*.c; \
 	      if test -s $*.o; \
 	         then \
 	         touch $*.o; \
@@ -239,6 +250,7 @@ lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files)
               mv $*.h $*.h++; \
            else \
               echo "$*.h++ is unchanged."; \
+              rm $*.h; \
            fi; \
         else \
         echo "$*.h++ does not exist"; \
@@ -256,18 +268,20 @@ lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files)
 
 #### *** (3) parser
 
-parser.y++ parser.hh : parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
+parser.y++: parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 	ctangle $<
 	./prbsnflx$(EXEEXT) parser.c parser.y
 	rm parser.c
 	./check_scan_parse_output.sh parser.y parser.y++
+	touch $@
 
-parser.c++ parser.h++ : parser.y++ 
+parser.c++ parser.h++ parser_1.h++: parser.y++ 
 	$(YACC) --debug -d -o parser.cxx $<
 	./check_scan_parse_output.sh parser.cxx parser.c++
 	./check_scan_parse_output.sh parser.hxx parser.h++
+	touch $@
 
-parser.o: parser.c++ parser.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
+parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      complex.h++ cones.h++ conicsct.h++ crclslc.h++ \
                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
@@ -283,6 +297,7 @@ parser.o: parser.c++ parser.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      utility.h++
 	@echo "Compiling 'parser.c++'.  This may take awhile ... "
 	$(CXXCOMPILE) -c -o $@ $<
+	touch $@
 
 
 #### *** (3) parser2
@@ -292,11 +307,13 @@ parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
 	./prbsnflx$(EXEEXT) parser2.c parser2.y
 	rm parser2.c
 	./check_scan_parse_output.sh parser2.y parser2.y++
+	@touch $@
 
 parser2.c++ parser2.h++ : parser2.y++ 
 	$(YACC) --debug -d -o parser2.cxx $<
 	./check_scan_parse_output.sh parser2.cxx parser2.c++
 	./check_scan_parse_output.sh parser2.hxx parser2.h++
+	@touch $@
 
 parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      complex.h++ cones.h++ conicsct.h++ crclslc.h++ \
@@ -313,20 +330,24 @@ parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
                      utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
+	@touch $@
 
 scanner2.o: scanner2.c++ scanner2.h++ io.h++  loader.h++ parser2.h++ pspglb.h++
 	$(CXXCOMPILE) -c -o $@ $<
+	@touch $@
 
 scanner2.c++ scanner2.h++ : scanner2.l++ 
 	$(LEX) -o scanner2.cxx $<
 	./check_scan_parse_output.sh scanner2.cxx scanner2.c++
 	./check_scan_parse_output.sh scanner2.hxx scanner2.h++
+	@touch $@
 
 scanner2.l++ : scanner2.web prbsnflx$(EXEEXT)
 	ctangle scanner2.web
 	./prbsnflx$(EXEEXT) scanner2.c scanner2.l
 	rm scanner2.c
 	./check_scan_parse_output.sh scanner2.l scanner2.l++
+	@touch $@
 
 prbsnflx$(EXEEXT): prbsnflx.c++ 
 	$(CXXCOMPILE) -o $@ $<
@@ -341,7 +362,7 @@ prbsnflx.c++: prbsnflx.l++
 
 #### *** (3) 
 
-main.o: main.c++ $(3dldf_hpp_files) parser.h++ parser2.h++ parser.hh
+main.o: main.c++ $(3dldf_hpp_files) parser.h++ parser2.h++ parser_1.h++
 
 arc.o: arc.c++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ conicsct.h++ crclslc.h++ \
                creatnew.h++ curves.h++ dashptrn.h++ ellipses.h++ ellpsslc.h++ \
@@ -462,7 +483,7 @@ deftfncs.o: deftfncs.c++ deftfncs.h++ arc.h++ circles.h++ cncsctlt.h++ \
 			 gsltmplt.h++ helices.h++ hyprbola.h++ imetfncs.h++ \
 			 io.h++ lines.h++ loader.h++ matrices.h++ nurbs.h++ \
 			 origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
-			 parahypr.h++ parser.hh parser.h++ paths.h++ pctfncs0.h++ \
+			 parahypr.h++ parser_1.h++ parser.h++ paths.h++ pctfncs0.h++ \
 			 pens.h++ pictures.h++ planes.h++ plyhdslc.h++ \
 			 pntrvcf0.h++ pntrvctr.h++ points.h++ polygons.h++ \
 			 polyhed.h++ predctes.h++ primes.h++ pspglb.h++ \
@@ -548,7 +569,7 @@ imetfncs.o: imetfncs.c++ imetfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
+                         predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++             
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -719,7 +740,7 @@ prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ spheres.h++ sphrdevl.h++ parabold.h++ paraellp.h++ \
                        parahypr.h++ glyphs.h++ ellpsoid.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                       predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
+                       predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -750,7 +771,7 @@ scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++
                  solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                  cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                  paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                 predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++
+                 predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -774,7 +795,7 @@ scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++
+                         predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -786,7 +807,7 @@ sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                       predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
+                       predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -799,7 +820,7 @@ sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
-                         predctes.h++ scanprse.h++ figures.h++ parser.hh parser.h++ scan.h++ scanprsf.h++ \
+                         predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -867,20 +888,111 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
+.PHONY : run
+run : 3DLDFtex.ps 3DLDFtex.pdf 
 
-#### *** (3) run
+3DLDFtex.pdf.gz : 3DLDFtex.pdf
+	rm -f 3DLDFtex.pdf.gz
+	cp -f 3DLDFtex.pdf YYY.pdf
+	gzip 3DLDFtex.pdf
+	mv -f YYY.pdf 3DLDFtex.pdf 
 
-.PHONY: run
+3DLDFtex.pdf : 3DLDFtex.ps
+	ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
 
-run: ttemp.ldf
-	3dldf$(EXEEXT) ttemp.ldf
+3DLDFtex.ps.gz : 3DLDFtex.ps
+	rm -f 3DLDFtex.ps.gz
+	cp 3DLDFtex.ps YYY.ps
+	gzip 3DLDFtex.ps
+	mv -f YYY.ps 3DLDFtex.ps 
+
+3DLDFtex.ps : 3DLDFtex.dvi
+	@echo "Running dvips on 3DLDFtex.dvi to create 3DLDFtex.ps."
+	dvips -o 3DLDFtex.ps 3DLDFtex
+
+3DLDFtex.dvi : 3DLDFtex.tex 3DLDFtex.bas 3DLDFmp.mp sample2.mp
+	@echo "Running MetaPost on 3DLDFmp.mp to create EPS files."
+	mpost 3DLDFmp.mp
+	@echo "Running TeX on 3DLDFtex.tex to create 3DLDFtex.dvi."
+	tex 3DLDFtex
+
+.PHONY : ldf
+ldf : sample2.mp 
+
+sample2.mp : sample2.ldf  
+	@echo "Running \`runit'."
+	$(SHELL) $(srcdir)/runit
+	@mv -f sample2.mp YYY.mp
+	@cp -f cpyrttex.txt sample2.mp
+	@chmod u+w sample2.mp
+	@cat YYY.mp >> sample2.mp
+	@rm -f YYY.mp
 
 .PHONY: prog
 
 prog: 
-	rm *.h *.c
+	-rm *.h *.c
 	$(MAKE) 3dldf$(EXEEXT)
 
+#### *** (3) purge.
+
+.PHONY : purge
+purge:
+	@echo "Deleting files generated by 3dldf"
+	-rm -f primes.lbn.gz
+	-rm -f primes.lsm
+	@echo "Deleting files generated by Metapost"
+	-rm -f  $(3dldf_mpgens) 
+	-rm -f sample?.mp *.mpx  ldf_?.log mpxerr.tex missfont.log
+	@echo "Deleting files generated by TeX"
+	-rm -f  3DLDFtex.dvi 3DLDFtex.log
+	@echo "Deleting files generated by dvips and ps2pdf"
+	-rm -f  3DLDFtex.ps
+	-rm -f  3DLDFtex.pdf
+	@echo "Deleting gzipped PostScript and PDF files"
+	-rm -f  3DLDFtex.ps.gz
+	-rm -f  3DLDFtex.pdf.gz
+	@echo "Deleting files generated by \`conveps'"
+	-rm -f  3DLDFmp_*.eps
+	-rm -f  3DLDFmp_*.jpg
+	-rm -f  3DLDFmp_*.png
+	-rm -f  3DLDFmp_*.pnm
+	-rm -f  3DLDFmp_*.ps
+	@echo "Deleting files generated by \`cweav3DL'"
+	-rm -f 3DLDFprg.idx
+	-rm -f 3DLDFprg.log
+	-rm -f 3DLDFprg.scn
+	-rm -f 3DLDFprg.tex
+	-rm -f 3DLDFprg.toc
+	-rm -f 3DLDFprg.dvi
+	-rm -f 3DLDFprg.ps
+	-rm -f 3DLDFprg.pdf
+	-rm -f 3DLDFp02.idx
+	-rm -f 3DLDFp02.log
+	-rm -f 3DLDFp02.scn
+	-rm -f 3DLDFp02.tex
+	-rm -f 3DLDFp02.toc
+	-rm -f 3DLDFp02.dvi
+	-rm -f 3DLDFp02.ps
+	-rm -f 3DLDFp02.pdf
+	-rm -f 3DLDFp03.idx
+	-rm -f 3DLDFp03.log
+	-rm -f 3DLDFp03.scn
+	-rm -f 3DLDFp03.tex
+	-rm -f 3DLDFp03.toc
+	-rm -f 3DLDFp03.dvi
+	-rm -f 3DLDFp03.ps
+	-rm -f 3DLDFp03.pdf
+	-rm -f func1.texi
+	-rm -f func2.texi
+	-rm -f syntax2.texi
+	-rm -f otflnms.tex
+	-rm -f 3DLDFmp.[0-9]* 3DLDFmp.log polyrhyt.[0-9]* polyrhyt.ps polyrhyt.pdf polyrhyt.dvi polyrhyt.mp
+	-rm -f bldelem[0-9].[0-9]* bldelem[0-9].ps bldelem[0-9].pdf bldelem[0-9].dvi bldelem[0-9].mp \
+               bldelem[0-9].log bldelem[0-9].toc
+	-rm -f sphrmd0[0-9].[0-9]* sphrmd0[0-9].ps sphrmd0[0-9].pdf sphrmd0[0-9].dvi sphrmd0[0-9].mp \
+               sphrmd0[0-9].log sphrmd0[0-9].toc
+	-rm -f texput.log
 
 #### *** (3)
 
@@ -888,7 +1000,7 @@ prog:
 .PHONY: tags
 
 tags:
-	etags $(3dldf_SOURCES) $(3dldf_PARSER_FILES)
+	etags $(3dldflb_CWEB_files) $(3dldf_SOURCES) $(3dldf_PARSER_FILES)
 
 .PHONY: query
 
