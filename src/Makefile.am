@@ -166,7 +166,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               loader.c loader.c++ loader.h loader.h++ \
               parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
               prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser2.y++ parser.y++ \
-              ldf_1.log scanner2.l++
+              scanner2.c++ scanner2.h++ ldf_1.log scanner2.l++
  
 # AM_CXXFLAGS =
 
@@ -762,6 +762,8 @@ rhtchdrn.o: rhtchdrn.c++ rhtchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
+#scan.h++: scan.web
+
 scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ \
                  pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ transfor.h++ \
                  pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ planes.h++ \
@@ -888,12 +890,13 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
+#### && ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
+
 .PHONY : run
-run : 
-	3dldf$(EXEEXT) sample2.ldf
-	mpost 3DLDFmp.mp
-	tex 3DLDFtex
-	ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
+run: 
+	$(MAKE) 3dldf$(EXEEXT) && 3dldf$(EXEEXT) sample2.ldf \
+           && mpost 3DLDFmp.mp && tex 3DLDFtex.tex \
+           && dvips -o 3DLDFtex.ps 3DLDFtex.dvi 
 
 3DLDFtex.pdf.gz : 3DLDFtex.pdf
 	rm -f 3DLDFtex.pdf.gz

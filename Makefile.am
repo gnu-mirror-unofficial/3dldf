@@ -46,87 +46,90 @@
 
 
 
-CWEBDIR     := CWEB
 
-export CWEBDIR
+ACLOCAL_AMFLAGS = -I m4
 
-vpath %.web $(CWEBDIR)
-vpath %.h $(CWEBDIR)
-vpath %.c $(CWEBDIR)
-vpath %.o $(CWEBDIR)
+SRCDIR     := src
+
+export SRCDIR
+
+vpath %.web $(SRCDIR)
+vpath %.h $(SRCDIR)
+vpath %.c $(SRCDIR)
+vpath %.o $(SRCDIR)
 
 
 EXTRA_DIST =  00NEWS 00README ChangeLog 
 
 .DELETE_ON_ERROR :
 
-SUBDIRS = $(CWEBDIR) 
+SUBDIRS = $(SRCDIR) 
 
 
 .PHONY: dummy
 dummy:
 	echo "distdir = $(distdir)"
-	$(MAKE) dummy -C $(CWEBDIR)
+	$(MAKE) dummy -C $(SRCDIR)
 
 
 .PHONY: info
 info:
 	@echo "info in 3DLDF-<Version>/Makefile.am."
-	$(MAKE) info -C $(CWEBDIR)
+	$(MAKE) info -C $(SRCDIR)
 
 
 .PHONY: info-recursive
 info-recursive:
 	@echo "info-recursive in 3DLDF-<Version>/Makefile.am."
-	$(MAKE) info-recursive -C $(CWEBDIR)
+	$(MAKE) info-recursive -C $(SRCDIR)
 
 
 .PHONY : 3dldf
 3dldf : 
-	$(MAKE) 3dldf -C $(CWEBDIR)
+	$(MAKE) 3dldf -C $(SRCDIR)
 
 
 
 .PHONY : ps
 ps : 
-	@echo Running \"make ps\" in $(CWEBDIR)
-	$(MAKE) ps -C $(CWEBDIR)
+	@echo Running \"make ps\" in $(SRCDIR)
+	$(MAKE) ps -C $(SRCDIR)
 
 
 .PHONY : 3DLDFput.mp
 3DLDFput.mp:
-	@echo Running \"make 3DLDFput.mp\" in $(CWEBDIR)
-	$(MAKE) 3DLDFput.mp -C $(CWEBDIR)
+	@echo Running \"make 3DLDFput.mp\" in $(SRCDIR)
+	$(MAKE) 3DLDFput.mp -C $(SRCDIR)
 
 .PHONY : ldf
 ldf : 3DLDFput.mp
-	@echo Running \"make ldf\" in $(CWEBDIR)
-	$(MAKE) ldf -C $(CWEBDIR)
+	@echo Running \"make ldf\" in $(SRCDIR)
+	$(MAKE) ldf -C $(SRCDIR)
 
 .PHONY : 3
 3 : 
-	@echo Running \"make 3\" in $(CWEBDIR)
-	$(MAKE) 3 -C $(CWEBDIR)
+	@echo Running \"make 3\" in $(SRCDIR)
+	$(MAKE) 3 -C $(SRCDIR)
 
 .PHONY : mp
 mp : 
-	@echo Running \"make mp\" in $(CWEBDIR)
-	$(MAKE) mp -C $(CWEBDIR)
+	@echo Running \"make mp\" in $(SRCDIR)
+	$(MAKE) mp -C $(SRCDIR)
 
 
 .PHONY : run
 run: 
-	@echo Running \"make run\" in $(CWEBDIR)
-	$(MAKE) run -C $(CWEBDIR)
+	@echo Running \"make run\" in $(SRCDIR)
+	$(MAKE) run -C $(SRCDIR)
 
 .PHONY : purge
 purge:
-	$(MAKE) purge -C $(CWEBDIR)
+	$(MAKE) purge -C $(SRCDIR)
 	@echo "Deleting $(distdir).tar.gz (the tarball containing the distribution)."
 	-rm -f $(distdir).tar.gz
 
 TAGS : 
-	$(MAKE) TAGS -C $(CWEBDIR)
+	$(MAKE) TAGS -C $(SRCDIR)
 
 ## Local Variables:
 ## mode:Makefile
