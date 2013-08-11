@@ -889,7 +889,11 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
 	$(CXXCOMPILE) -c -o $@ $<
 
 .PHONY : run
-run : 3DLDFtex.ps 3DLDFtex.pdf 
+run : 
+	3dldf$(EXEEXT) sample2.ldf
+	mpost 3DLDFmp.mp
+	tex 3DLDFtex
+	ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
 
 3DLDFtex.pdf.gz : 3DLDFtex.pdf
 	rm -f 3DLDFtex.pdf.gz
