@@ -212,8 +212,8 @@ definitions, but only when the macros are expanded.
 @<Garbage@>@;
 #endif 
 
-@q ** (2) This is what's written to `parser.h'.@>
-@ This is what's written to \filename{parser.h}.
+@q ** (2) This is what's written to `parser_1.h'.@>
+@ This is what's written to \filename{parser_1.h}.
 
 It's necessary to write the declaration of |LDF_LOCATION_TYPE| to
 \filename{parser.h}, because Bison does not write it to 
@@ -227,7 +227,7 @@ Before, the files that loaded \filename{parser.h} had the value
 set for parser input files.
 \ENDLOG 
 
-@(parser.h@>=
+@(parser_1.h++@>=
 
 #undef YYLTYPE
 @<Declare location type@>@;

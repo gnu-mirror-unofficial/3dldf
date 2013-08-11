@@ -6,12 +6,6 @@
 @q  * (1) Scanner 2.  @>
 @*2 scanner 2.
 
-@ Version control identifier.
-
-@<Version control identifier@>=
-static char version_control_id[] 
-   = "$Id: scanner2.web 399 2009-11-10 16:12:29Z lfinsto $";
-
 @
 @<Include files@>=
 
@@ -33,12 +27,11 @@ static char version_control_id[]
 
 #include <pthread.h>
 
-#include "config.h"
+#include <config.h>
 
-#include "loader.h"
-#include "pspglb.h"
-#include "io.h"  
-
+#include "loader.h++"
+#include "pspglb.h++"
+#include "io.h++"  
 #include "parser2.h++"
 
 @q ** (2) Define |YY_INPUT|.  @>
@@ -253,7 +246,6 @@ using namespace std;
 @<Rules@>@;@/
 @=%%@>
 @q User code@>
-@<Version control identifier@>@;@/
 @<|zzwrap| definition@>@;@/
 @<|zzerror| definition@>@;@/
 

@@ -54,9 +54,6 @@
 @** Layer\quad ({\tt layers\PERIOD web}).\hfil
 |Layers| are intended to be used for interactive drawing once I've
 programmed a graphical user interface (GUI).
-@<Version control identifier@>=
-static string rcs_id 
-   = "$Id: layers.web,v 1.11 2008/12/29 16:16:38 lfinsto1 Exp $";
 
 @q * Include files.@>
 @ Include files.
@@ -66,30 +63,30 @@ static string rcs_id
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h"
-#include "pspglb.h"
-#include "io.h"
-#include "colors.h"
-#include "transfor.h"
-#include "pens.h"
-#include "dashptrn.h"
-#include "shapes.h"  
-#include "pictures.h"  
-#include "points.h"
-#include "lines.h"
-#include "planes.h"
-#include "paths.h"
-#include "triangle.h"
-#include "curves.h"
-#include "polygons.h"
-#include "rectangs.h"
-#include "ellipses.h"
-#include "circles.h"
-#include "origami.h"
-#include "cuboid.h"
+#include "loader.h++"
+#include "pspglb.h++"
+#include "io.h++"
+#include "colors.h++"
+#include "transfor.h++"
+#include "pens.h++"
+#include "dashptrn.h++"
+#include "shapes.h++"  
+#include "pictures.h++"  
+#include "points.h++"
+#include "lines.h++"
+#include "planes.h++"
+#include "paths.h++"
+#include "triangle.h++"
+#include "curves.h++"
+#include "polygons.h++"
+#include "rectangs.h++"
+#include "ellipses.h++"
+#include "circles.h++"
+#include "origami.h++"
+#include "cuboid.h++"
 
 #if 0 
-   #include "patterns.h"
+   #include "patterns.h++"
 #endif 
 
 
@@ -124,7 +121,6 @@ class Layer
 @ This is compiled.
 @c
 @<Include files@>@;
-@<Version control identifier@>@;
 @<Define |class Layer|@>@;
 @<Define |Layer| functions@>@;
 

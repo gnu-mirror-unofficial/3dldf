@@ -77,10 +77,6 @@ Note also that debugging output in this file causes a
 I'm not sure whether it does under other circumstances.
 \ENDTODO 
 
-@<Version control identifier@>=
-static string rcs_id 
-   = "$Id: scan.web,v 1.76 2009/08/20 11:24:17 lfinsto1 Exp $";
-
 @q * (1) Include files.@>
 @ Include files.
 
@@ -95,71 +91,72 @@ Now including \filename{pens.web}.
 \ENDLOG 
 
 @<Include files@>=
-#include "loader.h"
+#include "loader.h++"
 #include <string.h>
-#include "pspglb.h"
-#include "io.h"
-#include "gsltmplt.h"
-#include "creatnew.h"
-#include "pntrvctr.h"
-#include "primes.h"
-#include "complex.h"
-#include "matrices.h"
-#include "colors.h"
-#include "transfor.h"
-#include "pens.h"
-#include "dashptrn.h"
-#include "shapes.h" 
-#include "pictures.h"
-#include "points.h"
-#include "lines.h"
-#include "planes.h"
-#include "nurbs.h"
-#include "paths.h"
-#include "curves.h"
-#include "polygons.h"
-#include "triangle.h"
-#include "rectangs.h"
-#include "conicsct.h"
-#include "ellipses.h"
-#include "circles.h"
-#include "ellpsslc.h"
-#include "crclslc.h"
-#include "parabola.h"
-#include "hyprbola.h"
-#include "cncsctlt.h"
-#include "arc.h"
-#include "helices.h"
-#include "origami.h"
+
+#include "pspglb.h++"
+#include "io.h++"
+#include "gsltmplt.h++"
+#include "creatnew.h++"
+#include "pntrvctr.h++"
+#include "primes.h++"
+#include "complex.h++"
+#include "matrices.h++"
+#include "colors.h++"
+#include "transfor.h++"
+#include "pens.h++"
+#include "dashptrn.h++"
+#include "shapes.h++" 
+#include "pictures.h++"
+#include "points.h++"
+#include "lines.h++"
+#include "planes.h++"
+#include "nurbs.h++"
+#include "paths.h++"
+#include "curves.h++"
+#include "polygons.h++"
+#include "triangle.h++"
+#include "rectangs.h++"
+#include "conicsct.h++"
+#include "ellipses.h++"
+#include "circles.h++"
+#include "ellpsslc.h++"
+#include "crclslc.h++"
+#include "parabola.h++"
+#include "hyprbola.h++"
+#include "cncsctlt.h++"
+#include "arc.h++"
+#include "helices.h++"
+#include "origami.h++"
 
 #if 0 
-   #include "patterns.h"
+   #include "patterns.h++"
 #endif 
 
-#include "solids.h"
-#include "solfaced.h"
-#include "cuboid.h"
-#include "polyhed.h"
-#include "ddchdrn.h"
-#include "rhtchdrn.h"
-#include "plyhdslc.h"
-#include "cones.h"
-#include "cylinder.h" 
-#include "ellpsoid.h"
-#include "spheres.h"
-#include "sphrdevl.h"
-#include "parabold.h"
-#include "paraellp.h"
-#include "parahypr.h" 
-#include "glyphs.h"
-#include "pctfncs0.h"
-#include "utility.h"
-#include "pntrvcf0.h"
-#include "predctes.h"
-#include "scanprse.h"   
-#include "figures.h"   
+#include "solids.h++"
+#include "solfaced.h++"
+#include "cuboid.h++"
+#include "polyhed.h++"
+#include "ddchdrn.h++"
+#include "rhtchdrn.h++"
+#include "plyhdslc.h++"
+#include "cones.h++"
+#include "cylinder.h++" 
+#include "ellpsoid.h++"
+#include "spheres.h++"
+#include "sphrdevl.h++"
+#include "parabold.h++"
+#include "paraellp.h++"
+#include "parahypr.h++" 
+#include "glyphs.h++"
+#include "pctfncs0.h++"
+#include "utility.h++"
+#include "pntrvcf0.h++"
+#include "predctes.h++"
+#include "scanprse.h++"   
+#include "figures.h++"   
 #include "parser.h++"   
-#include "parser.h"   
+#include "parser_1.h++"   
 
 @q * (1) yylex(). @>
 @* {\bf yylex()} definition.
@@ -3062,7 +3059,6 @@ get_catcode(const char c)
 @ This is what's compiled.
 @c
 @<Include files@>@;
-@<Version control identifier@>@;
 @<Declare scanning functions@>@;
 @<Define scanning functions@>@;
 
