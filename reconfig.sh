@@ -18,12 +18,34 @@ then
       echo "Building  shared libraries"
 fi
 
-configure CPPFLAGS="-I.." --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
+configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
 
 if test $# -gt 1
 then
    echo "Calling make"
    make
+
+   if test $1 -ne 0 
+   then
+      echo "Did not build  shared libraries"
+   else
+      echo "Built  shared libraries"
+   fi
 fi
+
+echo
+
+if test $# -gt 0 
+then
+   if test $1 -ne 0 
+   then
+      echo "Not building  shared libraries"
+   else
+      echo "Building  shared libraries"
+   fi
+   else
+      echo "Building  shared libraries"
+fi
+
 
 exit 0
