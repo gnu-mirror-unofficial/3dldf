@@ -77,12 +77,12 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
                 ellpsoid.web ellpsslc.web figures.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
-                imetfncs.web io.web lines.web \
+                imetfncs.web io.web lines.web loader.web \
                 matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
                 parahypr.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
-                rectangs.web rhtchdrn.web scanprse.web scanprsf.web \
+                rectangs.web rhtchdrn.web scan.web scanprse.web scanprsf.web \
                 sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
                 spheres.web sphrdevl.web transfor.web triangle.web \
                 utility.web
@@ -96,7 +96,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 3dldflb_obj_files = $(3dldflb_CWEB_files:.web=.o)
 
 
-3dldfsp_CWEB_files = parser.web parser2.web scanner2.web scan.web
+3dldfsp_CWEB_files = parser2.web scanner2.web 
 
 3dldfsp_c_files = $(3dldfsp_CWEB_files:.web=.c)
 3dldfsp_cpp_files = $(3dldfsp_CWEB_files:.web=.c++) 
@@ -106,6 +106,7 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 3dldfsp_lo_files = $(3dldfsp_CWEB_files:.web=.lo)
 
 3dldf_LDADD = lib3dldflb.la lib3dldfsp.la
+
 
 3dldf_SOURCES = main.web pspglb.web 
 
@@ -156,8 +157,11 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 dummy_SOURCES = dummy.cxx
 
-
-EXTRA_DIST = check_scan_parse_output.sh format.web patterns.web prelims.web runit
+EXTRA_DIST = check_scan_parse_output.sh format.web patterns.web prelims.web runit \
+             sample.ldf sample0.ldf sample1.ldf sample2.ldf \
+             3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
+             $(3dldflb_CWEB_files) $(3dldfsp_CWEB_files) $(3dldf_SOURCES) \
+             $(3dldf_PARSER_FILES)
 
 CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_files) \
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
@@ -177,6 +181,15 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 touch:
 	touch 3dldf$(EXEEXT) $(3dldf_obj_files) $(3dldflb_obj_files) $(3dldfsp_obj_files) \
                $(3dldf_LDADD)
+
+lib3dldflb.c:
+	touch $@
+
+lib3dldfsp.c:
+	touch $@
+
+dist-hook:
+	rm ./lib3dldflb.c ./lib3dldfsp.c
 
 #### *** (3) Link 3dldf
 

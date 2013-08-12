@@ -59,7 +59,7 @@ vpath %.c $(SRCDIR)
 vpath %.o $(SRCDIR)
 
 
-EXTRA_DIST =  00NEWS 00README ChangeLog 
+EXTRA_DIST = 00INFO 00NEWS 00README ChangeLog reconfig.sh
 
 .DELETE_ON_ERROR :
 
