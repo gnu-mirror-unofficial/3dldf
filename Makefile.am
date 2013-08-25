@@ -49,87 +49,92 @@
 
 ACLOCAL_AMFLAGS = -I m4
 
-SRCDIR     := src
+SOURCEDIR     := src
 
-export SRCDIR
+export SOURCEDIR
 
-vpath %.web $(SRCDIR)
-vpath %.h $(SRCDIR)
-vpath %.c $(SRCDIR)
-vpath %.o $(SRCDIR)
+vpath %.web $(SOURCEDIR)
+vpath %.h $(SOURCEDIR)
+vpath %.c $(SOURCEDIR)
+vpath %.o $(SOURCEDIR)
 
 
 EXTRA_DIST = 00INFO 00NEWS 00README ChangeLog reconfig.sh
 
 .DELETE_ON_ERROR :
 
-SUBDIRS = $(SRCDIR) 
+SUBDIRS = $(SOURCEDIR) 
 
 
 .PHONY: dummy
 dummy:
 	echo "distdir = $(distdir)"
-	$(MAKE) dummy -C $(SRCDIR)
+	$(MAKE) dummy -C $(SOURCEDIR)
 
 
 .PHONY: info
 info:
 	@echo "info in 3DLDF-<Version>/Makefile.am."
-	$(MAKE) info -C $(SRCDIR)
+	$(MAKE) info -C $(SOURCEDIR)
 
 
 .PHONY: info-recursive
 info-recursive:
 	@echo "info-recursive in 3DLDF-<Version>/Makefile.am."
-	$(MAKE) info-recursive -C $(SRCDIR)
+	$(MAKE) info-recursive -C $(SOURCEDIR)
 
 
 .PHONY : 3dldf
 3dldf : 
-	$(MAKE) 3dldf -C $(SRCDIR)
+	$(MAKE) 3dldf -C $(SOURCEDIR)
 
 
 
 .PHONY : ps
 ps : 
-	@echo Running \"make ps\" in $(SRCDIR)
-	$(MAKE) ps -C $(SRCDIR)
+	@echo Running \"make ps\" in $(SOURCEDIR)
+	$(MAKE) ps -C $(SOURCEDIR)
 
 
 .PHONY : 3DLDFput.mp
 3DLDFput.mp:
-	@echo Running \"make 3DLDFput.mp\" in $(SRCDIR)
-	$(MAKE) 3DLDFput.mp -C $(SRCDIR)
+	@echo Running \"make 3DLDFput.mp\" in $(SOURCEDIR)
+	$(MAKE) 3DLDFput.mp -C $(SOURCEDIR)
 
 .PHONY : ldf
 ldf : 3DLDFput.mp
-	@echo Running \"make ldf\" in $(SRCDIR)
-	$(MAKE) ldf -C $(SRCDIR)
+	@echo Running \"make ldf\" in $(SOURCEDIR)
+	$(MAKE) ldf -C $(SOURCEDIR)
 
 .PHONY : 3
 3 : 
-	@echo Running \"make 3\" in $(SRCDIR)
-	$(MAKE) 3 -C $(SRCDIR)
+	@echo Running \"make 3\" in $(SOURCEDIR)
+	$(MAKE) 3 -C $(SOURCEDIR)
 
 .PHONY : mp
 mp : 
-	@echo Running \"make mp\" in $(SRCDIR)
-	$(MAKE) mp -C $(SRCDIR)
+	@echo Running \"make mp\" in $(SOURCEDIR)
+	$(MAKE) mp -C $(SOURCEDIR)
 
 
 .PHONY : run
 run: 
-	@echo Running \"make run\" in $(SRCDIR)
-	$(MAKE) run -C $(SRCDIR)
+	@echo Running \"make run\" in $(SOURCEDIR)
+	$(MAKE) run -C $(SOURCEDIR)
 
 .PHONY : purge
 purge:
-	$(MAKE) purge -C $(SRCDIR)
+	$(MAKE) purge -C $(SOURCEDIR)
 	@echo "Deleting $(distdir).tar.gz (the tarball containing the distribution)."
 	-rm -f $(distdir).tar.gz
 
 TAGS : 
-	$(MAKE) TAGS -C $(SRCDIR)
+	$(MAKE) TAGS -C $(SOURCEDIR)
+
+.PHONY: query
+
+query:
+	echo "libdir = $(libdir)"
 
 ## Local Variables:
 ## mode:Makefile
