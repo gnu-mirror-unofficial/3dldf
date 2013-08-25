@@ -114,8 +114,6 @@ AC_CONFIG_FILES([Makefile src/Makefile])
 # Checks for endianness.
 AC_C_BIGENDIAN
 
-bindir=src
-
 AC_ARG_ENABLE([dummy],
 AC_HELP_STRING([--enable-debug-compile],
 [Enable conditionally compiled debugging output (this is the default).]),
