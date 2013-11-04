@@ -93,7 +93,7 @@ process_file(string name_string, size_t compile_and_link_position,
   bool DEBUG = false; /* |true| */
 
   if (DEBUG == true)
-    cout << "**********\n\n" << flush;
+    cout << "**********\n\n";
 
   int local_comparison_value;
 
@@ -201,23 +201,23 @@ Run \ctangle/ in the following cases:
 if (DEBUG)
 {
   cout << "local_comparison_value == " << local_comparison_value
-    << endl << flush;
+    << endl;
 
   if (h_file_stream)
-    cout << h_string << " is open.\n" << flush;
+    cout << h_string << " is open.\n";
   else 
-    cout << h_string << " is not open.\n" << flush;
+    cout << h_string << " is not open.\n";
 
 
   if (o_file_stream)
-    cout << o_string << " is open.\n" << flush;
+    cout << o_string << " is open.\n";
   else 
-    cout << o_string << " is not open.\n" << flush;
+    cout << o_string << " is not open.\n";
 
   if (c_file_stream)
-    cout << c_string << " is open.\n" << flush;
+    cout << c_string << " is open.\n";
   else 
-    cout << c_string << " is not open.\n" << flush;
+    cout << c_string << " is not open.\n";
 }
 
 
@@ -245,20 +245,18 @@ retangled.
   if (writes_header == true && h_file_stream) 
     {
       if (DEBUG == true)
-        cout << "Copying " << h_string << " to " << hld_string << ".\n"
-          << flush;
+        cout << "Copying " << h_string << " to " << hld_string << ".\n";
       system_string = "cp " + h_string + " " + hld_string;
       if (SILENT == false)
-        cout << "Running " << system_string << ".\n" << flush;
+        cout << "Running " << system_string << ".\n";
       system(system_string.c_str());
     }
   else if (!h_file_stream && writes_header == true && DEBUG == true)
-     cout << h_string << " doesn't exist, so I'm not copying anything.\n"
-          << flush;
+     cout << h_string << " doesn't exist, so I'm not copying anything.\n";
 
   else if (writes_header == false && DEBUG == true)
       cout << web_string << " doesn't write a header file, "
-           << "so I'm not copying anything.\n" << flush;
+           << "so I'm not copying anything.\n";
 
 
 
@@ -272,7 +270,7 @@ language option.
  system_string = "ctangle " + web_string;
 
 if (SILENT == false)
-     cout << "Running " << system_string << ".\n" << flush;
+     cout << "Running " << system_string << ".\n";
 
 /* LDF 2002.04.10.  Added error handling code.  Now, if
    \ctangle/ fails, \.{cmpl} exits.  */
@@ -289,14 +287,14 @@ return_value_stream.close();
 if (DEBUG)
 {
   cout << "sc_return_value == " << sc_return_value
-    << endl << flush;
+    << endl;
   getchar();
 }
 
 if (sc_return_value != 0)
 {
   cerr << "ERROR! ctangle " << web_string << " failed.\n"
-    << "Exiting.\n" << flush;
+    << "Exiting.\n";
 #ifdef __GNUC__ 
   unlink(return_value_file_name);
 #endif 
@@ -305,7 +303,7 @@ if (sc_return_value != 0)
 }
 else if (DEBUG)
 {
-  cout << "ctangle " << web_string << " succeeded.\n" << flush;
+  cout << "ctangle " << web_string << " succeeded.\n";
   getchar();
 }
  
@@ -327,7 +325,7 @@ else if (local_comparison_value == 0 /* The \CWEB/ file is older than the
                               */
 {
   if (SILENT == false)
-    cout << web_string << " is up-to-date.\n" << flush;
+    cout << web_string << " is up-to-date.\n";
 }
 
 @ We recompile in the following cases:
@@ -357,7 +355,7 @@ able to debug.  Did the same thing in \filename{cmplLIN.web}.
   
 if (!o_file_stream && SILENT == false && DEBUG == true)
      cout << o_string << " is missing. Will recompile "
-     << c_string << ".\n" << flush;
+     << c_string << ".\n";
      
 if (do_not_compile == false
     && ((dependencies & compile_and_link_flags).any()
@@ -376,7 +374,7 @@ if (do_not_compile == false
 @
 @<Define |process_file()|@>+=
   if (SILENT == false)
-    cout << "Running " << system_string << ".\n" << flush;
+    cout << "Running " << system_string << ".\n";
 
   system_string += "; echo $? > "
     + static_cast<string>(return_value_file_name);
@@ -390,13 +388,13 @@ if (do_not_compile == false
   if (DEBUG)
     {
       cout << "sc_return_value == " << sc_return_value
-           << endl << flush;
+           << endl;
       getchar();
     }
   if (sc_return_value != 0)
     {
       cerr << "ERROR! Compilation of " << c_string << " failed.\n"
-           << "Exiting.\n" << flush;
+           << "Exiting.\n";
 #ifdef __GNUC__ 
       unlink(return_value_file_name);
 #endif 
@@ -404,7 +402,7 @@ if (do_not_compile == false
     }
   else if (DEBUG)
     {
-      cout << "Compilation of " << c_string << " succeeded.\n" << flush;
+      cout << "Compilation of " << c_string << " succeeded.\n";
       getchar();
     }
 
@@ -415,7 +413,7 @@ else if (do_not_compile == true)
 {
     if (SILENT == false)
       cout << web_string << " doesn't write C++ code. "
-        << "Not bothering to compile.\n" << flush;
+        << "Not bothering to compile.\n";
 
 }
 
@@ -438,7 +436,7 @@ if (writes_header == true
                  if \ctangle/ has been run.  */
 
 {
-  cout << "Will test header file.\n" << flush;
+  cout << "Will test header file.\n";
   @<Test header file@>@;
 
   system_string = "rm -f " + hld_string;
@@ -449,11 +447,11 @@ if (writes_header == true
 else
 {
   if (DEBUG == true)
-    cout << "Won't test header file\n" << flush;
+    cout << "Won't test header file\n";
 }
 
 if (DEBUG == true)
-     cout << "**********\n\n" << flush;
+     cout << "**********\n\n";
 
 #ifdef __GNUC__ 
      unlink(return_value_file_name);
@@ -469,8 +467,7 @@ if (DEBUG == true)
   if (!h_file_stream)
     {
       if (SILENT == false)
-        cout << h_string << " isn't open. Will assume it's changed.\n"
-          << flush;
+        cout << h_string << " isn't open. Will assume it's changed.\n";
       local_comparison_value = 1;
       h_file_stream.close();
     }
@@ -478,12 +475,12 @@ if (DEBUG == true)
   else
     {
       if (SILENT == false)
-        cout << "Opening " << hld_string << endl << flush;
+        cout << "Opening " << hld_string << endl;
       hld_file_stream.open(hld_string.c_str());
       if (!hld_file_stream)
         {
           cerr << hld_string << " couldn't be opened. "
-            << "Assuming header file has changed.\n" << flush;
+            << "Assuming header file has changed.\n";
           local_comparison_value = 1;
         }
       else
@@ -491,7 +488,7 @@ if (DEBUG == true)
           if (DEBUG == true)
             cout << "Calling check_header_file(" << h_string
               << ", " << hld_string
-                << ")\n" << flush;
+                << ")\n";
           local_comparison_value
             = check_header_file(h_file_stream, hld_file_stream);
         }
@@ -508,7 +505,7 @@ If it has, don't reset the bit.
     {
      
      if (SILENT == false)  /* LDF 2002.04.10.  Changed message.  */
-        cout << h_string << " hasn't changed.\n" << flush;
+        cout << h_string << " hasn't changed.\n";
       compile_and_link_flags.reset(compile_and_link_position);
     }
 
@@ -518,18 +515,17 @@ If it has, don't reset the bit.
     {  
 
      if (SILENT == false)  /* LDF 2002.04.10.  Changed message.  */
-        cout << h_string << " has changed.\n" << flush;
+        cout << h_string << " has changed.\n";
       if(DEBUG == true)
         cout << h_string << " and " << hld_string
-          << " are different. Will recompile dependent compilation units.\n"
-          << flush;
+          << " are different. Will recompile dependent compilation units.\n";
     }
   else if (local_comparison_value > 1)
     {
       if(SILENT == false)
         cerr << "Error! Problem with " << h_string << " or "
           << hld_string << ".\n"
-            << "Exiting with return value 1.\n" << flush;
+            << "Exiting with return value 1.\n";
 #ifdef __GNUC__ 
       unlink(return_value_file_name);
 #endif 
@@ -544,7 +540,7 @@ unsigned short check_header_file(ifstream&  local_h_file_stream,
 {
   bool DEBUG = false;
   if (DEBUG) 
-    cout << "Entering check_header_file()" << endl << flush;
+    cout << "Entering check_header_file()" << endl;
 
     /* For temporarily copying the \filename{.h} file. */
 
@@ -651,7 +647,7 @@ result to a temporary file. Write \.{diff}'s output to
                      + " " + static_cast<string>(hld_copy_name)
     + " > /dev/null; echo $? > " + static_cast<string>(val_file_name);
    if (DEBUG) 
-     cout << "Running " << system_string << endl << flush;
+     cout << "Running " << system_string << endl;
   system(system_string.c_str());
 
   ifstream val_stream;
@@ -666,15 +662,15 @@ result to a temporary file. Write \.{diff}'s output to
                   + static_cast<string>(hld_copy_name) 
                   + "; rm -f " + static_cast<string>(val_file_name);
   if (DEBUG)
-    cout << "Running: " << system_string << endl << flush;
+    cout << "Running: " << system_string << endl;
 
   system(system_string.c_str());
 
 
   if (DEBUG)
     {
-      cout << "return_value == " << return_value << endl << flush;
-      cout << "Exiting check_header_file()" << endl << flush;
+      cout << "return_value == " << return_value << endl;
+      cout << "Exiting check_header_file()" << endl;
     }
 #ifdef __GNUC__ 
   unlink(h_copy_name);
