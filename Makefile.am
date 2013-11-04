@@ -49,9 +49,13 @@
 
 ACLOCAL_AMFLAGS = -I m4
 
-SOURCEDIR     := src
+SOURCEDIR := src
+DOCDIR    := doc
+OLDDOCDIR := doc/old_doc
 
 export SOURCEDIR
+export DOCDIR
+export OLDDOCDIR
 
 vpath %.web $(SOURCEDIR)
 vpath %.h $(SOURCEDIR)
@@ -63,7 +67,7 @@ EXTRA_DIST = ChangeLog reconfig.sh
 
 .DELETE_ON_ERROR :
 
-SUBDIRS = $(SOURCEDIR) 
+SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) 
 
 
 .PHONY: dummy
