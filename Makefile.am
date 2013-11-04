@@ -1,5 +1,5 @@
-## Makefile.am
-# Created by Laurence Finston.
+#### Makefile.am
+#### Created by Laurence Finston.
    
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
 #### Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013 The Free Software Foundation
@@ -59,7 +59,7 @@ vpath %.c $(SOURCEDIR)
 vpath %.o $(SOURCEDIR)
 
 
-EXTRA_DIST = 00INFO 00NEWS 00README ChangeLog reconfig.sh
+EXTRA_DIST = ChangeLog reconfig.sh
 
 .DELETE_ON_ERROR :
 
