@@ -59,8 +59,9 @@ SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypidx.texi fdl.texi \
                    invoking.texi varidx.texi
 
 
-all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split
+EXTRA_DIST = 3dldf.ps 3dldf.pdf 3dldf.dvi 3dldf.html 3dldf.info $(SOURCES_MANUAL) 
 
+all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split
 
 .PHONY: dvi
 

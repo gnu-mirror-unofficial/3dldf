@@ -284,8 +284,9 @@ ACLOCAL_AMFLAGS = -I m4
 SOURCEDIR := src
 DOCDIR := doc
 OLDDOCDIR := doc/old_doc
+EXAMPLESDIR := examples
 EXTRA_DIST = ChangeLog reconfig.sh
-SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) 
+SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) $(EXAMPLESDIR)
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -745,6 +746,7 @@ uninstall-am:
 export SOURCEDIR
 export DOCDIR
 export OLDDOCDIR
+export EXAMPLESDIR
 
 vpath %.web $(SOURCEDIR)
 vpath %.h $(SOURCEDIR)
@@ -815,6 +817,7 @@ TAGS :
 
 query:
 	echo "libdir = $(libdir)"
+	echo "SOURCEDIR = $(SOURCEDIR)"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -270,7 +270,8 @@ EXTRA_DIST = Makefile.am Makefile.in 00INFO braik_03.ldf ellpln01.ldf \
 	     stlltn05.txt braik_01.txt dodec_03.ldf hyprb_01.ldf plyhd_05.ldf \
 	     rhmtrc_01.txt stlltns.lmc braik_02.ldf dodec_03.lmc hyprb_01.txt \
 	     polyrhyt.ldf ripple_1.ldf stlltns.txt braik_02.txt dodec_03.txt \
-	     hyprb_02.ldf polyrhyt.lmc ripple_1.txt strspr01.ldf
+	     hyprb_02.ldf polyrhyt.lmc ripple_1.txt strspr01.ldf \
+             pprcuts.ps pprcuts.pdf
 
 CLEANFILES := 
 all: all-am

@@ -53,9 +53,12 @@ SOURCEDIR := src
 DOCDIR    := doc
 OLDDOCDIR := doc/old_doc
 
+EXAMPLESDIR := examples
+
 export SOURCEDIR
 export DOCDIR
 export OLDDOCDIR
+export EXAMPLESDIR
 
 vpath %.web $(SOURCEDIR)
 vpath %.h $(SOURCEDIR)
@@ -67,7 +70,7 @@ EXTRA_DIST = ChangeLog reconfig.sh
 
 .DELETE_ON_ERROR :
 
-SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) 
+SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) $(EXAMPLESDIR)
 
 
 .PHONY: dummy
@@ -139,6 +142,7 @@ TAGS :
 
 query:
 	echo "libdir = $(libdir)"
+	echo "SOURCEDIR = $(SOURCEDIR)"
 
 ## Local Variables:
 ## mode:Makefile
