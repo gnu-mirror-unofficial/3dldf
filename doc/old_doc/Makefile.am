@@ -108,7 +108,7 @@ pdf: 3DLDF.pdf
 
 EXTRA_DIST = 3DLDF.ps 3DLDF.pdf 3DLDF.dvi \
               ChangeLog.dev $(3dldf_TEXINFOS) \
-              $(3dldf_EPS) $(3dldf_PNG) 3DLDF.pdf
+              $(3dldf_EPS) $(3dldf_PNG) 
 
 .PHONY : dummy
 dummy:
