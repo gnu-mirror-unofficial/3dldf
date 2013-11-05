@@ -67,6 +67,24 @@
 # ** (2) Variables.
 
 
+#### !! START HERE: LDF 2013.11.05.
+#### These cause errors.  LDF 2013.11.05.
+
+# 3dldf error
+
+
+
+# ps2pdf error
+# prbla_01.ldf
+# prbla_01.txt 
+
+#### These aren't needed at present.  LDF 2013.11.05.
+# stlltn05.txt
+# stlltn05.mp
+
+# The generated mp files need to be modified, so the mp files are included in
+# the distribution.  Check this!  LDF 2013.11.05.
+
 LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
              bldelem4.ldf bldelem5.ldf braik_01.ldf braik_02.ldf braik_03.ldf \
              chssbrds.ldf clktwr_01.ldf cones01.ldf cubd_01.ldf cubd_02.ldf \
@@ -76,12 +94,11 @@ LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
              grrhm_06.ldf hyprb_00.ldf hyprb_01.ldf hyprb_02.ldf hyprb_03.ldf \
              hyprb_04.ldf hyprb_05.ldf intrfr_2.ldf intrfr_3.ldf intrfr_5.ldf \
              intrfr_6.ldf intrfr_7.ldf kntpoly1.ldf plyhd_01.ldf plyhd_05.ldf \
-             polyrhyt.ldf pprcut01.ldf prbla_00.ldf prbla_01.ldf prbla_05.ldf \
+             polyrhyt.ldf pprcut01.ldf prbla_00.ldf prbla_05.ldf \
              prbla_06.ldf prbla_10.ldf prbla_11.ldf prbla_12.ldf rhmtrc_01.ldf \
              ripple_1.ldf ripple_2.ldf sphrmd01.ldf sphrmd02.ldf sphrmd03.ldf \
              stgrddc1.ldf stlltn01.ldf stlltn03.ldf strspr01.ldf sundl_01.ldf \
-             sundl_02.ldf sundl_03.ldf tngnts_1.ldf trchd_1.ldf wave_1.ldf \
-             wave_2.ldf
+             sundl_02.ldf sundl_03.ldf tngnts_1.ldf trchd_1.ldf
 
 TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
              bldelem5.txt braik_01.txt braik_02.txt braik_03.txt chssbrds.txt \
@@ -90,21 +107,18 @@ TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
              goboards.txt grrhm_06.txt hyprb_00.txt hyprb_01.txt \
              hyprb_02.txt intrfr_2.txt intrfr_3.txt intrfr_5.txt intrfr_6.txt \
              intrfr_7.txt kntpoly1.txt polyrhyt.txt pprcuts.txt prbla_00.txt \
-             prbla_01.txt prbla_05.txt prbla_06.txt prbla_10.txt prbla_11.txt \
+             prbla_05.txt prbla_06.txt prbla_10.txt prbla_11.txt \
              prbla_12.txt rhmtrc_01.txt ripple_1.txt ripple_2.txt sphrmd01.txt \
              sphrmd02.txt sphrmd03.txt stgrddc1.txt stlltn01.txt stlltn02.txt \
-             stlltn04.txt stlltn05.txt stlltns.txt strspr01.txt sundl_01.txt \
+             stlltn04.txt stlltns.txt strspr01.txt sundl_01.txt \
              sundl_02.txt sundl_03.txt tngnts_1.txt trchd_1.txt wave_1.txt \
              wave_2.txt
-
-
-# 
 
 LMC_FILES := bldelem0.lmc bldelem1.lmc bldelem2.lmc bldelem3.lmc bldelem4.lmc \
              bldelem5.lmc dodec_02.lmc dodec_03.lmc elpdmd01.lmc polyrhyt.lmc \
              rhmtrc_01.lmc sphrmd00.lmc stlltns.lmc sundl_03.lmc
 
-NON_GEN_MP_FILES := raster_0.mp stlltn02.mp stlltn04.mp stlltn05.mp wave_1.mp wave_2.mp
+NON_GEN_MP_FILES := raster_0.mp stlltn02.mp stlltn04.mp wave_1.mp wave_2.mp
 
 GEN_MP_FILES = $(LDF_FILES:.ldf=.mp)
 DVI_FILES = $(TEX_FILES:.txt=.dvi)
@@ -114,8 +128,15 @@ EPS_FILES = $(TEX_FILES:.txt=.[0-9]*) pprcut01.[0-9]*
 LOG_FILES = $(TEX_FILES:.txt=.log) pprcut01.log
 MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 
+#### !! PLEASE NOTE:  The output of 'wave_1.ldf' and 'wave_2.ldf' must be
+#### modified by hand, so they are not included in 'LDF_FILES', while 
+#### 'wave_1.mp' and 'wave_2.mp' _are_ included in 'NON_GEN_MP_FILES'!
+#### 'wave_1.ldf' and 'wave_2.ldf' are included in 'EXTRA_DIST'.
+####
+#### LDF 2013.11.05.
+
 EXTRA_DIST = $(LDF_FILES) $(TEX_FILES) $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in \
-             fmt8511.txt fmtdina4.txt
+             fmt8511.txt fmtdina4.txt wave_1.ldf wave_2.ldf
 
 CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES) \
               $(MPX_FILES) ldf_1.log
@@ -160,7 +181,11 @@ purge:
 %.mp : %.ldf
 	$(top_builddir)/src/3dldf $<
 
+
 #### **** (4) Extra prerequisites for DVI files
+
+stlltns.dvi: stlltns.txt stlltn01.1 stlltn02.1 stlltn03.1 stlltn04.1
+	$(TEX) $<
 
 bldelem1.dvi: bldelem1.txt bldelem1.1 fmt8511.txt fmtdina4.txt 
 
@@ -216,13 +241,23 @@ sundl_03.mp: sundl_03.ldf sundl_03.lmc
 
 #### **** (4)
 
+pprcuts.dvi: pprcuts.txt pprcut01.0
+	$(TEX) $<
+
+pprcut01.0: pprcut01.mp
+	mpost $<
+
+pprcut01.mp: pprcut01.ldf
+	$(top_builddir)/src/3dldf $<
+
 #### *** (3) Query
 
 .PHONY: query
 
 query:
-	@echo "EPS_FILES == $(EPS_FILES)"
+	@echo "TEX == $(TEX)"
 
+# @echo "EPS_FILES == $(EPS_FILES)"
 # @echo "CXXCOMPILE == $(CXXCOMPILE)"
 # @echo "SOURCEDIR == $(SOURCEDIR)"
 # @echo "top_builddir == $(top_builddir)"
