@@ -66,44 +66,57 @@
 
 # ** (2) Variables.
 
-EXTRA_DIST = Makefile.am Makefile.in 00INFO braik_03.ldf ellpln01.ldf \
-	     hyprb_02.txt polyrhyt.txt ripple_2.ldf strspr01.txt arc_1.ldf \
-	     braik_03.txt ellpln01.txt hyprb_03.ldf pprcut01.ldf ripple_2.txt \
-	     sundl_01.ldf arc_1.txt chssbrds.ldf elpdmd01.ldf hyprb_04.ldf \
-	     pprcuts.txt sphrmd00.lmc sundl_01.txt bldelem0.lmc chssbrds.txt \
-	     elpdmd01.lmc hyprb_05.ldf prbla_00.ldf sphrmd01.ldf sundl_02.ldf \
-	     bldelem1.ldf clktwr_01.ldf elpdmd01.txt intrfr_2.ldf prbla_00.txt \
-	     sphrmd01.txt sundl_02.txt bldelem1.lmc clktwr_01.txt elpsd_02.ldf \
-	     intrfr_2.txt prbla_01.ldf sphrmd02.ldf sundl_03.ldf bldelem1.txt \
-	     cones01.ldf elpsd_06.ldf intrfr_3.ldf prbla_01.txt sphrmd02.txt \
-	     sundl_03.lmc bldelem2.ldf conveps elpsd_13.ldf intrfr_3.txt \
-	     prbla_05.ldf sphrmd03.ldf sundl_03.txt bldelem2.lmc cubd_01.ldf \
-	     elpsd_17.ldf intrfr_5.ldf prbla_05.txt sphrmd03.txt tngnts_1.ldf \
-	     bldelem2.txt cubd_02.ldf fctcn01.ldf intrfr_5.txt prbla_06.ldf \
-	     stgrddc1.ldf tngnts_1.txt bldelem3.ldf cubd_06.ldf fctcn01.txt \
-	     intrfr_6.ldf prbla_06.txt stgrddc1.txt trchd_1.ldf bldelem3.lmc \
-	     cycld_1.ldf fmt8511.txt intrfr_6.txt prbla_10.ldf stlltn01.ldf \
-	     trchd_1.txt bldelem3.txt cycld_1.txt fmtdina4.txt intrfr_7.ldf \
-	     prbla_10.txt stlltn01.txt ttemp.el bldelem4.ldf cycld_2.ldf \
-	     goboards.ldf intrfr_7.txt prbla_11.ldf stlltn02.mp wave_1.ldf \
-	     bldelem4.lmc cycld_2.txt goboards.txt kntpoly1.ldf prbla_11.txt \
-	     stlltn02.txt wave_1.mp bldelem4.txt dodec_01.ldf grrhm_02.ldf \
-	     kntpoly1.txt prbla_12.ldf stlltn03.ldf wave_1.txt bldelem5.ldf \
-	     dodec_01.txt grrhm_06.ldf Makefile prbla_12.txt stlltn04.mp \
-	     wave_2.ldf bldelem5.lmc dodec_02.ldf grrhm_06.txt Makefile.am \
-	     raster_0.mp stlltn04.txt wave_2.mp bldelem5.txt dodec_02.lmc \
-	     hyprb_00.ldf Makefile.in rhmtrc_01.ldf stlltn05.mp wave_2.txt \
-	     braik_01.ldf dodec_02.txt hyprb_00.txt plyhd_01.ldf rhmtrc_01.lmc \
-	     stlltn05.txt braik_01.txt dodec_03.ldf hyprb_01.ldf plyhd_05.ldf \
-	     rhmtrc_01.txt stlltns.lmc braik_02.ldf dodec_03.lmc hyprb_01.txt \
-	     polyrhyt.ldf ripple_1.ldf stlltns.txt braik_02.txt dodec_03.txt \
-	     hyprb_02.ldf polyrhyt.lmc ripple_1.txt strspr01.ldf \
-             pprcuts.ps pprcuts.pdf
+
+LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
+             bldelem4.ldf bldelem5.ldf braik_01.ldf braik_02.ldf braik_03.ldf \
+             chssbrds.ldf clktwr_01.ldf cones01.ldf cubd_01.ldf cubd_02.ldf \
+             cubd_06.ldf cycld_1.ldf cycld_2.ldf dodec_01.ldf dodec_02.ldf \
+             dodec_03.ldf ellpln01.ldf elpdmd01.ldf elpsd_02.ldf elpsd_06.ldf \
+             elpsd_13.ldf elpsd_17.ldf fctcn01.ldf goboards.ldf grrhm_02.ldf \
+             grrhm_06.ldf hyprb_00.ldf hyprb_01.ldf hyprb_02.ldf hyprb_03.ldf \
+             hyprb_04.ldf hyprb_05.ldf intrfr_2.ldf intrfr_3.ldf intrfr_5.ldf \
+             intrfr_6.ldf intrfr_7.ldf kntpoly1.ldf plyhd_01.ldf plyhd_05.ldf \
+             polyrhyt.ldf pprcut01.ldf prbla_00.ldf prbla_01.ldf prbla_05.ldf \
+             prbla_06.ldf prbla_10.ldf prbla_11.ldf prbla_12.ldf rhmtrc_01.ldf \
+             ripple_1.ldf ripple_2.ldf sphrmd01.ldf sphrmd02.ldf sphrmd03.ldf \
+             stgrddc1.ldf stlltn01.ldf stlltn03.ldf strspr01.ldf sundl_01.ldf \
+             sundl_02.ldf sundl_03.ldf tngnts_1.ldf trchd_1.ldf wave_1.ldf \
+             wave_2.ldf
+
+TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
+             bldelem5.txt braik_01.txt braik_02.txt braik_03.txt chssbrds.txt \
+             clktwr_01.txt cycld_1.txt cycld_2.txt dodec_01.txt dodec_02.txt \
+             dodec_03.txt ellpln01.txt elpdmd01.txt fctcn01.txt fmt8511.txt \
+             fmtdina4.txt goboards.txt grrhm_06.txt hyprb_00.txt hyprb_01.txt \
+             hyprb_02.txt intrfr_2.txt intrfr_3.txt intrfr_5.txt intrfr_6.txt \
+             intrfr_7.txt kntpoly1.txt polyrhyt.txt pprcuts.txt prbla_00.txt \
+             prbla_01.txt prbla_05.txt prbla_06.txt prbla_10.txt prbla_11.txt \
+             prbla_12.txt rhmtrc_01.txt ripple_1.txt ripple_2.txt sphrmd01.txt \
+             sphrmd02.txt sphrmd03.txt stgrddc1.txt stlltn01.txt stlltn02.txt \
+             stlltn04.txt stlltn05.txt stlltns.txt strspr01.txt sundl_01.txt \
+             sundl_02.txt sundl_03.txt tngnts_1.txt trchd_1.txt wave_1.txt \
+             wave_2.txt
 
 
+LMC_FILES := bldelem0.lmc bldelem1.lmc bldelem2.lmc bldelem3.lmc bldelem4.lmc \
+             bldelem5.lmc dodec_02.lmc dodec_03.lmc elpdmd01.lmc polyrhyt.lmc \
+             rhmtrc_01.lmc sphrmd00.lmc stlltns.lmc sundl_03.lmc
 
-CLEANFILES := 
+NON_GEN_MP_FILES := raster_0.mp stlltn02.mp stlltn04.mp stlltn05.mp wave_1.mp wave_2.mp
 
+GEN_MP_FILES = $(LDF_FILES:.ldf=.mp)
+DVI_FILES = $(TEX_FILES:.txt=.dvi)
+PS_FILES = $(TEX_FILES:.txt=.ps)
+PDF_FILES = $(TEX_FILES:.txt=.pdf)
+EPS_FILES = $(TEX_FILES:.txt=.[0-9]*) pprcut01.[0-9]*
+LOG_FILES = $(TEX_FILES:.txt=.log) pprcut01.log
+MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
+
+
+EXTRA_DIST = $(LDF_FILES) $(TEX_FILES) $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in 
+
+CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES) \
+              $(MPX_FILES) ldf_1.log
 
 
 #### ** (2) Rules
@@ -112,176 +125,62 @@ CLEANFILES :=
 
 # .PHONY: all
 
-# all: $(PS_FILES) $(PDF_FILES) $(PS_ZIP_FILES) $(PDF_ZIP_FILES) \
-#                  pprcuts.ps.gz pprcuts.ps.gz pprcuts.pdf.gz pprcuts.pdf.gz \
-#                  stlltns.ps.gz stlltns.ps.gz stlltns.pdf.gz stlltns.pdf.gz
+all: $(PS_FILES) $(PDF_FILES) 
 
+clean-local: 
+	rm -f $(EPS_FILES) 
 
-# #### Papercuts --- pprcuts
+.PRECIOUS : %.mp %.dvi %.ps
 
-.PHONY: pprcuts
+%.pdf : %.ps
+	ps2pdf $<
 
-pprcut01.1 pprcut01.2 pprcut01.3 pprcut01.4: pprcut01.mp
-	mpost pprcut01.mp
+%.ps : %.dvi
+	dvips -o $@ $<
 
-pprcut01.mp: pprcut01.ldf
-	$(top_builddir)/src/3dldf pprcut01.ldf
+%.dvi : %.txt %.1
+	tex $<
 
-pprcuts.dvi: pprcut01.1 pprcut01.2 pprcut01.3 pprcut01.4 pprcuts.txt
-	tex pprcuts.txt
+%.1 : %.mp
+	mpost $<
 
-pprcuts.ps: pprcuts.dvi
-	dvips -o pprcuts.ps pprcuts.dvi
+%.mp : %.ldf
+	$(top_builddir)/src/3dldf $<
 
-pprcuts.pdf: pprcuts.ps
-	ps2pdf pprcuts.ps
+bldelem1.mp: bldelem1.ldf bldelem1.lmc 
 
-# #### Stellation Patterns --- stllns
+bldelem2.mp: bldelem2.ldf bldelem1.lmc 
 
-# .PHONY: stlltns
+bldelem4.mp: bldelem4.ldf bldelem1.lmc 
 
-# stlltns: stlltns.ps stlltns.ps.gz stlltns.pdf stlltns.pdf.gz 
-# 	mv stlltns.ps stlltns.ps.gz stlltns.pdf stlltns.pdf.gz ../graphics
-# #	cd ../graphics && cvs commit -m "Edited." stlltns.ps stlltns.ps.gz stlltns.pdf stlltns.pdf.gz 
+bldelem5.mp: bldelem5.ldf bldelem0.lmc
 
-# #### 'stlltn02.mp' and 'stlltn04.mp' are special:  they were written by hand, i.e., 
-# #### there are no `.ldf' files.  
-# #### LDF 2010.09.10.
-# #### LDF 2011.01.05.
+bldelem2.mp: bldelem2.ldf bldelem1.lmc bldelem2.lmc
 
-# stlltn01.1: stlltn01.mp
-# 	mpost stlltn01.mp
+bldelem3.mp: bldelem3.ldf bldelem3.lmc bldelem1.lmc
 
-# stlltn02.1: stlltn02.mp
-# 	mpost stlltn02.mp
+bldelem4.mp: bldelem4.ldf bldelem1.lmc bldelem3.lmc
 
-# stlltn03.1: stlltn03.mp
-# 	mpost stlltn03.mp
+bldelem5.mp: bldelem5.ldf bldelem5.lmc
 
-# stlltn04.1: stlltn04.mp
-# 	mpost stlltn04.mp
-
-# stlltn01.mp: stlltn01.ldf
-# 	./3dldf stlltn01.ldf
-
-# stlltn03.mp: stlltn03.ldf
-# 	./3dldf stlltn03.ldf
-
-# stlltns.dvi: stlltn01.1 stlltn02.1 stlltn03.1 stlltn04.1 stlltns.txt
-# 	tex stlltns.txt
-
-# stlltns.ps: stlltns.dvi
-# 	dvips -o stlltns.ps stlltns.dvi
-
-# stlltns.pdf: stlltns.ps
-# 	ps2pdf stlltns.ps
-
-# stlltns.ps.gz: stlltns.ps
-# 	cp $< stlltns.ps.TEMP
-# 	gzip $< 
-# 	mv stlltns.ps.TEMP $<
-# 	touch $@ 
-
-# stlltns.pdf.gz: stlltns.pdf
-# 	cp $< stlltns.pdf.TEMP
-# 	gzip $< 
-# 	mv stlltns.pdf.TEMP $<
-# 	touch $@ 
-
-
-# bldelem1.mp: bldelem1.ldf bldelem1.lmc
-# 	./3dldf bldelem1.ldf
-
-# bldelem1.0: bldelem1.mp
-# 	mpost bldelem1.mp
-
-# bldelem1.dvi: bldelem1.0 bldelem1.txt fmt8511.txt fmtdina4.txt
-# 	tex '\def\FMT{DINAFOURPORTRAIT}' '\input bldelem1.txt' && tex '\def\FMT{DINAFOURPORTRAIT}' \
-#              '\input bldelem1.txt' 
-
-
-
-# bldelem2.mp: bldelem2.ldf bldelem2.lmc
-# 	./3dldf bldelem2.ldf
-
-# bldelem2.0: bldelem2.mp
-# 	mpost bldelem2.mp
-
-# bldelem2.dvi: bldelem2.0 bldelem2.txt fmt8511.txt fmtdina4.txt
-# 	tex '\def\FMT{DINAFOURPORTRAIT}' '\input bldelem2.txt' && tex '\def\FMT{DINAFOURPORTRAIT}' \
-#              '\input bldelem2.txt' 
-
-
-# bldelem3.mp: bldelem3.ldf bldelem3.lmc
-# 	./3dldf bldelem3.ldf
-
-# bldelem3.0: bldelem3.mp
-# 	mpost bldelem3.mp
-
-# bldelem3.dvi: bldelem3.0 bldelem3.txt fmt8511.txt fmtdina4.txt
-# 	tex '\def\FMT{DINAFOURPORTRAIT}' '\input bldelem3.txt' && tex '\def\FMT{DINAFOURPORTRAIT}' \
-#              '\input bldelem3.txt' 
-
-# bldelem4.mp: bldelem4.ldf bldelem4.lmc
-# 	./3dldf bldelem4.ldf
-
-# bldelem4.0: bldelem4.mp
-# 	mpost bldelem4.mp
-
-# bldelem4.dvi: bldelem4.0 bldelem4.txt fmt8511.txt fmtdina4.txt
-# 	tex '\def\FMT{DINAFOURPORTRAIT}' '\input bldelem4.txt' && tex '\def\FMT{DINAFOURPORTRAIT}' \
-#              '\input bldelem4.txt' 
-
-# bldelem5.mp: bldelem5.ldf bldelem5.lmc
-# 	./3dldf bldelem5.ldf
-
-# bldelem5.0: bldelem5.mp
-# 	mpost bldelem5.mp
-
-# bldelem5.dvi: bldelem5.0 bldelem5.txt fmt8511.txt fmtdina4.txt
-# 	tex '\def\FMT{DINAFOURPORTRAIT}' '\input bldelem5.txt' && tex '\def\FMT{DINAFOURPORTRAIT}' \
-#              '\input bldelem5.txt' 
-
-
-
-
-# .PHONY : bldelem1
-
-# bldelem1: bldelem1.ps bldelem1.ps.gz bldelem1.pdf bldelem1.pdf.gz
-# 	mv $^ ../graphics; cd ../graphics/; cvs commit -m "Edited." $^
-
-# .PHONY : bldelem2
-
-# bldelem2: bldelem2.ps bldelem2.ps.gz bldelem2.pdf bldelem2.pdf.gz
-# 	mv $^ ../graphics; cd ../graphics/; cvs commit -m "Edited." $^
-
-# .PHONY : bldelem3
-
-# bldelem3: bldelem3.ps bldelem3.ps.gz bldelem3.pdf bldelem3.pdf.gz
-# 	mv $^ ../graphics; cd ../graphics/; cvs commit -m "Edited." $^
-
-# .PHONY : bldelem4
-
-# bldelem4: bldelem4.ps bldelem4.ps.gz bldelem4.pdf bldelem4.pdf.gz
-# 	mv $^ ../graphics; cd ../graphics/; cvs commit -m "Edited." $^
-
-# .PHONY : bldelem5
-
-# bldelem5: bldelem5.ps bldelem5.ps.gz bldelem5.pdf bldelem5.pdf.gz
-# 	mv $^ ../graphics; cd ../graphics/; cvs commit -m "Edited." $^
-
-
-
-
+# dodec_02.lmc 
+# dodec_03.lmc 
+# elpdmd01.lmc 
+# polyrhyt.lmc 
+# rhmtrc_01.lmc 
+# sphrmd00.lmc 
+# stlltns.lmc 
+# sundl_03.lmc
 
 
 .PHONY: query
 
 query:
-	@echo "CXXCOMPILE == $(CXXCOMPILE)"
-	@echo "SOURCEDIR == $(SOURCEDIR)"
-	@echo "top_builddir == $(top_builddir)"
+	@echo "EPS_FILES == $(EPS_FILES)"
 
+# @echo "CXXCOMPILE == $(CXXCOMPILE)"
+# @echo "SOURCEDIR == $(SOURCEDIR)"
+# @echo "top_builddir == $(top_builddir)"
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
 # @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
 # @echo "CLEANFILES == $(CLEANFILES)"
