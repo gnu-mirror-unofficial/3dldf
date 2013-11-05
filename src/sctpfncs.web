@@ -2580,6 +2580,7 @@ Added this section.
 
 @<Define |Scanner_Type| functions@>=
 
+   bool clear_bool_ptr_new = false;
 
    if (clear_ptr == 0)
      {
@@ -2596,6 +2597,8 @@ Added this section.
        clear_bool_ptr = new bool;
        *clear_bool_ptr = false;
 
+       clear_bool_ptr_new = true;
+
      } /* |if (clear_ptr == 0)|  */
    
 
@@ -2607,8 +2610,7 @@ Added this section.
 
 
    else /* (|clear_ptr != 0|)  */
-     
-     {
+   {
        clear_bool_ptr = static_cast<bool*>(clear_ptr); 
 
 @q ***** (5) Error handling:  |clear_ptr != 0 && *clear_bool_ptr != true|.@>
@@ -2668,9 +2670,6 @@ because it's annoying.
      }         /* |else| (|*clear_bool_ptr == true|) */
 
  } /* |else| (|clear_ptr != 0|)  */
-
-
-   
 
 
 @q *** (3) Detach |entry_picture| if |*clear_bool_ptr == true|, otherwise copy it.@>
@@ -2923,11 +2922,20 @@ I set |clear_ptr| to 0.  This was a typo.
 \initials{LDF 2010.10.08.}
 Now checking if |clear_bool_ptr| is non-null before deleting.  Of course, if it's non-null
 but doesn't point to a valid object, this will cause a segmentation fault.
+
+\initials{LDF 2013.11.05.}
+@:BUG FIX@> BUG FIX:  Now only deleting |clear_bool_ptr| if memory has been allocated 
+for it above.  @:TODO@> !! TODO:  This isn't ideal.  The problem can probably be solved
+in a better way.  However, I will have to review this function.  
+The call to |delete| caused the following error:\hfil\break 
+\.{*** glibc detected *** 3dldf: free(): invalid pointer: 0x0000000000c991a0 ***}\hfil\break 
+Previously, it worked, so apparently it's a matter of the run-time system checking more 
+carefully than it had in the past.
 \ENDLOG 
 
 @<Define |Scanner_Type| functions@>=
 
-   if (clear_bool_ptr)   
+   if (clear_bool_ptr && clear_bool_ptr_new)   
       delete clear_bool_ptr;
 
    clear_bool_ptr = 0;
