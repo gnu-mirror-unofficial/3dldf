@@ -1,7 +1,6 @@
 %%%% stlltn05.mp
 %%%% Created by Laurence D. Finston (LDF) Thu Jan  6 13:11:35 CET 2011
 
-%%%% $Id: stlltn05.mp,v 1.5 2013/06/05 16:44:56 lfinsto1 Exp $
 
 %% DO NOT DELETE!  It was written by hand, _not_ generated!  
 %% LDF 2011.01.05.

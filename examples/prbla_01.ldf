@@ -109,7 +109,6 @@ cv += magenta;
 
 beginfig(1);
 
-
 parabola p;
 
 path q[];
@@ -199,12 +198,20 @@ fi;
 
 endfig with_projection parallel_x_y;
 
+message "save_picture:";
+show save_picture;
+pause;
+
 beginfig(2); 
 output save_picture with_projection parallel_x_y;
 if false: 
    label.rt("{\large Parallel Projection, X-Y Plane}", (0, -8));
 fi; 
 endfig with_projection parallel_x_y;
+
+message "save_picture:";
+show save_picture;
+pause;
 
 beginfig(3); 
 output save_picture with_projection parallel_x_z;
@@ -213,12 +220,20 @@ if false:
 fi; 
 endfig with_projection parallel_x_y;
 
+message "save_picture:";
+show save_picture;
+pause;
+
 beginfig(4); 
 output save_picture with_projection parallel_z_y;
 if false: 
    label("{\large Parallel Projection, Z-Y Plane}", (0, -8));
 fi; 
 endfig with_projection parallel_x_y;
+
+message "save_picture:";
+show save_picture;
+pause;
 
 verbatim_metapost "end";
 

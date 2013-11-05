@@ -55,9 +55,8 @@
 #### $^:  The names of all the prerequisites, with spaces between them.
 
 SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypidx.texi fdl.texi \
-                   funcidx.texi getstart.texi install.texi intro.texi \
+                   funcidx.texi getstart.texi gpl.texi install.texi intro.texi \
                    invoking.texi varidx.texi
-
 
 EXTRA_DIST = 3dldf.ps 3dldf.pdf 3dldf.dvi 3dldf.html 3dldf.info $(SOURCES_MANUAL) 
 

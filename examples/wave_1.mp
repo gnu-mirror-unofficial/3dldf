@@ -1,57 +1,6 @@
 %%%% wave_1.mp.
-%%%% Generated on Fri Oct 15 17:32:26 2010
-%%%% from wave_1.ldf by GNU 3DLDF 1.2.0.
-
-%% DO NOT DELETE!
-%%%% Modified by hand.  LDF 2010.10.15.
-
-%% * (1) Copyright and License.
-
-%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-%%%% Copyright (C) 2010, 2011, 2012, 2013 The Free Software Foundation 
-
-%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
-%%%% it under the terms of the GNU General Public License as published by 
-%%%% the Free Software Foundation; either version 3 of the License, or 
-%%%% (at your option) any later version. 
-
-%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
-%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
-%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-%%%% GNU General Public License for more details. 
-
-%%%% You should have received a copy of the GNU General Public License 
-%%%% along with GNU 3DLDF; if not, write to the Free Software 
-%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-%%%% GNU 3DLDF is a GNU package.  
-%%%% It is part of the GNU Project of the  
-%%%% Free Software Foundation 
-%%%% and is published under the GNU General Public License. 
-%%%% See the website http://www.gnu.org 
-%%%% for more information.   
-%%%% GNU 3DLDF is available for downloading from 
-%%%% http://www.gnu.org/software/3dldf/LDF.html. 
-
-%%%% Please send bug reports to Laurence.Finston@gmx.de
-%%%% The mailing list help-3dldf@gnu.org is available for people to 
-%%%% ask other users for help.  
-%%%% The mailing list info-3dldf@gnu.org is for the maintainer of 
-%%%% GNU 3DLDF to send announcements to users. 
-%%%% To subscribe to these mailing lists, send an 
-%%%% email with ``subscribe <email-address>'' as the subject.  
-
-%%%% The author can be contacted at: 
-
-%%%% Laurence D. Finston 
-%%%% c/o The Free Software Foundation, Inc.
-%%%% 51 Franklin St, Fifth Floor 
-%%%% Boston, MA  02110-1301 
-%%%% USA 
-
-%%%% Laurence.Finston@gmx.de 
-
-
+%%%% Generated on Tue Nov  5 15:06:15 2013
+%%%% from wave_1.ldf by GNU 3DLDF 2.0.
 
 beginfig(0);
 draw (0.000000cm, -16.000000cm) -- (32.000000cm, -16.000000cm)
@@ -65,10 +14,6 @@ withpen pencircle transformed begingroup; save T; transform T;
 endfig;
 
 beginfig(1);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.744107cm)
    .. (1.000000cm, 1.374930cm) .. (1.500000cm, 1.796432cm)
    .. (2.000000cm, 1.944444cm) .. (2.500000cm, 1.796432cm)
@@ -93,48 +38,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-beginfig(144);
-draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.744107cm)
-   .. (1.000000cm, 1.374930cm) .. (1.500000cm, 1.796432cm)
-   .. (2.000000cm, 1.944444cm) .. (2.500000cm, 1.796432cm)
-   .. (3.000000cm, 1.374930cm) .. (3.500000cm, 0.744107cm)
-   .. (4.000000cm, 0.000000cm) .. (4.500000cm, -0.744107cm)
-   .. (5.000000cm, -1.374930cm) .. (5.500000cm, -1.796432cm)
-   .. (6.000000cm, -1.944444cm) .. (6.500000cm, -1.796432cm)
-   .. (7.000000cm, -1.374930cm) .. (7.500000cm, -0.744107cm)
-   .. (8.000000cm, 0.000000cm) .. (8.500000cm, 0.744107cm)
-   .. (9.000000cm, 1.374930cm) .. (9.500000cm, 1.796432cm)
-   .. (10.000000cm, 1.944444cm) .. (10.500000cm, 1.796432cm)
-   .. (11.000000cm, 1.374930cm) .. (11.500000cm, 0.744107cm)
-   .. (12.000000cm, 0.000000cm) .. (12.500000cm, -0.744107cm)
-   .. (13.000000cm, -1.374930cm) .. (13.500000cm, -1.796432cm)
-   .. (14.000000cm, -1.944444cm) .. (14.500000cm, -1.796432cm)
-   .. (15.000000cm, -1.374930cm) .. (15.500000cm, -0.744107cm)
-   .. (16.000000cm, 0.000000cm) .. (16.500000cm, 0.744107cm)
-   .. (17.000000cm, 1.374930cm) .. (17.500000cm, 1.796432cm)
-   .. (18.000000cm, 1.944444cm)
-withcolor (0.000000, 0.000000, 0.000000) 
-withpen pencircle transformed begingroup; save T; transform T;
- xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
- yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
- ;
-
-endfig;
-
-
-
 beginfig(143);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.744107cm)
    .. (1.000000cm, 1.374930cm) .. (1.500000cm, 1.796432cm)
    .. (2.000000cm, 1.944444cm) .. (2.500000cm, 1.796432cm)
@@ -159,14 +68,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(2);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -196,19 +102,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(142);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.722846cm)
    .. (1.000000cm, 1.335646cm) .. (1.500000cm, 1.745106cm)
    .. (2.000000cm, 1.888889cm) .. (2.500000cm, 1.745106cm)
@@ -233,14 +132,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(3);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -270,19 +166,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(141);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.701586cm)
    .. (1.000000cm, 1.296362cm) .. (1.500000cm, 1.693779cm)
    .. (2.000000cm, 1.833333cm) .. (2.500000cm, 1.693779cm)
@@ -307,14 +196,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(4);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -344,19 +230,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(140);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.680326cm)
    .. (1.000000cm, 1.257079cm) .. (1.500000cm, 1.642453cm)
    .. (2.000000cm, 1.777778cm) .. (2.500000cm, 1.642453cm)
@@ -381,14 +260,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(5);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -418,19 +294,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(139);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.659066cm)
    .. (1.000000cm, 1.217795cm) .. (1.500000cm, 1.591126cm)
    .. (2.000000cm, 1.722222cm) .. (2.500000cm, 1.591126cm)
@@ -455,14 +324,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(6);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -492,19 +358,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(138);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.637806cm)
    .. (1.000000cm, 1.178511cm) .. (1.500000cm, 1.539799cm)
    .. (2.000000cm, 1.666667cm) .. (2.500000cm, 1.539799cm)
@@ -529,14 +388,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(7);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -566,19 +422,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(137);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.616546cm)
    .. (1.000000cm, 1.139228cm) .. (1.500000cm, 1.488473cm)
    .. (2.000000cm, 1.611111cm) .. (2.500000cm, 1.488473cm)
@@ -603,14 +452,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(8);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -640,19 +486,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(136);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.595285cm)
    .. (1.000000cm, 1.099944cm) .. (1.500000cm, 1.437146cm)
    .. (2.000000cm, 1.555556cm) .. (2.500000cm, 1.437146cm)
@@ -677,14 +516,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(9);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -714,19 +550,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(135);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.574025cm)
    .. (1.000000cm, 1.060660cm) .. (1.500000cm, 1.385819cm)
    .. (2.000000cm, 1.500000cm) .. (2.500000cm, 1.385819cm)
@@ -751,14 +580,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(10);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -788,19 +614,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(134);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.552765cm)
    .. (1.000000cm, 1.021376cm) .. (1.500000cm, 1.334493cm)
    .. (2.000000cm, 1.444444cm) .. (2.500000cm, 1.334493cm)
@@ -825,14 +644,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(11);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -862,19 +678,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(133);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.531505cm)
    .. (1.000000cm, 0.982093cm) .. (1.500000cm, 1.283166cm)
    .. (2.000000cm, 1.388889cm) .. (2.500000cm, 1.283166cm)
@@ -899,14 +708,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(12);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -936,19 +742,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(132);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.510245cm)
    .. (1.000000cm, 0.942809cm) .. (1.500000cm, 1.231839cm)
    .. (2.000000cm, 1.333333cm) .. (2.500000cm, 1.231839cm)
@@ -973,14 +772,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(13);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1010,19 +806,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(131);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.488984cm)
    .. (1.000000cm, 0.903525cm) .. (1.500000cm, 1.180513cm)
    .. (2.000000cm, 1.277778cm) .. (2.500000cm, 1.180513cm)
@@ -1047,14 +836,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(14);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1084,19 +870,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(130);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.467724cm)
    .. (1.000000cm, 0.864242cm) .. (1.500000cm, 1.129186cm)
    .. (2.000000cm, 1.222222cm) .. (2.500000cm, 1.129186cm)
@@ -1121,14 +900,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(15);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1158,19 +934,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(129);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.446464cm)
    .. (1.000000cm, 0.824958cm) .. (1.500000cm, 1.077859cm)
    .. (2.000000cm, 1.166667cm) .. (2.500000cm, 1.077859cm)
@@ -1195,14 +964,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(16);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1232,19 +998,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(128);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.425204cm)
    .. (1.000000cm, 0.785674cm) .. (1.500000cm, 1.026533cm)
    .. (2.000000cm, 1.111111cm) .. (2.500000cm, 1.026533cm)
@@ -1269,14 +1028,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(17);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1306,19 +1062,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(127);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.403944cm)
    .. (1.000000cm, 0.746390cm) .. (1.500000cm, 0.975206cm)
    .. (2.000000cm, 1.055556cm) .. (2.500000cm, 0.975206cm)
@@ -1343,14 +1092,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(18);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1380,19 +1126,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(126);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.382683cm)
    .. (1.000000cm, 0.707107cm) .. (1.500000cm, 0.923880cm)
    .. (2.000000cm, 1.000000cm) .. (2.500000cm, 0.923880cm)
@@ -1417,14 +1156,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(19);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1454,19 +1190,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(125);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.361423cm)
    .. (1.000000cm, 0.667823cm) .. (1.500000cm, 0.872553cm)
    .. (2.000000cm, 0.944444cm) .. (2.500000cm, 0.872553cm)
@@ -1491,14 +1220,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(20);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1528,19 +1254,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(124);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.340163cm)
    .. (1.000000cm, 0.628539cm) .. (1.500000cm, 0.821226cm)
    .. (2.000000cm, 0.888889cm) .. (2.500000cm, 0.821226cm)
@@ -1565,14 +1284,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(21);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1602,19 +1318,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(123);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.318903cm)
    .. (1.000000cm, 0.589256cm) .. (1.500000cm, 0.769900cm)
    .. (2.000000cm, 0.833333cm) .. (2.500000cm, 0.769900cm)
@@ -1639,14 +1348,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(22);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1676,19 +1382,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(122);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.297643cm)
    .. (1.000000cm, 0.549972cm) .. (1.500000cm, 0.718573cm)
    .. (2.000000cm, 0.777778cm) .. (2.500000cm, 0.718573cm)
@@ -1713,14 +1412,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(23);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1750,19 +1446,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(121);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.276382cm)
    .. (1.000000cm, 0.510688cm) .. (1.500000cm, 0.667246cm)
    .. (2.000000cm, 0.722222cm) .. (2.500000cm, 0.667246cm)
@@ -1787,14 +1476,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(24);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1824,19 +1510,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(120);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.255122cm)
    .. (1.000000cm, 0.471405cm) .. (1.500000cm, 0.615920cm)
    .. (2.000000cm, 0.666667cm) .. (2.500000cm, 0.615920cm)
@@ -1861,14 +1540,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(25);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1898,19 +1574,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(119);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.233862cm)
    .. (1.000000cm, 0.432121cm) .. (1.500000cm, 0.564593cm)
    .. (2.000000cm, 0.611111cm) .. (2.500000cm, 0.564593cm)
@@ -1935,14 +1604,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(26);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -1972,19 +1638,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(118);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.212602cm)
    .. (1.000000cm, 0.392837cm) .. (1.500000cm, 0.513266cm)
    .. (2.000000cm, 0.555556cm) .. (2.500000cm, 0.513266cm)
@@ -2009,14 +1668,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(27);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2046,19 +1702,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(117);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.191342cm)
    .. (1.000000cm, 0.353553cm) .. (1.500000cm, 0.461940cm)
    .. (2.000000cm, 0.500000cm) .. (2.500000cm, 0.461940cm)
@@ -2083,14 +1732,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(28);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2120,19 +1766,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(116);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.170082cm)
    .. (1.000000cm, 0.314270cm) .. (1.500000cm, 0.410613cm)
    .. (2.000000cm, 0.444444cm) .. (2.500000cm, 0.410613cm)
@@ -2157,14 +1796,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(29);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2194,19 +1830,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(115);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.148821cm)
    .. (1.000000cm, 0.274986cm) .. (1.500000cm, 0.359286cm)
    .. (2.000000cm, 0.388889cm) .. (2.500000cm, 0.359286cm)
@@ -2231,14 +1860,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(30);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2268,19 +1894,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(114);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.127561cm)
    .. (1.000000cm, 0.235702cm) .. (1.500000cm, 0.307960cm)
    .. (2.000000cm, 0.333333cm) .. (2.500000cm, 0.307960cm)
@@ -2305,14 +1924,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(31);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2342,19 +1958,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(113);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.106301cm)
    .. (1.000000cm, 0.196419cm) .. (1.500000cm, 0.256633cm)
    .. (2.000000cm, 0.277778cm) .. (2.500000cm, 0.256633cm)
@@ -2379,14 +1988,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(32);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2416,19 +2022,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(112);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.085041cm)
    .. (1.000000cm, 0.157135cm) .. (1.500000cm, 0.205307cm)
    .. (2.000000cm, 0.222222cm) .. (2.500000cm, 0.205307cm)
@@ -2453,14 +2052,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(33);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2490,19 +2086,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(111);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.063781cm)
    .. (1.000000cm, 0.117851cm) .. (1.500000cm, 0.153980cm)
    .. (2.000000cm, 0.166667cm) .. (2.500000cm, 0.153980cm)
@@ -2527,14 +2116,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(34);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2564,19 +2150,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(110);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.042520cm)
    .. (1.000000cm, 0.078567cm) .. (1.500000cm, 0.102653cm)
    .. (2.000000cm, 0.111111cm) .. (2.500000cm, 0.102653cm)
@@ -2601,14 +2180,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(35);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2638,19 +2214,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(109);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.021260cm)
    .. (1.000000cm, 0.039284cm) .. (1.500000cm, 0.051327cm)
    .. (2.000000cm, 0.055556cm) .. (2.500000cm, 0.051327cm)
@@ -2675,14 +2244,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(36);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2712,19 +2278,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(108);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, 0.000000cm) .. (0.500000cm, 0.000000cm)
    .. (1.000000cm, 0.000000cm) .. (1.500000cm, 0.000000cm)
    .. (2.000000cm, 0.000000cm) .. (2.500000cm, 0.000000cm)
@@ -2749,14 +2308,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(37);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2786,19 +2342,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(107);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.021260cm)
    .. (1.000000cm, -0.039284cm) .. (1.500000cm, -0.051327cm)
    .. (2.000000cm, -0.055556cm) .. (2.500000cm, -0.051327cm)
@@ -2823,14 +2372,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(38);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2860,19 +2406,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(106);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.042520cm)
    .. (1.000000cm, -0.078567cm) .. (1.500000cm, -0.102653cm)
    .. (2.000000cm, -0.111111cm) .. (2.500000cm, -0.102653cm)
@@ -2897,14 +2436,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(39);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -2934,19 +2470,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(105);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.063781cm)
    .. (1.000000cm, -0.117851cm) .. (1.500000cm, -0.153980cm)
    .. (2.000000cm, -0.166667cm) .. (2.500000cm, -0.153980cm)
@@ -2971,14 +2500,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(40);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3008,19 +2534,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(104);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.085041cm)
    .. (1.000000cm, -0.157135cm) .. (1.500000cm, -0.205307cm)
    .. (2.000000cm, -0.222222cm) .. (2.500000cm, -0.205307cm)
@@ -3045,14 +2564,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(41);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3082,19 +2598,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(103);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.106301cm)
    .. (1.000000cm, -0.196419cm) .. (1.500000cm, -0.256633cm)
    .. (2.000000cm, -0.277778cm) .. (2.500000cm, -0.256633cm)
@@ -3119,14 +2628,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(42);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3156,19 +2662,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(102);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.127561cm)
    .. (1.000000cm, -0.235702cm) .. (1.500000cm, -0.307960cm)
    .. (2.000000cm, -0.333333cm) .. (2.500000cm, -0.307960cm)
@@ -3193,14 +2692,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(43);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3230,19 +2726,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(101);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.148821cm)
    .. (1.000000cm, -0.274986cm) .. (1.500000cm, -0.359286cm)
    .. (2.000000cm, -0.388889cm) .. (2.500000cm, -0.359286cm)
@@ -3267,14 +2756,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(44);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3304,19 +2790,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(100);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.170082cm)
    .. (1.000000cm, -0.314270cm) .. (1.500000cm, -0.410613cm)
    .. (2.000000cm, -0.444444cm) .. (2.500000cm, -0.410613cm)
@@ -3341,14 +2820,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(45);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3378,19 +2854,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(99);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.191342cm)
    .. (1.000000cm, -0.353553cm) .. (1.500000cm, -0.461940cm)
    .. (2.000000cm, -0.500000cm) .. (2.500000cm, -0.461940cm)
@@ -3415,14 +2884,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(46);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3452,19 +2918,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(98);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.212602cm)
    .. (1.000000cm, -0.392837cm) .. (1.500000cm, -0.513266cm)
    .. (2.000000cm, -0.555556cm) .. (2.500000cm, -0.513266cm)
@@ -3489,14 +2948,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(47);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3526,19 +2982,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(97);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.233862cm)
    .. (1.000000cm, -0.432121cm) .. (1.500000cm, -0.564593cm)
    .. (2.000000cm, -0.611111cm) .. (2.500000cm, -0.564593cm)
@@ -3563,14 +3012,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(48);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3600,19 +3046,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(96);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.255122cm)
    .. (1.000000cm, -0.471405cm) .. (1.500000cm, -0.615920cm)
    .. (2.000000cm, -0.666667cm) .. (2.500000cm, -0.615920cm)
@@ -3637,14 +3076,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(49);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3674,19 +3110,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(95);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.276382cm)
    .. (1.000000cm, -0.510688cm) .. (1.500000cm, -0.667246cm)
    .. (2.000000cm, -0.722222cm) .. (2.500000cm, -0.667246cm)
@@ -3711,14 +3140,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(50);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3748,19 +3174,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(94);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.297643cm)
    .. (1.000000cm, -0.549972cm) .. (1.500000cm, -0.718573cm)
    .. (2.000000cm, -0.777778cm) .. (2.500000cm, -0.718573cm)
@@ -3785,14 +3204,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(51);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3822,19 +3238,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(93);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.318903cm)
    .. (1.000000cm, -0.589256cm) .. (1.500000cm, -0.769900cm)
    .. (2.000000cm, -0.833333cm) .. (2.500000cm, -0.769900cm)
@@ -3859,14 +3268,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(52);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3896,19 +3302,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(92);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.340163cm)
    .. (1.000000cm, -0.628539cm) .. (1.500000cm, -0.821226cm)
    .. (2.000000cm, -0.888889cm) .. (2.500000cm, -0.821226cm)
@@ -3933,14 +3332,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(53);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -3970,19 +3366,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(91);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.361423cm)
    .. (1.000000cm, -0.667823cm) .. (1.500000cm, -0.872553cm)
    .. (2.000000cm, -0.944444cm) .. (2.500000cm, -0.872553cm)
@@ -4007,14 +3396,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(54);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4044,19 +3430,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(90);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.382683cm)
    .. (1.000000cm, -0.707107cm) .. (1.500000cm, -0.923880cm)
    .. (2.000000cm, -1.000000cm) .. (2.500000cm, -0.923880cm)
@@ -4081,14 +3460,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(55);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4118,19 +3494,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(89);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.403944cm)
    .. (1.000000cm, -0.746390cm) .. (1.500000cm, -0.975206cm)
    .. (2.000000cm, -1.055556cm) .. (2.500000cm, -0.975206cm)
@@ -4155,14 +3524,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(56);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4192,19 +3558,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(88);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.425204cm)
    .. (1.000000cm, -0.785674cm) .. (1.500000cm, -1.026533cm)
    .. (2.000000cm, -1.111111cm) .. (2.500000cm, -1.026533cm)
@@ -4229,14 +3588,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(57);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4266,19 +3622,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(87);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.446464cm)
    .. (1.000000cm, -0.824958cm) .. (1.500000cm, -1.077859cm)
    .. (2.000000cm, -1.166667cm) .. (2.500000cm, -1.077859cm)
@@ -4303,14 +3652,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(58);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4340,19 +3686,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(86);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.467724cm)
    .. (1.000000cm, -0.864242cm) .. (1.500000cm, -1.129186cm)
    .. (2.000000cm, -1.222222cm) .. (2.500000cm, -1.129186cm)
@@ -4377,14 +3716,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(59);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4414,19 +3750,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(85);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.488984cm)
    .. (1.000000cm, -0.903525cm) .. (1.500000cm, -1.180513cm)
    .. (2.000000cm, -1.277778cm) .. (2.500000cm, -1.180513cm)
@@ -4451,14 +3780,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(60);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4488,19 +3814,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(84);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.510245cm)
    .. (1.000000cm, -0.942809cm) .. (1.500000cm, -1.231839cm)
    .. (2.000000cm, -1.333333cm) .. (2.500000cm, -1.231839cm)
@@ -4525,14 +3844,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(61);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4562,19 +3878,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(83);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.531505cm)
    .. (1.000000cm, -0.982093cm) .. (1.500000cm, -1.283166cm)
    .. (2.000000cm, -1.388889cm) .. (2.500000cm, -1.283166cm)
@@ -4599,14 +3908,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(62);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4636,19 +3942,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(82);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.552765cm)
    .. (1.000000cm, -1.021376cm) .. (1.500000cm, -1.334493cm)
    .. (2.000000cm, -1.444444cm) .. (2.500000cm, -1.334493cm)
@@ -4673,14 +3972,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(63);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4710,19 +4006,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(81);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.574025cm)
    .. (1.000000cm, -1.060660cm) .. (1.500000cm, -1.385819cm)
    .. (2.000000cm, -1.500000cm) .. (2.500000cm, -1.385819cm)
@@ -4747,14 +4036,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(64);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4784,19 +4070,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(80);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.595285cm)
    .. (1.000000cm, -1.099944cm) .. (1.500000cm, -1.437146cm)
    .. (2.000000cm, -1.555556cm) .. (2.500000cm, -1.437146cm)
@@ -4821,14 +4100,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(65);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4858,19 +4134,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(79);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.616546cm)
    .. (1.000000cm, -1.139228cm) .. (1.500000cm, -1.488473cm)
    .. (2.000000cm, -1.611111cm) .. (2.500000cm, -1.488473cm)
@@ -4895,14 +4164,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(66);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -4932,19 +4198,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(78);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.637806cm)
    .. (1.000000cm, -1.178511cm) .. (1.500000cm, -1.539799cm)
    .. (2.000000cm, -1.666667cm) .. (2.500000cm, -1.539799cm)
@@ -4969,14 +4228,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(67);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -5006,19 +4262,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(77);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.659066cm)
    .. (1.000000cm, -1.217795cm) .. (1.500000cm, -1.591126cm)
    .. (2.000000cm, -1.722222cm) .. (2.500000cm, -1.591126cm)
@@ -5043,14 +4292,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(68);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -5080,19 +4326,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(76);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.680326cm)
    .. (1.000000cm, -1.257079cm) .. (1.500000cm, -1.642453cm)
    .. (2.000000cm, -1.777778cm) .. (2.500000cm, -1.642453cm)
@@ -5117,14 +4356,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(69);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -5154,19 +4390,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(75);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.701586cm)
    .. (1.000000cm, -1.296362cm) .. (1.500000cm, -1.693779cm)
    .. (2.000000cm, -1.833333cm) .. (2.500000cm, -1.693779cm)
@@ -5191,14 +4420,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(70);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -5228,19 +4454,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(74);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.722846cm)
    .. (1.000000cm, -1.335646cm) .. (1.500000cm, -1.745106cm)
    .. (2.000000cm, -1.888889cm) .. (2.500000cm, -1.745106cm)
@@ -5265,14 +4484,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(71);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -5302,19 +4518,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(73);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.744107cm)
    .. (1.000000cm, -1.374930cm) .. (1.500000cm, -1.796432cm)
    .. (2.000000cm, -1.944444cm) .. (2.500000cm, -1.796432cm)
@@ -5339,14 +4548,11 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(72);
 draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
@@ -5376,19 +4582,12 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 beginfig(72);
-draw (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
-   -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
-   -- cycle
-withcolor (0.000000, 0.000000, 0.000000) ;
 draw (0.000000cm, -0.000000cm) .. (0.500000cm, -0.765367cm)
    .. (1.000000cm, -1.414214cm) .. (1.500000cm, -1.847759cm)
    .. (2.000000cm, -2.000000cm) .. (2.500000cm, -1.847759cm)
@@ -5413,12 +4612,9 @@ withpen pencircle transformed begingroup; save T; transform T;
  xxpart T = 0.100000cm; xpart T = 0.000000cm; xypart T = 0.000000cm;
  yypart T = 0.100000cm; ypart T = 0.000000cm; yxpart T = 0.000000cm; T endgroup 
  ;
+endfig;
 
 clip currentpicture to (0.000000cm, -8.000000cm) -- (16.000000cm, -8.000000cm)
    -- (16.000000cm, 8.000000cm) -- (0.000000cm, 8.000000cm)
      -- cycle;
-
-endfig;
-
-
 end

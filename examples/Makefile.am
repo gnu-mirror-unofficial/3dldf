@@ -66,19 +66,8 @@
 
 # ** (2) Variables.
 
-
-#### !! START HERE: LDF 2013.11.05.
-#### These cause errors.  LDF 2013.11.05.
-
-# 3dldf error
-
-
-
-# ps2pdf error
-# prbla_01.ldf
-# prbla_01.txt 
-
 #### These aren't needed at present.  LDF 2013.11.05.
+
 # stlltn05.txt
 # stlltn05.mp
 
@@ -135,7 +124,8 @@ MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 ####
 #### LDF 2013.11.05.
 
-EXTRA_DIST = $(LDF_FILES) $(TEX_FILES) $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in \
+EXTRA_DIST = $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
+             $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in \
              fmt8511.txt fmtdina4.txt wave_1.ldf wave_2.ldf
 
 CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES) \

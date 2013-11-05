@@ -1,7 +1,6 @@
 %%%% stlltn02.mp
 %% Created by Laurence D. Finston (LDF) Mi Jul  1 19:04:29 CEST 2009
 
-%%%% $Id: stlltn02.mp,v 1.6 2013/06/05 16:44:55 lfinsto1 Exp $
 
 %% DO NOT DELETE!  It was written by hand, _not_ generated!  
 %% LDF 2010.08.06.
