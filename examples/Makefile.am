@@ -125,7 +125,7 @@ MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 #### LDF 2013.11.05.
 
 EXTRA_DIST = $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
-             $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in \
+             $(NON_GEN_MP_FILES) $(LMC_FILES) 00INFO Makefile.am Makefile.in \
              fmt8511.txt fmtdina4.txt wave_1.ldf wave_2.ldf
 
 CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES) \

@@ -157,7 +157,10 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 dummy_SOURCES = dummy.cxx
 
-EXTRA_DIST = check_scan_parse_output.sh format.web patterns.web prelims.web runit \
+EXTRA_DIST = check_scan_parse_output.sh \
+             cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
+             cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
+             format.web patterns.web prelims.web runit \
              sample.ldf sample0.ldf sample1.ldf sample2.ldf \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldfsp_CWEB_files) $(3dldf_SOURCES) \
