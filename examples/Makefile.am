@@ -86,8 +86,8 @@ LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
 TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
              bldelem5.txt braik_01.txt braik_02.txt braik_03.txt chssbrds.txt \
              clktwr_01.txt cycld_1.txt cycld_2.txt dodec_01.txt dodec_02.txt \
-             dodec_03.txt ellpln01.txt elpdmd01.txt fctcn01.txt fmt8511.txt \
-             fmtdina4.txt goboards.txt grrhm_06.txt hyprb_00.txt hyprb_01.txt \
+             dodec_03.txt ellpln01.txt elpdmd01.txt fctcn01.txt  \
+             goboards.txt grrhm_06.txt hyprb_00.txt hyprb_01.txt \
              hyprb_02.txt intrfr_2.txt intrfr_3.txt intrfr_5.txt intrfr_6.txt \
              intrfr_7.txt kntpoly1.txt polyrhyt.txt pprcuts.txt prbla_00.txt \
              prbla_01.txt prbla_05.txt prbla_06.txt prbla_10.txt prbla_11.txt \
@@ -97,6 +97,8 @@ TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
              sundl_02.txt sundl_03.txt tngnts_1.txt trchd_1.txt wave_1.txt \
              wave_2.txt
 
+
+# 
 
 LMC_FILES := bldelem0.lmc bldelem1.lmc bldelem2.lmc bldelem3.lmc bldelem4.lmc \
              bldelem5.lmc dodec_02.lmc dodec_03.lmc elpdmd01.lmc polyrhyt.lmc \
@@ -112,8 +114,8 @@ EPS_FILES = $(TEX_FILES:.txt=.[0-9]*) pprcut01.[0-9]*
 LOG_FILES = $(TEX_FILES:.txt=.log) pprcut01.log
 MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 
-
-EXTRA_DIST = $(LDF_FILES) $(TEX_FILES) $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in 
+EXTRA_DIST = $(LDF_FILES) $(TEX_FILES) $(NON_GEN_MP_FILES) 00INFO Makefile.am Makefile.in \
+             fmt8511.txt fmtdina4.txt
 
 CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES) \
               $(MPX_FILES) ldf_1.log
@@ -121,14 +123,25 @@ CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES)
 
 #### ** (2) Rules
 
-#### !! START HERE:  LDF 2013.11.04.  Working on examples.
+#### *** (3) All
 
 # .PHONY: all
 
 all: $(PS_FILES) $(PDF_FILES) 
 
+#### *** (3) Clean
+
 clean-local: 
-	rm -f $(EPS_FILES) 
+	$(MAKE) purge
+
+#### *** (3) Purge
+
+.PHONY: purge
+
+purge:
+	rm -f $(EPS_FILES)
+
+#### *** (3) Implicit rules
 
 .PRECIOUS : %.mp %.dvi %.ps
 
@@ -147,6 +160,26 @@ clean-local:
 %.mp : %.ldf
 	$(top_builddir)/src/3dldf $<
 
+#### **** (4) Extra prerequisites for DVI files
+
+bldelem1.dvi: bldelem1.txt bldelem1.1 fmt8511.txt fmtdina4.txt 
+
+bldelem2.dvi: bldelem2.txt bldelem2.1 fmt8511.txt fmtdina4.txt
+
+bldelem3.dvi: bldelem3.txt bldelem3.1 fmt8511.txt fmtdina4.txt 
+
+bldelem4.dvi: bldelem4.txt bldelem4.1 fmt8511.txt fmtdina4.txt 
+
+bldelem5.dvi: bldelem5.txt bldelem5.1 fmt8511.txt fmtdina4.txt
+
+#### **** (4) Extra prerequisites for 'mp' files
+
+#### The following 'mp' files require 'lmc' macro files.
+#### That is, the 'ldf' files include the 'lmc' files.
+#### The 'mp' files are built according to the implicit rule, above.
+####
+#### LDF 2013.11.05.
+
 bldelem1.mp: bldelem1.ldf bldelem1.lmc 
 
 bldelem2.mp: bldelem2.ldf bldelem1.lmc 
@@ -163,15 +196,27 @@ bldelem4.mp: bldelem4.ldf bldelem1.lmc bldelem3.lmc
 
 bldelem5.mp: bldelem5.ldf bldelem5.lmc
 
-# dodec_02.lmc 
-# dodec_03.lmc 
-# elpdmd01.lmc 
-# polyrhyt.lmc 
-# rhmtrc_01.lmc 
-# sphrmd00.lmc 
-# stlltns.lmc 
-# sundl_03.lmc
+dodec_02.mp: dodec_02.ldf dodec_02.lmc
 
+dodec_03.mp: dodec_03.ldf dodec_03.lmc
+
+elpdmd01.mp: elpdmd01.ldf elpdmd01.lmc
+
+polyrhyt.mp: polyrhyt.ldf polyrhyt.lmc
+
+rhmtrc_01.mp: rhmtrc_01.ldf rhmtrc_01.lmc
+
+sphrmd00.mp: sphrmd00.ldf sphrmd00.lmc
+
+stlltn01.mp: stlltn01.ldf stlltns.lmc
+
+stlltn03.mp: stlltn03.ldf stlltns.lmc
+
+sundl_03.mp: sundl_03.ldf sundl_03.lmc
+
+#### **** (4)
+
+#### *** (3) Query
 
 .PHONY: query
 
