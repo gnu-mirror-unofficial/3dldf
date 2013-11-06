@@ -63,11 +63,11 @@ beginfig(1); %% Comments can start at the middle of a line.
 
 point p;       % Declaration.
 
-p = (1, 2, 3); % Assignment.
+p := (1, 2, 3); % Assignment.
 
 drawdot p;     % Drawing command.  Puts a dot on `current_picture'.
 
-endfig();      %  Outputs `current_picture'.
+endfig;      %  Outputs `current_picture'.
 
 
 % Types:
@@ -79,6 +79,7 @@ endfig();      %  Outputs `current_picture'.
 %% color_vector.
 
 % Declarations.
+
 
 boolean a;        % Single variable.
 
@@ -97,7 +98,6 @@ focus h, i[], jk[]lm[]n, opq;  % Multiple declarations with both ordinary
 %% Other types are declared analogously.
 
 % * Expressions.
-
 
 
 % Generally speaking, `variables' of a given type appear on the
@@ -119,17 +119,18 @@ focus h, i[], jk[]lm[]n, opq;  % Multiple declarations with both ordinary
 
 boolean a, b;
 
-a = true; % Initialization, `=' can be used.  (Not yet implemented.)
+%%%% a = true; % Initialization, `=' can be used.  (Not yet implemented.)
 
 b := false; % Ordinary assignment.
 
-a = true; % Equation, not assignment, and redundant to boot.
-          % Not yet implemented.
+%%%% a = true; % Equation, not assignment, and redundant to boot.
+               % Not yet implemented.
 
-a = false; % ERROR! Inconsistent equation (not assignment). 
-           % Not yet implemented. 
+%%%% a = false; % ERROR! Inconsistent equation (not assignment). 
+               % Not yet implemented. 
 
 a := false;  % Assignment, okay.
+
 
 %%% Assignments can be chained.
 
@@ -145,9 +146,15 @@ string s, t, u, v;
 
 s := "abcdef"; % Simple assignment from a literal string.
 
-t := u := v := "ghijkl"; % Chained assignment.  !! Make sure this works.
+%% t := u := v := "ghijkl"; % Chained assignment.  !! Not yet implemented!
+
+t := "ghijkl";
 
 u := s & t; % --> "abcdefghijkl".  Concatenation.
+
+%% Okay to here.
+
+
 
 %% pen expressions.
 
@@ -163,6 +170,8 @@ r := penspeck;
 
 s := pensquare;
 
+%% Okay to here.
+
 %%% pens can be transformed.  Transformations will be explained later.
 
 p := pencircle scaled 2; % Scaled by 2 in all three dimensions.  
@@ -174,21 +183,32 @@ p := pencircle scaled 2; % Scaled by 2 in all three dimensions.
                          % or z-y planes.
                          % !! Make sure this is true.
 
+
+
 q := penrazor scaled (2, 3, 4); % Scaled by 2 in the x-dimension,
                                 % 3 in the y-dimension, and
                                 % 4 in the z-dimension.
+
+
 
 r := penspeck scaled 3 shifted (1, 2, 3);  % Shifting is valid but
                                            % meaningless.
                                            % !! Make sure this is
                                            % true.
 
+
 s := pensquare scaled (2, 3) rotated (0, 0, 45); % This makes a
                                                  % diamond-shaped pen.
                                                  % !! Make sure this 
                                                  % works.
 
-p := q := r := s;  % Chained assignment.  !! Make sure this works.
+
+%% Okay to here.
+
+
+%%%% p := q := r := s;  % Chained assignment.  !! Not yet implemented!
+
+
 
 
 % ** dash_pattern expressions.
@@ -215,8 +235,9 @@ g := f;  % Assignment from a `dash_pattern' variable
 
 %% dash_pattern assignments can be chained.
 
-d := e := f := evenly scaled (2, 0, 0); % !! Make sure multiple
-                                        % chaining works.
+%% Okay to here.
+
+%%%% d := e := f := evenly scaled (2, 0, 0); % !! Not yet implemented!
 
 %% color expressions.
 
@@ -237,52 +258,52 @@ c := red; % Assignment from a predefined color variable.
 
 d := e := green; % color assignments can be chained.
 
-
 %%% color_vectors.
 
 %%%% These pairs of commands cause warnings to be issued.  
 %%%% The `point' entries are destroyed.
 
-point a;
-color_vector a[];  
+% point a;
+% color_vector a[];  
 
-point b[];
-color_vector b;
+% point b[];
+% color_vector b;
 
-point c;
-color_vector c;
+% point c;
+% color_vector c;
 
-
-point d[];
-color_vector d[];
+% point d[];
+% color_vector d[];
 
 %%%% Assignment to color_vectors.
 
-color_vector c;
-c += blue;
-c += green;
-show c;
+% color_vector c;
+% c += blue;
+% c += green;
+% show c;
 
-show c0;
-show c1;
+% show c0;
+% show c1;
+
+%% Okay to here.
 
 %%%% This demonstrates what happens when a `color_vector'
 %%%% variable is "overwritten" by a subsequent array declaration:
 %%%% The `color_vector' is "expired".
 
-color_vector a;
-a += green;
+% color_vector a;
+% a += green;
 
-show a;
+% show a;
 
-show a0;
+% show a0;
 
-circle a[];
+% circle a[];
 
-show a;
-a0 := unit_circle;
+% show a;
+% a0 := unit_circle;
 
-show a0;
+% show a0;
 
 % ** numeric expressions.
 
@@ -320,7 +341,11 @@ p := (3, 4, 5);
 
 g := length p; % g == ??, i.e., the magnitude of p.
 
-h := magnitude p; % h == ??.  The same as `length p', but clearer.
+
+%% Okay to here.
+
+%% h := magnitude p; % h == ??.  The same as `length p', but clearer.
+%%                   %% Not yet implemented!           
 
 i := x_part p; % i == 3
 
@@ -350,15 +375,21 @@ o := cosd 30; % 0.866.  The cosine of 30 degrees.
 
 p := mlog 2; % --> 177.44568.  !! Check what value is produced.
 
-q := mexp 256; % --> 2.71828 (The constant e).
-          % !! Check what value is produced.
+%% Okay to here.
 
-r := floor 2.5412; % --> 2
+%q := mexp 256; % --> 2.71828 (The constant e).
+%               % !! Check what value is produced.
+%               % Not yet implemented!
 
-s := floor -3.14; % --> -4.  !! Make sure this is true.
 
-t := uniformdeviate % !! There's a rule for this, but it's not yet
-               % functional.
+
+%r := floor 2.5412; % --> 2
+
+%s := floor -3.14; % --> -4.  !! Make sure this is true.
+
+%t := uniformdeviate % !! There's a rule for this, but it's not yet
+                     % functional.
+                     % Not yet implemented!
 
 
 %% internal_quantity expressions.
@@ -382,7 +413,7 @@ t := uniformdeviate % !! There's a rule for this, but it's not yet
 
 %% reg_polygon expressions.
 
-
+end;
 
 %% Local Variables:
 %% mode:Metafont
