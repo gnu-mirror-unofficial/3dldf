@@ -48,8 +48,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: arcexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
-
 @q * (0) arc expressions.  @>
 @** arc expressions.
 \initials{LDF 2007.10.13.}

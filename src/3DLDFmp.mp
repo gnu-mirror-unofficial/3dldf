@@ -50,8 +50,6 @@
 
 %% * (1) 
 
-
-%%%%%	$Id: 3DLDFmp.mp 1682 2010-12-17 16:08:30Z lfinsto $	
 input boxes;
 
 pickup pencircle scaled .25mm;

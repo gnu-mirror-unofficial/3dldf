@@ -1,8 +1,6 @@
 @q cmpxexpr.w @> 
 @q Created by Laurence Finston (LDF) Sun Dec  2 18:10:05 CET 2007 @>
 
-@q $Id: cmpxexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
-
 @q * (0) Copyright and License.@>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
@@ -50,8 +48,6 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-
-@q $Id: cmpxexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) complex expressions.  @>
 @** complex expressions.

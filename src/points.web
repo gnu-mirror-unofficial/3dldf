@@ -72,9 +72,6 @@ into my release versions for 3DLDF 1.1.4.  I've already put some of
 them back in, now I'm doing the rest of them.  However, the release
 versions are now in their own RCS repository.
 \ENDLOG 
-@<Version control identifier@>=
-static string rcs_id 
-   = "$Id: points.web,v 1.130 2009/01/06 17:41:21 lfinsto1 Exp $";
 
 @q * (1)  Include files.@>
 @ Include files.
@@ -1317,7 +1314,7 @@ Point::operator=(const Point& p)
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true| */ @; 
+  volatile bool DEBUG = false; /* |true| */ @; 
 
   using namespace Scan_Parse;
 
@@ -11998,7 +11995,6 @@ Now including
 
 @c
 @<Include files@>@;
-@<Version control identifier@>@;
 @<Define |class Point|@>@;
 @<Declare non-member template functions for |Point|@>@;
 @<Define |Point| constructors@>@;

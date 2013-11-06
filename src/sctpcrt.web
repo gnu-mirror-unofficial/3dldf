@@ -57,7 +57,6 @@
 Created this file.  
 \ENDLOG 
 
-@<Version control identifier@>=
 static string rcs_id 
    = "$Id: sctpcrt.web,v 1.219 2009/09/21 06:51:17 lfinsto1 Exp $";
 
@@ -232,6 +231,8 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
+  volatile bool DEBUG = false; /* |true| */ @; 
+
   stringstream cerr_strm;
 
   string thread_name = "";
@@ -242,7 +243,7 @@ Scanner_Type::create(string str,
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+
   if (DEBUG)
     {
       cerr_strm << "Entering Scanner_Type::create()\n";
@@ -980,6 +981,7 @@ Now setting |scanner_node->id_map_node->scanner_node = scanner_node|.
  
  if (top_level)
    {
+
 #if DEBUG_COMPILE
      if (DEBUG)
        cerr << "top_level == true.  Initializing scanner_node->id_map_node." 
@@ -1030,8 +1032,6 @@ and a call to |scanner_node->add_synonym| for |endinput|.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
-
-
 
   scanner_node->add_entry("end", END, spark);
 
@@ -4554,6 +4554,7 @@ Added call to |add_entry| for |register_width|.
 
 @<Define |Scanner_Type::create|@>=
 
+
     {
 
 
@@ -4738,6 +4739,7 @@ Added this section.
                                v);
 
 
+
 @q ****** (6) |mm|.@> 
 @ |mm|.
 \initials{LDF 2005.01.06.}
@@ -4891,7 +4893,7 @@ Added call to |add_entry| for |ditto|.
 
 
     } /* End of group.  */
-   
+
 
 @q ***** (5) |Colors|.  @>          
 @*4 |Colors|.
@@ -5181,8 +5183,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
  }  /* End of group.  */
 
 
-
-
 @q ***** (5) |Color_Vectors|.  @>          
 @*4 |Color_Vectors|.
 
@@ -5256,8 +5256,6 @@ Add error handling.
 
       status = array_entry->set_superordinate_vector(vector_entry);
       status = array_member_entry->set_superordinate_vector(vector_entry);
-
-     
 
    } /* End group:  Create |default_color_vector|  */
 
@@ -5365,6 +5363,7 @@ Now setting the type of |*p| to |Pen::NULL_PEN|.
                               not_array, Id_Map_Entry_Type::KNOWN, v);
 
     scanner_node->add_synonym("nullpen", "null_pen");
+
   }
 
 
@@ -5434,6 +5433,8 @@ Now calling |t->reset|.
     scanner_node->add_entry("identity", TRANSFORM, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
   }
 
 @q ***** (5) |Dash_Patterns|.  @>
@@ -5460,6 +5461,7 @@ Now calling |t->reset|.
     scanner_node->add_entry("evenly", DASH_PATTERN, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
+
   }
 
 @q ****** (6) |with_dots|.  @>
@@ -5525,6 +5527,7 @@ Added this section.
     scanner_node->add_entry("origin", POINT, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
+
   }
 
 @q ***** (5) |Paths|.  @>
@@ -5554,7 +5557,7 @@ for |nullpath|.
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
     scanner_node->add_synonym("nullpath", "null_path");
- 
+
   }
 
 
@@ -5586,11 +5589,15 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
   {
 
     Focus a(0, 0, -10, 0, 0, 10, 20); 
+
     Focus* f = create_new<Focus>(a);
+
     v = static_cast<void*>(f); 
+
     scanner_node->add_entry("default_focus", FOCUS, 
                             regular, not_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
+
   }
 
 
@@ -6071,7 +6078,7 @@ Added this section.
 
  } 
 
-     
+  
 @
 @<Define |Scanner_Type::create|@>=
 
@@ -6107,8 +6114,6 @@ Added this section.
      
    } /* |else| (|!top_level|)  */
    
-
-
 @q **  End of |Scanner_Node::create|.  @>
 @ End of |Scanner_Node::create|. 
 @<Define |Scanner_Type::create|@>=
@@ -6308,7 +6313,6 @@ the |input| command yet).
 @ This is what's compiled.
 @c
 @<Include files@>@;
-@<Version control identifier@>@;
 @<Define |Scanner_Type::create|@>@;
 
 @ This is what's written to \filename{scanner.h}.

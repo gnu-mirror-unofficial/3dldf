@@ -1,7 +1,5 @@
 %%%% 3DLDFtex.bas
 
-%%%%	$Id: 3DLDFtex.bas 1684 2010-12-17 16:34:21Z lfinsto $	
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
