@@ -268,7 +268,7 @@ TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
              dodec_03.txt ellpln01.txt elpdmd01.txt fctcn01.txt  \
              goboards.txt grrhm_06.txt hyprb_00.txt hyprb_01.txt \
              hyprb_02.txt intrfr_2.txt intrfr_3.txt intrfr_5.txt intrfr_6.txt \
-             intrfr_7.txt kntpoly1.txt polyrhyt.txt pprcuts.txt prbla_00.txt \
+             intrfr_7.txt kntpoly1.txt polyrhyt.txt pprcuts.txt prbla_00.txt prbla_01.txt \
              prbla_05.txt prbla_06.txt prbla_10.txt prbla_11.txt \
              prbla_12.txt rhmtrc_01.txt ripple_1.txt ripple_2.txt sphrmd01.txt \
              sphrmd02.txt sphrmd03.txt stgrddc1.txt stlltn01.txt stlltn02.txt \
@@ -281,6 +281,7 @@ LMC_FILES := bldelem0.lmc bldelem1.lmc bldelem2.lmc bldelem3.lmc bldelem4.lmc \
              rhmtrc_01.lmc sphrmd00.lmc stlltns.lmc sundl_03.lmc
 
 NON_GEN_MP_FILES := raster_0.mp stlltn02.mp stlltn04.mp wave_1.mp wave_2.mp
+TOC_FILES := bldelem1.toc bldelem2.toc bldelem3.toc bldelem4.toc bldelem5.toc polyrhyt.toc
 GEN_MP_FILES = $(LDF_FILES:.ldf=.mp)
 DVI_FILES = $(TEX_FILES:.txt=.dvi)
 PS_FILES = $(TEX_FILES:.txt=.ps)
@@ -296,12 +297,11 @@ MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 ####
 #### LDF 2013.11.05.
 EXTRA_DIST = $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
-             $(NON_GEN_MP_FILES) $(LMC_FILES) 00INFO Makefile.am Makefile.in \
-             fmt8511.txt fmtdina4.txt wave_1.ldf wave_2.ldf
+             $(NON_GEN_MP_FILES) $(LMC_FILES) Makefile.am Makefile.in \
+             fmt8511.txt fmtdina4.txt wave_1.ldf wave_1.mp.bak wave_2.ldf wave_2.mp.bak
 
-CLEANFILES := $(GEN_MP_FILES) $(DVI_FILES) $(PS_FILES) $(PDF_FILES) $(LOG_FILES) \
-              $(MPX_FILES) ldf_1.log
-
+PURGE_FILES := $(TOC_FILES) $(DVI_FILES) $(LOG_FILES) $(MPX_FILES) 
+CLEANFILES := $(GEN_MP_FILES) $(PS_FILES) $(PDF_FILES) ldf_1.log 
 all: all-am
 
 .SUFFIXES:
@@ -503,10 +503,16 @@ clean-local:
 
 #### *** (3) Purge
 
+#### 'EPS_FILES' must be specified explicitly, because it won't work with the 'clean' target:
+#### The action for the latter is incompatible with the use of a regexp (i.e., '.[0-9]*') 
+#### for the suffixes.  'EPS_FILES' is therefore not included in 'PURGE_FILES'.
+#### 
+#### LDF 2013.11.06.
+
 .PHONY: purge
 
 purge:
-	rm -f $(EPS_FILES)
+	rm -f $(EPS_FILES) $(PURGE_FILES)
 
 #### *** (3) Implicit rules
 

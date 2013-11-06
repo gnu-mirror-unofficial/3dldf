@@ -43,6 +43,7 @@ Copyright (C) 2013 The Free Software Foundation
 <li><a href="#toc_Installation">2 Installation</a></li>
 <li><a href="#toc_Invoking">3 Invoking</a></li>
 <li><a href="#toc_Getting-Started">4 Getting Started</a></li>
+<li><a href="#toc_Data-Types">5 Data Types</a></li>
 <li><a href="#toc_FDL">GNU Free Documentation License</a></li>
 <li><a href="#toc_GPL">GNU General Public License</a></li>
 <li><a href="#toc_Variable-Index">Variable Index</a></li>
@@ -61,6 +62,15 @@ Copyright (C) 2013 The Free Software Foundation
 <li><a name="toc_Installation" href="#Installation">2 Installation</a>
 <li><a name="toc_Invoking" href="#Invoking">3 Invoking</a>
 <li><a name="toc_Getting-Started" href="#Getting-Started">4 Getting Started</a>
+<li><a name="toc_Data-Types" href="#Data-Types">5 Data Types</a>
+<ul>
+<li><a href="#Data-Types">5.1 Numeric types</a>
+<li><a href="#Data-Types">5.2 Types for drawing and labeling:</a>
+<li><a href="#Data-Types">5.3 Shape types</a>
+<li><a href="#Data-Types">5.4 Combined types</a>
+<li><a href="#Data-Types">5.5 Other types</a>
+<li><a href="#Data-Types">5.6 Vector types</a>
+</li></ul>
 <li><a name="toc_FDL" href="#FDL">GNU Free Documentation License</a>
 <li><a name="toc_GPL" href="#GPL">GNU General Public License</a>
 <li><a name="toc_Variable-Index" href="#Variable-Index">Variable Index</a>
@@ -98,11 +108,12 @@ the section entitled &ldquo;GNU Free Documentation License.&rdquo;
 <li><a accesskey="2" href="#Installation">Installation</a>
 <li><a accesskey="3" href="#Invoking">Invoking</a>
 <li><a accesskey="4" href="#Getting-Started">Getting Started</a>
-<li><a accesskey="5" href="#FDL">FDL</a>
-<li><a accesskey="6" href="#GPL">GPL</a>
-<li><a accesskey="7" href="#Variable-Index">Variable Index</a>
-<li><a accesskey="8" href="#Data-Type-Index">Data Type Index</a>
-<li><a accesskey="9" href="#Function-Index">Function Index</a>
+<li><a accesskey="5" href="#Data-Types">Data Types</a>
+<li><a accesskey="6" href="#FDL">FDL</a>
+<li><a accesskey="7" href="#GPL">GPL</a>
+<li><a accesskey="8" href="#Variable-Index">Variable Index</a>
+<li><a accesskey="9" href="#Data-Type-Index">Data Type Index</a>
+<li><a href="#Function-Index">Function Index</a>
 <li><a href="#Concept-Index">Concept Index</a>
 
 </li></ul>
@@ -134,6 +145,13 @@ the section entitled &ldquo;GNU Free Documentation License.&rdquo;
 </p>
 <ul class="menu">
 <li><a href="#Getting-Started">Getting Started</a>
+
+</li></ul>
+<p>Data Types
+
+</p>
+<ul class="menu">
+<li><a href="#Data-Types">Data Types</a>
 
 </li></ul>
 <p>Variable Index
@@ -193,8 +211,8 @@ in their own programs to make drawings.
 the MetaPost language derived from it.
 
    <p>For several years, interactive versions of 3DLDF have been available for downloading from the
-Savannah website:  <a href="https://savannah.gnu.org/projects/3dldf/">https://savannah.gnu.org/projects/3dldf/</a>.  However, this 2.0 is the first release
-that includes this feature.
+Savannah website:  <a href="https://savannah.gnu.org/projects/3dldf/">https://savannah.gnu.org/projects/3dldf/</a>.  However, 2.0 is
+the first release that includes this feature.
 
    <p><a name="index-scanning-4"></a><a name="index-parsing-5"></a><a name="index-interpreter-6"></a>One result of this is that the old manual for releases through 1.1.5.1
 is largely obsolete, as far as the usage of 3DLDF is concerned.  The
@@ -202,11 +220,12 @@ reference sections, documenting the classes, functions, etc., are
 still usable for those who want to know the details of how the program
 works, though many descriptions may be out-of-date because of changes
 made in the meantime.  On the other hand, the reference sections are longer
-needed for just using the program.
+needed for just using the program.  The old manual is included in the distribution
+in the directory <samp><span class="file">3DLDF-2.0/doc/old_doc/</span></samp>.
 
    <p>The code for <dfn>scanning</dfn> and <dfn>parsing</dfn>, i.e., that
-which implements the <dfn>interpreter</dfn> that makes the program interactive, is of course not
-documented in the old manual at all.
+which implements the <dfn>interpreter</dfn> that makes the program interactive,
+is of course not documented in the old manual at all.
 
    <p>To document the new, interactive version of 3DLDF, it would therefore be necessary to write a
 completely new manual.  Unfortunately, it has not been possible for the author to do this, which
@@ -214,8 +233,12 @@ is the main reason that there has been no new release for so many years.  In ord
 any longer, he has decided to make a release without rewriting the manual, although this is clearly
 not ideal.
 
-   <p>As a partial substitute, release 2.0 contains a directory with many examples which can used to
-learn how to use the 3DLDF language.
+   <p>As a partial substitute, release 2.0 contains the directory
+<samp><span class="file">3DLDF-2.0/examples/</span></samp> with many examples which can used to
+learn how to use the 3DLDF language.  In addition, the directory
+<samp><span class="file">3DLDF-2.0/src/</span></samp> contains the files <samp><span class="file">sample.ldf</span></samp>,
+<samp><span class="file">sample.ldf</span></samp>, <samp><span class="file">sample0.ldf</span></samp>, <samp><span class="file">sample1.ldf</span></samp>
+and <samp><span class="file">sample2.ldf</span></samp>.
 
 <!-- ** (2) -->
 <!-- * (1) -->
@@ -228,7 +251,6 @@ learn how to use the 3DLDF language.
 <!-- End: -->
 <!-- Installation -->
 <!-- install.texi -->
-<!-- [...]/gwrdifpk/doc/install.texi -->
 <!-- Created by Laurence D. Finston (LDF) Mon Nov  4 17:45:25 CET 2013 -->
 <!-- This file is part of the 3DLDF User Manual. -->
 <!-- Copyright (C) 2013 The Free Software Foundation -->
@@ -260,7 +282,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- Invoking -->
 <!-- invoking.texi -->
 <!-- Created by Laurence D. Finston (LDF) Mon Nov  4 17:43:43 CET 2013 -->
-<!-- This file is part of the gwrdifpk User and Reference Manual. -->
+<!-- This file is part of the 3DLDF 2.0 User Manual. -->
 <!-- Copyright (C) 2013 The Free Software Foundation -->
 <!-- See the section "GNU Free Documentation License" in the file -->
 <!-- fdl.texi for copying conditions. -->
@@ -281,15 +303,27 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <p class="noindent">Command-line options:
 
      <dl>
-<dt><code>--bison-trace</code>
-<br><dt><code>--multithread-input</code>
-<br><dt><code>--multithread-output</code>
-<br><dt><code>--multithread-include</code>
-<br><dt><code>--silent</code>
-<br><dt><code>--quiet</code>
-<br><dt><code>--verbose</code>
-<br><dt><code>--help</code>
-<br><dt><code>--version</code><dd></dl>
+<dt><code>--bison-trace</code><dd>Prints information generated by GNU Bison
+for tracing which parser rules are reduced
+and the state of the Bison stack.
+
+     <br><dt><code>--multithread-input</code><dd>Enables the use of multiple threads for input.
+
+     <br><dt><code>--multithread-output</code><dd>Enables the use of multiple threads for output.
+
+     <br><dt><code>--multithread-include</code><dd>Enables the use of multiple threads for input files included in other input
+files.
+
+     <br><dt><code>--silent</code><dd>Suppresses almost all output to standard output and standard error.
+
+     <br><dt><code>--quiet</code><dd>Suppresses some output to standard output and standard error.
+
+     <br><dt><code>--verbose</code><dd>Causes status information to be printed to standard output.
+
+     <br><dt><code>--help</code><dd>Prints a help message and exits.
+
+     <br><dt><code>--version</code><dd>Prints version information and exits. 
+</dl>
 
 <!-- ** (2) -->
 <!-- * (1) Local Variables for Emacs -->
@@ -304,7 +338,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- eval:(set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi") -->
 <!-- fill-column:80 -->
 <!-- End: -->
-<!-- Getting Started -->
+<!-- Getting started -->
 <!-- getstart.texi -->
 <!-- Created by Laurence D. Finston (LDF) Mon Nov  4 17:45:20 CET 2013 -->
 <!-- This file is part of the 3DLDF User Manual. -->
@@ -312,11 +346,11 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- See the section "GNU Free Documentation License" in the file -->
 <!-- fdl.texi for copying conditions. -->
 <!-- Author:  Laurence D. Finston (LDF) -->
-<!-- * (1) Getting Started -->
+<!-- * (1) Getting started -->
 <div class="node">
 <a name="Getting-Started"></a>
 <p><hr>
-Next:&nbsp;<a rel="next" accesskey="n" href="#FDL">FDL</a>,
+Next:&nbsp;<a rel="next" accesskey="n" href="#Data-Types">Data Types</a>,
 Previous:&nbsp;<a rel="previous" accesskey="p" href="#Invoking">Invoking</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
@@ -337,11 +371,167 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <!-- eval:(set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi") -->
 <!-- fill-column:80 -->
 <!-- End: -->
+<!-- Data Types -->
+<!-- dttypes.texi -->
+<!-- Created by Laurence D. Finston (LDF) Wed Nov  6 16:56:11 CET 2013 -->
+<!-- This file is part of the 3DLDF 2.0 User Manual. -->
+<!-- Copyright (C) 2013 The Free Software Foundation -->
+<!-- See the section "GNU Free Documentation License" in the file -->
+<!-- fdl.texi for copying conditions. -->
+<!-- Author:  Laurence D. Finston (LDF) -->
+<!-- * (1) Data Types -->
+<div class="node">
+<a name="Data-Types"></a>
+<p><hr>
+Next:&nbsp;<a rel="next" accesskey="n" href="#FDL">FDL</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Getting-Started">Getting Started</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
+
+</div>
+
+<h2 class="chapter">5 Data Types</h2>
+
+<!-- ** (2) Numeric types -->
+<h3 class="section">5.1 Numeric types</h3>
+
+     <dl>
+<dt><code>numeric</code><dd>Integers and floating point numbers.
+
+     <br><dt><code>boolean</code><dd><code>true</code> or <code>false</code>
+
+     <br><dt><code>ulong_long</code><dd>Unsigned long long integers.  Corresponds to the C type
+<code>unsigned long long int</code>.
+
+     <br><dt><code>complex</code><dd>Complex number.
+
+     <br><dt><code>matrix</code><dd>Matrix. 
+</dl>
+
+<!-- ** (2) Types for drawing and labeling: -->
+<h3 class="section">5.2 Types for drawing and labeling:</h3>
+
+     <dl>
+<dt><code>transform</code><dd>Transformation matrix.
+
+     <br><dt><code>focus</code><dd><a name="index-perspective-projection-7"></a>Focus for the <dfn>perspective projection</dfn>.
+
+     <dt><code>pen</code>
+<dt><code>dash_pattern</code>
+<dt><code>color</code>
+<dt><code>string</code><dd></dl>
+
+<!-- ** (2) Shape types -->
+<h3 class="section">5.3 Shape types</h3>
+
+     <dl>
+<dt><code>point</code>
+<dt><code>path</code>
+<dt><code>circle</code>
+<dt><code>circle_slice</code>
+<dt><code>arc</code>
+<dt><code>cone</code>
+<dt><code>conic_section_lattice</code>
+<dt><code>cuboid</code>
+<dt><code>cylinder</code>
+<dt><code>ellipse_slice</code>
+<dt><code>ellipse</code>
+<dt><code>ellipsoid</code>
+<dt><code>glyph</code>
+<dt><code>helix</code>
+<dt><code>hyperbola</code>
+<dt><code>parabola</code>
+<dt><code>paraboloid</code>
+<dt><code>polygon</code>
+<dt><code>polyhedron_slice</code>
+<dt><code>polyhedron</code>
+<dt><code>rectangle</code>
+<dt><code>reg_polygon</code>
+<dt><code>sphere</code>
+<dt><code>sphere_development</code>
+<dt><code>triangle</code><dd></dl>
+
+<!-- ** (2) Combined types -->
+<h3 class="section">5.4 Combined types</h3>
+
+     <dl>
+<dt><code>bool_point</code><dd></dl>
+
+<!-- ** (2) Other types -->
+<h3 class="section">5.5 Other types</h3>
+
+     <dl>
+<dt><code>plane</code>
+<dt><code>nurb</code>
+<dt><code>origami_figure</code><dd></dl>
+
+<!-- ** (2) Vector types -->
+<h3 class="section">5.6 Vector types</h3>
+
+<p class="noindent">Vector types (alphabetical):
+
+     <dl>
+<dt><code>arc_vector</code>
+<dt><code>boolean_vector</code>
+<dt><code>bool_point_vector</code>
+<dt><code>circle_slice_vector</code>
+<dt><code>circle_vector</code>
+<dt><code>color_vector</code>
+<dt><code>complex_vector</code>
+<dt><code>cone_vector</code>
+<dt><code>conic_section_lattice_vector</code>
+<dt><code>cuboid_vector</code>
+<dt><code>cylinder_vector</code>
+<dt><code>dash_pattern_vector</code>
+<dt><code>ellipse_slice_vector</code>
+<dt><code>ellipse_vector</code>
+<dt><code>ellipsoid_vector</code>
+<dt><code>focus_vector</code>
+<dt><code>glyph_vector</code>
+<dt><code>helix_vector</code>
+<dt><code>hyperbola_vector</code>
+<dt><code>macro_vector</code>
+<dt><code>matrix_vector</code>
+<dt><code>numeric_vector</code>
+<dt><code>nurb_vector</code>
+<dt><code>origami_figure_vector</code>
+<dt><code>parabola_vector</code>
+<dt><code>paraboloid_vector</code>
+<dt><code>path_vector</code>
+<dt><code>pen_vector</code>
+<dt><code>picture_vector</code>
+<dt><code>plane_vector</code>
+<dt><code>point_vector</code>
+<dt><code>polygon_vector</code>
+<dt><code>polyhedron_slice_vector</code>
+<dt><code>polyhedron_vector</code>
+<dt><code>rectangle_vector</code>
+<dt><code>reg_polygon_vector</code>
+<dt><code>sphere_development_vector</code>
+<dt><code>sphere_vector</code>
+<dt><code>string_vector</code>
+<dt><code>transform_vector</code>
+<dt><code>triangle_vector</code>
+<dt><code>ulong_long_vector</code><dd></dl>
+
+<!-- *** (3) -->
+<!-- ** (2) -->
+<!-- * (1) Local Variables for Emacs -->
+<!-- For use in indirect buffers: -->
+<!-- (progn (texinfo-mode) (outline-minor-mode t) (setq outline-regexp "@c *\\*+") (ignore (quote -->
+<!-- )) (set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi")) -->
+<!-- Local Variables: -->
+<!-- mode:Texinfo -->
+<!-- abbrev-mode:t -->
+<!-- eval:(outline-minor-mode t) -->
+<!-- outline-regexp:"@c *\\*+" -->
+<!-- eval:(set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi") -->
+<!-- fill-column:80 -->
+<!-- End: -->
 <div class="node">
 <a name="FDL"></a>
 <p><hr>
 Next:&nbsp;<a rel="next" accesskey="n" href="#GPL">GPL</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="#Getting-Started">Getting Started</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="#Data-Types">Data Types</a>,
 Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 
 </div>
@@ -1599,6 +1789,7 @@ Up:&nbsp;<a rel="up" accesskey="u" href="#Top">Top</a>
 <li><a href="#index-interpreter-6">interpreter</a>: <a href="#Introduction">Introduction</a></li>
 <li><a href="#index-language-3">language</a>: <a href="#Introduction">Introduction</a></li>
 <li><a href="#index-parsing-5">parsing</a>: <a href="#Introduction">Introduction</a></li>
+<li><a href="#index-perspective-projection-7">perspective projection</a>: <a href="#Data-Types">Data Types</a></li>
 <li><a href="#index-program_002c-interactive-2">program, interactive</a>: <a href="#Introduction">Introduction</a></li>
 <li><a href="#index-scanning-4">scanning</a>: <a href="#Introduction">Introduction</a></li>
    </ul></body></html>
