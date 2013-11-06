@@ -1131,6 +1131,9 @@ set(string connector, bool@,@, cycle ...);
 void
 Path::set(string connector, bool cycle ... )
 {
+@q ***** (5) @>
+
+    volatile bool DEBUG = false;  /* |true|  */
 
     line_switch = false;
     cycle_switch = cycle;
@@ -1182,11 +1185,15 @@ Path::set(string connector, bool cycle ... )
     Point* arg_ptr;
 
     while ((arg_ptr = va_arg(ap, Point*)) != static_cast<Point*>(0))
-      points.push_back(create_new<Point>(arg_ptr));
+    {
+        points.push_back(create_new<Point>(arg_ptr)); 
+    }
     
     va_end(ap);
 
-}
+@q ***** (5) @>
+
+}  /* End of |Path::set(string connector, bool cycle ... )| definition  */
 
 @q ** (2) Variable number of Points and connectors.@>
 @*1 Variable number of {\bf Points} and connectors.
@@ -13955,8 +13962,25 @@ Focus::set(real* pos_x, real* pos_y, real* pos_z,
   }  /* |if|  */
 
 
+@q ***** (5)@>
+@
+\LOG
+\initials{LDF 2013.11.06.}
+@:BUG FIX@> BUG FIX:  Now casting the final argument to |Path::set| to
+|Point *|.  Previously, passing an uncast 0 caused a ``Segmentation fault'' 
+error in |Path::set| when |va_arg| tried to read it.
+\ENDLOG 
+
+@<Define |Focus| functions@>=
+
   Path q;
-  q.set("--", false, &position, &direction, &up, 0);
+  q.set("--", false, &position, &direction, &up, static_cast<Point*>(0));
+
+
+@q ***** (5)@>
+@
+@<Define |Focus| functions@>=
+
 
   Plane r = q.get_plane();
 
