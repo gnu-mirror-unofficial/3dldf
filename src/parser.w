@@ -51,7 +51,6 @@
 
 
 
-@q $Id: parser.w 1684 2010-12-17 16:34:21Z lfinsto $ @>
 
 @q * (0) Parsing.  @>
 @** Parsing\quad ({\tt parser\PERIOD w}).\hfil

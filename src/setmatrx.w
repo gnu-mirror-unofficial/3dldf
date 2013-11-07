@@ -1,7 +1,6 @@
 @q setmatrx.w @> 
 @q Created by Laurence Finston (LDF) Wed Nov 28 20:16:10 CET 2007 @>       
 
-@q $Id: setmatrx.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) Copyright and License.@>
 

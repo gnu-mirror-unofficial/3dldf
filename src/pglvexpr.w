@@ -50,7 +50,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: pglvexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) |glyph_vector| expressions.@>
 @** \§glyph vector> expressions.

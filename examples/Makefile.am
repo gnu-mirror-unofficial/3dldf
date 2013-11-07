@@ -46,7 +46,6 @@
 
 #### Laurence.Finston@gmx.de 
 
-
 
 
 ## * Top.
@@ -112,7 +111,6 @@ NON_GEN_MP_FILES := raster_0.mp stlltn02.mp stlltn04.mp wave_1.mp wave_2.mp
 TOC_FILES := bldelem1.toc bldelem2.toc bldelem3.toc bldelem4.toc bldelem5.toc polyrhyt.toc
 
 
-
 GEN_MP_FILES = $(LDF_FILES:.ldf=.mp)
 DVI_FILES = $(TEX_FILES:.txt=.dvi)
 PS_FILES = $(TEX_FILES:.txt=.ps)
@@ -121,6 +119,21 @@ EPS_FILES = $(TEX_FILES:.txt=.[0-9]*) pprcut01.[0-9]*
 LOG_FILES = $(TEX_FILES:.txt=.log) pprcut01.log
 MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 
+export LDF_FILES
+export TEX_FILES
+export LMC_FILES
+export NON_GEN_MP_FILES
+export TOC_FILES
+export GEN_MP_FILES
+export DVI_FILES
+export PS_FILES
+export PDF_FILES
+export EPS_FILES
+export LOG_FILES
+export MPX_FILES
+
+export top_builddir
+
 #### !! PLEASE NOTE:  The output of 'wave_1.ldf' and 'wave_2.ldf' must be
 #### modified by hand, so they are not included in 'LDF_FILES', while 
 #### 'wave_1.mp' and 'wave_2.mp' _are_ included in 'NON_GEN_MP_FILES'!
@@ -128,13 +141,14 @@ MPX_FILES = $(TEX_FILES:.txt=.mpx) pprcut01.mpx
 ####
 #### LDF 2013.11.05.
 
-EXTRA_DIST = $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
-             $(NON_GEN_MP_FILES) $(LMC_FILES) Makefile.am Makefile.in \
+EXTRA_DIST = README $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
+             $(NON_GEN_MP_FILES) $(LMC_FILES) Makefile.am Makefile.in Makefile_sub \
              fmt8511.txt fmtdina4.txt wave_1.ldf wave_1.mp.bak wave_2.ldf wave_2.mp.bak
 
 PURGE_FILES := $(TOC_FILES) $(DVI_FILES) $(LOG_FILES) $(MPX_FILES) 
 
-CLEANFILES := $(GEN_MP_FILES) $(PS_FILES) $(PDF_FILES) ldf_1.log 
+
+CLEANFILES := $(GEN_MP_FILES) ldf_1.log 
 
 #### ** (2) Rules
 
@@ -142,7 +156,17 @@ CLEANFILES := $(GEN_MP_FILES) $(PS_FILES) $(PDF_FILES) ldf_1.log
 
 # .PHONY: all
 
-all: $(PS_FILES) $(PDF_FILES) 
+all: 
+
+#### *** (3) reset
+
+#### This target removes the PostScript and PDF files.  LDF 2013.11.07.
+
+.PHONY: reset
+
+reset:
+	$(MAKE) clean
+	rm -f $(PS_FILES) $(PDF_FILES) 
 
 #### *** (3) Clean
 
@@ -162,100 +186,21 @@ clean-local:
 purge:
 	rm -f $(EPS_FILES) $(PURGE_FILES)
 
-#### *** (3) Implicit rules
 
-.PRECIOUS : %.mp %.dvi %.ps
+.PHONY : rebuild
 
-%.pdf : %.ps
-	ps2pdf $<
+rebuild:
+	$(MAKE) -f Makefile_sub rebuild
 
-%.ps : %.dvi
-	dvips -o $@ $<
-
-%.dvi : %.txt %.1
-	tex $<
-
-%.1 : %.mp
-	mpost $<
-
-%.mp : %.ldf
-	$(top_builddir)/src/3dldf $<
-
-
-#### **** (4) Extra prerequisites for DVI files
-
-stlltns.dvi: stlltns.txt stlltn01.1 stlltn02.1 stlltn03.1 stlltn04.1
-	$(TEX) $<
-
-bldelem1.dvi: bldelem1.txt bldelem1.1 fmt8511.txt fmtdina4.txt 
-
-bldelem2.dvi: bldelem2.txt bldelem2.1 fmt8511.txt fmtdina4.txt
-
-bldelem3.dvi: bldelem3.txt bldelem3.1 fmt8511.txt fmtdina4.txt 
-
-bldelem4.dvi: bldelem4.txt bldelem4.1 fmt8511.txt fmtdina4.txt 
-
-bldelem5.dvi: bldelem5.txt bldelem5.1 fmt8511.txt fmtdina4.txt
-
-#### **** (4) Extra prerequisites for 'mp' files
-
-#### The following 'mp' files require 'lmc' macro files.
-#### That is, the 'ldf' files include the 'lmc' files.
-#### The 'mp' files are built according to the implicit rule, above.
-####
-#### LDF 2013.11.05.
-
-bldelem1.mp: bldelem1.ldf bldelem1.lmc 
-
-bldelem2.mp: bldelem2.ldf bldelem1.lmc 
-
-bldelem4.mp: bldelem4.ldf bldelem1.lmc 
-
-bldelem5.mp: bldelem5.ldf bldelem0.lmc
-
-bldelem2.mp: bldelem2.ldf bldelem1.lmc bldelem2.lmc
-
-bldelem3.mp: bldelem3.ldf bldelem3.lmc bldelem1.lmc
-
-bldelem4.mp: bldelem4.ldf bldelem1.lmc bldelem3.lmc
-
-bldelem5.mp: bldelem5.ldf bldelem5.lmc
-
-dodec_02.mp: dodec_02.ldf dodec_02.lmc
-
-dodec_03.mp: dodec_03.ldf dodec_03.lmc
-
-elpdmd01.mp: elpdmd01.ldf elpdmd01.lmc
-
-polyrhyt.mp: polyrhyt.ldf polyrhyt.lmc
-
-rhmtrc_01.mp: rhmtrc_01.ldf rhmtrc_01.lmc
-
-sphrmd00.mp: sphrmd00.ldf sphrmd00.lmc
-
-stlltn01.mp: stlltn01.ldf stlltns.lmc
-
-stlltn03.mp: stlltn03.ldf stlltns.lmc
-
-sundl_03.mp: sundl_03.ldf sundl_03.lmc
-
-#### **** (4)
-
-pprcuts.dvi: pprcuts.txt pprcut01.0
-	$(TEX) $<
-
-pprcut01.0: pprcut01.mp
-	mpost $<
-
-pprcut01.mp: pprcut01.ldf
-	$(top_builddir)/src/3dldf $<
 
 #### *** (3) Query
 
 .PHONY: query
 
 query:
-	@echo "EPS_FILES == $(EPS_FILES)"
+	@echo "LDF_FILES == $(LDF_FILES)"
+	$(MAKE) -f Makefile_sub query
+
 # @echo "TEX == $(TEX)"
 # @echo "CXXCOMPILE == $(CXXCOMPILE)"
 # @echo "SOURCEDIR == $(SOURCEDIR)"

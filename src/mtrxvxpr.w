@@ -1,7 +1,6 @@
 @q mtrxvxpr.w @> 
 @q Created by Laurence Finston Wed Nov 28 16:33:24 CET 2007  @>
 
-@q $Id: mtrxvxpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
      
 @q * (0) Copyright and License.@>
 
@@ -51,7 +50,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: mtrxvxpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) |matrix_vector| expressions.@>
 @** \§matrix vector> expressions.

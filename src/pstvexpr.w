@@ -51,7 +51,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: pstvexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) |string_vector| expressions.@>
 @** {\bf string\_vector} expressions.

@@ -50,7 +50,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: pshowcmd.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q *** (3) Commands for showing.  @>
 @*3 Commands for showing.

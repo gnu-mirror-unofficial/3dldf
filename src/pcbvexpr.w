@@ -51,7 +51,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: pcbvexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) |cuboid_vector| expressions.@>
 @** \§cuboid vector> expressions.

@@ -1,7 +1,6 @@
 @q mtrxassn.w @> 
 @q Created by Laurence Finston (LDF) Thu Nov 29 20:03:21 CET 2007 @>
 
-@q $Id: mtrxassn.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) Copyright and License.@>
 
@@ -51,7 +50,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: mtrxassn.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q **** (4) matrix assignments.@>
 @*3 matrix assignments. 

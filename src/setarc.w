@@ -1,7 +1,6 @@
 @q setarc.w @> 
 @q Created by Laurence Finston (LDF) Sun Nov 25 17:46:59 CET 2007 @>       
 
-@q $Id: setarc.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) Copyright and License.@>
 

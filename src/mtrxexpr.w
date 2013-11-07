@@ -1,7 +1,6 @@
 @q mtrxexpr.w @> 
 @q Created by Laurence Finston (LDF) Wed Nov 28 16:30:38 CET 2007  @>
 
-@q $Id: mtrxexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) Copyright and License.@>
 
@@ -51,7 +50,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: mtrxexpr.w 1684 2010-12-17 16:34:21Z lfinsto $@>
 
 @q * (0) matrix expressions.  @>
 @** matrix expressions.

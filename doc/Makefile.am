@@ -54,7 +54,7 @@
 #### $<:  First prerequisite
 #### $^:  The names of all the prerequisites, with spaces between them.
 
-SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypidx.texi fdl.texi \
+SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypes.texi dttypidx.texi fdl.texi \
                    funcidx.texi getstart.texi gpl.texi install.texi intro.texi \
                    invoking.texi varidx.texi
 

@@ -51,7 +51,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 
-@q $Id: pfuncfin.w 2847 2012-04-10 13:24:48Z lfinsto $@>
 
 @q * (1) Additional C++ code. @>
 @* Additional \CPLUSPLUS/ code.
