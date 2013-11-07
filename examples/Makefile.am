@@ -83,7 +83,7 @@ LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
              grrhm_06.ldf hyprb_00.ldf hyprb_01.ldf hyprb_02.ldf hyprb_03.ldf \
              hyprb_04.ldf hyprb_05.ldf intrfr_2.ldf intrfr_3.ldf intrfr_5.ldf \
              intrfr_6.ldf intrfr_7.ldf kntpoly1.ldf plyhd_01.ldf plyhd_05.ldf \
-             polyrhyt.ldf pprcut01.ldf prbla_00.ldf prbla_05.ldf \
+             polyrhyt.ldf pprcut01.ldf prbla_00.ldf prbla_01.ldf prbla_05.ldf \
              prbla_06.ldf prbla_10.ldf prbla_11.ldf prbla_12.ldf rhmtrc_01.ldf \
              ripple_1.ldf ripple_2.ldf sphrmd01.ldf sphrmd02.ldf sphrmd03.ldf \
              stgrddc1.ldf stlltn01.ldf stlltn03.ldf strspr01.ldf sundl_01.ldf \
@@ -255,9 +255,8 @@ pprcut01.mp: pprcut01.ldf
 .PHONY: query
 
 query:
-	@echo "TEX == $(TEX)"
-
-# @echo "EPS_FILES == $(EPS_FILES)"
+	@echo "EPS_FILES == $(EPS_FILES)"
+# @echo "TEX == $(TEX)"
 # @echo "CXXCOMPILE == $(CXXCOMPILE)"
 # @echo "SOURCEDIR == $(SOURCEDIR)"
 # @echo "top_builddir == $(top_builddir)"
