@@ -92,14 +92,18 @@ e.g.:
    export LIBS="-lgsl -lgslcblas -lm"
    configure --prefix=`pwd`
 
-In this example, the package will be installed below the current directory,
+or 
+
+   cd <your path>/3DLDF-2.0 
+   configure --prefix=`pwd` LIBS="-lgsl -lgslcblas -lm"
+
+In these example, the package will be installed below the current directory,
 i.e., the top-level distribution directory.  It is safe to do this.  
 
 Alternatively, the shellscript `3DLDF-2.0/reconfig.sh' may be used to call
 `configure'.  If `reconfig.sh' is invoked without any arguments, or if its 
 first argument is 0, shared libraries will be built.  Otherwise, they won't.
 Not building shared libraries is faster.
-
 
 * Running 3dldf
 
@@ -110,7 +114,14 @@ the command-line like this:
 
 The user will be prompted for input.
 
-Alternatively, 
+Alternatively, one or more filenames may be specified:
+
+   3dldf sample.ldf sample1.ldf
+
+The suffix `.ldf' may be omitted.  If an input files has a different suffix,
+however, it must be specified.
+
+See the subdirectories `3DLDF-2.0/src/' and `3DLDF-2.0/examples/' for examples.
 
 %% Local Variables:
 %% mode:plain-TeX
