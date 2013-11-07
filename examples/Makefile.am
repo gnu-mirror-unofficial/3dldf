@@ -141,7 +141,7 @@ export top_builddir
 ####
 #### LDF 2013.11.05.
 
-EXTRA_DIST = README $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
+EXTRA_DIST = 00README $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
              $(NON_GEN_MP_FILES) $(LMC_FILES) Makefile.am Makefile.in Makefile_sub \
              fmt8511.txt fmtdina4.txt wave_1.ldf wave_1.mp.bak wave_2.ldf wave_2.mp.bak
 
