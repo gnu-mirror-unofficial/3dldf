@@ -186,13 +186,19 @@ Added |valarray <real> world_extremes|.
 \initials{LDF 2005.08.16.}
 Added |friend| declaration for 
 |Scan_Parse::clip_to_func(void*, void*)|.
+
+\initials{LDF 2013.11.10.}
+@:BUG FIX@> BUG FIX:  Changed the type of derivation from |Shape| 
+from |protected| to |public|.  This caused a compilation error in 
+|Pointer_Vector<C, D>::convert| when compiling with GCC 4.8.2.
+It had still worked with GCC 4.6.2.
 \ENDLOG 
 
 @q ** (2) Definition.  @>
 
 @<Define |class Path|@>=
 
-class Path : protected Shape
+class Path : public Shape
 {
 
    friend void* Scan_Parse::clip_to_func(void*, void*);
