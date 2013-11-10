@@ -68,7 +68,9 @@
 
 bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) 
 
-lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
+# lib3dldfsp.la
+
+lib_LTLIBRARIES = lib3dldflb.la 
 
 # colall.web intro.web
 
@@ -96,16 +98,17 @@ lib_LTLIBRARIES = lib3dldflb.la lib3dldfsp.la
 3dldflb_obj_files = $(3dldflb_CWEB_files:.web=.o)
 
 
-3dldfsp_CWEB_files = parser2.web scanner2.web 
+# 3dldfsp_CWEB_files = parser2.web scanner2.web 
 
-3dldfsp_c_files = $(3dldfsp_CWEB_files:.web=.c)
-3dldfsp_cpp_files = $(3dldfsp_CWEB_files:.web=.c++) 
-3dldfsp_h_files = $(3dldfsp_CWEB_files:.web=.h) 
-3dldfsp_hpp_files = $(3dldfsp_CWEB_files:.web=.h++) parser_1.h++
-3dldfsp_obj_files = $(3dldfsp_CWEB_files:.web=.o)
-3dldfsp_lo_files = $(3dldfsp_CWEB_files:.web=.lo)
+# 3dldfsp_c_files = $(3dldfsp_CWEB_files:.web=.c)
+# 3dldfsp_cpp_files = $(3dldfsp_CWEB_files:.web=.c++) 
+# 3dldfsp_h_files = $(3dldfsp_CWEB_files:.web=.h) 
+# 3dldfsp_hpp_files = $(3dldfsp_CWEB_files:.web=.h++) parser_1.h++
+# 3dldfsp_obj_files = $(3dldfsp_CWEB_files:.web=.o)
+# 3dldfsp_lo_files = $(3dldfsp_CWEB_files:.web=.lo)
 
-3dldf_LDADD = lib3dldflb.la lib3dldfsp.la
+
+3dldf_LDADD = lib3dldflb.la # lib3dldfsp.la
 
 
 3dldf_SOURCES = main.web pspglb.web 
@@ -157,14 +160,19 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 dummy_SOURCES = dummy.cxx
 
+# $(3dldfsp_CWEB_files) 
+
 EXTRA_DIST = check_scan_parse_output.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web patterns.web prelims.web runit \
              sample.ldf sample0.ldf sample1.ldf sample2.ldf \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
-             $(3dldflb_CWEB_files) $(3dldfsp_CWEB_files) $(3dldf_SOURCES) \
-             $(3dldf_PARSER_FILES)
+             $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
+             $(3dldf_PARSER_FILES) scanner2.web parser2.web
+
+
+# scanner2.c++ scanner2.h++ scanner2.l++ parser2.y++ 
 
 CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_files) \
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
@@ -172,8 +180,8 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
               loader.c loader.c++ loader.h loader.h++ \
               parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
-              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser2.y++ parser.y++ \
-              scanner2.c++ scanner2.h++ ldf_1.log scanner2.l++
+              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
+              ldf_1.log 
  
 # AM_CXXFLAGS =
 
@@ -184,32 +192,36 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
 
 .PHONY : touch
 
+# $(3dldfsp_obj_files) 
+
 touch:
-	touch 3dldf$(EXEEXT) $(3dldf_obj_files) $(3dldflb_obj_files) $(3dldfsp_obj_files) \
+	touch 3dldf$(EXEEXT) $(3dldf_obj_files) $(3dldflb_obj_files) \
                $(3dldf_LDADD)
 
 lib3dldflb.c:
 	touch $@
 
-lib3dldfsp.c:
-	touch $@
+# lib3dldfsp.c:
+# 	touch $@
 
 dist-hook:
-	rm ./lib3dldflb.c ./lib3dldfsp.c
+	rm ./lib3dldflb.c # ./lib3dldfsp.c
 
 #### *** (3) Link 3dldf
+
+# $(3dldfsp_obj_files)
 
 3dldf$(EXEEXT): $(3dldf_obj_files) $(3dldf_LDADD) 
 	@echo "Linking 3dldf"
 	$(CXXLINK) $(3dldf_obj_files) -pthread $(3dldf_LDADD) $(LIBS)
-	@touch $(3dldf_obj_files) $(3dldflb_obj_files) $(3dldfsp_obj_files) \
+	@touch $(3dldf_obj_files) $(3dldflb_obj_files)  \
                $(3dldf_LDADD) 3dldf$(EXEEXT) 
 
 lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser_1.h++ parser.h++ $(3dldflb_lo_files) 
 	$(CXXLINK) -rpath $(libdir) $(3dldflb_lo_files) $(LIBS)
 
-lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files) 
-	$(CXXLINK) -rpath $(libdir) $(3dldfsp_lo_files) $(LIBS)
+# lib3dldfsp.la: $(3dldfsp_hpp_files) $(3dldf_hpp_files) $(3dldfsp_lo_files) 
+# 	$(CXXLINK) -rpath $(libdir) $(3dldfsp_lo_files) $(LIBS)
 
 
 #### The following implicit (pattern) rule generates C++ source code and header files 
@@ -321,52 +333,52 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ circles.h++ cncsctlt.h++ co
 
 #### *** (3) parser2
 
-parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
-	ctangle $<
-	./prbsnflx$(EXEEXT) parser2.c parser2.y
-	rm parser2.c
-	./check_scan_parse_output.sh parser2.y parser2.y++
-	@touch $@
+# parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
+# 	ctangle $<
+# 	./prbsnflx$(EXEEXT) parser2.c parser2.y
+# 	rm parser2.c
+# 	./check_scan_parse_output.sh parser2.y parser2.y++
+# 	@touch $@
 
-parser2.c++ parser2.h++ : parser2.y++ 
-	$(YACC) --debug -d -o parser2.cxx $<
-	./check_scan_parse_output.sh parser2.cxx parser2.c++
-	./check_scan_parse_output.sh parser2.hxx parser2.h++
-	@touch $@
+# parser2.c++ parser2.h++ : parser2.y++ 
+# 	$(YACC) --debug -d -o parser2.cxx $<
+# 	./check_scan_parse_output.sh parser2.cxx parser2.c++
+# 	./check_scan_parse_output.sh parser2.hxx parser2.h++
+# 	@touch $@
 
-parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
-                     complex.h++ cones.h++ conicsct.h++ crclslc.h++ \
-                     creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
-                     dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
-                     ellpsslc.h++ glyphs.h++ gsltmplt.h++ helices.h++ \
-                     hyprbola.h++ io.h++ lines.h++ matrices.h++ nurbs.h++ \
-                     origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
-                     parahypr.h++ paths.h++ pctfncs0.h++ pens.h++ pictures.h++ \
-                     planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
-                     points.h++ polygons.h++ polyhed.h++ predctes.h++ \
-                     primes.h++ pspglb.h++ rectangs.h++ rhtchdrn.h++ \
-                     scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
-                     spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
-                     utility.h++
-	$(CXXCOMPILE) -c -o $@ $<
-	@touch $@
+# parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
+#                      complex.h++ cones.h++ conicsct.h++ crclslc.h++ \
+#                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
+#                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
+#                      ellpsslc.h++ glyphs.h++ gsltmplt.h++ helices.h++ \
+#                      hyprbola.h++ io.h++ lines.h++ matrices.h++ nurbs.h++ \
+#                      origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
+#                      parahypr.h++ paths.h++ pctfncs0.h++ pens.h++ pictures.h++ \
+#                      planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
+#                      points.h++ polygons.h++ polyhed.h++ predctes.h++ \
+#                      primes.h++ pspglb.h++ rectangs.h++ rhtchdrn.h++ \
+#                      scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
+#                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
+#                      utility.h++
+# 	$(CXXCOMPILE) -c -o $@ $<
+# 	@touch $@
 
-scanner2.o: scanner2.c++ scanner2.h++ io.h++  loader.h++ parser2.h++ pspglb.h++
-	$(CXXCOMPILE) -c -o $@ $<
-	@touch $@
+# scanner2.o: scanner2.c++ scanner2.h++ io.h++  loader.h++ parser2.h++ pspglb.h++
+# 	$(CXXCOMPILE) -c -o $@ $<
+# 	@touch $@
 
-scanner2.c++ scanner2.h++ : scanner2.l++ 
-	$(LEX) -o scanner2.cxx $<
-	./check_scan_parse_output.sh scanner2.cxx scanner2.c++
-	./check_scan_parse_output.sh scanner2.hxx scanner2.h++
-	@touch $@
+# scanner2.c++ scanner2.h++ : scanner2.l++ 
+# 	$(LEX) -o scanner2.cxx $<
+# 	./check_scan_parse_output.sh scanner2.cxx scanner2.c++
+# 	./check_scan_parse_output.sh scanner2.hxx scanner2.h++
+# 	@touch $@
 
-scanner2.l++ : scanner2.web prbsnflx$(EXEEXT)
-	ctangle scanner2.web
-	./prbsnflx$(EXEEXT) scanner2.c scanner2.l
-	rm scanner2.c
-	./check_scan_parse_output.sh scanner2.l scanner2.l++
-	@touch $@
+# scanner2.l++ : scanner2.web prbsnflx$(EXEEXT)
+# 	ctangle scanner2.web
+# 	./prbsnflx$(EXEEXT) scanner2.c scanner2.l
+# 	rm scanner2.c
+# 	./check_scan_parse_output.sh scanner2.l scanner2.l++
+# 	@touch $@
 
 prbsnflx$(EXEEXT): prbsnflx.c++ 
 	$(CXXCOMPILE) -o $@ $<
@@ -381,7 +393,9 @@ prbsnflx.c++: prbsnflx.l++
 
 #### *** (3) 
 
-main.o: main.c++ $(3dldf_hpp_files) parser.h++ parser2.h++ parser_1.h++
+# parser2.h++ 
+
+main.o: main.c++ $(3dldf_hpp_files) parser.h++ parser_1.h++
 
 arc.o: arc.c++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ conicsct.h++ crclslc.h++ \
                creatnew.h++ curves.h++ dashptrn.h++ ellipses.h++ ellpsslc.h++ \
