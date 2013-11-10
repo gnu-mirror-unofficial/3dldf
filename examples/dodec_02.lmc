@@ -96,6 +96,7 @@ pickup path_pen;
 
 rpv := get_net dodecahedron with_diameter diameter;
 
+
 %% rpv needs to be rotated because the routines for "folding"
 %% the net to make polyhedra in 3DLDF fold upwards, whereas
 %% a cardboard model is folded downwards.
@@ -132,6 +133,8 @@ if false:
       rotated (0, 0, -36);
 fi; 
 
+message "Error after here 0."; 
+
 %% **** (4) Get tabs
 
 if do_stitch_lines:
@@ -155,6 +158,7 @@ endfor;
 for i = 0 upto size pv / 2:
    draw pv[i];
 endfor;
+
 
 %% **** (4) Draw stitch lines.
 

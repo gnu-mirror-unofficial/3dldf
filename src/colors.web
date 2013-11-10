@@ -604,17 +604,17 @@ Color::operator+=(const Color& c)
 
 @<Define |Color| functions@>=
 
-       red_part   = min(1.0, red_part + c.red_part);
-       green_part = min(1.0, green_part + c.green_part);
-       blue_part  = min(1.0, blue_part + c.blue_part);
+       red_part   = min(static_cast<real>(1.0), red_part + c.red_part);
+       green_part = min(static_cast<real>(1.0), green_part + c.green_part);
+       blue_part  = min(static_cast<real>(1.0), blue_part + c.blue_part);
 
 @q **** (4).@>
 #if 0 
    if (type == RGB_COLOR && c.type == RGB_COLOR)
       {
-          red_part   = min(1.0, red_part + c.red_part);
-          green_part = min(1.0, green_part + c.green_part);
-          blue_part  = min(1.0, blue_part + c.blue_part);
+          red_part   = min(static_cast<real>(1.0), red_part + c.red_part);
+          green_part = min(static_cast<real>(1.0), green_part + c.green_part);
+          blue_part  = min(static_cast<real>(1.0), blue_part + c.blue_part);
       }
 #endif 
 @q **** (4).@>

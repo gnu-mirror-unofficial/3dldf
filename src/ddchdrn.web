@@ -769,8 +769,19 @@ Dodecahedron::get_tabs(const real pentagon_diameter,
 @q ****** (6) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_mutex.lock(); 
+       cerr << "Entering `Dodecahedron::get_tabs'."
+            << endl;
+       cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
 
    stringstream cerr_strm;
 
@@ -799,6 +810,8 @@ Dodecahedron::get_tabs(const real pentagon_diameter,
 
    Transform t;
    Transform u;
+
+cerr << "Error after here 0." << endl; 
 
 @q ****** (6)@>
 
