@@ -925,6 +925,20 @@ because |static_cast| failed when I tried to convert a
 
 \initials{LDF 2005.04.14.}
 @:BUG FIX@> BUG FIX:  Now incrementing |c->ctr|.
+
+
+\initials{LDF 2013.11.10.}
+@:BUG FIX@> BUG FIX:  Now explicitly resizing |c->v| with |static_cast<C*>(0)|
+as the value.  Previously, |operator+=| was called to push the pointers onto 
+|c->v|.  Now, the existing NULL values are replaced.
+\par
+I don't think this should be necessary:  The older code worked with GCC 4.6.2, 
+but it caused a compilation error with GCC 4.8.2:  Apparently, |vector::resize| 
+was called with |Shape| instead of |Shape *| as the value type, which didn't work,
+because |Shape| is an abstract class.
+\par
+In addition, I've had to change the type of derivation of |Path| from |Shape| from
+|protected| to |public|.
 \ENDLOG
 
 @q ***** (5) Declaration.@> 
@@ -947,11 +961,16 @@ Pointer_Vector<C, D>::convert(Pointer_Vector<D, D>*& d)
    
    Pointer_Vector<C, C>* c = new Pointer_Vector<C, C>;
 
+   c->v.resize(d->v.size(), static_cast<C*>(0));
+
+   int i = 0;
+ 
    for (typename vector<D*>::iterator iter = d->v.begin();
         iter != d->v.end();
         ++iter)
       {
-          *c += reinterpret_cast<C*>(*iter); 
+          c->v[i] = static_cast<C*>(*iter);
+
           ++(c->ctr);
       }
 
