@@ -1,0 +1,43 @@
+I am pleased to announce the release of GNU 3DLDF 2.0.1.
+
+This is a bug fix release.
+
+GNU 3DLDF is a package for three-dimensional drawing with MetaPost output.
+
+The package can be downloaded from ftp.gnu.org/gnu/3dldf/.  
+Alternatively, http://ftpmirror.gnu.org/3dldf/ will automatically redirect to a nearby mirror.
+
+It is also available from the Git repository for project at Savannah:
+
+git clone git://git.savannah.gnu.org/3dldf.git
+
+
+Changes since release 2.0:
+
+2013.11.10.
+
+        * 3DLDF-2.0.1/src/paths.web, 3DLDF-2.0.1/src/pntrvctr.web
+        
+        Changed the type of derivation of `class Path' from `class Shape' from `protected' 
+        to `public'.
+        
+        In the template function `Pointer_Vector<C, D>::convert':  Now explicitly 
+        resizing a `vector<C*>' with `static_cast<C*>(0)' as the value.
+
+        Previously, a compilation error occurred when compiling with GCC 4.8.2.  
+        It had still worked with GCC 4.6.2.
+
+
+More information about GNU 3DLDF is available on the project website:
+
+http://www.gnu.org/software/3dldf/
+
+Laurence Finston
+GNU 3DLDF maintainer
+
+Email:  Laurence.Finston --AT-- gmx.de
+
+
+
+
+
