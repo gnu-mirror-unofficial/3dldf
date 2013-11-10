@@ -351,7 +351,6 @@ Rhombic_Triacontahedron::get_rhombus(real rhombus_side_length,
 
    using namespace Scan_Parse;
 
-
 @q ***** (5) Error handling.@>
 
 @ Error handling.
@@ -362,6 +361,7 @@ Rhombic_Triacontahedron::get_rhombus(real rhombus_side_length,
    if (rhombus_side_length <= 0)
    {
 
+        cerr_mutex.lock(); 
         cerr_strm << thread_name 
                   << "ERROR!  In `Rhombic_Triacontahedron::get_rhombus':"
                   << endl 
@@ -369,7 +369,9 @@ Rhombic_Triacontahedron::get_rhombus(real rhombus_side_length,
                   << " (<= 0)"
                   << endl 
                   << "Can't create `Polygon'.  "
-                  << "Exiting function unsuccessfully with return value 0.";
+                  << "Exiting function unsuccessfully with return value 0."
+                  << endl;
+         cerr_mutex.unlock(); 
       
          return 0;
 
@@ -464,6 +466,24 @@ Rhombic_Triacontahedron::get_net(real rhombus_side_length,
                                                     &warning_stop_value);
 
    using namespace Scan_Parse;
+
+
+@q ***** (5) @>
+@
+@<Define |Rhombic_Triacontahedron| functions@>=
+
+@q ***** (5) @>
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+        cerr_mutex.lock(); 
+        cerr_strm << thread_name 
+                  << "Entering `Rhombic_Triacontahedron::get_net'."
+                  << endl;
+        cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */         
 
 @q ***** (5)@>
 @

@@ -21,3 +21,306 @@ flag during linking and do at least one of the following:
 See any operating system documentation about shared libraries for
 more information, such as the ld(1) and ld.so(8) manual pages.
 ----------------------------------------------------------------------
+
+make -C work/3DLDF-2.0 -j1 || \
+(printf "[*** build] ==> Build failed. Exiting.\n" && exit 1)
+make[2]: Entering directory '/home/brandon/Projects/gsrc/trunk/gnu/3dldf/work/3DLDF-2.0'
+Makefile:881: warning: overriding recipe for target 'info-recursive'
+Makefile:451: warning: ignoring old recipe for target 'info-recursive'
+make all-recursive
+make[3]: Entering directory '/home/brandon/Projects/gsrc/trunk/gnu/3dldf/work/3DLDF-2.0'
+Makefile:881: warning: overriding recipe for target 'info-recursive'
+Makefile:451: warning: ignoring old recipe for target 'info-recursive'
+Making all in src
+make[4]: Entering directory '/home/brandon/Projects/gsrc/trunk/gnu/3dldf/work/3DLDF-2.0/src'
+/bin/sh ../libtool --tag=CXX --mode=compile g++ -DHAVE_CONFIG_H -I. -I.. -g -O2 -MT polygons.lo -MD -MP -MF .deps/polygons.Tpo -c -o polygons.lo polygons.c++
+libtool: compile: g++ -DHAVE_CONFIG_H -I. -I.. -g -O2 -MT polygons.lo -MD -MP -MF .deps/polygons.Tpo -c polygons.c++ -fPIC -DPIC -o .libs/polygons.o
+In file included from /usr/include/c++/4.8.2/vector:64:0,
+from ./loader.web:312,
+from ./polygons.web:85:
+/usr/include/c++/4.8.2/bits/stl_vector.h: In instantiation of 'class std::vector<Shape, std::allocator<Shape> >':
+./pntrvctr.web:954:3: required from 'static Pointer_Vector<C>* Pointer_Vector<C, D>::convert(Pointer_Vector<D>*&) [with C = Shape; D = Polygon]'
+./polygons.web:3901:35: required from here
+/usr/include/c++/4.8.2/bits/stl_vector.h:704:7: error: cannot allocate an object of abstract type 'Shape'
+resize(size_type __new_size, value_type __x = value_type())
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:145:7: note: because the following virtual functions are pure within 'Shape':
+class Shape
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:449:5: note: virtual int Shape::copy_coords(char, char, bool, Scanner_Node)
+int copy_coords(const char from,
+^
+./shapes.web:455:6: note: virtual void Shape::show(std::string, char, bool, bool, Focus*, short unsigned int, real) const
+void show(string text = "",
+^
+./shapes.web:463:15: note: virtual Shape* Shape::get_copy() const
+virtual Shape* get_copy(void) const = 0;
+^
+./shapes.web:465:14: note: virtual void Shape::clear()
+virtual void clear(void) = 0;
+^
+./shapes.web:466:14: note: virtual void Shape::output(Scanner_Node)
+virtual void output(Scanner_Node) = 0;
+^
+./shapes.web:467:24: note: virtual std::vector<Shape*> Shape::extract(const Focus&, short unsigned int, real)
+virtual vector<Shape*> extract(const Focus&,
+^
+./shapes.web:470:19: note: virtual Transform Shape::rotate(real, real, real)
+virtual Transform rotate(const real, const real, const real) = 0;
+^
+./shapes.web:471:19: note: virtual Transform Shape::scale(real, real, real)
+virtual Transform scale(real, real, real) = 0;
+^
+./shapes.web:472:19: note: virtual Transform Shape::shear(real, real, real, real, real, real)
+virtual Transform shear(real xy, real xz, real yx, real yz,
+^
+./shapes.web:474:19: note: virtual Transform Shape::shift(real, real, real)
+virtual Transform shift(real, real, real) = 0;
+^
+./shapes.web:476:19: note: virtual Transform Shape::rotate(const Point&, const Point&, real)
+virtual Transform rotate(const Point&, const Point&,
+^
+./shapes.web:478:19: note: virtual Transform Shape::operator*=(const Transform&)
+virtual Transform operator*=(const Transform&) = 0;
+^
+./shapes.web:479:14: note: virtual void Shape::apply_transform()
+virtual void apply_transform(void) = 0;
+^
+./shapes.web:481:13: note: virtual int Shape::reflect_in(const Plane&, void*, Scanner_Node) const
+virtual int reflect_in(const Plane&,
+^
+./shapes.web:497:14: note: virtual void Shape::suppress_output()
+virtual void suppress_output(void) = 0;
+^
+./shapes.web:498:14: note: virtual void Shape::unsuppress_output()
+virtual void unsuppress_output(void) = 0;
+^
+./shapes.web:500:24: note: virtual short unsigned int Shape::get_shape_type() const
+virtual unsigned short get_shape_type(void) const = 0;
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:601:14: note: virtual bool Shape::set_world_extremes(Scanner_Node)
+virtual bool set_world_extremes(Scanner_Node scanner_node = 0) = 0;
+^
+./shapes.web:602:14: note: virtual bool Shape::set_pre_projective_extremes(Scanner_Node)
+virtual bool set_pre_projective_extremes(Scanner_Node scanner_node = 0) = 0;
+^
+./shapes.web:603:14: note: virtual bool Shape::set_projective_extremes(Scanner_Node)
+virtual bool set_projective_extremes(Scanner_Node scanner_node = 0) = 0;
+^
+./shapes.web:606:31: note: virtual const std::valarray<double>& Shape::get_world_extremes() const
+virtual const valarray<real>& get_world_extremes(void) const = 0;
+^
+./shapes.web:607:31: note: virtual const std::valarray<double>& Shape::get_pre_projective_extremes() const
+virtual const valarray<real>& get_pre_projective_extremes(void) const = 0;
+^
+./shapes.web:608:31: note: virtual const std::valarray<double>& Shape::get_projective_extremes() const
+virtual const valarray<real>& get_projective_extremes(void) const = 0;
+^
+./shapes.web:610:14: note: virtual real Shape::get_minimum_x(short unsigned int) const
+virtual real get_minimum_x(const unsigned short s
+^
+./shapes.web:614:14: note: virtual real Shape::get_maximum_x(short unsigned int) const
+virtual real get_maximum_x(const unsigned short s
+^
+./shapes.web:618:14: note: virtual real Shape::get_mean_x(short unsigned int) const
+virtual real get_mean_x(const unsigned short s
+^
+./shapes.web:622:14: note: virtual real Shape::get_minimum_y(short unsigned int) const
+virtual real get_minimum_y(const unsigned short s
+^
+./shapes.web:626:14: note: virtual real Shape::get_maximum_y(short unsigned int) const
+virtual real get_maximum_y(const unsigned short s
+^
+./shapes.web:630:14: note: virtual real Shape::get_mean_y(short unsigned int) const
+virtual real get_mean_y(const unsigned short s
+^
+./shapes.web:634:14: note: virtual real Shape::get_minimum_z(short unsigned int) const
+virtual real get_minimum_z(const unsigned short s
+^
+./shapes.web:638:14: note: virtual real Shape::get_maximum_z(short unsigned int) const
+virtual real get_maximum_z(const unsigned short s
+^
+./shapes.web:642:14: note: virtual real Shape::get_mean_z(short unsigned int) const
+virtual real get_mean_z(const unsigned short s
+^
+./shapes.web:648:1: note: virtual Unsigned_Byte Shape::enclosing_cuboids_intersect(Shape*, Scanner_Node)
+enclosing_cuboids_intersect(Shape* s,
+^
+./shapes.web:655:1: note: virtual Int_Void_Ptr Shape::intersection(Shape*, Scanner_Node)
+intersection(Shape* s,
+^
+./shapes.web:661:1: note: virtual Unsigned_Byte Shape::projections_intersect(Shape*, Scanner_Node)
+projections_intersect(Shape*,
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:685:13: note: virtual int Shape::push_draw_color(Color*&, bool)
+virtual int push_draw_color(Color*& c, bool copy = true) = 0;
+^
+./shapes.web:686:13: note: virtual int Shape::push_fill_color(Color*&, bool)
+virtual int push_fill_color(Color*& c, bool copy = true) = 0;
+^
+./shapes.web:687:13: note: virtual int Shape::push_color(Color*&, bool)
+virtual int push_color(Color*& c, bool copy = true) = 0;
+^
+./shapes.web:689:13: note: virtual int Shape::push_pen(Pen*&, bool)
+virtual int push_pen(Pen*& p, bool copy = true) = 0;
+^
+./shapes.web:691:13: note: virtual int Shape::push_dash_pattern(Dash_Pattern*&, bool)
+virtual int push_dash_pattern(Dash_Pattern*& d, bool copy = true) = 0;
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:747:14: note: virtual bool Shape::is_point() const
+virtual bool is_point(void) const = 0;
+^
+./shapes.web:748:14: note: virtual bool Shape::is_nurb() const
+virtual bool is_nurb(void) const = 0;
+^
+./shapes.web:749:14: note: virtual bool Shape::is_path() const
+virtual bool is_path(void) const = 0;
+^
+./shapes.web:750:14: note: virtual bool Shape::is_polygon() const
+virtual bool is_polygon(void) const = 0;
+^
+./shapes.web:751:14: note: virtual bool Shape::is_triangle() const
+virtual bool is_triangle(void) const = 0;
+^
+./shapes.web:752:14: note: virtual bool Shape::is_rectangle() const
+virtual bool is_rectangle(void) const = 0;
+^
+./shapes.web:753:14: note: virtual bool Shape::is_reg_polygon() const
+virtual bool is_reg_polygon(void) const = 0;
+^
+./shapes.web:754:14: note: virtual bool Shape::is_ellipse() const
+virtual bool is_ellipse(void) const = 0;
+^
+./shapes.web:755:14: note: virtual bool Shape::is_ellipse_slice() const
+virtual bool is_ellipse_slice(void) const = 0;
+^
+./shapes.web:756:14: note: virtual bool Shape::is_circle() const
+virtual bool is_circle(void) const = 0;
+^
+./shapes.web:757:14: note: virtual bool Shape::is_circle_slice() const
+virtual bool is_circle_slice(void) const = 0;
+^
+./shapes.web:758:14: note: virtual bool Shape::is_parabola() const
+virtual bool is_parabola(void) const = 0;
+^
+./shapes.web:759:14: note: virtual bool Shape::is_hyperbola() const
+virtual bool is_hyperbola(void) const = 0;
+^
+./shapes.web:760:14: note: virtual bool Shape::is_arc_type() const
+virtual bool is_arc_type(void) const = 0;
+^
+./shapes.web:761:14: note: virtual bool Shape::is_helix() const
+virtual bool is_helix(void) const = 0;
+^
+./shapes.web:762:14: note: virtual bool Shape::is_helix_slice() const
+virtual bool is_helix_slice(void) const = 0;
+^
+./shapes.web:763:14: note: virtual bool Shape::is_solid_faced() const
+virtual bool is_solid_faced(void) const = 0;
+^
+./shapes.web:764:14: note: virtual bool Shape::is_polyhedron() const
+virtual bool is_polyhedron(void) const = 0;
+^
+./shapes.web:765:14: note: virtual bool Shape::is_polyhedron_slice() const
+virtual bool is_polyhedron_slice(void) const = 0;
+^
+./shapes.web:766:14: note: virtual bool Shape::is_cuboid() const
+virtual bool is_cuboid(void) const = 0;
+^
+./shapes.web:767:14: note: virtual bool Shape::is_cuboid_slice() const
+virtual bool is_cuboid_slice(void) const = 0;
+^
+./shapes.web:768:14: note: virtual bool Shape::is_tetrahedron() const
+virtual bool is_tetrahedron(void) const = 0;
+^
+./shapes.web:769:14: note: virtual bool Shape::is_octahedron() const
+virtual bool is_octahedron(void) const = 0;
+^
+./shapes.web:770:14: note: virtual bool Shape::is_dodecahedron() const
+virtual bool is_dodecahedron(void) const = 0;
+^
+./shapes.web:771:14: note: virtual bool Shape::is_icosahedron() const
+virtual bool is_icosahedron(void) const = 0;
+^
+./shapes.web:772:14: note: virtual bool Shape::is_trunc_octahedron() const
+virtual bool is_trunc_octahedron(void) const = 0;
+^
+./shapes.web:773:14: note: virtual bool Shape::is_great_rhombicosidodecahedron() const
+virtual bool is_great_rhombicosidodecahedron(void) const = 0;
+^
+./shapes.web:774:14: note: virtual bool Shape::is_cone() const
+virtual bool is_cone(void) const = 0;
+^
+./shapes.web:775:14: note: virtual bool Shape::is_cone_slice() const
+virtual bool is_cone_slice(void) const = 0;
+^
+./shapes.web:776:14: note: virtual bool Shape::is_cylinder() const
+virtual bool is_cylinder(void) const = 0;
+^
+./shapes.web:777:14: note: virtual bool Shape::is_cylinder_slice() const
+virtual bool is_cylinder_slice(void) const = 0;
+^
+./shapes.web:778:14: note: virtual bool Shape::is_ellipsoid() const
+virtual bool is_ellipsoid(void) const = 0;
+^
+./shapes.web:779:14: note: virtual bool Shape::is_ellipsoid_slice() const
+virtual bool is_ellipsoid_slice(void) const = 0;
+^
+./shapes.web:780:14: note: virtual bool Shape::is_sphere() const
+virtual bool is_sphere(void) const = 0;
+^
+./shapes.web:781:14: note: virtual bool Shape::is_sphere_slice() const
+virtual bool is_sphere_slice(void) const = 0;
+^
+./shapes.web:782:14: note: virtual bool Shape::is_paraboloid() const
+virtual bool is_paraboloid(void) const = 0;
+^
+./shapes.web:783:14: note: virtual bool Shape::is_hyperboloid() const
+virtual bool is_hyperboloid(void) const = 0;
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:796:14: note: virtual bool Shape::is_whatever(Scanner_Node, real) const
+virtual bool is_whatever(Scanner_Node scanner_node = 0,
+^
+In file included from ./polygons.web:97:0:
+./shapes.web:869:1: note: virtual void Shape::set_surface_hiding_ctr(long unsigned int)
+set_surface_hiding_ctr(unsigned long u) = 0;
+^
+./shapes.web:873:1: note: virtual long unsigned int Shape::get_surface_hiding_ctr()
+get_surface_hiding_ctr(void) = 0;
+^
+./shapes.web:877:1: note: virtual long unsigned int Shape::reset_surface_hiding_ctr(long unsigned int)
+reset_surface_hiding_ctr(unsigned long u = 0) = 0;
+^
+./shapes.web:882:1: note: virtual void Shape::set_decomposition_level(long unsigned int)
+set_decomposition_level(unsigned long u) = 0;
+^
+./shapes.web:886:1: note: virtual long unsigned int Shape::get_decomposition_level()
+get_decomposition_level(void) = 0;
+^
+./shapes.web:890:1: note: virtual long unsigned int Shape::reset_decomposition_level(long unsigned int)
+reset_decomposition_level(unsigned long u = 0) = 0;
+^
+./shapes.web:893:23: note: virtual Pointer_Vector<Path>* Shape::decompose(Path*, Scanner_Node)
+Pointer_Vector<Path>* decompose(Path* p,
+^
+./shapes.web:897:24: note: virtual Pointer_Vector<Shape>* Shape::decompose(Shape*, Scanner_Node)
+Pointer_Vector<Shape>* decompose(Shape* s,
+^
+./shapes.web:902:1: note: virtual Pointer_Vector<Shape>* Shape::decompose(short unsigned int, bool, Scanner_Node)
+decompose(const unsigned short limit,
+^
+Makefile:689: recipe for target 'polygons.lo' failed
+make[4]: *** [polygons.lo] Error 1
+make[4]: Leaving directory '/home/brandon/Projects/gsrc/trunk/gnu/3dldf/work/3DLDF-2.0/src'
+Makefile:451: recipe for target 'all-recursive' failed
+make[3]: *** [all-recursive] Error 1
+make[3]: Leaving directory '/home/brandon/Projects/gsrc/trunk/gnu/3dldf/work/3DLDF-2.0'
+Makefile:382: recipe for target 'all' failed
+make[2]: *** [all] Error 2
+make[2]: Leaving directory '/home/brandon/Projects/gsrc/trunk/gnu/3dldf/work/3DLDF-2.0'
