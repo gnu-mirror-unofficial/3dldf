@@ -24,8 +24,11 @@ then
       echo "Building shared libraries"
 fi
 
-# configure CXX=/home/lfinsto/gcc-4.8.2/bin/g++ LDFLAGS="-L/home/lfinsto/gcc-4.8.2/lib64/../lib64" \
-#    --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
+#### This is for use on 'pcfinston', in order to be able to compile with GCC 4.8.2.
+#### LDF 2013.11.10.
+####
+#### configure CXX=/home/lfinsto/gcc-4.8.2/bin/g++ LDFLAGS="-L/home/lfinsto/gcc-4.8.2/lib64/../lib64" \
+#####    --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
 
 configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
 
