@@ -581,18 +581,18 @@ and subsequently resizing it, if necessary.
   world_extremes = p.world_extremes;
 
   if (world_extremes.size() == 0)
-     world_extremes.resize(6,0);
+     world_extremes.resize(6, 0);
 
   pre_projective_extremes = p.pre_projective_extremes; 
 
 
   if (pre_projective_extremes.size() == 0)  
-    pre_projective_extremes.resize(6,0);
+    pre_projective_extremes.resize(6, 0);
 
   projective_extremes = p.projective_extremes; 
 
   if (projective_extremes.size() == 0)  
-    projective_extremes.resize(6,0);
+    projective_extremes.resize(6, 0);
   
   
 
@@ -1137,7 +1137,18 @@ Path::set(string connector, bool cycle ... )
 {
 @q ***** (5) @>
 
-    volatile bool DEBUG = false;  /* |true|  */
+    volatile bool DEBUG = true;  /* |false|  */
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock();
+        cerr << "Entering `Path::set'."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
 
     line_switch = false;
     cycle_switch = cycle;
@@ -1192,7 +1203,7 @@ Path::set(string connector, bool cycle ... )
     {
         points.push_back(create_new<Point>(arg_ptr)); 
     }
-    
+
     va_end(ap);
 
 @q ***** (5) @>
@@ -1234,7 +1245,6 @@ Now resizing |pre_projective_extremes|.
 @*2 Constructor.
 @^\cfunc{Path}{Path}@>
 
-
 \LOG
 \initials{LDF 2004.06.07.}  
 Now setting |dash_pattern = 0| rather than
@@ -1271,7 +1281,7 @@ Path::Path(Point* first_point_ptr ... )
 {
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
-    cerr << "Entering Path() (Point* ...).\n" << flush;
+    cerr << "Entering Path() (Point* ...).\n";
 
   shape_type = PATH_TYPE;
   surface_hiding_ctr = 0;
