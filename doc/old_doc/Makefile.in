@@ -58,6 +58,9 @@
 #### USA                                  
 
 #### Laurence.Finston@gmx.de
+
+# html-split
+# 3DLDF.dvi 3DLDF.ps 3DLDF.pdf 3DLDF.info 3DLDF.html 
 VPATH = @srcdir@
 am__is_gnu_make = test -n '$(MAKEFILE_LIST)' && test -n '$(MAKELEVEL)'
 am__make_running_with_option = \
@@ -337,8 +340,8 @@ top_srcdir = @top_srcdir@
 	    ./graphics/png/3DLDF9?.png \
 	    ./graphics/png/3DLDF1??.png
 
-EXTRA_DIST = 3DLDF.ps 3DLDF.pdf 3DLDF.dvi \
-              ChangeLog.dev $(3dldf_TEXINFOS) \
+EXTRA_DIST = 3DLDF.ps 3DLDF.pdf 3DLDF.dvi 3DLDF.info 3DLDF.html \
+              ChangeLog.dev $(3dldf_TEXINFOS) 3DLDF/ \
               $(3dldf_EPS) $(3dldf_PNG) 
 
 all: all-am
@@ -509,6 +512,8 @@ mostlyclean-am: mostlyclean-generic mostlyclean-libtool
 
 pdf-am:
 
+ps: ps-am
+
 ps-am:
 
 uninstall-am:
@@ -528,7 +533,7 @@ uninstall-am:
 	tags-am uninstall uninstall-am
 
 
-all: 3DLDF.dvi 3DLDF.ps 3DLDF.pdf 3DLDF.info 3DLDF.html html-split
+all: 
 
 .PHONY: pdf
 
@@ -541,26 +546,26 @@ pdf: 3DLDF.pdf
 dummy:
 	echo "distdir = $(distdir)"
 
-.PHONY : ps
-ps: 3DLDF.ps 
+# .PHONY : ps
+# ps: 3DLDF.ps 
 
-3DLDF.ps : 3DLDF.dvi
-	@echo Running \"dvips -o 3DLDF.ps 3DLDF.dvi\"
-	dvips -o 3DLDF.ps 3DLDF.dvi
+# 3DLDF.ps : 3DLDF.dvi
+# 	@echo Running \"dvips -o 3DLDF.ps 3DLDF.dvi\"
+# 	dvips -o 3DLDF.ps 3DLDF.dvi
 
-3DLDF.dvi: $(3dldf_TEXINFOS)
-	texi2dvi 3DLDF.texi
+# 3DLDF.dvi: $(3dldf_TEXINFOS)
+# 	texi2dvi 3DLDF.texi
 
-3DLDF.html: $(3dldf_TEXINFOS)
-	makeinfo --html --no-split 3DLDF.texi
+# 3DLDF.html: $(3dldf_TEXINFOS)
+# 	makeinfo --html --no-split 3DLDF.texi
 
-3DLDF.info: $(3dldf_TEXINFOS)
-	makeinfo 3DLDF.texi
+# 3DLDF.info: $(3dldf_TEXINFOS)
+# 	makeinfo 3DLDF.texi
 
-.PHONY: html-split
+# .PHONY: html-split
 
-html-split: $(3dldf_TEXINFOS)
-	makeinfo --html 3DLDF.texi
+# html-split: $(3dldf_TEXINFOS)
+# 	makeinfo --html 3DLDF.texi
 
 .PHONY : purge
 purge:
