@@ -35,8 +35,8 @@ fi
 LIBRARY_FLAGS="-L/home/lfinsto/glibc-install/lib64 "
 LIBRARY_FLAGS+="-L/home/lfinsto/glibc-install/lib -L/home/lfinsto/gcc-4.8.2/lib64/../lib64" 
 
-configure $CONF_STATIC CPPFLAGS="-I/home/lfinsto/glibc-install/include" \
-   LDFLAGS="$LIBRARY_FLAGS" --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
+configure $CONF_STATIC CXX=/home/lfinsto/gcc-4.8.2/bin/g++ CPPFLAGS="-I/home/lfinsto/glibc-install/include" \
+   LDFLAGS="$LIBRARY_FLAGS" --prefix=`pwd` LIBS="-lgsl -lgslcblas -lm"
 
 #configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
 
