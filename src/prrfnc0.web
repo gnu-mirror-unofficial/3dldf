@@ -3502,6 +3502,10 @@ Added this section.
 \LOG
 \initials{LDF 2006.02.23.}
 Now setting |*result| to 0, if the value returned by |sin() < .00001|. 
+
+\initials{LDF 2013.12.11.}
+Added conditionally compiled code for the cases that |real| is a |typedef| for |float|
+or |double|.  This eliminates a warning from GCC.
 \ENDLOG 
 
 @<Define parser rule functions@>=
@@ -3509,9 +3513,19 @@ Now setting |*result| to 0, if the value returned by |sin() < .00001|.
   else if (operator_value == SIND)
       {
 
-          operand = fmod(operand, 360.0);
+          real r;
 
-          real r = sin((PI/180.0) * operand);
+#if LDF_REAL_FLOAT
+          operand = fmodf(operand, 360.0F);
+          r = sin((PI/180.0F) * operand);
+#elif LDF_REAL_DOUBLE
+          operand = fmod(operand, 360.0D);
+          r = sin((PI/180.0D) * operand);
+#else /* Default.  
+          operand = fmodf(operand, 360.0F);
+          r = sin((PI/180.0F) * operand);
+#endif
+          
           *result = (fabs(r) < .00001) ? 0 : r;
           return 0;
           
@@ -3523,14 +3537,31 @@ Now setting |*result| to 0, if the value returned by |sin() < .00001|.
 \LOG
 \initials{LDF 2006.02.23.}
 Now setting |*result| to 0, if the value returned by |cos() < .00001|. 
+
+\initials{LDF 2013.12.11.}
+Added conditionally compiled code for the cases that |real| is a |typedef| for |float|
+or |double|.  This eliminates a warning from GCC.
 \ENDLOG 
 
 @<Define parser rule functions@>=
 
   else if (operator_value == COSD)
      {
-          operand = fmod(operand, 360.0);
-          real r = cos((PI/180.0) * operand);
+
+          real r;
+
+#if LDF_REAL_FLOAT
+          operand = fmodf(operand, 360.0F);
+          r = cos((PI/180.0F) * operand);
+#elif LDF_REAL_DOUBLE
+          operand = fmod(operand, 360.0D);
+          r = cos((PI/180.0D) * operand);
+#else /* Default.  
+          operand = fmodf(operand, 360.0F);
+          r = cos((PI/180.0F) * operand);
+
+#endif
+
           *result = (fabs(r) < .00001) ? 0 : r;
           return 0;
      }
@@ -3541,6 +3572,10 @@ Now setting |*result| to 0, if the value returned by |cos() < .00001|.
 \LOG
 \initials{LDF 2007.02.06.}
 Added this section.
+
+\initials{LDF 2013.12.11.}
+Added conditionally compiled code for the cases that |real| is a |typedef| for |float|
+or |double|.  This eliminates a warning from GCC.
 \ENDLOG 
 
 @<Define parser rule functions@>=
@@ -3548,7 +3583,13 @@ Added this section.
   else if (operator_value == TAND)
      {
 
-          operand = fmod(operand, 360.0);
+#if LDF_REAL_FLOAT
+          operand = fmodf(operand, 360.0F); 
+#elif LDF_REAL_DOUBLE
+          operand = fmod(operand, 360.0D);  
+#else /* Default.  
+          operand = fmodf(operand, 360.0F); 
+#endif
 
 @q ****** (6)@> 
 
@@ -3968,7 +4009,7 @@ Scan_Parse::complex_primary_rule_func_0(void* v,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -4117,7 +4158,7 @@ Scan_Parse::complex_arith_op_rule_func(void* v,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -4835,7 +4876,7 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter); 
@@ -5265,7 +5306,7 @@ Scan_Parse::set_matrix_rule_func_0(void* curr_var,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -6052,7 +6093,7 @@ Scan_Parse::set_sphere_development_rule_func_0(void* curr_var,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
