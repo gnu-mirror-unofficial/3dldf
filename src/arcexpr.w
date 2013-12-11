@@ -84,7 +84,7 @@ Added this rule.
 {
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) ||  entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
@@ -151,7 +151,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Arc>*>(0))
       {
 
           delete c;
