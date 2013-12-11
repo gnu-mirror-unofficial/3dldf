@@ -173,7 +173,7 @@ Scanner_Type::~Scanner_Type(void)
   bool DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     cerr << "Entering `Scanner_Type' destructor."
-         << endl << flush; 
+         << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
@@ -298,7 +298,7 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
 #if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "Calling `delete id_map_node'."
-             << endl << flush;
+             << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
       delete id_map_node;
@@ -311,7 +311,7 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
    if (DEBUG)
      {
        cerr << "After call to `delete id_map_node'."
-            << endl << flush;
+            << endl;
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -323,7 +323,7 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
      {
          cerr << "In `Scanner_Type' destructor: Calling `delete' on `up'."
               << endl << "This will cause this function to be called recursively."
-              << endl << flush; 
+              << endl; 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -709,7 +709,7 @@ Now deleting |tolerance| and setting it to 0.
 #if DEBUG_COMPILE
   if (DEBUG)
     cerr << "Exiting `Scanner_Type' destructor."
-         << endl << flush; 
+         << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return;
@@ -1437,7 +1437,7 @@ Scanner_Type::add_synonym(string synonym, string base_name)
   bool DEBUG = false; /* |true| */ @;
 
   if (DEBUG)
-    cerr << "Entering Scanner_Type::add_synonym()." << "\n" << flush;
+    cerr << "Entering Scanner_Type::add_synonym()." << "\n";
 
 #endif
   
@@ -1451,9 +1451,8 @@ Scanner_Type::add_synonym(string synonym, string base_name)
       cerr << "ERROR! In Scanner_Type::add_synonym():\n"
            << "Entry already exists for " << synonym 
            << ".Returning 0.\n"
-           << "Type <RETURN> to continue.\n"
-           << flush;  
-     
+           << "Type <RETURN> to continue.\n";
+
       getchar();  /* Don't delete this!  */@;  
       
       return static_cast<Id_Map_Entry_Node>(0);
@@ -1468,9 +1467,8 @@ Scanner_Type::add_synonym(string synonym, string base_name)
            << "No existing entry for " << base_name << ", so I "
            << "can't add a synonym." << endl
            << "Returning 0.\n"
-           << "Type <RETURN> to continue.\n"
-           << flush;  
-     
+           << "Type <RETURN> to continue.\n";
+
       getchar();  /* Don't delete this!  */@;  
       
       return static_cast<Id_Map_Entry_Node>(0);
@@ -1504,7 +1502,7 @@ Scanner_Type::add_synonym(string synonym, string base_name)
   if (DEBUG)  
     {
       cerr << "Exiting Scanner_Type::add_synonym() and returning `entry'."
-         << "\n" << flush;
+         << "\n";
     }
 #endif
 
@@ -1541,7 +1539,7 @@ Scanner_Type::lookup(string s,
   bool DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     cerr << "Entering Scanner_Type::lookup(). level == " << level
-         << ".\n" << flush;
+         << ".\n";
 #endif
 
   if (local_id_map_node == 0)
@@ -1562,7 +1560,7 @@ Scanner_Type::lookup(string s,
               cerr << "In lookup(): Found " << s 
                    << ". It's a synonym for " << *base_name << "."
                    << endl << "Calling `lookup(" << *base_name
-                   << ", ...)'." << endl << flush;  
+                   << ", ...)'." << endl;  
             }
 #endif
       
@@ -1577,7 +1575,7 @@ Scanner_Type::lookup(string s,
           if (DEBUG) 
             cerr << "In lookup(): Found " << s 
                  << ". Returning Id_Map_Entry_Node with `type' == " 
-                << name_map[iter->second->type] << ".\n" << flush;
+                << name_map[iter->second->type] << ".\n";
 #endif
 
       return iter->second;
@@ -1607,7 +1605,7 @@ recursively, using |local_id_map_node->up| as the |local_id_map_node| argument.
           
 #if DEBUG_COMPILE
           if (DEBUG) 
-            cerr << "traverse == false.  Returning 0." << endl << flush;
+            cerr << "traverse == false.  Returning 0." << endl;
 #endif
           
           return static_cast<Id_Map_Entry_Node>(0);
@@ -1624,7 +1622,7 @@ sake of the debugging output.
 #if DEBUG_COMPILE
           if (DEBUG) 
             cerr << "traverse == true, but local_id_map_node->up  == 0. "
-                 << "Returning 0." << endl << flush;
+                 << "Returning 0." << endl;
 #endif        
           
           return static_cast<Id_Map_Entry_Node>(0);
@@ -1642,7 +1640,7 @@ Call this function recursively, incrementing |level| and using
             cerr << "traverse == true and local_id_map_node->up  != 0. "
                  << "Calling this function recursively:" << endl 
                  << "`lookup(" << s << ", true, " << level
-                 << ", local_id_map_node->up)'" << endl << flush;
+                 << ", local_id_map_node->up)'" << endl;
 #endif        
           return lookup(s, true, level, local_id_map_node->up);
         }
@@ -2235,7 +2233,7 @@ invalid value.
   return bvp;
 
 } /* End of |Scanner_Type::handle_numeric_list()| definition.  */
-;
+
 
 @q * (0) Extract |Picture| output arguments.@>
 @* Extract |Picture| output arguments.

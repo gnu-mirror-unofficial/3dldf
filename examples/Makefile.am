@@ -70,18 +70,32 @@
 # stlltn05.txt
 # stlltn05.mp
 
+#### Errors now occur when these two files are passed to 3dldf as input.
+#### The problems cannot be fixed easily.
+#### LDF 2013.12.11.
+#### elpsd_17.ldf
+#### plyhd_05.ldf
+####
+#### LDF 2013.12.11.
+
+#### Chess fonts may not be available.
+#### chssbrds.ldf
+#### chssbrds.txt
+####
+#### LDF 2013.12.11.
+
 # The generated mp files need to be modified, so the mp files are included in
 # the distribution.  Check this!  LDF 2013.11.05.
 
 LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
              bldelem4.ldf bldelem5.ldf braik_01.ldf braik_02.ldf braik_03.ldf \
-             chssbrds.ldf clktwr_01.ldf cones01.ldf cubd_01.ldf cubd_02.ldf \
+             clktwr_01.ldf cones01.ldf cubd_01.ldf cubd_02.ldf \
              cubd_06.ldf cycld_1.ldf cycld_2.ldf dodec_01.ldf dodec_02.ldf \
              dodec_03.ldf ellpln01.ldf elpdmd01.ldf elpsd_02.ldf elpsd_06.ldf \
-             elpsd_13.ldf elpsd_17.ldf fctcn01.ldf goboards.ldf grrhm_02.ldf \
+             elpsd_13.ldf fctcn01.ldf goboards.ldf grrhm_02.ldf \
              grrhm_06.ldf hyprb_00.ldf hyprb_01.ldf hyprb_02.ldf hyprb_03.ldf \
              hyprb_04.ldf hyprb_05.ldf intrfr_2.ldf intrfr_3.ldf intrfr_5.ldf \
-             intrfr_6.ldf intrfr_7.ldf kntpoly1.ldf plyhd_01.ldf plyhd_05.ldf \
+             intrfr_6.ldf intrfr_7.ldf kntpoly1.ldf plyhd_01.ldf \
              polyrhyt.ldf pprcut01.ldf prbla_00.ldf prbla_01.ldf prbla_05.ldf \
              prbla_06.ldf prbla_10.ldf prbla_11.ldf prbla_12.ldf rhmtrc_01.ldf \
              ripple_1.ldf ripple_2.ldf sphrmd01.ldf sphrmd02.ldf sphrmd03.ldf \
@@ -89,7 +103,7 @@ LDF_FILES := arc_1.ldf arc_1.ldf bldelem1.ldf bldelem2.ldf bldelem3.ldf \
              sundl_02.ldf sundl_03.ldf tngnts_1.ldf trchd_1.ldf
 
 TEX_FILES := arc_1.txt bldelem1.txt bldelem2.txt bldelem3.txt bldelem4.txt \
-             bldelem5.txt braik_01.txt braik_02.txt braik_03.txt chssbrds.txt \
+             bldelem5.txt braik_01.txt braik_02.txt braik_03.txt \
              clktwr_01.txt cycld_1.txt cycld_2.txt dodec_01.txt dodec_02.txt \
              dodec_03.txt ellpln01.txt elpdmd01.txt fctcn01.txt  \
              goboards.txt grrhm_06.txt hyprb_00.txt hyprb_01.txt \
@@ -141,7 +155,12 @@ export top_builddir
 ####
 #### LDF 2013.11.05.
 
-EXTRA_DIST = 00README $(PS_FILES) $(PDF_FILES) $(LDF_FILES) $(TEX_FILES) \
+#### Removed the PostScript and PDF files from the distribution.
+#### I will distribute them separately.
+####
+#### $(PS_FILES) $(PDF_FILES) 
+
+EXTRA_DIST = 00README $(LDF_FILES) $(TEX_FILES) \
              $(NON_GEN_MP_FILES) $(LMC_FILES) Makefile.am Makefile.in Makefile_sub \
              fmt8511.txt fmtdina4.txt wave_1.ldf wave_1.mp.bak wave_2.ldf wave_2.mp.bak
 
@@ -199,8 +218,9 @@ rebuild:
 
 query:
 	@echo "LDF_FILES == $(LDF_FILES)"
-	$(MAKE) -f Makefile_sub query
+	@echo "PS_FILES == $(PS_FILES)"
 
+# $(MAKE) -f Makefile_sub query
 # @echo "TEX == $(TEX)"
 # @echo "CXXCOMPILE == $(CXXCOMPILE)"
 # @echo "SOURCEDIR == $(SOURCEDIR)"

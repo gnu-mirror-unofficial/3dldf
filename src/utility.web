@@ -289,7 +289,7 @@ make_perspective_frame(Picture& picture,
 #if 0   
       cerr << "points[" << points.size()
            << "]. Angle = " << *iter <<". x = " 
-           << q.get_x() << endl << flush;
+           << q.get_x() << endl;
 #endif 
       points.push_back(create_new<Point>(q));                   
       if (*iter == 60 || *iter == 80) /* KLUDGE.  \initials{LDF 2003.05.14.}  */
@@ -425,8 +425,8 @@ persp_0(Picture& picture,
   if (front_corner_z < 0)
     {
       cerr << "ERROR! In persp_0():\n"
-           << "front_corner_z < 0.\nReturning.\n\n"
-           << flush;
+           << "front_corner_z < 0.\nReturning.\n\n";
+
       return;
     }
 

@@ -287,7 +287,7 @@ Scanner_Type::create(string str,
 
 #if DEBUG_COMPILE
     if (DEBUG)
-      cerr << "in_filename == " << in_filename << endl << flush;
+      cerr << "in_filename == " << in_filename << endl;
 #endif
 
   string::size_type s = in_filename.find('.');
@@ -295,7 +295,7 @@ Scanner_Type::create(string str,
     {
 #if DEBUG_COMPILE
       if (DEBUG) 
-        cerr << "No period." << "\n" << flush;@/@,@;
+        cerr << "No period." << "\n";@/@,@;
 #endif
 
 @q **** (4)    @>      
@@ -307,7 +307,7 @@ Scanner_Type::create(string str,
 
 #if DEBUG_COMPILE
       if (DEBUG)
-        cerr << "Trying " << in_filename<< ".\n" << flush;
+        cerr << "Trying " << in_filename<< ".\n";
 #endif
       
       in_file->open(in_filename.c_str());
@@ -315,7 +315,7 @@ Scanner_Type::create(string str,
         {
 #if DEBUG_COMPILE
           if (DEBUG)
-            cerr << in_filename << " exists!" << endl << flush;
+            cerr << in_filename << " exists!" << endl;
 #endif
         }
 
@@ -327,7 +327,7 @@ Scanner_Type::create(string str,
         {
 #if DEBUG_COMPILE
           if (DEBUG)
-            cerr << in_filename << " doesn't exist!" << endl << flush;
+            cerr << in_filename << " doesn't exist!" << endl;
 #endif
           in_filename = str;
           in_file->open(in_filename.c_str());
@@ -335,8 +335,7 @@ Scanner_Type::create(string str,
             {
               cerr << "ERROR! In Scanner_Type::create():\n"
                    << in_filename << " doesn't exist! "
-                   << "Returning 0. Will try to continue.\n\n" 
-                   << flush;
+                   << "Returning 0. Will try to continue.\n\n";
 
               delete in_file;
               return 0;
@@ -352,8 +351,12 @@ input filename.
   else 
     {
 #if DEBUG_COMPILE
-if (DEBUG) 
-  cerr << "s == " << s << endl << flush;
+      if (DEBUG) 
+      {
+          cerr_mutex.lock(); 
+          cerr << "s == " << s << endl;
+          cerr_mutex.unlock(); 
+      }
 #endif
 
       in_file->open(in_filename.c_str());
@@ -361,14 +364,14 @@ if (DEBUG)
         {
 #if DEBUG_COMPILE
           if (DEBUG)
-            cerr << in_filename << " exists!" << endl << flush;
+            cerr << in_filename << " exists!" << endl;
 #endif
         }
       else
         {
           cerr << "ERROR! In Scanner_Type::create():\n"
                << in_filename << " doesn't exist! "
-               << "Returning 0. Will try to continue.\n\n" << flush;
+               << "Returning 0. Will try to continue.\n\n";
           delete in_file;
           return 0;
         }
@@ -399,7 +402,7 @@ or more of the formats supported by the GNU plotutils package.
 
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "out_filename_base == " << out_filename_base << endl << flush;
+    cerr << "out_filename_base == " << out_filename_base << endl;
 #endif
 
 
@@ -411,7 +414,7 @@ or more of the formats supported by the GNU plotutils package.
 #if DEBUG_COMPILE
   if (DEBUG)   
     cerr << "out_filename_base after erase == "
-         << out_filename_base << endl << flush;
+         << out_filename_base << endl;
 #endif
 
 
@@ -982,7 +985,7 @@ Now setting |scanner_node->id_map_node->scanner_node = scanner_node|.
 #if DEBUG_COMPILE
      if (DEBUG)
        cerr << "top_level == true.  Initializing scanner_node->id_map_node." 
-            << endl << flush;
+            << endl;
 #endif
 
 @q ***  Add entries to |id_map_node->id_map|.  @>          
@@ -5587,6 +5590,18 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
 
     Focus a(0, 0, -10, 0, 0, 10, 20); 
 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_mutex.lock(); 
+       a.show("a:");
+       cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
     Focus* f = create_new<Focus>(a);
 
     v = static_cast<void*>(f); 
@@ -6091,7 +6106,7 @@ Added this section.
            {
              if (DEBUG) 
                cerr << "Entry " << i++ << ": " << iter->first
-                    << endl << flush;
+                    << endl;
            }
        }
 #endif /* |DEBUG_COMPILE|  */
@@ -6105,7 +6120,7 @@ Added this section.
 #if DEBUG_COMPILE
      if (DEBUG)
        cerr << "top_level == false.  Not initializing scanner_node->id_map_node." 
-            << endl << flush;
+            << endl;
 #endif
  
      
@@ -6116,7 +6131,7 @@ Added this section.
 @<Define |Scanner_Type::create|@>=
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "Exiting Scanner_Node::create()\n" << flush;
+    cerr << "Exiting Scanner_Node::create()\n";
 #endif
   return scanner_node;
 
@@ -6143,7 +6158,7 @@ Added this section.
    if (DEBUG) 
    cerr << "In `Check in_filename' section:" << endl
         << "in_filename == " << in_filename << endl
-        << "in_filename == " << in_filename << endl << flush;
+        << "in_filename == " << in_filename << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
@@ -6177,7 +6192,7 @@ the |input| command yet).
                    << endl  
                    << "Won't input `" << in_filename << "' twice." 
                    << endl  
-                   << "Returning 0. Will try to continue.\n\n" << flush;
+                   << "Returning 0. Will try to continue.\n\n";
 
               delete in_file;
        
@@ -6193,7 +6208,7 @@ the |input| command yet).
         if (DEBUG) 
           cerr << in_filename << " not found on `in_filename_vector'." 
                << endl << "Adding it."  
-               << endl << flush;
+               << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
         in_filename_vector.push_back(in_filename);
@@ -6218,7 +6233,7 @@ This section is used in |Scanner_Node::create|.
    if (DEBUG) 
    cerr << "In `Check out_filename' section:" << endl
         << "in_filename == " << in_filename << endl
-        << "out_filename == " << out_filename << endl << flush;
+        << "out_filename == " << out_filename << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
@@ -6252,7 +6267,7 @@ the |input| command yet).
                    << endl  
                    << "Won't input `" << in_filename << "' twice." 
                    << endl  
-                   << "Returning 0. Will try to continue.\n\n" << flush;
+                   << "Returning 0. Will try to continue.\n\n";
 
               delete in_file;
        
@@ -6268,7 +6283,7 @@ the |input| command yet).
         if (DEBUG) 
           cerr << out_filename << " not found on `out_filename_vector'." 
                << endl << "Adding it."  
-               << endl << flush;
+               << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
         out_filename_vector.push_back(out_filename);
@@ -6287,7 +6302,7 @@ the |input| command yet).
      {
        cerr << "ERROR! In `Scanner_Node::create()':\n"
          << out_filename << " doesn't exist! "
-           << "Returning 0. Will try to continue.\n\n" << flush;
+           << "Returning 0. Will try to continue.\n\n";
        delete in_file;
        delete out_file;
        return 0;
@@ -6296,8 +6311,8 @@ the |input| command yet).
      {
 #if DEBUG_COMPILE
        if (DEBUG)
-         cerr << "Succeeded in opening " << out_filename << ".\n"
-              << flush;
+         cerr << "Succeeded in opening " << out_filename << ".\n";
+
 #endif
      }
 

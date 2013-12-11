@@ -71,8 +71,10 @@ set f with_position (0, 1, -20) with_direction (0, 1, 10)
 picture save_picture;
 
 beginfig(1); 
+
 polyhedron gr;
-gr := unit_great_rhombicosidododecahedron scaled 4;
+
+gr := unit_great_rhombicosidodecahedron scaled (4, 0);
 
 polygon poly[];
 
@@ -103,6 +105,7 @@ endfig with_focus f;
 %% **** (4) 
 
 beginfig(2); 
+
 for i = 0 upto size gr - 1:
    poly[i] := get_reg_polygon (i) gr;
    center[i] := get_center poly[i];
@@ -127,6 +130,7 @@ output save_picture with_projection parallel_x_y;
 endfig; 
 
 beginfig(4); 
+
 for i = 0 upto size gr - 1:
    poly[i] := get_reg_polygon (i) gr;
    center[i] := get_center poly[i];
@@ -145,8 +149,6 @@ for i = 0 upto size gr - 1:
    fi;
 endfor;
 endfig with_projection parallel_z_y; 
-
-
 
 verbatim_metapost "end";
 end;

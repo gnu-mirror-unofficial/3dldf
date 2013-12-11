@@ -85,10 +85,12 @@ t := identity rotated (15, 15);
 r *= c *= t;
 
 draw c;
+
 draw r with_color red;
 
 plane q;
-q := (plane) r;
+
+q := get_plane r;
 
 polygon poly;
 poly := c intersection q;
@@ -100,7 +102,6 @@ for i = 0 upto 5:
    p[i] := get_point (i) poly; 
    drawdot p[i] with_color green with_pen dot_pen;
 endfor;
-
 
 label.lrt("$i_0$", p0);  
 label.lft("$i_1$",  p1);   
@@ -116,12 +117,10 @@ endfig with_focus f no_sort;
 point label_pt;
 label_pt := (0, -10);
 
-
 beginfig(2); 
 output save_picture with_projection parallel_x_z with_factor .75;
 %label("Parallel Projection, X-Z Plane", label_pt shifted 6);
 endfig with_projection parallel_x_y;
-
 
 beginfig(3); 
 output save_picture with_projection parallel_x_y with_factor .75;

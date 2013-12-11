@@ -774,22 +774,12 @@ Now resizing |pre_projective_coordinates| and
 
 @<Initialize coordinates and limits@>=
 
-#ifdef __DECCXX  
-   world_coordinates          = null_coordinates;
-   user_coordinates           = null_coordinates;
-   view_coordinates           = null_coordinates;  
-   pre_projective_coordinates = null_coordinates;@/  
-   projective_coordinates = null_coordinates;@/  
-#endif 
-
-#ifdef __GNUC__
    world_coordinates.resize(4, 0);
    user_coordinates.resize(4, 0);        
    view_coordinates.resize(4, 0);        
    pre_projective_coordinates.resize(4, 0); 
    projective_coordinates.resize(4, 0); 
    transform.reset();
-#endif 
 
    world_coordinates[3] = 1; 
    user_coordinates[3] = 1;
@@ -837,11 +827,11 @@ Point::Point(void)
   @<Initialize coordinates and limits@>@;
   do_output = true;
 
-  pen_vector = 0; 
-  dash_pattern_vector = 0;
+  pen_vector          = static_cast<Pointer_Vector<Pen>*>(0);
+  dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
 
-  draw_color_vector = 0;
-  fill_color_vector = 0;
+  draw_color_vector   = static_cast<Pointer_Vector<Color>*>(0);
+  fill_color_vector   = static_cast<Pointer_Vector<Color>*>(0);
 
   shape_type = POINT_TYPE;
   surface_hiding_ctr = 0;
@@ -902,11 +892,11 @@ Point(const real x, const real y, const real z);
   
    do_output = true;
 
-   pen_vector = 0; 
-   dash_pattern_vector = 0;
+   pen_vector          = static_cast<Pointer_Vector<Pen>*>(0);
+   dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
 
-   draw_color_vector = 0;
-   fill_color_vector = 0;
+   draw_color_vector   = static_cast<Pointer_Vector<Color>*>(0);
+   fill_color_vector   = static_cast<Pointer_Vector<Color>*>(0);
 
    shape_type = POINT_TYPE;
    surface_hiding_ctr = 0;
@@ -971,29 +961,28 @@ Point::set(const real x, const real y, const real z)
 {
     Point p(x, y, z);
 
-    if (pen_vector != 0)
+    if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        {
            delete pen_vector;
-           pen_vector = 0; 
+           pen_vector = static_cast<Pointer_Vector<Pen>*>(0); 
        }
 
-    if (dash_pattern_vector != 0)
+    if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
        {
            delete dash_pattern_vector;
-           dash_pattern_vector = 0; 
+           dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
 
-
-   if (draw_color_vector != 0)
+   if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete draw_color_vector;
-         draw_color_vector = 0;
+         draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
-   if (fill_color_vector != 0)
+   if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete fill_color_vector;
-         fill_color_vector = 0;
+         fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
     *this = p;
@@ -1036,11 +1025,11 @@ Point::Point(const Point& p)
 {
    @<Initialize coordinates and limits@>@;
 
-   draw_color_vector = 0;
-   fill_color_vector = 0;
+   draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
+   fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
 
-   pen_vector = 0;
-   dash_pattern_vector = 0;
+   pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
+   dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
 
    *this = p;
 
@@ -1048,6 +1037,9 @@ Point::Point(const Point& p)
    surface_hiding_ctr = 0;
    decomposition_level = 0;
    do_output = true;
+
+   return;
+
 }
 
 @q *** (3) Setting function.@>
@@ -1085,28 +1077,28 @@ void
 Point::set(const Point& p)
 {
 
-   if (draw_color_vector != 0)
+   if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete draw_color_vector;
-         draw_color_vector = 0;
+         draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
-   if (fill_color_vector != 0)
+   if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete fill_color_vector;
-         fill_color_vector = 0;
+         fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
-    if (pen_vector != 0)
+    if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        {
            delete pen_vector;
-           pen_vector = 0; 
+           pen_vector = static_cast<Pointer_Vector<Pen>*>(0); 
        }
 
-    if (dash_pattern_vector != 0)
+    if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
        {
            delete dash_pattern_vector;
-           dash_pattern_vector = 0; 
+           dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
 
 
@@ -1218,30 +1210,43 @@ virtual
 @<Define |Point| functions@>=
 Point::~Point(void)
 {
+   volatile bool DEBUG = false;  /* |true|  */
 
-    if (pen_vector != 0)
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_mutex.lock(); 
+       cerr << "Entering `Point' destructor." << endl;
+       cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+    if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        {
            delete pen_vector;
-           pen_vector = 0; 
+           pen_vector = static_cast<Pointer_Vector<Pen>*>(0); 
        }
 
-    if (dash_pattern_vector != 0)
+    if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
        {
            delete dash_pattern_vector;
-           dash_pattern_vector = 0; 
+           dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
 
 
-   if (draw_color_vector != 0)
+   if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete draw_color_vector;
-         draw_color_vector = 0;
+         draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
-   if (fill_color_vector != 0)
+   if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete fill_color_vector;
-         fill_color_vector = 0;
+         fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
    return;
@@ -1338,48 +1343,53 @@ Point::operator=(const Point& p)
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   transform     = p.transform;
-
 
   drawdot_value = p.drawdot_value;
 
-  if (p.draw_color_vector == 0 && draw_color_vector == 0) 
+  if (p.draw_color_vector == 0 && draw_color_vector == static_cast<Pointer_Vector<Color>*>(0)) 
      ; /* Do nothing.  */@; 
 
-  else if (p.draw_color_vector != 0 && draw_color_vector == 0)
+  else if (   p.draw_color_vector != 0 
+           && draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
      {
         draw_color_vector = new Pointer_Vector<Color>;
         *draw_color_vector = *(p.draw_color_vector);
      }
 
-  else if (p.draw_color_vector != 0 && draw_color_vector != 0)
+  else if (   p.draw_color_vector != 0 
+           && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
      *draw_color_vector = *(p.draw_color_vector);
      
-  else if (p.draw_color_vector == 0 && draw_color_vector != 0)
+  else if (   p.draw_color_vector == 0 
+           && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
      {
         delete draw_color_vector;
-        draw_color_vector = 0;
+        draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
 
      }
 
   
-  if (p.pen_vector == 0 && pen_vector == 0)
+  if (   p.pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+      && pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
      ;  /* Do nothing.  */@; 
 
-  else if (p.pen_vector != 0 && pen_vector == 0)
+  else if (   p.pen_vector != static_cast<Pointer_Vector<Pen>*>(0) 
+           && pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
       {
          pen_vector = new Pointer_Vector<Pen>;
          *pen_vector = *(p.pen_vector);
       }
 
-  else if (p.pen_vector != 0 && pen_vector != 0)
+  else if (   p.pen_vector != static_cast<Pointer_Vector<Pen>*>(0) 
+           && pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
       *pen_vector = *(p.pen_vector);
 
-  else if (p.pen_vector == 0 && pen_vector != 0)
+  else if (   p.pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+           && pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
       {
          delete pen_vector;
-         pen_vector = 0;
+         pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
       }
 
   world_coordinates = p.world_coordinates;
@@ -1479,28 +1489,28 @@ void
 Point::clear(void)  
 {
 
-    if (pen_vector != 0)
+    if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        {
            delete pen_vector;
-           pen_vector = 0; 
+           pen_vector = static_cast<Pointer_Vector<Pen>*>(0); 
        }
 
-    if (dash_pattern_vector != 0)
+    if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
        {
            delete dash_pattern_vector;
-           dash_pattern_vector = 0; 
+           dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
 
-   if (draw_color_vector != 0)
+   if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete draw_color_vector;
-         draw_color_vector = 0;
+         draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
-   if (fill_color_vector != 0)
+   if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
          delete fill_color_vector;
-         fill_color_vector = 0;
+         fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
 
@@ -1930,8 +1940,8 @@ no |Scanner_Node| argument is passed to this function, and I don't want to add o
                      << endl << "'do_persp == true', so "
                      << "'Focus* f' may not be 0.\n"
                      << "Returning 'projective_coordinates' as-is "
-                     << "and will try to continue." << endl 
-                    ;
+                     << "and will try to continue." << endl;
+
                 return  projective_coordinates;
             }
 
@@ -2055,8 +2065,8 @@ Point::get_coord(char c, char coords,
              << endl << "'do_persp == true', so "
              << "'Focus* f' may not be 0.\n"
              << "Returning 'projective_coordinates' as-is "
-             << "and will try to continue." << endl 
-            ;
+             << "and will try to continue." << endl;
+
         return  INVALID_REAL;
     }
 
@@ -2667,8 +2677,8 @@ $t$ will usually not be significant.
   else
     {
       cerr << "ERROR! In Point::is_on_segment()\n"
-        << "Can't calculate t. Returning false and INVALID_REAL.\n\n"
-         ;
+        << "Can't calculate t. Returning false and INVALID_REAL.\n\n";
+
       return pair <bool, real>(false, INVALID_REAL);
     }
   
@@ -2953,7 +2963,7 @@ push_draw_color(Color*& c, bool copy = true);
 int
 Point::push_draw_color(Color*& c, bool copy)
 {
-   if (draw_color_vector == 0)
+   if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       draw_color_vector = new Pointer_Vector<Color>;
 
    Color* d;
@@ -3004,7 +3014,7 @@ push_fill_color(Color*& c, bool copy = true);
 int
 Point::push_fill_color(Color*& c, bool copy)
 {
-   if (fill_color_vector == 0)
+   if (fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       fill_color_vector = new Pointer_Vector<Color>;
 
    Color* d;
@@ -3055,10 +3065,10 @@ push_color(Color*& c, bool copy = true);
 int
 Point::push_color(Color*& c, bool copy)
 {
-   if (draw_color_vector == 0)
+   if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       draw_color_vector = new Pointer_Vector<Color>;
 
-   if (fill_color_vector == 0)
+   if (fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       fill_color_vector = new Pointer_Vector<Color>;
 
    Color* d;
@@ -3118,7 +3128,7 @@ push_pen(Pen*& p, bool copy = true);
 int 
 Point::push_pen(Pen*& p, bool copy)
 {
-   if (pen_vector == 0)
+   if (pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
       pen_vector = new Pointer_Vector<Pen>;
 
    Pen* q;
@@ -3162,7 +3172,7 @@ push_dash_pattern(Dash_Pattern*& d, bool copy = true);
 int 
 Point::push_dash_pattern(Dash_Pattern*& d, bool copy)
 {
-   if (dash_pattern_vector == 0)
+   if (dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0))
       dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
 
    Dash_Pattern* e;
@@ -4752,8 +4762,8 @@ Explain this!
                   << projective_coordinates[0] << ", " 
                   << projective_coordinates[1] << ", " 
                   << projective_coordinates[2] << ", " 
-                  << projective_coordinates[3] << ")" << endl << endl 
-                 ;  
+                  << projective_coordinates[3] << ")" << endl << endl;
+
            }
 
          
@@ -5666,8 +5676,8 @@ Point::show(string text,
 
     if (*this == INVALID_POINT)
       {
-          cerr << "INVALID_POINT: (INVALID_REAL, INVALID_REAL, INVALID_REAL)\n"
-           ;
+          cerr << "INVALID_POINT: (INVALID_REAL, INVALID_REAL, INVALID_REAL)\n";
+
           return;
       }
 
@@ -7503,8 +7513,8 @@ Point::output(Scanner_Node scanner_node)
   if (do_output == false)
     {
       if (DEBUG)
-        cerr << "In Point::output(): do_output == false. Returning.\n" 
-            ;
+        cerr << "In Point::output(): do_output == false. Returning.\n";
+
       return;
     }
 
@@ -7536,8 +7546,8 @@ Now writing ``{\bf undrawdot}'' to |*out_stream| when
 
       if (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
         {
-          cerr << "Type <RETURN> to continue.\n"
-              ;  
+          cerr << "Type <RETURN> to continue.\n";
+
           getchar();  /* Don't delete this!  */@;  
         } 
 
@@ -7565,7 +7575,7 @@ but I've removed |drawdot_color|.
 
 @<Define |Point| functions@>=
 
-  if (draw_color_vector != 0 && draw_color_vector->ctr > 0)
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) && draw_color_vector->ctr > 0)
     *out_stream << endl << "   withcolor " << *(draw_color_vector->v[0]);
 
 @q **** (4) Handle |pen_vector|.@>
@@ -7579,7 +7589,7 @@ of |Pen* Point::pen|, which I've removed.
 
 @<Define |Point| functions@>=
 
-  if (pen_vector != 0 && pen_vector->ctr > 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
     {
 
        Pen* pen = pen_vector->v[0]; 
@@ -7616,8 +7626,8 @@ of |Pen* Point::pen|, which I've removed.
           if (scanner_node->get_run_state()->error_stop_mode 
               == Run_State::STOPPING)
             {
-              cerr << "Type <RETURN> to continue.\n"
-                  ;  
+              cerr << "Type <RETURN> to continue.\n";
+
               getchar();  /* Don't delete this!  */@;  
             } 
 
@@ -7671,7 +7681,7 @@ for the transformation.
 
         } /* |if (!pen->get_transform().is_identity())|  */@;
 
-    }  /* |if (pen_vector != 0 && pen_vector->ctr > 0)|  */
+    }  /* |if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)|  */
 
 
 
@@ -8514,6 +8524,7 @@ Point::operator*=(const Transform& t)
 @* Vector operations.
 \initials{LDF 2002.10.27.}  Note that the vector operations don't affect the w
 coordinate. 
+
 \LOG 
 \initials{LDF 2002.10.27.}     
 In the functions |operator+|,|operator+=|, |operator-|, and
@@ -9095,8 +9106,8 @@ Point::unit_vector(const bool assign, const bool silent)
           cerr << "WARNING! In Point::unit_vector():\n"
                << "Don't call this function with false as its argument.\n"
                << "Use unit_vector() without an argument instead.\n"
-               << "Calling unit_vector() without an argument.\n\n" 
-              ;
+               << "Calling unit_vector() without an argument.\n\n";
+
         }
       return unit_vector();
     }

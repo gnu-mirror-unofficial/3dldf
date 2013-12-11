@@ -612,7 +612,7 @@ Reg_Cl_Plane_Curve::location(Point ref_pt, Point pt0, const bool suppress_warnin
       {
         cerr << "ERROR! In Reg_Cl_Plane_Curve::location():"
              <<  "The Reg_Cl_Plane_Curve is non-planar.\n"
-             << "Returning -6\n\n" << flush;
+             << "Returning -6\n\n";
         return -6;
       }
 
@@ -626,7 +626,7 @@ Reg_Cl_Plane_Curve::location(Point ref_pt, Point pt0, const bool suppress_warnin
         if (!suppress_warnings)
           cerr << "WARNING! In Reg_Cl_Plane_Curve::location().\n"
                << "Point is not in plane of regular closed plane curve.\n"
-               << "Returning -2.\n\n" << flush;
+               << "Returning -2.\n\n";
           return -2;
       }
 
@@ -644,8 +644,8 @@ Reg_Cl_Plane_Curve::location(Point ref_pt, Point pt0, const bool suppress_warnin
     if (copy_normal.magnitude() == 0)
       {
           cerr << "ERROR! In Reg_Cl_Plane_Curve::location().\n"
-            << "Normal has no magnitude. Returning -4\n\n"
-              << flush;
+            << "Normal has no magnitude. Returning -4\n\n";
+              
           return -4;
       }
     
@@ -692,7 +692,7 @@ Reg_Cl_Plane_Curve::location(Point ref_pt, Point pt0, const bool suppress_warnin
       }
     if (DEBUG)
       {
-          cerr << "orientation == " << orientation << endl << flush;
+          cerr << "orientation == " << orientation << endl;
 #if 0 
 
 /* Commented-out, because |current_picture| is no longer a global
@@ -759,8 +759,7 @@ Reg_Cl_Plane_Curve::location(Point ref_pt, Point pt0, const bool suppress_warnin
       {
           cerr << "ERROR! In Reg_Cl_Plane_Curve::location().\n"
             << "orientation has invalid value: " << orientation
-              << "\nReturning -5\n\n"
-                << flush;
+              << "\nReturning -5\n\n";
           return -5;
       }
 
@@ -815,7 +814,7 @@ Reg_Cl_Plane_Curve::location(Point ref_pt, Point pt0, const bool suppress_warnin
     else
       {
           cerr << "ERROR! In Reg_Cl_Plane_Curve::location().\n"
-            << "This can't happen! Returning -3.\n" << flush;
+            << "This can't happen! Returning -3.\n";
 
           if (DEBUG)
             cerr << "Exiting Reg_Cl_Plane_Curve::location()\n";
@@ -840,7 +839,7 @@ Reg_Cl_Plane_Curve::angle_point(real angle)
 {
     cerr << "ERROR! In Reg_Cl_Plane_Curve::angle_point().\n"
          << "This virtual function doesn't have a real definition for "
-         << "ordinary Reg_Cl_Plane_Curves.\nReturning INVALID_POINT.\n\n" << flush;
+         << "ordinary Reg_Cl_Plane_Curves.\nReturning INVALID_POINT.\n\n";
     return INVALID_POINT;
 }
 
@@ -972,7 +971,7 @@ Reg_Cl_Plane_Curve::intersection_points(Point ref_pt, Point pt0,
 
     if(DEBUG)
       cerr << " *** Entering Reg_Cl_Plane_Curve::"
-           << "intersection_points()\n" << flush; 
+           << "intersection_points()\n"; 
   Bool_Point_Pair bpp = INVALID_BOOL_POINT_PAIR;
 
   Point origin_pt(0, 0, 0);
@@ -1016,9 +1015,9 @@ Reg_Cl_Plane_Curve::intersection_points(Point ref_pt, Point pt0,
              << "Something is wrong with the normals:\n";
         pt_vector.show("pt_vector:");
         pl.normal.show("pl.normal");
-        cerr << "Returning INVALID_BOOL_POINT_PAIR.\n\n" << flush;
+        cerr << "Returning INVALID_BOOL_POINT_PAIR.\n\n";
         if (DEBUG) 
-          cerr << "Exiting Polygon::intersection_points().\n\n" << flush;
+          cerr << "Exiting Polygon::intersection_points().\n\n";
         return INVALID_BOOL_POINT_PAIR;
     }
 
@@ -1093,7 +1092,7 @@ will be reentrant.
         
         if (DEBUG)
           {
-            cerr << "ang == " << ang << endl << flush;
+            cerr << "ang == " << ang << endl;
           }
 
         if (ang != 0)
@@ -1135,7 +1134,7 @@ will be reentrant.
         if (DEBUG)
           {
             curve_4.show("curve_4");
-            cerr << "ang == " << ang << endl << flush;
+            cerr << "ang == " << ang << endl;
           }
 
 
@@ -1189,7 +1188,7 @@ will be reentrant.
         real Slope = pt1.slope(pt0, 'x', 'z');
 
         if (DEBUG)
-          cerr << "Slope == " << Slope << endl << flush;
+          cerr << "Slope == " << Slope << endl;
         Real_Pair rr;
 
 /* BEGIN */
@@ -1203,7 +1202,7 @@ will be reentrant.
       {
         if (DEBUG)
           {
-            cerr << "Slope == 0" << endl << flush;
+            cerr << "Slope == 0" << endl;
              
           }
         rr = solve('h', pt0_v);
@@ -1267,7 +1266,7 @@ will be reentrant.
         real v_intercept;
         v_intercept = pt0_v - (Slope * pt0_h);
         if (DEBUG)
-          cerr << "v_intercept == " << v_intercept << endl << flush;
+          cerr << "v_intercept == " << v_intercept << endl;
 
         Real_Triple coeffs = get_coefficients(Slope, v_intercept);
 
@@ -1276,7 +1275,7 @@ will be reentrant.
           {
             if (DEBUG)
               {
-                cerr << "Solving quadratic.\n" << flush;
+                cerr << "Solving quadratic.\n";
                  
               }
             rr = solve_quadratic(coeffs.first, coeffs.second,
@@ -1285,8 +1284,7 @@ will be reentrant.
         else
           {
             cerr << "Not a quadratic. "
-                 << "Haven't programmed this case yet.\n"
-                 << flush;
+                 << "Haven't programmed this case yet.\n";
              
           }
 
@@ -1330,9 +1328,9 @@ if (bpp.first.pt == INVALID_POINT)
 if (DEBUG)
   {
     cerr << "on_segment.first == "
-      << on_segment.first << endl << flush;
+      << on_segment.first << endl;
     cerr << "on_segment.second == "
-      << on_segment.second << endl << flush;
+      << on_segment.second << endl;
   }
      
 
@@ -1348,13 +1346,13 @@ t_inverse = t0.inverse();
 if(bpp.first.pt != INVALID_POINT)
   {
           if (DEBUG)
-            cerr << "Transforming bpp.first.pt\n" << flush;
+            cerr << "Transforming bpp.first.pt\n";
           bpp.first.pt *= t_inverse;
         }
 else
   {
     if (DEBUG)
-      cerr << "bpp.first.pt is invalid\n" << flush;
+      cerr << "bpp.first.pt is invalid\n";
   }
         
 
@@ -1374,32 +1372,32 @@ else
 if (DEBUG)
   {
     cerr << "on_segment.first == "
-      << on_segment.first << endl << flush;
+      << on_segment.first << endl;
     cerr << "on_segment.second == "
-      << on_segment.second << endl << flush;
+      << on_segment.second << endl;
   }
         
 if(bpp.second.pt != INVALID_POINT)
   {
     if (DEBUG)
-      cerr << "Transforming bpp.second.pt\n" << flush;
+      cerr << "Transforming bpp.second.pt\n";
     bpp.second.pt *= t_inverse;
   }
 else 
   {
     bpp.second.pt = INVALID_POINT;
     if (DEBUG)
-      cerr << "bpp.second.pt is invalid\n" << flush;
+      cerr << "bpp.second.pt is invalid\n";
   }
         
 if(DEBUG)
   {
-    cerr << "rr.first == " << rr.first << endl << flush;
-    cerr << "rr.second == " << rr.second << endl << flush;
+    cerr << "rr.first == " << rr.first << endl;
+    cerr << "rr.second == " << rr.second << endl;
     cerr << "bpp.first.b == "
-      << bpp.first.b << endl << flush;
+      << bpp.first.b << endl;
     cerr << "bpp.second.b == "
-      << bpp.second.b << endl << flush;
+      << bpp.second.b << endl;
     bpp.first.pt.show("bpp.first.pt");
     bpp.second.pt.show("bpp.second.pt");
   }
@@ -1414,7 +1412,7 @@ else
         cerr << "WARNING! In Reg_Cl_Plane_Curve::intersection_points():\n"
              << "Line and Reg_Cl_Plane_Curve are in parallel planes.\n"
              << "No intersections. Returning INVALID_BOOL_POINT_PAIR."
-             << endl << endl << flush;
+             << endl << endl;
       return INVALID_BOOL_POINT_PAIR;
   }
 } /* End of parallel and coplanar cases.  */
@@ -1429,14 +1427,14 @@ else
           {
               if (DEBUG) 
                 cerr << "The line is perpendicular to the "
-                     << "Reg_Cl_Plane_Curve.\n" << flush; 
+                     << "Reg_Cl_Plane_Curve.\n"; 
           }
 
         else
           {
               if (DEBUG) 
                 cerr << "The line and the Reg_Cl_Plane_Curve "
-                     << "are non-coplanar.\n" << flush; 
+                     << "are non-coplanar.\n"; 
           }
 
         Bool_Point bp = pl.intersection_point(pt0, pt1);
@@ -1449,7 +1447,7 @@ else
         short s = location(ref_pt, bp.pt);
         
         if (DEBUG) 
-          cerr << "location: s == " << s << endl << flush;
+          cerr << "location: s == " << s << endl;
 
         if (s > -1)
           {
@@ -1457,7 +1455,7 @@ else
             bpp.first.b = bp.pt.is_on_segment(pt0, pt1).first;
         
             if (DEBUG)
-              cerr << "On segment: == " << bpp.first.b << endl << flush;
+              cerr << "On segment: == " << bpp.first.b << endl;
             return bpp;
 
           }
@@ -1494,7 +1492,7 @@ Reg_Cl_Plane_Curve::intersection_points(const Point& ref_pt, const Path& p) cons
     {
       cerr << "ERROR! In Reg_Cl_Plane_Curve::intersection_points():\n"
            << "Path argument p is non-linear. "
-           << "Returning INVALID_BOOL_POINT_PAIR.\n\n" << flush;
+           << "Returning INVALID_BOOL_POINT_PAIR.\n\n";
       return INVALID_BOOL_POINT_PAIR;
     }
   return intersection_points(ref_pt, p.get_point(0), p.get_last_point());

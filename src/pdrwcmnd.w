@@ -1225,7 +1225,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr << "\n*** Parser: drawdot_or_undrawdot --> DRAWDOT."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -1251,7 +1251,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr << "\n*** Parser: drawdot_or_undrawdot --> UNDRAWDOT."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@;
 

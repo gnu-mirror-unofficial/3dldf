@@ -843,8 +843,8 @@ Transform::rotate(real x, real y, real z)
     {
       if (DEBUG) 
         cerr << "In rotate(real, real, real)\n"
-             << "0 rotation about all axes. Returning identity matrix.\n"
-            ;
+             << "0 rotation about all axes. Returning identity matrix.\n";
+
       return t_all;
     }
 
@@ -1292,8 +1292,8 @@ Transform::inverse(void) const
       if (max == 0)
         {
           cerr << "ERROR! In Transform::inverse():\n"
-               << "Transform_Matrix is singular.  Returning INVALID_TRANSFORM.\n"
-              ;
+               << "Transform_Matrix is singular.  Returning INVALID_TRANSFORM.\n";
+
           return INVALID_TRANSFORM;
         }
 @ Row exchange. 

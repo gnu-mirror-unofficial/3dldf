@@ -242,7 +242,7 @@ Plane::Plane(const Point& p, const Point& n)
     else if(normal == origin_pt)
       {
           cerr << "WARNING! In Plane():\nnormal == origin_pt. "
-            << "Plane is INVALID_PLANE.\n\n" << flush;
+            << "Plane is INVALID_PLANE.\n\n";
           point = INVALID_POINT;
           distance = INVALID_REAL;
           return;
@@ -1604,13 +1604,13 @@ Plane::show(string text) const
 
   if (*this == INVALID_PLANE)
     {
-      cerr << "INVALID_PLANE. Can't show." << endl << endl << flush;
+      cerr << "INVALID_PLANE. Can't show." << endl << endl;
       return;
     }
   
   normal.show("normal:");
   point.show("point:");
-  cerr << "distance == " << distance << endl << endl << flush;
+  cerr << "distance == " << distance << endl << endl;
 
 }
 

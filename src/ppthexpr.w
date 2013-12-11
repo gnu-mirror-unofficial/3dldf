@@ -347,13 +347,13 @@ of the points on the path is the same.
            << "Setting the `path_primary' on the left-hand side to the "
            << "`path_primary' on the right-hand side "
            << endl << "and proceeding with fingers crossed."
-           << endl << flush; 
+           << endl; 
 
 
       if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
         {
-          cerr << "Type <RETURN> to continue.\n"
-               << flush;  
+          cerr << "Type <RETURN> to continue.\n";  
+
           getchar();  /* Don't delete this!  */@;  
         }  
 

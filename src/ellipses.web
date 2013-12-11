@@ -309,7 +309,7 @@ Ellipse::Ellipse(const Point& ccenter,
           cerr << "WARNING! In Ellipse(): Invalid value for number_of_points:"
             << nnumber_of_points << "." << endl 
               << "Using default instead: " << DEFAULT_NUMBER_OF_POINTS 
-                << endl << flush;
+                << endl;
           number_of_points = DEFAULT_NUMBER_OF_POINTS; 
       }
     else
@@ -660,6 +660,7 @@ Ellipse::get_copy() const
 {
   Ellipse* p = create_new<Ellipse>(0);
   *p = *this;
+
   return static_cast<Shape*>(p);
 }
 
@@ -1312,7 +1313,7 @@ Path::is_elliptical(Scanner_Node scanner_node) const
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = true; /* |false|  */
+  bool DEBUG = false; /* |true|  */
 
   using namespace Scan_Parse;
 
@@ -1498,7 +1499,7 @@ Ellipse::is_elliptical() const
           cerr << "In Ellipse::is_elliptical(): "
                << "get_normal() returned INVALID_POINT." << endl
                << "*this is non-planar. Returning false."
-            << endl << endl << flush;
+            << endl << endl;
         return false;
     }
 
@@ -1535,7 +1536,7 @@ Ellipse::is_elliptical() const
     {
         if (DEBUG) 
           cerr << "ERROR! In is_elliptical():\n"
-            << "Rotation failed.\nReturning false\n\n" << flush;
+            << "Rotation failed.\nReturning false\n\n";
         return false;
     }
   if (DEBUG) 
@@ -1550,8 +1551,8 @@ Ellipse::is_elliptical() const
 
   if (DEBUG)
     {
-      cerr << "a == " << a << endl << flush;
-      cerr << "b == " << b << endl << flush;
+      cerr << "a == " << a << endl;
+      cerr << "b == " << b << endl;
     }
 
   real r;
@@ -1565,22 +1566,22 @@ Ellipse::is_elliptical() const
 
       if (DEBUG)
         {
-          cerr << "Point " << i << ": " << endl << flush;
+          cerr << "Point " << i << ": " << endl;
           (**iter).show("iter:");
-          cerr << "x == " << x << endl << flush;
-          cerr << "z == " << z << endl << flush;
+          cerr << "x == " << x << endl;
+          cerr << "z == " << z << endl;
         }
       
       r =  ((x * x) / (a * a)) + ((z * z) / (b * b));
 
       if (DEBUG)       
-        cerr << "r == " << r << endl << flush;
+        cerr << "r == " << r << endl;
       
       if (fabs(r - 1) > Point::epsilon())
         {
           if (DEBUG) 
             cerr << "Point " << i << " doesn't satisfy ellipse equation.\n"
-                 << "Returning false.\n\n" << flush;
+                 << "Returning false.\n\n";
           return false;
         }
       ++i;
@@ -1588,7 +1589,7 @@ Ellipse::is_elliptical() const
 
   if (DEBUG) 
     cerr << "Exiting Ellipse::is_elliptical().  Returning true."
-         << endl << endl << flush;
+         << endl << endl;
   return true;
 
 } /* End of |Ellipse::is_elliptical()| definition.  */
@@ -1613,7 +1614,7 @@ is_whatever(void) const
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      {
        cerr_mutex.lock(); 
@@ -1727,8 +1728,7 @@ Ellipse::solve(char axis_unknown, real known) const
     {
       cerr << "ERROR! In Ellipse::solve().\n"
         << "Invalid character for axis_unknown: "
-          << axis_unknown << "\nReturning INVALID_REAL_PAIR.\n\n"
-            << flush;
+          << axis_unknown << "\nReturning INVALID_REAL_PAIR.\n\n";
       return INVALID_REAL_PAIR;
     }
 
@@ -2387,8 +2387,8 @@ Ellipse::location(const Point& p,
       {
           cerr << "ERROR! In `Ellipse::location':"
                << endl 
-               << "Ellipse is non-elliptical. Returning -3.\n\n"
-               << flush;
+               << "Ellipse is non-elliptical. Returning -3.\n\n";
+
           return -3;
       }
 
@@ -2396,7 +2396,8 @@ Ellipse::location(const Point& p,
       {
           cerr  << "WARNING! In Ellipse::location():\n"
                 << "Point doesn't lie in plane of Ellipse.\n"
-                << "Returning -2.\n\n" << flush;
+                << "Returning -2.\n\n";
+
           return -2;
       }
 
@@ -2782,7 +2783,7 @@ if (fabs(fabs(this_plane.distance) - fabs(e_plane.distance))
   {
     if (DEBUG)
       {
-        cerr << "Ellipses are coplanar.\n" << flush;
+        cerr << "Ellipses are coplanar.\n";
       }
 
     real ax_h = get_axis_h();
@@ -2862,7 +2863,7 @@ if (   this->center == e.center
             || this_axis_orientation == -e_axis_orientation_rotated)))
   {
     if (DEBUG)
-      cerr << "Centers and axis orientation are the same.\n" << flush;
+      cerr << "Centers and axis orientation are the same.\n";
 
 /* \initials{LDF 2002.04.14.}
    Pick the maximum of |axis_h| and |axis_v| and multiply it by 1.5.
@@ -2922,7 +2923,7 @@ if (   this->center == e.center
     for (int i = 0; i < 5; i++)
       {
         if (DEBUG)
-          cerr << "i == " << i << endl << flush;
+          cerr << "i == " << i << endl;
 
         if (i != 0)
           pt0.rotate(center, pt1, 30);
@@ -2954,8 +2955,8 @@ if (   this->center == e.center
           {
             cerr << "In Ellipse::intersection_points(Ellipse).\n"
                  << "This can't happen (this)!\n"
-                 << "Will try to continue.\n\n" 
-                 << flush;
+                 << "Will try to continue.\n\n";
+
             pt2 = INVALID_POINT;
           }
 
@@ -2978,8 +2979,8 @@ if (   this->center == e.center
         else
           {
             cerr << "In Ellipse::intersection_points(Ellipse).\n"
-              << "This can't happen (e)!\nWill try to continue.\n\n"
-              << flush;
+              << "This can't happen (e)!\nWill try to continue.\n\n";
+
             pt3 = INVALID_POINT;
           }
 
@@ -3010,7 +3011,7 @@ if (   this->center == e.center
     
     if (DEBUG)
       {
-        cerr << "congruent_flag == " << congruent_flag << endl << flush;
+        cerr << "congruent_flag == " << congruent_flag << endl;
       }
 
     if (congruent_flag == true)
@@ -3023,8 +3024,8 @@ if (   this->center == e.center
       }
     else if (DEBUG)
       {
-        cerr << "All five points are not on both ellipses.\n"
-          << flush;
+        cerr << "All five points are not on both ellipses.\n";
+
       }
 
   }  /* End of test of congruency and same location.  */
@@ -3052,7 +3053,7 @@ Transform t_inverse;
       {
         if (DEBUG)
           {
-            cerr << "Shifting copy to origin_pt.\n" << flush;
+            cerr << "Shifting copy to origin_pt.\n";
           }
           
           t.shift(-copy_center.get_x(), -copy_center.get_y(),
@@ -3063,7 +3064,7 @@ Transform t_inverse;
       }
     else if (DEBUG)
       {
-        cerr << "copy is already at origin_pt.\n" << flush;
+        cerr << "copy is already at origin_pt.\n";
       }
 
           
@@ -3099,8 +3100,8 @@ if (normal_x == 0 && normal_y == 0 && normal_z == 0)
   {
     cerr << "ERROR! In Ellipse::intersection_points():\n"
       << "Normal == 0. "
-        << "Returning INVALID_BOOL_POINT_QUADRUPLE\n\n"
-          << flush;
+        << "Returning INVALID_BOOL_POINT_QUADRUPLE\n\n";
+
     return INVALID_BOOL_POINT_QUADRUPLE;
   }
           
@@ -3108,8 +3109,8 @@ else if (normal_x == 0 && normal_y == 0) /* Ellipse lies in a plane
                                             parallel to x-y plane. */
   {
     if (DEBUG)
-      cerr << "Ellipse lies in a plane parallel to x-y plane\n"
-        << flush;
+      cerr << "Ellipse lies in a plane parallel to x-y plane\n";
+
     orientation = X_Y;
   }
 
@@ -3117,7 +3118,7 @@ else if (normal_x == 0 && normal_z == 0) /* Ellipse lies in a plane
                                             parallel to x-z plane. */
   {
     if (DEBUG)
-      cerr << "Ellipse lies in a plane parallel to x-z plane\n" << flush;
+      cerr << "Ellipse lies in a plane parallel to x-z plane\n";
     orientation = X_Z;      
   }
 
@@ -3125,16 +3126,15 @@ else if (normal_z == 0 && normal_y == 0) /* Ellipse lies in a plane
                                             parallel to z-y plane. */
   {
     if (DEBUG)
-      cerr << "Ellipse lies in a plane parallel to z-y plane\n" << flush;
+      cerr << "Ellipse lies in a plane parallel to z-y plane\n";
     orientation = Z_Y;
   }
 
 else  /* Ellipse doesn't lie in a plane parallel to a major plane. */
   {
     if (DEBUG)
-      cerr << "Ellipse doesn't lie in a plane parallel to a major plane.\n"
-        << flush;
-    
+      cerr << "Ellipse doesn't lie in a plane parallel to a major plane.\n";
+
     /* Put it in x-z plane. */
 
 #if 0 
@@ -3230,10 +3230,10 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
 
     if (DEBUG)
       {
-        cerr << "a == " << a << endl << flush;
-        cerr << "b == " << b << endl << flush;
-        cerr << "c == " << c << endl << flush;
-        cerr << "d == " << d << endl << flush;
+        cerr << "a == " << a << endl;
+        cerr << "b == " << b << endl;
+        cerr << "c == " << c << endl;
+        cerr << "d == " << d << endl;
       }
 
     real aa = (a * a);
@@ -3243,10 +3243,10 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
 
     if (DEBUG)
       {
-        cerr << "aa == " << aa << endl << flush;
-        cerr << "bb == " << bb << endl << flush;
-        cerr << "cc == " << cc << endl << flush;
-        cerr << "dd == " << dd << endl << flush;
+        cerr << "aa == " << aa << endl;
+        cerr << "bb == " << bb << endl;
+        cerr << "cc == " << cc << endl;
+        cerr << "dd == " << dd << endl;
       }
 
 
@@ -3261,8 +3261,8 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
 
     if (DEBUG)
       {
-        cerr << "numerator == " << numerator << endl << flush;
-        cerr << "denominator == " << denominator << endl << flush;
+        cerr << "numerator == " << numerator << endl;
+        cerr << "denominator == " << denominator << endl;
       }
     
     if (denominator == 0)
@@ -3288,7 +3288,7 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
     
     if (DEBUG)
       {
-        cerr << "x == " << x << endl << flush;
+        cerr << "x == " << x << endl;
         cerr << "y coordinate:\n";
       }
     
@@ -3297,8 +3297,8 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
 
     if (DEBUG)
       {
-        cerr << "numerator == " << numerator << endl << flush;
-        cerr << "denominator == " << denominator << endl << flush;
+        cerr << "numerator == " << numerator << endl;
+        cerr << "denominator == " << denominator << endl;
       }
 
     if (denominator == 0)
@@ -3324,7 +3324,7 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
 
     if (DEBUG)
       {
-        cerr << "y == " << y << endl << flush;
+        cerr << "y == " << y << endl;
       }
 
 @q ****** (6) The points.@>
@@ -3348,7 +3348,7 @@ or $y = 0$ (but not both).
     else if (orientation == X_Y)
       {
         pt20.set( x,  y, 0);
-        pt21.set(-x, -y, 0) ;       
+        pt21.set(-x, -y, 0);       
  
         if (y != 0 && x != 0)
           {
@@ -3398,8 +3398,8 @@ or $y = 0$ (but not both).
         cerr << "ERROR! In Ellipse::intersection_points(Ellipse).\n"
              << "This can't happen! orientation has invalid value: "
              << orientation << endl
-             << "Will to try to continue.\n\n" 
-             << flush;
+             << "Will to try to continue.\n\n";
+
       }
 
     if (DEBUG)
@@ -3425,12 +3425,12 @@ or $y = 0$ (but not both).
         ss_copy = copy.location(pt20);
 
         if (DEBUG)
-          cerr << "ss_copy == " << ss_copy << endl << flush;
+          cerr << "ss_copy == " << ss_copy << endl;
 
         ss_e = e.location(pt20);
 
         if (DEBUG)
-          cerr << "ss_e == " << ss_e << endl << flush;
+          cerr << "ss_e == " << ss_e << endl;
       }
 
 
@@ -3520,12 +3520,12 @@ else
       }
     cerr << "In Ellipse::intersection_points():\n"
          << "Searching for Ellipse intersections. "
-         << "This can take some time...\n\n" << flush;
+         << "This can take some time...\n\n";
 
     for (real i = 0; i < 360; i += .5)
       {
         if (DEBUG)
-          cerr << "i == " << i << endl << flush;
+          cerr << "i == " << i << endl;
 
         curr_point = copy.angle_point(i);
         if (DEBUG)
@@ -3534,7 +3534,7 @@ else
         curr_location = e.location(curr_point);
 
         if (DEBUG) 
-          cerr << "curr_location == " << curr_location << endl << flush;
+          cerr << "curr_location == " << curr_location << endl;
 
         if (curr_location == 0)
           {
@@ -3576,8 +3576,8 @@ else
             cerr << "ERROR! In Ellipse::intersection_points():\n"
                  << "This can't happen! curr_location has bad value: "
                  << curr_location << " "
-                 << "Returning INVALID_BOOL_POINT_QUADRUPLE\n\n"
-                 << flush;
+                 << "Returning INVALID_BOOL_POINT_QUADRUPLE\n\n";
+
             return INVALID_BOOL_POINT_QUADRUPLE;
           }
 
@@ -3586,11 +3586,11 @@ else
             if (DEBUG)
               {
                 cerr << "Found a transition!\n";
-                cerr << "i == " << i << endl << flush;
-                cerr << "save_angle == " << save_angle << endl << flush;
-                cerr << "curr_location == " << curr_location << endl << flush;
+                cerr << "i == " << i << endl;
+                cerr << "save_angle == " << save_angle << endl;
+                cerr << "curr_location == " << curr_location << endl;
                 cerr << "location_switch == "
-                  << location_switch << endl << flush;
+                  << location_switch << endl;
               }
             if (location_switch == 1)
               {
@@ -3643,8 +3643,8 @@ else
                     cerr << "ERROR! In Ellipse::intersection_points(Ellipse).\n"
                          << "This can't happen! Invalid value for curr_location: "
                          << curr_location 
-                         << "\nReturning INVALID_BOOL_POINT_QUADRUPLE.\n\n"
-                         << flush;
+                         << "\nReturning INVALID_BOOL_POINT_QUADRUPLE.\n\n";
+
                     return INVALID_BOOL_POINT_QUADRUPLE;
                   }
               } /* |while| */
@@ -3654,7 +3654,7 @@ else
       } /* |for| */
     
           cerr << "Finished searching for Ellipse intersections."
-               << endl << endl << flush;
+               << endl << endl;
 
  } /*  End of ``Ellipses have different centers 
       and/or axis orientation''.  */
@@ -3673,7 +3673,7 @@ else
   if (DEBUG)
     {
       cerr << "intersection_ctr == "
-        << intersection_ctr << endl << flush;
+        << intersection_ctr << endl;
     }
   
   if (intersection_ctr == 1)
@@ -3744,7 +3744,7 @@ the same way.
 else  
 {
   if (DEBUG)
-    cerr << "Ellipses are in perpendicular or skew planes.\n" << flush;
+    cerr << "Ellipses are in perpendicular or skew planes.\n";
       
 
   Line isect_line(this_plane.intersection_line(e_plane));
@@ -3761,9 +3761,9 @@ else
   
   if (DEBUG)
     {
-      cerr << "bpp.first.b == " << bpp.first.b << endl << flush;
+      cerr << "bpp.first.b == " << bpp.first.b << endl;
       bpp.first.pt.show("bpp first point:");
-      cerr << "bpp.second.b == " << bpp.second.b << endl << flush;
+      cerr << "bpp.second.b == " << bpp.second.b << endl;
       bpp.second.pt.show("bpp second point:");
     }
   
@@ -3833,7 +3833,7 @@ else
 } /* |else|.  End of perpendicular and skew cases.  */
 
 if (DEBUG || verbose)
-     cerr << "Exiting Ellipse::intersection_points(Ellipse)\n" << flush;
+     cerr << "Exiting Ellipse::intersection_points(Ellipse)\n";
      return bpq;
 }
 
@@ -3965,7 +3965,7 @@ Ellipse::do_transform(const Transform& t, bool check)
              {
                  if (DEBUG) 
                    cerr << "Recalculating linear_eccentricity, "
-                        << "numerical_eccentricity and foci.\n" << flush;
+                        << "numerical_eccentricity and foci.\n";
 
                  if (axis_h >= axis_v)
                    {
@@ -3994,7 +3994,7 @@ Ellipse::do_transform(const Transform& t, bool check)
              }
            else if (DEBUG) 
              cerr << "axis_h and axis_v are unchanged.\n"
-                  << "Not recalculating foci.\n" << flush;
+                  << "Not recalculating foci.\n";
 
          } /* |if (is_elliptical())| */
 
@@ -4455,7 +4455,7 @@ Ellipse::in_rectangle() const
       || bpp1.first.pt == INVALID_POINT || bpp1.second.pt == INVALID_POINT)
     {
       cerr << "Intersection didn't work.\n"
-           << "Returning empty rectangle.\n\n" << flush;
+           << "Returning empty rectangle.\n\n";
       Rectangle r2;
       return r2;
     }
@@ -4690,7 +4690,7 @@ Rectangle::out_ellipse() const
       M.show("M:"); /* I'd rather output this to |stderr|, but
                        I don't have a way to do this yet.  
                        \initials{LDF 2003.07.18.}  */
-      cerr << endl << flush;                                            
+      cerr << endl;                                            
     }
     
   Ellipse e(origin_pt, h_length, v_length);
@@ -4711,7 +4711,7 @@ Rectangle::out_ellipse() const
     {
       cerr << "ERROR! In |Rectangle::out_ellipse()|:\n"
            << "Couldn't find intersection point.\n"
-           << "Returning empty Ellipse.\n\n" << flush;
+           << "Returning empty Ellipse.\n\n";
       Ellipse r;
       return r;
     }

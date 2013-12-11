@@ -309,7 +309,7 @@ Polygon::get_center(void)
       cerr << "WARNING! In Polygon::get_center():\n"
         << "Polygon doesn't contain any Points, "
         << "so it presumably doesn't have a center.\n"
-        << "Returning INVALID_POINT.\n\n" << flush;
+        << "Returning INVALID_POINT.\n\n";
       return const_cast<Point&>(INVALID_POINT);
     }
   
@@ -343,7 +343,7 @@ Polygon::get_center() const
       cerr << "WARNING! In Polygon::get_center():\n"
         << "Polygon doesn't contain any Points, "
         << "so it presumably doesn't have a center.\n"
-        << "Returning INVALID_POINT.\n\n" << flush;
+        << "Returning INVALID_POINT.\n\n";
       return const_cast<Point&>(INVALID_POINT);
     }
 
@@ -1099,7 +1099,7 @@ Now passing the |bool suppress_warnings| argument to |Plane::intersection_point|
           {
 #if DEBUG_COMPILE
               if (DEBUG) 
-                cerr << "The line and the Polygon are non-coplanar.\n" << flush;
+                cerr << "The line and the Polygon are non-coplanar.\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
           }
@@ -1121,7 +1121,7 @@ Now passing the |bool suppress_warnings| argument to |Plane::intersection_point|
 #if DEBUG_COMPILE
             if (DEBUG)
               {
-                cerr << "bp.pt == center." << endl << flush;
+                cerr << "bp.pt == center." << endl;
               }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1138,7 +1138,7 @@ Now passing the |bool suppress_warnings| argument to |Plane::intersection_point|
           {
             show("this:");
             center.show("center");
-            cerr << "points.size() == " << points.size() << endl << flush;
+            cerr << "points.size() == " << points.size() << endl;
           }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1173,9 +1173,9 @@ Now passing the |bool suppress_warnings| argument to |Plane::intersection_point|
                   if (DEBUG)
                     {
                       if (bp.pt == r0)
-                        cerr << "bp.pt == r0." << endl << flush;
+                        cerr << "bp.pt == r0." << endl;
                       else if (bp.pt == r1)
-                        cerr << "bp.pt == r1." << endl << flush;
+                        cerr << "bp.pt == r1." << endl;
                     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1246,7 +1246,7 @@ Added this section.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-         cerr << "Exiting Polygon::intersection_points.\n\n" << flush;
+         cerr << "Exiting Polygon::intersection_points.\n\n";
      }
 #endif /* |DEBUG_COMPILE|  */@; 
  
@@ -1372,8 +1372,8 @@ Polygon::intersection_points(const Polygon& r) const
     {
       pl.normal.show("pl.normal");
       r_pl.normal.show("r_pl.normal");
-      cerr << "pl.distance == " << pl.distance << endl << flush;
-      cerr << "r_pl.distance == " << r_pl.distance << endl << flush;
+      cerr << "pl.distance == " << pl.distance << endl;
+      cerr << "r_pl.distance == " << r_pl.distance << endl;
     }
   
   real distance = fabs(fabs(pl.distance) - fabs(r_pl.distance));
@@ -1382,7 +1382,7 @@ Polygon::intersection_points(const Polygon& r) const
     distance = 0;
 
   if (DEBUG) 
-    cerr << "distance == " << distance << endl << flush;
+    cerr << "distance == " << distance << endl;
 
   if (pl.normal == r_pl.normal)
     {
@@ -1432,7 +1432,7 @@ Polygon::intersection_points(const Polygon& r) const
         {
             cerr << "WARNING!  In Polygon::intersection_points():\n"
                  << "The Polygons lie in parallel planes. "
-                 << "Returning empty vector<Point>.\n\n" << flush;
+                 << "Returning empty vector<Point>.\n\n";
             return v;
         }
     }
@@ -1499,7 +1499,7 @@ surface hiding routine.
        {
          if (DEBUG)
            cerr << "No intersection points found.  "
-                << "Returning empty vector<Point>\n\n" << flush;
+                << "Returning empty vector<Point>\n\n";
          v.clear();
          return v;
        }
@@ -2294,7 +2294,22 @@ Polygon::disentangle(void* v,
                                                     &error_stop_value,
                                                     &warning_stop_value);
 
+
    using namespace Scan_Parse;
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "Entering `Polygon::disentangle'."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
 
 @q **** (4).@>
 
@@ -2407,6 +2422,21 @@ Polygon::disentangle(void* v,
        }
 
     vector<Point> quad[4];
+   
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "In `Polygon::disentangle':"
+             << endl
+             << "`pv.size()' == " << pv.size()
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
 
     for (pv_iter = pv.begin(); pv_iter != pv.end(); ++pv_iter)
        {
@@ -2430,6 +2460,20 @@ Polygon::disentangle(void* v,
     Compare_Angles cmp_ang_pos(&ORIGIN, &pos_x_axis_point);
     Compare_Angles cmp_ang_neg(&ORIGIN, &neg_x_axis_point);
 
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "In `Polygon::disentangle':"
+             << endl
+             << "Before `for' loop."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
     for (int i = 0; i < 4; ++i)
       { 
 
@@ -2446,6 +2490,21 @@ Polygon::disentangle(void* v,
           quad[i].erase(dups_iter, quad[i].end()); 
 
       }  /* |for|  */
+
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "In `Polygon::disentangle':"
+             << endl
+             << "After `for' loop."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
 
 
     pv.clear();
@@ -2490,17 +2549,48 @@ Polygon::disentangle(void* v,
 
     Bool_Point bp;
 
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "In `Polygon::disentangle':"
+             << endl
+             << "Before `do' loop."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
     do
        {
           repeat = false;
 
           for (i = 0; i < pv_size - 2; ++i)
              {
+
                  j = (i + 1);
 
                  for (k = (i + 1); k < pv_size; ++k)
                     {
+
                        m = (k + 1) % pv_size;
+
+#if DEBUG_COMPILE
+                        if (DEBUG)   
+                        {
+                            cerr_mutex.lock(); 
+                            cerr << "`i' == " << i << endl
+                                 << "`j' == " << j << endl 
+                                 << "`i' == " << k << endl 
+                                 << "`m' == " << m << endl 
+                                 << endl;
+                            cerr_mutex.unlock(); 
+
+                        }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
 
                        bp = Point::intersection_point(pv[i], pv[j],
                                                       pv[k], pv[m % pv_size]);
@@ -2522,6 +2612,19 @@ Polygon::disentangle(void* v,
  
       }  while (repeat);
 
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "In `Polygon::disentangle':"
+             << endl
+             << "After `do' loop."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
 
 
 @q **** (4)@> 
@@ -2535,6 +2638,23 @@ Polygon::disentangle(void* v,
           *new_pt *= t_inverse;
           *poly += new_pt;
        }
+
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "Exiting `Polygon::disentangle' successfully "
+             << "with return value `poly'."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
 
     poly->set_cycle();
 
@@ -4106,7 +4226,7 @@ Reg_Polygon::Reg_Polygon(const Point& ccenter,
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
     cerr << "Entering Reg_Polygon::Reg_Polygon() "
-         << "(center, sides, diameter, angles).\n" << flush;
+         << "(center, sides, diameter, angles).\n";
 
   shape_type = REG_POLYGON_TYPE;
   surface_hiding_ctr = 0;
@@ -4154,7 +4274,7 @@ z-axis, if |angle_x|, |angle_y|, and |angle_z| are all 0).
     }
   if (DEBUG)
     cerr << "Exiting Reg_Polygon::Reg_Polygon() "
-         << "(center, sides, diameter, angles).\n" << flush;
+         << "(center, sides, diameter, angles).\n";
   return;
 }
 
@@ -4182,7 +4302,7 @@ Reg_Polygon::set(const Point& ccenter, const unsigned short ssides,
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
     cerr << "Entering Reg_Polygon::set() "
-         << "(center, sides, diameter, angles).\n" << flush;
+         << "(center, sides, diameter, angles).\n";
 
 @ @:??@> ?? \initials{LDF 2002.10.07.}  At exactly this place, |Path::Path| (the 
 default version with no arguments) is invoked.  When |set|
@@ -4197,7 +4317,7 @@ I don't have to worry about leakage.
   *this = p;
   if (DEBUG)
     cerr << "Exiting Reg_Polygon::set() "
-         << "(center, sides, diameter, angles).\n" << flush;
+         << "(center, sides, diameter, angles).\n";
   return;
 
 }
@@ -4373,8 +4493,8 @@ Reg_Polygon::is_reg_polygonal(void)
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr << "internal_angle == " << internal_angle << endl << flush;
-       cerr << "sides == " << sides << endl << flush;
+       cerr << "internal_angle == " << internal_angle << endl;
+       cerr << "sides == " << sides << endl;
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 

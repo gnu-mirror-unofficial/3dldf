@@ -644,8 +644,8 @@ Made debugging output thread-safe.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "$2 == " << @=$2@> << endl << flush;
-      cerr << "$$ == " << @=$$@> << endl << flush;
+      cerr << "$2 == " << @=$2@> << endl;
+      cerr << "$$ == " << @=$$@> << endl;
     }
 #endif /* |DEBUG_COMPILE|  */ 
 };
@@ -687,9 +687,9 @@ for subscripts rather than \.{-}.
   DEBUG = false; /* |true|  */
   if (DEBUG)
     {
-      cerr << "$2 == " << @=$2@> << endl << flush;
-      cerr << "$3 == " << @=$3@> << endl << flush;
-      cerr << "$$ == " << @=$$@> << endl << flush;
+      cerr << "$2 == " << @=$2@> << endl;
+      cerr << "$3 == " << @=$3@> << endl;
+      cerr << "$$ == " << @=$$@> << endl;
     }
 #endif /* |DEBUG_COMPILE|  */ 
 };

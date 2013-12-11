@@ -3094,7 +3094,7 @@ Added this rule.
 #endif 
 
           cerr_strm << "Division by 0.  Setting <numeric secondary> to 0.\n"
-                    << "Will try to continue.\n" << flush;
+                    << "Will try to continue.\n";
 
           @=$$@> = 0;
             
@@ -3743,7 +3743,7 @@ Removed debugging code.
   
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "$$ == " << @=$$@> << endl << flush;
+    cerr << "$$ == " << @=$$@> << endl;
 #endif /* |DEBUG_COMPILE|  */ 
 
 };
@@ -3824,7 +3824,7 @@ subtraction to work.
            << "($1 == " << @=$1@> << ") > MAX_REAL_SQRT" 
            << "Can't square it."
            << endl << "Setting `numeric_tertiary' to 0 "
-           << "and will try to continue.\n" << flush;
+           << "and will try to continue.\n";
 
       @=$$@> = 0;
       goto end_numeric_tertiary_2;
@@ -3839,7 +3839,7 @@ subtraction to work.
            << "($2 == " << @=$2@> << ") > MAX_REAL_SQRT" 
            << "Can't square it."
            << endl << "Setting `numeric_tertiary' to 0 "
-           << "and will try to continue.\n" << flush;
+           << "and will try to continue.\n";
 
       @=$$@> = 0;
       goto end_numeric_tertiary_2;
@@ -3863,13 +3863,13 @@ subtraction to work.
                << r0 << " + " << r1 << " > MAX_REAL" 
                << "Can't perform Pythagorean addition."
                << endl << "Setting `numeric_tertiary' to 0 "
-               << "and will try to continue.\n" << flush;
+               << "and will try to continue.\n";
           @=$$@> = 0;
 
           if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
             {
-              cerr << "Type <RETURN> to continue.\n"
-                << flush;
+              cerr << "Type <RETURN> to continue.\n";
+
               getchar();  /* Don't delete this!  */@;
             } 
 
@@ -3898,13 +3898,12 @@ subtraction to work.
                << r0 << " < " << r1 << ". "
                << "Can't perform Pythagorean subtraction."
                << endl << "Setting `numeric_tertiary' to 0 "
-               << "and will try to continue.\n" << flush;
+               << "and will try to continue.\n";
           @=$$@> = 0;
 
           if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
             {
-              cerr << "Type <RETURN> to continue.\n"
-                << flush;
+              cerr << "Type <RETURN> to continue.\n";
               getchar();  /* Don't delete this!  */@;
             } 
 
@@ -3927,7 +3926,7 @@ subtraction to work.
            << "numeric_secondary'." << endl
            << "$2 has invalid value: " << @=$2@>
            << endl << "Setting `numeric_tertiary' to 0 "
-           << "and will try to continue.\n" << flush;
+           << "and will try to continue.\n";
       @=$$@> = 0;
       goto end_numeric_tertiary_2;
     }
@@ -3938,7 +3937,7 @@ subtraction to work.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "$$ == " << @=$$@> << endl << flush;
+      cerr << "$$ == " << @=$$@> << endl;
     }
 #endif /* |DEBUG_COMPILE|  */ 
  end_numeric_tertiary_2:
@@ -4002,7 +4001,7 @@ subtraction to work.
   
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "$$ == " << @=$$@> << endl << flush;
+    cerr << "$$ == " << @=$$@> << endl;
 #endif /* |DEBUG_COMPILE|  */ 
 
 }
@@ -4032,7 +4031,7 @@ subtraction to work.
 
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "$$ == " << @=$$@> << endl << flush;
+    cerr << "$$ == " << @=$$@> << endl;
 #endif /* |DEBUG_COMPILE|  */ 
 }
 ;
@@ -4053,7 +4052,7 @@ subtraction to work.
 
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "$$ == " << @=$$@> << endl << flush;
+    cerr << "$$ == " << @=$$@> << endl;
 #endif /* |DEBUG_COMPILE|  */ 
 
 };
@@ -4086,7 +4085,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "$$ == " << @=$$@> << endl << flush;
+    cerr << "$$ == " << @=$$@> << endl;
 #endif /* |DEBUG_COMPILE|  */ 
 
 };

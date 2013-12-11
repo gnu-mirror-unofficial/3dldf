@@ -144,14 +144,14 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
 
   if (verbose)
     {
-      cout << "USHORT_SIZE  == " << USHORT_SIZE  << endl << flush;
-      cout << "UINT_SIZE  == " << UINT_SIZE  << endl << flush;
-      cout << "ULONG_SIZE == " << ULONG_SIZE << endl << flush;
-      cout << "ULONG_LONG_SIZE == " << ULONG_LONG_SIZE << endl << flush;
-      cout << "FLT_SIZE  == " << FLT_SIZE  << endl << flush;
-      cout << "DBL_SIZE  == " << DBL_SIZE  << endl << flush;
-      cout << "LONG_DBL_SIZE  == " << LONG_DBL_SIZE  << endl << flush;
-      cout << "Real_SIZE  == " << Real_SIZE  << endl << flush;
+      cout << "USHORT_SIZE  == " << USHORT_SIZE  << endl;
+      cout << "UINT_SIZE  == " << UINT_SIZE  << endl;
+      cout << "ULONG_SIZE == " << ULONG_SIZE << endl;
+      cout << "ULONG_LONG_SIZE == " << ULONG_LONG_SIZE << endl;
+      cout << "FLT_SIZE  == " << FLT_SIZE  << endl;
+      cout << "DBL_SIZE  == " << DBL_SIZE  << endl;
+      cout << "LONG_DBL_SIZE  == " << LONG_DBL_SIZE  << endl;
+      cout << "Real_SIZE  == " << Real_SIZE  << endl;
     }
 
 
@@ -194,7 +194,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
 	   << "Apparently, Real doesn't have the same size "
 	   << "as any unsigned integral type.\n"
 	   << "There must be some mistake.\n"
-	   << "Exiting with return value -1.\n\n" << flush;
+	   << "Exiting with return value -1.\n\n";
       return -1;
     }
   
@@ -211,7 +211,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
            << "MAX_VAL > *rp == "
            << (MAX_VAL > *rp) << endl
            << "MAX_VAL < *rp == "
-           << (MAX_VAL < *rp) << endl << flush;
+           << (MAX_VAL < *rp) << endl;
     }
 
 
@@ -219,7 +219,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
     {
       cerr << "ERROR! In System::get_second_largest<Real>():\n"
            << "MAX_VAL == *rp. Exiting with return value 1"
-           << endl << endl << flush;
+           << endl << endl;
       exit(1);
     }
 
@@ -227,7 +227,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
     {
       cerr << "ERROR! In System::get_second_largest<Real>():\n"
            << "MAX_VAL < *rp. Exiting with return value 1"
-           << endl << endl << flush;
+           << endl << endl;
       exit(1);
     }
 
@@ -241,7 +241,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
   i_type* ip = reinterpret_cast<i_type *>(&MAX_VAL);
 
   if (verbose)
-    cout << "*ip == " << *ip << endl << flush;
+    cout << "*ip == " << *ip << endl;
       
   i_type bit_pattern_i_type;
   i_type result;
@@ -254,27 +254,27 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
   b = *ip;
 
   if (verbose)
-    cout << "b (MAX_VAL) == " << b << endl << flush;
+    cout << "b (MAX_VAL) == " << b << endl;
 
   b = bit_pattern_i_type;
 
   if (verbose)
-    cout << "b (bit_pattern_i_type) == " << b << endl << flush;
+    cout << "b (bit_pattern_i_type) == " << b << endl;
 
   result = bit_pattern_i_type ^ *ip;
 
   if (verbose)
-    cout << "result == " << result << endl << flush;
+    cout << "result == " << result << endl;
 
   b = result;
 
   if (verbose)
-    cout << "b (result) == " << b << endl << flush;
+    cout << "b (result) == " << b << endl;
 
   rp = reinterpret_cast<Real *>(&result);
 
   if (verbose)
-    cout << "*rp == " << *rp << endl << flush;
+    cout << "*rp == " << *rp << endl;
  }
 
 
@@ -287,7 +287,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
   for (int i = 0; i < (sizeof(Real) * CHAR_BIT); ++i)
     {
       if (verbose)
-        cout << "i == " << i << endl << flush;
+        cout << "i == " << i << endl;
 
 
 	  // This has only been needed on the DEC Alpha, so far. 
@@ -309,7 +309,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
 	  if (i ==  (sizeof(Real) * CHAR_BIT) - (12))
 	    {
               if (verbose)
-                cout << "i == " << i << ".  This produces NAN.  Continuing.\n\n" << flush;
+                cout << "i == " << i << ".  This produces NAN.  Continuing.\n\n";
 	      continue;
 	    }
 
@@ -318,34 +318,34 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
 	  bit_pattern_i_type <<= i;
           if (verbose)
             cout << "bit_pattern_i_type (1 << " << i << ") == " 
-                 << bit_pattern_i_type << endl << flush;
+                 << bit_pattern_i_type << endl;
 
 	  b = bit_pattern_i_type;
 
           if (verbose)
-            cout << "b (bit_pattern_i_type) == " << b << endl << flush;
+            cout << "b (bit_pattern_i_type) == " << b << endl;
 
 	  result = bit_pattern_i_type ^ *ip;
 
 
           if (verbose)
-            cout << "result == " << result << endl << flush;
+            cout << "result == " << result << endl;
 
 	  b = result;
 
           if (verbose)
-            cout << "b (result) == " << b << endl << flush;
+            cout << "b (result) == " << b << endl;
 
 	  rp = reinterpret_cast<Real *>(&result);
 
             if (verbose)
-              cout << "*rp == " << *rp << endl << flush;
+              cout << "*rp == " << *rp << endl;
 
 
 	  if (*rp <= 0)
 	    {
               if (verbose)
-                cout << "*rp <= 0.\nContinuing.\n\n" << flush;
+                cout << "*rp <= 0.\nContinuing.\n\n";
 	      continue;
 	    }
 
@@ -353,7 +353,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
 	    {
               if (verbose)
                 cout << "*rp >=  MAX_VAL\nContinuing."
-                     << endl << flush;
+                     << endl;
 	      continue;
 	    }
 
@@ -361,7 +361,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
 	    {
               if (verbose)
                 cout << "second_largest_real >= *rp\nContinuing." 
-                     << "\n" << flush;
+                     << "\n";
 	      continue;
 	    } 
 	  else if (*rp > second_largest_real && *rp < MAX_VAL)
@@ -370,7 +370,7 @@ System::get_second_largest (Real MAX_VAL, bool verbose)
                 cout << "*rp > second_largest_real && "
                      << "*rp < MAX_VAL" << endl
                      << "Setting second_largest_real to *rp"
-                     << " and counter to i (" << i << ").\n" << flush;
+                     << " and counter to i (" << i << ").\n";
 
 	      second_largest_real = *rp;
 	      counter = i;

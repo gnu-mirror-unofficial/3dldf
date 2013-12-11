@@ -91,7 +91,7 @@ yyerror(void *v, char const* message);@/
 int
 yyerror(void *v, char const* message)
 {
-  cerr << "ERROR! In yyparse(): " << message << endl << flush;
+  cerr << "ERROR! In yyparse(): " << message << endl;
   return 0;
 }
 

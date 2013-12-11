@@ -657,6 +657,18 @@ Polyhedron::intersection(const Plane& q,
                                                    &error_stop_value,
                                                    &warning_stop_value);
 
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "Entering `Polyhedron::intersection'."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
 @q **** (4)@> 
 @
 \LOG
@@ -753,11 +765,25 @@ Changed |Pointer_Vector<Point>* bpv| to |Pointer_Vector<Bool_Point>* bpv|.
                                                       static_cast<void*>(scanner_node),
                                                       suppress_warnings));
 
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_mutex.lock(); 
+        cerr << thread_name << "Exiting `Polyhedron::intersection' "
+             << "with return value `poly'."
+             << endl;
+        cerr_mutex.unlock(); 
+
+    }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
     return poly;
 
 @q **** (4)@> 
 
-}  /* End of |Polyhedron::intersection_points(const Plane& p, [etc.])| 
+}  /* End of |Polyhedron::intersection(const Plane& p, [etc.])| 
       definition.  */
 
 
@@ -810,7 +836,7 @@ Polyhedron::intersection_points(const Reg_Polygon& r) const
            ++iter1)
         {
           v = (**iter0).intersection_points(**iter1);
-          cerr << "v.size() == " << v.size() << endl << flush;
+          cerr << "v.size() == " << v.size() << endl;
           for (vector<Point>::iterator pt_iter = v.begin();
                pt_iter != v.end();
                ++pt_iter)
@@ -1062,12 +1088,12 @@ now simply use the value I found.
   Point P1 = pts[5] - pts[1];
   Point P2 = P0 - pts[1];
   P1.show("P1");
-  cerr << "  P1.magnitude() == " <<   P1.magnitude() << endl << flush;
+  cerr << "  P1.magnitude() == " <<   P1.magnitude() << endl;
   P2.show("P2");
-  cerr << "P2.magnitude() == " << P2.magnitude() << endl << flush;
+  cerr << "P2.magnitude() == " << P2.magnitude() << endl;
   distance = (P2.magnitude() / P1.magnitude());
   cerr.precision(25);
-  cerr << "distance == " << distance << endl << flush;
+  cerr << "distance == " << distance << endl;
   cerr.precision(6);
 #endif 
 
@@ -2702,7 +2728,7 @@ Icosahedron::Icosahedron(const Point& p,
 {
     bool DEBUG = false; /* |true| */
     if (DEBUG)
-      cerr << "Entering Icosahedron::Icosahedron().\n" << flush;
+      cerr << "Entering Icosahedron::Icosahedron().\n";
 
     shape_type = ICOSAHEDRON_TYPE;
     surface_hiding_ctr = 0;
@@ -2838,7 +2864,7 @@ Icosahedron::Icosahedron(const Point& p,
 
     if (DEBUG)
       {
-          cerr << "Exiting Icosahedron::Icosahedron().\n" << flush;
+          cerr << "Exiting Icosahedron::Icosahedron().\n";
       }
     return;
 }
@@ -3021,7 +3047,7 @@ Icosahedron::get_net(const real triangle_diameter,
               {
                 cerr << "ERROR! In Icosahedron::get_net():\n"
                   << "y-coordinate != 0!\n"
-                    << "You'd better fix this!\n\n" << flush;
+                    << "You'd better fix this!\n\n";
               }
         }
       return triangles;
@@ -3060,7 +3086,7 @@ Icosahedron::get_net(const real triangle_diameter,
           {
             cerr << "ERROR! In Icosahedron::get_net():\n"
               << "y-coordinate != 0!\n"
-                << "You'd better fix this!\n\n" << flush;
+                << "You'd better fix this!\n\n";
           }
     }
   return triangles;

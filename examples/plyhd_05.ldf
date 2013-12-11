@@ -73,7 +73,11 @@ draw r with_color red;
 
 polygon q;
 
-q := p intersection (plane) r;
+plane r_plane;
+
+r_plane := get_plane r;
+
+q := p intersection r_plane;
 
 draw q with_color blue;
 

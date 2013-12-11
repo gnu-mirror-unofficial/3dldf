@@ -191,17 +191,17 @@ beginfig(Scanner_Node s, unsigned short i, bool silent = false);
 void 
 beginfig(Scanner_Node s, unsigned short i, bool silent)
 {
-  bool DEBUG = true; /* |false| */@; 
+  bool DEBUG = false; /* |true| */@; 
 
   if (SILENT_GLOBAL)
     silent = true;
   
   if (DEBUG) 
-    cerr << "Entering beginfig(" << i << ")" << endl << flush;
+    cerr << "Entering beginfig(" << i << ")" << endl;
 
   if (!silent)
     cerr << "Beginning figure " << i << "." 
-         << endl << flush;
+         << endl;
 
 
   Output_Struct* os = s->out[Run_State::METAPOST];
@@ -215,14 +215,14 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
     {
       if (DEBUG)
         cerr << "current_picture != 0.  Clearing and freeing the memory."
-             << endl << flush;
+             << endl;
       current_picture->clear();
       delete current_picture;
     }
   else
     {
       if (DEBUG)
-        cerr << "current_picture == 0." << endl << flush;
+        cerr << "current_picture == 0." << endl;
     }
 
   current_picture = new Picture;
@@ -232,7 +232,7 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
   *out_stream << "beginfig(" << i << ");\n";
 
   if (DEBUG) 
-    cerr << "Exiting beginfig(" << i << ")" << endl << flush;
+    cerr << "Exiting beginfig(" << i << ")" << endl;
 
   return;
 }
@@ -292,10 +292,10 @@ endfig (Scanner_Node s,
         const real min_y_proj, const real max_y_proj,
         const real min_z_proj, const real max_z_proj)
 {
-  bool DEBUG = true; /* |false| */ @;
+  bool DEBUG = false; /* |true| */ @;
 
   if (DEBUG) 
-    cerr << "Entering endfig().\n" << flush;
+    cerr << "Entering endfig().\n";
 
 
   Output_Struct* os = s->out[Run_State::METAPOST];
@@ -306,7 +306,7 @@ endfig (Scanner_Node s,
     {
       if (DEBUG)
         cerr << "projection != Projections::suppress. "
-             << "Calling current_picture->output()." << "\n" << flush;
+             << "Calling current_picture->output()." << "\n";
       current_picture->output(s, f, projection, factor, sort_value,
                               do_warnings, 
                               min_x_proj, max_x_proj,
@@ -317,7 +317,7 @@ endfig (Scanner_Node s,
     {
       if (DEBUG)
         cerr << "projection == Projections::suppress. "
-             << "Not calling current_picture->output()." << "\n" << flush;
+             << "Not calling current_picture->output()." << "\n";
     }
   
 
@@ -330,7 +330,7 @@ endfig (Scanner_Node s,
 
 
   if (DEBUG) 
-    cerr << "Exiting endfig().\n" << flush;
+    cerr << "Exiting endfig().\n";
 
   return;
 }

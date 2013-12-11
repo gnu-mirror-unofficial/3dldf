@@ -664,16 +664,16 @@ and |vector<Hyperbola*> s.hyperbolae|.
 
   if (DEBUG)
     {
-      cerr << "paths.size() == " << paths.size() << endl << flush;
-      cerr << "ellipses.size() == " << ellipses.size() << endl << flush;
-      cerr << "circles.size() == " << circles.size() << endl << flush;
+      cerr << "paths.size() == " << paths.size() << endl;
+      cerr << "ellipses.size() == " << ellipses.size() << endl;
+      cerr << "circles.size() == " << circles.size() << endl;
 
-      cerr << "parabolae.size() == " << parabolae.size() << endl << flush;
-      cerr << "hyperbolae.size() == " << hyperbolae.size() << endl << flush;
+      cerr << "parabolae.size() == " << parabolae.size() << endl;
+      cerr << "hyperbolae.size() == " << hyperbolae.size() << endl;
 
       cerr << "reg_polygons.size() == " << reg_polygons.size()
-           << endl << flush;
-      cerr << "rectangles.size() == " << rectangles.size() << endl << flush;
+           << endl;
+      cerr << "rectangles.size() == " << rectangles.size() << endl;
     }
 
   if (DEBUG)
@@ -908,7 +908,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
 
   if (DEBUG)
     {
-      cerr << "Entering Solid::get_shape_ptr().\n" << flush;
+      cerr << "Entering Solid::get_shape_ptr().\n";
     }
 
 
@@ -924,7 +924,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > paths.size() (" << paths.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
 
@@ -942,7 +942,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > ellipses.size() (" << ellipses.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
       }
@@ -959,7 +959,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > circles.size() (" << circles.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
 
@@ -978,7 +978,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > parabolae.size() (" << parabolae.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
 
@@ -996,7 +996,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > hyperbolae.size() (" << hyperbolae.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
 
@@ -1017,7 +1017,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > rectangles.size() (" << rectangles.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
       }
@@ -1034,7 +1034,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
             
             cerr << "ERROR! In Solid::get_shape_ptr():\n"
               << "s (" << s << ") > reg_polygons.size() (" << reg_polygons.size()
-                << ")\nReturning a null pointer (0).\n\n" << flush;
+                << ")\nReturning a null pointer (0).\n\n";
             return static_cast<Shape*>(0);
           }
       }
@@ -1044,7 +1044,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
       {
         cerr << "ERROR! In Solid::get_shape_ptr():\n"
           << "Invalid value for curr_shape_type: " << curr_shape_type << endl
-            << "Returning a null pointer (0).\n\n" << flush;
+            << "Returning a null pointer (0).\n\n";
         return static_cast<Shape*>(0);
       }
 
@@ -1368,7 +1368,7 @@ if (curr_shape_type == CIRCLE_VALUE)
       {
         cerr << "ERROR! In Solid::get_shape_center():\n"
           << "s (" << s << ") > circles.size() (" << circles.size()
-            << ")\nReturning INVALID_POINT.\n\n" << flush;
+            << ")\nReturning INVALID_POINT.\n\n";
         return INVALID_POINT;
       }
   }
@@ -1382,7 +1382,7 @@ else if (curr_shape_type == ELLIPSE_VALUE)
       {
         cerr << "ERROR! In Solid::get_shape_center():\n"
           << "s (" << s << ") > ellipses.size() (" << ellipses.size()
-            << ")\nReturning INVALID_POINT.\n\n" << flush;
+            << ")\nReturning INVALID_POINT.\n\n";
         return INVALID_POINT;
       }
   }
@@ -1396,7 +1396,7 @@ else if (curr_shape_type == RECTANGLE_VALUE)
       {
         cerr << "ERROR! In Solid::get_shape_center():\n"
           << "s (" << s << ") > rectangles.size() (" << rectangles.size()
-            << ")\nReturning INVALID_POINT.\n\n" << flush;
+            << ")\nReturning INVALID_POINT.\n\n";
         return INVALID_POINT;
       }
   }
@@ -1410,7 +1410,7 @@ else if (curr_shape_type == REG_POLYGON_VALUE)
     {
       cerr << "ERROR! In Solid::get_shape_center():\n"
         << "s (" << s << ") > reg_polygons.size() (" << reg_polygons.size()
-          << ")\nReturning INVALID_POINT.\n\n" << flush;
+          << ")\nReturning INVALID_POINT.\n\n";
       return INVALID_POINT;
     }
 }
@@ -1421,7 +1421,7 @@ else if (curr_shape_type == REG_POLYGON_VALUE)
         {
           cerr << "ERROR! In Solid::get_shape_center():\n"
             << "Invalid argument for curr_shape_type: " << curr_shape_type
-              << endl << "Returning INVALID_POINT.\n\n" << flush;
+              << endl << "Returning INVALID_POINT.\n\n";
           return INVALID_POINT;
         }   
 }
@@ -2862,7 +2862,7 @@ Solid::show(string text, char coords,
   
   else
     cerr << "rectangles is empty.\n";
-  cerr << endl << flush;
+  cerr << endl;
   return;
 
 }  /* End of |Solid::show()| definition.  */
@@ -4687,7 +4687,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Path cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4701,7 +4701,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Ellipse cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4715,7 +4715,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Circle cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4729,7 +4729,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Parabola cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4743,7 +4743,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Hyperbola cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4760,7 +4760,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Polygon cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4774,7 +4774,7 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         {
             cerr << "WARNING! In Solid::extract():\n"
                  << "Rectangle cannot be projected. "
-                 << "Returning empty vector <Shape*>.\n" << flush;
+                 << "Returning empty vector <Shape*>.\n";
             return v;
             break;
         }
@@ -4843,7 +4843,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
 {
   bool DEBUG = false; /* |true| */@;
   if (DEBUG)
-    cerr << "Entering Solid::set_pre_projective_extremes()" << "\n" << flush;
+    cerr << "Entering Solid::set_pre_projective_extremes()" << "\n";
   valarray <real> v;
   v.resize(6, 0);  /* LDF 2002.12.13.  Added.  Needed for compiling
                       under GNU/Linux using GCC on the Intel i686
@@ -4858,7 +4858,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -4881,7 +4881,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -4904,7 +4904,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -4927,7 +4927,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -4950,7 +4950,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -4976,7 +4976,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -4999,7 +4999,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_pre_projective_extremes():\n"
                << "Path::set_pre_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_pre_projective_extremes();
@@ -5016,7 +5016,7 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
     }
 
   if (DEBUG)
-    cerr << "Exiting Solid::set_pre_projective_extremes()" << "\n" << flush;
+    cerr << "Exiting Solid::set_pre_projective_extremes()" << "\n";
   return true;
 
 }  /* End of |Solid::set_pre_projective_extremes()| definition.  */
@@ -5056,7 +5056,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
 {
   bool DEBUG = false; /* |true| */@;
   if (DEBUG)
-    cerr << "Entering Solid::set_projective_extremes()" << "\n" << flush;
+    cerr << "Entering Solid::set_projective_extremes()" << "\n";
   valarray <real> v;
   v.resize(6, 0);  /* LDF 2002.12.13.  Added.  Needed for compiling
                       under GNU/Linux using GCC on the Intel i686
@@ -5071,7 +5071,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5094,7 +5094,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5117,7 +5117,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5140,7 +5140,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5164,7 +5164,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5189,7 +5189,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5212,7 +5212,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         {
           cerr << "ERROR! In Solid::set_projective_extremes():\n"
                << "Path::set_projective_extremes() returned false. "
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
       v = (**iter).get_projective_extremes();
@@ -5229,7 +5229,7 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
     }
 
   if (DEBUG)
-    cerr << "Exiting Solid::set_projective_extremes()" << "\n" << flush;
+    cerr << "Exiting Solid::set_projective_extremes()" << "\n";
   return true;
 
 }
@@ -5429,13 +5429,13 @@ Solid::get_minimum_x(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::get_minimum_x()" << endl << flush;
+    cerr << "Entering Solid::get_minimum_x()" << endl;
 
   if (DEBUG)
-    cerr << "minimum_x == " << projective_extremes[0] << endl << flush;
+    cerr << "minimum_x == " << projective_extremes[0] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Solid::get_minimum_x()" << endl << flush;
+    cerr << "Exiting Solid::get_minimum_x()" << endl;
 
   return projective_extremes[0];
 }
@@ -5472,13 +5472,13 @@ Solid::get_maximum_x(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::get_maximum_x()" << endl << flush;
+    cerr << "Entering Solid::get_maximum_x()" << endl;
 
   if (DEBUG)
-    cerr << "maximum_x == " << projective_extremes[1] << endl << flush;
+    cerr << "maximum_x == " << projective_extremes[1] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Solid::get_maximum_x()" << endl << flush;
+    cerr << "Exiting Solid::get_maximum_x()" << endl;
 
   return projective_extremes[1];
 }
@@ -5546,13 +5546,13 @@ Solid::get_minimum_y(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::get_minimum_y()" << endl << flush;
+    cerr << "Entering Solid::get_minimum_y()" << endl;
 
   if (DEBUG)
-    cerr << "minimum_y == " << projective_extremes[2] << endl << flush;
+    cerr << "minimum_y == " << projective_extremes[2] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Solid::get_minimum_y()" << endl << flush;
+    cerr << "Exiting Solid::get_minimum_y()" << endl;
 
   return projective_extremes[2];
 }
@@ -5589,13 +5589,13 @@ Solid::get_maximum_y(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::get_maximum_y()" << endl << flush;
+    cerr << "Entering Solid::get_maximum_y()" << endl;
 
   if (DEBUG)
-    cerr << "maximum_y == " << projective_extremes[3] << endl << flush;
+    cerr << "maximum_y == " << projective_extremes[3] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Solid::get_maximum_y()" << endl << flush;
+    cerr << "Exiting Solid::get_maximum_y()" << endl;
 
   return projective_extremes[3];
 }
@@ -6650,7 +6650,7 @@ Solid::fill(Picture& picture,
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::fill():" << "\n" << flush;
+    cerr << "Entering Solid::fill():" << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
@@ -6740,7 +6740,7 @@ Solid::fill(Picture& picture,
         cerr << "ERROR! In `Solid::fill()':"
              << "`Picture::lock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6748,7 +6748,7 @@ Solid::fill(Picture& picture,
     {
       
       cerr << "`Picture::lock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6779,7 +6779,7 @@ Solid::fill(Picture& picture,
         cerr << "ERROR! In `Solid::fill()':"
              << "`Picture::unlock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6787,7 +6787,7 @@ Solid::fill(Picture& picture,
     {
       
       cerr << "`Picture::unlock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6802,7 +6802,7 @@ Solid::fill(Picture& picture,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "Exiting Solid::fill():" << "\n" << flush;
+      cerr << "Exiting Solid::fill():" << "\n";
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6973,7 +6973,7 @@ Solid::filldraw(Picture& picture,
   bool DEBUG = false; /* |true| */
   if (DEBUG)
     cerr << "Entering Solid::filldraw():" 
-         << "\n" << flush;
+         << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   Solid* s = create_new<Solid>(0);
@@ -7071,7 +7071,7 @@ Solid::filldraw(Picture& picture,
         cerr << "ERROR! In `Solid::filldraw()':"
              << "`Picture::lock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7079,7 +7079,7 @@ Solid::filldraw(Picture& picture,
     {
       
       cerr << "`Picture::lock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7110,7 +7110,7 @@ Solid::filldraw(Picture& picture,
         cerr << "ERROR! In `Solid::filldraw()':"
              << "`Picture::unlock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7118,7 +7118,7 @@ Solid::filldraw(Picture& picture,
     {
       
       cerr << "`Picture::unlock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7134,7 +7134,7 @@ Solid::filldraw(Picture& picture,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "Exiting Solid::filldraw():" << "\n" << flush;
+      cerr << "Exiting Solid::filldraw():" << "\n";
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7220,7 +7220,7 @@ Solid::undraw(Picture& picture,
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::undraw():" << "\n" << flush;
+    cerr << "Entering Solid::undraw():" << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   Solid* s = create_new<Solid>(0);
@@ -7294,7 +7294,7 @@ Solid::undraw(Picture& picture,
         cerr << "ERROR! In `Solid::undraw()':"
              << "`Picture::lock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7302,7 +7302,7 @@ Solid::undraw(Picture& picture,
     {
       
       cerr << "`Picture::lock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7333,7 +7333,7 @@ Solid::undraw(Picture& picture,
         cerr << "ERROR! In `Solid::undraw()':"
              << "`Picture::unlock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7341,7 +7341,7 @@ Solid::undraw(Picture& picture,
     {
       
       cerr << "`Picture::unlock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7356,7 +7356,7 @@ Solid::undraw(Picture& picture,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "Exiting Solid::undraw():" << "\n" << flush;
+      cerr << "Exiting Solid::undraw():" << "\n";
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7429,7 +7429,7 @@ Solid::unfill(Picture& picture) const
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::unfill():" << "\n" << flush;
+    cerr << "Entering Solid::unfill():" << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   Solid* s = create_new<Solid>(0);
@@ -7502,7 +7502,7 @@ Solid::unfill(Picture& picture) const
         cerr << "ERROR! In `Solid::unfill()':"
              << "`Picture::lock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7510,7 +7510,7 @@ Solid::unfill(Picture& picture) const
     {
       
       cerr << "`Picture::lock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7541,7 +7541,7 @@ Solid::unfill(Picture& picture) const
         cerr << "ERROR! In `Solid::unfill()':"
              << "`Picture::unlock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7549,7 +7549,7 @@ Solid::unfill(Picture& picture) const
     {
       
       cerr << "`Picture::unlock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7564,7 +7564,7 @@ Solid::unfill(Picture& picture) const
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "Exiting Solid::unfill():" << "\n" << flush;
+      cerr << "Exiting Solid::unfill():" << "\n";
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7672,7 +7672,7 @@ Solid::unfilldraw(Picture& picture,
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Solid::unfilldraw():" << "\n" << flush;
+    cerr << "Entering Solid::unfilldraw():" << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   Solid* s = create_new<Solid>(0);
@@ -7743,7 +7743,7 @@ Solid::unfilldraw(Picture& picture,
         cerr << "ERROR! In `Solid::unfilldraw()':"
              << "`Picture::lock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7751,7 +7751,7 @@ Solid::unfilldraw(Picture& picture,
     {
       
       cerr << "`Picture::lock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7783,7 +7783,7 @@ Solid::unfilldraw(Picture& picture,
         cerr << "ERROR! In `Solid::unfilldraw()':"
              << "`Picture::unlock()' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -7791,7 +7791,7 @@ Solid::unfilldraw(Picture& picture,
     {
       
       cerr << "`Picture::unlock()' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -7805,7 +7805,7 @@ Solid::unfilldraw(Picture& picture,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr << "Exiting Solid::unfilldraw():" << "\n" << flush;
+      cerr << "Exiting Solid::unfilldraw():" << "\n";
     }
 #endif /* |DEBUG_COMPILE|  */@; 
   return 0;

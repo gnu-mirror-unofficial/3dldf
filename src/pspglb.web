@@ -465,7 +465,7 @@ Mutex_Type::Mutex_Type(void)
    if (DEBUG)
       {
           cerr << "Entering `Mutex_Type' default constructor."
-               << endl << flush;
+               << endl;
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -486,7 +486,7 @@ Mutex_Type::Mutex_Type(void)
              {
                  cerr << "In `Io_Struct::Io_Struct(void)':"
                       << endl << "`pthread_mutex_init' succeeded!"
-                      << endl << flush;
+                      << endl;
              }
 #endif /* |DEBUG_COMPILE|  */@; 
       }     
@@ -495,7 +495,7 @@ Mutex_Type::Mutex_Type(void)
    if (DEBUG)
        {
            cerr << "Exiting `Mutex_Type' default constructor."
-                << endl << flush;
+                << endl;
        }      
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1629,7 +1629,7 @@ Thread_Info_Type::~Thread_Info_Type(void)
   bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      cerr << "Entering `Thread_Info_Type' destructor."
-          << endl << flush; 
+          << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
@@ -1640,7 +1640,7 @@ Thread_Info_Type::~Thread_Info_Type(void)
 #if DEBUG_COMPILE
    if (DEBUG)
      cerr << "Exiting `Thread_Info_Type' destructor."
-          << endl << flush; 
+          << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return;
@@ -1670,7 +1670,7 @@ Thread_Info_Type::destroy_key_value(void* arg)
   bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      cerr << "Entering `Thread_Info_Type::destroy_key_value'."
-          << endl << flush; 
+          << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   Thread_Info_Type* t = static_cast<Thread_Info_Type*>(arg);
@@ -1682,7 +1682,7 @@ Thread_Info_Type::destroy_key_value(void* arg)
 #if DEBUG_COMPILE
    if (DEBUG)
      cerr << "Exiting `Thread_Info_Type::destroy_key_value'."
-          << endl << flush; 
+          << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return;
@@ -2411,7 +2411,7 @@ cerr_message(stringstream& s,
       cerr << "ERROR! In `cerr_message': "
            << "`cerr_mutex.lock' failed."
            << endl << "Exiting with return value " << status
-           << "." << endl << flush;
+           << "." << endl;
       return status;
     }
 
@@ -2424,7 +2424,7 @@ cerr_message(stringstream& s,
 
   if(get_char)
     {
-      cerr << "Type <RETURN> to continue.\n" << flush; 
+      cerr << "Type <RETURN> to continue.\n"; 
       getchar(); /* Don't delete this!  */ 
     }
 
@@ -2436,7 +2436,7 @@ cerr_message(stringstream& s,
       cerr << "ERROR! In `cerr_message': "
            << "`cerr_mutex.unlock' failed."
            << endl << "Exiting with return value " 
-           << status << "." << endl << flush;
+           << status << "." << endl;
       return status;
     }
 
@@ -2785,9 +2785,9 @@ show(void);
 void
 Run_State::show(void)
 {
-  cout << "multithread_input == " << multithread_input << endl << flush;
-  cout << "multithread_output == " << multithread_output << endl << flush;
-  cout << "multithread_include == " << multithread_include << endl << flush;
+  cout << "multithread_input == " << multithread_input << endl;
+  cout << "multithread_output == " << multithread_output << endl;
+  cout << "multithread_include == " << multithread_include << endl;
   return;
 }
 
@@ -2953,22 +2953,22 @@ System::get_endianness(const bool verbose)
   if (u.Char[0] == 1)
     {
       if (verbose)
-        cout << "Processor is little-endian." << endl << endl 
-             << flush;
+        cout << "Processor is little-endian." << endl << endl;
+
       return 0;
     }
   else if (u.Char[sizeof(long) - 1] == 1)
     {
       if (verbose)
-        cout << "Processor is big-endian." << endl << endl 
-             << flush;
+        cout << "Processor is big-endian." << endl << endl;
+
       return 1;
     }
   else
     {
       cerr << "ERROR! In System::get_endianness:\n"
            << "Can't determine endianness. Returning -1"
-           << endl << endl << flush;
+           << endl << endl;
       return -1;
     }
 

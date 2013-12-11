@@ -271,14 +271,14 @@ Io_Struct::~Io_Struct(void)
   bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      cerr << "Entering `Io_Struct::~Io_Struct()'."  
-          << endl << flush;
+          << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
 #if DEBUG_COMPILE
    if (DEBUG)
      cerr << "Exiting `Io_Struct::~Io_Struct()'."  
-          << endl << flush;
+          << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return;
@@ -399,7 +399,7 @@ Input_Struct::~Input_Struct(void)
   bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      cerr << "Entering `Input_Struct' destructor."
-          << "\n" << flush;
+          << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   if (type == FILE_TYPE)
@@ -410,7 +410,7 @@ Input_Struct::~Input_Struct(void)
 
 #if DEBUG_COMPILE
           if (DEBUG) 
-            cerr << "Closing " << filename << ".\n" << flush;
+            cerr << "Closing " << filename << ".\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
           i->close();
@@ -424,7 +424,7 @@ Input_Struct::~Input_Struct(void)
 #if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "Deleting stream_ptr and pointing it at 0"
-             << ".\n" << flush;
+             << ".\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
       delete (stream_ptr);
@@ -467,7 +467,7 @@ Input_Struct::~Input_Struct(void)
       if (DEBUG)
         {
           cerr << "`up' " << j++ << " is non-null. Deleting"
-               << "\n" << flush;
+               << "\n";
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -495,7 +495,7 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "Deleting stream_ptr and pointing it at 0"
-             << ".\n" << flush;
+             << ".\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
       delete (stream_ptr);
@@ -539,7 +539,7 @@ Added this section.
    if (DEBUG)
      {
        cerr << "Exiting `Input_Struct' destructor."
-            << "\n" << flush;
+            << "\n";
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -635,7 +635,7 @@ Output_Struct::~Output_Struct(void)
   bool DEBUG = false; /* |true| */ @; 
   if (DEBUG) 
     cerr << "Entering `Output_Struct' destructor."
-         << endl << flush; 
+         << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   if (type == FILE_TYPE)
@@ -645,7 +645,7 @@ Output_Struct::~Output_Struct(void)
         {
 #if DEBUG_COMPILE
           if (DEBUG) 
-            cerr << "Closing " << filename << ".\n" << flush;
+            cerr << "Closing " << filename << ".\n";
 #endif /* |DEBUG_COMPILE|  */@; 
           
           o->close();
@@ -658,7 +658,7 @@ Output_Struct::~Output_Struct(void)
 #if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "Deleting `stream_ptr' and pointing it at 0."
-             << endl << flush;
+             << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
       delete (stream_ptr);
@@ -1939,7 +1939,7 @@ Id_Map_Type::show(string s, bool show_all) const
    if (s == "")
       s = "Id_Map_Type:";
 
-   cerr << s << endl << "id_map:" << endl << flush;
+   cerr << s << endl << "id_map:" << endl;
 
    for (Id_Map_Const_Iterator iter = id_map.begin();
         iter != id_map.end();
@@ -1959,7 +1959,7 @@ Id_Map_Type::show(string s, bool show_all) const
     cerr << "up == 0\n";
   else
     {
-      cerr << "up != 0.  Showing up." << endl << flush;
+      cerr << "up != 0.  Showing up." << endl;
       up->show();
     }
   return;
@@ -3101,7 +3101,7 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 
   if (DEBUG)
     cerr << "Entering Scanner_Type::open_default_out_file()" << endl
-         << "format == " << format << endl << flush;
+         << "format == " << format << endl;
 
 
   run_state = r;
@@ -3136,7 +3136,7 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
     {
       cerr << "ERROR! In Scanner_Type::open_default_out_file():\n"
            << "Invalid `format\' argument: " << format << endl
-           << "Returning `false\'." << endl << endl << flush;
+           << "Returning `false\'." << endl << endl;
       return false;
     }
 
@@ -3151,8 +3151,8 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
           out_file_stream = 0;
           cerr << "ERROR! In Scanner_Type::open_default_out_file():"
                <<  "Opening " << filename 
-               << " failed!  Returning false.\n\n" 
-               << flush;
+               << " failed!  Returning false.\n\n";
+
           return false;
         }
       else
@@ -3165,15 +3165,15 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
             cerr << "Opening " << filename 
                  << " succeeded! returning `true\'" << endl
                  << "Exiting Scanner_Type::open_default_out_file()" << endl
-                 << endl << flush;
+                 << endl;
           return true;
         } /* |else|  */@;
     } /* |if (do_output)|  */@;
   else if (DEBUG)
     {
       cerr << conditional_string << " == false.  Returning `false\'.\n"
-        << "Exiting Scanner_Type::open_default_out_file()" << endl 
-        << flush; 
+        << "Exiting Scanner_Type::open_default_out_file()" << endl;
+
       return false;
     }
 } /* |Scanner_Type::open_default_out_file| */@;
@@ -3396,14 +3396,14 @@ Scanner_Type::get_in_filename(const bool silent) const
       if (!silent || DEBUG)
         cerr << "WARNING! In Scanner_Type::get_in_filename():\n"
              << "Scanner_Type.in is a null pointer. Returning "
-             << "empty string.\n" << flush;
+             << "empty string.\n";
       return "";
     }
   else
     {
       if (DEBUG)
         cerr << "In Scanner_Type::get_in_filename():\n"
-             << "returning " << in->filename << ".\n" << flush;
+             << "returning " << in->filename << ".\n";
       return in->filename;
     }
 }
@@ -4355,7 +4355,7 @@ Scanner_Type::show(string s, bool show_all) const
         cerr << "out[" << i << "] == 0" << endl;
       else
         cerr << "out[" << i << "]->filename == " << out[i]->filename
-             << endl << flush;
+             << endl;
     }
 
 

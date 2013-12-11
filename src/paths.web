@@ -717,7 +717,7 @@ Path::Path(void)
    bool DEBUG = false; /* |true|  */
 
    if (DEBUG)
-     cerr << "Entering Path() (default version).\n" << flush;
+     cerr << "Entering Path() (default version).\n";
 
    line_switch = false;
    cycle_switch = false;
@@ -814,7 +814,7 @@ Path::Path(const Point& p0, const Point& p1)
 {
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
-    cerr << "Entering Path() (line version).\n" << flush;
+    cerr << "Entering Path() (line version).\n";
 
   line_switch = true;
   cycle_switch = false;
@@ -847,7 +847,7 @@ Path::Path(const Point& p0, const Point& p1)
 
   connectors.push_back("--");
   if (DEBUG)
-    cerr << "Exiting Path() (line version).\n" << flush;
+    cerr << "Exiting Path() (line version).\n";
   return;
 
 }  /* End of |Path::Path(const Point& p0, const Point& p1)| 
@@ -1038,7 +1038,7 @@ Path::Path(string connector, bool@,@, cycle ... )
 {
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
-    cerr << "Entering Path() (connector, cycle, ...).\n" << flush;
+    cerr << "Entering Path() (connector, cycle, ...).\n";
 
   shape_type = PATH_TYPE;
   surface_hiding_ctr = 0;
@@ -1077,7 +1077,7 @@ Path::Path(string connector, bool@,@, cycle ... )
 
   va_end(ap);
   if (DEBUG)
-    cerr << "Exiting Path() (connector, cycle, ...).\n" << flush;
+    cerr << "Exiting Path() (connector, cycle, ...).\n";
   return;
 }
 
@@ -1333,7 +1333,7 @@ Path::Path(Point* first_point_ptr ... )
 
   va_end(ap);
   if (DEBUG)
-    cerr << "Exiting Path() (Point* ...).\n" << flush;
+    cerr << "Exiting Path() (Point* ...).\n";
 }
 
 @q *** (3) Setting function.@>
@@ -1530,7 +1530,7 @@ Path::Path(const Path& p)
   *this = p;
 
   if (DEBUG)
-    cerr << "Exiting Path() (copy constructor).\n" << flush;
+    cerr << "Exiting Path() (copy constructor).\n";
   return;
 }
 
@@ -1641,7 +1641,7 @@ Path::~Path(void)
    bool DEBUG = false; /* |true| */
    if (DEBUG)
      {
-       cerr << "Entering ~Path().\n" << flush;
+       cerr << "Entering ~Path().\n";
        show("Path:");
      }
    for(vector<Point*>::iterator iter = points.begin();
@@ -1705,7 +1705,7 @@ Now deleting |dash_pattern_vector| and |pen_vector| and setting them to
 
     if (DEBUG)
       {
-          cerr << "Exiting ~Path().\n" << flush;
+          cerr << "Exiting ~Path().\n";
       }
 }
 
@@ -3404,7 +3404,7 @@ Path::project(const Focus& f,
         {
           cerr << "ERROR! In Path::project():\n"
                << "Point::project() returned false.\n"
-               << "Returning false.\n\n" << flush;
+               << "Returning false.\n\n";
           return false;
         }
     }
@@ -4158,7 +4158,7 @@ Path::align_with_axis(bool assign, const char axis)
       cerr << "WARNING! In Path::align_with_axis():\n"
            << "Don't call this function with the \"assign\" "
            << "argument == false.\nIt won't cause any harm, though.\n"
-           << "Continuing.\n\n" << flush;
+           << "Continuing.\n\n";
       return t;
     }
   return (*this *= t);
@@ -4502,8 +4502,8 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
     {
       cerr << "ERROR! In Path::operator&(Path&)."
         << "Paths don't touch.\n"
-          << "Using \"..\" to join them instead of \"&\".\n"
-            << flush;
+          << "Using \"..\" to join them instead of \"&\".\n";
+
       connectors.push_back("..");
     }
   else
@@ -5535,7 +5535,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG) 
-    cerr << "Entering Path::fill().\n" << flush;
+    cerr << "Entering Path::fill().\n";
 #endif /* |DEBUG_COMPILE|  */@; 
   
   if (points.size() == 0)    
@@ -5543,7 +5543,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
       cerr << "WARNING! In Path::fill():\n"
         << "Path doesn't contain any Points.\n"
         << "Not adding `Path' to `Picture', returning 1, "
-        << "and will try to continue.\n\n" << flush;
+        << "and will try to continue.\n\n";
       return 1;
     }
 
@@ -5574,7 +5574,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
         cerr << "ERROR! In `Path::fill':"
              << "`Picture::lock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -5582,7 +5582,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
     {
       
       cerr << "`Picture::lock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -5613,7 +5613,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
         cerr << "ERROR! In `Path::fill':"
              << "`Picture::unlock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -5621,7 +5621,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
     {
       
       cerr << "`Picture::unlock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -5636,7 +5636,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
 
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "Exiting Path::fill().\n" << flush;
+    cerr << "Exiting Path::fill().\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
@@ -5763,7 +5763,7 @@ Path::filldraw(Picture& picture,
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
-    cerr << "Entering Path::filldraw().\n" << flush;
+    cerr << "Entering Path::filldraw().\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   if (points.size() == 0)  
@@ -5771,7 +5771,7 @@ Path::filldraw(Picture& picture,
       cerr << "WARNING! In Path::filldraw():\n"
         << "Path doesn't contain any Points.\n"
         << "Not adding `Path' to `Picture', returning 1, "
-        << "and will try to continue.\n\n" << flush;
+        << "and will try to continue.\n\n";
       return 1;
     }
 
@@ -5823,7 +5823,7 @@ Path::filldraw(Picture& picture,
         cerr << "ERROR! In `Path::filldraw':"
              << "`Picture::lock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -5831,7 +5831,7 @@ Path::filldraw(Picture& picture,
     {
       
       cerr << "`Picture::lock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -5864,7 +5864,7 @@ Path::filldraw(Picture& picture,
         cerr << "ERROR! In `Path::filldraw':"
              << "`Picture::unlock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -5872,7 +5872,7 @@ Path::filldraw(Picture& picture,
     {
       
       cerr << "`Picture::unlock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -5887,7 +5887,7 @@ Path::filldraw(Picture& picture,
 #if DEBUG_COMPILE
 
   if (DEBUG)
-    cerr << "Exiting Path::filldraw().\n" << flush;
+    cerr << "Exiting Path::filldraw().\n";
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -5966,7 +5966,7 @@ Path::undraw(Picture& picture,
       cerr << "WARNING! In Path::undraw():\n"
            << "Path doesn't contain any Points.\n"
            << "Not adding `Path' to `Picture', returning 1, "
-           << "and will try to continue.\n\n" << flush;
+           << "and will try to continue.\n\n";
       return 1;
     }
 
@@ -6011,7 +6011,7 @@ Path::undraw(Picture& picture,
         cerr << "ERROR! In `Path::undraw':"
              << "`Picture::lock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6019,7 +6019,7 @@ Path::undraw(Picture& picture,
     {
       
       cerr << "`Picture::lock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6051,7 +6051,7 @@ Path::undraw(Picture& picture,
         cerr << "ERROR! In `Path::undraw':"
              << "`Picture::unlock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6059,7 +6059,7 @@ Path::undraw(Picture& picture,
     {
       
       cerr << "`Picture::unlock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6205,7 +6205,7 @@ Path::unfill(Picture& picture)
       cerr << "WARNING! In Path::unfill():\n"
         << "Path doesn't contain any Points.\n"
         << "Not adding `Path' to `Picture', returning 1, "
-        << "and will try to continue.\n\n" << flush;
+        << "and will try to continue.\n\n";
       return 1;
     }
 
@@ -6235,7 +6235,7 @@ Path::unfill(Picture& picture)
         cerr << "ERROR! In `Path::unfill':"
              << "`Picture::lock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6243,7 +6243,7 @@ Path::unfill(Picture& picture)
     {
       
       cerr << "`Picture::lock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6274,7 +6274,7 @@ Path::unfill(Picture& picture)
         cerr << "ERROR! In `Path::unfill':"
              << "`Picture::unlock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6282,7 +6282,7 @@ Path::unfill(Picture& picture)
     {
       
       cerr << "`Picture::unlock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6390,7 +6390,7 @@ Path::unfilldraw(Picture& picture,
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true|  */ 
   if (DEBUG)
-    cerr << "Entering Path::unfilldraw().\n" << flush;
+    cerr << "Entering Path::unfilldraw().\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
   if (points.size() == 0)  
@@ -6398,7 +6398,7 @@ Path::unfilldraw(Picture& picture,
       cerr << "WARNING! In Path::unfilldraw():\n"
            << "Path doesn't contain any Points.\n"
            << "Not adding `Path' to `Picture', returning 1, "
-           << "and will try to continue.\n\n" << flush;
+           << "and will try to continue.\n\n";
       return 1;
     }
 
@@ -6450,7 +6450,7 @@ Path::unfilldraw(Picture& picture,
         cerr << "ERROR! In `Path::unfilldraw':"
              << "`Picture::lock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6458,7 +6458,7 @@ Path::unfilldraw(Picture& picture,
     {
       
       cerr << "`Picture::lock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6489,7 +6489,7 @@ Path::unfilldraw(Picture& picture,
         cerr << "ERROR! In `Path::unfilldraw':"
              << "`Picture::unlock' failed. "
              << "Returning 1 and will try to continue."
-             << endl << flush;
+             << endl;
         return 1;
       }
 #if DEBUG_COMPILE
@@ -6497,7 +6497,7 @@ Path::unfilldraw(Picture& picture,
     {
       
       cerr << "`Picture::unlock' succeeded."
-           << endl << flush;
+           << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6512,7 +6512,7 @@ Path::unfilldraw(Picture& picture,
 
 #if DEBUG_COMPILE
   if (DEBUG) 
-    cerr << "Exiting Path::unfilldraw().\n" << flush;
+    cerr << "Exiting Path::unfilldraw().\n";
 #endif /* |DEBUG_COMPILE|  */@;   
 
   return 0;
@@ -7755,13 +7755,13 @@ Path::get_minimum_x(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Path::get_minimum_x()" << endl << flush;
+    cerr << "Entering Path::get_minimum_x()" << endl;
 
   if (DEBUG)
-    cerr << "minimum_x == " << projective_extremes[0] << endl << flush;
+    cerr << "minimum_x == " << projective_extremes[0] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Path::get_minimum_x()" << endl << flush;
+    cerr << "Exiting Path::get_minimum_x()" << endl;
 
   return projective_extremes[0];
 }
@@ -7798,13 +7798,13 @@ Path::get_maximum_x(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Path::get_maximum_x()" << endl << flush;
+    cerr << "Entering Path::get_maximum_x()" << endl;
 
   if (DEBUG)
-    cerr << "maximum_x == " << projective_extremes[1] << endl << flush;
+    cerr << "maximum_x == " << projective_extremes[1] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Path::get_maximum_x()" << endl << flush;
+    cerr << "Exiting Path::get_maximum_x()" << endl;
 
   return projective_extremes[1];
 }
@@ -7872,13 +7872,13 @@ Path::get_minimum_y(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Path::get_minimum_y()" << endl << flush;
+    cerr << "Entering Path::get_minimum_y()" << endl;
 
   if (DEBUG)
-    cerr << "minimum_y == " << projective_extremes[2] << endl << flush;
+    cerr << "minimum_y == " << projective_extremes[2] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Path::get_minimum_y()" << endl << flush;
+    cerr << "Exiting Path::get_minimum_y()" << endl;
 
   return projective_extremes[2];
 }
@@ -7915,13 +7915,13 @@ Path::get_maximum_y(const unsigned short s) const
 {
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering Path::get_maximum_y()" << endl << flush;
+    cerr << "Entering Path::get_maximum_y()" << endl;
 
   if (DEBUG)
-    cerr << "maximum_y == " << projective_extremes[3] << endl << flush;
+    cerr << "maximum_y == " << projective_extremes[3] << endl;
 
   if (DEBUG)
-    cerr << "Exiting Path::get_maximum_y()" << endl << flush;
+    cerr << "Exiting Path::get_maximum_y()" << endl;
 
   return projective_extremes[3];
 }
@@ -9659,13 +9659,13 @@ Path::show(string text, char coords,
      ; /* Do nothing.  */
 
    else if (coords == 'p')
-      cerr << "Projective coordinates.\n" << flush;
+      cerr << "Projective coordinates.\n";
 
    else if (coords == 'u')
-     cerr << "User coordinates.\n" << flush;
+     cerr << "User coordinates.\n";
 
    else if (coords == 'v')
-     cerr << "View coordinates.\n" << flush;
+     cerr << "View coordinates.\n";
 
    else
      {
@@ -9691,11 +9691,11 @@ Path::show(string text, char coords,
         << points.size() << endl;  
 
    cerr << "connectors.size() == " 
-        << connectors.size() << endl << flush;  
+        << connectors.size() << endl;  
 
    if (connectors.size() == 0)
      {
-       cerr << "Using \"--\" as connector.\n" << flush;
+       cerr << "Using \"--\" as connector.\n";
        connector_string  = "--";
      }
 
@@ -9795,7 +9795,7 @@ Path::show(string text, char coords,
    else
      cerr << "`arrow' == `Path::NO_ARROW'.";
 
-   cerr << endl << flush;
+   cerr << endl;
 
    return;
 
@@ -9964,7 +9964,7 @@ Commented-out the warning.
     {
 #if 0 
       cerr << "WARNING! In Path::is_planar():\n"
-           << "Path is linear.  Returning true.\n\n" << flush;
+           << "Path is linear.  Returning true.\n\n";
 #endif 
       if (verbose)
         {
@@ -11114,7 +11114,7 @@ Path::slope(char a, char b)
   if (!is_linear())
     {
       cerr << "ERROR! In Path::slope(). Path is not linear!\n"
-           << "Returning INVALID_REAL\n" << flush;
+           << "Returning INVALID_REAL\n";
       return INVALID_REAL;
     }
   return points[1]->slope(*points[0], a, b);
@@ -11175,7 +11175,7 @@ compare another |Path| to it.
     {
       cerr << "ERROR! In Path::subpath():\n"
            << "The \"start\" argument is < the \"end\" argument.\n"
-           << "Returning empty Path.\n\n" << flush;
+           << "Returning empty Path.\n\n";
       return p;  
     }
 
@@ -11186,8 +11186,8 @@ to recover.
     {
       cerr << "ERROR! In Path::subpath():\n"
            << "\"start\" argument is > points.size() - 1.\n"
-           << "Will try to recover by setting start = 0.\n\n"
-           << flush;
+           << "Will try to recover by setting start = 0.\n\n";
+
       start = 0;
     }
 
@@ -11195,8 +11195,8 @@ to recover.
     {
       cerr << "ERROR! In Path::subpath():\n"
            << "\"end\" argument is > points.size().\n"
-           << "Will try to recover by setting end = points.size().\n\n"
-           << flush;
+           << "Will try to recover by setting end = points.size().\n\n";
+
       end = points.size();
     }
 
@@ -11213,7 +11213,7 @@ put |connector| onto |p.connectors|, and return |p|.
             {
               cerr << "ERROR! In Path::subpath():\n"
                    << "end argument > points.size().\n"
-               << "Breaking out of loop.\n\n" << flush;
+               << "Breaking out of loop.\n\n";
               break;
             }
           p.points.push_back(create_new<Point>(points[i]));
@@ -11250,7 +11250,7 @@ that add or remove connectors, so it's best to have this routine.
       p.connectors.push_back(s);
     }
   if (DEBUG)   
-    cerr << "p.connectors.size() == " << p.connectors.size() << endl << flush;
+    cerr << "p.connectors.size() == " << p.connectors.size() << endl;
   
   Path q;
   
@@ -11318,7 +11318,7 @@ Path::get_point(const unsigned short a)
       {
         cerr << "ERROR! In Path::get_point():\n"
              << "Argument is >= size of Path.\n"
-             << "Returning INVALID_POINT.\n\n"  << flush;
+             << "Returning INVALID_POINT.\n\n" ;
         return INVALID_POINT;
       }
 }
@@ -11358,7 +11358,7 @@ Path::get_point(const unsigned short a) const
       {
         cerr << "ERROR! In Path::get_point():\n"
              << "Argument is >= size of Path.\n"
-             << "Returning INVALID_POINT.\n\n"  << flush;
+             << "Returning INVALID_POINT.\n\n" ;
         return INVALID_POINT;
       }
 }
@@ -11399,7 +11399,7 @@ Path::get_last_point() const
       {
         cerr << "ERROR! In Path::get_last_point():\n"
              << "Path is empty.\n"
-             << "Returning INVALID_POINT.\n\n"  << flush;
+             << "Returning INVALID_POINT.\n\n" ;
         return INVALID_POINT;
       }
 }
@@ -11540,9 +11540,14 @@ get_normal(void) const;
 Point
 Path::get_normal(void) const
 {
-  bool DEBUG = false; /* |true|  */@; 
+  volatile bool DEBUG = false; /* |true|  */@; 
+
   if (DEBUG)
-    cerr << "Entering Path::get_normal().\n" << flush;
+  {
+     cerr_mutex.lock(); 
+     cerr << "Entering Path::get_normal().\n";
+     cerr_mutex.unlock(); 
+  }
 
   Point origin_pt(0, 0, 0);
 
@@ -11551,7 +11556,7 @@ Path::get_normal(void) const
       cerr_mutex.lock(); 
       cerr << "WARNING! In Path::get_normal():\n"
         << "Path is empty or contains only one Point. "
-        << "Returning INVALID_POINT.\n\n" << flush;
+        << "Returning INVALID_POINT.\n\n";
       cerr_mutex.unlock();  
 
       return INVALID_POINT;
@@ -11571,7 +11576,7 @@ the |Points| lie on a line or in a plane.
           cerr_mutex.lock(); 
           cerr << "WARNING! In Path::get_normal():\n"
                << "Connector may make Path non-linear or non-planar: " 
-               << *iter << endl << "Returning INVALID_POINT.\n\n" << flush;
+               << *iter << endl << "Returning INVALID_POINT.\n\n";
           cerr_mutex.unlock();  
 
           return INVALID_POINT;
@@ -11590,7 +11595,7 @@ Commented-out warning.
     {
 #if 0 
       cerr << "WARNING! In Path::get_normal():\n"
-           << "Path has 2 Points.  Returning origin_pt.\n\n" << flush;
+           << "Path has 2 Points.  Returning origin_pt.\n\n";
 #endif 
       return origin_pt;
     }
@@ -11614,16 +11619,26 @@ Commented-out warning.
     }
   
   if (iter == points.end() && b0 == origin_pt)
-    {
-      if (DEBUG) 
-      cerr_mutex.lock(); 
-      cerr << "Exiting Path::get_normal(). "
-           << "Points are all colinear.\n"
-           << "Returning origin_pt.\n\n";
-      cerr_mutex.unlock();  
+  {
+    if (DEBUG) 
+    cerr_mutex.lock(); 
+    cerr << "Exiting Path::get_normal(). "
+         << "Points are all colinear.\n"
+         << "Returning origin_pt.\n\n";
+    cerr_mutex.unlock();  
 
-      return origin_pt;
-    }
+    return origin_pt;
+  }
+#if DEBUG_COMPILE
+  else if (DEBUG)
+  {
+    cerr_mutex.lock(); 
+    cerr << "Exiting Path::get_normal(). "
+         << "Points are not all colinear.\n";
+    cerr_mutex.unlock();  
+          
+  }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
 
   if (DEBUG) 
   {
@@ -11641,8 +11656,8 @@ Commented-out warning.
         {
           cerr << "Exiting Path::get_normal(). " 
                << "Points are all colinear except for one.\n"
-               << "Returning normal.\n\n"
-               << flush;
+               << "Returning normal.\n\n";
+
         }
       return -b0;
     }
@@ -11682,7 +11697,7 @@ Commented-out warning.
           {
             cerr_mutex.lock(); 
             cerr << "Exiting Path::get_normal(). " 
-                 << "Returning INVALID_POINT.\n\n" << flush;
+                 << "Returning INVALID_POINT.\n\n";
             cerr_mutex.unlock();  
           }
 
@@ -11729,7 +11744,7 @@ Point::get_normal(const Point& p, const Point& q) const
       cerr_mutex.lock(); 
       cerr << "ERROR! In Point::get_normal():\n"
            << "The Points do not determine a plane.\n"
-           << "Returning INVALID_POINT.\n\n" << flush;
+           << "Returning INVALID_POINT.\n\n";
       cerr_mutex.unlock();  
       return INVALID_POINT;
     }
@@ -11838,7 +11853,7 @@ Point::is_in_triangle(const Point& p0,
         {
           cerr << "WARNING! In Point::is_in_triangle():\n"
             << "The Point arguments do not determine a plane.\n"
-              << "Returning false.\n\n" << flush;
+              << "Returning false.\n\n";
         }
       return false;
     }
@@ -11849,7 +11864,7 @@ Point::is_in_triangle(const Point& p0,
           cerr << "WARNING! In Point::is_in_triangle():\n"
             << "*this doesn't lie in the plane determined "
               << "by the arguments.\n"
-                << "Returning false.\n\n" << flush;
+                << "Returning false.\n\n";
             }
       return false;
     }
@@ -11898,7 +11913,7 @@ Point::is_in_triangle(const Point& p0,
     {
       if (DEBUG)
         cerr << "lambda_denominator or mu_denominator == 0. "
-             << "Exchanging y and z-coordinates.\n" << flush;
+             << "Exchanging y and z-coordinates.\n";
       real temp;
 
       temp = t_y;
@@ -11925,16 +11940,15 @@ Point::is_in_triangle(const Point& p0,
         {
           if (DEBUG)
             cerr << "Exchanging y and z-coordinates worked.\n" 
-                 << "lambda_denominator and mu_denominator are no longer 0.\n" 
-                 << flush;
+                 << "lambda_denominator and mu_denominator are no longer 0.\n";
+
           exchange_y_z = true;
         }
       else
         {
           if (DEBUG)
             cerr << "Exchanging y and z-coordinates didn't work.\n" 
-                 << "Exchanging x and z-coordinates.\n" 
-                 << flush;
+                 << "Exchanging x and z-coordinates.\n";
 
 @ First, put things back the way they were.
 It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}  
@@ -11983,8 +11997,8 @@ It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}
             {
               if (DEBUG)
                 cerr << "Exchanging x and z-coordinates worked.\n" 
-                  << "lambda_denominator and mu_denominator are no longer 0.\n" 
-                    << flush;
+                  << "lambda_denominator and mu_denominator are no longer 0.\n";
+
               exchange_x_z = true;
             }
           else
@@ -11993,7 +12007,7 @@ It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}
                 {
                   cerr << "WARNING! In Point::is_in_triangle():\n"
                     << "lambda_denominator or mu_denominator is 0.\n"
-                      << "Returning false.\n\n" << flush;
+                      << "Returning false.\n\n";
                 }
               return false;
             }
@@ -12008,12 +12022,12 @@ It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}
 
   if (DEBUG)
     {
-      cerr << "lambda == " << lambda << endl << flush;
-      cerr << "mu == " << mu << endl << flush;
-      cerr << "lambda + mu == " << lambda + mu << endl << flush;
+      cerr << "lambda == " << lambda << endl;
+      cerr << "mu == " << mu << endl;
+      cerr << "lambda + mu == " << lambda + mu << endl;
 
       cerr << "(lambda >= 0 && mu >= 0 && ((lambda + mu) <= 1)) == "
-           << (lambda >= 0 && mu >= 0 && ((lambda + mu) <= 1)) << endl << flush;
+           << (lambda >= 0 && mu >= 0 && ((lambda + mu) <= 1)) << endl;
     }
  
   bool b = (lambda >= 0 && mu >= 0 && ((lambda + mu) <= 1));
@@ -12027,7 +12041,7 @@ It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}
       else
         cerr << "The Point doesn't lie within the triangle. "
              << "Returning false."; 
-      cerr << endl << endl << flush;
+      cerr << endl << endl;
     }
   return b;  
 }
@@ -12603,7 +12617,7 @@ Path::intersection_point(const Path& pa, const bool trace) const
     else
       {
           cerr << "Haven't coded this case yet. "
-               << "Returning INVALID_BOOL_POINT.\n" << flush;
+               << "Returning INVALID_BOOL_POINT.\n";
           return INVALID_BOOL_POINT;
       }
 
@@ -12661,7 +12675,7 @@ Plane::intersection_point(const Path& p) const
     {
       cerr << "ERROR! In Plane::intersection_point(const Path&):"
            << endl << "Path is not linear!  Returning INVALID_BOOL_POINT."
-           << endl << endl << flush;
+           << endl << endl;
       return INVALID_BOOL_POINT;
     }
 }
@@ -12822,7 +12836,7 @@ draw_axes(Picture& picture,
     {
       cerr << "WARNING! In draw_axes():" << endl 
            << "All axes are suppressed. Returning." 
-           << endl << endl << flush;
+           << endl << endl;
       return;
     }
 
@@ -12947,7 +12961,7 @@ Path::get_line(void) const
   else
     {
       cerr << "ERROR! In Path::get_line():\n"
-           << "Path is not linear. Returning INVALID_LINE.\n\n" << flush;
+           << "Path is not linear. Returning INVALID_LINE.\n\n";
       return INVALID_LINE;
     }
 }
@@ -13130,9 +13144,7 @@ Path::decompose(Point* p,
 
 @q ***** (5) Preliminaries.@>   
 
-#if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
-#endif /* |DEBUG_COMPILE|  */@; 
+   volatile bool DEBUG = false; /* |true| */ @; 
 
    stringstream cerr_strm;
 
@@ -13885,9 +13897,7 @@ Focus::set(real* pos_x, real* pos_y, real* pos_z,
 
 @q ***** (5) Preliminaries.@>   
 
-#if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
-#endif /* |DEBUG_COMPILE|  */@; 
+   volatile bool DEBUG = false; /* |true| */ @; 
 
    stringstream cerr_strm;
 
@@ -13950,6 +13960,18 @@ Focus::set(real* pos_x, real* pos_y, real* pos_z,
       direction.set(temp_x, temp_y, temp_z);
   }  
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_mutex.lock();
+       position.show("position:");
+       direction.show("direction:");
+       cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
 @q ***** (5)@>
 
   transform.reset();
@@ -14001,9 +14023,41 @@ error in |Path::set| when |va_arg| tried to read it.
   normal = r.normal;
   normal.shift(position);
 
+
+  Point temp_pt[2];
+
+  temp_pt[0] = (up - position);
+  temp_pt[1] = (direction - position);
+
   real temp_angle = (up - position).angle(direction - position);
 
-  up.rotate(normal, position, 90 - temp_angle);
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_mutex.lock(); 
+       temp_pt[0].show("temp_pt[0]:");
+       temp_pt[1].show("temp_pt[1]:");
+
+       cerr << "temp_angle == " << temp_angle << endl;
+          up.show("up before rotation:");
+       cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   up.rotate(normal, position, 90 - temp_angle);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_mutex.lock(); 
+       up.show("up after rotation:");
+       cerr << "up.get_y == " << up.get_y() << endl
+            << "(up.get_y() < 0.0F) " << (up.get_y() < 0.0F) << endl;
+       cerr_mutex.unlock(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
 
   if (up.get_y() < 0)
      up.rotate(normal, position, 180);

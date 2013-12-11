@@ -2159,7 +2159,7 @@ Id_Map_Entry_Type::set_entry(string nname,
    {
       cerr << "ERROR! In `Id_Map_Entry_Type::set_entry()':"
            << endl << "`pthread_mutex_init()' failed.";
-      cerr << "Type <RETURN> to continue.\n" << flush; 
+      cerr << "Type <RETURN> to continue.\n"; 
       getchar();  /* Don't delete this!  */ 
 
    }
@@ -2170,7 +2170,7 @@ Id_Map_Entry_Type::set_entry(string nname,
           {
              cerr << "In `Id_Map_Entry_Type::set_entry()':"
                   << endl << "`pthread_mutex_init()' succeeded!"
-                  << endl << flush;
+                  << endl;
           }
 #endif /* |DEBUG_COMPILE|  */@; 
    }
@@ -2187,7 +2187,7 @@ Id_Map_Entry_Type::set_entry(string nname,
       cerr << "name == " << name << endl; 
 
       cerr << "In set_entry():  type == " << type << " == " 
-           << name_map[type] << endl << flush;
+           << name_map[type] << endl;
 
       if (category == SPARK)
         cerr << "category == SPARK" << endl;
@@ -2233,7 +2233,7 @@ Id_Map_Entry_Type::set_entry(string nname,
       else 
         cerr << "right != 0" << "\n";
 
-      cerr << "Exiting Id_Map_Entry_Type::set()." << "\n" << flush;
+      cerr << "Exiting Id_Map_Entry_Type::set()." << "\n";
     }
 
 #endif

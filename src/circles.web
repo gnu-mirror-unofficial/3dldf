@@ -1173,7 +1173,7 @@ Circle::is_circular(Scanner_Node scanner_node) const
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-        cerr << "Exiting Circle::is_circular(). Returning true.\n" << flush;
+        cerr << "Exiting Circle::is_circular(). Returning true." << endl;
      }
 #endif /* |DEBUG_COMPILE|  */ 
  
@@ -2232,7 +2232,7 @@ Reg_Polygon::in_circle() const
       {
           cerr << "ERROR! In Reg_Polygon::in_circle():\n"
                << "Reg_Polygon is non-planar.\n"
-               << "Returning empty Circle.\n\n" << flush;
+               << "Returning empty Circle." << endl << endl;
           return c;
       }
 
@@ -2240,7 +2240,7 @@ Reg_Polygon::in_circle() const
       {
           cerr << "ERROR! In `Reg_Polygon::in_circle()':\n"
                << "`Reg_Polygon' has fewer than 3 Points.\n"
-               << "Returning empty `Circle'.\n\n" << flush;
+               << "Returning empty `Circle'." << endl << endl;
           return c;
       }
     Point mid_pt = points[0]->mediate(*points[1]);
@@ -2344,14 +2344,14 @@ Reg_Polygon::out_circle(void) const
       {
           cerr << "ERROR! In Reg_Polygon::out_circle():\n"
             << "Reg_Polygon is non-planar.\n"
-              << "Returning empty Circle.\n\n" << flush;
+              << "Returning empty Circle." << endl << endl;
           return c;
       }
     if (points.size() < 3)
       {
           cerr << "ERROR! In Reg_Polygon::out_circle():\n"
             << "Reg_Polygon has less than 3 Points.\n"
-              << "Returning empty Circle.\n\n" << flush;
+              << "Returning empty Circle." << endl << endl;
           return c;
       }
     Point normal = get_normal();
