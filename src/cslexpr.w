@@ -90,14 +90,16 @@ Added this rule.
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+    } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
+              || entry->object == static_cast<void*>(0))|  */
 
-  else /* |entry != 0 && entry->object != 0|  */
+  else /* |   entry != static_cast<Id_Map_Entry_Node>(0) 
+           && entry->object != static_cast<void*>(0)|  */
 
     @=$$@> = static_cast<void*>(create_new<Conic_Section_Lattice>(
                                   static_cast<Conic_Section_Lattice*>(
@@ -186,11 +188,13 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node->conic_section_lattice_options == 0)
-      scanner_node->conic_section_lattice_options 
-         = new Conic_Section_Lattice_Options;
+   if (   scanner_node->conic_section_lattice_options 
+       == static_cast<Conic_Section_Lattice_Options*>(0))
+   {
+      scanner_node->conic_section_lattice_options = new Conic_Section_Lattice_Options;
+   }
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -451,21 +455,21 @@ Added this rule.
    Pointer_Vector<Conic_Section_Lattice>* pv 
       = static_cast<Pointer_Vector<Conic_Section_Lattice>*>(@=$2@>);
 
-@q ******* (7) Error handling:  |pv == 0|.@> 
+@q ******* (7) Error handling:  |pv == static_cast<Pointer_Vector<Conic_Section_Lattice>*>(0)|.@>
 
 @ Error handling:  |pv == 0|.
 \initials{LDF 2007.07.29.}
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Conic_Section_Lattice>*>(0))
       {
 
           delete r;
 
           @=$$@> = 0;
 
-      }  /* |if (pv == 0)|  */
+      }  /* |if (pv == static_cast<Pointer_Vector<Conic_Section_Lattice>*>(0))|  */
 
 @q ******* (7) Error handling:  |pv->ctr == 0|.@> 
 
@@ -483,9 +487,10 @@ Added this rule.
 
       }  /* |else if (pv->ctr == 0)|  */
 
-@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+@q ******* (7) |pv != static_cast<Pointer_Vector<Conic_Section_Lattice>*>(0) && pv->ctr > 0|.@>
 
-@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+@ |pv != static_cast<Pointer_Vector<Conic_Section_Lattice>*>(0) && pv->ctr > 0|.  
+Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
 \initials{LDF 2007.07.29.}
 
 @<Define rules@>=
