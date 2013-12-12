@@ -87,18 +87,21 @@ Added this rule.
 {
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+    } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
+              || entry->object == static_cast<void*>(0))|  */
 
-  else /* |entry != 0 && entry->object != 0|  */
-
-    @=$$@> = static_cast<void*>(create_new<Matrix>(
+  else 
+  {
+      @=$$@> = static_cast<void*>(create_new<Matrix>(
                                   static_cast<Matrix*>(
                                      entry->object))); 
+  }
+ 
 
 };
 
@@ -146,21 +149,21 @@ Added this rule.
    Pointer_Vector<Matrix>* pv 
       = static_cast<Pointer_Vector<Matrix>*>(@=$2@>);
 
-@q ******* (7) Error handling:  |pv == 0|.@> 
+@q ******* (7) Error handling:  |pv == static_cast<Pointer_Vector<Matrix>*>(0)|.@> 
 
-@ Error handling:  |pv == 0|.
+@ Error handling:  |pv == static_cast<Pointer_Vector<Matrix>*>(0)|.
 \initials{LDF 2007.11.28.}
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Matrix>*>(0))
       {
 
           delete c;
 
           @=$$@> = static_cast<void*>(0);
 
-      }  /* |if (pv == 0)|  */
+      }  /* |if (pv == static_cast<Pointer_Vector<Matrix>*>(0))|  */
 
 @q ******* (7) Error handling:  |pv->ctr == 0|.@> 
 
@@ -177,9 +180,10 @@ Added this rule.
 
       }  /* |else if (pv->ctr == 0)|  */
 
-@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+@q ******* (7) |pv != static_cast<Pointer_Vector<Matrix>*>(0) && pv->ctr > 0|.@> 
 
-@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+@ |pv != static_cast<Pointer_Vector<Matrix>*>(0) && pv->ctr > 0|.  
+Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
 \initials{LDF 2007.11.28.}
 
 @<Define rules@>=
