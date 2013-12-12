@@ -242,16 +242,18 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
    axis_h = axis_v = INVALID_REAL;
 
 
-@q **** (4) |options == 0|.  Use defaults.@> 
-@ |options == 0|.  Use defaults.
+@q **** (4) |options == static_cast<Parabola_Set_Option_Struct*>(0)|.  Use defaults.@> 
+@ |options == static_cast<Parabola_Set_Option_Struct*>(0)|.  Use defaults.
 \initials{LDF 2005.11.07.}
 
 @<Define |Parabola| functions@>= 
 
 
-    if (!options)  /* Use defaults.  Not programmed yet.
-                      LDF 2005.11.07.  */
+    if (options == static_cast<Parabola_Set_Option_Struct*>(0))  
        {
+
+            /* Use defaults.  Not programmed yet.
+               LDF 2005.11.07.  */
 
             vertex_0.set(0, 0, 0);
             focus_0 = INVALID_POINT;
@@ -261,13 +263,13 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
        }
 
 
-@q **** (4) |options != 0|.@> 
-@ |options != 0|.  
+@q **** (4) |options != static_cast<Parabola_Set_Option_Struct*>(0)|.@> 
+@ |options != static_cast<Parabola_Set_Option_Struct*>(0)|.  
 \initials{LDF 2005.11.07.}
 
 @<Define |Parabola| functions@>= 
 
-    else   /* |options != 0|  */
+    else   /* |options != static_cast<Parabola_Set_Option_Struct*>(0)|  */
        {
          
 @q ***** (5) |parameter|.@> 
@@ -337,7 +339,7 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
 @q ***** (5)@> 
 
 
-       }  /* |else| (|options != 0|)  */
+       }  /* |else| (|options != static_cast<Parabola_Set_Option_Struct*>(0)|)  */
 
 @q **** (4) Check |focus_0| and |vertex_0| for consistency.@> 
 @ Check |focus_0| and |vertex_0| for consistency.
@@ -722,7 +724,7 @@ Parabola::get_discriminant(const Path& p,
     if (normal == y_axis_pt)
        {
 
-           if (t != 0)
+           if (t != static_cast<Transform*>(0))
               t->reset();
        }
     
@@ -742,7 +744,7 @@ Added this section.
 
 @<Define |Parabola| functions@>=
 
-           if (u == 0)
+           if (u == static_cast<Transform*>(0))
               { 
                   cerr_strm << thread_name 
                             << "ERROR!  In `Parabola::get_discriminant()':"
@@ -763,18 +765,18 @@ Added this section.
 
                   return INVALID_REAL_TRIPLE;
                            
-              }  /* |if (u == 0)|  */
+              }  /* |if (u == static_cast<Transform*>(0))|  */
 
 @q ***** (5)@> 
 
            pth *= *u;
 
-           if (t != 0)
+           if (t != static_cast<Transform*>(0))
               *t = u->inverse();
 
         
            delete u;
-           u = 0;   
+           u = static_cast<Transform*>(0);   
 
        }  /* |else| (|normal != y_axis_pt|)  */ 
 
@@ -914,7 +916,7 @@ Added this section.
 
 @<Define |Parabola| functions@>=
 
-    if (t == 0)
+    if (t == static_cast<Transform*>(0))
        {
            cerr_strm << thread_name 
                      << "ERROR!  In `Parabola::location()':"
@@ -930,7 +932,7 @@ Added this section.
  
            return -5;
                            
-       }  /* |if (t == 0)|  */
+       }  /* |if (t == static_cast<Transform*>(0))|  */
 
 @q **** (4)@> 
 
@@ -1585,7 +1587,7 @@ Parabola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
 @q **** (4).@>
 
-    if (p == 0)
+    if (p == static_cast<Path*>(0))
        {
            cerr_strm << thread_name 
                      << "ERROR!  In `Parabola::intersection_points(Path* p, [etc.])':"
@@ -1597,7 +1599,7 @@ Parabola::intersection_points(const Path* p, Scanner_Node scanner_node) const
            cerr_strm.str("");
 
            return 0;
-       }  /* |if (p == 0)|  */
+       }  /* |if (p == static_cast<Path*>(0))|  */
 
 @q **** (4)@> 
 
@@ -1724,7 +1726,7 @@ Added this section.
 \ENDLOG
 @<Define |Parabola| functions@>=
 
-           if (slope == 0)
+           if (slope == ZERO_REAL)
               {
                    Point temp_pt = p->get_point(0);
                    temp_pt *= t->inverse();
@@ -1740,7 +1742,7 @@ Added this section.
 
                    *bpv += curr_bool_pt;
 
-              }  /* |if (slope == 0)|  */
+              }  /* |if (slope == ZERO_REAL)|  */
 
 @q ****** (6)@> 
 @
@@ -1750,7 +1752,7 @@ Now setting |curr_bool_pt->b| to |!location(curr_bool_pt->pt)|.
 \ENDLOG 
 @<Define |Parabola| functions@>=
 
-           else  /* |slope != 0|  */
+           else  /* |slope != ZERO_REAL|  */
               {
 
 @q ******* (7)@> 
@@ -1797,14 +1799,14 @@ Now setting |curr_bool_pt->b| to |!location(curr_bool_pt->pt)|.
 
 @q ******* (7)@> 
 
-              }  /* |else| (|slope != 0|)  */  
+              }  /* |else| (|slope != ZERO_REAL|)  */  
 
 @q ****** (6)@>                 
  
 @q ***** (5)@> 
 
            delete t;
-           t = 0;
+           t = static_cast<Transform*>(0);
 
            return bpv;
 
