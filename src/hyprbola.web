@@ -233,20 +233,20 @@ Hyperbola::set(Hyperbola_Set_Option_Struct* options, Scanner_Node scanner_node)
 
    using namespace Scan_Parse;
 
-@q **** (4) |options == 0|.  Use defaults.@>
-@ |options == 0|.  Use defaults.
+@q **** (4) |options == static_cast<Hyperbola_Set_Option_Struct*>(0)|.  Use defaults.@>
+@ |options == static_cast<Hyperbola_Set_Option_Struct*>(0)|.  Use defaults.
 \initials{LDF 2005.11.15.}
 
 @<Define |Hyperbola| functions@>=
 
-   if (!options)
-      {
+   if (options == static_cast<Hyperbola_Set_Option_Struct*>(0))
+   {
+      /* Do nothing  */
 
-      }  /* |if (!options)|  */
+   }  /* |if (options == static_cast<Hyperbola_Set_Option_Struct*>(0))|  */
 
-
-@q **** (4) |options != 0|.@>
-@ |options != 0|.
+@q **** (4) |options != static_cast<Hyperbola_Set_Option_Struct*>(0)|.  @>
+@ |options != static_cast<Hyperbola_Set_Option_Struct*>(0)|.
 \initials{LDF 2005.11.15.}
 
 \LOG
@@ -263,7 +263,7 @@ y-axis, if |*this| is left untransformed.
 
 @<Define |Hyperbola| functions@>=
 
-   else /* |options != 0|  */
+   else /* |options != static_cast<Hyperbola_Set_Option_Struct*>(0)|  */
       {
 
           real a = 1.0;
@@ -356,7 +356,7 @@ y-axis, if |*this| is left untransformed.
 
           connectors.push_back("..");
 
-      }     /* |else| (|options != 0|)  */
+      }     /* |else| (|options != static_cast<Hyperbola_Set_Option_Struct*>(0)|)  */
 
 
 @q **** (4).@>
@@ -589,7 +589,7 @@ Hyperbola::get_discriminant(const Path& p,
 
 @<Define |Hyperbola| functions@>=
 
-    if (u == 0)
+    if (u == static_cast<Transform*>(0))
        {
            cerr_strm << thread_name << "ERROR!  In `Hyperbola::get_discriminant()':"
                      << endl 
@@ -610,7 +610,7 @@ Hyperbola::get_discriminant(const Path& p,
            return INVALID_REAL_TRIPLE;
                    
 
-       }  /* |if (u == 0)|  */
+       }  /* |if (u == static_cast<Transform*>(0))|  */
 
 @q **** (4)@> 
 @
@@ -795,7 +795,7 @@ Hyperbola::location(Point q,
 @
 @<Define |Hyperbola| functions@>=
 
-    if (t == 0)
+    if (t == static_cast<Transform*>(0))
        {
            cerr_strm << thread_name 
                      << "ERROR!  In `Hyperbola::location()':"
@@ -811,7 +811,7 @@ Hyperbola::location(Point q,
  
            return -5;
                            
-       }  /* |if (t == 0)|  */
+       }  /* |if (t == static_cast<Transform*>(0))|  */
 
 @q **** (4)@> 
 
@@ -1982,7 +1982,7 @@ Hyperbola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
 @q ***** (5)@> 
 
-           if (discriminant == 0)
+           if (discriminant == ZERO_REAL)
               {
                   x = (-a_2 * m * n) / ((a_2 * m_2) - b_2);
  
@@ -2001,11 +2001,11 @@ Hyperbola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
                   return bpv;
 
-              }   /* |if (discriminant == 0)|  */
+              }   /* |if (discriminant == ZERO_REAL)|  */
 
 @q ***** (5)@> 
 
-           if (discriminant > 0)
+           if (discriminant > ZERO_REAL)
               {
 
                   real discriminant_root = sqrt(discriminant);
@@ -2050,7 +2050,7 @@ Hyperbola::intersection_points(const Path* p, Scanner_Node scanner_node) const
                   return bpv;
 
 
-              }  /* |if (discriminant > 0)|  */
+              }  /* |if (discriminant > ZERO_REAL)|  */
 
 @q ***** (5)@> 
 
