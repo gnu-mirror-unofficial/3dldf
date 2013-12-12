@@ -412,7 +412,7 @@ Added code to this section.
         base = static_cast<Path*>(e); 
         ellipses.push_back(e);
 
-        if (options->axis_y != ZERO_REAL)
+        if (options->axis_y != static_cast<real*>(0))
             axis_y = *options->axis_y;
         else
             axis_y = 1;
@@ -469,7 +469,7 @@ Added code to this section.
         type = CIRCULAR_CYLINDER_TYPE;
 
 
-        if (options->radius != ZERO_REAL)
+        if (options->radius != static_cast<real*>(0))
            radius = *options->radius;
         else if (   (options->axis_x && !options->axis_z)
                  || (   options->axis_x && options->axis_z

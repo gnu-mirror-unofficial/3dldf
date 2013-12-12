@@ -547,9 +547,9 @@ Helix::operator=(const Helix& h)
           *direction = *(h.direction);
        }
 
-    if (h.direction_vector != static_cast<Point*>(0))
+    if (h.direction_vector != static_cast<Pointer_Vector<Point>*>(0))
        {
-          if (direction_vector == static_cast<Point*>(0))
+          if (direction_vector == static_cast<Pointer_Vector<Point>*>(0))
              direction_vector = new Pointer_Vector<Point>; 
  
           *direction_vector = *(h.direction_vector);

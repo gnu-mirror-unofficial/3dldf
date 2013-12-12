@@ -231,14 +231,14 @@ Id_Map_Type::operator=(const Id_Map_Type& i)
       curr_entry = iter->second;
 
 
-@q ******* (7) Error handling:  |curr_entry == 0|.@> 
+@q ******* (7) Error handling:  |curr_entry == static_cast<Id_Map_Entry_Node>(0)|.@> 
 
-@ Error handling:  |curr_entry == 0|.
+@ Error handling:  |curr_entry == static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Type| functions@>=
   
-  if (curr_entry == 0)
+  if (curr_entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -253,7 +253,7 @@ Id_Map_Type::operator=(const Id_Map_Type& i)
 
               throw bad_assignment;
 
-    } /* |if (curr_entry == 0)|  */
+    } /* |if (curr_entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
 
 @q ******* (7) Superordinate vectors.  Doing nothing.@>
@@ -265,7 +265,7 @@ case.
 
 @<Define |Id_Map_Type| functions@>=
  
-     else if (curr_entry->subordinate_array != 0)
+     else if (curr_entry->subordinate_array != static_cast<Id_Map_Entry_Node>(0))
         ;  /* Do nothing.  */@; 
 
 
@@ -333,7 +333,7 @@ Now putting |new_superordinate_vector_entry| onto |id_map|.
 
 @<Define |Id_Map_Type| functions@>=
 
-  if (curr_entry->superordinate_vector != 0)
+  if (curr_entry->superordinate_vector != static_cast<Id_Map_Entry_Node>(0))
     {
 
       new_superordinate_vector_entry = new Id_Map_Entry_Type;
@@ -376,7 +376,7 @@ Now putting |new_superordinate_vector_entry| onto |id_map|.
 
 @q ********* (9).@> 
 
-    } /* |else if (curr_entry->superordinate_vector != 0)|  */
+    } /* |else if (curr_entry->superordinate_vector != static_cast<Id_Map_Entry_Node>(0))|  */
 
 
 @q ******** (8) @> 
@@ -599,12 +599,12 @@ Id_Map_Entry_Type::~Id_Map_Entry_Type(void)
    if (is_shape())
       {
         Shape* s = static_cast<Shape*>(object);
-        if (s != 0)
+        if (s != static_cast<Shape*>(0))
           {
             s->clear();
 
             delete s;
-            s = 0;
+            s = static_cast<Shape*>(0);
           }
         
 
@@ -635,10 +635,10 @@ and defined |Nurb::clear()|.
    else if (type == NURB)
        {
         Nurb* n = static_cast<Nurb*>(object);
-        if (n != 0)
+        if (n != static_cast<Nurb*>(0))
           {
             delete n;
-            n = 0;
+            n = static_cast<Nurb*>(0);
           }
 
        }  /* |else if (type == NURB)|  */
@@ -694,7 +694,7 @@ Added this section.
 
    else if (type == UNDECLARED)
      {
-       if (object != 0)
+       if (object != static_cast<Shape*>(0))
          {
 
            cerr_strm << thread_name 
@@ -710,9 +710,10 @@ Added this section.
 
            return;
 
-         } /* |if (object != 0)|  */
+         } /* |if (object != static_cast<Shape*>(0))|  */
 
-       else if (left != 0 || right != 0)
+       else if (   left != static_cast<Id_Map_Entry_Node>(0) 
+                || right != static_cast<Id_Map_Entry_Node>(0))
          {
 
            cerr_strm << thread_name
@@ -728,7 +729,8 @@ Added this section.
 
            return;
 
-         } /* |else if (left != 0 || right != 0)|  */
+         } /* |else if (   left != static_cast<Id_Map_Entry_Node>(0) 
+                        || right != static_cast<Id_Map_Entry_Node>(0))|  */
 
        else
          ; /* Do nothing.  */@; 
@@ -824,7 +826,7 @@ Added this section.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-       if (object != 0)
+       if (object != static_cast<Id_Map_Entry_Node>(0))
          {
 
 
@@ -1329,7 +1331,7 @@ Added this section.
 
            object = 0;
 
-         } /* |if (object != 0)|  */
+         } /* |if (object != static_cast<Id_Map_Entry_Node>(0))|  */
  
 
 @q ******** (8) |object| doesn't exist.  Won't destroy it.@> 
@@ -1355,7 +1357,7 @@ be used for other vector-types.
 
 #if DEBUG_COMPILE
 
-   else if (DEBUG) /* |object == 0|  */
+   else if (DEBUG) /* |object == static_cast<Id_Map_Entry_Node>(0)|  */
      {
 
        cerr_strm << thread_name
@@ -1366,7 +1368,7 @@ be used for other vector-types.
        cerr_message(cerr_strm); 
        cerr_strm.str("");
 
-     }     /* |else if (DEBUG)| (|object == 0|)  */
+     }     /* |else if (DEBUG)| (|object == static_cast<Id_Map_Entry_Node>(0)|)  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
  
@@ -1436,10 +1438,10 @@ Added code for handling entries of type |PREDICATE|.
 
        Predicate* c = static_cast<Predicate*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Predicate*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Predicate*>(0);
          }
 
      } /* |else if (type == PREDICATE)|  */
@@ -1451,10 +1453,10 @@ Added code for handling entries of type |PREDICATE|.
 
        int* c = static_cast<int*>(object);
        
-       if (c != 0)
+       if (c != static_cast<int*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<int*>(0);
          }
      } /* |else if (type == BOOLEAN)|  */
 
@@ -1463,10 +1465,10 @@ Added code for handling entries of type |PREDICATE|.
    else if (type == COMPLEX)
        {
         Complex* c = static_cast<Complex*>(object);
-        if (c != 0)
+        if (c != static_cast<Complex*>(0))
           {
             delete c;
-            c = 0;
+            c = static_cast<Complex*>(0);
           }
 
        }  /* |else if (type == COMPLEX)|  */
@@ -1475,10 +1477,10 @@ Added code for handling entries of type |PREDICATE|.
    else if (type == MATRIX)
        {
         Matrix* m = static_cast<Matrix*>(object);
-        if (m != 0)
+        if (m != static_cast<Matrix*>(0))
           {
             delete m;
-            m = 0;
+            m = static_cast<Matrix*>(0);
           }
 
        }  /* |else if (type == MATRIX)|  */
@@ -1492,10 +1494,10 @@ Added code for handling entries of type |PREDICATE|.
 
        Bool_Point* bp = static_cast<Bool_Point*>(object);
        
-       if (bp != 0)
+       if (bp != static_cast<Bool_Point*>(0))
          {
            delete bp;
-           bp = 0;
+           bp = static_cast<Bool_Point*>(0);
          }
      } /* |else if (type == BOOL_POINT)|  */
  
@@ -1507,10 +1509,10 @@ Added code for handling entries of type |PREDICATE|.
        
        string* c = static_cast<string*>(object);
    
-       if (c != 0)
+       if (c != static_cast<string*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<string*>(0);
          }
      }
   
@@ -1520,10 +1522,10 @@ Added code for handling entries of type |PREDICATE|.
 
        real* c = static_cast<real*>(object);
    
-       if (c != 0)
+       if (c != static_cast<real*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<real*>(0);
          }
      }
 
@@ -1532,10 +1534,10 @@ Added code for handling entries of type |PREDICATE|.
 
        unsigned long long* c = static_cast<unsigned long long*>(object);
    
-       if (c != 0)
+       if (c != static_cast<unsigned long long*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<unsigned long long*>(0);
          }
      }
 
@@ -1544,10 +1546,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Pen* c = static_cast<Pen*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Pen*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Pen*>(0);
          }
      }
 
@@ -1556,10 +1558,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Dash_Pattern* c = static_cast<Dash_Pattern*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Dash_Pattern*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Dash_Pattern*>(0);
          }
      }
 
@@ -1568,10 +1570,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Color* c = static_cast<Color*>(object);
 
-       if (c != 0)
+       if (c != static_cast<Color*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Color*>(0);
          }
 
      } /* | else if (type == COLOR)|  */
@@ -1582,10 +1584,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Picture* c = static_cast<Picture*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Picture*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Picture*>(0);
          }  
      }
 
@@ -1594,10 +1596,10 @@ Added code for handling entries of type |PREDICATE|.
 
        Transform* c = static_cast<Transform*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Transform*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Transform*>(0);
          }
      }
 
@@ -1606,10 +1608,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Plane* c = static_cast<Plane*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Plane*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Plane*>(0);
          }
      }
 
@@ -1620,10 +1622,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Focus* c = static_cast<Focus*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Focus*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Focus*>(0);
          }
      }
 
@@ -1633,10 +1635,10 @@ Added code for handling entries of type |PREDICATE|.
 
        Definition_Info_Node c = static_cast<Definition_Info_Node>(object);
        
-       if (c != 0)
+       if (c != static_cast<Definition_Info_Node>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Definition_Info_Node>(0);
          }
      }
 
@@ -1645,10 +1647,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Origami_Figure* c = static_cast<Origami_Figure*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Origami_Figure*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Origami_Figure*>(0);
          }
      }
 
@@ -1657,10 +1659,10 @@ Added code for handling entries of type |PREDICATE|.
        
        Glyph* c = static_cast<Glyph*>(object);
        
-       if (c != 0)
+       if (c != static_cast<Glyph*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<Glyph*>(0);
          }
      }
 
@@ -1677,10 +1679,10 @@ Added code for handling entries of type |PREDICATE|.
        
        real* c = static_cast<real*>(object);
    
-       if (c != 0)
+       if (c != static_cast<real*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<real*>(0);
          }
      }
 
@@ -1698,10 +1700,10 @@ Added code for handling entries of type |PREDICATE|.
        
        real* c = static_cast<real*>(object);
    
-       if (c != 0)
+       if (c != static_cast<real*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<real*>(0);
          }
      }  
 
@@ -1720,10 +1722,10 @@ Added code for handling entries of type |PREDICATE|.
        
        string*  c = static_cast<string*>(object);
        
-       if (c != 0)
+       if (c != static_cast<string*>(0))
          {
            delete c;
-           c = 0;
+           c = static_cast<string*>(0);
          }
      }
 
@@ -1748,7 +1750,7 @@ where this isn't allowed.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-   else if (object != 0)
+   else if (object != static_cast<void*>(0))
      {
        cerr_strm << thread_name 
                  << "ERROR! In `Id_Map_Entry_Type' destructor:" 
@@ -1987,7 +1989,7 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
 @<Define |Id_Map_Entry_Type| functions@>=
 
 
-	    if (curr_entry->up == 0)
+	    if (curr_entry->up == static_cast<Id_Map_Entry_Node>(0))
 	      {
 
 #if DEBUG_COMPILE
@@ -2007,7 +2009,7 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
 
 		    return 0;
 		  
-	      } /* |if (curr_entry->up == 0)|  */
+	      } /* |if (curr_entry->up == static_cast<Id_Map_Entry_Node>(0))|  */
 
 	    temp_entry = curr_entry;
 	    curr_entry = curr_entry->up;
@@ -2213,22 +2215,22 @@ Id_Map_Entry_Type::set_entry(string nname,
 
 
 
-      if (object == 0)
+      if (object == static_cast<void*>(0))
         cerr << "object == 0" << "\n";
       else 
         cerr << "object != 0" << "\n";
 
-      if (up == 0)
+      if (up == static_cast<Id_Map_Entry_Node>(0))
         cerr << "up == 0" << "\n";
       else 
         cerr << "up != 0" << "\n";
 
-      if (left == 0)
+      if (left == static_cast<Id_Map_Entry_Node>(0))
         cerr << "left == 0" << "\n";
       else 
         cerr << "left != 0" << "\n";
 
-      if (right == 0)
+      if (right == static_cast<Id_Map_Entry_Node>(0))
         cerr << "right == 0" << "\n";
       else 
         cerr << "right != 0" << "\n";
@@ -2275,28 +2277,29 @@ Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type& i)
 
    Scanner_Node scanner_node;
 
-   if (id_map_node != 0 && id_map_node->scanner_node != 0)
+   if (   id_map_node != static_cast<Id_Map_Node>(0) 
+       && id_map_node->scanner_node != static_cast<Scanner_Node>(0))
      {
        scanner_node = id_map_node->scanner_node;
 
-     } /* |if (id_map_node->scanner_node != 0)|  */
+     } /* |if (id_map_node->scanner_node != static_cast<Scanner_Node>(0))|  */
 
 
-   else if (i.id_map_node->scanner_node != 0)
+   else if (i.id_map_node->scanner_node != static_cast<Scanner_Node>(0))
      {
        scanner_node = i.id_map_node->scanner_node;
 
-     } /* |if (i.id_map_node->scanner_node != 0)|  */
+     } /* |if (i.id_map_node->scanner_node != static_cast<Scanner_Node>(0))|  */
 
 
 
-   else /* |   id_map_node->scanner_node == 0
- 	   && i.id_map_node->scanner_node == 0|  */
+   else /* |   id_map_node->scanner_node  == static_cast<Scanner_Node>(0)
+ 	   && i.id_map_node->scanner_node == static_cast<Scanner_Node>(0)|  */
      {
        
-       scanner_node = 0;
+       scanner_node = static_cast<Scanner_Node>(0);
      
-     }    /* |else| (|i.id_map_node->scanner_node == 0|)  */
+     }    /* |else| (|i.id_map_node->scanner_node == static_cast<Scanner_Node>(0)|)  */
 
 
 
@@ -2381,7 +2384,7 @@ Added code for handling the case that |type == PREDICATE|.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  if (type == SYNONYM && i.object != 0)
+  if (type == SYNONYM && i.object != static_cast<void*>(0))
     {
       string* o = new string;
       *o = *static_cast<string*>(i.object);
@@ -2390,7 +2393,7 @@ Added code for handling the case that |type == PREDICATE|.
     }
 
             
-  else if (type == PREDICATE && i.object != 0)
+  else if (type == PREDICATE && i.object != static_cast<void*>(0))
     {
       Predicate* o = new Predicate;
       *o = *static_cast<Predicate*>(i.object);
@@ -2398,7 +2401,7 @@ Added code for handling the case that |type == PREDICATE|.
       
     }
 
-  else if (type == BOOLEAN && i.object != 0)
+  else if (type == BOOLEAN && i.object != static_cast<void*>(0))
     {
       int* o = new int;
       *o = *static_cast<int*>(i.object);
@@ -2406,14 +2409,14 @@ Added code for handling the case that |type == PREDICATE|.
       
     }
 
-  else if (type == NUMERIC && i.object != 0)
+  else if (type == NUMERIC && i.object != static_cast<void*>(0))
     {
       real* o = new real;
       *o = *static_cast<real*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == ULONG_LONG && i.object != 0)
+  else if (type == ULONG_LONG && i.object != static_cast<void*>(0))
     {
       ulong_long* o = new ulong_long;
       *o = *static_cast<ulong_long*>(i.object);
@@ -2421,35 +2424,35 @@ Added code for handling the case that |type == PREDICATE|.
     }
 
 
-  else if (type == STRING && i.object != 0)
+  else if (type == STRING && i.object != static_cast<void*>(0))
     {
       string* o = new string;
       *o = *static_cast<string*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == PEN && i.object != 0)
+  else if (type == PEN && i.object != static_cast<void*>(0))
     {
       Pen* o = new Pen;
       *o = *static_cast<Pen*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == DASH_PATTERN && i.object != 0)
+  else if (type == DASH_PATTERN && i.object != static_cast<void*>(0))
     {
       Dash_Pattern* o = new Dash_Pattern;
       *o = *static_cast<Dash_Pattern*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == COLOR && i.object != 0)
+  else if (type == COLOR && i.object != static_cast<void*>(0))
     {
       Color* o = new Color;
       *o = *static_cast<Color*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == PICTURE && i.object != 0)
+  else if (type == PICTURE && i.object != static_cast<void*>(0))
     {
       Picture* o = new Picture;
       o->clear();
@@ -2458,7 +2461,7 @@ Added code for handling the case that |type == PREDICATE|.
     }
 
 
-  else if (type == TRANSFORM && i.object != 0)
+  else if (type == TRANSFORM && i.object != static_cast<void*>(0))
     {
       Transform* o = new Transform;
       *o = *static_cast<Transform*>(i.object);
@@ -2466,7 +2469,7 @@ Added code for handling the case that |type == PREDICATE|.
     }
 
 
-  else if (type == FOCUS && i.object != 0)
+  else if (type == FOCUS && i.object != static_cast<void*>(0))
     {
       Focus* o = new Focus;
       *o = *static_cast<Focus*>(i.object);
@@ -2474,7 +2477,7 @@ Added code for handling the case that |type == PREDICATE|.
     }
 
 
-  else if (type == MACRO && i.object != 0)
+  else if (type == MACRO && i.object != static_cast<void*>(0))
     {
       Definition_Info_Node o = new Definition_Info_Type;
       *o = *static_cast<Definition_Info_Node>(i.object);
@@ -2498,7 +2501,7 @@ Added code for handling the case that
 @<Define |Id_Map_Entry_Type| functions@>=
 
 
-  else if (type == BOOL_POINT && i.object != 0)
+  else if (type == BOOL_POINT && i.object != static_cast<void*>(0))
     {
       int* o = new int;
       *o = *static_cast<int*>(i.object);
@@ -2506,21 +2509,21 @@ Added code for handling the case that
       
     }
 
-  else if (type == POINT && i.object != 0)
+  else if (type == POINT && i.object != static_cast<void*>(0))
     {
       Point* o = new Point;
       *o = *static_cast<Point*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == PATH && i.object != 0)
+  else if (type == PATH && i.object != static_cast<void*>(0))
     {
       Path* o = new Path;
       *o = *static_cast<Path*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == TRIANGLE && i.object != 0)
+  else if (type == TRIANGLE && i.object != static_cast<void*>(0))
     {
       Triangle* o = new Triangle;
       *o = *static_cast<Triangle*>(i.object);
@@ -2528,21 +2531,21 @@ Added code for handling the case that
     }
 
 
-  else if (type == POLYGON && i.object != 0)
+  else if (type == POLYGON && i.object != static_cast<void*>(0))
     {
       Polygon* o = new Polygon;
       *o = *static_cast<Polygon*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == REG_POLYGON && i.object != 0)
+  else if (type == REG_POLYGON && i.object != static_cast<void*>(0))
     {
       Reg_Polygon* o = new Reg_Polygon;
       *o = *static_cast<Reg_Polygon*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == RECTANGLE && i.object != 0)
+  else if (type == RECTANGLE && i.object != static_cast<void*>(0))
     {
       Rectangle* o = new Rectangle;
       *o = *static_cast<Rectangle*>(i.object);
@@ -2551,7 +2554,7 @@ Added code for handling the case that
 
 #if 0 /* |Square| not defined yet.  \initials{LDF 2004.09.14.}  */@;
 
-  else if (type == SQUARE && i.object != 0)
+  else if (type == SQUARE && i.object != static_cast<void*>(0))
     {
       Square* o = new Square;
       *o = *static_cast<Square*>(i.object);
@@ -2559,14 +2562,14 @@ Added code for handling the case that
     }
 #endif 
 
-  else if (type == ELLIPSE && i.object != 0)
+  else if (type == ELLIPSE && i.object != static_cast<void*>(0))
     {
       Ellipse* o = new Ellipse;
       *o = *static_cast<Ellipse*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == CIRCLE && i.object != 0)
+  else if (type == CIRCLE && i.object != static_cast<void*>(0))
     {
       Circle* o = new Circle;
       *o = *static_cast<Circle*>(i.object);
@@ -2574,14 +2577,14 @@ Added code for handling the case that
     }
 
 
-  else if (type == CUBOID && i.object != 0)
+  else if (type == CUBOID && i.object != static_cast<void*>(0))
     {
       Cuboid* o = new Cuboid;
       *o = *static_cast<Cuboid*>(i.object);
       object = static_cast<void*>(o); 
     }
 
-  else if (type == POLYHEDRON && i.object != 0)
+  else if (type == POLYHEDRON && i.object != static_cast<void*>(0))
     {
       Polyhedron* o = new Polyhedron;
       *o = *static_cast<Polyhedron*>(i.object);
@@ -2827,13 +2830,13 @@ Added code for the case |type == POLYGON_VECTOR|.
   else if (type == UNDECLARED)
     {
 
-@q ****** (6) Error handling:  |object != 0|.@>
-@ Error handling:  |object != 0|.
+@q ****** (6) Error handling:  |object != static_cast<void*>(0)|.@>
+@ Error handling:  |object != static_cast<void*>(0)|.
 \initials{LDF 2004.09.14.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  if (i.object != 0)
+  if (i.object != static_cast<void*>(0))
     {
       cerr_strm << thread_name 
                 << "WARNING! In `Id_Map_Entry_Type::operator=():'"
@@ -2844,16 +2847,16 @@ Added code for the case |type == POLYGON_VECTOR|.
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-    } /* |if (i.object != 0)|  */
+    } /* |if (i.object != static_cast<void*>(0))|  */
 
-@q ****** (6) |object == 0|.@>
-@ |object == 0|.
+@q ****** (6) |object == static_cast<void*>(0)|.@>
+@ |object == static_cast<void*>(0)|.
 \initials{LDF 2004.09.14.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
 #if DEBUG_COMPILE
-   else if (DEBUG) /* |i.object == 0| */
+   else if (DEBUG) /* |i.object == static_cast<void*>(0)| */
      {
 
        cerr_strm << thread_name << "In `Id_Map_Entry_Type::operator=():'"
@@ -2864,7 +2867,7 @@ Added code for the case |type == POLYGON_VECTOR|.
        cerr_message(cerr_strm);
        cerr_strm.str("");
 
-     }  /* |else if (DEBUG)| (|i.object == 0|)  */
+     }  /* |else if (DEBUG)| (|i.object == static_cast<void*>(0)|)  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
  
@@ -2897,14 +2900,14 @@ Added code for the case |type == POLYGON_VECTOR|.
 #endif /* |DEBUG_COMPILE|  */@; 
  
 
-@q ****** (6) |i.left != 0|.@>
-@ |i.left != 0|.
+@q ****** (6) |i.left != static_cast<Id_Map_Entry_Node>(0)|.@>
+@ |i.left != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.14.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
 
-      if (i.left != 0)
+      if (i.left != static_cast<Id_Map_Entry_Node>(0))
         {
 
 #if DEBUG_COMPILE
@@ -2931,17 +2934,17 @@ Added code for the case |type == POLYGON_VECTOR|.
 
           left->up = this;
 
-        } /* |if (i.left != 0)|  */
+        } /* |if (i.left != static_cast<Id_Map_Entry_Node>(0))|  */
 
 
-@q ****** (6) |i.right != 0|.@>
-@ |i.right != 0|.
+@q ****** (6) |i.right != static_cast<Id_Map_Entry_Node>(0)|.@>
+@ |i.right != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.14.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
 
-      if (i.right != 0)
+      if (i.right != static_cast<Id_Map_Entry_Node>(0))
         {
 
 #if DEBUG_COMPILE
@@ -2966,7 +2969,7 @@ Added code for the case |type == POLYGON_VECTOR|.
 
           right->up = this;
 
-        } /* |if (i.right != 0)|  */
+        } /* |if (i.right != static_cast<Id_Map_Entry_Node>(0))|  */
 
 
 @q ****** (6) @> 
@@ -3041,14 +3044,15 @@ and error output.
 
   Scanner_Node scanner_node = 0;
 
-  if (id_map_node != 0 && id_map_node->scanner_node != 0)
+  if (   id_map_node != static_cast<Id_Map_Node>(0) 
+      && id_map_node->scanner_node != static_cast<Scanner_Node>(0))
     scanner_node = id_map_node->scanner_node;
   
   string thread_name;
 
   bool error_stop_value;
 
-  if (scanner_node != 0)
+  if (scanner_node != static_cast<Scanner_Node>(0))
     error_stop_value = (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
       ? true : false;
   else 
@@ -3069,10 +3073,11 @@ and error output.
 /* !! START HERE. LDF 2004.09.17.  
    Do this in the assignment operators, too.  */ 
 
-      if (scanner_node != 0 &&
-          (   scanner_node->get_run_state()->multithread_input 
-           || scanner_node->get_run_state()->multithread_output
-           || scanner_node->get_run_state()->multithread_include))
+      if (    scanner_node != static_cast<Scanner_Node>(0) 
+           &&
+              (   scanner_node->get_run_state()->multithread_input 
+               || scanner_node->get_run_state()->multithread_output
+               || scanner_node->get_run_state()->multithread_include))
 
         /* Using multithreading.  */
 
@@ -3083,19 +3088,20 @@ and error output.
         } /* |if| (Using multithreading.)  */
 
 
-@q ***** (5) |scanner_node == 0| or not using multithreading.@>   
+@q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.@> 
 
-@ |scanner_node == 0| or not using multithreading.
+@ |scanner_node == static_cast<Id_Map_Entry_Node>(0)| or not using multithreading.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-      else /* |scanner_node == 0| or not using multithreading.  */
+      else 
         {
-          thread_info = 0;
+          thread_info = static_cast<Thread_Info_Type*>(0);
           thread_name = "";
 
-        } /* |else| (|scanner_node == 0| or not using multithreading.)  */
+        } /* |else| (|scanner_node == static_cast<Scanner_Node>(0)| 
+                     or not using multithreading.)  */
 
 
 #else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
@@ -3220,17 +3226,17 @@ and error output.
   if (set_vector)
     {
 
-        if (s->subordinate_array == 0)
+        if (s->subordinate_array == static_cast<Id_Map_Entry_Node>(0))
           s->subordinate_array = this;
 
 
-        if (type == COLOR && object != 0)
+        if (type == COLOR && object != static_cast<void*>(0))
           {
 
               typedef Pointer_Vector<Color> Pv;
 
 
-              if (s->object == 0)
+              if (s->object == static_cast<void*>(0))
                 s->object = static_cast<void*>(new Pv); 
 
               Pv* pv = static_cast<Pv*>(s->object); 
@@ -3242,12 +3248,12 @@ and error output.
           } /* |if (type == COLOR)|  */
 
 
-        else if (type == POINT && object != 0)
+        else if (type == POINT && object != static_cast<void*>(0))
           {
 
               typedef Pointer_Vector<Point> Pv;
 
-              if (s->object == 0)
+              if (s->object == static_cast<void*>(0))
                 s->object = static_cast<void*>(new Pv); 
 
 
@@ -3259,12 +3265,12 @@ and error output.
           } /* |if (type == POINT)|  */
 
 
-        else if (type == BOOL_POINT && object != 0)
+        else if (type == BOOL_POINT && object != static_cast<void*>(0))
           {
 
               typedef Pointer_Vector<Bool_Point> Pv;
 
-              if (s->object == 0)
+              if (s->object == static_cast<void*>(0))
                 s->object = static_cast<void*>(new Pv); 
 
               Pv* pv = static_cast<Pv*>(s->object); 
@@ -3276,7 +3282,7 @@ and error output.
 
 
 
-        else if (object != 0)  /* Invalid |type|.  */
+        else if (object != static_cast<void*>(0))  /* Invalid |type|.  */
           {
 
 
@@ -3291,7 +3297,7 @@ and error output.
 
               return 1;
 
-          }  /* |else if (object != 0)| (Invalid |type|.)  */
+          }  /* |else if (object != static_cast<void*>(0))| (Invalid |type|.)  */
 
 
 
@@ -3438,14 +3444,16 @@ Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
 #endif
 
 
-@q **** (4) If |left != 0|, call this function recursively on |left|.@>   
+@q **** (4) If |left != static_cast<Id_Map_Entry_Node>(0)|, @>   
+@q **** (4) call this function recursively on |left|.       @>
 
-@ If |left != 0|, call this function recursively on |left|.
+@ If |left != static_cast<Id_Map_Entry_Node>(0)|, 
+call this function recursively on |left|.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-   if (left != 0)
+   if (left != static_cast<Id_Map_Entry_Node>(0))
       {
          status = left->set_id_map_node(i);
    
@@ -3472,7 +3480,7 @@ Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
 
             } /* |if (status != 0)|  */
 
-      } /* |if (left != 0)|  */
+      } /* |if (left != static_cast<Id_Map_Entry_Node>(0))|  */
  
 
 @q **** (4) Set |id_map_node|.@>   
@@ -3484,14 +3492,16 @@ Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
 
    id_map_node = i;
 
-@q **** (4) If |right != 0|, call this function recursively on |right|.@>   
+@q **** (4) If |right != static_cast<Id_Map_Entry_Node>(0)|, @>   
+@q **** (4) call this function recursively on |right|.       @>
 
-@ If |right != 0|, call this function recursively on |right|.
+@ If |right != static_cast<Id_Map_Entry_Node>(0)|, 
+call this function recursively on |right|.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-   if (right != 0)
+   if (right != static_cast<Id_Map_Entry_Node>(0))
       {
          status = right->set_id_map_node(i);
    
@@ -3518,7 +3528,7 @@ Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
 
             } /* |if (status != 0)|  */
 
-      } /* |if (right != 0)|  */
+      } /* |if (right != static_cast<Id_Map_Entry_Node>(0))|  */
  
 
 
@@ -3610,14 +3620,15 @@ and error output.
 
   Scanner_Node scanner_node = 0;
 
-  if (id_map_node != 0 && id_map_node->scanner_node != 0)
+  if (   id_map_node != static_cast<Id_Map_Node>(0) 
+      && id_map_node->scanner_node != static_cast<Scanner_Node>(0))
     scanner_node = id_map_node->scanner_node;
   
   string thread_name;
 
   bool error_stop_value;
 
-  if (scanner_node != 0)
+  if (scanner_node != static_cast<Scanner_Node>(0))
     error_stop_value = (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
       ? true : false;
   else 
@@ -3635,7 +3646,7 @@ and error output.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-      if (scanner_node != 0 &&
+      if (scanner_node != static_cast<Scanner_Node>(0) &&
           (   scanner_node->get_run_state()->multithread_input 
            || scanner_node->get_run_state()->multithread_output
            || scanner_node->get_run_state()->multithread_include))
@@ -3649,19 +3660,20 @@ and error output.
         } /* |if| (Using multithreading.)  */
 
 
-@q ***** (5) |scanner_node == 0| or not using multithreading.@>   
+@q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.@>   
 
-@ |scanner_node == 0| or not using multithreading.
+@ |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-      else /* |scanner_node == 0| or not using multithreading.  */
+      else /* |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.  */
         {
-          thread_info = 0;
+          thread_info = static_cast<Thread_Info_Type*>(0);
           thread_name = "";
 
-        } /* |else| (|scanner_node == 0| or not using multithreading.)  */
+        } /* |else| (|scanner_node == static_cast<Scanner_Node>(0)| 
+                     or not using multithreading.)  */
 
 
 #else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
@@ -3692,12 +3704,12 @@ and error output.
 
 
 
-    if (s->left != 0)
+    if (s->left != static_cast<Id_Map_Entry_Node>(0))
       set_subordinate_array(s->left, true, type);
 
 
 
-   if (s->object != 0)
+   if (s->object != static_cast<void*>(0))
      {
 #if DEBUG_COMPILE
          if (DEBUG)
@@ -3763,10 +3775,10 @@ and error output.
 
 
 
-     } /* |if (s->object != 0)|  */
+     } /* |if (s->object != static_cast<void*>(0))|  */
 
    
-   if (s->right != 0)
+   if (s->right != static_cast<Id_Map_Entry_Node>(0))
      set_subordinate_array(s->right, true, type);
 
 
@@ -3877,14 +3889,14 @@ Id_Map_Entry_Type::operator*=(const Transform& t)
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ***** (5) Error handling:  |object == 0|.@>
+@q ***** (5) Error handling:  |object == static_cast<void*>(0)|.@>
 
-@ Error handling:  |object == 0|.
+@ Error handling:  |object == static_cast<void*>(0)|.
 \initials{LDF 2004.09.29.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  if (object == 0)
+  if (object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Id_Map_Entry_Type::operator(const Transform&)':"
@@ -3894,7 +3906,7 @@ Id_Map_Entry_Type::operator*=(const Transform& t)
 
       return INVALID_TRANSFORM;
 
-    } /* |if (object == 0)|  */
+    } /* |if (object == static_cast<void*>(0))|  */
 
 @q ***** (5).@> 
 @
@@ -4373,10 +4385,10 @@ Id_Map_Entry_Type::show(string s,
  
    Scanner_Node scanner_node;
 
-   if (id_map_node != 0)
+   if (id_map_node != static_cast<Id_Map_Node>(0))
      scanner_node = id_map_node->scanner_node;
    else 
-     scanner_node = 0;
+     scanner_node = static_cast<Scanner_Node>(0);
 
 
 @q **** (4) Get thread information, or not, depending on circumstances.@>   
@@ -4394,14 +4406,14 @@ Id_Map_Entry_Type::show(string s,
   Thread_Info_Type* thread_info;
   
 
-@q ***** (5) |scanner_node != 0|.@>   
+@q ***** (5) |scanner_node != static_cast<Scanner_Node>(0)|.@>   
 
-@ |scanner_node != 0|.
+@ |scanner_node != static_cast<Scanner_Node>(0)|.
 \initials{LDF 2004.08.23.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  if (scanner_node) /* |scanner_node != 0|  */
+  if (scanner_node != static_cast<Scanner_Node>(0)) 
     {
    
 @q ****** (6) Using multithreading.@>   
@@ -4424,37 +4436,37 @@ Id_Map_Entry_Type::show(string s,
         } /* Using multithreading.  */
 
 
-@q ****** (6) |scanner_node != 0|, but not using multithreading.@>   
+@q ****** (6) |scanner_node != static_cast<Scanner_Node>(0)|, but not using multithreading.@> 
 
-@ |scanner_node != 0|, but not using multithreading.
+@ |scanner_node != static_cast<Scanner_Node>(0)|, but not using multithreading.
 \initials{LDF 2004.08.23.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-      else /* |scanner_node != 0|, but not using multithreading.  */
+      else /* |scanner_node != static_cast<Scanner_Node>(0)|, but not using multithreading.  */
         {
-          thread_info = 0;
+          thread_info = static_cast<Thread_Info_Type*>(0);
           thread_name = "";
 
-        } /* |else| (|scanner_node != 0|, but not using multithreading.)  */
+        } /* |else| (|scanner_node != static_cast<Scanner_Node>(0)|, 
+                     but not using multithreading.)  */
 
     } /* |if (scanner_node)|  */
 
 
-@q ***** (5) |scanner_node == 0|.  Assume we're using multithreading.@>   
-
-@ |scanner_node == 0|.  Assume we're using multithreading.
+@q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)|.  Assume we're using multithreading.@>
+@ |scanner_node == static_cast<Scanner_Node>(0)|.  Assume we're using multithreading.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  else /* (|scanner_node == 0|)  */
+  else /* (|scanner_node == static_cast<Scanner_Node>(0)|)  */
     {
 
       thread_info = Thread_Info_Type::get_thread_info(true);
       thread_name = Thread_Info_Type::get_thread_name(thread_info);
 
 
-    } /* |else| (|scanner_node == 0|)  */
+    } /* |else| (|scanner_node == static_cast<Scanner_Node>(0)|)  */
 
 #else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
 
@@ -4472,7 +4484,7 @@ Id_Map_Entry_Type::show(string s,
 
   bool error_stop_value;
 
-  if (scanner_node != 0)
+  if (scanner_node != static_cast<Scanner_Node>(0))
     error_stop_value 
        = (   scanner_node->get_run_state()->error_stop_mode 
           == Run_State::STOPPING)
@@ -4656,7 +4668,7 @@ Added code for the case that |known_state == EXPIRED|.
 
 
 
-  if (object != 0)
+  if (object != static_cast<void*>(0))
     {
 
 @q ***** (5) |PREDICATE|  @>
@@ -5036,14 +5048,14 @@ Added this section.
 
       else if (type == COLOR_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
               if (verbose)
                  {
-                    cerr_strm << "object != 0.";
+                    cerr_strm << "object != static_cast<void*>(0).";
               
                     log_message(cerr_strm); 
                     cerr << cerr_strm.str() << endl;
@@ -5057,7 +5069,7 @@ Added this section.
               pv->show("color_vector:");
               
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == COLOR_VECTOR)|  */
       
@@ -5076,15 +5088,15 @@ Added this section.
 
       else if (type == POINT_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
 
               if (verbose)
                   {
-                      cerr_strm << "object != 0.";
+                      cerr_strm << "object != static_cast<void*>(0).";
               
                       log_message(cerr_strm); 
                       cerr << cerr_strm.str() << endl;
@@ -5099,7 +5111,7 @@ Added this section.
               pv->show("point_vector:");
               
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == POINT_VECTOR)|  */
 
@@ -5118,14 +5130,14 @@ Added this section.
 
       else if (type == BOOL_POINT_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5140,7 +5152,7 @@ Added this section.
                 pv->show("bool_point_vector:");
               
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == BOOL_POINT_VECTOR)|  */
 
@@ -5160,14 +5172,14 @@ Added this section.
 
       else if (type == PATH_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5182,7 +5194,7 @@ Added this section.
                 pv->show("path_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == PATH_VECTOR)|  */
 
@@ -5200,14 +5212,14 @@ Added this section.
 
       else if (type == ELLIPSE_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5222,7 +5234,7 @@ Added this section.
                 pv->show("ellipse_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == ELLIPSE_VECTOR)|  */
 
@@ -5241,14 +5253,14 @@ Added this section.
 
       else if (type == CIRCLE_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5263,7 +5275,7 @@ Added this section.
                 pv->show("circle_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CIRCLE_VECTOR)|  */
 
@@ -5281,14 +5293,14 @@ Added this section.
 
       else if (type == PARABOLA_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5303,7 +5315,7 @@ Added this section.
                 pv->show("parabola_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == PARABOLA_VECTOR)|  */
 
@@ -5321,14 +5333,14 @@ Added this section.
 
       else if (type == HYPERBOLA_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5343,7 +5355,7 @@ Added this section.
                 pv->show("hyperbola_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == HYPERBOLA_VECTOR)|  */
 
@@ -5361,14 +5373,14 @@ Added this section.
 
       else if (type == ARC_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5383,7 +5395,7 @@ Added this section.
                 pv->show("arc_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == ARC_VECTOR)|  */
 
@@ -5403,14 +5415,14 @@ Added this section.
 
       else if (type == CONIC_SECTION_LATTICE_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5425,7 +5437,7 @@ Added this section.
                 pv->show("conic_section_lattice_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CONIC_SECTION_LATTICE_VECTOR)|  */
 
@@ -5444,14 +5456,14 @@ Added this section.
 
       else if (type == HELIX_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5466,7 +5478,7 @@ Added this section.
                 pv->show("helix_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == HELIX_VECTOR)|  */
 
@@ -5484,14 +5496,14 @@ Added this section.
 
       else if (type == POLYGON_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5506,7 +5518,7 @@ Added this section.
                 pv->show("polygon_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == POLYGON_VECTOR)|  */
 
@@ -5524,14 +5536,14 @@ Added this section.
 
       else if (type == RECTANGLE_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5546,7 +5558,7 @@ Added this section.
                 pv->show("rectangle_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == RECTANGLE_VECTOR)|  */
 
@@ -5564,14 +5576,14 @@ Added this section.
 
       else if (type == REG_POLYGON_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5586,7 +5598,7 @@ Added this section.
                 pv->show("reg_polygon_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == REG_POLYGON_VECTOR)|  */
 
@@ -5605,14 +5617,14 @@ Added this section.
 
       else if (type == CONE_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5627,7 +5639,7 @@ Added this section.
                 pv->show("cone_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CONE_VECTOR)|  */
 
@@ -5646,14 +5658,14 @@ Added this section.
 
       else if (type == CYLINDER_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5668,7 +5680,7 @@ Added this section.
                 pv->show("cylinder_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CYLINDER_VECTOR)|  */
 
@@ -5689,14 +5701,14 @@ Added this section.
 
       else if (type == CUBOID_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5711,7 +5723,7 @@ Added this section.
                 pv->show("cuboid_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CUBOID_VECTOR)|  */
 
@@ -5730,14 +5742,14 @@ Added this section.
 
       else if (type == ELLIPSOID_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5752,7 +5764,7 @@ Added this section.
                 pv->show("ellipsoid_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == ELLIPSOID_VECTOR)|  */
 
@@ -5771,14 +5783,14 @@ Added this section.
 
       else if (type == SPHERE_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5793,7 +5805,7 @@ Added this section.
                 pv->show("sphere_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == SPHERE_VECTOR)|  */
 
@@ -5811,14 +5823,14 @@ Added this section.
 
       else if (type == PARABOLOID_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5833,7 +5845,7 @@ Added this section.
                 pv->show("paraboloid_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == PARABOLOID_VECTOR)|  */
 
@@ -5852,14 +5864,14 @@ Added this section.  It's currently commented-out.
 #if 0 
       else if (type == HYPERBOLOID_VECTOR)
         {
-          if (verbose && object == 0)
-            cerr_strm << "object == 0.";
+          if (verbose && object == static_cast<void*>(0))
+            cerr_strm << "object == static_cast<void*>(0).";
               
           else
             {
                if (verbose)   
                   {
-                     cerr_strm << "object != 0.";
+                     cerr_strm << "object != static_cast<void*>(0).";
               
                      log_message(cerr_strm); 
                      cerr << cerr_strm.str() << endl;
@@ -5874,7 +5886,7 @@ Added this section.  It's currently commented-out.
                 pv->show("hyperboloid_vector:");
              
 
-            } /* |else| (|object != 0|)  */
+            } /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == HYPERBOLOID_VECTOR)|  */
 #endif 
@@ -5894,26 +5906,26 @@ Added this section.  It's currently commented-out.
           cerr_strm.str("");
         }
 
-    } /* |if (object != 0)|  */
+    } /* |if (object != static_cast<void*>(0))|  */
 
 
-@q **** (4) |object == 0|.  Can't show it.@>
+@q **** (4) |object == static_cast<void*>(0)|.  Can't show it.@>
 
-@ |object == 0|.  Can't show it.
+@ |object == static_cast<void*>(0)|.  Can't show it.
 \initials{LDF 2004.10.26.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
  
 
-   else if (verbose) /* (|object == 0|)  */
+   else if (verbose) /* (|object == static_cast<void*>(0)|)  */
       {    
-         cerr_strm << "object == 0.  Can't show it.";
+         cerr_strm << "object == static_cast<void*>(0).  Can't show it.";
       
          log_message(cerr_strm); 
          cerr << cerr_strm.str() << endl;
          cerr_strm.str("");
 
-      } /* |else if (verbose)| (|object == 0|)  */
+      } /* |else if (verbose)| (|object == static_cast<void*>(0)|)  */
 
 @q **** (4)@>
 @ 
@@ -5923,7 +5935,7 @@ Added this section.  It's currently commented-out.
   if (verbose)
     {
 
-      if (up == 0)
+      if (up == static_cast<Id_Map_Entry_Node>(0))
          cerr_strm << "up == 0";
       else 
          cerr_strm << "up != 0";
@@ -5932,7 +5944,7 @@ Added this section.  It's currently commented-out.
       cerr << cerr_strm.str() << endl;
       cerr_strm.str("");
  
-      if (left == 0)
+      if (left == static_cast<Id_Map_Entry_Node>(0))
           cerr_strm << "left == 0";
       else
         {    
@@ -5948,7 +5960,7 @@ Added this section.  It's currently commented-out.
       cerr_strm.str("");
 
 
-     if (right == 0)
+     if (right == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "right == 0";
      else
        {
@@ -5964,7 +5976,7 @@ Added this section.  It's currently commented-out.
      cerr_strm.str("");
 
 
-     if (superordinate_vector == 0)
+     if (superordinate_vector == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "superordinate_vector == 0";
 
      else
@@ -5973,7 +5985,7 @@ Added this section.  It's currently commented-out.
      cerr_strm << endl;
 
 
-     if (subordinate_array == 0)
+     if (subordinate_array == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "subordinate_array == 0";
 
      else
@@ -5989,12 +6001,12 @@ Added this section.  It's currently commented-out.
 @ |traverse == true|:  Traverse tree and show array entries.
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  if (traverse && left != 0)
+  if (traverse && left != static_cast<Id_Map_Entry_Node>(0))
     {
       left->show(left->name, true);
     }
 
-  if (traverse && right != 0)
+  if (traverse && right != static_cast<Id_Map_Entry_Node>(0))
     {
       right->show(right->name, true);
     }
