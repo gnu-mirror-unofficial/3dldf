@@ -323,7 +323,7 @@ Helix::set(Helix_Set_Option_Struct* option_struct, Scanner_Node scanner_node)
 
 @q **** (4) @>   
 
-   if (option_struct == 0)
+   if (option_struct == static_cast<Helix_Set_Option_Struct*>(0))
       {
           cerr_strm << thread_name << "ERROR!  In 'Helix::set()':"
                     << endl  
@@ -337,13 +337,13 @@ Helix::set(Helix_Set_Option_Struct* option_struct, Scanner_Node scanner_node)
 
           return 1;
 
-      }  /* |if (option_struct == 0)|  */      
+      }  /* |if (option_struct == static_cast<Helix_Set_Option_Struct*>(0))|  */      
 
 @q **** (4) @>   
 
    if (option_struct->center)
       {
-         if (center == 0)
+         if (center == static_cast<Point*>(0))
             center = option_struct->center;
          
          else 
@@ -364,7 +364,7 @@ Helix::set(Helix_Set_Option_Struct* option_struct, Scanner_Node scanner_node)
 
    if (option_struct->direction)
       {
-         if (direction == 0)
+         if (direction == static_cast<Point*>(0))
             direction = option_struct->direction;
          
          else 
@@ -386,7 +386,7 @@ Helix::set(Helix_Set_Option_Struct* option_struct, Scanner_Node scanner_node)
 
    if (option_struct->direction_vector)
       {
-         if (direction_vector == 0)
+         if (direction_vector == static_cast<Pointer_Vector<Point>*>(0))
             direction_vector = option_struct->direction_vector;
          
          else 
@@ -395,7 +395,7 @@ Helix::set(Helix_Set_Option_Struct* option_struct, Scanner_Node scanner_node)
                delete option_struct->direction_vector;
            }
 
-         option_struct->direction_vector = 0;
+         option_struct->direction_vector = static_cast<Pointer_Vector<Point>*>(0);
       }
 
     else
@@ -531,25 +531,25 @@ Helix::operator=(const Helix& h)
     if (this == &h) /* Make sure it's not self-assignment. */
        return *this;
 
-    if (h.center != 0)
+    if (h.center != static_cast<Point*>(0))
        {
-          if (center == 0)
+          if (center == static_cast<Point*>(0))
              center = create_new<Point>(0);
  
           *center = *(h.center);
        }
 
-    if (h.direction != 0)
+    if (h.direction != static_cast<Point*>(0))
        {
-          if (direction == 0)
+          if (direction == static_cast<Point*>(0))
              direction = create_new<Point>(0);
  
           *direction = *(h.direction);
        }
 
-    if (h.direction_vector != 0)
+    if (h.direction_vector != static_cast<Point*>(0))
        {
-          if (direction_vector == 0)
+          if (direction_vector == static_cast<Point*>(0))
              direction_vector = new Pointer_Vector<Point>; 
  
           *direction_vector = *(h.direction_vector);
@@ -685,7 +685,7 @@ operator*=(const Transform& t);
 Transform
 Helix::operator*=(const Transform& t)
 {
-   if (center != 0)
+   if (center != static_cast<Point*>(0))
       *center *= t;
 
    return Path::operator*=(t);
@@ -861,7 +861,7 @@ void
 Helix::shift_times(real x, real y, real z)
 {
 
-    if (center != 0)
+    if (center != static_cast<Point*>(0))
        center->shift_times(x, y, z);
 
 
@@ -1014,18 +1014,18 @@ Helix::show(string text, char coords,
    Path::show(text, coords, do_persp, do_apply,
               f, proj, factor);
 
-   if (center == 0)
+   if (center == static_cast<Point*>(0))
       cerr << "center == 0" << endl;
    else
       center->show("center:");
 
  
-   if (direction == 0)
+   if (direction == static_cast<Point*>(0))
       cerr << "direction == 0" << endl;
    else
       direction->show("direction:");
 
-   if (direction_vector == 0)
+   if (direction_vector == static_cast<Pointer_Vector<Point>*>(0))
       cerr << "direction_vector == 0" << endl;
    else
       direction_vector->show("direction_vector:");
