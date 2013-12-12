@@ -699,7 +699,7 @@ Cuboid::intersection_points(const Path& p,
 
            if (bpp.first.pt != INVALID_POINT)
               {
-                  if (bpv == 0)
+                  if (bpv == static_cast<Pointer_Vector<Bool_Point>*>(0))
                      {
                          bpv = new Pointer_Vector<Bool_Point>;
                          bp = new Bool_Point(bpp.first);
@@ -720,7 +720,7 @@ Cuboid::intersection_points(const Path& p,
 
            if (bpp.second.pt != INVALID_POINT)
               {
-                  if (bpv == 0)
+                  if (bpv == static_cast<Pointer_Vector<Bool_Point>*>(0))
                      {
                          bpv = new Pointer_Vector<Bool_Point>;
                          bp = new Bool_Point(bpp.second);
@@ -836,7 +836,8 @@ if |Line L == INVALID_LINE|.
            if (!bpv || bpv->ctr <= 0)
               continue;
 
-           else  /* |bpv != 0 && bpv->ctr > 0|  */
+           else  /* |   bpv != static_cast<Pointer_Vector<Bool_Point>*>(0) 
+                     && bpv->ctr > 0|  */
               {
 
                   for (int i = 0; i < 4; ++i)   /* First inner |for|  */
@@ -857,7 +858,7 @@ if |Line L == INVALID_LINE|.
 
                      }  /* End of first inner |for|  */
 
-             }  /* |else| (|bpv != 0|)  */
+             }  /* |else| (|bpv != static_cast<Pointer_Vector<Bool_Point>*>(0)|)  */
 
           delete bpv;
           bpv = 0;  
@@ -975,16 +976,16 @@ Cuboid::reflect_in(const Plane& p,
 
   Cuboid* cuboid_reflection = static_cast<Cuboid*>(v);  
 
-@q *** (3) If |cuboid_reflection == 0|, try to allocate memory @>
-@q *** (3) on the free store for it.                           @> 
+@q *** (3) If |cuboid_reflection == static_cast<Cuboid*>(0)|, try to allocate memory @>
+@q *** (3) on the free store for it.                                                 @>
 
-@ If |cuboid_reflection == 0|, try to allocate memory 
+@ If |cuboid_reflection == static_cast<Cuboid*>(0)|, try to allocate memory 
 on the free store for it.                            
 \initials{LDF 2004.10.12.}
 
 @<Define |Cuboid| functions@>=
 
- if (cuboid_reflection == 0)
+ if (cuboid_reflection == static_cast<Cuboid*>(0))
  {
   try
      {
@@ -1019,7 +1020,7 @@ on the free store for it.
   
 @q *** (3).@> 
 
-  } /* |if (cuboid_reflection == 0)|  */
+  } /* |if (cuboid_reflection == static_cast<Cuboid*>(0))|  */
 
 @q *** (3) Call |Solid_Faced::reflect_in()|.@> 
 
