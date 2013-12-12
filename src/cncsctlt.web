@@ -1384,7 +1384,7 @@ Conic_Section_Lattice::get_pascal_line(real increment, Scanner_Node scanner_node
 
 @<Define |Conic_Section_Lattice| functions@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Point>*>(0))
    {
        cerr_strm << thread_name << "ERROR!  "
                  << "In `Conic_Section_Lattice::get_pascal_line':"
@@ -1400,7 +1400,7 @@ Conic_Section_Lattice::get_pascal_line(real increment, Scanner_Node scanner_node
 
        return 0;
 
-   }  /* |if (pv == 0)|  */
+   }  /* |if (pv == static_cast<Pointer_Vector<Point>*>(0))|  */
 
 @q ******* (7) Error handling:  |*pv| contains too few |Points|.@>
 @ Error handling:  |*pv| contains too few |Points|.
@@ -1428,7 +1428,7 @@ Conic_Section_Lattice::get_pascal_line(real increment, Scanner_Node scanner_node
 
        return 0;
 
-   }  /* |if (pv == 0)|  */
+   }  /* |if (pv->ctr < 3)|  */
 
 
 @q ******* (7)@>
@@ -1746,9 +1746,12 @@ Conic_Section_Lattice::get_plane(void)
 {
    Path q;
 
-   if (   lattice[0] == 0 || *lattice[0] == INVALID_POINT
-       || lattice[1] == 0 || *lattice[1] == INVALID_POINT      
-       || lattice[2] == 0 || *lattice[2] == INVALID_POINT)
+   if (   lattice[0] == static_cast<Point*>(0) 
+       || *lattice[0] == INVALID_POINT
+       || lattice[1] == static_cast<Point*>(0) 
+       || *lattice[1] == INVALID_POINT      
+       || lattice[2] == static_cast<Point*>(0) 
+       || *lattice[2] == INVALID_POINT)
       return INVALID_PLANE;
 
    q += *lattice[0];
@@ -2030,7 +2033,7 @@ Added this section.
                            r,
                            do_shift);
 
-      if (p != 0)
+      if (p != static_cast<Point*>(0))
       {  
           Pointer_Vector<Point>* pv = new Pointer_Vector<Point>;
           *pv += p;
@@ -2075,7 +2078,7 @@ Added this section.
    Pointer_Vector<Point>* pv = new Pointer_Vector<Point>; 
 
    Point p;
-   Point* q = 0;
+   Point* q = static_cast<Point*>(0);
 
    bool b = true;
 
@@ -2258,7 +2261,7 @@ Added this section.
    Also, make it possible to have |start > end|.  
 */ 
 
-             if (q == 0 && quit_on_error)
+             if (q == static_cast<Point*>(0) && quit_on_error)
              {
                 cerr_strm << thread_name << "ERROR!  "
                           << "In `Conic_Section_Lattice::traverse':"
@@ -2275,7 +2278,7 @@ Added this section.
                          
              }  /* |if|  */
 
-             else if (q == 0)
+             else if (q == static_cast<Point*>(0))
              {
                 cerr_strm << thread_name << "WARNING!  "
                           << "In `Conic_Section_Lattice::traverse':"
@@ -2290,12 +2293,12 @@ Added this section.
 
              }  /* |else if|  */
 
-             else  /* |q != 0|  */
+             else  /* |q != static_cast<Point*>(0)|  */
              {
                 *pv += q;
              }
 
-             q = 0;
+             q = static_cast<Point*>(0);
              start_temp += increment;
              start += increment;
 
