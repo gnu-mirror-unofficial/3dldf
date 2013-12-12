@@ -2000,7 +2000,7 @@ Thread_Info_Type::get_thread_name(Thread_Info_Type* thread_info)
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   if (thread_info == 0)
+   if (thread_info == static_cast<Thread_Info_Type*>(0))
      {
        string s = "";
        return s;
@@ -2045,7 +2045,7 @@ Thread_Info_Type::get_scanner_node(Thread_Info_Type* thread_info)
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   if (thread_info == 0)
+   if (thread_info == static_cast<Thread_Info_Type*>(0))
      {
        return 0;
      }

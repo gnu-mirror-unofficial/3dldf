@@ -163,7 +163,7 @@ Added |bool warning_stop_value|.
 @
 \LOG
 @:BUG FIX@> BUG FIX:  Now checking 
-that |scanner_node != 0 && scanner_node->thread_info != 0| before 
+that |scanner_node != 0 && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)| before 
 setting |thread_name = scanner_node->thread_info->name|.
 \ENDLOG 
 
@@ -172,7 +172,7 @@ setting |thread_name = scanner_node->thread_info->name|.
    string thread_name;
 
 #ifdef HAVE_PTHREAD_H  
-   if (   scanner_node != 0 && scanner_node->thread_info != 0
+   if (   scanner_node != 0 && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
        && (   scanner_node->run_state.multithread_input 
            || scanner_node->run_state.multithread_output))      
 

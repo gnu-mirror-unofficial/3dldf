@@ -5487,7 +5487,7 @@ Scan_Parse::log_message(stringstream& s, bool do_endl)
   
   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-  if (thread_info != 0)
+  if (thread_info != static_cast<Thread_Info_Type*>(0))
     {
       thread_info->log_stream << s.str();
       if (do_endl)

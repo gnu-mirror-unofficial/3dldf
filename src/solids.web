@@ -2923,7 +2923,7 @@ Solid::clear(void)
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -5688,7 +5688,7 @@ Solid::get_minimum_z(const unsigned short s) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -5802,7 +5802,7 @@ Solid::get_maximum_z(const unsigned short s) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -5916,7 +5916,7 @@ Solid::get_mean_z(const unsigned short s) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
