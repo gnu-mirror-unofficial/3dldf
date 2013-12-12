@@ -247,7 +247,7 @@ Rethrow |bad_alloc| upon error.
 
 @q ***** (5) @> 
    
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -556,7 +556,7 @@ Added this rule.
    if (entry == 0)
      {
         
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      }  /* |if (entry == 0)|  */
 
@@ -707,7 +707,7 @@ Added this rule.
 
    if (entry == 0)
      {
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      }  /* |if (entry == 0)|  */
 
@@ -843,7 +843,7 @@ Added this rule.
 
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -882,7 +882,7 @@ Added this rule.
    else
       scanner_node->parabola_set_option_struct = new Parabola_Set_Option_Struct;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -902,7 +902,7 @@ Added this rule.
 @=set_parabola_option_list: set_parabola_option_list set_parabola_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -936,7 +936,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->focus 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -957,7 +957,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->vertex 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -978,7 +978,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->parameter 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1000,7 +1000,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->parameter 
       = @=$2@> / 2; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1023,7 +1023,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->directrix 
       = static_cast<Path*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1044,7 +1044,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->max_extent 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1065,7 +1065,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->parabola_set_option_struct->increment_value 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1101,7 +1101,7 @@ Added this rule.
 
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1140,7 +1140,7 @@ Added this rule.
    else
       scanner_node->hyperbola_set_option_struct = new Hyperbola_Set_Option_Struct;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1160,7 +1160,7 @@ Added this rule.
 @=set_hyperbola_option_list: set_hyperbola_option_list set_hyperbola_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1194,7 +1194,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->center
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1218,7 +1218,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->focus_0
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1239,7 +1239,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->focus_0
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1260,7 +1260,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->focus_1
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1281,7 +1281,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->vertex_0 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1302,7 +1302,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->vertex_0 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1323,7 +1323,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->vertex_1 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1344,7 +1344,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->parameter 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1366,7 +1366,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->parameter 
       = @=$2@> / 2; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1388,7 +1388,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->directrix 
       = static_cast<Path*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1409,7 +1409,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->max_extent 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1430,7 +1430,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->hyperbola_set_option_struct->increment_value 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1453,7 +1453,7 @@ Added this rule.
       parameter)->hyperbola_set_option_struct->major_axis_length 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1476,7 +1476,7 @@ Added this rule.
        parameter)->hyperbola_set_option_struct->major_axis_length 
       = @=$2@> / 2; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1499,7 +1499,7 @@ Added this rule.
       parameter)->hyperbola_set_option_struct->minor_axis_length 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1522,7 +1522,7 @@ Added this rule.
       parameter)->hyperbola_set_option_struct->minor_axis_length 
       = @=$2@> / 2; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1574,7 +1574,7 @@ before exiting rule.
 
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1613,7 +1613,7 @@ Added this rule.
    else
       scanner_node->helix_set_option_struct = new Helix_Set_Option_Struct;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1633,7 +1633,7 @@ Added this rule.
 @=set_helix_option_list: set_helix_option_list set_helix_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1667,7 +1667,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->center 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1688,7 +1688,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->direction 
        = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1709,7 +1709,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->direction_vector 
       = static_cast<Pointer_Vector<Point>*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1730,7 +1730,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->start_diameter 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1755,7 +1755,7 @@ Added this rule.
       = static_cast<unsigned short>(floor(fabs(@=$2@>) + .5)); 
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1775,7 +1775,7 @@ Added this rule.
 {
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->cycles = fabs(@=$2@>);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1796,7 +1796,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->angle 
       = fmod(fabs(@=$2@>), 360);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1817,7 +1817,7 @@ Added this rule.
    
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->type = @=$2@>;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1974,7 +1974,7 @@ Started working on this rule.
    if (entry == 0)
      {
         
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      }  /* |if (entry == 0)|  */
 
@@ -2068,7 +2068,7 @@ Added this rule.
 
    if (entry == 0)
      {
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      }  /* |if (entry == 0)|  */
 
@@ -2632,7 +2632,7 @@ Commented-in the call to |Scan_Parse::set_cone_rule_func_0()|.
 
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2671,7 +2671,7 @@ Added this rule.
    else
       scanner_node->cone_set_option_struct = new Cone_Set_Option_Struct;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2691,7 +2691,7 @@ Added this rule.
 @=set_cone_option_list: set_cone_option_list set_cone_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2725,7 +2725,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct->center 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2746,7 +2746,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct->direction 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2772,7 +2772,7 @@ Added this rule.
        *scanner_node->cone_set_option_struct->radius = @=$2@>; 
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2797,7 +2797,7 @@ Added this rule.
     else 
        *scanner_node->cone_set_option_struct->axis_x = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2822,7 +2822,7 @@ Added this rule.
     else 
        *scanner_node->cone_set_option_struct->axis_y = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2847,7 +2847,7 @@ Added this rule.
     else 
        *scanner_node->cone_set_option_struct->axis_z = @=$2@>; 
     
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2868,7 +2868,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct->base_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2889,7 +2889,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct->divisions
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2911,7 +2911,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct->type 
       = @=$2@>;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3017,7 +3017,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cone_set_option_struct->nap_type 
       = @=$2@>;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3105,7 +3105,7 @@ Commented-in the call to |Scan_Parse::set_cylinder_rule_func_0()|.
 
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3145,7 +3145,7 @@ Added this rule.
       scanner_node->cylinder_set_option_struct = new Cylinder_Set_Option_Struct;
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3165,7 +3165,7 @@ Added this rule.
 @=set_cylinder_option_list: set_cylinder_option_list set_cylinder_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3199,7 +3199,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct->center 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3221,7 +3221,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct->direction 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -3248,7 +3248,7 @@ Added this rule.
        *scanner_node->cylinder_set_option_struct->radius = @=$2@>; 
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3274,7 +3274,7 @@ Added this rule.
     else 
        *scanner_node->cylinder_set_option_struct->axis_x = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3299,7 +3299,7 @@ Added this rule.
     else 
        *scanner_node->cylinder_set_option_struct->axis_y = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3324,7 +3324,7 @@ Added this rule.
     else 
        *scanner_node->cylinder_set_option_struct->axis_z = @=$2@>; 
     
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3345,7 +3345,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct->base_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3366,7 +3366,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct->divisions
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3388,7 +3388,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct->type 
       = @=$2@>;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3511,7 +3511,7 @@ Added this rule.
 
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3553,7 +3553,7 @@ Commented-in the code in this rule.  Removed debugging code.
    else
       scanner_node->ellipsoid_set_option_struct = new Ellipsoid_Set_Option_Struct;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3572,7 +3572,7 @@ Added this rule.
 @<Define rules@>=
 @=set_ellipsoid_option_list: set_ellipsoid_option_list set_ellipsoid_option@>@/        
 {
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3606,7 +3606,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->center 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3636,7 +3636,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->axis_x 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3658,7 +3658,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->axis_y 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3679,7 +3679,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->axis_z 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3710,7 +3710,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->divisions_x 
       = static_cast<unsigned short>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3731,7 +3731,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->divisions_y 
       = static_cast<unsigned short>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3752,7 +3752,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->divisions_z 
       = static_cast<unsigned short>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3773,7 +3773,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->ellipsoid_set_option_struct->ellipse_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
   
@@ -3809,7 +3809,7 @@ Added this rule.
 
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3851,7 +3851,7 @@ exists or not and proceeds accordingly.
     else
        scanner_node->sphere_set_option_struct = new Sphere_Set_Option_Struct;
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3871,7 +3871,7 @@ Added this rule.
 @=set_sphere_option_list: set_sphere_option_list set_sphere_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3909,7 +3909,7 @@ Now compiling the code that sets
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->center 
       = static_cast<Point*>(@=$2@>); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3944,7 +3944,7 @@ I've removed |unsigned int Sphere_Set_Option_Struct::divisions|.
        = scanner_node->sphere_set_option_struct->divisions_horizontal
        = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3969,7 +3969,7 @@ Now rounding |@=$2@>| before setting
     static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->divisions_vertical
        = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3994,7 +3994,7 @@ Now rounding |@=$2@>| before setting
     static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->divisions_horizontal
        = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4014,7 +4014,7 @@ Added this rule.
 
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->radius = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4039,7 +4039,7 @@ instead of
 
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->radius = .5 * @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4062,7 +4062,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->circle_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4082,7 +4082,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->sphere_type 
       = @=$2@>;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4166,7 +4166,7 @@ Added this rule.
 
    static_cast<Scanner_Node>(parameter)->sphere_development_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4205,7 +4205,7 @@ Added this rule.
        scanner_node->sphere_development_set_option_struct 
           = new Sphere_Development_Set_Option_Struct;
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4226,7 +4226,7 @@ Added this rule.
 @=set_sphere_development_option@>@/
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4262,7 +4262,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->sphere_development_set_option_struct->radius 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4283,7 +4283,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->sphere_development_set_option_struct->radius 
       = .5 * @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4305,7 +4305,7 @@ Added this rule.
     scanner_node->sphere_development_set_option_struct->divisions_lat
        = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4327,7 +4327,7 @@ Added this rule.
     scanner_node->sphere_development_set_option_struct->divisions_long
        = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4349,7 +4349,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->sphere_development_set_option_struct->path_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4370,7 +4370,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->sphere_development_set_option_struct->segments
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4401,7 +4401,7 @@ Added this rule.
     
    }
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4438,7 +4438,7 @@ Working on this rule.
                                           parameter);
    static_cast<Scanner_Node>(parameter)->paraboloid_set_option_struct = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4476,7 +4476,7 @@ Added this rule.
     else
        scanner_node->paraboloid_set_option_struct = new Paraboloid_Set_Option_Struct;
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4496,7 +4496,7 @@ Added this rule.
 @=set_paraboloid_option_list: set_paraboloid_option_list set_paraboloid_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

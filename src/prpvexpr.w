@@ -102,7 +102,7 @@ Added this rule.
   if (entry == 0 || entry->object == 0)
     {
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -359,7 +359,7 @@ Removed debugging code.
   if (status != 0)
      {
        
-       @=$$@> = 0;
+       @=$$@> = static_cast<void*>(0);
 
      } /* |if (status != 0)|  */
       
