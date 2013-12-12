@@ -699,7 +699,7 @@ need them someday.
 
 @q ***** (5).@> 
           
-          if (u_z != 0)
+          if (u_z != ZERO_REAL)
             {
 
 
@@ -718,12 +718,12 @@ need them someday.
               t = (((b_x - a_x) * w_y) - ((b_y - a_y) * w_x))
                 / u_z;
 
-            } /* |if (u_z != 0)|  */
+            } /* |if (u_z != ZERO_REAL)|  */
           
 
 @q ***** (5).@> 
 
-          else if (u_x != 0)
+          else if (u_x != ZERO_REAL)
             {
 
 #if DEBUG_COMPILE
@@ -741,12 +741,12 @@ need them someday.
               t = (((b_y - a_y) * w_z) - ((b_z - a_z) * w_y))
                 / u_x;
 
-            } /* |else if (u_x != 0)|  */
+            } /* |else if (u_x != ZERO_REAL)|  */
 
 
 @q ***** (5).@> 
 
-          else if (u_y != 0)
+          else if (u_y != ZERO_REAL)
             {
  
 
@@ -766,7 +766,7 @@ need them someday.
               t = (((b_z - a_z) * w_x) - ((b_x - a_x) * w_z))
                 / u_y;
 
-            } /* |else if (u_y != 0)|  */
+            } /* |else if (u_y != ZERO_REAL)|  */
 
 @q ***** (5).@> 
 
@@ -976,7 +976,7 @@ Point::intersection_point(const Point& pp0, const Point& pp1, const
     }
 
 
-  if (brp.r != 0 || brp.b == false || brp.pt == INVALID_POINT)
+  if (brp.r != ZERO_REAL || brp.b == false || brp.pt == INVALID_POINT)
     return INVALID_BOOL_POINT;
 
   Bool_Point bp;
