@@ -356,7 +356,7 @@ Path::operator=(const Path& p)
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -409,10 +409,12 @@ Added code for handling copying |draw_color_vector|.
 
 @q **** (4) @>   
 
-         if (draw_color_vector == 0 && p.draw_color_vector == 0)
+         if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0)  
+             && p.draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
             ; /* Do nothing.  */@; 
 
-         else if (draw_color_vector == 0 &&  p.draw_color_vector != 0)
+         else if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
+                  && p.draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
             {
 
                 draw_color_vector = new Pointer_Vector<Color>; 
@@ -422,7 +424,8 @@ Added code for handling copying |draw_color_vector|.
 
             }
 
-         else if (draw_color_vector != 0 &&  p.draw_color_vector == 0)
+         else if (   draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                  && p.draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
             {
                 draw_color_vector->clear();
                 delete draw_color_vector;
@@ -430,10 +433,13 @@ Added code for handling copying |draw_color_vector|.
 
             }
 
-          else if (draw_color_vector != 0 &&  p.draw_color_vector != 0)
+          else if (   draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                   && p.draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
              *draw_color_vector = *(p.draw_color_vector);
 
 @q **** (4) @>   
+
+         /* !! START HERE: LDF 2013.12.12.  Casting 0 to pointer types.  */
 
          if (fill_color_vector == 0 && p.fill_color_vector == 0)
             ; /* Do nothing.  */@; 
@@ -4350,7 +4356,7 @@ Path::operator+=(Color* c)
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -8014,7 +8020,7 @@ Path::get_minimum_z(const unsigned short s) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -8129,7 +8135,7 @@ Path::get_maximum_z(const unsigned short s) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -8246,7 +8252,7 @@ Path::get_mean_z(const unsigned short s) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
