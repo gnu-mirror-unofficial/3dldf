@@ -341,8 +341,8 @@ Input_Struct(void);
 @<Define |Input_Struct| functions@>=
 Input_Struct::Input_Struct(void)
 {
-  stream_ptr = 0;
-  up = 0;
+  stream_ptr = static_cast<istream*>(0);
+  up = static_cast<Input_Struct*>(0);
 }
 
 
@@ -419,7 +419,7 @@ Input_Struct::~Input_Struct(void)
     } /* |if (type == FILE_TYPE)|  */@;
         
 
-  if (type == FILE_TYPE && stream_ptr != 0)
+  if (type == FILE_TYPE && stream_ptr != static_cast<ifstream*>(0))
     {
 #if DEBUG_COMPILE
       if (DEBUG) 
@@ -428,9 +428,9 @@ Input_Struct::~Input_Struct(void)
 #endif /* |DEBUG_COMPILE|  */@; 
 
       delete (stream_ptr);
-      stream_ptr = 0;
+      stream_ptr = static_cast<ifstream*>(0);
 
-    }  /* |if (type == FILE_TYPE && stream_ptr != 0)|  */
+    }  /* |if (type == FILE_TYPE && stream_ptr != static_cast<ifstream*>(0))|  */
 
 
 #if DEBUG_COMPILE
@@ -460,7 +460,7 @@ Input_Struct::~Input_Struct(void)
 @<Define |Input_Struct| functions@>=
 
 #if 0 
-  while (up != 0)
+  while (up != static_cast<Input_Struct*>(0))
     {
 
 #if DEBUG_COMPILE
@@ -474,7 +474,7 @@ Input_Struct::~Input_Struct(void)
       i = up;
       up = i->up;
       delete i;
-      i = 0;
+      i = static_cast<Input_Struct*>(0);
     }
 #endif  
 
@@ -490,7 +490,7 @@ Added this section.
 
 @<Define |Input_Struct| functions@>=
 
-  if (type == SCANTOKENS_STRING_TYPE && stream_ptr != 0)
+  if (type == SCANTOKENS_STRING_TYPE && stream_ptr != static_cast<istream*>(0))
     {
 #if DEBUG_COMPILE
       if (DEBUG) 
@@ -499,9 +499,9 @@ Added this section.
 #endif /* |DEBUG_COMPILE|  */@; 
 
       delete (stream_ptr);
-      stream_ptr = 0;
+      stream_ptr = static_cast<istream*>(0);
 
-    }  /* |if (type == SCANTOKENS_STRING_TYPE && stream_ptr != 0)|  */
+    }  /* |if (type == SCANTOKENS_STRING_TYPE && stream_ptr != static_cast<istream*>(0))|  */
   
 
 @q ****** (6) |type == MACRO_STRING_TYPE|.@>
@@ -516,13 +516,13 @@ Added this section.
 
 @<Define |Input_Struct| functions@>=
 
-  if (type == MACRO_STRING_TYPE && stream_ptr != 0)
+  if (type == MACRO_STRING_TYPE && stream_ptr != static_cast<istream*>(0))
     {
 
       delete stream_ptr;
-      stream_ptr = 0;
+      stream_ptr = static_cast<istream*>(0);
 
-    }  /* |if (type == MACRO_STRING_TYPE && stream_ptr != 0)|  */
+    }  /* |if (type == MACRO_STRING_TYPE && stream_ptr != static_cast<istream*>(0))|  */
   
 
 
@@ -603,7 +603,7 @@ Output_Struct(void);
 @<Define |Output_Struct| functions@>=
 Output_Struct::Output_Struct(void)
 {
-  stream_ptr = 0;
+  stream_ptr = static_cast<ostream*>(0);
 }
 
 
@@ -652,7 +652,7 @@ Output_Struct::~Output_Struct(void)
         }
     } /* |if (type == FILE_TYPE)|  */@;
     
-  if (stream_ptr != 0)
+  if (stream_ptr != static_cast<ostream*>(0))
     {
           
 #if DEBUG_COMPILE
@@ -1797,7 +1797,7 @@ Id_Map_Type::~Id_Map_Type(void)
 
       n = iter->second;
 
-      if (n != 0)
+      if (n != static_cast<Id_Map_Entry_Node>(0))
         {
 
 #if DEBUG_COMPILE
@@ -1834,7 +1834,7 @@ Id_Map_Type::~Id_Map_Type(void)
 
         n = 0;
 
-        } /* |if (n != 0)|  */
+        } /* |if (n != static_cast<Id_Map_Entry_Node>(0))|  */
 
     } /* |for|  */
 
@@ -1849,7 +1849,7 @@ Id_Map_Type::~Id_Map_Type(void)
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-  if (up != 0)
+  if (up != static_cast<Id_Map_Node>(0))
     {
 #if DEBUG_COMPILE
       if (DEBUG) 
@@ -1867,11 +1867,11 @@ Id_Map_Type::~Id_Map_Type(void)
       delete up;
       up = 0;
 
-    } /* |if (up != 0)|  */
+    } /* |if (up != static_cast<Id_Map_Entry_Node>(0))|  */
 
 #if DEBUG_COMPILE
 
-  else if (DEBUG) /* (|up == 0|)  */
+  else if (DEBUG) /* (|up == static_cast<Id_Map_Entry_Node>(0)|)  */
     {
       cerr_strm << thread_name << "In `Id_Map_Type' destructor:"
                 << endl
@@ -1881,7 +1881,7 @@ Id_Map_Type::~Id_Map_Type(void)
       cerr_message(cerr_strm); 
       cerr_strm.str(""); 
 
-    }   /* |else| (|up == 0|)  */
+    }   /* |else| (|up == static_cast<Id_Map_Entry_Node>(0)|)  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1955,7 +1955,7 @@ Id_Map_Type::show(string s, bool show_all) const
 
     } /* |for|  */@;
 
-  if (up == 0)
+  if (up == static_cast<Id_Map_Node>(0))
     cerr << "up == 0\n";
   else
     {
@@ -2158,7 +2158,7 @@ Loop_Info_Type::~Loop_Info_Type(void)
   step_value  = 0;  
   limit_value = 0;  
 
-  if (loop_strm_ptr != 0)
+  if (loop_strm_ptr != static_cast<stringstream*>(0))
     delete loop_strm_ptr; 
 
   loop_strm_ptr = 0;
@@ -3391,7 +3391,7 @@ string
 Scanner_Type::get_in_filename(const bool silent) const
 {
   bool DEBUG = false; /* |true| */ @; 
-  if (in == 0)
+  if (in == static_cast<Input_Struct*>(0))
     {
       if (!silent || DEBUG)
         cerr << "WARNING! In Scanner_Type::get_in_filename():\n"
@@ -3464,7 +3464,7 @@ int
 Scanner_Type::pop_in(void)
 {
 
-  if (in->up == 0)
+  if (in->up == static_cast<Input_Struct*>(0))
     {
       cerr_mutex.lock(); 
       cerr << "WARNING: In `Scanner_Type::pop_in()': "
@@ -3475,13 +3475,13 @@ Scanner_Type::pop_in(void)
 
       return 1;
 
-    } /* |if (in->up == 0)|  */
+    } /* |if (in->up == static_cast<Input_Struct*>(0))|  */
 
   Input_Struct* i = in;
   in = in->up;
-  i->up = 0;
+  i->up = static_cast<Input_Struct*>(0);
   delete i;
-  i = 0;
+  i = static_cast<Input_Struct*>(0);
   
   return 0;
   
@@ -3856,7 +3856,7 @@ Scanner_Type::get_array_entry(string s,
      }
 #endif /* |DEBUG_COMPILE|  */@; 
   
-  if (root == 0)
+  if (root == static_cast<Id_Map_Entry_Node>(0))
     {
 
 
@@ -3871,12 +3871,12 @@ Scanner_Type::get_array_entry(string s,
 
       return static_cast<Id_Map_Entry_Node>(0); 
 
-    } /* |if (root == 0)|  */
+    } /* |if (root == static_cast<Id_Map_Entry_Node>(0))|  */
 
   int curr_type = root->type;
 
-@q ****** (6) |root->left == 0|.@>  
-@ |root->left == 0|.
+@q ****** (6) |root->left == static_cast<Id_Map_Entry_Node>(0)|.@>  
+@ |root->left == static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF Undated.}
 
 \LOG
@@ -3887,7 +3887,7 @@ Added the condition |create_if_none == true|.
 
 @<Define |Scanner_Type| functions@>=
 
-  if (root->left == 0 && create_if_none)
+  if (root->left == static_cast<Id_Map_Entry_Node>(0) && create_if_none)
     {
 
 #if DEBUG_COMPILE
@@ -3937,10 +3937,10 @@ Added the condition |create_if_none == true|.
 
       return root->left;
 
-    } /* |if (root->left == 0)|  */
+    } /* |if (root->left == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |root->left == 0 && !create_if_none|.@> 
-@ |root->left == 0 && !create_if_none|.
+@q ****** (6) |root->left == static_cast<Id_Map_Entry_Node>(0) && !create_if_none|.@> 
+@ |root->left == static_cast<Id_Map_Entry_Node>(0) && !create_if_none|.
 \initials{LDF 2005.01.08.}
 
 \LOG
@@ -3950,7 +3950,7 @@ Added this section.
 
 @<Define |Scanner_Type| functions@>=
 
-   else if (root->left == 0 && !create_if_none)
+   else if (root->left == static_cast<Id_Map_Entry_Node>(0) && !create_if_none)
       {
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -3969,14 +3969,15 @@ Added this section.
 
          return 0;
 
-      } /* |else if (root->left == 0 && !create_if_none)|  */
+      } /* |else if (   root->left == static_cast<Id_Map_Entry_Node>(0) 
+                     && !create_if_none)|  */
 
-@q ****** (6) |root->left != 0|.@>  
-@ |root->left != 0|.
+@q ****** (6) |root->left != static_cast<Id_Map_Entry_Node>(0)|.@>  
+@ |root->left != static_cast<Id_Map_Entry_Node>(0)|.
 @<Define |Scanner_Type| functions@>=
 
 
-  else /* (|root->left != 0|)  */
+  else /* (|root->left != static_cast<Id_Map_Entry_Node>(0)|)  */
     {
 
 #if DEBUG_COMPILE
@@ -4052,13 +4053,13 @@ Added this section.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-@q ****** (6) |(root->left == 0)|.@>  
-@ |(root->left == 0)|.
+@q ****** (6) |(root->left == static_cast<Id_Map_Entry_Node>(0)|.@>  
+@ |(root->left == static_cast<Id_Map_Entry_Node>(0))|.
 \initials{LDF 2004.08.23.}
 
 @<Define |Scanner_Type| functions@>=
  
-  if (root->left == 0)
+  if (root->left == static_cast<Id_Map_Entry_Node>(0))
     {
                         
 #if DEBUG_COMPILE
@@ -4110,16 +4111,16 @@ Added this section.
       return root->left;
       
 
-    } /* |if (root->left == 0)|  */@;
+    } /* |if (root->left == static_cast<Id_Map_Entry_Node>(0))|  */@;
 
 
-@q ****** (6) |(root->left != 0)|.@>  
-@ |(root->left != 0)|.
+@q ****** (6) |(root->left != static_cast<Id_Map_Entry_Node>(0))|.@>  
+@ |(root->left != static_cast<Id_Map_Entry_Node>(0))|.
 \initials{LDF 2004.08.23.}
 
 @<Define |Scanner_Type| functions@>=
 
-  else /* |if (root->left != 0)|  */@;
+  else /* |if (root->left != static_cast<Id_Map_Entry_Node>(0))|  */@;
    {
 
 #if DEBUG_COMPILE
@@ -4139,7 +4140,7 @@ Added this section.
      root = root->left;
      continue;
 
-   } /* |else| (|root->left != 0|) */@;
+   } /* |else| (|root->left != static_cast<Id_Map_Entry_Node>(0)|) */@;
 
  } /* |if (s < root->name)|  */@;
 
@@ -4156,14 +4157,14 @@ If |right| is a null pointer, put the new
                   {
                     
 
-@q ****** (6) |root->right == 0|.@>  
+@q ****** (6) |root->right == static_cast<Id_Map_Entry_Node>(0)|.@>  
 
-@ |root->right == 0|.
+@ |root->right == static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.08.23.}
 
 @<Define |Scanner_Type| functions@>=
 
-                    if (root->right == 0)
+                    if (root->right == static_cast<Id_Map_Entry_Node>(0))
                       {
 
 #if DEBUG_COMPILE
@@ -4211,18 +4212,18 @@ If |right| is a null pointer, put the new
  
                         return root->right;
 
-                      } /* |if (root->right == 0)|  */@;
+                      } /* |if (root->right == static_cast<Id_Map_Entry_Node>(0))|  */@;
 
 
-@q ****** (6) |root->right != 0|.@>  
+@q ****** (6) |root->right != static_cast<Id_Map_Entry_Node>(0)|.@>  
 
-@ |root->right != 0|.
+@ |root->right != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.08.23.}
 
 @<Define |Scanner_Type| functions@>=
 
 
-                    else /* |root->right != 0| */
+                    else /* |root->right != static_cast<Id_Map_Entry_Node>(0)| */
                       {
 #if DEBUG_COMPILE
                         if (DEBUG) 
@@ -4241,13 +4242,13 @@ If |right| is a null pointer, put the new
 
                         root = root->right;
                         continue;
-                      } /* |else| (|root->right != 0|) */
+                      } /* |else| (|root->right != static_cast<Id_Map_Entry_Node>(0)|) */
 
                     } /* |else if (s > root->name)|  */
 
                  } /* |for|  */
  
-   } /* |else| (|root->left != 0|)  */
+   } /* |else| (|root->left != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 } /* End of |Scanner_Type::get_array_entry| definition.  */
 
@@ -4344,14 +4345,14 @@ Scanner_Type::show(string s, bool show_all) const
   else
     cerr << s << ":" << endl;
 
-  if (in == 0)
+  if (in == static_cast<Input_Struct*>(0))
     cerr << "in == 0" << endl;
   else
     cerr << "in->filename == " << in->filename << endl;    
       
   for (int i = Run_State::METAPOST; i <= Run_State::LIBPLOT; ++i)
     {
-      if (out[i] == 0)
+      if (out[i] == static_cast<Output_Struct*>(0))
         cerr << "out[" << i << "] == 0" << endl;
       else
         cerr << "out[" << i << "]->filename == " << out[i]->filename
