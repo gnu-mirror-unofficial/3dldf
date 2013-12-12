@@ -279,13 +279,13 @@ Cylinder::set(Cylinder_Set_Option_Struct* options,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4) WARNING:  |options == 0|.@> 
-@ WARNING:  |options == 0|.
+@q **** (4) WARNING:  |options == static_cast<Cylinder_Set_Option_Struct*>(0)|.@> 
+@ WARNING:  |options == static_cast<Cylinder_Set_Option_Struct*>(0)|.
 \initials{LDF 2006.11.06.}
 
 @<Define |Cylinder| functions@>=
 
-    if (options == 0)
+    if (options == static_cast<Cylinder_Set_Option_Struct*>(0))
     {  
          cerr_strm << "WARNING!  In `Cylinder::set()':"
                    << endl 
@@ -298,7 +298,7 @@ Cylinder::set(Cylinder_Set_Option_Struct* options,
 
          return 1;
          
-    }  /* |if (options == 0)|  */
+    }  /* |if (options == static_cast<Cylinder_Set_Option_Struct*>(0))|  */
 
 
 @q **** (4) |center|.@> 
@@ -307,11 +307,11 @@ Cylinder::set(Cylinder_Set_Option_Struct* options,
 
 @<Define |Cylinder| functions@>=
 
-    if (options->center != 0)
+    if (options->center != static_cast<Point*>(0))
     {
         center = *options->center;
 
-    }  /* |if (options->center == 0)|  */
+    }  /* |if (options->center == static_cast<Point*>(0))|  */
   
 
 @q **** (4) |direction|.@> 
@@ -320,11 +320,11 @@ Cylinder::set(Cylinder_Set_Option_Struct* options,
 
 @<Define |Cylinder| functions@>=
 
-    if (options->direction != 0)
+    if (options->direction != static_cast<Point*>(0))
     {
         direction = *options->direction;
 
-    }  /* |if (options->direction == 0)|  */
+    }  /* |if (options->direction == static_cast<Point*>(0))|  */
   
 
 
@@ -412,7 +412,7 @@ Added code to this section.
         base = static_cast<Path*>(e); 
         ellipses.push_back(e);
 
-        if (options->axis_y != 0)
+        if (options->axis_y != ZERO_REAL)
             axis_y = *options->axis_y;
         else
             axis_y = 1;
@@ -451,7 +451,7 @@ Added code to this section.
 
         center.set(0, .5 * axis_y, 0);
 
-        if (options->center != 0)
+        if (options->center != static_cast<Point*>(0))
            shift(*options->center - center);
 
 
@@ -469,7 +469,7 @@ Added code to this section.
         type = CIRCULAR_CYLINDER_TYPE;
 
 
-        if (options->radius != 0)
+        if (options->radius != ZERO_REAL)
            radius = *options->radius;
         else if (   (options->axis_x && !options->axis_z)
                  || (   options->axis_x && options->axis_z
@@ -547,7 +547,7 @@ Added code to this section.
 
         center.set(0, .5 * axis_y, 0);
 
-        if (options->center != 0)
+        if (options->center != static_cast<Point*>(0))
            shift(*options->center - center);
 
 
@@ -849,7 +849,7 @@ Cylinder::get_base_center(void* v)
 
 @q **** (4)@> 
    
-    if (type == CIRCULAR_CYLINDER_TYPE && base != 0)
+    if (type == CIRCULAR_CYLINDER_TYPE && base != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -861,7 +861,7 @@ Cylinder::get_base_center(void* v)
 
 @q **** (4)@> 
 
-    else if (type == ELLIPTICAL_CYLINDER_TYPE && base != 0)
+    else if (type == ELLIPTICAL_CYLINDER_TYPE && base != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -904,7 +904,7 @@ Cylinder::get_cap_center(void* v)
 
     Point* p;
 
-    if (type == CIRCULAR_CYLINDER_TYPE && cap != 0)
+    if (type == CIRCULAR_CYLINDER_TYPE && cap != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -915,7 +915,7 @@ Cylinder::get_cap_center(void* v)
 
 @q **** (4)@> 
 
-    else if (type == ELLIPTICAL_CYLINDER_TYPE && cap != 0)
+    else if (type == ELLIPTICAL_CYLINDER_TYPE && cap != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
