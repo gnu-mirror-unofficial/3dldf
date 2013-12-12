@@ -620,7 +620,7 @@ Added this section.
    {
       X = bp.pt;
 
-      if (isect_pv != 0)
+      if (isect_pv != static_cast<Pointer_Vector<Point>*>(0))
          *isect_pv += create_new<Point>(X);
 
 #if DEBUG_COMPILE
@@ -671,7 +671,7 @@ Added this section.
    {
       Y = bp.pt;
 
-      if (isect_pv != 0)
+      if (isect_pv != static_cast<Pointer_Vector<Point>*>(0))
          *isect_pv += create_new<Point>(Y);
 
 #if DEBUG_COMPILE
@@ -722,7 +722,7 @@ Added this section.
    {
       Z = bp.pt;
 
-      if (isect_pv != 0)
+      if (isect_pv != static_cast<Pointer_Vector<Point>*>(0))
          *isect_pv += create_new<Point>(Z);
 
 #if DEBUG_COMPILE
@@ -847,7 +847,7 @@ Conic_Section::are_on_conic_section(Pointer_Vector<Point>* pv,
 @
 @<Define |Conic_Section| functions@>=
    
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Point>*>(0))
    {
        cerr_strm << thread_name << "ERROR!  "
                  << "In `Conic_Section::are_on_conic_section':"
@@ -859,7 +859,7 @@ Conic_Section::are_on_conic_section(Pointer_Vector<Point>* pv,
        return false;
 
 
-   }  /* |if (pv == 0)|  */
+   }  /* |if (pv == static_cast<Pointer_Vector<Point>*>(0))|  */
 
 @q ***** (5)@> 
 @
@@ -1052,13 +1052,13 @@ Conic_Section::generate(Pointer_Vector<Point>* pv,
 Added this section.
 \ENDLOG
 
-@q ***** (5) Error handling:  |pv == 0|.@> 
-@ Error handling:  |pv == 0|.
+@q ***** (5) Error handling:  |pv == static_cast<Pointer_Vector<Point>*>(0)|.@> 
+@ Error handling:  |pv == static_cast<Pointer_Vector<Point>*>(0)|.
 \initials{LDF 2007.07.15.}
 
 @<Define |Conic_Section| functions@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Point>*>(0))
    {
         cerr_strm << thread_name << "ERROR!  In `Conic_Section::generate':"
                   << endl 
@@ -1071,7 +1071,7 @@ Added this section.
 
        return 0;
 
-   }  /* |if (pv == 0)|  */
+   }  /* |if (pv == static_cast<Pointer_Vector<Point>*>(0))|  */
 
 @q ***** (5) Error handling:  |*pv| doesn't contain enough |Points|.@> 
 @ Error handling:  |*pv| doesn't contain enough |Points|.
@@ -1267,7 +1267,7 @@ coplanarity, so |!test_points| is passed to
 
    bool XYZ_set = false;
 
-   if (isect_pv != 0 && isect_pv->v.size() >= 3)
+   if (isect_pv != static_cast<Pointer_Vector<Point>*>(0) && isect_pv->v.size() >= 3)
    {
       X = *isect_pv->v[0];
       Y = *isect_pv->v[1];
@@ -1901,7 +1901,7 @@ Conic_Section::show(string text, char coords,
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
