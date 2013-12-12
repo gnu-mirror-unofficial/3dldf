@@ -322,7 +322,7 @@ Ellipse::Ellipse(const Point& ccenter,
 
     Transform t;
 
-    if (angle_x != 0 || angle_y != 0 || angle_z != 0)
+    if (angle_x != ZERO_REAL || angle_y != ZERO_REAL || angle_z != ZERO_REAL)
       t.rotate(angle_x, angle_y, angle_z);
     
     t.shift(center);
@@ -483,12 +483,12 @@ Ellipse::Ellipse(const Point& ccenter,
    temp_center *= temp_pt *= t.rotate(0, -angle);
 
 
-   if (temp_pt.get_x() < 0 || temp_pt.get_z() != 0)
+   if (temp_pt.get_x() < ZERO_REAL || temp_pt.get_z() != ZERO_REAL)
          temp_center *= normal *= temp_pt *= t.rotate(0, 2 * angle);
 
 @q **** (4)@> 
 
-   if (temp_pt.get_x() < 0 || temp_pt.get_z() != 0)
+   if (temp_pt.get_x() < ZERO_REAL || temp_pt.get_z() != ZERO_REAL)
       {
           cerr_strm << thread_name << "ERROR!  In `Ellipse' constructor:"
                     << endl  
@@ -503,7 +503,7 @@ Ellipse::Ellipse(const Point& ccenter,
 
           focus_0 = focus_1 = INVALID_POINT;
                   
-      }  /* |if (temp_pt.get_x() < 0 || temp_pt.get_z() != 0)|  */
+      }  /* |if (temp_pt.get_x() < ZERO_REAL || temp_pt.get_z() != ZERO_REAL)|  */
   
    else 
       {
@@ -736,16 +736,16 @@ Ellipse::reflect_in(const Plane& p,
 
   Ellipse* ellipse_reflection = static_cast<Ellipse*>(v);  
 
-@q *** (3) If |ellipse_reflection == 0|, try to allocate memory @>
-@q *** (3) on the free store for it.                           @> 
+@q *** (3) If |ellipse_reflection == static_cast<Ellipse*>(0)|, @>
+@q *** (3) try to allocate memory on the free store for it.     @> 
 
-@ If |ellipse_reflection == 0|, try to allocate memory 
-on the free store for it.                            
+@ If |ellipse_reflection == static_cast<Ellipse*>(0)|, 
+try to allocate memory on the free store for it.                            
 \initials{LDF 2004.10.12.}
 
 @<Define |Ellipse| functions@>=
 
- if (ellipse_reflection == 0)
+ if (ellipse_reflection == static_cast<Ellipse*>(0))
  {
   try
      {
@@ -780,7 +780,7 @@ on the free store for it.
   
 @q *** (3).@> 
 
-  } /* |if (ellipse_reflection == 0)|  */
+  } /* |if (ellipse_reflection == static_cast<Ellipse*>(0))|  */
 
 @q *** (3) Call |Reg_Cl_Plane_Curve::reflect_in()|.@> 
 
@@ -970,7 +970,7 @@ Ellipse::reflect_off(const Plane& p,
 
 @q *** (3).@> 
 
-   if (v == 0)
+   if (v == static_cast<void*>(0))
       {
           cerr_strm << thread_name << "ERROR!  In `Ellipse::reflect_off()':"
                     << endl << "`void* v' argument is null.  "
@@ -982,7 +982,7 @@ Ellipse::reflect_off(const Plane& p,
 
           return 1;
 
-      } /* |if (v == 0)|  */
+      } /* |if (v == static_cast<void*>(0))|  */
 
 
   Pointer_Vector<Ellipse>* ellipse_ptr_vector 
@@ -3096,7 +3096,7 @@ const unsigned short Z_Y   = 2;
 #if 0 
 const unsigned short OTHER = 3;
 #endif 
-if (normal_x == 0 && normal_y == 0 && normal_z == 0)
+if (normal_x == ZERO_REAL && normal_y == ZERO_REAL && normal_z == ZERO_REAL)
   {
     cerr << "ERROR! In Ellipse::intersection_points():\n"
       << "Normal == 0. "
@@ -3105,7 +3105,7 @@ if (normal_x == 0 && normal_y == 0 && normal_z == 0)
     return INVALID_BOOL_POINT_QUADRUPLE;
   }
           
-else if (normal_x == 0 && normal_y == 0) /* Ellipse lies in a plane
+else if (normal_x == ZERO_REAL && normal_y == ZERO_REAL) /* Ellipse lies in a plane
                                             parallel to x-y plane. */
   {
     if (DEBUG)
@@ -3114,7 +3114,7 @@ else if (normal_x == 0 && normal_y == 0) /* Ellipse lies in a plane
     orientation = X_Y;
   }
 
-else if (normal_x == 0 && normal_z == 0) /* Ellipse lies in a plane
+else if (normal_x == ZERO_REAL && normal_z == ZERO_REAL) /* Ellipse lies in a plane
                                             parallel to x-z plane. */
   {
     if (DEBUG)
@@ -3122,7 +3122,7 @@ else if (normal_x == 0 && normal_z == 0) /* Ellipse lies in a plane
     orientation = X_Z;      
   }
 
-else if (normal_z == 0 && normal_y == 0) /* Ellipse lies in a plane 
+else if (normal_z == ZERO_REAL && normal_y == ZERO_REAL) /* Ellipse lies in a plane 
                                             parallel to z-y plane. */
   {
     if (DEBUG)
@@ -3265,7 +3265,7 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
         cerr << "denominator == " << denominator << endl;
       }
     
-    if (denominator == 0)
+    if (denominator == ZERO_REAL)
       {
         if (DEBUG)
           cerr << "x == INVALID_REAL.\n";
@@ -3301,7 +3301,7 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
         cerr << "denominator == " << denominator << endl;
       }
 
-    if (denominator == 0)
+    if (denominator == ZERO_REAL)
       {
         if (DEBUG)
           cerr << "y == INVALID_REAL.\n";
@@ -3350,7 +3350,7 @@ or $y = 0$ (but not both).
         pt20.set( x,  y, 0);
         pt21.set(-x, -y, 0);       
  
-        if (y != 0 && x != 0)
+        if (y != ZERO_REAL && x != ZERO_REAL)
           {
             pt22.set( x, -y, 0);
             pt23.set(-x,  y, 0);
@@ -3366,7 +3366,7 @@ or $y = 0$ (but not both).
         pt20.set( x, 0,  y);
         pt21.set(-x, 0, -y); 
 
-        if (y != 0 && x != 0)
+        if (y != ZERO_REAL && x != ZERO_REAL)
           {
             pt22.set( x, 0, -y);
             pt23.set(-x, 0,  y);
@@ -3382,7 +3382,7 @@ or $y = 0$ (but not both).
         pt20.set(0,  y,  x);
         pt21.set(0, -y, -x); 
         
-        if (x != 0 && y != 0)
+        if (x != ZERO_REAL && y != ZERO_REAL)
           {
             pt22.set(0,  y, -x);
             pt23.set(0, -y,  x);
@@ -3554,7 +3554,7 @@ else
             continue;
           } /* |if|.  End of ``Found an intersection point''.  */
 
-        else if (i == 0)
+        else if (i == ZERO_REAL)
           {
             location_switch = curr_location;
             save_angle = 0;
