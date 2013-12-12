@@ -1064,7 +1064,7 @@ for ( unsigned short i = 0; i < filename_array_ctr; ++i)
 
       curr_scanner_node = Scanner_Type::create(s, run_state_initial, true);
 
-      if (curr_scanner_node == 0)
+      if (curr_scanner_node == static_cast<Scanner_Node>(0))
          {
             cerr << "ERROR! In main(): "
                  << "Failed to open input and/or output files for "
@@ -1321,7 +1321,7 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
           
         } /* |if ( vector_size  == 0)| */ @;
 
-@q *** At least one filename argument.  @>
+@q *** (3) At least one filename argument.  @>
 @ At least one filename argument.
 
 \LOG
