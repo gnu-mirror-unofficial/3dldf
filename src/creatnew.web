@@ -192,7 +192,7 @@ create_new(const C* arg, Scanner_Node scanner_node = 0)
      }
 #endif /* |DEBUG_COMPILE|  */ 
 
-  if (arg != 0)
+  if (arg != static_cast<const C*>(0))
     *obj = *arg;
 
   return obj;
