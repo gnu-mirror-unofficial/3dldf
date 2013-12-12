@@ -71,7 +71,7 @@ Added this rule.
    Scan_Parse::set_arc_rule_func_0(@=$2@>, 
                                    parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -109,7 +109,7 @@ Added this rule.
    else
       scanner_node->arc_options = new Arc_Options;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -129,7 +129,7 @@ Added this rule.
 @=set_arc_option_list: set_arc_option_list set_arc_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -180,7 +180,7 @@ Added this rule.
 
    LDF 2007.11.25.  */ 
    
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -201,7 +201,7 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->arc_options->increment_value 
       = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

@@ -181,7 +181,7 @@ Added this rule.
          scanner_node->macro_untyped_parameter_vector.clear();
          scanner_node->macro_typed_parameter_vector.clear();
 
-         @=$$@> = 0;         
+         @=$$@> = static_cast<void*>(0);         
 
       }  /* |if (entry == 0)|  */
 
@@ -268,7 +268,7 @@ returning a non-zero value.
                 scanner_node->macro_typed_parameter_vector.clear();
 
 
-                @=$$@> = 0;
+                @=$$@> = static_cast<void*>(0);
      
             }  /* |if (status != 0)|  */
 
@@ -277,7 +277,7 @@ returning a non-zero value.
                scanner_node->macro_untyped_parameter_vector.clear();
                scanner_node->macro_typed_parameter_vector.clear();
 
-               @=$$@> = 0;
+               @=$$@> = static_cast<void*>(0);
 
             }  /* |else| (|status == 0|)  */
 
@@ -353,7 +353,7 @@ Rewrote this rule.
          scanner_node->macro_untyped_parameter_vector.clear();
          scanner_node->macro_typed_parameter_vector.clear();
 
-         @=$$@> = 0;         
+         @=$$@> = static_cast<void*>(0);         
 
       }  /* |if (entry == 0)|  */
 
@@ -482,7 +482,7 @@ returning a non-zero value.
                 scanner_node->macro_typed_parameter_vector.clear();
 
 
-                @=$$@> = 0;
+                @=$$@> = static_cast<void*>(0);
      
             }  /* |if (status != 0)|  */
 
@@ -491,7 +491,7 @@ returning a non-zero value.
                scanner_node->macro_untyped_parameter_vector.clear();
                scanner_node->macro_typed_parameter_vector.clear();
 
-               @=$$@> = 0;
+               @=$$@> = static_cast<void*>(0);
 
             }  /* |else| (|status == 0|)  */
 
@@ -526,7 +526,7 @@ Added this rule.
    macro_vector_definition_func(static_cast<Scanner_Node>(parameter),
                                 static_cast<Id_Map_Entry_Node>(@=$2@>)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -557,7 +557,7 @@ Added this rule.
 @=typed_parameter_list: /* Empty  */@>@/ 
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q ** (2) typed_parameter_list --> LEFT_BRACE typed_parameter_sublist RIGHT_BRACE.@> 
@@ -607,7 +607,7 @@ Added this rule.
         parameter)->macro_typed_parameter_vector.push_back(
             make_pair(@=$1@>, @=$2@>));   
    
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -631,7 +631,7 @@ Added this rule.
       parameter)->macro_typed_parameter_vector.push_back(
          make_pair(@=$3@>, @=$4@>));   
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -661,7 +661,7 @@ Added this rule.
 @<Define rules@>=
 @=untyped_parameter_list: /* Empty  */@>@/ 
 {
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -680,7 +680,7 @@ Added this rule.
 @<Define rules@>=
 @=untyped_parameter_list: LEFT_PARENTHESIS untyped_parameter_sublist RIGHT_PARENTHESIS@>@/ 
 {
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -714,7 +714,7 @@ Added this rule.
       parameter)->macro_untyped_parameter_vector.push_back(
          @=$1@>);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -739,7 +739,7 @@ Added this rule.
       parameter)->macro_untyped_parameter_vector.push_back(
          @=$3@>);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -780,7 +780,7 @@ Changed |defun_call| and |defun_variable| to
 
    macro_call_func(static_cast<Scanner_Node>(parameter),
                    static_cast<Id_Map_Entry_Node>(@=$1@>));
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -805,7 +805,7 @@ Added this rule.
    macro_call_func(static_cast<Scanner_Node>(parameter),
                    static_cast<Id_Map_Entry_Node>(@=$1@>));
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -829,7 +829,7 @@ Added this rule.
     macro_call_func(static_cast<Scanner_Node>(parameter),
                     static_cast<Id_Map_Entry_Node>(@=$1@>),
                     true);
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

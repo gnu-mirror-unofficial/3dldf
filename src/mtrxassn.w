@@ -122,7 +122,7 @@ Added this rule.
                                                            parameter); 
   }   
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -166,7 +166,7 @@ Added this rule.
   }   
 #endif 
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -201,7 +201,7 @@ Added this rule.
         = static_cast<Matrix*>(entry->object)->set_identity(parameter); 
   }   
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -235,7 +235,7 @@ Added this rule.
         = static_cast<Matrix*>(entry->object)->set_zero(parameter); 
   }   
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -269,7 +269,7 @@ Added this rule.
         = static_cast<Matrix*>(entry->object)->set_one(parameter); 
   }   
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -304,7 +304,7 @@ Added this rule.
         = static_cast<Matrix*>(entry->object)->set_all(@=$3@>, parameter); 
   }   
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 

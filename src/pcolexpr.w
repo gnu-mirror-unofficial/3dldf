@@ -161,7 +161,7 @@ Added this rule.
 
           delete c;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -176,7 +176,7 @@ Added this rule.
       {
           delete c;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -236,7 +236,7 @@ Added this rule.
 
    if (c == 0)
       {
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (c == 0)|  */
 
@@ -290,7 +290,7 @@ Added this rule.
                 delete c;
                 c = 0;
 
-                @=$$@> = 0;
+                @=$$@> = static_cast<void*>(0);
 
 
             }  /* |if (r == 0)|  */
@@ -380,7 +380,7 @@ Added this rule.
    if (c == 0)
       {
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (c == 0)|  */
 
@@ -432,7 +432,7 @@ Added this rule.
 
    if (entry == 0 || entry->object == 0)
       {
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -518,7 +518,7 @@ added the rule ``\§color tertiary> $\longrightarrow$
           c = 0;
           d = 0;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (c == 0 || d == 0)|  */
 
@@ -575,7 +575,7 @@ Added this rule.
           c = 0;
           d = 0;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (c == 0 || d == 0)|  */
 

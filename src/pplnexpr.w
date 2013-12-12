@@ -137,7 +137,7 @@ Added this rule.
       Plane v = q.get_plane();
 
       if (v == INVALID_PLANE)
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
       else
       {
           @=$$@> = static_cast<void*>(new Plane(v));  
@@ -147,7 +147,7 @@ Added this rule.
 
    else
    {
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    }
 
    delete p0;
@@ -390,7 +390,7 @@ Added this rule.
           delete c;
           c = 0;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -420,7 +420,7 @@ Added this rule.
           delete c;
           c = 0;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 

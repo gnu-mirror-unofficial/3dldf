@@ -90,7 +90,7 @@ possible to use |beginfig| in loops.
 
    Scan_Parse::beginfig_func(scanner_node, i);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -170,7 +170,7 @@ Rewrote this rule.  It now calls |output_command_func()|.
 
   Scan_Parse::output_command_func(scanner_node);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
  
 };
 
@@ -196,7 +196,7 @@ Added this rule.
 
    delete s;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -227,7 +227,7 @@ Added this rule.
 @=character_comment_optional: /* Empty  */@>
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -263,7 +263,7 @@ Added this rule.
 @=command: ENDCHAR with_clause_output_list@>@/
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
  
 };
 
@@ -313,7 +313,7 @@ and unnecessary.
 
     Scan_Parse::output_command_func(scanner_node);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -342,7 +342,7 @@ Added this rule.
 @=with_clause_output_list: /* Empty.  */@>
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -361,7 +361,7 @@ Added this rule.
 @=with_clause_output_list: with_clause_output_list with_clause_output@>
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 

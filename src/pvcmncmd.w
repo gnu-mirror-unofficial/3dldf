@@ -107,7 +107,7 @@ Added this rule.
 #endif 
       }  /* |if (status != 0)|  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -149,7 +149,7 @@ value to |Scan_Parse::cull_func|.
                                    parameter),
                                 @=$3@>);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -194,7 +194,7 @@ Change the way the options are handled.
                                 static_cast<Transform*>(0),
                                 static_cast<Point*>(0));
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -381,7 +381,7 @@ Added this rule.
 
 @q ***** (5)@> 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

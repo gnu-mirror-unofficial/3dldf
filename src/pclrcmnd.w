@@ -79,7 +79,7 @@ Removed code from this rule.  I'm about to start putting it in
    Scan_Parse::clear_vector_func(static_cast<Scanner_Node>(parameter), 
                                  static_cast<Id_Map_Entry_Node>(@=$2@>)); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -112,7 +112,7 @@ Removed debugging code.
 
   if (entry == 0 || entry->object == 0)
    {
-       @=$$@> = 0;
+       @=$$@> = static_cast<void*>(0);
 
    } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -128,7 +128,7 @@ Removed debugging code.
   
    p->clear_connectors(); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -157,7 +157,7 @@ Added this rule.
 
   if (entry == 0 || entry->object == 0)
    {
-       @=$$@> = 0;
+       @=$$@> = static_cast<void*>(0);
 
    } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -173,7 +173,7 @@ Added this rule.
 
    entry->object = 0;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -201,7 +201,7 @@ Added this rule.
 
   if (entry == 0) 
    {
-       @=$$@> = 0;
+       @=$$@> = static_cast<void*>(0);
 
    } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -221,7 +221,7 @@ signal an error or issue a warning.
    if (entry->object)
       static_cast<Picture*>(entry->object)->clear(); 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -242,7 +242,7 @@ Added this rule.
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
     delete static_cast<Transform*>(entry->object);
     entry->object = 0;
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 

@@ -193,7 +193,7 @@ Removed debugging code.
    {
       delete s;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
    } /* |if (t == 0)|  */
 
@@ -276,7 +276,7 @@ Added this rule.
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
    @=$$@> = (c) ?  c->get_ellipse(static_cast<Scanner_Node>(parameter))
-                :  @=$$@> = 0;
+                :  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -383,7 +383,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -399,7 +399,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 

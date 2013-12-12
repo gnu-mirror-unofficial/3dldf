@@ -121,7 +121,7 @@ It is now in the following |else| clause.
   if (entry == 0 || entry->object == 0)
     {
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -2645,7 +2645,7 @@ Added this rule.
        {
            delete p;
            delete e;
-           @=$$@> = 0;
+           @=$$@> = static_cast<void*>(0);
        }
 
     else 
@@ -2683,8 +2683,6 @@ Added this rule.
 @=boolean_primary: bool_point_expression IS_ON_ELLIPSE ellipse_expression@>@/
 {
 
-
-
     Bool_Point* bp = static_cast<Bool_Point*>(@=$1@>);    
 
     Ellipse* e = static_cast<Ellipse*>(@=$3@>);
@@ -2693,7 +2691,7 @@ Added this rule.
        {
            delete bp;
            delete e;
-           @=$$@> = 0;
+           @=$$@> = static_cast<void*>(0);
        }
 
     else 
@@ -2922,7 +2920,7 @@ Added this rule.
 @<Define rules@>=
 @=predicate_clause: /* Empty */@>@/
 {
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 }   
 
 
@@ -2945,7 +2943,7 @@ Added this rule.
    scanner_node->tolerance = new real;
    *(scanner_node->tolerance) = @=$2@>; 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 }   
 
 @q ** (2) boolean_primary --> path_expression IS_PARALLEL @>

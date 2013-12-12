@@ -217,7 +217,7 @@ Added this rule.
 @=get_conic_section_lattice_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -254,7 +254,7 @@ Added this rule.
        scanner_node->conic_section_lattice_options->do_cull 
           = true;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -277,7 +277,7 @@ Added this rule.
       scanner_node->conic_section_lattice_options->do_cull 
          = false;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -300,7 +300,7 @@ Added this rule.
        scanner_node->conic_section_lattice_options->do_rectify 
           = true;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -323,7 +323,7 @@ Added this rule.
       scanner_node->conic_section_lattice_options->do_rectify 
          = false;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -347,7 +347,7 @@ Added this rule.
        scanner_node->conic_section_lattice_options->tolerance 
           = @=$2@>;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -376,7 +376,7 @@ Removed \§boolean expresssion> from the right-hand side.
        scanner_node->conic_section_lattice_options->do_test 
           = true;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -399,7 +399,7 @@ Added this rule.
       scanner_node->conic_section_lattice_options->do_test 
          = false;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -425,7 +425,7 @@ Added this rule.
       scanner_node->conic_section_lattice_options->transform
          = static_cast<Transform*>(@=$2@>);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

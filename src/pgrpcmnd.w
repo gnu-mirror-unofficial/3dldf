@@ -248,7 +248,7 @@ Added this rule.
 @=save_command: SAVE@>@/
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 

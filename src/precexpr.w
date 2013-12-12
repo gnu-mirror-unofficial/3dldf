@@ -204,7 +204,7 @@ Changed \§numeric expression> to \§numeric secondary> and
 
       delete s;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
    } /* |if (t == 0)|  */
 
@@ -308,7 +308,7 @@ Now deleting |Ellipse* e|.
       @=$$@> = static_cast<void*>(r); 
    }
    else 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -344,7 +344,7 @@ Now deleting |Ellipse* e|.
       @=$$@> = static_cast<void*>(r); 
    }
    else
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -463,7 +463,7 @@ Added this rule.
 
           delete r;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -491,7 +491,7 @@ Added this rule.
 
           delete r;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -544,7 +544,7 @@ Added this rule.
       Rectangle r(*p0, *p1, *p2, *p3);
 
       if (r.size() != 4)
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
       else
          @=$$@> = static_cast<void*>(create_new<Rectangle>(r)); 
 
@@ -552,7 +552,7 @@ Added this rule.
 
    else
    {
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    }
 
    delete p0;

@@ -264,7 +264,7 @@ Added this rule.
       {
           delete bp;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (bpv == 0)|  */
 
@@ -280,7 +280,7 @@ Added this rule.
 
           delete bp;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (bpv->ctr == 0)|  */
 

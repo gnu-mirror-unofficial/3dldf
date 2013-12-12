@@ -3132,7 +3132,7 @@ Added this rule.
           cerr_strm.str("");
 
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -3161,7 +3161,7 @@ Added this rule.
                  cerr_message(cerr_strm, error_stop_value);
                  cerr_strm.str("");
 
-                 @=$$@> = 0;                
+                 @=$$@> = static_cast<void*>(0);                
 
 
              }  /* |if (pv->ctr <= 0)|  */
@@ -3200,7 +3200,7 @@ Added this rule.
                      cerr_message(cerr_strm, error_stop_value);
                      cerr_strm.str("");
 
-                     @=$$@> = 0;                                 
+                     @=$$@> = static_cast<void*>(0);                                 
 
 
                  }  /* |if (array_entry == 0)|  */
@@ -3375,7 +3375,7 @@ Added this rule.
           cerr_strm.str("");
 
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -3404,7 +3404,7 @@ Added this rule.
                  cerr_message(cerr_strm, error_stop_value);
                  cerr_strm.str("");
 
-                 @=$$@> = 0;                
+                 @=$$@> = static_cast<void*>(0);                
 
 
              }  /* |if (pv->ctr <= 0)|  */
@@ -3443,7 +3443,7 @@ Added this rule.
                      cerr_message(cerr_strm, error_stop_value);
                      cerr_strm.str("");
 
-                     @=$$@> = 0;                                 
+                     @=$$@> = static_cast<void*>(0);                                 
 
 
                  }  /* |if (array_entry == 0)|  */

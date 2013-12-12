@@ -135,7 +135,7 @@ This condition occurs legitimately when one tries to show an
    if (entry == 0 || entry->object == 0)
      {
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -503,7 +503,7 @@ Added this rule.
    Plane* q = static_cast<Plane*>(@=$4@>);
 
    if (p == 0 || q == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
 
@@ -542,7 +542,7 @@ Added this rule.
    Reg_Polygon* r = static_cast<Reg_Polygon*>(@=$4@>);
 
    if (p == 0 || r == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
 
@@ -587,7 +587,7 @@ Added this rule.
       delete f;
    }
    else
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -615,7 +615,7 @@ Added this rule.
    }
 
    else
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -642,7 +642,7 @@ Added this rule.
       delete f;
    }
    else
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -828,14 +828,14 @@ Added this rule.
    {
        Point p = f->get_normal();
        if (p == INVALID_POINT)
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
        else
           @=$$@> = static_cast<void*>(create_new<Point>(p));
 
        delete f;
    }
    else
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1033,7 +1033,7 @@ Added this rule.
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
    if (c == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
        Point* p = create_new<Point>(c->get_approx_center());
@@ -1061,7 +1061,7 @@ Added this rule.
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
    if (c == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
        Point* p = create_new<Point>(c->get_true_center());
@@ -1089,7 +1089,7 @@ Added this rule.
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
    if (c == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
        Point* p = create_new<Point>(c->get_point_6());
@@ -1147,7 +1147,7 @@ Changed \§conic section lattice primary> to
 
        delete scanner_node->conic_section_lattice_options;  
        scanner_node->conic_section_lattice_options = 0;
-       @=$$@> = 0;    
+       @=$$@> = static_cast<void*>(0);    
    }
 
 };
@@ -1210,7 +1210,7 @@ and |conic_section_lattice_variable| to |conic_section_lattice_expression|.
            scanner_node->conic_section_lattice_options = 0;
         }
 
-        @=$$@> = 0;    
+        @=$$@> = static_cast<void*>(0);    
 
     }  /* |else|  */
 
@@ -1256,7 +1256,7 @@ Added this rule.
       c = 0;
    }
    else
-      @=$$@> = 0;    
+      @=$$@> = static_cast<void*>(0);    
 };
 
 @q *** (3) with_conic_section_lattice_option_list and @> 
@@ -1317,7 +1317,7 @@ Added this rule.
 @=with_conic_section_lattice_option@>@/
 {
    
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1341,7 +1341,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_cull = true;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_NO_CULL @> 
@@ -1364,7 +1364,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_cull = false;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: @> 
@@ -1389,7 +1389,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->tolerance = @=$2@>;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1427,7 +1427,7 @@ Added this rule.
 
    }
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: @> 
@@ -1459,7 +1459,7 @@ Revised this rule.
               increment_vector.push_back(@=$2@>);
    }
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1502,7 +1502,7 @@ Added this rule.
    }  /* |if|  */
 
    delete pv;
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: @> 
@@ -1543,7 +1543,7 @@ Added this rule.
    }  /* |if|  */
 
    delete pv;
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_RECTIFY @> 
@@ -1566,7 +1566,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_rectify = true;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_NO_RECTIFY @> 
@@ -1589,7 +1589,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_rectify = false;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_SHIFT.@> 
@@ -1612,7 +1612,7 @@ Added this rule.
    if (scanner_node && scanner_node->conic_section_lattice_options)
         scanner_node->conic_section_lattice_options->do_shift = true;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_NO_SHIFT.@> 
@@ -1635,7 +1635,7 @@ Added this rule.
    if (scanner_node && scanner_node->conic_section_lattice_options)
         scanner_node->conic_section_lattice_options->do_shift = false;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_TEST @> 
@@ -1658,7 +1658,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_test = true;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: WITH_NO_TEST @> 
@@ -1681,7 +1681,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_test = false;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: @> 
@@ -1705,7 +1705,7 @@ Added this rule.
    if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_transform = true;      
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1734,7 +1734,7 @@ Added this rule.
          = static_cast<Transform*>(@=$2@>);      
    }
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) with_conic_section_lattice_option: @> 
@@ -1760,7 +1760,7 @@ Added this rule.
       scanner_node->conic_section_lattice_options->do_transform = false;      
    }
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q ** (2) point_primary --> GET_POINT numeric_secondary polygon_primary@>
@@ -2630,7 +2630,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -2658,7 +2658,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -3215,7 +3215,7 @@ latter case, the pointer is deleted.
       
       delete t;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     }  /* |if (p == 0)|  */@;
 
@@ -3245,7 +3245,7 @@ latter case, the pointer is deleted.
       delete p;
       delete t;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     }  /* |if (p == 0 || *p == INVALID_POINT)|  */@;
 

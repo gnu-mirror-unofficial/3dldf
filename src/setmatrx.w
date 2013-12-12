@@ -74,7 +74,7 @@ Added this rule.
                                       @=$6@>, 
                                       parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -110,7 +110,7 @@ Added this rule.
    else
       scanner_node->matrix_options = new Matrix_Options;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -130,7 +130,7 @@ Added this rule.
 @=set_matrix_option_list: set_matrix_option_list set_matrix_option@>@/        
 {
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -165,7 +165,7 @@ Added this rule.
    
    options->type = Matrix::MATRIX_DOUBLE_TYPE;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 @q ** (2) set_matrix_option_list --> WITH_TYPE FLOAT_TYPE_MATRIX.@>   
@@ -186,7 +186,7 @@ Added this rule.
    
    options->type = Matrix::MATRIX_FLOAT_TYPE;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -208,7 +208,7 @@ Added this rule.
    
    options->type = Matrix::MATRIX_COMPLEX_TYPE;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

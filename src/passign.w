@@ -710,7 +710,7 @@ I've managed to get rid of it, but I don't know what it was.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -744,7 +744,7 @@ failed.
          {
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -759,7 +759,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -834,7 +834,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -850,7 +850,7 @@ Added this rule.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
     }  /* |else|  */
 
@@ -2270,7 +2270,7 @@ Added this rule.
    if (entry == 0)
       {
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
         
       }  /* |if (entry == 0)| */        
 
@@ -2296,7 +2296,7 @@ Added this rule.
          if (entry_0 == 0 || entry_0->object == 0)
             {
 
-                @=$$@> = 0;
+                @=$$@> = static_cast<void*>(0);
 
             }  /* |if (entry_0 == 0 || entry_0->object == 0)|  */
 
@@ -2680,7 +2680,7 @@ Added this rule.
 
       delete b;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0)|  */
 
@@ -2771,7 +2771,7 @@ referenced by |boolean_variables|, |boolean_primaries|,
 
       delete p;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0)|  */
 
@@ -4000,7 +4000,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4044,7 +4044,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4109,7 +4109,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4153,7 +4153,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4218,7 +4218,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4262,7 +4262,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4336,7 +4336,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4379,7 +4379,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4454,7 +4454,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4497,7 +4497,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4571,7 +4571,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4616,7 +4616,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4694,7 +4694,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4737,7 +4737,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4811,7 +4811,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4854,7 +4854,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4928,7 +4928,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4971,7 +4971,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5065,7 +5065,7 @@ defined in \filename{scanprse.web}.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5108,7 +5108,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5173,7 +5173,7 @@ defined in \filename{scanprse.web}.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5218,7 +5218,7 @@ failed.
 
             delete bpv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5305,7 +5305,7 @@ defined in \filename{scanprse.web}.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5365,7 +5365,7 @@ failed.
             delete bpv;
             bpv = 0;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5431,7 +5431,7 @@ defined in \filename{scanprse.web}.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5475,7 +5475,7 @@ failed.
          {
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5548,7 +5548,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5590,7 +5590,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5662,7 +5662,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5704,7 +5704,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5776,7 +5776,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5818,7 +5818,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5894,7 +5894,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5938,7 +5938,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6013,7 +6013,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6057,7 +6057,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6132,7 +6132,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6176,7 +6176,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6251,7 +6251,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6296,7 +6296,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6372,7 +6372,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6414,7 +6414,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6488,7 +6488,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6530,7 +6530,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6604,7 +6604,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6645,7 +6645,7 @@ failed.
          {
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6762,7 +6762,7 @@ if |vector_type_assign<Polygon, Polygon>| failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6832,7 +6832,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6873,7 +6873,7 @@ failed.
          {
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6948,7 +6948,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6991,7 +6991,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7063,7 +7063,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7106,7 +7106,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7178,7 +7178,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7221,7 +7221,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7293,7 +7293,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7335,7 +7335,7 @@ failed.
          {
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7407,7 +7407,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7449,7 +7449,7 @@ failed.
          {
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7521,7 +7521,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7564,7 +7564,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7637,7 +7637,7 @@ Added this rule.
   if (entry == 0)
     {
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7680,7 +7680,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7762,7 +7762,7 @@ Now deleting |transformation_assignment_command|.
 
   delete static_cast<Transform*>(@=$1@>); 
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
    
 };
 

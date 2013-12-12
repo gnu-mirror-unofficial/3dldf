@@ -183,7 +183,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -269,7 +269,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -355,7 +355,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -452,7 +452,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -567,7 +567,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -674,7 +674,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -764,7 +764,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -920,7 +920,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1060,7 +1060,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1226,7 +1226,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1381,10 +1381,9 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) operation_assignment --> point_variable @> 
 @q **** (4) TIMES_ASSIGN numeric_expression.        @>
@@ -1509,7 +1508,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1664,7 +1663,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1890,7 +1889,7 @@ upon success and 0 upon failure.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1977,7 +1976,7 @@ upon success and 0 upon failure.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2100,7 +2099,7 @@ upon success and 0 upon failure.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2183,7 +2182,7 @@ upon success and 0 upon failure.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2325,7 +2324,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2455,7 +2454,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2717,7 +2716,7 @@ Added this section.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2795,7 +2794,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2861,11 +2860,9 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
-
-
 
 
 @q *** (3) |rectangles|.@>  
@@ -3015,7 +3012,7 @@ upon success and 0 upon failure.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3053,7 +3050,7 @@ Added this rule.
                                          @=$3@>,
                                          static_cast<Scanner_Node>(parameter));
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3185,7 +3182,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3342,7 +3339,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3470,7 +3467,7 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3592,7 +3589,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3718,11 +3715,9 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
-
-
 
 @q *** (3) |color_vectors|.@>  
 
@@ -3863,7 +3858,7 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3989,7 +3984,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4077,7 +4072,7 @@ Added this rule.
           delete position;
           delete direction; 
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
           
       }  /* |if (entry == 0)|  */
  
@@ -4208,7 +4203,7 @@ Added this rule.
                 delete position;
                 delete direction; 
 
-               @=$$@> = 0;
+               @=$$@> = static_cast<void*>(0);
  
             }  /* |if (status != 0)|  */
 
@@ -4219,7 +4214,7 @@ Added this rule.
                 delete position;
                 delete direction; 
  
-                @=$$@> = 0;
+                @=$$@> = static_cast<void*>(0);
 
            }  /* |else| (|status != 0|)  */
 
@@ -4369,7 +4364,7 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4457,7 +4452,7 @@ Moved this rule from \filename{passign.w} to this file
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4524,7 +4519,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4539,7 +4534,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -4700,7 +4695,7 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4825,7 +4820,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -4904,7 +4899,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -4970,7 +4965,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -4985,7 +4980,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -5040,7 +5035,7 @@ Added this rule.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -5083,7 +5078,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5102,7 +5097,7 @@ Added this rule.
                                                           pv);          
         delete pv;
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
 
 }; 
@@ -5227,7 +5222,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -5306,7 +5301,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5372,7 +5367,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5387,7 +5382,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -5441,7 +5436,7 @@ Added this rule.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -5484,7 +5479,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5503,7 +5498,7 @@ Added this rule.
                                                           pv);          
         delete pv;
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
 
 }; 
@@ -5550,7 +5545,7 @@ Added this rule.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -5593,7 +5588,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5612,7 +5607,7 @@ Added this rule.
                                                           pv);          
         delete pv;
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
 
 }; 
@@ -5660,7 +5655,7 @@ Added this rule.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -5702,7 +5697,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5722,7 +5717,7 @@ Added this rule.
                                  pv);          
         delete pv;
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
 
 }; 
@@ -5773,7 +5768,7 @@ Removed debugging code.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -5853,7 +5848,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -5919,7 +5914,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -5934,7 +5929,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -6067,7 +6062,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -6146,7 +6141,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6212,7 +6207,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6227,7 +6222,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -6359,7 +6354,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -6438,7 +6433,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6504,7 +6499,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6519,7 +6514,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -6651,7 +6646,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -6730,7 +6725,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6796,7 +6791,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -6811,7 +6806,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -6865,7 +6860,7 @@ Added this rule.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -6908,7 +6903,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -6927,7 +6922,7 @@ Added this rule.
                                                           pv);          
         delete pv;
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
 
 }; 
@@ -6974,7 +6969,7 @@ Added this rule.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -7017,7 +7012,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7036,7 +7031,7 @@ Added this rule.
                                                           pv);          
         delete pv;
 
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
 
 }; 
@@ -7164,7 +7159,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -7243,7 +7238,7 @@ Added this rule.
 
       delete pv;
 
-      @=$$@> = 0; 
+      @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)|  */
 
@@ -7309,7 +7304,7 @@ failed.
 
             delete pv;
 
-            @=$$@> = 0;
+            @=$$@> = static_cast<void*>(0);
 
          } /* |if (status != 0)|  */
 
@@ -7324,7 +7319,7 @@ failed.
       {
          delete pv;
 
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
  
       }  /* |else| (|status == 0|)  */
 
@@ -7459,7 +7454,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 

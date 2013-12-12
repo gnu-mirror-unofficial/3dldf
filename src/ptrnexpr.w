@@ -166,7 +166,7 @@ Added this rule.
       {
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -182,7 +182,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -249,7 +249,7 @@ Added this rule.
        delete f;
     }
     else
-       @=$$@> = 0;
+       @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -283,7 +283,7 @@ Added this rule.
        delete c;
     }
     else
-       @=$$@> = 0;
+       @=$$@> = static_cast<void*>(0);
 };
 
 

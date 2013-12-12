@@ -102,7 +102,7 @@ Added this rule.
   if (entry == 0 || entry->object == 0)
     {
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -1313,7 +1313,7 @@ this file(\filename{pbpvexpr.w}).
      Path*      p = static_cast<Path*>(@=$3@>);
 
      if (!(e && p))
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      else 
         @=$$@> = e->intersection_points(p, static_cast<Scanner_Node>(parameter));
@@ -1353,7 +1353,7 @@ this file(\filename{pbpvexpr.w}).
      Path*      p = static_cast<Path*>(@=$1@>);
 
      if (!(e && p))
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      else 
         @=$$@> = e->intersection_points(p, static_cast<Scanner_Node>(parameter));
@@ -1438,7 +1438,7 @@ Added this rule.
      Path*   p = static_cast<Path*>(@=$3@>);
 
      if (!(c && p))
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
 
      else 
         @=$$@> = c->intersection_points(*p, static_cast<Scanner_Node>(parameter));
@@ -1472,7 +1472,7 @@ Added this rule.
      Path*      p = static_cast<Path*>(@=$1@>);
 
      if (!(c && p))
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
 
      else 
         @=$$@> = c->intersection_points(*p, static_cast<Scanner_Node>(parameter));

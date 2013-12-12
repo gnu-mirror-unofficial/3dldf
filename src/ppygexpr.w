@@ -136,7 +136,7 @@ Added this rule.
 {
 
    if (@=$2@> == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
       Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
@@ -162,7 +162,7 @@ Added this rule.
 {
 
    if (@=$2@> == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
       Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
@@ -188,7 +188,7 @@ Added this rule.
 {
 
    if (@=$2@> == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
       Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
@@ -260,7 +260,7 @@ Added this rule.
 
           delete r;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -275,7 +275,7 @@ Added this rule.
       {
           delete r;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -469,7 +469,7 @@ Added this rule.
    Plane*  p = static_cast<Plane*>(@=$3@>);
 
    if (!(c && p))
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
      @=$$@> = static_cast<void*>(c->intersection(*p, 
                                                  false,  /* Don't suppress warnings.  */
@@ -502,7 +502,7 @@ Added this rule.
    Plane*  p = static_cast<Plane*>(@=$1@>);
 
    if (!(c && p))
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
      @=$$@> = static_cast<void*>(c->intersection(*p, 
                                                  false,  /* Don't suppress warnings.  */
@@ -535,7 +535,7 @@ Added this rule.
    Plane*  q = static_cast<Plane*>(@=$3@>);
 
    if (!(p && q))
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
      @=$$@> = static_cast<void*>(p->intersection(*q, 
                                                  false,  /* Don't suppress warnings.  */
@@ -568,7 +568,7 @@ Added this rule.
    Plane*  q = static_cast<Plane*>(@=$1@>);
 
    if (!(p && q))
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
      @=$$@> = static_cast<void*>(p->intersection(*q, 
                                                  false,  /* Don't suppress warnings.  */

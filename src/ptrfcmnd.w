@@ -80,7 +80,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -105,7 +105,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -133,7 +133,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -157,7 +157,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -183,7 +183,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -207,7 +207,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -231,7 +231,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -255,7 +255,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -279,7 +279,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -305,7 +305,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -329,7 +329,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -353,7 +353,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -380,7 +380,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -404,7 +404,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -430,7 +430,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -456,7 +456,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -480,7 +480,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -504,7 +504,7 @@ Added this rule.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -537,7 +537,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -570,7 +570,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -603,7 +603,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -636,7 +636,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -669,7 +669,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -702,7 +702,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -735,7 +735,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -768,7 +768,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -801,7 +801,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -834,7 +834,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -867,7 +867,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -900,7 +900,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -933,7 +933,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -966,7 +966,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -999,7 +999,7 @@ Added this rule.
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
                                pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1054,7 +1054,7 @@ Removed debugging output and error-handling code.
                               static_cast<Id_Map_Entry_Node>(@=$2@>),
                               pv);
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1081,7 +1081,7 @@ Added this rule.
 
    if (p == 0 || *p == INVALID_POINT)
    {
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
    }
    else
    {
@@ -1099,7 +1099,7 @@ Added this rule.
    }  /* |else|  */  
   
    delete p;
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1136,7 +1136,7 @@ Removed all unnecessary code.
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
                                 static_cast<Pointer_Vector<real>*>(@=$3@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1305,7 +1305,7 @@ never reduced.
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
         
-        @=$$@> = 0;
+        @=$$@> = static_cast<void*>(0);
      
 
     }  /* |if (entry == 0 || entry->object == 0)|  */
@@ -1357,7 +1357,7 @@ never reduced.
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
       
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     } /* |if (t == 0)|  */
 
@@ -1397,7 +1397,7 @@ never reduced.
 
       delete t;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     }  /* |else| (|t != 0|)  */
 
@@ -1430,7 +1430,7 @@ Added this rule.
         t->inverse(true);
      } 
 
-     @=$$@> = 0;
+     @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1456,7 +1456,7 @@ Added this rule.
         t->transpose(true);
      } 
 
-     @=$$@> = 0;
+     @=$$@> = static_cast<void*>(0);
 
 };
 

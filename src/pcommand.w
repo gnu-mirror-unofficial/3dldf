@@ -126,7 +126,7 @@ Removed debugging code.
 
    clip_to_func(@=$2@>, parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -225,7 +225,7 @@ Removed code.  Now calling |Scan_Parse::message_command_func()| instead.
 {
 
     Scan_Parse::message_command_func(@=$1@>, @=$2@>, parameter);
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -251,7 +251,7 @@ I must have removed it at some time in the past.
     getchar(); 
     cerr_mutex.unlock();  
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q ** (2) command --> SCANTOKENS string_expression.@> 
@@ -273,7 +273,7 @@ Added this rule.
    if (str_ptr == 0)
      {
      
-         @=$$@> = 0;
+         @=$$@> = static_cast<void*>(0);
 
     }  /* |if (str_ptr == 0)|  */
 
@@ -299,7 +299,7 @@ Added this rule.
            
           static_cast<Scanner_Node>(parameter)->in = curr_input_struct;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }   /* |else| (|str_ptr != 0|)  */
 };
@@ -331,7 +331,7 @@ Added this rule.
 
    if (s == 0)
       {
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       } /* |s == 0|  */
 
@@ -376,7 +376,7 @@ Added this rule.
 
           delete s;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
 @q ***** (5).@> 
 

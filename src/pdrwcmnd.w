@@ -398,7 +398,7 @@ all debugging code.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -426,7 +426,7 @@ Added this rule.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -454,7 +454,7 @@ Added this rule.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -482,7 +482,7 @@ Added this rule.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -510,7 +510,7 @@ Added this rule.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -538,7 +538,7 @@ Added this rule.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -566,7 +566,7 @@ Added this rule.
                                 @=$1@>,
                                 static_cast<Pointer_Vector<Path>*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -605,7 +605,7 @@ Removed all debugging code.
                           static_cast<Solid*>(@=$2@>));
 
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -633,7 +633,7 @@ Added this rule.
                           static_cast<Solid*>(@=$2@>));
 
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -661,7 +661,7 @@ Added this rule.
                           static_cast<Solid*>(@=$2@>));
 
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -689,7 +689,7 @@ Added this rule.
                           static_cast<Solid*>(@=$2@>));
 
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -717,7 +717,7 @@ Added this rule.
                                        @=$1@>,
                                        static_cast<Sphere_Development*>(@=$2@>));
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -746,7 +746,7 @@ Added this rule.
                           static_cast<Solid*>(@=$2@>));
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -775,7 +775,7 @@ Added this rule.
                           static_cast<Solid*>(@=$2@>));
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -819,7 +819,7 @@ Added \§with clause draw list>.
         delete c;
     }
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1016,7 +1016,7 @@ Removed debugging code.
                                  @=$1@>,
                                  static_cast<Point*>(@=$2@>));
 
-     @=$$@> = 0;
+     @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1085,7 +1085,7 @@ Not drawing or undrawing dot.
 
     delete bp;
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1192,7 +1192,7 @@ Added this rule.
 
    delete bp;
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1364,7 +1364,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 }
 ;
@@ -1380,7 +1380,7 @@ Added this rule.
 @=with_clause_draw_list: with_clause_draw_list with_clause_draw@>
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1417,7 +1417,7 @@ rather than a |void| pointer to an |Id_Map_Entry_Node|.
 
   static_cast<Scanner_Node>(parameter)->color_vector_ptr = entry->object;
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1447,7 +1447,7 @@ Previously, it was set to |@=$2@>|.
 
   static_cast<Scanner_Node>(parameter)->draw_color_vector_ptr = entry->object;
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1480,7 +1480,7 @@ Added this rule.
 
   static_cast<Scanner_Node>(parameter)->fill_color_vector_ptr = entry->object;
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1747,7 +1747,7 @@ Added this section.
       }   /* |else| (|p != 0|)  */
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1794,7 +1794,7 @@ Now calling |Scan_Parse::pickup_command()|.
 #endif 
        } /* |if (status != 0)|  */
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1840,7 +1840,7 @@ Now calling |Scan_Parse::pickup_command()|.
 #endif 
        } /* |if (status != 0)|  */
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1882,7 +1882,7 @@ Added this rule.
 #endif 
        } /* |if (status != 0)|  */
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1932,7 +1932,7 @@ which is defined in \filename{scanprse.web}.
 
        } /* |if (status != 0)|  */
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1963,7 +1963,7 @@ returns 0, so there's no need to test its return value.
                      static_cast<Scanner_Node>(parameter)->current_pen,
                      "scanner_node->current_pen");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -1994,7 +1994,7 @@ returns 0, so there's no need to test its return value.
                        scanner_node->current_color,
                        "scanner_node->current_color");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2024,7 +2024,7 @@ returns 0, so there's no need to test its return value.
                        scanner_node->current_draw_color,
                        "scanner_node->current_draw_color");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2055,7 +2055,7 @@ returns 0, so there's no need to test its return value.
                        "scanner_node->current_fill_color");
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2087,7 +2087,7 @@ returns 0, so there's no need to test its return value.
                               "scanner_node->current_dash_pattern");
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2132,7 +2132,7 @@ Added this rule.
                               "scanner_node->current_dash_pattern");
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 

@@ -145,7 +145,7 @@ Removed code from this rule.  Replaced it with a call to
    if (@=$1@>)
       @=$$@> = Scan_Parse::string_primary_rule_func(@=$1@>, parameter);
    else
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -265,7 +265,7 @@ Added this rule.
 
           delete s;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -293,7 +293,7 @@ Added this rule.
 
           delete s;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 

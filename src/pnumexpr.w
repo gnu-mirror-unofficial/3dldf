@@ -112,7 +112,7 @@ when one tries to show an ``unknown |numeric|''.
   if (entry == 0 || entry->object == 0)
     {
 
-      @=$$@> = 0;
+      @=$$@> = ZERO_REAL;
 
     }  /* |if (entry == 0 || entry->object == 0)| */
 
@@ -249,7 +249,7 @@ Print out context.
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-      @=$$@> = 0;
+      @=$$@> = ZERO_REAL;
 
 
     } /* |if (@=$3@> == 0)|  */
@@ -388,7 +388,7 @@ Added this rule.
   if (p == 0)
     {
 
-      @=$$@> = 0;
+      @=$$@> = ZERO_REAL;
       
     } /* |if (p == 0)|  */
 
@@ -427,7 +427,7 @@ Removed \§optional of> from this rule.
   Point* p = static_cast<Point*>(@=$2@>);
   if (p == 0)
     {
-      @=$$@> = 0;
+      @=$$@> = ZERO_REAL;
       
     } /* |if (p == 0)|  */
 
@@ -451,7 +451,7 @@ Removed \§optional of> from this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -469,7 +469,7 @@ Removed \§optional of> from this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -487,7 +487,7 @@ Removed \§optional of> from this rule.
    if (e)
      @=$$@> = e->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete e;
 
@@ -505,7 +505,7 @@ Removed \§optional of> from this rule.
    if (e)
      @=$$@> = e->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete e;
 
@@ -529,7 +529,7 @@ Added this rule.
    if (c)
      @=$$@> = c->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete c;
 
@@ -553,7 +553,7 @@ Added this rule.
    if (c)
      @=$$@> = c->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete c;
 
@@ -582,7 +582,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -607,7 +607,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -632,7 +632,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -657,7 +657,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -682,7 +682,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -706,7 +706,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -730,7 +730,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -748,7 +748,7 @@ Added this rule.
    if (e)
      @=$$@> = e->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete e;
 
@@ -795,7 +795,7 @@ Added this rule.  It currently contains a dummy action.
 
    delete p;
 
-   @=$$@> = 0;
+   @=$$@> = ZERO_REAL;
 
 };
 
@@ -819,7 +819,7 @@ Added this rule.
    if (p)
      @=$$@> = p->size();
    else
-     @=$$@> = 0;
+     @=$$@> = ZERO_REAL;
 
    delete p;
 
@@ -1543,7 +1543,7 @@ Added this rule.
    else  /* |entry != 0|  */
       {
           if (entry->object == 0)
-             @=$$@> = 0;
+             @=$$@> = ZERO_REAL;
 
           else  /* |entry->object != 0|  */
              {
@@ -1602,7 +1602,7 @@ Added this rule.
    else  /* |entry != 0|  */
       {
           if (entry->object == 0)
-             @=$$@> = 0;
+             @=$$@> = ZERO_REAL;
 
           else  /* |entry->object != 0|  */
              {
@@ -1833,22 +1833,22 @@ Now setting \§numeric primary> to 0 if \§color part> is
     @=$$@> = 0;
 
   else if (part == CYAN_PART)
-    @=$$@> = 0;
+    @=$$@> = ZERO_REAL;
 
   else if (part == MAGENTA_PART)
-    @=$$@> = 0;
+    @=$$@> = ZERO_REAL;
 
   else if (part == BLACK_PART)
-    @=$$@> = 0;
+    @=$$@> = ZERO_REAL;
 
   else if (part == WHITE_PART)
-    @=$$@> = 0;
+    @=$$@> = ZERO_REAL;
 
   else if (part == RED_ORANGE_PART)
-    @=$$@> = 0;
+    @=$$@> = ZERO_REAL;
 
   else if (part == BLUE_VIOLET_PART)
-    @=$$@> = 0;
+    @=$$@> = ZERO_REAL;
 
   else
     {
@@ -3096,7 +3096,7 @@ Added this rule.
           cerr_strm << "Division by 0.  Setting <numeric secondary> to 0.\n"
                     << "Will try to continue.\n";
 
-          @=$$@> = 0;
+          @=$$@> = ZERO_REAL;
             
           log_message(cerr_strm);
           cerr_message(cerr_strm, error_stop_value);
@@ -3826,7 +3826,7 @@ subtraction to work.
            << endl << "Setting `numeric_tertiary' to 0 "
            << "and will try to continue.\n";
 
-      @=$$@> = 0;
+      @=$$@> = ZERO_REAL;
       goto end_numeric_tertiary_2;
     }
 
@@ -3841,7 +3841,7 @@ subtraction to work.
            << endl << "Setting `numeric_tertiary' to 0 "
            << "and will try to continue.\n";
 
-      @=$$@> = 0;
+      @=$$@> = ZERO_REAL;
       goto end_numeric_tertiary_2;
     }
 
@@ -3864,7 +3864,8 @@ subtraction to work.
                << "Can't perform Pythagorean addition."
                << endl << "Setting `numeric_tertiary' to 0 "
                << "and will try to continue.\n";
-          @=$$@> = 0;
+
+          @=$$@> = ZERO_REAL;
 
           if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
             {
@@ -3899,7 +3900,8 @@ subtraction to work.
                << "Can't perform Pythagorean subtraction."
                << endl << "Setting `numeric_tertiary' to 0 "
                << "and will try to continue.\n";
-          @=$$@> = 0;
+
+          @=$$@> = ZERO_REAL;
 
           if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
             {
@@ -3927,7 +3929,9 @@ subtraction to work.
            << "$2 has invalid value: " << @=$2@>
            << endl << "Setting `numeric_tertiary' to 0 "
            << "and will try to continue.\n";
-      @=$$@> = 0;
+
+      @=$$@> = ZERO_REAL;
+
       goto end_numeric_tertiary_2;
     }
 

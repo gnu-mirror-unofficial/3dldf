@@ -907,7 +907,7 @@ working before.
 
   p->suppress_labels();
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -941,7 +941,7 @@ Added this rule.  I haven't tested it, though.
 
   p->unsuppress_labels();
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -970,7 +970,7 @@ Added this rule.
 
   p->kill_labels();
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1406,7 +1406,7 @@ Added this rule.
 @=with_text_color_optional: /* Empty  */@>
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1460,7 +1460,7 @@ Added this rule.
 @=with_dot_color_optional: /* Empty  */@>
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1516,7 +1516,7 @@ Added this rule.
 @=transformer_optional: /* Empty  */@>
 {
 
-  @=$$@> = 0;
+  @=$$@> = static_cast<void*>(0);
 
 };
 

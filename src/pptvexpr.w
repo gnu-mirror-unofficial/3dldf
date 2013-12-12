@@ -102,7 +102,7 @@ Added this rule.
   if (entry == 0 || entry->object == 0)
     {
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
@@ -225,7 +225,7 @@ Added this rule.
       c = 0;
    }
    else
-       @=$$@> = 0;    
+       @=$$@> = static_cast<void*>(0);    
 };
 
 @q ** (2) path_vector_primary --> GET_TABS DODECAHEDRON.@>
@@ -539,7 +539,7 @@ failed, returning a non-zero value.
    if (status != 0)
       {
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
        
       }  /* |if (status != 0)|  */
 
