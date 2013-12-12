@@ -692,7 +692,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 
-   @=$$@> = 0;
+   @=$$@> = ZERO_REAL;
 
 };
 
@@ -906,7 +906,7 @@ Replaced |solid_like_primary| with |cuboid_primary|.
 
       delete s;
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
    } /* |if (t == 0)|  */
 
@@ -1130,7 +1130,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == 0)|  */
 
@@ -1158,7 +1158,7 @@ Added this rule.
 
           delete p;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -1240,7 +1240,7 @@ Added this rule.
           cerr_message(cerr_strm, error_stop_value); 
           cerr_strm.str("");         
 
-          @=$$@> = 0;       
+          @=$$@> = static_cast<void*>(0);       
 
       }  /* |if (n == 0)|  */
    
@@ -1313,7 +1313,7 @@ It simply duplicated |n|.
                  cerr_message(cerr_strm, error_stop_value); 
                  cerr_strm.str("");         
 
-                 @=$$@> = 0;
+                 @=$$@> = static_cast<void*>(0);
      
             }  /* |if (status != 0)|  */
 
@@ -1392,7 +1392,7 @@ Added this rule.
 @=conic_section_lattice_expression with_conic_section_lattice_option_list@>@/
 {
    if (@=$4@> == 0)
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
    else
    {
       Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$4@>);
