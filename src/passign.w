@@ -705,24 +705,24 @@ I've managed to get rid of it, but I don't know what it was.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ***** (5) |entry != 0|.@>   
+@q ***** (5) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.08.30.}
 
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
       int status = Scan_Parse::vector_type_assign<real, real>(
@@ -764,7 +764,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ***** (5).@> 
@@ -831,14 +831,14 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
 
@@ -1904,7 +1904,7 @@ Added this rule.
 
     Pointer_Vector<real>* pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
 
-    if (pv == 0 || pv->ctr <= 0)
+    if (pv == static_cast<Pointer_Vector<real>*>(0)  || pv->ctr <= 0)
        {
            r = INVALID_REAL;
        }
@@ -2260,45 +2260,47 @@ Added this rule.
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
 
-@q ****** (6) Error handling:  |entry == 0|.@> 
+@q ****** (6) Error handling:  |entry == static_cast<Id_Map_Entry_Node>(0)|.@> 
 
-@ Error handling:  |entry == 0|.
+@ Error handling:  |entry == static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.30.}
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
           @=$$@> = static_cast<void*>(0);
         
-      }  /* |if (entry == 0)| */        
+      }  /* |if (entry == static_cast<Id_Map_Entry_Node>(0))| */        
 
-@q ****** (6) |entry != 0|.@> 
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@> 
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.30.}
 
 @<Define rules@>=
  
-   else  /* |entry != 0|  */
+   else  /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
       {
                
          Id_Map_Entry_Node entry_0 = static_cast<Id_Map_Entry_Node>(@=$3@>);  
  
    
-@q ******* (7) Error handling:  |entry_0 == 0 || entry_0->object == 0|.@> 
+@q ******* (7) Error handling:                                                         @>
+@q ******* (7) |entry_0 == static_cast<Id_Map_Entry_Node>(0) || entry_0->object == 0|. @>
 @ Error handling:  |entry_0 == 0 || entry_0->object == 0|.
 \initials{LDF 2004.12.30.}
 
 @<Define rules@>=
 
-         if (entry_0 == 0 || entry_0->object == 0)
+         if (   entry_0 == static_cast<Id_Map_Entry_Node>(0) 
+             || entry_0->object == static_cast<Id_Map_Entry_Node>(0))
             {
 
                 @=$$@> = static_cast<void*>(0);
 
-            }  /* |if (entry_0 == 0 || entry_0->object == 0)|  */
+            }  /* |if| */
 
 
 @q ******* (7) |entry_0 != 0 && entry_0->object != 0|.@> 
@@ -2320,7 +2322,7 @@ Added this rule.
 
 @<Define rules@>=
 
-            if (entry->object == 0)
+            if (entry->object == static_cast<Id_Map_Entry_Node>(0))
                {
 
 
@@ -2328,21 +2330,21 @@ Added this rule.
 
                   entry->object = static_cast<void*>(d); 
 
-               }  /* |if (entry->object == 0)|  */
+               }  /* |if (entry->object == static_cast<Id_Map_Entry_Node>(0))|  */
 
 
-@q ******** (8) |entry->object != 0|.@> 
+@q ******** (8) |entry->object != static_cast<void*>(0)|.@> 
 
-@ |entry->object == 0|.
+@ |entry->object == static_cast<void*>(0)|.
 \initials{LDF 2004.12.30.}
 
 @<Define rules@>=
 
-            else  /* |entry->object != 0|  */
+            else  /* |entry->object != static_cast<void*>(0)|  */
                {
                    d = static_cast<Definition_Info_Node>(entry->object);
 
-               }  /* |else| (|entry->object != 0|)  */
+               }  /* |else| (|entry->object != static_cast<void*>(0)|)  */
 
 @q ******** (8) @> 
 
@@ -2579,17 +2581,17 @@ to
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
 
 
 
-@q ******* (7) |entry != 0|.@>   
+@q ******* (7) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
 @ |entry != 0|.
 \initials{LDF 2004.09.01.}
@@ -2611,7 +2613,7 @@ to
 
 @<Define rules@>=
 
-  if (bp == 0)
+  if (bp == static_cast<Bool_Point*>(0))
     {
       
       bp = bpe;
@@ -2619,16 +2621,16 @@ to
       @=$$@> = entry->object = static_cast<void*>(bp);
  
 
-    } /* |if (bp == 0)|  */
+    } /* |if (bp == static_cast<Bool_Point*>(0))|  */
 
-@q ******** (8) |bp != 0|.@> 
+@q ******** (8) |bp != static_cast<Bool_Point*>(0)|.@> 
 
-@ |bp != 0|.
+@ |bp != static_cast<Bool_Point*>(0)|.
 \initials{LDF 2004.11.03.}
 
 @<Define rules@>=
 
-   else  /* |bp != 0|  */
+   else  /* |bp != static_cast<Bool_Point*>(0)|  */
      {
         bp->b  = bpe->b,
         bp->pt = bpe->pt;
@@ -2637,9 +2639,9 @@ to
 
         @=$$@> = entry->object;
 
-     }   /* |else| (|bp != 0|)  */
+     }   /* |else| (|bp != static_cast<Bool_Point*>(0)|)  */
 
-   } /* |else| (|entry != 0|)  */
+   } /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 };
 
@@ -2675,7 +2677,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete b;
@@ -2707,7 +2709,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (bp == 0)
+  if (bp == static_cast<Bool_Point*>(0))
     {
       
         bp = new Bool_Point;
@@ -2765,7 +2767,7 @@ referenced by |boolean_variables|, |boolean_primaries|,
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
 
@@ -2797,7 +2799,7 @@ referenced by |boolean_variables|, |boolean_primaries|,
 
 @<Define rules@>=
 
-  if (bp == 0)
+  if (bp == static_cast<Bool_Point*>(0))
     {
       
        bp = new Bool_Point;
@@ -3997,7 +3999,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
@@ -4106,7 +4108,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
@@ -4215,7 +4217,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
@@ -4333,7 +4335,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
@@ -4451,21 +4453,21 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Pen> PV;
@@ -4517,7 +4519,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -4561,28 +4563,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
 
@@ -4636,7 +4638,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -4684,28 +4686,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Color> PV;
@@ -4757,7 +4759,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -4801,28 +4803,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Transform> PV;
@@ -4874,7 +4876,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -4918,28 +4920,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.18.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.18.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Focus> PV;
@@ -4991,7 +4993,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5055,28 +5057,28 @@ defined in \filename{scanprse.web}.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.11.06.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.01.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Point> PV;
@@ -5128,7 +5130,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5163,29 +5165,29 @@ defined in \filename{scanprse.web}.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.11.10.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.11.10.}
 
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Point> PV;
@@ -5238,7 +5240,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5295,23 +5297,23 @@ defined in \filename{scanprse.web}.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.11.06.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.01.}
 
 \LOG
@@ -5332,7 +5334,7 @@ the |bool_point_vector_expression|, so we don't have to do so here.
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
         Scan_Parse::clear_vector_func(static_cast<Scanner_Node>(parameter),
@@ -5385,7 +5387,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5421,29 +5423,29 @@ defined in \filename{scanprse.web}.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.11.10.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.11.10.}
 
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
 
@@ -5495,7 +5497,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5538,28 +5540,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.12.10.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.10.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Path> PV;
@@ -5610,7 +5612,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5652,28 +5654,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Ellipse> PV;
@@ -5724,7 +5726,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5766,28 +5768,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Circle> PV;
@@ -5838,7 +5840,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -5884,28 +5886,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.11.07.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.11.07.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Parabola> PV;
@@ -5958,7 +5960,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6003,28 +6005,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.11.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.11.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Hyperbola> PV;
@@ -6077,7 +6079,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6122,28 +6124,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2007.10.13.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2007.10.13.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Arc> PV;
@@ -6196,7 +6198,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6241,28 +6243,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.11.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.11.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Conic_Section_Lattice> PV;
@@ -6316,7 +6318,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6362,28 +6364,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.05.20.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.05.20.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Helix> PV;
@@ -6434,7 +6436,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6478,28 +6480,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Triangle> PV;
@@ -6550,7 +6552,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6594,28 +6596,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.26.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.26.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Nurb> PV;
@@ -6665,7 +6667,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6822,28 +6824,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Rectangle> PV;
@@ -6893,7 +6895,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -6938,28 +6940,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Reg_Polygon> PV;
@@ -7011,7 +7013,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -7053,28 +7055,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Cuboid> PV;
@@ -7126,7 +7128,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -7168,28 +7170,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Polyhedron> PV;
@@ -7241,7 +7243,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -7283,28 +7285,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Sphere> PV;
@@ -7355,7 +7357,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -7397,28 +7399,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Sphere_Development> PV;
@@ -7469,7 +7471,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -7511,28 +7513,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Plane> PV;
@@ -7584,7 +7586,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
@@ -7627,28 +7629,28 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == 0|.@>
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
-@ Error handling for the case that |entry == 0 |.
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2005.02.03.}
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)|  */
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) |entry != 0|.@>   
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
-@ |entry != 0|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.02.03.}
 
 @<Define rules@>=
 
-  else /* |entry != 0|  */
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
    typedef Pointer_Vector<Origami_Figure> PV;
@@ -7700,7 +7702,7 @@ failed.
       }  /* |else| (|status == 0|)  */
 
 
-   }   /* |else| (|entry != 0|)  */
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 
 @q ****** (6).@> 
