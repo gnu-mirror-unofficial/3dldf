@@ -313,13 +313,13 @@ Cone::set(Cone_Set_Option_Struct* options,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4) WARNING:  |options == 0|.@> 
-@ WARNING:  |options == 0|.
+@q **** (4) WARNING:  |options == static_cast<Cone_Set_Option_Struct*>(0)|.@> 
+@ WARNING:  |options == static_cast<Cone_Set_Option_Struct*>(0)|.
 \initials{LDF 2006.11.08.}
 
 @<Define |Cone| functions@>=
 
-    if (options == 0)
+    if (options == static_cast<Cone_Set_Option_Struct*>(0))
     {  
          cerr_strm << "WARNING!  In `Cone::set()':"
                    << endl 
@@ -332,7 +332,7 @@ Cone::set(Cone_Set_Option_Struct* options,
 
          return 1;
          
-    }  /* |if (options == 0)|  */
+    }  /* |if (options == static_cast<Cone_Set_Option_Struct*>(0))|  */
 
 
 @q **** (4) |center|.@> 
@@ -341,11 +341,11 @@ Cone::set(Cone_Set_Option_Struct* options,
 
 @<Define |Cone| functions@>=
 
-    if (options->center != 0)
+    if (options->center != static_cast<Point*>(0))
     {
         center = *options->center;
 
-    }  /* |if (options->center == 0)|  */
+    }  /* |if (options->center == static_cast<Point*>(0))|  */
   
 
 @q **** (4) |direction|.@> 
@@ -354,11 +354,11 @@ Cone::set(Cone_Set_Option_Struct* options,
 
 @<Define |Cone| functions@>=
 
-    if (options->direction != 0)
+    if (options->direction != static_cast<Point*>(0))
     {
         direction = *options->direction;
 
-    }  /* |if (options->direction == 0)|  */
+    }  /* |if (options->direction == static_cast<Point*>(0))|  */
   
 
 @q **** (4) |nap_type|.@> 
@@ -558,7 +558,7 @@ Added code for creating double-napped elliptical cones.
          else if (nap_type == DOUBLE_NAPPED_TYPE)
            center.set(0, axis_y, 0);
 
-        if (options->center != 0)
+        if (options->center != static_cast<Point*>(0))
            shift(*options->center - center);
 
 
@@ -721,7 +721,7 @@ Added code for creating double-napped circular cones.
         else if (nap_type == DOUBLE_NAPPED_TYPE)
            center.set(0, axis_y, 0);
 
-        if (options->center != 0)
+        if (options->center != static_cast<Point*>(0))
            shift(*options->center - center);
 
 
@@ -1026,11 +1026,11 @@ Cone::get_base_center(void* v)
 
 @q **** (4)@> 
 
-        Point* p = 0;
+        Point* p = static_cast<Point*>(0);
 
 @q **** (4)@> 
    
-    if (type == CIRCULAR_CONE_TYPE && base != 0)
+    if (type == CIRCULAR_CONE_TYPE && base != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -1042,7 +1042,7 @@ Cone::get_base_center(void* v)
 
 @q **** (4)@> 
 
-    else if (type == ELLIPTICAL_CONE_TYPE && base != 0)
+    else if (type == ELLIPTICAL_CONE_TYPE && base != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -1082,7 +1082,7 @@ Cone::get_cap_center(void* v)
 
     Point* p;
 
-    if (type == CIRCULAR_CONE_TYPE && cap != 0)
+    if (type == CIRCULAR_CONE_TYPE && cap != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -1093,7 +1093,7 @@ Cone::get_cap_center(void* v)
 
 @q **** (4)@> 
 
-    else if (type == ELLIPTICAL_CONE_TYPE && cap != 0)
+    else if (type == ELLIPTICAL_CONE_TYPE && cap != static_cast<Path*>(0))
     {
          p = create_new<Point>(0);
      
@@ -1388,7 +1388,7 @@ void
 Cone::shift_times(real x, real y, real z)
 {
 
-    if (center != 0)
+    if (center != static_cast<Point*>(0))
        center->shift_times(x, y, z);
 
 
