@@ -83,7 +83,7 @@ Added this rule.
         static_cast<Focus*>(entry->object)->reset_angle(@=$3@>);
     } 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -296,7 +296,7 @@ Now calling |Scan_Parse::rotate_focus_func|.
                       Focus::MAIN_AXES, 
                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -324,7 +324,7 @@ Changed the default value for |axes| from |Focus::FOCUS_AXES| to
                       Focus::MAIN_AXES, 
                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -355,7 +355,7 @@ Added this rule.
                       Focus::FOCUS_AXES, 
                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -379,7 +379,7 @@ Added this rule.
                       Focus::FOCUS_AXES, 
                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 

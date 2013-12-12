@@ -84,7 +84,7 @@ Added this rule.
            shift_lattice(1, static_cast<Scanner_Node>(parameter)); 
     } 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -132,7 +132,7 @@ Added this rule.
            shift_lattice(i, static_cast<Scanner_Node>(parameter)); 
     }
  
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -168,7 +168,7 @@ Added this rule.
 
     delete t;    
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -198,7 +198,7 @@ Added this rule.
         c->reset_transform();
     }
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -228,7 +228,7 @@ Added this rule.
         c->delete_transform();
     }
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 

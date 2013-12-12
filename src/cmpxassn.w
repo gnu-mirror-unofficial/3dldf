@@ -134,7 +134,7 @@ Added this rule.
  
      delete pv;
 
-     @=$$@> = 0;
+     @=$$@> = static_cast<void*>(0);
   }
 
 };

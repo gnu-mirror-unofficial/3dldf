@@ -467,7 +467,7 @@ Added this rule.
 
           delete r;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == static_cast<Pointer_Vector<Conic_Section_Lattice>*>(0))|  */
 
@@ -483,7 +483,7 @@ Added this rule.
 
           delete r;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
@@ -503,8 +503,6 @@ Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
 @q ******* (7) @> 
 
 };
-
-
 
 @q * (1) conic_section_lattice secondary.@>
 @* \§conic section lattice secondary>.
@@ -565,7 +563,7 @@ Added this rule.
   else if (t)
   {
       delete t;
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
   }
 };
 

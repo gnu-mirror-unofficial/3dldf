@@ -159,7 +159,7 @@ Added this rule.
 
           delete c;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |if (pv == static_cast<Pointer_Vector<Complex>*>(0))|  */
 
@@ -174,7 +174,7 @@ Added this rule.
       {
           delete c;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
