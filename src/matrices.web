@@ -862,7 +862,7 @@ Matrix::~Matrix(void)
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -1062,7 +1062,7 @@ Matrix::operator=(const Matrix& m)
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
@@ -3174,7 +3174,7 @@ Matrix::operator*(const Matrix& m) const
 
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
 
-   if (thread_info != 0)
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
       scanner_node = thread_info->scanner_node;
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
