@@ -376,7 +376,7 @@ col_vec.push_back(&red);
 
     Transform t = center.shift(-center);
 
-    if (angle_x != 0 || angle_y != 0 || angle_z != 0)
+    if (angle_x != ZERO_REAL || angle_y != ZERO_REAL || angle_z != ZERO_REAL)
       t.rotate(angle_x, angle_y, angle_z);
 
     if (p != origin_pt)
@@ -578,7 +578,7 @@ Dodecahedron::get_net(const real pentagon_diameter,
       for (i = 0; i < 6; ++i)
         {
           for (int j = 0; j < 5; j++)
-            if (pents[i]->get_point(j).get_y() != 0)
+            if (pents[i]->get_point(j).get_y() != ZERO_REAL)
               {
                 cerr << "ERROR! In Dodecahedron::get_net():\n"
                   << "y-coordinate != 0!\n"
@@ -607,7 +607,7 @@ Dodecahedron::get_net(const real pentagon_diameter,
   for (i = 0; i < 12; ++i)
     {
       for (int j = 0; j < 5; j++)
-        if (pents[i]->get_point(j).get_y() != 0)
+        if (pents[i]->get_point(j).get_y() != ZERO_REAL)
           {
             cerr << "ERROR! In Dodecahedron::get_net():\n"
                  << "y-coordinate != 0!\n"
@@ -1685,16 +1685,16 @@ Dodecahedron::reflect_in(const Plane& p,
 
   Dodecahedron* dodecahedron_reflection = static_cast<Dodecahedron*>(v);  
 
-@q *** (3) If |dodecahedron_reflection == 0|, try to allocate memory @>
-@q *** (3) on the free store for it.                           @> 
+@q *** (3) If |dodecahedron_reflection == static_cast<Dodecahedron*>(0)|, @>
+@q *** (3) try to allocate memory on the free store for it.               @> 
 
-@ If |dodecahedron_reflection == 0|, try to allocate memory 
-on the free store for it.                            
+@ If |dodecahedron_reflection == static_cast<Dodecahedron*>(0)|, 
+try to allocate memory on the free store for it.                            
 \initials{LDF 2004.10.12.}
 
 @<Define |Dodecahedron| functions@>=
 
- if (dodecahedron_reflection == 0)
+ if (dodecahedron_reflection == static_cast<Dodecahedron*>(0))
  {
   try
      {
@@ -1729,7 +1729,7 @@ on the free store for it.
   
 @q *** (3).@> 
 
-  } /* |if (dodecahedron_reflection == 0)|  */
+  } /* |if (dodecahedron_reflection == static_cast<Dodecahedron*>(0))|  */
 
 @q *** (3) Call |Polyhedron::reflect_in()|.@> 
 
