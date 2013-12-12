@@ -85,14 +85,16 @@ Added this rule.
 {
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+    } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
+              || entry->object == static_cast<void*>(0))|  */
 
-  else /* |entry != 0 && entry->object != 0|  */
+  else /* |   entry != static_cast<Id_Map_Entry_Node>(0) 
+           && entry->object != static_cast<void*>(0)|  */
 
     @=$$@> = static_cast<void*>(create_new<Complex>(
                                   static_cast<Complex*>(
@@ -145,21 +147,21 @@ Added this rule.
    Pointer_Vector<Complex>* pv 
       = static_cast<Pointer_Vector<Complex>*>(@=$2@>);
 
-@q ******* (7) Error handling:  |pv == 0|.@> 
+@q ******* (7) Error handling:  |pv == static_cast<Pointer_Vector<Complex>*>(0)|.@> 
 
-@ Error handling:  |pv == 0|.
+@ Error handling:  |pv == |pv == static_cast<Pointer_Vector<Complex>*>(0)|.
 \initials{LDF 2007.12.02.}
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == |pv == static_cast<Pointer_Vector<Complex>*>(0))
       {
 
           delete c;
 
           @=$$@> = 0;
 
-      }  /* |if (pv == 0)|  */
+      }  /* |if (pv == |pv == static_cast<Pointer_Vector<Complex>*>(0))|  */
 
 @q ******* (7) Error handling:  |pv->ctr == 0|.@> 
 
@@ -176,9 +178,10 @@ Added this rule.
 
       }  /* |else if (pv->ctr == 0)|  */
 
-@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+@q ******* (7) |pv != |pv == static_cast<Pointer_Vector<Complex>*>(0) && pv->ctr > 0|.@> 
 
-@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+@ |pv != |pv == static_cast<Pointer_Vector<Complex>*>(0) && pv->ctr > 0|.  
+Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
 \initials{LDF 2007.12.02.}
 
 @<Define rules@>=

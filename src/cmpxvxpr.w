@@ -104,14 +104,16 @@ Added this rule.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-@q **** (4) Error handling:  |entry == 0 || entry->object == 0|.@> 
+@q **** (4) Error handling:  
+|entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0)|.@> 
 
-@ Error handling:  |entry == 0 || entry->object == 0|.
+@ Error handling:  
+|entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0)|.
 \initials{LDF 2007.12.02.}
 
 @<Define rules@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       cerr_strm << thread_name 
@@ -119,27 +121,29 @@ Added this rule.
                 << endl 
                 << "Rule `complex_vector_primary --> "
                 << "complex_vector_variable':"
-                << endl << "`entry' == 0 or `entry->object' == 0."
+                << endl << "`entry' == static_cast<Id_Map_Entry_Node>(0) or "
+                << "`entry->object' == static_cast<void*>(0)."
                 << endl 
                 << "Setting `complex_vector_primary' "
-                << "to 0 and will try to continue.";
+                << "to static_cast<void*>(0) and will try to continue.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+    } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
+              || entry->object == static_cast<void*>(0))|  */
 
-@q **** (4) |!(entry == 0 || entry->object == 0)|.@> 
+@q **** (4) |!(   entry == static_cast<Id_Map_Entry_Node>(0)  @>
+@q **** (4)    || entry->object == static_cast<void*>(0))|.   @>
 
-@ |!(entry == 0 || entry->object == 0)|.
+@ |!(entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))|.
 \initials{LDF 2007.12.02.}
 
 @<Define rules@>=
-  else /* |!(entry == 0 || entry->object == 0)|  */
-
+  else 
      {
 
         typedef Pointer_Vector<Complex> PV;
@@ -150,7 +154,7 @@ Added this rule.
 
         @=$$@> = static_cast<void*>(pv);                    
 
-     }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
+     }  /* |else|  */
 
 };
 

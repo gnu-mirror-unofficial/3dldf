@@ -106,12 +106,13 @@ Added this rule.
 
 @q **** (4) Error handling:  |entry == 0 || entry->object == 0|.@> 
 
-@ Error handling:  |entry == 0 || entry->object == 0|.
+@ Error handling:  
+|entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0)|.
 \initials{LDF 2007.10.13.}
 
 @<Define rules@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       cerr_strm << thread_name 
@@ -128,18 +129,19 @@ Added this rule.
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-      @=$$@> = 0;
+      @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+    } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
+              || entry->object == static_cast<void*>(0))|  */
 
-@q **** (4) |!(entry == 0 || entry->object == 0)|.@> 
+@q **** (4) |!(   entry == static_cast<Id_Map_Entry_Node>(0) 
+               || entry->object == static_cast<void*>(0))|.@> 
 
-@ |!(entry == 0 || entry->object == 0)|.
+@ |!(entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))|.
 \initials{LDF 2007.10.13.}
 
 @<Define rules@>=
-  else /* |!(entry == 0 || entry->object == 0)|  */
-
+  else 
      {
 
         typedef Pointer_Vector<Arc> PV;
@@ -150,10 +152,9 @@ Added this rule.
 
         @=$$@> = static_cast<void*>(pv);                    
 
-     }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
+     }  /* |else|  */
 
 };
-
 
 @q ** (2) arc_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) arc_vector_expression  RIGHT_PARENTHESIS.@>

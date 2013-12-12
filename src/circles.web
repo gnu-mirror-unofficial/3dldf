@@ -684,16 +684,16 @@ Circle::reflect_in(const Plane& p,
 
   Circle* circle_reflection = static_cast<Circle*>(v);  
 
-@q *** (3) If |circle_reflection == 0|, try to allocate memory @>
-@q *** (3) on the free store for it.                           @> 
+@q *** (3) If |circle_reflection == static_cast<Circle*>(0)|, try to allocate memory @>
+@q *** (3) on the free store for it.                                                 @> 
 
-@ If |circle_reflection == 0|, try to allocate memory 
+@ If |circle_reflection == static_cast<Circle*>(0)|, try to allocate memory 
 on the free store for it.                            
 \initials{LDF 2004.10.12.}
 
 @<Define |Circle| functions@>=
 
- if (circle_reflection == 0)
+ if (circle_reflection == static_cast<Circle*>(0))
  {
   try
      {
@@ -728,7 +728,7 @@ on the free store for it.
   
 @q *** (3).@> 
 
-  } /* |if (circle_reflection == 0)|  */
+  } /* |if (circle_reflection == static_cast<Circle*>(0))|  */
 
 @q *** (3) Call |Ellipse::reflect_in|.@> 
 
@@ -1661,7 +1661,7 @@ that takes a |const Path& p| argument.
 
 @<Define |Circle| functions@>=
 
-      if (dist == 0)
+      if (dist == ZERO_REAL)
         {
 #if DEBUG_COMPILE
            if (DEBUG)
@@ -1776,7 +1776,7 @@ that takes a |const Path& p| argument.
 
 @q ****** (6).@> 
 
-        } /* |if (dist == 0)| */
+        } /* |if (dist == ZERO_REAL)| */
       
 @q ***** (5) |dist > (radius + c.radius)|.@> 
 

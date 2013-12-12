@@ -691,7 +691,7 @@ void
 Arc::shift_times(real x, real y, real z)
 {
 
-    if (center != 0)
+    if (center != static_cast<Point*>(0))
        center->shift_times(x, y, z);
 
 
@@ -838,17 +838,17 @@ Arc::show(string text, char coords,
    else
       cerr << text << endl;
 
-   if (center == 0)
+   if (center == static_cast<Point*>(0))
       cerr << "No `center'." << endl;
    else
       center->show("center:", coords, do_persp, do_apply, f, proj, factor);
 
-   if (focus_0 == 0)
+   if (focus_0 == static_cast<Point*>(0))
       cerr << "No `focus_0'." << endl;
    else
       focus_0->show("focus_0:", coords, do_persp, do_apply, f, proj, factor);
 
-   if (focus_1 == 0)
+   if (focus_1 == static_cast<Point*>(0))
       cerr << "No `focus_1'." << endl;
    else
       focus_1->show("focus_1:", coords, do_persp, do_apply, f, proj, factor);

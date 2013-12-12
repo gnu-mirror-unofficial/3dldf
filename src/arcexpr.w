@@ -89,7 +89,8 @@ Added this rule.
 
       @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+    } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
+              || entry->object == static_cast<void*>(0))|  */
 
   else /* |entry != 0 && entry->object != 0|  */
 
@@ -144,7 +145,7 @@ Added this rule.
    Pointer_Vector<Arc>* pv 
       = static_cast<Pointer_Vector<Arc>*>(@=$2@>);
 
-@q ******* (7) Error handling:  |pv == 0|.@> 
+@q ******* (7) Error handling:  |pv == static_cast<Pointer_Vector<Arc>*>(0)|.@> 
 
 @ Error handling:  |pv == 0|.
 \initials{LDF 2007.10.13.}
@@ -156,9 +157,9 @@ Added this rule.
 
           delete c;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
-      }  /* |if (pv == 0)|  */
+      }  /* |if (pv == static_cast<Pointer_Vector<Arc>*>(0))|  */
 
 @q ******* (7) Error handling:  |pv->ctr == 0|.@> 
 
@@ -171,7 +172,7 @@ Added this rule.
       {
           delete c;
 
-          @=$$@> = 0;
+          @=$$@> = static_cast<void*>(0);
 
       }  /* |else if (pv->ctr == 0)|  */
 
