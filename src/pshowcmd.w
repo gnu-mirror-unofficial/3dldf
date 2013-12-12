@@ -109,7 +109,7 @@ referenced by |boolean_variables|, |boolean_primaries|,
    cerr_message(cerr_strm);
    cerr_strm.str("");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -165,7 +165,7 @@ Added \§fixed optional>.
    cerr_message(cerr_strm);
    cerr_strm.str("");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -192,7 +192,7 @@ Added this rule.
                     "complex",
                     parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -220,7 +220,7 @@ Added this rule.
                     "matrix",
                     parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -251,7 +251,7 @@ Added this rule.
 
 @=fixed_optional: /* Empty */@>@/
 {
-   @=$$@> = 0;
+   @=$$@> = 0;  /* integer  */
 };
 
 
@@ -301,7 +301,7 @@ Added this rule.
    cerr_message(cerr_strm);
    cerr_strm.str("");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -364,7 +364,7 @@ Added this rule.
    cerr_message(cerr_strm);
    cerr_strm.str("");
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -397,7 +397,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "pen",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW dash_pattern_expression@>
@@ -428,7 +428,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "dash_pattern",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
    
 
 };
@@ -461,7 +461,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "color",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -493,7 +493,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "transform",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -542,7 +542,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -570,7 +570,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "glyph",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -599,7 +599,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "plane",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -629,7 +629,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "origami_figure",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -662,7 +662,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  "point",
                                  parameter); 
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -692,7 +692,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "bool_point",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -723,7 +723,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "focus",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -792,7 +792,7 @@ Added this rule.
 
       } /* |else| (|entry != 0 && entry->object != 0|)  */
  
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -825,7 +825,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "path",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -856,7 +856,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "ellipse",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW parabola_expression@>
@@ -880,7 +880,7 @@ Added this rule.
                                     "parabola",
                                     parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW hyperbola_expression@>
@@ -904,7 +904,7 @@ Added this rule.
                                      "hyperbola",
                                      parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW circle_expression@>
@@ -943,7 +943,7 @@ Add |Circle::show()|.
                                       "circle",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW conic_section_lattice_expression@>
@@ -968,7 +968,7 @@ Added this rule.
                     "conic_section_lattice",
                     parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW arc_expression@>
@@ -992,7 +992,7 @@ Added this rule.
                                      "arc",
                                      parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW helix_expression@>
@@ -1019,7 +1019,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "helix",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1050,7 +1050,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "rectangle",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW triangle_expression@>
@@ -1077,7 +1077,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "triangle",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW nurb_expression@>
@@ -1104,7 +1104,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "nurb",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1132,7 +1132,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "polygon",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1163,7 +1163,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "reg_polygon",
                                       parameter);
 
-    @=$$@> = 0;};
+    @=$$@> = static_cast<void*>(0);};
 
 @q **** (4) command --> SHOW cone_expression@>
 
@@ -1189,7 +1189,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "cone",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW cylinder_expression@>
@@ -1217,7 +1217,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "cylinder",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1249,7 +1249,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "cuboid",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW polyhedron_expression@>
@@ -1279,7 +1279,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "polyhedron",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW ellipsoid_expression@>
@@ -1306,7 +1306,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "ellipsoid",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW sphere_expression@>
@@ -1333,7 +1333,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "sphere",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW sphere_development_expression@>
@@ -1357,7 +1357,7 @@ Added this rule.
                              "sphere_development",
                              parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1382,7 +1382,7 @@ Added this rule.
                                       "paraboloid",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1412,7 +1412,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "ellipse_slice",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW circle_slice_expression@>
@@ -1439,7 +1439,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "circle_slice",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 @q **** (4) command --> SHOW polyhedron_slice_expression@>
@@ -1466,7 +1466,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                       "polyhedron_slice",
                                       parameter);
 
-    @=$$@> = 0;
+    @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -1569,7 +1569,7 @@ Added this rule.
 
      }  /* |else| (|!nv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1648,7 +1648,7 @@ Added this rule.
 
      }  /* |else| (|!nv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1710,7 +1710,7 @@ Added this rule.
 
      }  /* |else| (|!nv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1738,7 +1738,7 @@ Added this rule.
                         "complex_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1766,7 +1766,7 @@ Added this rule.
                         "matrix_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1856,7 +1856,7 @@ needed here.
 
      }  /* |else| (|!sv || sv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1924,7 +1924,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1993,7 +1993,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2066,7 +2066,7 @@ Now deleting |Pointer_Vector<Color>* cv|.
 
      }  /* |else| (|!cv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2135,7 +2135,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2203,7 +2203,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2271,7 +2271,7 @@ Added this rule.
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 
@@ -2340,7 +2340,7 @@ Added this rule.
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 };
 
 @q ****** (6) command --> SHOW origami_figure_vector_expression@>
@@ -2407,7 +2407,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2475,7 +2475,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2543,7 +2543,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2627,7 +2627,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2698,7 +2698,7 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
 
      }  /* |else| (|!bpv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2765,7 +2765,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2797,7 +2797,7 @@ Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
                         "ellipse_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2826,7 +2826,7 @@ Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
                         "circle_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 
 };
@@ -2855,7 +2855,7 @@ Added this rule.
                         "parabola_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2884,7 +2884,7 @@ Added this rule.
                         "hyperbola_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2911,7 +2911,7 @@ Added this rule.
                         "conic_section_lattice_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -2939,7 +2939,7 @@ Added this rule.
                         "arc_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3008,7 +3008,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3076,7 +3076,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3141,7 +3141,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3210,7 +3210,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3280,7 +3280,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3347,7 +3347,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3414,7 +3414,7 @@ Added this rule.
 
      }  /* |else| (|!pv|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3440,7 +3440,7 @@ Added this rule.
                         "ellipsoid_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3468,7 +3468,7 @@ Added this rule.
                         "sphere_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3495,7 +3495,7 @@ Added this rule.
                         "sphere_development_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3523,7 +3523,7 @@ Added this rule.
                         "paraboloid_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3550,7 +3550,7 @@ Added this rule.
                         "cuboid_vector",
                         parameter);
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -3617,7 +3617,7 @@ Added this rule.
 
      }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
-   @=$$@> = 0;
+   @=$$@> = static_cast<void*>(0);
 
 };
 
