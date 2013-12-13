@@ -803,7 +803,7 @@ Now testing for |cross.magnitude() == 0|.
 
 else if (surface_vector == pt_vector || surface_vector == -pt_vector
          || cross == pl.normal || cross == -pl.normal 
-         || cross.magnitude() == 0)
+         || cross.magnitude() == ZERO_REAL)
   {
 
 @q ****** (6) Coplanar case.@>
@@ -824,7 +824,7 @@ points to be found that the user probably won't want.
 @<Define |Polygon| functions@>=
 
 
-  if (distance == 0)
+  if (distance == ZERO_REAL)
     {
 
 #if DEBUG_COMPILE
@@ -1390,7 +1390,7 @@ Polygon::intersection_points(const Polygon& r) const
 @q *** (3) Coplanar case.@>
 @ Coplanar case.
 @<Define |Polygon| functions@>=
-      if (distance == 0)
+      if (distance == ZERO_REAL)
         {
           if (DEBUG) 
             cerr << "Coplanar.\n";
@@ -1884,7 +1884,7 @@ on the free store for it.
 
 @<Define |Polygon| functions@>=
 
- if (polygon_reflection == 0)
+ if (polygon_reflection == static_cast<Polygon*>(0))
  {
   try
      {
@@ -2103,7 +2103,7 @@ Polygon::reflect_off(const Plane& p,
 
 @q *** (3).@> 
 
-   if (v == 0)
+   if (v == static_cast<void*>(0))
       {
           cerr_strm << thread_name << "ERROR!  In `Polygon::reflect_off():"
                     << endl << "`void* v' argument is null.  "
@@ -2313,7 +2313,7 @@ Polygon::disentangle(void* v,
 
 @q **** (4).@>
 
-   if (v == 0)
+   if (v == static_cast<void*>(0))
       {
           cerr_strm << thread_name << "ERROR!  In `Polygon::disentangle():"
                     << endl 
@@ -3032,7 +3032,8 @@ if this vector isn't empty.
 
 @<Define |Polygon| functions@>=
 
-   if (fill_color_vector != 0 && fill_color_vector->ctr > 0)
+   if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+       && fill_color_vector->ctr > 0)
       {
           for (vector<Color*>::iterator iter = fill_color_vector->v.begin();
                iter != fill_color_vector->v.end();         
@@ -3858,7 +3859,7 @@ Added this section.
 
 @q ***** (5).@> 
 
-         if (pvp != 0)
+         if (pvp != static_cast<Pointer_Vector<Polygon>*>(0))
             {
 
                 Pointer_Vector<Shape>* pvs = new Pointer_Vector<Shape>;
@@ -4263,13 +4264,10 @@ z-axis, if |angle_x|, |angle_y|, and |angle_z| are all 0).
         vertex->rotate(0, i*internal_angle, 0);
 
       
+      /* Rotation around the x-axis, y-axis, and z-axis, if applicable. */ 
 
-      if (angle_x != 0 || angle_y != 0
-          || angle_z != 0) /* Rotation around the x-axis, y-axis, and z-axis, if
-                              applicable. */ 
+      if (angle_x != ZERO_REAL || angle_y != ZERO_REAL || angle_z != ZERO_REAL) 
         vertex->rotate(angle_x, angle_y, angle_z);
-
-
 
       vertex->shift(center);  /* Put in position around |center|. */
       points.push_back(vertex);
@@ -4562,8 +4560,8 @@ reflect_in(const Plane& p,
 @<Define |Reg_Polygon| functions@>=
 int
 Reg_Polygon::reflect_in(const Plane& p, 
-                    void* v,
-                    const Scanner_Node scanner_node) const
+                        void* v,
+                        const Scanner_Node scanner_node) const
 
 
 {
@@ -4599,7 +4597,7 @@ on the free store for it.
 
 @<Define |Reg_Polygon| functions@>=
 
- if (reg_polygon_reflection == 0)
+ if (reg_polygon_reflection == static_cast<Reg_Polygon*>(0))
  {
   try
      {
