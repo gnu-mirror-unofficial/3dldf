@@ -36,7 +36,7 @@ fi
 #### -L/home/lfinsto/gcc-4.8.2/lib64/../lib64" \
 ##### --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
 
-configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
+./configure --prefix=`pwd` $CONF_STATIC LIBS="-lgsl -lgslcblas -lm"
 
 if test $# -gt 1
 then
