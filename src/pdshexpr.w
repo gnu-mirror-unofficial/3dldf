@@ -160,7 +160,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Dash_Pattern>*>(0))
       {
 
           delete p;

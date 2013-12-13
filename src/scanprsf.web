@@ -14329,7 +14329,7 @@ in conditional.
 
 @q ****** (6).@> 
 
-          if (pv == 0)
+          if (pv == static_cast<Pointer_Vector<Polygon>*>(0))
              {
                  cerr_strm << thread_name 
                            << "ERROR!  In `Scan_Parse::decompose_func()':"
@@ -16510,7 +16510,7 @@ returned 0.
 
 @<Define |Scan_Parse| functions@>=
  
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Point>*>(0))
    {
        cerr_strm << thread_name << "ERROR!  "
                  << "In `Scan_Parse::traverse_conic_section_lattice_func':"
@@ -17911,7 +17911,7 @@ failed, returning 0.
 
 @<Define |Conic_Section_Lattice| functions@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Point>*>(0))
    {
 
        cerr_strm << thread_name << "ERROR!  "

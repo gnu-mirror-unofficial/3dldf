@@ -1565,7 +1565,7 @@ Ellipsoid::intersection_points(Path* p,
 
      Pointer_Vector<Bool_Point>* bpv = c->intersection_points(*p, scanner_node);
 
-     if (bpv == 0 || bpv->ctr < 2)
+     if (bpv == static_cast<Pointer_Vector<Bool_Point>*>(0) || bpv->ctr < 2)
         {
            delete c;
            delete bpv;

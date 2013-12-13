@@ -7404,7 +7404,7 @@ Added this section.
 @<Define |Scan_Parse| template functions@>=
 
 
-  if (pv == 0)
+  if (pv == static_cast<PV*>(0))
     {     
        try 
          {
@@ -7869,7 +7869,7 @@ Rethrow |bad_alloc| upon failure.
 @<Define |Scan_Parse| template functions@>=
 
 
-  if (pv == 0)
+  if (pv == static_cast<PV*>(0))
     {     
        try 
          {
@@ -9401,7 +9401,7 @@ Error handling:  |pv == 0|. Delete |object|, |plane_path| and
 
 @<Define |Scan_Parse| template functions@>= 
 
-  if (pv == 0)
+  if (pv == static_cast<Pointer_Vector<C>*>(0))
      {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::reflect_off_func()': "
@@ -9635,7 +9635,7 @@ so it never throws |bad_alloc|.  I haven't yet defined
                    << "`object->reflect_off()' succeeded." << endl;
 
 
-        if (pv == 0)
+        if (pv == static_cast<Pointer_Vector<C>*>(0))
            cerr_strm << "`pv' == 0." << endl;
         else 
            cerr_strm << "`pv' != 0." << endl;

@@ -189,7 +189,7 @@ Removed debugging code.
      = s->get_ellipse_ptr(static_cast<unsigned short>( floor(fabs(@=$2@>) + .5))); 
 
 
-  if (t == 0)
+  if (t == static_cast<const Ellipse*>(0))
    {
       delete s;
 
@@ -378,7 +378,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Ellipse>*>(0))
       {
 
           delete p;

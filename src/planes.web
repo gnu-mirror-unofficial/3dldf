@@ -954,7 +954,7 @@ Added this section.
 
 @<Define |Point| functions@>=
   
-  if (pv == 0)
+  if (pv == static_cast<Pointer_Vector<Point>*>(0))
      {
 
          cerr_strm << thread_name << "ERROR!  In `Point::reflect_off()':"

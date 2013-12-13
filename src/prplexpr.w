@@ -298,7 +298,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Reg_Polygon>*>(0))
       {
 
           delete r;

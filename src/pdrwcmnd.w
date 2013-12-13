@@ -812,7 +812,7 @@ Added \§with clause draw list>.
 @=with_clause_draw_list@>@/
 {
 
-    if (@=$2@> != 0)
+    if (@=$2@> != static_cast<void*>(0))
     {
         Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
         c->draw_lattice(@=$4@>, parameter);
@@ -1052,12 +1052,8 @@ Not drawing or undrawing dot.
 
 @<Define rules@>=
 
-  if (bp == 0 || bp->pt == INVALID_POINT)
-    {
-      
-
-    } /* |if (bp == 0 || bp->pt == INVALID_POINT)|  */
-
+  if (bp == static_cast<Bool_Point*>(0) || bp->pt == INVALID_POINT)
+     ;       /* Do nothing  */
 
 @q ***** (5) |bp != 0 && bp->pt != INVALID_POINT|.@>   
 
@@ -1691,7 +1687,7 @@ Added this section.
 
 @<Define rules@>=
 
-   if (p == 0)
+   if (p == static_cast<Pen*>(0))
      {
 #if 0 
         cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1728,7 +1724,7 @@ Added this section.
 \ENDLOG
 
 @<Define rules@>=
-         if (q == 0)
+         if (q == static_cast<Pen*>(0))
             {
 
                 q = create_new<Pen>(0);

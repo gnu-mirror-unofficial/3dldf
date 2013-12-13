@@ -224,7 +224,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Pen>*>(0))
       {
           delete p;
 
