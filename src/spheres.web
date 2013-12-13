@@ -360,7 +360,7 @@ Sphere::set(Sphere_Set_Option_Struct* options, Scanner_Node scanner_node)
 
 @q ******* (7).@>
 
-          if (options == 0)
+          if (options == static_cast<Sphere_Set_Option_Struct*>(0))
               {
                   cerr_strm << thread_name << "In `Sphere::set':"
                             << endl << "`options' == 0";
@@ -427,7 +427,7 @@ Added this section.
 
 @<Define |Sphere| functions@>= 
 
-   if (options == 0)
+   if (options == static_cast<Sphere_Set_Option_Struct*>(0))
       {
           cerr << "options == 0" << endl;
           divisions_vertical = DEFAULT_DIVISIONS;
@@ -464,7 +464,7 @@ Added this section.
 
 @<Define |Sphere| functions@>= 
 
-   if (options == 0)
+   if (options == static_cast<Sphere_Set_Option_Struct*>(0))
       {
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -517,7 +517,7 @@ Added this section.
 
 @<Define |Sphere| functions@>= 
 
-   if (options == 0)
+   if (options == static_cast<Sphere_Set_Option_Struct*>(0))
       {
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -539,7 +539,7 @@ Added this section.
       }  /* |if (options == 0)|  */
 
 
-   else if (options->radius == 0)
+   else if (options->radius == ZERO_REAL)
       {
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -613,7 +613,7 @@ Added this section.
 
 @<Define |Sphere| functions@>= 
 
-   if (options == 0)
+   if (options == static_cast<Sphere_Set_Option_Struct*>(0))
       {
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -1507,7 +1507,7 @@ void
 Sphere::shift_times(real x, real y, real z)
 {
 
-    if (center != 0)
+    if (center != static_cast<Point*>(0))
        center->shift_times(x, y, z);
 
 
@@ -1800,7 +1800,7 @@ Sphere::intersection_points(const Line& l, Scanner_Node scanner_node) const
    real lambda1 = -p + root_value;
    point_pair.first  = a + (lambda1 * v);
 
-   if (root_value == 0)
+   if (root_value == ZERO_REAL)
       {
          point_pair.second = INVALID_POINT;
          return point_pair;          
@@ -2384,7 +2384,7 @@ Sphere_Set_Option_Struct::show(string text)
 
 @q ***** (5).@> 
 
-   if (center == 0)
+   if (center == static_cast<Point*>(0))
       cerr << "center == 0" << endl;
    else
       center->show("center");
