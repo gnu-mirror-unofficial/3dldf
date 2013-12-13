@@ -2978,7 +2978,7 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
 
   Thread_Info_Type* thread_info;
 
-  if (scanner_node == 0 /* Assume we're using threads.  */
+  if (scanner_node == static_cast<Scanner_Node>(0) /* Assume we're using threads.  */
 
       || (scanner_node->get_run_state()->multithread_input 
           || scanner_node->get_run_state()->multithread_output)      

@@ -1338,7 +1338,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_cull = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1361,8 +1362,9 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
-      scanner_node->conic_section_lattice_options->do_cull = false;      
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
+          scanner_node->conic_section_lattice_options->do_cull = false;      
 
    @=$$@> = static_cast<void*>(0);
 };
@@ -1386,8 +1388,9 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
-      scanner_node->conic_section_lattice_options->tolerance = @=$2@>;      
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
+       scanner_node->conic_section_lattice_options->tolerance = @=$2@>;      
 
    @=$$@> = static_cast<void*>(0);
 };
@@ -1563,7 +1566,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_rectify = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1586,7 +1590,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_rectify = false;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1655,7 +1660,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_test = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1678,7 +1684,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_test = false;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1702,7 +1709,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
       scanner_node->conic_section_lattice_options->do_transform = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1727,7 +1735,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
    {
       scanner_node->conic_section_lattice_options->do_transform = true;      
       scanner_node->conic_section_lattice_options->transform 
@@ -1755,7 +1764,8 @@ Added this rule.
     
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node != 0 && scanner_node->conic_section_lattice_options != 0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->conic_section_lattice_options != 0)
    {
       scanner_node->conic_section_lattice_options->do_transform = false;      
    }

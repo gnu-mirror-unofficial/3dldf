@@ -233,7 +233,7 @@ Added this rule.
 
 @q ***** (5)@> 
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 #if 0 
           cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "

@@ -115,7 +115,7 @@ in the |Id_Map_Entry_Node|.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
        cerr_strm << "ERROR! In yyparse(), rule " 

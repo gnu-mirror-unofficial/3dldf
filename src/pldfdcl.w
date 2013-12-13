@@ -2121,7 +2121,8 @@ Added this rule.
    string thread_name;
 
 #ifdef HAVE_PTHREAD_H  
-   if (   scanner_node != 0 && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
        && (   scanner_node->run_state.multithread_input 
            || scanner_node->run_state.multithread_output))      
 
@@ -2204,7 +2205,8 @@ Added this rule.
    string thread_name;
 
 #ifdef HAVE_PTHREAD_H  
-   if (   scanner_node != 0 && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
        && (   scanner_node->run_state.multithread_input 
            || scanner_node->run_state.multithread_output))      
 
@@ -2287,7 +2289,8 @@ Added this rule.
    string thread_name;
 
 #ifdef HAVE_PTHREAD_H  
-   if (   scanner_node != 0 && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
+   if (   scanner_node != static_cast<Scanner_Node>(0) 
+       && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
        && (   scanner_node->run_state.multithread_input 
            || scanner_node->run_state.multithread_output))      
 

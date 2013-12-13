@@ -159,7 +159,7 @@ Added this rule.
 
 @q ****** (6).@> 
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                    << "`macro_definition --> "
@@ -331,7 +331,7 @@ Rewrote this rule.
 
    entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                    << "`macro_definition --> "

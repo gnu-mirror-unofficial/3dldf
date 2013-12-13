@@ -129,7 +129,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |if (entry == 0)|  */
@@ -214,7 +214,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |if (entry == 0)|  */
@@ -300,7 +300,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |if (entry == 0)|  */
@@ -398,7 +398,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |else if (entry == 0)|  */
@@ -509,7 +509,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |else if (entry == 0)|  */
@@ -615,7 +615,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |else if (entry == 0)|  */
@@ -708,7 +708,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
  
       } /* |else if (entry == 0)|  */
@@ -841,7 +841,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -978,7 +978,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1143,7 +1143,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1298,7 +1298,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1429,7 +1429,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1584,7 +1584,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   else if (entry == 0)
+   else if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1734,7 +1734,7 @@ Changed \§path-like variable> back to \§path variable>.
 \initials{LDF 2004.10.27.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -2018,7 +2018,7 @@ Changed \§path-like variable> back to \§path variable>.
 \initials{LDF 2004.11.01.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
   
@@ -2138,7 +2138,7 @@ Removed debugging code.
 
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          /* Do nothing.  */          
       }
@@ -2239,7 +2239,7 @@ Added this rule.
 \initials{LDF 2005.01.26.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -2373,7 +2373,7 @@ Added this rule.
 \initials{LDF 2005.01.26.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -2601,7 +2601,7 @@ Added this rule.
 \initials{LDF 2009.11.16.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -2757,7 +2757,7 @@ Added this rule.
 \initials{LDF 2005.11.18.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
   
@@ -2823,7 +2823,7 @@ Added this rule.
 \initials{LDF 2005.11.18.}
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
   
@@ -2919,7 +2919,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -4050,7 +4050,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
           cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                     << "`operation_assignment -->  "
@@ -4430,7 +4430,7 @@ Moved this rule from \filename{passign.w} to this file
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -4877,7 +4877,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -5073,7 +5073,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
@@ -5279,7 +5279,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -5474,7 +5474,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
@@ -5583,7 +5583,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
@@ -5692,7 +5692,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
@@ -5826,7 +5826,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -6119,7 +6119,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -6411,7 +6411,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -6703,7 +6703,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -6898,7 +6898,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
@@ -7007,7 +7007,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       delete pv;
@@ -7216,7 +7216,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 

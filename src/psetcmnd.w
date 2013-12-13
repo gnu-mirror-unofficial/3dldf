@@ -165,7 +165,7 @@ signalled an error.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
    
 
@@ -553,7 +553,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
      {
         
         @=$$@> = static_cast<void*>(0);
@@ -705,7 +705,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
      {
         @=$$@> = static_cast<void*>(0);
 
@@ -1971,7 +1971,7 @@ Started working on this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
      {
         
         @=$$@> = static_cast<void*>(0);
@@ -2066,7 +2066,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
      {
         @=$$@> = static_cast<void*>(0);
 

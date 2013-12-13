@@ -1569,7 +1569,7 @@ Added this rule.
 
     Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$3@>); 
 
-    if (c != 0)
+    if (c != static_cast<Conic_Section_Lattice*>(0))
     {       
         c->label_lattice(parameter, 
                          @=$1@>, 
@@ -1620,7 +1620,7 @@ right-hand side.
 
     Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$3@>); 
 
-    if (c != 0)
+    if (c != static_cast<Conic_Section_Lattice*>(0))
     {       
         c->label_lattice(parameter, 
                          @=$1@>, 
@@ -1672,7 +1672,7 @@ right-hand side.
 
     Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$4@>); 
 
-    if (c != 0)
+    if (c != static_cast<Conic_Section_Lattice*>(0))
     {       
         c->label_lattice(parameter, 
                          @=$1@>, 

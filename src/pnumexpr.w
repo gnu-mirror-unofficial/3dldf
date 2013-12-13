@@ -1526,7 +1526,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
          @=$$@> = INVALID_REAL;
@@ -1586,7 +1586,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          @=$$@> = INVALID_REAL;
 

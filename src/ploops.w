@@ -583,7 +583,7 @@ Added this section.
 
           scanner_node->loop_info_node = scanner_node->loop_info_node->up;
       
-          if (temp_loop_info_node != 0)
+          if (temp_loop_info_node != static_cast<Loop_Info_Node>(0))
 
             delete temp_loop_info_node;
 
@@ -745,7 +745,7 @@ Added this section.
 
   scanner_node->loop_info_node = scanner_node->loop_info_node->up;
       
-      if (temp_loop_info_node != 0)
+      if (temp_loop_info_node != static_cast<Loop_Info_Node>(0))
 
         delete temp_loop_info_node;
 
@@ -829,7 +829,7 @@ Added this section.
 
       scanner_node->loop_info_node = scanner_node->loop_info_node->up;
       
-      if (temp_loop_info_node != 0)
+      if (temp_loop_info_node != static_cast<Loop_Info_Node>(0))
 
         delete temp_loop_info_node;
 

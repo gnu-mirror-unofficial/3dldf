@@ -192,7 +192,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
 
   Thread_Info_Type* thread_info;
 
-  if (scanner_node == 0 /* Assume we're using threads.  */
+  if (scanner_node == static_cast<Scanner_Node>(0) /* Assume we're using threads.  */
 
       || (scanner_node->get_run_state()->multithread_input 
           || scanner_node->get_run_state()->multithread_output)      
@@ -6299,7 +6299,7 @@ Now declaring the automatic variable |int status|.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (new_scanner_node == 0)
+  if (new_scanner_node == static_cast<Scanner_Node>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR: In `Scan_Parse::input_command()':"

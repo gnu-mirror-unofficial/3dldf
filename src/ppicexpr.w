@@ -99,7 +99,7 @@ to |Id_Map_Entry_Node|, cast to |void*|.
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
