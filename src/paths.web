@@ -8613,7 +8613,8 @@ Revised the code that checks the value of |arrow|.
 
           @<Output |Path|@>@;
 
-          if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) && fill_color_vector->ctr > 0)
+          if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+              && fill_color_vector->ctr > 0)
             *out_stream << " withcolor " << *(fill_color_vector->v[0]);
 
         *out_stream << ";" << endl << flush;
@@ -9110,7 +9111,8 @@ Added code for suppressing output if the type of the current
                status = adjust_dash_pattern_vector();
   
 
-               if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) && dash_pattern_vector->ctr > 0)
+               if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                   && dash_pattern_vector->ctr > 0)
                   {
                       dash_pattern_iter = dash_pattern_vector->v.begin();
                       do_dash_patterns = true;
@@ -9137,7 +9139,8 @@ Added code for suppressing output if the type of the current
                       cerr << "`do_dash_patterns' == " << do_dash_patterns
                            << endl;
 
-                      if (do_dash_patterns && dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
+                      if (do_dash_patterns && dash_pattern_vector 
+                             != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
                          cerr << "`dash_pattern_vector->v.size' == " 
                               << dash_pattern_vector->v.size()
                               << endl;
@@ -9438,13 +9441,15 @@ Added code for suppressing output if the type of the current
 
                @<Output |Path|@>@;
 
-               if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) && draw_color_vector->ctr > 0)
+               if (   draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                   && draw_color_vector->ctr > 0)
                   *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
 
                if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
                   *out_stream << endl << "withpen " << *(pen_vector->v[0]) << " ";
 
-               if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) && dash_pattern_vector->ctr > 0)
+               if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                   && dash_pattern_vector->ctr > 0)
                   *out_stream << endl << *(dash_pattern_vector->v[0]);
 
                *out_stream << ";\n" << flush;
@@ -9593,7 +9598,8 @@ the output operator for |Dash_Pattern|.
 
 @<Handle |dash_pattern|@>=
 
-  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) && dash_pattern_vector->ctr > 0)
+  if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+      && dash_pattern_vector->ctr > 0)
     {
 
         *out_stream << endl << *(dash_pattern_vector->v[0]);
@@ -12318,7 +12324,8 @@ adjust_dash_pattern_vector(void);
 int
 Path::adjust_dash_pattern_vector(void)
 {
-   if (dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0) || dash_pattern_vector->ctr <= 0)
+   if (   dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+       || dash_pattern_vector->ctr <= 0)
       return 1;
 
    int i = 0;
