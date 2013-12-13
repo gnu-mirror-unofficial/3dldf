@@ -350,14 +350,14 @@ of the function that uses a |Picture_Output_Arg_Type| object.
 @<Define |struct Picture_Output_Arg_Type| functions@>=
 Scan_Parse::Picture_Output_Arg_Type::~Picture_Output_Arg_Type(void)
 {
-  if (picture != 0)
+  if (picture != static_cast<Picture*>(0))
     {
       picture->clear();
       delete picture;
       picture = 0;
     }
 
-  if (focus != 0)
+  if (focus != static_cast<Focus*>(0))
     {
       delete focus;
       focus = 0;
@@ -1221,7 +1221,7 @@ Replaced the code in this section with a call to
 
 @<Define |Scan_Parse| functions@>= 
 
-      if (*(scanner_node->default_pen) != 0)
+      if (*(scanner_node->default_pen) != static_cast<Pen*>(0))
         {
            *out_stream << "pickup " << **(scanner_node->default_pen);
                    
@@ -1462,7 +1462,7 @@ If it's not, set |*return_value = 1| and exit with return value
   Picture_Output_Arg_Type* picture_ptr_arg
     = static_cast<Picture_Output_Arg_Type*>(arg); 
 
-  if (picture_ptr_arg == 0)
+  if (picture_ptr_arg == static_cast<Picture_Output_Arg_Type*>(0))
     {
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
                 << "`arg' == 0."
@@ -1584,7 +1584,7 @@ without \.{--multithread-input}.
 
   Output_Struct* out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAPOST];
 
-  if (out_stream == 0)
+  if (out_stream == static_cast<Output_Struct*>(0))
      {
          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
                    << endl 
@@ -2295,7 +2295,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
 
 @<Define |Scan_Parse| functions@>=
 
-  if (scanner_node->endfig_ptr != 0)
+  if (scanner_node->endfig_ptr != static_cast<void*>(0))
     {
       
       is_endfig = *static_cast<bool*>(scanner_node->endfig_ptr);
@@ -2472,7 +2472,7 @@ at this time.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (p == 0)
+  if (p == static_cast<Picture_Output_Arg_Type*>(0))
     {
         cerr_strm << "ERROR! " << thread_name
                   << "In `Scan_Parse::output_command_func()':"
@@ -3502,7 +3502,7 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| template functions@>=
 
-  if (expr == 0)
+  if (expr == static_cast<C*>(0))
     {
       cerr_strm << thread_name << "ERROR! In "
                 << "`Scan_Parse::assign_simple()':"
@@ -3553,7 +3553,7 @@ if |entry->object == 0|.  Otherwise, assigning to
 
   if (use_or_delete_expr)
     {
-       if (c == 0)   
+       if (c == static_cast<C*>(0))   
          c = expr;
     
        else /* |c != 0|  */
@@ -3585,7 +3585,7 @@ Added this section.
   else /* |!use_or_delete_expr|  */
      {
 
-        if (c == 0)
+        if (c == static_cast<C*>(0))
            {
   
               try 
@@ -3945,7 +3945,7 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
 @<Define |Scan_Parse| template functions@>=
 
 
-  if (expr == 0)
+  if (expr == static_cast<const C*>(0))
     {
         cerr_strm << thread_name << "ERROR! "
                   << "In `Scan_Parse::assign_chained()':"
@@ -4238,7 +4238,7 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-   if (entry_0 == 0) 
+   if (entry_0 == static_cast<Id_Map_Entry_Node>(0)) 
        { 
            cerr_strm << thread_name 
                      << "ERROR! In `Scan_Parse::assign_picture_simple()':"
@@ -4835,7 +4835,7 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-  if (t == 0)
+  if (t == static_cast<Picture*>(0))
     {
 
       cerr_strm << thread_name 
@@ -6658,7 +6658,7 @@ and continue.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (vector_entry != 0)
+   if (vector_entry != static_cast<Id_Map_Entry_Node>(0))
       {
 
         cerr_strm << thread_name 
@@ -6722,7 +6722,7 @@ and continue.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (array_entry != 0)
+   if (array_entry != static_cast<Id_Map_Entry_Node>(0))
       {
 
         cerr_strm << thread_name 
@@ -7817,7 +7817,7 @@ Added this section.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (object_vector == 0)
+   if (object_vector == static_cast<const Pointer_Vector<D>*>(0))
       {
          cerr_strm << thread_name 
                    << "ERROR!  In `Scan_Parse::vector_type_assign()':"
@@ -7855,7 +7855,7 @@ Now deleting |pv| and setting it to 0, if it's not 0 already.
 
   PV*  pv = static_cast<PV*>(entry->object);
 
-  if (pv != 0)
+  if (pv != static_cast<PV*>(0))
      {
          delete pv;
          pv = 0;
@@ -8172,7 +8172,7 @@ Scan_Parse::cull_func(void* v,
 
 @q ***** (5)@> 
 
-     if (v == 0)
+     if (v == static_cast<void*>(0))
      {
          cerr_strm << thread_name 
                    << "WARNING!  In `Scan_Parse::cull_func':"
@@ -8366,7 +8366,7 @@ Scan_Parse::rectify_func(void* v,
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (v == 0)
+   if (v == static_cast<void*>(0))
    {
        cerr_strm << thread_name << "ERROR!  In `Scan_Parse::rectify_func':"
                  << endl 
@@ -8886,7 +8886,7 @@ return 0.
 
 @<Define |Scan_Parse| template functions@>= 
 
-  if (object == 0)
+  if (object == static_cast<C*>(0))
      {
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::reflect_in_func()': "
                 << "`object' == 0."
@@ -8937,7 +8937,7 @@ return 0.
 
 @<Define |Scan_Parse| template functions@>= 
 
-  if (plane_path == 0)
+  if (plane_path == static_cast<Path*>(0))
      {
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::reflect_in_func()': "
                 << "`plane_path' == 0."
@@ -9119,7 +9119,7 @@ return 0.
 
 @<Define |Scan_Parse| template functions@>=
 
-  if (reflection == 0)
+  if (reflection == static_cast<C*>(0))
      {
 
         cerr_strm << thread_name << "ERROR! In `Scan_Parse::reflect_in_func()': "
@@ -9345,7 +9345,7 @@ Now deleting |reflection|.
 
 @<Define |Scan_Parse| template functions@>= 
 
-  if (object == 0)
+  if (object == static_cast<C*>(0))
      {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::reflect_off_func()': "
@@ -9440,7 +9440,7 @@ Now deleting |reflection|.
 
 @<Define |Scan_Parse| template functions@>= 
 
-  if (plane_path == 0)
+  if (plane_path == static_cast<Path*>(0))
      {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::reflect_off_func()': "
@@ -9479,7 +9479,7 @@ Now deleting |reflection|.
 
 @<Define |Scan_Parse| template functions@>= 
 
-  if (direction == 0)
+  if (direction == static_cast<Point*>(0))
      {
          cerr_strm << thread_name 
                    << "ERROR! In `Scan_Parse::reflect_off_func()': "
@@ -9644,7 +9644,7 @@ so it never throws |bad_alloc|.  I haven't yet defined
         cerr << cerr_strm.str();
         cerr_strm.str("");
 
-        if (pv != 0)
+        if (pv != static_cast<Pointer_Vector<C>*>(0))
            pv->show("pv in `Scan_Parse::reflect_off_func()':");
 
         cerr_mutex.unlock(); 
@@ -9756,7 +9756,7 @@ Added this section.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (expression == 0)
+   if (expression == static_cast<C*>(0))
      {
         cerr_strm << thread_name << "ERROR! In `Scan_Parse::pickup_command<C>()':"
                   << endl << "`C* expression' is null. "
@@ -9792,7 +9792,7 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| template functions@>=
-         if (q == 0)
+         if (q == static_cast<C*>(0))
             {
                try 
                   {
@@ -9910,7 +9910,7 @@ Scan_Parse::drop_command(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (*pointer == 0)
+   if (*pointer == static_cast<C*>(0))
       {
 
           cerr_strm << thread_name << "WARNING!  In "
@@ -10440,7 +10440,7 @@ Scan_Parse::get_point_func<Conic_Section_Lattice>(real r,
 
 @<Define |Scan_Parse| functions@>=
 
-    if (c == 0)
+    if (c == static_cast<Conic_Section_Lattice*>(0))
     {
         
         cerr_strm << thread_name << "ERROR! In `Scan_Parse::get_point_func':"
@@ -10681,7 +10681,7 @@ Scan_Parse::normal_func(C* c, Scanner_Node scanner_node)
 
 @<Define |Scan_Parse| template functions@>=
 
-  if (c == 0)
+  if (c == static_cast<C*>(0))
     {
 
       return 0;
@@ -11016,7 +11016,7 @@ template<class C>
 void*
 Scan_Parse::standardize_func(C* c, void* v)
 {
-   if (c == 0)
+   if (c == static_cast<C*>(0))
       return 0;
 
    Transform* t = c->standardize(static_cast<Scanner_Node>(v));
@@ -11480,7 +11480,8 @@ Added this section.
 \ENDLOG
 @<Define |Scan_Parse| template functions@>=
 
-    if (conic_section_lattice == 0 || c == 0)
+    if (   conic_section_lattice == static_cast<Conic_Section_Lattice*>(0) 
+        || c == static_cast<C*>(0))
     {
         delete conic_section_lattice;
         delete c;
@@ -11674,7 +11675,7 @@ template<class C>
 void*
 Scan_Parse::plane_cast_func(C* c, void* parameter) 
 {
-    if (c == 0)
+    if (c == static_cast<C*>(0))
        return 0;
     else if (!c->is_planar())
        {
@@ -11743,7 +11744,7 @@ template <class C>
 void*
 Scan_Parse::plane_assignment_func(void* entry, C* c, void* parameter)
 {
-   if (c == 0)
+   if (c == static_cast<C*>(0))
       return 0;
 
    else if (!c->is_planar())
@@ -12321,7 +12322,7 @@ void*
 Scan_Parse::in_cuboid_func(C* c, void* parameter)
 {
 
-   if (c == 0)
+   if (c == static_cast<C*>(0))
       return 0;
 
    Cuboid* d = c->in_cuboid(static_cast<Scanner_Node>(parameter));   
@@ -12371,7 +12372,7 @@ template<class C>
 void*
 Scan_Parse::out_cuboid_func(C* c, void* parameter)
 {
-   if (c == 0)
+   if (c == static_cast<C*>(0))
       return 0;
 
    Cuboid* d = c->out_cuboid(static_cast<Scanner_Node>(parameter));   
