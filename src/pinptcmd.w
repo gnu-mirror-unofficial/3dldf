@@ -102,7 +102,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (s == 0 || s->size() == 0)
+  if (s == static_cast<string*>(0) || s->size() == 0)
     {
 
       cerr_strm << thread_name 
@@ -218,7 +218,7 @@ Now deleting |s|, if it's non-null.
 
 @<Define rules@>=
 
-  if (s != 0)
+  if (s != static_cast<string*>(0))
     delete s;
 
   @=$$@> = static_cast<void*>(0); 

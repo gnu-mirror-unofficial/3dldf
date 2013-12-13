@@ -729,7 +729,7 @@ Point::reflect_in(const Plane& p,
 @<Define |Point| functions@>=
 
 
-   if (reflection == 0)
+   if (reflection == static_cast<Point*>(0))
      {
         cerr_strm << thread_name 
                   << "WARNING! In `Point::reflect_in()':"
@@ -1031,7 +1031,7 @@ Now deleting |pv| and setting it to 0.
 
 @<Define |Point| functions@>=
   
-  if (reflection == 0)
+  if (reflection == static_cast<Point*>(0))
      {
 
          cerr_strm << thread_name << "ERROR!  In `Point::reflect_off()':"
@@ -1152,7 +1152,7 @@ Added this section.
 @<Define |Point| functions@>=
 
 
-   if (rs.first == 0)
+   if (rs.first == ZERO_REAL)
      {
         cerr_strm << thread_name << "ERROR! In `Point::reflect_off()':"
                   << endl 
@@ -1363,7 +1363,7 @@ Handle cases: |Path| is in |Plane|, and |Path| is in a parallel
 
 @<Define |Plane| functions@>=
 
-  if (denominator == 0)  
+  if (denominator == ZERO_REAL)  
     {
          if (!suppress_warnings)  
             {
@@ -1555,13 +1555,13 @@ now.
   real vy = direction_vector.get_y();
   real vz = direction_vector.get_z();
 
-  if (direction_vector.get_x() != 0)
+  if (direction_vector.get_x() != ZERO_REAL)
     {
       x = 0;
       y = -1 * ((d*mz - e*nz) / vx);
       z = (d*my - e*ny) / vx;
     }
-  else if (direction_vector.get_y() != 0)
+  else if (direction_vector.get_y() != ZERO_REAL)
     {
       x = (d * mz - e * nz) / vy;
       y = 0;

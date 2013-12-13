@@ -394,7 +394,7 @@ Added this rule.
 
     bool* b;
 
-    if (scanner_node->clear_ptr == 0)
+    if (scanner_node->clear_ptr == static_cast<void*>(0))
       b = new bool;
 
     *b = true;
@@ -419,7 +419,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node->focus_ptr != 0)
+   if (scanner_node->focus_ptr != static_cast<void*>(0))
       delete static_cast<Focus*>(scanner_node->focus_ptr);
 
    @=$$@> = scanner_node->focus_ptr = @=$2@>;
@@ -447,7 +447,7 @@ Added this rule.
 
     *i = @=$2@>;
 
-    if (scanner_node->projection_ptr != 0)
+    if (scanner_node->projection_ptr != static_cast<void*>(0))
       delete static_cast<int*>(scanner_node->projection_ptr);
 
     @=$$@> = scanner_node->projection_ptr = static_cast<void*>(i);
@@ -476,7 +476,7 @@ set |@=$$@>|.
 
   real* r;
 
-  if (scanner_node->factor_ptr != 0)
+  if (scanner_node->factor_ptr != static_cast<void*>(0))
      r = static_cast<real*>(scanner_node->factor_ptr); 
   else 
      r = new real;
@@ -535,7 +535,7 @@ Added this rule.
     int* i = new int;
     *i = Sorting::MAX_Z;
 
-    if (scanner_node->sort_value_ptr != 0)
+    if (scanner_node->sort_value_ptr != static_cast<void*>(0))
       delete static_cast<int*>(scanner_node->sort_value_ptr);
 
     @=$$@> = scanner_node->sort_value_ptr = static_cast<void*>(i); 
@@ -560,7 +560,7 @@ Added this rule.
     int* i = new int;
     *i = Sorting::MIN_Z;
 
-    if (scanner_node->sort_value_ptr != 0)
+    if (scanner_node->sort_value_ptr != static_cast<void*>(0))
       delete static_cast<int*>(scanner_node->sort_value_ptr);
 
     @=$$@> = scanner_node->sort_value_ptr = static_cast<void*>(i); 
@@ -585,7 +585,7 @@ Added this rule.
    int* i = new int;
    *i = Sorting::MEAN_Z;
 
-   if (scanner_node->sort_value_ptr != 0)
+   if (scanner_node->sort_value_ptr != static_cast<void*>(0))
       delete static_cast<int*>(scanner_node->sort_value_ptr);
 
    @=$$@> = scanner_node->sort_value_ptr = static_cast<void*>(i); 
@@ -610,7 +610,7 @@ Added this rule.
     int* i = new int;
     *i = Sorting::SUPPRESS_SORT;
 
-    if (scanner_node->sort_value_ptr != 0)
+    if (scanner_node->sort_value_ptr != static_cast<void*>(0))
       delete static_cast<int*>(scanner_node->sort_value_ptr);
 
     @=$$@> = scanner_node->sort_value_ptr = static_cast<void*>(i); 
@@ -669,7 +669,7 @@ set |@=$$@>|.
   
     real* r;
 
-    if (scanner_node->factor_ptr != 0)
+    if (scanner_node->factor_ptr != static_cast<void*>(0))
        r = static_cast<real*>(scanner_node->min_x_proj_ptr); 
     else 
        r = new real;
@@ -706,7 +706,7 @@ set |@=$$@>|.
 
     real* r;
 
-    if (scanner_node->factor_ptr != 0)
+    if (scanner_node->factor_ptr != static_cast<void*>(0))
        r = static_cast<real*>(scanner_node->max_x_proj_ptr); 
     else 
        r = new real;
@@ -739,7 +739,7 @@ set |@=$$@>|.
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
   real* r;
 
-  if (scanner_node->factor_ptr != 0)
+  if (scanner_node->factor_ptr != static_cast<void*>(0))
      r = static_cast<real*>(scanner_node->min_y_proj_ptr); 
   else 
      r = new real;
@@ -774,7 +774,7 @@ set |@=$$@>|.
 
   real* r;
 
-  if (scanner_node->factor_ptr != 0)
+  if (scanner_node->factor_ptr != static_cast<void*>(0))
      r = static_cast<real*>(scanner_node->max_y_proj_ptr); 
   else 
      r = new real;
@@ -807,7 +807,7 @@ set |@=$$@>|.
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
   real* r;
 
-  if (scanner_node->factor_ptr != 0)
+  if (scanner_node->factor_ptr != static_cast<void*>(0))
      r = static_cast<real*>(scanner_node->min_z_proj_ptr); 
   else 
      r = new real;
@@ -840,7 +840,7 @@ set |@=$$@>|.
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);  
   real* r;
 
-  if (scanner_node->factor_ptr != 0)
+  if (scanner_node->factor_ptr != static_cast<void*>(0))
      r = static_cast<real*>(scanner_node->max_z_proj_ptr); 
   else 
      r = new real;
@@ -1025,12 +1025,12 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
    real* r;
 
-   if (scanner_node->surface_hiding_value_ptr != 0)
+   if (scanner_node->surface_hiding_value_ptr != static_cast<void*>(0))
       {
          r = static_cast<real*>(scanner_node->surface_hiding_value_ptr);           
       }
 
-   else  /* |scanner_node->surface_hiding_value_ptr == 0|  */
+   else  /* |scanner_node->surface_hiding_value_ptr == static_cast<void*>(0)|  */
       {
 
                r = new real;
@@ -1059,7 +1059,7 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
    real* r;
 
-   if (scanner_node->surface_hiding_value_ptr != 0)
+   if (scanner_node->surface_hiding_value_ptr != static_cast<void*>(0))
       {
          r = static_cast<real*>(scanner_node->surface_hiding_value_ptr);           
       }
