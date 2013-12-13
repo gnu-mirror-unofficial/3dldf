@@ -3980,7 +3980,7 @@ from function successfully.
                  << endl 
                  << "   `entry->name' == " << entry->name << ". ";
 
-      if (entry->object == 0)
+      if (entry->object == static_cast<void*>(0))
         cerr_strm << "`entry->object' == 0. Allocating new object.";
       else
         cerr_strm << "`entry->object' != 0. Not allocating new object.";
@@ -4014,7 +4014,7 @@ this function and call it instead of |new|.
 
 @<Define |Scan_Parse| template functions@>=
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
      {
          try  
            {
@@ -4331,7 +4331,7 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
       cerr_strm << thread_name << "In `Scan_Parse::assign_picture_simple()':"
                 << endl << "entry->name == " << entry->name << "." << endl;
 
-      if (entry->object == 0)
+      if (entry->object == static_cast<void*>(0))
         cerr_strm << "entry->object == 0. Allocating new `picture'.";
       else
         cerr_strm << "entry->object != 0. Not allocating new `picture'.";
@@ -4343,7 +4343,7 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(new(Picture));
 
 @q ***** (5) Try to lock |entry_0->mutex|.@> 
@@ -4809,7 +4809,7 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
                 << endl 
                 <<  "entry->name == " << entry->name << endl;
 
-      if (entry->object == 0)
+      if (entry->object == static_cast<void*>(0))
         cerr_strm << "entry->object == 0. Creating new `Picture'.";
       else
         cerr_strm << "entry->object != 0. Not creating new `Picture'.";
@@ -4823,7 +4823,7 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(new(Picture));
 
   s = static_cast<Picture*>(entry->object); 
@@ -5362,7 +5362,7 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
                 << "entry->name == " << entry->name << "." 
                 << endl;
 
-      if (entry->object == 0)
+      if (entry->object == static_cast<void*>(0))
         cerr_strm << "entry->object == 0. Allocating new `Point'.";
       else
         cerr_strm << "entry->object != 0. Not allocating new `Point'.";
@@ -5374,7 +5374,7 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(create_new<Point>(0));
 
 
@@ -5661,7 +5661,7 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 
   Color* c;
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
     {
       c = create_new<Color>(0);
       entry->object = static_cast<void*>(c); 
@@ -5928,7 +5928,7 @@ Int_Void_Ptr
                   << endl
                   << "entry->name == " << entry->name << endl;
 
-        if (entry->object == 0)
+        if (entry->object == static_cast<void*>(0))
            cerr_strm << "entry->object == 0. Allocating new `focus'.";
         else
            cerr_strm << "entry->object != 0. Not allocating new `focus'.";
@@ -5941,7 +5941,7 @@ Int_Void_Ptr
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(create_new<Focus>(0));
 
   f = static_cast<Focus*>(entry->object); 
@@ -8196,7 +8196,7 @@ Scan_Parse::cull_func(void* v,
 
      Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(v);
 
-     if (entry->object == 0)
+     if (entry->object == static_cast<void*>(0))
      {
          cerr_strm << thread_name 
                    << "WARNING!  In `Scan_Parse::cull_func':"
@@ -8396,7 +8396,7 @@ Scan_Parse::rectify_func(void* v,
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
    {
        cerr_strm << thread_name << "ERROR!  In `Scan_Parse::rectify_func':"
                  << endl 

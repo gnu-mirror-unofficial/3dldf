@@ -117,7 +117,7 @@ Added this conditional.
 \ENDLOG 
 
 @<Define rules@>=
-  else if (entry->object == 0)
+  else if (entry->object == static_cast<void*>(0))
     {
       entry->known_state = Id_Map_Entry_Type::KNOWN;
  

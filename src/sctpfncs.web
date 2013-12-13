@@ -2340,7 +2340,7 @@ Scanner_Type::extract_picture_output_args(void)
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      if (entry != 0)
+      if (entry != static_cast<Id_Map_Entry_Node>(0))
         {
           cerr_mutex.lock();
 
@@ -2446,7 +2446,7 @@ Scanner_Type::extract_picture_output_args(void)
 
 @<Define |Scanner_Type| functions@>=
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
      {
 
       cerr_strm << thread_name << "ERROR! "

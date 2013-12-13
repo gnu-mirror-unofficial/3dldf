@@ -5653,7 +5653,7 @@ Scan_Parse::set_helix_rule_func_0(void* curr_var,
  
    Helix* curr_helix;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
           curr_helix = create_new<Helix>(0);
           entry->object = static_cast<void*>(curr_helix); 
@@ -5749,7 +5749,7 @@ Scan_Parse::set_cone_rule_func_0(void* curr_var,
  
    Cone* curr_cone;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
           curr_cone = create_new<Cone>(0);
           entry->object = static_cast<void*>(curr_cone); 
@@ -5842,7 +5842,7 @@ Scan_Parse::set_cylinder_rule_func_0(void* curr_var,
  
    Cylinder* curr_cylinder;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
           curr_cylinder = create_new<Cylinder>(0);
           entry->object = static_cast<void*>(curr_cylinder); 
@@ -5941,7 +5941,7 @@ Scan_Parse::set_ellipsoid_rule_func_0(void* curr_var,
  
    Ellipsoid* curr_ellipsoid;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
           curr_ellipsoid = create_new<Ellipsoid>(0);
           entry->object = static_cast<void*>(curr_ellipsoid); 
@@ -6037,7 +6037,7 @@ Scan_Parse::set_sphere_rule_func_0(void* curr_var,
  
    Sphere* curr_sphere;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
           curr_sphere = create_new<Sphere>(0);
           entry->object = static_cast<void*>(curr_sphere); 
@@ -6145,7 +6145,7 @@ Scan_Parse::set_sphere_development_rule_func_0(void* curr_var,
  
    Sphere_Development* curr_sphere_development;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
           curr_sphere_development = create_new<Sphere_Development>(0);
           entry->object = static_cast<void*>(curr_sphere_development); 
@@ -6306,7 +6306,7 @@ Scan_Parse::set_paraboloid_rule_func_0(void* curr_var,
 
 @q ***** (5)@> 
 
-   else if (entry->object != 0)
+   else if (entry->object != static_cast<void*>(0))
       {
           Paraboloid* curr_paraboloid = static_cast<Paraboloid*>(entry->object);
 

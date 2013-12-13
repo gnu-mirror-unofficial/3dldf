@@ -1542,7 +1542,7 @@ Added this rule.
 
    else  /* |entry != 0|  */
       {
-          if (entry->object == 0)
+          if (entry->object == static_cast<void*>(0))
              @=$$@> = ZERO_REAL;
 
           else  /* |entry->object != 0|  */
@@ -1601,7 +1601,7 @@ Added this rule.
 
    else  /* |entry != 0|  */
       {
-          if (entry->object == 0)
+          if (entry->object == static_cast<void*>(0))
              @=$$@> = ZERO_REAL;
 
           else  /* |entry->object != 0|  */

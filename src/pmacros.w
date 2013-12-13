@@ -365,7 +365,7 @@ Rewrote this rule.
 
 @q ******* (7) @> 
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
             {
                Definition_Info_Node d;
 

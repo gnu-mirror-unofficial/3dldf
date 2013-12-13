@@ -152,7 +152,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
            } /* |if (entry->object == 0)|  */
@@ -237,7 +237,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
 
@@ -323,7 +323,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
 
@@ -421,7 +421,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
            } /* |if (entry->object == 0)|  */
@@ -532,7 +532,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
               delete c;
@@ -638,7 +638,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
 
@@ -731,7 +731,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
 
@@ -875,7 +875,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
               cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1177,7 +1177,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
               cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1332,7 +1332,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
               cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1463,7 +1463,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
               cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1618,7 +1618,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
            {
 
               cerr_strm << thread_name << "ERROR! In `yyparse()', rule "

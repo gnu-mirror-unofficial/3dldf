@@ -267,7 +267,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
           cerr_message(cerr_strm);
           cerr_strm.str("");
 
-          if (entry->object == 0)
+          if (entry->object == static_cast<void*>(0))
             {
               
               cerr_strm << thread_name << "In `Scan_Parse::variable_func()':"
@@ -329,7 +329,7 @@ Normally there should be one.  However, if there isn't, i.e.,
         {
           curr_type = UNDECLARED;
         }
-      else if (entry->object == 0)
+      else if (entry->object == static_cast<void*>(0))
         {
           curr_type = entry->type;
         }
@@ -7627,7 +7627,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry->object == 0)
+  if (entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::transformation_command_func()':"
@@ -10441,7 +10441,7 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
 
    Definition_Info_Node din;
 
-   if (entry->object == 0)
+   if (entry->object == static_cast<void*>(0))
       {
          try
             {

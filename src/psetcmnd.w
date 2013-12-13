@@ -195,7 +195,7 @@ Rethrow |bad_alloc| upon error.
 
 @<Define rules@>=
    
-         if (entry->object == 0)
+         if (entry->object == static_cast<void*>(0))
             {
 
                 c = create_new<Color>(0);

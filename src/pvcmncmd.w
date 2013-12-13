@@ -257,7 +257,7 @@ Added this rule.
 
 @q ****** (6)@> 
 
-          if (entry->object == 0)
+          if (entry->object == static_cast<void*>(0))
              {
               
                          pv  = new Pointer_Vector<Picture>;
