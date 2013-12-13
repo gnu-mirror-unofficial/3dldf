@@ -282,7 +282,7 @@ Added this rule.
 
 @q ******* (7)@> 
 
-          if (root == 0)
+          if (root == static_cast<Id_Map_Entry_Node>(0))
              {
 #if 0 
                  cerr_strm << thread_name 
@@ -312,7 +312,7 @@ Added this rule.
                                                     root);
 @q ******** (8)@> 
 
-                if (temp_entry == 0)
+                if (temp_entry == static_cast<Id_Map_Entry_Node>(0))
                    {
 #if 0 
                        cerr_strm << thread_name 
@@ -340,7 +340,7 @@ Added this rule.
                       Picture* p;
 
 @q ********* (9).@>  
-                      if (temp_entry->object == 0)
+                      if (temp_entry->object == static_cast<void*>(0))
                          {
                               Picture* p;
                         

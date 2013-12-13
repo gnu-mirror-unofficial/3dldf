@@ -236,9 +236,9 @@ Rectangle::Rectangle(const Point& ccenter, const real aaxis_h, const real aaxis_
   Point top_rt(axis_h_half, 0, axis_v_half);
 
     
-    if (angle_x != 0 || angle_y != 0
-        || angle_z != 0)   /* Rotation around the x-axis, 
-                              y-axis, and z-axis. */
+    if (angle_x != ZERO_REAL || angle_y != ZERO_REAL
+        || angle_z != ZERO_REAL)   /* Rotation around the x-axis, 
+                                      y-axis, and z-axis. */
       {
         bot_lft.rotate(angle_x, angle_y, angle_z);
         bot_rt.rotate(angle_x, angle_y, angle_z);
@@ -588,7 +588,7 @@ on the free store for it.
 
 @<Define |Rectangle| functions@>=
 
- if (rectangle_reflection == 0)
+ if (rectangle_reflection == static_cast<Rectangle*>(0))
  {
   try
      {

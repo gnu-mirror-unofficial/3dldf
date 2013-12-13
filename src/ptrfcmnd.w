@@ -1079,7 +1079,7 @@ Added this rule.
 
    Point* p = static_cast<Point*>(@=$4@>); 
 
-   if (p == 0 || *p == INVALID_POINT)
+   if (p == static_cast<Point*>(0) || *p == INVALID_POINT)
    {
         @=$$@> = static_cast<void*>(0);
    }
@@ -1336,7 +1336,7 @@ never reduced.
 
 @<Define rules@>=
 
-  if (t == 0)
+  if (t == static_cast<Transform*>(0))
     {
 
       cerr_strm << thread_name << "ERROR! In `yyparse()', rule "

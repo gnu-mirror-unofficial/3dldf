@@ -3183,7 +3183,7 @@ Added this rule.
              
 @q ******** (8) @> 
 
-              if (array_entry == 0)
+              if (array_entry == static_cast<Id_Map_Entry_Node>(0))
                  {
                      cerr_strm << thread_name 
                                << "ERROR!  In `yyparse()', rule "
@@ -3426,7 +3426,7 @@ Added this rule.
              
 @q ******** (8) @> 
 
-              if (array_entry == 0)
+              if (array_entry == static_cast<Id_Map_Entry_Node>(0))
                  {
                      cerr_strm << thread_name 
                                << "ERROR!  In `yyparse()', rule "

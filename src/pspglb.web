@@ -1675,7 +1675,7 @@ Thread_Info_Type::destroy_key_value(void* arg)
 
   Thread_Info_Type* t = static_cast<Thread_Info_Type*>(arg);
 
-  if (t != 0)
+  if (t != static_cast<Thread_Info_Type*>(0))
     delete t;
   t = 0;
 
@@ -1753,7 +1753,7 @@ Thread_Info_Type::get_thread_info(bool create_if_none,
 
 @<Define |Thread_Info_Type| functions@>=
 
-  if (v == 0 && !create_if_none)
+  if (v == static_cast<void*>(0) && !create_if_none)
     {
 
 #if DEBUG_COMPILE
@@ -1779,7 +1779,7 @@ Thread_Info_Type::get_thread_info(bool create_if_none,
 @<Define |Thread_Info_Type| functions@>=
 
 
-  if (v != 0)
+  if (v != static_cast<void*>(0))
    {
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2515,8 +2515,8 @@ solve_quadratic(real a, real b, real c)
     if (!finite(q))
        return Real_Pair(INVALID_REAL, INVALID_REAL);
 
-    p.first  = (a == 0) ? INVALID_REAL : q/a;
-    p.second = (q == 0) ? INVALID_REAL : c/q;
+    p.first  = (a == ZERO_REAL) ? INVALID_REAL : q/a;
+    p.second = (q == ZERO_REAL) ? INVALID_REAL : c/q;
 
     return p;
 

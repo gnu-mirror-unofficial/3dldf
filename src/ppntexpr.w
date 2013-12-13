@@ -502,7 +502,7 @@ Added this rule.
    Point* p = static_cast<Point*>(@=$2@>);
    Plane* q = static_cast<Plane*>(@=$4@>);
 
-   if (p == static_cast<Point*>(0) || q == static_cast<Point*>(0))
+   if (p == static_cast<Point*>(0) || q == static_cast<Plane*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -1340,7 +1340,7 @@ Added this rule.
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
        &&    scanner_node->conic_section_lattice_options 
-          != static_cast<Conic_Section_Lattice_Options>(0))
+          != static_cast<Conic_Section_Lattice_Options*>(0))
       scanner_node->conic_section_lattice_options->do_cull = true;      
 
    @=$$@> = static_cast<void*>(0);

@@ -796,7 +796,7 @@ Added this rule.
 \initials{LDF Undated.}
 
 @<Define rules@>=
-   if (s == 0 || t == 0)
+   if (s == static_cast<string*>(0) || t == static_cast<string*>(0))
       {
 
           cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "

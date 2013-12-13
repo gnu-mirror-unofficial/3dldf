@@ -827,7 +827,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (q == 0 || *q == INVALID_POINT)
+   if (q == static_cast<Point*>(0) || *q == INVALID_POINT)
      {
 
          Transform* t = new Transform;
@@ -1109,7 +1109,7 @@ Added this rule.  Rotation is by $180^{\circ}$.
 
 @<Define rules@>=
 
-  if (t == 0)
+  if (t == static_cast<Transform*>(0))
      {
 
       t = new Transform;
@@ -1182,7 +1182,7 @@ Removed code from this rule to the function
 
 @<Define rules@>=
 
-  if (t == 0)
+  if (t == static_cast<Transform*>(0))
      {
 
       t = new Transform;

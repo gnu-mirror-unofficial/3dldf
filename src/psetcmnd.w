@@ -2750,9 +2750,8 @@ Added this rule.
 
 };
 
-@q ** (2) set_cone_option_list --> WITH_RADIUS numeric_expression.@>   
-@* \§set cone option list> $\longrightarrow$ \.{WITH\_RADIUS}
-\§numeric expresssion>.
+@q ** (2) set_cone_option --> WITH_RADIUS numeric_expression.@>   
+@* \§set cone option> $\longrightarrow$ \.{WITH\_RADIUS} \§numeric expresssion>.
 \initials{LDF 2006.11.08.}
 
 \LOG
@@ -2766,7 +2765,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cone_set_option_struct->radius == ZERO_REAL)
+    if (scanner_node->cone_set_option_struct->radius == static_cast<real*>(0))
        scanner_node->cone_set_option_struct->radius = new real(@=$2@>); 
     else 
        *scanner_node->cone_set_option_struct->radius = @=$2@>; 
@@ -2792,7 +2791,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cone_set_option_struct->axis_x == 0)
+    if (scanner_node->cone_set_option_struct->axis_x == static_cast<real*>(0))
        scanner_node->cone_set_option_struct->axis_x = new real(@=$2@>); 
     else 
        *scanner_node->cone_set_option_struct->axis_x = @=$2@>; 
@@ -2817,7 +2816,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cone_set_option_struct->axis_y == 0)
+    if (scanner_node->cone_set_option_struct->axis_y == static_cast<real*>(0))
        scanner_node->cone_set_option_struct->axis_y = new real(@=$2@>); 
     else 
        *scanner_node->cone_set_option_struct->axis_y = @=$2@>; 
@@ -2842,7 +2841,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cone_set_option_struct->axis_z == 0)
+    if (scanner_node->cone_set_option_struct->axis_z == static_cast<real*>(0))
        scanner_node->cone_set_option_struct->axis_z = new real(@=$2@>); 
     else 
        *scanner_node->cone_set_option_struct->axis_z = @=$2@>; 
@@ -3242,7 +3241,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cylinder_set_option_struct->radius == ZERO_REAL)
+    if (scanner_node->cylinder_set_option_struct->radius == static_cast<real*>(0))
        scanner_node->cylinder_set_option_struct->radius = new real(@=$2@>); 
     else 
        *scanner_node->cylinder_set_option_struct->radius = @=$2@>; 
@@ -3269,7 +3268,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cylinder_set_option_struct->axis_x == 0)
+    if (scanner_node->cylinder_set_option_struct->axis_x == static_cast<real*>(0))
        scanner_node->cylinder_set_option_struct->axis_x = new real(@=$2@>); 
     else 
        *scanner_node->cylinder_set_option_struct->axis_x = @=$2@>; 
@@ -3294,7 +3293,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cylinder_set_option_struct->axis_y == 0)
+    if (scanner_node->cylinder_set_option_struct->axis_y == static_cast<real*>(0))
        scanner_node->cylinder_set_option_struct->axis_y = new real(@=$2@>); 
     else 
        *scanner_node->cylinder_set_option_struct->axis_y = @=$2@>; 
@@ -3319,7 +3318,7 @@ Added this rule.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
  
-    if (scanner_node->cylinder_set_option_struct->axis_z == 0)
+    if (scanner_node->cylinder_set_option_struct->axis_z == static_cast<real*>(0))
        scanner_node->cylinder_set_option_struct->axis_z = new real(@=$2@>); 
     else 
        *scanner_node->cylinder_set_option_struct->axis_z = @=$2@>; 
@@ -3845,7 +3844,7 @@ exists or not and proceeds accordingly.
 {
     Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-    if (scanner_node->sphere_set_option_struct != static_cast<sphere_set_option_struct*>(0))
+    if (scanner_node->sphere_set_option_struct != static_cast<Sphere_Set_Option_Struct*>(0))
        scanner_node->sphere_set_option_struct->clear();
 
     else
@@ -4471,7 +4470,8 @@ Added this rule.
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-    if (scanner_node->paraboloid_set_option_struct != static_cast<paraboloid_set_option_struct*>(0))
+    if (   scanner_node->paraboloid_set_option_struct 
+        != static_cast<Paraboloid_Set_Option_Struct*>(0))
        scanner_node->paraboloid_set_option_struct->clear();
 
     else
