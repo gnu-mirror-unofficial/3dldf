@@ -161,7 +161,7 @@ an ``unknown |path|''.
 
 @<Define rules@>=
 
-       if (p == 0)
+       if (p == static_cast<Path*>(0))
           {
 
              @=$$@> = static_cast<void*>(0);
@@ -889,7 +889,7 @@ Replaced |solid_like_primary| with |cuboid_primary|.
 
 @<Define rules@>=
 
-  if (t == 0)
+  if (t == static_cast<const Path*>(0))
    {
       cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                 << "`path_primary --> GET_PATH "
@@ -1225,7 +1225,7 @@ Added this rule.
 
 @q ****** (6).@> 
 
-   if (n == 0)
+   if (n == static_cast<Nurb*>(0))
       {
           cerr_strm << thread_name 
                     << "ERROR! In `yyparse()', rule "
@@ -1391,7 +1391,7 @@ Added this rule.
 @=path_primary: GET_PASCAL_LINE numeric_expression COMMA@>@/
 @=conic_section_lattice_expression with_conic_section_lattice_option_list@>@/
 {
-   if (@=$4@> == 0)
+   if (@=$4@> == static_cast<void*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {

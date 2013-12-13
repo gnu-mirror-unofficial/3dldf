@@ -179,7 +179,7 @@ non-integral.
   const Reg_Polygon* t = s->get_reg_polygon_ptr(u); 
 
 
-  if (t == 0)
+  if (t == static_cast<const Reg_Polygon*>(0))
    {
 
       delete s;
@@ -239,7 +239,7 @@ non-integral.
 
      const Reg_Polygon* t = p->get_reg_polygon_ptr(u); 
 
-     if (t == 0)
+     if (t == static_cast<const Reg_Polygon*>(0))
       {
 
          delete p;

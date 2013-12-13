@@ -174,7 +174,7 @@ Prime_Numbers::get_prime(ulong_long u, Scanner_Node scanner_node)
 @q **** (4)@> 
 
 
-   if (primes_table != 0)
+   if (primes_table != static_cast<FILE*>(0))
       {
           B:
 #if 0 
@@ -536,7 +536,7 @@ Prime_Numbers::get_prime_vector(ulong_long u, ulong_long v, Scanner_Node scanner
 
 @q **** (4)@> 
 
-    if (primes_table == 0 || primes_table->size() < v)
+    if (primes_table == static_cast<vector<ulong_long>*>(0) || primes_table->size() < v)
        {
            get_prime(v, scanner_node);
        }
@@ -632,7 +632,7 @@ Prime_Numbers::fill_primes_table(ulong_long u, Scanner_Node scanner_node)
                   q = n / (*primes_table)[k];
                   r = n % (*primes_table)[k];
 
-                  if (r == 0)
+                  if (r == 0ULL)
                      {
                          break;
                      }
@@ -685,7 +685,7 @@ Prime_Numbers::write_primes_file(Scanner_Node scanner_node)
 
 @q **** (4)@> 
 
-    if (primes_table == 0)
+    if (primes_table == static_cast<vector<ulong_long>*>(0))
        {
             cerr_mutex.lock(); 
             cerr << "ERROR!  In `Prime_Numbers::write_primes_file()':"

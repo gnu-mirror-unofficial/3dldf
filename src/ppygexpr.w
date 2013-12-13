@@ -135,7 +135,7 @@ Added this rule.
 @=polygon_primary: GET_PENTAGON conic_section_lattice_expression@>@/
 {
 
-   if (@=$2@> == 0)
+   if (@=$2@> == static_cast<void*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -161,7 +161,7 @@ Added this rule.
 @=polygon_primary: GET_HEXAGON conic_section_lattice_expression@>@/
 {
 
-   if (@=$2@> == 0)
+   if (@=$2@> == static_cast<void*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -187,7 +187,7 @@ Added this rule.
 @=polygon_primary: GET_POLYGON conic_section_lattice_expression@>@/
 {
 
-   if (@=$2@> == 0)
+   if (@=$2@> == static_cast<void*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {

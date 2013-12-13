@@ -502,7 +502,7 @@ Added this rule.
    Point* p = static_cast<Point*>(@=$2@>);
    Plane* q = static_cast<Plane*>(@=$4@>);
 
-   if (p == 0 || q == 0)
+   if (p == static_cast<Point*>(0) || q == static_cast<Point*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -541,7 +541,7 @@ Added this rule.
    Point* p       = static_cast<Point*>(@=$2@>);
    Reg_Polygon* r = static_cast<Reg_Polygon*>(@=$4@>);
 
-   if (p == 0 || r == 0)
+   if (p == static_cast<Point*>(0) || r == static_cast<Reg_Polygon*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -1032,7 +1032,7 @@ Added this rule.
  
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
-   if (c == 0)
+   if (c == static_cast<Conic_Section_Lattice*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -1060,7 +1060,7 @@ Added this rule.
  
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
-   if (c == 0)
+   if (c == static_cast<Conic_Section_Lattice*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -1088,7 +1088,7 @@ Added this rule.
  
    Conic_Section_Lattice* c = static_cast<Conic_Section_Lattice*>(@=$2@>);
 
-   if (c == 0)
+   if (c == static_cast<Conic_Section_Lattice*>(0))
       @=$$@> = static_cast<void*>(0);
    else
    {
@@ -1339,7 +1339,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options>(0))
       scanner_node->conic_section_lattice_options->do_cull = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1363,7 +1364,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
           scanner_node->conic_section_lattice_options->do_cull = false;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1389,7 +1391,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
        scanner_node->conic_section_lattice_options->tolerance = @=$2@>;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1567,7 +1570,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
       scanner_node->conic_section_lattice_options->do_rectify = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1591,7 +1595,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
       scanner_node->conic_section_lattice_options->do_rectify = false;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1661,7 +1666,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
       scanner_node->conic_section_lattice_options->do_test = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1685,7 +1691,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
       scanner_node->conic_section_lattice_options->do_test = false;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1710,7 +1717,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
       scanner_node->conic_section_lattice_options->do_transform = true;      
 
    @=$$@> = static_cast<void*>(0);
@@ -1736,7 +1744,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
    {
       scanner_node->conic_section_lattice_options->do_transform = true;      
       scanner_node->conic_section_lattice_options->transform 
@@ -1765,7 +1774,8 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->conic_section_lattice_options != 0)
+       &&    scanner_node->conic_section_lattice_options 
+          != static_cast<Conic_Section_Lattice_Options*>(0))
    {
       scanner_node->conic_section_lattice_options->do_transform = false;      
    }
@@ -2715,7 +2725,7 @@ Added this rule.
 
    Ellipse* e = static_cast<Ellipse*>(@=$3@>); 
 
-   if (e == 0)
+   if (e == static_cast<Ellipse*>(0))
       @=$$@> = static_cast<void*>(0); 
    else
    {
@@ -2819,7 +2829,7 @@ Added {\TeX} text and edited the formatting.
 
 @<Define rules@>=
 
-  if (p == 0)
+  if (p == static_cast<Point*>(0))
     {
        cerr_strm << thread_name << "ERROR! In `yyparse()', "
                  << "rule `point_secondary --> "
@@ -2873,7 +2883,7 @@ Added {\TeX} text and edited the formatting.
 
 @<Define rules@>=
 
-            if (@=$3@> == 0)
+            if (@=$3@> == ZERO_REAL)
               {
                 cerr_strm << thread_name 
                           << "ERROR! In `yyparse()', "
@@ -3041,7 +3051,7 @@ Added this rule.
 
    Point* p = static_cast<Point*>(@=$3@>); 
 
-   if (p == 0)
+   if (p == static_cast<Point*>(0))
       {
          cerr_strm << thread_name << "ERROR! In yyparse(), rule "
                    << "`point_secondary --> numeric_secondary TIMES "
@@ -3105,7 +3115,7 @@ Added this rule.
 
    Point* p = static_cast<Point*>(@=$2@>); 
 
-   if (p == 0)
+   if (p == static_cast<Point*>(0))
       {
          cerr_strm << thread_name << "ERROR! In yyparse(), rule "
                    << "`point_secondary --> numeric_secondary "
@@ -3208,7 +3218,7 @@ latter case, the pointer is deleted.
 
 @<Define rules@>=
 
-  if (p == 0)
+  if (p == static_cast<Point*>(0))
     {
       cerr_strm << thread_name << "ERROR! In `yyparse()',"
                 << endl    
@@ -3277,7 +3287,7 @@ latter case, the pointer is deleted.
 
 @<Define rules@>=
 
-  if (t == 0)
+  if (t == static_cast<Transform*>(0))
     {
 
       cerr_strm << thread_name << "ERROR! In `yyparse()',"
@@ -3537,7 +3547,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (p == 0)
+  if (p == static_cast<Point*>(0))
     {
        cerr_strm << thread_name << "ERROR!  In yyparse(), rule "
                  << "`point_tertiary -->"
@@ -3555,7 +3565,7 @@ Added this rule.
        
         @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT));
 
-        if (q != 0)
+        if (q != static_cast<Point*>(0))
            delete q;
 
      }  /* |if (p == 0)|  */@;
@@ -3565,7 +3575,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  else if (q == 0)
+  else if (q == static_cast<Point*>(0))
     {
        cerr_strm << thread_name << "ERROR! In yyparse(), rule "
                  << "`point_tertiary --> "
@@ -3582,7 +3592,7 @@ Added this rule.
 
        @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT)); 
 
-       if (p != 0)
+       if (p != static_cast<Point*>(0))
          delete p;
 
      }  /* |if (q == 0)|  */@;
@@ -3643,7 +3653,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (p == 0)
+  if (p == static_cast<Point*>(0))
     {
        cerr_strm << thread_name << "ERROR!  In yyparse(), rule "
                  << "`point_tertiary -->"
@@ -3661,7 +3671,7 @@ Added this rule.
        
         @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT));
 
-        if (q != 0)
+        if (q != static_cast<Point*>(0))
            delete q;
 
      }  /* |if (p == 0)|  */@;
@@ -3671,7 +3681,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  else if (q == 0)
+  else if (q == static_cast<Point*>(0))
     {
        cerr_strm << thread_name << "ERROR! In yyparse(), rule "
                  << "`point_tertiary --> "
@@ -3688,7 +3698,7 @@ Added this rule.
 
        @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT)); 
 
-       if (p != 0)
+       if (p != static_cast<Point*>(0))
          delete p;
 
      }  /* |if (q == 0)|  */@;

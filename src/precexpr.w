@@ -187,7 +187,7 @@ Changed \§numeric expression> to \§numeric secondary> and
 
 @<Define rules@>=
 
-  if (t == 0)
+  if (t == static_cast<const Rectangle*>(0))
    {
       cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                 << "`rectangle_primary --> GET_RECTANGLE "

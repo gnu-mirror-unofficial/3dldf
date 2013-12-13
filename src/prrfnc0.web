@@ -3214,7 +3214,7 @@ Scan_Parse::label_bool_point_func(void* parameter,
 
 @q **** (4)@> 
 
-   if (bp == 0)
+   if (bp == static_cast<void*>(0))
       {
 
           delete s;
@@ -3256,7 +3256,7 @@ Scan_Parse::label_bool_point_func(void* parameter,
 
 @q **** (4)@> 
 
-   if (s == 0)
+   if (s == static_cast<string*>(0))
       {
            stringstream label_strm;
            label_strm << num;
@@ -4567,7 +4567,7 @@ Scan_Parse::transform_primary_rule_func_0(void* ffocus,
 
 @q **** (4).@>
 
-   if (ffocus == 0)
+   if (ffocus == static_cast<Focus*>(0))
       return 0;
 
    Focus* f = static_cast<Focus*>(ffocus);
@@ -5202,7 +5202,7 @@ Scan_Parse::operation_assignment_picture_rule_func_0(
 
    Picture* p;
 
-   if (p_entry->object == 0)
+   if (p_entry->object == static_cast<void*>(0))
       {
          p = new Picture;
          p->clear();
@@ -5242,7 +5242,7 @@ Scan_Parse::operation_assignment_picture_rule_func_0(
 
    Picture* q;
 
-   if (q_entry->object == 0)
+   if (q_entry->object == static_cast<void*>(0))
       {
          q = new Picture;
          q->clear();
@@ -5361,14 +5361,14 @@ Scan_Parse::set_matrix_rule_func_0(void* curr_var,
 
 @q ***** (5)@>
 
-   if (curr_var == 0 || parameter == 0)
+   if (curr_var == static_cast<void*>(0) || parameter == static_cast<void*>(0))
        return 1;
     
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(curr_var);
 
     Matrix* curr_matrix = static_cast<Matrix*>(entry->object);
 
-    if (curr_matrix == 0)
+    if (curr_matrix == static_cast<Matrix*>(0))
     {
         curr_matrix = create_new<Matrix>(0); 
         entry->object = static_cast<void*>(curr_matrix);
@@ -5439,7 +5439,7 @@ Scan_Parse::set_parabola_rule_func_0(void* curr_var,
 {
 
  
-   if (curr_var == 0 || parameter == 0)
+   if (curr_var == static_cast<void*>(0) || parameter == static_cast<void*>(0))
        return 1;
 
     
@@ -5451,7 +5451,7 @@ Scan_Parse::set_parabola_rule_func_0(void* curr_var,
 
     Parabola* curr_parabola = static_cast<Parabola*>(entry->object);
 
-    if (curr_parabola == 0)
+    if (curr_parabola == static_cast<Parabola*>(0))
        {
            curr_parabola = create_new<Parabola>(0); 
            entry->object = static_cast<void*>(curr_parabola);
@@ -5489,7 +5489,7 @@ Scan_Parse::set_hyperbola_rule_func_0(void* curr_var,
 {
 
  
-   if (curr_var == 0 || parameter == 0)
+   if (curr_var == static_cast<void*>(0) || parameter == static_cast<void*>(0))
        return 1;
 
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(curr_var);
@@ -5500,7 +5500,7 @@ Scan_Parse::set_hyperbola_rule_func_0(void* curr_var,
 
     Hyperbola* curr_hyperbola = static_cast<Hyperbola*>(entry->object);
 
-    if (curr_hyperbola == 0)
+    if (curr_hyperbola == static_cast<Hyperbola*>(0))
        {
            curr_hyperbola = create_new<Hyperbola>(0); 
            entry->object = static_cast<void*>(curr_hyperbola);
@@ -5538,7 +5538,7 @@ Scan_Parse::set_arc_rule_func_0(void* curr_var,
 {
 
  
-   if (curr_var == 0 || parameter == 0)
+   if (curr_var == static_cast<void*>(0) || parameter == static_cast<void*>(0))
        return 1;
     
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(curr_var);
@@ -5551,7 +5551,7 @@ Scan_Parse::set_arc_rule_func_0(void* curr_var,
 
     Arc* curr_arc = static_cast<Arc*>(entry->object);
 
-    if (curr_arc == 0)
+    if (curr_arc == static_cast<Arc*>(0))
     {
         curr_arc = create_new<Arc>(0); 
         entry->object = static_cast<void*>(curr_arc);
@@ -6277,7 +6277,7 @@ Scan_Parse::set_paraboloid_rule_func_0(void* curr_var,
 
 @q ***** (5)@> 
 
-   if (entry->object == 0 && options->type == Paraboloid::ELLIPTICAL_TYPE)
+   if (entry->object == static_cast<void*>(0) && options->type == Paraboloid::ELLIPTICAL_TYPE)
       {
           Elliptical_Paraboloid* curr_paraboloid
              = create_new<Elliptical_Paraboloid>(0);
@@ -6293,7 +6293,8 @@ Scan_Parse::set_paraboloid_rule_func_0(void* curr_var,
 @q ***** (5)@> 
 
 
-   else if (entry->object == 0 && options->type == Paraboloid::HYPERBOLIC_TYPE)
+   else if (   entry->object == static_cast<void*>(0) 
+            && options->type == Paraboloid::HYPERBOLIC_TYPE)
       {
           Hyperbolic_Paraboloid* curr_paraboloid
              = create_new<Hyperbolic_Paraboloid>(0);

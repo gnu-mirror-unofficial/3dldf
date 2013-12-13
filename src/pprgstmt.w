@@ -261,14 +261,14 @@ Added this section.
 @<Define rules@>=
 
 
-  if (   scanner_node->in->up != 0
+  if (   scanner_node->in->up != static_cast<Input_Struct*>(0)
       && !(   scanner_node->run_state.multithread_input
            || scanner_node->run_state.multithread_include))
       
     {
       Input_Struct* up = scanner_node->in->up;
 
-      while (up != 0)
+      while (up != static_cast<Input_Struct*>(0))
         {
           delete scanner_node->in;
           scanner_node->in = up;

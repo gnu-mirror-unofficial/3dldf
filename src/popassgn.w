@@ -385,11 +385,8 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (@=$3@> == 0)
-      {
-
-
-      } /* |if (@=$3@> == 0)|  */
+   if (@=$3@> == ZERO_REAL)
+   ;   /* Do nothing  */
 
 @q ****** (6) Error handling:  |entry == 0|.@>   
 
@@ -399,10 +396,7 @@ Added this rule.
 @<Define rules@>=
 
    else if (entry == static_cast<Id_Map_Entry_Node>(0))
-      {
- 
-      } /* |else if (entry == 0)|  */
-
+   ;  /* Do nothing  */ 
 
 @q ***** (5) |$3 != 0 && entry != 0|.@>   
 
@@ -496,11 +490,8 @@ Added this rule.
 @<Define rules@>=
 
 
-   if (c == 0)
-      {
-
-
-      } /* |if (c == 0)|  */   
+   if (c == static_cast<Color*>(0))
+   ;
 
 @q ****** (6) Error handling:  |entry == 0|.@>   
 
@@ -510,9 +501,7 @@ Added this rule.
 @<Define rules@>=
 
    else if (entry == static_cast<Id_Map_Entry_Node>(0))
-      {
- 
-      } /* |else if (entry == 0)|  */
+   ;
 
 
 @q ***** (5) |c != 0 && entry != 0|.@>   
@@ -603,10 +592,8 @@ Added this rule.
 @<Define rules@>=
 
 
-   if (c == 0)
-      {
-
-      } /* |if (c == 0)|  */   
+   if (c == static_cast<Color*>(0))
+      ;  /* Do nothing  */ 
 
 @q ****** (6) Error handling:  |entry == 0|.@>   
 
@@ -616,9 +603,7 @@ Added this rule.
 @<Define rules@>=
 
    else if (entry == static_cast<Id_Map_Entry_Node>(0))
-      {
- 
-      } /* |else if (entry == 0)|  */
+   ; /* Do nothing  */
 
 
 @q ***** (5) |c != 0 && entry != 0|.@>   
@@ -732,10 +717,7 @@ Added this rule.
 @<Define rules@>=
 
          if (entry->object == static_cast<void*>(0))
-           {
-
-
-           } /* |if (entry->object == 0)|  */
+         ; /* Do nothing  */ 
 
 @q ****** (6).  |entry->object != 0|.@> 
 
@@ -815,7 +797,7 @@ Added this rule.
 @<Define rules@>=
 
 
-   if (r == 0)
+   if (r == ZERO_REAL)
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1012,7 +994,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (s == 0)
+         if (s == static_cast<string*>(0))
            {
 
               try 
@@ -1120,7 +1102,7 @@ Added this rule.
 @<Define rules@>=
 
 
-   if (p == 0)
+   if (p == static_cast<Point*>(0))
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1558,7 +1540,7 @@ Added this rule.
 @<Define rules@>=
 
 
-   if (r == 0)
+   if (r == ZERO_REAL)
       {
          cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                    << "`operation_assignment --> "
@@ -1817,7 +1799,7 @@ is cast to |Path*|.
   
 @<Define rules@>=
 
-         if (q == 0)
+         if (q == static_cast<Path*>(0))
            {
 
               try 
@@ -2045,7 +2027,7 @@ indicated by |entry->type|.
   
 @<Define rules@>=
 
-         if (p == 0)
+         if (p == static_cast<Path*>(0))
            {
 
 @q ******* (7) @> 
@@ -2081,7 +2063,7 @@ indicated by |entry->type|.
 
 @q ****** (6).@>           
 
-         if (p != 0)
+         if (p != static_cast<Path*>(0))
             p->set_cycle(true);
 
       }  /* |else| (|entry != 0|)  */
@@ -2159,7 +2141,7 @@ if |entry->object == 0|.  There's no need to make an unknown
 
          Path* p = static_cast<Path*>(entry->object);
 
-         if (p != 0)
+         if (p != static_cast<Path*>(0))
             {
                 p->set_cycle(false);
 
@@ -2274,7 +2256,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (q == 0)
+         if (q == static_cast<Nurb*>(0))
            {
 
               try 
@@ -2406,7 +2388,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (q == 0)
+         if (q == static_cast<Nurb*>(0))
            {
 
               try 
@@ -2668,7 +2650,7 @@ Added this section.
 
 @<Define rules@>=
 
-         if (q == 0)
+         if (q == static_cast<Sphere_Development*>(0))
          {
 
             try 
@@ -2771,7 +2753,7 @@ Added this rule.
 
          Parabola* p = static_cast<Parabola*>(entry->object);
 
-         if (p == 0)
+         if (p == static_cast<Parabola*>(0))
            {
 
                 p = create_new<Parabola>(0);     
@@ -2782,7 +2764,7 @@ Added this rule.
            } /* |if (p == 0)|  */
 
 
-         if (p != 0)
+         if (p != static_cast<Parabola*>(0))
             p->set_cycle(true);
 
       }  /* |else| (|entry != 0|)  */
@@ -2837,7 +2819,7 @@ Added this rule.
 
          Parabola* p = static_cast<Parabola*>(entry->object);
 
-         if (p == 0)
+         if (p == static_cast<Parabola*>(0))
            {
 
                 p = create_new<Parabola>(0);     
@@ -2848,7 +2830,7 @@ Added this rule.
            } /* |if (p == 0)|  */
 
 
-         if (p != 0)
+         if (p != static_cast<Parabola*>(0))
             p->set_cycle(false);
 
       }  /* |else| (|entry != 0|)  */
@@ -2954,7 +2936,7 @@ Added this rule.
   
 @<Define rules@>=
 
-         if (q == 0)
+         if (q == static_cast<Rectangle*>(0))
            {
 
               try 
