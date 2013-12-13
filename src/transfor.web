@@ -522,7 +522,7 @@ Transform::is_identity()
   for (int i = 0; i < 4; i++)
     for (int j = 0; j < 4; j++)
       if ((i == j && transform_matrix[i][j] != 1)
-          || ((i != j) && transform_matrix[i][j] != 0))
+          || ((i != j) && transform_matrix[i][j] != ZERO_REAL))
         return false;
   return true;
 }
@@ -545,7 +545,7 @@ Transform::is_identity() const
   for (int i = 0; i < 4; i++)
     for (int j = 0; j < 4; j++)
       if ((i == j && transform_matrix[i][j] != 1)
-          || ((i != j) && transform_matrix[i][j] != 0))
+          || ((i != j) && transform_matrix[i][j] != ZERO_REAL))
         return false;
   return true;
 }
@@ -719,7 +719,12 @@ Transform::shear(real xy, real xz, real yx, real yz,
     zy = 0;
   
 
-  if (xy == 0 && xz == 0 && yx == 0 && yz == 0 && zx == 0 && zy == 0)
+  if (   xy == ZERO_REAL 
+      && xz == ZERO_REAL 
+      && yx == ZERO_REAL 
+      && yz == ZERO_REAL 
+      && zx == ZERO_REAL 
+      && zy == ZERO_REAL)
     {
       cerr << "WARNING! In Transform::shear():\n"
            << "All arguments are 0.  Returning identity transformation."
@@ -759,7 +764,7 @@ Transform::shift(real x, real y, real z)
   real eps = epsilon();
   Transform t;
 
-  if (x == 0 && y == 0 && z == 0)
+  if (x == ZERO_REAL && y == ZERO_REAL && z == ZERO_REAL)
     return t;
 
   t.transform_matrix[3][0] = (fabs(x) > eps) ? x : 0;
@@ -839,7 +844,7 @@ Transform::rotate(real x, real y, real z)
   Transform t_all;
   real eps = epsilon();
 
-  if (x == 0 && y == 0 && z == 0)
+  if (x == ZERO_REAL && y == ZERO_REAL && z == ZERO_REAL)
     {
       if (DEBUG) 
         cerr << "In rotate(real, real, real)\n"
@@ -859,7 +864,8 @@ Transform::rotate(real x, real y, real z)
 
 @ Rotation around the x-axis.
 @<Define |Transform| functions@>=
-  if (x != 0)
+
+  if (x != ZERO_REAL)
     {
 
       @:!!@> /* !! Reversed direction of rotation because I didn't 
@@ -886,7 +892,8 @@ Transform::rotate(real x, real y, real z)
 
 @ Rotation around the y-axis.
 @<Define |Transform| functions@>=
-  if (y != 0)
+
+  if (y != ZERO_REAL)
     {
 
       @:!!@> /* !! Reversed direction of rotation because I didn't 
@@ -911,7 +918,8 @@ Transform::rotate(real x, real y, real z)
 
 @ Rotation around the z-axis.
 @<Define |Transform| functions@>=
-   if (z != 0)
+
+   if (z != ZERO_REAL)
      {
 
          z *= PI/180.0;
@@ -1289,7 +1297,8 @@ Transform::inverse(void) const
           cout << "max == " << max << endl;
           cout << "row == " << row << endl;
         }
-      if (max == 0)
+
+      if (max == ZERO_REAL)
         {
           cerr << "ERROR! In Transform::inverse():\n"
                << "Transform_Matrix is singular.  Returning INVALID_TRANSFORM.\n";
