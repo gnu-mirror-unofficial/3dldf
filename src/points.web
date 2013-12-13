@@ -1347,21 +1347,22 @@ Point::operator=(const Point& p)
 
   drawdot_value = p.drawdot_value;
 
-  if (p.draw_color_vector == 0 && draw_color_vector == static_cast<Pointer_Vector<Color>*>(0)) 
+  if (   p.draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
+      && draw_color_vector == static_cast<Pointer_Vector<Color>*>(0)) 
      ; /* Do nothing.  */@; 
 
-  else if (   p.draw_color_vector != 0 
+  else if (   p.draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
            && draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
      {
         draw_color_vector = new Pointer_Vector<Color>;
         *draw_color_vector = *(p.draw_color_vector);
      }
 
-  else if (   p.draw_color_vector != 0 
+  else if (   p.draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
            && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
      *draw_color_vector = *(p.draw_color_vector);
      
-  else if (   p.draw_color_vector == 0 
+  else if (   p.draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
            && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
      {
         delete draw_color_vector;
@@ -1933,7 +1934,7 @@ no |Scanner_Node| argument is passed to this function, and I don't want to add o
 
 @<Define |Point| functions@>=
 
-          if (f == 0)
+          if (f == static_cast<Focus*>(0))
 
             {
                 cerr << "ERROR! In 'Point::get_all_coords':"
@@ -2059,7 +2060,7 @@ Point::get_coord(char c, char coords,
 
 @
 @<Define |Point| functions@>=
-  if(do_persp && f == 0)
+  if(do_persp && f == static_cast<Focus*>(0))
     {
         cerr << "ERROR! In 'Point::get_all_coords':"
              << endl << "'do_persp == true', so "
@@ -3981,7 +3982,7 @@ Transform
 Point::shift(real x, real y, real z)
 {
   Transform t;
-  if (x != 0 || y != 0 || z != 0)
+  if (x != ZERO_REAL || y != ZERO_REAL || z != ZERO_REAL)
     transform *= t.shift(x, y, z);
   return t;
 }
@@ -4216,7 +4217,7 @@ will be reentrant.
       if (DEBUG) 
         cerr << "angle of projection: " << angle << endl;
 
-      if(angle != 0 && angle != INVALID_REAL)
+      if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(0, -angle);
 
       if (DEBUG) 
@@ -4227,7 +4228,7 @@ will be reentrant.
       if (DEBUG) 
         cerr << "angle to x-axis: " << angle << endl;
 
-      if(angle != 0 && angle != INVALID_REAL)
+      if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(0, 0, -angle);
 
       if (DEBUG) 
@@ -4268,9 +4269,9 @@ Trying to fix a bug that occurred while
 porting to GNU/Linux.  
 \ENDLOG  
 @<Define |Transform| functions@>= 
-      if (   proj_on_x_z_plane.world_coordinates[0] == 0  
-          && proj_on_x_z_plane.world_coordinates[1] == 0)
-        angle = 0;
+      if (   proj_on_x_z_plane.world_coordinates[0] == ZERO_REAL  
+          && proj_on_x_z_plane.world_coordinates[1] == ZERO_REAL)
+        angle = ZERO_REAL;
       else
         angle = proj_on_x_z_plane.angle(pt_on_z_axis);
 
@@ -4281,7 +4282,7 @@ porting to GNU/Linux.
       if (DEBUG) 
         cerr << "angle of projection: " << angle << endl;
 
-      if(angle != 0 && angle != INVALID_REAL)
+      if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(0, angle);
 
       if (DEBUG) 
@@ -4303,8 +4304,8 @@ the plane of a |Reg_Polygon| about a line from the center of the
 |Point| was not in the same plane.  
 \ENDLOG  
 @<Define |Transform| functions@>= 
-if (p1.world_coordinates[1] == 0)  
-  angle = 0;
+if (p1.world_coordinates[1] == ZERO_REAL)  
+  angle = ZERO_REAL;
 else
   angle = p1.angle(pt_on_z_axis);
 @
@@ -4315,7 +4316,7 @@ else
    cerr << "angle to z-axis: " << angle << endl;
 
 
-      if(angle != 0 && angle != INVALID_REAL)
+      if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(-angle);
       
       if (DEBUG) 
@@ -4712,7 +4713,7 @@ and |PARALLEL_Z_Y|.
        || proj == Projections::parallel_z_y)  
        {
          using namespace Projections;
-         if (factor == 0)
+         if (factor == ZERO_REAL)
            {
              cerr << "ERROR! In Point::project():\n"
                   << "factor == 0.  Multiplying coordinates by 0 doesn't make sense. "
@@ -4789,7 +4790,7 @@ Get numbers to output using {\it only\/} decimal notation!
 
 @<Define |Point| functions@>=
 
-  if (temp_coordinates[2] + f.get_distance() == 0)
+  if (temp_coordinates[2] + f.get_distance() == ZERO_REAL)
     {
       cerr << "ERROR! In Point::project():\n"
            << "temp_coordinates[2] == " << temp_coordinates[2]
@@ -4839,7 +4840,7 @@ Get numbers to output using {\it only\/} decimal notation!
 
   real eps = epsilon();
 
-  if (projective_coordinates[3] == 0)
+  if (projective_coordinates[3] == ZERO_REAL)
     {
       cerr << "ERROR! In Point::project(): "
            << "projective_coordinates[3] == 0.\n" 
@@ -4955,7 +4956,7 @@ Point::apply_transform()
               new_coordinates[i]
                 += world_coordinates[j] * transform.transform_matrix[j][i];
 
-              if (new_coordinates[i] != 0)
+              if (new_coordinates[i] != ZERO_REAL)
                 {
                   if (DEBUG)
                     {
@@ -5112,10 +5113,10 @@ Point::drawdot(Picture& picture,
 
     pt->drawdot_value = DRAWDOT_VALUE;  
 
-  if (ddrawdot_color != 0)
+  if (ddrawdot_color != static_cast<Color*>(0))
     pt->push_draw_color(ddrawdot_color, true);
   
-  if (ppen != 0)
+  if (ppen != static_cast<Pen*>(0))
      {
         pt->push_pen(ppen);
      }
@@ -5283,7 +5284,7 @@ Point::undrawdot(Picture& picture, Pen* ppen)
   pt->drawdot_value = UNDRAWDOT_VALUE;  
 
 
-  if (ppen != 0)
+  if (ppen != static_cast<Pen*>(0))
      {
         pt->push_pen(ppen);
      }
@@ -9018,7 +9019,7 @@ Point::angle(const Point& p) const
         << " Returning INVALID_REAL.\n";
       return INVALID_REAL;
     }
-  else if (mag == 0)
+  else if (mag == ZERO_REAL)
     {
       if (DEBUG) 
         cerr << "WARNING! In angle().\n"
@@ -9032,7 +9033,7 @@ Point::angle(const Point& p) const
            << " Returning INVALID_REAL.\n";
       return INVALID_REAL;
     }
-  else if (p_mag == 0)
+  else if (p_mag == ZERO_REAL)
     {
       if (DEBUG) 
         cerr << "WARNING! In angle().\n"
@@ -9117,7 +9118,7 @@ Point::unit_vector(const bool assign, const bool silent)
   real m = magnitude();
 
 
-  if (m == 0)  /* LDF 2002.04.10.  Added this error handling code for the case where
+  if (m == ZERO_REAL)  /* LDF 2002.04.10.  Added this error handling code for the case where
                                    *this has no magnitude.  */
     {
       if (!silent)
@@ -9437,9 +9438,9 @@ the coordinates.  I can just compare them with 0 instead.
 
 @<Define |Point| functions@>=
   
-  if (t_x == 0 && p_x == 0
-      && t_y == 0 && p_y == 0
-      && t_z == 0 && p_z == 0)
+  if (t_x == ZERO_REAL && p_x == ZERO_REAL
+      && t_y == ZERO_REAL && p_y == ZERO_REAL
+      && t_z == ZERO_REAL && p_z == ZERO_REAL)
     {
 
 #if DEBUG_COMPILE
@@ -9478,44 +9479,44 @@ coordinates are compared with 0, instead of using |fabs| and |eps|.
   signed short p_y_sign;
   signed short p_z_sign;
 
-  if(t_x == 0)
+  if (t_x == ZERO_REAL)
     t_x_sign = 0;
-  else if (t_x < 0)
+  else if (t_x < ZERO_REAL)
     t_x_sign = -1;
   else
     t_x_sign = 1;
 
-  if(t_y == 0)
+  if (t_y == ZERO_REAL)
     t_y_sign = 0;
-  else if (t_y < 0)
+  else if (t_y < ZERO_REAL)
     t_y_sign = -1;
   else
     t_y_sign = 1;
 
-  if(t_z == 0)
+  if (t_z == ZERO_REAL)
     t_z_sign = 0;
-  else if (t_z < 0)
+  else if (t_z < ZERO_REAL)
     t_z_sign = -1;
   else
     t_z_sign = 1;
 
-  if(p_x == 0)
+  if (p_x == ZERO_REAL)
     p_x_sign = 0;
-  else if (p_x < 0)
+  else if (p_x < ZERO_REAL)
     p_x_sign = -1;
   else
     p_x_sign = 1;
 
-  if(p_y == 0)
+  if (p_y == ZERO_REAL)
     p_y_sign = 0;
-  else if (p_y < 0)
+  else if (p_y < ZERO_REAL)
     p_y_sign = -1;
   else
     p_y_sign = 1;
 
-  if(p_z == 0)
+  if (p_z == ZERO_REAL)
     p_z_sign = 0;
-  else if (p_z < 0)
+  else if (p_z < ZERO_REAL)
     p_z_sign = -1;
   else
     p_z_sign = 1;
@@ -9944,25 +9945,25 @@ and z in each of the |Points|.  Then assign them to variables.
 @<Define |Point| functions@>=
 
     real slope_p_x_y
-      = (delta_x_p != 0) ? delta_y_p/delta_x_p : INVALID_REAL;     
+      = (delta_x_p != ZERO_REAL) ? delta_y_p/delta_x_p : INVALID_REAL;     
 
 
     real slope_p_x_z
-      = (delta_x_p != 0) ? delta_z_p/delta_x_p : INVALID_REAL; 
+      = (delta_x_p != ZERO_REAL) ? delta_z_p/delta_x_p : INVALID_REAL; 
 
     real slope_p_z_y
-      = (delta_z_p != 0) ? delta_y_p/delta_z_p : INVALID_REAL;
+      = (delta_z_p != ZERO_REAL) ? delta_y_p/delta_z_p : INVALID_REAL;
 
 @ Slopes for line $\overrightarrow{q_0q_1}$.
 @<Define |Point| functions@>=
    real slope_q_x_y
-      = (delta_x_q != 0) ? delta_y_q/delta_x_q : INVALID_REAL; 
+      = (delta_x_q != ZERO_REAL) ? delta_y_q/delta_x_q : INVALID_REAL; 
 
     real slope_q_x_z
-      = (delta_x_q != 0) ? delta_z_q/delta_x_q : INVALID_REAL; 
+      = (delta_x_q != ZERO_REAL) ? delta_z_q/delta_x_q : INVALID_REAL; 
 
     real slope_q_z_y
-      = (delta_z_q != 0) ? delta_y_q/delta_z_q : INVALID_REAL; 
+      = (delta_z_q != ZERO_REAL) ? delta_y_q/delta_z_q : INVALID_REAL; 
     
 @ The traces on the x-y plane. |x_i|, |y_i|, |z_i|, |y_int_p|, and
 |y_int_q| are set to |INVALID_REAL| so that I can test for whether the
