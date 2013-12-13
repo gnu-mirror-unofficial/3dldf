@@ -118,7 +118,7 @@ It is now in the following |else| clause.
 
 @<Define rules@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
         @=$$@> = static_cast<void*>(0);
@@ -361,7 +361,7 @@ Added this rule.
 
 @q **** (4).@> 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       *i = 0;
@@ -423,7 +423,7 @@ Added this rule.
 
 @q **** (4).@> 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       *i = 1;
@@ -512,9 +512,14 @@ Added this rule.
    bool* b  = new bool;
    Point* p = static_cast<Point*>(@=$2@>); 
 
-   *b = (p == 0 || *p  == INVALID_POINT) ? false : true;
+   *b = (   p == static_cast<Point*>(0) 
+         || *p  == INVALID_POINT) ? false : true;
 
-   delete p;   
+   if (p)
+   {
+      delete p;   
+      p = static_cast<Point*>(0);
+   }
 
    @=$$@> = static_cast<void*>(b);
 
@@ -536,9 +541,13 @@ Added this rule.
    bool* b  = new bool;
    Point* p = static_cast<Point*>(@=$2@>); 
 
-   *b = (p == 0 || *p  == INVALID_POINT) ? true : false;
+   *b = (p == static_cast<Point*>(0) || *p  == INVALID_POINT) ? true : false;
 
-   delete p;   
+   if (p) 
+   {
+      delete p;   
+      p = 0;
+   }
 
    @=$$@> = static_cast<void*>(b);
 
@@ -565,7 +574,8 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
     Pointer_Vector<Bool_Point>* bpv 
        = static_cast<Pointer_Vector<Bool_Point>*>(@=$2@>); 
 
-    *b = (bpv == 0 || bpv->v.size() <= 0) ? false : true;
+    *b = (   bpv == Pointer_Vector<Bool_Point>*(0) 
+          || bpv->v.size() <= 0) ? false : true;
 
     delete bpv;
     bpv = 0;
@@ -594,7 +604,8 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
 
     Pointer_Vector<Bool_Point>* bpv = static_cast<Pointer_Vector<Bool_Point>*>(@=$2@>); 
 
-    *b = (bpv == 0 || bpv->v.size() <= 0) ? true : false;
+    *b = (   bpv == Pointer_Vector<Bool_Point>*(0) 
+          || bpv->v.size() <= 0) ? true : false;
 
     delete bpv;
     bpv = 0;
@@ -680,7 +691,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
         *i = false;
@@ -2069,7 +2080,7 @@ Removed debugging code.
     Path* p = static_cast<Path*>(@=$1@>);
     Path* q = static_cast<Path*>(@=$3@>);
    
-    *i = (p && q != 0 && p->is_coplanar(*q)) ? 1 : 0;
+    *i = (p && q && p->is_coplanar(*q)) ? 1 : 0;
 
     delete p;
     delete q;
@@ -2855,7 +2866,8 @@ Added this rule.
    
    bool* b = new bool;
 
-   *b = (pv == 0) ? false : pv->are_distinct(@=$3@>, 10, parameter);
+   *b = (pv == static_cast<Pointer_Vector<Point>*>(0)) ? 
+            false : pv->are_distinct(@=$3@>, 10, parameter);
 
    delete pv;
 
@@ -2886,7 +2898,8 @@ Added this rule.
    
    bool* b = new bool;
 
-   *b = (pv == 0) ? false : pv->are_distinct(@=$3@>, 10, parameter);
+   *b = (pv == static_cast<Pointer_Vector<Point>*>(0)) ? 
+            false : pv->are_distinct(@=$3@>, 10, parameter);
 
    delete pv;
 
@@ -3090,7 +3103,7 @@ Now deleting |Pointer_Vector<bool>* pv|.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<bool>*>(0))
       {
 
           *b = false;
@@ -3375,7 +3388,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (p == 0 || q == 0)
+  if (p == static_cast<Point*>(0) || q == static_cast<Point*>(0))
     {
 
       *i = 0;
