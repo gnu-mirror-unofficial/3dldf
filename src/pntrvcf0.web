@@ -466,7 +466,7 @@ Added error handling code for the case that |i <= 1|.
    }
 
 
-   if (do_transform && transform != 0)
+   if (do_transform && transform != static_cast<Transform*>(0))
       *transform = t;
 
 @q *** (3)@> 
@@ -748,7 +748,7 @@ Pointer_Vector<Point, Point>::get_conic_section_lattice(
     cerr_mutex.unlock();  
 #endif 
 
-    if (do_transform && t == 0 )
+    if (do_transform && t == static_cast<Transform*>(0))
        t = create_new<Transform>(0);
 
     status = rectify(scanner_node,

@@ -419,7 +419,7 @@ Pointer_Vector<C, D>::assign_same_pointers(Pointer_Vector<D, D>* d,
 
    Pointer_Vector<C>* pvc;
 
-   if (c == 0)
+   if (c == static_cast<Pointer_Vector<C, C>*>(0))
      pvc = new Pointer_Vector<C>; 
    else 
      pvc = c;
@@ -946,7 +946,7 @@ In addition, I've had to change the type of derivation of |Path| from |Shape| fr
 @<Declare |Pointer_Vector| functions@>=
 static
 Pointer_Vector<C, C>* 
-convert(Pointer_Vector<D, D>*& d); 
+convert(Pointer_Vector<D, D>* d); 
 
 @q ***** (5) Definition.@> 
 
@@ -954,9 +954,10 @@ convert(Pointer_Vector<D, D>*& d);
 @<Define |Pointer_Vector| functions@>=
 template <class C, class D>
 Pointer_Vector<C, C>* 
-Pointer_Vector<C, D>::convert(Pointer_Vector<D, D>*& d)
+Pointer_Vector<C, D>::convert(Pointer_Vector<D, D>* d)
 {
-   if (d == 0 || d->ctr == 0)
+   if (   d == static_cast<Pointer_Vector<D, D>*>(0) 
+       || d->ctr == 0)
       return 0;
    
    Pointer_Vector<C, C>* c = new Pointer_Vector<C, C>;
@@ -1134,7 +1135,7 @@ Pointer_Vector<C, D>::cull(const unsigned short comparison,
              j = i;
              ++j;
 
-             if (*i == 0)
+             if (*i == static_cast<C*>(0))
              {
                 ++i_ctr;
                 continue;
@@ -1152,7 +1153,7 @@ Pointer_Vector<C, D>::cull(const unsigned short comparison,
 
              for (;j != temp_vector.end(); ++j)
              {
-                if (*j == 0)
+                if (*j == static_cast<C*>(0))
                 ;
                 else if ((**i).is_equal(**j, tolerance))
                 {
@@ -1173,7 +1174,7 @@ Pointer_Vector<C, D>::cull(const unsigned short comparison,
 
 @q ******* (7)@> 
 
-   if (temp_vector.back() != 0)
+   if (temp_vector.back() != static_cast<C*>(0))
    {
        v.push_back(temp_vector.back());
        ++ctr;
@@ -1355,7 +1356,7 @@ Pointer_Vector<C, D>::show(string s, Scanner_Node scanner_node) const
       {
          ctr_strm << i++ << ":";
 
-         if (*iter != 0)
+         if (*iter != static_cast<C*>(0))
             (*iter)->show(ctr_strm.str());
          else 
             cerr_strm << " 0";

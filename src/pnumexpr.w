@@ -223,7 +223,7 @@ Print out context.
       }
 #endif /* |DEBUG_COMPILE|  */
 
-  if (@=$3@> == 0)
+  if (@=$3@> == ZERO_REAL)
     {
 #if 0 
 @q       unsigned int first_line   = @@=@@1@@>.first_line;   @>
@@ -385,7 +385,7 @@ Added this rule.
 
   Point* p = static_cast<Point*>(@=$2@>);
 
-  if (p == 0)
+  if (p == static_cast<Point*>(0))
     {
 
       @=$$@> = ZERO_REAL;
@@ -425,7 +425,8 @@ Removed \§optional of> from this rule.
 {
 
   Point* p = static_cast<Point*>(@=$2@>);
-  if (p == 0)
+
+  if (p == static_cast<Point*>(0))
     {
       @=$$@> = ZERO_REAL;
       
@@ -3035,7 +3036,7 @@ Added this rule.
 
 @<Define rules@>=
 
-      if (*r == 0)
+      if (*r == ZERO_REAL)
          {
              @=$$@> = INVALID_REAL;
 
@@ -3073,7 +3074,7 @@ Added this rule.
     @=$$@> = @=$1@> * @=$3@>;
   else if (@=$2@> == OVER)
     {
-      if (@=$3@> == 0)
+      if (@=$3@> == ZERO_REAL)
         {
 
 #if 0 
@@ -3222,7 +3223,7 @@ debugging and error output thread-safe.
 
 @<Define rules@>=
 
-    if (p == 0 || q == 0)
+    if (p == static_cast<Point*>(0) || q == static_cast<Point*>(0))
       {
 
         @=$$@> = INVALID_REAL;
