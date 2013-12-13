@@ -287,7 +287,7 @@ on the free store for it.
 
 @<Define |Polyhedron| functions@>=
 
- if (polyhedron_reflection == 0)
+ if (polyhedron_reflection == static_cast<Polyhedron*>(0))
  {
   try
      {
@@ -1107,7 +1107,7 @@ now simply use the value I found.
 
   center.shift(-center);
 
-  if (angle_x != 0 || angle_y != 0 || angle_z != 0)
+  if (angle_x != ZERO_REAL || angle_y != ZERO_REAL || angle_z != ZERO_REAL)
     {
       for(i = 0; i < 4; ++i)
         reg_polygons[i]->rotate(angle_x, angle_y, angle_z);
@@ -1632,7 +1632,7 @@ on the free store for it.
 
 @<Define |Tetrahedron| functions@>=
 
- if (tetrahedron_reflection == 0)
+ if (tetrahedron_reflection == static_cast<Tetrahedron*>(0))
  {
   try
      {
@@ -2443,7 +2443,7 @@ on the free store for it.
 
 @<Define |Octahedron| functions@>=
 
- if (octahedron_reflection == 0)
+ if (octahedron_reflection == static_cast<Octahedron*>(0))
  {
   try
      {
@@ -2847,7 +2847,7 @@ Icosahedron::Icosahedron(const Point& p,
     
     center = origin_pt;
 
-    if (angle_x != 0 || angle_y != 0 || angle_z != 0)
+    if (angle_x != ZERO_REAL || angle_y != ZERO_REAL || angle_z != ZERO_REAL)
       for(vector<Reg_Polygon*>::iterator iter = reg_polygons.begin();
           iter != reg_polygons.end(); ++iter)
         (**iter).rotate(angle_x, angle_y, angle_z);
@@ -3043,7 +3043,7 @@ Icosahedron::get_net(const real triangle_diameter,
       for (i = 0; i < 10; ++i)
         {
           for (int j = 0; j < 3; j++)
-            if (triangles[i]->get_point(j).get_y() != 0)
+            if (triangles[i]->get_point(j).get_y() != ZERO_REAL)
               {
                 cerr << "ERROR! In Icosahedron::get_net():\n"
                   << "y-coordinate != 0!\n"
@@ -3082,7 +3082,7 @@ Icosahedron::get_net(const real triangle_diameter,
   for (i = 0; i < 20; ++i)
     {
       for (int j = 0; j < 3; j++)
-        if (triangles[i]->get_point(j).get_y() != 0)
+        if (triangles[i]->get_point(j).get_y() != ZERO_REAL)
           {
             cerr << "ERROR! In Icosahedron::get_net():\n"
               << "y-coordinate != 0!\n"
@@ -3326,7 +3326,7 @@ on the free store for it.
 
 @<Define |Icosahedron| functions@>=
 
- if (icosahedron_reflection == 0)
+ if (icosahedron_reflection == static_cast<Icosahedron*>(0))
  {
   try
      {
