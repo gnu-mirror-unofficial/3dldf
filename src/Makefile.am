@@ -299,14 +299,15 @@ lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser_1.h++ parser.h++ $
 
 #### *** (3) parser
 
-parser.y++: parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
+parser.y++ parser_1.h++: parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 	ctangle $<
 	./prbsnflx$(EXEEXT) parser.c parser.y
 	rm parser.c
 	./check_scan_parse_output.sh parser.y parser.y++
 	touch $@
 
-parser.c++ parser.h++ parser_1.h++: parser.y++ 
+
+parser.c++ parser.h++: parser.y++ 
 	$(YACC) --debug -d -o parser.cxx $<
 	./check_scan_parse_output.sh parser.cxx parser.c++
 	./check_scan_parse_output.sh parser.hxx parser.h++
@@ -328,8 +329,6 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ circles.h++ cncsctlt.h++ co
                      utility.h++
 	@echo "Compiling 'parser.c++'.  This may take awhile ... "
 	$(CXXCOMPILE) -c -o $@ $<
-	touch $@
-
 
 #### *** (3) parser2
 
