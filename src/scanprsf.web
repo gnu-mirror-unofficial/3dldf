@@ -249,7 +249,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      if (entry == 0)
+      if (entry == static_cast<Id_Map_Entry_Node>(0))
         {
           cerr_strm << thread_name << "In `Scan_Parse::variable_func()':"
                     << endl << "   entry == 0";
@@ -325,7 +325,7 @@ Normally there should be one.  However, if there isn't, i.e.,
 
       int curr_type;
       
-      if (entry == 0)
+      if (entry == static_cast<Id_Map_Entry_Node>(0))
         {
           curr_type = UNDECLARED;
         }
@@ -565,7 +565,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::label_point_command()':"
@@ -1117,7 +1117,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::label_path_command()':"
@@ -1671,7 +1671,7 @@ if (scanner_node->picture_entry_ptr == 0)
 
 @<Define |Scan_Parse| functions@>=
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
 
         cerr_strm << thread_name 
@@ -2502,7 +2502,7 @@ if (scanner_node->picture_entry_ptr == 0)
 
 @<Define |Scan_Parse| functions@>=
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
 
         cerr_strm << thread_name 
@@ -3133,7 +3133,7 @@ Added this section.
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "In `Scan_Parse::drawing_command_solid()':"
@@ -3274,7 +3274,7 @@ Added this section.
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "In `Scan_Parse::drawing_command_solid()':"
@@ -3384,7 +3384,7 @@ Added this section.
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "In `Scan_Parse::drawing_command_solid()':"
@@ -4006,7 +4006,7 @@ if (scanner_node->picture_entry_ptr == 0)
 
 @<Define |Scan_Parse| functions@>=
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
 
         cerr_strm << thread_name 
@@ -4765,7 +4765,7 @@ rules for the \§with clause list>.
 
 @<Define |Scan_Parse| functions@>=
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
 
         cerr_strm << thread_name 
@@ -6863,7 +6863,7 @@ if (scanner_node->picture_entry_ptr == 0)
 
 @<Define |Scan_Parse| functions@>=  
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
           cerr_strm << thread_name 
                     << "ERROR! In `drawdot_command()':"
@@ -7436,13 +7436,13 @@ Scan_Parse::variable_type(Scanner_Node scanner_node,
 
     } /* |if (entry != 0 && entry->array_flag)|  */
 
-  else if (entry == 0)
+  else if (entry == static_cast<Id_Map_Entry_Node>(0))
     entry = scanner_node->lookup(curr_name);
 
 #if DEBUG_COMPILE
   if (DEBUG) 
     {
-      if (entry == 0)
+      if (entry == static_cast<Id_Map_Entry_Node>(0))
         {
           cerr_strm << thread_name 
                     << "In `Scan_Parse::variable_type()':"
@@ -7478,7 +7478,7 @@ Exit with |ivp.i == 1| and |ivp.v == static_cast<void*>(0)|.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 
@@ -7606,7 +7606,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::transformation_command_func()':"
@@ -8104,7 +8104,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::transformation_assignment_command_func()':"
@@ -10412,7 +10412,7 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
 @<Define |Scan_Parse| functions@>=
 
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
           cerr_strm << thread_name << "ERROR!  "
                     << "In `Scan_Parse::macro_definition_func()':"
@@ -11048,7 +11048,7 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
 @q **** (4).@> 
 
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name 
                    << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
@@ -11352,7 +11352,7 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-   if (entry == 0 || entry->object == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func()':"
                     << endl << "Invalid `macro_variable'.  Can't call macro.  "
@@ -12092,7 +12092,7 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::clear_vector_func':"
@@ -13026,7 +13026,7 @@ Scan_Parse::pop_back_func(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::pop_back_func':"
@@ -13771,7 +13771,7 @@ as the |create_if_none| argument.
                                              root, 
                                              false);
 
-          if (temp_entry == 0)
+          if (temp_entry == static_cast<Id_Map_Entry_Node>(0))
              {
                  cerr_strm << thread_name 
                            << "ERROR! In `Scan_Parse::pop_back_func':"
@@ -13788,7 +13788,7 @@ as the |create_if_none| argument.
 
                  return 1;   
 
-             }  /* |if (temp_entry == 0)|  */
+             }  /* |if (temp_entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
 
           temp_entry->object = 0;
@@ -15226,7 +15226,7 @@ Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name 

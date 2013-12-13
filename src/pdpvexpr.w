@@ -95,12 +95,12 @@ Added this rule.
 
 @q **** (4) Error handling:  |entry == 0 || entry->object == 0|.@> 
 
-@ Error handling:  |entry == 0 || entry->object == 0|.
+@ Error handling:  |entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == 0|.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);

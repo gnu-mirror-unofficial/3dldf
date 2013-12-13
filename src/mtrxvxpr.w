@@ -113,7 +113,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       cerr_strm << thread_name 

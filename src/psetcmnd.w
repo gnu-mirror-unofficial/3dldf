@@ -4309,7 +4309,7 @@ Added this rule.
 
 };
 
-@q *** (3) set_sphere_development_option_list --> WITH_DIVISIONS_LONGITUDE numeric_expression.@>   
+@q *** (3) set_sphere_development_option_list --> WITH_DIVISIONS_LONGITUDE numeric_expression.@>
 @*2 \§set sphere_development option list> $\longrightarrow$ \.{WITH\_DIVISIONS\_LONGITUDE}
 \§numeric expresssion>.
 \initials{LDF 2009.11.18.}

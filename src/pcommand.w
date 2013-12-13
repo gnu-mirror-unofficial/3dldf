@@ -270,7 +270,7 @@ Added this rule.
 
    string* str_ptr = static_cast<string*>(@=$2@>); 
 
-   if (str_ptr == 0)
+   if (str_ptr == static_cast<string*>(0))
      {
      
          @=$$@> = static_cast<void*>(0);
@@ -329,7 +329,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (s == 0)
+   if (s == static_cast<string*>(0))
       {
           @=$$@> = static_cast<void*>(0);
 

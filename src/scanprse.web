@@ -2330,7 +2330,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
 @<Define |Scan_Parse| functions@>=
 
 
-      if (entry == 0 || entry->object == 0)
+      if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
         {
 
           cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
@@ -3443,7 +3443,7 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| template functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name << "ERROR! In "
                 << "`Scan_Parse::assign_simple()':"
@@ -3918,7 +3918,7 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| template functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
         cerr_strm << thread_name << "ERROR! "
                   << "In `Scan_Parse::assign_chained()':"
@@ -4211,7 +4211,7 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-   if (entry == 0) 
+   if (entry == static_cast<Id_Map_Entry_Node>(0)) 
        { 
            cerr_strm << thread_name 
                      << "ERROR! In `Scan_Parse::assign_picture_simple()':"
@@ -4776,7 +4776,7 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::assign_picture_chained()':"
@@ -5325,7 +5325,7 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 \initials{LDF 2004.05.05.}
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "ERROR! In `assign_point_numeric()':"
@@ -5391,7 +5391,7 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
   Id_Map_Entry_Node y_entry = scanner_node->lookup("curr_y");
   Id_Map_Entry_Node z_entry = scanner_node->lookup("curr_z");
 
-  if (y_entry == 0)
+  if (y_entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name << "WARNING! In `assign_point_numeric()':"
                 << endl << "`curr_y' not found. "
@@ -5415,7 +5415,7 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 \initials{LDF 2004.05.05.}
 @<Define |Scan_Parse| functions@>=
 
-  if (z_entry == 0)
+  if (z_entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       cerr_strm << thread_name << "WARNING! In `assign_point_numeric()':"
@@ -5574,7 +5574,7 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::set_color()':"
@@ -5832,7 +5832,7 @@ Int_Void_Ptr
 \initials{LDF 2004.08.14.}
 @<Define |Scan_Parse| functions@>=
 
-  if (entry == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::set_focus()':"
@@ -6142,7 +6142,7 @@ Scan_Parse::on_picture_optional_0(Scanner_Node scanner_node)
 
 @<Define |Scan_Parse| functions@>=
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
 
         cerr_strm << thread_name 
@@ -6855,7 +6855,7 @@ to create |array_entry| failed.
 
 @<Define |Scan_Parse| template functions@>=
 
-      if (array_entry == 0)
+      if (array_entry == static_cast<Id_Map_Entry_Node>(0))
         {
           cerr_strm << thread_name 
                     << "ERROR! In `Scan_Parse::vector_type_decl()':"
@@ -6947,7 +6947,7 @@ error handling if it fails.
 
 @<Define |Scan_Parse| template functions@>=
 
-      if (vector_entry == 0)
+      if (vector_entry == static_cast<Id_Map_Entry_Node>(0))
         {
 
           cerr_strm << thread_name 
@@ -7499,7 +7499,7 @@ Rethrow |bad_alloc| upon failure.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (array_entry == 0)
+   if (array_entry == static_cast<Id_Map_Entry_Node>(0))
      {
 
        cerr_strm << thread_name 
@@ -7557,7 +7557,7 @@ Rethrow |bad_alloc| upon failure.
 
 @<Define |Scan_Parse| template functions@>=
 
-       if (c_entry == 0)
+       if (c_entry == static_cast<Id_Map_Entry_Node>(0))
          {
            cerr_strm << thread_name 
                      << "ERROR! In `Scan_Parse::vector_type_plus_assign():"
@@ -7790,7 +7790,7 @@ Added this section.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (entry == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name 
                    << "ERROR!  In `Scan_Parse::vector_type_assign()':"
@@ -7966,7 +7966,7 @@ Rethrow |bad_alloc| upon failure.
 
 @<Define |Scan_Parse| template functions@>=
 
-   if (array_entry == 0)
+   if (array_entry == static_cast<Id_Map_Entry_Node>(0))
      {
 
        cerr_strm << thread_name 
@@ -8024,7 +8024,7 @@ Rethrow |bad_alloc| upon failure.
 
 @<Define |Scan_Parse| template functions@>=
 
-       if (c_entry == 0)
+       if (c_entry == static_cast<Id_Map_Entry_Node>(0))
          {
            cerr_strm << thread_name 
                      << "ERROR! In `Scan_Parse::vector_type_assign():"
@@ -8624,7 +8624,7 @@ Scan_Parse::reverse_func(void* v, void* parameter, C* c)
 
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(v);
 
-    if (entry == 0 || entry->object == 0)
+    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
        return 1;
 
 #if 0 

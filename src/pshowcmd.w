@@ -768,7 +768,7 @@ Added this rule.
 
    cerr_strm  << ">> ";
 
-   if (entry == 0 || entry->object == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
      {
         cerr_strm << "(unknown macro)";
         log_message(cerr_strm);
@@ -2246,7 +2246,7 @@ Added this rule.
 
    cerr_strm  << ">> ";
 
-   if (entry == 0 || entry->object == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
           cerr_strm << "(unknown picture_vector)";
           log_message(cerr_strm);
@@ -2315,7 +2315,7 @@ Added this rule.
 
    cerr_strm  << ">> ";
 
-   if (entry == 0 || entry->object == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
           cerr_strm << "(unknown macro_vector)";
           log_message(cerr_strm);

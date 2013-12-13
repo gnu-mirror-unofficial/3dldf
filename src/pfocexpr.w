@@ -83,7 +83,7 @@ an ``unknown |focus|''.
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);

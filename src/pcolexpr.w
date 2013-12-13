@@ -87,7 +87,7 @@ an ``unknown |color|''.
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
@@ -156,7 +156,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (pv == 0)
+   if (pv == static_cast<Pointer_Vector<Color>*>(0))
       {
 
           delete c;
@@ -234,7 +234,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (c == 0)
+   if (c == static_cast<Color*>(0))
       {
           @=$$@> = static_cast<void*>(0);
 
@@ -267,7 +267,7 @@ Added this rule.
 
 @<Define rules@>=
 
-         if (r == 0)
+         if (r == ZERO_REAL)
             {
 
 #if 0
@@ -377,7 +377,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (c == 0)
+   if (c == static_cast<Color*>(0))
       {
 
           @=$$@> = static_cast<void*>(0);
@@ -430,7 +430,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (entry == 0 || entry->object == 0)
+   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
           @=$$@> = static_cast<void*>(0);
 
@@ -509,14 +509,14 @@ added the rule ``\§color tertiary> $\longrightarrow$
 
 @q **** (4) @>   
 
-   if (c == 0 || d == 0)
+   if (c == static_cast<Color*>(0) || d == static_cast<Color*>(0))
       {
 
           delete c;
           delete d;
 
-          c = 0;
-          d = 0;
+          c = static_cast<Color*>(0);
+          d = static_cast<Color*>(0);
 
           @=$$@> = static_cast<void*>(0);
 
@@ -567,13 +567,13 @@ Added this rule.
 
 @q **** (4) @>   
 
-   if (c == 0 || d == 0)
+   if (c == static_cast<Color*>(0) || d == static_cast<Color*>(0))
       {
           delete c;
           delete d;
 
-          c = 0;
-          d = 0;
+          c = static_cast<Color*>(0);
+          d = static_cast<Color*>(0);
 
           @=$$@> = static_cast<void*>(0);
 
@@ -597,7 +597,7 @@ Added this rule.
 @q **** (4) @>   
 
                delete d;
-               d = 0;
+               d = static_cast<Color*>(0);
 };
 
 @q ** (2) color expression.  @>

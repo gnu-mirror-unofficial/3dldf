@@ -3128,7 +3128,7 @@ carefully than it had in the past.
        Id_Map_Entry_Node focus_entry = lookup("default_focus");
        
 
-       if (focus_entry == 0 || focus_entry->object == 0)
+       if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0)
          {
            
            cerr_strm << thread_name 

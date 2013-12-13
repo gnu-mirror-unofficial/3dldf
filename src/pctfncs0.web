@@ -773,7 +773,7 @@ It will be needed if this function is called on |*this| again.
 
 @q ********* (9) @> 
 
-                         if (ivp.v == 0)
+                         if (ivp.v == static_cast<void*>(0))
                             {
 
 #if DEBUG_COMPILE
@@ -799,7 +799,8 @@ It will be needed if this function is called on |*this| again.
 
 @q ********** (10) @>
 
-                                if (pv == 0 || pv->ctr <= 0)
+                                if (   pv == static_cast<Pointer_Vector<Shape>*>(0)  
+                                    || pv->ctr <= 0)
                                    {
 #if DEBUG_COMPILE
                                        if (DEBUG)
@@ -1082,8 +1083,7 @@ Added this section.
 @q ******* (7) @> 
 
           else if (status == 0)
-             {
-             }  /* |if (status == 0)| */
+             ;  /* Do nothing  */
 
 
 

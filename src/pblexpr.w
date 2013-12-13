@@ -574,7 +574,7 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
     Pointer_Vector<Bool_Point>* bpv 
        = static_cast<Pointer_Vector<Bool_Point>*>(@=$2@>); 
 
-    *b = (   bpv == Pointer_Vector<Bool_Point>*(0) 
+    *b = (   bpv == static_cast<Pointer_Vector<Bool_Point>*>(0) 
           || bpv->v.size() <= 0) ? false : true;
 
     delete bpv;
@@ -604,7 +604,7 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
 
     Pointer_Vector<Bool_Point>* bpv = static_cast<Pointer_Vector<Bool_Point>*>(@=$2@>); 
 
-    *b = (   bpv == Pointer_Vector<Bool_Point>*(0) 
+    *b = (   bpv == static_cast<Pointer_Vector<Bool_Point>*>(0) 
           || bpv->v.size() <= 0) ? true : false;
 
     delete bpv;

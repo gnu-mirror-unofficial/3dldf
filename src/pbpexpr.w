@@ -103,7 +103,7 @@ an ``unknown |bool_point|''.
 
 @<Define rules@>=
 
-  if (entry == 0 || entry->object == 0)
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
@@ -260,7 +260,7 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (bpv == 0)
+   if (bpv == static_cast<Pointer_Vector<Bool_Point>*>(0))
       {
           delete bp;
 
