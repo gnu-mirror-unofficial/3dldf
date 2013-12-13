@@ -103,7 +103,7 @@ Added this rule.
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
 
-   if (scanner_node->arc_options != 0)
+   if (scanner_node->arc_options != static_cast<Arc_Options*>(0))
       scanner_node->arc_options->clear();
 
    else
@@ -166,7 +166,7 @@ Added this rule.
    if (options->focus_0)
       delete options->focus_0;
 
-   if (@=$3@> == 0)
+   if (@=$3@> == ZERO_REAL)
       options->focus_0 = static_cast<Point*>(@=$5@>); 
    else if (@=$3@> == 1)
       options->focus_1 = static_cast<Point*>(@=$5@>); 

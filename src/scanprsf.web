@@ -1860,7 +1860,7 @@ Debugged this section.
 @q ******* (7) @> 
 
 
-            else if (   ccolor_vector != static_cast<Id_Map_Entry_Node>(0) 
+            else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0)
                      && ccolor_vector->ctr > 0)
                {
 
@@ -3077,7 +3077,8 @@ and set to |ccolor_vector|, if necessary.
 
     } /* |if (ddraw_color_vector_ptr == 0 && ccolor_vector_ptr != 0)|  */
 
-  if (ffill_color_vector_ptr == static_cast<void*>(0) && ccolor_vector_ptr != static_cast<void*>(0))
+  if (   ffill_color_vector_ptr == static_cast<void*>(0) 
+      && ccolor_vector_ptr != static_cast<void*>(0))
     {
       ffill_color_vector_ptr = ccolor_vector_ptr;
     }

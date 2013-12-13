@@ -383,7 +383,7 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
                  << name_map[rescan_catcode] << "'." 
                  << endl;
       
-       if (rescan_value == 0)
+       if (rescan_value == static_cast<void*>(0))
          cerr_strm << "`rescan_value' == 0" << endl;
        else
          {
@@ -408,7 +408,7 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 
 @<Define scanning functions@>=
 
-       if (rescan_value != 0 || !rescan_retest)
+       if (rescan_value != static_cast<void*>(0) || !rescan_retest)
          {
 
             value->pointer_value = static_cast<YYSTYPE*>(rescan_value);

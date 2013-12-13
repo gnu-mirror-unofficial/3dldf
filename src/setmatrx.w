@@ -105,7 +105,7 @@ Added this rule.
 {
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   if (scanner_node->matrix_options != 0)
+   if (scanner_node->matrix_options != static_cast<Matrix_Options*>(0))
       scanner_node->matrix_options->clear();
    else
       scanner_node->matrix_options = new Matrix_Options;
