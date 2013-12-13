@@ -31,9 +31,13 @@ export PATH="/home/lfinsto/gcc-4.8.2/bin/g++:/home/lfinsto/automake-1.14/bin/:$P
 configure --disable-shared CXX=/home/lfinsto/gcc-4.8.2/bin/g++ \
    LDFLAGS="-L/home/lfinsto/gcc-4.8.2/lib64" --prefix=`pwd` LIBS="-lgsl -lgslcblas -lm"
 
-LC_ALL=C TZ=UTCO diff -rc2P 3DLDF-2.0.2 3DLDF-2.0.3 | gzip -9 > 3DLDF-2.0.2-2.0.3.patch.gz
+%% ** (2) Setup and upload distribution
 
-patch -p1 < 3DLDF-2.0-2.0.1.patch 
+LDF 2013.12.13.
+
+LC_ALL=C TZ=UTCO diff -rc2P 3DLDF-2.0.2 3DLDF-2.0.3 | gzip -9 > 3DLDF-2.0.2-2.0.3.diff.gz
+
+patch -p1 < 3DLDF-2.0.2-2.0.3.diff
 
 ftp ftp-upload.gnu.org
 anonymous
