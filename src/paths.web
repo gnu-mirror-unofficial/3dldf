@@ -439,12 +439,12 @@ Added code for handling copying |draw_color_vector|.
 
 @q **** (4) @>   
 
-         /* !! START HERE: LDF 2013.12.12.  Casting 0 to pointer types.  */
-
-         if (fill_color_vector == 0 && p.fill_color_vector == 0)
+         if (   fill_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
+             && p.fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
             ; /* Do nothing.  */@; 
 
-         else if (fill_color_vector == 0 &&  p.fill_color_vector != 0)
+         else if (    fill_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
+                  &&  p.fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
             {
 
                 fill_color_vector = new Pointer_Vector<Color>; 
@@ -454,15 +454,17 @@ Added code for handling copying |draw_color_vector|.
 
             }
 
-         else if (fill_color_vector != 0 &&  p.fill_color_vector == 0)
+         else if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                  && p.fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
             {
                 fill_color_vector->clear();
                 delete fill_color_vector;
-                fill_color_vector = 0;
+                fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
 
             }
 
-          else if (fill_color_vector != 0 &&  p.fill_color_vector != 0)
+          else if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                   && p.fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
              *fill_color_vector = *(p.fill_color_vector);
 
 
@@ -500,10 +502,12 @@ Added this section.
 @<Define |Path| functions@>=
 
 
-         if (dash_pattern_vector == 0 && p.dash_pattern_vector == 0)
+         if (   dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+             && p.dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0))
             ; /* Do nothing.  */@; 
 
-         else if (dash_pattern_vector == 0 &&  p.dash_pattern_vector != 0)
+         else if (   dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                  && p.dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
             {
 
                 dash_pattern_vector = new Pointer_Vector<Dash_Pattern>; 
@@ -513,15 +517,17 @@ Added this section.
 
             }
 
-         else if (dash_pattern_vector != 0 &&  p.dash_pattern_vector == 0)
+         else if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                  && p.dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0))
             {
                 dash_pattern_vector->clear();
                 delete dash_pattern_vector;
-                dash_pattern_vector = 0;
+                dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
 
             }
 
-          else if (dash_pattern_vector != 0 &&  p.dash_pattern_vector != 0)
+          else if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                   && p.dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
              *dash_pattern_vector = *(p.dash_pattern_vector);
 
 
@@ -537,10 +543,12 @@ Added this section.
 @<Define |Path| functions@>=
 
 
-         if (pen_vector == 0 && p.pen_vector == 0)
+         if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+             && p.pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
             ; /* Do nothing.  */@; 
 
-         else if (pen_vector == 0 &&  p.pen_vector != 0)
+         else if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+                  && p.pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
             {
 
                 pen_vector = new Pointer_Vector<Pen>; 
@@ -550,15 +558,17 @@ Added this section.
 
             }
 
-         else if (pen_vector != 0 &&  p.pen_vector == 0)
+         else if (   pen_vector != static_cast<Pointer_Vector<Pen>*>(0) 
+                  && p.pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
             {
                 pen_vector->clear();
                 delete pen_vector;
-                pen_vector = 0;
+                pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
 
             }
 
-          else if (pen_vector != 0 &&  p.pen_vector != 0)
+          else if (   pen_vector != static_cast<Pointer_Vector<Pen>*>(0) 
+                   && p.pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
              *pen_vector = *(p.pen_vector);
 
 
@@ -919,31 +929,31 @@ Path::set(const Point& p0, const Point& p1)
   do_output = true;  /* LDF 2002.09.18.  Added this line.  */
   fill_draw_value = 0;
 
-  if (draw_color_vector != 0)
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete draw_color_vector;
-        draw_color_vector = 0;
+        draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
 
-  if (fill_color_vector != 0)
+  if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete fill_color_vector;
-        fill_color_vector = 0;
+        fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
 
 
-  if (dash_pattern_vector != 0)
+  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
     {
         delete dash_pattern_vector;
-        dash_pattern_vector = 0;
+        dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
     }
 
-  if (pen_vector != 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
     {
         delete pen_vector;
-        pen_vector = 0;
+        pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
     }
 
   arrow = NO_ARROW;
@@ -1166,29 +1176,29 @@ Path::set(string connector, bool cycle ... )
     fill_draw_value = 0;
 
 
-  if (draw_color_vector != 0)
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete draw_color_vector;
-        draw_color_vector = 0;
+        draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
-  if (fill_color_vector != 0)
+  if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete fill_color_vector;
-        fill_color_vector = 0;
+        fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
 
-  if (dash_pattern_vector != 0)
+  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
     {
         delete dash_pattern_vector;
-        dash_pattern_vector = 0;
+        dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
     }
 
-  if (pen_vector != 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
     {
         delete pen_vector;
-        pen_vector = 0;
+        pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
     }
 
     arrow = NO_ARROW;
@@ -1413,29 +1423,29 @@ Path::set(Point* first_point_ptr ... )
 
     fill_draw_value = 0;
 
-  if (draw_color_vector != 0)
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete draw_color_vector;
-        draw_color_vector = 0;
+        draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
 
-  if (fill_color_vector != 0)
+  if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete fill_color_vector;
-        fill_color_vector = 0;
+        fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
-  if (dash_pattern_vector != 0)
+  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
     {
         delete dash_pattern_vector;
-        dash_pattern_vector = 0;
+        dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
     }
 
-  if (pen_vector != 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
     {
         delete pen_vector;
-        pen_vector = 0;
+        pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
     }
 
     arrow = NO_ARROW;
@@ -1681,10 +1691,10 @@ Now deleting |dash_pattern_vector| and |pen_vector| and setting them to
 
 @<Define |Path| functions@>=
 
-   if (draw_color_vector != 0)
+   if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
           delete draw_color_vector;
-          draw_color_vector = 0;
+          draw_color_vector = static_cast<Pointer_Vector<Color>*>(0);
         
       }  /* |if (draw_color_vector != 0)|  */
 
@@ -1692,19 +1702,19 @@ Now deleting |dash_pattern_vector| and |pen_vector| and setting them to
   if (fill_color_vector != 0)
     {
         delete fill_color_vector;
-        fill_color_vector = 0;
+        fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
     }
 
-  if (dash_pattern_vector != 0)
+  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
     {
         delete dash_pattern_vector;
-        dash_pattern_vector = 0;
+        dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
     }
 
-  if (pen_vector != 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
     {
         delete pen_vector;
-        pen_vector = 0;
+        pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
     }
 
 @q *** (3).@> 
@@ -1781,26 +1791,26 @@ Path::clear()
 
   @<Discard |points| and |connectors|@>@;
   
-  if (draw_color_vector != 0)
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete draw_color_vector;
         draw_color_vector = 0;
     }
 
-  if (fill_color_vector != 0)
+  if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     {
         delete fill_color_vector;
         fill_color_vector = 0;
     }
 
 
-  if (dash_pattern_vector != 0)
+  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
     {
         delete dash_pattern_vector;
         dash_pattern_vector = 0;
     }
 
-  if (pen_vector != 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
     {
         delete pen_vector;
         pen_vector = 0;
@@ -2047,7 +2057,7 @@ push_draw_color(Color*& c, bool copy = true);
 int
 Path::push_draw_color(Color*& c, bool copy)
 {
-   if (draw_color_vector == 0)
+   if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       draw_color_vector = new Pointer_Vector<Color>;
 
    Color* d;
@@ -2097,7 +2107,7 @@ push_fill_color(Color*& c, bool copy = true);
 int
 Path::push_fill_color(Color*& c, bool copy)
 {
-   if (fill_color_vector == 0)
+   if (fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       fill_color_vector = new Pointer_Vector<Color>;
 
    Color* d;
@@ -2147,10 +2157,10 @@ push_color(Color*& c, bool copy = true);
 int
 Path::push_color(Color*& c, bool copy)
 {
-   if (draw_color_vector == 0)
+   if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       draw_color_vector = new Pointer_Vector<Color>;
 
-   if (fill_color_vector == 0)
+   if (fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       fill_color_vector = new Pointer_Vector<Color>;
 
    Color* d;
@@ -2197,7 +2207,7 @@ push_pen(Pen*& p, bool copy = true);
 int 
 Path::push_pen(Pen*& p, bool copy)
 {
-   if (pen_vector == 0)
+   if (pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
       pen_vector = new Pointer_Vector<Pen>;
 
    Pen* q;
@@ -2241,7 +2251,7 @@ push_dash_pattern(Dash_Pattern*& d, bool copy = true);
 int 
 Path::push_dash_pattern(Dash_Pattern*& d, bool copy)
 {
-   if (dash_pattern_vector == 0)
+   if (dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0))
       dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
 
    Dash_Pattern* e;
@@ -3496,7 +3506,7 @@ Path::reflect_in(const Plane& p,
 @<Define |Path| functions@>=
 
 
-   if (path_reflection == 0)
+   if (path_reflection == static_cast<Pointer_Vector<Path>*>(0))
      {
         cerr_strm << thread_name 
                   << "WARNING! In `Path::reflect_in':"
@@ -3795,7 +3805,7 @@ Added this section.
 
 @<Define |Path| functions@>=
   
-  if (path_ptr_vector == 0)
+  if (path_ptr_vector == static_cast<Pointer_Vector<Path>*>(0))
      {
 
          cerr_strm << thread_name << "ERROR!  In `Path::reflect_off':"
@@ -4374,7 +4384,7 @@ Path::operator+=(Color* c)
 
 @<Define |Path| functions@>=
 
-   if (c == 0)
+   if (c == static_cast<Color*>(0))
       {
           cerr_strm << thread_name << "WARNING!  In `Path::operator+=(Color*)':"
                     << endl 
@@ -4394,7 +4404,7 @@ Path::operator+=(Color* c)
 
 @q *** (3).@> 
 
-   if (draw_color_vector == 0)
+   if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       {
  
          try 
@@ -4421,7 +4431,7 @@ Path::operator+=(Color* c)
             }  /* |catch (bad_alloc)|  */
 
 
-      }  /* |if (draw_color_vector == 0)|  */
+      }  /* |if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))|  */
 
 @q *** (3).@> 
 
@@ -4981,7 +4991,7 @@ am now using |Pointer_Vector<Pen>* Shape::pen_vector| instead.
           
 
 
-          if (ppen_vector != 0)
+          if (ppen_vector != static_cast<Pointer_Vector<Pen>*>(0))
              {
                  p->pen_vector = new Pointer_Vector<Pen>;
                  *(p->pen_vector) = *ppen_vector;
@@ -4991,7 +5001,7 @@ am now using |Pointer_Vector<Pen>* Shape::pen_vector| instead.
             p->pen_vector = 0;
 
 
-          if (ddash_pattern_vector != 0)
+          if (ddash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
              {
                  p->dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
                  *(p->dash_pattern_vector) = *ddash_pattern_vector;
@@ -5262,7 +5272,7 @@ Point::draw(Picture& picture,
 
    Pointer_Vector<Pen>* ppen_vector = 0; 
 
-   if (ppen != 0)
+   if (ppen != static_cast<Pen*>(0))
       {
          ppen_vector = new Pointer_Vector<Pen>;
          ppen_vector->append_copy(ppen);
@@ -5270,7 +5280,7 @@ Point::draw(Picture& picture,
 
    Pointer_Vector<Dash_Pattern>* ddash_pattern_vector = 0;
 
-   if (ddash_pattern != 0)
+   if (ddash_pattern != static_cast<Dash_Pattern*>(0))
       {
          ddash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
          ddash_pattern_vector->append_copy(ddash_pattern);
@@ -5795,7 +5805,7 @@ Path::filldraw(Picture& picture,
   if (ffill_color)
      p->push_fill_color(ffill_color, false);
 
-  if (ppen_vector != 0)
+  if (ppen_vector != static_cast<Pointer_Vector<Pen>*>(0))
     {
       p->pen_vector = new Pointer_Vector<Pen>;
       *(p->pen_vector) = *ppen_vector;
@@ -5804,7 +5814,7 @@ Path::filldraw(Picture& picture,
     p->pen_vector = 0;
 
 
-  if (ddash_pattern_vector != 0)
+  if (ddash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
     {
       p->dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
       *(p->dash_pattern_vector) = *ddash_pattern_vector;
@@ -5983,7 +5993,7 @@ Path::undraw(Picture& picture,
     p->draw_color_vector = 0;
     p->fill_color_vector = 0;
 
-    if (ppen_vector != 0)
+    if (ppen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        { 
            p->pen_vector = new Pointer_Vector<Pen>;
            *(p->pen_vector) = *ppen_vector;
@@ -5991,7 +6001,7 @@ Path::undraw(Picture& picture,
     else
        p->pen_vector = 0;
 
-    if (ddash_pattern_vector != 0)
+    if (ddash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
        { 
            p->dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
            *(p->dash_pattern_vector) = *dash_pattern_vector;
@@ -6136,7 +6146,7 @@ Point::undraw(Picture& picture,
 
   Pointer_Vector<Pen>* ppen_vector = 0;
 
-  if (ppen != 0)
+  if (ppen != static_cast<Pen*>(0))
      {
         ppen_vector = new Pointer_Vector<Pen>;
         ppen_vector->append_copy(ppen);
@@ -6145,7 +6155,7 @@ Point::undraw(Picture& picture,
 
   Pointer_Vector<Dash_Pattern>* ddash_pattern_vector = 0;
 
-  if (ddash_pattern != 0)
+  if (ddash_pattern != static_cast<Dash_Pattern*>(0))
      {
         ddash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
         ddash_pattern_vector->append_copy(ddash_pattern);
@@ -6420,7 +6430,7 @@ Path::unfilldraw(Picture& picture,
 
   p->fill_color_vector = 0;
 
-  if (ppen_vector != 0)
+  if (ppen_vector != static_cast<Pointer_Vector<Pen>*>(0))
      {
          p->pen_vector = new Pointer_Vector<Pen>;
          *(p->pen_vector) = *ppen_vector;
@@ -6429,7 +6439,7 @@ Path::unfilldraw(Picture& picture,
     p->pen_vector = 0;
 
 
-  if (ddash_pattern_vector != 0)
+  if (ddash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
      {
          p->dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
          *(p->dash_pattern_vector) = *ddash_pattern_vector;
@@ -8603,7 +8613,7 @@ Revised the code that checks the value of |arrow|.
 
           @<Output |Path|@>@;
 
-          if (fill_color_vector != 0 && fill_color_vector->ctr > 0)
+          if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) && fill_color_vector->ctr > 0)
             *out_stream << " withcolor " << *(fill_color_vector->v[0]);
 
         *out_stream << ";" << endl << flush;
@@ -8659,19 +8669,26 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
               Color* temp_color;
 
-              if (fill_color_vector != 0 && fill_color_vector->ctr > 0)
+              if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                  && fill_color_vector->ctr > 0)
+              {
                 temp_color = fill_color_vector->v[0];
-              else temp_color = 0;
+              }
+              else 
+                 temp_color = 0;
             
-              if (temp_color == 0)
+              if (temp_color == static_cast<Color*>(0))
                   {
                       entry = scanner_node->lookup("background_color");
               
-                      if (entry != 0)
+                      if (entry != static_cast<Id_Map_Entry_Node>(0))
                          v = entry->get_object();         
 
-                      if (entry != 0 && v != 0)
+                      if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                          && v != static_cast<void*>(0))
+                      {
                          temp_color = static_cast<Color*>(v);
+                      }
                       else 
                          temp_color = const_cast<Color*>(&Colors::white);
 
@@ -8816,7 +8833,7 @@ Changed |if (draw_color == Colors::background_color)| to
  
 @q ***** (5).@> 
 
-          if (   draw_color_vector == 0 
+          if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
               || draw_color_vector->v.size() == 0)
             {
                 *out_stream << "unfilldraw " << **point_iter++;
@@ -9033,9 +9050,12 @@ Added code for suppressing output if the type of the current
                  || shape_type == TRIANGLE_TYPE 
                  || shape_type == RECTANGLE_TYPE 
                  || shape_type == REG_POLYGON_TYPE)
-             && (   draw_color_vector != 0 && draw_color_vector->ctr > 1
-                 || pen_vector != 0 && pen_vector->ctr > 1
-                 || dash_pattern_vector != 0 && dash_pattern_vector->ctr > 1)
+             && (  (    draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                    && draw_color_vector->ctr > 1)
+                 || (   pen_vector != static_cast<Pointer_Vector<Pen>*>(0) 
+                     && pen_vector->ctr > 1)
+                 || (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                     && dash_pattern_vector->ctr > 1))
            )
 
            {
@@ -9090,7 +9110,7 @@ Added code for suppressing output if the type of the current
                status = adjust_dash_pattern_vector();
   
 
-               if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)
+               if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) && dash_pattern_vector->ctr > 0)
                   {
                       dash_pattern_iter = dash_pattern_vector->v.begin();
                       do_dash_patterns = true;
@@ -9109,7 +9129,7 @@ Added code for suppressing output if the type of the current
                       cerr << "`do_pens' == " << do_pens
                            << endl;
 
-                      if (do_pens && pen_vector != 0)
+                      if (do_pens && pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
                          cerr << "`pen_vector->v.size' == " 
                               << pen_vector->v.size()
                               << endl;
@@ -9117,7 +9137,7 @@ Added code for suppressing output if the type of the current
                       cerr << "`do_dash_patterns' == " << do_dash_patterns
                            << endl;
 
-                      if (do_dash_patterns && dash_pattern_vector != 0)
+                      if (do_dash_patterns && dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
                          cerr << "`dash_pattern_vector->v.size' == " 
                               << dash_pattern_vector->v.size()
                               << endl;
@@ -9349,14 +9369,7 @@ This requires special handling because |arrow| could be equal to
 
 @q ****** (6).@> 
                
-           }  /*  |if (    (   shape_type == POLYGON_TYPE 
-                            || shape_type == TRIANGLE_TYPE 
-                            || shape_type == RECTANGLE_TYPE 
-                            || shape_type == REG_POLYGON_TYPE)
-                        && (   draw_color_vector != 0 && draw_color_vector->ctr > 1
-                            || pen_vector != 0 && pen_vector->ctr > 1
-                            || dash_pattern_vector != 0 && dash_pattern_vector->ctr > 1)
-                      )|  */
+           }  /*  |if|  */
 
 @q ***** (5).@>   
 @
@@ -9372,7 +9385,8 @@ Added code for suppressing output if the type of the current
 
 @<Define |Path| functions@>=
 
-        else if (   pen_vector == 0 || pen_vector->ctr == 0 
+        else if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+                 || pen_vector->ctr == 0 
                  || pen_vector->v[0]->get_type() != Pen::NULL_PEN)  
                 
                  /*  Not dividing |Path|.  */
@@ -9381,7 +9395,7 @@ Added code for suppressing output if the type of the current
 #if DEBUG_COMPILE
                if (DEBUG)
                   {
-                      if (pen_vector == 0)
+                      if (pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
                          cerr << "`pen_vector' == 0." << endl;
 
                       else 
@@ -9424,18 +9438,19 @@ Added code for suppressing output if the type of the current
 
                @<Output |Path|@>@;
 
-               if (draw_color_vector != 0 && draw_color_vector->ctr > 0)
+               if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) && draw_color_vector->ctr > 0)
                   *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
 
-               if (pen_vector != 0 && pen_vector->ctr > 0)
+               if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
                   *out_stream << endl << "withpen " << *(pen_vector->v[0]) << " ";
 
-               if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)
+               if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) && dash_pattern_vector->ctr > 0)
                   *out_stream << endl << *(dash_pattern_vector->v[0]);
 
                *out_stream << ";\n" << flush;
 
-           }  /*  |else if (   pen_vector == 0 || pen_vector->ctr == 0 
+           }  /*  |else if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+                            || pen_vector->ctr == 0 
                             || pen_vector->v[0]->get_type() != Pen::NULL_PEN)| 
                   (Not dividing |Path|.)  */
 
@@ -9555,7 +9570,7 @@ Replaced the code in this section with a call to
 
 @<Handle |pen|@>=
 
-  if (pen_vector != 0 && pen_vector->ctr > 0)
+  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
     {
 
         *out_stream << endl << "withpen " << *(pen_vector->v[0]);
@@ -9578,7 +9593,7 @@ the output operator for |Dash_Pattern|.
 
 @<Handle |dash_pattern|@>=
 
-  if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)
+  if (dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) && dash_pattern_vector->ctr > 0)
     {
 
         *out_stream << endl << *(dash_pattern_vector->v[0]);
@@ -9770,23 +9785,23 @@ Path::show(string text, char coords,
 
    cerr << endl;
 
-   if (fill_color_vector == 0)
+   if (fill_color_vector == static_cast<Pointer_Vector<Color>*>(0))
      cerr << "`fill_color_vector' == 0" << endl;
    else
      fill_color_vector->show("fill_color_vector:");
 
-   if (draw_color_vector == 0)
+   if (draw_color_vector == static_cast<Pointer_Vector<Color>*>(0))
       cerr << "`draw_color_vector' == 0" << endl;
    else
       draw_color_vector->show("draw_color_vector:");
 
 
-   if (pen_vector == 0)
+   if (pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
       cerr << "`pen_vector' == 0" << endl;
    else
       pen_vector->show("pen_vector:");
 
-   if (dash_pattern_vector == 0)
+   if (dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0))
       cerr << "`dash_pattern_vector' == 0" << endl;
    else
       dash_pattern_vector->show("dash_pattern_vector:");
@@ -9821,15 +9836,15 @@ show_colors(bool stop = false);
 void
 Path::show_colors(bool stop)
 {
-  if (draw_color_vector != 0)
+  if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     draw_color_vector->show("draw_color_vector:");
   else
-    cerr << "draw_color_vector == 0.\n";
+    cerr << "draw_color_vector == static_cast<Pointer_Vector<Color>*>(0).\n";
 
-  if (fill_color_vector != 0)
+  if (fill_color_vector != static_cast<Pointer_Vector<Color>*>(0))
     fill_color_vector->show("fill_color_vector:");
   else
-    cerr << "fill_color_vector == 0.\n";
+    cerr << "fill_color_vector == static_cast<Pointer_Vector<Color>*>(0).\n";
 
   if (stop)
     getchar(); /* Don't delete this!  */ 
@@ -11915,7 +11930,7 @@ Point::is_in_triangle(const Point& p0,
 
   bool exchange_y_z = false;
   bool exchange_x_z = false;
-  if (lambda_denominator == 0 || mu_denominator == 0)
+  if (lambda_denominator == ZERO_REAL || mu_denominator == ZERO_REAL)
     {
       if (DEBUG)
         cerr << "lambda_denominator or mu_denominator == 0. "
@@ -11942,7 +11957,7 @@ Point::is_in_triangle(const Point& p0,
       mu_denominator = ((e_x -  c_x) * (d_y - c_y)) - ((e_y - c_y) * (d_x - c_x));
 
 
-      if (!(lambda_denominator == 0 || mu_denominator == 0))
+      if (!(lambda_denominator == ZERO_REAL || mu_denominator == ZERO_REAL))
         {
           if (DEBUG)
             cerr << "Exchanging y and z-coordinates worked.\n" 
@@ -11999,7 +12014,7 @@ It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}
           lambda_denominator = (((e_x - c_x) * (d_y - c_y)) - ((e_y - c_y) * (d_x - c_x)));
           mu_denominator = ((e_x -  c_x) * (d_y - c_y)) - ((e_y - c_y) * (d_x - c_x));
 
-          if (!(lambda_denominator == 0 || mu_denominator == 0))
+          if (!(lambda_denominator == ZERO_REAL || mu_denominator == ZERO_REAL))
             {
               if (DEBUG)
                 cerr << "Exchanging x and z-coordinates worked.\n" 
@@ -12210,7 +12225,8 @@ adjust_draw_color_vector(void);
 int
 Path::adjust_draw_color_vector(void)
 {
-   if (draw_color_vector == 0 || draw_color_vector->ctr <= 0)
+   if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
+       || draw_color_vector->ctr <= 0)
       return 1;
 
    int i = 0;
@@ -12256,7 +12272,7 @@ adjust_pen_vector(void);
 int
 Path::adjust_pen_vector(void)
 {
-   if (pen_vector == 0 || pen_vector->ctr <= 0)
+   if (pen_vector == static_cast<Pointer_Vector<Pen>*>(0) || pen_vector->ctr <= 0)
       return 1;
 
    int i = 0;
@@ -12302,7 +12318,7 @@ adjust_dash_pattern_vector(void);
 int
 Path::adjust_dash_pattern_vector(void)
 {
-   if (dash_pattern_vector == 0 || dash_pattern_vector->ctr <= 0)
+   if (dash_pattern_vector == static_cast<Pointer_Vector<Dash_Pattern>*>(0) || dash_pattern_vector->ctr <= 0)
       return 1;
 
    int i = 0;
@@ -12829,9 +12845,9 @@ draw_axes(Picture& picture,
 
 
  
-  x_pt = (shift_x != 0) ? *shift_x : origin_pt;
-  y_pt = (shift_y != 0) ? *shift_y : origin_pt;
-  z_pt = (shift_z != 0) ? *shift_z : origin_pt;
+  x_pt = (shift_x != static_cast<const Point*>(0)) ? *shift_x : origin_pt;
+  y_pt = (shift_y != static_cast<const Point*>(0)) ? *shift_y : origin_pt;
+  z_pt = (shift_z != static_cast<const Point*>(0)) ? *shift_z : origin_pt;
 
 @  
 \LOG
@@ -13188,7 +13204,7 @@ is null.
 
 @<Define |Path| functions@>=
 
-   if (p == 0 || pv == 0)
+   if (p == static_cast<Point*>(0) || pv == static_cast<Pointer_Vector<Path>*>(0))
    {
        cerr_strm << "ERROR! In `Path::decompose':"
                  << endl
@@ -13257,7 +13273,7 @@ whole |Path| on |pv|.
 
 @<Define |Path| functions@>=
 
-         if (br.second == 0 || br.second == 1)
+         if (br.second == ZERO_REAL || br.second == 1)
          {
 #if DEBUG_COMPILE
              if (DEBUG)
@@ -13761,7 +13777,7 @@ such that |*r == 1|.
                            * *(control_points[i]); 
 
 
-                if (blend_value_denominator != 0)
+                if (blend_value_denominator != ZERO_REAL)
                    *C_of_u /= blend_value_denominator;
 
                 else  /* |blend_value_denominator == 0|  */
@@ -14252,7 +14268,7 @@ Now rotating |normal| along with |up|.
 
 @q ****** (6)@>
 
-    } /* |if (angle != 0)|  */
+    } /* |if (fabs(angle) > tolerance)|  */
 
 @q ***** (5)@>
 
