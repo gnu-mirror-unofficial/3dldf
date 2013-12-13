@@ -470,7 +470,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (position == 0)
+   if (position == static_cast<Point*>(0))
       {
           cerr_strm << thread_name << "ERROR! In `Scan_Parse::label_point_command()':"
                 << endl 
@@ -1050,7 +1050,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (ppath == 0)
+   if (ppath == static_cast<Path*>(0))
       {
           cerr_strm << thread_name << "ERROR! In `Scan_Parse::label_point_command()':"
                 << endl 
@@ -1565,7 +1565,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-    if (ppath == 0)
+    if (ppath == static_cast<Path*>(0))
       {
 
         cerr_strm << thread_name 
@@ -1644,7 +1644,7 @@ Check |scanner_node->picture_entry_ptr|.
 \initials{LDF 2004.06.03.}
 
 @<Define |Scan_Parse| functions@>=
-if (scanner_node->picture_entry_ptr == 0)
+if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
   {
 
 #if DEBUG_COMPILE
@@ -1780,27 +1780,28 @@ Debugged this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (ddraw_color_vector != 0)
-      scanner_node->draw_color_vector_ptr = 0;
+   if (ddraw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
+      scanner_node->draw_color_vector_ptr = static_cast<void*>(0);
 
    else  /* |ddraw_color_vector == 0|  */ 
       {
           ddraw_color_vector = new Pointer_Vector<Color>;
 
-         if (ddraw_color != 0)
+         if (ddraw_color != static_cast<Color*>(0))
             {
 
                ddraw_color_vector->append_copy(ddraw_color); 
             }      
 
 
-         else if (ccolor != 0)
+         else if (ccolor != static_cast<Color*>(0))
             {
                 ddraw_color_vector->append_copy(ccolor);
             }  
 
 
-         else if (ccolor_vector != 0 && ccolor_vector->ctr > 0)
+         else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                  && ccolor_vector->ctr > 0)
             {
                 ddraw_color_vector->append_copy(*ccolor_vector);
             }  
@@ -1811,7 +1812,8 @@ Debugged this section.
 
                  entry = scanner_node->lookup("default_color");
 
-                 if (entry != 0 && entry->object != 0)
+                 if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                     && entry->object != static_cast<void*>(0))
                     ddraw_color_vector->append_copy(
                        static_cast<Color*>(entry->object));
 
@@ -1828,7 +1830,7 @@ Debugged this section.
 
 @<Define |Scan_Parse| functions@>=
  
-     if (ffill_color != 0)
+     if (ffill_color != static_cast<Color*>(0))
         scanner_node->fill_color_ptr = 0;
 
 
@@ -1839,7 +1841,8 @@ Debugged this section.
 
 @q ******* (7) @> 
 
-            if (ffill_color_vector != 0 && ffill_color_vector->ctr > 0)
+            if (   ffill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                && ffill_color_vector->ctr > 0)
                {
 
 
@@ -1849,7 +1852,7 @@ Debugged this section.
 
 @q ******* (7) @> 
 
-            else if (ccolor != 0)
+            else if (ccolor != static_cast<Color*>(0))
                {
                   *ffill_color = *ccolor;
                }
@@ -1857,7 +1860,8 @@ Debugged this section.
 @q ******* (7) @> 
 
 
-            else if (ccolor_vector != 0 && ccolor_vector->ctr > 0)
+            else if (   ccolor_vector != static_cast<Id_Map_Entry_Node>(0) 
+                     && ccolor_vector->ctr > 0)
                {
 
                    *ffill_color = *(ccolor_vector->v[0]);
@@ -1871,7 +1875,8 @@ Debugged this section.
                  
                    entry = scanner_node->lookup("default_color");
 
-                   if (entry != 0 && entry->object != 0)
+                   if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                       && entry->object != static_cast<void*>(0))
                       *ffill_color = *(static_cast<Color*>(entry->object));
                    else                     
                       *ffill_color = Colors::black;
@@ -1885,7 +1890,8 @@ Debugged this section.
                  
               entry = scanner_node->lookup("background_color");
 
-              if (entry != 0 && entry->object != 0)
+              if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                  && entry->object != static_cast<void*>(0))
                  *ffill_color = *(static_cast<Color*>(entry->object));
               else                     
                  *ffill_color = Colors::white;
@@ -1912,7 +1918,7 @@ Added this section.
 
 @q ****** (6).@> 
 
-  if (scanner_node->pen_vector_ptr != 0)
+  if (scanner_node->pen_vector_ptr != static_cast<void*>(0))
      ppen_vector = static_cast<Pointer_Vector<Pen>*>(scanner_node->pen_vector_ptr); 
 
 @q ****** (6).@> 
@@ -1932,12 +1938,12 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
 @<Define |Scan_Parse| functions@>=
 
-         if (scanner_node->pen_ptr == 0)
+         if (scanner_node->pen_ptr == static_cast<void*>(0))
             {
 
 @q ******** (8) @> 
 
-                if (*(scanner_node->current_pen) != 0)
+                if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
                    {
                        ppen = *(scanner_node->current_pen);
 
@@ -1959,7 +1965,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
 @q ******* (7) @> 
 
-         if (ppen != 0)
+         if (ppen != static_cast<Pen*>(0))
             {
                 ppen_vector = new Pointer_Vector<Pen>;
                 *ppen_vector += ppen;
@@ -1984,7 +1990,7 @@ Added this section.
 
 @q ****** (6).@> 
 
-   if (scanner_node->dash_pattern_vector_ptr != 0)
+   if (scanner_node->dash_pattern_vector_ptr != static_cast<void*>(0))
       ddash_pattern_vector 
          = static_cast<Pointer_Vector<Dash_Pattern>*>(
               scanner_node->dash_pattern_vector_ptr);       
@@ -1996,13 +2002,13 @@ Added this section.
 
 @q ******* (7) @> 
 
-         if (scanner_node->dash_pattern_ptr == 0)
+         if (scanner_node->dash_pattern_ptr == static_cast<void*>(0))
             {
 
 @q ******** (8) @> 
 
 
-                if (*(scanner_node->current_dash_pattern) != 0)
+                if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
                    {
                        ddash_pattern = *(scanner_node->current_dash_pattern);
 
@@ -2025,7 +2031,7 @@ Added this section.
 
 @q ******* (7) @> 
 
-        if (ddash_pattern != 0)
+        if (ddash_pattern != static_cast<Dash_Pattern*>(0))
            {
               ddash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
               *ddash_pattern_vector += ddash_pattern; 
@@ -2422,7 +2428,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (ssolid == 0)
+   if (ssolid == static_cast<Solid*>(0))
      {
          cerr_strm << thread_name 
                    << "ERROR!  In `Scan_Parse::drawing_command_solid()':"       
@@ -2475,7 +2481,7 @@ Check |scanner_node->picture_entry_ptr|.
 \initials{LDF 2004.06.03.}
 
 @<Define |Scan_Parse| functions@>=
-if (scanner_node->picture_entry_ptr == 0)
+  if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
   {
 
 #if DEBUG_COMPILE
@@ -2582,7 +2588,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-if (scanner_node->color_vector_ptr == 0)
+  if (scanner_node->color_vector_ptr == static_cast<void*>(0))
   {
 
 #if DEBUG_COMPILE
@@ -2613,7 +2619,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->color_ptr != 0)
+   if (scanner_node->color_ptr != static_cast<void*>(0))
       {
 
          try 
@@ -2727,7 +2733,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->draw_color_vector_ptr == 0)
+   if (scanner_node->draw_color_vector_ptr == static_cast<void*>(0))
       {
 
 #if DEBUG_COMPILE
@@ -2759,7 +2765,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->draw_color_ptr != 0)
+   if (scanner_node->draw_color_ptr != static_cast<void*>(0))
       {
 
          try 
@@ -2892,7 +2898,7 @@ else /* |scanner_node->draw_color_vector_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->fill_color_vector_ptr == 0)
+   if (scanner_node->fill_color_vector_ptr == static_cast<void*>(0))
       {
 
 #if DEBUG_COMPILE
@@ -2925,7 +2931,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->fill_color_ptr != 0)
+   if (scanner_node->fill_color_ptr != static_cast<void*>(0))
       {
 
          try 
@@ -3027,7 +3033,8 @@ and set to |ccolor_vector|, if necessary.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (ddraw_color_vector_ptr == 0 && ccolor_vector_ptr != 0)
+  if (   ddraw_color_vector_ptr == static_cast<void*>(0) 
+      && ccolor_vector_ptr != static_cast<void*>(0))
     {
 
 #if DEBUG_COMPILE
@@ -3070,7 +3077,7 @@ and set to |ccolor_vector|, if necessary.
 
     } /* |if (ddraw_color_vector_ptr == 0 && ccolor_vector_ptr != 0)|  */
 
-  if (ffill_color_vector_ptr == 0 && ccolor_vector_ptr != 0)
+  if (ffill_color_vector_ptr == static_cast<void*>(0) && ccolor_vector_ptr != static_cast<void*>(0))
     {
       ffill_color_vector_ptr = ccolor_vector_ptr;
     }
@@ -3098,7 +3105,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (   ddraw_color_vector_ptr == 0 
+  if (   ddraw_color_vector_ptr == static_cast<void*>(0) 
       && (   basic_drawing_command == DRAW
           || basic_drawing_command == FILLDRAW
           || basic_drawing_command == UNFILLDRAW))
@@ -3241,7 +3248,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (   ffill_color_vector_ptr == 0 
+  if (   ffill_color_vector_ptr == static_cast<void*>(0) 
       && basic_drawing_command == FILL)
 
    {
@@ -3351,7 +3358,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (   ffill_color_vector_ptr == 0 
+  if (   ffill_color_vector_ptr == static_cast<void*>(0)
       && basic_drawing_command == FILLDRAW)
 
    {
@@ -3465,7 +3472,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-  if (scanner_node->pen_ptr == 0)
+  if (scanner_node->pen_ptr == static_cast<void*>(0))
     {
 #if DEBUG_COMPILE
       if (DEBUG) 
@@ -3482,7 +3489,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 #endif /* |DEBUG_COMPILE|  */@;  
     
 
-     if (*(scanner_node->current_pen) != 0)
+     if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
         {
             ppen = *(scanner_node->current_pen);
 
@@ -3528,12 +3535,11 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 \LOG
 \initials{LDF 2004.11.13.}
 Now setting |ddash_pattern = *(scanner_node->current_dash_pattern)|, if 
-|   scanner_node->dash_pattern_ptr == 0 
- && *(scanner_node->current_dash_pattern) != 0|. 
+|scanner_node->dash_pattern_ptr == 0 && *(scanner_node->current_dash_pattern) != 0|. 
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-if (scanner_node->dash_pattern_ptr == 0)
+if (scanner_node->dash_pattern_ptr == static_cast<void*>(0))
   {
 #if DEBUG_COMPILE
     if (DEBUG) 
@@ -3549,7 +3555,7 @@ if (scanner_node->dash_pattern_ptr == 0)
       }
 #endif /* |DEBUG_COMPILE|  */@;  
     
-       if (*(scanner_node->current_dash_pattern) != 0)
+       if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
          {
              ddash_pattern = *(scanner_node->current_dash_pattern);
 
@@ -3917,7 +3923,7 @@ Scan_Parse::drawing_command_sphere_development(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-    if (sd == 0)
+    if (sd == static_cast<Sphere_Development*>(0))
       {
 
         cerr_strm << thread_name 
@@ -3979,7 +3985,7 @@ Check |scanner_node->picture_entry_ptr|.
 \initials{LDF 2009.11.16.}
 
 @<Define |Scan_Parse| functions@>=
-if (scanner_node->picture_entry_ptr == 0)
+if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
   {
 
 #if DEBUG_COMPILE
@@ -4098,27 +4104,28 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-   if (ddraw_color_vector != 0)
-      scanner_node->draw_color_vector_ptr = 0;
+   if (ddraw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
+      scanner_node->draw_color_vector_ptr = static_cast<void*>(0);
 
    else  /* |ddraw_color_vector == 0|  */ 
       {
           ddraw_color_vector = new Pointer_Vector<Color>;
 
-         if (ddraw_color != 0)
+         if (ddraw_color != static_cast<Color*>(0))
             {
 
                ddraw_color_vector->append_copy(ddraw_color); 
             }      
 
 
-         else if (ccolor != 0)
+         else if (ccolor != static_cast<Color*>(0))
             {
                 ddraw_color_vector->append_copy(ccolor);
             }  
 
 
-         else if (ccolor_vector != 0 && ccolor_vector->ctr > 0)
+         else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                  && ccolor_vector->ctr > 0)
             {
                 ddraw_color_vector->append_copy(*ccolor_vector);
             }  
@@ -4129,7 +4136,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
                  entry = scanner_node->lookup("default_color");
 
-                 if (entry != 0 && entry->object != 0)
+                 if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                     && entry->object != static_cast<void*>(0))
                     ddraw_color_vector->append_copy(
                        static_cast<Color*>(entry->object));
 
@@ -4146,7 +4154,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
  
-     if (ffill_color != 0)
+     if (ffill_color != static_cast<Color*>(0))
         scanner_node->fill_color_ptr = 0;
 
 
@@ -4157,7 +4165,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-            if (ffill_color_vector != 0 && ffill_color_vector->ctr > 0)
+            if (   ffill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                && ffill_color_vector->ctr > 0)
                {
 
 
@@ -4167,7 +4176,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-            else if (ccolor != 0)
+            else if (ccolor != static_cast<Color*>(0))
                {
                   *ffill_color = *ccolor;
                }
@@ -4175,7 +4184,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 @q ******* (7) @> 
 
 
-            else if (ccolor_vector != 0 && ccolor_vector->ctr > 0)
+            else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                     && ccolor_vector->ctr > 0)
                {
 
                    *ffill_color = *(ccolor_vector->v[0]);
@@ -4189,7 +4199,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                  
                    entry = scanner_node->lookup("default_color");
 
-                   if (entry != 0 && entry->object != 0)
+                   if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                       && entry->object != static_cast<void*>(0))
                       *ffill_color = *(static_cast<Color*>(entry->object));
                    else                     
                       *ffill_color = Colors::black;
@@ -4203,7 +4214,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                  
               entry = scanner_node->lookup("background_color");
 
-              if (entry != 0 && entry->object != 0)
+              if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                  && entry->object != static_cast<void*>(0))
                  *ffill_color = *(static_cast<Color*>(entry->object));
               else                     
                  *ffill_color = Colors::white;
@@ -4222,7 +4234,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ****** (6).@> 
 
-  if (scanner_node->pen_vector_ptr != 0)
+  if (scanner_node->pen_vector_ptr != static_cast<void*>(0))
      ppen_vector = static_cast<Pointer_Vector<Pen>*>(scanner_node->pen_vector_ptr); 
 
 @q ****** (6).@> 
@@ -4236,12 +4248,12 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-         if (scanner_node->pen_ptr == 0)
+         if (scanner_node->pen_ptr == static_cast<void*>(0))
             {
 
 @q ******** (8) @> 
 
-                if (*(scanner_node->current_pen) != 0)
+                if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
                    {
                        ppen = *(scanner_node->current_pen);
 
@@ -4263,7 +4275,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-         if (ppen != 0)
+         if (ppen != static_cast<Pen*>(0))
             {
                 ppen_vector = new Pointer_Vector<Pen>;
                 *ppen_vector += ppen;
@@ -4283,7 +4295,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ****** (6).@> 
 
-   if (scanner_node->dash_pattern_vector_ptr != 0)
+   if (scanner_node->dash_pattern_vector_ptr != static_cast<void*>(0))
       ddash_pattern_vector 
          = static_cast<Pointer_Vector<Dash_Pattern>*>(
               scanner_node->dash_pattern_vector_ptr);       
@@ -4295,13 +4307,13 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-         if (scanner_node->dash_pattern_ptr == 0)
+         if (scanner_node->dash_pattern_ptr == static_cast<void*>(0))
             {
 
 @q ******** (8) @> 
 
 
-                if (*(scanner_node->current_dash_pattern) != 0)
+                if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
                    {
                        ddash_pattern = *(scanner_node->current_dash_pattern);
 
@@ -4324,7 +4336,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-        if (ddash_pattern != 0)
+        if (ddash_pattern != static_cast<Dash_Pattern*>(0))
            {
               ddash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
               *ddash_pattern_vector += ddash_pattern; 
@@ -4738,7 +4750,7 @@ rules for the \§with clause list>.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->picture_entry_ptr == 0)
+   if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
      {
 
 #if DEBUG_COMPILE
@@ -4846,7 +4858,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->color_vector_ptr != 0)
+   if (scanner_node->color_vector_ptr != static_cast<void*>(0))
       {
           ccolor_vector 
              = static_cast<Pointer_Vector<Color>*>(scanner_node->color_vector_ptr);  
@@ -4865,7 +4877,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-         if (scanner_node->color_ptr != 0 || *(scanner_node->current_color) != 0)
+         if (   scanner_node->color_ptr != static_cast<void*>(0) 
+             || *(scanner_node->current_color) != static_cast<Color*>(0))
             {
 
 @q ******** (8) @> 
@@ -4910,7 +4923,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 @q ******* (7) @> 
 
 
-          if (scanner_node->color_ptr != 0)
+          if (scanner_node->color_ptr != static_cast<void*>(0))
              {
 
                  ccolor_vector->append_copy(static_cast<Color*>(scanner_node->color_ptr));  
@@ -4920,7 +4933,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
             
-          else if (*(scanner_node->current_color) != 0)
+          else if (*(scanner_node->current_color) != static_cast<Color*>(0))
              {
                  ccolor_vector->append_copy(*scanner_node->current_color);  
 
@@ -4941,7 +4954,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->draw_color_vector_ptr != 0)
+   if (scanner_node->draw_color_vector_ptr != static_cast<void*>(0))
       {
           ddraw_color_vector 
              = static_cast<Pointer_Vector<Color>*>(scanner_node->draw_color_vector_ptr);  
@@ -4994,7 +5007,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-          if (scanner_node->draw_color_ptr != 0)
+          if (scanner_node->draw_color_ptr != static_cast<void*>(0))
              {
 
                  ddraw_color_vector->append_copy(
@@ -5026,7 +5039,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->fill_color_vector_ptr != 0)
+   if (scanner_node->fill_color_vector_ptr != static_cast<void*>(0))
       {
           ffill_color_vector 
              = static_cast<Pointer_Vector<Color>*>(scanner_node->fill_color_vector_ptr);  
@@ -5079,7 +5092,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-          if (scanner_node->fill_color_ptr != 0)
+          if (scanner_node->fill_color_ptr != static_cast<void*>(0))
              {
 
                  ffill_color_vector->append_copy(
@@ -5105,7 +5118,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 @
 @<Define |Scan_Parse| functions@>=
 
-   if (scanner_node->color_ptr != 0)
+   if (scanner_node->color_ptr != static_cast<void*>(0))
       ccolor = static_cast<Color*>(scanner_node->color_ptr); 
 
 
@@ -5113,12 +5126,13 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
    if (ddraw_color_vector->ctr == 0)
       {
-          if (ccolor_vector != 0 && ccolor_vector->ctr > 0)
+          if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
+              && ccolor_vector->ctr > 0)
              {
                  delete ddraw_color_vector;
                  ddraw_color_vector = ccolor_vector;
              }
-          else if (ccolor != 0)
+          else if (ccolor != static_cast<Color*>(0))
              {
                  ddraw_color_vector->append_copy(ccolor);
              }   
@@ -5127,7 +5141,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              {
                  entry = scanner_node->lookup("default_color");
 
-                 if (entry != 0 && entry->object != 0)
+                 if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                     && entry->object != static_cast<void*>(0))
                     ddraw_color_vector->append_copy(static_cast<Color*>(entry->object));
 
                  else
@@ -5141,11 +5156,12 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
    if (ffill_color_vector->ctr == 0)
       {
-          if (ccolor_vector != 0 && ccolor_vector->ctr > 0)
+          if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
+              && ccolor_vector->ctr > 0)
              {
                  *ffill_color_vector = *ccolor_vector;
              }
-          else if (ccolor != 0)
+          else if (ccolor != static_cast<Color*>(0))
              {
                  ffill_color_vector->append_copy(ccolor);
              }   
@@ -5154,7 +5170,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              {
                  entry = scanner_node->lookup("background_color");
 
-                 if (entry != 0 && entry->object != 0)
+                 if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                     && entry->object != static_cast<void*>(0))
                     ffill_color_vector->append_copy(static_cast<Color*>(entry->object));
 
                  else
@@ -5166,7 +5183,8 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              {
                  entry = scanner_node->lookup("default_color");
 
-                 if (entry != 0 && entry->object != 0)
+                 if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                     && entry->object != static_cast<void*>(0))
                     ffill_color_vector->append_copy(static_cast<Color*>(entry->object));
 
                  else
@@ -5193,7 +5211,7 @@ Added this section.
 
 @q ****** (6).@> 
 
-  if (scanner_node->pen_vector_ptr != 0)
+  if (scanner_node->pen_vector_ptr != static_cast<void*>(0))
      ppen_vector = static_cast<Pointer_Vector<Pen>*>(scanner_node->pen_vector_ptr); 
 
 @q ****** (6).@> 
@@ -5213,12 +5231,12 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
 @<Define |Scan_Parse| functions@>=
 
-         if (scanner_node->pen_ptr == 0)
+         if (scanner_node->pen_ptr == static_cast<void*>(0))
             {
 
 @q ******** (8) @> 
 
-                if (*(scanner_node->current_pen) != 0)
+                if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
                    {
                        ppen = *(scanner_node->current_pen);
 
@@ -5240,7 +5258,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
 @q ******* (7) @> 
 
-         if (ppen != 0)
+         if (ppen != static_cast<Pen*>(0))
             {
                 ppen_vector = new Pointer_Vector<Pen>;
                 *ppen_vector += ppen;
@@ -5265,7 +5283,7 @@ Added this section.
 
 @q ****** (6).@> 
 
-   if (scanner_node->dash_pattern_vector_ptr != 0)
+   if (scanner_node->dash_pattern_vector_ptr != static_cast<void*>(0))
       ddash_pattern_vector 
          = static_cast<Pointer_Vector<Dash_Pattern>*>(
               scanner_node->dash_pattern_vector_ptr);       
@@ -5277,13 +5295,13 @@ Added this section.
 
 @q ******* (7) @> 
 
-         if (scanner_node->dash_pattern_ptr == 0)
+         if (scanner_node->dash_pattern_ptr == static_cast<void*>(0))
             {
 
 @q ******** (8) @> 
 
 
-                if (*(scanner_node->current_dash_pattern) != 0)
+                if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
                    {
                        ddash_pattern = *(scanner_node->current_dash_pattern);
 
@@ -5306,7 +5324,7 @@ Added this section.
 
 @q ******* (7) @> 
 
-        if (ddash_pattern != 0)
+        if (ddash_pattern != static_cast<Dash_Pattern*>(0))
            {
               ddash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
               *ddash_pattern_vector += ddash_pattern; 
@@ -6239,7 +6257,7 @@ Now declaring the automatic variable |int status|.
 @
 @<Define |Scan_Parse| functions@>=
 
-  if (filename == 0 || filename->size() == 0)
+  if (filename == static_cast<string*>(0) || filename->size() == 0)
     {
 
       cerr_strm << thread_name 
@@ -6410,7 +6428,7 @@ figure.
 
       Id_Map_Entry_Node entry = new_scanner_node->lookup("current_picture");
 
-      if (entry != 0 && entry->object != 0)
+      if (entry != static_cast<Id_Map_Entry_Node>(0) && entry->object != static_cast<void*>(0))
         static_cast<Picture*>(entry->object)->clear(); 
 
       scanner_node->thread_vector.push_back(new pthread_t);
@@ -6802,7 +6820,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (ppoint == 0)
+   if (ppoint == static_cast<Point*>(0))
       {
           cerr_strm << thread_name 
                     << "ERROR! In `drawdot_command()':"
@@ -6837,7 +6855,7 @@ Check |scanner_node->picture_entry_ptr|.
 \initials{LDF 2004.06.21.}
 
 @<Define |Scan_Parse| functions@>=
-if (scanner_node->picture_entry_ptr == 0)
+if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
   {
 
 #if DEBUG_COMPILE
@@ -6949,7 +6967,7 @@ Now setting |ccolor = *(scanner_node->current_color)|, if
 
 @<Define |Scan_Parse| functions@>=  
 
-if (scanner_node->color_ptr == 0)
+if (scanner_node->color_ptr == static_cast<void*>(0))
   {
 
 #if DEBUG_COMPILE
@@ -6966,7 +6984,7 @@ if (scanner_node->color_ptr == 0)
 
 #endif /* |DEBUG_COMPILE|  */@;  
 
-     if (*(scanner_node->current_color) != 0)
+     if (*(scanner_node->current_color) != static_cast<Color*>(0))
  
         ccolor = *(scanner_node->current_color);
  
@@ -7007,7 +7025,7 @@ else /* |scanner_node->color_ptr != 0|  */
 \initials{LDF 2004.06.21.}
 
 @<Define |Scan_Parse| functions@>=  
-if (scanner_node->draw_color_ptr == 0)
+if (scanner_node->draw_color_ptr == static_cast<void*>(0))
   {
 #if DEBUG_COMPILE
     if (DEBUG) 
@@ -7055,7 +7073,7 @@ if necessary.
 
 @<Define |Scan_Parse| functions@>=  
 
-  if (ddraw_color == 0 && ccolor != 0)
+  if (ddraw_color == static_cast<Color*>(0) && ccolor != static_cast<Color*>(0))
     ddraw_color = ccolor;
 
 @q ***** (5) Check |scanner_node->pen_ptr|.@>
@@ -7075,7 +7093,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
 @<Define |Scan_Parse| functions@>=  
 
-   if (scanner_node->pen_ptr == 0)
+   if (scanner_node->pen_ptr == static_cast<void*>(0))
       {
 #if DEBUG_COMPILE
          if (DEBUG) 
@@ -7092,7 +7110,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
 @q ******* (7).@> 
           
-           if (*(scanner_node->current_pen) != 0)
+           if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
               ppen = *(scanner_node->current_pen);
 
 
@@ -7229,33 +7247,33 @@ latter function.
 
   scanner_node->picture_entry_ptr = 0;
 
-  if (scanner_node->color_ptr != 0)
+  if (scanner_node->color_ptr != static_cast<void*>(0))
     {
       Color* c = static_cast<Color*>(scanner_node->color_ptr);
       delete c;
       scanner_node->color_ptr = 0;
     }
 
-  if (scanner_node->draw_color_ptr != 0)
+  if (scanner_node->draw_color_ptr != static_cast<void*>(0))
     {
       delete static_cast<Color*>(scanner_node->draw_color_ptr);
       scanner_node->draw_color_ptr = 0;
     }
 
 
-  if (scanner_node->fill_color_ptr != 0)
+  if (scanner_node->fill_color_ptr != static_cast<void*>(0))
     {
       delete static_cast<Color*>(scanner_node->fill_color_ptr);
       scanner_node->fill_color_ptr = 0;
     }
 
-  if (scanner_node->pen_ptr != 0)
+  if (scanner_node->pen_ptr != static_cast<void*>(0))
     {
       delete static_cast<Pen*>(scanner_node->pen_ptr);
       scanner_node->pen_ptr = 0;
     }
 
-  if (scanner_node->dash_pattern_ptr != 0)
+  if (scanner_node->dash_pattern_ptr != static_cast<void*>(0))
     {
       delete static_cast<Dash_Pattern*>(scanner_node->dash_pattern_ptr);
       scanner_node->dash_pattern_ptr = 0;
@@ -7273,7 +7291,7 @@ Added this section.
 
 @<Reset pointers on |scanner_node|@>=
 
-  if (scanner_node->color_vector_ptr != 0)
+  if (scanner_node->color_vector_ptr != static_cast<void*>(0))
     {
 
       scanner_node->color_vector_ptr = 0;
@@ -7291,7 +7309,7 @@ Added this section.
 
 @<Reset pointers on |scanner_node|@>=
 
-  if (scanner_node->draw_color_vector_ptr != 0)
+  if (scanner_node->draw_color_vector_ptr != static_cast<void*>(0))
     {
 
       scanner_node->draw_color_vector_ptr = 0;
@@ -7309,7 +7327,7 @@ Added this section.
 
 @<Reset pointers on |scanner_node|@>=
 
-  if (scanner_node->fill_color_vector_ptr != 0)
+  if (scanner_node->fill_color_vector_ptr != static_cast<void*>(0))
     {
 
       scanner_node->fill_color_vector_ptr = 0;
@@ -7397,7 +7415,7 @@ Scan_Parse::variable_type(Scanner_Node scanner_node,
 @<Define |Scan_Parse| functions@>=
 
 
-  if (entry != 0 && entry->array_flag)
+  if (entry != static_cast<Id_Map_Entry_Node>(0) && entry->array_flag)
     {
 
 #if DEBUG_COMPILE
@@ -7507,7 +7525,7 @@ Issue warning and try to continue.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (entry != 0 && entry->type != curr_type)
+  if (entry != static_cast<Id_Map_Entry_Node>(0) && entry->type != curr_type)
     {
 
       cerr_strm << thread_name 
@@ -7868,12 +7886,6 @@ Now deleting |Transform* t| and setting it to 0.
 } /* End of |Scan_Parse::transformation_command_func|  
      definition.  */
 
-
-
-
-
-
-
 @q ** (2) |rotate_around_func|.@>
 @*1 {\bf rotate\_around\_func}.
 
@@ -7971,8 +7983,11 @@ Signal an error and exit with return value 0 upon failure.
 
 @<Define |Scan_Parse| functions@>=
 
-  if (   p == 0 || q == 0 || *p == INVALID_POINT || *q == INVALID_POINT
-      || r == INVALID_REAL)
+  if (   p  == static_cast<Point*>(0) 
+      || q  == static_cast<Point*>(0) 
+      || *p == INVALID_POINT 
+      || *q == INVALID_POINT
+      || r  == INVALID_REAL)
     {
       
       cerr_strm << thread_name << "ERROR! "
@@ -8158,7 +8173,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=      
   
-  if (t == 0)
+  if (t == static_cast<Transform*>(0))
     {
 
       cerr_strm << thread_name << "ERROR! "
@@ -12112,7 +12127,7 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-  if (entry->subordinate_array == 0)
+  if (entry->subordinate_array == static_cast<Id_Map_Entry_Node>(0))
     {
       
 
@@ -12209,7 +12224,7 @@ Added this section.
       typedef Pointer_Vector<bool> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12236,7 +12251,7 @@ Added this section.
       typedef Pointer_Vector<real> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12263,7 +12278,7 @@ Added this section.
       typedef Pointer_Vector<ulong_long> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12289,7 +12304,7 @@ Added this section.
       typedef Pointer_Vector<string> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12317,7 +12332,7 @@ Added this section.
       typedef Pointer_Vector<Pen> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12343,7 +12358,7 @@ Added this section.
       typedef Pointer_Vector<Dash_Pattern> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12368,7 +12383,7 @@ Added this section.
       typedef Pointer_Vector<Color> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12395,7 +12410,7 @@ Added this section.
       typedef Pointer_Vector<Transform> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12422,7 +12437,7 @@ Added this section.
       typedef Pointer_Vector<Focus> PV;
       PV* pv = static_cast<PV*>(entry->object);
 
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12450,7 +12465,7 @@ Added this section.
       typedef Pointer_Vector<Picture> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12477,7 +12492,7 @@ Added this section.
       typedef Pointer_Vector<Definition_Info_Type> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12504,7 +12519,7 @@ Added this section.
       typedef Pointer_Vector<Conic_Section_Lattice> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12540,7 +12555,7 @@ Added code for handling |parabola_vectors|, |hyperbola_vectors|,
       typedef Pointer_Vector<Point> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12567,7 +12582,7 @@ Added this section.
       typedef Pointer_Vector<Bool_Point> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12594,7 +12609,7 @@ Added this section.
       typedef Pointer_Vector<Path> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12622,7 +12637,7 @@ Added this section.
       typedef Pointer_Vector<Ellipse> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12649,7 +12664,7 @@ Added this section.
       typedef Pointer_Vector<Circle> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12677,7 +12692,7 @@ Added this section.
       typedef Pointer_Vector<Parabola> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12703,7 +12718,7 @@ Added this section.
       typedef Pointer_Vector<Hyperbola> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12732,7 +12747,7 @@ Added this section.
       typedef Pointer_Vector<Polygon> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12758,7 +12773,7 @@ Added this section.
       typedef Pointer_Vector<Triangle> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12786,7 +12801,7 @@ Added this section.
       typedef Pointer_Vector<Rectangle> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12812,7 +12827,7 @@ Added this section.
       typedef Pointer_Vector<Reg_Polygon> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12840,7 +12855,7 @@ Added this section.
       typedef Pointer_Vector<Ellipsoid> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12866,7 +12881,7 @@ Added this section.
       typedef Pointer_Vector<Sphere> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12895,7 +12910,7 @@ Added this section.
       typedef Pointer_Vector<Cuboid> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -12922,7 +12937,7 @@ Added this section.
       typedef Pointer_Vector<Polyhedron> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
           pv->v.clear();
           pv->ctr = 0;
@@ -13046,7 +13061,7 @@ Scan_Parse::pop_back_func(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-  if (entry->subordinate_array == 0)
+  if (entry->subordinate_array == static_cast<Id_Map_Entry_Node>(0))
     {
       
 
@@ -13272,7 +13287,7 @@ Added this section.
       typedef Pointer_Vector<Point> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13293,7 +13308,7 @@ Added this section.
       typedef Pointer_Vector<Bool_Point> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13313,7 +13328,7 @@ Added this section.
       typedef Pointer_Vector<Picture> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13334,7 +13349,7 @@ Added this section.
       typedef Pointer_Vector<Definition_Info_Type> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13360,7 +13375,7 @@ Added this section.
       typedef Pointer_Vector<Path> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13385,7 +13400,7 @@ Added this section.
       typedef Pointer_Vector<Ellipse> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13411,7 +13426,7 @@ Added this section.
       typedef Pointer_Vector<Circle> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13437,7 +13452,7 @@ Added this section.
       typedef Pointer_Vector<Parabola> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13463,7 +13478,7 @@ Added this section.
       typedef Pointer_Vector<Hyperbola> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13489,7 +13504,7 @@ Added this section.
       typedef Pointer_Vector<Conic_Section_Lattice> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13518,7 +13533,7 @@ Added this section.
       typedef Pointer_Vector<Triangle> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13546,7 +13561,7 @@ Added this section.
       typedef Pointer_Vector<Rectangle> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13572,7 +13587,7 @@ Added this section.
       typedef Pointer_Vector<Reg_Polygon> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13598,7 +13613,7 @@ Added this section.
       typedef Pointer_Vector<Ellipsoid> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13623,7 +13638,7 @@ Added this section.
       typedef Pointer_Vector<Sphere> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13649,7 +13664,7 @@ Added this section.
       typedef Pointer_Vector<Cuboid> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13676,7 +13691,7 @@ Added this section.
       typedef Pointer_Vector<Polyhedron> PV;
       PV* pv = static_cast<PV*>(entry->object);
       
-      if (pv != 0)
+      if (pv != static_cast<PV*>(0))
         {
             @<Common code for popping objects@>@;
         }
@@ -13737,7 +13752,7 @@ as the |create_if_none| argument.
 
 @<Common code for popping objects@>=
 
-   if (pv != 0)
+   if (pv != static_cast<PV*>(0))
       {
 
           name_strm << entry->name << "[" << pv->ctr - 1
@@ -13747,7 +13762,7 @@ as the |create_if_none| argument.
 
           root = scanner_node->lookup(root_strm.str());
 
-          if (root == 0)
+          if (root == static_cast<Id_Map_Entry_Node>(0))
              {
                  cerr_strm << thread_name 
                            << "ERROR! In `Scan_Parse::pop_back_func':"
@@ -13797,7 +13812,7 @@ as the |create_if_none| argument.
           pv->v.pop_back();
           --pv->ctr;
       
-      }  /* |if (pv != 0)|  */
+      }  /* |if (pv != static_cast<PV*>(0))|  */
 
 @q ** (2) |let_func|.@>
 @*1 {\bf let\_func}.
@@ -13917,7 +13932,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-   if (entry_1 == 0)
+   if (entry_1 == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::let_func()':"
                    << endl << "`" << t << "' doesn't reference an "
@@ -13948,7 +13963,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-   if (entry_0 != 0)
+   if (entry_0 != static_cast<Id_Map_Entry_Node>(0))
       {
 #if DEBUG_COMPILE
          if (DEBUG)
@@ -14132,7 +14147,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-     if (p == 0 || q == 0)
+     if (p == static_cast<Point*>(0) || q == static_cast<Path*>(0))
      {
      
          cerr_strm << thread_name 
@@ -14242,7 +14257,9 @@ in conditional.
 
 @<Define |Scan_Parse| functions@>=
 
-          if (r == 0 || p0 == 0 || p1 == 0)
+          if (   r == static_cast<Polygon*>(0) 
+              || p0 == static_cast<Point*>(0) 
+              || p1 == static_cast<Point*>(0))
              {
                  cerr_strm << thread_name 
                            << "ERROR!  In `Scan_Parse::decompose_func()':"
@@ -14357,7 +14374,7 @@ in conditional.
 
 @q ****** (6).@> 
 
-         else  /* |pv != 0|  */
+         else  /* |pv != static_cast<PV*>(0)|  */
             {
 
                 delete r;
@@ -14366,7 +14383,7 @@ in conditional.
 
                 return 0;
  
-            }  /* |else | (|pv != 0|)  */
+            }  /* |else | (|pv != static_cast<PV*>(0)|)  */
 
 @q ****** (6).@> 
 
@@ -14421,7 +14438,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (r == 0 || p == 0)
+   if (r == static_cast<Polygon*>(0) || p == static_cast<Path*>(0))
    {
        cerr_strm << thread_name 
                  << "ERROR!  In `Scan_Parse::decompose_func()':"
@@ -14653,7 +14670,7 @@ Scan_Parse::clip_to_func(void* arg1,
 
 @<Define |Scan_Parse| functions@>=
 
-   if (p == 0)
+   if (p == static_cast<Path*>(0))
       {
           cerr_strm << thread_name
                     << "ERROR!  In 'Scan_Parse::clip_to_func()':"
@@ -15573,7 +15590,7 @@ Now passing |true| as the |oversize_switch| argument to
 
 @q **** (4) @>   
 
-   if (str == 0)
+   if (str == static_cast<string*>(0))
       {
           cerr_strm << thread_name << "WARNING!  "
                     << "In `Scan_Parse::binary_number_string_func()':"
@@ -15665,12 +15682,12 @@ Scan_Parse::is_cycle_func(void* arg1,
 
 @<Define |Scan_Parse| functions@>=
    
-   if (p == 0)
+   if (p == static_cast<Path*>(0))
       {
 
         cerr_strm << thread_name << "ERROR! In `Scan_Parse::is_cycle_func()':"
                   << endl 
-                  << "`path* p' is null."
+                  << "`Path* p' is null."
                   << endl 
                   << "Returning `bool* b' (cast to `void*') with `*b == 0'.";
 
@@ -15950,7 +15967,7 @@ Scan_Parse::plane_intersection_func(void* v, void* w, void* parameter)
 \initials{LDF 2007.10.06.}
 @<Define |Scan_Parse| functions@>=
 
-  if (!p || !q)
+  if (p == static_cast<Plane*>(0) || q == static_cast<Plane*>(0))
   {
       cerr_strm << "ERROR!  In `Scan_Parse::plane_intersection_func:'"
                 << endl 
@@ -16216,7 +16233,7 @@ Scan_Parse::get_hyperbola_branch_func(real r, void* v, void* parameter)
 @
 @<Define |Scan_Parse| functions@>=
 
-   if (v == 0)
+   if (v == static_cast<void*>(0))
    {
        cerr_strm << thread_name << "ERROR!  In `Scan_Parse::get_hyperbola_branch_func':"
                  << endl 
@@ -16271,7 +16288,7 @@ Scan_Parse::get_hyperbola_branch_func(real r, void* v, void* parameter)
 
 @<Define |Scan_Parse| functions@>=
 
-   if (p == 0)
+   if (p == static_cast<Path*>(0))
    {
        cerr_strm << thread_name << "ERROR!  In `Scan_Parse::get_hyperbola_branch_func':"
                  << endl 
@@ -16465,7 +16482,7 @@ Scan_Parse::traverse_conic_section_lattice_func(void* parameter,
 
 @<Define |Scan_Parse| functions@>=
 
-    if (c == 0)
+    if (c == static_cast<void*>(0))
     {
         cerr_strm << thread_name << "ERROR!  "
                   << "In `Scan_Parse::traverse_conic_section_lattice_func':"
@@ -17305,7 +17322,7 @@ below.
 
     Point* p = 0;
 
-    if (increment != 0)
+    if (increment != ZERO_REAL)
     {
         p = get_point(scanner_node, 
                       cycle_value, 
@@ -17326,7 +17343,7 @@ below.
 @ $CF$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    if (p != 0)
+    if (p != static_cast<Point*>(0))
     {
        q = create_new<Path>(0);
 
@@ -17342,7 +17359,7 @@ below.
 @ $DF$.
 @<Define |Conic_Section_Lattice| functions@>=
 
-    if (p != 0)
+    if (p != static_cast<Point*>(0))
     {
 
         q = create_new<Path>(0);
@@ -17713,7 +17730,7 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 @
 @<Define |Conic_Section_Lattice| functions@>=
 
-    if (increment != 0)
+    if (increment != ZERO_REAL)
     {
 
        p = get_point(scanner_node, 
@@ -18016,7 +18033,7 @@ failed, returning 0.
 @ 
 @<Define |Conic_Section_Lattice| functions@>=
 
-    if (increment != 0)
+    if (increment != ZERO_REAL)
     {
         p = create_new<Point>(pv->v[2]);
         s = new string;
