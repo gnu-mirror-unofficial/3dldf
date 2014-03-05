@@ -1,4 +1,4 @@
-%%%% out_samp.tex
+%%%% sudoku.mp
 %%%% Created by Laurence D. Finston (LDF) Wed Mar  5 17:16:41 CET 2014
 
 %%%% * Copyright and License.
@@ -47,48 +47,7 @@
 
 %%%% Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)
 
-pickup pensquare scaled 1pt;
-
-path q;
-
-verbatimtex \font\large=cmr12 scaled \magstep3 etex
-
-beginfig(1);
-
-q := (0, 0) -- (3cm, 0) -- (3cm, -3cm) -- (0, -3cm) -- cycle;
-
-
-draw q withcolor (.5, .5, .5) withpen pensquare scaled 2pt; 
-
-draw q shifted (6cm, 0) withcolor (.5, .5, .5) withpen pensquare scaled 2pt; 
-
-draw q shifted (3cm, -3cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt; 
-
-draw q shifted (0cm, -6cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt; 
-
-draw q shifted (6cm, -6cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt; 
-
-
-for i = 0 downto -9:
-   draw (0, i*cm) -- (9cm, i*cm);  
-   draw (-i*cm, 0) -- (-i*cm, -9cm);  
-endfor;
-
-pair p[];
-
-p0 = (.5cm, -.5cm);
-
-label(btex {\large 5} etex, p0);
-
-transform t[];
-
-t0 = identity shifted (1cm, 0cm);
-
-p0 := p0 transformed t0;
-
-
-label(btex {\large 8} etex, p0);
-
+input out.mp
 
 
 endfig;

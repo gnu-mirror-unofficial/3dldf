@@ -66,11 +66,36 @@ fldtype.o: fldtype.cxx
 sudoku$(EXEEXT): sudoku.o fldtype.o
 	g++ -o sudoku$(EXEEXT) sudoku.o fldtype.o
 
+.PHONY: clean
+
+clean:
+	rm -f out.mp sudoku.cxx sudoku$(EXEEXT) sudoku.o sudoku.1 fldtype.cxx fldtype.hxx fldtype.o \
+              out.mp out.mpx sudoku.dvi sudoku.dvi sudoku.ps sudoku.pdf sudoku.log mpxerr.tex mpx*.dvi
+
 .PHONY: run
 
 run: sudoku$(EXEEXT)
 	./sudoku$(EXEEXT)
 
+
+.PHONY: run-o
+
+out.mp: sudoku$(EXEEXT)
+	./sudoku$(EXEEXT) 2>/dev/null > out.mp
+
+run-o: sudoku.ps 
+
+sudoku.pdf: sudoku.ps
+	ps2pdf sudoku.ps
+
+sudoku.ps: sudoku.dvi
+	dvips -o sudoku.ps sudoku.dvi
+
+sudoku.dvi: sudoku.tex sudoku.1
+	tex sudoku.tex
+
+sudoku.1: sudoku.mp out.mp
+	mpost sudoku.mp
 
 .PHONY: run-t
 
@@ -87,3 +112,6 @@ run-p: sudoku$(EXEEXT)
 
 query: 
 	echo "A == $A"
+
+
+

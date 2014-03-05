@@ -87,9 +87,9 @@ class Field_Type
 
    int check(int ii, int jj);
 
-   int output(int i, int j, bool full = true);
+   int output(int i, int j, bool full = true, string *out_str = 0);
 
-   static int output(Field_Type f[9][9]);
+   static int output(Field_Type f[9][9], bool tex = false, string filename = "");
 
 
 };
@@ -515,51 +515,147 @@ Field_Type::check(int ii, int jj)
 @<|Field_Type::output| definition@>=
 
 int 
-Field_Type::output(int i, int j, bool full)
+Field_Type::output(int i, int j, bool full, string *out_str)
 {
+    string s;
 
-    cerr << "[" << i << "][" << j << "]"
-         << endl;
+    stringstream temp_strm;
+
+
+    if (full)
+    {
+       temp_strm << "[" << i << "][" << j << "]"
+            << endl;
+       s = " ";
+    }
 
     if (bit_field & 2U)
-        cerr << "1 ";
+        temp_strm << "1" << s;
     if (bit_field & 4U)
-        cerr << "2 ";
+        temp_strm << "2" << s;
     if (bit_field & 8U)
-        cerr << "3 ";
+        temp_strm << "3" << s;
     if (bit_field & 16U)
-        cerr << "4 ";
+        temp_strm << "4" << s;
     if (bit_field & 32U)
-        cerr << "5 ";
+        temp_strm << "5" << s;
     if (bit_field & 64U)
-        cerr << "6 ";
+        temp_strm << "6" << s;
     if (bit_field & 128U)
-        cerr << "7 ";
+        temp_strm << "7" << s;
     if (bit_field & 256U)
-        cerr << "8 ";
+        temp_strm << "8" << s;
     if (bit_field & 512)
-        cerr << "9 ";
+        temp_strm << "9" << s;
 
-    cerr << endl << endl;
+    if (full)
+       temp_strm << endl << endl;
+
+    if (out_str)
+       *out_str = temp_strm.str();
+    else
+       cerr << temp_strm.str();
 
    return 0;
 
 }
 
-int Field_Type::output(Field_Type f[9][9])
+int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
 {
 
-   for (int i = 0; i < 9; ++i)
+   if (tex == false)
    {
-      for (int j = 0; j < 9; ++j)
-      {
-          f[i][j].output(i, j, false);
-           
 
+       for (int i = 0; i < 9; ++i)
+       {
+          for (int j = 0; j < 9; ++j)
+          {
+              
+              f[i][j].output(i, j, false);
 
-      }
+          }
 
-   }
+       }   
+
+   }  /* |if (tex == false)|  */
+
+   else
+   {
+       string s;
+
+       /* !! START HERE:   LDF 2014.03.05.  Add code for writing to output file.  */
+
+       cout << "pickup pensquare scaled 1pt;"
+            << endl 
+            << "path q;"
+            << endl 
+            << "pair p[];"
+            << "p0 = (.5cm, -.5cm);" << endl << endl 
+            << endl << endl 
+            << "transform t[];" << endl << endl 
+            << endl << endl 
+            << "verbatimtex \\font\\large=cmr12 scaled \\magstep3 etex"
+            << endl << endl 
+            << "beginfig(1);"
+            << endl 
+            << "q := (0, 0) -- (3cm, 0) -- (3cm, -3cm) -- (0, -3cm) -- cycle;"
+            << endl 
+            << endl 
+            << "draw q withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
+            << endl 
+            << endl 
+            << "draw q shifted (6cm, 0) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
+            << endl 
+            << endl 
+            << "draw q shifted (3cm, -3cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
+            << endl 
+            << endl 
+            << "draw q shifted (0cm, -6cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
+            << endl 
+            << endl 
+            << "draw q shifted (6cm, -6cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
+            << endl 
+            << endl 
+            << "for i = 0 downto -9:"
+            << endl 
+            << endl 
+            << "   draw (0, i*cm) -- (9cm, i*cm);"  
+            << endl 
+            << endl 
+            << "   draw (-i*cm, 0) -- (-i*cm, -9cm);"  
+            << endl 
+            << endl 
+            << "endfor;"
+            << endl 
+            << endl
+            << "t0 = identity shifted (1cm, 0);"
+            << endl << endl;
+
+       for (int i = 0; i < 9; ++i)
+       {
+           for (int j = 0; j < 9; ++j)
+           {
+
+               f[i][j].output(i, j, false, &s);
+
+               cout << "label(btex {\\large " << s << "} etex, p0);"
+                    << endl
+                    << endl
+                    << "p0 := p0 transformed t0;"
+                    << endl 
+                    << endl;
+
+           }
+           cout << "p0 := p0 shifted (-9cm, -1cm);" << endl << endl;
+   
+
+       }
+
+       cout << "endinput"
+            << endl << endl;
+
+   }  /* |else|  */
+
 
    return 0;
 }
