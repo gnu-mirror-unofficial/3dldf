@@ -1,0 +1,550 @@
+@q fldtype.web @>
+@q Created by Laurence D. Finston (LDF) Wed Mar  5 12:16:23 CET 2014 @>
+
+@
+@<Include files@>=
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <bitset>
+
+@q * (1) @>
+@
+@<class |Field_Type| declaration@>=
+
+class Field_Type
+{
+   friend int main(int, char *[]);
+
+   int ctr;
+   unsigned int bit_field;
+
+   public:
+
+   static int set_field_ctr;
+
+   Field_Type(void);
+
+   void show(string s = "");
+
+   void set(unsigned int); 
+
+   int check(int ii, int jj);
+
+   int output(int i, int j, bool full = true);
+
+   static int output(Field_Type f[9][9]);
+
+
+};
+
+@q * (1) @>
+@
+@<|Field_Type| constructor definition@>=
+
+Field_Type::Field_Type(void) 
+{
+   ctr = 9; 
+
+   for (int i = 1; i < 10; ++i)
+   {
+       bit_field |= 1UL;
+       bit_field <<= 1;
+   }
+
+
+}  /* End of |Field_Type| constructor definition  */
+
+
+@q * (1) @>
+@
+@<|Field_Type::show| definition@>=
+
+void
+Field_Type::show(string s)
+{
+    if (s.empty())
+       s = "Field_Type:";
+
+    bitset<sizeof(unsigned int) * 8> b(bit_field);
+
+    cerr << s 
+         << endl 
+         << "ctr       == " << ctr
+         << endl
+         << "bit_field == " << bit_field << " == " 
+         << b << endl; 
+
+    if (bit_field & 2U)
+        cerr << "1 ";
+    if (bit_field & 4U)
+        cerr << "2 ";
+    if (bit_field & 8U)
+        cerr << "3 ";
+    if (bit_field & 16U)
+        cerr << "4 ";
+    if (bit_field & 32U)
+        cerr << "5 ";
+    if (bit_field & 64U)
+        cerr << "6 ";
+    if (bit_field & 128U)
+        cerr << "7 ";
+    if (bit_field & 256U)
+        cerr << "8 ";
+    if (bit_field & 512)
+        cerr << "9 ";
+
+    cerr << endl << endl;      
+
+
+    return;
+
+
+}
+
+@q * (1) @>
+@
+@<|Field_Type::set| definition@>=
+void
+Field_Type::set(unsigned int num)
+{
+    unsigned int f = 1U;
+
+    f <<= num;
+
+    bit_field &= f;    
+
+
+    ctr = 1;
+
+    ++set_field_ctr;
+
+    return;    
+
+}
+
+@q * (1) @>
+@
+@<|Field_Type::check| definition@>=
+
+int 
+Field_Type::check(int ii, int jj)
+{
+@q ** (2) @>
+
+   bool DEBUG = true; /* |false|  */
+  
+   if (DEBUG)
+   {
+      cerr << "Entering `Field_Type::check'."
+           << endl;
+
+   }
+
+@q ** (2) @>
+
+   Field_Type *check_field = 0;
+
+   if (ctr == 1)
+   {
+      cerr << "WARNING!  In `Field_Type::check':  `ctr' == 1."
+           << endl
+           << "Not checking.  Exiting  function with return value 2."
+           << endl;
+   }
+
+@q ** (2) @>
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+      cerr << "First loop:  Row."
+           << endl;
+#endif 
+
+
+   for (int j = 0; j < 9; ++j)
+   {
+@q *** (3) @>
+
+      if (j == jj)
+         continue;
+
+      check_field = &diagram[ii][j];
+
+#if DEBUG_COMPILE 
+      if (DEBUG)
+      {
+         cerr << "Comparing " << ii << ", " << jj << " to " << ii << ", " << j 
+              << endl  
+              << "check_field->ctr == " << check_field->ctr
+              << endl
+              << "(check_field->bit_field & bit_field) == " 
+              << (check_field->bit_field & bit_field)
+              << endl;
+ 
+      }  /* |if (DEBUG)|  */
+
+#endif 
+
+@q *** (3) @>
+
+      if (check_field->ctr == 1 && (check_field->bit_field & bit_field) > 0)
+      {
+
+          cerr << "ctr before: " << ctr
+               << endl 
+               << "Removing bit." << endl << "bit_field before:  0" << oct << bit_field
+               << endl << dec;
+
+          bit_field &= ~check_field->bit_field;
+
+
+          --ctr;
+
+          cerr << "`ctr' after:  " << ctr
+               << endl 
+               << "bit_field after:   0" << oct << bit_field
+               << endl << dec;
+
+          show();
+
+          cerr << endl;
+
+          if (ctr == 1)
+          {
+
+             ++set_field_ctr;
+
+             if (DEBUG)
+                cerr << "Found.  Exiting function successfully with return value 1."
+                     << endl 
+                     << "`set_field_ctr' == " << set_field_ctr
+                     << endl << endl;
+
+             return 1;
+
+
+          }
+
+      }  /* |if|  */
+
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+         else if (DEBUG)
+         {
+             cerr << endl;
+
+         }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */          
+
+
+@q *** (3) @>
+
+   }  /* |for|  */
+
+@q ** (2) @>
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+      cerr << "Second loop:  Column."
+           << endl;
+#endif 
+
+
+
+   for (int i = 0; i < 9; ++i)
+   {
+@q *** (3) @>
+
+      if (i == ii)
+         continue;
+
+      check_field = &diagram[i][jj];
+
+#if DEBUG_COMPILE 
+      if (DEBUG)
+      {
+         cerr << "Comparing " << ii << ", " << jj << " to " << i << ", " << jj 
+              << endl 
+              << "check_field->ctr == " << check_field->ctr
+              << endl
+              << "(check_field->bit_field & bit_field) == " 
+              << (check_field->bit_field & bit_field)
+              << endl;
+ 
+      }  /* |if (DEBUG)|  */
+
+#endif 
+
+@q *** (3) @>
+
+
+      if (check_field->ctr == 1 && (check_field->bit_field & bit_field) > 0)
+      {
+
+ 
+          cerr << "ctr before: " << ctr
+               << endl 
+               << "Removing bit." << endl << "bit_field before:  0" << oct << bit_field
+               << endl << dec;
+
+          bit_field &= ~check_field->bit_field;
+
+
+          --ctr;
+
+          cerr << "`ctr' after:  " << ctr
+               << endl 
+               << "bit_field after:   0" << oct << bit_field
+               << endl << dec;
+
+
+          show();
+
+          cerr << endl;
+
+          if (ctr == 1)
+          {
+
+             ++set_field_ctr;
+
+             if (DEBUG)
+                cerr << "Found.  Exiting function successfully with return value 1."
+                     << endl 
+                     << "`set_field_ctr' == " << set_field_ctr
+                     << endl << endl;
+
+             return 1;
+
+
+          }
+      }  /* |if|  */
+
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+         else if (DEBUG)
+         {
+             cerr << endl;
+
+         }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */          
+
+
+
+@q *** (3) @>
+
+   }  /* |for|  */
+
+
+@q ** (2) @>
+
+   int m = (ii / 3) * 3;
+   int n = (jj / 3) * 3;
+
+#if DEBUG_COMPILE    
+   if (DEBUG)
+   {
+      cerr << "m == " << m << endl
+           << "n == " << n << endl
+           << "Third loop (double):  Inner squares."
+           << endl;
+   }
+#endif 
+
+   for (int i = m; i < m + 3; ++i)
+   {
+@q *** (3) @>
+
+      for (int j = n; j < n + 3; ++j)
+      {
+@q **** (4) @>
+
+          if (i == ii || j == jj)
+             continue;
+
+       	  if (DEBUG)
+       	  {
+             cerr << "Comparing " << ii << ", " << jj << " to " << i << ", " << j 
+                  << endl;
+
+       	  }
+
+@q **** (4) @>
+
+         check_field = &diagram[i][j];
+
+         cerr << "check_field->ctr == " << check_field->ctr
+              << endl
+              << "(check_field->bit_field & bit_field) == " 
+              << (check_field->bit_field & bit_field)
+              << endl;
+
+@q **** (4) @>
+
+         if (check_field->ctr == 1 && (check_field->bit_field & bit_field) > 0)
+         {
+@q ***** (5) @>
+ 
+             cerr << "ctr before: " << ctr
+                  << endl 
+                  << "Removing bit." << endl << "bit_field before:  0" << oct << bit_field
+                  << endl << dec;
+
+             bit_field &= ~check_field->bit_field;
+
+
+             --ctr;
+
+             cerr << "`ctr' after:  " << ctr
+                  << endl 
+                  << "bit_field after:   0" << oct << bit_field
+                  << endl << dec;
+
+
+             show();
+
+             cerr << endl;
+
+             if (ctr == 1)
+             {
+
+                ++set_field_ctr;
+
+#if DEBUG_COMPILE
+                if (DEBUG)
+                   cerr << "Found.  Exiting function successfully with return value 1."
+                        << endl 
+                        << "`set_field_ctr' == " << set_field_ctr
+                        << endl << endl;
+#endif /* |DEBUG_COMPILE|  */
+
+
+                return 1;
+
+             }
+
+         }  /* |if|  */
+
+#if DEBUG_COMPILE
+         else if (DEBUG)
+         {
+             cerr << endl;
+
+         }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */          
+
+@q **** (4) @>
+
+      }  /* |for|  */
+
+@q *** (3) @>
+
+   }  /* |for|  */
+
+   if (DEBUG)
+   {
+      cerr << "Exiting `Field_Type::check' successfully with return value 0."
+           << endl << endl;
+   }
+
+   return 0;
+
+
+}  /* End of |Field_Type::check| definition  */
+
+@q * (1) @>
+@
+@<|Field_Type::output| definition@>=
+
+int 
+Field_Type::output(int i, int j, bool full)
+{
+
+    cerr << "[" << i << "][" << j << "]"
+         << endl;
+
+    if (bit_field & 2U)
+        cerr << "1 ";
+    if (bit_field & 4U)
+        cerr << "2 ";
+    if (bit_field & 8U)
+        cerr << "3 ";
+    if (bit_field & 16U)
+        cerr << "4 ";
+    if (bit_field & 32U)
+        cerr << "5 ";
+    if (bit_field & 64U)
+        cerr << "6 ";
+    if (bit_field & 128U)
+        cerr << "7 ";
+    if (bit_field & 256U)
+        cerr << "8 ";
+    if (bit_field & 512)
+        cerr << "9 ";
+
+    cerr << endl << endl;
+
+   return 0;
+
+}
+
+int Field_Type::output(Field_Type f[9][9])
+{
+
+   for (int i = 0; i < 9; ++i)
+   {
+      for (int j = 0; j < 9; ++j)
+      {
+          f[i][j].output(i, j, false);
+           
+
+
+      }
+
+   }
+
+   return 0;
+}
+
+
+@
+@c
+@<Include files@>@;@/
+using namespace std;
+@<class |Field_Type| declaration@>@;@/
+int Field_Type::set_field_ctr = 0;
+extern Field_Type diagram[9][9];
+@<|Field_Type| constructor definition@>@;@/
+@<|Field_Type::show| definition@>@;@/
+@<|Field_Type::set| definition@>@;@/
+@<|Field_Type::check| definition@>@;@/
+@<|Field_Type::output| definition@>@;@/
+
+
+
+@
+@(fldtype.hxx@>=
+using namespace std;
+@<class |Field_Type| declaration@>@;@/
+
+
+
+
+@q Local Variables: @>
+@q mode:CWEB @>
+@q abbrev-mode:t @>
+@q outline-regexp:"@@q *\\*+" @>
+@q eval:(outline-minor-mode t) @>
+@q eval:(font-lock-mode nil) @>
+@q End: @>
+
+
