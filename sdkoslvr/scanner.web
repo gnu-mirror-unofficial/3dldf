@@ -86,6 +86,7 @@ using namespace std;
 #include <config.h>
 #endif
 
+#include <fldtype.hxx>
 
 @q ** (2) @>
 @
@@ -103,7 +104,7 @@ using namespace std;
 @
 @<Local variables@>=
 
-bool SCANNER_DEBUG = false; /* |true| */
+bool SCANNER_DEBUG = true; /* |false| */
 
 int status = 0;
 
@@ -132,6 +133,132 @@ stringstream temp_strm;
 
 }
 
+@q *** (3) 3 integers. @>
+@ 3 integers.
+\initials{LDF 2014.03.06.}
+
+@<Rules@>=
+
+@=^[[:blank:]]*[0-8][[:blank:]]*[0-8][[:blank:]]*[0-9][[:blank:]]*$ {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "Got three integers: " << yytext << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+   temp_strm.str("");
+   temp_strm.clear();
+
+   temp_strm << yytext;
+
+   int i, j, k;
+
+   temp_strm >> i >> j >> k;
+
+
+   temp_strm.str("");
+   temp_strm.clear();
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "i == " << i << ", j == " << j << ", k == " << k
+             << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+   diagram[i][j].set(k);
+
+}
+
+@q *** (3) END. @>
+@ END.
+\initials{LDF 2014.03.06.}
+
+@<Rules@>=
+
+@=end|END {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "END: " << yytext << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+   return 0;
+
+}
+
+@q *** (3) ENDINPUT. @>
+@ ENDINPUT.
+\initials{LDF 2014.03.06.}
+
+@<Rules@>=
+
+@=endinput|ENDINPUT {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "ENDINPUT: " << yytext << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+   return 0;
+
+}
+
+
+@q *** (3) Other characters. @>
+@ Other characters.
+\initials{LDF 2014.03.06.}
+
+@<Rules@>=
+
+@=. {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "Other char: " << yytext << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+}
+
+
+@q *** (3) @>
+
+@ End-of-file
+
+@<Rules@>=
+
+@=<<EOF>> {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+       cerr << "*** Scanning End of file ***" << endl;
+   }  /* |if (SCANNER_DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return 0;
+}
+
+
 
 
 @q ** (2) Putting scanner together. @>
@@ -144,6 +271,7 @@ stringstream temp_strm;
 @<Include header files@>@;@/
 @<Declarations@>@;@/
 struct File_Node* file_node_ptr = 0;
+extern Field_Type diagram[9][9];
 @=%}@>
 @<Options@>@;@/
 @<Definitions@>@;@/
@@ -153,6 +281,8 @@ struct File_Node* file_node_ptr = 0;
 @=%}@>
 @<Rules@>@;@/
 @=%%@>
+
+
 
 
 int

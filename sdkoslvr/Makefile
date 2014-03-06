@@ -49,6 +49,8 @@
 
 
 
+EXTRA_DIST = test_input.txt
+
 sudoku.cxx : sudoku.web
 	ctangle sudoku.web
 	mv sudoku.c sudoku.cxx
@@ -88,8 +90,8 @@ prbsnflx.c++: prbsnflx.l++
 
 #### *** (3) scanner
 
-scanner.o: scanner.c++ 
-	g++ -c -g -o scanner.o scanner.c++
+scanner.o: scanner.c++ fldtype.hxx
+	g++ -D DEBUG_COMPILE=1 -I. -c -g -o scanner.o scanner.c++
 
 scanner.c++ scanner.h++: scanner.l++
 	flex scanner.l++
@@ -98,7 +100,7 @@ scanner.c++ scanner.h++: scanner.l++
 scanner.l++ scanner1.h++: scanner.web prbsnflx
 	ctangle scanner.web
 	./prbsnflx scanner.c scanner.l++
-	@rm scanner.c
+	@rm -f scanner.c
 
 
 .PHONY: clean
