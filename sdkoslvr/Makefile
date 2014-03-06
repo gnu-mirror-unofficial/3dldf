@@ -108,7 +108,8 @@ scanner.l++ scanner1.h++: scanner.web prbsnflx
 clean:
 	rm -f out.mp sudoku.cxx sudoku$(EXEEXT) sudoku.o sudoku.1 fldtype.cxx fldtype.hxx fldtype.o \
               out.mp out.mpx sudoku.dvi sudoku.dvi sudoku.ps sudoku.pdf sudoku.log mpxerr.tex mpx*.dvi \
-              cmdlnopt.cxx cmdlnopt.h cmdlnopt.hxx cmdlnopt.o prbsnflx.c++ scanner.c scanner1.h++
+              cmdlnopt.cxx cmdlnopt.h cmdlnopt.hxx cmdlnopt.o prbsnflx.c++ scanner.c scanner1.h++ \
+              out_samp.mpx 
 
 .PHONY: run
 
