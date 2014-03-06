@@ -91,19 +91,9 @@ using namespace std;
 @
 @<Declarations@>=
 
-struct
-File_Node
-  {
-      YY_BUFFER_STATE buffer;
-      string in_filename;
-  };
-
-
 @q ** (2) Options @>
 @
 @<Options@>=
-@=%option header-file="scanner.h++"@>
-@=%option reentrant@>
 
 @q ** (2) Definitions @>
 @
@@ -142,84 +132,6 @@ stringstream temp_strm;
 
 }
 
-@q *** (3) endinput. @>
-@ endinput.
-@<Rules@>=
-
-@=endinput|ENDINPUT {@>
-
-#if DEBUG_COMPILE
-   if (SCANNER_DEBUG)
-   {
-
-        cerr << "endinput: Exiting `yylex' successfully with return value 0."
-             << endl;
-
-   } /* |if (SCANNER_DEBUG)| */
-#endif /* |DEBUG_COMPILE| */
-
-   yy_delete_buffer(YY_CURRENT_BUFFER, yyscanner);
-
-   delete file_node_ptr;
-
-   return 0;
-
-}
-
-
-@
-@<Rules@>=
-@=[[:blank:]]+ {@>
-
-#if DEBUG_COMPILE
-   if (SCANNER_DEBUG)
-   {
-
-        cerr << "Got blank." << endl;
-
-   } /* |if (SCANNER_DEBUG)| */
-#endif /* |DEBUG_COMPILE| */
-
-}
-
-@q *** (3) @>
-@
-@<Rules@>=
-
-@=. {@>
-  
-#if DEBUG_COMPILE
-   if (SCANNER_DEBUG)
-   {
-
-        cerr << "Got other character: " << yytext << endl;
-
-   } /* |if (SCANNER_DEBUG)| */
-#endif /* |DEBUG_COMPILE| */
-
-}
-
-@q *** (3) @>
-
-@ End-of-file
-
-@<Rules@>=
-
-@=<<EOF>> {@>
-
-#if DEBUG_COMPILE
-   if (SCANNER_DEBUG)
-   {
-       cerr << "*** Scanning End of file ***" << endl;
-   } /* |if (SCANNER_DEBUG)| */
-#endif /* |DEBUG_COMPILE| */
-
-   yy_delete_buffer(YY_CURRENT_BUFFER, yyscanner);
-
-   delete file_node_ptr;
- 
-   return 0;
-}
 
 
 @q ** (2) Putting scanner together. @>
@@ -242,24 +154,20 @@ struct File_Node* file_node_ptr = 0;
 @<Rules@>@;@/
 @=%%@>
 
+
 int
-yywrap(yyscan_t param)
+yywrap(void)
 {
     return 1;
 }
 
 int
-yyerror(yyscan_t param)
+yyerror(void)
 {
     return 0;
 }
 
 
-@q ** (2) @>
-@
-@(scanner1.h++@>=
-@<Declarations@>@;@/
-extern struct File_Node* file_node_ptr;
 
 @q * (1) @>
 
@@ -276,4 +184,4 @@ extern struct File_Node* file_node_ptr;
 /* mode:CWEB */
 /* outline-minor-mode:t */
 /* outline-regexp:"/\\* *%+" */
-/* End: 
+/* End:  */ 

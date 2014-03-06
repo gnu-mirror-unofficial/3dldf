@@ -53,7 +53,7 @@ sudoku.cxx : sudoku.web
 	ctangle sudoku.web
 	mv sudoku.c sudoku.cxx
 
-sudoku.o: sudoku.cxx fldtype.hxx
+sudoku.o: sudoku.cxx cmdlnopt.hxx fldtype.hxx
 	g++ -D DEBUG_COMPILE=1 -I. -c -g -o sudoku.o sudoku.cxx
 
 fldtype.cxx fldtype.hxx: fldtype.web
@@ -63,14 +63,50 @@ fldtype.cxx fldtype.hxx: fldtype.web
 fldtype.o: fldtype.cxx
 	g++ -D DEBUG_COMPILE=1 -I. -c -g -o fldtype.o fldtype.cxx
 
-sudoku$(EXEEXT): sudoku.o fldtype.o
-	g++ -o sudoku$(EXEEXT) sudoku.o fldtype.o
+
+cmdlnopt.cxx cmdlnopt.hxx: cmdlnopt.web
+	ctangle cmdlnopt.web
+	mv cmdlnopt.c cmdlnopt.cxx
+
+cmdlnopt.o: cmdlnopt.cxx
+	g++ -D DEBUG_COMPILE=1 -I. -c -g -o cmdlnopt.o cmdlnopt.cxx
+
+sudoku$(EXEEXT): sudoku.o cmdlnopt.o fldtype.o scanner.o
+	g++ -o sudoku$(EXEEXT) sudoku.o cmdlnopt.o fldtype.o scanner.o
+
+
+prbsnflx$(EXEEXT): prbsnflx.c++ 
+	g++ -g -o prbsnflx$(EXEEXT) prbsnflx.c++
+
+prbsnflx.c++: prbsnflx.l++
+	flex prbsnflx.l++
+	mv lex.yy.c prbsnflx.c++
+	@cat cpyrtcpp.txt > AAAtmp.txt
+	@echo >> AAAtmp.txt
+	@cat prbsnflx.c++ >> AAAtmp.txt
+	@mv AAAtmp.txt prbsnflx.c++
+
+#### *** (3) scanner
+
+scanner.o: scanner.c++ 
+	g++ -c -g -o scanner.o scanner.c++
+
+scanner.c++ scanner.h++: scanner.l++
+	flex scanner.l++
+	mv lex.yy.c scanner.c++
+
+scanner.l++ scanner1.h++: scanner.web prbsnflx
+	ctangle scanner.web
+	./prbsnflx scanner.c scanner.l++
+	@rm scanner.c
+
 
 .PHONY: clean
 
 clean:
 	rm -f out.mp sudoku.cxx sudoku$(EXEEXT) sudoku.o sudoku.1 fldtype.cxx fldtype.hxx fldtype.o \
-              out.mp out.mpx sudoku.dvi sudoku.dvi sudoku.ps sudoku.pdf sudoku.log mpxerr.tex mpx*.dvi
+              out.mp out.mpx sudoku.dvi sudoku.dvi sudoku.ps sudoku.pdf sudoku.log mpxerr.tex mpx*.dvi \
+              cmdlnopt.cxx cmdlnopt.h cmdlnopt.hxx cmdlnopt.o prbsnflx.c++ scanner.c scanner1.h++
 
 .PHONY: run
 

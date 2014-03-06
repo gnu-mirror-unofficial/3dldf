@@ -67,6 +67,7 @@
 #include <sstream>
 #include <bitset>
 
+#include <cmdlnopt.hxx>
 #include <fldtype.hxx>
 
 
@@ -76,6 +77,10 @@
 @<Global variable declarations@>=
 
 Field_Type diagram[9][9];
+
+string input_filename;
+string output_filename;
+int global_debug_level = 0;
 
 @q * (1) @>
 @
@@ -92,6 +97,76 @@ int main(int argc, char *argv[])
   int pass_limit = 100;
 
   int status = 0;
+
+  status = process_command_line_options(argc, argv);
+
+  cerr << "input_filename == " << input_filename << endl;
+
+  FILE *fp;
+
+  if (!input_filename.empty())
+  {
+      errno = 0;
+      fp = fopen(input_filename.c_str(), "r");
+
+      if (fp == 0)
+      {
+          cerr << "ERROR!  In `main':  `fopen' failed, returning NULL:"
+               << endl
+               << strerror(errno)
+               << endl 
+               << "Exiting `sudoku' unsuccessfully with exit status 1." 
+               << endl;
+
+          exit(1);
+      }
+      else
+      {
+          cerr << "In `main':  `fopen' succeeded.  Will read from "
+               << "`" << input_filename << "'."
+               << endl;
+
+          yyin = fp;
+
+      }
+       
+  }  /* |if (!input_filename.empty())|  */
+  else  
+  {
+     yyin = stdin;
+  }
+
+  status = yylex();
+
+  if (status != 0)
+  {
+     cerr << "ERROR!  In `main':  `yylex' failed, returning " << status << "."
+          << endl
+          << "Exiting `sudoku' unsuccessfully with exit status 1." 
+          << endl;
+
+     exit(1);
+  }
+
+#if DEBUG_COMPILE
+  else if (DEBUG)
+  {
+     cerr << "In `main':  `yylex' succeeded, returning 0."
+          << endl;
+
+  }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+  if (fp)
+  {
+     fclose(fp);
+     fp = 0;
+  }
+
+
+fprintf(stderr, "Type <RETURN> to continue");
+getchar(); 
+
 
   diagram[0][2].set(2);
   diagram[0][3].set(9);
@@ -640,6 +715,8 @@ int main(int argc, char *argv[])
 @<Include files@>@;@/
 using namespace std;
 @<Global variable declarations@>@;@/
+int yylex(void);
+extern FILE *yyin, *yyout;
 @<|main| definition@>@;@/
 
 
