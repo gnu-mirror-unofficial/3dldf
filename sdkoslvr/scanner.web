@@ -1,0 +1,279 @@
+@q scanner.web @>
+@q Created by Laurence Finston Do  6 Mär 2014 12:36:57 CET  @>
+
+@q * Copyright and License.@>
+
+@q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
+@q Copyright (C) 2014 The Free Software Foundation                          @>
+
+@q GNU 3DLDF is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version. @>
+
+@q GNU 3DLDF is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details. @>
+
+@q You should have received a copy of the GNU General Public License @>
+@q along with GNU 3DLDF; if not, write to the Free Software @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
+
+@q GNU 3DLDF is a GNU package.  @>
+@q It is part of the GNU Project of the  @>
+@q Free Software Foundation @>
+@q and is published under the GNU General Public License. @>
+@q See the website http://www.gnu.org @>
+@q for more information.   @>
+@q GNU 3DLDF is available for downloading from @>
+@q http://www.gnu.org/software/3dldf/LDF.html. @>
+
+@q (``@@'' stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de @>
+@q The mailing list help-3dldf@@gnu.org is available for people to @>
+@q ask other users for help.  @>
+@q The mailing list info-3dldf@@gnu.org is for sending @>
+@q announcements to users. To subscribe to these mailing lists, send an @>
+@q email with ``subscribe <email-address>'' as the subject.  @>
+
+@q The author can be contacted at: @>
+
+@q Laurence D. Finston @>
+@q Kreuzbergring 41 @>
+@q D-37075 Goettingen @>
+@q Germany @>
+
+@q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
+
+
+
+@* Scanner.
+
+@q ** (2) Include header files @>
+@
+@<Include header files@>=
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+
+#include <limits.h>
+
+#include <fstream>
+#include <getopt.h>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <iterator>
+#include <new>
+#include <string>
+#include <ctype.h>
+#include <time.h>
+#include <math.h>
+#include <sstream>
+#include <stdarg.h>
+#include <stdexcept>
+
+#include <vector>
+#include <map>
+#include <string>
+
+using namespace std;
+
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+
+@q ** (2) @>
+@
+@<Declarations@>=
+
+struct
+File_Node
+  {
+      YY_BUFFER_STATE buffer;
+      string in_filename;
+  };
+
+
+@q ** (2) Options @>
+@
+@<Options@>=
+@=%option header-file="scanner.h++"@>
+@=%option reentrant@>
+
+@q ** (2) Definitions @>
+@
+@<Definitions@>=
+
+@q ** (2) @>
+@
+@<Local variables@>=
+
+bool SCANNER_DEBUG = false; /* |true| */
+
+int status = 0;
+
+stringstream temp_strm;
+
+@q ** (2) Rules @>
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@q *** (3) Comment. @>
+@ Comment.
+@<Rules@>=
+
+@=#.*$ {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "Got comment: " << yytext << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+}
+
+@q *** (3) endinput. @>
+@ endinput.
+@<Rules@>=
+
+@=endinput|ENDINPUT {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "endinput: Exiting `yylex' successfully with return value 0."
+             << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+   yy_delete_buffer(YY_CURRENT_BUFFER, yyscanner);
+
+   delete file_node_ptr;
+
+   return 0;
+
+}
+
+
+@
+@<Rules@>=
+@=[[:blank:]]+ {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "Got blank." << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+}
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=. {@>
+  
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+
+        cerr << "Got other character: " << yytext << endl;
+
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+}
+
+@q *** (3) @>
+
+@ End-of-file
+
+@<Rules@>=
+
+@=<<EOF>> {@>
+
+#if DEBUG_COMPILE
+   if (SCANNER_DEBUG)
+   {
+       cerr << "*** Scanning End of file ***" << endl;
+   } /* |if (SCANNER_DEBUG)| */
+#endif /* |DEBUG_COMPILE| */
+
+   yy_delete_buffer(YY_CURRENT_BUFFER, yyscanner);
+
+   delete file_node_ptr;
+ 
+   return 0;
+}
+
+
+@q ** (2) Putting scanner together. @>
+
+@ Putting scanner together.
+\initials{LDF 2013.10.10.}
+
+@c
+@=%{@>
+@<Include header files@>@;@/
+@<Declarations@>@;@/
+struct File_Node* file_node_ptr = 0;
+@=%}@>
+@<Options@>@;@/
+@<Definitions@>@;@/
+@=%%@>
+@=%{@>
+@<Local variables@>@;@/
+@=%}@>
+@<Rules@>@;@/
+@=%%@>
+
+int
+yywrap(yyscan_t param)
+{
+    return 1;
+}
+
+int
+yyerror(yyscan_t param)
+{
+    return 0;
+}
+
+
+@q ** (2) @>
+@
+@(scanner1.h++@>=
+@<Declarations@>@;@/
+extern struct File_Node* file_node_ptr;
+
+@q * (1) @>
+
+/*
+ For use in indirect buffers.
+(progn
+ (outline-minor-mode t)
+ (setq outline-regexp "/\\* *%+")
+ )
+
+*/
+
+/* Local Variables: */
+/* mode:CWEB */
+/* outline-minor-mode:t */
+/* outline-regexp:"/\\* *%+" */
+/* End: 
