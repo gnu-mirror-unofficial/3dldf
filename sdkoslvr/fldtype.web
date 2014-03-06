@@ -563,6 +563,8 @@ Field_Type::output(int i, int j, bool full, string *out_str)
 int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
 {
 
+   stringstream temp_strm;
+
    if (tex == false)
    {
 
@@ -583,53 +585,57 @@ int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
    {
        string s;
 
-       /* !! START HERE:   LDF 2014.03.05.  Add code for writing to output file.  */
-
-       cout << "pickup pensquare scaled 1pt;"
-            << endl 
-            << "path q;"
-            << endl 
-            << "pair p[];"
-            << "p0 = (.5cm, -.5cm);" << endl << endl 
-            << endl << endl 
-            << "transform t[];" << endl << endl 
-            << endl << endl 
-            << "verbatimtex \\font\\large=cmr12 scaled \\magstep3 etex"
-            << endl << endl 
-            << "beginfig(1);"
-            << endl 
-            << "q := (0, 0) -- (3cm, 0) -- (3cm, -3cm) -- (0, -3cm) -- cycle;"
-            << endl 
-            << endl 
-            << "draw q withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
-            << endl 
-            << endl 
-            << "draw q shifted (6cm, 0) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
-            << endl 
-            << endl 
-            << "draw q shifted (3cm, -3cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
-            << endl 
-            << endl 
-            << "draw q shifted (0cm, -6cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
-            << endl 
-            << endl 
-            << "draw q shifted (6cm, -6cm) withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
-            << endl 
-            << endl 
-            << "for i = 0 downto -9:"
-            << endl 
-            << endl 
-            << "   draw (0, i*cm) -- (9cm, i*cm);"  
-            << endl 
-            << endl 
-            << "   draw (-i*cm, 0) -- (-i*cm, -9cm);"  
-            << endl 
-            << endl 
-            << "endfor;"
-            << endl 
-            << endl
-            << "t0 = identity shifted (1cm, 0);"
-            << endl << endl;
+       temp_strm << "pickup pensquare scaled 1pt;"
+                 << endl 
+                 << "path q;"
+                 << endl 
+                 << "pair p[];"
+                 << endl 
+                 << endl 
+                 << "p0 = (.5cm, -.5cm);" << endl << endl 
+                 << endl << endl 
+                 << "transform t[];" << endl << endl 
+                 << endl << endl 
+                 << "verbatimtex \\font\\large=cmr12 scaled \\magstep3 etex"
+                 << endl << endl 
+                 << "beginfig(1);"
+                 << endl 
+                 << "q := (0, 0) -- (3cm, 0) -- (3cm, -3cm) -- (0, -3cm) -- cycle;"
+                 << endl 
+                 << endl 
+                 << "draw q withcolor (.5, .5, .5) withpen pensquare scaled 2pt;" 
+                 << endl 
+                 << endl 
+                 << "draw q shifted (6cm, 0) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;"
+                 << endl 
+                 << endl 
+                 << "draw q shifted (3cm, -3cm) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;" 
+                 << endl 
+                 << endl 
+                 << "draw q shifted (0cm, -6cm) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;" 
+                 << endl 
+                 << endl 
+                 << "draw q shifted (6cm, -6cm) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;" 
+                 << endl 
+                 << endl 
+                 << "for i = 0 downto -9:"
+                 << endl 
+                 << endl 
+                 << "   draw (0, i*cm) -- (9cm, i*cm);"  
+                 << endl 
+                 << endl 
+                 << "   draw (-i*cm, 0) -- (-i*cm, -9cm);"  
+                 << endl 
+                 << endl 
+                 << "endfor;"
+                 << endl 
+                 << endl
+                 << "t0 = identity shifted (1cm, 0);"
+                 << endl << endl;
 
        for (int i = 0; i < 9; ++i)
        {
@@ -638,27 +644,39 @@ int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
 
                f[i][j].output(i, j, false, &s);
 
-               cout << "label(btex {\\large " << s << "} etex, p0);"
-                    << endl
-                    << endl
-                    << "p0 := p0 transformed t0;"
-                    << endl 
-                    << endl;
+               temp_strm << "label(btex {\\large " << s << "} etex, p0);"
+                         << endl
+                         << endl
+                         << "p0 := p0 transformed t0;"
+                         << endl 
+                         << endl;
 
            }
-           cout << "p0 := p0 shifted (-9cm, -1cm);" << endl << endl;
+
+           temp_strm << "p0 := p0 shifted (-9cm, -1cm);" << endl << endl;
    
 
        }
 
-       cout << "endinput"
-            << endl << endl;
+       temp_strm << "endinput"
+                 << endl << endl;
+
+
+       if (out_strm && out_strm.is_open())
+          out_strm << temp_strm.str();
+       else
+          cout << temp_strm.str();
+
+       temp_strm.str("");
+
 
    }  /* |else|  */
 
 
+
    return 0;
-}
+
+}  /* End of |Field_Type::output| definition (|static| version)  */
 
 
 @
@@ -668,6 +686,7 @@ using namespace std;
 @<class |Field_Type| declaration@>@;@/
 int Field_Type::set_field_ctr = 0;
 extern Field_Type diagram[9][9];
+extern ofstream out_strm;
 @<|Field_Type| constructor definition@>@;@/
 @<|Field_Type::show| definition@>@;@/
 @<|Field_Type::set| definition@>@;@/

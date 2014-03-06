@@ -82,6 +82,8 @@ string input_filename;
 string output_filename;
 int global_debug_level = 0;
 
+ofstream out_strm;
+
 @q * (1) @>
 @
 @<|main| definition@>=
@@ -100,7 +102,77 @@ int main(int argc, char *argv[])
 
   status = process_command_line_options(argc, argv);
 
-  cerr << "input_filename == " << input_filename << endl;
+#if DEBUG_COMPILE
+  if (DEBUG)
+  {
+     cerr << "input_filename  == " << input_filename << endl
+          << "output_filename == " << output_filename << endl;
+
+  }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@q ** (2) @>
+@
+@<|main| definition@>=
+
+  if (!output_filename.empty()) 
+  {
+     out_strm.open(output_filename.c_str());
+     
+     if (!(out_strm && out_strm.is_open()))
+     {
+          cerr << "ERROR!  In `main':  `ofstream::open' failed."
+               << endl
+               << "Failed to open `" << output_filename << "'."
+               << endl 
+               << "Exiting `sudoku' unsuccessfully with exit status 1." 
+               << endl;
+
+          exit(1);
+
+     }  /* |if|  */
+     else
+     {
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         {
+              cerr << "In `main':  `ofstream::open' succeeded."
+                   << endl
+                   << "Opened `" << output_filename << "' successfully."
+                   << endl;
+
+         }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+         time_t curr_time = time(0);
+
+         string temp_str = asctime(localtime(&curr_time));
+
+         out_strm << "%%%% " << output_filename << endl
+                  << "%%%% Generated " << temp_str.substr(0, temp_str.length() - 1) 
+                  << " by `sudoku'."
+                  << endl
+                  << endl;
+
+     }  /* |else|  */
+
+  }  /* |if (!output_filename.empty()) |  */
+
+#if DEBUG_COMPILE
+  else if (DEBUG)
+  {
+     cerr << "In `main':  `output_filename' is empty.  "
+          << "Will write to standard output."
+          << endl;
+
+  }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@q ** (2) @>
+@
+@<|main| definition@>=
 
   FILE *fp;
 
@@ -117,6 +189,8 @@ int main(int argc, char *argv[])
                << endl 
                << "Exiting `sudoku' unsuccessfully with exit status 1." 
                << endl;
+
+          out_strm.close();
 
           exit(1);
       }
@@ -144,6 +218,8 @@ int main(int argc, char *argv[])
           << endl
           << "Exiting `sudoku' unsuccessfully with exit status 1." 
           << endl;
+
+     out_strm.close();
 
      exit(1);
   }
@@ -219,6 +295,8 @@ int main(int argc, char *argv[])
   for (int iter_ctr = 1;;++iter_ctr)
   {
 @q *** (3) @>
+
+     cout << "Pass " << iter_ctr << endl;
 
 #if DEBUG_COMPILE
      if (DEBUG)
@@ -668,6 +746,8 @@ int main(int argc, char *argv[])
 
   Field_Type::output(diagram, true);
 
+
+  out_strm.close();
 
   return 0;
 
