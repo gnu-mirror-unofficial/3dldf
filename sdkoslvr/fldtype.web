@@ -79,6 +79,9 @@ class Field_Type
 
    static int set_field_ctr;
 
+
+   @<|Field_Type| function declarations@>@;@/
+
    Field_Type(void);
 
    void show(string s = "");
@@ -88,8 +91,6 @@ class Field_Type
    int check(int ii, int jj);
 
    int output(int i, int j, bool full = true, string *out_str = 0);
-
-   static int output(Field_Type f[9][9], bool tex = false, string filename = "");
 
 
 };
@@ -341,7 +342,13 @@ Field_Type::check(int ii, int jj)
 
  
           cerr << "ctr before: " << ctr
+               << endl
+               << "bit_field:               " << oct << bit_field  
+               << " (octal)"
+               << "check_field->bit_field:  " << oct << check_field->bit_field  
+               << " (octal)"
                << endl 
+               << dec
                << "Removing bit." << endl << "bit_field before:  0" << oct << bit_field
                << endl << dec;
 
@@ -357,6 +364,7 @@ Field_Type::check(int ii, int jj)
 
 
           show();
+          check_field->show("*check_field:");
 
           cerr << endl;
 
@@ -510,9 +518,9 @@ Field_Type::check(int ii, int jj)
 
 }  /* End of |Field_Type::check| definition  */
 
-@q * (1) @>
+@q ** (2) @>
 @
-@<|Field_Type::output| definition@>=
+@<|Field_Type::output| definitions@>=
 
 int 
 Field_Type::output(int i, int j, bool full, string *out_str)
@@ -560,28 +568,65 @@ Field_Type::output(int i, int j, bool full, string *out_str)
 
 }
 
-int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
+@q ** (2) @>
+@
+@q *** (3) Declaration @>
+
+@<|Field_Type| function declarations@>=
+
+static 
+int output(Field_Type f[9][9], bool tex = false, bool full = false);
+
+@q *** (3) Definition  @>
+@
+@<|Field_Type::output| definitions@>=
+
+int Field_Type::output(Field_Type f[9][9], bool tex, bool full)
 {
 
    stringstream temp_strm;
 
+@q **** (4) @>
+
    if (tex == false)
    {
 
+       if (full == false)
+           cerr << " | 0 1 2 3 4 5 6 7 8"
+                << endl
+                << "-  - - - - - - - - - "
+                << endl;
+
+
        for (int i = 0; i < 9; ++i)
        {
+          if (full == false)
+             cerr << i << "| ";
+
           for (int j = 0; j < 9; ++j)
           {
-              
-              f[i][j].output(i, j, false);
+     
+              if (f[i][j].ctr == 1 || full)
+              {
+                 f[i][j].output(i, j, full);
+                 if (full == false)
+                    cerr << " ";
+              }
+              else if (full == false)
+                 cerr << "-" << " ";
 
           }
+          cerr << endl;
 
        }   
 
    }  /* |if (tex == false)|  */
 
-   else
+@q **** (4) @>
+@
+@<|Field_Type::output| definitions@>=
+
+   else if (tex == true && full == true)
    {
        string s;
 
@@ -592,7 +637,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
                  << "pair p[];"
                  << endl 
                  << endl 
-                 << "p0 = (.5cm, -.5cm);" << endl << endl 
+                 << "p0 = (1cm, -1cm);" << endl << endl 
                  << endl << endl 
                  << "transform t[];" << endl << endl 
                  << endl << endl 
@@ -670,7 +715,31 @@ int Field_Type::output(Field_Type f[9][9], bool tex, string filename)
        temp_strm.str("");
 
 
-   }  /* |else|  */
+   }  /* |else if (tex == true && full == false)|  */
+
+
+@q **** (4) @>
+
+
+
+   else if (tex == true && full == false)
+   {
+       string s;
+
+
+       temp_strm << "endinput"
+                 << endl << endl;
+
+
+       if (out_strm && out_strm.is_open())
+          out_strm << temp_strm.str();
+       else
+          cout << temp_strm.str();
+
+       temp_strm.str("");
+
+
+   }  /* |else if (tex == true && full == false)|  */
 
 
 
@@ -691,7 +760,7 @@ extern ofstream out_strm;
 @<|Field_Type::show| definition@>@;@/
 @<|Field_Type::set| definition@>@;@/
 @<|Field_Type::check| definition@>@;@/
-@<|Field_Type::output| definition@>@;@/
+@<|Field_Type::output| definitions@>@;@/
 
 
 

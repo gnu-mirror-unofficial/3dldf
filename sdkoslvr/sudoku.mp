@@ -47,7 +47,9 @@
 
 %%%% Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)
 
-input out.mp
+%input out.mp
+
+input out_samp.mp
 
 
 endfig;

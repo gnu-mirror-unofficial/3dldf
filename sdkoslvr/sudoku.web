@@ -84,6 +84,9 @@ int global_debug_level = 0;
 
 ofstream out_strm;
 
+int pass_limit = 100;
+
+
 @q * (1) @>
 @
 @<|main| definition@>=
@@ -96,7 +99,6 @@ int main(int argc, char *argv[])
 
   Field_Type *curr_field = 0;
 
-  int pass_limit = 100;
 
   int status = 0;
 
@@ -230,6 +232,8 @@ int main(int argc, char *argv[])
      cerr << "In `main':  `yylex' succeeded, returning 0."
           << endl;
 
+     Field_Type::output(diagram);
+
   }  /* |else if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
@@ -239,60 +243,13 @@ int main(int argc, char *argv[])
      fp = 0;
   }
 
-  diagram[0][2].show("diagram[0][2]:");
+  diagram[1][0].show("diagram[1][0]:");
 
-
-
-@q ** (2) @>
-@
-@<|main| definition@>=
-
-  unsigned long int temp_val = 0UL;
-
-  if (argc > 1 && argv[1] != 0 && strlen(argv[1]) > 0)
-  {
-       errno = 0;
-       temp_val = strtoul(argv[1], 0, 10);
-
-       if (temp_val == ULONG_MAX)
-       {
-           cerr << "ERROR!  `strtoul' failed, returning `ULONG_MAX':"
-                << endl
-                << strerror(errno)
-                << endl 
-                << "Not resetting `pass_limit'.  Will use default value == " 
-                << pass_limit << "."
-                << endl;
-
-       }
-       else if (pass_limit > INT_MAX)
-       {
-           cerr << "WARNING!  `strtoul' returned " << temp_val << " "
-                << "(> `INT_MAX' == " << INT_MAX << ")"
-                << endl
-                << endl 
-                << "Value out of range.  Not resetting `pass_limit'.  Will use default value == " 
-                << pass_limit << "."
-                << endl;
-
-       }
-
-#if DEBUG_COMPILE
-       else if (DEBUG)
-       {
-           cerr << "Resetting `pass_limit' to " << temp_val << "." 
-                << endl;
-
-       }  /* |else if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-      
-  }  /* |if|  */
 
 @q ** (2) @>
 
 
-  for (int iter_ctr = 1;;++iter_ctr)
+  for (int iter_ctr = 1; iter_ctr <= pass_limit; ++iter_ctr)
   {
 @q *** (3) @>
 
@@ -726,7 +683,7 @@ int main(int argc, char *argv[])
                 << endl;
 
   
-           Field_Type::output(diagram);
+           Field_Type::output(diagram, false, true);
 
            cerr << endl;
 

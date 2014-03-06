@@ -150,8 +150,11 @@ process_command_line_options(int argc, char* argv[])
   const unsigned short DEBUG_LEVEL_INDEX                    =  0;
   const unsigned short INPUT_FILENAME_INDEX                 =  1;
   const unsigned short OUTPUT_FILENAME_INDEX                =  2;
-  const unsigned short STDIN_INDEX                          =  3;
-  const unsigned short STDOUT_INDEX                         =  4;
+  const unsigned short PASS_LIMIT_INDEX                     =  3;
+  const unsigned short STDIN_INDEX                          =  4;
+  const unsigned short STDOUT_INDEX                         =  5;
+
+
 @q **** (4) @>
 
 @q *** (3) Option struct.@>
@@ -164,6 +167,7 @@ process_command_line_options(int argc, char* argv[])
     {"debug-level",  2, 0, 0},
     {"input-filename",  1, 0, 0},
     {"output-filename",  1, 0, 0},
+    {"pass-limit",  1, 0, 0},
     {"stdin",  0, 0, 0},
     {"stdout",  0, 0, 0},
     {0, 0, 0, 0}
@@ -323,6 +327,85 @@ Added this section.
 @q ****** (6) @>
 
         } /* |else if (option_index == OUTPUT_FILENAME_INDEX)|  */
+
+
+@q ***** (5) pass-limit.@>
+
+@ \.{pass-limit}.
+\initials{LDF 2014.03.06.}
+
+\LOG
+\initials{LDF 2014.03.06.}
+Added this section.
+\ENDLOG
+
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == PASS_LIMIT_INDEX)
+        {
+
+@q ****** (6) @>
+
+#if DEBUG_COMPILE 
+            if (DEBUG) 
+            {
+               
+               cerr << "`option_index' == "
+                    << "`PASS_LIMIT_INDEX'" 
+                    << endl;
+ 
+            }
+#endif  /* |DEBUG_COMPILE|  */ 
+
+            unsigned long int temp_val = 0UL;
+
+            errno = 0;
+            temp_val = strtoul(optarg, 0, 10);
+
+            if (temp_val == ULONG_MAX)
+            {
+                cerr << "ERROR!  `strtoul' failed, returning `ULONG_MAX':"
+                     << endl
+                     << strerror(errno)
+                     << endl 
+                     << "Not resetting `pass_limit'.  Will use default value == " 
+                     << pass_limit << "."
+                     << endl;
+
+            }
+            else if (pass_limit > INT_MAX)
+            {
+                cerr << "WARNING!  `strtoul' returned " << temp_val << " "
+                     << "(> `INT_MAX' == " << INT_MAX << ")"
+                     << endl
+                     << endl 
+                     << "Value out of range.  Not resetting `pass_limit'.  "
+                     << "Will use default value == " 
+                     << pass_limit << "."
+                     << endl;
+
+            }
+            else
+            {
+
+#if DEBUG_COMPILE
+                if (DEBUG)
+                {
+                    cerr << "Resetting `pass_limit' to " << temp_val << "." 
+                         << endl;
+
+                }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+                
+                pass_limit = temp_val;
+
+            }   
+
+@q ****** (6) @>
+
+        } /* |else if (option_index == PASS_LIMIT_INDEX)|  */
+
+
 
 @q ***** (5) debug-level.  @>
 @ \.{debug-level}.
@@ -610,6 +693,7 @@ using namespace std;
 extern int global_debug_level;
 extern string input_filename;
 extern string output_filename;
+extern int pass_limit;
 @<|process_command_line_options| declaration@>@;@/
 @<|process_command_line_options| definition@>@;
 
