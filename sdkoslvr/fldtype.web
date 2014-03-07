@@ -530,34 +530,65 @@ Field_Type::output(int i, int j, bool full, string *out_str)
     stringstream temp_strm;
 
 
+#if 0 
     if (full)
     {
        temp_strm << "[" << i << "][" << j << "]"
             << endl;
        s = " ";
     }
+#endif 
 
     if (bit_field & 2U)
-        temp_strm << "1" << s;
-    if (bit_field & 4U)
-        temp_strm << "2" << s;
-    if (bit_field & 8U)
-        temp_strm << "3" << s;
-    if (bit_field & 16U)
-        temp_strm << "4" << s;
-    if (bit_field & 32U)
-        temp_strm << "5" << s;
-    if (bit_field & 64U)
-        temp_strm << "6" << s;
-    if (bit_field & 128U)
-        temp_strm << "7" << s;
-    if (bit_field & 256U)
-        temp_strm << "8" << s;
-    if (bit_field & 512)
-        temp_strm << "9" << s;
+        temp_strm << "1";
+    else
+        temp_strm << " ";
 
+    if (bit_field & 4U)
+        temp_strm << "2";
+    else
+        temp_strm << " ";
+
+    if (bit_field & 8U)
+        temp_strm << "3";
+    else
+        temp_strm << " ";
+
+    if (bit_field & 16U)
+        temp_strm << "4";
+    else
+        temp_strm << " ";
+
+    if (bit_field & 32U)
+        temp_strm << "5";
+    else
+        temp_strm << " ";
+
+    if (bit_field & 64U)
+        temp_strm << "6";
+    else
+        temp_strm << " ";
+
+    if (bit_field & 128U)
+        temp_strm << "7" ;
+    else
+        temp_strm << " ";
+
+    if (bit_field & 256U)
+        temp_strm << "8" ;
+    else
+        temp_strm << " ";
+
+    if (bit_field & 512)
+        temp_strm << "9" ;
+    else
+        temp_strm << " ";
+
+
+#if 0 
     if (full)
        temp_strm << endl << endl;
+#endif 
 
     if (out_str)
        *out_str = temp_strm.str();
@@ -575,44 +606,86 @@ Field_Type::output(int i, int j, bool full, string *out_str)
 @<|Field_Type| function declarations@>=
 
 static 
-int output(Field_Type f[9][9], bool tex = false, bool full = false);
+int output(Field_Type f[9][9], bool tex = false, bool full = false, bool final = false);
 
 @q *** (3) Definition  @>
 @
 @<|Field_Type::output| definitions@>=
 
-int Field_Type::output(Field_Type f[9][9], bool tex, bool full)
+int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
 {
 
    stringstream temp_strm;
 
 @q **** (4) @>
 
-   if (tex == false)
+   if (tex == false && full == true)
+   {
+      string s;
+
+      for (int i = 0; i < 9; ++i)
+      {
+
+          temp_strm << "|-----------|-----------|-----------|-----------|"
+                    << "-----------|-----------|-----------|-----------|-----------|"
+                    << endl
+                    << "|   [" << i << "][0]  | " << "  [" << i << "][1]  |"
+                    << "  [" << i << "][2]   | " << "  [" << i << "][3]  |"
+                    << "  [" << i << "][4]   | " << "  [" << i << "][5]  |"
+                    << "  [" << i << "][6]   | " << "  [" << i << "][7]  |"
+                    << "  [" << i << "][8]   | " << endl
+                    << "| ";
+
+          for (int j = 0; j < 9; ++j)
+          {
+              f[i][j].output(i, j, false, &s);
+              temp_strm << s << " | ";
+              s = "";
+          }
+          temp_strm << endl;
+      }
+      temp_strm << "|-----------|-----------|-----------|-----------|"
+                << "-----------|-----------|-----------|-----------|-----------|"
+                << endl;
+
+
+      if (final)
+      {
+         cerr << temp_strm.str(); 
+         cout << temp_strm.str(); 
+      }
+
+      temp_strm.str("");
+
+   }  /* |if (tex == false && full == true)|  */
+
+
+@q **** (4) @>
+
+
+   else if (tex == false && full == false)
    {
 
-       if (full == false)
-           cerr << " | 0 1 2 3 4 5 6 7 8"
-                << endl
-                << "-  - - - - - - - - - "
-                << endl;
+       cerr << " | 0 1 2 3 4 5 6 7 8"
+            << endl
+            << "-  - - - - - - - - - "
+            << endl;
 
 
        for (int i = 0; i < 9; ++i)
        {
-          if (full == false)
-             cerr << i << "| ";
+
+          cerr << i << "| ";
 
           for (int j = 0; j < 9; ++j)
           {
      
-              if (f[i][j].ctr == 1 || full)
+              if (f[i][j].ctr == 1)
               {
                  f[i][j].output(i, j, full);
-                 if (full == false)
-                    cerr << " ";
+                 cerr << " ";
               }
-              else if (full == false)
+              else 
                  cerr << "-" << " ";
 
           }
@@ -620,7 +693,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full)
 
        }   
 
-   }  /* |if (tex == false)|  */
+   }  /* |if (tex == false && full == false)|  */
 
 @q **** (4) @>
 @
@@ -629,6 +702,8 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full)
    else if (tex == true && full == true)
    {
        string s;
+
+       temp_strm.str("");
 
        temp_strm << "pickup pensquare scaled 1pt;"
                  << endl 
@@ -777,7 +852,7 @@ using namespace std;
 @q abbrev-mode:t @>
 @q outline-regexp:"@@q *\\*+" @>
 @q eval:(outline-minor-mode t) @>
-@q eval:(font-lock-mode nil) @>
+@q eval:(font-lock-mode -1) @>
 @q End: @>
 
 

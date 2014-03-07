@@ -113,6 +113,7 @@ int main(int argc, char *argv[])
   }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
+
 @q ** (2) @>
 @
 @<|main| definition@>=
@@ -245,7 +246,6 @@ int main(int argc, char *argv[])
 
   diagram[1][0].show("diagram[1][0]:");
 
-
 @q ** (2) @>
 
 
@@ -254,6 +254,7 @@ int main(int argc, char *argv[])
 @q *** (3) @>
 
      cout << "Pass " << iter_ctr << endl;
+     cerr << "Pass " << iter_ctr << endl;
 
 #if DEBUG_COMPILE
      if (DEBUG)
@@ -531,6 +532,8 @@ int main(int argc, char *argv[])
 @ Check inner squares for single elements.
 
 @<|main| definition@>=
+
+#if 1 
    
       curr_bit = 1U;
       ctr = 0;
@@ -541,6 +544,8 @@ int main(int argc, char *argv[])
 
       int m = 0;
       int n = 0;
+
+
 
 @q *** (3) @>
 
@@ -643,6 +648,8 @@ int main(int argc, char *argv[])
 
       }  /* |for|  */
 
+#endif 
+
 @q **** (4) @>
 
 @q *** (3) @>
@@ -683,10 +690,18 @@ int main(int argc, char *argv[])
                 << endl;
 
   
-           Field_Type::output(diagram, false, true);
+           if (Field_Type::set_field_ctr >= 81)
+              Field_Type::output(diagram, false, false);
+           else
+           {
+#if 0 
+/* !! START HERE:  LDF 2014.03.07.  Fix this.  */
+
+              Field_Type::output(diagram, false, true, true);
+#endif 
+           }
 
            cerr << endl;
-
 
 
       }  /* |if (DEBUG)|  */
@@ -699,14 +714,39 @@ int main(int argc, char *argv[])
 
 @q ** (2) @>
 
+#if 0 
+
+
+/* !! START HERE:  LDF 2014.03.07.  Fix this.  */
+
   Field_Type::output(diagram);
 
   Field_Type::output(diagram, true);
+#endif 
 
+  out_strm.close();     
 
-  out_strm.close();
+  if (Field_Type::set_field_ctr < 81)
+  {
+     cout << "ERROR!  In `main':  `Field_Type::set_field_ctr' == " 
+          << Field_Type::set_field_ctr << " (< 81)"
+          << endl 
+          << "Failed to solve sudoku:"
+          << endl;
 
-  return 0;
+     Field_Type::output(diagram, false, true, true);
+
+     cout << "Exiting `sudoku' unsuccessfully with exit status 1."
+          << endl;
+
+     exit(1);
+
+  }  /* |if|  */
+
+  else
+  {
+     exit(0);
+  }
 
 }  /* End of |main| definition  */
 
@@ -726,6 +766,6 @@ extern FILE *yyin, *yyout;
 @q mode:CWEB @>
 @q abbrev-mode:t @>
 @q eval:(outline-minor-mode t) @>
-@q eval:(font-lock-mode nil) @>
+@q eval:(font-lock-mode -1) @>
 @q End: @>
 

@@ -113,8 +113,9 @@ clean:
 
 .PHONY: run
 
-run: sudoku$(EXEEXT)
-	./sudoku$(EXEEXT)
+run: sudoku$(EXEEXT) test_input.txt
+	./sudoku$(EXEEXT) --pass-limit 10 --input-filename test_input.txt \
+           --output-filename out.mp 2> ttemp.txt
 
 
 .PHONY: run-o
