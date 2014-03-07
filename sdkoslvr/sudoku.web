@@ -724,8 +724,6 @@ int main(int argc, char *argv[])
   Field_Type::output(diagram, true);
 #endif 
 
-  out_strm.close();     
-
   if (Field_Type::set_field_ctr < 81)
   {
      cout << "ERROR!  In `main':  `Field_Type::set_field_ctr' == " 
@@ -735,16 +733,27 @@ int main(int argc, char *argv[])
           << endl;
 
      Field_Type::output(diagram, false, true, true);
+     Field_Type::output(diagram, true, true, true);
 
-     cout << "Exiting `sudoku' unsuccessfully with exit status 1."
+     cout << "ERROR!  In `main':  `Field_Type::set_field_ctr' == " 
+          << Field_Type::set_field_ctr << " (< 81)"
+          << endl 
+          << "Failed to solve sudoku:"
+          << endl
+          << endl 
+          << "Exiting `sudoku' unsuccessfully with exit status 3."
           << endl;
 
-     exit(1);
+     out_strm.close();     
+
+     exit(3);
 
   }  /* |if|  */
 
   else
   {
+     out_strm.close();     
+
      exit(0);
   }
 

@@ -693,13 +693,13 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
 
        }   
 
-   }  /* |if (tex == false && full == false)|  */
+   }  /* |else if (tex == false && full == false)|  */
 
 @q **** (4) @>
 @
 @<|Field_Type::output| definitions@>=
 
-   else if (tex == true && full == true)
+   else if (tex == true && full == false)
    {
        string s;
 
@@ -792,15 +792,46 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
 
    }  /* |else if (tex == true && full == false)|  */
 
-
 @q **** (4) @>
-
-
+@
+@<|Field_Type::output| definitions@>=
 
    else if (tex == true && full == false)
    {
        string s;
 
+       temp_strm.str("");
+
+       temp_strm << "pickup pensquare scaled 1pt;"
+                 << endl 
+                 << "path q;"
+                 << endl 
+                 << "pair p[];"
+                 << endl 
+                 << endl 
+                 << "p0 = (1cm, -1cm);" << endl << endl 
+                 << endl << endl;
+
+       for (int i = 0; i < 9; ++i)
+       {
+           for (int j = 0; j < 9; ++j)
+           {
+
+               f[i][j].output(i, j, false, &s);
+
+               temp_strm << "label(btex {\\large " << s << "} etex, p0);"
+                         << endl
+                         << endl
+                         << "p0 := p0 transformed t0;"
+                         << endl 
+                         << endl;
+
+           }
+
+           temp_strm << "p0 := p0 shifted (-9cm, -1cm);" << endl << endl;
+   
+
+       }
 
        temp_strm << "endinput"
                  << endl << endl;
@@ -815,6 +846,117 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
 
 
    }  /* |else if (tex == true && full == false)|  */
+
+@q **** (4) @>
+@
+@<|Field_Type::output| definitions@>=
+
+   else if (tex == true && full == true)
+   {
+       string s;
+
+       temp_strm << "verbatimtex \\font\\large=cmr17 scaled \\magstep3 "
+                 << "\\font\\small=cmr10 scaled \\magstephalf etex "
+                 << endl << endl 
+
+                 << "pickup pensquare scaled 1pt;"
+                 << endl << endl 
+                 << "path q;"
+                 << endl << endl 
+                 << "pair p[];"
+                 << endl << endl 
+                 << "square_len = 5cm;"
+                 << endl << endl 
+                 << "p0 = (square_len/6, -square_len/6);"
+                 << endl << endl 
+                 << "transform t[];"
+                 << endl << endl 
+                 << "t0 = identity shifted (square_len/3, 0);"
+                 << endl << endl 
+                 << endl << endl 
+                 << "beginfig(1);"
+                 << endl << endl 
+                 << "q := (0, 0) -- (square_len, 0) -- (square_len, -square_len) "
+                 << "-- (0, -square_len) -- cycle;"
+                 << endl << endl 
+                 << "draw q withcolor (.5, .5, .5) withpen pensquare scaled 2pt;"
+                 << endl << endl 
+                 << "draw q shifted (2square_len, 0) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;"
+                 << endl << endl 
+                 << "draw q shifted (square_len, -square_len) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;"
+                 << endl << endl 
+                 << "draw q shifted (0cm, -2square_len) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;"
+                 << endl << endl 
+                 << "draw q shifted (2square_len, -2square_len) withcolor (.5, .5, .5) "
+                 << "withpen pensquare scaled 2pt;"
+                 << endl << endl 
+                 << "for i = 0 downto -9:"
+                 << endl << endl 
+                 << "   draw (0, i*square_len/3) -- (3square_len, i*square_len/3);"
+                 << endl << endl 
+                 << "   draw (-i*square_len/3, 0) -- (-i*square_len/3, -3square_len);"
+                 << endl << endl 
+                 << "endfor;"
+                 << endl << endl;
+
+       for (int i = 0; i < 9; ++i)
+       {
+           temp_strm << "%% *** Row " << i << endl << endl;
+
+           for (int j = 0; j < 9; ++j)
+           {
+               s = "";
+
+               temp_strm << "%% [" << i << "][" << j << "]"
+                         << endl << endl;
+
+               f[i][j].output(i, j, false, &s);
+
+               if (f[i][j].ctr == 1)
+               {
+                  temp_strm << "label(btex {\\large " << s << "} etex, p0);"
+                            << endl << endl;
+
+               }
+               else 
+               {
+                  temp_strm << "label(btex {\\small " << s << "} etex, "
+                            << "p0 shifted (0, square_len/16));";
+
+
+               }
+ 
+               temp_strm << endl
+                         << endl
+                         << "p0 := p0 transformed t0;"
+                         << endl 
+                         << endl;
+
+
+           }
+
+           temp_strm << "p0 := p0 shifted (-3square_len, -square_len/3);" 
+                     << endl << endl;
+   
+
+       }  /* |for|  */
+
+       temp_strm << "endfig;" << endl << endl << "endinput" << endl << endl;
+
+       if (out_strm && out_strm.is_open())
+          out_strm << temp_strm.str();
+       else
+          cout << temp_strm.str();
+
+       temp_strm.str("");
+
+
+   }  /* |else if (tex == true && full == true)|  */
+
+
 
 
 

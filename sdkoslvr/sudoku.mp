@@ -52,8 +52,6 @@ input out.mp
 %input out_samp.mp
 
 
-endfig;
-
 end;
 
 
@@ -61,5 +59,5 @@ end;
 %% mode:plain-Tex 
 %% abbrev-mode:t 
 %% eval:(outline-minor-mode t) 
-%% eval:(font-lock-mode nil) 
+%% eval:(font-lock-mode -1) 
 %% End: 
