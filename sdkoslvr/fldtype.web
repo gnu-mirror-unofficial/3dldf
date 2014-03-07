@@ -307,7 +307,6 @@ Field_Type::check(int ii, int jj)
 #endif 
 
 
-
    for (int i = 0; i < 9; ++i)
    {
 @q *** (3) @>
@@ -549,8 +548,8 @@ Field_Type::output(int i, int j, bool full, bool tex, string *out_str)
 
     if (tex == true && ctr > 1)
     {
-       temp_strm << "\\vbox{\hbox{";
-       s = "\\space ";
+       temp_strm << "\\vbox{\\hbox{";
+       s = "\\copy0 ";
     }
     else if (tex == true && ctr == 1)
        s = "";
@@ -582,8 +581,8 @@ Field_Type::output(int i, int j, bool full, bool tex, string *out_str)
     else
         temp_strm << s;
 
-    if (tex == true)
-       temp_strm << "}\hbox{";
+    if (tex == true && ctr > 1)
+       temp_strm << "}\\hbox{";
 
     if (bit_field & 64U)
         temp_strm << "6";
@@ -739,7 +738,8 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
                  << endl << endl 
                  << "transform t[];" << endl << endl 
                  << endl << endl 
-                 << "verbatimtex \\font\\large=cmr12 scaled \\magstep3 etex"
+                 << "verbatimtex \\font\\large=cmr12 scaled \\magstep3 "
+                 << "etex"
                  << endl << endl 
                  << "beginfig(1);"
                  << endl 
@@ -871,17 +871,26 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
    }  /* |else if (tex == true && full == false)|  */
 
 @q **** (4) @>
-@
+
+@ In \.{cmr10 scaled \\magstephalf}, the digits and the en-dash all have the same
+width, so \.{\\hss} isn't really needed.  However, it may be if some other font is used.
+\initials{LDF 2014.03.07.}
+
 @<|Field_Type::output| definitions@>=
 
    else if (tex == true && full == true)
    {
        string s;
 
-       temp_strm << "verbatimtex \\font\\large=cmr17 scaled \\magstep3 "
-                 << "\\font\\small=cmr10 scaled \\magstephalf etex "
-                 << endl << endl 
 
+
+       temp_strm << "verbatimtex \\font\\large=cmr17 scaled \\magstep3 "
+                 << "\\font\\small=cmr10 scaled \\magstep1 "
+                 << "\\font\\medium=cmr17 "
+                 << "\\setbox1=\\hbox{{\\small 0}} "
+                 << "\\setbox0=\\hbox to \\wd1{\\hss --\\hss} "
+                 << "etex "
+                 << endl << endl 
                  << "pickup pensquare scaled 1pt;"
                  << endl << endl 
                  << "path q;"
@@ -891,10 +900,16 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
                  << "square_len = 5cm;"
                  << endl << endl 
                  << "p0 = (square_len/6, -square_len/6);"
+                 << endl 
+                 << "p1 = p0 shifted (0, square_len/3);"
+                 << endl 
+                 << "p2 = p0 shifted (-square_len/3, 0);"
                  << endl << endl 
                  << "transform t[];"
                  << endl << endl 
                  << "t0 = identity shifted (square_len/3, 0);"
+                 << endl 
+                 << "t1 = identity shifted (0, -square_len/3);"
                  << endl << endl 
                  << endl << endl 
                  << "beginfig(1);"
@@ -915,8 +930,21 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
                  << endl << endl 
                  << "draw q shifted (2square_len, -2square_len) withcolor (.5, .5, .5) "
                  << "withpen pensquare scaled 2pt;"
-                 << endl << endl 
-                 << "for i = 0 downto -9:"
+                 << endl << endl;
+
+       for (int i = 0; i < 9; ++i)
+       {
+          temp_strm << "label(btex {\\medium " << i << "} etex, p1);"
+                    << endl
+                    << "label(btex {\\medium " << i << "} etex, p2);"
+                    << endl << endl 
+                    << "p1 := p1 transformed t0;"
+                    << endl 
+                    << "p2 := p2 transformed t1;"
+                    << endl << endl;
+       }
+
+       temp_strm << "for i = 0 downto -9:"
                  << endl << endl 
                  << "   draw (0, i*square_len/3) -- (3square_len, i*square_len/3);"
                  << endl << endl 
@@ -937,7 +965,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
                          << endl << endl;
 
                f[i][j].output(i, j, false, true, &s);
-
+ 
                if (f[i][j].ctr == 1)
                {
                   temp_strm << "label(btex {\\large " << s << "} etex, p0);"

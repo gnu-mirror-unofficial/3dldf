@@ -114,19 +114,19 @@ clean:
 .PHONY: run
 
 run: sudoku$(EXEEXT) test_input.txt
-	./sudoku$(EXEEXT) --pass-limit 1 --input-filename test_input.txt \
+	./sudoku$(EXEEXT) --pass-limit 50 --input-filename test_input.txt \
            --output-filename out.mp 2> ttemp.txt
 
 
 .PHONY: run-o
 
-out.mp: sudoku$(EXEEXT)
-	./sudoku$(EXEEXT) 2>/dev/null > out.mp
-
 run-o: 
 	mpost sudoku.mp
 	tex sudoku.tex
 	dvips -o sudoku.ps sudoku.dvi
+
+out.mp: sudoku$(EXEEXT)
+	./sudoku$(EXEEXT) 2>/dev/null > out.mp
 
 sudoku.pdf: sudoku.ps
 	ps2pdf sudoku.ps
@@ -142,8 +142,9 @@ sudoku.1: sudoku.mp out.mp
 
 .PHONY: run-t
 
-run-t: sudoku$(EXEEXT)
-	./sudoku$(EXEEXT) 2> ttemp.txt
+run-t: 
+	tex sudoku.tex
+	dvips -o sudoku.ps sudoku.dvi
 
 .PHONY: run-p
 
