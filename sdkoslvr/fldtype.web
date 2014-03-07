@@ -90,8 +90,6 @@ class Field_Type
 
    int check(int ii, int jj);
 
-   int output(int i, int j, bool full = true, string *out_str = 0);
-
 
 };
 
@@ -518,17 +516,26 @@ Field_Type::check(int ii, int jj)
 
 }  /* End of |Field_Type::check| definition  */
 
-@q ** (2) @>
-@
+@q ** (2) Output  |output|.@>
+@ Output  |output|.
+
+@q *** (3) Declaration @>
+
+@<|Field_Type| function declarations@>=
+
+int 
+output(int i, int j, bool full = true, bool tex = false, string *out_str = 0);
+
+@q *** (3) Definition  @>
+@       
 @<|Field_Type::output| definitions@>=
 
 int 
-Field_Type::output(int i, int j, bool full, string *out_str)
+Field_Type::output(int i, int j, bool full, bool tex, string *out_str)
 {
     string s;
 
     stringstream temp_strm;
-
 
 #if 0 
     if (full)
@@ -539,51 +546,67 @@ Field_Type::output(int i, int j, bool full, string *out_str)
     }
 #endif 
 
+
+    if (tex == true && ctr > 1)
+    {
+       temp_strm << "\\vbox{\hbox{";
+       s = "\\space ";
+    }
+    else if (tex == true && ctr == 1)
+       s = "";
+    else
+       s = " ";
+    
     if (bit_field & 2U)
         temp_strm << "1";
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 4U)
         temp_strm << "2";
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 8U)
         temp_strm << "3";
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 16U)
         temp_strm << "4";
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 32U)
         temp_strm << "5";
     else
-        temp_strm << " ";
+        temp_strm << s;
+
+    if (tex == true)
+       temp_strm << "}\hbox{";
 
     if (bit_field & 64U)
         temp_strm << "6";
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 128U)
         temp_strm << "7" ;
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 256U)
         temp_strm << "8" ;
     else
-        temp_strm << " ";
+        temp_strm << s;
 
     if (bit_field & 512)
         temp_strm << "9" ;
     else
-        temp_strm << " ";
+        temp_strm << s;
 
+    if (tex == true && ctr > 1)
+       temp_strm << "}}";
 
 #if 0 
     if (full)
@@ -597,7 +620,7 @@ Field_Type::output(int i, int j, bool full, string *out_str)
 
    return 0;
 
-}
+}  /* End of |Field_Type::output| definition  */
 
 @q ** (2) @>
 @
@@ -638,7 +661,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
 
           for (int j = 0; j < 9; ++j)
           {
-              f[i][j].output(i, j, false, &s);
+              f[i][j].output(i, j, false, false, &s);
               temp_strm << s << " | ";
               s = "";
           }
@@ -682,7 +705,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
      
               if (f[i][j].ctr == 1)
               {
-                 f[i][j].output(i, j, full);
+                 f[i][j].output(i, j, full, false);
                  cerr << " ";
               }
               else 
@@ -762,7 +785,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
            for (int j = 0; j < 9; ++j)
            {
 
-               f[i][j].output(i, j, false, &s);
+               f[i][j].output(i, j, false, true, &s);
 
                temp_strm << "label(btex {\\large " << s << "} etex, p0);"
                          << endl
@@ -817,7 +840,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
            for (int j = 0; j < 9; ++j)
            {
 
-               f[i][j].output(i, j, false, &s);
+               f[i][j].output(i, j, false, true, &s);
 
                temp_strm << "label(btex {\\large " << s << "} etex, p0);"
                          << endl
@@ -913,7 +936,7 @@ int Field_Type::output(Field_Type f[9][9], bool tex, bool full, bool final)
                temp_strm << "%% [" << i << "][" << j << "]"
                          << endl << endl;
 
-               f[i][j].output(i, j, false, &s);
+               f[i][j].output(i, j, false, true, &s);
 
                if (f[i][j].ctr == 1)
                {
