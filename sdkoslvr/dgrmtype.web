@@ -1,7 +1,7 @@
 @q dgrmtype.web @>
-@q Created by Laurence D. Finston (LDF) Wed Fri Mar  7 16:21:10 CET 2014
+@q Created by Laurence D. Finston (LDF) Wed Fri Mar  7 16:21:10 CET 2014 @>
 
-@q * Copyright and License.@>
+@q * Copyright and License. @>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
 @q Copyright (C) 2014 The Free Software Foundation                          @>
@@ -64,30 +64,63 @@
 #include <sstream>
 #include <bitset>
 
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <fldtype.hxx>
+
 @q * (1) @>
 @
 @<class |Diagram_Type| declaration@>=
 
+template <int T, int U>
 class Diagram_Type
 {
 
+  public:
+
+     @<|Diagram_Type| function declarations@>@;@/
+
 };
+
 
 @q * (1) @>
 @
+@q ** (2) Declaration @>
+
+@<|Diagram_Type| function declarations@>=
+
+Diagram_Type(void);
+
+@q ** (2) Definition  @>
+@
 @<|Diagram_Type| constructor definition@>=
 
-Diagram_Type::Diagram_Type(void) 
+template <int T, int U>
+Diagram_Type<T, U>::Diagram_Type(void) 
 {
+   cerr << "T == " << T << ", U == " << U << endl;
 
+   return;
 
 }  /* End of |Diagram_Type| constructor definition  */
 
 
+
 @q * (1) @>
+@
+@<|Diagram_Type| function declarations@>=
+
+#if 0 
+void
+show(string s);
+#endif 
+
 @
 @<|Diagram_Type::show| definition@>=
 
+#if 0 
 void
 Diagram_Type::show(string s)
 {
@@ -100,7 +133,7 @@ Diagram_Type::show(string s)
 
 
 }
-
+#endif 
 
 @
 @c
@@ -109,13 +142,17 @@ using namespace std;
 @<class |Diagram_Type| declaration@>@;@/
 extern ofstream out_strm;
 @<|Diagram_Type| constructor definition@>@;@/
-@<|Diagram_Type::show| definition@>@;@/
 
+#if 0 
+@<|Diagram_Type::show| definition@>@;@/
+#endif 
 
 @
 @(dgrmtype.hxx@>=
 using namespace std;
 @<class |Diagram_Type| declaration@>@;@/
+@<|Diagram_Type| constructor definition@>@;@/
+
 
 
 

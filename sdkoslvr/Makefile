@@ -55,7 +55,7 @@ sudoku.cxx : sudoku.web
 	ctangle sudoku.web
 	mv sudoku.c sudoku.cxx
 
-sudoku.o: sudoku.cxx cmdlnopt.hxx fldtype.hxx
+sudoku.o: sudoku.cxx cmdlnopt.hxx dgrmtype.hxx fldtype.hxx
 	g++ -D DEBUG_COMPILE=1 -I. -c -g -o sudoku.o sudoku.cxx
 
 fldtype.cxx fldtype.hxx: fldtype.web
@@ -65,6 +65,13 @@ fldtype.cxx fldtype.hxx: fldtype.web
 fldtype.o: fldtype.cxx
 	g++ -D DEBUG_COMPILE=1 -I. -c -g -o fldtype.o fldtype.cxx
 
+dgrmtype.cxx dgrmtype.hxx: dgrmtype.web
+	ctangle dgrmtype.web
+	mv dgrmtype.c dgrmtype.cxx
+
+dgrmtype.o: dgrmtype.cxx fldtype.hxx
+	g++ -D DEBUG_COMPILE=1 -I. -c -g -o dgrmtype.o dgrmtype.cxx
+
 
 cmdlnopt.cxx cmdlnopt.hxx: cmdlnopt.web
 	ctangle cmdlnopt.web
@@ -73,9 +80,13 @@ cmdlnopt.cxx cmdlnopt.hxx: cmdlnopt.web
 cmdlnopt.o: cmdlnopt.cxx
 	g++ -D DEBUG_COMPILE=1 -I. -c -g -o cmdlnopt.o cmdlnopt.cxx
 
-sudoku$(EXEEXT): sudoku.o cmdlnopt.o fldtype.o scanner.o
-	g++ -o sudoku$(EXEEXT) sudoku.o cmdlnopt.o fldtype.o scanner.o
+#### Link sudoku
 
+sudoku$(EXEEXT): sudoku.o cmdlnopt.o dgrmtype.o fldtype.o scanner.o
+	g++ -o sudoku$(EXEEXT) sudoku.o cmdlnopt.o dgrmtype.o fldtype.o scanner.o
+
+
+#### 
 
 prbsnflx$(EXEEXT): prbsnflx.c++ 
 	g++ -g -o prbsnflx$(EXEEXT) prbsnflx.c++
@@ -113,9 +124,11 @@ clean:
 
 .PHONY: run
 
+# 2> ttemp.txt
+
 run: sudoku$(EXEEXT) test_input.txt
 	./sudoku$(EXEEXT) --pass-limit 50 --input-filename test_input.txt \
-           --output-filename out.mp 2> ttemp.txt
+           --output-filename out.mp 
 
 
 .PHONY: run-o

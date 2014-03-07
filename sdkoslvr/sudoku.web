@@ -67,14 +67,26 @@
 #include <sstream>
 #include <bitset>
 
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+
 #include <cmdlnopt.hxx>
 #include <fldtype.hxx>
+#include <dgrmtype.hxx>
 
 
 @q * (1) @>
 
 @
 @<Global variable declarations@>=
+
+/* !! START HERE:  LDF 2014.03.07. Start replacing |diagram| with an object of type 
+   |Diagram_Type|.   
+   Move the "checking" code here to `dgrmtype.web'.  
+
+*/
 
 Field_Type diagram[9][9];
 
@@ -99,6 +111,9 @@ int main(int argc, char *argv[])
 
   Field_Type *curr_field = 0;
 
+  Diagram_Type<9, 9> diagram_1;
+
+  exit(0);
 
   int status = 0;
 

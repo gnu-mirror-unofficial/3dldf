@@ -64,6 +64,11 @@
 #include <sstream>
 #include <bitset>
 
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+
 @q * (1) @>
 @
 @<class |Field_Type| declaration@>=
@@ -71,6 +76,8 @@
 class Field_Type
 {
    friend int main(int, char *[]);
+
+   template <int T, int U> friend class Diagram_Type;
 
    int ctr;
    unsigned int bit_field;
@@ -1020,6 +1027,7 @@ width, so \.{\\hss} isn't really needed.  However, it may be if some other font 
 @c
 @<Include files@>@;@/
 using namespace std;
+template <int T, int U> class Diagram_Type;
 @<class |Field_Type| declaration@>@;@/
 int Field_Type::set_field_ctr = 0;
 extern Field_Type diagram[9][9];
@@ -1035,6 +1043,7 @@ extern ofstream out_strm;
 @
 @(fldtype.hxx@>=
 using namespace std;
+template <int T, int U> class Diagram_Type;
 @<class |Field_Type| declaration@>@;@/
 
 
