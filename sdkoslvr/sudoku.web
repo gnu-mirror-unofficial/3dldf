@@ -88,8 +88,6 @@
 
 */
 
-Field_Type diagram[9][9];
-
 string input_filename;
 string output_filename;
 int global_debug_level = 0;
@@ -103,7 +101,8 @@ int pass_limit = 100;
 @
 @<|main| definition@>=
 
-int main(int argc, char *argv[])
+int 
+main(int argc, char *argv[])
 {
 @q ** (2) @>
 
@@ -111,9 +110,7 @@ int main(int argc, char *argv[])
 
   Field_Type *curr_field = 0;
 
-  Diagram_Type<9, 9> diagram_1;
-
-  exit(0);
+  Diagram_Type<9, 9> diag;
 
   int status = 0;
 
@@ -248,7 +245,7 @@ int main(int argc, char *argv[])
      cerr << "In `main':  `yylex' succeeded, returning 0."
           << endl;
 
-     Field_Type::output(diagram);
+     diag.output();
 
   }  /* |else if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
@@ -259,484 +256,23 @@ int main(int argc, char *argv[])
      fp = 0;
   }
 
-  diagram[1][0].show("diagram[1][0]:");
+#if 0 
+  diag.diagram[1][0].show("diag.diagram[1][0]:");
+#endif 
 
 @q ** (2) @>
 
+  exit(0);
 
-  for (int iter_ctr = 1; iter_ctr <= pass_limit; ++iter_ctr)
-  {
-@q *** (3) @>
 
-     cout << "Pass " << iter_ctr << endl;
-     cerr << "Pass " << iter_ctr << endl;
-
-#if DEBUG_COMPILE
-     if (DEBUG)
-     { 
-         cerr << "Pass " << iter_ctr 
-              << endl
-              << "`iter_ctr' == " << iter_ctr 
-              << endl
-              << "Field_Type::set_field_ctr == " << Field_Type::set_field_ctr
-              << endl;
-     }
-#endif
-
-@q *** (3) @>
-
-      for (int i = 0; i < 9; ++i)
-      {
-@q **** (4) @>
-
-          for (int j = 0; j < 9; ++j)
-          {
-@q ***** (5) @>
-
-#if DEBUG_COMPILE
-      	      if (DEBUG)
-      	      {
-      	        cerr << "i == " << setw(2) << i << ", j == " << setw(2) << j 
-                     << endl
-                     << "Field_Type::set_field_ctr == " << Field_Type::set_field_ctr
-                     << endl;
-
-              }
-#endif
-
-@q **** (4) @>
-
-               curr_field = &diagram[i][j];
-
-               if (curr_field->ctr == 1)
-               {
-#if DEBUG_COMPILE
-                  if (DEBUG)     
-                  {
-                      cerr << "`curr_field->ctr' == 1.  Not calling `Field_Type::check'.  "
-                           << "Continuing."
-                           << endl;
-
-                  }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-                  continue;
-               }
-
-@q **** (4) @>
-@
-@<|main| definition@>=
-
-               else
-               {
-
-      		   curr_field->show("*curr_field:");
-
-                   status = curr_field->check(i, j);
-
-                   cerr << endl;
-     
-      		   curr_field->show("*curr_field:");
-
-#if 0 
-		   cerr << "Enter <RETURN> to continue:  ";
-      		   getchar();
-      		   cerr << endl;
-#endif 
-
-
-
-               }  /* |else|  */
-
-@q **** (4) @> 
-@
-@<|main| definition@>=
-
-
-          }  /* |for|  */
-
-#if DEBUG_COMPILE
-          if (DEBUG)
-          {
-              cerr << endl;
-          }
-#endif  /* |DEBUG_COMPILE|  */ 
-
-@q **** (4) @>
-
-      }  /* |for|  */
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-
-      unsigned int curr_bit = 1U;
-      int ctr = 0;
-
-      Field_Type *save_field = 0;
-
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-
-      cerr << "Checking rows for single elements." << endl;
-
-      curr_bit = 1U;
-      ctr = 0;
-
-      save_field = 0;
-
-      for (int k = 1; k <= 9; ++k)
-      {
-
-          curr_bit <<= 1;
-
-          cerr << "k == " << k << endl
-               << "curr_bit == 0" << oct << curr_bit << " (octal)" << dec 
-               << endl;
-
-          for (int i = 0; i < 9; ++i)
-          {
-
-              ctr = 0;
-
-              for (int j = 0; j < 9; ++j)
-              {
-
-                  cerr << "Checking [" << i << "][" << j << "]" << endl;
-
-                  curr_field = &diagram[i][j];
-
-
-                  curr_field->show("curr_field:");
-
-                  if ((curr_field->bit_field & curr_bit) > 0 && curr_field->ctr == 1)
-                  {
-                      save_field = 0;
-                      ctr = 2;
-                      break;
-
-                  }
-                  else if ((curr_field->bit_field & curr_bit) > 0 && ctr == 0)
-                  {
-                     save_field = curr_field;
-                     ++ctr;
-                  }
-                  else if ((curr_field->bit_field & curr_bit) > 0 && ctr == 1)
-                  {
-                     save_field = 0;
-                     ++ctr;
-                     break;
-                  }
-
-              }  /* |for|  */
-
-              if (ctr == 1 && save_field != 0)
-              {
-                  cerr << "Found single element.  Setting."
-                       << endl;
-
-                  save_field->bit_field = curr_bit;
-                  save_field->ctr       = 1;
-
-                  ++Field_Type::set_field_ctr;
-              }
-            
-
-          }  /* |for|  */
-
-      }  /* |for|  */
-
-@q **** (4) @>
-
-      if (Field_Type::set_field_ctr >= 81)
-      {
-        cerr << "`Field_Type::set_field_ctr' == " << Field_Type::set_field_ctr << "(>= 81).  "
-             << endl 
-             << "Breaking." << endl;
-        break;
-      }
-
-@q **** (4) @>
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-
-      curr_bit = 1U;
-      ctr = 0;
-
-      save_field = 0;
-
-      cerr << "Checking columns for single elements." << endl;       
-
-      for (int k = 1; k <= 9; ++k)
-      {
-
-          curr_bit <<= 1;
-
-          cerr << "k == " << k << endl
-               << "curr_bit == 0" << oct << curr_bit << " (octal)" << dec 
-               << endl;
-
-          for (int j = 0; j < 9; ++j)
-          {
-
-              ctr = 0;
-
-              for (int i = 0; i < 9; ++i)
-              {
-
-                  cerr << "Checking [" << i << "][" << j << "]" << endl;
-
-                  curr_field = &diagram[i][j];
-
-
-                  curr_field->show("curr_field:");
-
-                  if ((curr_field->bit_field & curr_bit) > 0 && curr_field->ctr == 1)
-                  {
-                      save_field = 0;
-                      ctr = 2;
-                      break;
-
-                  }
-                  else if ((curr_field->bit_field & curr_bit) > 0 && ctr == 0)
-                  {
-                     save_field = curr_field;
-                     ++ctr;
-                  }
-                  else if ((curr_field->bit_field & curr_bit) > 0 && ctr == 1)
-                  {
-                     save_field = 0;
-                     ++ctr;
-                     break;
-                  }
-
-              }  /* |for|  */
-
-              if (ctr == 1 && save_field != 0)
-              {
-                  cerr << "Found single element.  Setting."
-                       << endl;
-
-                  save_field->bit_field = curr_bit;
-                  save_field->ctr       = 1;
-
-                  ++Field_Type::set_field_ctr;
-              }
-            
-
-          }  /* |for|  */
-
-      }  /* |for|  */
-
-@q **** (4) @>
-
-      if (Field_Type::set_field_ctr >= 81)
-      {
-        cerr << "`Field_Type::set_field_ctr' == " << Field_Type::set_field_ctr << "(>= 81).  "
-             << endl 
-             << "Breaking." << endl;
-        break;
-      }
-
-
-@q *** (3) @>
-
-@ Check inner squares for single elements.
-
-@<|main| definition@>=
-
-#if 1 
-   
-      curr_bit = 1U;
-      ctr = 0;
-
-      save_field = 0;
-
-      cerr << "Checking inner squares for single elements." << endl;
-
-      int m = 0;
-      int n = 0;
-
-
-
-@q *** (3) @>
-
-      for (int k = 1; k <= 9; ++k)
-      {
-@q **** (4) @>
-
-          curr_bit <<= 1;
-
-          cerr << "k == " << k << endl
-               << "curr_bit == 0" << oct << curr_bit << " (octal)" << dec 
-               << endl;
-
-
-@q **** (4) @>
-@
-@<|main| definition@>=
-
-          for (int m = 0; m < 9; m += 3)
-          {
-@q ***** (5) @>
-
-              for (int n = 0; n < 9; n += 3)
-              {
-@q ****** (6) @>
-
-                  for (int i = m; i < m + 3; ++i)
-                  {
-@q ******* (7) @>
-
-                     for (int j = n; j < n + 3; ++j)
-                     {
-@q ******** (8) @>
-
-                        cerr << "Checking [" << i << "][" << j << "]" << endl;
-
-                        curr_field = &diagram[i][j];
-
-
-                        curr_field->show("curr_field:");
-
-                        if ((curr_field->bit_field & curr_bit) > 0 && curr_field->ctr == 1)
-                        {
-                            cerr << "Already set.  Breaking." << endl;
-
-                            save_field = 0;
-                            ctr = 2;
-                            break;
-
-                        }
-                        else if ((curr_field->bit_field & curr_bit) > 0 && ctr == 0)
-                        {
-                           save_field = curr_field;
-                           ++ctr;
-                        }
-                        else if ((curr_field->bit_field & curr_bit) > 0 && ctr == 1)
-                        {
-
-                           cerr << "Not single.  Breaking." << endl;
-
-                           save_field = 0;
-                           ++ctr;
-                           break;
-                        }
-
-@q ******** (8) @>
-
-                     }  /* |for|  */
-
-@q ******* (7) @>
-
-                  }  /* |for|  */
-
-@q ****** (6) @>
-@
-@<|main| definition@>=
-
-                  cerr << endl;   
-
-                  if (ctr == 1 && save_field != 0)
-                  {
-                      cerr << "Found single element.  Setting."
-                           << endl;
-
-                      save_field->bit_field = curr_bit;
-                      save_field->ctr       = 1;
-
-                      ++Field_Type::set_field_ctr;
-                  }   
-
-@q ****** (6) @>
-
-              }  /* |for|  */
-
-@q ***** (5) @>
-
-          }  /* |for|  */
-
-@q **** (4) @>
-
-      }  /* |for|  */
-
-#endif 
-
-@q **** (4) @>
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-      
-
-      if (Field_Type::set_field_ctr >= 81)
-      {
-        cerr << "`Field_Type::set_field_ctr' == " << Field_Type::set_field_ctr << "(>= 81).  "
-             << endl 
-             << "Breaking." << endl;
-        break;
-      }
-      else if (iter_ctr > pass_limit)
-      {
-        cerr << "ERROR!  `iter_ctr' == " << iter_ctr << " (> " << pass_limit << ")."
-             << endl
-             << "Field_Type::set_field_ctr == " << Field_Type::set_field_ctr
-             << endl 
-             << "Failed to solve sudoku.  Breaking." 
-             << endl;
-        break;
-      }
-      else if (DEBUG)
-      {
-        cerr << "`Field_Type::set_field_ctr' == " << Field_Type::set_field_ctr << " (< 81)."
-             << endl 
-             << "Not Breaking." << endl;
-      }
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-      {
-           cerr << "End of pass " << iter_ctr 
-                << endl
-                << "Field_Type::set_field_ctr == " << Field_Type::set_field_ctr
-                << endl;
-
-  
-           if (Field_Type::set_field_ctr >= 81)
-              Field_Type::output(diagram, false, false);
-           else
-           {
-#if 0 
-/* !! START HERE:  LDF 2014.03.07.  Fix this.  */
-
-              Field_Type::output(diagram, false, true, true);
-#endif 
-           }
-
-           cerr << endl;
-
-
-      }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@q *** (3) @>
-
-  }  /* |for|  */
-
-@q ** (2) @>
 
 #if 0 
 
 
 /* !! START HERE:  LDF 2014.03.07.  Fix this.  */
 
-  Field_Type::output(diagram);
+  diag.output();
 
-  Field_Type::output(diagram, true);
 #endif 
 
   if (Field_Type::set_field_ctr < 81)
@@ -747,8 +283,8 @@ int main(int argc, char *argv[])
           << "Failed to solve sudoku in " << pass_limit << " passes:"
           << endl;
 
-     Field_Type::output(diagram, false, true, true);
-     Field_Type::output(diagram, true, true, true);
+     diag.output(false, true, true);
+     diag.output(true, true, true);
 
      cout << "ERROR!  In `main':  `Field_Type::set_field_ctr' == " 
           << Field_Type::set_field_ctr << " (< 81)"
