@@ -6,7 +6,7 @@
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
 @q Copyright (C) 2007, 2008, 2009, 2010, @>
-@q 2011, 2012, 2013, 2014 The Free Software Foundation  @>
+@q 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018 The Free Software Foundation  @>
 
 @q GNU 3DLDF is free software; you can redistribute it and/or modify @>
 @q it under the terms of the GNU General Public License as published by @>
