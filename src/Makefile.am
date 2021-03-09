@@ -184,7 +184,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
               ldf_1.log 
  
-# AM_CXXFLAGS =
+AM_CXXFLAGS = -fpermissive
 
 # AM_LDFLAGS = -lgsl -lgslcblas -lm #### Using this didn't work.  LIBS must passed 
 #                                   #### to 'configure'.  LDF 2013.11.06.
