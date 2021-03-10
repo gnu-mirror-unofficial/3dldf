@@ -180,7 +180,7 @@ referenced by |boolean_variables|, |boolean_primaries|,
  
     int i = (*b) ? 1 : 0;
 
-    int status = conditional(scanner_node, i); 
+    int status = Scan_Parse::conditional(scanner_node, i); 
 
   
 @q ****** (6) Error handling: |status != 0|.@> 
@@ -244,7 +244,7 @@ Added this rule.
 
     int discard = 2;
 
-    int status = conditional(static_cast<Scanner_Node>(parameter), discard);
+    int status = Scan_Parse::conditional(static_cast<Scanner_Node>(parameter), discard);
 
 @q ****** (6) Error handling: |status != 0|.@> 
 
@@ -303,7 +303,7 @@ Added this rule.
 
   int discard = 2;
 
-  int status = conditional(static_cast<Scanner_Node>(parameter), discard);
+  int status = Scan_Parse::conditional(static_cast<Scanner_Node>(parameter), discard);
 
 @q ****** (6) Error handling: |status != 0|.@> 
 

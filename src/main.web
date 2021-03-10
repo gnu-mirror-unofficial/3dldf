@@ -147,7 +147,6 @@ Now including \filename{parabold.h}.
 #include "cncsctlt.h++"
 #include "helices.h++"
 #include "origami.h++"
-
 #if 0
    #include "patterns.h++"
 #endif 
@@ -326,7 +325,7 @@ option.
 
 @<GCC command line option processing@>=
 {
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
   int option_ctr;
   int digit_optind = 0;
  
@@ -967,7 +966,7 @@ main(int argc, char *argv[])
 
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @;
+  bool DEBUG = true; /* |false| */ @;
 #endif /* |DEBUG_COMPILE|  */@; 
 
   string thread_name = "";
@@ -1029,13 +1028,22 @@ main(int argc, char *argv[])
   @<Print version, copyright, and license information@>;
 
   if (ldf_real_float)
-    MAX_REAL = System::get_second_largest<float>(FLT_MAX, false);
+    MAX_REAL = System::get_second_largest<float>(FLT_MAX, true);
   else if (ldf_real_double)
-    MAX_REAL = System::get_second_largest<double>(DBL_MAX, false);
+    MAX_REAL = System::get_second_largest<double>(DBL_MAX, true);
   
   MAX_REAL_SQRT = sqrt(MAX_REAL);
 
-  cerr.setf(ios::fixed, ios::floatfield);
+  cerr << "FLT_MAX       == " << FLT_MAX << endl
+       << "DBL_MAX       == " << DBL_MAX << endl  
+       << "MAX_REAL      == " << MAX_REAL << endl
+       << "MAX_REAL_SQRT == " << MAX_REAL_SQRT << endl;
+  
+cout << "Enter <RETURN> to continue." << endl;
+getchar();
+
+
+cerr.setf(ios::fixed, ios::floatfield);
   cerr.precision(6);
 
 
@@ -1056,6 +1064,7 @@ ofstream* out_file;
 string in_filename;
 string s;  
 
+cout << "Here I am." << endl;
 
 for ( unsigned short i = 0; i < filename_array_ctr; ++i)
    {
@@ -1226,7 +1235,7 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
 
 #if DEBUG_COMPILE
       bool DEBUG_SAVE = DEBUG;
-      DEBUG = false; /* |true|  */
+      DEBUG = true; /* |false|  */
 
       if (DEBUG)
         {
@@ -1237,8 +1246,17 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
           cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
-   
+
+cout << "Error after here." << endl; 
+cout << "Enter <RETURN> to continue." << endl;
+getchar(); 
+
       scanner_node_stdin = Scanner_Type::create("", run_state_initial, true);
+
+cout << "Error after here 1." << endl; 
+cout << "Enter <RETURN> to continue." << endl;
+getchar(); 
+
 
       for (int i = Run_State::METAPOST; i <= Run_State::LIBPLOT; ++i)
         scanner_node_stdin->open_default_out_file(i, run_state_initial);
@@ -1355,7 +1373,7 @@ Added this section.
 
 #if DEBUG_COMPILE
           bool SAVE_DEBUG = DEBUG;
-          DEBUG = false; /* |true|  */
+          DEBUG = true; /* |false|  */
 #endif /* |DEBUG_COMPILE|  */@; 
  
           int status;
