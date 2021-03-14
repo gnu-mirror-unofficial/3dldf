@@ -1016,35 +1016,51 @@ main(int argc, char *argv[])
 
   @<Process command line options@>;
 
+  cerr.setf(ios::fixed, ios::floatfield);
+
+  // cerr.precision(6);
+
 #if DEBUG_COMPILE
   if (DEBUG)
     {
         cerr << "filename_array_ctr == " << filename_array_ctr << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
- 
-
 
   @<Print version, copyright, and license information@>;
 
+
+  cerr << "sizeof(int) == " << sizeof(int) << endl
+       << "sizeof(int*) == " << sizeof(int*) << endl
+       << "sizeof(long int) == " << sizeof(long int) << endl;
+
   if (ldf_real_float)
-    MAX_REAL = System::get_second_largest<float>(FLT_MAX, true);
+  {
+
+     cout << "Calling System::get_second_largest<float>" << endl;
+
+     MAX_REAL = System::get_second_largest<float>(FLT_MAX, true);
+  }
   else if (ldf_real_double)
-    MAX_REAL = System::get_second_largest<double>(DBL_MAX, true);
-  
+  {
+     cout << "Calling System::get_second_largest<double>" << endl;
+
+     MAX_REAL = System::get_second_largest<double>(DBL_MAX, true);
+  }
+
   MAX_REAL_SQRT = sqrt(MAX_REAL);
 
-  cerr << "FLT_MAX       == " << FLT_MAX << endl
+  cerr << "Here I am." << endl;
+
+  cerr << "INT_MAX       == " << INT_MAX << endl
+       << "FLT_MAX       == " << FLT_MAX << endl       
        << "DBL_MAX       == " << DBL_MAX << endl  
        << "MAX_REAL      == " << MAX_REAL << endl
        << "MAX_REAL_SQRT == " << MAX_REAL_SQRT << endl;
   
-cout << "Enter <RETURN> to continue." << endl;
+cerr << "Enter <RETURN> to continue." << endl;
 getchar();
 
-
-cerr.setf(ios::fixed, ios::floatfield);
-  cerr.precision(6);
 
 
 @q ** Handle filename arguments. @>
@@ -1063,8 +1079,6 @@ ofstream* out_file;
 
 string in_filename;
 string s;  
-
-cout << "Here I am." << endl;
 
 for ( unsigned short i = 0; i < filename_array_ctr; ++i)
    {
