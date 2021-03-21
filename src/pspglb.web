@@ -339,16 +339,19 @@ Int_Void_Ptr
 
 @
 @<Declare |Int_Void_Ptr| functions@>=
-Int_Void_Ptr
+void
 set(int ii, void* vv);
 
 @
 @<Define |Int_Void_Ptr| functions@>=
-Int_Void_Ptr
+void
 Int_Void_Ptr::set(int ii, void* vv)
 {
    i = ii;
    v = vv;
+ 
+   return;
+
 }
 
 @q ** (2) Int_Void_Ptr_Bool.  @>
@@ -388,17 +391,19 @@ struct Int_Void_Ptr_Bool
 \cfunctexi{Int_Void_Ptr_Bool}{set}
 
 @<Declare |Int_Void_Ptr_Bool| functions@>=
-Int_Void_Ptr_Bool
+void
 set(int ii, void* vv, bool bb);
 
 @
 @<Define |Int_Void_Ptr_Bool| functions@>=
-Int_Void_Ptr_Bool
+void
 Int_Void_Ptr_Bool::set(int ii, void* vv, bool bb)
 {
    i = ii;
    v = vv;
    b = bb;
+  
+   return;
 }
 
 @q ** (2) |struct Mutex_Type|.@>
@@ -1040,7 +1045,6 @@ template <class C, class D> Cond_Var_Type<C, D>::Cond_Var_Type(void)
 \initials{LDF 2004.07.15.}
 
 @<Define |Cond_Var_Type| functions@>=
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -5079,7 +5083,7 @@ polyhedron_path_intersection_func(Polyhedron* p,
                       
 template <class C>
 int
-show_func(C* c, string text = "", void* parameter = 0);
+show_func(C* c, string text, void* parameter);
 
 
 void*

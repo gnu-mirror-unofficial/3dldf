@@ -1038,19 +1038,26 @@ main(int argc, char *argv[])
   {
 
      cout << "Calling System::get_second_largest<float>" << endl;
+  
+     MAX_REAL = System::get_second_largest<float>(FLT_MAX, 23, 31, true);
 
-     MAX_REAL = System::get_second_largest<float>(FLT_MAX, true);
+     cout << "After call to System::get_second_largest<float>" << endl;
+     cerr << "XXX After call to System::get_second_largest<float>" << endl;
+
+     cerr << "Enter <RETURN> to continue: ";
+     getchar(); 
+
+     exit(0);
+
   }
   else if (ldf_real_double)
   {
      cout << "Calling System::get_second_largest<double>" << endl;
 
-     MAX_REAL = System::get_second_largest<double>(DBL_MAX, true);
+     MAX_REAL = System::get_second_largest<double>(DBL_MAX, 52, 63, true);
   }
 
   MAX_REAL_SQRT = sqrt(MAX_REAL);
-
-  cerr << "Here I am." << endl;
 
   cerr << "INT_MAX       == " << INT_MAX << endl
        << "FLT_MAX       == " << FLT_MAX << endl       

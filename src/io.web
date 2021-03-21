@@ -5009,7 +5009,7 @@ the default |false|.  This required making
    friend
    string*
    Scan_Parse::sub_binary_number_string_func(C c, 
-                              bool oversize_switch = false,
+                              bool oversize_switch,
                               Scanner_Node scanner_node);
 
 
@@ -5237,7 +5237,7 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
                                            int vector_type_num,
                                            int array_type_num,
                                            C* object,
-                                           bool copy_object = true);
+                                           bool copy_object);
 
      template <class C, class D>
      friend
@@ -5611,10 +5611,10 @@ Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
                                    const unsigned short conic_section_type,
                                    C* c, 
                                    void* parameter,
-                                   bool test_points = true,
-                                   bool rectify_points = true,
-                                   real tolerance = -1,
-                                   bool ignore_extra_points = true);
+                                   bool test_points,
+                                   bool rectify_points,
+                                   real tolerance,
+                                   bool ignore_extra_points);
 
 friend 
 void* 
@@ -5680,7 +5680,7 @@ int
 Scan_Parse::cull_func(void* v, 
                       const unsigned short comparison,
                       Scanner_Node scanner_node, 
-                      real tolerance = -1,
+                      real tolerance,
                       C* c);
 
 template<class C>
@@ -5688,10 +5688,10 @@ friend
 int 
 Scan_Parse::rectify_func(void* v,
                          Scanner_Node scanner_node,
-                         bool do_test = true,
-                         bool do_cull = true,
-                         bool do_transform = true,
-                         real tolerance = -1,
+                         bool do_test,
+                         bool do_cull,
+                         bool do_transform,
+                         real tolerance,
                          Transform* t,
                          C* c);
 
@@ -6114,7 +6114,7 @@ Scan_Parse::message_command_func(int message_type, void* v, void* parameter);
 template <class C>
 friend 
 int
-Scan_Parse::show_func(C* c, string text = "", void* parameter);
+Scan_Parse::show_func(C* c, string text, void* parameter);
 
 friend
 void*
