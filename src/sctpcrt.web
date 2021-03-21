@@ -5588,11 +5588,7 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
 @<Define |Scanner_Type::create|@>=          
   {
 
-cout << "Error after here 2." << endl; 
-
     Focus a(0, 0, -10, 0, 0, 10, 20); 
-
-cout << "Error after here 3." << endl; 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -5605,11 +5601,7 @@ cout << "Error after here 3." << endl;
 #endif  /* |DEBUG_COMPILE|  */ 
 
 
-cout << "Error after here 4." << endl; 
-
     Focus* f = create_new<Focus>(a);
-
-cout << "Error after here 5." << endl; 
 
     v = static_cast<void*>(f); 
 
@@ -6133,13 +6125,14 @@ Added this section.
      
    } /* |else| (|!top_level|)  */
    
-@q **  End of |Scanner_Node::create|.  @>
-@ End of |Scanner_Node::create|. 
+@q **  End of |Scanner_Type::create|.  @>
+@ End of |Scanner_Type::create|. 
 @<Define |Scanner_Type::create|@>=
 #if DEBUG_COMPILE
   if (DEBUG)
-    cerr << "Exiting Scanner_Node::create()\n";
+    cerr << "Exiting Scanner_Type::create()\n";
 #endif
+
   return scanner_node;
 
 }
@@ -6147,7 +6140,7 @@ Added this section.
 @q ** Check |in_filename|, return 0 upon failure. @>
 @*1 Check {\bf in\_filename}, return 0 upon failure.  
 
-This section is used in |Scanner_Node::create|. 
+This section is used in |Scanner_Type::create|. 
 \initials{LDF 2004.07.03.}
 
 \LOG
@@ -6192,7 +6185,7 @@ the |input| command yet).
           if (*iter == in_filename)
             {
  
-              cerr << "ERROR! In `Scanner_Node::create()':"
+              cerr << "ERROR! In `Scanner_Type::create()':"
                    << endl 
                    << in_filename << " is already on "
                    << "`in_filename_vector'."
@@ -6227,7 +6220,7 @@ the |input| command yet).
 @q *** Check |out_filename|, return 0 upon failure. @>
 @ Check {\bf out\_filename}, return 0 upon failure.  
 
-This section is used in |Scanner_Node::create|. 
+This section is used in |Scanner_Type::create|. 
 \initials{LDF 2004.04.16.}
 
 @<Check |out_filename|, return 0 upon failure@>=
@@ -6267,7 +6260,7 @@ the |input| command yet).
           if (*iter == out_filename)
             {
  
-              cerr << "ERROR! In `Scanner_Node::create()':"
+              cerr << "ERROR! In `Scanner_Type::create()':"
                    << endl 
                    << out_filename << " is already on "
                    << "`out_filename_vector'."
@@ -6307,7 +6300,7 @@ the |input| command yet).
    out_file->open(out_filename.c_str());
    if (!(*out_file))
      {
-       cerr << "ERROR! In `Scanner_Node::create()':\n"
+       cerr << "ERROR! In `Scanner_Type::create()':\n"
          << out_filename << " doesn't exist! "
            << "Returning 0. Will try to continue.\n\n";
        delete in_file;

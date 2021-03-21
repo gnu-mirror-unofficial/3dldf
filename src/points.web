@@ -8955,9 +8955,6 @@ Point::magnitude() const
            << "a.world_coordinates[2] == " << a.world_coordinates[2] << endl 
            << "MAX_REAL_SQRT          == " << MAX_REAL_SQRT << endl;
 
-      cout << "Enter <RETURN> to continue." << endl;
-      getchar(); 
-
       return INVALID_REAL;
     }
 
@@ -8966,11 +8963,6 @@ Point::magnitude() const
 
   cout << "r    == " << r << endl
        << "temp == " << temp << endl;
-
-cout << "Enter <RETURN> to continue." << endl;
-getchar(); 
-
-
 
   if (MAX_REAL - r < temp)
     {
@@ -10896,12 +10888,8 @@ Focus::Focus(const real pos_x, const real pos_y, const real pos_z,
      : distance(dist), angle(ang), axis(ax)
 {
    
-    cout << "Error after here 6." << endl; 
-
     set(pos_x, pos_y, pos_z, dir_x, dir_y, dir_z, dist, ang, ax, tolerance,
         scanner_node);
-
-    cout << "Error after here 7." << endl; 
 
     return;
 
@@ -10958,12 +10946,8 @@ Focus::set(real pos_x, real pos_y, real pos_z,
              Scanner_Node scanner_node)
 {
 
-cout << "Error after here 8." << endl; 
-
    set(&pos_x, &pos_y, &pos_z, &dir_x, &dir_y, &dir_z,
        &dist, &ang, ax, tolerance, scanner_node);
-
-cout << "Error after here 9." << endl; 
 
    return;
 
@@ -11051,12 +11035,8 @@ Focus::set(const Point& pos, const Point& dir, const real dist,
      
 {
 
- cout << "Error after here 10." << endl; 
-
   set(pos.get_x(), pos.get_y(), pos.get_z(),
       dir.get_x(), dir.get_y(), dir.get_z(), dist, ang, ax);
-
- cout << "Error after here 11." << endl; 
 
 }
 
@@ -11097,8 +11077,6 @@ Focus::set(Point* pos, Point* dir, real* dist,
 
 @q ****** (6)@>
 
- cout << "Error after here 12." << endl; 
-
    real* pos_x = 0;
    real* pos_y = 0;
    real* pos_z = 0;
@@ -11115,9 +11093,6 @@ Focus::set(Point* pos, Point* dir, real* dist,
    real temp_dir_y;
    real temp_dir_z;
 
- cout << "Error after here 13." << endl; 
-
-
    if (pos)
    {
       temp_pos_x = pos->get_x();
@@ -11130,8 +11105,6 @@ Focus::set(Point* pos, Point* dir, real* dist,
       
    }
 
- cout << "Error after here 14." << endl; 
-
    if (dir)
    {
       temp_dir_x = dir->get_x();
@@ -11143,8 +11116,6 @@ Focus::set(Point* pos, Point* dir, real* dist,
       dir_z = &temp_dir_z;
       
    }
-
- cout << "Error after here 15." << endl; 
 
    set(pos_x, pos_y, pos_z,
        dir_x, dir_y, dir_z, dist, ang, ax);

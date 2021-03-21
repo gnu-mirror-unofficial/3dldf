@@ -124,19 +124,15 @@ template <class Real>
 Real
 System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool verbose)
 {
-
    verbose = true;
 
-   cout.precision(10);
-   cerr.precision(10);
+   cerr.precision(6);
 
    float f;
 
    if (verbose)
    {       
-       cout << "Entering `System::get_second_largest'." << endl;
-       cerr << "Enter <RETURN> to continue: ";
-       getchar(); 
+       cerr << "Entering `System::get_second_largest'." << endl;
    }
 
   const unsigned short USHORT_SIZE = sizeof(unsigned short);
@@ -156,7 +152,7 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 
   if (verbose)
     {
-      cout << "INT_WIDTH       == " << INT_WIDTH  << endl    
+      cerr << "INT_WIDTH       == " << INT_WIDTH  << endl    
            << "LONG_WIDTH      == " << LONG_WIDTH  << endl          
            << "USHORT_SIZE     == " << USHORT_SIZE  << endl
            << "UINT_SIZE       == " << UINT_SIZE  << endl
@@ -167,24 +163,16 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
            << "LONG_DBL_SIZE   == " << LONG_DBL_SIZE  << endl
            << "Real_SIZE       == " << Real_SIZE  << endl;
 
-      cout << "Error after here." << endl;    
-      cerr << "XXX Error after here." << endl;    
     }
-
-  cerr << "Error after here 1." << endl;    
 
   Real* rp = new Real;
 
-  cerr << "Error after here 2." << endl;    
-
   *rp = 0.0;
   
-  cerr << "Error after here 1." << endl;    
-
   if (Real_EQ_USHORT)
     {
       if (verbose)
-        cout << "Real_EQ_USHORT\n";
+        cerr << "Real_EQ_USHORT\n";
       typedef unsigned short i_type;
       i_type result;
       @<Calculate second-largest |Real|@>@;
@@ -193,28 +181,24 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
   else if (Real_EQ_UINT)
     {
       if (verbose)
-        cout << "Real_EQ_UINT\n";
+        cerr << "Real_EQ_UINT\n";
       typedef unsigned int i_type;
       i_type result;
 
-      cerr << "Here I am.  Before entering @@<Calculate second-largest |Real|@@>" << endl
-           << "Type <RETURN> to continue: ";
-      getchar();
+      if (verbose)
+         cerr << "Before entering @@<Calculate second-largest |Real|@@>" << endl;
 
       @<Calculate second-largest |Real|@>@;
 
       cerr << "Here I am.  After exiting @@<Calculate second-largest |Real|@@>" << endl
            << "*rp == " << *rp << endl 
-           << "f   == " << f << endl
-           << "Type <RETURN> to continue: ";
-      getchar();
-
+           << "f   == " << f << endl;
     }
       
   else if (Real_EQ_ULONG)
     {
       if (verbose)
-        cout << "Real_EQ_ULONG \n";
+        cerr << "Real_EQ_ULONG \n";
       typedef unsigned long i_type;
       i_type result;
       @<Calculate second-largest |Real|@>@;
@@ -222,7 +206,7 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
   else if (Real_EQ_ULONG_LONG)
     {
       if (verbose)
-        cout << "Real_EQ_ULONG_LONG\n";
+        cerr << "Real_EQ_ULONG_LONG\n";
       typedef unsigned long long i_type;
       i_type result;
       @<Calculate second-largest |Real|@>@;
@@ -236,15 +220,12 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 	   << "There must be some mistake.\n"
 	   << "Exiting with return value -1.\n\n";
 
-       cerr << "Enter <RETURN> to continue: ";
-       getchar(); 
-
       return -1;
     }
   
   if (verbose)
     {
-        cout << "MAX_VAL == " << MAX_VAL << endl
+        cerr << "MAX_VAL == " << MAX_VAL << endl
              << "*rp == " << *rp << endl
              << "(MAX_VAL == f) == "
              << (MAX_VAL == f) 
@@ -264,9 +245,6 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
            << "MAX_VAL == f. Exiting `3dldf' with exit status 1."
            << endl << endl;
 
-       cerr << "Enter <RETURN> to continue: ";
-       getchar(); 
-
       exit(1);
     }
 
@@ -275,9 +253,6 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
       cerr << "ERROR! In System::get_second_largest<Real>():\n"
            << "MAX_VAL < f. Exiting `3dldf' with exit status 1."
            << endl << endl;
-
-       cerr << "Enter <RETURN> to continue: ";
-       getchar(); 
 
       exit(1);
     }
@@ -288,9 +263,6 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
        {
           cerr << "Exiting `get_second_largest' successfully with return value `f' == "
                << f << endl;
-
-          cerr << "Enter <RETURN> to continue: ";
-          getchar(); 
        }
 
      }
@@ -306,9 +278,6 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 @<Calculate second-largest |Real|@>=
 {
   cerr << "Entering |@@<Calculate second-largest |Real|@@>|." << endl;
-
-  cerr << "Enter <RETURN> to continue: ";
-  getchar(); 
 
   Real r = MAX_VAL;
 
@@ -371,12 +340,9 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
   for (int i = 0; i < (sizeof(Real) * CHAR_BIT); ++i)
     {
       if (verbose)
-        cout << "i == " << i << endl;
+        cerr << "i == " << i << endl;
 
-        cout "second_largest_real == " << second_largest_real << endl;
-
-        cerr << "Enter <RETURN> to continue: ";
-        getchar(); 
+        cerr "second_largest_real == " << second_largest_real << endl;
 
 	  // This has only been needed on the DEC Alpha, so far. 
           // This is the case that the highest-order bit of the 
@@ -397,49 +363,49 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 	  if (i ==  (sizeof(Real) * CHAR_BIT) - (12))
 	    {
               if (verbose)
-                cout << "i == " << i << ".  This produces NAN.  Continuing.\n\n";
+                cerr << "i == " << i << ".  This produces NAN.  Continuing.\n\n";
 	      continue;
 	    }
 
 	  bit_pattern_i_type = 1;
 	  bit_pattern_i_type <<= i;
           if (verbose)
-            cout << "bit_pattern_i_type (1 << " << i << ") == " 
+            cerr << "bit_pattern_i_type (1 << " << i << ") == " 
                  << bit_pattern_i_type << endl;
 
 	  b = bit_pattern_i_type;
 
           if (verbose)
-            cout << "b (bit_pattern_i_type) == " << b << endl;
+            cerr << "b (bit_pattern_i_type) == " << b << endl;
 
 	  result = bit_pattern_i_type ^ *ip;
 
 
           if (verbose)
-            cout << "result == " << result << endl;
+            cerr << "result == " << result << endl;
 
 	  b = result;
 
           if (verbose)
-            cout << "b (result) == " << b << endl;
+            cerr << "b (result) == " << b << endl;
 
 	  rp = reinterpret_cast<Real *>(&result);
 
             if (verbose)
-              cout << "In \"Calculate\":  *rp == " << *rp << endl;
+              cerr << "In \"Calculate\":  *rp == " << *rp << endl;
 
 
 	  if (*rp <= 0)
 	    {
               if (verbose)
-                cout << "*rp <= 0.\nContinuing.\n\n";
+                cerr << "*rp <= 0.\nContinuing.\n\n";
 	      continue;
 	    }
 
 	  else if (*rp >= MAX_VAL)
 	    {
               if (verbose)
-                cout << "*rp >=  MAX_VAL\nContinuing."
+                cerr << "*rp >=  MAX_VAL\nContinuing."
                      << endl;
 	      continue;
 	    }
@@ -447,14 +413,14 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 	  else if (second_largest_real >= *rp)
 	    {
               if (verbose)
-                cout << "second_largest_real >= *rp\nContinuing." 
+                cerr << "second_largest_real >= *rp\nContinuing." 
                      << "\n";
 	      continue;
 	    } 
 	  else if (*rp > second_largest_real && *rp < MAX_VAL)
 	    {
               if (verbose)
-                cout << "*rp > second_largest_real && "
+                cerr << "*rp > second_largest_real && "
                      << "*rp < MAX_VAL" << endl
                      << "Setting second_largest_real to *rp"
                      << " and counter to i (" << i << ").\n";
@@ -465,7 +431,7 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 	  else 
 	    {
               if (verbose)
-                cout << "Some other condition. Continuing.\n";
+                cerr << "Some other condition. Continuing.\n";
 	      continue;
 	    }
 	      

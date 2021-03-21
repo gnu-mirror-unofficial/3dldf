@@ -1029,51 +1029,47 @@ main(int argc, char *argv[])
 
   @<Print version, copyright, and license information@>;
 
-
-  cerr << "sizeof(int) == " << sizeof(int) << endl
-       << "sizeof(int*) == " << sizeof(int*) << endl
-       << "sizeof(long int) == " << sizeof(long int) << endl;
+  if (DEBUG)
+  {
+     cerr << "sizeof(int) == " << sizeof(int) << endl
+          << "sizeof(int*) == " << sizeof(int*) << endl
+          << "sizeof(long int) == " << sizeof(long int) << endl;
+  }
 
   if (ldf_real_float)
   {
 
-     cout << "Calling System::get_second_largest<float>" << endl;
+     if (DEBUG)
+        cerr << "Calling System::get_second_largest<float>" << endl;
   
      MAX_REAL = System::get_second_largest<float>(FLT_MAX, 23, 31, true);
 
-     cout << "After call to System::get_second_largest<float>" << endl;
-     cerr << "XXX After call to System::get_second_largest<float>" << endl;
-
-     cerr << "Enter <RETURN> to continue: ";
-     getchar(); 
-
-     exit(0);
+     if (DEBUG)
+        cerr << "After call to System::get_second_largest<float>" << endl;
 
   }
   else if (ldf_real_double)
   {
-     cout << "Calling System::get_second_largest<double>" << endl;
+     if (DEBUG)
+        cerr << "Calling System::get_second_largest<double>" << endl;
 
      MAX_REAL = System::get_second_largest<double>(DBL_MAX, 52, 63, true);
   }
 
   MAX_REAL_SQRT = sqrt(MAX_REAL);
 
-  cerr << "INT_MAX       == " << INT_MAX << endl
-       << "FLT_MAX       == " << FLT_MAX << endl       
-       << "DBL_MAX       == " << DBL_MAX << endl  
-       << "MAX_REAL      == " << MAX_REAL << endl
-       << "MAX_REAL_SQRT == " << MAX_REAL_SQRT << endl;
+  if (DEBUG)
+  {
+     cerr << "INT_MAX       == " << INT_MAX << endl
+          << "FLT_MAX       == " << FLT_MAX << endl       
+          << "DBL_MAX       == " << DBL_MAX << endl  
+          << "MAX_REAL      == " << MAX_REAL << endl
+          << "MAX_REAL_SQRT == " << MAX_REAL_SQRT << endl;
+  }
   
-cerr << "Enter <RETURN> to continue." << endl;
-getchar();
-
-
-
 @q ** Handle filename arguments. @>
 @ Handle filename arguments.
 @<Main@>=
-
 
 vector<Scanner_Node> scanner_node_vector;
 
@@ -1123,8 +1119,6 @@ for ( unsigned short i = 0; i < filename_array_ctr; ++i)
 
     } /* |for|  */@;
 
-
-
 @q ** Scan input.@>
 @ Scan input.
 We only scan from standard input in two cases:  1. if there were no valid
@@ -1154,7 +1148,6 @@ default output files.
 If there was more than one valid filename argument, 
 we never read from standard input.  
 \initials{LDF 2004.03.28.}
-
 
 \TODO
 @q { @>
@@ -1268,25 +1261,30 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-cout << "Error after here." << endl; 
-cout << "Enter <RETURN> to continue." << endl;
-getchar(); 
-
       scanner_node_stdin = Scanner_Type::create("", run_state_initial, true);
 
-cout << "Error after here 1." << endl; 
-cout << "Enter <RETURN> to continue." << endl;
-getchar(); 
+      cerr << "Run_State::METAPOST == " << Run_State::METAPOST << endl
+           << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
 
+      // !!START HERE:  Changed the following |for| loop.
+      // Check how this was supposed to work.
 
-      for (int i = Run_State::METAPOST; i <= Run_State::LIBPLOT; ++i)
+      // Old:
+      // |for (int i = Run_State::METAPOST; i < Run_State::LIBPLOT; ++i);|
+
+      // New
+      for (int i = 0; i < 1; ++i)
+      {
         scanner_node_stdin->open_default_out_file(i, run_state_initial);
+      }
 
 #ifdef __DECCXX
+
       scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
                                    ios_base::fixed, ios_base::floatfield);
 #else
 #ifdef __GNUC__ 
+
       scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
                                               ios::fixed, ios::floatfield);
 #endif 
