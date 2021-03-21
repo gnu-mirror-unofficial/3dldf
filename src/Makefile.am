@@ -67,7 +67,7 @@
 
 # ** (2) Variables.
 
-bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) 
+bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT)  
 
 # lib3dldfsp.la
 
@@ -1056,6 +1056,15 @@ ttemp$(EXEEXT): ttemp.cxx
 
 run-t: ttemp$(EXEEXT)
 	./ttemp$(EXEEXT)
+
+cnepspng$(EXEEXT): cnepspng.o
+	g++ -o cnepspng$(EXEEXT) cnepspng.o
+
+cnepspng.o: cnepspng.c++
+	g++ -c -g -o cnepspng.o cnepspng.c++
+
+cnepspng.c++: cnepspng.web
+	ctangle cnepspng.web - cnepspng.c++
 
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
 # @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"

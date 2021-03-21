@@ -225,13 +225,15 @@ the code that converts the EPS files to PNG.
 
 @<Include files@>=
 
-#include <ctype.h>
-#include <getopt.h>
-#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <strings.h>
-#include <time.h>
+#include <errno.h>
+#include <getopt.h>
+#include <string.h>
+#include <string>
+
+using namespace std;
+
 
 @q * (1) Preprocessor macros.@> 
 @* Preprocessor macros.
@@ -262,7 +264,7 @@ typedef unsigned char Unsigned_Byte;
 
 @<Global constants@>=
 
-   const Unsigned_Byte  MAX_FILENAME      =   32;
+   const unsigned short MAX_FILENAME      = 1024;
    const unsigned short MAX_SYSTEM_STRING = 1024;
    const unsigned short MAX_DATESTAMP     =  128;
    const unsigned short MAX_BORDER_STRING =  128;
@@ -274,9 +276,9 @@ typedef unsigned char Unsigned_Byte;
    const unsigned short MAX_COERCE_STRING    =  32;
    const unsigned short MAX_OUTPUT_EXTENSION =   8;
 
-   const Unsigned_Byte SILENT             =   0;
-   const Unsigned_Byte QUIET              =   1;
-   const Unsigned_Byte VERBOSE            =   2;
+   const unsigned short SILENT             =   0;
+   const unsigned short QUIET              =   1;
+   const unsigned short VERBOSE            =   2;
 
 
 #if 0 
@@ -312,7 +314,7 @@ typedef unsigned char Unsigned_Byte;
 
 @<Global variables@>=
 
-   Unsigned_Byte VERBOSITY;
+   unsigned short VERBOSITY;
 
 @q * (1) Local variables for |main()|@> 
 @* Local variables for {\bf main()}.
@@ -333,16 +335,16 @@ Added this section.
    int start_value = -1;
    int end_value   = -1;
 
-   char system_string[MAX_SYSTEM_STRING];
+   string system_string;
 
    char vertical_border[MAX_BORDER_STRING];
    char horizontal_border[MAX_BORDER_STRING];
 
-   Unsigned_Byte eps_output  = 0;
-   Unsigned_Byte jpeg_output = 0;
-   Unsigned_Byte pnm_output  = 2;
-   Unsigned_Byte png_output  = 0;
-   Unsigned_Byte ps_output   = 0;
+   unsigned short eps_output  = 0;
+   unsigned short jpeg_output = 0;
+   unsigned short pnm_output  = 2;
+   unsigned short png_output  = 0;
+   unsigned short ps_output   = 0;
 
    char fill_string[MAX_COLOR_STRING];
    char opaque_string[MAX_COLOR_STRING];
@@ -354,7 +356,7 @@ Added this section.
    unsigned int height_value = 0;
    unsigned int width_value  = 0;
    
-   Unsigned_Byte coerce_value = 0;
+   unsigned short coerce_value = 0;
 
    char coerce_string[MAX_COERCE_STRING];
    char output_extension[MAX_OUTPUT_EXTENSION];
@@ -1085,7 +1087,7 @@ Added this section.
 
 @<Process filenames@>=
 
-   Unsigned_Byte arg_ctr = optind;
+   unsigned short arg_ctr = optind;
 
    printf("arg_ctr == %d\nargc == %d\n", arg_ctr, argc);  
 
@@ -1306,11 +1308,10 @@ to \.{dvips}.
    FILE* tex_file;
    FILE* eps_file;
 
-   char temp_file_name[MAX_FILENAME];
-   char tex_file_name[MAX_FILENAME];
-   char dvi_file_name[MAX_FILENAME];
-   char eps_file_name[MAX_FILENAME];
-   char log_file_name[MAX_FILENAME];
+   string tex_file_name;
+   string dvi_file_name;
+   string eps_file_name;
+   string log_file_name;
 
    float width;
    float height;
@@ -1399,13 +1400,13 @@ doesn't exist.
 
 @q ****** (6)@> 
 
-         sprintf(eps_file_name, "%s.%d", filename_stem, i);   
+         sprintf(const_cast<char*>(eps_file_name.c_str()), "%s.%d", filename_stem, i);   
 
          if (DEBUG)
-           printf("`eps_file_name' == %s\n", eps_file_name);
+           printf("`eps_file_name.c_str()' == %s\n", eps_file_name.c_str());
 
 
-          eps_file = fopen(eps_file_name, "r");
+          eps_file = fopen(eps_file_name.c_str(), "r");
 
           if (eps_file == 0 && i == 0)
              {
@@ -1474,19 +1475,19 @@ Added this section.
 @<Main@>=
 
 
-         sprintf(tex_file_name, "%s_%s%d.tex", filename_stem, zeroes_string, i);   
-         sprintf(dvi_file_name, "%s_%s%d.dvi", filename_stem, zeroes_string, i);   
-         sprintf(log_file_name, "%s_%s%d.log", filename_stem, zeroes_string, i);   
+         sprintf(const_cast<char*>(tex_file_name.c_str()), "%s_%s%d.tex", filename_stem, zeroes_string, i);   
+         sprintf(const_cast<char*>(dvi_file_name.c_str()), "%s_%s%d.dvi", filename_stem, zeroes_string, i);   
+         sprintf(const_cast<char*>(log_file_name.c_str()), "%s_%s%d.log", filename_stem, zeroes_string, i);   
 
-         tex_file = fopen(tex_file_name, "w");
+         tex_file = fopen(tex_file_name.c_str(), "w");
 
 #if DEBUG_COMPILE
          if (DEBUG)
             {
-               printf("`eps_file_name' == %s\n", eps_file_name);
-               printf("`tex_file_name' == %s\n", tex_file_name);
-               printf("`dvi_file_name' == %s\n", dvi_file_name);
-               printf("`log_file_name' == %s\n", log_file_name);
+               printf("`eps_file_name.c_str()' == %s\n", eps_file_name.c_str());
+               printf("`tex_file_name.c_str()' == %s\n", tex_file_name.c_str());
+               printf("`dvi_file_name.c_str()' == %s\n", dvi_file_name.c_str());
+               printf("`log_file_name.c_str()' == %s\n", log_file_name.c_str());
             }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1504,10 +1505,10 @@ Added this section.
 
           fclose(tex_file);
 
-          sprintf(system_string, "tex %s", tex_file_name);
-          printf("%s\n", system_string);
+          sprintf(const_cast<char*>(system_string.c_str()), "tex %s", tex_file_name.c_str());
+          printf("%s\n", system_string.c_str());
 
-          system(system_string);
+          status = system(system_string.c_str());
 
 @q ****** (6)@> 
 @
@@ -1521,20 +1522,20 @@ Now calling |remove()| rather than using ``\.{rm}'' in a call to
 
 
 
-          sprintf(system_string, "%s_%s%d.ps", filename_stem, 
+          sprintf(const_cast<char*>(system_string.c_str()), "%s_%s%d.ps", filename_stem, 
                   zeroes_string, i);
 
-          printf("Removing %s\n", system_string);
+          printf("Removing %s\n", system_string.c_str());
 
 
-          remove(system_string);
+          remove(system_string.c_str());
 
-          sprintf(system_string, "dvips -o %s_%s%d.ps %s", 
-                  filename_stem, zeroes_string, i, dvi_file_name);
+          sprintf(const_cast<char*>(system_string.c_str()), "dvips -o %s_%s%d.ps %s", 
+                  filename_stem, zeroes_string, i, dvi_file_name.c_str());
 
-          printf("%s\n", system_string);
+          printf("%s\n", system_string.c_str());
 
-          system(system_string);
+          status = system(system_string.c_str());
 
 @q ****** (6)@> 
 
@@ -1553,13 +1554,13 @@ Now calling |remove()| rather than using ``\.{rm}'' in a call to
 
 
 
-          sprintf(system_string, 
+          sprintf(const_cast<char*>(system_string.c_str()), 
                   "mogrify -crop 0x0 %s_%s%d.ps", 
                   filename_stem, zeroes_string, i);
 
-          printf("Executing %s\n", system_string);
+          printf("Executing %s\n", system_string.c_str());
  
-          system(system_string);
+          status = system(system_string.c_str());
 
 @q ****** (6)@> 
 @
@@ -1620,23 +1621,23 @@ Commented-out the code that converts the EPS files to PNG.
                  @<Convert PS file@>@;
              }
 
-          printf("Removing %s\n", tex_file_name);
-          remove(tex_file_name);
+          printf("Removing %s\n", tex_file_name.c_str());
+          remove(tex_file_name.c_str());
 
-          printf("Removing %s\n", dvi_file_name);
-          remove(dvi_file_name);
+          printf("Removing %s\n", dvi_file_name.c_str());
+          remove(dvi_file_name.c_str());
 
 
 @q ****** (6)@>  
 @
 @<Convert PS file@>=
 
-    sprintf(system_string, "convert %s %s_%s%d.ps %s_%s%d.%s", 
+    sprintf(const_cast<char*>(system_string.c_str()), "convert %s %s_%s%d.ps %s_%s%d.%s", 
             coerce_string, filename_stem, zeroes_string, i, 
             filename_stem, zeroes_string, i, output_extension);
 
-    printf("Executing \"%s\"\n", system_string);
-    system(system_string);
+    printf("Executing \"%s\"\n", system_string.c_str());
+    status = system(system_string.c_str());
 
 
 @q ******* (7) PostScript file.@> 
@@ -1645,19 +1646,19 @@ Commented-out the code that converts the EPS files to PNG.
 
 @<Main@>=
 
-          sprintf(system_string, "%s_%s%d.ps", filename_stem,
+          sprintf(const_cast<char*>(system_string.c_str()), "%s_%s%d.ps", filename_stem,
                   zeroes_string, i);
 
           if (!ps_output)  /* PostScript file.  */
             {
     
-               printf("Removing %s\n", system_string);
-               remove(system_string);
+               printf("Removing %s\n", system_string.c_str());
+               remove(system_string.c_str());
             }
 #if DEBUG_COMPILE
           else if (DEBUG)
              {
-                 printf("Not removing %s.\n", system_string);
+                 printf("Not removing %s.\n", system_string.c_str());
              }       
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1665,8 +1666,8 @@ Commented-out the code that converts the EPS files to PNG.
 @ 
 @<Main@>=
 
-          printf("Removing %s\n", log_file_name);
-          remove(log_file_name);
+          printf("Removing %s\n", log_file_name.c_str());
+          remove(log_file_name.c_str());
 
 @q ****** (6)@> 
 
