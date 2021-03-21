@@ -1,0 +1,22 @@
+#### /home/laurence/3DLDF-2.0.3/src/Makefile_1
+#### Created by Laurence Finston Sun 21 Mar 2021 05:03:39 PM CET
+
+#### Automatic Variables.  For more, see Section 10.5.3, "Automatic Variables"
+#### of the Make info manual.
+#### LDF 2009.12.29.
+
+#### $@:  Target
+#### $<:  First prerequisite
+#### $^:  The names of all the prerequisites, with spaces between them.
+#### $*:  The stem with which an implicit rule matches
+
+.PHONY: run
+
+run: ttemp
+	./ttemp
+
+ttemp: ttemp.o
+	g++ -o ttemp ttemp.o
+
+ttemp.o: ttemp.cxx
+	g++ -c -g -o ttemp.o ttemp.cxx
