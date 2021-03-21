@@ -212,7 +212,7 @@ AR = ar
 AUTOCONF = ${SHELL} /home/laurence/3DLDF-2.0.3/missing autoconf
 AUTOHEADER = ${SHELL} /home/laurence/3DLDF-2.0.3/missing autoheader
 AUTOMAKE = ${SHELL} /home/laurence/3DLDF-2.0.3/missing automake-1.16
-AWK = mawk
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2

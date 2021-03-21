@@ -2,7 +2,7 @@
 #### Created by Laurence D. Finston (LDF)
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-#### Copyright (C) 2013, 2014 The Free Software Foundation
+#### Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation
 
 #### GNU 3DLDF is free software; you can redistribute it and/or modify 
 #### it under the terms of the GNU General Public License as published by 
@@ -60,7 +60,7 @@ SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypes.texi dttypidx.texi fdl.texi \
 
 EXTRA_DIST = 3dldf.ps 3dldf.pdf 3dldf.dvi 3dldf.html 3dldf.info $(SOURCES_MANUAL) texinfo.tex
 
-all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split
+all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split manual_install
 
 .PHONY: dvi
 
@@ -117,6 +117,12 @@ TAGS: $(SOURCES_MANUAL)
 query:
 	echo "SOURCES_MANUAL == $(SOURCES_MANUAL)"
 
+
+3dldf.info.gz: 3dldf.info
+	gzip -k 3dldf.info
+
+manual_install: 3dldf.info.gz
+	sudo cp 3dldf.info.gz /usr/share/info
 
 ## Local Variables:
 ## mode:Makefile
