@@ -3394,13 +3394,11 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
                           void* var,
                           C* expr,
                           bool use_or_delete_expr)
-
-
 {
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = true; /* |false|  */
 
   using namespace Scan_Parse;
 
@@ -3616,15 +3614,19 @@ Added this section.
 @
 @<Define |Scan_Parse| template functions@>=
 
-
   entry->known_state = Id_Map_Entry_Type::KNOWN;
 
   ivp.v = entry->object = static_cast<void*>(c);   
 
   ivp.i = 0;
 
+  return ivp;
+  
 } /* End of |Scan_Parse::assign_simple| 
      definition.  \initials{LDF 2004.07.27.}  */
+
+
+
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -6245,7 +6247,7 @@ int
 Scan_Parse::vector_type_decl(Scanner_Node scanner_node,
                              int vector_type_num,
                              int array_type_num,
-                             C* dummy = 0)
+                             C* dummy)
 {
 
 
@@ -8147,8 +8149,8 @@ int
 Scan_Parse::cull_func(void* v, 
                       const unsigned short comparison,
                       Scanner_Node scanner_node, 
-                      real tolerance = -1,
-                      C* c = 0)
+                      real tolerance,
+                      C* c)
 {
 
 @q ***** (5) Preliminaries.@>   
