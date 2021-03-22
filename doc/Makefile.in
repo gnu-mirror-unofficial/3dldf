@@ -497,7 +497,7 @@ uninstall-am:
 .PRECIOUS: Makefile
 
 
-all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split manual_install
+all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split # install_manual
 
 .PHONY: dvi
 
@@ -557,7 +557,7 @@ query:
 3dldf.info.gz: 3dldf.info
 	gzip -k 3dldf.info
 
-manual_install: 3dldf.info.gz
+install_manual: 3dldf.info.gz
 	sudo cp 3dldf.info.gz /usr/share/info
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

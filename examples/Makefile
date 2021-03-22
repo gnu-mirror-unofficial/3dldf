@@ -14,13 +14,13 @@
 
 
 
-#### 3DLDF-2.0.3/examples/Makefile.am
+#### 3DLDF-2.0.4/examples/Makefile.am
 #### Created by Laurence D. Finston (LDF) Mon Nov  4 18:55:22 CET 2013
 
 #### * Copyright and License.
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-#### Copyright (C) 2013, 2014 The Free Software Foundation
+#### Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, The Free Software Foundation
 
 #### GNU 3DLDF is free software; you can redistribute it and/or modify 
 #### it under the terms of the GNU General Public License as published by 
@@ -205,13 +205,13 @@ am__can_run_installinfo = \
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/laurence/3DLDF-2.0.3/missing aclocal-1.16
+ACLOCAL = ${SHELL} /home/laurence/3DLDF-2.0.4/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/laurence/3DLDF-2.0.3/missing autoconf
-AUTOHEADER = ${SHELL} /home/laurence/3DLDF-2.0.3/missing autoheader
-AUTOMAKE = ${SHELL} /home/laurence/3DLDF-2.0.3/missing automake-1.16
+AUTOCONF = ${SHELL} /home/laurence/3DLDF-2.0.4/missing autoconf
+AUTOHEADER = ${SHELL} /home/laurence/3DLDF-2.0.4/missing autoheader
+AUTOMAKE = ${SHELL} /home/laurence/3DLDF-2.0.4/missing automake-1.16
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -258,7 +258,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/laurence/3DLDF-2.0.3/missing makeinfo
+MAKEINFO = ${SHELL} /home/laurence/3DLDF-2.0.4/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -270,23 +270,23 @@ OTOOL64 =
 PACKAGE = 3DLDF
 PACKAGE_BUGREPORT = Laurence.Finston@gmx.de
 PACKAGE_NAME = GNU 3DLDF
-PACKAGE_STRING = GNU 3DLDF 2.0.3
+PACKAGE_STRING = GNU 3DLDF 2.0.4
 PACKAGE_TARNAME = 3DLDF
 PACKAGE_URL = http://www.gnu.org/software/3DLDF/
-PACKAGE_VERSION = 2.0.3
+PACKAGE_VERSION = 2.0.4
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = strip
-VERSION = 2.0.3
+VERSION = 2.0.4
 YACC = bison -y
 YFLAGS = 
-abs_builddir = /home/laurence/3DLDF-2.0.3/examples
-abs_srcdir = /home/laurence/3DLDF-2.0.3/examples
-abs_top_builddir = /home/laurence/3DLDF-2.0.3
-abs_top_srcdir = /home/laurence/3DLDF-2.0.3
+abs_builddir = /home/laurence/3DLDF-2.0.4/examples
+abs_srcdir = /home/laurence/3DLDF-2.0.4/examples
+abs_top_builddir = /home/laurence/3DLDF-2.0.4
+abs_top_srcdir = /home/laurence/3DLDF-2.0.4
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -316,7 +316,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/laurence/3DLDF-2.0.3/install-sh
+install_sh = ${SHELL} /home/laurence/3DLDF-2.0.4/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -325,7 +325,7 @@ mandir = ${datarootdir}/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /home/laurence/3DLDF-2.0.3
+prefix = /home/laurence/3DLDF-2.0.4
 program_transform_name = s,x,x,
 psdir = ${docdir}
 runstatedir = ${localstatedir}/run
