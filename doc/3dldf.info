@@ -197,7 +197,77 @@ MetaPost.  The code for a "figure" is enclosed between calls to
 to different "shapes" that can be drawn.  The simplest of these, and the
 basis for all other shape-types is 'point'.
 
-   A point is like a 'pair' in
+   A 'point' is like a 'pair' in METAFONT and MetaPost except that it
+represents a point in three-dimensional space.  It therefore contains an
+x-, y-, and z-coordinate.  However, 'point' has an additional
+w-coordinate for use in "projections" Currently, the only projection
+implemented is the "perspective projection".
+
+   'points' can be assigned to using the ':=' operator:
+
+     point p;
+     p := (1, 2, 3);
+
+   The ':=' operator must be used because '=' has a special meaning in
+METAFONT and MetaPost: METAFONT and MetaPost can solve linear equations
+interactively and the '=' operator will only assign a value to a
+variable if this doesn't contradict the results of previous operations
+pertaining to it.  While it would be desirable to implement this
+feature, 3DLDF, like most other programming languages, does not
+implement it (and may never do so).  The author is not a mathematician
+and does not know what would be involved in implementing it.  3DLDF
+defines considerably more, and more complex, data types than METAFONT
+and MetaPost and it might not be practicable to implement this feature,
+even for someone with considerably greater mathematical skills than the
+author.
+
+   As in METAFONT and MetaPost, the ':=' operator is used for
+"assignments" in 3DLDF.
+
+   The value of variables in a run of 3DLDF can be output using the
+'show' command:
+
+     show p;
+     -|  point: (1.00000000, 2.00000000, 3.00000000)
+
+   Please note that the w-coordinate is not shown by 'show [point]'.  It
+can, however, be output by using the 'wpart' operator:
+
+     show wpart p;
+     -| >> 1
+
+   It cannot, however, be assigned to!
+
+   The data type that is next highest in complexity to 'point' is
+'path'.  Just as in METAFONT and MetaPost 'paths' consist of 'pairs'
+joined by "connectors", in 3DLDF, they consist of 'points' joined by
+connectors:
+
+     point p, q;
+     p := (1, 2, 3);
+     q := (4, 5, 6);
+     path r;
+     r := p .. q;
+     show r;
+     -| >> path:
+     type:  PATH_TYPE
+     surface_hiding_ctr:  0
+     decomposition_level:  0
+     points.size() == 2
+     connectors.size() == 1
+     (1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+     fill_draw_value == 0
+     `fill_color_vector' == 0
+     `draw_color_vector' == 0
+     `pen_vector' == 0
+     `dash_pattern_vector' == 0
+     `arrow' == `Path::NO_ARROW'.
+
+   Paths can be drawn:
+
+     draw r;
+
+   =>
 
 
 File: 3dldf.info,  Node: Data Types,  Next: FDL,  Prev: Getting Started,  Up: Top
@@ -1638,13 +1708,13 @@ Node: Introduction1918
 Node: Installation3575
 Node: Invoking3695
 Node: Getting Started5046
-Node: Data Types5623
-Node: FDL7573
-Node: GPL32667
-Node: Variable Index70186
-Node: Data Type Index70306
-Node: Function Index70439
-Node: Concept Index70569
+Node: Data Types7987
+Node: FDL9937
+Node: GPL35031
+Node: Variable Index72550
+Node: Data Type Index72670
+Node: Function Index72803
+Node: Concept Index72933
 
 End Tag Table
 

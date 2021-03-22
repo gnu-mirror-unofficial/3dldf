@@ -2621,6 +2621,15 @@ Added |vector <real> numeric_list_real_vector|.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+#ifdef HAVE_LIBMYSQLCLIENT
+  MYSQL_RES *result;
+  MYSQL_ROW curr_row;
+  MYSQL *mysql;
+  unsigned int row_ctr; 
+  unsigned int field_ctr;
+  long affected_rows;
+#endif 
+
    Input_Struct* in;
 
    Id_Map_Node id_map_node;
@@ -2971,12 +2980,10 @@ Added this function declaration.
 \initials{LDF 2004.04.16.}  Moved to this file from
 \filename{scanprse.web}. 
 
-
 \initials{LDF 2004.04.16.}  Changed |metafont_output|, |png_output|, and
 |libplot_output| to |do_output[Run_State::METAFONT]|,
 |do_output[Run_State::PNG]|, and |do_output[Run_State::LIBPLOT]|,
 respectively.  
-
 
 \initials{LDF 2004.04.16.}  Moved definition to
 \filename{colors.web}.  This was necessary because it now calls

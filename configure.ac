@@ -89,12 +89,13 @@ AC_DEFINE_UNQUOTED([HAVE_GZIP], $HAVE_GZIP, d
 # Checks for libraries.
 #AC_CHECK_LIB(m, trunc)
 AC_CHECK_LIB(gsl, gsl_matrix_alloc)
+AC_CHECK_LIB(mysqlclient, mysql_init)
 
 # Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([errno.h float.h limits.h stdlib.h \
                   unistd.h pthread.h gsl/gsl_complex.h \
-                  gsl/gsl_complex_math.h gsl/gsl_matrix.h])
+                  gsl/gsl_complex_math.h gsl/gsl_matrix.h mysql.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 #AC_C_CONST

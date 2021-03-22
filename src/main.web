@@ -228,6 +228,22 @@ yywrap(void)
 }
 #endif 
 
+
+@q * (1) Database function declarations.@>
+@* Database function declarations.
+\initials{LDF 2021.03.22.}
+
+\LOG
+\initials{LDF 2021.03.22.}
+Added this section with the declaration of |submit_mysql_query|.
+\ENDLOG
+
+@<Declare database functions@>=
+#if 0 
+int
+submit_mysql_query(string query_str);
+#endif 
+
 @q * Actions in |main|.@>
 @* Actions in {\it main\/}.
 
@@ -993,7 +1009,7 @@ main(int argc, char *argv[])
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "Entering `main()'.";
+      cerr_strm << thread_name << "Entering `main'.";
       log_message(cerr_strm);
       cerr_message(cerr_strm); 
       cerr_strm.str(""); 
@@ -1766,6 +1782,7 @@ if (!(SILENT_GLOBAL || QUIET_GLOBAL))
 @c
 @<Include files@>@;
 @<Declare scanning and parsing functions@>@;
+@<Declare database functions@>@;
 @<Main@>@;
 @<Define scanning and parsing functions@>@;
 

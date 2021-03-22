@@ -283,6 +283,9 @@ Now including \filename{limits}.
 #include <stdlib.h>
 #endif 
 
+#ifdef HAVE_MYSQL_H
+#include <mysql.h>
+#endif 
 
 @ \filename{streambuf.h} is included above, if |LDF_GCC_2_95| is
 defined, instead of \filename{ios}, which is included in all other

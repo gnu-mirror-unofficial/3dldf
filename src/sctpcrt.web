@@ -228,7 +228,7 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
-  volatile bool DEBUG = false; /* |true| */ @; 
+  volatile bool DEBUG = true; /* |false| */ @; 
 
   stringstream cerr_strm;
 
@@ -249,7 +249,6 @@ Scanner_Type::create(string str,
     }
 #endif
   
-
 @q ** (2) Set up input and output streams.@>      
 
 @*1  Set up input and output streams.
@@ -572,6 +571,68 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
   scanner_node->output_pending.value_1 = 0;
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+@q ** (2) Data members for the database. @>      
+
+@*1  Data members for the database.
+\initials{LDF 2021.03.22.}
+
+@<Define |Scanner_Type::create|@>=
+
+#ifdef HAVE_LIBMYSQLCLIENT
+  scanner_node->result = 0;
+  scanner_node->curr_row = 0;
+  scanner_node->mysql = 0;
+  scanner_node->row_ctr = 0; 
+  scanner_node->field_ctr = 0;
+  scanner_node->affected_rows = 0;
+#endif 
+
+  scanner_node->mysql = mysql_init(0);
+
+  if (scanner_node->mysql != 0) 
+  {
+     if (DEBUG)
+     {
+        cerr_strm << thread_name << "In `Scanner_Type::create()':"
+                  << endl
+                  << "mysql_init succeeded." << endl; 
+        cerr_message(cerr_strm); 
+     }
+  }
+  else
+  {
+     cerr_strm << "ERROR!  In `Scanner_Type::create': `mysql_init failed'." << endl
+               << "Exiting thread unsuccessfully with exit status 0."
+               << endl;
+     cerr_message(cerr_strm); 
+#ifdef HAVE_PTHREAD_H  
+     pthread_exit(0);
+#else
+     return(0);
+#endif /* |HAVE_PTHREAD_H|  */@; 
+
+  }
+
+/* !! START HERE  */
+
+   unsigned int mysql_timeout = 120;
+
+/*  
+   // mysql_options(mysql, MYSQL_OPT_RECONNECT, 0);
+   mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
+  
+   if (!mysql_real_connect(mysql,"localhost","laurence",0,"Songs",0,NULL,0))
+     {
+       fprintf(stderr, "Failed to connect to database: Error: %s\n",
+	       mysql_error(mysql));
+     }
+
+   errno = 0;
+ */
+
+@*1 Switches.
+@<Define |Scanner_Type::create|@>=
+
   scanner_node->array_switch = false; 
   scanner_node->known_switch = false;
   scanner_node->action_switch = 0;
@@ -581,6 +642,8 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
   scanner_node->in->up = 0;
   
   scanner_node->in->filename = in_filename;
+
+
 
   if (in_file != static_cast<ifstream*>(0))
     { 
