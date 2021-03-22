@@ -163,7 +163,7 @@ dummy_SOURCES = dummy.cxx
 
 # $(3dldfsp_CWEB_files) 
 
-EXTRA_DIST = check_scan_parse_output.sh \
+EXTRA_DIST = check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web patterns.web prelims.web runit \
@@ -327,9 +327,8 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ circles.h++ cncsctlt.h++ co
                      primes.h++ pspglb.h++ rectangs.h++ rhtchdrn.h++ \
                      scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
-                     utility.h++
-	@echo "Compiling 'parser.c++'.  This may take awhile ... "
-	$(CXXCOMPILE) -c -o $@ $<
+                     utility.h++ compile_parser.sh
+	./compile_parser.sh "$(CXXCOMPILE)"
 
 #### *** (3) parser2
 
@@ -974,6 +973,27 @@ sample2.mp : sample2.ldf
 prog: 
 	-rm *.h *.c
 	$(MAKE) 3dldf$(EXEEXT)
+
+.PHONY: headers
+
+headers:
+	make arc.h++  circles.h++ cncsctlt.h++  colors.h++ complex.h++ cones.h++ conicsct.h++ \
+             conveps.h++ crclslc.h++ creatnew.h++ cuboid.h++ \
+             curves.h++ cwebbisn.h++ cylinder.h++ dashptrn.h++ \
+             ddchdrn.h++ deftfncs.h++ ellipses.h++ ellpsoid.h++ \
+             ellpsslc.h++ figures.h++ glyphs.h++ gsltmplt.h++ \
+             helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
+             loader.h++ main.h++ matrices.h++ nurbs.h++ origami.h++ \
+             parabola.h++ parabold.h++ paraellp.h++ parahypr.h++ \
+             parser2.h++ paths.h++ patterns.h++ pctfncs0.h++ pens.h++ \
+             pictures.h++ planes.h++ plyhdslc.h++ pntrvcf0.h++ \
+             pntrvctr.h++ points.h++ polygons.h++ polyhed.h++ \
+             predctes.h++ primes.h++ prrfnc0.h++ pspglb.h++ \
+             rectangs.h++ rhtchdrn.h++ scanner2.h++ scanprse.h++ \
+             scanprsf.h++ scan.h++ sctpcrt.h++ sctpfncs.h++ shapes.h++ \
+             solfaced.h++ solids.h++ spheres.h++ sphrdevl.h++ \
+             transfor.h++ triangle.h++
+
 
 #### *** (3) purge.
 
