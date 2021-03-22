@@ -14,6 +14,99 @@
 @node Getting Started, Data Types, Invoking, Top
 @chapter Getting Started
 
+The syntax of the 3DLDF language is based on that of @MF{} and @MP{}.  The code for
+a @dfn{figure} is enclosed between calls to @code{beginfig} and @code{endfig},
+as in @MP{}:
+
+@example
+beginfig(1);
+(drawing commands)
+endfig;
+@end example
+
+3DLDF, among other things, defines numerous data types corresponding to different @dfn{shapes}
+that can be drawn.  The simplest of these, and the basis for all other shape-types is
+@code{point}.
+
+A @code{point} is like a @code{pair} in @MF{} and @MP{} except that it represents a point
+in three-dimensional space.  It therefore contains an x-, y-, and z-coordinate.  However,
+@code{point} has an additional w-coordinate for use in @dfn{projections} (@pxref{Projections}).
+Currently, the only projection implemented is the @dfn{perspective projection}.
+
+@code{points} can be assigned to using the @code{:=} operator:
+
+@example
+point p;
+p := (1, 2, 3);
+@end example
+
+The @code{:=} operator must be used because @code{=} has a special meaning in @MF{} and @MP{}:
+@MF{} and @MP{} can solve linear equations interactively and the @code{=} operator
+will only assign a value to a variable if this doesn't contradict the results of previous
+operations pertaining to it.  While it would be desirable to implement this feature, 3DLDF,
+like most other programming languages,  does not implement it (and may never do so).  The author
+is not a mathematician and does not know what would be involved in implementing it.
+3DLDF defines considerably more, and more complex, data types than @MF{} and @MP{} and
+it might not be practicable to implement this feature, even for someone with considerably
+greater mathematical skills than the author.
+
+As in @MF{} and @MP{}, the @code{:=} operator is used for @dfn{assignments} in 3DLDF.
+
+The value of variables in a run of 3DLDF can be output using the @code{show} command:
+
+@example
+show p;
+@print{}  point: (1.00000000, 2.00000000, 3.00000000)
+@end example
+
+Please note that the w-coordinate is not shown by @code{show [point]}.
+It can, however, be output by using the @code{wpart} operator:
+
+@example
+show wpart p;
+@print{} >> 1
+@end example
+
+It cannot, however, be assigned to!
+
+The data type that is next highest in complexity to @code{point} is @code{path}.
+Just as in @MF{} and @MP{} @code{paths} consist of @code{pairs} joined by
+@dfn{connectors}, in 3DLDF, they consist of @code{points} joined by connectors:
+
+@example
+point p, q;
+p := (1, 2, 3);
+q := (4, 5, 6);
+path r;
+r := p .. q;
+show r;
+@print{} >> path:
+type:  PATH_TYPE
+surface_hiding_ctr:  0
+decomposition_level:  0
+points.size() == 2
+connectors.size() == 1
+(1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+fill_draw_value == 0
+`fill_color_vector' == 0
+`draw_color_vector' == 0
+`pen_vector' == 0
+`dash_pattern_vector' == 0
+`arrow' == `Path::NO_ARROW'.
+@end example
+
+Paths can be drawn:
+
+@example
+draw r;
+@end example
+
+@result{}
+
+
+
+
+
 @c * (1) Emacs-Lisp code for use in indirect buffers
 
 @c (progn (ignore (quote

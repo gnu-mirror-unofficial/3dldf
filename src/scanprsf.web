@@ -16681,6 +16681,12 @@ Scan_Parse::numeric_primary_rule_func_1(int point_part,
          cerr_strm << "`YPART'.";
       else if (point_part == ZPART)
          cerr_strm << "`ZPART'.";
+      cerr_strm << endl;
+
+      cerr_strm << "`WPART' == " << WPART << endl
+                << "`XPART' == " << XPART << endl
+                << "`YPART' == " << YPART << endl
+                << "`ZPART' == " << ZPART << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -16704,9 +16710,13 @@ Removed the |goto| I used before.
 
   if (point_part >= WPART && point_part <= ZPART)
     {
-      i = point_part - WPART;
-      c = i + 'w';
-      r = p->get_coord(c);
+        i = point_part - WPART;
+        c = i + 'w';
+#if 0
+        cerr << "i == " << i << endl
+             << "c == " << c << endl;
+#endif
+        r = p->get_coord(c);
     }
 
 @q ******* (7) Error handling for the case that point_part has an invalid value.  @>
@@ -16715,7 +16725,7 @@ Removed the |goto| I used before.
 
 @<Define |Scan_Parse| functions@>=
 
-  else  /* |!(point_part >= WPART && point_part <= ZPART)|  */
+  else  /* |!(point_part >= 0 && point_part <= 3)|  */
     {
 
 #if 1       

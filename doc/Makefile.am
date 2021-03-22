@@ -95,7 +95,7 @@ info: 3dldf.info
 	makeinfo 3dldf.texi
 
 3dldf.html: $(SOURCES_MANUAL)
-	makeinfo --html --no-split 3dldf.texi
+	makeinfo --force --html --no-split 3dldf.texi
 
 #### .PHONY: html-split
 
