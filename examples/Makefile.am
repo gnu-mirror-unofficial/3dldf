@@ -1,10 +1,10 @@
-#### 3DLDF-2.0.3/examples/Makefile.am
+#### 3DLDF-2.0.4/examples/Makefile.am
 #### Created by Laurence D. Finston (LDF) Mon Nov  4 18:55:22 CET 2013
 
 #### * Copyright and License.
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-#### Copyright (C) 2013, 2014 The Free Software Foundation
+#### Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, The Free Software Foundation
 
 #### GNU 3DLDF is free software; you can redistribute it and/or modify 
 #### it under the terms of the GNU General Public License as published by 

@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #### check_scan_parse_output.sh
-#### 3DLDF-2.0.3/src/check_scan_parse_output.sh
+#### 3DLDF-2.0.4/src/check_scan_parse_output.sh
 
 #### Created by Laurence D. Finston (LDF) Sun May 19 16:48:34 CEST 2013
 

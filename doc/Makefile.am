@@ -60,7 +60,7 @@ SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypes.texi dttypidx.texi fdl-1.3.te
 
 EXTRA_DIST = 3dldf.ps 3dldf.pdf 3dldf.dvi 3dldf.html 3dldf.info $(SOURCES_MANUAL) texinfo.tex
 
-all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split manual_install
+all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split # install_manual
 
 .PHONY: dvi
 
@@ -117,11 +117,10 @@ TAGS: $(SOURCES_MANUAL)
 query:
 	echo "SOURCES_MANUAL == $(SOURCES_MANUAL)"
 
-
 3dldf.info.gz: 3dldf.info
 	gzip -k 3dldf.info
 
-manual_install: 3dldf.info.gz
+install_manual: 3dldf.info.gz
 	sudo cp 3dldf.info.gz /usr/share/info
 
 ## Local Variables:
