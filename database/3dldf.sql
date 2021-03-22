@@ -8,28 +8,50 @@ drop table points;
 
 create table points
 (
-    title varchar(128) unique not null,
+    w_coord_world float not null default 0.0,	
+    x_coord_world float not null default 0.0,
+    y_coord_world float not null default 0.0,
+    z_coord_world float not null default 0.0,
+    w_coord_user float not null default 0.0,	
+    x_coord_user float not null default 0.0,
+    y_coord_user float not null default 0.0,
+    z_coord_user float not null default 0.0,
+    w_coord_view float not null default 0.0,	
+    x_coord_view float not null default 0.0,
+    y_coord_view float not null default 0.0,
+    z_coord_view float not null default 0.0,
+    w_coord_pre_projective float not null default 0.0,	
+    x_coord_pre_projective float not null default 0.0,
+    y_coord_pre_projective float not null default 0.0,
+    z_coord_pre_projective float not null default 0.0,
+    w_coord_projective float not null default 0.0,	
+    x_coord_projective float not null default 0.0,
+    y_coord_projective float not null default 0.0,
+    z_coord_projective float not null default 0.0,
+    draw_dot_value int not null default 0,
+    do_output boolean not null default false,
+    measurement_units varchar(16) not null default "cm"
+    
 );
 
-alter table Songs add column operetta varchar(64) default null after opera;
+alter table points add column operetta varchar(64) default null after opera;
 
-show columns from Songs.Songs;
+show columns from 3dldf.points;
 
-/* Insert into `Songs'  */
+/* Insert into `points'  */
 
 /* ***************************************************** */
 
-insert into Songs (title, music, lead_sheet, recordings)
+insert into points (x_coord_world, y_coord_world, z_coord_world, w_coord_world)
 values
-("Abends in der Taverna", "Werner Bochmann", true, 1);
+(1, 2, 3, 1);
 
 #### *****************************************************
 
 /* Select  */
 
-select * from Songs order by title asc\G
-
-select title from Songs where words_and_music = "Irving Berlin"\G
+select x_coord_world, y_coord_world, z_coord_world, w_coord_world from points
+order by x_coord_world asc\G
 
 /* Local Variables: */
 /* mode:SQL */
