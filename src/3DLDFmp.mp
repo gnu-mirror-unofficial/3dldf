@@ -63,17 +63,17 @@ defaultdy:=.75cm;
   
 %input 3DLDFput.mp 
 
-%% * (1) Now inputting `sample2.mp' instead of `sample1.mp' or `sample0.mp'.
+%% * (1) Now inputting `sample1.mp' instead of `sample2.mp' or `sample0.mp'.
 %%       `sample0.ldf' has gotten so large that I've switched 
-%%       to using `sample2.ldf' for the current sample code.  When I'm done with it,
+%%       to using `sample1.ldf' for the current sample code.  When I'm done with it,
 %%       I'm now putting it into `sample1.ldf'.  It's easier to search `sample2.ldf'
 %%       if the older samples are removed.
 %% 
 %%       LDF 2007.09.19.
 
 %input sample0.mp 
-%input sample1.mp 
-input sample2.mp 
+input sample1.mp 
+%input sample2.mp 
 
 %input stars.mp 
 

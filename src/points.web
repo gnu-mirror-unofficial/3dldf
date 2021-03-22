@@ -8928,14 +8928,15 @@ magnitude() const;
 real
 Point::magnitude() const
 {
-  bool DEBUG = true;  /* |false| */
+  bool DEBUG = false;  /* |true| */
   
   real r    = 0.0;
   real temp = 0.0;
 
   Point a(*this);
 
-  a.show("a:");
+  if (DEBUG)
+     a.show("a:");
 
 /* START HERE  */ 
 
@@ -8961,8 +8962,9 @@ Point::magnitude() const
   r = a.world_coordinates[0] * a.world_coordinates[0];
   temp = a.world_coordinates[1] * a.world_coordinates[1];
 
-  cout << "r    == " << r << endl
-       << "temp == " << temp << endl;
+  if (DEBUG)
+     cout << "r    == " << r << endl
+          << "temp == " << temp << endl;
 
   if (MAX_REAL - r < temp)
     {

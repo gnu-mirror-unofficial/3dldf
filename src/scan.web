@@ -2709,8 +2709,12 @@ Added this section.
                             sscanf(s.str().c_str(), "%lf", 
                                                     &(value->real_value));
 #else
-                            sscanf(s.str().c_str(), "%f", 
-                                                    &(value->real_value));
+                            {
+                               float f = static_cast<float>(value->real_value);
+
+                               sscanf(s.str().c_str(), "%f", 
+                                                       &f);
+                            }
 #endif
 
 #if DEBUG_COMPILE

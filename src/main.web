@@ -966,7 +966,7 @@ main(int argc, char *argv[])
 
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @;
+  bool DEBUG = false; /* |true| */ @;
 #endif /* |DEBUG_COMPILE|  */@; 
 
   string thread_name = "";
@@ -1042,7 +1042,7 @@ main(int argc, char *argv[])
      if (DEBUG)
         cerr << "Calling System::get_second_largest<float>" << endl;
   
-     MAX_REAL = System::get_second_largest<float>(FLT_MAX, 23, 31, true);
+     MAX_REAL = System::get_second_largest<float>(FLT_MAX, 23, 31, false);  /* |true| (|verbose|)  */
 
      if (DEBUG)
         cerr << "After call to System::get_second_largest<float>" << endl;

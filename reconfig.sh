@@ -8,7 +8,8 @@
 #### Usage:  reconfig.sh [ARG_0 [ARG_1]]
 ####
 #### Arguments:
-####             ARG_0:  If 0, build shared libraries.  Otherwise, don't build shared libraries.
+####             ARG_0:  If 0 or absent, build shared libraries.
+####                     Otherwise, don't build shared libraries.
 ####             ARG_1:  If present, call 'make' after 'configure'.
 
 if test $# -gt 0 

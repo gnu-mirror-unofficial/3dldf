@@ -259,7 +259,7 @@ Added this section.
 @q =%expect 1@>@/
 @q =%locations@>@/
 @q =%glr-parser@>@/
-@=%pure_parser@>@/
+@=%define api.pure@>@/
 @=%parse-param {yyscan_t parameter}@>@;@/
 @=%lex-param {yyscan_t parameter}@>@;@/
 @=/* %token_table */@>@/ 

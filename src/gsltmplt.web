@@ -124,9 +124,7 @@ template <class Real>
 Real
 System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool verbose)
 {
-   verbose = true;
-
-   cerr.precision(6);
+   cerr.precision(8);
 
    float f;
 
@@ -182,6 +180,7 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
     {
       if (verbose)
         cerr << "Real_EQ_UINT\n";
+
       typedef unsigned int i_type;
       i_type result;
 
@@ -190,9 +189,10 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 
       @<Calculate second-largest |Real|@>@;
 
-      cerr << "Here I am.  After exiting @@<Calculate second-largest |Real|@@>" << endl
-           << "*rp == " << *rp << endl 
-           << "f   == " << f << endl;
+      if (verbose)
+         cerr << "Here I am.  After exiting @@<Calculate second-largest |Real|@@>" << endl
+              << "*rp == " << *rp << endl 
+              << "f   == " << f << endl;
     }
       
   else if (Real_EQ_ULONG)
@@ -277,7 +277,8 @@ System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool v
 
 @<Calculate second-largest |Real|@>=
 {
-  cerr << "Entering |@@<Calculate second-largest |Real|@@>|." << endl;
+  if (verbose)
+     cerr << "Entering |@@<Calculate second-largest |Real|@@>|." << endl;
 
   Real r = MAX_VAL;
 

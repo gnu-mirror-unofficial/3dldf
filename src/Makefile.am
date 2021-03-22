@@ -184,7 +184,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
               ldf_1.log 
  
-AM_CXXFLAGS = -fpermissive
+AM_CXXFLAGS = -fpermissive -fdiagnostics-show-option -Wno-return-type
 
 # AM_LDFLAGS = -lgsl -lgslcblas -lm #### Using this didn't work.  LIBS must passed 
 #                                   #### to 'configure'.  LDF 2013.11.06.
@@ -309,7 +309,7 @@ parser.y++ parser_1.h++: parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 
 
 parser.c++ parser.h++: parser.y++ 
-	$(YACC) --debug -d -o parser.cxx $<
+	$(YACC) -Wno-yacc --debug -d -o parser.cxx $<
 	./check_scan_parse_output.sh parser.cxx parser.c++
 	./check_scan_parse_output.sh parser.hxx parser.h++
 	touch $@
@@ -926,7 +926,7 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 run: 3dldf$(EXEEXT)
-	touch sample2.ldf
+	touch sample1.ldf
 	-rm 3DLDFtex.dvi 3DLDFtex.ps
 	$(MAKE) 3DLDFtex.ps
 
@@ -950,22 +950,22 @@ run: 3dldf$(EXEEXT)
 	@echo "Running dvips on 3DLDFtex.dvi to create 3DLDFtex.ps."
 	dvips -o 3DLDFtex.ps 3DLDFtex
 
-3DLDFtex.dvi : 3DLDFtex.tex 3DLDFtex.bas 3DLDFmp.mp sample2.mp
+3DLDFtex.dvi : 3DLDFtex.tex 3DLDFtex.bas 3DLDFmp.mp sample1.mp
 	@echo "Running MetaPost on 3DLDFmp.mp to create EPS files."
 	mpost 3DLDFmp.mp
 	@echo "Running TeX on 3DLDFtex.tex to create 3DLDFtex.dvi."
 	tex 3DLDFtex
 
 .PHONY : ldf
-ldf : sample2.mp 
+ldf : sample1.mp 
 
-sample2.mp : sample2.ldf  
+sample1.mp : sample1.ldf  
 	@echo "Running \`runit'."
 	$(SHELL) $(srcdir)/runit
-	@mv -f sample2.mp YYY.mp
-	@cp -f cpyrttex.txt sample2.mp
-	@chmod u+w sample2.mp
-	@cat YYY.mp >> sample2.mp
+	@mv -f sample1.mp YYY.mp
+	@cp -f cpyrttex.txt sample1.mp
+	@chmod u+w sample1.mp
+	@cat YYY.mp >> sample1.mp
 	@rm -f YYY.mp
 
 .PHONY: prog
