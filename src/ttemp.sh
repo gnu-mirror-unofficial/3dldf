@@ -1,46 +1,33 @@
-make rectangs.o; echo $?
-make conicsct.o; echo $?
-make ellipses.o; echo $?
-make circles.o; echo $?
-make ellpsslc.o; echo $?
-make crclslc.o; echo $?
-make parabola.o; echo $?
-make hyprbola.o; echo $?
-make cncsctlt.o; echo $?
-make helices.o; echo $?
-make origami.o; echo $?
-make patterns.o; echo $?
-make solids.o; echo $?
-make solfaced.o; echo $?
-make cuboid.o; echo $?
-make polyhed.o; echo $?
-make ddchdrn.o; echo $?
-make rhtchdrn.o; echo $?
-make plyhdslc.o; echo $?
-make cones.o; echo $?
-make cylinder.o; echo $? 
-make ellpsoid.o; echo $?
-make spheres.o; echo $? 
-make sphrdevl.o; echo $? 
-make parabold.o; echo $?
-make paraellp.o; echo $?
-make parahypr.o; echo $? 
-make glyphs.o; echo $?
-make pctfncs0.o; echo $?
-make utility.o; echo $?
-make pntrvcf0.o; echo $?
-make predctes.o; echo $?
-make scanprse.o; echo $?   
-make figures.o; echo $?   
-make parser.o; echo $?   
-make parser_1.o; echo $?   
-make scan.o; echo $?
-make scanprsf.o; echo $?
-make imetfncs.o; echo $?
-make deftfncs.o; echo $?
-make sctpcrt.o; echo $?  
-make sctpfncs.o; echo $?  
-make prrfnc0.o; echo $?
-make parser2.o; echo $?   
-make scanner2.o; echo $?   
+echo "Arg 1 == $1"
 
+
+if [ -f ./parser.o ];  
+then 
+    echo -n "parser.o exists. ";  
+    echo -n "Do you want to compile parser.c++? (y/n) ";  
+    read X; 
+    #echo "X == $X"; 
+    if test $X == "y" || test $X == "Y"; 
+    then
+	make parser.c++
+	echo "Compiling 'parser.c++'.  This may take awhile ... ";
+	$1 -c -o parser.o parser.c++
+    else 
+	echo "Not compiling 'parser.c++'.";
+    fi 
+else 
+    echo "parser.o doesn't exist.  Making parser.o"; 
+    echo "Compiling 'parser.c++'.  This may take awhile ... ";
+    $1 -c -o parser.o parser.c++
+fi
+
+#     if [[ $X -eq 'y' ]];
+#     then
+# 	echo "X == y";
+#     else
+# 	echo "X != y";
+#     fi; 
+# else
+#     echo "parser.o doesn't exist.  Making parser.o"; 
+#     echo "Compiling 'parser.c++'.  This may take awhile ... ";
+# fi

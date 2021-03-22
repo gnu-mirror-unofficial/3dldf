@@ -5,6 +5,8 @@
 
 #### Created Mon 22 Mar 2021 08:44:22 AM CET by Laurence D. Finston (LDF)
 
+#echo $1
+
 if [ -f ./parser.o ];  
 then 
     echo -n "parser.o exists. ";  
