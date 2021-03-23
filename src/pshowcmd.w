@@ -3567,11 +3567,14 @@ Added this rule.
     cerr_strm.str("");
 #else
  
+    if (scanner_node->database_options.empty())
+       scanner_node->database_options.push_back(ALL);
+
     status = scanner_node->show_database();
  
     if (status != 0)
     {
-       cerr_strm << "*** Parser:  ERROR! In rule `command --> SHOW DATABASE':"
+       cerr_strm << "*** Parser:  ERROR! In rule `command --> SHOW DATABASE database_option_list':"
                  << "`Scanner_Type::show_database' failed, returning " << status 
                  << endl
                  << "Failed to show database.  Continuing." << endl;
@@ -3581,7 +3584,7 @@ Added this rule.
     }
     else if (DEBUG)
     {
-       cerr_strm << "*** Parser:  In rule `command --> SHOW DATABASE':"
+       cerr_strm << "*** Parser:  In rule `command --> SHOW DATABASE database_option_list':"
                  << "`Scanner_Type::show_database' succeeded, returning 0."
                  << endl;
        log_message(cerr_strm);
@@ -3621,7 +3624,20 @@ Added this rule.
 @<Define rules@>=
 @=database_option_list: /*  Empty  */@>@/
 {
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `database_option_list: EMPTY'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
    if (scanner_node)
       scanner_node->database_options.clear();   
@@ -3641,6 +3657,21 @@ Added this rule.
 @<Define rules@>=
 @=database_option_list: database_option_list database_option@>@/
 {
+
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG)
+     {
+       cerr_strm << "*** Parser: Rule `database_option_list: database_option_list database_option'.";
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+       
+     }
+#endif /* |DEBUG_COMPILE|  */@;
+
    @=$$@> = 0; 
 };
 
@@ -3657,7 +3688,7 @@ Added this type declaration.
 @=%type <int_value> database_option@>
 
 @q *** (3) database_option: POINTS.@>
-@*2 \§database option>$\longrightarrow$ \.{POINTS}.
+@*2 \§database option>$\longrightarrow$ \.{ALL}.
 \initials{LDF 2021.03.23.}
 
 \LOG
@@ -3668,7 +3699,20 @@ Added this rule.
 @<Define rules@>=
 @=database_option: ALL@>@/
 {
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `database_option: ALL'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
    if (scanner_node)
       scanner_node->database_options.push_back(ALL);
@@ -3688,7 +3732,20 @@ Added this rule.
 @<Define rules@>=
 @=database_option: POINTS@>@/
 {
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `database_option: POINTS'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
    if (scanner_node)
       scanner_node->database_options.push_back(POINTS);
@@ -3708,16 +3765,25 @@ Added this rule.
 @<Define rules@>=
 @=database_option: PATHS@>@/
 {
+  @<Common declarations for rules@>@;
 
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `database_option: PATHS'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
    if (scanner_node)
       scanner_node->database_options.push_back(PATHS);
 
    @=$$@> = 0;
 };
-
-
 
 @q * (0)@>
 
