@@ -48,9 +48,7 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
- 
 @q * (0) Numeric expressions.  @>
 @** Numeric expressions.
 \initials{LDF 2004.10.01.}
@@ -79,7 +77,6 @@ Changed |variable| to |numeric_variable|.
 The way it was before caused reduce/reduce conflicts when I tried to 
 use |variable| in the rule for |point_primary|.
 
-
 \initials{LDF 2004.05.03.}
 @:BUG FIX@> BUG FIX: 
 Changed this rule to account for the fact that
@@ -106,7 +103,6 @@ when one tries to show an ``unknown |numeric|''.
 @=numeric_atom: numeric_variable@>
 {
 
-
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
@@ -116,13 +112,11 @@ when one tries to show an ``unknown |numeric|''.
 
     }  /* |if (entry == 0 || entry->object == 0)| */
 
-
   else /* |entry != 0| */
  
       @=$$@> = *static_cast<real*>(entry->object);
  
 };
-
 
 @q ***** (5) numeric_argument.  @>
 @*4 \§numeric argument>.
@@ -135,7 +129,6 @@ when one tries to show an ``unknown |numeric|''.
 @q !! TO DO:  @>
 Add this case.  \initials{LDF 2004.04.28.}
 \ENDTODO 
-
 
 @q ***** (5) numeric_token_atom.  @>
 @*4 \§numeric token atom>.
@@ -173,7 +166,6 @@ Changed this rule.  It now uses |numeric_single| rather than
 `\.{\LP}' \§numeric expression> `\.{\RP}' explicitly.
 \ENDLOG 
 
-
 @<Define rules@>= 
 @=numeric_atom: numeric_single@>
 {
@@ -181,9 +173,6 @@ Changed this rule.  It now uses |numeric_single| rather than
   @=$$@> = @=$1@>;
 
 };
-
-
-
 
 @q **** (4) Numeric token atom.  @>
 @*3 \§numeric token atom>.
@@ -244,13 +233,11 @@ Print out context.
       cerr_strm << "Division by 0.  Setting <numeric token atom> to 0."
                 << "Will try to continue.";
 
-
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
       @=$$@> = ZERO_REAL;
-
 
     } /* |if (@=$3@> == 0)|  */
   
@@ -285,7 +272,6 @@ Print out context.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4) Numeric primary.  @>
 @*3 \§numeric primary>.
@@ -324,7 +310,6 @@ Added this rule.
 
 };
 
-
 @*4 \§numeric primary> $\longrightarrow$ \.{MAGNITUDE} \§numeric primary>.
 \initials{LDF 2007.06.20.}
 
@@ -340,7 +325,6 @@ Added this rule.
   @=$$@> = fabs(@=$2@>);
 
 };
-
 
 @q ***** (5) numeric_primary LENGTH numeric_primary.  @>
 
@@ -400,9 +384,6 @@ Added this rule.
     } /* |else| (|p != 0|)  */
 
 };
-
-
-
 
 @q ***** (5) numeric_primary --> MAGNITUDE point_primary.@>
 
@@ -560,10 +541,6 @@ Added this rule.
 
 };
 
-
-
-
-
 @q ***** (5) numeric_primary --> LENGTH parabola_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{LENGTH} \§parabola primary>.
@@ -573,7 +550,6 @@ Added this rule.
 \initials{LDF 2005.11.09.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=numeric_primary: LENGTH parabola_primary@>@/
@@ -599,7 +575,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=numeric_primary: SIZE parabola_primary@>@/
 {
@@ -624,7 +599,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=numeric_primary: SIZE hyperbola_primary@>@/
 {
@@ -638,7 +612,6 @@ Added this rule.
    delete p;
 
 };
-
 
 @q ***** (5) numeric_primary --> LENGTH polygon_primary.  @>
 
@@ -673,7 +646,6 @@ Added this rule.
 \initials{LDF 2005.12.11.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=numeric_primary: SIZE polygon_primary@>@/
@@ -753,7 +725,6 @@ Added this rule.
 
    delete e;
 
-
 };
 
 @q ***** (5) numeric_primary --> SIZE sphere_primary.  @>
@@ -787,8 +758,6 @@ Now calling |Scan_Parse::sphere_size_func|.
 Added this rule.  It currently contains a dummy action.
 \ENDLOG
 
-
-
 @<Define rules@>=
 @=numeric_primary: SIZE paraboloid_primary@>@/
 {
@@ -799,8 +768,6 @@ Added this rule.  It currently contains a dummy action.
    @=$$@> = ZERO_REAL;
 
 };
-
-
 
 @q ***** (5) numeric_primary --> SIZE polyhedron_primary.  @>
 
@@ -825,11 +792,6 @@ Added this rule.
    delete p;
 
 };
-
-
-
-
-
 
 @q ***** (5) numeric_primary --> LENGTH string_primary.  @>
 
@@ -905,8 +867,6 @@ Added this rule.
 
 };
 
-
-
 @q ***** (5) numeric_primary --> SIZE numeric_vector_primary.@>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§numeric vector primary>.
@@ -953,8 +913,6 @@ Added this rule.
 
 };
 
-
-
 @q ***** (5) numeric_primary --> SIZE string_vector_primary.@>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§string vector primary>.
@@ -977,7 +935,6 @@ Added this rule.
    delete sv;
 
 };
-
 
 @q ***** (5) numeric_primary --> SIZE pen_vector_primary.@>
 
@@ -1025,8 +982,6 @@ Added this rule.
    delete pv;
 
 };
-
-
 
 @q ***** (5) numeric_primary --> SIZE color_vector_primary.@>
 
@@ -1099,7 +1054,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) numeric_primary --> SIZE point_vector_primary.@>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§point vector primary>.
@@ -1122,7 +1076,6 @@ Added this rule.
    delete pv;
 
 };
-
 
 @q ***** (5) numeric_primary --> SIZE bool_point_vector_primary.  @>
 
@@ -1286,9 +1239,6 @@ Added this rule.
 
 };
 
-
-
-
 @q ***** (5) numeric_primary --> SIZE nurb_vector_primary.@>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} 
@@ -1382,7 +1332,6 @@ Added this rule.
    delete pv;
 
 };
-
 
 @q ***** (5) numeric_primary --> SIZE reg_polygon_vector_primary.@>
 
@@ -1517,7 +1466,6 @@ Added this rule.
 @=numeric_primary: SIZE picture_vector_variable@>@/
 {
 
-
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
 @q ******* (7) Error handling:  |entry == 0|.@> 
@@ -1577,7 +1525,6 @@ Added this rule.
 @=numeric_primary: SIZE macro_vector_variable@>@/
 {
 
-
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
 @q ******* (7) Error handling:  |entry == 0|.@> 
@@ -1620,7 +1567,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) numeric_primary --> point_part point_primary.@>
 
 @*4 \§numeric primary> $\longrightarrow$ \§point part> \§point primary>.
@@ -1655,7 +1601,6 @@ Removed code from this rule.  Now calling
 
 };
 
-
 @q ***** (5) numeric_primary --> point_part transform_primary.@>
 
 @*4 \§numeric primary> $\longrightarrow$ 
@@ -1682,8 +1627,7 @@ Removed code from this rule.  Now calling
   else if (part == WPART)
     @=$$@> = t->get_element(3, 3);
 
-  
-  else
+else
     {
 #if 0 
       cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1703,9 +1647,7 @@ Removed code from this rule.  Now calling
 
     } /* |else|  */
 
-
   delete t;
-
 
 };
 
@@ -1732,7 +1674,6 @@ Removed code from this rule.  Now calling
   else if (part == XZPART)
     @=$$@> = t->get_element(2, 0);
 
-
   else if (part == YXPART)
     @=$$@> = t->get_element(0, 0);
 
@@ -1741,7 +1682,6 @@ Removed code from this rule.  Now calling
 
   else if (part == YZPART)
     @=$$@> = t->get_element(2, 0);
-
 
   else if (part == ZXPART)
     @=$$@> = t->get_element(0, 0);
@@ -1752,7 +1692,6 @@ Removed code from this rule.  Now calling
   else if (part == ZZPART)
     @=$$@> = t->get_element(2, 0);
 
-
   else if (part == WXPART)
     @=$$@> = t->get_element(0, 0);
 
@@ -1761,7 +1700,6 @@ Removed code from this rule.  Now calling
 
   else if (part == WZPART)
     @=$$@> = t->get_element(2, 0);
-
 
   else
     {
@@ -1783,8 +1721,6 @@ Removed code from this rule.  Now calling
       @=$$@> = INVALID_REAL;
 
     } /* |else|  */
-
-
 
   delete t;
 
@@ -1873,11 +1809,9 @@ Now setting \§numeric primary> to 0 if \§color part> is
 
     } /* |else|  */
 
-
   delete c;
 
 };
-
 
 @q **** (4) point_part.@>
 @*3 \§point part>.
@@ -1889,7 +1823,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> point_part@>@/
-
 
 @q ***** (5) point_part --> XPART.  @>
 @ \§point part> $\longrightarrow$ \.{XPART}.
@@ -1965,7 +1898,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> transform_part@>@/
- 
 
 @q ***** (5) transform_part --> XXPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{XXPART}.
@@ -2000,7 +1932,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) transform_part --> XZPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{XZPART}.
 \initials{LDF 2004.10.07.}
@@ -2017,7 +1948,6 @@ Added this rule.
   @=$$@> = XZPART;
 
 };
-
 
 @q ***** (5) transform_part --> YXPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{YXPART}.
@@ -2053,8 +1983,6 @@ Added this rule.
 
 };
 
-
-
 @q ***** (5) transform_part --> YZPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{YZPART}.
 \initials{LDF 2004.10.07.}
@@ -2072,7 +2000,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) transform_part --> ZXPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{ZXPART}.
 \initials{LDF 2004.10.07.}
@@ -2089,7 +2016,6 @@ Added this rule.
   @=$$@> = ZXPART;
 
 };
-
 
 @q ***** (5) transform_part --> ZYPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{ZYPART}.
@@ -2125,7 +2051,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) transform_part --> WXPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{WXPART}.
 \initials{LDF 2004.10.07.}
@@ -2142,7 +2067,6 @@ Added this rule.
   @=$$@> = WXPART;
 
 };
-
 
 @q ***** (5) transform_part --> WYPART.@> 
 @*4 \§transform part> $\longrightarrow$ \.{WYPART}.
@@ -2236,7 +2160,6 @@ Added this rule.
   @=$$@> = BLUE_PART;
 
 };
-
 
 @q ***** (5) color_part --> YELLOW_PART.  @>
 @ \§color part> $\longrightarrow$ \.{YELLOW\_PART}.
@@ -2422,7 +2345,6 @@ Program the |UNIFORMDEVIATE| case.
 } /* End of rule |@=numeric_operator numeric_primary@>|.  */
 ;
 
-
 @q ***** (5) numeric_primary --> LAST numeric_vector_expression.@>
 
 @*4 \§numeric primary> $\longrightarrow$ 
@@ -2540,8 +2462,6 @@ Added this rule.
 
 };
 
-
-
 @q ***** (5) numeric_primary --> GET_DIAMETER circle_expression.  @>
 
 @ \§numeric primary> $\longrightarrow$ \.{GET\_DIAMETER}
@@ -2569,7 +2489,6 @@ Added this rule.
      @=$$@> = INVALID_REAL;
 
 };
-
 
 @q ***** (5) numeric_primary --> CIRCUMFERENCE circle_expression.  @>
 
@@ -2619,7 +2538,6 @@ Add this rule.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> numeric_operator@>@/
-
 
 @q ***** (5) numeric_operator --> SQRT.@>
 @*4 \§numeric operator> $\longrightarrow$ \.{SQRT}.
@@ -2725,7 +2643,6 @@ Added this rule.
   @=$$@> = ARCSIND;
 
 };
-
 
 @q ****** (6) numeric_operator --> ARCCOSD.@>
 
@@ -2871,7 +2788,6 @@ Added this rule.
   
 };
 
-
 @q ***** (5) numeric_secondary --> numeric_secondary @>
 @q ***** (5) TIMES numeric_variable.                 @>
 
@@ -2882,7 +2798,6 @@ Added this rule.
 \initials{LDF 2004.12.07.}
 Added this rule.
 \ENDLOG
-
 
 @q ****** (6) Definition.@> 
 
@@ -2905,8 +2820,6 @@ Added this rule.
          @=$$@> = INVALID_REAL;
             
       } /* |if (entry == 0 || entry->object == 0)|  */
-
-
 
 @q ******* (7) |entry != 0 && entry->object != 0|.@> 
 
@@ -2940,7 +2853,6 @@ Multiplication without \.{TIMES}.
 Added this rule.
 \ENDLOG
 
-
 @q ****** (6) Definition.@> 
 
 @<Define rules@>= 
@@ -2962,8 +2874,6 @@ Added this rule.
          @=$$@> = INVALID_REAL;
             
       } /* |if (entry == 0 || entry->object == 0)|  */
-
-
 
 @q ******* (7) |entry != 0 && entry->object != 0|.@> 
 
@@ -2993,7 +2903,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @q ****** (6) Definition.@> 
 
 @<Define rules@>= 
@@ -3015,7 +2924,6 @@ Added this rule.
             
       } /* |if (entry == 0 || entry->object == 0)|  */
 
-
 @q ******* (7) |entry != 0 && entry->object != 0|.@> 
 
 @ |entry != 0 && entry->object != 0|.
@@ -3026,8 +2934,6 @@ Added this rule.
    else  /* |entry != 0 && entry->object != 0|  */
       {
          real* r = static_cast<real*>(entry->object);
- 
-
 
 @q ******** (8) Error handling:  |*r == 0|.@> 
 
@@ -3042,7 +2948,6 @@ Added this rule.
 
          } /* |if (*r == 0)|  */
 
-
 @q ******** (8) @> 
 
       else /* |*r != 0|  */
@@ -3051,7 +2956,6 @@ Added this rule.
             @=$$@> = @=$1@> / *r;  
 
          } /* |else| (|*r != 0|)  */
-
 
       }   /* |else| (|entry != 0 && entry->object != 0|)  */
 
@@ -3086,7 +2990,6 @@ Added this rule.
 
           cerr_strm << "ERROR! ";
 
-
 #if 0 
           if (scanner_node->in->type == Io_Struct::FILE_TYPE)
             cerr_strm << "In input file `" << scanner_node->in->filename << "' "
@@ -3117,12 +3020,9 @@ Added this rule.
                 << i << ".\nSetting <numeric_secondary> to 0. "
                 << "Will try to continue.\n";
 
-
-
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
-
 
     }  /* |else|  */  
   
@@ -3140,7 +3040,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */ 
 
 };
-
 
 @q ***** (5) numeric_secondary --> point_secondary @>
 @q ***** (5) DOT_PRODUCT point_primary.            @>
@@ -3165,7 +3064,6 @@ Added this rule.
   Point* q = static_cast<Point*>(@=$3@>);  
 
   real r;
-
 
         r = p->dot_product(*q);  
 
@@ -3215,7 +3113,6 @@ debugging and error output thread-safe.
     Point* p = static_cast<Point*>(@=$1@>); 
     Point* q = static_cast<Point*>(@=$3@>); 
 
-
 @q ****** (6)  Error handling:  |p == 0 || q == 0|.  @>
 
 @ Error handling.  |p == 0 || q == 0|.
@@ -3229,7 +3126,6 @@ debugging and error output thread-safe.
         @=$$@> = INVALID_REAL;
 
       }  /* |if (p == 0 || q == 0)|  */@;
-
 
 @q ******* (7)  Error handling.  |*p == *q|.  @>
 
@@ -3256,7 +3152,6 @@ debugging and error output thread-safe.
                             
     @=$$@> = p->angle(*q);
 
-
 @q ******* (7) Delete |p| and |q| and exit rule.@>
 
 @ Delete |p| and |q| and exit rule.
@@ -3267,7 +3162,6 @@ debugging and error output thread-safe.
   delete p;
   
   delete q;
-
 
 };
 
@@ -3486,7 +3380,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) numeric_secondary --> point_secondary  @>
 @q ***** (5) LOCATION cone_primary.            @>
 
@@ -3522,7 +3415,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) numeric_secondary --> point_secondary  @>
 @q ***** (5) LOCATION cylinder_primary.            @>
 
@@ -3553,7 +3445,6 @@ Added this rule.
    delete c;   
 
 };
-
 
 @q ***** (5) numeric_secondary --> point_secondary @>
 @q ***** (5) DISTANCE_TO_PLANE path_primary.       @>
@@ -3600,7 +3491,6 @@ Removed debugging code.
 \initials{LDF 2004.10.23.}
 
 @<Define rules@>=
-
 
    else /* |q->is_planar() == true|  */
       {
@@ -3656,9 +3546,7 @@ Removed debugging code.
 
          @=$$@> = br.second;
 
-
      }  /* |if (q && p && q->is_linear())|  */
-
 
    else /* |!(q && p && q->is_linear())|  */
       {
@@ -3679,8 +3567,6 @@ Removed debugging code.
 
 };
 
-
-
 @q **** (4) times_or_over.  @>
 @ \§times or over>. 
 
@@ -3700,7 +3586,6 @@ Removed debugging code.
 #endif /* |DEBUG_COMPILE|  */
   
   @=$$@> = TIMES;
-
 
 }
 ;
@@ -3790,9 +3675,6 @@ Added this rule.
    @=$$@> = @=$1@> - @=$3@>;
 
 };
-
-
-
 
 @q ***** (5) numeric_tertiary pythagorean_plus_or_minus numeric_secondary@>
 
@@ -4054,7 +3936,6 @@ subtraction to work.
 
   @=$$@> = @=$1@>;
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     cerr << "$$ == " << @=$$@> << endl;
@@ -4212,7 +4093,6 @@ Changed |scanner_node->token_real_vector| to |scanner_node->numeric_list_real_ve
 
 };
 
-
 @q ***** (5) numeric_operator --> PLUS.  @>
 @*4 \§numeric operator> $\longrightarrow$ 
 \.{PLUS}.
@@ -4248,7 +4128,6 @@ Now setting the semantic value of the rule to |MINUS|.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -4257,7 +4136,6 @@ Now setting the semantic value of the rule to |MINUS|.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q abbrev-mode:t                      @>

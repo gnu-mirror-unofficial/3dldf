@@ -47,8 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * Additional scanning and parsing functions.@>
 @** Additional scanning and parsing functions\quad 
@@ -131,7 +129,6 @@ Added this file.
 #include "parser_1.h++"   
 #include "scan.h++"
 
-
 @q * |Scan_Parse| functions.@>
 @* {\bf Scan\_Parse} functions.
 
@@ -145,7 +142,6 @@ Scan_Parse
 {
   @<Declare |Scan_Parse| functions@>@;
 };
-
 
 @q ** (2) |variable_func|.@>
 @*1 {\bf variable\_func}.
@@ -185,7 +181,6 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
                           int local_YYEMPTY)
 {
 
-
   string thread_name;
   
 #ifdef HAVE_PTHREAD_H  
@@ -216,7 +211,6 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
 
     } /* |else| (Not using threads).  */
 
-
 #else /* |HAVE_PTHREAD_H| is undefined.  */@; 
   
   thread_name = "";
@@ -235,14 +229,12 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   String_Bool return_value;
 
   return_value.second = false;
 
   return_value.first = tag;
   return_value.first += suffix;
-
 
   Id_Map_Entry_Node entry = scanner_node->lookup(return_value.first.c_str());
 
@@ -257,7 +249,6 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
           cerr_strm.str("");
 
         } /* |if (entry == 0)|  */
-
 
       else /* (|entry != 0|)  */
         {
@@ -274,7 +265,6 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
                         << endl << "   `entry->object' == 0";
               cerr_message(cerr_strm);
               cerr_strm.str("");
-
 
             } /* |if (entry->object == 0)|  */
 
@@ -369,7 +359,6 @@ Normally there should be one.  However, if there isn't, i.e.,
   return return_value;
 }
 
-
 @q ** (2) |label_point_command|.@>
 @*1 {\bf label\_point\_command}.
 
@@ -431,7 +420,6 @@ Scan_Parse::label_point_command(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
-
   bool error_stop_value   = true;
   bool warning_stop_value = true;
   string thread_name      = "";
@@ -440,7 +428,6 @@ Scan_Parse::label_point_command(Scanner_Node scanner_node,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q **** (4).@>
 
@@ -457,7 +444,6 @@ Scan_Parse::label_point_command(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
   int status;
-
 
 @q **** (4) Error handling.  |position == 0|.@> 
 @ Error handling.  |position == 0|.
@@ -496,8 +482,6 @@ Added this section.
 
       }  /* |if (position == 0)|  */
 
-
-
 @q **** (4) Determine whether to use dot or not.@>
 @ Determine whether to use dot or not.
 \initials{LDF 2004.08.16.}
@@ -528,8 +512,6 @@ Added this section.
 
     } /* |else| (Invalid value for |label_or_dotlabel|.)  */
 
- 
-
 @q **** (4) |!dot && dot_color|.  Delete |dot_color| and set it to 0.@>   
 @ |!dot && dot_color|.  Delete |dot_color| and set it to 0.
 \initials{LDF 2005.01.31.}
@@ -541,7 +523,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    if (!dot && dot_color)
       {
          delete dot_color;
@@ -552,13 +533,9 @@ Added this section.
 @
 @<Define |Scan_Parse| functions@>=
 
-
-    
-  string position_str;
+string position_str;
 
   Picture* picture_ptr;
-
-
 
 @q ***** (5) Error handling for |entry == 0 || entry->object == 0|.@>
 @ Error handling for |entry == 0 || entry->object == 0|
@@ -593,8 +570,6 @@ Added this section.
       return 1;
 
     } /* |if (entry == 0 || entry->object == 0)|  */
-
-
 
 @q **** (4) Set |position_str|.@>   
 @ Set |position_str|.
@@ -641,14 +616,12 @@ Added this section.
                 << "Invalid `label_suffix': " << label_suffix
                 << ". Will use \"\" and continue.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
       
       break;
     }  /* |switch (label_suffix)|  */
-
 
 @q **** (4) Try to lock |entry->mutex|.@>
 @ Try to lock |entry->mutex|.  Exit function upon failure.
@@ -750,7 +723,6 @@ Added this section.
                 << "and will try to unlock `entry->mutex' "
                 << "and exit function, with return value 1.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
@@ -820,7 +792,6 @@ Added this section.
                 << endl 
                 << "and exit function with return value 1.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
@@ -830,7 +801,6 @@ Added this section.
       delete text_color;
       delete dot_color;
       delete position;
-
 
       text_str = 0;
       transform = 0;
@@ -885,7 +855,6 @@ Added this section.
                 << endl 
                 << "Deleting pointers and exiting function with return value 1.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
@@ -919,7 +888,6 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q **** (4) Exit |Scan_Parse::label_point_command| successfully.@>   
 @ Exit |Scan_Parse::label_point_command| successfully.
 
@@ -952,8 +920,6 @@ Added this section.
    return 0;
 
 } /* End of |Scan_Parse::label_point_command| definition.  */
-
-
 
 @q ** |label_path_command|.@>
 @*1 {\bf label\_point\_command}.
@@ -1008,7 +974,6 @@ Scan_Parse::label_path_command(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
-
   bool error_stop_value   = true;
   bool warning_stop_value = true;
   string thread_name      = "";
@@ -1018,11 +983,7 @@ Scan_Parse::label_path_command(Scanner_Node scanner_node,
                                                    &error_stop_value,
                                                    &warning_stop_value);
 
-
-
-
 @q **** (4).@>
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -1034,10 +995,9 @@ Scan_Parse::label_path_command(Scanner_Node scanner_node,
       cerr_message(cerr_strm); 
       cerr_strm.str(""); 
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-  int status;
+int status;
 
 @q **** (4) Error handling:  |Path* ppath == 0|.@> 
 @ Error handling:  |Path* ppath == 0|.
@@ -1070,7 +1030,6 @@ Added this section.
 
       }  /* |if (ppath == 0)|  */
 
-
 @q **** (4) Determine whether to use dot or not.@>
 @ Determine whether to use dot or not.
 \initials{LDF 2004.10.08.}
@@ -1100,8 +1059,6 @@ Added this section.
       dot = false;
 
     } /* |else| (Invalid value for |label_or_dotlabel|.)  */
-
- 
 
 @q **** (4) @>   
 @
@@ -1139,8 +1096,6 @@ Added this section.
       return 1;
 
     } /* |if (entry == 0 || entry->object == 0)|  */
-
-
 
 @q **** (4) Set |position_str|.@>   
 @ Set |position_str|.
@@ -1187,14 +1142,12 @@ Added this section.
                 << "Invalid `label_suffix': " << label_suffix
                 << ". Will use \"\" and continue.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
       
       break;
     }  /* |switch (label_suffix)|  */
-
 
 @q **** (4) Try to lock |entry->mutex|.@>
 @ Try to lock |entry->mutex|.  Exit function upon failure.
@@ -1287,7 +1240,6 @@ Added this section.
                 << endl 
                 << "and exit function, returning 1.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
@@ -1316,7 +1268,6 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q **** (4) Make labels.@>   
 @ Make labels.
 \initials{LDF 2004.10.08.}
@@ -1331,7 +1282,6 @@ Added this section.
                dot_color,
                dot,
                scanner_node);
-
 
 @q **** (4) Try to unlock |picture_ptr->mutex|.@>
 
@@ -1452,7 +1402,6 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q **** (4) Exit |Scan_Parse::label_path_command| successfully.@>   
 
 @ Exit |Scan_Parse::label_path_command| successfully.
@@ -1472,7 +1421,6 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   delete text_str;
   delete text_color;
   delete dot_color;
@@ -1481,8 +1429,6 @@ Added this section.
   return 0;
 
 }  /* End of |Scan_Parse::label_path_command| definition.  */   
-
-
 
 @q ** (2) |drawing_command_path|.@>
 @*1 {\bf drawing\_command\_path}.
@@ -1509,7 +1455,6 @@ int
 drawing_command_path(Scanner_Node scanner_node,
                      int basic_drawing_command,
                      Path* ppath);
-
 
 @q *** (3) Definition.@>
 @
@@ -1552,7 +1497,6 @@ Scan_Parse::drawing_command_path(Scanner_Node scanner_node,
       cerr_strm.str(""); 
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ******* (7) Error handling for the case that |ppath == 0|.@>
 @ Error handling for the case that |ppath == 0|.
@@ -1690,11 +1634,8 @@ if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
         delete ppath;
 
         @<Reset pointers on |scanner_node|@>@;
-        
 
-        return 1;
-
-
+return 1;
 
       } /* |if (entry == 0)|  */@;
 
@@ -1737,7 +1678,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
   } /* |else| (|scanner_node->picture_entry_ptr != 0|)  */
 
-
   entry = 0;
 
 @q ***** (5) Set |ddraw_color_vector| and |ffill_color|.@> 
@@ -1763,7 +1703,6 @@ Debugged this section.
    ccolor        = static_cast<Color*>(scanner_node->color_ptr); 
    ccolor_vector = static_cast<Pointer_Vector<Color>*>(
                       scanner_node->color_vector_ptr); 
-
 
    ddraw_color        = static_cast<Color*>(scanner_node->draw_color_ptr); 
    ddraw_color_vector = static_cast<Pointer_Vector<Color>*>(
@@ -1793,19 +1732,16 @@ Debugged this section.
                ddraw_color_vector->append_copy(ddraw_color); 
             }      
 
-
          else if (ccolor != static_cast<Color*>(0))
             {
                 ddraw_color_vector->append_copy(ccolor);
             }  
-
 
          else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
                   && ccolor_vector->ctr > 0)
             {
                 ddraw_color_vector->append_copy(*ccolor_vector);
             }  
-
 
           else 
              {
@@ -1821,7 +1757,6 @@ Debugged this section.
                     ddraw_color_vector->append_copy(&Colors::black);
              }
 
-
       }  /* |else| (|ddraw_color_vector == 0|)  */ 
 
 @q ****** (6) Set |ffill_color|.@> 
@@ -1833,7 +1768,6 @@ Debugged this section.
      if (ffill_color != static_cast<Color*>(0))
         scanner_node->fill_color_ptr = 0;
 
-
       else /* |ffill_color == 0|  */
          {
 
@@ -1844,7 +1778,6 @@ Debugged this section.
             if (   ffill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                 && ffill_color_vector->ctr > 0)
                {
-
 
                    *ffill_color = *(ffill_color_vector->v[0]);
                    
@@ -1858,7 +1791,6 @@ Debugged this section.
                }
 
 @q ******* (7) @> 
-
 
             else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0)
                      && ccolor_vector->ctr > 0)
@@ -1901,9 +1833,6 @@ Debugged this section.
 @q ******* (7) @> 
 
       }  /* |else| (|ffill_color == 0|)  */
-
-
-
 
 @q ***** (5) Check |scanner_node->pen_vector_ptr|.  @>
 @ Check |scanner_node->pen_vector_ptr|.
@@ -1953,7 +1882,6 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
             } /* |if (scanner_node->pen_ptr == 0)|  */
 
-
 @q ******* (7) @> 
 
          else /* (|scanner_node->pen_ptr != 0|)  */
@@ -1971,11 +1899,9 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
                 *ppen_vector += ppen;
             }
 
-
 @q ******* (7) @> 
 
      }     /* |else| (|scanner_node->pen_vector_ptr == 0|)  */
-
 
 @q ***** (5) Check |scanner_node->dash_pattern_vector_ptr|.  @>
 @ Check |scanner_node->dash_pattern_vector_ptr|.
@@ -2007,16 +1933,13 @@ Added this section.
 
 @q ******** (8) @> 
 
-
                 if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
                    {
                        ddash_pattern = *(scanner_node->current_dash_pattern);
 
                    }  /* |if (*(scanner_node->current_dash_pattern) != 0)|  */
 
-
 @q ******** (8) @> 
-
 
              } /* |if (scanner_node->dash_pattern_ptr == 0)|  */
 
@@ -2037,7 +1960,6 @@ Added this section.
               *ddash_pattern_vector += ddash_pattern; 
            }
 @q ******* (7) @> 
-
 
      }  /* |else| (|scanner_node->dash_pattern_vector_ptr == 0|)  */
 
@@ -2071,7 +1993,6 @@ Now setting |ddraw_color_vector = 0|.
       || basic_drawing_command == DRAWDBLARROW)
     {
 
-
 #if DEBUG_COMPILE
    if (DEBUG) 
      {
@@ -2096,7 +2017,6 @@ Now setting |ddraw_color_vector = 0|.
        else if (basic_drawing_command == DRAWDBLARROW)
          arrow = Path::DOUBLE_ARROW;
 
-
        ppath->draw(*ppicture, ddraw_color_vector, ddash_pattern_vector, ppen_vector, arrow);
 
        delete ffill_color;
@@ -2104,9 +2024,7 @@ Now setting |ddraw_color_vector = 0|.
 
        ddraw_color_vector = 0;
 
-
     } /* |if (basic_drawing_command == DRAW)|  */
-
 
 @q ***** (5) FILL@>
 @ \.{FILL}.
@@ -2118,7 +2036,6 @@ Now setting |ffill_color_vector = 0|.
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>= 
-
 
   else if (basic_drawing_command == FILL)
     {
@@ -2174,18 +2091,14 @@ Now setting |ddraw_color_vector = 0| and |ffill_color_vector = 0|.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
    ppath->filldraw(*ppicture, ddraw_color_vector, ffill_color,
                    ddash_pattern_vector, ppen_vector);
-
 
    ddraw_color_vector = 0;
    ffill_color        = 0;
 
-
  } /* |else if (basic_drawing_command == FILLDRAW)|  */
 
-  
 @q ***** (5) UNDRAW.@>
 @ \.{UNDRAW}.
 \initials{LDF 2004.06.02.}
@@ -2215,8 +2128,7 @@ Now setting |ddraw_color_vector = 0| and |ffill_color_vector = 0|.
      delete ffill_color; 
      ffill_color = 0;
 
-     
-   } /* |else if (basic_drawing_command == UNDRAW)|  */
+} /* |else if (basic_drawing_command == UNDRAW)|  */
   
 @q ***** (5) UNFILL.@>
 @ |UNFILL|.
@@ -2247,9 +2159,7 @@ Now setting |ddraw_color_vector = 0| and |ffill_color_vector = 0|.
        delete ffill_color; 
        ffill_color = 0;
 
-
      } /* |else if (basic_drawing_command == UNFILL)|  */
-
 
 @q ***** (5) UNFILLDRAW.@>
 @ |UNFILLDRAW|.
@@ -2281,8 +2191,7 @@ instead of |ddraw_color|.
 
          ppath->unfilldraw(*ppicture, ddraw_color_vector, ddash_pattern_vector, ppen_vector);
 
- 
-         delete ffill_color; 
+delete ffill_color; 
          ffill_color = 0;
 
        } /* |else if (basic_drawing_command == UNFILLDRAW)|  */
@@ -2310,7 +2219,6 @@ instead of |ddraw_color|.
       ppath->clear();
       delete ppath;
 
-
       delete ddraw_color_vector;
       ddraw_color_vector = 0;
 
@@ -2333,7 +2241,6 @@ instead of |ddraw_color|.
   delete ppath;
 
   @<Reset pointers on |scanner_node|@>@;
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -2402,8 +2309,6 @@ Scan_Parse::drawing_command_solid(Scanner_Node scanner_node,
                                                    &warning_stop_value);
 
 @q **** (4).@>
-
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -2527,11 +2432,8 @@ Check |scanner_node->picture_entry_ptr|.
         delete ssolid;
 
         @<Reset pointers on |scanner_node|@>@;
-        
 
-        return 1;
-
-
+return 1;
 
       } /* |if (entry == 0)|  */@;
 
@@ -2574,9 +2476,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
   } /* |else| (|scanner_node->picture_entry_ptr != 0|)  */
 
-
   entry = 0;
-
 
 @q ***** (5) Check |scanner_node->color_vector_ptr|.  @>
 @ Check |scanner_node->color_vector_ptr|.
@@ -2637,7 +2537,6 @@ Added this section.
 Added this section.
 \ENDLOG
 
-
 @<Define |Scan_Parse| functions@>=
 
          catch (bad_alloc)
@@ -2662,20 +2561,16 @@ Added this section.
         
                 throw;
 
-
             }  /* |catch (bad_alloc)|  */
 
 @q ******** (8) @> 
-
 
 /* !! Porting:  LDF 2008.10.09.  */
      
      Color* temp_color_ptr = new Color;
      *temp_color_ptr       =  *static_cast<Color*>(scanner_node->color_ptr); 
 
-
      *ccolor_vector_ptr += temp_color_ptr;
-
 
      scanner_node->color_ptr = 0;
 
@@ -2684,7 +2579,6 @@ Added this section.
 @q ******* (7) @> 
 
   } /* |if (scanner_node->color_vector_ptr == 0)|  */@;
-
 
 @q ****** (6) |scanner_node->color_vector_ptr != 0|.  @>
 @ |scanner_node->color_vector_ptr != 0|.
@@ -2721,7 +2615,6 @@ Added this section.
     scanner_node->color_vector_ptr = 0;
 
    }  /* |else| (|scanner_node->color_vector_ptr != 0|)  */@;
-
 
 @q ***** (5) Check |scanner_node->draw_color_vector_ptr|.  @>
 @ Check |scanner_node->draw_color_vector_ptr|.
@@ -2807,11 +2700,9 @@ Added this section.
         
                 throw;
 
-
             }  /* |catch (bad_alloc)|  */
 
 @q ******** (8) @> 
-
 
 /* !! Porting:  LDF 2008.10.09.  */
 
@@ -2825,7 +2716,6 @@ Added this section.
 @q ******* (7) @> 
 
   } /* |if (scanner_node->draw_color_vector_ptr == 0)|  */@;
-
 
 @q ****** (6) |scanner_node->draw_color_vector_ptr != 0|.  @>
 @ |scanner_node->draw_color_vector_ptr != 0|.
@@ -2850,7 +2740,6 @@ else /* |scanner_node->draw_color_vector_ptr != 0|  */
 
     ddraw_color_vector_ptr
       = static_cast<Pvc*>(scanner_node->draw_color_vector_ptr);
-
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -2884,9 +2773,7 @@ else /* |scanner_node->draw_color_vector_ptr != 0|  */
       
 #endif /* |DEBUG_COMPILE|  */@;  
 
-
   }  /* |else| (|scanner_node->draw_color_vector_ptr != 0|)  */@;
-
 
 @q ***** (5) Check |scanner_node->fill_color_vector_ptr|.  @>
 @ Check |scanner_node->fill_color_vector_ptr|.
@@ -2914,7 +2801,6 @@ else /* |scanner_node->draw_color_vector_ptr != 0|  */
                 cerr_strm.str(""); 
             }
 #endif /* |DEBUG_COMPILE|  */@;  
-
 
 @q ******* (7) Check |scanner_node->fill_color_ptr|.@> 
 
@@ -2973,11 +2859,9 @@ Added this section.
         
                 throw;
 
-
             }  /* |catch (bad_alloc)|  */
 
 @q ******** (8) @> 
-
 
 /* !! Porting:  LDF 2008.10.09.  */
 
@@ -2991,7 +2875,6 @@ Added this section.
 @q ******* (7) @> 
 
   } /* |if (scanner_node->fill_color_vector_ptr == 0)|  */@;
-
 
 @q ****** (6) |scanner_node->fill_color_vector_ptr != 0|.  @>
 @ |scanner_node->fill_color_vector_ptr != 0|.
@@ -3015,15 +2898,12 @@ Added this section.
             }
 #endif /* |DEBUG_COMPILE|  */@;  
 
-
          ffill_color_vector_ptr
             = static_cast<Pvc*>(scanner_node->fill_color_vector_ptr);
- 
 
-         scanner_node->fill_color_vector_ptr = 0;
+scanner_node->fill_color_vector_ptr = 0;
       
      }  /* |else| (|scanner_node->fill_color_vector_ptr != 0|)  */@;
-
 
 @q ***** (5) Check |ddraw_color_vector| and |ffill_color_vector| @>
 @q ***** (5) and set to |ccolor_vector|, if necessary.           @>
@@ -3054,10 +2934,9 @@ and set to |ccolor_vector|, if necessary.
           cerr_strm.str("");
                     
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      ddraw_color_vector_ptr = ccolor_vector_ptr;
+ddraw_color_vector_ptr = ccolor_vector_ptr;
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -3093,7 +2972,6 @@ is still null, set defaults.
 \initials{LDF 2004.08.30.}
 Added this section.
 \ENDLOG
-
 
 @q ****** (6) |ddraw_color_vector_ptr|.@>
 @ |ddraw_color_vector_ptr|.
@@ -3140,7 +3018,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
@@ -3160,10 +3037,8 @@ Added this section.
       ddraw_color_vector_ptr = new Pvc;
       
       ddraw_color_vector_ptr->v.push_back(const_cast<Color*>(&Colors::black));
-      
 
-    } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ******* (7) |lookup| succeeded.@> 
 @ |lookup| succeeded.
@@ -3176,7 +3051,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else /* |entry != 0|  */
     {
 
@@ -3184,8 +3058,7 @@ Added this section.
    if (DEBUG)
      {
 
- 
-        cerr_strm << thread_name 
+cerr_strm << thread_name 
                   << "In `Scan_Parse::drawing_command_solid()':"
                   << endl
                   << "Found `default_color_vector'.";
@@ -3201,7 +3074,6 @@ Added this section.
       
     }   /* |else| (|entry != 0|)  */
 
-
 @q ******* (7) End of code for setting |ddraw_color_vector_ptr|, @>  
 @q ******* (7) if necessary.                                     @>  
 
@@ -3215,9 +3087,6 @@ if necessary.
               && (   basic_drawing_command == DRAW
                   || basic_drawing_command == FILLDRAW
                   || basic_drawing_command == UNFILLDRAW))|  */
-
-
-
 
 @q ****** (6) |ffill_color_vector_ptr|.@>
 @ |ffill_color_vector_ptr|.
@@ -3281,7 +3150,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
@@ -3301,10 +3169,8 @@ Added this section.
       ffill_color_vector_ptr = new Pvc;
       
       ffill_color_vector_ptr->v.push_back(const_cast<Color*>(&Colors::black));
-      
 
-    } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ******** (8) |lookup| succeeded.@> 
 @ |lookup| succeeded.
@@ -3317,10 +3183,8 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else /* |entry != 0|  */
     {
-
 
       cerr_strm << thread_name << "In `Scan_Parse::drawing_command_solid()':"
                 << endl
@@ -3334,7 +3198,6 @@ Added this section.
       
     }   /* |else| (|entry != 0|)  */
 
-
 @q ******** (8) End of code for setting |ffill_color_vector_ptr|, @>  
 @q ******** (8) if |basic_drawing_command == FILL|.               @>  
 
@@ -3346,7 +3209,6 @@ if |basic_drawing_command == FILL|.
 
  }  /* |if (   ffill_color_vector_ptr == 0 
             && basic_drawing_command == FILL)|  */
-
 
 @q ******* (7) |basic_drawing_command == FILLDRAW|.@>  
 @ |basic_drawing_command == FILLDRAW|.
@@ -3391,7 +3253,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
@@ -3411,10 +3272,8 @@ Added this section.
       ffill_color_vector_ptr = new Pvc;
       
       ffill_color_vector_ptr->v.push_back(const_cast<Color*>(&Colors::white));
-      
 
-    } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ******** (8) |lookup| succeeded.@> 
 @ |lookup| succeeded.
@@ -3427,10 +3286,8 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else /* |entry != 0|  */
     {
-
 
       cerr_strm << thread_name << "In `Scan_Parse::drawing_command_solid()':"
                 << endl
@@ -3443,7 +3300,6 @@ Added this section.
       ffill_color_vector_ptr = static_cast<Pvc*>(entry->object);
       
     }   /* |else| (|entry != 0|)  */
-
 
 @q ******** (8) End of code for setting |ffill_color_vector_ptr|, @>  
 @q ******** (8) if |basic_drawing_command == FILLDRAW|.               @>  
@@ -3487,15 +3343,13 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@;  
-    
+#endif /* |DEBUG_COMPILE|  */@;
 
-     if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
+if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
         {
             ppen = *(scanner_node->current_pen);
 
         }  /* |if (*(scanner_node->current_pen) != 0)|  */
-
 
     } /* |if (scanner_node->pen_ptr == 0)|  */
 
@@ -3527,11 +3381,9 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
    } /* |else| (|scanner_node->pen_ptr != 0|)  */
 
-
 @q ***** (5) Check |scanner_node->dash_pattern_ptr|.  @>
 @ Check |scanner_node->dash_pattern_ptr|.
 \initials{LDF 2004.06.02.}
-
 
 \LOG
 \initials{LDF 2004.11.13.}
@@ -3562,10 +3414,7 @@ if (scanner_node->dash_pattern_ptr == static_cast<void*>(0))
 
          }  /* |if (*(scanner_node->current_dash_pattern) != 0)|  */
 
-
-
   } /* |if (scanner_node->dash_pattern_ptr == 0)|  */
-
 
 else /* (|scanner_node->dash_pattern_ptr != 0|)  */
   {
@@ -3586,7 +3435,6 @@ else /* (|scanner_node->dash_pattern_ptr != 0|)  */
 
   } /* |else| (|scanner_node->dash_pattern_ptr != 0|)  */
 
-
 @q **** (4) Check which drawing command to use.@>
 @ Check which drawing command to use
 \initials{LDF 2004.06.02.}
@@ -3599,7 +3447,6 @@ else /* (|scanner_node->dash_pattern_ptr != 0|)  */
 \initials{LDF 2004.09.05.}
 Now passing |scanner_node| as an argument to |Solid::draw|.
 \ENDLOG 
-
 
 @<Define |Scan_Parse| functions@>= 
 
@@ -3627,13 +3474,11 @@ Now passing |scanner_node| as an argument to |Solid::draw|.
 
  } /* |if (basic_drawing_command == DRAW)|  */
 
-
 @q ***** (5) FILL@>
 @ \.{FILL}.
 \initials{LDF 2004.06.02.}
 
 @<Define |Scan_Parse| functions@>= 
-
 
   else if (basic_drawing_command == FILL)
     {
@@ -3661,7 +3506,6 @@ Now passing |scanner_node| as an argument to |Solid::draw|.
 
 @<Define |Scan_Parse| functions@>= 
 
-
   else if (basic_drawing_command == FILLDRAW)
     {
 #if DEBUG_COMPILE
@@ -3677,7 +3521,6 @@ Now passing |scanner_node| as an argument to |Solid::draw|.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
    ssolid->filldraw(*ppicture,
                     ddraw_color_vector_ptr->v,
                     ffill_color_vector_ptr->v,
@@ -3686,7 +3529,6 @@ Now passing |scanner_node| as an argument to |Solid::draw|.
 
  } /* |else if (basic_drawing_command == FILLDRAW)|  */
 
-  
 @q ***** (5) UNDRAW.@>
 @ \.{UNDRAW}.
 \initials{LDF 2004.06.02.}
@@ -3737,7 +3579,6 @@ Now passing |scanner_node| as an argument to |Solid::draw|.
        ssolid->unfill(*ppicture);
 
      } /* |else if (basic_drawing_command == UNFILL)|  */
-
 
 @q ***** (5) UNFILLDRAW.@>
 @ |UNFILLDRAW|.
@@ -3810,7 +3651,6 @@ Make it do so!
       
     }  /* |else| (invalid |basic_drawing_command|).  */
 
-
 @q ***** (5) Delete |ddraw_color_vector_ptr| and/or @>   
 @q ***** (5) |ffill_color_vector_ptr|, if necessary.@>   
 
@@ -3825,7 +3665,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    if (delete_ddraw_color_vector_ptr)
       {
         ddraw_color_vector_ptr->v.clear();
@@ -3839,8 +3678,6 @@ Added this section.
         delete ffill_color_vector_ptr;
         ffill_color_vector_ptr = 0;
       }
-     
-
 
 @q **** (4) Exit function successfully.@> 
 @ Exit function successfully.
@@ -3873,7 +3710,6 @@ int
 drawing_command_sphere_development(Scanner_Node scanner_node,
                                    int basic_drawing_command,
                                    Sphere_Development*  sd);
-
 
 @q *** (3) Definition.@>
 @
@@ -3916,7 +3752,6 @@ Scan_Parse::drawing_command_sphere_development(Scanner_Node scanner_node,
       cerr_strm.str(""); 
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ******* (7) Error handling for the case that |sd == 0|.@>
 @ Error handling for the case that |sd == 0|.
@@ -4032,9 +3867,8 @@ if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
         sd = 0;
 
         @<Reset pointers on |scanner_node|@>@;
-        
 
-        return 1;
+return 1;
 
       } /* |if (entry == 0)|  */@;
 
@@ -4077,7 +3911,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
   } /* |else| (|scanner_node->picture_entry_ptr != 0|)  */
 
-
   entry = 0;
 
 @q ***** (5) Set |ddraw_color_vector| and |ffill_color|.@> 
@@ -4088,7 +3921,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
    ccolor        = static_cast<Color*>(scanner_node->color_ptr); 
    ccolor_vector = static_cast<Pointer_Vector<Color>*>(
                       scanner_node->color_vector_ptr); 
-
 
    ddraw_color        = static_cast<Color*>(scanner_node->draw_color_ptr); 
    ddraw_color_vector = static_cast<Pointer_Vector<Color>*>(
@@ -4118,19 +3950,16 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                ddraw_color_vector->append_copy(ddraw_color); 
             }      
 
-
          else if (ccolor != static_cast<Color*>(0))
             {
                 ddraw_color_vector->append_copy(ccolor);
             }  
-
 
          else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
                   && ccolor_vector->ctr > 0)
             {
                 ddraw_color_vector->append_copy(*ccolor_vector);
             }  
-
 
           else 
              {
@@ -4146,7 +3975,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                     ddraw_color_vector->append_copy(&Colors::black);
              }
 
-
       }  /* |else| (|ddraw_color_vector == 0|)  */ 
 
 @q ****** (6) Set |ffill_color|.@> 
@@ -4158,7 +3986,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
      if (ffill_color != static_cast<Color*>(0))
         scanner_node->fill_color_ptr = 0;
 
-
       else /* |ffill_color == 0|  */
          {
 
@@ -4169,7 +3996,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
             if (   ffill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                 && ffill_color_vector->ctr > 0)
                {
-
 
                    *ffill_color = *(ffill_color_vector->v[0]);
                    
@@ -4183,7 +4009,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                }
 
 @q ******* (7) @> 
-
 
             else if (   ccolor_vector != static_cast<Pointer_Vector<Color>*>(0) 
                      && ccolor_vector->ctr > 0)
@@ -4264,7 +4089,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
             } /* |if (scanner_node->pen_ptr == 0)|  */
 
-
 @q ******* (7) @> 
 
          else /* (|scanner_node->pen_ptr != 0|)  */
@@ -4282,11 +4106,9 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                 *ppen_vector += ppen;
             }
 
-
 @q ******* (7) @> 
 
      }     /* |else| (|scanner_node->pen_vector_ptr == 0|)  */
-
 
 @q ***** (5) Check |scanner_node->dash_pattern_vector_ptr|.  @>
 @ Check |scanner_node->dash_pattern_vector_ptr|.
@@ -4313,16 +4135,13 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******** (8) @> 
 
-
                 if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
                    {
                        ddash_pattern = *(scanner_node->current_dash_pattern);
 
                    }  /* |if (*(scanner_node->current_dash_pattern) != 0)|  */
 
-
 @q ******** (8) @> 
-
 
              } /* |if (scanner_node->dash_pattern_ptr == 0)|  */
 
@@ -4344,7 +4163,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
            }
 @q ******* (7) @> 
 
-
      }  /* |else| (|scanner_node->dash_pattern_vector_ptr == 0|)  */
 
 @q **** (4) Check which drawing command to use.@>
@@ -4360,7 +4178,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
   if (   basic_drawing_command == DRAW)
     {
 
-
 #if DEBUG_COMPILE
    if (DEBUG) 
      {
@@ -4374,7 +4191,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
        sd->draw(*ppicture, ddraw_color_vector, ddash_pattern_vector, ppen_vector);
 
        delete ffill_color;
@@ -4384,13 +4200,11 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
     } /* |if (basic_drawing_command == DRAW)|  */
 
-
 @q ***** (5) FILL@>
 @ \.{FILL}.
 \initials{LDF 2009.11.16.}
 
 @<Define |Scan_Parse| functions@>= 
-
 
   else if (basic_drawing_command == FILL)
     {
@@ -4450,14 +4264,11 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                    ddash_pattern_vector, ppen_vector);
 #endif 
 
-
    ddraw_color_vector = 0;
    ffill_color        = 0;
 
-
  } /* |else if (basic_drawing_command == FILLDRAW)|  */
 
-  
 @q ***** (5) UNDRAW.@>
 @ \.{UNDRAW}.
 \initials{LDF 2009.11.16.}
@@ -4493,8 +4304,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
      delete ffill_color; 
      ffill_color = 0;
 
-     
-   } /* |else if (basic_drawing_command == UNDRAW)|  */
+} /* |else if (basic_drawing_command == UNDRAW)|  */
   
 @q ***** (5) UNFILL.@>
 @ |UNFILL|.
@@ -4530,9 +4340,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
        delete ffill_color; 
        ffill_color = 0;
 
-
      } /* |else if (basic_drawing_command == UNFILL)|  */
-
 
 @q ***** (5) UNFILLDRAW.@>
 @ |UNFILLDRAW|.
@@ -4562,10 +4370,9 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
          sd->unfilldraw(*ppicture, ddraw_color_vector, ddash_pattern_vector, ppen_vector);
 
-#endif 
+#endif
 
- 
-         delete ffill_color; 
+delete ffill_color; 
          ffill_color = 0;
 
        } /* |else if (basic_drawing_command == UNFILLDRAW)|  */
@@ -4622,7 +4429,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
   @<Reset pointers on |scanner_node|@>@;
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -4639,8 +4445,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
   return 0;
 
 } /* End of |Scan_Parse::drawing_command_sphere_development| definition.  */
-
-
 
 @q ** (2) |drawing_command_path_vector|.@>
 @*1 {\bf drawing\_command\_path\_vector}.
@@ -4671,7 +4475,6 @@ int
 drawing_command_path_vector(Scanner_Node scanner_node,
                             int basic_drawing_command,
                             Pointer_Vector<Path>* pv);
-
 
 @q *** (3) Definition.@>
 @
@@ -4712,7 +4515,6 @@ Scan_Parse::drawing_command_path_vector(Scanner_Node scanner_node,
       cerr_strm.str(""); 
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q **** (4) @>   
 @
@@ -4798,11 +4600,8 @@ rules for the \§with clause list>.
         pv = 0;
 
         @<Reset pointers on |scanner_node|@>@;
-        
 
-        return 1;
-
-
+return 1;
 
       } /* |if (entry == 0)|  */@;
 
@@ -4845,9 +4644,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
   } /* |else| (|scanner_node->picture_entry_ptr != 0|)  */
 
-
   entry = 0;
-
 
 @q ***** (5) Check |scanner_node->color_vector_ptr|.  @>
 @ Check |scanner_node->color_vector_ptr|.
@@ -4865,7 +4662,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              = static_cast<Pointer_Vector<Color>*>(scanner_node->color_vector_ptr);  
 
       }  /* |if (scanner_node->color_vector_ptr != 0)|  */
-
 
 @q ****** (6) |scanner_node->color_vector_ptr == 0|.  @>
 @ |scanner_node->color_vector_ptr == 0|.
@@ -4923,14 +4719,12 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
 @q ******* (7) @> 
 
-
           if (scanner_node->color_ptr != static_cast<void*>(0))
              {
 
                  ccolor_vector->append_copy(static_cast<Color*>(scanner_node->color_ptr));  
                    
              }  /* |if (scanner_node->color_ptr != 0)|  */
-
 
 @q ******* (7) @> 
             
@@ -4943,7 +4737,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 @q ******* (7) @> 
 
       }   /* |else| (|scanner_node->color_vector_ptr == 0|)  */
-
 
 @q ***** (5) Check |scanner_node->draw_color_vector_ptr|.  @>
 @ Check |scanner_node->draw_color_vector_ptr|.
@@ -4961,7 +4754,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              = static_cast<Pointer_Vector<Color>*>(scanner_node->draw_color_vector_ptr);  
 
       }  /* |if (scanner_node->draw_color_vector_ptr != 0)|  */
-
 
 @q ****** (6) |scanner_node->draw_color_vector_ptr == 0|.  @>
 @ |scanner_node->draw_color_vector_ptr == 0|.
@@ -5016,7 +4808,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                    
              }  /* |if (scanner_node->draw_color_ptr != 0)|  */
 
-
 @q ******* (7) @> 
             
           else if (*(scanner_node->current_draw_color) != 0)
@@ -5028,7 +4819,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 @q ******* (7) @> 
 
       }   /* |else| (|scanner_node->draw_color_vector_ptr == 0|)  */
-
 
 @q ***** (5) Check |scanner_node->fill_color_vector_ptr|.  @>
 @ Check |scanner_node->fill_color_vector_ptr|.
@@ -5046,7 +4836,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              = static_cast<Pointer_Vector<Color>*>(scanner_node->fill_color_vector_ptr);  
 
       }  /* |if (scanner_node->fill_color_vector_ptr != 0)|  */
-
 
 @q ****** (6) |scanner_node->fill_color_vector_ptr == 0|.  @>
 @ |scanner_node->fill_color_vector_ptr == 0|.
@@ -5101,7 +4890,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                    
              }  /* |if (scanner_node->fill_color_ptr != 0)|  */
 
-
 @q ******* (7) @> 
             
           else if (*(scanner_node->current_fill_color) != 0)
@@ -5114,14 +4902,12 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
       }   /* |else| (|scanner_node->fill_color_vector_ptr == 0|)  */
 
-
 @q ***** (5).@>
 @
 @<Define |Scan_Parse| functions@>=
 
    if (scanner_node->color_ptr != static_cast<void*>(0))
       ccolor = static_cast<Color*>(scanner_node->color_ptr); 
-
 
 @q ****** (6).@> 
 
@@ -5193,10 +4979,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
              }
 
-
-
       }  /* |if (ffill_color_vector->ctr == 0)|  */
-
 
 @q ***** (5) Check |scanner_node->pen_vector_ptr|.  @>
 @ Check |scanner_node->pen_vector_ptr|.
@@ -5206,7 +4989,6 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 \initials{LDF 2005.03.18.}
 Added this section.
 \ENDLOG
-
 
 @<Define |Scan_Parse| functions@>=
 
@@ -5247,7 +5029,6 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
 
             } /* |if (scanner_node->pen_ptr == 0)|  */
 
-
 @q ******* (7) @> 
 
          else /* (|scanner_node->pen_ptr != 0|)  */
@@ -5265,11 +5046,9 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
                 *ppen_vector += ppen;
             }
 
-
 @q ******* (7) @> 
 
      }     /* |else| (|scanner_node->pen_vector_ptr == 0|)  */
-
 
 @q ***** (5) Check |scanner_node->dash_pattern_ptr|.  @>
 @ Check |scanner_node->dash_pattern_ptr|.
@@ -5301,16 +5080,13 @@ Added this section.
 
 @q ******** (8) @> 
 
-
                 if (*(scanner_node->current_dash_pattern) != static_cast<Dash_Pattern*>(0))
                    {
                        ddash_pattern = *(scanner_node->current_dash_pattern);
 
                    }  /* |if (*(scanner_node->current_dash_pattern) != 0)|  */
 
-
 @q ******** (8) @> 
-
 
              } /* |if (scanner_node->dash_pattern_ptr == 0)|  */
 
@@ -5332,9 +5108,7 @@ Added this section.
            }
 @q ******* (7) @> 
 
-
      }  /* |else| (|scanner_node->dash_pattern_vector_ptr == 0|)  */
-
 
 @q **** (4) @>   
 @
@@ -5345,12 +5119,9 @@ Added this section.
 
         Pointer_Vector<Color>* temp_draw_color_vector; 
 
-
         Color* temp_fill_color;
 
-
         vector<Path*>::const_iterator path_iter;
-
 
 @q **** (4) Check which drawing command to use.@>
 @ Check which drawing command to use
@@ -5372,7 +5143,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
       || basic_drawing_command == DRAWARROW
       || basic_drawing_command == DRAWDBLARROW)
     {
-
 
        unsigned short arrow;
   
@@ -5396,7 +5166,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
 
                temp_draw_color_vector->append_copy(*draw_color_iter);
 
-
                (**path_iter).draw(*ppicture, temp_draw_color_vector, 
                                   ddash_pattern_vector, ppen_vector, arrow);
 
@@ -5414,13 +5183,11 @@ Now checking for |basic_drawing_command == DRAWARROW| and
 
     } /* |if (basic_drawing_command == DRAW)|  */
 
-
 @q ***** (5) FILL@>
 @ \.{FILL}.
 \initials{LDF 2005.03.15.}
 
 @<Define |Scan_Parse| functions@>= 
-
 
   else if (basic_drawing_command == FILL)
     {
@@ -5431,7 +5198,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
 
         for(; path_iter != pv->v.end(); ++path_iter)
            {
-
 
                temp_fill_color = new Color;
             
@@ -5448,10 +5214,8 @@ Now checking for |basic_drawing_command == DRAWARROW| and
  
            }  /* |for|  */
 
-
          delete ddraw_color_vector;
          ddraw_color_vector = 0;
-
 
     } /* |else if (basic_drawing_command == FILL)|  */
 
@@ -5460,7 +5224,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
 \initials{LDF 2005.03.15.}
 
 @<Define |Scan_Parse| functions@>= 
-
 
   else if (basic_drawing_command == FILLDRAW)
     {
@@ -5503,7 +5266,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
 
     } /* |else if (basic_drawing_command == FILLDRAW)|  */
 
-  
 @q ***** (5) UNDRAW.@>
 @ \.{UNDRAW}.
 \initials{LDF 2005.03.15.}
@@ -5521,8 +5283,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
                (**path_iter).undraw(*ppicture, ddash_pattern_vector, ppen_vector);
 
            }  /* |for|  */
-
-
 
          delete ddraw_color_vector;
          ddraw_color_vector = 0;
@@ -5546,11 +5306,9 @@ Now checking for |basic_drawing_command == DRAWARROW| and
         for(; path_iter != pv->v.end(); ++path_iter)
            {
 
-
                (**path_iter).unfilldraw(*ppicture);
 
            }  /* |for|  */
-
 
          delete ddraw_color_vector;
          ddraw_color_vector = 0;
@@ -5559,7 +5317,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
          ffill_color_vector = 0;
 
      } /* |else if (basic_drawing_command == UNFILL)|  */
-
 
 @q ***** (5) UNFILLDRAW.@>
 @ |UNFILLDRAW|.
@@ -5577,11 +5334,9 @@ Now checking for |basic_drawing_command == DRAWARROW| and
         for(; path_iter != pv->v.end(); ++path_iter)
            {
 
-            
-               temp_draw_color_vector = new Pointer_Vector<Color> ;
+temp_draw_color_vector = new Pointer_Vector<Color> ;
 
                temp_draw_color_vector->append_copy(*draw_color_iter);
-
 
                (**path_iter).unfilldraw(*ppicture, temp_draw_color_vector, 
                                         ddash_pattern_vector, ppen_vector);
@@ -5594,7 +5349,6 @@ Now checking for |basic_drawing_command == DRAWARROW| and
                   draw_color_iter = ddraw_color_vector->v.begin();
 
            }  /* |for|  */
-
 
          delete ffill_color_vector;
          ffill_color_vector = 0;
@@ -5669,7 +5423,6 @@ should be discarded.
 
 @<Define |Scan_Parse| functions@>= 
 
-
 int 
 Scan_Parse::conditional(Scanner_Node scanner_node,
                         int arg)
@@ -5704,13 +5457,11 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H| */@;
 
-
 @q **** (4) @> 
 @ 
 \initials{LDF 2004.09.10.}
 
 @<Define |Scan_Parse| functions@>= 
-
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -5724,18 +5475,15 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
           cerr << "`scanner_node->if_ctr' == " << scanner_node->if_ctr 
                << endl;
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    int save_if_ctr = scanner_node->if_ctr;
-
+int save_if_ctr = scanner_node->if_ctr;
 
 @q ***** (5) |arg == 0 || arg == 2|.@> 
 @q ***** (5) Eat tokens. @> 
@@ -5806,7 +5554,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-
   if (curr_catcode == IF)
     {
 
@@ -5829,8 +5576,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
    scanner_node->if_ctr++;
 
  } /* |if (curr_catcode == IF)|  */
-
-
 
 @q ******* (7) |curr_catcode == FI|.@> 
 
@@ -5872,7 +5617,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 @:BUG FIX@> BUG FIX:  Changed |<=| to |<|.
 \ENDLOG 
 
-
 @<Define |Scan_Parse| functions@>=
 
               if (scanner_node->if_ctr < save_if_ctr)
@@ -5881,9 +5625,8 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
                   if (DEBUG)
                     {
- 
 
-                      cerr_strm << thread_name 
+cerr_strm << thread_name 
                                 << "In `Scan_Parse::conditional()':"
                                 << endl 
                                 << "`scanner_node->if_ctr' < `save_if_ctr'."
@@ -5893,21 +5636,18 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
                       cerr_message(cerr_strm);
                       cerr_strm.str("");
 
-
                     }
 #endif /* |DEBUG_COMPILE|  */@; 
                   
                   return 0;
 
-                 
-                } /* |if (if_ctr < save_if_ctr)|  */
+} /* |if (if_ctr < save_if_ctr)|  */
    
 @q ******** (8) |scanner_node->if_ctr >= save_if_ctr|.@> 
 @q ******** (8) Continue.@> 
 
 @ |scanner_node->if_ctr >= save_if_ctr|.  Continue.
 \initials{LDF 2004.09.10.}
-
 
 \LOG
 \initials{LDF 2005.04.08.}
@@ -5921,29 +5661,23 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
       if (DEBUG)
         {
- 
-          
-          cerr_strm << thread_name 
+
+cerr_strm << thread_name 
                     << "In `Scan_Parse::conditional()':"
                     << endl 
                     << "`scanner_node->if_ctr' >= `save_if_ctr'."
                     << endl << "Continuing.";
- 
-          
-          log_message(cerr_strm);
+
+log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
-
 
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       continue;
-      
 
-    }    /* |else| (|scanner_node->if_ctr >= save_if_ctr|)  */
-
+}    /* |else| (|scanner_node->if_ctr >= save_if_ctr|)  */
 
 @q ******** (8) End of |curr_catcode == FI)| case.@> 
 @ End of |curr_catcode == FI)| case.
@@ -5958,7 +5692,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 \initials{LDF 2004.09.10.}
 
 @<Define |Scan_Parse| functions@>=
-
 
           else if (curr_catcode == ELSE && arg == 0)
             {
@@ -5983,7 +5716,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 #else
               curr_catcode = yylex(&value, scanner_node); 
 #endif 
-
 
 @q ******** (8) Error handling:  |curr_catcode != COLON|.@> 
 
@@ -6028,7 +5760,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
                          continue;
                      }
 
-
 @q ********* (9) @> 
 
                   else  /* |scanner_node->if_ctr <= save_if_ctr|  */
@@ -6056,11 +5787,9 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 
              } /* |else| (|curr_catcode == COLON|)  */
 
-
 @q ******** (8) @> 
 
             } /* |else if (curr_catcode == ELSE)|  */
-
 
 @q ******* (7) |curr_catcode == ELSEIF|.@> 
 
@@ -6069,11 +5798,8 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-
-
           else if (curr_catcode == ELSEIF && arg == 0)
             {
-
 
 #if DEBUG_COMPILE
               if (DEBUG) 
@@ -6120,7 +5846,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
                 
                 continue;
 
-
               } /* |else|  */
 
 @q ******* (7) End of |for| loop.@> 
@@ -6140,7 +5865,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 @<Define |Scan_Parse| functions@>=
 
     } /* |if (arg == 0 || arg == 2)|  */
-
 
 @q ***** (5) |arg == 1|.  Continue parsing.@> 
 
@@ -6171,8 +5895,6 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
 
 } /* End of |Scan_Parse::conditional| definition.  */
 
-
-
 @q ** (2) |input_command|.@>
 @*1 {\bf input\_command}.
 
@@ -6189,7 +5911,6 @@ i.e., that single-threaded inclusion is being used.
 @q *** (3) Definition.@> 
 
 @<Define |Scan_Parse| functions@>= 
-
 
 int 
 Scan_Parse::input_command(Scanner_Node scanner_node,
@@ -6226,7 +5947,6 @@ Scan_Parse::input_command(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H| */@;
 
-
 @q **** (4) @> 
 @ 
 \initials{LDF 2004.09.10.}
@@ -6237,7 +5957,6 @@ Now declaring the automatic variable |int status|.
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -6252,7 +5971,6 @@ Now declaring the automatic variable |int status|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
     int status;
-
 
 @q **** (4) @>   
 @
@@ -6294,9 +6012,7 @@ Now declaring the automatic variable |int status|.
           cerr_message(cerr_strm);
           cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Try to create new |Scanner_Node|.@> 
 
@@ -6304,8 +6020,6 @@ Now declaring the automatic variable |int status|.
 \initials{LDF 2004.09.15.}
 
 @<Define |Scan_Parse| functions@>=
-
-
 
   Scanner_Node new_scanner_node = Scanner_Type::create(*filename,
                                                        scanner_node->run_state,
@@ -6336,7 +6050,6 @@ Now declaring the automatic variable |int status|.
 
     } /* |if (new_scanner_node == 0)|  */
 
-
 @q ****** (6) |new_scanner_node != 0|@> 
 
 @ |new_scanner_node != 0|.
@@ -6344,8 +6057,7 @@ Now declaring the automatic variable |int status|.
 
 @<Define |Scan_Parse| functions@>=
 
-      
-  else /* |new_scanner_node != 0|  */
+else /* |new_scanner_node != 0|  */
 
     {
 #if DEBUG_COMPILE
@@ -6362,20 +6074,15 @@ Now declaring the automatic variable |int status|.
           cerr_strm.str("");
           
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-       
+#endif /* |DEBUG_COMPILE|  */@;
 
-    }  /* |else| (|new_scanner_node != 0|)  */
-
-
+}  /* |else| (|new_scanner_node != 0|)  */
 
 @q ***** (5) Assign to |*new_scanner_node| from |*scanner_node|.@> 
 
 @ Assign to  |new_scanner_node| from |scanner_node|.
 Exit upon error.
 \initials{LDF 2004.09.15.}
-
 
 \LOG
 \initials{LDF 2004.09.20.}
@@ -6403,7 +6110,6 @@ figure.
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-
       delete new_scanner_node;
 
       new_scanner_node = 0;
@@ -6411,7 +6117,6 @@ figure.
       return 1;
 
     } /* |catch (Bad_Assignment_Type)|  */
-
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -6425,7 +6130,6 @@ figure.
           cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
       Id_Map_Entry_Node entry = new_scanner_node->lookup("current_picture");
 
@@ -6466,7 +6170,6 @@ figure.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) @>   
 @ 
 @<Define |Scan_Parse| functions@>=
@@ -6500,7 +6203,6 @@ figure.
 @  Set input filename.
 \initials{LDF 2004.09.20.}
 
-
 \LOG
 \initials{LDF 2004.09.20.}
 Added code for resolving the filename.
@@ -6511,7 +6213,6 @@ Added code for resolving the filename.
       ifstream* new_ifstream = new ifstream;
 
       string save_filename = *filename;
-
 
  string::size_type s = filename->find('.');
       if (s == string::npos)
@@ -6679,9 +6380,8 @@ input filename.
 
             }  /* |else| (|!(*new_ifstream)|) */
 
-        }  /* |else| (|s != string::npos|)  */ 
-  
-      
+        }  /* |else| (|s != string::npos|)  */
+
 @q ***** (5) Push |new_input_struct| onto |scanner_node->in|.@> 
 @ Push |new_input_struct| onto |scanner_node->in|.
 We must push a |SEMI_COLON| onto |scanner_node->rescan_stack|, because
@@ -6725,19 +6425,16 @@ because empty statements are valid.
 
     }  /* |else| (|!scanner_node->run_state.multithread_include|)  */
 
-
 @q **** (4) Exit function successfully with return value 0.@>   
 
 @ Exit function successfully with return value 0.
 \initials{LDF 2004.09.15.}
 
 @<Define |Scan_Parse| functions@>=
-  
 
-    return 0;
+return 0;
 
 }  /* End of |Scan_Parse::input_command| definition.  */
-                           
 
 @q ** |drawdot_command|.@>
 @*1 {\bf drawdot\_command}.
@@ -6757,7 +6454,6 @@ drawdot_command(Scanner_Node scanner_node,
                 int drawdot_or_undrawdot,
                 Point* ppoint);
 
-
 @q *** (3) Definition.@>
 @
 @<Define |Scan_Parse| functions@>=
@@ -6767,7 +6463,6 @@ Scan_Parse::drawdot_command(Scanner_Node scanner_node,
                             Point* ppoint)
 
 {
-
 
 @q **** (4) Preliminaries.@>   
 
@@ -6902,9 +6597,7 @@ if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
           
           return 1;
 
-
       } /* |if (entry == 0 || entry->object == 0)|  */@;
-
 
 @q ******* (7) Success!  |current_picture| exists.  @>
 @ Success!  |current_picture| exists.
@@ -6917,7 +6610,6 @@ if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
     }
 
   } /* |if (scanner_node->picture_entry_ptr == 0)|  */@;
-
 
 @q ****** (6) |scanner_node->picture_entry_ptr != 0|.   @>
 @ |scanner_node->picture_entry_ptr != 0|.
@@ -6948,9 +6640,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
 
   } /* |else| (|scanner_node->picture_entry_ptr != 0|)  */
 
-
   entry = 0;
-
 
 @q ***** (5) Check |scanner_node->color_ptr|.  @>
 @ Check |scanner_node->color_ptr|.
@@ -6988,14 +6678,12 @@ if (scanner_node->color_ptr == static_cast<void*>(0))
      if (*(scanner_node->current_color) != static_cast<Color*>(0))
  
         ccolor = *(scanner_node->current_color);
- 
 
-  } /* |if (scanner_node->color_ptr == 0)|  */@;
+} /* |if (scanner_node->color_ptr == 0)|  */@;
 
 @q ****** (6) |scanner_node->color_ptr != 0|.  @>
 @ |scanner_node->color_ptr != 0|.
 \initials{LDF 2004.06.21.}
-
 
 @<Define |Scan_Parse| functions@>=  
 
@@ -7017,7 +6705,6 @@ else /* |scanner_node->color_ptr != 0|  */
 #endif /* |DEBUG_COMPILE|  */@;  
 
     ccolor = static_cast<Color*>(scanner_node->color_ptr); 
-
 
   }  /* |else| (|scanner_node->color_ptr != 0|)  */@;
 
@@ -7062,9 +6749,7 @@ else
 
     ddraw_color = static_cast<Color*>(scanner_node->draw_color_ptr); 
 
-
   }
-
 
 @q ***** (5) Check |ddraw_color| and set to |ccolor|, @>
 @q ***** (5) if necessary.                            @>
@@ -7114,7 +6799,6 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
            if (*(scanner_node->current_pen) != static_cast<Pen*>(0))
               ppen = *(scanner_node->current_pen);
 
-
      }  /* |if (scanner_node->pen_ptr == 0)|  */
 
 @q ****** (6) |scanner_node->pen_ptr != 0|.@> 
@@ -7139,11 +6823,9 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
             }     
 #endif /* |DEBUG_COMPILE|  */@;  
 
-
       ppen = static_cast<Pen*>(scanner_node->pen_ptr); 
 
   }  /* |else| (|scanner_node->pen_ptr != 0|)  */
-
 
 @q **** (4) Invoke |drawdot| or |undrawdot|.@>
 @ Invoke |drawdot| or |undrawdot|.
@@ -7160,7 +6842,6 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
     {
       ppoint->undrawdot(*ppicture, ppen);
     }
-
 
 @q ***** (5) Error handling for invalid |basic_drawing_command|.@>
 @ Error handling for invalid \§basic drawing command>.
@@ -7188,9 +6869,7 @@ Now setting |ppen = *(scanner_node->current_pen)|, if
       return 1;
 
     }
-  
 
-  
 @q **** (4) Clear and delete |ppoint|,           @>
 @q **** (4) reset the pointers on|scanner_node|, @>
 @q **** (4) and exit function successfully.      @>
@@ -7210,7 +6889,6 @@ and exit function successfully.
   return 0;
 
 } /* End of |Scan_Parse::drawdot_command| definition.  */
-
 
 @q *** (3) Reset pointers on |scanner_node|.@> 
 @*2 Reset pointers on |scanner_node|.
@@ -7261,7 +6939,6 @@ latter function.
       scanner_node->draw_color_ptr = 0;
     }
 
-
   if (scanner_node->fill_color_ptr != static_cast<void*>(0))
     {
       delete static_cast<Color*>(scanner_node->fill_color_ptr);
@@ -7298,7 +6975,6 @@ Added this section.
       scanner_node->color_vector_ptr = 0;
     }
 
-
 @q **** (4) |draw_color_vector_ptr|.@> 
 @ |draw_color_vector_ptr| is persistent, so it's not deleted.
 \initials{LDF 2004.08.29.}
@@ -7316,7 +6992,6 @@ Added this section.
       scanner_node->draw_color_vector_ptr = 0;
     }
 
-
 @q **** (4) |fill_color_vector_ptr|.@> 
 @ |fill_color_vector_ptr| is persistent, so it's not deleted.
 \initials{LDF 2004.08.29.}
@@ -7333,8 +7008,6 @@ Added this section.
 
       scanner_node->fill_color_vector_ptr = 0;
     }
-
-
 
 @q ** (2) |variable_type|.@>
 @*1 {\bf variable\_type}.
@@ -7404,17 +7077,12 @@ Scan_Parse::variable_type(Scanner_Node scanner_node,
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
-
-
 @q **** (4) |entry| is an array.@>
 
 @ |entry| is an array.
 \initials{LDF 2004.08.18.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (entry != static_cast<Id_Map_Entry_Node>(0) && entry->array_flag)
     {
@@ -7433,7 +7101,6 @@ Scan_Parse::variable_type(Scanner_Node scanner_node,
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       curr_name = scanner_node->resolve_array_name(curr_name);
 
 #if DEBUG_COMPILE
@@ -7448,10 +7115,9 @@ Scan_Parse::variable_type(Scanner_Node scanner_node,
           cerr_message(cerr_strm);
           cerr_strm.str(""); 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      
-      entry = scanner_node->get_array_entry(curr_name, entry);
+entry = scanner_node->get_array_entry(curr_name, entry);
 
     } /* |if (entry != 0 && entry->array_flag)|  */
 
@@ -7517,7 +7183,6 @@ Exit with |ivp.i == 1| and |ivp.v == static_cast<void*>(0)|.
 
     } /* |if (entry == 0)|  */
 
-
 @q **** (4) Error handling for the case that |entry->type != curr_type|.@>
 
 @ Error handling for the case that |entry->type != curr_type|.
@@ -7535,11 +7200,9 @@ Issue warning and try to continue.
                 << ") != " << "(curr_type == " << name_map[curr_type]
                 << ")." << endl << "Will try to continue.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str(""); 
-
 
     } /* |if (entry != 0 && entry->type != curr_type)|  */
 
@@ -7549,7 +7212,6 @@ Issue warning and try to continue.
   return ivp;
 
 } /* End of |Scan_Parse::variable_type| definition.  */
-
 
 @q ** (2) |transformation_command_func|.@>
 @*1 {\bf transformation\_command\_func}.
@@ -7663,7 +7325,6 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
 
 @q **** (4) @>   
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -7704,7 +7365,6 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
       return 1;
 
     } /* |if (bvp.first == false)|  */
-                                                                 
 
 @q **** (4) |Scanner_Type::handle_numeric_list| succeeded.@>   
 
@@ -7735,15 +7395,13 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
 
   Transform* t = static_cast<Transform*>(bvp.second); 
 
-
 @q **** (4) Handle |Shapes|.@> 
 @ Handle |Shapes|.
 \initials{LDF 2004.09.24.}
 
 @<Define |Scan_Parse| functions@>=
-      
 
-      if (entry->is_shape())
+if (entry->is_shape())
         {
 
           Shape* s = static_cast<Shape*>(entry->object);
@@ -7761,16 +7419,13 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
           getchar(); 
           cerr_mutex.unlock(); 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-          
-        } /* |if (entry->is_shape())|  */
+#endif /* |DEBUG_COMPILE|  */@;
 
+} /* |if (entry->is_shape())|  */
 
 @q **** (4) Handle other types.@> 
 @ Handle other types..
 \initials{LDF 2004.09.24.}
-
 
 \LOG
 \initials{LDF 2004.12.02.}
@@ -7778,7 +7433,6 @@ Added code for handling |Pictures|.
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-
 
 @q ***** (5)@>  
 
@@ -7809,7 +7463,6 @@ Added code for handling |Pictures|.
       Dash_Pattern* d = static_cast<Dash_Pattern*>(entry->object);
       
       *d *= *t;
-
 
     } /* |else if (entry->type == DASH_PATTERN)|  */
 
@@ -7860,7 +7513,6 @@ Added this section.
       
     } /* |else|  */
 
-
 @q ***** (5)@>
 
 @q **** (4) Delete |Transform* t| and set it to null.@> 
@@ -7876,8 +7528,6 @@ Now deleting |Transform* t| and setting it to 0.
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-
-
 
   delete t;
   t = 0;
@@ -7998,7 +7648,6 @@ Signal an error and exit with return value 0 upon failure.
                 << endl 
                 << "Exiting function with return value 0.";
 
-
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
@@ -8006,9 +7655,8 @@ Signal an error and exit with return value 0 upon failure.
       delete t;
 
       return 0;
-      
 
-    } /* |if (   p == 0 || q == 0
+} /* |if (   p == 0 || q == 0
               || *p == INVALID_POINT || *q == INVALID_POINT)|   */@;
 
 @q **** (4) Arguments are valid.  Perform rotation.@>   
@@ -8069,7 +7717,6 @@ and
 \§transformation assignment command>''
 in \filename{ptrfcmnd.w}.
 \ENDLOG
-
 
 @q *** (3) Definition.@>
 
@@ -8139,7 +7786,6 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
 
     }  /* |if (entry == 0 || entry->object == 0)|  */
 
-
 @q **** (4) |!(entry == 0 || entry->object == 0)| @>   
 @q **** (4) (|any_variable| is valid).            @>   
 
@@ -8164,9 +7810,8 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
           cerr_strm.str("");
           
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      
 @q ***** (5) Error handling:  |t == 0|.@> 
 
 @ Error handling:  |t == 0|.
@@ -8190,10 +7835,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
 
       return 0;
 
-
     } /* |if (t == 0)|  */
-
-
 
 @q ***** (5) |t| is valid.@> 
 
@@ -8217,9 +7859,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
           cerr_strm.str("");
           
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-      
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) |entry->type == TRANSFORM|.@> 
 
@@ -8246,7 +7886,6 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
       
       *(static_cast<Transform*>(entry->object)) *= *t;
-
 
     }  /* |if (entry->type == TRANSFORM)|  */
 
@@ -8276,9 +7915,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       
       *(static_cast<Pen*>(entry->object)) *= *t;
 
-
     }  /* |else if (entry->type == PEN)|  */
-
 
 @q ****** (6) |entry->type == DASH_PATTERN|.@> 
 
@@ -8306,9 +7943,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       
       *(static_cast<Dash_Pattern*>(entry->object)) *= *t;
 
-
     }  /* |else if (entry->type == DASH_PATTERN)|  */
-
 
 @q ****** (6) |entry->type == PICTURE|.@> 
 
@@ -8341,12 +7976,7 @@ Added this section.
       
       *(static_cast<Picture*>(entry->object)) *= *t;
 
-
     }  /* |else if (entry->type == PICTURE)|  */
-
-
-
-
 
 @q ****** (6) |entry->type == CONIC_SECTION_LATTICE|.@> 
 @ |entry->type == CONIC_SECTION_LATTICE|.
@@ -8378,7 +8008,6 @@ Added this section.
       
   *(static_cast<Conic_Section_Lattice*>(entry->object)) *= *t;
 
-
   }  /* |else if (entry->type == CONIC_SECTION_LATTICE)|  */ 
 
 @q ****** (6) |entry->is_shape == true|.@> 
@@ -8407,9 +8036,7 @@ Added this section.
       
       (static_cast<Shape*>(entry->object))->operator*=(*t);
 
-
     }  /* |else if (entry->is_shape())|  */
-
 
 @q ****** (6) Error handling:  Invalid |entry->type|.@> 
 
@@ -8438,16 +8065,11 @@ Added this section.
       
     }   /* |else| (Invalid |entry->type|)  */
 
-
 @q ****** (6).@> 
 
-
     }   /* |else| (|t != 0|)  */
-     
 
 @q ***** (5).@> 
-
-
 
     }    /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
@@ -8490,8 +8112,6 @@ Scan_Parse::align_path_func(void* v, int ax, void* parameter)
    string thread_name      = "";
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
-
-
 
    if (scanner_node)
       scanner_node->get_thread_name_and_stop_values(&thread_name,
@@ -8582,15 +8202,6 @@ Scan_Parse::align_path_func(void* v, int ax, void* parameter)
 
 }  /* End of |Scan_Parse::align_path_func| definition.  */
 
-
-
-
-
-
-
-
-
-
 @q ** (2) |for_loop_func|.@>
 @*1 {\bf for\_loop\_func}.
 \initials{LDF 2004.10.28.}
@@ -8632,7 +8243,6 @@ Scan_Parse::for_loop_func(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
-
   bool error_stop_value   = true;
   bool warning_stop_value = true;
   string thread_name      = "";
@@ -8641,7 +8251,6 @@ Scan_Parse::for_loop_func(Scanner_Node scanner_node,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q **** (4).@>
 
@@ -8655,11 +8264,9 @@ Scan_Parse::for_loop_func(Scanner_Node scanner_node,
       cerr_message(cerr_strm); 
       cerr_strm.str(""); 
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-  
-  int status;
+int status;
 
 @q **** (4) Try to allocate memory for a new |Loop_Info_Type|.@>   
 @ Try to allocate memory for a new |Loop_Info_Type|.
@@ -8673,7 +8280,6 @@ Scan_Parse::for_loop_func(Scanner_Node scanner_node,
     {
        curr_loop_info_node = new Loop_Info_Type;
     }
-  
 
 @q ***** (5) Error handling:  |new Loop_Info_Type| failed.@> 
 @q ***** (5) Rethrow |bad_alloc|.                         @> 
@@ -8700,7 +8306,6 @@ Rethrow |bad_alloc|.
 
     }   /* |catch (bad_alloc)|  */
 
-
 @q ***** (5) |new Loop_Info_Type| succeeded.@> 
 @ |new Loop_Info_Type| succeeded.
 \initials{LDF 2004.10.28.}
@@ -8720,7 +8325,6 @@ Rethrow |bad_alloc|.
 
        curr_loop_info_node->step_value    = step_value;   
        curr_loop_info_node->limit_value   = limit_value;  
-
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -8776,7 +8380,6 @@ Delete |curr_loop_info_node| and rethrow |bad_alloc|.
 
 @<Define |Scan_Parse| functions@>=
 
-
   catch (bad_alloc)
     {
     
@@ -8796,7 +8399,6 @@ Delete |curr_loop_info_node| and rethrow |bad_alloc|.
 
        throw;
 
-
     }  /* |catch (bad_alloc)|  */
 
 @q ***** (5) |new Id_Map_Type| succeeded.@> 
@@ -8811,14 +8413,12 @@ Delete |curr_loop_info_node| and rethrow |bad_alloc|.
 
   scanner_node->id_map_node = id_map_node;
 
-
 @q **** (4) If |loop_type == Loop_Info_Type::FOR_TYPE|, @>   
 @q **** (4) try to allocate memory for a new |real|.    @>   
 
 @ If |loop_type == Loop_Info_Type::FOR_TYPE|, 
 try to allocate memory for a new |real|.
 \initials{LDF 2004.10.28.}
-
 
 \LOG
 \initials{LDF 2004.10.28.}
@@ -8837,8 +8437,6 @@ if |loop_type == Loop_Info_Type::FOR_TYPE|.  It's not needed if
             {
                r = new real;
             }   
-
-
 
 @q ***** (5) Error handling:  |new real| failed.   @>
 @q ***** (5) Delete |curr_loop_info_node| and      @>
@@ -8896,8 +8494,7 @@ rethrow |bad_alloc|.
  
    } /* |if (loop_type == Loop_Info_Type::FOR_TYPE)|  */
 
- 
-  unsigned int nest_ctr = 0;
+unsigned int nest_ctr = 0;
 
 @q ***** (5) Beginning of |for| loop.@>
 
@@ -8922,8 +8519,7 @@ Added |int prev_token|.
       curr_token = yylex(&value, &location, scanner_node);
 #else
       curr_token = yylex(&value, scanner_node); 
-#endif 
-      
+#endif
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -8940,8 +8536,7 @@ Added |int prev_token|.
           cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) |curr_token == END_FOR && nest_ctr == 0|.@>
 
@@ -8966,15 +8561,13 @@ Added |int prev_token|.
           cerr_strm.str("");
 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      *(scanner_node->loop_info_node->loop_strm_ptr) << " end_for;";
+*(scanner_node->loop_info_node->loop_strm_ptr) << " end_for;";
 
       break;
    
    } /* |if (curr_token == END_FOR && nest_ctr == 0)|  */
-
 
 @q ****** (6) |curr_token == END_FOR && nest_ctr > 0|.@>
 
@@ -8999,10 +8592,9 @@ Added |int prev_token|.
           cerr_strm.str("");
 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      nest_ctr--;
+nest_ctr--;
 
       *(scanner_node->loop_info_node->loop_strm_ptr) << " end_for";
 
@@ -9037,11 +8629,9 @@ Added |int prev_token|.
             cerr_strm.str("");
 
           }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-        string s;
+string s;
 
         if (curr_token == FOR)
           s = " for";
@@ -9061,7 +8651,6 @@ Added |int prev_token|.
       } /* |else if (   curr_token == FOR
                      || curr_token == FOR_SUFFIXES
                      || curr_token == FOREVER)|  */
-      
 
 @q ****** (6) Other tokens.@>
 
@@ -9143,10 +8732,9 @@ in |*(scanner_node->loop_info_node->loop_strm_ptr)|.
         case HYPHEN_PAIR:
         case HYPHEN_TRIPLE:
 
-          *(scanner_node->loop_info_node->loop_strm_ptr) << " ";     
- 
+          *(scanner_node->loop_info_node->loop_strm_ptr) << " ";
 
-        default:
+default:
           switch (prev_token)
              {
    
@@ -9192,7 +8780,6 @@ in |*(scanner_node->loop_info_node->loop_strm_ptr)|.
 
  }  /* |else| (Other tokens.)  */
 
-
 @q ****** (6) End of |for| loop.@> 
 
 @ End of |for| loop.
@@ -9228,15 +8815,12 @@ in |*(scanner_node->loop_info_node->loop_strm_ptr)|.
     = static_cast<istream*>(scanner_node->loop_info_node->loop_strm_ptr);
 
   curr_input_struct->type = Io_Struct::LOOP_STRING_TYPE;
-  
-  
- 
-  scanner_node->in = curr_input_struct;
+
+scanner_node->in = curr_input_struct;
 
   return 0;
 
 } /* End of |Scan_Parse::for_loop_func| definition.  */
-
 
 @q ** (2) |for_suffixes_loop_func|.@>
 @*1 {\bf for\_suffixes\_loop\_func}.
@@ -9288,7 +8872,6 @@ Scan_Parse::for_suffixes_loop_func(Scanner_Node scanner_node,
 
    int status;
 
-
 @q **** (4) Try to allocate memory for a new |Loop_Info_Type|.@>   
 @ Try to allocate memory for a new |Loop_Info_Type|.
 \initials{LDF 2005.01.18.}
@@ -9301,7 +8884,6 @@ Scan_Parse::for_suffixes_loop_func(Scanner_Node scanner_node,
       {
          curr_loop_info_node = new Loop_Info_Type;
       }
-  
 
 @q ***** (5) Error handling:  |new Loop_Info_Type| failed.@> 
 @q ***** (5) Rethrow |bad_alloc|.                         @> 
@@ -9327,7 +8909,6 @@ Rethrow |bad_alloc|.
          throw;
 
       }   /* |catch (bad_alloc)|  */
-
 
 @q ***** (5) |new Loop_Info_Type| succeeded.@> 
 @ |new Loop_Info_Type| succeeded.
@@ -9356,14 +8937,11 @@ Rethrow |bad_alloc|.
 
    string curr_suffix = "";
 
-
 @q **** (4).@>
-
 
    for(;;)
       {
-    
-   
+
 @q ***** (5).@> 
 
 #if 0 
@@ -9425,7 +9003,6 @@ Rethrow |bad_alloc|.
                   }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
                 curr_suffix += scanner_node->token_string;                
             }
 
@@ -9462,7 +9039,6 @@ Changed |Loop_Info_Type::vector<string> suffix_vector| to
 #endif /* |DEBUG_COMPILE|  */@; 
  
 @q **** (4).@>
-
 
    /* Move this to where I use |begingroup|!  
       LDF 2005.01.20. */
@@ -9521,7 +9097,6 @@ Changed |Loop_Info_Type::vector<string> suffix_vector| to
 
       }  /* |for(;;)|  */
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -9534,8 +9109,6 @@ Changed |Loop_Info_Type::vector<string> suffix_vector| to
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4).@>
-
-   
 
 @q **** (4).@>
 
@@ -9617,8 +9190,7 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
                          << endl 
                          << "First call.";
 
-   
-               log_message(cerr_strm); 
+log_message(cerr_strm); 
                cerr_message(cerr_strm); 
                cerr_strm.str(""); 
 
@@ -9648,9 +9220,7 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
          
        }  /* |catch (bad_alloc)|  */
 
-
 @q ***** (5).@> 
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -9665,12 +9235,9 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
          cerr_message(cerr_strm);
          cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
-         
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5).@> 
-
-
 
        curr_input_struct->up = scanner_node->in;
 
@@ -9680,7 +9247,6 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
 
        curr_input_struct->stream_ptr 
            = static_cast<istream*>(curr_stringstream);
-
 
    }  /* |if (ctr == 0)|  */
 
@@ -9712,19 +9278,15 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
 
       }  /* |else| (|ctr != 0|)  */
 
-
 @q **** (4) @>   
 
       *curr_stringstream 
          << scanner_node->loop_info_node->loop_strm_ptr->str();
 
-
       stringstream placeholder_strm;
       placeholder_strm << "¥" 
                        << scanner_node->loop_info_node->suffix_parameter 
                        << "¥";
-
-
 
       string::size_type curr_position = 0;
       string::size_type old_position;
@@ -9754,7 +9316,6 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
                                  curr_placeholder_size,
                                  curr_suffix);
 
-
          }  /* |while (curr_position != string::npos)|  */
 
 #if DEBUG_COMPILE
@@ -9779,7 +9340,6 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
 
    *curr_stringstream << replacement;
 
-
    if(scanner_node->loop_info_node->suffix_list.size() == 0)
       *curr_stringstream << "endgroup;";
 
@@ -9787,7 +9347,6 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
       scanner_node->in->stream_ptr)->str(curr_stringstream->str());
 
    scanner_node->in->stream_ptr->seekg(0);
-
 
 @q **** (4) @>   
 
@@ -9801,14 +9360,12 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
              << static_cast<stringstream*>(scanner_node->in->stream_ptr)->str()
              << endl;
 
-
         cerr << "Type <RETURN> to continue. ";
         getchar(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
  
 @q **** (4) @>   
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -9837,7 +9394,6 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
    return 0;
 
 }  /* |Scan_Parse::for_suffixes_internal_func|  */
-
 
 @q ** (2) |verbatim_metapost_func|.@>
 @*1 {\bf verbatim\_metapost\_func}.
@@ -9891,7 +9447,6 @@ Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node,
    int status;
    bool multithread_output  = scanner_node->run_state.multithread_output;
 
-
 @q ***** (5) If we're using multithreaded output,       @>
 @q ***** (5) @>
 
@@ -9904,7 +9459,6 @@ Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node,
   if (multithread_output)
 
     {
-
 
 @q ****** (6) Try to lock |scanner_node->output_pending|, set       @>  
 @q ****** (6) |scanner_node->output_pending.value_0| to |true|,     @>  
@@ -9954,14 +9508,12 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |if (status != 0)|  */
 
-
 @q ******* (7) |output_pending.lock| succeeded.@>
 
 @ |output_pending.lock| succeeded.
 \initials{LDF 2004.12.13.}
 
 @<Define |Scan_Parse| functions@>=
-
 
       else /* |scanner_node->output_pending.lock| succeeded.  */
         {
@@ -9979,7 +9531,6 @@ and increment |scanner_node->output_pending.value_1|.
               cerr_strm.str("");
             }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ******** (8) Check whether an output operation is pending.@>
 @ Check whether an output operation is pending.
@@ -10005,22 +9556,18 @@ and increment |scanner_node->output_pending.value_1|.
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       timespec timeout;
 
       timeout.tv_sec = time (0) + 300; /* Five minutes.  */
       timeout.tv_nsec = 0;
         
       status = scanner_node->output_pending.timedwait(&timeout);
-        
-
 
 @q ********* (9) Error handling:  Timout.@>
 @ Error handling:  Timout.
 \initials{LDF 2004.12.13.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (status == ETIMEDOUT)
     {
@@ -10044,7 +9591,6 @@ and increment |scanner_node->output_pending.value_1|.
 
     } /* |if (status == ETIMEDOUT)|  */
 
-
 @q ********* (9) Error handling:  |scanner_node->output_pending.timedwait| @>
 @q ********* (9) failed.                                                     @>
 
@@ -10053,10 +9599,8 @@ and increment |scanner_node->output_pending.value_1|.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (status != 0)
     {
-
 
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::verbatim_metapost_func()':"
@@ -10088,10 +9632,9 @@ and increment |scanner_node->output_pending.value_1|.
        cerr_strm.str("");
 
      } /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-       
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |while (scanner_node->output_pending.value_0)|  */
+} /* |while (scanner_node->output_pending.value_0)|  */
 
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -10114,7 +9657,6 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |else| (|scanner_node->output_pending.lock| succeeded.)  */
 
-
 @q ***** (5) Write output.@> 
 
 @ Write output.
@@ -10128,7 +9670,6 @@ and increment |scanner_node->output_pending.value_1|.
   
      *(scanner_node->out[Run_State::METAPOST]->stream_ptr) 
            << *s << endl << flush;
-            
 
 #ifdef HAVE_PTHREAD_H  
    scanner_node->out[Run_State::METAPOST]->unlock();
@@ -10144,7 +9685,6 @@ and increment |scanner_node->output_pending.value_1|.
 @<Define |Scan_Parse| functions@>= 
 
   status = scanner_node->output_pending.unlock();
-
 
 @q ******* (7) Error handling.  |output_pending.unlock| failed.@>
 
@@ -10167,14 +9707,12 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |if (status != 0)|  */
 
-
 @q ******* (7) |output_pending.unlock| succeeded.@>
 
 @ |output_pending.unlock| succeeded.
 \initials{LDF 2004.12.13.}
 
 @<Define |Scan_Parse| functions@>=
-
 
       else /* |scanner_node->output_pending.unlock| succeeded.  */
         {
@@ -10192,15 +9730,11 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |else| (|scanner_node->output_pending.unlock| succeeded.)  */
 
-
-
     } /* |if (multithread_output)|  */
-
 
 @q ***** (5) Not using multithreaded output.@>
 
 @ Not using multithreaded output.
-
 
 @<Define |Scan_Parse| functions@>=
 
@@ -10233,15 +9767,12 @@ and increment |scanner_node->output_pending.value_1|.
   
      *(scanner_node->out[Run_State::METAPOST]->stream_ptr) 
            << *s << endl << flush;
-            
 
 #ifdef HAVE_PTHREAD_H  
    scanner_node->out[Run_State::METAPOST]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
     }     /* |else | (|!multithread_output|)  */
-
 
 @q ***** (5) Exit function successfully with return value 0.@>   
 
@@ -10250,7 +9781,6 @@ and increment |scanner_node->output_pending.value_1|.
 
 @<Define |Scan_Parse| functions@>=
 
-                                                                
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -10266,7 +9796,6 @@ and increment |scanner_node->output_pending.value_1|.
 
 }  /* End of |Scan_Parse::verbatim_metapost_func|
      definition.  */
-
 
 @q ** (2) |end_group_func|.@>
 @*1 {\bf end\_group\_func}.
@@ -10318,7 +9847,6 @@ Scan_Parse::end_group_func(void* parameter)
                  << "Not decrementing `scanner_node->group_ctr' "
                  << "and continuing.";
 
-
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
@@ -10358,9 +9886,7 @@ Scan_Parse::end_group_func(void* parameter)
 
  }  /* |else| (|scanner_node->group_ctr > 0|)  */
 
-
 }  /* End of |Scan_Parse::end_group_func| definition.  */
-
 
 @q ** (2) |macro_definition_func|.@>
 @*1 {\bf macro\_definition\_func}.
@@ -10398,7 +9924,6 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
 
    using namespace Scan_Parse;
 
-
 @q ***** (5) @>   
 
 #if DEBUG_COMPILE
@@ -10417,7 +9942,6 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
 @ Error handling:  |entry == 0|.
 \initials{LDF 2004.12.29.}
 
-
 \LOG
 \initials{LDF 2005.01.03.}
 @:BUG FIX@> BUG FIX:  Now clearing 
@@ -10426,7 +9950,6 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-
 
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
@@ -10445,7 +9968,6 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
           return 1;
 
       }  /* |if (entry == 0)|  */
-
 
 @q ***** (5) |entry->object == 0|.@> 
 
@@ -10503,7 +10025,6 @@ Now setting |din->type = MACRO|.
 @q ****** (6).@> 
 
       }  /* |if (entry->object == 0)|  */
-  
 
 @q ***** (5) |entry->object != 0|.@> 
 @ |entry->object != 0|.
@@ -10572,7 +10093,6 @@ arguments with the same name that might be passed to the macro.
  
       }  /* |for|  */
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -10581,7 +10101,6 @@ arguments with the same name that might be passed to the macro.
         cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ***** (5).@> 
 
@@ -10644,9 +10163,8 @@ arguments with the same name that might be passed to the macro.
          curr_token = yylex(&value, &location, scanner_node);
 #else
          curr_token = yylex(&value, scanner_node); 
-#endif 
+#endif
 
-      
 #if DEBUG_COMPILE
          if (DEBUG)
             {
@@ -10690,7 +10208,6 @@ arguments with the same name that might be passed to the macro.
 
             } /* |if (curr_token == ENDDEF && nest_ctr == 0)|  */
 
-
 @q ******* (7) @> 
 @
 @<Define |Scan_Parse| functions@>=
@@ -10719,7 +10236,6 @@ arguments with the same name that might be passed to the macro.
                continue;
 
             } /* |else if (curr_token == ENDDEF)|  */
-
 
 @q ******* (7) @> 
 @
@@ -10753,7 +10269,6 @@ arguments with the same name that might be passed to the macro.
                             || curr_token == PRIMARYDEF
                             || curr_token == SECONDARYDEF 
                             || curr_token == TERTIARYDEF)|  */
-
 
 @q ******* (7) @> 
 
@@ -10822,10 +10337,9 @@ preceded by a space character, if necessary.
         case HYPHEN_PAIR:
         case HYPHEN_TRIPLE:
 
-          *(din->definition_strm_ptr[1]) << " ";     
- 
+          *(din->definition_strm_ptr[1]) << " ";
 
-        default:
+default:
           switch (prev_token)
              {
    
@@ -10863,7 +10377,6 @@ preceded by a space character, if necessary.
                                          << "\"";
       }
 
-
     else if (is_symbolic_token(curr_token))
        {
 #if DEBUG_COMPILE
@@ -10876,8 +10389,7 @@ preceded by a space character, if necessary.
                 cerr_message(cerr_strm);
                 cerr_strm.str("");
              }
-#endif /* |DEBUG_COMPILE|  */@; 
-           
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ******** (8) @> 
 
@@ -10951,7 +10463,6 @@ preceded by a space character, if necessary.
           if (!is_parameter)
              *(din->definition_strm_ptr[1]) << scanner_node->token_string;
 
-
        }  /* |else if (is_symbolic_token(curr_token))|  */
 
     else      
@@ -10966,7 +10477,6 @@ preceded by a space character, if necessary.
 @q ******* (7) @> 
  
       } /* |for|  */
-
 
 @q **** (4) @>   
 
@@ -11000,11 +10510,9 @@ preceded by a space character, if necessary.
 
    return 0;
 
-
 @q **** (4) @>   
 
 }  /* End of |Scan_Parse::macro_definition_func| definition.  */
-
 
 @q ** (2) |macro_vector_definition_func|.@>
 @*1 {\bf macro\_vector\_definition\_func}.
@@ -11041,9 +10549,7 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
                                                     &error_stop_value,
                                                     &warning_stop_value);
 
-  
-
-   using namespace Scan_Parse;
+using namespace Scan_Parse;
 
    int status;
 
@@ -11062,7 +10568,6 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4).@> 
-
 
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
@@ -11083,7 +10588,6 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
          return 1;
 
       }  /* |if (entry == 0)|  */
-
 
 @q **** (4) @>   
 
@@ -11126,7 +10630,6 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
 @q **** (4) @>   
 
       temp_entry->object = static_cast<void*>(d);
-
 
       try 
          {
@@ -11180,12 +10683,9 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
 
             return 1;
 
-  
-      }  /* |if (status != 0)|  */
-
+}  /* |if (status != 0)|  */
 
 @q **** (4) @>   
-
 
    else /* |status == 0|  */
       {
@@ -11201,16 +10701,14 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
                cerr_strm.str("");
 
             }    
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      }  /* |else| (|status == 0|)  */
+}  /* |else| (|status == 0|)  */
 
 @q **** (4) @>   
 
       temp_entry->object = 0;
       delete temp_entry;
-
 
       try
          {
@@ -11246,7 +10744,6 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
              throw;
      
          }  /* |catch (bad_alloc)|  */
-
 
 @q **** (4) @>   
 
@@ -11300,7 +10797,6 @@ Scan_Parse::macro_vector_definition_func(Scanner_Node scanner_node,
 
 }  /* End of |Scan_Parse::macro_vector_definition_func| definition.  */
 
-
 @q ** (2) |macro_call_func|.@>
 @*1 {\bf macro\_call\_func}.
 
@@ -11349,7 +10845,6 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
 
    using namespace Scan_Parse;
 
-
 @q **** (4) @>   
 
 #if DEBUG_COMPILE
@@ -11382,9 +10877,8 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
           scanner_node->macro_typed_parameter_vector.clear();
 
           return 1;
-         
-   
-      }  /* |if (entry == 0 || entry->object == 0)|  */
+
+}  /* |if (entry == 0 || entry->object == 0)|  */
 
 @q **** (4) @>   
 @
@@ -11393,10 +10887,8 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
    else /* |entry != 0 && entry->object != 0|  */ 
       {
 
-
           Definition_Info_Node d 
              = static_cast<Definition_Info_Node>(entry->object);
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -11428,7 +10920,6 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-
    if (   scanner_node->macro_untyped_parameter_vector.size()
        != d->untyped_parameter_ctr)
       {
@@ -11447,9 +10938,8 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
           log_message(cerr_strm);
           cerr_message(cerr_strm, error_stop_value);
           cerr_strm.str("");
-      
 
-          scanner_node->macro_untyped_parameter_vector.clear();
+scanner_node->macro_untyped_parameter_vector.clear();
           scanner_node->macro_typed_parameter_vector.clear();
 
           return 1;
@@ -11548,9 +11038,7 @@ parameters with arguments if the macro has untyped parameters, i.e.,
                       cerr << "Type <RETURN> to continue. ";
                       getchar(); 
                    }       
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6).@> 
 @
@@ -11560,7 +11048,6 @@ parameters with arguments if the macro has untyped parameters, i.e.,
 Removed the |while| loops for replacing the placeholders for the
 values of the typed parameters.  They only occur once in 
 |d->definition_strm_ptr[0]->str|, so the loops aren't needed.
-
 
 \initials{LDF 2005.01.03.}
 Added |int bracket_nest_ctr| and code for handling brackets.
@@ -11647,7 +11134,6 @@ in the |else| case of the conditional testing |curr_token|.
 
          curr_placeholder_size =  curr_placeholder.size();
 
-
          for (;;)
             {
          
@@ -11658,7 +11144,6 @@ in the |else| case of the conditional testing |curr_token|.
 #else
                  curr_token = yylex(&value, scanner_node); 
 #endif 
-
 
                  if (curr_token == RIGHT_BRACE && brace_nest_ctr == 0)
                        {
@@ -11720,7 +11205,6 @@ in the |else| case of the conditional testing |curr_token|.
                           curr_argument_strm << "{";
                           ++brace_nest_ctr;
                        }
-
 
                     else if (curr_token == LEFT_PARENTHESIS)
                        {
@@ -11812,11 +11296,9 @@ in the |else| case of the conditional testing |curr_token|.
                                    cerr_message(cerr_strm);
                                    cerr_strm.str("");         
                               }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-                           curr_position = replacement_0.find(curr_placeholder);
+curr_position = replacement_0.find(curr_placeholder);
 
                            replacement_0.replace(curr_position, 
                                                  curr_placeholder_size,
@@ -11857,14 +11339,11 @@ in the |else| case of the conditional testing |curr_token|.
                                   cerr_message(cerr_strm);
                                   cerr_strm.str("");          
                              }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-                       }  /* |else|  */
+}  /* |else|  */
 
                  }  /* |for|  */
-
-
 
 #if DEBUG_COMPILE
               if (DEBUG)
@@ -11935,7 +11414,6 @@ This is now done above anyway.
 
 @<Define |Scan_Parse| functions@>=
 
-
          catch (bad_alloc)
             {
                cerr_strm << thread_name 
@@ -11987,7 +11465,6 @@ Now putting |begingroup| and |endgroup| onto |*curr_stringstream|.
  
        scanner_node->in = curr_input_struct;
 
-
 @q ****** (6).@> 
 @
 \LOG
@@ -12003,22 +11480,16 @@ This is now done above anyway.
 
 @q ****** (6).@> 
 
-
       }  /* |else| (|   scanner_node->macro_untyped_parameter_vector.size()
                      == d->untyped_parameter_ctr|)  */
 
-
 @q ***** (5).@> 
 
-
       }  /* |else | (|entry != 0 && entry->object != 0|)  */ 
-
 
 @q **** (4) @>   
 
 }  /* End of |Scan_Parse::macro_call_func| definition.  */
-
-
 
 @q ** (2) |is_symbolic_token|.@>
 @*1 {\bf is\_symbolic\_token}.
@@ -12037,7 +11508,6 @@ Scan_Parse::is_symbolic_token(int curr_token)
 {
    return (curr_token >= SYMBOL_0 && curr_token <= SYMBOL_7) ? true : false;
 }
-
 
 @q ** (2) |clear_vector_func|.@>
 @*1 {\bf clear\_vector\_func}.
@@ -12089,7 +11559,6 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
 
    int status;
 
-
 @q **** (4) @>   
 
 #if DEBUG_COMPILE
@@ -12130,9 +11599,8 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
 
   if (entry->subordinate_array == static_cast<Id_Map_Entry_Node>(0))
     {
-      
 
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::clear_vector_func':"
+cerr_strm << thread_name << "ERROR! In `Scan_Parse::clear_vector_func':"
                 << endl
                 << "`entry->subordinate_array' == 0."
                 << "Exiting function with return value 1.";
@@ -12145,14 +11613,12 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
 
     } /* |if (entry->subordinate_array == 0)|  */
 
-
 @q **** (4) @>   
 @
 @<Define |Scan_Parse| functions@>=
 
       status
         = entry->subordinate_array->destroy_array_subentries();
-
 
 @q **** (4) @> 
 @
@@ -12174,7 +11640,6 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
           return 1;
 
         } /* |if (status != 0)|  */
-
 
 @q **** (4) @> 
 @
@@ -12206,7 +11671,6 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
 Added this section.
 \ENDLOG
 
-
 @q ***** (5) |BOOLEAN_VECTOR|.@> 
 
 @ |BOOLEAN_VECTOR|.
@@ -12218,7 +11682,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (entry->type == BOOLEAN_VECTOR)
     {
@@ -12233,7 +11696,6 @@ Added this section.
 
     } /* |if (entry->type == BOOLEAN_VECTOR)|  */
 
-
 @q ***** (5) |NUMERIC_VECTOR|.@> 
 
 @ |NUMERIC_VECTOR|.
@@ -12245,7 +11707,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == NUMERIC_VECTOR)
     {
@@ -12259,8 +11720,6 @@ Added this section.
         }
 
     } /* |if (entry->type == NUMERIC_VECTOR)|  */
-
-
 
 @q ***** (5) |ULONG_LONG_VECTOR|.@> 
 
@@ -12299,7 +11758,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == STRING_VECTOR)
     {
       typedef Pointer_Vector<string> PV;
@@ -12313,8 +11771,6 @@ Added this section.
 
     } /* |if (entry->type == STRING_VECTOR)|  */
 
-
-
 @q ***** (5) |PEN_VECTOR|.@> 
 
 @ |PEN_VECTOR|.
@@ -12326,7 +11782,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == PEN_VECTOR)
     {
@@ -12353,7 +11808,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == DASH_PATTERN_VECTOR)
     {
       typedef Pointer_Vector<Dash_Pattern> PV;
@@ -12367,17 +11821,12 @@ Added this section.
 
     } /* |if (entry->type == DASH_PATTERN_VECTOR)|  */
 
-
-
-
-
 @q ***** (5) |COLOR_VECTOR|.@> 
 
 @ |COLOR_VECTOR|.
 \initials{LDF Undated.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == COLOR_VECTOR)
     {
@@ -12392,7 +11841,6 @@ Added this section.
 
     } /* |if (entry->type == COLOR_VECTOR)|  */
 
-
 @q ***** (5) |TRANSFORM_VECTOR|.@> 
 
 @ |TRANSFORM_VECTOR|.
@@ -12404,7 +11852,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == TRANSFORM_VECTOR)
     {
@@ -12419,7 +11866,6 @@ Added this section.
 
     } /* |if (entry->type == TRANSFORM_VECTOR)|  */
 
-
 @q ***** (5) |FOCUS_VECTOR|.@> 
 
 @ |FOCUS_VECTOR|.
@@ -12431,7 +11877,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == FOCUS_VECTOR)
     {
@@ -12445,9 +11890,6 @@ Added this section.
         }
 
     } /* |if (entry->type == FOCUS_VECTOR)|  */
-
-
-
 
 @q ***** (5) |PICTURE_VECTOR|.@>   
 
@@ -12474,7 +11916,6 @@ Added this section.
       
     } /* |if (entry->type == PICTURE_VECTOR)|  */
 
-
 @q ***** (5) |MACRO_VECTOR|.@>   
 
 @ |MACRO_VECTOR|.
@@ -12486,7 +11927,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == MACRO_VECTOR)
     {
@@ -12501,7 +11941,6 @@ Added this section.
       
     } /* |if (entry->type == MACRO_VECTOR)|  */
 
-
 @q ***** (5) |CONIC_SECTION_LATTICE_VECTOR|.@>   
 
 @ |CONIC_SECTION_LATTICE_VECTOR|.
@@ -12513,7 +11952,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == CONIC_SECTION_LATTICE_VECTOR)
     {
@@ -12528,7 +11966,6 @@ Added this section.
       
     } /* |if (entry->type == CONIC_SECTION_LATTICE_VECTOR)|  */
 
-
 @q **** (4) Shape types.@>   
 @ |Shape| types.
 \initials{LDF 2005.01.07.}
@@ -12542,14 +11979,12 @@ Added code for handling |parabola_vectors|, |hyperbola_vectors|,
 |ellipsoid_vectors|, and |sphere_vectors|.
 \ENDLOG
 
-
 @q ***** (5) |POINT_VECTOR|.@>   
 
 @ |POINT_VECTOR|.
 \initials{LDF Undated.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == POINT_VECTOR)
     {
@@ -12564,7 +11999,6 @@ Added code for handling |parabola_vectors|, |hyperbola_vectors|,
       
     } /* |if (entry->type == POINT_VECTOR)|  */
 
-
 @q ***** (5) |BOOL_POINT_VECTOR|.@>   
 
 @ |BOOL_POINT_VECTOR|.
@@ -12576,7 +12010,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == BOOL_POINT_VECTOR)
     {
@@ -12591,7 +12024,6 @@ Added this section.
       
     } /* |if (entry->type == BOOL_POINT_VECTOR)|  */
 
-
 @q ***** (5) |PATH_VECTOR|.@>   
 
 @ |PATH_VECTOR|.
@@ -12603,7 +12035,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == PATH_VECTOR)
     {
@@ -12618,8 +12049,6 @@ Added this section.
       
     } /* |if (entry->type == PATH_VECTOR)|  */
 
-
-
 @q ***** (5) |ELLIPSE_VECTOR|.@>   
 
 @ |ELLIPSE_VECTOR|.
@@ -12631,7 +12060,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == ELLIPSE_VECTOR)
     {
@@ -12646,7 +12074,6 @@ Added this section.
       
     } /* |if (entry->type == ELLIPSE_VECTOR)|  */
 
-
 @q ***** (5) |CIRCLE_VECTOR|.@>   
 
 @ |CIRCLE_VECTOR|.
@@ -12658,7 +12085,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == CIRCLE_VECTOR)
     {
@@ -12673,8 +12099,6 @@ Added this section.
       
     } /* |if (entry->type == CIRCLE_VECTOR)|  */
 
-
-
 @q ***** (5) |PARABOLA_VECTOR|.@>   
 
 @ |PARABOLA_VECTOR|.
@@ -12686,7 +12110,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == PARABOLA_VECTOR)
     {
@@ -12713,7 +12136,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == HYPERBOLA_VECTOR)
     {
       typedef Pointer_Vector<Hyperbola> PV;
@@ -12726,10 +12148,6 @@ Added this section.
         }
       
     } /* |if (entry->type == HYPERBOLA_VECTOR)|  */
-
-
-
-
 
 @q ***** (5) |POLYGON_VECTOR|.@>   
 
@@ -12768,7 +12186,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == TRIANGLE_VECTOR)
     {
       typedef Pointer_Vector<Triangle> PV;
@@ -12782,8 +12199,6 @@ Added this section.
       
     } /* |if (entry->type == TRIANGLE_VECTOR)|  */
 
-
-
 @q ***** (5) |RECTANGLE_VECTOR|.@>   
 
 @ |RECTANGLE_VECTOR|.
@@ -12795,7 +12210,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == RECTANGLE_VECTOR)
     {
@@ -12822,7 +12236,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == REG_POLYGON_VECTOR)
     {
       typedef Pointer_Vector<Reg_Polygon> PV;
@@ -12836,8 +12249,6 @@ Added this section.
       
     } /* |if (entry->type == REG_POLYGON_VECTOR)|  */
 
-
-
 @q ***** (5) |ELLIPSOID_VECTOR|.@>   
 
 @ |ELLIPSOID_VECTOR|.
@@ -12849,7 +12260,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == ELLIPSOID_VECTOR)
     {
@@ -12876,7 +12286,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == SPHERE_VECTOR)
     {
       typedef Pointer_Vector<Sphere> PV;
@@ -12890,9 +12299,6 @@ Added this section.
       
     } /* |if (entry->type == SPHERE_VECTOR)|  */
 
-
-
-
 @q ***** (5) |CUBOID_VECTOR|.@>   
 
 @ |CUBOID_VECTOR|.
@@ -12904,7 +12310,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == CUBOID_VECTOR)
     {
@@ -12919,7 +12324,6 @@ Added this section.
       
     } /* |if (entry->type == CUBOID_VECTOR)|  */
 
-
 @q ***** (5) |POLYHEDRON_VECTOR|.@>   
 
 @ |POLYHEDRON_VECTOR|.
@@ -12931,7 +12335,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == POLYHEDRON_VECTOR)
     {
@@ -12946,14 +12349,12 @@ Added this section.
       
     } /* |if (entry->type == POLYHEDRON_VECTOR)|  */
 
-
 @q **** (4) Invalid |entry->type|.@>   
 
 @ Invalid |entry->type|.
 \initials{LDF Undated.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   else /* Invalid |entry->type|.  */
     {
@@ -12976,7 +12377,6 @@ Added this section.
    return 0;
 
 }  /* End of |Scan_Parse::clear_vector_func| definition.  */
-
 
 @q ** (2) |pop_back_func|.@>
 @*1 {\bf pop\_back\_func}.
@@ -13023,7 +12423,6 @@ Scan_Parse::pop_back_func(Scanner_Node scanner_node,
 
    int status;
 
-
 @q **** (4) @>   
 
 #if DEBUG_COMPILE
@@ -13064,9 +12463,8 @@ Scan_Parse::pop_back_func(Scanner_Node scanner_node,
 
   if (entry->subordinate_array == static_cast<Id_Map_Entry_Node>(0))
     {
-      
 
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::pop_back_func':"
+cerr_strm << thread_name << "ERROR! In `Scan_Parse::pop_back_func':"
                 << endl
                 << "`entry->subordinate_array' == 0."
                 << "Exiting function with return value 1.";
@@ -13078,7 +12476,6 @@ Scan_Parse::pop_back_func(Scanner_Node scanner_node,
       return 1;
 
     } /* |if (entry->subordinate_array == 0)|  */
-
 
 @q **** (4).@>   
 @
@@ -13099,7 +12496,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    if (entry->type == BOOLEAN_VECTOR)
     {
       typedef Pointer_Vector<bool> PV;
@@ -13108,7 +12504,6 @@ Added this section.
       @<Common code for popping objects@>@;
 
     } /* |if (entry->type == BOOLEAN_VECTOR)|  */
-
 
 @q **** (4) |entry->type == NUMERIC_VECTOR|.@>   
 @ |entry->type == NUMERIC_VECTOR|.
@@ -13121,7 +12516,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    else if (entry->type == NUMERIC_VECTOR)
     {
       typedef Pointer_Vector<real> PV;
@@ -13130,7 +12524,6 @@ Added this section.
       @<Common code for popping objects@>@;
 
     } /* |if (entry->type == NUMERIC_VECTOR)|  */
-
 
 @q **** (4) |entry->type == ULONG_LONG_VECTOR|.@>   
 @ |entry->type == ULONG_LONG_VECTOR|.
@@ -13143,7 +12536,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    else if (entry->type == ULONG_LONG_VECTOR)
     {
       typedef Pointer_Vector<ulong_long> PV;
@@ -13152,7 +12544,6 @@ Added this section.
       @<Common code for popping objects@>@;
 
     } /* |if (entry->type == ULONG_LONG_VECTOR)|  */
-
 
 @q **** (4) |entry->type == STRING_VECTOR|.@>   
 @ |entry->type == STRING_VECTOR|.
@@ -13165,7 +12556,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    else if (entry->type == STRING_VECTOR)
     {
       typedef Pointer_Vector<string> PV;
@@ -13174,7 +12564,6 @@ Added this section.
       @<Common code for popping objects@>@;
 
     } /* |if (entry->type == STRING_VECTOR)|  */
-
 
 @q **** (4) |entry->type == PEN_VECTOR|.@>   
 @ |entry->type == PEN_VECTOR|.
@@ -13187,7 +12576,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    else if (entry->type == PEN_VECTOR)
     {
       typedef Pointer_Vector<Pen> PV;
@@ -13196,9 +12584,6 @@ Added this section.
       @<Common code for popping objects@>@;
 
     } /* |if (entry->type == PEN_VECTOR)|  */
-
-
-
 
 @q **** (4) |entry->type == DASH_PATTERN_VECTOR|.@>   
 @ |entry->type == DASH_PATTERN_VECTOR|.
@@ -13210,7 +12595,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
    else if (entry->type == DASH_PATTERN_VECTOR)
     {
@@ -13245,7 +12629,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    else if (entry->type == TRANSFORM_VECTOR)
     {
       typedef Pointer_Vector<Transform> PV;
@@ -13266,7 +12649,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
    else if (entry->type == FOCUS_VECTOR)
     {
       typedef Pointer_Vector<Focus> PV;
@@ -13276,12 +12658,9 @@ Added this section.
 
     } /* |if (entry->type == FOCUS_VECTOR)|  */
 
-
-
 @q **** (4).@>   
 @
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == POINT_VECTOR)
     {
@@ -13295,14 +12674,12 @@ Added this section.
       
     } /* |if (entry->type == POINT_VECTOR)|  */
 
-
 @q **** (4) |BOOL_POINT_VECTOR|.@>   
 
 @ |BOOL_POINT_VECTOR|.
 \initials{LDF 2005.01.05.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == BOOL_POINT_VECTOR)
     {
@@ -13323,7 +12700,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == PICTURE_VECTOR)
     {
       typedef Pointer_Vector<Picture> PV;
@@ -13336,14 +12712,12 @@ Added this section.
       
     } /* |if (entry->type == PICTURE_VECTOR)|  */
 
-
 @q **** (4) |MACRO_VECTOR|.@>   
 
 @ |MACRO_VECTOR|.
 \initials{LDF 2005.01.05.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == MACRO_VECTOR)
     {
@@ -13357,7 +12731,6 @@ Added this section.
       
     } /* |if (entry->type == MACRO_VECTOR)|  */
 
-
 @q **** (4) |PATH_VECTOR|.@>   
 
 @ |PATH_VECTOR|.
@@ -13369,7 +12742,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == PATH_VECTOR)
     {
@@ -13395,7 +12767,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == ELLIPSE_VECTOR)
     {
       typedef Pointer_Vector<Ellipse> PV;
@@ -13407,7 +12778,6 @@ Added this section.
         }
       
     } /* |if (entry->type == ELLIPSE_VECTOR)|  */
-
 
 @q **** (4) |CIRCLE_VECTOR|.@>   
 
@@ -13421,7 +12791,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == CIRCLE_VECTOR)
     {
       typedef Pointer_Vector<Circle> PV;
@@ -13433,7 +12802,6 @@ Added this section.
         }
       
     } /* |if (entry->type == CIRCLE_VECTOR)|  */
-
 
 @q **** (4) |PARABOLA_VECTOR|.@>   
 
@@ -13447,7 +12815,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == PARABOLA_VECTOR)
     {
       typedef Pointer_Vector<Parabola> PV;
@@ -13459,7 +12826,6 @@ Added this section.
         }
       
     } /* |if (entry->type == PARABOLA_VECTOR)|  */
-
 
 @q **** (4) |HYPERBOLA_VECTOR|.@>   
 
@@ -13473,7 +12839,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == HYPERBOLA_VECTOR)
     {
       typedef Pointer_Vector<Hyperbola> PV;
@@ -13485,7 +12850,6 @@ Added this section.
         }
       
     } /* |if (entry->type == HYPERBOLA_VECTOR)|  */
-
 
 @q **** (4) |CONIC_SECTION_LATTICE_VECTOR|.@>   
 
@@ -13499,7 +12863,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == CONIC_SECTION_LATTICE_VECTOR)
     {
       typedef Pointer_Vector<Conic_Section_Lattice> PV;
@@ -13511,10 +12874,6 @@ Added this section.
         }
       
     } /* |if (entry->type == CONIC_SECTION_LATTICE_VECTOR)|  */
-
-
-
-
 
 @q **** (4) |TRIANGLE_VECTOR|.@>   
 
@@ -13528,7 +12887,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == TRIANGLE_VECTOR)
     {
       typedef Pointer_Vector<Triangle> PV;
@@ -13540,9 +12898,6 @@ Added this section.
         }
       
     } /* |if (entry->type == TRIANGLE_VECTOR)|  */
-
-
-
 
 @q **** (4) |RECTANGLE_VECTOR|.@>   
 
@@ -13556,7 +12911,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == RECTANGLE_VECTOR)
     {
       typedef Pointer_Vector<Rectangle> PV;
@@ -13568,7 +12922,6 @@ Added this section.
         }
       
     } /* |if (entry->type == RECTANGLE_VECTOR)|  */
-
 
 @q **** (4) |REG_POLYGON_VECTOR|.@>   
 
@@ -13582,7 +12935,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == REG_POLYGON_VECTOR)
     {
       typedef Pointer_Vector<Reg_Polygon> PV;
@@ -13595,7 +12947,6 @@ Added this section.
       
     } /* |if (entry->type == REG_POLYGON_VECTOR)|  */
 
-
 @q **** (4) |ELLIPSOID_VECTOR|.@>   
 
 @ |ELLIPSOID_VECTOR|.
@@ -13607,7 +12958,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == ELLIPSOID_VECTOR)
     {
@@ -13633,7 +12983,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == SPHERE_VECTOR)
     {
       typedef Pointer_Vector<Sphere> PV;
@@ -13645,7 +12994,6 @@ Added this section.
         }
       
     } /* |if (entry->type == SPHERE_VECTOR)|  */
-
 
 @q **** (4) |CUBOID_VECTOR|.@>   
 
@@ -13659,7 +13007,6 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (entry->type == CUBOID_VECTOR)
     {
       typedef Pointer_Vector<Cuboid> PV;
@@ -13672,8 +13019,6 @@ Added this section.
       
     } /* |if (entry->type == CUBOID_VECTOR)|  */
 
-
-
 @q **** (4) |POLYHEDRON_VECTOR|.@>   
 
 @ |POLYHEDRON_VECTOR|.
@@ -13685,7 +13030,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if (entry->type == POLYHEDRON_VECTOR)
     {
@@ -13704,7 +13048,6 @@ Added this section.
 \initials{LDF Undated.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   else /* Invalid |entry->type|.  */
     {
@@ -13741,7 +13084,6 @@ Added this section.  It's used in the
 \initials{LDF 2005.01.06.}
 Minor changes.
 
-
 \initials{LDF 2005.01.15.}
 @:BUG FIX@> BUG FIX:
 Now calling |Scanner_Type::get_array_entry| with |false| 
@@ -13749,7 +13091,6 @@ as the |create_if_none| argument.
 \ENDLOG
 
 @q **** (4) Code.@> 
-
 
 @<Common code for popping objects@>=
 
@@ -13781,7 +13122,6 @@ as the |create_if_none| argument.
 
              }  /* |if (root == 0)|  */
 
-
           temp_entry 
              = scanner_node->get_array_entry(name_strm.str(), 
                                              root, 
@@ -13805,7 +13145,6 @@ as the |create_if_none| argument.
                  return 1;   
 
              }  /* |if (temp_entry == static_cast<Id_Map_Entry_Node>(0))|  */
-
 
           temp_entry->object = 0;
 
@@ -13858,7 +13197,6 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
    int status;
 
-
 @q **** (4) @>   
 
 #if DEBUG_COMPILE
@@ -13906,7 +13244,6 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
       }  /* |for|  */
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -13946,7 +13283,6 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
                  
       }  /* |if (entry_1 == 0)|  */
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      { 
@@ -13954,9 +13290,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
         entry_1->show("entry_1:", true, true);
         cerr_mutex.unlock(); 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) |entry_0 != 0|.  Must discard old value.@>   
 @ |entry_0 != 0|.  Must discard old value.
@@ -14027,7 +13361,6 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
          scanner_node->id_map_node->id_map[entry_0->name] = entry_0;
 
-
 #if DEBUG_COMPILE
          if (DEBUG)
             {
@@ -14039,11 +13372,9 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
             }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4) @>   
-   
+@q **** (4) @>
 
-   return 0;
-
+return 0;
 
 }  /* End of |Scan_Parse::let_func| definition.  */
 
@@ -14099,7 +13430,6 @@ Scan_Parse::decompose_func(Scanner_Node scanner_node,
    using namespace Scan_Parse;
 
    int status;
-
 
 @q **** (4) @>   
 
@@ -14196,7 +13526,6 @@ Added this section.
            cerr_message(cerr_strm, error_stop_value);
            cerr_strm.str("");
 
-
 /* START HERE!!  LDF 2007.06.19.  */ 
 
            return 1;
@@ -14220,7 +13549,6 @@ Added this section.
             return 0;
         }
 
-
    }  /* |else| */
 
 @q ***** (5)@> 
@@ -14242,14 +13570,12 @@ in conditional.
    if (   type_0 == POLYGON && type_1 == POINT 
        && type_2 == POINT && vector_type == POLYGON_VECTOR)
    {
-         
 
-      Polygon* r = static_cast<Polygon*>(object_0);
+Polygon* r = static_cast<Polygon*>(object_0);
       Point* p0;
       Point* p1;
       p0 = static_cast<Point*>(object_1); 
       p1 = static_cast<Point*>(object_2); 
-
 
 @q ***** (5) Error handling:  |r == 0 || p0 == 0 || p1 == 0|.@>   
 
@@ -14287,7 +13613,6 @@ in conditional.
 
              }  /* |if (r == 0 || p0 == 0 || p1 == 0|)  */
 
-
 @q ***** (5) |r != 0 && p0 != 0 && p1 != 0|.@>   
 
 @ |r != 0 && p0 != 0 && p1 != 0|.
@@ -14297,9 +13622,8 @@ in conditional.
 
    else  /* |r != 0 && p != 0 && p1 != 0|.  */ 
       {
-   
 
-         Pointer_Vector<Polygon>* pv 
+Pointer_Vector<Polygon>* pv 
             = static_cast<Pointer_Vector<Polygon>*>(vector_object); 
 
           try 
@@ -14333,9 +13657,8 @@ in conditional.
                  delete p1;
 
                  delete pv;
-            
 
-                 r = 0;
+r = 0;
                  p1 = p0 = 0;
 
                  pv = 0;
@@ -14343,7 +13666,6 @@ in conditional.
                  throw;
                  
              }  /* |catch (bad_alloc)|  */
-
 
 @q ****** (6).@> 
 
@@ -14394,7 +13716,6 @@ in conditional.
 
   }  /* |if (   type_0 == POLYGON && type_1 == POINT 
              && type_1 == POINT && vector_type == POLYGON_VECTOR)|  */
-
 
 @q **** (4) Decompose a |Polygon| using a |Path|.@> 
 @ Decompose a |Polygon| using a |Path|.
@@ -14526,7 +13847,6 @@ Added this section.
 @q ***** (5)@> 
 
    }  /* |else if| (Decompose a |Polygon| using a |Path|)  */
- 
 
 @q **** (4) Decompose two |Polygons|.@>   
 @ Decompose two |Polygons|.
@@ -14537,7 +13857,6 @@ Added this section.
    else if (   type_0 == POLYGON && type_1 == POLYGON 
             && type_2 == NULL_VALUE && vector_type == POLYGON_VECTOR)
    {
-
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -14552,7 +13871,6 @@ Added this section.
            cerr_strm.str("");
        }       
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
        Polygon* p0 = static_cast<Polygon*>(object_0); 
        Polygon* p1 = static_cast<Polygon*>(object_1); 
@@ -14586,7 +13904,6 @@ setting it to 0 if it returns a non-zero value.
      else 
         return 0;
 
-
 @q ***** (5).@> 
 
    }  /* |else if (   type_0 == POLYGON && type_1 == POLYGON  
@@ -14594,11 +13911,9 @@ setting it to 0 if it returns a non-zero value.
 
 @q **** (4) @>   
 
-
    return 1;
 
 }  /* End of |Scan_Parse::decompose_func| definition.  */
-
 
 @q ** (2) |clip_to_func|.@>
 @*1 {\bf clip\_to\_func}.
@@ -14639,7 +13954,6 @@ Scan_Parse::clip_to_func(void* arg1,
 
    int status;
 
-
 @q **** (4) @>   
 
 #if DEBUG_COMPILE
@@ -14647,7 +13961,6 @@ Scan_Parse::clip_to_func(void* arg1,
     {
         cerr_strm << thread_name
                   << "Entering 'Scan_Parse::clip_to_func()'.";
-
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -14662,7 +13975,6 @@ Scan_Parse::clip_to_func(void* arg1,
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    Path* p = static_cast<Path*>(arg1); 
-
 
 @q **** (4) Error handling:  |p == 0|.@>   
 
@@ -14686,14 +13998,12 @@ Scan_Parse::clip_to_func(void* arg1,
 
       } /* |if (p == 0)|  */
 
-
 @q **** (4) Error handling:  |!p->is_cycle|.@>   
 
 @ Error handling:  |!p->is_cycle|.
 \initials{LDF 2005.08.16.}
 
 @<Define |Scan_Parse| functions@>=
-
 
    if (!p->is_cycle())
       {
@@ -14712,7 +14022,6 @@ Scan_Parse::clip_to_func(void* arg1,
       } /* |if (!p->is_cycle())|  */
 
 @q **** (4) @>   
-
 
    p->apply_transform();  
   
@@ -14745,7 +14054,6 @@ Scan_Parse::clip_to_func(void* arg1,
                       << (*point_iter)->get_y('w', false, false)
                       << "cm)";
 
-
           /* This breaks the line and indents after two points */
         
           if  (counter == 2 && point_iter != p->points.end())
@@ -14767,7 +14075,6 @@ Scan_Parse::clip_to_func(void* arg1,
 \initials{LDF 2005.08.16.}
 
 @<Define |Scan_Parse| functions@>=
-
 
     if (p->is_cycle())
       *out_stream << "   " << connector_string 
@@ -14797,7 +14104,6 @@ Scan_Parse::clip_to_func(void* arg1,
    return 0;
 
 }  /* End of |Scan_Parse::clip_to_func| definition.  */
-
 
 @q ** (2) |measure_text_func|.@>
 @*1 {\bf measure\_text\_func}.
@@ -14852,7 +14158,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
     {
         cerr_strm << thread_name
                   << "Entering 'Scan_Parse::measure_text_func()'.";
-
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -14951,7 +14256,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
       }  /* |while (true)|  */
 
-
 @q **** (4) @>   
 
    strcpy(dvi_file_name, tex_file_name);
@@ -14987,7 +14291,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
    string header_string = "";
 
-
    if (header_entry && header_entry->object)
       {
           header_string = *static_cast<string*>(header_entry->object);
@@ -15015,11 +14318,9 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
    tex_file.close();
 
-
    stringstream command_string;
 
    command_string << "tex " << tex_file_name << " > /dev/null";
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -15043,7 +14344,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
                    << "`status'  == " << status << endl;
      }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ***** (5) Error handling:  |system| failed.@>  
 @ Error handling:  |system| failed.
@@ -15076,7 +14376,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
  
       }   /* |if (status != 0)|  */
 
-
 @q **** (4) @>   
 @
 @<Define |Scan_Parse| functions@>=
@@ -15101,10 +14400,9 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
                 cerr_message(cerr_strm);
                 cerr_strm.str("");
             }    
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-          real* wd = new real;
+real* wd = new real;
           real* ht = new real;
           real* dp = new real;
 
@@ -15156,9 +14454,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
                          
       }  /* |else|  (|!measurement_file.is_open|)  */
 
-
 @q **** (4) @>   
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -15189,7 +14485,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
     return 0;
 
 }  /* End of |Scan_Parse::measure_text_func| definition.  */
-
 
 @q ** (2) |numeric_vector_assignment_func|.@>
 @*1 {\bf numeric\_vector\_assignment\_func}.
@@ -15242,7 +14537,6 @@ Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
 \initials{LDF 2005.01.07.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
@@ -15297,8 +14591,7 @@ Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
          entry_pv->clear(true);
       }
 
-   
-   status = vector_type_assign<real, real>(scanner_node,
+status = vector_type_assign<real, real>(scanner_node,
                                            entry,
                                            pv);
 
@@ -15310,9 +14603,8 @@ failed.
 \initials{LDF 2005.01.07.}
 
 @<Define |Scan_Parse| functions@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR!  In `numeric_vector_assignment_func()':"
@@ -15346,15 +14638,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ****** (6).@> 
 
 }  /* End of |Scan_Parse::numeric_vector_assignment_func| definition.  */
-
-
 
 @q ** (2) |binary_number_string_func|.@>
 @*1 {\bf binary\_number\_string\_func}.
@@ -15417,7 +14705,6 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
 
 /* !! START HERE.  LDF 2005.09.10.  Get code from ttemp.web.  */@; 
 
-
    short sign = (r >= 0) ? 1 : -1;
 
    double e = fabs(r);
@@ -15471,12 +14758,9 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
                cerr_message(cerr_strm);
                cerr_strm.str("");
           }  
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-
-         str = sub_binary_number_string_func<short>(static_cast<short>(e), 
+str = sub_binary_number_string_func<short>(static_cast<short>(e), 
                                              scanner_node);
      }
 
@@ -15484,7 +14768,6 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
 
   else if ((e >= 0 && e <= i.max()) || (e < 0 && e >= i.min()))
      {
-
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -15498,11 +14781,9 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
                cerr_message(cerr_strm);
                cerr_strm.str("");
           }  
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-         str = sub_binary_number_string_func<int>(static_cast<int>(e),
+str = sub_binary_number_string_func<int>(static_cast<int>(e),
                                              scanner_node);
 
      }
@@ -15511,7 +14792,6 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
 
   else if ((e >= 0 && e <= l.max()) || (e < 0 && e >= l.min()))
      {
-
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -15527,7 +14807,6 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
           }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
          str = sub_binary_number_string_func<long>(static_cast<long>(e),
                                              scanner_node);
 
@@ -15542,7 +14821,6 @@ Now passing |true| as the |oversize_switch| argument to
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-
 
   else if ((e >= 0 && e <= ll.max()) || (e < 0 && e >= ll.min()))
      {
@@ -15560,8 +14838,6 @@ Now passing |true| as the |oversize_switch| argument to
                cerr_strm.str("");
           }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-
 
          str = sub_binary_number_string_func<long long>(
                                              static_cast<long long>(e),
@@ -15654,7 +14930,6 @@ Scan_Parse::is_cycle_func(void* arg1,
 
    int status;
 
-
 @q **** (4) @>   
 
 #if DEBUG_COMPILE
@@ -15662,7 +14937,6 @@ Scan_Parse::is_cycle_func(void* arg1,
     {
         cerr_strm << thread_name
                   << "Entering 'Scan_Parse::is_cycle_func()'.";
-
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -15707,7 +14981,6 @@ Scan_Parse::is_cycle_func(void* arg1,
 \initials{LDF 2004.10.02.}
 
 @<Define |Scan_Parse| functions@>=
-
 
    else /* |p != 0|  */
       {
@@ -15759,7 +15032,6 @@ Scan_Parse::is_on_sphere_func(void* ppoint,
    Point*  p = static_cast<Point*>(ppoint);
    Sphere* s = static_cast<Sphere*>(ssphere);
 
-
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
    if (tolerance < 0 && scanner_node->tolerance)
@@ -15776,7 +15048,6 @@ Scan_Parse::is_on_sphere_func(void* ppoint,
    return static_cast<void*>(b); 
 
 }  /* End of |Scan_Parse::is_on_sphere_func| definition.  */
-
 
 @q ** (2) |rotate_focus_func|.@>
 @*1 {\bf rotate\_focus\_func}.
@@ -15987,7 +15258,6 @@ Scan_Parse::plane_intersection_func(void* v, void* w, void* parameter)
                 
   } /* |if (!p || !q)|  */
 
-
 @q **** (4)@>
 
    Line L = p->intersection_line(*q, scanner_node);
@@ -16093,7 +15363,6 @@ Added this section.
                                   scanner_node);
     }
 
-
 @q ***** (5) |Icosahedron|.@>
 @ |Icosahedron|.
 \initials{2008.12.30.}
@@ -16112,7 +15381,6 @@ Added this section.
                                  scanner_node);
     }
 
-
 @q ***** (5) |Great_Rhombicosidodecahedron|@>
 @ |Great_Rhombicosidodecahedron|.
 @
@@ -16126,7 +15394,6 @@ Added this section.
                                  static_cast<bool>(do_half),
                                  scanner_node);
     }
-
 
 @q ***** (5) |Rhombic_Triacontahedron|@>
 @ |Rhombic_Triacontahedron|.
@@ -16177,9 +15444,8 @@ Added this section.
        return 0;
 
     Pointer_Vector<Reg_Polygon>* pv = new Pointer_Vector<Reg_Polygon>;
- 
 
-    for (vector<Reg_Polygon*>::iterator iter = v.begin();
+for (vector<Reg_Polygon*>::iterator iter = v.begin();
          iter != v.end();
          ++iter)
        *pv += *iter;
@@ -16221,7 +15487,6 @@ Scan_Parse::get_hyperbola_branch_func(real r, void* v, void* parameter)
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-
    if (scanner_node)
       scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                     &error_stop_value,
@@ -16250,7 +15515,6 @@ Scan_Parse::get_hyperbola_branch_func(real r, void* v, void* parameter)
 
    }  /* |if (v == 0)|  */
 
-
 @q **** (4).@>
 
     Hyperbola* h = static_cast<Hyperbola*>(v);
@@ -16277,7 +15541,6 @@ Scan_Parse::get_hyperbola_branch_func(real r, void* v, void* parameter)
        return 0;
 
    }  /* |if (r < 0 || r > 1)|  */
-
 
 @q **** (4)@> 
 
@@ -16416,11 +15679,9 @@ Scan_Parse::get_conic_section_lattice_func(Pointer_Vector<Point>* pv,
                                                              do_transform,
                                                              t);            
 
-
    return static_cast<void*>(c);
 
 }  /* |Scan_Parse::get_conic_section_lattice_func| definition.  */
-
 
 @q ** (2) Traverse |Conic_Section_Lattice|.@> 
 @*1 Traverse {\bf Conic\_Section\_Lattice}.
@@ -16511,13 +15772,11 @@ Scan_Parse::traverse_conic_section_lattice_func(void* parameter,
 @
 @<Define |Scan_Parse| functions@>=
 
-  
-    Conic_Section_Lattice* lattice 
+Conic_Section_Lattice* lattice 
        = static_cast<Conic_Section_Lattice*>(c); 
 
     Pointer_Vector<Point>* pv 
        = lattice->traverse(start, end, scanner_node);
-
 
 @q **** (4) Error handling:  |Conic_Section_Lattice::traverse| @> 
 @q **** (4) returned 0.@> 
@@ -16558,7 +15817,6 @@ returned 0.
 @
 @<Define |Scan_Parse| functions@>=
 
-
     delete lattice;
     lattice = 0;
 
@@ -16586,8 +15844,7 @@ returned 0.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    return static_cast<void*>(pv); 
-   
+    return static_cast<void*>(pv);
 
 }  /* End of |Scan_Parse::traverse_conic_section_lattice_func| 
       definition.  */
@@ -16746,7 +16003,6 @@ Removed the |goto| I used before.
       r = 0;
 
     } /* |else| (|!(point_part >= WPART && point_part <= ZPART)|)  */
-  
 
 @q ****** (6)  Delete |p|, and exit function.@>
 
@@ -16858,7 +16114,6 @@ Scan_Parse::numeric_list_rule_func_0(void* v, void* parameter)
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   Pointer_Vector<real>* w = new Pointer_Vector<real>;
 
   for (vector<real>::const_iterator iter =
@@ -16890,9 +16145,7 @@ Scan_Parse::numeric_list_rule_func_0(void* v, void* parameter)
 
     return static_cast<void*>(w); 
 
-
 }  /* End of |Scan_Parse::numeric_list_rule_func_0| definition.  */
-
 
 @q ** (2) Point Primary Rule Function 0.@>
 @*1 Point Primary Rule Function 0.
@@ -17072,7 +16325,6 @@ Consider setting |z| to |curr_z| if |w->v.size() < 3|.
 
 }  /* End of |Scan_Parse::point_primary_rule_func_0| definition.  */
 
-
 @q * (1) |Conic_Section_Lattice| functions.@> 
 @* {\bf Conic\_Section\_Lattice} functions.
 \initials{LDF 2007.08.16.}
@@ -17095,7 +16347,6 @@ Added this section.
 @q *** (3) Draw Lattice.@> 
 @*2 Draw Lattice.
 \initials{LDF 2007.08.16.}
-
 
 The way this function is programmed is a compromise, because of the
 way |Scan_Parse::drawing_command_path| works.  See below.
@@ -17154,7 +16405,6 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
 
    using namespace Scan_Parse;
 
-
 @q ***** (5)@>
 @
 @<Define |Conic_Section_Lattice| functions@>=
@@ -17181,7 +16431,6 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
    fill_color_ptr
 #endif 
 
-
 @q ****** (6)@>
 
    if (scanner_node && scanner_node->pen_ptr)
@@ -17193,7 +16442,6 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
       *pen_vector_temp = *(static_cast<Pointer_Vector<Pen>*>(
                              scanner_node->pen_vector_ptr)); 
    }
-
 
 @q ****** (6)@>
 
@@ -17233,7 +16481,6 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
          = create_new<Color>(
               static_cast<Color*>(scanner_node->draw_color_ptr)); 
 
-
    if (scanner_node && scanner_node->draw_color_vector_ptr)
    {
       draw_color_vector_temp 
@@ -17244,14 +16491,12 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
 
    }
 
-
 @q ****** (6)@>
 
    if (scanner_node && scanner_node->fill_color_ptr)
       fill_color_temp 
          = create_new<Color>(
               static_cast<Color*>(scanner_node->fill_color_ptr)); 
-
 
    if (scanner_node && scanner_node->fill_color_vector_ptr)
    {
@@ -17262,7 +16507,6 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
          = *static_cast<Pointer_Vector<Color>*>(scanner_node->fill_color_vector_ptr); 
 
    }
-
 
 @q ***** (5)@>
 @
@@ -17285,7 +16529,6 @@ Conic_Section_Lattice::draw_lattice(real increment, void* parameter)
        scanner_node->conic_section_lattice_options = 0;
 
    }  /* |if|  */
-
 
 @q ***** (5)@>
 @
@@ -17342,9 +16585,6 @@ below.
                       lattice_point_flag);
     }
 
-
-
-
 @q ***** (5) Paths containing |F|.@>
 @ Paths containing |F|.  These are only drawn if |increment != 0| and
 |Conic_Section_Lattice::get_point| returned a valid |Point*|.
@@ -17398,7 +16638,6 @@ below.
     drawing_command_path(scanner_node, DRAW, q);
 
     @<Restore pointers in |draw_lattice|@>@;
-
 
 @q ****** (6) AE@> 
 @ $AE$.
@@ -17466,7 +16705,6 @@ as mentioned above, so I'm not going to try to fix it here.
 
 @<Define |Conic_Section_Lattice| functions@>=
 
-
 @q ***** (5)@> 
 @
 @<Define |Conic_Section_Lattice| functions@>=
@@ -17491,7 +16729,6 @@ as mentioned above, so I'm not going to try to fix it here.
 
 }  /* End of |Conic_Section_Lattice::draw_lattice| definition.  */
 
-
 @q **** (4) Restore pointers in |draw_lattice|.@> 
 @*3 Restore pointers in {\bf draw\_lattice}.
 \initials{LDF 2007.08.19.}
@@ -17505,7 +16742,6 @@ Added this section.
 
     if (pen_temp)
        scanner_node->pen_ptr = static_cast<void*>(create_new<Pen>(pen_temp)); 
-
 
 /* !! Porting:  LDF 2008.10.09.  */
 
@@ -17552,11 +16788,9 @@ Added this section.
        
     }  /* |if (color_vector_temp)|  */
 
-
     if (draw_color_temp)
        scanner_node->draw_color_ptr
           = static_cast<void*>(create_new<Color>(draw_color_temp)); 
-
 
     if (draw_color_vector_temp)
     {
@@ -17580,11 +16814,9 @@ Added this section.
        
     }  /* |if (draw_color_vector_temp)|  */
 
-                  
-    if (fill_color_temp)
+if (fill_color_temp)
        scanner_node->fill_color_ptr
           = static_cast<void*>(create_new<Color>(fill_color_temp)); 
-
 
     if (fill_color_vector_temp)
     {
@@ -17608,10 +16840,7 @@ Added this section.
        
     }  /* |if (fill_color_vector_temp)|  */
 
-
-
 @q **** (4)@> 
-
 
 @q *** (3)@> 
 
@@ -17679,7 +16908,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 
    using namespace Scan_Parse;
 
-
 @q ***** (5)@>
 
    signed short cycle_value = 0;
@@ -17700,7 +16928,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
 
    }  /* |if|  */
 
-
 @q ***** (5)@>
 
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(eentry);   
@@ -17717,7 +16944,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
         transform = static_cast<Transform*>(ttransform); 
         ttransform = 0;
     }
-
 
     if (ttext_color)
     {
@@ -17757,7 +16983,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
        tc = (text_color) ? create_new<Color>(text_color)    : 0;
        dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
-
        Scan_Parse::label_point_command(scanner_node,
                                        label_type,
                                        label_suffix,
@@ -17773,7 +16998,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
        p = 0;
 
     }  /* |if (increment != 0)|  */
-
 
 @q ***** (5) Label the lattice points.@> 
 @ Label the lattice points.
@@ -17791,7 +17015,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
-
     Scan_Parse::label_point_command(scanner_node,
                                     label_type,
                                     label_suffix,
@@ -17801,8 +17024,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
                                     tc,
                                     dc,
                                     entry);
-
-
 
 @q ****** (6)@> 
 
@@ -17823,10 +17044,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
                                     tc,
                                     dc,
                                     entry);
-
-
-
-
 
 @q ****** (6)@>
 
@@ -17880,7 +17097,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
-
     Scan_Parse::label_point_command(scanner_node,
                                     label_type,
                                     label_suffix,
@@ -17902,7 +17118,6 @@ Conic_Section_Lattice::label_lattice(void* parameter,
     t  = (transform)  ? create_new<Transform>(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
-
 
     Scan_Parse::label_point_command(scanner_node,
                                     label_type,
@@ -17991,7 +17206,6 @@ failed, returning 0.
 
    }  /* |if (pv == 0)|  */
 
-
 @q ****** (6) |X|.@>
 @ |X|.
 @<Define |Conic_Section_Lattice| functions@>=
@@ -18004,7 +17218,6 @@ failed, returning 0.
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
 
-
     Scan_Parse::label_point_command(scanner_node,
                                     label_type,
                                     label_suffix,
@@ -18014,8 +17227,6 @@ failed, returning 0.
                                     tc,
                                     dc,
                                     entry);
-
-
 
 @q ****** (6) |Y|.@>
 @ |Y|.
@@ -18028,7 +17239,6 @@ failed, returning 0.
     t  = (transform)  ? create_new<Transform>(transform) : 0;
     tc = (text_color) ? create_new<Color>(text_color)    : 0;
     dc = (dot_color)  ? create_new<Color>(dot_color)     : 0;
-
 
     Scan_Parse::label_point_command(scanner_node,
                                     label_type,
@@ -18066,7 +17276,6 @@ failed, returning 0.
 
     }  /* |if (increment != 0)|  */
 
-
 @q ****** (6)@>   
 
 @q ***** (5)@> 
@@ -18078,7 +17287,6 @@ failed, returning 0.
     return 0;
 
 }  /* End of |Conic_Section_Lattice::label_lattice| definition.  */
-
 
 @q ** (2)@> 
 
@@ -18098,9 +17306,6 @@ failed, returning 0.
 @(scanprsf.h@>=
 @<Declare |namespace Scan_Parse|@>@;
 
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -18109,8 +17314,6 @@ failed, returning 0.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-  
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Transformation Commands.@>
 @** Transformation Commands.
@@ -82,7 +80,6 @@ Added this rule.
 
     @=$$@> = static_cast<void*>(0);
 
-
 };
 
 @q **** (4) command: ROTATE picture_variable numeric_list.@> 
@@ -107,11 +104,7 @@ Added this rule.
 
     @=$$@> = static_cast<void*>(0);
 
-
 };
-
-
-
 
 @q **** (4) command: ROTATE point_variable numeric_list.@> 
 
@@ -160,8 +153,6 @@ Added this rule.
     @=$$@> = static_cast<void*>(0);
 
 };
-
-
 
 @q **** (4) command: ROTATE ellipse_variable numeric_list.@> 
 
@@ -283,8 +274,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) command: ROTATE rectangle_variable numeric_list.@> 
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE} \§rectangle variable> 
@@ -357,9 +346,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4) command: ROTATE cuboid_variable numeric_list.@> 
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE} \§cuboid variable> 
@@ -408,8 +394,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) command: ROTATE sphere_variable numeric_list.@> 
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE} \§sphere variable> 
@@ -433,8 +417,6 @@ Added this rule.
     @=$$@> = static_cast<void*>(0);
 
 };
-
-
 
 @q **** (4) command: ROTATE helix_variable numeric_list.@> 
 
@@ -1003,9 +985,6 @@ Added this rule.
 
 };
 
-
-
-
 @q ** (2) command --> basic_transformation_command @>
 @q ** (2) any_variable BY numeric_primary. @>
 @*1 \§command> $\longrightarrow$ 
@@ -1047,9 +1026,8 @@ Removed debugging output and error-handling code.
        *pv += r;
 
    } /* |if (basic_transformation_command == SCALE)|  */
-               
 
-  transformation_command_func(static_cast<Scanner_Node>(parameter),
+transformation_command_func(static_cast<Scanner_Node>(parameter),
                               @=$1@>,
                               static_cast<Id_Map_Entry_Node>(@=$2@>),
                               pv);
@@ -1149,7 +1127,6 @@ Removed all unnecessary code.
 Added this type declaration.
 \ENDLOG
 
-
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> basic_transformation_command@>
 
@@ -1227,7 +1204,6 @@ Removed all unnecessary code.
 \.{COMMA} \§point expression> \.{RIGHT\_PARENTHESIS}
 \§numeric expression>.
 
-
 \LOG
 \initials{LDF 2004.09.29.}
 Added this rule.
@@ -1287,7 +1263,6 @@ never reduced.
   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
 
-
         cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
                   << endl 
                   << "`transformation_command --> "
@@ -1306,10 +1281,8 @@ never reduced.
         cerr_strm.str("");
         
         @=$$@> = static_cast<void*>(0);
-     
 
-    }  /* |if (entry == 0 || entry->object == 0)|  */
-
+}  /* |if (entry == 0 || entry->object == 0)|  */
 
 @q **** (4) |entry != 0 &&  entry->object != 0|.@>   
 
@@ -1318,16 +1291,13 @@ never reduced.
 
 @<Define rules@>=
 
-
   else  /* |!(entry == 0 || entry->object == 0)|  */
     {
-
 
       Transform* t = rotate_around_func(scanner_node, 
                                         static_cast<Point*>(@=$4@>),
                                         static_cast<Point*>(@=$6@>),
                                         @=$8@>);
-
 
 @q ***** (5) Error handling:  |Scan_Parse::rotate_around_func()| failed.@>
 
@@ -1360,7 +1330,6 @@ never reduced.
       @=$$@> = static_cast<void*>(0);
 
     } /* |if (t == 0)|  */
-
 
 @q ***** (5) |Scan_Parse::rotate_around_func()| succeeded.@>
 
@@ -1400,7 +1369,6 @@ never reduced.
       @=$$@> = static_cast<void*>(0);
 
     }  /* |else| (|t != 0|)  */
-
 
 @q ***** (5).@> 
 
@@ -1472,7 +1440,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> transformation_assignment_command@>
 
-
 @q ** (2) transformation_assignment_command -->          @>
 @q ** (2) any_variable TIMES_ASSIGN transform_expression.@>
 
@@ -1493,7 +1460,6 @@ Removed code from this rule to
 Removed all unnecessary code.
 \ENDLOG
 
-
 @q *** (3) Definition.@> 
 
 @<Define rules@>=
@@ -1501,7 +1467,6 @@ Removed all unnecessary code.
 @=transformation_assignment_command: any_variable TIMES_ASSIGN @>@/
 @=transform_expression@>@/
 {
-
 
      Transform* t
         = transformation_assignment_command_func(static_cast<Scanner_Node>(parameter),
@@ -1570,10 +1535,7 @@ Removed all unnecessary code.
                                                static_cast<Id_Map_Entry_Node>($1),
                                                static_cast<Transform*>(@=$3@>));
 
-  
- 
-    @=$$@> = t;
-  
+@=$$@> = t;
 
 };
 
@@ -1601,8 +1563,6 @@ Removed all unnecessary code.
 @=transformation_assignment_command@>@/
 {
 
-
-
      Transform* t
         = transformation_assignment_command_func(static_cast<Scanner_Node>(parameter),
                                                  static_cast<Id_Map_Entry_Node>($1),
@@ -1612,10 +1572,6 @@ Removed all unnecessary code.
   
 };
 
-
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1624,7 +1580,6 @@ Removed all unnecessary code.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

@@ -49,9 +49,6 @@
 
 @q Laurence.Finston@@gmx.de  (@@ stands for a single ``at'' sign.)@>
 
-
-
-
 @q * (0) sphere expressions.  @>
 @** sphere expressions.
 \initials{LDF 2005.06.06.}
@@ -122,7 +119,6 @@ Added this rule.
   @=$$@> = @=$2@>;
 
 };
-
 
 @q ***** (5) sphere_primary --> LAST @>
 @q ***** (5) sphere_vector_expression.@>
@@ -236,7 +232,6 @@ Added this rule.
 @*1 \§sphere secondary> $\longrightarrow$ \§sphere secondary> 
 \§transformer>.
 
-
 \LOG
 \initials{LDF 2005.06.06.}
 Added this rule.
@@ -289,8 +284,6 @@ Added this rule.
 
 };
 
-
-
 @q * (1) sphere expression.@>
 @* \§sphere expression>.
 \initials{LDF 2005.06.06.}
@@ -319,7 +312,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -328,7 +320,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

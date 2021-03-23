@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |bool_point_vector| expressions.@>
 @** {\bf bool\_point\_vector} expressions.
@@ -60,7 +58,6 @@
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
-
 @q * (1) |bool_point_vector| primary.  @>
 @* \§bool-point vector primary>.
 \initials{LDF 2004.11.05.}
@@ -69,7 +66,6 @@ Created this file and wrote quite a few rules.
 \initials{LDF 2004.11.05.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> bool_point_vector_primary@>@/
@@ -116,7 +112,6 @@ Added this rule.
 
      {
 
-
         typedef Pointer_Vector<Bool_Point> BPV;
 
         BPV* bpv = new BPV;
@@ -128,7 +123,6 @@ Added this rule.
      }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
-
 
 @q ** (2) bool_point_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) bool_point_vector_expression  RIGHT_PARENTHESIS.@>
@@ -356,9 +350,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4) bool_point_vector_tertiary: circle_tertiary  @> 
 @q **** (4) INTERSECTION_POINTS path_secondary.@> 
 
@@ -425,9 +416,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4) bool_point_vector_tertiary: ellipse_tertiary  @> 
 @q **** (4) INTERSECTION_POINTS ellipse_secondary.@> 
 
@@ -493,7 +481,6 @@ Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
             static_cast<Circle*>(@=$3@>), 
             parameter); 
 
-
 };
 
 @q **** (4) bool_point_vector_tertiary: ellipse_tertiary @> 
@@ -556,7 +543,6 @@ Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
 @=ellipse_secondary@>@/
 {
 
-
    @=$$@> 
       = Scan_Parse::ellipse_like_intersection_func<Ellipse, Ellipse>
            (static_cast<Ellipse*>(@=$1@>), 
@@ -564,7 +550,6 @@ Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
             parameter); 
 
 };
-
 
 @q ** (2) bool_point_vector_tertiary: parabola_tertiary @> 
 @q ** (2) INTERSECTION_POINTS path_secondary.  @> 
@@ -745,7 +730,6 @@ Added this rule.
                 static_cast<Path*>(@=$1@>),
                 parameter);
 };
-
 
 @q ** (2) bool_point_vector_tertiary: hyperbola_tertiary @> 
 @q ** (2) INTERSECTION_POINTS plane_secondary.  @> 
@@ -931,15 +915,9 @@ Added this rule.
 @=path_secondary@>@/
 {
 
-
-
     Pointer_Vector<Bool_Point>* bpv = new Pointer_Vector<Bool_Point>;
 
-
-
-
-   
-    bpv->convert_pair_pointer(static_cast<Bool_Point_Pair*>(
+bpv->convert_pair_pointer(static_cast<Bool_Point_Pair*>(
                                  Scan_Parse::intersection_points_func<Reg_Polygon, 
                                                                       Path, 
                                                                       Bool_Point_Pair>
@@ -948,9 +926,7 @@ Added this rule.
                                              parameter)));   
     @=$$@> = static_cast<void*>(bpv); 
 
-
 };
-
 
 @q **** (4) bool_point_vector_tertiary: path_tertiary  @> 
 @q **** (4) INTERSECTION_POINTS rectangle_secondary.@> 
@@ -981,7 +957,6 @@ Added this rule.
                                                   (static_cast<Rectangle*>(@=$3@>),
                                                    static_cast<Path*>(@=$1@>), 
                                                    parameter)));
-
 
     @=$$@> = static_cast<void*>(bpv); 
 
@@ -1120,7 +1095,6 @@ Added \§with tolerance optional> and \§with increment optional>
             @=$5@>);
 };
 
-
 @q ** (2) bool_point_vector_tertiary: path_tertiary           @> 
 @q ** (2) INTERSECTION_POINTS conic_section_lattice_secondary @> 
 @q ** (2) with_tolerance_optional with_increment_optional     @>
@@ -1183,9 +1157,8 @@ Added this rule.
                 static_cast<Conic_Section_Lattice*>(@=$3@>),
                 static_cast<Circle*>(@=$1@>),
                 @=$4@>, 
-                @=$5@>); 
+                @=$5@>);
 
- 
 };
 
 @q **** (4) bool_point_vector_tertiary: conic_section_lattice_tertiary @> 
@@ -1247,9 +1220,8 @@ Added this rule.
                 static_cast<Conic_Section_Lattice*>(@=$3@>),
                 static_cast<Ellipse*>(@=$1@>),
                 @=$4@>, 
-                @=$5@>); 
+                @=$5@>);
 
- 
 };
 
 @q **** (4) bool_point_vector_tertiary: conic_section_lattice_tertiary @> 
@@ -1324,7 +1296,6 @@ this file(\filename{pbpvexpr.w}).
      p = 0;
 
 };
-
 
 @q ** (2) bool_point_vector_tertiary: path_tertiary @> 
 @q ** (2) INTERSECTION_POINTS ellipsoid_secondary.  @> 
@@ -1449,7 +1420,6 @@ Added this rule.
      p = 0;
 };
 
-
 @q ** (2) bool_point_vector_tertiary: path_tertiary @> 
 @q ** (2) INTERSECTION_POINTS cuboid_secondary.  @> 
 
@@ -1482,7 +1452,6 @@ Added this rule.
      c = 0;
      p = 0;
 };
-
 
 @q ** (2) bool_point_vector_tertiary: polyhedron_tertiary @> 
 @q ** (2) INTERSECTION_POINTS path_secondary.        @> 
@@ -1539,9 +1508,6 @@ Changed \§point vector tertiary> to \§bool-point vector tertiary>.
                 parameter);
 };
 
-
-
-
 @q * (1) bool_point_vector expression.@>
 @* \§bool-point vector expression>.
 
@@ -1570,8 +1536,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1580,7 +1544,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -1589,5 +1552,4 @@ Added this rule.
 @q fill-column:80                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

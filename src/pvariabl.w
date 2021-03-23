@@ -49,15 +49,11 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-
-
-
 @q * (0) Variables.  @>
 @** Variables.
 
 @q * (1) Variables and suffixes.  @>
 @* Variables and suffixes.
-
 
 @q ** (2) variable.  @>
 @*1 \§variable>.
@@ -93,7 +89,6 @@ Removed most of the code from this rule to |Scan_Parse::variable_func()|,
 defined in \filename{scan.web}.
 \ENDLOG 
 
-
 @q ***** (5) Definition.  @>
 
 @
@@ -121,7 +116,6 @@ defined in \filename{scan.web}.
 @<Type declarations for non-terminal symbols@>=
 @=%type <string_value> suffix@>@/
 
-
 @q *** (3) suffix --> (EMPTY).  @>
 @*2 \§suffix> $\longrightarrow$ (EMPTY). 
 
@@ -144,9 +138,7 @@ defined in \filename{scan.web}.
 
   static_cast<Scanner_Node>(parameter)->token_real_vector.push_back(@=$2@>);
 
-
 };
-
 
 @q **** (4) suffix --> tag.  @>
 @*3 \§suffix> $\longrightarrow$ \§tag>. 
@@ -167,13 +159,11 @@ I don't know for how long.
 
 };
 
-
 @q *** (3) subscript.  @>
 @*2 \§subscript>.  
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <real_value> subscript@>@/
-
 
 @q **** (4) subscript --> numeric_token.  @>
 
@@ -325,7 +315,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
 @q *** (3) string_variable.  @>
 @*2 \§string variable>.
 
@@ -349,7 +338,6 @@ including |@<Common code for variable types@>|.
 Removed code from this rule.  Now calling 
 |Scan_Parse::variable_decl_func()|.
 \ENDLOG 
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> string_variable@>@/
@@ -389,7 +377,6 @@ Removed code from this rule.  Now calling
 |Scan_Parse::variable_decl_func()|.
 \ENDLOG 
 
-
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> pen_variable@>@/
 
@@ -427,7 +414,6 @@ including |@<Common code for variable types@>|.
 Removed code from this rule.  Now calling 
 |Scan_Parse::variable_decl_func()|.
 \ENDLOG 
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> dash_pattern_variable@>@/
@@ -470,7 +456,6 @@ Removed code from this rule.  Now calling
 |Scan_Parse::variable_decl_func()|.
 \ENDLOG 
 
-
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> color_variable@>@/
 
@@ -485,7 +470,6 @@ Removed code from this rule.  Now calling
 
 };
 
-
 @q *** (3) Vector types.@> 
 @*2 Vector types.
 \initials{LDF 2004.12.23.}
@@ -494,7 +478,6 @@ Removed code from this rule.  Now calling
 \initials{LDF 2004.12.23.}
 Added this section.
 \ENDLOG
-
 
 @q **** (4) boolean_vector_variable.  @>
 @*3 \§boolean vector variable>.
@@ -693,9 +676,6 @@ Added this rule.
                                parameter);
 };
 
-
-
-
 @q **** (4) pen_vector_variable.  @>
 @*3 \§pen vector variable>.
 \initials{LDF 2004.12.23.}
@@ -791,7 +771,6 @@ Added this rule.
                                @=$2@>, 
                                PICTURE_VECTOR,
                                parameter);
-
 
 };
 
@@ -896,8 +875,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
-
 @q *** (3) color_vector_variable.  @>
 @*2 \§color vector variable>.
 
@@ -913,12 +890,10 @@ Added this section.
 \initials{LDF 2004.08.23.}  
 Added this rule.
 
-
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
 |Scan_Parse::variable_decl_func()|.
 \ENDLOG 
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> color_vector_variable@>@/
@@ -987,7 +962,6 @@ Added this rule.
 Removed code from this rule.  Now calling 
 |Scan_Parse::variable_decl_func()|.
 \ENDLOG 
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> bool_point_vector_variable@>@/
@@ -1107,8 +1081,6 @@ Removed code from this rule.  Now calling
 
 };
 
-
-
 @q *** (3) ellipse_vector_variable.  @>
 @*2 \§ellipse vector variable>.
 
@@ -1179,7 +1151,6 @@ Removed code from this rule.  Now calling
                                parameter);
 
 };
-
 
 @q *** (3) parabola_vector_variable.  @>
 @*2 \§parabola vector variable>.
@@ -1274,7 +1245,6 @@ Added this rule.
                                parameter);
 };
 
-
 @q *** (3) conic_section_lattice_vector_variable.  @>
 @*2 \§conic section lattice vector variable>.
 \initials{LDF 2007.07.29.}
@@ -1342,7 +1312,6 @@ Removed code from this rule.  Now calling
 
 };
 
-
 @q *** (3) rectangle_vector_variable.  @>
 @*2 \§rectangle vector variable>.
 
@@ -1376,7 +1345,6 @@ Removed code from this rule.  Now calling
                                RECTANGLE_VECTOR,
                                parameter);
 };
-
 
 @q *** (3) polygon_vector_variable.  @>
 @*2 \§polygon vector variable>.
@@ -1412,7 +1380,6 @@ Removed code from this rule.  Now calling
                                POLYGON_VECTOR,
                                parameter);
 };
-
 
 @q *** (3) reg_polygon_vector_variable.  @>
 @*2 \§regular polygon vector variable>.
@@ -1763,7 +1730,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
 @q *** (3) sphere_development_vector_variable.  @>
 @*2 \§sphere development vector variable>.
 \initials{LDF 2009.11.09.}
@@ -1825,8 +1791,6 @@ Added this rule.
                                PARABOLOID_VECTOR,
                                parameter);
 };
-
-
 
 @q *** (3) glyph_vector_variable.  @>
 @*2 \§glyph vector variable>.
@@ -1896,10 +1860,6 @@ Added this rule.
                                parameter);
 
 };
-
-
-
-
 
 @q **** (4) origami_figure_vector_variable.  @>
 @*3 \§origami figure vector variable>.
@@ -1999,7 +1959,6 @@ Added this rule.
 @=vector_type_variable: numeric_vector_variable@>
 {
 
-
   @=$$@> = @=$1@>;
 
 };
@@ -2038,9 +1997,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 };
 
-
-
-
 @q **** (4) vector_type_variable --> matrix_vector_variable.@>
 
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2057,8 +2013,6 @@ Added this rule.
 {
   @=$$@> = @=$1@>;
 };
-
-
 
 @q **** (4) vector_type_variable --> pen_vector_variable.@>
 
@@ -2191,8 +2145,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) vector_type_variable --> triangle_vector_variable.@>
 
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2211,7 +2163,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4) vector_type_variable --> nurb_vector_variable.@>
 
@@ -2232,8 +2183,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) vector_type_variable --> point_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
 \§point vector variable>.
@@ -2249,7 +2198,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4)  vector_type_variable --> bool_point_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2280,7 +2228,6 @@ Added this rule.
 @<Define rules@>= 
 @=vector_type_variable: path_vector_variable@>
 {
-
 
   @=$$@> = @=$1@>;
 
@@ -2392,9 +2339,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4)  vector_type_variable --> helix_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
 \§helix vector variable>.
@@ -2413,7 +2357,6 @@ Added this rule.
 
 };
 
-
 @q **** (4)  vector_type_variable --> rectangle_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
 \§rectangle vector variable>.
@@ -2430,7 +2373,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4)  vector_type_variable --> polygon_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2449,7 +2391,6 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4)  vector_type_variable --> reg_polygon_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2482,7 +2423,6 @@ Added this rule.
 @=vector_type_variable: cone_vector_variable@>
 {
 
-
   @=$$@> = @=$1@>;
 
 };
@@ -2504,8 +2444,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q **** (4)  vector_type_variable --> cuboid_vector_variable.@>
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2538,7 +2476,6 @@ Added this rule.
 @<Define rules@>= 
 @=vector_type_variable: polyhedron_vector_variable@>
 {
-
 
   @=$$@> = @=$1@>;
 
@@ -2597,7 +2534,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4) vector_type_variable --> ellipsoid_vector_variable.@>
 
@@ -2675,7 +2611,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) vector_type_variable --> glyph_vector_variable.@>
 
 @*3 \§vector type variable>  $\longrightarrow$ 
@@ -2713,8 +2648,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q **** (4) vector_type_variable --> origami_figure_vector_variable.@>
 
@@ -2818,7 +2751,6 @@ Removed the |Scanner_Node| argument in the call to
     }
 #endif /* |DEBUG_COMPILE|  */
 
-
   bool is_array;
 
   is_array = (scanner_node->token_real_vector.size() > 0) ? true : false;
@@ -2855,8 +2787,6 @@ Removed the |Scanner_Node| argument in the call to
                                   Id_Map_Entry_Type::REGULAR, 
                                   false, is_array);
 
-
-
   Int_Void_Ptr ivp = variable_type(scanner_node,
                                    entry,
                                    @=$1@>,
@@ -2878,7 +2808,6 @@ Removed the |Scanner_Node| argument in the call to
 
    } /* |if (ivp.i != 0)| 
          (|Scan_Parse::variable_type()| failed.)  */
-
 
    else /* (|ivp.i == 0|---|Scan_Parse::variable_type()| 
             succeeded.)  */
@@ -3036,7 +2965,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
 @q *** (3) picture_variable.@>
 @*2 \§picture variable>.
 \initials{LDF 2004.05.21.}  
@@ -3074,7 +3002,6 @@ Removed code from this rule.  Now calling
                                PICTURE,
                                parameter);
 };
-
 
 @q **** (4)  picture_variable --> LAST picture_vector_variable.@>
 @*3 \§picture variable> $\longrightarrow$ \.{LAST} 
@@ -3131,7 +3058,6 @@ Added this rule.
           cerr_message(cerr_strm, error_stop_value);
           cerr_strm.str("");
 
-
           @=$$@> = static_cast<void*>(0);
 
       }  /* |if (entry == 0 || entry->object == 0)|  */
@@ -3163,14 +3089,12 @@ Added this rule.
 
                  @=$$@> = static_cast<void*>(0);                
 
-
              }  /* |if (pv->ctr <= 0)|  */
 
 @q ******* (7) @> 
 
         else /* |pv->ctr > 0|  */
            {
-
 
               stringstream name_strm;
 
@@ -3202,7 +3126,6 @@ Added this rule.
 
                      @=$$@> = static_cast<void*>(0);                                 
 
-
                  }  /* |if (array_entry == 0)|  */
 
 @q ******** (8) @> 
@@ -3214,10 +3137,8 @@ Added this rule.
 
            }  /* |else| (|pv->ctr > 0|)  */
 
-
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 };
-
 
 @q ***  (3) point variable.@>
 @*2 \§point variable>.
@@ -3374,7 +3295,6 @@ Added this rule.
           cerr_message(cerr_strm, error_stop_value);
           cerr_strm.str("");
 
-
           @=$$@> = static_cast<void*>(0);
 
       }  /* |if (entry == 0 || entry->object == 0)|  */
@@ -3406,14 +3326,12 @@ Added this rule.
 
                  @=$$@> = static_cast<void*>(0);                
 
-
              }  /* |if (pv->ctr <= 0)|  */
 
 @q ******* (7) @> 
 
         else /* |pv->ctr > 0|  */
            {
-
 
               stringstream name_strm;
 
@@ -3445,7 +3363,6 @@ Added this rule.
 
                      @=$$@> = static_cast<void*>(0);                                 
 
-
                  }  /* |if (array_entry == 0)|  */
 
 @q ******** (8) @> 
@@ -3457,11 +3374,8 @@ Added this rule.
 
            }  /* |else| (|pv->ctr > 0|)  */
 
-
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
-
- 
 };
 
 @q *** (3) path variable.  @>
@@ -3551,7 +3465,6 @@ Removed code from this rule.  Now calling
                                CIRCLE,
                                parameter);
 };
-
 
 @q *** (3) parabola variable --> variable PARABOLA.@>
 @*2 \§parabola variable> $\longrightarrow$ \§variable> 
@@ -3645,8 +3558,6 @@ Added this rule.
                                parameter);
 };
 
-
-
 @q *** (3) helix variable --> variable HELIX.@>
 @*2 \§helix variable> $\longrightarrow$ \§variable> 
 \.{HELIX}.
@@ -3737,8 +3648,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
-
 @q *** (3)  reg_polygon variable --> variable REG_POLYGON.  @>
 @*1 \§regular polygon variable> $\longrightarrow$ \§variable> 
 \.{REG\_POLYGON}.
@@ -3809,7 +3718,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
 @q *** (3)  nurb variable --> variable NURB.@>
 @*1 \§nurb variable> $\longrightarrow$ \§variable> 
 \.{NURB}.
@@ -3842,7 +3750,6 @@ Removed code from this rule.  Now calling
                                NURB,
                                parameter);
 };
-
 
 @q *** (3) cone variable --> variable CONE.  @>
 @*2 \§cone variable> $\longrightarrow$ \§variable> 
@@ -3908,7 +3815,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
 @q *** (3) cuboid variable --> variable CUBOID.  @>
 @*2 \§cuboid variable> $\longrightarrow$ \§variable> 
 \.{CUBOID}.
@@ -3944,8 +3850,6 @@ Removed code from this rule.  Now calling
                                CUBOID,
                                parameter);
 };
-
-
 
 @q ***  polyhedron variable --> variable POLYHEDRON.  @>
 @ \§polyhedron variable> $\longrightarrow$ \§variable> 
@@ -3986,7 +3890,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> ellipse_slice_variable@>@/
 
-
 @q ****  (4) ellipse_slice variable --> variable ELLIPSE_SLICE.@>
 @*3 \§ellipse slice variable> $\longrightarrow$ \§variable> 
 \.{ELLIPSE\_SLICE}.
@@ -4010,7 +3913,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
 @q *** (3) circle_slice variable.@>
 @*2 \§circle slice variable>.
 \initials{LDF 2005.03.29.}
@@ -4022,7 +3924,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> circle_slice_variable@>@/
-
 
 @q ****  (4) circle_slice variable --> variable CIRCLE_SLICE.@>
 @*3 \§circle slice variable> $\longrightarrow$ \§variable> 
@@ -4058,7 +3959,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> polyhedron_slice_variable@>@/
-
 
 @q ****  (4) polyhedron_slice variable --> variable POLYHEDRON_SLICE.@>
 @*3 \§polyhedron slice variable> $\longrightarrow$ \§variable> 
@@ -4203,7 +4103,6 @@ Added this rule.
                                parameter);
 };
 
-
 @q *** (3) glyph variable --> variable GLYPH.  @>
 @*2 \§glyph variable> $\longrightarrow$ \§variable> 
 \.{GLYPH}.
@@ -4296,9 +4195,6 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
-
-
-
 @q *** (3) any_variable.  @>
 @*2 \§any variable>.
 
@@ -4347,12 +4243,9 @@ Added this rule.
 @=any_variable: bool_point_variable@>@/
 {
 
-
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q *** (3) any_variable --> string_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§string variable>.
@@ -4417,8 +4310,6 @@ Added this rule.
 
 };
 
-
-
 @q *** (3) any_variable --> matrix_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§matrix variable>.
 \initials{LDF 2007.11.28.}
@@ -4466,7 +4357,6 @@ Added this rule.
 
 };
 
-
 @q ***  any_variable --> color_variable.  @>
 @ \§any variable> $\longrightarrow$ \§color variable>.
 
@@ -4481,10 +4371,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
-
-
 
 @q *** (3) any_variable --> transform_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§transform variable>.
@@ -4515,8 +4401,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q ***  any_variable --> point_variable.  @>
 @ \§any variable> $\longrightarrow$ \§point variable>.
@@ -4570,7 +4454,6 @@ Added this rule.
 
 };
 
-
 @q ***  any_variable --> path_variable.  @>
 @ \§any variable> $\longrightarrow$ \§path variable>.
 
@@ -4585,7 +4468,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q *** (3) any_variable --> ellipse_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§ellipse variable>.
@@ -4672,7 +4554,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) any_variable --> helix_variable.@>
 @*2 \§any variable> $\longrightarrow$ \§helix variable>.
 \initials{LDF 2005.05.19.}
@@ -4689,8 +4570,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q *** (3) any_variable --> rectangle_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§rectangle variable>.
@@ -4722,8 +4601,6 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 };
-
-
 
 @q *** (3)  any_variable --> reg_polygon_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§regular polygon variable>.
@@ -4776,7 +4653,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) any_variable --> cone_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§cone variable>.
 \initials{LDF 2005.05.24.}
@@ -4811,7 +4687,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) any_variable --> cuboid_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§cuboid variable>.
 \initials{LDF 2004.08.17.}  
@@ -4828,7 +4703,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q ***  any_variable --> polyhedron_variable.  @>
 @ \§any variable> $\longrightarrow$ \§polyhedron variable>.
@@ -4972,7 +4846,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) any_variable --> glyph_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§glyph variable>.
@@ -5010,10 +4883,6 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 };
-
-
-
-
 
 @q *** (3) any_variable --> origami_figure_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
@@ -5105,7 +4974,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 };
 
-
 @q *** (3)  any_variable --> complex_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§complex vector variable>.
 \initials{LDF 2007.12.02.}
@@ -5121,8 +4989,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 };
 
-
-
 @q *** (3)  any_variable --> matrix_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§matrix vector variable>.
 
@@ -5136,8 +5002,6 @@ Added this rule.
 {
   @=$$@> = @=$1@>;
 };
-
-
 
 @q *** (3)  any_variable --> pen_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§pen vector variable>.
@@ -5170,7 +5034,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q *** (3)  any_variable --> color_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§color vector variable>.
@@ -5252,7 +5115,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) any_variable --> point_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§point vector variable>.
 
@@ -5332,7 +5194,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q *** (3) any_variable --> ellipse_vector_variable.@>
 @*2 \§any variable> $\longrightarrow$ \§ellipse vector variable>.
@@ -5418,8 +5279,6 @@ Added this rule.
 
 };
 
-
-
 @q *** (3) any_variable --> conic_section_lattice_vector_variable.@>
 @*2 \§any variable> $\longrightarrow$ \§conic section lattice vector variable>.
 \initials{LDF 2007.07.29.}
@@ -5436,8 +5295,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q *** (3) any_variable --> helix_vector_variable.@>
 @*2 \§any variable> $\longrightarrow$ \§helix vector variable>.
@@ -5489,8 +5346,6 @@ Added this rule.
 
 };
 
-
-
 @q *** (3) any_variable --> reg_polygon_vector_variable.@>
 @*2 \§any variable> $\longrightarrow$ \§regular polygon vector variable>.
 
@@ -5540,7 +5395,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q *** (3)  any_variable --> cuboid_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ \§cuboid vector variable>.
@@ -5679,7 +5533,6 @@ Added this rule.
 
 };
 
-
 @q *** (3)  any_variable --> paraboloid_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§paraboloid vector variable>.
@@ -5697,7 +5550,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q *** (3)  any_variable --> glyph_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
@@ -5735,7 +5587,6 @@ Added this rule.
 
 };
 
-
 @q *** (3)  any_variable --> origami_figure_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§origami figure vector variable>.
@@ -5754,10 +5605,6 @@ Added this rule.
 
 };
 
-
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -5766,7 +5613,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

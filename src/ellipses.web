@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * Ellipse.@>
 @** Ellipse\quad ({\tt ellipses\PERIOD web}).\hfil
@@ -149,7 +148,6 @@ Added this section.
 \initials{LDF 2007.07.15.}
 Now setting |DEFAULT_NUMBER_OF_POINTS| to 32 instead of 16.
 \ENDLOG
-
 
 @<Define |static| |Ellipse| data members@>=
 unsigned short Ellipse::DEFAULT_NUMBER_OF_POINTS = 32; /* \initials{LDF 2002.11.06.}
@@ -264,7 +262,6 @@ Ellipse::Ellipse(const Point& ccenter,
                  const unsigned short nnumber_of_points) 
 {
 
-
    axis_h = aaxis_h;
    axis_v = aaxis_v;
 
@@ -279,13 +276,11 @@ Ellipse::Ellipse(const Point& ccenter,
    center = ccenter;
    center.apply_transform();
 
-
    focus_0 = origin_pt;    
    focus_1 = origin_pt;
 
    real axis_h_half = axis_h / 2;
    real axis_v_half = axis_v / 2;
-
 
    if (axis_h >= axis_v)
       {
@@ -397,7 +392,6 @@ Ellipse(const Point& ccenter,
         const Path& p,
         Scanner_Node scanner_node = 0);
 
-
 @q **** (4) Definition.  @>
 
 @
@@ -461,7 +455,6 @@ Ellipse::Ellipse(const Point& ccenter,
           numerical_eccentricity = linear_eccentricity / axis_v_half;
       }
 
-
 @q **** (4)@> 
 
    Transform t;
@@ -477,11 +470,9 @@ Ellipse::Ellipse(const Point& ccenter,
 
    temp_pt *= temp_center *= normal *= t;
 
-
    real angle = temp_pt.angle(Point(1, 0, 0));
   
    temp_center *= temp_pt *= t.rotate(0, -angle);
-
 
    if (temp_pt.get_x() < ZERO_REAL || temp_pt.get_z() != ZERO_REAL)
          temp_center *= normal *= temp_pt *= t.rotate(0, 2 * angle);
@@ -519,7 +510,6 @@ Ellipse::Ellipse(const Point& ccenter,
                  focus_1.shift(0, 0, linear_eccentricity);
              }
 
-
           focus_0 *= focus_1 *= t.inverse();
       }
 
@@ -534,14 +524,11 @@ Ellipse::Ellipse(const Point& ccenter,
 
 }  /* End of |Ellipse()| definition.  */
 
-
-
 @q ** (2) Pseudo-constructor for dynamic allocation.@>
 @*1 Pseudo-constructor for dynamic allocation.
 
 @q *** (3) Pointer argument.@>
 @*2 Pointer argument.
-
 
 \LOG
 \initials{LDF 2002.11.06.}  
@@ -622,21 +609,17 @@ Ellipse::operator=(const Ellipse& e)
     return *this;
 
   Path::operator=(e);
-    
 
-
-  center = e.center;  /* |Ellipse| members. */
+center = e.center;  /* |Ellipse| members. */
   axis_h = e.axis_h;
   axis_v = e.axis_v;
   focus_0 = e.focus_0;
   focus_1 = e.focus_1;
 
-
   number_of_points = e.number_of_points; /* |Reg_Cl_Plane_Curve| members. */
 
   return *this;
 }
-
 
 @q * (1) Get copy.@>
 @* Get copy.
@@ -663,8 +646,6 @@ Ellipse::get_copy() const
 
   return static_cast<Shape*>(p);
 }
-
-
 
 @q * (1) Reflection in a |Plane|.@> 
 @* Reflection in a |Plane|.
@@ -701,7 +682,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -711,12 +691,11 @@ Ellipse::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -730,7 +709,6 @@ Ellipse::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -759,7 +737,6 @@ try to allocate memory on the free store for it.
 
 @<Define |Ellipse| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -774,10 +751,8 @@ try to allocate memory on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (ellipse_reflection == static_cast<Ellipse*>(0))|  */
@@ -792,7 +767,6 @@ try to allocate memory on the free store for it.
   Reg_Cl_Plane_Curve reg_cl_plane_curve_reflection;
 
   int status;
-
 
   try
      {
@@ -850,8 +824,7 @@ try to allocate memory on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Reg_Cl_Plane_Curve::reflect_in()| succeeded.@> 
 
@@ -937,7 +910,6 @@ reflect_off(const Plane& p,
             void* v,
             const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -948,12 +920,11 @@ Ellipse::reflect_off(const Plane& p,
                      void* v,
                      const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-   bool DEBUG = false; /* |true|  */
+   bool DEBUG = false; /* |true| */
 
    using namespace Scan_Parse;
 
@@ -983,7 +954,6 @@ Ellipse::reflect_off(const Plane& p,
           return 1;
 
       } /* |if (v == static_cast<void*>(0))|  */
-
 
   Pointer_Vector<Ellipse>* ellipse_ptr_vector 
      = static_cast<Pointer_Vector<Ellipse>*>(v);
@@ -1016,7 +986,6 @@ Ellipse::reflect_off(const Plane& p,
           return 1;
 
       }  /* |if (status != 0)|  */
-
 
 @q *** (3)  Try to allocate memory for three pointers to |Point_Vector<Point>|.@> 
 
@@ -1057,14 +1026,12 @@ Ellipse::reflect_off(const Plane& p,
          
       }  /* |catch (bad_alloc)|  */
 
-
 @q *** (3) Set up |Point_Vector<Point>| objects.@> 
 
 @ Set up |Point_Vector<Point>| objects.
 \initials{LDF 2004.12.14.}
 
 @<Define |Ellipse| functions@>=
-
 
    for (int i = 0; i < 4; ++i)
       {
@@ -1073,7 +1040,6 @@ Ellipse::reflect_off(const Plane& p,
          *f1vp += &(ellipse_ptr_vector->v[i]->focus_1);
 
       }  /* |for|  */
-
 
 @q *** (3)  Call |Point::reflect_off()| on |center|, |focus_0|, and |focus_1|.@> 
 
@@ -1123,7 +1089,6 @@ Return 1 upon error.
 
    status = center.reflect_off(p, direction, f1vp, scanner_node);
 
-
    if (status != 0)
       {
           cerr_strm << thread_name << "ERROR!  In `Ellipse::reflect_off()':"
@@ -1148,7 +1113,6 @@ Return 1 upon error.
    return 0;
 
 } /* End of |Ellipse::reflect_off()| definition.  */
-
 
 @q * (1) Labelling. @>
 @* Labelling.
@@ -1229,7 +1193,6 @@ both with default 0.  Passing these arguments on to
 Now passing 0 as the |Transform*| argument to |Point::label()|.
 \ENDLOG 
 
-
 @<Declare |Ellipse| functions@>=
 inline
 void
@@ -1240,7 +1203,6 @@ dotlabel(Picture& picture,
 {
   label(picture, pos, ttext_color, ddot_color, true);
 }
-
 
 @q * (1) Returning elements and information.@>
 @* Returning elements and information.
@@ -1313,7 +1275,7 @@ Path::is_elliptical(Scanner_Node scanner_node) const
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -1374,7 +1336,6 @@ Rewrite this function so that it can test arbitrary |Paths|.
 
 @<Define |Path| functions@>=
 
-
   if (points.size() % 4 != 0)
      {
 #if DEBUG_COMPILE
@@ -1423,7 +1384,6 @@ and test whether it's elliptical.
        e += *iter;
 
     } /* |for|  */
-
 
   Point p0 = get_point(0);
   Point p_half = get_point(points.size() / 2);
@@ -1521,7 +1481,6 @@ Ellipse::is_elliptical() const
   t.rotate(0, ang);
   p0 *= e.do_transform(t);
 
-
   p0.unit_vector(true);
   if (p0 != x_axis_pt)
     {
@@ -1594,10 +1553,6 @@ Ellipse::is_elliptical() const
 
 } /* End of |Ellipse::is_elliptical()| definition.  */
 
-
-
-
-
 @q ** (2) Is whatever.@>
 @*1 Is whatever.
 @^\cfunc{Ellipse}{is\_whatever}@>
@@ -1625,7 +1580,6 @@ is_whatever(void) const
  
   return is_elliptical();
 }
-
 
 @q ** (2) Is quadratic.@>
 @*1 Is quadratic.
@@ -1675,8 +1629,6 @@ Ellipse::is_quartic() const
 {
   return false;
 }
-
-
 
 @q ** Solve.@>
 @*1 Solve.
@@ -1746,9 +1698,8 @@ $$y = \sqrt{(1 - x^2/a^2) \times b^2}$$
 and 
 $$x = \sqrt{(1 - y^2/b^2) \times a^2}.$$
 @<Define |Ellipse| functions@>=
-  
 
-  r.first = sqrt((1 - ((known * known) / (radius_known * radius_known)))
+r.first = sqrt((1 - ((known * known) / (radius_known * radius_known)))
                  * (radius_unknown * radius_unknown));
   r.second = -r.first;
   return r;
@@ -1796,24 +1747,19 @@ Ellipse::get_coefficients(real Slope, real v_intercept) const
     real ax_h = get_axis_h();
     real ax_v = get_axis_v();
 
-
     r.first = ((ax_v / 2) * (ax_v / 2)) + (((ax_h / 2) * (ax_h / 2))
                                               * (Slope * Slope));  /* a */
-    
 
-    r.second = 2 * Slope * v_intercept *
-      ((ax_h / 2) * (ax_h / 2));  /* b */  
-    
-    
-    r.third = (((ax_h / 2) * (ax_h / 2)) * (v_intercept * v_intercept))
+r.second = 2 * Slope * v_intercept *
+      ((ax_h / 2) * (ax_h / 2));  /* b */
+
+r.third = (((ax_h / 2) * (ax_h / 2)) * (v_intercept * v_intercept))
       - (((ax_v / 2) * (ax_v / 2)) * ((ax_h / 2) * (ax_h /
                                                           2)));  /* c */
     
     return r;
     
   }
-
-
 
 @q ** Get center.@>
 @*1 Get center.
@@ -1831,7 +1777,6 @@ Point&|.
 virtual 
 const Point&
 get_center();
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -1862,7 +1807,6 @@ Ellipse::get_center() const
   p.apply_transform();
   return p;
 }
-
 
 @q ** (2) Get focus.@>
 @*1 Get focus.
@@ -1996,8 +1940,6 @@ Ellipse::get_vertex(const unsigned short s, Scanner_Node scanner_node) const
 
 }  /* End of |Ellipse::get_vertex()| definition.  */
 
-
-
 @q ** (2) Get linear eccentricity.@>
 @*1 Get linear eccentricity.
 
@@ -2009,7 +1951,6 @@ Added this function.
 @<Declare |Ellipse| functions@>=
 real
 get_linear_eccentricity() const;
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -2031,7 +1972,6 @@ Added this function.
 @<Declare |Ellipse| functions@>=
 real
 get_numerical_eccentricity() const;
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -2064,7 +2004,6 @@ Real_Triple
 get_discriminant(const Path& p,
                  Transform* t = 0,
                  Scanner_Node scanner_node = 0) const;
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -2107,7 +2046,6 @@ small by half.  Now multiplying by 2 in all versions of |get_axis_h()|
 and |get_axis_v()|.
 \ENDLOG
 
-
 @q *** (3) Get vertical axis.@>
 @*2 Get vertical axis. 
 
@@ -2117,7 +2055,6 @@ and |get_axis_v()|.
 @<Declare |Ellipse| functions@>=
 real
 get_axis_v() const;
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -2138,7 +2075,6 @@ Ellipse::get_axis_v() const
 real
 get_axis_v();
 
-  
 @
 @<Define |Ellipse| functions@>=
 real
@@ -2152,8 +2088,6 @@ Ellipse::get_axis_v()
   return axis_v;
 }
 
-
-
 @q *** Get horizontal axis.@>
 @*2 Get horizontal axis. 
 
@@ -2163,7 +2097,6 @@ Ellipse::get_axis_v()
 @<Declare |Ellipse| functions@>=
 real
 get_axis_h() const;
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -2182,7 +2115,6 @@ Ellipse::get_axis_h() const
 @<Declare |Ellipse| functions@>=
 real
 get_axis_h();
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -2272,12 +2204,8 @@ Ellipse::angle_point(const real angle) const
     direction_line.unit_vector(true);
 
     Point direction_pt;
-    
 
-
-
-
-    if (bpp.first.pt != INVALID_POINT)
+if (bpp.first.pt != INVALID_POINT)
       {
         direction_pt = bpp.first.pt;
         direction_pt -= Center;
@@ -2287,8 +2215,6 @@ Ellipse::angle_point(const real angle) const
       }
       return bpp.second.pt;    
 }
-
-
 
 @q * (1) Equality.@>
 @* Equality.
@@ -2309,7 +2235,6 @@ virtual
 bool
 Ellipse::operator==(const Ellipse& e)
 {
-
 
 }
 
@@ -2402,9 +2327,8 @@ Ellipse::location(const Point& p,
       }
 
     real max_ax = max(ax_h, ax_v);
-    
-    
-    Point q = p - get_focus(0);
+
+Point q = p - get_focus(0);
     real mag = q.magnitude();
 
     q = p - get_focus(1);
@@ -2754,7 +2678,6 @@ Ellipse::intersection_points(Ellipse e, Scanner_Node scanner_node) const
     cerr << "Entering Ellipse::intersection_points(Ellipse e, const bool verbose)"
          << endl;
 
-
   Point origin_pt(0, 0, 0);
   
   Bool_Point_Quadruple bpq = INVALID_BOOL_POINT_QUADRUPLE;
@@ -2788,7 +2711,6 @@ if (fabs(fabs(this_plane.distance) - fabs(e_plane.distance))
 
     real ax_h = get_axis_h();
     real ax_v = get_axis_v();
-
 
 @q ***** (5) Congruent, same location and axis orientation.@>
 @ Congruent, same location and axis orientation.
@@ -2905,7 +2827,6 @@ if (   this->center == e.center
        with |*this|, and |pt3| is the intersection of the same line
        with |e|.  */
 
-
     Point pt2;
     Point pt3;
 
@@ -2960,7 +2881,6 @@ if (   this->center == e.center
             pt2 = INVALID_POINT;
           }
 
-
         if (bpp_e.first.b == true)
           {
             if (DEBUG)
@@ -2983,7 +2903,6 @@ if (   this->center == e.center
 
             pt3 = INVALID_POINT;
           }
-
 
 #if 0
         if (DEBUG)
@@ -3038,7 +2957,6 @@ else if (DEBUG)
          << "Haven't programmed this case yet.\n";
   }
 
-
 Ellipse copy(*this);
 
 Point copy_center(copy.get_center());
@@ -3066,8 +2984,6 @@ Transform t_inverse;
       {
         cerr << "copy is already at origin_pt.\n";
       }
-
-          
 
 @q ***** (5) Get coordinates of normal.@>
 @ Get coordinates of normal.
@@ -3205,8 +3121,6 @@ e_axis_orientation = e.get_point(0);
 e_axis_orientation -= e_center;
 e_axis_orientation.unit_vector(true);
 
-
-
 if (   (e_center == origin_pt && copy_center == origin_pt)
     && ((   copy_axis_orientation == e_axis_orientation
          || copy_axis_orientation == -e_axis_orientation)
@@ -3248,7 +3162,6 @@ if (   (e_center == origin_pt && copy_center == origin_pt)
         cerr << "cc == " << cc << endl;
         cerr << "dd == " << dd << endl;
       }
-
 
     real denominator;
     real numerator;
@@ -3433,10 +3346,8 @@ or $y = 0$ (but not both).
           cerr << "ss_e == " << ss_e << endl;
       }
 
-
     if (ss_copy == 0 && ss_e == 0)
       {
-
 
         pt20 *= t_inverse;
         pt21 *= t_inverse;
@@ -3661,9 +3572,6 @@ else
 
 }  /* End of coplanar case.  */
 
-
-
-
 @q ******* (7) Handle intersection point.@>
 @ Handle intersection point.
 @<Handle intersection point@>=
@@ -3690,14 +3598,12 @@ else
       bpq.second.pt *= t_inverse;
     }
 
-
   else if (intersection_ctr == 3)
     {
       bpq.third.b = true;
       bpq.third.pt = curr_point;
       bpq.third.pt *= t_inverse;
     }
-
 
   else if (intersection_ctr == 4)
     {
@@ -3723,7 +3629,6 @@ else
     }
 }
 
-
 @q **** (4) Parallel and non-coplanar case.@>
 @  Parallel and non-coplanar case.
 @<Define |Ellipse| functions@>=
@@ -3745,9 +3650,8 @@ else
 {
   if (DEBUG)
     cerr << "Ellipses are in perpendicular or skew planes.\n";
-      
 
-  Line isect_line(this_plane.intersection_line(e_plane));
+Line isect_line(this_plane.intersection_line(e_plane));
 
   if (DEBUG) 
     isect_line.show("isect_line:");
@@ -3871,8 +3775,6 @@ if (DEBUG || verbose)
             cerr << temp_string << " point doesn't lie in the plane of e.\n";
         }
 }  
-
-
 
 @q * (1) Transformations.@>
 @* Transformations. 
@@ -4027,7 +3929,6 @@ Turned off warning message.
 @^\cofunc{Ellipse}{*=}@>
 \initials{LDF 2002.04.12.}
 
-
 \LOG
 \initials{LDF 2002.04.12.}  
 Added this function.
@@ -4049,7 +3950,6 @@ Ellipse::operator*=(const Transform& t)
 {
   return do_transform(t, true);
 }
-
 
 @q ** (2) Rotatation around the main axes.@>
 @*1 Rotation  around the main axes. 
@@ -4156,7 +4056,6 @@ Ellipse::shift(real xx, real yy, real zz)
   return do_transform(t, false);
 }
 
-
 @q *** Point argument. @>
 @ {\bf Point} argument. 
 @^\cfunc{Ellipse}{shift}@>
@@ -4172,7 +4071,6 @@ Ellipse::shift(const Point& p)
 {
   return shift(p.get_x(), p.get_y(), p.get_z());
 }
-
 
 @q ** Shift times. @>
 @ Shift times. 
@@ -4310,7 +4208,6 @@ Ellipse::standardize(Scanner_Node scanner_node) const
     return t;
 }
 
-
 @q * (1) Showing.@>
 @* Showing.
 @^\cfunc{Ellipse}{show}@>
@@ -4334,9 +4231,6 @@ show(string text = "",
      Focus* f = 0, 
      const unsigned short proj = 0,
      const real factor = 1) const;
-
-
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -4376,7 +4270,6 @@ Made |const|.
 @<Declare |Ellipse| functions@>=
 Rectangle
 out_rectangle() const;
-     
 
 @
 @<Define |Ellipse| functions@>=
@@ -4387,9 +4280,8 @@ Ellipse::out_rectangle() const
   Point pt0(get_point(0));
   Point pt1(get_point(number_of_points / 2));
   Path pa0(pt0, pt1);
-  
 
-  Point pt2(get_point(number_of_points / 4));
+Point pt2(get_point(number_of_points / 4));
   Point pt3(get_point(3 * number_of_points / 4));
 
   Point pt4(pt1);
@@ -4435,7 +4327,6 @@ Ellipse::out_rectangle() const
 @<Declare |Ellipse| functions@>=
 Rectangle
 in_rectangle() const;
-
 
 @
 @<Define |Ellipse| functions@>=
@@ -4510,7 +4401,6 @@ Replaced the optional argument |const Dash_Pattern* ddash_pattern = 0|
 with the optional argument 
 |Pointer_Vector<Dash_Pattern>* ddash_pattern_vector = 0|.
 \ENDLOG
-
 
 \TODO
 @q { @>
@@ -4608,7 +4498,6 @@ Ellipse::draw_in_rectangle(Picture& picture,
 
 @q * (1) |Rectangle| functions.@>
 @* {\bf Rectangle} functions.
-
 
 \TODO
 @q { @>
@@ -4716,9 +4605,7 @@ Rectangle::out_ellipse() const
       return r;
     }
 
-
   real scale_value = out_distance / in_distance;
-
 
   e.scale(scale_value, 0, scale_value);
 
@@ -4726,7 +4613,6 @@ Rectangle::out_ellipse() const
 
   return e;
 }
-
 
 @q *** (3) Enclosed |Ellipse|.@>
 @*2 Enclosed {\bf Ellipse}.
@@ -4849,7 +4735,6 @@ Rectangle::in_ellipse(unsigned int point_count, Scanner_Node scanner_node) const
 
 }  /* End of |Rectangle::in_ellipse()| definition.  */
 
-
 @q *** (3) Draw surrounding |Ellipse|.@>
 @*2 Draw surrounding {\bf Ellipse}.
 \initials{LDF 2003.07.18.}  
@@ -4949,7 +4834,6 @@ Rectangle::draw_in_ellipse(Pointer_Vector<Color>* ddraw_color_vector,
   return e;
 }
 
-
 @q * (1) Putting Ellipse together.@>
 @* Putting {\bf Ellipse} together.
 \initials{LDF Undated.}
@@ -4973,8 +4857,6 @@ This is what's compiled.
 @<Define |class Ellipse|@>@;
 @<Declare non-member template functions for |Ellipse|@>@;
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -4983,9 +4865,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
-
 @q * Local variables for Emacs.@>
 
 @q Local Variables: @>

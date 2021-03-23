@@ -48,9 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
-
 
 @q * (0) Drawing Commands.@>
 @** Drawing Commands.
@@ -60,7 +57,6 @@
 Created this file.  It contains code removed from 
 \filename{pcommand.w}, which was getting too large.
 \ENDLOG 
-
 
 @q * (1) command --> basic_drawing_command   @>
 @q * (1) path_expression with_clause_draw_list. @>
@@ -92,7 +88,6 @@ Changed |path_like_expression| to |path_expression|.  Removed
 all debugging code.
 \ENDLOG 
 
-
 @q ** (2) Definition.@> 
 @
 @<Define rules@>= 
@@ -100,7 +95,6 @@ all debugging code.
 @=command: basic_drawing_command path_expression @>
 @=with_clause_draw_list@>
 {
-
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
@@ -258,9 +252,6 @@ Added this rule.
 
 };
 
-
-
-
 @q * (1) command --> basic_drawing_command   @>
 @q * (1) polygon_expression with_clause_draw_list. @>
 
@@ -352,7 +343,6 @@ Added this rule.
 \initials{LDF 2005.10.24.}
 Added this rule.
 \ENDLOG
-
 
 @q ** (2) Definition.@> 
 @
@@ -604,7 +594,6 @@ Removed all debugging code.
                           @=$1@>,
                           static_cast<Solid*>(@=$2@>));
 
-
   @=$$@> = static_cast<void*>(0);
 
 };
@@ -631,7 +620,6 @@ Added this rule.
     drawing_command_solid(static_cast<Scanner_Node>(parameter),
                           @=$1@>,
                           static_cast<Solid*>(@=$2@>));
-
 
   @=$$@> = static_cast<void*>(0);
 
@@ -660,7 +648,6 @@ Added this rule.
                           @=$1@>,
                           static_cast<Solid*>(@=$2@>));
 
-
   @=$$@> = static_cast<void*>(0);
 
 };
@@ -687,7 +674,6 @@ Added this rule.
     drawing_command_solid(static_cast<Scanner_Node>(parameter),
                           @=$1@>,
                           static_cast<Solid*>(@=$2@>));
-
 
   @=$$@> = static_cast<void*>(0);
 
@@ -745,7 +731,6 @@ Added this rule.
                           @=$1@>,
                           static_cast<Solid*>(@=$2@>));
 
-
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -773,7 +758,6 @@ Added this rule.
     drawing_command_solid(static_cast<Scanner_Node>(parameter),
                           @=$1@>,
                           static_cast<Solid*>(@=$2@>));
-
 
     @=$$@> = static_cast<void*>(0);
 
@@ -829,7 +813,6 @@ Added \§with clause draw list>.
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> basic_drawing_command@>
 
-
 @q ***** (5) basic_drawing_command --> DRAW.@>
 @*4 \§basic drawing command> $\longrightarrow$ \.{DRAW}.
 
@@ -841,7 +824,6 @@ Added \§with clause draw list>.
   @=$$@> = DRAW;
 
 };
-
 
 @q ***** (5) basic_drawing_command --> DRAWARROW.@>
 @*4 \§basic drawing command> $\longrightarrow$ \.{DRAWARROW}.
@@ -876,7 +858,6 @@ Added this rule.
   @=$$@> = DRAWDBLARROW;
 
 };
-
 
 @q ***** (5) basic_drawing_command --> FILL.@>
 @*4 \§basic drawing command> $\longrightarrow$ \.{FILL}.
@@ -966,7 +947,6 @@ Added this rule.
 }
 ;
 
-
 @q ***** (5) basic_drawing_command --> UNFILLDRAW.@>
 @*4 \§basic drawing command> $\longrightarrow$ \.{UNFILLDRAW}.
 
@@ -1010,7 +990,6 @@ Removed debugging code.
 @=command: drawdot_or_undrawdot point_expression@>
 @= with_clause_draw_list@>@/
 {
-
 
      Scan_Parse::drawdot_command(static_cast<Scanner_Node>(parameter),
                                  @=$1@>,
@@ -1096,7 +1075,6 @@ Not drawing or undrawing dot.
 Added this rule.
 \ENDLOG 
 
-
 @q ***** (5) Definition.@> 
 
 @<Define rules@>=
@@ -1140,8 +1118,6 @@ Added this rule.
             break;
 
      } /* |switch (@=$1@>)|  */
-
-
 
    if (condition)
       {
@@ -1211,7 +1187,6 @@ Added this section.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>= 
 
 @=drawdot_or_undrawdot: DRAWDOT@>
@@ -1237,7 +1212,6 @@ Added this rule.
 \initials{LDF 2004.06.21.} 
 Added this rule.
 \ENDLOG 
-
 
 @<Define rules@>= 
 @=drawdot_or_undrawdot: UNDRAWDOT@>
@@ -1274,7 +1248,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>= 
 
 @=conditional_drawdot_or_undrawdot: DRAWDOT_IF@>
@@ -1292,7 +1265,6 @@ Added this rule.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>= 
 @=conditional_drawdot_or_undrawdot: UNDRAWDOT_IF@>
 {
@@ -1308,7 +1280,6 @@ Added this rule.
 \initials{LDF 2004.11.05.}
 Added this rule.
 \ENDLOG 
-
 
 @<Define rules@>= 
 
@@ -1327,7 +1298,6 @@ Added this rule.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>= 
 @=conditional_drawdot_or_undrawdot: UNDRAWDOT_UNLESS@>
 {
@@ -1336,13 +1306,11 @@ Added this rule.
 
 };
 
-
 @q **** (4) with_clause_draw_list @>
 @*3 \§with clause draw list>.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> with_clause_draw_list@>
-
 
 @q ***** (5) with_clause_draw_list --> EMPTY.@>
 @*4 \§with clause list> $\longrightarrow$ \.{EMPTY}.
@@ -1417,7 +1385,6 @@ rather than a |void| pointer to an |Id_Map_Entry_Node|.
 
 };
 
-
 @q ***** (5) with_clause_draw --> WITH_DRAW_COLOR_VECTOR color_vector_variable.@>
 
 @*4 \§with clause list> $\longrightarrow$ \.{WITH\_DRAW\_COLOR\_VECTOR}
@@ -1432,7 +1399,6 @@ Added this rule.
 Now setting |scanner_node->draw_color_vector_ptr| to |entry->object|.
 Previously, it was set to |@=$2@>|.
 \ENDLOG 
-
 
 @<Define rules@>= 
   
@@ -1466,7 +1432,6 @@ Added this rule.
 |Id_Map_Entry_Node|. 
 \ENDLOG 
 
-
 @<Define rules@>= 
   
 @=with_clause_draw: WITH_FILL_COLOR_VECTOR color_vector_variable@>
@@ -1479,7 +1444,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ***** (5) with_clause_draw --> WITH_PEN pen_expression.@>
 
@@ -1543,7 +1507,6 @@ a |void*|, since it already is one.
 
 };
 
-
 @q ***** (5) with_clause_draw --> WITH_DASH_PATTERN_VECTOR @>
 @q ***** (5) dash_pattern_vector_expression.               @>
 
@@ -1564,7 +1527,6 @@ Added this rule.
    @=$$@> = static_cast<Scanner_Node>(parameter)->dash_pattern_vector_ptr = @=$2@>;
 
 };
-
 
 @q ***** (5) with_clause_draw --> WITH_COLOR color_expression.@>
 
@@ -1615,7 +1577,6 @@ Added this rule.
 @*4 \§with clause list> $\longrightarrow$ \.{ON\_PICTURE}
 \§picture expression>.
 
-
 \LOG
 \initials{LDF 2004.06.30.}
 Changed the code in this rule to account for the fact that 
@@ -1638,7 +1599,6 @@ Lock mutex for |picture_expression|, which is an |Id_Map_Entry_Node|.
 {
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
-
 
   @=$$@> = static_cast<Scanner_Node>(parameter)->picture_entry_ptr 
      = static_cast<void*>(entry->object);
@@ -1684,7 +1644,6 @@ Now trying to allocate memory for a new |Pen|, if
 Added this section.
 \ENDLOG
 
-
 @<Define rules@>=
 
    if (p == static_cast<Pen*>(0))
@@ -1707,7 +1666,6 @@ Added this section.
 
 @ |p != 0|.
 \initials{LDF 2004.11.12.}
-
 
 @<Define rules@>=
    else /* |p != 0|  */
@@ -1733,7 +1691,6 @@ Added this section.
 
             }  /* |if (q == 0)|  */
 
-
 @q ***** (5).@> 
 
          *q = *p;
@@ -1741,7 +1698,6 @@ Added this section.
          delete p;
 
       }   /* |else| (|p != 0|)  */
-
 
    @=$$@> = static_cast<void*>(0);
 
@@ -1766,13 +1722,11 @@ Now calling |Scan_Parse::pickup_command()|.
 @=command: PICKUP color_expression@>@/
 {
 
-
     int status = pickup_command<Color>(static_cast<Scanner_Node>(parameter),
                                        static_cast<Color*>(@=$2@>),
                                        static_cast<Scanner_Node>(parameter)->current_color);
 
- 
-    if (status != 0)
+if (status != 0)
        {
 #if 0 
            cerr_strm << thread_name 
@@ -1812,7 +1766,6 @@ Now calling |Scan_Parse::pickup_command()|.
 @<Define rules@>=
 @=command: PICKUP_DRAW_COLOR color_expression@>@/
 {
-
 
     int status = pickup_command<Color>(static_cast<Scanner_Node>(parameter), 
                                        static_cast<Color*>(@=$2@>),
@@ -1882,7 +1835,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) command --> PICKUP dash_pattern_expression.@> 
 @* \§command> $\longrightarrow$ 
 \.{PICKUP} \§dash pattern expression>.
@@ -1908,8 +1860,7 @@ which is defined in \filename{scanprse.web}.
                             static_cast<Dash_Pattern*>(@=$2@>),
                             static_cast<Scanner_Node>(parameter)->current_dash_pattern);
 
- 
-    if (status != 0)
+if (status != 0)
        {
 #if 0 
            cerr_strm << thread_name 
@@ -1960,7 +1911,6 @@ returns 0, so there's no need to test its return value.
                      "scanner_node->current_pen");
 
    @=$$@> = static_cast<void*>(0);
-
 
 };
 
@@ -2050,7 +2000,6 @@ returns 0, so there's no need to test its return value.
                        scanner_node->current_fill_color,
                        "scanner_node->current_fill_color");
 
-
    @=$$@> = static_cast<void*>(0);
 
 };
@@ -2082,11 +2031,9 @@ returns 0, so there's no need to test its return value.
                               scanner_node->current_dash_pattern,
                               "scanner_node->current_dash_pattern");
 
-
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ** (2) command --> DROP_ALL.@> 
 @*1 \§command> $\longrightarrow$ 
@@ -2114,7 +2061,6 @@ Added this rule.
                        scanner_node->current_color,
                        "scanner_node->current_color");
 
-
    drop_command<Color>(scanner_node,
                        scanner_node->current_draw_color,
                        "scanner_node->current_draw_color");
@@ -2127,12 +2073,10 @@ Added this rule.
                               scanner_node->current_dash_pattern,
                               "scanner_node->current_dash_pattern");
 
-
    @=$$@> = static_cast<void*>(0);
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -2141,7 +2085,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

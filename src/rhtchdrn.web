@@ -1,7 +1,6 @@
 @q rhtchdrn.web @>
 @q Created by Laurence D. Finston (LDF) Mon Oct 22 17:08:00 CEST 2007 @>
 
-
 @q * (0) Copyright and License.@>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
@@ -49,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Rhombic_Triacontahedron.@>
 @** {\bf Rhombic\_Triacontahedron}.
@@ -254,7 +252,6 @@ Rhombic_Triacontahedron::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
-
 
 @q ** (2) Returning elements and information.@>
 @* Returning elements and information.
@@ -467,7 +464,6 @@ Rhombic_Triacontahedron::get_net(real rhombus_side_length,
 
    using namespace Scan_Parse;
 
-
 @q ***** (5) @>
 @
 @<Define |Rhombic_Triacontahedron| functions@>=
@@ -634,7 +630,6 @@ Rhombic_Triacontahedron::get_net(real rhombus_side_length,
    *pv += create_new<Polygon>(rhombus[4]);
    *pv += create_new<Polygon>(rhombus[5]);
 
-
 @q ****** (6) Rhombuses 7, 8 and 9  @>
 
    rhombus[6] = rhombus[0];
@@ -677,7 +672,6 @@ Rhombic_Triacontahedron::get_net(real rhombus_side_length,
        *pv += create_new<Polygon>(rhombus[i]); 
    }
 
-
 @q ****** (6) Rhombuses 16, 17, 18, 19, 20 and 21  @>
 
    rhombus[16] = rhombus[4];
@@ -698,7 +692,6 @@ Rhombic_Triacontahedron::get_net(real rhombus_side_length,
        rhombus[i] *= t[0];
        *pv += create_new<Polygon>(rhombus[i]); 
    }
-
 
 @q ****** (6) Rhombuses 22, 23, 24, 25, 26, 27, 28 and 29  @>
 
@@ -792,7 +785,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    using namespace Scan_Parse;
 
-
 @q ****** (6) Declarations and Initializations.@>
 @ Declarations and Initializations.
 \initials{LDF 2007.10.29.}
@@ -810,14 +802,12 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
                                          do_half,
                                          scanner_node);
 
-
    Pointer_Vector<Path>* tv = new Pointer_Vector<Path>;
 
    Pointer_Vector<Path>* sv = 0;
 
    if (do_stitch_lines)
       sv = new Pointer_Vector<Path>;
-
 
    Bool_Point bp;
 
@@ -891,7 +881,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)|  */
 
-
 @q ******* (7) Tab rhombus 1, points 1 -- 2, outer  @>
 
    p[20] = nv->v[1]->get_point(0);
@@ -917,7 +906,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)|  */
 
-
 @q ******* (7) Tab rhombus 1, points 2 -- 3, outer  @>
 
    t0.reset();
@@ -939,7 +927,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
       *sv += create_new<Path>(stitch_line);
 
    }  /* |if (do_stitch_lines)|  */
-
 
 @q ******* (7) Tab rhombus 1, points 3 -- 0, outer  @>
 
@@ -963,12 +950,10 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)|  */
 
-
 @q ******* (7) Tab rhombus 2, points 0 -- 1, outer  @>
 
    for (int i = 0; i < 4; ++i)
       p[30 + i] = nv->v[2]->get_point(i);
-
 
    t0.reset();
    t0.rotate(p[20], p[21]);
@@ -1010,7 +995,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)|  */
 
-
 @q ******* (7) Tab rhombus 2, points 2 -- 3, outer  @>
 
    t0.reset();
@@ -1030,7 +1014,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
       *sv += create_new<Path>(stitch_line);
 
    }  /* |if (do_stitch_lines)|  */
-
 
 @q ******* (7) Tab rhombus 3, points 1 -- 2, outer  @>
 
@@ -1062,7 +1045,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)|  */
 
-
 @q ******* (7) Tab rhombus 3, points 3 -- 0, inner  @>
 
    t0.inverse(true);
@@ -1083,7 +1065,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
       *sv += create_new<Path>(stitch_line);
 
    }  /* |if (do_stitch_lines)|  */
-
 
 @q ******* (7) Tab rhombus 4, points 2 -- 3, outer  @>
 
@@ -1137,7 +1118,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)|  */
 
-
 @q ******* (7) Tab rhombus 5, points 1 -- 2, outer  @>
 
    t0.reset(); 
@@ -1177,7 +1157,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
       *sv += create_new<Path>(stitch_line);
 
    }  /* |if (do_stitch_lines)|  */
-
 
 @q ****** (6) Tabs and stitch lines for second column.  @>
 
@@ -1281,7 +1260,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    *tv += create_new<Path>(tab);
 
-
 @q ******** (8) Stitch lines  @>
 
    if (do_stitch_lines)
@@ -1374,10 +1352,7 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
       *sv += create_new<Path>(stitch_line);
 
-
-
    }  /* |if (do_stitch_lines)|  */
-
 
 @q ****** (6) Tabs and stitch lines for third column.  @>
 
@@ -1463,7 +1438,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    *tv += create_new<Path>(tab);
 
-
 @q ******** (8) Stitch lines for third column  @>
 
    if (do_stitch_lines)
@@ -1515,7 +1489,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
       stitch_line = *sv->v[24];
       stitch_line *= t0;
       *sv += create_new<Path>(stitch_line);
-
 
    }  /* |if (do_stitch_lines)| (Third column)  */
 
@@ -1647,7 +1620,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    }  /* |if (do_stitch_lines)| (Fourth column)  */
 
-
 @q ****** (6) Tabs and stitch lines for fifth column.  @>
 
    for (int i = 0; i < 4; ++i)
@@ -1661,10 +1633,8 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
 @q ******* (7) Tabs  @>
 
-
    t0.reset(); 
    t0.shift(p[122] - p[112]);
-
 
    tab = *tv->v[37];  /* Rhombus 24 */
 
@@ -1747,7 +1717,6 @@ Rhombic_Triacontahedron::get_tabs(real rhombus_side_length,
 
    if (do_stitch_lines)
    {
-
 
       stitch_line = *sv->v[37];  /* Rhombus 24 */
       stitch_line *= t0;
@@ -1935,7 +1904,6 @@ Rhombic_Triacontahedron::get_tabs(void* parameter)
 @(rhtchdrn.h@>=
 @<Declare |class Rhombic_Triacontahedron|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1944,7 +1912,6 @@ Rhombic_Triacontahedron::get_tabs(void* parameter)
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

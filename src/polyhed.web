@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Polyhedra.@>
 @** Polyhedra\quad ({\tt polyhedra\PERIOD web}).\hfil
@@ -160,8 +159,6 @@ class Polyhedron : public Solid_Faced
   @<Declare |Polyhedron| functions@>@;
 };
 
-
-
 @q * (1) Is |Polyhedron|.@> 
 @* Is {\bf Polyhedron}.
 \initials{LDF 2005.03.31.}
@@ -243,7 +240,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -253,12 +249,11 @@ Polyhedron::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -272,7 +267,6 @@ Polyhedron::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -301,7 +295,6 @@ on the free store for it.
 
 @<Define |Polyhedron| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -316,10 +309,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (polyhedron_reflection == 0)|  */
@@ -334,7 +325,6 @@ on the free store for it.
   Solid_Faced solid_faced_reflection;
 
   int status;
-
 
   try
      {
@@ -392,8 +382,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Solid_Faced::reflect_in()| succeeded.@> 
 
@@ -425,7 +414,6 @@ on the free store for it.
 
 @<Define |Polyhedron| functions@>=
 
-
   polyhedron_reflection->number_of_polygon_types = number_of_polygon_types; 
   polyhedron_reflection->face_radius             = face_radius; 
   polyhedron_reflection->edge_radius             = edge_radius; 
@@ -456,9 +444,6 @@ on the free store for it.
   return 0;
 
 } /* End of |Polyhedron::reflect_in()| definition.  */
-
-
-
 
 @q * (1) Intersection.@>  
 @* Intersection.
@@ -556,7 +541,6 @@ Polyhedron::intersection_points(Path* q, Scanner_Node scanner_node) const
 
       }  /* |if (!(q && q->is_linear()))|  */
 
-
 @q **** (4)@> 
 @
 @<Define |Polyhedron| functions@>=
@@ -582,7 +566,6 @@ Polyhedron::intersection_points(Path* q, Scanner_Node scanner_node) const
       }  /* |for|  */
 
 @q **** (4)@> 
-
 
     vector<Point>::iterator v_iter;
     vector<Point>::iterator dups_iter;
@@ -642,7 +625,7 @@ Polyhedron::intersection(const Plane& q,
 {
 @q **** (4) Preliminaries.@> 
 
-    bool DEBUG = false; /* |true|  */
+    bool DEBUG = false; /* |true| */
 
     using namespace Scan_Parse;
 
@@ -667,7 +650,6 @@ Polyhedron::intersection(const Plane& q,
 
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
 
 @q **** (4)@> 
 @
@@ -722,9 +704,8 @@ Changed |Pointer_Vector<Point>* bpv| to |Pointer_Vector<Bool_Point>* bpv|.
                                     }
 
                              } /* End of second inner |for|  */
-                  
 
-                     }  /* End of first inner |for|  */
+}  /* End of first inner |for|  */
 
              }  /* |else| (|bpv != 0|)  */
 
@@ -765,7 +746,6 @@ Changed |Pointer_Vector<Point>* bpv| to |Pointer_Vector<Bool_Point>* bpv|.
                                                       static_cast<void*>(scanner_node),
                                                       suppress_warnings));
 
-
 #if DEBUG_COMPILE
     if (DEBUG)
     {
@@ -778,15 +758,12 @@ Changed |Pointer_Vector<Point>* bpv| to |Pointer_Vector<Bool_Point>* bpv|.
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
-
     return poly;
 
 @q **** (4)@> 
 
 }  /* End of |Polyhedron::intersection(const Plane& p, [etc.])| 
       definition.  */
-
-
 
 @q ** (2) Intersection of a |Polyhedron| and a |Reg_Polygon|.@> 
 @*1 Intersection of a {\bf Polyhedron} and a {\bf Reg\_Polygon}.
@@ -847,10 +824,6 @@ Polyhedron::intersection_points(const Reg_Polygon& r) const
 }
 #endif 
 
-
-
-
-
 @q * (0) Regular Platonic Polyhedra.@>
 @** Regular Platonic Polyhedra.
 
@@ -859,7 +832,6 @@ Polyhedron::intersection_points(const Reg_Polygon& r) const
 \LOG
 \initials{LDF 2002.11.12.}  Added this section.
 \ENDLOG 
-
 
 @q * (1) {\bf Tetrahedron} Class definition.@>
 @* {\bf Tetrahedron} class definition.
@@ -885,7 +857,6 @@ class Tetrahedron : public Polyhedron
 \ENDLOG 
 @<Define |static const Tetrahedron| data members@>=
 const real Tetrahedron::dihedral_angle = PI * (70 + 32/60.0) / 180.0;
-
 
 @q * Constructors and setting functions.@>
 @ Constructors and setting functions.
@@ -987,7 +958,6 @@ Tetrahedron::Tetrahedron(const Point& p,
 
   number_of_polygon_types = 1;
 
-
   Point origin_pt(0, 0, 0);
 
 #if 0 
@@ -1048,8 +1018,6 @@ Tetrahedron::Tetrahedron(const Point& p,
   pts[2].draw(pts[4], &green);
   pts[3].draw(pts[7], &orange);
 #endif 
-
-
 
 @ |center| is the intersection point of the line segments from the
 vertices of |*(reg_polygons[0])| to the centers of the opposite faces.   
@@ -1178,8 +1146,6 @@ Tetrahedron::get_copy() const
   return static_cast<Shape*>(p);
 }
 
-
-
 @q * (1) Returning elements and information.@>
 @* Returning elements and information.
 \initials{LDF 2005.03.18.}
@@ -1208,7 +1174,6 @@ get_shape_type(void) const
 {
    return TETRAHEDRON_TYPE;
 }
-
 
 @q ** (2) Is |Tetrahedron|.@> 
 @*1 Is {\bf Tetrahedron}.
@@ -1277,7 +1242,6 @@ Tetrahedron::get_net(const real triangle_diameter,
 
   triangles[0]->set(origin_pt, 3, triangle_diameter, 0, 180);
 
-
   triangles[1]->set(origin_pt, 3, triangle_diameter);
 
   Point pts[6];
@@ -1300,10 +1264,6 @@ Tetrahedron::get_net(const real triangle_diameter,
    
   return triangles;
 }
-
-
-
-
 
 @q * (1) Draw net.@>
 @* Draw net.
@@ -1357,9 +1317,7 @@ Tetrahedron::draw_net(Picture& picture,
   if (!make_tabs)
     return;
 
-  
-  
-  Point pts[32];
+Point pts[32];
 
   pts[0] = v[2]->get_point(1);
   pts[1] = v[2]->get_point(2);
@@ -1381,15 +1339,13 @@ Tetrahedron::draw_net(Picture& picture,
 
   pts[10].rotate(pts[6], pts[8], -110);
   pts[11].rotate(pts[7], pts[9], 110);
-  
 
-  pts[10] = pts[6].mediate(pts[10], 1.5);
+pts[10] = pts[6].mediate(pts[10], 1.5);
   pts[11] = pts[7].mediate(pts[11], 1.5);
 
 #if 0 
   for (i = 0; i < 8; i++)
     pts[i].dotlabel(i);
-
 
   pts[10].dotlabel(10);
   pts[11].dotlabel(11);
@@ -1400,9 +1356,8 @@ Tetrahedron::draw_net(Picture& picture,
   p[0].set("--", true, &pts[6], &pts[10], &pts[11], &pts[7], static_cast<Point*>(0));
 
   p[0].draw(picture);
-  
 
-  pts[12] = pts[6].mediate(pts[7]);
+pts[12] = pts[6].mediate(pts[7]);
   pts[13] = pts[10].mediate(pts[11]);
 
 #if 0 
@@ -1456,7 +1411,6 @@ Tetrahedron::draw_net(Picture& picture,
   p[2].draw_help(Colors::help_color);
 #endif 
 
-
   Pen q;
   Transform s;
   s.scale(.05, .05, .05);
@@ -1487,7 +1441,6 @@ Tetrahedron::draw_net(Picture& picture,
       pts[19].drawdot(picture, 0, &q);
     }
 
-
   t.reset();
   t.rotate(pts[4], pts[1]);
 
@@ -1499,7 +1452,6 @@ Tetrahedron::draw_net(Picture& picture,
       pts[19] = pts[20].mediate(pts[21], i /16.0);
       pts[19].drawdot(picture, 0, &q);
     }
-
 
   pts[20] = pts[17];
   pts[21] = pts[18];
@@ -1513,7 +1465,6 @@ Tetrahedron::draw_net(Picture& picture,
       pts[19] = pts[20].mediate(pts[21], i /16.0);
       pts[19].drawdot(picture, 0, &q);
     }
-
 
   t.reset();
 
@@ -1552,9 +1503,7 @@ Tetrahedron::draw_net(Picture& picture,
       pts[19].drawdot(picture, 0, &q);
     }
 
-
   return;
-
 
 }
 
@@ -1588,7 +1537,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -1598,12 +1546,11 @@ Tetrahedron::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -1617,7 +1564,6 @@ Tetrahedron::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -1646,7 +1592,6 @@ on the free store for it.
 
 @<Define |Tetrahedron| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -1661,10 +1606,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (tetrahedron_reflection == 0)|  */
@@ -1679,7 +1622,6 @@ on the free store for it.
   Polyhedron polyhedron_reflection;
 
   int status;
-
 
   try
      {
@@ -1737,8 +1679,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
 
@@ -1770,7 +1711,6 @@ on the free store for it.
 
 @<Define |Tetrahedron| functions@>=
 
-
    tetrahedron_reflection->triangle_radius = triangle_radius; 
 
 @q *** (3) Exit function successfully with   @> 
@@ -1799,8 +1739,6 @@ on the free store for it.
 
 } /* End of |Tetrahedron::reflect_in()| definition.  */
 
-
-
 @q * (0) Octahedron.@>
 @** {\bf Octahedron}.
 \initials{LDF 2004.10.08.}
@@ -1810,17 +1748,14 @@ on the free store for it.
 Added this section.
 \ENDLOG
 
-
 @q * (1)  {\bf Octahedron} Class definition.@>
 @* {\bf Octahedron} class definition.
 \initials{LDF 2004.10.08.}
-
 
 \LOG
 \initials{LDF 2004.10.08.}
 Added this class definition.
 \ENDLOG
-
 
 @f Octahedron Polyhedron
 
@@ -1835,7 +1770,6 @@ class Octahedron : public Polyhedron
   @<Declare |Octahedron| functions@>@;
 };
 
-
 @q * (1) Define static const Octahedron data members.@>
 @* Define {\bf static const Octahedron} data members.
 
@@ -1846,7 +1780,6 @@ Added this section.
 
 @<Define |static const Octahedron| data members@>=
 const real Octahedron::dihedral_angle = PI/180.0 * (109.0 + 28.0/60.0);
-
 
 @q * (1) Constructors and setting functions.@>
 @*1 Constructors and setting functions.
@@ -1899,7 +1832,6 @@ Octahedron::Octahedron(void)
 
 } /* End of |Octahedron::Octahedron(void)| definition.  */
 
-
 @q ** (2) Center, diameter of triangles, and angles. @>
 @*1 Center, diameter of triangles, and angles.
 
@@ -1910,7 +1842,6 @@ Added this section.
 
 @q *** (3) Constructor.@>
 @*2 Constructor.
-
 
 \LOG
 \initials{LDF 2004.10.08.}
@@ -1929,7 +1860,6 @@ Now setting |surface_hiding_ctr = 0|.
 Now setting |decomposition_level = 0|.
 \ENDLOG
 
-
 @q **** (4) Declaration.@> 
 
 @<Declare |Octahedron| functions@>=
@@ -1939,7 +1869,6 @@ Octahedron(const Point& ccenter,
            real angle_y = 0,
            real angle_z = 0,
            Scanner_Node scanner_node = 0);
-
 
 @q **** (4) Definition.@> 
 
@@ -2006,14 +1935,9 @@ Octahedron::Octahedron(const Point& ccenter,
 
     triangle_radius = triangle_diameter / 2.0;
 
-
-
     reg_polygons = get_net(triangle_diameter, true);
 
-
-
    real angle = 180 - (dihedral_angle * 180.0/PI);
-
 
 @q ***** (5) @>   
 @
@@ -2021,7 +1945,6 @@ Octahedron::Octahedron(const Point& ccenter,
 
     int i = 0;
     int j = 0;
-
 
     Point pts[4][3];
 
@@ -2036,14 +1959,11 @@ Octahedron::Octahedron(const Point& ccenter,
 
       } /* |for| (|i|) */
 
-    
-   reg_polygons[1]->rotate(pts[0][2], pts[0][1], -angle);
+reg_polygons[1]->rotate(pts[0][2], pts[0][1], -angle);
 
    reg_polygons[3]->rotate(pts[2][2], pts[2][1], -angle);
 
-
    *reg_polygons[2] *= reg_polygons[3]->rotate(pts[2][0], pts[0][1], -angle);
-
 
     for (i = 1; i < 4; ++i)
       {
@@ -2056,8 +1976,7 @@ Octahedron::Octahedron(const Point& ccenter,
 
       } /* |for| (|i|) */
 
-   
-   Point q[9];
+Point q[9];
 
    q[0] = pts[0][0].mediate(pts[0][2]);
    q[1] = pts[1][0].mediate(pts[1][2]);
@@ -2072,15 +1991,12 @@ Octahedron::Octahedron(const Point& ccenter,
 
            q[i] *= *reg_polygons[i] *= t;
 
-
-
    t.reset();
 
    t.align_with_axis(q[1], q[2], 'x');
 
    for (i = 0; i < 4; ++i)   
       q[i] *= *reg_polygons[i] *= t;
-
 
 @q ***** (5) Try to create four more |Reg_Polygons|.@> 
 
@@ -2147,7 +2063,6 @@ about the x-axis.
 
     q[8] = q[1].mediate(q[2]);
 
-
 @q ***** (5) Shift the |Reg_Polygons| so that the |Octahedron| @>  
 @q ***** (5) is centered about the origin.                     @> 
 
@@ -2160,9 +2075,6 @@ about the origin.
     for (i = 0; i < 8; i++)
        q[i] *= reg_polygons[i]->shift(-q[8]);
 
-    
-
-
 @q ***** (5) Rotate the |Reg_Polygons| about the main axes, if necessary.@>  
 
 @ Rotate the |Reg_Polygons| about the main axes, if necessary.
@@ -2172,7 +2084,6 @@ about the origin.
 
    if (angle_x || angle_y || angle_z)
      rotate(angle_x, angle_y, angle_z);
-
 
 @q ***** (5) Shift |*this| so that |center == ccenter|, if necessary.@>
 
@@ -2186,10 +2097,7 @@ Added this section.
 I haven't tested the code it contains yet. 
 \ENDLOG
 
-
 @<Define |Octahedron| functions@>=
-
-
 
 Point origin(0, 0, 0);
 
@@ -2260,7 +2168,6 @@ Octahedron::get_copy() const
   return static_cast<Shape*>(p);
 }
 
-
 @q * (1) Returning elements and information.@>
 @* Returning elements and information.
 \initials{LDF 2005.03.18.}
@@ -2290,7 +2197,6 @@ get_shape_type(void) const
    return OCTAHEDRON_TYPE;
 }
 
-
 @q ** (2) Is |Octahedron|.@> 
 @*1 Is {\bf Octahedron}.
 \initials{LDF 2005.03.31.}
@@ -2311,7 +2217,6 @@ is_octahedron(void) const
 {
    return true;
 }
-
 
 @q * (1) Get net.@>  
 @* Get net. 
@@ -2339,7 +2244,7 @@ Octahedron::get_net(const real triangle_diameter,
                     bool do_half,
                     Scanner_Node scanner_node)
 {
-bool DEBUG = false; /* |true|  */@; 
+bool DEBUG = false; /* |true| */@; 
 vector<Reg_Polygon*> triangles;
 
 Point origin_pt(0, 0, 0);
@@ -2367,7 +2272,6 @@ triangles[3]->shift(pts[1] - pts[2]);
 return triangles;
 
 }  /* End of |Octahedron::get_net()| definition.  */
-
 
 @q * (1) Reflection in a |Plane|.@> 
 @* Reflection in a |Plane|.
@@ -2399,7 +2303,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -2409,12 +2312,11 @@ Octahedron::reflect_in(const Plane& p,
                        void* v,
                        const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -2428,7 +2330,6 @@ Octahedron::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -2457,7 +2358,6 @@ on the free store for it.
 
 @<Define |Octahedron| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -2472,10 +2372,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (octahedron_reflection == 0)|  */
@@ -2490,7 +2388,6 @@ on the free store for it.
   Polyhedron polyhedron_reflection;
 
   int status;
-
 
   try
      {
@@ -2548,8 +2445,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
 
@@ -2580,7 +2476,6 @@ on the free store for it.
 \initials{LDF 2004.10.05.}
 
 @<Define |Octahedron| functions@>=
-
 
    octahedron_reflection->triangle_radius = triangle_radius; 
 
@@ -2654,7 +2549,6 @@ Now setting |surface_hiding_ctr = 0|.
 Now setting |decomposition_level = 0|.
 \ENDLOG
 
-
 @<Declare |Icosahedron| functions@>=
 
 Icosahedron(void);
@@ -2694,7 +2588,6 @@ Must fix this constructor.  There's a
 problem with rotation.  I've already done so for the |Dodecahedron|
 constructor. 
 \ENDTODO 
-
 
 \LOG
 \initials{LDF 2002.10.16.}
@@ -2755,7 +2648,6 @@ Icosahedron::Icosahedron(const Point& p,
     reg_polygons.push_back(create_new<Reg_Polygon>(0));
     reg_polygons.front()->set(origin_pt, 3, triangle_diameter);
 
-
     Point pts[7];
 
     for (i = 0; i < 3; ++i)
@@ -2779,7 +2671,6 @@ Icosahedron::Icosahedron(const Point& p,
     reg_polygons[5]->rotate(0, 180);
     reg_polygons[5]->shift(pts[1] - reg_polygons[5]->get_point(0));
 
-
     for (i = 6; i < 10; ++i)
       {
         reg_polygons.push_back(create_new<Reg_Polygon>(reg_polygons[5]));
@@ -2792,13 +2683,10 @@ Icosahedron::Icosahedron(const Point& p,
     reg_polygons[9]->shift(pts[2] - pts[0]);
     reg_polygons[9]->shift(pts[2] - pts[1]);
 
-
     pts[3] = reg_polygons[2]->get_point(1);
     pts[4] = reg_polygons[2]->get_point(0);
     pts[5] = reg_polygons[1]->get_point(2);
     pts[6] = reg_polygons[1]->get_point(0);
-
-
 
     real angle = 180.0 - (dihedral_angle * 180.0/PI);
 
@@ -2810,7 +2698,6 @@ Icosahedron::Icosahedron(const Point& p,
 
     *reg_polygons[7] *= *reg_polygons[2] *= *reg_polygons[3]
       *= reg_polygons[5]->rotate(pts[1], pts[0], -angle);
-
 
     *reg_polygons[1] *= reg_polygons[9]->rotate(pts[2], pts[6], angle);
 
@@ -2837,8 +2724,6 @@ Icosahedron::Icosahedron(const Point& p,
     
     for (i = 10; i < 20; ++i)
       reg_polygons[i]->shift(0, y_shift);
-
-
 
     center = reg_polygons[0]->get_center().mediate(reg_polygons[10]->get_center()); 
     
@@ -2869,7 +2754,6 @@ Icosahedron::Icosahedron(const Point& p,
     return;
 }
 
-
 @q * (1) Get copy.@>
 @* Get copy.
 @^\cfunc{Icosahedron}{get\_copy}@>
@@ -2894,8 +2778,6 @@ Icosahedron::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
-
-
 
 @q * (1) Returning elements and information.@>
 @* Returning elements and information.
@@ -2947,10 +2829,6 @@ is_icosahedron(void) const
    return true;
 }
 
-
-
-
-
 @q * (1) Get net.@>  
 @* Get net. 
 @^\cfunc{Icosahedron}{get\_net}@>
@@ -2991,7 +2869,7 @@ Icosahedron::get_net(const real triangle_diameter,
                      bool do_half,
                      Scanner_Node scanner_node)
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
   vector<Reg_Polygon*> triangles;
 
   Point origin_pt(0, 0, 0);
@@ -3039,7 +2917,6 @@ Icosahedron::get_net(const real triangle_diameter,
       *triangles[9] = *triangles[5];
       *triangles[8] *= triangles[9]->shift(pts[1] - pts[2]);
 
-
       for (i = 0; i < 10; ++i)
         {
           for (int j = 0; j < 3; j++)
@@ -3052,7 +2929,6 @@ Icosahedron::get_net(const real triangle_diameter,
         }
       return triangles;
     }
-
 
   /* Do the second half.  */
 
@@ -3092,7 +2968,6 @@ Icosahedron::get_net(const real triangle_diameter,
   return triangles;
 }
 
-
 @q * (1) Draw net.@>  
 @* Draw net. 
 @^\cfunc{Icosahedron}{draw\_net}@>
@@ -3121,7 +2996,6 @@ Added |Picture& picture| argument.
 Write code for tabs.
 \initials{LDF Undated.}
 \ENDTODO 
-
 
 @q ** Declaration.  @>  
 
@@ -3172,7 +3046,6 @@ Icosahedron::draw_net(Picture& picture,
   pts[0] = v[0]->get_point(0);
   pts[1] = v[0]->get_point(1);
   pts[2] = v[0]->get_point(2);
-
 
   pts[3] = pts[0].mediate(pts[1], .1);
   pts[4] = pts[1].mediate(pts[0], .1);
@@ -3247,7 +3120,6 @@ Icosahedron::draw_net(Picture& picture,
   return;
 }
 
-
 @q * (1) Reflection in a |Plane|.@> 
 @* Reflection in a |Plane|.
 \initials{LDF 2004.10.05.}
@@ -3282,7 +3154,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -3292,12 +3163,11 @@ Icosahedron::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -3311,7 +3181,6 @@ Icosahedron::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -3340,7 +3209,6 @@ on the free store for it.
 
 @<Define |Icosahedron| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -3355,10 +3223,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (icosahedron_reflection == 0)|  */
@@ -3373,7 +3239,6 @@ on the free store for it.
   Polyhedron polyhedron_reflection;
 
   int status;
-
 
   try
      {
@@ -3431,8 +3296,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
 
@@ -3492,8 +3356,6 @@ on the free store for it.
 
 } /* End of |Icosahedron::reflect_in()| definition.  */
 
-
-
 @q * (0) Semi-Regular Archimedean Polyhedra.@>
 @** Semi-Regular Archimedean Polyhedra.
 
@@ -3525,8 +3387,6 @@ const real Trunc_Octahedron::angle_hex_square
 const real Trunc_Octahedron::angle_hex_hex
     = (109 + (28.0 / 60.0)) * (PI / 180.0);   
 
-
-
 @q ** (2) |Trunc_Octahedron| functions.@>
 @*1 {\bf Trunc\_Octahedron} functions.
 \initials{LDF 2004.10.21.}
@@ -3550,7 +3410,6 @@ Now setting |surface_hiding_ctr = 0|.
 \initials{LDF 2005.04.18.}
 Now setting |decomposition_level = 0|.
 \ENDLOG
-
 
 @<Declare |Trunc_Octahedron| functions@>=
 Trunc_Octahedron(void);
@@ -3669,7 +3528,6 @@ Trunc_Octahedron::Trunc_Octahedron(const Point& ccenter,
     edge_radius = 0;
     vertex_radius = 0;
 
-
     faces    = 14;          /* from |Solid_Faced|.  
                                \initials{LDF 2002.10.29.}
                                Truncated octahedrons consist of 6
@@ -3696,14 +3554,11 @@ Trunc_Octahedron::Trunc_Octahedron(const Point& ccenter,
     for (i = 0; i < 6; i++)
        p[i + 15] = reg_polygons[1]->get_point(i);
 
-
     real alpha = -(180 - (180 / PI * angle_hex_square));
 
     real beta = -(180 - (180 / PI * angle_hex_hex));
- 
 
-    reg_polygons[5]->rotate(p[11], p[12], alpha);
-
+reg_polygons[5]->rotate(p[11], p[12], alpha);
 
     *reg_polygons[5] *= reg_polygons[3]->rotate(p[1], p[0], beta);
   
@@ -3727,7 +3582,6 @@ Trunc_Octahedron::Trunc_Octahedron(const Point& ccenter,
      for (i = 0; i < 4; i++)
        p[i + 27] = reg_polygons[11]->get_point(i);
 
-
     Transform t;
 
     t.shift(p[23] - p[27]);
@@ -3740,7 +3594,6 @@ Trunc_Octahedron::Trunc_Octahedron(const Point& ccenter,
     t.reset();
 
    p[31] = reg_polygons[7]->get_center();
-
 
     t.shift(-.5 * p[31]);
 
@@ -3759,7 +3612,6 @@ Trunc_Octahedron::Trunc_Octahedron(const Point& ccenter,
   if (angle_x || angle_y || angle_z)
     rotate(angle_x, angle_y, angle_z);
 
-
 @q ****** (6) Shift |*this| so that |center| comes to lie at |ccenter|, @> 
 @q ****** (6) if necessary.                                             @> 
 
@@ -3772,7 +3624,6 @@ if necessary.
   Point origin(0, 0, 0);
   
   center = origin;
-
 
   if (ccenter != origin)
     center *= shift(ccenter);
@@ -3795,7 +3646,6 @@ if necessary.
     return;
 
 } /* End of non-default |Trunc_Octahedron| constructor definition.  */
-
 
 @q ** (2) Get copy.@>
 @*1 Get copy.
@@ -3821,8 +3671,6 @@ Trunc_Octahedron::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
-
-
 
 @q ** (2) Returning elements and information.@>
 @*1 Returning elements and information.
@@ -3874,7 +3722,6 @@ is_trunc_octahedron(void) const
    return true;
 }
 
-
 @q ** (2) Get net.@>  
 @*1 Get net. 
 @^\cfunc{Trunc\_Octahedron}{get\_net}@>
@@ -3913,15 +3760,14 @@ Trunc_Octahedron::get_net(const real hexagon_diameter,
                           bool do_half,
                           Scanner_Node scanner_node)
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
   vector<Reg_Polygon*> reg_polygons;
 
   Point origin_pt(0, 0, 0);
 
   int i;
 
-  
-  reg_polygons.push_back(create_new<Reg_Polygon>(0));
+reg_polygons.push_back(create_new<Reg_Polygon>(0));
   reg_polygons[0]->set(origin_pt, 6, hexagon_diameter);
 
   Point p[24];
@@ -3959,16 +3805,13 @@ Trunc_Octahedron::get_net(const real hexagon_diameter,
   
   reg_polygons.back()->shift(p[1] - p[8]);
 
-
   reg_polygons.push_back(create_new<Reg_Polygon>(reg_polygons[4]));
   
   reg_polygons.back()->shift(p[4] - p[6]);
 
-
   return reg_polygons;
 
 } /* End of |Trunc_Octahedron::get_net()| definition.  */
-
 
 @q * (1) Great Rhombicosidodecahedron.@>
 @* {\bf Great Rhombicosidodecahedron}.
@@ -4029,9 +3872,6 @@ hexagon-square:    159.095 degrees
 hexagon-decagon:   142.62 degrees
 */
 
-
-
-
 @q ** (2) |Great_Rhombicosidodecahedron| functions.@>
 @*1 {\bf Great\_Rhombicosidodecahedron} functions.
 \initials{LDF 2005.12.14.}
@@ -4049,7 +3889,6 @@ Added this section.
 \initials{LDF 2005.12.14.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Default constructor. (No arguments.)@>
 
@@ -4172,7 +4011,6 @@ Great_Rhombicosidodecahedron::Great_Rhombicosidodecahedron(
     edge_radius = 0;
     vertex_radius = 0;
 
-
     faces    = 62;          /* from |Solid_Faced|.  */
 
     vertices = 120;
@@ -4195,7 +4033,6 @@ Added this section.
 @<Define |Great_Rhombicosidodecahedron| functions@>=
 
 @q ******* (7)@> 
-
 
     Point axis_0;
     Point axis_1;
@@ -4228,14 +4065,10 @@ Added this section.
 
 @q ******** (8)@> 
 
-
-
     axis_0 = reg_polygons[3]->get_point(2);
     axis_1 = reg_polygons[3]->get_point(3);
 
     *(reg_polygons[4]) *= reg_polygons[3]->rotate(axis_0, axis_1, hex_square_angle);
-
-
 
 @q ******** (8)@> 
 
@@ -4255,8 +4088,6 @@ Added this section.
        *= *reg_polygons[1] 
        *= reg_polygons[0]->rotate(axis_0, axis_1, hex_square_angle);
 
-
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[5]->get_point(3);
@@ -4266,7 +4097,6 @@ Added this section.
        *= *reg_polygons[2] 
        *= *reg_polygons[1] 
        *= reg_polygons[0]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******* (7) Column 2.@> 
 @ Column 2.
@@ -4287,15 +4117,12 @@ Added this section.
 
     reg_polygons[10]->rotate(axis_0, axis_1, hex_square_angle);
 
-
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[9]->get_point(5);
     axis_1 = reg_polygons[9]->get_point(0);
 
     *reg_polygons[9] *= reg_polygons[10]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4304,7 +4131,6 @@ Added this section.
 
     *reg_polygons[8] *= *reg_polygons[9] 
        *= reg_polygons[10]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
     axis_0 = reg_polygons[6]->get_point(5);
@@ -4349,7 +4175,6 @@ Added this section.
 
     *reg_polygons[15] *= *reg_polygons[16] 
        *= reg_polygons[17]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
     axis_0 = reg_polygons[13]->get_point(0);
@@ -4398,7 +4223,6 @@ Added this section.
 
     *reg_polygons[22] 
        *= reg_polygons[23]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4462,7 +4286,6 @@ Added this section.
     *reg_polygons[28] 
        *= reg_polygons[29]->rotate(axis_0, axis_1, hex_square_angle);
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[26]->get_point(0);
@@ -4519,7 +4342,6 @@ Added this section.
 
     *reg_polygons[34] *= reg_polygons[35]->rotate(axis_0, axis_1, hex_square_angle);
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[32]->get_point(3);
@@ -4527,7 +4349,6 @@ Added this section.
 
     *reg_polygons[33] *= *reg_polygons[34] 
        *= reg_polygons[35]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4589,7 +4410,6 @@ Added this section.
 
     *reg_polygons[39] *= *reg_polygons[40] 
        *= reg_polygons[41]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4654,7 +4474,6 @@ Added this section.
     *reg_polygons[46] *= *reg_polygons[47] 
        *= reg_polygons[49]->rotate(axis_0, axis_1, hex_square_angle);
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[44]->get_point(3);
@@ -4662,7 +4481,6 @@ Added this section.
 
     *reg_polygons[45] *= *reg_polygons[46] *= *reg_polygons[47] 
        *= reg_polygons[49]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4687,7 +4505,6 @@ Added this section.
     for (i = 0; i < 42; ++i)
        *reg_polygons[i] *= t;    
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[42]->get_point(3);
@@ -4698,7 +4515,6 @@ Added this section.
 
     for (i = 0; i < 43; ++i)
        *reg_polygons[i] *= t;    
-
 
 @q ******* (7) Column 9.@> 
 @ Column 9.
@@ -4712,14 +4528,12 @@ Added this section.
 
     reg_polygons[54]->rotate(axis_0, axis_1, hex_square_angle);
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[53]->get_point(2);
     axis_1 = reg_polygons[53]->get_point(3);
 
     *reg_polygons[53] *= reg_polygons[54]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4728,8 +4542,6 @@ Added this section.
 
     *reg_polygons[52] *= *reg_polygons[53] 
        *= reg_polygons[54]->rotate(axis_0, axis_1, hex_square_angle);
-
-
 
 @q ******** (8)@> 
 
@@ -4767,7 +4579,6 @@ Added this section.
     for (i = 0; i < 50; ++i)
        *reg_polygons[i] *= t;    
 
-
 @q ******* (7) Column 10.@> 
 @ Column 10.
 
@@ -4787,7 +4598,6 @@ Added this section.
 
     *reg_polygons[59] *= reg_polygons[60]->rotate(axis_0, axis_1, hex_square_angle);
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[57]->get_point(3);
@@ -4796,14 +4606,12 @@ Added this section.
     *reg_polygons[58] *= *reg_polygons[59] 
        *= reg_polygons[60]->rotate(axis_0, axis_1, hex_square_angle);
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[57]->get_point(4);
     axis_1 = reg_polygons[57]->get_point(5);
 
     reg_polygons[61]->rotate(axis_0, axis_1, hex_square_angle);
-
 
 @q ******** (8)@> 
 
@@ -4828,7 +4636,6 @@ Added this section.
     for (i = 0; i < 55; ++i)
        *reg_polygons[i] *= t;    
 
-
 @q ******** (8)@> 
 
     axis_0 = reg_polygons[55]->get_point(3);
@@ -4850,7 +4657,6 @@ Added this section.
 
     Point mid_pt = axis_0.mediate(reg_polygons[57]->get_center());
 
-
     t.reset();
     t.align_with_axis(mid_pt, axis_0, 'y');
 
@@ -4861,7 +4667,6 @@ Added this section.
     return;
 
 } /* End of non-default |Great_Rhombicosidodecahedron| constructor definition.  */
-
 
 @q ** (2) Get copy.@>
 @*1 Get copy.
@@ -4934,7 +4739,6 @@ is_great_rhombicosidodecahedron(void) const
 {
    return true;
 }
-
 
 @q ** (2) Get net.@>  
 @*1 Get net. 
@@ -5027,14 +4831,12 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
     square[2].rotate(hexagon[0].get_point(4), normal, -30);
 
-
 @q **** (4) Column 2.@> 
 
 @q ***** (5) hexagon 2.@> 
 
     hexagon[2] = hexagon[0];
     hexagon[2].shift(square[2].get_point(2) - hexagon[0].get_point(1));
-
 
 @q ***** (5) decagon 1.@> 
 
@@ -5066,7 +4868,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
     square[5] = square[4];
     square[5].shift(hexagon[2].get_point(5) - square[4].get_point(0));
 
-
 @q **** (4) Column 3.@> 
 
     decagon[2] = decagon[0];
@@ -5084,7 +4885,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
     decagon[3] = decagon[2];
     
     decagon[3].shift(hexagon[5].get_point(0) - decagon[2].get_point(4));
-  
 
 @q **** (4) Column 4.@> 
 
@@ -5101,7 +4901,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
     square[8] *= decagon[4] *=  hexagon[6] 
               *= square[9]  *= hexagon[7] *= square[10] *= t;
 
-
 @q ***** (5) Column 5.@> 
 
     decagon[5] = decagon[2];
@@ -5117,8 +4916,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
    decagon[5] *= square[11] *= hexagon[8] *= square[12] 
               *= hexagon[9] *= square[13] *= square[14] *= t;
-
-
 
 @q **** (4) Column 6.@> 
 
@@ -5138,10 +4935,8 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
     if (do_half)
        goto A; 
 
-
     square[17] = square[11];
     square[17] *= t;
-
 
 @q **** (4) Column 7.@> 
 
@@ -5157,9 +4952,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
     decagon[7] *=  hexagon[12] *= square[18] 
               *= hexagon[13] *= square[19]  *= square[20] *= t;
-
-
-
 
 @q **** (4) Column 8.@> 
 
@@ -5180,7 +4972,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
     decagon[9].shift(hexagon[15].get_point(2) - decagon[7].get_point(0));
 
-
 @q **** (4) Column 9.@> 
 
     decagon[10] = decagon[7];
@@ -5198,7 +4989,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
 @q **** (4) Column 10.@> 
 
-
     decagon[11] = decagon[8];
     hexagon[18] = hexagon[14];
     square[27]  = square[21];
@@ -5212,13 +5002,9 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
     decagon[11] *=  hexagon[18] *= square[27] 
               *= hexagon[19] *= square[28]  *= square[29] *= t;
 
-
-
-
 @q **** (4) Push |Reg_Polygon| pointers onto |reg_polygons|.@> 
 
    A:
-
 
 @q ***** (5) Column 1.@> 
 
@@ -5259,14 +5045,12 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
 @q ***** (5) Column 4.@> 
 
-
     reg_polygons.push_back(create_new<Reg_Polygon>(square[8]));  
     reg_polygons.push_back(create_new<Reg_Polygon>(decagon[4])); 
     reg_polygons.push_back(create_new<Reg_Polygon>(hexagon[6])); 
     reg_polygons.push_back(create_new<Reg_Polygon>(square[9]));  
     reg_polygons.push_back(create_new<Reg_Polygon>(hexagon[7])); 
     reg_polygons.push_back(create_new<Reg_Polygon>(square[10])); 
-
 
 @q ***** (5) Column 5.@> 
 
@@ -5289,9 +5073,7 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
     if (do_half)
        return reg_polygons;
 
-
     reg_polygons.push_back(create_new<Reg_Polygon>(square[17]));   
-
 
 @q ***** (5) Column 7.@> 
 
@@ -5333,8 +5115,6 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 @q ***** (5)@> 
 
     return reg_polygons;
-
-
 
 } /* End of |Great_Rhombicosidodecahedron::get_net()| definition.  */
 
@@ -5411,7 +5191,6 @@ Polyhedron_Options::Polyhedron_Options(void)
    polygon_3_diameter = 0;
 
    rhombus_0_side_length = 0;
-
 
    do_half            = false;;
    do_stitch_lines    = true;
@@ -5519,8 +5298,6 @@ Polyhedron_Options::clear(void)
 @<Declare |class Great_Rhombicosidodecahedron|@>@;
 @<Declare |struct Polyhedron_Options|@>@;
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -5529,7 +5306,6 @@ Polyhedron_Options::clear(void)
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

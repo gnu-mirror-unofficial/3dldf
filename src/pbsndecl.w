@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Declarations.  @>
 @** Declarations.  
@@ -153,7 +151,6 @@ when I tried to build 3DLDF from scratch.
 using namespace std;
 using namespace Scan_Parse;@/
 
-
 @q * (1) Location type.  @>
 @* Location type.
 @<Declare location type@>=
@@ -226,7 +223,6 @@ macros are expanded.
 #define YYERROR_VERBOSE
 #endif 
 
-
 @q * (1) Bison declarations.  @>
 @* Bison declarations.
 
@@ -286,7 +282,6 @@ Added |unsigned long long ulong_long_value|.
   unsigned long long ulong_long_value;
   void* pointer_value;
 };
-
 
 @q * (1) Token and precedence declarations.  @>
 @* Token and precedence declarations.
@@ -348,7 +343,6 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @f numeric_token non_terminal_symbol
 
 @<Token and precedence declarations@>=
-
 
 @=%token <int_value> NULL_VALUE@>@/
 @=%token <int_value> TERMINATE@>@/      
@@ -584,7 +578,6 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> ELLIPSOID_SLICE @>@/
 @=%token <pointer_value> SPHERE_SLICE@>@/
 
-
 @=%token <pointer_value> PARABOLA_SLICE@>@/
 @=%token <pointer_value> HYPERBOLA_SLICE@>@/
 @=%token <pointer_value> PARABOLOID_SLICE@>@/
@@ -657,7 +650,6 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 
 @=%token <pointer_value> ORIGAMI_FIGURE@>@/
 @=%token <pointer_value> ORIGAMI_FIGURE_VECTOR@>@/
-
 
 @q ** (2)  Declarators for object types defined in 3DLDF.@>
 @*1 Declarators for object types defined in 3DLDF.
@@ -947,7 +939,6 @@ Added token declaration for |SPHERE_DEVELOPMENT_VECTOR_DECLARATOR|.
 
 @=%token <string_value> HELIX_SLICE_VECTOR_DECLARATOR@>@/
 
-
 @q *** (3) General-Purpose Words and ``Syntactic Sugar''.@>
 @*2 General-Purpose Words and ``Syntactic Sugar''.
 \initials{LDF 2004.09.24.}
@@ -969,7 +960,6 @@ Added token declaration for |OFF|.
 @=%token <int_value> AROUND@>@/
 @=%token <int_value> TO@>@/
 
-
 @q *** (3) System information.@>
 @*2 System information.
 \initials{LDF 2004.11.15.}
@@ -984,7 +974,6 @@ Added this section with token declarations for
 
 @=%token <int_value> IS_BIG_ENDIAN@>@/
 @=%token <int_value> IS_LITTLE_ENDIAN@>@/
-
 
 @q *** (3) Transformers and Transform Commands.  @>
 @*2 Transformers and Transform Commands.
@@ -1012,7 +1001,6 @@ Replaced |REFLECTED| with |REFLECTED_IN| and |REFLECTED_OFF|.
 Added token declaration for |ALIGN|.
 \ENDLOG 
 
-
 @<Token and precedence declarations@>=
 
 @=%token <pointer_value> REFLECTED_IN@>@/
@@ -1038,7 +1026,6 @@ Added token declaration for |ALIGN|.
 @=%token <int_value> XSCALE@>@/
 @=%token <int_value> YSCALE@>@/
 @=%token <int_value> ZSCALE@>@/
-
 
 @q *** (3) Operators.  @>
 @*2 Operators.
@@ -1083,7 +1070,6 @@ Added |%right| declaration of |PLUS_ASSIGN|, |MINUS_ASSIGN|,
 
 \initials{LDF 2004.10.05.}
 Added |%left| declarations of |DOT_PRODUCT| and |CROSS_PRODUCT|.
-
 
 \initials{LDF 2004.10.06.}
 Added |%left| declarations of |NORMAL| and |UNIT_VECTOR|.
@@ -1199,7 +1185,6 @@ Added token declarations for |GET_PRIME_VECTOR|,
 @=%token <int_value> GET_PRIME_FACTORS@>@/
 @=%token <int_value> GET_PRIME_VECTOR@>@/
 
-
 @=%token <int_value> IS_PRIME@>@/
 @=%token <int_value> IS_PRIME_VECTOR@>@/
 
@@ -1210,7 +1195,6 @@ Added token declarations for |GET_PRIME_VECTOR|,
 @=%token <int_value> GET_FERMAT_PRIME_VECTOR@>@/
 @=%token <int_value> IS_FERMAT_PRIME@>@/
 @=%token <int_value> IS_FERMAT_PRIME_VECTOR@>@/
-
 
 @=%token <int_value> GET_GAUSS_PRIME@>@/
 @=%token <int_value> GET_GAUSS_PRIME_VECTOR@>@/
@@ -1241,7 +1225,6 @@ Added token declarations for the following type predicates:\hfil\break
 |IS_PATH|, |IS_TRIANGLE|, |IS_REG_POLYGON|, |IS_RECTANGLE|, |IS_SQUARE|,
 |IS_ELLIPSE|, |IS_CIRCLE|, |IS_CUBOID|, |IS_TETRAHEDRON|, |IS_OCTAHEDRON|,
 |IS_DODECAHEDRON|, |IS_ICOSAHEDRON|, and |IS_TRUNC_OCTAHEDRON|.
-
 
 \initials{LDF 2004.10.14.}
 Added token declarations for 
@@ -1306,7 +1289,6 @@ Added token declarations for |IS_PATH_VECTOR|,
 |IS_ELLIPSE_VECTOR|, |IS_CIRCLE_VECTOR|,  |IS_CUBOID_VECTOR|, 
 |IS_TETRAHEDRON_VECTOR|, |IS_OCTAHEDRON_VECTOR|, |IS_DODECAHEDRON_VECTOR|, 
 |IS_ICOSAHEDRON_VECTOR|, and |IS_TRUNC_OCTAHEDRON_VECTOR|.
-
 
 \initials{LDF 2004.12.11.}
 Added token declarations for 
@@ -1374,7 +1356,6 @@ Added token declarations for
 Added token declarations for 
 |IS_ON_ELLIPSE|, |IS_ON_CIRCLE|, |IS_ON_PARABOLA|, and
 |IS_ON_HYPERBOLA|.
-
 
 \initials{LDF 2005.11.07.}
 Added token declarations for 
@@ -1701,7 +1682,6 @@ Added this section.
 
 @<Token and precedence declarations@>=
 
-
 @q *** (3) Tokens for matrix types.@>
 @*2 Tokens for matrix types.  
 \initials{LDF 2007.11.28.}
@@ -1740,8 +1720,6 @@ Added token declarations for |IDENTITY_MATRIX|, |ZERO_MATRIX|, and
 @=%token <int_value> ZERO_MATRIX@>@/
 @=%token <int_value> ONE_MATRIX@>@/
 
-
-
 @q *** (3) Tokens for general options.  @>
 @*2 Tokens for general options.  
 \initials{LDF 2007.07.22.}
@@ -1757,7 +1735,6 @@ other sections to here.
 @=%token <int_value> WITH_PRECISION@>@/
 @=%token <int_value> WITH_TOLERANCE@>@/
 
-
 @q *** (3) Tokens for |strings|.  @>
 @*2 Tokens for {\bf strings}.
 \initials{LDF 2005.09.08.}
@@ -1765,7 +1742,6 @@ other sections to here.
 \LOG
 \initials{LDF 2005.09.08.}
 Added this section with the declaration of |DECIMAL|.
-
 
 \initials{LDF 2005.09.08.}
 Added the declarations of |BINARY|, |OCTAL|, and |HEXADECIMAL|.
@@ -1889,8 +1865,6 @@ Added token declaration for |CLIP_TO|.
 @=%token <int_value> CMYK@>@/
 @=%token <int_value> RGB@>@/
 
-
-
 @=%token <int_value> DROP_ALL@>@/
 
 @q *** (3) Types for |Focuses|.  @>
@@ -1995,7 +1969,6 @@ Added token declarations for
 |WITH_MIN_Y_PROJ|, |WITH_MAX_Y_PROJ|, 
 |WITH_MIN_Z_PROJ|, and |WITH_MAX_Z_PROJ|. 
 
-
 \initials{LDF 2004.06.29.}
 Changed |WITH_MIN_X_PROJ| to |MIN_Y_PROJ|.  Did the same for
 |MAX_X_PROJ|, |MIN_Y_PROJ|, etc.
@@ -2073,7 +2046,6 @@ Added token declaration for |END_INPUT|.
 Changed value type of |INPUT| and |END| from |string_value| 
 to |int_value|. 
 
-
 \initials{LDF 2004.10.20.}
 Added token declaration for |MEDIATE|.
 
@@ -2135,7 +2107,6 @@ Added token declaration for |LET|.
 @=%token <int_value> LABEL_UNLESS@>@/
 @=%token <int_value> DOTLABEL_IF@>@/
 @=%token <int_value> DOTLABEL_UNLESS@>@/
-
 
 @=%token <int_value> LABELS@>@/
 @=%token <int_value> LABELS_IF@>@/
@@ -2261,7 +2232,6 @@ Added token declarations for |WITH_DIVISIONS_LATITUDE|
 @=%token <int_value> WITH_PATH@>@/
 @=%token <int_value> WITH_ENVELOPE@>@/
 
-
 @q *** (3) Types for modifying |Shapes|.@>
 @ Types for modifying |Shapes|.
 
@@ -2274,7 +2244,6 @@ for |CLEAR_CONNECTORS|.
 @<Token and precedence declarations@>=
 
 @=%token <int_value> CLEAR_CONNECTORS@>@/
-
 
 @q *** (3) Types for outputting |Pictures|.  @>
 @*2 Types for outputting |Pictures|.
@@ -2319,7 +2288,6 @@ Added token declaration for |FIXED|.
 
 @=%token <int_value> WITH_SURFACE_HIDING@>@/
 @=%token <int_value> WITHOUT_SURFACE_HIDING@>@/
-
 
 @q *** (3) Types for intersections.  @>
 @*2 Types for intersections.
@@ -2436,7 +2404,6 @@ Added the token declarations for |TRANSPOSE| and |TRANSPOSED|.
 
 @=%token <int_value> TRANSPOSE@>@/
 @=%token <int_value> TRANSPOSED@>@/
-
 
 @q *** (3) Types for extracting sub-objects.@>
 @*2 Types for extracting sub-objects.
@@ -2592,7 +2559,6 @@ and |DELETE_TRANSFORM|.
 @=%token <int_value> GET_BASE_CENTER@>@/
 @=%token <int_value> GET_CAP_CENTER@>@/
 
-
 @=%token <int_value> GET_PARABOLA@>@/
 @=%token <int_value> GET_HYPERBOLA@>@/
 
@@ -2659,7 +2625,6 @@ Added token declarations for |WITH_TRANSFORM| and |WITH_NO_TRANSFORM|.
 
 @=%token <int_value> WITH_TRANSFORM@>@/
 @=%token <int_value> WITH_NO_TRANSFORM@>@/
-
 
 @q *** (3) Types for enclosed and enclosing figures.@>
 @*2 Types for enclosed and enclosing figures.
@@ -2841,7 +2806,6 @@ Added token declarations for |CULLED| and |RECTIFIED|.
 @=%token <int_value> RECTIFY@>@/ 
 @=%token <int_value> RECTIFIED@>@/ 
 
-
 @q *** (3) Tokens for |planes|.@>
 @*2 Tokens for |planes|.
 \initials{LDF 2007.10.02.}
@@ -3001,7 +2965,6 @@ Added token declaration for |CIRCUMFERENCE|.
 @=%token <int_value> LABEL_LATTICE@>@/ 
 @=%token <int_value> DOTLABEL_LATTICE@>@/ 
 
-
 @q *** (3) Types for quadric surfaces.@>
 @*2 Types for quadric surfaces.
 \initials{LDF 2005.10.25.}
@@ -3037,7 +3000,6 @@ Added token declaration for |MAP| and |DEVELOP|.
 
 @=%token <int_value> DEVELOP@>@/ 
 @=%token <int_value> MAP@>@/ 
-
 
 @q *** (3) Tokens for |Polyhedra|.@> 
 @*2 Tokens for {\bf Polyhedra}.
@@ -3103,7 +3065,6 @@ Added the token declarations for |GET_RHOMBUS| and |WITH_SIDE_LENGTH|.
 @=%token <int_value> WITH_TABS@>@/ 
 @=%token <int_value> WITH_SIDE_LENGTH@>@/ 
 @=%token <int_value> WITH_RHOMBUS_SIDE_LENGTH@>@/ 
-
 
 @=%token <int_value> WITH_STITCH_LINES@>@/ 
 @=%token <int_value> WITH_NO_STITCH_LINES@>@/ 
@@ -3189,7 +3150,6 @@ Added this section.  It's currently empty.
 
 @<Token and precedence declarations@>=
 
-
 @q ** (2) Constants in |namespace Scan_Parse|. @>
 @*1 Constants in {\bf namespace Scan\_Parse}. 
 It is safe to assume that |TRANSFORM == MIN_SHAPE - 1|.  This can be useful
@@ -3225,7 +3185,6 @@ Scan_Parse
   extern const unsigned int MIN_SHAPE; 
   extern const unsigned int MAX_SHAPE;
 };
-
 
 @q ** (2) |name_map| and |type_name_map|. @>
 @*1 {\bf name\_map} and {\bf type\_name\_map}. 
@@ -3271,9 +3230,6 @@ to \filename{prrfnc0.web}.
 int
 initialize_name_map(void);
 
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -3282,7 +3238,6 @@ initialize_name_map(void);
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(outline-minor-mode t) @>

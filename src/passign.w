@@ -48,13 +48,9 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
-
 
 @q * (0) Assignments.  @>
 @** Assignments.  
-
 
 \LOG
 \initials{LDF 2004.05.03.}  
@@ -70,7 +66,6 @@ Removed type declaration for |operation_assignment| to
 \filename{popassgn.w}.
 \ENDLOG 
 
-
 \TODO
 @q { @>
 @:TO DO}{{\bf TO DO}@>
@@ -82,7 +77,6 @@ Make it possible to chain assignments for all types.
 
 @q * (1) assignment.  @>
 @* \§assignment>.
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> assignment@>
@@ -104,7 +98,6 @@ Added this section.
 \initials{LDF 2005.01.07.}
 Added this section.
 \ENDLOG
-
 
 @q **** (4) assignment --> boolean_assignment. @>
 @*3 \§assignment> $\longrightarrow$ \§boolean assignment>.
@@ -147,7 +140,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q *** (3) assignment --> string_assignment.@>
 @*1 \§assignment> $\longrightarrow$ \§string assignment>.
@@ -311,7 +303,6 @@ Added this rule.
 
 }; 
 
-
 @q **** (4) assignment --> path_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§path assignment>.
 @<Define rules@>= 
@@ -362,7 +353,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 }; 
 
-
 @q **** (4) assignment --> hyperbola_assignment.@>
 
 @*3 \§assignment> $\longrightarrow$ \§hyperbola assignment>.
@@ -378,7 +368,6 @@ Added this rule.
 {
   @=$$@> = @=$1@>;
 }; 
-
 
 @q **** (4) assignment --> arc_assignment.@>
 
@@ -396,7 +385,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 }; 
 
-
 @q **** (4) assignment --> conic_section_lattice_assignment.@>
 
 @*3 \§assignment> $\longrightarrow$ \§conic section lattice assignment>.
@@ -413,8 +401,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 }; 
 
-
-
 @q **** (4) assignment --> helix_assignment.@>
 
 @*3 \§assignment> $\longrightarrow$ \§helix assignment>.
@@ -430,7 +416,6 @@ Added this rule.
 {
   @=$$@> = @=$1@>;
 }; 
-
 
 @q **** (4) assignment --> rectangle_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§rectangle assignment>.
@@ -571,8 +556,6 @@ Added this rule.
 
 }; 
 
-
-
 @q **** (4) assignment --> origami_figure_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§origami figure assignment>.
 
@@ -588,8 +571,6 @@ Added this rule.
       @=$$@> = @=$1@>;
 
 }; 
-
-
 
 @q ** (2) Vector types.@> 
 @*1 Vector types.
@@ -719,7 +700,6 @@ I've managed to get rid of it, but I don't know what it was.
 @ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2005.08.30.}
 
-
 @<Define rules@>=
 
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
@@ -738,9 +718,8 @@ failed.
 \initials{LDF 2005.08.30.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             delete pv;
 
@@ -763,14 +742,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ***** (5).@> 
 
 }; 
-
 
 @q ** (2) ulong_long_vector_assignment.@> 
 @*1 \§ulong long vector assignment>.
@@ -841,12 +817,10 @@ Added this rule.
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
-
          Scan_Parse::vector_type_assign<unsigned long long, unsigned long long>(
                static_cast<Scanner_Node>(parameter),
                entry,
                pv);          
-
 
             delete pv;
 
@@ -910,11 +884,8 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) assignment --> color_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§color vector assignment>.
-
 
 \LOG
 \initials{LDF 2004.08.23.}  
@@ -972,9 +943,6 @@ Added this rule.
 
 };
 
-
-
-
 @q *** (3) |Shape| types.@> 
 @*2 {\bf Shape} types.
 \initials{LDF 2005.01.07.}
@@ -986,7 +954,6 @@ Added this section.
 
 @q **** (4) assignment --> point_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§point vector assignment>.
-
 
 \LOG
 \initials{LDF 2004.09.01.}  
@@ -1000,7 +967,6 @@ Commented this rule back in.
 \ENDLOG 
 
 @<Define rules@>=
-  
 
 @=assignment: point_vector_assignment@>
 {
@@ -1009,10 +975,8 @@ Commented this rule back in.
 
 };
 
-
 @q **** (4) assignment --> bool_point_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§bool-point vector assignment>.
-
 
 \LOG
 \initials{LDF 2004.09.01.}  
@@ -1034,7 +998,6 @@ Commented this rule in again.
 
 };
 
-
 @q **** (4) assignment --> path_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§path vector assignment>.
 \initials{LDF 2004.12.10.}
@@ -1052,7 +1015,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4) assignment --> ellipse_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§ellipse vector assignment>.
@@ -1126,7 +1088,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) assignment --> arc_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§arc vector assignment>.
 \initials{LDF 2007.10.13.}
@@ -1144,8 +1105,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q **** (4) assignment --> conic_section_lattice_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§conic section lattice vector assignment>.
@@ -1165,7 +1124,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) assignment --> helix_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§helix vector assignment>.
 \initials{LDF 2005.05.20.}
@@ -1183,8 +1141,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q **** (4) assignment --> nurb_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§nurb vector assignment>.
@@ -1204,7 +1160,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) assignment --> triangle_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§triangle vector assignment>.
 \initials{LDF 2005.01.25.}
@@ -1222,7 +1177,6 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4) assignment --> rectangle_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§rectangle vector assignment>.
@@ -1259,8 +1213,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
 
 @q **** (4) assignment --> reg_polygon_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§regular polygon vector assignment>.
@@ -1370,8 +1322,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) assignment --> origami_figure_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ 
 \§origami figure vector assignment>.
@@ -1390,9 +1340,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
-
-
 
 @q **** (4) assignment --> assignment_command.@>
 @*3 \§assignment> $\longrightarrow$ 
@@ -1428,7 +1375,6 @@ Added this section.
 Added this section.
 \ENDLOG
 
-
 @q *** (3) Non-|Shape| types.@> 
 @*1 Non-{\bf Shape} types.
 \initials{LDF 2005.01.07.}
@@ -1437,7 +1383,6 @@ Added this section.
 \initials{LDF 2005.01.07.}
 Added this section.
 \ENDLOG
-
 
 @q **** (4) |boolean_assignment|.@>
 @*2 \§boolean assignment>. 
@@ -1448,7 +1393,6 @@ Added this section.
 @q ***** (5) boolean_assignment --> boolean_variable := boolean_expression.  @>
 @*3 \§boolean assignment> $\longrightarrow$ \§boolean variable>
 \.{:=} \§boolean expression>.  
-
 
 \LOG
 \initials{LDF 2004.07.26.}
@@ -1464,9 +1408,8 @@ failed because no memory had been allocated for |int_ptr|.
 Changed |int i| to |int* i|, because I've changed the type of 
 |boolean_expression| from |int_value| to |pointer_value| in 
 \filename{pblexpr.w}.
-\ENDLOG 
+\ENDLOG
 
- 
 @<Define rules@>= 
  
 @=boolean_assignment: boolean_variable ASSIGN boolean_expression@>
@@ -1545,7 +1488,6 @@ referenced by |boolean_variables|, |boolean_primaries|,
 
   *i = (bp->b) ? 1 : 0;
 
-
   delete bp;
 
   Int_Void_Ptr ivp = Scan_Parse::assign_simple<int>(
@@ -1557,9 +1499,6 @@ referenced by |boolean_variables|, |boolean_primaries|,
   @=$$@> = ivp.v;
  
 };
-
-
-
 
 @q **** (4) string_assignment.  @>
 @*2 \§string assignment>. 
@@ -1663,7 +1602,6 @@ Now calling |Scan_Parse::assign_simple|.
 
   @=$$@> = ivp.v;
 
-
 };
 
 @q **** (4) pen_assignment --> pen_variable := pen_assignment.@>
@@ -1697,7 +1635,6 @@ Removed code from this rule.  Now calling
 
   @=$$@> = ivp.v;
 
-  
 };
 
 @q **** (4) dash_pattern_assignment.  @>
@@ -1768,7 +1705,6 @@ Removed code from this rule.  Now calling
   @=$$@> = ivp.v;
 
 };
-
 
 @q **** (4) color_assignment.  @>
 @*2 \§color assignment>. 
@@ -1848,7 +1784,6 @@ Removed code from this rule.  Now calling
 @*3 \§numeric assignment> $\longrightarrow$ \§numeric variable>
 \.{:=} \§numeric expression>.  
 
-
 \LOG
 \initials{LDF 2004.07.26.}
 Removed code from this rule.  
@@ -1867,7 +1802,6 @@ instead of |Scan_Parse::assign_real|.
  
 @=numeric_assignment: numeric_variable ASSIGN numeric_expression@>@/
 {
-
 
   real r = @=$3@>; 
 
@@ -1914,7 +1848,6 @@ Added this rule.
            delete pv;
            pv = 0;
        }
-
 
     Int_Void_Ptr ivp = assign_simple<real>(static_cast<Scanner_Node>(parameter),
                                          "real", 
@@ -1982,7 +1915,6 @@ Added this rule.
  
 @=ulong_long_assignment: ulong_long_variable ASSIGN ulong_long_expression@>@/
 {
-
 
   unsigned long long r = @=$3@>; 
 
@@ -2057,7 +1989,6 @@ the latter function.
 {
 
   Transform* t = static_cast<Transform*>(@=$3@>);
-
 
   Int_Void_Ptr ivp = Scan_Parse::assign_simple<Transform>(
                                    static_cast<Scanner_Node>(parameter),
@@ -2259,7 +2190,6 @@ Added this rule.
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-
 @q ****** (6) Error handling:  |entry == static_cast<Id_Map_Entry_Node>(0)|.@> 
 
 @ Error handling:  |entry == static_cast<Id_Map_Entry_Node>(0)|.
@@ -2284,9 +2214,8 @@ Added this rule.
    else  /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
       {
                
-         Id_Map_Entry_Node entry_0 = static_cast<Id_Map_Entry_Node>(@=$3@>);  
- 
-   
+         Id_Map_Entry_Node entry_0 = static_cast<Id_Map_Entry_Node>(@=$3@>);
+
 @q ******* (7) Error handling:                                                         @>
 @q ******* (7) |entry_0 == static_cast<Id_Map_Entry_Node>(0) || entry_0->object == 0|. @>
 @ Error handling:  |entry_0 == 0 || entry_0->object == 0|.
@@ -2301,7 +2230,6 @@ Added this rule.
                 @=$$@> = static_cast<void*>(0);
 
             }  /* |if| */
-
 
 @q ******* (7) |entry_0 != 0 && entry_0->object != 0|.@> 
 
@@ -2325,13 +2253,11 @@ Added this rule.
             if (entry->object == static_cast<Id_Map_Entry_Node>(0))
                {
 
-
                   d = new Definition_Info_Type;
 
                   entry->object = static_cast<void*>(d); 
 
                }  /* |if (entry->object == static_cast<Id_Map_Entry_Node>(0))|  */
-
 
 @q ******** (8) |entry->object != static_cast<void*>(0)|.@> 
 
@@ -2348,27 +2274,19 @@ Added this rule.
 
 @q ******** (8) @> 
 
-
             *d = *(static_cast<Definition_Info_Node>(entry_0->object));  
 
             @=$$@> = static_cast<void*>(entry); 
 
          }  /* |else| ( |entry_0 != 0 && entry_0->object != 0|)  */
 
-
 @q ******* (7) @> 
-
 
    }  /* |else| (|entry != 0|)  */
 
 @q ****** (6).@> 
 
 };
-
-
-
-
-
 
 @q *** (3) Shape types.@> 
 @*1 {\bf Shape} types.
@@ -2378,8 +2296,6 @@ Added this rule.
 \initials{LDF 2005.01.07.}
 Added this section.
 \ENDLOG
-
-
 
 @q **** (4) point_assignment.  @>
 @*2 \§point assignment>. 
@@ -2404,7 +2320,6 @@ Now calling |Scan_Parse::assign_simple| rather than
 the latter function. 
 \ENDLOG 
 
-
 @<Define rules@>= 
  
 @=point_assignment: point_variable ASSIGN point_expression@>
@@ -2420,7 +2335,6 @@ the latter function.
   @=$$@> = ivp.v;
 
 };
-
 
 @q ***** (5) point_assignment --> point_variable ASSIGN bool_point_expression.@>
 @*3 \§point assignment> $\longrightarrow$ \§point variable> \.{ASSIGN} 
@@ -2491,7 +2405,6 @@ Removed code from this rule to the function
 
 };
 
-
 @q ***** (5) point_assignment --> point_variable := point_assignment.  @>
 
 @*3 \§point assignment> $\longrightarrow$ \§point variable>
@@ -2514,18 +2427,13 @@ Got this rule to work.
 @=point_assignment: point_variable ASSIGN point_assignment@>
 {
 
-
     Int_Void_Ptr ivp = assign_chained<Point>(static_cast<Scanner_Node>(parameter),
                                              @=$1@>,
                                              static_cast<Point*>(@=$3@>));
 
     @=$$@> = ivp.v;
 
-
 };
-
-
-
 
 @q **** (4) bool_point_assignment.@>
 @*2 \§bool-point assignment>. 
@@ -2560,20 +2468,16 @@ to
 \§bool-point variable> \.{ASSIGN} \§bool-point expression>''.
 \ENDLOG
 
-@q ****** (6) Definition.@> 
+@q ****** (6) Definition.@>
 
- 
 @<Define rules@>=
  
 @=bool_point_assignment: bool_point_variable ASSIGN @>@/
 @=bool_point_expression@>@/
 {
 
-
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-
-  
 @q ******* (7) Error handling for the case that |entry == 0|.@>
 
 @ Error handling for the case that |entry == 0 |.
@@ -2588,9 +2492,6 @@ to
 
     } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-
-
-
 @q ******* (7) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
 @ |entry != 0|.
@@ -2600,7 +2501,6 @@ to
 
   else /* |entry != 0|  */
     {
-
 
          Bool_Point* bp = static_cast<Bool_Point*>(entry->object);
 
@@ -2619,9 +2519,8 @@ to
       bp = bpe;
       
       @=$$@> = entry->object = static_cast<void*>(bp);
- 
 
-    } /* |if (bp == static_cast<Bool_Point*>(0))|  */
+} /* |if (bp == static_cast<Bool_Point*>(0))|  */
 
 @q ******** (8) |bp != static_cast<Bool_Point*>(0)|.@> 
 
@@ -2656,15 +2555,13 @@ to
 Added this rule.
 \ENDLOG
 
-@q ***** (5) Definition.@> 
+@q ***** (5) Definition.@>
 
- 
 @<Define rules@>=
  
 @=bool_point_assignment: bool_point_variable ASSIGN @>@/
 @=boolean_expression@>@/
 {
-
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
@@ -2686,7 +2583,6 @@ Added this rule.
 
     } /* |if (entry == 0)|  */
 
-
 @q ****** (6) |entry != 0|.@>   
 
 @ |entry != 0|.
@@ -2697,10 +2593,7 @@ Added this rule.
   else /* |entry != 0|  */
     {
 
- 
-        Bool_Point* bp = static_cast<Bool_Point*>(entry->object);
-
-
+Bool_Point* bp = static_cast<Bool_Point*>(entry->object);
 
 @q ******* (7) |bp == 0|.@> 
 
@@ -2713,7 +2606,6 @@ Added this rule.
     {
       
         bp = new Bool_Point;
-
 
     } /* |if (bp == 0)|  */
 
@@ -2747,9 +2639,8 @@ referenced by |boolean_variables|, |boolean_primaries|,
 |secondaries|, |tertiaries|, and |expressions|.
 \ENDLOG
 
-@q ***** (5) Definition.@> 
+@q ***** (5) Definition.@>
 
- 
 @<Define rules@>=
  
 @=bool_point_assignment: bool_point_variable ASSIGN @>@/
@@ -2770,13 +2661,11 @@ referenced by |boolean_variables|, |boolean_primaries|,
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
-
       delete p;
 
       @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0)|  */
-
 
 @q ****** (6) |entry != 0|.@>   
 
@@ -2790,8 +2679,6 @@ referenced by |boolean_variables|, |boolean_primaries|,
 
         Bool_Point* bp = static_cast<Bool_Point*>(entry->object);
 
-
-
 @q ******* (7) |bp == 0|.@> 
 
 @ |bp == 0|.
@@ -2803,7 +2690,6 @@ referenced by |boolean_variables|, |boolean_primaries|,
     {
       
        bp = new Bool_Point;
-
 
     } /* |if (bp == 0)|  */
 
@@ -2920,7 +2806,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) path_assignment --> path_variable := rectangle_expression.@>   
 
 @*4 \§path assignment> $\longrightarrow$ \§path variable> 
@@ -2973,7 +2858,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) path_assignment --> path_variable := polygon_expression.@>   
 
 @*4 \§path assignment> $\longrightarrow$ \§path variable> 
@@ -2999,7 +2883,6 @@ Added this rule.
   @=$$@> = ivp.v;
 
 };
-
 
 @q ***** (5) path_assignment --> path_variable := reg_polygon_expression.@>   
 
@@ -3298,7 +3181,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) arc_assignment.@>
 @*3 \§arc assignment>. 
 \initials{LDF 2007.10.13.}
@@ -3339,8 +3221,6 @@ Added this rule.
   @=$$@> = ivp.v;
 
 };
-
-
 
 @q **** (4) helix_assignment.@>
 @*3 \§helix assignment>. 
@@ -3421,7 +3301,6 @@ Removed all debugging code.
 @=polygon_assignment: polygon_variable ASSIGN polygon_expression@>
 {
 
-
   Polygon* f = static_cast<Polygon*>(@=$3@>);
 
   Int_Void_Ptr ivp = assign_simple<Polygon>(static_cast<Scanner_Node>(parameter),
@@ -3449,7 +3328,6 @@ Added this rule.
  
 @=polygon_assignment: polygon_variable ASSIGN rectangle_expression@>
 {
-
 
   Polygon* f = static_cast<Polygon*>(@=$3@>);
 
@@ -3479,7 +3357,6 @@ Added this rule.
 @=polygon_assignment: polygon_variable ASSIGN triangle_expression@>
 {
 
-
   Polygon* f = static_cast<Polygon*>(@=$3@>);
 
   Int_Void_Ptr ivp = assign_simple<Polygon>(static_cast<Scanner_Node>(parameter),
@@ -3507,7 +3384,6 @@ Added this rule.
  
 @=polygon_assignment: polygon_variable ASSIGN reg_polygon_expression@>
 {
-
 
   Polygon* f = static_cast<Polygon*>(@=$3@>);
 
@@ -3562,8 +3438,6 @@ Now calling |Scan_Parse::assign_simple|.
   @=$$@> = ivp.v;
 
 };
-
-
 
 @q **** (4) rectangle_assignment.  @>
 @*2 \§rectangle assignment>. 
@@ -3639,7 +3513,6 @@ Added this rule.
  
 @=triangle_assignment: triangle_variable ASSIGN triangle_expression@>
 {
-
 
   Triangle* t = static_cast<Triangle*>(@=$3@>);
 
@@ -3719,8 +3592,7 @@ Added this rule.
 @=polyhedron_assignment: polyhedron_variable ASSIGN polyhedron_expression@>
 {
 
-  
-  Polyhedron* c = static_cast<Polyhedron*>(@=$3@>);
+Polyhedron* c = static_cast<Polyhedron*>(@=$3@>);
 
   Int_Void_Ptr ivp = assign_simple<Polyhedron>(static_cast<Scanner_Node>(parameter),
                                    "Polyhedron",
@@ -3892,7 +3764,6 @@ Added this rule.
                                                      parameter);
 };
 
-
 @q **** (4) origami_figure_assignment.  @>
 @*2 \§origami figure assignment>. 
 \initials{LDF 2005.02.03.}
@@ -3935,7 +3806,6 @@ Added this rule.
   @=$$@> = ivp.v;
 
 };
-
 
 @q ** (2) Vector types.@> 
 @*1 Vector types.
@@ -4016,7 +3886,6 @@ Added this rule.
   else /* |entry != 0|  */
     {
 
-
    typedef Pointer_Vector<bool> PV;
  
    PV* pv = static_cast<PV*>(@=$3@>);
@@ -4026,8 +3895,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-      int status = vector_type_assign<bool, bool>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<bool, bool>(static_cast<Scanner_Node>(parameter),
                                               entry,
                                               pv);
 
@@ -4039,9 +3907,8 @@ failed.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4065,9 +3932,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ****** (6).@> 
 
@@ -4097,7 +3962,6 @@ Added this rule.
 
 @=assignment: complex_vector_variable ASSIGN complex_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -4148,9 +4012,8 @@ failed.
 \initials{LDF 2007.12.02.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4174,9 +4037,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ****** (6).@> 
 
@@ -4206,7 +4067,6 @@ Added this rule.
 
 @=assignment: matrix_vector_variable ASSIGN matrix_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -4257,9 +4117,8 @@ failed.
 \initials{LDF 2007.10.13.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4283,9 +4142,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ****** (6).@> 
 
@@ -4361,8 +4218,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-      int status = vector_type_assign<string, string>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<string, string>(static_cast<Scanner_Node>(parameter),
                                                   entry,
                                                   pv);
 
@@ -4374,9 +4230,8 @@ failed.
 \initials{LDF 2005.01.09.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4400,9 +4255,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ****** (6).@> 
 
@@ -4443,7 +4296,6 @@ Added this rule.
 @=ASSIGN pen_vector_expression@>@/
 {
 
-
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
 @q ****** (6) Error handling for the case that |entry == 0|.@>
@@ -4479,8 +4331,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-      int status = vector_type_assign<Pen, Pen>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<Pen, Pen>(static_cast<Scanner_Node>(parameter),
                                                 entry,
                                                 pv);
 
@@ -4492,9 +4343,8 @@ failed.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4518,9 +4368,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -4587,7 +4435,6 @@ Added this rule.
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
 
-
    typedef Pointer_Vector<Dash_Pattern> PV;
  
    PV* pv = static_cast<PV*>(@=$3@>);
@@ -4597,8 +4444,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-   int status = vector_type_assign<Dash_Pattern, Dash_Pattern>(
+int status = vector_type_assign<Dash_Pattern, Dash_Pattern>(
                                              static_cast<Scanner_Node>(parameter),
                                              entry,
                                              pv);
@@ -4611,9 +4457,8 @@ failed.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4637,14 +4482,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
 
 @q **** (4) color_vector_assignment.  @>
 @*2 \§color vector assignment>. 
@@ -4656,7 +4498,6 @@ Commented-out this type declaration.
 \initials{LDF 2005.01.07.}
 Commented this type declaration back in.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 
@@ -4719,8 +4560,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-   int status = vector_type_assign<Color, Color>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<Color, Color>(static_cast<Scanner_Node>(parameter),
                                                  entry,
                                                  pv);
 
@@ -4732,9 +4572,8 @@ failed.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4758,9 +4597,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -4836,8 +4673,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-   int status = vector_type_assign<Transform, Transform>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<Transform, Transform>(static_cast<Scanner_Node>(parameter),
                                                 entry,
                                                 pv);
 
@@ -4849,9 +4685,8 @@ failed.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4875,9 +4710,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -4953,8 +4786,7 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-   
-   int status = vector_type_assign<Focus, Focus>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<Focus, Focus>(static_cast<Scanner_Node>(parameter),
                                                 entry,
                                                 pv);
 
@@ -4966,9 +4798,8 @@ failed.
 \initials{LDF 2005.01.18.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -4992,15 +4823,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
-
 
 @q *** (3) |Shape| types.@> 
 @*1 {\bf Shape} types.
@@ -5090,8 +4917,7 @@ defined in \filename{scanprse.web}.
    if (entry_pv)
      entry_pv->clear();
 
-   
-   int status = vector_type_assign<Point, Point>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<Point, Point>(static_cast<Scanner_Node>(parameter),
                                                 entry,
                                                 pv);
 
@@ -5103,9 +4929,8 @@ failed.
 \initials{LDF 2004.11.06.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -5129,9 +4954,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -5153,7 +4976,6 @@ Changed the code in this rule to account for changes
 I've made in |Scan_Parse::vector_type_assign|, which is 
 defined in \filename{scanprse.web}.
 \ENDLOG
-
 
 @q ***** (5) Definition.@> 
 
@@ -5184,7 +5006,6 @@ defined in \filename{scanprse.web}.
 @ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.11.10.}
 
-
 @<Define rules@>=
 
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
@@ -5200,8 +5021,7 @@ defined in \filename{scanprse.web}.
    if (entry_pv)
      entry_pv->clear();
 
-   
-   int status = vector_type_assign<Point, Bool_Point>(static_cast<Scanner_Node>(parameter),
+int status = vector_type_assign<Point, Bool_Point>(static_cast<Scanner_Node>(parameter),
                                                   entry,                   
                                                   bpv);
 
@@ -5213,9 +5033,8 @@ failed.
 \initials{LDF 2004.11.10.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete bpv;
@@ -5239,9 +5058,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -5285,7 +5102,6 @@ Changed the code in this rule to account for changes
 I've made in |Scan_Parse::vector_type_assign|, which is 
 defined in \filename{scanprse.web}.
 \ENDLOG
-
 
 @q ***** (5) Definition.@> 
 
@@ -5344,9 +5160,7 @@ the |bool_point_vector_expression|, so we don't have to do so here.
  
         BPV* bpv = static_cast<BPV*>(@=$3@>);
 
-
-   
-        int status = vector_type_assign<Bool_Point, Bool_Point>(
+int status = vector_type_assign<Bool_Point, Bool_Point>(
                           static_cast<Scanner_Node>(parameter),
                           entry,
                           bpv);
@@ -5359,9 +5173,8 @@ failed.
 \initials{LDF 2004.11.06.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete bpv;
@@ -5389,7 +5202,6 @@ failed.
 
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
-
 @q ****** (6).@> 
 
 }; 
@@ -5411,7 +5223,6 @@ Changed the code in this rule to account for changes
 I've made in |Scan_Parse::vector_type_assign|, which is 
 defined in \filename{scanprse.web}.
 \ENDLOG
-
 
 @q ***** (5) Definition.@> 
 
@@ -5442,12 +5253,10 @@ defined in \filename{scanprse.web}.
 @ |entry != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.11.10.}
 
-
 @<Define rules@>=
 
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
     {
-
 
    typedef Pointer_Vector<Point> PV;
    typedef Pointer_Vector<Bool_Point> BPV;
@@ -5471,9 +5280,8 @@ failed.
 \initials{LDF 2004.11.10.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             delete pv;
 
@@ -5496,9 +5304,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -5536,7 +5342,6 @@ Added this rule.
 @=path_vector_assignment: path_vector_variable @>  
 @=ASSIGN path_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -5585,9 +5390,8 @@ failed.
 \initials{LDF 2004.12.10.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -5611,9 +5415,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -5699,9 +5501,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -5725,9 +5526,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -5813,9 +5612,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -5839,14 +5637,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
 
 @q **** (4) |parabola_vector_assignment|.  @>
 @*2 \§parabola vector assignment>. 
@@ -5882,7 +5677,6 @@ Added this rule.
 @=parabola_vector_assignment: parabola_vector_variable @>  
 @=ASSIGN parabola_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -5933,9 +5727,8 @@ failed.
 \initials{LDF 2005.11.07.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -5959,9 +5752,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -6001,7 +5792,6 @@ Added this rule.
 @=hyperbola_vector_assignment: hyperbola_vector_variable @>  
 @=ASSIGN hyperbola_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -6052,9 +5842,8 @@ failed.
 \initials{LDF 2005.11.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -6078,9 +5867,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -6120,7 +5907,6 @@ Added this rule.
 @=arc_vector_assignment: arc_vector_variable @>  
 @=ASSIGN arc_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -6171,9 +5957,8 @@ failed.
 \initials{LDF 2007.10.13.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -6197,9 +5982,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -6239,7 +6022,6 @@ Added this rule.
 @=conic_section_lattice_vector_assignment: conic_section_lattice_vector_variable @>  
 @=ASSIGN conic_section_lattice_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -6291,9 +6073,8 @@ failed.
 \initials{LDF 2005.11.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -6317,15 +6098,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
-
 
 @q **** (4) |helix_vector_assignment|.  @>
 @*2 \§helix vector assignment>. 
@@ -6409,9 +6186,8 @@ failed.
 \initials{LDF 2005.05.20.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -6435,9 +6211,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -6525,9 +6299,8 @@ failed.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -6551,9 +6324,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -6641,9 +6412,8 @@ failed.
 \initials{LDF 2005.01.26.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             delete pv;
 
@@ -6666,9 +6436,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -6783,7 +6551,6 @@ if |vector_type_assign<Polygon, Polygon>| failed.
  
       }  /* |else| (|status == 0|)  */
 
-
 @q ****** (6).@> 
 
 }; 
@@ -6820,7 +6587,6 @@ Added this rule.
 @=rectangle_vector_assignment: rectangle_vector_variable @>  
 @=ASSIGN rectangle_vector_expression@>@/
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
@@ -6869,9 +6635,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             delete pv;
 
@@ -6894,16 +6659,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
-
-
 
 @q **** (4) |reg_polygon_vector_assignment|.  @>
 @*2 \§regular polygon vector assignment>. 
@@ -6986,9 +6746,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -7012,9 +6771,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -7101,9 +6858,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -7127,9 +6883,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -7216,9 +6970,8 @@ failed.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -7242,9 +6995,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -7331,9 +7082,8 @@ failed.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             delete pv;
 
@@ -7356,9 +7106,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -7445,9 +7193,8 @@ failed.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             delete pv;
 
@@ -7470,9 +7217,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
@@ -7559,9 +7304,8 @@ failed.
 \initials{LDF 2005.10.30.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -7585,14 +7329,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
 
 @q **** (4) |origami_figure_vector_assignment|.  @>
 @*2 \§origami figure vector assignment>. 
@@ -7675,9 +7416,8 @@ failed.
 \initials{LDF 2005.02.03.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
 
             delete pv;
@@ -7701,14 +7441,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
-
 
 @q ****** (6).@> 
 
 }; 
-
 
 @q * (1) |assignment_command|.@>
 @** \§assignment command>. 
@@ -7720,7 +7457,6 @@ failed.
 @q ** (2) assignment_command --> intersection_assignment_command.  @>
 @* \§assignment command> $\longrightarrow$ 
 \§intersection assignment command>.
-
 
 \LOG
 \initials{LDF 2004.09.05.}
@@ -7747,7 +7483,6 @@ Commented-out this rule.
 @q ** (2) assignment_command --> transformation_assignment_command.@>
 @* \§assignment command> $\longrightarrow$ 
 \§transformation assignment command>.
-
 
 \LOG
 \initials{LDF 2004.10.01.}
@@ -7778,7 +7513,6 @@ Now deleting |transformation_assignment_command|.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

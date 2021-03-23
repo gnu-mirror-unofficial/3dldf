@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
 
 @q * (0) Picture and Label.@>
 @** Picture and Label\quad ({\tt pictures\PERIOD web}).\hfil
@@ -89,7 +88,6 @@ versions are now in their own RCS repository.
 #include "dashptrn.h++"
 #include "shapes.h++"
 
-
 @q * (0) Label.@>
 @** Label.
 \initials{LDF 2002.10.20.} 
@@ -98,11 +96,9 @@ onto |Pictures|.  They are
 created by the functions |label()| and |dotlabel()|, which are
 currently defined for |Points| and |Paths|.
 
-
 @q * (1) {\bf Label} class definition.@>
 @* {\bf Label} class definition.
 \initials{LDF Undated.}
-
 
 A |Label| contains a pointer to a |Point|, which is
 its location, a |bool| to indicate whether the label should have a dot
@@ -116,7 +112,6 @@ positioning the text with respect to the label.
 |Labels| are currently only ever created 
 on the free store.
 \initials{LDF 2002.10.09.}  
-
 
 \LOG
 \initials{LDF 2005.01.31.}
@@ -160,7 +155,6 @@ class Label
 @q * (1) Static data members. @>
 @* Static data members.
 \initials{LDF Undated.}
-
 
 |DO_LABELS| is used for globally enabling or suppressing putting
 |Labels| onto |Pictures|:  If
@@ -245,7 +239,6 @@ type in this file (\filename{pictures.web}).
 @<Declare |Label| functions@>=
 ~Label(void);
 
-
 @q ** (2) Declarations for {\bf Label} functions.@>
 @*1 Declarations for {\bf Label} functions.
 \initials{LDF Undated.}
@@ -254,7 +247,6 @@ These must be defined in \filename{points.web},
 because they require operations on |pt|, and |Point| is an incomplete
 type in this file.
 \initials{LDF Undated.}
-
 
 \LOG 
 \initials{LDF 2002.10.23.}  
@@ -274,7 +266,6 @@ Label* get_copy() const;
 @q * (0) Picture. @>
 @** Picture.
 @f Picture int
-
 
 @q * (1) Picture class definition.@>
 @* {\bf Picture} class definition.
@@ -334,9 +325,8 @@ class Picture
     Transform transform;
     vector<Shape*> shapes;
     vector<Label*> labels;
-    bool do_labels;   
+    bool do_labels;
 
-    
 @q *** Public data and function members.@>
 @ Public data and function members.
 \initials{LDF 2004.06.28.}
@@ -355,7 +345,6 @@ class Picture
     static real default_max_y_proj;
     static real default_min_z_proj;
     static real default_max_z_proj;
-
 
     @<Declare |Picture| functions@>@;
 };
@@ -395,7 +384,6 @@ to $\pm 200$, as appropriate.
     real Picture::default_min_z_proj           = -200;
     real Picture::default_max_z_proj           =  200;
 
-
 @q * Constructors.@>
 @* Constructors.
 
@@ -407,7 +395,6 @@ to $\pm 200$, as appropriate.
 \initials{LDF 2004.06.19.}
 Now calling |pthread_cond_init()| for |cond_var| and 
 |pthread_cond_mutex()| for |mutex|.
-
 
 \initials{LDF 2004.06.29.}
 Removed code for handling |pthread_mutex_t mutex| and 
@@ -428,13 +415,11 @@ Picture::Picture(void)
   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   do_labels = true;
 
   return;
   
 }
-
 
 @q ** (2) Copy constructor. @>
 @ Copy constructor.
@@ -447,8 +432,6 @@ file.  I've had to do these things because of differences between the
 DEC compiler and the GNU compiler.
 @<Declare |Picture| functions@>=
 Picture(const Picture& p);
-
-
 
 @q * (1) Destructor.@>
 @* Destructor.
@@ -498,7 +481,6 @@ with the GNU Compiler.
 void
 operator=(const Picture& p);
 
-
 @q * (1) Adding elements.@>
 @* Adding elements.
 
@@ -526,7 +508,6 @@ Added this declaration.
 void   
 operator+=(const Picture& p);
 
-
 @q ** (2) Add {\bf Shape}.@>
 @*1 Add {\bf Shape}.
 @^\cofunc{Picture}{+=}@>
@@ -541,7 +522,6 @@ Picture::operator+=(Shape* s)
 {
     shapes.push_back(s);
 }  
-
 
 @q ** (2) Add Label.@>
 @*1 Add {\bf Label}.
@@ -610,7 +590,6 @@ Picture::kill_labels()
 Transformations for |Pictures| are saved up, and then performed when
 the |Picture| is output.
 
-
 @q ** Affine transformations.@>
 @ Affine transformations.
 
@@ -628,7 +607,6 @@ Picture::scale(real x, real y, real z)
 {
   return transform.scale(x, y, z);
 }
-
 
 @q *** Shift. (Translation.) @>
 @ Shift. (Translation.)
@@ -661,9 +639,6 @@ here.
 @<Declare |Picture| functions@>=
 Transform 
 shift(const Point& p);
-    
-
-
 
 @q *** (3) Rotation around the main axes.@>
 @*2 Rotation around the main axes.
@@ -682,8 +657,7 @@ Transform
 Picture::rotate(const real x, const real y, const real z)
 {
   return transform.rotate(x, y, z);
-} 
-   
+}
 
 @q *** (3) Rotation around an arbitrary axis.@>
 @*2 Rotation around an arbitrary axis.
@@ -710,9 +684,7 @@ Transform
 rotate(const Point& p0, const Point& p1,
               const real angle = 180);
 
-
 /* Remember to add shear! */
-
 
 @q *** (3) Shear. Remember to add!!@>
 
@@ -750,7 +722,6 @@ Picture::set_transform(const Transform& t)
 Transform
 operator*=(const Transform& t);
 
-
 @
 @<Define |Picture| functions@>=
 Transform
@@ -772,7 +743,6 @@ Now locking and unlocking |mutex| before showing the |Picture|.
 Changed return value from |void| to |int|.  This function currently 
 returns 0 upon success, and 1 if |pthread_mutex_lock()| 
 or |pthread_mutex_unlock()| fails.
-
 
 \initials{LDF 2004.07.16.}
 Removed code for locking and unlocking |mutex|.  Code that calls this function
@@ -830,7 +800,6 @@ Picture::show(string text, bool stop)
   return 0;
 
 } /* End of |Picture::show| definition  */
-
 
 @q * Show transform.@>
 @ Show {\bf transform}.
@@ -973,7 +942,6 @@ Now including |@<Define |Label| functions@>|.
 @<Define classes@>@;
 @<Declarations for the header file@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -982,7 +950,6 @@ Now including |@<Define |Label| functions@>|.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

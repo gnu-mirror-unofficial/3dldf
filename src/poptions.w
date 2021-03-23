@@ -48,9 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
-
 
 @q * (0) Options.  @>
 @** Options.
@@ -171,7 +168,6 @@ Added this type declaration.
 
 @=%type <int_value> with_test_optional@>
 
-
 @q *** (3) with_test_optional:  EMPTY.@>  
 
 @*2 \§with test optional> $\longrightarrow$ \.{EMPTY}.
@@ -210,7 +206,6 @@ Added this rule.
    @=$$@> = WITH_TEST;
 };
 
-
 @q *** (3) with_test_optional: WITH_NO_TEST.@>  
 
 @*2 \§with test optional> $\longrightarrow$ \.{WITH\_NO\_TEST}.
@@ -242,7 +237,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <int_value> with_cull_optional@>
-
 
 @q *** (3) with_cull_optional:  EMPTY.@>  
 
@@ -282,7 +276,6 @@ Added this rule.
    @=$$@> = WITH_CULL;
 };
 
-
 @q *** (3) with_cull_optional: WITH_NO_CULL.@>  
 
 @*2 \§with cull optional> $\longrightarrow$ \.{WITH\_NO\_CULL}.
@@ -314,7 +307,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <int_value> with_rectify_optional@>
-
 
 @q *** (3) with_rectify_optional:  EMPTY.@>  
 
@@ -354,7 +346,6 @@ Added this rule.
    @=$$@> = WITH_RECTIFY;
 };
 
-
 @q *** (3) with_rectify_optional: WITH_NO_RECTIFY.@>  
 
 @*2 \§with rectify optional> $\longrightarrow$ \.{WITH\_NO\_RECTIFY}.
@@ -374,7 +365,6 @@ Added this rule.
    @=$$@> = WITH_NO_RECTIFY;
 };
 
-
 @q * (0) @>
 
 @q   Emacs-Lisp code for use in indirect buffers when using the          @>
@@ -385,9 +375,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

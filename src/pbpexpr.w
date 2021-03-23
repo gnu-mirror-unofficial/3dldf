@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |bool_point| expressions.  @>
 @** {\bf bool\_point} expressions.
@@ -60,7 +58,6 @@
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
-
 @q * (1) |bool_point| primary.  @>
 @* \§bool-point primary>.
   
@@ -68,7 +65,6 @@ Created this file and wrote quite a few rules.
 \initials{LDF 2004.09.05.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> bool_point_primary@>@/
@@ -115,7 +111,6 @@ an ``unknown |bool_point|''.
 @ |!(entry == 0 || entry->object == 0)|.
 \initials{LDF 2004.11.05.}
 
-
 \LOG
 \initials{LDF 2004.11.05.}
 @:BUG FIX@> BUG FIX:  Now setting 
@@ -137,7 +132,6 @@ an ``unknown |bool_point|''.
 
 };
 
-
 @q **** (4) bool_point_argument.@>
 @*3 \§bool-point argument>.  
 
@@ -148,10 +142,8 @@ an ``unknown |bool_point|''.
 @q !! TO DO:  @>
 \initials{LDF 2004.04.29.}
 Program this case.  
-\ENDTODO 
+\ENDTODO
 
-
- 
 @q ***** (5) bool_point_primary --> LEFT_PARENTHESIS   @>
 @q ***** (5) boolean_expression COMMA point_expression @>
 @q ***** (5) RIGHT_PARENTHESIS.                        @>
@@ -247,7 +239,6 @@ Added this rule.
 { 
    Bool_Point* bp;
 
-
          bp = create_new<Bool_Point>(0);
 
    Pointer_Vector<Bool_Point>* bpv 
@@ -300,7 +291,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) bool_point secondary.  @>
 @*3 \§bool-point secondary>.
 \initials{LDF Undated.}
@@ -332,10 +322,8 @@ Added this rule.
   
   @=$$@> = @=$1@>;
 
-
 }
 ;
-
 
 @q **** (4) bool_point tertiary.  @>
 @ \§bool-point tertiary>.
@@ -438,8 +426,6 @@ Added this rule.
 }
 ;
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -448,7 +434,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -457,5 +442,4 @@ Added this rule.
 @q fill-column:80                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

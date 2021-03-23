@@ -101,7 +101,6 @@ zzerror(void* v, char const* s);
 
 @<Token and type declarations@>=
 
-
 @q *** (3) @>
 @*3 Control.
 
@@ -110,7 +109,6 @@ zzerror(void* v, char const* s);
 @=%token<int_value> START_ENTRY_2@>   
 @=%token<int_value> END_ENTRY_2@>   
 @=%token<int_value> END_2@>   
-
 
 @q **** (4) Tokens for start conditions.  @>
 @*3 Tokens for start conditions.  
@@ -182,7 +180,6 @@ This rule ensures that an empty file won't cause an error.
 @*3 Statement.
 \initials{LDF 2009.10.05.}
 
-
 @q **** (4) statement --> START_ENTRY_2 keyword_value_pair_list END_ENTRY_2 @>
 
 @*3 \<statement> $\longrightarrow$ \.{START\_ENTRY\_2} \<keyword value pair list> 
@@ -194,7 +191,6 @@ This rule ensures that an empty file won't cause an error.
 @=statement: START_ENTRY_2 entry_statement_list END_ENTRY_2 @>
 {
 
-
 };
 
 @q **** (4) @>
@@ -204,10 +200,7 @@ This rule ensures that an empty file won't cause an error.
 @=entry_statement_list: /* Empty  */  @>
 {
 
-
 };
-
-
 
 @ Putting parser together.
 @c

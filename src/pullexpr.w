@@ -48,9 +48,7 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
- 
 @q * (0) Unsigned long long expressions.  @>
 @** Unsigned long long  expressions.
 \initials{LDF 2005.12.05.}
@@ -94,7 +92,6 @@ Added this rule.
 
       }  /* |if (entry == 0 || entry->object == 0)| */
 
-
     else /* |entry != 0| */
  
         @=$$@> = *static_cast<unsigned long long*>(entry->object);
@@ -115,8 +112,6 @@ Added this rule.
 {
         @=$$@> = @=$1@>;
 };
-
-
 
 @q ** (2) ulong_long_primary --> get_prime_sub ulong_long_primary.  @>
 @*1 \§ulong long primary> $\longrightarrow$ \§get prime sub> 
@@ -217,7 +212,6 @@ Added this type declaration.
 {
 
   @=$$@> = @=$1@>;
-  
 
 };
 
@@ -250,8 +244,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -260,7 +252,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

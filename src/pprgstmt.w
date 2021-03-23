@@ -48,15 +48,12 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q ** (2) Common declarations for rules.@>
 @*1 Common declarations for rules.
 It would be nice to declare the variables in this section as local variables
 within |yyparse()|, but I don't know of any way to do that.
 \initials{LDF 2004.04.16.}
-
 
 I also wanted |out_stream_metapost| to be a plain |ostream| rather than an
 |ostream*|, but I couldn't get this to work.  I believe it will only be needed
@@ -134,7 +131,6 @@ Added |bool warning_stop_value|.
    ostream* out_stream_metapost
       = scanner_node->out[Run_State::METAPOST]->stream_ptr;
 
-
    bool error_stop_value = (      scanner_node->run_state.error_stop_mode
                          == Run_State::STOPPING
                       && scanner_node->in->type != Io_Struct::STDIN_TYPE)
@@ -146,8 +142,6 @@ Added |bool warning_stop_value|.
                       && scanner_node->in->type != Io_Struct::STDIN_TYPE)
                       
                       ? true : false;
-
-
 
    Id_Map_Entry_Node entry;
 
@@ -197,7 +191,6 @@ setting |thread_name = scanner_node->thread_info->name|.
 #if DEBUG_COMPILE
    bool DEBUG = false;
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ** (2) program.  Start symbol.  @>
 @q ** (2) program: statement_list END  @>
@@ -260,7 +253,6 @@ Added this section.
 
 @<Define rules@>=
 
-
   if (   scanner_node->in->up != static_cast<Input_Struct*>(0)
       && !(   scanner_node->run_state.multithread_input
            || scanner_node->run_state.multithread_include))
@@ -274,9 +266,6 @@ Added this section.
           scanner_node->in = up;
           up = scanner_node->in->up;
         }
-
-
-
 
       delete scanner_node->in;
       scanner_node->in = 0;
@@ -310,7 +299,6 @@ Added this section.
       cerr_strm.str("");
       
     } /* |if (scanner_node->group_ctr > 0)|  */
-
 
  Id_Map_Node id_map_node = 0; 
 
@@ -357,7 +345,6 @@ Added this section.
 @q *** (3) statement_list.   @>
 @ \§statement\_list>.  
 
-
 @f statement_list non_terminal_symbol
 
 @q **** (4) statement_list --> /* Empty  */.@>   
@@ -378,8 +365,6 @@ Added this section.
 @<Define rules@>=
 @=statement_list: statement_list  statement@>
 {
-
-
 
 #if DEBUG_COMPILE 
   @<Common declarations for rules@>@;
@@ -462,7 +447,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) statement --> END_INPUT.@>
 @*3  \§statement> $\longrightarrow$ \.{END\_INPUT}.
 
@@ -495,9 +479,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
   Int_Void_Ptr_Bool end_ivp(END, 0, false);
-
 
 @q ****** (6) Using multithreaded input and/or multithreaded inclusion.@>   
 
@@ -534,7 +516,6 @@ Added this rule.
 
     } /* |if (   scanner_node->run_state.multithread_input 
               || scanner_node->run_state.multithread_include)|  */
-    
 
 @q ****** (6) Using single-threaded input and inclusion.@>   
 
@@ -543,12 +524,10 @@ Added this rule.
 
 @<Define rules@>=
 
-  
-  else /* |!(   scanner_node->run_state.multithread_input 
+else /* |!(   scanner_node->run_state.multithread_input 
              || scanner_node->run_state.multithread_include)|  */
     {
 
-      
 @q ******* (7) |scanner_node->in->up != 0|.       @> 
 @q ******* (7) Will call |scanner_node->pop_in()|.@> 
 
@@ -578,9 +557,7 @@ Added this rule.
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       status = scanner_node->pop_in();
-
 
 @q ******** (8) Error handling:  |scanner_node->pop_in()| failed.@> 
 
@@ -608,7 +585,6 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-
 @q ******** (8) |scanner_node->pop_in()| succeeded.@> 
 @ |scanner_node->pop_in()| succeeded.
 \initials{LDF 2004.10.01.}
@@ -627,7 +603,6 @@ Added this rule.
                            << endl 
                            << "`scanner_node->pop_in()' succeeded.";
 
-
                  log_message(cerr_strm);
                  cerr_message(cerr_strm);
                  cerr_strm.str("");
@@ -641,10 +616,7 @@ Added this rule.
 
 @q ******** (8).@> 
 
-
     } /* |if (scanner_node->in->up)|  */
-  
-  
 
 @q ******* (7) |scanner_node->in->up == 0|.       @> 
 @q ******* (7) Will push |END| onto |scanner_node->rescan_stack|.@> 
@@ -672,16 +644,12 @@ Will push |END| onto |scanner_node->rescan_stack|.
           cerr_message(cerr_strm);
           cerr_strm.str("");
 
-
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-      
-      scanner_node->rescan_stack.push(end_ivp);
+#endif /* |DEBUG_COMPILE|  */@;
+
+scanner_node->rescan_stack.push(end_ivp);
 
     }  /* |else| (|scanner_node->in->up == 0|)  */
-
-
 
 @q ******* (7) End of single-threaded input and inclusion case.@> 
 
@@ -712,7 +680,6 @@ Will push |END| onto |scanner_node->rescan_stack|.
 Now including this rule in |@<Garbage@>|.
 \ENDLOG
 
-
 @<Garbage@>=
 @=statement:  equation SEMI_COLON@>
 ;
@@ -736,7 +703,7 @@ Made debugging output thread-safe.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -760,9 +727,7 @@ Made debugging output thread-safe.
 Made debugging output thread-safe.
 \ENDLOG 
 
-
 @<Define rules@>=
-
 
 @=statement:  assignment SEMI_COLON@>
 {
@@ -772,7 +737,7 @@ Made debugging output thread-safe.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -806,7 +771,7 @@ Added this rule.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -840,7 +805,7 @@ Added this rule.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -855,11 +820,8 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) statement --> command SEMI_COLON.  @>
 @ \§statement> $\longrightarrow$ \§command>  \.{SEMI\_COLON}.
-
 
 \LOG
 \initials{LDF 2004.06.02.}  
@@ -879,7 +841,7 @@ Made debugging output thread-safe.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG) 
     {
       cerr_strm << thread_name 
@@ -912,7 +874,7 @@ Added this rule.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG) 
     {
       cerr_strm << thread_name 
@@ -944,7 +906,7 @@ Added this rule.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG) 
     {
       cerr_strm << thread_name 
@@ -979,7 +941,7 @@ Changed |defun_call| to |macro_call|.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG) 
     {
       cerr_strm << thread_name 
@@ -1012,7 +974,7 @@ Added this rule.
 #endif
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG)
      {
          cerr_strm << thread_name 
@@ -1062,7 +1024,7 @@ in |Scan_Parse::let_func()|.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false; /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG) 
       {
           cerr_strm << thread_name 
@@ -1111,8 +1073,6 @@ Added this section.
 
               }  /* |catch (bad_alloc)|  */
 
-
-
 @q ***** (5) Error handling:  |Scan_Parse::let_func()| failed, @>   
 @q ***** (5) returning a non-zero value                        @>   
 
@@ -1157,14 +1117,12 @@ Added this section.
 
                }  /* |else if (DEBUG) | (|status == 0|)  */
 
-#endif /* |DEBUG_COMPILE|  */@; 
- 
- 
+#endif /* |DEBUG_COMPILE|  */@;
+
 @q **** (4) @>   
 
 };
 
-  
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1173,8 +1131,6 @@ Added this section.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

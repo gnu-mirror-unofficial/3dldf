@@ -48,8 +48,7 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-                
+
 @q * (0) Triangle.@>       
 @** Triangle\quad ({\tt triangle\PERIOD web}).\hfil
 \initials{LDF Undated.}
@@ -218,7 +217,6 @@ Triangle::Triangle(void)
     center = INVALID_POINT;
 }
 
-
 @q *** (3) |Point*| arguments.@>
 @*2 {\bf Point*} arguments.
 @^\cfunc{Triangle}{Triangle}@>
@@ -268,7 +266,7 @@ Triangle::Triangle(Point* A, Point* B, Point* C,
 {
 
 #if DEBUG_COMPILE
-   bool DEBUG = false;  /* |true|  */ 
+   bool DEBUG = false; /* |true| */ 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    this->set(A, B, C, scanner_node);  
@@ -442,8 +440,6 @@ Now dereferencing |Point* C| and |Point* A| in the call to
 |Triangle::set(Point* A, Point* B, Point* C,
                Scanner_Node scanner_node)| definition.  */
 
-
-
 @q ** (2) Assignment.@>
 @*1 Assignment.
 \initials{LDF 2005.01.20.}
@@ -490,8 +486,6 @@ Triangle::operator=(const Triangle& t)
 
 }  /* End of |Triangle::operator=(const Triangle& t)| definition.  */
 
-
-
 @q * (1) Get copy.@>
 @* Get copy.
 @^\cfunc{Triangle}{get\_copy}@>
@@ -517,8 +511,6 @@ Triangle::get_copy() const
   return static_cast<Shape*>(p);
 }
 
-
-
 @q ** (2) Get |Shape| type.@> 
 @*1 Get {\bf Shape} type.
 \initials{LDF 2005.03.18.}
@@ -538,7 +530,6 @@ get_shape_type(void) const
 {
    return TRIANGLE_TYPE;
 }
-
 
 @q ** (2) Is |Triangle|.@> 
 @*1 Is {\bf Triangle}.
@@ -624,7 +615,6 @@ Triangle::is_equal(Triangle& t, real tolerance) const
         << "fabs(gamma - t.gamma) == " << fabs(gamma - t.gamma)
         << endl;
 
-
   real A;
   real B;
   real C;
@@ -641,7 +631,6 @@ Triangle::is_equal(Triangle& t, real tolerance) const
   real T_BETA;
   real T_GAMMA;
 
-
    vector<real> v;
    v.push_back(alpha);
    v.push_back(beta);
@@ -651,7 +640,6 @@ Triangle::is_equal(Triangle& t, real tolerance) const
    t_v.push_back(t.alpha);
    t_v.push_back(t.beta);
    t_v.push_back(t.gamma);
-
 
    cerr << "alpha == " << alpha << endl;
    cerr << "t.alpha == " << t.alpha << endl;
@@ -670,12 +658,10 @@ Triangle::is_equal(Triangle& t, real tolerance) const
         ++iter)
       cerr << "*iter = " << *iter << endl;
 
-
    for (vector<real>::const_iterator iter = t_v.begin();
         iter != t_v.end();
         ++iter)
       cerr << "*iter = " << *iter << endl;
-
 
    return (   fabs(a - t.a) < tolerance 
            && fabs(b - t.b)  < tolerance
@@ -693,10 +679,7 @@ Triangle::is_equal(Triangle& t, real tolerance) const
 
    return false;
 
-
 }  /* End of |Triangle::is_equal()| definition.  */
-
-
 
 @q ** (2) Show.@>
 @*1 Show.
@@ -790,7 +773,6 @@ since it's not present.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

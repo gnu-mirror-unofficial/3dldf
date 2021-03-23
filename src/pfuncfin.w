@@ -49,8 +49,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (1) Additional C++ code. @>
 @* Additional \CPLUSPLUS/ code.
@@ -115,7 +113,6 @@ set_yydebug(int i)
   return;
 }
 
-
 @q ** Unset |yydebug|.  @>
 @ Unset {\bf yydebug}.
 
@@ -157,7 +154,6 @@ Added this section.
 \initials{LDF 2004.05.02.}
 
 @<Garbage@>=
-
 
 @q * (1) Putting the parser together.@>
 @* Putting the parser together.
@@ -209,7 +205,6 @@ typedef void* yyscan_t;
 
 @<Reset |DEBUG_COMPILE|@>@;
 
-
 #if 0 
 @<Garbage@>@;
 #endif 
@@ -240,7 +235,6 @@ typedef void* yyscan_t;
 @<Declare functions@>@;
 @<Reset |DEBUG_COMPILE|@>@;
 
-  
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -249,8 +243,6 @@ typedef void* yyscan_t;
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

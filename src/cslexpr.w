@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) conic_section_lattice expressions.  @>
 @** \§conic section lattice expressions>.
@@ -159,7 +157,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) get_conic_section_lattice_option_list.@>   
 @*2 \§get conic section lattice option list>.
 \initials{LDF 2007.07.29.}
@@ -233,7 +230,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <pointer_value> get_conic_section_lattice_option@>
-
 
 @q **** (4) get_conic_section_lattice_option --> WITH_CULL.@>   
 @*3 \§get conic section lattice option> $\longrightarrow$ \.{WITH\_CULL}.
@@ -351,9 +347,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4) get_conic_section_lattice_option --> WITH_TEST.@>   
 @*3 \§get conic section lattice option> $\longrightarrow$ \.{WITH\_TEST}.
 \initials{LDF 2007.07.29.}
@@ -448,7 +441,6 @@ Added this rule.
 { 
 
    Conic_Section_Lattice* r;
-
 
          r = create_new<Conic_Section_Lattice>(0);
 
@@ -595,8 +587,6 @@ Added this rule.
 
 };
 
-
-
 @q * (1) conic_section_lattice expression.  @>
 @* \§conic section lattice expression>.
 \initials{LDF 2007.07.29.}
@@ -626,8 +616,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -636,7 +624,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

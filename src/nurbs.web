@@ -50,7 +50,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) |Nurbs|.@>
 @** {\bf Nurbs}.\quad ({\tt nurbs\PERIOD web}).\hfil
@@ -218,8 +217,6 @@ This argument isn't used in these functions yet.
                          void*,
                          const Scanner_Node = 0) const {return 0;}
 
-
-
   virtual bool set_pre_projective_extremes(Scanner_Node scanner_node = 0) 
      {return true;}
 
@@ -231,7 +228,6 @@ This argument isn't used in these functions yet.
                                 = Shape::PROJECTIVE_COORDINATES_VALUE) 
                              const {return 0;}
 
-
   virtual real get_maximum_x(const unsigned short s 
                              = Shape::PROJECTIVE_COORDINATES_VALUE) 
                             const {return 0;}
@@ -240,11 +236,9 @@ This argument isn't used in these functions yet.
                           = Shape::PROJECTIVE_COORDINATES_VALUE) 
                          const {return 0;}
 
-
   virtual real get_minimum_y(const unsigned short s 
                                 = Shape::PROJECTIVE_COORDINATES_VALUE) 
                              const {return 0;}
-
 
   virtual real get_maximum_y(const unsigned short s 
                              = Shape::PROJECTIVE_COORDINATES_VALUE) 
@@ -257,7 +251,6 @@ This argument isn't used in these functions yet.
   virtual real get_minimum_z(const unsigned short s 
                                 = Shape::PROJECTIVE_COORDINATES_VALUE) 
                              const {return 0;}
-
 
   virtual real get_maximum_z(const unsigned short s 
                              = Shape::PROJECTIVE_COORDINATES_VALUE) 
@@ -273,14 +266,12 @@ This argument isn't used in these functions yet.
   virtual const valarray<real>& get_pre_projective_extremes(void) const 
     {return pre_projective_extremes;}
 
-
   virtual const valarray<real>& get_projective_extremes(void) const 
     {return projective_extremes;}
 
   virtual void suppress_output(void) {return;}
 
   virtual void unsuppress_output(void) {return;}
-
 
 @q *** (3).@> 
 
@@ -371,7 +362,6 @@ Nurb::~Nurb(void)
        {
            delete *iter;
        }
-
 
    for(vector<Point*>::iterator iter = control_points.begin();
        iter != control_points.end();  
@@ -527,7 +517,6 @@ is_polygon(void) const
    return false;
 }
 
-
 @q *** (3) Is |Triangle|.@> 
 @*2 Is {\bf Triangle}.
 \initials{LDF 2005.03.31.}
@@ -671,7 +660,6 @@ is_parabola(void) const
 {
    return false;
 }
-
 
 @q ** (2) Is |Hyperbola|.@> 
 @*1 Is {\bf Hyperbola}.
@@ -961,7 +949,6 @@ is_great_rhombicosidodecahedron(void) const
    return false;
 }
 
-
 @q ** (2) Is |Cone|.@> 
 @*1 Is {\bf Cone}.
 \initials{LDF 2005.05.24.}
@@ -1235,7 +1222,6 @@ get_surface_hiding_ctr(void)
    return surface_hiding_ctr;
 }
 
-
 @q ** (2) Set |decomposition_level|.@> 
 @*1 Set {\it decomposition\_level}.
 \initials{LDF 2005.04.18.}
@@ -1292,7 +1278,6 @@ get_decomposition_level(void)
    return decomposition_level;
 }
 
-
 @q ** (2) Decompose.@> 
 @*1 Decompose.
 LDF 2005.04.01.
@@ -1333,7 +1318,6 @@ Nurb::decompose(Path* p, Scanner_Node scanner_node)
 {
    return 0;
 }
-
 
 @q *** (3) |Shape*| argument.@> 
 @*2 {\bf Shape*} argument.
@@ -1412,7 +1396,6 @@ Nurb::decompose(const unsigned short limit,
 Added this section.
 \ENDLOG
 
-
 @q *** (3) Appending |Points|.@> 
 @*2 Appending {\bf Points}.
 \initials{LDF 2005.01.26.}
@@ -1438,7 +1421,6 @@ Nurb::operator+=(Point* p)
 {
    control_points.push_back(p);
 }
-
 
 @q *** (3) Appending knots and weights.@> 
 @*2 Appending knots.
@@ -1573,7 +1555,6 @@ Nurb::append_knot_or_weight(real r,
 
 }  /* End of |Nurb::append_knot_or_weight()| definition.  */
 
-
 @q *** (3) Generate.@> 
 @*2 Generate.
 \initials{LDF 2005.01.27.}
@@ -1605,7 +1586,6 @@ generate(Scanner_Node scanner_node,
          real power,
          real time,
          Path* p);
-         
 
 @q ** (2) Pushing |Colors|.@> 
 @*1 Pushing {\bf Colors}.
@@ -1633,8 +1613,6 @@ virtual
 int
 push_draw_color(Color*& c, bool copy = true);
 
-
-
 @q **** (4) Definition.@> 
 
 @
@@ -1661,7 +1639,6 @@ Nurb::push_draw_color(Color*& c, bool copy)
 
 }  /* End of |Nurb::push_draw_color()|  */
 
-
 @q *** (3) Push fill color.@>
 @*1 Push fill color.
 \initials{LDF 2005.03.17.}
@@ -1678,8 +1655,6 @@ Added this function.
 virtual
 int
 push_fill_color(Color*& c, bool copy = true);
-
-
 
 @q **** (4) Definition.@> 
 
@@ -1707,7 +1682,6 @@ Nurb::push_fill_color(Color*& c, bool copy)
 
 }  /* End of |Nurb::push_fill_color()|  */
 
-
 @q *** (3) Push color.@>
 @*1 Push color.
 \initials{LDF 2005.03.17.}
@@ -1724,8 +1698,6 @@ Added this function.
 virtual
 int
 push_color(Color*& c, bool copy = true);
-
-
 
 @q **** (4) Definition.@> 
 
@@ -1758,7 +1730,6 @@ Nurb::push_color(Color*& c, bool copy)
    return 0;
 
 }  /* End of |Nurb::push_color()|  */
-
 
 @q ** (2) Push pen.@>
 @*1 Push pen.
@@ -1848,9 +1819,6 @@ Nurb::push_dash_pattern(Dash_Pattern*& d, bool copy)
 
 }  /* End of |Nurb::push_dash_pattern()| definition.  */
 
-
-
-
 @q ** (2) Blending function.@> 
 @*1 Blending function.
 \initials{LDF 2005.01.28.}
@@ -1926,7 +1894,6 @@ Nurb::blending_func(unsigned int i,
    if (p == 0U)
       {
 
-
 @q ***** (5).@> 
 
           if (   u >= *(knots[i]) && u < *(knots[i + 1]) 
@@ -1963,7 +1930,6 @@ Nurb::blending_func(unsigned int i,
 
 @q ***** (5).@> 
 
-
       }  /* |if (p == 0U)|  */
 
 @q **** (4) |p != 0U|.@>   
@@ -1983,19 +1949,15 @@ Nurb::blending_func(unsigned int i,
      {
         cerr << "`coefficient_1' == " << coefficient_1 << endl;
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-          if (coefficient_1 != ZERO_REAL)
+if (coefficient_1 != ZERO_REAL)
              {
                 coefficient_1 = (u - *(knots[i])) / coefficient_1;
                 value_1 = coefficient_1 * blending_func(i, p - 1, u, scanner_node);
              }
           else
              value_1 = 0;
-
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2013,7 +1975,6 @@ Nurb::blending_func(unsigned int i,
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
           if (coefficient_2 != ZERO_REAL)
              {
                 coefficient_2 =  (*(knots[i + p + 1]) - u) / coefficient_2;
@@ -2021,7 +1982,6 @@ Nurb::blending_func(unsigned int i,
              }
           else 
              value_2 = 0;
- 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2033,11 +1993,9 @@ Nurb::blending_func(unsigned int i,
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
           return value_1 + value_2;
 
       }  /* |else| (|p != 0U|)  */
-
 
 @q **** (4).@>
 
@@ -2064,7 +2022,6 @@ show(string text = "", char coords = 'w',
      const bool do_persp = true, const bool do_apply = true,
      Focus* f = 0, const unsigned short proj = 0,
      const real factor = 1) const;
-
 
 @q *** (3) Definition.@> 
 
@@ -2124,13 +2081,10 @@ Nurb::show(string text,
       {
           cerr << "Weight " << i++ << ":  " << **iter << endl;
       }
-      
 
 @q **** (4) @>   
 
 }  /* End of |Nurb::show()| definition.  */
-
-
 
 @q ** (2) Enclosing Cuboids Intersect.@>
 @*1 Enclosing Cuboids Intersect.
@@ -2222,7 +2176,6 @@ Unsigned_Byte
 projections_intersect(Shape* s,
                       Scanner_Node scanner_node = 0);
 
-
 @q ** (2) Definition.@>  
 
 @ 
@@ -2233,9 +2186,6 @@ Nurb::projections_intersect(Shape* s,
 {
    return 0;
 }
-
-
-
 
 @q * (1) Putting |Nurbs| together.@>
 @* Putting {\bf Nurbs} together.
@@ -2268,7 +2218,6 @@ Added this section.
 @(nurbs.h@>=
 @<Define |class Nurb|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -2277,9 +2226,6 @@ Added this section.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

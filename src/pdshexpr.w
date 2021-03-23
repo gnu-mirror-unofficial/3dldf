@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) dash_pattern expressions.  @>
 @** {\bf dash\_pattern} expressions.
@@ -58,7 +56,6 @@
 \initials{LDF 2004.06.07.}  
 Created this file.
 \ENDLOG 
-
 
 @q ** (2) dash_pattern primary.  @>
 @*1 \§dash pattern primary>.
@@ -250,7 +247,6 @@ with multiple transformers to fail.
 
 };
 
-
 @q ** (2) dash_pattern tertiary.  @>
 @*1 \§dash pattern tertiary>.
 \initials{LDF Undated.}
@@ -268,7 +264,6 @@ with multiple transformers to fail.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q ** (2) dash_pattern expression.  @>
 @*1 \§dash pattern expression>.
@@ -289,7 +284,6 @@ with multiple transformers to fail.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -298,7 +292,6 @@ with multiple transformers to fail.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

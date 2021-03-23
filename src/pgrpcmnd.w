@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Group commands.  @>
 @** Group commands.  
@@ -58,7 +56,6 @@
 \initials{LDF 2004.09.12.}  
 Created this file.
 \ENDLOG 
-
 
 @q * (1) group_command.@>
 @*  {\bf group\_command}.@>
@@ -129,7 +126,6 @@ Added this rule.  I'm not sure whether I'll need it, though.
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> begin_group_command@>
 
-
 @q ** (2) begin_group_command: BEGIN_GROUP@>
 @*1 \§begin group command> $\longrightarrow$ \.{BEGIN\_GROUP}.
 \initials{LDF Undated.}
@@ -155,7 +151,6 @@ Added this rule.  I'm not sure whether I'll need it, though.
     {
       cerr_strm << thread_name << "*** Parser: `begin_group_command --> "
                 << "BEGIN_GROUP'.";
-
 
       cerr_strm << endl << "`scanner_node->token_string' == "
                 << scanner_node->token_string;
@@ -202,7 +197,6 @@ Added this rule.  I'm not sure whether I'll need it, though.
 
   @=$$@> = static_cast<void*>(0); 
 
-
 };
 
 @q * (1) command: \.{END\_GROUP}.@>
@@ -226,7 +220,6 @@ Removed code from it and now calling |Scan_Parse::end_group_func|.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) save_command.@>
 @*  \§save command>.
@@ -258,8 +251,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-  
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

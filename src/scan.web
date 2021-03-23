@@ -48,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
 
 @q * (0) Scanner.@>
 @** Scanner\quad ({\tt scanner\PERIOD web}).\hfil
@@ -62,7 +61,6 @@ if there were any references to the old \filename{scanner.w} file that
 I formerly used to create a Flex input file, but there don't seem to
 be any.
 \initials{LDF 2004.04.08.} 
-
 
 \TODO
 @q { @>
@@ -184,7 +182,6 @@ standard input.  If the program is waiting for input, and the user
 types ``RETURN'' (actually ``NEWLINE''), the message 
 ``(Please type a command or say `end')'' is printed to standard error.  
 
-
 \initials{LDF 2004.09.20.}
 Added the label |yylex_start| for use with |goto|.  It's used when 
 |sub_yylex| has reached the end of the input file and 
@@ -209,7 +206,6 @@ Made debugging and error output thread-safe.  Formatting changes.
 Get thread info for error and debugging output.
 \ENDTODO 
 
-
 @q ** (2) Definition.  @>
 
 @<Define scanning functions@>=
@@ -218,7 +214,6 @@ int
 yylex(YYSTYPE* value,
       void* parameter)
 {
-
 
 @q *** (3) Preliminaries.@>
 @ Preliminaries.
@@ -281,7 +276,6 @@ Added this section.
 
     } /* |if (scanner_node == 0)|  */
 
-
 @q **** (4) |scanner_node != 0|.@> 
 @ |scanner_node != 0|.
 
@@ -309,7 +303,6 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                 &error_stop_value,
                                                 &warning_stop_value);
@@ -329,7 +322,6 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
     }
 #endif
 
- 
 @q *** (3).@> 
 @
 @<Define scanning functions@>=
@@ -344,9 +336,7 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 
   int status;
 
-
  yylex_start:
-
 
 @q *** (3) Rescan stack not empty.@>
 
@@ -391,8 +381,7 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
            cerr_strm << "`rescan_value' != 0" << endl;
          }
 
-       
-       cerr_strm << "`rescan_retest' == " 
+cerr_strm << "`rescan_retest' == " 
                  << rescan_retest << ".";
 
        log_message(cerr_strm);
@@ -426,7 +415,6 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
                    cerr_strm.str();
                }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
             scanner_node->set_first_call_yylex(false);
 
@@ -464,7 +452,6 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 @q **** (4) .@> 
 
      }    /* |if (scanner_node->rescan_stack.size() > 0)|  */@;
-
 
 @q *** (3) Rescan stack is empty.  Scan new token.@>
 
@@ -508,8 +495,7 @@ Added this section.
 
 @<Define scanning functions@>=
 
-       if (scanner_node->get_in_type() == Io_Struct::STDIN_TYPE)
-         
+         if (scanner_node->get_in_type() == Io_Struct::STDIN_TYPE)
          {
 
            prev_catcode = curr_catcode;
@@ -521,17 +507,15 @@ Added this section.
                cerr_mutex.unlock(); 
              }
 
-
            curr_catcode = sub_yylex(value,
                                     scanner_node);
 
 @q ***** (5).@>
-               
 
            if (   prev_catcode == INVALID_CATCODE
                && curr_catcode == NULL_VALUE)
 
-             {
+           {
                null_ctr++;
 
                cerr_mutex.lock(); 
@@ -560,19 +544,16 @@ Added this section.
                    prev_catcode = curr_catcode;
                    curr_catcode = sub_yylex(value,
                                             scanner_node);
-                   
 
-                 } /* |while|  */
-
+} /* |while|  */
 
 @q ****** (6).@> 
 
-             } /* |if|  */
+           } /* |if|  */
 
 @q ***** (5) .@> 
 
          } /* |if (scanner_node->get_in_type() == Io_Struct::STDIN_TYPE)|  */
-
 
 @q **** (4) |!(scanner_node->get_in_type() == Io_Struct::STDIN_TYPE)|.@>
 @q **** (4) Not reading from standard input.@> 
@@ -589,15 +570,11 @@ Not reading from standard input.
       curr_catcode = sub_yylex(value,
                                scanner_node);
 
-
     }  /* |else| (|!(scanner_node->get_in_type() == Io_Struct::STDIN_TYPE)|)  */
-
 
 @q **** (4)@>
 
      }      /* |else| (|scanner_node->rescan_stack.size() <= 0|)  */@;
-   
-
 
 @q *** (3) TERMINATE.  @>
 @*2 \.{TERMINATE}.
@@ -685,11 +662,9 @@ Do I need to change anything here?
     {
       scanner_node->set_first_call_yylex(true);
       return SEMI_COLON;
-    }  
-    
+    }
 
-
-            goto yylex_start;
+goto yylex_start;
 
 @q **** (4) @>   
 
@@ -698,7 +673,6 @@ Do I need to change anything here?
 @q *** (3).@> 
 @
 @<Define scanning functions@>=
-
 
        else  /* |status != 0|  */
          {
@@ -715,7 +689,6 @@ Do I need to change anything here?
                cerr_strm.str(""); 
              }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q **** (4) |   run_state->multithread_input    @> 
 @q **** (4)  || run_state->multithread_include|.@> 
@@ -735,8 +708,7 @@ Added this section.
   if (   run_state->multithread_input 
       || run_state->multithread_include)
 
-    
-    {
+{
       
       cerr_strm << thread_name << "WARNING! In `yylex()':"
                 << endl 
@@ -745,19 +717,15 @@ Added this section.
                 << endl << "In these cases, input files should contain "
                 << "an `end' or `endinput' command."
                 << endl << "I'll pretend this one does and continue.";
-                
-      
-      log_message(cerr_strm); 
+
+log_message(cerr_strm); 
       cerr_message(cerr_strm); 
       cerr_strm.str(""); 
       
       return END;
 
-      
-    } /* |if (   run_state->multithread_input 
+} /* |if (   run_state->multithread_input 
               || run_state->multithread_include)|  */
-
-
 
 @q **** (4) Error handling:  |!(   run_state->multithread_input     @> 
 @q **** (4)                     || run_state->multithread_include)|.@> 
@@ -808,7 +776,6 @@ Now returning |END| rather than |TERMINATE|.
 
      }  /* |if (curr_catcode == TERMINATE)|  */
 
-
 @q ** (2) Handle special assignments.@>
 @*1 Handle special assignments.
 \initials{LDF 2004.08.26.}
@@ -836,10 +803,9 @@ Added this section.
           cerr_message(cerr_strm); 
           cerr_strm.str(""); 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-      scanner_node->set_first_call_yylex(false);
+scanner_node->set_first_call_yylex(false);
 
       return curr_catcode;
 
@@ -865,7 +831,6 @@ Added this section.
           }
 #endif
 
-
 @q *** (3) Call |scanner_node->lookup|.@>
 
 @ Call |scanner_node->lookup|.
@@ -875,7 +840,6 @@ Added this section.
 
         Id_Map_Entry_Node entry = scanner_node->lookup(value->string_value);
 
- 
 @q *** (3) |lookup| failed.@>
 
 @ |lookup| failed.
@@ -920,9 +884,8 @@ Now checking for |!entry->is_true_internal|.
                      << "In `yylex()': `lookup(" << value->string_value
                 << ")' succeeded." << endl 
                 << "`type' == `" << name_map[entry->get_type()] << "'.";
-           
 
-           if (entry->is_spark())
+if (entry->is_spark())
              {
                cerr << value->string_value << " is a spark. Will return " 
                     << name_map[entry->get_type()]
@@ -951,7 +914,6 @@ Now checking for |!entry->is_true_internal|.
          } /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
            if (   !entry->is_spark() && !entry->is_internal()
                && !entry->is_true_internal()
@@ -1090,7 +1052,6 @@ sub_yylex(YYSTYPE *value,
           Scanner_Node scanner_node)
 {
 
-
 @q *** (3) Preliminaries.@>
 @ Preliminaries.
 
@@ -1151,7 +1112,6 @@ Added this section.
 
     } /* |if (scanner_node == 0)|  */
 
-
 @q **** (4) |scanner_node != 0|.@> 
 @ |scanner_node != 0|.
 
@@ -1201,7 +1161,6 @@ Added this section.
 
     } /* |if (!scanner_node->is_open_in())|  */
 
-
 @q **** (4).@>   
 @ 
 @<Define scanning functions@>=
@@ -1247,6 +1206,7 @@ Added this section.
 
   for (bool first_time = true;;)
     {
+
       prev_char = curr_char;
       curr_char = scanner_node->peek();
 
@@ -1261,9 +1221,7 @@ Added this section.
           cerr_strm.str("");
 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Handle ``RETURNS'' (actually ``NEWLINES'') when reading @>   
 @q ***** (5) from standard input.                                    @>   
@@ -1290,12 +1248,9 @@ Added this section.
           return NULL_VALUE;
         }
 
-
-
 @q ***** (5) |curr_char == EOF|.@>   
 @ |curr_char == EOF|.
 @<Define scanning functions@>=
-
 
       if (curr_char == EOF)
         {
@@ -1375,7 +1330,6 @@ Added this section.
 #endif /* |DEBUG_COMPILE|  */@; 
  
       temp_catcode = get_catcode(curr_char);
-      
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1425,7 +1379,6 @@ Added this section.
           location->last_column  = curr_column;
           location->position     = curr_position;
 #endif 
-
 
           strcpy(value->string_value, "INVALID");
 
@@ -1552,7 +1505,6 @@ Added this section.
           scanner_node->ignore();
           ++curr_position;
           ++curr_column;
-      
 
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -1581,7 +1533,6 @@ Added this section.
                     << next_char << "'." << endl 
                     << "Will try to continue.";
 
-
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
               cerr_strm.str("");
@@ -1591,8 +1542,6 @@ Added this section.
 @q ******** (8).@>
    
     } /* |if (curr_char == '+' && next_char == '-')|  */
-
-
 
 @q ******* (7) Hyphen pair or hyphen triple (path joins).@> 
 @ Hyphen pair or hyphen triple (path joins).
@@ -1622,7 +1571,6 @@ Added this section.
           scanner_node->ignore();
           ++curr_position;
           ++curr_column;
-      
 
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -1661,7 +1609,6 @@ Added this section.
  
           scanner_node->set_token_string("--");
 
-
 @q ********* (9).@> 
 
 @
@@ -1695,7 +1642,6 @@ Commented this out.  It caused an error.
         
     } /* |if (curr_char == '-' && next_char == '-')|  */
 
-
 @q ******* (7) Arithmetical operation with assignment.@> 
 @q ******* (7) |next_char == '='|.                    @> 
 
@@ -1714,7 +1660,6 @@ Added this section.
         {
 
           int i;
-
 
           if (curr_char == '+')
             {
@@ -1756,7 +1701,6 @@ Added this section.
             }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
           return i;
 
         } /* |if (next_char == '=')|  */
@@ -1765,7 +1709,6 @@ Added this section.
 
 @ |next_char != '='|.
 \initials{LDF 2004.11.28.}
-
 
 \LOG
 \initials{LDF 2004.11.29.}
@@ -1805,7 +1748,6 @@ This seems to work, but I'll have to keep an eye on it.
             scanner_node->putback(next_char);
 #endif 
 
-
           return temp_catcode;
 
         }  /* |else| (|next_char != '='|)  */
@@ -1814,11 +1756,9 @@ This seems to work, but I'll have to keep an eye on it.
 
  } /* |if| (possible special assignment).  */
 
-
 @q ****** (6) Periods not followed by digits or periods are ignored.@>
 @ Periods not followed by digits or periods are ignored.
 \initials{LDF Undated.}
-
 
 \LOG
 \initials{LDF 2004.05.13.}  
@@ -1961,7 +1901,6 @@ Commented this out.  It caused an error.
 @q ******** (8).@> 
 
         } /* |if (get_catcode(next_char) == PERIOD)|  */
-          
 
 @q ******* (7) |DIGIT|.@>   
 @ |DIGIT|
@@ -2042,10 +1981,9 @@ Commented this out.  It caused an error.
        cerr_message(cerr_strm); 
        cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-   curr_catcode = temp_catcode;
+curr_catcode = temp_catcode;
    curr_token_string = scanner_node->get();
    ++curr_position;
 
@@ -2056,7 +1994,6 @@ Commented this out.  It caused an error.
      } 
     else
         ++curr_column;
-
 
 @q ****** (6) Loners, i.e., tokens that consist of a single character.@>   
 
@@ -2098,7 +2035,6 @@ Commented this out.  It caused an error.
 
 @<Define scanning functions@>=
 
-
    if (curr_catcode == LEFT_PARENTHESIS)
       {
 #if DEBUG_COMPILE
@@ -2112,13 +2048,11 @@ Commented this out.  It caused an error.
                cerr_message(cerr_strm);
                cerr_strm.str();
             }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
- 
-         goto finish;
+#endif /* |DEBUG_COMPILE|  */@;
+
+goto finish;
 
       } /* |if (curr_catcode == LEFT_PARENTHESIS)|  */
-
 
 @q ******* (7) |RIGHT_PARENTHESIS|.@>   
 
@@ -2145,7 +2079,6 @@ Commented this out.  It caused an error.
               goto finish;
 
       } /* |if (curr_catcode == RIGHT_PARENTHESIS)|  */
-          
 
 @q ****** (6) |DIGIT|.@>   
 
@@ -2157,7 +2090,6 @@ to |REAL|, if we scan a period.
 
    else if (curr_catcode == DIGIT)
       curr_catcode = INTEGER;
-
 
 @q ****** (6) |PERCENT|.@>   
 @ |PERCENT|.  Comment.  Skip all characters up to and including the
@@ -2178,7 +2110,6 @@ order to end a comment.  This will probably also cause problems when
 passing input to the standard input of \.{3dldf} by means of a pipe or
 redirection. 
 \ENDLOG 
-
 
 @<Define scanning functions@>=
 
@@ -2201,7 +2132,6 @@ redirection.
                     prev_char = curr_char;
 		    curr_char = scanner_node->get();
                     ++curr_position;
-
 
 @q ******* (7).@> 
 		    if (curr_char == EOF)
@@ -2239,9 +2169,6 @@ redirection.
                        {
                           ++curr_line;
                           curr_column = 0;
-
-
-
 
 #if DEBUG_COMPILE
                           if (DEBUG)
@@ -2304,8 +2231,7 @@ Added this conditional.
 
 @<Define scanning functions@>=
 
- 
-   else if (curr_catcode == DOUBLE_QUOTE)
+else if (curr_catcode == DOUBLE_QUOTE)
       {
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -2330,7 +2256,6 @@ Added this conditional.
             prev_char = curr_char;
             curr_char = scanner_node->get();
             ++curr_position;
-            
 
 @q ******* (7).@>
 
@@ -2419,7 +2344,6 @@ Added this conditional.
 
    } /* |else if (curr_catcode == DOUBLE_QUOTE)|  */
 
-
 @q ****** (6) End of first characters.  @>
 @ End of first characters.
 @<Define scanning functions@>=
@@ -2439,7 +2363,6 @@ Added this conditional.
             {
               curr_token_string += scanner_node->get();
 
-
               ++curr_position;
 
               if (curr_char == '\n')
@@ -2451,9 +2374,6 @@ Added this conditional.
                    ++curr_column;
              }
 
-
-
-    
 @q ******* (7) Period, i.e., a decimal point.@>
 @ Period, i.e., a decimal point.
 @<Define scanning functions@>=
@@ -2599,9 +2519,8 @@ or in functions called from them.
 
                    if (scanner_node->ulong_long_switch)
                       {
-                                    
 
-                           unsigned long long ull = strtoull(s.str().c_str(), 0, 10);
+unsigned long long ull = strtoull(s.str().c_str(), 0, 10);
 
                            curr_catcode = ULONG_LONG_TYPE; 
                 
@@ -2629,16 +2548,12 @@ or in functions called from them.
                        }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
-
 @q ******** (8) @> 
 
                     ll = strtoll(s.str().c_str(), 0, 10);
 
                     numeric_limits<int> int_limits;
                     numeric_limits<long long> long_long_limits;
-
 
 @q ********* (9) Check for |ll >= long_long_limits.max|.@> 
 
@@ -2678,7 +2593,6 @@ Added this section.
                           value->real_value = INVALID_REAL;
 
                           curr_catcode = REAL;
-
 
                        }  /* |if (ll >= long_long_limits.max())|  */
 
@@ -2737,7 +2651,6 @@ Added this section.
 
 @q ********* (9) @>                                         
 
-
                     else /* |ll <= int_limits.max|  */
                        {
 
@@ -2781,7 +2694,6 @@ Added this section.
 @q ********* (9) @> 
   
       }  /* |else| (|!scanner_node->ulong_long_switch|)  */
-
 
 @q ******** (8) @>              
 
@@ -2860,7 +2772,6 @@ upon failure.
                   
                 } /* |else if (curr_catcode == STRING)|  */
 
-
 @q ****** (6) Other types.@>
 
 @ Other types.  We set |value->string_value| to |curr_token_string|. 
@@ -2895,7 +2806,6 @@ to check the token string in |yyparse|.
 
 @ Update positions.  
 \initials{LDF 2004.04.04}
-
 
 \LOG
 \initials{LDF 2004.11.29.}
@@ -2939,7 +2849,6 @@ This seems to work, but I'll have to keep an eye on it.
  
                scanner_node->set_token_string(curr_token_string);
 
-
 #if 0 
                if (   scanner_node->get_in_type() == Io_Struct::STDIN_TYPE
                    && next_char != EOF && !isspace(next_char))
@@ -2966,7 +2875,6 @@ This seems to work, but I'll have to keep an eye on it.
 @q ** (2) get_catcode() @>
 @*1 {\bf get\_catcode()}.
 \initials{LDF Undated.}
-
 
 \LOG
 \initials{LDF 2005.01.02.}
@@ -3074,12 +2982,10 @@ get_catcode(const char c)
 @<Declare scanning functions@>@;
 @<Define scanning functions@>@;
 
-
 @ This is what's written to \filename{scan.h}.
 @(scan.h@>=
 @<Declare scanning functions@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -3088,7 +2994,6 @@ get_catcode(const char c)
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |point_vector| expressions.@>
 @** {\bf point\_vector} expressions.
@@ -60,7 +58,6 @@
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
-
 @q * (1) |point_vector| primary.  @>
 @* \§point vector primary>.
 \initials{LDF 2004.11.10.}
@@ -69,7 +66,6 @@ Created this file and wrote quite a few rules.
 \initials{LDF 2004.11.10.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> point_vector_primary@>@/
@@ -127,7 +123,6 @@ Added this rule.
      }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
-
 
 @q ** (2) point_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) point_vector_expression  RIGHT_PARENTHESIS.@>
@@ -247,7 +242,6 @@ Added this rule.
     @=$$@> = Dodecahedron::get_tabs(parameter);
 
 };
-
 
 @*1 \§path vector primary> $\longrightarrow$ \.{GET\_TABS}
 \.{RHOMBIC\_TRIACONTAHEDRON}.
@@ -485,7 +479,6 @@ Changed |path_like_expression| to |path_expression|.
 Removed debugging code.
 \ENDLOG
 
-
 @q ****** (6) Definition.@> 
 
 @<Define rules@>=
@@ -535,14 +528,12 @@ failed, returning a non-zero value.
 
 @<Define rules@>=
 
-
    if (status != 0)
       {
 
           @=$$@> = static_cast<void*>(0);
        
       }  /* |if (status != 0)|  */
-
 
 @q ******** (8) Success!  |status == 0|.@> 
 
@@ -559,8 +550,6 @@ failed, returning a non-zero value.
       }   /* |else| (|status == 0|)  */
 
 };
-
-
 
 @q * (1) point_vector tertiary.  @>
 
@@ -628,10 +617,6 @@ Changed |bool_point_vector_tertiary| to |bool_point_vector_tertiary|.
                                parameter);
 };
 
-
-
-
-
 @q ** (2) point_vector_tertiary: polygon_tertiary @> 
 @q ** (2) INTERSECTION_POINTS polygon_secondary.  @> 
 
@@ -694,7 +679,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) point_vector_tertiary: reg_polygon_tertiary @> 
 @q ** (2) INTERSECTION_POINTS polygon_secondary.  @> 
 
@@ -752,7 +736,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -761,7 +744,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -770,5 +752,4 @@ Added this rule.
 @q fill-column:80                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

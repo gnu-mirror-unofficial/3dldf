@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
-
 
 @q * (0) Declarations.  @>
 @** Declarations.
@@ -123,7 +121,6 @@ Added this rule.
 \initials{LDF 2004.12.12.}
 Made debugging output thread-safe.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=declaration: string_declaration@>
@@ -339,7 +336,6 @@ Made debugging output thread-safe.
 @=declaration: transform_declaration@>
 ;
 
-
 @q *** (3) declaration --> picture declaration.  @>
 @*2 \§declaration> $\longrightarrow$ \§picture declaration>.
 \initials{LDF 2004.05.21.}  
@@ -437,7 +433,6 @@ Added this rule.
 Made debugging output thread-safe.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=declaration: path_declaration@>
 {
@@ -503,7 +498,6 @@ Added this rule.
 @=declaration: parabola_declaration@>
 ;
 
-
 @q *** (3) declaration --> hyperbola declaration.  @>
 @*2 \§declaration> $\longrightarrow$ \§hyperbola declaration>.  
 \initials{LDF 2005.11.14.}
@@ -530,8 +524,6 @@ Added this rule.
 @=declaration: arc_declaration@>
 ;
 
-
-
 @q *** (3) declaration --> conic_section_lattice declaration.  @>
 @*2 \§declaration> $\longrightarrow$ \§conic section lattice declaration>.  
 \initials{LDF 2007.07.29.}
@@ -544,7 +536,6 @@ Added this rule.
 @<Define rules@>=
 @=declaration: conic_section_lattice_declaration@>
 ;
-
 
 @q *** (3) declaration --> helix declaration.  @>
 @*2 \§declaration> $\longrightarrow$ |helix_declaration|.  
@@ -620,7 +611,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) declaration --> polygon_declaration.@>
 @*3 \§declaration> $\longrightarrow$ \§polygon declaration>.  
 \initials{LDF 2005.02.11.}
@@ -658,7 +648,6 @@ Added this rule.
 Made debugging output thread-safe.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=declaration: reg_polygon_declaration@>
 {
@@ -678,7 +667,6 @@ Made debugging output thread-safe.
 
 };
 
-
 @q **** (4) declaration --> rectangle_declaration.  @>
 @*3 \§declaration> $\longrightarrow$ \§rectangle declaration>.
 
@@ -686,7 +674,6 @@ Made debugging output thread-safe.
 \initials{LDF 2004.12.11.}
 Made debugging output thread-safe.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=declaration: rectangle_declaration@>
@@ -801,7 +788,6 @@ Added this rule.
 @=declaration: cylinder_declaration@>
 {
 
-    
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
@@ -830,7 +816,6 @@ Made debugging output thread-safe.
 @<Define rules@>=
 @=declaration: cuboid_declaration@>
 {
-
 
 #if DEBUG_COMPILE
     bool DEBUG = false; /* |true| */ @; 
@@ -884,7 +869,6 @@ Added this rule.
 @=declaration: ellipsoid_declaration@>
 {
 
-
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
    if (DEBUG)
@@ -931,7 +915,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 };
-
 
 @q *** (3) declaration --> sphere_development declaration.  @>
 @*2 \§declaration> $\longrightarrow$ \%sphere development declaration>.  
@@ -992,7 +975,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) declaration --> glyph declaration.  @>
 @*2 \§declaration> $\longrightarrow$ |glyph_declaration|.  
 \initials{LDF 2005.06.08.}
@@ -1005,7 +987,6 @@ Added this rule.
 @<Define rules@>=
 @=declaration: glyph_declaration@>
 {
-   
 
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
@@ -1054,8 +1035,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) declaration --> ellipse_slice_declaration.  @>
 @*3 \§declaration> $\longrightarrow$ \§ellipse slice declaration>.
 \initials{LDF 2005.03.29.}
@@ -1068,7 +1047,6 @@ Added this rule.
 @<Define rules@>=
 @=declaration: ellipse_slice_declaration@>
 {
-
 
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
@@ -1127,7 +1105,6 @@ Added this rule.
 @<Define rules@>=
 @=declaration: polyhedron_slice_declaration@>
 {
-
 
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
@@ -1232,7 +1209,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) declaration --> origami_figure declaration.@>
 @*3 \§declaration> $\longrightarrow$ \§origami figure declaration>.
 \initials{LDF 2005.02.04.}
@@ -1262,7 +1238,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 };
-
 
 @q *** (3) Vector-type declarations.@>
 @*2 Vector-type declarations.
@@ -1433,7 +1408,6 @@ Added this rule.
 @=declaration: focus_vector_declaration@>
 ;
 
-
 @q ***** (5) declaration --> macro_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§macro vector declaration>.
 
@@ -1449,7 +1423,6 @@ Added this rule.
 @q **** (4) |Shape| types.@> 
 @*3 {\bf Shape} types.
 \initials{LDF 2004.12.12.}
-
 
 @q ***** (5) declaration --> point_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§point vector declaration>.
@@ -1532,7 +1505,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) declaration --> ellipse_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§ellipse vector declaration>.
 
@@ -1559,7 +1531,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 };
-
 
 @q ***** (5) declaration --> circle_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§circle vector declaration>.
@@ -1630,8 +1601,6 @@ Added this rule.
 {
 };
 
-
-
 @q ***** (5) declaration --> conic_section_lattice_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§conic section lattice vector declaration>.
 \initials{LDF 2007.07.29.}
@@ -1645,7 +1614,6 @@ Added this rule.
 @=declaration: conic_section_lattice_vector_declaration@>
 {
 };
-
 
 @q ***** (5) declaration --> helix_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§helix vector declaration>.
@@ -1719,8 +1687,6 @@ Added this rule.
 
 };
 
-
-
 @q ***** (5) declaration --> rectangle_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§rectangle vector declaration>.
 
@@ -1776,7 +1742,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 };
-
 
 @q ***** (5) declaration --> reg_polygon_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§regular polygon vector declaration>.
@@ -1862,8 +1827,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 };
-
-
 
 @q ***** (5) declaration --> cuboid_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§cuboid vector declaration>.
@@ -1961,7 +1924,6 @@ Added this rule.
 @=declaration: sphere_vector_declaration@>
 ;
 
-
 @q ***** (5) declaration --> sphere_development_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§sphere development vector declaration>.
 \initials{LDF 2009.11.04.}
@@ -2016,7 +1978,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) declaration --> plane_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§plane vector declaration>.
 \initials{LDF 2005.10.30.}
@@ -2044,8 +2005,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
 };
-
-
 
 @q ***** (5) declaration --> origami_figure_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ 
@@ -2078,11 +2037,8 @@ Added this rule.
 
 };
 
-
-
 @q *** (3) Type declarations.  @>
 @*2 Type declarations.
-
 
 @q **** (4) Non-vector types.@> 
 @*3 Non-vector types. 
@@ -2138,7 +2094,6 @@ Added this rule.
    else  /* Threads not available or not using them.  */
 
       thread_name = "";
-
 
    bool error_stop_value = (      scanner_node->run_state.error_stop_mode
                          == Run_State::STOPPING
@@ -2223,7 +2178,6 @@ Added this rule.
 
       thread_name = "";
 
-
    bool error_stop_value = (      scanner_node->run_state.error_stop_mode
                          == Run_State::STOPPING
                       && scanner_node->in->type != Io_Struct::STDIN_TYPE)
@@ -2307,7 +2261,6 @@ Added this rule.
 
       thread_name = "";
 
-
    bool error_stop_value = (      scanner_node->run_state.error_stop_mode
                          == Run_State::STOPPING
                       && scanner_node->in->type != Io_Struct::STDIN_TYPE)
@@ -2355,7 +2308,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) string_declaration.  @>
 @*4 \§string declaration>.
 \initials{LDF 2004.05.17.}  
@@ -2364,7 +2316,6 @@ Added this rule.
 \initials{LDF 2004.05.17.}  
 Added this rule.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=string_declaration: STRING_DECLARATOR declaration_list@>
@@ -2380,7 +2331,6 @@ Added this rule.
 \initials{LDF 2004.05.21.}  
 Added this rule.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=pen_declaration: PEN_DECLARATOR declaration_list@>
@@ -2398,7 +2348,6 @@ Added this rule.
 \initials{LDF 2004.06.07.}  Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=dash_pattern_declaration: DASH_PATTERN_DECLARATOR declaration_list@>
 {
@@ -2413,7 +2362,6 @@ Added this rule.
 \initials{LDF 2004.06.07.}  
 Added this rule.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=focus_declaration: FOCUS_DECLARATOR declaration_list@>
@@ -2430,13 +2378,11 @@ Added this rule.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=macro_declaration: MACRO_DECLARATOR declaration_list@>
 {
     Scan_Parse::non_shape_decl_func(static_cast<Scanner_Node>(parameter), MACRO);
 };
-
 
 @q **** (4) color_declaration --> COLOR_DECLARATOR declaration_list.  @>
 @ \§color declaration> $\longrightarrow$ \.{COLOR\_DECLARATOR} 
@@ -2445,7 +2391,6 @@ Added this rule.
 \LOG
 \initials{LDF 2004.05.25.}  Added this rule.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=color_declaration: COLOR_DECLARATOR declaration_list@>
@@ -2512,7 +2457,6 @@ dummy code.
 \initials{LDF 2004.05.21.}  Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=picture_declaration: PICTURE_DECLARATOR declaration_list@>
 {
@@ -2559,7 +2503,6 @@ Added debugging code.
 {
    Scan_Parse::non_shape_decl_func(static_cast<Scanner_Node>(parameter), BOOL_POINT);
 };
-
 
 @q ***** (5) path_declaration.  @>
 @ {\bf path\_declaration}.
@@ -2615,13 +2558,11 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=polygon_declaration: POLYGON_DECLARATOR declaration_list@>
 {
    shape_decl_func<Polygon>(static_cast<Scanner_Node>(parameter), POLYGON);
 };
-
 
 @q ***** (5) reg_polygon_declaration.  @>
 
@@ -2653,7 +2594,6 @@ Added this rule.
 @q } @> 
 !! TO DO:  Program this case.  \initials{LDF 2004.04.23.} 
 \ENDTODO  
-
 
 @<Define rules@>=
 @=square_declaration: SQUARE_DECLARATOR declaration_list@>
@@ -2771,7 +2711,6 @@ Removed debugging code.
  
 };
 
-
 @q ***** (5) cone_declaration.  @>
 @*4 {\bf cone\_declaration}.
 \initials{LDF 2005.05.25.}
@@ -2802,7 +2741,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
     stringstream cerr_strm;
-    bool DEBUG = false;  /* |true|  */
+    bool DEBUG = false; /* |true| */
 #endif 
 
     int status;
@@ -2930,7 +2869,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) glyph_declaration.  @>
 @*4 {\bf glyph\_declaration}.
 \initials{LDF 2005.06.08.}
@@ -2945,7 +2883,6 @@ Added this rule.
 {
   shape_decl_func<Glyph>(static_cast<Scanner_Node>(parameter), GLYPH);
 };
-
 
 @q ***** (5) plane_declaration.  @>
 @*4 {\bf plane\_declaration}.
@@ -3059,7 +2996,6 @@ Added this section.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=boolean_vector_declaration: BOOLEAN_VECTOR_DECLARATOR declaration_list@>
 {
@@ -3123,7 +3059,6 @@ Added this rule.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=numeric_vector_declaration: NUMERIC_VECTOR_DECLARATOR declaration_list@>
 {
@@ -3132,7 +3067,6 @@ Added this rule.
                                     NUMERIC_VECTOR,
                                     NUMERIC);
 };
-
 
 @q ****** (6) ulong_long_vector_declaration -->               @>
 @q ****** (6) ULONG_LONG_VECTOR_DECLARATOR declaration_list.  @>
@@ -3220,9 +3154,6 @@ Added this rule.
                                           DASH_PATTERN);
 };
 
-
-
-
 @q ****** (6) color_vector_declaration -->               @>
 @q ****** (6) COLOR_VECTOR_DECLARATOR declaration_list.  @>
 
@@ -3241,7 +3172,6 @@ It's no longer a template function and I've changed its arguments.
 Changed the call to |Scan_Parse::vector_type_decl()|
 to reflect the fact that I've made it a template function again.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=color_vector_declaration: COLOR_VECTOR_DECLARATOR declaration_list@>
@@ -3290,7 +3220,6 @@ the call to |Scan_Parse::vector_type_decl()|.  I don't know why this
 apparently caused no problems.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=picture_vector_declaration: PICTURE_VECTOR_DECLARATOR declaration_list@>
 {
@@ -3312,7 +3241,6 @@ apparently caused no problems.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=focus_vector_declaration: FOCUS_VECTOR_DECLARATOR declaration_list@>
 {
@@ -3333,7 +3261,6 @@ Added this rule.
 Added this rule.
 \ENDLOG 
 
-
 @<Define rules@>=
 @=macro_vector_declaration: MACRO_VECTOR_DECLARATOR declaration_list@>
 {
@@ -3342,8 +3269,6 @@ Added this rule.
                                                   MACRO_VECTOR,
                                                   MACRO);
 };
-
-
 
 @q ***** (5) |Shape| types.@> 
 @*4 {\bf Shape} types.
@@ -3516,8 +3441,6 @@ Added this rule.
 
 };
 
-
-
 @q ****** (6) conic_section_lattice_vector_declaration -->               @>
 @q ****** (6) CONIC_SECTION_LATTICE_VECTOR_DECLARATOR declaration_list.  @>
 
@@ -3541,9 +3464,6 @@ Added this rule.
                                            CONIC_SECTION_LATTICE);
 
 };
-
-
-
 
 @q ****** (6) helix_vector_declaration -->               @>
 @q ****** (6) HELIX_VECTOR_DECLARATOR declaration_list.  @>
@@ -3569,7 +3489,6 @@ Removed debugging code.
                                         HELIX);
 
 };
-
 
 @q ****** (6) rectangle_vector_declaration -->               @>
 @q ****** (6) RECTANGLE_VECTOR_DECLARATOR declaration_list.  @>
@@ -3613,7 +3532,6 @@ Added this rule.
 
 };
 
-
 @q ****** (6) nurb_vector_declaration -->               @>
 @q ****** (6) NURB_VECTOR_DECLARATOR declaration_list.  @>
 
@@ -3635,7 +3553,6 @@ Added this rule.
 
 };
 
-
 @q ****** (6) polygon_vector_declaration -->               @>
 @q ****** (6) POLYGON_VECTOR_DECLARATOR declaration_list.  @>
 @*3 \§polygon vector declaration> $\longrightarrow$ 
@@ -3656,8 +3573,6 @@ Added this rule.
                                       POLYGON);
 
 };
-
-
 
 @q ****** (6) reg_polygon_vector_declaration -->               @>
 @q ****** (6) REG_POLYGON_VECTOR_DECLARATOR declaration_list.  @>
@@ -3781,7 +3696,6 @@ Added this rule.
                                        ELLIPSOID_VECTOR,
                                        ELLIPSOID);
 
- 
 };
 
 @q ****** (6) sphere_vector_declaration -->               @>
@@ -3824,7 +3738,6 @@ Added this rule.
                                          SPHERE_DEVELOPMENT);
 };
 
-
 @q ****** (6) paraboloid_vector_declaration -->               @>
 @q ****** (6) PARABOLOID_VECTOR_DECLARATOR declaration_list.  @>
 
@@ -3844,7 +3757,6 @@ Added this rule.
                                  PARABOLOID_VECTOR,
                                  PARABOLOID);
 };
-
 
 @q ****** (6) glyph_vector_declaration -->               @>
 @q ****** (6) GLYPH_VECTOR_DECLARATOR declaration_list.  @>
@@ -3887,9 +3799,6 @@ Added this rule.
                                        PLANE_VECTOR,
                                        PLANE);
 };
-
-
-
 
 @q ****** (6) ellipse_slice_vector_declaration -->               @>
 @q ****** (6) ELLIPSE_SLICE_VECTOR_DECLARATOR declaration_list.  @>
@@ -4161,7 +4070,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) any_declarator --> STRING_VECTOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{STRING\_VECTOR\_DECLARATOR}.
 \initials{LDF 2004.12.21.}
@@ -4188,7 +4096,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: PEN_DECLARATOR@>
 {
@@ -4205,7 +4112,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: PEN_VECTOR_DECLARATOR@>
@@ -4224,7 +4130,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: DASH_PATTERN_DECLARATOR@>
 {
@@ -4241,7 +4146,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: DASH_PATTERN_VECTOR_DECLARATOR@>
@@ -4260,7 +4164,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: FOCUS_DECLARATOR@>
 {
@@ -4275,7 +4178,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: FOCUS_VECTOR_DECLARATOR@>
@@ -4292,7 +4194,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: MACRO_DECLARATOR@>
 {
@@ -4308,13 +4209,11 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: MACRO_VECTOR_DECLARATOR@>
 {
    @=$$@> = MACRO_VECTOR_DECLARATOR;
 };
-
 
 @q ** (2) any_declarator --> COLOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{COLOR\_DECLARATOR}.
@@ -4324,7 +4223,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: COLOR_DECLARATOR@>
@@ -4356,7 +4254,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: NUMERIC_DECLARATOR@>
 {
@@ -4371,7 +4268,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: NUMERIC_VECTOR_DECLARATOR@>
@@ -4418,7 +4314,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: TRANSFORM_DECLARATOR@>
 {
@@ -4433,7 +4328,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: TRANSFORM_VECTOR_DECLARATOR@>
@@ -4450,7 +4344,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: PICTURE_DECLARATOR@>
 {
@@ -4466,7 +4359,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: PICTURE_VECTOR_DECLARATOR@>
 {
@@ -4481,7 +4373,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: POINT_DECLARATOR@>
@@ -4499,7 +4390,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: POINT_VECTOR_DECLARATOR@>
 {
@@ -4515,7 +4405,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: BOOL_POINT_DECLARATOR@>
@@ -4533,7 +4422,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: BOOL_POINT_VECTOR_DECLARATOR@>
 {
@@ -4549,7 +4437,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: PATH_DECLARATOR@>
@@ -4567,7 +4454,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: PATH_VECTOR_DECLARATOR@>
 {
@@ -4583,7 +4469,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: TRIANGLE_DECLARATOR@>
@@ -4601,7 +4486,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: NURB_DECLARATOR@>
 {
@@ -4609,7 +4493,6 @@ Added this rule.
    @=$$@> = NURB_DECLARATOR;
 
 };
-
 
 @q ** (2) any_declarator --> TRIANGLE_VECTOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{TRIANGLE\_VECTOR\_DECLARATOR}.
@@ -4619,7 +4502,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: TRIANGLE_VECTOR_DECLARATOR@>
@@ -4637,14 +4519,12 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: NURB_VECTOR_DECLARATOR@>
 {
    @=$$@> = NURB_VECTOR_DECLARATOR;
 
 };
-
 
 @q ** (2) any_declarator --> POLYGON_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{POLYGON\_DECLARATOR}.
@@ -4654,7 +4534,6 @@ Added this rule.
 \initials{LDF 2005.02.11.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: POLYGON_DECLARATOR@>
@@ -4680,7 +4559,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) any_declarator --> REG_POLYGON_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{REG\_POLYGON\_DECLARATOR}.
 \initials{LDF 2004.12.21.}
@@ -4689,7 +4567,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: REG_POLYGON_DECLARATOR@>
@@ -4708,7 +4585,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: REG_POLYGON_VECTOR_DECLARATOR@>
 {
@@ -4725,7 +4601,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: RECTANGLE_DECLARATOR@>
@@ -4744,7 +4619,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: RECTANGLE_VECTOR_DECLARATOR@>
 {
@@ -4762,7 +4636,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: SQUARE_DECLARATOR@>
 {
@@ -4778,7 +4651,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: SQUARE_VECTOR_DECLARATOR@>
@@ -4797,7 +4669,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: ELLIPSE_DECLARATOR@>
 {
@@ -4814,7 +4685,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: ELLIPSE_VECTOR_DECLARATOR@>
@@ -4833,7 +4703,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: CIRCLE_DECLARATOR@>
 {
@@ -4850,7 +4719,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: CIRCLE_VECTOR_DECLARATOR@>
@@ -4877,7 +4745,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) any_declarator --> PARABOLA_VECTOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{PARABOLA\_VECTOR\_DECLARATOR}.
 \initials{LDF 2005.11.07.}
@@ -4886,7 +4753,6 @@ Added this rule.
 \initials{LDF 2005.11.07.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: PARABOLA_VECTOR_DECLARATOR@>
@@ -4922,7 +4788,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: HYPERBOLA_VECTOR_DECLARATOR@>
 {
@@ -4930,7 +4795,6 @@ Added this rule.
    @=$$@> = HYPERBOLA_VECTOR_DECLARATOR;
 
 };
-
 
 @q ** (2) any_declarator --> ARC_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{ARC\_DECLARATOR}.
@@ -4965,9 +4829,6 @@ Added this rule.
    @=$$@> = ARC_VECTOR_DECLARATOR;
 
 };
-
-
-
 
 @q ** (2) any_declarator --> CONIC_SECTION_LATTICE_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{CONIC\_SECTION\_LATTICE\_DECLARATOR}.
@@ -5035,7 +4896,6 @@ Added this rule.
 Removed debugging code.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: HELIX_VECTOR_DECLARATOR@>
 {
@@ -5057,7 +4917,6 @@ Added this rule.
 @=any_declarator: CONE_DECLARATOR@>
 {
 
-
    @=$$@> = CONE_DECLARATOR;
 
 };
@@ -5070,7 +4929,6 @@ Added this rule.
 \initials{LDF 2005.05.25.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: CONE_VECTOR_DECLARATOR@>
@@ -5106,7 +4964,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: CYLINDER_VECTOR_DECLARATOR@>
 {
@@ -5123,7 +4980,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: CUBOID_DECLARATOR@>
@@ -5142,7 +4998,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: CUBOID_VECTOR_DECLARATOR@>
 {
@@ -5160,7 +5015,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: POLYHEDRON_DECLARATOR@>
 {
@@ -5177,7 +5031,6 @@ Added this rule.
 \initials{LDF 2004.12.21.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: POLYHEDRON_VECTOR_DECLARATOR@>
@@ -5234,7 +5087,6 @@ Added this rule.
    @=$$@> = SPHERE_DEVELOPMENT_DECLARATOR;
 };
 
-
 @q ** (2) any_declarator --> PARABOLOID_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{PARABOLOID\_DECLARATOR}.
 \initials{LDF 2006.01.23.}
@@ -5249,7 +5101,6 @@ Added this rule.
 {
    @=$$@> = PARABOLOID_DECLARATOR;
 };
-
 
 @q ** (2) any_declarator --> GLYPH_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{GLYPH\_DECLARATOR}.
@@ -5285,8 +5136,6 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) any_declarator --> ELLIPSOID_VECTOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{ELLIPSOID\_VECTOR\_DECLARATOR}.
 \initials{LDF 2005.05.26.}
@@ -5295,7 +5144,6 @@ Added this rule.
 \initials{LDF 2005.05.26.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=any_declarator: ELLIPSOID_VECTOR_DECLARATOR@>
@@ -5338,7 +5186,6 @@ Added this rule.
    @=$$@> = SPHERE_DEVELOPMENT_VECTOR_DECLARATOR;
 
 };
-
 
 @q ** (2) any_declarator --> PARABOLOID_VECTOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{PARABOLOID\_VECTOR\_DECLARATOR}.
@@ -5390,9 +5237,6 @@ Added this rule.
    @=$$@> = PLANE_VECTOR_DECLARATOR;
 
 };
-
-
-
 
 @q ** (2) any_declarator --> ELLIPSE_SLICE_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{ELLIPSE\_SLICE\_DECLARATOR}.
@@ -5507,7 +5351,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=any_declarator: ORIGAMI_FIGURE_DECLARATOR@>
 {
@@ -5530,7 +5373,6 @@ Added this rule.
    @=$$@> = ORIGAMI_FIGURE_VECTOR_DECLARATOR;
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -5539,7 +5381,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

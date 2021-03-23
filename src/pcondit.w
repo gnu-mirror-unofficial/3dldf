@@ -48,9 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
-
 
 @q * (0) Conditionals.  @>
 @** Conditionals.  
@@ -135,8 +132,6 @@ Added this rule.
 
 };
 
-
-
 @q *** |if_conditional|.@>   
 @*2 {\bf if\_conditional}.
 
@@ -180,9 +175,8 @@ referenced by |boolean_variables|, |boolean_primaries|,
  
     int i = (*b) ? 1 : 0;
 
-    int status = Scan_Parse::conditional(scanner_node, i); 
+    int status = Scan_Parse::conditional(scanner_node, i);
 
-  
 @q ****** (6) Error handling: |status != 0|.@> 
 
 @ Error handling: |status != 0|.
@@ -403,9 +397,8 @@ Added code for printing the current location to standard error
       cerr_strm.str("");
       
     }    /* |else| (|scanner_node->if_ctr <= 0|)  */
-  
 
-  @=$$@> = static_cast<void*>(0);
+@=$$@> = static_cast<void*>(0);
 
 };
 
@@ -419,8 +412,6 @@ Added code for printing the current location to standard error
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-  
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (1) Set Commands.  @>
 @* Set Commands.  
@@ -72,7 +70,6 @@ Added this section.
 @q *** (3) command --> SET color_variable LEFT_PARENTHESIS  @>
 @q *** (3) numeric_expression COMMA numeric_expression COMMA    @> 
 @q *** (3) numeric_expression RIGHT_PARENTHESIS.                @> 
-
 
 @*2 \§command> $\longrightarrow$ \.{SET} \§color variable> 
 \.{LEFT\_PARENTHESIS} \§numeric expression> \.{COMMA} 
@@ -167,10 +164,8 @@ signalled an error.
 
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
-   
 
-      } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ***** (5) |entry != 0|.@> 
 
@@ -182,7 +177,6 @@ signalled an error.
    else /* |entry != 0|  */
 
       {
-
 
           Color* c;
 
@@ -204,7 +198,6 @@ Rethrow |bad_alloc| upon error.
 
             }  /* |if (entry->object == 0)|  */
 
-
 @q ****** (6) |entry->object != 0|.@> 
 
 @ |entry->object != 0|.
@@ -214,7 +207,6 @@ Rethrow |bad_alloc| upon error.
  
          else  /* |entry->object != 0|  */
              c = static_cast<Color*>(entry->object);
- 
 
 @q ****** (6).@> 
 
@@ -227,19 +219,16 @@ Rethrow |bad_alloc| upon error.
           else if (@=$2@> == BLUE_PART)
              c->set_blue_part(@=$3@>);
 
-      
 @q ****** (6) Error handling:  Invalid |color_part|.@> 
 @ Error handling:  Invalid |color_part|.
 \initials{LDF 2004.12.20.}
 
 @<Define rules@>=
 
-
           else /* Invalid |color_part|.  */
              {
 
-             
-             }  /* |else| (Invalid |color_part|).  */
+}  /* |else| (Invalid |color_part|).  */
 
 @q ****** (6) @> 
 
@@ -251,7 +240,6 @@ Rethrow |bad_alloc| upon error.
 
 };
 
-
 @q ** (2) focuses.@>
 @*1 {\bf focuses}.  
 \initials{LDF 2004.12.19.}
@@ -261,12 +249,10 @@ Rethrow |bad_alloc| upon error.
 Added this section.
 \ENDLOG
 
-
 @q *** (3) command --> SET focus_variable WITH_POSITION @>
 @q *** (3) point_expression WITH_DIRECTION point_expression @> 
 @q *** (3) WITH_DISTANCE numeric_expression                 @>
 @q *** (3) with_angle_optional with_axis_optional.          @>
-
 
 @*2 \§command> $\longrightarrow$ \.{SET} \§focus variable>
 \.{WITH\_POSITION}
@@ -301,7 +287,6 @@ and therefore unknown when
 
 @q *** (3) Definition.@>
 
-
 @<Define rules@>= 
 
 @=command: SET focus_variable WITH_POSITION point_expression@>@/
@@ -332,7 +317,6 @@ and therefore unknown when
       @=$$@> = static_cast<void*>(0); 
       
     } /* |if (ivp.i != 0)| (|set_focus()| failed.)  */
-   
 
 @q **** (4) |Scan_Parse::set_focus()| succeeded.@> 
 
@@ -408,7 +392,6 @@ Added this section.
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> with_axis_optional@>
 
-
 @q ***** (5) with_axis_optional --> EMPTY.  @>
 
 @*4  \§with axis optional> $\longrightarrow$ \.{EMPTY}.  
@@ -456,7 +439,6 @@ Added this section.
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> axis_specifier@>
 
-
 @q ***** (5) axis_specifier --> X_AXIS.@>
 
 @*4  \§with axis optional> $\longrightarrow$ `\.{X\_AXIS}'.  
@@ -473,7 +455,6 @@ Added this rule.
   @=$$@> = X_AXIS;
 
 };
-
 
 @q ***** (5) axis_specifier --> Y_AXIS.  @>
 
@@ -528,14 +509,12 @@ Added this section.
 \§with axis h optional> \§with axis v optional> 
 \§with point count optional> \§with normal optional>.
 
-
 \LOG
 \initials{LDF 2004.11.01.}
 Added this rule.
 \ENDLOG 
 
 @q *** (3) Definition.@>
-
 
 @<Define rules@>= 
 @=command: SET ellipse_variable@>@/        
@@ -584,7 +563,6 @@ Added this rule.
 
              }  /* |if (e == 0)|  */
 
-
 @q ***** (5).@>               
 @
 \LOG
@@ -624,7 +602,6 @@ if |*center != origin|.
              *e *= t;
            } /* |if (*normal != y_axis_pt)|  */
 
-
 @q ***** (5) |*center != origin|.  Shift |*e|.@>  
 
 @ |*center != origin|.  Shift |*e|.
@@ -656,7 +633,6 @@ Added this section.
 
        } /* |else| (|entry != 0|)  */
 
-
 @q **** (4) @>   
 
 };
@@ -679,14 +655,12 @@ Added this section.
 \§with diameter optional> \§with point count optional> 
 \§with normal optional>.
 
-
 \LOG
 \initials{LDF 2004.11.01.}
 Added this rule.
 \ENDLOG 
 
 @q *** (3) Definition.@>
-
 
 @<Define rules@>= 
 @=command: SET circle_variable@>@/        
@@ -734,7 +708,6 @@ Added this rule.
 
              }  /* |if (c == 0)|  */
 
-
 @q ***** (5).@>               
 @
 \LOG
@@ -772,7 +745,6 @@ if |*center != origin|.
              *c *= t;
            } /* |if (*normal != y_axis_pt)|  */
 
-
 @q ***** (5) |*center != origin|.  Shift |*c|.@>  
 
 @ |*center != origin|.  Shift |*c|.
@@ -787,7 +759,6 @@ Added this section.
 
    if (*center != origin)
     c->shift(*center);
-
 
 @q ***** (5) Delete |center| and |normal|, set |entry->object| and   @> 
 @q ***** (5) |command| to |static_cast<void*>(c)|, and exit rule.@> 
@@ -804,7 +775,6 @@ Added this section.
          @=$$@> = entry->object = static_cast<void*>(c); 
 
        } /* |else| (|entry != 0|)  */
-
 
 @q **** (4) @>   
 
@@ -846,7 +816,6 @@ Added this rule.
 
 };
 
-
 @q * (1) set_parabola_option_list.@>   
 @* \§set parabola option list>.
 \initials{LDF 2005.11.07.}
@@ -873,7 +842,6 @@ Added this rule.
 @=set_parabola_option_list: /* Empty  */@>@/        
 {
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
-
 
    if (   scanner_node->parabola_set_option_struct 
        != static_cast<Parabola_Set_Option_Struct*>(0))
@@ -1004,7 +972,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) set_parabola_option_list -->           @>   
 @q ** (2) WITH_DIRECTRIX path_expression.@>   
 @* \§set parabola option list> $\longrightarrow$ 
@@ -1105,7 +1072,6 @@ Added this rule.
 
 };
 
-
 @q * (1) set_hyperbola_option_list.@>   
 @* \§set hyperbola option list>.
 \initials{LDF 2005.11.14.}
@@ -1132,7 +1098,6 @@ Added this rule.
 @=set_hyperbola_option_list: /* Empty  */@>@/        
 {
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
-
 
    if (scanner_node->hyperbola_set_option_struct != static_cast<Hyperbola_Set_Option_Struct*>(0))
       scanner_node->hyperbola_set_option_struct->clear();
@@ -1197,9 +1162,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
-
-
 
 @q ** (2) set_hyperbola_option_list --> WITH_FOCUS point_expression.@>   
 @* \§set hyperbola option list> $\longrightarrow$ \.{WITH\_FOCUS}
@@ -1560,8 +1522,6 @@ No longer passing |scanner_node->helix_set_option_struct| to
 before exiting rule.
 \ENDLOG 
 
-
-
 @q *** (3) Definition.@>
 
 @<Define rules@>= 
@@ -1571,13 +1531,11 @@ before exiting rule.
    set_helix_rule_func_0(@=$2@>, 
                          parameter);
 
-
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct = 0;
 
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) set_helix_option_list.@>   
 @* \§set helix option list>.
@@ -1754,7 +1712,6 @@ Added this rule.
    static_cast<Scanner_Node>(parameter)->helix_set_option_struct->points_per_cycle 
       = static_cast<unsigned short>(floor(fabs(@=$2@>) + .5)); 
 
-
    @=$$@> = static_cast<void*>(0);
 
 };
@@ -1888,7 +1845,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) helix_type_specifier --> PARABOLIC.@>
 
 @*2 \§helix type specifier> $\longrightarrow$ \.{PARABOLIC}.
@@ -1904,7 +1860,6 @@ Added this rule.
 {
    
    @=$$@> = Helix::HELIX_PARABOLIC_TYPE@>;
-
 
 };
 
@@ -1926,7 +1881,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) triangles.@>  
 @*1 {\bf triangles}.
 \initials{LDF 2005.01.20.}
@@ -1935,7 +1889,6 @@ Added this rule.
 \initials{LDF 2005.01.20.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) command --> SET triangle_variable WITH_POINTS@>        
 @q *** (3) LEFT_PARENTHESIS point_expression COMMA point_expression   @>
@@ -1954,7 +1907,6 @@ Started working on this rule.
 \ENDLOG 
 
 @q **** (4) Definition.@>
-
 
 @<Define rules@>= 
 @=command: SET triangle_variable WITH_POINTS@>@/        
@@ -2000,8 +1952,7 @@ Started working on this rule.
 
                     t = create_new<Triangle>(0);
 
- 
-               entry->object = static_cast<void*>(t); 
+entry->object = static_cast<void*>(t); 
 
             }  /* |if (t == 0)|  */
 
@@ -2019,9 +1970,6 @@ Started working on this rule.
 @q ***** (5).@> 
 
 };
-
-
-
 
 @q ** (2) reg_polygons.@>  
 
@@ -2041,7 +1989,6 @@ Added this section.
 \§with center optional>  \§with diameter optional> 
 \§with normal optional>.
 
-
 \LOG
 \initials{LDF 2004.11.01.}
 Added this rule.
@@ -2049,13 +1996,11 @@ Added this rule.
 
 @q *** (3) Definition.@>
 
-
 @<Define rules@>= 
 @=command: SET reg_polygon_variable@>@/        
 @= WITH_SIDES numeric_expression with_center_optional@>@/             
 @= with_diameter_optional with_normal_optional@>@/                           
 {
-
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
@@ -2092,11 +2037,9 @@ Added this rule.
           if (r == static_cast<Reg_Polygon*>(0))
              {
 
-
                     r = create_new<Reg_Polygon>(0);
 
              }  /* |if (r == 0)|  */
-
 
 @q ***** (5).@>               
 @
@@ -2120,14 +2063,12 @@ if |*center != origin|.
 
 @<Define rules@>=
 
-
          if (sides < 0)
            {
 
                sides *= -1;
 
            }  /* |if (sides < 0)|  */
-
 
 @q ****** (6) Error handling:  |sides == 0|.@> 
 @ Error handling:  |sides == 0|.
@@ -2168,7 +2109,6 @@ if |*center != origin|.
              *r *= t;
            } /* |if (*normal != y_axis_pt)|  */
 
-
 @q ***** (5) |*center != origin|.  Shift |*r|.@>  
 
 @ |*center != origin|.  Shift |*r|.
@@ -2183,7 +2123,6 @@ Added this section.
 
    if (*center != origin)
     r->shift(*center);
-
 
 @q ***** (5) Delete |center| and |normal|, set |entry->object| and   @> 
 @q ***** (5) |command| to |static_cast<void*>(r)|, and exit rule.@> 
@@ -2201,12 +2140,9 @@ Added this section.
 
        } /* |else| (|entry != 0|)  */
 
-
 @q **** (4) @>   
 
 };
-
-
 
 @q * (1) with_center_optional.@> 
 @* \§with center optional>.
@@ -2314,7 +2250,6 @@ Added this rule.
  
 };
 
-
 @q * (1) with_axis_h_optional.@> 
 @* \§with axis h optional>.
 \initials{LDF 2004.11.02.}
@@ -2365,7 +2300,6 @@ Added this rule.
    @=$$@> = @=$2@>;
  
 };
-
 
 @q * (1) with_axis_v_optional.@> 
 @* \§with axis v optional>.
@@ -2478,11 +2412,9 @@ Added this rule.
    if (r == ZERO_REAL)
       {
 
-
         @=$$@> = 32;
 
       } /* |if (r < 0)|  */
-
 
 @q **** (4) |r != 0|.@>   
 
@@ -2493,7 +2425,6 @@ Added this rule.
 
    else /* |r != 0|  */
      {
-
 
 @q ***** (5) Error handling:  |r < 0|.@> 
 
@@ -2508,7 +2439,6 @@ Added this rule.
               r = -r;
 
            }  /* |if (r < 0)|  */
-
 
          r = floor(r + .5); 
         
@@ -2527,14 +2457,11 @@ Added this rule.
 
                u += (4 - v);
 
-
            } /* |if (u % 4 != 0)|  */
-
 
 @q ***** (5).@> 
 
         @=$$@> = u;
-
 
     } /* |else| (|r != 0|)  */
  
@@ -2570,9 +2497,8 @@ Added this rule.
       Point* p;
 
            p = create_new<Point>(0);
- 
 
-     p->set(0, 1, 0);
+p->set(0, 1, 0);
 
      @=$$@> = static_cast<void*>(p); 
  
@@ -2635,7 +2561,6 @@ Commented-in the call to |Scan_Parse::set_cone_rule_func_0()|.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) set_cone_option_list.@>   
 @* \§set cone option list>.
@@ -2770,7 +2695,6 @@ Added this rule.
     else 
        *scanner_node->cone_set_option_struct->radius = @=$2@>; 
 
-
    @=$$@> = static_cast<void*>(0);
 
 };
@@ -2892,7 +2816,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) set_cone_option_list --> WITH_TYPE cone_type.@>   
 @* \§set cone option list> $\longrightarrow$ \.{WITH\_TYPE}
 \§cone type>.
@@ -2914,7 +2837,6 @@ Added this rule.
 
 };
 
-
 @q * (1) cone_type.@> 
 @* \§cone type>.
 \initials{LDF 2006.11.08.}
@@ -2927,7 +2849,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <int_value> cone_type@>
-
 
 @q ** (2) cone_type: ELLIPTICAL.@> 
 @*1 \§cone type> $\longrightarrow$ \.{ELLIPTICAL}.
@@ -2963,7 +2884,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) cone_type: PARABOLIC.@> 
 @*1 \§cone type> $\longrightarrow$ \.{PARABOLIC}.
 \initials{LDF 2006.11.08.}
@@ -2997,7 +2917,6 @@ Added this rule.
    @=$$@> = Shape::HYPERBOLIC_CONE_TYPE;
 
 };
-
 
 @q ** (2) set_cone_option_list --> WITH_TYPE nap_type.@>   
 @* \§set cone option list> $\longrightarrow$ \.{WITH\_TYPE}
@@ -3033,7 +2952,6 @@ Added this type declaration.
 
 @=%type <int_value> nap_type@>
 
-
 @q ** (2) nap_type: SINGLE_NAPPED.@> 
 @*1 \§nap type> $\longrightarrow$ \.{SINGLE\_NAPPED}.
 \initials{LDF 2006.11.09.}
@@ -3067,7 +2985,6 @@ Added this rule.
    @=$$@> = Cone::DOUBLE_NAPPED_TYPE;
 
 };
-
 
 @q ** (2) cylinders.@>  
 @*1 {\bf cylinders}.
@@ -3108,7 +3025,6 @@ Commented-in the call to |Scan_Parse::set_cylinder_rule_func_0()|.
 
 };
 
-
 @q * (1) set_cylinder_option_list.@>   
 @* \§set cylinder option list>.
 \initials{LDF 2005.05.25.}
@@ -3142,7 +3058,6 @@ Added this rule.
 
    else
       scanner_node->cylinder_set_option_struct = new Cylinder_Set_Option_Struct;
-
 
    @=$$@> = static_cast<void*>(0);
 
@@ -3216,12 +3131,10 @@ Added this rule.
 @=set_cylinder_option: WITH_DIRECTION point_expression@>@/        
 {
 
-
    static_cast<Scanner_Node>(parameter)->cylinder_set_option_struct->direction 
       = static_cast<Point*>(@=$2@>); 
 
    @=$$@> = static_cast<void*>(0);
-
 
 };
 
@@ -3246,11 +3159,9 @@ Added this rule.
     else 
        *scanner_node->cylinder_set_option_struct->radius = @=$2@>; 
 
-
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ** (2) set_cylinder_option_list --> WITH_AXIS_X numeric_expression.@>   
 @* \§set cylinder option list> $\longrightarrow$ \.{WITH\_AXIS\_X}
@@ -3369,7 +3280,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) set_cylinder_option_list --> WITH_TYPE .@>   
 @* \§set cylinder option list> $\longrightarrow$ \.{WITH\_TYPE}
 \§cylinder type>.
@@ -3391,7 +3301,6 @@ Added this rule.
 
 };
 
-
 @q * (1) cylinder_type.@> 
 @* \§cylinder type>.
 \initials{LDF 2006.11.06.}
@@ -3404,7 +3313,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <int_value> cylinder_type@>
-
 
 @q ** (2) cylinder_type: ELLIPTICAL.@> 
 @*1 \§cylinder type> $\longrightarrow$ \.{ELLIPTICAL}.
@@ -3440,7 +3348,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) cylinder_type: PARABOLIC.@> 
 @*1 \§cylinder type> $\longrightarrow$ \.{PARABOLIC}.
 \initials{LDF 2006.11.06.}
@@ -3474,9 +3381,6 @@ Added this rule.
    @=$$@> = Shape::HYPERBOLIC_CYLINDER_TYPE;
 
 };
-
-
-
 
 @q ** (2) ellipsoids.@>  
 @*1 {\bf ellipsoids}.
@@ -3513,7 +3417,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) set_ellipsoid_option_list.@>   
 @* \§set ellipsoid option list>.
@@ -3639,7 +3542,6 @@ Added this rule.
 
 };
 
-
 @q *** (3) set_ellipsoid_option_list --> WITH_AXIS_Y numeric_expression.@>   
 @*2 \§set ellipsoid option list> $\longrightarrow$ \.{WITH\_AXIS\_Y}
 \§numeric expresssion>.
@@ -3681,7 +3583,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ** (2) Divisions.@> 
 @*1 Divisions.
@@ -3812,7 +3713,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) set_sphere_option_list.@>   
 @*1 \§set sphere option list>.
 \initials{LDF 2005.06.06.}
@@ -3911,7 +3811,6 @@ Now compiling the code that sets
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) set_sphere_option_list --> WITH_DIVISIONS numeric_expression.@>   
 @*2 \§set sphere option list> $\longrightarrow$ \.{WITH\_DIVISIONS}
@@ -4042,7 +3941,6 @@ instead of
 
 };
 
-
 @q *** (3) set_sphere_option --> WITH_POINT_COUNT numeric_expression.@>   
 @*2 \§set sphere option> $\longrightarrow$ \.{WITH\_POINT\_COUNT}
 \§numeric expresssion>.
@@ -4057,14 +3955,12 @@ Added this rule.
 @=set_sphere_option: WITH_POINT_COUNT numeric_expression@>@/        
 {
 
-
    static_cast<Scanner_Node>(parameter)->sphere_set_option_struct->circle_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) set_sphere_option_list --> WITH_TYPE sphere_type@>   
 @*2 \§set sphere option list> $\longrightarrow$ \§sphere type>.
@@ -4114,7 +4010,6 @@ Added this rule.
    @=$$@> = Sphere::GLOBE_TYPE;
 
 };
-
 
 @q **** (4) sphere_type --> SPHERE_PANEL_TYPE.@> 
 @*5 \§sphere type> $\longrightarrow$ \.{SPHERE\_PANEL\_TYPE}.
@@ -4168,7 +4063,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ** (2) set_sphere_development_option_list.@>   
 @*1 \§set sphere_development option list>.
@@ -4242,8 +4136,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <pointer_value> set_sphere_development_option@>
-
-
 
 @q *** (3) set_sphere_development_option_list --> WITH_RADIUS numeric_expression.@>   
 @*2 \§set sphere_development option list> $\longrightarrow$ \.{WITH\_RADIUS}
@@ -4345,7 +4237,6 @@ Added this rule.
 @=set_sphere_development_option: WITH_POINT_COUNT numeric_expression@>@/        
 {
 
-
    static_cast<Scanner_Node>(parameter)->sphere_development_set_option_struct->path_point_count
       = static_cast<unsigned int>(floor(fabs(@=$2@>) + .5)); 
 
@@ -4373,7 +4264,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) set_sphere_development_option --> WITH_TRANSFORM transform_expression.@>   
 @*2 \§set sphere_development option> $\longrightarrow$ \.{WITH\_TRANSFORM}
@@ -4544,7 +4434,6 @@ Added this type declaration.
 
 @=%type <int_value> paraboloid_type@>
 
-
 @q **** (4) paraboloid_type --> ELLIPTICAL.@> 
 @*3 \§paraboloid type> $\longrightarrow$ \.{ELLIPTICAL}.
 \initials{LDF 2006.01.25.}
@@ -4587,7 +4476,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -4596,7 +4484,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

@@ -47,8 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Utility functions.@>
 @** Utility functions\quad ({\tt utility\PERIOD web}).\hfil
@@ -75,7 +73,6 @@ into my release versions for 3DLDF 1.1.4.  I've already put some of
 them back in, now I'm doing the rest of them.  However, the release
 versions are now in their own RCS repository.
 \ENDLOG 
-
 
 @q * Include files.@>
 @ Include files.
@@ -195,7 +192,6 @@ make_perspective_frame(Picture& picture,
                        real gl_lft = 0, 
                        real gl_rt = 0);
 
-
 @q ** Definition.@>
 @
 @<Define perspective functions@>=
@@ -210,10 +206,7 @@ make_perspective_frame(Picture& picture,
                        real gl_rt = 0)
 {
 
-
   using namespace Colors;
-
-
 
   if (horizon_rt == ZERO_REAL)
     horizon_rt = horizon_lft;
@@ -226,7 +219,6 @@ make_perspective_frame(Picture& picture,
 
   Point f;
   f.dotlabel(picture, "focus", "bot");
-
 
   Point cv(f);
   cv.shift(0, f_2_cv);
@@ -265,7 +257,6 @@ make_perspective_frame(Picture& picture,
   points.push_back(create_new<Point>(gl_l));
   points.push_back(create_new<Point>(gl_r));                   
 
-
 @ Calculate the vanishing points on the right side, and put them onto
 |points|. 
 @<Define perspective functions@>=
@@ -274,8 +265,6 @@ make_perspective_frame(Picture& picture,
   Point q_super;
   stringstream s;
   signed short sign;
-
-
 
   for (vector<real>::const_iterator iter = angles.begin();
        iter != angles.end();
@@ -308,15 +297,13 @@ make_perspective_frame(Picture& picture,
   real h_offset = 0;
   real v_offset = 1;
 
-  
-  Point p0(gl_l);
+Point p0(gl_l);
   p0.shift(0, - (gl_l.get_y() - f.get_y()));
   p0.shift(-h_offset, -v_offset);
 
   Point p1(gl_r);
   p1.shift(0, - (gl_l.get_y() - f.get_y()));
   p1.shift(h_offset, -v_offset);
-
 
   Point p2(horizon_r);
   p2.shift(h_offset, v_offset);
@@ -344,7 +331,6 @@ perspective using the traditional perspective construction with
 vanishing points, focus, horizon line, etc. 
 I use it in the {\it 3DLDF User and Reference Manual\/} 
 (\filename{3DLDFman.texi}).
-
 
 |f_2_cv| $=$ ``Focus to CV'', i.e., the distance of the focus
 to the picture plane.
@@ -401,7 +387,6 @@ persp_0(Picture& picture,
         real gl_lft = 0, 
         real gl_rt = 0);
 
-
 @q ** Definition.@>
 @
 @<Define perspective functions@>=
@@ -440,7 +425,6 @@ persp_0(Picture& picture,
   
   ddashed_withdots.set_type(Dash_Pattern::WITH_DOTS);
 
-
   if (horizon_rt == ZERO_REAL)
     horizon_rt = horizon_lft;
 
@@ -455,12 +439,9 @@ persp_0(Picture& picture,
 
   real angle_lft = 90 - angle_rt;
 
-
   Point cv(f);
   cv.shift(0, f_2_cv);
   cv.dotlabel(picture, "CV"); 
-
-
 
   Point horizon_l(cv);
   horizon_l.shift(-horizon_lft);
@@ -468,15 +449,12 @@ persp_0(Picture& picture,
   horizon_r.shift(horizon_rt);
   horizon_r.dotlabel(picture, "horizon", "llft"); 
 
-
-
   Point gl_l;
   real f_2_gl = f_2_cv - gl_2_cv;
   gl_l.shift(-gl_lft, f_2_gl);
   Point gl_r;
   gl_r.shift(gl_rt, f_2_gl);
   gl_r.dotlabel(picture, "ground line", "ulft"); 
-
 
   Point origin_pt(0, f_2_gl, 0);    
 
@@ -539,7 +517,6 @@ CV.  Then, we shift |p| |side_rt| units along the ground line, and
 draw a line from |p| to the measuring point.  The intersection of the
 two lines is |front_corner|.
 
-
 @<Define perspective functions@>=
   Point mp_cv; 
   Point mp_cv_super;
@@ -570,8 +547,7 @@ two lines is |front_corner|.
 
   Point x_pt(origin_pt);
 
-  
-  x_pt.shift(front_corner_x);
+x_pt.shift(front_corner_x);
   temp_str.str("");
   temp_str << "$x_{r_0}=" <<  front_corner_x << "$";
 
@@ -579,14 +555,11 @@ two lines is |front_corner|.
   x_pt_sub.shift(0, -1);
   x_pt_sub.dotlabel(picture, temp_str.str(), "bot"); 
 
-
-
   Point z_pt(x_pt);
   
   signed short sign = static_cast<signed short>(front_corner_x / fabs(front_corner_x));
 
   z_pt.shift(-sign * front_corner_z);
-
 
   temp_str.str("");
   temp_str << "$z_{r_0}=" <<  front_corner_z << "$";
@@ -658,7 +631,6 @@ by |pa| when it's filled.
   z_pt.draw(picture, mp_cv, &black, &ddashed_withdots);
   z_pt_sub.drawarrow(picture, z_pt);
 
-
   if (angle_rt != 45)
     {
       right_corner.draw(picture, vpr, &black, &ddashed_evenly);
@@ -721,10 +693,6 @@ abbrev.label(picture, "right", "rt");
   current_picture->output(s, ffocus, Projections::parallel_x_y);
 }
 
-
-  
-
-
 @q * (1) Putting utilities together.@>
 @* Putting utilities together.
 \initials{LDF Undated.}
@@ -749,7 +717,6 @@ This is what's compiled.
 @(utility.h@>=
 @q Declare perspective functions@>@;
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

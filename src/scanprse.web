@@ -48,8 +48,6 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-
-
 @q * Scanning and Parsing.@>
 @** Scanning and Parsing\quad ({\tt scanprse\PERIOD web}).\hfil
 
@@ -244,11 +242,9 @@ Scan_Parse
 
    @<|struct Picture_Output_Arg_Type| declaration@>@;
 
-
    @<Declare |Scan_Parse| functions@>@;
 
 };
-
 
 @q ** (2) |struct Picture_Output_Arg_Type| declaration.@>
 @*1 {\bf struct picture\_output\_arg\_type} declaration.
@@ -314,15 +310,12 @@ Picture_Output_Arg_Type
  
   unsigned short surface_hiding_value;
 
-
   @<Declare |struct Picture_Output_Arg_Type| functions@>@;
 
 };
 
-
 @q *** |struct Picture_Output_Arg_Type| functions.@>
 @*2 {\bf struct picture\_output\_arg\_type} functions.
-
 
 @q **** (4) Destructor.@>
 @*3 Destructor.
@@ -337,12 +330,10 @@ No longer deleting |return_value|.  It must be deleted by the caller
 of the function that uses a |Picture_Output_Arg_Type| object.
 \ENDLOG 
 
-
 @q ***** (5) Declaration.@>
 
 @<Declare |struct Picture_Output_Arg_Type| functions@>=
 ~Picture_Output_Arg_Type(void);
-
 
 @q ***** (5) Definition.@>
 
@@ -366,7 +357,6 @@ Scan_Parse::Picture_Output_Arg_Type::~Picture_Output_Arg_Type(void)
   return;
 }
 
-
 @q ** (2) |Scan_Parse| functions.@>
 @*1 |Scan_Parse| functions.
 
@@ -374,7 +364,6 @@ Scan_Parse::Picture_Output_Arg_Type::~Picture_Output_Arg_Type(void)
 \initials{LDF 2004.06.22.}
 Added this section.
 \ENDLOG 
-
 
 @q *** (3) |parse_func|.@>
 @*2 {\bf parse\_func}.
@@ -409,7 +398,6 @@ formerly in that section at the beginning of this function.  That section wasn't
 used in any other functions.
 \ENDLOG
 
-
 @q **** (4) Definition.@>
 
 @
@@ -432,7 +420,6 @@ Scan_Parse::parse_func(void* arg)
   
   string thread_name = Thread_Info_Type::get_thread_name(thread_info);
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
         {
@@ -451,7 +438,6 @@ Scan_Parse::parse_func(void* arg)
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
                    ? true : false;
 
-
   *return_value = yyparse(arg);
 
   if (*return_value == 0)
@@ -468,10 +454,9 @@ Scan_Parse::parse_func(void* arg)
           cerr_strm.str("");
                       
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |if (*return_value == 0)| (success)  */
+} /* |if (*return_value == 0)| (success)  */
 
   else /* (|*return_value != 0|) (failure)  */
     {
@@ -486,11 +471,7 @@ Scan_Parse::parse_func(void* arg)
         cerr_message(cerr_strm, error_stop_value); 
         cerr_strm.str("");
 
-      
-      }  /*   |else| (|*return_value != 0|) (failure)  */
-
-
-
+}  /*   |else| (|*return_value != 0|) (failure)  */
 
 @q ***** (5) Try to lock |scanner_node->thread_vector_mutex|.@>
 @ Try to lock |scanner_node->thread_vector_mutex|.
@@ -531,7 +512,6 @@ Scan_Parse::parse_func(void* arg)
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) Wait until no more outputs are pending.@>
 @ Wait until no more outputs are pending.
 \initials{LDF 2004.07.16.}
@@ -558,15 +538,12 @@ Scan_Parse::parse_func(void* arg)
         timeout.tv_nsec = 0;
         
         status = scanner_node->output_pending.timedwait(&timeout);
-        
-
 
 @q ****** (6) Error handling:  Timout.@>
 @ Error handling:  Timout.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (status == ETIMEDOUT)
     {
@@ -590,7 +567,6 @@ Scan_Parse::parse_func(void* arg)
 
     } /* |if (status == ETIMEDOUT)|  */
 
-
 @q ******* (7) Error handling:                                   @>
 @q ******* (7) |scanner_node->output_pending.timedwait| failed.@>
 @ Error handling:  |scanner_node->output_pending.timedwait| failed.
@@ -600,7 +576,6 @@ Scan_Parse::parse_func(void* arg)
 
   else if (status != 0)
     {
-
 
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::parse_func()':"
@@ -619,7 +594,6 @@ Scan_Parse::parse_func(void* arg)
 
       return return_value;
 
-
     } /* |else if (status != 0)|  */
 
 #if DEBUG_COMPILE
@@ -635,10 +609,9 @@ Scan_Parse::parse_func(void* arg)
        cerr_strm.str("");
 
      } /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-       
+#endif /* |DEBUG_COMPILE|  */@;
 
-  } /* |while (scanner_node->output_pending.value_1 > 0)|  */
+} /* |while (scanner_node->output_pending.value_1 > 0)|  */
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -702,11 +675,9 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) Join with sub-threads.@>
 @ Join with sub-threads.
 @<Define |Scan_Parse| functions@>=
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -722,12 +693,10 @@ Added this section.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   { /* Beginning of group.  */
 
     int i = 0;
     void* return_value;
-
 
   for (vector<pthread_t*>::iterator iter = scanner_node->thread_vector.begin();
        iter != scanner_node->thread_vector.end();
@@ -760,8 +729,7 @@ Added this section.
             cerr_strm.str("");
 
           }
-#endif /* |DEBUG_COMPILE|  */@; 
-         
+#endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -775,7 +743,6 @@ Added this section.
 
         delete static_cast<int*>(return_value);
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -786,10 +753,8 @@ Added this section.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       } /* |for|  */
   } /* End of group.  */
-
 
 @q ***** (5) Try to unlock |scanner_node->thread_vector_mutex|.@>
 @ Try to unlock |scanner_node->thread_vector_mutex|.
@@ -850,7 +815,6 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   delete scanner_node;
   scanner_node = 0;
 
@@ -867,7 +831,6 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -880,13 +843,9 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   return static_cast<void*>(return_value);
 
 } /* End of |Scan_Parse::parse_func| definition.  */
-
-
-
 
 @q *** (3) |beginfig_func|.@>
 @*3 {\bf beginfig\_func}.
@@ -931,10 +890,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
   int status;
 
-
 @q **** (4).@>
-
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -948,7 +904,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
   Output_Struct* os = scanner_node->out[Run_State::METAPOST];
 
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
-
 
 @q ****** (6) Try to lock |scanner_node->output_pending|.@>  
 @ Try to lock |scanner_node->output_pending|.
@@ -980,7 +935,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
                 << "Not writing to `out_stream'."
                 << endl << "Will try to continue.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str("");
@@ -1002,9 +956,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
     } /* |else| (|scanner_node->output_pending.lock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
-
-
 
 @q ****** (6) Check whether an output operation is pending.@>
 @ Check whether an output operation is pending.
@@ -1028,22 +979,18 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
            }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
         timespec timeout;
 
         timeout.tv_sec = time (0) + 300; /* Five minutes.  */
         timeout.tv_nsec = 0;
         
         status = scanner_node->output_pending.timedwait(&timeout);
-        
-
 
 @q ******* (7) Error handling:  Timout.@>
 @ Error handling:  Timout.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (status == ETIMEDOUT)
     {
@@ -1066,7 +1013,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
     } /* |if (status == ETIMEDOUT)|  */
 
-
 @q ******* (7) Error handling:  @>
 @q ******* (7) |scanner_node->output_pending.timedwait| failed.@> 
 
@@ -1075,10 +1021,8 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (status != 0)
     {
-
 
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::beginfig_func()':"
@@ -1138,8 +1082,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
    scanner_node->output_pending.value_0 = true;
    scanner_node->output_pending.value_1++;
 
-
-
 @q ****** (6) Try to lock |os->mutex|.@>  
 @ Try to lock |os->mutex|.
 \initials{LDF 2004.07.15.}
@@ -1147,7 +1089,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 @<Define |Scan_Parse| functions@>= 
 
 #ifdef HAVE_PTHREAD_H  
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1160,7 +1101,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
       cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
   status = os->lock();
 
@@ -1198,14 +1138,12 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q ****** (6) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
 @<Define |Scan_Parse| functions@>= 
 
       *out_stream << "beginfig(" << fig_num << ");" 
                   << endl;
-
 
 @q ******* (7) @> 
 @ 
@@ -1244,7 +1182,6 @@ Replaced the code in this section with a call to
                 << "Not writing to `out_stream'."
                 << endl << "Will try to continue.";
 
-
       cerr_message(cerr_strm);
       cerr_strm.str("");
 
@@ -1266,7 +1203,6 @@ Replaced the code in this section with a call to
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q ****** (6) Set |scanner_node->output_pending.value_0| to |false|, @>  
 @q ****** (6) decrement |scanner_node->output_pending.value_1|, and  @>  
 @q ****** (6) and signal condition.                                  @>  
@@ -1274,18 +1210,14 @@ Replaced the code in this section with a call to
 decrement |scanner_node->output_pending.value_1|, and   
 and signal condition.                                   
 
-
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>= 
-
-
 
   scanner_node->output_pending.value_0 = false;
   scanner_node->output_pending.value_1--;
   
   status = scanner_node->output_pending.signal();
-
 
 @q ******* (7) Error handling:  |scanner_node->output_pending.signal| failed.@>
 @ Error handling:  |scanner_node->output_pending.signal| failed.
@@ -1293,10 +1225,8 @@ and signal condition.
 
 @<Define |Scan_Parse| functions@>=
 
-
   if (status != 0)
     {
-
 
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::beginfig_func()':"
@@ -1347,7 +1277,6 @@ and signal condition.
                 << "Not writing to `out_stream'."
                 << endl << "Will try to continue.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str("");
@@ -1370,12 +1299,9 @@ and signal condition.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
-
 @q ***** (5) Exit function successfully.@>
 @ Exit function successfully.
 @<Define |Scan_Parse| functions@>=
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1388,7 +1314,6 @@ and signal condition.
 
   return 0;
 }
-
 
 @q *** (3) |output_func|.@>
 @*3 {\bf output\_func}.
@@ -1416,7 +1341,6 @@ Added calls to |log_message| and rearranged the code for debugging and error
 output.  Now calling |cerr_strm.str("")| to clear 
 |cerr_strm|, since |cerr_message| no longer does this.  
 \ENDLOG 
-
 
 @q **** (4) Definition.@>
 @
@@ -1484,13 +1408,11 @@ If it's not, set |*return_value = 1| and exit with return value
 
     } /* |if (picture_ptr_arg == 0)|  */
 
-
   Scanner_Node scanner_node = picture_ptr_arg->scanner_node;
 
   bool error_stop_value = (scanner_node->get_run_state()->error_stop_mode
                      == Run_State::STOPPING)
                       ? true : false;
-
 
 @q ***** (5) Error handling:  Multithreading is not supported.@>
 @ Multithreading is not supported.
@@ -1565,7 +1487,6 @@ If it's not, set |*return_value = 1| and exit with return value
         return static_cast<void*>(return_value); 
   
     } /* |if (!scanner_node->output_pending.value_0)|  */
-  
 
 @q ***** (5) Lock output stream mutex.  Exit on error.@>
 
@@ -1600,7 +1521,6 @@ without \.{--multithread-input}.
 
       }
 
-
   status = out_stream->lock();
 
   if (status != 0)
@@ -1618,8 +1538,6 @@ without \.{--multithread-input}.
         *return_value = 1;
         return static_cast<void*>(return_value); 
     }
-
-
 
 @q ***** (5) Call |Picture::output|.@>
 
@@ -1653,9 +1571,8 @@ to |Picture::output|.
      {
 
        cerr_message(cerr_strm);
-         
 
-       cerr_mutex.lock();
+cerr_mutex.lock();
 
        picture_ptr_arg->picture->show("picture:");
 
@@ -1692,8 +1609,6 @@ to |Picture::output|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
   cerr_strm.str("");
-  
-
 
 @q ***** (5) If |picture_ptr_arg->endfig|, write ``{\bf endfig;} to outstream.@>
 @ If |picture_ptr_arg->endfig|, write ``{\bf endfig;} to the output stream for
@@ -1704,7 +1619,6 @@ MetaPost code.
   
   if (picture_ptr_arg->endfig)
     {
-
 
       cerr_strm << thread_name << "In `output_func()':"
                 << endl << "`picture_arg->endfig' == `true'.";
@@ -1717,9 +1631,7 @@ MetaPost code.
 
       cerr_strm.str("");
 
-
       *(out_stream->stream_ptr) << "endfig;" << endl << endl << flush;
-
 
     } /* |if (picture_ptr_arg->endfig)|  */
 
@@ -1737,9 +1649,7 @@ MetaPost code.
       
       cerr_strm.str("");
 
-
     } /* |else| (|!picture_ptr_arg->endfig|)  */
-
 
 @q ***** (5) Unlock output stream mutex.  Exit on error.@>
 
@@ -1749,7 +1659,6 @@ MetaPost code.
 @<Define |Scan_Parse| functions@>=
 
   status = out_stream->unlock();
-
 
   if (status != 0)
     {
@@ -1767,7 +1676,6 @@ MetaPost code.
       return static_cast<void*>(return_value); 
 
     } /* |if (status != 0)|  */
-
 
 @q ***** (5) Try to lock |*(picture_ptr_arg->picture)| and then unlock it.@>
 
@@ -1821,7 +1729,6 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ******* (7) |picture_ptr_arg->picture->trylock| succeeded.@>
 
 @ |picture_ptr_arg->picture->trylock| succeeded.
@@ -1854,7 +1761,6 @@ Added this section.
  
     } /* |if (status == 0)| 
          (|picture_ptr_arg->picture->trylock| succeeded.)  */
-
 
 @q ******* (7) |picture_ptr_arg->picture->trylock| failed.@>
 
@@ -1953,7 +1859,6 @@ Added this section.
     } /* |if (status == 0)| 
          (|picture_ptr_arg->picture->unlock| succeeded.)  */
 
-
 @q ******* (7) |picture_ptr_arg->picture->unlock| failed.@>
 
 @ |picture_ptr_arg->picture->unlock| failed.
@@ -1967,7 +1872,6 @@ Added this section.
 \ENDLOG 
 
 @<Define |Scan_Parse| functions@>=
-
 
   else 
 
@@ -1991,7 +1895,6 @@ Added this section.
     }   /* |else| (|status == 0| XXX |picture_ptr_arg->picture->unlock| 
                    failed.)  */
 
-
 @q ***** (5) Delete |picture_ptr_arg|.@>
 
 @ Delete |picture_ptr_arg|.
@@ -2011,12 +1914,8 @@ Added this section.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
-
   delete picture_ptr_arg;
 
-  
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -2026,8 +1925,7 @@ Added this section.
       cerr_message(cerr_strm, DEBUG);
       cerr_strm.str(""); 
     }
-#endif /* |DEBUG_COMPILE|  */@; 
-  
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Try to lock |scanner_node->output_pending|.@>  
 @ Try to lock |scanner_node->output_pending|.
@@ -2052,7 +1950,6 @@ Added this section.
 
       return static_cast<void*>(return_value); 
 
-
     } /* |if (status != 0)|  */
 
   else /* |scanner_node->output_pending.lock| succeeded.  */
@@ -2071,14 +1968,11 @@ Added this section.
 
       cerr_strm.str("");
 
-
     } /* |else| (|scanner_node->output_pending.lock| succeeded.)  */
-
 
 @q ***** (5) Set |scanner_node->output_pending.value_0| to |false|, @>  
 @q ***** (5) decrement |scanner_node->output_pending.value_0|,      @>
 @q ***** (5) and signal condition.                                  @>
- 
 
 @ Set |scanner_node->output_pending.value_0| to |false|, 
 decrement |scanner_node->output_pending.value_0|, and signal 
@@ -2092,17 +1986,14 @@ condition.
   
   status = scanner_node->output_pending.signal();
 
-
 @q ****** (6) Error handling:  |scanner_node->output_pending.signal| failed.@>
 @ Error handling:  |scanner_node->output_pending.signal| failed.
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>=
 
-
   if (status != 0)
     {
-
 
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::output_func()':"
@@ -2183,12 +2074,10 @@ condition.
 #endif /* |DEBUG_COMPILE|  */@; 
 
       cerr_strm.str("");
-      
 
-    } /* |else| (|scanner_node->output_pending.unlock| succeeded.)  */
+} /* |else| (|scanner_node->output_pending.unlock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
 
 @q ***** (5) Exit function successfully.@>
 
@@ -2196,7 +2085,6 @@ condition.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   cerr_strm << thread_info->name 
             << ". Exiting `Scan_Parse::output_func()'."
@@ -2246,7 +2134,6 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   string thread_name;
 
@@ -2318,9 +2205,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
 
         } /* |if (!is_endfig)|  */
 
-
       Id_Map_Entry_Node entry = scanner_node->lookup("current_picture");
-      
 
 @q ****** (6) Error handling:  |current_picture| not found.@>
 
@@ -2328,7 +2213,6 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
 \initials{LDF 2004.07.14.}
 
 @<Define |Scan_Parse| functions@>=
-
 
       if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
         {
@@ -2342,10 +2226,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
 
           return 1;
 
-
-          
-        } /* |if (entry == 0 && entry->object == 0)|  */
-
+} /* |if (entry == 0 && entry->object == 0)|  */
 
 @q ****** (6) Lock |entry|. Exit on error.@>
 
@@ -2355,7 +2236,6 @@ at this time.
 \initials{LDF 2004.07.14.}
 
 @<Define |Scan_Parse| functions@>=
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2389,10 +2269,8 @@ at this time.
 \initials{LDF 2004.07.14.}
 
 @<Define |Scan_Parse| functions@>=
-  
-       
-     scanner_node->picture_entry_ptr = static_cast<void*>(entry);
- 
+
+scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2431,8 +2309,6 @@ at this time.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
       status = entry->unlock();
 
       if (status != 0)
@@ -2450,10 +2326,7 @@ at this time.
           
         }
 
-
     } /* |if (scanner_node->endfig_ptr != 0)|  */
-  
-
 
 @q ***** (5) Get |Picture| and arguments for |Picture::output|.@>
 
@@ -2485,7 +2358,6 @@ at this time.
 
         return 1;
     } /* |if (p == 0)|  */
-
 
 @q ***** (5) If we're using multithreaded output,       @>
 @q ***** (5) create new thread and call |output_func|.@>
@@ -2528,7 +2400,6 @@ at this time.
         }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
 @q ****** (6) Try to lock |scanner_node->output_pending|, set       @>  
 @q ****** (6) |scanner_node->output_pending.value_0| to |true|,     @>  
 @q ****** (6) and increment |scanner_node->output_pending.value_1|. @>  
@@ -2561,8 +2432,6 @@ and increment |scanner_node->output_pending.value_1|.
 
 @<Define |Scan_Parse| functions@>=
 
-
-
       if (status != 0)
         {
           cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
@@ -2571,7 +2440,6 @@ and increment |scanner_node->output_pending.value_1|.
                     << "Not calling `output_func()'."
                     << endl << "Exiting function with return value 1.";
 
-
           cerr_message(cerr_strm, error_stop_value);
           cerr_strm.str("");
 
@@ -2579,14 +2447,12 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |if (status != 0)|  */
 
-
 @q ******* (7) |output_pending.lock| succeeded.@>
 
 @ |output_pending.lock| succeeded.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
-
 
       else /* |scanner_node->output_pending.lock| succeeded.  */
         {
@@ -2600,7 +2466,6 @@ and increment |scanner_node->output_pending.value_1|.
               cerr_strm.str("");
             }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ******** (8) Check whether an output operation is pending.@>
 @ Check whether an output operation is pending.
@@ -2623,22 +2488,18 @@ and increment |scanner_node->output_pending.value_1|.
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       timespec timeout;
 
       timeout.tv_sec = time (0) + 300; /* Five minutes.  */
       timeout.tv_nsec = 0;
         
       status = scanner_node->output_pending.timedwait(&timeout);
-        
-
 
 @q ********* (9) Error handling:  Timout.@>
 @ Error handling:  Timout.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
-
 
   if (status == ETIMEDOUT)
     {
@@ -2659,17 +2520,14 @@ and increment |scanner_node->output_pending.value_1|.
 
     } /* |if (status == ETIMEDOUT)|  */
 
-
 @q ********* (9) Error handling:  |scanner_node->output_pending.timedwait| failed.@>
 @ Error handling:  |scanner_node->output_pending.timedwait| failed.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
 
-
   else if (status != 0)
     {
-
 
       cerr_strm << thread_name 
                 << "ERROR! In `Scan_Parse::output_command_func()':"
@@ -2700,10 +2558,9 @@ and increment |scanner_node->output_pending.value_1|.
        cerr_strm.str("");
 
      } /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-       
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |while (scanner_node->output_pending.value_0)|  */
+} /* |while (scanner_node->output_pending.value_0)|  */
 
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -2726,7 +2583,6 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |else| (|scanner_node->output_pending.lock| succeeded.)  */
 
-
 @q ****** (6) Try to unlock |scanner_node->output_pending|.@>  
 @ Try to unlock |scanner_node->output_pending|.
 \initials{LDF 2004.07.16.}
@@ -2735,15 +2591,12 @@ and increment |scanner_node->output_pending.value_1|.
 
   status = scanner_node->output_pending.unlock();
 
-
 @q ******* (7) Error handling.  |output_pending.unlock| failed.@>
 
 @ Error handling:  |output_pending.unlock| failed.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
-
-
 
       if (status != 0)
         {
@@ -2757,15 +2610,12 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |if (status != 0)|  */
 
-
 @q ******* (7) |output_pending.unlock| succeeded.@>
 
 @ |output_pending.unlock| succeeded.
 \initials{LDF 2004.07.16.}
 
 @<Define |Scan_Parse| functions@>=
-
-
 
       else /* |scanner_node->output_pending.unlock| succeeded.  */
         {
@@ -2783,7 +2633,6 @@ and increment |scanner_node->output_pending.value_1|.
 
         } /* |else| (|scanner_node->output_pending.unlock| succeeded.)  */
 
-
 @q ****** (6) Call |pthread_create|.@>
 
 @ Call |pthread_create|.
@@ -2791,12 +2640,10 @@ and increment |scanner_node->output_pending.value_1|.
 
 @<Define |Scan_Parse| functions@>=
 
-
       status = pthread_create(scanner_node->thread_vector.back(),
                               0,
                               output_func,
                               static_cast<void*>(p)); 
-
 
 @q ******* (7) Error handling.  |pthread_create| failed.@>
 
@@ -2821,7 +2668,6 @@ and increment |scanner_node->output_pending.value_1|.
 
     } /* |if (status != 0)|  */
 
-
 @q ******* (7) Success!  |pthread_create| succeeded.@>
 
 @ Success!  |pthread_create| succeeded.
@@ -2842,7 +2688,6 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
     } /* |if (multithread_output)|  */
-
 
 @q ***** (5) Not using multithreaded output.@>
 
@@ -2902,20 +2747,16 @@ to |Picture::output|.
                       p->min_z_proj,
                       p->max_z_proj,
                       p->surface_hiding_value);
-   
 
-   if (is_endfig)
+if (is_endfig)
      *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
            << "endfig;" << endl << endl << flush;
-            
 
 #ifdef HAVE_PTHREAD_H  
    p->scanner_node->out[Run_State::METAPOST]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
     }     /* |else | (|!multithread_output|)  */
-
 
 @q ***** (5) Exit function successfully with return value 0.@>   
 
@@ -2924,7 +2765,6 @@ to |Picture::output|.
 
 @<Define |Scan_Parse| functions@>=
 
-                                                                
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -2935,8 +2775,6 @@ to |Picture::output|.
       
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
-
 
   return 0;
 
@@ -3023,7 +2861,6 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -3092,7 +2929,6 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
 
   scanner_node->token_string_bool_vector.clear();
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -3105,10 +2941,8 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   return 0;
 
-  
 }  /* End of |Scan_Parse::non_shape_decl_func| definition.  */
 
 @q *** (3) |shape_decl_func|.@>
@@ -3157,7 +2991,7 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
   stringstream cerr_strm;
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 #endif /* |DEBUG_COMPILE|  */
 
   cerr_strm << thread_name << "Entering `Scan_Parse::shape_decl_func()'.";
@@ -3184,18 +3018,14 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
          ++iter)
       {
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
          cerr << "iter->first == " << iter->first << endl;
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-  
-        scanner_node->add_entry(iter->first,                    // |name|
+scanner_node->add_entry(iter->first,                    // |name|
                                 type_num,                       // |type|
                                 Id_Map_Entry_Type::REGULAR,     // |category|
                                 false,                          // |const_flag|
@@ -3207,7 +3037,6 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
     } /* |for|  */
 
    } /* End of group.  */
-
 
   scanner_node->token_string_bool_vector.clear();
 
@@ -3229,7 +3058,6 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
   return 0;
  
 }  /* End of |Scan_Parse::shape_decl_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -3285,7 +3113,6 @@ shape_decl_func(Scanner_Node, int, Rectangle* dummy = 0);
 int
 shape_decl_func(Scanner_Node, int, Square* dummy = 0);
 #endif 
-
 
 int
 shape_decl_func(Scanner_Node, int, Ellipse* dummy = 0);
@@ -3398,7 +3225,7 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -3412,7 +3239,6 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
                                                    &warning_stop_value);
 
   stringstream cerr_strm;
-
 
   dummy_func();
 
@@ -3463,7 +3289,6 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
     } /* |if (entry == 0)|  */
 
-
 @q ***** (5) Error handling for case that |entry->const_flag == true|.  @>
 @ Error handling for case that |entry->const_flag == true|.
 \initials{LDF 2004.07.27.}
@@ -3490,7 +3315,6 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
       ivp.v = static_cast<void*>(0);
       
       return ivp;
-
 
     } /* |if (entry->const_flag)|  */
 
@@ -3521,14 +3345,11 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
       
       return ivp;
 
-
     } /* |if (expr == 0)|  */
-
 
 @q ***** (5).@> 
 
   C* c = static_cast<C*>(entry->object);  
-
 
 @q ***** (5) |use_or_delete_expr == true|.        @>
 @q ***** (5) Assign, delete |expr|, if necessary,  @>
@@ -3563,7 +3384,6 @@ if |entry->object == 0|.  Otherwise, assigning to
          } /* |else| (|c != 0|)  */
 
     }  /* |if (use_or_delete_expr)|  */
- 
 
 @q ***** (5) |use_or_delete_expr == false|.   @>
 @q ***** (5) Create new |C|, if necessary, and @> 
@@ -3609,7 +3429,6 @@ Added this section.
 
      } /* |else| (|!use_or_delete_expr|)  */
 
-
 @q ***** (5).@> 
 @
 @<Define |Scan_Parse| template functions@>=
@@ -3624,9 +3443,6 @@ Added this section.
   
 } /* End of |Scan_Parse::assign_simple| 
      definition.  \initials{LDF 2004.07.27.}  */
-
-
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -3693,13 +3509,11 @@ assign_simple(Scanner_Node scanner_node,
               void* var,
               const string* expr);
 
-
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
               const string type_name,
               void* var,
               const Pen* expr);
-
 
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
@@ -3719,7 +3533,6 @@ assign_simple(Scanner_Node scanner_node,
               void* var,
               const Transform* expr);
 
-
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
               const string type_name,
@@ -3731,7 +3544,6 @@ assign_simple(Scanner_Node scanner_node,
               const string type_name,
               void* var,
               const Bool_Point* expr);
-
 
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
@@ -3784,7 +3596,6 @@ assign_simple(Scanner_Node scanner_node,
               const Square* expr);
 #endif 
 
-
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
               const string type_name,
@@ -3802,7 +3613,6 @@ assign_simple(Scanner_Node scanner_node,
               const string type_name,
               void* var,
               const Cuboid* expr);
-
 
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
@@ -3837,14 +3647,11 @@ assign_simple(Scanner_Node scanner_node,
               void* var,
               const Trunc_Octahedron* expr);
 
-
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,
               const string type_name,
               void* var,
               const Ellipsoid* expr);
-
-
 
 @q *** (3) |assign_chained|.@>
 @*2 {\bf assign\_chained}.
@@ -3875,7 +3682,7 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -3890,13 +3697,9 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
-
-
-
 @q ***** (5).@> 
 
   Int_Void_Ptr ivp;
-
 
 #if DEBUG_COMPILE
   if (DEBUG) 
@@ -3907,11 +3710,9 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
      cerr_message(cerr_strm); 
      cerr_strm.str(""); 
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
- 
-  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(var);
-
+Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(var);
 
 @q ***** (5) Error handling for the case that |entry == 0|.@>
 
@@ -3938,14 +3739,12 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
 
     } /* |if (entry == 0)|  */
 
-
 @q ***** (5) Error handling for the case that |expr == 0|.@>
 
 @ Error handling for the case that |expr == 0|.
 \initials{LDF 2004.08.08.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
   if (expr == static_cast<const C*>(0))
     {
@@ -3964,7 +3763,6 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
         return ivp;
 
     } /* |if (expr == 0)|  */
-
 
 @q ***** (5) Allocate memory, if necessary, assign, and return  @>
 @q ***** (5) from function successfully.                        @>
@@ -4039,7 +3837,6 @@ this function and call it instead of |new|.
 
      } /* |if (entry->object == 0)|  */
 
-
 @q ****** (6) |entry->object != 0|.@> 
 @ |entry->object != 0|.
 \initials{LDF 2004.10.25.}
@@ -4078,20 +3875,17 @@ Changed the |void* expr| argument to |const C* expr| and removed the
 |const C* dummy| argument. 
 \ENDLOG 
 
-
 @<Declare |Scan_Parse| functions@>=
 
 Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
                void* var,
                const int* expr);
-               
 
 Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
                void* var,
                const real* expr);
-
 
 Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
@@ -4103,7 +3897,6 @@ assign_chained(Scanner_Node scanner_node,
                void* var,
                const Pen* expr);
 
-
 Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
                void* var,
@@ -4114,9 +3907,6 @@ assign_chained(Scanner_Node scanner_node,
                void* var,
                const Color* expr);
 
-
-
-
 Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
                void* var,
@@ -4126,8 +3916,6 @@ Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
                void* var,
                const Point* expr);
-
-
 
 Int_Void_Ptr
 assign_chained(Scanner_Node scanner_node,
@@ -4164,7 +3952,6 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
                                   Id_Map_Entry_Node entry_0)
 
 {
-
 
 @q ***** (5) Preliminaries.@>   
 
@@ -4206,7 +3993,6 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 
    int status;
 
-
 @q ***** (5) Error handling for the case that |entry == 0|.@> 
 @ Error handling for the case that |entry == 0|.
 \initials{LDF 2004.08.08.}
@@ -4233,7 +4019,6 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 
     } /* |if (entry == 0)|  */
 
-
 @q ***** (5) Error handling for the case that |entry_0 == 0|.@> 
 @ Error handling for the case that |entry_0 == 0|.
 \initials{LDF 2004.08.08.}
@@ -4259,8 +4044,6 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
         return ivp;
 
     } /* |if (entry_0 == 0)|  */
-
-             
 
 @q ***** (5) Try to lock |entry->mutex|.@> 
 @ Try to lock |entry->mutex|.
@@ -4319,7 +4102,6 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) Allocate memory for |entry->object|, if necessary.@> 
 @ Allocate memory for |entry->object|, if necessary.
 \initials{LDF 2004.08.08.}
@@ -4343,7 +4125,6 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
       cerr_strm.str(""); 
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
   if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(new(Picture));
@@ -4411,8 +4192,6 @@ If it fails, try to unlock |entry->mutex|.
 
   s = static_cast<Picture*>(entry_0->object);
   t = static_cast<Picture*>(entry->object);
-
-
 
 @q ***** (5) Try to lock |s->mutex| and |t->mutex|.@> 
 @ Try to lock |s->mutex| and |t->mutex|.
@@ -4487,7 +4266,6 @@ If either attempt fails, try to unlock the mutexes we've already locked.
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
-
 
       entry->unlock();
       entry_0->unlock();
@@ -4567,7 +4345,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
       
       return ivp;
 
-
     } /* |if (status != 0)| */
 
 #endif 
@@ -4604,7 +4381,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
       ivp.v = static_cast<void*>(0);
       
       return ivp;
-
 
     } /* |if (status != 0)| */
 
@@ -4673,7 +4449,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
       
       return ivp;
 
-
     } /* |if (status != 0)| (|entry->unlock| failed.)  */ 
   
 #if DEBUG_COMPILE
@@ -4699,10 +4474,7 @@ If any attempt fails, try to unlock the mutexes that are still locked.
 
    return ivp;
 
-
 } /* End of |Scan_Parse::assign_picture_simple| definition.  */
-
-
 
 @q *** (3) |assign_picture_chained|.@>
 @*2 {\bf assign\_picture\_chained}.     
@@ -4727,7 +4499,6 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
    stringstream cerr_strm;
 
@@ -4771,12 +4542,9 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 
    int status;
 
-
-
 @q ***** (5) Error handling for the case that |entry == 0|.  @>
 @ Error handling for the case that |entry == 0|.
 @<Define |Scan_Parse| functions@>=
-
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
@@ -4786,7 +4554,6 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
                 << "`entry' == 0. "
                 << "Exiting function and returning `int' value 1 "
                 << "and `void*' value 0.";
-
 
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
@@ -4824,7 +4591,6 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(new(Picture));
 
@@ -4859,7 +4625,6 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 
     } /* |if (t == 0)|  */
 
-
 @q ***** (5) Try to lock mutexes.@>   
 @ Try to lock mutexes.
 \initials{LDF 2004.06.30.}
@@ -4883,7 +4648,6 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
                 << "`entry->lock()' failed." << endl
                 << "Exiting function and returning `int' value 1 "
                 << "and `void*' value 0.";
-
 
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
@@ -4913,7 +4677,6 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
 
 @q ****** (6) |entry_0|.@> 
 @ |entry_0|.
@@ -4977,7 +4740,6 @@ If locking fails, try to unlock |entry->mutex|.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q ****** (6) |s->mutex| and |t->mutex|.@> 
 @ |s->mutex| and |t->mutex|.
 If either attempt fails, try to unlock the mutexes we've already locked.
@@ -5018,7 +4780,6 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 #if DEBUG_COMPILE
   else if (DEBUG) 
     {
-
 
       cerr_strm << thread_name 
                 << "In `Scan_Parse::assign_picture_chained()':"
@@ -5084,7 +4845,6 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
 
 @q ***** (5) Perform assignment, set |entry->known_state|, and set value of rule.@> 
 @ Perform assignment, set |entry->known_state|, and set value of rule.
@@ -5160,7 +4920,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
                 << "and exit function returning `int' value 1 "
                 << "and `void*' value 0.";
 
-
       entry_0->unlock();
       entry->unlock();
       
@@ -5218,7 +4977,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
 
 @<Define |Scan_Parse| functions@>=
 
-
 #ifdef HAVE_PTHREAD_H  
 
   status = entry->unlock();
@@ -5245,8 +5003,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
   
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
-
 @q ***** (5) Exit rule.@>
 @ Exit rule.
 \initials{LDF 2004.06.30.}
@@ -5256,8 +5012,6 @@ If any attempt fails, try to unlock the mutexes that are still locked.
   return ivp;
 
 }
-
-
 
 @q *** (3) |assign_point_numeric|.@>
 @*2 {\bf assign\_point\_numeric}.     
@@ -5321,7 +5075,6 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 
    int status;
 
-
 @q ***** (5)  Error handling for the case that |entry == 0|.  @>
 @ Error handling for the case that |entry == 0|.  
 \initials{LDF 2004.05.05.}
@@ -5347,8 +5100,6 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 
     } /* |if (entry == 0)|  */
 
-
-
 @q ***** (5)  Create new |Point| if |entry->object == 0|.  @>
 @ Create new |Point| if |entry->object == 0|.
 \initials{LDF 2004.05.05.}
@@ -5357,9 +5108,8 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    if (DEBUG) 
     {
-      
 
-      cerr_strm << thread_name << "In `assign_point_numeric()':"
+cerr_strm << thread_name << "In `assign_point_numeric()':"
                 << endl
                 << "entry->name == " << entry->name << "." 
                 << endl;
@@ -5375,10 +5125,8 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   if (entry->object == static_cast<void*>(0))
     entry->object = static_cast<void*>(create_new<Point>(0));
-
 
 @q ***** (5)  Look up |curr_y| and |curr_z|.  @>
 @  Look up |curr_y| and |curr_z|.
@@ -5424,8 +5172,6 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
                 << endl
                 << "`curr_z' not found. Using 0 instead.";
 
-
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm, error_stop_value); 
       cerr_strm.str(""); 
@@ -5436,7 +5182,6 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
   
   else /* |z_entry != 0| */
     z = *static_cast<real*>(z_entry->object);
-
 
 @q ***** (5)  Set |entry->object| and exit rule.  @>
 @ Set |entry->object| and exit rule.
@@ -5453,11 +5198,6 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
    return ivp;
 
 } /* End of |Scan_Parse::assign_point_numeric| definition.  */
-
-
-
-
-
 
 @q *** (3) |log_message|.@>
 @*3 {\bf log\_message}.
@@ -5567,14 +5307,11 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
    cerr_strm.str(""); 
 
   int status;
-  
-
 
 @q ***** (5) Error handling for the case that |entry == 0|.@>
 @ Error handling for the case that |entry == 0|.
 \initials{LDF 2004.06.30.}
 @<Define |Scan_Parse| functions@>=
-
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
@@ -5645,9 +5382,6 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
-
-
 @q ****** (6) Allocate memory for a new |Color|, if |entry->object == 0|.@>
 @ Allocate memory for a new |Color|, if |entry->object == 0|.
 \initials{LDF 2004.06.30.}
@@ -5673,7 +5407,6 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
     {
        c = static_cast<Color*>(entry->object); 
     }
-
 
   c->set(red_part, green_part, blue_part);
 
@@ -5728,7 +5461,6 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q ***** (5) Exit |Scan_Parse::set_color| successfully.@>   
 @ Exit |Scan_Parse::set_color| successfully.
 \initials{LDF 2004.08.14.}
@@ -5742,8 +5474,6 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 
 } /* End of |Scan_Parse::set_color| definition.  */
 
-
-
 @q *** (3) |set_focus|.@>
 @*3 {\bf set\_focus}.
 This function is declared in \filename{pspglb.web}.
@@ -5754,7 +5484,6 @@ This function is declared in \filename{pspglb.web}.
 Added this function.  It's used in the parser rule
 \§set command> $\longrightarrow$ \.{SET} \§focus variable> 
 etc., in \filename{pcommand.w}.
-
 
 \initials{LDF 2004.08.14.}
 Added the |const int| arguments |x_axis|, |y_axis|, and |z_axis|. 
@@ -5827,7 +5556,6 @@ Int_Void_Ptr
    cerr_strm.str(""); 
 
   int status;
-
 
 @q ***** (5) Error handling for the case that |entry == 0|.@>
 @ Error handling for the case that |entry == 0|.
@@ -5911,10 +5639,7 @@ Int_Void_Ptr
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
 
 @q ***** (5) Allocate memory for new |Focus|, if necessary.@>  
 @ Allocate memory for new |Focus|, if necessary.
@@ -5960,8 +5685,12 @@ Int_Void_Ptr
         cerr_mutex.lock();
         cerr << thread_name << "In `Scan_Parse::set_focus()':" 
              << endl;
+        cerr_mutex.unlock();
+
         position->show("position:");
         direction->show("direction:");
+
+        cerr_mutex.lock();
         cerr << "distance == " << distance << endl
              << "angle == " << angle << endl;
 
@@ -6017,7 +5746,6 @@ Int_Void_Ptr
 
      }  /* |else|  (|axis| has invalid value.)  */
 
-
 @q ****** (6) Set |Focus|.@>  
 @ Set |Focus|.
 @<Define |Scan_Parse| functions@>= 
@@ -6029,13 +5757,10 @@ Int_Void_Ptr
   ivp.v = entry->object; 
   ivp.i = 0;
 
-
-  
 @q ****** (6) Try to unlock |entry->mutex|.@>
 @ Try to unlock |entry->mutex|.  Exit function upon failure.
 \initials{LDF 2004.06.24.}
 @<Define |Scan_Parse| functions@>= 
-
 
 #ifdef HAVE_PTHREAD_H  
   status = entry->unlock();
@@ -6063,7 +5788,6 @@ Int_Void_Ptr
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-
 @q ****** (6) Exit function successfully.@>
 @ Exit function successfully.
 \initials{LDF 2004.06.24.}
@@ -6072,7 +5796,6 @@ Int_Void_Ptr
   return ivp;
 
 } /* End of |Scan_Parse::set_focus| definition.  */
-
 
 @q *** (3) |on_picture_optional_0|.@>
 @*3 {\bf on\_picture\_optional\_0}.
@@ -6153,7 +5876,6 @@ Scan_Parse::on_picture_optional_0(Scanner_Node scanner_node)
                   << endl << "Exiting function with return value "
                   << "`static_cast<void*>(0)'.";
 
-
         log_message(cerr_strm); 
         cerr_message(cerr_strm, error_stop_value); 
         cerr_strm.str(""); 
@@ -6169,8 +5891,6 @@ Scan_Parse::on_picture_optional_0(Scanner_Node scanner_node)
 
   else
     {
-
-
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -6192,7 +5912,6 @@ Scan_Parse::on_picture_optional_0(Scanner_Node scanner_node)
     } /* |else| (|current_picture| exists).  */
 
 } /* End of |Scan_Parse::on_picture_optional_0| definition.  */
-
 
 @q *** (3) |vector_type_decl|.@>
 @*2 {\bf vector\_type\_decl}.
@@ -6249,7 +5968,6 @@ Scan_Parse::vector_type_decl(Scanner_Node scanner_node,
                              int array_type_num,
                              C* dummy)
 {
-
 
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */@; 
@@ -6316,8 +6034,6 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
 
 @<Define |Scan_Parse| template functions@>=
 
-
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -6330,7 +6046,6 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   bool declaration_succeeded = false;
 
   const bool not_const = false;
@@ -6338,16 +6053,12 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
   const bool is_array  = true;
   const bool not_array = false;
 
-
-
 @q ***** (5) Cycle through |scanner_node->token_string_bool_vector|.@>   
 
 @ Cycle through |scanner_node->token_string_bool_vector|.
 \initials{LDF 2004.08.24.}
 
 @<Define |Scan_Parse| template functions@>=
-
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -6360,8 +6071,6 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
       cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */
-
-
 
 { /* Begin group.  */
 
@@ -6393,8 +6102,6 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
 
 #endif /* |DEBUG_COMPILE|  */@;
 
-
-
 @q ****** (6) It's an array declaration.@>   
 
 @ It's an array declaration.
@@ -6418,11 +6125,7 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
         }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
-
-
    int j = 0;
-
 
    string::const_iterator last_iter;
 
@@ -6440,7 +6143,6 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
 
       } /* |for|  */   
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -6453,11 +6155,8 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
           cerr_message(cerr_strm, error_stop_value);
           cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-
-  
 @q ******* (7) Error handling for the case that it's an array of @>
 @q ******* (7) degree $> 1$.                                     @>   
 
@@ -6488,15 +6187,12 @@ to return prematurely, it returns 0.  Otherwise, it returns 1.
 
       } /* |if (j > 1)|  */
 
-
-
 @q ******* (7) It's an array of degree 1.@>   
 
 @ It's an array of degree 1.
 \initials{LDF 2004.08.24.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -6521,7 +6217,6 @@ at the end.
 
 @<Define |Scan_Parse| template functions@>=
 
-
    if (last_iter != iter->first.end() - 1)
       {
          cerr_strm << thread_name 
@@ -6540,8 +6235,6 @@ at the end.
          continue;
 
       } /* |if (s_iter != iter->first.end() - 1)|  */
-
-
 
 #if DEBUG_COMPILE
    else if (DEBUG)
@@ -6565,9 +6258,6 @@ at the end.
 
    vector_name.erase(vector_name.end() - 1);
 
-
-
-
 @q ******* (7) End of ``array declaration'' case.@>   
 
 @ End of ``array declaration'' case.
@@ -6575,10 +6265,8 @@ at the end.
 
 @<Define |Scan_Parse| template functions@>=
 
-
     } /* |if (iter->second)| 
          (it's an array declaration).  */
-
 
 @q ****** (6) It's not an array declaration.@>   
 
@@ -6586,7 +6274,6 @@ at the end.
 \initials{LDF 2004.08.24.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
   else /* (|!iter->second| XXX it's not an array declaration.)  */
     {
@@ -6612,16 +6299,12 @@ at the end.
     } /* |else| (|!iter->second|---it's 
                  not an array declaration.)  */
 
-
-
-
 @q ****** (6) Check for existing variables.@>   
 
 @ Check for existing variables.
 \initials{LDF 2004.08.24.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
 #if DEBUG_COMPILE
          if (DEBUG)
@@ -6639,12 +6322,9 @@ at the end.
             }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
    Id_Map_Entry_Node vector_entry = scanner_node->lookup(vector_name);
 
    Id_Map_Entry_Node array_entry = scanner_node->lookup(array_name);
-
-
 
 @q ******* (7) Check |vector_entry|, issue a warning if it exists, @>   
 @q ******* (7) and continue.@>   
@@ -6680,9 +6360,6 @@ and continue.
 
       } /* |if (vector_entry != 0)| */
 
-
-
-
 @q ******** (8) |vector_entry| doesn't exist.@>   
 
 @ |vector_entry| doesn't exist.
@@ -6707,8 +6384,6 @@ and continue.
      } /* |else if (DEBUG)| (|vector_entry == 0|) */    
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
-
 
 @q ******* (7) Check |array_entry|, issue a warning if it exists, @>   
 @q ******* (7) and continue.@>   
@@ -6735,17 +6410,14 @@ and continue.
         if (used_array_syntax)
           cerr_strm << "[]";
 
-        
-        cerr_strm << "' will cause existing entry for `" << vector_name 
+cerr_strm << "' will cause existing entry for `" << vector_name 
                   << "[]' to be destroyed.";
 
         log_message(cerr_strm); 
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
- 
 
-      } /* |if (array_entry != 0)| */
-
+} /* |if (array_entry != 0)| */
 
 @q ******** (8) |array_entry| doesn't exist.@>   
 
@@ -6778,9 +6450,6 @@ Now conditionally compiling this section.
 
 #endif /* |DEBUG_COMPILE|  */@;    
 
-
-
-
 @q ****** (6) Try to create a new |Pointer_Vector<C>|.@>  
 @q ****** (6) Rethrow |bad_alloc| upon error.         @>  
 
@@ -6807,7 +6476,6 @@ catching |bad_alloc|.
 
 @ Call |add_entry| for |array_entry|.
 \initials{LDF 2004.08.24.}
-
 
 \LOG
 \initials{LDF 2006.10.08.}
@@ -6837,7 +6505,6 @@ Find a better solution to this problem.
 \ENDLOG 
 
 @<Define |Scan_Parse| template functions@>=
-
 
    array_entry = scanner_node->add_entry(array_name,
                                          array_type_num,
@@ -6876,7 +6543,6 @@ to create |array_entry| failed.
 
         } /* |if (array_entry == 0)|  */
 
-
 @q ******* (7) Success! Calling |add_entry| for |array_entry| succeeded.@>  
 
 @ Success! Calling |add_entry| for |array_entry| succeeded.
@@ -6897,10 +6563,7 @@ to create |array_entry| failed.
           cerr_message(cerr_strm);
           cerr_strm.str("");
       }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) Call |add_entry| for |vector_entry|.@>  
 
@@ -6975,7 +6638,6 @@ failed.
 
 @<Define |Scan_Parse| template functions@>=
 
-
           if (status != 0) /* |scanner_node->erase_entry| failed.  */
             {
 
@@ -7041,10 +6703,7 @@ failed.
           
           return 1;
 
-
-
         } /* |if (vector_entry == 0)|  */
-
 
 @q ******* (7) Success! Calling |add_entry| for |vector_entry| succeeded.@>  
 
@@ -7168,7 +6827,6 @@ failed.
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ****** (6) End of |for| loop for cycling through    @>   
 @q ****** (6) |scanner_node->token_string_bool_vector|.@>   
 
@@ -7192,7 +6850,6 @@ If we've reached this code, entries have successfully been added to
 
   scanner_node->token_string_bool_vector.clear();
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -7211,7 +6868,6 @@ If we've reached this code, entries have successfully been added to
 
 @<Define |Scan_Parse| template functions@>=
 
-
    if (declaration_succeeded)
       {
 #if DEBUG_COMPILE
@@ -7228,7 +6884,6 @@ If we've reached this code, entries have successfully been added to
         
         return 0;
       } /* |if (declaration_succeeded)|  */
-
 
 @q ****** (6) No declarations succeeded.@>   
 @ No declarations succeeded.  Exit with return value 1. 
@@ -7295,8 +6950,6 @@ vector_type_decl(Scanner_Node scanner_node,
                  int array_type_num,
                  Path* dummy = 0);
 
-
-
 @q *** (3) |vector_type_plus_assign|.@>
 @*2 {\bf vector\_type\_plus\_assign}.
 This function is declared in \filename{pspglb.web}.
@@ -7321,7 +6974,6 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 Added |bool copy_object| argument.
 \ENDLOG 
 
-
 @q **** (4) Definition.@>
 @
 @<Define |Scan_Parse| template functions@>=
@@ -7337,7 +6989,7 @@ Scan_Parse::vector_type_plus_assign(Scanner_Node scanner_node,
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -7405,7 +7057,6 @@ Added this section.
 
 @<Define |Scan_Parse| template functions@>=
 
-
   if (pv == static_cast<PV*>(0))
     {     
        try 
@@ -7432,7 +7083,6 @@ Added this section.
        entry->object = static_cast<void*>(pv); 
 
     }  /* |if (pv == 0)|  */
-
 
 @q ****** (6)  Try to allocate memory for a new |C|.@> 
 
@@ -7518,7 +7168,6 @@ Rethrow |bad_alloc| upon failure.
        return 1;
 
      } /* |if (array_entry == 0)|  */
-
 
 @q ****** (6) Success! |array_entry != 0|.@>   
 
@@ -7623,23 +7272,19 @@ if it's non-null.
       c_entry->object = static_cast<void*>(new_object);
       c_entry->known_state = Id_Map_Entry_Type::KNOWN;
 
-
     }    /* |else| (|c_entry != 0|)  */
 
 @q ******* (7).@>   
 @ 
 @<Define |Scan_Parse| template functions@>=
 
-
      }   /* |else| (|array_entry != 0|)  */
-
 
 @q ***** (5).@>   
 @ 
 @<Define |Scan_Parse| template functions@>=
 
   pv->ctr++;
-
 
 @q ***** (5).@>   
 @ 
@@ -7659,11 +7304,9 @@ if it's non-null.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   return 0;
 
 } /* End of |Scan_Parse::vector_type_plus_assign| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -7697,13 +7340,11 @@ Added declaration for |vector_type_plus_assign<Definition_Info_Type>|.
                            int array_type_num,
                            Point* object);
 
-
    int 
    vector_type_plus_assign(Scanner_Node scanner_node,
                            int vector_type_num,
                            int array_type_num,
                            Bool_Point* object);
-
 
    int 
    vector_type_plus_assign(Scanner_Node scanner_node,
@@ -7711,17 +7352,11 @@ Added declaration for |vector_type_plus_assign<Definition_Info_Type>|.
                            int array_type_num,
                            Path* object);
 
-
    int 
    vector_type_plus_assign(Scanner_Node scanner_node,
                            int vector_type_num,
                            int array_type_num,
                            Definition_Info_Node object);
-
-
-
-
-
 
 @q *** (3) |vector_type_assign|.@>
 @*2 {\bf vector\_type\_assign}.
@@ -7732,7 +7367,6 @@ This function is declared in \filename{pspglb.web}.
 \initials{LDF 2004.11.08.}
 Added this function.
 \ENDLOG 
-
 
 @q **** (4) Definition.@>
 @
@@ -7747,7 +7381,7 @@ Scan_Parse::vector_type_assign(Scanner_Node scanner_node,
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -7779,7 +7413,6 @@ Scan_Parse::vector_type_assign(Scanner_Node scanner_node,
       
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ***** (5) Error handling:  |entry == 0|.@> 
 @ Error handling:  |entry == 0|.  Return 1.
@@ -7870,7 +7503,6 @@ Rethrow |bad_alloc| upon failure.
 
 @<Define |Scan_Parse| template functions@>=
 
-
   if (pv == static_cast<PV*>(0))
     {     
        try 
@@ -7898,10 +7530,7 @@ Rethrow |bad_alloc| upon failure.
 
     }  /* |if (pv == 0)|  */
 
-
-
 @q ****** (6) Loop over |object_vector|.@> 
-
 
    C* new_object;
 
@@ -7917,7 +7546,6 @@ Rethrow |bad_alloc| upon failure.
 \initials{LDF 2004.11.06.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
   try 
      {
@@ -7945,12 +7573,9 @@ Rethrow |bad_alloc| upon failure.
 
 @q ******* (7).@> 
 
-
-
    *new_object = **iter;
 
    pv->v.push_back(new_object);
-
 
 @q ******* (7) Get |array_entry|.@>   
 @ Get |array_entry|.
@@ -7985,7 +7610,6 @@ Rethrow |bad_alloc| upon failure.
        return 1;
 
      } /* |if (array_entry == 0)|  */
-
 
 @q ******* (7) Success! |array_entry != 0|.@>   
 
@@ -8067,10 +7691,9 @@ Rethrow |bad_alloc| upon failure.
           cerr_message(cerr_strm); 
           cerr_strm.str(""); 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
 
-      c_entry->object = static_cast<void*>(new_object); 
+c_entry->object = static_cast<void*>(new_object); 
       c_entry->known_state = Id_Map_Entry_Type::KNOWN;
 
     }    /* |else| (|c_entry != 0|)  */
@@ -8079,9 +7702,7 @@ Rethrow |bad_alloc| upon failure.
 @ 
 @<Define |Scan_Parse| template functions@>=
 
-
      }   /* |else| (|array_entry != 0|)  */
-
 
 @q ******* (7).@>   
 @ 
@@ -8090,7 +7711,6 @@ Rethrow |bad_alloc| upon failure.
       pv->ctr++;
 
    } /* |for|  */
-
 
 @q ****** (6).@> 
 
@@ -8112,11 +7732,9 @@ Rethrow |bad_alloc| upon failure.
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   return 0;
 
 } /* End of |Scan_Parse::vector_type_assign| definition.  */
-
 
 @q *** (3) Cull.@> 
 @*2 Cull.
@@ -8195,7 +7813,6 @@ Scan_Parse::cull_func(void* v,
 
 @q ***** (5)@> 
 
-
      Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(v);
 
      if (entry->object == static_cast<void*>(0))
@@ -8216,7 +7833,6 @@ Scan_Parse::cull_func(void* v,
          return 1;
 
      } /* |if (entry->object == 0)|  */
-
 
 @q ***** (5)@> 
 
@@ -8251,9 +7867,8 @@ Add error handling.
                                             entry); 
      if (status != 0)
         return status;
-      
 
-     status = qv->cull(comparison,
+status = qv->cull(comparison,
                        tolerance,
                        scanner_node,
                        c);      
@@ -8268,7 +7883,6 @@ Add error handling.
      return status;
 
 }  /* End of |Scan_Parse::cull_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -8385,7 +7999,6 @@ Scan_Parse::rectify_func(void* v,
 
    }  /* |if (v == 0)|  */
 
-
 @q ***** (5)@> 
 @
 @<Define |Scan_Parse| template functions@>=
@@ -8415,7 +8028,6 @@ Scan_Parse::rectify_func(void* v,
 
    }  /* |if (entry->object == 0)|  */
 
-
 @q ***** (5)@> 
 @
 @<Define |Scan_Parse| template functions@>=
@@ -8435,15 +8047,12 @@ Scan_Parse::rectify_func(void* v,
       ++qv->ctr;
    }
 
-
 @q ***** (5)@> 
 @
 @<Define |Scan_Parse| template functions@>=
 
-
    status = clear_vector_func(scanner_node,
                               entry); 
-
 
 @q ****** (6)@> 
 
@@ -8464,11 +8073,9 @@ Scan_Parse::rectify_func(void* v,
 
    }  /* |if (status != 0)|  */
 
-
 @q ***** (5)@> 
 @
 @<Define |Scan_Parse| template functions@>=
-
 
    status = qv->rectify(scanner_node, 
                         do_test, 
@@ -8670,9 +8277,7 @@ Scan_Parse::reverse_func(void* v, void* parameter, C* c)
 
     return 0;
 
-
 }  /* End of |Scan_Parse::reverse_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -8846,7 +8451,6 @@ Changed the name of this function from |reflect_func| to
 Removed |using namespace Scan_Parse| declaration.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define |Scan_Parse| template functions@>=
@@ -8858,10 +8462,9 @@ Scan_Parse::reflect_in_func(Scanner_Node scanner_node,
 			 Path* plane_path)
 {
 
-
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   bool error_stop_value   = true;
   bool warning_stop_value = true;
@@ -8904,7 +8507,6 @@ return 0.
       return 0;
 
     }  /* |if (object == 0)|  */@;
-
 
 @q ****** (6) |object != 0|.@> 
 
@@ -8956,8 +8558,6 @@ return 0.
 
     }  /* |if (plane_path == 0)|  */@;
 
-
-
 @q ****** (6).@> 
   
     if (!plane_path->is_planar())
@@ -8980,7 +8580,6 @@ return 0.
       
       }  /* |if (!plane_path->is_planar())|  */
 
-
 @q ****** (6) |plane_path != 0 && plane_path->is_planar|.@> 
 
 @ |plane_path != 0 && plane_path->is_planar|.
@@ -9002,7 +8601,6 @@ return 0.
        }
 #endif /* |DEBUG_COMPILE|  */ 
 
-
   C* reflection;
 
 @q ***** (5) Try to allocate memory on the free store for |reflection|.@> 
@@ -9010,7 +8608,6 @@ return 0.
 \initials{LDF 2004.10.12.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
    try 
     {
@@ -9046,7 +8643,6 @@ return 0.
 
      } /* |catch (bad_alloc)|  */
 
-
 @q ****** (6) |create_new<C>| succeeded.@> 
 
 @ |create_new<C>| succeeded.
@@ -9066,15 +8662,13 @@ return 0.
           cerr_strm.str("");
  
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Call |object->reflect_in|.@> 
 @ Call |object->reflect_in|.
 \initials{LDF 2004.10.03.}
 
 @<Define |Scan_Parse| template functions@>=
-
 
   int status;
 
@@ -9086,7 +8680,6 @@ return 0.
                                   scanner_node); 
 
     } /* |try|  */
-
 
 @q ****** (6) Error handling:  |object->reflect_in| threw |bad_alloc|.@>  
 
@@ -9141,7 +8734,6 @@ return 0.
         
      } /* |if (reflection == 0)|  */
 
-
 @q ***** (5) Exit function successfully with return value |reflection|.@> 
 
 @ Exit function successfully with return value |reflection|.
@@ -9153,7 +8745,6 @@ Now deleting |object| and |plane_path|.
 \ENDLOG 
 
 @<Define |Scan_Parse| template functions@>=
-
 
   delete object;
   delete plane_path;
@@ -9208,13 +8799,10 @@ reflect_in_func(Scanner_Node scanner_node,
                 Reg_Polygon* object,
                 Path* plane_path);
 
-
 Rectangle*
 reflect_in_func(Scanner_Node scanner_node,
              Rectangle* object,
              Path* plane_path);
-
-
 
 Ellipse*
 reflect_in_func(Scanner_Node scanner_node,
@@ -9226,19 +8814,15 @@ reflect_in_func(Scanner_Node scanner_node,
              Circle* object,
              Path* plane_path);
 
-
 Cuboid*
 reflect_in_func(Scanner_Node scanner_node,
              Cuboid* object,
              Path* plane_path);
 
-
-
 Tetrahedron*
 reflect_in_func(Scanner_Node scanner_node,
              Tetrahedron* object,
              Path* plane_path);
-
 
 Octahedron*
 reflect_in_func(Scanner_Node scanner_node,
@@ -9249,8 +8833,6 @@ Dodecahedron*
 reflect_in_func(Scanner_Node scanner_node,
              Dodecahedron* object,
              Path* plane_path);
-
-
 
 Icosahedron*
 reflect_in_func(Scanner_Node scanner_node,
@@ -9312,10 +8894,9 @@ Scan_Parse::reflect_off_func(Scanner_Node scanner_node,
                              Pointer_Vector<C>* pv)
 {
 
-
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   bool error_stop_value   = true;
   bool warning_stop_value = true;
@@ -9367,7 +8948,6 @@ Now deleting |reflection|.
       return 1;
 
     }  /* |if (object == 0)|  */@;
-
 
 @q ****** (6) |object != 0|.@> 
 
@@ -9502,8 +9082,6 @@ Now deleting |reflection|.
 
     }  /* |if (direction == 0)|  */@;
 
-
-
 @q ****** (6) Error handling:  |plane_path| is non-planar.@> 
 
 @ Error handling:  |plane_path| is non-planar.
@@ -9515,7 +9093,6 @@ Now deleting |reflection|.
 \ENDLOG 
 
 @<Define |Scan_Parse| template functions@>= 
-
 
     if (!plane_path->is_planar())
       {
@@ -9539,7 +9116,6 @@ Now deleting |reflection|.
         return 1;
       
       }  /* |if (!plane_path->is_planar())|  */
-
 
 @q ****** (6) |plane_path->is_planar|.@> 
 
@@ -9575,13 +9151,10 @@ so it never throws |bad_alloc|.  I haven't yet defined
 
 @<Define |Scan_Parse| template functions@>=
 
-
   int status = object->reflect_off(plane_path->get_plane(),
                                    *direction,
                                    static_cast<void*>(pv),
                                    scanner_node); 
-
-
 
 @q ****** (6) Error handling:  |status != 0|.@>  
 
@@ -9613,7 +9186,6 @@ so it never throws |bad_alloc|.  I haven't yet defined
         
      } /* |if (status != 0)|  */
 
-
 @q ***** (5) Delete |object|, |plane_path|, and |direction|     @> 
 @q ***** (5) and exit function successfully with return value 0.@> 
 
@@ -9636,7 +9208,6 @@ so it never throws |bad_alloc|.  I haven't yet defined
                    << "In `Scan_Parse::reflect_off_func()': "
                    << "`object->reflect_off()' succeeded." << endl;
 
-
         if (pv == static_cast<Pointer_Vector<C>*>(0))
            cerr_strm << "`pv' == 0." << endl;
         else 
@@ -9651,13 +9222,11 @@ so it never throws |bad_alloc|.  I haven't yet defined
 
         cerr_mutex.unlock(); 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  return 0;
+return 0;
 
 } /* End of |Scan_Parse::reflect_off_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -9693,7 +9262,6 @@ reflect_off_func(Scanner_Node scanner_node,
                  Path* direction,
                  Pointer_Vector<Path>* pv);
 
-
 int
 reflect_off_func(Scanner_Node scanner_node,
                  Path* object,
@@ -9702,9 +9270,6 @@ reflect_off_func(Scanner_Node scanner_node,
                  Pointer_Vector<Focus>* pv);
 
 @q *** (3) |pickup_command|.@> 
-
-
-
 
 @*2 {\bf pickup\_command}.
 \initials{LDF 2004.11.13.}
@@ -9755,7 +9320,6 @@ Scan_Parse::pickup_command(Scanner_Node scanner_node,
 Added this section.
 \ENDLOG
 
-
 @<Define |Scan_Parse| template functions@>=
 
    if (expression == static_cast<C*>(0))
@@ -9777,7 +9341,6 @@ Added this section.
 
 @ |expression != 0|.
 \initials{LDF 2004.11.12.}
-
 
 @<Define |Scan_Parse| template functions@>=
    else /* |expression != 0|  */
@@ -9827,7 +9390,6 @@ Added this section.
 
             }  /* |if (q == 0)|  */
 
-
 @q ****** (6).@> 
 
          *q = *expression;
@@ -9835,7 +9397,6 @@ Added this section.
          delete expression;
 
       }   /* |else| (|expression != 0|)  */
-
 
     return 0;
 
@@ -9866,7 +9427,6 @@ pickup_command(Scanner_Node scanner_node,
                Pen* expression,
                Pen** pointer);
 
-
 @q *** (3) |drop_command|.@> 
 
 @*2 {\bf drop\_command}.
@@ -9887,11 +9447,10 @@ Scan_Parse::drop_command(Scanner_Node scanner_node,
                          C** pointer,
                          string pointer_name)
 {
-                
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   bool error_stop_value   = true;
   bool warning_stop_value = true;
@@ -9903,7 +9462,6 @@ Scan_Parse::drop_command(Scanner_Node scanner_node,
                                                    &warning_stop_value);
 
   stringstream cerr_strm;
-
 
 @q ***** (5) WARNING:  |*pointer == 0|.@>   
 
@@ -9944,10 +9502,8 @@ Scan_Parse::drop_command(Scanner_Node scanner_node,
 @q ***** (5) .@> 
 
    return 0;
-  
 
 }  /* End of |Scan_Parse::drop_command| definition.  */
-   
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -9974,8 +9530,6 @@ int
 drop_command(Scanner_Node scanner_node,
              Pen** pointer,
              string pointer_name);
-
-
 
 @q *** (3) |sub_binary_number_string_func|.@> 
 
@@ -10005,11 +9559,10 @@ Scan_Parse::sub_binary_number_string_func(C c,
                               bool oversize_switch,
                               Scanner_Node scanner_node)
 {
-                
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   bool error_stop_value   = true;
   bool warning_stop_value = true;
@@ -10031,7 +9584,6 @@ Scan_Parse::sub_binary_number_string_func(C c,
    string* s = new string;
    stringstream t;
 
-
 @q ***** (5)@>  
 
    if (oversize_switch)
@@ -10051,11 +9603,9 @@ Scan_Parse::sub_binary_number_string_func(C c,
                 cerr_strm.str("");
            }   
 
+#endif /* |DEBUG_COMPILE|  */@;
 
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
-          int i;
+int i;
    
 #if DEBUG_COMPILE
          if (DEBUG)
@@ -10097,11 +9647,9 @@ Scan_Parse::sub_binary_number_string_func(C c,
              cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-          for (i = size / 2; i < size; ++i)
+for (i = size / 2; i < size; ++i)
              {
                 pattern <<= 1;
              }
@@ -10138,11 +9686,9 @@ Scan_Parse::sub_binary_number_string_func(C c,
              cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-          llng_0 >>= size / 2;
+llng_0 >>= size / 2;
  
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -10158,11 +9704,9 @@ Scan_Parse::sub_binary_number_string_func(C c,
              cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-          llng_0 &= ~pattern;
-
+llng_0 &= ~pattern;
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -10179,8 +9723,7 @@ Scan_Parse::sub_binary_number_string_func(C c,
              cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>   
 
@@ -10202,7 +9745,6 @@ Scan_Parse::sub_binary_number_string_func(C c,
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
           long lng_0 = static_cast<long>(llng_0);
           long lng_1 = static_cast<long>(llng_1);
 
@@ -10221,10 +9763,9 @@ Scan_Parse::sub_binary_number_string_func(C c,
              cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-         
-          b <<= size / 2;
+b <<= size / 2;
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -10234,14 +9775,12 @@ Scan_Parse::sub_binary_number_string_func(C c,
                        << endl 
                        << "`b' == " << b << endl; 
 
-
              log_message(cerr_strm);
              cerr_message(cerr_strm);
              cerr_strm.str("");
 
         }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
           b |= lng_1;           
 
@@ -10255,7 +9794,6 @@ Scan_Parse::sub_binary_number_string_func(C c,
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       }  /* |if (oversize_switch)|  */
    
 @q ***** (5)@>  
@@ -10263,7 +9801,6 @@ Scan_Parse::sub_binary_number_string_func(C c,
    else  /* |!oversize_switch|  */
 
       b = c;
-
 
 @q ***** (5)@>  
 
@@ -10277,7 +9814,6 @@ Scan_Parse::sub_binary_number_string_func(C c,
 
 }  /* End of |Scan_Parse::sub_binary_number_string_func| 
       definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -10309,8 +9845,6 @@ string*
 sub_binary_number_string_func(long long c, 
                               bool oversize_switch,
                               Scanner_Node scanner_node);
-
-
 
 @q *** (3) Get |Point|.@> 
 @*2 Get {\bf Point}.
@@ -10379,7 +9913,6 @@ and function rule successfully.
 
 }  /* End of |Scan_Parse::get_point_func| definition.  */
 
-
 @q **** (4) Specialization for |Conic_Section_Lattice|.@> 
 @ Specialization for {\bf Conic\_Section\_Lattice}.
 \initials{LDF 2007.08.03.}
@@ -10434,7 +9967,6 @@ Scan_Parse::get_point_func<Conic_Section_Lattice>(real r,
    }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ***** (5) Error handling:  |c == 0|.@> 
 @ Error handling:  |c == 0|.
@@ -10511,7 +10043,6 @@ Scan_Parse::get_point_func<Conic_Section_Lattice>(real r,
 @
 @<Define |Scan_Parse| functions@>=
 
-
     if (scanner_node)
     {
         delete scanner_node->conic_section_lattice_options;
@@ -10538,8 +10069,6 @@ Scan_Parse::get_point_func<Conic_Section_Lattice>(real r,
     return static_cast<void*>(p);
 
 }  /* End of |Scan_Parse::get_point_func<Conic_Section_Lattice>| definition.  */
-
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -10579,7 +10108,6 @@ get_point_func(real r, Triangle* c, void* parameter = 0);
 void*
 get_point_func(real r, Rectangle* c, void* parameter = 0);
 
-
 @q *** (3) |get_center_func|.@> 
 
 @*2 {\bf get\_center\_func}.
@@ -10609,7 +10137,6 @@ Scan_Parse::get_center_func(C* c, void* parameter)
     return static_cast<void*>(p);
 
 }  /* End of |Scan_Parse::get_center_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -10658,7 +10185,6 @@ get_center_func(Ellipsoid* e, void* parameter = 0);
 void*
 get_center_func(Cylinder* c, void* parameter = 0);
 
-
 @q *** (3) |normal_func|.@> 
 @*2 {\bf normal\_func}.
 \initials{LDF 2005.12.09.}
@@ -10704,10 +10230,7 @@ Scan_Parse::normal_func(C* c, Scanner_Node scanner_node)
 
       return 0;
 
-
     }  /* |else if (!c->is_planar())|  */
-
-
 
 @q **** (4) |c| is planar.@>   
 @ |c| is planar.
@@ -10730,7 +10253,6 @@ Scan_Parse::normal_func(C* c, Scanner_Node scanner_node)
     }   /* |else| (|c && c->is_planar|)  */
 
 }  /* End of |Scan_Parse::normal_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -10809,7 +10331,6 @@ Scan_Parse::get_focus_func(C* c, const unsigned short s, void* parameter)
 
 }  /* End of |Scan_Parse::get_focus_func| definition.  */
 
-
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
 \initials{LDF 2005.11.09.}
@@ -10844,7 +10365,6 @@ get_focus_func(Paraboloid* c, const unsigned short s = 0, void* parameter = 0);
 
 void*
 get_focus_func(Hyperboloid* c, const unsigned short s = 0, void* parameter = 0);
-
 
 @q *** (3) |get_vertex_func|.@> 
 
@@ -10884,7 +10404,6 @@ Scan_Parse::get_vertex_func(C* c, const unsigned short s, void* parameter)
     return static_cast<void*>(p);
 
 }  /* End of |Scan_Parse::get_vertex_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -10948,7 +10467,6 @@ Scan_Parse::is_whatever_func(C* c, void* parameter)
 
 }  /* End of |Scan_Parse::is_whatever_func| definition.  */
 
-
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
 \initials{LDF 2005.10.26.}
@@ -10995,7 +10513,6 @@ is_whatever_func(Polyhedron* c, void* parameter = 0);
 
 void*
 is_whatever_func(Sphere* c, void* parameter = 0);
-
 
 @q *** (3) Standardize.@> 
 @*2 Standardize.
@@ -11076,7 +10593,6 @@ void*
 standardize_func(Sphere* c, void* v);
 #endif 
 
-
 @q *** (3) |intersection_points_func|.@> 
 
 @*2 {\bf intersection\_points\_func}.
@@ -11119,7 +10635,6 @@ Scan_Parse::intersection_points_func(C* c,
 
 }  /* End of |Scan_Parse::intersection_points_func| definition.  */
 
-
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
 \initials{LDF 2005.10.27.}
@@ -11159,7 +10674,6 @@ Added this function.
 Changed the type of the object pointed to by the |void*| return value from 
 |Pointer_Vector<Point>| to |Pointer_Vector<Bool_Point>|.
 
-
 \initials{LDF 2005.11.21.}
 Changed the name of this function from |conic_section_line_intersection_func|
 to |conic_section_intersection_func| and added a second 
@@ -11189,9 +10703,7 @@ Scan_Parse::conic_section_intersection_func(C* c, D* d, void* parameter)
 
        }  /* |if (!(c && d))|  */
 
-
-   
-    Pointer_Vector<Bool_Point>* bpv = c->intersection_points(d, scanner_node);
+Pointer_Vector<Bool_Point>* bpv = c->intersection_points(d, scanner_node);
 
     delete c;
     c = 0;
@@ -11202,7 +10714,6 @@ Scan_Parse::conic_section_intersection_func(C* c, D* d, void* parameter)
     return static_cast<void*>(bpv);
 
 }  /* End of |Scan_Parse::conic_section_intersection_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -11232,7 +10743,6 @@ conic_section_intersection_func(Hyperbola* c, Path* d, void* parameter);
 
 void*
 conic_section_intersection_func(Parabola* c, Plane* d, void* parameter);
-
 
 @q *** (3) |ellipse_like_intersection_func|.@> 
 @*2  {\bf ellipse\_like\_intersection\_func}.
@@ -11297,11 +10807,9 @@ Scan_Parse::ellipse_like_intersection_func(C* c, D* d, void* parameter)
    delete d;
    d = 0;
 
-
    return bpv;
 
 }  /* End of |Scan_Parse::ellipse_like_intersection_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -11325,7 +10833,6 @@ ellipse_like_intersection_func(Circle* c, Ellipse* d, void* parameter);
 
 void*
 ellipse_like_intersection_func(Circle* c, Circle* d, void* parameter);
-
 
 @q *** (3) |ellipse_like_plane_intersection_func|.@> 
 @*2  {\bf ellipse\_like\_plane\_intersection\_func}.
@@ -11423,7 +10930,6 @@ ellipse_like_plane_intersection_func(Ellipse* c, void* w, void* parameter = 0);
 
 void*
 ellipse_like_plane_intersection_func(Circle* c, void* w, void* parameter = 0);
-
 
 @q *** (3) |conic_section_lattice_intersection_func|.@> 
 @*2  {\bf conic\_section\_lattice\_intersection\_func}.
@@ -11573,7 +11079,6 @@ Scan_Parse::polygon_like_intersection_func(C* c, D* d, void* parameter)
 
       }  /* |if (!(c && d))|  */
 
-
    vector<Point> v;
    v  = c->intersection_points(*d);
 
@@ -11590,7 +11095,6 @@ Scan_Parse::polygon_like_intersection_func(C* c, D* d, void* parameter)
    return static_cast<void*>(pv);
 
 }  /* End of |Scan_Parse::polygon_like_intersection_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -11615,7 +11119,6 @@ polygon_like_intersection_func(Polygon* c, Rectangle* d, void* parameter);
 void*
 polygon_like_intersection_func(Polygon* c, Triangle* d, void* parameter);
 
-
 @q ***** (5).@> 
 
 void*
@@ -11629,7 +11132,6 @@ polygon_like_intersection_func(Reg_Polygon* c, Rectangle* d, void* parameter);
 
 void*
 polygon_like_intersection_func(Reg_Polygon* c, Triangle* d, void* parameter);
-
 
 @q ***** (5).@> 
 
@@ -11645,12 +11147,10 @@ polygon_like_intersection_func(Rectangle* c,  Reg_Polygon* d, void* parameter);
 void*
 polygon_like_intersection_func(Rectangle* c,  Triangle* d, void* parameter);
 
-
 @q ***** (5).@> 
 
 void*
 polygon_like_intersection_func(Triangle* c, Triangle* d, void* parameter);
-
 
 void*
 polygon_like_intersection_func(Triangle* c, Polygon* d, void* parameter);
@@ -11660,7 +11160,6 @@ polygon_like_intersection_func(Triangle* c,  Reg_Polygon* d, void* parameter);
 
 void*
 polygon_like_intersection_func(Triangle* c,  Rectangle* d, void* parameter);
-
 
 @q *** (3) |plane_cast_func|.@> 
 @*2 {\bf plane\_cast\_func}.
@@ -11695,7 +11194,6 @@ Scan_Parse::plane_cast_func(C* c, void* parameter)
        }
 
 }  /* End of |Scan_Parse::plane_cast_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -11769,7 +11267,6 @@ Scan_Parse::plane_assignment_func(void* entry, C* c, void* parameter)
 
 }  /* End of |Scan_Parse::plane_assignment_func| definition.  */
 
-
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
 \initials{LDF 2005.10.30.}
@@ -11801,7 +11298,6 @@ plane_assignment_func(void* entry, Rectangle* c, void* parameter = 0);
 
 void*
 plane_assignment_func(void* entry, Triangle* c, void* parameter = 0);
-
 
 @q *** (3) |show_func|.@> 
 @*2 {\bf show\_func}.
@@ -11855,8 +11351,6 @@ Scan_Parse::show_func(C* c, string text, void* parameter)
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
 @q **** (4).@>
 
    string s;
@@ -11874,9 +11368,8 @@ Scan_Parse::show_func(C* c, string text, void* parameter)
           cerr_mutex.unlock(); 
 
       }  /* |if (p)|  */
- 
 
-   else  /* |!c|  */
+else  /* |!c|  */
      {
         cerr_strm << "(unknown " << text << ")";
         log_message(cerr_strm);
@@ -11888,7 +11381,6 @@ Scan_Parse::show_func(C* c, string text, void* parameter)
    return 0;
 
 }  /* End of |Scan_Parse::show_func| definition.  */
-
 
 @q **** (4) Template function instantiations. @>
 @*3 Template function instantiations.
@@ -12049,7 +11541,6 @@ show_func(Pointer_Vector<Ellipse>* c,
                       string text = "ellipse_vector", 
                       void* parameter = 0);
 
-
 int
 show_func(Pointer_Vector<Parabola>* c, 
                       string text = "parabola_vector", 
@@ -12079,8 +11570,6 @@ int
 show_func(Pointer_Vector<Cuboid>* c, 
                       string text = "Cuboid_vector", 
                       void* parameter = 0);
-
-
 
 @q *** (3) |ellipsoid_like_plane_intersection_func|.@> 
 @*2  {\bf ellipsoid\_like\_plane\_intersection\_func}.
@@ -12140,7 +11629,6 @@ void*
 ellipsoid_like_plane_intersection_func(Sphere* c, 
                                        Plane* p, 
                                        void* parameter = 0);
-
 
 @q *** (3) Functions for |Conic_Sections|.@> 
 @*2 Functions for {\bf Conic\_Sections}.
@@ -12210,7 +11698,6 @@ Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
 
 }  /* End of |Scan_Parse::get_conic_section_func| definition.  */
 
-
 @q ***** (5) Template function instantiations.@>
 @*4 Template function instantiations.
 \initials{LDF 2007.07.03.}
@@ -12243,7 +11730,6 @@ to -1.
 
 @<Declare |Scan_Parse| functions@>=
 
-
 #if 0
 /* !! Porting:  LDF 2008.10.09.  */
 void*
@@ -12268,7 +11754,6 @@ Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
                                    real tolerance = -1,
                                    bool ignore_extra_points = true);
 
-
 void*
 Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
                                    int increment_value,
@@ -12280,7 +11765,6 @@ Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
                                    real tolerance = -1,
                                    bool ignore_extra_points = true);
 
-
 void*
 Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
                                    int increment_value,
@@ -12291,7 +11775,6 @@ Scan_Parse::get_conic_section_func(Pointer_Vector<Point>* pv,
                                    bool rectify_points = true,
                                    real tolerance = -1,
                                    bool ignore_extra_points = true);
-
 
 #endif
 
@@ -12313,11 +11796,9 @@ Added this section.
 Added this function.
 \ENDLOG
 
-
 @q ***** (5) Definition.@> 
 
 @<Define |Scan_Parse| template functions@>=
-
 
 template<class C>
 void*
@@ -12335,7 +11816,6 @@ Scan_Parse::in_cuboid_func(C* c, void* parameter)
    return static_cast<void*>(d);
 
 }  /* End of |Scan_Parse::in_cuboid_func| definition.  */
-
 
 @q ***** (5) Template function instantiations. @>
 @*4 Template function instantiations.
@@ -12364,7 +11844,6 @@ in_cuboid_func(Sphere* s, void* parameter = 0);
 \initials{LDF 2005.12.07.}
 Added this function.
 \ENDLOG
-
 
 @q ***** (5) Definition.@> 
 
@@ -12405,7 +11884,6 @@ out_cuboid_func(Ellipsoid* c, void* parameter = 0);
 void*
 out_cuboid_func(Sphere* c, void* parameter = 0);
 
-
 @q * (1) Putting namespace Scan_Parse together.@>
 @* Putting {\bf namespace Scan\_Parse} together.
 
@@ -12428,8 +11906,6 @@ out_cuboid_func(Sphere* c, void* parameter = 0);
 @<|extern| |namespace Scan_Parse| declaration@>@;
 @<Define |Scan_Parse| template functions@>@;
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -12438,8 +11914,6 @@ out_cuboid_func(Sphere* c, void* parameter = 0);
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-  
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

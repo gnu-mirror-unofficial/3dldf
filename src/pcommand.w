@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Commands.  @>
 @** Commands.  
@@ -130,7 +128,6 @@ Removed debugging code.
 
 };
 
-
 @q ** (2) command --> group_command.  @>
 @*1 \§command> $\longrightarrow$ \§group command>.
 
@@ -148,7 +145,6 @@ Added this rule.
 
 };
 
-
 @q * (1) message_command.@> 
 @* \§message command>.
 \initials{LDF 2004.09.22.}
@@ -160,7 +156,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> message_command@>
-
 
 @q ** (2) message_or_errmessage.@> 
 @*1 \§message or errmessage>.
@@ -190,7 +185,6 @@ Added this rule.
   @=$$@> = MESSAGE;
 
 };
-
 
 @q ** (2) message_or_errmessage --> ERRMESSAGE.@> 
 @*1 \§message or errmessage> $\longrightarrow$ \.{ERRMESSAGE}.
@@ -227,7 +221,6 @@ Removed code.  Now calling |Scan_Parse::message_command_func()| instead.
     Scan_Parse::message_command_func(@=$1@>, @=$2@>, parameter);
     @=$$@> = static_cast<void*>(0);
 };
-
 
 @q ** (2) command --> PAUSE.@> 
 @*1 \§command> $\longrightarrow$ \.{PAUSE}.
@@ -277,14 +270,12 @@ Added this rule.
 
     }  /* |if (str_ptr == 0)|  */
 
-
    else /* |str_ptr != 0|  */
       {
 
           stringstream* str_strm_ptr;
 
           Input_Struct* curr_input_struct;
-
 
                 str_strm_ptr = new stringstream;
                 curr_input_struct = new Input_Struct;
@@ -335,7 +326,6 @@ Added this rule.
 
       } /* |s == 0|  */
 
-
 @q **** (4) |s != 0|.@>   
 
 @ |s != 0|.
@@ -382,10 +372,8 @@ Added this rule.
 
    }   /* |else| (|s != 0|)  */  
 
-
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -394,7 +382,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

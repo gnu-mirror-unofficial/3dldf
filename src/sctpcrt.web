@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * |Scanner_Type::create|.@>
 @** {\bf Scanner\_Type} Create function.\quad ({\tt sctcrt\PERIOD web}).\hfil
@@ -65,7 +64,6 @@ Created this file.
 Now including \filename{deftfncs.h}.  It contains function definitions for 
 |Definition_Info_Node|.
 \ENDLOG
-
 
 @<Include files@>=
 #include "loader.h++"
@@ -159,7 +157,6 @@ setting |scanner_node->out[]->is_file| to |true| for the formats
 which are being used.  Currently, MetaPost is the only output format
 in use. 
 
-
 \initials{LDF 2004.04.20.}  Moved this function definition from
 \filename{colors.web} to this file.  It needs to be here because it
 uses preprocessor macros defined in \filename{parser.w}.
@@ -228,7 +225,7 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
-  volatile bool DEBUG = true; /* |false| */ @; 
+  volatile bool DEBUG = false; /* |true| */ @; 
 
   stringstream cerr_strm;
 
@@ -269,7 +266,6 @@ Scanner_Type::create(string str,
   ofstream* out_file_metapost; 
   ofstream* out_file_png; 
   ofstream* out_file_libplot; 
-
 
 @q *** (3) Set input filename.@>      
 
@@ -404,7 +400,6 @@ or more of the formats supported by the GNU plotutils package.
     cerr << "out_filename_base == " << out_filename_base << endl;
 #endif
 
-
   s = out_filename_base.find_last_of('.');
   
   if (s != string::npos)
@@ -416,7 +411,6 @@ or more of the formats supported by the GNU plotutils package.
          << out_filename_base << endl;
 #endif
 
-
   if (r.do_output[Run_State::METAPOST])
     {
       out_file = 0;
@@ -426,7 +420,6 @@ or more of the formats supported by the GNU plotutils package.
       out_file_metapost = out_file;
       out_file = 0;
     }  
-
 
   if (r.do_output[Run_State::PNG])
     {
@@ -448,9 +441,7 @@ or more of the formats supported by the GNU plotutils package.
       out_file = 0;
     }
 
-
   } /* if (str != "")  */
-
 
 @q *** (3)  Use |stdin| and default output files.@>      
 @*2  Use |stdin| and default output files.
@@ -513,7 +504,6 @@ code from the parser rules and put it into functions.
 
     } /* |else | (|str == ""|)  */
 
-
 @q **** (4) Success!  Allocate memory.  @>          
 
 @ Succeeded in setting the input filename and the output filenames.
@@ -528,7 +518,6 @@ output file formats are set to 0.
 Now writing header with |in_filename|,
 |out_filename_metapost|,  
 and a datestamp to the beginning of the MetaPost output file.
-
 
 \initials{LDF 2004.05.02.}  
 Now setting |scanner_node->in->up| to 0.
@@ -559,7 +548,6 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
-
 
   Scanner_Node scanner_node = new Scanner_Type;
 
@@ -661,8 +649,6 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
   
   scanner_node->in->filename = in_filename;
 
-
-
   if (in_file != static_cast<ifstream*>(0))
     { 
         scanner_node->in->stream_ptr = static_cast<istream*>(in_file);
@@ -670,7 +656,6 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
         in_file = 0;
 
     } /* |if (in_file != 0)|  */
-
 
   else if (in_stream != static_cast<istream*>(0))
      {
@@ -732,8 +717,6 @@ needed, because this function predefines variables for these |Colors|.
 
       scanner_node->out[Run_State::METAPOST]->type = Io_Struct::FILE_TYPE;
 
-
-
 #ifdef __DECCXX
   out_file_metapost->setf(ios_base::fixed, ios_base::floatfield);
 #else
@@ -748,7 +731,6 @@ needed, because this function predefines variables for these |Colors|.
                          << "GNU 3DLDF " << VERSION_3DLDF << "."
                          << endl << endl << flush; 
 
-
 #if 0 
     Color::initialize_colors(out_file_metapost);
 #endif 
@@ -758,8 +740,6 @@ needed, because this function predefines variables for these |Colors|.
   else
     scanner_node->out[Run_State::METAPOST] = 0;
 
-
-
   if (   scanner_node->in->type 
       == Io_Struct::FILE_TYPE && r.do_output[Run_State::PNG])
     {
@@ -768,7 +748,6 @@ needed, because this function predefines variables for these |Colors|.
       scanner_node->out[Run_State::PNG]->stream_ptr
         = static_cast<ostream*>(out_file_png);
       scanner_node->out[Run_State::PNG]->type = Io_Struct::FILE_TYPE;
-
 
       out_file_png = 0;
    }
@@ -784,15 +763,12 @@ needed, because this function predefines variables for these |Colors|.
       scanner_node->out[Run_State::LIBPLOT]->stream_ptr
         = static_cast<ostream*>(out_file_libplot);
 
-
       scanner_node->out[Run_State::LIBPLOT]->type = Io_Struct::FILE_TYPE;
 
       out_file_libplot = 0;
     }
   else
     scanner_node->out[Run_State::LIBPLOT] = 0;
-
-
 
 @q ** (2) Assign initial values to data members.  @>          
 @*1 Assign initial values to data members.
@@ -894,8 +870,6 @@ and
    scanner_node->sphere_set_option_struct = 0;
    scanner_node->paraboloid_set_option_struct = 0;
 
-
-
 @q *** (3)  Pointers for |with_clause_draw|. @>
 @*2 Pointers for |with_clause_draw|.
 \initials{LDF 2004.06.28.} 
@@ -906,7 +880,6 @@ Now setting |scanner_node->color_vector_ptr|,
 |scanner_node->draw_color_vector_ptr|, and 
 |scanner_node->fill_color_vector_ptr| to 0.
 They are used in the parser rules for drawing |Solids|.
-
 
 \initials{LDF 2005.03.18.}
 Now setting |scanner_node->pen_vector_ptr| and 
@@ -966,8 +939,6 @@ Now setting |scanner_node->surface_hiding_value_ptr| to 0.
 
    scanner_node->surface_hiding_value_ptr = 0;
 
-
-
 @q *** (3) Pointers for |predicate_clause|. @>
 @*2 Pointers for |predicate_clause|.
 \initials{LDF 2005.10.26.}
@@ -981,14 +952,10 @@ Added this section with the assignment to |scanner_node->tolerance|.
 
 @<Define |Scanner_Type::create|@>=
 
-
    scanner_node->tolerance = 0;
-
 
 @q *** (3) Initialize |thread_vector_mutex|.@>      
 @*2 Initialize |thread_vector_mutex|.
-
-
 
 \LOG
 \initials{LDF 2004.07.10.}
@@ -996,7 +963,6 @@ Added this section.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1081,7 +1047,6 @@ Now setting |scanner_node->id_map_node->scanner_node = scanner_node|.
 @*3 General-Purpose Words and ``Syntactic Sugar''.
 \initials{LDF 2004.09.24.}
 
-
 \LOG
 \initials{LDF 2004.09.24.}
 Added this section with calls to |scanner_node->add_entry| for 
@@ -1139,7 +1104,6 @@ for |REVERSE|, |SUBPATH|, and |OF|.
    scanner_node->add_entry("reverse", REVERSE, spark);
    scanner_node->add_entry("subpath", SUBPATH, spark);
    scanner_node->add_entry("of", OF, spark);
-
 
 @q **** (4) Types defined in 3DLDF.  @>          
 @*3 Types defined in 3DLDF.
@@ -1241,7 +1205,6 @@ Added calls to |scanner_node->add_entry| for
 \initials{LDF 2005.12.05.}
 Added calls to |scanner_node->add_entry| for
 |ulong_long| and |ulong_long_vector|.
-
 
 \initials{LDF 2007.11.28.}
 Added calls to |scanner_node->add_entry| for |matrix| (|MATRIX_DECLARATOR|),
@@ -1368,7 +1331,6 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
      scanner_node->add_entry("picture_vector", 
                              PICTURE_VECTOR_DECLARATOR, spark);
 
-
      scanner_node->add_entry("ellipse_slice", ELLIPSE_SLICE_DECLARATOR, spark);
      scanner_node->add_entry("ellipse_slice_vector", 
                              ELLIPSE_SLICE_VECTOR_DECLARATOR, spark);
@@ -1389,7 +1351,6 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
 
      scanner_node->add_entry("plane_vector", 
                              PLANE_VECTOR_DECLARATOR, spark);
-
 
 @q **** (4)@> 
 @ 
@@ -1534,7 +1495,6 @@ Added this section with calls to |scanner_node->add_entry| for
    scanner_node->add_synonym("is_bigendian", "is_big_endian");
    scanner_node->add_synonym("is_littleendian", "is_little_endian");
 
-
 @q **** (4) Transformers and Transform Commands.  @>          
 @*3 Transformers and Transform Commands.
 
@@ -1561,7 +1521,6 @@ Added call to |scanner_node->add_entry| for |align|.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
-
 
   scanner_node->add_entry("align", ALIGN, spark);
 
@@ -1590,8 +1549,6 @@ Added call to |scanner_node->add_entry| for |align|.
   scanner_node->add_entry("xscale", XSCALE, spark);
   scanner_node->add_entry("yscale", YSCALE, spark);
   scanner_node->add_entry("zscale", ZSCALE, spark);
-
-
 
 @q **** (4) Type Predicates.@>          
 @*3 Type Predicates.
@@ -1638,7 +1595,6 @@ for the following type predicates:\hfil\break
 \initials{LDF 2005.01.26.}
 Added calls to |scanner_node->add_entry| for
 |is_nurb| and |is_nurb_vector|.
-
 
 \initials{LDF 2005.02.04.}
 Added calls to |scanner_node->add_entry| for
@@ -1688,7 +1644,6 @@ Added calls to |scanner_node->add_entry| for |is_matrix| and
 \initials{LDF 2007.11.28.}
 Added calls to |scanner_node->add_entry| for |is_complex| and 
 |is_complex_vector|.
-
 
 \initials{LDF 2009.11.09.}
 Added calls to |scanner_node->add_entry| for 
@@ -1799,7 +1754,6 @@ and |is_sphere_development_vector|.
      scanner_node->add_entry("is_picture_vector", 
                              IS_PICTURE_VECTOR, spark);
 
-
      scanner_node->add_entry("is_ellipse_slice", IS_ELLIPSE_SLICE, spark);
 
      scanner_node->add_entry("is_circle_slice", IS_CIRCLE_SLICE, spark);
@@ -1817,7 +1771,6 @@ and |is_sphere_development_vector|.
                              IS_POLYHEDRON_SLICE_VECTOR, 
                              spark);
 
-
      scanner_node->add_entry("is_origami_figure_vector", 
                              IS_ORIGAMI_FIGURE_VECTOR, spark);
 
@@ -1826,7 +1779,6 @@ and |is_sphere_development_vector|.
 
      scanner_node->add_entry("is_plane_vector", 
                              IS_PLANE_VECTOR, spark);
-
 
 @q **** (4) Predicates for the characteristics of |Shapes|.@>          
 @*3 Predicates for the characteristics of {\bf Shapes}.
@@ -1915,7 +1867,6 @@ Added call to |scanner_node->add_entry| for |are_distinct|.
 
 @<Define |Scanner_Type::create|@>=
 
-
    scanner_node->add_entry("is_linear", IS_LINEAR, spark);
    scanner_node->add_entry("is_planar", IS_PLANAR, spark);
 
@@ -1963,7 +1914,6 @@ Added call to |scanner_node->add_entry| for |are_distinct|.
 
    scanner_node->add_entry("is_on_sphere", IS_ON_SPHERE, spark);
    scanner_node->add_entry("with_tolerance", WITH_TOLERANCE, spark);
-
 
 @q **** (4) Predicates for geometric figures.@>          
 @*3 Predicates for geometric figures.
@@ -2069,12 +2019,8 @@ for |is_on_plane|.
   scanner_node->add_entry("are_skew", ARE_SKEW, spark);
   scanner_node->add_entry("are_not_skew", ARE_NOT_SKEW, spark);
 
-
-
-
 @q **** (4) Operators.  @>          
 @*3 Operators.
-
 
 \LOG
 \initials{LDF 2004.04.28.}  
@@ -2085,7 +2031,6 @@ Added call to |add_entry| for |MAGNITUDE|.
 
 \initials{LDF 2004.05.05.} 
 Added call to |add_entry| for |ANGLE|. 
-
 
 \initials{LDF 2004.05.17.}  
 Added calls to |add_entry| for 
@@ -2124,7 +2069,6 @@ Added calls to |add_entry| for |normal| and
 Added calls to |add_entry| for |xxpart|, |xypart|, |xzpart|,
 |yxpart|, |yypart|, |yzpart|, |zxpart|, |zypart|, |zzpart|, and
 |wxpart|, |wypart|, |wzpart|.
-
 
 \initials{LDF 2004.10.07.}
 @:BUG FIX@> BUG FIX: 
@@ -2221,12 +2165,9 @@ Added calls to |add_entry| for |get_perpendicular| and |get_perpendicular_base|.
      scanner_node->add_entry("zypart", ZYPART, spark); 
      scanner_node->add_entry("zzpart", ZZPART, spark); 
 
-
      scanner_node->add_entry("wxpart", WXPART, spark); 
      scanner_node->add_entry("wypart", WYPART, spark); 
      scanner_node->add_entry("wzpart", WZPART, spark); 
-
-
 
      scanner_node->add_entry("++", PYTHAGOREAN_PLUS, spark);
      scanner_node->add_entry("+-+", PYTHAGOREAN_MINUS, spark);
@@ -2246,7 +2187,6 @@ Added calls to |add_entry| for |get_perpendicular| and |get_perpendicular_base|.
 
      scanner_node->add_entry("not", NOT, spark);
      scanner_node->add_synonym("!", "not");
-
 
      scanner_node->add_entry("true", TRUE, spark);
      scanner_node->add_entry("false", FALSE, spark);
@@ -2271,7 +2211,6 @@ Added calls to |add_entry| for |get_perpendicular| and |get_perpendicular_base|.
      scanner_node->add_entry(":=", ASSIGN, spark);
      scanner_node->add_entry("=", EQUATE, spark);
 
-
      scanner_node->add_entry(":", COLON, spark);
 
      scanner_node->add_entry("+=", PLUS_ASSIGN, spark);
@@ -2294,7 +2233,6 @@ Added calls to |add_entry| for |get_perpendicular| and |get_perpendicular_base|.
      scanner_node->add_entry("blue_violet_part", BLUE_VIOLET_PART, spark);
      scanner_node->add_entry("red_orange_part", RED_ORANGE_PART, spark);
 
-
 @q **** (4) Sparks for |numerics|.@>          
 @*3 Sparks for {\bf numerics}.
 \initials{LDF 2005.11.03.}
@@ -2310,7 +2248,6 @@ Added this section and moved the call to
 \initials{LDF 2005.11.03.}
 Added the call to |add_entry| for |with_precision|.
 \ENDLOG
-
 
 @<Define |Scanner_Type::create|@>=
 
@@ -2461,7 +2398,6 @@ the former.
 \initials{LDF 2004.06.08.}  Added a call to |add_entry| for 
 |with_projection| and a call to |add_synonym| for |withprojection|.
 
-
 \initials{LDF 2004.06.26.}  Added a call to |add_entry| for 
 |with_factor| and a call to |add_synonym| for |withfactor|.
 
@@ -2558,7 +2494,6 @@ in input because of the numerals.
   scanner_node->add_entry("clip_to", CLIP_TO, spark);
   scanner_node->add_synonym("clipto", "clip_to");
 
-
   scanner_node->add_entry("undrawdot", UNDRAWDOT, spark);
   scanner_node->add_entry("undraw", UNDRAW, spark);
   scanner_node->add_entry("unfill", UNFILL, spark);
@@ -2575,7 +2510,6 @@ in input because of the numerals.
   scanner_node->add_entry("penrazor", PENRAZOR, spark);
   scanner_node->add_entry("penspeck", PENSPECK, spark);
   scanner_node->add_entry("pensquare", PENSQUARE, spark);
-
 
   scanner_node->add_entry("with_pen", WITH_PEN, spark);
   scanner_node->add_synonym("withpen", "with_pen");
@@ -2606,7 +2540,6 @@ in input because of the numerals.
   scanner_node->add_entry("with_fill_color_vector", WITH_FILL_COLOR_VECTOR, spark);
   scanner_node->add_synonym("withfillcolorvector", "with_fill_color_vector");
 
-
   scanner_node->add_entry("with_weight", WITH_WEIGHT, spark);
   scanner_node->add_synonym("withweight", "with_weight");
 
@@ -2618,7 +2551,6 @@ in input because of the numerals.
 
   scanner_node->add_entry("with_factor", WITH_FACTOR, spark);
   scanner_node->add_synonym("withfactor", "with_factor");
-
 
   scanner_node->add_entry("no_sort",     NO_SORT,     spark);
   scanner_node->add_entry("max_z_sort",  MAX_Z_SORT,  spark);
@@ -2657,7 +2589,6 @@ in input because of the numerals.
 
   scanner_node->add_entry("drop_all", DROP_ALL, spark);
 
-
 @q **** (4) Sparks for projections.@>
 @*3 Sparks for projections.
 \initials{LDF 2005.04.15.}
@@ -2681,7 +2612,6 @@ Added the call to |scanner_node->add_entry| for
   scanner_node->add_entry("project", PROJECT, spark);
   scanner_node->add_entry("projected", PROJECTED, spark);
   scanner_node->add_entry("with_z", WITH_Z, spark);
-
 
 @q **** (4) Sparks for setting.  @>
 @*3 Sparks for setting.
@@ -2813,7 +2743,6 @@ calls to |scanner_node->add_synonym| for
    scanner_node->add_entry("with_path", WITH_PATH, spark);
    scanner_node->add_entry("with_envelope", WITH_ENVELOPE, spark);
 
-
 @q **** (4) Types for labels.  @>
 @*3 Types for labels.
 
@@ -2877,7 +2806,6 @@ Added a call to |scanner_node->add_entry| for |let|.
   scanner_node->add_entry("dotlabel_if", DOTLABEL_IF, spark);
   scanner_node->add_entry("dotlabel_unless", DOTLABEL_UNLESS, spark);
 
-
   scanner_node->add_entry("labels", LABELS, spark);
   scanner_node->add_entry("labels_if", LABELS_IF, spark);
   scanner_node->add_entry("labels_unless", LABELS_UNLESS, spark);
@@ -2909,15 +2837,11 @@ Added call to |add_entry| for |MEDIATE|.
 
 @<Define |Scanner_Type::create|@>=
 
-
   scanner_node->add_entry("message", MESSAGE, spark);
   scanner_node->add_entry("errmessage", ERRMESSAGE, spark);
   scanner_node->add_entry("pause", PAUSE, spark);
 
   scanner_node->add_entry("mediate", MEDIATE, spark);
-
-
-
 
 @q **** (4) Types for |Focuses|.  @>
 @*3 Types for |Focuses|.
@@ -3055,7 +2979,6 @@ Added this section with a call to |add_entry| for |INPUT|.
 
 @<Define |Scanner_Type::create|@>=
 
-
   scanner_node->add_entry("input", INPUT, spark);
 
 @q **** (4) Types for figures.  @>
@@ -3073,7 +2996,6 @@ Added calls to |scanner_node->add_entry|for |beginchar| and
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
-
 
   scanner_node->add_entry("beginfig", BEGINFIG, spark);
   scanner_node->add_entry("endfig", ENDFIG, spark);
@@ -3104,8 +3026,6 @@ Added the call to |scanner_node->add_entry| for |FIXED|.
   scanner_node->add_entry("show", SHOW, spark);
   scanner_node->add_entry("fixed", FIXED, spark);
 
-
-
 @q **** (4) Types for intersections.  @>          
 @*3 Types for intersections.
 
@@ -3124,14 +3044,12 @@ Added call to |scanner_node->add_entry| for |intersection|.
 
 @<Define |Scanner_Type::create|@>=
 
-
   scanner_node->add_entry("intersection", INTERSECTION, spark);
   scanner_node->add_entry("intersection_point", INTERSECTION_POINT, spark);
   scanner_node->add_entry("intersection_points", INTERSECTION_POINTS, spark);
 
   scanner_node->add_synonym("intersectionpoint", "intersection_point");
   scanner_node->add_synonym("intersectionpoints", "intersection_points");
-
 
 @q **** (4) Types for conditionals.  @>
 @*3 Types for conditionals.
@@ -3148,8 +3066,6 @@ Added this section with calls to |scanner_node->add_entry| for
    scanner_node->add_entry("else", ELSE, spark);
    scanner_node->add_entry("elseif", ELSEIF, spark);
    scanner_node->add_entry("fi", FI, spark);
-
-
 
 @q **** (4) Types for loops.  @>
 @*3 Types for loops.
@@ -3195,7 +3111,6 @@ Added call to |scanner_node->add_entry| for
 
 @<Define |Scanner_Type::create|@>=
 
-
   scanner_node->add_entry("for", FOR, spark);
   scanner_node->add_entry("for_suffixes", FOR_SUFFIXES, spark);
   scanner_node->add_synonym("forsuffixes", "for_suffixes");
@@ -3213,13 +3128,11 @@ Added call to |scanner_node->add_entry| for
   scanner_node->add_entry("end_for", END_FOR, spark);
   scanner_node->add_synonym("endfor", "end_for");
 
-
   scanner_node->add_entry("upto", UPTO, spark);
   scanner_node->add_synonym("up_to", "upto");
 
   scanner_node->add_entry("downto", DOWNTO, spark);
   scanner_node->add_synonym("down_to", "downto");
-
 
 @q **** (4) Types for transformations.@>
 @*3 Types for transformations.
@@ -3255,7 +3168,6 @@ Added this section with calls to |scanner_node->add_entry| for
 
 @<Define |Scanner_Type::create|@>=
 
-
   scanner_node->add_entry("begin_group", BEGIN_GROUP, spark);
   scanner_node->add_entry("end_group", END_GROUP, spark);
   scanner_node->add_entry("save", SAVE, spark);
@@ -3263,7 +3175,6 @@ Added this section with calls to |scanner_node->add_entry| for
 
   scanner_node->add_synonym("begingroup", "begin_group");
   scanner_node->add_synonym("endgroup", "end_group");
-
 
 @q **** (4) Types for extracting sub-objects.@>
 @*3 Types for extracting sub-objects.
@@ -3451,7 +3362,6 @@ Added calls to |scanner_node->add_entry| for |set_transform|,
    scanner_node->add_entry("with_fraction", WITH_FRACTION, spark);
    scanner_node->add_entry("with_closed", WITH_CLOSED, spark);
 
-
 @q **** (4) Types for generating objects.@>
 @*3 Types for generating objects.
 \initials{LDF 2007.07.20.}
@@ -3553,7 +3463,6 @@ Removed the call to |scanner_node->add_entry| for |defun|.
 
 @<Define |Scanner_Type::create|@>=
 
-
    scanner_node->add_entry("macro", MACRO_DECLARATOR, spark);
 
    scanner_node->add_entry("primarydef", PRIMARYDEF, spark);
@@ -3564,7 +3473,6 @@ Removed the call to |scanner_node->add_entry| for |defun|.
    scanner_node->add_entry("primarydef_vector", PRIMARYDEF_VECTOR_DECLARATOR, spark);
    scanner_node->add_entry("secondarydef_vector", SECONDARYDEF_VECTOR_DECLARATOR, spark);
    scanner_node->add_entry("tertiarydef_vector", TERTIARYDEF_VECTOR_DECLARATOR, spark);
-
 
    scanner_node->add_entry("def", DEF, spark);
    scanner_node->add_entry("enddef", ENDDEF, spark);
@@ -3635,7 +3543,6 @@ Added calls to |scanner_node->add_entry| for |culled|,
 
 @<Define |Scanner_Type::create|@>=
 
-
     scanner_node->add_entry("cull", CULL, spark);
     scanner_node->add_entry("culled", CULLED, spark);
 
@@ -3666,7 +3573,6 @@ Added this section with the call to |scanner_node->add_entry| for
 
    scanner_node->add_entry("get_plane", GET_PLANE, spark);
 
-
 @q **** (4) Tokens for |triangles|.@>
 @*3 Tokens for {\bf triangles}.
 \initials{LDF 2005.01.20.}
@@ -3687,7 +3593,6 @@ Removed the calls to |scanner_node->add_entry| for
 
 \initials{LDF 2005.01.23.}
 Added call to |scanner_node->add_entry| for |with_points|.
-
 
 \initials{LDF 2005.10.25.}
 Removed the calls to |scanner_node->add_entry| for 
@@ -3894,7 +3799,6 @@ Added calls to |scanner_node->add_entry| for |map| and |develop|.
 
    scanner_node->add_entry("map", MAP, spark);
 
-
 @q **** (4) Entries for |Polyhedra|.@>   
 
 @*3 Entries for {\bf Polyhedra}.
@@ -4040,7 +3944,6 @@ Changed |with_order| to |with_power|.
 
    scanner_node->add_synonym("with_time", "with_time_parameter");
 
-
 @q **** (4) Entries for |Polygons|.@>   
 
 @*3 Entries for {\bf Polygons}.
@@ -4094,7 +3997,6 @@ Changed the |type| argument in all of the calls to
     const unsigned short internal = Id_Map_Entry_Type::INTERNAL;
     bool not_array = false;
     bool not_const = false;
-
 
     void* v;
     real* r;
@@ -4359,7 +4261,6 @@ Changed the |type| argument in all of the calls to
                             not_array,
                             Id_Map_Entry_Type::KNOWN, v);
 
-
     r = new real;
     *r = 0;
     v = static_cast<void*>(r);
@@ -4372,10 +4273,7 @@ Changed the |type| argument in all of the calls to
     scanner_node->add_entry("curr_z", NUMERIC, internal, not_const, not_array,
                             Id_Map_Entry_Type::KNOWN, v);
 
-
-
   } /* End of group for |INTERNALS|.  */
-
 
 @q **** (4) True internal quantities.@>          
 @*3 Internal quantities.
@@ -4412,7 +4310,6 @@ a call to |add_synonym| for |defaultpen|.
 
 @<Define |Scanner_Type::create|@>=
 
-
 @q ******* (7) |current_pen|.@> 
 
     entry = scanner_node->add_entry("current_pen", 
@@ -4424,15 +4321,12 @@ a call to |add_synonym| for |defaultpen|.
                                     0); 
 
     scanner_node->add_synonym("currentpen", "current_pen");
-    
 
-    v = &(entry->object);
+v = &(entry->object);
 
     scanner_node->current_pen = static_cast<Pen**>(v);
 
 @q ******* (7) |default_pen|.@> 
-
-
 
     entry = scanner_node->add_entry("default_pen", 
                                     PEN,
@@ -4443,12 +4337,10 @@ a call to |add_synonym| for |defaultpen|.
                                     0); 
 
     scanner_node->add_synonym("defaultpen", "default_pen");
-    
 
-    v = &(entry->object);
+v = &(entry->object);
 
     scanner_node->default_pen = static_cast<Pen**>(v);
-
 
 @q ****** (6) |Colors|.@> 
 
@@ -4464,7 +4356,6 @@ a call to |add_synonym| for |currentcolor|.
 
 @<Define |Scanner_Type::create|@>=
 
-  
 @q ******* (7) |current_color|.@> 
 
     entry = scanner_node->add_entry("current_color", 
@@ -4481,7 +4372,6 @@ a call to |add_synonym| for |currentcolor|.
 
     scanner_node->current_color = static_cast<Color**>(v);
 
-
 @q ******* (7) |current_draw_color|.@> 
 
     entry = scanner_node->add_entry("current_draw_color", 
@@ -4495,7 +4385,6 @@ a call to |add_synonym| for |currentcolor|.
     v = &(entry->object);
 
     scanner_node->current_draw_color = static_cast<Color**>(v);
-
 
 @q ******* (7) |current_fill_color|.@> 
 
@@ -4523,7 +4412,6 @@ Added this section.
 
 @<Define |Scanner_Type::create|@>=
 
-
 @q ******* (7) |current_dash_pattern|.@> 
 
     entry = scanner_node->add_entry("current_dash_pattern", 
@@ -4534,7 +4422,6 @@ Added this section.
                                     Id_Map_Entry_Type::INDEPENDENT, 
                                     0); 
 
-
     scanner_node->add_synonym("current_dashpattern", "current_dash_pattern");
 
     v = &(entry->object);
@@ -4544,8 +4431,6 @@ Added this section.
 @q ****** (6) @> 
 
   } /* End of group for |INTERNALS|.  */
-
-
 
 @q **** (4) Predefined variables and constants.  @>          
 @*3 Predefined variables and constants.
@@ -4613,7 +4498,6 @@ Commented-out this section.
     scanner_node->add_entry("is_quadrilateral_type", PREDICATE, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-
   }  /* End of group (|Predicates|)  */
 #endif 
 
@@ -4636,9 +4520,7 @@ Added call to |add_entry| for |register_width|.
 
 @<Define |Scanner_Type::create|@>=
 
-
     {
-
 
        real* r;
    
@@ -4649,7 +4531,6 @@ Added call to |add_entry| for |register_width|.
 @<Define |Scanner_Type::create|@>=
 
        r = new real;
-
 
        *r = INVALID_REAL;        
 
@@ -4662,7 +4543,6 @@ Added call to |add_entry| for |register_width|.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
-
 
 @q ****** (6) |register_width|.@> 
 
@@ -4710,7 +4590,6 @@ Added this section.
                                Id_Map_Entry_Type::KNOWN,
                                v);
 
-
 @q ****** (6) |pc|.@> 
 @ |pc|.
 \initials{LDF 2005.01.06.}
@@ -4735,8 +4614,6 @@ Added this section.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
-
-
 
 @q ****** (6) |in|.@> 
 @ |in|.
@@ -4763,7 +4640,6 @@ Added this section.
                                Id_Map_Entry_Type::KNOWN,
                                v);
 
-
 @q ****** (6) |bp|.@> 
 @ |bp|.
 \initials{LDF 2005.01.06.}
@@ -4788,8 +4664,6 @@ Added this section.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
-
-
 
 @q ****** (6) |cm|.@> 
 @ |cm|.
@@ -4819,8 +4693,6 @@ Added this section.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
-
-
 
 @q ****** (6) |mm|.@> 
 @ |mm|.
@@ -4875,7 +4747,6 @@ Added this section.
                                Id_Map_Entry_Type::KNOWN,
                                v);
 
-
 @q ****** (6) |cc|.@> 
 @ |cc|.
 \initials{LDF 2005.01.06.}
@@ -4906,7 +4777,6 @@ Added this section.
 @<Define |Scanner_Type::create|@>=
 
     } /* End of group.  */
-   
 
 @q ***** (5) |Strings|.  @>          
 @*4 |Strings|.
@@ -4928,7 +4798,6 @@ Added call to |add_entry| for |ditto|.
    
        s = new string;
 
-
        *s = "\n";
 
        v = static_cast<void*>(s); 
@@ -4947,7 +4816,6 @@ Added call to |add_entry| for |ditto|.
 
       *s = "\"";
 
-
        v = static_cast<void*>(s); 
 
        scanner_node->add_entry("ditto",
@@ -4957,7 +4825,6 @@ Added call to |add_entry| for |ditto|.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
-
 
       s = new string;
 
@@ -4973,9 +4840,7 @@ Added call to |add_entry| for |ditto|.
                               Id_Map_Entry_Type::KNOWN,
                               v);
 
-
     } /* End of group.  */
-
 
 @q ***** (5) |Colors|.  @>          
 @*4 |Colors|.
@@ -5048,7 +4913,6 @@ Added call to |add_entry| for |ditto|.
                             not_array, Id_Map_Entry_Type::KNOWN, v);
   }
 
-
 @q ****** (6) Other colors.@>          
 @ Other colors.
 
@@ -5083,16 +4947,13 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("black", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
- 
-
-   c = create_new<Color>(0);  
+c = create_new<Color>(0);  
    *c = Colors::white;
 
    v = static_cast<void*>(c);
     
    scanner_node->add_entry("white", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-
 
    c = create_new<Color>(0);  
    *c = Colors::red;
@@ -5102,16 +4963,13 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("red", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
- 
-
-  c = create_new<Color>(0);  
+c = create_new<Color>(0);  
    *c = Colors::green;
 
    v = static_cast<void*>(c);
     
    scanner_node->add_entry("green", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-
 
    c = create_new<Color>(0);  
    *c = Colors::blue;
@@ -5128,7 +4986,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
     
    scanner_node->add_entry("pink", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-
 
    c = create_new<Color>(0);  
    *c = Colors::yellow;
@@ -5178,7 +5035,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("purple", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-
    c = create_new<Color>(0);  
    *c = Colors::yellow_green;
 
@@ -5187,7 +5043,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("yellow_green", COLOR, 
                            regular, is_constant,
                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
 
    c = create_new<Color>(0);  
    *c = Colors::green_yellow;
@@ -5198,8 +5053,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
                            regular, is_constant,
                            not_array, Id_Map_Entry_Type::KNOWN, v);
 
-
-
    c = create_new<Color>(0);  
    *c = Colors::dark_green;
 
@@ -5208,8 +5061,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("dark_green", COLOR, 
                            regular, is_constant,
                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-
 
    c = create_new<Color>(0);  
    *c = Colors::blue_violet;
@@ -5220,7 +5071,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
                            regular, is_constant,
                            not_array, Id_Map_Entry_Type::KNOWN, v);
 
-
    c = create_new<Color>(0);  
    *c = Colors::gray;
 
@@ -5229,16 +5079,13 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("gray", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-  
-   c = create_new<Color>(0);  
+c = create_new<Color>(0);  
    *c = Colors::light_gray;
 
    v = static_cast<void*>(c);
     
    scanner_node->add_entry("light_gray", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-
-
 
    c = create_new<Color>(0);  
    *c = Colors::dark_gray;
@@ -5247,8 +5094,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
     
    scanner_node->add_entry("dark_gray", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-
-
 
    scanner_node->add_synonym("grey", "gray");
    scanner_node->add_synonym("dark_grey", "dark_gray");
@@ -5264,7 +5109,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
 
  }  /* End of group.  */
 
-
 @q ***** (5) |Color_Vectors|.  @>          
 @*4 |Color_Vectors|.
 
@@ -5275,7 +5119,6 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
 \initials{LDF 2004.08.30.}
 Added this section.
 \ENDLOG 
-
 
 \TODO
 @q { @>
@@ -5298,7 +5141,6 @@ Add error handling.
                                  true, /* is array  */
                                  Id_Map_Entry_Type::KNOWN,
                                  0);
-
 
      Color* c = new Color;
      *c = Colors::black;
@@ -5335,12 +5177,10 @@ Add error handling.
                               array_entry /* |subordinate_array|  */
                               );
 
-
       status = array_entry->set_superordinate_vector(vector_entry);
       status = array_member_entry->set_superordinate_vector(vector_entry);
 
    } /* End group:  Create |default_color_vector|  */
-
 
 @q ****** (6) background_color_vector (color_vector).  @>          
 @ |background_color_vector|.
@@ -5371,7 +5211,6 @@ Add error handling.
                                  true, /* is array  */
                                  Id_Map_Entry_Type::KNOWN,
                                  0);
-
 
      Color* c = new Color;
      *c = Colors::white;
@@ -5408,14 +5247,11 @@ Add error handling.
                               array_entry /* |subordinate_array|  */
                               );
 
-
       status = array_entry->set_superordinate_vector(vector_entry);
 
       status = array_member_entry->set_superordinate_vector(vector_entry);
 
    } /* End group:  Create |background_color_vector|  */
-
-
 
 @q ***** (5) |Pens|.  @>          
 @*4 |Pens|.
@@ -5432,22 +5268,17 @@ Now setting the type of |*p| to |Pen::NULL_PEN|.
 @<Define |Scanner_Type::create|@>=
   {
 
-
-    
-    Pen* p = create_new<Pen>(0);  
+Pen* p = create_new<Pen>(0);  
     p->set_type(Pen::NULL_PEN);
 
     v = static_cast<void*>(p);
 
-    
-    
-    scanner_node->add_entry("null_pen", PEN, regular, is_constant,
+scanner_node->add_entry("null_pen", PEN, regular, is_constant,
                               not_array, Id_Map_Entry_Type::KNOWN, v);
 
     scanner_node->add_synonym("nullpen", "null_pen");
 
   }
-
 
 @q ***** (5) |Pictures|.  @>          
 @*4 |Pictures|.
@@ -5516,12 +5347,10 @@ Now calling |t->reset|.
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-
   }
 
 @q ***** (5) |Dash_Patterns|.  @>
 @*3 |Dash_Patterns|.
-
 
 \LOG
 \initials{LDF 2004.06.07.}  Added this section.
@@ -5529,7 +5358,6 @@ Now calling |t->reset|.
 
 @q ****** (6) |evenly|.  @>
 |evenly|.
-
 
 \LOG
 \initials{LDF 2004.06.07.}  Added this section.
@@ -5642,7 +5470,6 @@ for |nullpath|.
 
   }
 
-
 @q ***** (5) |Focuses|.  @>
 @*4 |Focuses|.
 
@@ -5653,7 +5480,6 @@ for |nullpath|.
 @q ****** (6) |default_focus|.  @>
 
 |default_focus|.
-
 
 \LOG
 \initials{LDF 2004.06.08.}  
@@ -5675,13 +5501,10 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-       cerr_mutex.lock(); 
        a.show("a:");
-       cerr_mutex.unlock(); 
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
 
     Focus* f = create_new<Focus>(a);
 
@@ -5693,7 +5516,6 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
 
   }
 
-
 @q ***** (5) |Ellipses|.  @>
 @*4 |Ellipses|.
 
@@ -5703,7 +5525,6 @@ Changed the y-coordinates of |position| and |direction| from 10 to 0.
 
 @q ****** (6) |unit_ellipse|.  @>
 |unit_ellipse|.
-
 
 \LOG
 \initials{LDF 2004.07.09.}  
@@ -5726,10 +5547,8 @@ Changed |axis_h| and |axis_v| arguments to 2 from 1.
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
     scanner_node->add_synonym("unitellipse", "unit_ellipse");
-  
 
-
-  }
+}
 
 @q ***** (5) |Circles|.  @>
 @*4 |Circles|.
@@ -5741,7 +5560,6 @@ Changed |axis_h| and |axis_v| arguments to 2 from 1.
 @q ****** (6) |unit_circle|.  @>
 
 |unit_circle|.
-
 
 \LOG
 \initials{LDF 2004.06.17.}  Added this section.
@@ -5760,11 +5578,8 @@ Changed |axis_h| and |axis_v| arguments to 2 from 1.
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
     scanner_node->add_synonym("unitcircle", "unit_circle");
-  
 
-
-  }
-
+}
 
 @q ***** (5) |Rectangles|.  @>
 @*4 |Rectangles|.
@@ -5807,7 +5622,6 @@ Added |unit_rectangle| and |unitrectangle|.  They are synonyms of
 
   }
 
-
 @q ***** (5) |Reg_Polygons|.  @>
 @*4 |Reg_Polygons|.
 
@@ -5849,8 +5663,6 @@ Find out whether ``ondecagon'' is correct!
 @ |unit_pentagon|.
 
 @<Define |Scanner_Type::create|@>=          
-
-
 
     r = create_new<Reg_Polygon>(0);
 
@@ -5921,8 +5733,6 @@ Find out whether ``ondecagon'' is correct!
     scanner_node->add_entry("unit_nonagon", REG_POLYGON, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-    
-
 
 @q ****** (6) |unit_decagon|.  @>
 @ |unit_decagon|.
@@ -5938,8 +5748,6 @@ Find out whether ``ondecagon'' is correct!
     scanner_node->add_entry("unit_decagon", REG_POLYGON, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-    
-
 
 @q ****** (6) |unit_ondecagon|.  @>
 @ |unit_ondecagon|.
@@ -5956,7 +5764,6 @@ Find out whether ``ondecagon'' is correct!
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-
 @q ****** (6) |unit_dodecagon|.  @>
 @ |unit_dodecagon|.
 
@@ -5971,11 +5778,8 @@ Find out whether ``ondecagon'' is correct!
     scanner_node->add_entry("unit_dodecagon", REG_POLYGON, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
-    
 
-    
-
-  }
+}
 
 @q ***** (5) |Cuboids| and |Polyhedra|.  @>
 @*4 |Cuboids| and |Polyhedra|.
@@ -6010,7 +5814,6 @@ Added |unit_cuboid|.
 
    }
 
-
 @q ****** (6) |unit_tetrahedron|.  @>
 @ |unit_tetrahedron|.
 
@@ -6040,8 +5843,6 @@ Added this section.
 
 @<Define |Scanner_Type::create|@>=          
 
-
-
    {
 
      Octahedron a(p, 2);
@@ -6054,8 +5855,6 @@ Added this section.
                              not_array, Id_Map_Entry_Type::KNOWN, v);
        
    }
-
-
 
 @q ****** (6) |unit_dodecahedron|.  @>
 @ |unit_dodecaahedron|.
@@ -6075,7 +5874,6 @@ Added this section.
                                not_array, Id_Map_Entry_Type::KNOWN, v);
 
    }
-
 
 @q ****** (6) |unit_icosahedron|.  @>
 @ |unit_icosacahedron|.
@@ -6099,7 +5897,6 @@ Added this section.
 
    }
 
-
 @q ****** (6) |unit_trunc_octahedron|.  @>
 @ |unit_icosacahedron|.
 
@@ -6121,9 +5918,6 @@ Added this section.
                                v);
 
    }
-
-
-
 
 @q ****** (6) |unit_great_rhombicosidodecahedron|.@>
 @ |unit_icosacahedron|.
@@ -6169,9 +5963,8 @@ Added this section.
 
 @<Define |Scanner_Type::create|@>=          
 
- } 
+ }
 
-  
 @
 @<Define |Scanner_Type::create|@>=
 
@@ -6192,9 +5985,8 @@ Added this section.
        }
 #endif /* |DEBUG_COMPILE|  */
 #endif /* 0  */
- 
 
-   } /* |if (top_level)|  */
+} /* |if (top_level)|  */
  
  else 
    {
@@ -6203,9 +5995,8 @@ Added this section.
        cerr << "top_level == false.  Not initializing scanner_node->id_map_node." 
             << endl;
 #endif
- 
-     
-   } /* |else| (|!top_level|)  */
+
+} /* |else| (|!top_level|)  */
    
 @q **  End of |Scanner_Type::create|.  @>
 @ End of |Scanner_Type::create|. 
@@ -6243,7 +6034,6 @@ Added this section.
         << "in_filename == " << in_filename << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q *** (3) Check whether |in_filename| is already on |in_filename_vector|.@>
 @ Check whether |in_filename| is already on |in_filename_vector|.
 \initials{LDF 2004.07.02.}
@@ -6277,9 +6067,8 @@ the |input| command yet).
                    << "Returning 0. Will try to continue.\n\n";
 
               delete in_file;
-       
 
-              return 0;
+return 0;
             }
         } /* |for|  */    
 
@@ -6297,7 +6086,6 @@ the |input| command yet).
       }     
 
 }  /* End of group.  */@;
-
 
 @q *** Check |out_filename|, return 0 upon failure. @>
 @ Check {\bf out\_filename}, return 0 upon failure.  
@@ -6317,7 +6105,6 @@ This section is used in |Scanner_Type::create|.
         << "in_filename == " << in_filename << endl
         << "out_filename == " << out_filename << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q *** (3) Check whether |out_filename| is already on |out_filename_vector|.@>
 @ Check whether |out_filename| is already on |out_filename_vector|.
@@ -6352,9 +6139,8 @@ the |input| command yet).
                    << "Returning 0. Will try to continue.\n\n";
 
               delete in_file;
-       
 
-              return 0;
+return 0;
             }
         } /* |for|  */    
 
@@ -6370,7 +6156,6 @@ the |input| command yet).
 
         out_filename_vector.push_back(out_filename);
       }     
-
 
 @q *** (3) Try to open |out_file|.@>
 @ Try to open |out_file|.
@@ -6400,7 +6185,6 @@ the |input| command yet).
 
  } /* End of group.  */@;
 
-
 @q * Putting |Scanner_Type::create| together.@>
 @* Putting {\bf Scanner\_Type::create()} together.
   
@@ -6414,7 +6198,6 @@ the |input| command yet).
 
 /* Nothing.  */
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -6423,9 +6206,6 @@ the |input| command yet).
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

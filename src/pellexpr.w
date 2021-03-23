@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
-
 
 @q * (0) ellipse expressions.  @>
 @** Ellipse expressions.
@@ -108,7 +106,6 @@ an ``unknown |ellipse|''.
 @q *** ellipse_primary --> ellipse_argument.@>
 @ \§ellipse primary> $\longrightarrow$ \§ellipse argument>.  
 
-
 @q *** ellipse_primary --> ( ellipse_expression )  @>
 @ \§ellipse primary> $\longrightarrow$ `\.{\LP}' 
 \§ellipse expression> `\.{\RP}'.
@@ -134,7 +131,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) ellipse_primary --> GET_ELLIPSE INTEGER cone_primary@>
 @*1 \§ellipse primary> $\longrightarrow$ \.{GET\_ELLIPSE}
 INTEGER \§cone primary>. 
@@ -159,7 +155,6 @@ Added this rule.
                                        @=$2@>);
 
 };
-
 
 @q ** (2) ellipse_primary --> GET_ELLIPSE numeric_primary ellipsoid_primary@>
 @*1 \§ellipse primary> $\longrightarrow$ \.{GET\_ELLIPSE}
@@ -188,7 +183,6 @@ Removed debugging code.
   const Ellipse* t 
      = s->get_ellipse_ptr(static_cast<unsigned short>( floor(fabs(@=$2@>) + .5))); 
 
-
   if (t == static_cast<const Ellipse*>(0))
    {
       delete s;
@@ -196,7 +190,6 @@ Removed debugging code.
       @=$$@> = static_cast<void*>(0);
 
    } /* |if (t == 0)|  */
-
 
   else /* |t != 0|  */
      {
@@ -252,7 +245,6 @@ is passed to |Scan_Parse::get_conic_section_func|.
                                     parameter,
                                     test_value,
                                     rectify_value);
-
 
 };
 
@@ -346,7 +338,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) ellipse_primary --> LAST @>
 @q ***** (5) ellipse_vector_expression.@>
 
@@ -419,11 +410,8 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) ellipse secondary.  @>
 @*1 \§ellipse secondary>.
-
 
 \LOG
 \initials{LDF 2004.06.29.}  
@@ -506,7 +494,6 @@ Removed debugging code.
                                            static_cast<Ellipse*>(@=$1@>),
                                            static_cast<Path*>(@=$3@>));
 
-
      @=$$@> = static_cast<void*>(p);
 
 };
@@ -525,7 +512,6 @@ Added this section.
 @q *** ellipse tertiary --> ellipse_secondary.  @>
 @ \§ellipse tertiary> $\longrightarrow$ \§ellipse secondary>.
 
-
 \LOG
 \initials{LDF 2004.06.29.}
 Added this rule.
@@ -538,7 +524,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q **** (4) ellipse_tertiary: ellipsoid_tertiary @> 
 @q **** (4) INTERSECTION plane_secondary.        @> 
@@ -597,7 +582,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -606,7 +590,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

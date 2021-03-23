@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
 
 @q * (0) class Point.@>
 @** {\bf class Point}\quad ({\tt points\PERIOD web}).\hfil
@@ -213,7 +212,6 @@ class Point : protected Shape
     valarray <real> pre_projective_extremes;      
     valarray <real> projective_extremes;      
 
-
     bool do_output;  /* LDF 2002.09.18.  Added this data member.  */
 
   public:
@@ -267,7 +265,6 @@ const short Point::USER_VALUES_X_Y = WORLD_VALUES - 6;
 const short Point::VIEW_VALUES_X_Y = WORLD_VALUES - 7;
 
 const short Point::WORLD_VALUES_Z  = WORLD_VALUES - 8;
-
 
 @q * Type definitions and utility structures.@>
 @* Type definitions and utility structures.
@@ -405,7 +402,6 @@ Bool_Point::~Bool_Point()
    return;
 }
 
-
 @q **** (4) Assignment operators.@>   
 @*3 Assignment operators.
 \initials{LDF 2004.11.11.}
@@ -440,7 +436,6 @@ Bool_Point::operator=(const Bool_Point& bp)
    pt = bp.pt;
    return *this;
 }
-
 
 @q **** (4) |const bool&| argument.@>
 @*3 {\bf const bool\AMP} argument.
@@ -504,7 +499,6 @@ Bool_Point::operator=(const Point& p)
    return *this;
 }
 
-
 @q **** (4) Clear.@>   
 @*3 Clear.
 \initials{LDF 2005.01.06.}
@@ -532,8 +526,6 @@ Bool_Point::clear(void)
    pt.clear();
    b = false;
 }
-
-
 
 @q **** (4) Show.@>
 @*3 Show.
@@ -563,7 +555,6 @@ Bool_Point::show(string text)
   return;
 
 }
-
 
 @q ** (2) Bool_Point_Quadruple.@>
 
@@ -617,7 +608,6 @@ Bool_Point_Quadruple::Bool_Point_Quadruple() :
      third(INVALID_BOOL_POINT), 
      fourth(INVALID_BOOL_POINT) {}
 
-
 @q ** (2) Bool_Real_Point.@>
 @*2 {\bf Bool\_Real\_Point}.
 \initials{LDF 2002.04.10.}  
@@ -664,7 +654,6 @@ Bool_Real_Point
       pt = brp.pt;
     }
 };
-
 
 @q *** Default Constructor for {\bf Bool\_Real\_Point}.@>
 @ Default Constructor for {\bf Bool\_Real\_Point}.
@@ -713,7 +702,6 @@ extern const Bool_Point INVALID_BOOL_POINT(false, INVALID_POINT);
 extern const Bool_Point_Pair INVALID_BOOL_POINT_PAIR(INVALID_BOOL_POINT,
                                        INVALID_BOOL_POINT); 
 
-
 extern const Bool_Real_Point INVALID_BOOL_REAL_POINT(false, INVALID_REAL,
                                        INVALID_POINT);
 extern const Bool_Point_Quadruple
@@ -721,8 +709,6 @@ extern const Bool_Point_Quadruple
                                 INVALID_BOOL_POINT,
                                 INVALID_BOOL_POINT,
                                 INVALID_BOOL_POINT);
-
-
 
 @
 @<Declarations for the header file@>=
@@ -734,12 +720,10 @@ extern const Point_Pair INVALID_POINT_PAIR;
 extern const Bool_Point INVALID_BOOL_POINT;
 extern const Bool_Point_Pair INVALID_BOOL_POINT_PAIR; 
 
-
 extern const Bool_Real_Point INVALID_BOOL_REAL_POINT;
 
 extern const Bool_Point_Quadruple
    INVALID_BOOL_POINT_QUADRUPLE;
-
 
 @q * (1) Constructors and setting functions.@>
 @* Constructors and setting functions.
@@ -790,7 +774,6 @@ Now resizing |pre_projective_coordinates| and
    pre_projective_extremes.resize(6, 0);
    projective_extremes.resize(6, 0);
 
-
 @q ** (2) Default version.  No arguments.@>
 @*1 Default version.  No arguments.
 @^\cfunc{Point}{Point}@>
@@ -838,8 +821,6 @@ Point::Point(void)
   surface_hiding_ctr = 0;
   decomposition_level = 0;
 }
-
-
 
 @q ** (2) Three real values.@>
 @*1 Three {\bf real} values.
@@ -992,7 +973,6 @@ Point::set(const real x, const real y, const real z)
                                        value was |void|.  */
 }     
 
-
 @q ** (2) Copy constructor.@>
 @*1 Copy constructor.
 @^\cfunc{Point}{Point}@>
@@ -1102,7 +1082,6 @@ Point::set(const Point& p)
            dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
 
-
   *this = p;
   do_output = true;
 }     
@@ -1211,8 +1190,7 @@ virtual
 @<Define |Point| functions@>=
 Point::~Point(void)
 {
-   volatile bool DEBUG = false;  /* |true|  */
-
+   volatile bool DEBUG = false; /* |true| */
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1223,7 +1201,6 @@ Point::~Point(void)
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
 
     if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
        {
@@ -1236,7 +1213,6 @@ Point::~Point(void)
            delete dash_pattern_vector;
            dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0); 
        }
-
 
    if (draw_color_vector != static_cast<Pointer_Vector<Color>*>(0))
       {
@@ -1257,7 +1233,6 @@ Point::~Point(void)
 @q * (1) Assignment. @>
 @* Assignment.
 @^\cofunc{Point}{=}@>
-
 
 @q ** (2) |const Point&| argument.@> 
 @*1 {\bf const Point\AMP} argument.
@@ -1317,7 +1292,6 @@ const Point&
 Point::operator=(const Point& p)
 {
 
-
 @q *** (3) Preliminaries.@> 
 
   volatile bool DEBUG = false; /* |true| */ @; 
@@ -1329,7 +1303,6 @@ Point::operator=(const Point& p)
   bool error_stop_value   = true;
   bool warning_stop_value = true;
   string thread_name      = "";
-
 
 @q *** (3).@> 
 
@@ -1371,8 +1344,7 @@ Point::operator=(const Point& p)
 
      }
 
-  
-  if (   p.pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+if (   p.pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
       && pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
      ;  /* Do nothing.  */@; 
 
@@ -1421,9 +1393,7 @@ Point::operator=(const Point& p)
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   return p;  
-
 
 } /* End of |Point::operator=(const Point& p)| definition.  */
 
@@ -1453,7 +1423,6 @@ Point::operator=(const Bool_Point& bp)
    return (*this = bp.pt);
 
 } /* End of |Point::operator=(const Bool_Point& bp)| definition.  */
-
 
 @q * (1) Clear.@>
 @* Clear.  
@@ -1515,7 +1484,6 @@ Point::clear(void)
          fill_color_vector = static_cast<Pointer_Vector<Color>*>(0);
       }
 
-
   for (int i = 0; i < 4; i++)
     {
       world_coordinates[i] = user_coordinates[i] 
@@ -1527,10 +1495,7 @@ Point::clear(void)
   transform.reset();
   return;
 
-
 } /* End of |Point::clear| definition.  */
-
-
 
 @q * (1) Clean.@>
 @* Clean.
@@ -1584,7 +1549,6 @@ copy_coords(const char from,
             bool set_z_to_zero = false,
             Scanner_Node scanner_node = 0);
 
-
 @q ** (2) Definition.@>  
 
 @ 
@@ -1615,9 +1579,7 @@ Point::copy_coords(char from,
 
    using namespace Scan_Parse;
 
-
 @q *** (3) @> 
-
 
    from = tolower(from);
    to   = tolower(to);
@@ -1644,7 +1606,6 @@ Point::copy_coords(char from,
 
       }  /* |if|  */
 
-
 @q *** (3) @> 
 
    if (from == to)
@@ -1664,11 +1625,9 @@ Point::copy_coords(char from,
 
       }  /* |if|  */
 
-
 @q *** (3) @> 
 
    valarray<real> temp_coordinates(6);
-
 
    if (from == 'w')
       {
@@ -1697,8 +1656,6 @@ Point::copy_coords(char from,
          view_coordinates = 0;
  
       }
-
-
 
 @q *** (3) @> 
 
@@ -1803,9 +1760,6 @@ Point::is_whatever(Scanner_Node scanner_node,
   return true;
 }
 
-
-
-
 @q ** (2) Epsilon.@>
 @*1 Epsilon.
 @^\cfunc{Point}{epsilon}@>
@@ -1817,7 +1771,6 @@ Now returning different values, depending on
 whether |real| is |float| or |double|.
 @:!! TO DO@> TO DO:  Try to find out what values would be best.  It
 will be necessary to check how good the value for |double| is.
-
 
 \initials{LDF 2004.1.2.} 
 Made |epsilon| non-inline.
@@ -1872,7 +1825,6 @@ What is the syntax for a pointer to a |const|, as opposed to a
 \LOG
 \initials{LDF 2002.09.19.}  Added this function.
 
-
 \initials{LDF 2004.06.08.}  @:BUG FIX@> BUG FIX: 
 Changed default for |do_persp| from |true| to |false|.  Having it be |true|
 failed, because I've gotten rid of the global variable |default_focus|, and
@@ -1885,7 +1837,6 @@ valarray <real>
 get_all_coords(char coords = 'w', const bool do_persp = false,
                const bool do_apply = true, Focus* f = 0,
                const unsigned short proj = Projections::persp, real factor = 1);
-
 
 @q ***** (5) Definition.  @>
 @
@@ -1963,8 +1914,6 @@ no |Scanner_Node| argument is passed to this function, and I don't want to add o
     }
 }
 
-
-
 @q **** (4) {\bf const} version.@>
 @ {\bf const} version.
 @^\cfunc{Point}{get\_all\_coords}@>
@@ -1985,7 +1934,6 @@ get_all_coords(char coords = 'w', const bool do_persp = false,
                const unsigned short proj = Projections::persp, 
                real factor = 1) const;
 
-
 @
 @<Define |Point| functions@>=
 valarray <real> 
@@ -1997,7 +1945,6 @@ Point::get_all_coords(char coords, const bool do_persp,
     valarray <real> v = p.get_all_coords(coords, do_persp, do_apply, f);
     return v;
 }
-
 
 @q *** (3) Get coord.@>
 @*2 Get coord.
@@ -2014,7 +1961,6 @@ to call |project| multiple times when doing |Path::output|.
 
 The argument |c| refers to either the x, y, z, or w coordinate.
 \initials{LDF 2002.10.27.}
-
 
 \LOG
 \initials{LDF 2004.06.08.}  @:BUG FIX@> BUG FIX: 
@@ -2121,7 +2067,6 @@ Point::get_coord(char c, char coords,
     }
 }
 
-
 @q **** (4) const version.@>
 @ {\bf const} version.
 @^\cfunc{Point}{get\_coord}@>
@@ -2141,8 +2086,6 @@ get_coord(char c, char coords = 'w',
           Focus* f = 0, const unsigned short proj = Projections::persp,
           real factor = 1) const;
 
-
-
 @
 @<Define |Point| functions@>=
 real 
@@ -2155,7 +2098,6 @@ Point::get_coord(char c, char coords,
   Point p(*this);
   return p.get_coord(c, coords, do_persp, do_apply, f, proj, factor);
 }
-
 
 @q *** Get x.@>
 @ Get x.
@@ -2177,7 +2119,6 @@ get_x(char coords = 'w', const bool do_persp = false,
       const bool do_apply = true, 
       Focus* f = 0, const unsigned short proj = Projections::persp,
       real factor = 1);
-
 
 @
 @<Define |Point| functions@>=
@@ -2205,7 +2146,6 @@ get_x(char coords = 'w', const bool do_persp = false,
       const bool do_apply = true, 
       Focus* f = 0, const unsigned short proj = Projections::persp,
       real factor = 1) const;
-
 
 @
 @<Define |Point| functions@>=
@@ -2264,7 +2204,6 @@ get_y(char coords = 'w', const bool do_persp = false,
       Focus* f = 0, const unsigned short proj = Projections::persp,
       real factor = 1) const;
 
-
 @
 @<Define |Point| functions@>=
 real
@@ -2295,7 +2234,6 @@ get_z(char coords = 'w', const bool do_persp = false,
       const unsigned short proj = Projections::persp,
       real factor = 1);
 
-
 @
 @<Define |Point| functions@>=
 real
@@ -2323,7 +2261,6 @@ get_z(char coords = 'w', const bool do_persp = false,
       const unsigned short proj = Projections::persp,
       real factor = 1) const;
 
-
 @
 @<Define |Point| functions@>=
 real
@@ -2332,7 +2269,6 @@ Point::get_z(char coords, const bool do_persp, const bool do_apply,
 {
   return get_coord('z', coords, do_persp, do_apply, f, proj, factor);
 }
-
 
 @q *** Get w.@>
 @ Get w.
@@ -2354,7 +2290,6 @@ get_w(char coords = 'w', const bool do_persp = false,
       const bool do_apply = true, Focus* f = 0,
       const unsigned short proj = Projections::persp,
       real factor = 1);
-
 
 @
 @<Define |Point| functions@>=
@@ -2447,7 +2382,7 @@ slope(Point p, char m = 'x', char n = 'y') const;
 real
 Point::slope(Point p, char m, char n) const
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
   Point a(*this);
 
   a.apply_transform();
@@ -2507,7 +2442,6 @@ case I change my mind.
   return (a_n_coord - p_n_coord) / (a_m_coord - p_m_coord);
 }
 
-
 @q ** (2) Is on segment.@>
 @*1 Is on segment.
 
@@ -2524,11 +2458,9 @@ line passing through |p0| and |p1|, but not on the segment.  If
 |*this| doesn't lie on the line, $t$ will be |INVALID_REAL|.  
 \initials{LDF 2002.10.29.}
 
-
 To check whether |*this| lies on the line, use
 |is_on_line|.  
 \initials{LDF 2002.10.29.}  
-
 
 \LOG
 \initials{LDF 2002.10.29.}  
@@ -2555,7 +2487,7 @@ is_on_segment(Point p0, Point p1);
 Bool_Real
 Point::is_on_segment(Point p0, Point p1)
 {
-  bool DEBUG = false; /* |true|  */@;
+  bool DEBUG = false; /* |true| */@;
 
   if (DEBUG)
     cerr << "Entering Point::is_on_segment().\n";
@@ -2563,7 +2495,6 @@ Point::is_on_segment(Point p0, Point p1)
   apply_transform();
   p0.apply_transform();
   p1.apply_transform();
-
 
   if (DEBUG)
     {
@@ -2612,7 +2543,6 @@ Point::is_on_segment(Point p0, Point p1)
     }@/@,
   /* \initials{LDF 2002.10.29.}  Beginning of new code.  */
 
-
   Point v0(*this - p0);  
   Point v1(p1 - *this);
 
@@ -2625,7 +2555,6 @@ if (DEBUG)
     v1.show("v1");
   }
 
-
   v0.unit_vector(true);
   v1.unit_vector(true);
   if (DEBUG) 
@@ -2633,8 +2562,6 @@ if (DEBUG)
       v0.show("v0");
       v1.show("v1");
     }
-
-
 
   Point v2(-v1);
 
@@ -2650,7 +2577,6 @@ if (DEBUG)
       return pair<bool, real>(false, INVALID_REAL);
     }@/@,
   /* \initials{LDF 2002.10.29.}  End of new code.  */
-
 
 @ \initials{LDF 2002.10.29.}  Calculate how far |*this| is on the way from |p0|
 to |p1|.  
@@ -2810,7 +2736,6 @@ is_in_triangle(const Point& p0,
                const Point& p2,
                bool verbose = false) const;
 
-
 @q * (1) Setting data members.@>
 @* Setting data members.
 \initials{LDF 2004.09.01.}
@@ -2819,7 +2744,6 @@ is_in_triangle(const Point& p0,
 \initials{LDF 2004.09.01.}
 Added this section.
 \ENDLOG
-
 
 @q ** (2) Set |surface_hiding_ctr|.@> 
 @*1 Set {\it surface\_hiding\_ctr}.
@@ -2933,9 +2857,6 @@ get_decomposition_level(void)
    return decomposition_level;
 }
 
-
-
-
 @q ** (2) Push draw color.@>
 @*1 Push draw color.
 \initials{LDF 2005.03.17.}
@@ -2956,7 +2877,6 @@ if the |bool copy| argument is |false|.
 virtual
 int
 push_draw_color(Color*& c, bool copy = true);
-
 
 @q *** (3) Definition.@> 
 
@@ -2985,7 +2905,6 @@ Point::push_draw_color(Color*& c, bool copy)
 
 }  /* End of |Point::push_draw_color|  */
 
-
 @q ** (2) Push fill color.@>
 @*1 Push fill color.
 \initials{LDF 2005.03.17.}
@@ -3006,8 +2925,6 @@ if the |bool copy| argument is |false|.
 virtual
 int
 push_fill_color(Color*& c, bool copy = true);
-
-
 
 @q *** (3) Definition.@> 
 
@@ -3036,7 +2953,6 @@ Point::push_fill_color(Color*& c, bool copy)
 
 }  /* End of |Point::push_fill_color|  */
 
-
 @q ** (2) Push color.@>
 @*1 Push color.
 \initials{LDF 2005.03.17.}
@@ -3057,8 +2973,6 @@ if the |bool copy| argument is |false|.
 virtual
 int
 push_color(Color*& c, bool copy = true);
-
-
 
 @q *** (3) Definition.@> 
 
@@ -3088,15 +3002,11 @@ Point::push_color(Color*& c, bool copy)
          c = 0;
       }
 
-
    *fill_color_vector += d;
 
    return 0;
 
 }  /* End of |Point::push_color|  */
-
-
-
 
 @q ** (2) Push pen.@>
 @*1 Push pen.
@@ -3193,7 +3103,6 @@ Point::push_dash_pattern(Dash_Pattern*& d, bool copy)
    return 0;
 
 }  /* End of |Point::push_dash_pattern| definition.  */
-
 
 @q * (1) Functions for checking types.@> 
 @* Functions for checking types.
@@ -3419,7 +3328,6 @@ is_parabola(void) const
 {
    return false;
 }
-
 
 @q ** (2) Is |Hyperbola|.@> 
 @*1 Is {\bf Hyperbola}.
@@ -3871,7 +3779,6 @@ is_paraboloid(void) const
    return false;
 }
 
-
 @q ** (2) Is |Hyperboloid|.@> 
 @*1 Is {\bf Hyperboloid}.
 \initials{LDF 2005.11.07.}
@@ -4030,11 +3937,8 @@ Picture::shift(const Point& p)
   return shift(p.get_x(), p.get_y(), p.get_z());
 }
 
-
 @q *** Shift times.@>
 @ Shift times.  
-
-
 
 \initials{LDF 2003.01.19.}  Note that |shift_times| will only have an effect 
 if it's called {\it after\/} a call to
@@ -4058,7 +3962,6 @@ Now just returning the return value of |transform.shift_times|.
 @<Declare |Point| functions@>=
 Transform
 shift_times(real x, real y = 1, real z = 1);
-
 
 @
 @<Define |Point| functions@>=
@@ -4087,7 +3990,6 @@ Point::shift_times(const Point& p)
   return transform.shift_times(p.get_x(), p.get_y(), p.get_z());
 }
 
-
 @q *** (3) Alignment with an axis. @>
 
 @*2 Alignment with an axis.
@@ -4103,7 +4005,6 @@ $\overrightarrow{p_0p_1}$ with one of the main axes.
 get erroneous results with\newline
 |rotate(Point, Point, real)| 
 (formerly |rotate_around|).  I think the problem may be here.
-
 
 \LOG
 \initials{LDF 2002.12.10.}  
@@ -4129,7 +4030,7 @@ Transform
 Transform::align_with_axis(Point p0, Point p1,
                            char axis) /* Default is the z-axis. */
 {
-  bool DEBUG = false; /* |true|  */@;
+  bool DEBUG = false; /* |true| */@;
   if (DEBUG)
         cerr << "Entering Transform::align_with_axis." << endl;
 
@@ -4172,9 +4073,6 @@ the same way, so that the relationship between them remains constant.
       p0.apply_transform();
     }
 
-
-
-
    @<Normalize point@>  /* \initials{LDF 2002.10.23.}  Transform the |Point| so
                           that it's x, y, and z coordinates are all
                           positive.  See below for the explanation.  */
@@ -4190,7 +4088,6 @@ the same way, so that the relationship between them remains constant.
 
   if (DEBUG) 
     proj_on_x_z_plane.show("proj_on_x_z_plane");
-
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the x or y-axis, rotate
 |p1| onto the x-y plane and then to the x-axis.
@@ -4262,7 +4159,6 @@ the y-z plane and then to the z-axis.
           pt_on_z_axis.set(0, 0, -1);
         }
 
-
 @
 \LOG
 \initials{LDF 2002.12.10.}  Added the following conditional.  
@@ -4278,7 +4174,6 @@ porting to GNU/Linux.
 
 @
 @<Define |Transform| functions@>= 
-
 
       if (DEBUG) 
         cerr << "angle of projection: " << angle << endl;
@@ -4312,10 +4207,8 @@ else
 @
 @<Define |Transform| functions@>= 
 
-
  if (DEBUG) 
    cerr << "angle to z-axis: " << angle << endl;
-
 
       if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(-angle);
@@ -4323,7 +4216,6 @@ else
       if (DEBUG) 
         p1.show("p1 after rotation to z-axis");
     }
-
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the y-axis, |p1| must be
 rotated from the x-axis (where it is now) around the z-axis by
@@ -4337,7 +4229,6 @@ $90^\circ$.  Then it will be on the y-axis.
       if (DEBUG) 
         p1.show("p1 after rotation to y-axis");
     }
-
 
   if (DEBUG)
     {
@@ -4412,11 +4303,8 @@ elegant construction, but I don't know one.
     }
 }
 
-
-
 @q *** (3) Rotation around an arbitrary axis. @>
 @*2 Rotation around an arbitrary axis.
-
 
 @q **** {\bf Point} versions.@>
 @ {\bf Point} versions.
@@ -4483,8 +4371,6 @@ to |rotate|.  This function now overloads |rotate| with three
 @<Declare |Point| functions@>=
 Transform
 rotate(const Path& p,  const real angle = 180);
-   
-   
 
 @q **** {\bf Transform} version.@>
 @ {\bf Transform} version.  Declared in \filename{transfor.web}. 
@@ -4506,7 +4392,6 @@ Haven't tested it yet.  @:!! TO DO@> TO DO:  Test this!
 \initials{LDF 2002.11.03.}  @:!! TO DO@> TO DO:  See if I can't make |Point|
 arguments |const|.  
 
-
 \initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
 to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
@@ -4515,7 +4400,7 @@ to |rotate|.  This function now overloads |rotate| with three
 Transform
 Transform::rotate(Point p0, Point p1, const real angle)
 {
-  bool DEBUG = false; /* |true|  */@;
+  bool DEBUG = false; /* |true| */@;
   if (DEBUG)
     cerr << "Entering Transform::rotate().\n";
   p0.apply_transform();
@@ -4545,9 +4430,6 @@ Transform::rotate(Point p0, Point p1, const real angle)
   clean();
   return t;
 }
-
-
-
 
 @q **** {\bf Picture} version.@>
 @ {\bf Picture} version.
@@ -4645,7 +4527,6 @@ Point::project(const Focus& f, const unsigned short proj, real factor)
   if (DEBUG)
     cerr << "Entering project().\n";
 
-
   if (!transform.is_identity())   
     apply_transform();
 
@@ -4690,7 +4571,6 @@ Added this section.
      {
         pre_projective_coordinates[i] = temp_coordinates[i];
      }
-
 
 @q **** (4) Parallel projection.@>
 @ Parallel projection.\newline  
@@ -4751,9 +4631,8 @@ Explain this!
            vertical = 1;  
          else
            vertical = 2;
-           
 
-         projective_coordinates[0] = world_coordinates[horizontal] * factor; 
+projective_coordinates[0] = world_coordinates[horizontal] * factor; 
          projective_coordinates[1] = world_coordinates[vertical] * factor; 
          projective_coordinates[2] = 0;                             
          projective_coordinates[3] = 1;
@@ -4768,11 +4647,9 @@ Explain this!
 
            }
 
-         
-         return true;
+return true;
        }
 
-  
 @q **** (4) Perspective projection.@>
 @ Perspective projection.
 \initials{LDF Undated.}
@@ -4817,7 +4694,6 @@ Get numbers to output using {\it only\/} decimal notation!
       return false;
   }
 
-
   real save_z = temp_coordinates[2] / (temp_coordinates[2] + f.get_distance());
 
   if (DEBUG)
@@ -4828,7 +4704,6 @@ Get numbers to output using {\it only\/} decimal notation!
       cerr << "save_z == " << save_z << endl;
     }
 
-
   for(i = 0; i < 4; i++)
     {
       for(j = 0; j < 4; j++)
@@ -4837,7 +4712,6 @@ Get numbers to output using {\it only\/} decimal notation!
             += temp_coordinates[j] * f.get_persp_element(j, i);
         }
     }
-
 
   real eps = epsilon();
 
@@ -4887,7 +4761,6 @@ Get numbers to output using {\it only\/} decimal notation!
       cerr << ")\n";
     }
 
-
   for (i = 0; i < 2; i++)    /* \initials{LDF 2002.11.07.}  KLUDGE.  Added this
                                 loop.  The value used for comparison
                                 is slightly larger than 
@@ -4904,7 +4777,6 @@ Get numbers to output using {\it only\/} decimal notation!
   return true;
 
 }  /* End of |Point::project| definition.  */
-
 
 @q ** (2) Applying transformations.@>
 @*1 Applying transformations. 
@@ -4923,7 +4795,7 @@ apply_transform();
 void
 Point::apply_transform()
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
 
   if (transform.is_identity())  /* If |transform.matrix| is the
                                    identity matrix, 
@@ -4936,11 +4808,8 @@ Point::apply_transform()
   int j;  
   valarray <real> new_coordinates;
 
-
   new_coordinates.resize(4, 0); /* \initials{LDF 2002.12.08.}  BUG FIX.  
                                    For GNU CC.  */
-
-
 
   if (DEBUG)
     {
@@ -4984,7 +4853,6 @@ Point::apply_transform()
   transform.reset();
 } 
 
-
 @q ** Set transform to identity. @>
 @ Set {\bf transform} to identity.
 @^\cfunc{Point}{reset\_transform}@>
@@ -4999,7 +4867,6 @@ Point::reset_transform()
 {
   transform.reset();
 }
-
 
 @q * (1) Drawing.@>
 @* Drawing.
@@ -5152,7 +5019,6 @@ Point::drawdot(Picture& picture,
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |pt| to |picture|.@>   
 @ Add |pt| to |picture|.
 \initials{LDF 2004.06.24.}
@@ -5161,13 +5027,11 @@ Point::drawdot(Picture& picture,
 
     picture += static_cast<Shape*>(pt);
 
-
 @q **** (4) Try to unlock |picture.mutex|.@>   
 @ Try to unlock |picture.mutex|.
 \initials{LDF 2004.06.24.}
 
 @<Define |Point| functions@>=
-
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -5191,7 +5055,6 @@ Point::drawdot(Picture& picture,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
 
 @q **** (4) Exit function successfully.@>   
 @ Exit function successfully.
@@ -5221,7 +5084,6 @@ causes the \MP/ command {\bf undrawdot} to be written to
 \LOG
 \initials{LDF 2004.05.25.}  Made |Picture& picture| the first argument
 and removed the default, which was formerly |current_picture|.
-
 
 \initials{LDF 2004.06.03.}  Now setting |pt->drawdot_color = 0| instead of
 |pt->drawdot_color = Colors::background_color|, since I've gotten rid of 
@@ -5284,12 +5146,10 @@ Point::undrawdot(Picture& picture, Pen* ppen)
   
   pt->drawdot_value = UNDRAWDOT_VALUE;  
 
-
   if (ppen != static_cast<Pen*>(0))
      {
         pt->push_pen(ppen);
      }
-
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -5317,7 +5177,6 @@ Point::undrawdot(Picture& picture, Pen* ppen)
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
   picture += static_cast<Shape*>(pt);
-  
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -5344,7 +5203,6 @@ Point::undrawdot(Picture& picture, Pen* ppen)
   return 0;
 }
 
-
 @q ** (2) Draw.@>
 @*1 Draw.
 @^\cfunc{Point}{draw}@>
@@ -5358,7 +5216,6 @@ and returns the |Path|.  The latter is a line, i.e.,
 |draw| must be defined in \filename{paths.web}, because |Path|
 is an incomplete type here.
 \initials{LDF Undated.}
-
 
 \LOG
 \initials{LDF 2003.01.15.}  
@@ -5400,7 +5257,6 @@ draw(Picture& picture,
      const Pen* ppen = 0,
      unsigned short aarrow = 0,
      Scanner_Node scanner_node = 0) const;
-
 
 @q ** (2) Draw arrow.@>
 @*1 Draw arrow.
@@ -5447,7 +5303,6 @@ drawarrow(Picture& picture,
           const Pen* ppen = 0,
           Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Draw double arrow.@>
 @*1 Draw double arrow.
 @^\cfunc{Point}{drawdblarrow}@>
@@ -5473,8 +5328,6 @@ drawdblarrow(Picture& picture,
              const Dash_Pattern* ddashed = 0,
              const Pen* ppen = 0,
              Scanner_Node scanner_node = 0) const;
-
-
 
 @q ** (2) Undraw.@>
 @*1 Undraw.
@@ -5525,7 +5378,6 @@ undraw(Picture& picture,
 @^\cfunc{Point}{show}@>
 \initials{LDF 2002.10.26.}
 
-
 The arguments:
 
 \BARGS{|const unsigned short proj|} %% The longest argument. 
@@ -5546,7 +5398,6 @@ The arguments:
    |user_coordinates|, or |view_coordinates|, respectively.  
    The latter two exist, but are not currently used.  The
    corresponding uppercase characters can also be used.
-
 
 \ARG{|const bool do_persp|}\relax
    Only meaningful if the |projective_coordinates| are
@@ -5585,7 +5436,6 @@ The arguments:
    1 (no magnification or shrinking). 
 \EARGS
 \initials{LDF 2002.10.26.}
-
 
 \TODO
 @q { @>
@@ -5638,7 +5488,6 @@ show(string text = "",
      const unsigned short proj = Projections::persp,
      const real factor = 1) const;
 
-
 @q *** (3) Definition.@>
 @ 
 @<Define |Point| functions@>=
@@ -5651,7 +5500,7 @@ Point::show(string text,
             const unsigned short proj,
             const real factor) const
 {
-    bool DEBUG = false; /* |true|  */@; 
+    bool DEBUG = false; /* |true| */@; 
 
     cerr << text;
 
@@ -5697,7 +5546,6 @@ if (DEBUG)
     transform.show("Transform after apply_transform");
   }
 }
-
 
 @q ** Show transform.@>
 @ Show transform.
@@ -5753,8 +5601,6 @@ operator<<(ostream& o, Point& p)
     << Point::measurement_units << ")";
     return o;   
 }
-
-
 
 @q ** (2) Suppress output.@>
 @*1 Suppress output.
@@ -5860,8 +5706,7 @@ Point::extract(const Focus& f, const unsigned short proj, real factor)
       return v;
     }
 
-  
-  if (DEBUG)
+if (DEBUG)
     {
       cerr << "world_coordinates:      (" << world_coordinates[0]
            << ", " << world_coordinates[1] << ", "
@@ -5946,7 +5791,6 @@ get_projective_extremes(void) const
 {
   return projective_extremes;
 }
-
 
 @q ** (2) Get minimum x.@>
 @*1 Get minimum x.
@@ -6183,9 +6027,6 @@ Point::get_mean_y(const unsigned short s) const
   return ((projective_extremes[2] + projective_extremes[3]) / 2);
 }
 
-
-
-
 @q ** (2) Get minimum z.@>
 @*1 Get minimum z.
 @^\cfunc{Point}{get\_minimum\_z}@>
@@ -6233,7 +6074,6 @@ Point::get_minimum_z(const unsigned short s) const
    bool warning_stop_value = true;
    string thread_name      = "";
 
-
 /* This code is for functions that don't take a |Scanner_Node scanner_node|
    argument.  */
 
@@ -6267,10 +6107,9 @@ Point::get_minimum_z(const unsigned short s) const
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
+if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
        return projective_extremes[4];
 
     else if (s == PRE_PROJECTIVE_COORDINATES_VALUE)
@@ -6296,8 +6135,7 @@ Point::get_minimum_z(const unsigned short s) const
           return INVALID_REAL;
 
       }  /* |else|  */
-   
-   
+
 }  /* End of |Point::get_minimum_z| definition.  */
 
 @q ** (2) Get maximum z.@>
@@ -6318,7 +6156,6 @@ Rewrote this function.  It now tests the value of
 the |const unsigned short s| argument.  Made the debugging and
 error output thread-safe.
 \ENDLOG 
-
 
 @q *** (3) Declaration.@> 
 
@@ -6347,7 +6184,6 @@ Point::get_maximum_z(const unsigned short s) const
    bool error_stop_value   = true;
    bool warning_stop_value = true;
    string thread_name      = "";
-
 
 /* This code is for functions that don't take a |Scanner_Node scanner_node|
    argument.  */
@@ -6382,10 +6218,9 @@ Point::get_maximum_z(const unsigned short s) const
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
+if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
        return projective_extremes[5];
 
     else if (s == PRE_PROJECTIVE_COORDINATES_VALUE)
@@ -6411,12 +6246,8 @@ Point::get_maximum_z(const unsigned short s) const
           return INVALID_REAL;
 
       }  /* |else|  */
-   
-   
+
 }  /* End of |Point::get_maximum_z| definition.  */
-
-
-
 
 @q ** (2) Get mean z.@>
 @*1 Get mean z.
@@ -6461,7 +6292,6 @@ Point::get_mean_z(const unsigned short s) const
    bool warning_stop_value = true;
    string thread_name      = "";
 
-
 /* This code is for functions that don't take a |Scanner_Node scanner_node|
    argument.  */
 
@@ -6495,10 +6325,9 @@ Point::get_mean_z(const unsigned short s) const
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
+if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
        return ((projective_extremes[4] + projective_extremes[5]) / 2);
 
     else if (s == PRE_PROJECTIVE_COORDINATES_VALUE)
@@ -6524,12 +6353,8 @@ Point::get_mean_z(const unsigned short s) const
           return INVALID_REAL;
 
       }  /* |else|  */
-   
-   
+
 }  /* End of |Point::get_mean_z| definition.  */
-
-
-
 
 @q ** (2) Set world extremes.@> 
 @*1 Set world extremes.
@@ -6897,7 +6722,6 @@ Unsigned_Byte
 projections_intersect(Shape* s,
                       Scanner_Node scanner_node = 0);
 
-
 @q ** (2) Definition.@>  
 
 @ 
@@ -6908,9 +6732,6 @@ Point::projections_intersect(Shape* s,
 {
    return 0;
 }
-
-
-
 
 @q ** (2) Comparison classes.@>
 @*1 Comparison classes.
@@ -6947,7 +6768,6 @@ by |Shapes| that are closer.
 \item{$\bullet$} If |Sorting::SUPPRESS_SORT| is passed to
 |Picture::output|, |elements| is not sorted, and the |Shapes| are
 output in the order in which they were drawn or filled. 
-
 
 \LOG
 \initials{LDF 2004.06.29.}
@@ -7231,7 +7051,6 @@ Added this section.
 class Compare_Angles
 {
 
-
     public:
 
        Point origin;
@@ -7357,7 +7176,6 @@ class Compare_Points
 
 @<Declare |Compare_Points| functions@>=
 Compare_Points(real t = Shape::DEFAULT_TOLERANCE);
-               
 
 @q ***** (5) Definition.@> 
 @
@@ -7427,15 +7245,12 @@ Compare_Points::operator()(const Point& p0, const Point& p1) const
 
         return false;
 
-
      return    fabs(fabs(p0_x) - fabs(p1_x)) <= tolerance
             && fabs(fabs(p0_y) - fabs(p1_y)) <= tolerance
             && fabs(fabs(p0_z) - fabs(p1_z)) <= tolerance;
 
 }  /* End of |Compare_Points::operator()(const Point& p0, const Point& p1)| 
       definition.  */
-
-
 
 @q ** (2) Output.@>
 @*1 Output.
@@ -7507,8 +7322,7 @@ Point::output(Scanner_Node scanner_node)
   if (DEBUG)
     cerr << "Entering Point::output().\n";
 
-  
-  Output_Struct* os = scanner_node->out[Run_State::METAPOST];
+Output_Struct* os = scanner_node->out[Run_State::METAPOST];
   
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
   
@@ -7545,7 +7359,6 @@ Now writing ``{\bf undrawdot}'' to |*out_stream| when
       cerr << "WARNING! Invalid |drawdot_value|: "
         << drawdot_value << ". Using \"drawdot\"\n";
 
-
       if (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
         {
           cerr << "Type <RETURN> to continue.\n";
@@ -7561,7 +7374,6 @@ Now writing ``{\bf undrawdot}'' to |*out_stream| when
               << measurement_units
               << ", " << projective_coordinates[1]
               << measurement_units << ")";
-
 
 @q **** (4) Handle |Color|.  @>
 @ Handle |Color|.
@@ -7596,7 +7408,6 @@ of |Pen* Point::pen|, which I've removed.
 
        Pen* pen = pen_vector->v[0]; 
        unsigned short pen_type = pen->get_type();
-
 
       *out_stream << endl << "   ";
 
@@ -7633,12 +7444,10 @@ of |Pen* Point::pen|, which I've removed.
               getchar();  /* Don't delete this!  */@;  
             } 
 
-
           *out_stream << ";\n";
           return;
           
         } /* |else| (invalid |pen->type|).  */
-
 
 @q ***** (5) Handle |pen->transform|.@>   
 @ Handle |pen->transform|.
@@ -7684,8 +7493,6 @@ for the transformation.
         } /* |if (!pen->get_transform().is_identity())|  */@;
 
     }  /* |if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)|  */
-
-
 
 @q **** (4) Finish and exit function.  @>
 @ Finish and exit function.
@@ -7747,7 +7554,6 @@ The arguments:
 Add |pen| argument to |label|
 and |dotlabel|.
 \ENDTODO 
-
 
 \LOG 
 \initials{LDF 2002.05.14.}  
@@ -7823,7 +7629,6 @@ Point::label(Picture& picture,
              const bool dot,
              Scanner_Node scanner_node) const
 {
-
 
 @q ***** (5) Preliminaries.@>   
 
@@ -7927,7 +7732,6 @@ catching |bad_alloc|.
              lbl->dot_color = 0;
       }
 
-
 @q ****** (6).@>
 
    catch (bad_alloc)
@@ -7945,12 +7749,10 @@ catching |bad_alloc|.
 
       } /* |catch (bad_alloc)|  */
 
-
 @q ***** (5).@> 
 
    if(dot == true)
      lbl->dot = true;
-
 
    if (ttransform)
    {
@@ -7966,7 +7768,6 @@ catching |bad_alloc|.
    else
      lbl->text = "Pt.";
 
-
    picture += lbl; /* \initials{LDF 2002.10.27.}  The |Label| is pushed onto the
                       |vector labels| in |picture|.  */
 
@@ -7979,11 +7780,9 @@ catching |bad_alloc|.
          cerr_message(cerr_strm);
          cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-   return;
+return;
 
 }  /* |Point::label|  */
 
@@ -8005,7 +7804,6 @@ Make it possible to use |PROJ_VALUES| to use the
 values in |projective_coordinates| for the label.  This will require
 adding arguments for use by |project|.  
 \ENDTODO 
-
 
 \LOG
 \initials{LDF 2003.04.01.}  
@@ -8089,7 +7887,7 @@ Point::label(Picture& picture,
              Color* ddot_color,
              const bool dot) const
 {
-    bool DEBUG = false; /* |true|  */@; 
+    bool DEBUG = false; /* |true| */@; 
 
     stringstream s;
     if (text_short == WORLD_VALUES || text_short == WORLD_VALUES_X_Y)
@@ -8253,7 +8051,6 @@ Point::dotlabel(Picture& picture,
   label(picture, text_short, position_str, ttransform, ttext_color, ddot_color, true);
 }
 
-
 @q * (1) |Label| functions.@> 
 @* {\bf Label} functions.
 \initials{LDF 2005.01.31.}
@@ -8299,13 +8096,11 @@ Label::~Label(void)
    delete transform;
    transform = 0;
 
-
    delete text_color;
    text_color = 0;
 
    delete dot_color;
    dot_color = 0;
-
 
    delete pen;
    pen = 0;
@@ -8314,11 +8109,9 @@ Label::~Label(void)
 
 }  /* End of |Label::~Label(void)| definition.  */
 
-
 @q ** (2) Get copy of Label.@>
 @*1 Get copy of {\bf Label}.
 @^\cfunc{Label}{get\_copy}@>
-
 
 \LOG
 \initials{LDF 2005.01.31.}
@@ -8409,7 +8202,6 @@ Label::output(Scanner_Node s,
    Output_Struct* os = s->out[Run_State::METAPOST];
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
-
    if (!t.is_identity())
      *pt *= t;
 
@@ -8452,15 +8244,13 @@ Label::output(Scanner_Node s,
 
         } /* |if (transform && !transform->is_identity())|  */@;
 
-
    *out_stream << ", ("
                << pt->get_x('p', false)
                << Point::measurement_units << ", "
                << pt->get_y('p', false)
                << Point::measurement_units << "))";
- 
 
-   if (text_color)
+if (text_color)
       *out_stream << endl << " withcolor " << *text_color;
 
    *out_stream << ";" << endl;
@@ -8475,7 +8265,6 @@ Label::output(Scanner_Node s,
                       << Point::measurement_units << ", "
                       << pt->get_y('p', false)
                       << Point::measurement_units << ")";
-
 
             if (pen)
                *out_stream << " withpen " << *pen;
@@ -8492,7 +8281,6 @@ Label::output(Scanner_Node s,
    return;
 
 }  /* End of |Label::output| definition.  */
-
 
 @q * (1) |Transform_Matrix| operations. @>
 @* {\bf Transform\_Matrix} operations.
@@ -8539,8 +8327,6 @@ directly instead of using |get_x|, |get_y|, and |get_z|.
 This is safe, as is calling |apply_transform| on |p|, and saves the
 cost of three function calls.
 
-
-
 \ENDLOG 
 
 @q ** (2) Vector addition. @>
@@ -8553,7 +8339,6 @@ cost of three function calls.
 
 Point 
 operator+(Point p) const;
-
 
 @
 @<Define |Point| functions@>=
@@ -8590,7 +8375,6 @@ Point::operator+=(Point p)
   shift(p.world_coordinates[0], p.world_coordinates[1],
         p.world_coordinates[2]);
 }
-
 
 @q ** (2) Vector subtraction. @>
 
@@ -8704,7 +8488,6 @@ Point::operator*(const real r) const
     return a;
 }
 
-
 @q *** (3) Non-member version.  @>
 
 @*2 Non-member version (scalar first).  
@@ -8748,7 +8531,6 @@ Point::operator-() const
     return a;
 }
 
-
 @q ** (2) Vector-scalar division with assignment.@>
 @*1 Vector-scalar division with assignment.
 @^\cofunc{Point}{/=}@>
@@ -8778,7 +8560,6 @@ Point::operator/=(const real r)
     world_coordinates[i] /= r;
 }
 
-
 @q ** (2) Vector-scalar division.@>
 @*1 Vector-scalar division.
 @^\cofunc{Point}{/}@>
@@ -8804,8 +8585,6 @@ Point::operator/(const real r) const
   a /= r;
   return a;
 }
-
-
 
 @q ** (2) Dot product. @>
 @*1 Dot product.
@@ -8929,7 +8708,7 @@ magnitude() const;
 real
 Point::magnitude() const
 {
-  bool DEBUG = false;  /* |true| */
+  bool DEBUG = false; /* |true| */
   
   real r    = 0.0;
   real temp = 0.0;
@@ -8950,7 +8729,6 @@ Point::magnitude() const
       cerr << "ERROR: In Point::magnitude().\n"
         << "Point has a coordinate too large for squaring!\n"
           << "Returning INVALID_REAL.\n" << endl;
-
 
       cerr << "a.world_coordinates[0] == " << a.world_coordinates[0] << endl
            << "a.world_coordinates[1] == " << a.world_coordinates[1] << endl
@@ -9133,7 +8911,6 @@ Point::unit_vector(const bool assign, const bool silent)
 
   real m = magnitude();
 
-
   if (m == ZERO_REAL)  /* LDF 2002.04.10.  Added this error handling code for the case where
                                    *this has no magnitude.  */
     {
@@ -9166,7 +8943,6 @@ Point::unit_vector() const
   Point a(*this);
   return a.unit_vector(true);
 }
-
 
 @q ** (2) Mediation.@>
 @ Mediation.
@@ -9270,7 +9046,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Reflection off of a |Plane|.@>
 
 @*1 Reflection off of a {\bf Plane}.
@@ -9330,7 +9105,6 @@ reflect_off(const Plane& p,
 @q *** (3) Is Equal.@> 
 @*2 Is Equal.
 
-
 @q **** (4) Non-|const| version.@> 
 @*3 Non-{\bf const} version.
 @^\cfunc{Point}{is\_equal}@>
@@ -9349,7 +9123,6 @@ Made |Point& p| argument non-|const|.
 @<Declare |Point| functions@>=
 bool
 is_equal(Point& p, real tolerance = -1, void* parameter = 0);
-
 
 @q ***** (5) Definition.@> 
 @
@@ -9381,7 +9154,6 @@ Point::is_equal(Point& p, real tolerance, void* parameter)
 
 @q ***** (5).@>
 
-  
 #if DEBUG_COMPILE
    if (DEBUG)
    {
@@ -9556,7 +9328,6 @@ coordinates are compared with 0, instead of using |fabs| and |eps|.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   if (   (t_x_sign  != p_x_sign)
            || (t_y_sign != p_y_sign)
            || (t_z_sign != p_z_sign))
@@ -9577,10 +9348,8 @@ coordinates are compared with 0, instead of using |fabs| and |eps|.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       return false;
     }
-
 
 @ Get the difference between each pair of x, y, and z-coordinates.
 @<Define |Point| functions@>=
@@ -9670,7 +9439,6 @@ this version was called, causing endless recursion.
 bool
 is_equal(const Point& p, real tolerance = -1, void* parameter = 0) const;
 
-
 @q ***** (5) Definition.@> 
 @
 @<Define |Point| functions@>=
@@ -9699,7 +9467,6 @@ verbose form, in case I have to debug it some more.
 @*3 Non-{\bf const} version.
 @^\cofunc{Point}{==}@>
 \initials{LDF Undated.}
-
 
 \LOG
 \initials{LDF Undated.}
@@ -9741,7 +9508,6 @@ Point::operator==(Point p)
 
 }  /* End of |Point::operator==(Point p)| definition.  */
 
-
 @q *** (3) |const| version.@>
 @*2 {\bf const} version.
 @^\cofunc{Point}{==}@>
@@ -9767,10 +9533,6 @@ Point::operator==(const Point& p) const
   return (copy == p);
 }
 
-
-
-
-
 @q ** (2) Inequality.@>
 @*1 Inequality.
 @^\cofunc{Point}{!=}@>
@@ -9785,7 +9547,6 @@ Point::operator!=(const Point& p) const
 {
   return !(*this == p);
 }
-
 
 @q * (1) Intersection.@>
 @* Intersection.  
@@ -9803,7 +9564,6 @@ and the |Point| is the intersection point.  If no intersection point
 exists, i.e, the line segments are congruent or parallel, then the
 |bool| is |false| and the |Point| is |INVALID_POINT|. 
 
-
 \initials{LDF Undated.}
 Note that |intersection_point| had to be defined as a |static| member
 function, because |Path::intersection_point| was not able to resolve
@@ -9814,7 +9574,6 @@ the call of |intersection_point| inside\break
 with four references to |Points| as arguments was deemed to have ``too many
 arguments'' and the references to |Point| couldn't be converted to
 |const| references to |Path|.   
-
 
 @q ** (2) Vector version.@>
 @*1 Vector version.
@@ -9901,7 +9660,6 @@ static
 Bool_Point
 intersection_point(Point p0, Point p1, Point q0, Point q1, const bool trace);
 
-
 @q *** (3) Definition.@>
 @
 @<Define |Point| functions@>=
@@ -9909,7 +9667,7 @@ Bool_Point
 Point::intersection_point(Point p0, Point p1, Point q0, Point q1,
                           const bool trace)
 {
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   if (DEBUG) 
     {
@@ -9937,9 +9695,8 @@ and z in each of the |Points|.  Then assign them to variables.
   real p1_x = p1.world_coordinates[0];
   real p1_y = p1.world_coordinates[1];
   real p1_z = p1.world_coordinates[2];
-  
 
-  real q0_x = q0.world_coordinates[0];
+real q0_x = q0.world_coordinates[0];
   real q0_y = q0.world_coordinates[1];
   real q0_z = q0.world_coordinates[2];
 
@@ -9962,7 +9719,6 @@ and z in each of the |Points|.  Then assign them to variables.
 
     real slope_p_x_y
       = (delta_x_p != ZERO_REAL) ? delta_y_p/delta_x_p : INVALID_REAL;     
-
 
     real slope_p_x_z
       = (delta_x_p != ZERO_REAL) ? delta_z_p/delta_x_p : INVALID_REAL; 
@@ -9990,12 +9746,10 @@ routines below succeed in setting them correctly.
   real y_i = INVALID_REAL;  /* y-coordinate of the intersection point. */
   real z_i = INVALID_REAL;  /* z-coordinate of the intersection point. */
 
-
   real y_int_p = INVALID_REAL; /* y-intercept of
                                   $\overrightarrow{p_0p_1}$. */
   real y_int_q = INVALID_REAL; /* y-intercept of
                                   $\overrightarrow{q_0q_1}$. */
-
 
   if (slope_p_x_y != INVALID_REAL) /* $\Delta x_p \neq 0$. */  
     {
@@ -10172,12 +9926,10 @@ are coincident.
       real z_int_p = INVALID_REAL; /* z-intercept of $\overrightarrow{p_0p_1}$. */
       real z_int_q = INVALID_REAL; /* z-intercept of $\overrightarrow{q_0q_1}$. */
 
-
       if (slope_p_x_z != INVALID_REAL) /* $\Delta x_p \neq 0$. */  
         {
           z_int_p  = p0_z - (slope_p_x_z * p0_x);
         }
-
 
       if (slope_q_x_z != INVALID_REAL) /* $\Delta x_q \neq 0$. */  
         {
@@ -10261,16 +10013,14 @@ to |false|.
       if (DEBUG)
         bp.pt.show("bp.pt");
     }
-  
 
-  if (bp.pt.is_on_segment(p0, p1).first == false
+if (bp.pt.is_on_segment(p0, p1).first == false
       || bp.pt.is_on_segment(q0, q1).first == false)
     bp.b = false;
   else
     bp.b = true;
-  
 
-  if (DEBUG)
+if (DEBUG)
     {
       cerr << "bp.b == " << bp.b << endl;
       cerr << "Exiting Point::intersection_point().\n";
@@ -10376,7 +10126,6 @@ Point::decompose(Shape* s, Scanner_Node scanner_node)
 {
    return 0;
 }
-
 
 @q *** (3) Self-decomposition.@> 
 @*2 Self-decomposition.
@@ -10513,20 +10262,15 @@ Picture::Picture(const Picture& p)
 #endif /* |DEBUG_COMPILE|  */@; 
    }
 
-
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
-
   *this = p;
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
     cerr << "Exiting the copy constructor for 'Picture'."
          << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
   return;
   
@@ -10604,7 +10348,7 @@ Picture::clear(void)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true|  */ 
+  bool DEBUG = false; /* |true| */ 
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #if DEBUG_COMPILE
@@ -10650,14 +10394,12 @@ Removed call to |delete (*iter)->pt|.  |Label::pt| is now deleted in
   shapes.clear();
   labels.clear();
 
-
 #if DEBUG_COMPILE
    if (DEBUG) 
       cerr << "Exiting Picture::clear().\n";
 #endif /* |DEBUG_COMPILE|  */@;   
 
 }
-
 
 @q ** (2) Output.@> 
 @*1 Output.
@@ -10879,7 +10621,6 @@ Focus(const real pos_x, const real pos_y, const real pos_z,
       real tolerance = .0001,
       Scanner_Node scanner_node = 0);
 
-
 @q ***** (5) Definition.  @>
 @
 @<Define |Focus| functions@>=
@@ -10937,7 +10678,6 @@ set(const real pos_x, const real pos_y, const real pos_z,
       real tolerance = .0001,
       Scanner_Node scanner_node = 0);
 
-
 @q ***** (5) Definition.  @>
 @
 @<Define |Focus| functions@>=
@@ -10955,7 +10695,6 @@ Focus::set(real pos_x, real pos_y, real pos_z,
    return;
 
 }  /* End of |Focus::set| definition (version with |real| arguments)  */
-
 
 @q *** (3) Setting function with |real*| arguments.@>
 @*2 Setting function with {\bf real*} arguments.
@@ -10997,7 +10736,6 @@ and assigning to |*this| from it.
 Focus(const Point& pos, const Point& dir,
       const real dist,  const real ang = 0.0, char ax = 'z');
 
-
 @q ***** (5) Definition.@>
 @
 @<Define |Focus| functions@>=
@@ -11007,7 +10745,6 @@ Focus::Focus(const Point& pos, const Point& dir,
   set(pos.get_x(), pos.get_y(), pos.get_z(),
       dir.get_x(), dir.get_y(), dir.get_z(), dist, ang, ax);
 }
-
 
 @q **** (4) Setting function.@>
 @*3 Setting function.
@@ -11129,8 +10866,6 @@ Focus::set(Point* pos, Point* dir, real* dist,
 
 }  /* End of |Focus::set| definition 
       (version with |Point*| and |real*| arguments)  */
-
-
 
 @q ** (2) Pseudo-constructor for dynamic allocation. @>
 @*1 Pseudo-constructor for dynamic allocation. 
@@ -11266,7 +11001,6 @@ Added this section.
 @*2 Rotate.
 \initials{LDF 2007.09.02.}
 
-
 @q **** (4) |real| arguments.@>
 @*3 {\bf real} arguments.
 @^\cfunc{Focus}{rotate}@>
@@ -11329,7 +11063,6 @@ Focus::rotate(const real angle_x,
 
 @q ****** (6)@>
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
    {
@@ -11377,7 +11110,6 @@ value.
        cerr_strm.str("");
 
    }  /* |if| (Invalid value for |axes| argument)  */
-
 
    Transform t;
 
@@ -11435,7 +11167,6 @@ multiplying it by |t.inverse()| and then shift it back?  Check this.
 
        }  /* |if (fabs(angle_x) > tolerance)|  */
 
-
 @q ******* (7)@>
 
        if (fabs(angle_y) > tolerance)
@@ -11484,7 +11215,6 @@ multiplying it by |t.inverse()| and then shift it back?  Check this.
 #endif 
            
        }  /* |if (fabs(angle_y) > tolerance)|  */
-
 
 @q ******* (7)@>
 
@@ -11557,7 +11287,6 @@ multiplying it by |t.inverse()| and then shift it back?  Check this.
            || fabs(angle_y) > tolerance 
            || fabs(angle_z) > tolerance)
        {
-
 
 #if 0 
            position.show("position before rotation about main axes:");
@@ -11636,7 +11365,6 @@ This can't happen, since this case is caught above.
    return 0;
 
 }  /* End of |Focus::rotate| definition.  */
-
 
 @q ** (2) Reflect off.@>
 @*1 Reflect off.
@@ -11743,7 +11471,6 @@ inline
 const Point& 
 get_direction(void) const {return direction;}
 
-
 @q *** (3) Get distance.@>
 @*2 Get distance.
 @^\cfunc{Focus}{get\_distance}@>
@@ -11778,7 +11505,6 @@ Added this function.
 inline
 const Point& 
 get_up(void) const {return up;}
-
 
 @q *** (3) Get transform.@>
 @*2 Get transform.
@@ -11993,7 +11719,6 @@ Focus_Options(void)
 Added this function.
 \ENDLOG
 
-
 @<Declare |Focus_Options| functions@>=
 int
 clear(void);
@@ -12064,8 +11789,7 @@ Now including
 @<Declare non-member template functions for |Focus|@>@;
 @<Type definitions@>@;
 @<Declarations for the header file@>@;
- 
-
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -12074,7 +11798,6 @@ Now including
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode) (setq fill-column 80))      @>
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>
@@ -12088,4 +11811,3 @@ Now including
 @q indent-tabs-mode:nil @>
 @q End: @>
 
-  

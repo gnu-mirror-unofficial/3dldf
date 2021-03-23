@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Vector Maninpulation Commands.  @>
 @** Vector Maninpulation Commands.  
@@ -153,7 +151,6 @@ value to |Scan_Parse::cull_func|.
 
 };
 
-
 @q *** (3) command --> RECTIFY point_vector_variable.@> 
 @*2 \§command> $\longrightarrow$ \.{RECTIFY}
 \§point-vector variable>.
@@ -198,7 +195,6 @@ Change the way the options are handled.
 
 };
 
-
 @q ** (2) Commands for picture-vector variables.@> 
 @*1 Commands for {\bf picture-vector} variables.
 \initials{LDF 2007.07.27.}
@@ -207,7 +203,6 @@ Change the way the options are handled.
 \initials{LDF 2007.07.27.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) command --> picture_vector_variable @>
 @q *** (3) PYTHAGOREAN_PLUS.                   @> 
@@ -261,7 +256,6 @@ Added this rule.
              {
               
                          pv  = new Pointer_Vector<Picture>;
-               
 
 @q ******* (7)@> 
 
@@ -332,7 +326,6 @@ Added this rule.
 
                    }  /* |if (temp_entry == 0)|  */
 
-
 @q ******** (8)@> 
 
                else  /* |temp_entry != 0|  */
@@ -343,9 +336,8 @@ Added this rule.
                       if (temp_entry->object == static_cast<void*>(0))
                          {
                               Picture* p;
-                        
 
-                              p = new Picture;
+p = new Picture;
                               p->clear();
 
                               temp_entry->object = static_cast<void*>(p);
@@ -353,7 +345,6 @@ Added this rule.
 @q ********** (10).@> 
             
                          }  /* |if (temp_entry->object == 0)|  */
-                         
 
 @q ********* (9).@>  
 
@@ -364,10 +355,6 @@ Added this rule.
                        ++pv->ctr;
 
                   }  /* |else| (|temp_entry != 0|)  */
-
-
-
-
 
 @q ******** (8)@> 
 
@@ -385,7 +372,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -394,7 +380,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

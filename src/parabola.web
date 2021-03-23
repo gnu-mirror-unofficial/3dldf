@@ -48,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Parabolae.@>
 @** Parabolae\quad ({\tt parabola\PERIOD web}).\hfil
@@ -241,13 +240,11 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
  
    axis_h = axis_v = INVALID_REAL;
 
-
 @q **** (4) |options == static_cast<Parabola_Set_Option_Struct*>(0)|.  Use defaults.@> 
 @ |options == static_cast<Parabola_Set_Option_Struct*>(0)|.  Use defaults.
 \initials{LDF 2005.11.07.}
 
 @<Define |Parabola| functions@>= 
-
 
     if (options == static_cast<Parabola_Set_Option_Struct*>(0))  
        {
@@ -261,7 +258,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
             max_extent      = DEFAULT_MAX_EXTENT;
             increment_value = DEFAULT_INCREMENT_VALUE;
        }
-
 
 @q **** (4) |options != static_cast<Parabola_Set_Option_Struct*>(0)|.@> 
 @ |options != static_cast<Parabola_Set_Option_Struct*>(0)|.  
@@ -286,7 +282,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
             else
                parameter = DEFAULT_PARAMETER;
 
-
 @q ***** (5)@> 
 
            if (options->max_extent != INVALID_REAL)
@@ -296,8 +291,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
               }
             else
                max_extent = DEFAULT_MAX_EXTENT;
-
-
 
 @q ***** (5)@> 
 
@@ -320,8 +313,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
             else
                focus_0 = INVALID_POINT;
 
-
-
 @q ***** (5) |vertex|.@> 
 
            if (options->vertex)
@@ -337,7 +328,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
                vertex_0 = INVALID_POINT;
 
 @q ***** (5)@> 
-
 
        }  /* |else| (|options != static_cast<Parabola_Set_Option_Struct*>(0)|)  */
 
@@ -361,7 +351,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
           focus_0 = INVALID_POINT;
 
       }  /* |if|  */
-      
 
 @q **** (4) Generate |Path|.@> 
 @ Generate |Path|.
@@ -384,9 +373,8 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
     Point shift_pt = INVALID_POINT;
 
     deque<Point*> curr_deque;
-  
 
-    if (vertex_0 == INVALID_POINT)
+if (vertex_0 == INVALID_POINT)
        {
            shift_pt = focus_0;
            shift_pt.shift(-p); 
@@ -397,7 +385,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
           focus_0.set(p, 0, 0);
           focus_0.shift(vertex_0);
        }
-
 
 @q ***** (5) Create the |Point| on |points| corresponding to |vertex_0|. @> 
 @ Create the |Point| on |points| corresponding to |vertex_0|.
@@ -414,7 +401,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
        curr_pt->shift(shift_pt);
 
     curr_deque.push_front(curr_pt);
-     
 
 @q ***** (5) Create the other |Points|.@>
 @ Create the other |Points|.
@@ -426,7 +412,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
 \ENDLOG 
 
 @<Define |Parabola| functions@>= 
-
 
     for (real t = increment_value; curr_x < max_extent; t += increment_value)
        {
@@ -476,7 +461,6 @@ Parabola::set(Parabola_Set_Option_Struct* options, Scanner_Node scanner_node)
        }
 
     connectors.push_back("..");
-
 
 @q **** (4) Exit function successfully with return value 0.@>
 @ Exit function successfully with return value 0.
@@ -543,7 +527,6 @@ Added this function.
 @<Declare non-member template functions for |Parabola|@>=
 Parabola* 
 create_new(const Parabola& c, Scanner_Node scanner_node);
-
 
 @q * (1) Assignment.@> 
 @* Assignment.
@@ -672,7 +655,6 @@ get_discriminant(const Path& p,
                  Transform* t = 0, 
                  Scanner_Node scanner_node = 0) const;
 
-
 @q *** (3) Definition.@> 
 
 @
@@ -774,8 +756,7 @@ Added this section.
            if (t != static_cast<Transform*>(0))
               *t = u->inverse();
 
-        
-           delete u;
+delete u;
            u = static_cast<Transform*>(0);   
 
        }  /* |else| (|normal != y_axis_pt|)  */ 
@@ -791,8 +772,7 @@ Added this section.
 
     real z_int = bp.pt.get_z();
 
-   
-    return Real_Triple((half_parameter * (half_parameter - (2 * slope * z_int))),
+return Real_Triple((half_parameter * (half_parameter - (2 * slope * z_int))),
                        slope,
                        z_int);
 
@@ -936,7 +916,6 @@ Added this section.
 
 @q **** (4)@> 
 
-
     q *= *t;
 
     if (fabs(q.get_y()) > tolerance)
@@ -971,7 +950,6 @@ Added this section.
     return -1;
 
 }  /* End of |Parabola::location()| definition.  */
-
 
 @q * (1) Predicates.@> 
 @* Predicates.
@@ -1052,8 +1030,6 @@ Path::is_parabolic(Scanner_Node scanner_node) const
 {
    return false;
 
-
-
 } /* End of |Path::is_parabolic()| definition.  */
 
 @q * (1) Transformations.@>
@@ -1064,7 +1040,6 @@ Path::is_parabolic(Scanner_Node scanner_node) const
 \initials{LDF 2005.11.07.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Multiplication by a |Transform| with assignment.@>
 @*2 Multiplication by a |Transform| with assignment.
@@ -1092,7 +1067,6 @@ Parabola::operator*=(const Transform& t)
    Conic_Section::operator*=(t);
    return Path::operator*=(t);
 }
-
 
 @q ** (2) Rotatation around the main axes.@>
 @*1 Rotation  around the main axes. 
@@ -1154,7 +1128,6 @@ Parabola::scale(real x, real y, real z)
 Added this function.
 \ENDLOG
 
-
 @<Declare |Parabola| functions@>=
 
 virtual
@@ -1183,7 +1156,6 @@ Parabola::shear(real xy, real xz, real yx, real yz,
 Added this section.
 \ENDLOG
 
-
 @q *** (3) |real| arguments.@>
 @*2 {\bf real} arguments. 
 @^\cfunc{Parabola}{shift}@>
@@ -1209,7 +1181,6 @@ Parabola::shift(real xx, real yy, real zz)
   return operator*=(t);
 }
 
-
 @q *** (3) Point argument.@>
 
 @*2 {\bf Point} argument. 
@@ -1234,7 +1205,6 @@ Parabola::shift(const Point& p)
   return shift(p.get_x(), p.get_y(), p.get_z());
 }
 
-
 @q ** (2) Shift times. @>
 @*1 Shift times. 
 \initials{LDF 2005.11.07.}
@@ -1252,11 +1222,9 @@ Added this function.
 
 @<Declare |Parabola| functions@>=
 
-
 virtual
 void 
 shift_times(real x, real y = 1, real z = 1);
-
 
 @
 @<Define |Parabola| functions@>=
@@ -1293,7 +1261,6 @@ Parabola::shift_times(const Point& p)
 {
   return shift_times(p.get_x(), p.get_y(), p.get_z());
 }
-
 
 @q ** (2) Rotatation around an arbitrary axis.@>
 @*1 Rotatation around an arbitrary axis. 
@@ -1508,7 +1475,6 @@ Parabola::intersection_points(const Plane* p, Scanner_Node scanner_node) const
           else 
              cerr_strm << "The plane of `*this' and `*p' are parallel, ";
 
-
           cerr_strm << "i.e., there are infinitely many intersections."
                     << endl 
                     << "Exiting function with return value 0.";
@@ -1640,7 +1606,6 @@ Parabola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5)@> 
 
            real half_parameter = parameter / 2;
@@ -1659,7 +1624,6 @@ Parabola::intersection_points(const Path* p, Scanner_Node scanner_node) const
            Bool_Point* curr_bool_pt;
            Pointer_Vector<Bool_Point>* bpv;
 
-  
 @q ***** (5) |slope| is infinite or |slope == INVALID_REAL|.@> 
 
 @ |slope| is infinite or |slope == INVALID_REAL|.
@@ -1714,7 +1678,6 @@ Added this section.
            real slope_squared = slope * slope;
 
            real discriminant_root = sqrt(discriminant);
-
 
 @q ***** (5)@> 
 
@@ -1784,7 +1747,6 @@ Now setting |curr_bool_pt->b| to |!location(curr_bool_pt->pt)|.
 
                            curr_z = (half_parameter - discriminant_root) / slope;
 
-
                            curr_bool_pt = new Bool_Point;
 
                            curr_bool_pt->pt.set(curr_x, 0, curr_z);
@@ -1851,18 +1813,13 @@ Programmed this case.
                }
 
        }   /*  |*this| and |*p| are non-coplanar.  */
-   
 
 @q **** (4)@> 
 
 }  /* End of |Parabola::intersection_points()| definition.  */
 
-
-
-
 @q ** (2) |Plane| reference argument.@> 
 @*1 {\bf Plane} reference argument.
-
 
 @q * (1) Modifying.@> 
 @* Modifying.
@@ -1893,7 +1850,6 @@ Added this function.
 virtual
 int
 set_cycle(const bool b = true, Scanner_Node scanner_node = 0);
-
 
 @q *** (3) Definition.@> 
 @
@@ -1963,8 +1919,6 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
 
 }  /* End of |Parabola::set_cycle()| definition.  */
 
-
-
 @q * (1) Show.@> 
 @* Show.
 \initials{LDF 2005.11.07.}
@@ -1993,7 +1947,6 @@ show(string text = "",
      Focus* f = 0, 
      const unsigned short proj = 0,
      const real factor = 1) const;
-
 
 @q ** (2) Definition.@> 
 
@@ -2069,9 +2022,8 @@ Parabola_Set_Option_Struct
 
    real max_extent;
    real increment_value;
-   
 
-   @<Declare |Parabola_Set_Option_Struct| functions@>@;
+@<Declare |Parabola_Set_Option_Struct| functions@>@;
 
 };
 
@@ -2083,7 +2035,6 @@ Parabola_Set_Option_Struct
 \initials{LDF 2005.11.07.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Constructors.@>
 @*2 Constructors.
@@ -2209,7 +2160,6 @@ and |Path* directrix|, and setting them and
 |real parameter|, |real linear_eccentricity|,
 |real numerical_eccentricity|, and |real directrix| to 0.
 
-
 \initials{LDF 2005.11.21.}
 Removed |Parabola_Set_Option_Struct::numerical_eccentricity|.
 The numerical eccentricity of a parabola is always 1.
@@ -2248,7 +2198,6 @@ Parabola_Set_Option_Struct::clear(void)
 
 }  /* End of |Parabola_Set_Option_Struct::clear()| definition.  */
 
-
 @q * (1) Putting Parabola together. @>
 @* Putting {\bf Parabola} together.
 
@@ -2275,7 +2224,6 @@ This is what's compiled.
 @<Define |struct Parabola_Set_Option_Struct|@>@;
 @<Declare non-member template functions for |Parabola|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -2284,7 +2232,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

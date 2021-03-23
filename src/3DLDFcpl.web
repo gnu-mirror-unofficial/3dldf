@@ -48,8 +48,6 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-
-
 @q * (0) Compiling.@> 
 @** Compiling\quad ({\tt 3DLDFcpl\PERIOD web}).\hfil
 
@@ -89,7 +87,6 @@ what I want, but I'm not sure.
 Clean up the conditionally compiled code.  I
 think it could be neater.  
 \ENDTODO 
-
 
 \LOG
 \initials{LDF 2003.05.13.}  
@@ -159,28 +156,19 @@ variables are defined or undefined here.
 
 #include <bitset>
 
-
 #include <errno.h>
-
 
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
 
-
 #include <stdlib.h>
-
 
 #include <string>
 
-
-
 #include <sys/stat.h>
 
-
-
 #include <sys/types.h>
-
 
 #include <time.h>
 
@@ -241,10 +229,9 @@ file_age(char* filename_1, char* filename_2)
 #if 0 
     int MAX_STRING = 64;
     char *file1, *file2;
-#endif 
+#endif
 
-     
-    file_1_exists = stat(filename_1,&file_info_1); // 0, if the file 1 exists.
+file_1_exists = stat(filename_1,&file_info_1); // 0, if the file 1 exists.
     file_2_exists = stat(filename_2,&file_info_2);
 
     if ((file_1_exists != 0) && (file_2_exists != 0)) /* Neither file
@@ -368,7 +355,7 @@ int
 main(int argc, char *argv[])
 {@/
 
-  volatile bool DEBUG = false;  /* |true|  */
+  volatile bool DEBUG = true;  /* |false|  */
 
   unsigned short comparison_value;       
 
@@ -496,10 +483,9 @@ main(int argc, char *argv[])
                                        out of the archive. We'll assume
                                        \filename{loader.h} is up-to-date. */
      
-     ; /*   Do nothing  */  
-                                                        
+     ; /*   Do nothing  */
 
-    else if (comparison_value == 3) /* \filename{loader.h} doesn't exist, but 
+else if (comparison_value == 3) /* \filename{loader.h} doesn't exist, but 
                                        \filename{3dldf} does. 
                                        If \filename{loader.h} doesn't exist, 
                                        we're in serious trouble. 
@@ -646,14 +632,10 @@ testing it.
  dependencies.set(25);
  process_file("examples", 26, true);
 
-
 @
 @<Main@>+=
- 
 
-
-
- for (int i = 1; i < MAX_FLAGS; i++)
+for (int i = 1; i < MAX_FLAGS; i++)
     dependencies.set(i); /* Depends on all header files. 
                             \initials{LDF 2002.11.10.}  Setting them all, in case
                             I've unset any above.  */
@@ -662,12 +644,8 @@ testing it.
                                             does not write a header
                                             file.  */@;
       }
- 
- 
 
-
-
-  if(compile_and_link_flags.any())
+if(compile_and_link_flags.any())
     {
       if (SILENT == false)
         cout << "Relinking.\n";
@@ -683,8 +661,6 @@ and \filename{procDEC.web}.
 \ENDLOG 
 
 @<Main@>+=
-
-   
 
 #ifdef __GNUC__ 
   string system_string = "g++ -lm -g ";
@@ -755,8 +731,6 @@ and \filename{procDEC.web}.
 }
 
 @i 3DLDFprc.web
-
-
 
 @q * Putting {\tt 3DLDFcpl} together.@>
 @* Putting {\tt 3DLDFcpl} together.

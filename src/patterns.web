@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
 
 @q * (0) Patterns.@>
 @** Patterns\quad ({\tt patterns\PERIOD web}).\hfil
@@ -192,7 +191,6 @@ hex_pattern_1(Picture& picture,
 
               unsigned int max_hexagons = 1000);
 
-
 @
 @<Define Pattern functions@>=
 unsigned int
@@ -211,12 +209,10 @@ hex_pattern_1(Picture& picture,
               Color* fill_color_outer,                
 
               Color* draw_color_middle,  /* Middle */ 
-              Color* fill_color_middle,               
+              Color* fill_color_middle,
 
-                                                      
-              Color* draw_color_inner,  /* Inner */   
+Color* draw_color_inner,  /* Inner */   
               Color* fill_color_inner,
-
 
               unsigned int max_hexagons)
 
@@ -290,13 +286,11 @@ wouldn't be as clearly understandable.
   Reg_Polygon p_middle;
   Reg_Polygon p_inner;
 
-
 @ The middle and inner hexagons are only set (and used) if 
 |do_middle| and/or |do_inner| are true. 
 \initials{LDF 2002.09.22.}
 
 @<Define Pattern functions@>=
-
 
   if (do_middle)
     p_middle.set(pt0, 6, diameter_middle);
@@ -340,7 +334,6 @@ wouldn't be as clearly understandable.
     t.shift(.5 * right_shift);
 
   p_outer *= t;  
-
 
   if (do_middle)
     p_middle *= t;
@@ -422,7 +415,6 @@ wouldn't be as clearly understandable.
           if (do_inner)
             p_inner_copy = p_inner;
 
-
           if (j == 1)
             {
               p_outer_copy *= offset;
@@ -440,7 +432,6 @@ wouldn't be as clearly understandable.
               if (do_inner)
                 p_inner_copy *= t;
             }
-
 
 @ This loop draws and/or fills the horizontal rows.  
 \initials{LDF 2002.09.22.}
@@ -497,11 +488,8 @@ wouldn't be as clearly understandable.
                                         fill_color_inner,
                                         0, &pen_inner);
                 }
-              
 
-
-              
-              ++hexagon_ctr;
+++hexagon_ctr;
               if (hexagon_ctr >= max_hexagons)
                 {
                   cerr << "ERROR! In hex_pattern_1():\n"
@@ -536,12 +524,10 @@ wouldn't be as clearly understandable.
     {
       cerr << "Exiting hex_pattern_1()." << endl;
     }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  return hexagon_ctr;
-} 
-  
+return hexagon_ctr;
+}
 
 @q * Epicycloid patterns. @>
 @* Epicycloid patterns.
@@ -549,7 +535,6 @@ wouldn't be as clearly understandable.
 circle.  If I then end on a point on the inner circle too, I won't
 have ``loose ends''.
 \initials{LDF 2004.01.31.}  
-
 
 @q ** Epicycloid pattern 1.@>
 @ Epicycloid pattern 1.
@@ -627,20 +612,17 @@ epicycloid_pattern_1(Picture& picture,
     }
 
   using namespace Colors;
- 
 
-  unsigned int spiral_counter = 0;
+unsigned int spiral_counter = 0;
   real radius_outer;
   real phi;
 
   Path spiral;
   spiral += "..";
 
-
   Dash_Pattern ddashed;
 
   ddashed.set_type(Dash_Pattern::EVENLY);
-
 
   real radius_inner = diameter_inner / 2;
 
@@ -655,16 +637,12 @@ epicycloid_pattern_1(Picture& picture,
   Point normal;
   Point p0;
 
-
   real theta = 360.0 / arc_divisions;
-
 
   Circle temp_circle;
   Point p2;
   Point temp_circle_center;
   Point temp_circle_normal;
-
-
 
   if (offsets < 1)
     {
@@ -675,7 +653,6 @@ epicycloid_pattern_1(Picture& picture,
 
   real diameter_outer;
   vector<const Color*>::iterator iter = colors.begin();
-
 
   for (diameter_outer = diameter_outer_start;
        diameter_outer >= diameter_outer_end;
@@ -690,8 +667,6 @@ epicycloid_pattern_1(Picture& picture,
           iter = colors.begin();
         }
 
-
-
       radius_outer = diameter_outer / 2;
       outer_circle_center.set(0, 0, radius_inner + radius_outer);
       normal = outer_circle_center;
@@ -699,14 +674,10 @@ epicycloid_pattern_1(Picture& picture,
       p0.set(0, 0, radius_inner + diameter_outer);
       outer_circle.set(outer_circle_center, diameter_outer);
 
-
       if(colors.size() == 0)
         colors.push_back(&black);
-      
 
-      
-
-      for (unsigned int i = 0; i < offsets; ++i)
+for (unsigned int i = 0; i < offsets; ++i)
         {
 
           if (i != 0)
@@ -764,7 +735,6 @@ around the center of the inner |Circle|, but by rotating the |Point|
 used for tracing the epicycloid about the center of the 
 outer |Circle|.
 
-
 @q ** Epicycloid pattern 3.@>
 @ Epicycloid pattern 3.
 \initials{LDF 2003.02.11.}  This function works well for outer |Circles| with
@@ -790,7 +760,6 @@ I've gotten rid of |Colors::default_color_vector|.
 removed the global variable |origin|.  I'm replacing it with a predefined
 variable defined in |Scanner_Type::create()|.
 \ENDLOG 
-
 
 @q *** Declaration.  @>
 
@@ -819,16 +788,13 @@ epicycloid_pattern_3(Picture& picture,
 
   bool DEBUG = false; /* true */
 
-
   Point origin_pt(0, 0, 0);
 
   vector<const Color*>::iterator color_iter = colors.begin();
 
-
   Dash_Pattern ddashed;
 
   ddashed.set_type(Dash_Pattern::EVENLY);
-
 
   real radius_outer = diameter_outer / 2;
   real radius_inner = diameter_inner / 2;
@@ -900,8 +866,6 @@ epicycloid_pattern_3(Picture& picture,
   return spiral_counter;
 }
 
-
-
 @q * Putting patterns together.@>
 @ Putting patterns together.
 
@@ -915,7 +879,6 @@ epicycloid_pattern_3(Picture& picture,
 @(patterns.h@>=
 @<Declare Pattern functions@>@;
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

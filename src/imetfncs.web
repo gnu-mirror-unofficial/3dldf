@@ -47,12 +47,9 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |Id_Map_Type| and |Id_Map_Entry_Type| functions.@>
 @** {\bf Id\_Map\_Type} and {\bf Id\_Map\_Entry\_Type} functions.
-
 
 \LOG
 \initials{LDF 2004.07.16.}
@@ -171,7 +168,6 @@ const Id_Map_Type&
 Id_Map_Type::operator=(const Id_Map_Type& i)
 {
 
-
 @q ***** (6) Preliminaries.@>   
 
 #if DEBUG_COMPILE
@@ -192,7 +188,6 @@ Id_Map_Type::operator=(const Id_Map_Type& i)
    using namespace Scan_Parse;
 
 @q ****** (6) @>   
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -230,7 +225,6 @@ Id_Map_Type::operator=(const Id_Map_Type& i)
       curr_name = iter->first;
       curr_entry = iter->second;
 
-
 @q ******* (7) Error handling:  |curr_entry == static_cast<Id_Map_Entry_Node>(0)|.@> 
 
 @ Error handling:  |curr_entry == static_cast<Id_Map_Entry_Node>(0)|.
@@ -250,11 +244,9 @@ Id_Map_Type::operator=(const Id_Map_Type& i)
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
 
-
               throw bad_assignment;
 
     } /* |if (curr_entry == static_cast<Id_Map_Entry_Node>(0))|  */
-
 
 @q ******* (7) Superordinate vectors.  Doing nothing.@>
 
@@ -267,8 +259,6 @@ case.
  
      else if (curr_entry->subordinate_array != static_cast<Id_Map_Entry_Node>(0))
         ;  /* Do nothing.  */@; 
-
-
 
 @q ******* (7) Everything else.@> 
 
@@ -304,14 +294,12 @@ Now calling |new_entry->set_id_map_node(this, true)|.
              log_message(cerr_strm);
              cerr_message(cerr_strm, error_stop_value);
              cerr_strm.str("");
-             
 
-             throw;
+throw;
 
            } /* |catch (Bad_Assignment_Type)|  */
-            
 
-         new_entry->set_id_map_node(this, true);
+new_entry->set_id_map_node(this, true);
 	 
          id_map[curr_name] = new_entry;
 
@@ -358,13 +346,9 @@ Now putting |new_superordinate_vector_entry| onto |id_map|.
 
           throw;
 
-          
-        } /* |catch (Bad_Assignment_Type)|  */
-        
+} /* |catch (Bad_Assignment_Type)|  */
 
- 
-      new_superordinate_vector_entry->id_map_node = this; 
-
+new_superordinate_vector_entry->id_map_node = this; 
 
       new_entry->set_superordinate_vector(new_superordinate_vector_entry,
                                           true, /* |set_vector|  */
@@ -373,11 +357,9 @@ Now putting |new_superordinate_vector_entry| onto |id_map|.
 
       id_map[new_superordinate_vector_entry->name] = new_superordinate_vector_entry;
 
-
 @q ********* (9).@> 
 
     } /* |else if (curr_entry->superordinate_vector != static_cast<Id_Map_Entry_Node>(0))|  */
-
 
 @q ******** (8) @> 
 
@@ -393,7 +375,6 @@ Now putting |new_superordinate_vector_entry| onto |id_map|.
 \initials{LDF 2004.09.15.}
 
 @<Define |Id_Map_Type| functions@>=
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -412,9 +393,6 @@ Now putting |new_superordinate_vector_entry| onto |id_map|.
   return i;
 
 } /* End of |Id_Map_Type::operator=()| definition.  */
-
-
-
 
 @q * (1) |Id_Map_Entry_Type| functions.  @>
 @* {\bf Id\_Map\_Entry\_Type} functions. 
@@ -457,8 +435,6 @@ Id_Map_Entry_Type::Id_Map_Entry_Type(void)
 
   return;
 }
-
-
 
 @q ** (2) Destructor.  @>
 @*1 Destructor.
@@ -509,7 +485,6 @@ destructor.  It would be possible to make |id_map| available by
 putting a |Scanner_Node| in |Id_Map_Entry_Type| and setting it for all
 entries.  (Added ``TODO'' note to myself, below.)
 
-
 \initials{LDF 2004.08.27.}
 Added code for handling |superordinate_vector|.  It currently 
 works for |color_vectors| and |point_vectors|.
@@ -525,7 +500,6 @@ Make it possible to set |stop_value| to |false| when running 3DLDF
 silently.  It's currently not possible to access the |Scanner_Node| that the
 |Id_Map_Entry_Type| (|*this|) is on, so it's not possible to check its
 |run_state.error_stop_mode|.  
-
 
 \initials{LDF 2004.08.27.}
 Perhaps make |id_map| available in this function by putting
@@ -580,13 +554,11 @@ Id_Map_Entry_Type::~Id_Map_Entry_Type(void)
 
        cerr_strm << endl << "`name' == " << name;
 
-       
-       log_message(cerr_strm); 
+log_message(cerr_strm); 
        cerr_message(cerr_strm); 
        cerr_strm.str(""); 
        }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
    Id_Map_Entry_Node node;
 
@@ -606,10 +578,8 @@ Id_Map_Entry_Type::~Id_Map_Entry_Type(void)
             delete s;
             s = static_cast<Shape*>(0);
           }
-        
 
-      } /* |if (is_shape())|  */
-
+} /* |if (is_shape())|  */
 
 @q ****** (6) Handle |Nurbs|.@>  
 @ Handle |Nurbs|.
@@ -643,7 +613,6 @@ and defined |Nurb::clear()|.
 
        }  /* |else if (type == NURB)|  */
 
-
 @q ****** (6) Handle |Conic_Section_Lattices|.@>  
 @ Handle |Conic_Section_Lattices|.
 \initials{LDF 2007.07.29.}
@@ -663,7 +632,6 @@ Added this section.
        c = 0;
 
    }  /* |else if (type == CONIC_SECTION_LATTICE)|  */
-
 
 @q ****** (6) Handle |Sphere_Development|.@>  
 @ Handle |Sphere_Development|.
@@ -690,7 +658,6 @@ Added this section.
 \initials{LDF 2004.07.01.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
    else if (type == UNDECLARED)
      {
@@ -736,8 +703,6 @@ Added this section.
          ; /* Do nothing.  */@; 
 
      } /* |else if (type == UNDECLARED)|  */@;
-
-
 
 @q ****** (6) Handle vector types.@>  
 @ Handle vector types.
@@ -814,7 +779,6 @@ Add code for handling other vector-types.
 @ Destroy |object|, if it exists.
 \initials{LDF 2004.08.27.}
 
-
 @q ******** (8) |object| exists.  Will destroy it.@> 
 @ |object| exists.  Will destroy it.
 \initials{LDF 2004.08.27.}
@@ -828,7 +792,6 @@ Added this section.
 
        if (object != static_cast<Id_Map_Entry_Node>(0))
          {
-
 
 #if DEBUG_COMPILE
            if (DEBUG)
@@ -893,7 +856,6 @@ Added this section.
 
            }
 
-
 @q ********* (9) |COLOR_VECTOR|.@> 
 @ |COLOR_VECTOR|.
 
@@ -930,7 +892,6 @@ Added this section.
                pv = 0;
 
              }
-
 
 @q ********* (9) |BOOL_POINT_VECTOR|.@> 
 @ |BOOL_POINT_VECTOR|.
@@ -974,7 +935,6 @@ Added this section.
                pv = 0;
 
              }
-
 
 @q ********* (9) |ELLIPSE_VECTOR|.@> 
 @ |ELLIPSE_VECTOR|.
@@ -1023,7 +983,6 @@ Added this section.
                pv = 0;
 
              }
-
 
 @q ********* (9) |PARABOLA_VECTOR|.@> 
 @ |PARABOLA_VECTOR|.
@@ -1097,7 +1056,6 @@ Added this section.
 
              }
 
-
 @q ********* (9) |CONIC_SECTION_LATTICE_VECTOR|.@> 
 @ |CONIC_SECTION_LATTICE_VECTOR|.
 \initials{LDF 2007.07.29.}
@@ -1123,8 +1081,6 @@ Added this section.
 
              }
 
-
-
 @q ********* (9) |RECTANGLE_VECTOR|.@> 
 @ |RECTANGLE_VECTOR|.
 
@@ -1148,7 +1104,6 @@ Added this section.
                pv = 0;
 
              }
-
 
 @q ********* (9) |POLYGON_VECTOR|.@> 
 @ |POLYGON_VECTOR|.
@@ -1200,7 +1155,6 @@ Added this section.
 
              }
 
-
 @q ********* (9) |ELLIPSOID_VECTOR|.@> 
 @ |ELLIPSOID_VECTOR|.
 
@@ -1224,7 +1178,6 @@ Added this section.
                pv = 0;
 
              }
-
 
 @q ********* (9) |SPHERE_VECTOR|.@> 
 @ |SPHERE_VECTOR|.
@@ -1298,9 +1251,6 @@ Added this section.
 
              }
 
-
-
-
 @q ********* (9) |CUBOID_VECTOR|.@> 
 @ |CUBOID_VECTOR|.
 
@@ -1325,14 +1275,11 @@ Added this section.
 
              }
 
-
-
 @q ********* (9)@> 
 
            object = 0;
 
          } /* |if (object != static_cast<Id_Map_Entry_Node>(0))|  */
- 
 
 @q ******** (8) |object| doesn't exist.  Won't destroy it.@> 
 @ |object| doesn't exist.  Won't destroy it.
@@ -1460,8 +1407,6 @@ Added code for handling entries of type |PREDICATE|.
          }
      } /* |else if (type == BOOLEAN)|  */
 
-
-
    else if (type == COMPLEX)
        {
         Complex* c = static_cast<Complex*>(object);
@@ -1473,7 +1418,6 @@ Added code for handling entries of type |PREDICATE|.
 
        }  /* |else if (type == COMPLEX)|  */
 
-
    else if (type == MATRIX)
        {
         Matrix* m = static_cast<Matrix*>(object);
@@ -1484,8 +1428,6 @@ Added code for handling entries of type |PREDICATE|.
           }
 
        }  /* |else if (type == MATRIX)|  */
-
-
 
 @q ******* (7) |BOOL_POINT|.@>  
 
@@ -1503,7 +1445,6 @@ Added code for handling entries of type |PREDICATE|.
  
 @q ******* (7) |STRING|.@>  
 
-
    else if (type == STRING)
      {
        
@@ -1515,9 +1456,8 @@ Added code for handling entries of type |PREDICATE|.
            c = static_cast<string*>(0);
          }
      }
-  
 
-   else if (type == NUMERIC)
+else if (type == NUMERIC)
      {
 
        real* c = static_cast<real*>(object);
@@ -1578,7 +1518,6 @@ Added code for handling entries of type |PREDICATE|.
 
      } /* | else if (type == COLOR)|  */
 
-
    else if (type == PICTURE)
      {
        
@@ -1615,8 +1554,6 @@ Added code for handling entries of type |PREDICATE|.
          }
      }
 
-
-
    else if (type == FOCUS)
      {
        
@@ -1628,7 +1565,6 @@ Added code for handling entries of type |PREDICATE|.
            c = static_cast<Focus*>(0);
          }
      }
-
 
    else if (type == MACRO)
      {
@@ -1672,8 +1608,6 @@ Added code for handling entries of type |PREDICATE|.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
-
    else if (category == INTERNAL)
      {
        
@@ -1686,14 +1620,11 @@ Added code for handling entries of type |PREDICATE|.
          }
      }
 
-
 @q ****** (6) Handle true internal quantities.@>  
 @ Handle true internal quantities.
 \initials{LDF 2004.11.11.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
-
 
    else if (category == TRUE_INTERNAL)
      {
@@ -1707,15 +1638,11 @@ Added code for handling entries of type |PREDICATE|.
          }
      }  
 
-
-
-
 @q ****** (6) Handle synonyms.@>  
 @ Handle synonyms.
 \initials{LDF 2004.07.01.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
    else if (type == SYNONYM && object != 0)
      {
@@ -1735,12 +1662,10 @@ Added code for handling entries of type |PREDICATE|.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
    else if (category == SPARK && object == 0)
      {
        /* Do nothing.  */@; 
      }
-
 
 @q ****** (6) Error handling:  @>
 @q ****** (6) |object != 0| for a |type| where this isn't allowed.@>  
@@ -1766,7 +1691,6 @@ where this isn't allowed.
        
        return;
      }
-
 
 @q ****** (6) Error handling:  Case not accounted for.@>
 @ Error handling:  Case not accounted for.
@@ -1811,7 +1735,6 @@ where this isn't allowed.
 
 }  /* End of |~Id_Map_Entry_Type| definition.  */
 
-
 @q ** (2) Destroy array subentries.  @>
 @*1 Destroy array subentries.
 
@@ -1840,7 +1763,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
   using namespace Scan_Parse;
 
    stringstream cerr_strm;
-
 
   string thread_name;
 
@@ -1882,7 +1804,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
    Id_Map_Entry_Node curr_entry = this;
    Id_Map_Entry_Node temp_entry = 0;
 
-
 @q **** (4) Cycle down through |left| and |right|.@> 
 
 @ Cycle down through |left| and |right|.
@@ -1913,8 +1834,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
-
          if (curr_entry->left)
 	  {
 
@@ -1932,12 +1851,10 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
                 }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 	    curr_entry = curr_entry->left;
 	    continue;
 
 	  } /* |if (curr_entry->left)|  */
-
 
 @q ***** (5) |right| is non-null.@> 
 
@@ -1945,7 +1862,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
 \initials{LDF 2004.08.21.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
          if (curr_entry->right)
 	  {
@@ -1964,7 +1880,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
                 }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 	    curr_entry = curr_entry->right;
 	    continue;
 
@@ -1977,7 +1892,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
 	else /* (|!(curr_entry->left || curr_entry->right)|)  */
 	  {
 
@@ -1987,7 +1901,6 @@ Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node scanner_node)
 \initials{LDF 2004.08.21.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
 	    if (curr_entry->up == static_cast<Id_Map_Entry_Node>(0))
 	      {
@@ -2039,7 +1952,6 @@ after comparing it to |curr_entry->left| and (possibly)
 |curr_entry->right|.
 \ENDLOG
 
-
 @<Define |Id_Map_Entry_Type| functions@>=
 
 	    if (temp_entry == curr_entry->left)
@@ -2062,11 +1974,9 @@ after comparing it to |curr_entry->left| and (possibly)
 
       } /* |for|  */
 
-
   return 0;
 
 }  /* End of |Id_Map_Entry_Type::destroy_array_subentries()| definition.  */
-
 
 @q ** (2) Setting.  @>
 @*1 Setting.
@@ -2177,11 +2087,7 @@ Id_Map_Entry_Type::set_entry(string nname,
 #endif /* |DEBUG_COMPILE|  */@; 
    }
 
-
 #endif /* |HAVE_PTHREAD_H|  */@;
-
-
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -2211,9 +2117,6 @@ Id_Map_Entry_Type::set_entry(string nname,
       cerr << "const_flag == " << const_flag << endl
            << "array_flag == " << array_flag << endl
            << "type == " << name_map[type] << endl;
-
-
-
 
       if (object == static_cast<void*>(0))
         cerr << "object == 0" << "\n";
@@ -2245,7 +2148,6 @@ Id_Map_Entry_Type::set_entry(string nname,
 
 @q ** (2) Assignment operator.  @>
 @*1 Assignment operator.
-
 
 \LOG
 \initials{LDF 2004.09.14.}
@@ -2284,14 +2186,11 @@ Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type& i)
 
      } /* |if (id_map_node->scanner_node != static_cast<Scanner_Node>(0))|  */
 
-
    else if (i.id_map_node->scanner_node != static_cast<Scanner_Node>(0))
      {
        scanner_node = i.id_map_node->scanner_node;
 
      } /* |if (i.id_map_node->scanner_node != static_cast<Scanner_Node>(0))|  */
-
-
 
    else /* |   id_map_node->scanner_node  == static_cast<Scanner_Node>(0)
  	   && i.id_map_node->scanner_node == static_cast<Scanner_Node>(0)|  */
@@ -2300,8 +2199,6 @@ Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type& i)
        scanner_node = static_cast<Scanner_Node>(0);
      
      }    /* |else| (|i.id_map_node->scanner_node == static_cast<Scanner_Node>(0)|)  */
-
-
 
 @q **** (4) Preliminaries.@>   
 
@@ -2336,7 +2233,6 @@ Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type& i)
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q **** (4) @>   
 
   name = i.name;
@@ -2359,11 +2255,9 @@ Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type& i)
 
   object = 0;
 
-
 @q ***** (5) Assign to |object|, if |i.object| is non-null.@>
 @ Assign to |object|, if |i.object| is non-null.
 \initials{LDF 2004.09.14.}
-
 
 \LOG
 \initials{LDF 2004.12.28.}
@@ -2392,8 +2286,7 @@ Added code for handling the case that |type == PREDICATE|.
       
     }
 
-            
-  else if (type == PREDICATE && i.object != static_cast<void*>(0))
+else if (type == PREDICATE && i.object != static_cast<void*>(0))
     {
       Predicate* o = new Predicate;
       *o = *static_cast<Predicate*>(i.object);
@@ -2422,7 +2315,6 @@ Added code for handling the case that |type == PREDICATE|.
       *o = *static_cast<ulong_long*>(i.object);
       object = static_cast<void*>(o); 
     }
-
 
   else if (type == STRING && i.object != static_cast<void*>(0))
     {
@@ -2460,14 +2352,12 @@ Added code for handling the case that |type == PREDICATE|.
       object = static_cast<void*>(o); 
     }
 
-
   else if (type == TRANSFORM && i.object != static_cast<void*>(0))
     {
       Transform* o = new Transform;
       *o = *static_cast<Transform*>(i.object);
       object = static_cast<void*>(o); 
     }
-
 
   else if (type == FOCUS && i.object != static_cast<void*>(0))
     {
@@ -2476,7 +2366,6 @@ Added code for handling the case that |type == PREDICATE|.
       object = static_cast<void*>(o); 
     }
 
-
   else if (type == MACRO && i.object != static_cast<void*>(0))
     {
       Definition_Info_Node o = new Definition_Info_Type;
@@ -2484,13 +2373,10 @@ Added code for handling the case that |type == PREDICATE|.
       object = static_cast<void*>(o); 
     }
 
-
-
 @q ****** (6) |Shape|-types.@>
 
 @ |Shape|-types.
 \initials{LDF 2004.09.14.}
-
 
 \LOG
 \initials{LDF 2005.02.11.}
@@ -2499,7 +2385,6 @@ Added code for handling the case that
 \ENDLOG 
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
   else if (type == BOOL_POINT && i.object != static_cast<void*>(0))
     {
@@ -2529,7 +2414,6 @@ Added code for handling the case that
       *o = *static_cast<Triangle*>(i.object);
       object = static_cast<void*>(o); 
     }
-
 
   else if (type == POLYGON && i.object != static_cast<void*>(0))
     {
@@ -2575,7 +2459,6 @@ Added code for handling the case that
       *o = *static_cast<Circle*>(i.object);
       object = static_cast<void*>(o); 
     }
-
 
   else if (type == CUBOID && i.object != static_cast<void*>(0))
     {
@@ -2625,7 +2508,6 @@ Added code for the cases
 |type == TRANSFORM_VECTOR|,
 and
 |type == FOCUS_VECTOR|.
-
 
 \initials{LDF 2005.06.09.}
 Added code for the cases 
@@ -2713,9 +2595,6 @@ Added code for the cases
       object = static_cast<void*>(o);       
     }
 
-
-
-
 @q ****** (6) |Shape|-types.@> 
 @ |Shape|-types.
 \initials{LDF 2005.01.26.}
@@ -2762,13 +2641,11 @@ Added code for the case |type == POLYGON_VECTOR|.
       object = static_cast<void*>(o);       
     }
 
-
   else if (type == PATH_VECTOR)
     {
       Pointer_Vector<Path>* o = new Pointer_Vector<Path>;
       object = static_cast<void*>(o);       
     }
-
 
   else if (type == ELLIPSE_VECTOR)
     {
@@ -2794,7 +2671,6 @@ Added code for the case |type == POLYGON_VECTOR|.
       object = static_cast<void*>(o);       
     }
 
-
   else if (type == POLYGON_VECTOR)
     {
       Pointer_Vector<Polygon>* o = new Pointer_Vector<Polygon>;
@@ -2807,13 +2683,11 @@ Added code for the case |type == POLYGON_VECTOR|.
       object = static_cast<void*>(o);       
     }
 
-
   else if (type == CUBOID_VECTOR)
     {
       Pointer_Vector<Cuboid>* o = new Pointer_Vector<Cuboid>;
       object = static_cast<void*>(o);       
     }
-
 
   else if (type == POLYHEDRON_VECTOR)
     {
@@ -2875,7 +2749,6 @@ Added code for the case |type == POLYGON_VECTOR|.
   
   } /* |if (type == UNDECLARED)| */
 
-
 @q ***** (5) Arrays.@>
 @ Arrays.
 \initials{LDF 2004.09.14.}
@@ -2897,15 +2770,13 @@ Added code for the case |type == POLYGON_VECTOR|.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) |i.left != static_cast<Id_Map_Entry_Node>(0)|.@>
 @ |i.left != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.14.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
       if (i.left != static_cast<Id_Map_Entry_Node>(0))
         {
@@ -2924,11 +2795,9 @@ Added code for the case |type == POLYGON_VECTOR|.
               cerr_message(cerr_strm);
               cerr_strm.str("");
             }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-          
-
-          left = new Id_Map_Entry_Type;
+left = new Id_Map_Entry_Type;
 
           *left = *(i.left);
 
@@ -2936,13 +2805,11 @@ Added code for the case |type == POLYGON_VECTOR|.
 
         } /* |if (i.left != static_cast<Id_Map_Entry_Node>(0))|  */
 
-
 @q ****** (6) |i.right != static_cast<Id_Map_Entry_Node>(0)|.@>
 @ |i.right != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.09.14.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
       if (i.right != static_cast<Id_Map_Entry_Node>(0))
         {
@@ -2971,19 +2838,14 @@ Added code for the case |type == POLYGON_VECTOR|.
 
         } /* |if (i.right != static_cast<Id_Map_Entry_Node>(0))|  */
 
-
 @q ****** (6) @> 
 
-
     } /* |if (array_flag)|  */
-
-
 
   return i;
 
 }   /* End of |Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type&)|
      definition.  */
-
 
 @q ** (2)  Set |superordinate_vector|.@>
 @*1 Set {\bf superordinate\_vector}.
@@ -3038,7 +2900,7 @@ and error output.
 
   using namespace Scan_Parse;
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   int status;
 
@@ -3057,7 +2919,6 @@ and error output.
       ? true : false;
   else 
     error_stop_value = true;  /* |false|  */
-
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -3087,7 +2948,6 @@ and error output.
 
         } /* |if| (Using multithreading.)  */
 
-
 @q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.@> 
 
 @ |scanner_node == static_cast<Id_Map_Entry_Node>(0)| or not using multithreading.
@@ -3102,7 +2962,6 @@ and error output.
 
         } /* |else| (|scanner_node == static_cast<Scanner_Node>(0)| 
                      or not using multithreading.)  */
-
 
 #else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
 
@@ -3122,7 +2981,6 @@ and error output.
       cerr_strm << thread_name 
                 << "Entering `Id_Map_Entry_Type::set_superordinate_vector()'.";
 
-
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
       cerr_strm.str("");
@@ -3130,13 +2988,11 @@ and error output.
     }
 #endif
 
-  
 @q **** (4) Error handling:  |array_flag == false && traverse == true|.@>   
 @ Error handling:  |array_flag == false && traverse == true|.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
   if (!array_flag)
     {
@@ -3153,7 +3009,6 @@ and error output.
 
     } /* |if (!array_flag)|  */
 
-    
 @q **** (4) |array_flag == true|.  Traverse tree.@>   
 @ |array_flag == true|.  Traverse tree.
 \initials{LDF 2004.09.17.}
@@ -3162,18 +3017,14 @@ and error output.
 @ Call this function recursively on |left|.
 \initials{LDF 2004.09.17.}
 
-
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
 /* !! START HERE.  LDF 2004.09.17.  Add error handling like this 
       in assignment operator.  */ 
 
-
   if (left)  
     {
       status = left->set_superordinate_vector(s, set_vector, traverse, type);
-      
 
 @q ****** (6) Error handling:  Recursive call to             @>   
 @q ****** (6) |set_superordinate_vector()| on |left| failed. @>   
@@ -3182,13 +3033,11 @@ and error output.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
       if (status != 0)
 
         {
 
-          
-          cerr_strm << thread_name 
+cerr_strm << thread_name 
                     << "ERROR! In `Id_Map_Entry_Type::set_superordinate_vector()':"
                     << endl << "Recursive call to `set_superordinate_vector()' "
                     << "for `left' failed."
@@ -3199,7 +3048,6 @@ and error output.
           cerr_strm.str("");
           
           return 1;
-
 
         } /* |if (status != 0)|  */
 
@@ -3212,12 +3060,9 @@ and error output.
       
     } /* |if (left)|  */
 
-
-
 @q ***** (5) Set |superordinate_vector|.@>   
 @ 
 \initials{LDF 2004.09.17.}
-
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
@@ -3229,12 +3074,10 @@ and error output.
         if (s->subordinate_array == static_cast<Id_Map_Entry_Node>(0))
           s->subordinate_array = this;
 
-
         if (type == COLOR && object != static_cast<void*>(0))
           {
 
               typedef Pointer_Vector<Color> Pv;
-
 
               if (s->object == static_cast<void*>(0))
                 s->object = static_cast<void*>(new Pv); 
@@ -3244,9 +3087,7 @@ and error output.
               pv->v.push_back(static_cast<Color*>(object));
               pv->ctr++;
 
-
           } /* |if (type == COLOR)|  */
-
 
         else if (type == POINT && object != static_cast<void*>(0))
           {
@@ -3256,14 +3097,12 @@ and error output.
               if (s->object == static_cast<void*>(0))
                 s->object = static_cast<void*>(new Pv); 
 
-
               Pv* pv = static_cast<Pv*>(s->object); 
 
               pv->v.push_back(static_cast<Point*>(object));
               pv->ctr++;
 
           } /* |if (type == POINT)|  */
-
 
         else if (type == BOOL_POINT && object != static_cast<void*>(0))
           {
@@ -3280,11 +3119,8 @@ and error output.
 
           } /* |if (type == BOOL_POINT)|  */
 
-
-
         else if (object != static_cast<void*>(0))  /* Invalid |type|.  */
           {
-
 
               cerr_strm << thread_name 
                         << "ERROR! In `Id_Map_Entry_Type::set_superordinate_vector()':"
@@ -3299,25 +3135,17 @@ and error output.
 
           }  /* |else if (object != static_cast<void*>(0))| (Invalid |type|.)  */
 
-
-
-
     } /* |if (set_vector)|  */
-
 
 @q ***** (5) Call this function recursively on |right|.@>   
 @ Call this function recursively on |right|.
 \initials{LDF 2004.09.17.}
 
-
 @<Define |Id_Map_Entry_Type| functions@>=
-
-
 
   if (right)
     {
         status = right->set_superordinate_vector(s, set_vector, traverse, type);
-      
 
 @q ****** (6) Error handling:  Recursive call to             @>   
 @q ****** (6) |set_superordinate_vector()| on |right| failed. @>   
@@ -3326,13 +3154,11 @@ and error output.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
       if (status != 0)
 
         {
 
-          
-          cerr_strm << thread_name 
+cerr_strm << thread_name 
                     << "ERROR! In `Id_Map_Entry_Type::set_superordinate_vector()':"
                     << endl << "Recursive call to `set_superordinate_vector()' "
                     << "for `right' failed."
@@ -3343,7 +3169,6 @@ and error output.
           cerr_strm.str("");
           
           return 1;
-
 
         } /* |if (status != 0)|  */
 
@@ -3356,7 +3181,6 @@ and error output.
       
     } /* |if (right)|  */
 
-
 @q **** (4) Exit function successfully with return value 0.@>   
 @ Exit function successfully with return value 0.
 \initials{LDF 2004.09.17.}
@@ -3366,7 +3190,6 @@ and error output.
   return 0;
 
 } /* End of |Id_Map_Entry_Type::set_superordinate_vector()| definition.  */
-
 
 @q ** (2)  Set |id_map_node|.@>
 @*1 Set {\bf id\_map\_node}.
@@ -3383,7 +3206,6 @@ Added this function.  It's declared in \filename{io.web}.
 int
 Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
 {
-
 
 @q **** (4) |!traverse == false|.  Just set |id_map_node| and return 0.@>
 @ |!traverse == false|.  Just set |id_map_node| and return 0.
@@ -3402,14 +3224,13 @@ Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
 
   using namespace Scan_Parse;
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   int status;
 
   string thread_name;
 
   bool error_stop_value = true; /* |false|  */
-
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -3436,13 +3257,11 @@ Id_Map_Entry_Type::set_id_map_node(const Id_Map_Node i, bool traverse)
       cerr_strm << thread_name 
                 << "Entering `Id_Map_Entry_Type::set_id_map_node()'.";
 
-
       log_message(cerr_strm); 
       cerr_strm.str("");
 
     }
 #endif
-
 
 @q **** (4) If |left != static_cast<Id_Map_Entry_Node>(0)|, @>   
 @q **** (4) call this function recursively on |left|.       @>
@@ -3456,7 +3275,6 @@ call this function recursively on |left|.
    if (left != static_cast<Id_Map_Entry_Node>(0))
       {
          status = left->set_id_map_node(i);
-   
 
 @q ***** (5) Error handling:  It failed.@>   
 
@@ -3481,7 +3299,6 @@ call this function recursively on |left|.
             } /* |if (status != 0)|  */
 
       } /* |if (left != static_cast<Id_Map_Entry_Node>(0))|  */
- 
 
 @q **** (4) Set |id_map_node|.@>   
 
@@ -3504,7 +3321,6 @@ call this function recursively on |right|.
    if (right != static_cast<Id_Map_Entry_Node>(0))
       {
          status = right->set_id_map_node(i);
-   
 
 @q ***** (5) Error handling:  It failed.@>   
 
@@ -3529,8 +3345,6 @@ call this function recursively on |right|.
             } /* |if (status != 0)|  */
 
       } /* |if (right != static_cast<Id_Map_Entry_Node>(0))|  */
- 
-
 
 @q **** (4) Exit function successfully with return value 0.@>   
 
@@ -3600,7 +3414,6 @@ and error output.
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
   subordinate_array = s;
 
   if (!traverse)
@@ -3614,7 +3427,7 @@ and error output.
 
   using namespace Scan_Parse;
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   int status;
 
@@ -3633,7 +3446,6 @@ and error output.
       ? true : false;
   else 
     error_stop_value = true;  /* |false|  */
-
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -3659,7 +3471,6 @@ and error output.
 
         } /* |if| (Using multithreading.)  */
 
-
 @q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.@>   
 
 @ |scanner_node == static_cast<Scanner_Node>(0)| or not using multithreading.
@@ -3674,7 +3485,6 @@ and error output.
 
         } /* |else| (|scanner_node == static_cast<Scanner_Node>(0)| 
                      or not using multithreading.)  */
-
 
 #else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
 
@@ -3694,7 +3504,6 @@ and error output.
         cerr_strm << thread_name 
                   << "Entering `Id_Map_Entry_Type::set_subordinate_array()'.";
 
-
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
@@ -3702,12 +3511,8 @@ and error output.
     }
 #endif
 
-
-
     if (s->left != static_cast<Id_Map_Entry_Node>(0))
       set_subordinate_array(s->left, true, type);
-
-
 
    if (s->object != static_cast<void*>(0))
      {
@@ -3734,7 +3539,6 @@ and error output.
                pv->ctr++;
            }
 
-
          else if (type == POINT)
            {
                typedef Pointer_Vector<Point> Pv;
@@ -3744,7 +3548,6 @@ and error output.
                pv->v.push_back(static_cast<Point*>(s->object));
                pv->ctr++;
            }
-
 
          else if (type == BOOL_POINT)
            {
@@ -3759,7 +3562,6 @@ and error output.
          else /* Invalid |type|.  */
            {
 
-
                cerr_strm << thread_name 
                         << "ERROR! In `Id_Map_Entry_Type::set_subordinate_array()':"
                         << endl << "Invalid `type': `" << name_map[type] 
@@ -3773,14 +3575,10 @@ and error output.
 
            }  /* |else| (Invalid |type|.)  */
 
-
-
      } /* |if (s->object != static_cast<void*>(0))|  */
 
-   
-   if (s->right != static_cast<Id_Map_Entry_Node>(0))
+if (s->right != static_cast<Id_Map_Entry_Node>(0))
      set_subordinate_array(s->right, true, type);
-
 
 @q **** (4) @>   
 
@@ -3798,13 +3596,9 @@ and error output.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
    return 0;
 
 } /* End of |Id_Map_Entry_Type::set_subordinate_array()| definition.  */
-
-
 
 @q ** (2) Transformations.  @>
 @*1 Transformations.
@@ -3833,7 +3627,6 @@ Added this function.  It's used in the parser rule
 Transform
 Id_Map_Entry_Type::operator*=(const Transform& t)
 {
-
 
 @q ***** (5) Preliminaries.@>
 
@@ -3930,7 +3723,6 @@ Id_Map_Entry_Type::operator*=(const Transform& t)
       bp->pt *= t;
     }
 
-
 @q ***** (5) Error handling:  Invalid type.@>
 
 @ Error handling:  Invalid type.
@@ -3966,7 +3758,6 @@ Id_Map_Entry_Type::operator*=(const Transform& t)
 }  /* End of |Id_Map_Entry_Type::operator*=(const Transform&)|
       definition.  */
 
-
 @q ** (2) Returning elements and information.  @>
 @*1 Returning elements and information.
 
@@ -3977,14 +3768,12 @@ Id_Map_Entry_Type::operator*=(const Transform& t)
 \initials{LDF 2004.04.23.}  Added this function. 
 \ENDLOG
 
-
 @<Define |Id_Map_Entry_Type| functions@>=
 bool
 Id_Map_Entry_Type::is_ldf_type(void) const
 {
   return (type >= NUMERIC && type <= Scan_Parse::MAX_SHAPE);
 }
-
 
 @q *** (3) Is |Shape|.@>
 @*2 Is {\bf Shape}.
@@ -4059,7 +3848,6 @@ Id_Map_Entry_Type::is_shape(void) const
     return false;
 
 }  /* End of |Id_Map_Entry_Type::is_shape()| definition.  */
-
 
 @q *** (3) Is |Shape|-vector-type.@>
 @*2 Is {\bf Shape}-vector-type.
@@ -4189,7 +3977,6 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
 
 }  /* End of |Id_Map_Entry_Type::is_non_shape_vector_type()| definition.  */
 
-
 @q *** (3) Is Vector-type.@>
 @*2 Is Vector-type.
 \initials{LDF 2004.12.12.}
@@ -4206,7 +3993,6 @@ Id_Map_Entry_Type::is_vector_type(void) const
   return (is_shape_vector_type() || is_non_shape_vector_type());
 
 }  /* End of |Id_Map_Entry_Type::is_vector_type()| definition.  */
-
 
 @q ** (2) Showing.@>
 @*1 Showing.
@@ -4362,7 +4148,6 @@ Write code for showing other types of objects.
 
 @q *** Definition.  @>
 
-
 @
 @<Define |Id_Map_Entry_Type| functions@>=
 void 
@@ -4390,7 +4175,6 @@ Id_Map_Entry_Type::show(string s,
    else 
      scanner_node = static_cast<Scanner_Node>(0);
 
-
 @q **** (4) Get thread information, or not, depending on circumstances.@>   
 
 @ Get thread information, or not, depending on circumstances.
@@ -4398,13 +4182,11 @@ Id_Map_Entry_Type::show(string s,
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
   string thread_name;
 
 #ifdef HAVE_PTHREAD_H  
   
   Thread_Info_Type* thread_info;
-  
 
 @q ***** (5) |scanner_node != static_cast<Scanner_Node>(0)|.@>   
 
@@ -4435,7 +4217,6 @@ Id_Map_Entry_Type::show(string s,
 
         } /* Using multithreading.  */
 
-
 @q ****** (6) |scanner_node != static_cast<Scanner_Node>(0)|, but not using multithreading.@> 
 
 @ |scanner_node != static_cast<Scanner_Node>(0)|, but not using multithreading.
@@ -4453,7 +4234,6 @@ Id_Map_Entry_Type::show(string s,
 
     } /* |if (scanner_node)|  */
 
-
 @q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)|.  Assume we're using multithreading.@>
 @ |scanner_node == static_cast<Scanner_Node>(0)|.  Assume we're using multithreading.
 
@@ -4465,15 +4245,13 @@ Id_Map_Entry_Type::show(string s,
       thread_info = Thread_Info_Type::get_thread_info(true);
       thread_name = Thread_Info_Type::get_thread_name(thread_info);
 
-
     } /* |else| (|scanner_node == static_cast<Scanner_Node>(0)|)  */
 
 #else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
 
   thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
- 
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@;
 
 @q **** (4) Set |error_stop_value|.@>   
 
@@ -4505,7 +4283,6 @@ Id_Map_Entry_Type::show(string s,
       cerr_strm << thread_name 
                 << "Entering `Id_Map_Entry_Type::show()'.";
 
-
       log_message(cerr_strm); 
       cerr << cerr_strm.str() << endl;
       cerr_strm.str("");
@@ -4513,15 +4290,13 @@ Id_Map_Entry_Type::show(string s,
     }
 #endif
 
-
   if (verbose)
      {
 
          if (s == "")
            s = "Id_Map_Entry_Type:";
 
- 
-         cerr_strm << s << endl
+cerr_strm << s << endl
                    << "name == " << name << endl
                    << "type == " << name_map[type];
 
@@ -4541,7 +4316,6 @@ Id_Map_Entry_Type::show(string s,
         cerr_strm.str("");
 
      }     /* |else| (|!verbose|)  */
-
 
 @q **** (4) Print |category|.@>
 
@@ -4570,8 +4344,6 @@ Id_Map_Entry_Type::show(string s,
 
          }
 
-
-
        else if (category == TRUE_INTERNAL)
          {
            cerr_strm << "category == TRUE_INTERNAL";
@@ -4590,20 +4362,17 @@ Id_Map_Entry_Type::show(string s,
        cerr << cerr_strm.str() << endl;
        cerr_strm.str("");
 
-
    } /* |if (verbose)|  */
 
 @q **** (4)@>
 @ 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-
      if (verbose)
        {
 
         cerr_strm << "const_flag == " << const_flag << endl
                   << "array_flag == " << array_flag;
-
 
         log_message(cerr_strm); 
         cerr << cerr_strm.str() << endl;
@@ -4654,19 +4423,15 @@ Added code for the case that |known_state == EXPIRED|.
 
            }
 
-
          log_message(cerr_strm); 
          cerr << cerr_strm.str() << endl;
          cerr_strm.str("");
 
   } /* |if (verbose)|  */
 
-
 @q **** (4)@>
 @ 
 @<Define |Id_Map_Entry_Type| functions@>=
-
-
 
   if (object != static_cast<void*>(0))
     {
@@ -4695,14 +4460,12 @@ Added this section.
 
 @q ***** (5)@>
 
-
       else if (type == BOOLEAN)
         {
           if (verbose)
              cerr_strm << "boolean value == ";
-   
-         
-          cerr_strm << ((*static_cast<bool*>(get_object())) 
+
+cerr_strm << ((*static_cast<bool*>(get_object())) 
                        ? "true" : "false");
 
           log_message(cerr_strm); 
@@ -4710,7 +4473,6 @@ Added this section.
           cerr_strm.str("");
           
         }
-
 
 @q ***** (5)@>
 
@@ -4779,8 +4541,6 @@ Added this section.
           cerr_strm.str("");
         }
 
-
-
 @q ***** (5)@>
 
       else if (type == PEN)
@@ -4802,7 +4562,6 @@ Added this section.
           static_cast<Color*>(object)->show("color:");
         }
 
-
 @q ***** (5)@>
 
       else if (type == TRANSFORM)
@@ -4810,14 +4569,12 @@ Added this section.
           static_cast<Transform*>(object)->show("transform:");
         }
 
-
 @q ***** (5)@>
 
       else if (type == PICTURE)
         {
           static_cast<Picture*>(object)->show("picture:");
         }
-
 
 @q ***** (5)@>
 
@@ -4833,14 +4590,12 @@ Added this section.
           static_cast<Focus*>(object)->show("focus:");
         }
 
-
 @q ***** (5)@>
 
       else if (type == MACRO)
         {
           static_cast<Definition_Info_Node>(object)->show("macro:");
         }
-
 
 @q ***** (5)@>
 
@@ -4856,14 +4611,12 @@ Added this section.
           static_cast<Circle*>(object)->show("circle:");
         }
 
-
 @q ***** (5)@>
 
       else if (type == ELLIPSE)
         {
           static_cast<Ellipse*>(object)->show("ellipse:");
         }
-
 
 @q ***** (5)@>
 
@@ -4892,7 +4645,6 @@ Added this section.
         {
           static_cast<Conic_Section_Lattice*>(object)->show("conic_section_lattice:");
         }
-
 
 @q ***** (5)@>
 
@@ -4929,7 +4681,6 @@ Added this section.
           static_cast<Cone*>(object)->show("cone:");
         }
 
-
 @q ***** (5)@>  
 
       else if (type == CYLINDER)
@@ -4937,14 +4688,12 @@ Added this section.
           static_cast<Cylinder*>(object)->show("cylinder:");
         }
 
-
 @q ***** (5)@>
 
       else if (type == ELLIPSOID)
         {
           static_cast<Ellipsoid*>(object)->show("ellipsoid:");
         }
-
 
 @q ***** (5)@>
 
@@ -4974,7 +4723,6 @@ Added this section.
           static_cast<Paraboloid*>(object)->show("paraboloid:");
         }
 
-
 @q ***** (5)@>
 
 #if 0 
@@ -4990,7 +4738,6 @@ Added this section.
         {
           static_cast<Cuboid*>(object)->show("cuboid:");
         }
-
 
 @q ***** (5)@>
 
@@ -5022,7 +4769,6 @@ Commented this section in.
           cerr << cerr_strm.str() << endl;
           cerr_strm.str("");
         }
-      
 
 @q ***** (5) Vector types.@>
 
@@ -5067,12 +4813,10 @@ Added this section.
               PV*  pv = static_cast<PV*>(object);
               
               pv->show("color_vector:");
-              
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == COLOR_VECTOR)|  */
-      
 
 @q ****** (6) |POINT_VECTOR|.@>
 
@@ -5109,12 +4853,10 @@ Added this section.
               PV*  pv = static_cast<PV*>(object);
               
               pv->show("point_vector:");
-              
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == POINT_VECTOR)|  */
-
 
 @q ****** (6) |BOOL_POINT_VECTOR|.@>
 
@@ -5150,13 +4892,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("bool_point_vector:");
-              
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == BOOL_POINT_VECTOR)|  */
-
-
 
 @q ****** (6) |PATH_VECTOR|.@>
 
@@ -5192,9 +4931,8 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("path_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == PATH_VECTOR)|  */
 
@@ -5232,12 +4970,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("ellipse_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == ELLIPSE_VECTOR)|  */
-
 
 @q ****** (6) |CIRCLE_VECTOR|.@>
 
@@ -5273,12 +5009,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("circle_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CIRCLE_VECTOR)|  */
-
 
 @q ****** (6) |PARABOLA_VECTOR|.@>
 @ |PARABOLA_VECTOR|.
@@ -5313,12 +5047,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("parabola_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == PARABOLA_VECTOR)|  */
-
 
 @q ****** (6) |HYPERBOLA_VECTOR|.@>
 @ |HYPERBOLA_VECTOR|.
@@ -5353,12 +5085,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("hyperbola_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == HYPERBOLA_VECTOR)|  */
-
 
 @q ****** (6) |ARC_VECTOR|.@>
 @ |ARC_VECTOR|.
@@ -5393,14 +5123,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("arc_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == ARC_VECTOR)|  */
-
-
-
 
 @q ****** (6) |CONIC_SECTION_LATTICE_VECTOR|.@>
 @ |CONIC_SECTION_LATTICE_VECTOR|.
@@ -5435,12 +5161,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("conic_section_lattice_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CONIC_SECTION_LATTICE_VECTOR)|  */
-
 
 @q ****** (6) |HELIX_VECTOR|.@>
 
@@ -5476,9 +5200,8 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("helix_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == HELIX_VECTOR)|  */
 
@@ -5516,9 +5239,8 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("polygon_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == POLYGON_VECTOR)|  */
 
@@ -5556,9 +5278,8 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("rectangle_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == RECTANGLE_VECTOR)|  */
 
@@ -5596,12 +5317,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("reg_polygon_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == REG_POLYGON_VECTOR)|  */
-
 
 @q ****** (6) |CONE_VECTOR|.@>
 
@@ -5637,12 +5356,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("cone_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CONE_VECTOR)|  */
-
 
 @q ****** (6) |CYLINDER_VECTOR|.@>
 
@@ -5678,14 +5395,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("cylinder_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CYLINDER_VECTOR)|  */
-
-
-
 
 @q ****** (6) |CUBOID_VECTOR|.@>
 
@@ -5721,12 +5434,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("cuboid_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == CUBOID_VECTOR)|  */
-
 
 @q ****** (6) |ELLIPSOID_VECTOR|.@>
 
@@ -5762,12 +5473,10 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("ellipsoid_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == ELLIPSOID_VECTOR)|  */
-
 
 @q ****** (6) |SPHERE_VECTOR|.@>
 
@@ -5803,9 +5512,8 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("sphere_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == SPHERE_VECTOR)|  */
 
@@ -5843,9 +5551,8 @@ Added this section.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("paraboloid_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == PARABOLOID_VECTOR)|  */
 
@@ -5884,13 +5591,11 @@ Added this section.  It's currently commented-out.
                 PV*  pv = static_cast<PV*>(object);
               
                 pv->show("hyperboloid_vector:");
-             
 
-            } /* |else| (|object != static_cast<void*>(0)|)  */
+} /* |else| (|object != static_cast<void*>(0)|)  */
             
         } /* |else if (type == HYPERBOLOID_VECTOR)|  */
 #endif 
-
 
 @q ***** (5).@>
 @ 
@@ -5908,16 +5613,14 @@ Added this section.  It's currently commented-out.
 
     } /* |if (object != static_cast<void*>(0))|  */
 
-
 @q **** (4) |object == static_cast<void*>(0)|.  Can't show it.@>
 
 @ |object == static_cast<void*>(0)|.  Can't show it.
 \initials{LDF 2004.10.26.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
- 
 
-   else if (verbose) /* (|object == static_cast<void*>(0)|)  */
+else if (verbose) /* (|object == static_cast<void*>(0)|)  */
       {    
          cerr_strm << "object == static_cast<void*>(0).  Can't show it.";
       
@@ -5930,7 +5633,6 @@ Added this section.  It's currently commented-out.
 @q **** (4)@>
 @ 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
   if (verbose)
     {
@@ -5953,12 +5655,10 @@ Added this section.  It's currently commented-out.
           left->show("left:");
 #endif 
         }
-  
 
-      log_message(cerr_strm); 
+log_message(cerr_strm); 
       cerr << cerr_strm.str() << endl;
       cerr_strm.str("");
-
 
      if (right == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "right == 0";
@@ -5970,11 +5670,9 @@ Added this section.  It's currently commented-out.
 #endif 
        }
 
-
      log_message(cerr_strm); 
      cerr << cerr_strm.str() << endl;
      cerr_strm.str("");
-
 
      if (superordinate_vector == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "superordinate_vector == 0";
@@ -5983,7 +5681,6 @@ Added this section.  It's currently commented-out.
        cerr_strm << "superordinate_vector != 0";
 
      cerr_strm << endl;
-
 
      if (subordinate_array == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "subordinate_array == 0";
@@ -6011,12 +5708,9 @@ Added this section.  It's currently commented-out.
       right->show(right->name, true);
     }
 
-
-
 @q **** (4)@>
 @ 
 @<Define |Id_Map_Entry_Type| functions@>=
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -6036,10 +5730,6 @@ Added this section.  It's currently commented-out.
 
 } /* End of |Id_Map_Entry_Type::show()| definition.  */
 
-
-
-
-
 @q * Putting the |Id_Map_Entry_Type| functions together.@>
 @ Putting the {\bf Id\_Map\_Entry\_Type} functions together.
   
@@ -6052,7 +5742,6 @@ Added this section.  It's currently commented-out.
 @ This is what's written to \filename{imetfncs.h}.
 @(imetfncs.h@>=
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -6061,9 +5750,6 @@ Added this section.  It's currently commented-out.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

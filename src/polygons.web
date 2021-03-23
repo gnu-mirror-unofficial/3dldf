@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Polygon.@>
 @** Polygon\quad ({\tt polygons\PERIOD web}).\hfil
@@ -134,7 +133,6 @@ class Polygon : public Path
  public:
   @<Declare |Polygon| functions@>@;
 };
-
 
 @q * (1) Default constructor.@> 
 @* Default constructor.
@@ -244,7 +242,6 @@ get_shape_type(void) const
    return POLYGON_TYPE;
 }
 
-
 @q ** (2) Is |Polygon|.@> 
 @*1 Is {\bf Polygon}.
 \initials{LDF 2005.03.31.}
@@ -265,7 +262,6 @@ is_polygon(void) const
 {
    return true;
 }
-
 
 @q ** (2) Get center.@>
 @*1 Get center.  
@@ -316,7 +312,6 @@ Polygon::get_center(void)
   center.apply_transform();
   return center;
 }
-
 
 @q *** {\bf const} version.@>
 @ {\bf const} version.
@@ -420,14 +415,10 @@ Polygon::projections_intersect(Shape* s, Scanner_Node scanner_node)
          return 1;
       }
 
-
-
    else 
       return 2;
-   
 
 }  /* End of |Polygon::projections_intersect| definition.  */
-
 
 @q * (1) Intersections.@>
 @* Intersections.
@@ -487,7 +478,6 @@ Polygon::intersection(Shape* s, Scanner_Node scanner_node)
 
 @q **** (4).@>
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -532,10 +522,9 @@ Polygon::intersection(Shape* s, Scanner_Node scanner_node)
              }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ****** (6).@> 
- 
+@q ****** (6).@>
 
-         vector<Point> vp = intersection_points(*static_cast<Polygon*>(s));
+vector<Point> vp = intersection_points(*static_cast<Polygon*>(s));
 
 @q ******* (7) @> 
 
@@ -561,8 +550,6 @@ Polygon::intersection(Shape* s, Scanner_Node scanner_node)
               return ivp;
 
            }  /* |else| (|vp.size() <= 0|)  */
-            
-
 
 @q ****** (6).@> 
           
@@ -570,7 +557,6 @@ Polygon::intersection(Shape* s, Scanner_Node scanner_node)
                  && s_type     == Shapes::REG_POLYGON_TYPE)|  */   
 
 @q ***** (5).@> 
-
 
 @q ***** (5).@> 
 
@@ -589,18 +575,15 @@ Polygon::intersection(Shape* s, Scanner_Node scanner_node)
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
    return ivp;
 
 }  /* End of |Polygon::intersection|.  */
-
 
 @q ** (2) Intersection with a line.@>
 @*1 Intersection with a line.
 
 A line can intersect with a |Polygon| at two points at most.  
 \initials{LDF 2003.06.13.}  
-
 
 @q *** (3) Point version.@>
 @*2 {\bf Point} version. 
@@ -685,7 +668,6 @@ Polygon::intersection_points(const Point& pt0,
 
 @q ***** (5).@>
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -701,22 +683,17 @@ Polygon::intersection_points(const Point& pt0,
      
     Point origin_pt(0, 0, 0);
 
-
     Bool_Point_Pair bpp = INVALID_BOOL_POINT_PAIR;  /* The return
                                                        value.  */
     Plane pl = get_plane();
-
 
     Point pt_vector(pt1 - pt0);
 
     Point temp_pt_0 = get_point(0);
 
-
     Point temp_pt_1 = get_center();
 
-
     Point surface_vector(get_point(0) - get_center());
-
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -747,7 +724,6 @@ Polygon::intersection_points(const Point& pt0,
           cerr_mutex.unlock(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ***** (5) Degenerate cases, error handling.@>
 @ Degenerate cases, error handling.
@@ -822,7 +798,6 @@ points to be found that the user probably won't want.
 \initials{LDF 2003.06.13.}  
 
 @<Define |Polygon| functions@>=
-
 
   if (distance == ZERO_REAL)
     {
@@ -901,7 +876,6 @@ points to be found that the user probably won't want.
               bp = Point::intersection_point(pt0, pt1, q0, q1);
 
 @q ******** (8) @> 
-
 
               if (bp.b) /* Intersection point is on both segments.  */
                 {
@@ -987,7 +961,6 @@ point is the same as the first.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
                       } /* |!found|  */
 
 @q ********* (9) @> 
@@ -1005,7 +978,6 @@ point is the same as the first.
                       {
                           continue;
                       }
-
 
 @q ********* (9) @> 
 
@@ -1183,7 +1155,6 @@ Now passing the |bool suppress_warnings| argument to |Plane::intersection_point|
                   bpp.first.b = bp.pt.is_on_segment(pt0, pt1).first;
                   return bpp;
                 }
-              
 
 @q ******* (7)@>
 @ 
@@ -1207,11 +1178,9 @@ The latter is now only defined when |DEBUG_COMPILE| is non-zero.
                   return bpp;
                 }
 
-
 @q ******* (7)@>
 
             }  /* |for|  */
-
 
 @q ****** (6)@>   
 @ 
@@ -1238,7 +1207,6 @@ Added this section.
 
 } /* End of ``Perpendicular and non-coplanar cases''.  */
 
-
 @q ***** (5) End of definition.@>
 @ End of definition.
 @<Define |Polygon| functions@>=
@@ -1254,7 +1222,6 @@ Added this section.
 
 }  /* End of |Polygon::intersection_points| definition.  */
 
-
 @q *** (3) Path version.@>
 @*2 {\bf Path} version.
 @^\cfunc{Polygon}{intersection\_points}@>
@@ -1268,7 +1235,6 @@ with the default 0.  Made error output thread-safe.
 \initials{LDF 2005.12.09.}
 Added optional |bool suppress_warnings| argument with the default |false|.
 \ENDLOG
-
 
 @q **** (4) Declaration.@> 
 
@@ -1319,7 +1285,6 @@ Polygon::intersection_points(const Path& p,
                    << "Exiting function unsuccessfully with return value "
                    << "`INVALID_BOOL_POINT_PAIR'.";
 
-
          log_message(cerr_strm);
          cerr_message(cerr_strm, error_stop_value);
          cerr_strm.str("");
@@ -1335,7 +1300,6 @@ Polygon::intersection_points(const Path& p,
 
 }  /* End of |Polygon::intersection_points| definition.  */
 
-  
 @q ** (2) Intersection with another Polygon.@>
 @*1 Intersection with another {\bf Polygon}.
 @^\cfunc{Polygon}{intersection\_points}@>
@@ -1361,7 +1325,7 @@ intersection_points(const Polygon& r) const;
 vector<Point>
 Polygon::intersection_points(const Polygon& r) const
 {
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   vector<Point> v;
   
@@ -1467,7 +1431,6 @@ surface hiding routine.
       Line l = pl.intersection_line(r_pl);
       Bool_Point_Pair bpp = intersection_points(l.position,
                                                 (l.position + l.direction));
-
 
       v.push_back(bpp.first.pt);
 
@@ -1690,7 +1653,6 @@ Polygon::rotate(const Path& p, const real angle)
                        p.get_last_point(), angle);  
 }   
 
-
 @q ** Scale. @>
 @ Scale. 
 @^\cfunc{Polygon}{scale}@>
@@ -1750,7 +1712,6 @@ Polygon::shift(real x, real y, real z)
   return (*this *= t);
 }
 
-
 @q *** Point argument. @>
 @ {\bf Point} argument. 
 @^\cfunc{Polygon}{shift}@>
@@ -1766,7 +1727,6 @@ Polygon::shift(const Point& p)
 {
   return shift(p.get_x(), p.get_y(), p.get_z());
 }
-  
 
 @q ** Shift times. @>
 @ Shift times. 
@@ -1840,7 +1800,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -1850,12 +1809,11 @@ Polygon::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -1869,7 +1827,6 @@ Polygon::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -1898,7 +1855,6 @@ on the free store for it.
 
 @<Define |Polygon| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -1913,10 +1869,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (polygon_reflection == 0)|  */
@@ -1931,7 +1885,6 @@ on the free store for it.
   Path path_reflection;
 
   int status;
-
 
   try
      {
@@ -1989,8 +1942,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Path::reflect_in| succeeded.@> 
 
@@ -2070,7 +2022,6 @@ reflect_off(const Plane& p,
             void* v,
             const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -2081,12 +2032,11 @@ Polygon::reflect_off(const Plane& p,
                      void* v,
                      const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-   bool DEBUG = false; /* |true|  */
+   bool DEBUG = false; /* |true| */
 
    using namespace Scan_Parse;
 
@@ -2116,7 +2066,6 @@ Polygon::reflect_off(const Plane& p,
           return 1;
 
       } /* |if (v == 0)|  */
-
 
   Pointer_Vector<Polygon>* polygon_ptr_vector 
      = static_cast<Pointer_Vector<Polygon>*>(v);
@@ -2149,7 +2098,6 @@ Polygon::reflect_off(const Plane& p,
           return 1;
 
       }  /* |if (status != 0)|  */
-
 
 @q *** (3)  Try to allocate memory for a pointer to |Point_Vector<Point>|.@> 
 
@@ -2186,7 +2134,6 @@ Polygon::reflect_off(const Plane& p,
          
       }  /* |catch (bad_alloc)|  */
 
-
 @q *** (3) Set up |Point_Vector<Point>| object.@> 
 
 @ Set up |Point_Vector<Point>| object.
@@ -2194,12 +2141,10 @@ Polygon::reflect_off(const Plane& p,
 
 @<Define |Polygon| functions@>=
 
-
    for (int i = 0; i < 4; ++i)
       {
          *cvp += &(polygon_ptr_vector->v[i]->center);
       }  /* |for|  */
-
 
 @q *** (3)  Call |Point::reflect_off| on |center|.@> 
 
@@ -2237,7 +2182,6 @@ Return 1 upon error.
    return 0;
 
 } /* End of |Polygon::reflect_off| definition.  */
-
 
 @q * (1) Disentangling.@> 
 @* Disentangling.
@@ -2294,7 +2238,6 @@ Polygon::disentangle(void* v,
                                                     &error_stop_value,
                                                     &warning_stop_value);
 
-
    using namespace Scan_Parse;
 
 @q **** (4) @>
@@ -2309,7 +2252,6 @@ Polygon::disentangle(void* v,
 
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
 
 @q **** (4).@>
 
@@ -2422,7 +2364,6 @@ Polygon::disentangle(void* v,
        }
 
     vector<Point> quad[4];
-   
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -2437,7 +2378,6 @@ Polygon::disentangle(void* v,
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
-
     for (pv_iter = pv.begin(); pv_iter != pv.end(); ++pv_iter)
        {
            
@@ -2450,7 +2390,6 @@ Polygon::disentangle(void* v,
            else if (pv_iter->get_x() >= 0 && pv_iter->get_z() < 0)
               quad[3].push_back(*pv_iter);
        }   
-
 
     Transform t_inverse = t.inverse();
 
@@ -2473,7 +2412,6 @@ Polygon::disentangle(void* v,
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
-
     for (int i = 0; i < 4; ++i)
       { 
 
@@ -2491,7 +2429,6 @@ Polygon::disentangle(void* v,
 
       }  /* |for|  */
 
-
 #if DEBUG_COMPILE
     if (DEBUG)
     {
@@ -2504,8 +2441,6 @@ Polygon::disentangle(void* v,
 
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
-
 
     pv.clear();
 
@@ -2549,7 +2484,6 @@ Polygon::disentangle(void* v,
 
     Bool_Point bp;
 
-
 #if DEBUG_COMPILE
     if (DEBUG)
     {
@@ -2562,7 +2496,6 @@ Polygon::disentangle(void* v,
 
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
 
     do
        {
@@ -2625,8 +2558,6 @@ Polygon::disentangle(void* v,
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
-
-
 @q **** (4)@> 
 
     Point* new_pt;
@@ -2638,7 +2569,6 @@ Polygon::disentangle(void* v,
           *new_pt *= t_inverse;
           *poly += new_pt;
        }
-
 
 @q **** (4) @>
 
@@ -2653,8 +2583,6 @@ Polygon::disentangle(void* v,
 
     }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-
-
 
     poly->set_cycle();
 
@@ -2735,7 +2663,6 @@ Polygon::decompose(Point* p0,
                    Pointer_Vector<Polygon>* pv,
                    Scanner_Node scanner_node)
 
-
 {
    
 @q **** (4) Preliminaries.@>   
@@ -2758,7 +2685,6 @@ Polygon::decompose(Point* p0,
    using namespace Scan_Parse;
 
    int status;
-
 
 @q **** (4) @>   
 
@@ -2805,7 +2731,6 @@ Polygon::decompose(Point* p0,
 
       }  /* |if (p0 == 0 || p1 == 0 || pv == 0)|  */
 
-
 @q **** (4) @>   
 @
 @<Define |Polygon| functions@>=
@@ -2830,7 +2755,6 @@ Polygon::decompose(Point* p0,
           return 1;
     
       }  /* |if (!is_convex_polygonal())|  */
-
 
 @q **** (4) @>   
 
@@ -2872,14 +2796,11 @@ Added this section.
 
             }  /* |if|  */
 
-
       }  /* |for|  */
 
 @q **** (4) @>   
 
-
   Bool_Point_Pair bpp = Polygon::intersection_points(*p0, *p1, scanner_node);
-    
 
 @q **** (4) @>   
 @
@@ -2923,7 +2844,6 @@ Added this section.
 @
 @<Define |Polygon| functions@>=
 
-   
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -2948,8 +2868,7 @@ Added this section.
 
          cerr_mutex.unlock(); 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>   
 @
@@ -2993,7 +2912,6 @@ Moved this code.  Previously, it was before the call to
           throw;
 
       }  /* |catch (bad_alloc)|  */
-    
 
 @q **** (4) @>   
 
@@ -3021,7 +2939,6 @@ to |decomposition_level + 1|.
 
    q[0]->fill_draw_value = q[1]->fill_draw_value = fill_draw_value;
 
-
 @q **** (4).@> 
 @
 \LOG
@@ -3046,18 +2963,15 @@ if this vector isn't empty.
 
       }  /* |if (fill_color_vector != 0 && fill_color_vector->ctr > 0)|  */
 
-
 @q **** (4) @>   
 @
 @<Define |Polygon| functions@>=
-
 
    bool copy_pens          = (adjust_pen_vector() == 0)          ? true : false;
 
    bool copy_draw_colors   = (adjust_draw_color_vector() == 0)   ? true : false;
 
    bool copy_dash_patterns = (adjust_dash_pattern_vector() == 0) ? true : false;
-
 
    q[0]->pen_vector = new Pointer_Vector<Pen>;
    q[1]->pen_vector = new Pointer_Vector<Pen>;
@@ -3073,7 +2987,6 @@ if this vector isn't empty.
          q[0]->dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
          q[1]->dash_pattern_vector = new Pointer_Vector<Dash_Pattern>;
       }
-   
 
 @q **** (4) @>   
 
@@ -3096,17 +3009,14 @@ Now allocating memory for |Point** r|.
 
    vector<Point*>::size_type offset;
 
-
    for (i = 0; i < size; i++)
       {
-
 
 @q ***** (5).@> 
 
           if (bpp.first.pt.is_on_segment(*(points[i]), 
                                          *(points[(i + 1) % size])).first)
              {
-
 
 @q ****** (6).@> 
                  if (bpp.second.pt.is_on_segment(
@@ -3138,7 +3048,6 @@ Now allocating memory for |Point** r|.
                                    
                     }  /* |if (bpp.second.pt.is_on_segment(*points[i], 
                                                  *points[(i + 1) % size]).first)|  */
-         
 
 @q ****** (6).@> 
                  for (j = 0; j < size; ++j)
@@ -3146,16 +3055,14 @@ Now allocating memory for |Point** r|.
 
                  offset = i;
 
-                 break;   
-                  
+                 break;
 
-             }  /* |if (bpp.first.pt.is_on_segment(*points[i], 
+}  /* |if (bpp.first.pt.is_on_segment(*points[i], 
                                                    *points[(i + 1) % size]).first)|  */
  
 @q ***** (5).@> 
 
       }  /* |for|  */
-
 
 @q **** (4) @>   
 
@@ -3184,7 +3091,6 @@ Now allocating memory for |Point** r|.
 
       }  /* |for|  */
 
-
 @q **** (4) @>   
 
 @
@@ -3207,7 +3113,6 @@ Previously, it was initialized to itself.
 
 @<Define |Polygon| functions@>=
 
-
          unsigned int temp_ctr = offset;
 
          *q[0] += *r[0];
@@ -3215,7 +3120,6 @@ Previously, it was initialized to itself.
          if (bpp.first.pt != *r[0])
             {
                *q[0] += bpp.first.pt;
-
 
                 if(copy_draw_colors)
                    {
@@ -3230,7 +3134,6 @@ Previously, it was initialized to itself.
                          dash_pattern_vector->v[offset]);
                    } 
 
-
                 if (copy_pens)
                    q[0]->pen_vector->append_copy(
                       pen_vector->v[offset]);
@@ -3238,8 +3141,7 @@ Previously, it was initialized to itself.
                 ++temp_ctr;
             }
 
-   
-         if (bpp.first.pt != bpp.second.pt)
+if (bpp.first.pt != bpp.second.pt)
             {
                *q[0] += bpp.second.pt;
 
@@ -3251,14 +3153,11 @@ Previously, it was initialized to itself.
                          draw_color_vector->v[offset]);
                    } 
 
-
                 if(copy_dash_patterns)
                    {
                       q[0]->dash_pattern_vector->append_copy(
                          dash_pattern_vector->v[offset]);
                    } 
-
-
 
                Pen* p = new Pen;
                p->set_type(Pen::NULL_PEN);
@@ -3268,7 +3167,6 @@ Previously, it was initialized to itself.
             }
          
          temp_ctr += index - 1;
-
 
          if (index != size)
             {
@@ -3295,7 +3193,6 @@ Previously, it was initialized to itself.
                                        % dash_pattern_vector->ctr]);
                                }  
 
-
                             if (copy_pens)
                               q[0]->pen_vector->append_copy(
                                   pen_vector->v[(offset + i - 1) 
@@ -3308,7 +3205,6 @@ Previously, it was initialized to itself.
 
             }  /* |if (index != size)|  */
 
-
    /* !! START HERE.  LDF 2005.04.07.  Do the same for |Pens| and 
       |Dash_Patterns|.  */@; 
 
@@ -3319,9 +3215,7 @@ Previously, it was initialized to itself.
                                                 % draw_color_vector->ctr]);
          temp_ctr = offset;
 
-
          *q[1] += bpp.first.pt;
-
 
          if(copy_draw_colors)
             {
@@ -3342,13 +3236,10 @@ Previously, it was initialized to itself.
 
          ++temp_ctr;
 
-           
-
-          for (i = 1; i < index; ++i)
+for (i = 1; i < index; ++i)
              {
                 if (q[1]->get_last_point() != *r[i])
                     {
-
 
                          if(copy_draw_colors)
                             {
@@ -3356,14 +3247,12 @@ Previously, it was initialized to itself.
                                   draw_color_vector->v[temp_ctr % draw_color_vector->ctr]);
                             }
 
-
                          if(copy_dash_patterns)
                             {
                                q[1]->dash_pattern_vector->append_copy(
                                   dash_pattern_vector->v[temp_ctr 
                                      % dash_pattern_vector->ctr]);
                             }     
-
 
                          if (copy_pens)
                            q[1]->pen_vector->append_copy(
@@ -3380,13 +3269,11 @@ Previously, it was initialized to itself.
             {
                *q[1] += bpp.second.pt;
 
-
                if(copy_dash_patterns)
                   {
                      q[1]->dash_pattern_vector->append_copy(
                         dash_pattern_vector->v[temp_ctr % dash_pattern_vector->ctr]);
                   } 
-
 
                if(copy_draw_colors)
                   {
@@ -3404,10 +3291,9 @@ Previously, it was initialized to itself.
          q[0]->set_cycle(true);
          q[1]->set_cycle(true);
          
-@q **** (4) @>   
-   
+@q **** (4) @>
 
-   *pv += q[0];
+*pv += q[0];
    *pv += q[1];
 
 @q **** (4) @>   
@@ -3429,9 +3315,6 @@ Now deleting |Point** r|.
                                  Pointer_Vector<Polygon>* pv,
                                  Scanner_Node scanner_node)| 
       definition.  */
-
-
-
 
 @q ** (2) |Polygon*| argument.@> 
 @ {\bf Polygon*} argument.
@@ -3465,7 +3348,6 @@ decompose(Polygon* p,
           bool top_level,
           Scanner_Node scanner_node = 0);
 
-
 @q *** (3) Definition.@>
 
 @
@@ -3480,7 +3362,7 @@ Polygon::decompose(Polygon* p,
 @q **** (4) Preliminaries.@> 
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true|  */
+   bool DEBUG = false; /* |true| */
 #endif /* |DEBUG_COMPILE|  */@; 
  
    using namespace Scan_Parse;
@@ -3544,7 +3426,6 @@ Now returning 0 rather than 1.
 
       }  /* |if (vp.size() == 0)|  */
 
-
 @q **** (4) Coplanar case.@>   
 @ Coplanar case.
 \initials{LDF 2005.02.21.}
@@ -3569,7 +3450,6 @@ Now returning 0 rather than 1.
 @q ***** (5).@>  
 
    Pointer_Vector<Polygon>* temp_pv;
-
 
    try 
       {
@@ -3617,8 +3497,7 @@ Now returning 0 rather than 1.
          point_vector.push_back(*iter);
       }
 
-   
-   for (i = 0; i < point_vector.size(); ++i)
+for (i = 0; i < point_vector.size(); ++i)
       {
 
           j = (i + 1) % point_vector.size();
@@ -3647,9 +3526,8 @@ Now returning 0 rather than 1.
               }  /* |for|  */
 
       }  /* |for|  */
-        
 
-   for (list<Polygon*>::const_iterator iter = polygon_list.begin();
+for (list<Polygon*>::const_iterator iter = polygon_list.begin();
         iter != polygon_list.end();
         ++iter)
       {
@@ -3668,11 +3546,9 @@ Now returning 0 rather than 1.
 
       }  /* |if (is_coplanar(*p, scanner_node))|  */
 
-
 @q **** (4) Non-coplanar case.@>   
 @ Non-coplanar case.
 \initials{LDF 2005.02.21.}
-
 
 \LOG
 \initials{LDF 2005.02.25.}
@@ -3698,7 +3574,6 @@ wasn't derived from |class Polygon|.
             }    
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
           Line isect_line = get_plane().intersection_line(p->get_plane());
 
           Point* pt0 = create_new<Point>(0);
@@ -3715,9 +3590,7 @@ wasn't derived from |class Polygon|.
 
 @q ***** (5) End of non-coplanar case.@>  
 
-
       }  /* |else| (|!is_coplanar(*p, scanner_node)|)  */
-
 
 @q **** (4) @>   
 
@@ -3736,7 +3609,6 @@ wasn't derived from |class Polygon|.
 @q **** (4) @>   
 
    return 1;
-
 
 }  /* End of |Polygon::decompose(Polygon* p, 
                                  const Scanner_Node)| definition.  */
@@ -3763,7 +3635,6 @@ virtual
 Pointer_Vector<Shape>*
 decompose(Shape* s, Scanner_Node scanner_node = 0);
 
-
 @q *** (3) Definition.@>
 
 @
@@ -3774,7 +3645,7 @@ Polygon::decompose(Shape* s, Scanner_Node scanner_node)
 
 @q **** (4) Preliminaries.@> 
 
-   bool DEBUG = false; /* |true|  */
+   bool DEBUG = false; /* |true| */
 
    using namespace Scan_Parse;
 
@@ -3878,7 +3749,6 @@ Added this section.
                 pvp->clear(false);
                 delete pvp;
 
-
                 return pvs;
 
            }  /* |if (pvp != 0)|  */
@@ -3900,7 +3770,6 @@ Added this section.
          cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q **** (4) @>   
 
@@ -3996,9 +3865,8 @@ Polygon::decompose(const unsigned short limit,
                 *pv2 += *pv1;
         
                 pv1->clear(false);
-      
 
-            }  /* |for|  */
+}  /* |for|  */
 
          pv0->clear(true);
 
@@ -4060,7 +3928,6 @@ Pointer_Vector<Polygon>*
 sub_decompose(const bool use_rectangles = false,
               Scanner_Node scanner_node = 0);
 
-
 @q * (0) Reg_Polygon.@>
 @** Reg\_Polygon\quad ({\tt polygons\PERIOD web}).\hfil
 \initials{LDF 2003.04.15.}  @:!! TO DO@> TO DO:  It will be necessary to supply
@@ -4104,7 +3971,6 @@ class Reg_Polygon : public Polygon
     @<Declare |Reg_Polygon| functions@>@;
 };
 
-
 @q * (1) Assignment.@>
 @* Assignment.
 @^\cofunc{Reg\_Polygon}{=}@>
@@ -4139,7 +4005,6 @@ Reg_Polygon::operator=(const Reg_Polygon& p)
   center = p.center;
   return *this;
 }
-
 
 @q * (1) Constructors and setting functions. @>
 @* Constructors and setting functions.
@@ -4176,8 +4041,6 @@ Reg_Polygon();
    projective_extremes.resize(6, 0); /* LDF 2003.04.09.  Added this
                                        line.  */
 }
-
-
 
 @q ** (2) Center, sides, diameter, and angles. @>
 @*1 Center, sides, diameter, and angles.
@@ -4226,7 +4089,7 @@ Reg_Polygon::Reg_Polygon(const Point& ccenter,
                          : radius(ddiameter / 2), sides(ssides)
   
 {
-  bool DEBUG = false; /* |true|  */ 
+  bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Reg_Polygon::Reg_Polygon() "
          << "(center, sides, diameter, angles).\n";
@@ -4242,10 +4105,8 @@ Reg_Polygon::Reg_Polygon(const Point& ccenter,
   projective_extremes.resize(6, 0); /* LDF 2003.04.09.  Added this
                                        line.  */
 
-
   center.apply_transform();
 
-  
 @ For regular polygons with an even number of sides, we rotate them so
 that a flat side is at the ``top'' (in the direction of the positive
 z-axis, if |angle_x|, |angle_y|, and |angle_z| are all 0). 
@@ -4258,13 +4119,11 @@ z-axis, if |angle_x|, |angle_y|, and |angle_z| are all 0).
       if (sides % 2 == 0)
         vertex->rotate(0, internal_angle / 2, 0);
 
-      
-      if ( i > 0)  /* \initials{LDF 2002.11.06.}  Only rotate if the angle $\neq
+if ( i > 0)  /* \initials{LDF 2002.11.06.}  Only rotate if the angle $\neq
                       0$, i.e., don't rotate the first time.  */
         vertex->rotate(0, i*internal_angle, 0);
 
-      
-      /* Rotation around the x-axis, y-axis, and z-axis, if applicable. */ 
+/* Rotation around the x-axis, y-axis, and z-axis, if applicable. */ 
 
       if (angle_x != ZERO_REAL || angle_y != ZERO_REAL || angle_z != ZERO_REAL) 
         vertex->rotate(angle_x, angle_y, angle_z);
@@ -4277,7 +4136,6 @@ z-axis, if |angle_x|, |angle_y|, and |angle_z| are all 0).
          << "(center, sides, diameter, angles).\n";
   return;
 }
-
 
 @q *** (3) Setting function.@>
 @*2 Setting function.
@@ -4299,7 +4157,7 @@ Reg_Polygon::set(const Point& ccenter, const unsigned short ssides,
                      const real ddiameter,
                      const real angle_x, const real angle_y, const real angle_z)
 {
-  bool DEBUG = false; /* |true|  */ 
+  bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Reg_Polygon::set() "
          << "(center, sides, diameter, angles).\n";
@@ -4415,8 +4273,6 @@ manipulated into a non-planar state, so it's safer to use the |Path|
 version, which tests whether it's really planar or not.  
 \ENDLOG 
 
-
-
 @q ** (2) Get |Shape| type.@> 
 @*1 Get {\bf Shape} type.
 \initials{LDF 2005.03.18.}
@@ -4437,7 +4293,6 @@ get_shape_type(void) const
    return REG_POLYGON_TYPE;
 }
 
-
 @q ** (2) Is |Reg_Polygon|.@> 
 @*1 Is {\bf Reg\_Polygon}.
 \initials{LDF 2005.03.31.}
@@ -4456,8 +4311,6 @@ is_reg_polygon(void)
    return true;
 }
 
-
-
 @q ** (2) Is regular and polygonal.@>
 @*1 Is regular and polygonal.
 @^\cfunc{Reg\_Polygon}{is\_reg\_polygonal}@>
@@ -4475,8 +4328,6 @@ Make log entry.  Also add |location(const Point&)|.
 bool
 is_reg_polygonal(void);
 
-
-
 @
 @<Define |Reg_Polygon| functions@>=
 bool
@@ -4485,7 +4336,6 @@ Reg_Polygon::is_reg_polygonal(void)
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
   if (!is_planar())
     return false;
@@ -4502,7 +4352,6 @@ Reg_Polygon::is_reg_polygonal(void)
 
 }
 
-
 @q ** (2) Get radius.@>
 @*1 Get radius.  
 @^\cfunc{Reg\_Polygon}{get\_radius}@>
@@ -4516,7 +4365,6 @@ Added this function.
 inline
 real
 get_radius() const {return radius;}
-
 
 @q * (1) Reflection in a |Plane|.@> 
 @ Reflection in a |Plane|.
@@ -4553,7 +4401,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q ** (2) Definition.@>
 
 @
@@ -4563,12 +4410,11 @@ Reg_Polygon::reflect_in(const Plane& p,
                         void* v,
                         const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -4582,7 +4428,6 @@ Reg_Polygon::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -4611,7 +4456,6 @@ on the free store for it.
 
 @<Define |Reg_Polygon| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -4626,10 +4470,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (reg_polygon_reflection == 0)|  */
@@ -4644,7 +4486,6 @@ on the free store for it.
   Polygon polygon_reflection;
 
   int status;
-
 
   try
      {
@@ -4702,8 +4543,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Polygon::reflect_in| succeeded.@> 
 
@@ -4765,11 +4605,6 @@ on the free store for it.
 
 } /* End of |Reg_Polygon::reflect_in| definition.  */
 
-
-
-
-
-
 @q * (1) Circles.@>
 @* Circles.
 \initials{LDF 2003.06.13.}  The functions in this section are all defined in
@@ -4778,7 +4613,6 @@ file.
 \LOG
 \initials{LDF 2003.06.13.}  Added this section.
 \ENDLOG
-
 
 @q ** (2) Enclosed circle.@>
 @*1 Enclosed circle.
@@ -4793,7 +4627,6 @@ Added this function.
 
 Circle
 in_circle() const;
-
 
 @q ** (2) Draw enclosed circle.@>
 @*1 Draw enclosed circle.
@@ -4843,7 +4676,6 @@ draw_in_circle(Picture& picture,
                Pointer_Vector<Dash_Pattern>* ddash_pattern_vector = 0,
                Pointer_Vector<Pen>* ppen_vector = 0) const;
 
-
 @q ** (2) Surrounding circle.@>
 @*1 Surrounding circle.
 @^\cfunc{Reg\_Polygon}{out\_circle}@>
@@ -4853,7 +4685,6 @@ draw_in_circle(Picture& picture,
 
 Circle
 out_circle(void) const;
-
 
 @q ** (2) Draw surrounding circle.@>
 @*1 Draw surrounding circle.
@@ -4926,7 +4757,6 @@ This is what's compiled.
 @<Define |class Reg_Polygon|@>@;
 @<Declare non-member template functions for |Reg_Polygon|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -4935,7 +4765,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-  
 @q * Local variables for Emacs.@>
 
 @q Local Variables: @>

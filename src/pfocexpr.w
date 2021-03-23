@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) focus expressions.  @>
 @** {\bf focus} expressions.
@@ -59,7 +57,6 @@
 Created this file.
 \ENDLOG 
 
-
 @q * (1) focus primary.  @>
 @* \§focus primary>.
   
@@ -68,7 +65,6 @@ Created this file.
 
 @q ** (2) focus_primary --> focus_variable.@>
 @*1 \§focus primary> $\longrightarrow$ \§focus variable>.  
-
 
 \LOG
 \initials{LDF 2004.11.22.}
@@ -94,9 +90,8 @@ an ``unknown |focus|''.
 
   {
     Focus* s = create_new<Focus>(static_cast<Focus*>(entry->object));
-  
-  
-    @=$$@> = static_cast<void*>(s);
+
+@=$$@> = static_cast<void*>(s);
  
   }   /* |else| (|entry != 0 && entry->object != 0|)  */@;
 
@@ -185,7 +180,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) focus secondary.  @>
 @*1 \§focus secondary>.
 \initials{LDF Undated.}
@@ -223,7 +217,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) focus expression.  @>
 @*1 \§focus expression>.
 \initials{LDF Undated.}
@@ -242,7 +235,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -251,7 +243,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

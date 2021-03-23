@@ -48,9 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
-
 
 @q * (0) Loops.  @>
 @** Loops.  
@@ -187,12 +184,9 @@ which is defined in \filename{scanprsf.web}.
                                     @=$6@>,
                                     @=$8@>);
 
-
-
      @=$$@> = 0;
 
 };
-
 
 @q *** (3) for_loop --> FOR symbolic_token equate_or_assign @>
 @q *** (3) numeric_expression upto_or_downto                @>
@@ -223,7 +217,6 @@ Added this rule.
    real limit_value = @=$6@>;
    real step_value; 
 
-
    if (@=$5@> == UPTO)
       step_value = 1;
 
@@ -239,7 +232,6 @@ Added this rule.
             step_value = -1;
 
       }  /* |else| (|!(@=$5@> == UPTO || @=$5@> == DOWNTO)|)  */   
-
 
 @q ***** (5) Call |Scan_Parse::for_loop_func()|.@>
 
@@ -306,9 +298,6 @@ Added this rule.
 
 };
 
-
-
-
 @q *** (3) for_loop --> FOREVER COLON.@>
 
 @*2 \§for-loop> $\longrightarrow$ 
@@ -339,13 +328,9 @@ Added |int prev_token|.
          for_loop_func(static_cast<Scanner_Node>(parameter),
                                 Loop_Info_Type::FOREVER_TYPE);
 
-
   @=$$@> = 0;
 
 };
-
-
-
 
 @q *** (3) for_loop --> FOR_SUFFIXES symbolic_token equate_or_assign.@> 
 
@@ -370,13 +355,11 @@ Started rewriting this rule.
 
    string s = @=$2@>;
 
-
           for_suffixes_loop_func(static_cast<Scanner_Node>(parameter), s);
 
           @=$$@> = 0;
 
 };
-
 
 @q *** (3) for_loop --> FOR_SUFFIXES_INTERNAL_START SEMI_COLON.@> 
 
@@ -406,7 +389,6 @@ in a |try| block and catching |bad_alloc|.
 
 };
 
-
 @q *** (3) for_loop --> FOR_SUFFIXES_INTERNAL SEMI_COLON.@> 
 
 @*2 \§for-loop> $\longrightarrow$ 
@@ -428,7 +410,6 @@ is defined in \filename{scanprsf.web}.
   
 @=for_loop: FOR_SUFFIXES_INTERNAL SEMI_COLON@>@/
 {
-
 
    for_suffixes_internal_func(static_cast<Scanner_Node>(parameter), 1);
 
@@ -512,7 +493,6 @@ by |scanner_node->loop_info_node->step_value|
 
   real step_value  = scanner_node->loop_info_node->step_value;
 
-
 @q ******* (7) We've surpassed the limit.  Ending the loop.@>   
 
 @ We've surpassed the limit.  Ending the loop.
@@ -520,7 +500,6 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
 \initials{LDF 2004.09.13.}
 
 @<Define rules@>=
-
 
   if (   (step_value > 0 && start_value > limit_value)
       || (step_value < 0 && start_value < limit_value))
@@ -530,7 +509,6 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
 
     } /*  |if (   (step_value > 0 && start_value > limit_value)
                || (step_value < 0 && start_value < limit_value))|  */
-  
 
 @q ******* (7) We haven't reached the limit yet.  Continuing the loop.@>   
 
@@ -548,7 +526,6 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
     } /* |else| (|!(   (step_value > 0 && start_value > limit_value)
                     || (step_value < 0 && start_value < limit_value))|)  */
 
-
 }  /* |if (scanner_node->loop_info_node->type == Loop_Info_Type::FOR_TYPE)|  */
 
 @q ***** (5) End |for_suffixes| loop.@>   
@@ -558,11 +535,9 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
 
 @<Define rules@>=
 
-
   else if (   scanner_node->loop_info_node->type 
            == Loop_Info_Type::FOR_SUFFIXES_TYPE)
     {
-
 
 @q ****** (6) |scanner_node->loop_info_node->suffix_list.size() == 0|.@> 
 
@@ -639,8 +614,6 @@ calling
     } /* |else if (   scanner_node->loop_info_node->type
                    == Loop_Info_Type::FOREVER_TYPE)|  */
 
-
-
 @q ***** (5) Error handling:  Invalid loop type.@>   
 
 @ Error handling:  Invalid loop type.
@@ -654,7 +627,6 @@ calling
 
     } /* |else|  */
 
-
 @q **** (4) Set |$$| and exit rule successfully.@>   
 
 @ Set |@=$$@>| and exit rule successfully.
@@ -662,11 +634,9 @@ calling
 
 @<Define rules@>=
 
-
   @=$$@> = 0;
 
 };
-
 
 @q *** (3) end_loop --> exit_if_or_exit_unless boolean_expression SEMI_COLON.@>
 @*2 \§exit-loop> $\longrightarrow$ 
@@ -691,9 +661,8 @@ will have to change this code back, too.
 
   bool* b = static_cast<bool*>(@=$2@>);
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
- 
 
-  if (@=$1@> == EXIT_UNLESS)
+if (@=$1@> == EXIT_UNLESS)
     *b = !(*b);
 
 @q ***** (5) |*b == true|.  End the loop.@>   
@@ -707,9 +676,7 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
   if (*b)
     {
 
-
       int status = scanner_node->pop_in();
-
 
 @q ****** (6) Error handling:  |Scanner_Type::pop_in()| failed.@> 
 
@@ -724,8 +691,6 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
       return 1;
 
     } /* |if (status != 0)|  */
-                
-
 
 @q ****** (6) |Scanner_Type::pop_in()| succeeded.@> 
 
@@ -739,9 +704,7 @@ Added this section.
 
 @<Define rules@>=
 
-
   Loop_Info_Node temp_loop_info_node = scanner_node->loop_info_node;
-
 
   scanner_node->loop_info_node = scanner_node->loop_info_node->up;
       
@@ -750,17 +713,12 @@ Added this section.
         delete temp_loop_info_node;
 
       temp_loop_info_node = 0;
-      
 
-      Int_Void_Ptr_Bool ivp(END_GROUP, 0, false);
+Int_Void_Ptr_Bool ivp(END_GROUP, 0, false);
       scanner_node->rescan_stack.push(ivp);
-
-
 
     } /* |if (*b)| */
 
-  
-  
 @q ***** (5) |*b == false|.  Continue looping.@>   
 
 @ |*b == false|.  Continue looping.
@@ -773,8 +731,6 @@ Added this section.
   @=$$@> = 0;
 
 };
-
-
 
 @q *** (3) End loop.@> 
 @ End loop.
@@ -808,8 +764,6 @@ Added this section.
       return 1;
 
     } /* |if (status != 0)|  */
-                
-
 
 @q **** (4) |Scanner_Type::pop_in()| succeeded.@> 
 
@@ -823,9 +777,7 @@ Added this section.
 
 @<End loop@>=
 
-
       Loop_Info_Node temp_loop_info_node = scanner_node->loop_info_node;
-
 
       scanner_node->loop_info_node = scanner_node->loop_info_node->up;
       
@@ -835,14 +787,10 @@ Added this section.
 
       temp_loop_info_node = 0;
 
-
       Int_Void_Ptr_Bool ivp(END_GROUP, 0, false);
       scanner_node->rescan_stack.push(ivp);
 
 } /* End of ``End loop'' group.  */
-
-
-
 
 @q *** (3) exit_if_or_exit_unless.@>
 @*2 \§exit-if or exit-unless>.
@@ -855,7 +803,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> exit_if_or_exit_unless@>
-
 
 @q **** (4) exit_if_or_exit_unless --> EXIT_IF.@>
 @*3 \§exit-if or exit-unless> $\longrightarrow$ \.{EXIT\_IF}.
@@ -902,9 +849,6 @@ Added this rule.
 @q   accessed via the local variables list.                              @>
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
-
-
-  
 
 @q * (0) Local variables for Emacs.@>
 

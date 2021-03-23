@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |plane_vector| expressions.@>
 @** \§plane vector> expressions.
@@ -60,7 +58,6 @@
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
-
 @q * (1) |plane_vector| primary.  @>
 @* \§plane vector primary>.
 \initials{LDF 2005.10.30.}
@@ -69,7 +66,6 @@ Created this file and wrote quite a few rules.
 \initials{LDF 2005.10.30.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> plane_vector_primary@>@/
@@ -157,7 +153,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) plane_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) plane_vector_expression  RIGHT_PARENTHESIS.@>
 
@@ -244,7 +239,6 @@ Added this rule.
 
 };
 
-
 @q * (1) plane_vector tertiary.  @>
 
 @* \§plane vector tertiary>.
@@ -293,7 +287,6 @@ Added this rule.
 
 };
 
-
 @q * (1) plane_vector expression.@>
 @* \§plane vector expression>.
 
@@ -337,8 +330,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -347,7 +338,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -356,5 +346,4 @@ Added this rule.
 @q fill-column:70                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

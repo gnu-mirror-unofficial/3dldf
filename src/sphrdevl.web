@@ -47,8 +47,7 @@ Franklin St, Fifth Floor @>
 @q Boston, MA 02110-1301 @> 
 @q USA @>
 
-@q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@> 
-
+@q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 @q * (0) Sphere_Developments.@> 
 @** Sphere\_Developments\quad ({\tt sphrdevl\PERIOD web}).\hfil
@@ -140,7 +139,6 @@ class Sphere_Development
       unsigned int divisions_lat;  /* Lines of latitude  */
 
       unsigned int path_point_count;
-
 
       Transform transform;
       
@@ -287,7 +285,6 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
     long_paths.clear();
     lat_paths.clear();
 
-
 @q ****** (6).@> 
 
     if (options == static_cast<Sphere_Development_Set_Option_Struct*>(0))
@@ -314,9 +311,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
        divisions_lat = DEFAULT_DIVISIONS_LAT;
        divisions_long = DEFAULT_DIVISIONS_LONG;
 
-
     }  /* |if (options == 0)|  */
-
 
 @q ****** (6) @>
 
@@ -409,7 +404,6 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 
         lat_paths[make_pair(0, angle)] = q; 
 
-
    }  /* |for|  */
 
 #if 0 
@@ -439,9 +433,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 
       }  /* |if (DEBUG)|  */
 
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6)@>
 
@@ -465,7 +457,6 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 @q ****** (6).@> 
 
 } /* End of |Sphere_Development::set| definition.  */
-
 
 @q *** (3) Setting data members.  @>
 @*2 Setting data members.
@@ -525,7 +516,6 @@ Sphere_Development::operator=(const Sphere_Development& sd)
    divisions_lat = sd.divisions_lat;
    divisions_long = sd.divisions_long;
 
-
    long_paths = sd.long_paths; 
    lat_paths  = sd.lat_paths; 
 
@@ -538,7 +528,6 @@ Sphere_Development::operator=(const Sphere_Development& sd)
    return;
 
 }  /* End of |Sphere_Development::operator=(const Sphere_Development&)| definition  */
-
 
 @q *** (3) @>
 
@@ -662,7 +651,6 @@ Sphere_Development::map_point(real latitude,
 
 @q **** (4) @>
 
-
 @q *** (3) Drawing and Filling.  @>
 @*2 Drawing and Filling.
 \initials{LDF 2009.11.16.}
@@ -757,7 +745,6 @@ Sphere_Development::draw(Picture& picture,
                           Path::NO_ARROW,
                           scanner_node);
 
-
    }  /* |long_paths|  */
 
 @q ****** (6) Latitude lines.  @>
@@ -776,7 +763,6 @@ Sphere_Development::draw(Picture& picture,
                           ppen_vector, 
                           Path::NO_ARROW,
                           scanner_node);
-
 
    }  /* |lat_paths|  */
      
@@ -833,7 +819,6 @@ I need to find a way to specify a different pen for drawing the points.
 
 }  /* End of |Sphere_Development::draw| definition  */
 
-
 @q *** (3) Transformations.@>
 @*2 Transformations. 
 \initials{LDF 2009.11.10.}
@@ -842,7 +827,6 @@ I need to find a way to specify a different pen for drawing the points.
 \initials{LDF 2009.11.10.}
 Added this section.
 \ENDLOG
-
 
 @q ***** (5) Multiplication by a |Transform| with assignment.@>
 @*4 Multiplication by a |Transform| with assignment.
@@ -868,7 +852,6 @@ Sphere_Development::operator*=(const Transform& t)
 
    return t;
 }
-
 
 @q **** (4) Rotatation around the main axes.@>
 @*3 Rotation  around the main axes. 
@@ -934,7 +917,6 @@ Sphere_Development::scale(real x, real y, real z)
 Added this function.
 \ENDLOG
 
-
 @<Declare |Sphere_Development| functions@>=
 
 virtual
@@ -963,7 +945,6 @@ Sphere_Development::shear(real xy, real xz, real yx, real yz,
 Added this section.
 \ENDLOG
 
-
 @q ***** (5) |real| arguments.@>
 @*3 {\bf real} arguments. 
 @^\cfunc{Sphere_Development}{shift}@>
@@ -989,7 +970,6 @@ Sphere_Development::shift(real xx, real yy, real zz)
   t.shift(xx, yy, zz);
   return operator*=(t);
 }
-
 
 @q ***** (5) Point argument.@>
 
@@ -1105,7 +1085,6 @@ show(string text = "",
      const unsigned short proj = Projections::persp,
      const real factor = 1) const;
 
-
 @q *** (3) Definition.@>
 @ 
 @<Define |Sphere_Development| functions@>=
@@ -1193,7 +1172,6 @@ Sphere_Development_Set_Option_Struct
 \initials{LDF 2009.11.17.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Constructors.  @>
 @*2 Constructors.
@@ -1288,7 +1266,6 @@ Sphere_Development_Set_Option_Struct::clear(void)
 
 }  /* End of |Sphere_Development_Set_Option_Struct::clear()| definition.  */
 
-
 @q *** (3) Show.@> 
 @*2 Show.
 \initials{LDF 2009.11.17.}
@@ -1340,8 +1317,6 @@ Sphere_Development_Set_Option_Struct::show(string text)
 
 }  /* End of |Sphere_Development_Set_Option_Struct::show()| definition.  */
 
-
- 
 @q * (1) Putting |Sphere_Developments| together. @>
 @* Putting {\bf Sphere\_Developments} together.
 
@@ -1361,7 +1336,6 @@ This is what's compiled.
 @<Declare |class Sphere_Development|@>@;@/
 @<Declare |struct Sphere_Development_Set_Option_Struct|@>@;@/
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1370,8 +1344,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Input Command.@>
 @** Input Command.
@@ -58,7 +56,6 @@
 \initials{LDF 2004.09.14.}
 Created this file. 
 \ENDLOG 
-
 
 @q ** (2) command --> INPUT STRING. @>
 @*1  \§command> \.{INPUT} \.{STRING}.
@@ -91,9 +88,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
-  
-  string* s = static_cast<string*>(@=$2@>);
+string* s = static_cast<string*>(@=$2@>);
 
 @q **** (4) Error handling:  |s == 0 || s->size() == 0|.@> 
 
@@ -126,7 +121,6 @@ Added this rule.
   else /* |!(s == 0 || s->size() == 0)|  */
     {
 
-
 #if DEBUG_COMPILE
       if (DEBUG)
         {
@@ -139,9 +133,7 @@ Added this rule.
           cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Call |Scan_Parse::input_command()|.@> 
 
@@ -173,7 +165,6 @@ Added this rule.
 
     } /* |if (status != 0)|  */
 
-
 @q ****** (6) |Scan_Parse::input_command()| succeeded.@> 
 
 @ Error handling:  |Scan_Parse::input_command()| succeeded.
@@ -188,7 +179,6 @@ Added this rule.
                 << "In `yyparse()', rule `input_command --> INPUT STRING':"
                 << endl << "`Scan_Parse::input_command()' succeeded."
                  << endl << "Inputting file \"" << *s << "\".";
-
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -210,7 +200,6 @@ Added this rule.
 cast from |void*|.
 \initials{LDF 2004.09.14.}
 
-
 \LOG
 \initials{LDF 2004.09.15.}
 Now deleting |s|, if it's non-null.
@@ -226,11 +215,6 @@ Now deleting |s|, if it's non-null.
 }
 ;
 
-
-
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -239,7 +223,6 @@ Now deleting |s|, if it's non-null.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

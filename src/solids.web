@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Solid.@>
 @** Solid\quad ({\tt solids\PERIOD web}).\hfil
@@ -125,7 +124,6 @@ versions are now in their own RCS repository.
 #if 0 
    #include "patterns.h++"
 #endif 
-
 
 @q * (1) Solid class definition.@>
 @* {\bf Solid} class definition.
@@ -214,7 +212,6 @@ class Solid : public Shape
   @<Declare |Solid| functions@>@;
 };
 
-
 @q * Define static const Solid data members.@>
 @ Define {\bf static const Solid} data members.
 
@@ -237,7 +234,6 @@ Now setting |PARABOLA_VALUE| and |HYPERBOLA_VALUE|.
 
    const unsigned short Solid::RECTANGLE_VALUE   = 5;   
    const unsigned short Solid::REG_POLYGON_VALUE = 6; 
-
 
 @q * (1) Constructors.@>
 @* Constructors.
@@ -457,7 +453,6 @@ virtual
 @<Define |Solid| functions@>=
 Solid::~Solid() {}
 
-
 @q * (1) Assignment.@>
 @* Assignment.
 @^\cofunc{Solid}{=}@>
@@ -503,7 +498,6 @@ Solid::operator=(const Solid& s)
 
   center = s.center; /* LDF 2002.10.06.  Added this line, because
                         |center| is now a member of |Solid|.  */
-
 
 @q *** (3)@> 
 
@@ -763,9 +757,6 @@ get_shape_type(void) const
    return SOLID_TYPE;
 }
 
-
-
-
 @q ** (2) Get center.@>
 @*1 Get center.
 @^\cfunc{Solid}{get\_center}@>
@@ -830,9 +821,6 @@ Solid::copy_coords(const char from,
    return 0;
 }
 
-
-
-
 @q ** (2) Getting Shapes.@>
 @*1 Getting Shapes.
 
@@ -845,9 +833,8 @@ Changed the functions |get_circle_ptr()|,
 longer use |get_shape_ptr()|.  There's no good reason for casting pointers
 from one type to another.  I rather doubt that |get_shape_ptr()| is
 needed, anyway.   
-\ENDLOG 
+\ENDLOG
 
-  
 @q *** Get (3) Shape pointer.@>
 @*1 Get Shape pointer.
 @^\cfunc{Solid}{get\_shape\_ptr}@>
@@ -904,13 +891,12 @@ Shape*
 Solid::get_shape_ptr(const unsigned short curr_shape_type,
                      const unsigned short s) const
 {
-  bool DEBUG = false; /* |true|  */@;
+  bool DEBUG = false; /* |true| */@;
 
   if (DEBUG)
     {
       cerr << "Entering Solid::get_shape_ptr().\n";
     }
-
 
 @q **** Path case.@>
     if (curr_shape_type == PATH_VALUE)
@@ -1001,9 +987,6 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
           }
 
       }
-
-
-
 
 @q **** Rectangle case.@>
     else if (curr_shape_type == RECTANGLE_VALUE)
@@ -1216,8 +1199,6 @@ Solid::get_hyperbola_ptr(const unsigned short s) const
     }
 }
 
-
-
 @q *** (3) Get Rectangle pointer.@>
 @*2 Get {\bf Rectangle} pointer.
 @^\cfunc{Solid}{get\_rectangle\_ptr}@>
@@ -1287,11 +1268,8 @@ Solid::get_reg_polygon_ptr(const unsigned short s) const
     }
 }
 
-
-
 @q ** (2) Getting Shape centers.@>
 @*1 Getting Shape centers.
-
 
 \TODO
 @q { @>
@@ -1302,7 +1280,6 @@ Solid::get_reg_polygon_ptr(const unsigned short s) const
 I think it might be possible to code the functions in
 this section more succinctly.
 \ENDTODO 
-
 
 \LOG
 \initials{LDF 2003.04.11.}  
@@ -1489,7 +1466,6 @@ Solid::get_rectangle_center(const unsigned short s) const
   return get_shape_center(RECTANGLE_VALUE, s);
 }
 
-
 @q *** Get Reg_Polygon center.@>
 @ Get {\bf Reg\_Polygon} center. 
 @^\cfunc{Solid}{get\_reg\_polygon\_center}@> 
@@ -1508,7 +1484,6 @@ Solid::get_reg_polygon_center(const unsigned short s) const
 {
   return get_shape_center(REG_POLYGON_VALUE, s);
 }
-
 
 @q * (1) Functions for checking types.@> 
 @* Functions for checking types.
@@ -1734,7 +1709,6 @@ is_parabola(void) const
 {
    return false;
 }
-
 
 @q ** (2) Is |Hyperbola|.@> 
 @*1 Is {\bf Hyperbola}.
@@ -2024,8 +1998,6 @@ is_great_rhombicosidodecahedron(void) const
    return false;
 }
 
-
-
 @q ** (2) Is |Cone|.@> 
 @*1 Is {\bf Cone}.
 \initials{LDF 2005.05.24.}
@@ -2075,7 +2047,6 @@ is_cone_slice(void) const
 {
    return false;
 }
-
 
 @q ** (2) Is |Cylinder|.@> 
 @*1 Is {\bf Cylinder}.
@@ -2144,7 +2115,6 @@ is_ellipsoid(void) const
 {
    return false;
 }
-
 
 @q ** (2) Is ellipsoidal|.@> 
 @*1 Is ellipsoidal.
@@ -2310,8 +2280,6 @@ virtual
 bool
 is_hyperbolic_paraboloidal(Scanner_Node scanner_node = 0) const;
 
-
-
 @q ** (2) Is |Hyperboloid|.@> 
 @*1 Is {\bf Hyperboloid}.
 \initials{LDF 2005.11.07.}
@@ -2445,7 +2413,6 @@ bool
 is_whatever(Scanner_Node scanner_node = 0,
             real tolerance = Shape::DEFAULT_TOLERANCE) const;
 
-
 @
 @<Define |Solid| functions@>=
 
@@ -2501,8 +2468,6 @@ virtual
 int
 push_draw_color(Color*& c, bool copy = true);
 
-
-
 @q *** (3) Definition.@> 
 
 @
@@ -2529,7 +2494,6 @@ Solid::push_draw_color(Color*& c, bool copy)
 
 }  /* End of |Solid::push_draw_color()|  */
 
-
 @q ** (2) Push fill color.@>
 @*1 Push fill color.
 \initials{LDF 2005.03.17.}
@@ -2546,8 +2510,6 @@ Added this function.
 virtual
 int
 push_fill_color(Color*& c, bool copy = true);
-
-
 
 @q *** (3) Definition.@> 
 
@@ -2575,7 +2537,6 @@ Solid::push_fill_color(Color*& c, bool copy)
 
 }  /* End of |Solid::push_fill_color()|  */
 
-
 @q ** (2) Push color.@>
 @*1 Push color.
 \initials{LDF 2005.03.17.}
@@ -2592,8 +2553,6 @@ Added this function.
 virtual
 int
 push_color(Color*& c, bool copy = true);
-
-
 
 @q *** (3) Definition.@> 
 
@@ -2715,8 +2674,6 @@ Solid::push_dash_pattern(Dash_Pattern*& d, bool copy)
 
 }  /* End of |Solid::push_dash_pattern()| definition.  */
 
-
-
 @q * (1) Show.@>
 @* Show.
 @^\cfunc{Solid}{show}@>
@@ -2727,7 +2684,6 @@ Solid::push_dash_pattern(Dash_Pattern*& d, bool copy)
 Added code for showing |vector<Parabola*> parabolae| 
 and |vector<Hyperbola*> hyperbolae|.
 \ENDLOG 
-
 
 @<Declare |Solid| functions@>=
 
@@ -2800,7 +2756,6 @@ Solid::show(string text, char coords,
   else
     cerr << "circles is empty.\n";
 
-
   if (parabolae.size() > 0)
     {
       cerr << "Showing parabolae.\n";
@@ -2815,7 +2770,6 @@ Solid::show(string text, char coords,
     }
   else
     cerr << "parabolae is empty.\n";
-
 
   if (hyperbolae.size() > 0)
     {
@@ -2957,7 +2911,6 @@ Solid::clear(void)
    pre_projective_extremes  = 0;  
    projective_extremes      = 0;    
 
-
    for (vector <Path*>::iterator iter = paths.begin();
         iter != paths.end(); ++iter)
      (**iter).clear();
@@ -2971,7 +2924,6 @@ Solid::clear(void)
          }
 
    ellipses.clear();
-
 
    for (vector <Circle*>::iterator iter = circles.begin();
         iter != circles.end(); ++iter)
@@ -2999,8 +2951,6 @@ Solid::clear(void)
          }
 
    hyperbolae.clear();
-
-
 
    for (vector <Reg_Polygon*>::iterator iter = reg_polygons.begin();
         iter != reg_polygons.end(); ++iter)
@@ -3044,7 +2994,6 @@ pointers on |vector<Parabola*> parabolae| and |vector<Hyperbola*> hyperbolae|
 by |Transform t|.
 \ENDLOG 
 
-
 @<Declare |Solid| functions@>=
 virtual 
 Transform 
@@ -3084,10 +3033,8 @@ Solid::operator*=(const Transform& t)
        iter != rectangles.end(); ++iter)
     **iter *= t;
 
-
   return t;
 }
-
 
 @q ** (2) Applying a transformation.@>
 @*1 Applying a transformation.
@@ -3188,7 +3135,6 @@ Solid::shear(real xy, real xz, real yx, real yz,
   return t;
 }
 
-
 @q ** (2) Shift.@>
 @*1 Shift.
 
@@ -3230,8 +3176,6 @@ Solid::shift(const Point& pt)
   return t;
 }
 
-
-
 @q ** (2) Rotatation around the main axes.@>
 @*1 Rotatation around the main axes.
 @^\cfunc{Solid}{rotate}@>
@@ -3250,8 +3194,6 @@ Solid::rotate(const real xx, const real yy, const real zz)
   *this *= t;
   return t;
 }
-     
-
 
 @q ** (2) Rotatation around an arbitrary axis.@>
 @*1 Rotatation around an arbitrary axis.
@@ -3267,9 +3209,6 @@ Transform
 rotate(const Point& p0, const Point& p1,
                                   const real angle = 180);
 
-
-
-
 @
 @<Define |Solid| functions@>=
 Transform 
@@ -3281,7 +3220,6 @@ Solid::rotate(const Point& p0, const Point& p1,
   *this *= t;
   return t;
 }
-
 
 @q * (1) Reflections.@>
 @* Reflections.
@@ -3325,7 +3263,6 @@ reflect_in(const Plane& p,
            void* v,
            const Scanner_Node scanner_node = 0) const;
 
-
 @q *** (3) Definition.@>
 
 @
@@ -3336,15 +3273,13 @@ Solid::reflect_in(const Plane& p,
                   const Scanner_Node scanner_node) const
 {
 
-
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
   stringstream cerr_strm;
-
 
   bool error_stop_value   = true;
   bool warning_stop_value = true;
@@ -3355,11 +3290,9 @@ Solid::reflect_in(const Plane& p,
                                                    &error_stop_value,
                                                    &warning_stop_value);
 
-
 @q *** (3).@> 
 
   Solid* solid_reflection = static_cast<Solid*>(v); 
-
 
 @q *** (3) If |solid_reflection == 0|, try to allocate memory @> 
 @q *** (3) for it on the free store.@> 
@@ -3369,7 +3302,6 @@ Solid::reflect_in(const Plane& p,
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
-
 
    if (solid_reflection == static_cast<Solid*>(0))
      {
@@ -3381,9 +3313,8 @@ Solid::reflect_in(const Plane& p,
         log_message(cerr_strm);
         cerr_message(cerr_strm, warning_stop_value);
         cerr_strm.str("");
- 
 
-        try
+try
           {
              solid_reflection = create_new<Solid>(0, scanner_node);
           }
@@ -3403,13 +3334,11 @@ Solid::reflect_in(const Plane& p,
                         << endl << "`create_new<Solid>()' failed. "
                         << "Rethrowing `bad_alloc'.";
 
-
               log_message(cerr_strm);
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
 
               throw;
-
 
           } /* |catch (bad_alloc)|  */
 
@@ -3437,12 +3366,9 @@ Solid::reflect_in(const Plane& p,
 
      } /* |if (solid_reflection == 0)|  */
 
-
-
 @q *** (3).@> 
 
   int status;
-
 
 @q *** (3) Reflect the objects on the vectors.@> 
 
@@ -3450,7 +3376,6 @@ Solid::reflect_in(const Plane& p,
 \initials{LDF 2004.10.11.}
 
 @<Define |Solid| functions@>=
-
 
 @q **** (4) |circles|.@> 
 @ |circles|.
@@ -3460,8 +3385,7 @@ Solid::reflect_in(const Plane& p,
 
  { /* Beginning of |Circle| group.  */
 
-  
-  Circle* circle_reflection;
+Circle* circle_reflection;
 
   for (vector<Circle*>::const_iterator iter = circles.begin();
        iter != circles.end();
@@ -3510,11 +3434,9 @@ Solid::reflect_in(const Plane& p,
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
 
-
               delete solid_reflection;
 
               return 1;
-
 
          } /* |if (status != 0)|  */
 
@@ -3539,8 +3461,7 @@ Solid::reflect_in(const Plane& p,
           cerr_strm.str("");
 
      }       /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-        
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Push |circle_reflection| onto |circles|.@> 
 
@@ -3555,8 +3476,6 @@ Solid::reflect_in(const Plane& p,
 
  } /* End of |Circle| group.  */
 
-
-
 @q **** (4) |ellipses|.@> 
 @ |ellipses|.
 \initials{LDF 2004.10.12.}
@@ -3564,7 +3483,6 @@ Solid::reflect_in(const Plane& p,
 @<Define |Solid| functions@>=
 
  { /* Beginning of |Ellipse| group.  */
-
 
   Ellipse* ellipse_reflection;
 
@@ -3585,7 +3503,6 @@ Solid::reflect_in(const Plane& p,
             ellipse_reflection = create_new<Ellipse>(0, scanner_node);
          }
 
-
 @q ****** (6) Error handling:  |create_new<Ellipse>()| failed.@> 
 
 @ Error handling:  |create_new<Ellipse>()| failed.
@@ -3602,7 +3519,6 @@ Solid::reflect_in(const Plane& p,
                         << "Deleting `solid_reflection' and "
                         << "rethrowing `bad_alloc'.";
 
-
               log_message(cerr_strm);
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
@@ -3612,7 +3528,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
            }  /* |catch (bad_alloc)|  */
-
 
 @q ****** (6) |create_new<Ellipse>()| succeeded.@> 
 
@@ -3632,8 +3547,7 @@ Solid::reflect_in(const Plane& p,
          cerr_message(cerr_strm);
          cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Call |Ellipse::reflect_in()|.@> 
 
@@ -3648,7 +3562,6 @@ Solid::reflect_in(const Plane& p,
                                      static_cast<void*>(ellipse_reflection),
                                      scanner_node);
      }
-
 
 @q ****** (6) Error handling:  |Ellipse::reflect_in()| threw |bad_alloc|.@> 
 
@@ -3676,8 +3589,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
      }  /* |catch (bad_alloc)|  */
-
-
 
 @q ****** (6) Error handling:  |Ellipse::reflect_in()| returned 1.@> 
 
@@ -3728,8 +3639,7 @@ Solid::reflect_in(const Plane& p,
           cerr_strm.str("");
 
      }       /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-        
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Push |ellipse_reflection| onto |ellipses|.@> 
 
@@ -3742,7 +3652,6 @@ Solid::reflect_in(const Plane& p,
 
     } /* |for| (|ellipses|)  */
 
-
  } /* End of |Ellipse| group.  */
 
 @q **** (4) |paths|.@> 
@@ -3752,7 +3661,6 @@ Solid::reflect_in(const Plane& p,
 @<Define |Solid| functions@>=
 
  { /* Beginning of |Path| group.  */
-
 
   Path* path_reflection;
 
@@ -3773,7 +3681,6 @@ Solid::reflect_in(const Plane& p,
             path_reflection = create_new<Path>(0, scanner_node);
          }
 
-
 @q ****** (6) Error handling:  |create_new<Path>()| failed.@> 
 
 @ Error handling:  |create_new<Path>()| failed.
@@ -3790,7 +3697,6 @@ Solid::reflect_in(const Plane& p,
                         << "Deleting `solid_reflection' and "
                         << "rethrowing `bad_alloc'.";
 
-
               log_message(cerr_strm);
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
@@ -3800,7 +3706,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
            }  /* |catch (bad_alloc)|  */
-
 
 @q ****** (6) |create_new<Path>()| succeeded.@> 
 
@@ -3820,8 +3725,7 @@ Solid::reflect_in(const Plane& p,
          cerr_message(cerr_strm);
          cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Call |Path::reflect_in()|.@> 
 
@@ -3836,7 +3740,6 @@ Solid::reflect_in(const Plane& p,
                                      static_cast<void*>(path_reflection),
                                      scanner_node);
      }
-
 
 @q ****** (6) Error handling:  |Path::reflect_in()| threw |bad_alloc|.@> 
 
@@ -3865,8 +3768,6 @@ Solid::reflect_in(const Plane& p,
 
      }  /* |catch (bad_alloc)|  */
 
-
-
 @q ****** (6) Error handling:  |Path::reflect_in()| returned 1.@> 
 
 @ Error handling:  |Path::reflect_in()| returned 1.
@@ -3893,7 +3794,6 @@ Solid::reflect_in(const Plane& p,
 
               return 1;
 
-
          } /* |if (status != 0)|  */
 
 @q ****** (6) |Path::reflect_in()| succeeded.@> 
@@ -3917,8 +3817,7 @@ Solid::reflect_in(const Plane& p,
           cerr_strm.str("");
 
      }       /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-        
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Push |path_reflection| onto |paths|.@> 
 
@@ -3931,10 +3830,7 @@ Solid::reflect_in(const Plane& p,
 
     } /* |for| (|paths|)  */
 
-
  } /* End of |Path| group.  */
-
-
 
 @q **** (4) |rectangles|.@> 
 @ |rectangles|.
@@ -3943,7 +3839,6 @@ Solid::reflect_in(const Plane& p,
 @<Define |Solid| functions@>=
 
  { /* Beginning of |Rectangle| group.  */
-
 
   Rectangle* rectangle_reflection;
 
@@ -3964,7 +3859,6 @@ Solid::reflect_in(const Plane& p,
             rectangle_reflection = create_new<Rectangle>(0, scanner_node);
          }
 
-
 @q ****** (6) Error handling:  |create_new<Rectangle>()| failed.@> 
 
 @ Error handling:  |create_new<Rectangle>()| failed.
@@ -3981,7 +3875,6 @@ Solid::reflect_in(const Plane& p,
                         << "Deleting `solid_reflection' and "
                         << "rethrowing `bad_alloc'.";
 
-
               log_message(cerr_strm);
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
@@ -3991,7 +3884,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
            }  /* |catch (bad_alloc)|  */
-
 
 @q ****** (6) |create_new<Rectangle>()| succeeded.@> 
 
@@ -4011,8 +3903,7 @@ Solid::reflect_in(const Plane& p,
          cerr_message(cerr_strm);
          cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Call |Rectangle::reflect_in()|.@> 
 
@@ -4027,7 +3918,6 @@ Solid::reflect_in(const Plane& p,
                                      static_cast<void*>(rectangle_reflection),
                                      scanner_node);
      }
-
 
 @q ****** (6) Error handling:  |Rectangle::reflect_in()| threw |bad_alloc|.@> 
 
@@ -4055,8 +3945,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
      }  /* |catch (bad_alloc)|  */
-
-
 
 @q ****** (6) Error handling:  |Rectangle::reflect_in()| returned 1.@> 
 
@@ -4107,8 +3995,7 @@ Solid::reflect_in(const Plane& p,
           cerr_strm.str("");
 
      }       /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-        
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Push |rectangle_reflection| onto |rectangles|.@> 
 
@@ -4121,9 +4008,7 @@ Solid::reflect_in(const Plane& p,
 
     } /* |for| (|rectangles|)  */
 
-
  } /* End of |Rectangle| group.  */
-
 
 @q **** (4) |reg_polygons|.@> 
 @ |reg_polygons|.
@@ -4132,7 +4017,6 @@ Solid::reflect_in(const Plane& p,
 @<Define |Solid| functions@>=
 
  { /* Beginning of |Reg_Polygon| group.  */
-
 
   Reg_Polygon* reg_polygon_reflection;
 
@@ -4153,7 +4037,6 @@ Solid::reflect_in(const Plane& p,
             reg_polygon_reflection = create_new<Reg_Polygon>(0, scanner_node);
          }
 
-
 @q ****** (6) Error handling:  |create_new<Reg_Polygon>()| failed.@> 
 
 @ Error handling:  |create_new<Reg_Polygon>()| failed.
@@ -4170,7 +4053,6 @@ Solid::reflect_in(const Plane& p,
                         << "Deleting `solid_reflection' and "
                         << "rethrowing `bad_alloc'.";
 
-
               log_message(cerr_strm);
               cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
@@ -4180,7 +4062,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
            }  /* |catch (bad_alloc)|  */
-
 
 @q ****** (6) |create_new<Reg_Polygon>()| succeeded.@> 
 
@@ -4200,8 +4081,7 @@ Solid::reflect_in(const Plane& p,
          cerr_message(cerr_strm);
          cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Call |Reg_Polygon::reflect_in()|.@> 
 
@@ -4216,7 +4096,6 @@ Solid::reflect_in(const Plane& p,
                                      static_cast<void*>(reg_polygon_reflection),
                                      scanner_node);
      }
-
 
 @q ****** (6) Error handling:  |Reg_Polygon::reflect_in()| threw |bad_alloc|.@> 
 
@@ -4244,8 +4123,6 @@ Solid::reflect_in(const Plane& p,
               throw;
 
      }  /* |catch (bad_alloc)|  */
-
-
 
 @q ****** (6) Error handling:  |Reg_Polygon::reflect_in()| returned 1.@> 
 
@@ -4296,8 +4173,7 @@ Solid::reflect_in(const Plane& p,
           cerr_strm.str("");
 
      }       /* |else if (DEBUG)| (|status == 0|)  */
-#endif /* |DEBUG_COMPILE|  */@; 
-        
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) Push |reg_polygon_reflection| onto |reg_polygons|.@> 
 
@@ -4306,13 +4182,11 @@ Solid::reflect_in(const Plane& p,
 
 @<Define |Solid| functions@>=
 
-
     solid_reflection->reg_polygons.push_back(0);
     
     solid_reflection->reg_polygons.back() = reg_polygon_reflection;
 
     } /* |for| (|reg_polygons|)  */
-
 
  } /* End of |Reg_Polygon| group.  */
 
@@ -4328,7 +4202,6 @@ Solid::reflect_in(const Plane& p,
   solid_reflection->center = center;
   solid_reflection->do_output = do_output;
 
-
 @q *** (3) Exit function successfully with return value 0.@> 
 
 @ Exit function successfully with return value 0.
@@ -4340,12 +4213,10 @@ Solid::reflect_in(const Plane& p,
 
 } /* End of |Solid::reflect_in()|  definition.  */
 
-
 @q ** (2) Reflection off of a |Plane|.@>
 @*1 Reflection off of a {\bf Plane}.
 @^\cfunc{Solid}{reflect\_in}@>
 \initials{LDF 2004.12.15.}
-
 
 \LOG
 \initials{LDF 2004.12.15.}
@@ -4375,15 +4246,13 @@ Solid::reflect_off(const Plane& p,
 
 {
 
-
 @q **** (4) Preliminaries.@> 
 
-   bool DEBUG = false; /* |true|  */
+   bool DEBUG = false; /* |true| */
 
    using namespace Scan_Parse;
 
    stringstream cerr_strm;
-
 
    bool error_stop_value   = true;
    bool warning_stop_value = true;
@@ -4393,7 +4262,6 @@ Solid::reflect_off(const Plane& p,
       scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
    int status;
 
@@ -4430,7 +4298,6 @@ Added this section.
 
       }  /* |if (solid_ptr_vector == 0)|  */
 
-
 @q **** (4) Error handling:  |solid_ptr_vector->ctr < 4|.  @> 
 
 @ Error handling:  |solid_ptr_vector->ctr < 4|.  
@@ -4443,7 +4310,6 @@ Added this section.
 \ENDLOG
 
 @<Define |Solid| functions@>=
-
 
   if (solid_ptr_vector->ctr < 4)
      {
@@ -4458,9 +4324,8 @@ Added this section.
          cerr_strm.str("");
        
          delete solid_ptr_vector;
- 
-        
-         return 1;
+
+return 1;
 
       }  /* |if (solid_ptr_vector->ctr < 4)|  */
 
@@ -4494,8 +4359,6 @@ Added this section.
           return 1;
 
     }  /* |if (direction == *this)|  */
-
-
 
 @q **** (4) @>   
 @
@@ -4536,7 +4399,6 @@ Added this section.
          
       }  /* |catch (bad_alloc)|  */
 
-
 @q **** (4) Set up |Point_Vector<Point>| object.@> 
 
 @ Set up |Point_Vector<Point>| object.
@@ -4544,12 +4406,10 @@ Added this section.
 
 @<Define |Solid| functions@>=
 
-
    for (int i = 0; i < 4; ++i)
       {
          *center_pv += &(solid_ptr_vector->v[i]->center);
       }  /* |for|  */
-
 
 @q **** (4)  Call |Point::reflect_off()| on |center|.@> 
 
@@ -4558,7 +4418,6 @@ Return 1 upon error.
 \initials{LDF 2004.12.15.}
 
 @<Define |Solid| functions@>=
-
 
    status = center.reflect_off(p, direction, center_pv, scanner_node);
 
@@ -4575,7 +4434,6 @@ Return 1 upon error.
           return 1;
 
       }  /* |status != 0|  */
-
 
 @q **** (4) |Rectangles|.@> 
 @ |Rectangles|.
@@ -4605,7 +4463,6 @@ Return 1 upon error.
 
     } /* |catch (bad_alloc)|  */
 
-
    try 
       {
          solid_ptr_vector->v[0]->rectangles.push_back(create_new<Rectangle>(0));
@@ -4629,14 +4486,12 @@ Return 1 upon error.
 
     } /* |catch (bad_alloc)|  */
 
-
 /* !! START HERE.  LDF 2004.12.15. */@; 
 
    for (int i = 0; i < 4; ++i)
       *rectangle_pv += solid_ptr_vector->v[i]->rectangles[0];
    
    rectangles[0]->reflect_off(p, direction, rectangle_pv, scanner_node);
-
 
 @q **** (4) Exit function successfully with return value 0.@>   
 
@@ -4646,7 +4501,6 @@ Return 1 upon error.
 @<Define |Solid| functions@>=
 
    return 0;
-
 
 };  /* End of |Solid::reflect_off()| definition.  */
 
@@ -4749,9 +4603,6 @@ Solid::extract(const Focus& f, const unsigned short proj, real factor)
         }
     }
 
-
-
-
   for (vector <Reg_Polygon*>::iterator iter = reg_polygons.begin();
        iter != reg_polygons.end(); ++iter)
     {
@@ -4848,10 +4699,8 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
   v.resize(6, 0);  /* LDF 2002.12.13.  Added.  Needed for compiling
                       under GNU/Linux using GCC on the Intel i686
                       computer gwdu101.gwdg.de.  */
- 
- 
-  
-  for (vector <Path*>::iterator iter = paths.begin();
+
+for (vector <Path*>::iterator iter = paths.begin();
        iter != paths.end(); ++iter)
     {
       if(!(**iter).set_pre_projective_extremes())
@@ -4965,9 +4814,6 @@ Solid::set_pre_projective_extremes(Scanner_Node scanner_node)
           pre_projective_extremes[i] = max(pre_projective_extremes[i], v[i]);
         }
     }
-
-
-
 
   for (vector <Reg_Polygon*>::iterator iter = reg_polygons.begin();
        iter != reg_polygons.end(); ++iter)
@@ -5061,10 +4907,8 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
   v.resize(6, 0);  /* LDF 2002.12.13.  Added.  Needed for compiling
                       under GNU/Linux using GCC on the Intel i686
                       computer gwdu101.gwdg.de.  */
- 
- 
-  
-  for (vector <Path*>::iterator iter = paths.begin();
+
+for (vector <Path*>::iterator iter = paths.begin();
        iter != paths.end(); ++iter)
     {
       if(!(**iter).set_projective_extremes())
@@ -5156,7 +5000,6 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
         }
     }
 
-
   for (vector <Hyperbola*>::iterator iter = hyperbolae.begin();
        iter != hyperbolae.end(); ++iter)
     {
@@ -5179,8 +5022,6 @@ Solid::set_projective_extremes(Scanner_Node scanner_node)
           projective_extremes[i] = max(projective_extremes[i], v[i]);
         }
     }
-
-
 
   for (vector <Reg_Polygon*>::iterator iter = reg_polygons.begin();
        iter != reg_polygons.end(); ++iter)
@@ -5321,7 +5162,6 @@ Unsigned_Byte
 projections_intersect(Shape* s,
                       Scanner_Node scanner_node = 0);
 
-
 @q ** (2) Definition.@>  
 
 @ 
@@ -5332,7 +5172,6 @@ Solid::projections_intersect(Shape* s,
 {
    return 0;
 }
-
 
 @q ** (2) Get world extremes.@> 
 @*1 Get world extremes.
@@ -5678,7 +5517,6 @@ Solid::get_minimum_z(const unsigned short s) const
    bool warning_stop_value = true;
    string thread_name      = "";
 
-
 /* This code is for functions that don't take a |Scanner_Node scanner_node|
    argument.  */
 
@@ -5712,10 +5550,9 @@ Solid::get_minimum_z(const unsigned short s) const
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
+if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
        return projective_extremes[4];
 
     else if (s == PRE_PROJECTIVE_COORDINATES_VALUE)
@@ -5741,12 +5578,8 @@ Solid::get_minimum_z(const unsigned short s) const
           return INVALID_REAL;
 
       }  /* |else|  */
-   
-   
+
 }  /* End of |Solid::get_minimum_z()| definition.  */
-
-
-
 
 @q ** (2) Get maximum z.@>
 @*1 Get maximum z.
@@ -5792,7 +5625,6 @@ Solid::get_maximum_z(const unsigned short s) const
    bool warning_stop_value = true;
    string thread_name      = "";
 
-
 /* This code is for functions that don't take a |Scanner_Node scanner_node|
    argument.  */
 
@@ -5826,10 +5658,9 @@ Solid::get_maximum_z(const unsigned short s) const
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
+if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
        return projective_extremes[5];
 
     else if (s == PRE_PROJECTIVE_COORDINATES_VALUE)
@@ -5855,10 +5686,8 @@ Solid::get_maximum_z(const unsigned short s) const
           return INVALID_REAL;
 
       }  /* |else|  */
-   
-   
-}  /* End of |Solid::get_maximum_z()| definition.  */
 
+}  /* End of |Solid::get_maximum_z()| definition.  */
 
 @q ** (2) Get mean z.@>
 @ Get mean z.
@@ -5906,7 +5735,6 @@ Solid::get_mean_z(const unsigned short s) const
    bool warning_stop_value = true;
    string thread_name      = "";
 
-
 /* This code is for functions that don't take a |Scanner_Node scanner_node|
    argument.  */
 
@@ -5940,10 +5768,9 @@ Solid::get_mean_z(const unsigned short s) const
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
+if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
        return ((projective_extremes[4] + projective_extremes[5]) / 2);
 
     else if (s == PRE_PROJECTIVE_COORDINATES_VALUE)
@@ -5969,8 +5796,7 @@ Solid::get_mean_z(const unsigned short s) const
           return INVALID_REAL;
 
       }  /* |else|  */
-   
-   
+
 }  /* End of |Solid::get_mean_z()| definition.  */
 
 @q ** Suppress output.@>
@@ -6006,8 +5832,6 @@ Solid::unsuppress_output()
   do_output = true;
   return;
 }
-
-
 
 @q ** (2) Output.@>
 @*1 Output.
@@ -6045,7 +5869,6 @@ Removed the explicit template argument from the call to
 |Compare_Maximum_Z::operator()()|.
 \ENDLOG 
 
-
 @<Declare |Solid| functions@>=
 virtual
 void   
@@ -6056,7 +5879,7 @@ output(Scanner_Node s);
 void
 Solid::output(Scanner_Node s)
 {
-  bool DEBUG = false; /* |true|  */ 
+  bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Solid::output().\n";
 
@@ -6123,7 +5946,6 @@ Added code for handling |draw_color|.
 Now setting |*c = Colors::black| if |color_ptr == 0|.  
 I'm not sure this is necessary.
 
-
 \initials{LDF 2004.09.05.}
 Changed the way |color_ptr| is set.  Now we cycle through the
 |vector<const Color*>| again if we reach the end.
@@ -6144,7 +5966,6 @@ vectors, if they're non-null.
 
 {   /* Beginning of group.  */
 
-
   if (c_iter != v.end())
     color_ptr = *c_iter++;
   else
@@ -6154,7 +5975,6 @@ vectors, if they're non-null.
    }
 
   (**iter).set_fill_draw_value(DRAW_VALUE);
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -6182,7 +6002,6 @@ vectors, if they're non-null.
 
   if (ppen)
      (**iter).push_pen(ppen);
-
 
   if (c_iter == v.end())
     {
@@ -6271,7 +6090,6 @@ Solid::draw(Picture& picture,
             Scanner_Node scanner_node) const
 {
 
-
   using namespace Scan_Parse;
 
   string thread_name = "";
@@ -6313,7 +6131,6 @@ Solid::draw(Picture& picture,
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 #if DEBUG_COMPILE
     if (DEBUG)
       {
@@ -6322,9 +6139,8 @@ Solid::draw(Picture& picture,
 
         int i = 0;
         stringstream i_strm;
-        
 
-        for (vector<Color*>::const_iterator iter = v.begin();
+for (vector<Color*>::const_iterator iter = v.begin();
              iter != v.end();
              iter++)
           {
@@ -6340,14 +6156,12 @@ Solid::draw(Picture& picture,
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   Solid* s = create_new<Solid>(0);
   *s = *this;
 
   Color* color_ptr = 0;
 
   vector <Color*>::const_iterator c_iter = v.begin();
-
 
   for (vector<Path*>::const_iterator iter = s->paths.begin();
        iter != s->paths.end();
@@ -6408,7 +6222,6 @@ Solid::draw(Picture& picture,
       @<Process vectors for |draw()|@>@;
     } 
 
-
 @q **** (4) Try to lock |picture.mutex|.@>   
 @ Try to lock |picture.mutex|.
 \initials{LDF 2004.06.24.}
@@ -6426,15 +6239,13 @@ Solid::draw(Picture& picture,
              << "`Picture::lock()' failed. "
              << "Returning 1 and will try to continue.";
 
-        
-        log_message(cerr_strm);
+log_message(cerr_strm);
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
 
         return 1;
 
       } /* |if (status != 0)|  */
-
 
 #if DEBUG_COMPILE
   else if (DEBUG)
@@ -6451,17 +6262,13 @@ Solid::draw(Picture& picture,
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |p| to |picture|.@>   
 @ Add |p| to |picture|.
 \initials{LDF 2004.06.24.}
 
 @<Define |Solid| functions@>=
 
-
-
   picture += dynamic_cast<Shape*>(s);
-
 
 @q **** (4) Try to unlock |picture.mutex|.@>   
 @ Try to unlock |picture.mutex|.
@@ -6524,7 +6331,6 @@ Solid::draw(Picture& picture,
 
 } /* End of |Solid::draw()| definition.  */
 
-
 @q ** (2) Process vectors for |fill()|.@>
 @*1 Process vectors for {\it fill\/}().
 \initials{LDF 2002.10.09.}  Added this section.
@@ -6569,17 +6375,14 @@ Removed the call to |Path::set_draw_color()|.
 
   (**iter).set_fill_draw_value(FILL_VALUE);
 
-
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
        cerr << "Allocating memory for Color." << endl;
      }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-   Color* c = create_new<Color>(0);
+Color* c = create_new<Color>(0);
 
    if (color_ptr != static_cast<Color*>(0))
       *c  = *color_ptr;
@@ -6587,9 +6390,8 @@ Removed the call to |Path::set_draw_color()|.
       *c = Colors::black;
 
    *c  = *color_ptr;
-   
 
-  (**iter).push_fill_color(c, false);
+(**iter).push_fill_color(c, false);
 
   if (c_iter == v.end())
     {
@@ -6597,8 +6399,6 @@ Removed the call to |Path::set_draw_color()|.
     } 
 
 }
-
-
 
 @q ** Fill.@>
 @ Fill.
@@ -6653,7 +6453,6 @@ Solid::fill(Picture& picture,
     cerr << "Entering Solid::fill():" << "\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
   Solid* s = create_new<Solid>(0);
   *s = *this;
 
@@ -6705,8 +6504,6 @@ Solid::fill(Picture& picture,
 
   c_iter = v.begin();
 
-
-
   for (vector<Reg_Polygon*>::const_iterator iter = s->reg_polygons.begin();
        iter != s->reg_polygons.end();
        ++iter)
@@ -6722,7 +6519,6 @@ Solid::fill(Picture& picture,
     {
       @<Process vectors for |fill()|@>@;      
     } 
-
 
 @q **** (4) Try to lock |picture.mutex|.@>   
 @ Try to lock |picture.mutex|.
@@ -6754,7 +6550,6 @@ Solid::fill(Picture& picture,
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |p| to |picture|.@>   
 @ Add |p| to |picture|.
 \initials{LDF 2004.06.24.}
@@ -6762,7 +6557,6 @@ Solid::fill(Picture& picture,
 @<Define |Solid| functions@>=
 
   picture += dynamic_cast<Shape*>(s);
-
 
 @q **** (4) Try to unlock |picture.mutex|.@>   
 @ Try to unlock |picture.mutex|.
@@ -6810,7 +6604,6 @@ Solid::fill(Picture& picture,
 
 }
 
-
 @q ** (2) Process vectors for |filldraw()|.@>
 
 @*1 Process vectors for {\it filldraw\/}().
@@ -6851,11 +6644,9 @@ vectors, if they're non-null.
     {
        draw_color_iter = draw_colors.begin();
        draw_color_ptr = *draw_color_iter++;
-    } 
-     
+    }
 
-
-  if (fill_color_iter != fill_colors.end())
+if (fill_color_iter != fill_colors.end())
       fill_color_ptr = *fill_color_iter++;
   else
     {
@@ -6870,10 +6661,9 @@ vectors, if they're non-null.
     {
       cerr << "Allocating memory for Color." << endl;
     }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-    
-    Color* c = create_new<Color>(0);
+#endif /* |DEBUG_COMPILE|  */@;
+
+Color* c = create_new<Color>(0);
 
   if (draw_color_ptr != static_cast<Color*>(0))
     *c  = *draw_color_ptr;
@@ -6881,7 +6671,6 @@ vectors, if they're non-null.
     *c = Colors::black;
 
   (**iter).push_draw_color(c, false);
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -7037,9 +6826,6 @@ Solid::filldraw(Picture& picture,
   draw_color_iter = draw_colors.begin();
   fill_color_iter = fill_colors.begin();
 
-
-
-
   for (vector<Reg_Polygon*>::const_iterator iter = s->reg_polygons.begin();
        iter != s->reg_polygons.end();
        ++iter)
@@ -7052,8 +6838,7 @@ Solid::filldraw(Picture& picture,
        ++iter)
     {
       @<Process vectors for |filldraw()|@>@;
-    } 
-  
+    }
 
 @q **** (4) Try to lock |picture.mutex|.@>   
 @ Try to lock |picture.mutex|.
@@ -7085,13 +6870,11 @@ Solid::filldraw(Picture& picture,
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |p| to |picture|.@>   
 @ Add |p| to |picture|.
 \initials{LDF 2004.06.24.}
 
 @<Define |Solid| functions@>=
-
 
   picture += dynamic_cast<Shape*>(s);
 
@@ -7129,7 +6912,6 @@ Solid::filldraw(Picture& picture,
 \initials{LDF 2004.06.24.}
 
 @<Define |Solid| functions@>=
-
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -7208,7 +6990,6 @@ undraw(Picture& picture,
        Dash_Pattern* ddashed = 0,
        Pen* ppen = 0) const;
 
-
 @
 @<Define |Solid| functions@>=
 int
@@ -7225,7 +7006,6 @@ Solid::undraw(Picture& picture,
 
   Solid* s = create_new<Solid>(0);
   *s = *this;
-
 
   for (vector<Path*>::const_iterator iter = s->paths.begin();
        iter != s->paths.end();
@@ -7261,8 +7041,6 @@ Solid::undraw(Picture& picture,
     {
       @<Process vectors for |undraw()|@>@;
     }
-
-
 
   for (vector<Reg_Polygon*>::const_iterator iter = s->reg_polygons.begin();
        iter != s->reg_polygons.end();
@@ -7308,13 +7086,11 @@ Solid::undraw(Picture& picture,
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |p| to |picture|.@>   
 @ Add |p| to |picture|.
 \initials{LDF 2004.06.24.}
 
 @<Define |Solid| functions@>=
-
 
   picture += dynamic_cast<Shape*>(s);
 
@@ -7387,7 +7163,6 @@ Changed the argument of |set_dash_pattern| from
 Removed the call to |Path::set_draw_color()|.
 \ENDLOG 
 
-
 @<Process vectors for |unfill()|@>=
 {
   (**iter).set_fill_draw_value(UNFILL_VALUE);
@@ -7435,14 +7210,12 @@ Solid::unfill(Picture& picture) const
   Solid* s = create_new<Solid>(0);
   *s = *this;
 
-
   for (vector<Path*>::const_iterator iter = s->paths.begin();
        iter != s->paths.end();
        ++iter)
     {
       @<Process vectors for |unfill()|@>@;
     } 
-
 
   for (vector<Ellipse*>::const_iterator iter = s->ellipses.begin();
        iter != s->ellipses.end();
@@ -7516,13 +7289,11 @@ Solid::unfill(Picture& picture) const
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |p| to |picture|.@>   
 @ Add |p| to |picture|.
 \initials{LDF 2004.06.24.}
 
 @<Define |Solid| functions@>=
-
 
   picture += dynamic_cast<Shape*>(s);
 
@@ -7571,7 +7342,6 @@ Solid::unfill(Picture& picture) const
   return 0;
 
 }
-
 
 @q ** (2) Process vectors for |unfilldraw()|.@>
 @*1 Process vectors for {\it unfilldraw\/}().
@@ -7685,7 +7455,6 @@ Solid::unfilldraw(Picture& picture,
       @<Process vectors for |unfilldraw()|@>@;
     } /* |for|  */
 
-
   for (vector<Ellipse*>::const_iterator iter = s->ellipses.begin();
        iter != s->ellipses.end();
        ++iter)
@@ -7757,16 +7526,13 @@ Solid::unfilldraw(Picture& picture,
 
 #endif /* |HAVE_PTHREAD_H|  */@;
 
-
 @q **** (4) Add |p| to |picture|.@>   
 @ Add |p| to |picture|.
 \initials{LDF 2004.06.24.}
 
 @<Define |Solid| functions@>=
 
-  
-  picture += dynamic_cast<Shape*>(s);
-
+picture += dynamic_cast<Shape*>(s);
 
 @q **** (4) Try to unlock |picture.mutex|.@>   
 @ Try to unlock |picture.mutex|.
@@ -7932,8 +7698,6 @@ get_decomposition_level(void)
    return decomposition_level;
 }
 
-
-
 @q ** (2) Decompose.@> 
 
 @*1 Decompose.
@@ -8076,8 +7840,6 @@ Solid::decompose(const unsigned short limit,
 @<Define |class Solid|@>@;
 @<Declare non-member template functions for |Solid|@>@;
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -8086,9 +7848,6 @@ Solid::decompose(const unsigned short limit,
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
-
 
 @q * (0) circle expressions.  @>
 @** circle expressions.
@@ -58,7 +56,6 @@
 \initials{LDF 2004.06.17.}
 Created this file.
 \ENDLOG 
-
 
 @q * (1) circle primary.  @>
 @* \§circle primary>.
@@ -110,7 +107,6 @@ an ``unknown |circle|''.
 @q ** (2) circle_primary --> circle_argument.@>
 @*1 \§circle primary> $\longrightarrow$ \§circle argument>.  
 
-
 @q ** (2) circle_primary --> ( circle_expression )  @>
 @*1 \§circle primary> $\longrightarrow$ `\.{\LP}' 
 \§circle expression> `\.{\RP}'.
@@ -127,7 +123,6 @@ Added this rule.
   @=$$@> = @=$2@>;
 
 };
-
 
 @q ** (2) circle_primary --> GET_CIRCLE numeric_primary sphere_primary@>
 @*1 \§circle primary> $\longrightarrow$ \.{GET\_CIRCLE}
@@ -148,13 +143,11 @@ Changed |@=$2@>| from \.{INTEGER} to \§numeric primary>.
 @=circle_primary: GET_CIRCLE numeric_primary sphere_primary@>@/
 {
 
-
   Sphere* s = static_cast<Sphere*>(@=$3@>);
 
   Circle* c;
 
   const Circle* t = s->get_circle_ptr(@=$2@>); 
-
 
 @q **** (4) Error handling:  |Sphere::get_circle_ptr()| returned 0.@>   
 
@@ -172,7 +165,6 @@ Changed |@=$2@>| from \.{INTEGER} to \§numeric primary>.
 
    } /* |if (t == 0)|  */
 
-
 @q **** (4) Try to allocate memory on free store for |circle_primary|.@>   
 
 @ Try to allocate memory on free store for \§circle primary>.
@@ -184,7 +176,6 @@ Changed |@=$2@>| from \.{INTEGER} to \§numeric primary>.
      {
 
          c = create_new<Circle>(t, static_cast<Scanner_Node>(parameter));
-
 
 @q **** (4) Delete |s|, set |circle_primary| to                 @>   
 @q **** (4) |static_cast<void*>(c)|, and exit rule successfully.@>   
@@ -225,7 +216,6 @@ Added this rule.
                                        Shape::CONE_TYPE, 
                                        @=$3@>,
                                        @=$2@>);
-
 
 };
 
@@ -301,7 +291,6 @@ Added this rule.
 
    Circle* c;
 
-
          c = create_new<Circle>(0);
 
    *c = r->out_circle();
@@ -328,7 +317,6 @@ Added this rule.
 @=circle_primary: LAST circle_vector_expression@>@/
 { 
    Circle* c;
-
 
          c = create_new<Circle>(0);
 
@@ -383,9 +371,6 @@ Added this rule.
 
 };
 
-
-
-
 @q * (1) circle secondary.  @>
 @* \§circle secondary>.
 \initials{LDF 2004.06.17.}  
@@ -426,7 +411,6 @@ Added this rule.
 @*1 \§circle secondary> $\longrightarrow$ \§circle secondary> 
 \§transformer>.
 \initials{LDF 2004.06.17.}
-
 
 \LOG
 \initials{LDF 2004.06.17.}
@@ -494,7 +478,6 @@ Removed debugging code.
 @q * (1) circle tertiary.@>
 @* \§circle tertiary>.
 
-
 \LOG
 \initials{LDF 2004.06.17.} 
 Added this type declaration.
@@ -506,7 +489,6 @@ Added this type declaration.
 @q ** (2) circle tertiary --> circle_secondary.  @>
 @*1 \§circle tertiary> $\longrightarrow$ \§circle secondary>.
 
-
 \LOG
 \initials{LDF 2004.06.17.}
 Added this rule.
@@ -517,7 +499,6 @@ Added this rule.
 {
   @=$$@> = @=$1@>;
 };
-
 
 @q **** (4) circle_tertiary: sphere_tertiary @> 
 @q **** (4) INTERSECTION plane_secondary.    @> 
@@ -578,7 +559,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -587,7 +567,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

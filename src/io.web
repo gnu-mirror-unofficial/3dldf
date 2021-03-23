@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * I/O.@>
 @** I/O\quad ({\tt io\PERIOD web}).\hfil
@@ -129,7 +128,6 @@ Io_Struct
   string filename;
   
   unsigned short type;
-
 
   static const unsigned short INVALID_TYPE;
 
@@ -260,7 +258,6 @@ using |public| derivation  if the preprocessor macro
 @<Declare |Io_Struct| functions@>=
 ~Io_Struct(void);
 
-
 @q ***** (5) Definition@>
 @
 @<Define |Io_Struct| functions@>=
@@ -273,7 +270,6 @@ Io_Struct::~Io_Struct(void)
      cerr << "Entering `Io_Struct::~Io_Struct()'."  
           << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -290,7 +286,6 @@ Io_Struct::~Io_Struct(void)
 
 \LOG
 \initials{LDF 2004.05.02.}  Added |Input_Struct* up|.
-
 
 \initials{LDF 2004.06.19.}
 Now including the section |@<Declare |Input_Struct| functions@>|, 
@@ -315,14 +310,12 @@ Input_Struct : public Io_Struct
 @q *** |Input_Struct| functions.@>
 @*2 {\bf Input\_Struct} functions.
 
-
 @q **** (4) Default constructor.@>
 @*3 Default constructor.
 
 This constructor initializes |stream_ptr| and |up| to 0 
 (just for insurance).
 \initials{LDF 2004.06.19.}
-
 
 \LOG
 \initials{LDF 2004.06.19.}
@@ -335,7 +328,6 @@ Added this function.
 @<Declare |Input_Struct| functions@>=
 Input_Struct(void);
 
-
 @q ***** (5) Definition@>
 @
 @<Define |Input_Struct| functions@>=
@@ -345,10 +337,8 @@ Input_Struct::Input_Struct(void)
   up = static_cast<Input_Struct*>(0);
 }
 
-
 @q **** (4) Destructor.@>
 @*3 Destructor.
-
 
 \LOG
 \initials{LDF 2004.07.01.}
@@ -366,7 +356,6 @@ Now only deleting |stream_ptr| if |is_file == true|.
 
 \initials{LDF 2004.09.09.}
 Now testing |ype == FILE_TYPE| instead of |is_file == true|.
-
 
 \initials{LDF 2004.09.13.}
 Now deleting |stream_ptr|  and pointing it at 0 if 
@@ -387,13 +376,11 @@ Commented-out the code for deleting |up|.
 @<Declare |Input_Struct| functions@>=
 ~Input_Struct(void);
 
-
 @q ***** (5) Definition@>
 @
 @<Define |Input_Struct| functions@>=
 Input_Struct::~Input_Struct(void)
 {
-
 
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @; 
@@ -417,9 +404,8 @@ Input_Struct::~Input_Struct(void)
         }
 
     } /* |if (type == FILE_TYPE)|  */@;
-        
 
-  if (type == FILE_TYPE && stream_ptr != static_cast<ifstream*>(0))
+if (type == FILE_TYPE && stream_ptr != static_cast<ifstream*>(0))
     {
 #if DEBUG_COMPILE
       if (DEBUG) 
@@ -431,7 +417,6 @@ Input_Struct::~Input_Struct(void)
       stream_ptr = static_cast<ifstream*>(0);
 
     }  /* |if (type == FILE_TYPE && stream_ptr != static_cast<ifstream*>(0))|  */
-
 
 #if DEBUG_COMPILE
    else if (!type == FILE_TYPE && DEBUG)
@@ -502,7 +487,6 @@ Added this section.
       stream_ptr = static_cast<istream*>(0);
 
     }  /* |if (type == SCANTOKENS_STRING_TYPE && stream_ptr != static_cast<istream*>(0))|  */
-  
 
 @q ****** (6) |type == MACRO_STRING_TYPE|.@>
 
@@ -523,10 +507,6 @@ Added this section.
       stream_ptr = static_cast<istream*>(0);
 
     }  /* |if (type == MACRO_STRING_TYPE && stream_ptr != static_cast<istream*>(0))|  */
-  
-
-
-
 
 @q ****** (6) Exit destructor.@>
 
@@ -576,10 +556,8 @@ Output_Struct : public Io_Struct
 
 };
 
-
 @q *** |Output_Struct| functions.@>
 @*2 {\bf Output\_Struct} functions.
-
 
 @q **** (4) Default constructor.@>
 @*3 Default constructor.
@@ -606,7 +584,6 @@ Output_Struct::Output_Struct(void)
   stream_ptr = static_cast<ostream*>(0);
 }
 
-
 @q **** (4) Destructor.@>
 @*3 Destructor.
 
@@ -617,7 +594,6 @@ Added code to this function.  It now tests whether |stream_ptr| points to an
 |ofstream|.  If it does, and the file stream is open, it closes it before
 deleting it and pointing |stream_ptr| at 0.
 \ENDLOG 
-
 
 @q ***** (5) Declaration@>
 
@@ -668,7 +644,6 @@ Output_Struct::~Output_Struct(void)
   return;
 }
 
-
 @q * Global variables.@>
 @* Global variables.
 
@@ -705,12 +680,10 @@ multiprocess or multithread input and output.
 It has been replaced by an |ostream*| in an |Output_Struct| in 
 |class Scanner_Type|.
 \ENDLOG
-  
 
 @f ifstream int
 @f ofstream int
 @<Global variables@>=
-
 
 string default_out_filename_metapost = "3DLDFput.mp";
 string default_out_filename_png = "3DLDFput.png";
@@ -729,12 +702,9 @@ string default_out_filename_libplot = "3DLDFput.lpt";
 
 @<|extern| variable declarations@>=
 
-
-
 extern string default_out_filename_metapost;
 extern string default_out_filename_png;
 extern string default_out_filename_libplot;
-
 
 @q * I/O functions.@>
 @* I/O functions.
@@ -747,7 +717,6 @@ extern string default_out_filename_libplot;
 \initials{LDF 2004.04.02.}  Commented-out.  This function is not
 currently being used. 
 \ENDLOG 
-
 
 \TODO
 @q { @>
@@ -795,8 +764,6 @@ initialize_io(string in_stream_name, string out_stream_name,
   out_stream.setf(ios::fixed, ios::floatfield);
 #endif 
 #endif 
-
-
 
   tex_stream.open(tex_stream_name.c_str());
 
@@ -873,7 +840,6 @@ write_footers()
 @q ** (2) Id_Map_Entry_Node.@>
 @*1 {\bf Id\_Map\_Entry\_Node}.
 
-
 \LOG
 \initials{LDF 2004.04.20.}  
 Added this section. 
@@ -907,10 +873,8 @@ to |Id_Map_Entry_Type|.  Added |string name|, removed |bool b|, changed
 Changed |Id_Map_Entry_Type| from a
 |struct| to a |class| and declared |Id_Map_Type| to be a |friend|.
 
-
 \initials{LDF 2004.04.20.}  
 Declared |Scanner_Type| to be a |friend|.
-
 
 \initials{LDF 2004.04.23.}  
 Replaced |bool known| with |unsigned short
@@ -935,7 +899,6 @@ Added |const_flag|.  Changed |is_array| to
 \initials{LDF 2004.06.22.}
 Added |pthread_mutex_t mutex| and |pthread_cond_t cond_var|.
 
-
 \initials{LDF 2004.06.24.}
 Now conditionally compiling the declarations of |mutex| and |cond_var|,
 depending upon whether |HAVE_PTHREAD_H| is defined.
@@ -946,7 +909,6 @@ Now deriving |Id_Map_Entry_Type|
 from |Mutex_Type| using |public| derivation
 if the preprocessor macro  |HAVE_PTHREAD_H| is defined.  
 Currently not using condition variables.
-
 
 \initials{LDF 2004.08.24.}
 Added the private data member 
@@ -967,7 +929,6 @@ create two |Id_Map_Entry_Nodes|.  The first will have |name == c|,
 |subordinate_array| will point to the other |Id_Map_Entry_Node| 
 of the pair. 
 
-
 \initials{LDF 2004.08.28.}
 Added the private data member |Scanner_Node scanner_node|.
 
@@ -981,7 +942,6 @@ for setting |category|.
 \ENDLOG 
 
 @q **** (4) End of LOG.@>
-
 
 @f Id_Map_Entry_Type int@>
 @f Id_Map_Entry_Node Id_Map_Entry_Type
@@ -1032,7 +992,6 @@ Replaced |Scanner_Node scanner_node| with |Id_Map_Node id_map_node|.
   bool const_flag;
   bool array_flag;
 
-
   unsigned short known_state;
   unsigned short category;
 
@@ -1048,7 +1007,6 @@ Replaced |Scanner_Node scanner_node| with |Id_Map_Node id_map_node|.
 
   Id_Map_Node id_map_node;
 
-
 @q **** (4) Public members.  @>
 
 @ Public members.
@@ -1056,15 +1014,12 @@ Replaced |Scanner_Node scanner_node| with |Id_Map_Node id_map_node|.
 
 @<|Id_Map_Entry_Type| declaration@>=
 
-
  public:
-
 
 @q ***** (5) Static constants.  @>
 
 @ Static constants.
 \initials{LDF 2004.08.24.}
-
 
 \LOG
 \initials{LDF 2004.08.27.}
@@ -1080,13 +1035,10 @@ Removed |EXPIRED|.
   static const unsigned short DEPENDENT;
   static const unsigned short KNOWN;
 
-
   static const unsigned short SPARK;   /* For setting |category|.  */
   static const unsigned short REGULAR;
   static const unsigned short INTERNAL;
   static const unsigned short TRUE_INTERNAL;
-
-
 
 @q ***** (5) Function declarations.  @>
 
@@ -1097,7 +1049,6 @@ Removed |EXPIRED|.
 
   @<Declare |Id_Map_Entry_Type| functions@>@;
 };
-
 
 @q *** (3) |static Id_Map_Entry_Type| member constants.  @>
 @*2 {\bf static Id\_Map\_Entry\_Type} member constants.
@@ -1117,7 +1068,6 @@ const unsigned short Id_Map_Entry_Type::REGULAR          = 1;
 const unsigned short Id_Map_Entry_Type::INTERNAL         = 2; 
 const unsigned short Id_Map_Entry_Type::TRUE_INTERNAL    = 3;
 
-
 @q *** (3) |Id_Map_Entry_Type| functions.  @>
 @*2 {\bf Id\_Map\_Entry\_Type} functions.
 
@@ -1133,25 +1083,26 @@ Added this function declaration.  The definition is in
 @<Declare |Id_Map_Entry_Type| functions@>=
 Id_Map_Entry_Type(void);
 
-
 @q **** (4)  Setting function.  @>
 @*3 Setting function.
 
 \LOG
-\initials{LDF 2004.04.20.}  Added this function.
+\initials{LDF 2004.04.20.}  
+Added this function.
 
-\initials{LDF 2004.04.22.}  Moved definition to \filename{scan.web}.
+\initials{LDF 2004.04.22.}  
+Moved definition to \filename{scan.web}.
 
-\initials{LDF 2004.04.29.}  Changed |bool sspark_flag| argument to 
-|unsigned short ccategory|. 
+\initials{LDF 2004.04.29.}  
+Changed |bool sspark_flag| argument to |unsigned short ccategory|. 
 
-\initials{LDF 2004.04.29.}  Changed the name of this function from |set| to 
-|set_entry|.  It was too difficult to find the places where it's invoked
-before, since the classes derived from |Shape| also have |set| functions.
+\initials{LDF 2004.04.29.}  
+Changed the name of this function from |set| to |set_entry|.  It was too difficult 
+to find the places where it's invoked before, since the classes derived from |Shape| 
+also have |set| functions.
 
 \initials{LDF 2004.05.09.}  
-Added |cconst_flag| argument.  Changed |iis_array|
-argument to |aarray_flag|.
+Added |cconst_flag| argument.  Changed |iis_array| argument to |aarray_flag|.
 
 \initials{LDF 2004.08.24.}
 Added |Id_Map_Entry_Node ssuperordinate_vector| 
@@ -1184,7 +1135,6 @@ set_entry(string nname,
           Id_Map_Entry_Node rright = 0,
           Id_Map_Entry_Node ssuperordinate_vector = 0,
           Id_Map_Entry_Node ssubordinate_array = 0);
-                  
 
 @q **** (4)  Destructor.  @>
 @*3 Destructor.
@@ -1215,7 +1165,6 @@ Moved the definition from \filename{scan.web} to
 \filename{imetfncs.web}.
 \ENDLOG 
 
-
 @q ***** (5) Declaration.@> 
 
 @<Declare |Id_Map_Entry_Type| functions@>=
@@ -1229,13 +1178,11 @@ Moved the definition from \filename{scan.web} to
 Added this function.  It's defined in \filename{imetfncs.web}.
 \ENDLOG
 
-
 @q ***** (5) Declaration.@> 
 
 @<Declare |Id_Map_Entry_Type| functions@>=
 int
 destroy_array_subentries(Scanner_Node scanner_node = 0);
-
 
 @q **** (4)  Assignment operator.  @>
 @*3 Assignment operator.
@@ -1249,9 +1196,6 @@ Added this declaration.  This function is defined in
 @<Declare |Id_Map_Entry_Type| functions@>=
 const Id_Map_Entry_Type&
 operator=(const Id_Map_Entry_Type& idet);
-
-
-
 
 @q **** (4)  Setting values of date members.@>
 @*3 Setting values of date members.
@@ -1278,8 +1222,6 @@ set_superordinate_vector(Id_Map_Entry_Node s,
                          bool set_vector = false,
                          bool traverse = false,
                          int type = 0);
-
-
 
 @q ***** (5)  Set |id_map_node|.@>
 @*4 Set {\bf id\_map\_node}.
@@ -1315,8 +1257,6 @@ int
 set_subordinate_array(Id_Map_Entry_Node s,
                       bool traverse = false,
                       int type = 0);
-
-
 
 @q **** (4) Get object.@>   
 @*3 Get object.
@@ -1367,7 +1307,6 @@ operator*=(const Transform& t);
 Added this function. 
 \ENDLOG
 
-
 @<Declare |Id_Map_Entry_Type| functions@>=
 inline
 bool
@@ -1375,7 +1314,6 @@ is_const(void) const
 {
   return const_flag;
 }
-
 
 @q ***** (5)  Is |Shape|.  @>
 @*4 Is {\bf Shape}.
@@ -1391,8 +1329,6 @@ Added this function.
 @<Declare |Id_Map_Entry_Type| functions@>=
 bool
 is_shape(void) const;
-
-
 
 @q ***** (5) Is |Shape|-vector-type.@>
 @*4 Is {\bf Shape}-vector-type.
@@ -1411,13 +1347,9 @@ Added this declaration.
 bool
 is_shape_vector_type(void) const;
 
-
-
-
 @q ***** (5) Is Non-|Shape|-vector-type.@>
 @*4 Is Non-{\bf Shape}-vector-type.
 \initials{LDF 2004.12.12.}
-
 
 This function is defined in \filename{imetfncs.web}.
 \initials{LDF 2004.12.12.}
@@ -1431,7 +1363,6 @@ Added this declaration.
 
 bool
 is_non_shape_vector_type(void) const;
-
 
 @q ***** (5) Is Vector-type.@>
 @*4 Is Vector-type.
@@ -1450,14 +1381,12 @@ Added this declaration.
 bool
 is_vector_type(void) const;
 
-
 @q ***** (5)  Get object.  @>
 @*4 Get object.
 
 \LOG
 \initials{LDF 2004.04.29.}  Added this function. 
 \ENDLOG
-
 
 @<Declare |Id_Map_Entry_Type| functions@>=
 inline
@@ -1467,15 +1396,12 @@ get_object(void) const
   return object;
 }
 
-
-
 @q ***** (5)  Get name.  @>
 @*4 Get name.
 
 \LOG
 \initials{LDF 2004.04.29.}  Added this function. 
 \ENDLOG
-
 
 @<Declare |Id_Map_Entry_Type| functions@>=
 inline
@@ -1492,7 +1418,6 @@ get_name(void) const
 \initials{LDF 2004.04.29.}  Added this function. 
 \ENDLOG
 
-
 @<Declare |Id_Map_Entry_Type| functions@>=
 inline
 unsigned short
@@ -1507,7 +1432,6 @@ get_category(void) const
 \LOG
 \initials{LDF 2004.04.22.}  Added this function. 
 \ENDLOG
-
 
 @<Declare |Id_Map_Entry_Type| functions@>=
 inline
@@ -1527,7 +1451,6 @@ get_type(void) const
 if |category == SPARK|, otherwise |false|.  
 I've replaced |bool spark_flag| with |unsigned short category| today.
 \ENDLOG
-
 
 @<Declare |Id_Map_Entry_Type| functions@>=
 inline
@@ -1584,8 +1507,6 @@ is_true_internal(void) const
   return (category == TRUE_INTERNAL);
 }
 
-
-
 @q ***** (5)  Is 3DLDF object type.  @>
 @*4 Is 3DLDF object type.
 
@@ -1598,11 +1519,9 @@ C preprocessor macros generated by Bison from `token' declarations in
 \initials{LDF 2004.04.23.}  Added this function. 
 \ENDLOG
 
-
 @<Declare |Id_Map_Entry_Type| functions@>=
 bool
 is_ldf_type(void) const;
-  
 
 @q **** (4)  Showing.  @>
 @*3 Showing.
@@ -1636,7 +1555,6 @@ show(string s = "",
      bool traverse = false,
      bool verbose = false) const;
 
-
 @q ** Declare |Id_Map_Sub_Type|.@>
 @*1 Declare {\bf Id\_Map\_Sub\_Type}.
 
@@ -1664,7 +1582,6 @@ typedef Id_Map_Sub_Type::const_iterator Id_Map_Const_Iterator;
 \ENDLOG 
 @<|Id_Map_Node| declaration@>=
 typedef Id_Map_Type* Id_Map_Node;
-
 
 @q ** Declare |Id_Map_Type|.@>
 @*1 Declare {\bf Id\_Map\_Type}.
@@ -1704,8 +1621,6 @@ Now including the section
 @f Id_Map_Type int
 @f Id_Map_Node Id_Map_Type 
 
-
-
 @q *** Declaration.  @>
 @<|Id_Map_Type| declaration@>=
 class
@@ -1715,12 +1630,10 @@ Id_Map_Type
   friend class Id_Map_Entry_Type;
   friend int yyparse(yyscan_t);
 
-
   Scanner_Node scanner_node;
 
   Id_Map_Sub_Type id_map; 
   Id_Map_Node up;
-
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
@@ -1744,7 +1657,6 @@ Made debugging and error output thread-safe.  Now calling
 |Id_Map_Entry_Type::destroy_array_subentries|.
 \ENDLOG 
 
-
 @<Declare |Id_Map_Type| functions@>=
 ~Id_Map_Type(void);
 
@@ -1762,7 +1674,6 @@ Id_Map_Type::~Id_Map_Type(void)
   bool error_stop_value = true; /* |false|  */
 
   using namespace Scan_Parse;
-
 
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @; 
@@ -1806,7 +1717,11 @@ Id_Map_Type::~Id_Map_Type(void)
               cerr_mutex.lock();
               cerr << thread_name << "In `Id_Map_Type' destructor:" 
                    << endl;
+              cerr_mutex.unlock();
+
               n->show("n:");
+
+              cerr_mutex.lock();
               cerr << "Destroying `n'." << endl;
               cerr_mutex.unlock();
             }
@@ -1847,7 +1762,6 @@ Id_Map_Type::~Id_Map_Type(void)
       cerr_strm.str(""); 
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
   if (up != static_cast<Id_Map_Node>(0))
     {
@@ -1906,8 +1820,6 @@ Moved the definition to \filename{imetfncs.web}.
 const Id_Map_Type&
 operator=(const Id_Map_Type& i);
 
-
-
 @q **** (4) Show.  @>
 @*3 Show.
 
@@ -1922,7 +1834,6 @@ including predefined |sparks| such as |END|, |NULL_VALUE|, etc.
 \initials{LDF 2004.04.23.}
 Added this function.  
 \ENDLOG 
-
 
 @q ***** (5)  Declaration.@>
 
@@ -1945,7 +1856,6 @@ Id_Map_Type::show(string s, bool show_all) const
         iter != id_map.end();
         ++iter)
       {
- 
 
 /* !! TO DO:  Show other types of entries.  \initials{LDF 2004.04.25.}  */@;
                                                                                 
@@ -1984,7 +1894,6 @@ Added this section.
 
 @<|Loop_Info_Node| declaration@>=
 typedef Loop_Info_Type* Loop_Info_Node;
-
 
 @q ** (2) |Loop_Info_Type|.@>
 @*1 {\bf Loop\_Info\_Type}.
@@ -2071,8 +1980,6 @@ Added this section.
    const unsigned short Loop_Info_Type::FOR_TYPE          = 2;
    const unsigned short Loop_Info_Type::FOREVER_TYPE      = 3;
    const unsigned short Loop_Info_Type::FOR_SUFFIXES_TYPE = 4;
-
-
 
 @q *** (3) |Loop_Info_Type| functions.@>
 @*2 {\bf Loop\_Info\_Type} functions.
@@ -2172,7 +2079,6 @@ Loop_Info_Type::~Loop_Info_Type(void)
   return;
 
 } /* End of |Loop_Info_Type| destructor definition.  */
-
 
 @q * (1) Definition Information.@>
 @* Definition Information.
@@ -2338,7 +2244,6 @@ Added this function.
 Definition_Info_Type::~Definition_Info_Type(void)
 {
 
-
   delete definition_strm_ptr[0]; 
   delete definition_strm_ptr[1]; 
 
@@ -2348,7 +2253,6 @@ Definition_Info_Type::~Definition_Info_Type(void)
   return;
 
 } /* End of |Definition_Info_Type| destructor definition.  */
-
 
 @q **** (4) Assignment operator.@>
 @*3 Assignment operator.
@@ -2385,14 +2289,12 @@ Definition_Info_Type::operator=(const Definition_Info_Type& d)
    untyped_parameter_ctr = d.untyped_parameter_ctr;
    typed_parameter_ctr   = d.typed_parameter_ctr;
 
-
    definition_strm_ptr[0]->str(d.definition_strm_ptr[0]->str()); 
    definition_strm_ptr[1]->str(d.definition_strm_ptr[1]->str()); 
 
    return *this;
 
 } /* End of |Definition_Info_Type| destructor definition.  */
-
 
 @q **** (4) Clear.@>
 @*3 Clear.
@@ -2409,7 +2311,6 @@ Added this function declaration.  This function is defined in
 @<Declare |Definition_Info_Type| functions@>=
 void
 clear(void);
-
 
 @q **** (4) Show.@>
 @*3 Show.
@@ -2549,7 +2450,6 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
 
 @<|Scanner_Type| declaration@>=
 
-
   friend class Id_Map_Type;
   friend class Id_Map_Entry_Type;
 
@@ -2565,8 +2465,6 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
   friend int Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
-
-  
 
 @q **** (4) |private| data members. @>
 @*3 |private| data members.
@@ -2612,10 +2510,8 @@ Added |vector <real> numeric_list_real_vector|.
 
   Thread_Info_Type* thread_info;
 
-
   vector<pthread_t*> thread_vector;
   pthread_mutex_t    thread_vector_mutex;
-
 
   Cond_Var_Type<bool, unsigned int> output_pending;
 
@@ -2658,7 +2554,6 @@ Added |vector <real> numeric_list_real_vector|.
    string token_string;
 
    Loop_Info_Node loop_info_node;
-
 
 @q ***** (5) Pointers for true internal quantities.@> 
 @*4 Pointers for true internal quantities.
@@ -2713,7 +2608,6 @@ Added the declaration of |Matrix_Options* matrix_options|.
 
    Matrix_Options* matrix_options;
    Focus_Options* focus_options;
-
 
 @q ***** (5) Data members for setting |Shape|-types.@> 
 
@@ -2821,7 +2715,6 @@ Added |pen_vector_ptr| and |dash_pattern_vector_ptr|.
    void* dash_pattern_ptr;
    void* dash_pattern_vector_ptr;
 
-
 @q ***** (5) Pointers for |with_clause_output|. @>
 @*4 Pointers for |with_clause_output|.
 \initials{LDF 2004.06.28.}
@@ -2832,7 +2725,6 @@ Added this section.
 
 \initials{LDF 2004.06.28.}
 Changed all these variables to |void*|.
-
 
 \initials{LDF 2004.06.28.}
 Added ``|_ptr|'' to the end of the names of all of the variables in this
@@ -2853,7 +2745,6 @@ Added |surface_hiding_value_ptr|.
 
   void* clear_ptr;
   void* endfig_ptr;  
-
 
   void* focus_ptr;
   void* projection_ptr;
@@ -2882,7 +2773,6 @@ Added this section with the declaration of |tolerance|.
 @<|Scanner_Type| declaration@>=
 
    real* tolerance;
-
 
 @q ***** (5) Data members for macro definitions.@> 
 
@@ -2945,6 +2835,7 @@ Added |bool ulong_long_switch|.
 
   Output_Struct* out[3];
   @<Declare |Scanner_Type| functions@>@;  
+
 };
 
 @q *** (3) Scanner_Type functions.@>
@@ -3012,8 +2903,7 @@ in |@<Main@>|.
 @q } @> 
 @q !! TO DO:@>
 \initials{LDF 2004.04.20.}  Add arguments and code for handling |out|.
-\ENDTODO 
- 
+\ENDTODO
 
 \LOG
 \initials{LDF 2004.04.20.}  Added this function.
@@ -3034,7 +2924,6 @@ set(string in_filename,
     const unsigned short ttype,
     Run_State& rrun_state = run_state_initial);
 
-
 @
 @<Define |Scanner_Type| functions@>=
 void
@@ -3050,7 +2939,6 @@ Scanner_Type::set(string in_filename,
       in->filename = in_filename;
       in->stream_ptr = in_stream_ptr;
       in->type = ttype;
-
 
       arc_options = 0;
 
@@ -3084,10 +2972,7 @@ operator=(const Scanner_Type& s);
 |libplot_output| to |do_output[Run_State::METAFONT]|,
 |do_output[Run_State::PNG]|, and |do_output[Run_State::LIBPLOT]|,
 respectively.  
-
-
 \ENDLOG 
-
 
 @<Declare |Scanner_Type| functions@>=
 bool
@@ -3104,7 +2989,6 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
   if (DEBUG)
     cerr << "Entering Scanner_Type::open_default_out_file()" << endl
          << "format == " << format << endl;
-
 
   run_state = r;
 
@@ -3185,7 +3069,6 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 
 } /* |Scanner_Type::open_default_out_file| */@;
 
-
 @q **** (4) Get thread name and stop value.@>
 @*3 Get thread name and stop value.
 \initials{LDF 2004.10.03.}
@@ -3193,7 +3076,6 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 \LOG
 \initials{LDF 2004.10.03.}
 Added this function.
-
 
 \initials{LDF 2004.10.05.}
 Now setting |*error_stop_value| to |Run_State::STOPPING| rather than
@@ -3210,7 +3092,6 @@ int
 get_thread_name_and_stop_values(string* thread_name = 0,
                                 bool* error_stop_value = 0,
                                 bool* warning_stop_value = 0);
-
 
 @q ***** (5) Definition. @>
 @
@@ -3260,7 +3141,6 @@ Scanner_Type::get_thread_name_and_stop_values(string* thread_name,
 
 }  /* End of |Scanner_Type::get_thread_name_and_stop_values| definition.  */
 
-
 @q **** (4) Handling input. @>
 @*3 Handling input.
 
@@ -3274,7 +3154,6 @@ Scanner_Type::get_thread_name_and_stop_values(string* thread_name,
 @<Declare |Scanner_Type| functions@>=
 char
 get() const;
-
 
 @q ****** (6) Definition. @>
 @
@@ -3295,7 +3174,6 @@ Scanner_Type::get() const
 char
 peek() const;
 
-
 @q ****** (6) Definition. @>
 @
 @<Define |Scanner_Type| functions@>=
@@ -3315,8 +3193,6 @@ Scanner_Type::peek() const
 @<Declare |Scanner_Type| functions@>=
 void
 ignore() const;
-
-
 
 @q ****** (6) Definition. @>
 @
@@ -3345,9 +3221,6 @@ putback(char c)
   return;
 }
 
-
-
-
 @q **** (4) Querying. @>
 @*3 Querying.
 
@@ -3361,7 +3234,6 @@ putback(char c)
 @<Declare |Scanner_Type| functions@>=
 bool
 is_open_in() const;
-
 
 @q ****** (6) Definition. @>
 @
@@ -3389,7 +3261,6 @@ const
 string
 get_in_filename(const bool silent = false) const;
 
-
 @q ****** (6) Definition. @>
 @
 @<Define |Scanner_Type| functions@>=
@@ -3415,7 +3286,6 @@ Scanner_Type::get_in_filename(const bool silent) const
     }
 }
 
-
 @q ***** (5) Get |run_state|. @>
 @*4 Get |run_state|.
 
@@ -3432,8 +3302,6 @@ get_run_state(void) const
 {
   return &run_state;
 }
-
-
 
 @q ***** (5) Pop |in|.@>
 @*4 Pop {\bf in}.
@@ -3494,8 +3362,6 @@ Scanner_Type::pop_in(void)
   
 }   /* End of |Scanner_Type::pop_in| definition.  */
 
-
-
 @q ***** (5) Get the type of |in| (|in->type|). @>
 @*4 Get the type of {\bf in}.
 
@@ -3550,7 +3416,6 @@ get_in_good(void) const
   return in->stream_ptr->good();
 }
 
-
 @q ***** (5) |get_in_bad|. @>
 @*4 {\bf get\_in\_bad}.
 
@@ -3568,7 +3433,6 @@ get_in_bad(void) const
 {
   return in->stream_ptr->bad();
 }
-
 
 @q ***** (5) |get_in_fail|. @>
 @*4 {\bf get\_in\_fail}.
@@ -3628,9 +3492,6 @@ add_entry(string nname,
           Id_Map_Entry_Node ssuperordinate_vector = 0,
           Id_Map_Entry_Node ssubordinate_array = 0);
 
-
-
-
 @q **** (4) Add synonym.  @>
 @*3 Add synonym.
 
@@ -3647,8 +3508,6 @@ to \filename{scan.web}.
 @<Declare |Scanner_Type| functions@>=
 Id_Map_Entry_Node
 add_synonym(string synonym, string name);
-
-
 
 @q **** (4) Lookup. @>
 @*3 Lookup.
@@ -3675,7 +3534,6 @@ Made this function a member function of
 \initials{LDF 2004.04.22.}  
 Changed the name of this function from 
 |check_id| to |lookup| and rewrote it.  
-
 
 \initials{LDF 2004.04.24.}  
 Moved this function definition from \filename{io.web} 
@@ -3706,8 +3564,6 @@ Added this declaration.  This function is defined in
 int 
 erase_entry(string s);
 
-
-
 @q **** (4) Resolve array name. @>
 @*3 Resolve array name.
 
@@ -3719,7 +3575,6 @@ Added this function.
 Now using the character octal 243 (British Pound) as the placeholder
 for subscripts rather than \.{-}.
 \ENDLOG 
-
 
 @<Declare |Scanner_Type| functions@>=
 string
@@ -3775,7 +3630,6 @@ Now returning |root->left|, if this is the newly-created
 Now passing |root->superordinate_vector| as an argument in calls to 
 |Id_Map_Entry_Type::set_entry|.
 
-
 \initials{LDF 2004.08.28.}
 Now passing |this| as the |Scanner_Node| argument in calls to 
 |Id_Map_Entry_Type::set_entry|.
@@ -3794,13 +3648,11 @@ entry was always created if none existed.
 
 @q ***** (5) Declaration. @>
 
-
 @<Declare |Scanner_Type| functions@>=
 Id_Map_Entry_Node 
 get_array_entry(string s, 
                 Id_Map_Entry_Node head, 
                 bool create_if_none = true);
-
 
 @q ***** (5) Definition. @>
 
@@ -3866,7 +3718,6 @@ Scanner_Type::get_array_entry(string s,
   if (root == static_cast<Id_Map_Entry_Node>(0))
     {
 
-
       cerr_strm << thread_name 
                 << "ERROR! In `Scanner_Type::get_array_entry()':"
                 << endl
@@ -3890,7 +3741,6 @@ Scanner_Type::get_array_entry(string s,
 \initials{LDF 2005.01.08.}
 Added the condition |create_if_none == true|.
 \ENDLOG 
-
 
 @<Define |Scanner_Type| functions@>=
 
@@ -3941,7 +3791,6 @@ Added the condition |create_if_none == true|.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
       return root->left;
 
     } /* |if (root->left == static_cast<Id_Map_Entry_Node>(0))|  */
@@ -3982,7 +3831,6 @@ Added this section.
 @q ****** (6) |root->left != static_cast<Id_Map_Entry_Node>(0)|.@>  
 @ |root->left != static_cast<Id_Map_Entry_Node>(0)|.
 @<Define |Scanner_Type| functions@>=
-
 
   else /* (|root->left != static_cast<Id_Map_Entry_Node>(0)|)  */
     {
@@ -4033,17 +3881,14 @@ Added this section.
 
     } /* |if (s == root->name)| */@;
 
-
 @q ***** (5) |(s < root->name)|.@>
 @ |s < root->name|.  If |left| is a null pointer, put the new
 |Id_Map_Entry_Node| there, otherwise continue traversing the tree structure.
 \initials{LDF 2004.04.27.}
 @<Define |Scanner_Type| functions@>=
 
-
                 else if (s < root->name)
                   {
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -4058,7 +3903,6 @@ Added this section.
        cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ****** (6) |(root->left == static_cast<Id_Map_Entry_Node>(0)|.@>  
 @ |(root->left == static_cast<Id_Map_Entry_Node>(0))|.
@@ -4100,8 +3944,6 @@ Added this section.
                             static_cast<Id_Map_Entry_Node>(0), /* |right|  */ 
                             root->superordinate_vector);
 
-
-
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -4116,10 +3958,8 @@ Added this section.
 #endif /* |DEBUG_COMPILE|  */@; 
       
       return root->left;
-      
 
-    } /* |if (root->left == static_cast<Id_Map_Entry_Node>(0))|  */@;
-
+} /* |if (root->left == static_cast<Id_Map_Entry_Node>(0))|  */@;
 
 @q ****** (6) |(root->left != static_cast<Id_Map_Entry_Node>(0))|.@>  
 @ |(root->left != static_cast<Id_Map_Entry_Node>(0))|.
@@ -4162,7 +4002,6 @@ If |right| is a null pointer, put the new
 
                 else if (s > root->name)
                   {
-                    
 
 @q ****** (6) |root->right == static_cast<Id_Map_Entry_Node>(0)|.@>  
 
@@ -4221,14 +4060,12 @@ If |right| is a null pointer, put the new
 
                       } /* |if (root->right == static_cast<Id_Map_Entry_Node>(0))|  */@;
 
-
 @q ****** (6) |root->right != static_cast<Id_Map_Entry_Node>(0)|.@>  
 
 @ |root->right != static_cast<Id_Map_Entry_Node>(0)|.
 \initials{LDF 2004.08.23.}
 
 @<Define |Scanner_Type| functions@>=
-
 
                     else /* |root->right != static_cast<Id_Map_Entry_Node>(0)| */
                       {
@@ -4363,7 +4200,6 @@ Scanner_Type::show(string s, bool show_all) const
              << endl;
     }
 
-
   id_map_node->show("", show_all);
 
   return;
@@ -4406,7 +4242,7 @@ Scanner_Type::submit_mysql_query(string query_str)
 {
   int status = 0;
 
-  bool DEBUG = true;  /* |false|  */
+  bool DEBUG = false; /* |true| */
   
   mysql_query(mysql, query_str.c_str());
 
@@ -4452,9 +4288,8 @@ Scanner_Type::submit_mysql_query(string query_str)
                 << endl
                 << "`field_ctr' == " << field_ctr 
                 << endl;
-                     
 
-         }  /* |if (DEBUG)|  */
+}  /* |if (DEBUG)|  */
    
        affected_rows = (long) mysql_affected_rows(mysql);
 
@@ -4482,7 +4317,6 @@ This function is defined in \filename{scan.web}.
 @<Declare |Scanner_Type| functions@>=
 Bool_Void_Pointer
 handle_numeric_list(int transform_token, void* r);
-     
 
 @q ** Extract |Picture| output arguments.  @>
 @*1 Extract {\bf Picture} output arguments.
@@ -4497,8 +4331,6 @@ declaration.
 @<Declare |Scanner_Type| functions@>=
 Scan_Parse::Picture_Output_Arg_Type*
 extract_picture_output_args();
-
-
 
 @q * |friend| declarations for functions in |namespace Scan_Parse|.@>
 @* {\bf friend} declarations for functions in 
@@ -4543,7 +4375,6 @@ Added |friend| declaration for |Scan_Parse::non_shape_decl_func|.
 
 \initials{LDF 2004.07.22.} 
 Added |friend| declaration for |Scan_Parse::shape_decl_func|.
-
 
 \initials{LDF 2004.07.23.}
 Added default value for the |C*| argument to 
@@ -4629,10 +4460,8 @@ Added |friend| declaration for |Scan_Parse::drawing_command|.
 \initials{LDF 2004.08.17.}
 Added |friend| declaration for |Scan_Parse::drawdot_command|.
 
-
 \initials{LDF 2004.08.18.}
 Added |friend| declaration for |Scan_Parse::variable_type|.
-
 
 \initials{LDF 2004.08.24.}
 Added |friend| declaration for |Scan_Parse::vector_type_decl|.
@@ -4671,7 +4500,6 @@ In the |friend| declaration of
 Changed the |Id_Map_Entry_Node path_entry_0| and 
 |Id_Map_Entry_Node path_entry_1| arguments 
 to |Path* path_0| and |Path* path_1|.
-
 
 \initials{LDF 2004.09.07.}
 In |friend| declaration for |intersection_point_command|:
@@ -4714,7 +4542,6 @@ Added |friend| declaration for
 Added |friend| declaration for 
 |Scan_Parse::intersection_points_polygon_like|.
 
-
 \initials{LDF 2004.10.04.}
 Added |friend| declaration for the template function 
 |Scan_Parse::reflect_func|.
@@ -4729,7 +4556,6 @@ Changed the name of |Scan_Parse::reflect_func| to
 \initials{LDF 2004.10.25.}
 Made |C* expr| argument of |Scan_Parse::assign_simple| 
 non-|const| in |friend| declaration.
-
 
 \initials{LDF 2004.10.26.}
 Added |friend| declaration for the specialization of
@@ -4943,14 +4769,12 @@ Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
                                            void* v,
                                            void* w);
 
-
 friend
 int
 Scan_Parse::numeric_primary_rule_func_0(int          operator_value,
                                         real         operand,
                                         real*        result,
                                         Scanner_Node scanner_node);
-
 
 friend
 real
@@ -4961,7 +4785,6 @@ Scan_Parse::numeric_primary_rule_func_1(int point_part,
 friend
 void*
 Scan_Parse::numeric_list_rule_func_0(void* v, void* parameter);
-
 
 @q **** (4) Functions for complex numbers.@>   
 @*3 Functions for complex numbers.
@@ -4987,7 +4810,6 @@ void*
 Scan_Parse::complex_primary_rule_func_0(void* v,
                                         int op,
                                         void* parameter);
-
 
 @q **** (4) Functions for matrices.@>   
 @*3 Functions for matrices.
@@ -5058,7 +4880,6 @@ Removed |get_focus_1_func| and |get_vertex_1_func|.
    void*
    Scan_Parse::get_vertex_func(C* c, const unsigned short s, void* parameter);
 
-
 @q **** (4) Functions for |Focuses|.@>   
 @*3 Functions for {\bf Focuses}.
 \initials{LDF 2007.09.19.}
@@ -5116,7 +4937,6 @@ the default |false|.  This required making
                               bool oversize_switch,
                               Scanner_Node scanner_node);
 
-
 @q **** (4) @>   
 @
 @<|friend| declarations for functions in |namespace Scan_Parse|@>=
@@ -5157,13 +4977,11 @@ the default |false|.  This required making
                                 void* var,
                                 const C* expr);
 
-
    friend  
      Int_Void_Ptr
      Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
                                        Id_Map_Entry_Node entry,
                                        Id_Map_Entry_Node entry_0);
-
 
    friend  
      Int_Void_Ptr
@@ -5171,14 +4989,11 @@ the default |false|.  This required making
                                         Id_Map_Entry_Node entry,
                                         Id_Map_Entry_Node entry_0);
 
-
   friend  
     Int_Void_Ptr
     Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
                                      Id_Map_Entry_Node entry,
                                      real x);
-
-
 
    friend  
      Int_Void_Ptr
@@ -5187,7 +5002,6 @@ the default |false|.  This required making
                            real red_part,
                            real green_part,
                            real blue_part);
-
 
    friend
      Int_Void_Ptr
@@ -5237,10 +5051,6 @@ Added the |friend| declaration for |label_bool_point_func|.
                                      void* dot_col,
                                      void* pict);
 
-
-
-
-
      friend
      int
      Scan_Parse::label_path_command(Scanner_Node scanner_node,
@@ -5252,7 +5062,6 @@ Added the |friend| declaration for |label_bool_point_func|.
                                     int start_ctr,
                                     Path* position,
                                     Id_Map_Entry_Node entry);
-
 
 @q **** (4) Functions for |Points|.@> 
 @ Functions for {\bf Points}.
@@ -5269,7 +5078,6 @@ template <class C>
 friend 
 void*
 Scan_Parse::normal_func(C* c, Scanner_Node scanner_node);
-
 
 @q **** (4)@> 
 @
@@ -5303,7 +5111,6 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
                                      int basic_drawing_command,
                                      Solid* solid);
 
-
      friend
      int
      Scan_Parse::drawing_command_sphere_development(Scanner_Node scanner_node,
@@ -5315,8 +5122,6 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
      Scan_Parse::drawdot_command(Scanner_Node scanner_node,
                                  int drawdot_or_undrawdot,
                                  Point* ppoint);
-
-
 
      friend 
        Int_Void_Ptr
@@ -5331,7 +5136,6 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
                                        int vector_type_num,
                                        int array_type_num,
                                        C* dummy);
-
 
      template <class C>
      friend
@@ -5431,7 +5235,6 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
      Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node, 
                                         const string* s);
 
-
      friend
      int
      Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
@@ -5452,12 +5255,10 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
      bool
      Scan_Parse::is_symbolic_token(int curr_token);
 
-
      friend 
      int
      Scan_Parse::clear_vector_func(Scanner_Node scanner_node, 
                                    Id_Map_Entry_Node entry);
-
 
      friend 
      int
@@ -5472,7 +5273,6 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
      friend 
      int
      Scan_Parse::reverse_func(void* v, void* parameter, C* c);
-
 
      friend 
      int
@@ -5500,7 +5300,6 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
 Added this section.
 \ENDLOG
 
-
 @q ***** (5) |string| expressions.@>  
 @*4 {\bf string} expressions.
 \initials{LDF 2005.11.03.}
@@ -5516,7 +5315,6 @@ Added this section with the |friend| declaration for
 friend 
 void*
 Scan_Parse::string_primary_rule_func(void* v, void* parameter);
-
 
 @q ***** (5) Functions for |Transforms|.@>  
 @*4 Functions for {\bf Transforms}.
@@ -5556,7 +5354,6 @@ standardize_func(C* c, void* v);
 friend
 void*
 Scan_Parse::align_path_func(void* v, int ax, void* parameter);
-   
 
 @q ***** (5) |point| expressions.@>  
 @*4 {\bf point} expressions.
@@ -5623,8 +5420,6 @@ Added the argument |int with_z| to |path_secondary_rule_0|.
                                           int with_z,
                                           Scanner_Node scanner_node);
 
-
-
 @q ***** (5) |polygon| expressions.@>  
 @*4 {\bf polygon} expressions.
 
@@ -5648,8 +5443,6 @@ Scan_Parse::polygon_secondary_rule_func_0(void* ppolygon,
                                           void* ffocus,
                                           int with_z,
                                           Scanner_Node scanner_node);
-
-
 
 @q ***** (5) Functions for conic sections and |Conic_Section_Lattices|.@>  
 @*4 Functions for conic sections and {\bf Conic\_Section\_Lattices}.
@@ -5839,7 +5632,6 @@ Scan_Parse::polyhedron_get_net_func(int type,
                                     int do_half, 
                                     void* parameter);
 
-
 @q ***** (5) Functions for Quadric Surfaces.@> 
 @ Functions for Quadric Surfaces.
 \initials{LDF 2006.11.09.}
@@ -5860,7 +5652,6 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
                                        int arg_0,
                                        int arg_1);
 
-
 @q ***** (5) Operation assignments.@>  
 @*4 Operation assignments.
 
@@ -5868,7 +5659,6 @@ Scan_Parse::quad_surf_get_element_func(void* parameter,
 \initials{LDF 2005.05.12.}
 Added this section.
 \ENDLOG
-
 
 @q ****** (6) Operation assignments for |Pictures|.@>  
 @*5 Operation assignments for {\bf Pictures}.
@@ -5888,11 +5678,9 @@ Added this section with the declaration of
                                         void* from_picture_entry,
                                         Scanner_Node scanner_node);
 
-
 @q ***** (5) Set commands.@>  
 @*4 Set commands.
 \initials{LDF 2005.05.19.}
-
 
 \LOG
 \initials{LDF 2005.05.19.}
@@ -6100,7 +5888,6 @@ int
 Scan_Parse::set_ellipsoid_rule_func_0(void* curr_var,
                                       void* parameter);
 
-
 friend 
 int
 Scan_Parse::set_sphere_rule_func_0(void* curr_var,
@@ -6110,7 +5897,6 @@ friend
 int
 Scan_Parse::set_sphere_development_rule_func_0(void* curr_var,
                                                void* parameter);
-
 
 friend 
 int
@@ -6133,12 +5919,10 @@ void*
 Scan_Parse::is_cycle_func(void* arg1,
                           void* parameter);
 
-
 template<class C>
 friend
 void*
 Scan_Parse::is_whatever_func(C* c, void* parameter);
-
 
 friend
 void*
@@ -6146,7 +5930,6 @@ Scan_Parse::is_on_sphere_func(void* ppoint,
                               void* ssphere, 
                               void* parameter,
                               real tolerance);
-
 
 template <class C, class D, class E>
 friend
@@ -6160,7 +5943,6 @@ Pointer_Vector<Bool_Point>*
 Scan_Parse::convert(Bool_Point_Quadruple* bpq, 
                     void* parameter,
                     bool delete_bpq);
-
 
 template<class C, class D>
 friend
@@ -6181,7 +5963,6 @@ template<class C, class D>
 friend
 void*
 Scan_Parse::polygon_like_intersection_func(C* c, D* d, void* parameter);
-
 
 template<class C>
 friend 
@@ -6227,8 +6008,6 @@ Scan_Parse::plane_intersection_func(void* v, void* w, void* parameter);
 friend
 int
 Scan_Parse::sphere_size_func(void* v, void* parameter);
-
-
 
 @q * (1) Putting I/O together.@>
 @* Putting I/O together.
@@ -6305,7 +6084,6 @@ int yyparse(yyscan_t);
 @<|extern| variable declarations@>@;
 #endif
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -6314,8 +6092,6 @@ int yyparse(yyscan_t);
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

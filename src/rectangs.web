@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Rectangle.@>       
 @** Rectangle\quad ({\tt rectangles\PERIOD web}).\hfil
@@ -235,8 +234,7 @@ Rectangle::Rectangle(const Point& ccenter, const real aaxis_h, const real aaxis_
   Point top_lft(-axis_h_half, 0, axis_v_half);
   Point top_rt(axis_h_half, 0, axis_v_half);
 
-    
-    if (angle_x != ZERO_REAL || angle_y != ZERO_REAL
+if (angle_x != ZERO_REAL || angle_y != ZERO_REAL
         || angle_z != ZERO_REAL)   /* Rotation around the x-axis, 
                                       y-axis, and z-axis. */
       {
@@ -295,7 +293,6 @@ the resulting |Rectangle|.
 @*2 Constructor.
 @^\cfunc{Rectangle}{Rectangle}@>
 \initials{LDF Undated.}
-
 
 \LOG
 \initials{LDF 2005.01.24.}
@@ -385,7 +382,6 @@ Rectangle::set(const Point& pt0, const Point& pt1,
 @q * (1) Pseudo-constructor for dynamic allocation.@>
 @* Pseudo-constructor for dynamic allocation.
 
-
 @q ** (2) Pointer argument.@>
 @*1 Pointer argument.
 
@@ -403,7 +399,6 @@ Added |Scanner_Node scanner_node| argument.
 
 Rectangle* 
 create_new(const Rectangle* c, Scanner_Node scanner_node);
-
 
 @q ** (2) Reference argument.@>
 @*1 Reference argument.
@@ -457,10 +452,6 @@ Rectangle::operator=(const Rectangle& c)
   return *this;
 }
 
-
-
-
-
 @q * (1) Get copy.@>
 @* Get copy.
 @^\cfunc{Rectangle}{get\_copy}@>
@@ -485,7 +476,6 @@ Rectangle::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
-
 
 @q * (1) Is |Rectangle|.@> 
 @* Is {\bf Rectangle}.
@@ -534,7 +524,6 @@ Following a system update,
 having |Shape*| as the return value no longer worked.
 \ENDLOG
 
-
 @q ** (2) Declaration.@> 
 
 @<Declare |Rectangle| functions@>=
@@ -543,7 +532,6 @@ int
 reflect_in(const Plane& p, 
            void* v,
            const Scanner_Node scanner_node = 0) const;
-
 
 @q ** (2) Definition.@>
 
@@ -554,12 +542,11 @@ Rectangle::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -573,7 +560,6 @@ Rectangle::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -602,7 +588,6 @@ on the free store for it.
 
 @<Define |Rectangle| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -617,10 +602,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (rectangle_reflection == 0)|  */
@@ -635,7 +618,6 @@ on the free store for it.
   Polygon polygon_reflection;
 
   int status;
-
 
   try
      {
@@ -693,8 +675,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Polygon::reflect_in()| succeeded.@> 
 
@@ -755,7 +736,6 @@ on the free store for it.
 
 } /* End of |Rectangle::reflect_in()| definition.  */
 
-
 @q * (1) Returning Elements and information.@>
 @* Returning Elements and information.
 \initials{LDF 2003.04.15.}  
@@ -765,7 +745,6 @@ on the free store for it.
 Added this section.  It's become necessary, since I'm
 deriving |Rectangle| from |Path| now, and not from |Reg_Polygon|.
 \ENDLOG 
-
 
 @q ** (2) Get |Shape| type.@> 
 @*1 Get {\bf Shape} type.
@@ -786,9 +765,6 @@ get_shape_type(void) const
 {
    return RECTANGLE_TYPE;
 }
-
-
-
 
 @q ** (2) Returning |Points|.@>
 @*1 Returning {\bf Points}.
@@ -883,7 +859,6 @@ Rectangle::get_mid_point(unsigned short c)  const
     return p0.mediate(p1);
 }
 
-
 @q ** (2) Getting axes.@>
 @*1 Getting axes.
 \initials{LDF 2003.07.18.}  
@@ -934,7 +909,6 @@ Rectangle::get_axis_v() const
 {
   return axis_v;
 }
-
 
 @q * (1) |Ellipses|.@>
 @* {\bf Ellipses}.
@@ -1059,7 +1033,6 @@ draw_in_ellipse(Pointer_Vector<Color>* ddraw_color_vector = 0,
                 Pointer_Vector<Dash_Pattern>* ddash_pattern_vector = 0,
                 Pointer_Vector<Pen>* ppen_vector = 0,
                 Picture& picture = *current_picture) const;
-
 
 @q * (1) |Polygon| functions.@> 
 @* {\bf Polygon} functions.
@@ -1192,7 +1165,6 @@ the |Pointer_Vector<Polygon>| |*pv|.  Previously, I used a
 
 @q ****** (6)@> 
 
-
            p = new Point;
            q = new Point;
            r = new Point;
@@ -1208,9 +1180,7 @@ the |Pointer_Vector<Polygon>| |*pv|.  Previously, I used a
            ++(pv->ctr);
            pv->v.push_back(static_cast<Polygon*>(curr_triangle));
 
-
 @q ****** (6)@> 
-
 
            p = new Point;
            q = new Point;
@@ -1227,10 +1197,7 @@ the |Pointer_Vector<Polygon>| |*pv|.  Previously, I used a
            ++(pv->ctr);
            pv->v.push_back(static_cast<Polygon*>(curr_triangle));
 
-
 @q ****** (6)@> 
-
-
 
            p = new Point;
            q = new Point;
@@ -1246,7 +1213,6 @@ the |Pointer_Vector<Polygon>| |*pv|.  Previously, I used a
 
            ++(pv->ctr);
            pv->v.push_back(static_cast<Polygon*>(curr_triangle));
-
 
 @q ****** (6)@> 
 
@@ -1268,7 +1234,6 @@ No longer allocating memory for |Points|, since I'm calling
    else if (points_size == 4 && use_rectangles == true)
       {
 
-
            Rectangle* curr_rectangle;
 
            Point mid_0_1 = points[0]->mediate(*(points[1]));
@@ -1276,15 +1241,12 @@ No longer allocating memory for |Points|, since I'm calling
            Point mid_2_3 = points[2]->mediate(*(points[3]));
            Point mid_3_0 = points[3]->mediate(*(points[0]));
 
-
 @q ****** (6)@> 
 
            Point P;
            Point Q;
            Point R;
            Point S;
-
-
 
            P = *(points[0]);
            Q = mid_0_1;
@@ -1298,10 +1260,7 @@ No longer allocating memory for |Points|, since I'm calling
            ++(pv->ctr);
            pv->v.push_back(static_cast<Polygon*>(curr_rectangle));
 
-
 @q ****** (6)@> 
-
-
 
            P = mid_0_1;
            Q = *(points[1]);
@@ -1315,9 +1274,7 @@ No longer allocating memory for |Points|, since I'm calling
            ++(pv->ctr);
            pv->v.push_back(static_cast<Polygon*>(curr_rectangle));
 
-
 @q ****** (6)@> 
-
 
            P = center;
            Q = mid_1_2;
@@ -1333,7 +1290,6 @@ No longer allocating memory for |Points|, since I'm calling
 
 @q ****** (6)@> 
 
-
            P = mid_3_0;
            Q = center;
            R = mid_2_3;
@@ -1346,12 +1302,9 @@ No longer allocating memory for |Points|, since I'm calling
            ++(pv->ctr);
            pv->v.push_back(static_cast<Polygon*>(curr_rectangle));
 
-
 @q ****** (6)@> 
 
       }  /* /* |points_size == 4 && use_rectangles == true|  */
-
-
 
 @q ***** (5)@>  
 
@@ -1364,7 +1317,6 @@ No longer allocating memory for |Points|, since I'm calling
           Point* s;
  
           Polygon* curr_polygon;
-
 
           for (vector<Point*>::size_type i = 0;
                i < points_size;
@@ -1404,8 +1356,6 @@ No longer allocating memory for |Points|, since I'm calling
                                      Scanner_Node scanner_node)| 
       definition.  */
 
-
-
 @q * (1) |Plane| functions.@> 
 @* {\bf Plane} functions.
 \initials{LDF 2005.11.01.}
@@ -1414,7 +1364,6 @@ No longer allocating memory for |Points|, since I'm calling
 \initials{LDF 2005.11.01.}
 Added this section.
 \ENDLOG
-
 
 @q ** (2) Get |Rectangle|.@> 
 @*1 Get {\bf Rectangle}.
@@ -1552,7 +1501,6 @@ Now including |@<Define |Plane| functions@>|.
 @<Define |class Rectangle|@>@;
 @<Declare non-member template functions for |Rectangle|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1561,7 +1509,6 @@ Now including |@<Define |Plane| functions@>|.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

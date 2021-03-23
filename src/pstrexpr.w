@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) string expressions.  @>
 @** string expressions.
@@ -100,7 +98,6 @@ This condition occurs legitimately when one tries to show an
          cerr_strm << thread_name 
                    << "*** Parser: `string_primary --> string_variable'.";
 
-
          log_message(cerr_strm);
          cerr_message(cerr_strm);
          cerr_strm.str("");
@@ -148,7 +145,6 @@ Removed code from this rule.  Replaced it with a call to
       @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) string_primary --> LEFT_PARENTHESIS string_expression @>
 @q *** (3) RIGHT_PARENTHESIS.                                    @>   
@@ -313,7 +309,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) string_primary --> BINARY numeric_expression.@>
 
 @*4 \§string primary> $\longrightarrow$ 
@@ -350,8 +345,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(s); 
 
 };
-
-
 
 @q ***** (5) string_primary --> OCTAL numeric_expression.@>
 
@@ -419,7 +412,6 @@ Added error handling.
 
        } /* |if (r > ULONG_MAX)|  */
 
-
 @q ******* (7) @>
 
    else  /* |r <= ULONG_MAX|  */
@@ -452,11 +444,9 @@ Added error handling.
 
       }  /* |else| (|r <= ULONG_MAX|)  */
 
+@q ******* (7) @>
 
-@q ******* (7) @> 
-
-    
-   @=$$@> = static_cast<void*>(s); 
+@=$$@> = static_cast<void*>(s); 
 
 };
 
@@ -509,7 +499,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> precision_optional@>@/
 
-
 @q ******* (7) precision_optional --> /* Empty  */@> 
 @*6 \§precision optional> $\longrightarrow$  \.{EMPTY}.
 \initials{LDF 2005.11.03.}
@@ -541,8 +530,6 @@ Added this rule.
 {
     @=$$@> = static_cast<int>(floor(fabs(@=$2@> + .5)));
 };
-
-
 
 @q ***** (5) string_primary --> HEXADECIMAL numeric_expression.@>
 
@@ -610,7 +597,6 @@ Added error handling.
 
        } /* |if (r > ULONG_MAX)|  */
 
-
 @q ******* (7) @>
 
    else  /* |r <= ULONG_MAX|  */
@@ -643,11 +629,9 @@ Added error handling.
 
       }  /* |else| (|r <= ULONG_MAX|)  */
 
+@q ******* (7) @>
 
-@q ******* (7) @> 
-
-    
-   @=$$@> = static_cast<void*>(s); 
+@=$$@> = static_cast<void*>(s); 
 
 };
 
@@ -684,7 +668,6 @@ Added error handling.
 
 };
 
-
 @q ** (2) string tertiary.  @>
 @*1 \§string tertiary>.
 \initials{LDF Undated.}
@@ -717,7 +700,6 @@ Added error handling.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q ** (3) string expression.  @>
 @*2 \§string expression>.
@@ -815,9 +797,8 @@ Added this rule.
 
          s = new string;
          *s = "";
-      
 
-    }  /* |if (s == 0 || t == 0)|  */
+}  /* |if (s == 0 || t == 0)|  */
 
 @q ***** (5) |s != 0 && t != 0|.@>
 
@@ -840,14 +821,6 @@ Added this rule.
 
 };
 
-
-
-
-
-
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -856,7 +829,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

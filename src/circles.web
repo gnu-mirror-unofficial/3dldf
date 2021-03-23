@@ -165,7 +165,6 @@ Circle::Circle(void)
    pen_vector = 0; 
 }
 
-
 @q ** (2) Center, diameters and angles. @>
 @*1 Center, diameters and angles.
 \initials{LDF Undated.}
@@ -267,7 +266,6 @@ Circle::set(const Point& ccenter, const real ddiameter, const real angle_x,
   return;
 }
 
-
 @q * (1) Pseudo-constructor for dynamic allocation.@>
 @* Pseudo-constructor for dynamic allocation.
 
@@ -330,7 +328,6 @@ Changed argument from |Circle| to |const Circle&|.
 Circle* 
 create_new(const Circle& c, Scanner_Node scanner_node);
 
-
 @q * Destructor. @>
 @* Destructor. 
 \initials{LDF 2002.10.09.}  Removed the destructor.  |Path::~Path| or
@@ -355,7 +352,6 @@ further assignment.
 Changed and simplified this function.  It now uses 
 |Ellipse::operator=|.
 \ENDLOG 
-
 
 @<Declare |Circle| functions@>=
 Circle&
@@ -405,13 +401,11 @@ integer value, so it doesn't matter which one we use to set |radius|.
 |e.axis_h| differ by a small amount, possible due to imprecision (see below).
 \ENDLOG 
 
-
 @q *** Declaration.  @>
 
 @<Declare |Circle| functions@>=
 Circle&
 operator=(const Ellipse& e);
-
 
 @q *** Definition.  @>
 
@@ -468,8 +462,6 @@ Circle::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
-
-
 
 @q * (1) Transformations.@> 
 
@@ -563,7 +555,6 @@ Circle::do_transform(const Transform& t, bool check)
 @^\cofunc{Circle}{*=}@>
 \initials{LDF 2004.11.07.}
 
-
 \LOG
 \initials{LDF 2004.11.07.}
 Added this function.
@@ -639,7 +630,6 @@ Following a system update,
 having |Shape*| as the return value no longer worked.
 \ENDLOG
 
-
 @q ** (2) Declaration.@> 
 
 @<Declare |Circle| functions@>=
@@ -648,7 +638,6 @@ int
 reflect_in(const Plane& p, 
            void* v,
            const Scanner_Node scanner_node = 0) const;
-
 
 @q ** (2) Definition.@>
 
@@ -659,12 +648,11 @@ Circle::reflect_in(const Plane& p,
                     void* v,
                     const Scanner_Node scanner_node) const
 
-
 {
 
 @q *** (3) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -678,7 +666,6 @@ Circle::reflect_in(const Plane& p,
      scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                    &error_stop_value,
                                                    &warning_stop_value);
-
 
 @q *** (3).@> 
 
@@ -707,7 +694,6 @@ on the free store for it.
 
 @<Define |Circle| functions@>=
 
-
   catch (bad_alloc)
      {
 
@@ -722,10 +708,8 @@ on the free store for it.
 
        throw;
 
-       
-     } /* |catch (bad_alloc)|  */
+} /* |catch (bad_alloc)|  */
 
-  
 @q *** (3).@> 
 
   } /* |if (circle_reflection == static_cast<Circle*>(0))|  */
@@ -740,7 +724,6 @@ on the free store for it.
   Ellipse ellipse_reflection;
 
   int status;
-
 
   try
      {
@@ -798,8 +781,7 @@ on the free store for it.
 
       return 1;
 
-      
-    }  /* |if (status == 1)|  */
+}  /* |if (status == 1)|  */
 
 @q **** (4) |Ellipse::reflect_in| succeeded.@> 
 
@@ -859,7 +841,6 @@ on the free store for it.
 
 } /* End of |Circle::reflect_in| definition.  */
 
-
 @q * (1) Returning elements and information.@>
 @* Returning elements and information.
 
@@ -904,8 +885,6 @@ is_circle(void) const
    return true;
 }
 
-
-
 @q ** (2) Is circular.@>
 @*1 Is circular.
 
@@ -932,7 +911,7 @@ Path::is_circular(Scanner_Node scanner_node) const
 
 @q ***** (5) Preliminaries.@> 
 
-  volatile bool DEBUG = false; /* |true|  */
+  volatile bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -993,7 +972,6 @@ Rewrite this function so that it can test arbitrary |Paths|.
 
 @<Define |Path| functions@>=
 
-
   if (points.size() % 4 != 0)
      {
 #if DEBUG_COMPILE
@@ -1051,7 +1029,6 @@ and test whether it's circular.
        c += *iter;
 
     } /* |for|  */
-
 
   Point p0 = get_point(0);
   Point p_half = get_point(points.size() / 2);
@@ -1135,7 +1112,6 @@ Circle::is_circular(Scanner_Node scanner_node) const
        return false;
    }
 
-
 @q ***** (5) @>
 
     Point p;
@@ -1146,7 +1122,6 @@ Circle::is_circular(Scanner_Node scanner_node) const
 
     p = **iter++ - c;
     mag0 = p.magnitude();
-
 
     for (int i = 1; iter != points.end(); ++iter)
       {
@@ -1208,8 +1183,6 @@ is_whatever(void) const
 
   return is_circular();
 }
-
-
 
 @q ** (2) Get radius.@>
 @ Get radius.
@@ -1301,7 +1274,6 @@ signed short
 location(const Point& p, 
          real tolerance = -1, 
          Scanner_Node scanner_node = 0) const;
-
 
 @q *** (3) Definition.@>
 @
@@ -1433,7 +1405,6 @@ Circle::intersection_points(const Point& pt0, const Point& pt1) const
     return Ellipse::intersection_points(pt0, pt1);
 }
 
-
 @q ** (2) Path argument.@>
 @*1 {\bf Path} argument.  
 @^\cfunc{Circle}{intersection\_points}@>
@@ -1448,7 +1419,6 @@ virtual
 Bool_Point_Pair
 intersection_points(const Path& p, Scanner_Node scanner_node = 0) const;
 
-
 @
 @<Define |Circle| functions@>=
 Bool_Point_Pair
@@ -1456,7 +1426,6 @@ Circle::intersection_points(const Path& p, Scanner_Node scanner_node) const
 {
   return Ellipse::intersection_points(p);
 }
-
 
 @q ** (2) |Circle| argument.@>
 @*1 {\bf Circle} argument.
@@ -1505,14 +1474,13 @@ Circle::intersection_points(const Circle& c,
                             Scanner_Node scanner_node) const
 {
 
-
 @q **** (4) Preliminaries.@> 
 
 #if DEBUG_COMPILE
-   bool DEBUG = false;  /* |true|  */
+   bool DEBUG = false; /* |true| */
    if (DEBUG)
       {
-          bool DEBUG = false; /* |true|  */
+          bool DEBUG = false; /* |true| */
       }
 #endif /* |DEBUG_COMPILE|  */ 
 
@@ -1543,7 +1511,6 @@ Circle::intersection_points(const Circle& c,
       }
 #endif /* |DEBUG_COMPILE|  */ 
 
-
   Bool_Point_Quadruple bpq = INVALID_BOOL_POINT_QUADRUPLE;
 
   Plane this_plane = get_plane();
@@ -1569,7 +1536,6 @@ that takes a |const Path& p| argument.
    quite right.  The following conditional doesn't catch the case of 
    parallel planes.  */@; 
 
-
   if (!(this_plane.normal == c_plane.normal
         || this_plane.normal == -c_plane.normal))
     {
@@ -1589,9 +1555,7 @@ that takes a |const Path& p| argument.
          } 
 #endif /* |DEBUG_COMPILE|  */ 
 
-
       bpq = Ellipse::intersection_points(static_cast<Ellipse>(c), scanner_node);
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1607,10 +1571,8 @@ that takes a |const Path& p| argument.
 
       return bpq;
 
-
     }  /* |if (!(   this_plane.normal == c_plane.normal
                  || this_plane.normal == -c_plane.normal))|  */
-
 
 @q **** (4) |Circles| are coplanar.@> 
 
@@ -1637,9 +1599,7 @@ that takes a |const Path& p| argument.
           }
 #endif /* |DEBUG_COMPILE|  */ 
 
-
       real dist = (c.center - center).magnitude();
-
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -1676,7 +1636,6 @@ that takes a |const Path& p| argument.
                  cerr_strm.str(); 
               }
 #endif /* |DEBUG_COMPILE|  */ 
-
 
 @q ****** (6) |radius == c.radius|.  Return |INVALID_BOOL_POINT_QUADRUPLE|.@> 
 
@@ -1715,7 +1674,6 @@ that takes a |const Path& p| argument.
 
 @<Define |Circle| functions@>=
 
-
           else if (radius > c.radius)
             {
 
@@ -1740,14 +1698,12 @@ that takes a |const Path& p| argument.
 
             }  /* |else if (radius > c.radius)|  */
 
-
 @q ****** (6) |radius < c.radius|.  Return |INVALID_BOOL_POINT_QUADRUPLE|.@> 
 
 @ |radius < c.radius|.  Return |INVALID_BOOL_POINT_QUADRUPLE|.
 \initials{LDF 2004.11.06.}     
 
 @<Define |Circle| functions@>=
-
 
           else if (radius < c.radius)
             {
@@ -1772,7 +1728,6 @@ that takes a |const Path& p| argument.
                return INVALID_BOOL_POINT_QUADRUPLE;
 
             }  /* |else if (radius < c.radius)|  */
-
 
 @q ****** (6).@> 
 
@@ -1828,7 +1783,6 @@ that takes a |const Path& p| argument.
           bpq.first.pt *= radius;
           bpq.first.pt.shift(center);
           bpq.first.b = true;
-          
 
 #if DEBUG_COMPILE
           if (DEBUG)
@@ -1842,7 +1796,6 @@ that takes a |const Path& p| argument.
                 cerr_strm.str();
              }      
 #endif /* |DEBUG_COMPILE|  */ 
-
 
           return bpq;
 
@@ -1871,7 +1824,6 @@ that takes a |const Path& p| argument.
                  cerr_strm.str(); 
               }
 #endif /* |DEBUG_COMPILE|  */ 
-
 
 @q ****** (6) |radius > c.radius|.@> 
 
@@ -1924,7 +1876,6 @@ that takes a |const Path& p| argument.
          cerr_strm.str();
       }
 #endif /* |DEBUG_COMPILE|  */ 
-
 
               bpq.first.pt.set(center - c.center);
 
@@ -1997,7 +1948,6 @@ that takes a |const Path& p| argument.
                                          (((dist + a) * (dist + a)) - bb)));
              beta *= 180 / PI;
 
-
 #if DEBUG_COMPILE
                if (DEBUG)
                   {        
@@ -2027,7 +1977,6 @@ that takes a |const Path& p| argument.
              bpq.second.b = true;
              bpq.second.pt = P;
              bpq.second.pt.rotate(center, normal, -beta);
-
 
 #if DEBUG_COMPILE
              if (DEBUG)
@@ -2114,7 +2063,6 @@ that takes a |const Path& p| argument.
 
        } /* |else if (dist < (radius + c.radius))|  */
 
-
 @q ***** (5) .@> 
 
       else
@@ -2169,8 +2117,6 @@ show(string text = "",
      const unsigned short proj = 0,
      const real factor = 1) const;
 
-
-
 @
 @<Define |Circle| functions@>=
 void 
@@ -2191,7 +2137,6 @@ Circle::show(string text, char coords,
    return;
 
 }  /* End of |Circle::show()| definition.  */
-
 
 @q * (1) Reg_Polygon functions.@>
 @* {\bf Reg\_Polygon} functions.
@@ -2259,8 +2204,6 @@ Reg_Polygon::in_circle() const
 
     return c;
 }
-
-
 
 @q ** (2) Draw enclosed circle.@>
 @*1 Draw enclosed circle.
@@ -2432,7 +2375,6 @@ This is what's compiled.
 @<Define |class Circle|@>@;
 @<Declare non-member template functions for |Circle|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -2441,7 +2383,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

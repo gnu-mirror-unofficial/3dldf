@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Clear Commands.@>
 @** Clear Commands.
@@ -74,7 +72,6 @@ Removed code from this rule.  I'm about to start putting it in
 @<Define rules@>=
 @=command: CLEAR vector_type_variable@>
 {
-
 
    Scan_Parse::clear_vector_func(static_cast<Scanner_Node>(parameter), 
                                  static_cast<Id_Map_Entry_Node>(@=$2@>)); 
@@ -115,7 +112,6 @@ Removed debugging code.
        @=$$@> = static_cast<void*>(0);
 
    } /* |if (entry == 0 || entry->object == 0)|  */
-
 
 @q **** (4) |entry != 0 && entry->object != 0|.@>   
 
@@ -161,7 +157,6 @@ Added this rule.
 
    } /* |if (entry == 0 || entry->object == 0)|  */
 
-
 @q **** (4) |entry != 0 && entry->object != 0|.@>   
 
 @ |entry != 0 && entry->object != 0|.
@@ -205,7 +200,6 @@ Added this rule.
 
    } /* |if (entry == 0 || entry->object == 0)|  */
 
-
 @q **** (4) |entry != 0|.@>   
 
 @ |entry != 0|.
@@ -224,7 +218,6 @@ signal an error or issue a warning.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ** (2) command --> CLEAR transform_variable.@>
 @*1 \§command> $\longrightarrow$ \.{CLEAR} \§transform variable>.
@@ -245,10 +238,7 @@ Added this rule.
     @=$$@> = static_cast<void*>(0);
 };
 
-
 @q * (0) @>
-
-
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
@@ -258,7 +248,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

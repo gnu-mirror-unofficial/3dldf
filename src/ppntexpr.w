@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) point expressions.  @>
 @** \§point expressions>.
@@ -148,7 +146,6 @@ This condition occurs legitimately when one tries to show an
 
    else /* |entry != 0 && entry->object != 0|  */
       {
-          
 
 @q ***** (5) Try to allocate memory for a new |Point| for |point_primary|.@>        
 
@@ -184,7 +181,6 @@ This condition occurs legitimately when one tries to show an
         @=$$@> = static_cast<void*>(q);           
 
    }  /* |else| (|entry != 0 && entry->object != 0|)  */
-
 
 @q **** (4) @>   
 
@@ -330,7 +326,6 @@ Added this rule.
 
       } /* |if (*p == INVALID_POINT)|  */
 
-
 @q **** (4) |Point::mediate| succeeded.@>   
 
 @ |Point::mediate| succeeded.  Delete |q| and set |point_primary| 
@@ -352,10 +347,8 @@ to |static_cast<void*>(p)|.
 
 };
 
-
 @q ** (2) point_primary: MEDIATE LEFT_PARENTHESIS point_expression @>
 @q ** (2) COMMA point_expression RIGHT_PARENTHESIS.                @>
-
 
 @ \§point primary> $\longrightarrow$ \.{MEDIATE} 
 \.{LEFT\_PARENTHESIS} \§point expression> \.{COMMA} 
@@ -430,7 +423,6 @@ Added this rule.
 
       } /* |if (*p == INVALID_POINT)|  */
 
-
 @q **** (4) |Point::mediate| succeeded.@>   
 
 @ |Point::mediate| succeeded.  Delete |q| and set |point_primary| 
@@ -483,7 +475,6 @@ Removed code from this rule.  Now calling |Scan_Parse::normal_func|.
 
 };
 
-
 @q ** (2) point_primary --> GET_PERPENDICULAR_BASE point_secondary COMMA plane_primary@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_PERPENDICULAR\_BASE} 
 \filename{point secondary} \.{COMMA} \§plane primary>. 
@@ -520,7 +511,6 @@ Added this rule.
    delete p;
    delete q;
 
-
 };
 
 @q ** (2) point_primary --> GET_PERPENDICULAR_BASE point_secondary COMMA reg_polygon_primary@>
@@ -555,7 +545,6 @@ Added this rule.
                                               static_cast<Scanner_Node>(parameter));
 
        @=$$@> = (status == 0) ? static_cast<void*>(base) : 0;
-
 
    }  /* |else|  */
 
@@ -865,14 +854,12 @@ Removed \§optional of>.
       {
         cerr_strm << thread_name << "*** Parser: "
                   << "`point_primary --> UNIT_VECTOR point_primary'.";
-        
 
-        log_message(cerr_strm);
+log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
       }
 #endif /* |DEBUG_COMPILE|  */
-
 
   Point* p = static_cast<Point*>(@=$2@>);
 
@@ -882,11 +869,9 @@ Removed \§optional of>.
 
 };
 
-
 @q ** (2) point_primary --> GET_POINT numeric_secondary path_primary@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_POINT} 
 \§numeric secondary> \§path primary>. 
-
 
 @:!!@> !!  For some reason, a parse error occurs if \§numeric variables> aren't
 enclosed in parentheses.  It doesn't happen with literal numbers, i.e.,  
@@ -1013,7 +998,6 @@ Added this rule.
                                                    parameter);
 };
 
-
 @q ** (2) point_primary --> GET_APPROX_CENTER conic_section_lattice_expression@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_APPROX\_CENTER} 
 \§conic section lattice expression>. 
@@ -1130,7 +1114,6 @@ Changed \§conic section lattice primary> to
   
    Conic_Section_Lattice* c 
       = static_cast<Conic_Section_Lattice*>(@=$2@>); 
-
 
    if (c)
    {
@@ -1398,9 +1381,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 };
 
-
-
-
 @q **** (4) with_conic_section_lattice_option: @> 
 @q **** (4) WITH_CYCLE_VALUE numeric_expression          @> 
 
@@ -1468,7 +1448,6 @@ Revised this rule.
    @=$$@> = static_cast<void*>(0);
 };
 
-
 @q **** (4) with_conic_section_lattice_option: @> 
 @q **** (4) WITH_INCREMENTS numeric_list                 @> 
 
@@ -1491,7 +1470,6 @@ Added this rule.
    Pointer_Vector<real>* pv 
       = static_cast<Pointer_Vector<real>*>(@=$2@>);        
 
-
    if (scanner_node && scanner_node->conic_section_lattice_options)
    {
        
@@ -1503,7 +1481,6 @@ Added this rule.
                conic_section_lattice_options->
                   increment_vector.push_back(**iter);
         }
-
 
    }  /* |if|  */
 
@@ -1544,7 +1521,6 @@ Added this rule.
                conic_section_lattice_options->
                   increment_vector.push_back(**iter);
         }
-
 
    }  /* |if|  */
 
@@ -1723,7 +1699,6 @@ Added this rule.
 
    @=$$@> = static_cast<void*>(0);
 };
-
 
 @q **** (4) with_conic_section_lattice_option: @> 
 @q **** (4) WITH_TRANSFORM transform_primary             @> 
@@ -2048,9 +2023,6 @@ Added this rule.
                                                  parameter);
 };
 
-
-
-
 @q ** (2) point_primary --> GET_CENTER ellipse_primary@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_CENTER} 
 \§ellipse primary>. 
@@ -2077,10 +2049,7 @@ to |Scan_Parse::get_center_func<Ellipse>|.
 
    @=$$@> = Scan_Parse::get_center_func<Ellipse>(static_cast<Ellipse*>(@=$2@>));
 
-
 };
-
-
 
 @q ** (2) point_primary --> GET_CENTER circle_primary@>
 @*1 \§point primary> $\longrightarrow$ \.{GET\_CENTER} 
@@ -2283,7 +2252,6 @@ Added this rule.
 
    @=$$@> = Scan_Parse::get_center_func<Reg_Polygon>(static_cast<Reg_Polygon*>(@=$2@>));
 
-
 };
 
 @q ** (2) point_primary --> GET_CENTER rectangle_primary@>
@@ -2304,7 +2272,6 @@ Added this rule.
 
    @=$$@> = Scan_Parse::get_center_func<Rectangle>(static_cast<Rectangle*>(@=$2@>));
 
-
 };
 
 @q *** (3) point_primary --> GET_CENTER triangle_primary@>
@@ -2324,7 +2291,6 @@ Added this rule.
 {
 
    @=$$@> = Scan_Parse::get_center_func<Triangle>(static_cast<Triangle*>(@=$2@>));
-
 
 };
 
@@ -2395,9 +2361,7 @@ Added this rule.
 
    @=$$@> = Scan_Parse::get_center_func<Ellipsoid>(static_cast<Ellipsoid*>(@=$2@>));
 
-
 };
-
 
 @q *** (3) point_primary --> GET_CENTER sphere_primary@>
 @*2 \§point primary> $\longrightarrow$ \.{GET\_CENTER} 
@@ -2417,9 +2381,7 @@ Added this rule.
 
    @=$$@> = Scan_Parse::get_center_func<Sphere>(static_cast<Sphere*>(@=$2@>));
 
-
 };
-
 
 @q *** (3) point_primary --> GET_APEX cone_primary@>
 @*2 \§point primary> $\longrightarrow$ \.{GET\_APEX} 
@@ -2442,7 +2404,6 @@ Added this rule.
                                        GET_APEX, 
                                        Shape::CONE_TYPE, 
                                        @=$2@>);
-
 
 };
 
@@ -2488,7 +2449,6 @@ Added this rule.
 
 };
 
-
 @q *** (2) point_primary --> GET_CENTER cylinder_primary@>
 @*2 \§point primary> $\longrightarrow$ \.{GET\_CENTER} 
 \§cylinder primary>. 
@@ -2508,9 +2468,7 @@ Added this rule.
 
    @=$$@> = Scan_Parse::get_center_func<Cylinder>(static_cast<Cylinder*>(@=$2@>));
 
-
 };
-
 
 @q *** (3) point_primary --> GET_BASE_CENTER cylinder_primary@>
 @*2 \§point primary> $\longrightarrow$ \.{GET\_BASE\_CENTER} 
@@ -2551,7 +2509,6 @@ Added this rule.
 {
 
    @=$$@> = static_cast<Cylinder*>(@=$2@>)->get_cap_center(parameter);
-
 
 };
 
@@ -2603,7 +2560,6 @@ Added this rule.
 \ENDLOG 
 
 @<Define rules@>=
-
 
    catch (bad_alloc)
       {
@@ -2714,14 +2670,12 @@ the error occurring in code that doesn't seem to be related.
 Added this rule.
 \ENDLOG
 
-
 @q ****** (6) Definition.@> 
 
 @<Define rules@>=
 @=point_primary: GET_ANGLE_POINT numeric_primary ellipse_expression@>@/
 { 
 @q ******* (7) @>
-
 
    Ellipse* e = static_cast<Ellipse*>(@=$3@>); 
 
@@ -2840,8 +2794,7 @@ Added {\TeX} text and edited the formatting.
                  << "Setting `point_primary' on the left-hand side to "
                  << "`INVALID_POINT' and will try to continue.";
 
-       
-       log_message(cerr_strm);
+log_message(cerr_strm);
        cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");
 
@@ -2856,7 +2809,6 @@ Added {\TeX} text and edited the formatting.
 
 @<Define rules@>=
 
-
   else /* |p != 0|  */@;
     {
 
@@ -2869,7 +2821,6 @@ Added {\TeX} text and edited the formatting.
 
       if (@=$2@> == TIMES)
         *p *= @=$3@>;
-
 
 @q ******** (8) |times_or_over == OVER|.@> 
 
@@ -2916,7 +2867,6 @@ Added {\TeX} text and edited the formatting.
 @q ********* (9).@> 
 
           } /* |else if (@=$2@> == OVER)|  */
-
 
 @q ******** (8).@>   
 
@@ -3022,7 +2972,6 @@ Set value of rule to |r|, delete |q|, and exit rule.
 Adding this rule caused a jump from 57 to 111 shift/reduce conflicts.
 \initials{LDF 2004.05.05.}
 
-
 \LOG
 \initials{LDF 2004.05.05.}  
 Added this rule.
@@ -3060,16 +3009,14 @@ Added this rule.
                    << "`point_primary' is invalid."
                    << "Setting `point_secondary' to `INVALID_POINT' "
                    << "and will try to continue.";
-       
 
-         log_message(cerr_strm);
+log_message(cerr_strm);
          cerr_message(cerr_strm, error_stop_value);
          cerr_strm.str("");
        
          p = create_new<Point>(&INVALID_POINT);
 
      }  /* |if (p == 0)|  */@;
-
 
   else /* |p != 0|  */
 
@@ -3124,9 +3071,8 @@ Added this rule.
                    << "`point_primary' is invalid."
                    << "Will try to set `point_secondary' to `INVALID_POINT' "
                    << "and try to continue.";
-       
 
-         log_message(cerr_strm);
+log_message(cerr_strm);
          cerr_message(cerr_strm, error_stop_value);
          cerr_strm.str("");
        
@@ -3154,7 +3100,6 @@ Added this rule.
 
      }  /* |if (p == 0)|  */@;
 
-
   else /* |p != 0|  */
 
     *p *= @=$1@>;
@@ -3162,7 +3107,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(p);
 
 };
-
 
 @q *** (3) point secondary --> point_secondary transformer.  @>
 
@@ -3279,7 +3223,6 @@ latter case, the pointer is deleted.
   else /* |p != 0|  */
     {
 
-
 @q ******** (8) Error handling:  |t == 0|.@> 
 
 @ Error handling:  |t == 0|.
@@ -3302,9 +3245,8 @@ latter case, the pointer is deleted.
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
-      
 
-      @=$$@> = static_cast<void*>(p); 
+@=$$@> = static_cast<void*>(p); 
 
     } /* |if (t == 0)|  */
 
@@ -3327,19 +3269,15 @@ latter case, the pointer is deleted.
     {
       *p *= *t;
 
- 
-      delete t;
+delete t;
 
       @=$$@> = static_cast<void*>(p);       
 
-
     }  /* |else| (|t != 0|)  */
-
 
 @q ******** (8)@> 
 
     }  /* |else| (|p != 0|)  */
-
 
 @q ******* (7) Exit rule.@> 
 
@@ -3383,7 +3321,6 @@ Added \§with z optional> to this rule.
                                         static_cast<Scanner_Node>(parameter));
 
 };
-
 
 @q ****** (6) with_z_optional.@> 
 @*5 \§with z optional>.
@@ -3541,7 +3478,6 @@ Added this rule.
   Point* p = static_cast<Point*>(@=$1@>); 
   Point* q = static_cast<Point*>(@=$3@>); 
 
-
 @q ****** (6) Error handling for |p == 0|.  @>
 @ Error handling for |p == 0|.
 
@@ -3597,7 +3533,6 @@ Added this rule.
 
      }  /* |if (q == 0)|  */@;
 
-
 @q ****** (6) Success!  @>
 @ Success!
 
@@ -3646,7 +3581,6 @@ Added this rule.
 
   Point* p = static_cast<Point*>(@=$1@>); 
   Point* q = static_cast<Point*>(@=$3@>); 
-
 
 @q ****** (6) Error handling for |p == 0|.  @>
 @ Error handling for |p == 0|.
@@ -3702,7 +3636,6 @@ Added this rule.
          delete p;
 
      }  /* |if (q == 0)|  */@;
-
 
 @q ****** (6) Success!  @>
 @ Success!
@@ -3857,7 +3790,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -3866,7 +3798,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) Macros.@>
 @** Macros.
@@ -70,7 +68,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> macro_definition@>
-
 
 @q ** (2) macro_definition --> DEF variable UNDECLARED untyped_parameter_list @>
 @q ** (2) typed_parameter_list  ASSIGN.                                       @> 
@@ -96,7 +93,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-    DEBUG = false;  /* |true|  */
+    DEBUG = false; /* |true| */
     if (DEBUG)
        {
 
@@ -146,7 +143,6 @@ Added this rule.
  
       }  /* |catch (bad_alloc)|  */
 
-
 @q ****** (6).@> 
 
    entry = scanner_node->add_entry(@=$2@>,
@@ -189,7 +185,6 @@ Added this rule.
 
    else /* |entry != 0|  */
       {
-     
 
 @q ******* (7) Call |Scan_Parse::macro_definition_func()|.@> 
 
@@ -203,7 +198,6 @@ Added this rule.
                status = macro_definition_func(scanner_node,
                                               entry); 
             }
-
 
 @q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
 @q ******* (7) throwing |bad_alloc|.                                          @>  
@@ -266,7 +260,6 @@ returning a non-zero value.
 
                 scanner_node->macro_untyped_parameter_vector.clear();
                 scanner_node->macro_typed_parameter_vector.clear();
-
 
                 @=$$@> = static_cast<void*>(0);
      
@@ -310,7 +303,7 @@ Rewrote this rule.
    @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-    DEBUG = false;  /* |true|  */
+    DEBUG = false; /* |true| */
     if (DEBUG)
        {
 
@@ -325,7 +318,6 @@ Rewrote this rule.
            cerr_strm.str("");
        }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ****** (6).@> 
 
@@ -361,7 +353,6 @@ Rewrote this rule.
 
    else /* |entry != 0|  */
       {
-     
 
 @q ******* (7) @> 
 
@@ -404,7 +395,6 @@ Rewrote this rule.
 
             }  /* |if (entry->object == 0)|  */
 
-
 @q ******* (7) Call |Scan_Parse::macro_definition_func()|.@> 
 
 @ Call |Scan_Parse::macro_definition_func()|.
@@ -417,7 +407,6 @@ Rewrote this rule.
                status = macro_definition_func(scanner_node,
                                               entry); 
             }
-
 
 @q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
 @q ******* (7) throwing |bad_alloc|.                                          @>  
@@ -481,7 +470,6 @@ returning a non-zero value.
                 scanner_node->macro_untyped_parameter_vector.clear();
                 scanner_node->macro_typed_parameter_vector.clear();
 
-
                 @=$$@> = static_cast<void*>(0);
      
             }  /* |if (status != 0)|  */
@@ -500,7 +488,6 @@ returning a non-zero value.
 @q ****** (6).@> 
 
 };
-
 
 @q ** (2) macro_definition --> DEF macro_vector_variable untyped_parameter_list @>
 @q ** (2) typed_parameter_list PLUS_ASSIGN. @> 
@@ -522,14 +509,12 @@ Added this rule.
 @=typed_parameter_list PLUS_ASSIGN@>@/
 {
 
-
    macro_vector_definition_func(static_cast<Scanner_Node>(parameter),
                                 static_cast<Id_Map_Entry_Node>(@=$2@>)); 
 
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) typed_parameter_list.@> 
 @* \§typed parameter list>.
@@ -552,7 +537,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=typed_parameter_list: /* Empty  */@>@/ 
 {
@@ -569,7 +553,6 @@ Added this rule.
 \initials{LDF 2004.12.29.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=typed_parameter_list: LEFT_BRACE typed_parameter_sublist RIGHT_BRACE@>@/ 
@@ -599,7 +582,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=typed_parameter_sublist: any_declarator symbolic_token@>@/ 
 {
@@ -623,7 +605,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=typed_parameter_sublist: typed_parameter_sublist COMMA any_declarator symbolic_token@>@/ 
 {
@@ -634,7 +615,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) untyped_parameter_list.@> 
 @* \§untyped parameter list>.
@@ -657,7 +637,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=untyped_parameter_list: /* Empty  */@>@/ 
 {
@@ -675,7 +654,6 @@ Added this rule.
 \initials{LDF 2005.01.02.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>=
 @=untyped_parameter_list: LEFT_PARENTHESIS untyped_parameter_sublist RIGHT_PARENTHESIS@>@/ 
@@ -706,7 +684,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=untyped_parameter_sublist: symbolic_token@>@/ 
 {
@@ -730,7 +707,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=untyped_parameter_sublist: untyped_parameter_sublist COMMA symbolic_token@>@/ 
 {
@@ -742,7 +718,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q * (1) macro_call.@> 
 @* \§macro call>.
@@ -771,7 +746,6 @@ Changed |defun_call| and |defun_variable| to
 |macro_call| and |macro_variable|.
 \ENDLOG
 
-
 @q *** (3) Definition.@> 
 
 @<Define rules@>=
@@ -794,7 +768,6 @@ Changed |defun_call| and |defun_variable| to
 \initials{LDF 2005.01.03.}
 Added this rule.
 \ENDLOG
-
 
 @q *** (3) Definition.@> 
 
@@ -820,7 +793,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @q *** (3) Definition.@> 
 
 @<Define rules@>=
@@ -833,10 +805,8 @@ Added this rule.
 
 };
 
-
 @q * (0) @>
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -845,7 +815,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -854,5 +823,4 @@ Added this rule.
 @q fill-column:80                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Transformations.@>
 @** Transformations\quad ({\tt transform\PERIOD web}).\hfil
@@ -158,9 +157,7 @@ Transform::Transform(real r)
   for(int i = 0; i < 4; i++)
     for(int j = 0; j < 4; j++)
       transform_matrix[i][j] = r;
-}   
-
-    
+}
 
 @q *** (3) Constructor with 16 {\bf real} arguments.@>
 @*2 Constructor with 16 {\bf real} arguments.  
@@ -219,10 +216,8 @@ Added |Scanner_Node scanner_node| argument.
 Transform* 
 create_new(const Transform* t, Scanner_Node scanner_node = 0);
 
-
 Transform* 
 create_new(const Transform& t, Scanner_Node scanner_node = 0);
-
 
 @q ** (2) Operators.@>
 @*1 Operators.
@@ -265,8 +260,6 @@ Transform::operator=(const Transform& t)
 @*2 Equality.@>
 @^\cofunc{Transform}{==}@>
 \initials{LDF 2007.10.02.}
-
-
 
 @q **** (4)Is Equal.@>
 @*3 Is Equal.
@@ -365,8 +358,6 @@ Transform::is_unequal(const Transform& t, real tolerance) const
 
 }  /* End of |Transform::is_unequal| definition.  */
 
-
-
 @q **** (4) Operator.@>
 @*3 Operator.
 @^\cofunc{Transform}{!=}@>
@@ -411,7 +402,6 @@ void Transform::reset()
     }
 }
 
-
 @q ** (2) Setting values.@>
 @*1 Setting values.@>
 @^\cfunc{Transform}{set\_element}@>
@@ -432,7 +422,6 @@ Transform::set_element(const unsigned short row,
   transform_matrix[row][col] = (fabs(r) < epsilon()) ? 0 : r;
   return;
 }
-
 
 @q ** (2) Clean.@>
 @*1 Clean.  
@@ -571,7 +560,6 @@ Transform::get_element(const unsigned short row,
 {
   return transform_matrix[row][col];
 }
-
 
 @q ** (2) Show. @>
 @*1 Show.
@@ -717,9 +705,8 @@ Transform::shear(real xy, real xz, real yx, real yz,
 
   if (fabs(zy) < eps)
     zy = 0;
-  
 
-  if (   xy == ZERO_REAL 
+if (   xy == ZERO_REAL 
       && xz == ZERO_REAL 
       && yx == ZERO_REAL 
       && yz == ZERO_REAL 
@@ -743,7 +730,6 @@ Transform::shear(real xy, real xz, real yx, real yz,
   clean();
   return t;
 }
-
 
 @q *** (3) Shift (translation). @>
 @*2 Shift. (Translation.)
@@ -801,7 +787,7 @@ shift_times(real x, real y = 1, real z = 1);
 Transform 
 Transform::shift_times(real x, real y, real z)
 {
-  bool DEBUG = false; /* |true|  */@;
+  bool DEBUG = false; /* |true| */@;
 
   if (DEBUG)
     {
@@ -840,7 +826,7 @@ rotate(real x, real y = 0, real z = 0);
 Transform 
 Transform::rotate(real x, real y, real z)
 {
-  bool DEBUG = false; /* |true|  */@;  
+  bool DEBUG = false; /* |true| */@;  
   Transform t_all;
   real eps = epsilon();
 
@@ -889,7 +875,6 @@ Transform::rotate(real x, real y, real z)
 
     } // |if|
 
-
 @ Rotation around the y-axis.
 @<Define |Transform| functions@>=
 
@@ -914,7 +899,6 @@ Transform::rotate(real x, real y, real z)
               = (fabs(temp1) >= eps) ? temp1 : 0;       
           }
     } // |if|
-
 
 @ Rotation around the z-axis.
 @<Define |Transform| functions@>=
@@ -942,7 +926,6 @@ Transform::rotate(real x, real y, real z)
   t_all *= t_x;
   t_all *= t_y;
   t_all *= t_z;
-
 
   t_all.clean();
 
@@ -995,7 +978,6 @@ to |rotate|.  This function now overloads |rotate| with three
 @<Declare |Transform| functions@>=
 Transform
 rotate(const Path& p,  const real angle = 180);
-
 
 @q ** (2) Alignment with an axis. @>
 @*1 Alignment with an axis.
@@ -1059,8 +1041,6 @@ Transform::operator*=(real r)
   return r;
 }
 
-
-
 @q *** (3) Transform argument.@>
 @*2 {\bf Transform} argument.
 @^\cofunc{Transform}{*=}@>
@@ -1089,7 +1069,7 @@ operator*=(const Transform& t);
 Transform
 Transform::operator*=(const Transform& t)
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
   if (DEBUG) 
     cout << "Entering Transform::operator*=().\n";
 
@@ -1132,7 +1112,6 @@ Transform::operator*=(const Transform& t)
   return t;
 }  
 
-
 @q ** Plain multiplication.@>
 @ Plain multiplication.
 
@@ -1157,7 +1136,6 @@ Transform::operator*(const real r) const
   return t;
 }
 
-
 @q *** Transform argument.@>
 @ {\bf Transform} argument.
 @^\cofunc{Transform}{*}@>
@@ -1175,7 +1153,6 @@ Transform::operator*(const Transform t) const
   a.clean();
   return a;
 }
-
 
 @q * (1) Transform_Matrix inversion.@>
 @* Matrix inversion.  
@@ -1226,7 +1203,7 @@ inverse(void) const;
 Transform
 Transform::inverse(void) const
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
   if (DEBUG)
     cout << "Entering Transform::inverse()." << endl;
   int i;
@@ -1280,7 +1257,6 @@ Transform::inverse(void) const
 
 @ Pivot search. 
 @<Define |Transform| functions@>= 
-
 
       max = fabs(t.transform_matrix[j][j]);
       row = j;
@@ -1387,9 +1363,8 @@ functions called ``|inverse|'' and ``|invert|'' would be
 confusing.
 \ENDLOG 
 
-@q *** (3) Declaration.@> 
+@q *** (3) Declaration.@>
 
- 
 @<Declare |Transform| functions@>=
 Transform
 inverse(bool assign);
@@ -1401,7 +1376,7 @@ inverse(bool assign);
 Transform
 Transform::inverse(bool assign)
 {
-  bool DEBUG = false; /* |true|  */@; 
+  bool DEBUG = false; /* |true| */@; 
   if (DEBUG)
     cout << "Entering Transform::inverse(bool assign).\n";
 
@@ -1439,9 +1414,8 @@ Added this section.
 Added this function.  
 \ENDLOG 
 
-@q *** (3) Declaration.@> 
+@q *** (3) Declaration.@>
 
- 
 @<Declare |Transform| functions@>=
 Transform
 transpose(bool assign);
@@ -1472,7 +1446,6 @@ Transform::transpose(bool assign)
 
 }  /* End of |Transform::transpose(bool assign)| definition.  */
 
-
 @q ** (2) const version (no assignment).@>
 @*1 {\bf const} version (no assignment).
 @^\cfunc{Transform}{transpose}@>
@@ -1501,9 +1474,6 @@ Transform::transpose(void) const
   return t.transpose(true);
 
 }  /* End of |Transform::transpose(void) const| definition.  */
-
-
-
 
 @q * (1) Global variables. @>
 @* Global variables.
@@ -1546,7 +1516,6 @@ extern const Transform IDENTITY_TRANSFORM;
 @<Declarations for the header file@>@;
 #endif
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>
@@ -1561,4 +1530,3 @@ extern const Transform IDENTITY_TRANSFORM;
 @q eval:(outline-minor-mode) @>
 @q End: @>
 
-   

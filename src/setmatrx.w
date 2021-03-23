@@ -1,7 +1,6 @@
 @q setmatrx.w @> 
 @q Created by Laurence Finston (LDF) Wed Nov 28 20:16:10 CET 2007 @>       
 
-
 @q * (0) Copyright and License.@>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
@@ -49,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q *** (3) command --> SET matrix_variable set_matrix_option_list.@> 
 
@@ -212,7 +210,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -221,7 +218,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

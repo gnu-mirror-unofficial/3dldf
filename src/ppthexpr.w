@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) path expressions.@>
 @** path expressions.
@@ -98,13 +96,11 @@ in the |Id_Map_Entry_Node|.
       cerr_strm << thread_name 
                 << "*** Parser: `path_primary --> path_variable'.";
 
-
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
@@ -133,14 +129,12 @@ in the |Id_Map_Entry_Node|.
  
     } /* |if (entry == 0)|  */
 
-
 @q ***** (5) |entry != 0|.@> 
 
 @ |entry != 0|.
 \initials{LDF 2004.10.27.}
 
 @<Define rules@>=
-
 
   else /* |entry != 0|  */
     {
@@ -167,8 +161,6 @@ an ``unknown |path|''.
              @=$$@> = static_cast<void*>(0);
 
           } /* |if (p == 0)|  */
-
-
 
 @q ****** (6) Try to allocate memory for a new |Path|.@>        
 
@@ -205,18 +197,14 @@ Put the following code inside an |else| clause.
                     cerr_strm.str("");
 
                     throw;
-                
-                
-                }  /* |catch (bad_alloc)|  */
 
+}  /* |catch (bad_alloc)|  */
 
         @=$$@> = static_cast<void*>(q); 
-
 
 @q ******* (7).@> 
 
       }  /* |else| (|p != 0|)  */
-
 
 @q ****** (6).@> 
 
@@ -281,7 +269,6 @@ Removed debugging code.
   @=$$@> = static_cast<void*>(p);  
 
 };
-
 
 @q *** (3) path_primary --> SUBPATH numeric_list OF path_primary  @>
 @*2 \§path primary> $\longrightarrow$ \.{SUBPATH} \§numeric list>
@@ -348,7 +335,6 @@ of the points on the path is the same.
            << "`path_primary' on the right-hand side "
            << endl << "and proceeding with fingers crossed."
            << endl; 
-
 
       if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
         {
@@ -421,7 +407,6 @@ of the points on the path is the same.
 
 };
 
-
 @q *** (3) path_primary --> SEGMENT ellipse_primary                  @>
 @q *** (3) WITH_START numeric_expression WITH_END numeric_expression @>
 @q *** (3) with_closed_optional with_angle_optional.                 @>   
@@ -472,7 +457,6 @@ Removed debugging code.
    @=$$@> = static_cast<void*>(p); 
 
 };
-
 
 @q *** (3) path_primary --> HALF ellipse_primary    @>
 @q *** (3) with_closed_optional with_angle_optional @>
@@ -671,7 +655,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=with_start_optional: /* Empty  */@>@/
 {
@@ -690,7 +673,6 @@ Added this rule.
         cerr_strm.str("");
       }
 #endif /* |DEBUG_COMPILE|  */
-
 
    @=$$@> = ZERO_REAL;
 
@@ -749,7 +731,6 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=with_closed_optional: /* Empty  */@>@/
 {
@@ -768,7 +749,6 @@ Added this rule.
         cerr_strm.str("");
       }
 #endif /* |DEBUG_COMPILE|  */
-
 
    @=$$@> = 0;
 
@@ -881,7 +861,6 @@ Replaced |solid_like_primary| with |cuboid_primary|.
 
   const Path* t = s->get_path_ptr(u); 
 
-
 @q **** (4) Error handling:  |Cuboid::get_path_ptr()| returned 0.@>   
 
 @ Error handling:  |Cuboid::get_path_ptr()| returned 0.
@@ -910,7 +889,6 @@ Replaced |solid_like_primary| with |cuboid_primary|.
 
    } /* |if (t == 0)|  */
 
-
 @q **** (4) Try to allocate memory on free store for |path_primary|.@>   
 
 @ Try to allocate memory on free store for \§path primary>.
@@ -924,7 +902,6 @@ Replaced |solid_like_primary| with |cuboid_primary|.
           {
             p = create_new<Path>(t, scanner_node);
           }
-
 
 @q ***** (5) Error handling:  |create_new<Path>()| failed.@> 
 
@@ -954,8 +931,6 @@ Replaced |solid_like_primary| with |cuboid_primary|.
                throw;
 
             } /*        |catch (bad_alloc)|  */
-
-
 
 @q **** (4) Delete |s|, set |path_primary| to              @>   
 @q **** (4) |static_cast<void*>(p)|, and exit rule successfully.@>   
@@ -1018,7 +993,6 @@ Added this rule.
                                        @=$2@>);
 };
 
-
 @q *** (3) path_primary --> GET_PATH INTEGER cone_primary.@>
 @*1 \§path primary> $\longrightarrow$ \.{INTEGER} \.{GET\_PATH}
 \§cone primary>. 
@@ -1041,8 +1015,6 @@ Added this rule.
                                        @=$3@>,
                                        @=$2@>);
 };
-
-
 
 @q ***** (5) path_primary --> LAST @>
 @q ***** (5) path_vector_expression.@>
@@ -1178,9 +1150,6 @@ Added this rule.
 
 };
 
-
-
-
 @q ***** (5) path_primary --> GENERATE nurb_expression @>
 @q ***** (5) WITH_POWER numeric_expression             @> 
 @q ***** (5) WITH_TIME_PARAMETER numeric_expression.   @> 
@@ -1207,7 +1176,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG)
       {
           cerr_strm << thread_name 
@@ -1294,7 +1263,6 @@ It simply duplicated |n|.
                                @=$6@>,
                                p);
 
-
 @q ******* (7) @>           
 
          if (status != 0)
@@ -1319,7 +1287,6 @@ It simply duplicated |n|.
 
 @q ******* (7) @> 
 
-
         else  /* |status == 0|  */
            {
 
@@ -1343,14 +1310,12 @@ It simply duplicated |n|.
                @=$$@> = static_cast<void*>(p); 
 
            }  /* |else| (|status == 0|)  */
-           
 
-      }  /* |else| (|n != 0|)  */
+}  /* |else| (|n != 0|)  */
  
 @q ****** (6).@> 
 
 };
-
 
 @q *** (3) path_primary --> GET_BRANCH numeric_secondary hyperbola_primary.@>
 @*1 \§path primary> $\longrightarrow$ \.{GET\_BRANCH} 
@@ -1481,7 +1446,6 @@ Removed debugging code.
 @=path_expression@>@/ 
 {
 
-
     Path* p = reflect_in_func<Path>(static_cast<Scanner_Node>(parameter),
                                     static_cast<Path*>(@=$1@>),
                                     static_cast<Path*>(@=$3@>));
@@ -1568,8 +1532,7 @@ Added this rule.
     delete q;
     q = 0;
 
-    @=$$@> = static_cast<void*>(p); 
-   
+    @=$$@> = static_cast<void*>(p);
 
 };
 
@@ -1591,8 +1554,6 @@ Added this rule.
    
 };
 
-
-
 @q **** (4) path_join.@>
 @*3 \§path join>.
 
@@ -1609,7 +1570,6 @@ Added this rule.
   strcpy(@=$$@>, @=$1@>);
   
 };
-
 
 @q *** (3) basic_path_join.@>
 @*2 \§basic path join>.
@@ -1672,13 +1632,11 @@ Added this rule.
 
 };
 
-
 @q ** (2) path expression.  @>
 @*1 \§path expression>.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> path_expression@>
-
 
 @q *** (3) path expression --> path_tertiary.  @>
 @*2 \§path expression> $\longrightarrow$ \§path tertiary>.
@@ -1729,7 +1687,6 @@ Added this rule.
 
   p->append(*q, @=$2@>, true);  
 
-
   @=$$@> = static_cast<void*>(p); 
 
 };
@@ -1766,8 +1723,6 @@ Now calling |p->adjust_connectors()|.
   @=$$@> = static_cast<void*>(p); 
 
 };
-
-
 
 @q **** (4) path_element_list  @>   
 @*3 \§path element list>.
@@ -1815,7 +1770,6 @@ Removed debugging code.
     @=$$@> = static_cast<void*>(q); 
 
 };
-
 
 @q ***** (5) path_element_list --> path_element_list @>   
 @q ***** (5) path_join point_expression.             @>   
@@ -1871,7 +1825,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) path_element_list --> path_element_list path_join CYCLE.  @>   
 @ \§path element list> $\longrightarrow$ 
 \§path element list> \§path join> \.{CYCLE}.
@@ -1895,7 +1848,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1904,7 +1856,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

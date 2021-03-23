@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
 
 @q * (0) Glyphs.@>
 @** Glyphs\quad ({\tt glyphs\PERIOD web}).\hfil
@@ -158,7 +157,6 @@ class Glyph
 Added this function.
 \ENDLOG
 
-
 @q *** (3) Declaration.  @>
 
 @<Declare |Glyph| functions@>=
@@ -232,7 +230,6 @@ Added this function.
 Glyph* 
 create_new(const Glyph& c, Scanner_Node scanner_node);
 
-
 @q * (1) Assignment.@> 
 @* Assignment.
 \initials{LDF 2005.06.08.}
@@ -241,7 +238,6 @@ create_new(const Glyph& c, Scanner_Node scanner_node);
 \initials{LDF 2005.06.08.}
 Added this section.
 \ENDLOG
-
 
 @q ** (2) Assignment from a |Glyph|.@> 
 @*1 Assignment from a |Glyph|.
@@ -286,7 +282,6 @@ Glyph::operator=(const Glyph& c)
 Added this section.
 \ENDLOG
 
-
 @q *** (3) Multiplication by a |Transform| with assignment.@>
 @*2 Multiplication by a |Transform| with assignment.
 @^\cofunc{Glyph}{*=}@>
@@ -310,7 +305,6 @@ Glyph::operator*=(const Transform& t)
 {
    return t;
 }
-
 
 @q ** (2) Rotatation around the main axes.@>
 @*1 Rotation  around the main axes. 
@@ -375,7 +369,6 @@ Glyph::scale(real x, real y, real z)
 Added this function.
 \ENDLOG
 
-
 @<Declare |Glyph| functions@>=
 
 virtual
@@ -404,7 +397,6 @@ Glyph::shear(real xy, real xz, real yx, real yz,
 Added this section.
 \ENDLOG
 
-
 @q *** (3) |real| arguments.@>
 @*2 {\bf real} arguments. 
 @^\cfunc{Glyph}{shift}@>
@@ -431,7 +423,6 @@ Glyph::shift(real xx, real yy, real zz)
   return operator*=(t);
 }
 
-
 @q *** (3) Point argument.@>
 
 @*2 {\bf Point} argument. 
@@ -456,7 +447,6 @@ Glyph::shift(const Point& p)
 {
   return shift(p.get_x(), p.get_y(), p.get_z());
 }
-
 
 @q ** (2) Shift times. @>
 @*1 Shift times. 
@@ -595,9 +585,6 @@ Glyph::rotate(const Path& p, const real angle)
                  p.get_last_point(), angle);  
 }   
 
-
-
-
 @q * (1) Show.@> 
 @* Show.
 \initials{LDF 2005.06.08.}
@@ -620,7 +607,6 @@ show(string text = "",
      Focus* f = 0, 
      const unsigned short proj = 0,
      const real factor = 1) const;
-
 
 @q ** (2) Definition.@> 
 
@@ -678,7 +664,6 @@ Glyph_Set_Option_Struct
 \initials{LDF 2005.06.08.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Constructors.  @>
 @*2 Constructors.
@@ -768,7 +753,6 @@ Glyph_Set_Option_Struct::clear(void)
 
 }  /* End of |Glyph_Set_Option_Struct::clear()| definition.  */
 
-
 @q * (1) Putting Glyph together. @>
 @* Putting {\bf Glyph} together.
 
@@ -789,7 +773,6 @@ This is what's compiled.
 @<Define |struct Glyph_Set_Option_Struct|@>@;
 @<Declare non-member template functions for |Glyph|@>@;
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

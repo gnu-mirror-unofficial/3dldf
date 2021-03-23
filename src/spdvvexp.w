@@ -49,9 +49,6 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-
-
-
 @q * (0) |sphere_development_vector| expressions.@>
 @** \§sphere development vector> expressions.
 \initials{LDF 2009.11.10.}
@@ -61,7 +58,6 @@
 Created this file.
 \ENDLOG 
 
-
 @q * (1) |sphere_development_vector| primary.  @>
 @* \§sphere development vector primary>.
 \initials{LDF 2009.11.10.}
@@ -70,7 +66,6 @@ Created this file.
 \initials{LDF 2009.11.10.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> sphere_development_vector_primary@>@/
@@ -129,7 +124,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) sphere_development_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) sphere_development_vector_expression  RIGHT_PARENTHESIS.@>
 
@@ -183,7 +177,6 @@ Added this rule.
 
 };
 
-
 @q * (1) sphere_development_vector tertiary.  @>
 
 @* \§sphere development vector tertiary>.
@@ -216,7 +209,6 @@ Added this rule.
 
 };
 
-
 @q * (1) sphere_development_vector expression.@>
 @* \§sphere development vector expression>.
 
@@ -244,8 +236,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -254,7 +244,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -263,5 +252,4 @@ Added this rule.
 @q fill-column:80                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

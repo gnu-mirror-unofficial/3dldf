@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * polyhedron expressions.  @>
 @** {\bf polyhedron} expressions.
@@ -120,7 +118,6 @@ an ``unknown |tetrahedron|''.
 
 @q *** polyhedron_primary --> polyhedron_argument.@>
 @ \§polyhedron primary> $\longrightarrow$ \§polyhedron argument>.  
-
 
 @q *** polyhedron_primary --> ( polyhedron_expression )  @>
 @ \§polyhedron primary> $\longrightarrow$ `\.{\LP}' 
@@ -288,7 +285,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) polyhedron secondary.  @>
 @*1 \§polyhedron secondary>.
 \initials{LDF 2004.08.30.}  
@@ -385,7 +381,6 @@ Removed debugging code.
 @=path_expression@>@/ 
 {
 
-
    Polyhedron* p = reflect_in_func<Polyhedron>(static_cast<Scanner_Node>(parameter),
                                              static_cast<Polyhedron*>(@=$1@>),
                                              static_cast<Path*>(@=$3@>));
@@ -394,11 +389,8 @@ Removed debugging code.
 
 };
 
-
-
 @q ** (2) polyhedron tertiary.  @>
 @*1 \§polyhedron tertiary>.
-
 
 \LOG
 \initials{LDF 2004.08.30.}  
@@ -410,7 +402,6 @@ Added this section.
 
 @q *** polyhedron tertiary --> polyhedron_secondary.  @>
 @ \§polyhedron tertiary> $\longrightarrow$ \§polyhedron secondary>.
-
 
 \LOG
 \initials{LDF 2004.08.30.}
@@ -438,8 +429,6 @@ Added this rule.
 
 }
 ;
-
-
 
 @q ** polyhedron expression.  @>
 @ \§polyhedron expression>.
@@ -481,7 +470,6 @@ Added this rule.
 }
 ;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -490,7 +478,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

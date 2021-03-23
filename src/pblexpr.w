@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) boolean expressions.  @>
 @** boolean expressions.
@@ -98,7 +96,6 @@ Added this rule.
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-
 @q *** (3) Error handling: |entry == 0 || entry->object == 0|.@>
 
 @ Error handling: |entry == 0 || entry->object == 0|.
@@ -125,7 +122,6 @@ It is now in the following |else| clause.
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
-
 @q *** (3) |!(entry == 0 || entry->object == 0)|.@>
 
 @ |!(entry == 0 || entry->object == 0)|.
@@ -139,15 +135,12 @@ it before the |if| clause.
 
 @<Define rules@>=
 
-
   else /* |entry != 0 && entry->object != 0|  */
     {
 
-
        bool* b;
-   
 
-            b = new bool;
+b = new bool;
 
       *b = *static_cast<bool*>(entry->object); 
       
@@ -158,8 +151,6 @@ it before the |if| clause.
 @q *** (3).@> 
 
 };
-
-
 
 @q ** (2) boolean_primary --> boolean_argument.@>
 @*1 \§boolean primary> $\longrightarrow$ \§boolean argument>.  
@@ -180,9 +171,8 @@ Added this rule.
 {
 
     bool* b;
-   
 
-         b = new bool;
+b = new bool;
 
       *b = 1;
       
@@ -191,8 +181,6 @@ Added this rule.
 @q **** (4) @>   
 
 };
-
-
 
 @q ** (2) boolean_primary --> FALSE.@>
 @*1 \§boolean primary> $\longrightarrow$ \.{FALSE}.
@@ -207,9 +195,8 @@ Added this rule.
 {
 
     bool* i;
-   
 
-         i = new bool;
+i = new bool;
 
       *i = 0;
       
@@ -254,7 +241,6 @@ be accounted for in the parser rules.
 I am leaving this rule here as an example, but commenting it out.
 I will not be using this approach for the present. 
 \initials{LDF 2007.11.28.}
-
 
 \LOG
 \initials{LDF 2007.11.28.}
@@ -338,11 +324,9 @@ Added this rule.
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
-
     bool* i;
-      
 
-    i = new bool;
+i = new bool;
 
 @q **** (4) Error handling:  |new bool| failed.  Rethrow |bad_alloc|.@>   
 
@@ -358,7 +342,6 @@ Added this rule.
 
 @<Define rules@>=
 
-
 @q **** (4).@> 
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
@@ -370,7 +353,6 @@ Added this rule.
       
     }  /* |if (entry == 0)|  */@;
 
-
 @q **** (4).@> 
   
   else if (entry->known_state == Id_Map_Entry_Type::KNOWN)
@@ -378,7 +360,6 @@ Added this rule.
         *i = 1;
         @=$$@> = static_cast<void*>(i);
      }
-    
 
 @q **** (4).@> 
 
@@ -396,7 +377,6 @@ Added this rule.
 @*3 \§boolean primary> $\longrightarrow$ `\.{IS\_UNKNOWN}' 
 \§any variable>. 
 
-
 \LOG
 \initials{LDF 2004.05.17.}  
 Added this rule.
@@ -410,14 +390,12 @@ Added this rule.
    
     i = new bool;
 
-
 @q **** (4) |new bool| succeeded.@> 
 
 @ |new bool| succeeded.
 \initials{LDF 2004.10.26.}
 
 @<Define rules@>=
-
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
@@ -429,12 +407,10 @@ Added this rule.
       *i = 1;
   
       @=$$@> = static_cast<void*>(i);
-      
-      
-    }  /* |if (entry == 0)|  */@;
 
-  
-  else if (entry->known_state == Id_Map_Entry_Type::KNOWN)
+}  /* |if (entry == 0)|  */@;
+
+else if (entry->known_state == Id_Map_Entry_Type::KNOWN)
      {
         *i = 0;
         @=$$@> = static_cast<void*>(i);
@@ -614,14 +590,9 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
 
 };
 
-
-
-
-
 @q ** (2) boolean_primary --> NOT boolean_primary.@>
 @*1 \§boolean primary> $\longrightarrow$ 
 \.{NOT} \§boolean primary>. 
-
 
 \LOG
 \initials{LDF 2004.10.02.}
@@ -698,9 +669,7 @@ Added this rule.
 
         @=$$@> = static_cast<void*>(i);
 
-
       }  /* |if (entry == 0)|  */
-
 
 @q **** (4) |entry != 0|.@> 
 
@@ -708,7 +677,6 @@ Added this rule.
 \initials{LDF 2004.10.02.}
 
 @<Define rules@>=
-
 
    else  /* |entry != 0|  */
       {
@@ -719,11 +687,9 @@ Added this rule.
 
       }  /* |else| (|entry != 0|)  */
 
-
 @q **** (4).@> 
 
 };
-
 
 @q ** (2) boolean_primary --> IS_BIG_ENDIAN.@>
 @*1 \§boolean primary> $\longrightarrow$ \§type predicate> 
@@ -752,13 +718,11 @@ Added this rule.
 
 @<Define rules@>=
 
-
    *i = (System::is_big_endian()) ? 1 : 0;
 
    @=$$@> = static_cast<void*>(i); 
 
 };
-
 
 @q ** (2) boolean_primary --> IS_LITTLE_ENDIAN.@>
 @*1 \§boolean primary> $\longrightarrow$ \§type predicate> 
@@ -787,13 +751,11 @@ Added this rule.
 
 @<Define rules@>=
 
-
    *i = (System::is_little_endian()) ? 1 : 0;
 
    @=$$@> = static_cast<void*>(i); 
 
 };
-
 
 @q * (1) type_predicate.@>
 @* \§type predicate>.
@@ -805,7 +767,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> type_predicate@>
-
 
 @q ** (2) type_predicate --> IS_BOOLEAN.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_BOOLEAN}.
@@ -873,7 +834,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) type_predicate --> IS_BOOL_POINT.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_BOOL\_POINT}.
 
@@ -937,8 +897,6 @@ Added this rule.
   @=$$@> = STRING_VECTOR;
 
 };
-
-
 
 @q ** (2) type_predicate --> IS_NUMERIC.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_NUMERIC}.
@@ -1100,8 +1058,6 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) type_predicate --> IS_TRANSFORM.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_TRANSFORM}.
 \initials{LDF 2004.10.02.}
@@ -1136,7 +1092,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) type_predicate --> IS_ORIGAMI_FIGURE.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_ORIGAMI\_FIGURE}.
 \initials{LDF 2005.02.04.}
@@ -1170,8 +1125,6 @@ Added this rule.
    @=$$@> = ORIGAMI_FIGURE_VECTOR;
 
 };
-
-
 
 @q ** (2) type_predicate --> IS_POINT.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_POINT}.
@@ -1237,8 +1190,6 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) type_predicate --> IS_PATH.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_PATH}.
 
@@ -1271,8 +1222,6 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) type_predicate --> IS_TRIANGLE.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_TRIANGLE}.
 
@@ -1304,7 +1253,6 @@ Added this rule.
   @=$$@> = TRIANGLE_VECTOR;
 
 };
-
 
 @q ** (2) type_predicate --> IS_POLYGON.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_POLYGON}.
@@ -1339,8 +1287,6 @@ Added this rule.
   @=$$@> = POLYGON_VECTOR;
 
 };
-
-
 
 @q ** (2) type_predicate --> IS_REG_POLYGON.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_REG\_POLYGON}.
@@ -1422,7 +1368,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) type_predicate --> IS_ELLIPSE_VECTOR.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_ELLIPSE\_VECTOR}.
 
@@ -1438,7 +1383,6 @@ Added this rule.
   @=$$@> = ELLIPSE_VECTOR;
 
 };
-
 
 @q ** (2) type_predicate --> IS_CIRCLE.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_CIRCLE}.
@@ -1488,7 +1432,6 @@ Added this rule.
   @=$$@> = PARABOLA;
 
 };
-
 
 @q ** (2) type_predicate --> IS_PARABOLA_VECTOR.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_PARABOLA\_VECTOR}.
@@ -1541,7 +1484,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) type_predicate --> IS_CONIC_SECTION_LATTICE.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_CONIC\_SECTION\_LATTICE}.
 \initials{LDF 2007.07.29.}
@@ -1576,7 +1518,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) type_predicate --> IS_ELLIPSOID.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_ELLIPSOID}.
 \initials{LDF 2005.12.01.}
@@ -1593,7 +1534,6 @@ Added this rule.
   @=$$@> = ELLIPSOID;
 
 };
-
 
 @q ** (2) type_predicate --> IS_ELLIPSOID_VECTOR.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_ELLIPSOID\_VECTOR}.
@@ -1612,7 +1552,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) type_predicate --> IS_SPHERE.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_SPHERE}.
 \initials{LDF 2005.12.01.}
@@ -1629,7 +1568,6 @@ Added this rule.
   @=$$@> = SPHERE;
 
 };
-
 
 @q ** (2) type_predicate --> IS_SPHERE_VECTOR.@>
 @*1 \§type predicate> $\longrightarrow$ \.{IS\_SPHERE\_VECTOR}.
@@ -1741,7 +1679,6 @@ debugging code.
 @*1 \§boolean primary> $\longrightarrow$ \.{IS\_CYCLE}
 \§circle expression>. 
 
-
 \LOG
 \initials{LDF 2005.10.24.}
 Added this rule.
@@ -1761,7 +1698,6 @@ Added this rule.
 @q ** (2) boolean_primary --> IS_CYCLE ellipse_expression.@>
 @*1 \§boolean primary> $\longrightarrow$ \.{IS\_CYCLE}
 \§ellipse expression>. 
-
 
 \LOG
 \initials{LDF 2005.10.24.}
@@ -1783,7 +1719,6 @@ Added this rule.
 @*1 \§boolean primary> $\longrightarrow$ \.{IS\_CYCLE}
 \§rectangle expression>. 
 
-
 \LOG
 \initials{LDF 2005.10.24.}
 Added this rule.
@@ -1803,7 +1738,6 @@ Added this rule.
 @q ** (2) boolean_primary --> IS_CYCLE triangle_expression.@>
 @*1 \§boolean primary> $\longrightarrow$ \.{IS\_CYCLE}
 \§triangle expression>. 
-
 
 \LOG
 \initials{LDF 2005.10.24.}
@@ -1825,7 +1759,6 @@ Added this rule.
 @*1 \§boolean primary> $\longrightarrow$ \.{IS\_CYCLE}
 \§polygon expression>. 
 
-
 \LOG
 \initials{LDF 2005.10.24.}
 Added this rule.
@@ -1845,7 +1778,6 @@ Added this rule.
 @q ** (2) boolean_primary --> IS_CYCLE reg_polygon_expression.@>
 @*1 \§boolean primary> $\longrightarrow$ \.{IS\_CYCLE}
 \§regular polygon expression>. 
-
 
 \LOG
 \initials{LDF 2005.10.24.}
@@ -1880,9 +1812,8 @@ Added this rule.
 {
 
     bool* i;
-   
 
-    i = new bool;
+i = new bool;
 
 @q **** (4) |new bool| succeeded.@> 
 
@@ -1908,7 +1839,6 @@ which was incorrect.
 @*1 \§boolean primary> $\longrightarrow$ 
 \.{IS\_ODD} \§numeric primary>. 
 \initials{LDF 2004.10.02.}
-
 
 \LOG
 \initials{LDF 2004.10.02.}
@@ -2019,7 +1949,6 @@ Removed debugging code.
    @=$$@> = static_cast<void*>(i);
 
 };
-
 
 @q ** (2) boolean_primary --> IS_PLANAR path_expression.@>
 @*1 \§boolean primary> 
@@ -2155,7 +2084,6 @@ Removed debugging code.
     @=$$@> = static_cast<void*>(i);
 };
 
-
 @q ** (2) boolean_primary --> IS_RECTANGULAR path_expression.@>
 @*1 \§boolean primary> 
 $\longrightarrow$ \.{IS\_RECTANGULAR} \§path expression>.
@@ -2187,7 +2115,6 @@ Removed debugging code.
     @=$$@> = static_cast<void*>(i);
 
 };
-
 
 @q ** (2) boolean_primary --> IS_SQUARE path_expression.@>
 @*1 \§boolean primary> 
@@ -2254,8 +2181,6 @@ Removed debugging code.
 
 };
 
-
-
 @q ** (2) boolean_primary --> IS_CONVEX_POLYGONAL path_expression.@>
 @*1 \§boolean primary> 
 $\longrightarrow$ \.{IS\_CONVEX\_POLYGONAL} \§path expression>.
@@ -2289,7 +2214,6 @@ Removed debugging code.
     @=$$@> = static_cast<void*>(i);
 
 };
-
 
 @q ** (2) boolean_primary --> IS_ELLIPTICAL path_expression.@>
 @*1 \§boolean primary> 
@@ -2375,9 +2299,6 @@ Added this rule.
 
 };
 
-
-
-
 @q ** (2) boolean_primary --> IS_CIRCULAR path_expression.@>
 @*1 \§boolean primary> 
 $\longrightarrow$ \.{IS\_CIRCULAR} \§path expression>.
@@ -2428,7 +2349,6 @@ Added this rule.
 
 @q * (1) |Point| locations.@> 
 
-
 @q ** (2) boolean_primary --> point_expression IS_ON_SEGMENT @>
 @q ** (2) path_expression.                                   @>
 @*1 \§boolean primary> 
@@ -2478,7 +2398,6 @@ Removed debugging code.
 
       @=$$@> = static_cast<void*>(b);
 
-
 @q **** (4) @>   
 
 };
@@ -2520,13 +2439,11 @@ Removed debugging code.
           
        }  /* |if (p && q && q->is_linear())|  */
 
-
      else /* |!(p && q && q->is_linear())|  */
         { 
             *b = false;
 
         }  /* |else | (|!(p && q && q->is_linear())|)  */
-
 
      delete p;
      delete q;
@@ -2560,16 +2477,13 @@ Added this rule.
        {
             *b = p->is_on_plane(*q, @=$4@>);
 
-          
-       }  /* |if (p && q)|  */
-
+}  /* |if (p && q)|  */
 
      else /* |!(p && q)|  */
         { 
             *b = false;
 
         }  /* |else | (|!(p && q)|)  */
-
 
      delete p;
      delete q;
@@ -2597,7 +2511,6 @@ Added this rule.
 @=boolean_primary: point_expression IS_IN_TRIANGLE @>@/
 @=LEFT_PARENTHESIS point_expression COMMA @>@/                   
 @=point_expression COMMA point_expression RIGHT_PARENTHESIS@>@/
-
 
 {
 
@@ -2646,8 +2559,6 @@ Added this rule.
 @=boolean_primary: point_expression IS_ON_ELLIPSE ellipse_expression@>@/
 {
 
-
-
     Point* p = static_cast<Point*>(@=$1@>);    
     
     Ellipse* e = static_cast<Ellipse*>(@=$3@>);
@@ -2670,8 +2581,6 @@ Added this rule.
 
            @=$$@> = static_cast<void*>(b);
        }
-
-
 
 @q **** (4) @>   
 
@@ -2760,8 +2669,7 @@ by |pv|.
             static_cast<Scanner_Node>(parameter),
             static_cast<Point*>(0));
 
-  
-   *b = Conic_Section::are_on_conic_section(pv,
+*b = Conic_Section::are_on_conic_section(pv,
                                             parameter,
                                             @=$3@>);
 
@@ -2773,7 +2681,6 @@ by |pv|.
 @q **** (4) @>   
 
 };
-
 
 @q ** (2) boolean_primary --> ARE_ON_CONIC_SECTION          @>
 @q ** (2) point_vector_expression with_tolerance_optional.  @>
@@ -2810,14 +2717,12 @@ by |pv|.
             static_cast<Scanner_Node>(parameter),
             static_cast<Point*>(0));
 
-
    *b = Conic_Section::are_on_conic_section(pv, parameter, @=$3@>);
 
    delete pv;
    pv = 0;
 
    @=$$@> = static_cast<void*>(b);  
-
 
 @q **** (4) @>   
 
@@ -2843,7 +2748,6 @@ Added this rule.
    @=$$@> = Scan_Parse::is_on_sphere_func(@=$1@>, @=$3@>, parameter);
    
 };
-
 
 @q ** (2) boolean_primary --> ARE_DISTINCT point_list with_tolerance_optional@>
 
@@ -2875,8 +2779,6 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) boolean_primary --> ARE_DISTINCT point_vector_primary with_tolerance_optional@>
 
 @*1 \§boolean primary> $\longrightarrow$ \.{ARE\_DISTINCT} 
@@ -2907,8 +2809,6 @@ Added this rule.
 
 };
 
-
-
 @q ** (2) predicate_clause.@>   
 @*1 \§predicate clause>.
 \initials{LDF 2005.10.26.}
@@ -2935,7 +2835,6 @@ Added this rule.
 {
    @=$$@> = static_cast<void*>(0);
 }   
-
 
 @q *** (3) predicate_clause --> WITH_TOLERANCE numeric_expression.@>   
 @*2 \§predicate clause> $\longrightarrow$ 
@@ -2984,9 +2883,8 @@ Removed debugging code.
    Path* q = static_cast<Path*>(@=$3@>);  
 
    bool* b = new bool;
-   
 
-   if (p && q && p->is_linear() && q->is_linear())
+if (p && q && p->is_linear() && q->is_linear())
       {
          Line l = p->get_line();
          Line m = q->get_line();
@@ -3029,7 +2927,6 @@ Removed debugging code.
 @<Define rules@>=
 @=boolean_primary: path_expression IS_COLINEAR path_expression@>@/
 {
-
 
    Path* p = static_cast<Path*>(@=$1@>);
    Path* q = static_cast<Path*>(@=$3@>);  
@@ -3146,7 +3043,6 @@ Now deleting |Pointer_Vector<bool>* pv|.
    
 };
 
-
 @q * (1) boolean_secondary.  @>
 @* \§boolean secondary>.
 
@@ -3197,7 +3093,6 @@ an implicit conversion from |bool| to |int|.
 
   bool* i = static_cast<bool*>(@=$1@>);
   bool* j = static_cast<bool*>(@=$3@>);
-
 
   *i = (*i && *j) ? 1 : 0;
 
@@ -3254,8 +3149,7 @@ Added this rule.
   bool* i = static_cast<bool*>(@=$1@>);
   bool* j = static_cast<bool*>(@=$3@>);
 
-  
-  *i = (*i || *j) ? 1 : 0;
+*i = (*i || *j) ? 1 : 0;
 
   @=$$@> = static_cast<void*>(i);
 
@@ -3323,14 +3217,11 @@ Added this rule.
   else if (@=$2@> == LESS_OR_EQUAL)
     *i = (@=$1@> <= @=$3@>) ? 1 : 0;
 
-
   else if (@=$2@> == GREATER)
     *i = (@=$1@> > @=$3@>) ? 1 : 0;
 
-
   else if (@=$2@> == GREATER_OR_EQUAL)
     *i = (@=$1@> >= @=$3@>) ? 1 : 0;
-
 
   else if (@=$2@> == EQUAL)
     *i = (@=$1@> == @=$3@>) ? 1 : 0;
@@ -3364,13 +3255,11 @@ Added this rule.
 
     bool* i;
 
-
     Point* p = static_cast<Point*>(@=$1@>);
 
     Point* q = static_cast<Point*>(@=$3@>);
 
-   
-    i = new bool;
+i = new bool;
 
 @q **** (4) |new bool| succeeded.@> 
 
@@ -3397,7 +3286,6 @@ Added this rule.
 
     } /* |if (p == 0 || q == 0)|  */
 
-
 @q *** (3) Error handling:  |(*p == INVALID_POINT || *q == INVALID_POINT)|.@>
 
 @ Error handling:  |(*p == INVALID_POINT || *q == INVALID_POINT)|.
@@ -3410,7 +3298,6 @@ Added this rule.
      @=$$@> = static_cast<void*>(i);
 
     } /* |if (*p == INVALID_POINT || *q == INVALID_POINT)|  */
-
 
 @q **** (4) |Points| are valid.@>
 @ |Points| are valid.
@@ -3432,7 +3319,6 @@ Added this rule.
          else if (@=$2@> == LESS)
            *i = (p_mag < q_mag) ? 1 : 0;
 
-
          else if (@=$2@> == LESS_OR_EQUAL)
             *i = (p_mag <= q_mag) ? 1 : 0;
 
@@ -3452,7 +3338,6 @@ Added this rule.
        @=$$@> = static_cast<void*>(i);
 
     }    /* |else| (|Points| are valid.)  */
-     
 
 @q **** (4) @>              
                   
@@ -3478,7 +3363,6 @@ Added this rule.
    bool* i = static_cast<bool*>(@=$1@>); 
 
    bool* j = static_cast<bool*>(@=$3@>); 
-
 
   if (@=$2@> == EQUAL)
     *i = (*i == *j) ? 1 : 0;
@@ -3510,7 +3394,6 @@ Added this rule.
   delete j; 
 
 };
-
 
 @q ** (2) boolean expression --> transform_expression EQUAL transform_tertiary.@>
 @*1 \§boolean expression> $\longrightarrow$ \§transform expression> 
@@ -3571,7 +3454,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(b);   
 
 };
-
 
 @q ** (2) boolean expression --> triangle_expression EQUAL triangle_tertiary.  @>
 @*1 \§boolean expression> $\longrightarrow$ \§triangle expression> 
@@ -3639,13 +3521,9 @@ Added this rule.
 
 };
 
-
-
-
 @q ** (2) boolean expression --> string_expression relation string_tertiary.@>
 @*1 \§boolean expression> $\longrightarrow$ \§string expression> 
 \§relation> \§string tertiary>.
-
 
 \TODO
 @q { @>
@@ -3699,7 +3577,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) relation --> GREATER.@>
 @*1 \§relation> $\longrightarrow$ \.{GREATER}.
 
@@ -3731,7 +3608,6 @@ Added this rule.
    @=$$@> = GREATER_OR_EQUAL;
 
 };
-
 
 @q ** (2) relation --> EQUAL.  @>
 @*1 \§relation> $\longrightarrow$ \.{EQUAL}.
@@ -3765,7 +3641,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -3774,9 +3649,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -3785,5 +3657,4 @@ Added this rule.
 @q fill-column:80                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

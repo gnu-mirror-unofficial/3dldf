@@ -48,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Conic_Section_Lattice.@>
 @** Conic Section Lattice\quad ({\tt cncsctlt\PERIOD web}).\hfil
@@ -150,7 +149,6 @@ class Conic_Section_Lattice
 
       @<Declare |static| |class Conic_Section_Lattice| data members@>@;
 
-
       @<Declare |Conic_Section_Lattice| functions@>@;
 };
 
@@ -240,8 +238,6 @@ Conic_Section_Lattice::~Conic_Section_Lattice(void)
    delete transform;
    return;
 }
-
-
 
 @q *** (3) Pseudo-constructor for dynamic allocation.@>
 @*2 Pseudo-constructor for dynamic allocation.
@@ -602,7 +598,6 @@ get_point(Scanner_Node scanner_node = 0,
           bool do_shift = true,
           bool lattice_point_flag = false);
 
-
 @q ****** (6) Definition.@> 
 @
 @<Define |Conic_Section_Lattice| functions@>=
@@ -880,14 +875,12 @@ Point*
 get_point(Scanner_Node scanner_node,
           real increment);
 
-
 @q ******* (7) Definition.@> 
 @
 @<Define |Conic_Section_Lattice| functions@>=
 Point*
 Conic_Section_Lattice::get_point(Scanner_Node scanner_node,
                                  real increment)
-
 
 {
    Point p = get_point(increment);
@@ -914,13 +907,11 @@ Added this function.
 Point
 get_point(real increment);
 
-
 @q ******* (7) Definition.@> 
 @
 @<Define |Conic_Section_Lattice| functions@>=
 Point
 Conic_Section_Lattice::get_point(real increment)
-
 
 {
 
@@ -988,8 +979,6 @@ get_transform(Scanner_Node scanner_node = 0)
       return 0;
 
 }  /* End of |Conic_Section_Lattice::get_transform| definition.  */
-
-
 
 @q **** (4) Pascal Points and Line.@> 
 @*3 Pascal Points and Line.
@@ -1070,7 +1059,6 @@ Conic_Section_Lattice::get_pascal_point(real r,
 
    }  /* |if (r < 0 || r > 2)|  */
 
-
 @q ******* (7)@>
 
    signed short cycle_value = 0;
@@ -1104,7 +1092,6 @@ Conic_Section_Lattice::get_pascal_point(real r,
       }   
 
    } /* |if (do_shift)|  */
-
 
 @q ******* (7)@>
 
@@ -1194,7 +1181,6 @@ Conic_Section_Lattice::get_pascal_point(real r,
 
 }  /* End of |Conic_Section_Lattice::get_pascal_point| definition.  */
 
-
 @q ***** (5) Get Pascal Points.@> 
 @*4 Get Pascal Points.
 \initials{LDF 2007.08.19.}
@@ -1268,7 +1254,6 @@ Conic_Section_Lattice::get_pascal_points(real increment, Scanner_Node scanner_no
       }   
 
    } /* |if (do_shift)|  */
-
 
 @q ******* (7)@>
 
@@ -1430,7 +1415,6 @@ Conic_Section_Lattice::get_pascal_line(real increment, Scanner_Node scanner_node
 
    }  /* |if (pv->ctr < 3)|  */
 
-
 @q ******* (7)@>
 
    Point XY = *(pv->v[0]) - *(pv->v[1]);
@@ -1462,9 +1446,7 @@ Conic_Section_Lattice::get_pascal_line(real increment, Scanner_Node scanner_node
 
    return q;
 
-
 }  /* End of |Conic_Section_Lattice::get_pascal_line| definition.  */
-
 
 @q **** (4) Get Polygons.@> 
 @*3 Get Polygons.
@@ -1503,7 +1485,6 @@ Conic_Section_Lattice::get_polygon(Scanner_Node scanner_node)
    return 0;  
 
 }  /* End of |Conic_Section_Lattice::get_polygon| definition.  */
-
 
 @q ***** (5) Get Pentagon.@> 
 @*4 Get Pentagon.
@@ -1600,7 +1581,6 @@ is equal to |INVALID_POINT|.  Return 0.
 
 }  /* End of |Conic_Section_Lattice::get_pentagon| definition.  */
 
-
 @q ***** (5) Get Hexagon.@> 
 @*4 Get Hexagon.
 \initials{LDF 2007.08.16.}
@@ -1682,7 +1662,6 @@ is equal to |INVALID_POINT|.  Return 0.
 
    }  /* |for|  */ 
 
-
 @q ******* (7) Warning:  |pt6 == INVALID_POINT|.@> 
 @ Warning:  |pt6 == INVALID_POINT|.  Call |get_pentagon| instead
 and return its return value.
@@ -1762,7 +1741,6 @@ Conic_Section_Lattice::get_plane(void)
 
 }  /* End of |Conic_Section_Lattice::get_plane| definition.  */
 
-
 @q *** (3) Shift lattice.@> 
 @*2 Shift lattice.
 \initials{LDF 2007.08.07.}
@@ -1786,7 +1764,6 @@ Added this function.
 @<Declare |Conic_Section_Lattice| functions@>=
 int
 shift_lattice(int cycle_value = 1, Scanner_Node scanner_node = 0);
-
 
 @q ***** (5) Definition.@> 
 @
@@ -1827,7 +1804,6 @@ Conic_Section_Lattice::shift_lattice(int cycle_value,
 
 #endif /* |DEBUG_COMPILE|  */@;    
 
-
 @q ****** (6)@> 
 
 #if DEBUG_COMPILE
@@ -1862,7 +1838,6 @@ Conic_Section_Lattice::shift_lattice(int cycle_value,
        return 0;
                 
    }  /* |if (cycle_value == 0)|  */
-
 
 @q ****** (6)@> 
 @
@@ -1903,7 +1878,6 @@ Conic_Section_Lattice::shift_lattice(int cycle_value,
       lattice.push_front(p);
    }
 
-
 @q ****** (6)@> 
 @
 @<Define |Conic_Section_Lattice| functions@>=
@@ -1921,7 +1895,6 @@ Conic_Section_Lattice::shift_lattice(int cycle_value,
 
 #endif /* |DEBUG_COMPILE|  */@;    
 
-
    return 0;
 
 }  /* End of |Conic_Section_Lattice::shift_lattice| definition.  */
@@ -1937,7 +1910,6 @@ Added this function.
 \initials{LDF 2007.08.08.}
 Added code.
 \ENDLOG
-
 
 @q **** (4) Declaration.@> 
 
@@ -2015,7 +1987,6 @@ Conic_Section_Lattice::traverse(real start,
          tolerance = opt->tolerance;
    }
 
-
 @q ***** (5)@> 
 @
 \LOG
@@ -2043,7 +2014,6 @@ Added this section.
          return 0;
 
       }  /* |if (start == end)|  */
-
 
 @q ***** (5)@> 
 @
@@ -2097,7 +2067,6 @@ Added this section.
 
    }  /* |if (DEBUG)|  */
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
    vector<real>::iterator iter = increment_vector.begin();
    increment = *iter;
@@ -2233,10 +2202,9 @@ Added this section.
 
    }  /* |if (DEBUG)|  */
 
-#endif /* |DEBUG_COMPILE|  */@; 
-  
+#endif /* |DEBUG_COMPILE|  */@;
 
-          while (   fabs(start_temp - 1.0) > tolerance 
+while (   fabs(start_temp - 1.0) > tolerance 
                  && (   start <= end 
                      || (start > end && start - end < tolerance)))
           {
@@ -2333,9 +2301,8 @@ Added this section.
 @q ****** (6)@> 
 
    }  /* |if (do_shift)|  */
-   
 
-   A:  /* Place to go, if nested loop needs to be exited.  
+A:  /* Place to go, if nested loop needs to be exited.  
           \initials{LDF 2007.08.14.}  */
 
    if (pv->ctr <= 0)
@@ -2353,7 +2320,6 @@ Added this section.
       return 0;
 
    }  /* |if (pv->ctr <= 0)|  */
-  
 
 @q ***** (5).@>
 
@@ -2361,7 +2327,6 @@ Added this section.
    {
       pv->reverse();
    }
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2382,12 +2347,10 @@ Added this section.
       delete scanner_node->conic_section_lattice_options;
       scanner_node->conic_section_lattice_options = 0;
    }
-   
 
-   return pv;
+return pv;
 
 }  /* End of |Conic_Section_Lattice::traverse| definition.  */
-
 
 @q *** (3) Creating objects of conic section types.@>
 @*2 Creating objects of conic section types.
@@ -2456,12 +2419,9 @@ Conic_Section_Lattice::get_ellipse(Scanner_Node scanner_node)
 
 /* START HERE!! LDF 2007.09.26.  */ 
 
-
-
 @q ****** (6)@>
 
    Ellipse* e = create_new<Ellipse>(0);
-
 
 @q ****** (6)@>
 
@@ -2478,7 +2438,6 @@ Conic_Section_Lattice::get_ellipse(Scanner_Node scanner_node)
    }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
    return e;
 
@@ -2675,7 +2634,6 @@ Conic_Section_Lattice::intersection_points(Path q,
 #endif /* |DEBUG_COMPILE|  */@; 
 #endif 
 
-
 @q ****** (6)@>
 
    Point normal = polygon->get_normal();
@@ -2688,7 +2646,6 @@ Conic_Section_Lattice::intersection_points(Path q,
        cerr_mutex.unlock();
    } /* |if (DEBUG)| */ 
 #endif /* |DEBUG_COMPILE| */@;
-
 
    Point q0 = q.get_point(0);
    Point q1 = q.get_point(1);
@@ -2726,7 +2683,6 @@ Can't handle this case yet.
        return 0;
 
    }  /* |if (!(q0.is_on_plane() && q1.is_on_plane()))|  */
-
 
 @q ****** (6)@>
 @
@@ -2872,7 +2828,6 @@ Can't handle this case yet.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
               start[start_ctr++] = 1;
           }   
 
@@ -2934,7 +2889,6 @@ Can't handle this case yet.
 @q ******** (8)@>
 
    }  /* |if (bpp.first.pt != INVALID_POINT)|  */
-
 
 @q ******* (7)@>
 
@@ -3086,7 +3040,6 @@ Can't handle this case yet.
 
    }  /* |else| (|normal != y_axis_pt|)  */
 
-
 @q ***** (5) Align |q| with the z-axis and transform other objects accordingly.@>
 @ Align |q| with the z-axis and transform other objects accordingly.
 \initials{LDF 2007.08.21.}
@@ -3160,7 +3113,6 @@ Make it possible to set tolerance using an option.
 @q ******** (8)@>
 
    }  /* |if (fabs(angle) > tolerance)| (outer conditional)  */
-
 
    *this *= *polygon *= t *= u;
 
@@ -3275,7 +3227,6 @@ Must still be tested, though.
 
   }  /* |for|  */
 
-
 @q ***** (5) Traverse.@>
 @ Traverse.
 \initials{LDF 2007.08.20.}
@@ -3306,7 +3257,6 @@ Add an option for setting |increment| to the parser rules.
    
 @q ****** (6)@>
 
-
    if (increment <= 0)
       increment = .1;
 
@@ -3329,7 +3279,6 @@ Add an option for setting |increment| to the parser rules.
        shift_lattice(start[0]);
        start[0] = -1;
    }
-
 
    curr_pt = *lattice[0];
 
@@ -3390,7 +3339,6 @@ Add an option for setting |increment| to the parser rules.
             << "`curr_value' == " << curr_value << endl;
 #endif 
 
-
 @q ******* (7)@>
 @
 \TODO
@@ -3446,7 +3394,6 @@ Added code for checking whether the |Point| is already on |bpv|.
           cerr << "Got a point!  Ending loop." << endl;
 #endif 
 
-
           *bpv += new Bool_Point(bp);
 
           last_value = curr_value;
@@ -3456,10 +3403,9 @@ Added code for checking whether the |Point| is already on |bpv|.
           {
 #if 0 /* 1  */ 
               cerr << "Returning `bpv'." << endl;
-#endif 
+#endif
 
-       
-              return bpv;
+return bpv;
           }
 
           break;
@@ -3485,7 +3431,6 @@ Added code for checking whether the |Point| is already on |bpv|.
        }  /* |else if (curr_pos != last_pos)|  
              (Binary search)  */
 
-
 @q ******* (7)@>
 
        else 
@@ -3497,7 +3442,6 @@ Added code for checking whether the |Point| is already on |bpv|.
            last_value = curr_value;
            curr_value += increment;
        }
-
 
 @q ******* (7)@>
 
@@ -3575,10 +3519,8 @@ line doesn't intersect the polygon.
 #endif /* |DEBUG_COMPILE|  */@; 
 
     return bpv;
- 
 
 }  /* End of |Conic_Section_Lattice::intersection_points(Path p)| definition.  */ 
-
 
 @q **** (4) |Ellipse| argument.@> 
 @*3 {\bf Ellipse} argument.
@@ -3854,7 +3796,6 @@ Conic_Section_Lattice::intersection_points(Circle c,
            curr_pos = c.location(curr_pt, tolerance);
        }
 
-
    }  /* |while|  */
 
 @q ****** (6)@>
@@ -3881,7 +3822,6 @@ Conic_Section_Lattice::intersection_points(Circle c,
 
 }  /* End of |Conic_Section_Lattice::intersection_points| definition
       (|Circle| argument).  */ 
-
 
 @q *** (3) Drawing.@> 
 @*2 Drawing.
@@ -3973,7 +3913,6 @@ Added code.
 void 
 show(string text = "", Scanner_Node scanner_node = 0) const;
 
-
 @q **** (4) Definition.@> 
 
 @
@@ -4022,7 +3961,6 @@ Conic_Section_Lattice::show(string text, Scanner_Node scanner_node) const
     return;
    
 } /* End of |Conic_Section_Lattice::show| definition.  */
-
 
 @q * (1) |Conic_Section_Lattice_Options|.@> 
 @* {\bf Conic\_Section\_Lattice\_Options}.
@@ -4116,7 +4054,6 @@ Conic_Section_Lattice_Options::Conic_Section_Lattice_Options(void)
     do_transform  = true;
     quit_on_error = true;
 
-
     lattice_point_flag = false;
 
     cycle_value = 0;
@@ -4154,7 +4091,6 @@ Conic_Section_Lattice_Options::~Conic_Section_Lattice_Options(void)
 }  /* End of |Conic_Section_Lattice_Options| destructor
       definition.   */
 
-
 @q *** (3) Show.@> 
 @*2 Show.
 \initials{LDF 2007.08.03.}
@@ -4171,7 +4107,6 @@ Changed to account for the fact that I've changed
 |real* Conic_Section_Lattice_Options::increment| to 
 |vector<real> increment_vector|.
 \ENDLOG
-
 
 @<Declare |Conic_Section_Lattice_Options| functions@>=
 void
@@ -4253,7 +4188,6 @@ This is what's compiled.
 @<Define |struct Conic_Section_Lattice_Options|@>@;
 @<Declare non-member template functions for |Conic_Section_Lattice|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -4262,8 +4196,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

@@ -1,7 +1,6 @@
 @q mtrxassn.w @> 
 @q Created by Laurence Finston (LDF) Thu Nov 29 20:03:21 CET 2007 @>
 
-
 @q * (0) Copyright and License.@>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
@@ -49,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q **** (4) matrix assignments.@>
 @*3 matrix assignments. 
@@ -177,7 +174,6 @@ Added this rule.
 
 @q ***** (5) assignment --> matrix_variable ASSIGN IDENTITY_MATRIX.@>
 
-
 @*4 \§assignment> $\longrightarrow$ \§matrix variable> 
 \.{ASSIGN} \.{IDENTITY\_MATRIX}.
 \initials{LDF 2007.11.29.}
@@ -274,7 +270,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) Set all elements of |matrix| to a single value.@>
 @*3 Set all elements of {\bf matrix} to a single value.
 \initials{LDF 2007.11.29.}
@@ -309,9 +304,6 @@ Added this rule.
 
 };
 
-
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -320,7 +312,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

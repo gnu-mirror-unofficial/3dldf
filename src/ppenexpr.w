@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) pen expressions.  @>
 @** {\bf pen} expressions.
@@ -59,7 +57,6 @@
 Created this file.
 \ENDLOG 
 
-
 @q * (1) pen primary.  @>
 @* \§pen primary>.
   
@@ -68,7 +65,6 @@ Created this file.
 
 @q ** (2) pen_primary --> pen_variable.@>
 @*1 \§pen primary> $\longrightarrow$ \§pen variable>.  
-
 
 \LOG
 \initials{LDF 2004.06.07.}  
@@ -101,17 +97,14 @@ This condition occurs legitimately when one tries to show an
   {
     Pen* s
       = create_new<Pen>(static_cast<Pen*>(entry->object));
-  
-  
-    @=$$@> = static_cast<void*>(s);
+
+@=$$@> = static_cast<void*>(s);
   }
 
 };
 
 @q ** (2) pen_primary --> pen_argument.@>
 @*1 \§pen primary> $\longrightarrow$ \§pen argument>.  
-
-
 
 @q ** (2) pen_primary --> PENCIRCLE  @>
 @*1 \§pen primary> $\longrightarrow$ `\.{PENCIRCLE}'.
@@ -129,10 +122,8 @@ This condition occurs legitimately when one tries to show an
 
 };
 
-
 @q *** (3) pen_primary --> PENRAZOR  @>
 @*2 \§pen primary> $\longrightarrow$ \.{PENRAZOR}.
-
 
 @<Define rules@>=
 @=pen_primary: PENRAZOR@>@/
@@ -149,7 +140,6 @@ This condition occurs legitimately when one tries to show an
 
 @q *** (3) pen_primary --> PENSPECK  @>
 @*2 \§pen primary> $\longrightarrow$ `\.{PENSPECK}'.
-
 
 @<Define rules@>=
 @=pen_primary: PENSPECK@>@/
@@ -179,8 +169,6 @@ This condition occurs legitimately when one tries to show an
   @=$$@> = static_cast<void*>(p); 
 
 };
-
-
 
 @q *** (3) pen_primary --> ( pen_expression )  @>
 @*2 \§pen primary> $\longrightarrow$ `\.{\LP}' 
@@ -264,7 +252,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) pen secondary.  @>
 @*1 \§pen secondary>.
 
@@ -285,7 +272,6 @@ Added this rule.
 @q *** (3) pen secondary --> pen_secondary transformer.@>
 @*2 \§pen secondary> $\longrightarrow$ \§pen secondary> \§transformer>.
 
-
 !! START HERE.  LDF 2004.09.07.  
 3D transformations don't work on |pens|.  They won't work for 
 |dash_patterns|, either.  Must define new type of |transformer| 
@@ -299,7 +285,6 @@ with multiple transformers to fail.
 \initials{LDF 2006.01.20.}
 @:BUG FIX@> BUG FIX:  Now deleting |Transform* t|.
 \ENDLOG 
-
 
 @<Define rules@>=
 @=pen_secondary: pen_secondary transformer@>@/
@@ -315,7 +300,6 @@ with multiple transformers to fail.
   @=$$@> = static_cast<void*>(p); 
 
 };
-
 
 @q ** (2) pen tertiary.  @>
 @*1 \§pen tertiary>.
@@ -334,7 +318,6 @@ with multiple transformers to fail.
 
 };
 
-
 @q ** (2) pen expression.  @>
 @*1 \§pen expression>.
 
@@ -351,7 +334,6 @@ with multiple transformers to fail.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -360,7 +342,6 @@ with multiple transformers to fail.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

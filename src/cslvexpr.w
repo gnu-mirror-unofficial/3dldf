@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |conic_section_lattice_vector| expressions.@>
 @** \§conic section lattice vector> expressions.
@@ -60,7 +58,6 @@
 Created this file.  Copied the rules from \filename{porgvexpr.w}, changing
 \§origami figure vector> expressions to \§conic section vector> expressions.
 \ENDLOG 
-
 
 @q * (1) |conic_section_lattice_vector| primary.  @>
 @* \§conic section lattice vector primary>.
@@ -127,7 +124,6 @@ Added this rule.
      }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
-
 
 @q ** (2) conic_section_lattice_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) conic_section_lattice_vector_expression  RIGHT_PARENTHESIS.@>
@@ -214,7 +210,6 @@ Added this rule.
 
 };
 
-
 @q * (1) conic_section_lattice_vector expression.@>
 @* \§conic section lattice vector expression>.
 
@@ -243,7 +238,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -252,7 +246,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

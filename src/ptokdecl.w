@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) symbolic_token.  @>
 @** \§symbolic token>.
@@ -103,7 +101,6 @@
 \initials{LDF 2004.04.22.}
 \ENDTODO 
 
-
 @q *** spark --> BOOLEAN_DECLARATOR.  @>
 @*2 \§spark> $\longrightarrow$ \.{BOOLEAN\_DECLARATOR}.
 
@@ -155,8 +152,6 @@
 #endif /* |DEBUG_COMPILE|  */
 }
 ;
-
-
 
 @q *** STRING_DECLARATOR.  @>
 @ |STRING_DECLARATOR|.
@@ -294,7 +289,6 @@
 
   @<Common declarations for rules@>@; 
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -416,10 +410,6 @@ Added this rule.
 
 };
 
-
-
-
-
 @q *** (3) CUBOID_DECLARATOR.  @>
 @*2 |CUBOID_DECLARATOR|.
 
@@ -460,7 +450,6 @@ Added this rule.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <string_value> tag@>@/
-
 
 @q *** (3) SYMBOL_0.  @>
 @*2 \.{SYMBOL\_0}.
@@ -593,7 +582,6 @@ Made debugging output thread-safe.
 #endif /* |DEBUG_COMPILE|  */
 };
 
-
 @q ** declared_suffix.  @>
 @ {\bf declared\_suffix}.
 @q { @>
@@ -640,7 +628,6 @@ Made debugging output thread-safe.
 
   strcat(@=$$@>, @=$2@>);
 
-
 #if DEBUG_COMPILE
   if (DEBUG)
     {
@@ -660,7 +647,6 @@ tag, since it's a spark.
 Now using the character octal 243 (British Pound) as the placeholder
 for subscripts rather than \.{-}.
 \ENDLOG
-
 
 @<Define rules@>=
 
@@ -684,7 +670,7 @@ for subscripts rather than \.{-}.
   strcat(@=$$@>, "£");
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true|  */
+  DEBUG = false; /* |true| */
   if (DEBUG)
     {
       cerr << "$2 == " << @=$2@> << endl;
@@ -694,8 +680,6 @@ for subscripts rather than \.{-}.
 #endif /* |DEBUG_COMPILE|  */ 
 };
 
-
-  
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -704,8 +688,6 @@ for subscripts rather than \.{-}.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

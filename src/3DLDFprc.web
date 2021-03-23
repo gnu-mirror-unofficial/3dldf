@@ -48,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * Process file.@>
 @* Process file\quad ({\tt 3DLDFprc\PERIOD web}).\hfil
@@ -99,7 +98,6 @@ process_file(string name_string, size_t compile_and_link_position,
   ifstream h_file_stream;
   ifstream hld_file_stream;
 
-
 @ LDF 2002.4.7.
 Added the |compile|$\ldots$ variables and the
 code below where it's used.  The latter checks whether
@@ -116,13 +114,11 @@ It's so long since I wrote this function, that I'm not clear in my
 mind about how it's nested.  If I was, I'd put the |compile|$\ldots$ 
 variables closer to where they're used.
 
-
 It would be nice to have a command line option that would determine
 whether \.{cmpl} exits or not when a compiler error occurs.  However,
 even if it doesn't, relinking should be suppressed if one does occur.
 @:!!@> !! If I add such a command line option, I must define a 
 |bool suppress_relinking|.
-
 
 @<Define |process_file()|@>+=
 
@@ -139,7 +135,6 @@ even if it doesn't, relinking should be suppressed if one does occur.
 #endif 
   ifstream return_value_stream;
   int sc_return_value; /* LDF 2002.11.10.  System call return value.  */
-
 
   string web_string = name_string + ".web";
 
@@ -185,7 +180,6 @@ Run \ctangle/ in the following cases:
 
 @:!! TO DO@> TO DO:  Check why I need |const_cast|.
 
-
 @<Define |process_file()|@>+=
 
   dependencies.set(compile_and_link_position); 
@@ -203,7 +197,6 @@ if (DEBUG)
   else 
     cout << h_string << " is not open.\n";
 
-
   if (o_file_stream)
     cout << o_string << " is open.\n";
   else 
@@ -214,7 +207,6 @@ if (DEBUG)
   else 
     cout << c_string << " is not open.\n";
 }
-
 
 if (local_comparison_value == 1 /* The \CWEB/ file is younger than the 
                               \CPLUSPLUS/ file. */
@@ -236,7 +228,6 @@ retangled.
 
 @<Define |process_file()|@>+=
 
-
   if (writes_header == true && h_file_stream) 
     {
       if (DEBUG == true)
@@ -252,8 +243,6 @@ retangled.
   else if (writes_header == false && DEBUG == true)
       cout << web_string << " doesn't write a header file, "
            << "so I'm not copying anything.\n";
-
-
 
 @
 \LOG
@@ -303,7 +292,6 @@ else if (DEBUG)
 }
  
 /* LDF 2002.04.10.  End of the error handling code I've added today.  */
-
 
 compile_and_link_flags.set(compile_and_link_position);
 }
@@ -454,8 +442,6 @@ if (DEBUG == true)
      return;
    }
 
-
-
 @q ** Test header file.@>
 @*1 Test header file.
 @<Test header file@>=
@@ -504,7 +490,6 @@ If it has, don't reset the bit.
       compile_and_link_flags.reset(compile_and_link_position);
     }
 
-
   else if(local_comparison_value == 1) /* LDF 2002.11.12.  Header file
                                           has changed.  */
     {  
@@ -552,8 +537,7 @@ unsigned short check_header_file(ifstream&  local_h_file_stream,
 
   string system_string;
 
-  
-  h_copy_stream.open(h_copy_name);  
+h_copy_stream.open(h_copy_name);  
   hld_copy_stream.open(hld_copy_name); 
   char val_file_name[] = "dXXXXXX";
   fd = mkstemp(val_file_name);
@@ -577,14 +561,12 @@ unsigned short check_header_file(ifstream&  local_h_file_stream,
 #endif 
 #endif 
 
-
 @ Copy the two versions of the header file, the old and the new,
 removing the comments and |@[#line@]| commands.
 This assumes that no comments or |@[#line@]| commands extend over more
 than one line, which is a reasonable assumption, considering that
 \ctangle/ removes comments.
 @<Define |check_header_file()|@>+=
-
 
 string curr_string;
 string::size_type position;
@@ -608,7 +590,6 @@ string::size_type position;
  h_copy_stream.close();
  local_h_file_stream.close();         
 
-
 /* Now, do the same thing for the backup of the header file. */
 
  while (getline(local_hld_file_stream, curr_string))
@@ -626,11 +607,8 @@ string::size_type position;
      
    }
 
-
-
  hld_copy_stream << flush;
  hld_copy_stream.close() ; 
-
 
 @  Use \.{diff} to compare the copies of the old and new header files, with the
 comments and |@[#line@]| commands removed using \.{diff} and write the
@@ -651,7 +629,6 @@ result to a temporary file. Write \.{diff}'s output to
   val_stream >> return_value;
   val_stream.close();
 
-
   system_string = "rm -f " + static_cast<string>(h_copy_name) 
                   + "; rm -f " 
                   + static_cast<string>(hld_copy_name) 
@@ -660,7 +637,6 @@ result to a temporary file. Write \.{diff}'s output to
     cout << "Running: " << system_string << endl;
 
   system(system_string.c_str());
-
 
   if (DEBUG)
     {
@@ -675,7 +651,6 @@ result to a temporary file. Write \.{diff}'s output to
   return return_value;
 
 }
-
 
 @q Local Variables: @>
 @q mode:CWEB @>

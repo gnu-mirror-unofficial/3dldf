@@ -30,7 +30,6 @@
 @q GNU 3DLDF is available for downloading from @>
 @q http://www.gnu.org/software/3dldf/LDF.html. @>
 
-
 @q (``@@'' stands for a single at-sign in the following paragraph.) @>
 
 @q Please send bug reports to bug-3dldf@@gnu.org @>
@@ -49,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |triangle_vector| expressions.@>
 @** \§triangle vector> expressions.
@@ -61,7 +58,6 @@
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
-
 @q * (1) |triangle_vector| primary.  @>
 @* \§triangle vector primary>.
 \initials{LDF 2005.01.20.}
@@ -70,7 +66,6 @@ Created this file and wrote quite a few rules.
 \initials{LDF 2005.01.20.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> triangle_vector_primary@>@/
@@ -157,7 +152,6 @@ Added this rule.
      }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
-
 
 @q ** (2) triangle_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) triangle_vector_expression  RIGHT_PARENTHESIS.@>
@@ -274,12 +268,10 @@ Removed debugging code.
 
     PV* pv = new PV;
 
-
     *pv += create_new<Triangle>(0, scanner_node);
     *pv += create_new<Triangle>(0, scanner_node);
     *pv += create_new<Triangle>(0, scanner_node);
     *pv += create_new<Triangle>(0, scanner_node);
-
 
 @q ******* (7) Call |Scan_Parse::reflect_off_func<Triangle>()|.@> 
 
@@ -316,7 +308,6 @@ Removed debugging code.
 \initials{LDF 2005.01.20.}
 
 @<Define rules@>=                        
-
 
   else /* |status == 0|  */
      {
@@ -377,7 +368,6 @@ Added this rule.
 
 };
 
-
 @q * (1) triangle_vector expression.@>
 @* \§triangle vector expression>.
 
@@ -421,8 +411,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -431,7 +419,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>
@@ -440,5 +427,4 @@ Added this rule.
 @q fill-column:70                     @>
 @q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
-
 

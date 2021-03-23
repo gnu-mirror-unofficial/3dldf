@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) cuboid expressions.  @>
 @** {\bf cuboid} expressions.
@@ -143,7 +141,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) cuboid_primary --> OUT_CUBOID ellipsoid_primary.@>
 @*1 \§cuboid primary> $\longrightarrow$ \.{OUT\_CUBOID} 
 \§ellipsoid primary>.
@@ -162,7 +159,6 @@ Added this rule.
                                        parameter);
 
 };
-
 
 @q ** (2) cuboid_primary --> LAST cuboid_vector_expression.@>
 
@@ -233,8 +229,6 @@ Added this rule.
 
 };
 
-
-
 @q * (1) cuboid secondary.  @>
 @*1 \§cuboid secondary>.
 \initials{LDF 2004.07.06.}  
@@ -267,7 +261,6 @@ Added this rule.
 @*1 \§cuboid secondary> $\longrightarrow$ 
 \§cuboid secondary> \§transformer>.
 \initials{LDF 2004.07.06.}
-
 
 \LOG
 \initials{LDF 2004.07.06.}
@@ -356,8 +349,6 @@ Added this rule.
 
 };
 
-
-
 @q * (1) cuboid expression.  @>
 @* \§cuboid expression>.
 \initials{LDF 2004.07.06.}  
@@ -386,7 +377,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -395,7 +385,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

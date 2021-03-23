@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) picture expressions.  @>
 @** picture expressions.
@@ -57,7 +55,6 @@
 \LOG
 \initials{LDF 2004.05.21.}  Created this file.
 \ENDLOG 
-
 
 @q * (1) picture primary.  @>
 @* \§picture primary>.
@@ -67,7 +64,6 @@
 
 @q ** (2) picture_primary --> picture_variable.@>
 @*1 \§picture primary> $\longrightarrow$ \§picture variable>.  
-
 
 \LOG
 \initials{LDF 2004.06.04.}  
@@ -145,10 +141,8 @@ Added this conditional.
 @q *** (3) picture_primary --> picture_argument..@>
 @ \§picture primary> $\longrightarrow$ \§picture argument>.  
 
-
 @q *** picture_primary --> ( picture_expression )  @>
 @ \§picture primary> $\longrightarrow$ `\.{\LP}' \§picture expression> `\.{\RP}'.
-
 
 @<Define rules@>=
 @=picture_primary: LEFT_PARENTHESIS picture_expression RIGHT_PARENTHESIS@>@/
@@ -235,7 +229,6 @@ and continuing.
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    cerr_strm << thread_name << "WARNING!  In `yyparse()', rule "
              << endl << "`picture_secondary --> "
              << "picture_primary transformer':"
@@ -257,7 +250,6 @@ and continuing.
 
 };
 
-
 @q ** (2) picture tertiary.  @>
 @ \§picture tertiary>.
 
@@ -267,12 +259,9 @@ and continuing.
 @q *** picture tertiary --> picture_secondary.@>
 @ \§picture tertiary> $\longrightarrow$ \§picture secondary>.
 
-
 @<Define rules@>=
 @=picture_tertiary: picture_secondary@>@/
 {
-
-
 
   @=$$@> = @=$1@>;
 
@@ -283,14 +272,12 @@ and continuing.
 `\.{PLUS}' \§picture secondary>.
 \initials{LDF 2004.05.21.}  
 
-
 Pictures cannot yet be subtracted in 3DLDF.
 \initials{LDF 2004.05.21.}
 
 \LOG
 \initials{LDF 2004.05.21.}  
 Added this rule.
-
 
 \initials{LDF 2004.06.04.}  
 No longer deleting |q| at the end of this rule. 
@@ -340,7 +327,6 @@ Made changes to account for these facts.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -349,7 +335,6 @@ Made changes to account for these facts.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

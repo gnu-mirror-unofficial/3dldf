@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) transform expressions.  @>
 @** transform expressions.
@@ -120,7 +118,6 @@ an ``unknown |transform|''.
 \initials{LDF 2004.09.28.}
 Made debugging output thread-safe.  Formatting changes. 
 \ENDLOG 
-
 
 @<Define rules@>=
 @=transform_primary: LEFT_PARENTHESIS transform_expression RIGHT_PARENTHESIS@>@/
@@ -253,8 +250,6 @@ Added this rule.
 
 };
 
-
-
 @q ***** (5) transform_primary --> GET_TRANSFORM @>
 @q ***** (5) conic_section_lattice_expression.   @>
 
@@ -286,7 +281,6 @@ Added this rule.
        @=$$@> = static_cast<void*>(0);
 };
 
-
 @q ***** (5) transform_primary --> INVERSE transform_expression.@>
 
 @*4 \§transform primary> $\longrightarrow$ 
@@ -311,7 +305,6 @@ Now passing |INVERSE| to |Scan_Parse::transform_primary_rule_func_1|.
                                            static_cast<Scanner_Node>(
                                               parameter));
 };
-
 
 @q ***** (5) transform_primary --> TRANSPOSED transform_expression.@>
 
@@ -359,7 +352,6 @@ Added this rule.
                static_cast<Scanner_Node>(parameter)); 
 
 };
-
 
 @q ***** (5) transform_primary --> ALIGN path_primary WITH_AXIS axis_specifier.@>
 
@@ -412,7 +404,6 @@ Made debugging output thread-safe.  Formatting changes.
 @*2 \§transform secondary> $\longrightarrow$ \§transform secondary>
 \§transformer>.
 
-
 \LOG
 \initials{LDF 2004.09.28.}
 Made debugging output thread-safe.  Formatting changes.
@@ -421,9 +412,8 @@ Made debugging output thread-safe.  Formatting changes.
 @<Define rules@>=
 @=transform_secondary: transform_secondary transformer@>@/
 {
-  
-  
-  Transform* t = static_cast<Transform*>(@=$1@>);
+
+Transform* t = static_cast<Transform*>(@=$1@>);
   Transform* u = static_cast<Transform*>(@=$2@>);
 
   *t *= *u;
@@ -433,7 +423,6 @@ Made debugging output thread-safe.  Formatting changes.
   delete (u);
 
 };
-
 
 @q ** (2) transform tertiary.  @>
 @*1 \§transform tertiary>.
@@ -457,7 +446,6 @@ Made debugging output thread-safe.  Formatting changes.
 
 };
 
-
 @q ** (2) transform expression.  @>
 @*1 \§transform expression>.
 
@@ -479,7 +467,6 @@ Made debugging output thread-safe.  Formatting changes.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q ** (2) transformer.  @>
 @*1 \§transformer>.
@@ -581,11 +568,9 @@ of the |vector<real*>|.
 
       t->reset();
       
-      @=$$@> = static_cast<void*>(t); 
-        
+      @=$$@> = static_cast<void*>(t);
 
-    } /* |if (!bvp.first)|  */
-
+} /* |if (!bvp.first)|  */
 
 @q ***** (5) |Scanner_Type::handle_numeric_list()| succeeded.@>
 
@@ -594,12 +579,10 @@ of the |vector<real*>|.
 
 @<Define rules@>=
 
-
   else /* |bvp.first == true|  */
     {
 
       @=$$@> = bvp.second;
-
 
     }  /* |else| (|bvp.first == true|)  */
 
@@ -633,7 +616,6 @@ now takes a |void*| argument.
   Bool_Void_Pointer bvp
     = static_cast<Scanner_Node>(parameter)->handle_numeric_list(transform_token, @=$2@>);
 
-
 @q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list()| failed.@>
 
 @ Error handling:  |Scanner_Type::handle_numeric_list()| failed.
@@ -648,11 +630,9 @@ now takes a |void*| argument.
 
       t->reset();
       
-      @=$$@> = static_cast<void*>(t); 
-        
+      @=$$@> = static_cast<void*>(t);
 
-    } /* |if (!bvp.first)|  */
-
+} /* |if (!bvp.first)|  */
 
 @q ***** (5) |Scanner_Type::handle_numeric_list()| succeeded.@>
 
@@ -661,12 +641,10 @@ now takes a |void*| argument.
 
 @<Define rules@>=
 
-
   else /* |bvp.first == true|  */
     {
 
       @=$$@> = bvp.second;
-
 
     }  /* |else| (|bvp.first == true|)  */
 
@@ -721,14 +699,11 @@ of the |vector<real*>|.
    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
      {
 
-
          Transform* t = new Transform;
 
          @=$$@> = static_cast<void*>(t); 
 
-
      }  /* |if (entry == 0 || entry->object == 0)|  */
-
 
 @q ***** (5) |entry| and |entry->object| are non-null.@> 
 
@@ -750,7 +725,6 @@ of the |vector<real*>|.
        r[0] = new real;
        r[1] = new real;
        r[2] = new real;
-
 
        *(r[0]) = q->get_x();
        *(r[1]) = q->get_y();
@@ -778,11 +752,9 @@ of the |vector<real*>|.
 
       t->reset();
       
-      @=$$@> = static_cast<void*>(t); 
-        
+      @=$$@> = static_cast<void*>(t);
 
-    } /* |if (!bvp.first)|  */
-
+} /* |if (!bvp.first)|  */
 
 @q ***** (5) |Scanner_Type::handle_numeric_list()| succeeded.@>
 
@@ -790,7 +762,6 @@ of the |vector<real*>|.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
-
 
   else /* |bvp.first == true|  */
     {
@@ -834,9 +805,7 @@ Added this rule.
 
          @=$$@> = static_cast<void*>(t); 
 
-
      }  /* |if (q == 0 || *q == INVALID_POINT)|  */
-
 
 @q ***** (5) |q| is valid.@> 
 
@@ -856,7 +825,6 @@ Added this rule.
        r[0] = new real;
        r[1] = new real;
        r[2] = new real;
-
 
        *(r[0]) = q->get_x();
        *(r[1]) = q->get_y();
@@ -884,11 +852,9 @@ Added this rule.
 
       t->reset();
       
-      @=$$@> = static_cast<void*>(t); 
-        
+      @=$$@> = static_cast<void*>(t);
 
-    } /* |if (!bvp.first)|  */
-
+} /* |if (!bvp.first)|  */
 
 @q ****** (6) |Scanner_Type::handle_numeric_list()| succeeded.@>
 
@@ -896,7 +862,6 @@ Added this rule.
 \initials{LDF 2007.10.19.}
 
 @<Define rules@>=
-
 
      else /* |bvp.first == true|  */
     {
@@ -907,7 +872,6 @@ Added this rule.
 
 @q ****** (6)@>
 
-
   }  /* |else| (|q != 0 && *q != INVALID_POINT|)  */
 
 @q ***** (5)@>
@@ -915,9 +879,6 @@ Added this rule.
    delete q;
 
 };
-
-
-
 
 @q *** (3) basic_transformer.  @>
 @*2 \§basic transformer>.
@@ -935,7 +896,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: ROTATED@>@/
 
@@ -944,7 +904,6 @@ Added this rule.
   @=$$@> = ROTATED;
 
 };
-
 
 @q **** (4) basic_transformer --> SCALED.@>   
 @*3 \§basic transformer> $\longrightarrow$ \.{SCALED.}.
@@ -955,7 +914,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: SCALED@>@/
 
@@ -963,9 +921,7 @@ Added this rule.
 
   @=$$@> = SCALED;
 
-
 };
-
 
 @q **** (4) basic_transformer --> XSCALED.@>   
 @*3 \§basic transformer> $\longrightarrow$ \.{XSCALED.}.
@@ -976,14 +932,12 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: XSCALED@>@/
 
 {
 
   @=$$@> = XSCALED;
-
 
 };
 
@@ -996,7 +950,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: YSCALED@>@/
 
@@ -1004,9 +957,7 @@ Added this rule.
 
   @=$$@> = YSCALED;
 
-
 };
-
 
 @q **** (4) basic_transformer --> ZSCALED.@>   
 @*3 \§basic transformer> $\longrightarrow$ \.{ZSCALED.}.
@@ -1017,7 +968,6 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: ZSCALED@>@/
 
@@ -1025,11 +975,7 @@ Added this rule.
 
   @=$$@> = ZSCALED;
 
-
 };
-
-
-
 
 @q **** (4) basic_transformer --> SHEARED.@>   
 @*3 \§basic transformer> $\longrightarrow$ \.{SHEARED}.
@@ -1040,14 +986,12 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: SHEARED@>@/
 
 {
 
   @=$$@> = SHEARED;
-
 
 };
 
@@ -1060,14 +1004,12 @@ Added this rule.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>=
 @=basic_transformer: SHIFTED@>@/
 
 {
 
   @=$$@> = SHIFTED;
-
 
 };
 
@@ -1096,8 +1038,7 @@ Added this rule.  Rotation is by $180^{\circ}$.
 @=point_expression RIGHT_PARENTHESIS @>@/
 {
 
- 
-  Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
+Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
                                     static_cast<Point*>(@=$3@>),
                                     static_cast<Point*>(@=$5@>),
                                     180);
@@ -1120,7 +1061,6 @@ Added this rule.  Rotation is by $180^{\circ}$.
 
      } /* |if (t == 0)|  */
 
-
 @q ****** (6) |Scan_Parse::rotate_around_func()| succeeded.@>
 
 @ |Scan_Parse::rotate_around_func()| succeeded.
@@ -1134,7 +1074,6 @@ Added this rule.  Rotation is by $180^{\circ}$.
        @=$$@> = static_cast<Transform*>(t); 
 
     }  /* |else| (|t != 0|)  */
-
 
 };
 
@@ -1169,8 +1108,7 @@ Removed code from this rule to the function
 @=point_expression RIGHT_PARENTHESIS numeric_expression @>@/
 {
 
- 
-  Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
+Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
                                     static_cast<Point*>(@=$3@>),
                                     static_cast<Point*>(@=$5@>),
                                     @=$7@>);
@@ -1193,7 +1131,6 @@ Removed code from this rule to the function
 
      } /* |if (t == 0)|  */
 
-
 @q ****** (6) |Scan_Parse::rotate_around_func()| succeeded.@>
 
 @ |Scan_Parse::rotate_around_func()| succeeded.
@@ -1207,7 +1144,6 @@ Removed code from this rule to the function
        @=$$@> = static_cast<Transform*>(t); 
 
     }  /* |else| (|t != 0|)  */
-
 
 };
 
@@ -1233,7 +1169,6 @@ Made debugging output thread-safe.  Formatting changes.
 
 };
 
-
 @q **** (4) TIMES (synonym for "TRANSFORMED").  @>
 @*2 \.{TIMES}.
 
@@ -1253,8 +1188,6 @@ Added this rule.
 
 };
 
-
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1263,7 +1196,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

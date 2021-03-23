@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Ellipsoids.@>
 @** Ellipsoids\quad ({\tt ellpsoid\PERIOD web}).\hfil
@@ -120,8 +119,7 @@ Now including \filename{pens.web}.
 #include "rhtchdrn.h++"
 #include "plyhdslc.h++"
 #include "cones.h++"
-#include "cylinder.h++" 
- 
+#include "cylinder.h++"
 
 @q * (1) Ellipsoid class definition.@>
 @* {\bf Ellipsoid} class definition.
@@ -324,9 +322,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
  
 @q ***** (5)@> 
 
-
     center.set(0, 0, 0);
-
 
    if (options)
       {
@@ -357,7 +353,6 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
        }
      /* |else| (|!options|)  */
 
-
 @q **** (4) Make sure divisions are even.@> 
 @ Make sure divisions are even.
 \initials{LDF 2005.10.31.}
@@ -373,7 +368,6 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
       {
          divisions_y += 1;
       }
-
 
    if (divisions_z > 0 && (divisions_z % 2))
       {
@@ -449,7 +443,6 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
 
 @<Define |Ellipsoid| functions@>=
 
-
    temp_divisions = divisions_x / 2;
 
    distance = axis_x / (2 * temp_divisions);
@@ -490,13 +483,11 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
 
       }  /* |for|  */
 
-
 @q ***** (5) Generate |Ellipses| along the y-axis.@> 
 @ Generate |Ellipses| along the y-axis.
 \initials{LDF 2005.10.31.}
 
 @<Define |Ellipsoid| functions@>=
-
 
    temp_divisions = divisions_y / 2;
 
@@ -521,7 +512,6 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
 
           temp_axis_v = (bpp.first.pt - bpp.second.pt).magnitude();
 
-
 #if 0 
           ppath = create_new<Path>(0);
           ppath->set(bpp.first.pt, bpp.second.pt);
@@ -538,20 +528,15 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
 
       }  /* |for|  */
 
-
-
 @q ***** (5) Generate |Ellipses| along the z-axis.@> 
 @ Generate |Ellipses| along the z-axis.
 \initials{LDF 2005.10.31.}
 
 @<Define |Ellipsoid| functions@>=
 
-
-
    temp_divisions = divisions_z / 2;
 
    distance = axis_z / (2 * temp_divisions);
-
 
    for (i = temp_divisions - 1; i > 0; --i)
       {
@@ -675,7 +660,6 @@ Added this function.
 Ellipsoid* 
 create_new(const Ellipsoid& c, Scanner_Node scanner_node);
 
-
 @q * (1) Assignment.@> 
 @* Assignment.
 \initials{LDF 2005.05.26.}
@@ -757,7 +741,6 @@ Ellipsoid::operator=(const Ellipsoid& e)
 
       main_ellipses.clear();
 
-
       for (vector<Ellipse*>::const_iterator iter = e.main_ellipses.begin();
            iter != e.main_ellipses.end();  
            ++iter)
@@ -793,7 +776,6 @@ get_shape_type(void) const
 {
    return ELLIPSOID_TYPE;
 }
-
 
 @q ** (2) Size.@> 
 @*1 Size.
@@ -849,7 +831,6 @@ Changed return value from |real| to |Signed_Byte|.
 Signed_Byte
 location(Point p, Scanner_Node scanner_node = 0, bool no_transform = false) const;
 
-
 @q *** (3) Definition.@> 
 @
 @<Define |Ellipsoid| functions@>=
@@ -877,8 +858,7 @@ Ellipsoid::location(Point p, Scanner_Node scanner_node, bool no_transform) const
 
 @q **** (4).@>
 
-    
-    Transform* t = 0;
+Transform* t = 0;
 
     if (!no_transform)
           t = standardize(scanner_node);
@@ -903,7 +883,6 @@ Ellipsoid::location(Point p, Scanner_Node scanner_node, bool no_transform) const
            return -2;
 
        }  /* |if (!no_transform && t == 0)|  */
-   
 
 @q **** (4)@> 
 
@@ -973,7 +952,7 @@ Solid::is_ellipsoidal(Scanner_Node scanner_node) const
 
 @q ***** (5) Preliminaries.@> 
 
-  bool DEBUG = true; /* |false|  */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -1002,7 +981,6 @@ Solid::is_ellipsoidal(Scanner_Node scanner_node) const
 \initials{LDF 2005.05.26.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Multiplication by a |Transform| with assignment.@>
 @*2 Multiplication by a |Transform| with assignment.
@@ -1035,7 +1013,6 @@ Ellipsoid::operator*=(const Transform& t)
  
    return Solid::operator*=(t);
 }
-
 
 @q ** (2) Rotatation around the main axes.@>
 @*1 Rotation  around the main axes. 
@@ -1100,7 +1077,6 @@ Ellipsoid::scale(real x, real y, real z)
 Added this function.
 \ENDLOG
 
-
 @<Declare |Ellipsoid| functions@>=
 
 virtual
@@ -1129,7 +1105,6 @@ Ellipsoid::shear(real xy, real xz, real yx, real yz,
 Added this section.
 \ENDLOG
 
-
 @q *** (3) |real| arguments.@>
 @*2 {\bf real} arguments. 
 @^\cfunc{Ellipsoid}{shift}@>
@@ -1156,7 +1131,6 @@ Ellipsoid::shift(real xx, real yy, real zz)
   return operator*=(t);
 }
 
-
 @q *** (3) Point argument.@>
 
 @*2 {\bf Point} argument. 
@@ -1181,7 +1155,6 @@ Ellipsoid::shift(const Point& p)
 {
   return shift(p.get_x(), p.get_y(), p.get_z());
 }
-
 
 @q ** (2) Shift times. @>
 @*1 Shift times. 
@@ -1403,7 +1376,6 @@ Ellipsoid::standardize(Scanner_Node scanner_node) const
            return 0;
 
        }  /* |if (axis_x <= 0 || axis_y <= 0 || axis_z <= 0)|  */
-    
 
 @q **** (4)@> 
 
@@ -1423,12 +1395,10 @@ Ellipsoid::standardize(Scanner_Node scanner_node) const
 
     angle = x.angle(Point(1, 0, 0));
 
-
     if (fabs(angle) > Shape::DEFAULT_TOLERANCE)
        {
            x *= y *= z *= t->rotate(0, -2 * angle);
        }
-
 
 @q **** (4)@> 
 
@@ -1572,7 +1542,6 @@ Ellipsoid::intersection_points(Path* p,
            return 0;
         }
 
-
 @q **** (4)@> 
 
     Path q(bpv->v[0]->pt, bpv->v[1]->pt);
@@ -1605,7 +1574,6 @@ Ellipsoid::intersection_points(Path* p,
 
            return 0;
 
-
        }  /* |if (t == 0)|  */
 
      if (save_transform)
@@ -1615,7 +1583,6 @@ Ellipsoid::intersection_points(Path* p,
         {
             q *= *t;
         }
-    
 
 @q **** (4)@> 
     
@@ -1642,12 +1609,10 @@ Ellipsoid::intersection_points(Path* p,
      curr_pt = start_pt;
      curr_location = location(curr_pt, scanner_node, true);
 
-
      if (curr_location == 0)
         goto B;
 
      out_pt = curr_pt;
-
 
      for (i = 1; i * step_value < 1; ++i)
         {
@@ -1728,13 +1693,10 @@ Ellipsoid::intersection_points(Path* p,
             goto C;
         }
 
-
-
      else
         return bpv;
 
 }  /* End of |Ellipsoid::intersection(const Path&, [etc.])| definition.  */
-
 
 @q ** (2) |Plane| reference argument.@> 
 @*1 {\bf Plane} reference argument.
@@ -1769,7 +1731,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -1787,7 +1749,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
 @q **** (4).@>
 
-
     if (center == INVALID_POINT || q == INVALID_PLANE)
 
         {
@@ -1804,7 +1765,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
             return 0;
 
         }  /* |if (center == INVALID_POINT || q == INVALID_PLANE)|  */
-
 
 @q **** (4)@> 
 
@@ -1861,7 +1821,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
          }  /* |if (!polygon)|  */
 
-
 @q **** (4)@> 
 
        Point mid_pt[6];
@@ -1903,14 +1862,12 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              return pv;
 #endif 
 
-
               delete polygon;
               polygon = 0;
 
               return 0;
               
           }  /* |if (polygon_size < 3)|  */
-
 
 @q **** (4)@> 
 
@@ -1948,7 +1905,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                delete c; 
                c = 0;
 
-
 #if TESTING 
              *pv += polygon;
              return pv;
@@ -1976,7 +1932,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 @ The first line, approximately drawn through the center of |polygon|.
 @<Define |Ellipsoid| functions@>=
 
-
        if (polygon_size == 3)
           {
              isect_path[0].set(mid_pt[0], vertex[2]);
@@ -1994,9 +1949,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                isect_path[0].set(mid_pt[0], mid_pt[3]);
           }
 
-
        bpv = intersection_points(&(isect_path[0]), scanner_node, t, 0);
-
 
 @q ***** (5)@> 
 
@@ -2029,15 +1982,12 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              return pv;
 #endif 
 
-
                         delete polygon;
                         polygon = 0;
 
                         return 0;   
 
                    }  /* |if (!bpv || bpv->ctr == 0)|  */
-
-
 
                 isect_path[0].set(bpv->v[0]->pt, bpv->v[1]->pt);
       
@@ -2080,9 +2030,8 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
                        isect_path[1].shift(temp_pt[0] - temp_pt[1]);
                        isect_path[2].shift(temp_pt[0] - temp_pt[1]);
-                       
 
-                       isect_path[1].shift(.3333 * (temp_pt[2] - temp_pt[0]));
+isect_path[1].shift(.3333 * (temp_pt[2] - temp_pt[0]));
                        isect_path[2].shift(.6667 * (temp_pt[2] - temp_pt[0]));
 
                    }
@@ -2098,9 +2047,8 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
                        isect_path[1].shift(temp_pt[0] - temp_pt[1]);
                        isect_path[2].shift(temp_pt[0] - temp_pt[1]);
-                       
 
-                       isect_path[1].shift(.3333 * (temp_pt[2] - temp_pt[0]));
+isect_path[1].shift(.3333 * (temp_pt[2] - temp_pt[0]));
                        isect_path[2].shift(.6667 * (temp_pt[2] - temp_pt[0]));
 
                    }
@@ -2137,14 +2085,11 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                        isect_path[1].shift(.3333 * (temp_pt[2] - temp_pt[0]));
                        isect_path[2].shift(.6667 * (temp_pt[2] - temp_pt[0]));
 
-
                    }  /* |else if (polygon_size == 6)|  */
-
 
                 bpv = intersection_points(&(isect_path[1]), scanner_node, t, 0);
 
 @q ***** (5)@> 
-
 
                 if (!bpv || bpv->ctr == 0)
                    {
@@ -2182,7 +2127,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              return pv;
 #endif 
 
-
                         delete polygon;
                         polygon = 0;
 
@@ -2190,11 +2134,9 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
                    }  /* |if (!bpv || bpv->ctr == 0)|  */
 
-
                 isect_path[1].set(bpv->v[0]->pt, bpv->v[1]->pt);
 
-      
-                bpv->clear();
+bpv->clear();
                 delete bpv;
                 bpv = 0;
                 
@@ -2207,11 +2149,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
 @q ***** (5)@> 
 
-
-
-
                 bpv = intersection_points(&(isect_path[2]), scanner_node, t, 0);
-
 
 @q ***** (5)@> 
 
@@ -2237,17 +2175,14 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
-
              new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
              new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
-             
 
-             return pv;
+return pv;
 #endif 
-
 
                         delete t;
                         t = 0;    
@@ -2261,7 +2196,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                         return 0;   
 
                    }  /* |if (!bpv || bpv->ctr == 0)|  */
-
 
 @q ***** (5)@> 
 
@@ -2278,7 +2212,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                      << (int) location(isect_path[2].get_last_point()) << endl;
 #endif 
 
-
 @q ***** (5)@> 
 
                 temp_pt[0] = isect_path[1].get_point(0).mediate(
@@ -2287,9 +2220,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                 temp_pt[1] = isect_path[2].get_point(0).mediate(
                                  isect_path[2].get_last_point());
 
-
                 isect_path[3].set(temp_pt[0], temp_pt[1]);
-
 
                 bpv = intersection_points(&(isect_path[3]), scanner_node, t, 0);
 
@@ -2318,20 +2249,17 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
-
              new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
              new_path = create_new<Path>(isect_path[2]);
              *pv += new_path;
 
-
              new_path = create_new<Path>(isect_path[3]);
              *pv += new_path;
              
              return pv;
 #endif 
-
 
                         delete t;
                         t = 0;    
@@ -2346,7 +2274,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
                    }  /* |if (!bpv || bpv->ctr == 0)|  */
 
-
 @q ***** (5)@> 
 
                 isect_path[3].set(bpv->v[0]->pt, bpv->v[1]->pt);
@@ -2354,7 +2281,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                 bpv->clear();
                 delete bpv;
                 bpv = 0;
-
 
 #if TESTING
                 cerr << "location of isect_path[3].get_point(0): "
@@ -2364,12 +2290,10 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
 #endif 
 
-
                 ellipse_center = isect_path[3].get_point(0).mediate(
                                     isect_path[3].get_last_point());
 
 @q ***** (5)@> 
-
 
 @q **** (4)@> 
 
@@ -2381,11 +2305,9 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                 Point curr_pt;
                 Point save_pt;
 
-       
-                real step_value = 5;
+real step_value = 5;
                 real save_step_value = step_value;
                 real curr_rotation_value;
-
 
                 Unsigned_Byte isect_ctr = 0;
                 Point isect_pt[4];
@@ -2395,16 +2317,13 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
                 Signed_Byte save_location;
 
-
                 real angle;
-
 
                 normal = q.normal;
                 normal.shift(ellipse_center);
 
                 normal_save = normal;
                 ellipse_center_save = ellipse_center;
-
 
                 in_pt = ellipse_center.mediate(isect_path[2].get_point(0), .875);
 
@@ -2415,9 +2334,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
             C:
 
-     
-                save_pt = curr_pt = in_pt;
-
+save_pt = curr_pt = in_pt;
 
 @q **** (4)@> 
 
@@ -2523,8 +2440,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                                    << "Bisecting." << endl;
 #endif 
 
-
-
                               in_pt = curr_pt;
                               if (save_location < 0)
                                   {
@@ -2551,7 +2466,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                        else if  (curr_location == -1)
                           {
 
-
                               if (!bisecting)
                                  {
                                      bisecting = true;
@@ -2567,7 +2481,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                                  cerr << "`curr_location' == -1 and `bisecting' == `true'.  "
                                       << "Bisecting." << endl;
 #endif 
-
 
                               out_pt = curr_pt;
 
@@ -2590,7 +2503,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                               goto A;
                                
                           }
- 
 
 @q ***** (5)@> 
                        
@@ -2630,7 +2542,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              new_path = create_new<Path>(isect_path[0]);
              *pv += new_path;
 
-
              new_path = create_new<Path>(isect_path[1]);
              *pv += new_path;
 
@@ -2643,13 +2554,8 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              return pv;
 #endif 
 
-
-
               delete polygon;
               polygon = 0;
-
-
-
 
               return 0;   
 
@@ -2657,11 +2563,9 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
 @q **** (4)@> 
 
-
        Transform t_inverse = t->inverse();
- 
 
-       for (int i = 0; i < 4; ++i)
+for (int i = 0; i < 4; ++i)
           {
              isect_pt[i] *= t_inverse;
 
@@ -2672,7 +2576,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              cerr << "isect_pt[" << i << "].is_on_plane(q) == " 
                   << isect_pt[i].is_on_plane(q) << endl;
 #endif 
-
 
           }  /* |for|  */
 
@@ -2691,16 +2594,13 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
        isect_path[4].show("isect_path[4]:");
 #endif 
 
-
        Point axis_h_pt[2];
        Point axis_v_pt[2];
 
        axis_h_pt[0] = isect_pt[0].mediate(isect_pt[1]);
        axis_h_pt[1] = isect_pt[2].mediate(isect_pt[3]);
 
-
        isect_path[5].set(axis_h_pt[0], axis_h_pt[1]);
-
 
        bpv = intersection_points(&(isect_path[5]), scanner_node, t, 0);
 
@@ -2710,7 +2610,6 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
        bpv->clear();
        delete bpv;
        bpv = 0;
-
 
 @q **** (4)@>
 
@@ -2724,11 +2623,9 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
        axis_v_pt[0] = bpv->v[0]->pt;
        axis_v_pt[1] = bpv->v[1]->pt;
 
-
        bpv->clear();
        delete bpv;
        bpv = 0;
-
 
 @q **** (4) Make the longer axis the horizontal one.@> 
 
@@ -2752,15 +2649,12 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
           }  /* |if (axis_h_mag < axis_v_mag)|  */
 
-
        isect_path[5].set(axis_h_pt[0], axis_h_pt[1]); 
        isect_path[6].set(axis_v_pt[0], axis_v_pt[1]); 
 
 @q **** (4)@> 
 
        Point temp_center;
-
-
 
        normal = isect_path[4].get_normal(); 
 
@@ -2788,9 +2682,7 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
        curr_rotation_value = 360.0 / ellipse_point_count;
 
-
        save_pt = temp_center.mediate(axis_h_pt[0], 1.5);
-
 
        vector<Point> vp0;
        vector<Point> vp1;
@@ -2806,12 +2698,10 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
              bpv = intersection_points(&temp_path, scanner_node, t, 0);
 
-
              if (!bpv || bpv->ctr == 0)
                 {
                    goto FINISH_UP;
                 }
-
 
              if (bpv->v[0]->pt.is_on_segment(temp_path).first)
                 {
@@ -2830,19 +2720,16 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
           }  /* |for|  */
 
-
         for(vector<Point>::iterator iter = vp0.begin();
             iter != vp0.end();  ++iter)
            ellipse_path += *iter;
-            
 
-        for(vector<Point>::iterator iter = vp1.begin();
+for(vector<Point>::iterator iter = vp1.begin();
             iter != vp1.end();  ++iter)
            ellipse_path += *iter;
 
         vp0.clear();
         vp1.clear();
-
 
 @q **** (4)@> 
 
@@ -2863,14 +2750,10 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
                         axis_v_mag, 
                         ellipse_path,
                         scanner_node);
-      
 
-
-
-   FINISH_UP:
+FINISH_UP:
 
              pv = new Pointer_Vector<Path>;
-
 
 #if TESTING 
              *pv += polygon;
@@ -2893,12 +2776,10 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
              new_path = create_new<Path>(isect_path[5]);
              *pv += new_path;
 
-
              new_path = create_new<Path>(isect_path[6]);
              *pv += new_path;
 
              *pv += e;
-
 
        delete t;
        t = 0;
@@ -2927,16 +2808,13 @@ Ellipsoid::intersection(const Plane& q, Scanner_Node scanner_node) const
 
        return e;
 
-#endif 
-
-   
+#endif
 
 @q **** (4)@> 
 
 }  /* End of |Ellipsoid::intersection(const Plane&, [etc.])| definition.  */
 
 #undef TESTING
-
 
 @q * (1) Show.@> 
 @* Show.
@@ -2978,7 +2856,6 @@ show(string text = "",
      Focus* f = 0, 
      const unsigned short proj = 0,
      const real factor = 1) const;
-
 
 @q ** (2) Definition.@> 
 
@@ -3063,7 +2940,6 @@ is more difficult than I thought.
 Cuboid*
 in_cuboid(Scanner_Node scanner_node = 0) const;
 
-
 @q *** (3) Definition.@> 
 
 @
@@ -3122,7 +2998,6 @@ out_cuboid(Scanner_Node scanner_node = 0,
            const Transform* use_transform  = 0, 
            Transform* save_transform = 0) const;
 
-
 @q *** (3) Definition.@> 
 
 @
@@ -3160,7 +3035,6 @@ Ellipsoid::out_cuboid(Scanner_Node scanner_node,
        {
            t = create_new<Transform>(use_transform);
        }
-
 
     if (!t)
        t = standardize(scanner_node);
@@ -3254,7 +3128,6 @@ Ellipsoid_Set_Option_Struct
 \initials{LDF 2005.05.26.}
 Added this section.
 \ENDLOG
-
 
 @q *** (3) Constructors.  @>
 @*2 Constructors.
@@ -3388,7 +3261,6 @@ Ellipsoid_Set_Option_Struct::clear(void)
 
 }  /* End of |Ellipsoid_Set_Option_Struct::clear()| definition.  */
 
-
 @q * (1) Putting Ellipsoid together. @>
 @* Putting {\bf Ellipsoid} together.
 
@@ -3421,7 +3293,6 @@ Now including |@<Define |static| |class Ellipsoid| data members@>|.
 @<Define |struct Ellipsoid_Set_Option_Struct|@>@;
 @<Declare non-member template functions for |Ellipsoid|@>@;
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -3430,7 +3301,6 @@ Now including |@<Define |static| |class Ellipsoid| data members@>|.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

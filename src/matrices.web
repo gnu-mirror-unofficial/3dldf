@@ -48,7 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
 
 @q * (0) Matrix.@>
 @** Matrix\quad ({\tt matrices\PERIOD web}).\hfil
@@ -447,13 +446,11 @@ Added conditional for the case |type == MATRIX_INVALID_TYPE|.
        matrix = static_cast<void*>(g);
    }
 
-
    else if (type == MATRIX_COMPLEX_TYPE)
    {
        gsl_matrix_complex* g = gsl_matrix_complex_alloc(rows, columns);
        matrix = static_cast<void*>(g);
    }
-
 
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
@@ -543,7 +540,6 @@ Matrix::set(const unsigned short ttype,
 
 @q ***** (5)@>
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
    {
@@ -618,7 +614,6 @@ Matrix::set(const unsigned short ttype,
 
    }  /* |if (rrows < 1 || ccolumns < 1)|  */
 
-
 @q ***** (5) Set |type| to default value.@>   
 @ Set |type| to default value.
 \initials{LDF 2007.11.28.}
@@ -633,17 +628,14 @@ Matrix::set(const unsigned short ttype,
    type = MATRIX_DOUBLE_TYPE;
 #endif
 
-
 @q ***** (5) Set |rows| and |columns|.@>   
 @ Set |rows| and |columns|.
 \initials{LDF 2007.11.28.}
 
 @<Define |Matrix| functions@>= 
 
-
    rows    = rrows;
    columns = ccolumns;
-
 
 @q ***** (5) Check |scanner_node->matrix_options| and set parameters, @>   
 @q ***** (5) if appropriate.                                          @>   
@@ -799,7 +791,6 @@ Matrix::set(const unsigned short ttype,
 
 @q ***** (5)@>
 
-
 #if DEBUG_COMPILE
    if (DEBUG)
    {
@@ -815,7 +806,6 @@ Matrix::set(const unsigned short ttype,
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5)@>
-
 
    return 0;
 
@@ -872,9 +862,7 @@ Matrix::~Matrix(void)
                                                     &error_stop_value,
                                                     &warning_stop_value);
 
-
    using namespace Scan_Parse;
-
 
 @q ***** (5)@>
 
@@ -968,13 +956,11 @@ Matrix::~Matrix(void)
        gsl_matrix_uchar_free(g);
    }
 
-
    else if (type == MATRIX_COMPLEX_TYPE)
    {
        gsl_matrix_complex* g = static_cast<gsl_matrix_complex*>(matrix);
        gsl_matrix_complex_free(g);
    }
-
 
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
@@ -1148,7 +1134,6 @@ Matrix::operator=(const Matrix& m)
 
        gsl_matrix* h = static_cast<gsl_matrix*>(m.matrix);
 
-
        /* Testing.  Use |gsl_matrix_memcpy| instead.  
           \initials{LDF 2007.12.23.}  */
     
@@ -1173,7 +1158,6 @@ Matrix::operator=(const Matrix& m)
 
    else if (type == MATRIX_LONG_DOUBLE_TYPE)
    {
-
 
        gsl_matrix_long_double* g = gsl_matrix_long_double_alloc(rows, columns);
        gsl_matrix_long_double_memcpy(g, static_cast<gsl_matrix_long_double*>(m.matrix));
@@ -1628,9 +1612,7 @@ Matrix::set_element(real r,
 
    }
 
-
    /* |MATRIX_COMPLEX_TYPE|.  See above.  \initials{LDF 2007.12.18.}  */
-
 
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
@@ -2094,7 +2076,6 @@ Matrix::set_zero(void* parameter)
 
    }
 
-
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
        gsl_matrix_complex_float* g = static_cast<gsl_matrix_complex_float*>(matrix);
@@ -2323,7 +2304,6 @@ Matrix::set_one(void* parameter)
        gsl_matrix_complex_set_all(g, 1);
 
    }
-
 
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
@@ -2554,7 +2534,6 @@ Matrix::set_all(const real r, void* parameter)
 
    }
 
-
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
        gsl_matrix_complex_float* g = static_cast<gsl_matrix_complex_float*>(matrix);
@@ -2775,7 +2754,6 @@ Matrix::get_element(real r,
 
    }  /* |if (rrow >= rows || ccolumn >= columns)|  */
 
-
 @q ****** (6) Check type and get element in |matrix|.@>   
 @ Check type and get element in |matrix|.
 \initials{LDF 2007.12.18.}
@@ -2874,7 +2852,6 @@ Matrix::get_element(real r,
 
    }
 
-
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
        gsl_matrix_complex_float* g = static_cast<gsl_matrix_complex_float*>(matrix);
@@ -2935,8 +2912,6 @@ Matrix::get_element(real r,
 #endif 
 
 }  /* End of |Matrix::get_element| definition.  */
-
-
 
 @q *** (3) Predicates.@>
 @*2 Predicates.
@@ -3062,11 +3037,9 @@ Matrix::is_one(const Matrix& m, real tolerance)
     
 }  /* End of |Matrix::is_one| definition.  */
 
-
 @q **** (4) Is multipliable.@>
 @*3 Is multipliable.
 \initials{LDF 2007.11.29.}
-
 
 \LOG
 \initials{LDF 2007.11.29.}
@@ -3091,7 +3064,6 @@ Matrix::is_multipliable(const Matrix& m, Scanner_Node scanner_node) const
        return false;
     
 }  /* End of |Matrix::is_multipliable| definition.  */
-
 
 @q **** (4) Is singular.@>
 @*3 Is singular.
@@ -3341,7 +3313,6 @@ Matrix::operator*(const Matrix& m) const
 #endif 
 
       return m;
-
 
    }  /* |if (type == MATRIX_DOUBLE_TYPE && m.type == MATRIX_DOUBLE_TYPE)|  */
 
@@ -3634,13 +3605,11 @@ Matrix::clear(Scanner_Node scanner_node)
        gsl_matrix_uchar_free(g);
    }
 
-
    else if (type == MATRIX_COMPLEX_TYPE)
    {
        gsl_matrix_complex* g = static_cast<gsl_matrix_complex*>(matrix);
        gsl_matrix_complex_free(g);
    }
-
 
    else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
    {
@@ -3695,7 +3664,6 @@ Added this function.
 
 void 
 show(string text = "", Scanner_Node scanner_node = 0) const;
-
 
 @q **** (4) Definition.@> 
 
@@ -3896,7 +3864,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     {
        gsl_matrix_int* g = static_cast<gsl_matrix_int*>(matrix);
 
-
        for (size_t i = 0; i < rows; ++i)
        {
            for (size_t j = 0; j < columns; ++j)
@@ -3916,7 +3883,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     {
        gsl_matrix_uint* g = static_cast<gsl_matrix_uint*>(matrix);
 
-
        for (size_t i = 0; i < rows; ++i)
        {
            for (size_t j = 0; j < columns; ++j)
@@ -3934,7 +3900,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     else if (type == MATRIX_LONG_TYPE)
     {
        gsl_matrix_long* g = static_cast<gsl_matrix_long*>(matrix);
-
 
        for (size_t i = 0; i < rows; ++i)
        {
@@ -3955,7 +3920,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     {
        gsl_matrix_ulong* g = static_cast<gsl_matrix_ulong*>(matrix);
 
-
        for (size_t i = 0; i < rows; ++i)
        {
            for (size_t j = 0; j < columns; ++j)
@@ -3974,7 +3938,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     else if (type == MATRIX_SHORT_TYPE)
     {
        gsl_matrix_short* g = static_cast<gsl_matrix_short*>(matrix);
-
 
        for (size_t i = 0; i < rows; ++i)
        {
@@ -3995,7 +3958,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     {
        gsl_matrix_ushort* g = static_cast<gsl_matrix_ushort*>(matrix);
 
-
        for (size_t i = 0; i < rows; ++i)
        {
            for (size_t j = 0; j < columns; ++j)
@@ -4015,7 +3977,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     {
        gsl_matrix_char* g = static_cast<gsl_matrix_char*>(matrix);
 
-
        for (size_t i = 0; i < rows; ++i)
        {
            for (size_t j = 0; j < columns; ++j)
@@ -4034,7 +3995,6 @@ Matrix::show(string text, Scanner_Node scanner_node) const
     else if (type == MATRIX_UCHAR_TYPE)
     {
        gsl_matrix_uchar* g = static_cast<gsl_matrix_uchar*>(matrix);
-
 
        for (size_t i = 0; i < rows; ++i)
        {
@@ -4087,7 +4047,6 @@ to call |gsl_matrix_complex_get| and use its return value instead.
     else if (type == MATRIX_COMPLEX_FLOAT_TYPE)
     {
        gsl_matrix_complex_float* g = static_cast<gsl_matrix_complex_float*>(matrix);
-
 
 #if 0 
        for (size_t i = 0; i < rows; ++i)
@@ -4392,9 +4351,8 @@ This is what's compiled.
 @<Declare |class Matrix|@>@;
 @<Declare |struct Matrix_Options|@>@;
 @<|extern| declarations for the header file@>@;
-#endif 
+#endif
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -4403,8 +4361,6 @@ This is what's compiled.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
-
 @q * Local variables for Emacs.@>
 @q Local Variables: @>
 @q mode:CWEB @>

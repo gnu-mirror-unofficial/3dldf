@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) color expressions.  @>
 @** \§color expressions>.
@@ -59,12 +57,10 @@
 Created this file.
 \ENDLOG 
 
-
 @q ** (2) color primary.  @>
 @*1 \§color primary>.
 \initials{LDF Undated.}
 
-  
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> color_primary@>@/
 
@@ -196,7 +192,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) color secondary.  @>
 @*1 \§color secondary>.
 \initials{LDF Undated.} 
@@ -292,7 +287,6 @@ Added this rule.
 
                 @=$$@> = static_cast<void*>(0);
 
-
             }  /* |if (r == 0)|  */
 
 @q ****** (6) |r != 0|.@>   
@@ -313,7 +307,6 @@ Added this rule.
 @q ***** (5).@> 
 
       } /* |else if (@=$2@> == OVER)|  */
-
 
 @q ***** (5) Error handling:  Invalid value for |times_or_over|.@>   
 
@@ -398,9 +391,6 @@ Added this rule.
 
 };
 
-
-
-
 @q *** (3) color_secondary --> numeric_secondary color_variable.@> 
 
 @*2 \§color secondary> $\longrightarrow$ \§numeric secondary> 
@@ -436,7 +426,6 @@ Added this rule.
 
       }  /* |if (entry == 0 || entry->object == 0)|  */
 
-
 @q ***** (5) |entry != 0 && entry->object != 0|.@> 
 @ |entry != 0 && entry->object != 0|.
 \initials{LDF 2004.12.17.}
@@ -458,9 +447,6 @@ Added this rule.
 @q ***** (5).@>    
 
 };
-
-
-
 
 @q ** (2) color tertiary.@>
 @*1 \§color tertiary>.
@@ -618,7 +604,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -627,7 +612,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

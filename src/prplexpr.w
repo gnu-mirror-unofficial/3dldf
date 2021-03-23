@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) reg_polygon expressions.  @>
 @** {\bf reg\_polygon} expressions.
@@ -61,7 +59,6 @@ Created this file.
 \initials{LDF 2004.07.06.}
 Made debugging output thread-safe in all rules.
 \ENDLOG 
-
 
 @q * (1) reg_polygon primary.  @>
 @* \§regular polygon primary>.
@@ -111,7 +108,6 @@ an ``unknown |reg_polygon|''.
 @*1 \§regular polygon primary> $\longrightarrow$ 
 \§regular polygon argument>.  
 
-
 @q ** (2) reg_polygon_primary --> ( reg_polygon_expression )  @>
 @*1 \§regular polygon primary> $\longrightarrow$ `\.{\LP}' 
 \§regular polygon expression> `\.{\RP}'.
@@ -129,12 +125,10 @@ Added this rule.
 
 };
 
-
 @q ** (2) reg_polygon_primary --> GET_REG_POLYGON numeric_expression @>
 @q ** (2) cuboid_primary.                                        @>
 @*1 \§regular polygon primary> $\longrightarrow$ \.{GET\_REG\_POLYGON}
 \§numeric expression> \§cuboid primary>. 
-
 
 @:!!@> !!  For some reason, a parse error occurs if \§numeric variables> aren't
 enclosed in parentheses.  It doesn't happen with literal numbers, i.e.,  
@@ -175,9 +169,7 @@ non-integral.
 
   unsigned short u = static_cast<unsigned short>(floor(fabs(@=$2@>) + .5));
 
-
   const Reg_Polygon* t = s->get_reg_polygon_ptr(u); 
-
 
   if (t == static_cast<const Reg_Polygon*>(0))
    {
@@ -187,7 +179,6 @@ non-integral.
       @=$$@> = static_cast<void*>(0);
 
    } /* |if (t == 0)|  */
-
 
   else /* |t != 0|  */
      {
@@ -248,8 +239,6 @@ non-integral.
 
       } /* |if (t == 0)|  */
 
-
-
      else /* |t != 0|  */
         {
 
@@ -262,8 +251,6 @@ non-integral.
      }  /* |else| (|t != 0|)  */
 
 };
-
-
 
 @q ***** (5) reg_polygon_primary --> LAST @>
 @q ***** (5) reg_polygon_vector_expression.@>
@@ -284,7 +271,6 @@ Added this rule.
 { 
 
    Reg_Polygon* r;
-
 
          r = create_new<Reg_Polygon>(0);
 
@@ -338,9 +324,6 @@ Added this rule.
 
 };
 
-
-
-
 @q * (1) reg_polygon secondary.  @>
 @* \§regular polygon secondary>.
 \initials{LDF 2004.07.06.}  
@@ -372,7 +355,6 @@ Added this rule.
 @q *** (3) reg_polygon secondary --> reg_polygon_secondary transformer.  @>
 @*2 \§regular polygon secondary> $\longrightarrow$ 
 \§regular polygon secondary> \§transformer>.
-
 
 \LOG
 \initials{LDF 2004.07.06.}
@@ -427,18 +409,12 @@ Removed debugging code.
                                                   static_cast<Reg_Polygon*>(@=$1@>),
                                                   static_cast<Path*>(@=$3@>));
 
-
     @=$$@> = static_cast<void*>(p);
 
 };
 
-
-
-
-
 @q ** (2) reg_polygon tertiary.  @>
 @*1 \§regular polygon tertiary>.
-
 
 \LOG
 \initials{LDF 2004.07.06.}  
@@ -450,7 +426,6 @@ Added this section.
 
 @q *** reg_polygon tertiary --> reg_polygon_secondary.  @>
 @ \§regular polygon tertiary> $\longrightarrow$ \§regular polygon secondary>.
-
 
 \LOG
 \initials{LDF 2004.07.06.}
@@ -464,7 +439,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
-
 
 @q ** (2) reg_polygon expression.  @>
 @*1 \§regular polygon expression>.
@@ -494,7 +468,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -503,7 +476,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

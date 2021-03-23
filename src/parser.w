@@ -49,9 +49,6 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-
-
-
 @q * (0) Parsing.  @>
 @** Parsing\quad ({\tt parser\PERIOD w}).\hfil
 
@@ -114,7 +111,6 @@
 @q ** (2) Vector Manipulation Commands.  `pvcmncmd.w'@>
 
 @i pvcmncmd.w
-
 
 @q ** (2) Reverse Command.  `reverse.w'@>
 
@@ -207,7 +203,6 @@
 @q *** (3) transform expressions.  `ptrnexpr.w'.  @>
 
 @i ptrnexpr.w
-
 
 @q *** (3) picture expressions.  `ppicexpr.w'.  @>
 
@@ -483,7 +478,6 @@
 
 @i pplnvxpr.w
 
-
 @q *** (3) origami_figure_vector expressions.  `porvexpr.w'.  @>
 
 @i porvexpr.w
@@ -504,8 +498,6 @@
 
 @i pfuncfin.w
 
-
-  
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -514,8 +506,6 @@
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

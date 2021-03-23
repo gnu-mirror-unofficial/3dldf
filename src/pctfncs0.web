@@ -47,7 +47,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
 
 @q * (0) Picture functions.@>
 @** {\bf Picture} functions\quad ({\tt pctfncs0\PERIOD web}).\hfil
@@ -207,7 +206,6 @@ Picture::output(Scanner_Node scanner_node,
                 const unsigned short surface_hiding_value)
 {
 
-
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
@@ -231,7 +229,6 @@ Picture::output(Scanner_Node scanner_node,
 @q **** (4).@>
 
   using namespace Sorting;
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -357,7 +354,6 @@ this, I had to make |apply_transform()| a |Shape| function.
 
     }  /* Outer |for|  */
 
-
 @q **** (4) @>   
 
 @ Set the extremes for the |Shape| and handle the error if
@@ -402,7 +398,6 @@ no elements to be constructed.
                }
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ****** (6).@> 
 
@@ -535,7 +530,6 @@ We can't just return, because there might still be |Labels| on the
    if (elements.size() > 0)
       {
 
-
 @q ***** (5) Sort.@> 
 @ Sort.
 \initials{LDF Undated.}
@@ -606,12 +600,10 @@ Eliminated unused variables.
 
 #if DEBUG_COMPILE
    OLD_DEBUG = DEBUG;
-   DEBUG = false;  /* |true|  */
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+   DEBUG = false; /* |true| */
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-      Shape* curr_shape = 0;
+Shape* curr_shape = 0;
       Shape* next_shape = 0;
 
       int status;
@@ -624,7 +616,6 @@ Eliminated unused variables.
 
       bool decomposed_curr_shape_flag;
 
-
 @q ****** (6).@> 
 @
 \LOG
@@ -634,7 +625,6 @@ It will be needed if this function is called on |*this| again.
 \ENDLOG 
 
 @<Define |Picture| functions@>=
-
 
       {  /* Beginning of group.  */
 
@@ -682,7 +672,6 @@ It will be needed if this function is called on |*this| again.
 
             curr_shape = *curr_position;
 
-
 #if DEBUG_COMPILE
             if (DEBUG)
                {
@@ -691,12 +680,9 @@ It will be needed if this function is called on |*this| again.
                        << "`curr_shape->surface_hiding_ctr' == "
                        << curr_shape->get_surface_hiding_ctr() << endl;
                }  
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-
-
-            next_position = curr_position;
+next_position = curr_position;
             ++next_position;
 
 @q ******* (7) Inner loop.@> 
@@ -727,19 +713,15 @@ It will be needed if this function is called on |*this| again.
                     }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
                  if (next_shape->get_surface_hiding_ctr() <= decomposition_ctr)
                     continue;
 
                  status = curr_shape->enclosing_cuboids_intersect(next_shape);
 
-
 @q ******** (8) @> 
 
                   if (status == 0)
                      {
-
 
 #if DEBUG_COMPILE
                          if (DEBUG)
@@ -756,7 +738,6 @@ It will be needed if this function is called on |*this| again.
 
                      }
 @q ******** (8) @> 
-
 
                   else /* |status > 0|  */
                      {
@@ -819,7 +800,6 @@ It will be needed if this function is called on |*this| again.
 
 @q ********** (10) @>
 
-
                                 else  /* |pv != 0 && pv->ctr > 0|  */
                                     {
                                         decomposed_curr_shape_flag = true;
@@ -831,8 +811,7 @@ It will be needed if this function is called on |*this| again.
                                                   cerr << "Decomposed `Shapes'." 
                                                        << endl;
                                               }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q *********** (11)@>
 @
@@ -854,9 +833,7 @@ to determine whether |curr_shape| should be deleted.
 
 @<Define |Picture| functions@>=
 
-                              
-
-                               if (curr_shape->get_decomposition_level() > 0)
+if (curr_shape->get_decomposition_level() > 0)
                                   {
                                       delete curr_shape;
                                       curr_shape = 0;
@@ -902,7 +879,6 @@ to determine whether |next_shape| should be deleted.
 
                                     }  /* |for|  */                           
 
-
                                     }    /* |else| (|pv != 0 && pv->ctr > 0|)  */
 
 @q ********** (10) @>
@@ -915,16 +891,11 @@ to determine whether |next_shape| should be deleted.
 
 @q ******** (8) @> 
 
-
-
               }  /* Inner |for|.  */
 
 @q ******* (7) @> 
 
          }  /* Outer |for|.  */
-
-
-
 
    }  /* End of group.  */
 
@@ -932,7 +903,6 @@ to determine whether |next_shape| should be deleted.
 @
 @<Define |Picture| functions@>=
 
-   
 @q ****** (6) Sort |shape_list|.@> 
 
 @ Sort |shape_list|.
@@ -942,7 +912,7 @@ to determine whether |next_shape| should be deleted.
 
 #if DEBUG_COMPILE
    OLD_DEBUG = DEBUG;
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
         cerr << "`shape_list.size()' == " << shape_list.size() << endl;
@@ -995,7 +965,6 @@ to determine whether |next_shape| should be deleted.
           shape_list.sort(Compare_Mean_Z<>());
        }
 
-
 @q ****** (6)@> 
 @
 \LOG
@@ -1007,7 +976,7 @@ Added this section.
 
 #if DEBUG_COMPILE
    OLD_DEBUG = DEBUG;
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
      {
@@ -1025,9 +994,8 @@ Added this section.
    curr_position = shape_list.begin();
    next_position = shape_list.begin();
    ++next_position;
-  
 
-   while (next_position != shape_list.end())
+while (next_position != shape_list.end())
 
       {
 
@@ -1051,7 +1019,6 @@ Added this section.
                    }           
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ******* (7) @> 
 
           if (status == 2)
@@ -1066,7 +1033,7 @@ Added this section.
                 
 #if DEBUG_COMPILE
                  OLD_DEBUG = DEBUG;
-                 DEBUG = false;  /* |true|  */
+                 DEBUG = false; /* |true| */
                  if (DEBUG)
                    {
                       curr_shape->show("curr_shape:", 'p', false, false);
@@ -1085,8 +1052,6 @@ Added this section.
           else if (status == 0)
              ;  /* Do nothing  */
 
-
-
 @q ******* (7) @> 
 
          ++curr_position;
@@ -1096,9 +1061,7 @@ Added this section.
 
 #if DEBUG_COMPILE
    DEBUG = OLD_DEBUG;
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) Output |shape_list|.@> 
 
@@ -1109,10 +1072,9 @@ Added this section.
 
 #if DEBUG_COMPILE
    valarray<real> temp_valarray(0.0, 6);
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-   for (list<Shape*>::iterator iter = shape_list.begin();
+for (list<Shape*>::iterator iter = shape_list.begin();
         iter != shape_list.end();
         ++iter)
       {
@@ -1138,7 +1100,6 @@ Added this section.
          (**iter).unsuppress_output(); 
 
       }  /* |for|  */
-
 
 @q ****** (6).@> 
 @
@@ -1187,7 +1148,6 @@ and then clearing |shape_list|.
              {
                  (**iter).output(scanner_node);
 
-
 @q ****** (6).@> 
 
 @ With a different |Focus| or different limiting
@@ -1210,7 +1170,6 @@ invoked again.
 
    }  /* |else|  */
 
-
   } /* |if (elements.size() > 0)|  */
 
 @q **** (4) @>   
@@ -1218,7 +1177,6 @@ invoked again.
 It is necessary to output the labels last because they might otherwise
 be drawn over by |fill()| or |filldraw()| commands. 
 \initials{LDF Undated.} 
-
 
 I'm not bothering to sort the labels so that the ones
 behind can be hidden by the ones in front.  Labels should all be
@@ -1267,8 +1225,6 @@ and invoke |Transform::is_identity()| in
 
 @q ***** (5).@> 
 
-
-
   }  /* |if (do_labels == true) | */
 
 @q **** (4) @>   
@@ -1283,7 +1239,6 @@ each time I output a |Picture|, which is not what I want.
 @<Define |Picture| functions@>= 
 
    transform.reset();
-
 
 @q **** (4) @>   
 
@@ -1301,15 +1256,9 @@ each time I output a |Picture|, which is not what I want.
 
 }  /* End of |Picture::output()| definition.  */
 
-
-
-
-
 @q * (1) Putting Picture functions together.@>
 @* Putting {\bf Picture} functions together.
 \initials{LDF 2005.04.09.}
-
-
 
 This is what's compiled.
 \initials{LDF 2005.04.09.}
@@ -1325,7 +1274,6 @@ This is what's compiled.
 @(pctfncs0.h@>=
 @q Nothing.  @>@;
 
-
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>

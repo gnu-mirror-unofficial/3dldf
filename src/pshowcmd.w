@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q *** (3) Commands for showing.  @>
 @*3 Commands for showing.
@@ -93,7 +91,6 @@ referenced by |boolean_variables|, |boolean_primaries|,
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    bool* b = static_cast<bool*>(@=$2@>); 
 
@@ -151,7 +148,6 @@ Added \§fixed optional>.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    real r = static_cast<real>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -195,7 +191,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) command --> SHOW matrix_expression@>
 
@@ -246,14 +241,12 @@ Added this type declaration.
 Added this rule.
 \ENDLOG
 
-
 @<Define rules@>= 
 
 @=fixed_optional: /* Empty */@>@/
 {
    @=$$@> = 0;  /* integer  */
 };
-
 
 @q ****** (6) fixed_optional --> FIXED.@> 
 @*5 \§fixed optional> $\longrightarrow$ \.{FIXED}.
@@ -263,7 +256,6 @@ Added this rule.
 \initials{LDF 2005.09.13.}
 Added this rule.
 \ENDLOG
-
 
 @<Define rules@>= 
 
@@ -305,9 +297,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4) command --> SHOW string_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -345,7 +334,6 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    string* s = static_cast<string*>(@=$2@>); 
 
@@ -429,7 +417,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  parameter); 
 
     @=$$@> = static_cast<void*>(0);
-   
 
 };
 
@@ -462,7 +449,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
                                  parameter); 
 
     @=$$@> = static_cast<void*>(0);
-
 
 };
 
@@ -522,7 +508,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 @=command: SHOW picture_expression@>@/
 {
 #if DEBUG_COMPILE
-   bool DEBUG = false;  /* |true|  */
+   bool DEBUG = false; /* |true| */
    if (DEBUG)
    {
 
@@ -539,8 +525,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
        Scan_Parse::show_func<Picture>(static_cast<Picture*>(entry->object),
                                      "picture",
                                      parameter); 
-
-
 
     @=$$@> = static_cast<void*>(0);
 
@@ -603,8 +587,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
 };
 
-
-
 @q **** (4) command --> SHOW origami_figure_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -632,7 +614,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) command --> SHOW point_expression@>
 
@@ -695,7 +676,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 };
 
-
 @q **** (4) command --> SHOW focus_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -726,7 +706,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) command --> SHOW macro_variable@>
 
@@ -796,8 +775,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) command --> SHOW path_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -827,7 +804,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
     @=$$@> = static_cast<void*>(0);
 };
-
 
 @q **** (4) command --> SHOW ellipse_expression@>
 
@@ -1022,7 +998,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 };
 
-
 @q **** (4) command --> SHOW rectangle_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -1107,7 +1082,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 };
 
-
 @q **** (4) command --> SHOW polygon_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -1134,7 +1108,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
     @=$$@> = static_cast<void*>(0);
 };
-
 
 @q **** (4) command --> SHOW reg_polygon_expression@>
 
@@ -1220,7 +1193,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) command --> SHOW cuboid_expression@>
 
@@ -1360,7 +1332,6 @@ Added this rule.
     @=$$@> = static_cast<void*>(0);
 };
 
-
 @q **** (4) command --> SHOW paraboloid_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -1384,9 +1355,6 @@ Added this rule.
 
     @=$$@> = static_cast<void*>(0);
 };
-
-
-
 
 @q **** (4) command --> SHOW ellipse_slice_expression@>
 
@@ -1469,8 +1437,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
     @=$$@> = static_cast<void*>(0);
 };
 
-
-
 @q **** (4) Vector-type expressions.@>   
 @*3 Vector-type expressions.
 \initials{LDF 2004.12.09.}
@@ -1479,7 +1445,6 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 \initials{LDF 2004.12.09.}
 Added this section.
 \ENDLOG
-
 
 @q ***** (5) Non-|Shape| types.@> 
 @*4 Non-{\bf Shape} types.
@@ -1526,7 +1491,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<bool>* nv = static_cast<Pointer_Vector<bool>*>(@=$2@>); 
 
    cerr_strm  << ">> boolean_vector:"
@@ -1550,7 +1514,6 @@ Added this rule.
 
                }  /* |for|  */
 
-
           log_message(cerr_strm);
           cerr_strm.str("");
           cerr_mutex.unlock(); 
@@ -1558,9 +1521,8 @@ Added this rule.
           delete nv;
 
       }  /* |if (nv)|  */
- 
 
-   else  /* |!nv|  */
+else  /* |!nv|  */
      {
         cerr_strm << "(unknown boolean_vector)";
         log_message(cerr_strm);
@@ -1609,7 +1571,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<real>* nv = static_cast<Pointer_Vector<real>*>(@=$2@>); 
 
    cerr_strm  << ">> numeric_vector:"
@@ -1629,7 +1590,6 @@ Added this rule.
 
                }  /* |for|  */
 
-
           log_message(cerr_strm);
           cerr_strm.str("");
           cerr_mutex.unlock(); 
@@ -1637,9 +1597,8 @@ Added this rule.
           delete nv;
 
       }  /* |if (nv)|  */
- 
 
-   else  /* |!nv|  */
+else  /* |!nv|  */
      {
         cerr_strm << "(unknown numeric_vector)";
         log_message(cerr_strm);
@@ -1691,7 +1650,6 @@ Added this rule.
 
                }  /* |for|  */
 
-
           log_message(cerr_strm);
           cerr_strm.str("");
           cerr_mutex.unlock(); 
@@ -1699,9 +1657,8 @@ Added this rule.
           delete nv;
 
       }  /* |if (nv)|  */
- 
 
-   else  /* |!nv|  */
+else  /* |!nv|  */
      {
         cerr_strm << "(unknown ulong_long_vector)";
         log_message(cerr_strm);
@@ -1810,7 +1767,6 @@ Added this rule.
 
    cerr_strm  << ">> ";
 
-
 @q ******** (8) @> 
 
 @
@@ -1896,7 +1852,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Pen>* pv = static_cast<Pointer_Vector<Pen>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -1913,9 +1868,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv)|  */
- 
 
-   else  /* |!pv|  */
+else  /* |!pv|  */
      {
         cerr_strm << "(unknown pen_vector)";
         log_message(cerr_strm);
@@ -1964,7 +1918,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Dash_Pattern>* pv 
       = static_cast<Pointer_Vector<Dash_Pattern>*>(@=$2@>); 
 
@@ -1982,9 +1935,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
- 
 
-   else  /* |!pv || pv->ctr <= 0|  */
+else  /* |!pv || pv->ctr <= 0|  */
      {
         cerr_strm << "(unknown dash_pattern_vector)";
         log_message(cerr_strm);
@@ -1996,8 +1948,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
-
 
 @q ****** (6) command --> SHOW color_vector_expression@>
 
@@ -2038,7 +1988,6 @@ Now deleting |Pointer_Vector<Color>* cv|.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Color>* cv = static_cast<Pointer_Vector<Color>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -2055,9 +2004,8 @@ Now deleting |Pointer_Vector<Color>* cv|.
           delete cv;
 
       }  /* |if (cv)|  */
- 
 
-   else  /* |!cv|  */
+else  /* |!cv|  */
      {
         cerr_strm << "(unknown color_vector)";
         log_message(cerr_strm);
@@ -2106,7 +2054,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Transform>* pv 
       = static_cast<Pointer_Vector<Transform>*>(@=$2@>); 
 
@@ -2124,9 +2071,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
- 
 
-   else  /* |!pv || pv->ctr <= 0|  */
+else  /* |!pv || pv->ctr <= 0|  */
      {
         cerr_strm << "(unknown transform_vector)";
         log_message(cerr_strm);
@@ -2174,7 +2120,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Focus>* pv 
       = static_cast<Pointer_Vector<Focus>*>(@=$2@>); 
 
@@ -2192,9 +2137,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
- 
 
-   else  /* |!pv || pv->ctr <= 0|  */
+else  /* |!pv || pv->ctr <= 0|  */
      {
         cerr_strm << "(unknown focus_vector)";
         log_message(cerr_strm);
@@ -2270,10 +2214,8 @@ Added this rule.
 
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
-
    @=$$@> = static_cast<void*>(0);
 };
-
 
 @q ****** (6) command --> SHOW macro_vector_variable@>
 
@@ -2339,7 +2281,6 @@ Added this rule.
 
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
-
    @=$$@> = static_cast<void*>(0);
 };
 
@@ -2378,7 +2319,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Origami_Figure>* pv 
       = static_cast<Pointer_Vector<Origami_Figure>*>(@=$2@>); 
 
@@ -2396,9 +2336,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
- 
 
-   else  /* |!pv || pv->ctr <= 0|  */
+else  /* |!pv || pv->ctr <= 0|  */
      {
         cerr_strm << "(unknown origami_figure_vector)";
         log_message(cerr_strm);
@@ -2446,7 +2385,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Glyph>* pv 
       = static_cast<Pointer_Vector<Glyph>*>(@=$2@>); 
 
@@ -2464,9 +2402,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
- 
 
-   else  /* |!pv || pv->ctr <= 0|  */
+else  /* |!pv || pv->ctr <= 0|  */
      {
         cerr_strm << "(unknown glyph_vector)";
         log_message(cerr_strm);
@@ -2514,7 +2451,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Plane>* pv 
       = static_cast<Pointer_Vector<Plane>*>(@=$2@>); 
 
@@ -2532,9 +2468,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
- 
 
-   else  /* |!pv || pv->ctr <= 0|  */
+else  /* |!pv || pv->ctr <= 0|  */
      {
         cerr_strm << "(unknown plane_vector)";
         log_message(cerr_strm);
@@ -2547,9 +2482,6 @@ Added this rule.
 
 };
 
-
-
-
 @q ***** (5) |Shape| types.@> 
 @*4 {\bf Shape} types.
 \initials{LDF 2004.12.12.}
@@ -2561,7 +2493,6 @@ Added this section.
 \initials{LDF 2004.12.12.}
 Now deleting |Pointer_Vector<Point>* pv|.
 \ENDLOG
-
 
 @q ****** (6) command --> SHOW point_vector_expression@>
 
@@ -2599,7 +2530,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Point>* pv = static_cast<Pointer_Vector<Point>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -2616,9 +2546,8 @@ Added this rule.
           delete pv;
 
       }  /* |if (pv)|  */
- 
 
-   else  /* |!pv|  */
+else  /* |!pv|  */
      {
         cerr_strm << "(unknown point_vector)";
         log_message(cerr_strm);
@@ -2669,7 +2598,6 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    Pointer_Vector<Bool_Point>* bpv 
       = static_cast<Pointer_Vector<Bool_Point>*>(@=$2@>); 
@@ -2738,7 +2666,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Path>* pv = static_cast<Pointer_Vector<Path>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -2791,7 +2718,6 @@ Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
 
 {
 
-
    Scan_Parse::show_func<Pointer_Vector<Ellipse> >(
                         static_cast<Pointer_Vector<Ellipse>*>(@=$2@>),
                         "ellipse_vector",
@@ -2828,7 +2754,6 @@ Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
 
    @=$$@> = static_cast<void*>(0);
 
-
 };
 
 @q ****** (6) command --> SHOW parabola_vector_expression@>
@@ -2858,7 +2783,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ****** (6) command --> SHOW hyperbola_vector_expression@>
 
@@ -2943,8 +2867,6 @@ Added this rule.
 
 };
 
-
-
 @q ****** (6) command --> SHOW helix_vector_expression@>
 
 @*5 \§command> $\longrightarrow$ \.{SHOW}
@@ -2981,7 +2903,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Helix>* pv = static_cast<Pointer_Vector<Helix>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -3011,7 +2932,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ****** (6) command --> SHOW rectangle_vector_expression@>
 
@@ -3048,7 +2968,6 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    Pointer_Vector<Rectangle>* pv = static_cast<Pointer_Vector<Rectangle>*>(@=$2@>); 
 
@@ -3145,7 +3064,6 @@ Added this rule.
 
 };
 
-
 @q ****** (6) command --> SHOW polygon_vector_expression@>
 
 @*5 \§command> $\longrightarrow$ \.{SHOW}
@@ -3182,7 +3100,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Polygon>* pv 
       = static_cast<Pointer_Vector<Polygon>*>(@=$2@>); 
 
@@ -3213,8 +3130,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
-
 
 @q ****** (6) command --> SHOW reg_polygon_vector_expression@>
 
@@ -3251,7 +3166,6 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    Pointer_Vector<Reg_Polygon>* pv 
       = static_cast<Pointer_Vector<Reg_Polygon>*>(@=$2@>); 
@@ -3320,7 +3234,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Cone>* pv = static_cast<Pointer_Vector<Cone>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -3387,7 +3300,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Cylinder>* pv = static_cast<Pointer_Vector<Cylinder>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
@@ -3444,7 +3356,6 @@ Added this rule.
 
 };
 
-
 @q ****** (6) command --> SHOW sphere_vector_expression@>
 
 @*5 \§command> $\longrightarrow$ \.{SHOW}
@@ -3499,7 +3410,6 @@ Added this rule.
 
 };
 
-
 @q ****** (6) command --> SHOW paraboloid_vector_expression@>
 
 @*5 \§command> $\longrightarrow$ \.{SHOW}
@@ -3526,7 +3436,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q ****** (6) command --> SHOW cuboid_vector_expression@>
 
@@ -3589,7 +3498,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    Pointer_Vector<Polyhedron>* pv 
       = static_cast<Pointer_Vector<Polyhedron>*>(@=$2@>); 
 
@@ -3640,7 +3548,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm  
@@ -3694,7 +3602,6 @@ Added this rule.
 
 @q * (0)@>
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -3703,7 +3610,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
-
-
 
 @q *** (3) label_command.@>
 @*2 \§label command>.
@@ -61,7 +59,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> label_command@>
-
 
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS string_expression               @>
@@ -109,7 +106,6 @@ reference, or 0, on to |Scan_Parse::label_point_command()|.
 @=with_text_color_optional with_dot_color_optional@>@/ 
 @=on_picture_optional@>@/
 {
-
 
     label_point_command(static_cast<Scanner_Node>(parameter),
                         @=$1@>, 
@@ -180,7 +176,6 @@ Added \§with text color optional> and \§with dot color optional>.
                       static_cast<Id_Map_Entry_Node>(@=$10@>)); 
 };
 
-
 @q **** (4) label_command --> label_or_dotlabel label_suffix     @>
 @q **** (4) LEFT_PARENTHESIS string_expression                   @>
 @q **** (4) COMMA bool_point_expression RIGHT_PARENTHESIS        @>
@@ -229,7 +224,6 @@ Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
                                      @=$10@>);
 };
 
-
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
 @q **** (4) COMMA bool_point_expression RIGHT_PARENTHESIS    @>
@@ -267,7 +261,6 @@ Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
 @=with_text_color_optional with_dot_color_optional@>@/
 @=on_picture_optional@>@/
 {
-
 
    Scan_Parse::label_bool_point_func(parameter,
                                      @=$1@>,
@@ -328,7 +321,6 @@ Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
                                      @=$10@>);
 };
 
-
 @q **** (4) label_command --> conditional_label_or_dotlabel  @>
 @q **** (4) label_suffix LEFT_PARENTHESIS numeric_expression @>
 @q **** (4) COMMA bool_point_expression RIGHT_PARENTHESIS    @>
@@ -376,9 +368,6 @@ Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
                                      @=$10@>);
 };
 
-
-
-
 @q **** (4) label_command --> label_or_dotlabel label_suffix    @>
 @q **** (4) LEFT_PARENTHESIS string_expression                  @>
 @q **** (4) COMMA numeric_expression COMMA path_expression @>
@@ -413,7 +402,6 @@ Removed debugging code.
 
 @q ***** (5) Definition.@>
 
-
 @<Define rules@>= 
 
 @=label_command: label_or_dotlabel label_suffix@>@/
@@ -422,9 +410,8 @@ Removed debugging code.
 @=with_text_color_optional with_dot_color_optional@>@/ 
 @=on_picture_optional@>@/
 {
-   
 
-    label_path_command(static_cast<Scanner_Node>(parameter),
+label_path_command(static_cast<Scanner_Node>(parameter),
                        @=$1@>, 
                        @=$2@>, 
                        static_cast<string*>(@=$4@>),
@@ -434,7 +421,6 @@ Removed debugging code.
                        static_cast<Path*>(@=$8@>),
                        static_cast<Id_Map_Entry_Node>(@=$12@>)); 
 };
-
 
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
@@ -472,7 +458,6 @@ Changed |path_like_expression| to |path_expression|.
 Removed debugging code.
 \ENDLOG 
 
-
 @q ***** (5) Definition.@>
 
 @<Define rules@>= 
@@ -499,7 +484,6 @@ Removed debugging code.
                       static_cast<Id_Map_Entry_Node>(@=$10@>)); 
 
 };
-
 
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
@@ -546,7 +530,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
 @q **** (4) COMMA circle_expression RIGHT_PARENTHESIS          @>
@@ -592,9 +575,6 @@ Added this rule.
 
 };
 
-
-
-
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
 @q **** (4) COMMA parabola_expression RIGHT_PARENTHESIS          @>
@@ -609,12 +589,10 @@ Added this rule.
 \§on picture optional>.
 \initials{LDF 2005.11.09.}
 
-
 \LOG
 \initials{LDF 2005.11.09.}
 Added this rule.
 \ENDLOG 
-
 
 @q ***** (5) Definition.@>
 
@@ -642,7 +620,6 @@ Added this rule.
                       static_cast<Id_Map_Entry_Node>(@=$10@>)); 
 
 };
-
 
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
@@ -689,7 +666,6 @@ Added this rule.
                       static_cast<Id_Map_Entry_Node>(@=$10@>)); 
 
 };
-
 
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
@@ -827,7 +803,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS numeric_expression              @>
 @q **** (4) COMMA triangle_expression RIGHT_PARENTHESIS          @>
@@ -874,10 +849,6 @@ Added this rule.
 
 };
 
-
-
-
-
 @q **** (4) label_command --> SUPPRESS_LABELS picture_variable.@>
 
 @*3 \§label command> $\longrightarrow$ \.{SUPPRESS\_LABELS}
@@ -911,7 +882,6 @@ working before.
 
 };
 
-
 @q **** (4) label_command --> UNSUPPRESS_LABELS picture_variable.@>
 
 @*3 \§label command> $\longrightarrow$ \.{UNSUPPRESS\_LABELS}
@@ -922,7 +892,6 @@ working before.
 Added this rule.  I haven't tested it, though.
 \ENDLOG 
 
-
 @q ***** (5) Definition.@>
 
 @
@@ -931,9 +900,7 @@ Added this rule.  I haven't tested it, though.
 @=label_command: UNSUPPRESS_LABELS picture_variable@>@/
 {
 
-
 /* !! TODO:  LDF 2004.10.22.  Test this rule.  */@; 
-
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
@@ -954,7 +921,6 @@ Added this rule.  I haven't tested it, though.
 \initials{LDF 2004.10.22.}
 Added this rule.
 \ENDLOG 
-
 
 @q ***** (5) Definition.@>
 
@@ -991,7 +957,6 @@ Added this rule.
 \initials{LDF 2004.06.30.}  Added this rule.
 \ENDLOG 
 
-
 @
 @<Define rules@>= 
 
@@ -1008,7 +973,6 @@ Added this rule.
 \LOG
 \initials{LDF 2004.06.30.}  Added this rule.
 \ENDLOG 
-
 
 @
 @<Define rules@>= 
@@ -1027,7 +991,6 @@ Added this rule.
 \initials{LDF 2004.11.06.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> conditional_label_or_dotlabel@>
@@ -1108,8 +1071,6 @@ Added this rule.
 
 };
 
-
-
 @q **** (4) label_suffix.@>
 @*3 \§label suffix>.
 
@@ -1120,7 +1081,6 @@ Added this section.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> label_suffix@>
-
 
 @q ***** (5) label_suffix --> EMPTY.@>
 @*4 \§label suffix> $\longrightarrow$ \.{EMPTY}.
@@ -1140,7 +1100,6 @@ Added this rule.
 
   @=$$@> = NULL_VALUE;
 
-  
 };
 
 @q ***** (5) label_suffix --> RT.@>
@@ -1183,7 +1142,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) label_suffix --> TOP.@>
 @*4 \§label suffix> $\longrightarrow$ \.{TOP}.
 
@@ -1204,7 +1162,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) label_suffix --> BOT.@>
 @*4 \§label suffix> $\longrightarrow$ \.{BOT}.
 
@@ -1220,7 +1177,6 @@ Added this rule.
 
 @=label_suffix: BOT@>@/
 {
-
 
   @=$$@> = BOT;
 
@@ -1265,7 +1221,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) label_suffix --> LRT.@>
 @*4 \§label suffix> $\longrightarrow$ '\.{LRT}'.
 
@@ -1286,7 +1241,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) label_suffix --> LLFT.@>
 @*4 \§label suffix> $\longrightarrow$ '\.{LLFT}'.
 
@@ -1306,8 +1260,6 @@ Added this rule.
   @=$$@> = LLFT;
 
 };
-
-
 
 @q **** (4) on_picture_optional.  @>
 
@@ -1336,7 +1288,6 @@ defined in \filename{scanprse.web}.
 @=on_picture_optional: /* Empty */@>
 {
 
-
   void* v = on_picture_optional_0(static_cast<Scanner_Node>(parameter));
 
   if (v == 0) /* (|on_picture_optional_0()| failed.)  */
@@ -1345,8 +1296,6 @@ defined in \filename{scanprse.web}.
       @=$$@> = static_cast<void*>(0); 
 
     } /* |if (entry == 0)| (|on_picture_optional_0()| failed.)  */
-
-
 
   else  /* (|on_picture_optional_0()| succeeded.)  */
     {
@@ -1357,12 +1306,10 @@ defined in \filename{scanprse.web}.
 
 };
 
-
 @*4 \§on picture optional> $\longrightarrow$ \.{picture expression}.
 
 \LOG
 \initials{LDF 2004.06.30.}  Added this rule.
-
 
 \initials{LDF 2004.08.16.}
 @:BUG FIX@> BUG FIX:  Now setting |@=$$@> = @=$1@>|.
@@ -1377,7 +1324,6 @@ Also made debugging output thread-safe.
 
 };
 
-
 @q * (1) with_text_color_optional.@> 
 @* \§with text color optional>.
 \initials{LDF 2005.01.29.}
@@ -1389,7 +1335,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> with_text_color_optional@>
-
 
 @q ** (2) with_text_color_optional --> EMPTY.@> 
 @*1 \§with text color optional> $\longrightarrow$ \.{EMPTY}.
@@ -1444,7 +1389,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> with_dot_color_optional@>
 
-
 @q ** (2) with_dot_color_optional --> EMPTY.@> 
 @*1 \§with dot color optional> $\longrightarrow$ \.{EMPTY}.
 \initials{LDF 2005.01.29.}
@@ -1497,7 +1441,6 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> transformer_optional@>
-
 
 @q ** (2) transformer_optional --> /* EMPTY  */ @> 
 
@@ -1688,7 +1631,6 @@ right-hand side.
     }
 };
 
-
 @q ** (2) label_or_dotlabel_lattice.@>
 @*1 \§label or dotlabel lattice>.
 \initials{LDF 2007.08.16.}
@@ -1736,9 +1678,8 @@ Added this rule.
 
 };
 
-@q * (1).@> 
+@q * (1).@>
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1747,7 +1688,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

@@ -48,9 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
-
 
 @q * (0) Operation Assignments.  @>
 @** Operation Assignments.  
@@ -80,7 +77,6 @@ Added this type declaration.
 
 @=%type <pointer_value> operation_assignment@>
 
-
 @q ** (2) Non-vector types.@>  
 @*1 Non-vector types.
 \initials{LDF 2004.12.04.}
@@ -99,7 +95,6 @@ Added this section.
 \initials{LDF 2004.12.04.}
 Added this section.
 \ENDLOG
-
 
 @q **** (4) operation_assignment --> numeric_variable @> 
 @q **** (4) PLUS_ASSIGN numeric_expression.           @>
@@ -133,7 +128,6 @@ Added this rule.
       {
  
       } /* |if (entry == 0)|  */
-
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -219,7 +213,6 @@ Added this rule.
  
       } /* |if (entry == 0)|  */
 
-
 @q ***** (5) |entry != 0|.@>   
 
 @ |entry != 0|.
@@ -239,7 +232,6 @@ Added this rule.
 
          if (entry->object == static_cast<void*>(0))
            {
-
 
            } /* |if (entry->object == 0)|  */
 
@@ -305,7 +297,6 @@ Added this rule.
  
       } /* |if (entry == 0)|  */
 
-
 @q ***** (5) |entry != 0|.@>   
 
 @ |entry != 0|.
@@ -325,7 +316,6 @@ Added this rule.
 
          if (entry->object == static_cast<void*>(0))
            {
-
 
            } /* |if (entry->object == 0)|  */
 
@@ -489,7 +479,6 @@ Added this rule.
 
 @<Define rules@>=
 
-
    if (c == static_cast<Color*>(0))
    ;
 
@@ -502,7 +491,6 @@ Added this rule.
 
    else if (entry == static_cast<Id_Map_Entry_Node>(0))
    ;
-
 
 @q ***** (5) |c != 0 && entry != 0|.@>   
 
@@ -560,7 +548,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) operation_assignment --> color_variable @> 
 @q **** (4) MINUS_ASSIGN color_expression.           @>
 
@@ -579,7 +566,6 @@ Added this rule.
 @=operation_assignment: color_variable MINUS_ASSIGN color_expression@>@/
 {
 
-
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
    Color* c = static_cast<Color*>(@=$3@>);
@@ -590,7 +576,6 @@ Added this rule.
 \initials{LDF 2004.12.18.}
 
 @<Define rules@>=
-
 
    if (c == static_cast<Color*>(0))
       ;  /* Do nothing  */ 
@@ -604,7 +589,6 @@ Added this rule.
 
    else if (entry == static_cast<Id_Map_Entry_Node>(0))
    ; /* Do nothing  */
-
 
 @q ***** (5) |c != 0 && entry != 0|.@>   
 
@@ -625,7 +609,6 @@ Added this rule.
 
          if (entry->object == static_cast<void*>(0))
            {
-
 
               delete c;
 
@@ -663,7 +646,6 @@ Added this rule.
 
 };
 
-
 @q **** (4) operation_assignment --> color_variable @> 
 @q **** (4) TIMES_ASSIGN numeric_expression.        @>
 
@@ -698,7 +680,6 @@ Added this rule.
  
       } /* |else if (entry == 0)|  */
 
-
 @q ***** (5) |entry != 0|.@>   
 
 @ |entry != 0|.
@@ -732,7 +713,6 @@ Added this rule.
 
                *q *= r;
 
-
             }   /* |else| (|entry->object != 0|)  */                
 
 @q ****** (6).@> 
@@ -749,7 +729,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) operation_assignment --> color_variable @> 
 @q **** (4) DIVIDE_ASSIGN numeric_expression.        @>
@@ -771,7 +750,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -788,14 +767,12 @@ Added this rule.
 
    real r = @=$3@>;
 
-
 @q ****** (6) Error handling:  |r == 0|.@>   
 
 @ Error handling:  |r == 0|.
 \initials{LDF 2004.12.18.}
 
 @<Define rules@>=
-
 
    if (r == ZERO_REAL)
       {
@@ -813,8 +790,6 @@ Added this rule.
          cerr_strm.str(""); 
 
       } /* |if (c == 0)|  */   
-
-
 
 @q ****** (6) Error handling:  |entry == 0|.@>   
 
@@ -838,7 +813,6 @@ Added this rule.
          cerr_strm.str("");
  
       } /* |else if (entry == 0)|  */
-
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -888,7 +862,6 @@ Added this rule.
 
                *q /= r;
 
-
             }   /* |else| (|entry->object != 0|)  */                
 
 @q ****** (6).@> 
@@ -916,7 +889,6 @@ Added this rule.
 Added this section.
 \ENDLOG
 
-
 @q **** (4) operation_assignment --> string_variable PLUS_ASSIGN @>
 @q **** (4) numeric_expression.                                  @>
 
@@ -929,7 +901,6 @@ Added this section.
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -938,7 +909,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -973,17 +944,13 @@ Added this rule.
          log_message(cerr_strm);
          cerr_message(cerr_strm, error_stop_value);
          cerr_strm.str("");
- 
 
-      } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ***** (5) |entry != 0|.@>   
 
-
     else /* |entry != 0|  */
       {
-
 
          string* s = static_cast<string*>(entry->object);
 
@@ -1024,7 +991,6 @@ Added this rule.
 
            } /* |if (s == 0)|  */
 
-
 @q ****** (6).@>           
  
          stringstream t;
@@ -1045,7 +1011,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) |points|.@>  
 
@@ -1077,7 +1042,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -1100,7 +1065,6 @@ Added this rule.
 \initials{LDF 2004.12.04.}
 
 @<Define rules@>=
-
 
    if (p == static_cast<Point*>(0))
       {
@@ -1140,7 +1104,6 @@ Added this rule.
          cerr_strm.str("");
  
       } /* |else if (entry == 0)|  */
-
 
 @q ***** (5) |p != 0 && entry != 0|.@>   
 
@@ -1232,7 +1195,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -1255,7 +1218,6 @@ Added this rule.
 \initials{LDF 2004.12.06.}
 
 @<Define rules@>=
-
 
    if (p == 0)
       {
@@ -1295,7 +1257,6 @@ Added this rule.
          cerr_strm.str("");
  
       } /* |else if (entry == 0)|  */
-
 
 @q ***** (5) |p != 0 && entry != 0|.@>   
 
@@ -1387,7 +1348,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -1426,7 +1387,6 @@ Added this rule.
          cerr_strm.str("");
  
       } /* |else if (entry == 0)|  */
-
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -1476,7 +1436,6 @@ Added this rule.
 
                *q *= r;
 
-
             }   /* |else| (|entry->object != 0|)  */                
 
 @q ****** (6).@> 
@@ -1514,7 +1473,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -1531,14 +1490,12 @@ Added this rule.
 
    real r = @=$3@>;
 
-
 @q ****** (6) Error handling:  |r == 0|.@>   
 
 @ Error handling:  |r == 0|.
 \initials{LDF 2004.12.18.}
 
 @<Define rules@>=
-
 
    if (r == ZERO_REAL)
       {
@@ -1556,8 +1513,6 @@ Added this rule.
          cerr_strm.str(""); 
 
       } /* |if (p == 0)|  */   
-
-
 
 @q ****** (6) Error handling:  |entry == 0|.@>   
 
@@ -1581,7 +1536,6 @@ Added this rule.
          cerr_strm.str("");
  
       } /* |else if (entry == 0)|  */
-
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -1631,7 +1585,6 @@ Added this rule.
 
                *q /= r;
 
-
             }   /* |else| (|entry->object != 0|)  */                
 
 @q ****** (6).@> 
@@ -1658,7 +1611,6 @@ Added this rule.
 \initials{LDF 2004.12.04.}
 Added this section.
 \ENDLOG
-
 
 @q **** (4) operation_assignment --> path_variable PLUS_ASSIGN @>
 @q **** (4) point_expression.                                       @>
@@ -1694,7 +1646,7 @@ Changed \§path-like variable> back to \§path variable>.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -1734,7 +1686,6 @@ Changed \§path-like variable> back to \§path variable>.
 
       } /* |if (entry == 0)|  */
 
-
 @q ***** (5) Error handling:  |entry| has invalid type.@>   
 @ Error handling:  |entry| has invalid type.
 \initials{LDF 2005.02.11.}
@@ -1753,7 +1704,6 @@ Added this section.
               || entry->type == REG_POLYGON
               || entry->type == ELLIPSE
               || entry->type == CIRCLE))
-
 
       {
           cerr_strm << thread_name << "ERROR! In `yyparse()', rule "
@@ -1842,17 +1792,13 @@ is cast to |Path*|.
 
                 } /* |catch (bad_alloc)|  */
 
-
            } /* |if (q == 0)|  */
 
-
 @q ****** (6).@>           
-
 
          *q += *p;
 
          entry->object = static_cast<void*>(q);
-
 
          delete p;
 
@@ -2003,9 +1949,7 @@ Changed \§path-like variable> back to \§path variable>.
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
-  
-      } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -2030,10 +1974,9 @@ indicated by |entry->type|.
          if (p == static_cast<Path*>(0))
            {
 
-@q ******* (7) @> 
+@q ******* (7) @>
 
-     
-                   if (entry->type == PATH)
+if (entry->type == PATH)
                       p = create_new<Path>(0);     
                    else if (entry->type == POLYGON)
                       p = create_new<Polygon>(0);      
@@ -2052,14 +1995,11 @@ indicated by |entry->type|.
 
                       }  /* |else| (|entry->type| is invalid).  */
 
-
 @q ******* (7) @> 
 
               entry->object = static_cast<void*>(p); 
 
-
            } /* |if (p == 0)|  */
-
 
 @q ****** (6).@>           
 
@@ -2090,7 +2030,6 @@ upon success and 0 upon failure.
 @*3 \§operation assignment> $\longrightarrow$ \§path variable>
 \.{MINUS\_ASSIGN} \.{CYCLE}.
 \initials{LDF 2004.11.01.}
-
 
 \LOG
 \initials{LDF 2004.11.01.}
@@ -2178,7 +2117,6 @@ upon success and 0 upon failure.
 Added this section.
 \ENDLOG
 
-
 @q **** (4) operation_assignment --> nurb_variable PLUS_ASSIGN point_expression.@>
 
 @*3 \§operation assignment> $\longrightarrow$ \§nurb variable> 
@@ -2198,7 +2136,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -2239,13 +2177,10 @@ Added this rule.
 
       } /* |if (entry == 0)|  */
 
-
 @q ****** (6) |entry != 0|.@>   
-
 
     else /* |entry != 0|  */
       {
-
 
          Nurb* q = static_cast<Nurb*>(entry->object);
 
@@ -2285,17 +2220,13 @@ Added this rule.
 
                 } /* |catch (bad_alloc)|  */
 
-
            } /* |if (q == 0)|  */
 
-
 @q ******* (7).@>           
-
 
          *q += p;
 
          entry->object = static_cast<void*>(q);
-
 
       }  /* |else| (|entry != 0|)  */
    
@@ -2331,7 +2262,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -2371,13 +2302,10 @@ Added this rule.
  
       } /* |if (entry == 0)|  */
 
-
 @q ****** (6) |entry != 0|.@>   
-
 
     else /* |entry != 0|  */
       {
-
 
          Nurb* q = static_cast<Nurb*>(entry->object);
 
@@ -2416,16 +2344,13 @@ Added this rule.
 
                 } /* |catch (bad_alloc)|  */
 
-
            } /* |if (q == 0)|  */
-
 
 @q ******* (7).@>           
 
          q->append_knot_or_weight(r, @=$3@>, scanner_node);
 
          entry->object = static_cast<void*>(q);
-
 
       }  /* |else| (|entry != 0|)  */
    
@@ -2439,7 +2364,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) knot_or_weight.@>   
 @*3 \§knot or weight>.
@@ -2472,7 +2396,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -2505,7 +2429,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -2556,7 +2480,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -2600,7 +2524,6 @@ Added this rule.
          cerr_strm.str("");
  
       } /* |if (entry == 0)|  */
-
 
 @q ***** (5) Error handling:  |entry| has invalid type.@>   
 @ Error handling:  |entry| has invalid type.
@@ -2679,9 +2602,7 @@ Added this section.
 
             } /* |catch (bad_alloc)|  */
 
-
          } /* |if (q == 0)|  */
-
 
 @q ****** (6).@>           
 
@@ -2702,9 +2623,6 @@ Added this section.
 
 };
 
-
-
-
 @q *** (3) parabolae.@> 
 @*2 {\bf parabolae}.
 \initials{LDF 2005.11.18.}
@@ -2719,7 +2637,6 @@ Added this section.
 @*3 \§operation assignment> $\longrightarrow$ \§parabola variable> 
 \.{PLUS\_ASSIGN} \.{CYCLE}.
 \initials{LDF 2005.11.18.}
-
 
 \LOG
 \initials{LDF 2005.11.18.}
@@ -2742,9 +2659,7 @@ Added this rule.
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
-  
-      } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -2760,9 +2675,7 @@ Added this rule.
 
                 entry->object = static_cast<void*>(p); 
 
-
            } /* |if (p == 0)|  */
-
 
          if (p != static_cast<Parabola*>(0))
             p->set_cycle(true);
@@ -2786,7 +2699,6 @@ Added this rule.
 \.{MINUS\_ASSIGN} \.{CYCLE}.
 \initials{LDF 2005.11.18.}
 
-
 \LOG
 \initials{LDF 2005.11.18.}
 Added this rule.
@@ -2808,9 +2720,7 @@ Added this rule.
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
 
-  
-      } /* |if (entry == 0)|  */
-
+} /* |if (entry == 0)|  */
 
 @q ***** (5) |entry != 0|.@>   
 
@@ -2826,9 +2736,7 @@ Added this rule.
 
                 entry->object = static_cast<void*>(p); 
 
-
            } /* |if (p == 0)|  */
-
 
          if (p != static_cast<Parabola*>(0))
             p->set_cycle(false);
@@ -2845,7 +2753,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) |rectangles|.@>  
 
@@ -2877,7 +2784,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    if (DEBUG)
      {
 
@@ -2919,13 +2826,10 @@ Added this rule.
 
       } /* |if (entry == 0)|  */
 
-
 @q ***** (5) |entry != 0|.@>   
-
 
     else /* |entry != 0|  */
       {
-
 
          Rectangle* q = static_cast<Rectangle*>(entry->object);
 
@@ -2965,17 +2869,13 @@ Added this rule.
 
                 } /* |catch (bad_alloc)|  */
 
-
            } /* |if (q == 0)|  */
 
-
 @q ****** (6).@>           
-
 
          *q += *p;
 
          entry->object = static_cast<void*>(q);
-
 
          delete p;
 
@@ -2997,7 +2897,6 @@ upon success and 0 upon failure.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) |pictures|.@>  
 
@@ -3077,7 +2976,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3104,8 +3003,6 @@ Added this rule.
                                      BOOLEAN,
                                      static_cast<bool*>(@=$3@>));
 
-
-
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.07.}
@@ -3126,16 +3023,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3152,10 +3047,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -3167,9 +3061,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
-
-
 
 @q *** (3) |numeric_vectors|.@>  
 
@@ -3204,7 +3095,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3224,8 +3115,7 @@ Added this rule.
 
 @<Define rules@>=
 
-  
-   real* r;
+real* r;
 
    try 
       {
@@ -3249,7 +3139,6 @@ Added this rule.
 
       }  /* |catch (bad_alloc)|  */
 
-
 @q ***** (5).@> 
 
   *r = @=$3@>;
@@ -3260,8 +3149,6 @@ Added this rule.
                                      NUMERIC_VECTOR,
                                      NUMERIC,
                                      r);
-
-
 
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
@@ -3283,16 +3170,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.06.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3309,10 +3194,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -3357,7 +3241,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3384,8 +3268,6 @@ Added this rule.
                                       STRING,
                                       static_cast<string*>(@=$3@>));
 
-
-
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.09.}
@@ -3406,16 +3288,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.09.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3432,10 +3312,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -3484,7 +3363,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3511,8 +3390,6 @@ Added this rule.
                                    PEN,
                                    static_cast<Pen*>(@=$3@>));
 
-
-
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.11.}
@@ -3533,16 +3410,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.11.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3559,10 +3434,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -3607,7 +3481,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3635,8 +3509,6 @@ Added this rule.
                                    DASH_PATTERN,
                                    static_cast<Dash_Pattern*>(@=$3@>));
 
-
-
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.13.}
@@ -3658,16 +3530,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3685,10 +3555,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -3748,7 +3617,7 @@ Moved this rule from \filename{passign.w} to this file
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3775,8 +3644,6 @@ Moved this rule from \filename{passign.w} to this file
                                      COLOR,
                                      static_cast<Color*>(@=$3@>));
 
-
-
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.08.31.}
@@ -3797,16 +3664,14 @@ Moved this rule from \filename{passign.w} to this file
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3823,10 +3688,9 @@ Moved this rule from \filename{passign.w} to this file
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -3876,7 +3740,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -3904,8 +3768,6 @@ Added this rule.
                                    TRANSFORM,
                                    static_cast<Transform*>(@=$3@>));
 
-
-
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.13.}
@@ -3927,16 +3789,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -3954,10 +3814,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -4011,7 +3870,6 @@ Added this rule.
                  << "WITH_DISTANCE numeric_expression"
                  << endl 
                  << "with_angle_optional with_axis_optional'.";
-
 
        log_message(cerr_strm);       
        cerr_message(cerr_strm); 
@@ -4068,7 +3926,6 @@ Added this rule.
       {
 
          Focus* f;
-
 
          try 
             {
@@ -4138,7 +3995,6 @@ Added this rule.
                    << "`with_axis_optional' has invalid value.  "
                    << "Setting `axis_char' to 'z'.";
 
-
          log_message(cerr_strm); 
          cerr_message(cerr_strm, error_stop_value); 
          cerr_strm.str(""); 
@@ -4200,7 +4056,6 @@ Added this rule.
 
            }  /* |else| (|status != 0|)  */
 
-
 @q ******* (7) @>
 
       }  /* |else| (|entry != 0|)  */
@@ -4254,7 +4109,7 @@ Moved this rule from \filename{passign.w} to this file
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -4281,8 +4136,6 @@ Moved this rule from \filename{passign.w} to this file
                                      POINT,
                                      static_cast<Point*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.08.31.}
@@ -4303,16 +4156,14 @@ Moved this rule from \filename{passign.w} to this file
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -4329,10 +4180,9 @@ Moved this rule from \filename{passign.w} to this file
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -4371,7 +4221,6 @@ Moved this rule from \filename{passign.w} to this file
 (\filename{popassgn.w}). 
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -4383,7 +4232,7 @@ Moved this rule from \filename{passign.w} to this file
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -4443,7 +4292,6 @@ Moved this rule from \filename{passign.w} to this file
 @ |entry != 0|.
 \initials{LDF 2004.11.10.}
 
-
 @<Define rules@>=
 
   else /* |entry != 0|  */
@@ -4464,10 +4312,9 @@ Moved this rule from \filename{passign.w} to this file
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Point, Point>(scanner_node,
+status = vector_type_assign<Point, Point>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -4479,9 +4326,8 @@ failed.
 \initials{LDF 2004.11.10.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -4520,14 +4366,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
 }; 
-
 
 @q *** (3) |bool_point_vectors|.@>  
 @*2 {\bf bool\_point\_vectors}.
@@ -4578,7 +4421,7 @@ Moved this rule from \filename{passign.w} to this file
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -4594,8 +4437,7 @@ Moved this rule from \filename{passign.w} to this file
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
- 
-  Bool_Point* bp = static_cast<Bool_Point*>(@=$3@>);
+Bool_Point* bp = static_cast<Bool_Point*>(@=$3@>);
 
 @q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
 @ Call |Scan_Parse::vector_type_plus_assign()|.
@@ -4609,7 +4451,6 @@ Moved this rule from \filename{passign.w} to this file
                              BOOL_POINT_VECTOR,
                              BOOL_POINT,
                              bp);   
-
 
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
@@ -4633,16 +4474,14 @@ Moved this rule from \filename{passign.w} to this file
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.09.01.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -4660,10 +4499,9 @@ Moved this rule from \filename{passign.w} to this file
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -4680,7 +4518,6 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q *** (3) |path_vectors|.@>  
 
@@ -4715,7 +4552,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -4742,8 +4579,6 @@ Added this rule.
                                      PATH,
                                      static_cast<Path*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.12.12.}
@@ -4764,16 +4599,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.12.12.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -4790,10 +4623,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -4818,7 +4650,6 @@ $\longrightarrow$ \§path vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -4830,7 +4661,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -4910,10 +4741,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Path, Path>(scanner_node,
+status = vector_type_assign<Path, Path>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -4925,9 +4755,8 @@ failed.
 \initials{LDF 2004.12.12.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -4966,14 +4795,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
 }; 
-
 
 @q *** (3) |ellipse_vectors|.@>  
 
@@ -5015,8 +4841,6 @@ Added this rule.
                                     ELLIPSE,
                                     static_cast<Ellipse*>(@=$3@>));
 
-
-
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -5032,7 +4856,6 @@ $\longrightarrow$ \§ellipse vector variable>
 \initials{LDF 2004.12.14.}
 Added this rule.
 \ENDLOG
-
 
 @q **** (4) Definition.@> 
 
@@ -5117,7 +4940,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -5144,8 +4967,6 @@ Added this rule.
                                         CIRCLE,
                                         static_cast<Circle*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.12.14.}
@@ -5166,16 +4987,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -5192,10 +5011,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -5220,7 +5038,6 @@ $\longrightarrow$ \§circle vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -5232,7 +5049,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -5312,10 +5129,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Circle, Circle>(scanner_node,
+status = vector_type_assign<Circle, Circle>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -5327,9 +5143,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -5368,9 +5183,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
@@ -5416,8 +5229,6 @@ Added this rule.
                                     PARABOLA,
                                     static_cast<Parabola*>(@=$3@>));
 
-
-
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -5433,7 +5244,6 @@ $\longrightarrow$ \§parabola vector variable>
 \initials{LDF 2005.12.01.}
 Added this rule.
 \ENDLOG
-
 
 @q **** (4) Definition.@> 
 
@@ -5525,8 +5335,6 @@ Added this rule.
                                     HYPERBOLA,
                                     static_cast<Hyperbola*>(@=$3@>));
 
-
-
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -5542,7 +5350,6 @@ $\longrightarrow$ \§hyperbola vector variable>
 \initials{LDF 2005.12.01.}
 Added this rule.
 \ENDLOG
-
 
 @q **** (4) Definition.@> 
 
@@ -5634,8 +5441,6 @@ Added this rule.
                                     CONIC_SECTION_LATTICE_VECTOR,
                                     CONIC_SECTION_LATTICE,
                                     static_cast<Conic_Section_Lattice*>(@=$3@>));
-
-
 
     @=$$@> = static_cast<void*>(0);
 
@@ -5736,19 +5541,15 @@ Removed debugging code.
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
- 
 
 @=operation_assignment: polygon_vector_variable PLUS_ASSIGN polygon_expression@>
 {
-
 
     vector_type_plus_assign<Polygon>(static_cast<Scanner_Node>(parameter),
                                      static_cast<Id_Map_Entry_Node>(@=$1@>), 
                                      POLYGON_VECTOR,
                                      POLYGON,
                                      static_cast<Polygon*>(@=$3@>));
-
-
 
     @=$$@> = static_cast<void*>(0);
 
@@ -5767,7 +5568,6 @@ $\longrightarrow$ \§polygon vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -5779,7 +5579,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -5859,10 +5659,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Polygon, Polygon>(scanner_node,
+status = vector_type_assign<Polygon, Polygon>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -5874,9 +5673,8 @@ failed.
 \initials{LDF 2005.03.01.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -5915,14 +5713,11 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
 }; 
-
 
 @q *** (3) |triangle_vectors|.@>  
 
@@ -5957,7 +5752,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -5984,8 +5779,6 @@ Added this rule.
                                          TRIANGLE,
                                          static_cast<Triangle*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.25.}
@@ -6006,16 +5799,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -6032,10 +5823,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -6060,7 +5850,6 @@ $\longrightarrow$ \§triangle vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -6072,7 +5861,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -6152,10 +5941,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Triangle, Triangle>(scanner_node,
+status = vector_type_assign<Triangle, Triangle>(scanner_node,
                                                       entry,
                                                       pv);          
 
@@ -6167,9 +5955,8 @@ failed.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -6208,9 +5995,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
@@ -6249,7 +6034,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -6276,8 +6061,6 @@ Added this rule.
                                         RECTANGLE,
                                         static_cast<Rectangle*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.12.14.}
@@ -6298,16 +6081,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -6324,10 +6105,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -6352,7 +6132,6 @@ $\longrightarrow$ \§rectangle vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -6364,7 +6143,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -6444,10 +6223,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Rectangle, Rectangle>(scanner_node,
+status = vector_type_assign<Rectangle, Rectangle>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -6459,9 +6237,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -6500,9 +6277,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
@@ -6541,7 +6316,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -6568,8 +6343,6 @@ Added this rule.
                                         REG_POLYGON,
                                         static_cast<Reg_Polygon*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.12.14.}
@@ -6590,16 +6363,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -6616,10 +6387,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -6644,7 +6414,6 @@ $\longrightarrow$ \§regular polygon vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -6656,7 +6425,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -6736,10 +6505,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Reg_Polygon, Reg_Polygon>(scanner_node,
+status = vector_type_assign<Reg_Polygon, Reg_Polygon>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -6751,9 +6519,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -6792,9 +6559,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
@@ -6840,8 +6605,6 @@ Added this rule.
                                     ELLIPSOID,
                                     static_cast<Ellipsoid*>(@=$3@>));
 
-
-
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -6857,7 +6620,6 @@ $\longrightarrow$ \§ellipsoid vector variable>
 \initials{LDF 2005.12.01.}
 Added this rule.
 \ENDLOG
-
 
 @q **** (4) Definition.@> 
 
@@ -6949,8 +6711,6 @@ Added this rule.
                                     SPHERE,
                                     static_cast<Sphere*>(@=$3@>));
 
-
-
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -6966,7 +6726,6 @@ $\longrightarrow$ \§sphere vector variable>
 \initials{LDF 2005.12.01.}
 Added this rule.
 \ENDLOG
-
 
 @q **** (4) Definition.@> 
 
@@ -7018,9 +6777,6 @@ Added this rule.
 
 }; 
 
-
-
-
 @q *** (3) |cuboid_vectors|.@>  
 
 @*2 \§cuboid vectors>.
@@ -7054,7 +6810,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -7081,8 +6837,6 @@ Added this rule.
                                         CUBOID,
                                         static_cast<Cuboid*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2004.12.14.}
@@ -7103,16 +6857,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -7129,10 +6881,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -7157,7 +6908,6 @@ $\longrightarrow$ \§cuboid vector variable>
 Added this rule.
 \ENDLOG
 
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
@@ -7169,7 +6919,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -7249,10 +6999,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-  
-      status = vector_type_assign<Cuboid, Cuboid>(scanner_node,
+status = vector_type_assign<Cuboid, Cuboid>(scanner_node,
                                                 entry,
                                                 pv);          
 
@@ -7264,9 +7013,8 @@ failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
-                            
 
-    if (status != 0)
+if (status != 0)
          {
             cerr_strm << thread_name 
                       << "ERROR! In parser rule "
@@ -7305,9 +7053,7 @@ failed.
  
       }  /* |else| (|status == 0|)  */
 
-
    }   /* |else| (|entry != 0|)  */
-
 
 @q ***** (5).@> 
 
@@ -7347,7 +7093,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true|  */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -7375,8 +7121,6 @@ Added this rule.
                                         POLYHEDRON,
                                         static_cast<Polyhedron*>(@=$3@>));
 
-
-
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
 \initials{LDF 2005.01.14.}
@@ -7397,16 +7141,14 @@ Added this rule.
       cerr_strm.str("");
 
     }  /* |if (status != 0)|  */
- 
-                             
+
 @q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=
-                                           
 
-  else /* |status == 0|  */
+else /* |status == 0|  */
     {
 
 #if DEBUG_COMPILE
@@ -7424,10 +7166,9 @@ Added this rule.
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
 
-    } /* |else| (|status == 0|)  */ 
+} /* |else| (|status == 0|)  */ 
 
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
@@ -7450,9 +7191,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>

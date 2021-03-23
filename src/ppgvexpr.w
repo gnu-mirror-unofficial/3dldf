@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) |polygon_vector| expressions.@>
 @** \§polygon vector> expressions.
@@ -60,7 +58,6 @@
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
-
 @q * (1) |polygon_vector| primary.@>
 @* \§polygon vector primary>.
 \initials{LDF 2005.02.11.}
@@ -69,7 +66,6 @@ Created this file and wrote quite a few rules.
 \initials{LDF 2005.02.11.}
 Added this type declaration.
 \ENDLOG
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> polygon_vector_primary@>@/
@@ -156,7 +152,6 @@ Added this rule.
      }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
-
 
 @q ** (2) polygon_vector_primary --> LEFT_PARENTHESIS  @>
 @q ** (2) polygon_vector_expression  RIGHT_PARENTHESIS.@>
@@ -441,7 +436,6 @@ Added this section.
                                 static_cast<void*>(pv),
                                 POLYGON_VECTOR);
 
-
    if (status != 0)
       {
          
@@ -449,16 +443,12 @@ Added this section.
 
       }  /* |if (status != 0)|  */
 
- 
-   else /* |status != 0|  */
+else /* |status != 0|  */
       {
  
          @=$$@> = static_cast<void*>(pv);
 
       }  /* |else| (|status != 0|)  */
-
-
-
 
 @q ** (2) polygon_vector_secondary --> polygon_secondary @> 
 @q ** (2) DECOMPOSE path_primary                         @> 
@@ -532,7 +522,6 @@ Added this rule.
 
 };
 
-
 @q ** (2) polygon_vector_secondary --> reg_polygon_secondary @> 
 @q ** (2) OVER path_primary                                  @> 
 
@@ -556,7 +545,6 @@ Added this rule.
    @<Decompose |Polygon| using |Path|@>@;
 
 };
-
 
 @q ** (2) Decompose |Polygon| using |Path|.@> 
 @*1 Decompose {\bf Polygon} using {\bf Path}.
@@ -643,8 +631,7 @@ Removed debugging code.
 {
     Pointer_Vector<Polygon>* pv = new Pointer_Vector<Polygon>;
 
- 
-    int status = decompose_func(static_cast<Scanner_Node>(parameter),
+int status = decompose_func(static_cast<Scanner_Node>(parameter),
                                 @=$1@>,
                                 POLYGON,
                                 @=$3@>,
@@ -723,7 +710,6 @@ in order to create a |Pointer_Vector<Polygon>*| from the
 
 };
 
-
 @q *** (3) with_rectangles_optional.@> 
 
 @*1 \§with rectangles optional>.
@@ -755,7 +741,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG)
       {
           cerr_strm << thread_name 
@@ -771,7 +757,6 @@ Added this rule.
 @q ****** (6) @>   
 
    @=$$@> = 0;
-
 
 };
 
@@ -793,7 +778,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = false;  /* |true| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG)
       {
           cerr_strm << thread_name 
@@ -811,8 +796,6 @@ Added this rule.
    @=$$@> = 1;
 
 };
-
-
 
 @q * (1) polygon_vector tertiary.  @>
 
@@ -862,7 +845,6 @@ Added this rule.
 
 };
 
-
 @q * (1) polygon_vector expression.@>
 @* \§polygon vector expression>.
 
@@ -906,7 +888,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -915,7 +896,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

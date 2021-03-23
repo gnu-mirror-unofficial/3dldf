@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q * (0) paraboloid expressions.  @>
 @** paraboloid expressions.
@@ -121,7 +119,6 @@ Added this rule.
   @=$$@> = @=$2@>;
 
 };
-
 
 @q ***** (5) paraboloid_primary --> LAST @>
 @q ***** (5) paraboloid_vector_expression.@>
@@ -227,7 +224,6 @@ Added this rule.
 @*1 \§paraboloid secondary> $\longrightarrow$ \§paraboloid secondary> 
 \§transformer>.
 
-
 \LOG
 \initials{LDF 2006.01.20.}
 Added this rule.
@@ -237,7 +233,6 @@ Added this rule.
 @=paraboloid_secondary: paraboloid_secondary transformer@>@/
 {
 
-
   Paraboloid* p = static_cast<Paraboloid*>(@=$1@>);
   Transform* t = static_cast<Transform*>(@=$2@>);
 
@@ -245,12 +240,9 @@ Added this rule.
 
   delete t;
 
-
   @=$$@> = static_cast<void*>(p); 
 
 };
-
-
 
 @q * (1) paraboloid tertiary.@>
 @* \§paraboloid tertiary>.
@@ -281,8 +273,6 @@ Added this rule.
 
 };
 
-
-
 @q * (1) paraboloid expression.@>
 @* \§paraboloid expression>.
 \initials{LDF 2006.01.20.}
@@ -311,7 +301,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -320,7 +309,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
 @q eval:(outline-minor-mode t)        @>

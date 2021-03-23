@@ -48,8 +48,6 @@
 @q USA                                 @>
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
-
-
 
 @q *** (3) command --> BEGINFIG LEFT_PARENTHESIS @>
 @q *** (3) numeric_expression RIGHT_PARENTHESIS. @> 
@@ -98,7 +96,6 @@ possible to use |beginfig| in loops.
 @*3 \§command> $\longrightarrow$ 
 \.{ENDFIG} \§with clause output list>.
 
-
 \LOG
 \initials{LDF 2004.06.19.}  
 Added this rule.
@@ -117,7 +114,6 @@ Removed most of the code for this rule to the function
 Changed the way |endfig_func()| is called to reflect 
 changes I've made to it in preparation for using it as the 
 start routine of a new thread.
-
 
 \initials{LDF 2004.06.23.}
 Now calling |pthread_create()| with |Scan_Parse::endfig_func()| as the thread's
@@ -212,7 +208,6 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> character_comment_optional@>
 
-
 @q **** (4) character_comment_optional --> /* EMPTY  */@>   
 @*3 \§character comment optional> $\longrightarrow$ \.{EMPTY}.
 \initials{LDF 2005.06.11.}
@@ -249,7 +244,6 @@ Added this rule.
 
    @=$$@> = @=$1@>;
 
- 
 };
 
 @q **** (4) command --> ENDCHAR with_clause_output_list.@>
@@ -280,7 +274,6 @@ Added this rule.
 
 \initials{LDF 2004.06.24.}
 Now using a thread with |output_func()| as its start routine.
-
 
 \initials{LDF 2004.06.29.}
 Rewrote this rule.  It now handles all of the arguments 
@@ -316,7 +309,6 @@ and unnecessary.
     @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) with_clause_output_list @>
 @*3 \§with clause output list>.
@@ -364,7 +356,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(0);
 
 };
-
 
 @q **** (4) with_clause_output @>
 @*3 \§with clause output>.
@@ -426,7 +417,6 @@ Added this rule.
 
 };
 
-
 @q ***** (5) with_clause_output --> WITH_PROJECTION projection_type.@>
 @*4 \§with clause output> $\longrightarrow$ \.{WITH\_PROJECTION}
 \§projection type>.
@@ -487,7 +477,6 @@ set |@=$$@>|.
 
 };
 
-
 @q ***** (5) with_clause_output --> sort_option.@>
 @*4 \§with clause output> $\longrightarrow$ \§sort option>.
 
@@ -512,7 +501,6 @@ Added this rule.
 \initials{LDF 2004.06.29.}
 Added this section.
 \ENDLOG 
-
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> sort_option@>
@@ -642,7 +630,6 @@ Added this rule.
 Added this section.
 \ENDLOG 
 
-
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> projection_limits_option@>
 
@@ -677,8 +664,6 @@ set |@=$$@>|.
     *r = @=$2@>;
  
     @=$$@> = scanner_node->min_x_proj_ptr = static_cast<void*>(r);
-
-
 
 };
 
@@ -764,8 +749,7 @@ Changed the way I allocate memory for a |real| value and
 set |@=$$@>|.
 \ENDLOG 
 
-@<Define rules@>= 
-  
+@<Define rules@>=
 
 @=projection_limits_option: MAX_Y_PROJ EQUATE numeric_expression@>
 {
@@ -893,7 +877,6 @@ set |@=$$@>|.
 
 };
 
-
 @q ******* (7) projection_type --> PARALLEL_X_Z.  @>
 @*6 \§projection type> $\longrightarrow$ `\.{PARALLEL\_X\_Z}'.  
 
@@ -910,8 +893,6 @@ set |@=$$@>|.
 
 };
 
-
-
 @q ******* (7) projection_type --> PARALLEL_Z_Y.  @>
 @*6 \§projection type> $\longrightarrow$ `\.{PARALLEL\_Z\_Y}'.  
 
@@ -927,8 +908,6 @@ set |@=$$@>|.
   @=$$@> = Projections::parallel_z_y;
 
 };
-
-
 
 @q ******* (7) projection_type --> AXONOMETRIC.  @>
 @*6 \§projection type> $\longrightarrow$ `\.{AXONOMETRIC}'.  
@@ -961,7 +940,6 @@ set |@=$$@>|.
   @=$$@> = Projections::iso;
 
 };
-
 
 @q ******* (7) projection_type --> SUPPRESS.  @>
 @*6 \§projection type> $\longrightarrow$ `\.{SUPPRESS}'.  
@@ -1076,7 +1054,6 @@ Added this rule.
 
 };
 
-
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -1085,7 +1062,6 @@ Added this rule.
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
-
 @q Local Variables: @>
 @q mode:CWEB  @>
 @q eval:(outline-minor-mode t)  @>
