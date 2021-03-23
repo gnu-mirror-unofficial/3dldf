@@ -46,16 +46,22 @@ show columns from 3dldf.points;
 
 /* ***************************************************** */
 
+delete from points;
+
 insert into points (x_coord_world, y_coord_world, z_coord_world, w_coord_world)
 values
 (1, 2, 3, 1);
+
+insert into points (x_coord_world, y_coord_world, z_coord_world, w_coord_world)
+values
+(17.5, 5, 13.001, 1.6);
 
 #### *****************************************************
 
 /* Select  */
 
 select x_coord_world, y_coord_world, z_coord_world, w_coord_world from points
-order by x_coord_world asc\G
+order by x_coord_world, y_coord_world, z_coord_world, z_coord_world asc\G
 
 /* Local Variables: */
 /* mode:SQL */

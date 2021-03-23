@@ -2628,6 +2628,7 @@ Added |vector <real> numeric_list_real_vector|.
   unsigned int row_ctr; 
   unsigned int field_ctr;
   long affected_rows;
+  stringstream sql_strm;
 #endif 
 
    Input_Struct* in;
@@ -2915,10 +2916,6 @@ Removed |int definition_ctr|.
    
    vector<string>     macro_untyped_parameter_vector;
    vector<Int_String> macro_typed_parameter_vector;
-
-
-
-
 
 @q **** (4) |public| data and function members.@>
 @*3 |public| data and function members.
@@ -4328,8 +4325,6 @@ get_token_string(void)
   return token_string;
 }
 
-
-
 @q **** (4) Showing. @>
 @*3 Showing.
 
@@ -4338,7 +4333,6 @@ get_token_string(void)
 \filename{scanprse.web}. 
 
 \ENDLOG 
-
 
 @<Declare |Scanner_Type| functions@>=
 void
@@ -4374,6 +4368,106 @@ Scanner_Type::show(string s, bool show_all) const
 
   return;
 }
+
+@q * (1) Database functions.@>
+@* Database functions.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this section with the declarations of |submit_mysql_query| and |show_database|.
+\ENDLOG
+
+@q * (2) Show database.@>
+@* Show database.
+\initials{LDF 2021.03.23.}
+
+@q ***** (5) Declaration. @>
+@
+@<Declare |Scanner_Type| functions@>=
+int
+show_database(vector<int> &int_vector);
+
+@q * (2) Submit MySQL query.@>
+@* Submit MySQL query.
+\initials{LDF 2021.03.23.}
+
+@q ***** (5) Declaration. @>
+@
+@<Declare |Scanner_Type| functions@>=
+int
+submit_mysql_query(string query_str);
+
+@q ***** (5) Definition. @>
+@
+@<Define |Scanner_Type| functions@>=
+int
+Scanner_Type::submit_mysql_query(string query_str)
+{
+  int status = 0;
+
+  bool DEBUG = true;  /* |false|  */
+  
+  mysql_query(mysql, query_str.c_str());
+
+   if (status != 0)
+     {
+          
+       cerr  << "ERROR!  In `|Scanner_Type::submit_mysql_query|':"
+	     << endl 
+	     << "`mysql_query' failed, returning " << status << ":"
+	     << endl 
+	     << "Error:  " << mysql_error(mysql)
+	     << endl 
+	     << "Error number:  " << mysql_errno(mysql)
+	     << endl 
+	     << "Exiting function unsuccessfully with return value 1." 
+	     << endl;
+
+       return 1;
+         
+     }  /* |if| (|mysql_query| failed.)  */
+
+   result = mysql_store_result(mysql);        
+
+   if (result == 0)
+   {
+     cerr  << "In `|Scanner_Type::submit_mysql_query|':  "
+          << "`mysql_store_result' returned 0." << endl 
+          << "No results.  Continuing."
+          << endl;
+          
+   }  /* |if| (No result)  */
+   else
+   {
+       cerr  << "In `|Scanner_Type::submit_mysql_query|':  "
+             << "`mysql_store_result' returned results." << endl;
+
+       row_ctr   = mysql_num_rows(result);
+       field_ctr = mysql_num_fields(result);
+
+       if (DEBUG)
+         {
+           cerr << "`row_ctr' == " << row_ctr 
+                << endl
+                << "`field_ctr' == " << field_ctr 
+                << endl;
+                     
+
+         }  /* |if (DEBUG)|  */
+   
+       affected_rows = (long) mysql_affected_rows(mysql);
+
+       if (DEBUG)
+       {
+         cerr << "`affected_rows' == " << affected_rows
+              << endl;
+       }
+   }
+
+   return 0;
+   
+}  /* |submit_mysql_query| definition */
 
 @q **** (4) Handle |numeric_list|.  @>
 @*3 Handle {\bf numeric\_list}.

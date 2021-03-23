@@ -3644,8 +3644,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm  
-                << "*** Parser: `command --> "
-                << "SHOW DATABASE'.";
+                << "*** Parser: Rule `command --> SHOW DATABASE'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3654,7 +3653,42 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = static_cast<void*>(0);
+#ifndef HAVE_LIBMYSQLCLIENT
+    cerr_strm << "MySQL not available.  No database to show." << endl
+              << "Continuing." << endl;
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+#else
+ 
+    vector<int> arg_vector;
+    arg_vector.push_back(DATABASE);
+
+    status = scanner_node->show_database(arg_vector);
+ 
+    if (status != 0)
+    {
+       cerr_strm << "*** Parser:  ERROR! In rule `command --> SHOW DATABASE':"
+                 << "`Scanner_Type::show_database' failed, returning " << status 
+                 << endl
+                 << "Failed to show database.  Continuing." << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+    }
+    else if (DEBUG)
+    {
+       cerr_strm << "*** Parser:  In rule `command --> SHOW DATABASE':"
+                 << "`Scanner_Type::show_database' succeeded, returning 0."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+    }
+
+#endif 
+
+    @=$$@> = static_cast<void*>(0);
 
 };
 
