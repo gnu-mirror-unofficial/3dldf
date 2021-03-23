@@ -109,7 +109,7 @@ This condition occurs legitimately when one tries to show an
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -131,11 +131,11 @@ This condition occurs legitimately when one tries to show an
 @<Define rules@>=
 
    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
-     {
+   {
 
-        @=$$@> = static_cast<void*>(0);
+      @=$$@> = static_cast<void*>(0);
 
-     } /* |if (entry == 0 || entry->object == 0)|  */
+   } /* |if (entry == 0 || entry->object == 0)|  */
 
 @q **** (4) |entry != 0 && entry->object != 0|.@>   
 
@@ -145,7 +145,7 @@ This condition occurs legitimately when one tries to show an
 @<Define rules@>=
 
    else /* |entry != 0 && entry->object != 0|  */
-      {
+   {
 
 @q ***** (5) Try to allocate memory for a new |Point| for |point_primary|.@>        
 
@@ -164,21 +164,93 @@ This condition occurs legitimately when one tries to show an
          catch (bad_alloc)
            {
          
-                 cerr_strm << "ERROR! In yyparse(), rule " 
-                           << "`point_primary --> point_variable':"
-                           << endl 
-                           << "`create_new<Point>()' failed. "
-                           << "Rethrowing `bad_alloc'.";
+              cerr_strm << "ERROR! In yyparse(), rule " 
+                        << "`point_primary --> point_variable':"
+                        << endl 
+                        << "`create_new<Point>()' failed. "
+                        << "Rethrowing `bad_alloc'.";
 
-                    log_message(cerr_strm);
-                    cerr_message(cerr_strm, error_stop_value);
-                    cerr_strm.str("");
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
 
-                    throw;
+              throw;
 
            } /* |catch (bad_alloc)|  */
-                  
+    
+        if (DEBUG)
+           cerr << "entry->name   == " << entry->name << endl
+                << "q->get_name() == " << q->get_name() << endl;
+
+        string q_name = q->get_name();
+
+        if (q_name.length() > 0 && q_name != entry->name)
+        {
+              cerr_strm << "WARNING! In `yyparse', rule " 
+                        << "`point_primary --> point_variable':"
+                        << endl 
+                        << "`q_name' is not empty and doesn't match `entry->name'."
+                        << endl
+                        << "`q_name'      == " << q_name << endl
+                        << "`entry->name' == " << entry->name << endl
+                        << "This shouldn't be possible.  Not setting `q->name'." 
+                        << endl
+                        << "Continuing." << endl;
+
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
+        }
+        else if (q_name.length() > 0 && q_name == entry->name)
+        {
+            if (DEBUG)
+            {
+              cerr_strm << "In `yyparse', rule " 
+                        << "`point_primary --> point_variable':"
+                        << endl 
+                        << "`q_name' is not empty and matches `entry->name'."
+                        << endl
+                        << "`q_name' == `entry->name' == " << q_name << endl
+                        << "This isn't a problem." << endl 
+                        << "Continuing." << endl;
+
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
+            } 
+        }
+        else
+        {
+            if (DEBUG)
+            {
+                cerr_strm << "In `yyparse', rule " 
+                          << "`point_primary --> point_variable':"
+                          << endl 
+                          << "`q_name' is empty.  Setting `q->name' to `entry->name' == " 
+                          << entry->name << endl;
+
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+           }
+
+           q->set_name(entry->name);
+
+           if (DEBUG)
+           {
+               cerr_strm << "In `yyparse', rule " 
+                         << "`point_primary --> point_variable':"
+                         << endl 
+                         << "`q->name' == " << q->get_name() << endl; 
+
+               log_message(cerr_strm);
+               cerr_message(cerr_strm);
+               cerr_strm.str("");
+           }
+        } 
+
         @=$$@> = static_cast<void*>(q);           
+
 
    }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
@@ -315,7 +387,7 @@ Added this rule.
                      << "and exiting rule.";
 
            log_message(cerr_strm);
-           cerr_message(cerr_strm, error_stop_value);
+           cerr_message(cerr_strm);
            cerr_strm.str("");
         
            delete p;
@@ -412,7 +484,7 @@ Added this rule.
                      << "and exiting rule.";
 
            log_message(cerr_strm);
-           cerr_message(cerr_strm, error_stop_value);
+           cerr_message(cerr_strm);
            cerr_strm.str("");
         
            delete p;
@@ -2570,7 +2642,7 @@ Added this rule.
                    << "Rethrowing `bad_alloc'.";
 
          log_message(cerr_strm);
-         cerr_message(cerr_strm, error_stop_value);
+         cerr_message(cerr_strm);
          cerr_strm.str("");
 
          throw;
@@ -2601,7 +2673,7 @@ Added this rule.
                     << endl << "and will try to continue.";
 
           log_message(cerr_strm);
-          cerr_message(cerr_strm, error_stop_value);
+          cerr_message(cerr_strm);
           cerr_strm.str("");
 
           delete p;
@@ -2629,7 +2701,7 @@ Added this rule.
                     << endl << "and will try to continue.";
 
           log_message(cerr_strm);
-          cerr_message(cerr_strm, error_stop_value);
+          cerr_message(cerr_strm);
           cerr_strm.str("");
 
           delete p;
@@ -2795,7 +2867,7 @@ Added {\TeX} text and edited the formatting.
                  << "`INVALID_POINT' and will try to continue.";
 
 log_message(cerr_strm);
-       cerr_message(cerr_strm, error_stop_value);
+       cerr_message(cerr_strm);
        cerr_strm.str("");
 
        p = create_new<Point>(&INVALID_POINT);
@@ -2847,7 +2919,7 @@ log_message(cerr_strm);
                           << "to `INVALID_POINT' and will try to continue.";
                      
                 log_message(cerr_strm);
-                cerr_message(cerr_strm, error_stop_value);
+                cerr_message(cerr_strm);
                 cerr_strm.str("");
   
                 *p = INVALID_POINT;
@@ -2942,7 +3014,7 @@ Added this rule.
                 << "an exception.  Rethrowing.";
 
       log_message(cerr_strm);
-      cerr_message(cerr_strm, error_stop_value);
+      cerr_message(cerr_strm);
       cerr_strm.str("");
 
       throw;
@@ -3011,7 +3083,7 @@ Added this rule.
                    << "and will try to continue.";
 
 log_message(cerr_strm);
-         cerr_message(cerr_strm, error_stop_value);
+         cerr_message(cerr_strm);
          cerr_strm.str("");
        
          p = create_new<Point>(&INVALID_POINT);
@@ -3073,7 +3145,7 @@ Added this rule.
                    << "and try to continue.";
 
 log_message(cerr_strm);
-         cerr_message(cerr_strm, error_stop_value);
+         cerr_message(cerr_strm);
          cerr_strm.str("");
        
          try 
@@ -3091,7 +3163,7 @@ log_message(cerr_strm);
                          << "Rethrowing `bad_alloc'.";
 
                log_message(cerr_strm);
-               cerr_message(cerr_strm, error_stop_value);
+               cerr_message(cerr_strm);
                cerr_strm.str("");
  
                throw;
@@ -3174,7 +3246,7 @@ latter case, the pointer is deleted.
                 << "and will try to continue.";
 
       log_message(cerr_strm);
-      cerr_message(cerr_strm, error_stop_value);
+      cerr_message(cerr_strm);
       cerr_strm.str("");
       
       delete t;
@@ -3203,7 +3275,7 @@ latter case, the pointer is deleted.
                 << "and will try to continue.";
 
       log_message(cerr_strm);
-      cerr_message(cerr_strm, error_stop_value);
+      cerr_message(cerr_strm);
       cerr_strm.str("");
       
       delete p;
@@ -3243,7 +3315,7 @@ latter case, the pointer is deleted.
                 << "but will try to continue.";
 
       log_message(cerr_strm);
-      cerr_message(cerr_strm, error_stop_value);
+      cerr_message(cerr_strm);
       cerr_strm.str("");
 
 @=$$@> = static_cast<void*>(p); 
@@ -3496,7 +3568,7 @@ Added this rule.
                  << "and will try to continue.";
 
         log_message(cerr_strm);
-        cerr_message(cerr_strm, error_stop_value);
+        cerr_message(cerr_strm);
         cerr_strm.str("");
        
         @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT));
@@ -3523,7 +3595,7 @@ Added this rule.
                  << "and will try to continue.";
        
        log_message(cerr_strm);
-       cerr_message(cerr_strm, error_stop_value);
+       cerr_message(cerr_strm);
        cerr_strm.str("");       
 
        @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT)); 
@@ -3600,7 +3672,7 @@ Added this rule.
                  << "and will try to continue.";
 
         log_message(cerr_strm);
-        cerr_message(cerr_strm, error_stop_value);
+        cerr_message(cerr_strm);
         cerr_strm.str("");
        
         @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT));
@@ -3627,7 +3699,7 @@ Added this rule.
                  << "and will try to continue.";
        
        log_message(cerr_strm);
-       cerr_message(cerr_strm, error_stop_value);
+       cerr_message(cerr_strm);
        cerr_strm.str("");       
 
        @=$$@> = static_cast<void*>(create_new<Point>(&INVALID_POINT)); 

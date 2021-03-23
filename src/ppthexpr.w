@@ -86,11 +86,10 @@ in the |Id_Map_Entry_Node|.
 @<Define rules@>=
 @=path_primary: path_variable@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -112,7 +111,7 @@ in the |Id_Map_Entry_Node|.
 @<Define rules@>=
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
-    {
+  {
 
        cerr_strm << "ERROR! In yyparse(), rule " 
                  << "`path_primary --> path_variable':"
@@ -127,7 +126,7 @@ in the |Id_Map_Entry_Node|.
 
        @=$$@> = static_cast<void*>(0);
  
-    } /* |if (entry == 0)|  */
+  } /* |if (entry == 0)|  */
 
 @q ***** (5) |entry != 0|.@> 
 
@@ -137,7 +136,7 @@ in the |Id_Map_Entry_Node|.
 @<Define rules@>=
 
   else /* |entry != 0|  */
-    {
+  {
 
         Path* p = static_cast<Path*>(entry->object); 
    
@@ -156,11 +155,11 @@ an ``unknown |path|''.
 @<Define rules@>=
 
        if (p == static_cast<Path*>(0))
-          {
+       {
 
-             @=$$@> = static_cast<void*>(0);
+          @=$$@> = static_cast<void*>(0);
 
-          } /* |if (p == 0)|  */
+       } /* |if (p == 0)|  */
 
 @q ****** (6) Try to allocate memory for a new |Path|.@>        
 
@@ -178,28 +177,99 @@ Put the following code inside an |else| clause.
      {
         Path* q;
          
-              try 
-                {
-                   q = create_new<Path>(p);
-                }             
-              
-              catch (bad_alloc)
-                {
-  
-                    cerr_strm << "ERROR! In yyparse(), rule " 
-                              << "`path_primary --> path_variable':"
-                              << endl 
-                              << "`create_new<Path>()' failed. "
-                              << "Rethrowing `bad_alloc'.";
+        try 
+        {
+            q = create_new<Path>(p);
+        }             
+        
+        catch (bad_alloc)
+        {
+            cerr_strm << "ERROR! In yyparse(), rule " 
+                      << "`path_primary --> path_variable':"
+                      << endl 
+                      << "`create_new<Path>()' failed. "
+                      << "Rethrowing `bad_alloc'.";
 
-                    log_message(cerr_strm);
-                    cerr_message(cerr_strm, error_stop_value);
-                    cerr_strm.str("");
+           log_message(cerr_strm);
+           cerr_message(cerr_strm, error_stop_value);
+           cerr_strm.str("");
 
-                    throw;
+           throw;
 
-}  /* |catch (bad_alloc)|  */
+        }  /* |catch (bad_alloc)|  */
 
+        if (DEBUG)
+           cerr << "entry->name   == " << entry->name << endl
+                << "q->get_name() == " << q->get_name() << endl;
+
+        string q_name = q->get_name();
+
+        if (q_name.length() > 0 && q_name != entry->name)
+        {
+              cerr_strm << "WARNING! In `yyparse', rule " 
+                        << "`path_primary --> path_variable':"
+                        << endl 
+                        << "`q_name' is not empty and doesn't match `entry->name'."
+                        << endl
+                        << "`q_name'      == " << q_name << endl
+                        << "`entry->name' == " << entry->name << endl
+                        << "This shouldn't be possible.  Not setting `q->name'." 
+                        << endl
+                        << "Continuing." << endl;
+
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
+        }
+        else if (q_name.length() > 0 && q_name == entry->name)
+        {
+            if (DEBUG)
+            {
+              cerr_strm << "In `yyparse', rule " 
+                        << "`path_primary --> path_variable':"
+                        << endl 
+                        << "`q_name' is not empty and matches `entry->name'."
+                        << endl
+                        << "`q_name' == `entry->name' == " << q_name << endl
+                        << "This isn't a problem." << endl 
+                        << "Continuing." << endl;
+
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
+            } 
+        }
+        else
+        {
+            if (DEBUG)
+            {
+                cerr_strm << "In `yyparse', rule " 
+                          << "`path_primary --> path_variable':"
+                          << endl 
+                          << "`q_name' is empty.  Setting `q->name' to `entry->name' == " 
+                          << entry->name << endl;
+
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+           }
+
+           q->set_name(entry->name);
+
+           if (DEBUG)
+           {
+               cerr_strm << "In `yyparse', rule " 
+                         << "`path_primary --> path_variable':"
+                         << endl 
+                         << "`q->name' == " << q->get_name() << endl; 
+
+               log_message(cerr_strm);
+               cerr_message(cerr_strm);
+               cerr_strm.str("");
+           }
+        } 
+
+ 
         @=$$@> = static_cast<void*>(q); 
 
 @q ******* (7).@> 

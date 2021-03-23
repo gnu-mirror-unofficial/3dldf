@@ -240,7 +240,7 @@ I must have removed it at some time in the past.
 {
 
     cerr_mutex.lock(); 
-    cerr << "Type <RETURN> to continue: ";
+    cerr << "Type <RETURN> to continue: ";  /* Don't delete this!  */
     getchar(); 
     cerr_mutex.unlock();  
 
@@ -394,7 +394,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> SAVE point_expression TO DATABASE'."
-                << endl  
+                << endl;  
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);

@@ -2991,7 +2991,7 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
   stringstream cerr_strm;
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */
+  bool DEBUG = true; /* |false| */
 #endif /* |DEBUG_COMPILE|  */
 
   cerr_strm << thread_name << "Entering `Scan_Parse::shape_decl_func()'.";
@@ -3025,13 +3025,13 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-scanner_node->add_entry(iter->first,                    // |name|
-                                type_num,                       // |type|
-                                Id_Map_Entry_Type::REGULAR,     // |category|
-                                false,                          // |const_flag|
-                                iter->second,                   // |array_flag|
-                                Id_Map_Entry_Type::INDEPENDENT, // |known_state|
-                                0);                             // |object|
+     scanner_node->add_entry(iter->first,                    // |name|
+                             type_num,                       // |type|
+                             Id_Map_Entry_Type::REGULAR,     // |category|
+                             false,                          // |const_flag|
+                             iter->second,                   // |array_flag|
+                             Id_Map_Entry_Type::INDEPENDENT, // |known_state|
+                             0);                             // |object|
       ++i;
 
     } /* |for|  */
@@ -3222,7 +3222,6 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
                           C* expr,
                           bool use_or_delete_expr)
 {
-
 @q ***** (5) Preliminaries.@> 
 
   bool DEBUG = false; /* |true| */
@@ -3240,7 +3239,9 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
-  dummy_func();
+  dummy_func();  /* Useful for use with GDB, when the latter can't recognize the 
+                    name of a function.  This can occur with template functions.
+                    \initials{LDF 2021.03.23.}  */
 
 @q ***** (5).@> 
 
@@ -3285,6 +3286,8 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
       ivp.i = 1;
       ivp.v = static_cast<void*>(0);
       
+      cerr << "Exiting `Scan_Parse::assign_simple'." << endl;
+
       return ivp;
 
     } /* |if (entry == 0)|  */
@@ -3314,6 +3317,8 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
       ivp.i = 1;
       ivp.v = static_cast<void*>(0);
       
+      cerr << "Exiting `Scan_Parse::assign_simple'." << endl;
+
       return ivp;
 
     } /* |if (entry->const_flag)|  */
@@ -3343,6 +3348,8 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
       ivp.i = 1;
       ivp.v = static_cast<void*>(0);
       
+      cerr << "Exiting `Scan_Parse::assign_simple'." << endl;
+
       return ivp;
 
     } /* |if (expr == 0)|  */
@@ -3361,9 +3368,8 @@ if necessary, and return from function successfully.
 
 \LOG
 \initials{LDF 2004.10.25.}
-Revised this section.  Now assigning to 
-|entry->object| from |static_cast<void*>(expr)| 
-if |entry->object == 0|.  Otherwise, assigning to 
+Revised this section.  Now assigning to |entry->object| from 
+|static_cast<void*>(expr)| if |entry->object == 0|.  Otherwise, assigning to 
 |*static_cast<C*>(entry->object)| from |*expr|, deleting 
 |expr|, and setting it to 0.
 \ENDLOG 
@@ -3438,6 +3444,12 @@ Added this section.
   ivp.v = entry->object = static_cast<void*>(c);   
 
   ivp.i = 0;
+
+  if (DEBUG)
+     entry->show("entry:");
+
+  if (DEBUG)
+     cerr << "Exiting `Scan_Parse::assign_simple'." << endl;
 
   return ivp;
   
@@ -11359,13 +11371,12 @@ Scan_Parse::show_func(C* c, string text, void* parameter)
 
    if (c)
       {
-          cerr_mutex.lock(); 
-          cerr << cerr_strm.str();
           text += ":";
           c->show(text);
+          cerr_message(cerr_strm);
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+ 
 
       }  /* |if (p)|  */
 

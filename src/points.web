@@ -197,6 +197,9 @@ class Point : protected Shape
   friend int Scanner_Type::show_database(void);
 
   private:
+
+    string name;
+
     Transform transform;
     valarray<real> world_coordinates;
     valarray<real> user_coordinates;
@@ -811,6 +814,8 @@ Point::Point(void)
   @<Initialize coordinates and limits@>@;
   do_output = true;
 
+  name = "";
+
   pen_vector          = static_cast<Pointer_Vector<Pen>*>(0);
   dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
 
@@ -867,10 +872,12 @@ Point(const real x, const real y, const real z);
 
 @
 @<Define |Point| constructors@>=
- Point::Point(const real x, const real y, const real z)
+Point::Point(const real x, const real y, const real z)
 {
 
    @<Initialize coordinates and limits@>@;
+
+   name = "";
   
    do_output = true;
 
@@ -2360,6 +2367,42 @@ Point::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
+
+@q *** (3) Set name.@>
+@*2 Set name.
+@^\cfunc{Point}{set\_name}@>
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Point| functions@>=
+void
+set_name(string nname)
+{
+   name = nname;
+   return;
+}     
+
+@q *** (3) Get name.@>
+@*2 Get name.
+@^\cfunc{Point}{get\_name}@>
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Point| functions@>=
+const
+string
+get_name(void)
+{
+   return name;
+}     
 
 @q ** Slope.@>
 @ Slope.
@@ -5502,10 +5545,17 @@ Point::show(string text,
 {
     bool DEBUG = false; /* |true| */@; 
 
+    cerr_mutex.lock();
+
+    if (DEBUG)
+       cerr << "Entering `Point::show'." << endl;
+
     cerr << text;
 
     if (text != "")
       cerr  << " ";
+
+    cerr << "name == " << name << endl;
 
     coords = tolower(coords);
 
@@ -5527,25 +5577,41 @@ Point::show(string text,
 
     if (*this == INVALID_POINT)
       {
-          cerr << "INVALID_POINT: (INVALID_REAL, INVALID_REAL, INVALID_REAL)\n";
+          cerr << "In `Point::show':" << endl
+               << "INVALID_POINT: (INVALID_REAL, INVALID_REAL, INVALID_REAL)" 
+               << endl
+               << "Exiting function with void return value."
+               << endl;
+
+          cerr_mutex.unlock();
 
           return;
       }
 
   if (DEBUG) 
-    transform.show("Transform before apply_transform");
-    
-  valarray<real> v = get_all_coords(coords, do_persp, do_apply, f, proj, factor);
-
-    cerr << "(" << v[0] << ", " << v[1] << ", "
-
-      << v[2] << ")\n";
-
-if (DEBUG)
   {
-    transform.show("Transform after apply_transform");
+    cerr_mutex.unlock();
+    transform.show("In `Point.:show': Transform before apply_transform");
   }
-}
+    
+    valarray<real> v = get_all_coords(coords, do_persp, do_apply, f, proj, factor);
+
+    cerr << "`valarray<real> v.size() == " << v.size() << endl 
+         << "(" << v[0] << ", " << v[1] << ", " << v[2] << ", " << v[3] << ")"
+         << endl;
+
+    if (DEBUG)
+      {
+        transform.show("In `Point.:show': Transform after apply_transform");
+      }  
+
+    if (DEBUG)
+       cerr << "Exiting `Point::show' successfully with void return value." 
+            << endl;
+
+    cerr_mutex.unlock();
+
+}  /* End of |Point::show| definition */
 
 @q ** Show transform.@>
 @ Show transform.

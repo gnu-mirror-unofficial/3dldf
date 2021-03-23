@@ -139,12 +139,8 @@ Added this rule.  I'm not sure whether I'll need it, though.
 @=begin_group_command: BEGIN_GROUP@>@/
 {
 
-#if DEBUG_COMPILE 
    @<Common declarations for rules@>@;
-#else
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter); 
-#endif
-  
+
 #if DEBUG_COMPILE
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
@@ -182,6 +178,7 @@ Added this rule.  I'm not sure whether I'll need it, though.
   scanner_node->group_ctr++;
 
   Id_Map_Node id_map_node = new Id_Map_Type;
+
   id_map_node->scanner_node = scanner_node;
 
   id_map_node->up = scanner_node->id_map_node;

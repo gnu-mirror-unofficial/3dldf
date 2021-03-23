@@ -426,8 +426,6 @@ if (type == FILE_TYPE && stream_ptr != static_cast<ifstream*>(0))
             << endl << "`type' isn't `FILE_TYPE'."  
             << endl 
             << " Not deleting `stream_ptr'." << endl;
-       cerr << "Type <RETURN> to continue. ";
-       getchar(); 
        cerr_mutex.unlock(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -849,8 +847,8 @@ Added this section.
 
 typedef Id_Map_Entry_Type* Id_Map_Entry_Node;
 
-@q ** (2) Id_Map_Entry_Type.@>
-@*1 {\bf Id\_Map\_Entry\_Type}.
+@q ** (2) class Id_Map_Entry_Type.@>
+@*1 {\bf class Id\_Map\_Entry\_Type}.
 No |Id_Map_Entry_Type| objects should ever be declared.  They should
 only ever be accessed via |Id_Map_Entry_Nodes|, which should be
 created by dynamically on the free store by using

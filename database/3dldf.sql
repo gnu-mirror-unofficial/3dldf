@@ -8,6 +8,8 @@ grant all on 3dldf.* to '3dldf'@'localhost';
 
 use 3dldf;
 
+/* * points  */
+
 drop table points;
 
 create table points
@@ -34,8 +36,28 @@ create table points
     z_coord_projective float not null default 0.0,
     draw_dot_value int not null default 0,
     do_output boolean not null default false,
+
+    transform_matrix_0_0 float not null default 1.0,
+    transform_matrix_0_1 float not null default 0.0,
+    transform_matrix_0_2 float not null default 0.0,
+    transform_matrix_0_3 float not null default 0.0,	
+                  
+    transform_matrix_1_0 float not null default 0.0,
+    transform_matrix_1_1 float not null default 1.0,
+    transform_matrix_1_2 float not null default 0.0,
+    transform_matrix_1_3 float not null default 0.0,
+                  
+    transform_matrix_2_0 float not null default 0.0,
+    transform_matrix_2_1 float not null default 0.0,
+    transform_matrix_2_2 float not null default 1.0,
+    transform_matrix_2_3 float not null default 0.0,
+                  
+    transform_matrix_3_0 float not null default 0.0,
+    transform_matrix_3_1 float not null default 0.0,
+    transform_matrix_3_2 float not null default 0.0,
+    transform_matrix_3_3 float not null default 1.0,
+
     measurement_units varchar(16) not null default "cm"
-    
 );
 
 alter table points add column operetta varchar(64) default null after opera;
@@ -54,16 +76,57 @@ values
 
 insert into points (x_coord_world, y_coord_world, z_coord_world, w_coord_world)
 values
-(17.5, 5, 13.001, 1.6);
+(17.5, 5, 13.001, 1);
 
-#### *****************************************************
+/* * Select  */
 
-/* Select  */
+select x_coord_world, y_coord_world, z_coord_world, w_coord_world,
+transform_matrix_0_0, transform_matrix_0_1, transform_matrix_0_2, transform_matrix_0_3,
+transform_matrix_1_0, transform_matrix_1_1, transform_matrix_1_2, transform_matrix_1_3,
+transform_matrix_2_0, transform_matrix_2_1, transform_matrix_2_2, transform_matrix_2_3,
+transform_matrix_3_0, transform_matrix_3_1, transform_matrix_3_2, transform_matrix_3_3
+from
+points order by x_coord_world, y_coord_world, z_coord_world, z_coord_world asc\G
 
-select x_coord_world, y_coord_world, z_coord_world, w_coord_world from points
-order by x_coord_world, y_coord_world, z_coord_world, z_coord_world asc\G
+
+/* * transforms  */
+
+drop table transforms;
+
+create table transforms
+(
+    name varchar(32) not null default "",
+  
+    matrix_0_0 float not null default 1.0,
+    matrix_0_1 float not null default 0.0,
+    matrix_0_2 float not null default 0.0,
+    matrix_0_3 float not null default 0.0,	
+                  
+    matrix_1_0 float not null default 0.0,
+    matrix_1_1 float not null default 1.0,
+    matrix_1_2 float not null default 0.0,
+    matrix_1_3 float not null default 0.0,
+                  
+    matrix_2_0 float not null default 0.0,
+    matrix_2_1 float not null default 0.0,
+    matrix_2_2 float not null default 1.0,
+    matrix_2_3 float not null default 0.0,
+                  
+    matrix_3_0 float not null default 0.0,
+    matrix_3_1 float not null default 0.0,
+    matrix_3_2 float not null default 0.0,
+    matrix_3_3 float not null default 1.0
+
+);
+
+delete from transforms;
+
+insert into transforms (name) values ("t0");
+
+select * from transforms order by name, matrix_0_0 asc\G
 
 /* Local Variables: */
 /* mode:SQL */
 /* outline-minor-mode:t */
 /* End: */
+
