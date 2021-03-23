@@ -194,10 +194,10 @@ LDF_LOCATION_TYPE::LDF_LOCATION_TYPE(void)
 Now setting |DEBUG_COMPILE_SAVE| to |DEBUG_COMPILE| and |DEBUG_COMPILE| to 0.
 
 \initials{LDF 2005.10.22.}
-@:BUG FIX@> BUG FIX:  Fixed the way I set |DEBUG_COMPILE_SAVE| 
-to |DEBUG_COMPILE|.  The way it was before didn't work, 
-because the bodies of macros are not expanded in 
-definitions, but only when the macros are expanded.
+@:BUG FIX@> BUG FIX: Fixed the way I set |DEBUG_COMPILE_SAVE| to
+|DEBUG_COMPILE|.  The way it was before didn't work, because the
+bodies of macros are not expanded in definitions, but only when the
+macros are expanded.
 \ENDLOG
 
 @<Preprocessor macros not only for the parser@>=
@@ -217,7 +217,6 @@ definitions, but only when the macros are expanded.
 
 @q #undef DEBUG_COMPILE @>
 @q #define DEBUG_COMPILE 0 @>
-
 
 @q * (1) Preprocessor macros for the parser only.  @>
 @* Preprocessor macros for the parser only.
@@ -315,7 +314,6 @@ Add formatting commands.
 Make sure these declarations work properly.
 \ENDTODO 
  
-
 @f terminal_symbol int
 @f non_terminal_symbol terminal_symbol 
 
@@ -399,8 +397,7 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @q ** (2)  Object types defined in 3DLDF and |UNDECLARED|.@>  
 
 @*1 Object types defined in 3DLDF and |UNDECLARED|.  
-I plan to use the latter in 
-{\bf save} commands. 
+I plan to use the latter in {\bf save} commands. 
 \initials{LDF 2004.04.23.}
 
 \LOG
@@ -411,9 +408,9 @@ Added this section.
 Added |UNKNOWN_TYPE|.
 
 \initials{LDF 2004.05.03.}  
-Changed |UNKNOWN_TYPE| to |UNDECLARED| and 
-values of the types in this section from |string_value| to |pointer_value|.
-|NUMERIC| was already a |pointer_value|.
+Changed |UNKNOWN_TYPE| to |UNDECLARED| and values of the types in this
+section from |string_value| to |pointer_value|.  |NUMERIC| was already
+a |pointer_value|.
 
 \initials{LDF 2004.05.17.}  
 Added token declaration for |BOOLEAN|.
@@ -646,7 +643,6 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> SPHERE_VECTOR@>@/
 @=%token <pointer_value> SPHERE_DEVELOPMENT_VECTOR@>@/
 
-
 @=%token <pointer_value> PARABOLA_VECTOR@>@/
 @=%token <pointer_value> HYPERBOLA_VECTOR@>@/
 
@@ -654,8 +650,6 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 
 @=%token <pointer_value> PARABOLOID_VECTOR@>@/
 @=%token <pointer_value> HYPERBOLOID_VECTOR@>@/
-
-
 
 @=%token <pointer_value> GLYPH_VECTOR@>@/
 
@@ -973,6 +967,7 @@ Added token declaration for |OFF|.
 @=%token <int_value> OFF@>@/
 @=%token <int_value> BY@>@/
 @=%token <int_value> AROUND@>@/
+@=%token <int_value> TO@>@/
 
 
 @q *** (3) System information.@>
@@ -2419,6 +2414,7 @@ Added this section with token declarations for
 @=%token <int_value> BEGIN_GROUP@>@/
 @=%token <int_value> END_GROUP@>@/
 @=%token <int_value> SAVE@>@/
+@=%token <int_value> DATABASE@>@/
 
 @q *** (3) Types for transformations.@>
 @*2 Types for transformations.

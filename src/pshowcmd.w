@@ -3621,6 +3621,43 @@ Added this rule.
 
 };
 
+@q ****** (6) command --> SHOW DATABASE@>
+
+@*5 \§command> $\longrightarrow$ \.{SHOW} \.{DATABASE}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@q ******* (7) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW DATABASE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `command --> "
+                << "SHOW DATABASE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = static_cast<void*>(0);
+
+};
+
 @q * (0)@>
 
 

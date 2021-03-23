@@ -114,9 +114,7 @@ Added this rule.  I'm not sure whether I'll need it, though.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `group_command --> "
-                << "save_command'.";
-
+      cerr_strm << "*** Parser: `group_command --> " << "save_command'.";
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -124,8 +122,6 @@ Added this rule.  I'm not sure whether I'll need it, though.
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
-
-
 
 @q * (1) begin_group_command.@>
 @* \§begin group command>.

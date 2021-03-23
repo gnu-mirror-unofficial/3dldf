@@ -309,7 +309,7 @@ parser.y++ parser_1.h++: parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 
 
 parser.c++ parser.h++: parser.y++ 
-	$(YACC) -Wno-yacc --debug -d -o parser.cxx $<
+	$(YACC) -Wno-yacc -Wno-conflicts-sr --debug -d -o parser.cxx $<
 	./check_scan_parse_output.sh parser.cxx parser.c++
 	./check_scan_parse_output.sh parser.hxx parser.h++
 	touch $@

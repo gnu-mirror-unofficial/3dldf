@@ -597,38 +597,56 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
                   << endl
                   << "mysql_init succeeded." << endl; 
         cerr_message(cerr_strm); 
+        cerr_strm.str("");
      }
   }
   else
   {
-     cerr_strm << "ERROR!  In `Scanner_Type::create': `mysql_init failed'." << endl
-               << "Exiting thread unsuccessfully with exit status 0."
+     cerr_strm << thread_name << "ERROR!  In `Scanner_Type::create': `mysql_init failed'." << endl;
+#ifdef HAVE_PTHREAD_H  
+     cerr_strm << "Exiting thread unsuccessfully with exit status 0."
                << endl;
      cerr_message(cerr_strm); 
-#ifdef HAVE_PTHREAD_H  
+     cerr_strm.str("");
      pthread_exit(0);
 #else
+     cerr_strm << "Exiting function unsuccessfully with return value 0."
+               << endl;
+     cerr_message(cerr_strm); 
+     cerr_strm.str("");
      return(0);
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
   }
 
-/* !! START HERE  */
+  unsigned int mysql_timeout = 120;
 
-   unsigned int mysql_timeout = 120;
+   // For some reason, this function call causes an error.
+   // \initials{LDF 2021.03.23.}
+   // mysql_options(scanner_node->mysql, MYSQL_OPT_RECONNECT, 0);
 
-/*  
-   // mysql_options(mysql, MYSQL_OPT_RECONNECT, 0);
-   mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
+   mysql_options(scanner_node->mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
   
-   if (!mysql_real_connect(mysql,"localhost","laurence",0,"Songs",0,NULL,0))
+   if (!mysql_real_connect(scanner_node->mysql,"localhost","3dldf",0,"3dldf",0,NULL,0))
      {
-       fprintf(stderr, "Failed to connect to database: Error: %s\n",
-	       mysql_error(mysql));
+       cerr_strm << thread_name << "In `Scanner_Type::create': `mysql_real_connect' failed, returning NULL." 
+                 << endl 
+                 << "Failed to connect to database: Error: " << mysql_error(scanner_node->mysql) 
+                 << endl;
+#ifdef HAVE_PTHREAD_H  
+       cerr_strm << "Exiting thread unsuccessfully with exit status 0." << endl;
+       cerr_message(cerr_strm); 
+       pthread_exit(0);
+#else
+       cerr_strm << "Exiting function unsuccessfully with return value 0." << endl;
+       cerr_message(cerr_strm); 
+       return(0);
+#endif /* |HAVE_PTHREAD_H|  */@; 
      }
-
-   errno = 0;
- */
+   else if (DEBUG)
+   {
+       cerr << thread_name << "In `Scanner_Type::create':  `mysql_real_connect' succeeded." << endl;
+   }
 
 @*1 Switches.
 @<Define |Scanner_Type::create|@>=
@@ -1078,6 +1096,7 @@ Added call to |scanner_node->add_entry| for |OFF|.
   scanner_node->add_entry("off", OFF, spark);
   scanner_node->add_entry("by", BY, spark);
   scanner_node->add_entry("around", AROUND, spark);
+  scanner_node->add_entry("to", TO, spark);
 
 @q **** (4) Commands.  @>          
 
@@ -1087,7 +1106,6 @@ Added call to |scanner_node->add_entry| for |OFF|.
 \initials{LDF 2004.08.25.}
 Added calls to |scanner_node->add_entry| for 
 |PLUS_ASSIGN|, |MINUS_ASSIGN|, |TIMES_ASSIGN|, and |DIVIDE_ASSIGN|.
-
 
 \initials{LDF 2004.09.30.}
 Added a call to |scanner_node->add_entry| for |END_INPUT|
@@ -3241,6 +3259,7 @@ Added this section with calls to |scanner_node->add_entry| for
   scanner_node->add_entry("begin_group", BEGIN_GROUP, spark);
   scanner_node->add_entry("end_group", END_GROUP, spark);
   scanner_node->add_entry("save", SAVE, spark);
+  scanner_node->add_entry("database", DATABASE, spark);
 
   scanner_node->add_synonym("begingroup", "begin_group");
   scanner_node->add_synonym("endgroup", "end_group");

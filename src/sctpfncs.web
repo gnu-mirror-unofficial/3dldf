@@ -170,7 +170,7 @@ Scanner_Type::~Scanner_Type(void)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     cerr << "Entering `Scanner_Type' destructor."
          << endl; 
@@ -700,7 +700,11 @@ Now deleting |tolerance| and setting it to 0.
       tolerance = 0;
     }
 
+   /* Close connection to database.  */
 
+   mysql_close(mysql);
+
+   mysql_library_end();
 
 
 /* !! TO DO.  LDF 2004.07.02.  Figure out how to take care of 

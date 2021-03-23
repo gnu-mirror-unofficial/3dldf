@@ -4,7 +4,8 @@
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing.  @>
 @q Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,             @>
-@q 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation                                         @>
+@q 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,               @>
+@q 2021 The Free Software Foundation                                         @>
 
 @q GNU 3DLDF is free software; you can redistribute it and/or modify @>
 @q it under the terms of the GNU General Public License as published by @>
@@ -69,12 +70,12 @@ be any.
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2004.09.19.}
-Rewrite |yylex| and |sub_yylex| so that input is buffered.
-``3dldf < sample0.ldf'' fails, but other ways of reading from standard input work.  
-See \filename{3DLDF-1.2.0/00README} for more information.
-Note also that debugging output in this file causes a 
-``Memory fault'' error when reading from standard input in this way.  
-I'm not sure whether it does under other circumstances.
+Rewrite |yylex| and |sub_yylex| so that input is buffered.  ``3dldf <
+sample0.ldf'' fails, but other ways of reading from standard input
+work.  See \filename{3DLDF-1.2.0/00README} for more information.  Note
+also that debugging output in this file causes a ``Memory fault''
+error when reading from standard input in this way.  I'm not sure
+whether it does under other circumstances.
 \ENDTODO 
 
 @q * (1) Include files.@>
@@ -1446,7 +1447,6 @@ Added this section.
 
           first_time = false;
 
-
 @q ****** (6) Handle possible special assignments      @>
 @q ****** (6) and Pythagorean addition and subtraction.@>
 
@@ -1462,15 +1462,13 @@ Added this section.  It seems to work.
 Added code for handling Pythagorean addition and subtraction. 
 \ENDLOG 
 
-
 @<Define scanning functions@>=
   
   if (   curr_char == '+'
       || curr_char == '-'
       || curr_char == '*'
       || curr_char == '/') 
-      
-    {
+  {
 
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -3090,13 +3088,11 @@ get_catcode(const char c)
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
-
-
 
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>
-@q run-cweave-on-file:"3DLDF.web" @>
+@q run-cweave-on-file:"3DLDFprg.web" @>
 @q eval:(read-abbrev-file) @>
 @q indent-tabs-mode:nil @>
 @q eval:(outline-minor-mode) @>

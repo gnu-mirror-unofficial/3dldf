@@ -1,6 +1,10 @@
 /* /home/laurence/3DLDF-2.0.4/database/3dldf.sql  */
 
 /* Created Mon 22 Mar 2021 04:27:10 PM CET by Laurence D. Finston (LDF)  */
+create database 3dldf;
+
+create user '3dldf'@'localhost';
+grant all on 3dldf.* to '3dldf'@'localhost';
 
 use 3dldf;
 
