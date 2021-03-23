@@ -374,6 +374,44 @@ Added this rule.
 
 };
 
+@q ** (2) command --> SAVE point_expression TO DATABASE.@> 
+@*1 \§command> $\longrightarrow$ \.{SAVE} \§point expression> \.{TO} \.{DATABASE}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: SAVE point_expression TO DATABASE@>@/
+{
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> SAVE point_expression TO DATABASE'."
+                << endl  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   Point *p = static_cast<Point*>(@=$2@>); 
+
+   p->show("*p:");
+
+   @=$$@> = 0;
+
+};
+
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
