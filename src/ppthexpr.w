@@ -326,7 +326,7 @@ of the points on the path is the same.
   if (w->v.size() < 2)
     {
 
-      cerr << "ERROR! In yyparse():\n"
+      cerr << "ERROR! In `yyparse()':" << endl 
            << "Rule `path_primary --> SUBPATH numeric_list OF path_primary', "
            << "(path_primary 5):"
            << endl 

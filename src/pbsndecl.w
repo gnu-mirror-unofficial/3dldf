@@ -537,9 +537,11 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> FOCUS@>@/
 
 @=%token <pointer_value> POINT@>@/
+@=%token <pointer_value> POINTS@>@/
 @=%token <pointer_value> BOOL_POINT@>@/
 @=%token <pointer_value> NURB@>@/
 @=%token <pointer_value> PATH@>@/
+@=%token <pointer_value> PATHS@>@/
 @=%token <pointer_value> TRIANGLE@>@/
 @=%token <pointer_value> POLYGON@>@/
 @=%token <pointer_value> REG_POLYGON@>@/
@@ -2383,6 +2385,7 @@ Added this section with token declarations for
 @=%token <int_value> END_GROUP@>@/
 @=%token <int_value> SAVE@>@/
 @=%token <int_value> DATABASE@>@/
+@=%token <int_value> ALL@>@/
 
 @q *** (3) Types for transformations.@>
 @*2 Types for transformations.

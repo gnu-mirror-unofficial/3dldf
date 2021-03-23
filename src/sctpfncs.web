@@ -347,6 +347,8 @@ Now clearing |numeric_list_real_vector|.
 
 @<Define |Scanner_Type| functions@>=
 
+  database_options.clear();
+
   token_string_bool_vector.clear();
   token_real_vector.clear();
 
@@ -3748,7 +3750,7 @@ Added this function.
 @
 @<Define |Scanner_Type| functions@>=
 int
-Scanner_Type::show_database(vector<int> &int_vector)
+Scanner_Type::show_database(void)
 {
     bool DEBUG = false; /* |true| */
 

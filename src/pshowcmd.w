@@ -3529,9 +3529,9 @@ Added this rule.
 
 };
 
-@q ****** (6) command --> SHOW DATABASE@>
+@q ****** (6) command --> SHOW DATABASE database_option_list@>
 
-@*5 \§command> $\longrightarrow$ \.{SHOW} \.{DATABASE}.
+@*5 \§command> $\longrightarrow$ \.{SHOW} \.{DATABASE} \§database option list>.
 \initials{LDF 2021.03.23.}
 
 \LOG
@@ -3543,17 +3543,15 @@ Added this rule.
 
 @<Define rules@>= 
   
-@=command: SHOW DATABASE@>@/
+@=command: SHOW DATABASE database_option_list@>@/
 {
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @; 
+  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: Rule `command --> SHOW DATABASE'.";
-
+      cerr_strm << "*** Parser: Rule `command --> SHOW DATABASE database_option_list'.";
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -3569,10 +3567,7 @@ Added this rule.
     cerr_strm.str("");
 #else
  
-    vector<int> arg_vector;
-    arg_vector.push_back(DATABASE);
-
-    status = scanner_node->show_database(arg_vector);
+    status = scanner_node->show_database();
  
     if (status != 0)
     {
@@ -3594,11 +3589,135 @@ Added this rule.
        cerr_strm.str("");
     }
 
+    scanner_node->database_options.clear();
+
 #endif 
 
     @=$$@> = static_cast<void*>(0);
 
 };
+
+@q ** (2) database_option_list.@>
+@*1 \§database option list>.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> database_option_list@>
+
+@q *** (3) database_option_list: /* Empty  */@>
+@*2 \§database option list> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=database_option_list: /*  Empty  */@>@/
+{
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   if (scanner_node)
+      scanner_node->database_options.clear();   
+
+   @=$$@> = 0; 
+};
+
+@q *** (3) database_option_list: database_option_list database_option. @>
+@*2 \§database option list> $\longrightarrow$ \§database option>.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=database_option_list: database_option_list database_option@>@/
+{
+   @=$$@> = 0; 
+};
+
+@q ** (2) database_option.@>
+@*1 \§database option>.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> database_option@>
+
+@q *** (3) database_option: POINTS.@>
+@*2 \§database option>$\longrightarrow$ \.{POINTS}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=database_option: ALL@>@/
+{
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   if (scanner_node)
+      scanner_node->database_options.push_back(ALL);
+
+   @=$$@> = 0;
+};
+
+@q *** (3) database_option: POINTS.@>
+@*2 \§database option>$\longrightarrow$ \.{POINTS}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=database_option: POINTS@>@/
+{
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   if (scanner_node)
+      scanner_node->database_options.push_back(POINTS);
+
+   @=$$@> = 0;
+};
+
+@q *** (3) database_option: PATHS.@>
+@*2 \§database option> $\longrightarrow$ \.{PATHS}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=database_option: PATHS@>@/
+{
+
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   if (scanner_node)
+      scanner_node->database_options.push_back(PATHS);
+
+   @=$$@> = 0;
+};
+
+
 
 @q * (0)@>
 
