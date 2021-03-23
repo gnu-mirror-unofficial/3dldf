@@ -3756,6 +3756,7 @@ Scanner_Type::show_database(void)
 
     bool do_points = false;
     bool do_paths = false;
+    bool do_transforms = false;
 
     int status = 0;
 
@@ -3804,6 +3805,7 @@ Scanner_Type::show_database(void)
     {
         do_points = true;
         do_paths = true;
+        do_transforms = true;
     }
     
     else
@@ -3822,14 +3824,22 @@ Scanner_Type::show_database(void)
            do_paths = true;
        }  
 
-    }
+       iter = find(database_options.begin(), database_options.end(), TRANSFORMS);
+
+       if (iter != database_options.end())
+       {
+           do_transforms = true;
+       }  
+
+    }  /* |else|  */
    
     if (DEBUG)
     {
       cerr_strm << "In`Scanner_Type::show_database':" 
                 << endl
                 << "`do_points' == " << do_points << endl 
-                << "`do_paths' == " << do_paths << endl;
+                << "`do_paths' == " << do_paths << endl
+                << "`do_transforms' == " << do_transforms << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -4024,6 +4034,15 @@ Scanner_Type::show_database(void)
     {
 
     }  /* |if (do_paths)|  */
+
+@q *** @> 
+@
+@<Define |Scanner_Type| functions@>=
+
+    if (do_transforms)
+    {
+
+    }  /* |if (do_transforms)|  */
 
 @q *** @> 
 @

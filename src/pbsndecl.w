@@ -534,6 +534,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> COLOR@>@/
 @=%token <pointer_value> PICTURE@>@/
 @=%token <pointer_value> TRANSFORM@>@/
+@=%token <pointer_value> TRANSFORMS@>@/
 @=%token <pointer_value> FOCUS@>@/
 
 @=%token <pointer_value> POINT@>@/

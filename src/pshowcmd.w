@@ -3785,6 +3785,39 @@ Added this rule.
    @=$$@> = 0;
 };
 
+@q *** (3) database_option: TRANSFORMS.@>
+@*2 \§database option> $\longrightarrow$ \.{TRANSFORMS}.
+\initials{LDF 2021.03.23.}
+
+\LOG
+\initials{LDF 2021.03.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=database_option: TRANSFORMS@>@/
+{
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `database_option: TRANSFORMS'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   if (scanner_node)
+      scanner_node->database_options.push_back(TRANSFORMS);
+
+   @=$$@> = 0;
+};
+
+
 @q * (0)@>
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
