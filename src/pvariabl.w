@@ -90,7 +90,6 @@ defined in \filename{scan.web}.
 \ENDLOG 
 
 @q ***** (5) Definition.  @>
-
 @
 @<Define rules@>=
 @=variable: tag suffix@>@/

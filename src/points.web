@@ -191,14 +191,13 @@ surface hiding.
 
 @<Define |class Point|@>=
 
-class Point : protected Shape
+class Point: protected Shape
 {
   friend Transform Transform::align_with_axis(Point, Point, char);
   friend int Scanner_Type::show_database(void);
+  friend int yyparse(yyscan_t);
 
   private:
-
-    string name;
 
     Transform transform;
     valarray<real> world_coordinates;
@@ -814,8 +813,6 @@ Point::Point(void)
   @<Initialize coordinates and limits@>@;
   do_output = true;
 
-  name = "";
-
   pen_vector          = static_cast<Pointer_Vector<Pen>*>(0);
   dash_pattern_vector = static_cast<Pointer_Vector<Dash_Pattern>*>(0);
 
@@ -877,8 +874,6 @@ Point::Point(const real x, const real y, const real z)
 
    @<Initialize coordinates and limits@>@;
 
-   name = "";
-  
    do_output = true;
 
    pen_vector          = static_cast<Pointer_Vector<Pen>*>(0);
@@ -2367,42 +2362,6 @@ Point::get_copy() const
   *p = *this;
   return static_cast<Shape*>(p);
 }
-
-@q *** (3) Set name.@>
-@*2 Set name.
-@^\cfunc{Point}{set\_name}@>
-\initials{LDF 2021.03.23.}
-
-\LOG
-\initials{LDF 2021.03.23.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Point| functions@>=
-void
-set_name(string nname)
-{
-   name = nname;
-   return;
-}     
-
-@q *** (3) Get name.@>
-@*2 Get name.
-@^\cfunc{Point}{get\_name}@>
-\initials{LDF 2021.03.23.}
-
-\LOG
-\initials{LDF 2021.03.23.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Point| functions@>=
-const
-string
-get_name(void)
-{
-   return name;
-}     
 
 @q ** Slope.@>
 @ Slope.
@@ -5554,8 +5513,6 @@ Point::show(string text,
 
     if (text != "")
       cerr  << " ";
-
-    cerr << "name == " << name << endl;
 
     coords = tolower(coords);
 

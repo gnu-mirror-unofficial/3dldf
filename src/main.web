@@ -1231,8 +1231,11 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
 
       scanner_node_stdin = Scanner_Type::create("", run_state_initial, true);
 
-      cerr << "Run_State::METAPOST == " << Run_State::METAPOST << endl
-           << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
+      if (DEBUG)
+      { 
+         cerr << "Run_State::METAPOST == " << Run_State::METAPOST << endl
+              << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
+      }
 
       // !!START HERE:  Changed the following |for| loop.
       // Check how this was supposed to work.

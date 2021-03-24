@@ -2991,14 +2991,11 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
   stringstream cerr_strm;
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */
-#endif /* |DEBUG_COMPILE|  */
+  bool DEBUG = false; /* |true| */
 
-  cerr_strm << thread_name << "Entering `Scan_Parse::shape_decl_func()'.";
-
-#if DEBUG_COMPILE
    if (DEBUG)
    {
+     cerr_strm << thread_name << "Entering `Scan_Parse::shape_decl_func()'.";
      cerr_message(cerr_strm); 
      log_message(cerr_strm); 
 
@@ -3040,12 +3037,11 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
 
   scanner_node->token_string_bool_vector.clear();
 
-  cerr_strm << thread_name << "Exiting `Scan_Parse::shape_decl_func()' "
-            << "successfully with return value 0.";
- 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
+      cerr_strm << thread_name << "Exiting `Scan_Parse::shape_decl_func()' "
+                << "successfully with return value 0.";
       cerr_message(cerr_strm); 
       log_message(cerr_strm); 
 
@@ -6287,7 +6283,7 @@ at the end.
 
 @<Define |Scan_Parse| template functions@>=
 
-  else /* (|!iter->second| XXX it's not an array declaration.)  */
+  else /* (|!iter->second|:  It's not an array declaration.)  */
     {
 
 #if DEBUG_COMPILE

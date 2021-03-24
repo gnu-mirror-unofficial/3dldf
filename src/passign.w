@@ -2749,7 +2749,6 @@ Removed all debugging code.
                                          "Path",
                                          @=$1@>,
                                          p);
-
   @=$$@> = ivp.v;
 
 };

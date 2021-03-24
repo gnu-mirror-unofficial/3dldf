@@ -322,11 +322,11 @@ Added this rule.
 @=boolean_primary: IS_KNOWN any_variable@>@/
 {
 
-  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
     bool* i;
 
-i = new bool;
+    i = new bool;
 
 @q **** (4) Error handling:  |new bool| failed.  Rethrow |bad_alloc|.@>   
 

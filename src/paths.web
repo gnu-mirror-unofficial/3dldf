@@ -232,8 +232,6 @@ Added |valarray <real> pre_projective_extremes|.
   vector <Point*> points;
   vector <string> connectors;
 
-  string name;
-
  public:
 
   static const unsigned short NO_ARROW;
@@ -714,8 +712,6 @@ Path::Path(void)
 
    if (DEBUG)
      cerr << "Entering Path() (default version).\n";
-
-   name = "";
 
    line_switch = false;
    cycle_switch = false;
@@ -1956,42 +1952,6 @@ Path::set_fill_draw_value(const signed short s)
   fill_draw_value = s;
   return;
 }
-
-
-@q *** (3) Set name.@>
-@*2 Set name.
-@^\cfunc{Path}{set\_name}@>
-\initials{LDF 2021.03.23.}
-
-\LOG
-\initials{LDF 2021.03.23.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Path| functions@>=
-void
-set_name(string s)
-{
-   name = s;
-}     
-
-@q *** (3) Get name.@>
-@*2 Get name.
-@^\cfunc{Path}{get\_name}@>
-\initials{LDF 2021.03.23.}
-
-\LOG
-\initials{LDF 2021.03.23.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Path| functions@>=
-const
-string
-get_name(void)
-{
-   return name;
-}     
 
 @q ** (2) Get fill_draw_value.@>
 @*1 Set {\bf fill\_draw\_value}.
@@ -9454,8 +9414,7 @@ Path::show(string text, char coords,
    if (text == "")
      text = "Path:";
 
-   cerr << text << endl
-        << "name == " << name << endl;
+   cerr << text << endl;
    
    coords = tolower(coords);
    

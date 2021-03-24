@@ -374,8 +374,8 @@ Added this rule.
 
 };
 
-@q ** (2) command --> SAVE point_expression TO DATABASE.@> 
-@*1 \§command> $\longrightarrow$ \.{SAVE} \§point expression> \.{TO} \.{DATABASE}.
+@q ** (2) command --> SAVE variable TO DATABASE.@> 
+@*1 \§command> $\longrightarrow$ \.{SAVE} \§variable> \.{TO} \.{DATABASE}.
 \initials{LDF 2021.03.23.}
 
 \LOG
@@ -384,7 +384,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=command: SAVE point_expression TO DATABASE@>@/
+@=command: SAVE any_variable_list TO DATABASE@>@/
 {
 
    @<Common declarations for rules@>@; 
@@ -393,7 +393,63 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> SAVE point_expression TO DATABASE'."
+      cerr_strm << "*** Parser: `command --> SAVE any_variable_list TO DATABASE'."
+                << endl;  
+
+      cerr_strm << "`scanner_node->database_variable_vector.size()' == "
+                << scanner_node->database_variable_vector.size()
+                << endl;
+
+      for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();   
+           iter != scanner_node->database_variable_vector.end();
+           ++iter)
+      {
+          (*iter)->show("*iter:", true, true);
+      }
+  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+ 
+   scanner_node->database_variable_vector.clear();
+
+   @=$$@> = 0;
+
+};
+
+@q ** (2) any_variable_list @>
+@ \§any variable list>.
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> any_variable_list@>
+
+@q ** (2) any_variable_list> --> EMPTY @>
+@ \§any variable list> $\longrightarrow$ /* Empty */
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=any_variable_list: /* Empty  */@>
+{
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `any_variable_list: /* Empty  */'."
                 << endl;  
 
       log_message(cerr_strm);
@@ -403,14 +459,72 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   Point *p = static_cast<Point*>(@=$2@>); 
-
-   p->show("*p:");
-
-   @=$$@> = 0;
+    scanner_node->database_variable_vector.clear();
 
 };
 
+@q ** (2) any_variable_list -->  @>
+@ \§any variable list> $\longrightarrow$ \§any variable list> \§any variable>. 
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=any_variable_list: any_variable_list any_variable @>
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `any_variable_list: any_variable_list any_variable'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+        scanner_node->database_variable_vector.push_back(static_cast<Id_Map_Entry_Node>(@=$2@>));
+
+};
+
+@q ** (2) any_variable_list --> any_variable_list COMMA any_variable. @>
+
+@ \§any variable list> $\longrightarrow$ \§any variable list> \.{COMMA} \§any variable>.
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=any_variable_list: any_variable_list COMMA any_variable@>
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `any_variable_list: any_variable_list COMMA any_variable'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->database_variable_vector.push_back(static_cast<Id_Map_Entry_Node>(@=$3@>));
+
+};
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
