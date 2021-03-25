@@ -392,29 +392,54 @@ Added this rule.
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `command --> SAVE any_variable_list TO DATABASE'."
-                << endl;  
+  {
+       cerr_strm << "*** Parser: Rule `command --> SAVE any_variable_list TO DATABASE'."
+                 << endl;  
 
-      cerr_strm << "`scanner_node->database_variable_vector.size()' == "
-                << scanner_node->database_variable_vector.size()
-                << endl;
+       cerr_strm << "`scanner_node->database_variable_vector.size()' == "
+                 << scanner_node->database_variable_vector.size()
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
 
-      for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();   
-           iter != scanner_node->database_variable_vector.end();
-           ++iter)
-      {
-          (*iter)->show("*iter:", true, true);
-      }
-  
+   }  /* |if (DEBUG)|  */
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
 #endif /* |DEBUG_COMPILE|  */@;
- 
-   scanner_node->database_variable_vector.clear();
+
+   status = save_to_database_func(parameter, true);
+
+   if (status != 0)
+   {
+       cerr_strm << "ERROR!  In `yyparse', Rule `command --> SAVE any_variable_list TO DATABASE'."
+                 << endl  
+                 << "`Scan_Parse::save_to_database_func' failed, returning " << status << "."
+                 << endl 
+                 << "Failed to save objects to database."
+                 << endl 
+                 << "Continuing."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+   else
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+       {
+            cerr_strm << "*** Parser: Rule `command --> SAVE any_variable_list TO DATABASE':"
+                      << endl  
+                      << "`Scan_Parse::save_to_database_func' succeeded, returning 0."
+                      << endl;
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+
+        }  /* |if (DEBUG)|  */
+#endif /* |DEBUG_COMPILE|  */@;
+
+   }
 
    @=$$@> = 0;
 

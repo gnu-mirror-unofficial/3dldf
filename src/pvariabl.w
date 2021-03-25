@@ -73,7 +73,7 @@ Actually, |Int_Void_Ptr_Bool| |structs| are pushed onto the stack, and the
 the |Id_Map_Entry_Node| referenced by |variable|.  
 \initials{LDF 2004.05.03.}
 
-|yylex()| returns the tokens passed to it via |scanner_node->rescan_stack| 
+|yylex| returns the tokens passed to it via |scanner_node->rescan_stack| 
 without calling |sub_yylex()| for the next token, making it possible 
 to insert a token in the input stream indicating what type of variable we've
 found.  This is necessary, because simply using |variable| with no further 

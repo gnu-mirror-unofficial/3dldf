@@ -5638,41 +5638,59 @@ else if (verbose) /* (|object == static_cast<void*>(0)|)  */
     {
 
       if (up == static_cast<Id_Map_Entry_Node>(0))
+      {
          cerr_strm << "up == 0";
-      else 
-         cerr_strm << "up != 0";
+         log_message(cerr_strm); 
+         cerr << cerr_strm.str() << endl;
+         cerr_strm.str("");
 
-      log_message(cerr_strm); 
-      cerr << cerr_strm.str() << endl;
-      cerr_strm.str("");
+      }
+      else 
+      {
+         cerr_strm << "up != 0";
+         log_message(cerr_strm); 
+         cerr << cerr_strm.str() << endl;
+         cerr_strm.str("");
+
+         up->show("up:", true, true);
+      }
+
  
       if (left == static_cast<Id_Map_Entry_Node>(0))
-          cerr_strm << "left == 0";
+      {
+          cerr_strm << "vvv (" << name << ") left == 0" << endl;
+          log_message(cerr_strm); 
+          cerr << cerr_strm.str();
+          cerr_strm.str("");
+      }
       else
         {    
-          cerr_strm << "left != 0";
+          cerr_strm << "wwww (" << name << ") left != 0" << endl;
+          log_message(cerr_strm); 
+          cerr << cerr_strm.str();
+          cerr_strm.str("");
 #if 0 
           left->show("left:");
 #endif 
         }
 
-log_message(cerr_strm); 
-      cerr << cerr_strm.str() << endl;
-      cerr_strm.str("");
-
      if (right == static_cast<Id_Map_Entry_Node>(0))
-       cerr_strm << "right == 0";
+     {
+          cerr_strm << "(" << name << ") right == 0" << endl;
+          log_message(cerr_strm); 
+          cerr << cerr_strm.str();
+          cerr_strm.str("");
+     } 
      else
-       {
-           cerr_strm << "right != 0";
+     {
+        cerr_strm << "(" << name << ") right != 0 "<< endl;
+        log_message(cerr_strm); 
+        cerr << cerr_strm.str();
+        cerr_strm.str("");
 #if 0 
-           right->show("right:");
+        right->show("right:");
 #endif 
-       }
-
-     log_message(cerr_strm); 
-     cerr << cerr_strm.str() << endl;
-     cerr_strm.str("");
+     }
 
      if (superordinate_vector == static_cast<Id_Map_Entry_Node>(0))
        cerr_strm << "superordinate_vector == 0";
@@ -5699,16 +5717,34 @@ log_message(cerr_strm);
 @<Define |Id_Map_Entry_Type| functions@>=
 
   if (traverse && left != static_cast<Id_Map_Entry_Node>(0))
-    {
-      cerr << "left:" << endl;
-      left->show(left->name, true);
-    }
+  {
+    if (left->name == "")
+       cerr << "xxx left->name is empty." << endl
+            << "xxx left->type == " << name_map[left->type] << endl;
 
-  if (traverse && right != static_cast<Id_Map_Entry_Node>(0))
-    {
-      cerr << "right:" << endl;
-      right->show(right->name, true);
-    }
+    cerr << "xxx (" << name << ") left:" << endl;
+    left->show(left->name, true);
+  }
+  if (traverse && right != 0)
+  {
+    if (right->name == "")
+       cerr << "xxx right->name is empty." << endl; 
+
+    cerr << "(" << name << ") right:" << endl;
+    right->show(right->name, true);
+  }
+#if 0 
+  if (traverse && superordinate_vector != static_cast<Id_Map_Entry_Node>(0))
+  {
+    cerr << "(" << name << ") superordinate_vector:" << endl;
+    superordinate_vector->show(superordinate_vector->name, true);
+  }
+#endif 
+  if (traverse && subordinate_array != static_cast<Id_Map_Entry_Node>(0))
+  {
+    cerr << "(" << name << ") subordinate_array:" << endl;
+    subordinate_array->show(subordinate_array->name, true);
+  }
 
 @q **** (4)@>
 @ 
@@ -5726,7 +5762,7 @@ log_message(cerr_strm);
     }
 #endif
 
-   cerr << endl;
+   // cerr << endl;
 
   return;
 

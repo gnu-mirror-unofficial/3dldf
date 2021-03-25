@@ -1591,6 +1591,118 @@ Call this function recursively, incrementing |level| and using
     } /* Not found.  */
 }
 
+@q ** @>
+@
+@<Define |Scanner_Type| functions@>=
+int
+Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node, 
+                                     vector<Id_Map_Entry_Node> &vvector, 
+                                     bool debug)
+{
+#if DEBUG_COMPILE
+  bool DEBUG = debug;
+
+  if (DEBUG == false)
+     DEBUG = true; /* |false| */ @;
+
+#endif /* |DEBUG_COMPILE| */ @; 
+
+  using namespace Scan_Parse;
+
+  int status;
+
+  stringstream cerr_strm;
+
+  string thread_name;
+
+#ifdef HAVE_PTHREAD_H  
+  
+  Thread_Info_Type* thread_info;
+  
+  if (   run_state.multithread_input 
+      || run_state.multithread_output
+      || run_state.multithread_include)
+    {
+      thread_info = Thread_Info_Type::get_thread_info(true);
+      thread_name = Thread_Info_Type::get_thread_name(thread_info);
+    }
+
+  else
+    {
+      thread_info = 0;
+      thread_name = "";
+    }
+
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+
+  thread_name = "";
+
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+
+#if DEBUG_COMPILE
+
+  if (DEBUG)
+     {
+        cerr_strm << thread_name
+                  << "Entering `Scanner_Type::collect_array_elements'." << endl;
+        log_message(cerr_strm); 
+        cerr_message(cerr_strm); 
+        cerr_strm.str(""); 
+     }
+
+#endif
+
+@q *** @>
+@
+@<Define |Scanner_Type| functions@>=
+
+     if (curr_node->left != 0)
+     {
+         vvector.push_back(curr_node->left);
+         collect_array_elements(curr_node->left, vvector, debug);
+     }
+     if (curr_node->right != 0)
+     {
+         vvector.push_back(curr_node->right);
+         collect_array_elements(curr_node->right, vvector, debug);
+
+     }
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      cerr_strm << thread_name << "In:  `Scanner_Type::collect_array_elements'"
+                << endl
+                << "`vvector.size()' == " << vvector.size() << endl;
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str("");
+     }       
+
+#endif 
+
+@q *** @>
+@
+@<Define |Scanner_Type| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      cerr_strm << thread_name << "In:  `Scanner_Type::collect_array_elements'"
+                << endl
+                << "Exiting `Scanner_Type::collect_array_elements' successfully, returning 0.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str("");
+     }       
+
+#endif 
+
+  return 0;
+   
+}  /* |Scanner_Type::collect_array_elements| */
+
 @q * (1) Erase entry. @>
 @* Erase entry.
 

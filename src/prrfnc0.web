@@ -6503,6 +6503,206 @@ Changed |Pointer_Vector<Point>* pv| to |Pointer_Vector<Point>* bpv|.
 
 }  /* End of |Scan_Parse::polyhedron_path_intersection_func| definition.  */
 
+@q ** (2) Save to database function. @>
+@*1 Save to database function.
+\initials{LDF 2021.03.25.}
+
+\LOG
+\initials{LDF 2021.03.25.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define parser rule functions@>=
+
+int
+Scan_Parse::save_to_database_func(void *parameter, bool debug)
+{
+#if DEBUG_COMPILE
+   bool DEBUG = true;
+
+   if (debug == false)
+      DEBUG = true; /* |false| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   int status = 0;
+
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter); 
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+   using namespace Scan_Parse;
+
+   vector<Id_Map_Entry_Node> array_element_vector;
+
+@ 
+@<Define parser rule functions@>=
+
+   cerr << "Before loop:"
+        << endl 
+        << "scanner_node->database_variable_vector.size() == "
+        << scanner_node->database_variable_vector.size() << endl;
+
+   for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();   
+        iter != scanner_node->database_variable_vector.end();
+        ++iter)
+   {
+       if ((*iter)->known_state != Id_Map_Entry_Type::KNOWN)
+       {
+
+          cerr_strm << (*iter)->name << " is not KNOWN." << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+          (*iter)->show("*iter:", true, true);
+
+          /* Append character octal 243 (British pound) to |iter->name| */
+          /* to test whether it's an array.                             */
+
+          string s = (*iter)->name + static_cast<char>(0243);
+
+          Id_Map_Entry_Node curr_node = scanner_node->lookup(s, true);
+
+          if (curr_node != 0)
+          {
+             cerr << "Before `collect_array_elements':"
+                  << endl 
+                  << "`array_element_vector.size()' == " << array_element_vector.size() 
+                  << endl;
+
+             status = scanner_node->collect_array_elements(curr_node, 
+                                                           array_element_vector,
+                                                           true);
+             if (status != 0)
+             {
+                 cerr_strm << "ERROR!  In `yyparse', Rule "
+                           << "`command: SAVE any_variable_list TO DATABASE'."
+                           << endl
+                           << "`Scanner_Type::collect_array_elements' failed, returning "
+                           << status << "." << endl 
+                           << "Failed to collect array elements.  Continuing."
+                           << endl;
+                 log_message(cerr_strm);
+                 cerr_message(cerr_strm);
+                 cerr_strm.str("");
+                  
+             }
+             else
+             {
+#if DEBUG_COMPILE
+                 if (DEBUG)
+                 { 
+ 
+                     cerr_strm << "In `yyparse', Rule "
+                               << "`command: SAVE any_variable_list TO DATABASE'."
+                               << endl
+                               << "`Scanner_Type::collect_array_elements' succeeded, returning 0."
+                               << endl
+                               << "`array_element_vector.size()' == " << array_element_vector.size() 
+                               << endl;
+                     log_message(cerr_strm);
+                     cerr_message(cerr_strm);
+                     cerr_strm.str("");
+                 }
+#endif /* |DEBUG_COMPILE|  */@;
+                  
+             }
+
+       }  /* |if (curr_node != 0)| */
+
+@ 
+@<Define parser rule functions@>=
+
+       else
+       {
+          if (DEBUG)
+          { 
+               cerr_strm << "`curr_node' is NULL.  Not showing" << endl;
+               log_message(cerr_strm);
+               cerr_message(cerr_strm);
+               cerr_strm.str("");
+          }                 
+       }
+
+     }  /* |if|  */
+
+     else
+     {
+        if (DEBUG)
+        { 
+             cerr_strm << "`(*iter)->known_state' == KNOWN" 
+                       << endl 
+                       << "Showing" << endl;
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+        }                 
+
+         (*iter)->show("*iter:", true, true);
+     }  
+
+   }  /* |for|  */
+
+@ 
+@<Define parser rule functions@>=
+
+
+   cerr << "After loop:"
+        << endl 
+        << "array_element_vector.size() == "
+        << array_element_vector.size() << endl;
+
+   scanner_node->database_variable_vector.insert(scanner_node->database_variable_vector.end(),
+                                                 array_element_vector.begin(), 
+                                                 array_element_vector.end());
+
+   cerr << "After `insert':"
+        << endl 
+        << "scanner_node->database_variable_vector.size() == "
+        << scanner_node->database_variable_vector.size() 
+        << endl
+        << "array_element_vector.size() == " << array_element_vector.size() 
+        << endl;
+
+   for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();
+        iter != scanner_node->database_variable_vector.end();
+        ++iter)
+   {
+        cerr << "`(*iter)->name' == " << (*iter)->name 
+             << endl 
+             << "`(*iter)->type' == " << name_map[(*iter)->type] 
+             << endl 
+             << "`(*iter)->known_state' == ";
+
+        if ((*iter)->known_state == Id_Map_Entry_Type::KNOWN)
+            cerr << "KNOWN." << endl;
+        else if ((*iter)->known_state == Id_Map_Entry_Type::DEPENDENT)
+            cerr << "DEPENDENT." << endl;
+        else if ((*iter)->known_state == Id_Map_Entry_Type::INDEPENDENT)
+            cerr << "INDEPENDENT." << endl;
+   }
+
+@ 
+@<Define parser rule functions@>=
+
+   scanner_node->database_variable_vector.clear();
+
+   return 0;
+
+}  /* End of |Scan_Parse::save_to_database_func| definition */   
+
+
+
 @q * (1) Putting parser rule functions together.@>
 @* Putting parser functions together.
 \initials{LDF 2005.04.15.}
