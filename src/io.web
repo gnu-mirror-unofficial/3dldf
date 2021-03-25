@@ -946,8 +946,7 @@ for setting |category|.
 
 @q *** (3) Declaration.  @>
 @<|Id_Map_Entry_Type| declaration@>=
-class 
-Id_Map_Entry_Type 
+class Id_Map_Entry_Type 
 
 #ifdef HAVE_PTHREAD_H  
 : public Mutex_Type
@@ -6002,7 +6001,7 @@ Scan_Parse::polyhedron_path_intersection_func(Polyhedron* p,
 
 friend
 int
-Scan_Parse::save_to_database_func(void *parameter, bool debug);
+Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug);
 
 template<class C>
 friend 

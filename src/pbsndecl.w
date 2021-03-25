@@ -2387,6 +2387,8 @@ Added this section with token declarations for
 @=%token <int_value> SAVE@>@/
 @=%token <int_value> DATABASE@>@/
 @=%token <int_value> ALL@>@/
+@=%token <int_value> WITH@>@/
+@=%token <int_value> PREFIX@>@/
 
 @q *** (3) Types for transformations.@>
 @*2 Types for transformations.

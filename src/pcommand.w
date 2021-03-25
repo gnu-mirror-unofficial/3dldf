@@ -374,8 +374,9 @@ Added this rule.
 
 };
 
-@q ** (2) command --> SAVE variable TO DATABASE.@> 
-@*1 \§command> $\longrightarrow$ \.{SAVE} \§variable> \.{TO} \.{DATABASE}.
+@q ** (2) command --> SAVE variable TO DATABASE with_prefix_option.@> 
+@*1 \§command> $\longrightarrow$ \.{SAVE} \§variable> \.{TO} \.{DATABASE}
+\§with prefix option>.
 \initials{LDF 2021.03.23.}
 
 \LOG
@@ -384,7 +385,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=command: SAVE any_variable_list TO DATABASE@>@/
+@=command: SAVE any_variable_list TO DATABASE with_prefix_option@>@/
 {
 
    @<Common declarations for rules@>@; 
@@ -407,7 +408,14 @@ Added this rule.
 
 #endif /* |DEBUG_COMPILE|  */@;
 
-   status = save_to_database_func(parameter, true);
+   string prefix;
+
+   if (@=$5@> != 0)
+      prefix = static_cast<Id_Map_Entry_Node>(@=$5@>)->name;
+
+   status = save_to_database_func(static_cast<Scanner_Node>(parameter), 
+                                  prefix,
+                                  true);  /* |false|  */
 
    if (status != 0)
    {
@@ -550,6 +558,83 @@ Added this rule.
     scanner_node->database_variable_vector.push_back(static_cast<Id_Map_Entry_Node>(@=$3@>));
 
 };
+
+@q ** (2) with_prefix_option @>
+@ \§with prefix option>.
+
+\LOG
+\initials{LDF 2021.03.25.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> with_prefix_option@>
+
+@q ** (2) with_prefix_option> --> EMPTY @>
+@ \§with prefix option> $\longrightarrow$ /* Empty */
+
+\LOG
+\initials{LDF 2021.03.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=with_prefix_option: /* Empty  */@>
+{
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `with_prefix_option: /* Empty  */'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = 0;
+
+};
+
+@q ** (2) with_prefix_option -->  @>
+@ \§with prefix option> $\longrightarrow$ \.{WITH} \.{PREFIX} \§any variable>. 
+
+\LOG
+\initials{LDF 2021.03.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=with_prefix_option: WITH PREFIX any_variable @>
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `with_prefix_option: WITH PREFIX any_variable'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = @=$3@>;
+
+};
+
+
+
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>

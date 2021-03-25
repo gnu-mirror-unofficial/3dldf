@@ -10227,6 +10227,124 @@ Picture::operator=(const Picture& p)
     }
 }
 
+
+@q *** (3) Save |Point| to database.@>
+@*2 Save |Point| to database.
+@^\cfunc{Point}{save\_point\_to\_database}@>
+\initials{LDF 2021.03.25.}
+
+\LOG
+\initials{LDF 2021.03.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Point| functions@>=
+
+static
+int
+save_points_to_database(vector<Id_Map_Entry_Node> &vvector, 
+                        Scanner_Node scanner_node, 
+                        string prefix = "",
+                        bool debug = false);
+
+@q **** (4) Save |Point| to database.@>
+@
+@<Define |Point| functions@>=
+int
+Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector, 
+                               Scanner_Node scanner_node, 
+                               string prefix,
+                               bool debug)
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true;
+
+  if (debug == false)
+     DEBUG = true; /* |false|  */
+
+  if (DEBUG)
+    cerr << "Entering `Point::save_points_to_database'."
+         << endl;
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+   if (vvector.size() == 0)
+   {
+       cerr << "WARNING!  In  `Point::save_points_to_database':"
+            << "`vector<Id_Map_Entry_Node> vvector' is empty." << endl 
+            << "No points to save to database." << endl 
+            << "Exiting function with return value 2."
+            << endl;
+
+      return 2;
+   }
+
+@q ***** (5) Save |Points| to database.@>
+@
+@<Define |Point| functions@>=
+
+   Point *curr_point = 0;
+  
+   stringstream sql_strm;
+
+   cerr << "`prefix' == " << prefix << endl;
+
+   sql_strm << "insert into points (prefix, name, world_coordinates_x, world_coordinates_y, "
+            << "world_coordinates_z, world_coordinates_w) "
+            << "values ";
+
+   string comma_str = "";
+
+   for (vector<Id_Map_Entry_Node>::iterator iter = vvector.begin();
+        iter != vvector.end();
+        ++iter)
+   {
+       curr_point = static_cast<Point*>((*iter)->get_object());
+
+#if DEBUG_COMPILE 
+       if (DEBUG)
+       { 
+          cerr << "`(*iter)->get_name()' == " << (*iter)->get_name() << endl;
+          curr_point->show("*curr_point:");
+       }       
+#endif /* |DEBUG_COMPILE|  */@;        
+
+       sql_strm << comma_str  
+                << "(\"" << prefix << "\", \"" << (*iter)->get_name() << "\", " 
+                << curr_point->world_coordinates[0] << ", " << curr_point->world_coordinates[1] << ", "
+                << curr_point->world_coordinates[2] << ", " << curr_point->world_coordinates[3] << ")";
+
+       comma_str = ", ";
+
+   }  /* |for| */
+
+   sql_strm << ";";
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   { 
+      cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
+   }       
+#endif /* |DEBUG_COMPILE|  */@;        
+
+@q ***** (5) Save |Points| to database.@>
+@
+@<Define |Point| functions@>=
+
+
+#if DEBUG_COMPILE
+
+  if (DEBUG)
+    cerr << "Exiting `Point::save_points_to_database' successfully with return value 0."
+         << endl;
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |Point::save_points_to_database| definition  */
+
+
 @q ** (2) Copy constructor. @>
 @*1 Copy constructor.
 \initials{LDF 2002.12.05.}  
@@ -11819,7 +11937,8 @@ Now including
 @q   following s-expression in order to use the facilities normally      @>
 @q   accessed via the local variables list.                              @>
 @q   \initials{LDF 2004.02.12}.                                          @>
-@q   (progn (cweb-mode) (outline-minor-mode) (setq fill-column 80))      @>
+@q   (progn (cweb-mode) (outline-minor-mode)                   (ignore " @>
+@q ")  (setq fill-column 80) (column-number-mode 1))                     @>
 
 @q Local Variables: @>
 @q mode:CWEB @>

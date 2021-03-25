@@ -52,20 +52,25 @@
 
 %% * (1) New sample code.
 
-% point p;
+point_vector pv;
+
+pv += (1.0, 2.9, 3.506);
+pv += (11, 12, 13);
+pv += (141, 152, 153);
 
 % path r;
 
-%path qs[][];
+path qs[][];
 
-%qs[0][0] := origin .. (1, 0, 2);
-%qs[1][1] := origin .. (21, 0, 22);
+qs[0][0] := origin .. (1, 0, 2);
+qs[1][1] := origin .. (21, 0, 22);
 
 %save qs[0][0] to database;
 
-%path s;
+% path s;
 
-%p := (1, 2, 3);
+point p;
+p := (1, 2, 3);
 
 point q[];
 
@@ -73,21 +78,19 @@ q0 := (11, 12, 13);
 q1 := (21, 22, 23);
 q2 := (31, 32, 33);
 
+save p, q, qs, pv to database with prefix abc;
+
 %r := p .. q0;
 
-%save p, q0, r, s to database;
+%save p, q q0, qs, pv, s to database;
 
-save q to database;
+%save q to database;
 
 end;
 
 %show p;
 
-% point_vector pv;
 
-% pv += (1, 2, 3);
-% pv += (11, 12, 13);
-% pv += (141, 152, 153);
 
 % save pv to database;
 

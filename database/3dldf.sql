@@ -14,26 +14,28 @@ drop table points;
 
 create table points
 (
-    w_coord_world float not null default 0.0,	
-    x_coord_world float not null default 0.0,
-    y_coord_world float not null default 0.0,
-    z_coord_world float not null default 0.0,
-    w_coord_user float not null default 0.0,	
-    x_coord_user float not null default 0.0,
-    y_coord_user float not null default 0.0,
-    z_coord_user float not null default 0.0,
-    w_coord_view float not null default 0.0,	
-    x_coord_view float not null default 0.0,
-    y_coord_view float not null default 0.0,
-    z_coord_view float not null default 0.0,
-    w_coord_pre_projective float not null default 0.0,	
-    x_coord_pre_projective float not null default 0.0,
-    y_coord_pre_projective float not null default 0.0,
-    z_coord_pre_projective float not null default 0.0,
-    w_coord_projective float not null default 0.0,	
-    x_coord_projective float not null default 0.0,
-    y_coord_projective float not null default 0.0,
-    z_coord_projective float not null default 0.0,
+    prefix varchar(32) not null default "",
+    name varchar(32) not null default "",
+    world_coordinates_x float not null default 0.0,
+    world_coordinates_y float not null default 0.0,
+    world_coordinates_z float not null default 0.0,
+    world_coordinates_w float not null default 0.0,	
+    user_coordinates_x float not null default 0.0,
+    user_coordinates_y float not null default 0.0,
+    user_coordinates_z float not null default 0.0,
+    user_coordinates_w float not null default 0.0,
+    view_coordinates_x float not null default 0.0,
+    view_coordinates_y float not null default 0.0,
+    view_coordinates_z float not null default 0.0,
+    view_coordinates_w float not null default 0.0,	
+    pre_projective_coordinates_w float not null default 0.0,	
+    pre_projective_coordinates_x float not null default 0.0,
+    pre_projective_coordinates_y float not null default 0.0,
+    pre_projective_coordinates_z float not null default 0.0,
+    projective_coordinates_x float not null default 0.0,
+    projective_coordinates_y float not null default 0.0,
+    projective_coordinates_z float not null default 0.0,
+    projective_coordinates_w float not null default 0.0,	
     draw_dot_value int not null default 0,
     do_output boolean not null default false,
 
@@ -70,23 +72,23 @@ show columns from 3dldf.points;
 
 delete from points;
 
-insert into points (x_coord_world, y_coord_world, z_coord_world, w_coord_world)
+insert into points (world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
 values
 (1, 2, 3, 1);
 
-insert into points (x_coord_world, y_coord_world, z_coord_world, w_coord_world)
+insert into points (world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
 values
 (17.5, 5, 13.001, 1);
 
 /* * Select  */
 
-select x_coord_world, y_coord_world, z_coord_world, w_coord_world,
+select world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w,
 transform_matrix_0_0, transform_matrix_0_1, transform_matrix_0_2, transform_matrix_0_3,
 transform_matrix_1_0, transform_matrix_1_1, transform_matrix_1_2, transform_matrix_1_3,
 transform_matrix_2_0, transform_matrix_2_1, transform_matrix_2_2, transform_matrix_2_3,
 transform_matrix_3_0, transform_matrix_3_1, transform_matrix_3_2, transform_matrix_3_3
 from
-points order by x_coord_world, y_coord_world, z_coord_world, z_coord_world asc\G
+points order by world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_z asc\G
 
 
 /* * transforms  */

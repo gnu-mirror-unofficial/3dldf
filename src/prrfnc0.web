@@ -2413,6 +2413,8 @@ Added this section with |name_map| entries for
   name_map[SAVE]        = "SAVE";
   name_map[DATABASE]    = "DATABASE";
   name_map[ALL]         = "ALL";
+  name_map[WITH]        = "WITH";
+  name_map[PREFIX]      = "PREFIX";
 
 @q *** (3) Types for transformations.@>
 @*2 Types for transformations.
@@ -6517,7 +6519,7 @@ Added this function.
 @<Define parser rule functions@>=
 
 int
-Scan_Parse::save_to_database_func(void *parameter, bool debug)
+Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug)
 {
 #if DEBUG_COMPILE
    bool DEBUG = true;
@@ -6533,8 +6535,6 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
    string thread_name      = "";
 
    int status = 0;
-
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter); 
 
    if (scanner_node)
       scanner_node->get_thread_name_and_stop_values(&thread_name,
@@ -6552,26 +6552,67 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
         << "scanner_node->database_variable_vector.size() == "
         << scanner_node->database_variable_vector.size() << endl;
 
+   vector<Id_Map_Entry_Node> point_entry_vector;
+   vector<Id_Map_Entry_Node> path_entry_vector;
+   vector<Id_Map_Entry_Node> transform_entry_vector;
+
    for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();   
         iter != scanner_node->database_variable_vector.end();
         ++iter)
    {
-       if ((*iter)->known_state != Id_Map_Entry_Type::KNOWN)
+       if ((*iter)->known_state != Id_Map_Entry_Type::KNOWN
+           || (*iter)->type == POINT_VECTOR
+           || (*iter)->type == PATH_VECTOR
+           || (*iter)->type == TRANSFORM_VECTOR)
+          
        {
 
-          cerr_strm << (*iter)->name << " is not KNOWN." << endl;
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
+          if ((*iter)->known_state != Id_Map_Entry_Type::KNOWN)
+          {
+             cerr_strm << (*iter)->name << " is not KNOWN." << endl;
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+          }
+          else if ((*iter)->type == POINT_VECTOR)
+          {
+             cerr_strm << "(*iter)->type == POINT_VECTOR." << endl;
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+          }
+          else if ((*iter)->type == PATH_VECTOR)
+          {
+             cerr_strm << "(*iter)->type == PATH_VECTOR." << endl;
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+          }
+          else if ((*iter)->type == TRANSFORM_VECTOR)
+          {
+             cerr_strm << "(*iter)->type == TRANSFORM_VECTOR." << endl;
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+          }
 
-          (*iter)->show("*iter:", true, true);
-
-          /* Append character octal 243 (British pound) to |iter->name| */
-          /* to test whether it's an array.                             */
+          /* Append from one to five ``British pound'' characters (i.e., octal 243)   */
+          /* to |iter->name| to test whether it's a one- or multi-dimentsional array. */
+          /* Six or more dimensional arrays will not be found.                        */
+          /* \initials{LDF 2021.03.25.}                                               */
 
           string s = (*iter)->name + static_cast<char>(0243);
 
           Id_Map_Entry_Node curr_node = scanner_node->lookup(s, true);
+
+          if (curr_node == 0)
+          {
+             for (int i = 0; i < 5 && curr_node == 0; ++i)
+             {
+                 s += static_cast<char>(0243);              
+                 curr_node = scanner_node->lookup(s, true);
+             }  
+          }
 
           if (curr_node != 0)
           {
@@ -6585,9 +6626,7 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
                                                            true);
              if (status != 0)
              {
-                 cerr_strm << "ERROR!  In `yyparse', Rule "
-                           << "`command: SAVE any_variable_list TO DATABASE'."
-                           << endl
+                 cerr_strm << "ERROR!  In `Scan_Parse::save_to_database_func':" << endl 
                            << "`Scanner_Type::collect_array_elements' failed, returning "
                            << status << "." << endl 
                            << "Failed to collect array elements.  Continuing."
@@ -6603,9 +6642,7 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
                  if (DEBUG)
                  { 
  
-                     cerr_strm << "In `yyparse', Rule "
-                               << "`command: SAVE any_variable_list TO DATABASE'."
-                               << endl
+                     cerr_strm << "In `Scan_Parse::save_to_database_func':" << endl 
                                << "`Scanner_Type::collect_array_elements' succeeded, returning 0."
                                << endl
                                << "`array_element_vector.size()' == " << array_element_vector.size() 
@@ -6627,7 +6664,7 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
        {
           if (DEBUG)
           { 
-               cerr_strm << "`curr_node' is NULL.  Not showing" << endl;
+               cerr_strm << "`curr_node' is NULL.  No array found.  Not showing" << endl;
                log_message(cerr_strm);
                cerr_message(cerr_strm);
                cerr_strm.str("");
@@ -6665,7 +6702,6 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
    scanner_node->database_variable_vector.insert(scanner_node->database_variable_vector.end(),
                                                  array_element_vector.begin(), 
                                                  array_element_vector.end());
-
    cerr << "After `insert':"
         << endl 
         << "scanner_node->database_variable_vector.size() == "
@@ -6673,6 +6709,8 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
         << endl
         << "array_element_vector.size() == " << array_element_vector.size() 
         << endl;
+
+   array_element_vector.clear(); 
 
    for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();
         iter != scanner_node->database_variable_vector.end();
@@ -6685,17 +6723,94 @@ Scan_Parse::save_to_database_func(void *parameter, bool debug)
              << "`(*iter)->known_state' == ";
 
         if ((*iter)->known_state == Id_Map_Entry_Type::KNOWN)
+        {
             cerr << "KNOWN." << endl;
+
+            if ((*iter)->type == POINT)
+            {
+                point_entry_vector.push_back(*iter);
+                
+            }
+            else if ((*iter)->type == PATH)
+            {
+                path_entry_vector.push_back(*iter);
+                
+            }
+            else if ((*iter)->type == TRANSFORM)
+            {
+                transform_entry_vector.push_back(*iter);
+                
+            }
+        }
         else if ((*iter)->known_state == Id_Map_Entry_Type::DEPENDENT)
+        {
             cerr << "DEPENDENT." << endl;
+        }
         else if ((*iter)->known_state == Id_Map_Entry_Type::INDEPENDENT)
+        {
             cerr << "INDEPENDENT." << endl;
+        }
    }
 
+   scanner_node->database_variable_vector.clear();
+
+   cerr << "`point_entry_vector.size()' == " << point_entry_vector.size() 
+        << endl 
+        << "`path_entry_vector.size()' == " << path_entry_vector.size() 
+        << endl 
+        << "`transform_entry_vector.size()' == " << transform_entry_vector.size() 
+        << endl;
+
+@q **** (4) @>
 @ 
 @<Define parser rule functions@>=
 
-   scanner_node->database_variable_vector.clear();
+   if (point_entry_vector.size() == 0)
+   {
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `Scan_Parse::save_to_database_func':"
+            << endl 
+            << "`point_entry_vector' is empty.  No points to save to database." << endl 
+            << "Not calling `Point::save_points_to_database'.  Continuing."
+            << endl;
+   }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   }
+   
+   else
+   {
+       status = Point::save_points_to_database(point_entry_vector, 
+                                               scanner_node, 
+                                               prefix,
+                                               true);  /* |false|  */
+        
+       if (status != 0)
+       {
+           cerr << "ERROR!  In `Scan_Parse::save_to_database_func':"
+                << endl 
+                << "`Point::save_points_to_database' failed, returning " << status << "."
+                << endl 
+                << "Failed to save points to database.  Continuing."
+                << endl;
+       }
+#if DEBUG_COMPILE
+       else if (DEBUG)
+       {
+           cerr << "In `Scan_Parse::save_to_database_func':"
+                << endl 
+                << "`Point::save_points_to_database' succeeded, returning 0."
+                << endl;
+       }   
+#endif /* |DEBUG_COMPILE|  */@;
+
+   }
+
+@q **** (4) @>
+@ 
+@<Define parser rule functions@>=
 
    return 0;
 
