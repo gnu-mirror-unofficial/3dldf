@@ -36,31 +36,51 @@ create table points
     projective_coordinates_y float not null default 0.0,
     projective_coordinates_z float not null default 0.0,
     projective_coordinates_w float not null default 0.0,	
+    world_extremes_min_x float not null default 0.0,	
+    world_extremes_max_x float not null default 0.0, 
+    world_extremes_min_y float not null default 0.0, 
+    world_extremes_max_y float not null default 0.0, 
+    world_extremes_min_z float not null default 0.0, 
+    world_extremes_max_z float not null default 0.0, 
+    pre_projective_extremes_min_x float not null default 0.0,  
+    pre_projective_extremes_max_x float not null default 0.0, 
+    pre_projective_extremes_min_y float not null default 0.0,  
+    pre_projective_extremes_max_y float not null default 0.0, 
+    pre_projective_extremes_min_z float not null default 0.0,  
+    pre_projective_extremes_max_z float not null default 0.0, 
+    projective_extremes_min_x float not null default 0.0,  
+    projective_extremes_max_x float not null default 0.0, 
+    projective_extremes_min_y float not null default 0.0,  
+    projective_extremes_max_y float not null default 0.0, 
+    projective_extremes_min_z float not null default 0.0,  
+    projective_extremes_max_z float not null default 0.0, 
     draw_dot_value int not null default 0,
     do_output boolean not null default false,
-
-    transform_matrix_0_0 float not null default 1.0,
-    transform_matrix_0_1 float not null default 0.0,
-    transform_matrix_0_2 float not null default 0.0,
-    transform_matrix_0_3 float not null default 0.0,	
-                  
-    transform_matrix_1_0 float not null default 0.0,
-    transform_matrix_1_1 float not null default 1.0,
-    transform_matrix_1_2 float not null default 0.0,
-    transform_matrix_1_3 float not null default 0.0,
-                  
-    transform_matrix_2_0 float not null default 0.0,
-    transform_matrix_2_1 float not null default 0.0,
-    transform_matrix_2_2 float not null default 1.0,
-    transform_matrix_2_3 float not null default 0.0,
-                  
-    transform_matrix_3_0 float not null default 0.0,
-    transform_matrix_3_1 float not null default 0.0,
-    transform_matrix_3_2 float not null default 0.0,
-    transform_matrix_3_3 float not null default 1.0,
-
     measurement_units varchar(16) not null default "cm"
 );
+
+
+    -- transform_matrix_0_0 float not null default 1.0,
+    -- transform_matrix_0_1 float not null default 0.0,
+    -- transform_matrix_0_2 float not null default 0.0,
+    -- transform_matrix_0_3 float not null default 0.0,	
+                  
+    -- transform_matrix_1_0 float not null default 0.0,
+    -- transform_matrix_1_1 float not null default 1.0,
+    -- transform_matrix_1_2 float not null default 0.0,
+    -- transform_matrix_1_3 float not null default 0.0,
+                  
+    -- transform_matrix_2_0 float not null default 0.0,
+    -- transform_matrix_2_1 float not null default 0.0,
+    -- transform_matrix_2_2 float not null default 1.0,
+    -- transform_matrix_2_3 float not null default 0.0,
+                  
+    -- transform_matrix_3_0 float not null default 0.0,
+    -- transform_matrix_3_1 float not null default 0.0,
+    -- transform_matrix_3_2 float not null default 0.0,
+    -- transform_matrix_3_3 float not null default 1.0,
+
+
 
 alter table points add column operetta varchar(64) default null after opera;
 
