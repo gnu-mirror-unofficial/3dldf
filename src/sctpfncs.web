@@ -1658,11 +1658,13 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
 
      if (curr_node->left != 0)
      {
+         curr_node->left->vector_type_flag = curr_node->vector_type_flag;
          vvector.push_back(curr_node->left);
          collect_array_elements(curr_node->left, vvector, debug);
      }
      if (curr_node->right != 0)
      {
+         curr_node->right->vector_type_flag = curr_node->vector_type_flag;
          vvector.push_back(curr_node->right);
          collect_array_elements(curr_node->right, vvector, debug);
 

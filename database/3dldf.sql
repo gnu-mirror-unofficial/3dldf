@@ -16,6 +16,8 @@ create table points
 (
     prefix varchar(32) not null default "",
     name varchar(32) not null default "",
+    array_flag boolean not null default false,
+    vector_type_flag boolean not null default false,
     world_coordinates_x float not null default 0.0,
     world_coordinates_y float not null default 0.0,
     world_coordinates_z float not null default 0.0,
@@ -54,7 +56,7 @@ create table points
     projective_extremes_max_y float not null default 0.0, 
     projective_extremes_min_z float not null default 0.0,  
     projective_extremes_max_z float not null default 0.0, 
-    draw_dot_value int not null default 0,
+    drawdot_value int not null default 0,
     do_output boolean not null default false,
     measurement_units varchar(16) not null default "cm"
 );
@@ -100,7 +102,20 @@ insert into points (world_coordinates_x, world_coordinates_y, world_coordinates_
 values
 (17.5, 5, 13.001, 1);
 
+
+
+
 /* * Select  */
+
+select * from points\G
+
+select * from points order by prefix, name, world_coordinates_x, world_coordinates_y,
+world_coordinates_z asc\G
+
+
+
+
+
 
 select world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w,
 transform_matrix_0_0, transform_matrix_0_1, transform_matrix_0_2, transform_matrix_0_3,
@@ -109,6 +124,11 @@ transform_matrix_2_0, transform_matrix_2_1, transform_matrix_2_2, transform_matr
 transform_matrix_3_0, transform_matrix_3_1, transform_matrix_3_2, transform_matrix_3_3
 from
 points order by world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_z asc\G
+
+
+
+
+
 
 
 /* * transforms  */
@@ -146,6 +166,10 @@ delete from transforms;
 insert into transforms (name) values ("t0");
 
 select * from transforms order by name, matrix_0_0 asc\G
+
+
+
+
 
 /* Local Variables: */
 /* mode:SQL */

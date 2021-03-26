@@ -417,6 +417,7 @@ Id_Map_Entry_Type::Id_Map_Entry_Type(void)
   const_flag = false;
 
   array_flag = false;
+  vector_type_flag = false;
 
   known_state = INDEPENDENT;
   category = REGULAR;
@@ -2114,9 +2115,9 @@ Id_Map_Entry_Type::set_entry(string nname,
              << "category has invalid value: " 
              << category << endl << "Will try to continue.\n";
 
-      cerr << "const_flag == " << const_flag << endl
-           << "array_flag == " << array_flag << endl
-           << "type == " << name_map[type] << endl;
+      cerr << "const_flag       == " << const_flag << endl
+           << "array_flag       == " << array_flag << endl
+           << "type             == " << name_map[type] << endl;
 
       if (object == static_cast<void*>(0))
         cerr << "object == 0" << "\n";
@@ -2239,6 +2240,7 @@ Id_Map_Entry_Type::operator=(const Id_Map_Entry_Type& i)
 
   const_flag = i.const_flag;
   array_flag = i.array_flag;
+  vector_type_flag = i.vector_type_flag;
 
   known_state = i.known_state;
   category= i.category;
@@ -4371,11 +4373,13 @@ Id_Map_Entry_Type::show(string s,
      if (verbose)
        {
 
-        cerr_strm << "const_flag == " << const_flag << endl
-                  << "array_flag == " << array_flag;
+        cerr_strm << "const_flag       == " << const_flag << endl
+                  << "array_flag       == " << array_flag << endl 
+                  << "vector_type_flag == " << vector_type_flag
+                  << endl; 
 
         log_message(cerr_strm); 
-        cerr << cerr_strm.str() << endl;
+        cerr << cerr_strm.str();
         cerr_strm.str("");
 
     } /* |if (verbose)|  */

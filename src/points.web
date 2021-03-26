@@ -95,6 +95,8 @@ versions are now in their own RCS repository.
 #include "dashptrn.h++"
 #include "shapes.h++"
 #include "pictures.h++"
+#include "parser.h++"   
+#include "parser_1.h++"
 
 @q * (1) Point class definition.@>
 @* {\bf Point} class definition.
@@ -1987,11 +1989,13 @@ get_coord(char c,
 @
 @<Define |Point| functions@>=
 real 
-Point::get_coord(char c, char coords,
+Point::get_coord(char c, 
+                 char coords,
                  const bool do_persp,
                  const bool do_apply,
                  Focus* f,
-                 const unsigned short proj, real factor)
+                 const unsigned short proj,
+                 real factor)
 {
   
   if (do_apply)
@@ -5636,7 +5640,6 @@ a |Shape*| from |elements| in |Picture::output| causes a memory fault.
 \ENDLOG 
 
 @<Declare |Point| functions@>=
-
 virtual
 void
 suppress_output();
@@ -10290,8 +10293,44 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
 
    cerr << "`prefix' == " << prefix << endl;
 
-   sql_strm << "insert into points (prefix, name, world_coordinates_x, world_coordinates_y, "
-            << "world_coordinates_z, world_coordinates_w) "
+   sql_strm << "insert into points (prefix, name, "
+            << "array_flag, "
+            << "vector_type_flag, "
+            << "world_coordinates_x, world_coordinates_y, "
+            << "world_coordinates_z, world_coordinates_w, "
+            << "user_coordinates_x, user_coordinates_y, "
+            << "user_coordinates_z, user_coordinates_w, "
+            << "view_coordinates_x, view_coordinates_y, "
+            << "view_coordinates_z, view_coordinates_w, "
+            << "pre_projective_coordinates_x, " 
+            << "pre_projective_coordinates_y, "
+            << "pre_projective_coordinates_z, " 
+            << "pre_projective_coordinates_w, "
+            << "projective_coordinates_x, " 
+            << "projective_coordinates_y, "
+            << "projective_coordinates_z, " 
+            << "projective_coordinates_w, "
+            << "drawdot_value, "
+            << "world_extremes_min_x, "
+            << "world_extremes_max_x, "
+            << "world_extremes_min_y, "
+            << "world_extremes_max_y, "
+            << "world_extremes_min_z, "
+            << "world_extremes_max_z, "
+            << "pre_projective_extremes_min_x, " 
+            << "pre_projective_extremes_max_x, "
+            << "pre_projective_extremes_min_y, " 
+            << "pre_projective_extremes_max_y, "
+            << "pre_projective_extremes_min_z, " 
+            << "pre_projective_extremes_max_z, "
+            << "projective_extremes_min_x, " 
+            << "projective_extremes_max_x, "
+            << "projective_extremes_min_y, " 
+            << "projective_extremes_max_y, "
+            << "projective_extremes_min_z, " 
+            << "projective_extremes_max_z, "
+            << "do_output, "
+            << "measurement_units) "
             << "values ";
 
    string comma_str = "";
@@ -10302,6 +10341,8 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
    {
        curr_point = static_cast<Point*>((*iter)->get_object());
 
+       curr_point->apply_transform();
+
 #if DEBUG_COMPILE 
        if (DEBUG)
        { 
@@ -10310,10 +10351,46 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
        }       
 #endif /* |DEBUG_COMPILE|  */@;        
 
+
        sql_strm << comma_str  
-                << "(\"" << prefix << "\", \"" << (*iter)->get_name() << "\", " 
+                << "(\"" << prefix << "\", \"" << (*iter)->get_name() << "\", "
+                << (*iter)->get_array_flag() << ", " 
+                << (*iter)->get_vector_type_flag() << ", "
                 << curr_point->world_coordinates[0] << ", " << curr_point->world_coordinates[1] << ", "
-                << curr_point->world_coordinates[2] << ", " << curr_point->world_coordinates[3] << ")";
+                << curr_point->world_coordinates[2] << ", " << curr_point->world_coordinates[3] << ", "
+                << curr_point->user_coordinates[0] << ", " << curr_point->user_coordinates[1] << ", "
+                << curr_point->user_coordinates[2] << ", " << curr_point->user_coordinates[3] << ", "
+                << curr_point->view_coordinates[0] << ", " << curr_point->view_coordinates[1] << ", "
+                << curr_point->view_coordinates[2] << ", " << curr_point->view_coordinates[3] << ", "
+                << curr_point->pre_projective_coordinates[0] << ", " 
+                << curr_point->pre_projective_coordinates[1] << ", "
+                << curr_point->pre_projective_coordinates[2] << ", " 
+                << curr_point->pre_projective_coordinates[3] << ","
+                << curr_point->projective_coordinates[0] << ", " 
+                << curr_point->projective_coordinates[1] << ", "
+                << curr_point->projective_coordinates[2] << ", " 
+                << curr_point->projective_coordinates[3] << ", "
+                << curr_point->drawdot_value << ", "
+                << curr_point->world_extremes[0] << ", " 
+                << curr_point->world_extremes[1] << ", "
+                << curr_point->world_extremes[2] << ", "  
+                << curr_point->world_extremes[3] << ", "
+                << curr_point->world_extremes[4] << ", " 
+                << curr_point->world_extremes[5] << ", "
+                << curr_point->pre_projective_extremes[0] << ", " 
+                << curr_point->pre_projective_extremes[1] << ", "
+                << curr_point->pre_projective_extremes[2] << ", " 
+                << curr_point->pre_projective_extremes[3] << ", "
+                << curr_point->pre_projective_extremes[4] << ", " 
+                << curr_point->pre_projective_extremes[5] << ", "
+                << curr_point->projective_extremes[0] << ", " 
+                << curr_point->projective_extremes[1] << ", "
+                << curr_point->projective_extremes[2] << ", " 
+                << curr_point->projective_extremes[3] << ", "
+                << curr_point->projective_extremes[4] << ", " 
+                << curr_point->projective_extremes[5] << ", "
+                << curr_point->do_output << ", "
+                << "\"" << curr_point->measurement_units << "\")";
 
        comma_str = ", ";
 

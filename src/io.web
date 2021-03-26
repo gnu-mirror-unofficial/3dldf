@@ -988,6 +988,7 @@ Replaced |Scanner_Node scanner_node| with |Id_Map_Node id_map_node|.
 
   bool const_flag;
   bool array_flag;
+  bool vector_type_flag;
 
   unsigned short known_state;
   unsigned short category;
@@ -1436,6 +1437,38 @@ unsigned int
 get_type(void) const
 {
   return type;
+}
+
+@q ***** (5)  Get array flag.  @>
+@*4 Get array flag.
+
+\LOG
+\initials{LDF 2021.03.26.}
+Added this function. 
+\ENDLOG
+
+@<Declare |Id_Map_Entry_Type| functions@>=
+inline
+bool
+get_array_flag(void) const
+{
+  return array_flag;
+}
+
+@q ***** (5)  Get vector type flag.  @>
+@*4 Get vector type flag.
+
+\LOG
+\initials{LDF 2021.03.26.}
+Added this function. 
+\ENDLOG
+
+@<Declare |Id_Map_Entry_Type| functions@>=
+inline
+bool
+get_vector_type_flag(void) const
+{
+  return vector_type_flag;
 }
 
 @q ***** (5) Is spark.  @>

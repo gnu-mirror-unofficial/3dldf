@@ -6544,6 +6544,10 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
 
    vector<Id_Map_Entry_Node> array_element_vector;
 
+
+   cerr << "Entering `Scan_Parse::save_to_database_func'."
+        << endl;
+
 @ 
 @<Define parser rule functions@>=
 
@@ -6556,10 +6560,15 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
    vector<Id_Map_Entry_Node> path_entry_vector;
    vector<Id_Map_Entry_Node> transform_entry_vector;
 
+   bool vvector_type_flag = false;
+
    for (vector<Id_Map_Entry_Node>::iterator iter = scanner_node->database_variable_vector.begin();   
         iter != scanner_node->database_variable_vector.end();
         ++iter)
    {
+
+       vvector_type_flag = false;
+
        if ((*iter)->known_state != Id_Map_Entry_Type::KNOWN
            || (*iter)->type == POINT_VECTOR
            || (*iter)->type == PATH_VECTOR
@@ -6580,6 +6589,8 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
              log_message(cerr_strm);
              cerr_message(cerr_strm);
              cerr_strm.str("");
+
+             vvector_type_flag = true;
           }
           else if ((*iter)->type == PATH_VECTOR)
           {
@@ -6587,6 +6598,9 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
              log_message(cerr_strm);
              cerr_message(cerr_strm);
              cerr_strm.str("");
+
+             vvector_type_flag = true;
+
           }
           else if ((*iter)->type == TRANSFORM_VECTOR)
           {
@@ -6594,6 +6608,9 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
              log_message(cerr_strm);
              cerr_message(cerr_strm);
              cerr_strm.str("");
+
+             vvector_type_flag = true;
+
           }
 
           /* Append from one to five ``British pound'' characters (i.e., octal 243)   */
@@ -6620,6 +6637,8 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
                   << endl 
                   << "`array_element_vector.size()' == " << array_element_vector.size() 
                   << endl;
+
+             curr_node->vector_type_flag = vvector_type_flag;
 
              status = scanner_node->collect_array_elements(curr_node, 
                                                            array_element_vector,
@@ -6693,7 +6712,6 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
 @ 
 @<Define parser rule functions@>=
 
-
    cerr << "After loop:"
         << endl 
         << "array_element_vector.size() == "
@@ -6719,6 +6737,10 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
         cerr << "`(*iter)->name' == " << (*iter)->name 
              << endl 
              << "`(*iter)->type' == " << name_map[(*iter)->type] 
+             << endl 
+             << "`(*iter)->array_flag' == " << (*iter)->array_flag
+             << endl 
+             << "`(*iter)->vector_type_flag' == " << (*iter)->vector_type_flag
              << endl 
              << "`(*iter)->known_state' == ";
 
@@ -6749,6 +6771,24 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
         else if ((*iter)->known_state == Id_Map_Entry_Type::INDEPENDENT)
         {
             cerr << "INDEPENDENT." << endl;
+        }
+
+        if ((*iter)->subordinate_array == 0)
+           cerr << "`(*iter)->subordinate_array' is NULL." << endl;
+        else
+        {
+           cerr << "`(*iter)->subordinate_array' is not NULL." << endl
+                << "`(*iter)->subordinate_array->get_name()' == " 
+                << (*iter)->subordinate_array->get_name() << endl;
+        }
+
+        if ((*iter)->superordinate_vector == 0)
+           cerr << "`(*iter)->superordinate_vector' is NULL." << endl;
+        else
+        {
+           cerr << "`(*iter)->superordinate_vector' is not NULL." << endl
+                << "`(*iter)->superordinate_vector->get_name()' == " 
+                << (*iter)->superordinate_vector->get_name() << endl;
         }
    }
 
@@ -6811,6 +6851,9 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
 @q **** (4) @>
 @ 
 @<Define parser rule functions@>=
+
+   cerr << "Exiting `Scan_Parse::save_to_database_func' successfully with return value 0."
+        << endl;
 
    return 0;
 
