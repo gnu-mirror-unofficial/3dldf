@@ -107,7 +107,7 @@ values
 
 /* * Select  */
 
-select * from points\G
+select prefix, name, array_flag, vector_type_flag from points order by prefix, name\G
 
 select * from points order by prefix, name, world_coordinates_x, world_coordinates_y,
 world_coordinates_z asc\G

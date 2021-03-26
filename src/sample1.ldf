@@ -52,6 +52,35 @@
 
 %% * (1) New sample code.
 
+point p;
+p := (1, 2, 3);
+
+point q[];
+
+q0 := (11, 12, 13);
+q1 := (21, 22, 23);
+q2 := (31, 32, 33);
+
+point_vector pv;
+
+pv += (1.0, 2.9, 3.506);
+pv += (11, 12, 13);
+pv += (141, 152, 153);
+
+message "pv:";
+%show pv; %% !! Find out why this blocks!  Probably cerr_mutex is locked.
+show pv[0];
+
+restore abc from database;
+
+%restore abc from database query;
+
+%restore abc from database overwrite;
+
+%restore abc from database no_overwrite;
+
+end;
+
 point_vector pv;
 
 pv += (1.0, 2.9, 3.506);

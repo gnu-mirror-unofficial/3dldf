@@ -4897,7 +4897,14 @@ polyhedron_path_intersection_func(Polyhedron* p,
                       
 
 int
-save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug);
+save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug = false);
+
+int
+restore_from_database_func(Scanner_Node scanner_node, 
+                           string prefix, 
+                           int overwrite_option, 
+                           bool debug = false);
+
 
 template <class C>
 int

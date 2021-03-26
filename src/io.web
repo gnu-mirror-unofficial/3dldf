@@ -970,6 +970,8 @@ class Id_Map_Entry_Type
   friend class Scanner_Type;
   friend int yyparse(yyscan_t);
 
+  friend class Point;
+
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
 @q ***** (5) Data members.  @>
@@ -2493,6 +2495,8 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
   friend int main(int, char**);
 
   friend int Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node);
+
+  friend class Point;
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
@@ -6035,6 +6039,13 @@ Scan_Parse::polyhedron_path_intersection_func(Polyhedron* p,
 friend
 int
 Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug);
+
+friend
+int
+Scan_Parse::restore_from_database_func(Scanner_Node scanner_node, 
+                                       string prefix, 
+                                       int overwrite_option, 
+                                       bool debug);
 
 template<class C>
 friend 

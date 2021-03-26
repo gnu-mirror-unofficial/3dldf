@@ -1054,6 +1054,10 @@ Added this section with calls to |scanner_node->add_entry| for
 
 \initials{LDF 2004.12.03.}
 Added call to |scanner_node->add_entry| for |OFF|.
+
+\initials{LDF 2021.03.26.}
+Added calls to |scanner_node->add_entry| for |FROM|, |OVERWRITE|, |NO_OVERWRITE| 
+and |QUERY| and a call to |scanner_node->add_synonym| for |no_overwrite|.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
@@ -1062,6 +1066,11 @@ Added call to |scanner_node->add_entry| for |OFF|.
   scanner_node->add_entry("by", BY, spark);
   scanner_node->add_entry("around", AROUND, spark);
   scanner_node->add_entry("to", TO, spark);
+  scanner_node->add_entry("from", FROM, spark);
+  scanner_node->add_entry("overwrite", OVERWRITE, spark);
+  scanner_node->add_entry("no_overwrite", NO_OVERWRITE, spark);
+  scanner_node->add_synonym("nooverwrite", "no_overwrite");
+  scanner_node->add_entry("query", QUERY, spark);
 
 @q **** (4) Commands.  @>          
 
@@ -3174,6 +3183,7 @@ Added this section with calls to |scanner_node->add_entry| for
   scanner_node->add_entry("begin_group", BEGIN_GROUP, spark);
   scanner_node->add_entry("end_group", END_GROUP, spark);
   scanner_node->add_entry("save", SAVE, spark);
+  scanner_node->add_entry("restore", RESTORE, spark);
   scanner_node->add_entry("database", DATABASE, spark);
   scanner_node->add_entry("all", ALL, spark);
   scanner_node->add_entry("with", WITH, spark);

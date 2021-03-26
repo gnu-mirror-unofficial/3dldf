@@ -374,8 +374,8 @@ Added this rule.
 
 };
 
-@q ** (2) command --> SAVE variable TO DATABASE with_prefix_option.@> 
-@*1 \§command> $\longrightarrow$ \.{SAVE} \§variable> \.{TO} \.{DATABASE}
+@q ** (2) command --> SAVE any_variable_list TO DATABASE with_prefix_option.@> 
+@*1 \§command> $\longrightarrow$ \.{SAVE} \§any variable list> \.{TO} \.{DATABASE}
 \§with prefix option>.
 \initials{LDF 2021.03.23.}
 
@@ -633,7 +633,232 @@ Added this rule.
 
 };
 
+@q ** (2) command --> RESTORE any_variable FROM DATABASE overwrite_option.@> 
+@*1 \§command> $\longrightarrow$ \.{RESTORE} \§any variable> \.{FROM} \.{DATABASE}.
+\§overwrite option>.
+\initials{LDF 2021.03.24.}
 
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: RESTORE any_variable FROM DATABASE overwrite_option@>@/
+{
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+       cerr_strm << "*** Parser: Rule `command --> RESTORE any_variable FROM DATABASE overwrite_option'."
+                 << endl;  
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+   string prefix;
+
+   if (@=$2@> != 0)
+      prefix = static_cast<Id_Map_Entry_Node>(@=$2@>)->name;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  {
+       cerr_strm << "*** Parser: Rule `command --> RESTORE any_variable FROM DATABASE overwrite_option':"
+                 << endl
+                 << "`prefix' == " << prefix << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+   status = restore_from_database_func(static_cast<Scanner_Node>(parameter), 
+                                       prefix,
+                                       @=$5@>,
+                                       true);  /* |false|  */
+   if (status != 0)
+   {
+       cerr_strm << "ERROR!  In `yyparse', Rule `command --> "
+                 << "RESTORE any_variable FROM DATABASE overwrite_option'."
+                 << endl  
+                 << "`Scan_Parse::restore_to_database_func' failed, returning " << status << "."
+                 << endl 
+                 << "Failed to restore objects from database."
+                 << endl 
+                 << "Continuing."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+   else
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+       {
+            cerr_strm << "*** Parser: Rule `command --> RESTORE any_variable "
+                      << "FROM DATABASE overwrite_option':"
+                      << endl  
+                      << "`Scan_Parse::restore_to_database_func' succeeded, returning 0."
+                      << endl;
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+
+        }  /* |if (DEBUG)|  */
+#endif /* |DEBUG_COMPILE|  */@;
+
+   }
+
+   @=$$@> = 0;
+
+};
+
+@q ** (2) overwrite_option @>
+@ \§overwrite option>.
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> overwrite_option@>
+
+@q ** (2) overwrite_option> --> EMPTY @>
+@ \§overwrite option> $\longrightarrow$ /* Empty */
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=overwrite_option: /* Empty  */@>
+{
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `overwrite_option: /* Empty  */'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = QUERY;
+
+};
+
+@q ** (2) overwrite_option --> QUERY @>
+@ \§overwrite option> $\longrightarrow$ \.{QUERY}.
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=overwrite_option: QUERY @>
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `overwrite_option: QUERY'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = QUERY;
+
+};
+
+@q ** (2) overwrite_option --> OVERWRITE @>
+@ \§overwrite option> $\longrightarrow$ \.{OVERWRITE}.
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=overwrite_option: OVERWRITE @>
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `overwrite_option: OVERWRITE'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = OVERWRITE;
+
+};
+
+@q ** (2) overwrite_option --> NO_OVERWRITE @>
+@ \§overwrite option> $\longrightarrow$ \.{NO\_OVERWRITE}.
+
+\LOG
+\initials{LDF 2021.03.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=overwrite_option: NO_OVERWRITE @>
+{
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `overwrite_option: NO_OVERWRITE'."
+                << endl;  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = NO_OVERWRITE;
+
+};
 
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>

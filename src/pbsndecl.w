@@ -953,6 +953,9 @@ Added this section with token declarations for
 
 \initials{LDF 2004.12.03.}
 Added token declaration for |OFF|.
+
+\initials{LDF 2021.03.26.}
+Added token declarations for |FROM|, |OVERWRITE|, |NO_OVERWRITE| and |QUERY|.
 \ENDLOG
 
 @<Token and precedence declarations@>=
@@ -962,6 +965,10 @@ Added token declaration for |OFF|.
 @=%token <int_value> BY@>@/
 @=%token <int_value> AROUND@>@/
 @=%token <int_value> TO@>@/
+@=%token <int_value> FROM@>@/
+@=%token <int_value> OVERWRITE@>@/
+@=%token <int_value> NO_OVERWRITE@>@/
+@=%token <int_value> QUERY@>@/
 
 @q *** (3) System information.@>
 @*2 System information.
@@ -2378,6 +2385,8 @@ Added token declaration for |FOR_SUFFIXES_INTERNAL_START|.
 Added this section with token declarations for 
 |BEGIN_GROUP|, |END_GROUP|, and |SAVE|.
 
+\initials{LDF 2021.03.26.}
+Added token declaration for |RESTORE|.
 \ENDLOG
 
 @<Token and precedence declarations@>=
@@ -2385,6 +2394,7 @@ Added this section with token declarations for
 @=%token <int_value> BEGIN_GROUP@>@/
 @=%token <int_value> END_GROUP@>@/
 @=%token <int_value> SAVE@>@/
+@=%token <int_value> RESTORE@>@/
 @=%token <int_value> DATABASE@>@/
 @=%token <int_value> ALL@>@/
 @=%token <int_value> WITH@>@/
