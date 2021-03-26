@@ -264,15 +264,22 @@ Added this section with |name_map| entries for
 
 \initials{LDF 2004.12.03.}
 Added |name_map| entry for |OFF|.
+
+\initials{LDF 2021.03.26.}
+Added |name_map| entries for |FROM|, |OVERWRITE|, |NO_OVERWRITE| and |QUERY|. 
 \ENDLOG
 
 @<Define functions@>=
 
-  name_map[IN]     = "IN";
-  name_map[OFF]    = "OFF";
-  name_map[BY]     = "BY";
-  name_map[AROUND] = "AROUND";
-  name_map[TO]     = "TO";
+  name_map[IN]           = "IN";
+  name_map[OFF]          = "OFF";
+  name_map[BY]           = "BY";
+  name_map[AROUND]       = "AROUND";
+  name_map[TO]           = "TO";
+  name_map[FROM]         = "FROM";
+  name_map[OVERWRITE]    = "OVERWRITE";
+  name_map[NO_OVERWRITE] = "NO_OVERWRITE";
+  name_map[QUERY]        = "QUERY";
 
 @q *** (3) Object types defined in 3DLDF (and |UNDECLARED|).  @>
 @*2 Object types defined in 3DLDF (and |UNDECLARED|).
@@ -2411,6 +2418,7 @@ Added this section with |name_map| entries for
   name_map[BEGIN_GROUP] = "BEGIN_GROUP";
   name_map[END_GROUP]   = "END_GROUP";
   name_map[SAVE]        = "SAVE";
+  name_map[RESTORE]     = "RESTORE";
   name_map[DATABASE]    = "DATABASE";
   name_map[ALL]         = "ALL";
   name_map[WITH]        = "WITH";
@@ -6858,6 +6866,66 @@ Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool
    return 0;
 
 }  /* End of |Scan_Parse::save_to_database_func| definition */   
+
+@q ** (2) restore from database function. @>
+@*1 restore from database function.
+\initials{LDF 2021.03.26.}
+
+\LOG
+\initials{LDF 2021.03.26.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define parser rule functions@>=
+
+int
+Scan_Parse::restore_from_database_func(Scanner_Node scanner_node, string prefix, bool debug)
+{
+#if DEBUG_COMPILE
+   bool DEBUG = true;
+
+   if (debug == false)
+      DEBUG = true; /* |false| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   int status = 0;
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+   using namespace Scan_Parse;
+
+   vector<Id_Map_Entry_Node> array_element_vector;
+
+
+   cerr << "Entering `Scan_Parse::restore_from_database_func'."
+        << endl;
+
+@ 
+@<Define parser rule functions@>=
+
+
+
+@q **** (4) @>
+@ 
+@<Define parser rule functions@>=
+
+   cerr << "Exiting `Scan_Parse::restore_from_database_func' successfully with return value 0."
+        << endl;
+
+   return 0;
+
+}  /* End of |Scan_Parse::restore_from_database_func| definition */   
+
 
 
 
