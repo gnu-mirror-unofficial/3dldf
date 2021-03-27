@@ -10435,6 +10435,8 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
                                     int overwrite_option, 
                                     bool debug)
 {
+@q ***** (5) @>
+
 #if DEBUG_COMPILE
   bool DEBUG = true;
 
@@ -10447,6 +10449,8 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q ***** (5) @>
+
    int status = 0;
 
    stringstream sql_strm;
@@ -10454,6 +10458,19 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
    Point *curr_point = 0;
 
    Id_Map_Entry_Node curr_node = 0;
+
+
+   string temp_str;
+
+   string name;
+   string save_name;
+   string::size_type pos_0 = 0;
+   string::size_type pos_1 = 0;
+   size_t len = 0;
+
+   vector<Id_Map_Entry_Node> curr_vector;
+
+@q ***** (5) @>
 
    sql_strm << "select prefix, name, array_flag, vector_type_flag, "
             << "world_coordinates_x, world_coordinates_y, "
@@ -10532,13 +10549,11 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
    scanner_node->curr_row = 0;
 
-   string name;
-   string::size_type pos_0 = 0;
-   string::size_type pos_1 = 0;
-   size_t len = 0;
 
    do 
    {
+       curr_node = 0;
+
        name = "";
 
        scanner_node->curr_row = mysql_fetch_row(scanner_node->result);
@@ -10588,7 +10603,7 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
        }
 
-       name = scanner_node->curr_row[1];
+       save_name = name = scanner_node->curr_row[1];
 
        do 
        {
@@ -10614,15 +10629,7 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
        curr_node = scanner_node->lookup(name, true);
 
-       if (curr_node == 0)
-       {
-          cerr << "`curr_node' == 0.  `Scanner_Type::lookup' didn't find `name' == " 
-               << name
-               << endl 
-               << "No need to query for and/or erase entry."
-               << endl;
-       }          
-       else 
+       if (curr_node != 0)
        {
           cerr << "`curr_node' != 0.  `Scanner_Type::lookup' found `name' == " << name
                << endl 
@@ -10633,26 +10640,178 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
            curr_node->show("*curr_node:", true, true);
 
-/* !!START HERE  \initials{LDF 2021.03.26.}  */ 
+           if (overwrite_option == NO_OVERWRITE)
+           {
+              cerr << "`overwrite_option' == NO_OVERWRITE.  Skipping."
+                   << endl;
 
-#if 0 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-#endif 
+              break;
+           }
+
+           else if (overwrite_option == QUERY)
+           {
+               char c;
+               string temp_name = name;
+
+               pos_0 = temp_name.find_first_of(static_cast<char>(0243));
+               if (pos_0 != string::npos)
+                  temp_name.erase(pos_0);
+
+               cerr_mutex.lock();
+               cerr << temp_name << " exists.  Overwrite? (y/n): ";
+               cin >> c;
+               cerr << "c == '" << c << "'" << endl;
+               cerr_mutex.unlock();
+
+               if (c == 'y' || c == 'Y')
+               {
+                  cerr << "Will overwrite " << temp_name << endl << flush;
+               }
+               else
+               {
+                  cerr << "Won't overwrite " << temp_name << endl << flush;
+                  break;
+               }
+           }
+
+           else if (overwrite_option == OVERWRITE)
+           {
+              cerr << "overwrite_option == OVERWRITE" << endl 
+                   << "Will overwrite " << name << endl;
+           }
+
+       } /* |if (curr_node != 0)|  */
+
+       else /* |curr_node == 0|  */
+       {
+          cerr << "`curr_node' == 0.  `Scanner_Type::lookup' didn't find `name' == " 
+               << name
+               << endl 
+               << "No need to query for and/or erase entry."
+               << endl;
        }          
-  
+
+@q ****** (6) @>
+@
+@<Define |Point| functions@>=
+
+      curr_node = 0;
+
+      curr_node = new Id_Map_Entry_Type;
+      curr_node->object = static_cast<void*>(new Point); 
+
+      curr_node->name       = scanner_node->curr_row[1];
+      curr_node->array_flag = atoi(scanner_node->curr_row[2]);    
+      curr_node->vector_type_flag = atoi(scanner_node->curr_row[3]);    
+      curr_node->type = POINT;
+      curr_node->known_state = Id_Map_Entry_Type::KNOWN;
+      curr_node->category = Id_Map_Entry_Type::REGULAR;
+      static_cast<Point*>(curr_node->object)->world_coordinates[0]          = atof(scanner_node->curr_row[4]);
+      static_cast<Point*>(curr_node->object)->world_coordinates[1]          = atof(scanner_node->curr_row[5]);
+      static_cast<Point*>(curr_node->object)->world_coordinates[2]          = atof(scanner_node->curr_row[6]);
+      static_cast<Point*>(curr_node->object)->world_coordinates[3]          = atof(scanner_node->curr_row[7]);
+      static_cast<Point*>(curr_node->object)->user_coordinates[0]           = atof(scanner_node->curr_row[8]);
+      static_cast<Point*>(curr_node->object)->user_coordinates[1]           = atof(scanner_node->curr_row[9]);
+      static_cast<Point*>(curr_node->object)->user_coordinates[2]           = atof(scanner_node->curr_row[10]);
+      static_cast<Point*>(curr_node->object)->user_coordinates[3]           = atof(scanner_node->curr_row[11]);
+      static_cast<Point*>(curr_node->object)->view_coordinates[0]           = atof(scanner_node->curr_row[12]);
+      static_cast<Point*>(curr_node->object)->view_coordinates[1]           = atof(scanner_node->curr_row[13]);
+      static_cast<Point*>(curr_node->object)->view_coordinates[2]           = atof(scanner_node->curr_row[14]);
+      static_cast<Point*>(curr_node->object)->view_coordinates[3]           = atof(scanner_node->curr_row[15]);
+      static_cast<Point*>(curr_node->object)->pre_projective_coordinates[0] = atof(scanner_node->curr_row[16]);
+      static_cast<Point*>(curr_node->object)->pre_projective_coordinates[1] = atof(scanner_node->curr_row[17]);
+      static_cast<Point*>(curr_node->object)->pre_projective_coordinates[2] = atof(scanner_node->curr_row[18]);
+      static_cast<Point*>(curr_node->object)->pre_projective_coordinates[3] = atof(scanner_node->curr_row[19]);
+      static_cast<Point*>(curr_node->object)->projective_coordinates[0]     = atof(scanner_node->curr_row[20]);
+      static_cast<Point*>(curr_node->object)->projective_coordinates[1]     = atof(scanner_node->curr_row[21]);
+      static_cast<Point*>(curr_node->object)->projective_coordinates[2]     = atof(scanner_node->curr_row[22]);
+      static_cast<Point*>(curr_node->object)->projective_coordinates[3]     = atof(scanner_node->curr_row[23]);
+      static_cast<Point*>(curr_node->object)->drawdot_value                 = atoi(scanner_node->curr_row[24]);
+      static_cast<Point*>(curr_node->object)->world_extremes[0]             = atof(scanner_node->curr_row[25]);
+      static_cast<Point*>(curr_node->object)->world_extremes[1]             = atof(scanner_node->curr_row[26]);
+      static_cast<Point*>(curr_node->object)->world_extremes[2]             = atof(scanner_node->curr_row[27]);
+      static_cast<Point*>(curr_node->object)->world_extremes[3]             = atof(scanner_node->curr_row[28]);
+      static_cast<Point*>(curr_node->object)->world_extremes[4]             = atof(scanner_node->curr_row[29]);
+      static_cast<Point*>(curr_node->object)->world_extremes[5]             = atof(scanner_node->curr_row[30]);
+      static_cast<Point*>(curr_node->object)->pre_projective_extremes[0]    = atof(scanner_node->curr_row[31]);
+      static_cast<Point*>(curr_node->object)->pre_projective_extremes[1]    = atof(scanner_node->curr_row[32]);
+      static_cast<Point*>(curr_node->object)->pre_projective_extremes[2]    = atof(scanner_node->curr_row[33]);
+      static_cast<Point*>(curr_node->object)->pre_projective_extremes[3]    = atof(scanner_node->curr_row[34]);
+      static_cast<Point*>(curr_node->object)->pre_projective_extremes[4]    = atof(scanner_node->curr_row[35]);
+      static_cast<Point*>(curr_node->object)->pre_projective_extremes[5]    = atof(scanner_node->curr_row[36]);
+      static_cast<Point*>(curr_node->object)->projective_extremes[0]        = atof(scanner_node->curr_row[37]);
+      static_cast<Point*>(curr_node->object)->projective_extremes[1]        = atof(scanner_node->curr_row[38]);
+      static_cast<Point*>(curr_node->object)->projective_extremes[2]        = atof(scanner_node->curr_row[39]);
+      static_cast<Point*>(curr_node->object)->projective_extremes[3]        = atof(scanner_node->curr_row[40]);
+      static_cast<Point*>(curr_node->object)->projective_extremes[4]        = atof(scanner_node->curr_row[41]);
+      static_cast<Point*>(curr_node->object)->projective_extremes[5]        = atof(scanner_node->curr_row[42]);
+      static_cast<Point*>(curr_node->object)->do_output = atoi(scanner_node->curr_row[43]);
+      static_cast<Point*>(curr_node->object)->measurement_units = scanner_node->curr_row[44];
+
+      curr_node->show("*curr_node:");
+      curr_vector.push_back(curr_node);
 
    } while (scanner_node->curr_row != 0);
 
    /* Free |result|  */
-     
    if (scanner_node->result)
    {
        mysql_free_result(scanner_node->result);
        scanner_node->result = 0;
    }
 
+@q ***** (5) @>
+@
+@<Define |Point| functions@>=
 
+   name = "";
+
+   for (vector<Id_Map_Entry_Node>::iterator iter = curr_vector.begin();
+        iter != curr_vector.end();
+        ++iter)
+   {
+       cerr << "(*iter)->get_name() == " << (*iter)->get_name() << endl
+            << "(*iter)->type == " << name_map[(*iter)->type] << endl 
+            << "(*iter)->array_flag == " << (*iter)->array_flag << endl
+            << "((*iter)->vector_type_flag != 0) == " << ((*iter)->vector_type_flag != 0)
+            << endl 
+            << "((*iter)->up != 0) == " << ((*iter)->up != 0)
+            << endl;
+
+       curr_point = static_cast<Point *>((*iter)->object);
+
+       if ((*iter)->array_flag == false)
+       {
+          cerr << "(*iter)->array_flag == false.  Ordinary point." << endl;
+       }
+       else if ((*iter)->array_flag == true)
+       {
+          cerr << "(*iter)->array_flag == true." << endl;
+
+          temp_str = (*iter)->name;
+
+          pos_0 = temp_str.find_first_of("[");       
+
+          if(pos_0 != string::npos)
+          {
+             temp_str.erase(pos_0);
+          }
+          cerr << "temp_str == " << temp_str << endl;
+
+
+          if ((*iter)->vector_type_flag == false)
+          {
+             cerr << "Array type." << endl;
+
+          }
+          else 
+          {
+             cerr << "Point vector type." << endl;
+          }
+
+       } /* |else if| */
+
+   }  /* |for|  */
 
 @q ***** (5) @>
 @
