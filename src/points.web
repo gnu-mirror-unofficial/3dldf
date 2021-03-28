@@ -10449,7 +10449,16 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
+
 @q ***** (5) @>
+@
+@<Define |Point| functions@>=
+
+   scanner_node->id_map_node->show("*(scanner_node->id_map_node):");
+
+@q ***** (5) @>
+@
+@<Define |Point| functions@>=
 
    int status = 0;
 
@@ -10548,7 +10557,6 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
    /*  Process the contents of |curr_row|  */
 
    scanner_node->curr_row = 0;
-
 
    do 
    {
@@ -10798,6 +10806,9 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
           }
           cerr << "temp_str == " << temp_str << endl;
 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
           if ((*iter)->vector_type_flag == false)
           {
@@ -10807,6 +10818,14 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
           else 
           {
              cerr << "Point vector type." << endl;
+
+             Id_Map_Entry_Node temp_node = scanner_node->lookup(temp_name, true); 
+
+             if (temp_node != 0)
+             {
+
+             }
+
           }
 
        } /* |else if| */

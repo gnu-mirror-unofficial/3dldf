@@ -1588,7 +1588,7 @@ show(string s = "",
      bool verbose = false) const;
 
 @q ** Declare |Id_Map_Sub_Type|.@>
-@*1 Declare {\bf Id\_Map\_Sub\_Type}.
+@*1 Declare {\bf Id\_Map\_Sub\_Type} (|typedef|).
 
 \LOG
 \initials{LDF 2004.04.20.}  Changed this |typedef|, so that |second|
@@ -1654,9 +1654,8 @@ Now including the section
 @f Id_Map_Node Id_Map_Type 
 
 @q *** Declaration.  @>
-@<|Id_Map_Type| declaration@>=
-class
-Id_Map_Type
+@<class |Id_Map_Type| declaration@>=
+class Id_Map_Type
 {
   friend class Scanner_Type;
   friend class Id_Map_Entry_Type;
@@ -2461,8 +2460,7 @@ input.
 @q *** (3) Declaration. @>
 
 @<|Scanner_Type| declaration@>=
-class
-Scanner_Type 
+class Scanner_Type 
 {
 
 @q **** (4) |friend| declarations. @>
@@ -6101,7 +6099,7 @@ Now including |@<|Definition_Info_Node| declaration@>|,
 @<Initialize |static Id_Map_Entry_Type| member constants@>@;
 @<|Id_Map_Sub_Map_Type| declaration@>@;
 @<|Id_Map_Node| declaration@>@;
-@<|Id_Map_Type| declaration@>@;
+@<class |Id_Map_Type| declaration@>@;
 @<Global variables@>@;
 @<|Loop_Info_Node| declaration@>@;
 @<|Loop_Info_Type| declaration@>@;
@@ -6139,7 +6137,7 @@ int yyparse(yyscan_t);
 @<|Id_Map_Entry_Type| declaration@>@;
 @<|Id_Map_Sub_Map_Type| declaration@>@;
 @<|Id_Map_Node| declaration@>@;
-@<|Id_Map_Type| declaration@>@;
+@<class |Id_Map_Type| declaration@>@;
 @<|Loop_Info_Node| declaration@>@;
 @<|Loop_Info_Type| declaration@>@;
 @<|Definition_Info_Node| declaration@>@;
