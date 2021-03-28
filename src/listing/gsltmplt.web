@@ -1,0 +1,430 @@
+@q gsltmplt.web @>
+   
+@q * (0) Get second-largest |real| value. @>
+@** Get second-largest {\bf real} value.
+
+@q * Include files.@>
+@ Include files.
+@<Include files@>=
+#include "loader.h++"
+#include "pspglb.h++"
+#include "io.h++"
+
+@q * Declare |namespace System|. @>
+@ Declare {\bf namespace System}. @>
+\LOG
+\initials{LDF 2004.1.2.}  Added this section.
+\ENDLOG 
+@<Declare |namespace System|@>+=
+namespace 
+System
+{
+  @<Declare |System| functions@>@;
+}
+
+@q * Get second largest. @>
+@ Get second largest.
+This function calculates the second-largest |real| value.
+It should be called using |float| or |double| as a parameter, e.g.,
+|get_second_largest<float>(FLT_MAX)| or 
+|get_second_largest<double>(DBL_MAX)|.  
+|FLT_MAX| or |DBL_MAX| must be
+passed as an argument.  
+On systems with the |numeric_limits| template, 
+|real_limits.max()| could be used instead.
+\initials{LDF 2003.12.29.}
+
+|get_second_largest()| determines which
+unsigned integral type has the same size as the template parameter
+|Real|.  The locally declared type |i_type| is defined to be a synonym
+for this type using |typedef|.  
+|ip| is a pointer to |i_type|.  It is assigned a value by 
+casting a pointer to |MAX_VAL| to the type of |ip|, i.e., a pointer to
+|i_type|.  Then, 1 is subtracted from |*ip|, and the |ip| 
+ss cast back to a pointer to |Real|.  This is the second largest
+|Real| value.
+\initials{LDF 2003.12.29.}
+
+This algorithm works on all of the machines I've tested.  It doesn't
+matter whether they are big or little-endian, whether they have 32 or
+64-bit processors.  If the exponent of a floating point type is stored
+in its low order byte or bytes, then this will fail.  
+I haven't run into this problem yet, though.
+The commented-out code in |@<Loop for testing bits@>| may help in
+finding the second-largest |Real| value in this case. 
+\initials{LDF 2003.12.29.}
+
+\LOG
+\initials{LDF 2003.12.29.}  Added this function.
+  
+\initials{LDF 2004.1.2.}  Moved this section from
+\filename{pspglb.web} to \filename{creatnew.web}.
+\ENDLOG 
+
+@q ** Declaration. @>
+@<Declare |System| functions@>=
+template <class Real> 
+Real
+get_second_largest (Real MAX_VAL, bool verbose = false);
+
+@q ** Definition. @>
+@
+@<Define |System| functions@>=
+template <class Real> 
+Real
+System::get_second_largest (Real MAX_VAL, int sign_bit_0, int sign_bit_1, bool verbose)
+{
+   cerr.precision(8);
+
+   float f;
+
+   if (verbose)
+   {       
+       cerr << "Entering `System::get_second_largest'." << endl;
+   }
+
+  const unsigned short USHORT_SIZE = sizeof(unsigned short);
+  const unsigned short UINT_SIZE = sizeof(unsigned int);
+  const unsigned short ULONG_SIZE = sizeof(unsigned long);
+  const unsigned short ULONG_LONG_SIZE = sizeof(unsigned long long);
+
+  const unsigned short Real_SIZE = sizeof(Real);
+  const unsigned short FLT_SIZE = sizeof(float);
+  const unsigned short DBL_SIZE = sizeof(double);
+  const unsigned short LONG_DBL_SIZE = sizeof(long double);
+
+  const bool Real_EQ_USHORT = (Real_SIZE == USHORT_SIZE);
+  const bool Real_EQ_UINT = (Real_SIZE == UINT_SIZE);
+  const bool Real_EQ_ULONG = (Real_SIZE == ULONG_SIZE);
+  const bool Real_EQ_ULONG_LONG = (Real_SIZE == ULONG_LONG_SIZE);
+
+  if (verbose)
+    {
+      cerr << "INT_WIDTH       == " << INT_WIDTH  << endl    
+           << "LONG_WIDTH      == " << LONG_WIDTH  << endl          
+           << "USHORT_SIZE     == " << USHORT_SIZE  << endl
+           << "UINT_SIZE       == " << UINT_SIZE  << endl
+           << "ULONG_SIZE      == " << ULONG_SIZE << endl
+           << "ULONG_LONG_SIZE == " << ULONG_LONG_SIZE << endl
+           << "FLT_SIZE        == " << FLT_SIZE  << endl
+           << "DBL_SIZE        == " << DBL_SIZE  << endl
+           << "LONG_DBL_SIZE   == " << LONG_DBL_SIZE  << endl
+           << "Real_SIZE       == " << Real_SIZE  << endl;
+
+    }
+
+  Real* rp = new Real;
+
+  *rp = 0.0;
+  
+  if (Real_EQ_USHORT)
+    {
+      if (verbose)
+        cerr << "Real_EQ_USHORT\n";
+      typedef unsigned short i_type;
+      i_type result;
+      @<Calculate second-largest |Real|@>@;
+    }
+
+  else if (Real_EQ_UINT)
+    {
+      if (verbose)
+        cerr << "Real_EQ_UINT\n";
+
+      typedef unsigned int i_type;
+      i_type result;
+
+      if (verbose)
+         cerr << "Before entering @@<Calculate second-largest |Real|@@>" << endl;
+
+      @<Calculate second-largest |Real|@>@;
+
+      if (verbose)
+         cerr << "Here I am.  After exiting @@<Calculate second-largest |Real|@@>" << endl
+              << "*rp == " << *rp << endl 
+              << "f   == " << f << endl;
+    }
+      
+  else if (Real_EQ_ULONG)
+    {
+      if (verbose)
+        cerr << "Real_EQ_ULONG \n";
+      typedef unsigned long i_type;
+      i_type result;
+      @<Calculate second-largest |Real|@>@;
+    }
+  else if (Real_EQ_ULONG_LONG)
+    {
+      if (verbose)
+        cerr << "Real_EQ_ULONG_LONG\n";
+      typedef unsigned long long i_type;
+      i_type result;
+      @<Calculate second-largest |Real|@>@;
+    }
+  
+  else
+    {
+      cerr << "ERROR! In main():\n"
+	   << "Apparently, Real doesn't have the same size "
+	   << "as any unsigned integral type.\n"
+	   << "There must be some mistake.\n"
+	   << "Exiting with return value -1.\n\n";
+
+      return -1;
+    }
+  
+  if (verbose)
+    {
+        cerr << "MAX_VAL == " << MAX_VAL << endl
+             << "*rp == " << *rp << endl
+             << "(MAX_VAL == f) == "
+             << (MAX_VAL == f) 
+             << endl
+             << "(MAX_VAL - f) == "
+             << (MAX_VAL - f) << endl
+             << "MAX_VAL > f == "
+             << (MAX_VAL > f) << endl
+             << "MAX_VAL < f == "
+             << (MAX_VAL < f) << endl;
+    }
+
+  if (MAX_VAL == f)
+    {
+      cerr << "ERROR! In System::get_second_largest<Real>():\n"
+           << "MAX_VAL == f. Exiting `3dldf' with exit status 1."
+           << endl << endl;
+
+      exit(1);
+    }
+
+  else if (MAX_VAL < f)
+    {
+      cerr << "ERROR! In System::get_second_largest<Real>():\n"
+           << "MAX_VAL < f. Exiting `3dldf' with exit status 1."
+           << endl << endl;
+
+      exit(1);
+    }
+
+    else
+    {
+       if (verbose)
+       {
+          cerr << "Exiting `get_second_largest' successfully with return value `f' == "
+               << f << endl;
+       }
+
+     }
+
+    return f;
+
+}  /* End of |System::get_second_largest|  */
+
+@q *** Calculate second-largest |Real|. @>
+
+@ Calculate second-largest {\bf Real}.
+
+@<Calculate second-largest |Real|@>=
+{
+  if (verbose)
+     cerr << "Entering |@@<Calculate second-largest |Real|@@>|." << endl;
+
+  Real r = MAX_VAL;
+
+  i_type sign_bits = 0;
+  
+  i_type* ip = reinterpret_cast<i_type *>(&r);
+
+  if (verbose)
+    cerr << "*ip == " << *ip << endl;
+      
+  i_type bit_pattern_i_type;
+
+  bit_pattern_i_type = 1;
+
+  bitset<sizeof(i_type) * CHAR_BIT> b;
+
+  b = *ip;
+
+  if (verbose)
+    cerr << "b (MAX_VAL) == " << b << endl;
+
+  b = bit_pattern_i_type;
+
+  if (verbose)
+    cerr << "b (bit_pattern_i_type) == " << b << endl;
+
+   sign_bits = (1 << sign_bit_0) & (1 << sign_bit_1);
+
+   b = sign_bits;
+
+   if (verbose)        
+      cerr << "sign_bits == " << sign_bits << " == " << b << endl;
+
+  result = (bit_pattern_i_type ^ *ip) ^ sign_bits;
+
+  b = result;
+
+  if (verbose)
+    cerr << "result == " << result << " == " << b << endl;
+
+  rp = reinterpret_cast<Real *>(&result);
+
+  f = *rp;
+
+  if (verbose)
+    cerr << "*rp == " << *rp << " == " << b << endl
+         << "f == " << f << endl;
+
+  if (verbose)
+    cerr << "At end of |@@<Calculate second-largest |Real|@@>|:  f == " << f << endl;
+
+}  /* |@<Calculate second-largest |Real|@>@;|  */
+
+@q *** Loop for testing bits. @>
+@ Loop for testing bits.
+@<Loop for testing bits@>=
+#if 0 
+  int counter;
+
+  for (int i = 0; i < (sizeof(Real) * CHAR_BIT); ++i)
+    {
+      if (verbose)
+        cerr << "i == " << i << endl;
+
+        cerr "second_largest_real == " << second_largest_real << endl;
+
+	  // This has only been needed on the DEC Alpha, so far. 
+          // This is the case that the highest-order bit of the 
+	  // mantissa is 1, and all of the other bits (in particular,
+	  // all the bits of the exponent) are 0.  In this case, |*rp|
+	  // is not a number (NAN).  The GNU compiler copes with this,
+	  // the DEC compiler signals a floating point error and dumps
+	  // core (I believe).  I wasn't able to catch the error with 
+          // |try| and |catch|. 
+	  // !! TO DO:  Change |(8 + 1)| to |(FLT_EXP + 1)|, except
+	  // |FLT_EXP| 
+	  // isn't the right name.  Find it, and put here.  This
+	  // assumes the exponent is at the left, which may not be
+	  // true.  Skipping this bit pattern is necessary on the DEC
+	  // ALPHA, because the float is not a number.
+          // It must be 23 for float, and 52 for double.
+
+	  if (i ==  (sizeof(Real) * CHAR_BIT) - (12))
+	    {
+              if (verbose)
+                cerr << "i == " << i << ".  This produces NAN.  Continuing.\n\n";
+	      continue;
+	    }
+
+	  bit_pattern_i_type = 1;
+	  bit_pattern_i_type <<= i;
+          if (verbose)
+            cerr << "bit_pattern_i_type (1 << " << i << ") == " 
+                 << bit_pattern_i_type << endl;
+
+	  b = bit_pattern_i_type;
+
+          if (verbose)
+            cerr << "b (bit_pattern_i_type) == " << b << endl;
+
+	  result = bit_pattern_i_type ^ *ip;
+
+          if (verbose)
+            cerr << "result == " << result << endl;
+
+	  b = result;
+
+          if (verbose)
+            cerr << "b (result) == " << b << endl;
+
+	  rp = reinterpret_cast<Real *>(&result);
+
+            if (verbose)
+              cerr << "In \"Calculate\":  *rp == " << *rp << endl;
+
+	  if (*rp <= 0)
+	    {
+              if (verbose)
+                cerr << "*rp <= 0.\nContinuing.\n\n";
+	      continue;
+	    }
+
+	  else if (*rp >= MAX_VAL)
+	    {
+              if (verbose)
+                cerr << "*rp >=  MAX_VAL\nContinuing."
+                     << endl;
+	      continue;
+	    }
+
+	  else if (second_largest_real >= *rp)
+	    {
+              if (verbose)
+                cerr << "second_largest_real >= *rp\nContinuing." 
+                     << "\n";
+	      continue;
+	    } 
+	  else if (*rp > second_largest_real && *rp < MAX_VAL)
+	    {
+              if (verbose)
+                cerr << "*rp > second_largest_real && "
+                     << "*rp < MAX_VAL" << endl
+                     << "Setting second_largest_real to *rp"
+                     << " and counter to i (" << i << ").\n";
+
+	      second_largest_real = *rp;
+	      counter = i;
+	    }
+	  else 
+	    {
+              if (verbose)
+                cerr << "Some other condition. Continuing.\n";
+	      continue;
+	    }
+	      
+	} /* |for| */
+
+#endif 
+
+@q * Template function instantiations. @>
+@ Template function instantiations.
+\LOG
+\initials{LDF 2003.12.29.}  Added this section.
+\ENDLOG 
+@<Declare |System| functions@>=
+float 
+get_second_largest (float MAX_VAL, bool verbose);
+
+@
+@<Declare |System| functions@>=
+double 
+get_second_largest (double MAX_VAL, bool verbose);
+
+@q * Putting gsltmplt together.@>
+@ Putting {\tt gsltmplt} together.
+
+@q ** This is what's compiled.@>
+@ This is what's compiled.
+I don't really need to compile the definition of |get_second_largest()| here,
+because it must be included in all of the files that instantiate it,
+anyway.  However, that may become unnecessary later, in which case it
+will have to be compiled here.  In addition, if there's something
+wrong with the definition, it may be helpful to catch the error here. 
+\initials{LDF 2004.1.2.}
+@c
+@<Include files@>@;
+@<Declare |namespace System|@>@;
+@<Define |System| functions@>@;
+
+@q ** This is what's written to \filename{gsltmplt.h}.@>
+@ This is what's written to the \filename{gsltmplt.h}.
+The file \filename{gsltmplt.h} must be included by all files that
+define specializations of |get_second_largest()|.  
+\initials{LDF 2003.12.29.}
+
+@(gsltmplt.h@>=
+@<Declare |namespace System|@>@;
+@<Declare |System| functions@>@;
+@<Define |System| functions@>@;
+

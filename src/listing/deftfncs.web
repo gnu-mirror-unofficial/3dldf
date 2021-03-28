@@ -1,0 +1,206 @@
+@q deftfncs.web @>
+      
+@q * (0) |Definition_Info_Type| functions.@>
+@** {\bf Definition\_Info\_Type} functions.
+\initials{LDF 2004.12.21.}
+
+\LOG
+\initials{LDF 2004.12.21.}
+Created this file.
+\ENDLOG 
+
+@q * (1) Include files.@>
+@* Include files.
+
+@<Include files@>=
+#include "loader.h++"
+#include "pspglb.h++"
+#include "io.h++"
+#include "gsltmplt.h++"
+#include "creatnew.h++"
+#include "pntrvctr.h++"
+#include "primes.h++"
+#include "complex.h++"
+#include "matrices.h++"
+#include "colors.h++"
+#include "transfor.h++"
+#include "pens.h++"
+#include "dashptrn.h++"
+#include "shapes.h++" 
+#include "pictures.h++"
+#include "points.h++"
+#include "lines.h++"
+#include "planes.h++"
+#include "nurbs.h++"
+#include "paths.h++"
+#include "curves.h++"
+#include "polygons.h++"
+#include "triangle.h++"
+#include "rectangs.h++"
+#include "conicsct.h++"
+#include "ellipses.h++"
+#include "circles.h++"
+#include "ellpsslc.h++"
+#include "crclslc.h++"
+#include "parabola.h++"
+#include "hyprbola.h++"
+#include "cncsctlt.h++"
+#include "arc.h++"
+#include "helices.h++"
+#include "origami.h++"
+
+#if 0 
+   #include "patterns.h++"
+#endif 
+
+#include "solids.h++"
+#include "solfaced.h++"
+#include "cuboid.h++"
+#include "polyhed.h++"
+#include "ddchdrn.h++"
+#include "rhtchdrn.h++"
+#include "plyhdslc.h++"
+#include "cones.h++"
+#include "cylinder.h++" 
+#include "ellpsoid.h++"
+#include "spheres.h++" 
+#include "sphrdevl.h++"
+#include "parabold.h++"
+#include "paraellp.h++"
+#include "parahypr.h++"
+#include "glyphs.h++"
+#include "pctfncs0.h++"
+#include "utility.h++"
+#include "pntrvcf0.h++"
+#include "predctes.h++"
+#include "scanprse.h++"   
+#include "figures.h++"   
+#include "parser.h++"   
+#include "parser_1.h++"
+#include "scan.h++"
+#include "scanprsf.h++"
+#include "imetfncs.h++"
+
+@q * (1) |Definition_Info_Type| functions.  @>
+@* {\bf Definition\_Info\_Type} functions. 
+
+@q ** (2) Clear.@> 
+@ {\bf clear}.
+\initials{LDF 2004.12.29.}
+
+\LOG
+\initials{LDF 2004.12.29.}
+Added this function definition.
+
+\initials{LDF 2004.12.29.}
+Now clearing |untyped_parameter_vector| and |typed_parameter_vector|.
+
+\initials{LDF 2005.01.02.}
+No longer clearing |vector<string> untyped_parameter_vector| and 
+|vector<Int_String> typed_parameter_vector|, since I've removed these 
+data members.  Now setting |unsigned int untyped_parameter_ctr| and 
+|unsigned int typed_parameter_ctr| to 0.
+
+\initials{LDF 2005.01.03.}
+Removed code for setting |Id_Map_Entry_Node entry| and
+|Definition_Info_Node up| to 0 and |string name| to |""|, because I've
+removed these data members from the |Definition_Info_Type| definition.
+\ENDLOG 
+
+@q ***** (5) Definition.@>
+
+@<Define |Definition_Info_Type| functions@>=
+void
+Definition_Info_Type::clear(void)
+{
+
+  definition_strm_ptr[0]->str(""); 
+  definition_strm_ptr[1]->str(""); 
+
+  untyped_parameter_ctr = 0;
+  typed_parameter_ctr   = 0;
+
+  type = NULL_VALUE;
+
+  return;
+
+} /* End of |Definition_Info_Type| destructor definition.  */
+
+@q ** (2) Show.@> 
+@ {\bf show}.
+\initials{LDF 2004.12.21.}
+
+\LOG
+\initials{LDF 2004.12.21.}
+Added this function.
+
+\initials{LDF 2004.12.22.}
+@:BUG FIX@> BUG FIX::  Removed code referring to 
+|definition_strm_ptr[2]|, which no longer exists.
+
+\initials{LDF 2004.12.22.}
+Now checking whether |definition_strm_ptr[0]| and 
+|definition_strm_ptr[1]| are non-null before writing the strings they
+contain to |cerr|.
+
+\initials{LDF 2004.12.22.}
+Made this function |const|.  
+Now showing |definition_parameter_vector|.
+
+\initials{LDF 2004.12.29.}
+Now showing |untyped_parameter_vector| and |typed_parameter_vector|
+instead of |definition_parameter_vector|.
+
+\initials{LDF 2005.01.02.}
+No longer showing |vector<string> untyped_parameter_vector| and 
+|vector<Int_String> typed_parameter_vector|, since I've removed these 
+data members.  Now showing |unsigned int untyped_parameter_ctr| and 
+|unsigned int typed_parameter_ctr| instead.
+
+\initials{LDF 2005.01.03.}
+No longer showing |string name|, because I've
+removed it from the |Definition_Info_Type| definition.
+\ENDLOG
+
+@<Define |Definition_Info_Type| functions@>=
+void
+Definition_Info_Type::show(string text) const
+{
+   using namespace Scan_Parse;
+
+   if (text == "")
+      text = "Definition_Info_Type:";
+
+   cerr << text << endl << "`type' == " << name_map[type] << endl;
+
+   if (definition_strm_ptr[0])
+      cerr << "`definition_strm_ptr[0]->str()' == " << definition_strm_ptr[0]->str()
+           << endl;
+   else
+      cerr << "`definition_strm_ptr[0]' is null." << endl;
+
+   if (definition_strm_ptr[1])
+      cerr << "`definition_strm_ptr[1]->str()' == " << definition_strm_ptr[1]->str()
+        << endl;
+   else
+      cerr << "`definition_strm_ptr[1]' is null." << endl;
+
+   cerr << "`untyped_parameter_ctr' == " << untyped_parameter_ctr << endl
+        << "`typed_parameter_ctr' == " << typed_parameter_ctr << endl;
+
+   return;
+
+}  /* End of |Definition_Info_Type::show(void)| definition.  */
+
+@q * (1) Putting the |Definition_Info_Type| functions together.@>
+@* Putting the {\bf Definition\_Info\_Type} functions together.
+  
+@ This is what's compiled.
+@c
+@<Include files@>@;
+@<Define |Definition_Info_Type| functions@>@;
+
+@ This is what's written to \filename{deftfncs.h}.
+@(deftfncs.h@>=
+
+ 
