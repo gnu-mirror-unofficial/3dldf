@@ -19,202 +19,685 @@
 \advance\voffset by -1in
 \advance\hoffset by -1in
 
-%% \advance\voffset by 1.5cm
-%% \advance\hoffset by 1cm
+\advance\vsize by -1.25in
+\advance\hsize by -.75in
 
-%% \advance\hsize by -2cm
+\advance\voffset by 1.5cm
+\advance\hoffset by 1cm
 
-\font\twelvett=cmtt12
+\font\mediumtt=cmtt10 scaled 1050
+\font\largebx=cmbx12 
 
-\magnification=1050
-
-%\let\listingfont\twelvett
+\let\listingfont\mediumtt
 
 %\showthe\listingfont
-
-\readtocfile
-\vfil\eject
 
 \newcount\chapno
 \chapno=1
 
-\writetocentry{chapter}{loader.web}
+\begingroup
+\advance\baselineskip by .5\baselineskip
+\centerline{{\largebx Table of Contents}}
+\vskip.5\baselineskip
+\readtocfile
+\vfil\eject
+\endgroup
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . loader.web:  Include files}
 \listing{loader.web}
 \vfil\eject
 
-\writetocentry{chapter}{pspglb.web}
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pspglb.web: Global items}
 \listing{pspglb.web}
 \vfil\eject
 
-\writetocentry{chapter}{io.web}
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1. io.web: I/O}
 \listing{io.web}
 \vfil\eject
 
-\bye
-
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . gsltmplt.web:
+                           Get second-largest {\bf real} value.}
 \listing{gsltmplt.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . creatnew.web}
 \listing{creatnew.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pntrvctr.web}
 \listing{pntrvctr.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . primes.web}
 \listing{primes.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . complex.web}
 \listing{complex.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . matrices.web}
 \listing{matrices.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . colors.web}
 \listing{colors.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . transfor.web}
 \listing{transfor.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pens.web}
 \listing{pens.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . dashptrn.web}
 \listing{dashptrn.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . shapes.web}
 \listing{shapes.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pictures.web}
 \listing{pictures.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . points.web}
 \listing{points.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . lines.web}
 \listing{lines.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . planes.web}
 \listing{planes.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . nurbs.web}
 \listing{nurbs.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . paths.web}
 \listing{paths.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . curves.web}
 \listing{curves.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . polygons.web}
 \listing{polygons.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . triangle.web}
 \listing{triangle.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . rectangs.web}
 \listing{rectangs.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . conicsct.web}
 \listing{conicsct.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ellipses.web}
 \listing{ellipses.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . circles.web}
 \listing{circles.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ellpsslc.web}
 \listing{ellpsslc.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . crclslc.web}
 \listing{crclslc.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . parabola.web}
 \listing{parabola.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . hyprbola.web}
 \listing{hyprbola.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cncsctlt.web}
 \listing{cncsctlt.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . helices.web}
 \listing{helices.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . origami.web}
 \listing{origami.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . solids.web}
 \listing{solids.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . solfaced.web}
 \listing{solfaced.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cuboid.web}
 \listing{cuboid.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . polyhed.web}
 \listing{polyhed.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ddchdrn.web}
 \listing{ddchdrn.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . rhtchdrn.web}
 \listing{rhtchdrn.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . plyhdslc.web}
 \listing{plyhdslc.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cones.web}
 \listing{cones.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cylinder.web}
 \listing{cylinder.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ellpsoid.web}
 \listing{ellpsoid.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . spheres.web}
 \listing{spheres.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . parabold.web}
 \listing{parabold.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . paraellp.web}
 \listing{paraellp.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . parahypr.web}
 \listing{parahypr.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . glyphs.web}
 \listing{glyphs.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pctfncs0.web}
 \listing{pctfncs0.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . utility.web}
 \listing{utility.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pntrvcf0.web}
 \listing{pntrvcf0.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . predctes.web}
 \listing{predctes.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . figures.web}
 \listing{figures.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . main.web}
 \listing{main.web}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pbsndecl.w}
 \listing{pbsndecl.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pprgstmt.w}
 \listing{pprgstmt.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . poptions.w}
 \listing{poptions.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . passign.w}
 \listing{passign.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cmpxassn.w}
 \listing{cmpxassn.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . mtrxassn.w}
 \listing{mtrxassn.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . popassgn.w}
 \listing{popassgn.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pvariabl.w}
 \listing{pvariabl.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcommand.w}
 \listing{pcommand.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pdrwcmnd.w}
 \listing{pdrwcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pclrcmnd.w}
 \listing{pclrcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pgrpcmnd.w}
 \listing{pgrpcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pinptcmd.w}
 \listing{pinptcmd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ptrfcmnd.w}
 \listing{ptrfcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pvcmncmd.w}
 \listing{pvcmncmd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . reverse.w}
 \listing{reverse.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . psetcmnd.w}
 \listing{psetcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . setmatrx.w}
 \listing{setmatrx.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . setarc.w}
 \listing{setarc.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . plblcmnd.w}
 \listing{plblcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pfgopcmd.w}
 \listing{pfgopcmd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . fcscmnd.w}
 \listing{fcscmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cslcmnd.w}
 \listing{cslcmnd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pshowcmd.w}
 \listing{pshowcmd.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcondit.w}
 \listing{pcondit.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ploops.w}
 \listing{ploops.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . peqexpr.w}
 \listing{peqexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pblexpr.w}
 \listing{pblexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pnumexpr.w}
 \listing{pnumexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pullexpr.w}
 \listing{pullexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . mtrxexpr.w}
 \listing{mtrxexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cmpxexpr.w}
 \listing{cmpxexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pstrexpr.w}
 \listing{pstrexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppenexpr.w}
 \listing{ppenexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pdshexpr.w}
 \listing{pdshexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcolexpr.w}
 \listing{pcolexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ptrnexpr.w}
 \listing{ptrnexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppicexpr.w}
 \listing{ppicexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppntexpr.w}
 \listing{ppntexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pbpexpr.w}
 \listing{pbpexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pfocexpr.w}
 \listing{pfocexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pnrbexpr.w}
 \listing{pnrbexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppthexpr.w}
 \listing{ppthexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pellexpr.w}
 \listing{pellexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcirexpr.w}
 \listing{pcirexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pellpslc.w}
 \listing{pellpslc.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcrclslc.w}
 \listing{pcrclslc.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pprbexpr.w}
 \listing{pprbexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . phypexpr.w}
 \listing{phypexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cslexpr.w}
 \listing{cslexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . arcexpr.w}
 \listing{arcexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . phlxexpr.w}
 \listing{phlxexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppygexpr.w}
 \listing{ppygexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . precexpr.w}
 \listing{precexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . prplexpr.w}
 \listing{prplexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ptglexpr.w}
 \listing{ptglexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pconexpr.w}
 \listing{pconexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcylexpr.w}
 \listing{pcylexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcubexpr.w}
 \listing{pcubexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pphdexpr.w}
 \listing{pphdexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pplhdslc.w}
 \listing{pplhdslc.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . peldexpr.w}
 \listing{peldexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . psphexpr.w}
 \listing{psphexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . spdvexpr.w}
 \listing{spdvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pprdexpr.w}
 \listing{pprdexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pglyexpr.w}
 \listing{pglyexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pplnexpr.w}
 \listing{pplnexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . porgexpr.w}
 \listing{porgexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pblvexpr.w}
 \listing{pblvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pnmvexpr.w}
 \listing{pnmvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pullvxpr.w}
 \listing{pullvxpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . mtrxvxpr.w}
 \listing{mtrxvxpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cmpxvxpr.w}
 \listing{cmpxvxpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pstvexpr.w}
 \listing{pstvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pclvexpr.w}
 \listing{pclvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppnvexpr.w}
 \listing{ppnvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pdpvexpr.w}
 \listing{pdpvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ptfvexpr.w}
 \listing{ptfvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pfcvexpr.w}
 \listing{pfcvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pptvexpr.w}
 \listing{pptvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pbpvexpr.w}
 \listing{pbpvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pnbvexpr.w}
 \listing{pnbvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pphvexpr.w}
 \listing{pphvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pelvexpr.w}
 \listing{pelvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcrvexpr.w}
 \listing{pcrvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppbvexpr.w}
 \listing{ppbvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . phpvexpr.w}
 \listing{phpvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . arcvexpr.w}
 \listing{arcvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . cslvexpr.w}
 \listing{cslvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . phxvexpr.w}
 \listing{phxvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppgvexpr.w}
 \listing{ppgvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . prcvexpr.w}
 \listing{prcvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . prpvexpr.w}
 \listing{prpvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ptgvexpr.w}
 \listing{ptgvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcnvexpr.w}
 \listing{pcnvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcyvexpr.w}
 \listing{pcyvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pcbvexpr.w}
 \listing{pcbvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pplvexpr.w}
 \listing{pplvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pedvexpr.w}
 \listing{pedvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pspvexpr.w}
 \listing{pspvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . spdvvexp.w}
 \listing{spdvvexp.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ppdvexpr.w}
 \listing{ppdvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pglvexpr.w}
 \listing{pglvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pplnvxpr.w}
 \listing{pplnvxpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . porvexpr.w}
 \listing{porvexpr.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pldfdcl.w}
 \listing{pldfdcl.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . ptokdecl.w}
 \listing{ptokdecl.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pmacros.w}
 \listing{pmacros.w}
+\vfil\eject
+
+\writetocentry{chapter}{\the\chapno\global\advance\chapno by 1 . pfuncfin.w}
 \listing{pfuncfin.w}
-
-
-
+\vfil\eject
 
 \bye
