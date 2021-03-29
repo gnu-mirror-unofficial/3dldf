@@ -379,8 +379,7 @@ main(int argc, char *argv[])
   if (comparison_value == 0) /* \filename{loader.h} is older than
                                   \filename{loader.web}. */
     {
-#if 1 
-
+#if 1
         string temp_string0;
         string system_string0;
         system_string0 = "ctangle loader; rm -f loader.c";
@@ -408,8 +407,7 @@ main(int argc, char *argv[])
                                        \filename{loader.h} is up-to-date. */
       {
           cout << "loader.h is up-to-date.\n";
-      }                                                   
-
+      }                                                  
     else if (comparison_value == 3) /* \filename{loader.h} doesn't exist, but 
                                        \filename{loader.web} does. 
                                        We must generate \filename{loader.h}
@@ -451,8 +449,7 @@ main(int argc, char *argv[])
             << "Exiting with return value 1\n";
        exit(1);
      }                                                   
-                                    
-    else /* Impossible case. */
+   else /* Impossible case. */
       {
         cerr << "This can't happen!\n"
              << "file_age() has returned an impossible value.\n"
@@ -496,16 +493,14 @@ else if (comparison_value == 3) /* \filename{loader.h} doesn't exist, but
        cerr << "Error! loader.h doesn't exist. Can't continue.\n"
             << "Exiting with return value 1\n";
        exit(1);
-     }                                                   
-
+     }                                                  
     else if (comparison_value == 4) /* \filename{3dldf} doesn't exist, but 
                                        \filename{loader.h} does. 
                                        Assume \filename{loader.h} is up to 
                                        date and just relink. */
      {
        compile_and_link_flags.set(0);
-     }                                                   
-
+     }                                                  
     else if (comparison_value == 5) /* Neither \filename{loader.h} nor 
                                        \filename{3dldf} exists. Same as case 3:
                                        If \filename{loader.h} doesn't exist, 
@@ -516,8 +511,7 @@ else if (comparison_value == 3) /* \filename{loader.h} doesn't exist, but
             << "Exiting with return value 1\n";
        exit(1);
 
-     }                                                   
-
+     }                                                  
     else if (comparison_value == 6) /* An error occurred in
                                       |file_age()|. Issue an error message an
                                       return with value 1. */
@@ -526,8 +520,7 @@ else if (comparison_value == 3) /* \filename{loader.h} doesn't exist, but
        cerr << "Error! An error occurred in file_age().\n"
             << "Exiting with return value 1\n";
        exit(1);
-     }                                                   
-                                    
+     }                                                  
     else /* Impossible case. */
       {
         cerr << "This can't happen!\n"

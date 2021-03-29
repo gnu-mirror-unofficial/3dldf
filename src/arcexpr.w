@@ -96,8 +96,7 @@ Added this rule.
 
     @=$$@> = static_cast<void*>(create_new<Arc>(
                                   static_cast<Arc*>(
-                                     entry->object))); 
-
+                                     entry->object)));
 };
 
 @q ** (2) arc_primary --> LEFT_PARENTHESIS arc_expression @> 
@@ -135,8 +134,7 @@ Added this rule.
 
 @<Define rules@>=
 @=arc_primary: LAST arc_vector_expression@>@/
-{ 
-
+{
    Arc* c;
 
          c = create_new<Arc>(0);
@@ -241,7 +239,6 @@ Added this rule.
   @=$$@> = static_cast<void*>(p); 
 
   delete t;
-
 };
 
 @q * (1) arc tertiary.@>

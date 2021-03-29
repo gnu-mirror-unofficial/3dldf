@@ -152,7 +152,6 @@ Added this rule.
         @=$$@> = static_cast<void*>(pv);                    
 
      }  /* |else|  */
-
 };
 
 @q ** (2) arc_vector_primary --> LEFT_PARENTHESIS  @>
@@ -220,7 +219,6 @@ Added this rule.
 @<Define rules@>=
 @=arc_vector_secondary: arc_vector_primary@>@/ 
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
