@@ -398,7 +398,7 @@ Added the ``\.{--quiet}'' option.
     if (option_ctr == -1)
       {
         if (DEBUG)
-          cerr << "No more option arguments." << endl << endl << flush;
+          cerr << "No more option arguments." << endl << endl ;
         break;
       }
 
@@ -666,7 +666,7 @@ called using the ``\.{version}'' option.
 #if DEBUG_COMPILE
             if (DEBUG)
                {
-                  cerr << "Exiting with return value 0." << endl << flush;
+                  cerr << "Exiting with return value 0." << endl ;
                }
 #endif /* |DEBUG_COMPILE|  */@; 
   
@@ -684,7 +684,7 @@ called using the ``\.{version}'' option.
                  << "option_index has invalid value: "
                  << option_index << endl
                  << "Will try to continue." 
-                 << endl << endl << flush;
+                 << endl << endl ;
           }
       }
 
@@ -696,7 +696,7 @@ called using the ``\.{version}'' option.
     else if (option_ctr == '?')
       {
         cerr << "getopt_long() returned ambiguous match. Breaking."
-             << endl << endl << flush;
+             << endl << endl ;
         break;
       }
 
@@ -708,7 +708,7 @@ called using the ``\.{version}'' option.
     else
       {
         cerr << "getopt_long() returned invalid option."
-             << endl << flush;
+             << endl ;
       }
 
 @q **** (4) End of while loop.@>
@@ -738,9 +738,9 @@ called using the ``\.{version}'' option.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr << "argv[" << optind << "] == " << argv[optind] << endl << flush;
+              cerr << "argv[" << optind << "] == " << argv[optind] << endl ;
               cerr << "strlen(argv[optind]) == " << strlen(argv[optind]) << endl
-                   << flush;
+                   ;
             }
 #endif
 
@@ -750,7 +750,7 @@ called using the ``\.{version}'' option.
 #if 0 
 #if DEBUG_COMPILE
               if (DEBUG)
-                cerr << "It's less" << "\n" << flush;
+                cerr << "It's less" << "\n" ;
 #endif
 #endif 
               strcpy(filename_array[i], argv[optind]);
@@ -758,14 +758,14 @@ called using the ``\.{version}'' option.
               if (DEBUG)
                 {
                   cerr << "filename_array[" << i << "] == " 
-                       << filename_array[i] << endl << flush;
+                       << filename_array[i] << endl ;
                 }
             }
           else
             {
               cerr << "WARNING: In main():\n"
                    << "Filename argument from the command line is too long:\n"
-                   << argv[optind] << endl << "Ignoring.\n\n" << flush;
+                   << argv[optind] << endl << "Ignoring.\n\n" ;
               break;
             }
         } /* |for| */ 
@@ -775,7 +775,7 @@ called using the ``\.{version}'' option.
         {
           for(unsigned short j  = 0; j < i; ++j)
             cerr << "filename_array[" << j << "] == "
-                 << filename_array[j] << endl << flush;
+                 << filename_array[j] << endl ;
         }
 
 } /* |if|  */
@@ -783,7 +783,7 @@ called using the ``\.{version}'' option.
   if (DEBUG)
     {
       cerr << "Exiting. (Debugging command line option processing.)" 
-           << endl << endl << flush;
+           << endl << endl ;
       exit(0);
     }
 #endif 
@@ -1068,7 +1068,7 @@ for ( unsigned short i = 0; i < filename_array_ctr; ++i)
             cerr << "ERROR! In main(): "
                  << "Failed to open input and/or output files for "
                  << filename_array[i] 
-                 << ".\nWill try to continue.\n\n" << flush;
+                 << ".\nWill try to continue.\n\n" ;
              continue;
          }
       else
@@ -1083,7 +1083,7 @@ for ( unsigned short i = 0; i < filename_array_ctr; ++i)
                        << "scanner_node_vector[" << i << "]->"
                        << "out[Run_State::METAPOST]->filename == " 
            << scanner_node_vector[i]->out[Run_State::METAPOST]->filename 
-           << endl << flush;
+           << endl;
               } /* |if (DEBUG)|  */@;
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -1602,7 +1602,7 @@ Now calling |pthread_exit| instead of |return| if |HAVE_PTHREAD_H| is defined.
  
 #if DEBUG_COMPILE
   if (DEBUG) 
-    cerr << "Clearing scanner_node_vector" << "\n" << flush;
+    cerr << "Clearing scanner_node_vector" << "\n" ;
 #endif /* |DEBUG_COMPILE|  */@; 
 
   scanner_node_vector.clear(); 
@@ -1610,7 +1610,7 @@ Now calling |pthread_exit| instead of |return| if |HAVE_PTHREAD_H| is defined.
 #if DEBUG_COMPILE
    if (DEBUG) 
      cerr << "scanner_node_vector.size() == " << scanner_node_vector.size()
-          << endl << flush;
+          << endl ;
 #endif /* |DEBUG_COMPILE|  */@;    
 
 @

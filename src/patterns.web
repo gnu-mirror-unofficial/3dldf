@@ -221,7 +221,7 @@ Color* draw_color_inner,  /* Inner */
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */
   if (DEBUG)
-    cerr << "Entering hex_pattern_1().\n" << flush;
+    cerr << "Entering hex_pattern_1().\n" ;
 #endif /* |DEBUG_COMPILE|  */@; 
 
   Pen pen_outer;
@@ -246,10 +246,10 @@ Color* draw_color_inner,  /* Inner */
       cerr << "ERROR! In hex_pattern_1():\n"
         << "first_row has invalid value: " << first_row
           << "It must be strictly positive.\n"
-            << "Taking absolute value.\n" << flush;
+            << "Taking absolute value.\n" ;
       first_row = abs(first_row);
       cerr << "Now first_row == " << first_row << "." << endl
-           << flush;
+           ;
     }
 
   if (first_row > 25) /* \initials{LDF 2002.09.22.}
@@ -260,7 +260,7 @@ Color* draw_color_inner,  /* Inner */
       cerr << "ERROR! In hex_pattern_1():\n"
            << "first_row has invalid value: " << first_row
            << "It can be at most 25.\n"
-           << "Setting first_row to 25.\n" << flush;
+           << "Setting first_row to 25.\n" ;
       first_row = 25;
     }
 
@@ -495,7 +495,7 @@ wouldn't be as clearly understandable.
                   cerr << "ERROR! In hex_pattern_1():\n"
                        << "Too many sets of hexagons: "
                        << hexagon_ctr << ".  Returning."
-                       << endl << flush;
+                       << endl ;
 
                   return hexagon_ctr;
                 }
@@ -608,7 +608,7 @@ epicycloid_pattern_1(Picture& picture,
     {
       cerr << "WARNING! diameter_inner < diameter_outer!\n"
            << "This is likely to lead to strange results.\n"
-           << "Continuing.\n\n" << flush;
+           << "Continuing.\n\n" ;
     }
 
   using namespace Colors;
@@ -647,7 +647,7 @@ unsigned int spiral_counter = 0;
   if (offsets < 1)
     {
       cerr << "WARNING! offsets has invalid value: " << offsets << endl
-        << "offsets must be >= 1.  Setting to 1.\n\n" << flush;
+        << "offsets must be >= 1.  Setting to 1.\n\n" ;
       offsets = 1;
     }
 
@@ -825,7 +825,7 @@ epicycloid_pattern_3(Picture& picture,
           cerr << "theta_total == " << theta_total
                << endl << "Reducing theta_total to "
                << (theta_total - 360)
-               << endl << flush;
+               << endl ;
           theta_total -= 360;
           ++iter_ctr;
           spiral.draw(picture, *color_iter++);
@@ -838,7 +838,7 @@ epicycloid_pattern_3(Picture& picture,
       if (iter_ctr > limit)
         {
           cerr << "Exceeded limit.  iter_ctr == " << iter_ctr
-               << endl << "Breaking.\n\n" << flush;
+               << endl << "Breaking.\n\n" ;
           break;
         }
       else if (iter_ctr > 0 && (fmod((iter_ctr * radius_outer),
@@ -848,7 +848,7 @@ epicycloid_pattern_3(Picture& picture,
                << "iter_ctr == " << iter_ctr << endl
                << "fmod((iter_ctr * radius_outer), radius_inner) == "
                << fmod((iter_ctr * radius_outer), radius_inner) << endl
-               << "Breaking.\n\n" << flush;
+               << "Breaking.\n\n" ;
           break;
         }
       outer_circle_center *= normal *= p0
