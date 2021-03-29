@@ -180,7 +180,6 @@ This condition occurs legitimately when one tries to show an
     
         @=$$@> = static_cast<void*>(q);           
 
-
    }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
 @q **** (4) @>   

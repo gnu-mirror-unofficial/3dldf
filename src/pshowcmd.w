@@ -3817,7 +3817,6 @@ Added this rule.
    @=$$@> = 0;
 };
 
-
 @q * (0)@>
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>

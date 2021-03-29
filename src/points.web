@@ -10230,7 +10230,6 @@ Picture::operator=(const Picture& p)
     }
 }
 
-
 @q *** (3) Save |Point| to database.@>
 @*2 Save |Point| to database.
 @^\cfunc{Point}{save\_point\_to\_database}@>
@@ -10274,7 +10273,6 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
          << endl;
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
    if (vvector.size() == 0)
    {
@@ -10355,7 +10353,6 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
        }       
 #endif /* |DEBUG_COMPILE|  */@;        
 
-
        sql_strm << comma_str  
                 << "(\"" << prefix << "\", \"" << (*iter)->get_name() << "\", "
                 << (*iter)->get_array_flag() << ", " 
@@ -10413,7 +10410,6 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
 @
 @<Define |Point| functions@>=
 
-
 #if DEBUG_COMPILE
 
   if (DEBUG)
@@ -10424,7 +10420,6 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
    return 0;
 
 }  /* End of |Point::save_points_to_database| definition  */
-
 
 @q **** (4) Restore |Points| from database.@>
 @
@@ -10449,7 +10444,6 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) @>
 @
 @<Define |Point| functions@>=
@@ -10467,7 +10461,6 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
    Point *curr_point = 0;
 
    Id_Map_Entry_Node curr_node = 0;
-
 
    string temp_str;
 
@@ -10809,7 +10802,6 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
-
           if ((*iter)->vector_type_flag == false)
           {
              cerr << "Array type." << endl;
@@ -10836,7 +10828,6 @@ getchar();
 @
 @<Define |Point| functions@>=
 
-
 #if DEBUG_COMPILE
 
   if (DEBUG)
@@ -10845,7 +10836,6 @@ getchar();
 #endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
-
 
 }
 
