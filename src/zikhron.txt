@@ -5,8 +5,7 @@
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-%%%% Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
-%%%% 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation
+%%%% Copyright (C) 2021 The Free Software Foundation
 
 %%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
 %%%% it under the terms of the GNU General Public License as published by 
@@ -91,8 +90,8 @@
 \headline={\hfil}
 
 \iftrue % \iffalse
-\pageno=-1
-%\pageno=0
+%\pageno=-1
+\pageno=0
 \vskip.5cm
 \centerline{Sundials Zikhron Ya'akov}
 \vskip\baselineskip
@@ -111,8 +110,7 @@ This document is part of GNU 3DLDF, a package for three-dimensional
 drawing.
 \vskip\baselineskip
 
-Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
-2016, 2017, 2018, 2019, 2020, 2021 The Free Software FoundationThe Free Software Foundation
+Copyright (C) 2021 The Free Software FoundationThe Free Software Foundation
 \vskip\baselineskip
 
 GNU 3DLDF is free software; you can redistribute it and/or modify 
@@ -149,8 +147,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA}}
 \advance\voffset by 1in
 \advance\hoffset by 1in
 
-\iftrue % \iffalse
-\ifnum\pageno<0\else\pageno=-1\fi
+%% \ifnum\pageno<0\else\pageno=-1\fi
 \begingroup
 
 \parindent=0pt
@@ -164,20 +161,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA}}
 
 %% **** (4) 
 
-\hbox to \dimen0{Perspective Projections\hfil}
-
 %% Latitude and longitude of Zikhron Ya'akov, Israel: 32° 34′ 15″ N, 34° 57′ 6″ E,
 %% Decimal 32.570833, 34.951667
-
-\hbox to \dimen0{Zikhron Ya'akov, Israel 
-                 $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E
-                 \leaderfill \the\currpg}
-\global\advance\currpg by 1
 %%
 %% Zikhron Ya'akov, Israel
 %%
 \hbox to \dimen0{Zikhron Ya'akov, Israel
-                 $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+                 $32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
 \global\advance\currpg by 1
 \hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill \the\currpg}
@@ -187,49 +177,31 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA}}
 
 \endgroup
 \vfil\eject
-\fi
 
 \advance\voffset by -.5in
 \advance\hoffset by -1in
 
 %% **** (4) End of contents
 
-%% *** (3) Perspective projections
+%% *** (3) Headline
 
-\pageno=1
+\iftrue % \iffalse
+\headline={Sundials Zikhron Ya'akov, Israel\quad Copyright {\copyright} 2021 The Free Software Foundation\hfil %
+   \folio\hfil Author:  Laurence D. Finston\hfil}
+\fi
 
-%% **** (4) Zikhron Ya'akov, Israel 
-
-\vbox to \vsize{%
-\vskip1cm
-\centerline{{\bf Zikhron Ya'akov, Israel}
-$32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
-\vskip1cm
-\line{\hskip1cm\epsffile{zikhron.1}\hss}
-\vskip1cm
-\line{\hskip 2cm{\bf Perspective projection}\hfil}
-\line{\hskip 2cm Zikhron Ya'akov, Israel
-$32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
-\line{\hskip 2cm Focus:  $\rm{position} = (0, 5, -12)$, %
-$\rm{direction} = (0, 5, 10)$, %
-$\rm{distance} = 10$\hfil}
-\line{\hskip 2cm (dimensions in centimeters)\hfil}
-\vss
-}
-
-\vfil\eject
 
 %% **** (4) Zikhron Ya'akov
 
 \vbox to \vsize{%
 \vskip1cm
 \centerline{{\bf Zikhron Ya'akov, Israel}
-$32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+$32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \vskip1cm
 \line{\hskip1cm\epsffile{zikhron.1}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
-\line{\hskip 2cm Zikhron Ya'akov, Israel $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+\line{\hskip 2cm Zikhron Ya'akov, Israel $32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \line{\hskip 2cm Focus:  $\rm{position} = (0, 5, -12)$, %
 $\rm{direction} = (0, 5, 10)$, %
 $\rm{distance} = 10$\hfil}
@@ -241,25 +213,25 @@ $\rm{distance} = 10$\hfil}
 
 \vbox to \vsize{%
 \vskip2cm
-\centerline{{\bf Zikhron Ya'akov, Israel} $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+\centerline{{\bf Zikhron Ya'akov, Israel} $32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \vskip1cm
 \line{\hskip 2cm\epsffile{zikhron.2}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
-\line{\hskip 2cm Zikhron Ya'akov, Israel $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+\line{\hskip 2cm Zikhron Ya'akov, Israel $32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \vss}
 \vfil\eject
 
 \vbox to \vsize{%
 \vskip2cm
-\centerline{{\bf Zikhron Ya'akov, Israel} $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+\centerline{{\bf Zikhron Ya'akov, Israel} $32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \vskip1cm
 \line{\hskip 0cm\epsffile{zikhron.3}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$)\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
-\line{\hskip 2cm Zikhron Ya'akov, Israel $32^\circ$ $34' 15''$ N, $34^\circ$ $57' 6''$ E\hfil}
+\line{\hskip 2cm Zikhron Ya'akov, Israel $32^\circ$ $34'$ $15''$ N, $34^\circ$ $57'$ $6''$ E\hfil}
 \vss}
 \vfil\eject
 
