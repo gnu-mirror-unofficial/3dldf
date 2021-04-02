@@ -1086,6 +1086,28 @@ cnepspng.o: cnepspng.c++
 cnepspng.c++: cnepspng.web
 	ctangle cnepspng.web - cnepspng.c++
 
+## Sundial plans for Zikhron Ya'akov, Israel
+
+.PHONY: zp
+
+zp: zikhron.pdf
+
+zikhron.pdf: zikhron.ps
+	ps2pdf zikhron.ps
+
+zikhron.ps: zikhron.dvi
+	dvips -o zikhron.ps zikhron.dvi
+
+zikhron.dvi: zikhron.txt zikhron.1
+	tex zikhron.txt
+
+zikhron.1: zikhron.mp
+	mpost zikhron.mp
+
+zikhron.mp: zikhron.ldf sundl_03.lmc
+	3dldf zikhron.ldf
+
+
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
 # @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
 # @echo "CLEANFILES == $(CLEANFILES)"
