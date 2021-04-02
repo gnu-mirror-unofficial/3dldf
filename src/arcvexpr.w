@@ -170,8 +170,7 @@ Added this rule.
 @=arc_vector_primary: LEFT_PARENTHESIS@>@/ 
 @=arc_vector_expression RIGHT_PARENTHESIS@>@/ 
 {
-   
-   @<Common declarations for rules@>@;
+ @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
   DEBUG = false; /* |true| */ @; 

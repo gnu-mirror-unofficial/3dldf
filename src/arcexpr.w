@@ -86,7 +86,6 @@ Added this rule.
 
   if (entry == static_cast<Id_Map_Entry_Node>(0) ||  entry->object == static_cast<void*>(0))
     {
-
       @=$$@> = static_cast<void*>(0);
 
     } /* |if (   entry == static_cast<Id_Map_Entry_Node>(0) 
