@@ -5572,6 +5572,8 @@ Point::show(string text,
 
     cerr_mutex.unlock();
 
+    return;
+
 }  /* End of |Point::show| definition */
 
 @q ** Show transform.@>
@@ -10799,9 +10801,6 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
           }
           cerr << "temp_str == " << temp_str << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
           if ((*iter)->vector_type_flag == false)
           {
              cerr << "Array type." << endl;
@@ -10811,7 +10810,7 @@ getchar();
           {
              cerr << "Point vector type." << endl;
 
-             Id_Map_Entry_Node temp_node = scanner_node->lookup(temp_name, true); 
+             Id_Map_Entry_Node temp_node = scanner_node->lookup(temp_str, true); 
 
              if (temp_node != 0)
              {

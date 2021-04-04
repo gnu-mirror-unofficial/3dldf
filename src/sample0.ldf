@@ -179,11 +179,9 @@ endfig with_projection parallel_x_z;
 
 end;
 
-
 %% *** (3) Leave at end of code to be executed.
 
 %% ** (2) Code that's not executed.
-
 
 %% *** (3) Drawing and labelling `conic_section_lattices'.
 
@@ -296,7 +294,6 @@ show nv;
 message "nv0 after reversal:"; 
 show nv0;
 
-
 %% **** (4) transform_vector
 
 transform_vector tv;
@@ -322,7 +319,6 @@ message "tv after reversal:";
 show tv;
 message "tv0 after reversal:"; 
 show tv0;
-
 
 % **** (4) 
 
@@ -363,7 +359,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -374,7 +369,6 @@ numeric j;
 point A, B, C, D, E; %% The lattice points  
 point F;             %% The point found using `get_point'
 point X, Y, Z;       %% The intersection points
-
 
 pen dot_pen;
 dot_pen := pencircle scaled (1.5mm, 1.5mm);
@@ -443,7 +437,6 @@ dotlabel.top("$D$", D);
 E := get_lattice_point 4, c;
 dotlabel.top("$E$", E); 
 
-
 numeric_vector nv;
 
 nv += .1;
@@ -497,7 +490,6 @@ endfig with_projection parallel_x_z no_sort;
 
 %% **** (4) End.
 
-
 end;
 
 %% *** (3) Pascal's Theorem and Braikenridge-Maclaurin Construction.
@@ -522,7 +514,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -533,7 +524,6 @@ numeric j;
 point A, B, C, D, E; %% The lattice points  
 point F;             %% The point found using `get_point'
 point X, Y, Z;       %% The intersection points
-
 
 pen dot_pen;
 dot_pen := pencircle scaled (1.5mm, 1.5mm);
@@ -605,7 +595,6 @@ dotlabel.top("$D$", D);
 E := get_lattice_point 4, c;
 dotlabel.top("$E$", E); 
 
-
 numeric_vector nv;
 
 nv += .1;
@@ -642,7 +631,6 @@ end;
 
 %% *** (3) Leave at end of code to be executed.
 
-
 %% *** (3) Pascal's Theorem and Braikenridge-Maclaurin Construction.
 %% Constructing a conic section from 5 or 6 points.  
 %% Traversing an ellipse.
@@ -665,7 +653,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -676,7 +663,6 @@ numeric j;
 point A, B, C, D, E; %% The lattice points  
 point F;             %% The point found using `get_point'
 point X, Y, Z;       %% The intersection points
-
 
 pen dot_pen;
 dot_pen := pencircle scaled (1.5mm, 1.5mm);
@@ -744,7 +730,6 @@ dotlabel.top("$D$", D);
 E := get_lattice_point 4, c;
 dotlabel.top("$E$", E); 
 
-
 numeric_vector nv;
 
 nv += .1;
@@ -801,7 +786,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -822,7 +806,6 @@ dot_pen := pencircle scaled (1.5mm, 1.5mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -874,7 +857,6 @@ verbatim_metapost "verbatimtex \font\largebf=cmbx12 etex;";
 
 %% **** (4) Figures
 
-
 %% ***** (5) Figures 0 to 9
 
 for i = 0 upto 9:
@@ -909,9 +891,7 @@ label.top("$C'$",  C shifted (0, 0, .5));
 label.urt("$D'$",  D shifted (.5, 0, .5));
 label.bot("$E'$",  E shifted (0, 0, -.5));
 
-
 dotlabel.bot("$F$", F) with_text_color red;
-
 
 pickup path_pen;
 
@@ -926,7 +906,6 @@ draw F -- D;
 bp := (A -- C) intersection_point (B -- D);
 
 X := bp;
-
 
 bp := (C -- F) intersection_point (B -- E);
 
@@ -966,8 +945,6 @@ draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 endfig with_projection parallel_x_z no_sort; 
 endfor;
 
-
-
 %% ***** (5) Figures 10 to 19
 
 save_A := A;
@@ -990,7 +967,6 @@ dotlabel.top("$C$", save_C) with_text_color red;
 dotlabel.urt("$D$",  save_D) with_text_color red;
 dotlabel.bot("$E$", save_E) with_text_color red;
 
-
 A := get_point c with_increment 0;
 B := get_point c with_increment 1;
 C := get_point c with_increment 2;
@@ -1002,7 +978,6 @@ label.ulft("$C'$", C shifted (0, 0, .5));
 label.top("$D'$",  D shifted (0, 0, .5));
 label.urt("$E'$",  E shifted (.5, 0, .5));
 label.bot("$A'$",  A shifted (0, 0, -.5));
-
 
 if (i) == 0:
    F := A;
@@ -1028,7 +1003,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -1048,7 +1022,6 @@ dotlabel.ulft("$X$", X) with_dot_color blue;
 dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
-
 
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
@@ -1077,14 +1050,11 @@ C := get_point c with_increment 2;
 D := get_point c with_increment 3;
 E := get_point c with_increment 4;
 
-
 label.llft("$C'$", C shifted (0, 0, -.5));
 label.ulft("$D'$", D shifted (0, 0, .5));
 label.top("$E'$",  E shifted (0, 0, .5));
 label.urt("$A'$",  A shifted (.5, 0, .5));
 label.bot("$B'$",  B shifted (0, 0, -.5));
-
-
 
 if (i) == 0:
    F := A;
@@ -1110,7 +1080,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -1130,7 +1099,6 @@ dotlabel.ulft("$X$", X) with_dot_color blue;
 dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
-
 
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
@@ -1158,7 +1126,6 @@ B := get_point c with_increment 1;
 C := get_point c with_increment 2;
 D := get_point c with_increment 3;
 E := get_point c with_increment 4;
-
 
 label.llft("$D'$", D shifted (0, 0, -.5));
 label.ulft("$E'$", E shifted (0, 0, .5));
@@ -1190,7 +1157,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -1211,12 +1177,10 @@ dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
 
-
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
 endfig with_projection parallel_x_z no_sort; 
 endfor;
-
 
 %% ***** (5) Figures 40 to 49
 
@@ -1239,7 +1203,6 @@ B := get_point c with_increment 1;
 C := get_point c with_increment 2;
 D := get_point c with_increment 3;
 E := get_point c with_increment 4;
-
 
 label.llft("$E'$", E shifted (0, 0, -.5));
 label.ulft("$A'$", A shifted (0, 0, .5));
@@ -1271,7 +1234,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -1292,7 +1254,6 @@ dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
 
-
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
 endfig with_projection parallel_x_z no_sort; 
@@ -1301,8 +1262,6 @@ endfor;
 %% **** (4) End.
 
 end;
-
-
 
 %% *** (3) Pascal's Theorem and Braikenridge-Maclaurin Construction.
 %% Constructing a conic section from 5 or 6 points.  
@@ -1330,7 +1289,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -1345,7 +1303,6 @@ dot_pen := pencircle scaled (1.5mm, 1.5mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -1436,7 +1393,6 @@ label_pt := (0, 0, .5frame_h -1.5);
 
 verbatim_metapost "verbatimtex \font\largebf=cmbx12 etex;";
 
-
 s :=     "\vtop{\centerline{{\largebf The Braikenridge-Maclaurin Construction 3}}"
       &  "\vskip.5\baselineskip"
       &  "\centerline{Copyright {\copyright} 2007, 2008, 2009, 2010, 2011, 2012, "
@@ -1461,7 +1417,6 @@ endfig with_projection parallel_x_z no_sort;
 %% **** (4) End.
 
 end;
-
 
 %% *** (3) Pascal's Theorem and Braikenridge-Maclaurin Construction.
 %% Constructing a conic section from 5 or 6 points.  
@@ -1491,7 +1446,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -1506,7 +1460,6 @@ dot_pen := pencircle scaled (1mm, 1mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -1580,7 +1533,6 @@ cv += c;
 %message "cv:";
 %show cv;
 
-
 % b := are_on_conic_section pv;
 % message "are_on_conic_section pv after culling:";
 % show b; 
@@ -1589,10 +1541,8 @@ p0 := get_point (0, c) with_cycle_value 0;
 
 p0 := get_lattice_point (0, c) with_cycle_value 1;
 
-
 message "p0:"; 
 show p0;
-
 
 label.llft(0, pv[0]) with_text_color blue;
 label.llft(1, pv[1]) with_text_color blue;
@@ -1601,7 +1551,6 @@ label.llft(3, pv[3]) with_text_color blue;
 label.llft(4, pv[4]) with_text_color blue;
 label.llft(5, pv[5]) with_text_color blue;
 
-
 draw frame;
 
 endfig with_projection parallel_x_z no_sort; 
@@ -1609,10 +1558,6 @@ endfig with_projection parallel_x_z no_sort;
 %% **** (4) End.
 
 end;
-
-
-
-
 
 %% *** (3) Pascal's Theorem and Braikenridge-Maclaurin Construction.
 %% Constructing a conic section from 5 or 6 points.  
@@ -1643,7 +1588,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -1658,7 +1602,6 @@ dot_pen := pencircle scaled (1mm, 1mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -1695,7 +1638,6 @@ pv += D;
 pv += E;  
 pv += F;
 pv += F;
-
 
 beginfig(1);
 
@@ -1745,10 +1687,6 @@ endfig with_projection parallel_x_z no_sort;
 
 end;
 
-
-
-
-
 increment_value := 10;
 
 %e1 := get_ellipse pv (increment_value);
@@ -1762,7 +1700,6 @@ dotlabel.lft("$D$",  D) with_dot_color red;
 dotlabel.llft("$E$", E) with_dot_color red;
 dotlabel.lrt("$F$",  F) with_dot_color red;
 
-
 %% **** (4) 
 
 draw frame;
@@ -1772,8 +1709,6 @@ endfig with_projection parallel_x_z no_sort;
 %% **** (4) End.
 
 end;
-
-
 
 %% *** (3) Braikenridge-Maclaurin Construction.
 %% Constructing a conic section from 5 points.  
@@ -1813,7 +1748,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -1826,7 +1760,6 @@ dot_pen := pencircle scaled (1mm, 1mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -1859,7 +1792,6 @@ pv += B;
 pv += C;
 pv += D;
 pv += E;
-
 
 beginfig(1);
 draw h0 with_pen path_pen;
@@ -1900,7 +1832,6 @@ dotlabel.lft("$C$", C) with_dot_color red;
 dotlabel.lft("$D$", D) with_dot_color red;
 dotlabel.lft("$E$", E) with_dot_color red;
 
-
 %% **** (4) 
 
 draw frame;
@@ -1938,7 +1869,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -1951,7 +1881,6 @@ dot_pen := pencircle scaled (1mm, 1mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -1980,7 +1909,6 @@ pv += B;
 pv += C;
 pv += D;
 pv += E;
-
 
 beginfig(1);
 draw prb0 with_pen path_pen;
@@ -2055,7 +1983,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -2067,7 +1994,6 @@ point F;              %% determined below.
 
 point p[];
 point_vector pv;
-
 
 point X;
 point Y;
@@ -2097,12 +2023,10 @@ shift prb (-5, 0);
 message "size prb";
 show size prb;
 
-
 %% **** (4) 
 
 def mv {numeric sstart, numeric ccount, boolean bbool,
     point aa, point bb, point cc, point dd, point ee} +=
-
 
 j := 0;
 
@@ -2158,7 +2082,6 @@ F := bp;
 dotlabel.top("$F$", F);
 
 draw C -- F -- D with_color blue;
-
 
 %% **** (4) 
 
@@ -2258,7 +2181,6 @@ B := get_point (24) prb;
 
 mv0 {31, 10, true, A, B, C, D, E};
 
-
 %% **** (4) 
 
 j := 0;
@@ -2317,14 +2239,12 @@ dotlabel.top("$F$", F);
 
 draw C -- F -- D with_color blue;
 
-
 %% **** (4) 
 
 draw frame;
 
 endfig with_projection parallel_x_z;
 endfor;
-
 
 end;
 
@@ -2355,7 +2275,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -2366,7 +2285,6 @@ point A, B, C, D, E;  %% The given points.
 point F;              %% determined below.
 
 point p[];
-
 
 point X;
 point Y;
@@ -2421,7 +2339,6 @@ increment_value := 10;
 
 e1 := get_ellipse pv (increment_value);
 
-
 % draw A -- C with_pen path_pen dashed evenly;
 % draw B -- D with_pen path_pen dashed evenly;
 % draw A -- E with_pen path_pen dashed evenly;
@@ -2471,7 +2388,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -2483,7 +2399,6 @@ point F;              %% determined below.
 
 point p[];
 point_vector pv;
-
 
 point X;
 point Y;
@@ -2605,7 +2520,6 @@ p2 := mediate(X, Z, 1.5);
 
 draw p1 -- p2 with_color green with_pen path_pen;
 
-
 %% ****** (6)
 
 bp := (cc -- Y) intersection_point (dd -- Z);
@@ -2655,7 +2569,6 @@ def mv {numeric Sstart,
   % else:
   % message "Not incrementing `Sstart'.";
   fi;
-
 
 %   message "`Sstart' before second set:";
 %   show Sstart;
@@ -2732,9 +2645,7 @@ mv1 {0, 30, true, A, B, C, D, E};
 
 end;
 
-
 %% *** (3) 
-
 
 %% *** (3) Working on decomposition.
 %%         LDF 2007.06.19.
@@ -2876,7 +2787,6 @@ for i = 1 upto 31:
 
    bpv := rpoly intersection_points ppath;
 
-
    if xpart p0 >= xpart p1:
       fill pv0 with_color red;
       fill pv1 with_color green;
@@ -2946,7 +2856,6 @@ drawarrow origin -- (axis_x_rt, 0) on_picture axis_picture;
 drawarrow origin -- (0, -axis_y_bot) on_picture axis_picture;
 drawarrow origin -- (0, axis_y_top) on_picture axis_picture;
 
-
 drawarrow origin -- (0, 0, -axis_z_front) on_picture axis_picture;
 drawarrow origin -- (0, 0, axis_z_back) on_picture axis_picture;
 
@@ -3001,10 +2910,6 @@ output axis_picture with_focus f;
 endfig with_focus f;
 
 end; 
-
-
-
-
 
 %% *** (3) Filldrawing a cuboid.
 %%         LDF 2007.03.16.
@@ -3073,7 +2978,6 @@ verbatim_metapost "end";
 
 end;
 
-
 %% *** (3) Filldrawing a cuboid.
 %%         LDF 2007.03.14.
 
@@ -3113,15 +3017,12 @@ endfig no_sort;
 
 end;
 
-
-
 %% *** (3) Find a circle given an arc.
 %%         LDF 2007.03.01.
 
 %% verbatim_metapost "verbatimtex \magnification=\magstep3 etex";
 
 %% **** (4) 
-
 
 focus f;
 set f with_position (-3, 15, -30) 
@@ -3137,7 +3038,6 @@ pen_width := .75mm;
 
 w := 12cm;
 h := 16cm;
-
 
 frame_w := w - .5pen_width;
 frame_h := h - .5pen_width;
@@ -3256,7 +3156,6 @@ show alpha;
 ang := (p0 - M) angle (p1 - M);
 show ang;
 
-
 draw frame;
 endfig with_projection parallel_x_y;
 end;
@@ -3269,7 +3168,6 @@ end;
 %% verbatim_metapost "verbatimtex \magnification=\magstep3 etex";
 
 %% **** (4) 
-
 
 focus f;
 set f with_position (-3, 15, -30) 
@@ -3285,7 +3183,6 @@ pen_width := .75mm;
 
 w := 60cm;
 h := 80cm;
-
 
 frame_w := w - .5pen_width;
 frame_h := h - .5pen_width;
@@ -3397,14 +3294,12 @@ draw C -- T0;
 label.llft("$r$", mediate(C, T0));
 label.lrt("$r$", mediate(C, T1));
 
-
 drawdot T1 withpen pencircle scaled (1mm, 1mm);
 label.rt("$T_1$", T1 shifted (.25, 0));
 draw C -- T1;
 
 label.lft("$a$", mediate(T0, P));
 label.rt("$a$", mediate(T1, P));
-
 
 draw frame;
 endfig with_projection parallel_x_y with_factor .25;
@@ -3441,9 +3336,7 @@ endfig with_projection parallel_x_y with_factor .25;
 
 end;
 
-
 %% ***** (5) 
-
 
 % beginfig(2); 
 % output save_picture with_projection parallel_x_z;
@@ -3518,7 +3411,6 @@ endfig with_projection parallel_x_y no_sort;
 
 end;
 
-
 %% *** (3) Cones.
 %%         The shadow of a double-napped cone.
 %%         LDF 2006.11.09.
@@ -3569,27 +3461,21 @@ path s[];
 
 path proj[];
 
-
 bool_point_vector bpv;
 
 point apex[];
 
 apex0 := get_apex c;
 
-
 q0 := apex0;
 q0 += p0 * 10;
 
-
 s0 := apex0 -- q0;
-
 
 bpv := s0 intersection_points r;
 
 q2 := bpv0;
 q3 := bpv1;
-
-
 
 if not is_invalid q2:
   apex1 := q2;
@@ -3599,7 +3485,6 @@ else:
        apex1 := q3;
 fi;
 fi;
-
 
 path cap;
 path base;
@@ -3642,9 +3527,6 @@ proj0 += cycle;
 
 draw proj0;
 
-
-
-
 draw c;
 %draw r;
 
@@ -3660,7 +3542,6 @@ output save_picture with_projection parallel_x_z;
 endfig; 
 
 end;
-
 
 %% *** (3) Cones.
 %%         It's now possible to use single and double-napped 
@@ -3698,7 +3579,6 @@ drawarrow origin -- (axis_x_rt, 0) on_picture axis_picture;
 
 drawarrow origin -- (0, -axis_y_bot) on_picture axis_picture;
 drawarrow origin -- (0, axis_y_top) on_picture axis_picture;
-
 
 drawarrow origin -- (0, 0, -axis_z_front) on_picture axis_picture;
 drawarrow origin -- (0, 0, axis_z_back) on_picture axis_picture;
@@ -3759,7 +3639,6 @@ q += get_path 15 c;
 
 draw q with_color_vector cv;
 
-
 if false: 
 q += get_base c;
 q += get_cap c;
@@ -3790,7 +3669,6 @@ fi;
 %message "q0:";
 %show q0;
 
-
 save_picture := current_picture;
 
 %output axis_picture with_focus f;
@@ -3802,13 +3680,11 @@ endfig;;
 
 end; 
 
-
 %% *** (3) Cylinders.
 %%         It is now possible to set, transform, and draw right circular
 %%         and elliptical cylinders.  I'm still working on the 
 %%         functions and rules for this type.
 %%         LDF 2006.11.08.
-
 
 verbatim_metapost "verbatimtex \magnification=\magstep3 etex";
 
@@ -3837,7 +3713,6 @@ drawarrow origin -- (axis_x_rt, 0) on_picture axis_picture;
 
 drawarrow origin -- (0, -axis_y_bot) on_picture axis_picture;
 drawarrow origin -- (0, axis_y_top) on_picture axis_picture;
-
 
 drawarrow origin -- (0, 0, -axis_z_front) on_picture axis_picture;
 drawarrow origin -- (0, 0, axis_z_back) on_picture axis_picture;
@@ -3894,7 +3769,6 @@ endfig with_focus f;
 
 end; 
 
-
 %% *** (3) Bug fix:  This works now.  The solution was a kludge, however.
 %%         See the definition of `Scan_Parse::vector_type_decl' in 
 %%         `scanprse.web' for more information.
@@ -3911,7 +3785,6 @@ point_vector pv;
 drawdot origin;
 endfig; 
 end;
-
 
 %% *** (3) Alignment with an axis.  Started working on this.
 %%         LDF 2006.10.01.
@@ -3969,14 +3842,12 @@ n0 := get_normal e0;
 n1 := mediate(c, c + n0, 5);
 dotlabel.top("$n_1$", n1);
 
-
 %% ***** (5) 
 
 point q[];
 bool_point_vector bpv;
 string s;
 path A;
-
 
 for i = 0 upto 31:
     bpv := (n1 -- get_point (i) e0) intersection_points r;
@@ -3992,7 +3863,6 @@ draw A with_color blue;
 message "A:";
 show A;
 
-
 for i = 0 step 2 until 30:
    drawarrow n1 -- q[i] dashed with_dots with_pen pencircle scaled (.5mm, .5mm);
 endfor;
@@ -4002,9 +3872,7 @@ q100 := bpv0;
 
 label.rt("$A$", q100);
 
-
 %% ***** (5) 
-
 
 %% Draw axes.
 
@@ -4013,7 +3881,6 @@ drawdblarrow (0, -5) -- (0, 5);
 drawdblarrow (0, 0, -5) -- (0, 0, 5);
 
 endfig with_focus f no_sort;
-
 
 %% **** (4) Projection onto a tilted plane.
 
@@ -4031,11 +3898,9 @@ draw e0 with_color red;
 
 dotlabel.top("$n_1$", n1);
 
-
 %% ***** (5) 
 
 path B;
-
 
 for i = 0 upto 31:
     bpv := (n1 -- get_point (i) e0) intersection_points r;
@@ -4063,7 +3928,6 @@ label.rt("$B$", q101);
 
 %% ***** (5) 
 
-
 %% Draw axes.
 
 drawdblarrow (-5, 0) -- (5, 0);
@@ -4072,9 +3936,7 @@ drawdblarrow (0, 0, -5) -- (0, 0, 5);
 
 endfig with_focus f no_sort;
 
-
 end;
-
 
 %% *** (3) Ellipses.  Projecting ellipses onto a plane using a vector.
 %%         LDF 2006.10.01.
@@ -4116,7 +3978,6 @@ path w;
 
 bool_point_vector bpv;
 
-
 for i = 0 upto 31:
 p[i] := get_point (i) e0;
 q[i] := p[i] + v0;
@@ -4156,9 +4017,7 @@ drawdblarrow (-5, 0) -- (5, 0);
 drawdblarrow (0, -5) -- (0, 5);
 drawdblarrow (0, 0, -5) -- (0, 0, 5);
 
-
 endfig with_focus f;
-
 
 %% **** (4) 
 
@@ -4170,7 +4029,6 @@ label.("$e_0$", get_center e0);
 draw e0 with_color red;
 
 rotate r (15, 15);
-
 
 plane a;
 
@@ -4189,7 +4047,6 @@ bpv := (p[i] -- q[i]) intersection_points r;
 u[i] := bpv0;
 b += u[i];
 endfor;
-
 
 b += ..;
 b += cycle;
@@ -4233,23 +4090,18 @@ n1 := n0 + u100;
 drawarrow u100 -- n1;
 label.lft("$n$", n1);
 
-
 %% Draw axes.
 
 drawdblarrow (-5, 0) -- (5, 0);
 drawdblarrow (0, -5) -- (0, 5);
 drawdblarrow (0, 0, -5) -- (0, 0, 5);
 
-
 endfig with_focus f;
 
 end;
 
-
-
 %% *** (3) Ellipses.
 %%         LDF 2006.09.28.
-
 
 focus f;
 set f with_position (3, 10, -20) 
@@ -4280,7 +4132,6 @@ draw e1 with_color red;
 message "e1:";
 show e1;
 
-
 set e2 with_point_count 32;
 scale e2 (7, 0, 3);
 rotate e2 (70, 0, 70);
@@ -4296,7 +4147,6 @@ drawdblarrow (0, 0, -5) -- (0, 0, 5);
 
 endfig with_focus f;
 end;
-
 
 %% *** (3) Wave form 3.  LDF 2006.03.04.
 %%         Working on this.
@@ -4355,7 +4205,6 @@ path first_path[];
 path x_axis_path;
 x_axis_path := (0,0) -- (frame_w, 0);
 
-
 for j = 0 upto 32:
    q := null_path;
    beginfig(j); 
@@ -4413,7 +4262,6 @@ for j = 65 upto 96:
    output frame_picture with_projection parallel_x_y;
    endfig;
 endfor;
-
 
 j := 95;
 for i = 97 upto 127:
@@ -4521,10 +4369,8 @@ point p;
 
 path null_path;
 
-
 k := 36;
 sign := 1;
-
 
 t := 143;
 
@@ -4549,7 +4395,6 @@ for j = 0 upto 71:
 
    q += ..;
 
-
    beginfig(j + 1);
    draw q with_pen pencircle scaled (1mm, 1mm);
    output current_picture with_projection parallel_x_y;
@@ -4569,8 +4414,6 @@ for j = 0 upto 71:
    t -= 1;
    
 endfor;
-
-
 
 end; 
 
@@ -4642,12 +4485,10 @@ point pt[];
 point v[];
 ellipse e[];
 
-
 pt0 := get_point 0 q0;
 
 message "point 0 of q0:";
 show pt0;
-
 
 pt1 := get_point 0 q1;
 
@@ -4658,7 +4499,6 @@ show pt1;
 
 i := 1;
 curr_extent := 12;
-
 
 forever:
    
@@ -4772,7 +4612,6 @@ show b;
 message "is_invalid b:";
 show is_invalid b;
 
-
 qv += 1;
 c := qv;
 
@@ -4788,7 +4627,6 @@ c := qv;
 
 message "c after pop:";
 show c;
-
 
 message "is_invalid c:";
 show is_invalid c;
@@ -4865,7 +4703,6 @@ set f with_position (0, 0, -20) with_direction (0, 0, 10)
 
 picture save_picture;
 
-
 pickup pencircle scaled .1;
 
 beginfig(1);
@@ -4901,14 +4738,12 @@ endfig;
 
 end;
 
-
 %% *** (3) Disentangling the `points' on a `point_vector' to produce a convex `polygon'.
 %%         LDF 2006.01.20.
 
 focus f;
 set f with_position (0, 0, -20) with_direction (0, 0, 10) 
        with_distance 20;
-
 
 beginfig(1);
 
@@ -4955,7 +4790,6 @@ draw rpv;
 
 endfig with_projection parallel_x_z; 
 end;
-
 
 %% *** (3) The Great_Rhombicosidododecahedron.
 %%         LDF 2005.12.20.
@@ -5059,10 +4893,7 @@ label.top("$s_3$", center8) with_text_color green;  % poly  8
 label.top("$h_3$", center9) with_text_color green;  % poly  9
 label.top("$s_4$", center10) with_text_color green; % poly 10
 
-
 fi;
-
-
 
 %% ***** (5) Column 3.
 
@@ -5127,7 +4958,6 @@ label.top("$s_{18}$", center39) with_text_color green; % poly 39
 label.top("$h_{13}$", center40) with_text_color green; % poly 40
 label.top("$s_{19}$", center41) with_text_color green; % poly 41
 
-
 fi;
 
 %% ***** (5) Column 8.
@@ -5171,7 +5001,6 @@ label.top("$s_{29}$", center61) with_text_color green; % poly 61
 fi;
 
 %% **** (4) 
-
 
 point p[];
 
@@ -5254,7 +5083,6 @@ set E with_center origin with_axis_x Ew with_axis_y Eh with_axis_z Ed
        with_divisions_x 8 with_divisions_y 8 with_divisions_z 2
        with_point_count 64;
 
-
 rectangle r[];
 
 %r0 := unit_rectangle scaled (rw, 0, rd) rotated (15, 15, 20) shifted (0, 0, 4);  %% These work.
@@ -5304,7 +5132,6 @@ message "is_elliptical e:";  %% It fails the test, but all of its `points' are
                              %% on the `ellipsoid'.
 show is_elliptical e;
 
-
 point v[];
 point f[];
 
@@ -5334,12 +5161,10 @@ endfig with_focus f no_sort;
 point label_pt;
 label_pt := (0, -10);
 
-
 beginfig(2); 
 output save_picture with_projection parallel_x_z;
 %label("Parallel Projection, X-Z Plane", label_pt shifted 6);
 endfig with_projection parallel_x_y;
-
 
 beginfig(3); 
 output save_picture with_projection parallel_x_y;
@@ -5405,7 +5230,6 @@ for i = 0 upto 5:
    drawdot p[i] with_color green with_pen dot_pen;
 endfor;
 
-
 label.lrt("$i_0$", p0);  
 label.lft("$i_1$",  p1);   
 label.lft("$i_2$", p2);   
@@ -5420,12 +5244,10 @@ endfig with_focus f no_sort;
 point label_pt;
 label_pt := (0, -10);
 
-
 beginfig(2); 
 output save_picture with_projection parallel_x_z with_factor .75;
 %label("Parallel Projection, X-Z Plane", label_pt shifted 6);
 endfig with_projection parallel_x_y;
-
 
 beginfig(3); 
 output save_picture with_projection parallel_x_y with_factor .75;
@@ -5436,7 +5258,6 @@ beginfig(4);
 output save_picture with_projection parallel_z_y with_factor .75;
 %label("Parallel Projection, Z-Y Plane", label_pt);
 endfig with_projection parallel_x_y;
-
 
 end;
 
@@ -5497,7 +5318,6 @@ output save_picture with_projection parallel_x_z;
 %label("Parallel Projection, X-Z Plane", label_pt);
 endfig with_projection parallel_x_y;
 
-
 beginfig(3); 
 output save_picture with_projection parallel_x_y;
 %label("Parallel Projection, X-Y Plane", label_pt);
@@ -5507,7 +5327,6 @@ beginfig(4);
 output save_picture with_projection parallel_z_y;
 %label("Parallel Projection, Z-Y Plane", label_pt);
 endfig with_projection parallel_x_y;
-
 
 end;
 
@@ -5522,7 +5341,6 @@ pickup pencircle scaled (.75mm, .75mm);
 
 focus f;
 set f with_position (-12, 15, -30) with_direction (-12, 15, 100) with_distance 20; 
-
 
 beginfig(1);
 cuboid c;
@@ -5544,7 +5362,6 @@ s :=   "\\setbox0=\\hbox{$p_0$}\\hbox to \\wd0{\\box0 , $l = "
 drawdot p0 with_pen dot_pen with_color blue;
 label.top(s, p0 shifted (0, .25));
 
-
 rectangle r[];
 r0 := get_rectangle 0 c;
 
@@ -5552,7 +5369,6 @@ p1 := mediate(get_point 0 r0, get_point 3 r0, 1/3);
 
 message "p1 location c:";
 show p1 location c;
-
 
 s :=   "\\setbox0=\\hbox{$p_1$}\\hbox to \\wd0{\\box0 , $l = " 
      & decimal (p1 location c) & "$\\hss}"; 
@@ -5603,7 +5419,6 @@ rd := Ed + 15;
 set E with_center origin with_axis_x Ew with_axis_y Eh with_axis_z Ed
        with_divisions_x 8 with_divisions_y 8 with_divisions_z 2
        with_point_count 64;
-
 
 rectangle r[];
 
@@ -5666,12 +5481,10 @@ endfig with_focus f no_sort;
 point label_pt;
 label_pt := (0, -10);
 
-
 beginfig(2); 
 output save_picture with_projection parallel_x_z;
 %label("Parallel Projection, X-Z Plane", label_pt shifted 6);
 endfig with_projection parallel_x_y;
-
 
 beginfig(3); 
 output save_picture with_projection parallel_x_y;
@@ -5733,13 +5546,9 @@ dotlabel.top(0, poly5);
 
 point p[];
 
-
 endfig with_projection parallel_x_z;  
 
 end;
-
-
-
 
 %% *** (3) BUG FIX:  Plain `label' and `dotlabel' now work correctly for `bool_points', 
 %%                   whose `boolean' part is `false'.  That is, the label or dotlabel 
@@ -5748,11 +5557,7 @@ end;
 
 beginfig(1);
 
-
-
 bool_point b[];
-
-
 
 for i = 0 step 1 until 9:
    b[i] := false;
@@ -5774,7 +5579,6 @@ label_if.top("$b_3$", b3);  %% Should print.
 
 label_unless.top("$b_4$", b4);  %% Shouldn't print.
 
-
 dotlabel.top("$b_5$", b5);  %% Should print
 
 dotlabel_if.top("$b_6$", b6);  %% Shouldn't print.
@@ -5784,7 +5588,6 @@ dotlabel_unless.top("$b_7$", b7);  %% Should print.
 dotlabel_if.top("$b_8$", b8);  %% Should print.
 
 dotlabel_unless.top("$b_9$", b9);  %% Shouldn't print.
-
 
 endfig;
 end;  
@@ -5842,12 +5645,10 @@ endfig with_focus f no_sort;
 point label_pt;
 label_pt := (0, -10);
 
-
 beginfig(2); 
 output save_picture with_projection parallel_x_z;
 label("Parallel Projection, X-Z Plane", label_pt shifted 6);
 endfig with_projection parallel_x_y;
-
 
 beginfig(3); 
 output save_picture with_projection parallel_x_y;
@@ -5859,9 +5660,7 @@ output save_picture with_projection parallel_z_y;
 label("Parallel Projection, Z-Y Plane", label_pt);
 endfig with_projection parallel_x_y;
 
-
 end;
-
 
 %% *** (3) The intersection points of a linear `path' and an `ellipsoid'.
 %%         LDF 2005.12.09.
@@ -5935,7 +5734,6 @@ output save_picture with_projection parallel_x_z;
 label("Parallel Projection, X-Z Plane", label_pt);
 endfig with_projection parallel_x_y;
 
-
 beginfig(3); 
 output save_picture with_projection parallel_x_y;
 label("Parallel Projection, X-Y Plane", label_pt);
@@ -5945,7 +5743,6 @@ beginfig(4);
 output save_picture with_projection parallel_z_y;
 label("Parallel Projection, Z-Y Plane", label_pt);
 endfig with_projection parallel_x_y;
-
 
 end;
 
@@ -5967,7 +5764,6 @@ beginfig(1);
 %  set e with_center origin with_axis_x 12 with_axis_y 8 with_axis_z 5
 %        with_divisions_x 8 with_divisions_y 8 with_divisions_z 2
 %        with_point_count 64;
-
 
 %draw e;
 
@@ -5997,7 +5793,6 @@ bpv := c intersection_points q0;
 dotlabel.top("$i_0$", bpv0);
 dotlabel.top("$i_1$", bpv1);
 
-
 q1 := ((-10, 10) -- (10, 10)) shifted (1, 1, 1);
 q2 := ((-10, 4) -- (10, 4));
 q3 := ((-10, 4, -2.5) -- (10, 4, -2.5));
@@ -6020,7 +5815,6 @@ output save_picture with_projection parallel_x_z;
 label("Parallel Projection, X-Z Plane", label_pt);
 endfig with_projection parallel_x_y;
 
-
 beginfig(3); 
 output save_picture with_projection parallel_x_y;
 label("Parallel Projection, X-Y Plane", label_pt);
@@ -6030,7 +5824,6 @@ beginfig(4);
 output save_picture with_projection parallel_z_y;
 label("Parallel Projection, Z-Y Plane", label_pt);
 endfig with_projection parallel_x_y;
-
 
 end;
 
@@ -6097,8 +5890,6 @@ endfig with_focus f no_sort;
 
 end;
 
-
-
 %% *** (3) The surrounding `cuboid' of an `ellipsoid'.
 %%         The problem of finding the inscribed `cuboid' is more 
 %%         difficult, and I don't know how to do it yet.
@@ -6158,10 +5949,7 @@ output save_picture with_projection parallel_z_y;
 %label("{\large Parallel Projection, Z-Y Plane}", label_pt);
 endfig with_projection parallel_x_y no_sort;
 
-
 end;
-
-
 
 %% *** (3) Added parser rules and functions for `ulong_long_vector'
 %%         and `get_prime_vector'.
@@ -6215,9 +6003,6 @@ show L;
 
 endfig;  
 end;
-
-
-
 
 %% *** (3) Added complete sets of rules for `parabola_vector', `hyperbola_vector', 
 %%         `ellipsoid_vector', and `sphere_vector'.
@@ -6290,9 +6075,7 @@ else:
    message "`a' is not a `sphere_vector'.";
 fi
 
-
 %% ***** (5) 
-
 
 %% **** (4) Addition with assignment.
 
@@ -6328,7 +6111,6 @@ show size hpv;
 
 ellipsoid e;
 
-
 set e with_center (0, 0, 0) with_axis_x 15 with_axis_y 8 with_axis_z 10
       with_divisions_x 4 with_divisions_y 4 with_divisions_z 2
       with_point_count 64;
@@ -6354,9 +6136,7 @@ spv += s;
 message "size of `spv' after assignment:";
 show size spv;
 
-
 %% ***** (5) 
-
 
 %% **** (4) Assignment from a `parabola_vector_expression'.
 
@@ -6368,7 +6148,6 @@ pppv := ppv;
 
 message "`size pppv':";
 show size pppv;
-
 
 %% ***** (5) 
 
@@ -6388,9 +6167,7 @@ sspv := spv;
 message "`size sspv':";
 show size sspv;
 
-
 %% ***** (5) 
-
 
 %% **** (4) pop_back.
 
@@ -6446,7 +6223,6 @@ endfor;
 message "size `spv' after the loop:";
 show size spv;
 
-
 %% **** (4) This code works, but produces a lot of terminal output.
 
 %% ***** (5) 
@@ -6465,7 +6241,6 @@ show size spv;
 % message "`last hpv':";
 % show last hpv;
 
-
 %% ***** (5) 
 
 % message "`epv[1]':";
@@ -6473,7 +6248,6 @@ show size spv;
 
 % message "`last epv':";
 % show last epv;
-
 
 %% ***** (5) 
 
@@ -6542,7 +6316,6 @@ beginfig(1);
 
 bool_point_vector bpv;
 
-
 ellipse e[];
 e0 := unit_ellipse scaled (2, 0, 5);
 draw e0;
@@ -6601,7 +6374,6 @@ beginfig(1);
 
 bool_point_vector bpv;
 
-
 ellipse e[];
 e0 := unit_ellipse scaled (2, 0, 5);
 draw e0;
@@ -6623,7 +6395,6 @@ point q;
 dotlabel.top("$q$", q);
 label.top("$q$", q);
 label("$q$", q);
-
 
 bpv := e0 intersection_points e1;
 bpv := c0 intersection_points c1;
@@ -6650,7 +6421,6 @@ end;
 %%
 %%         LDF 2005.12.01.
 
-
 %% *** (3) Tried fixing some bugs involving vector-types, but it didn't work out.
 %%         I ended up having to revert files to the state they were in before.
 %%         However, things seem to be working properly now.  I don't know what
@@ -6660,7 +6430,6 @@ end;
 %%         since I wrote it, so I don't remember all the details.
 %%         
 %%         LDF 2005.11.30.
-
 
 %% *** (3) Intersection points of two `ellipses'.
 %%         Most of the following code is from 2004.11.06, but it 
@@ -6674,7 +6443,6 @@ set f with_position (-5, 15, -30) with_direction (-5, 15, 100) with_distance 20;
 beginfig(1);
 
 bool_point_vector bpv;
-
 
 ellipse e[];
 e0 := unit_ellipse scaled (2, 0, 5);
@@ -6831,7 +6599,6 @@ label.lft("$q_1$", (get_point 1 q1) shifted (-.225, -.75));
 
 save_picture := current_picture;
 
-
 endfig with_focus f no_sort;
 
 end;
@@ -6918,8 +6685,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) The intersection points of a `hyperbola' `h' and a linear `path' `q',
 %%         such that `h' and `q' are non-coplanar.
 %%
@@ -6987,11 +6752,7 @@ label.lft("$i_1$, {\\tt false}", p4 shifted -.25);
 label.rt("$q_0$", (get_point 1 q0) shifted (.225, -.75)); 
 label.lft("$q_1$", (get_point 1 q1) shifted (-.225, -.75)); 
 
-
-
-
 save_picture := current_picture;
-
 
 endfig with_focus f no_sort;
 
@@ -7042,7 +6803,6 @@ p1 := get_point 5 h0;
 L1 := p1 location h1;
 message "L1:";
 show L1;
-
 
 %% **** (4) Between center and one of the foci:
 
@@ -7126,7 +6886,6 @@ s := "\setbox0=\hbox{$p_6$ ($y \\neq 0$),}\vbox{\copy0\hbox to \wd0{\hfil $l = "
    & decimal L[6] & "$\hfil}}";
 label.bot(s, p6 shifted (0, 0, -.25));
 
-
 %% **** (4) 
 
 endfig with_projection parallel_x_z;
@@ -7185,8 +6944,6 @@ fi;
 endfig with_projection parallel_x_z;
 end;
 
-
-
 %% *** (3) The intersection points of a `hyperbola' `h' and a linear `path' `q',
 %%         such that `h' and `q' are coplanar, and the slope of `q' is 0.
 %%
@@ -7213,7 +6970,6 @@ q0 := (-12, 0, 2) -- (12, 0, 2);  % rotated (0, 30, 0) shifted 1;
 
 %q0 *= h *= t;
 
-
 draw h;
 draw q0;
 
@@ -7235,7 +6991,6 @@ if size bpv > 1:
    drawdot bpv1 with_color red with_pen p;
    label.ulft("$i_1$", bpv1);
 fi;
-
 
 endfig with_projection parallel_x_z;
 end;
@@ -7266,10 +7021,8 @@ q0 := (-12, 0) -- (12, 0) rotated (0, 30, 0) shifted 1;
 
 %q0 *= h *= t;
 
-
 draw h;
 draw q0;
-
 
 %dotlabel.top(0, h);
 %dotlabel.urt("$o$", origin);
@@ -7293,7 +7046,6 @@ if size bpv > 1:
    label.ulft("$i_1$", bpv1);
 fi;
 
-
 endfig with_projection parallel_x_z;
 end;
 
@@ -7313,7 +7065,6 @@ pickup pencircle scaled (.75mm, .75mm);
 beginfig(1);
 parabola p;
 set p with_parameter 3 with_extent 12;
-
 
 path q[];
 q0 := (2, 0, -4) -- (2, 0, 4);
@@ -7341,7 +7092,6 @@ fi;
 
 clear bpv;
 
-
 bpv := p intersection_points q1;
 
 if size bpv > 0:
@@ -7357,11 +7107,7 @@ end;
 focus f;
 set f with_position (-5, 10, -20) with_direction (-5, 10, 100) with_distance 15; 
 
-
 pickup pencircle scaled (.75mm, .75mm);
-
-
-
 
 beginfig(1);
 
@@ -7393,7 +7139,6 @@ show pv;
 endfig with_focus f; 
 
 end;
-
 
 %% *** (3) The intersection of a `parabola' and linear `paths' that do 
 %%        not lie in the same plane as the `parabola'.
@@ -7430,15 +7175,12 @@ axis_picture := current_picture;
 clear current_picture;
 endfig; 
 
-
-
 verbatim_metapost "verbatimtex \magnification=\magstep5 \font\large=cmr12 etex";
 
 focus f;
 set f with_position (-5, 10, -20) with_direction (-5, 10, 100) with_distance 15; 
 
 pickup pencircle scaled (.75mm, .75mm);
-
 
 beginfig(1);
 parabola prb[];
@@ -7506,7 +7248,6 @@ focus f;
 set f with_position (-5, 10, -20) with_direction (-5, 10, 100) with_distance 15; 
 
 pickup pencircle scaled (1mm, 1mm);
-
 
 beginfig(1);
 parabola prb[];
@@ -7580,14 +7321,11 @@ fi;
 
 %% **** (4) 
 
-
 endfig with_focus f;  
 
 %verbatim_metapost "end";
 
 end;
-
-
 
 %% *** (3) The location of a `point' with respect to a `parabola'.
 %%         LDF 2005.11.21.
@@ -7807,7 +7545,6 @@ fi;
 endfig with_projection parallel_x_z;
 end;
 
-
 %% *** (3) "Standardizing" a `parabola'.
 %%         The `standardize' operator takes a `parabola' argument
 %%         and returns a `transform'.  This is the `transform' that
@@ -7925,15 +7662,8 @@ draw p;
 endfig with_projection parallel_x_z;
 end;
 
-
-
-
-
-
-
 %% *** (3) `hyperbolae' now work.
 %%         LDF 2005.11.15.
-
 
 verbatim_metapost "ahlength := .25cm;";
 
@@ -8033,7 +7763,6 @@ axis_picture := current_picture;
 clear current_picture;
 endfig; 
 
-
 color_vector cv;
 cv += red;
 cv += green;
@@ -8043,7 +7772,6 @@ cv += yellow;
 cv += magenta;
 
 beginfig(1);
-
 
 parabola p;
 
@@ -8065,7 +7793,6 @@ for j = 0 upto 6:
 endfor;
 
 %dotlabel.top(0, p);
-
 
 for i = 1 upto 23:
    rotate p by 7.5;
@@ -8093,7 +7820,6 @@ endfor;
 
 save_picture := current_picture;
 
-
 %output axis_picture with_focus f;
 output current_picture with_focus f;
 clear current_picture;
@@ -8104,7 +7830,6 @@ if false:
 
    y_value     := -11;
    shift_value := -1;
-
 
    label.rt("{\large Perspective Projection}", (0, y_value));
 
@@ -8216,16 +7941,10 @@ frame_picture := current_picture;
 clear current_picture;
 endfig; 
 
-
-
-
-
-
 %% **** (4) The intersection of an `ellipsoid' and a `plane'.
 %%          The figure formed is an `ellipse'.  Working on this.
 %%          I can now find points on the ellipse and sort them.
 %%          LDF 2005.11.05.
-
 
 %% **** (4) Added a parser rule and functions for finding the intersection
 %%          points of an `ellipse' and a `plane'.
@@ -8235,7 +7954,6 @@ ellipsoid e;
 set e with_center (0, 0, 0) with_axis_x 15 with_axis_y 8 with_axis_z 10
       with_divisions_x 4 with_divisions_y 4 with_divisions_z 2
       with_point_count 64;
-
 
 rotate e (15, 0, 15);
 shift e (5, 5, 5);
@@ -8263,15 +7981,11 @@ cv += magenta;
 cv += orange;
 cv += purple;
 
-
 %% ***** (5) Figure 1.
 
 beginfig(1); 
 
 %%   rotate r (0, 0, 5);
-
-
-
 
 %g := unit_ellipse scaled (4, 0, 3) rotated 90;
 
@@ -8322,7 +8036,6 @@ endfor;
 
    pickup pencircle scaled (1.5mm, 1.5mm);
 
-
    save_picture := current_picture;
    output current_picture with_focus f no_sort;   
 
@@ -8339,7 +8052,6 @@ beginfig(2);
 output save_picture with_projection parallel_x_y;  
 label("{\large X-Y}", (0, -10));
 endfig with_projection parallel_x_y;
-
 
 %% ***** (5) 
 
@@ -8486,10 +8198,8 @@ pickup dot_pen;
 drawdot J with_color red; 
 label.urt("$J$", J shifted (0, 0, .25));
 
-
 endfig with_projection parallel_x_z no_sort;  
 end;
-
 
 %% *** (3) Revised `message_command':  It now takes a `string_expression' argument
 %%         rather than a |STRING| token.
@@ -8501,7 +8211,6 @@ end;
 %%         by `\', `n', `"', or `t'.  `\\' thus makes it possible to get the
 %%         literal string "\n" by typing "\\n".
 %%         LDF 2005.11.03.
-
 
 string s;
 s := "PI with 13 digits of precision---" & decimal 3.141592653589793 with_precision 13 & "---";
@@ -8519,7 +8228,6 @@ message s;
 s := "double backslash--- \\ --- double backslash";
 message s;
 
-
 s := "double backslash n--- \\n --- double backslash n";
 message s;
 
@@ -8531,14 +8239,6 @@ drawdot origin;
 endfig; 
 end;
 
-
-
-
-
-
-
-
-
 %% *** (3) Added parser rules and functions for `ellipsoids'.
 %%         LDF 2005.10.31.
 
@@ -8548,7 +8248,6 @@ focus f;
 
 set f with_position (-6, 7, -20) with_direction (-1, 7, 10) 
       with_distance 20;
-
 
 picture frame_picture;
 picture axis_picture;
@@ -8620,7 +8319,6 @@ output axis_picture with_focus f;
 
 endfig with_focus f;
 
-
 beginfig(2);
 %output frame_picture with_projection parallel_x_y;
 %output axis_picture with_projection parallel_x_y; 
@@ -8666,7 +8364,6 @@ t0 := identity;
 show t0;
 show t1;
 
-
 point p[];
 p0 := (1, 2, 3);
 show p0;
@@ -8675,14 +8372,11 @@ show p1;
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) Intersection of a `sphere' and the plane of a `rectangle'
 %%         or an `ellipse'.
 %%         LDF 2005.10.30.
 
 verbatim_metapost "verbatimtex \magnification=\magstep5 etex";
-
 
 focus f;
 
@@ -8871,8 +8565,6 @@ endfor;
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) Intersection points of two `polygons'.
 
 beginfig(1);
@@ -8897,7 +8589,6 @@ endfor;
 endfig with_projection parallel_x_y; 
 end;
 
-
 %% *** (3) Intersection points of a `triangle' and a linear `path'.
 
 beginfig(1);
@@ -8917,7 +8608,6 @@ set q with_points ((-3, -1), (3, -1), (0, 3));
 
 draw q;
 
-
 bpv := q intersection_points p0;
 
 dotlabel_if.rt("bpv${}_0$", bpv0); 
@@ -8932,8 +8622,6 @@ dotlabel_if.lft("cpv${}_1$", cpv1);
 
 endfig with_projection parallel_x_y; 
 end;
-
-
 
 %% *** (3) Intersection points of a `rectangle' and a linear `path'.
 
@@ -8967,8 +8655,6 @@ dotlabel_if.lft("cpv${}_1$", cpv1);
 
 endfig with_projection parallel_x_y; 
 end;
-
-
 
 %% *** (3) Intersection points of a `reg_polygon' and a linear `path'.
 
@@ -9036,8 +8722,6 @@ dotlabel_if.lft("cpv${}_1$", cpv1);
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) Intersections of a `circle' and a linear `path'.
 
 beginfig(1);
@@ -9054,7 +8738,6 @@ bp := p0 intersection_point p1;
 
 dotlabel_if.top("bp", bp);
 
-
 bool_point_vector bpv;
 
 circle c;
@@ -9069,7 +8752,6 @@ dotlabel_if.lft("bpv${}_1$", bpv1);
 
 bool_point_vector cpv;
 
-
 cpv := p1 intersection_points c;
 
 dotlabel_if.rt("cpv${}_0$", cpv0); 
@@ -9079,8 +8761,6 @@ dotlabel_if.lft("cpv${}_1$", cpv1);
 endfig with_projection parallel_x_y; 
 
 end;
-
-
 
 %% *** (3) Intersections of an `ellipse' and a linear `path'.
 
@@ -9098,7 +8778,6 @@ bp := p0 intersection_point p1;
 
 dotlabel_if.top("bp", bp);
 
-
 bool_point_vector bpv;
 
 ellipse e;
@@ -9112,7 +8791,6 @@ dotlabel_if.rt("bpv${}_0$", bpv0);
 dotlabel_if.lft("bpv${}_1$", bpv1); 
 
 bool_point_vector cpv;
-
 
 cpv := p1 intersection_points e;
 
@@ -9200,8 +8878,6 @@ dotlabel_if.bot("bpv-b 3", bpv_b3);
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) `ellipse' intersections.  
 %%          Working on the rules for intersections.  Some need to be
 %%          replaced because I've gotten rid of the "x-like" expressions 
@@ -9220,7 +8896,6 @@ end;
 %% TO DO:  Add `sphere' assignment.  Check rule for intersection points of linear
 %%         `path' and plane.  Add missing rules for intersections.
 %%         LDF 2005.10.27.
-
 
 beginfig(1); 
 
@@ -9250,9 +8925,6 @@ dotlabel.bot("bpv-b 3", bpv_b3);
 
 endfig with_projection parallel_x_y; 
 end;
-
-
-
 
 %% *** (3) Added parser rules and functions for `is_spherical'
 %%         and `is_on_sphere'.  The latter works, the former
@@ -9291,7 +8963,6 @@ endfig;
 
 end;  
 
-
 %% *** (3) Added `get_center' rules for all missing types.
 %%         LDF 2005.10.25.
 
@@ -9313,7 +8984,6 @@ draw s;
 endfig;
 
 end;
-
 
 %% *** (3) `spheres' can now be constructed, drawn, and transformed.
 %%         I have not yet written a complete set of parser rules for them, though.
@@ -9390,7 +9060,6 @@ set s1 with_center (0, -10, 0)
        with_divisions_horizontal 10
        with_type panel_type;
 
-
 p2 := (0, -14);
 label("Panel-Type Sphere", p2);
 
@@ -9418,7 +9087,6 @@ endfig;
 end;
 
 %% ** (2) 
-
 
 %%  Removed all of the declarations and rules for "x_like" expressions,
 %%  e.g., `path_like_variable', `path_like_primary', `ellipse_like_secondary',
@@ -9464,7 +9132,6 @@ end;
 %%         seem to work properly.  I thought I'd had problems with them before.
 %%         LDF 2005.10.19.
 
-
 pickup pencircle scaled (1mm, 1mm);
 
 beginfig(1);
@@ -9494,8 +9161,6 @@ filldraw c3 with_fill_color green with_draw_color yellow;
 filldraw c4 with_fill_color green with_color yellow;
 endfig; 
 end;
-
-
 
 %% *** (3) Added rules for creating `strings' to represent numbers in
 %%        octal, decimal, and hexadecimal notation.
@@ -9601,8 +9266,6 @@ endfig;
 
 end;
 
-
-
 string s;
 
 s := decimal a;
@@ -9619,7 +9282,6 @@ s := hexadecimal a;
 
 message "s (hexadecimal):";
 show s;
-
 
 message "a == ";
 show a;
@@ -9663,15 +9325,11 @@ dotlabel.top("(0, 0, 0)", origin);
 endfig; 
 end;
 
-
-
-
 %% *** (3) Speech balloon test.  LDF 2005.08.25.
 
 verbatim_metapost "verbatimtex \font\Largebx=cmbx17 scaled \magstep3 etex";
 
 verbatim_metapost "verbatimtex \font\Large=cmr17 scaled \magstep3 etex";
-
 
 %% **** (4) 
 
@@ -9708,7 +9366,6 @@ draw frame with_pen pensquare scaled (pen_width, pen_width, pen_width) with_colo
 frame_picture := current_picture;
 endfig with_projection parallel_x_y;  
 
-
 %% **** (4) Set up box.
 
 picture song_picture;
@@ -9742,7 +9399,6 @@ label.rt(song_string, p0 shifted (-2mm, 0));
 song_picture := current_picture;
 clear current_picture;
 
-
 %output song_picture with_projection parallel_x_y; 
 clip_to balloon;
 
@@ -9751,7 +9407,6 @@ output balloon_picture with_projection parallel_x_y;
 output frame_picture with_projection parallel_x_y; 
 
 endfig;
-
 
 pickup pencircle scaled (.75mm, .75mm, .75mm);
 
@@ -9773,12 +9428,8 @@ verbatim_metapost "end";
 
 end; 
 
-
-
-
 %% *** (3) Added code for clipping 'pictures' to cyclical 'paths'.
 %%         LDF 2005.08.16.
-
 
 path outer_frame_path;
 path inner_frame_path;
@@ -9824,7 +9475,6 @@ output current_picture with_projection parallel_x_y;
 clear current_picture;
 endfig; 
 
-
 beginfig(2);
 draw outer_frame_path;
 ellipse e[];
@@ -9837,10 +9487,6 @@ clear current_picture;
 endfig; 
 
 end; 
-
-
-
-
 
 %% *** (3) Scrolling Text.
 %% Run these commands:
@@ -9859,8 +9505,6 @@ verbatim_metapost "verbatimtex \font\Large=cmr12 scaled \magstep3 etex";
 
 verbatim_metapost 
    "verbatimtex \def\leaderfill{\leaders\hbox to 1em{\hss.\hss}\hfil}etex";
-
-
 
 %% ** (2) 
 
@@ -9886,7 +9530,6 @@ shift frame (-.5frame_w, -.5frame_h);
 
 string clip_string;
 
-
 clip_string := "clip currentpicture to ";
 
 clip_string := clip_string &
@@ -9904,14 +9547,12 @@ draw frame with_pen pensquare scaled (pen_width, pen_width, pen_width);
 frame_picture := current_picture;
 endfig with_projection parallel_x_y;  
 
-
 %% ** (2) Set up box.
 
 hoffset_value := .25cm;
 voffset_value := .25cm;
 
 vskip_value := 2cm;
-
 
 title_w := frame_w - hoffset_value;
 title_h := frame_h - voffset_value;
@@ -10028,8 +9669,6 @@ endfor;
 
 end; 
 
-
-
 %% *** (3) Reflected and rotated text.
 %%         LDF 2005.08.15.
 
@@ -10049,7 +9688,6 @@ end;
 %%          it's possible.
 %%          LDF 2005.08.15.
 
-
 beginfig(1);
 string s;
 s := "label(btex ABC etex  ";
@@ -10062,11 +9700,6 @@ show s;
 verbatim_metapost s;
 endfig with_projection parallel_x_y;  
 end;
-
-
-
-
-
 
 %% *** (3) Run these commands:
 %% make run
@@ -10086,7 +9719,6 @@ verbatim_metapost "verbatimtex \font\largebx=cmbx17 etex";
 verbatim_metapost "verbatimtex \font\bigit=cmti11 etex";
 verbatim_metapost "verbatimtex \font\normal=cmr10 etex";
 verbatim_metapost "verbatimtex \font\small=cmr6 etex";
-
 
 %% *** (3) 
 
@@ -10136,7 +9768,6 @@ endfig with_projection parallel_x_y;
 j += 1;
 endfor;
 
-
 scale_value := 8;
 
 for i := 20 upto 23:
@@ -10149,7 +9780,6 @@ endfor;
 
 %% *** (3) 
 
-
 for i = 24 upto 28:
 beginfig(i);
 draw frame with_pen pensquare scaled (pen_width, pen_width, pen_width);
@@ -10157,15 +9787,11 @@ frame_picture := current_picture;
 endfig with_projection parallel_x_y;  
 endfor;
 
-
-
 %% **** (4)
 
 j := 0;
 for i = 29 upto 43:
 scale_value := 1 + .5j;
-
-
 
 beginfig(i);
 text_scale_value := 1/4scale_value;
@@ -10191,7 +9817,6 @@ message "scale_value:";
 show scale_value;
 message "text_scale_value:";
 show text_scale_value;
-
 
 for i := 44 upto 47:
 beginfig(i);
@@ -10222,7 +9847,6 @@ landscape := false;  %% true
 
 %% **** (4) Set up frame.
 
-
 verbatim_metapost "verbatimtex \font\Large=cmbx12 scaled 6000 etex";
 verbatim_metapost "verbatimtex \font\large=cmr17 etex";
 verbatim_metapost "verbatimtex \font\largebx=cmbx17 etex";
@@ -10230,8 +9854,6 @@ verbatim_metapost "verbatimtex \font\normal=cmr10 etex";
 verbatim_metapost "verbatimtex \font\small=cmr6 etex";
 
 pickup pencircle scaled (.75mm, .75mm, .75mm);
-
-
 
 % \vsize=(/ 27 4.0) 6.75
 % \hsize=(/ 19 4.0) 4.75
@@ -10389,7 +10011,6 @@ rp0 := unit_rectangle scaled 5 rotated 90;
 rp1 := unit_rectangle scaled 5 shifted (0, -1);
 rp2 := unit_rectangle scaled 5 shifted (0, 1);
 
-
 beginfig(1); 
 
 draw rp0 with_draw_color blue;
@@ -10454,7 +10075,6 @@ fill r0 with_color red;
 fill r4 with_color blue;
 fill r2 with_color green;
 
-
 picture cube_picture;
 
 cube_picture := current_picture;
@@ -10490,8 +10110,6 @@ draw frame with_pen pencircle scaled (2mm, 2mm, 2mm);
 
 endfig with_projection parallel_x_y;
 
-
-
 beginfig(2);
 
 output cube_picture with_focus f;  
@@ -10501,7 +10119,6 @@ shift frame (-4.5cm, -3cm);
 draw frame with_pen pencircle scaled (2mm, 2mm, 2mm);
 
 endfig with_projection parallel_x_y;
-
 
 end;
 
@@ -10524,8 +10141,6 @@ beginfig(1);
 drawdot origin;
 endfig; 
 
-
-
 %% *** (3) Added "skeleton" code for 'glyphs'.
 %%         This means that I've defined parser rules and functions
 %%         for declaring objects of this type and performing basic 
@@ -10534,7 +10149,6 @@ endfig;
 %%         since no 'paths' or 'solids' are generated to represent the
 %%         glyphs.
 %%         LDF 2005.06.09.
-
 
 beginfig(1);
 
@@ -10553,10 +10167,6 @@ show gv;
 endfig;
 end; 
 
-
-
-
-
 %% *** (3) Added "skeleton" code for 'spheres'.
 %%         This means that I've defined parser rules and functions
 %%         for declaring objects of this type and performing basic 
@@ -10565,7 +10175,6 @@ end;
 %%         since no surfaces are generated to represent the
 %%         spherical shapes.
 %%         LDF 2005.05.25.
-
 
 beginfig(1);
 drawdot origin;
@@ -10579,9 +10188,6 @@ show s;
 
 endfig;
 end; 
-
-
-
 
 %% *** (3) Added "skeleton" code for 'ellipsoids'.
 %%         This means that I've defined parser rules and functions
@@ -10634,9 +10240,6 @@ show d;
 endfig;
 end; 
 
-
-
-
 %% *** (3) Added options for setting 'helices'.  No path is generated yet, though.
 %%         LDF 2005.05.21.
 
@@ -10662,8 +10265,6 @@ show h;
 
 endfig;
 end; 
-
-
 
 %% *** (3) "Fade" example.
 %%         LDF 2005.05.17.
@@ -10696,7 +10297,6 @@ verbatim_metapost "bye;";
 
 end;
 
-
 %% *** (3) "Fade out" and "Fade in" example.
 %%         LDF 2005.05.13.
 
@@ -10717,8 +10317,6 @@ endfor;
 verbatim_metapost "bye;";
 
 end;
-
-
 
 %% *** (3) Bug fix:  Setting 'colors' now works properly.
 %%
@@ -10767,8 +10365,6 @@ endfor;
 
 end;
 
-
-
 %% *** (3) Rotating Sphere.  Revised.  Added an invisible frame 
 %%         in order to make all of the images the same size.
 %%         This prevents the "jump" in the browsers when running
@@ -10797,7 +10393,6 @@ point p;
 path q[];
 
 p := get_point 0 c0;
-
 
 q[division_value] += p;
 
@@ -10993,33 +10588,23 @@ rotate_around r11 (q24, q20) 60;
 
 %% **** (4) Start rotating by `dihedral_angle'.
 
-
 rotate_around r0 (q7, q8) a;
-
 
 rotate_around r2 (q9, q8) a;
 
-
 rotate_around r3 (q5, q9) a;
-
-
 
 rotate_around r4 (q6, q5) a;
 
 rotate_around r8 (q21, q22) a;
 
-
-
 rotate_around r9 (q22, q23) a;
 
-
 rotate_around r10 (q23, q24) a;
-
 
 rotate_around r11 (q20, q24) a;
 
 %% **** (4) Start rotating top "cup".  
-
 
 for i = 7 upto 11:
    rotate_around r[i] (q21, q20) a;
@@ -11031,7 +10616,6 @@ endfor;
 set f with_position (-3, 8, -10) with_direction (-3, 8, 10) 
    with_distance 15;
 
-
 for i = 6 upto 11:
    rotate_around r[i] (q13, q14) a;
 endfor;
@@ -11042,7 +10626,6 @@ endfor;
 
 set f with_position (0, 7, -10) with_direction (0, 7, 10) 
    with_distance 15;
-
 
 shift frame (-5, 0, 3);
 shift p4 (-5, 0, 3);
@@ -11073,9 +10656,6 @@ undraw frame;
 
 endfig with_projection parallel_x_z;
 
-
-
-
 verbatim_metapost "bye;";
 
 end;
@@ -11086,7 +10666,6 @@ end;
 
 verbatim_metapost "verbatimtex \font\large=cmbx12 scaled 5000 etex";
 verbatim_metapost "verbatimtex \font\normal=cmr17 etex";
-
 
 point p[];
 
@@ -11108,7 +10687,6 @@ color_vector gray_vector;
 %% I don't know what the problem is.
 %%
 %% LDF 2005.05.04.
-
 
 for i = 0 upto 131:
 j := i / 131;
@@ -11139,7 +10717,6 @@ offset := 0;
 % beginfig(132 + offset);
 %    draw q with_pen pencircle scaled (2, 2, 2);
 % endfig with_projection parallel_x_y;
-
 
 %% **** (4) Director's credit.
 
@@ -11172,15 +10749,11 @@ text_shift_value /= 2;
 
 %%offset += 133;
 
-
-
-
 %% ** (2) "The Birth of a Dodecahedron".  The dodecahedron.
 %%
 %%        LDF 2005.05.04.
 
 point p[];
-
 
 reg_polygon r[];
 
@@ -11201,7 +10774,6 @@ p2 := (569.1875pt, 0, 426.59375pt);
 p3 := (0,          0, 426.59375pt);
 
 p4 := mediate(p0, p2);
-
 
 dihedral_angle := 116.565;
 a := 180 - dihedral_angle;
@@ -11244,7 +10816,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) 
 
 beginfig(2 + offset);
@@ -11282,8 +10853,6 @@ draw frame;
 endfig with_projection parallel_x_z;
 
 %% **** (4) 
-
-
 
 beginfig(5 + offset);
 r2 := r1 rotated_around (q8, q9) 60;
@@ -11435,7 +11004,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) 
 
 beginfig(20 + offset);
@@ -11506,7 +11074,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) 
 
 beginfig(26 + offset);
@@ -11537,7 +11104,6 @@ output current_picture with_focus f;
 clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
-
 
 %% **** (4) 
 
@@ -11570,9 +11136,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
-
-
 %% **** (4) 
 
 beginfig(32 + offset);
@@ -11594,7 +11157,6 @@ output current_picture with_focus f;
 clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
-
 
 %% **** (4) 
 
@@ -11629,7 +11191,6 @@ endfig with_projection parallel_x_z;
 
 %% **** (4) 
 
-
 beginfig(36 + offset);
 
 draw r0;
@@ -11647,9 +11208,7 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) 
-
 
 beginfig(37 + offset);
 
@@ -11670,9 +11229,7 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) 
-
 
 beginfig(38 + offset);
 
@@ -11705,7 +11262,6 @@ for i = 9 upto 11:
    draw r[i];
 endfor;
 
-
 rotate_around r8 (q21, q22) a;
 
 draw r8;
@@ -11718,7 +11274,6 @@ endfig with_projection parallel_x_z;
 %% **** (4) 
 
 beginfig(40 + offset);
-
 
 for i = 0 upto 8:
    draw r[i];
@@ -11749,13 +11304,11 @@ endfig with_projection parallel_x_z;
 
 beginfig(41 + offset);
 
-
 for i = 0 upto 9:
    draw r[i];
 endfor;
 
 draw r11;
-
 
 % for i = 0 upto 11:
 %    label(i, get_center r[i]) with_text_color blue;
@@ -11777,7 +11330,6 @@ endfig with_projection parallel_x_z;
 %% **** (4) 
 
 beginfig(42 + offset);
-
 
 for i = 0 upto 10:
    draw r[i];
@@ -11804,7 +11356,6 @@ endfig with_projection parallel_x_z;
 
 beginfig(43 + offset);
 
-
 for i = 0 upto 6:
    draw r[i];
 endfor;
@@ -11827,17 +11378,13 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) Cut.  Change focus.
 %%          LDF 2005.05.07.
-
 
 set f with_position (-3, 8, -10) with_direction (-3, 8, 10) 
    with_distance 15;
 
-
 beginfig(44 + offset);
-
 
 for i = 0 upto 5:
    draw r[i];
@@ -11865,7 +11412,6 @@ endfig with_projection parallel_x_z;
 
 beginfig(45 + offset);
 
-
 for i = 0 upto 4:
    draw r[i];
 endfor;
@@ -11882,8 +11428,6 @@ endfor;
 % for i = 10 upto 14:
 %    dotlabel.top(i, q[i]);
 % endfor;
-
-
 
 output current_picture with_focus f no_sort;
 clear current_picture;
@@ -11915,7 +11459,6 @@ endfor;
 %    dotlabel.top(i, q[i]);
 % endfor;
 
-
 output current_picture with_focus f no_sort;
 clear current_picture;
 shift frame (-5, 0, 3);
@@ -11925,8 +11468,6 @@ endfig with_projection parallel_x_z;
 %% **** (4) 
 
 beginfig(47 + offset);
-
-
 
 draw r0;
 
@@ -11949,8 +11490,6 @@ endfig with_projection parallel_x_z;
 %% **** (4) 
 
 beginfig(48 + offset);
-
-
 
 draw r0;
 
@@ -11975,8 +11514,6 @@ endfig with_projection parallel_x_z;
 
 beginfig(49 + offset);
 
-
-
 draw r0;
 
 filldraw r1 with_fill_color violet with_draw_color black;
@@ -12000,8 +11537,6 @@ endfig with_projection parallel_x_z;
 %% **** (4) 
 
 beginfig(50 + offset);
-
-
 
 draw r0;
 
@@ -12028,10 +11563,6 @@ endfig with_projection parallel_x_z;
 
 beginfig(51 + offset);
 
-
-
-
-
 filldraw r1 with_fill_color violet with_draw_color black;
 filldraw r3 with_fill_color blue with_draw_color black;
 filldraw r2 with_fill_color red with_draw_color black;
@@ -12051,7 +11582,6 @@ output current_picture with_focus f no_sort;
 clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
-
 
 %% **** (4) 
 
@@ -12077,7 +11607,6 @@ output current_picture with_focus f no_sort;
 clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
-
 
 %% **** (4) 
 
@@ -12105,7 +11634,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
 %% **** (4) 
 
 beginfig(54 + offset);
@@ -12132,7 +11660,6 @@ output current_picture with_focus f no_sort;
 clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
-
 
 %% **** (4) 
 
@@ -12188,8 +11715,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
-
 %% **** (4) 
 
 beginfig(57 + offset);
@@ -12216,8 +11741,6 @@ clear current_picture;
 draw frame;
 endfig with_projection parallel_x_z;
 
-
-
 beginfig(58 + offset); 
 
 p5 := mediate(get_point 0 frame, get_point 2 frame);
@@ -12241,7 +11764,6 @@ end;
     %verbatim_metapost "verbatimtex \\magnification=\\magstep3 etex";
 
     point p[];
-
 
    %% p0 := (182.05pt, 210pt);
    %% p1 := (412.05pt ,210pt);
@@ -12340,16 +11862,11 @@ end;
 
     end;
 
-
-
-
-
 %% ** (2) Generate images for the MPEG animation `disk_1.mpg' in 
 %%        `~/3DLDF/ANIMATNS/TTEST_0/'.
 %%        LDF 2005.05.03.
 
     verbatim_metapost "verbatimtex \font\large=cmbx12 scaled \magstep3 etex";
-
 
     %verbatim_metapost "verbatimtex \\magnification=\\magstep3 etex";
 
@@ -12361,7 +11878,6 @@ end;
     p3 := (182.05pt, 382.05002pt);
 
     p4 := mediate(p0, p2);
-
 
     path q;
 
@@ -12389,7 +11905,6 @@ end;
        endfig with_projection parallel_x_y;    
     endfor;
 
-
     k := 4;
 
     for i = 1 upto 48:
@@ -12409,9 +11924,6 @@ end;
     endfor;
 
     end;
-
-
-
 
 %% *** (3) 
 
@@ -12449,9 +11961,7 @@ rotate c0 by 90;
 point p;
 path q[];
 
-
 p := get_point 0 c0;
-
 
 q[division_value] += p;
 
@@ -12460,8 +11970,6 @@ pen thick_pen;
 thick_pen := pencircle scaled (2.5, 2.5, 2.5);
 
 pickup thick_pen;
-
-
 
 step_value := 360 / division_value;
 j := 1;
@@ -12501,7 +12009,6 @@ clear current_picture;
 
 message "Starting figures.";
 
-
 for i = 1 upto 35:
    rotate save_picture (0, 10);
    beginfig(i);
@@ -12511,17 +12018,10 @@ for i = 1 upto 35:
    show i;
 endfor;
 
-
 end;
-
-
-
-
-
 
 %% *** (3) Trying to get surface hiding to work for three objects.
 %%         LDF 2005.04.20.
-
 
 pickup pencircle scaled 3;
 
@@ -12537,7 +12037,6 @@ rp0 := unit_rectangle scaled 5 rotated 90;
 
 rp1 := unit_rectangle scaled 5 shifted (0, -1);
 rp2 := unit_rectangle scaled 5 shifted (0, 1);
-
 
 beginfig(1); 
 
@@ -12578,10 +12077,6 @@ endfig with_projection parallel_z_y;
 
 end;
 
-
-
-
-
 %% *** (3) Added the option `with_z' to the rules for projecting
 %%         `paths' and `polygons'.
 %%         LDF 2005.04.19.
@@ -12606,7 +12101,6 @@ C := A projected f with_z;
 
 message "point C:";
 show C;
-
 
 path D;
 path E;
@@ -12636,7 +12130,6 @@ show H;
 
 endfig; 
 end;
-
 
 %% *** (3) Working on surface hiding.
 %%         LDF 2005.04.18.
@@ -12685,15 +12178,12 @@ output save_picture with_projection parallel_x_y;
 label.bot("Parallel X-Y", origin shifted (0, -.5));
 endfig with_projection parallel_x_y;;
 
-
 beginfig(4); 
 output save_picture with_projection parallel_x_z;
 label.bot("Parallel X-Y", origin shifted (0, 0, -.5));
 endfig with_projection parallel_x_z;;
 
 end;
-
-
 
 %% *** (3) Working on projecting objects.
 %%         Added functions and parser rules for getting 
@@ -12734,7 +12224,6 @@ A := unit_pentagon rotated (30, 30, 30) shifted (1, 2, 13);
 
 polygon B;
 
-
 B := projected A with_focus f;
 
 rectangle C;
@@ -12752,7 +12241,6 @@ message "t:";
 show t;
 %pause;
 
-
 transform u;
 
 u := inverse t;
@@ -12760,7 +12248,6 @@ u := inverse t;
 message "u:";
 show u;
 %pause;
-
 
 shift p (0, 0, 6);
 
@@ -12781,7 +12268,6 @@ draw D;
 output current_picture with_focus f;  
       
 clear current_picture;
-
 
 pv := p / q;
 
@@ -12810,10 +12296,7 @@ draw D;
 output save_picture with_projection parallel_x_y;
 endfig; 
 
-
-
 end;
-
 
 %% *** (3) Self-decomposition of `polygons'.
 %%         LDF 2005.04.13.
@@ -12841,17 +12324,14 @@ draw qv;
 shift t (0, -5);
 shift r (0, -7);
 
-
 pv := t decompose 2;
 qv := r decompose 2;
 
 draw pv;
 draw qv;
 
-
 shift t (0, -5);
 shift r (0, -7);
-
 
 pv := t decompose 3;
 qv := r decompose 3;
@@ -12859,13 +12339,10 @@ qv := r decompose 3;
 draw pv;
 draw qv;
 
-
 endfig with_projection parallel_x_y; 
-
 
 %% *** (3) Self-decomposition of `rectangles'.
 %%         LDF 2005.04.13.
-
 
 beginfig(2);
 
@@ -12901,7 +12378,6 @@ pv := r decompose 1 with_rectangles;
 draw pv;
 
 %% **** (4) ***********
-
 
 shift r (-7, -4.5);
 
@@ -12951,8 +12427,6 @@ draw pv;
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% ** (2) Self-decomposition of a `polygon'.
 %%        After much difficulty, I've managed to get a single level of 
 %%        decomposition to work.
@@ -12980,7 +12454,6 @@ pv := r decompose 1;
 
 fill pv with_fill_color_vector cv;
 
-
 transform t;
 t := identity shifted (0, -5);
 
@@ -12999,10 +12472,6 @@ fill pv with_fill_color_vector cv;
 endfig with_projection parallel_x_y; 
 end;
 
-
-
-
-
 %% *** (3) Working on `colors'.  I want to be able to use both 
 %% "RGB" (red-green-blue) and "CMY" (cyan-magenta-yellow) `colors'.
 %% This will need more work.  Currently, all `colors' are RGB.
@@ -13017,7 +12486,6 @@ circle c[];
 c0 := unit_circle scaled 2 rotated 90 shifted (0, 5);
 c2 := c0 shifted 3;
 c1 := c0 shifted 6;
-
 
 def m {color A, color B, string S, string T, string U} :=
 transform t;
@@ -13040,7 +12508,6 @@ label(T, get_center c1);
 label(U, get_center c2); 
 enddef;
 
-
 string s[];
 s0 := "q0";
 s1 := "q1";
@@ -13050,12 +12517,10 @@ color q[];
 set q0 (.5, .0, .5);
 set q1 (.3, .0, .3);
 
-
 m {q0, q1, s0, s1, s2};
 
 endfig with_projection parallel_x_y; 
 end; 
-
 
 %% *** (3) Working on surface hiding.
 %%         LDF 2005.04.08.
@@ -13069,7 +12534,6 @@ focus f;
 set f with_position (-5, 5, -10) with_direction (-5, 5, 10) 
    with_distance 10;
 
-
 color_vector cv;
 cv += blue;
 cv += orange;
@@ -13081,11 +12545,9 @@ polygon_vector pv;
 
 picture save_picture;
 
-
 p := unit_pentagon scaled 5 rotated (0, 20) shifted (0, 0, -5);
 
 q := unit_hexagon scaled 5 rotated (90, 20) shifted (0, 1, 5);
-
 
 for i = 1 upto 10:
 
@@ -13190,9 +12652,6 @@ fi;
 
 end;
 
-
-
-
 %% *** (3) Now suppressing output from drawing 
 %%         commands for non-polygonal `paths' when the type of 
 %%         the current `Pen' is `Pen::NULL_PEN'.
@@ -13203,7 +12662,6 @@ beginfig(1);
 focus f;
 set f with_position (-5, 10, -10) with_direction (-5, 10, 10) 
    with_distance 10;
-
 
 pickup pencircle scaled 3;
 
@@ -13225,7 +12683,6 @@ end;
 %%         commands when the type of 
 %%         the current `Pen' is `Pen::NULL_PEN'.
 %%         LDF 2005.04.04.
-
 
 beginfig(1); 
 
@@ -13249,7 +12706,6 @@ pv += pensquare scaled 2;
 pv += null_pen;
 pv += pensquare scaled 2;
 
-
 color_vector cv;
 
 cv += blue;
@@ -13264,10 +12720,8 @@ endfig with_focus f;
 
 end;
 
-
 %% *** (3) Working on implementing surface hiding 
 %%         LDF 2005.04.04.
-
 
 beginfig(1); 
 
@@ -13290,8 +12744,6 @@ filldraw q with_draw_color blue with_fill_color yellow;;
 endfig with_focus f with_surface_hiding;
 
 end;
-
-
 
 %% *** (3) Working on implementing surface hiding 
 %%         in `Picture::output()' in `points.web'.
@@ -13386,15 +12838,6 @@ show p;
 endfig;
 end;
 
-
-
-
-
-
-
-
-
-
 %% *** (3) Multiple `pens' and/or `dash_patterns' can now be used for
 %%         drawing objects of `polygon-like' types.
 %%         LDF 2005.03.18.
@@ -13427,7 +12870,6 @@ draw p with_draw_color_vector cv with_dash_pattern_vector dpv
  with_pen_vector pv
 ;
 
-
 circle c;
 
 c := unit_circle scaled 7 rotated 90;
@@ -13436,16 +12878,8 @@ draw c with_draw_color_vector cv with_dash_pattern_vector dpv
  with_pen_vector pv
 ;
 
-
-
 endfig with_projection parallel_x_y; 
 end;
-
-
-
-
-
-
 
 %% *** (3) Removed `Color* Path::fill_color'.  Now using
 %%         `Pointer_Vector<Color>* fill_color_vector->v[0]'
@@ -13470,7 +12904,6 @@ cv += red;
 
 filldraw c with_draw_color yellow with_pen pencircle scaled 3 with_fill_color_vector cv;
 
-
 endfig with_projection parallel_x_y; 
 end;
 
@@ -13492,8 +12925,6 @@ drawdot origin with_pen q;
 point p;
 p := (0, 1);
 
-
-
 drawdot p with_color blue with_pen q;
 
 shift p (0, 1);
@@ -13502,14 +12933,12 @@ drawdot p with_color blue with_pen q;
 endfig with_projection parallel_x_y; 
 end;
 
-
 %% *** (3) Drawing and filling `solid-like' 
 %%         objects now works again.  I had to account for 
 %%         changes I've made to `class Shape' and `class Path'.
 %%         They still don't work exactly as I'd like them to,
 %%         but this was the case before, too.
 %%         LDF 2005.03.17. 
-
 
 %% PLEASE NOTE!
 %% I've replaced the individual polyhedral types with the single type 
@@ -13550,8 +12979,6 @@ end;
 %%         in `scanprsf.web'.  It seems to work now.
 %%         LDF 2005.03.16.
 
-
-
 beginfig(1); 
 
 polygon_vector pv;
@@ -13561,7 +12988,6 @@ pv += unit_pentagon scaled 3;
 pv += unit_hexagon scaled 3 rotated 90;
 
 pv += unit_heptagon scaled 3 rotated 90 shifted 5;
-
 
 color_vector cv;
 
@@ -13578,13 +13004,11 @@ color_vector dv;
 dv += blue_violet;
 dv += orange;
 
-
 pickup pencircle scaled (2, 2, 2);
 
 focus f;
 set f with_position (-5, 5, -10) with_direction (-5, 5, 10) 
    with_distance 10;
-
 
 %draw pv0;
 
@@ -13594,7 +13018,6 @@ set f with_position (-5, 5, -10) with_direction (-5, 5, 10)
 
 %draw pv0 with_draw_color_vector cv;
 
-
 %fill pv0;
 
 %fill pv0 with_fill_color green;
@@ -13602,7 +13025,6 @@ set f with_position (-5, 5, -10) with_direction (-5, 5, 10)
 %fill pv0 with_color blue;
 
 %fill pv0 with_fill_color_vector cv;
-
 
 %filldraw pv0;
 
@@ -13634,7 +13056,6 @@ set f with_position (-5, 5, -10) with_direction (-5, 5, 10)
 
 %filldraw pv0 with_draw_color_vector cv with_fill_color black;
 
-
 %filldraw pv0 with_fill_color yellow with_color black
 %   with_draw_color_vector cv with_fill_color_vector dv;
 
@@ -13655,15 +13076,9 @@ set f with_position (-5, 5, -10) with_direction (-5, 5, 10)
 
 filldraw pv0 with_draw_color black with_fill_color yellow;
 
-
-
 endfig with_focus f; 
 
 end;
-
-
-
-
 
 %% *** (3) Removed the parser rules for appending `colors' to `path-like' variables.
 %% 	   Changed the `Path' drawing and filling functions (in `paths.web')
@@ -13705,7 +13120,6 @@ set f with_position (-5, 5, -10) with_direction (-5, 5, 10)
 
 beginfig(1);
 
-
 draw p with_draw_color_vector cv;
 
 draw q with_color green;
@@ -13716,11 +13130,9 @@ endfig with_focus f with_surface_hiding;
 
 end;
 
-
 %% *** (3) Drawing and filling (and undrawing and unfilling) 
 %%         `path_like_vectors'.
 %%         LDF 2005.03.10.
-
 
 rectangle r;
 r := unit_rectangle scaled 4;
@@ -13797,7 +13209,6 @@ endfig with_projection parallel_x_z;
 
 end; 
 
-
 %% **** (4) Unfilling a `path_like_vector'.
 %%          LDF 2005.03.10.
 
@@ -13835,13 +13246,10 @@ endfig with_projection parallel_x_y;
 
 end; 
 
-
-
 %% **** (4) Filldrawing a `path_like_vector'.
 %%          LDF 2005.03.10.
 
 beginfig(1); 
-
 
 draw t;
 dotlabel.bot(0, t);
@@ -13889,7 +13297,6 @@ message "size pv:";
 show size pv;
 pause;
 
-
 draw t;
 dotlabel.bot(0, t);
 
@@ -13924,9 +13331,7 @@ if size pv > 6:
    fill pv6 with_color brown;
 fi;
 
-
 endfig with_projection parallel_x_y; 
-
 
 %% **** (4) 
 
@@ -13979,7 +13384,6 @@ dotlabel.top(0, r);
 
 endfig with_projection parallel_x_y; 
 
-
 %% **** (4) 
 
 beginfig(4); 
@@ -13997,7 +13401,6 @@ dotlabel.bot(0, t);
 
 draw r;
 dotlabel.top(0, r); 
-
 
 if size pv > 0:
    fill pv0 with_color red;
@@ -14035,8 +13438,6 @@ beginfig(5);
 
 shift t (0, 1);
 
-
-
 pv := r / t; 
              
 message "size pv:";
@@ -14048,7 +13449,6 @@ dotlabel.bot(0, t);
 
 draw r;
 dotlabel.top(0, r); 
-
 
 if size pv > 0:
    fill pv0 with_color red;
@@ -14136,7 +13536,6 @@ fill pv3 with_color yellow;
 
 endfig with_projection parallel_x_z;
 
-
 beginfig(3); 
 
 focus f;
@@ -14156,7 +13555,6 @@ fill pv2 with_color blue;
 fill pv3 with_color yellow;
 fill pv0 with_color red;
 
-
 dotlabel.top(0, r);
 message "r:";
 show r; 
@@ -14164,8 +13562,6 @@ show r;
 endfig with_focus f max_z_sort;
 
 end;
-
-
 
 %% *** (3) Working on decomposing polygonal objects.
 %%         Decomposing a `polygon-like' object using two `points'.
@@ -14200,9 +13596,6 @@ fill pv1 with_color green;
 endfig with_projection parallel_x_y;
 end;
 
-
-
-
 %% *** (3) Working on decomposing polygonal objects.
 %%         Decomposing a `polygon-like' object using two `points'.
 %%         LDF 2005.02.22.
@@ -14232,7 +13625,6 @@ fill pv[1] with_color green;
 endfig with_projection parallel_x_y;
 end;
 
-
 %% *** (3) Decomposing a `polygon-like' using two `points'.
 %%         LDF 2005.02.21.
 
@@ -14258,7 +13650,6 @@ fill qv1 with_color green;
 endfig with_projection parallel_x_y;
 
 end;
-
 
 %% *** (3) Working on decomposing polygonal objects.
 %% 	   Added the parser rule
@@ -14328,7 +13719,6 @@ beginfig(1);
 
 polygon p;
 
-
 p += cycle;
 
 p += origin;
@@ -14355,7 +13745,6 @@ draw p;
 endfig;
 end;
 
-
 %% *** (3) BUG FIX:  This works now.
 
 beginfig(1);
@@ -14371,7 +13760,6 @@ show p4;
 
 endfig;
 end;
-
 
 %% *** (3) `is_convex_polygonal'.  
 %%         LDF 2005.02.11.
@@ -14421,10 +13809,6 @@ endfig with_projection parallel_x_y;
 
 end;
 
-
-
-
-
 %% *** (3) Working on decomposing polygonal objects.
 %% 	   It now works to divide a `rectangle' by a linear `path',
 %%         using the division operator `/'.  The result is a `path_vector'
@@ -14446,7 +13830,6 @@ dotlabel.bot(1, get_point 1 r);
 dotlabel.urt(2, get_point 2 r);
 dotlabel.top(3, get_point 3 r);
 
-
 dotlabel.lrt(0, get_point 2 r) with_text_color blue;
 dotlabel.llft(1, get_point 3 r) with_text_color blue;
 dotlabel.ulft(2, get_point 0 r) with_text_color blue;
@@ -14467,7 +13850,6 @@ endfig with_projection parallel_x_y;
 
 end;
 
-
 %% *** (3) Started working on `origami_figures'.  They can't be 
 %%         used for anything yet.
 %%         LDF 2005.02.04.
@@ -14480,7 +13862,6 @@ show o;
 point p;
 show is_origami_figure o;
 show is_origami_figure p;
-
 
 endfig;
 end;
@@ -14516,8 +13897,6 @@ endfig with_projection parallel_x_y;
 
 end;
 
-
-
 %% *** (3) Bug fix:  `clear current_picture' no longer causes a 
 %%         segmentation fault when using labels.
 %%         LDF 2005.02.01.
@@ -14541,10 +13920,6 @@ endfig;
 
 end;
 
-
-
-
-
 %% *** (3) `label_if', `label_unless', `dotlabel_if', and 
 %%         `dotlabel_unless' for `bool_points' with a 
 %%         `string_expression' or a 
@@ -14562,7 +13937,6 @@ bp0 := (true, origin);
 dotlabel_if.top(0, bp0) with_text_color blue with_dot_color red;
 label_if.bot(1, bp0) with_text_color green;
 
-
 bp1 := (false, (0, 2));
 
 dotlabel_unless.top(0, bp1) with_text_color purple with_dot_color yellow;
@@ -14571,10 +13945,6 @@ label_unless.bot(1, bp1) with_text_color orange;
 endfig;
 
 end;
-
-
-
-
 
 %% *** (3) `label' and `dotlabel' for `bool_points' with a 
 %%         `string' argument for the text and 
@@ -14594,7 +13964,6 @@ label.bot("bp", bp) with_text_color green;
 endfig;
 
 end;
-
 
 %% *** (3) `label' and `dotlabel' for `paths' with 
 %%         a `numerical_expression' argument for the text and 
@@ -14616,8 +13985,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) `label' and `dotlabel' for `points' with 
 %%         a `numerical_expression' argument for the text and 
 %%         optional `with_text_color' and `with_dot_color' 
@@ -14626,15 +13993,12 @@ end;
 
 beginfig(1); 
 
-
 label.lft(-1.2, origin) with_text_color blue;
 dotlabel.rt(1, origin) with_text_color red with_dot_color green;
 
 endfig;
 
 end;
-
-
 
 %% *** (3) It's now possible to generate a `path' from a `nurb'.  
 %%         Now generating a NURB.
@@ -14668,7 +14032,6 @@ a += (5, .75);
 
 n += (4.5, .25);  %% 6
 a += (4.5, .25);
-
 
 draw a;
 
@@ -14730,7 +14093,6 @@ a += (5, .75);
 n += (4.5, .25);  %% 6
 a += (4.5, .25);
 
-
 draw a;
 
 dotlabel.top(0, a);
@@ -14766,10 +14128,6 @@ draw q with_color red;
 endfig; 
 end;
 
-
-
-
-
 %% *** (3) Appending `knots' and `weights' to `nurbs'.  
 %%         LDF 2005.01.27.
 
@@ -14791,8 +14149,6 @@ show n;
 
 endfig; 
 end;
-
-
 
 %% *** (3) `let'.  LDF 2005.01.26.
 
@@ -14817,7 +14173,6 @@ show a;
 a := (0, 1, 2);
 message "`a' after assignment:";
 show a;
-
 
 endfig; 
 end;
@@ -14845,7 +14200,6 @@ show is_quadrilateral r0;
 message "is_quadrilateral r1:";
 show is_quadrilateral r1;
 
-
 r2 += origin;
 r2 += (1, 0);
 r2 += (0, 0, 1);
@@ -14854,11 +14208,8 @@ r2 += (1, 1, 1);
 message "is_quadrilateral r2:";
 show is_quadrilateral r2;
 
-
 endfig with_projection parallel_x_z; 
 end;
-
-
 
 %% *** (3) `triangle_vectors'.
 %%         LDF 2005.01.25.
@@ -14868,7 +14219,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 triangle_vector tpv;  
-
 
 %% **** (4) Type predicate.
 
@@ -14915,9 +14265,6 @@ show btpv;
 message "`size tpv':";
 show size tpv;
 
-
-
-
 %% **** (4) pop_back.
 
 for i = 1 upto size tpv / 2:
@@ -14948,7 +14295,6 @@ show tpv;
 endfig;
 end;
 
-
 %% *** (3) Started working on surface hiding.  
 %%         Added |unsigned short shape_type| to |class Shape|.
 %%         It will be necessary to store information about
@@ -14963,7 +14309,6 @@ show p;
 endfig; 
 end;
 
-
 %% *** (3) `is_triangular <path_like_expression>'.
 %%         LDF 2005.01.24.
 
@@ -14977,7 +14322,6 @@ p += origin;
 message "is_triangular p after appending origin:";
 show is_triangular p;
 
-
 p += (1, 0);
 p += (0, 1);
 
@@ -14989,7 +14333,6 @@ show is_triangular p;
 
 endfig with_projection parallel_x_y; 
 end;
-
 
 %% *** (3) Setting `triangles' using three points, 
 %%         `is_triangle', and `is_triangular'.
@@ -15017,7 +14360,6 @@ show is_triangle t0;
 message "is_triangular t0:";
 show is_triangular t0;
 
-
 set t1 with_points (origin, (1, 0), (2, 0));
 
 message "t1:";
@@ -15041,7 +14383,6 @@ label.bot("$c$", mediate(A, B));
 
 endfig with_projection parallel_x_y; 
 end;
-
 
 %% *** (3) `forsuffixes' now works. 
 %%         LDF 2005.01.20.
@@ -15069,12 +14410,6 @@ message "After the loop.";
 endfig;
 end;
 
-
-
-
-
-
-
 %% *** (3) `focus_vectors'.
 %%         LDF 2005.01.18.
 
@@ -15098,7 +14433,6 @@ else:
    message "`a' is not a `focus_vector'.";
 fi;
 
-
 %% **** (4) Addition with assignment.
 
 fv += with_position (0, 10, -10) with_direction (0, 10, 10) 
@@ -15109,7 +14443,6 @@ fv += with_position (0, 20, -20) with_direction (0, 20, 20)
 
 fv += with_position (0, 30, -30) with_direction (0, 30, 30) 
       with_distance 20;
-
 
 message "fv after plus-assigns:";
 show fv;
@@ -15128,7 +14461,6 @@ show bfv;
 message "`size fv':";
 show size fv;
 
-
 %% **** (4) Accessing an array element.
 
 message "`fv[1]':";
@@ -15141,14 +14473,11 @@ show last fv;
 
 %% **** (4) pop_back.
 
-
 pop_back fv;
 pop_back fv;
-
 
 message "`fv' after popping twice:";
 show fv;
-
 
 clear fv;
 message "`fv' after clearing:";
@@ -15160,10 +14489,6 @@ show fv;
 
 endfig;
 end;
-
-
-
-
 
 %% *** (3) `picture_vectors'.  LDF 2005.01.17. 
 
@@ -15232,7 +14557,6 @@ beginfig(1);
 
 cuboid_vector epv;  
 
-
 %% **** (4) Type predicate.
 
 if is_cuboid_vector epv:                    
@@ -15247,7 +14571,6 @@ else:
    message "`a' is not a `cuboid_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    epv += unit_cuboid;
@@ -15260,8 +14583,6 @@ fi
    message "`epv' before the loop:";
    show epv;
 
-
-
 %% **** (4) Assignment from a `cuboid_vector_expression'.
 
 cuboid_vector bepv;
@@ -15271,13 +14592,8 @@ bepv := epv;
 message "`bepv':";
 show bepv;
 
-
-
 message "`size epv':";
 show size epv;
-
-
-
 
 %% **** (4) pop_back.
 
@@ -15291,7 +14607,6 @@ endfor;
 
 message "`epv' after the loop:";
 show epv;
-
 
 message "`epv[1]':";
 show epv1;
@@ -15310,13 +14625,6 @@ show epv;
 endfig;
 end;
 
-
-
-
-
-
-
-
 %% *** (3) `reg_polygon_vectors'.
 %%         LDF 2005.01.14.
 
@@ -15325,7 +14633,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 reg_polygon_vector epv;  
-
 
 %% **** (4) Type predicate.
 
@@ -15341,7 +14648,6 @@ else:
    message "`a' is not a `reg_polygon_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    epv += unit_triangle;
@@ -15354,8 +14660,6 @@ fi
    message "`epv' before the loop:";
    show epv;
 
-
-
 %% **** (4) Assignment from a `reg_polygon_vector_expression'.
 
 reg_polygon_vector bepv;
@@ -15365,13 +14669,8 @@ bepv := epv;
 message "`bepv':";
 show bepv;
 
-
-
 message "`size epv':";
 show size epv;
-
-
-
 
 %% **** (4) pop_back.
 
@@ -15385,7 +14684,6 @@ endfor;
 
 message "`epv' after the loop:";
 show epv;
-
 
 message "`epv[1]':";
 show epv1;
@@ -15413,7 +14711,6 @@ beginfig(1);
 
 rectangle_vector epv;  
 
-
 %% **** (4) Type predicate.
 
 if is_rectangle_vector epv:                    
@@ -15428,7 +14725,6 @@ else:
    message "`a' is not a `rectangle_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    epv += unit_rectangle;
@@ -15438,11 +14734,8 @@ fi
    epv += unit_rectangle scaled (4, 5, 6) shifted (7, 8, 9);
    epv += unit_rectangle scaled (4, 5, 6) sheared (7, 8, 9);
 
-
    message "`epv' before the loop:";
    show epv;
-
-
 
 %% **** (4) Assignment from a `rectangle_vector_expression'.
 
@@ -15453,13 +14746,8 @@ bepv := epv;
 message "`bepv':";
 show bepv;
 
-
-
 message "`size epv':";
 show size epv;
-
-
-
 
 %% **** (4) pop_back.
 
@@ -15473,7 +14761,6 @@ endfor;
 
 message "`epv' after the loop:";
 show epv;
-
 
 message "`epv[1]':";
 show epv1;
@@ -15492,7 +14779,6 @@ show epv;
 endfig;
 end;
 
-
 %% *** (3) `circle_vectors'.
 %%         LDF 2005.01.14.
 
@@ -15501,7 +14787,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 circle_vector epv;  
-
 
 %% **** (4) Type predicate.
 
@@ -15517,7 +14802,6 @@ else:
    message "`a' is not a `circle_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    epv += unit_circle;
@@ -15527,11 +14811,8 @@ fi
    epv += unit_circle scaled (4, 5, 6) shifted (7, 8, 9);
    epv += unit_circle scaled (4, 5, 6) sheared (7, 8, 9);
 
-
    message "`epv' before the loop:";
    show epv;
-
-
 
 %% **** (4) Assignment from a `circle_vector_expression'.
 
@@ -15542,13 +14823,8 @@ bepv := epv;
 message "`bepv':";
 show bepv;
 
-
-
 message "`size epv':";
 show size epv;
-
-
-
 
 %% **** (4) pop_back.
 
@@ -15562,7 +14838,6 @@ endfor;
 
 message "`epv' after the loop:";
 show epv;
-
 
 message "`epv[1]':";
 show epv1;
@@ -15581,7 +14856,6 @@ show epv;
 endfig;
 end;
 
-
 %% *** (3) `ellipse_vectors'.
 %%         LDF 2005.01.14.
 
@@ -15590,7 +14864,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 ellipse_vector epv;  
-
 
 %% **** (4) Type predicate.
 
@@ -15606,7 +14879,6 @@ else:
    message "`a' is not a `ellipse_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    epv += unit_ellipse;
@@ -15616,11 +14888,8 @@ fi
    epv += unit_ellipse scaled (4, 5, 6) shifted (7, 8, 9);
    epv += unit_ellipse scaled (4, 5, 6) sheared (7, 8, 9);
 
-
    message "`epv' before the loop:";
    show epv;
-
-
 
 %% **** (4) Assignment from a `ellipse_vector_expression'.
 
@@ -15631,13 +14900,8 @@ bepv := epv;
 message "`bepv':";
 show bepv;
 
-
-
 message "`size epv':";
 show size epv;
-
-
-
 
 %% **** (4) pop_back.
 
@@ -15652,10 +14916,8 @@ endfor;
 message "`epv' after the loop:";
 show epv;
 
-
 message "`epv[1]':";
 show epv1;
-
 
 message "`last epv':";
 show last epv;
@@ -15671,7 +14933,6 @@ show epv;
 endfig;
 end;
 
-
 %% *** (3) `path_vectors'.
 %%         LDF 2005.01.14.
 
@@ -15680,7 +14941,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 path_vector tpv;  
-
 
 %% **** (4) Type predicate.
 
@@ -15696,7 +14956,6 @@ else:
    message "`a' is not a `path_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    tpv += origin .. (1, 1, 1);
@@ -15705,7 +14964,6 @@ fi
    tpv += origin .. (1, 1, 1) sheared (1, 2, 3);;
    tpv += origin .. (1, 1, 1) scaled (4, 5, 6) shifted (7, 8, 9);
    tpv += origin .. (1, 1, 1) scaled (4, 5, 6) sheared (7, 8, 9);
-
 
    message "`tpv' before the loop:";
    show tpv;
@@ -15752,10 +15010,6 @@ show tpv;
 endfig;
 end;
 
-
-
-
-
 %% *** (3) `transform_vectors'.
 %%         LDF 2005.01.13.
 
@@ -15764,7 +15018,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 transform_vector tpv;  
-
 
 %% **** (4) Type predicate.
 
@@ -15780,7 +15033,6 @@ else:
    message "`a' is not a `transform_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    tpv += identity;
@@ -15789,7 +15041,6 @@ fi
    tpv += identity sheared (1, 2, 3);;
    tpv += identity scaled (4, 5, 6) shifted (7, 8, 9);
    tpv += identity scaled (4, 5, 6) sheared (7, 8, 9);
-
 
    message "`tpv' before the loop:";
    show tpv;
@@ -15836,8 +15087,6 @@ show tpv;
 endfig;
 end;
 
-
-
 %% *** (3) `dash_pattern_vectors'.
 %%         LDF 2005.01.13.
 
@@ -15846,7 +15095,6 @@ beginfig(1);
 %% **** (4) Declaration.
 
 dash_pattern_vector dpv;  
-
 
 %% **** (4) Type predicate.
 
@@ -15862,7 +15110,6 @@ else:
    message "`a' is not a `dash_pattern_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    dpv += evenly;
@@ -15874,8 +15121,6 @@ fi
 
    message "`dpv' before the loop:";
    show dpv;
-
-
 
 %% **** (4) Assignment from a `dash_pattern_vector_expression'.
 
@@ -15928,7 +15173,6 @@ beginfig(1);
 
 pen_vector sv;  
 
-
 %% **** (4) Type predicate.
 
 if is_pen_vector sv:                    
@@ -15943,7 +15187,6 @@ else:
    message "`a' is not a `pen_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    sv += pencircle;
@@ -15955,7 +15198,6 @@ fi
 
    message "`sv' before the loop:";
    show sv;
-
 
 %% **** (4) Assignment from a `pen_vector_expression'.
 
@@ -15996,7 +15238,6 @@ show sv;
 % message "last q:";  
 % show last q;
 
-
 endfig;
 
 end;
@@ -16025,7 +15266,6 @@ pen thick_pen;
 thick_pen := pencircle scaled (2.5, 2.5, 2.5);
 
 pickup thick_pen;
-
 
 step_value := 360 / division_value;
 j := 1;
@@ -16062,7 +15302,6 @@ picture q;
 q := p := current_picture;
 
 n := 0;
-
 
 for i = 0 step 1 until 4:
    p := q;
@@ -16116,7 +15355,6 @@ fi
    message "`sv' before the loop:";
    show sv;
 
-
 %% **** (4) Assignment from a `string_vector_expression'.
 
 string_vector bsv;
@@ -16155,7 +15393,6 @@ show sv;
 %string_vector q;   %% Causes error, but 3dldf can recover.
 % message "last q:";  
 % show last q;
-
 
 endfig;
 
@@ -16202,9 +15439,6 @@ show mv;
 endfig;;
 end;
 
-
-
-
 %% *** (3) Sphere.  Put on the GNU 3DLDF home page.
 %%         LDF 2005.01.10.
 
@@ -16214,7 +15448,6 @@ circle c[];
 division_value := 64;
 one_quarter_division_value := 1/4division_value;
 three_quarters_division_value := 3/4division_value;
-
 
 set c0 with_point_count division_value;
 scale c0 (8, 0, 8);
@@ -16230,7 +15463,6 @@ pen thick_pen;
 thick_pen := pencircle scaled (2.5, 2.5, 2.5);
 
 pickup thick_pen;
-
 
 step_value := 360 / division_value;
 j := 1;
@@ -16266,7 +15498,6 @@ rotate current_picture (-45, -15);
 endfig;
 end;
 
-
 %% *** (3) `last macro_vector_variable'.
 %%         LDF 2005.01.08.
 
@@ -16296,10 +15527,6 @@ show mv;
 endfig;;
 end;
 
-
-
-
-
 %% *** (3) `last bool_point_vector_expression'.
 %%         LDF 2005.01.08.
 
@@ -16315,7 +15542,6 @@ show last bpv;
 
 endfig;;
 end;
-
 
 %% *** (3) `last point_vector_expression'.
 %%         LDF 2005.01.08.
@@ -16349,8 +15575,6 @@ show last cv;
 endfig;;
 end;
 
-
-
 %% *** (3) `boolean_vectors'.
 %%         LDF 2005.01.07.
 
@@ -16374,7 +15598,6 @@ else:
    message "`a' is not a `boolean_vector'.";
 fi
 
-
 %% **** (4) Addition with assignment.
 
    bv += true;
@@ -16384,11 +15607,8 @@ fi
    bv += true;
    bv += false;
 
-
-
    message "`bv' before the loop:";
    show bv;
-
 
 %% **** (4) Assignment from a `boolean_vector_expression'.
 
@@ -16429,12 +15649,9 @@ show bv;
 % message "last q:";  
 % show last q;
 
-
 endfig;
 
 end;
-
-
 
 %% *** (3) `numeric_vectors'.
 %%         LDF 2005.01.07.
@@ -16458,7 +15675,6 @@ if is_numeric_vector a:
 else:
    message "`a' is not a `numeric_vector'.";
 fi
-
 
 %% **** (4) Addition with assignment.
 
@@ -16507,14 +15723,9 @@ show nv;
 % message "last q:";  
 % show last q;
 
-
 endfig;
 
 end;
-
-
-
-
 
 %% *** (3) Assignment to a `color_vector_variable'
 %%         from a `color_vector_expression' 
@@ -16599,13 +15810,9 @@ endfor;
 message "`pv' after the loop:";
 show pv;
 
-
 endfig;
 
 end;
-
-
-
 
 %% *** (3) Popping `macros' off of a `macro_vector'.
 %%         LDF 2005.01.06.
@@ -16661,8 +15868,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) It's now possible to specify dimensions for `numeric' 
 %%         values!  Internally, 3DLDF converts these values to 
 %%         centimeters, and the values it writes to the output files
@@ -16695,7 +15900,6 @@ show dd;
 message "cc (cicero):";
 show cc;
 
-
 message "72.27pt / in:";
 show 72.27pt / in;
 
@@ -16727,13 +15931,9 @@ p := (1cm, 2in, 3cc);
 message "p:";
 show p;
 
-
-
-
 endfig;
 
 end;
-
 
 %% *** (3) Debugged parser rules involving unary plus and minus.
 %%         I'm sorry to say that they can no longer be used with
@@ -16794,8 +15994,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) Popping `bool_points' off of a `bool_point_vector'.
 
 beginfig(1);
@@ -16829,8 +16027,6 @@ show p;
 endfig;
 
 end;
-
-
 
 %% *** (3) Popping `points' off of a `point_vector'.
 
@@ -16866,8 +16062,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) Popping `colors' off of a `color_vector'.
 
 beginfig(1);
@@ -16901,8 +16095,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) Examples of how to use `macro_vectors'.  LDF 2005.01.03.
 %%         It's now possible to clear them;  see below.
 
@@ -16935,7 +16127,6 @@ message "In `m1':  t:";
 show t;
 enddef;
 
-
 numeric f;
 f := 1.45;
 
@@ -16947,7 +16138,6 @@ picture h;
 m1 (f, g, h) {(1, 2, 3), origin .. (10, 10, 10), 
               identity scaled (1, 2, 3) shifted (4, 5, 6)};
 
-
 message "`m' before clearing:";
 show m;
 
@@ -16958,8 +16148,6 @@ show m;
 
 endfig;
 end;
-
-
 
 %% *** (3) Examples of using macros.  LDF 2005.01.03.
 
@@ -17014,7 +16202,6 @@ j := (0, 1, 2);
 
 g (j) {origin -- (3, 3, 3)};
 
-
 %% A nested macro definition.
 def k :=
 def l :=
@@ -17048,7 +16235,6 @@ m (r, s) {origin -- (3, 3, 3), identity scaled (1, 2, 3)};
 
 endfig;
 end;
-
 
 %% *** (3) Debugged parser rules and functions for macros.
 %%         LDF 2005.01.03.
@@ -17114,19 +16300,14 @@ endfig;
 
 end;
 
-
 %m (B, C);  %% Error:  Argument mismatch.  Can recover.  LDF 2005.01.02.
-
-
 
 %% *** (3) Working on the parser rules for `macros'.  
 %%         It's now possible to use undeclared variables or declared macro 
 %%         variables in macro definitions.  
 %%         LDF 2004.12.30.
 
-
 beginfig(1); 
-
 
 def m :=  %% `m' is an undeclared variable (`variable UNDECLARED'):
           %% LDF 2004.12.30.
@@ -17162,7 +16343,6 @@ endfig;
 
 end;
 
-
 %% *** (3) BUG FIX:  Variables with multiple subscripts separated by `tags' work
 %%                   now.  The rule `suffix: suffix tag' in `pvariabl.w' was 
 %%                   not being included in the CWEB section `@<Define rules@>'.
@@ -17189,12 +16369,9 @@ endfig;
 
 end;
 
-
-
 %% *** (3) A `defun' with a loop.  LDF 2004.12.23.
 
 beginfig(1); 
-
 
 defun a (c) =
 for i = 0 upto c:
@@ -17209,19 +16386,13 @@ b := 3;
 
 a (b);
 
-
 endfig; 
 
 end;
 
-
-
-
-
 %% *** (3) A `defun' with a conditional.  LDF 2004.12.23.
 
 beginfig(1); 
-
 
 defun a (c) =
 bool d; %% `d' is local to the replacement text of `a'.
@@ -17254,10 +16425,6 @@ show d;
 endfig; 
 
 end;
-
-
-
-
 
 %% *** (3) `defuns'.  LDF 2004.12.22.
 
@@ -17301,12 +16468,10 @@ f (b, c, d);
 
 enddef;
 
-
 string A;
 bool B;
 rectangle C;
 point D;
-
 
 a (A, B, C, D);
 
@@ -17322,8 +16487,6 @@ j;
 
 endfig; 
 end;
-
-
 
 %% *** (3) Setting `color' parts.  LDF 2004.12.20.
 
@@ -17345,11 +16508,9 @@ show c;
 endfig; 
 end;
 
-
 %% *** (3) Multiplying `points' by `numerics' with the `numeric' first, 
 %%         with and without the `*' symbol.
 %%         LDF 2004.12.20.
-
 
 beginfig(1);
 point p, q;
@@ -17365,15 +16526,10 @@ q :=  2p;
 message "q:";
 show q;
 
-
 endfig; 
 end;
 
-
-
-
 %% *** (3) Multiplying and dividing `points' by `numerics' with assignment.
-
 
 beginfig(1);
 point p;
@@ -17390,15 +16546,10 @@ p /= 3;
 message "p:";
 show p;
 
-
-
 endfig; 
 end;
 
-
-
 %% *** (3) Multiplying `colors' by `numerics' with the `numeric' first. 
-
 
 beginfig(1);
 color c, d, e, f;
@@ -17412,7 +16563,6 @@ show d;
 endfig; 
 end;
 
-
 %% *** (3) Multiplying and dividing `colors' by `numerics' 
 %%         with assignment.
 %%         LDF 2004.12.18.
@@ -17421,12 +16571,10 @@ beginfig(1);
 color c, d, e, f;
 set c (.125, .05, .075);
 
-
 c *=  2;
 
 message "c:";
 show c;
-
 
 c /= 3;
 
@@ -17459,7 +16607,6 @@ d -= c;
 message "d:";
 show d;
 
-
 e += c;  %% `e' is unknown.  Error can be handled.
 
 message "e:";
@@ -17472,7 +16619,6 @@ show e;
 
 endfig; 
 end;
-
 
 %% *** (3) Adding and subtracting `colors'.
 %%         LDF 2004.12.17.
@@ -17495,8 +16641,6 @@ show f;
 endfig; 
 end;
 
-
-
 %% *** (3) Multiplying `color' variables by `numerics' with
 %%         no multiplication sign.
 %%         LDF 2004.12.17.
@@ -17509,9 +16653,6 @@ message "d:";
 show d; 
 endfig; 
 end;
-
-
-
 
 %% *** (3) Multiplying `color' variables by `numerics' with
 %%         no multiplication sign.
@@ -17547,7 +16688,6 @@ d := c/3;
 message "d:";
 show d; 
 
-
 n := 2;
 
 d := c * n;
@@ -17560,13 +16700,9 @@ d := c/0; %% Causes errors, but `3dldf' can handle them.
 message "d:";
 show d; 
 
-
 endfig; 
 
 end;
-
-
-
 
 %% *** (3) Multiplying and dividing `colors' by `numerics'.
 %%         LDF 2004.12.17.
@@ -17589,7 +16725,6 @@ d := c/3;
 message "d:";
 show d; 
 
-
 n := 2;
 
 d := c * n;
@@ -17601,7 +16736,6 @@ d := c/0; %% Causes errors, but `3dldf' can handle them.
 
 message "d:";
 show d; 
-
 
 endfig; 
 
@@ -17631,10 +16765,6 @@ endfig;
 
 end;
 
-
-
-
-
 %% *** (3) It is now possible to use plain `color' arguments 
 %%         in drawing and filling commands for `solids'.
 %%         LDF 2004.12.16.
@@ -17651,9 +16781,6 @@ filldraw c with_draw_color red with_fill_color blue with_pen p;
 endfig; 
 
 end;
-
-
-
 
 %% *** (3) `rectangle_vector_secondary: rectangle_secondary REFLECTED_OFF 
 %%         path_like_expression WITH_DIRECTION point_expression' 
@@ -17700,7 +16827,6 @@ p2 := get_center q1;
 
 label.top("$q_1$", p2);
 
-
 p3 := (p1 -- p0) intersection_point e;
 
 dotlabel.lft("$i$", p3);
@@ -17721,12 +16847,7 @@ beginfig(2);
 output r with_focus f;
 endfig;
 
-
 end;
-
-
-
-
 
 %% *** (3) `cuboid_vector_secondary: cuboid_secondary REFLECTED_OFF 
 %%         path_like_expression WITH_DIRECTION point_expression' 
@@ -17762,7 +16883,6 @@ rectangle r[];
 r0 := get_rectangle 0 q0;
 draw r0 with_color blue with_pen pencircle scaled (2, 2, 2);
 
-
 scale e (3, 3, 3);
 
 draw e;
@@ -17787,7 +16907,6 @@ draw q1 with_color_vector cv with_pen pencircle scaled (2, 2, 2);
 %p2 := get_center q1;
 
 %label.top("$q_1$", p2);
-
 
 % p3 := (p1 -- p0) intersection_point e;
 
@@ -17873,7 +16992,6 @@ p2 := get_center q1;
 
 label.top("$q_1$", p2);
 
-
 p3 := (p1 -- p0) intersection_point e;
 
 dotlabel.lft("$i$", p3);
@@ -17932,7 +17050,6 @@ p2 := get_center q1;
 
 label.top("$q_1$", p2);
 
-
 p3 := (p1 -- p0) intersection_point e;
 
 dotlabel.lft("$i$", p3);
@@ -17945,13 +17062,6 @@ drawarrow p3 -- p2 dashed evenly;
 
 endfig with_focus f; 
 end;
-
-
-
-
-
-
-
 
 %% *** (3) `circle_vector_secondary: circle_secondary REFLECTED_OFF 
 %%         path_like_expression WITH_DIRECTION point_expression' 
@@ -17998,7 +17108,6 @@ p2 := get_center q1;
 
 label.top("$q_1$", p2);
 
-
 p3 := (p1 -- p0) intersection_point e;
 
 dotlabel.lft("$i$", p3);
@@ -18011,7 +17120,6 @@ drawarrow p3 -- p2 dashed evenly;
 
 endfig with_focus f; 
 end;
-
 
 %% *** (3) `ellipse_vector_secondary: ellipse_secondary REFLECTED_OFF 
 %%         path_like_expression WITH_DIRECTION point_expression' 
@@ -18057,7 +17165,6 @@ draw q1;
 p2 := get_center q1;
 
 label.top("$q_1$", p2);
-
 
 p3 := (p1 -- p0) intersection_point e;
 
@@ -18116,13 +17223,11 @@ set f with_position (0, 3, -10) with_direction (0, 3, 10)
 point p[];
 p0 := (-1, -1, 0);
 
-
 label.ulft("$p_0$", p0);
 
 circle c;
 
 set c with_point_count 32;
-
 
 label("$c$", get_center c);
 
@@ -18158,7 +17263,6 @@ draw p1 -- p3 dashed evenly;
 drawarrow p3 -- p0 dashed with_dots;
 
 drawarrow p3 -- p2 dashed evenly;
-
 
 endfig with_focus f; 
 end;
@@ -18198,7 +17302,6 @@ show size cv;
 
 endfig;
 end;
-
 
 %% *** (3) Added the parser rule
 %%         `numeric_secondary --> numeric_secondary numeric_variable'
@@ -18244,10 +17347,6 @@ show a * 2;
 endfig;
 end;
 
-
-
-
-
 %% *** (3) Reflecting a `point' off of a planar `path'.
 %% `reflected_off' now returns a `point_vector' rather than a 
 %% single `point'.  See below for an explanation of what's returned.
@@ -18257,8 +17356,6 @@ point_vector q;  %% BUG!  It doesn't work to put this after
                  %% the `Pointer_Vector' destructor.
                  %% Will work on fixing this soon.
                  %% LDF 2004.12.09.
-
-
 
 for i = 0 upto 8:
 beginfig(i + 1); 
@@ -18305,12 +17402,10 @@ label.bot("direction", p1);
 
 drawarrow p0 -- p1 dashed with_dots;
 
-
 q := p0 reflected_off c with_direction p1;
 
 message "q:";
 show q;
-
 
 %% q0:  The point representing the reflection. 
 %% q2:  The intersection `point' of the ray from p0 in the direction
@@ -18327,21 +17422,15 @@ dotlabel.top("$q_1$", q1);
 dotlabel.top("$q_2$", q2);
 label.top("$q_3$", q3);
 
-
 drawarrow p0 -- q2 -- q0 dashed evenly;
 
 drawarrow origin -- q3 dashed evenly;
-
 
 %endfig with_projection parallel_x_y;
 endfig with_focus f; 
 endfor;
 
 end;
-
-
-
-
 
 %% *** (3)  LDF 2004.12.09.
 %% BUG.
@@ -18366,7 +17455,6 @@ endfor;
 endfig; 
 end;
 
-
 %% *** (3) Reflecting a `point' off of a planar `path'.
 %% `reflected_off' now returns a `point_vector' rather than a 
 %% single `point'.  See below for an explanation of what's returned.
@@ -18379,8 +17467,6 @@ point_vector q;  %% BUG!  It doesn't work to put this after
 
 for i = 0 upto 8:
 beginfig(i + 1); 
-
-
 
 focus f;
 
@@ -18423,12 +17509,10 @@ label.bot("direction", p1);
 
 drawarrow p0 -- p1 dashed with_dots;
 
-
 q := p0 reflected_off c with_direction p1;
 
 message "q:";
 show q;
-
 
 %% q0:  The point representing the reflection. 
 %% q2:  The intersection `point' of the ray from p0 in the direction
@@ -18445,19 +17529,15 @@ dotlabel.top("$q_1$", q1);
 dotlabel.top("$q_2$", q2);
 label.top("$q_3$", q3);
 
-
 drawarrow p0 -- q2 -- q0 dashed evenly;
 
 drawarrow origin -- q3 dashed evenly;
-
 
 %endfig with_projection parallel_x_y;
 endfig with_focus f; 
 endfor;
 
 end;
-
-
 
 %% *** (3) Assigning to `booleans' from `bool_point_vectors'.
 %% LDF 2004.12.09.
@@ -18524,7 +17604,6 @@ show cv;
 
 color c;
 
-
 c := cv;
 
 message "c:";
@@ -18552,7 +17631,6 @@ show pv;
 
 point p;
 
-
 p := pv;
 
 message "p:";
@@ -18563,8 +17641,6 @@ show pv;
 
 endfig;
 end;
-
-
 
 %% *** (3) Multiplying `numerics' and `points' by `numeric' variables
 %% containing non-integral values works, too.
@@ -18605,7 +17681,6 @@ show r;
 endfig;
 
 end;
-
 
 %% *** (3) Bug fix:  Added the parser rule
 %% `numeric_secondary: numeric_token OVER numeric_variable'.
@@ -18685,7 +17760,6 @@ end;
 
 %beginfig(1);
 
-
 show unit_cuboid;
 
 cuboid c[];
@@ -18698,15 +17772,10 @@ show c1;
 
 %end;
 
-
-
-
-
 %% *** (3) LDF 2004.11.23.
 %% Showing `reg_polygon_expressions'.
 
 %beginfig(1);
-
 
 show unit_pentagon;
 
@@ -18720,16 +17789,10 @@ show r;
 
 %end;
 
-
-
-
-
-
 %% *** (3) LDF 2004.11.23.
 %% Showing `rectangle_expressions'.
 
 %beginfig(1);
-
 
 show unit_rectangle;
 
@@ -18743,12 +17806,10 @@ show r;
 
 %end;
 
-
 %% *** (3) LDF 2004.11.23.
 %% Showing `ellipse_expressions'.
 
 %beginfig(1);
-
 
 show unit_ellipse;
 
@@ -18772,10 +17833,6 @@ c := unit_circle;
 show c;  
 
 %end;
-
-
-
-
 
 %% *** (3) LDF 2004.11.22.
 %% Showing `path_expressions'.
@@ -18866,8 +17923,6 @@ d  := evenly;
 
 show d;  
 
-
-
 %end;
 
 %% *** (3) LDF 2004.11.22.
@@ -18885,7 +17940,6 @@ show p;
 
 %end;
 
-
 %% *** (3) LDF 2004.11.22.
 %% Showing `point_expressions'.
 
@@ -18898,7 +17952,6 @@ show p;
 p  := (3.5, 1, 2);
 
 show p;
-
 
 %end;
 
@@ -18913,7 +17966,6 @@ show n;  %% It's not possible to distinguish unknown numeric variables
          %% from `numeric_expressions' that are equal to 0.  I may change 
          %% this in the future.  LDF 2004.11.21.
 
-
 n := 3.5;
 
 show n;
@@ -18926,7 +17978,6 @@ show c;
 endfig;
 
 end;
-
 
 %% *** (3) LDF 2004.11.22.
 %% Showing `string_expressions'.
@@ -18944,7 +17995,6 @@ show s;
 endfig;
 
 end;
-
 
 %% *** (3) LDF 2004.11.21.
 %% Showing `boolean_expressions'.
@@ -18966,8 +18016,6 @@ show true;
 endfig;
 
 end;
-
-
 
 %% *** (3) LDF 2004.12.06.
 %% Operation assignments on `numerics' and `points'.
@@ -18996,11 +18044,6 @@ show p;
  
 endfig; 
 end;
-
-
-
-
-
 
 %% *** (3) Moved rules for `operation_assignments' to
 %% `popassgn.w' from `passign.w'.
@@ -19054,7 +18097,6 @@ show q;
 %endfig;
 %end;
 
-
 %% *** (3) LDF 2004.12.03.
 
 %beginfig(1);  %% Reflection of an `circle' in the plane of another `circle'.
@@ -19077,7 +18119,6 @@ show q;
 %endfig;
 %end;
 
-
 %% *** (3) LDF 2004.12.03.
 
 %beginfig(1);  %% Reflection of a `rectangle in the plane of a `circle'.
@@ -19089,7 +18130,6 @@ show q;
 %endfig;
 %end;
 
-
 %% *** (3) LDF 2004.12.03.
 
 %beginfig(1);  %% Reflection of a `reg_polygon in the plane of a `circle'.
@@ -19100,8 +18140,6 @@ q := p reflected_in unit_circle;
 show q;
 %endfig;
 %end;
-
-
 
 %% *** (3) LDF 2004.12.03.
 
@@ -19130,12 +18168,6 @@ show q;
 
 endfig;
 end;
-
-
-
-
-
-
 
 %% *** (3) LDF 2004.12.02.
 %% Transforming `pictures'.  They cannot be transformed using 
@@ -19173,10 +18205,6 @@ endfig;
 
 end;
 
-
-
-
-
 %% *** (3) LDF 2004.12.01.
 %% `scantokens string_expression'.
 
@@ -19198,9 +18226,6 @@ scantokens s;
 endfig;
 
 end;
-
-
-
 
 %% *** (3) LDF 2004.12.01.
 %% boolean expressions.
@@ -19251,10 +18276,6 @@ endfig;
 
 end;
 
-
-
-
-
 %% *** (3) LDF 2004.11.30.
 %% path connectors.
 
@@ -19266,17 +18287,12 @@ p := (1, 1, 1)..(2, 2, 2);  %% Bug fix:  This now works.
 
 q := (1, 1, 1) .. (2, 2, 2);   
 
-
 show p;  
 show q;
 
 endfig;
 
 end;
-
-
-
-
 
 %% *** (3) LDF 2004.11.30.
 %% numerical suffixes.
@@ -19289,7 +18305,6 @@ t[.5] := 3;
 
 show t[1/2];  %% Bug fix:  This now works when reading from 
               %% standard input.
-
 
 endfig;
 
@@ -19312,8 +18327,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) LDF 2004.11.26.
 %% Quarters of `circles'.
 
@@ -19329,18 +18342,15 @@ label.top("", 0, c);
 
 path p[];
 
-
 p0 := quarter c with_closed with_angle 45 with_start 15;
 
 %with_angle 30;
-
 
 pen q;
 
 q := pencircle scaled (1.5, 1.5);
 
 drawarrow p0 with_pen q with_color blue;
-
 
 %p1 := quarter c with_closed with_start 3;
 
@@ -19349,7 +18359,6 @@ drawarrow p0 with_pen q with_color blue;
 endfig with_projection parallel_x_z;
 
 end;
-
 
 %% Halves of `circles'.
 
@@ -19365,16 +18374,13 @@ label.top("", 0, c);
 
 path p[];
 
-
 p0 := half c with_closed with_angle 90 with_start 12;
-
 
 pen q;
 
 q := pencircle scaled (1.5, 1.5);
 
 drawarrow p0 with_pen q with_color blue;
-
 
 p1 := half c with_closed with_start 3;
 
@@ -19383,10 +18389,6 @@ p1 := half c with_closed with_start 3;
 endfig with_projection parallel_x_z;
 
 end;
-
-
-
-
 
 %% *** (3) LDF 2004.11.26.
 %% `path' segments.
@@ -19413,14 +18415,9 @@ p1 := segment e with_start 1 with_end 5 with_closed;
 
 draw p1 with_color red with_pen q;
 
-
 endfig with_projection parallel_x_z;
 
 end;
-
-
-
-
 
 %% *** (3) LDF 2004.11.26.
 %% Cyclical `paths' can now be reversed.
@@ -19454,7 +18451,6 @@ end;
 
 beginfig(1);
 
-
 show unit_cuboid;
 
 cuboid c[];
@@ -19467,15 +18463,10 @@ show c1;
 
 end;
 
-
-
-
-
 %% *** (3) LDF 2004.11.23.
 %% Showing `reg_polygon_expressions'.
 
 beginfig(1);
-
 
 show unit_pentagon;
 
@@ -19489,16 +18480,10 @@ show r;
 
 end;
 
-
-
-
-
-
 %% *** (3) LDF 2004.11.23.
 %% Showing `rectangle_expressions'.
 
 beginfig(1);
-
 
 show unit_rectangle;
 
@@ -19512,12 +18497,10 @@ show r;
 
 end;
 
-
 %% *** (3) LDF 2004.11.23.
 %% Showing `ellipse_expressions'.
 
 beginfig(1);
-
 
 show unit_ellipse;
 
@@ -19541,10 +18524,6 @@ c := unit_circle;
 show c;  
 
 end;
-
-
-
-
 
 %% *** (3) LDF 2004.11.22.
 %% Showing `path_expressions'.
@@ -19635,8 +18614,6 @@ d  := evenly;
 
 show d;  
 
-
-
 end;
 
 %% *** (3) LDF 2004.11.22.
@@ -19667,7 +18644,6 @@ s  := "abc";
 
 show s;
 
-
 end;
 
 %% *** (3) LDF 2004.11.22.
@@ -19683,7 +18659,6 @@ p  := (3.5, 1, 2);
 
 show p;
 
-
 end;
 
 %% *** (3) LDF 2004.11.22.
@@ -19697,7 +18672,6 @@ show n;  %% It's not possible to distinguish unknown numeric variables
          %% from `numeric_expressions' that are equal to 0.  I may change 
          %% this in the future.  LDF 2004.11.21.
 
-
 n := 3.5;
 
 show n;
@@ -19709,8 +18683,6 @@ c := 2;
 show c;
 
 end;
-
-
 
 %% *** (3) LDF 2004.11.21.
 %% Showing `boolean_expressions'.
@@ -19752,12 +18724,9 @@ e := out_ellipse r;
 
 draw e;
 
-
 endfig with_projection parallel_x_z; 
 
 end;
-
-
 
 %% *** (3) LDF 2004.11.15.
 %% `in_circle' and `out_circle'.
@@ -19780,11 +18749,9 @@ c := out_circle r;
 
 draw c;
 
-
 endfig with_projection parallel_x_z; 
 
 end;
-
 
 %% *** (3) LDF 2004.11.15.
 %% `is_big_endian' and `is_little_endian'.
@@ -19824,12 +18791,9 @@ drop_color;
 
 fill c shifted (0, 2);
 
-
 endfig;
 
 end;
-
-
 
 %% *** (3) LDF 2004.11.13.
 %% `pickup <color expression>' and `pickup_fill_color <color expression>'.
@@ -19852,13 +18816,9 @@ drop_color;
 
 fill c shifted (0, 2);
 
-
 endfig;
 
 end;
-
-
-
 
 %% *** (3) LDF 2004.11.13.
 %% `pickup <color expression>' and `pickup_draw_color <color expression>'.
@@ -19881,11 +18841,9 @@ drop_color;
 
 draw c shifted (0, 2);
 
-
 endfig;
 
 end;
-
 
 %% *** (3) LDF 2004.11.13.
 %% Implemented the commands
@@ -19913,9 +18871,6 @@ endfig;
 
 end;
 
-
-
-
 %% *** (3) LDF 2004.11.12.
 %% Implemented the commands
 %% `pickup <color expression>', `pickup_draw_color <color expression>', 
@@ -19935,7 +18890,6 @@ show current_draw_color;
 pickup_fill_color green;
 
 show current_fill_color;
-
 
 circle c;
 c := unit_circle scaled (3, 4) rotated 90;
@@ -19996,7 +18950,6 @@ c := unit_cuboid shifted 2;
 
 draw c;
 
-
 pen p;
 
 p := pensquare scaled (3, 5) rotated (0, 0, 30);
@@ -20022,7 +18975,6 @@ end;
 %% Picking up and dropping `pens' and drawing `points' using
 %% `drawdot'.
 
-
 beginfig(1); 
 
 point q;
@@ -20030,7 +18982,6 @@ point q;
 q := origin;
 
 drawdot q;
-
 
 pen p;
 
@@ -20051,10 +19002,8 @@ drawdot q;
 endfig with_projection parallel_x_y; 
 end;
 
-
 %% *** (3) LDF 2004.11.12.
 %% Picking up and dropping `pens' and drawing `paths'.
-
 
 beginfig(1); 
 
@@ -20082,12 +19031,6 @@ draw c;
 
 endfig with_projection parallel_x_y; 
 end;
-
-
-
-
-
-
 
 %% *** (3) LDF 2004.11.11.  
 %% Assignments from `point_vectors' to `bool_point_vectors'
@@ -20142,8 +19085,6 @@ show pv_b;
 endfig with_projection parallel_x_z;
 end;
 
-
-
 %% *** (3) LDF 2004.11.10.  
 %% Added the rule 
 %% `point_vector_assignment: point_vector_variable
@@ -20152,7 +19093,6 @@ end;
 %% `c0 intersection_points c1', where `c0' and `c1' are `circles',
 %% to a `point_vector', although the result of this `expression' is
 %% a `bool_point_vector'.
-
 
 beginfig(1);
 
@@ -20164,21 +19104,17 @@ c1 := c0 shifted 1;
 draw c0;
 draw c1 with_color red;
 
-
 point_vector pv;
-
 
 pv := c0 intersection_points c1;
 
 show pv;
-
 
 dotlabel.top(0, pv0);
 dotlabel.top(1, pv1);
 
 endfig with_projection parallel_x_z;
 end;
-
 
 %% *** (3) LDF 2004.11.10.
 %% Intersection points of a `reg_polygon'  and a `rectangle':
@@ -20218,9 +19154,6 @@ endfor;
 
 endfig with_projection parallel_x_y; 
 end;
-
-
-
 
 %% *** (3) LDF 2004.11.10.
 %% Intersection points of a `reg_polygon'  and a `rectangle'.
@@ -20269,7 +19202,6 @@ c1 := c0 shifted 1;
 draw c0;
 draw c1 with_color red;
 
-
 bool_point_vector bvp;
 
 bvp := c0 intersection_points c1;
@@ -20278,9 +19210,6 @@ show bvp;
 
 endfig with_projection parallel_x_z;
 end;
-
-
-
 
 %% *** (3) LDF 2004.11.09.  
 %% Fixed the `unit_' variables.  These are all of the right size.  
@@ -20311,8 +19240,6 @@ dotlabel.top("$(0, 0, 1)$", (0, 0, 1));
 
 endfig with_projection parallel_x_z;
 end;
-
-
 
 %% *** (3) LDF 2004.11.09.  
 %% Transformations and transformation commands:
@@ -20345,7 +19272,6 @@ r *= t;
 show p;
 show r;
 
-
 draw p;
 draw r;
 
@@ -20356,17 +19282,14 @@ shift c by 1;
 show c;
 draw c;
 
-
 endfig;
 end;
-
 
 %% *** (3) LDF 2004.11.09.  
 %% Intersection points of a linear `path'  and a `rectangle' (in that order).
 
 %% !! This case now works.
 %% LDF 2004.11.09.
-
 
 beginfig(1);
 bool_point_vector bpv;
@@ -20406,7 +19329,6 @@ end;
 %% !! This case now works.
 %% LDF 2004.11.09.
 
-
 beginfig(1);
 bool_point_vector bpv;
 
@@ -20439,14 +19361,11 @@ endfor;
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) LDF 2004.11.09.  
 %% Intersection points of a `reg_polygon' and a linear `path' (in that order).
 
 %% !! This case works.
 %% LDF 2004.11.09.
-
 
 beginfig(1);
 bool_point_vector bpv;
@@ -20477,10 +19396,8 @@ show i;
 dotlabel_if.top(i, bpv[i]);
 endfor;
 
-
 endfig with_projection parallel_x_y; 
 end;
-
 
 %% *** (3) LDF 2004.11.09.  
 %% Intersection points of a linear `path' and a `reg_polygon' (in that order).
@@ -20517,12 +19434,8 @@ show i;
 dotlabel_if.top(i, bpv[i]);
 endfor;
 
-
 endfig with_projection parallel_x_y; 
 end;
-
-
-
 
 %% *** (3) LDF 2004.11.08. `drawarrow' and `drawdlbarrow'.
 
@@ -20540,7 +19453,6 @@ drawdblarrow p1;
 endfig with_projection parallel_x_y;  
 end;
 
-
 %% *** (3) LDF 2004.11.08. `internal_quantities' are now 
 %% normal `numerics', except that their `category' is 
 %% `Id_Map_Entry_Type::INTERNAL' rather than 
@@ -20553,7 +19465,6 @@ show tracingtitles;
 endfig;  
 end;
 
-
 %% *** (3) LDF 2004.11.08.  
 %% Intersection points of a `reg_polygon' and a linear `path' (in that order).
 %% This case works:  `reg_polygon' and `path' are non-coplanar.
@@ -20590,9 +19501,6 @@ dotlabel_if.top(1, bpv1);
 endfig with_focus f;
 end;
 
-
-
-
 %% *** (3) LDF 2004.11.08.  
 %% Intersection points of a `reg_polygon' and a linear `path' (in that order).
 %% This case works:  `reg_polygon' and `path' are non-coplanar.
@@ -20628,7 +19536,6 @@ dotlabel_if.top(1, bpv1);
 
 endfig with_focus f;
 end;
-
 
 %% *** (3) LDF 2004.11.08.  
 %% Intersection points of a `rectangle' and a linear `path' (in that order).
@@ -20666,7 +19573,6 @@ dotlabel_if.top(1, bpv1);
 endfig with_focus f;
 end;
 
-
 %% *** (3) LDF 2004.11.08.  
 %% Intersection points of an `ellipse' and a `circle' (in that order).
 
@@ -20685,7 +19591,6 @@ label("$c$", get_center c);
 label("$e$", get_center e);
 
 draw e with_color red;
-
 
 bpv := e intersection_points c;
 
@@ -20718,7 +19623,6 @@ label("$e$", get_center e);
 
 draw e with_color red;
 
-
 bpv := c intersection_points e;
 
 show bpv;
@@ -20730,8 +19634,6 @@ dotlabel_if.top(3, bpv3);
 
 endfig with_projection parallel_x_z; 
 end;
-
-
 
 %% *** (3) LDF 2004.11.08.  
 %% Intersection points of two `circles'.
@@ -20763,13 +19665,11 @@ dotlabel_if.top(3, bpv3);
 endfig with_projection parallel_x_z; 
 end;
 
-
 %% *** (3) LDF 2004.11.06.  
 %% Intersection of a linear `path' and an `ellipse', parser 
 %% rule 
 %% `bool_point_vector_tertiary: path_tertiary INTERSECTION_POINTS 
 %% ellipse_like_secondary'.
-
 
 beginfig(1);
 bool_point_vector bpv;
@@ -20798,8 +19698,6 @@ dotlabel.top("$p_1$", p1);
 
 endfig with_projection parallel_x_y; 
 end;
-
-
 
 %% *** (3) LDF 2004.11.06.  
 %% Intersection points of two `ellipses'.
@@ -20831,10 +19729,8 @@ dotlabel_if.top(3, bpv3);
 endfig with_projection parallel_x_z; 
 end;
 
-
 %% *** (3) LDF 2004.11.06.  
 %% Conditional labelling of `bool_points' with `numeric_expression' argument.
-
 
 beginfig(1);
 bool_point_vector bpv;
@@ -20872,7 +19768,6 @@ end;
 %% *** (3) LDF 2004.11.06.  
 %% Conditional labelling of `bool_points' with `string_expression' argument.
 
-
 beginfig(1);
 bool_point_vector bpv;
 path q;
@@ -20906,14 +19801,11 @@ dotlabel_unless.bot("$p_1$", bpv1);
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) LDF 2004.11.06.  
 %% Intersection of a linear `path' and an `ellipse', parser 
 %% rule 
 %% `bool_point_vector_tertiary: path_tertiary INTERSECTION_POINTS 
 %% ellipse_like_secondary'.
-
 
 beginfig(1);
 bool_point_vector bpv;
@@ -20937,15 +19829,12 @@ point p[];
 p0 := bpv0;
 p1 := bpv1;
 
-
 dotlabel.top("$p_0$", p0);  
 dotlabel.top("$p_1$", p1);  
 
 endfig with_projection parallel_x_y; 
 end;
 
-
-
 %% *** (3) LDF 2004.11.05.  
 %% Intersection of two linear `paths':
 %% `bool_point_tertiary --> path_tertiary INTERSECTION_POINT 
@@ -21019,8 +19908,6 @@ dotlabel.top("$p$", p);  %% !! LDF 2004.11.05.  Add `dotlabel_if', etc.
 
 endfig with_projection parallel_x_y; 
 end;
-
-
 
 %% *** (3) LDF 2004.11.05.  Scaling `pens' works after all.
 
@@ -21064,8 +19951,6 @@ show bp;
 endfig; 
 end;
 
-
-
 %% *** (3) LDF 2004.11.05.  Assignment from a `boolean_expression'
 %%         to a `bool_point_variable'.
 
@@ -21088,7 +19973,6 @@ show bp;
 endfig; 
 end;
 
-
 %% *** (3) LDF 2004.11.05.  `drawdot_if', `drawdot_unless', 
 %%         `undrawdot_if', and `undrawdot_unless'. 
 
@@ -21104,7 +19988,6 @@ drawdot_unless b;
 
 drawdot_if d;
 drawdot_unless c;
-
 
 undrawdot_if a;
 undrawdot_unless b;
@@ -21128,14 +20011,12 @@ show p1;
 endfig; 
 end;
 
-
 %% *** (3) LDF 2004.11.05.  
 %% Assignment from a `bool_point' to a `point'.       
 
 beginfig(1);
 point p;
 bp := (false, (1, 2, 3));
-
 
 show p;
 show bp;
@@ -21152,8 +20033,6 @@ show p;
 
 endfig;  
 end;
-
-
 
 %% *** (3) LDF 2004.11.05.  
 %% Assignment from a `bool_point' to a `boolean'.       
@@ -21163,7 +20042,6 @@ boolean b;
 bool_point bp;
 bp := (false, (1, 2, 3));
 
-
 show b;
 show bp;
 
@@ -21179,8 +20057,6 @@ show b;
 
 endfig;  
 end;
-
-
 
 %% *** (3) LDF 2004.11.05.  Assignments using `+=' and `-=' are no longer 
 %%         chainable.  They fail with parse errors, as they should,
@@ -21211,7 +20087,6 @@ q := p += (2, 2, 2);  %% This now fails with a parse error, as it should,
 show p;
 show q;
 
-
 endfig;  
 end;
 
@@ -21222,9 +20097,6 @@ show b;
 endfig;  
 end;
 
-
-
-
 %% *** (3) LDF 2004.11.02.  `set reg_polygon'.
 
 beginfig(1); 
@@ -21234,7 +20106,6 @@ draw r;
 dotlabel.top(0, r);
 endfig with_projection parallel_x_z;
 end; 
-
 
 %% *** (3) LDF 2004.11.02.  `set circle_variable'.
 %%                          In this drawing, 64 points are enough 
@@ -21263,7 +20134,6 @@ picture p;
 p := current_picture;
 endfig; 
 
-
 beginfig(2);
 output p with_projection parallel_x_y; 
 endfig; 
@@ -21278,11 +20148,7 @@ set f with_position (5, 5, -10) with_direction (5, 5, 10) with_distance 15;
 output p with_focus f;
 endfig; 
 
-
 end; 
-
-
-
 
 %% *** (3) LDF 2004.11.02.  `set ellipse_variable'.
 %%                          The arguments are now optional, but
@@ -21314,9 +20180,6 @@ show p;
 
 endfig; 
 end; 
-
-
-
 
 %% *** (3) LDF 2004.11.01.  Replacing the connector `..' with `--' 
 %%                          in a `circle' to avoid problems with 
@@ -21361,7 +20224,6 @@ endfig;
 
 end; 
 
-
 %% *** (3) LDF 2004.11.01. `clear_connectors path_like_variable'.
 
 beginfig(1);
@@ -21393,19 +20255,15 @@ show c;
 endfig; 
 end; 
 
-
 %% *** (3) LDF 2004.11.01.
 
 beginfig(1);
 point p[];
 path q[];
 
-
 q0 := (1, 1, 1) -- (2, 2,2);
 
 q0 += cycle;
-
-
 
 %% q2 := q1 := q0 += p5;     %% Invalid.  These constructions cause 
 %% q2 := q1 := q0 += cycle;  %% segmentation faults.  I don't want     
@@ -21423,14 +20281,11 @@ show q2;
 endfig; 
 end; 
 
-
-
 %% *** (3) LDF 2004.11.01.
 
 beginfig(1);
 point p[];
 path q[];
-
 
 %% LDF 2004.11.01.  This now works properly.
 
@@ -21444,7 +20299,6 @@ q3 := (1, 1, 1) --- (2, 2, 2) --- q0 --- cycle;
 show q3;
 endfig; 
 end; 
-
 
 %% *** (3) LDF 2004.10.28.
 
@@ -21498,7 +20352,6 @@ endfor;
 endfig; 
 end; 
 
-
 %% *** (3) LDF 2004.10.27.  Bug fix:  `forever' loops work again.
 
 numeric i;
@@ -21532,10 +20385,7 @@ endfor;
 endfig; 
 end; 
 
-
-
 %% *** (3) LDF 2004.10.27.
-
 
 beginfig(1);
 path p[], r;
@@ -21554,8 +20404,6 @@ show r;
 endfig;  
 
 end;
-
-
 
 %% *** (3) LDF 2004.10.27.
 
@@ -21577,10 +20425,6 @@ show p;
 endfig; 
 end;
 
-
-
-
-
 %% *** (3) LDF 2004.10.27.  Bug fix:  It's now possible to chain 
 %%                          `point' assignments.
 
@@ -21589,7 +20433,6 @@ beginfig(1);
 point p[], q, r;
 
 q := r := p0 := p1 := (1, 1, 1);
-
 
 show q;
 show r;
@@ -21602,7 +20445,6 @@ path p[], q, r;  %% It's now possible to chain `path' assignments, too.
 
 q := r := p0 := p1 := (1, 1, 1) .. (2, 2, 2);
 
-
 show q;
 show r;
 
@@ -21610,14 +20452,9 @@ show p0;
 show p1;
 show p2;
 
-
-
 endfig;  
 
-
 end;
-
-
 
 %% *** (3) LDF 2004.10.27.  Fixed bug:  This works again.
 
@@ -21640,8 +20477,6 @@ endfig;
 
 end;
 
-
-
 %% *** (3) LDF 2004.10.26.  Bug involving `path' connectors.
 
 beginfig(1); 
@@ -21661,15 +20496,12 @@ q := p0 .. p1;
 endfig;
 end;
 
-
 %% *** (3)  LDF 2004.10.26.
-
 
 beginfig(1);  %% LDF 2004.10.26.  `is_colinear'
 bool b[];
 point p[];
 path q[];
-
 
 q0 := origin -- (1, 1, 1);
 q1 := (3, 3, 3) -- (4, 4, 4);
@@ -21684,7 +20516,6 @@ show b1;
 
 endfig; 
 end;
-
 
 beginfig(1);  %% `is_coplanar'
 
@@ -21742,8 +20573,6 @@ show pv;
 endfig; 
 end;
 
-
-
 %% LDF 2004.10.25.  Chained assignment to `points'.
 
 beginfig(1);  
@@ -21757,7 +20586,6 @@ show p2;
 
 endfig; 
 end;
-
 
 %% *** (3) LDF 2004.10.25. `is_linear' and `is_planar'.
 
@@ -21789,13 +20617,9 @@ show b2;
 b3 := is_planar e;
 show b3;
 
-
 endfig; 
 
 %end;
-
-
-
 
 %% *** (3) LDF 2004.10.25.
 
@@ -21818,7 +20642,6 @@ f := p2 distance_along_line (origin -- p2);  %% 1.  `point' is the
                                              %% last `point' on the `path'.
 
 show f;
-
 
 a := p1 distance_along_line (origin -- p2);  %% .5 == halfway.
 show a; 
@@ -21906,7 +20729,6 @@ p0 := (0, 1);
 
 q0 := (-1, -1, -1) -- (-1, -3, 0) -- (0, 3, 0) -- (1, -2, 3) -- (3, 3, 3);
 
-
 n1 := p0 distance_to_plane e;
 show n1;
 
@@ -21930,8 +20752,6 @@ else:
    message "n3 != INVALID_NUMERIC.";
 fi;
 pause;
-
-
 
 endfig;
 end;
@@ -21960,12 +20780,8 @@ show b1;
 b2 := p0 is_parallel e;
 show b2;
 
-
-
 endfig;
 end;
-
-
 
 %% *** (3) LDF 2004.10.23.  `location'.
 
@@ -21988,7 +20804,6 @@ d := (1.5, 0) location e;
 endfig;
 end;
 
-
 %% *** (3) LDF 2004.10.22.  `is_in_triangle'.
 
 beginfig(1);  
@@ -22010,15 +20825,12 @@ dotlabel.top("$q_0$", q0);
 dotlabel.top("$q_1$", q1);
 dotlabel.top("$q_2$", q2);
 
-
 b0 := p0 is_in_triangle (q0, q1, q2);
 show b0;
-
 
 p1 := (1, 1);
 
 dotlabel.top("$p_1$", p1);
-
 
 b1 := p1 is_in_triangle (q0, q1, q2);
 show b1;
@@ -22027,10 +20839,8 @@ p2 := (1, 2);
 
 dotlabel.top("$p_2$", p2);
 
-
 b2 := p2 is_in_triangle (q0, q1, q2);
 show b2;
-
 
 endfig with_projection parallel_x_y;
 end;
@@ -22092,9 +20902,6 @@ show b4;
 endfig;
 end;
 
-
-
-
 %% *** (3) LDF 2004.10.18.
 
 beginfig(1);  %% `is_elliptical'.
@@ -22124,7 +20931,6 @@ f := e sheared (2, 3, 4, 5, 6, 7);
 b3 := is_elliptical f;
 show b3;
 
-
 endfig;
 end;
 
@@ -22142,7 +20948,6 @@ show b;
 
 rectangle r;
 r := unit_square;
-
 
 b := is_rectangular r;
 show b;
@@ -22170,8 +20975,6 @@ show b;
 endfig;
 end;
 
-
-
 %% *** (3) LDF 2004.10.14.
 
 beginfig(1);  %% `is_rectangular'.
@@ -22188,7 +20991,6 @@ b1 := is_rectangle c;
 show b1;
 endfig;
 end;
-
 
 %% *** (3) LDF 2004.10.13.
 
@@ -22208,8 +21010,6 @@ p1 := get_center r1;
 dotlabel.top("$p_1$", p1);
 endfig;
 end;
-
-
 
 %% *** (3) LDF 2004.10.09.
 
@@ -22236,8 +21036,6 @@ dotlabel.top(12, p);
 endfig with_projection parallel_x_y;
 end;
 
-
-
 %% *** (3) LDF 2004.10.09.
 
 beginfig(1); %% `get_center' with an `ellipse' argument and a `circle' 
@@ -22254,8 +21052,6 @@ draw c;
 show q;
 endfig with_projection parallel_x_y;
 end;
-
-
 
 %% *** (3) LDF 2004.10.06.
 
@@ -22306,10 +21102,7 @@ show s;         %% will fail, but `3dldf' will be able to recover.
 endfig;
 end;
 
-
-
 %% *** (3) LDF 2004.10.06.
-
 
 beginfig(1);  %% Cross product of two `points' 
               %% (actually vectors, in the mathematical sense).
@@ -22327,7 +21120,6 @@ t := p cross_product r; %% Vectors are not parallel, cross product is
 show t;
 endfig;
 end;
-
 
 %% *** (3) LDF 2004.10.06.
 
@@ -22357,14 +21149,12 @@ if is_even 4:
 fi;
 pause;
 
-
 if is_even 5:
       message "5 is even.";
    else:
       message "5 isn't even.";
 fi;
 pause;
-
 
 if is_odd 4:
       message "4 is odd.";
@@ -22396,7 +21186,6 @@ q := (1, 1) .. (2, 2) .. (3, 3) .. cycle;
 
 d := unit_circle;
 
-
 if is_cycle p:
       message "`p' is a cycle.";
    else:
@@ -22411,7 +21200,6 @@ if (is_cycle q):
 fi;
 pause;
 
-
 show c; %% Even `circles' with no points are cycles.
 
 if (is_cycle c):
@@ -22421,7 +21209,6 @@ if (is_cycle c):
 fi;
 pause;
 
-
 if (is_cycle d):
       message "`d' is a cycle.";
    else:
@@ -22429,11 +21216,7 @@ if (is_cycle d):
 fi;
 pause;
 
-
 end;
-
-
-
 
 %% *** (3) LDF 2004.10.04.
 
@@ -22456,8 +21239,6 @@ fi;
 pause;
 end;
 
-
-
 %% *** (3) LDF 2004.10.04.
 
 beginfig(1);      %% `not <boolean_primary>'.
@@ -22469,7 +21250,6 @@ d := not c;
 show d;
 end_input;
 %end;
-
 
 %% *** (3) LDF 2004.10.04.
 
@@ -22492,8 +21272,6 @@ if (is_known r):
       message "r is unknown.";
 fi;
 end;
-
-
 
 %% *** (3) LDF 2004.10.01.
 
@@ -22529,7 +21307,6 @@ endfig;
 end_input;
 %end;
 
-
 %% *** (3) LDF 2004.10.01.
 
 beginfig(1);      
@@ -22549,7 +21326,6 @@ end_input;
 
 %% *** (3) LDF 2004.10.01.
 
-
 beginfig(1);      
 point p, q; 
                   
@@ -22564,7 +21340,6 @@ a := p angle q; %% This works.  LDF 2004.10.01.
 show a;
 endfig;
 end;
-
 
 %% *** (3) LDF 2004.10.01.
 
@@ -22588,8 +21363,6 @@ endinput;  %% LDF 2004.10.01.
            %% Otherwise, it causes warnings to be issued.
 end;
 
-
-
 %% *** (3) LDF 2004.09.22.  This works.
 
 beginfig(1);  
@@ -22602,7 +21375,6 @@ pause;
 errmessage "Hello again";
 
 endfig with_projection parallel_x_y;
-
 
 %% *** (3) LDF 2004.09.22.  This works.
 
@@ -22624,7 +21396,6 @@ for_suffixes i = 1, 2, 3:  %% This causes an error to be signalled.
 show i;
 endfor;
 endfig;
-
 
 %% *** (3) LDF 2004.09.22.  If multithreaded inclusion is being used,
 %% any given file should only be included once.  Included files should
@@ -22652,10 +21423,6 @@ end;
 
 %% *****************
 
-
-
-
-
 point p; %% This works.  LDF 2004.09.13.
 for i = 6 step -3 until 0:
    for j = 10 step -1 until 8:
@@ -22664,7 +21431,6 @@ for i = 6 step -3 until 0:
    endfor;
 endfor;
 
-
 point p; %% This works.  LDF 2004.09.13.
 for i = 6 step 3 until 12:
    for j = 10 step 1 until 12:
@@ -22672,7 +21438,6 @@ for i = 6 step 3 until 12:
       show p;
    endfor;
 endfor;
-
 
 %% *** (3) for loop. 
 
@@ -22696,13 +21461,9 @@ show a;
 endgroup;
 show a;
 
-
-
-
 begingroup; 
 
 endgroup;
-
 
 for a = 1 step 3 until 7: %% Working on this.  Must implement groups before loops.
                           %% LDF 2004.09.12.
@@ -22712,12 +21473,9 @@ point p;
 p := 12;
 endfor;
 
-
-
 %% *** This works.  The `boolean_expressions' can be changed.  
 %%     LDF 2004.09.10.
 
-
 a := 0;
 
 if false:
@@ -22730,8 +21488,6 @@ fi
 
 show a;
 
-
-
 a := 0;
 
 if true:
@@ -22743,8 +21499,6 @@ fi
 fi
 
 show a;
-
-
 
 a := 0;
 
@@ -22768,14 +21522,12 @@ fi
  
 show a;
 
-
 %% *** This works.  LDF 2004.09.09.
 
 circle c[];
 
 c0 := unit_circle rotated 90;
 c1 := unit_circle rotated 90 scaled (2, 3) shifted (1.5);
-
 
 draw c0;
 draw c1;
@@ -22801,7 +21553,6 @@ ellipse c[];
 c0 := unit_circle scaled (2, 4) rotated 90;
 c1 := unit_circle scaled (4, 2) rotated 90 shifted (1);
 
-
 draw c0;
 draw c1;
 
@@ -22810,8 +21561,6 @@ bool_point_vector bpv;
 bpv := c0 intersection_points c1;
 
 show bpv;
-
-
 
 %% *** This works.  LDF 2004.09.08.
 
@@ -22820,18 +21569,14 @@ circle c[];
 c0 := unit_circle scaled 2 rotated 90;
 c1 := unit_circle scaled 2 rotated 90 shifted (1);
 
-
 draw c0;
 draw c1;
-
 
 bool_point_vector bpv;
 
 bpv := c0 intersection_points c1;
 
 show bpv;
-
-
 
 %% *** This works.  LDF 2004.09.08.
 
@@ -22849,11 +21594,7 @@ c := unit_circle scaled 3;
 
 draw c with_pen pensquare scaled (2, 3) rotated (0, 0, 45);
 
-
-
-
 %% *** This works.  LDF 2004.09.07.
-
 
 path p, q;
 
@@ -22864,7 +21605,6 @@ circle c;
 
 c := unit_circle scaled 2 rotated 90;
 
-
 draw c;
 draw p;
 
@@ -22873,9 +21613,6 @@ bool_point_vector bpv;
 bpv := c intersection_points p;
 
 show bpv;
-
-
-
 
 %% *** This works.  LDF 2004.09.05.
 
@@ -22892,8 +21629,6 @@ bool_point B;
 B := p intersection_point q;
 show B;
 
-
-
 bool_point_vector bpv;
 bool_point bp, bpa;
 
@@ -22908,9 +21643,7 @@ show bpv[0];
 show bpv[1];
 show bpv[2];
 
-
 %% ** (2) End of 3DLDF code.
-
 
 %% * (1) Emacs-Lisp code for use in indirect buffers when using the          
 %%   	 GNU Emacs editor.  The local variable list is not evaluated when an 
