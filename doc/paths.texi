@@ -15,6 +15,74 @@
 @node Paths, FDL, Transforms, Top
 @chapter Paths
 
+To make drawings, it's necessary to combine @code{points} and transforms into
+more complex @dfn{compound objects}.  The simplest of these is the @code{path},
+which consists of @code{points} connected by @dfn{connectors}, as in @MF and @MP.
+
+Unlike @MF and @MP, however, 3DLDF only defines the two connectors @code{..}
+and @code{--};  3DLDF doesn't define @MF and @MP's means for specifying @code{paths}
+more exactly, i.e., @code{controls}, directions, etc.  This would be much more
+difficult in three dimensions.
+
+A simple @code{path} can be declared and assigned to like this:
+
+@example
+path r;
+r := (1, 2, 3) .. (4, 5, 6);
+show r;
+@result{}
+path:
+type:  PATH_TYPE
+surface_hiding_ctr:  0
+decomposition_level:  0
+points.size() == 2
+connectors.size() == 1
+(1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+fill_draw_value == 0
+`fill_color_vector' == 0
+`draw_color_vector' == 0
+`pen_vector' == 0
+`dash_pattern_vector' == 0
+`arrow' == `Path::NO_ARROW'.
+@end example
+
+Here, the @code{points} on the @code{path} are specified as unnamed @code{point}
+@dfn{expressions}, which are not saved in variables.  A @code{path} can also
+be assigned to using @code{point} variables:
+
+@example
+point p[];
+path r;
+p0 := (1, 2, 3);
+p1 := (4, 5, 6);
+r := p0 .. p1;
+show r;
+@result{}
+path:
+type:  PATH_TYPE
+surface_hiding_ctr:  0
+decomposition_level:  0
+points.size() == 2
+connectors.size() == 1
+(1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+fill_draw_value == 0
+`fill_color_vector' == 0
+`draw_color_vector' == 0
+`pen_vector' == 0
+`dash_pattern_vector' == 0
+`arrow' == `Path::NO_ARROW'.
+@end example
+
+The result is exactly the same.
+
+Now, we can draw @code{r} to make our first drawing:
+
+@example
+draw p;
+@end example
+
+@center{@image{example_1}}
+
 @c *** (3)
 
 @c ** (2)
