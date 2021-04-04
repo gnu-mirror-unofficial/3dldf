@@ -1,0 +1,135 @@
+@c /home/laurence/3DLDF-2.0.4/doc/trnsfrms.texi
+
+@c Created by Laurence D. Finston (LDF) Sun 04 Apr 2021 12:34:27 PM CEST
+
+@c This file is part of the 3DLDF 2.0.4 User Manual.
+@c Copyright (C) 2021 The Free Software Foundation
+
+@c See the section "GNU Free Documentation License" in the file 
+@c fdl.texi for copying conditions.
+
+@c Author:  Laurence D. Finston (LDF)
+
+@c * (1) Transforms
+
+@node Transforms, Paths, Points, Top
+@chapter Transforms
+
+Objects of type @code{transform} represent @math{4\times 4} matrices that are used
+to perform (affine and non-affine) @dfn{transformations} on @code{points}.
+Transformations are performed on other shape-types by performing the same
+transformation on each of the @code{points} that make up the object, e.g., all
+of the @code{points} on a @code{path} or @code{sphere}.
+
+The basic @dfn{affine transformations} are:
+
+@itemize @w{}
+shifting
+
+scaling
+
+shearing
+
+rotating and
+
+reflecting 
+@end itemize
+
+In addition, there are
+
+@itemize @w{}
+xscaling
+
+yscaling
+
+zscaling and 
+
+rotating around a point (really a combination of rotating and shifting)
+@end itemize
+
+@noindent
+Xscaling, yscaling and zscaling are scaling in only one dimension.
+
+The basic building block of @code{transforms} is the @dfn{identity} transformation,
+which represents no transformation at all:
+
+@example
+transform t;
+t := identity;
+show t;
+transform:
+  1       0       0       0 
+  0       1       0       0 
+  0       0       1       0 
+  0       0       0       1 
+@end example
+
+Transforming a @code{point} by the identity transformation results in a @code{point}
+at the same location as the original @code{point}:
+
+@example
+point p, q;
+p := (1, 2, 3);
+show p;
+@result{}
+point: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 3.00000000, 1.00000000)
+q := p transformed identity;
+show q;
+@result{}
+point: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 3.00000000, 1.00000000)
+@end example
+
+Shifting is a more interesting transformation:
+
+@example
+q := p transformed identity shifted (1, 2, 3);
+show q;
+@result{}
+point: `valarray<real> v.size() == 4
+(2.00000000, 4.00000000, 6.00000000, 1.00000000)
+@end example
+
+@code{transform} variables can be declared and used in expressions:
+
+@example
+
+transform t;
+t := identity rotated (5, 6, 7);
+q := p transformed t;
+show q;
+@result{}
+point: `valarray<real> v.size() == 4
+(0.42045397, 2.32240796, 2.90338445, 1.00000000)
+@end example
+
+Multiple transformations can be performed on a @code{transform} and
+then applied all at once by multiplying the transformation matrix with
+a @code{point} or the @code{points} on a @dfn{compound object}, such as
+a @code{path} or a @code{sphere}.  Each @code{point} contains a
+@code{transform} object so that transformations can be ``saved up'' in
+this way and applied all at once when needed, e.g., when a point is
+@dfn{drawn}.
+
+@c *** (3)
+
+@c ** (2)
+
+@c * (1) Local Variables for Emacs
+
+@c For use in indirect buffers:
+@c
+@c (progn (texinfo-mode) (outline-minor-mode t) (setq outline-regexp "@c *\\*+") (ignore (quote 
+@c )) (set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi"))
+  
+@c Local Variables:
+@c mode:Texinfo
+@c abbrev-mode:t
+@c eval:(outline-minor-mode t)
+@c outline-regexp:"@c *\\*+"
+@c eval:(set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi")
+@c fill-column:80
+@c End:
+
+

@@ -1,0 +1,88 @@
+@c /home/laurence/3DLDF-2.0.4/doc/points.texi
+
+@c Created by Laurence D. Finston (LDF) Sun 04 Apr 2021 09:08:33 AM CEST
+
+@c This file is part of the 3DLDF 2.0.4 User Manual.
+@c Copyright (C) 2021 The Free Software Foundation
+
+@c See the section "GNU Free Documentation License" in the file 
+@c fdl.texi for copying conditions.
+
+@c Author:  Laurence D. Finston (LDF)
+
+@c * (1) Points
+
+@node Points, FDL, Transforms, Top
+@chapter Points
+
+The @code{point} type is the fundamental @code{Shape} type in 3DLDF and is the
+basic building block for all of the more complex types, e.g., @code{path},
+@code{nurb}, @code{plane}, @code{circle}, @code{polyhedron}, and so on.
+
+A @code{point} contains an array (implemented as a @code{valarray} of @code{float}
+or @code{double} in @cpp) of four real numbers representing the points x-, y-, z- and
+w-coordinates.  The latter exists in order to make it possible to multiply @code{points}
+with @math{4\times 4} @dfn{transformation matrices} (@pxref{Transforms}).
+It is only ever not equal to 1 when a @code{point} is transformed by a
+@dfn{non-affine transformation}, such as the @dfn{perspective projection}
+(@pxref{Perspective Projection}).
+
+@code{Points} can be assigned to by specifying the x-, y- and z-coordinates:
+
+@example
+p := (1, 2, 3);
+show p;
+point: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 3.00000000, 1.00000000)
+@end example
+
+Please note that the w-coordinate cannot be assigned to!
+
+If the z-coordinate is left out, the default is 0:
+
+@example
+p := (1, 2);
+show p;
+point: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 0.00000000, 1.00000000)
+@end example
+
+In addition, the y-coordinate can also be left out:
+
+@example
+p := (1);
+show p;
+point: `valarray<real> v.size() == 4
+(1.00000000, 0.00000000, 0.00000000, 1.00000000)
+@end example
+
+In this case, the parentheses are optional:
+
+@example
+p := 10;
+show p;
+point: `valarray<real> v.size() == 4
+(10.00000000, 0.00000000, 0.00000000, 1.00000000)
+@end example
+
+@c *** (3)
+
+@c ** (2)
+
+@c * (1) Local Variables for Emacs
+
+@c For use in indirect buffers:
+@c
+@c (progn (texinfo-mode) (outline-minor-mode t) (setq outline-regexp "@c *\\*+") (ignore (quote 
+@c )) (set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi"))
+  
+@c Local Variables:
+@c mode:Texinfo
+@c abbrev-mode:t
+@c eval:(outline-minor-mode t)
+@c outline-regexp:"@c *\\*+"
+@c eval:(set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi")
+@c fill-column:80
+@c End:
+
+
