@@ -761,13 +761,13 @@ Added this rule.
 
           Definition_Info_Node m = static_cast<Definition_Info_Node>(entry->object); 
 
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           cerr << entry->name << endl;
           m->show("macro:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
       } /* |else| (|entry != 0 && entry->object != 0|)  */
  
@@ -1502,7 +1502,7 @@ Added this rule.
           string temp_str[2];
           temp_str[0] = "false";
           temp_str[1] = "true";
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           for (vector<bool*>::const_iterator iter 
                   = nv->v.begin();
@@ -1516,7 +1516,7 @@ Added this rule.
 
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete nv;
 
@@ -1579,7 +1579,7 @@ Added this rule.
    if (nv && nv->ctr > 0)
       {
           int ctr = 0;
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           for (vector<real*>::const_iterator iter 
                   = nv->v.begin();
@@ -1592,7 +1592,7 @@ Added this rule.
 
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete nv;
 
@@ -1639,7 +1639,7 @@ Added this rule.
    if (nv && nv->ctr > 0)
       {
           int ctr = 0;
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           for (vector<ulong_long*>::const_iterator iter 
                   = nv->v.begin();
@@ -1652,7 +1652,7 @@ Added this rule.
 
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete nv;
 
@@ -1782,7 +1782,7 @@ needed here.
    if (sv && sv->ctr > 0)
       {
           int ctr = 0;
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           for (vector<string*>::const_iterator iter 
                   = sv->v.begin();
@@ -1795,7 +1795,7 @@ needed here.
 
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete sv;
 
@@ -1858,12 +1858,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("pen_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -1925,12 +1925,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("dash_pattern_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -1994,12 +1994,12 @@ Now deleting |Pointer_Vector<Color>* cv|.
 
    if (cv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           cv->show("color_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete cv;
 
@@ -2061,12 +2061,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("transform_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2127,12 +2127,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("focus_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2205,12 +2205,12 @@ Added this rule.
           Pointer_Vector<Picture>* pv 
              = static_cast<Pointer_Vector<Picture>*>(entry->object); 
 
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("picture_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
@@ -2272,12 +2272,12 @@ Added this rule.
           Pointer_Vector<Definition_Info_Type>* mv 
              = static_cast<Pointer_Vector<Definition_Info_Type>*>(entry->object); 
 
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           mv->show("macro_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
       }  /* |else| (|entry != 0 && entry->object != 0|)  */
 
@@ -2326,12 +2326,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("origami_figure_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2392,12 +2392,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("glyph_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2458,12 +2458,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("plane_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2536,12 +2536,10 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
           cerr << cerr_strm.str();
           pv->show("point_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
 
           delete pv;
 
@@ -2606,12 +2604,12 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
 
    if (bpv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           bpv->show("bool_point_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete bpv;
 
@@ -2672,12 +2670,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("path_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2909,12 +2907,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("helix_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -2975,12 +2973,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("rectangle_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -3040,12 +3038,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("triangle_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -3107,12 +3105,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("polygon_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -3174,12 +3172,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("reg_polygon_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -3240,12 +3238,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("cone_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -3306,12 +3304,12 @@ Added this rule.
 
    if (pv)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("cylinder_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
+          
 
           delete pv;
 
@@ -3505,13 +3503,12 @@ Added this rule.
 
    if (pv && pv->ctr > 0)
       {
-          cerr_mutex.lock(); 
+          
           cerr << cerr_strm.str();
           pv->show("polyhedron_vector:");
           log_message(cerr_strm);
           cerr_strm.str("");
-          cerr_mutex.unlock(); 
-
+          
           delete pv;
 
       }  /* |if (pv && pv->ctr > 0)|  */
