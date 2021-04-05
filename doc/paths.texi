@@ -75,16 +75,68 @@ fill_draw_value == 0
 
 The result is exactly the same.
 
-Now, we can draw @code{r} to make our first drawing:
+Now, we can draw @code{r} and label the endpoints to make our first drawing:
 
 @example
 beginfig(1);
 draw p;
-endfig with_projection parallel_x_y; 
+dotlabel.lft("$p_0$", p0);
+dotlabel.rt("$p_1$", p1);
+endfig with_projection parallel_x_y;
+@result{}
+@image{example_1}
 @end example
 
-@center{@image{example_1}}
+It's necessary to call @code{endfig} with the argument @code{with_projection parallel_x_y}
+in order to project the drawing onto the x-y plane because the default projection is
+the @dfn{projective projection} (@pxref{Projective Projection}).
 
+The @code{label} and @code{dotlabel} commands are similar to the corresponding commands in
+@MF and @MP.
+
+Of course, @code{paths} can consist of more than two points and can describe curves:
+
+@example
+beginfig(2);
+point p[];
+path q;
+p0 := origin;
+p1 := (1, 0, 1);
+p2 := (3, 0, 2);
+p3 := (2, 0, 5);
+p4 := (4, 0, 1);
+q := p0 .. p1 .. p2 .. p3 .. p4 .. p0;
+draw q;
+dotlabel.lft("$p_0$", p0);
+dotlabel.ulft("$p_1$", p1);
+dotlabel.lft("$p_2$", p2);
+dotlabel.rt("$p_3$", p3);
+dotlabel.lrt("$p_4$", p4);
+endfig with_projection parallel_x_z;
+@result{}
+@image{example_2}
+@end example
+
+In this example, the @code{points} are all on the x-z plane and the drawing is projected
+onto that plane.  The @dfn{picture} (@code{currentpicture}, as in @MP) (@pxref{Pictures})
+can be saved and output again, this time using the perspective projection:
+
+@example
+picture v;
+beginfig(2);
+@dots{}
+endfig with_projection parallel_x_z;
+
+beginfig(3);
+currentpicture := v;
+endfig;
+@result{}
+@image{example_3}
+@end example
+
+
+
+  
 @c *** (3)
 
 @c ** (2)

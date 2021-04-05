@@ -82,7 +82,7 @@ html: 3dldf.html
 
 info: 3dldf.info
 
-3dldf.dvi: $(SOURCES_MANUAL) example.1
+3dldf.dvi: $(SOURCES_MANUAL) examples_1.eps
 	texi2dvi 3dldf.texi
 
 3dldf.ps: 3dldf.dvi
@@ -109,20 +109,22 @@ html-split: $(SOURCES_MANUAL)
 
 exps: examples.ps
 
+examples: examples.ps 
+
 examples.ps: examples.dvi
 	dvips -o examples.ps examples.dvi
 
-examples.dvi: example.1 examples.tex
+examples.dvi: examples_1.eps examples.tex
 	tex examples.tex
 
-examples: example.1 
+examples_1.eps: examples.1
+	./rename_examples.sh
 
-example.1: example.mp
-	mpost example.mp
+examples.1: examples.mp
+	mpost examples.mp
 
-example.mp: example.ldf
-	../src/3dldf example.ldf
-
+examples.mp: examples.ldf
+	../src/3dldf examples.ldf
 
 #### ** (2) Tags
 

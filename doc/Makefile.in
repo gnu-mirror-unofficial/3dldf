@@ -519,7 +519,7 @@ html: 3dldf.html
 
 info: 3dldf.info
 
-3dldf.dvi: $(SOURCES_MANUAL) example.1
+3dldf.dvi: $(SOURCES_MANUAL) example_1.eps
 	texi2dvi 3dldf.texi
 
 3dldf.ps: 3dldf.dvi
@@ -542,9 +542,20 @@ html-split: $(SOURCES_MANUAL)
 
 #### ** (2) Examples
 
-PHONY: examples
+.PHONY: exps
 
-examples: example.1 
+exps: examples.ps
+
+examples: examples.ps 
+
+examples.ps: examples.dvi
+	dvips -o examples.ps examples.dvi
+
+examples.dvi: example_1.eps examples.tex
+	tex examples.tex
+
+example_1.eps: example.1
+	./rename_examples.sh
 
 example.1: example.mp
 	mpost example.mp

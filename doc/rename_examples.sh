@@ -3,7 +3,7 @@
 ## /home/laurence/3DLDF-2.0.4/doc/rename_examples.sh
 ## Created by Laurence D. Finston (LDF) Mon 05 Apr 2021 11:01:27 AM CEST
 
-%% * (1) Copyright and License.
+#### * (1) Copyright and License.
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
 #### Copyright (C) 2021 The Free Software Foundation
@@ -48,11 +48,11 @@
 
 #### Laurence.Finston@gmx.de
 
-for i in example.[[:digit:]]*
+for i in examples.[[:digit:]]*
 do
    echo $i;
    s=${i:8}
-   echo "mv $i example_$s.eps"
-   mv $i example_$s.eps
+   echo "mv $i examples_$s.eps"
+   mv $i examples_$s.eps
 done;    
 	 
