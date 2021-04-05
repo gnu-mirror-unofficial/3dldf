@@ -979,7 +979,7 @@ prog:
 headers:
 	make arc.h++  circles.h++ cncsctlt.h++  colors.h++ complex.h++ cones.h++ conicsct.h++ \
              conveps.h++ crclslc.h++ creatnew.h++ cuboid.h++ \
-             curves.h++ cwebbisn.h++ cylinder.h++ dashptrn.h++ \
+             curves.h++ cylinder.h++ dashptrn.h++ \
              ddchdrn.h++ deftfncs.h++ ellipses.h++ ellpsoid.h++ \
              ellpsslc.h++ figures.h++ glyphs.h++ gsltmplt.h++ \
              helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
