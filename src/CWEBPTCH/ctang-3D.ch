@@ -2,9 +2,6 @@ ctang-3D.ch
 This is the change file for CWEB's CTANGLE for use with GNU 3DLDF.
 Laurence Finston Mon Nov 22 13:25:49 CET 2004
 
-$Id: ctang-3D.ch,v 1.4 2005/01/14 17:30:45 lfinsto1 Exp $
-
-
 @x 
 @d max_toks 270000 /* number of bytes in compressed \CEE/ code */
 @d max_names 4000 /* number of identifiers, strings, section names;
