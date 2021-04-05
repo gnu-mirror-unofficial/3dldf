@@ -28,10 +28,10 @@ Integers and floating point numbers.
 Unsigned long long integers.  Corresponds to the C type @code{unsigned long long int}.
 
 @item complex
-Complex number.
+Complex numbers.
 
 @item matrix
-Matrix.
+Matrices.
 @end table
 
 
@@ -63,7 +63,6 @@ Focus for the @dfn{perspective projection}.
 
 @item figure
 @end table
-
 
 @c ** (2) Shape types
 @section Shape types
@@ -142,133 +141,6 @@ Focus for the @dfn{perspective projection}.
 
 @itemx origami_figure
 @end table 
-
-@c ** (2) Arrays and Vector types
-
-@section Arrays and Vector types
-
-Ordinary arrays are declared in 3DLDF as they are in @MF and @MP, e.g.:
-
-@example
-numeric n[];
-@end example
-
-Now, variables @code{n0}, @code{n1}, @code{n25}, etc., may be assigned to:
-
-@example
-n0 := 24;
-n1 := 63;
-n25 := 712;
-show n0;
-@result{} >> 24
-show n1;
-@result{} >> 63
-show n25;
-@result{} >> 712
-show n73;
-@result{} >> 0
-@end example
-
-Since @code{n[]} is of type numeric, @code{n73}, which hasn't been assigned to,
-is automatically created with the type @code{numeric}.  For an unknown member
-of an array of a different type, the result of showing is different:
-
-@example
-point p[];
-show p0;
-@result{} >> (unknown point)
-@end example
-
-However, there is no way to access these arrays as a whole:
-
-@example
-show n;
-@result{} >> 0
-show p;
-@result{} >> 0
-@end example
-
-Here, @code{n} and @code{p} are simply treated as unknown @code{numerics}, i.e.,
-they are automatically created and assigned the value 0.
-
-Internally, a vector-type object contains an ordinary array, with a single
-numerical subscript, but it is possible to access it as a whole, i.e.,
-to show or perform an operation on all members of the array with a
-single command and without iterating through all of them with a loop.
-
-@example
-point_vector pv;
-pv += (1, 2, 3);
-pv += (10, 20, 30);
-show pv;
-@result{} >> point_vector:
-size of vector: 2
-0: `valarray<real> v.size() == 4
-(1.00000000, 2.00000000, 3.00000000, 1.00000000)
-1: `valarray<real> v.size() == 4
-(10.00000000, 20.00000000, 30.00000000, 1.00000000)
-@end example
-
-Please note that assignments must be made to a vector-type object
-using the @code{+=} operator.  Explicitly assigning to a member of
-the underlying array will not produce the desired results:
-
-@example
-point_vector pv;
-pv0 := (1, 2, 3); %% Don't do this!
-show pv0;
-point: `valarray<real> v.size() == 4
-(1.00000000, 2.00000000, 3.00000000, 1.00000000)
-show pv;
->> point_vector:
-size of vector: 0
-@end example
-
-The assignment to @code{pv0} works, but 3DLDF only  ``registers'' the
-assignment to the array belonging to @code{pv};  the underlying @code{point}
-object is not accessible via @code{pv}.
-
-@example
-pv += (11, 12, 13);
-show pv0;
-point: `valarray<real> v.size() == 4
-(11.00000000, 12.00000000, 13.00000000, 1.00000000)
-show pv;
->> point_vector:
-size of vector: 1
-0: `valarray<real> v.size() == 4
-(11.00000000, 12.00000000, 13.00000000, 1.00000000)
-@end example
-
-Here, the command @code{pv += (11, 12, 13)} causes the value of @code{pv0}
-to be overwritten.  In addition, @code{pv0} is now accessible via @code{pv} and
-the @code{show} command shows its (new) value.
-
-Assignment to other @code{pointer_vector} types is performed similarly:
-
-@example
-color_vector cv;
-cv += red;
-cv += green;
-cv += blue;
-show cv;
->> color_vector:
-size of vector: 3
-0:
-red_part == 1.00000000
-green_part == 0.00000000
-blue_part == 0.00000000
-
-1:
-red_part == 0.00000000
-green_part == 1.00000000
-blue_part == 0.00000000
-
-2:
-red_part == 0.00000000
-green_part == 0.00000000
-blue_part == 1.00000000
-@end example
 
 @table @code 
 @item numeric_vector

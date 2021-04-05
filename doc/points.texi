@@ -19,51 +19,6 @@ The @code{point} type is the fundamental @code{Shape} type in 3DLDF and is the
 basic building block for all of the more complex types, e.g., @code{path},
 @code{nurb}, @code{plane}, @code{circle}, @code{polyhedron}, and so on.
 
-A @code{point} contains an array (implemented as a @code{valarray} of @code{float}
-or @code{double} in @cpp) of four real numbers representing the points x-, y-, z- and
-w-coordinates.  The latter exists in order to make it possible to multiply @code{points}
-with @math{4\times 4} @dfn{transformation matrices} (@pxref{Transforms}).
-It is only ever not equal to 1 when a @code{point} is transformed by a
-@dfn{non-affine transformation}, such as the @dfn{perspective projection}
-(@pxref{Perspective Projection}).
-
-@code{Points} can be assigned to by specifying the x-, y- and z-coordinates:
-
-@example
-p := (1, 2, 3);
-show p;
-point: `valarray<real> v.size() == 4
-(1.00000000, 2.00000000, 3.00000000, 1.00000000)
-@end example
-
-Please note that the w-coordinate cannot be assigned to!
-
-If the z-coordinate is left out, the default is 0:
-
-@example
-p := (1, 2);
-show p;
-point: `valarray<real> v.size() == 4
-(1.00000000, 2.00000000, 0.00000000, 1.00000000)
-@end example
-
-In addition, the y-coordinate can also be left out:
-
-@example
-p := (1);
-show p;
-point: `valarray<real> v.size() == 4
-(1.00000000, 0.00000000, 0.00000000, 1.00000000)
-@end example
-
-In this case, the parentheses are optional:
-
-@example
-p := 10;
-show p;
-point: `valarray<real> v.size() == 4
-(10.00000000, 0.00000000, 0.00000000, 1.00000000)
-@end example
 
 @c *** (3)
 

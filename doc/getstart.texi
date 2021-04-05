@@ -11,7 +11,7 @@
 
 @c * (1) Getting started
 
-@node Getting Started, Data Types, Invoking, Top
+@node Getting Started
 @chapter Getting Started
 
 The syntax of the 3DLDF language is based on that of @MF{} and @MP{}.  The code for
@@ -24,42 +24,85 @@ beginfig(1);
 endfig;
 @end example
 
+@c ** (2) Points
+@node Points (Getting Started)
+@section Points
+
 3DLDF, among other things, defines numerous data types corresponding to different @dfn{shapes}
 that can be drawn.  The simplest of these, and the basis for all other shape-types is
 @code{point}.
 
 A @code{point} is like a @code{pair} in @MF{} and @MP{} except that it represents a point
-in three-dimensional space.  It therefore contains an x-, y-, and z-coordinate.  However,
-@code{point} has an additional w-coordinate for use in @dfn{projections}
-(@pxref{Projections}).
-Currently, the only projection implemented is the @dfn{perspective projection}.
+in three-dimensional space.  
+
+A @code{point} contains an array (implemented as a @code{valarray} of @code{float}
+or @code{double} in @cpp) of four real numbers representing the points x-, y-, z- and
+w-coordinates.  The latter exists in order to make it possible to multiply @code{points}
+with @math{4\times 4} @dfn{transformation matrices} (@pxref{Transforms}).
+It is only ever not equal to 1 when a @code{point} is transformed by a
+@dfn{non-affine transformation}, such as the @dfn{perspective projection}
+(@pxref{Perspective Projection}).
+
+Currently, the only projections implemented in 3DLDF are parallel projections onto the
+x-y, x-z and y-z planes and the perspective projection.
 Other possible projections would be projection onto a cylinder, sphere or
 other three-dimensional object.
 
-@code{points} can be assigned to using the @code{:=} operator:
+@code{Points} can be assigned to by specifying the x-, y- and z-coordinates
+using the @code{:=} operator:
 
 @example
 point p;
 p := (1, 2, 3);
 @end example
 
-The @code{:=} operator must be used because @code{=} has a special meaning in @MF{} and @MP{}:
-@MF{} and @MP{} can solve linear equations interactively and the @code{=} operator
+The @code{:=} operator must be used because @code{=} has a special meaning in @MF and @MP:
+@MF and @MP can solve linear equations interactively and the @code{=} operator
 will only assign a value to a variable if this doesn't contradict the results of previous
 operations pertaining to it.  While it would be desirable to implement this feature, 3DLDF,
 like most other programming languages,  does not implement it (and may never do so).  The author
 is not a mathematician and does not know what would be involved in implementing it.
-3DLDF defines considerably more, and more complex, data types than @MF{} and @MP{} and
+3DLDF defines considerably more, and more complex, data types than @MF and @MP and
 it might not be practicable to implement this feature, even for someone with considerably
 greater mathematical skills than the author.
 
-As in @MF{} and @MP{}, the @code{:=} operator is used for @dfn{assignments} in 3DLDF.
+Please note that the w-coordinate cannot be assigned to!
 
-The value of variables in a run of 3DLDF can be output using the @code{show} command:
+If the z-coordinate is left out, the default is 0:
+
+@example
+p := (1, 2);
+show p;
+point: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 0.00000000, 1.00000000)
+@end example
+
+In addition, the y-coordinate can also be left out:
+
+@example
+p := (1);
+show p;
+@print{}
+point: `valarray<real> v.size() == 4
+(1.00000000, 0.00000000, 0.00000000, 1.00000000)
+@end example
+
+In this case, the parentheses are optional:
+
+@example
+p := 10;
+show p;
+@print{}
+point: `valarray<real> v.size() == 4
+(10.00000000, 0.00000000, 0.00000000, 1.00000000)
+@end example
+
+The value of variables in a run of 3DLDF can be output using the @code{show} command, as above:
 
 @example
 show p;
-@print{}  point: (1.00000000, 2.00000000, 3.00000000)
+@print{}
+point: (1.00000000, 2.00000000, 3.00000000)
 @end example
 
 Please note that the w-coordinate is not shown by @code{show [point]}.
@@ -70,26 +113,38 @@ show wpart p;
 @print{} >> 1
 @end example
 
-It cannot, however, be assigned to!
+@c ** (2) Paths
+@node Paths (Getting Started)
+@section Paths
 
-The data type that is next highest in complexity to @code{point} is @code{path}.
-Just as in @MF{} and @MP{} @code{paths} consist of @code{pairs} joined by
-@dfn{connectors}, in 3DLDF, they consist of @code{points} joined by connectors:
+To make drawings, it's necessary to combine @code{points} into more complex
+@dfn{compound objects}.  The simplest of these is the @code{path},
+which consists of @code{points} connected by @dfn{connectors}, as in @MF and @MP.
+
+Unlike @MF and @MP, however, 3DLDF only defines the two connectors @code{..}
+and @code{--};  3DLDF doesn't define @MF and @MP's means for specifying @code{paths}
+more exactly, i.e., @code{controls}, directions, etc.  This would be much more
+difficult in three dimensions.
+
+3DLDF defines a type @code{nurb} with @dfn{knots}, @dfn{weights} and @dfn{control points},
+which are intended to be used for greater control over the shape of paths and to ensure
+consistency even under non-affine transformations, but this feature is not implemented in
+Release 3.0.
+
+A simple @code{path} can be declared and assigned to like this:
 
 @example
-point p, q;
-p := (1, 2, 3);
-q := (4, 5, 6);
 path r;
-r := p .. q;
+r := (0, 0) .. (1, 1);
 show r;
-@print{} >> path:
+@print{}
+path:
 type:  PATH_TYPE
 surface_hiding_ctr:  0
 decomposition_level:  0
 points.size() == 2
 connectors.size() == 1
-(1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+(0.00000000, 0.00000000, 0.00000000) .. (1.00000000, 1.00000000, 0.00000000);
 fill_draw_value == 0
 `fill_color_vector' == 0
 `draw_color_vector' == 0
@@ -98,15 +153,206 @@ fill_draw_value == 0
 `arrow' == `Path::NO_ARROW'.
 @end example
 
-Paths can be drawn:
+Here, the @code{points} on the @code{path} are specified as unnamed @code{point}
+@dfn{expressions}, which are not saved in variables.  A @code{path} can also
+be assigned to using @code{point} variables:
 
 @example
-draw r;
+point p[];
+path r;
+p0 := origin; %% Equivalent to @code{(0, 0, 0)}
+p1 := (1cm, 1cm);
+r := p0 .. p1;
+show r;
+@print{}
+path:
+type:  PATH_TYPE
+surface_hiding_ctr:  0
+decomposition_level:  0
+points.size() == 2
+connectors.size() == 1
+(0.00000000, 0.00000000, 0.00000000) .. (1.00000000, 1.00000000, 0.00000000);
+fill_draw_value == 0
+`fill_color_vector' == 0
+`draw_color_vector' == 0
+`pen_vector' == 0
+`dash_pattern_vector' == 0
+`arrow' == `Path::NO_ARROW'.
 @end example
 
+The result is exactly the same.
+
+Now, we can draw @code{r} and label the endpoints to make our first drawing:
+
+@example
+beginfig(1);
+draw p;
+dotlabel.lft("$p_0$", p0);
+dotlabel.rt("$p_1$", p1);
+endfig with_projection parallel_x_y;
 @result{}
+@image{examples_1}
+@end example
 
+It's necessary to call @code{endfig} with the argument @code{with_projection parallel_x_y}
+in order to project the drawing onto the x-y plane because the default projection is
+the @dfn{projective projection} (@pxref{Projective Projection}).
 
+The @code{label} and @code{dotlabel} commands are similar to the corresponding commands in
+@MF and @MP.
+
+Of course, @code{paths} can consist of more than two points and can describe curves:
+
+@example
+beginfig(2);
+point p[];
+path q;
+p0 := origin;
+p1 := (1, 0, 1);
+p2 := (3, 0, 2);
+p3 := (2, 0, 5);
+p4 := (4, 0, 1);
+q := p0 .. p1 .. p2 .. p3 .. p4 .. p0;
+draw q;
+dotlabel.lft("$p_0$", p0);
+dotlabel.ulft("$p_1$", p1);
+dotlabel.lft("$p_2$", p2);
+dotlabel.rt("$p_3$", p3);
+dotlabel.lrt("$p_4$", p4);
+endfig with_projection parallel_x_z;
+@result{}
+@image{examples_2}
+@end example
+
+In this example, the @code{points} are all on the x-z plane and the drawing is projected
+onto that plane.
+
+@c ** (2) Arrays and Vector types
+@section Arrays and Vector types
+
+Ordinary arrays are declared in 3DLDF as they are in @MF and @MP, e.g.:
+
+@example
+numeric n[];
+@end example
+
+Now, variables @code{n0}, @code{n1}, @code{n25}, etc., may be assigned to:
+
+@example
+n0 := 24;
+n1 := 63;
+n25 := 712;
+show n0;
+@print{} >> 24
+show n1;
+@print{} >> 63
+show n25;
+@print{} >> 712
+show n73;
+@print{} >> 0
+@end example
+
+Since @code{n[]} is of type numeric, @code{n73}, which hasn't been assigned to,
+is automatically created with the type @code{numeric}.  For an unknown member
+of an array of a different type, the result of showing is different:
+
+@example
+point p[];
+show p0;
+@print{} >> (unknown point)
+@end example
+
+However, there is no way to access these arrays as a whole:
+
+@example
+show n;
+@print{} >> 0
+show p;
+@print{} >> 0
+@end example
+
+Here, @code{n} and @code{p} are simply treated as unknown @code{numerics}, i.e.,
+they are automatically created and assigned the value 0.
+
+Internally, a vector-type object contains an ordinary array, with a single
+numerical subscript, but it is possible to access it as a whole, i.e.,
+to show or perform an operation on all members of the array with a
+single command and without iterating through all of them with a loop (@pxref{Loops}).
+
+@example
+point_vector pv;
+pv += (1, 2, 3);
+pv += (10, 20, 30);
+show pv;
+@print{} >> point_vector:
+size of vector: 2
+0: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 3.00000000, 1.00000000)
+1: `valarray<real> v.size() == 4
+(10.00000000, 20.00000000, 30.00000000, 1.00000000)
+@end example
+
+Please note that assignments must be made to a vector-type object
+using the @code{+=} operator (which doesn't exist in @MF and @MP).
+Explicitly assigning to a member of the underlying array will not produce
+the desired results:
+
+@example
+point_vector pv;
+pv0 := (1, 2, 3); %% Don't do this!
+show pv0;
+point: `valarray<real> v.size() == 4
+(1.00000000, 2.00000000, 3.00000000, 1.00000000)
+show pv;
+>> point_vector:
+size of vector: 0
+@end example
+
+The assignment to @code{pv0} works, but 3DLDF only  ``registers'' the
+assignment to the array belonging to @code{pv};  the underlying @code{point}
+object is not accessible via @code{pv}.
+
+@example
+pv += (11, 12, 13);
+show pv0;
+point: `valarray<real> v.size() == 4
+(11.00000000, 12.00000000, 13.00000000, 1.00000000)
+show pv;
+>> point_vector:
+size of vector: 1
+0: `valarray<real> v.size() == 4
+(11.00000000, 12.00000000, 13.00000000, 1.00000000)
+@end example
+
+Here, the command @code{pv += (11, 12, 13)} causes the value of @code{pv0}
+to be overwritten.  In addition, @code{pv0} is now accessible via @code{pv} and
+the @code{show} command shows its (new) value.
+
+Assignment to other @code{pointer_vector} types is performed similarly:
+
+@example
+color_vector cv;
+cv += red;
+cv += green;
+cv += blue;
+show cv;
+>> color_vector:
+size of vector: 3
+0:
+red_part == 1.00000000
+green_part == 0.00000000
+blue_part == 0.00000000
+
+1:
+red_part == 0.00000000
+green_part == 1.00000000
+blue_part == 0.00000000
+
+2:
+red_part == 0.00000000
+green_part == 0.00000000
+blue_part == 1.00000000
+@end example
 
 
 

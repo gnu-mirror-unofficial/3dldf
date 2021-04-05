@@ -58,7 +58,6 @@ A copy of the license is included in the section entitled
 
 @c *********************
 
-
 @c @setchapternewpage odd
 @c @setchapternewpage off  @c For saving paper.  LDF 2003.08.20.
 
@@ -94,6 +93,9 @@ A copy of the license is included in the section entitled
 * Invoking::
 * Getting Started::
 * Data Types::
+* Points::
+* Paths::
+* Transforms::
 * FDL::
 * GPL::
 * Variable Index::              
@@ -123,6 +125,18 @@ Getting Started
 Data Types
 
 * Data Types::
+
+Points
+
+* Points::
+
+Paths
+
+* Paths::
+
+Transforms
+
+* Transforms::
 
 Variable Index
 
@@ -176,7 +190,6 @@ METAFONT
 MetaPost
 @end macro
 
-
 @iftex
 @tex
 \global\pageno=1
@@ -195,15 +208,38 @@ MetaPost
 
 @include invoking.texi
 
-@c Currently commented-out.  LDF 2021.04.05.
 @c Getting started
-@c @include getstart.texi
+@include getstart.texi
 
 @c Data Types
 
 @include dttypes.texi
 
+@include numerics.texi
+
+@include complex.texi
+
+@include matrix.texi
+
+@include transfrm.texi
+
+@include focus.texi
+
+@include pen.texi
+
+@include dashptrn.texi
+
+@include color.texi
+
+@include string.texi
+
+@include picture.texi
+
+@include figure.texi
+
 @include points.texi
+
+@include paths.texi
 
 @include trnsfrms.texi
 
@@ -235,7 +271,6 @@ MetaPost
 @c Concept Index (c)
 @include concidx.texi
 
-
 @bye
 
 @c * (1)
@@ -254,6 +289,3 @@ MetaPost
 @c eval:(set (make-local-variable 'run-texi2dvi-on-file) "3dldf.texi")
 @c fill-column:80
 @c End:
-
-
-
