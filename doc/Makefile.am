@@ -54,9 +54,12 @@
 #### $<:  First prerequisite
 #### $^:  The names of all the prerequisites, with spaces between them.
 
-SOURCES_MANUAL :=  3dldf.texi concidx.texi dttypes.texi dttypidx.texi fdl-1.3.texi \
-                   funcidx.texi getstart.texi gpl-3.0.texi install.texi intro.texi \
-                   invoking.texi varidx.texi
+SOURCES_MANUAL := color.texi complex.texi dashptrn.texi dttypes.texi \
+		  figure.texi focus.texi getstart.texi install.texi intro.texi \
+		  invoking.texi matrix.texi numerics.texi paths.texi pen.texi \
+		  picture.texi points.texi string.texi trnsfrms.texi \
+                  concidx.texi dttypidx.texi funcidx.texi varidx.texi
+
 
 EXTRA_DIST = 3dldf.ps 3dldf.pdf 3dldf.dvi 3dldf.html 3dldf.info $(SOURCES_MANUAL) texinfo.tex
 
