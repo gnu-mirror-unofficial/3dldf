@@ -82,7 +82,7 @@ html: 3dldf.html
 
 info: 3dldf.info
 
-3dldf.dvi: $(SOURCES_MANUAL)
+3dldf.dvi: $(SOURCES_MANUAL) example.1
 	texi2dvi 3dldf.texi
 
 3dldf.ps: 3dldf.dvi
@@ -102,6 +102,27 @@ info: 3dldf.info
 html-split: $(SOURCES_MANUAL)
 	makeinfo --html 3dldf.texi
 	touch html-split
+
+#### ** (2) Examples
+
+.PHONY: exps
+
+exps: examples.ps
+
+examples.ps: examples.dvi
+	dvips -o examples.ps examples.dvi
+
+examples.dvi: example.1 examples.tex
+	tex examples.tex
+
+examples: example.1 
+
+example.1: example.mp
+	mpost example.mp
+
+example.mp: example.ldf
+	../src/3dldf example.ldf
+
 
 #### ** (2) Tags
 

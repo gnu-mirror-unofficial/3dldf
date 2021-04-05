@@ -1,4 +1,4 @@
-@c /home/laurence/3DLDF-2.0.4/doc/paths.texi
+b@c /home/laurence/3DLDF-2.0.4/doc/paths.texi
 
 @c Created by Laurence D. Finston (LDF) Sun 04 Apr 2021 01:22:29 PM CEST
 
@@ -28,7 +28,7 @@ A simple @code{path} can be declared and assigned to like this:
 
 @example
 path r;
-r := (1, 2, 3) .. (4, 5, 6);
+r := (0, 0) .. (1, 1);
 show r;
 @result{}
 path:
@@ -37,7 +37,7 @@ surface_hiding_ctr:  0
 decomposition_level:  0
 points.size() == 2
 connectors.size() == 1
-(1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+(0.00000000, 0.00000000, 0.00000000) .. (1.00000000, 1.00000000, 0.00000000);
 fill_draw_value == 0
 `fill_color_vector' == 0
 `draw_color_vector' == 0
@@ -53,8 +53,8 @@ be assigned to using @code{point} variables:
 @example
 point p[];
 path r;
-p0 := (1, 2, 3);
-p1 := (4, 5, 6);
+p0 := origin; %% Equivalent to @code{(0, 0, 0)}
+p1 := (1cm, 1cm);
 r := p0 .. p1;
 show r;
 @result{}
@@ -64,7 +64,7 @@ surface_hiding_ctr:  0
 decomposition_level:  0
 points.size() == 2
 connectors.size() == 1
-(1.00000000, 2.00000000, 3.00000000) .. (4.00000000, 5.00000000, 6.00000000);
+(0.00000000, 0.00000000, 0.00000000) .. (1.00000000, 1.00000000, 0.00000000);
 fill_draw_value == 0
 `fill_color_vector' == 0
 `draw_color_vector' == 0
@@ -78,7 +78,9 @@ The result is exactly the same.
 Now, we can draw @code{r} to make our first drawing:
 
 @example
+beginfig(1);
 draw p;
+endfig with_projection parallel_x_y; 
 @end example
 
 @center{@image{example_1}}
