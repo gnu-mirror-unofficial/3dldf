@@ -424,8 +424,6 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-clean: clean-am
-
 clean-am: clean-generic clean-libtool mostlyclean-am
 
 distclean: distclean-am
@@ -519,7 +517,7 @@ html: 3dldf.html
 
 info: 3dldf.info
 
-3dldf.dvi: $(SOURCES_MANUAL) example_1.eps
+3dldf.dvi: $(SOURCES_MANUAL) examples_1.eps
 	texi2dvi 3dldf.texi
 
 3dldf.ps: 3dldf.dvi
@@ -551,17 +549,17 @@ examples: examples.ps
 examples.ps: examples.dvi
 	dvips -o examples.ps examples.dvi
 
-examples.dvi: example_1.eps examples.tex
+examples.dvi: examples_1.eps examples.tex
 	tex examples.tex
 
-example_1.eps: example.1
+examples_1.eps: examples.1
 	./rename_examples.sh
 
-example.1: example.mp
-	mpost example.mp
+examples.1: examples.mp
+	mpost examples.mp
 
-example.mp: example.ldf
-	../src/3dldf example.ldf
+examples.mp: examples.ldf
+	../src/3dldf examples.ldf
 
 #### ** (2) Tags
 
@@ -571,6 +569,19 @@ tags: TAGS
 
 TAGS: $(SOURCES_MANUAL)
 	etags $(SOURCES_MANUAL)
+
+#### ** (2) Clean
+
+.PHONY: clean
+
+clean:
+	rm -f examples_*.eps examples_*.[[:digit:]] *.dvi *.eps *.ps *.pdf *.html *.aux *.cp *.cps *.fn \
+           *.info *.info.gz *.ky *.log *.pg 3DLDFput.mp 3dldf.tmp 3dldf.toc 3dldf.tp 3dldf.vr \
+           *.mpx html-split *.*~ sample10.mp examples.mp *.[[:digit:]] *.[[:digit:]][[:digit:]] \
+           *.[[:digit:]][[:digit:]][[:digit:]]
+#### ** (2) Query
+
+.PHONY: query
 
 .PHONY: query
 

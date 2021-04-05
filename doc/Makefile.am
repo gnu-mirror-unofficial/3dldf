@@ -135,6 +135,20 @@ tags: TAGS
 TAGS: $(SOURCES_MANUAL)
 	etags $(SOURCES_MANUAL)
 
+
+#### ** (2) Clean
+
+.PHONY: clean
+
+clean:
+	rm -f examples_*.eps examples_*.[[:digit:]] *.dvi *.eps *.ps *.pdf *.html *.aux *.cp *.cps *.fn \
+           *.info *.info.gz *.ky *.log *.pg 3DLDFput.mp 3dldf.tmp 3dldf.toc 3dldf.tp 3dldf.vr \
+           *.mpx html-split *.*~ sample10.mp examples.mp *.[[:digit:]] *.[[:digit:]][[:digit:]] \
+           *.[[:digit:]][[:digit:]][[:digit:]]
+#### ** (2) Query
+
+.PHONY: query
+
 .PHONY: query
 
 query:

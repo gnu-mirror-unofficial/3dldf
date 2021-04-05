@@ -51,7 +51,7 @@
 for i in examples.[[:digit:]]*
 do
    echo $i;
-   s=${i:8}
+   s=${i:9}
    echo "mv $i examples_$s.eps"
    mv $i examples_$s.eps
 done;    
