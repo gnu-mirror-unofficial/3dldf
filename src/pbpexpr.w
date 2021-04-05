@@ -120,15 +120,14 @@ an ``unknown |bool_point|''.
 
 @<Define rules@>=
   else /* |!(entry == 0 || entry->object == 0)|  */
+  {
 
-     {
+     Bool_Point* bp = new Bool_Point;
+     *bp = *static_cast<Bool_Point*>(entry->object);
 
-        Bool_Point* bp = new Bool_Point;
-        *bp = *static_cast<Bool_Point*>(entry->object);
+     @=$$@> = static_cast<void*>(bp);                    
 
-        @=$$@> = static_cast<void*>(bp);                    
-
-     }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
+  }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
 
