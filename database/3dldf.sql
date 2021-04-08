@@ -11,11 +11,11 @@ use 3dldf;
 /* * points  */
 
 drop table points;
-
 create table points
 (
     prefix varchar(32) not null default "",
     name varchar(32) not null default "",
+    up varchar(32) default null,
     array_flag boolean not null default false,
     vector_type_flag boolean not null default false,
     world_coordinates_x float not null default 0.0,
@@ -62,28 +62,6 @@ create table points
 );
 
 
-    -- transform_matrix_0_0 float not null default 1.0,
-    -- transform_matrix_0_1 float not null default 0.0,
-    -- transform_matrix_0_2 float not null default 0.0,
-    -- transform_matrix_0_3 float not null default 0.0,	
-                  
-    -- transform_matrix_1_0 float not null default 0.0,
-    -- transform_matrix_1_1 float not null default 1.0,
-    -- transform_matrix_1_2 float not null default 0.0,
-    -- transform_matrix_1_3 float not null default 0.0,
-                  
-    -- transform_matrix_2_0 float not null default 0.0,
-    -- transform_matrix_2_1 float not null default 0.0,
-    -- transform_matrix_2_2 float not null default 1.0,
-    -- transform_matrix_2_3 float not null default 0.0,
-                  
-    -- transform_matrix_3_0 float not null default 0.0,
-    -- transform_matrix_3_1 float not null default 0.0,
-    -- transform_matrix_3_2 float not null default 0.0,
-    -- transform_matrix_3_3 float not null default 1.0,
-
-
-
 alter table points add column operetta varchar(64) default null after opera;
 
 show columns from 3dldf.points;
@@ -94,72 +72,63 @@ show columns from 3dldf.points;
 
 delete from points;
 
-insert into points (world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
+insert into points (prefix, name, world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
 values
-(1, 2, 3, 1);
+("abc", "p", 1, 2, 3, 1);
 
-insert into points (world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
+insert into points (prefix, name, world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
 values
-(17.5, 5, 13.001, 1);
-
-
+("abc", "q", 17.5, 5, 13.001, 1);
 
 
 /* * Select  */
 
-select prefix, name, array_flag, vector_type_flag from points order by prefix, name\G
+
+
+select prefix, name, array_flag, vector_type_flag,
+world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w
+from points order by prefix, name\G
 
 select * from points order by prefix, name, world_coordinates_x, world_coordinates_y,
 world_coordinates_z asc\G
 
 
-
-
-
-
-select world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w,
-transform_matrix_0_0, transform_matrix_0_1, transform_matrix_0_2, transform_matrix_0_3,
-transform_matrix_1_0, transform_matrix_1_1, transform_matrix_1_2, transform_matrix_1_3,
-transform_matrix_2_0, transform_matrix_2_1, transform_matrix_2_2, transform_matrix_2_3,
-transform_matrix_3_0, transform_matrix_3_1, transform_matrix_3_2, transform_matrix_3_3
-from
-points order by world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_z asc\G
-
-
-
-
-
-
-
-/* * transforms  */
+/* Transforms  */
 
 drop table transforms;
-
 create table transforms
 (
-    name varchar(32) not null default "",
-  
-    matrix_0_0 float not null default 1.0,
-    matrix_0_1 float not null default 0.0,
-    matrix_0_2 float not null default 0.0,
-    matrix_0_3 float not null default 0.0,	
-                  
-    matrix_1_0 float not null default 0.0,
-    matrix_1_1 float not null default 1.0,
-    matrix_1_2 float not null default 0.0,
-    matrix_1_3 float not null default 0.0,
-                  
-    matrix_2_0 float not null default 0.0,
-    matrix_2_1 float not null default 0.0,
-    matrix_2_2 float not null default 1.0,
-    matrix_2_3 float not null default 0.0,
-                  
-    matrix_3_0 float not null default 0.0,
-    matrix_3_1 float not null default 0.0,
-    matrix_3_2 float not null default 0.0,
-    matrix_3_3 float not null default 1.0
+   prefix varchar(32) not null default "",
+   name varchar(32) not null default "",
+   up varchar(32) default null,
+   
+   matrix_0_0 float not null default 1.0,
+   matrix_0_1 float not null default 0.0,
+   matrix_0_2 float not null default 0.0,
+   matrix_0_3 float not null default 0.0,	
+
+   matrix_1_0 float not null default 0.0,
+   matrix_1_1 float not null default 1.0,
+   matrix_1_2 float not null default 0.0,
+   matrix_1_3 float not null default 0.0,
+    
+   matrix_2_0 float not null default 0.0,
+   matrix_2_1 float not null default 0.0,
+   matrix_2_2 float not null default 1.0,
+   matrix_2_3 float not null default 0.0,
+    
+   matrix_3_0 float not null default 0.0,
+   matrix_3_1 float not null default 0.0,
+   matrix_3_2 float not null default 0.0,
+   matrix_3_3 float not null default 1.0
 
 );
+
+
+
+insert into transforms () values ();
+
+select * from transforms\G
 
 delete from transforms;
 
@@ -167,9 +136,62 @@ insert into transforms (name) values ("t0");
 
 select * from transforms order by name, matrix_0_0 asc\G
 
+/* * paths  */
 
+drop table paths;
 
+create table paths
+(
+   prefix varchar(32) not null default "",
+   name varchar(32) not null default "",
+   up varchar(32) default null,
 
+   line_switch boolean not null default false;
+   cycle_switch boolean not null default false;
+  
+    do_output boolean not null default false;
+  
+    fill_draw_value int not null default 0;  
+    
+    arrow int not null default 0;  
+
+    world_extremes_min_x float not null default 0.0,	
+    world_extremes_max_x float not null default 0.0, 
+    world_extremes_min_y float not null default 0.0, 
+    world_extremes_max_y float not null default 0.0, 
+    world_extremes_min_z float not null default 0.0, 
+    world_extremes_max_z float not null default 0.0, 
+
+    pre_projective_extremes_min_x float not null default 0.0,  
+    pre_projective_extremes_max_x float not null default 0.0, 
+    pre_projective_extremes_min_y float not null default 0.0,  
+    pre_projective_extremes_max_y float not null default 0.0, 
+    pre_projective_extremes_min_z float not null default 0.0,  
+    pre_projective_extremes_max_z float not null default 0.0, 
+
+    projective_extremes_min_x float not null default 0.0,  
+    projective_extremes_max_x float not null default 0.0, 
+    projective_extremes_min_y float not null default 0.0,  
+    projective_extremes_max_y float not null default 0.0, 
+    projective_extremes_min_z float not null default 0.0,  
+    projective_extremes_max_z float not null default 0.0, 
+
+);
+
+/* * connectors  */
+
+drop table connectors;
+
+create table connectors
+(
+   prefix varchar(32) not null default "",
+   up varchar(32) default null,
+   counter int not null default 0,
+   connector varchar(2) default ""
+);
+
+insert into connectors () values ();
+select * from connectors\G
 
 /* Local Variables: */
 /* mode:SQL */

@@ -2387,12 +2387,16 @@ Added this section with token declarations for
 
 \initials{LDF 2021.03.26.}
 Added token declaration for |RESTORE|.
+
+\initials{LDF 2021.04.08.}
+Added token declaration for |SCANNER_NODE|.
 \ENDLOG
 
 @<Token and precedence declarations@>=
 
 @=%token <int_value> BEGIN_GROUP@>@/
 @=%token <int_value> END_GROUP@>@/
+@=%token <int_value> SCANNER_NODE@>@/
 @=%token <int_value> SAVE@>@/
 @=%token <int_value> RESTORE@>@/
 @=%token <int_value> DATABASE@>@/

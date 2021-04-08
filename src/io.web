@@ -3645,8 +3645,8 @@ Scanner_Type::resolve_array_name(string s)
        ++iter)
     {
       real_stream << '[' << *iter << ']';
-      
-      s_size = s.find('£');
+
+      s_size = s.find(static_cast<char>(0243)); /* £:  British pound symbol  */
       
       if (s_size != string::npos)
         s.replace(s_size, 1, real_stream.str());
@@ -4381,7 +4381,7 @@ declaration.
 
 @<Declare |Scanner_Type| functions@>=
 Scan_Parse::Picture_Output_Arg_Type*
-extract_picture_output_args();
+extract_picture_output_args(void);
 
 @q * |friend| declarations for functions in |namespace Scan_Parse|.@>
 @* {\bf friend} declarations for functions in 
