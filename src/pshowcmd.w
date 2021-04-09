@@ -3804,7 +3804,7 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> database_option@>
 
-@q *** (3) database_option: POINTS.@>
+@q *** (3) database_option: ALL.@>
 @*2 \§database option>$\longrightarrow$ \.{ALL}.
 \initials{LDF 2021.03.23.}
 

@@ -4060,8 +4060,8 @@ Scanner_Type::show_database(void)
   
        Point curr_point;
 
-       string curr_prefix;
-       string curr_name;
+       vector<string> point_prefix_vector;
+       vector<string> point_name_vector;
 
        vector<Point> point_vector;
  
@@ -4109,19 +4109,46 @@ Scanner_Type::show_database(void)
 
            }  /* |if (curr_row == 0)|  */
 
-           cerr_strm << "Iteration " << (i + 1) << ": `curr_row[0]' == " << curr_row[0] << endl;
+           cerr_strm << "Iteration " << (i + 1) << ":" << endl 
+                     << "`curr_row[0]' == `prefix' == " << curr_row[0] << endl
+                     << "`curr_row[1]' == `name'   == " << curr_row[1] << endl;
            log_message(cerr_strm);
            cerr_message(cerr_strm);
            cerr_strm.str("");
 
            curr_point.clear();
 
+           point_prefix_vector.push_back(curr_row[0]);
+           point_name_vector.push_back(curr_row[1]);
 
+           curr_point.world_coordinates[0] = static_cast<real>(atof(curr_row[2]));
+           curr_point.world_coordinates[1] = static_cast<real>(atof(curr_row[3]));
+           curr_point.world_coordinates[2] = static_cast<real>(atof(curr_row[4]));
+           curr_point.world_coordinates[3] = static_cast<real>(atof(curr_row[5]));
 
-           curr_point.world_coordinates[0] = static_cast<real>(atof(curr_row[0]));
-           curr_point.world_coordinates[1] = static_cast<real>(atof(curr_row[1]));
-           curr_point.world_coordinates[2] = static_cast<real>(atof(curr_row[2]));
-           curr_point.world_coordinates[3] = static_cast<real>(atof(curr_row[3]));
+           curr_point.user_coordinates[0] = static_cast<real>(atof(curr_row[6]));
+           curr_point.user_coordinates[1] = static_cast<real>(atof(curr_row[7]));
+           curr_point.user_coordinates[2] = static_cast<real>(atof(curr_row[8]));
+           curr_point.user_coordinates[3] = static_cast<real>(atof(curr_row[9]));
+
+           curr_point.view_coordinates[0] = static_cast<real>(atof(curr_row[10]));
+           curr_point.view_coordinates[1] = static_cast<real>(atof(curr_row[11]));
+           curr_point.view_coordinates[2] = static_cast<real>(atof(curr_row[12]));
+           curr_point.view_coordinates[3] = static_cast<real>(atof(curr_row[13]));
+
+           curr_point.pre_projective_coordinates[0] = static_cast<real>(atof(curr_row[14]));
+           curr_point.pre_projective_coordinates[1] = static_cast<real>(atof(curr_row[15]));
+           curr_point.pre_projective_coordinates[2] = static_cast<real>(atof(curr_row[16]));
+           curr_point.pre_projective_coordinates[3] = static_cast<real>(atof(curr_row[17]));
+ 
+           curr_point.projective_coordinates[0] = static_cast<real>(atof(curr_row[18]));
+           curr_point.projective_coordinates[1] = static_cast<real>(atof(curr_row[19]));
+           curr_point.projective_coordinates[2] = static_cast<real>(atof(curr_row[20]));
+           curr_point.projective_coordinates[3] = static_cast<real>(atof(curr_row[21]));
+ 
+           curr_point.drawdot_value = static_cast<signed short>(atoi(curr_row[22]));
+           curr_point.do_output = static_cast<bool>(atoi(curr_row[23]));
+           curr_point.measurement_units = static_cast<string>(curr_row[24]);
 
            cerr_strm << "`curr_point.world_coordinates[0]' == " << curr_point.world_coordinates[0] 
                      << endl
@@ -4130,11 +4157,16 @@ Scanner_Type::show_database(void)
                      << "`curr_point.world_coordinates[2]' == " << curr_point.world_coordinates[2] 
                      << endl
                      << "`curr_point.world_coordinates[3]' == " << curr_point.world_coordinates[3] 
+                     << endl
+                     << "`currenldrawdot_value'        == " << curr_point.drawdot_value << endl 
+                     << "`curr_point.do_output'            == " << curr_point.do_output << endl         
+                     << "`curr_point.measurement_units'    == " << curr_point.measurement_units 
                      << endl;
 
            log_message(cerr_strm);
            cerr_message(cerr_strm);
            cerr_strm.str("");
+
 
            point_vector.push_back(curr_point);
            ++i;
@@ -4151,6 +4183,11 @@ Scanner_Type::show_database(void)
 
      if (point_vector.size() == 0)
      {
+         cerr_strm << "`point_vector.size()' == 0.  No points to show.  Continuing." 
+                   << endl;
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
      }
      else
      {
@@ -4165,18 +4202,25 @@ Scanner_Type::show_database(void)
               iter != point_vector.end();
               ++iter)
          {
-             cerr_strm << "Point " << j << ":";
+             cerr_strm << "Point " << j << ":" << endl 
+                       << "`prefix' == " << point_prefix_vector[j] << endl 
+                       << "`name'   == " << point_name_vector[j];
              log_message(cerr_strm);
              cerr_message(cerr_strm);
              cerr_strm.str("");
 
              iter->show("Point");
 
+             cerr_strm << endl;
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+
+
+
              ++j;
          }
-
      }
-
    }  /* |if (do_points)|  */
 
 @q *** @> 
