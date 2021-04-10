@@ -5508,6 +5508,8 @@ Point::show(string text,
 {
     bool DEBUG = false; /* |true| */@; 
 
+    vector<char> coords_vector;
+
     cerr_mutex.lock();
 
     if (DEBUG)
@@ -5520,14 +5522,28 @@ Point::show(string text,
 
     coords = tolower(coords);
 
+    if (coords == 'a')
+    {
+        coords_vector.push_back('w');   
+        coords_vector.push_back('p');   
+        coords_vector.push_back('u');   
+        coords_vector.push_back('v');   
+    }
+    else
+        coords_vector.push_back(coords);   
+
+
     if (coords == 'w')
-      ; /* Do nothing.  */
+      cerr << "Projective coordinates.\n";
+
     else if (coords == 'p')
       cerr << "Projective coordinates.\n";
     else if (coords == 'u')
       cerr << "User coordinates.\n";
     else if (coords == 'v')
       cerr << "View coordinates.\n";
+    else if (coords == 'a')
+      cerr << "All coordinates.\n";
     else
       {
           cerr << "WARNING! In |show|: "
@@ -5553,26 +5569,45 @@ Point::show(string text,
   {
     cerr_mutex.unlock();
     transform.show("In `Point.:show': Transform before apply_transform");
+    cerr_mutex.lock();
   }
-    
-    valarray<real> v = get_all_coords(coords, do_persp, do_apply, f, proj, factor);
 
-    cerr << "`valarray<real> v.size() == " << v.size() << endl 
-         << "(" << v[0] << ", " << v[1] << ", " << v[2] << ", " << v[3] << ")"
-         << endl;
+  valarray<real> v;
 
-    if (DEBUG)
-      {
-        transform.show("In `Point.:show': Transform after apply_transform");
-      }  
+  for (vector<char>::iterator iter = coords_vector.begin();
+       iter != coords_vector.end();
+       ++iter)
+  {
+       v = get_all_coords(*iter, do_persp, do_apply, f, proj, factor);
 
-    if (DEBUG)
-       cerr << "Exiting `Point::show' successfully with void return value." 
-            << endl;
+       if (*iter == 'w')
+         cerr << "World coordinates:" << endl;
+       else if (*iter == 'p')
+         cerr << "Projective coordinates:" << endl;
+       else if (*iter == 'u')
+         cerr << "User coordinates:" << endl;
+       else if (*iter == 'v')
+         cerr << "View coordinates:" << endl;
 
-    cerr_mutex.unlock();
+      cerr << "`valarray<real> v.size() == " << v.size() << endl 
+           << "(" << v[0] << ", " << v[1] << ", " << v[2] << ", " << v[3] << ")"
+           << endl;
+  }
 
-    return;
+  if (DEBUG)
+  {
+      cerr_mutex.unlock();
+      transform.show("In `Point.:show': Transform after apply_transform");
+      cerr_mutex.lock();
+  }  
+
+  if (DEBUG)
+     cerr << "Exiting `Point::show' successfully with void return value." 
+          << endl;
+
+  cerr_mutex.unlock();
+
+  return;
 
 }  /* End of |Point::show| definition */
 
