@@ -3859,12 +3859,14 @@ surface hiding.
 Added this function.
 \ENDLOG
 
-@q ***** (5) Definition @>
+@q *** (3) Definition @>
 @
 @<Define |Scanner_Type| functions@>=
 int
 Scanner_Type::show_database(void)
 {
+@q **** (4) Definition @>
+
     bool DEBUG = true; /* |false| */
 
     bool do_points = false;
@@ -3906,7 +3908,7 @@ Scanner_Type::show_database(void)
       cerr_strm.str("");
     }
 
-@q *** @> 
+@q **** (4) @>
 @
 @<Define |Scanner_Type| functions@>=
 
@@ -3963,12 +3965,14 @@ Scanner_Type::show_database(void)
       cerr_strm.str("");
     }
 
-@q *** @> 
-@
+@q **** (4) Points.  @> 
+@ Points.  
 @<Define |Scanner_Type| functions@>=
 
     if (do_points)
     {
+@q ***** (5) @>
+
         sql_strm.str("");
 
         sql_strm << "select prefix, name, world_coordinates_x, world_coordinates_y, world_coordinates_z, "
@@ -3988,6 +3992,8 @@ Scanner_Type::show_database(void)
            cerr_message(cerr_strm);
            cerr_strm.str("");
         }
+
+@q ***** (5) @>
 
         status = submit_mysql_query(sql_strm.str());
 
@@ -4027,7 +4033,7 @@ Scanner_Type::show_database(void)
 
         sql_strm.str("");
 
-@q *** @> 
+@q ***** (5) @>
 @
 @<Define |Scanner_Type| functions@>=
 
@@ -4052,6 +4058,10 @@ Scanner_Type::show_database(void)
 
        }
 
+@q ***** (5) @>
+@
+@<Define |Scanner_Type| functions@>=
+
        /*  Process the contents of |curr_row|  */
 
        curr_row = 0;
@@ -4064,9 +4074,13 @@ Scanner_Type::show_database(void)
        vector<string> point_name_vector;
 
        vector<Point> point_vector;
+
+@q ***** (5) @>
  
        do
        {
+@q ****** (6) @>
+
             curr_point.clear();
 
             curr_row = mysql_fetch_row(result);
@@ -4171,7 +4185,11 @@ Scanner_Type::show_database(void)
            point_vector.push_back(curr_point);
            ++i;
 
+@q ****** (6) @>
+
       } while (curr_row != 0);
+
+@q ***** (5) @>
 
      /* Free |result|  */
      
@@ -4180,6 +4198,8 @@ Scanner_Type::show_database(void)
 	 mysql_free_result(result);
 	 result = 0;
        }
+
+@q ***** (5) @>
 
      if (point_vector.size() == 0)
      {
@@ -4209,22 +4229,23 @@ Scanner_Type::show_database(void)
              cerr_message(cerr_strm);
              cerr_strm.str("");
 
-             iter->show("Point");
+             iter->show("Point:", 'a');
 
              cerr_strm << endl;
              log_message(cerr_strm);
              cerr_message(cerr_strm);
              cerr_strm.str("");
-
-
-
              ++j;
          }
      }
+
+@q ***** (5) @>
+
    }  /* |if (do_points)|  */
 
-@q *** @> 
-@
+@q **** (4) Paths.  @>
+@ Paths.  
+
 @<Define |Scanner_Type| functions@>=
 
     if (do_paths)
@@ -4257,6 +4278,8 @@ Scanner_Type::show_database(void)
    return 0;
 
 #endif 
+
+@q **** (4) @>
 
 }
 

@@ -72,20 +72,21 @@ show columns from 3dldf.points;
 
 delete from points;
 
-insert into points (prefix, name, world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
+insert into points (prefix, name, up,
+world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
 values
-("abc", "p", 1, 2, 3, 1);
+("abc", "p", "r", 1, 2, 3, 1);
 
-insert into points (prefix, name, world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
+insert into points (prefix, name, up,
+world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w)
 values
-("abc", "q", 17.5, 5, 13.001, 1);
+("abc", "q", "r", 17.5, 5, 13.001, 1);
 
 
 /* * Select  */
 
 
-
-select prefix, name, array_flag, vector_type_flag,
+select prefix, name, up, array_flag, vector_type_flag,
 world_coordinates_x, world_coordinates_y, world_coordinates_z, world_coordinates_w
 from points order by prefix, name\G
 
@@ -146,37 +147,46 @@ create table paths
    name varchar(32) not null default "",
    up varchar(32) default null,
 
-   line_switch boolean not null default false;
-   cycle_switch boolean not null default false;
+   line_switch boolean not null default false,
+   cycle_switch boolean not null default false,
   
-    do_output boolean not null default false;
+   do_output boolean not null default false,
   
-    fill_draw_value int not null default 0;  
+   fill_draw_value int not null default 0,
     
-    arrow int not null default 0;  
+   arrow int not null default 0,
 
-    world_extremes_min_x float not null default 0.0,	
-    world_extremes_max_x float not null default 0.0, 
-    world_extremes_min_y float not null default 0.0, 
-    world_extremes_max_y float not null default 0.0, 
-    world_extremes_min_z float not null default 0.0, 
-    world_extremes_max_z float not null default 0.0, 
+   world_extremes_min_x float not null default 0.0,	
+   world_extremes_max_x float not null default 0.0, 
+   world_extremes_min_y float not null default 0.0, 
+   world_extremes_max_y float not null default 0.0, 
+   world_extremes_min_z float not null default 0.0, 
+   world_extremes_max_z float not null default 0.0, 
 
-    pre_projective_extremes_min_x float not null default 0.0,  
-    pre_projective_extremes_max_x float not null default 0.0, 
-    pre_projective_extremes_min_y float not null default 0.0,  
-    pre_projective_extremes_max_y float not null default 0.0, 
-    pre_projective_extremes_min_z float not null default 0.0,  
-    pre_projective_extremes_max_z float not null default 0.0, 
+   pre_projective_extremes_min_x float not null default 0.0,  
+   pre_projective_extremes_max_x float not null default 0.0, 
+   pre_projective_extremes_min_y float not null default 0.0,  
+   pre_projective_extremes_max_y float not null default 0.0, 
+   pre_projective_extremes_min_z float not null default 0.0,  
+   pre_projective_extremes_max_z float not null default 0.0, 
 
-    projective_extremes_min_x float not null default 0.0,  
-    projective_extremes_max_x float not null default 0.0, 
-    projective_extremes_min_y float not null default 0.0,  
-    projective_extremes_max_y float not null default 0.0, 
-    projective_extremes_min_z float not null default 0.0,  
-    projective_extremes_max_z float not null default 0.0, 
-
+   projective_extremes_min_x float not null default 0.0,  
+   projective_extremes_max_x float not null default 0.0, 
+   projective_extremes_min_y float not null default 0.0,  
+   projective_extremes_max_y float not null default 0.0, 
+   projective_extremes_min_z float not null default 0.0,  
+   projective_extremes_max_z float not null default 0.0 
 );
+
+
+insert into paths (prefix, name) values ("abc", "r"); 
+
+select * from points where up = "r"\G
+
+
+
+
+
 
 /* * connectors  */
 
