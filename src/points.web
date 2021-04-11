@@ -5515,11 +5515,11 @@ Point::show(string text,
     if (DEBUG)
        cerr << "Entering `Point::show'." << endl;
 
-    cerr << text;
-
     if (text != "")
-      cerr  << " ";
-
+      cerr  << text << ":" << endl;
+    else
+      cerr << "Point:" << endl;
+ 
     coords = tolower(coords);
 
     if (coords == 'a')
@@ -5532,18 +5532,16 @@ Point::show(string text,
     else
         coords_vector.push_back(coords);   
 
-
     if (coords == 'w')
-      cerr << "Projective coordinates.\n";
-
+      ; // cerr << "World coordinates.\n";
     else if (coords == 'p')
-      cerr << "Projective coordinates.\n";
+      ; // cerr << "Projective coordinates.\n";
     else if (coords == 'u')
-      cerr << "User coordinates.\n";
+      ; // cerr << "User coordinates.\n";
     else if (coords == 'v')
-      cerr << "View coordinates.\n";
+      ; // cerr << "View coordinates.\n";
     else if (coords == 'a')
-      cerr << "All coordinates.\n";
+       cerr << "All coordinates.\n";
     else
       {
           cerr << "WARNING! In |show|: "
@@ -5600,6 +5598,8 @@ Point::show(string text,
       transform.show("In `Point.:show': Transform after apply_transform");
       cerr_mutex.lock();
   }  
+
+  cerr << endl;
 
   if (DEBUG)
      cerr << "Exiting `Point::show' successfully with void return value." 
