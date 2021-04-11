@@ -67,7 +67,9 @@
 
 # ** (2) Variables.
 
-bin_PROGRAMS = dummy$(EXEEXT) prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT)  
+# dummy$(EXEEXT) 
+
+bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT)  
 
 # lib3dldfsp.la
 
@@ -159,7 +161,7 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 prbsnflx_SOURCES = prbsnflx.l++
 
-dummy_SOURCES = dummy.cxx
+#dummy_SOURCES = dummy.cxx
 
 # $(3dldfsp_CWEB_files) 
 
