@@ -1897,12 +1897,15 @@ Id_Map_Type::show(string s, bool show_all) const
     } /* |for|  */@;
 
   if (up == static_cast<Id_Map_Node>(0))
-    cerr << "up == 0\n";
+     cerr << "Id_Map_Type::up is NULL.\n";
   else
-    {
-      cerr << "up != 0.  Showing up." << endl;
-      up->show();
-    }
+  {
+     cerr << "up != 0.  Showing up." << endl;
+     up->show("Id_Map_Type::up", show_all);
+  }
+
+  cerr << endl;
+
   return;
 }
 
@@ -4254,6 +4257,24 @@ Scanner_Type::show(string s, bool show_all) const
     }
 
   id_map_node->show("", show_all);
+
+  if (show_all && up != 0)
+  {
+      up->show("*up", true);
+  }
+  else if (!show_all && up != 0)
+  {
+     cerr << "`scanner-node->up' is non-NULL but `show_all' is `false'." << endl
+          << "Not showing `scanner-node->up'." << endl;
+  }
+  else if (show_all && up == 0)
+  {
+      cerr << "`Scanner_Type::up' is NULL.  Not showing." << endl;
+  }
+  else
+      cerr << "`Scanner_Type::up' is NULL." << endl;
+
+  cerr << endl;
 
   return;
 }
