@@ -3934,6 +3934,172 @@ Added this rule.
    @=$$@> = 0;
 };
 
+@q ****** (6) command --> SHOW SCANNER_NODE scanner_node_option_list@>
+
+@*5 \§command> $\longrightarrow$ \.{SHOW} \.{SCANNER_NODE} \§scanner node option list>.
+\initials{LDF 2021.04.11.}
+
+\LOG
+\initials{LDF 2021.04.11.}
+Added this rule.
+\ENDLOG
+
+@q ******* (7) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW SCANNER_NODE scanner_node_option_list@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+      cerr_strm << "*** Parser: Rule `command --> SHOW SCANNER_NODE scanner_node_option_list'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+   
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    vector<int>::iterator iter = find(scanner_node->show_scanner_node_options.begin(), 
+                                      scanner_node->show_scanner_node_options.end(), ALL);
+
+    bool show_all = (iter != scanner_node->show_scanner_node_options.end()) ? true : false;
+
+    status = scanner_node->show("Scanner_Type", show_all);
+ 
+    scanner_node->show_scanner_node_options.clear();
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
+@q ** (2) scanner_node_option_list.@>
+@*1 \§scanner node option list>.
+\initials{LDF 2021.04.11.}
+
+\LOG
+\initials{LDF 2021.04.11.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> scanner_node_option_list@>
+
+@q *** (3) scanner_node_option_list: /* Empty  */@>
+@*2 \§scanner node option list> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.04.11.}
+
+\LOG
+\initials{LDF 2021.04.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=scanner_node_option_list: /*  Empty  */@>@/
+{
+
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `scanner_node_option_list: EMPTY'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   if (scanner_node)
+      scanner_node->show_scanner_node_options.clear();   
+
+   @=$$@> = 0; 
+};
+
+@q *** (3) scanner_node_option_list: scanner_node_option_list scanner_node_option. @>
+@*2 \§scanner node option list> $\longrightarrow$ \§scanner node option>.
+\initials{LDF 2021.04.11.}
+
+\LOG
+\initials{LDF 2021.04.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=scanner_node_option_list: scanner_node_option_list scanner_node_option@>@/
+{
+
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG)
+     {
+       cerr_strm << "*** Parser: Rule `scanner_node_option_list: scanner_node_option_list scanner_node_option'.";
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+       
+     }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0; 
+};
+
+@q ** (2) scanner_node_option.@>
+@*1 \§scanner node option>.
+\initials{LDF 2021.04.11.}
+
+\LOG
+\initials{LDF 2021.04.11.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> scanner_node_option@>
+
+@q *** (3) scanner_node_option: ALL.@>
+@*2 \§scanner node option>$\longrightarrow$ \.{ALL}.
+\initials{LDF 2021.04.11.}
+
+\LOG
+\initials{LDF 2021.04.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=scanner_node_option: ALL@>@/
+{
+
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `scanner_node_option: ALL'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   if (scanner_node)
+      scanner_node->show_scanner_node_options.push_back(ALL);
+
+   @=$$@> = 0;
+};
+
+
+
+
 @q * (0)@>
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
