@@ -1,5 +1,8 @@
 #! /bin/bash
 
+#### /home/laurence/3DLDF-2.0.4/src/create_headers.sh
+#### Created by Laurence D. Finston (LDF) Mon Mar 22 21:25:10 2021 +0100
+
 #### * Copyright and License.
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
