@@ -1,7 +1,6 @@
 %%%% dodec_02.ldf
 %%%% Created by Laurence D. Finston (LDF) Tue Oct 16 22:49:15 CEST 2007
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -69,9 +68,7 @@ fi;
 
 %% ** (2) draw_dodecahedron_net
 
-
 input "dodec_02.lmc";
-
 
 %% *** (3) Global declarations and initializations
 
@@ -105,7 +102,6 @@ endfig with_projection parallel_x_z no_sort;
 beginfig(2);
 d0 := unit_dodecahedron scaled 2 rotated (180, 190);
 draw d0;
-
 
 for i = 0 upto 11:
    r[i] := get_reg_polygon (i) d0;
@@ -153,10 +149,8 @@ filldraw r9;
 filldraw r10;
 filldraw r11;
 
-
 % filldraw r10;
 % filldraw r11;
-
 
 n1 := ((get_normal r1) * -1) shifted c1;
 
@@ -198,8 +192,6 @@ filldraw r8;
 % draw r10;
 % draw r11;
 
-
-
 label(3, c3);
 label(4, c4);
 label(5, c5);
@@ -207,7 +199,6 @@ label(7, c7);
 label(8, c8);
 
 endfig with_focus f no_sort;   
-
 
 %% *** (3) Figure 4
 
@@ -227,7 +218,6 @@ endfig with_projection parallel_x_z no_sort;
 %% **** (4) Declarations
 
 path q[];
-
 
 %% **** (4) Figure 5
 
@@ -305,7 +295,6 @@ endfor;
 for i = 0 upto 9:
    p[30 + i] := p[10 + i] transformed t0;
 endfor;
-
 
 %dotlabel.bot("$p_{20}$", p20);
 %dotlabel.bot("$p_{21}$", p21);
@@ -458,7 +447,6 @@ for i = 0 upto 4:
    draw q[60 + i] dashed evenly;
 endfor;
 
-
 %% ***** (5) Fifth row
 
 for i = 0 upto 3:
@@ -496,7 +484,6 @@ endfor;
 %% ***** (5) End of figure 5
 
 endfig with_projection parallel_x_z no_sort; 
-
 
 %% *** (3) Figure 6
 
@@ -551,7 +538,6 @@ draw q[4] dashed evenly;
 %dotlabel.top("$p_{18}$", p18);
 %dotlabel.top("$p_{19}$", p19);
 
-
 %% ***** (5) Second pentagon, r1
 
 p100 := p15 shifted 1;
@@ -575,7 +561,6 @@ endfor;
 for i = 0 upto 9:
    p[30 + i] := p[10 + i] transformed t0;
 endfor;
-
 
 %dotlabel.bot("$p_{20}$", p20);
 %dotlabel.bot("$p_{21}$", p21);
@@ -631,7 +616,6 @@ endfor;
 %dotlabel.bot("$p_{58}$", p58);
 %dotlabel.bot("$p_{59}$", p59);
 
-
 %% ***** (5) Second row 
 
 t0 := identity shifted (0, 0, -6);
@@ -668,7 +652,6 @@ for i = 0 upto 4:
   draw q[40 + i] dashed evenly;
   draw q[60 + i] dashed evenly;
 endfor;
-
 
 %% ***** (5) Fourth row 
 

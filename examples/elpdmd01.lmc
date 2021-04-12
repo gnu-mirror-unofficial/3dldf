@@ -1,7 +1,6 @@
 %%%% elpdmd01.lmc
 %%%% Created by Laurence D. Finston (LDF) Fri Nov 26 15:19:45 CET 2010
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -101,7 +100,6 @@ tab_ctr := 0;
 tab_x_offset := 0;
 tab_z_offset := 0;
 
-
 % j, k:  	  Points on first triangle
 % b, c:  	  Points on second triangle
 % n:     	  amount of mediation used to get offset from the points on the first triangle
@@ -139,7 +137,6 @@ def tab (double_tab_picture, dtp_ctr) {triangle t, numeric j, numeric k, numeric
 
    P0 := mediate(get_point (j) t, get_point (k) t, n);
    P1 := mediate(get_point (k) t, get_point (j) t, n);
-
 
    P3 := mediate(P0, P1);
 
@@ -184,7 +181,6 @@ def tab (double_tab_picture, dtp_ctr) {triangle t, numeric j, numeric k, numeric
    draw P3 -- P4 with_color dark_gray with_pen thin_pen;
 
 % %% ****** (6) Double tab on double_tab_picture[dtp_ctr]
-
 
    P15 := P0;
 
@@ -271,7 +267,6 @@ def tab (double_tab_picture, dtp_ctr) {triangle t, numeric j, numeric k, numeric
 
 %    tab_x_offset += magnitude(P16 - P15) + .5cm;
 
-
 %% ****** (6)
 
    numeric minus_one;
@@ -282,7 +277,6 @@ def tab (double_tab_picture, dtp_ctr) {triangle t, numeric j, numeric k, numeric
       crosshair (double_tab_picture, dtp_ctr) {mediate(P21, P22, i/(crosshair_ctr + 1)), .1cm, P21, P22};
       crosshair (double_tab_picture, dtp_ctr) {mediate(P27, P28, i/(crosshair_ctr + 1)), .1cm, P27, P28};
    endfor;
-
 
 %    message "unit_vector(P10 - P11):"; 
 %    show unit_vector(P10 - P11);
@@ -355,20 +349,15 @@ def tab (double_tab_picture, dtp_ctr) {triangle t, numeric j, numeric k, numeric
 
    draw Q7 -- Q8 with_color dark_gray with_pen thin_pen;
 
-
-
    for i = 1 upto crosshair_ctr:
       crosshair  (current_picture, minus_one) {mediate(Q7, Q8, i/(crosshair_ctr + 1)), .1cm, Q7, Q8};
    endfor;
-
 
 %     message "unit_vector(Q8 - Q7):"; 
 %     show unit_vector(Q8 - Q7);
 
 %     message "unit_vector(Q4 - Q5):"; 
 %     show unit_vector(Q4 - Q5);
-
-
 
 %      dotlabel.lft("$Q_{0}$", Q0);
 %      dotlabel.bot("$Q_{1}$", Q1);
@@ -379,7 +368,6 @@ def tab (double_tab_picture, dtp_ctr) {triangle t, numeric j, numeric k, numeric
 %       dotlabel.top ("$Q_{6}$", Q6) with_text_color blue with_dot_color blue;
 %       dotlabel.bot("$Q_{7}$", Q7);
 %       dotlabel.top ("$Q_{8}$", Q8);
-
 
 %% ***** (5)
 
@@ -411,7 +399,6 @@ def tab_single {triangle t, numeric j, numeric k, numeric n, numeric r, numeric 
 
    P0 := mediate(get_point (j) t, get_point (k) t, n);
    P1 := mediate(get_point (k) t, get_point (j) t, n);
-
 
    P3 := mediate(P0, P1);
 
@@ -469,7 +456,6 @@ def tab_single {triangle t, numeric j, numeric k, numeric n, numeric r, numeric 
 
 enddef;
 
-
 %% ***** (5) handle_blob
 
 macro handle_blob;
@@ -526,11 +512,7 @@ P8 := (OFFSET * unit_vector(P2 - P0)) shifted P2;
 
 draw P8 -- P2 dashed evenly;
 
-
-
-
 enddef;
-
 
 %% ***** (5) End of macro definitions
 

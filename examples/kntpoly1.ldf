@@ -1,7 +1,6 @@
 %%%% kntpoly1.ldf
 %%%% Created by Laurence D. Finston (LDF) Tue Aug  5 21:07:43 CEST 2008
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -115,9 +114,7 @@ p3 := p1 rotated (0, 54);
 p4 := p1 shifted (0, 1);
 p5 := p0 rotated_around (p1, p4) -54;
 
-
 p6 := (p0 -- p3) intersection_point (p1 -- p5);
-
 
 message "length (p6 - p1)";
 show length (p6 - p1);
@@ -126,7 +123,6 @@ show length (p6 - p1);
 %show length (p6 - p0);
 
 diameter := 2 * length (p6 - p0);
-
 
 %draw p2 -- p0 -- p1;
 %draw p0 -- p3;
@@ -138,7 +134,6 @@ diameter := 2 * length (p6 - p0);
 %dotlabel.bot("$p_3$", p3);
 %dotlabel.bot("$p_5$", p5);
 %dotlabel.bot("$p_6$", p6);
-
 
 set pentagon0 with_sides 5 with_center p6 with_diameter diameter;
 
@@ -161,7 +156,6 @@ if false:
    dotlabel.bot("$p_{16}$", p16);
 fi; 
 
-
 p29 := p7 shifted (0, 0, 12h);
 
 %dotlabel.ulft("$p_{29}$", p29);
@@ -172,7 +166,6 @@ for i := 30 upto 38:
    p[i] := p29 shifted (j * w, 0);
    j := j + 1;
 endfor;
-
 
 if false: 
    dotlabel.top("$p_{30}$", p30);
@@ -194,9 +187,6 @@ for i := 7 upto 18:
    j := j + 1;
 endfor;
 
-
-
-
 % for i := 29 upto 38:
 %   shift p[i] (0, 0, k);
 % endfor;
@@ -205,9 +195,7 @@ for i := 7 upto 16:
    draw p[i] -- p[i + 22] withcolor dark_gray;
 endfor;
 
-
 % %% Top
-
 
 %% Left side
 
@@ -283,7 +271,6 @@ label.rt("{\eightrm \hbox to \wd0{11.\hss} P 1}", mediate(p60, p61));
 %    label.rt(i - 49, mediate(p[i], p[i + 1]));
 % endfor;
 
-
 p70 := p9 shifted (0, 0, h);
 p71 := p10 shifted (0, 0, h);
 
@@ -315,7 +302,6 @@ endfor;
 shift r0 (w, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
 
-
 for i := 0 upto 5:
    shift r0 (-w, 0);
    filldraw r0 with_draw_color black with_fill_color light_gray;
@@ -323,43 +309,35 @@ endfor;
 
 shift r0 (0, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
-
 
 for i := 0 upto 5:
    shift r0 (w, 0);
    filldraw r0 with_draw_color black with_fill_color light_gray;
 endfor;
 
-
 shift r0 (0, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
-
 
 for i := 0 upto 5:
    shift r0 (-w, 0);
    filldraw r0 with_draw_color black with_fill_color light_gray;
 endfor;
 
-
 shift r0 (0, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
-
 
 for i := 0 upto 5:
    shift r0 (w, 0);
    filldraw r0 with_draw_color black with_fill_color light_gray;
 endfor;
 
-
 shift r0 (0, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
-
 
 for i := 0 upto 5:
    shift r0 (-w, 0);
    filldraw r0 with_draw_color black with_fill_color light_gray;
 endfor;
-
 
 shift r0 (w, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
@@ -368,8 +346,6 @@ for i := 0 upto 3:
    shift r0 (w, 0);
    filldraw r0 with_draw_color black with_fill_color light_gray;
 endfor;
-
-
 
 shift r0 (-w, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
@@ -381,7 +357,6 @@ endfor;
 
 shift r0 (w, 0, h);
 filldraw r0 with_draw_color black with_fill_color light_gray;
-
 
 p72 := p39 shifted (1.5w, 0);
 p74 := p72 shifted (0, 0, h);
@@ -407,16 +382,13 @@ filldraw r1 with_draw_color black with_fill_color light_gray;
 shift r1 (5.5w, 0);
 filldraw r1 with_draw_color black with_fill_color light_gray;
 
-
 shift r1 (w, 0, 4h);
 filldraw r1 with_draw_color black with_fill_color light_gray;
 
 shift r1 (-7.5w, 0);
 filldraw r1 with_draw_color black with_fill_color light_gray;
 
-
 draw pentagon0;
-
 
 %% *** (3) End of 3DLDF code
 

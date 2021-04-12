@@ -174,7 +174,6 @@ def rect_prism_ma (V, W, STP, DTP, LP) {numeric h_val_side, numeric v_val_side, 
 
    c2 *= c3 *= t1;
 
-
 %% *** (3)
 
 %% **** (4)
@@ -395,7 +394,6 @@ def rect_prism_ma (V, W, STP, DTP, LP) {numeric h_val_side, numeric v_val_side, 
       dotlabel.top("$p_{23}$", p23) W;
    fi;
 
-
 %% *** (3)
 
   t2 := identity rotated (90, 0);
@@ -455,21 +453,15 @@ def rect_prism_ma (V, W, STP, DTP, LP) {numeric h_val_side, numeric v_val_side, 
 
   s21 := mediate(s11, s9);
 
-
   s22 := mediate(s8, s5);
-
 
   s23 := mediate(s4, s6);
 
-
   s24 := mediate(s2, s7);
-
 
   s25 := mediate(s15, s4);
 
-
   s26 := mediate(s9, s17);
-
 
   if do_labels:   
      label("$q_4$ ($s_{21}$)", s21) V;
@@ -490,10 +482,8 @@ def rect_prism_ma (V, W, STP, DTP, LP) {numeric h_val_side, numeric v_val_side, 
               & "\hbox{Angle $\gamma$: ${" &  decimal rot_angle_c & "}^\circ$}"
               & "\hbox{Angle $\delta$: ${" &  decimal rot_angle_d & "}^\circ$}}";
 
-
   
   label.lrt(temp_str, s20) LP;
-
 
 %% *** (3) Tabs
 
@@ -514,24 +504,20 @@ def rect_prism_ma (V, W, STP, DTP, LP) {numeric h_val_side, numeric v_val_side, 
   tab (temp_path, STP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, -1};
   tab (temp_path, DTP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, 1};
 
-
   temp_path := s7 -- s3;
 
   tab (temp_path, STP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, 1};
   tab (temp_path, DTP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, 1};
-
 
   temp_path := s12 -- s4;
 
   tab (temp_path, STP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, -1};
   tab (temp_path, DTP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
 
-
   temp_path := s11 -- s8;
 
   tab (temp_path, STP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
   tab (temp_path, DTP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
-
 
   temp_path := s4 -- s7;
 
@@ -577,9 +563,6 @@ def rect_prism_ma (V, W, STP, DTP, LP) {numeric h_val_side, numeric v_val_side, 
 
   tab (temp_path, STP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_d, -1};
   tab (temp_path, DTP, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_d, 1};
-
-
-
 
 %% *** (3)
 

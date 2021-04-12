@@ -77,7 +77,6 @@ set E with_center origin with_axis_x Ew with_axis_y Eh with_axis_z Ed
        with_divisions_x 8 with_divisions_y 8 with_divisions_z 2
        with_point_count 64;
 
-
 rectangle r[];
 
 %r0 := unit_rectangle scaled (rw, 0, rd) rotated (15, 15, 20) shifted (0, 0, 4);  %% These work.
@@ -139,12 +138,10 @@ endfig with_focus f no_sort;
 point label_pt;
 label_pt := (0, -10);
 
-
 beginfig(2); 
 output save_picture with_projection parallel_x_z;
 %label("Parallel Projection, X-Z Plane", label_pt shifted 6);
 endfig with_projection parallel_x_y;
-
 
 beginfig(3); 
 output save_picture with_projection parallel_x_y;

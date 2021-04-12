@@ -60,7 +60,6 @@ input "bldelem0.lmc";
 %% !! TODO: LDF 2012.09.15.  
 %% Improve the labelling when A = B = C.
 
-
 macro rect_prism;
 
 %% AA:  Rectangles
@@ -80,7 +79,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
                     	     	     	 numeric ccross_c} =
 
 %% *** (3)
-
 
    numeric h_offset;
    numeric tab_height;
@@ -117,7 +115,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
 
    R2 := unit_rectangle rotated (90, 0) scaled (height_end, v_val_side);
    shift R2 by (P[1][1] - get_point 0 R2);
-
 
    R3 := R1 shifted by (get_point 1 R2 - P[1][0]);
 
@@ -169,13 +166,11 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
       draw S2 shifted (-.0, -.25cm) -- S3 shifted (.0, .25cm) with_color gray with_pen thin_pen
               on_picture BB;
 
-
       crosshair (BB) {S0, .1, P[0][0], P[0][1]};
       crosshair (BB) {S1, .1, P[0][0], P[0][1]};
       crosshair (BB) {S2, .1, P[0][0], P[0][1]};
       crosshair (BB) {S3, .1, P[0][0], P[0][1]};
       crosshair (BB) {S4, .1, P[0][0], P[0][1]};
-
 
 %% **** (4)  Bottom end 
 
@@ -190,7 +185,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
 
       %dotlabel.rt("$S_5$", S5) with_text_color red;
 
-
 %% **** (4)
 
       draw S0 shifted (0, -.5 height_end) -- S0 shifted (0, .5 height_end) with_color gray with_pen thin_pen
@@ -200,7 +194,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
               on_picture BB;
 
       crosshair (BB) {S0, .1, P[0][0], P[0][1]};
-
 
 %% **** (4)  Rectangles (sides)
 
@@ -261,16 +254,13 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
 
    crosshair (DD) {get_center RA, .1, P[0][0], P[0][1]};         
 
-
    tab (RA, DD, h_offset, tab_height) {0, 3, .875, .75, .2, ccross_c, -1};
    tab (RA, DD, h_offset, tab_height) {1, 2, .875, .75, .2, ccross_c, 1};
    tab (RA, DD, h_offset, tab_height) {2, 3, .875, .75, .2, ccross_a, 1};
 
-
    tab (RA, CC, h_offset, tab_height) {0, 3, .875, .75, .2, ccross_c, 1};
    tab (RA, CC, h_offset, tab_height) {1, 2, .875, .75, .2, ccross_c, -1};
    tab (RA, CC, h_offset, tab_height) {2, 3, .875, .75, .2, ccross_c, -1};
-
 
    RA := R2;
    tab (RA, CC, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_c, 1};
@@ -327,11 +317,9 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
 
    crosshair (DD) {get_center RA, .1, P[0][0], P[0][1]};         
 
-
    tab (RA, DD, h_offset, tab_height) {0, 3, .875, .75, .2, ccross_c, 1};
    tab (RA, DD, h_offset, tab_height) {1, 2, .875, .75, .2, ccross_c, -1};
    tab (RA, DD, h_offset, tab_height) {2, 3, .875, .75, .2, ccross_a, -1};
-
 
    tab (RA, CC, h_offset, tab_height) {0, 3, .875, .75, .2, ccross_c, -1};
    tab (RA, CC, h_offset, tab_height) {1, 2, .875, .75, .2, ccross_c, 1};
@@ -355,7 +343,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
       label("$R_3$", get_center R3);
       label("$R_4$", get_center R4);
       label("$R_5$", get_center R5);
-
 
       dotlabel.bot("$P^0_0$", P[0][0]);
       dotlabel.bot("$P^0_1$", P[0][1]);
@@ -391,7 +378,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
       %dotlabel.rt("$M_1$", M1);
 
    fi;
-
 
 %% *** (3) Separate Double Tabs
 
@@ -452,7 +438,6 @@ def rect_prism (AA, BB, CC, DD, EE, FF) {numeric h_val_side,
      endfor;
 
    fi;
-
 
    label.rt("$B$", mediate(get_point 1 R3, get_point 2 R3)) DD;
 
@@ -618,7 +603,6 @@ fi;
 % dotlabel.bot("$2_2$", P[2][2]);
 % dotlabel.top("$Y_1$", Y1);
 
-
 Q0 := P[0][1] -- Y0 -- Y1 -- P[0][2] -- cycle;
 
 Q1 := P[0][0] -- P[2][1] -- Y0 -- P[0][1] -- cycle;
@@ -717,7 +701,6 @@ for i := 0 upto 3:
    S[i + 16] := get_point (i) Q3;
    S[i + 20] := get_point (i) Q4;
 endfor;
-
 
 S4 := get_point (0) Q7;
 S5 := get_point (1) Q7;
@@ -864,12 +847,9 @@ else:
    temp_path := S10 -- S9;
    tab (temp_path, ZERO, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
 
-
    temp_path := S9 -- S0;
    tab (temp_path, ZERO, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_c, -1};
 fi;
-
-
 
 if false: % true
    draw S9 -- S10 with_pen big_pen with_color red;
@@ -930,7 +910,6 @@ if do_double_tabs:
          label.bot("$C$", mediate(S2, S21) shifted (1mm, 0));
       fi;
 
-
       label.rt("$B$", mediate(S22, S23));
 
       temp_path := origin -- (magnitude (S21 - S22), 0);
@@ -963,14 +942,11 @@ if do_double_tabs:
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, 1};
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, -1};
 
-
       if double_tab_shift_value:
          shift temp_path (0, shift_val);
       else:
          shift temp_path (magnitude (S14 - S15) - h_offset + .25cm, 0);
       fi;
-
-
 
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, 1};
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, -1};
@@ -979,12 +955,10 @@ if do_double_tabs:
 
       V += WW;
 
-
       %message "h_offset:"; 
       %show h_offset;
 
       label.lft("$B$", (0, 3shift_val)) V;
-
 
    else:
       %message "V isn't a picture.\nNot creating separate double tabs.";
@@ -1003,7 +977,6 @@ if do_double_tabs:
 %else:
 %   message "Not doing double tabs:"; 
 fi;
-
 
 %% *** (3) Guidelines and non-tab crosshairs
 
@@ -1071,11 +1044,9 @@ if not do_double_tabs:
     crosshair (ZERO) {S10 shifted (.25, -.25), .1, S0, S1};
 fi;
 
-
 pen dot_pen;
 
 dot_pen := pencircle scaled (1mm, 1mm, 1mm);
-
 
 if do_labels:
 
@@ -1129,7 +1100,6 @@ if do_labels:
    dotlabel.urt("$S_{47}$", S47);
    dotlabel.top("$S_{48}$", S48);
    dotlabel.ulft("$S_{49}$", S49);
-
 
    %dotlabel.top("$S_{50}$", S50);
    dotlabel.rt("$S_{51}$", S51);

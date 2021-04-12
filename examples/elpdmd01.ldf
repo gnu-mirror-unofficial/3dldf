@@ -1,7 +1,6 @@
 %%%% elpdmd01.ldf
 %%%% Created by Laurence D. Finston (LDF) Fri Aug 27 14:50:45 CEST 2010
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -88,7 +87,6 @@ verbatim_metapost "prologues := 3;";
 
 % verbatim_metapost "verbatimtex \font\large=cmr12 scaled \magstep2 etex;";
 % verbatim_metapost "verbatimtex \font\Large=cmr17 scaled \magstep2 etex;";
-
 
 %% ** (2) Declarations
 
@@ -232,7 +230,6 @@ p11 := (-1 * (get_normal w1)) shifted p10;
 
 %dotlabel.top("$p_{11}$", p11);
 
-
 %% **** (4)  Triangle 2
 
 set w2 with_points (p0, p7, p3);
@@ -252,7 +249,6 @@ shift p13 by p12;
 
 % message "get_normal (p0 -- p7 -- p3 -- cycle):"; 
 % show get_normal (p0 -- p7 -- p3 -- cycle);
-
 
 %% w1 and w2 are nearly similar, but not quite.
 
@@ -508,7 +504,6 @@ label("$w_{1}$", get_center w1);
 draw r1 -- r2 dashed evenly;
 draw r2 -- r7;
 
-
 %% **** (4) Triangle 2 (w2)
 
 s0 := p0;
@@ -556,7 +551,6 @@ s0 *= s7 *= s12 *= s13 *= w2 *= t0;
 
 % pause;
 
-
 %% !! START HERE:  move w2 to a better position with respect to w0.
 %% LDF 2010.11.29.
 
@@ -590,9 +584,6 @@ dotlabel.bot("$s_{0}$", s0);
 %dotlabel.top("$s_{7}$", s7);
 
 label("$w_2$", get_center w2);
-
-
-
 
 %% **** (4) Triangle 3
 
@@ -658,7 +649,6 @@ draw u2 -- u3 dashed evenly;
 dotlabel.ulft("$u_{2}$", u2);
 dotlabel.lft("$u_{3}$", u3);
 dotlabel.urt("$u_{7}$", u7);
-
 
 % message "w0:"; 
 % show w0;
@@ -733,7 +723,6 @@ b := (r1 - s2) angle (P1 - P2);
 
 % message "(r1 - s2):"; 
 % show (r1 - s2);
-
 
 t2 := identity shifted by (r1 - P1);
 
@@ -845,7 +834,6 @@ b := (S21 - S1) angle (P21 - r1);
 
 % message "(P21 - r1):"; 
 % show (P21 - r1);
-
 
 h0 := mediate(r1, P21);
 h1 := mediate(S1, S21);
@@ -1006,7 +994,6 @@ fi;
 
 %% **** (4) w2
 
-
 shift w2 by -1 * get_point 2 w2;
 
 rotate w2 (180, 0);
@@ -1053,8 +1040,6 @@ endfig with_projection parallel_x_z no_sort;
 verbatim_metapost "end;";
 
 end;
-
-
 
 %% ** (2) 
 

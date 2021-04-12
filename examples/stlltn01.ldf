@@ -1,7 +1,6 @@
 %%%% stlltn01.ldf
 %%%% Created by Laurence D. Finston (LDF) Wed Jun  9 19:19:04 CEST 2010
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -88,11 +87,9 @@ frame_color := dark_grey;
 frame_width := 19.5cm;
 frame_height:= 22cm;
 
-
 frame :=    (-.5frame_width, 0, -.5frame_height) -- (.5frame_width, 0, -.5frame_height)
          -- (.5frame_width, 0, .5frame_height) -- (-.5frame_width, 0, .5frame_height)
          -- cycle;
-
 
 pickup pencircle scaled (.5mm, .5mm, .5mm);
 
@@ -127,8 +124,6 @@ t1 := identity rotated_around (mediate(get_point 0 frame, get_point 3 frame),
 
 t2 := identity shifted (3, 0);
 
-
-
 draw (p1 -- p2) * t0;
 draw (p3 -- p4) * t0;
 
@@ -145,8 +140,6 @@ draw (p3 -- p4) * t2;
 
 draw (p1 -- p2) * t2 * t1;
 draw (p3 -- p4) * t2 * t1;
-
-
 
 crosshair_picture := current_picture;
 
@@ -255,6 +248,4 @@ end;
 %% eval:(read-abbrev-file "~/.abbrev_defs")
 %% outline-regexp:"%% [*\f]+"
 %% End:
-
-
 

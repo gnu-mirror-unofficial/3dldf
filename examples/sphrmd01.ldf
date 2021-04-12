@@ -1,7 +1,6 @@
 %%%% sphrmd01.ldf
 %%%% Created by Laurence D. Finston (LDF) Thu Jan 22 17:09:19 CET 2009
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -109,7 +108,6 @@ enddef;
 
 %% *** (3) Declarations and initializations
 
-
 PI := 3.141592653589793;
 
 focus f[];
@@ -184,7 +182,6 @@ d[2][0] := 2 * PI * r0 * m[2] / 360;
 
 d[3][0] := 2 * PI * r0 * m[3] / 360;
 
-
 %for i = 0 upto 2:
 %   s := "d[" & decimal i & "][0]:";
 %   message s;
@@ -237,7 +234,6 @@ for i := k step k until (180 - k):
 
    j += 1;
 
-
    d[0][i] := (2 * PI * r[i] *  m[0]) / 360;
    d[1][i] := (2 * PI * r[i] *  m[1]) / 360;
    d[2][i] := (2 * PI * r[i] *  m[2]) / 360;
@@ -247,7 +243,6 @@ for i := k step k until (180 - k):
 %
 %   message s;
 %   show d[0][i];
-
 
 endfor;
 
@@ -298,7 +293,6 @@ for i := k step k until (180 - k):
    p7 := (-d[2][i]/2, j * f);  %% Points on outer curves
    p8 := (d[2][i]/2, j * f);
 
-
    p9 := (d[3][i]/2, j * f);  %% Point on even further out curve
 
    draw p3 -- p9 with_color gray;  %% Horizontals
@@ -318,7 +312,6 @@ for i := k step k until (180 - k):
       crosshair{p5, .1cm};
    fi;
 
-
    %drawdot p5 with_pen dot_pen;
 
    p32 := p5 shifted (-.333cm, 0);
@@ -326,12 +319,10 @@ for i := k step k until (180 - k):
 
    tick{p32, -.25cm};
 
-
    p33 := p8 shifted (.333cm, 0);
    p35 := p33 shifted (.333cm, 0);
 
    tick{p33, .25cm};
-
 
    if n >= 0:
       s := decimal n;
@@ -357,7 +348,6 @@ for i := k step k until (180 - k):
       crosshair{p8, .1cm};
    fi;
 
-
    %drawdot p8 with_pen dot_pen;
    
    n -= 1;
@@ -374,7 +364,6 @@ q3 += p2;
 q4 += p2;
 q5 += p2;
 q6 += p2;
-
 
 draw q0;
 draw q1 dashed evenly;
@@ -427,8 +416,6 @@ for i = 5 upto 8:
 endfor;
 
 endfig with_projection parallel_x_y no_sort;
-
-
 
 %% *** (3)
 

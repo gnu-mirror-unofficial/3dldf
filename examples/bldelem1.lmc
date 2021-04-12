@@ -110,10 +110,8 @@ macro tab;
 % mag :           magnitude (1 or -1)
 % crosshair_ctr:  Number of crosshairs.
 
-
 def tab (t, VV, H_OFFSET, HEIGHT) {numeric j, numeric k, numeric n, numeric r, numeric u, 
              numeric crosshair_ctr, numeric mag} :=
-
 
 %% *** (3)
 
@@ -166,7 +164,6 @@ def tab (t, VV, H_OFFSET, HEIGHT) {numeric j, numeric k, numeric n, numeric r, n
 
    P5 := mediate(get_point (j) t, get_point (k) t, r) shifted by (P4 - P3);
    P6 := mediate(get_point (k) t, get_point (j) t, r) shifted by (P4 - P3);
-
 
    %draw P0 -- P1 with_pen pencircle scaled (.5mm, .5mm, .5mm) with_color red on_picture W;
 
@@ -273,7 +270,6 @@ def rect_prism (V) {numeric h_val_side,
 
 %% *** (3)
 
-
    numeric h_offset;
    numeric tab_height;
 
@@ -288,7 +284,6 @@ def rect_prism (V) {numeric h_val_side,
    R0 := unit_rectangle rotated (90, 0) scaled (h_val_side, height_end);
    R1 := unit_rectangle rotated (90, 0) scaled (h_val_side, v_val_side);
 
-
    P[0][0] := get_point 0 R0;
    P[1][3] := get_point 3 R1;
 
@@ -298,9 +293,6 @@ def rect_prism (V) {numeric h_val_side,
    T0 := identity shifted by (P[0][0] - P[1][3]);
 
    P[1][3] *= R1 *= T0;
-
-
-
 
    draw R0; % with_color red;
    draw R1; % with_color blue;
@@ -316,7 +308,6 @@ def rect_prism (V) {numeric h_val_side,
 
    R2 := unit_rectangle rotated (90, 0) scaled (height_end, v_val_side);
    shift R2 by (P[1][1] - get_point 0 R2);
-
 
    R3 := R1 shifted by (get_point 1 R2 - P[1][0]);
 
@@ -363,8 +354,6 @@ def rect_prism (V) {numeric h_val_side,
       if not ddouble_tabs:
       	 %draw S1 -- S2 -- S3 -- S4 -- cycle with_color gray with_pen thin_pen;
 
-
-
       	 draw S1 shifted (-.25cm, 0) -- S2 shifted (.25cm, 0) with_color gray with_pen thin_pen 
       	         on_picture W;
 
@@ -376,7 +365,6 @@ def rect_prism (V) {numeric h_val_side,
 
       	 draw S2 shifted (-.0, -.25cm) -- S3 shifted (.0, .25cm) with_color gray with_pen thin_pen
       	         on_picture W;
-
 
       	 crosshair (W) {S0, .1, P[0][0], P[0][1]};
       	 crosshair (W) {S1, .1, P[0][0], P[0][1]};
@@ -446,10 +434,7 @@ def rect_prism (V) {numeric h_val_side,
          crosshair (ZERO) {(get_center R[i]) shifted (0, -.25 * v_val_side), .1, P[0][0], P[0][1]};         
       endfor;
 
-
 %% **** (4)
-
-
 
 %% **** (4)
 
@@ -508,7 +493,6 @@ def rect_prism (V) {numeric h_val_side,
       tab (RA, ZERO, h_offset, tab_height) {2, 3, .875, .75, .2, ccross_a, 1};
    fi;
 
-
 %%    *** (3)  Draw the main rectangles and squares
 
    draw R0 with_pen pencircle scaled (.5mm, .5mm, .5mm);
@@ -527,7 +511,6 @@ def rect_prism (V) {numeric h_val_side,
       label("$R_3$", get_center R3);
       label("$R_4$", get_center R4);
       label("$R_5$", get_center R5);
-
 
       dotlabel.bot("$P^0_0$", P[0][0]);
       dotlabel.bot("$P^0_1$", P[0][1]);
@@ -632,7 +615,6 @@ if ddouble_tabs:
         shift temp_path (temp_mag - h_offset + .25cm, 0);
      endfor;
 
-
    fi;
 
    label.rt("$C$", mediate(get_point 1 R3, get_point 2 R3));
@@ -651,17 +633,11 @@ if ddouble_tabs:
       shift temp_path (0, shift_val);
    endfor;
 
-
 else:
    message "Not doing double tabs:"; 
 fi;
 
-
 %% *** (3) End of rect_prism definition
-
-
-
-
 
 enddef;
 
@@ -794,7 +770,6 @@ fi;
 % dotlabel.bot("$2_2$", P[2][2]);
 % dotlabel.top("$Y_1$", Y1);
 
-
 Q0 := P[0][1] -- Y0 -- Y1 -- P[0][2] -- cycle;
 
 Q1 := P[0][0] -- P[2][1] -- Y0 -- P[0][1] -- cycle;
@@ -893,7 +868,6 @@ for i := 0 upto 3:
    S[i + 16] := get_point (i) Q3;
    S[i + 20] := get_point (i) Q4;
 endfor;
-
 
 S4 := get_point (0) Q7;
 S5 := get_point (1) Q7;
@@ -1040,12 +1014,9 @@ else:
    temp_path := S10 -- S9;
    tab (temp_path, ZERO, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
 
-
    temp_path := S9 -- S0;
    tab (temp_path, ZERO, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_b, -1};
 fi;
-
-
 
 if false: % true
    draw S9 -- S10 with_pen big_pen with_color red;
@@ -1106,7 +1077,6 @@ if do_double_tabs:
          label.bot("$B$", mediate(S2, S21) shifted (1mm, 0));
       fi;
 
-
       label.rt("$C$", mediate(S22, S23));
 
       temp_path := origin -- (magnitude (S21 - S22), 0);
@@ -1139,14 +1109,11 @@ if do_double_tabs:
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_c, 1};
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_c, -1};
 
-
       if double_tab_shift_value:
          shift temp_path (0, shift_val);
       else:
          shift temp_path (magnitude (S14 - S15) - h_offset + .25cm, 0);
       fi;
-
-
 
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_c, 1};
       tab (temp_path, WW, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_c, -1};
@@ -1155,12 +1122,10 @@ if do_double_tabs:
 
       V += WW;
 
-
       %message "h_offset:"; 
       %show h_offset;
 
       label.lft("$C$", (0, 3shift_val)) V;
-
 
    else:
       %message "V isn't a picture.\nNot creating separate double tabs.";
@@ -1179,7 +1144,6 @@ if do_double_tabs:
 %else:
 %   message "Not doing double tabs:"; 
 fi;
-
 
 %% *** (3) Guidelines and non-tab crosshairs
 
@@ -1247,11 +1211,9 @@ if not do_double_tabs:
     crosshair (ZERO) {S10 shifted (.25, -.25), .1, S0, S1};
 fi;
 
-
 pen dot_pen;
 
 dot_pen := pencircle scaled (1mm, 1mm, 1mm);
-
 
 if do_labels:
 
@@ -1305,7 +1267,6 @@ if do_labels:
    dotlabel.urt("$S_{47}$", S47);
    dotlabel.top("$S_{48}$", S48);
    dotlabel.ulft("$S_{49}$", S49);
-
 
    %dotlabel.top("$S_{50}$", S50);
    dotlabel.rt("$S_{51}$", S51);

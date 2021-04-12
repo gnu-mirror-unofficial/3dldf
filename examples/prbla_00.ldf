@@ -94,7 +94,6 @@ endfig;
 
 beginfig(1);
 
-
 parabola p;
 
 point vertex;
@@ -106,14 +105,11 @@ set p
 %  with_focus p_focus  
    with_extent 5cm;
 
-
 point p_f;
 point vertex;
 
-
 draw p with_color blue;
 %dotlabel.lft(0, p); 
-
 
 pickup pencircle scaled (2mm, 2mm);
 
@@ -126,9 +122,7 @@ p_f := get_focus p;
 drawdot p_f;
 label.rt("focus", p_f);
 
-
 label("{\large PARABOLA}", (5, 0, -5));
-
 
 output axis_picture with_projection parallel_x_z;
 endfig with_projection parallel_x_z;

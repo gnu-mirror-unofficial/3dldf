@@ -62,7 +62,6 @@ pickup pencircle scaled (.75mm, .75mm);
 focus f;
 set f with_position (-12, 15, -30) with_direction (-12, 15, 100) with_distance 20; 
 
-
 beginfig(1);
 cuboid c;
 c := unit_cuboid scaled (20, 16, 10) rotated (-20, 15);
@@ -83,7 +82,6 @@ s :=   "\\setbox0=\\hbox{$p_0$}\\hbox to \\wd0{\\box0 , $l = "
 drawdot p0 with_pen dot_pen with_color blue;
 label.top(s, p0 shifted (0, .25));
 
-
 rectangle r[];
 r0 := get_rectangle 0 c;
 
@@ -92,14 +90,11 @@ p1 := mediate(get_point 0 r0, get_point 3 r0, 1/3);
 message "p1 location c:";
 show p1 location c;
 
-
 s :=   "\\setbox0=\\hbox{$p_1$}\\hbox to \\wd0{\\box0 , $l = " 
      & decimal (p1 location c) & "$\\hss}"; 
 
 drawdot p1 with_pen dot_pen with_color blue;
 label.rt(s, p1 shifted .25);
-
-
 
 r1 := get_rectangle 2 c;
 

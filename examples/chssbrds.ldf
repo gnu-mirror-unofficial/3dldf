@@ -224,15 +224,12 @@ def chessboard (Q, V) {numeric unit_size, bool upside_down}=
       fi;
    endfor;
 
-
-
 if false:  % true
    dotlabel.lft(0, P0) V;
    dotlabel.lft(3, P3) V;
    dotlabel.lft(1, P1) V;
    dotlabel.lft(2, P2) V;
 fi;
-
 
    if upside_down:
       P4 := mediate(P1, P2);
@@ -243,7 +240,6 @@ fi;
       P5 := mediate(P0, P1);
       P6 := P5 * inverse T1;
    fi;
-
 
    if upside_down:
       for i = 1 upto 8:
@@ -272,7 +268,6 @@ fi;
 %      label("7", P7) V;
    fi;
 
-
    verbatim_metapost "verbatimtex \setbox0=\hbox{\largeit A\/} etex;"; 
 
    if upside_down:
@@ -290,7 +285,6 @@ fi;
    	    N += 1;
    	 endfor;
    fi;
-
 
 %  label.bot("$P_{6}$", P6) V;
 
@@ -323,8 +317,6 @@ def BQ (P) {numeric x_val, numeric y_val} =
    label("{\BQ}", P[x_val][y_val]);
 
 enddef;
-
-
 
 %% **** (4)
 
@@ -370,12 +362,9 @@ if false:
 fi;
    v1 := v0;
 
-
    shift v1 (8 * unit_size + 3.5cm, 0);
 
    current_picture += v1;
-
-
 
 if false: 
 
@@ -404,7 +393,6 @@ endfig with_projection parallel_x_y no_sort;
 %% and without help labels.
 
 %% *** (3) Fig. 2:  Recto of gathering.
-
 
 beginfig(2);
 
@@ -477,14 +465,12 @@ fi;
 
 label("8", p4 shifted (.333cm, -.333cm)) rotated (0, 0, 180);
 
-
 v2 := v3;
 
 shift v2 by (g8 - (3.5unit_size, -3.5unit_size));
 shift v2 (2unit_size, 0);
 
 current_picture += v2;
-
 
 %% **** (4)
 
@@ -588,7 +574,6 @@ shift v2 (2unit_size, 0);
 
 current_picture += v2;
 
-
 %% **** (4)
 
 g12 := (.5[xpart p4, xpart p0], .5[ypart p2, ypart p9]);
@@ -635,8 +620,6 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p8, p11, .1);
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p11, p8, .05);
 
-
-
 %% ***** (5)
 
    label("\copy3", mediate(p4, p6, .25) shifted (.1cm, 0));
@@ -646,13 +629,11 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p4, p6, .25) shifted (.1cm, 0));
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p6, p4, .25) shifted (.1cm, 0));
 
-
 %% ***** (5)
 
 fi;
 
 endfig with_projection parallel_x_y no_sort;
-
 
 %% *** (3) Fig. 3: Verso of gathering.
 
@@ -672,7 +653,6 @@ fi;
 fi;
 
 %% **** (4)
-
 
 draw p4 -- p6;
 draw p5 -- p7;
@@ -836,7 +816,6 @@ v2 := v0;
 shift v2 by (g6 - (3.5unit_size, -3.5unit_size));
 shift v2 (-2unit_size, 0);
 
-
 current_picture += v2;
 
 %% **** (4)
@@ -879,8 +858,6 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p8, p11, .1);
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p11, p8, .05);
 
-
-
 %% ***** (5)
 
    label("\copy3", mediate(p4, p6, .25) shifted (.1cm, 0));
@@ -889,7 +866,6 @@ if do_labels:
 
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p4, p6, .25) shifted (.1cm, 0));
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p6, p4, .25) shifted (.1cm, 0));
-
 
 %% ***** (5)
 
@@ -1050,7 +1026,6 @@ shift v2 (2unit_size, 0);
 
 current_picture += v2;
 
-
 %% **** (4)
 
 if do_labels:
@@ -1095,8 +1070,6 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p8, p11, .1);
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p11, p8, .05);
 
-
-
 %% ***** (5)
 
    label("\copy3", mediate(p4, p6, .25) shifted (.1cm, 0));
@@ -1106,13 +1079,11 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p4, p6, .25) shifted (.1cm, 0));
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p6, p4, .25) shifted (.1cm, 0));
 
-
 %% ***** (5)
 
 fi;
 
 endfig with_projection parallel_x_y no_sort;
-
 
 %% *** (3) Fig. 5: Verso of gathering without labels.
 
@@ -1132,7 +1103,6 @@ fi;
 fi;
 
 %% **** (4)
-
 
 draw p4 -- p6;
 draw p5 -- p7;
@@ -1280,7 +1250,6 @@ v2 := v0;
 shift v2 by (g6 - (3.5unit_size, -3.5unit_size));
 shift v2 (-2unit_size, 0);
 
-
 current_picture += v2;
 
 %% **** (4)
@@ -1323,8 +1292,6 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p8, p11, .1);
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by mediate(p11, p8, .05);
 
-
-
 %% ***** (5)
 
    label("\copy3", mediate(p4, p6, .25) shifted (.1cm, 0));
@@ -1334,15 +1301,11 @@ if do_labels:
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p4, p6, .25) shifted (.1cm, 0));
    draw unit_circle scaled (.5cm, 0, .5cm)  rotated (90, 0) shifted by (mediate(p6, p4, .25) shifted (.1cm, 0));
 
-
 %% ***** (5)
 
 fi;
 
 endfig with_projection parallel_x_y no_sort;
-
-
-
 
 %% *** (3) End of 3DLDF code
 

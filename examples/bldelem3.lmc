@@ -95,7 +95,6 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
       draw p[i] -- p0 on_picture U with_pen normal_pen;
    endfor;
 
-
    point S[];
 
    S0 := mediate(p1, p2);
@@ -136,13 +135,9 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
 
 %% **** (4) 
 
-
-
 %% **** (4) 
 
   rotate t[0] (90, 0);
-
-
 
   path temp_path;
   path save_path;
@@ -168,7 +163,6 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
      temp_mag := magnitude (get_point 0 t0 - get_point 1 t0);
 
      temp_path := origin -- (temp_mag, 0);
-
 
      save_path := temp_path;
 
@@ -206,13 +200,11 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
         tab (temp_path, V, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
         tab (temp_path, W, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
 
-
         temp_path := get_point 2 t[i] -- get_point 1 t[i];
         tab (temp_path, V, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
         tab (temp_path, W, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, -1};
 
      endfor;
-
 
      if (is_triangle T):
          T := t0;
@@ -233,12 +225,7 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
 
      S5 :=  (curr_mag * unit_vector (S2 - S0)) shifted by S0;
 
-
-
-
      rotate S5 (90, 0);
-
-
 
      rotate S0 (90, 0);
 
@@ -261,9 +248,7 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
      tab (temp_path, V, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, -1};
      tab (temp_path, W, h_offset, tab_height) {0, 1, .875, .75, .2, ccross_a, 1};
 
-
      drawdot S10 with_pen pencircle scaled (1mm, 1mm, 1mm) on_picture V;
-
 
      Q0 := get_point 0 t0 -- S8 -- S9 -- get_point 2 t0 -- cycle;
 
@@ -316,7 +301,6 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
 
      S12 := get_center r1;
      S13 := S12 shifted (0, 0, 1);
-
 
      for i = 1 upto ssides - 1:
         t[i] := t0 rotated (0, 0, i * rot_val);
@@ -401,7 +385,6 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
 
      fi;  %% if hheight_c <= 0:
 
-
   fi;  %% Truncating pyramid
 
 %% **** (4)
@@ -427,7 +410,6 @@ def pyramid (U, V, W, ttext_picture, ddbl_tab_picture,
   if is_picture ttext_picture:
      label(s, origin) ttext_picture;
   fi;
-
 
 enddef;
 
@@ -515,7 +497,6 @@ def obelisk (UU, VV, WW, TT, DD) {numeric SSIDES, numeric DDIAM,
 
    endfor;
 
-
    temp_val := -SSIDES;
    temp_val *= (2tab_height + .25cm);
    temp_val -= .25cm;
@@ -545,13 +526,9 @@ def obelisk (UU, VV, WW, TT, DD) {numeric SSIDES, numeric DDIAM,
 
    %draw R with_color green with_pen big_pen;    
 
-
-
 enddef;
 
-
 %% *** (3)
-
 
 %% ** (2)
 

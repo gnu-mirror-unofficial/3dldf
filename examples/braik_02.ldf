@@ -47,7 +47,6 @@
  
 
 
-
 %% *** (3) Braikenridge-Maclaurin Construction.
 %% Constructing a conic section from 5 points.  
 
@@ -63,7 +62,6 @@
 %% ps2pdf braik_02.ps                 %% Create PDF file
 
 %% 3dldf braik_02; mpost braik_02; tex braik_02.txt; dvips -o braik_02.ps braik_02.dvi 
-
 
 verbatim_metapost "verbatimtex  \magnification=\magstep2 \font\small=cmr8 etex ";
 
@@ -85,7 +83,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -97,7 +94,6 @@ point F;              %% determined below.
 
 point p[];
 point_vector pv;
-
 
 point X;
 point Y;
@@ -127,12 +123,10 @@ shift prb (-5, 0);
 message "size prb";
 show size prb;
 
-
 %% **** (4) 
 
 def mv {numeric sstart, numeric ccount, boolean bbool,
     point aa, point bb, point cc, point dd, point ee} +=
-
 
 j := 0;
 
@@ -188,7 +182,6 @@ F := bp;
 dotlabel.top("$F$", F);
 
 draw C -- F -- D with_color blue;
-
 
 %% **** (4) 
 
@@ -294,7 +287,6 @@ B := get_point (24) prb;
 
 mv0 {31, 10, true, A, B, C, D, E};
 
-
 %% **** (4) 
 
 j := 0;
@@ -362,7 +354,6 @@ label("{\small Copyright {\copyright} 2007, 2008, 2009, 2010, 2011, 2012, 2013, 
 
 endfig with_projection parallel_x_z;
 endfor;
-
 
 verbatim_metapost "end";
 end;

@@ -50,7 +50,6 @@
  
 
 
-
 %% *** (3) Cones.
 %%         The shadow of a double-napped cone.
 %%         LDF 2006.11.09.
@@ -101,27 +100,21 @@ path s[];
 
 path proj[];
 
-
 bool_point_vector bpv;
 
 point apex[];
 
 apex0 := get_apex c;
 
-
 q0 := apex0;
 q0 += p * 10;
 
-
 s0 := apex0 -- q0;
-
 
 bpv := s0 intersection_points r;
 
 q2 := bpv0;
 q3 := bpv1;
-
-
 
 if not is_invalid q2:
   apex1 := q2;
@@ -131,7 +124,6 @@ else:
        apex1 := q3;
 fi;
 fi;
-
 
 path cap;
 path base;
@@ -165,7 +157,6 @@ proj0 += ..;
 proj0 += cycle;
 
 draw proj0;
-
 
 draw c;
 %draw r;

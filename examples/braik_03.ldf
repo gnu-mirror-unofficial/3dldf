@@ -81,7 +81,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 boolean b;
@@ -102,7 +101,6 @@ dot_pen := pencircle scaled (1.5mm, 1.5mm);
 
 pen path_pen;
 path_pen := pencircle scaled (.7mm, .7mm);
-
 
 string s;
 
@@ -154,7 +152,6 @@ verbatim_metapost "verbatimtex \font\largebf=cmbx12 etex;";
 
 %% **** (4) Figures
 
-
 %% ***** (5) Figures 0 to 9
 
 for i = 0 upto 9:
@@ -189,9 +186,7 @@ label.top("$C'$",  C shifted (0, 0, .5));
 label.urt("$D'$",  D shifted (.5, 0, .5));
 label.bot("$E'$",  E shifted (0, 0, -.5));
 
-
 dotlabel.bot("$F$", F) with_text_color red;
-
 
 pickup path_pen;
 
@@ -206,7 +201,6 @@ draw F -- D;
 bp := (A -- C) intersection_point (B -- D);
 
 X := bp;
-
 
 bp := (C -- F) intersection_point (B -- E);
 
@@ -267,7 +261,6 @@ dotlabel.top("$C$", save_C) with_text_color red;
 dotlabel.urt("$D$",  save_D) with_text_color red;
 dotlabel.bot("$E$", save_E) with_text_color red;
 
-
 A := get_point c with_increment 0;
 B := get_point c with_increment 1;
 C := get_point c with_increment 2;
@@ -279,7 +272,6 @@ label.ulft("$C'$", C shifted (0, 0, .5));
 label.top("$D'$",  D shifted (0, 0, .5));
 label.urt("$E'$",  E shifted (.5, 0, .5));
 label.bot("$A'$",  A shifted (0, 0, -.5));
-
 
 if (i) == 0:
    F := A;
@@ -305,7 +297,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -325,7 +316,6 @@ dotlabel.ulft("$X$", X) with_dot_color blue;
 dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
-
 
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
@@ -354,14 +344,11 @@ C := get_point c with_increment 2;
 D := get_point c with_increment 3;
 E := get_point c with_increment 4;
 
-
 label.llft("$C'$", C shifted (0, 0, -.5));
 label.ulft("$D'$", D shifted (0, 0, .5));
 label.top("$E'$",  E shifted (0, 0, .5));
 label.urt("$A'$",  A shifted (.5, 0, .5));
 label.bot("$B'$",  B shifted (0, 0, -.5));
-
-
 
 if (i) == 0:
    F := A;
@@ -387,7 +374,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -407,7 +393,6 @@ dotlabel.ulft("$X$", X) with_dot_color blue;
 dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
-
 
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
@@ -435,7 +420,6 @@ B := get_point c with_increment 1;
 C := get_point c with_increment 2;
 D := get_point c with_increment 3;
 E := get_point c with_increment 4;
-
 
 label.llft("$D'$", D shifted (0, 0, -.5));
 label.ulft("$E'$", E shifted (0, 0, .5));
@@ -467,7 +451,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -488,12 +471,10 @@ dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
 
-
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 
 endfig with_projection parallel_x_z no_sort; 
 endfor;
-
 
 %% ***** (5) Figures 40 to 49
 
@@ -516,7 +497,6 @@ B := get_point c with_increment 1;
 C := get_point c with_increment 2;
 D := get_point c with_increment 3;
 E := get_point c with_increment 4;
-
 
 label.llft("$E'$", E shifted (0, 0, -.5));
 label.ulft("$A'$", A shifted (0, 0, .5));
@@ -548,7 +528,6 @@ X := bp;
 
 bp := (C -- F) intersection_point (B -- E);
 
-
 Y := bp;
 
 bp := (F -- D) intersection_point (E -- A);
@@ -568,7 +547,6 @@ dotlabel.ulft("$X$", X) with_dot_color blue;
 dotlabel.urt("$Y$", Y) with_dot_color blue;
 
 dotlabel.lrt("$Z$", Z) with_dot_color blue;
-
 
 draw frame with_pen pensquare scaled (1.5mm, 1.5mm);
 

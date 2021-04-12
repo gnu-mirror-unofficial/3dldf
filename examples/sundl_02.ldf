@@ -1,7 +1,6 @@
 %%%% sundl_02.ldf
 %%%% Created by Laurence D. Finston (LDF) Sun Oct  7 18:53:17 CEST 2007
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -184,7 +183,6 @@ endfor;
 
 %draw p[75] -- p[-105];
 
-
 %% **** (4) Rotate dial and surrounding rectangles.
 
 t2 := identity rotated (0, 0, -latitude);
@@ -200,7 +198,6 @@ for i = 0 upto 3:
    q[28 + i] := get_point (i) r0;
    q[i] := get_point (i) r1;
 endfor;
-
 
 %% ***** (5) r0
 
@@ -220,7 +217,6 @@ dotlabel.rt("$q_3$", q3);
 
 label.lrt("$r_1$", mediate(q0, q3)) with_text_color green;
 
-
 %% **** (4) Get the rectangle perpendicular to r1, draw and label it (r4)
 
 q4 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) 90;
@@ -228,7 +224,6 @@ q5 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) -90;
 
 dotlabel.lft("$q_4$", q4);
 dotlabel.lft("$q_5$", q5);
-
 
 q6 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) 90;
 q7 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) -90;
@@ -256,14 +251,11 @@ draw r2 with_color red;
 
 label.lft("$r_2$", mediate(q4, q8)) with_text_color red;
 
-
-
 bpv := r2 intersection_points (g0 -- g1);
 
 gv := bpv0;
 
 dotlabel.urt("$g_v$", gv);
-
 
 %% **** (4) 90 deg.  Noon line.
 
@@ -425,9 +417,6 @@ dotlabel.ulft("$q_{70}$", q70);
 
 draw gh -- q70;
 
-
-
-
 %% **** (4) 120 deg. (10:00 AM) 
 
 m120 := (origin, gv, p120);
@@ -455,7 +444,6 @@ q68 := bpv0;
 dotlabel.lft("$q_{68}$", q68);
 
 draw gh -- q68;
-
 
 %% **** (4) 105 deg. (11:00 AM) 
 
@@ -485,14 +473,12 @@ dotlabel.lft("$q_{66}$", q66);
 
 draw gh -- q66;
 
-
 %% **** (4) 90 deg. (Noon)
 
 q13 := mediate(q0, q1); %% Trace of noon line on horizontal plane
 
 dotlabel.llft("$q_{13}$", q13);
 draw gh -- q13;
-
 
 %% **** (4) 75 deg.  (1:00 PM)
 
@@ -598,7 +584,6 @@ q60 := bpv0;
 dotlabel.ulft("$q_{60}$", q60);
 
 draw gh -- q60;
-
 
 %% **** (4) 15 deg. (5:00 PM) 
 
@@ -722,7 +707,6 @@ if false:
  dotlabel.lft("\uppercase\expandafter{\romannumeral 17} $(-15^\circ)$", p[-15]);
 fi; 
 
-
 %% **** (4) Center of r2 and normal of r2, shifted to center of r2
 
 q40 := get_center r2;
@@ -765,7 +749,6 @@ c1 *= r10 *= r11 *= r12 *= t1;
 for i = -165 step 15 until 180:
    draw origin -- (p[i] transformed t1);
 endfor;
-
 
 draw c1;
 draw r10 with_color red;
@@ -866,7 +849,6 @@ dotlabel.ulft("$q_{43}$", q43);
 dotlabel.lft("$q_{44}$", q44);
 dotlabel.rt("$q_{45}$", q45);
 
-
 %% **** (4) Label the directions
 
 label("Up", mediate(q44, q45) shifted (0, 0, 1));
@@ -889,8 +871,6 @@ draw (gv -- q75) transformed t3;
 dotlabel.lft("VII $q_{73}$", q73 transformed t3);
 
 draw (gv -- q73) transformed t3;
-
-
 
 %% ***** (5) 8:00 AM (150 deg.)
 
@@ -915,7 +895,6 @@ draw (gv -- q67) transformed t3;
 dotlabel.bot("\vbox{\hbox{$q_{65}$}\hbox{XI}}", q65 transformed t3);
 
 draw (gv -- q65) transformed t3;
-
 
 %% ***** (5) 90 deg.  (Noon)
 
@@ -949,15 +928,11 @@ dotlabel.rt("$q_{61}$ XVII", q61 transformed t3);
 
 draw (gv -- q61) transformed t3;
 
-
 %% ***** (5) 6:00 PM (0 deg.)
 
 dotlabel.rt("$q_{63}$ XVIII", q63 transformed t3);
 
 draw (gv -- q63) transformed t3;
-
-
-
 
 %% **** (4) End of figure 3
 
@@ -972,7 +947,6 @@ t4 := align (q80 -- q81) with_axis y_axis;
 rotate t4 (0, -90);
 
 draw r6 transformed t4;
-
 
 %% **** (4) Label the directions
 
@@ -991,7 +965,6 @@ dotlabel.lrt("$q_{1}$",   q1 transformed t4);
 %% **** (4) The trace of the gnomon on the plane of r6
 
 dotlabel.bot("$g_h$", gh  transformed t4);  
-
 
 %% **** (4) Time division points and lines
 
@@ -1015,24 +988,20 @@ dotlabel.lft("VIII $q_{72}$", q72 transformed t4);
 draw (gh -- q70) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{70}$}\hbox{IX}}", q70 transformed t4);
 
-
 %% ***** (5) 120 deg.  (10:00 AM)
 
 draw (gh -- q68) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{68}$}\hbox{X}}", q68 transformed t4);
-
 
 %% ***** (5) 105 deg.  (11:00 AM)
 
 draw (gh -- q66) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{66}$}\hbox{XI}}", q66 transformed t4);
 
-
 %% ***** (5) 90 deg.  (Noon)
 
 draw (gh -- q13) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{13}$}\hbox{XII}}", q13 transformed t4);
-
 
 %% ***** (5) 75 deg.  (1:00 PM)
 
@@ -1059,19 +1028,16 @@ dotlabel.rt("$q_{60}$ XVI", q60 transformed t4);
 draw (gh -- q62) transformed t4;
 dotlabel.rt("$q_{62}$ XVII", q62 transformed t4);
 
-
 %% ***** (5) 0 deg. (6:00 PM)
 
 draw (gh -- q64) transformed t4;
 dotlabel.rt("$q_{64}$ XVIII", q64 transformed t4);
-
 
 %% **** (4) End of figure 4
 
 endfig with_projection parallel_x_z with_factor 1.5;  
 
 %% *** (3) Chicago.
-
 
 %% **** (4) 
 
@@ -1168,7 +1134,6 @@ endfor;
 
 %draw p[75] -- p[-105];
 
-
 %% **** (4) Rotate dial and surrounding rectangles.
 
 t2 := identity rotated (0, 0, -latitude);
@@ -1184,7 +1149,6 @@ for i = 0 upto 3:
    q[28 + i] := get_point (i) r0;
    q[i] := get_point (i) r1;
 endfor;
-
 
 %% ***** (5) r0
 
@@ -1204,7 +1168,6 @@ dotlabel.rt("$q_3$", q3);
 
 label.lrt("$r_1$", mediate(q0, q3)) with_text_color green;
 
-
 %% **** (4) Get the rectangle perpendicular to r1, draw and label it (r4)
 
 q4 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) 90;
@@ -1212,7 +1175,6 @@ q5 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) -90;
 
 dotlabel.lft("$q_4$", q4);
 dotlabel.lft("$q_5$", q5);
-
 
 q6 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) 90;
 q7 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) -90;
@@ -1240,14 +1202,11 @@ draw r2 with_color red;
 
 label.lft("$r_2$", mediate(q4, q8)) with_text_color red;
 
-
-
 bpv := r2 intersection_points (g0 -- g1);
 
 gv := bpv0;
 
 dotlabel.urt("$g_v$", gv);
-
 
 %% **** (4) 90 deg.  Noon line.
 
@@ -1409,9 +1368,6 @@ dotlabel.ulft("$q_{70}$", q70);
 
 draw gh -- q70;
 
-
-
-
 %% **** (4) 120 deg. (10:00 AM) 
 
 m120 := (origin, gv, p120);
@@ -1439,7 +1395,6 @@ q68 := bpv0;
 dotlabel.lft("$q_{68}$", q68);
 
 draw gh -- q68;
-
 
 %% **** (4) 105 deg. (11:00 AM) 
 
@@ -1469,14 +1424,12 @@ dotlabel.lft("$q_{66}$", q66);
 
 draw gh -- q66;
 
-
 %% **** (4) 90 deg. (Noon)
 
 q13 := mediate(q0, q1); %% Trace of noon line on horizontal plane
 
 dotlabel.llft("$q_{13}$", q13);
 draw gh -- q13;
-
 
 %% **** (4) 75 deg.  (1:00 PM)
 
@@ -1582,7 +1535,6 @@ q60 := bpv0;
 dotlabel.ulft("$q_{60}$", q60);
 
 draw gh -- q60;
-
 
 %% **** (4) 15 deg. (5:00 PM) 
 
@@ -1706,7 +1658,6 @@ if false:
  dotlabel.lft("\uppercase\expandafter{\romannumeral 17} $(-15^\circ)$", p[-15]);
 fi; 
 
-
 %% **** (4) Center of r2 and normal of r2, shifted to center of r2
 
 q40 := get_center r2;
@@ -1726,7 +1677,6 @@ drawarrow q40 -- q41 with_color red;
 %% **** (4) End of figure 5
 
 endfig with_focus f0 no_sort;
-
 
 %% *** (3) Figure 6:  Parallel projection onto vertical plane (plane of r2)
 
@@ -1753,7 +1703,6 @@ dotlabel.ulft("$q_{43}$", q43);
 dotlabel.lft("$q_{44}$", q44);
 dotlabel.rt("$q_{45}$", q45);
 
-
 %% **** (4) Label the directions
 
 label("Up", mediate(q44, q45) shifted (0, 0, 1));
@@ -1776,8 +1725,6 @@ draw (gv -- q75) transformed t3;
 dotlabel.lft("VII $q_{73}$", q73 transformed t3);
 
 draw (gv -- q73) transformed t3;
-
-
 
 %% ***** (5) 8:00 AM (150 deg.)
 
@@ -1802,7 +1749,6 @@ draw (gv -- q67) transformed t3;
 dotlabel.bot("\vbox{\hbox{$q_{65}$}\hbox{XI}}", q65 transformed t3);
 
 draw (gv -- q65) transformed t3;
-
 
 %% ***** (5) 90 deg.  (Noon)
 
@@ -1836,7 +1782,6 @@ dotlabel.rt("$q_{61}$ XVII", q61 transformed t3);
 
 draw (gv -- q61) transformed t3;
 
-
 %% ***** (5) 6:00 PM (0 deg.)
 
 dotlabel.rt("$q_{63}$ XVIII", q63 transformed t3);
@@ -1857,7 +1802,6 @@ rotate t4 (0, -90);
 
 draw r6 transformed t4;
 
-
 %% **** (4) Label the directions
 
 label("North", q13 transformed t4 shifted (0, 0, 1.5));
@@ -1875,7 +1819,6 @@ dotlabel.lrt("$q_{1}$",   q1 transformed t4);
 %% **** (4) The trace of the gnomon on the plane of r6
 
 dotlabel.bot("$g_h$", gh  transformed t4);  
-
 
 %% **** (4) Time division points and lines
 
@@ -1899,24 +1842,20 @@ dotlabel.lft("VIII $q_{72}$", q72 transformed t4);
 draw (gh -- q70) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{70}$}\hbox{IX}}", q70 transformed t4);
 
-
 %% ***** (5) 120 deg.  (10:00 AM)
 
 draw (gh -- q68) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{68}$}\hbox{X}}", q68 transformed t4);
-
 
 %% ***** (5) 105 deg.  (11:00 AM)
 
 draw (gh -- q66) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{66}$}\hbox{XI}}", q66 transformed t4);
 
-
 %% ***** (5) 90 deg.  (Noon)
 
 draw (gh -- q13) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{13}$}\hbox{XII}}", q13 transformed t4);
-
 
 %% ***** (5) 75 deg.  (1:00 PM)
 
@@ -1942,7 +1881,6 @@ dotlabel.rt("$q_{60}$ XVI", q60 transformed t4);
 
 draw (gh -- q62) transformed t4;
 dotlabel.rt("$q_{62}$ XVII", q62 transformed t4);
-
 
 %% ***** (5) 0 deg. (6:00 PM)
 
@@ -2009,7 +1947,6 @@ t0 := identity rotated (90, 90);
 
 c0 *= r0 *= r1 *= t0;
 
-
 beginfig(8); 
 
 dotlabel.lrt("$\rm{origin}$", origin);
@@ -2052,7 +1989,6 @@ endfor;
 
 %draw p[75] -- p[-105];
 
-
 %% **** (4) Rotate dial and surrounding rectangles.
 
 t2 := identity rotated (0, 0, -latitude);
@@ -2068,7 +2004,6 @@ for i = 0 upto 3:
    q[28 + i] := get_point (i) r0;
    q[i] := get_point (i) r1;
 endfor;
-
 
 %% ***** (5) r0
 
@@ -2088,7 +2023,6 @@ dotlabel.rt("$q_3$", q3);
 
 label.lrt("$r_1$", mediate(q0, q3)) with_text_color green;
 
-
 %% **** (4) Get the rectangle perpendicular to r1, draw and label it (r4)
 
 q4 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) 90;
@@ -2096,7 +2030,6 @@ q5 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) -90;
 
 dotlabel.lft("$q_4$", q4);
 dotlabel.lft("$q_5$", q5);
-
 
 q6 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) 90;
 q7 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) -90;
@@ -2124,14 +2057,11 @@ draw r2 with_color red;
 
 label.lft("$r_2$", mediate(q4, q8)) with_text_color red;
 
-
-
 bpv := r2 intersection_points (g0 -- g1);
 
 gv := bpv0;
 
 dotlabel.urt("$g_v$", gv);
-
 
 %% **** (4) 90 deg.  Noon line.
 
@@ -2293,9 +2223,6 @@ dotlabel.ulft("$q_{70}$", q70);
 
 draw gh -- q70;
 
-
-
-
 %% **** (4) 120 deg. (10:00 AM) 
 
 m120 := (origin, gv, p120);
@@ -2323,7 +2250,6 @@ q68 := bpv0;
 dotlabel.lft("$q_{68}$", q68);
 
 draw gh -- q68;
-
 
 %% **** (4) 105 deg. (11:00 AM) 
 
@@ -2353,14 +2279,12 @@ dotlabel.lft("$q_{66}$", q66);
 
 draw gh -- q66;
 
-
 %% **** (4) 90 deg. (Noon)
 
 q13 := mediate(q0, q1); %% Trace of noon line on horizontal plane
 
 dotlabel.llft("$q_{13}$", q13);
 draw gh -- q13;
-
 
 %% **** (4) 75 deg.  (1:00 PM)
 
@@ -2466,7 +2390,6 @@ q60 := bpv0;
 dotlabel.ulft("$q_{60}$", q60);
 
 draw gh -- q60;
-
 
 %% **** (4) 15 deg. (5:00 PM) 
 
@@ -2590,7 +2513,6 @@ if false:
  dotlabel.lft("\uppercase\expandafter{\romannumeral 17} $(-15^\circ)$", p[-15]);
 fi; 
 
-
 %% **** (4) Center of r2 and normal of r2, shifted to center of r2
 
 q40 := get_center r2;
@@ -2610,7 +2532,6 @@ drawarrow q40 -- q41 with_color red;
 %% **** (4) End of figure 8
 
 endfig with_focus f0 no_sort;
-
 
 %% *** (3) Figure 9:  Parallel projection onto vertical plane (plane of r2)
 
@@ -2637,7 +2558,6 @@ dotlabel.ulft("$q_{43}$", q43);
 dotlabel.lft("$q_{44}$", q44);
 dotlabel.rt("$q_{45}$", q45);
 
-
 %% **** (4) Label the directions
 
 label("Up", mediate(q44, q45) shifted (0, 0, 1));
@@ -2660,8 +2580,6 @@ draw (gv -- q75) transformed t3;
 dotlabel.lft("VII $q_{73}$", q73 transformed t3);
 
 draw (gv -- q73) transformed t3;
-
-
 
 %% ***** (5) 8:00 AM (150 deg.)
 
@@ -2686,7 +2604,6 @@ draw (gv -- q67) transformed t3;
 dotlabel.bot("\vbox{\hbox{$q_{65}$}\hbox{XI}}", q65 transformed t3);
 
 draw (gv -- q65) transformed t3;
-
 
 %% ***** (5) 90 deg.  (Noon)
 
@@ -2720,7 +2637,6 @@ dotlabel.rt("$q_{61}$ XVII", q61 transformed t3);
 
 draw (gv -- q61) transformed t3;
 
-
 %% ***** (5) 6:00 PM (0 deg.)
 
 dotlabel.rt("$q_{63}$ XVIII", q63 transformed t3);
@@ -2741,7 +2657,6 @@ rotate t4 (0, -90);
 
 draw r6 transformed t4;
 
-
 %% **** (4) Label the directions
 
 label("North", q13 transformed t4 shifted (0, 0, 1.5));
@@ -2759,7 +2674,6 @@ dotlabel.lrt("$q_{1}$",   q1 transformed t4);
 %% **** (4) The trace of the gnomon on the plane of r6
 
 dotlabel.bot("$g_h$", gh  transformed t4);  
-
 
 %% **** (4) Time division points and lines
 
@@ -2783,24 +2697,20 @@ dotlabel.lft("VIII $q_{72}$", q72 transformed t4);
 draw (gh -- q70) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{70}$}\hbox{IX}}", q70 transformed t4);
 
-
 %% ***** (5) 120 deg.  (10:00 AM)
 
 draw (gh -- q68) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{68}$}\hbox{X}}", q68 transformed t4);
-
 
 %% ***** (5) 105 deg.  (11:00 AM)
 
 draw (gh -- q66) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{66}$}\hbox{XI}}", q66 transformed t4);
 
-
 %% ***** (5) 90 deg.  (Noon)
 
 draw (gh -- q13) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{13}$}\hbox{XII}}", q13 transformed t4);
-
 
 %% ***** (5) 75 deg.  (1:00 PM)
 
@@ -2827,7 +2737,6 @@ dotlabel.rt("$q_{60}$ XVI", q60 transformed t4);
 draw (gh -- q62) transformed t4;
 dotlabel.rt("$q_{62}$ XVII", q62 transformed t4);
 
-
 %% ***** (5) 0 deg. (6:00 PM)
 
 draw (gh -- q64) transformed t4;
@@ -2844,7 +2753,6 @@ endfig with_projection parallel_x_z with_factor 1.5;
 verbatim_metapost "end;";
 
 end;
-
 
 %% ** (2) 
 

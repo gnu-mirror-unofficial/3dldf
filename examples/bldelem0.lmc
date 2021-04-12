@@ -110,10 +110,8 @@ macro tab;
 % mag :           magnitude (1 or -1)
 % crosshair_ctr:  Number of crosshairs.
 
-
 def tab (t, V, H_OFFSET, HEIGHT) {numeric j, numeric k, numeric n, numeric r, numeric u, 
              numeric crosshair_ctr, numeric mag} :=
-
 
 %% *** (3)
 
@@ -158,7 +156,6 @@ def tab (t, V, H_OFFSET, HEIGHT) {numeric j, numeric k, numeric n, numeric r, nu
 
    P5 := mediate(get_point (j) t, get_point (k) t, r) shifted by (P4 - P3);
    P6 := mediate(get_point (k) t, get_point (j) t, r) shifted by (P4 - P3);
-
 
    %draw P0 -- P1 with_pen pencircle scaled (.5mm, .5mm, .5mm) with_color red on_picture V;
 
@@ -236,7 +233,6 @@ if do_labels:
     % dotlabel.bot("$P_{11}$", P11) V;
 
 fi;
-
 
 %% *** (3)
 

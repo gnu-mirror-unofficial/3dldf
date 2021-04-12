@@ -1,7 +1,6 @@
 %%% sundl_03.lmc
 %%%% Created by Laurence D. Finston (LDF) Thu Oct 11 13:04:57 CEST 2007
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -48,7 +47,6 @@
 %%%% Laurence.Finston@gmx.de
  
 
-
 
 %% * (1) Sundial macros.
 
@@ -147,8 +145,6 @@ c0 *= r0 *= r1 *= t0;
 
 %% **** (4) First Figure
 
-
-
 pickup pencircle scaled (.575mm, .575mm);
 
 beginfig(curr_figure); 
@@ -162,8 +158,6 @@ drawdblarrow g0 -- g1;
 
 label.bot("$g_0$", g0);
 label.top("$g_1$", g1);
-
-
 
 p0 := (0, 0, radius);
 
@@ -180,8 +174,6 @@ for i = 0 step 15 until 180:
    fi; 
 endfor;
 
-
-
 %% **** (4) Points on bottom of dial (horizontal)
 
 for i = -15 step -15 until -165:
@@ -196,8 +188,6 @@ for i = -15 step -15 until -165:
 endfor;
 
 %draw p[75] -- p[-105];
-
-
 
 %% **** (4) Rotate dial and surrounding rectangles.
 
@@ -215,8 +205,6 @@ for i = 0 upto 3:
    q[i] := get_point (i) r1;
 endfor;
 
-
-
 %% ***** (5) r0
 
 dotlabel.bot("$q_{28}$", q28);
@@ -225,8 +213,6 @@ dotlabel.top("$q_{30}$", q30);
 dotlabel.rt("$q_{31}$", q31);
 
 label.lrt("$r_0$", mediate(q28, q31, .25)) with_text_color red;
-
-
 
 %% ***** (5) r1
 
@@ -237,9 +223,6 @@ dotlabel.rt("$q_3$", q3);
 
 label.lrt("$r_1$", mediate(q0, q3)) with_text_color green;
 
-
-
-
 %% **** (4) Get the rectangle perpendicular to r1, draw and label it (r4)
 
 q4 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) 90;
@@ -247,7 +230,6 @@ q5 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) -90;
 
 dotlabel.lft("$q_4$", q4);
 dotlabel.lft("$q_5$", q5);
-
 
 q6 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) 90;
 q7 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) -90;
@@ -260,8 +242,6 @@ r4 := (q5, q4, q6, q7);
 draw r4 with_color cyan;
 
 label.llft("$r_4$", mediate(q4, q5, .25)) with_text_color cyan;
-
-
 
 %% **** (4) Find, draw and label the rectangle representing the vertical plane (r2)
 
@@ -283,9 +263,6 @@ gv := bpv0;
 
 dotlabel.urt("$g_v$", gv);
 
-
-
-
 %% **** (4) 90 deg.  Noon line.
 
 %% ***** (5) Vertical
@@ -301,15 +278,12 @@ dotlabel.lrt("$q_{12}$", q12);
 
 draw q11 -- q12;
 
-
-
 %% **** (4) Horizontal plane (plane of r6)
 
 q50 := q0 shifted 15;
 q51 := q1 shifted 15;
 
 r6 := (q0, q1, q51, q50);
-
 
 draw r6 with_color orange;
 
@@ -332,8 +306,6 @@ gh := bpv0; %% Trace of gv on r6
 
 dotlabel.urt("$g_h$", gh);
 
-
-
 %% **** (4) Planes of the vertical and horizontal rectangles
 
 m2 := get_plane r2;  %% Vertical
@@ -354,8 +326,6 @@ q75 := bpv0;
 dotlabel.lft("$q_{75}$", q75);
 
 draw gv -- q75;
-
-
 
 %% ***** (5) Horizontal
 
@@ -389,8 +359,6 @@ dotlabel.lft("$q_{73}$", q73);
 
 draw gv -- q73;
 
-
-
 %% ***** (5) Horizontal
 
 h165h := m165 intersection m6;
@@ -419,9 +387,6 @@ dotlabel.lft("$q_{71}$", q71);
 
 draw gv -- q71;
 
-
-
-
 %% ***** (5) Horizontal
 
 h150h := m150 intersection m6;
@@ -433,8 +398,6 @@ q72 := bpv1;
 dotlabel.bot("$q_{72}$", q72);
 
 draw gh -- q72;
-
-
 
 %% **** (4) 135 deg. (9:00 AM) 
 
@@ -452,8 +415,6 @@ dotlabel.lrt("$q_{69}$", q69);
 
 draw gv -- q69;
 
-
-
 %% ***** (5) Horizontal
 
 h135h := m135 intersection m6;
@@ -465,9 +426,6 @@ q70 := bpv0;
 dotlabel.ulft("$q_{70}$", q70);
 
 draw gh -- q70;
-
-
-
 
 %% **** (4) 120 deg. (10:00 AM) 
 
@@ -485,8 +443,6 @@ dotlabel.rt("$q_{67}$", q67);
 
 draw gv -- q67;
 
-
-
 %% ***** (5) Horizontal
 
 h120h := m120 intersection m6;
@@ -498,8 +454,6 @@ q68 := bpv0;
 dotlabel.lft("$q_{68}$", q68);
 
 draw gh -- q68;
-
-
 
 %% **** (4) 105 deg. (11:00 AM) 
 
@@ -517,8 +471,6 @@ dotlabel.rt("$q_{65}$", q65);
 
 draw gv -- q65;
 
-
-
 %% ***** (5) Horizontal
 
 h105h := m105 intersection m6;
@@ -531,17 +483,12 @@ dotlabel.lft("$q_{66}$", q66);
 
 draw gh -- q66;
 
-
-
 %% **** (4) 90 deg. (Noon)
 
 q13 := mediate(q0, q1); %% Trace of noon line on horizontal plane
 
 dotlabel.llft("$q_{13}$", q13);
 draw gh -- q13;
-
-
-
 
 %% **** (4) 75 deg.  (1:00 PM)
 
@@ -559,8 +506,6 @@ draw gv -- q56;
 
 dotlabel.rt("$q_{56}$", q56);
 
-
-
 %% ***** (5) Horizontal
 
 h75h := m75 intersection m6;
@@ -571,8 +516,6 @@ q57 := bpv0;
 
 draw gh -- q57;
 dotlabel.ulft("$q_{57}$", q57);
-
-
 
 %% **** (4) 60 deg. (2:00 PM)
 
@@ -588,8 +531,6 @@ q53 := bpv0;
 
 dotlabel.rt("$q_{53}$", q53);
 
-
-
 %% ***** (5) Horizontal
 
 h60h := m60 intersection m6;
@@ -600,8 +541,6 @@ q58 := bpv0;
 
 draw gh -- q58;
 dotlabel.lft("$q_{58}$", q58);
-
-
 
 %% **** (4) 45 deg. (3:00 PM) 
 
@@ -617,8 +556,6 @@ q54 := bpv0;
 
 dotlabel.lrt("$q_{54}$", q54);
 
-
-
 %% ***** (5) Horizontal
 
 h45h := m45 intersection m6;
@@ -629,8 +566,6 @@ q59 := bpv0;
 
 draw gh -- q59;
 dotlabel.lft("$q_{59}$", q59);
-
-
 
 %% **** (4) 30 deg. (4:00 PM) 
 
@@ -648,8 +583,6 @@ dotlabel.lrt("$q_{55}$", q55);
 
 draw gv -- q55;
 
-
-
 %% ***** (5) Horizontal
 
 h30h := m30 intersection m6;
@@ -662,13 +595,9 @@ dotlabel.ulft("$q_{60}$", q60);
 
 draw gh -- q60;
 
-
-
 %% ****** (6) 15 deg. (5:00 PM) 
 
 m15 := (origin, gv, p15);
-
-
 
 %% ****** (6) Vertical
 
@@ -682,9 +611,6 @@ dotlabel.urt("$q_{61}$", q61);
 
 draw gv -- q61;
 
-
-
-
 %% ****** (6) Horizontal
 
 h15h := m15 intersection m6;
@@ -696,8 +622,6 @@ q62 := bpv0;
 dotlabel.urt("$q_{62}$", q62);
 
 draw gh -- q62;
-
-
 
 %% ****** (6) 0 deg. (18:00 PM) 
 
@@ -715,8 +639,6 @@ dotlabel.rt("$q_{63}$", q63);
 
 draw gv -- q63;
 
-
-
 %% ****** (6) Horizontal
 
 %% This is the same as h180h.  TODO:  Try getting rid of it.
@@ -727,7 +649,6 @@ h0h := m0 intersection m6;
 bpv := h0h intersection_points r6;
 
 q64 := bpv0;
-
 
 if is_valid q64:
    %message "q64 is valid"; 
@@ -750,15 +671,11 @@ label.urt("$c_0$", get_point(16) c0 * .875 shifted (.1, 0));
 draw p0 -- p180 with_color blue with_pen path_pen;
 draw p[-90] -- p90 with_color blue with_pen path_pen;
 
-
-
 %% ***** (5) Draw time divisions on vertical dial
 
 draw q16 -- gv;  %% 1:00 PM (75 deg.) 
 draw gv -- q53;  %% 2:00 PM (60 deg.)
 draw gv -- q54;  %% 3:00 PM (45 deg.)
-
-
 
 %% ***** (5) Labels for top of vertical dial.
 
@@ -805,10 +722,7 @@ if false:
  dotlabel.lft("\uppercase\expandafter{\romannumeral 17} $(-15^\circ)$", p[-15]);
 fi; 
 
-
 %% ***** (5) Center of r2 and normal of r2, shifted to center of r2
-
-
 
 q40 := get_center r2;
 q41 := get_normal r2 * -1 shifted q40;
@@ -856,7 +770,6 @@ dotlabel.ulft("$q_{43}$", q43);
 dotlabel.lft("$q_{44}$", q44);
 dotlabel.rt("$q_{45}$", q45);
 
-
 %% **** (4) Label the directions
 
 label("Up", mediate(q44, q45) shifted (0, 0, 1));
@@ -879,8 +792,6 @@ draw (gv -- q75) transformed t3;
 dotlabel.lft("VII $q_{73}$", q73 transformed t3);
 
 draw (gv -- q73) transformed t3;
-
-
 
 %% ***** (5) 8:00 AM (150 deg.)
 
@@ -905,7 +816,6 @@ draw (gv -- q67) transformed t3;
 dotlabel.bot("\vbox{\hbox{$q_{65}$}\hbox{XI}}", q65 transformed t3);
 
 draw (gv -- q65) transformed t3;
-
 
 %% ***** (5) 90 deg.  (Noon)
 
@@ -939,7 +849,6 @@ dotlabel.rt("$q_{61}$ XVII", q61 transformed t3);
 
 draw (gv -- q61) transformed t3;
 
-
 %% ***** (5) 6:00 PM (0 deg.)
 
 dotlabel.rt("$q_{63}$ XVIII", q63 transformed t3);
@@ -949,8 +858,6 @@ draw (gv -- q63) transformed t3;
 %% **** (4) End of second
 
 endfig with_projection parallel_x_z with_factor 1.5;  
-
-
 
 %% *** (3) Third Figure
 %% *** (3) Parallel projection onto horizontal plane 
@@ -964,7 +871,6 @@ t4 := align (q80 -- q81) with_axis y_axis;
 rotate t4 (0, -90);
 
 draw r6 transformed t4;
-
 
 %% **** (4) Label the directions
 
@@ -983,7 +889,6 @@ dotlabel.lrt("$q_{1}$",   q1 transformed t4);
 %% **** (4) The trace of the gnomon on the plane of r6
 
 dotlabel.bot("$g_h$", gh  transformed t4);  
-
 
 %% **** (4) Time division points and lines
 
@@ -1009,24 +914,20 @@ dotlabel.lft("VIII $q_{72}$", q72 transformed t4);
 draw (gh -- q70) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{70}$}\hbox{IX}}", q70 transformed t4);
 
-
 %% ***** (5) 120 deg.  (10:00 AM)
 
 draw (gh -- q68) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{68}$}\hbox{X}}", q68 transformed t4);
-
 
 %% ***** (5) 105 deg.  (11:00 AM)
 
 draw (gh -- q66) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{66}$}\hbox{XI}}", q66 transformed t4);
 
-
 %% ***** (5) 90 deg.  (Noon)
 
 draw (gh -- q13) transformed t4;
 dotlabel.top("\vbox{\hbox{$q_{13}$}\hbox{XII}}", q13 transformed t4);
-
 
 %% ***** (5) 75 deg.  (1:00 PM)
 
@@ -1052,7 +953,6 @@ dotlabel.rt("$q_{60}$ XVI", q60 transformed t4);
 
 draw (gh -- q62) transformed t4;
 dotlabel.rt("$q_{62}$ XVII", q62 transformed t4);
-
 
 %% ***** (5) 0 deg. (6:00 PM)
 
@@ -1097,7 +997,6 @@ enddef;
 %% for i = -165 step 15 until 180:
 %%    draw origin -- (p[i] transformed t1);
 %% endfor;
-
 
 %% draw c1;
 %% draw r10 with_color red;

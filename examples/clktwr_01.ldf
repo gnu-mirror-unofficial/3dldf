@@ -96,7 +96,6 @@ def crosshair {point aa,
 
 enddef;
 
-
 %% *** (3) Figure 1
 
 beginfig(1);
@@ -141,7 +140,6 @@ if dolabels:
 dotlabel.lft("$p_8$", p8);
 dotlabel.rt("$p_9$", p9);
 fi;
-
 
 p10 := p8 shifted (0, 2cm);
 
@@ -304,7 +302,6 @@ t0 := (identity rotated_around (p4, p36) 180) rotated_around (p4, p2) 180;
 
 p51 *= p52 *= p53 *= p54 *= p55 *= p56 *= p57 *= p58 *= t0;
 
-
 if dolabels:
 dotlabel.top("$p_{51}$", p51);
 dotlabel.top("$p_{52}$", p52);
@@ -326,7 +323,6 @@ for i = 1 upto 15:
 %   drawdot mediate(p57, p58, (i / 16)) with_pen pencircle scaled (.75mm, .75mm, .75mm);
     crosshair{mediate(p57, p58, (i / 16)), .1cm};
 endfor;
-
 
 %% **** (4) Clock
 
@@ -374,7 +370,6 @@ s1 := "verbatimtex\n"
       & "\setbox2=\hbox{\vbox to \ht0{\vss}\vbox{\hrule width 2\wd0 height \dimen0 depth -\ht0}}\n"
       & "etex\n\n";
 
-
 verbatim_metapost s1;
 
 s2 := "\hbox to 3\wd0{\leaders\hbox to 1em"
@@ -389,7 +384,6 @@ label(s3, p19) with_text_color dark_gray;
 
 % label("\copy1", p19) with_text_color dark_gray;
 % label("\copy2", p19) with_text_color dark_gray;
-
 
 for i = 1 upto 11:
    p[19 + i]  := p19 rotated_around (p15, p18) (30 * i);
@@ -458,10 +452,7 @@ p65 := mediate(p63, p64, .25) rotated_around (p63, p66) 45;
 
 p67 := (p63 -- p65) intersection_point (p61 --  p62);
 
-
 p68 := p67 rotated_around (p60, p61) 180;
-
-
 
 draw p63 -- p67 -- p68 -- p64;
 
@@ -471,11 +462,7 @@ p70 := p69 shifted (0, 1cm);
 
 p71 := (p69 -- p70) intersection_point (p63 -- p67);
 
-
-
 p72 := p71 rotated_around (p60, p61) 180;
-
-
 
 draw p60 -- p61 with_color gray;
 
@@ -578,7 +565,6 @@ for i = 1 upto 7:
     crosshair{mediate(p92, p93, (i / 8)), .1cm};
 endfor;
 
-
 v2 := current_picture;
 clear current_picture;
 
@@ -629,7 +615,6 @@ for i = 1 upto 7:
     crosshair{mediate(p100, p101, (i / 8)), .1cm};
 endfor;
 
-
 v3 := current_picture;
 clear current_picture;
 
@@ -647,7 +632,6 @@ p126 := p14 shifted (-1cm, -1cm);
 p127 := p16 shifted (1cm, 1cm);
 p128 := p17 shifted (-1cm, 1cm);
 
-
 % dolabels := true;
 % dolabels := false;
 
@@ -657,8 +641,6 @@ dotlabel.llft("$p_{14}$", p14);
 dotlabel.llft("$p_{16}$", p16);
 dotlabel.lrt("$p_{17}$", p17);
 fi;
-
-
 
 draw p125 -- p126 -- p128 -- p127 -- cycle dashed evenly with_color gray;
 
@@ -677,8 +659,6 @@ label("$c$", mediate(p14, p16, .4));
 
 v4 := current_picture;
 clear current_picture;
-
-
 
 %% ***** (5) Tabs 
 
@@ -808,7 +788,6 @@ undraw p94 -- p95;
 
 draw p94 -- p95 dashed evenly;
 
-
 %% **** (4) Additional labels
 
 label.urt("$b$", p12);
@@ -819,14 +798,12 @@ endfig with_projection parallel_x_y no_sort;
 
 %% *** (3) Figure 2
 
-
 %% **** (4)
 
 focus f[];
 
 set f0 with_position (-5, 20, -50) 
        with_direction (-5, 20, 10) with_distance 100; 
-
 
 rectangle r[];
 
@@ -837,7 +814,6 @@ path q[];
 %% **** (4)
 
 beginfig(2); 
-
 
 p0 := origin;
 p1 := (side_width, 0);
@@ -869,7 +845,6 @@ dotlabel.rt("$p_{5}$", p5);
 dotlabel.rt("$p_{6}$", p6);
 dotlabel.lft("$p_{7}$", p7);
 
-
 draw p0 -- p4;
 draw p3 -- p7;
 
@@ -878,11 +853,7 @@ draw p2 -- p6 dashed evenly;
 
 %% !! START HERE:  Put in the arches.  LDF 2010.06.02.
 
-
 %draw r1 with_color red;
-
-
-
 
 endfig with_focus f0;
 
@@ -913,6 +884,4 @@ end;
 %% eval:(read-abbrev-file "~/.abbrev_defs")
 %% outline-regexp:"%% [*\f]+"
 %% End:
-
-
 

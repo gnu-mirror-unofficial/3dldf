@@ -73,7 +73,6 @@ pen_width := .75mm;
 w := 60cm;
 h := 80cm;
 
-
 frame_w := w - .5pen_width;
 frame_h := h - .5pen_width;
 
@@ -184,14 +183,12 @@ draw C -- T0;
 label.llft("$r$", mediate(C, T0));
 label.lrt("$r$", mediate(C, T1));
 
-
 drawdot T1 withpen pencircle scaled (1mm, 1mm);
 label.rt("$T_1$", T1 shifted (.25, 0));
 draw C -- T1;
 
 label.lft("$a$", mediate(T0, P));
 label.rt("$a$", mediate(T1, P));
-
 
 draw frame;
 endfig with_projection parallel_x_y with_factor .25;

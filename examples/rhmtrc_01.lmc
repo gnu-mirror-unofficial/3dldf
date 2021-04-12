@@ -1,7 +1,6 @@
 %%% rhmtrc_01.lmc
 %%%% Created by Laurence D. Finston (LDF) Fri Oct 26 23:09:21 CEST 2007
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -53,7 +52,6 @@
 
 % * (1) Beginning of 3DLDF code.
 
-
 %% ** (2) Macro `draw_rhombic_triacontahedron_net'
 
 %% *** (3) Declaration 
@@ -68,7 +66,6 @@ def draw_rhombic_triacontahedron_net {numeric rhombus_side_length,
                                       boolean do_stitch_lines,
                                       numeric stitch_divisions,
                                       numeric dot_diam} = 
-
 
 %% **** (4) Declarations in macro `draw_rhombic_triacontahedron_net'
 
@@ -92,11 +89,9 @@ pen @dot_pen;
 @pv := get_net rhombic_triacontahedron 
          with_rhombus_side_length rhombus_side_length;
 
-
 @qv := get_tabs rhombic_triacontahedron 
          with_rhombus_side_length rhombus_side_length
          with_stitch_divisions stitch_divisions;
-
 
 %message "size @pv:"; 
 %show size @pv;
@@ -318,7 +313,6 @@ fi;
 p14 := get_point 1 @qv[size @qv / 2];
 p15 := get_last_point @qv[size @qv / 2];
 
-
 if false:
 dotlabel.lft("$p_{14}$", p14);
 dotlabel.ulft("$p_{15}$", p15);
@@ -392,6 +386,4 @@ endinput;
 %% eval:(read-abbrev-file abbrev-file-name)
 %% outline-regexp:"%% [*\f]+"
 %% End:
-
-
 

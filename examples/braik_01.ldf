@@ -49,7 +49,6 @@
  
 
 
-
 %% Run like this:
 %% 3dldf braik_01.ldf
 %% mpost braik_01.mp
@@ -61,10 +60,7 @@
 %%         Constructing an ellipse from 5 points.  
 %%         LDF 2007.06.26.
 
-
 verbatim_metapost "verbatimtex  \magnification=\magstep2 \font\small=cmr8 etex ";
-
-
 
 %% **** (4) Frame
 
@@ -84,7 +80,6 @@ frame := origin -- (frame_w, 0) -- (frame_w, 0, frame_h)
 
 shift frame (-.5frame_w, 0, -.5frame_h);
 
-
 %% **** (4) Declarations
 
 numeric i;
@@ -96,7 +91,6 @@ point F;              %% determined below.
 
 point p[];
 point_vector pv;
-
 
 point X;
 point Y;
@@ -212,7 +206,6 @@ dotlabel.bot("$p_2$", p2) with_dot_color red;
 
 draw p1 -- p2 with_color green with_pen path_pen;
 
-
 %% ****** (6)
 
 bp := (cc -- Y) intersection_point (dd -- Z);
@@ -266,7 +259,6 @@ def mv {numeric Sstart,
   % else:
   % message "Not incrementing `Sstart'.";
   fi;
-
 
   %message "`Sstart' before second set:";
   %show Sstart;

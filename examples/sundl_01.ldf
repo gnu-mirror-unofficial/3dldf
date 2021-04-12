@@ -1,7 +1,6 @@
 %%%% sundl_01.ldf
 %%%% Created by Laurence D. Finston (LDF) Thu Sep 27 17:57:57 CEST 2007
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -162,7 +161,6 @@ endfor;
 
 draw p[75] -- p[-105];
 
-
 %% **** (4) Rotate dial and surrounding rectangles.
 
 t2 := identity rotated (0, 0, -latitude);
@@ -205,13 +203,11 @@ q5 := unit_vector(q3 - q0) * 2 shifted q0 rotated_around(q0, q1) -90;
 dotlabel.lft("$q_4$", q4);
 dotlabel.lft("$q_5$", q5);
 
-
 q6 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) 90;
 q7 := unit_vector(q2 - q1) * 2 shifted q1 rotated_around(q0, q1) -90;
 
 dotlabel.urt("$q_6$", q6);
 dotlabel.lrt("$q_7$", q7);
-
 
 r4 := (q5, q4, q6, q7);
 
@@ -270,7 +266,6 @@ draw q14 -- q15 dashed evenly;
 point n[];
 
 n0 := (get_normal c0 * -1) shifted q14;
-
 
 bpv := (q14 -- n0) intersection_points r2;
 
@@ -360,14 +355,11 @@ label.lrt(s, q33);
 
 t4 := align (q32 -- q33) with_axis y_axis;
 
-
 %% **** (4) Draw dial
-
 
 draw c0;
 
 label.urt("$c_0$", get_point(16) c0 * .875 shifted (.1, 0));
-
 
 %% **** (4) Draw axes of dial
 
@@ -388,7 +380,6 @@ fi;
 
 dotlabel.lft("\uppercase\expandafter{\romannumeral 12} $(90^\circ)$", p90);
 dotlabel.lft("$p_{75} =$\uppercase\expandafter{\romannumeral 13} $(75^\circ)$", p75);
-
 
 if false: 
    dotlabel.lft("\uppercase\expandafter{\romannumeral 14} $(60^\circ)$", p60);
@@ -424,8 +415,6 @@ if false:
  dotlabel.lft("\uppercase\expandafter{\romannumeral 16} $(-30^\circ)$", p[-30]);
  dotlabel.lft("\uppercase\expandafter{\romannumeral 17} $(-15^\circ)$", p[-15]);
 fi; 
-
-
 
 %% **** (4) End of figure 1
 
@@ -465,7 +454,6 @@ draw p0 -- p180 with_color blue;
 
 draw q14 -- q15 dashed evenly;
 draw q14 -- q16 dashed evenly;
-
 
 %% **** (4) Labels for top of dial.  (vertical)
 
@@ -510,7 +498,6 @@ dotlabel.rt("\uppercase\expandafter{\romannumeral 17} $(-15^\circ)$", p[-15]);
 
 endfig with_projection parallel_z_y with_factor 1.25 no_sort; 
 
-
 %% *** (3) Figure 3.  Parallel projection onto the skew plane r3
 
 beginfig(3); 
@@ -539,7 +526,6 @@ dotlabel.bot("$q_{22}$", q22);
 
 draw q18 -- q22 dashed evenly with_color red;
 
-
 q34 := mediate(q23, q24);
 
 endfig with_projection parallel_x_z;
@@ -549,7 +535,6 @@ endfig with_projection parallel_x_z;
 verbatim_metapost "end;";
 
 end;
-
 
 %% ** (2) 
 

@@ -1,9 +1,7 @@
 %%%% fctcn01.ldf
 %%%% Created by Laurence D. Finston (LDF) Tue Oct 27 17:14:40 CET 2009
 
-
 %% * (1) Copyright and License.
-
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
 %%%% Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation  
@@ -108,7 +106,6 @@ transform t[];
 
 string s;
 
-
 %% *** (3) Figure 0
        
 beginfig(0);
@@ -147,8 +144,6 @@ p10 := mediate(p7, p8);
 
 %dotlabel.top(10, p10);   
 
-
-
 bpv := (p0 -- p10) intersection_points c0;
 
 %show bpv;
@@ -186,7 +181,6 @@ label.top("$n_0$", n0);
 drawarrow p13 -- n0;
 
 v0 := current_picture;
-
 
 %% **** (4) End of figure 0
   
@@ -228,7 +222,6 @@ unfilldraw c3;
 draw (-.25, 0) -- (.25, 0);
 draw (0, 0, -.25) -- (0, 0, .25);
 
-
 p60 := get_point 0 c1;
 %dotlabel.top("$p_{60}$", p60);
 
@@ -238,7 +231,6 @@ for i = 1 upto 15:
    s := "$p_{" & decimal a & "}$";
    %dotlabel.top(s, p[a]);
 endfor;
-
 
 %% **** (4)
 
@@ -285,7 +277,6 @@ for i = 1 upto 4:
    drawdot mediate(p86, p87, i/5) with_pen dot_pen;
 endfor;
 
-
 %% ***** (5)
 
 t2 := identity rotated_around (origin, p5) 180;
@@ -300,7 +291,6 @@ draw q5;
 for i = 1 upto 4:
    drawdot mediate(p88, p89, i/5) with_pen dot_pen;
 endfor;
-
 
 t3 := identity rotated (0, 45);
 
@@ -354,12 +344,10 @@ for i = 0 upto 2:
    s := "$p_{" & decimal a & "}$";
 endfor;
 
-
 %dotlabel.rt("$p_{15}$", p15);
 %dotlabel.lft("$p_{16}$", p16);
 
 %label.rt("$p_{17}$", p17);
-
 
 % message "magnitude (p1 - p7):"; 
 % show magnitude (p1 - p7);
@@ -419,7 +407,6 @@ w1 *= p21 *= t1;
 %dotlabel.top("$p_{21}$", p21);
 
 %% **** (4) The remaining 13 triangles
-
 
 for i = 22 upto 34:
    s := "$p_{" & decimal i & "}$";
@@ -488,13 +475,10 @@ for i := 20 upto 34:
 
 endfor;
 
-
-
 draw p17 -- p38;
 draw p17 -- p40;
 draw p17 -- p43;
 draw p17 -- p48;
-
 
 q1 += --;
 
@@ -613,7 +597,6 @@ endfor;
 
 a := (p34 - p17) angle (p16 - p17);
 
-
 p108 := p17 shifted (0, 1);
 
 t5 := identity rotated_around (p17, p108) -a;
@@ -622,7 +605,6 @@ p100 *= p101 *= p103 *= p105 *= p106 *= p107 *= t5;
 
 draw p100 -- p105 -- p103 -- p101;
 draw p106 -- p107 dashed evenly;
-
 
 for i := 1 upto 15:
    drawdot mediate(p106, p107, i/16) with_pen dot_pen;

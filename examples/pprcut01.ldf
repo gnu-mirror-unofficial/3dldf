@@ -1,7 +1,6 @@
 %%%% pprcut01.ldf
 %%%% Created by Laurence D. Finston (LDF) Sat Jan  1 20:32:27 CET 2011
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -109,13 +108,11 @@ q1 := q0 rotated_around (p0, p1) 90;
 draw q0 transformed frame_transform on_picture crosshair_picture; 
 draw q1 transformed frame_transform on_picture crosshair_picture; 
 
-
 draw q0 rotated_around ((0, 0, .5frame_ht), (frame_wd, 0, .5frame_ht)) 
      transformed frame_transform on_picture crosshair_picture; 
 
 draw q1 rotated_around ((0, 0, .5frame_ht), (frame_wd, 0, .5frame_ht)) 
      transformed frame_transform on_picture crosshair_picture; 
-
 
 draw q0 rotated_around ((.5frame_wd, 0, 0), (.5frame_wd, 0, .5frame_ht)) 
      transformed frame_transform on_picture crosshair_picture; 
@@ -146,7 +143,6 @@ draw (q1 shifted by ((.5frame_wd, 0, 1cm) - p0))
      rotated_around ((0, 0, .5frame_ht), (frame_wd, 0, .5frame_ht))
      transformed frame_transform  
      on_picture crosshair_picture; 
-
 
 endfig; 
 
@@ -249,11 +245,9 @@ draw p4 -- p6 -- p10
  -- p9 -- p5 -- p7 -- p11 -- p8 -- cycle 
  dashed evenly with_pen pencircle scaled (.5mm, .5mm, .5mm) on_picture PICT;
 
-
 %dotlabel.top(0, q0) PICT;
 
 enddef;
-
 
 %% * (1) macro polygon_circle
 
@@ -333,7 +327,6 @@ draw main_circle on_picture main_picture;
 
 draw r0 with_color dark_grey dashed evenly on_picture help_picture;
 
-
 for i := 0 upto polygon_sides - 1:
 
    a := i + 1;
@@ -344,7 +337,6 @@ for i := 0 upto polygon_sides - 1:
 
    p6 := unit_vector(get_point (i) r0 - get_point (a) r0) * 1.5
       shifted by get_point (i) r0;
-
 
    p7 := unit_vector(get_point (a) r0 - get_point (i) r0) * 1.5
       shifted by get_point (a) r0;
@@ -369,7 +361,6 @@ for i := 0 upto 2 * polygon_sides - 1:
 
    p6 := unit_vector(get_point (i) r1 - get_point (a) r1) * 1.5
       shifted by get_point (i) r1;
-
 
    p7 := unit_vector(get_point (a) r1 - get_point (i) r1) * 1.5
       shifted by get_point (a) r1;
@@ -464,7 +455,6 @@ current_picture += v5;
 current_picture += v105;
 endfig with_projection parallel_x_z; 
 
-
 %% * (1) 7-gon sections
 
 beginfig(107); 
@@ -495,7 +485,6 @@ rotate v109 (0, -90);
 shift v109 (7, 0, -15);
 current_picture += v109;
 endfig with_projection parallel_x_z; 
-
 
 %% * (1) !! START HERE: Temporary code.  The sections need to be placed by hand on the pages.
 %%   This code just puts one in the figure.
@@ -538,6 +527,4 @@ end;
 %% eval:(read-abbrev-file "~/.abbrev_defs")
 %% outline-regexp:"%% [*\f]+"
 %% End:
-
-
 

@@ -1,7 +1,6 @@
 %%%% sphrmd02.ldf
 %%%% Created by Laurence D. Finston (LDF) Mon May 31 19:22:33 CEST 2010
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -85,13 +84,11 @@ fi;
 %% Replaced dots with crosshairs.
 %% ENDLOG 
 
-
 input "sphrmd00.lmc";
 
 verbatim_metapost "verbatimtex \font\large=cmr17 etex;";
 
 %% *** (3) Declarations and initializations
-
 
 PI := 3.141592653589793;
 
@@ -147,7 +144,6 @@ numeric r[];  %% Radii
 numeric d[][];  %% Lengths of the horizontals.
 
 string s;
-
 
 %% *** (3) Figure 0
 
@@ -254,12 +250,10 @@ for i := k step k until (180 - k):
    d[6][i] := (2 * PI * r[i] *  m[6]) / 360;
    d[7][i] := (2 * PI * r[i] *  m[7]) / 360;
 
-
 %   s := "d[0][" & decimal i & "]:";
 %
 %   message s;
 %   show d[0][i];
-
 
 endfor;
 
@@ -286,7 +280,6 @@ rotate c1 (90, 0);
 
 endfig with_projection parallel_x_y no_sort;
 
-
 %% *** (3) Figure 1
 
 e := PI * r0;
@@ -297,7 +290,6 @@ ZERO := 0;
 
 numeric h_offset;
 numeric ht;
-
 
 beginfig(1); 
 
@@ -378,7 +370,6 @@ for i := k step k until (180 - k):
    p7 := (-d[2][i]/2, j * f);  %% Points on outer curves
    p8 := (d[2][i]/2, j * f);
 
-
    p9 := (d[3][i]/2, j * f);  %% Point on even further out curve
 
    p10 := (-d[4][i]/2, j * f);  %% Points on further inner curves
@@ -393,14 +384,11 @@ for i := k step k until (180 - k):
    p16 := (-d[7][i]/2, j * f);  
    p17 := (d[7][i]/2, j * f);  
 
-
    if (i == 45) or (i == 90) or (i == 135):  %% Horizontals
       draw p3 -- p4 dashed evenly;
    else: 
       draw p3 -- p4 with_color gray;  
    fi;
-
-
 
    q0 += p3;                   %% Main curves
    q1 += p4;
@@ -458,12 +446,10 @@ for i := k step k until (180 - k):
    q13 += p16;
    q14 += p17;
 
-
    
    if magnitude n < 15:
       old_crosshair{p6, .1cm};
    fi;
-
 
    %drawdot p8 with_pen dot_pen;
    
@@ -598,7 +584,6 @@ p47 := mediate(p42, p43, 5);
 draw p46 -- p42 dashed evenly with_color gray;
 draw p47 -- p43 dashed evenly with_color gray;
 
-
 v2 := current_picture;
 v4 := v2;
 
@@ -654,7 +639,6 @@ t4 := identity shifted (0, -14cm);  %% -17.5cm
 
 v2 := v4;
 v2 *= t4;
-
 
 for i = 0 upto 8:
    current_picture += v2;
@@ -719,11 +703,9 @@ c2 := in_circle rp1;
 
 %draw c2;
 
-
 draw rp1;  %% rp1 is scaled so that the length of one side is equal to 
            %% 1/8 of the circumference of c1.
            %% LDF 2012.08.05.
-
 
 old_crosshair{origin, .1cm};
 
@@ -740,7 +722,6 @@ for i = 8 upto 14:
    temp_pt := mediate(p[i], p[i + 1]);
    old_crosshair{mediate(origin, temp_pt, .675), .1cm};
 endfor;
-
 
 numeric rp_one_side_length;
 
@@ -765,7 +746,6 @@ rp_one_side_length := magnitude (p8 - p9);  %% 1.9635 Current value.  LDF 2012.0
 % label.top("$p_{13}$", p13);
 % label.top("$p_{14}$", p14);
 % label.top("$p_{15}$", p15);
-
 
 reg_polygon poly;
 poly := rp1;
@@ -805,7 +785,6 @@ endfor;
 shift tab_picture (5cm, 0);
 current_picture += tab_picture;
 
-
 endfig with_projection parallel_x_y no_sort;
 
 % r[30]:
@@ -831,8 +810,6 @@ beginfig(999);
 
 endfig;  
 
-
-
 %% *** (3) Figure 4 (1004, 2004, 3004, 4004)
 %% *** (3) Octagonal pyramid.
 %% LDF 2012.08.06.
@@ -846,8 +823,6 @@ clear v;
 clear w;
 clear text_picture;
 clear dbl_tab_picture;
-
-
 
 % 2.56543
 
@@ -876,18 +851,11 @@ beginfig(4004);
    current_picture += dbl_tab_picture;
 endfig with_projection parallel_x_y no_sort;
 
-
-
-
-
-
 %% *** (3) End of 3DLDF code
 
 verbatim_metapost "end;";
 
 end;
-
-
 
 %% ** (2) 
 

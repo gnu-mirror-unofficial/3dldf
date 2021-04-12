@@ -3,7 +3,6 @@
 
 %% * (1) Great Stellated Dodecahedron
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -89,8 +88,6 @@ triangle w[];
 
 verbatim_metapost "verbatimtex \font\largebf=cmbx12 etex;";
 
-
-
 pen dot_pen;
 
 dot_pen := pencircle scaled (1mm, 1mm);
@@ -119,7 +116,6 @@ for i = 0 upto 19:
  
 endfor;
 
-
 % draw rpv with_color red dashed evenly 
 %    with_pen pencircle scaled (.375mm, .375mm, .375mm);
 
@@ -131,14 +127,11 @@ for i = 0 step 4 until 16:
     draw p[i][1] -- p[i][2] dashed evenly;
 endfor;
 
-
-
 for i = 3 step 4 until 19:
 %    draw p[i][0] -- p[i][1];
     draw p[i][0] -- p[i][2];
     draw p[i][1] -- p[i][2] dashed evenly;
 endfor;
-
 
 %draw p[1][0] -- p[1][1];
 draw p[18][0] -- p[18][1];
@@ -219,7 +212,6 @@ tab13 := tab12 rotated_around (tab9, tab10) 180;
 
 %dotlabel.rt("$t_{13}$", tab13);
 
-
 draw tab12 -- tab13 dashed evenly;
 
 for j := 1 upto 5:
@@ -259,9 +251,7 @@ endfor;
 
 %% *** (3)
 
-
 t0 := identity shifted by tab6;
-
 
 for i = 4 step 4 until 16:
    tab0 *= tab1 *= tab3 *= tab5 *= tab12 *= tab13 *= t0;
@@ -325,7 +315,6 @@ i := 1;
 % label.bot(1, p[i]1);
 % label.lft(2, p[i]2);
 
-
 tab20 *= tab21 *= tab23 *= tab25 *= tab32 *= tab33 *= t1;
 
 c190 := c19 shifted (0, 1);
@@ -373,9 +362,7 @@ for i = 15 step -4 until 3:
       drawdot tab[33 + j] with_pen dot_pen;
    endfor;
 
-
 endfor;
-
 
 %% **** (4)
 
@@ -401,7 +388,6 @@ endfor;
 
 draw p[1][0] -- tab1;
 draw p[1][1] -- tab0;
-
 
 %% *** (3) The last tab trace
 
@@ -439,7 +425,6 @@ for j = 1 upto 5:
    drawdot tab[13 + j] with_pen dot_pen;
 endfor;
 
-
 %% *** (3) Inner triangles for stitch holes.
 
 % dotlabel.top(0, p0[0]);
@@ -452,10 +437,8 @@ for j = 0 upto 19:
 
    scale w[j + 4] (.5, 0, .5);
 
-
    c[20 + j] := get_center w[j + 4];
    shift w[j + 4] by (c[j] - c[20 + j]);
-
 
    draw w[j + 4] dashed withdots;
 
@@ -466,7 +449,6 @@ for j = 0 upto 19:
    % dotlabel.urt(0, v[j][0]);
    % dotlabel.top(1, v[j][1]);
    % dotlabel.lft(2, v[j][2]);
-
 
    for i = 0 upto 3:
       drawdot mediate(v[j][0], v[j][1], i/4) with_pen dot_pen;
@@ -479,7 +461,6 @@ endfor;
 %% *** (3)
 
 endfig with_projection parallel_x_z; 
-
 
 %% ** (2) Figure 2 --- Pyramids
 
@@ -534,8 +515,6 @@ q3 := q0 rotated_around (q1, q2) 180;
 
 draw q1 -- q3 -- q2;
 
-
-
 q4 := q1 rotated_around (q0, q2) 180;
 
 %dotlabel.top("$q_4$", q4);
@@ -549,8 +528,6 @@ q5 := q1 rotated (0, -60);
 draw q0 -- q5 -- q1;
 
 %% *** (3)
-
-
 
 set w0 with_points (q0, q4, q2);
 set w1 with_points (q0, q1, q2);
@@ -592,7 +569,6 @@ for i = 0 upto 3:
    drawdot mediate(b1, b2, i/4) with_pen dot_pen;
    drawdot mediate(b2, b0, i/4) with_pen dot_pen;
 endfor;
-
 
 %% *** (3)
 
@@ -718,7 +694,6 @@ endfor;
 
 t3 := identity rotated_around (q2, q28) 180;
 
-
 q10 *= q11 *= q12 *= q14 *= q21 *= q22 *= q23 *= q24 *= q25 *= q26 *= q27 *= t3;
 
 % dotlabel.top("$q_{10}$", q10);
@@ -789,7 +764,6 @@ t7 := (identity rotated_around (q2, q28) 180) rotated_around (q2, q4) 180;
 q40 *= q42 *= q46 *= q47 *= q50 *= q51 *= q52 *= q53 *= q54 *= q55 *= q56
     *= q57 *= q58 *= q59 *= q60 *= t7;
 
-
 draw q40 -- q42 -- q46 -- q47 dashed evenly;
 draw q50 -- q51 dashed evenly;
 
@@ -844,8 +818,6 @@ shift t0 (.5, 0, .5);
 q7 := q6;
 
 q4 *= q5 *= q6 *= w1 *= t0;
-
-
 
 % dotlabel.top("$q_4$", q4);
 % dotlabel.top("$q_5$", q5);
@@ -914,7 +886,6 @@ draw w3;
 label(j, c3);
 j := j + 1;
 
-
 for i = 0 upto 4:
    c2 *= c3 *= r0 *= r1 *= r2 *= r3 *= r4 *= r5 *= r6 *= w2 *= w3 *= t1;
    draw w2;
@@ -940,7 +911,6 @@ w3 := w1;
 
 c2 := c0;
 c3 := c1;
-
 
 t3 := identity shifted by 2 * (q8 - q2);
 shift t3 (0, 0, -2);
@@ -1011,8 +981,6 @@ w3 := w1;
 c2 := c0;
 c3 := c1;
 
-
-
 t4 := identity shifted by 4 * (q8 - q2);
 shift t4 by (0, 0, -4);
 
@@ -1051,7 +1019,6 @@ w3 := w1;
 c2 := c0;
 c3 := c1;
 
-
 t5 := identity shifted by (q0 - q5);
 shift t5 by 4 * (q8 - q2);
 shift t5 (0, 0, -4.5);
@@ -1077,7 +1044,6 @@ endfor;
 endfig with_projection parallel_x_z; 
 
 %% ** (2)
-
 
 %% *** (3) End of 3DLDF code
 

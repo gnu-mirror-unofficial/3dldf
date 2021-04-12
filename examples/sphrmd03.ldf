@@ -1,7 +1,6 @@
 %%%% sphrmd03.ldf
 %%%% Created by Laurence D. Finston (LDF) Fri Jul 16 18:24:36 CEST 2010
 
-
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
@@ -116,7 +115,6 @@ focus f[];
 set f0 with_position  (3, 10, -20) 
        with_direction (3, 10, 10) with_distance 20; 
 
-
 boolean do_triangle_labels;
 boolean do_tabs;
 boolean do_double_tabs;
@@ -166,7 +164,6 @@ fi;
 
 % message "border_pen:"; 
 % show border_pen;
-
 
 %% *** (3) Macros
 
@@ -233,7 +230,6 @@ def tab {triangle t, numeric j, numeric k, numeric n, numeric r, numeric u,
 
    P0 := mediate(get_point (j) t, get_point (k) t, n);
    P1 := mediate(get_point (k) t, get_point (j) t, n);
-
 
    P3 := mediate(P0, P1);
 
@@ -342,7 +338,6 @@ def tab {triangle t, numeric j, numeric k, numeric n, numeric r, numeric u,
 
       draw P27 -- P28 with_color dark_gray on_picture tab_picture;
 
-
 %     dotlabel.lft("$P_{15}$", P15) tab_picture;
 
 %     dotlabel.rt("$P_{16}$", P16) tab_picture;
@@ -368,7 +363,6 @@ def tab {triangle t, numeric j, numeric k, numeric n, numeric r, numeric u,
       tab_x_offset += magnitude(P16 - P15) + .5cm;
 
    fi;  %% if do_double_tabs  
-
 
 %% ****** (6)
 
@@ -455,14 +449,11 @@ def tab {triangle t, numeric j, numeric k, numeric n, numeric r, numeric u,
       crosshair  (current_picture) {mediate(Q7, Q8, i/(crosshair_ctr + 1)), .1cm, Q7, Q8};
    endfor;
 
-
 %     message "unit_vector(Q8 - Q7):"; 
 %     show unit_vector(Q8 - Q7);
 
 %     message "unit_vector(Q4 - Q5):"; 
 %     show unit_vector(Q4 - Q5);
-
-
 
 %      dotlabel.lft("$Q_{0}$", Q0);
 %      dotlabel.bot("$Q_{1}$", Q1);
@@ -473,7 +464,6 @@ def tab {triangle t, numeric j, numeric k, numeric n, numeric r, numeric u,
 %       dotlabel.top ("$Q_{6}$", Q6) with_text_color blue with_dot_color blue;
 %       dotlabel.bot("$Q_{7}$", Q7);
 %       dotlabel.top ("$Q_{8}$", Q8);
-
 
 %% ***** (5)
 
@@ -505,7 +495,6 @@ def tab_single {triangle t, numeric j, numeric k, numeric n, numeric r, numeric 
 
    P0 := mediate(get_point (j) t, get_point (k) t, n);
    P1 := mediate(get_point (k) t, get_point (j) t, n);
-
 
    P3 := mediate(P0, P1);
 
@@ -559,7 +548,6 @@ def tab_single {triangle t, numeric j, numeric k, numeric n, numeric r, numeric 
 
 enddef;
 
-
 %% ***** (5) handle_blob
 
 macro handle_blob;
@@ -572,7 +560,6 @@ draw mediate(P, Q, A) -- mediate(P, Q, B) dashed evenly
         with_pen dashed_pen with_color gray;
 
 enddef;
-
 
 %% ***** (5) End of macro definitions
 
@@ -624,7 +611,6 @@ rotate p6 (0, -ang_0);
 % draw p0 -- p5;
 % draw p0 -- p6;
 
-
 % dotlabel.top("$p_{0}$", p0);
 % dotlabel.rt("$p_{2}$", p2);
 % dotlabel.rt("$p_{3}$", p3);
@@ -670,7 +656,6 @@ draw p3 -- p9 -- p7 -- cycle; % with_color cyan;
 % draw p6 -- p4 -- p2 -- cycle; % with_color green;;
 % draw p4 -- p3 -- p2 -- cycle; % with_color cyan;
 
-
 % %% **** (4)
 
 p10 := p2 rotated (0, 0,  -3ang_0);
@@ -702,7 +687,6 @@ draw p11 -- p12 -- p10 -- cycle; % with_color blue;
 draw p10 -- p12 -- p4  -- cycle; % with_color green;;
 draw p4 -- p12 -- p6   -- cycle; % with_color cyan;
 
-
 % %% **** (4)
 
 p13 := p2 rotated (0, 0,  5ang_0);
@@ -732,7 +716,6 @@ draw p14 -- p15 -- p8 -- cycle; % with_color red;
 draw p8 -- p15 -- p7 -- cycle; % with_color blue;
 draw p7 -- p15 -- p13 -- cycle; % with_color green;;
 draw p13 -- p15 -- p14 -- cycle; % with_color cyan;
-
 
 % %% **** (4)
 
@@ -792,7 +775,6 @@ current_picture := v0;
 
 endfig with_projection parallel_x_z no_sort;
 
-
 %% *** (3) Figure 2
 
 beginfig(2); 
@@ -817,11 +799,9 @@ current_picture := v0;
 % dotlabel.rt("$p_{5}$", p5);
 % dotlabel.rt("$p_{6}$", p6);
 
-
 % dotlabel.rt("$p_{7}$",  p7);
 % dotlabel.rt("$p_{8}$",  p8);
 % dotlabel.rt("$p_{9}$",  p9);
-
 
 % dotlabel.rt("$p_{10}$", p10);
 % dotlabel.rt("$p_{11}$", p11);
@@ -858,7 +838,6 @@ p64 := mediate(p7, p8);
 
 % label.lft(magnitude (p2 - p5), mediate(p2, p5));
 % label.lft(magnitude (p2 - p6), mediate(p2, p6));
-
 
 p53 := mediate(p6, p4);
 p54 := mediate(p53, p2);
@@ -942,7 +921,6 @@ p71 := get_point 0 w8;
 p72 := get_point 1 w8;
 p73 := get_point 2 w8;
 
-
 % message "(p58 - p57) angle (p72 - p73):";
 % show (p58 - p57) angle (p72 - p73);
 
@@ -969,10 +947,7 @@ w8 *= p71 *= p72 *= p73 *= t19;
 %dotlabel.urt("$p_{72}$", p72);
 %dotlabel.lrt("$p_{73}$", p73);
 
-
-
 %% **** (4)
-
 
 % message "(p66 - p67):"; 
 % show (p66 - p67);
@@ -980,12 +955,10 @@ w8 *= p71 *= p72 *= p73 *= t19;
 % message "(p71 - p72):"; 
 % show (p71 - p72);
 
-
 % message "(p71 - p72) angle (p66 - p67):"; 
 % show (p71 - p72) angle (p66 - p67);
 
 ang_1 := (p71 - p72) angle (p66 - p67);
-
 
 t20 := identity rotated (0, -ang_1);
 
@@ -1022,13 +995,11 @@ p74 := mediate(p65, p66);
 
 %dotlabel.top("$p_{74}$", p74);
 
-
 w9 := w8 rotated_around (p72, p74);
 
 p75 := get_point 2 w9;
 
 %dotlabel.ulft("$p_{75}$", p75);
-
 
 %% **** (4)
 
@@ -1055,7 +1026,6 @@ label("\vbox{\hbox{Row 1,}\hbox{Type 1}}", get_center w5 shifted (0, 0, .125));
 label("\vbox{\hbox{Row 1,}\hbox{Type 1}}", get_center w6 shifted (0, 0, -.125));
 label("\vbox{\hbox{Row 1,}\hbox{Type 2}}", get_center w8 shifted (0, 0, 0));
 label("\vbox{\hbox{Row 1,}\hbox{Type 2}}", get_center w9 shifted (0, 0, 0));
-
 
 %% **** (4)
 
@@ -1088,7 +1058,6 @@ draw (get_point 1 w11) -- (get_point 2 w11) dashed evenly with_pen dashed_pen;
 
 draw (get_point 0 w13) -- (get_point 2 w13) dashed evenly with_pen dashed_pen;
 draw (get_point 1 w13) -- (get_point 2 w13) with_pen border_pen;
-
 
 %% **** (4)
 
@@ -1239,7 +1208,6 @@ draw (get_point 1 w35) -- (get_point 2 w35) dashed evenly with_pen dashed_pen;
 
 draw (get_point 1 w37) -- (get_point 2 w37) with_pen border_pen;
 
-
 %% **** (4) Triangles w38 -- w53
 
 t26 := identity rotated_around (p78, p79);
@@ -1280,7 +1248,6 @@ draw (get_point 0 w40) -- (get_point 2 w40) dashed evenly with_pen dashed_pen;
 draw (get_point 0 w41) -- (get_point 2 w41) dashed evenly with_pen dashed_pen;
 draw (get_point 1 w41) -- (get_point 2 w41) with_pen border_pen;
 
-
 draw (get_point 0 w42) -- (get_point 1 w42) with_pen border_pen;
 draw (get_point 0 w42) -- (get_point 2 w42) with_pen border_pen;
 draw (get_point 1 w42) -- (get_point 2 w42) dashed evenly with_pen dashed_pen;
@@ -1320,7 +1287,6 @@ v3 := current_picture;
 
 clear current_picture;
 
-
 %% Get code for second row out of atemp.ldf.  LDF 2010.07.07.
 
 %% **** (4) Second row
@@ -1341,7 +1307,6 @@ w54 *= t27;
 p93 := get_point 0 w54;
 p94 := get_point 1 w54;
 p95 := get_point 2 w54;
-
 
 ang_1 := (p66 - p65) angle (p93 - p95);
 
@@ -1406,7 +1371,6 @@ t33 := identity shifted by (p66 - p106);
 
 p104 *= p105 *= p106 *= w56 *= t33;
 
-
 %draw w56 with_color gray;
 
 draw (get_point 0 w56) -- (get_point 1 w56) dashed evenly with_pen dashed_pen;
@@ -1459,11 +1423,9 @@ w57 *= p98 *= p99 *= p100 *= t34;
 % message "(p98 - p100):"; 
 % show (p98 - p100);
 
-
 t35 := identity shifted by (p104 - p98);
 
 w57 *= p98 *= p99 *= p100 *= t35;
-
 
 %draw w57 with_color gray;
 
@@ -1503,8 +1465,6 @@ draw (get_point 1 w58) -- (get_point 2 w58) with_pen border_pen;
 %dotlabel.lft("$p_{108}$", p108);
 
 %% ***** (5)
-
-
 
 t37 := identity rotated_around (p99, p108);
 
@@ -1603,7 +1563,6 @@ p179 := mediate(get_point 2 w65, mediate(get_point 0 w65, get_point 1 w65));
 
 label("\vbox{\hbox{Row 2,}\hbox{Type 3}}", p179 shifted (0, 0, .25));
 
-
 %% ***** (5)
 
 t39 := identity rotated_around (p111, p112);
@@ -1648,7 +1607,6 @@ draw (get_point 1 w73) -- (get_point 2 w73) dashed evenly with_pen dashed_pen;
 
 draw (get_point 0 w74) -- (get_point 2 w74) dashed evenly with_pen dashed_pen;
 draw (get_point 1 w74) -- (get_point 2 w74) with_pen border_pen;
-
 
 draw (get_point 0 w75) -- (get_point 1 w75) dashed evenly with_pen dashed_pen;
 draw (get_point 0 w75) -- (get_point 2 w75) with_pen border_pen;
@@ -1880,7 +1838,6 @@ w104 *= p122 *= p123 *= p124 *= t46;
 % message "(p123 - p124) angle (p117 - p116):"; 
 % show (p123 - p124) angle (p117 - p116);
 
-
 %dotlabel.lrt("$p_{122}$", p122);
 %dotlabel.rt("$p_{123}$", p123);
 %dotlabel.bot("$p_{124}$", p124);
@@ -1978,7 +1935,6 @@ label("\vbox{\small{\hbox{Row 3,}\vskip-.2cm\hbox{Type 2}}}", get_center w106 sh
 p179 := mediate(get_point 2 w105, mediate(get_point 0 w105, get_point 1 w105));
 
 label("\vbox{\small{\hbox{Row 3,}\vskip-.2cm\hbox{Type 3}}}", p179 shifted (0, 0, .25cm));
-
 
 %% ***** (5)
 
@@ -2292,9 +2248,7 @@ w156 := w152 * t56;
 w157 := w153 * t56;
 w158 := w154 * t56;
 
-
 %dotlabel.lft("$p_{145}$", p145);
-
 
 %% ***** (5)
 
@@ -2306,7 +2260,6 @@ w159 := w155 * t57;
 w160 := w156 * t57;
 w161 := w157 * t57;
 w162 := w158 * t57;
-
 
 %dotlabel.lft("$p_{146}$", p146);
 
@@ -2357,7 +2310,6 @@ handle_blob {(get_point 1 w161), (get_point 2 w161), .80, 1.4};
 
 % draw (get_point 0 w160) -- (get_point 2 w160) dashed evenly with_pen dashed_pen;
 % draw (get_point 1 w161) -- (get_point 2 w161) dashed evenly with_pen dashed_pen;
-
 
 draw (get_point 0 w156) -- (get_point 2 w156) with_pen border_pen;
 draw (get_point 1 w159) -- (get_point 2 w159) dashed evenly with_pen dashed_pen;
@@ -2420,7 +2372,6 @@ label("Pole 1", (get_point 1 w165) shifted (-.5, 0));
 
 %% ****** (6) Extra pole 2
 
-
 t68 := identity shifted (0, 0, -17);
 
 k := 271; %% up to 294.
@@ -2466,7 +2417,6 @@ handle_blob {(get_point 1 w281), (get_point 2 w281), .80, 1.4};
 % draw (get_point 0 w280) -- (get_point 2 w280) dashed evenly with_pen dashed_pen;
 % draw (get_point 1 w281) -- (get_point 2 w281) dashed evenly with_pen dashed_pen;
 
-
 draw (get_point 0 w276) -- (get_point 2 w276) with_pen border_pen;
 draw (get_point 1 w279) -- (get_point 2 w279) dashed evenly with_pen dashed_pen;
 draw (get_point 0 w281) -- (get_point 2 w281) with_pen border_pen;
@@ -2476,7 +2426,6 @@ draw (get_point 0 w281) -- (get_point 2 w281) with_pen border_pen;
 % endfor;
 
 label("Extra Pole 2", (get_point 1 w274) shifted (-.5, 0));
-
 
 %% ****** (6) Extra Pole 1
 
@@ -2513,7 +2462,6 @@ label("Extra Pole 1", (get_point 1 w286) shifted (-.5, 0));
 %% ****** (6) End of extra poles
 
 %% ***** (5) End of Poles
-
 
 %% **** (4) The lower half, Second row, lower
 
@@ -2567,7 +2515,6 @@ draw (get_point 1 w177) -- (get_point 2 w177) dashed evenly with_pen dashed_pen;
 draw (get_point 0 w178) -- (get_point 2 w178) dashed evenly with_pen dashed_pen;
 draw (get_point 1 w178) -- (get_point 2 w178) with_pen border_pen;
 
-
 %% ***** (5)
 
 % dotlabel.top(0, get_point 0 w178);
@@ -2605,7 +2552,6 @@ w182 := w178 * t61;
 draw (get_point 0 w179) -- (get_point 1 w179) dashed evenly with_pen dashed_pen;
 draw (get_point 0 w179) -- (get_point 2 w179) with_pen border_pen;
 draw (get_point 1 w179) -- (get_point 2 w179) with_pen border_pen;
-
 
 draw (get_point 0 w181) -- (get_point 1 w181) with_pen border_pen;
 draw (get_point 0 w181) -- (get_point 2 w181) dashed evenly with_pen dashed_pen;
@@ -2826,7 +2772,6 @@ draw (get_point 1 w221) -- (get_point 2 w221) dashed evenly with_pen dashed_pen;
 
 draw (get_point 0 w222) -- (get_point 2 w222) with_pen border_pen;
 draw (get_point 1 w222) -- (get_point 2 w222) with_pen border_pen;
-
 
 %% **** (4) Third row, bottom
 
@@ -3057,16 +3002,12 @@ if do_tabs:
 
  tab {w240, 0, 2, .75, .675, .3, w268, 0, 2, 3}; %% w240 and w268 --- Third row, below
 
-
-
  label.rt("Row ends (1, 2 above, 2 below, 3 above, 3 below)", (tab_x_offset, 0, tab_z_offset)) tab_picture;
 
  tab_x_offset := 0cm;
  tab_z_offset -= tab_row_offset;   
 
-
 %% ****** (6) First row gaps
-
 
  tab {w50, 0, 2, .75, .675, .4, w53, 2, 1, 3}; %% w50 and w53
  tab {w45, 1, 2, .75, .675, .4, w42, 2, 0, 3}; %% w45 and w42 
@@ -3080,7 +3021,6 @@ if do_tabs:
  tab {w29, 1, 2, .75, .675, .4, w26, 2, 0, 3}; %% w29 and w26
  tab {w22, 0, 2, .75, .675, .4, w25, 1, 2, 3}; %% w22 and w25
  tab {w33, 1, 2, .75, .675, .4, w30, 2, 0, 3}; %% w33 and w30
-
 
  label.rt("First row gaps", (tab_x_offset, 0, tab_z_offset)) tab_picture;
 
@@ -3109,7 +3049,6 @@ if do_tabs:
 
 %% ****** (6) Second row gaps, right (below)
 
-
     tab {w195, 1, 2, .75, .675, .4, w198, 1, 2, 3}; %% w195 and w198
     tab {w191, 1, 2, .75, .675, .4, w194, 1, 2, 3}; %% w191 and w194
     tab {w183, 1, 2, .75, .675, .4, w186, 1, 2, 3}; %% w183 and w186
@@ -3122,7 +3061,6 @@ if do_tabs:
     tab {w207, 1, 2, .75, .675, .4, w210, 1, 2, 3}; %% w207 and w210
     tab {w218, 1, 2, .75, .675, .4, w215, 1, 2, 3}; %% w218 and w215
     tab {w219, 1, 2, .75, .675, .4, w222, 1, 2, 3}; %% w219 and w222
-
 
     label.rt("Second row gaps, right (below)", (tab_x_offset, 0, tab_z_offset)) tab_picture;
 
@@ -3149,7 +3087,6 @@ if do_tabs:
  tab_x_offset := 0cm;
  tab_z_offset -= tab_row_offset;   
 
-
 %% ****** (6) Third row gaps, right (below)
 
     tab {w242, 1, 2, .75, .675, .3, w239, 0, 2, 3}; %% w242 and w239
@@ -3169,7 +3106,6 @@ if do_tabs:
 
     tab_x_offset := 0cm;
     tab_z_offset -= tab_row_offset;   
-
 
 %% ****** (6) First and second row, top
 
@@ -3209,7 +3145,6 @@ if do_tabs:
     tab_x_offset := 0cm;
     tab_z_offset -= tab_row_offset;   
 
-
 %% ****** (6) Second and third row, top
 
     tab {w101, 0, 1, .75, .675, .4, w147, 0, 1, 3}; %% w101 and w147
@@ -3229,7 +3164,6 @@ if do_tabs:
 
     tab_x_offset := 0cm;
     tab_z_offset -= tab_row_offset;   
-
 
 %% ****** (6) Second and third row, bottom
 
@@ -3262,7 +3196,6 @@ if do_tabs:
     tab {w288, 0, 2, .75, .675, .2, w290, 0, 2, 3}; %% w288 and w290
     tab {w276, 0, 2, .75, .675, .2, w278, 0, 2, 3}; %% w276 and w278
     tab {w281, 0, 2, .75, .675, .2, w271, 0, 2, 3}; %% w281 and w271
-
 
     label.rt("Pole 1 and Pole 2 (plus extras):  Joins", (tab_x_offset, 0, tab_z_offset)) tab_picture;
 
@@ -3297,7 +3230,6 @@ if do_tabs:
     tab_single {w286, 1, 0, .875, .75, .3, 3};
     tab_single {w289, 1, 0, .875, .75, .3, 3};
     tab_single {w290, 1, 0, .875, .75, .3, 3};
-
 
     label.rt("Pole 1 and Row 3, above", (tab_x_offset, 0, tab_z_offset)) tab_picture;
 
@@ -3351,17 +3283,12 @@ if false:
    ; ", 1, 2, 3}; %% w" (number-to-string a)
    ;" and w" (number-to-string b) "\n\n"))
 
-
-
   (defun ttemp (a b) 
     (insert (concat "\n\nfor i := 0 upto 2:\n"
 		    "   dotlabel.top(i, get_point (i) w" (number-to-string a)
 		    ") with_text_color blue with_dot_color blue;\n"
 		    "   dotlabel.bot(i, get_point (i) w" (number-to-string b)
 		    ") with_text_color red with_dot_color red;\nendfor;\n\n"))
-
-
-
 
     )
 
@@ -3375,12 +3302,6 @@ fi;
 %% 
 %% 
 %% 
-
-
-
-
-
-
 
 % (progn    (ignore '(
 % )) (ttemp 230 227) (ignore '(
@@ -3443,7 +3364,6 @@ endfig with_projection parallel_x_y no_sort;
 %% these triangles won't be needed.
 %% LDF 2010.08.13.
 
-
 picture total_picture;
 
 beginfig(8); 
@@ -3488,7 +3408,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w296);
    draw (get_point 0 w296) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w296) - (get_point 0 w296))
             shifted by (get_point 1 w296);
    draw (get_point 1 w296) -- p172 dashed evenly;
@@ -3496,7 +3415,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w296) - (get_point 2 w296))
             shifted by (get_point 1 w296);
    draw (get_point 1 w296) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w296) - (get_point 0 w296))
             shifted by (get_point 2 w296);
@@ -3536,7 +3454,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w296);
    draw (get_point 0 w296) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w296) - (get_point 0 w296))
             shifted by (get_point 1 w296);
    draw (get_point 1 w296) -- p172 dashed evenly;
@@ -3544,7 +3461,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w296) - (get_point 2 w296))
             shifted by (get_point 1 w296);
    draw (get_point 1 w296) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w296) - (get_point 0 w296))
             shifted by (get_point 2 w296);
@@ -3563,7 +3479,6 @@ endfor;
 v4 := current_picture;
 
 shift v4 (0, 0, -(1.5 * magnitude(get_point 2 w296 - mediate(get_point 0 w296, get_point 1 w296)) + 1cm));
-
 
 total_picture := v4;
 
@@ -3616,7 +3531,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w298);
    draw (get_point 0 w298) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w298) - (get_point 0 w298))
             shifted by (get_point 1 w298);
    draw (get_point 1 w298) -- p172 dashed evenly;
@@ -3624,7 +3538,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w298) - (get_point 2 w298))
             shifted by (get_point 1 w298);
    draw (get_point 1 w298) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w298) - (get_point 0 w298))
             shifted by (get_point 2 w298);
@@ -3659,7 +3572,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w298);
    draw (get_point 0 w298) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w298) - (get_point 0 w298))
             shifted by (get_point 1 w298);
    draw (get_point 1 w298) -- p172 dashed evenly;
@@ -3667,7 +3579,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w298) - (get_point 2 w298))
             shifted by (get_point 1 w298);
    draw (get_point 1 w298) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w298) - (get_point 0 w298))
             shifted by (get_point 2 w298);
@@ -3727,7 +3638,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w300);
    draw (get_point 0 w300) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w300) - (get_point 0 w300))
             shifted by (get_point 1 w300);
    draw (get_point 1 w300) -- p172 dashed evenly;
@@ -3735,7 +3645,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w300) - (get_point 2 w300))
             shifted by (get_point 1 w300);
    draw (get_point 1 w300) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w300) - (get_point 0 w300))
             shifted by (get_point 2 w300);
@@ -3749,14 +3658,12 @@ for i = 0 upto 6:
    shift w300 (shift_val, 0);
 endfor;
 
-
 %% ***** (5) Line 2
 
 t71 := (identity rotated_around (get_point 0 w299, get_point 2 w299))
        shifted ((xpart(get_point 2 w299) - xpart(get_point 0 w299)) * .5 + .5cm, 
                 0,  
                 zpart(get_point 1 w299) - zpart(get_point 0 w299) -.75cm);
-
 
 w300 := w299 * t71;
 
@@ -3770,7 +3677,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w300);
    draw (get_point 0 w300) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w300) - (get_point 0 w300))
             shifted by (get_point 1 w300);
    draw (get_point 1 w300) -- p172 dashed evenly;
@@ -3778,7 +3684,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w300) - (get_point 2 w300))
             shifted by (get_point 1 w300);
    draw (get_point 1 w300) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w300) - (get_point 0 w300))
             shifted by (get_point 2 w300);
@@ -3849,7 +3754,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w302);
    draw (get_point 0 w302) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w302) - (get_point 0 w302))
             shifted by (get_point 1 w302);
    draw (get_point 1 w302) -- p172 dashed evenly;
@@ -3857,7 +3761,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w302) - (get_point 2 w302))
             shifted by (get_point 1 w302);
    draw (get_point 1 w302) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w302) - (get_point 0 w302))
             shifted by (get_point 2 w302);
@@ -3878,7 +3781,6 @@ t72 := (identity rotated_around (get_point 0 w301, get_point 2 w301))
                 0,  
                 zpart(get_point 1 w301) - zpart(get_point 0 w301) -.75cm);
 
-
 w302 := w301 * t72;
 
 for i = 0 upto 6:
@@ -3891,7 +3793,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w302);
    draw (get_point 0 w302) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w302) - (get_point 0 w302))
             shifted by (get_point 1 w302);
    draw (get_point 1 w302) -- p172 dashed evenly;
@@ -3899,7 +3800,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w302) - (get_point 2 w302))
             shifted by (get_point 1 w302);
    draw (get_point 1 w302) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w302) - (get_point 0 w302))
             shifted by (get_point 2 w302);
@@ -3981,7 +3881,6 @@ for i = 0 upto 8:
             shifted by (get_point 0 w304);
    draw (get_point 0 w304) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w304) - (get_point 0 w304))
             shifted by (get_point 1 w304);
    draw (get_point 1 w304) -- p172 dashed evenly;
@@ -3989,7 +3888,6 @@ for i = 0 upto 8:
    p173 :=  help_line_offset * unit_vector((get_point 1 w304) - (get_point 2 w304))
             shifted by (get_point 1 w304);
    draw (get_point 1 w304) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w304) - (get_point 0 w304))
             shifted by (get_point 2 w304);
@@ -4031,7 +3929,6 @@ for i = 0 upto 8:
             shifted by (get_point 0 w304);
    draw (get_point 0 w304) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w304) - (get_point 0 w304))
             shifted by (get_point 1 w304);
    draw (get_point 1 w304) -- p172 dashed evenly;
@@ -4039,7 +3936,6 @@ for i = 0 upto 8:
    p173 :=  help_line_offset * unit_vector((get_point 1 w304) - (get_point 2 w304))
             shifted by (get_point 1 w304);
    draw (get_point 1 w304) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w304) - (get_point 0 w304))
             shifted by (get_point 2 w304);
@@ -4112,7 +4008,6 @@ for i = 0 upto 9:
             shifted by (get_point 0 w306);
    draw (get_point 0 w306) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w306) - (get_point 0 w306))
             shifted by (get_point 1 w306);
    draw (get_point 1 w306) -- p172 dashed evenly;
@@ -4120,7 +4015,6 @@ for i = 0 upto 9:
    p173 :=  help_line_offset * unit_vector((get_point 1 w306) - (get_point 2 w306))
             shifted by (get_point 1 w306);
    draw (get_point 1 w306) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w306) - (get_point 0 w306))
             shifted by (get_point 2 w306);
@@ -4162,7 +4056,6 @@ for i = 0 upto 9:
             shifted by (get_point 0 w306);
    draw (get_point 0 w306) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w306) - (get_point 0 w306))
             shifted by (get_point 1 w306);
    draw (get_point 1 w306) -- p172 dashed evenly;
@@ -4170,7 +4063,6 @@ for i = 0 upto 9:
    p173 :=  help_line_offset * unit_vector((get_point 1 w306) - (get_point 2 w306))
             shifted by (get_point 1 w306);
    draw (get_point 1 w306) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w306) - (get_point 0 w306))
             shifted by (get_point 2 w306);
@@ -4248,7 +4140,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w308);
    draw (get_point 0 w308) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w308) - (get_point 0 w308))
             shifted by (get_point 1 w308);
    draw (get_point 1 w308) -- p172 dashed evenly;
@@ -4256,7 +4147,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w308) - (get_point 2 w308))
             shifted by (get_point 1 w308);
    draw (get_point 1 w308) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w308) - (get_point 0 w308))
             shifted by (get_point 2 w308);
@@ -4300,7 +4190,6 @@ for i = 0 upto 6:
             shifted by (get_point 0 w308);
    draw (get_point 0 w308) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w308) - (get_point 0 w308))
             shifted by (get_point 1 w308);
    draw (get_point 1 w308) -- p172 dashed evenly;
@@ -4308,7 +4197,6 @@ for i = 0 upto 6:
    p173 :=  help_line_offset * unit_vector((get_point 1 w308) - (get_point 2 w308))
             shifted by (get_point 1 w308);
    draw (get_point 1 w308) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w308) - (get_point 0 w308))
             shifted by (get_point 2 w308);
@@ -4392,7 +4280,6 @@ for i = 0 upto 13:
             shifted by (get_point 0 w310);
    draw (get_point 0 w310) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w310) - (get_point 0 w310))
             shifted by (get_point 1 w310);
    draw (get_point 1 w310) -- p172 dashed evenly;
@@ -4400,7 +4287,6 @@ for i = 0 upto 13:
    p173 :=  help_line_offset * unit_vector((get_point 1 w310) - (get_point 2 w310))
             shifted by (get_point 1 w310);
    draw (get_point 1 w310) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w310) - (get_point 0 w310))
             shifted by (get_point 2 w310);
@@ -4444,7 +4330,6 @@ for i = 0 upto 13:
             shifted by (get_point 0 w310);
    draw (get_point 0 w310) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w310) - (get_point 0 w310))
             shifted by (get_point 1 w310);
    draw (get_point 1 w310) -- p172 dashed evenly;
@@ -4452,7 +4337,6 @@ for i = 0 upto 13:
    p173 :=  help_line_offset * unit_vector((get_point 1 w310) - (get_point 2 w310))
             shifted by (get_point 1 w310);
    draw (get_point 1 w310) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w310) - (get_point 0 w310))
             shifted by (get_point 2 w310);
@@ -4468,7 +4352,6 @@ for i = 0 upto 13:
    shift p177 (shift_val, 0);
 
 endfor;
-
 
 %% ***** (5)
 
@@ -4522,7 +4405,6 @@ for i = 0 upto 18:
             shifted by (get_point 0 w312);
    draw (get_point 0 w312) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w312) - (get_point 0 w312))
             shifted by (get_point 1 w312);
    draw (get_point 1 w312) -- p172 dashed evenly;
@@ -4530,7 +4412,6 @@ for i = 0 upto 18:
    p173 :=  help_line_offset * unit_vector((get_point 1 w312) - (get_point 2 w312))
             shifted by (get_point 1 w312);
    draw (get_point 1 w312) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w312) - (get_point 0 w312))
             shifted by (get_point 2 w312);
@@ -4574,7 +4455,6 @@ for i = 0 upto 18:
             shifted by (get_point 0 w312);
    draw (get_point 0 w312) -- p171 dashed evenly;
 
-
    p172 :=  help_line_offset * unit_vector((get_point 1 w312) - (get_point 0 w312))
             shifted by (get_point 1 w312);
    draw (get_point 1 w312) -- p172 dashed evenly;
@@ -4582,7 +4462,6 @@ for i = 0 upto 18:
    p173 :=  help_line_offset * unit_vector((get_point 1 w312) - (get_point 2 w312))
             shifted by (get_point 1 w312);
    draw (get_point 1 w312) -- p173 dashed evenly;
-
 
    p174 :=  help_line_offset * unit_vector((get_point 2 w312) - (get_point 0 w312))
             shifted by (get_point 2 w312);
@@ -4599,7 +4478,6 @@ for i = 0 upto 18:
 
 endfor;
 
-
 %% ***** (5)
 
 v12 := current_picture;
@@ -4608,9 +4486,7 @@ clear current_picture;
 
 total_picture += v12;
 
-
 %% **** (4)
-
 
 current_picture := total_picture;
 
@@ -4621,8 +4497,6 @@ endfig with_projection parallel_x_z no_sort;
 verbatim_metapost "end;";
 
 end;
-
-
 
 %% ** (2) 
 
