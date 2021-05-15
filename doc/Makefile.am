@@ -1,8 +1,8 @@
-## 3DLDF-2.0/doc/Makefile.am
+## 3DLDF-2.0/doc/old_doc/Makefile.am
 #### Created by Laurence D. Finston (LDF)
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-#### Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc.
+#### Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation
 
 #### GNU 3DLDF is free software; you can redistribute it and/or modify 
 #### it under the terms of the GNU General Public License as published by 
@@ -46,128 +46,130 @@
 
 
 
-#### Automatic Variables.  For more, see Section 10.5.3, "Automatic Variables"
-#### of the Make info manual.
-#### LDF 2009.12.29.
+# html-split
+# 3DLDF.dvi 3DLDF.ps 3DLDF.pdf 3DLDF.info 3DLDF.html 
 
-#### $@:  Target
-#### $<:  First prerequisite
-#### $^:  The names of all the prerequisites, with spaces between them.
+all: 
 
-SOURCES_MANUAL := color.texi complex.texi dashptrn.texi dttypes.texi \
-		  figure.texi focus.texi getstart.texi install.texi intro.texi \
-		  invoking.texi matrix.texi numerics.texi paths.texi pen.texi \
-		  picture.texi points.texi string.texi trnsfrms.texi \
-                  concidx.texi dttypidx.texi funcidx.texi varidx.texi
+3dldf_TEXINFOS = 3DLDF.texi intro.texi contrib.texi using.texi gspoint.texi gstranpt.texi  \
+                 gstransf.texi gsdlpt.texi gspaths.texi gsplane.texi gssolfig.texi \
+                 gspict.texi intersct.texi instlrun.texi typeglb.texi glbcnvar.texi \
+                 creatnew.texi system.texi color.texi io.texi shape.texi transfor.texi \
+                 label.texi picture.texi point.texi focus.texi line.texi plane.texi \
+                 path.texi polygon.texi regpolyg.texi rectang.texi rcpcurve.texi \
+                 ellipse.texi circle.texi pattern.texi solid.texi solfaced.texi \
+                 cuboid.texi polyhed.texi utility.texi addfile.texi future.texi \
+                 changes.texi biblio.texi fdl.texi varidx.texi funcidx.texi \
+                 concidx.texi 
 
+3dldf_EPS =   ./graphics/eps/3DLDFmp.1 \
+              ./graphics/eps/3DLDFmp.2 \
+              ./graphics/eps/3DLDFmp.3 \
+              ./graphics/eps/3DLDFmp.4 \
+              ./graphics/eps/3DLDFmp.5 \
+              ./graphics/eps/3DLDFmp.6 \
+              ./graphics/eps/3DLDFmp.7 \
+              ./graphics/eps/3DLDFmp.8 \
+              ./graphics/eps/3DLDFmp.9 \
+              ./graphics/eps/3DLDFmp.1? \
+              ./graphics/eps/3DLDFmp.2? \
+              ./graphics/eps/3DLDFmp.3? \
+              ./graphics/eps/3DLDFmp.4? \
+              ./graphics/eps/3DLDFmp.5? \
+              ./graphics/eps/3DLDFmp.6? \
+              ./graphics/eps/3DLDFmp.7? \
+              ./graphics/eps/3DLDFmp.8? \
+              ./graphics/eps/3DLDFmp.9? \
+              ./graphics/eps/3DLDFmp.1??   
 
-EXTRA_DIST = 3dldf.ps 3dldf.pdf 3dldf.dvi 3dldf.html 3dldf.info $(SOURCES_MANUAL) texinfo.tex
-
-all: 3dldf.dvi 3dldf.ps 3dldf.pdf 3dldf.info 3dldf.html html-split # install_manual
-
-.PHONY: dvi
-
-dvi: 3dldf.dvi
-
-.PHONY: ps
-
-ps: 3dldf.ps
+3dldf_PNG = ./graphics/png/3DLDF1.png \
+	    ./graphics/png/3DLDF2.png \
+	    ./graphics/png/3DLDF3.png \
+	    ./graphics/png/3DLDF4.png \
+	    ./graphics/png/3DLDF5.png \
+	    ./graphics/png/3DLDF6.png \
+	    ./graphics/png/3DLDF7.png \
+	    ./graphics/png/3DLDF8.png \
+	    ./graphics/png/3DLDF9.png \
+	    ./graphics/png/3DLDF1?.png \
+	    ./graphics/png/3DLDF2?.png \
+	    ./graphics/png/3DLDF3?.png \
+	    ./graphics/png/3DLDF4?.png \
+	    ./graphics/png/3DLDF5?.png \
+	    ./graphics/png/3DLDF6?.png \
+	    ./graphics/png/3DLDF7?.png \
+	    ./graphics/png/3DLDF8?.png \
+	    ./graphics/png/3DLDF9?.png \
+	    ./graphics/png/3DLDF1??.png
 
 .PHONY: pdf
 
-pdf: 3dldf.pdf
+pdf: 3DLDF.pdf
 
-.PHONY: html
+3DLDF.pdf: 3DLDF.ps
+	ps2pdf 3DLDF.ps
 
-html: 3dldf.html
+EXTRA_DIST = 3DLDF.ps 3DLDF.pdf 3DLDF.dvi 3DLDF.info 3DLDF.html \
+              ChangeLog.dev $(3dldf_TEXINFOS) 3DLDF/ \
+              $(3dldf_EPS) $(3dldf_PNG) 
 
-.PHONY: info
+.PHONY : dummy
+dummy:
+	echo "distdir = $(distdir)"
 
-info: 3dldf.info
+.PHONY : ps
+ps: 3DLDF.ps 
 
-3dldf.dvi: $(SOURCES_MANUAL) examples_1.eps
-	texi2dvi 3dldf.texi
-
-3dldf.ps: 3dldf.dvi
-	dvips -o $@ $<
-
-3dldf.pdf: 3dldf.ps
-	ps2pdf $<
-
-3dldf.info: $(SOURCES_MANUAL)
-	makeinfo 3dldf.texi
-
-3dldf.html: $(SOURCES_MANUAL)
-	makeinfo --force --html --no-split 3dldf.texi
-
-#### .PHONY: html-split
-
-html-split: $(SOURCES_MANUAL)
-	makeinfo --html 3dldf.texi
-	touch html-split
-
-#### ** (2) Examples
-
-.PHONY: exps
-
-exps: examples.ps
-
-examples: examples.ps 
-
-examples.ps: examples.dvi
-	dvips -o examples.ps examples.dvi
-
-examples.dvi: examples_1.eps examples.tex
-	tex examples.tex
-
-examples_1.eps: examples.1
-	./rename_examples.sh
-
-examples.1: examples.mp
-	mpost examples.mp
-
-examples.mp: examples.ldf
-	../src/3dldf examples.ldf
-
-#### ** (2) Tags
-
-.PHONY: tags
-
-tags: TAGS
-
-TAGS: $(SOURCES_MANUAL)
-	etags $(SOURCES_MANUAL)
+3DLDF.ps : 3DLDF.dvi
+	@echo Running \"dvips -o 3DLDF.ps 3DLDF.dvi\"
+	dvips -o 3DLDF.ps 3DLDF.dvi
 
 
-#### ** (2) Clean
+3DLDF.dvi: $(3dldf_TEXINFOS)
+	texi2dvi 3DLDF.texi
 
-.PHONY: clean
+3DLDF.html: $(3dldf_TEXINFOS)
+	makeinfo --html --no-split 3DLDF.texi
 
-clean:
-	rm -f examples_*.eps examples_*.[[:digit:]] *.dvi *.eps *.ps *.pdf *.html *.aux *.cp *.cps *.fn \
-           *.info *.info.gz *.ky *.log *.pg 3DLDFput.mp 3dldf.tmp 3dldf.toc 3dldf.tp 3dldf.vr \
-           *.mpx html-split *.*~ sample10.mp examples.mp *.[[:digit:]] *.[[:digit:]][[:digit:]] \
-           *.[[:digit:]][[:digit:]][[:digit:]]
-#### ** (2) Query
+3DLDF.info: $(3dldf_TEXINFOS)
+	makeinfo 3DLDF.texi
 
-.PHONY: query
+.PHONY: html-split
 
-.PHONY: query
+html-split: $(3dldf_TEXINFOS)
+	makeinfo --html 3DLDF.texi
 
-query:
-	echo "SOURCES_MANUAL == $(SOURCES_MANUAL)"
 
-3dldf.info.gz: 3dldf.info
-	gzip -k 3dldf.info
+.PHONY : purge
+purge:
+	@echo "Deleting files generated by Texinfo."
+	-rm -f 3DLDF.aux
+	-rm -f 3DLDF.cp
+	-rm -f 3DLDF.cps
+	-rm -f 3DLDF.fn
+	-rm -f 3DLDF.ky
+	-rm -f 3DLDF.log
+	-rm -f 3DLDF.pg
+	-rm -f 3DLDF.tmp
+	-rm -f 3DLDF.toc
+	-rm -f 3DLDF.tp
+	-rm -f 3DLDF.vr
+	-rm -f 3DLDF.fns
+	-rm -f 3DLDF.vrs
 
-install_manual: 3dldf.info.gz
-	sudo cp 3dldf.info.gz /usr/share/info
+TAGS : $(3dldf_TEXINFOS) 
+	@echo "Regenerating the tags table for the TEXINFO files."
+	etags $(3dldf_TEXINFOS) 
+
+
+.PHONY : show
+show:
+	@echo "3dldf_PNG: $(3dldf_PNG)"
+	@echo "3dldf_EPS: $(3dldf_EPS)"
 
 ## Local Variables:
 ## mode:Makefile
 ## End:
-
-
 
 
 
