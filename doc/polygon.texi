@@ -1,7 +1,8 @@
 @c polygon.texi
 
 @c This file is part of the 3DLDF User and Reference Manual.
-@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation 
+@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+@c 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc. 
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
 
@@ -189,14 +190,12 @@ Fig. 139.
 
 @c
 
-
 In @NEXTFIG{}, the lines @OVERRTARROW{BC} and 
 @OVERRTARROW{PQ}
 are not coplanar with the @code{Reg_Polygon} @math{r}.  In each case, only
 one intersection point is possible, and it can be either an intersection
 with an edge of the 
 @code{Reg_Polygon}, or lie within its perimeter.
-
 
 @example
 Point B(r.get_point(3).mediate(r.get_point(4)));
@@ -271,7 +270,6 @@ Fig. 140.
 
 @c
 
-
 In @NEXTFIG{}, the intersection point of @math{r} with the line
 @OVERRTARROW{PQ}
 does not lie on the line @emph{segment} @math{PQ}. 
@@ -282,7 +280,6 @@ bpp.first.pt.dotlabel("$i$", "rt");
 cout << "bpp.first.b == " << bpp.first.b << endl << flush;
 @print{} bpp.first.b == 0
 @end example
-
 
 @c
 @iftex
@@ -336,9 +333,7 @@ Fig. 141.
 
 @c
 
-
 @end deftypefn 
-
 
 @deftypefn {@code{const} function} {vector<Point>} intersection_points ({const Polygon&} @var{r})
 Finds the intersection points of two @code{Polygons}.  
@@ -354,7 +349,6 @@ Reg_Polygon rp(origin, 5, 5, 0, 36);
 rp.shift(0, 0, .25);
 vector <Point> v = r.intersection_points(rp);
 @end example
-
 
 @c
 @iftex
@@ -416,7 +410,6 @@ intersection points of the line with @code{*this}, while @math{v[2]} and
 @math{v[3]} will be the intersection points of the line with @var{r}.  If one
 or more of the intersection points doesn't exist, the corresponding
 member of @math{v} will contain @code{INVALID_POINT} as a placeholder.  
-
 
 @example
 Point A(1, 1, 1);
@@ -486,7 +479,6 @@ don't overlap at all, nor does the intersection line of the two planes
 intersect with @math{p}.  However, it does intersect with @math{p} at the
 labelled @code{Points}.
 
-
 @example
 Point A(1, 1, 1);
 Rectangle r(A, 4, 4);
@@ -548,7 +540,6 @@ Fig. 144.
 @end ifinfo
 
 @c
-
 
 @end deftypefn 
 

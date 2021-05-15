@@ -1,10 +1,10 @@
 @c intro.texi
   
 @c This file is part of the 3DLDF User and Reference Manual.
-@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation 
+@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+@c 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc. 
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
-
 
 @comment  node-name,  next,  previous,  up
 @node Introduction, Contributing to 3DLDF, Top, Top
@@ -144,7 +144,6 @@ main sponsor is the Free Software Foundation.
 Texinfo can be used to generate online and printed documentation from
 the same input files.  
 
-
 For more information about Texinfo, see:
 
 @bibskip
@@ -168,7 +167,6 @@ Laurence D. Finston, so far the sole author of
 both 3DLDF and this manual.  ``Currently'' and similar formulations
 refer to version @value{VERSION} of 3DLDF as of 
 @value{UPDATED}.
-
 
 This manual is intended for both beginning and advanced users of 3DLDF. 
 So, if there's something you don't understand, it's probably best to
@@ -277,9 +275,6 @@ p0.show("p0:");
 @print{} p0: (1, 2, 3)
 @end example
 
-
-
-
 @ifnottex 
 The beautiful mathematical typesetting produced by @TeX{} 
 unfortunately does not appear in the Info and HTML versions of this
@@ -303,8 +298,6 @@ Multiplication.  For example, read @samp{x * y} as
 The square root function.  For example, read @samp{sqrt(x)} as
 ``the square root of x''.
 @end table
-
-
 
 In addition, examples 
 @end ifnottex 
@@ -369,7 +362,6 @@ $\{\ldots, -3, -2, -1, 0, 1, 2, 3, 4, \ldots\}$.
 @{@dots{}, -3, -2, -1, 0, 1, 2, 3, 4, @dots{}@}
 @end ifnottex 
 
-
 @item @REAL{} 
 The set of the real numbers.
 @end table
@@ -389,7 +381,6 @@ contains the MetaPost code for generating the illustrations.
 3DLDF was built using GCC 2.95 when the illustrations were generated.
 For some reason, GCC 3.3 has difficulty with them.  It works to generate
 them in batches of about 50 with GCC 3.3.
-
 
 @cindex PNG (Portable Network Graphics)
 @cindex Portable Network Graphics (PNG)
@@ -514,9 +505,6 @@ The version of @file{examples.web} in @file{3DLDF-@value{VERSION}/CWEB} merely
 includes the files @file{subex1.web} and @file{subex2.web}.  
 If you rename @file{3DLDF-@value{VERSION}/CWEB/exampman.web} to @file{examples.web},
 you can generate the illustrations. 
-
-
-
 
 @node CWEB Documentation, Metafont and MetaPost, About This Manual, Introduction
 @section CWEB Documentation 
@@ -693,10 +681,9 @@ with features specific to MetaPost.
  
 @menu
 * Accuracy::                    
-* No Input Routine::            
 @end menu
 
-@node Accuracy, No Input Routine, Caveats, Caveats
+@node Accuracy, Ports, Caveats, Caveats
 @subsection Accuracy
 
 When 3DLDF is run, it uses the three-dimensional data contained in the
@@ -756,32 +743,6 @@ coordinate values, and the values they should have.  So far, I haven't
 found a solution for this problem.  On the other hand, it hasn't
 yet affected the usability of 3DLDF.
 
-@node No Input Routine,  , Accuracy, Caveats
-@subsection No Input Routine
-
-3DLDF does not yet include a routine for reading input
-files.   This means  that user  code must  be written  in @cpp {},
-compiled, and  linked with  the rest of the program.  I admit,
-this is  not ideal, and writing an input routine for user code
-is one of the next things I plan to add to 3DLDF.
-
-I plan to use Flex and Bison to write the input routine.@c
-@c
-@footnote{Flex is a program for generating text scanners and Bison is a 
-parser generator.  They are available from
-@uref{http://www.gnu.org}.}  
-@c
-The syntax of the input code should be as close
-as possible  to that  of MetaPost, while taking account of the
-differences between  MetaPost and 3DLDF.   
-
-For the present, however, the  use of 3DLDF is limited to
-those who  feel comfortable  using  @cpp {} and compiling  and
-relinking programs.  Please don't be put off by this!  It's not so
-difficult, and @command{make} does most of the work of recompiling and
-running 3DLDF.  @xref{Installing and Running 3DLDF}, for more
-information. 
-
 @node Ports,  , Caveats, Introduction
 @section Ports
 
@@ -833,7 +794,6 @@ I am no longer able to build 3DLDF on the DECalpha Personal Workstation.
 I'm fairly sure that it would be possible to port it, but 
 I don't plan to do this, since Tru64 Unix 5.1 and the DEC @cpp {}
 compiler are non-free software.  
-
 
  
 

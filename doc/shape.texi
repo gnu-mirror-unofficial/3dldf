@@ -1,10 +1,10 @@
 @c shape.texi
   
 @c This file is part of the 3DLDF User and Reference Manual.
-@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation 
+@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+@c 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc. 
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
-
 
  
 @node Shape Reference, Transform Reference, Input and Output, Top
@@ -42,7 +42,6 @@ pointers to @code{Shape}.  @xref{Picture Reference}.
  
 @node Shape Data Members, Shape Operators, Shape Reference, Shape Reference
 @section Data Members
-
 
 @deftypevr  {Protected static constants} {signed short} DRAWDOT 
 @deftypevrx {} {signed short} DRAW    
@@ -132,7 +131,6 @@ Returns @code{true} if the object was allocated on the free store,
 otherwise @code{false}.  
 @end deftypefn 
 
-
 @node Showing Shapes, Outputting Shapes, Querying Shapes, Shape Reference
 @section Showing
 
@@ -183,7 +181,6 @@ This is needed in @code{Picture::output()} for determining the order in
 which objects are output.
 @end deftypefn 
 
-
 @deftypefn {@code{const} pure virtual functions}  real get_minimum_z (void) 
 @deftypefnx {}  real get_maximum_z (void) 
 @deftypefnx {}  real get_mean_z (void) 
@@ -193,7 +190,6 @@ the @code{Shape}, i.e., from @code{projective_extremes}.  The values for
 the @code{Shapes} on the @code{Picture} are used for determining the
 order in which they are output 
 @end deftypefn 
-
 
 @deftypefn {@code{const} pure virtual function} {const valarray<real>} get_extremes (void)
 Returns @code{projective_extremes}.
@@ -213,5 +209,4 @@ This way, output of @code{Shapes} that couldn't be output when
 won't necessarily be suppressed when 
 @code{Picture::output()} is called again with different arguments.
 @end deftypefn 
-
 

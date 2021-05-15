@@ -1,10 +1,10 @@
 @c point.texi
         
 @c This file is part of the 3DLDF User and Reference Manual.
-@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation 
+@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+@c 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc. 
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
-
  
 @node Point Reference, Focus Reference, Picture Reference, Top
 @chapter Point Reference
@@ -250,7 +250,6 @@ Creates a @code{bool_point_quadruple} and sets
 Makes @code{*this} a copy of @var{arg}.  
 @end deftypefn 
 
-
 @deftp struct bool_real_point b r pt
 @code{b} is a @code{bool}, @code{r} is a @code{real}, and @code{pt} is a
 @code{Point}.  @code{bool_real_point} also contains three constructors
@@ -275,7 +274,6 @@ Creates a @code{bool_real_point} and sets @code{b} to @var{bb},
 @deftypefn {Assignment operator} void bool_real_point::operator= ({const bool_real_point&} @var{brp})
 Makes @code{*this} a copy of @var{brp}.
 @end deftypefn 
-
 
 @node Point Global Constants and Variables, Point Constructors and Setting Functions, Point Typedefs and Utility Structures, Point Reference
 @section Global Constants and Variables
@@ -328,7 +326,6 @@ have the same z or y and z values.
 Corresponds to the constructor above, but is used for resetting the coordinates of an existing 
 @code{Point}.
 @end deftypefn
-
 
 @deftypefn {Copy constructor} void Point ({const Point&} @var{p})
 Creates a @code{Point} and copies the values for its x, y, and z-coordinates 
@@ -533,7 +530,6 @@ Inequality comparison for @code{Points}.  Returns @code{false} if
 @code{*this == @var{p}}, otherwise @code{true}.
 @end deftypefn
 
-
 @node Copying Points, Querying Points, Point Operators, Point Reference
 @section Copying 
 
@@ -566,7 +562,6 @@ free store, i.e., if the @code{Point} has been created using
 Point Reference; Constructors and Setting Functions}.
 @end deftypefn
 
-
 @deftypefn {@code{const} function} bool is_on_plane ({const Plane&} @var{p})
 Returns @code{true}, if the @code{Point} lies on the
 @code{Plane} @var{p}, otherwise @code{false}.
@@ -582,8 +577,6 @@ unless the user constructs the case specially.
 In @NEXTFIG{}, the coordinates for @math{B} and @math{C} were found by using 
 @code{Plane::intersection_point()}.  
 @xref{Plane Intersections,,Planes; Intersections}.}
-
-
 
 @example
 Point P(1, 1, 1);
@@ -710,7 +703,6 @@ would have to call @code{reset_transform()} before calling one of
 these functions.  It would probably be a good idea to save @code{transform}
 before doing so. 
 
-
 @item @code{Focus*} @var{f} 
 Indicates what @code{Focus} is to be used for projection.
 Only relevant if @code{coords} is @code{'p'}, i.e.,
@@ -718,14 +710,12 @@ Only relevant if @code{coords} is @code{'p'}, i.e.,
 returned.  The default is 0, in which case @var{f} points to the global
 variable @code{default_focus}.
 
-
 @item @code{const unsigned short} @var{proj}
 Indicates what form of projection is to be used.
 Only relevant if @code{coords} is @code{'p'}, i.e.,
 @code{projective_coordinates}, or one of its elements, is to be
 returned.  The default is @code{Projections::PERSP}, which causes the
 perspective projection to be applied.
-
 
 @item @code{real} @var{factor} 
 Passed to @code{project()}.  The values of the x and y coordinates in
@@ -1659,7 +1649,6 @@ $\theta = 0^\circ$ or $180^\circ$,
 @TMS{P, Q} will be @math{(0, 0, 0)}.
 The cross product thus provides a test for parallel vectors.
 
-
 @example
 Point P(1, 2, 1);
 Point Q(P);
@@ -1817,7 +1806,6 @@ Fig. 90.
 @c
 @end deftypefn
 
-
 @deftypefn {Function} Point unit_vector ({const bool} @var{assign}, [{const bool} @var{silent = false}])
 @deftypefnx {@code{const} function} Point unit_vector (void) 
 These functions return a @code{Point} with the x, y, and z-coordinates
@@ -1849,7 +1837,6 @@ cout << P.magnitude();
 @end example
 
 @end deftypefn
-
 
 @node Points and Lines, Point Intersections, Vector Operations, Point Reference
 @section Points and Lines
@@ -1983,7 +1970,6 @@ Fig. 91.
 
 @c
 
-
 @end deftypefn
 
 @deftypefn {@code{const} function} bool_real is_on_line ({const Point&} @var{p0}, {const Point&} @var{p1})
@@ -2035,7 +2021,6 @@ P lies between A and B ---> 0 <  r < 1.
 P lies on the opposite side of A from B ---> r > 1
 @end display
 @end ifnottex 
-
 
 @example
 Point A(-1, -2);
@@ -2884,7 +2869,6 @@ Writes the MetaPost code for drawing or undrawing a @code{Point} to
 @code{Shape} on the @code{Picture} is a @code{Point}.
 @xref{Outputting Pictures,,Picture Reference; Outputting}.  
 @end deftypefun
-
 
 @deftypefn {Virtual function} void suppress_output (void)
 Sets @code{do_output} to @code{false}, which causes a @code{Point}

@@ -1,7 +1,8 @@
 @c gspict.texi
 
 @c This file is part of the 3DLDF User and Reference Manual.
-@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation 
+@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+@c 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc. 
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
 
@@ -25,7 +26,6 @@ was passed as an argument to the drawing or filling command.  The
 arguments for the pen, 
 dash pattern, @code{Color}, and any others, are used to set the
 corresponding data members of @var{C} (not @var{O}).  
-
 
 @cindex output file  
 @vindex out_stream
@@ -113,7 +113,6 @@ The optional
 @c
 @c !! TO DO:  Try to find the place in the @TeX{}book, where Knuth
 @c explains what ``syntactic sugar'' is.
-
 
 In MetaPost, the @code{endfig} command causes output and then clears
 @code{currentpicture}.  This is not the case in 3DLDF, where
@@ -235,7 +234,6 @@ current_picture.rotate(45, 45);
 current_picture.shift(10, 0, 3);
 current_picture.output();
 @end example
-
 
 @iftex
 @tex 
@@ -364,7 +362,6 @@ code didn't specify a @var{pen} argument,
 @code{currentpen}.  All other pens must be passed as arguments to the
 drawing commands.
 
-
 @menu
 * Projections::                 
 * Focuses Getstart::            
@@ -394,7 +391,6 @@ I probably will, when I get around to it.
 This is the projection most people think of, when they think of
 3D-graphics.  It is discussed in 
 detail in @ref{The Perspective Projection}.
-
 
 @item @bullet{} The isometric and axonometric projections
 @c !! TO DO: 
@@ -447,7 +443,6 @@ r.draw();
 c.draw();
 current_picture.output(Projections::PARALLEL_X_Y);
 @end example
-
 
 @iftex
 @tex
@@ -532,7 +527,6 @@ Fig. 54.
 
 @code{Picture::output()} can be called with an additional @code{real}
 argument @var{factor} for magnifying or shrinking the @code{Picture}.
-
 
 @c !! TO DO:  Try using the code above and removing here.  Change
 @c factor, if necessary.  LDF 2003.08.15.
@@ -653,7 +647,6 @@ $90^\circ - 40^\circ = 50^\circ$
 @end ifnottex 
 @c
 to the ground line. 
-
 
 @c !! NOTE:  I haven't been able to get the colons lined up the way I'd
 @c like for the explanations of the abbreviations.  LDF 2003.08.15.
@@ -803,7 +796,6 @@ in @math{p} will also be parallel.
 @c
 }
 
-
 In @TWOPREFIG{}, the lines
 @iftex
 @tex
@@ -940,7 +932,6 @@ r.draw();
 current_picture.output();
 @end example
 
-
 @iftex
 @tex
 \ifmakeexamples
@@ -1030,7 +1021,6 @@ so a @code{Focus} contains a third @code{Point up}, to indicate which
 direction will be ``up'' on the projection, when a @code{Picture} is
 projected.  
 
-
 The projection plane @math{q}
 will always be perpendicular to 
 @c
@@ -1085,7 +1075,6 @@ Rectangle r(center, 3, 3);
 r.draw();
 current_picture.output(f);
 @end example
-
 
 @iftex
 @tex
@@ -1149,7 +1138,6 @@ Rectangle r(center, 3, 3);
 r.draw();
 current_picture.output(f);
 @end example
-
 
 @iftex
 @tex 
@@ -1257,7 +1245,6 @@ projection.  The @code{Focus} need never be
 transformed by @code{transform}.
 The actual perspective transformation is stored 
 in @code{persp}.
-
 
 @code{Focuses} can be moved by using one of the setting functions, which
 take the same arguments as the constructors.  
@@ -1370,7 +1357,6 @@ Now, running MetaPost on @file{persp.mp} generates the EPS files
 @c !! TO DO:  Add a node ``Animation''.  When I've done so, put a cross
 @c reference here.  LDF 2003.08.15.
 
-
 @node Surface Hiding,  , Focuses Getstart, Pictures
 @section Surface Hiding
 
@@ -1441,7 +1427,6 @@ covered by @var{c} should be visible:
 r.draw();
 c.filldraw();
 @end example
-
 
 @iftex
 @tex
@@ -1694,12 +1679,9 @@ greatest magnitude.
 When subsequently @math{r_0} is drawn, it covers part of the top of 
 @math{r_1}, which lies in front of @math{r_0}, and should be visible:
 
-
-
 @example
 current_picture.output(default_focus, PERSP, 1, MAX_Z);
 @end example
-
 
 @iftex
 @tex
@@ -1760,7 +1742,6 @@ It thereby covers the bottom part of
 @example
 current_picture.output(default_focus, PERSP, 1, MIN_Z);
 @end example
-
 
 @iftex
 @tex
@@ -1992,5 +1973,4 @@ comparing each @code{Shape} with every other @code{Shape}, and could
 greatly increase run-time.  
 
  
-
 

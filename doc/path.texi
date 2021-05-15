@@ -1,7 +1,8 @@
 @c path.texi
      
 @c This file is part of the 3DLDF User and Reference Manual.
-@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 The Free Software Foundation 
+@c Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
+@c 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc. 
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
 
@@ -133,7 +134,6 @@ ever dynamically allocated.
 Constructors and Setting Functions}.  
 @end deftypevr 
 
-
 @deftypevr {Protected variable} bool do_output 
 Used in @code{Picture::output()}.  Set to @code{false} if the @code{Path}
 isn't projectable using the arguments passed to
@@ -234,7 +234,6 @@ Creates an empty @code{Path} with no
 @code{Points} and no connectors.
 @end deftypefn
 
-
 @deftypefn {Constructor} void Path ({const Point&} @var{p0}, {const Point&} @var{p1})
 Creates a line (more precisely, a line segment) between @var{p0}
 and @var{p1}.  The single 
@@ -255,7 +254,6 @@ it uses @code{is_linear()} instead.  When I've done this, it may be
 possible to eliminate @code{line_switch}.  
 @xref{Path Data Members,,Path Reference; Data Members}, and
 @ref{Querying Paths,,Path Reference; Querying}.}
-
 
 @example
 Point A(-2, -2.5, -1);
@@ -310,7 +308,6 @@ Fig. 110.
 
 @end deftypefn
 
-
 @deftypefn {Setting function} void set ({const Point&} @var{p0}, {const Point&} @var{p1})
 Corresponds to the constructor above.
 
@@ -325,7 +322,6 @@ q.show("q:");
 @end example
 
 @end deftypefn 
-
 
 @deftypefn {Constructor} void Path (string @var{connector}, bool @var{cycle}, Point* @var{p}, [@dots{}], 0)
 For @code{Paths} with an arbitrary number of @code{Points}
@@ -369,7 +365,6 @@ an input routine, these function calls should be generated
 automatically.  It will be more important to define a convenient syntax
 for the input routine.  
 
-
 @example
 Point P0; 
 Point P1(2);
@@ -377,7 +372,6 @@ Point P2(2,2);
 Point P3(0,2);
 Path p("..", true, &P0, &P1, &P2, &P3, 0);
 p.draw();
-
 
 @end example
 
@@ -568,7 +562,6 @@ Corresponds to the constructor above.
 Creates a new @code{Path}, making it a copy of @var{p}.
 @end deftypefn
 
-
 @deftypefn {Template specializations} Path* create_new<Path> ({const Path*} @var{p})
 @c
 @deftypefnx {} Path* create_new<Path> ({const Path&} @var{p})
@@ -584,15 +577,10 @@ copy of an existing one, @samp{0} must be passed to
 @code{create_new<Path>()} as its argument.
 @xref{Dynamic Allocation of Shapes}, for more information. 
 
-
 @code{create_new<Path>()} is used in the drawing and filling functions
 for copying a @code{Path} and putting the copy onto a @code{Picture}.  
 @xref{Drawing and Filling Paths, , Path Reference; Drawing and Filling}.
 @end deftypefn 
-
-
-
-
 
 @node Path Destructor, Path Operators, Path Constructors and Setting Functions, Path Reference
 @section Destructor
@@ -662,7 +650,6 @@ Neither @code{*this} nor @var{pa} may be cyclical, i.e.,
 @deftypefun void operator+= ({const string} @var{s})
 Pushes @var{s} onto @code{connectors}.
 @end deftypefun
-
 
 @node Appending to Paths , Copying Paths, Path Operators, Path Reference
 @section Appending
@@ -1341,7 +1328,6 @@ Applying Transformations}.
 
 @node Drawing and Filling Paths, Labelling Paths, Applying Transformations to Paths, Path Reference
 @section Drawing and Filling
-
 
 @deftypefn {@code{const} virtual function} void draw ([{const Color&} @var{ddraw_color} = @code{*Colors::default_color}, [{const string} @var{ddashed} = "", [{const string} @var{ppen} = "", [Picture& @var{picture} = @code{current_picture}]]]])
 @deftypefnx {@code{const} Virtual function} void draw (Picture& @var{picture}, [{const Color&} @var{ddraw_color} = *Colors::default_color, [string @var{ddashed} = "", [string @var{ppen} = ""]]])
@@ -2047,7 +2033,6 @@ It can often be useful to draw the outline of a @code{Path}, but to have
 it hide objects that lie behind it.  This is why the default for
 @var{ffill_color} is @code{*Colors::background_color}.  
 
-
 @example
 default_focus.set(3, 0, -10, 3, 10, 10, 10);  
 Point p[8];
@@ -2519,7 +2504,6 @@ Shows the values of @code{draw_color} and @code{fill_color}.  These will
 normally be 0, unless the @code{Path} is on a @code{Picture}.  
 @end deftypefun   
 
-
 @node Querying Paths, Outputting Paths, Showing Paths, Path Reference
 @section Querying
 @c
@@ -2749,7 +2733,6 @@ Fig. 137.
 @deftypefun void set_cycle ([{const bool} @var{c} = @code{true}])
 Sets @code{cycle_switch} to @var{c}.
 @end deftypefun 
-
 
 @deftypefn {Function} Path reverse (bool @var{assign})
 @deftypefnx {@code{const} function} Path reverse (void)
