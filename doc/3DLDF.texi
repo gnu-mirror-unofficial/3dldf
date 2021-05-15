@@ -454,7 +454,7 @@ Caveats
 
 Points
 
-* Declaring and Initializing Points::  
+* Declaring points::  
 * Setting and Assigning to Points::  
 * Shifting Points::             
 * Scaling Points::              
@@ -822,6 +822,7 @@ Future Plans
 
 Changes
 
+* Changes in 3DLDF 3.0::    
 * Changes in 3DLDF 1.1.5.1::    
 * Changes in 3DLDF 1.1.5::      
 * Changes in 3DLDF 1.1.4.2::    
@@ -851,6 +852,29 @@ Changes
 @end iftex
 @ifnottex
 C++
+@end ifnottex
+@end macro
+
+
+@macro MF {}
+@iftex
+@tex
+{@manual METAFONT}
+@end tex
+@end iftex
+@ifnottex
+METAFONT
+@end ifnottex
+@end macro
+
+@macro MP {}
+@iftex
+@tex
+MetaPost
+@end tex
+@end iftex
+@ifnottex
+MetaPost
 @end ifnottex
 @end macro
 
@@ -1079,10 +1103,8 @@ $\\pm{\arg\}$%
 
 @include contrib.texi
 
-@c @c Got rid of getstart.texi, because it confuses Emacs and makeinfo
-@c @c to have files nested too deeply.
-
-@include using.texi
+@c Got rid of getstart.texi, because it confuses Emacs and makeinfo
+@c to have files nested too deeply.
 
 @c chapter Points
 @include gspoint.texi   
@@ -1112,9 +1134,9 @@ $\\pm{\arg\}$%
 
 @include instlrun.texi
 
-@c @c Unless otherwise stated, all of the functions described in the following
-@c @c chapters are @dfn{member functions} of the  
-@c @c the @code{class} currently under discussion.
+@c Unless otherwise stated, all of the functions described in the following
+@c chapters are @dfn{member functions} of the  
+@c the @code{class} currently under discussion.
 
 @include typeglb.texi 
 

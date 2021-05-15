@@ -51,7 +51,7 @@
 
 all: 
 
-3dldf_TEXINFOS = 3DLDF.texi intro.texi contrib.texi using.texi gspoint.texi gstranpt.texi  \
+3dldf_TEXINFOS = 3DLDF.texi intro.texi contrib.texi gspoint.texi gstranpt.texi  \
                  gstransf.texi gsdlpt.texi gspaths.texi gsplane.texi gssolfig.texi \
                  gspict.texi intersct.texi instlrun.texi typeglb.texi glbcnvar.texi \
                  creatnew.texi system.texi color.texi io.texi shape.texi transfor.texi \
