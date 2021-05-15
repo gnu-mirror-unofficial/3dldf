@@ -113,7 +113,6 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 3dldf_LDADD = lib3dldflb.la # lib3dldfsp.la
 
-
 3dldf_SOURCES = main.web pspglb.web 
 
 3dldf_cpp_files = $(3dldf_SOURCES:.web=.c++)
