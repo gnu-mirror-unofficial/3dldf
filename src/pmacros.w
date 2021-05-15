@@ -70,11 +70,11 @@ Added this type declaration.
 @=%type <pointer_value> macro_definition@>
 
 @q ** (2) macro_definition --> DEF variable UNDECLARED untyped_parameter_list @>
-@q ** (2) typed_parameter_list  ASSIGN.                                       @> 
+@q ** (2) typed_parameter_list  equate_or_assign.                             @> 
 
 @*1 \§macro definition> $\longrightarrow$ \.{DEF} \§symbolic token>
 \§untyped parameter list> \§typed parameter list> 
-\§equate or assign> \§macro variable>.  
+\§equate or assign>.  
 \initials{LDF 2004.12.30.}
 
 \LOG
@@ -89,7 +89,6 @@ Added this rule.
 @=macro_definition: DEF variable UNDECLARED untyped_parameter_list@>@/
 @=typed_parameter_list equate_or_assign@>@/
 {
-
    @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE

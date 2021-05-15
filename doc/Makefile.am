@@ -59,7 +59,7 @@ all:
                  path.texi polygon.texi regpolyg.texi rectang.texi rcpcurve.texi \
                  ellipse.texi circle.texi pattern.texi solid.texi solfaced.texi \
                  cuboid.texi polyhed.texi utility.texi addfile.texi future.texi \
-                 changes.texi biblio.texi fdl.texi varidx.texi funcidx.texi \
+                 changes.texi biblio.texi fdl-1.3.texi varidx.texi funcidx.texi \
                  concidx.texi 
 
 3dldf_EPS =   ./graphics/eps/3DLDFmp.1 \
@@ -124,6 +124,10 @@ ps: 3DLDF.ps
 	@echo Running \"dvips -o 3DLDF.ps 3DLDF.dvi\"
 	dvips -o 3DLDF.ps 3DLDF.dvi
 
+
+.PHONY: dvi
+
+dvi: 3DLDF.dvi
 
 3DLDF.dvi: $(3dldf_TEXINFOS)
 	texi2dvi 3DLDF.texi
