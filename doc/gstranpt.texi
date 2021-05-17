@@ -6,6 +6,8 @@
 @c See the section "GNU Free Documentation License" in the file 
 @c fdl-1.3.texi for copying conditions.
 
+@c * (1) Top
+
 @node Transforming Points, Transforms, Points, Top
 @chapter Transforming Points
 
@@ -45,12 +47,14 @@ Rotating about an axis.
 * Rotating Points::             
 @end menu
 
+@c ** (2)
+
 @node Shifting Points, Scaling Points, Transforming Points, Transforming Points
 @section Shifting
 
 In 3DLDF, @code{points} can be shifted entirely analogously to the way
-@code{pairs} are shifted in @MF, albeit with a third argument for 
-@code{shift()}.  The arguments are added to the x-, y- and
+@code{pairs} are shifted in @MF, albeit with a third argument for the 
+keyword @code{shifted}.  The arguments are added to the x-, y- and
 z-coordinates, respectively, of the @code{point}.  The arguments for
 the y- and z-coordinates are optional.  If only a single argument is
 supplied, i.e., for the x-coordinate, the parentheses are optional:
@@ -115,25 +119,68 @@ ERROR! In yyparse(): syntax error
 `yyparse()' returned 1.
 @end example
 
-@c !! START HERE!  Explain @code{shift} command.
+The @MF{} language was designed to be @dfn{declarative} (as opposed to
+@dfn{imperative}).  Statements in a program should be @emph{assertions} rather
+than commands telling the computer what to do.  This was an idea that was in the
+air at the time Donald Knuth was developing @MF{}, however, with all due
+respect, the author feels that it has not stood the test of time.
 
-Another way of shifting @code{Points} is to use the binary @code{+=} 
-operator (@code{Point::operator+=()})  with a @code{Point}
-argument.
+Therefore, 3DLDF implements @emph{commands} corresponding to the keywords
+@code{shifted}, @code{scaled}, @code{rotate}, etc., which can be used for
+transforming @code{points} and other objects---unless you're afraid of hurting
+the computer's feelings.  The commands are named @code{shift}, @code{scale},
+@code{rotate}, etc.:
 
 @example
-Point a0(1, 1, 1);
-Point a1(2, 2, 2);
-a0 += a1;
-a0.show("a0:");
-@print{} a0: (3, 3, 3)
+point p, q, r;
+p := q := r := origin;
+shift p by 1; %% "by" is required
+show p;
+@print{}
+(1.00000000, 0.00000000, 0.00000000, 1.00000000)
+shift q (2, 3); 
+show q;
+@print{}
+(2.00000000, 3.00000000, 0.00000000, 1.00000000)
+shift r (4, 5, 6);
+show r;
+@print{}
+(4.00000000, 5.00000000, 6.00000000, 1.00000000)
+shift r by p; %% point argument, "by" is required.
+show r;
+@print{}
+(5.00000000, 5.00000000, 6.00000000, 1.00000000)
 @end example
+
+Yet another way of shifting @code{points} is to use the @code{+=} 
+operator with a @code{point} or @code{point expression} argument:
+
+@example
+point a, b, c;
+a := (1, 1, 1);
+b := (2, 2, 2);
+a += b;
+show a;
+@print{}
+(3.00000000, 3.00000000, 3.00000000, 1.00000000)
+c := a shifted by b;
+show c;
+@print{}
+(5.00000000, 5.00000000, 5.00000000, 1.00000000)
+@end example
+
+The @code{+=} operator (as well as the @code{-=}, @code{*=} and @code{/=} operators)
+only exist in 3DLDF, i.e., not in @MF{} or @MP{}.  In fact, they are exceptions
+to the normal scanning rules inherited from @MF{}.
+@xref{How 3DLDF Reads What You Type}.
+
+@c ** (2)
 
 @node Scaling Points, Shearing Points, Shifting Points, Transforming Points
 @section Scaling
 
-The function @code{scale()} takes three @code{real} arguments.  
-The x, y, and z-coordinates of the @code{Point} are 
+The keyword @code{scaled} takes three numerical (@code{real}) arguments.  
+The x, y, and z-coordinates of the @code{point} are 
 multiplied by the first, second, and third arguments respectively.  Only
 the first argument is required;  the default for the others is 1.
 
@@ -144,11 +191,15 @@ in the z-dimension only, dummy arguments of 1 must be passed for scaling
 in the x and y-dimensions.
 
 @example
-Point p0(1, 2, 3);
-p0.scale(2, 3, 4);
-p0.show("p0:");
-@print{} p0: (2, 6, 12)
-p0.scale(2);
+point p[];
+p0 := (1, 2, 3);
+p1 := p0 scaled (2, 3, 4);
+show p1;
+@print{}
+
+@c !! START HERE!  Mon 17 May 2021 03:57:23 PM CEST
+
+p2 := 0.scale(2);
 p0.show("p0:");
 @print{} p0: (4, 6, 12)
 p0.scale(1, 3);
@@ -158,6 +209,8 @@ p0.scale(1, 1, 3);
 p0.show("p0:");
 @print{} p0: (4, 18, 36)
 @end example
+
+@c ** (2)
 
 @node Shearing Points, Rotating Points, Scaling Points, Transforming Points
 @section Shearing
@@ -255,6 +308,8 @@ Fig. 1.
 @ifinfo
 [Figure 1 not displayed.]
 @end ifinfo
+
+@c ** (2)
 
 @node Rotating Points,  , Shearing Points, Transforming Points
 @section Rotating
@@ -405,3 +460,19 @@ rotation about two @code{Points}.  It's usually worked to reverse the
 order of the @code{Point} arguments, or to change sign of the angle
 argument.  I think I've fixed the problem, though.
 
+@c ** (2)
+
+@c * (1) Local Variables for Emacs
+
+@c For use in indirect buffers:
+@c
+@c (progn (texinfo-mode) (outline-minor-mode t) (setq outline-regexp "@c *\\*+") (ignore (quote 
+@c )))
+  
+@c Local Variables:
+@c mode:Texinfo
+@c abbrev-mode:t
+@c eval:(outline-minor-mode t)
+@c outline-regexp:"@c *\\*+"
+@c fill-column:80
+@c End:
