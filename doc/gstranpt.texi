@@ -259,57 +259,7 @@ q.shear(1.5);
 q.draw(black, "evenly");
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point P0;}
-\immediate\write\examples{Point P1(3);}
-\immediate\write\examples{Point P2(3, 3);}
-\immediate\write\examples{Point P3(0, 3);}
-\immediate\write\examples{Rectangle r(P0, P1, P2, P3);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{r.get_point(0).dotlabel("$P_0$ = $Q_0$ = (0, 0)", "llft");}
-\immediate\write\examples{r.get_point(1).dotlabel("$P_1$ = $Q_1$ = (3, 0)", "lrt");}
-\immediate\write\examples{r.get_point(2).dotlabel("$P_2$ = (3, 3)", "ulft");}
-\immediate\write\examples{r.get_point(3).dotlabel("$P_3$ = (0, 3)", "ulft");}
-\immediate\write\examples{r.get_center().label("$r$", "");} 
-\immediate\write\examples{Rectangle q(r);}
-\immediate\write\examples{q.shear(1.5);}  
-\immediate\write\examples{Point q_center(q.get_center());} 
-\immediate\write\examples{q_center.label("$q$", "");} 
-\immediate\write\examples{q.get_point(2).dotlabel("$Q_2$ = (7.5, 3)");}
-\immediate\write\examples{q.get_point(3).dotlabel("$Q_3$ = (4.5, 3)");}
-\immediate\write\examples{q.draw(black, "evenly");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
-
-@ifhtml
-@html
-<p align="center">
-<br>
-<img src="./graphics/png/3DLDF1.png"
-alt="[Figure 1. Not displayed.]"
-/>
-<br>
-<br>
-Fig. 1.
-<br>
-</p>
-@end html
-@end ifhtml
-
-@ifinfo
-[Figure 1 not displayed.]
-@end ifinfo
-
-@c ** (2)
+@c ** (2) Rotating Points
 
 @node Rotating Points,  , Shearing Points, Transforming Points
 @section Rotating
