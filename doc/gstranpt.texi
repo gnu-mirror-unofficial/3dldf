@@ -185,11 +185,13 @@ multiplied by the first, second, and third arguments respectively.
 
 If only one argument is supplied, the x-, y- and z-coordinates of the
 @code{point} are all multiplied by the argument.  The argument may optionally be
-surrounded by parentheses.
+surrounded by parentheses.  Please note that this implies that to scale only the
+x-coordinate, a dummy argument of 1 must be supplied for the y-coordinate,
+otherwise, all three coordinates will be multiplied by the argument.
 
 If two arguments are supplied, the x-coordinate of the @code{point} is
 multiplied by the first argument and the y-coordinate is multiplied by the
-second.  The z-coordinate remains unchanged.
+second.  The z-coordinate remains unchanged.  
 
 If one wants to perform scaling in either the y-dimension only, a
 dummy argument of 1 must be passed for scaling in the x-dimension.
