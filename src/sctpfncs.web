@@ -1871,8 +1871,7 @@ Made debugging and error output thread-safe.
 
 @<Define |Scanner_Type| functions@>=
 Bool_Void_Pointer
-Scanner_Type::handle_numeric_list(int transform_token,
-                                    void* r)
+Scanner_Type::handle_numeric_list(int transform_token, void* r)
 {
 
 @q *** (3) Preliminaries.@> 
@@ -2161,6 +2160,87 @@ log_message(cerr_strm);
       t->scale(args[0], args[1], args[2]);
    
     } /* |else if (transform_token == SCALE || transform_token == SCALED)|  */
+
+@q **** (4) @>   
+
+@ |XSCALE| and |XSCALED|.
+\LOG
+\initials{LDF 2021.05.17.}  
+@:BUG FIX@> BUG FIX:  Added this section.
+@<Define |Scanner_Type| functions@>=
+
+  else if (transform_token == XSCALE || transform_token == XSCALED)
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In `Scanner_Type::handle_numeric_list()': Xscaling.";
+          
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      t->scale(args[0], 1, 1);
+   
+    } /* |else if (transform_token == XSCALE || transform_token == XSCALED)|  */
+
+@q **** (4) @>   
+
+@ |YSCALE| and |YSCALED|.
+\LOG
+\initials{LDF 2021.05.17.}  
+@:BUG FIX@> BUG FIX:  Added this section.
+@<Define |Scanner_Type| functions@>=
+
+  else if (transform_token == YSCALE || transform_token == YSCALED)
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In `Scanner_Type::handle_numeric_list()': Yscaling.";
+          
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      t->scale(1, args[0], 1);
+   
+    } /* |else if (transform_token == YSCALE || transform_token == YSCALED)|  */
+
+@q **** (4) @>   
+
+@ |ZSCALE| and |ZSCALED|.
+\LOG
+\initials{LDF 2021.05.17.}  
+@:BUG FIX@> BUG FIX:  Added this section.
+@<Define |Scanner_Type| functions@>=
+
+  else if (transform_token == ZSCALE || transform_token == ZSCALED)
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In `Scanner_Type::handle_numeric_list()': Zscaling.";
+          
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      t->scale(1, 1, args[0]);
+   
+    } /* |else if (transform_token == ZSCALE || transform_token == ZSCALED)|  */
 
 @q **** (4) @>   
 
