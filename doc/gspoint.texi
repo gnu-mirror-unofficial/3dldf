@@ -92,8 +92,8 @@ computer screen.  Please note, that when the coordinates of a
 @code{Point} are referred to in this manual, the
 @code{world_coordinates} are meant, unless otherwise stated.
 
-@code{points} can be declared and their values can be set in different
-ways.  
+@code{points} can be declared and they can be @dfn{assigned to}, i.e., the values of their @code{world_coordinates}
+can be set, in different ways.  
 
 @example
 point pt[];
@@ -112,16 +112,17 @@ show pt2;
 @end example
 
 @code{pt0} is assigned to using a single argument for the x-coordinate, 
-so its y and z-coordinates are both set to 0.  A @code{point's} w-coordinate
+so its y and z-coordinates are both set to 0.  @code{pt1} is assigned to using two arguments, so it's z-coordinate
+is set to 0.  Finally, @code{pt2} is assigned to using three arguments.  A @code{point's} w-coordinate
 cannot be set by the user.  In a @code{point's} world coordinates, the w-coordinate is always 1.
 The w-coordinate in a @code{point's} projective coordinates only takes on a value not
 equal to 1 in the case of a @dfn{non-affine transformation}, in particular, the
 @dfn{perspective projection}.
 
 Actually, in the previous example, the y-coordinate of @code{pt0} and the z-coordinates
-of @code{pt0} and @code{pt1} are set to the values of the pre-defined @code{numeric} variables
-@code{curr_y} and @code{curr_z}.  Their values are normally 0 but they can be set to other values
-by the user:
+of @code{pt0} and @code{pt1} are set to the values of the pre-defined, @dfn{internal} @code{numeric}
+variables @code{curr_y} and @code{curr_z}.  Their values are initially 0 but they can be set to other
+values by the user:
 
 @example
 curr_y := 10;
@@ -132,62 +133,18 @@ show pt3;
 (1.00000000, 10.00000000, 20.00000000, 1.00000000)
 @end example
 
+Please note that @code{points} (and all other data types in 3DLDF) are
+assigned to using the @code{:=} operator. In @MF{} and @MP{}, the
+initial assignment to a variable, i.e., its @dfn{initialization} may
+be performed using the plain @code{=} operator provided the statement
+doesn't contradict any previous statements.  In @MF{} and @MP{},
+assignments using the @code{=} operator are @dfn{assertions};  they
+need not completely specify the values of the variables.  3DLDF
+unfortunately does not implement this feature of @MF{} and @MP{}.
 
-@c !! START HERE!
-
-Please note that @code{pt0} is constructed using a the default
-constructor, whereas the other @code{points} are constructed using a
-constructor with one required argument (for the x-coordinate), and two
-optional arguments (for the y and z-coordinates).  The default
-constructor always sets all the coordinates to 0, irrespective of the
-values of @code{CURR_Y} and @code{CURR_Z}.
-
-@node Setting and Assigning to points,  , Declaring points, Points
-@section Setting and Assigning to points
-
-@findex Point::operator=
-@findex operator= (for points)
-@findex Point::set
-@findex set (for points)
-It is possible to change the value of the coordinates of @code{points}
-by using the @dfn{assignment operator} @code{=}
-(@code{Point::operator=()}) or the function @code{Point::set()} 
-(with appropriate arguments): 
-
-@example
-Point pt0(2, 3.3, 7);
-Point pt1;
-pt1 = pt0;
-pt0.set(34, 99, 107.5);
-pt0.show("pt0:");
-@print{} pt0: (34, 99, 107.5)
-pt1.show("pt1:");
-@print{} pt1: (2, 3.3, 7)
-@end example
-
-In this example, @code{pt0} is initialized with the coordinates @code{(2, 3.3, 7)},
-and @code{pt1} with the coordinates @code{(0, 0, 0)}.  
-@code{pt1 = pt0} causes @code{pt1} to have the same coordinates as
-@code{pt0}, then the coordinates of @code{pt0} are changed to @code{(34,
-99, 107.5)}. This doesn't affect @code{pt1}, whose coordinates remain 
-@code{(2, 3.3, 7)}. 
-
-Another way of declaring and initializing @code{points} is by using the
-@dfn{copy constructor}:  
-
-@example
-Point pt0(1, 3.5, 19);
-Point pt1(pt0);
-Point pt2 = pt0;
-Point pt3;
-pt3 = pt0;
-@end example
-
-In this example, @code{pt1} and @code{pt2} are both declared and
-initialized using the copy constructor;  @code{Point pt2 = pt0} does not
-invoke the assignment operator.  @code{pt3}, on the other hand, is
-declared using the default constructor, and not initialized.  In the
-following line, @code{pt3 = pt0} does invoke the assignment operator,
-thus resetting the coordinate values of @code{pt3} to those of
-@code{pt0}.   
-
+In @MF and @MP, the @code{:=} operator is used for actual
+assignments, i.e., the statement sets the value of a variable and
+doesn't integrate it into a system of equations that should eventually
+specify its value.  3DLDF conforms to this usage of the @code{:=}
+operator.  The @code{=} operator is used in a different sense in
+@dfn{conditional} statements, as in @MF{} and @MP{}.  @xref{Conditionals}.

@@ -9,11 +9,22 @@
 @node Transforming Points, Transforms, Points, Top
 @chapter Transforming Points
 
-@code{Points} don't always have to remain in the same place.  There are
-various ways of moving or @emph{transforming} them:
+@code{points} don't always have to remain in the same place.  There are
+various ways of moving or @dfn{transforming}@c
+@c
+@footnote{The transformations described in this chapter are known as
+@dfn{affine transformations}.  They have the property that parallelity
+of lines is maintained.  That is, if two lines (each determined by two
+points) are parallel before the transformation, they will also be
+parallel after the transformation.  Affine transformations are
+discussed in many books about computer graphics and geometry.  For
+3DLDF, I've mostly used Jones, @cite{Computer Graphics through Key Mathematics}
+and Salomon, @cite{Computer Graphics and Geometric Modeling}.}
+@c
+them:
 @itemize @bullet
 @item
-Shifting.  This is often called ``translating'', but the operation in Metafont
+Shifting.  This is often called ``translating'', but the operation in @MF
 that performs translation is called @code{shift}, so I call it ``shifting''.
 
 @item
@@ -27,42 +38,6 @@ Rotating about an axis.
 
 @end itemize
 
-@code{class Point} has several member functions 
-for applying these @dfn{affine transformations}@c
-@c
-@footnote{@dfn{Affine transformations} are operations 
-that have the property that parallelity of
-lines is maintained.  That is, if two lines (each determined by two
-points) are parallel before the transformation, they will also be
-parallel after 
-the transformation.  Affine transformations are discussed in many books
-about computer graphics and geometry.  For 3DLDF, I've mostly used
-Jones, @cite{Computer Graphics through Key Mathematics}  and Salomon, 
-@cite{Computer Graphics and Geometric Modeling}.}
-@c
-to a @code{Point}.
-@c
-Most of the arguments to these functions are of 
-type @code{real}.  As you may know, there is no such data type in @cpp{}.
-I have defined @code{real} using @code{typedef} to be either
-@code{float} or @code{double}, depending on the value of a preprocessor 
-switch for conditional compilation.@c
-@c
-@footnote{I try to avoid the use of
-preprocessor macros as much as possible, for the reasons given by
-Stroustrup in the @cite{The @cpp{} Programming Language}, 
-@SECT{}7.8, 
-pp.@: 160--163, and 
-@cite{Design and Evolution of @cpp{}}, Chapter 18, pp.@: 423--426.  
-However, conditional compilation is one of
-the tasks that only the preprocessor can perform.}
-@c
-3DLDF uses many @code{real} values and I wanted to be able to
-change the precision used by making one change (in the file
-@file{pspglb.web}) rather than having to examine all the places in the
-program where @code{float} or @code{double} are used.  Unfortunately,
-setting @code{real} to @code{double} currently doesn't work.
-
 @menu
 * Shifting Points::             
 * Scaling Points::              
@@ -73,48 +48,74 @@ setting @code{real} to @code{double} currently doesn't work.
 @node Shifting Points, Scaling Points, Transforming Points, Transforming Points
 @section Shifting
 
-The function 
-@code{shift()} 
-adds its arguments to the corresponding 
-@code{world_coordinates} of a @code{Point}.  In the following example, 
-the function @code{show()} is used to print the @code{world_coordinates}
-of @code{p0} to standard output.
+In 3DLDF, @code{points} can be shifted entirely analogously to the way
+@code{pairs} are shifted in @MF, albeit with a third argument for 
+@code{shift()}.  The arguments are added to the x-, y- and
+z-coordinates, respectively, of the @code{point}.  The arguments for
+the y- and z-coordinates are optional.  If only a single argument is
+supplied, i.e., for the x-coordinate, the parentheses are optional:
 
 @example
-Point p0(0, 0, 0);
-p0.shift(1, 2, 3);
-p0.show("p0:");
-@print{} p0: (1, 2, 3)
-p0.shift(10);
-p0.show("p0:");
-@print{} p0: (11, 2, 3)
-p0.shift(0, 20);
-p0.show("p0:");
-@print{} p0: (11, 22, 3)
-p0.shift(0, 0, 30);
-p0.show("p0:");
-@print{} p0: (11, 22, 33)
+point p, q, r, s;
+p := origin shifted (1, 2, 3); %% origin == (0, 0, 0)
+show p;
+@print{}
+(1.00000000, 2.00000000, 3.00000000, 1.00000000)
+q := origin shifted (5, 6);
+show q;
+@print{}
+(5.00000000, 6.00000000, 0.00000000, 1.00000000)
+r := origin shifted (7);
+show r;
+@print{}
+(7.00000000, 0.00000000, 0.00000000, 1.00000000)
+s := origin shifted 8;
+show s;
+@print{}
+(8.00000000, 0.00000000, 0.00000000, 1.00000000)
 @end example
 
-@noindent
-@code{shift} takes three @code{real} arguments, whereby the second and
-third are optional.  To shift a @code{Point} in the direction of 
-the positive or negative y-axis, and/or the positive or negative z-axis
-only, then a 0 argument for the 
-x direction, and possibly one for the y direction 
-must be used as placeholders, as in the example above. 
-
-@code{shift()} can be invoked with a @code{Point} argument
-instead of @code{real} arguments.  In this case, the x, y, and
-z-coordinates of the argument are used for shifting the @code{Point}:
+@code{points} need not be shifted using numerical (@code{real})
+arguments:  The argument to @code{shifted} may be another
+@code{point}.   In this case, the x-, y- and z-coordinates of the
+@code{point} passed as an argument are added to the corresponding
+coordinates of the @code{point} being shifted:
 
 @example
-Point a(10, 10, 10);
-Point b(1, 2, 3);
-a.shift(b);
-a.show("a:")
-@print{} a: (11, 12, 13)
+point p, q, r, s;
+p := (1, 2, 3);
+q := (10, 20, 30);
+r := p shifted by q;
+show r;
+@print{}
+(11.00000000, 22.00000000, 33.00000000, 1.00000000)
+s := r shifted q;
+@print{}
+(21.00000000, 42.00000000, 63.00000000, 1.00000000)
 @end example
+
+In this case, the keyword @code{by} is ``syntactic sugar'', i.e., it's
+use is optional.  However, if the argument to @code{shifted} is a
+@dfn{point expression}, i.e., an @dfn{expression} whose value is a
+@code{point}, rather than a @code{point} itself, the @code{keyword}
+@code{by} @emph{must} be used:
+
+@example
+point p, q, r, s;
+p := (1, 2, 3);
+q := (10, 20, 30);
+r := origin shifted by (p + q);  %% Correct
+show r;
+@print{}
+(11.00000000, 22.00000000, 33.00000000, 1.00000000)
+r := origin shifted (p + q);  %% Incorrect
+@error{}
+ERROR! In yyparse(): syntax error
+[Thread 1] ERROR! In `main()':
+`yyparse()' returned 1.
+@end example
+
+@c !! START HERE!  Explain @code{shift} command.
 
 Another way of shifting @code{Points} is to use the binary @code{+=} 
 operator (@code{Point::operator+=()})  with a @code{Point}

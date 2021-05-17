@@ -975,6 +975,17 @@ prog:
 	-rm *.h *.c
 	$(MAKE) 3dldf$(EXEEXT)
 
+conveps$(EXEEXT): conveps.o
+	g++ -pthread -o conveps conveps.o
+
+conveps.o: conveps.c++
+	g++ -DHAVE_CONFIG_H -I. -I.. -fpermissive -fdiagnostics-show-option \
+            -Wno-return-type -g -O2 -MT conveps.o -MD -MP -MF .deps/conveps.Tpo -c -o conveps.o conveps.c++
+
+conveps.c++: conveps.web
+	ctangle conveps.web
+	mv conveps.c conveps.c++
+
 .PHONY: headers
 
 headers:
