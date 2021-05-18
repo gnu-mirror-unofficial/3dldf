@@ -1008,7 +1008,6 @@ Removed debugging output and error-handling code.
   
 @=command: basic_transformation_command any_variable @>
 @=BY numeric_primary@>@/
-
 {
 
    Pointer_Vector<real>* pv = new Pointer_Vector<real>;
@@ -1027,12 +1026,12 @@ Removed debugging output and error-handling code.
 
    } /* |if (basic_transformation_command == SCALE)|  */
 
-transformation_command_func(static_cast<Scanner_Node>(parameter),
-                              @=$1@>,
-                              static_cast<Id_Map_Entry_Node>(@=$2@>),
-                              pv);
+   transformation_command_func(static_cast<Scanner_Node>(parameter),
+                               @=$1@>,
+                               static_cast<Id_Map_Entry_Node>(@=$2@>),
+                               pv);
 
-  @=$$@> = static_cast<void*>(0);
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1052,7 +1051,6 @@ Added this rule.
   
 @=command: basic_transformation_command any_variable @>
 @=BY point_expression@>@/
-
 {
 
    Point* p = static_cast<Point*>(@=$4@>); 
