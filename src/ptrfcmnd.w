@@ -1151,6 +1151,63 @@ Removed all unnecessary code.
 
 };
 
+@q ** (2) basic_transformation_command --> XSCALE@>
+@*3 \§basic transformation command> --> \.{XSCALE}.
+\initials{LDF 2021.05.18.}
+
+\LOG
+\initials{LDF 2021.05.18.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+
+@=basic_transformation_command: XSCALE@>
+{
+
+  @=$$@> = XSCALE;
+
+};
+
+@q ** (2) basic_transformation_command --> YSCALE@>
+@*3 \§basic transformation command> --> \.{YSCALE}.
+\initials{LDF 2021.05.18.}
+
+\LOG
+\initials{LDF 2021.05.18.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+
+@=basic_transformation_command: YSCALE@>
+{
+
+  @=$$@> = YSCALE;
+
+};
+
+@q ** (2) basic_transformation_command --> ZSCALE@>
+@*3 \§basic transformation command> --> \.{ZSCALE}.
+\initials{LDF 2021.05.18.}
+
+\LOG
+\initials{LDF 2021.05.18.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+
+@=basic_transformation_command: ZSCALE@>
+{
+
+  @=$$@> = ZSCALE;
+
+};
+
+
+
+
 @q ** (2) basic_transformation_command --> SHEAR@>
 @*3 \§basic transformation command> --> \.{SHEAR}.
 \initials{LDF 2004.09.25.}
