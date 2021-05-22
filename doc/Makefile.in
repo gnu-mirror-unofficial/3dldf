@@ -605,6 +605,24 @@ TAGS : $(3dldf_TEXINFOS)
 	@echo "Regenerating the tags table for the TEXINFO files."
 	etags $(3dldf_TEXINFOS) 
 
+.PHONY: examples
+
+.PHONY: exm
+
+exm examples: examples.ps
+
+examples.ps: examples.dvi
+	dvips -o $@ $<
+
+examples.dvi: examples.tex examples.1
+	tex $<
+
+examples.1: examples.mp
+	mpost $<
+
+examples.mp: examples.ldf ../src/3dldf$(EXEEXT)
+	../src/3dldf$(EXEEXT) $< 
+
 .PHONY : show
 show:
 	@echo "3dldf_PNG: $(3dldf_PNG)"

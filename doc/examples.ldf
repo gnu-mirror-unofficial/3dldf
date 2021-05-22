@@ -11,6 +11,17 @@
 
 %% * (1) Examples
 
+beginfig(1);
+path p;
+p := (0, 0) -- (4, 0) -- (4, 3) -- (0, 3) -- cycle;
+draw p;
+shear p by 1.5;
+draw p dashed evenly;
+endfig with_projection parallel_x_y; 
+verbatim_metapost "end;";
+end;
+
+
 %% ** (2) Example 1
 
 beginfig(1);

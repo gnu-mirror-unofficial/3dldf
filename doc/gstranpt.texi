@@ -293,20 +293,23 @@ show q;
 @c I've copied the following example from 
 @c the node ``Affine Transformations for Points''.
 @c
-@NEXTFIG{} demonstrates the effect of shearing the points of a rectangle
-in the x-y plane.
+@NEXTFIG{} demonstrates the effect of shearing the points of a rectangular
+@code{path} in the x-y plane.
 
 @example
-Point P0;
-Point P1(3);
-Point P2(3, 3);
-Point P3(0, 3);
-Rectangle r(p0, p1, p2, p3);
-r.draw();
-Rectangle q(r);
-q.shear(1.5);
-q.draw(black, "evenly");
+path p;
+p := (0, 0) -- (4, 0) -- (4, 3) -- (0, 3) -- cycle;
+draw p;
+shear p (1.5);
+draw p dashed evenly;
 @end example
+
+@iftex
+@tex
+\vskip2\baselineskip
+\leftline{\epsffile{examples.1}}
+@end tex
+@end iftex
 
 @c ** (2) Rotating Points
 
