@@ -26,7 +26,7 @@ and Salomon, @cite{Computer Graphics and Geometric Modeling}.}
 them:
 @itemize @bullet
 @item
-Shifting.  This is often called ``translating'', but the operation in @MF
+Shifting.  This is often called ``translating'', but the operation in @MF{}
 that performs translation is called @code{shift}, so I call it ``shifting''.
 
 @item
@@ -152,8 +152,8 @@ show r;
 (5.00000000, 5.00000000, 6.00000000, 1.00000000)
 @end example
 
-Yet another way of shifting @code{points} is to use the @code{+=} 
-operator with a @code{point} or @code{point expression} argument:
+Yet another way of shifting @code{points} is to use the @code{+=} or
+@code{-=} operator with a @code{point} or @code{point expression} argument:
 
 @example
 point a, b, c;
@@ -163,13 +163,12 @@ a += b;
 show a;
 @print{}
 (3.00000000, 3.00000000, 3.00000000, 1.00000000)
-c := a shifted by b;
-show c;
-@print{}
-(5.00000000, 5.00000000, 5.00000000, 1.00000000)
+b -= a;
+show b;
+(-1.00000000, -1.00000000, -1.00000000, 1.00000000)
 @end example
 
-The @code{+=} operator (as well as the @code{-=}, @code{*=} and @code{/=} operators)
+The @code{+=} and @code{-=} operators (as well as the @code{*=} and @code{/=} operators)
 only exist in 3DLDF, i.e., not in @MF{} or @MP{}.  In fact, they are exceptions
 to the normal scanning rules inherited from @MF{}.
 @xref{How 3DLDF Reads What You Type}.
@@ -197,9 +196,6 @@ If one wants to perform scaling in either the y-dimension only, a
 dummy argument of 1 must be passed for scaling in the x-dimension.
 Similarly, if one wants to perform scaling in the z-dimension only,
 dummy arguments of 1 must be passed for scaling in the x and y-dimensions.
-
-@c !! START HERE!  Tue 18 May 2021 12:00:04 AM CEST
-@c Rewrite this example.  Below it, add explanations of xscaling, yscaling, and zscaling.
 
 @example
 point p[];
@@ -230,41 +226,69 @@ For scaling a single coordinate of a @code{point}, 3DLDF implements the keywords
 @code{xscale}, @code{yscale} and @code{zscale}:
 
 @example
-
+point p, q;
+p := (1, 1, 1);
+q := p xscaled 2;
+show q;
+@print{} 
+(2.00000000, 1.00000000, 1.00000000, 1.00000000)
+q := p yscaled 3;
+show q;
+@print{}
+(1.00000000, 3.00000000, 1.00000000, 1.00000000)
+q := p zscaled 4;
+show q;
+@print{}
+(1.00000000, 1.00000000, 4.00000000, 1.00000000)
+xscale p by 5;
+show p;
+@print{}
+(5.00000000, 1.00000000, 1.00000000, 1.00000000)
+yscale p by 6;
+show p;
+@print{}
+(5.00000000, 6.00000000, 1.00000000, 1.00000000)
+zscale p by 7;
+show p;
+@print{}
+(5.00000000, 6.00000000, 7.00000000, 1.00000000)
 @end example
-
-
 
 @c ** (2)
 
 @node Shearing Points, Rotating Points, Scaling Points, Transforming Points
 @section Shearing
 
-Shearing is more complicated than shifting or scaling.  The function
-@code{shear()} takes six @code{real} arguments.
-If @math{p} is a @code{Point}, then @code{p.shear(a, b, c, d, e, f)} sets
-@math{x_p} to @math{x_p + ay_p + bz_p}, @math{y_p} to 
-@math{y_p + cx_p + dz_p}, and  
-@math{z_p} to @math{z_p + ex_p + fy_p}.
-In this way, each coordinate of a @code{Point} is modified based on the
+Shearing is more complicated than shifting or scaling.  The @code{sheared}
+keyword takes six numerical arguments.
+If @math{p} and @math{q} are @code{points}, then @code{q := p sheared (a, b, c, d, e, f)} sets
+@math{x_q} to @math{x_q + ay_q + bz_q}, @math{y_q} to 
+@math{y_q + cx_q + dz_q}, and  
+@math{z_q} to @math{z_q + ex_q + fy_q}.
+In this way, each (non-w) coordinate of a @code{point} is modified based on the
 values of the other two coordinates, whereby the influence of the
 other coordinates on the new value is weighted according to the
 arguments. 
 
 @example
-Point p(1, 1, 1);
-p.shear(1);
-p.show("p:");
-@print{} p: (2, 1, 1)
-p.set(1, 1, 1);
-p.shear(1, 1);
-p.show("p:");
-@print{} p: (3, 1, 1)
-p.set(1, 1, 1);
-p.shear(1, 1, 2, 2, 3, 3);
-p.show("p:");
-@print{} p: (3, 5, 7)
+point p, q;
+p := (1, 1, 1);
+q := p sheared (1);
+show q;
+@print{}
+(2.00000000, 1.00000000, 1.00000000, 1.00000000)
+q := p sheared (1, 1);
+show q;
+@print{} 
+(3.00000000, 1.00000000, 1.00000000, 1.00000000)
+q := p sheared (1, 1, 2, 2, 3, 3);
+show q;
+@print{}
+(3.00000000, 5.00000000, 7.00000000, 1.00000000)
 @end example
+
+@c !! START HERE!  Sat 22 May 2021 10:50:21 AM CEST
+@c Rewrite this example.  
 
 @c I've copied the following example from 
 @c the node ``Affine Transformations for Points''.
