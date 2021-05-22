@@ -130,50 +130,49 @@ cout << q.distance;
 @print{} -0.618736
 @end example
 
-@c
-@iftex
-@tex
-\medskip
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(4, 3, -10, 0, 3, 10, 10);}
-\immediate\write\examples{Circle c(origin, 5);}
-\immediate\write\examples{Point N(0, 1);}
-\immediate\write\examples{c *= N.rotate(-35, 30, 20);}
-\immediate\write\examples{N.label("$N$");}
-\immediate\write\examples{Point N_save(N);}
-\immediate\write\examples{Point P(1, 1, 1);}
-\immediate\write\examples{Plane q(P, N);}
-\immediate\write\examples{P.dotlabel("$P$", "lrt"); }
-\immediate\write\examples{c *= N.shift(P);}
-\immediate\write\examples{N.label("$@DBKS{vec}@OCB n@CCB$");}
-\immediate\write\examples{c.filldraw(black, light_gray, "evenly");}
-\immediate\write\examples{Point pt[7];}
-\immediate\write\examples{P.drawarrow(N);}
-\immediate\write\examples{pt[0] = c.get_center();}
-\immediate\write\examples{for (int i = 0; i < 16; i+=2)}
-\immediate\write\examples{  @OCB}
-\immediate\write\examples{    pt[1] = c.get_point(i);}
-\immediate\write\examples{    pt[2] =  pt[1]- pt[0];}
-\immediate\write\examples{    pt[2] *= .5;}
-\immediate\write\examples{    pt[2].shift(pt[1]);}
-\immediate\write\examples{    pt[0].drawarrow(pt[2], black, "evenly");}
-\immediate\write\examples{  @CCB}
-\immediate\write\examples{pt[3] = c.get_center().mediate(c.get_point(15), .667);}
-\immediate\write\examples{pt[4] = c.get_center().mediate(c.get_point(0), .667);}
-\immediate\write\examples{pt[5] = pt[3].mediate(pt[4]);}
-\immediate\write\examples{pt[5].label("$q$");}
-\immediate\write\examples{pt[6].shift(0, -.1);} 
-\immediate\write\examples{draw_axes(0,"d","d","d",black,"","",0,0,pt[6]);}
-\immediate\write\examples{origin.drawarrow(N_save);}
-\immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \medskip
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(4, 3, -10, 0, 3, 10, 10);}
+@c \immediate\write\examples{Circle c(origin, 5);}
+@c \immediate\write\examples{Point N(0, 1);}
+@c \immediate\write\examples{c *= N.rotate(-35, 30, 20);}
+@c \immediate\write\examples{N.label("$N$");}
+@c \immediate\write\examples{Point N_save(N);}
+@c \immediate\write\examples{Point P(1, 1, 1);}
+@c \immediate\write\examples{Plane q(P, N);}
+@c \immediate\write\examples{P.dotlabel("$P$", "lrt"); }
+@c \immediate\write\examples{c *= N.shift(P);}
+@c \immediate\write\examples{N.label("$@DBKS{vec}@OCB n@CCB$");}
+@c \immediate\write\examples{c.filldraw(black, light_gray, "evenly");}
+@c \immediate\write\examples{Point pt[7];}
+@c \immediate\write\examples{P.drawarrow(N);}
+@c \immediate\write\examples{pt[0] = c.get_center();}
+@c \immediate\write\examples{for (int i = 0; i < 16; i+=2)}
+@c \immediate\write\examples{  @OCB}
+@c \immediate\write\examples{    pt[1] = c.get_point(i);}
+@c \immediate\write\examples{    pt[2] =  pt[1]- pt[0];}
+@c \immediate\write\examples{    pt[2] *= .5;}
+@c \immediate\write\examples{    pt[2].shift(pt[1]);}
+@c \immediate\write\examples{    pt[0].drawarrow(pt[2], black, "evenly");}
+@c \immediate\write\examples{  @CCB}
+@c \immediate\write\examples{pt[3] = c.get_center().mediate(c.get_point(15), .667);}
+@c \immediate\write\examples{pt[4] = c.get_center().mediate(c.get_point(0), .667);}
+@c \immediate\write\examples{pt[5] = pt[3].mediate(pt[4]);}
+@c \immediate\write\examples{pt[5].label("$q$");}
+@c \immediate\write\examples{pt[6].shift(0, -.1);} 
+@c \immediate\write\examples{draw_axes(0,"d","d","d",black,"","",0,0,pt[6]);}
+@c \immediate\write\examples{origin.drawarrow(N_save);}
+@c \immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -310,52 +309,52 @@ cout << bp.second;
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(-3, 4, -10, -3, 4, 10, 10);}
-\immediate\write\examples{Circle c(origin, 5);}
-\immediate\write\examples{Point N(0, 1);}
-\immediate\write\examples{c *= N.rotate(-10, 20, 20);}
-\immediate\write\examples{Point P(1, 1, 1);}
-\immediate\write\examples{Plane q(P, N);}
-\immediate\write\examples{P.dotlabel("$P$", "lrt"); }
-\immediate\write\examples{c *= N.shift(P);}
-\immediate\write\examples{N.label("$@DBKS{vec}@OCB n@CCB$", "rt");}
-\immediate\write\examples{c.filldraw(black, light_gray, "evenly");}
-\immediate\write\examples{Point pt[7];}
-\immediate\write\examples{P.drawarrow(N);}
-\immediate\write\examples{pt[0] = c.get_center();}
-\immediate\write\examples{for (int i = 0; i < 16; i+=2)}
-\immediate\write\examples{ @OCB}
-\immediate\write\examples{ pt[1] = c.get_point(i);}
-\immediate\write\examples{ pt[2] = pt[1]- pt[0];}
-\immediate\write\examples{ pt[2] *= .5;}
-\immediate\write\examples{ pt[2].shift(pt[1]);}
-\immediate\write\examples{ pt[0].drawarrow(pt[2], black, "evenly");}
-\immediate\write\examples{ @CCB}
-\immediate\write\examples{pt[3] = c.get_point(12).mediate(c.get_point(14), .4);}
-\immediate\write\examples{pt[4] = pt[0].mediate(pt[3], .8);}
-\immediate\write\examples{pt[4].label("$q$", "");}
-\immediate\write\examples{pt[6].shift(0, -.1);}
-\immediate\write\examples{Point A(4, -2, 4);}
-\immediate\write\examples{Point B(-1, 3, 2);}
-\immediate\write\examples{A.dotlabel("$A$", "bot"); }
-\immediate\write\examples{B.dotlabel("$B$"); }
-\immediate\write\examples{A.draw(B, black, "evenly");}
-\immediate\write\examples{Point C = q.intersection_point(A, B).pt;}
-\immediate\write\examples{C.dotlabel("$C$", "bot"); }
-\immediate\write\examples{real_short bp;}
-\immediate\write\examples{draw_axes(0,"d","d","d",black,"","",0,0,pt[6]);}
-\immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(-3, 4, -10, -3, 4, 10, 10);}
+@c \immediate\write\examples{Circle c(origin, 5);}
+@c \immediate\write\examples{Point N(0, 1);}
+@c \immediate\write\examples{c *= N.rotate(-10, 20, 20);}
+@c \immediate\write\examples{Point P(1, 1, 1);}
+@c \immediate\write\examples{Plane q(P, N);}
+@c \immediate\write\examples{P.dotlabel("$P$", "lrt"); }
+@c \immediate\write\examples{c *= N.shift(P);}
+@c \immediate\write\examples{N.label("$@DBKS{vec}@OCB n@CCB$", "rt");}
+@c \immediate\write\examples{c.filldraw(black, light_gray, "evenly");}
+@c \immediate\write\examples{Point pt[7];}
+@c \immediate\write\examples{P.drawarrow(N);}
+@c \immediate\write\examples{pt[0] = c.get_center();}
+@c \immediate\write\examples{for (int i = 0; i < 16; i+=2)}
+@c \immediate\write\examples{ @OCB}
+@c \immediate\write\examples{ pt[1] = c.get_point(i);}
+@c \immediate\write\examples{ pt[2] = pt[1]- pt[0];}
+@c \immediate\write\examples{ pt[2] *= .5;}
+@c \immediate\write\examples{ pt[2].shift(pt[1]);}
+@c \immediate\write\examples{ pt[0].drawarrow(pt[2], black, "evenly");}
+@c \immediate\write\examples{ @CCB}
+@c \immediate\write\examples{pt[3] = c.get_point(12).mediate(c.get_point(14), .4);}
+@c \immediate\write\examples{pt[4] = pt[0].mediate(pt[3], .8);}
+@c \immediate\write\examples{pt[4].label("$q$", "");}
+@c \immediate\write\examples{pt[6].shift(0, -.1);}
+@c \immediate\write\examples{Point A(4, -2, 4);}
+@c \immediate\write\examples{Point B(-1, 3, 2);}
+@c \immediate\write\examples{A.dotlabel("$A$", "bot"); }
+@c \immediate\write\examples{B.dotlabel("$B$"); }
+@c \immediate\write\examples{A.draw(B, black, "evenly");}
+@c \immediate\write\examples{Point C = q.intersection_point(A, B).pt;}
+@c \immediate\write\examples{C.dotlabel("$C$", "bot"); }
+@c \immediate\write\examples{real_short bp;}
+@c \immediate\write\examples{draw_axes(0,"d","d","d",black,"","",0,0,pt[6]);}
+@c \immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -422,56 +421,56 @@ draw_axes();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP  
-\immediate\write\examples{default_focus.set(3, 2, -10, 3, 2, 10, 10);}
-\immediate\write\examples{Point center(2, 2, 3.5);}
-\immediate\write\examples{center.drawdot();}
-\immediate\write\examples{Reg_Polygon h(center, 6, 4, 80, 30, 10);}
-\immediate\write\examples{h.draw();}
-\immediate\write\examples{Plane q = h.get_plane();}
-\immediate\write\examples{Point N = q.normal;}
-\immediate\write\examples{N.shift(center);}
-\immediate\write\examples{Point N_temp(N);}
-\immediate\write\examples{N_temp *= 1.1;}
-\immediate\write\examples{center.drawarrow(N_temp);}
-\immediate\write\examples{N_temp.label("$@DBKS{vec}@OCB n@CCB$", "rt");}
-\immediate\write\examples{Point P0 = center.mediate(h.get_point(2));}
-\immediate\write\examples{P0.shift(5 * (N - center));}
-\immediate\write\examples{P0.dotlabel("$P_0$"); }
-\immediate\write\examples{Point P1(P0);}
-\immediate\write\examples{P1.rotate(h.get_point(1), h.get_point(4));}
-\immediate\write\examples{P1 = 3 * (P1 - P0);}
-\immediate\write\examples{P1.shift(P0);}
-\immediate\write\examples{P1.shift(3, -.5, -2);}
-\immediate\write\examples{P1.dotlabel("$P_1$"); }
-\immediate\write\examples{bool_point bp = q.intersection_point(P0, P1);}
-\immediate\write\examples{Point i_P = bp.pt;}
-\immediate\write\examples{i_P.dotlabel("$i_P$", "bot"); }
-\immediate\write\examples{P0.draw(P1, black, "evenly");}
-\immediate\write\examples{Point P4 = h.get_point(3).mediate(h.get_point(0), .75);}
-\immediate\write\examples{P4.shift(N - center);}
-\immediate\write\examples{Point P5(P4);}
-\immediate\write\examples{P5.rotate(h.get_point(3), h.get_point(0));}
-\immediate\write\examples{P4.shift(-1, 2);}
-\immediate\write\examples{Path theta(P4, P5);}
-\immediate\write\examples{P4.drawdot(black, "pencircle scaled .75mm");}
-\immediate\write\examples{theta.get_point(0).mediate(theta.get_point(1), .1).label("$@DBKS{theta}$", "rt"); }
-\immediate\write\examples{theta.drawarrow(black);}
-\immediate\write\examples{bp = q.intersection_point(theta);}
-\immediate\write\examples{Point i_theta = bp.pt;}
-\immediate\write\examples{i_theta.dotlabel("$i_@DBKS{theta}$", "rt"); }
-\immediate\write\examples{draw_axes();}
-\immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP  
+@c \immediate\write\examples{default_focus.set(3, 2, -10, 3, 2, 10, 10);}
+@c \immediate\write\examples{Point center(2, 2, 3.5);}
+@c \immediate\write\examples{center.drawdot();}
+@c \immediate\write\examples{Reg_Polygon h(center, 6, 4, 80, 30, 10);}
+@c \immediate\write\examples{h.draw();}
+@c \immediate\write\examples{Plane q = h.get_plane();}
+@c \immediate\write\examples{Point N = q.normal;}
+@c \immediate\write\examples{N.shift(center);}
+@c \immediate\write\examples{Point N_temp(N);}
+@c \immediate\write\examples{N_temp *= 1.1;}
+@c \immediate\write\examples{center.drawarrow(N_temp);}
+@c \immediate\write\examples{N_temp.label("$@DBKS{vec}@OCB n@CCB$", "rt");}
+@c \immediate\write\examples{Point P0 = center.mediate(h.get_point(2));}
+@c \immediate\write\examples{P0.shift(5 * (N - center));}
+@c \immediate\write\examples{P0.dotlabel("$P_0$"); }
+@c \immediate\write\examples{Point P1(P0);}
+@c \immediate\write\examples{P1.rotate(h.get_point(1), h.get_point(4));}
+@c \immediate\write\examples{P1 = 3 * (P1 - P0);}
+@c \immediate\write\examples{P1.shift(P0);}
+@c \immediate\write\examples{P1.shift(3, -.5, -2);}
+@c \immediate\write\examples{P1.dotlabel("$P_1$"); }
+@c \immediate\write\examples{bool_point bp = q.intersection_point(P0, P1);}
+@c \immediate\write\examples{Point i_P = bp.pt;}
+@c \immediate\write\examples{i_P.dotlabel("$i_P$", "bot"); }
+@c \immediate\write\examples{P0.draw(P1, black, "evenly");}
+@c \immediate\write\examples{Point P4 = h.get_point(3).mediate(h.get_point(0), .75);}
+@c \immediate\write\examples{P4.shift(N - center);}
+@c \immediate\write\examples{Point P5(P4);}
+@c \immediate\write\examples{P5.rotate(h.get_point(3), h.get_point(0));}
+@c \immediate\write\examples{P4.shift(-1, 2);}
+@c \immediate\write\examples{Path theta(P4, P5);}
+@c \immediate\write\examples{P4.drawdot(black, "pencircle scaled .75mm");}
+@c \immediate\write\examples{theta.get_point(0).mediate(theta.get_point(1), .1).label("$@DBKS{theta}$", "rt"); }
+@c \immediate\write\examples{theta.drawarrow(black);}
+@c \immediate\write\examples{bp = q.intersection_point(theta);}
+@c \immediate\write\examples{Point i_theta = bp.pt;}
+@c \immediate\write\examples{i_theta.dotlabel("$i_@DBKS{theta}$", "rt"); }
+@c \immediate\write\examples{draw_axes();}
+@c \immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -546,46 +545,46 @@ cout << P3.is_on_plane(q1);
 @end example
 
 @c
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 2, -10, 3, 2, 10, 10);}
-\immediate\write\examples{Rectangle r0(origin, 5, 5, 10, 15, 6);}
-\immediate\write\examples{Rectangle r1(origin, 5, 5, 90, 50, 10);}
-\immediate\write\examples{r1 *= r0.rotate(30, 30, 30);}
-\immediate\write\examples{r1 *= r0.shift(1, -1, 3);}
-\immediate\write\examples{r1.filldraw(black, gray);}
-\immediate\write\examples{r0.draw(black, "", "pencircle scaled .5mm");}
-\immediate\write\examples{r0.get_point(1).label("$r_0$"); }
-\immediate\write\examples{r1.get_point(2).label("$r_1$", "lft"); }
-\immediate\write\examples{Plane q0 = r0.get_plane();}
-\immediate\write\examples{Plane q1 = r1.get_plane();}
-\immediate\write\examples{Line l = q0.intersection_line(q1);}
-\immediate\write\examples{Point P0(l.direction);}
-\immediate\write\examples{P0.shift(l.position);}
-\immediate\write\examples{Point P1(-l.direction);}
-\immediate\write\examples{P1.shift(l.position);}
-\immediate\write\examples{Point P2(P0 - P1);}
-\immediate\write\examples{P2 *= 12.5;}
-\immediate\write\examples{P2.shift(P0);}
-\immediate\write\examples{Point P3(P0 - P1);}
-\immediate\write\examples{P3 *= 7;}
-\immediate\write\examples{P3.shift(P0);}
-\immediate\write\examples{P2.label("$P_2$", "rt"); }
-\immediate\write\examples{P3.label("$P_3$", "rt"); }
-\immediate\write\examples{P2.drawarrow(P3, black, "evenly");}
-\immediate\write\examples{P3.drawarrow(P2, black, "evenly");}
-\immediate\write\examples{P2.mediate(P3, .8).label("$l$", "rt");}
-\immediate\write\examples{draw_axes();} 
-\immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX  
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 2, -10, 3, 2, 10, 10);}
+@c \immediate\write\examples{Rectangle r0(origin, 5, 5, 10, 15, 6);}
+@c \immediate\write\examples{Rectangle r1(origin, 5, 5, 90, 50, 10);}
+@c \immediate\write\examples{r1 *= r0.rotate(30, 30, 30);}
+@c \immediate\write\examples{r1 *= r0.shift(1, -1, 3);}
+@c \immediate\write\examples{r1.filldraw(black, gray);}
+@c \immediate\write\examples{r0.draw(black, "", "pencircle scaled .5mm");}
+@c \immediate\write\examples{r0.get_point(1).label("$r_0$"); }
+@c \immediate\write\examples{r1.get_point(2).label("$r_1$", "lft"); }
+@c \immediate\write\examples{Plane q0 = r0.get_plane();}
+@c \immediate\write\examples{Plane q1 = r1.get_plane();}
+@c \immediate\write\examples{Line l = q0.intersection_line(q1);}
+@c \immediate\write\examples{Point P0(l.direction);}
+@c \immediate\write\examples{P0.shift(l.position);}
+@c \immediate\write\examples{Point P1(-l.direction);}
+@c \immediate\write\examples{P1.shift(l.position);}
+@c \immediate\write\examples{Point P2(P0 - P1);}
+@c \immediate\write\examples{P2 *= 12.5;}
+@c \immediate\write\examples{P2.shift(P0);}
+@c \immediate\write\examples{Point P3(P0 - P1);}
+@c \immediate\write\examples{P3 *= 7;}
+@c \immediate\write\examples{P3.shift(P0);}
+@c \immediate\write\examples{P2.label("$P_2$", "rt"); }
+@c \immediate\write\examples{P3.label("$P_3$", "rt"); }
+@c \immediate\write\examples{P2.drawarrow(P3, black, "evenly");}
+@c \immediate\write\examples{P3.drawarrow(P2, black, "evenly");}
+@c \immediate\write\examples{P2.mediate(P3, .8).label("$l$", "rt");}
+@c \immediate\write\examples{draw_axes();} 
+@c \immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX  
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

@@ -215,40 +215,40 @@ bpp = e.intersection_points(C, D);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point p0(2, 2, 3);}
-\immediate\write\examples{p0.label("$e$", "");}
-\immediate\write\examples{Ellipse e(p0, 3, 4, 30, -60, -5.2);}
-\immediate\write\examples{e.draw();}
-\immediate\write\examples{Point p1 = p0.mediate(e.get_point(11), .5);}
-\immediate\write\examples{Point A = e.get_normal();}
-\immediate\write\examples{A *= 2.5;}
-\immediate\write\examples{A.shift(p1);}
-\immediate\write\examples{A.dotlabel("$A$"); }
-\immediate\write\examples{Point B = A.mediate(p1, 2);}
-\immediate\write\examples{B.dotlabel("$B$", "bot");}
-\immediate\write\examples{A.draw(B, black, "evenly");}
-\immediate\write\examples{bool_point_pair bpp = e.intersection_points(A, B);}
-\immediate\write\examples{bpp.first.pt.dotlabel("$i_0$", "rt"); }
-\immediate\write\examples{Point C(0, 2, 0);}
-\immediate\write\examples{Point D(0, -3.5, 0);}
-\immediate\write\examples{C *= D.rotate(2, 0, -5);}
-\immediate\write\examples{C *= D.shift(e.get_point(4));}
-\immediate\write\examples{C.dotlabel("$C$"); }
-\immediate\write\examples{D.dotlabel("$D$", "bot"); }
-\immediate\write\examples{C.draw(D, black, "evenly");}
-\immediate\write\examples{bpp = e.intersection_points(C, D);}
-\immediate\write\examples{bpp.first.pt.dotlabel("$i_1$", "rt"); }
-\OEX{}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point p0(2, 2, 3);}
+@c \immediate\write\examples{p0.label("$e$", "");}
+@c \immediate\write\examples{Ellipse e(p0, 3, 4, 30, -60, -5.2);}
+@c \immediate\write\examples{e.draw();}
+@c \immediate\write\examples{Point p1 = p0.mediate(e.get_point(11), .5);}
+@c \immediate\write\examples{Point A = e.get_normal();}
+@c \immediate\write\examples{A *= 2.5;}
+@c \immediate\write\examples{A.shift(p1);}
+@c \immediate\write\examples{A.dotlabel("$A$"); }
+@c \immediate\write\examples{Point B = A.mediate(p1, 2);}
+@c \immediate\write\examples{B.dotlabel("$B$", "bot");}
+@c \immediate\write\examples{A.draw(B, black, "evenly");}
+@c \immediate\write\examples{bool_point_pair bpp = e.intersection_points(A, B);}
+@c \immediate\write\examples{bpp.first.pt.dotlabel("$i_0$", "rt"); }
+@c \immediate\write\examples{Point C(0, 2, 0);}
+@c \immediate\write\examples{Point D(0, -3.5, 0);}
+@c \immediate\write\examples{C *= D.rotate(2, 0, -5);}
+@c \immediate\write\examples{C *= D.shift(e.get_point(4));}
+@c \immediate\write\examples{C.dotlabel("$C$"); }
+@c \immediate\write\examples{D.dotlabel("$D$", "bot"); }
+@c \immediate\write\examples{C.draw(D, black, "evenly");}
+@c \immediate\write\examples{bpp = e.intersection_points(C, D);}
+@c \immediate\write\examples{bpp.first.pt.dotlabel("$i_1$", "rt"); }
+@c \OEX{}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -285,28 +285,28 @@ bpp = e.intersection_points(q);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{e.draw();}
-\immediate\write\examples{p0.label("$e$");}
-\immediate\write\examples{A = p0.mediate(e.get_point(3), 1.5);}
-\immediate\write\examples{B = p0.mediate(e.get_point(11), 1.5);}
-\immediate\write\examples{Path q(A, B);} 
-\immediate\write\examples{q.get_point(0).dotlabel("$q_0$", "rt"); }
-\immediate\write\examples{q.get_point(1).dotlabel("$q_1$", "lft"); }
-\immediate\write\examples{q.draw(black, "evenly");}
-\immediate\write\examples{bpp = e.intersection_points(q);} 
-\immediate\write\examples{bpp.first.pt.dotlabel("$i_0$"); }
-\immediate\write\examples{bpp.second.pt.dotlabel("$i_1$", "ulft"); }
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{e.draw();}
+@c \immediate\write\examples{p0.label("$e$");}
+@c \immediate\write\examples{A = p0.mediate(e.get_point(3), 1.5);}
+@c \immediate\write\examples{B = p0.mediate(e.get_point(11), 1.5);}
+@c \immediate\write\examples{Path q(A, B);} 
+@c \immediate\write\examples{q.get_point(0).dotlabel("$q_0$", "rt"); }
+@c \immediate\write\examples{q.get_point(1).dotlabel("$q_1$", "lft"); }
+@c \immediate\write\examples{q.draw(black, "evenly");}
+@c \immediate\write\examples{bpp = e.intersection_points(q);} 
+@c \immediate\write\examples{bpp.first.pt.dotlabel("$i_0$"); }
+@c \immediate\write\examples{bpp.second.pt.dotlabel("$i_1$", "ulft"); }
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -369,25 +369,25 @@ connectors.size() == 8(-0.00662541, -0.888379, -1.79185) ..
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 5, -10, 2, 5, 10, 10); }
-\immediate\write\examples{Circle c(origin, 4, 30, 30, 30);}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{origin.label("$c$", "");}
-\immediate\write\examples{Path p = c.segment(3, 130);}
-\immediate\write\examples{(.75 * p.get_point(2)).label("$p$", "rt");}
-\immediate\write\examples{p.filldraw(black, light_gray, "", "pencircle scaled .75mm");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 5, -10, 2, 5, 10, 10); }
+@c \immediate\write\examples{Circle c(origin, 4, 30, 30, 30);}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{origin.label("$c$", "");}
+@c \immediate\write\examples{Path p = c.segment(3, 130);}
+@c \immediate\write\examples{(.75 * p.get_point(2)).label("$p$", "rt");}
+@c \immediate\write\examples{p.filldraw(black, light_gray, "", "pencircle scaled .75mm");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -423,25 +423,25 @@ Path p = e.half(0, false);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 5, -10, 3, 3, 10, 10); }
-\immediate\write\examples{Ellipse e(origin, 3, 5, 20, 15, 12.5);}
-\immediate\write\examples{e.fill(light_gray);}
-\immediate\write\examples{origin.label("$e$", "");}
-\immediate\write\examples{Path p = e.half(0, false);}
-\immediate\write\examples{p.get_point(p.get_size() / 2).label("$p$");}
-\immediate\write\examples{p.draw(black, "", "pencircle scaled .75mm");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 5, -10, 3, 3, 10, 10); }
+@c \immediate\write\examples{Ellipse e(origin, 3, 5, 20, 15, 12.5);}
+@c \immediate\write\examples{e.fill(light_gray);}
+@c \immediate\write\examples{origin.label("$e$", "");}
+@c \immediate\write\examples{Path p = e.half(0, false);}
+@c \immediate\write\examples{p.get_point(p.get_size() / 2).label("$p$");}
+@c \immediate\write\examples{p.draw(black, "", "pencircle scaled .75mm");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -478,25 +478,25 @@ Path p = e.quarter(180, false);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 5, -10, 3, 3, 10, 10); }
-\immediate\write\examples{Ellipse e(origin, 3, 5, 60, 5, 2.5);}
-\immediate\write\examples{e.fill(light_gray);}
-\immediate\write\examples{origin.label("$e$", "");}
-\immediate\write\examples{Path p = e.quarter(180, false);}
-\immediate\write\examples{p.get_point(p.get_size() / 2).label("$p$", "llft");}
-\immediate\write\examples{p.draw(black, "", "pencircle scaled .75mm");}
-\OEX{} 
-\EGRP
-\EEX 1
-\fi
-\PEX  
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 5, -10, 3, 3, 10, 10); }
+@c \immediate\write\examples{Ellipse e(origin, 3, 5, 60, 5, 2.5);}
+@c \immediate\write\examples{e.fill(light_gray);}
+@c \immediate\write\examples{origin.label("$e$", "");}
+@c \immediate\write\examples{Path p = e.quarter(180, false);}
+@c \immediate\write\examples{p.get_point(p.get_size() / 2).label("$p$", "llft");}
+@c \immediate\write\examples{p.draw(black, "", "pencircle scaled .75mm");}
+@c \OEX{} 
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX  
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

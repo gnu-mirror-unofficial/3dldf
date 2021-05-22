@@ -129,22 +129,22 @@ t.draw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 3, -10, 3, 3, 10, 20);}
-\immediate\write\examples{Tetrahedron t(origin, 3);}
-\immediate\write\examples{t.draw();}
-\immediate\write\examples{draw_axes(gray);} 
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 3, -10, 3, 3, 10, 20);}
+@c \immediate\write\examples{Tetrahedron t(origin, 3);}
+@c \immediate\write\examples{t.draw();}
+@c \immediate\write\examples{draw_axes(gray);} 
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -174,24 +174,24 @@ t.draw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 3, -10, 3, 3, 10, 20);}
-\immediate\write\examples{Point P(1, 0, 1);}
-\immediate\write\examples{P.dotlabel("$P$", "bot"); } 
-\immediate\write\examples{Tetrahedron t(P, 2.75, 30, 32.5, 20);}
-\immediate\write\examples{t.draw();}
-\immediate\write\examples{draw_axes(gray);} 
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 3, -10, 3, 3, 10, 20);}
+@c \immediate\write\examples{Point P(1, 0, 1);}
+@c \immediate\write\examples{P.dotlabel("$P$", "bot"); } 
+@c \immediate\write\examples{Tetrahedron t(P, 2.75, 30, 32.5, 20);}
+@c \immediate\write\examples{t.draw();}
+@c \immediate\write\examples{draw_axes(gray);} 
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -247,27 +247,27 @@ for (vector<Reg_Polygon*>::iterator iter = vrp.begin();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{vector<Reg_Polygon*> vrp = Tetrahedron::get_net(2);}
-\immediate\write\examples{for (vector<Reg_Polygon*>::iterator iter = vrp.begin();}
-\immediate\write\examples{     iter != vrp.end();}
-\immediate\write\examples{     ++iter)}
-\immediate\write\examples{  @OCB}
-\immediate\write\examples{    (**iter).draw();}
-\immediate\write\examples{  @CCB}
-\immediate\write\examples{draw_axes(gray, 0, "d", "", "rt"); }
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
-\OEX{Projections::PARALLEL_X_Z }
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{vector<Reg_Polygon*> vrp = Tetrahedron::get_net(2);}
+@c \immediate\write\examples{for (vector<Reg_Polygon*>::iterator iter = vrp.begin();}
+@c \immediate\write\examples{     iter != vrp.end();}
+@c \immediate\write\examples{     ++iter)}
+@c \immediate\write\examples{  @OCB}
+@c \immediate\write\examples{    (**iter).draw();}
+@c \immediate\write\examples{  @CCB}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "", "rt"); }
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
+@c \OEX{Projections::PARALLEL_X_Z }
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -328,19 +328,19 @@ Tetrahedron::draw_net(3, true);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Tetrahedron::draw_net(3, true);} 
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Tetrahedron::draw_net(3, true);} 
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -425,23 +425,23 @@ d.draw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 5, -10, 2, 5, 10, 10);} 
-\immediate\write\examples{Point P(-1, -2, 4);}
-\immediate\write\examples{P.dotlabel("$P$"); } 
-\immediate\write\examples{Dodecahedron d(P, 3, 12.5, 16, 2);}
-\immediate\write\examples{d.draw();}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "top"); } 
-\OEX{}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 5, -10, 2, 5, 10, 10);} 
+@c \immediate\write\examples{Point P(-1, -2, 4);}
+@c \immediate\write\examples{P.dotlabel("$P$"); } 
+@c \immediate\write\examples{Dodecahedron d(P, 3, 12.5, 16, 2);}
+@c \immediate\write\examples{d.draw();}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "top"); } 
+@c \OEX{}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -469,19 +469,19 @@ d.filldraw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{d.filldraw();}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "top"); } 
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{d.filldraw();}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "top"); } 
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -529,22 +529,22 @@ for(vector<Reg_Polygon*>::iterator iter = vrp.begin();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{vector<Reg_Polygon*> vrp = Dodecahedron::get_net(1);}
-\immediate\write\examples{for(vector<Reg_Polygon*>::iterator iter = vrp.begin();}
-\immediate\write\examples{    iter != vrp.end(); ++iter)}
-\immediate\write\examples{       (**iter).draw();}
-\OEX{Projections::PARALLEL_X_Z}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{vector<Reg_Polygon*> vrp = Dodecahedron::get_net(1);}
+@c \immediate\write\examples{for(vector<Reg_Polygon*>::iterator iter = vrp.begin();}
+@c \immediate\write\examples{    iter != vrp.end(); ++iter)}
+@c \immediate\write\examples{       (**iter).draw();}
+@c \OEX{Projections::PARALLEL_X_Z}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -589,19 +589,19 @@ Dodecahedron::draw_net(1, false);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Dodecahedron::draw_net(1, false);} 
-\OEX{Projections::PARALLEL_X_Z}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Dodecahedron::draw_net(1, false);} 
+@c \OEX{Projections::PARALLEL_X_Z}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -680,20 +680,20 @@ i.draw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 5, -10, 3, 5, 10, 10);  }
-\immediate\write\examples{Icosahedron i(origin, 3, 0, 10);}
-\immediate\write\examples{i.draw();} 
-\OEX{}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 5, -10, 3, 5, 10, 10);  }
+@c \immediate\write\examples{Icosahedron i(origin, 3, 0, 10);}
+@c \immediate\write\examples{i.draw();} 
+@c \OEX{}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -721,18 +721,18 @@ i.filldraw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{i.filldraw();} 
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{i.filldraw();} 
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -779,22 +779,22 @@ for (vector<Reg_Polygon*>::iterator iter = vrp.begin();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{vector<Reg_Polygon*> vrp = Icosahedron::get_net(1.5);}
-\immediate\write\examples{for (vector<Reg_Polygon*>::iterator iter = vrp.begin();}
-\immediate\write\examples{     iter != vrp.end(); ++iter)}
-\immediate\write\examples{   (**iter).draw();      }
-\OEX{Projections::PARALLEL_X_Z}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{vector<Reg_Polygon*> vrp = Icosahedron::get_net(1.5);}
+@c \immediate\write\examples{for (vector<Reg_Polygon*>::iterator iter = vrp.begin();}
+@c \immediate\write\examples{     iter != vrp.end(); ++iter)}
+@c \immediate\write\examples{   (**iter).draw();      }
+@c \OEX{Projections::PARALLEL_X_Z}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -839,19 +839,19 @@ Icosahedron::draw_net(2, false);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Icosahedron::draw_net(2, false);}
-\OEX{Projections::PARALLEL_X_Z}
-\EGRP
-\EEX 1
-\fi
-\PEX 
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Icosahedron::draw_net(2, false);}
+@c \OEX{Projections::PARALLEL_X_Z}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX 
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

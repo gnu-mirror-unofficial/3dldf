@@ -44,30 +44,30 @@ Point P(0, 1);
 P.drawdot(Colors::black, "pencircle scaled 3mm");
 @end example
 
-@iftex 
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point P(0, 1);}
-\immediate\write\examples{P.drawdot(Colors::black, "pencircle scaled 3mm");} 
-\immediate\write\examples{Point p0(P);p0.shift(0, .5);p0.label("$P$","");}
-\immediate\write\examples{Point mid;}
-\immediate\write\examples{mid = P.mediate(p0);}
-\immediate\write\examples{Point pt[4];}
-\immediate\write\examples{for (int i = 0; i < 4; ++i)}
-\immediate\write\examples{  pt[i] = mid;}
-\immediate\write\examples{pt[0].shift(-.5, -.5);}
-\immediate\write\examples{pt[1].shift(.5, -.5);}
-\immediate\write\examples{pt[2].shift(.5, .5);}
-\immediate\write\examples{pt[3].shift(-.5, .5);}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point P(0, 1);}
+@c \immediate\write\examples{P.drawdot(Colors::black, "pencircle scaled 3mm");} 
+@c \immediate\write\examples{Point p0(P);p0.shift(0, .5);p0.label("$P$","");}
+@c \immediate\write\examples{Point mid;}
+@c \immediate\write\examples{mid = P.mediate(p0);}
+@c \immediate\write\examples{Point pt[4];}
+@c \immediate\write\examples{for (int i = 0; i < 4; ++i)}
+@c \immediate\write\examples{  pt[i] = mid;}
+@c \immediate\write\examples{pt[0].shift(-.5, -.5);}
+@c \immediate\write\examples{pt[1].shift(.5, -.5);}
+@c \immediate\write\examples{pt[2].shift(.5, .5);}
+@c \immediate\write\examples{pt[3].shift(-.5, .5);}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -108,31 +108,31 @@ smaller pen. @code{undraw()} does not take a @code{Color} argument.
 p.undrawdot("pencircle scaled 2mm");
 @end example
 
-@iftex 
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point P(0, 1);}
-\immediate\write\examples{P.drawdot(black, "pencircle scaled 3mm");} 
-\immediate\write\examples{P.undrawdot("pencircle scaled 2mm");} 
-\immediate\write\examples{Point p0(P);p0.shift(0, .5);p0.label("$P$", "");} 
-\immediate\write\examples{Point mid;}
-\immediate\write\examples{mid = P.mediate(p0);}
-\immediate\write\examples{Point pt[4];}
-\immediate\write\examples{for (int i = 0; i < 4; ++i)}
-\immediate\write\examples{  pt[i] = mid;}
-\immediate\write\examples{pt[0].shift(-.5, -.5);}
-\immediate\write\examples{pt[1].shift(.5, -.5);}
-\immediate\write\examples{pt[2].shift(.5, .5);}
-\immediate\write\examples{pt[3].shift(-.5, .5);}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point P(0, 1);}
+@c \immediate\write\examples{P.drawdot(black, "pencircle scaled 3mm");} 
+@c \immediate\write\examples{P.undrawdot("pencircle scaled 2mm");} 
+@c \immediate\write\examples{Point p0(P);p0.shift(0, .5);p0.label("$P$", "");} 
+@c \immediate\write\examples{Point mid;}
+@c \immediate\write\examples{mid = P.mediate(p0);}
+@c \immediate\write\examples{Point pt[4];}
+@c \immediate\write\examples{for (int i = 0; i < 4; ++i)}
+@c \immediate\write\examples{  pt[i] = mid;}
+@c \immediate\write\examples{pt[0].shift(-.5, -.5);}
+@c \immediate\write\examples{pt[1].shift(.5, -.5);}
+@c \immediate\write\examples{pt[2].shift(.5, .5);}
+@c \immediate\write\examples{pt[3].shift(-.5, .5);}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -174,23 +174,23 @@ Point p1(2, 2);
 p0.draw(p1);
 @end example
 
-@iftex 
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point p0;}
-\immediate\write\examples{Point p1(2, 2);}
-\immediate\write\examples{p0.draw(p1);}
-\immediate\write\examples{p0.dotlabel("$p_0$", "lft");}
-\immediate\write\examples{p1.dotlabel("$p_1$", "rt");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point p0;}
+@c \immediate\write\examples{Point p1(2, 2);}
+@c \immediate\write\examples{p0.draw(p1);}
+@c \immediate\write\examples{p0.dotlabel("$p_0$", "lft");}
+@c \immediate\write\examples{p1.dotlabel("$p_1$", "rt");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -237,24 +237,24 @@ isn't used here.
 p0.draw(p1, Colors::gray, "", "pensquare scaled .5cm rotated 45");
 @end example
 
-@iftex 
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{Point p0;}
-\immediate\write\examples{Point p1(2, 2);}
-\immediate\write\examples{p0.draw(p1, Colors::gray, "",} 
-\immediate\write\examples{"pensquare scaled .5cm rotated 45");}
-\immediate\write\examples{p0.dotlabel("$p_0$", "lft");}
-\immediate\write\examples{p1.dotlabel("$p_1$", "rt");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{Point p0;}
+@c \immediate\write\examples{Point p1(2, 2);}
+@c \immediate\write\examples{p0.draw(p1, Colors::gray, "",} 
+@c \immediate\write\examples{"pensquare scaled .5cm rotated 45");}
+@c \immediate\write\examples{p0.dotlabel("$p_0$", "lft");}
+@c \immediate\write\examples{p1.dotlabel("$p_1$", "rt");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -290,25 +290,25 @@ of the middle of the region are not undrawn.
 p0.undraw(p1, "evenly scaled 6", "pencircle scaled .2cm");
 @end example
 
-@iftex 
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{Point p0;}
-\immediate\write\examples{Point p1(2, 2);}
-\immediate\write\examples{p0.draw(p1, Colors::gray, "evenly",} 
-\immediate\write\examples{"pensquare scaled .5cm rotated 45");}
-\immediate\write\examples{p0.undraw(p1, "evenly scaled 6", "pencircle scaled .2cm");}
-\immediate\write\examples{p0.dotlabel("$p_0$", "lft");}
-\immediate\write\examples{p1.dotlabel("$p_1$", "rt");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{Point p0;}
+@c \immediate\write\examples{Point p1(2, 2);}
+@c \immediate\write\examples{p0.draw(p1, Colors::gray, "evenly",} 
+@c \immediate\write\examples{"pensquare scaled .5cm rotated 45");}
+@c \immediate\write\examples{p0.undraw(p1, "evenly scaled 6", "pencircle scaled .2cm");}
+@c \immediate\write\examples{p0.dotlabel("$p_0$", "lft");}
+@c \immediate\write\examples{p1.dotlabel("$p_1$", "rt");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -379,37 +379,37 @@ p4.label(4);
 p5.label("$\\leftarrow p_5$", "rt"); 
 @end example
 
-@iftex 
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point p0;}
-\immediate\write\examples{Point p1(1);}
-\immediate\write\examples{Point p2(2);}
-\immediate\write\examples{Point p3(p0);}
-\immediate\write\examples{Point p4(p1);}
-\immediate\write\examples{Point p5(p2);}
-\immediate\write\examples{p3 *= p4 *= p5.shift(0, 1);}
-\immediate\write\examples{p0.draw(p1);}
-\immediate\write\examples{p1.draw(p2);}
-\immediate\write\examples{p2.draw(p5);}
-\immediate\write\examples{p5.draw(p4);}
-\immediate\write\examples{p4.draw(p3);}
-\immediate\write\examples{p3.draw(p0);}
-\immediate\write\examples{p0.label("$p_0$", "");}
-\immediate\write\examples{p1.dotlabel(1);}
-\immediate\write\examples{p2.dotlabel("p2", "bot"); }
-\immediate\write\examples{p3.dotlabel("This is $p_3$", "lft"); }
-\immediate\write\examples{p4.label(4);}
-\immediate\write\examples{p5.label("$\DBKS{leftarrow} p_5$", "rt"); }
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point p0;}
+@c \immediate\write\examples{Point p1(1);}
+@c \immediate\write\examples{Point p2(2);}
+@c \immediate\write\examples{Point p3(p0);}
+@c \immediate\write\examples{Point p4(p1);}
+@c \immediate\write\examples{Point p5(p2);}
+@c \immediate\write\examples{p3 *= p4 *= p5.shift(0, 1);}
+@c \immediate\write\examples{p0.draw(p1);}
+@c \immediate\write\examples{p1.draw(p2);}
+@c \immediate\write\examples{p2.draw(p5);}
+@c \immediate\write\examples{p5.draw(p4);}
+@c \immediate\write\examples{p4.draw(p3);}
+@c \immediate\write\examples{p3.draw(p0);}
+@c \immediate\write\examples{p0.label("$p_0$", "");}
+@c \immediate\write\examples{p1.dotlabel(1);}
+@c \immediate\write\examples{p2.dotlabel("p2", "bot"); }
+@c \immediate\write\examples{p3.dotlabel("This is $p_3$", "lft"); }
+@c \immediate\write\examples{p4.label(4);}
+@c \immediate\write\examples{p5.label("$\DBKS{leftarrow} p_5$", "rt"); }
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

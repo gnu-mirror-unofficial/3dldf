@@ -90,22 +90,22 @@ r.draw();
 @end example
 
 @c
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(-5, 10, -10, -5, 10, 10, 10);} 
-\immediate\write\examples{Reg_Polygon r(origin, 3, 2.75, 10, 15, 12.5);} 
-\immediate\write\examples{r.draw();} 
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "rt");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(-5, 10, -10, -5, 10, 10, 10);} 
+@c \immediate\write\examples{Reg_Polygon r(origin, 3, 2.75, 10, 15, 12.5);} 
+@c \immediate\write\examples{r.draw();} 
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "rt");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -151,26 +151,26 @@ for (int i = 3; i <= 16; ++i)
 @end example
 
 @c
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Reg_Polygon r;}
-\immediate\write\examples{real j = .5;}
-\immediate\write\examples{for (int i = 3; i <= 16; ++i)}
-\immediate\write\examples{  @OCB}
-\immediate\write\examples{    r.set(origin, i, j);}
-\immediate\write\examples{    r.draw();}
-\immediate\write\examples{    j += .5;}
-\immediate\write\examples{  @CCB}
-\OEX{Projections::PARALLEL_X_Z}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Reg_Polygon r;}
+@c \immediate\write\examples{real j = .5;}
+@c \immediate\write\examples{for (int i = 3; i <= 16; ++i)}
+@c \immediate\write\examples{  @OCB}
+@c \immediate\write\examples{    r.set(origin, i, j);}
+@c \immediate\write\examples{    r.draw();}
+@c \immediate\write\examples{    j += .5;}
+@c \immediate\write\examples{  @CCB}
+@c \OEX{Projections::PARALLEL_X_Z}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -240,27 +240,27 @@ c.unfilldraw(black);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 5, -5, 3, 0, 1, 10);}
-\immediate\write\examples{Point P(0, -1, 1);}
-\immediate\write\examples{Reg_Polygon h(P, 6, 4, 15, 12, 11.5);}
-\immediate\write\examples{h.filldraw(black, gray);}
-\immediate\write\examples{h.get_point(4).mediate(h.get_point(5)).label("$h$", "urt");}
-\immediate\write\examples{Circle c = h.in_circle();}
-\immediate\write\examples{c.unfilldraw(black);}
-\immediate\write\examples{P.label("$c$");}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 5, -5, 3, 0, 1, 10);}
+@c \immediate\write\examples{Point P(0, -1, 1);}
+@c \immediate\write\examples{Reg_Polygon h(P, 6, 4, 15, 12, 11.5);}
+@c \immediate\write\examples{h.filldraw(black, gray);}
+@c \immediate\write\examples{h.get_point(4).mediate(h.get_point(5)).label("$h$", "urt");}
+@c \immediate\write\examples{Circle c = h.in_circle();}
+@c \immediate\write\examples{c.unfilldraw(black);}
+@c \immediate\write\examples{P.label("$c$");}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -298,26 +298,26 @@ h.draw_in_circle();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
-\immediate\write\examples{Point P(0, 1, 1);}
-\immediate\write\examples{Reg_Polygon h(P, 7, 4, 80, 2, 5);}
-\immediate\write\examples{h.draw(black, "evenly");}
-\immediate\write\examples{h.get_point(0).label("$h$");}
-\immediate\write\examples{h.draw_in_circle();}
-\immediate\write\examples{P.label("$c$", "");}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
+@c \immediate\write\examples{Point P(0, 1, 1);}
+@c \immediate\write\examples{Reg_Polygon h(P, 7, 4, 80, 2, 5);}
+@c \immediate\write\examples{h.draw(black, "evenly");}
+@c \immediate\write\examples{h.get_point(0).label("$h$");}
+@c \immediate\write\examples{h.draw_in_circle();}
+@c \immediate\write\examples{P.label("$c$", "");}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -354,27 +354,27 @@ h.unfilldraw(black);
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 5, -5, 3, 0, 1, 10);}
-\immediate\write\examples{Point P(0, -1, 1);}
-\immediate\write\examples{Reg_Polygon h(P, 6, 4, 15, 12, 11.5);}
-\immediate\write\examples{Circle c = h.out_circle();}
-\immediate\write\examples{c.filldraw(black, gray);}
-\immediate\write\examples{h.unfilldraw(black);}
-\immediate\write\examples{P.label("$h$");}
-\immediate\write\examples{c.get_point(7).label("$c$");}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 5, -5, 3, 0, 1, 10);}
+@c \immediate\write\examples{Point P(0, -1, 1);}
+@c \immediate\write\examples{Reg_Polygon h(P, 6, 4, 15, 12, 11.5);}
+@c \immediate\write\examples{Circle c = h.out_circle();}
+@c \immediate\write\examples{c.filldraw(black, gray);}
+@c \immediate\write\examples{h.unfilldraw(black);}
+@c \immediate\write\examples{P.label("$h$");}
+@c \immediate\write\examples{c.get_point(7).label("$c$");}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -412,26 +412,26 @@ h.draw_out_circle();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
-\immediate\write\examples{Point P(0, 1, 1);}
-\immediate\write\examples{Reg_Polygon h(P, 7, 4, 80, 2, 5);}
-\immediate\write\examples{h.draw(black, "evenly");}
-\immediate\write\examples{Circle c = h.draw_out_circle();}
-\immediate\write\examples{c.get_point(0).label("$c$");}
-\immediate\write\examples{P.label("$h$", "");}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
+@c \immediate\write\examples{Point P(0, 1, 1);}
+@c \immediate\write\examples{Reg_Polygon h(P, 7, 4, 80, 2, 5);}
+@c \immediate\write\examples{h.draw(black, "evenly");}
+@c \immediate\write\examples{Circle c = h.draw_out_circle();}
+@c \immediate\write\examples{c.get_point(0).label("$c$");}
+@c \immediate\write\examples{P.label("$h$", "");}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "top");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
  
 @ifhtml
 @html

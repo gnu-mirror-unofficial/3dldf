@@ -62,35 +62,35 @@ cout << q3.get_line_switch();
 @print{} 0
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point p0;}
-\immediate\write\examples{p0.dotlabel("$p_0$", "bot"); }
-\immediate\write\examples{Point p1(1, 1);}
-\immediate\write\examples{p1.dotlabel("$p_1$"); }
-\immediate\write\examples{Point p2(2, 3);}
-\immediate\write\examples{p2.dotlabel("$p_2$"); }
-\immediate\write\examples{Path q0(p0, p1);}
-\immediate\write\examples{Path q1;}
-\immediate\write\examples{q1 = q0;}
-\immediate\write\examples{Path q2 = p0.draw(p1);}
-\immediate\write\examples{Path q3("..", false, &p1, &p2, &p0, 0);}
-\immediate\write\examples{q3.draw(black, "evenly");}
-\immediate\write\examples{Point p4(p0.mediate(p1));}
-\immediate\write\examples{p4.label("$q_0 @DBKS{equiv} q_1 @DBKS{equiv} q_2$", "rt");}
-\immediate\write\examples{Point p5(p2);}
-\immediate\write\examples{p5.shift(-3, -1);}
-\immediate\write\examples{p5.label("$q_3$");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point p0;}
+@c \immediate\write\examples{p0.dotlabel("$p_0$", "bot"); }
+@c \immediate\write\examples{Point p1(1, 1);}
+@c \immediate\write\examples{p1.dotlabel("$p_1$"); }
+@c \immediate\write\examples{Point p2(2, 3);}
+@c \immediate\write\examples{p2.dotlabel("$p_2$"); }
+@c \immediate\write\examples{Path q0(p0, p1);}
+@c \immediate\write\examples{Path q1;}
+@c \immediate\write\examples{q1 = q0;}
+@c \immediate\write\examples{Path q2 = p0.draw(p1);}
+@c \immediate\write\examples{Path q3("..", false, &p1, &p2, &p0, 0);}
+@c \immediate\write\examples{q3.draw(black, "evenly");}
+@c \immediate\write\examples{Point p4(p0.mediate(p1));}
+@c \immediate\write\examples{p4.label("$q_0 @DBKS{equiv} q_1 @DBKS{equiv} q_2$", "rt");}
+@c \immediate\write\examples{Point p5(p2);}
+@c \immediate\write\examples{p5.shift(-3, -1);}
+@c \immediate\write\examples{p5.label("$q_3$");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -264,28 +264,28 @@ p.show("p:");
    (-2, -2.5, -1) -- (3, 2, 2.5);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 2, -10, 2, 2, 10, 10);} 
-\immediate\write\examples{Point A(-2, -2.5, -1);}
-\immediate\write\examples{Point B(3, 2, 2.5);}
-\immediate\write\examples{A.dotlabel("$A$", "llft"); }
-\immediate\write\examples{A.label(Point::WORLD_VALUES, "lrt");} 
-\immediate\write\examples{B.dotlabel("$B$", "ulft"); }
-\immediate\write\examples{B.label(Point::WORLD_VALUES, "urt");} 
-\immediate\write\examples{Path p(A, B);}
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{draw_axes(gray);} 
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 2, -10, 2, 2, 10, 10);} 
+@c \immediate\write\examples{Point A(-2, -2.5, -1);}
+@c \immediate\write\examples{Point B(3, 2, 2.5);}
+@c \immediate\write\examples{A.dotlabel("$A$", "llft"); }
+@c \immediate\write\examples{A.label(Point::WORLD_VALUES, "lrt");} 
+@c \immediate\write\examples{B.dotlabel("$B$", "ulft"); }
+@c \immediate\write\examples{B.label(Point::WORLD_VALUES, "urt");} 
+@c \immediate\write\examples{Path p(A, B);}
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{draw_axes(gray);} 
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -375,28 +375,28 @@ p.draw();
 
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point P0;}
-\immediate\write\examples{Point P1(2);}
-\immediate\write\examples{Point P2(2,2);}
-\immediate\write\examples{Point P3(0,2);}
-\immediate\write\examples{Path p("..", true, &P0, &P1, &P2, &P3, 0);}
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{P0.dotlabel("$P_0$", "llft");} 
-\immediate\write\examples{P1.dotlabel("$P_1$", "lrt");}
-\immediate\write\examples{P2.dotlabel("$P_2$");} 
-\immediate\write\examples{P3.dotlabel("$P_3$");} 
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point P0;}
+@c \immediate\write\examples{Point P1(2);}
+@c \immediate\write\examples{Point P2(2,2);}
+@c \immediate\write\examples{Point P3(0,2);}
+@c \immediate\write\examples{Path p("..", true, &P0, &P1, &P2, &P3, 0);}
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{P0.dotlabel("$P_0$", "llft");} 
+@c \immediate\write\examples{P1.dotlabel("$P_1$", "lrt");}
+@c \immediate\write\examples{P2.dotlabel("$P_2$");} 
+@c \immediate\write\examples{P3.dotlabel("$P_3$");} 
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -436,29 +436,29 @@ q.show("q:");
    (-1.07861, 0.514487, 6.29505) ... (2.84065, -3.26065, 6.29505);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 2, -10, 2, 2, 10, 10);}
-\immediate\write\examples{Point P[4];}
-\immediate\write\examples{P[0].set(2, 1, 3);}
-\immediate\write\examples{P[3] = P[2] =  P[1] = P[0];}
-\immediate\write\examples{P[3] *= P[2] *=  P[1].rotate(3, 12, 18);}
-\immediate\write\examples{P[3] *= P[2].shift(-2, -1, 3);}
-\immediate\write\examples{P[3].shear(1.5, .5, 3.5);}
-\immediate\write\examples{Path q("...", false, &P[0], &P[1], &P[2], &P[3], 0);}
-\immediate\write\examples{q.dotlabel(); }
-\immediate\write\examples{q.draw();}
-\immediate\write\examples{draw_axes(gray);}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 2, -10, 2, 2, 10, 10);}
+@c \immediate\write\examples{Point P[4];}
+@c \immediate\write\examples{P[0].set(2, 1, 3);}
+@c \immediate\write\examples{P[3] = P[2] =  P[1] = P[0];}
+@c \immediate\write\examples{P[3] *= P[2] *=  P[1].rotate(3, 12, 18);}
+@c \immediate\write\examples{P[3] *= P[2].shift(-2, -1, 3);}
+@c \immediate\write\examples{P[3].shear(1.5, .5, 3.5);}
+@c \immediate\write\examples{Path q("...", false, &P[0], &P[1], &P[2], &P[3], 0);}
+@c \immediate\write\examples{q.dotlabel(); }
+@c \immediate\write\examples{q.draw();}
+@c \immediate\write\examples{draw_axes(gray);}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -510,28 +510,28 @@ Point D(1, 3);
 Path p(&A, "..", &B, "..", &C, "--", &D, "...", 0);
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point A;} 
-\immediate\write\examples{Point B(2, 0);}
-\immediate\write\examples{Point C(3, 2);}
-\immediate\write\examples{Point D(1, 3);}
-\immediate\write\examples{A.dotlabel("A", "llft");} 
-\immediate\write\examples{B.dotlabel("B", "lrt");} 
-\immediate\write\examples{C.dotlabel("C");} 
-\immediate\write\examples{D.dotlabel("D");}
-\immediate\write\examples{Path p(&A, "..", &B, "..", &C, "--", &D, "...", 0);}
-\immediate\write\examples{p.draw();} 
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point A;} 
+@c \immediate\write\examples{Point B(2, 0);}
+@c \immediate\write\examples{Point C(3, 2);}
+@c \immediate\write\examples{Point D(1, 3);}
+@c \immediate\write\examples{A.dotlabel("A", "llft");} 
+@c \immediate\write\examples{B.dotlabel("B", "lrt");} 
+@c \immediate\write\examples{C.dotlabel("C");} 
+@c \immediate\write\examples{D.dotlabel("D");}
+@c \immediate\write\examples{Path p(&A, "..", &B, "..", &C, "--", &D, "...", 0);}
+@c \immediate\write\examples{p.draw();} 
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -685,39 +685,39 @@ q.show("q:");
    (-0.5, 3, 0) -- cycle;
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point A(-2, 2);}
-\immediate\write\examples{Point B(-2, -2);}
-\immediate\write\examples{Point C(2, -2);}
-\immediate\write\examples{Point D(2, 2);}
-\immediate\write\examples{A.dotlabel("$A$", "ulft"); }
-\immediate\write\examples{B.dotlabel("$B$", "llft"); }
-\immediate\write\examples{C.dotlabel("$C$", "lrt"); }
-\immediate\write\examples{D.dotlabel("$D$", "urt"); }
-\immediate\write\examples{Path q("--", false, &A, &B, &C, &D, 0);}
-\immediate\write\examples{Point E(1, 2);}
-\immediate\write\examples{Point F(0, 4);}
-\immediate\write\examples{Point G(-.5, 3);}
-\immediate\write\examples{E.dotlabel("$E$", "urt");}
-\immediate\write\examples{F.dotlabel("$F$");  }
-\immediate\write\examples{G.dotlabel("$G$", "rt"); }
-\immediate\write\examples{Path r("..", false, &E, &F, &G, 0);}
-\immediate\write\examples{q.append(r, "..", true);}
-\immediate\write\examples{q += "..";}
-\immediate\write\examples{q += "--";}
-\immediate\write\examples{q.set_cycle();}
-\immediate\write\examples{q.draw();}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point A(-2, 2);}
+@c \immediate\write\examples{Point B(-2, -2);}
+@c \immediate\write\examples{Point C(2, -2);}
+@c \immediate\write\examples{Point D(2, 2);}
+@c \immediate\write\examples{A.dotlabel("$A$", "ulft"); }
+@c \immediate\write\examples{B.dotlabel("$B$", "llft"); }
+@c \immediate\write\examples{C.dotlabel("$C$", "lrt"); }
+@c \immediate\write\examples{D.dotlabel("$D$", "urt"); }
+@c \immediate\write\examples{Path q("--", false, &A, &B, &C, &D, 0);}
+@c \immediate\write\examples{Point E(1, 2);}
+@c \immediate\write\examples{Point F(0, 4);}
+@c \immediate\write\examples{Point G(-.5, 3);}
+@c \immediate\write\examples{E.dotlabel("$E$", "urt");}
+@c \immediate\write\examples{F.dotlabel("$F$");  }
+@c \immediate\write\examples{G.dotlabel("$G$", "rt"); }
+@c \immediate\write\examples{Path r("..", false, &E, &F, &G, 0);}
+@c \immediate\write\examples{q.append(r, "..", true);}
+@c \immediate\write\examples{q += "..";}
+@c \immediate\write\examples{q += "--";}
+@c \immediate\write\examples{q.set_cycle();}
+@c \immediate\write\examples{q.draw();}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -870,32 +870,32 @@ p.scale(2, 2);
 p.draw();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{origin.dotlabel("(0, 0, 0)", "bot");} 
-\immediate\write\examples{Point pt[8];}
-\immediate\write\examples{pt[0] = (-1, -1);}
-\immediate\write\examples{for (int i = 1; i < 8; ++i)}
-\BGRP
-\immediate\write\examples{pt[i] = pt[0];}
-\immediate\write\examples{pt[i].rotate(0, 0, i * 45);}
-\EGRP 
-\immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], &pt[3], }
-\immediate\write\examples{&pt[4], &pt[5], &pt[6],}
-\immediate\write\examples{&pt[7], 0); }
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{p.scale(2, 2);}
-\immediate\write\examples{p.draw();}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{origin.dotlabel("(0, 0, 0)", "bot");} 
+@c \immediate\write\examples{Point pt[8];}
+@c \immediate\write\examples{pt[0] = (-1, -1);}
+@c \immediate\write\examples{for (int i = 1; i < 8; ++i)}
+@c \BGRP
+@c \immediate\write\examples{pt[i] = pt[0];}
+@c \immediate\write\examples{pt[i].rotate(0, 0, i * 45);}
+@c \EGRP 
+@c \immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], &pt[3], }
+@c \immediate\write\examples{&pt[4], &pt[5], &pt[6],}
+@c \immediate\write\examples{&pt[7], 0); }
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{p.scale(2, 2);}
+@c \immediate\write\examples{p.draw();}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -937,38 +937,38 @@ q.shear(1.5, 2, 2.5, 3, 3.5, 5);
 q.filldraw(black, light_gray);
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(3, 3, -10, 3, 3, 10, 10);}
-\immediate\write\examples{Point p0;}
-\immediate\write\examples{Point p1(1);}
-\immediate\write\examples{Point p2(1, 1);}
-\immediate\write\examples{Point p3(0, 1);}
-\immediate\write\examples{Path q("--", true, &p0, &p1, &p2, &p3, 0);}
-\immediate\write\examples{q.rotate(0, 45);}
-\immediate\write\examples{q.shift(1);}
-\immediate\write\examples{q.filldraw(black, light_gray);}
-\immediate\write\examples{q.get_point(0).dotlabel(Point::WORLD_VALUES, "llft"); }
-\immediate\write\examples{q.get_point(1).dotlabel(Point::WORLD_VALUES, "rt"); }
-\immediate\write\examples{q.get_point(2).dotlabel(Point::WORLD_VALUES, "rt"); }
-\immediate\write\examples{q.get_point(3).dotlabel(Point::WORLD_VALUES, "lft"); }
-\immediate\write\examples{q.shear(1.5, 2, 2.5, 3, 3.5, 5);}
-\immediate\write\examples{q.filldraw(black, light_gray);}
-\immediate\write\examples{q.get_point(0).dotlabel(Point::WORLD_VALUES, "ulft"); }
-\immediate\write\examples{q.get_point(1).dotlabel(Point::WORLD_VALUES, "lft"); }
-\immediate\write\examples{q.get_point(2).dotlabel(Point::WORLD_VALUES, "rt"); }
-\immediate\write\examples{q.get_point(3).dotlabel(Point::WORLD_VALUES, "rt"); }
-\immediate\write\examples{draw_axes(gray);}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(3, 3, -10, 3, 3, 10, 10);}
+@c \immediate\write\examples{Point p0;}
+@c \immediate\write\examples{Point p1(1);}
+@c \immediate\write\examples{Point p2(1, 1);}
+@c \immediate\write\examples{Point p3(0, 1);}
+@c \immediate\write\examples{Path q("--", true, &p0, &p1, &p2, &p3, 0);}
+@c \immediate\write\examples{q.rotate(0, 45);}
+@c \immediate\write\examples{q.shift(1);}
+@c \immediate\write\examples{q.filldraw(black, light_gray);}
+@c \immediate\write\examples{q.get_point(0).dotlabel(Point::WORLD_VALUES, "llft"); }
+@c \immediate\write\examples{q.get_point(1).dotlabel(Point::WORLD_VALUES, "rt"); }
+@c \immediate\write\examples{q.get_point(2).dotlabel(Point::WORLD_VALUES, "rt"); }
+@c \immediate\write\examples{q.get_point(3).dotlabel(Point::WORLD_VALUES, "lft"); }
+@c \immediate\write\examples{q.shear(1.5, 2, 2.5, 3, 3.5, 5);}
+@c \immediate\write\examples{q.filldraw(black, light_gray);}
+@c \immediate\write\examples{q.get_point(0).dotlabel(Point::WORLD_VALUES, "ulft"); }
+@c \immediate\write\examples{q.get_point(1).dotlabel(Point::WORLD_VALUES, "lft"); }
+@c \immediate\write\examples{q.get_point(2).dotlabel(Point::WORLD_VALUES, "rt"); }
+@c \immediate\write\examples{q.get_point(3).dotlabel(Point::WORLD_VALUES, "rt"); }
+@c \immediate\write\examples{draw_axes(gray);}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1016,35 +1016,35 @@ p.shift(3, 3, 3);
 p.draw();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(5, 10, -10, 0, 10, 10, 10);}
-\immediate\write\examples{draw_axes(2.5, "bot", "lft", "rt", gray);}
-\immediate\write\examples{Point pt[6];}
-\immediate\write\examples{pt[0].set(-2, -2);}
-\immediate\write\examples{pt[1].set(0, -3);}
-\immediate\write\examples{pt[2].set(2, -2);}
-\immediate\write\examples{pt[3].set(2, 2);}
-\immediate\write\examples{pt[4].set(0, 3);}
-\immediate\write\examples{pt[5].set(-2, 2);}
-\immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], &pt[3], &pt[4], &pt[5], 0);}
-\immediate\write\examples{Point p_center(origin);}
-\immediate\write\examples{origin.label("$p$", "lrt");}
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{p_center *= p.shift(3, 3, 3);}
-\immediate\write\examples{origin.drawarrow(p_center, black, "evenly");} 
-\immediate\write\examples{p_center.label("$p$");} 
-\immediate\write\examples{p.draw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(5, 10, -10, 0, 10, 10, 10);}
+@c \immediate\write\examples{draw_axes(2.5, "bot", "lft", "rt", gray);}
+@c \immediate\write\examples{Point pt[6];}
+@c \immediate\write\examples{pt[0].set(-2, -2);}
+@c \immediate\write\examples{pt[1].set(0, -3);}
+@c \immediate\write\examples{pt[2].set(2, -2);}
+@c \immediate\write\examples{pt[3].set(2, 2);}
+@c \immediate\write\examples{pt[4].set(0, 3);}
+@c \immediate\write\examples{pt[5].set(-2, 2);}
+@c \immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], &pt[3], &pt[4], &pt[5], 0);}
+@c \immediate\write\examples{Point p_center(origin);}
+@c \immediate\write\examples{origin.label("$p$", "lrt");}
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{p_center *= p.shift(3, 3, 3);}
+@c \immediate\write\examples{origin.drawarrow(p_center, black, "evenly");} 
+@c \immediate\write\examples{p_center.label("$p$");} 
+@c \immediate\write\examples{p.draw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1093,37 +1093,37 @@ p.shift(s);
 p.draw();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(5, 10, -10, 0, 10, 10, 10);}
-\immediate\write\examples{draw_axes(2.5, "bot", "lft", "rt", gray);}
-\immediate\write\examples{Point pt[6];}
-\immediate\write\examples{pt[0].set(-2, -2);}
-\immediate\write\examples{pt[1].set(0, -3);}
-\immediate\write\examples{pt[2].set(2, -2);}
-\immediate\write\examples{pt[3].set(2, 2);}
-\immediate\write\examples{pt[4].set(0, 3);}
-\immediate\write\examples{pt[5].set(-2, 2);}
-\immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], }
-\immediate\write\examples{&pt[3], &pt[4], &pt[5], 0);} 
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{Point A;}
-\immediate\write\examples{A.label("$p$", "lrt");}
-\immediate\write\examples{Point s(2, -2, 4);}
-\immediate\write\examples{A *= p.shift(s);}
-\immediate\write\examples{origin.drawarrow(A, black, "evenly");} 
-\immediate\write\examples{A.label("$p$");}
-\immediate\write\examples{p.draw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(5, 10, -10, 0, 10, 10, 10);}
+@c \immediate\write\examples{draw_axes(2.5, "bot", "lft", "rt", gray);}
+@c \immediate\write\examples{Point pt[6];}
+@c \immediate\write\examples{pt[0].set(-2, -2);}
+@c \immediate\write\examples{pt[1].set(0, -3);}
+@c \immediate\write\examples{pt[2].set(2, -2);}
+@c \immediate\write\examples{pt[3].set(2, 2);}
+@c \immediate\write\examples{pt[4].set(0, 3);}
+@c \immediate\write\examples{pt[5].set(-2, 2);}
+@c \immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], }
+@c \immediate\write\examples{&pt[3], &pt[4], &pt[5], 0);} 
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{Point A;}
+@c \immediate\write\examples{A.label("$p$", "lrt");}
+@c \immediate\write\examples{Point s(2, -2, 4);}
+@c \immediate\write\examples{A *= p.shift(s);}
+@c \immediate\write\examples{origin.drawarrow(A, black, "evenly");} 
+@c \immediate\write\examples{A.label("$p$");}
+@c \immediate\write\examples{p.draw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1255,45 +1255,45 @@ q.show("q:");
    (0.707, -0.707, 0) .. (0.924, -0.383, 0) .. cycle;
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 2, -10, 2, 2, 10, 10);}
-\immediate\write\examples{Point A(2, 3, 2);}
-\immediate\write\examples{Point B(-1, 1, 3);}
-\immediate\write\examples{Path p(A, B);}
-\immediate\write\examples{A.dotlabel("$A$", "urt"); }
-\immediate\write\examples{B.dotlabel("$B$", "lft"); }
-\immediate\write\examples{A.mediate(B).label("$p$"); }
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{Transform t = p.align_with_axis(true, 'z');}
-\immediate\write\examples{p *= t;}
-\immediate\write\examples{Point C(1);}
-\immediate\write\examples{C *= t.inverse();}
-\immediate\write\examples{Path q;}
-\immediate\write\examples{q += "..";}
-\immediate\write\examples{q += C;}
-\immediate\write\examples{for (int i = 0; i < 15; ++i)}
-\immediate\write\examples{  @OCB}
-\immediate\write\examples{    C.rotate(A, B, 360.0/16);}
-\immediate\write\examples{    q += C;}
-\immediate\write\examples{  @CCB}
-\immediate\write\examples{q.set_cycle(true);}
-\immediate\write\examples{q.draw();}
-\immediate\write\examples{q.get_point(14).label("$q$", "ulft");}
-\immediate\write\examples{q.align_with_axis(A, B, 'z');}
-\immediate\write\examples{q.draw();}
-\immediate\write\examples{origin.mediate(q.get_point(6)).label("$q$");}
-\immediate\write\examples{draw_axes(gray);   }
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 2, -10, 2, 2, 10, 10);}
+@c \immediate\write\examples{Point A(2, 3, 2);}
+@c \immediate\write\examples{Point B(-1, 1, 3);}
+@c \immediate\write\examples{Path p(A, B);}
+@c \immediate\write\examples{A.dotlabel("$A$", "urt"); }
+@c \immediate\write\examples{B.dotlabel("$B$", "lft"); }
+@c \immediate\write\examples{A.mediate(B).label("$p$"); }
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{Transform t = p.align_with_axis(true, 'z');}
+@c \immediate\write\examples{p *= t;}
+@c \immediate\write\examples{Point C(1);}
+@c \immediate\write\examples{C *= t.inverse();}
+@c \immediate\write\examples{Path q;}
+@c \immediate\write\examples{q += "..";}
+@c \immediate\write\examples{q += C;}
+@c \immediate\write\examples{for (int i = 0; i < 15; ++i)}
+@c \immediate\write\examples{  @OCB}
+@c \immediate\write\examples{    C.rotate(A, B, 360.0/16);}
+@c \immediate\write\examples{    q += C;}
+@c \immediate\write\examples{  @CCB}
+@c \immediate\write\examples{q.set_cycle(true);}
+@c \immediate\write\examples{q.draw();}
+@c \immediate\write\examples{q.get_point(14).label("$q$", "ulft");}
+@c \immediate\write\examples{q.align_with_axis(A, B, 'z');}
+@c \immediate\write\examples{q.draw();}
+@c \immediate\write\examples{origin.mediate(q.get_point(6)).label("$q$");}
+@c \immediate\write\examples{draw_axes(gray);   }
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1354,29 +1354,29 @@ Path p("..", true, &A, &B, &C, &D, &E, 0);
 p.draw();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point A;}
-\immediate\write\examples{Point B(2);}
-\immediate\write\examples{Point C(3, 3);}
-\immediate\write\examples{Point D(1, 2);}
-\immediate\write\examples{Point E(-1, 1);}
-\immediate\write\examples{A.dotlabel("A", "bot");}
-\immediate\write\examples{B.dotlabel("B", "bot");}
-\immediate\write\examples{C.dotlabel("C");}
-\immediate\write\examples{D.dotlabel("D");}
-\immediate\write\examples{E.dotlabel("E", "lft");}
-\immediate\write\examples{Path p("..", true, &A, &B, &C, &D, &E, 0);}
-\immediate\write\examples{p.draw();}
-\OEX{Projections::PARALLEL_X_Y}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point A;}
+@c \immediate\write\examples{Point B(2);}
+@c \immediate\write\examples{Point C(3, 3);}
+@c \immediate\write\examples{Point D(1, 2);}
+@c \immediate\write\examples{Point E(-1, 1);}
+@c \immediate\write\examples{A.dotlabel("A", "bot");}
+@c \immediate\write\examples{B.dotlabel("B", "bot");}
+@c \immediate\write\examples{C.dotlabel("C");}
+@c \immediate\write\examples{D.dotlabel("D");}
+@c \immediate\write\examples{E.dotlabel("E", "lft");}
+@c \immediate\write\examples{Path p("..", true, &A, &B, &C, &D, &E, 0);}
+@c \immediate\write\examples{p.draw();}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1420,25 +1420,25 @@ using namespace Colors;
 p.draw(gray, "", "pencircle scaled .25mm");
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{A.dotlabel("A", "bot");}
-\immediate\write\examples{B.dotlabel("B", "bot");}
-\immediate\write\examples{C.dotlabel("C");}
-\immediate\write\examples{D.dotlabel("D");}
-\immediate\write\examples{E.dotlabel("E", "lft");}
-\immediate\write\examples{out_stream << "pickup pencircle scaled 2mm;" << endl;}
-\immediate\write\examples{p.draw(Colors::gray);}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y);}
-\immediate\write\examples{out_stream << "pickup pencircle scaled .25mm;" << endl;}
-\OEX{Projections::PARALLEL_X_Y}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{A.dotlabel("A", "bot");}
+@c \immediate\write\examples{B.dotlabel("B", "bot");}
+@c \immediate\write\examples{C.dotlabel("C");}
+@c \immediate\write\examples{D.dotlabel("D");}
+@c \immediate\write\examples{E.dotlabel("E", "lft");}
+@c \immediate\write\examples{out_stream << "pickup pencircle scaled 2mm;" << endl;}
+@c \immediate\write\examples{p.draw(Colors::gray);}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y);}
+@c \immediate\write\examples{out_stream << "pickup pencircle scaled .25mm;" << endl;}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1472,22 +1472,22 @@ that are written unchanged to @code{out_stream}.
 p.draw(black, "evenly");
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\immediate\write\examples{A.dotlabel("A", "bot");}
-\immediate\write\examples{B.dotlabel("B", "bot");}
-\immediate\write\examples{C.dotlabel("C");}
-\immediate\write\examples{D.dotlabel("D");}
-\immediate\write\examples{E.dotlabel("E", "lft");}
-\immediate\write\examples{p.draw(black, "evenly");}
-\OEX{Projections::PARALLEL_X_Y}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{A.dotlabel("A", "bot");}
+@c \immediate\write\examples{B.dotlabel("B", "bot");}
+@c \immediate\write\examples{C.dotlabel("C");}
+@c \immediate\write\examples{D.dotlabel("D");}
+@c \immediate\write\examples{E.dotlabel("E", "lft");}
+@c \immediate\write\examples{p.draw(black, "evenly");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1523,31 +1523,31 @@ p.draw(black, "", "pensquare xscaled 3mm
        yscaled .25mm scaled .5mm");
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\immediate\write\examples{Point A0(A);}
-\immediate\write\examples{Point B0(B);}
-\immediate\write\examples{Point C0(C);}
-\immediate\write\examples{Point D0(D);}
-\immediate\write\examples{Point E0(E);}
-\immediate\write\examples{A0 *= B0.shift(0, -.1);}
-\immediate\write\examples{C0.shift(0, .05);}
-\immediate\write\examples{D0.shift(0, .15);}
-\immediate\write\examples{E0.shift(-.175);}
-\immediate\write\examples{A0.label("A", "bot");}
-\immediate\write\examples{B0.label("B", "bot");}
-\immediate\write\examples{C0.label("C");}
-\immediate\write\examples{D0.label("D");}
-\immediate\write\examples{E0.label("E", "lft");}
-\immediate\write\examples{p.draw(black, "", "pensquare xscaled 3mm yscaled .25mm scaled .5mm");}
-\OEX{Projections::PARALLEL_X_Y}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{Point A0(A);}
+@c \immediate\write\examples{Point B0(B);}
+@c \immediate\write\examples{Point C0(C);}
+@c \immediate\write\examples{Point D0(D);}
+@c \immediate\write\examples{Point E0(E);}
+@c \immediate\write\examples{A0 *= B0.shift(0, -.1);}
+@c \immediate\write\examples{C0.shift(0, .05);}
+@c \immediate\write\examples{D0.shift(0, .15);}
+@c \immediate\write\examples{E0.shift(-.175);}
+@c \immediate\write\examples{A0.label("A", "bot");}
+@c \immediate\write\examples{B0.label("B", "bot");}
+@c \immediate\write\examples{C0.label("C");}
+@c \immediate\write\examples{D0.label("D");}
+@c \immediate\write\examples{E0.label("E", "lft");}
+@c \immediate\write\examples{p.draw(black, "", "pensquare xscaled 3mm yscaled .25mm scaled .5mm");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1598,23 +1598,23 @@ E.dotlabel("E", "lft", temp_picture);
 temp_picture.output(Projections::PARALLEL_X_Y);
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\immediate\write\examples{Picture temp_picture;}
-\immediate\write\examples{A.dotlabel("A", "bot", temp_picture);}
-\immediate\write\examples{B.dotlabel("B", "bot", temp_picture);}
-\immediate\write\examples{C.dotlabel("C", "top", temp_picture);}
-\immediate\write\examples{D.dotlabel("D", "top", temp_picture);}
-\immediate\write\examples{E.dotlabel("E", "lft", temp_picture);}
-\immediate\write\examples{p.draw(temp_picture);}
-\immediate\write\examples{temp_picture.output(Projections::PARALLEL_X_Y);}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{Picture temp_picture;}
+@c \immediate\write\examples{A.dotlabel("A", "bot", temp_picture);}
+@c \immediate\write\examples{B.dotlabel("B", "bot", temp_picture);}
+@c \immediate\write\examples{C.dotlabel("C", "top", temp_picture);}
+@c \immediate\write\examples{D.dotlabel("D", "top", temp_picture);}
+@c \immediate\write\examples{E.dotlabel("E", "lft", temp_picture);}
+@c \immediate\write\examples{p.draw(temp_picture);}
+@c \immediate\write\examples{temp_picture.output(Projections::PARALLEL_X_Y);}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1668,23 +1668,23 @@ n.dotlabel("$n$");
 m.drawarrow(n);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point m;}
-\immediate\write\examples{Point n(2, 2);}
-\immediate\write\examples{m.dotlabel("$m$", "bot"); }
-\immediate\write\examples{n.label("$n$"); }
-\immediate\write\examples{m.drawarrow(n);}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point m;}
+@c \immediate\write\examples{Point n(2, 2);}
+@c \immediate\write\examples{m.dotlabel("$m$", "bot"); }
+@c \immediate\write\examples{n.label("$n$"); }
+@c \immediate\write\examples{m.drawarrow(n);}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1762,19 +1762,19 @@ draw_axes(0, "bot", "rt", "");
 current_picture.output(Projections::PARALLEL_X_Y);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{draw_axes(0, "bot", "rt", "");}
-\immediate\write\examples{current_picture.output(PARALLEL_X_Y);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{draw_axes(0, "bot", "rt", "");}
+@c \immediate\write\examples{current_picture.output(PARALLEL_X_Y);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1818,19 +1818,19 @@ are used.
 draw_axes();
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{draw_axes();} 
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{draw_axes();} 
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1859,20 +1859,20 @@ Point P(.5, .5, .5);
 draw_axes(0, "d", "d", "d", black, "", "", P, -P, P);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point P(.5, .5, .5);}
-\immediate\write\examples{draw_axes(0, "d", "d", "d", black, "", "", P, -P, P);}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point P(.5, .5, .5);}
+@c \immediate\write\examples{draw_axes(0, "d", "d", "d", black, "", "", P, -P, P);}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1925,22 +1925,22 @@ The arguments are similar to those of @code{draw()}, except that the
 p.fill(gray);
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\immediate\write\examples{A.dotlabel("A", "bot");}
-\immediate\write\examples{B.dotlabel("B", "bot");}
-\immediate\write\examples{C.dotlabel("C");}
-\immediate\write\examples{D.dotlabel("D");}
-\immediate\write\examples{E.dotlabel("E", "lft");}
-\immediate\write\examples{p.fill(gray);}
-\OEX{Projections::PARALLEL_X_Y}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{A.dotlabel("A", "bot");}
+@c \immediate\write\examples{B.dotlabel("B", "bot");}
+@c \immediate\write\examples{C.dotlabel("C");}
+@c \immediate\write\examples{D.dotlabel("D");}
+@c \immediate\write\examples{E.dotlabel("E", "lft");}
+@c \immediate\write\examples{p.fill(gray);}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1992,23 +1992,23 @@ filling.
 p.filldraw(black, gray, "", "pencircle scaled 2mm");
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\immediate\write\examples{A0.label("A", "bot");}
-\immediate\write\examples{B0.label("B", "bot");}
-\immediate\write\examples{C0.label("C");}
-\immediate\write\examples{D0.label("D");}
-\immediate\write\examples{E0.label("E", "lft");}
-\immediate\write\examples{p.filldraw(black, gray, "", "pencircle scaled 2mm");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{A0.label("A", "bot");}
+@c \immediate\write\examples{B0.label("B", "bot");}
+@c \immediate\write\examples{C0.label("C");}
+@c \immediate\write\examples{D0.label("D");}
+@c \immediate\write\examples{E0.label("E", "lft");}
+@c \immediate\write\examples{p.filldraw(black, gray, "", "pencircle scaled 2mm");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2059,41 +2059,41 @@ r0.shift(0, 0, -2.5);
 r0.filldraw();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(3, 0, -10, 3, 0, 10, 10);}
-\immediate\write\examples{Point p[8];}
-\immediate\write\examples{p[0] = p[1] = p[2] = p[3] = p[4] = p[5] 
-                          = p[6] = p[7].set(-1,-1, 5);}
-\immediate\write\examples{p[1] *= p[2] *= p[3] *= p[4] *= p[5] 
-                          *= p[6] *= p[7].rotate(0, 0, 45);}
-\immediate\write\examples{p[2] *= p[3] *= p[4] *= p[5] *= p[6] 
-                          *= p[7].rotate(0, 0, 45);}
-\immediate\write\examples{p[3] *= p[4] *= p[5] *= p[6] *= p[7].rotate(0, 0, 45);}
-\immediate\write\examples{p[4] *= p[5] *= p[6] *= p[7].rotate(0, 0, 45);}
-\immediate\write\examples{p[5] *= p[6] *= p[7].rotate(0, 0, 45);}
-\immediate\write\examples{p[6] *= p[7].rotate(0, 0, 45);}
-\immediate\write\examples{p[7].rotate(0, 0, 45);}
-\immediate\write\examples{Path r0("..", true, &p[0], &p[1], &p[2], 
-                          &p[3], &p[4], &p[5], &p[6], &p[7], 0);}
-\immediate\write\examples{r0.filldraw(black, light_gray);}
-\immediate\write\examples{r0.scale(2, .5);}
-\immediate\write\examples{r0.shift(0, 0, -2.5); }
-\immediate\write\examples{r0.filldraw(black, gray, "evenly scaled 4", } 
-\immediate\write\examples{"pencircle scaled .5mm");} 
-\immediate\write\examples{r0.scale(.25, 3);}
-\immediate\write\examples{r0.shift(0, 0, -2.5);}
-\immediate\write\examples{r0.filldraw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(3, 0, -10, 3, 0, 10, 10);}
+@c \immediate\write\examples{Point p[8];}
+@c \immediate\write\examples{p[0] = p[1] = p[2] = p[3] = p[4] = p[5] 
+@c                         = p[6] = p[7].set(-1,-1, 5);}
+@c \immediate\write\examples{p[1] *= p[2] *= p[3] *= p[4] *= p[5] 
+@c                         *= p[6] *= p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{p[2] *= p[3] *= p[4] *= p[5] *= p[6] 
+@c                         *= p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{p[3] *= p[4] *= p[5] *= p[6] *= p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{p[4] *= p[5] *= p[6] *= p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{p[5] *= p[6] *= p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{p[6] *= p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{p[7].rotate(0, 0, 45);}
+@c \immediate\write\examples{Path r0("..", true, &p[0], &p[1], &p[2], 
+@c                        &p[3], &p[4], &p[5], &p[6], &p[7], 0);}
+@c \immediate\write\examples{r0.filldraw(black, light_gray);}
+@c \immediate\write\examples{r0.scale(2, .5);}
+@c \immediate\write\examples{r0.shift(0, 0, -2.5); }
+@c \immediate\write\examples{r0.filldraw(black, gray, "evenly scaled 4", } 
+@c \immediate\write\examples{"pencircle scaled .5mm");} 
+@c \immediate\write\examples{r0.scale(.25, 3);}
+@c \immediate\write\examples{r0.shift(0, 0, -2.5);}
+@c \immediate\write\examples{r0.filldraw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2148,25 +2148,25 @@ p.draw(black, "", "pencircle scaled 3mm");
 p.undraw("", "pencircle scaled 1mm");
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point P0(1, 1);}
-\immediate\write\examples{Point P1(2, 1);}
-\immediate\write\examples{Point P2(2, 3);}
-\immediate\write\examples{Point P3(-1, 1);}
-\immediate\write\examples{Path p("--", false, &origin, &P0, &P1, &P2, &P3, 0);}
-\immediate\write\examples{p.draw(black, "", "pencircle scaled 3mm");}
-\immediate\write\examples{p.undraw("", "pencircle scaled 1mm");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point P0(1, 1);}
+@c \immediate\write\examples{Point P1(2, 1);}
+@c \immediate\write\examples{Point P2(2, 3);}
+@c \immediate\write\examples{Point P3(-1, 1);}
+@c \immediate\write\examples{Path p("--", false, &origin, &P0, &P1, &P2, &P3, 0);}
+@c \immediate\write\examples{p.draw(black, "", "pencircle scaled 3mm");}
+@c \immediate\write\examples{p.undraw("", "pencircle scaled 1mm");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2210,28 +2210,28 @@ p.scale(.5, .5);
 p.unfill();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{Point pt[4];}
-\immediate\write\examples{pt[0].set(-2, -2);}
-\immediate\write\examples{pt[1].set(2, -2);}
-\immediate\write\examples{pt[2].set(2, 2);}
-\immediate\write\examples{pt[3].set(-2, 2);}
-\immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], &pt[3], 0);}
-\immediate\write\examples{p.draw();}
-\immediate\write\examples{p.filldraw(black, gray);}
-\immediate\write\examples{p.scale(.5, .5);}
-\immediate\write\examples{p.unfill();}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{Point pt[4];}
+@c \immediate\write\examples{pt[0].set(-2, -2);}
+@c \immediate\write\examples{pt[1].set(2, -2);}
+@c \immediate\write\examples{pt[2].set(2, 2);}
+@c \immediate\write\examples{pt[3].set(-2, 2);}
+@c \immediate\write\examples{Path p("--", true, &pt[0], &pt[1], &pt[2], &pt[3], 0);}
+@c \immediate\write\examples{p.draw();}
+@c \immediate\write\examples{p.filldraw(black, gray);}
+@c \immediate\write\examples{p.scale(.5, .5);}
+@c \immediate\write\examples{p.unfill();}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2295,30 +2295,30 @@ p.scale(.5, .5);
 p.unfilldraw(black, "", "pensquare xscaled 3mm");
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point pt[6];}
-\immediate\write\examples{pt[0].set(-2, -2);}
-\immediate\write\examples{pt[1].set(0, -3);}
-\immediate\write\examples{pt[2].set(2, -2);}
-\immediate\write\examples{pt[3].set(2, 2);}
-\immediate\write\examples{pt[4].set(0, 3);}
-\immediate\write\examples{pt[5].set(-2, 2);}
-\immediate\write\examples{Path p("--", true, &pt[0], &pt[1], 
-                          &pt[2], &pt[3], &pt[4], &pt[5], 0);}
-\immediate\write\examples{p.fill(gray);}
-\immediate\write\examples{p.scale(.5, .5);}
-\immediate\write\examples{p.unfilldraw(black, "", "pensquare xscaled 3mm");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point pt[6];}
+@c \immediate\write\examples{pt[0].set(-2, -2);}
+@c \immediate\write\examples{pt[1].set(0, -3);}
+@c \immediate\write\examples{pt[2].set(2, -2);}
+@c \immediate\write\examples{pt[3].set(2, 2);}
+@c \immediate\write\examples{pt[4].set(0, 3);}
+@c \immediate\write\examples{pt[5].set(-2, 2);}
+@c \immediate\write\examples{Path p("--", true, &pt[0], &pt[1], 
+@c                        &pt[2], &pt[3], &pt[4], &pt[5], 0);}
+@c \immediate\write\examples{p.fill(gray);}
+@c \immediate\write\examples{p.scale(.5, .5);}
+@c \immediate\write\examples{p.unfilldraw(black, "", "pensquare xscaled 3mm");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2441,42 +2441,42 @@ Projective coordinates.
 -- (1.88483, -0.615266, 0.183441) -- cycle;
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(0, 3, -10, 0, 3, 10, 10);}
-\immediate\write\examples{Reg_Polygon r(origin, 5, 3, 45);}
-\immediate\write\examples{r.fill(gray);}
-\immediate\write\examples{Point p[10];}
-\immediate\write\examples{for (int i = 0; i < 5; ++i)}
-\immediate\write\examples{    p[i] = r.get_point(i);}
-\immediate\write\examples{p[0].dotlabel(0); }
-\immediate\write\examples{p[1].dotlabel(1, "ulft"); }
-\immediate\write\examples{p[2].dotlabel(2, "llft"); }
-\immediate\write\examples{p[3].dotlabel(3, "lrt"); }
-\immediate\write\examples{p[4].dotlabel(4, "urt"); }
-\immediate\write\examples{p[5] = Point::intersection_point(p[4], p[0], p[2], p[1]).pt;}
-\immediate\write\examples{p[5].dotlabel(5); }
-\immediate\write\examples{p[6] = Point::intersection_point(p[0], p[1], p[2], p[3]).pt;}
-\immediate\write\examples{p[6].dotlabel(6, "lft"); }
-\immediate\write\examples{p[7] = Point::intersection_point(p[1], p[2], p[4], p[3]).pt;}
-\immediate\write\examples{p[7].dotlabel(7, "bot"); }
-\immediate\write\examples{p[8] = Point::intersection_point(p[2], p[3], p[0], p[4]).pt;}
-\immediate\write\examples{p[8].dotlabel(8, "rt"); }
-\immediate\write\examples{p[9] = Point::intersection_point(p[3], p[4], p[0], p[1]).pt;}
-\immediate\write\examples{p[9].dotlabel(9); }
-\immediate\write\examples{Path q("--", true, &p[0], &p[5], &p[1], &p[6], &p[2], &p[7], }
-\immediate\write\examples{       &p[3], &p[8], &p[4], &p[9], 0);}
-\immediate\write\examples{q.draw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(0, 3, -10, 0, 3, 10, 10);}
+@c \immediate\write\examples{Reg_Polygon r(origin, 5, 3, 45);}
+@c \immediate\write\examples{r.fill(gray);}
+@c \immediate\write\examples{Point p[10];}
+@c \immediate\write\examples{for (int i = 0; i < 5; ++i)}
+@c \immediate\write\examples{    p[i] = r.get_point(i);}
+@c \immediate\write\examples{p[0].dotlabel(0); }
+@c \immediate\write\examples{p[1].dotlabel(1, "ulft"); }
+@c \immediate\write\examples{p[2].dotlabel(2, "llft"); }
+@c \immediate\write\examples{p[3].dotlabel(3, "lrt"); }
+@c \immediate\write\examples{p[4].dotlabel(4, "urt"); }
+@c \immediate\write\examples{p[5] = Point::intersection_point(p[4], p[0], p[2], p[1]).pt;}
+@c \immediate\write\examples{p[5].dotlabel(5); }
+@c \immediate\write\examples{p[6] = Point::intersection_point(p[0], p[1], p[2], p[3]).pt;}
+@c \immediate\write\examples{p[6].dotlabel(6, "lft"); }
+@c \immediate\write\examples{p[7] = Point::intersection_point(p[1], p[2], p[4], p[3]).pt;}
+@c \immediate\write\examples{p[7].dotlabel(7, "bot"); }
+@c \immediate\write\examples{p[8] = Point::intersection_point(p[2], p[3], p[0], p[4]).pt;}
+@c \immediate\write\examples{p[8].dotlabel(8, "rt"); }
+@c \immediate\write\examples{p[9] = Point::intersection_point(p[3], p[4], p[0], p[1]).pt;}
+@c \immediate\write\examples{p[9].dotlabel(9); }
+@c \immediate\write\examples{Path q("--", true, &p[0], &p[5], &p[1], &p[6], &p[2], &p[7], }
+@c \immediate\write\examples{       &p[3], &p[8], &p[4], &p[9], 0);}
+@c \immediate\write\examples{q.draw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2603,34 +2603,34 @@ Rectangle r(P, 4, 4, 30, 30, 30);
 Point N = r.get_normal();
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 3, -10, 0, 3, 10, 10);}
-\immediate\write\examples{Point P(1, 1, 1);}
-\immediate\write\examples{P.dotlabel("$P$", "bot"); }
-\immediate\write\examples{Rectangle r(P, 4, 4, 30, 30, 30);}
-\immediate\write\examples{r.get_point(0).dotlabel(0, "bot");}
-\immediate\write\examples{r.get_point(1).dotlabel(1, "rt");}
-\immediate\write\examples{r.get_point(2).dotlabel(2);}
-\immediate\write\examples{r.get_point(3).dotlabel(3, "lft");}
-\immediate\write\examples{r.filldraw(black, light_gray);}
-\immediate\write\examples{Point N = r.get_normal();}
-\immediate\write\examples{N.label("$@DBKS{vec}@OCB N@CCB$");}
-\immediate\write\examples{origin.drawarrow(N);}
-\immediate\write\examples{N.shift(P);}
-\immediate\write\examples{P.drawarrow(N);}
-\immediate\write\examples{N.label("$@DBKS{vec}@OCB N@CCB$", "rt");}
-\immediate\write\examples{draw_axes(0, "d", "d", "d", black, "evenly");}
-\immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 3, -10, 0, 3, 10, 10);}
+@c \immediate\write\examples{Point P(1, 1, 1);}
+@c \immediate\write\examples{P.dotlabel("$P$", "bot"); }
+@c \immediate\write\examples{Rectangle r(P, 4, 4, 30, 30, 30);}
+@c \immediate\write\examples{r.get_point(0).dotlabel(0, "bot");}
+@c \immediate\write\examples{r.get_point(1).dotlabel(1, "rt");}
+@c \immediate\write\examples{r.get_point(2).dotlabel(2);}
+@c \immediate\write\examples{r.get_point(3).dotlabel(3, "lft");}
+@c \immediate\write\examples{r.filldraw(black, light_gray);}
+@c \immediate\write\examples{Point N = r.get_normal();}
+@c \immediate\write\examples{N.label("$@DBKS{vec}@OCB N@CCB$");}
+@c \immediate\write\examples{origin.drawarrow(N);}
+@c \immediate\write\examples{N.shift(P);}
+@c \immediate\write\examples{P.drawarrow(N);}
+@c \immediate\write\examples{N.label("$@DBKS{vec}@OCB N@CCB$", "rt");}
+@c \immediate\write\examples{draw_axes(0, "d", "d", "d", black, "evenly");}
+@c \immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2685,29 +2685,29 @@ q.show("q:");
    distance == -0.131735
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(4, 3, -10, 0, 3, 10, 10);}
-\immediate\write\examples{Point P(1, 1, 1);}
-\immediate\write\examples{P.dotlabel("$P$", "bot"); }
-\immediate\write\examples{Rectangle r(P, 4, 4, 45, 20, 15);}
-\immediate\write\examples{r.filldraw(black, light_gray);}
-\immediate\write\examples{Plane q = r.get_plane();}
-\immediate\write\examples{q.point.dotlabel("@OCB@DBKS{tt} q.point@CCB", "bot");}
-\immediate\write\examples{origin.drawarrow(q.normal);} 
-\immediate\write\examples{q.normal.label("@OCB@DBKS{tt} q.normal@CCB", "lft");}
-\immediate\write\examples{P.mediate(r.get_point(2), .5).label("$r$", "");} 
-\immediate\write\examples{draw_axes(0, "d", "d", "d", black, "evenly");}
-\immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(4, 3, -10, 0, 3, 10, 10);}
+@c \immediate\write\examples{Point P(1, 1, 1);}
+@c \immediate\write\examples{P.dotlabel("$P$", "bot"); }
+@c \immediate\write\examples{Rectangle r(P, 4, 4, 45, 20, 15);}
+@c \immediate\write\examples{r.filldraw(black, light_gray);}
+@c \immediate\write\examples{Plane q = r.get_plane();}
+@c \immediate\write\examples{q.point.dotlabel("@OCB@DBKS{tt} q.point@CCB", "bot");}
+@c \immediate\write\examples{origin.drawarrow(q.normal);} 
+@c \immediate\write\examples{q.normal.label("@OCB@DBKS{tt} q.normal@CCB", "lft");}
+@c \immediate\write\examples{P.mediate(r.get_point(2), .5).label("$r$", "");} 
+@c \immediate\write\examples{draw_axes(0, "d", "d", "d", black, "evenly");}
+@c \immediate\write\examples{current_picture.output(default_focus, Projections::PERSP, 1, Sorting::NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -2850,34 +2850,34 @@ bp.pt.show("bp.pt:");
 @print{} bp.pt: (0.5, 0.5, 0.5)
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 10, -10, 2, 10, 10, 10);}
-\immediate\write\examples{Point A(-1, -1, -1);}
-\immediate\write\examples{Point B(1, 1, 1);}
-\immediate\write\examples{Path p0(A, B);}
-\immediate\write\examples{p0.draw();}
-\immediate\write\examples{Point C(-2, 1, 1);}
-\immediate\write\examples{Point D(1.75, 0.25, 0.25);}
-\immediate\write\examples{Path p1(C, D);}
-\immediate\write\examples{p1.draw();}
-\immediate\write\examples{bool_point bp = p0.intersection_point(p1);}
-\immediate\write\examples{bp.pt.dotlabel("$i$"); }
-\immediate\write\examples{A.dotlabel("$A$", "bot"); }
-\immediate\write\examples{B.dotlabel("$B$"); }
-\immediate\write\examples{C.dotlabel("$C$", "lft"); }
-\immediate\write\examples{D.dotlabel("$D$", "rt"); }
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "rt");}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 10, -10, 2, 10, 10, 10);}
+@c \immediate\write\examples{Point A(-1, -1, -1);}
+@c \immediate\write\examples{Point B(1, 1, 1);}
+@c \immediate\write\examples{Path p0(A, B);}
+@c \immediate\write\examples{p0.draw();}
+@c \immediate\write\examples{Point C(-2, 1, 1);}
+@c \immediate\write\examples{Point D(1.75, 0.25, 0.25);}
+@c \immediate\write\examples{Path p1(C, D);}
+@c \immediate\write\examples{p1.draw();}
+@c \immediate\write\examples{bool_point bp = p0.intersection_point(p1);}
+@c \immediate\write\examples{bp.pt.dotlabel("$i$"); }
+@c \immediate\write\examples{A.dotlabel("$A$", "bot"); }
+@c \immediate\write\examples{B.dotlabel("$B$"); }
+@c \immediate\write\examples{C.dotlabel("$C$", "lft"); }
+@c \immediate\write\examples{D.dotlabel("$D$", "rt"); }
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "rt");}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

@@ -124,26 +124,23 @@ cout << d.is_circular();
 @print{} 0
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Circle c(origin, 3, 90);}
-\immediate\write\examples{Circle d = c;}
-\immediate\write\examples{d.shift(2.5);}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{c.get_center().label("$c$", "");}
-\immediate\write\examples{d.scale(2, 3);}
-\immediate\write\examples{d.draw();}
-\immediate\write\examples{d.get_center().label("$d$", "");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c iftex
+@c tex
+@c \immediate\write\examples{Circle c(origin, 3, 90);}
+@c \immediate\write\examples{Circle d = c;}
+@c \immediate\write\examples{d.shift(2.5);}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{c.get_center().label("$c$", "");}
+@c \immediate\write\examples{d.scale(2, 3);}
+@c \immediate\write\examples{d.draw();}
+@c \immediate\write\examples{d.get_center().label("$d$", "");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c @c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -212,29 +209,29 @@ bpq.first.pt.dotlabel("$f$");
 bpq.second.pt.dotlabel("$s$"); 
 @end example
   
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Circle t(origin, 5, 90);}
-\immediate\write\examples{Circle c(origin, 3, 90);}
-\immediate\write\examples{c.shift(3);}
-\immediate\write\examples{c.rotate(0, 0, 45);}
-\immediate\write\examples{t.draw();}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{t.get_center().label("t", ""); }
-\immediate\write\examples{c.get_center().label("c", ""); }
-\immediate\write\examples{bool_point_quadruple bpq = t.intersection_points(c);}
-\immediate\write\examples{bpq.first.pt.dotlabel("$f$", "lrt"); }
-\immediate\write\examples{bpq.second.pt.dotlabel("$s$", "llft"); }
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX  
-@end tex
-@end iftex
+@c iftex
+@c tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Circle t(origin, 5, 90);}
+@c \immediate\write\examples{Circle c(origin, 3, 90);}
+@c \immediate\write\examples{c.shift(3);}
+@c \immediate\write\examples{c.rotate(0, 0, 45);}
+@c \immediate\write\examples{t.draw();}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{t.get_center().label("t", ""); }
+@c \immediate\write\examples{c.get_center().label("c", ""); }
+@c \immediate\write\examples{bool_point_quadruple bpq = t.intersection_points(c);}
+@c \immediate\write\examples{bpq.first.pt.dotlabel("$f$", "lrt"); }
+@c \immediate\write\examples{bpq.second.pt.dotlabel("$s$", "llft"); }
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c @c \PEX  
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

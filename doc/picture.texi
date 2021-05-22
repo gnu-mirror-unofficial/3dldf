@@ -99,33 +99,33 @@ new_picture.shift(2);
 new_picture.output(Projections::PARALLEL_X_Z);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{Circle c(origin, 3);} 
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{Picture new_picture(current_picture);}
-\immediate\write\examples{new_picture.shift(2);}
-\immediate\write\examples{new_picture.output(Projections::PARALLEL_X_Z);}
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{Circle c(origin, 3);} 
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{Picture new_picture(current_picture);}
+@c \immediate\write\examples{new_picture.shift(2);}
+@c \immediate\write\examples{new_picture.output(Projections::PARALLEL_X_Z);}
 %% Labels.
-\immediate\write\examples{Point p1(c.get_point(8));}
-\immediate\write\examples{Point p0(p1);}
-\immediate\write\examples{p0.shift(-1);}
-\immediate\write\examples{p0.dotlabel("current@UBAR picture", "ulft");}
-\immediate\write\examples{p0.drawarrow(p1);}
-\immediate\write\examples{Point p2(c.get_point(0));}
-\immediate\write\examples{p2.shift(2);}  %% This shift must be the same as the
+@c \immediate\write\examples{Point p1(c.get_point(8));}
+@c \immediate\write\examples{Point p0(p1);}
+@c \immediate\write\examples{p0.shift(-1);}
+@c \immediate\write\examples{p0.dotlabel("current@UBAR picture", "ulft");}
+@c \immediate\write\examples{p0.drawarrow(p1);}
+@c \immediate\write\examples{Point p2(c.get_point(0));}
+@c \immediate\write\examples{p2.shift(2);}  %% This shift must be the same as the
                               %% shift applied to new_picture above!
-\immediate\write\examples{Point p3(p2); p3.shift(1);} 
-\immediate\write\examples{p3.drawarrow(p2);} 
-\immediate\write\examples{p3.dotlabel("new@UBAR picture", "urt");} 
-\OEX{Projections::PARALLEL_X_Z}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c \immediate\write\examples{Point p3(p2); p3.shift(1);} 
+@c \immediate\write\examples{p3.drawarrow(p2);} 
+@c \immediate\write\examples{p3.dotlabel("new@UBAR picture", "urt");} 
+@c \OEX{Projections::PARALLEL_X_Z}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -192,23 +192,23 @@ current_picture *= t;
 current_picture.output(Projections::PARALLEL_X_Y);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{Transform t;}
-\immediate\write\examples{t.rotate(0, 0, 180);}
-\immediate\write\examples{t.shift(5);}
-\immediate\write\examples{Reg_Polygon pl(origin, 5, 3, 90);^^Jpl.draw();}
-\immediate\write\examples{pl.label();} 
-\OEX{Projections::PARALLEL_X_Y}
-\immediate\write\examples{current_picture *= t;} 
-\OEX{Projections::PARALLEL_X_Y}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{Transform t;}
+@c \immediate\write\examples{t.rotate(0, 0, 180);}
+@c \immediate\write\examples{t.shift(5);}
+@c \immediate\write\examples{Reg_Polygon pl(origin, 5, 3, 90);^^Jpl.draw();}
+@c \immediate\write\examples{pl.label();} 
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \immediate\write\examples{current_picture *= t;} 
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -547,40 +547,40 @@ current_picture.rotate(0, 60);
 current_picture.output(Projections::PARALLEL_X_Z);
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\immediate\write\examples{Ellipse e(origin, 3, 5);}
-\immediate\write\examples{e.label();}
-\immediate\write\examples{e.draw();}
-\immediate\write\examples{Point pt0(-3);}
-\immediate\write\examples{Point pt1(3);}
-\immediate\write\examples{pt0.draw(pt1);}
-\immediate\write\examples{Point pt2(0, 0, -4);}
-\immediate\write\examples{Point pt3(0, 0, 4);}
-\immediate\write\examples{pt2.draw(pt3);}
-\immediate\write\examples{pt0.dotlabel("0", "lft");}
-\immediate\write\examples{pt1.dotlabel("1", "rt");}
-\immediate\write\examples{pt2.dotlabel("2", "bot");}
-\immediate\write\examples{pt3.dotlabel("3");}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
-\immediate\write\examples{current_picture.rotate(0, 60);}
-\immediate\write\examples{current_picture.suppress_labels();}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
-\immediate\write\examples{current_picture.rotate(0, 60);}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{Ellipse e(origin, 3, 5);}
+@c \immediate\write\examples{e.label();}
+@c \immediate\write\examples{e.draw();}
+@c \immediate\write\examples{Point pt0(-3);}
+@c \immediate\write\examples{Point pt1(3);}
+@c \immediate\write\examples{pt0.draw(pt1);}
+@c \immediate\write\examples{Point pt2(0, 0, -4);}
+@c \immediate\write\examples{Point pt3(0, 0, 4);}
+@c \immediate\write\examples{pt2.draw(pt3);}
+@c \immediate\write\examples{pt0.dotlabel("0", "lft");}
+@c \immediate\write\examples{pt1.dotlabel("1", "rt");}
+@c \immediate\write\examples{pt2.dotlabel("2", "bot");}
+@c \immediate\write\examples{pt3.dotlabel("3");}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
+@c \immediate\write\examples{current_picture.rotate(0, 60);}
+@c \immediate\write\examples{current_picture.suppress_labels();}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
+@c \immediate\write\examples{current_picture.rotate(0, 60);}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Z);}
 %%
 %% LDF 2003.01.19.  !! I neglected to unsuppress the labels at first.
 %% It took me maybe 45 minutes to find out why my labels in the next
 %% example weren't being printed!
 %%
-\immediate\write\examples{current_picture.unsuppress_labels();} 
-\EEX 1
-\fi
-\PEX  
-@end tex
-@end iftex
+@c \immediate\write\examples{current_picture.unsuppress_labels();} 
+@c \EEX 1
+@c \fi
+@c \PEX  
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

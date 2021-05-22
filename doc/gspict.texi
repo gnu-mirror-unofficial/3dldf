@@ -61,23 +61,23 @@ current_picture.output();
 endfig(1);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(0, 0, -10, 0, 0, 10, 10);} 
-\immediate\write\examples{Circle c(origin, 3, 90);}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{c.shift(1.5);}
-\immediate\write\examples{c.draw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(0, 0, -10, 0, 0, 10, 10);} 
+@c \immediate\write\examples{Circle c(origin, 3, 90);}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{c.shift(1.5);}
+@c \immediate\write\examples{c.draw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -150,25 +150,25 @@ current_picture.output();
 endfig(1);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Picture my_picture;}
-\immediate\write\examples{default_focus.set(0, 0, -10, 0, 0, 10, 10);} 
-\immediate\write\examples{Circle c(origin, 3, 90);}
-\immediate\write\examples{c.draw(my_picture);}
-\immediate\write\examples{my_picture.output();}
-\immediate\write\examples{c.shift(1.5);}
-\immediate\write\examples{c.fill(light_gray);}
-\immediate\write\examples{current_picture.output();} 
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Picture my_picture;}
+@c \immediate\write\examples{default_focus.set(0, 0, -10, 0, 0, 10, 10);} 
+@c \immediate\write\examples{Circle c(origin, 3, 90);}
+@c \immediate\write\examples{c.draw(my_picture);}
+@c \immediate\write\examples{my_picture.output();}
+@c \immediate\write\examples{c.shift(1.5);}
+@c \immediate\write\examples{c.fill(light_gray);}
+@c \immediate\write\examples{current_picture.output();} 
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -235,56 +235,56 @@ current_picture.shift(10, 0, 3);
 current_picture.output();
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(7, 5, -10, 7, 5, 10, 10);}
-\immediate\write\examples{Cuboid c0(origin, 5, 5, 5);}
-\immediate\write\examples{c0.shift(0, 0, 3);}
-\immediate\write\examples{c0.draw();}
-\immediate\write\examples{Circle z0(c0.get_rectangle_center(0), 2.5, 90, 0, 0, 64);}
-\immediate\write\examples{z0.draw();}
-\immediate\write\examples{Circle z1(z0);}
-\immediate\write\examples{z1.shift(0, 0, -1);}
-\immediate\write\examples{z1.draw();}
-\immediate\write\examples{int i;}
-\immediate\write\examples{int j = z0.get_size();} 
-\immediate\write\examples{for (i = 0; i < 8; ++i)}
-\immediate\write\examples{    z0.get_point(i * j/8).draw(z1.get_point(i * j/8));}
-\immediate\write\examples{Cuboid c1(c0.get_rectangle_center(4), 5, 3, 3);}
-\immediate\write\examples{c1.shift(0, 2.5);}
-\immediate\write\examples{c1.draw();}
-\immediate\write\examples{Rectangle r0 = *c1.get_rectangle_ptr(3);}
-\immediate\write\examples{Point p[10];}
-\immediate\write\examples{for (i = 0; i < 4; ++i)}
-\immediate\write\examples{  p[i] = r0.get_point(i);}
-\immediate\write\examples{p[4] = r0.get_mid_point(0);}
-\immediate\write\examples{p[5] = r0.get_mid_point(2);}
-\immediate\write\examples{p[6] = p[4].mediate(p[5], 2/3.0);}
-\immediate\write\examples{Circle z2(p[6], 2, 90, 90, 0, 64);}
-\immediate\write\examples{z2.draw();}
-\immediate\write\examples{Circle z3 = z2;}
-\immediate\write\examples{z3.shift(3);}
-\immediate\write\examples{z3.draw();}
-\immediate\write\examples{j = z2.get_size();} 
-\immediate\write\examples{for (i = 0; i < 8; ++i)}
-\immediate\write\examples{    z2.get_point(i * j/8).draw(z3.get_point(i * j/8));}
-\immediate\write\examples{p[7] = c0.get_rectangle_center(2);}
-\immediate\write\examples{p[7].shift(-4);}
-\immediate\write\examples{p[8] = c0.get_rectangle_center(3);}
-\immediate\write\examples{p[8].shift(4);}
-\immediate\write\examples{current_picture.output();}
-\immediate\write\examples{current_picture.rotate(45, 45);}
-\immediate\write\examples{current_picture.shift(10, 0, 3);}
-\immediate\write\examples{current_picture.output();}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(7, 5, -10, 7, 5, 10, 10);}
+@c \immediate\write\examples{Cuboid c0(origin, 5, 5, 5);}
+@c \immediate\write\examples{c0.shift(0, 0, 3);}
+@c \immediate\write\examples{c0.draw();}
+@c \immediate\write\examples{Circle z0(c0.get_rectangle_center(0), 2.5, 90, 0, 0, 64);}
+@c \immediate\write\examples{z0.draw();}
+@c \immediate\write\examples{Circle z1(z0);}
+@c \immediate\write\examples{z1.shift(0, 0, -1);}
+@c \immediate\write\examples{z1.draw();}
+@c \immediate\write\examples{int i;}
+@c \immediate\write\examples{int j = z0.get_size();} 
+@c \immediate\write\examples{for (i = 0; i < 8; ++i)}
+@c \immediate\write\examples{    z0.get_point(i * j/8).draw(z1.get_point(i * j/8));}
+@c \immediate\write\examples{Cuboid c1(c0.get_rectangle_center(4), 5, 3, 3);}
+@c \immediate\write\examples{c1.shift(0, 2.5);}
+@c \immediate\write\examples{c1.draw();}
+@c \immediate\write\examples{Rectangle r0 = *c1.get_rectangle_ptr(3);}
+@c \immediate\write\examples{Point p[10];}
+@c \immediate\write\examples{for (i = 0; i < 4; ++i)}
+@c \immediate\write\examples{  p[i] = r0.get_point(i);}
+@c \immediate\write\examples{p[4] = r0.get_mid_point(0);}
+@c \immediate\write\examples{p[5] = r0.get_mid_point(2);}
+@c \immediate\write\examples{p[6] = p[4].mediate(p[5], 2/3.0);}
+@c \immediate\write\examples{Circle z2(p[6], 2, 90, 90, 0, 64);}
+@c \immediate\write\examples{z2.draw();}
+@c \immediate\write\examples{Circle z3 = z2;}
+@c \immediate\write\examples{z3.shift(3);}
+@c \immediate\write\examples{z3.draw();}
+@c \immediate\write\examples{j = z2.get_size();} 
+@c \immediate\write\examples{for (i = 0; i < 8; ++i)}
+@c \immediate\write\examples{    z2.get_point(i * j/8).draw(z3.get_point(i * j/8));}
+@c \immediate\write\examples{p[7] = c0.get_rectangle_center(2);}
+@c \immediate\write\examples{p[7].shift(-4);}
+@c \immediate\write\examples{p[8] = c0.get_rectangle_center(3);}
+@c \immediate\write\examples{p[8].shift(4);}
+@c \immediate\write\examples{current_picture.output();}
+@c \immediate\write\examples{current_picture.rotate(45, 45);}
+@c \immediate\write\examples{current_picture.shift(10, 0, 3);}
+@c \immediate\write\examples{current_picture.output();}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -444,23 +444,23 @@ c.draw();
 current_picture.output(Projections::PARALLEL_X_Y);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{Rectangle r(origin, 3, 3, 90);}
-\immediate\write\examples{Circle c(origin, 3, 90);}
-\immediate\write\examples{c *= r.shift(0, 0, 5);}
-\immediate\write\examples{r.filldraw(black, gray);}
-\immediate\write\examples{c.unfilldraw(black);}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{Rectangle r(origin, 3, 3, 90);}
+@c \immediate\write\examples{Circle c(origin, 3, 90);}
+@c \immediate\write\examples{c *= r.shift(0, 0, 5);}
+@c \immediate\write\examples{r.filldraw(black, gray);}
+@c \immediate\write\examples{c.unfilldraw(black);}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -488,23 +488,23 @@ x-y plane, then the projection will be distorted:
 current_picture.output(Projections::PARALLEL_X_Y);
 @end example
  
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Rectangle r(origin, 3, 3, 90, 60);}
-\immediate\write\examples{Circle c(origin, 3, 90, 60);}
-\immediate\write\examples{c *= r.shift(0, 0, 5);}
-\immediate\write\examples{r.filldraw(black, gray);}
-\immediate\write\examples{c.unfilldraw(black); }
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Rectangle r(origin, 3, 3, 90, 60);}
+@c \immediate\write\examples{Circle c(origin, 3, 90, 60);}
+@c \immediate\write\examples{c *= r.shift(0, 0, 5);}
+@c \immediate\write\examples{r.filldraw(black, gray);}
+@c \immediate\write\examples{c.unfilldraw(black); }
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -544,33 +544,33 @@ current_picture.shift(1);
 current_picture.output(Projections::PARALLEL_X_Y, 2);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Rectangle r(origin, 4, 4, 90, 60);}
-\immediate\write\examples{Circle c(origin, 4, 90, 60);}
-\immediate\write\examples{c *= r.shift(0, 0, 5);}
-\immediate\write\examples{r.filldraw(black, gray);}
-\immediate\write\examples{c.unfilldraw(black);}
-\immediate\write\examples{Point p(origin);}
-\immediate\write\examples{p.label("$.5@DBKS{}times$", "");}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y, .5);}
-\immediate\write\examples{current_picture.kill_labels();}
-\immediate\write\examples{p.label("Normal size", "");}
-\immediate\write\examples{p *= current_picture.shift(2.5);}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y);}
-\immediate\write\examples{current_picture.kill_labels();}
-\immediate\write\examples{p.label("$2@DBKS{}times$", "");}
-\immediate\write\examples{current_picture.shift(1);}
-\immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y, 2);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Rectangle r(origin, 4, 4, 90, 60);}
+@c \immediate\write\examples{Circle c(origin, 4, 90, 60);}
+@c \immediate\write\examples{c *= r.shift(0, 0, 5);}
+@c \immediate\write\examples{r.filldraw(black, gray);}
+@c \immediate\write\examples{c.unfilldraw(black);}
+@c \immediate\write\examples{Point p(origin);}
+@c \immediate\write\examples{p.label("$.5@DBKS{}times$", "");}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y, .5);}
+@c \immediate\write\examples{current_picture.kill_labels();}
+@c \immediate\write\examples{p.label("Normal size", "");}
+@c \immediate\write\examples{p *= current_picture.shift(2.5);}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y);}
+@c \immediate\write\examples{current_picture.kill_labels();}
+@c \immediate\write\examples{p.label("$2@DBKS{}times$", "");}
+@c \immediate\write\examples{current_picture.shift(1);}
+@c \immediate\write\examples{current_picture.output(Projections::PARALLEL_X_Y, 2);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -651,18 +651,18 @@ to the ground line.
 @c !! NOTE:  I haven't been able to get the colons lined up the way I'd
 @c like for the explanations of the abbreviations.  LDF 2003.08.15.
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{persp_0(2, 1.5, 5, 2, 40, 6, 4, 6, 9, 6, 9);} 
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{persp_0(2, 1.5, 5, 2, 40, 6, 4, 6, 9, 6, 9);} 
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -695,28 +695,28 @@ r.shift(p - r.get_point(0));
 r.draw();
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(0, 4, -6, 0, 4, 6, 6);}
-\immediate\write\examples{Rectangle R(origin, 2, 5, 0, 40);}
-\immediate\write\examples{Point p(2, 0, 1.5);}
-\immediate\write\examples{R.shift(p - R.get_point(0));}
-\immediate\write\examples{R.get_point(0).dotlabel("$r_0$", "bot");}
-\immediate\write\examples{R.get_point(1).dotlabel("$r_1$", "rt");}
-\immediate\write\examples{R.get_point(2).dotlabel("$r_2$");}
-\immediate\write\examples{R.get_point(3).dotlabel("$r_3$", "lft");}
-\immediate\write\examples{R.get_center().label("$R$", "");}
-\immediate\write\examples{R.draw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(0, 4, -6, 0, 4, 6, 6);}
+@c \immediate\write\examples{Rectangle R(origin, 2, 5, 0, 40);}
+@c \immediate\write\examples{Point p(2, 0, 1.5);}
+@c \immediate\write\examples{R.shift(p - R.get_point(0));}
+@c \immediate\write\examples{R.get_point(0).dotlabel("$r_0$", "bot");}
+@c \immediate\write\examples{R.get_point(1).dotlabel("$r_1$", "rt");}
+@c \immediate\write\examples{R.get_point(2).dotlabel("$r_2$");}
+@c \immediate\write\examples{R.get_point(3).dotlabel("$r_3$", "lft");}
+@c \immediate\write\examples{R.get_center().label("$R$", "");}
+@c \immediate\write\examples{R.draw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -825,52 +825,52 @@ The lower the angle of a
 vanishing point, the further away it is from the center of vision, as
 @NEXTFIG{} shows:    
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{vector<real> vps;}
-\immediate\write\examples{vps.push_back(.5);}
-\immediate\write\examples{vps.push_back(5);}
-\immediate\write\examples{for (real r = 10; r < 90; r+=10)}
-\immediate\write\examples{vps.push_back(r);}
-\immediate\write\examples{vector<Point*> points =  }
-\immediate\write\examples{make_perspective_frame(vps, 5, 4, 1, 16);} 
-\immediate\write\examples{Point f(*points[0]);}
-\immediate\write\examples{Point vp_pt_5r(*points[7]);}
-\immediate\write\examples{Point vp5r(*points[8]);}
-\immediate\write\examples{Point vp10r(*points[9]);}
-\immediate\write\examples{Point p10r(vp10r - f);}
-\immediate\write\examples{Point p_pt_5r(vp_pt_5r - f);}
-\immediate\write\examples{Point p5r(vp5r - f);}
-\immediate\write\examples{p_pt_5r.unit_vector(true);}
-\immediate\write\examples{p5r.unit_vector(true);}
-\immediate\write\examples{p10r.unit_vector(true);}
-\immediate\write\examples{p_pt_5r *= p5r *= p10r *= 13.5;}
-\immediate\write\examples{stringstream s;}
-\immediate\write\examples{f.drawarrow(p_pt_5r, black, "evenly");}
-\immediate\write\examples{s << "VP $0.5^@DBKS{}circ$ $(x="}
-\immediate\write\examples{<< vp_pt_5r.get_x() << "@OCB{}@DBKS{}rm cm@CCB{})$";}
-\immediate\write\examples{p_pt_5r.label(s.str(), "rt");}
-\immediate\write\examples{s.str("");}
-\immediate\write\examples{f.drawarrow(p5r, black, "evenly");}
-\immediate\write\examples{s << "VP $5^@DBKS{}circ$ $(x="}
-\immediate\write\examples{<< vp5r.get_x() << "@OCB{}@DBKS{}rm cm@CCB{})$";}
-\immediate\write\examples{p5r.label(s.str(), "rt");}
-\immediate\write\examples{s.str("");}
-\immediate\write\examples{f.drawarrow(p10r, black, "evenly");}
-\immediate\write\examples{s << "VP $10^@DBKS{}circ$ $(x="}
-\immediate\write\examples{<< vp10r.get_x() << "@OCB{}@DBKS{}rm cm@CCB{})$";}
-\immediate\write\examples{p10r.label(s.str(), "rt");}
-\immediate\write\examples{s.str("");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\SEEX{.25cm}{.5cm}{0cm}{0cm}
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{vector<real> vps;}
+@c \immediate\write\examples{vps.push_back(.5);}
+@c \immediate\write\examples{vps.push_back(5);}
+@c \immediate\write\examples{for (real r = 10; r < 90; r+=10)}
+@c \immediate\write\examples{vps.push_back(r);}
+@c \immediate\write\examples{vector<Point*> points =  }
+@c \immediate\write\examples{make_perspective_frame(vps, 5, 4, 1, 16);} 
+@c \immediate\write\examples{Point f(*points[0]);}
+@c \immediate\write\examples{Point vp_pt_5r(*points[7]);}
+@c \immediate\write\examples{Point vp5r(*points[8]);}
+@c \immediate\write\examples{Point vp10r(*points[9]);}
+@c \immediate\write\examples{Point p10r(vp10r - f);}
+@c \immediate\write\examples{Point p_pt_5r(vp_pt_5r - f);}
+@c \immediate\write\examples{Point p5r(vp5r - f);}
+@c \immediate\write\examples{p_pt_5r.unit_vector(true);}
+@c \immediate\write\examples{p5r.unit_vector(true);}
+@c \immediate\write\examples{p10r.unit_vector(true);}
+@c \immediate\write\examples{p_pt_5r *= p5r *= p10r *= 13.5;}
+@c \immediate\write\examples{stringstream s;}
+@c \immediate\write\examples{f.drawarrow(p_pt_5r, black, "evenly");}
+@c \immediate\write\examples{s << "VP $0.5^@DBKS{}circ$ $(x="}
+@c \immediate\write\examples{<< vp_pt_5r.get_x() << "@OCB{}@DBKS{}rm cm@CCB{})$";}
+@c \immediate\write\examples{p_pt_5r.label(s.str(), "rt");}
+@c \immediate\write\examples{s.str("");}
+@c \immediate\write\examples{f.drawarrow(p5r, black, "evenly");}
+@c \immediate\write\examples{s << "VP $5^@DBKS{}circ$ $(x="}
+@c \immediate\write\examples{<< vp5r.get_x() << "@OCB{}@DBKS{}rm cm@CCB{})$";}
+@c \immediate\write\examples{p5r.label(s.str(), "rt");}
+@c \immediate\write\examples{s.str("");}
+@c \immediate\write\examples{f.drawarrow(p10r, black, "evenly");}
+@c \immediate\write\examples{s << "VP $10^@DBKS{}circ$ $(x="}
+@c \immediate\write\examples{<< vp10r.get_x() << "@OCB{}@DBKS{}rm cm@CCB{})$";}
+@c \immediate\write\examples{p10r.label(s.str(), "rt");}
+@c \immediate\write\examples{s.str("");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \SEEX{.25cm}{.5cm}{0cm}{0cm}
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -932,40 +932,40 @@ r.draw();
 current_picture.output();
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(0, 4, -6, 0, 4, 6, 6);}
-\immediate\write\examples{Rectangle r;}
-\immediate\write\examples{Point center(0, 2);}
-\immediate\write\examples{stringstream s;}
-\immediate\write\examples{r.set(center, 2, 5, 0, 0, 0.5);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{s << "$" << .5 << "^@DBKS{}circ$";}
-\immediate\write\examples{center.label(s.str(), "");}
-\immediate\write\examples{s.str("");}
-\immediate\write\examples{center.shift(4);}
-\immediate\write\examples{r.set(center, 2, 5, 0, 0, 2.5);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{s << "$" << 2.5 << "^@DBKS{}circ$";}
-\immediate\write\examples{center.label(s.str(), "");}
-\immediate\write\examples{s.str("");}
-\immediate\write\examples{center.shift(4);}
-\immediate\write\examples{r.set(center, 2, 5, 0, 0, 5);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{s << "$" << 5 << "^@DBKS{}circ$";}
-\immediate\write\examples{center.label(s.str(), "");}
-\immediate\write\examples{s.str("");}
-\immediate\write\examples{center.shift(4);}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(0, 4, -6, 0, 4, 6, 6);}
+@c \immediate\write\examples{Rectangle r;}
+@c \immediate\write\examples{Point center(0, 2);}
+@c \immediate\write\examples{stringstream s;}
+@c \immediate\write\examples{r.set(center, 2, 5, 0, 0, 0.5);}
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{s << "$" << .5 << "^@DBKS{}circ$";}
+@c \immediate\write\examples{center.label(s.str(), "");}
+@c \immediate\write\examples{s.str("");}
+@c \immediate\write\examples{center.shift(4);}
+@c \immediate\write\examples{r.set(center, 2, 5, 0, 0, 2.5);}
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{s << "$" << 2.5 << "^@DBKS{}circ$";}
+@c \immediate\write\examples{center.label(s.str(), "");}
+@c \immediate\write\examples{s.str("");}
+@c \immediate\write\examples{center.shift(4);}
+@c \immediate\write\examples{r.set(center, 2, 5, 0, 0, 5);}
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{s << "$" << 5 << "^@DBKS{}circ$";}
+@c \immediate\write\examples{center.label(s.str(), "");}
+@c \immediate\write\examples{s.str("");}
+@c \immediate\write\examples{center.shift(4);}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1076,26 +1076,26 @@ r.draw();
 current_picture.output(f);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point pos(0, 5, -10);}
-\immediate\write\examples{Point dir(0, 5, 10);}
-\immediate\write\examples{Focus f(pos, dir, 10);}
-\immediate\write\examples{Point center(2, 0, 3);}
-\immediate\write\examples{Rectangle r(center, 3, 3);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{center.label("$r$", "");}
-\immediate\write\examples{draw_axes(gray);} 
-\immediate\write\examples{current_picture.output(f);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point pos(0, 5, -10);}
+@c \immediate\write\examples{Point dir(0, 5, 10);}
+@c \immediate\write\examples{Focus f(pos, dir, 10);}
+@c \immediate\write\examples{Point center(2, 0, 3);}
+@c \immediate\write\examples{Rectangle r(center, 3, 3);}
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{center.label("$r$", "");}
+@c \immediate\write\examples{draw_axes(gray);} 
+@c \immediate\write\examples{current_picture.output(f);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1139,26 +1139,26 @@ r.draw();
 current_picture.output(f);
 @end example
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point pos(0, 5, -10);}
-\immediate\write\examples{Point dir(0, 5, 10);}
-\immediate\write\examples{Focus f(pos, dir, 10, 30);}
-\immediate\write\examples{Point center(2, 0, 3);}
-\immediate\write\examples{Rectangle r(center, 3, 3);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{center.label("$r$", "");}
-\immediate\write\examples{draw_axes(gray);} 
-\immediate\write\examples{current_picture.output(f);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point pos(0, 5, -10);}
+@c \immediate\write\examples{Point dir(0, 5, 10);}
+@c \immediate\write\examples{Focus f(pos, dir, 10, 30);}
+@c \immediate\write\examples{Point center(2, 0, 3);}
+@c \immediate\write\examples{Rectangle r(center, 3, 3);}
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{center.label("$r$", "");}
+@c \immediate\write\examples{draw_axes(gray);} 
+@c \immediate\write\examples{current_picture.output(f);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1192,24 +1192,24 @@ r.draw();
 current_picture.output(f);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Focus f(3, 5, -5, 0, 3, 0, 10, 10);}
-\immediate\write\examples{Point center(2, 0, 3);}
-\immediate\write\examples{Rectangle r(center, 3, 3);}
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{center.label("$r$", "");}
-\immediate\write\examples{draw_axes(gray);} 
-\immediate\write\examples{current_picture.output(f);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Focus f(3, 5, -5, 0, 3, 0, 10, 10);}
+@c \immediate\write\examples{Point center(2, 0, 3);}
+@c \immediate\write\examples{Rectangle r(center, 3, 3);}
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{center.label("$r$", "");}
+@c \immediate\write\examples{draw_axes(gray);} 
+@c \immediate\write\examples{current_picture.output(f);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1277,32 +1277,32 @@ for (int i = 0; i < 5; ++i)
 endfig(1);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Point pos(2, 10, 3);}
-\immediate\write\examples{Point dir(2, -10, 3);}
-\immediate\write\examples{Focus f;}
-\immediate\write\examples{Point center(2, 0, 3);}
-\immediate\write\examples{for (int i = 0; i < 5; ++i)}
-\immediate\write\examples{@OCB}
-\immediate\write\examples{f.set(pos, dir, 10, (15 * i));}
-\immediate\write\examples{Rectangle r(center, 3, 3);}
-\immediate\write\examples{r.get_point(0).label(i, "lft"); }
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{ current_picture.output(f);}
-\immediate\write\examples{    current_picture.clear();}
-\immediate\write\examples{    pos.shift(1, 1, 0);}
-\immediate\write\examples{    dir.rotate(0, 0, 10);}
-\immediate\write\examples{  @CCB}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Point pos(2, 10, 3);}
+@c \immediate\write\examples{Point dir(2, -10, 3);}
+@c \immediate\write\examples{Focus f;}
+@c \immediate\write\examples{Point center(2, 0, 3);}
+@c \immediate\write\examples{for (int i = 0; i < 5; ++i)}
+@c \immediate\write\examples{@OCB}
+@c \immediate\write\examples{f.set(pos, dir, 10, (15 * i));}
+@c \immediate\write\examples{Rectangle r(center, 3, 3);}
+@c \immediate\write\examples{r.get_point(0).label(i, "lft"); }
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{ current_picture.output(f);}
+@c \immediate\write\examples{    current_picture.clear();}
+@c \immediate\write\examples{    pos.shift(1, 1, 0);}
+@c \immediate\write\examples{    dir.rotate(0, 0, 10);}
+@c \immediate\write\examples{  @CCB}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1380,26 +1380,26 @@ c.draw();
 current_picture.output();
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(1, 3, -5, 0, 3, 5, 10);}
-\immediate\write\examples{Point p(0, -2, 5);}
-\immediate\write\examples{Rectangle r(p, 3, 4, 90);}
-\immediate\write\examples{p.label("$r$", "");} 
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{Point q(2, -2, 3);}
-\immediate\write\examples{Circle c(q, 3, 90);}
-\immediate\write\examples{q.label("$c$", "");} 
-\immediate\write\examples{c.draw();}
-\OEX{}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(1, 3, -5, 0, 3, 5, 10);}
+@c \immediate\write\examples{Point p(0, -2, 5);}
+@c \immediate\write\examples{Rectangle r(p, 3, 4, 90);}
+@c \immediate\write\examples{p.label("$r$", "");} 
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{Point q(2, -2, 3);}
+@c \immediate\write\examples{Circle c(q, 3, 90);}
+@c \immediate\write\examples{q.label("$c$", "");} 
+@c \immediate\write\examples{c.draw();}
+@c \OEX{}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1428,20 +1428,20 @@ r.draw();
 c.filldraw();
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{p.label("$r$", "");} 
-\immediate\write\examples{q.label("$c$", "");} 
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{c.filldraw();}
-\OEX{}
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{p.label("$r$", "");} 
+@c \immediate\write\examples{q.label("$c$", "");} 
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{c.filldraw();}
+@c \OEX{}
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1470,22 +1470,22 @@ the position and direction of the @code{Focus} used for outputting the
 default_focus.set(8, 0, -5, 5, 3, 5, 10);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\immediate\write\examples{default_focus.set(8, 0, -5, 5, 3, 5, 10);}
-\immediate\write\examples{r.get_point(3).mediate(p, .333).label("$r$", "");}
-\immediate\write\examples{q.label("$c$", "");} 
-\immediate\write\examples{r.draw();}
-\immediate\write\examples{c.filldraw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \immediate\write\examples{default_focus.set(8, 0, -5, 5, 3, 5, 10);}
+@c \immediate\write\examples{r.get_point(3).mediate(p, .333).label("$r$", "");}
+@c \immediate\write\examples{q.label("$c$", "");} 
+@c \immediate\write\examples{r.draw();}
+@c \immediate\write\examples{c.filldraw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1609,34 +1609,34 @@ Perspective coordinates.
 -- cycle;
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
-\immediate\write\examples{Rectangle r0(origin, 3, 4, 45);}
-\immediate\write\examples{Rectangle r1(origin, 2, 6, -45);}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{r0.get_point(0).label(Point::WORLD_VALUES_Z, "lft");}
-\immediate\write\examples{r0.get_point(1).label(Point::WORLD_VALUES_Z, "rt");}
-\immediate\write\examples{r0.get_point(2).label(Point::WORLD_VALUES_Z, "lrt");}
-\immediate\write\examples{r0.get_point(3).label(Point::WORLD_VALUES_Z, "llft");}
-\immediate\write\examples{r1.get_point(0).label(Point::WORLD_VALUES_Z, "lft");}
-\immediate\write\examples{r1.get_point(1).label(Point::WORLD_VALUES_Z, "rt");}
-\immediate\write\examples{r1.get_point(2).label(Point::WORLD_VALUES_Z, "rt");}
-\immediate\write\examples{r1.get_point(3).label(Point::WORLD_VALUES_Z, "lft");}
-\immediate\write\examples{r0.get_mid_point(0).label("$r_0$", "bot");}
-\immediate\write\examples{r1.get_mid_point(0).label("$r_1$");}
-\immediate\write\examples{draw_axes(gray);}
-\immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MAX_Z);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
+@c \immediate\write\examples{Rectangle r0(origin, 3, 4, 45);}
+@c \immediate\write\examples{Rectangle r1(origin, 2, 6, -45);}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{r0.get_point(0).label(Point::WORLD_VALUES_Z, "lft");}
+@c \immediate\write\examples{r0.get_point(1).label(Point::WORLD_VALUES_Z, "rt");}
+@c \immediate\write\examples{r0.get_point(2).label(Point::WORLD_VALUES_Z, "lrt");}
+@c \immediate\write\examples{r0.get_point(3).label(Point::WORLD_VALUES_Z, "llft");}
+@c \immediate\write\examples{r1.get_point(0).label(Point::WORLD_VALUES_Z, "lft");}
+@c \immediate\write\examples{r1.get_point(1).label(Point::WORLD_VALUES_Z, "rt");}
+@c \immediate\write\examples{r1.get_point(2).label(Point::WORLD_VALUES_Z, "rt");}
+@c \immediate\write\examples{r1.get_point(3).label(Point::WORLD_VALUES_Z, "lft");}
+@c \immediate\write\examples{r0.get_mid_point(0).label("$r_0$", "bot");}
+@c \immediate\write\examples{r1.get_mid_point(0).label("$r_1$");}
+@c \immediate\write\examples{draw_axes(gray);}
+@c \immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MAX_Z);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1683,33 +1683,33 @@ When subsequently @math{r_0} is drawn, it covers part of the top of
 current_picture.output(default_focus, PERSP, 1, MAX_Z);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
-\immediate\write\examples{Rectangle r0(origin, 3, 4, 45);}
-\immediate\write\examples{Rectangle r1(origin, 2, 6, -45);}
-\immediate\write\examples{r0.filldraw();}
-\immediate\write\examples{r1.filldraw(black, gray);}
-\immediate\write\examples{r0.get_mid_point(0).label("$r_0$", "bot");}
-\immediate\write\examples{r1.get_mid_point(0).label("$r_1$");}
-\immediate\write\examples{draw_axes(gray);}
-\immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MAX_Z);}
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
+@c \immediate\write\examples{Rectangle r0(origin, 3, 4, 45);}
+@c \immediate\write\examples{Rectangle r1(origin, 2, 6, -45);}
+@c \immediate\write\examples{r0.filldraw();}
+@c \immediate\write\examples{r1.filldraw(black, gray);}
+@c \immediate\write\examples{r0.get_mid_point(0).label("$r_0$", "bot");}
+@c \immediate\write\examples{r1.get_mid_point(0).label("$r_1$");}
+@c \immediate\write\examples{draw_axes(gray);}
+@c \immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MAX_Z);}
 %%
 %% Kludge!! I clear current_picture in order to get the z-axis to be
 %% drawn.  LDF 2003.08.15.
 %%
-\immediate\write\examples{current_picture.clear();} 
-\immediate\write\examples{draw_axes(gray);}
-\immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MAX_Z);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c \immediate\write\examples{current_picture.clear();} 
+@c \immediate\write\examples{draw_axes(gray);}
+@c \immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MAX_Z);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1743,26 +1743,26 @@ It thereby covers the bottom part of
 current_picture.output(default_focus, PERSP, 1, MIN_Z);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
-\immediate\write\examples{Rectangle r0(origin, 3, 4, 45);}
-\immediate\write\examples{Rectangle r1(origin, 2, 6, -45);}
-\immediate\write\examples{r0.get_mid_point(0).label("$r_0$", "bot");}
-\immediate\write\examples{r1.get_mid_point(0).label("$r_1$");}
-\immediate\write\examples{r0.filldraw();}
-\immediate\write\examples{r1.filldraw(black, gray);}
-\immediate\write\examples{draw_axes(gray);}
-\immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MIN_Z);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
+@c \immediate\write\examples{Rectangle r0(origin, 3, 4, 45);}
+@c \immediate\write\examples{Rectangle r1(origin, 2, 6, -45);}
+@c \immediate\write\examples{r0.get_mid_point(0).label("$r_0$", "bot");}
+@c \immediate\write\examples{r1.get_mid_point(0).label("$r_1$");}
+@c \immediate\write\examples{r0.filldraw();}
+@c \immediate\write\examples{r1.filldraw(black, gray);}
+@c \immediate\write\examples{draw_axes(gray);}
+@c \immediate\write\examples{current_picture.output(default_focus, PERSP, 1, MIN_Z);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1800,24 +1800,24 @@ c.filldraw(black, gray);
 current_picture.output(default_focus, PERSP, 1, NO_SORT);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
-\immediate\write\examples{Rectangle r(origin, 3, 4, 45);}
-\immediate\write\examples{Circle c(origin, 2, -45);}
-\immediate\write\examples{r.filldraw();}
-\immediate\write\examples{c.filldraw(black, gray);}
-\immediate\write\examples{draw_axes(gray);}
-\immediate\write\examples{current_picture.output(default_focus, PERSP, 1, NO_SORT);}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{default_focus.set(5, 3, -10, 3, 1, 1, 10, 180);}
+@c \immediate\write\examples{Rectangle r(origin, 3, 4, 45);}
+@c \immediate\write\examples{Circle c(origin, 2, -45);}
+@c \immediate\write\examples{r.filldraw();}
+@c \immediate\write\examples{c.filldraw(black, gray);}
+@c \immediate\write\examples{draw_axes(gray);}
+@c \immediate\write\examples{current_picture.output(default_focus, PERSP, 1, NO_SORT);}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1874,58 +1874,58 @@ The following table shows how many comparisons are needed for $n$
 @end tex
 @end iftex
 
-@iftex
-@tex 
-\ifmakeexamples
-\BEX
-\BGRP 
-\immediate\write\examples{Rectangle r0(origin, 2, .5, 90);}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{Point p0(r0.get_center());}
-\immediate\write\examples{p0.label("\OCB\DBKS{tt} Shapes\CCB", "");}
-\immediate\write\examples{Rectangle r1(origin, 3, .5, 90);}
-\immediate\write\examples{r1.shift(r0.get_point(1) - r1.get_point(0));}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{Point p1(r1.get_center());}
-\immediate\write\examples{p1.label("Comparisons", "");}
-\immediate\write\examples{Transform t;}
-\immediate\write\examples{t.shift(r0.get_point(0) - r0.get_point(3));}
-\immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{real w0 = r0.get_point(1).get_x() - r0.get_point(0).get_x();}
-\immediate\write\examples{real w1 = r1.get_point(1).get_x() - r1.get_point(0).get_x();}
-\immediate\write\examples{p0.shift(.375 * w0);}
-\immediate\write\examples{p1.shift(.375 * w1);}
-\immediate\write\examples{p0.label("10", "lft");}
-\immediate\write\examples{p1.label("45", "lft");}
-\immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{p0.label("100", "lft");}
-\immediate\write\examples{p1.label("4950", "lft");}
-\immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{p0.label("1000", "lft");}
-\immediate\write\examples{p1.label("499,500", "lft");}
-\immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{p0.label("10,000", "lft");}
-\immediate\write\examples{p1.label("49,995,000", "lft");}
-\immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
-\immediate\write\examples{r0.draw();}
-\immediate\write\examples{r1.draw();}
-\immediate\write\examples{p0.label("100,000", "lft");}
-\immediate\write\examples{p1.label("$4.99995\DBKS{times} 10^9$", "lft");}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 0
-\fi
-\PEX 
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP 
+@c \immediate\write\examples{Rectangle r0(origin, 2, .5, 90);}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{Point p0(r0.get_center());}
+@c \immediate\write\examples{p0.label("\OCB\DBKS{tt} Shapes\CCB", "");}
+@c \immediate\write\examples{Rectangle r1(origin, 3, .5, 90);}
+@c \immediate\write\examples{r1.shift(r0.get_point(1) - r1.get_point(0));}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{Point p1(r1.get_center());}
+@c \immediate\write\examples{p1.label("Comparisons", "");}
+@c \immediate\write\examples{Transform t;}
+@c \immediate\write\examples{t.shift(r0.get_point(0) - r0.get_point(3));}
+@c \immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{real w0 = r0.get_point(1).get_x() - r0.get_point(0).get_x();}
+@c \immediate\write\examples{real w1 = r1.get_point(1).get_x() - r1.get_point(0).get_x();}
+@c \immediate\write\examples{p0.shift(.375 * w0);}
+@c \immediate\write\examples{p1.shift(.375 * w1);}
+@c \immediate\write\examples{p0.label("10", "lft");}
+@c \immediate\write\examples{p1.label("45", "lft");}
+@c \immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{p0.label("100", "lft");}
+@c \immediate\write\examples{p1.label("4950", "lft");}
+@c \immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{p0.label("1000", "lft");}
+@c \immediate\write\examples{p1.label("499,500", "lft");}
+@c \immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{p0.label("10,000", "lft");}
+@c \immediate\write\examples{p1.label("49,995,000", "lft");}
+@c \immediate\write\examples{p0 *= p1 *= r0 *= r1 *= t;}
+@c \immediate\write\examples{r0.draw();}
+@c \immediate\write\examples{r1.draw();}
+@c \immediate\write\examples{p0.label("100,000", "lft");}
+@c \immediate\write\examples{p1.label("$4.99995\DBKS{times} 10^9$", "lft");}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 0
+@c \fi
+@c \PEX 
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

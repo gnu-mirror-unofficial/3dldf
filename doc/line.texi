@@ -64,40 +64,40 @@ Line L0(p, d);
 Line L1 = p.get_line(d);
 @end example
 
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 3, -10, 0, 3, 10, 10);}
-\immediate\write\examples{draw_axes(gray);}
-\immediate\write\examples{stringstream s;}
-\immediate\write\examples{Point p(2, 1, 2);}
-\immediate\write\examples{Point d(-3, 3, 3.5);}
-\immediate\write\examples{p.dotlabel("$p$"); }
-\immediate\write\examples{p.label(Point::WORLD_VALUES, "bot");}
-\immediate\write\examples{p.draw(d, black, "evenly");}
-\immediate\write\examples{Line L0(p, d);}
-\immediate\write\examples{s << "$d @DBKS{equiv} L_0.@OCB@DBKS{tt} direction@CCB @DBKS{equiv} (" }
-\immediate\write\examples{  << L0.direction.get_x()}
-\immediate\write\examples{  << ", " << L0.direction.get_y() << ", " << L0.direction.get_z()}
-\immediate\write\examples{  << ")$";}
-\immediate\write\examples{L0.direction.label(s.str()); }
-\immediate\write\examples{origin.drawarrow(L0.direction);}
-\immediate\write\examples{Line L1 = p.get_line(d);}
-\immediate\write\examples{s.str("");}
-\immediate\write\examples{s << "$L_1.@OCB@DBKS{tt} direction@CCB @DBKS{equiv} (" << L1.direction.get_x()}
-\immediate\write\examples{  << ", " << L1.direction.get_y() << ", " << L1.direction.get_z()}
-\immediate\write\examples{  << ")$";}
-\immediate\write\examples{L1.direction.label(s.str());}
-\immediate\write\examples{origin.drawarrow(L1.direction); }
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 3, -10, 0, 3, 10, 10);}
+@c \immediate\write\examples{draw_axes(gray);}
+@c \immediate\write\examples{stringstream s;}
+@c \immediate\write\examples{Point p(2, 1, 2);}
+@c \immediate\write\examples{Point d(-3, 3, 3.5);}
+@c \immediate\write\examples{p.dotlabel("$p$"); }
+@c \immediate\write\examples{p.label(Point::WORLD_VALUES, "bot");}
+@c \immediate\write\examples{p.draw(d, black, "evenly");}
+@c \immediate\write\examples{Line L0(p, d);}
+@c \immediate\write\examples{s << "$d @DBKS{equiv} L_0.@OCB@DBKS{tt} direction@CCB @DBKS{equiv} (" }
+@c \immediate\write\examples{  << L0.direction.get_x()}
+@c \immediate\write\examples{  << ", " << L0.direction.get_y() << ", " << L0.direction.get_z()}
+@c \immediate\write\examples{  << ")$";}
+@c \immediate\write\examples{L0.direction.label(s.str()); }
+@c \immediate\write\examples{origin.drawarrow(L0.direction);}
+@c \immediate\write\examples{Line L1 = p.get_line(d);}
+@c \immediate\write\examples{s.str("");}
+@c \immediate\write\examples{s << "$L_1.@OCB@DBKS{tt} direction@CCB @DBKS{equiv} (" << L1.direction.get_x()}
+@c \immediate\write\examples{  << ", " << L1.direction.get_y() << ", " << L1.direction.get_z()}
+@c \immediate\write\examples{  << ")$";}
+@c \immediate\write\examples{L1.direction.label(s.str());}
+@c \immediate\write\examples{origin.drawarrow(L1.direction); }
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html

@@ -827,42 +827,42 @@ r[3].draw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{Rectangle r[4];} 
-\immediate\write\examples{r[0].set(origin, 1, 1, 90);}
-\immediate\write\examples{r[3] = r[2] = r[1] = r[0];} 
-\immediate\write\examples{Transform t;}  
-\immediate\write\examples{t.reset();}
-\immediate\write\examples{t.shift(1.5, 1.5);} 
-\immediate\write\examples{r[0] *= t;} 
-\immediate\write\examples{r[0].draw();} 
-\immediate\write\examples{r[0].get_center().label("$r_0$", "");}
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{Rectangle r[4];} 
+@c \immediate\write\examples{r[0].set(origin, 1, 1, 90);}
+@c \immediate\write\examples{r[3] = r[2] = r[1] = r[0];} 
+@c \immediate\write\examples{Transform t;}  
+@c \immediate\write\examples{t.reset();}
+@c \immediate\write\examples{t.shift(1.5, 1.5);} 
+@c \immediate\write\examples{r[0] *= t;} 
+@c \immediate\write\examples{r[0].draw();} 
+@c \immediate\write\examples{r[0].get_center().label("$r_0$", "");}
 %  
-\immediate\write\examples{t.shift_times(1.5, 1.5);} 
-\immediate\write\examples{r[1] *= t;} 
-\immediate\write\examples{r[1].get_center().label("$r_1$", "");}
-\immediate\write\examples{r[1].draw();}
+@c \immediate\write\examples{t.shift_times(1.5, 1.5);} 
+@c \immediate\write\examples{r[1] *= t;} 
+@c \immediate\write\examples{r[1].get_center().label("$r_1$", "");}
+@c \immediate\write\examples{r[1].draw();}
 %
-\immediate\write\examples{t.shift_times(1.5, 1.5);} 
-\immediate\write\examples{r[2] *= t;}
-\immediate\write\examples{r[2].get_center().label("$r_2$", "");}
-\immediate\write\examples{r[2].draw();}
+@c \immediate\write\examples{t.shift_times(1.5, 1.5);} 
+@c \immediate\write\examples{r[2] *= t;}
+@c \immediate\write\examples{r[2].get_center().label("$r_2$", "");}
+@c \immediate\write\examples{r[2].draw();}
 %
-\immediate\write\examples{t.shift_times(1.5, 1.5);}
-\immediate\write\examples{r[3] *= t;}
-\immediate\write\examples{r[3].get_center().label("$r_3$", "");}
-\immediate\write\examples{r[3].draw();}
-\OEX{Projections::PARALLEL_X_Y}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c \immediate\write\examples{t.shift_times(1.5, 1.5);}
+@c \immediate\write\examples{r[3] *= t;}
+@c \immediate\write\examples{r[3].get_center().label("$r_3$", "");}
+@c \immediate\write\examples{r[3].draw();}
+@c \OEX{Projections::PARALLEL_X_Y}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -908,38 +908,38 @@ c.draw();
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
-\immediate\write\examples{Cuboid c(origin, 1, 1, 1);}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{Transform t;}
-\immediate\write\examples{t.rotate(30, 30, 30);}
-\immediate\write\examples{t.shift(1, 0, 1);}
-\immediate\write\examples{c *= t;}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
-\immediate\write\examples{c *= t;            }
-\immediate\write\examples{c.draw();          }
-\immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
-\immediate\write\examples{c *= t;            }
-\immediate\write\examples{c.draw();          }
-\immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
-\immediate\write\examples{c *= t;            }
-\immediate\write\examples{c.draw();          }
-\immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
-\immediate\write\examples{c *= t;}
-\immediate\write\examples{c.draw();}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
+@c \immediate\write\examples{Cuboid c(origin, 1, 1, 1);}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{Transform t;}
+@c \immediate\write\examples{t.rotate(30, 30, 30);}
+@c \immediate\write\examples{t.shift(1, 0, 1);}
+@c \immediate\write\examples{c *= t;}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
+@c \immediate\write\examples{c *= t;            }
+@c \immediate\write\examples{c.draw();          }
+@c \immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
+@c \immediate\write\examples{c *= t;            }
+@c \immediate\write\examples{c.draw();          }
+@c \immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
+@c \immediate\write\examples{c *= t;            }
+@c \immediate\write\examples{c.draw();          }
+@c \immediate\write\examples{t.shift_times(1.5, 0, 1.5);}
+@c \immediate\write\examples{c *= t;}
+@c \immediate\write\examples{c.draw();}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
@@ -1049,35 +1049,35 @@ n.show("n:");
 @end example
 
 @c
-@iftex
-@tex
-\ifmakeexamples
-\BEX
-\BGRP
-\immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
-\immediate\write\examples{Circle c(origin, 3, 75, 25, 6);}
-\immediate\write\examples{c.shift(2, 3);}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{c.get_center().label("$c$", "llft");}
-\immediate\write\examples{Point n = c.get_normal();}
-\immediate\write\examples{n.shift(c.get_center());}
-\immediate\write\examples{n.label("$\DBKS{vec}\OCB n\CCB$", "urt"); }
-\immediate\write\examples{c.get_center().drawarrow(n);}
-\immediate\write\examples{Transform t;}
-\immediate\write\examples{t.align_with_axis(c.get_center(), n, 'y');}
-\immediate\write\examples{n *= c *= t;}
-\immediate\write\examples{c.draw();}
-\immediate\write\examples{c.get_center().label("$c$", "lrt");}
-\immediate\write\examples{n.label("$\DBKS{vec}\OCB n\CCB$", "rt");}
-\immediate\write\examples{draw_axes(gray, 0, "d", "d", "rt");}
-\immediate\write\examples{c.get_center().drawarrow(n);}
-\OEX{}
-\EGRP
-\EEX 1
-\fi
-\PEX  
-@end tex
-@end iftex
+@c @iftex
+@c @tex
+@c \ifmakeexamples
+@c \BEX
+@c \BGRP
+@c \immediate\write\examples{default_focus.set(2, 3, -10, 2, 3, 10, 10);}
+@c \immediate\write\examples{Circle c(origin, 3, 75, 25, 6);}
+@c \immediate\write\examples{c.shift(2, 3);}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{c.get_center().label("$c$", "llft");}
+@c \immediate\write\examples{Point n = c.get_normal();}
+@c \immediate\write\examples{n.shift(c.get_center());}
+@c \immediate\write\examples{n.label("$\DBKS{vec}\OCB n\CCB$", "urt"); }
+@c \immediate\write\examples{c.get_center().drawarrow(n);}
+@c \immediate\write\examples{Transform t;}
+@c \immediate\write\examples{t.align_with_axis(c.get_center(), n, 'y');}
+@c \immediate\write\examples{n *= c *= t;}
+@c \immediate\write\examples{c.draw();}
+@c \immediate\write\examples{c.get_center().label("$c$", "lrt");}
+@c \immediate\write\examples{n.label("$\DBKS{vec}\OCB n\CCB$", "rt");}
+@c \immediate\write\examples{draw_axes(gray, 0, "d", "d", "rt");}
+@c \immediate\write\examples{c.get_center().drawarrow(n);}
+@c \OEX{}
+@c \EGRP
+@c \EEX 1
+@c \fi
+@c \PEX  
+@c @end tex
+@c @end iftex
 
 @ifhtml
 @html
