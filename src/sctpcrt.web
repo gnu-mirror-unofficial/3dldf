@@ -3978,6 +3978,33 @@ for |disentangle|.
 
    scanner_node->add_entry("disentangle", DISENTANGLE, spark); 
 
+
+@*3 Entries for time and astronomy.
+\initials{LDF 2021.05.23.}
+
+\LOG
+\initials{LDF 2021.05.23.}
+Added this section with calls to |scanner_node->add_entry| for |time|,
+|sidereal|, |solar|, |earth|, |rotation|, |right|, |ascension|,
+|declination|, |precession|, |nutation| and |mean|.
+\ENDLOG
+
+@q ***** (5)@> 
+
+@<Define |Scanner_Type::create|@>=
+
+   scanner_node->add_entry("time", TIME, spark);
+   scanner_node->add_entry("sidereal", SIDEREAL, spark);
+   scanner_node->add_entry("solar", SOLAR, spark);
+   scanner_node->add_entry("earth", EARTH, spark);
+   scanner_node->add_entry("rotation", ROTATION, spark);
+   scanner_node->add_entry("right", RIGHT, spark);
+   scanner_node->add_entry("ascension", ASCENSION, spark);
+   scanner_node->add_entry("declination", DECLINATION, spark);
+   scanner_node->add_entry("precession", PRECESSION, spark);
+   scanner_node->add_entry("nutation", NUTATION, spark);
+   scanner_node->add_entry("mean", MEAN, spark);
+
 @q **** (4) Internal quantities.  @>          
 @*3 Internal quantities.
 
