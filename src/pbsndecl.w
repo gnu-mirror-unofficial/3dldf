@@ -3179,17 +3179,21 @@ Added this section.
 
 @<Token and precedence declarations@>=
 
-@=%token <int_value> TIME@>@/
-@=%token <int_value> SIDEREAL@>@/
-@=%token <int_value> SOLAR@>@/
-@=%token <int_value> EARTH@>@/
-@=%token <int_value> ROTATION@>@/
-@=%token <int_value> RIGHT@>@/
+@=%token <int_value> APPARENT@>@/
 @=%token <int_value> ASCENSION@>@/
 @=%token <int_value> DECLINATION@>@/
-@=%token <int_value> PRECESSION@>@/
-@=%token <int_value> NUTATION@>@/
+@=%token <int_value> EARTH@>@/
+@=%token <int_value> GREENWICH@>@/
 @=%token <int_value> MEAN@>@/
+@=%token <int_value> MERIDIAN@>@/
+@=%token <int_value> NUTATION@>@/
+@=%token <int_value> PRECESSION@>@/
+@=%token <int_value> RIGHT@>@/
+@=%token <int_value> ROTATION@>@/
+@=%token <int_value> SIDEREAL@>@/
+@=%token <int_value> SOLAR@>@/
+@=%token <int_value> TIME@>@/
+@=%token <int_value> UNIVERSAL@>@/
 
 @q ** (2) Constants in |namespace Scan_Parse|. @>
 @*1 Constants in {\bf namespace Scan\_Parse}. 

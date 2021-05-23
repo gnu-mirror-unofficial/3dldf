@@ -3984,26 +3984,29 @@ for |disentangle|.
 
 \LOG
 \initials{LDF 2021.05.23.}
-Added this section with calls to |scanner_node->add_entry| for |time|,
-|sidereal|, |solar|, |earth|, |rotation|, |right|, |ascension|,
-|declination|, |precession|, |nutation| and |mean|.
+Added this section.
 \ENDLOG
 
 @q ***** (5)@> 
 
 @<Define |Scanner_Type::create|@>=
 
-   scanner_node->add_entry("time", TIME, spark);
-   scanner_node->add_entry("sidereal", SIDEREAL, spark);
-   scanner_node->add_entry("solar", SOLAR, spark);
-   scanner_node->add_entry("earth", EARTH, spark);
-   scanner_node->add_entry("rotation", ROTATION, spark);
-   scanner_node->add_entry("right", RIGHT, spark);
+   scanner_node->add_entry("apparent", APPARENT, spark);
    scanner_node->add_entry("ascension", ASCENSION, spark);
    scanner_node->add_entry("declination", DECLINATION, spark);
-   scanner_node->add_entry("precession", PRECESSION, spark);
-   scanner_node->add_entry("nutation", NUTATION, spark);
+   scanner_node->add_entry("earth", EARTH, spark);
+   scanner_node->add_entry("greenwich", GREENWICH, spark);
+   scanner_node->add_synonym("Greenwich", "greenwich");
    scanner_node->add_entry("mean", MEAN, spark);
+   scanner_node->add_entry("meridian", MERIDIAN, spark);
+   scanner_node->add_entry("nutation", NUTATION, spark);
+   scanner_node->add_entry("precession", PRECESSION, spark);
+   scanner_node->add_entry("right", RIGHT, spark);
+   scanner_node->add_entry("rotation", ROTATION, spark);
+   scanner_node->add_entry("sidereal", SIDEREAL, spark);
+   scanner_node->add_entry("solar", SOLAR, spark);
+   scanner_node->add_entry("time", TIME, spark);
+   scanner_node->add_entry("universal", UNIVERSAL, spark);
 
 @q **** (4) Internal quantities.  @>          
 @*3 Internal quantities.
@@ -4195,6 +4198,7 @@ Changed the |type| argument in all of the calls to
     scanner_node->add_entry("fillin", NUMERIC, internal, not_const, not_array,
                           Id_Map_Entry_Type::KNOWN, v);
     
+#if 0 
     r = new real;
     *r = 0;
     v = static_cast<void*>(r);
@@ -4213,11 +4217,13 @@ Changed the |type| argument in all of the calls to
     scanner_node->add_entry("day", NUMERIC, internal, not_const, not_array,
                           Id_Map_Entry_Type::KNOWN, v);
     
+
     r = new real;
     *r = 0;
     v = static_cast<void*>(r);
     scanner_node->add_entry("time", NUMERIC, internal, not_const, not_array,
                           Id_Map_Entry_Type::KNOWN, v);
+#endif 
     
     r = new real;
     *r = 0;

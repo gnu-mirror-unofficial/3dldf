@@ -482,6 +482,10 @@
 
 @i porvexpr.w
 
+@q *** (3) time and astronomy expressions.  `ptmastro.w'.  @>
+
+@i ptmastro.w
+
 @q ** (2) Declarations.  `pldfdcl.w'.  @>
 
 @i pldfdcl.w
