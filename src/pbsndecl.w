@@ -364,29 +364,29 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @=%token <int_value>    SUBPATH@>@/
 @=%token <int_value>    OF@>@/
 
-@=%token <string_value> COMMA@>@/
-@=%token <string_value> COLON@>@/ 
-@=%token <string_value> SEMI_COLON@>@/ 
-@=%token <string_value> LEFT_PARENTHESIS@>@/
-@=%token <string_value> RIGHT_PARENTHESIS@>@/
-@=%token <string_value> DOUBLE_QUOTE@>@/
-@=%token <string_value> LEFT_BRACKET@>@/
-@=%token <string_value> RIGHT_BRACKET@>@/
-@=%token <string_value> LEFT_BRACE@>@/
-@=%token <string_value> RIGHT_BRACE@>@/
-@=%token <string_value> DIGIT@>@/
-@=%token <int_value>    INTEGER@>@/        
+@=%token <string_value>     COMMA@>@/
+@=%token <string_value>     COLON@>@/ 
+@=%token <string_value>     SEMI_COLON@>@/ 
+@=%token <string_value>     LEFT_PARENTHESIS@>@/
+@=%token <string_value>     RIGHT_PARENTHESIS@>@/
+@=%token <string_value>     DOUBLE_QUOTE@>@/
+@=%token <string_value>     LEFT_BRACKET@>@/
+@=%token <string_value>     RIGHT_BRACKET@>@/
+@=%token <string_value>     LEFT_BRACE@>@/
+@=%token <string_value>     RIGHT_BRACE@>@/
+@=%token <string_value>     DIGIT@>@/
+@=%token <int_value>        INTEGER@>@/        
 @=%token <ulong_long_value> ULONG_LONG_TYPE@>@/
-@=%token <real_value>   REAL@>@/          
-@=%token <string_value> PERCENT@>@/
-@=%token <string_value> SYMBOL_0@>@/
-@=%token <string_value> SYMBOL_1@>@/
-@=%token <string_value> SYMBOL_2@>@/
-@=%token <string_value> SYMBOL_3@>@/
-@=%token <string_value> SYMBOL_4@>@/
-@=%token <string_value> SYMBOL_5@>@/
-@=%token <string_value> SYMBOL_6@>@/
-@=%token <string_value> SYMBOL_7@>@/
+@=%token <real_value>       REAL@>@/          
+@=%token <string_value>     PERCENT@>@/
+@=%token <string_value>     SYMBOL_0@>@/
+@=%token <string_value>     SYMBOL_1@>@/
+@=%token <string_value>     SYMBOL_2@>@/
+@=%token <string_value>     SYMBOL_3@>@/
+@=%token <string_value>     SYMBOL_4@>@/
+@=%token <string_value>     SYMBOL_5@>@/
+@=%token <string_value>     SYMBOL_6@>@/
+@=%token <string_value>     SYMBOL_7@>@/
 
 @q ** (2)  Object types defined in 3DLDF and |UNDECLARED|.@>  
 
@@ -3158,7 +3158,7 @@ Added this section with the token declaration for
 @=%token <int_value> DISENTANGLE@>@/ 
 
 @q *** (3) Tokens for |origami_figures|.@>
-@*2 Tokens for |nurbs|.
+@*2 Tokens for |origami_figures|.
 \initials{LDF 2005.02.03.}
 
 \LOG
@@ -3166,9 +3166,30 @@ Added this section with the token declaration for
 Added this section.  It's currently empty.
 \ENDLOG
 
+@q *** (3) Tokens for time and astronomy.  @>
+@*2 Tokens for time and astronomy.
+\initials{LDF 2021.05.23.}
+
+\LOG
+\initials{LDF 2021.05.23.}
+Added this section.
+\ENDLOG
+
 @q **** (4) Code.@>   
 
 @<Token and precedence declarations@>=
+
+@=%token <int_value> TIME@>@/
+@=%token <int_value> SIDEREAL@>@/
+@=%token <int_value> SOLAR@>@/
+@=%token <int_value> EARTH@>@/
+@=%token <int_value> ROTATION@>@/
+@=%token <int_value> RIGHT@>@/
+@=%token <int_value> ASCENSION@>@/
+@=%token <int_value> DECLINATION@>@/
+@=%token <int_value> PRECESSION@>@/
+@=%token <int_value> NUTATION@>@/
+@=%token <int_value> MEAN@>@/
 
 @q ** (2) Constants in |namespace Scan_Parse|. @>
 @*1 Constants in {\bf namespace Scan\_Parse}. 
