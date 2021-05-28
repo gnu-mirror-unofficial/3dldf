@@ -492,6 +492,10 @@
 
 @i pstrvctr.w 
 
+@q **** (4) constellation vector expressions.  'pcnstvct.w'.  @>
+
+@i pcnstvct.w 
+
 @q ** (2) Declarations.  `pldfdcl.w'.  @>
 
 @i pldfdcl.w

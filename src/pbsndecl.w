@@ -572,6 +572,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> GLYPH@>@/
 
 @=%token <pointer_value> STAR@>@/
+@=%token <pointer_value> CONSTELLATION@>@/
 
 @=%token <pointer_value> PLANE@>@/
 
@@ -653,6 +654,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> GLYPH_VECTOR@>@/
 
 @=%token <pointer_value> STAR_VECTOR@>@/
+@=%token <pointer_value> CONSTELLATION_VECTOR@>@/
 
 @=%token <pointer_value> PLANE_VECTOR@>@/
 
@@ -837,6 +839,7 @@ Added token declaration for |SPHERE_DEVELOPMENT_DECLARATOR|
 @=%token <string_value> GLYPH_DECLARATOR@>@/
 @=%token <string_value> PLANE_DECLARATOR@>@/
 @=%token <string_value> STAR_DECLARATOR@>@/
+@=%token <string_value> CONSTELLATION_DECLARATOR@>@/
 
 @=%token <string_value> ORIGAMI_FIGURE_DECLARATOR@>@/
 
@@ -943,6 +946,7 @@ Added token declaration for |SPHERE_DEVELOPMENT_VECTOR_DECLARATOR|.
 @=%token <string_value> GLYPH_SLICE_VECTOR_DECLARATOR@>@/
 
 @=%token <string_value> STAR_VECTOR_DECLARATOR@>@/
+@=%token <string_value> CONSTELLATION_VECTOR_DECLARATOR@>@/
 @=%token <string_value> PLANE_VECTOR_DECLARATOR@>@/
 
 @=%token <string_value> ORIGAMI_FIGURE_VECTOR_DECLARATOR@>@/
@@ -1579,6 +1583,9 @@ Added token declarations for
 
 @=%token <int_value> IS_STAR@>@/
 @=%token <int_value> IS_STAR_VECTOR@>@/
+
+@=%token <int_value> IS_CONSTELLATION@>@/
+@=%token <int_value> IS_CONSTELLATION_VECTOR@>@/
 
 @=%token <int_value> IS_PLANE@>@/
 @=%token <int_value> IS_PLANE_VECTOR@>@/

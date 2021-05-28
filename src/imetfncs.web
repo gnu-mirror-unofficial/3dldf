@@ -1605,16 +1605,29 @@ else if (type == NUMERIC)
      }
 
    else if (type == STAR)
-     {
-       
-       Star* c = static_cast<Star*>(object);
-       
-       if (c != static_cast<Star*>(0))
-         {
-           delete c;
-           c = static_cast<Star*>(0);
-         }
-     }
+   {
+     
+     Star* c = static_cast<Star*>(object);
+     
+     if (c != static_cast<Star*>(0))
+       {
+         delete c;
+         c = static_cast<Star*>(0);
+       }
+   }
+
+   else if (type == CONSTELLATION)
+   {
+     
+     Constellation* c = static_cast<Constellation*>(object);
+     
+     if (c != static_cast<Constellation*>(0))
+       {
+         delete c;
+         c = static_cast<Constellation*>(0);
+       }
+   }
+
 
 
 @q ****** (6) Handle internal quantities.@>  
@@ -2616,6 +2629,13 @@ Added code for the cases
       Pointer_Vector<Star>* o = new Pointer_Vector<Star>;
       object = static_cast<void*>(o);       
     }
+
+  else if (type == CONSTELLATION_VECTOR)
+    {
+      Pointer_Vector<Constellation>* o = new Pointer_Vector<Constellation>;
+      object = static_cast<void*>(o);       
+    }
+
 
 
 @q ****** (6) |Shape|-types.@> 
@@ -3993,6 +4013,7 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
       || type == ORIGAMI_FIGURE_VECTOR
       || type == GLYPH_VECTOR
       || type == STAR_VECTOR
+      || type == CONSTELLATION_VECTOR
       || type == CONIC_SECTION_LATTICE_VECTOR)
 
     return true;

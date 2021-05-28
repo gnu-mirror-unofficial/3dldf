@@ -1866,6 +1866,43 @@ instead of
 
 };
 
+@q *** (3) constellation_vector_variable.  @>
+@*2 \§constellation vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> constellation_vector_variable@>@/
+
+@q **** (4) constellation_vector_variable --> variable CONSTELLATION_VECTOR.@>
+@*3 \§constellation vector variable> $\longrightarrow$ \§variable> 
+\.{CONSTELLATION\_VECTOR}.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+
+\initials{LDF 2021.05.28.}
+Now calling |Scan_Parse::variable_decl_func()|
+instead of 
+|Scan_Parse::constellation_vector_variable_rule_func_0()|.
+\ENDLOG 
+
+@<Define rules@>= 
+@=constellation_vector_variable: variable CONSTELLATION_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               CONSTELLATION_VECTOR,
+                               parameter);
+
+};
+
 @q *** (3) plane_vector_variable.  @>
 @*2 \§plane vector variable>.
 \initials{LDF 2005.10.30.}
@@ -2680,6 +2717,25 @@ Added this rule.
 
 @<Define rules@>= 
 @=vector_type_variable: star_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) vector_type_variable --> constellation_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§constellation vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: constellation_vector_variable@>
 {
 
   @=$$@> = @=$1@>;
@@ -4223,6 +4279,38 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
+@q *** (3) constellation variable --> variable CONSTELLATION.  @>
+@*2 \§constellation variable> $\longrightarrow$ \§variable> 
+\.{CONSTELLATION}.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> constellation_variable@>@/
+
+@
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+
+\initials{LDF 2021.05.28.}
+Removed code from this rule.  Now calling 
+|Scan_Parse::variable_decl_func()|.
+\ENDLOG
+
+@<Define rules@>= 
+@=constellation_variable: variable CONSTELLATION@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               CONSTELLATION,
+                               parameter);
+};
+
 @q *** (3) plane variable --> variable PLANE.  @>
 @*2 \§plane variable> $\longrightarrow$ \§variable> 
 \.{PLANE}.
@@ -4971,6 +5059,24 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 };
+@q *** (3) any_variable --> constellation_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§constellation variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+
+@=any_variable: constellation_variable@>@/
+{
+
+   @=$$@> = @=$1@>;
+
+};
 
 @q *** (3) any_variable --> plane_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
@@ -5693,6 +5799,25 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q *** (3)  any_variable --> constellation_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§constellation vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: constellation_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
 
 @q *** (3)  any_variable --> plane_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 

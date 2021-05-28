@@ -130,7 +130,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                       parser.w passign.w pastrnmy.w pblexpr.w \
                       pblvexpr.w pbpexpr.w \
                       pbpvexpr.w pbsndecl.w pcbvexpr.w pcirexpr.w \
-		      pclrcmnd.w pclvexpr.w pcnvexpr.w pcolexpr.w pcommand.w \
+		      pclrcmnd.w pclvexpr.w pcnstvct.w pcnvexpr.w pcolexpr.w pcommand.w \
 		      pcondit.w pconexpr.w pcrclslc.w pcrvexpr.w pcubexpr.w \
                       pcylexpr.w pcyvexpr.w pdpvexpr.w \
                       pdrwcmnd.w pdshexpr.w pedvexpr.w peldexpr.w \

@@ -136,10 +136,6 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 #include "deftfncs.h++"
 #include "astronmy.h++"
 
-#define Constellation Star
-
-#define CONSTELLATION STAR
-
 @q * (1) Pseudo-constructor for dynamic allocation.@>
 @* Pseudo-constructor for dynamic allocation.
 This function is declared in \filename{io.web}.  It must be defined
@@ -1264,6 +1260,7 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
      scanner_node->add_entry("glyph", GLYPH_DECLARATOR, spark);
 
      scanner_node->add_entry("star", STAR_DECLARATOR, spark);
+     scanner_node->add_entry("constellation", CONSTELLATION_DECLARATOR, spark);
 
      scanner_node->add_entry("plane", PLANE_DECLARATOR, spark);
 
@@ -1370,6 +1367,9 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
 
      scanner_node->add_entry("star_vector", 
                              STAR_VECTOR_DECLARATOR, spark);
+
+     scanner_node->add_entry("constellation_vector", 
+                             CONSTELLATION_VECTOR_DECLARATOR, spark);
 
      scanner_node->add_entry("plane_vector", 
                              PLANE_VECTOR_DECLARATOR, spark);
@@ -1702,6 +1702,7 @@ and |is_sphere_development_vector|.
      scanner_node->add_entry("is_glyph", IS_GLYPH, spark);
 
      scanner_node->add_entry("is_star", IS_STAR, spark);
+     scanner_node->add_entry("is_constellation", IS_CONSTELLATION, spark);
 
      scanner_node->add_entry("is_plane", IS_PLANE, spark);
 
@@ -1803,6 +1804,10 @@ and |is_sphere_development_vector|.
 
      scanner_node->add_entry("is_star_vector", 
                              IS_STAR_VECTOR, spark);
+
+
+     scanner_node->add_entry("is_constellation_vector", 
+                             IS_CONSTELLATION_VECTOR, spark);
 
      scanner_node->add_entry("is_plane_vector", 
                              IS_PLANE_VECTOR, spark);
@@ -7493,11 +7498,11 @@ Added this section.
     t = create_new<Constellation>(s);
     v = static_cast<void*>(t); 
 
-    scanner_node->add_entry("boötes", CONSTELLATION, 
+    scanner_node->add_entry("booetes", CONSTELLATION, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-    scanner_node->add_synonym("Boötes", "boötes");
+    scanner_node->add_synonym("Booetes", "booetes");
 
 
 

@@ -564,8 +564,440 @@ Star::show(string text, Scanner_Node scanner_node) const
 
 } /* End of |Star::show| definition.  */
 
-@q * (1) Putting Star together.@>
-@* Putting {\bf Star} together.
+@q * (1) Constellation class definition.@>
+@* {\bf Constellation} class definition.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this |class| definition.
+\ENDLOG
+
+@q ** (2) Code.@> 
+
+@<Declare |class Constellation|@>=
+
+class Constellation
+{
+
+   protected:
+
+   public:
+
+      @<Declare |static| |class Constellation| data members@>@;
+
+      @<Declare |Constellation| functions@>@;
+};
+
+@q ** (2) Static member variable declarations and initializations.@>
+@*1 Static member variable declarations and initializations.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this section.
+\ENDLOG
+
+@<Declare |static| |class Constellation| data members@>=
+
+@q *** (3) Code.@> 
+@
+@<Initialize |static| |class Constellation| data members@>=
+
+@q ** (2) Global constants.@>
+@*1 Global constants.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this section.
+\ENDLOG
+
+@<Global constants@>=
+
+@q *** (3)@>
+@
+@<Declarations for the header file@>=
+
+@q ** (2) |Constellation| functions.@> 
+@*1 {\bf Constellation} functions.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this section.
+\ENDLOG
+
+@q *** (3) Constructors and Setting Functions.@>
+@*2 Constructors and Setting Functions.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this section.
+\ENDLOG
+
+@q **** (4) Default Constructor.@> 
+@*3 Default Constructor.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q ***** (5) Declaration.@>
+
+@<Declare |Constellation| functions@>=
+Constellation(void);
+
+@q ***** (5) Definition.  @>
+
+@
+@<Define |Constellation| functions@>= 
+Constellation::Constellation(void)
+{
+   return;
+}
+
+
+@q **** (4) Setting function.@> 
+@*2 Setting function.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Constellation| functions@>=
+int
+set(real real_part, real imaginary_part, Scanner_Node scanner_node = 0);
+
+@q **** (4) Definition.  @>
+
+@
+@<Define |Constellation| functions@>= 
+int
+Constellation::set(real real_part, real imaginary_part, Scanner_Node scanner_node)
+{
+
+@q ***** (5) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q ***** (5)@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << thread_name << "Entering `Constellation::set'.";
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5)@>
+
+   return 0;
+
+@q ***** (5)@>
+
+}  /* End of |Constellation::set| definition.  */
+
+@q *** (3) Destructor.@> 
+@*2 Destructor.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Constellation| functions@>=
+virtual
+~Constellation(void);
+
+@q **** (4) Definition.  @>
+
+@
+@<Define |Constellation| functions@>= 
+Constellation::~Constellation(void)
+{
+
+@q ***** (5) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   Scanner_Node scanner_node = 0;
+
+#ifdef HAVE_PTHREAD_H
+
+   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
+
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
+      scanner_node = thread_info->scanner_node;
+
+#endif /* |HAVE_PTHREAD_H|  */@; 
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q ***** (5)@>
+
+}  /* End of |~Constellation| definition.  */
+
+@q *** (3) Pseudo-constructor for dynamic allocation.@>
+@*2 Pseudo-constructor for dynamic allocation.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this section.
+\ENDLOG
+
+@q **** (4) Pointer argument.@>
+@*3 Pointer argument.@>
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function declaration.
+\ENDLOG
+
+@<Declare non-member template functions for |Constellation|@>=
+
+Constellation* 
+create_new(const Constellation* p, Scanner_Node scanner_node = 0);
+
+@q **** (4) Reference argument.@>
+@*3 Referece argument.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function declaration.
+\ENDLOG
+
+@<Declare non-member template functions for |Constellation|@>=
+Constellation* 
+create_new(const Constellation& p, Scanner_Node scanner_node = 0);
+
+@q *** (3) Assignment.@> 
+@*2 Assignment.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this section.
+\ENDLOG
+
+@q **** (4) Assignment from a |Constellation|.@> 
+@*3 Assignment from a |Constellation|.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q ***** (5) Declaration.@> 
+
+@<Declare |Constellation| functions@>=
+virtual
+Constellation&
+operator=(const Constellation& c);
+
+@q ***** (5) Definition.@> 
+@
+@<Define |Constellation| functions@>=
+
+Constellation&
+Constellation::operator=(const Constellation& c)
+{
+
+@q ****** (6) Preliminaries.@>   
+
+   volatile bool DEBUG = false; /* |true| */ @; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   Scanner_Node scanner_node = 0;
+
+#ifdef HAVE_PTHREAD_H
+
+   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
+
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
+      scanner_node = thread_info->scanner_node;
+
+#endif /* |HAVE_PTHREAD_H|  */@; 
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q ****** (6)@>
+
+    if (this == &c) /* Make sure it's not self-assignment. */
+       return *this;
+
+@q ****** (6)@>
+
+    return *this;
+
+}  /* End of 
+      |Constellation::operator=(const Constellation& m)| definition.  */
+
+@q *** (3) Clear.@> 
+@*2 Clear.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Constellation| functions@>=
+int
+clear(Scanner_Node scanner_node = 0);
+
+@q **** (4) Definition.  @>
+
+@
+@<Define |Constellation| functions@>= 
+int 
+Constellation::clear(Scanner_Node scanner_node)
+{
+@q ***** (5) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q ***** (5)@>
+
+   return 0;
+
+}  /* End of |Constellation::clear| definition.  */
+
+@q *** (3) Show.@> 
+@*2 Show.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Constellation| functions@>=
+
+void 
+show(string text = "", Scanner_Node scanner_node = 0) const;
+
+@q **** (4) Definition.@> 
+
+@
+@<Define |Constellation| functions@>=
+void 
+Constellation::show(string text, Scanner_Node scanner_node) const
+{
+@q ***** (5) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q ***** (5)@>
+
+    if (text == "")
+       text = "Constellation:";
+
+    cerr << text 
+         << endl;
+
+@q ***** (5)@>
+
+    return;
+
+} /* End of |Constellation::show| definition.  */
+
+
+
+@q * (1) Putting Astronomy together.@>
+@* Putting {\bf Astronomy} together.
 
 \immediate\write\functexifile{^^JEnd of file:  astronmy.web^^J}
 
@@ -579,6 +1011,10 @@ This is what's compiled.
 @<Initialize |static| |class Star| data members@>@;
 @<Declare non-member template functions for |Star|@>@;
 @<Define |Star| functions@>@;
+@<Declare |class Constellation|@>@;
+@<Initialize |static| |class Constellation| data members@>@;
+@<Declare non-member template functions for |Constellation|@>@;
+@<Define |Constellation| functions@>@;
 @<Global constants@>@;
 
 @q ** (2) This is what's written to "astronmy.h".@> 
@@ -589,8 +1025,10 @@ This is what's compiled.
 #ifndef LDF_ASTRONMY_KNOWN
 #define LDF_ASTRONMY_KNOWN 1
 @<Declare |class Star|@>@;
-@<Declarations for the header file@>@;
+@<Declare |class Constellation|@>@;
 @<Declare non-member template functions for |Star|@>@;
+@<Declare non-member template functions for |Constellation|@>@;
+@<Declarations for the header file@>@;
 #endif
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
