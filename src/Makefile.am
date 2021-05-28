@@ -77,7 +77,7 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 # colall.web intro.web
 
-3dldflb_CWEB_files = arc.web circles.web cncsctlt.web colors.web complex.web \
+3dldflb_CWEB_files = arc.web astronmy.web circles.web cncsctlt.web colors.web complex.web \
                 cones.web conicsct.web crclslc.web creatnew.web cuboid.web curves.web \
                 cylinder.web dashptrn.web ddchdrn.web deftfncs.web ellipses.web \
                 ellpsoid.web ellpsslc.web figures.web glyphs.web gsltmplt.web \
@@ -127,7 +127,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                       cslcmnd.w cslexpr.w cslvexpr.w \
                       fcscmnd.w \
                       mtrxassn.w mtrxexpr.w mtrxvxpr.w \
-                      parser.w passign.w pblexpr.w \
+                      parser.w passign.w pastrnmy.w pblexpr.w \
                       pblvexpr.w pbpexpr.w \
                       pbpvexpr.w pbsndecl.w pcbvexpr.w pcirexpr.w \
 		      pclrcmnd.w pclvexpr.w pcnvexpr.w pcolexpr.w pcommand.w \
@@ -150,9 +150,9 @@ lib_LTLIBRARIES = lib3dldflb.la
                       ppygexpr.w \
                       prcvexpr.w \
 		      precexpr.w prpvexpr.w prplexpr.w psetcmnd.w \
-                      pshowcmd.w psphexpr.w pspvexpr.w pstrexpr.w \
+                      pshowcmd.w psphexpr.w pspvexpr.w pstrexpr.w pstrvctr.w \
                       pstvexpr.w ptfvexpr.w \
-                      ptglexpr.w ptgvexpr.w \
+                      ptglexpr.w ptgvexpr.w ptmastro.w \
                       ptokdecl.w ptrfcmnd.w \
                       ptrnexpr.w pullexpr.w pullvxpr.w pvariabl.w pvcmncmd.w \
                       reverse.w setarc.w setmatrx.w spdvexpr.w spdvvexp.w
@@ -315,7 +315,7 @@ parser.c++ parser.h++: parser.y++
 	./check_scan_parse_output.sh parser.hxx parser.h++
 	touch $@
 
-parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
+parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ astronmy.h++ circles.h++ cncsctlt.h++ colors.h++ \
                      complex.h++ cones.h++ conicsct.h++ crclslc.h++ \
                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
@@ -346,7 +346,7 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ circles.h++ cncsctlt.h++ co
 # 	./check_scan_parse_output.sh parser2.hxx parser2.h++
 # 	@touch $@
 
-# parser2.o: parser2.c++ parser2.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
+# parser2.o: parser2.c++ parser2.h++ arc.h++ astronmy.h++ circles.h++ cncsctlt.h++ colors.h++ \
 #                      complex.h++ cones.h++ conicsct.h++ crclslc.h++ \
 #                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
 #                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
@@ -403,6 +403,22 @@ arc.o: arc.c++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ conicsct.h++ crclslc.
                paths.h++ pens.h++ pictures.h++ planes.h++ pntrvctr.h++ \
                points.h++ polygons.h++ primes.h++ pspglb.h++ rectangs.h++ \
                shapes.h++ transfor.h++ triangle.h++
+	$(CXXCOMPILE) -c -o $@ $<
+
+
+astronmy.o: astronmy.c++ astronmy.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h++ \
+	    complex.h++ cones.h++ conicsct.h++ crclslc.h++ creatnew.h++ cuboid.h++ \
+	    curves.h++ cylinder.h++ dashptrn.h++ ddchdrn.h++ deftfncs.h++ \
+	    ellipses.h++ ellpsoid.h++ ellpsslc.h++ figures.h++ glyphs.h++ \
+	    gsltmplt.h++ helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
+	    loader.h++ matrices.h++ origami.h++ parabola.h++ parabold.h++ \
+	    paraellp.h++ parahypr.h++ parser.h++ parser_1.h++ paths.h++ \
+	    pctfncs0.h++ pens.h++ pictures.h++ planes.h++ plyhdslc.h++ \
+	    pntrvcf0.h++ pntrvctr.h++ points.h++ polygons.h++ polyhed.h++ \
+	    predctes.h++ primes.h++ prrfnc0.h++ pspglb.h++ rectangs.h++ \
+	    rhtchdrn.h++ scan.h++ scanprse.h++ scanprsf.h++ sctpcrt.h++ \
+	    sctpfncs.h++ shapes.h++ solfaced.h++ solids.h++ spheres.h++ \
+	    sphrdevl.h++ transfor.h++ triangle.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 circles.o: circles.c++ circles.h++ colors.h++ complex.h++ conicsct.h++ creatnew.h++ \
@@ -603,7 +619,7 @@ imetfncs.o: imetfncs.c++ imetfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
-                         imetfncs.h++             
+                         astronmy.h++ imetfncs.h++             
 	$(CXXCOMPILE) -c -o $@ $<
 
 io.o: io.c++ io.h++ loader.h++ pspglb.h++ io.h++
@@ -774,7 +790,7 @@ prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        cones.h++ cylinder.h++ spheres.h++ sphrdevl.h++ parabold.h++ paraellp.h++ \
                        parahypr.h++ glyphs.h++ ellpsoid.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
-                       imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ 
+                       imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ astronmy.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 pspglb.o: pspglb.c++ pspglb.h++ loader.h++ pspglb.h++
@@ -843,7 +859,7 @@ sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
-                       imetfncs.h++ deftfncs.h++ sctpcrt.h++
+                       imetfncs.h++ deftfncs.h++ astronmy.h++ sctpcrt.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -989,7 +1005,7 @@ conveps.c++: conveps.web
 .PHONY: headers
 
 headers:
-	make arc.h++  circles.h++ cncsctlt.h++  colors.h++ complex.h++ cones.h++ conicsct.h++ \
+	make arc.h++ astronmy.h++ circles.h++ cncsctlt.h++  colors.h++ complex.h++ cones.h++ conicsct.h++ \
              conveps.h++ crclslc.h++ creatnew.h++ cuboid.h++ \
              curves.h++ cylinder.h++ dashptrn.h++ \
              ddchdrn.h++ deftfncs.h++ ellipses.h++ ellpsoid.h++ \

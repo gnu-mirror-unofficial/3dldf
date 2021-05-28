@@ -107,18 +107,17 @@ Added this rule.
 
 @<Define rules@>=
   else /* |!(entry == 0 || entry->object == 0)|  */
+  {
 
-     {
+     typedef Pointer_Vector<Star> PV;
 
-        typedef Pointer_Vector<Star> PV;
+     PV* pv = new PV;
 
-        PV* pv = new PV;
+     *pv = *static_cast<PV*>(entry->object);
 
-        *pv = *static_cast<PV*>(entry->object);
+     @=$$@> = static_cast<void*>(pv);                    
 
-        @=$$@> = static_cast<void*>(pv);                    
-
-     }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
+  }  /* |else| (|!(entry == 0 || entry->object == 0)|)  */
 
 };
 

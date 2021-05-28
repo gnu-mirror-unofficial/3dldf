@@ -484,7 +484,13 @@
 
 @q *** (3) time and astronomy expressions.  `ptmastro.w'.  @>
 
+@i pastrnmy.w
+
 @i ptmastro.w
+
+@q **** (4) star vector expressions.  'pstrvctr.w'.  @>
+
+@i pstrvctr.w 
 
 @q ** (2) Declarations.  `pldfdcl.w'.  @>
 

@@ -1828,6 +1828,44 @@ instead of
 
 };
 
+
+@q *** (3) star_vector_variable.  @>
+@*2 \§star vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> star_vector_variable@>@/
+
+@q **** (4) star_vector_variable --> variable STAR_VECTOR.@>
+@*3 \§star vector variable> $\longrightarrow$ \§variable> 
+\.{STAR\_VECTOR}.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+
+\initials{LDF 2021.05.28.}
+Now calling |Scan_Parse::variable_decl_func()|
+instead of 
+|Scan_Parse::star_vector_variable_rule_func_0()|.
+\ENDLOG 
+
+@<Define rules@>= 
+@=star_vector_variable: variable STAR_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               STAR_VECTOR,
+                               parameter);
+
+};
+
 @q *** (3) plane_vector_variable.  @>
 @*2 \§plane vector variable>.
 \initials{LDF 2005.10.30.}
@@ -2623,6 +2661,25 @@ Added this rule.
 
 @<Define rules@>= 
 @=vector_type_variable: glyph_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) vector_type_variable --> star_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§star vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: star_vector_variable@>
 {
 
   @=$$@> = @=$1@>;
@@ -4134,6 +4191,38 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
+@q *** (3) star variable --> variable STAR.  @>
+@*2 \§star variable> $\longrightarrow$ \§variable> 
+\.{STAR}.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> star_variable@>@/
+
+@
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+
+\initials{LDF 2021.05.28.}
+Removed code from this rule.  Now calling 
+|Scan_Parse::variable_decl_func()|.
+\ENDLOG
+
+@<Define rules@>= 
+@=star_variable: variable STAR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               STAR,
+                               parameter);
+};
+
 @q *** (3) plane variable --> variable PLANE.  @>
 @*2 \§plane variable> $\longrightarrow$ \§variable> 
 \.{PLANE}.
@@ -4864,6 +4953,25 @@ Added this rule.
 
 };
 
+@q *** (3) any_variable --> star_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§star variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+
+@=any_variable: star_variable@>@/
+{
+
+   @=$$@> = @=$1@>;
+
+};
+
 @q *** (3) any_variable --> plane_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§plane variable>.
@@ -5562,6 +5670,24 @@ Added this rule.
 
 @<Define rules@>=
 @=any_variable: glyph_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3)  any_variable --> star_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§star vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: star_vector_variable@>@/
 {
 
   @=$$@> = @=$1@>;

@@ -130,6 +130,7 @@ The first is |Id_Map_Type::operator=(const Id_Map_Type&)|.
 #include "parser_1.h++"   
 #include "scan.h++"
 #include "scanprsf.h++"
+#include "astronmy.h++"
 
 @q * (1) |Id_Map_Type| functions.  @>
 @* {\bf Id\_Map\_Type} functions. 
@@ -1603,6 +1604,19 @@ else if (type == NUMERIC)
          }
      }
 
+   else if (type == STAR)
+     {
+       
+       Star* c = static_cast<Star*>(object);
+       
+       if (c != static_cast<Star*>(0))
+         {
+           delete c;
+           c = static_cast<Star*>(0);
+         }
+     }
+
+
 @q ****** (6) Handle internal quantities.@>  
 @ Handle internal quantities.
 \initials{LDF 2004.07.01.}
@@ -2596,6 +2610,13 @@ Added code for the cases
       Pointer_Vector<Glyph>* o = new Pointer_Vector<Glyph>;
       object = static_cast<void*>(o);       
     }
+
+  else if (type == STAR_VECTOR)
+    {
+      Pointer_Vector<Star>* o = new Pointer_Vector<Star>;
+      object = static_cast<void*>(o);       
+    }
+
 
 @q ****** (6) |Shape|-types.@> 
 @ |Shape|-types.
@@ -3971,6 +3992,7 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
       || type == MACRO_VECTOR
       || type == ORIGAMI_FIGURE_VECTOR
       || type == GLYPH_VECTOR
+      || type == STAR_VECTOR
       || type == CONIC_SECTION_LATTICE_VECTOR)
 
     return true;

@@ -134,6 +134,7 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 #include "scanprsf.h++"   
 #include "imetfncs.h++"
 #include "deftfncs.h++"
+#include "astronmy.h++"
 
 @q * (1) Pseudo-constructor for dynamic allocation.@>
 @* Pseudo-constructor for dynamic allocation.
@@ -1258,6 +1259,8 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
      scanner_node->add_entry("origami_figure", ORIGAMI_FIGURE_DECLARATOR, spark);
      scanner_node->add_entry("glyph", GLYPH_DECLARATOR, spark);
 
+     scanner_node->add_entry("star", STAR_DECLARATOR, spark);
+
      scanner_node->add_entry("plane", PLANE_DECLARATOR, spark);
 
      scanner_node->add_entry("point", POINT_DECLARATOR, spark);
@@ -1360,6 +1363,9 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
 
      scanner_node->add_entry("glyph_vector", 
                              GLYPH_VECTOR_DECLARATOR, spark);
+
+     scanner_node->add_entry("star_vector", 
+                             STAR_VECTOR_DECLARATOR, spark);
 
      scanner_node->add_entry("plane_vector", 
                              PLANE_VECTOR_DECLARATOR, spark);
@@ -1691,6 +1697,8 @@ and |is_sphere_development_vector|.
      scanner_node->add_entry("is_origami_figure", IS_ORIGAMI_FIGURE, spark);
      scanner_node->add_entry("is_glyph", IS_GLYPH, spark);
 
+     scanner_node->add_entry("is_star", IS_STAR, spark);
+
      scanner_node->add_entry("is_plane", IS_PLANE, spark);
 
      scanner_node->add_entry("is_nurb", IS_NURB, spark);
@@ -1788,6 +1796,9 @@ and |is_sphere_development_vector|.
 
      scanner_node->add_entry("is_glyph_vector", 
                              IS_GLYPH_VECTOR, spark);
+
+     scanner_node->add_entry("is_star_vector", 
+                             IS_STAR_VECTOR, spark);
 
      scanner_node->add_entry("is_plane_vector", 
                              IS_PLANE_VECTOR, spark);

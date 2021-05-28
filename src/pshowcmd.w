@@ -557,6 +557,31 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
 };
 
+@q **** (4) command --> SHOW star_expression@>
+
+@*3 \§command> $\longrightarrow$ \.{SHOW}
+\§star expression>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW star_expression@>@/
+{
+    Scan_Parse::show_func<Star>(static_cast<Star*>(@=$2@>),
+                                 "star",
+                                 parameter); 
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
 @q **** (4) command --> SHOW plane_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
