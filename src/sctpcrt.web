@@ -192,7 +192,7 @@ to call |create_new<Pen>|.  When I tried to call
 Setting |scanner_node->draw_color_ptr|, |scanner_node->fill_color_ptr|, 
 |scanner_node->pen_ptr|, |scanner_node->dash_pattern_ptr|, 
 and |scanner_node->picture_ptr| to 0.  They're used in the rules for 
-\§drawing command>.  
+\Â§drawing command>.  
 
 \initials{LDF 2004.07.05.}
 @:BUG FIX@> BUG FIX:  Removed default for |const Run_State& r|.  
@@ -530,9 +530,9 @@ Removed references to the global variable
 
 \initials{LDF 2004.06.03.}  
 Now setting |color_ptr| to 0.  Not doing this causes
-an error in the rule ``\§drawing command> $\longrightarrow$ 
-\§basic drawing command>  
-\§path expression> \§with clause list>'', which causes the program to exit
+an error in the rule ``\Â§drawing command> $\longrightarrow$ 
+\Â§basic drawing command>  
+\Â§path expression> \Â§with clause list>'', which causes the program to exit
 (without a core dump).
 
 \initials{LDF 2004.07.09.}
@@ -5511,9 +5511,9 @@ for |null_path| and the call to |scanner_node->add_synonym|
 for |nullpath|.
 \ENDLOG 
 
-@q ****** (6) |origin|.  @>
+@q ****** (6) |null_path|.  @>
 
-|origin|.
+|null_path|.
 
 \LOG
 \initials{LDF 2004.06.08.}  Added this section.
@@ -6027,23 +6027,1322 @@ Added this section.
 Added this section.
 \ENDLOG 
 
-@q ****** (6) |origin|.  @>
-
-|origin|.
-
-\LOG
-\initials{LDF 2021.05.28.}  Added this section.
-\ENDLOG 
-
 @<Define |Scanner_Type::create|@>=          
   {
+
     Star s;
-    Star* t = create_new<Star>(t);
+    Star* t = 0;
+
+/* 1 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("sun", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Sun", "sun");
+    
+
+@q ****** (6) @>
+
+/* 2 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("sirius", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Sirius", "sirius");
+    
+
+@q ****** (6) @>
+
+/* 3 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("canopus", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Canopus", "canopus");
+    
+
+@q ****** (6) @>
+
+/* 4 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("rigil_kentaurus", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Rigil_Kentaurus", "rigil_kentaurus");
+
+    scanner_node->add_synonym("toliman", "rigil_kentaurus");
+
+    scanner_node->add_synonym("Toliman", "rigil_kentaurus"); 
+    
+
+@q ****** (6) @>
+
+/* 5 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("arcturus", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Arcturus", "arcturus");
+    
+
+@q ****** (6) @>
+
+/* 6 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("vega", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Vega", "vega");
+    
+
+@q ****** (6) @>
+
+/* 7 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("capella", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Capella", "capella");
+    
+
+@q ****** (6) @>
+
+/* 8 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("rigel", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Rigel", "rigel");
+    
+
+@q ****** (6) @>
+
+/* 9 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("procyon", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Procyon", "procyon");
+    
+
+@q ****** (6) @>
+
+/* 10 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("achernar", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Achernar", "achernar");
+    
+
+@q ****** (6) @>
+
+/* 11 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("betelgeuse", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Betelgeuse", "betelgeuse");
+    
+
+@q ****** (6) @>
+
+/* 12 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("hadar", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Hadar", "hadar");
+    
+
+@q ****** (6) @>
+
+/* 13 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("altair", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Altair", "altair");
+    
+
+@q ****** (6) @>
+
+/* 14 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("acrux", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Acrux", "acrux");
+    
+
+@q ****** (6) @>
+
+/* 15 */
+
+    t = create_new<Star>(s);
     v = static_cast<void*>(t); 
 
     scanner_node->add_entry("aldebaran", STAR, 
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Aldebaran", "aldebaran");
+    
+
+@q ****** (6) @>
+
+/* 16 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("antares", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Antares", "antares");
+    
+
+@q ****** (6) @>
+
+/* 17 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("spica", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Spica", "spica");
+    
+
+@q ****** (6) @>
+
+/* 18 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("pollux", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Pollux", "pollux");
+    
+
+@q ****** (6) @>
+
+/* 19 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("fomalhaut", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Fomalhaut", "fomalhaut");
+    
+
+@q ****** (6) @>
+
+/* 20 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("deneb", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Deneb", "deneb");
+    
+
+@q ****** (6) @>
+
+/* 21 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mimosa", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mimosa", "mimosa");
+    
+
+@q ****** (6) @>
+
+/* 22 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("regulus", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Regulus", "regulus");
+    
+
+@q ****** (6) @>
+
+/* 23 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("adhara", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Adhara", "adhara");
+    
+
+@q ****** (6) @>
+
+/* 24 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("shaula", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Shaula", "shaula");
+    
+
+@q ****** (6) @>
+
+/* 25 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("castor", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Castor", "castor");
+    
+
+@q ****** (6) @>
+
+/* 26 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("gacrux", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Gacrux", "gacrux");
+    
+
+@q ****** (6) @>
+
+/* 27 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("bellatrix", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Bellatrix", "bellatrix");
+    
+
+@q ****** (6) @>
+
+/* 28 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("elnath", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Elnath", "elnath");
+    
+
+@q ****** (6) @>
+
+/* 29 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("miaplacidus", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Miaplacidus", "miaplacidus");
+    
+
+@q ****** (6) @>
+
+/* 30 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alnilam", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alnilam", "alnilam");
+    
+
+@q ****** (6) @>
+
+/* 31 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    /* Name does not appear in the IAU Catalog of Star Names */
+
+    scanner_node->add_entry("regor", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Regor", "regor");
+    
+
+@q ****** (6) @>
+
+/* 32 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alnair", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alnair", "alnair");
+    
+
+@q ****** (6) @>
+
+/* 33 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alioth", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alioth", "alioth");
+    
+
+@q ****** (6) @>
+
+/* 34 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alnitak", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alnitak", "alnitak");
+    
+
+@q ****** (6) @>
+
+/* 35 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("dubhe", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Dubhe", "dubhe");
+    
+
+@q ****** (6) @>
+
+/* 36 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mirfak", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mirfak", "mirfak");
+    
+
+@q ****** (6) @>
+
+/* 37 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("wezen", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Wezen", "wezen");
+    
+
+@q ****** (6) @>
+
+/* 38 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("sargas", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Sargas", "sargas");
+    
+
+@q ****** (6) @>
+
+/* 39 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("kaus_australis", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Kaus_Australis", "kaus_australis");
+    
+
+@q ****** (6) @>
+
+/* 40 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("avior", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Avior", "avior");
+    
+
+@q ****** (6) @>
+
+/* 41 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alkaid", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alkaid", "alkaid");
+    
+
+@q ****** (6) @>
+
+/* 42 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("menkalinan", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Menkalinan", "menkalinan");
+    
+
+@q ****** (6) @>
+
+/* 43 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("atria", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Atria", "atria");
+    
+
+@q ****** (6) @>
+
+/* 44 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alhena", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alhena", "alhena");
+    
+
+@q ****** (6) @>
+
+/* 45 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("peacock", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Peacock", "peacock");
+    
+
+@q ****** (6) @>
+
+/* 46 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alsephina", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alsephina", "alsephina");
+    
+
+@q ****** (6) @>
+
+/* 47 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mirzam", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mirzam", "mirzam");
+    
+
+@q ****** (6) @>
+
+/* 48 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alphard", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alphard", "alphard");
+    
+
+@q ****** (6) @>
+
+/* 49 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("polaris", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Polaris", "polaris");
+    
+
+@q ****** (6) @>
+
+/* 50 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("hamal", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Hamal", "hamal");
+    
+
+@q ****** (6) @>
+
+/* 51 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("algieba", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Algieba", "algieba");
+    
+
+@q ****** (6) @>
+
+/* 52 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("diphda", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Diphda", "diphda");
+    
+
+@q ****** (6) @>
+
+/* 53 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mizar", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mizar", "mizar");
+    
+
+@q ****** (6) @>
+
+/* 54 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("nunki", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Nunki", "nunki");
+    
+
+@q ****** (6) @>
+
+/* 55 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("menkent", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Menkent", "menkent");
+    
+
+@q ****** (6) @>
+
+/* 56 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mirach", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mirach", "mirach");
+    
+
+@q ****** (6) @>
+
+/* 57 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alpheratz", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alpheratz", "alpheratz");
+    
+
+@q ****** (6) @>
+
+/* 58 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("rasalhague", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Rasalhague", "rasalhague");
+    
+
+@q ****** (6) @>
+
+/* 59 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("kochab", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Kochab", "kochab");
+    
+
+@q ****** (6) @>
+
+/* 60 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("saiph", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Saiph", "saiph");
+    
+
+@q ****** (6) @>
+
+/* 61 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("denebola", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Denebola", "denebola");
+    
+
+@q ****** (6) @>
+
+/* 62 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("algol", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Algol", "algol");
+    
+
+@q ****** (6) @>
+
+/* 63 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("tiaki", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Tiaki", "tiaki");
+    
+
+@q ****** (6) @>
+
+/* 64 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("muhlifain", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Muhlifain", "muhlifain");
+    
+
+@q ****** (6) @>
+
+/* 65 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("aspidiske", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Aspidiske", "aspidiske");
+    
+
+@q ****** (6) @>
+
+/* 66 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("suhail", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Suhail", "suhail");
+    
+
+@q ****** (6) @>
+
+/* 67 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("alphecca", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Alphecca", "alphecca");
+    
+
+@q ****** (6) @>
+
+/* 68 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mintaka", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mintaka", "mintaka");
+    
+
+@q ****** (6) @>
+
+/* 69 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("sadr", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Sadr", "sadr");
+    
+
+@q ****** (6) @>
+
+/* 70 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("eltanin", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Eltanin", "eltanin");
+    
+
+@q ****** (6) @>
+
+/* 71 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("schedar", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Schedar", "schedar");
+    
+
+@q ****** (6) @>
+
+/* 72 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("naos", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Naos", "naos");
+    
+
+@q ****** (6) @>
+
+/* 73 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("almach", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Almach", "almach");
+    
+
+@q ****** (6) @>
+
+/* 74 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("caph", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Caph", "caph");
+    
+
+@q ****** (6) @>
+
+/* 75 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("izar", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Izar", "izar");
+    
+
+@q ****** (6) @>
+
+/* 76 */
+
+    /* t = create_new<Star>(s); */
+    /* v = static_cast<void*>(t);  */
+
+    /* scanner_node->add_entry("-", STAR,  */
+    /*                         regular, is_constant, */
+    /*                         not_array, Id_Map_Entry_Type::KNOWN, v); */
+
+    /* scanner_node->add_synonym("-", "-"); */
+    
+
+@q ****** (6) @>
+
+/* 77 */
+
+    /* t = create_new<Star>(s); */
+    /* v = static_cast<void*>(t);  */
+
+    /* scanner_node->add_entry("-", STAR,  */
+    /*                         regular, is_constant, */
+    /*                         not_array, Id_Map_Entry_Type::KNOWN, v); */
+
+    /* scanner_node->add_synonym("-", "?-"); */
+    
+
+@q ****** (6) @>
+
+/* 78 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("dschubba", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Dschubba", "dschubba");
+    
+
+@q ****** (6) @>
+
+/* 79 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("larawag", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Larawag", "larawag");
+    
+
+@q ****** (6) @>
+
+/* 80 */
+
+    /* t = create_new<Star>(s); */
+    /* v = static_cast<void*>(t);  */
+
+    /* scanner_node->add_entry("-", STAR,  */
+    /*                         regular, is_constant, */
+    /*                         not_array, Id_Map_Entry_Type::KNOWN, v); */
+
+    /* scanner_node->add_synonym("-", "-"); */
+    
+
+@q ****** (6) @>
+
+/* 81 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("merak", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Merak", "merak");
+    
+
+@q ****** (6) @>
+
+/* 82 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("ankaa", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Ankaa", "ankaa");
+    
+
+@q ****** (6) @>
+
+/* 83 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("girtab[a]", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Girtab[a]", "girtab[a]");
+    
+
+@q ****** (6) @>
+
+/* 84 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("enif", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Enif", "enif");
+    
+
+@q ****** (6) @>
+
+/* 85 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("scheat", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Scheat", "scheat");
+    
+
+@q ****** (6) @>
+
+/* 86 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("sabik", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Sabik", "sabik");
+    
+
+@q ****** (6) @>
+
+/* 87 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("phecda", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Phecda", "phecda");
+    
+
+@q ****** (6) @>
+
+/* 88 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("aludra", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Aludra", "aludra");
+    
+
+@q ****** (6) @>
+
+/* 89 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("markeb", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Markeb", "markeb");
+    
+
+@q ****** (6) @>
+
+/* 90 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("navi[a]", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Navi[a]", "navi[a]");
+    
+
+@q ****** (6) @>
+
+/* 91 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("markab", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Markab", "markab");
+    
+
+@q ****** (6) @>
+
+/* 92 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("aljanah", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Aljanah", "aljanah");
+    
+
+@q ****** (6) @>
+
+/* 93 */
+
+    t = create_new<Star>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("acrab", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Acrab", "acrab");
+    
+
+
+
+
+@q ****** (6) @>
 
   }
 
