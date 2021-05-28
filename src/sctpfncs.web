@@ -1390,13 +1390,14 @@ Scanner_Type::add_synonym(string synonym, string base_name)
 
 #endif
 
-Id_Map_Iterator iter =  id_map_node->id_map.find(synonym);
+  Id_Map_Iterator iter =  id_map_node->id_map.find(synonym);
 
   if (iter != id_map_node->id_map.end())
     {
-      cerr << "ERROR! In Scanner_Type::add_synonym():\n"
-           << "Entry already exists for " << synonym 
-           << ".Returning 0.\n"
+      cerr << "ERROR! In Scanner_Type::add_synonym():" << endl 
+           << "Entry already exists for " << synonym << "." << endl 
+           << "`base_name' == " << base_name << endl 
+           << "Returning 0.\n"
            << "Type <RETURN> to continue.\n";
 
       getchar();  /* Don't delete this!  */@;  
