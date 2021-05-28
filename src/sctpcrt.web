@@ -6019,6 +6019,34 @@ Added this section.
 
    }
 
+@q ***** (5) |Stars|.  @>
+@*4 |Stars|.
+
+\LOG
+\initials{LDF 2021.05.28.}  
+Added this section.
+\ENDLOG 
+
+@q ****** (6) |origin|.  @>
+
+|origin|.
+
+\LOG
+\initials{LDF 2021.05.28.}  Added this section.
+\ENDLOG 
+
+@<Define |Scanner_Type::create|@>=          
+  {
+    Star s;
+    Star* t = create_new<Star>(t);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("aldebaran", STAR, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+  }
+
 @q ***** (5) End of group for ``Predefined variables and constants''.  @>          
 @ End of group for ``Predefined variables and constants''.
 
