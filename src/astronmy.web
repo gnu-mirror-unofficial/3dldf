@@ -152,6 +152,9 @@ class Star
 
    protected:
 
+   real right_ascension;
+   real declination;
+
    public:
 
       @<Declare |static| |class Star| data members@>@;
@@ -227,6 +230,10 @@ Star(void);
 @<Define |Star| functions@>= 
 Star::Star(void)
 {
+
+   right_ascension = 0;
+   declination = 0;
+
    return;
 }
 
@@ -244,20 +251,20 @@ Added this function.
 
 @<Declare |Star| functions@>=
 int
-set(real real_part, real imaginary_part, Scanner_Node scanner_node = 0);
+set(real ra, real dcl, Scanner_Node scanner_node = 0);
 
 @q **** (4) Definition.  @>
 
 @
 @<Define |Star| functions@>= 
 int
-Star::set(real real_part, real imaginary_part, Scanner_Node scanner_node)
+Star::set(real ra, real dcl, Scanner_Node scanner_node)
 {
 
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -287,6 +294,9 @@ Star::set(real real_part, real imaginary_part, Scanner_Node scanner_node)
    }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   right_ascension = ra;
+   declination = dcl;
 
 @q ***** (5)@>
 
@@ -456,6 +466,9 @@ Star::operator=(const Star& c)
 
 @q ****** (6)@>
 
+   right_ascension = c.right_ascension;
+   declination = c.declination;
+
     return *this;
 
 }  /* End of 
@@ -503,6 +516,9 @@ Star::clear(Scanner_Node scanner_node)
    using namespace Scan_Parse;
 
 @q ***** (5)@>
+
+   right_ascension = 0;
+   declination = 0;
 
    return 0;
 
@@ -555,7 +571,9 @@ Star::show(string text, Scanner_Node scanner_node) const
     if (text == "")
        text = "Star:";
 
-    cerr << text 
+    cerr << text << endl
+         << "right_ascension == " << right_ascension << endl 
+         << "declination     == " << declination << endl 
          << endl;
 
 @q ***** (5)@>
