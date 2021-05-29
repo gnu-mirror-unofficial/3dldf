@@ -3064,7 +3064,7 @@ Added this rule.
 @<Define rules@>=
 @=star_declaration: STAR_DECLARATOR declaration_list@>
 {
-   non_shape_decl_func<Star>(static_cast<Scanner_Node>(parameter), STAR);
+   non_shape_decl_func(static_cast<Scanner_Node>(parameter), STAR);
 };
 
 @q ***** (5) constellation_declaration.  @>
@@ -3079,7 +3079,7 @@ Added this rule.
 @<Define rules@>=
 @=constellation_declaration: CONSTELLATION_DECLARATOR declaration_list@>
 {
-  non_shape_decl_func<Constellation>(static_cast<Scanner_Node>(parameter), CONSTELLATION);
+   non_shape_decl_func(static_cast<Scanner_Node>(parameter), CONSTELLATION);
 };
 
 @q ***** (5) planet_declaration.  @>
@@ -3094,7 +3094,7 @@ Added this rule.
 @<Define rules@>=
 @=planet_declaration: PLANET_DECLARATOR declaration_list@>
 {
-  non_shape_decl_func<Planet>(static_cast<Scanner_Node>(parameter), PLANET);
+   non_shape_decl_func(static_cast<Scanner_Node>(parameter), PLANET);
 };
 
 @q ***** (5) plane_declaration.  @>
