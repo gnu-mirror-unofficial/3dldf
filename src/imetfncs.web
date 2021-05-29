@@ -1628,7 +1628,17 @@ else if (type == NUMERIC)
        }
    }
 
-
+   else if (type == PLANET)
+   {
+     
+     Planet* c = static_cast<Planet*>(object);
+     
+     if (c != static_cast<Planet*>(0))
+       {
+         delete c;
+         c = static_cast<Planet*>(0);
+       }
+   }
 
 @q ****** (6) Handle internal quantities.@>  
 @ Handle internal quantities.
@@ -2636,7 +2646,11 @@ Added code for the cases
       object = static_cast<void*>(o);       
     }
 
-
+  else if (type == PLANET_VECTOR)
+    {
+      Pointer_Vector<Planet>* o = new Pointer_Vector<Planet>;
+      object = static_cast<void*>(o);       
+    }
 
 @q ****** (6) |Shape|-types.@> 
 @ |Shape|-types.
@@ -4014,6 +4028,7 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
       || type == GLYPH_VECTOR
       || type == STAR_VECTOR
       || type == CONSTELLATION_VECTOR
+      || type == PLANET_VECTOR
       || type == CONIC_SECTION_LATTICE_VECTOR)
 
     return true;

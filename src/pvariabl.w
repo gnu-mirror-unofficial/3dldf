@@ -1849,11 +1849,6 @@ Added this type declaration.
 \LOG
 \initials{LDF 2021.05.28.}
 Added this rule.
-
-\initials{LDF 2021.05.28.}
-Now calling |Scan_Parse::variable_decl_func()|
-instead of 
-|Scan_Parse::star_vector_variable_rule_func_0()|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1886,11 +1881,6 @@ Added this type declaration.
 \LOG
 \initials{LDF 2021.05.28.}
 Added this rule.
-
-\initials{LDF 2021.05.28.}
-Now calling |Scan_Parse::variable_decl_func()|
-instead of 
-|Scan_Parse::constellation_vector_variable_rule_func_0()|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1899,6 +1889,38 @@ instead of
    @=$$@> = variable_decl_func(@=$1@>, 
                                @=$2@>, 
                                CONSTELLATION_VECTOR,
+                               parameter);
+
+};
+
+@q *** (3) planet_vector_variable.  @>
+@*2 \§planet vector variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_vector_variable@>@/
+
+@q **** (4) planet_vector_variable --> variable PLANET_VECTOR.@>
+@*3 \§planet vector variable> $\longrightarrow$ \§variable> 
+\.{PLANET\_VECTOR}.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=planet_vector_variable: variable PLANET_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               PLANET_VECTOR,
                                parameter);
 
 };
@@ -2741,6 +2763,26 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q **** (4) vector_type_variable --> planet_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§planet vector variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: planet_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
 
 @q **** (4) vector_type_variable --> plane_vector_variable.@>
 
@@ -4264,10 +4306,6 @@ Added this type declaration.
 \LOG
 \initials{LDF 2021.05.28.}
 Added this rule.
-
-\initials{LDF 2021.05.28.}
-Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4296,10 +4334,6 @@ Added this type declaration.
 \LOG
 \initials{LDF 2021.05.28.}
 Added this rule.
-
-\initials{LDF 2021.05.28.}
-Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4310,6 +4344,35 @@ Removed code from this rule.  Now calling
                                CONSTELLATION,
                                parameter);
 };
+
+@q *** (3) planet variable --> variable PLANET.  @>
+@*2 \§planet variable> $\longrightarrow$ \§variable> 
+\.{PLANET}.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_variable@>@/
+
+@
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=planet_variable: variable PLANET@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               PLANET,
+                               parameter);
+};
+
 
 @q *** (3) plane variable --> variable PLANE.  @>
 @*2 \§plane variable> $\longrightarrow$ \§variable> 
@@ -5078,6 +5141,26 @@ Added this rule.
 
 };
 
+@q *** (3) any_variable --> planet_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§planet variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+
+@=any_variable: planet_variable@>@/
+{
+
+   @=$$@> = @=$1@>;
+
+};
+
+
 @q *** (3) any_variable --> plane_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§plane variable>.
@@ -5817,6 +5900,25 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q *** (3)  any_variable --> planet_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§planet vector variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: planet_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
 
 
 @q *** (3)  any_variable --> plane_vector_variable.  @>

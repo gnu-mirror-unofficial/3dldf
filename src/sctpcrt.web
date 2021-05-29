@@ -1261,6 +1261,7 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
 
      scanner_node->add_entry("star", STAR_DECLARATOR, spark);
      scanner_node->add_entry("constellation", CONSTELLATION_DECLARATOR, spark);
+     scanner_node->add_entry("planet", PLANET_DECLARATOR, spark);
 
      scanner_node->add_entry("plane", PLANE_DECLARATOR, spark);
 
@@ -1370,6 +1371,9 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
 
      scanner_node->add_entry("constellation_vector", 
                              CONSTELLATION_VECTOR_DECLARATOR, spark);
+
+     scanner_node->add_entry("planet_vector", 
+                             PLANET_VECTOR_DECLARATOR, spark);
 
      scanner_node->add_entry("plane_vector", 
                              PLANE_VECTOR_DECLARATOR, spark);
@@ -1703,6 +1707,7 @@ and |is_sphere_development_vector|.
 
      scanner_node->add_entry("is_star", IS_STAR, spark);
      scanner_node->add_entry("is_constellation", IS_CONSTELLATION, spark);
+     scanner_node->add_entry("is_planet", IS_PLANET, spark);
 
      scanner_node->add_entry("is_plane", IS_PLANE, spark);
 
@@ -1808,6 +1813,9 @@ and |is_sphere_development_vector|.
 
      scanner_node->add_entry("is_constellation_vector", 
                              IS_CONSTELLATION_VECTOR, spark);
+
+     scanner_node->add_entry("is_planet_vector", 
+                             IS_PLANET_VECTOR, spark);
 
      scanner_node->add_entry("is_plane_vector", 
                              IS_PLANE_VECTOR, spark);
@@ -8698,6 +8706,149 @@ Added this section.
 @<Define |Scanner_Type::create|@>=  
   
   }  /* End of group for |Constellations|.  */
+
+@q ***** (5) |Planets|.  @>
+@*4 |Planets|.
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this section.
+\ENDLOG 
+@<Define |Scanner_Type::create|@>=          
+
+  {
+
+@q ***** (5) @>
+
+    Planet s;
+    Planet* t = 0;
+
+@q ****** (6) @>
+
+/* Mercury */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mercury", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mercury", "mercury");
+
+@q ****** (6) @>
+
+/* Venus */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("venus", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Venus", "venus");
+
+@q ****** (6) @>
+
+/* Earth */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("earth", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Earth", "earth");
+
+@q ****** (6) @>
+
+/* Mars */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("mars", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Mars", "mars");
+
+@q ****** (6) @>
+
+/* Jupiter */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("jupiter", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Jupiter", "jupiter");
+
+@q ****** (6) @>
+
+/* Saturn */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("saturn", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Saturn", "saturn");
+
+@q ****** (6) @>
+
+/* Uranus */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("uranus", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Uranus", "uranus");
+
+@q ****** (6) @>
+
+/* Neptune */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("neptune", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Neptune", "neptune");
+
+@q ****** (6) @>
+
+/* Pluto */
+
+    t = create_new<Planet>(s);
+    v = static_cast<void*>(t); 
+
+    scanner_node->add_entry("pluto", PLANET, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("Pluto", "pluto");
+
+@q ****** (6) @>
+
+@q ***** (5) End of group for ``Predefined variables and constants''.  @>          
+@ End of group for ``Predefined variables and constants''.
+
+@<Define |Scanner_Type::create|@>=  
+  
+  }  /* End of group for |Planets|.  */
+
 
 
 @q ***** (5) End of group for ``Predefined variables and constants''.  @>          

@@ -608,6 +608,32 @@ Added this rule.
 };
 
 
+@q **** (4) command --> SHOW planet_expression@>
+
+@*3 \§command> $\longrightarrow$ \.{SHOW}
+\§planet expression>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW planet_expression@>@/
+{
+    Scan_Parse::show_func<Planet>(static_cast<Planet*>(@=$2@>),
+                                 "planet",
+                                 parameter); 
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
+
 
 @q **** (4) command --> SHOW plane_expression@>
 

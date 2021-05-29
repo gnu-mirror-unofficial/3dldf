@@ -1063,6 +1063,34 @@ Added this rule.
 
 };
 
+@q *** (3) declaration --> planet declaration.  @>
+@*2 \§declaration> $\longrightarrow$ |planet_declaration|.  
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=declaration: planet_declaration@>
+{
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ @; 
+   if (DEBUG)
+   {
+      stringstream cerr_strm;
+      cerr_strm  
+                << "*** Parser:  'declaration --> planet_declaration'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str();
+
+   }
+#endif /* |DEBUG_COMPILE|  */
+
+};
 
 @q *** (3) declaration --> plane declaration.  @>
 @*2 \§declaration> $\longrightarrow$ |plane_declaration|.  
@@ -2091,7 +2119,32 @@ Added this rule.
 
 };
 
+@q ***** (5) declaration --> planet_vector declaration.  @>
+@*4 \§declaration> $\longrightarrow$ \§planet vector declaration>.
+\initials{LDF 2021.05.29.}
 
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=declaration: planet_vector_declaration@>
+{
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+  {
+    stringstream cerr_strm;
+    cerr_strm << "*** Parser:  'declaration --> planet_vector_declaration'.";
+
+    log_message(cerr_strm); 
+    cerr_message(cerr_strm); 
+    cerr_strm.str("");
+  }
+#endif /* |DEBUG_COMPILE|  */
+
+};
 
 @q ***** (5) declaration --> plane_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§plane vector declaration>.
@@ -3011,7 +3064,7 @@ Added this rule.
 @<Define rules@>=
 @=star_declaration: STAR_DECLARATOR declaration_list@>
 {
-  shape_decl_func<Star>(static_cast<Scanner_Node>(parameter), STAR);
+   non_shape_decl_func<Star>(static_cast<Scanner_Node>(parameter), STAR);
 };
 
 @q ***** (5) constellation_declaration.  @>
@@ -3026,9 +3079,23 @@ Added this rule.
 @<Define rules@>=
 @=constellation_declaration: CONSTELLATION_DECLARATOR declaration_list@>
 {
-  shape_decl_func<Constellation>(static_cast<Scanner_Node>(parameter), CONSTELLATION);
+  non_shape_decl_func<Constellation>(static_cast<Scanner_Node>(parameter), CONSTELLATION);
 };
 
+@q ***** (5) planet_declaration.  @>
+@*4 {\bf planet\_declaration}.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=planet_declaration: PLANET_DECLARATOR declaration_list@>
+{
+  non_shape_decl_func<Planet>(static_cast<Scanner_Node>(parameter), PLANET);
+};
 
 @q ***** (5) plane_declaration.  @>
 @*4 {\bf plane\_declaration}.
@@ -3969,6 +4036,29 @@ Added this rule.
                                        CONSTELLATION);
 
 };
+
+@q ****** (6) planet_vector_declaration -->               @>
+@q ****** (6) PLANET_VECTOR_DECLARATOR declaration_list.  @>
+
+@*3 \§planet vector declaration> $\longrightarrow$ 
+\.{PLANET\_VECTOR\_DECLARATOR} \§declaration list>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=planet_vector_declaration: PLANET_VECTOR_DECLARATOR declaration_list@>
+{
+
+  vector_type_decl<Planet>(static_cast<Scanner_Node>(parameter),
+                                       PLANET_VECTOR,
+                                       PLANET);
+
+};
+
 
 @q ****** (6) plane_vector_declaration -->               @>
 @q ****** (6) PLANE_VECTOR_DECLARATOR declaration_list.  @>

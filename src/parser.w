@@ -496,6 +496,10 @@
 
 @i pcnstvct.w 
 
+@q **** (4) planet vector expressions.  'plntvctr.w'.  @>
+
+@i pplntvct.w
+
 @q ** (2) Declarations.  `pldfdcl.w'.  @>
 
 @i pldfdcl.w

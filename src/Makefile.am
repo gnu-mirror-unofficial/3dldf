@@ -145,7 +145,7 @@ lib_LTLIBRARIES = lib3dldflb.la
 		      popassgn.w poptions.w porgexpr.w porvexpr.w ppbvexpr.w ppdvexpr.w \
                       ppenexpr.w \
                       ppgvexpr.w pphdexpr.w pphvexpr.w ppicexpr.w pplhdslc.w \
-                      pplnexpr.w pplnvxpr.w pplvexpr.w ppntexpr.w ppnvexpr.w \
+                      pplnexpr.w pplntvct.w pplnvxpr.w pplvexpr.w ppntexpr.w ppnvexpr.w \
                       pprbexpr.w pprdexpr.w pprgstmt.w ppthexpr.w pptvexpr.w \
                       ppygexpr.w \
                       prcvexpr.w \
