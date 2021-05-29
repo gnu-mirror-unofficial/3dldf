@@ -520,6 +520,244 @@ Added this rule.
 
 };
 
+@q * (0) planet expressions.  @>
+@** planet expressions.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Created this file.
+\ENDLOG 
+
+@q * (1) planet_primary.  @>
+@* \§planet primary>.
+\initials{LDF 2021.05.29.}  
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_primary@>@/
+
+@q ** (2) planet_primary --> planet_variable.@>
+@*1 \§planet primary> $\longrightarrow$ \§planet variable>.  
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+
+@=planet_primary: planet_variable@>@/
+{
+
+  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
+  {
+
+    @=$$@> = static_cast<void*>(0);
+
+  } /* |if (entry == 0 || entry->object == 0)|  */
+
+  else /* |entry != 0 && entry->object != 0|  */
+
+  @=$$@> = static_cast<void*>(create_new<Planet>(
+                              static_cast<Planet*>(
+                              entry->object))); 
+
+};
+
+@q ** (2) planet_primary --> LEFT_PARENTHESIS planet_expression RIGHT_PARENTHESIS @>
+
+@*1 \§planet primary> $\longrightarrow$ \.{\LP} 
+\§planet expression> \.{\RP}.
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=planet_primary: LEFT_PARENTHESIS planet_expression RIGHT_PARENTHESIS@>@/
+{
+  @=$$@> = @=$2@>;
+
+};
+
+@q ***** (5) planet_primary --> LAST @>
+@q ***** (5) planet_vector_expression.@>
+
+@*4 \§planet primary> $\longrightarrow$ 
+\.{LAST} \§planet vector expression>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=planet_primary: LAST planet_vector_expression@>@/
+{ 
+
+    Planet* c;
+
+    c = create_new<Planet>(0);
+
+    Pointer_Vector<Planet>* pv 
+      = static_cast<Pointer_Vector<Planet>*>(@=$2@>);
+
+@q ******* (7) Error handling:  |pv == 0|.@> 
+
+@ Error handling:  |pv == 0|.
+\initials{LDF 2021.05.29.}
+
+@<Define rules@>=
+
+  if (pv == static_cast<Pointer_Vector<Planet>*>(0))
+  {
+      delete c;
+
+      @=$$@> = static_cast<void*>(0);
+
+  }  /* |if (pv == 0)|  */
+
+@q ******* (7) Error handling:  |pv->ctr == 0|.@> 
+
+@ Error handling:  |pv->ctr == 0|.
+\initials{LDF 2021.05.29.}
+
+@<Define rules@>=
+
+   else if (pv->ctr == 0)
+   {
+
+       delete c;
+
+       @=$$@> = static_cast<void*>(0);
+
+   }  /* |else if (pv->ctr == 0)|  */
+
+@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+
+@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+\initials{LDF 2021.05.29.}
+
+@<Define rules@>=
+
+   else 
+   {
+      *c = *(pv->v[pv->ctr - 1]);
+      @=$$@> = static_cast<void*>(c); 
+   }
+
+@q ******* (7) @> 
+
+};
+
+@q * (1) planet_secondary.  @>
+@* \§planet secondary>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_secondary@>
+  
+@q ** (2) planet secondary --> planet_primary.@>
+@*1 \§planet secondary> $\longrightarrow$ \§planet primary>.
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=planet_secondary: planet_primary@>@/
+{
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @;
+  if (DEBUG)
+    {
+      cerr << "\n*** Parser: planet_secondary --> planet_primary "
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q * (1) planet tertiary.@>
+@* \§planet tertiary>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_tertiary@>
+
+@q ** (2) planet tertiary --> planet_secondary.  @>
+@*1 \§planet tertiary> $\longrightarrow$ \§planet secondary>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=planet_tertiary: planet_secondary@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q * (1) planet expression.@>
+@* \§planet expression>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_expression@>
+
+@q ** (2) planet expression --> planet_tertiary.  @>
+@*1 \§planet expression> $\longrightarrow$ \§planet tertiary>.
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=planet_expression: planet_tertiary@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
