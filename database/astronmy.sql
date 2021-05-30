@@ -1,14 +1,17 @@
 /* /home/laurence/3DLDF-3.0/database/astronmy.sql    */
 /* Created by Laurence D. Finston (LDF) 2021.05.29.  */
 
+/* * (1)  */
+
 create database Astronomy;
 
 use Astronomy;
 
+/* ** (2) Create tables  */
 
+/* *** (3) Stars  */
 
--- 
---
+/* *** (3) Constellations  */
 
 drop table Constellations;
 
@@ -18,6 +21,12 @@ create table Constellations
    name varchar(64) not null default "",
    abbreviation varchar(16) not null default ""
 );
+
+/* *** (3) Constellations  */
+
+
+/* ** (2) */
+
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (1, "Hya", "Hydra");
 
@@ -195,4 +204,14 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (88, "Cru", "Crux");
 
+/* ** (2) */
+
 select * from Constellations order by rank_constellation;
+
+/* Local Variables:                   */
+/* eval:(outline-minor-mode t)        */
+/* abbrev-file-name:"~/.abbrev_defs"  */
+/* eval:(read-abbrev-file)            */
+/* outline-regexp:"/\\* \\*+"         */
+/* fill-column:80                     */
+/* End:                               */
