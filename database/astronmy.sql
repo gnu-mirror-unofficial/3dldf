@@ -73,11 +73,30 @@ create table Stars
    right_ascension_hours int not null default 0,
    right_ascension_minutes int not null default 0,
    right_ascension_seconds float not null default 0.0,
+   right_ascension_decimal_hours float not null default 0.0,
    declination_degrees int not null default 0,
    declination_minutes int not null default 0,
-   declination_seconds float not null default 0.0
+   declination_seconds float not null default 0.0,
+   declination_decimal_degrees float not null default 0.0
 );
 
+create table ttemp
+(
+   right_ascension time(4)
+);
+
+alter table Stars add column right_ascension_decimal_hours float not null default 0.0 after right_ascension_seconds;
+alter table Stars add column declination_decimal_degrees float not null default 0.0 after declination_seconds;
+
+insert into ttemp (right_ascension) values ('1:45:20.02');
+
+select * from ttemp;
+select time_to_sec('1:45:20.02');
+select time_to_sec('1:45:20');
+
+
+
+select utc_time();
 
 /* *** (3) Constellations  */
 
