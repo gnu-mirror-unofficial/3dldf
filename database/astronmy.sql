@@ -294,11 +294,37 @@ select * from Stars order by flamsteed_designation_number\G
  
 28,  "omega",    "Psc",  9072,   0, 00, 15.8, +6, 57, 57, /* Done  */
 
+/* **** (4) */
 
-
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
 values
 (0,  "epsilon",  "Tuc",  9076,   0, 00, 51.9,   -65, 28, 27);
 
+/* **** (4) */
+
+select * from Stars\G
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
 values
 (0,  "theta",    "Oct",  9084,   0, 02, 31.3,   -76, 57, 49);
 
@@ -884,7 +910,34 @@ values
 30,            "Gem",  2478,   6 45 01.9,   +13 12 28);
 27,   "epsilon",  "Gem",  2473,   6 45 04.2,   +25 06 4);
 0,  "",       "",   2513,   6 45 51.7,   -52 13 17);
- 9,   "alpha",    "CMa",  2491,   6 45 57.4,   -16 44 3);
+
+/* **** (4) Sirius  */
+
+select * from Stars where right_ascension_hours = 6 and right_ascension_minutes = 45\G
+
+update Stars set common_name = "Sirius" where right_ascension_hours = 6 and right_ascension_minutes = 45;
+
+update Stars set constellation_full_name = "Alpha Canis Majoris" where constellation_abbreviation = "CMa";
+
+  1. Alpha Canis Majoris       Sirius            06 45 -16.7  227.2  -8.9  A1V          -1.46   1.43  379.21 1.58     9
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(9,   "alpha",    "CMa",  2491,   6, 45, 57.4, -16, 44, 3);
+
+
+/* **** (4) */
+
 31,   "xi",       "Gem",  2484,   6 46 19.6,   +12 52 2);
 0,  "",       "",   2518,   6 47 59.4,   -37 57 04);
 56,   "psi^5",    "Aur",  2483,   6 48 04.2,   +43 33 2);
