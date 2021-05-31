@@ -269,6 +269,185 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (88, "Cru", "Crux");
 
 
+/* ** (2) Update Stars, set `constellation_full_name'.  */
+
+update Stars set constellation_full_name = "Pisces" where constellation_abbreviation = "Psc";
+
+update Stars set constellation_full_name = "Hydra" where constellation_abbreviation = "Hya";
+
+update Stars set constellation_full_name = "Virgo" where constellation_abbreviation = "Vir";
+
+update Stars set constellation_full_name = "Ursa" where constellation_abbreviation = "UMa";
+
+update Stars set constellation_full_name = "Cetus" where constellation_abbreviation = "Cet";
+
+update Stars set constellation_full_name = "Hercules" where constellation_abbreviation = "Her";
+
+update Stars set constellation_full_name = "Eridanus" where constellation_abbreviation = "Eri";
+
+update Stars set constellation_full_name = "Pegasus" where constellation_abbreviation = "Peg";
+
+update Stars set constellation_full_name = "Draco" where constellation_abbreviation = "Dra";
+
+update Stars set constellation_full_name = "Centaurus" where constellation_abbreviation = "Cen";
+
+update Stars set constellation_full_name = "Aquarius" where constellation_abbreviation = "Aqr";
+
+update Stars set constellation_full_name = "Ophiuchus" where constellation_abbreviation = "Oph";
+
+update Stars set constellation_full_name = "Leo" where constellation_abbreviation = "Leo";
+
+update Stars set constellation_full_name = "Boötes" where constellation_abbreviation = "Boo";
+
+update Stars set constellation_full_name = "Pisces" where constellation_abbreviation = "Psc";
+
+update Stars set constellation_full_name = "Sagittarius" where constellation_abbreviation = "Sgr";
+
+update Stars set constellation_full_name = "Cygnus" where constellation_abbreviation = "Cyg";
+
+update Stars set constellation_full_name = "Taurus" where constellation_abbreviation = "Tau";
+
+update Stars set constellation_full_name = "Camelopardalis" where constellation_abbreviation = "Cam";
+
+update Stars set constellation_full_name = "Andromeda" where constellation_abbreviation = "And";
+
+update Stars set constellation_full_name = "Puppis" where constellation_abbreviation = "Pup";
+
+update Stars set constellation_full_name = "Auriga" where constellation_abbreviation = "Aur";
+
+update Stars set constellation_full_name = "Aquila" where constellation_abbreviation = "Aql";
+
+update Stars set constellation_full_name = "Serpens" where constellation_abbreviation = "Ser";
+
+update Stars set constellation_full_name = "Perseus" where constellation_abbreviation = "Per";
+
+update Stars set constellation_full_name = "Cassiopeia" where constellation_abbreviation = "Cas";
+
+update Stars set constellation_full_name = "Orion" where constellation_abbreviation = "Ori";
+
+update Stars set constellation_full_name = "Cepheus" where constellation_abbreviation = "Cep";
+
+update Stars set constellation_full_name = "Lynx" where constellation_abbreviation = "Lyn";
+
+update Stars set constellation_full_name = "Libra" where constellation_abbreviation = "Lib";
+
+update Stars set constellation_full_name = "Gemini" where constellation_abbreviation = "Gem";
+
+update Stars set constellation_full_name = "Cancer" where constellation_abbreviation = "Cnc";
+
+update Stars set constellation_full_name = "Vela" where constellation_abbreviation = "Vel";
+
+update Stars set constellation_full_name = "Scorpius" where constellation_abbreviation = "Sco";
+
+update Stars set constellation_full_name = "Carina" where constellation_abbreviation = "Car";
+
+update Stars set constellation_full_name = "Monoceros" where constellation_abbreviation = "Mon";
+
+update Stars set constellation_full_name = "Sculptor" where constellation_abbreviation = "Scl";
+
+update Stars set constellation_full_name = "Phoenix" where constellation_abbreviation = "Phe";
+
+update Stars set constellation_full_name = "Canes" where constellation_abbreviation = "CVn";
+
+update Stars set constellation_full_name = "Aries" where constellation_abbreviation = "Ari";
+
+update Stars set constellation_full_name = "Capricornus" where constellation_abbreviation = "Cap";
+
+update Stars set constellation_full_name = "Fornax" where constellation_abbreviation = "For";
+
+update Stars set constellation_full_name = "Coma" where constellation_abbreviation = "Com";
+
+update Stars set constellation_full_name = "Canis" where constellation_abbreviation = "CMa";
+
+update Stars set constellation_full_name = "Pavo" where constellation_abbreviation = "Pav";
+
+update Stars set constellation_full_name = "Grus" where constellation_abbreviation = "Gru";
+
+update Stars set constellation_full_name = "Lupus" where constellation_abbreviation = "Lup";
+
+update Stars set constellation_full_name = "Sextans" where constellation_abbreviation = "Sex";
+
+update Stars set constellation_full_name = "Tucana" where constellation_abbreviation = "Tuc";
+
+update Stars set constellation_full_name = "Indus" where constellation_abbreviation = "Ind";
+
+update Stars set constellation_full_name = "Octans" where constellation_abbreviation = "Oct";
+
+update Stars set constellation_full_name = "Lepus" where constellation_abbreviation = "Lep";
+
+update Stars set constellation_full_name = "Lyra" where constellation_abbreviation = "Lyr";
+
+update Stars set constellation_full_name = "Crater" where constellation_abbreviation = "Crt";
+
+update Stars set constellation_full_name = "Columba" where constellation_abbreviation = "Col";
+
+update Stars set constellation_full_name = "Vulpecula" where constellation_abbreviation = "Vul";
+
+update Stars set constellation_full_name = "Ursa" where constellation_abbreviation = "UMi";
+
+update Stars set constellation_full_name = "Telescopium" where constellation_abbreviation = "Tel";
+
+update Stars set constellation_full_name = "Horologium" where constellation_abbreviation = "Hor";
+
+update Stars set constellation_full_name = "Pictor" where constellation_abbreviation = "Pic";
+
+update Stars set constellation_full_name = "Piscis" where constellation_abbreviation = "PsA";
+
+update Stars set constellation_full_name = "Hydrus" where constellation_abbreviation = "Hyi";
+
+update Stars set constellation_full_name = "Antlia" where constellation_abbreviation = "Ant";
+
+update Stars set constellation_full_name = "Ara" where constellation_abbreviation = "Ara";
+
+update Stars set constellation_full_name = "Leo" where constellation_abbreviation = "LMi";
+
+update Stars set constellation_full_name = "Pyxis" where constellation_abbreviation = "Pyx";
+
+update Stars set constellation_full_name = "Microscopium" where constellation_abbreviation = "Mic";
+
+update Stars set constellation_full_name = "Apus" where constellation_abbreviation = "Aps";
+
+update Stars set constellation_full_name = "Lacerta" where constellation_abbreviation = "Lac";
+update Stars set constellation_full_name = "Delphinus" where constellation_abbreviation = "Delete";
+
+update Stars set constellation_full_name = "Corvus" where constellation_abbreviation = "Crv";
+
+update Stars set constellation_full_name = "Canis" where constellation_abbreviation = "CMi";
+
+update Stars set constellation_full_name = "Dorado" where constellation_abbreviation = "Dor";
+
+update Stars set constellation_full_name = "Corona" where constellation_abbreviation = "CrB";
+
+update Stars set constellation_full_name = "Norma" where constellation_abbreviation = "Nor";
+
+update Stars set constellation_full_name = "Mensa" where constellation_abbreviation = "Men";
+
+update Stars set constellation_full_name = "Volans" where constellation_abbreviation = "Vol";
+
+update Stars set constellation_full_name = "Musca" where constellation_abbreviation = "Mus";
+
+update Stars set constellation_full_name = "Triangulum" where constellation_abbreviation = "Tri";
+
+update Stars set constellation_full_name = "Chamaeleon" where constellation_abbreviation = "Cha";
+
+update Stars set constellation_full_name = "Corona" where constellation_abbreviation = "CrA";
+
+update Stars set constellation_full_name = "Caelum" where constellation_abbreviation = "Cae";
+
+update Stars set constellation_full_name = "Reticulum" where constellation_abbreviation = "Ret";
+
+update Stars set constellation_full_name = "Triangulum" where constellation_abbreviation = "TrA";
+
+update Stars set constellation_full_name = "Scutum" where constellation_abbreviation = "Sct";
+
+update Stars set constellation_full_name = "Circinus" where constellation_abbreviation = "Cir";
+
+update Stars set constellation_full_name = "Sagitta" where constellation_abbreviation = "Sge";
+
+update Stars set constellation_full_name = "Equuleus" where constellation_abbreviation = "Equ";
+
+update Stars set constellation_full_name = "Crux" where constellation_abbreviation = "Cru";
+
 /* ** (2) Insert into Stars  */
 
 replace into Stars (
@@ -291,32 +470,32 @@ update Stars set constellation_full_name = "Pisces" where constellation_abbrevia
 
 /* !! START HERE:  LDF Mon 31 May 2021 01:06:43 AM CEST */
 
-28,  "omega", "Psc", 9072, 0, 00, 15.8, +6, 57, 57, /* Done  */
-0,    epsilon,  Tuc,  9076,   0 00 51.9,   -65 28 27, 
- 0,   theta,    Oct,  9084,   0 02 31.3,   -76 57 49, 
-30,   YY,       Psc,  9089,   0 02 54.5,   - 5 54 41
- 2,   "",       Cet,  9098,   0 04 41.2,   -17 13 59, 
-33,   BC,       Psc,     3,   0 06 17.0,   - 5 36 15
-21,   alpha,    And,    15,   0 09 20.9,   +29 11 33
-11,   beta,     Cas,    21,   0 10 10.6,   +59 15 06
- 0,   epsilon,  Phe,    25,   0 10 20.7,   -45 38 44,  
-22,   "",       And,    27,   0 11 17.4,   +46 10 31,  
- 0,   kappa^2,  Scl,    34,   0 12 30.6,   -27 41 49,  
- 0, theta,      Scl,    35,   0 12 40.2,   -35 01 47,  
-88,   gamma,    Peg,    39,   0 14 11.4,   +15 17 11
-89,   chi,      Peg,    45,   0 15 33.8,   +20 18 34
- 7,  AE,        Cet,    48,   0 15 34.7,   -18 49 50
-25,   sigma,    And,    68,   0 19 18.0,   +36 53 16
- 8,   iota,     Cet,    74,   0 20 22.2,   - 8 43 17
- 0, zeta,     Tuc,    77,   0 21 01.4,   -64 45 58,  
+28,  "omega",  "Psc", 9072,  0, 00, 15.8, +6, 57, 57, /* Done  */
+ 0,  epsilon,  Tuc,  9076,   0 00 51.9,   -65 28 27, 
+ 0,  theta,    Oct,  9084,   0 02 31.3,   -76 57 49, 
+30,  YY,       Psc,  9089,   0 02 54.5,   - 5 54 41
+ 2,  "",       Cet,  9098,   0 04 41.2,   -17 13 59, 
+33,  BC,       Psc,     3,   0 06 17.0,   - 5 36 15
+21,  alpha,    And,    15,   0 09 20.9,   +29 11 33
+11,  beta,     Cas,    21,   0 10 10.6,   +59 15 06
+ 0,  epsilon,  Phe,    25,   0 10 20.7,   -45 38 44,  
+22,  "",       And,    27,   0 11 17.4,   +46 10 31,  
+ 0,  kappa^2,  Scl,    34,   0 12 30.6,   -27 41 49,  
+ 0,  theta,    Scl,    35,   0 12 40.2,   -35 01 47,  
+88,  gamma,    Peg,    39,   0 14 11.4,   +15 17 11
+89,  chi,      Peg,    45,   0 15 33.8,   +20 18 34
+ 7,  AE,       Cet,    48,   0 15 34.7,   -18 49 50
+25,  sigma,    And,    68,   0 19 18.0,   +36 53 16
+ 8,  iota,     Cet,    74,   0 20 22.2,   - 8 43 17
+ 0,  zeta,     Tuc,    77,   0 21 01.4,   -64 45 58,  
 41,            Psc,    80,   0 21 33.1,   + 8 17 34,  
 27,   rho,     And,    82,   0 22 06.1,   +38 04 15
- 0, R,       And,    90,   0 25 00.9,   +38 40 45,  
+ 0, R,         And,    90,   0 25 00.9,   +38 40 45,  
  0, beta,     Hyi,    98,   0 26 41.9,   -77 09 01,  
  0, kappa,    Phe,   100,   0 27 06.5,   -43 34 39,  
  0, alpha,    Phe,    99,   0 27 11.7,   -42 12 20,  
  0, ""               118,   0 31 18.0,   -23 41 08,    
- 0, lambda^1 Phe,   125,   0 32 18.2,   -48 42 05,   
+ 0, lambda^1  Phe,   125,    0 32 18.2,   -48 42 05,   
  0, beta^1,   Tuc,   126,   0 32 23.1,   -62 51 23,  
 15,   kappa,    Cas,   130,   0 34 04.0,   +63 02 01
 29,   pi,       And,   154,   0 37 52.4,   +33 49 15
