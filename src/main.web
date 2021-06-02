@@ -353,6 +353,7 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short QUIET_INDEX                = 6;
   const unsigned short VERBOSE_INDEX              = 7;
   const unsigned short VERSION_INDEX              = 8;
+  const unsigned short ASTRONOMY                  = 9;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -374,6 +375,7 @@ Added the ``\.{--quiet}'' option.
     {"quiet", 0, 0, 0},
     {"verbose", 0, 0, 0},
     {"version", 0, 0, 0},
+    {"astronomy", 0, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -387,7 +389,7 @@ Added the ``\.{--quiet}'' option.
 
   while (1) {
 
-    option_ctr = getopt_long_only (argc, argv, "hv",
+    option_ctr = getopt_long_only(argc, argv, "hv",
                           long_options, &option_index);
 #if 0 
     if (DEBUG)
@@ -495,7 +497,8 @@ Edited the output.
                  << "--version:               Prints the version number of "
                  << "GNU 3DLDF" << endl 
                  << "                         to standard output and exits with "
-                 << "return value 0."
+                 << "return value 0." << endl << endl 
+                 << "--astronomy:             Enables the features of GNU 3DLDF pertaining to astronomy."
                  << endl << endl; 
 
 #if DEBUG_COMPILE
@@ -676,6 +679,24 @@ called using the ``\.{version}'' option.
   
             exit(0);
           }
+
+@q **** (4) astronomy.@>
+@ astronomy.
+
+\LOG
+\initials{LDF 2021.06.03.}
+Added the ``\.{astronomy}'' option.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == ASTRONOMY_INDEX)
+        {
+            cerr << "Enabling features pertaining to astronomy."
+                 << endl << endl;
+
+            astronomy_enabled = true;
+        }
 
 @q **** (4) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
