@@ -829,14 +829,22 @@ Changed |Mutex_Type cerr_mutex_struct| to |cerr_mutex|.
 \ENDLOG 
 
 @<Global variables@>=
-Mutex_Type 
-cerr_mutex;
+Mutex_Type cerr_mutex;
+
+bool databases_enabled = false;
+bool astronomy_enabled = false;
 
 @
 @<|extern| declarations for global |Mutex_Type| variables@>=
+
 extern
-Mutex_Type 
-cerr_mutex;
+Mutex_Type cerr_mutex;
+
+extern 
+bool databases_enabled;
+
+extern 
+bool astronomy_enabled;
 
 @q ** (2) |struct Cond_Var_Type|.@>
 @*1 {\bf struct Cond\_Var\_Type}.
