@@ -344,16 +344,19 @@ Added |const unsigned short BISON_TRACE_INDEX|.
 
 @<GCC command line option processing@>=
 
-  const unsigned short BISON_TRACE_INDEX          = 0;
-  const unsigned short HELP_INDEX                 = 1;
-  const unsigned short MULTITHREAD_INPUT_INDEX    = 2;
-  const unsigned short MULTITHREAD_OUTPUT_INDEX   = 3;
-  const unsigned short MULTITHREAD_INCLUDE_INDEX  = 4;
-  const unsigned short SILENT_INDEX               = 5;
-  const unsigned short QUIET_INDEX                = 6;
-  const unsigned short VERBOSE_INDEX              = 7;
-  const unsigned short VERSION_INDEX              = 8;
-  const unsigned short ASTRONOMY                  = 9;
+  const unsigned short BISON_TRACE_INDEX          =  0;
+  const unsigned short HELP_INDEX                 =  1;
+  const unsigned short MULTITHREAD_INPUT_INDEX    =  2;
+  const unsigned short MULTITHREAD_OUTPUT_INDEX   =  3;
+  const unsigned short MULTITHREAD_INCLUDE_INDEX  =  4;
+  const unsigned short SILENT_INDEX               =  5;
+  const unsigned short QUIET_INDEX                =  6;
+  const unsigned short VERBOSE_INDEX              =  7;
+  const unsigned short VERSION_INDEX              =  8;
+  const unsigned short DATABASE_INDEX             =  9;
+  const unsigned short ASTRONOMY_INDEX            = 10;
+
+
 
 @q *** Option struct.@>
 @ Option struct.
@@ -375,6 +378,7 @@ Added the ``\.{--quiet}'' option.
     {"quiet", 0, 0, 0},
     {"verbose", 0, 0, 0},
     {"version", 0, 0, 0},
+    {"database", 0, 0, 0},
     {"astronomy", 0, 0, 0},
     {0, 0, 0, 0}
   };
@@ -498,6 +502,8 @@ Edited the output.
                  << "GNU 3DLDF" << endl 
                  << "                         to standard output and exits with "
                  << "return value 0." << endl << endl 
+                 << "--database:              Enables the use of the MySQL databases."
+                 << endl << endl 
                  << "--astronomy:             Enables the features of GNU 3DLDF pertaining to astronomy."
                  << endl << endl; 
 
@@ -680,6 +686,35 @@ called using the ``\.{version}'' option.
             exit(0);
           }
 
+@q **** (4) databases.@>
+@ databases.
+
+\LOG
+\initials{LDF 2021.06.03.}
+Added the ``\.{databases}'' option.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == DATABASES_INDEX)
+        {
+#ifdef HAVE_LIBMYSQLCLIENT
+#ifdef HAVE_MYSQL_H 1
+
+            cerr << "Enabling databases." << endl << endl;
+
+            databases_enabled = true;
+#endif 
+#endif 
+
+            if (!databases_enabled)
+            {
+               cerr << "MySQL unavailable.  Not enabling databases." << endl << endl;
+
+            }
+        }
+
+
 @q **** (4) astronomy.@>
 @ astronomy.
 
@@ -692,10 +727,24 @@ Added the ``\.{astronomy}'' option.
 
         else if (option_index == ASTRONOMY_INDEX)
         {
+
+#ifdef HAVE_LIBMYSQLCLIENT
+#ifdef HAVE_MYSQL_H 1
+
             cerr << "Enabling features pertaining to astronomy."
                  << endl << endl;
 
             astronomy_enabled = true;
+            databases_enabled = true;
+#endif 
+#endif 
+
+            if (!astronomy_enabled)
+            {
+               cerr << "MySQL unavailable.  Not enabling databases or features pertaing to astronomy." 
+                    << endl << endl;
+
+            }
         }
 
 @q **** (4) Invalid option_index value.@>
@@ -1177,6 +1226,14 @@ Now calling |Shape::initialize_type_name_map|.
 
 @q *** @>
 @<Main@>=
+
+   cerr << "databases_enabled == " << databases_enabled << endl;
+
+   cerr << "astronomy_enabled == " << astronomy_enabled << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
    if (initialize_name_map() != 0)
      {
