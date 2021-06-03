@@ -68,6 +68,7 @@ create table Stars
    flamsteed_designation_number int not null default 0,
    bayer_designation_greek_letter varchar(16) not null default "",
    bs_hr_number int not null default 0,
+   approx_rank_apparent_magnitude int not null default 0,
    constellation_abbreviation char(3) not null default "",
    constellation_full_name varchar(32) not null default "",
    constellation_number int not null default 0,
@@ -90,6 +91,8 @@ alter table Stars add column right_ascension_decimal_hours float not null defaul
 alter table Stars add column declination_decimal_degrees float not null default 0.0 after declination_seconds;
 alter table Stars add column constellation_number int not null default 0 after constellation_full_name;
 
+   
+alter table Stars add column approx_rank_apparent_magnitude int not null default 0 after bs_hr_number;
 
 insert into ttemp (right_ascension) values ('1:45:20.02');
 
@@ -1743,8 +1746,6 @@ values
 (0, "phi",      "Per",   496,   1, 44, 49.9,   +50, 46, 52);
 
 /* **** (4) */
-
-/* !! START HERE:  Add replace commands.  */ 
 
 replace into Stars (
    flamsteed_designation_number,
@@ -4501,8 +4502,6 @@ replace into Stars (
 values
 (68, "v776",       "Tau",  1389,   4, 26, 33.8,   +17, 58, 08);
 
-/* !! START HERE:  */
-
 /* **** (4) */
 
 replace into Stars (
@@ -6159,63 +6158,901 @@ values
 
 /* !! START HERE:  */ 
 
-(6, "",             "Tau",  2034,   5, 54, 29.5,   +27, 36, 54);
-(54,   "chi^1",    "Ori",  2047,   5, 55, 28.8,   +20, 16, 4);
-(58,   "alpha",    "Ori",  2061,   5, 56, 10.4,   +7, 24, 3);
-(30,   "xi",       "Aur",  2029,   5, 56, 23.9,   +55, 42, 3);
-(16,   "eta",      "Lep",  2085,   5, 57, 14.9,   -14, 09, 5);
-(0, "gamma",    "Col",  2106,   5, 58, 11.6,   -35, 16, 56);
-(0, "eta",      "Col",  2120,   5, 59, 42.8,   -42, 48, 54);
-(0, "",             "Ori",  2103,   5, 59, 46.7,   +0, 33, 12);
-(34,   "beta",     "Aur",  2088,   6, 00, 53.2,   +44, 56, 5);
-(37,   "theta",    "Aur",  2095,   6, 00, 59.0,   +37, 12, 4);
-(33,   "delta",    "Aur",  2077,   6, 01, 03.1,   +54, 17, 0);
-(35,   "pi",       "Aur",  2091,   6, 01, 18.5,   +45, 56, 1);
-(61,   "mu",       "Ori",  2124,   6, 03, 24.1,   +9, 38, 4);
-(62,   "chi^2",    "Ori",  2135,   6, 05, 01.1,   +20, 08, 1);
-(1, "",             "Gem",  2134,   6, 05, 14.7,   +23, 15, 38);
-(17,  "SS",        "Lep",  2148,   6, 05, 48.7,   -16, 29, 1);
-(0, "nu",       "Dor",  2221,   6, 08, 37.1,   -68, 50, 50);
-(67,   "nu",       "Ori",  2159,   6, 08, 37.7,   +14, 45, 5);
-(0, "alpha",    "Men",  2261,   6, 09, 41.3,   -74, 45, 31);
-(0,  "",       "",   2180,   6, 09, 44.6,   -22, 25, 55);
-(0, "delta",    "Pic",  2212,   6, 10, 39.6,   -54, 58, 24);
-(70,   "xi",       "Ori",  2199,   6, 12, 59.5,   +14, 12, 1);
-(6, "",             "Cam",  2165,   6, 14, 42.7,   +65, 42, 43);
-(5,   "gamma",    "Mon",  2227,   6, 15, 45.5,   -6, 16, 5);
-(7,   "eta",      "Gem",  2216,   6, 15, 59.7,   +22, 29, 5);
-(44,   "kappa",    "Aur",  2219,   6, 16, 33.4,   +29, 29, 2);
-(0, "kappa",    "Col",  2256,   6, 17, 12.7,   -35, 08, 52);
-(4, "",             "Ori",  2241,   6, 17, 29.0,   +12, 15, 56);
-(7, "",             "Mon",  2273,   6, 20, 36.3,   -7, 49, 55);
-(0,  "",       "",   2209,   6, 20, 52.9,   +69, 18, 37);
-(1,   "zeta",     "CMa",  2282,   6, 21, 01.4,   -30, 04, 2);
-(2,  "UZ",        "Lyn",  2238,   6, 21, 15.2,   +59, 00, 0);
-(0, "delta",    "Col",  2296,   6, 22, 47.4,   -33, 26, 48);
-(2,   "beta",     "CMa",  2294,   6, 23, 30.9,   -17, 57, 5);
-(13,   "mu",       "Gem",  2286,   6, 24, 04.8,   +22, 30, 0);
-(0, "alpha",    "Car",  2326,   6, 24, 21.8,   -52, 42, 23);
-(8, "",             "Mon",  2298,   6, 24, 44.9,   +4, 34, 55);
-(0,  "",       "",   2305,   6, 25, 02.1,   -11, 32, 29);
-(46,   "psi^1",    "Aur",  2289,   6, 26, 19.3,   +49, 16, 3);
-(0, "lambda",   "CMa",  2361,   6, 28, 51.4,   -32, 35, 34);
-(0, "",             "Mon",  2344,   6, 28, 52.4,   -4, 46, 30);
-(18,   "nu",       "Gem",  2343,   6, 30, 03.7,   +20, 11, 5);
-(4,   "xi^1",     "CMa",  2387,   6, 32, 37.6,   -23, 25, 5);
-(0,  "",       "",   2392,   6, 33, 38.9,   -11, 10, 52);
-(3, "",             "Mon",  2385,   6, 33, 54.3,   +7, 19, 05);
-(0,  "",       "",   2395,   6, 34, 34.3,   -1, 14, 08);
-(0,  "",       "",   2435,   6, 35, 23.1,   -52, 59, 29);
-(5,   "xi^2",     "CMa",  2414,   6, 35, 49.9,   -22, 58, 5);
-(7,   "nu^2",     "CMa",  2429,   6, 37, 29.5,   -19, 16, 2);
-(0, "nu",       "Pup",  2451,   6, 38, 19.7,   -43, 12, 47);
-(8,   "nu^3",     "CMa",  2443,   6, 38, 42.3,   -18, 15, 1);
-(24,   "gamma",    "Gem",  2421,   6, 38, 46.8,   +16, 22, 5);
-(15,  "S",         "Mon",  2456,   6, 41, 59.8,   +9, 52, 3);
-(0, "",             "Gem",  2478,   6, 45, 01.9,   +13, 12, 28);
-(27,   "epsilon",  "Gem",  2473,   6, 45, 04.2,   +25, 06, 4);
-(0,  "",       "",   2513,   6, 45, 51.7,   -52, 13, 17);
+/* **** (4) */
 
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(6, "",             "Tau",  2034,   5, 54, 29.5,   +27, 36, 54);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(54,   "chi^1",    "Ori",  2047,   5, 55, 28.8,   +20, 16, 4);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(58,   "alpha",    "Ori",  2061,   5, 56, 10.4,   +7, 24, 3);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(30,   "xi",       "Aur",  2029,   5, 56, 23.9,   +55, 42, 3);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(16,   "eta",      "Lep",  2085,   5, 57, 14.9,   -14, 09, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "gamma",    "Col",  2106,   5, 58, 11.6,   -35, 16, 56);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "eta",      "Col",  2120,   5, 59, 42.8,   -42, 48, 54);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "",             "Ori",  2103,   5, 59, 46.7,   +0, 33, 12);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(34,   "beta",     "Aur",  2088,   6, 00, 53.2,   +44, 56, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(37,   "theta",    "Aur",  2095,   6, 00, 59.0,   +37, 12, 4);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(33,   "delta",    "Aur",  2077,   6, 01, 03.1,   +54, 17, 0);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(35,   "pi",       "Aur",  2091,   6, 01, 18.5,   +45, 56, 1);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(61,   "mu",       "Ori",  2124,   6, 03, 24.1,   +9, 38, 4);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(62,   "chi^2",    "Ori",  2135,   6, 05, 01.1,   +20, 08, 1);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(1, "",             "Gem",  2134,   6, 05, 14.7,   +23, 15, 38);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(17,  "SS",        "Lep",  2148,   6, 05, 48.7,   -16, 29, 1);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "nu",       "Dor",  2221,   6, 08, 37.1,   -68, 50, 50);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(67,   "nu",       "Ori",  2159,   6, 08, 37.7,   +14, 45, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "alpha",    "Men",  2261,   6, 09, 41.3,   -74, 45, 31);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2180,   6, 09, 44.6,   -22, 25, 55);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "delta",    "Pic",  2212,   6, 10, 39.6,   -54, 58, 24);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(70,   "xi",       "Ori",  2199,   6, 12, 59.5,   +14, 12, 1);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(6, "",             "Cam",  2165,   6, 14, 42.7,   +65, 42, 43);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(5,   "gamma",    "Mon",  2227,   6, 15, 45.5,   -6, 16, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(7,   "eta",      "Gem",  2216,   6, 15, 59.7,   +22, 29, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(44,   "kappa",    "Aur",  2219,   6, 16, 33.4,   +29, 29, 2);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "kappa",    "Col",  2256,   6, 17, 12.7,   -35, 08, 52);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(4, "",             "Ori",  2241,   6, 17, 29.0,   +12, 15, 56);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(7, "",             "Mon",  2273,   6, 20, 36.3,   -7, 49, 55);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2209,   6, 20, 52.9,   +69, 18, 37);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(1,   "zeta",     "CMa",  2282,   6, 21, 01.4,   -30, 04, 2);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(2,  "UZ",        "Lyn",  2238,   6, 21, 15.2,   +59, 00, 0);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "delta",    "Col",  2296,   6, 22, 47.4,   -33, 26, 48);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(2,   "beta",     "CMa",  2294,   6, 23, 30.9,   -17, 57, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(13,   "mu",       "Gem",  2286,   6, 24, 04.8,   +22, 30, 0);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "alpha",    "Car",  2326,   6, 24, 21.8,   -52, 42, 23);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(8, "",             "Mon",  2298,   6, 24, 44.9,   +4, 34, 55);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2305,   6, 25, 02.1,   -11, 32, 29);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(46,   "psi^1",    "Aur",  2289,   6, 26, 19.3,   +49, 16, 3);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "lambda",   "CMa",  2361,   6, 28, 51.4,   -32, 35, 34);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "",             "Mon",  2344,   6, 28, 52.4,   -4, 46, 30);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(18,   "nu",       "Gem",  2343,   6, 30, 03.7,   +20, 11, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(4,   "xi^1",     "CMa",  2387,   6, 32, 37.6,   -23, 25, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2392,   6, 33, 38.9,   -11, 10, 52);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(3, "",             "Mon",  2385,   6, 33, 54.3,   +7, 19, 05);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2395,   6, 34, 34.3,   -1, 14, 08);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2435,   6, 35, 23.1,   -52, 59, 29);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(5,   "xi^2",     "CMa",  2414,   6, 35, 49.9,   -22, 58, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(7,   "nu^2",     "CMa",  2429,   6, 37, 29.5,   -19, 16, 2);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "nu",       "Pup",  2451,   6, 38, 19.7,   -43, 12, 47);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(8,   "nu^3",     "CMa",  2443,   6, 38, 42.3,   -18, 15, 1);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(24,   "gamma",    "Gem",  2421,   6, 38, 46.8,   +16, 22, 5);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(15,  "S",         "Mon",  2456,   6, 41, 59.8,   +9, 52, 3);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0, "",             "Gem",  2478,   6, 45, 01.9,   +13, 12, 28);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(27,   "epsilon",  "Gem",  2473,   6, 45, 04.2,   +25, 06, 4);
+
+/* **** (4) */
+
+replace into Stars (
+   flamsteed_designation_number,
+   bayer_designation_greek_letter,
+   constellation_abbreviation,
+   bs_hr_number,
+   right_ascension_hours,
+   right_ascension_minutes,
+   right_ascension_seconds,
+   declination_degrees,
+   declination_minutes,
+   declination_seconds)
+values
+(0,  "",       "",   2513,   6, 45, 51.7,   -52, 13, 17);
 
 /* **** (4)  Sirius  */
 
@@ -23033,6 +23870,8 @@ values
 
 select * from Stars order by bs_hr_number\G
 
+select bs_hr_number from Stars order by bs_hr_number;
+
 select "Here I am.";
 
 select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars order by constellation_number\G
@@ -23049,9 +23888,6 @@ select distinct constellation_full_name, constellation_abbreviation, constellati
 order by constellation_full_name\G
 
 select * from Stars where constellation_number = 0\G
-
-
-
 
 /* *** (3) */
 
@@ -23344,6 +24180,248 @@ update Stars set constellation_full_name = "Corona Borealis" where constellation
 update Stars set constellation_full_name = "Corona Australis" where constellation_abbreviation = "CrA";
 
 update Stars set constellation_full_name = "Triangulum Australe" where constellation_abbreviation = "TrA";
+
+/* *** (3)  */
+
+stars_with_celestial_coordinates.txt
+
+http://www.atlasoftheuniverse.com/stars.html
+
+select * from Stars where right_ascension_hours = 6 and right_ascension_minutes = 45\G
+
+select * from Stars where bayer_designation_greek_letter = "Alpha"\G
+select * from Stars where bayer_designation_greek_letter = "ALPHA"\G
+
+/* **** (4) */
+
+select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_full_name = "canis majoris";
+
+select constellation_full_name from Stars order by constellation_full_name\G
+
+select distinct constellation_full_name from Stars order by constellation_full_name;
+
+select * from Stars\G
+
+select * from Stars where common_name = "Sirius"\G
+
+/* **** (4) */
+
+update Stars set common_name = "Sirius", approx_rank_apparent_magnitude = 1
+where bayer_designation_greek_letter = "Alpha" and constellation_full_name = "Canis Major";
+
+/* **** (4) */
+
+update Stars set common_name = "Canopus", approx_rank_apparent_magnitude = 2
+where bayer_designation_greek_letter = "Alpha" and constellation_full_name = "Carina";
+
+select distinct constellation_full_name from Stars order by constellation_full_name;
+
+3, Alpha Centauri,               Rigil Kentaurus
+4, Alpha Boötis,                 Arcturus
+5, Alpha Lyra,                  Vega
+6, Alpha Auriga,                Capella
+7, Beta Orionis,                 Rigel
+8, Alpha Canis Minor,          Procyon
+9, Alpha Eridani,                Achernar
+10, Alpha Orionis,               Betelgeuse
+11, Beta Centauri,                Hadar
+12, Alpha Aquila,                Altair
+13, Alpha Crucis,                 Acrux
+14, Alpha Tauri,                  Aldebaran
+15, Alpha Scorpii,                Antares
+16, Alpha Virginis,               Spica
+17, Beta Geminorum,               Pollux
+18, Alpha Piscis Austrini,        Fomalhaut
+19, Alpha Cygni,                  Deneb
+20, Beta Crucis,                  Mimosa
+21, Alpha Leonis,                 Regulus
+22, Epsilon Canis Major,        Adhara
+23, Alpha Geminorum,              Castor
+24, Lambda Scorpii,               Shaula
+25, Gamma Crucis,                 Gacrux
+26, Gamma Orionis,                Bellatrix
+27, Beta Tauri,                   Elnath
+28, Beta Carina,                 Miaplacidus
+29, Epsilon Orionis,              Alnilam
+30, Alpha Gruis,                  Alnair
+31, Zeta Orionis,                 Alnitak
+32, Epsilon Ursa Major,        Alioth
+33, Alpha Persei,                 Mirfak
+34, Alpha Ursa Major,          Dubhe
+35, Gamma Velorum,                Regor
+36, Delta Canis Major,          Wezen
+37, Epsilon Sagittarii,           Kaus Australis
+38, Eta Ursa Major,            Alkaid
+39, Theta Scorpii,                Sargas
+40, Epsilon Carina,              Avior
+41, Beta Auriga,                 Menkalinan
+42, Alpha Trianguli Australis,    Atria
+43, Gamma Geminorum,              Alhena
+44, Alpha Pavonis,                Peacock
+45, Delta Velorum,                Koo She
+46, Beta Canis Major,           Mirzam
+47, Alpha Hydra,                 Alphard
+48, Alpha Ursa Minor,          Polaris
+49, Gamma Leonis,                 Algieba
+50, Alpha Arietis,                Hamal
+51, Beta Ceti,                    Diphda
+52, Sigma Sagittarii,             Nunki
+53, Theta Centauri,               Menkent
+54, Alpha Andromeda,             Alpheratz
+55, Beta Andromeda,              Mirach
+56, Kappa Orionis,                Saiph
+57, Beta Ursa Minor,           Kochab
+58, Beta Gruis,                   Al Dhanab
+59, Alpha Ophiuchi,               Rasalhague
+60, Beta Persei,                  Algol
+61, Gamma Andromeda,             Almach
+62, Beta Leonis,                  Denebola
+63, Gamma Cassiopeia,            Cih
+64, Gamma Centauri,               Muhlifain
+65, Zeta Puppis,                  Naos
+66, Iota Carina,                 Aspidiske
+67, Alpha Corona Borealis,       Alphecca
+68, Lambda Velorum,               Suhail
+69, Zeta Ursa Major,           Mizar
+70, Gamma Cygni,                  Sadr
+71, Alpha Cassiopeia,            Schedar
+72, Gamma Draconis,               Eltanin
+73, Delta Orionis,                Mintaka
+74, Beta Cassiopeia,             Caph
+76, Delta Scorpii,                Dschubba
+77, Epsilon Scorpii,              Wei
+78, Alpha Lupi,                   Men
+80, Beta Ursa Major,           Merak
+81, Epsilon Boötis,               Izar
+82, Epsilon Pegasi,               Enif
+83, Kappa Scorpii,                Girtab
+84, Alpha Phoenicis,              Ankaa
+85, Gamma Ursa Major,          Phecda
+86, Eta Ophiuchi,                 Sabik
+87, Beta Pegasi,                  Scheat
+88, Eta Canis Major,            Aludra
+89, Alpha Cephei,                 Alderamin
+90, Kappa Velorum,                Markeb
+91, Epsilon Cygni,                Gienah
+92, Alpha Pegasi,                 Markab
+93, Alpha Ceti,                   Menkar
+94, Zeta Ophiuchi,                Han
+95, Zeta Centauri,                Al Nair
+96, Delta Leonis,                 Zosma
+97, Beta Scorpii,                 Graffias
+98, Alpha Leporis,                Arneb
+100, Gamma Corvi,                  Gienah Ghurab
+101, Zeta Sagittarii,              Ascella
+102, Beta Libra,                  Zubeneschamali
+103, Alpha Serpentis,              Unukalhai
+104, Beta Arietis,                 Sheratan
+105, Alpha Libra,                 Zubenelgenubi
+106, Alpha Columba,               Phact
+108, Beta Corvi,                   Kraz
+109, Delta Cassiopeia,            Ruchbah
+110, Eta Boötis,                   Muphrid
+111, Beta Lupi,                    Ke Kouan
+112, Iota Auriga,                 Hassaleh
+115, Upsilon Scorpii,              Lesath
+117, Delta Sagittarii,             Kaus Meridionalis 
+118, Gamma Aquila,                Tarazed
+119, Delta Ophiuchi,               Yed Prior
+120, Eta Draconis,                 Aldhibain
+122, Gamma Virginis,               Porrima
+123, Iota Orionis,                 Hatysa
+125, Beta Ophiuchi,                Cebalrai
+126, Beta Eridani,                 Kursa
+127, Beta Herculis,                Kornephoros
+129, Beta Draconis,                Rastaban
+130, Alpha Canum Venaticorum,      Cor Caroli
+132, Beta Leporis,                 Nihal
+133, Zeta Herculis,                Rutilicus
+136, Lambda Sagittarii,            Kaus Borealis
+137, Gamma Pegasi,                 Algenib
+138, Rho Puppis,                   Turais
+142, Alpha Ara,                   Choo
+143, Eta Tauri,                    Alcyone
+144, Epsilon Virginis,             Vindemiatrix
+145, Delta Capricorni,             Deneb Algedi
+146, Alpha Hydri,                  Head of Hydrus
+148, Mu Geminorum,                 Tejat
+151, Theta Eridani,                Acamar
+152, Pi Sagittarii,                Albaldah
+153, Beta Canis Minor,           Gomeisa
+156, Sigma Scorpii,                Alniyat
+157, Beta Cygni,                   Albireo
+158, Beta Aquarii,                 Sadalsuud
+161, Eta Pegasi,                   Matar
+163, Delta Corvi,                  Algorel
+164, Alpha Aquarii,                Sadalmelik
+165, Gamma Eridani,                Zaurak
+166, Zeta Tauri,                   Alheka
+167, Epsilon Leonis,               Ras Elased Australis 
+168, Gamma^2 Sagittarii,            Alnasl
+171, Zeta Aquila,                 Deneb el Okab
+174, Gamma Ursa Minor,          Pherkad Major
+178, Zeta Canis Major,           Phurad
+180, Epsilon Corvi,                Minkar
+181, Epsilon Auriga,              Almaaz
+183, Gamma Boötis,                 Seginus
+184, Beta Capricorni,              Dabih
+185, Epsilon Geminorum,            Mebsuta
+186, Mu Ursa Major,             Tania Australis
+187, Delta Draconis,               Tais
+192, Alpha Indi,                   Persian
+193, Beta Columba,                Wazn
+194, Iota Ursa Major,           Talita
+196, Delta Herculis,               Sarin
+197, Kappa Centauri,               Ke Kwan
+202, Theta Ursa Major,          Al Haud
+203, Zeta Draconis,                Aldhibah
+205, Eta Auriga,                  Hoedus II
+207, Pi^3 Orionis,                  Tabit
+212, Gamma Cephei,                 Errai
+214, Epsilon Ophiuchi,             Yed Posterior
+215, Eta Serpentis,                Alava
+216, Beta Cephei,                  Alphirk
+221, Sigma Libra,                 Brachium
+222, Gamma Lyra,                  Sulaphat
+226, Delta Aquarii,                Skat
+229, Iota Draconis,                Edasich
+233, Eta Geminorum,                Propus
+234, Alpha Herculis,               Rasalgethi
+237, Rho Persei,                   Gorgonea Tertia
+238, Delta Ursa Major,          Megrez
+243, Theta Leonis,                 Chort
+244, Xi Puppis,                    Asmidiske
+245, Epsilon Cassiopeia,          Segin
+246, Eta Orionis,                  Algjebbah
+247, Xi Geminorum,                 Alzirr
+248, Omicron Ursa Major,        Muscida
+251, Zeta Virginis,                Heze
+253, Lambda Orionis,               Meissa
+255, Delta Virginis,               Auva
+263, Zeta Pegasi,                  Homam
+264, Alpha Trianguli,              Mothallah
+269, Zeta Leonis,                  Adhafera
+270, Lambda Aquila,               Althalimain
+271, Lambda Ursa Major,         Tania Borealis
+272, Beta Lyra,                   Sheliak
+273, Eta Cassiopeia,              Achird
+274, Eta Ceti,                     Dheneb
+277, Gamma Ceti,                   Kaffaljidhma
+282, Nu Ursa Major,             Alula Borealis
+283, Beta Bootis,                  Nekkar
+287, Delta Geminorum,              Wasat
+290, Mu Pegasi,                    Sadalbari
+291, Delta Eridani,                Rana
+292, Omicron Leonis,               Subra
+293, Phi Velorum,                  Tseen Ke
+295, Theta Pegasi,                 Baham
+296, Epsilon Tauri,                Ain
+297, Beta Cancri,                  Tarf
+
+
+
+/* ** (2)  */
+
 
 /* ** (2) Select */
 
