@@ -4361,7 +4361,151 @@ Scanner_Type::show_database(void)
 
 @q **** (4) @>
 
-}
+}  /* End of |Scanner_Type::show_database| definition  */
+
+@q *** (3) @>
+
+@q ** (2) Get astronomy.  @>
+@ Get astronomy.  Query database and store data in ``astronomical'' variables.  
+\initials{LDF 2021.06.06.}
+
+\LOG
+\initials{LDF 2021.06.06.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Definition @>
+
+@<Define |Scanner_Type| functions@>=
+int
+Scanner_Type::get_astronomy(void)
+{
+@q **** (4) @>
+
+   sql_strm.str("");
+
+   sql_strm << "select * from Stars;";
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = scanner_node->submit_mysql_query(sql_strm.str());
+
+@q **** (4) @>
+
+   if (status != 0)
+   {
+      cerr << "ERROR!  In `Scanner_Type::get_astronomy':"
+           << endl
+           << "`Scanner_Type::submit_mysql_query' failed, returning " 
+           << status << "." << endl 
+           << "MySQL error:  " << mysql_error(scanner_node->mysql)
+           << endl 
+           << "MySQL error number:  " << mysql_errno(scanner_node->mysql)
+           << endl    
+           << "Exiting function unsuccessfully with return value 1." << endl;
+
+      if (scanner_node->result)
+      {
+          mysql_free_result(scanner_node->result);
+          scanner_node->result = 0;
+      }
+      return 1;
+   }
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   {
+      cerr << "In `Scanner_Type::::get_astronomy':"
+           << endl
+           << "`Scanner_Type::submit_mysql_query' succeeded, returning 0."
+           << endl 
+           << "`scanner_node->affected_rows' == " << scanner_node->affected_rows
+           << endl 
+           << "`scanner_node->row_ctr' == " << scanner_node->row_ctr
+           << endl 
+           << "`scanner_node->field_ctr' == " << scanner_node->field_ctr
+           << endl;
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   /*  Process the contents of |curr_row|  */
+
+   scanner_node->curr_row = 0;
+
+   do 
+   {
+@q ***** (5) @>
+
+       scanner_node->curr_row = mysql_fetch_row(scanner_node->result);
+
+       if (scanner_node->curr_row == 0)
+       {
+         if (DEBUG) 
+           cerr << "`mysql_fetch_row' returned NULL:" 
+                << endl;
+
+         if (*mysql_error(scanner_node->mysql))
+           {
+             cerr << "ERROR!  In `Scanner_Type::::get_astronomy':  `mysql_fetch_row' failed "
+                  << "returning NULL." << endl
+                  << "Error:  " << mysql_error(scanner_node->mysql) << endl
+                  << "Exiting function unsuccessfully with return value 1."
+                  << endl;
+
+             if (scanner_node->result)
+             {
+                 mysql_free_result(scanner_node->result);
+                 scanner_node->result = 0;
+             }
+
+             return 1;
+
+           }
+
+@q ***** (5) @>
+
+         else if (DEBUG)
+           {
+             cerr << "No more rows." << endl;
+            
+             break;
+           }
+
+       }  /* |if (scanner_node->curr_row == 0)|  */
+
+@q ***** (5) @>
+
+   } while (scanner_node->curr_row != 0);
+
+@q **** (4) @>
+
+   /* Free |result|  */
+
+   if (scanner_node->result)
+   {
+       mysql_free_result(scanner_node->result);
+       scanner_node->result = 0;
+   }
+
+   return 0;
+
+@q **** (4) @>
+
+}  /* End of |Scanner_Type::get_astronomy| definition  */
+
+@q *** (3) @>
+
+@q ** (2) @>
+
 
 @q * Putting |Scanner_Type| functions together.@>
 @* Putting {\bf Scanner\_Type} functions together.
