@@ -872,7 +872,7 @@ sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
-                         imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++
+                         imetfncs.h++ deftfncs.h++ sctpcrt.h++ astronmy.h++ sctpfncs.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 shapes.o: shapes.c++ shapes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -1020,7 +1020,7 @@ headers:
              rectangs.h++ rhtchdrn.h++ scanner2.h++ scanprse.h++ \
              scanprsf.h++ scan.h++ sctpcrt.h++ sctpfncs.h++ shapes.h++ \
              solfaced.h++ solids.h++ spheres.h++ sphrdevl.h++ \
-             transfor.h++ triangle.h++
+             transfor.h++ triangle.h++ 
 
 
 #### *** (3) purge.

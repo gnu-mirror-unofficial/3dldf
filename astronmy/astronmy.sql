@@ -49,9 +49,8 @@
 
 /* * (1)  */
 
-create database Astronomy;
 
-use Astronomy;
+use 3dldf;
 
 /* ** (2) Create tables  */
 
