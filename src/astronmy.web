@@ -149,11 +149,27 @@ Added this |class| definition.
 
 class Star
 {
-
    protected:
 
-   real right_ascension;
-   real declination;
+      string common_name;
+      string greek_name;
+      string latin_name;
+      string arabic_name;
+      int flamsteed_designation_number;
+      string bayer_designation_greek_letter;
+      int bs_hr_number;
+      int approx_rank_apparent_magnitude;
+      string constellation_abbreviation;
+      string constellation_full_name;
+      int constellation_number;
+      int right_ascension_hours;
+      int right_ascension_minutes;
+      real right_ascension_seconds;
+      real right_ascension_decimal_hours;
+      int declination_degrees;
+      int declination_minutes;
+      real declination_seconds;
+      real declination_decimal_degrees;
 
    public:
 
@@ -230,13 +246,71 @@ Star(void);
 @<Define |Star| functions@>= 
 Star::Star(void)
 {
-
-   right_ascension = 0;
-   declination = 0;
+      common_name = "";
+      greek_name = "";
+      latin_name = "";
+      arabic_name = "";
+      flamsteed_designation_number = 0;
+      bayer_designation_greek_letter = "";
+      bs_hr_number = 0;
+      approx_rank_apparent_magnitude = 0;
+      constellation_abbreviation = "";
+      constellation_full_name = "";
+      constellation_number = 0;
+      right_ascension_hours = 0;
+      right_ascension_minutes = 0;
+      right_ascension_seconds = 0.0;
+      right_ascension_decimal_hours = 0.0;
+      declination_degrees = 0;
+      declination_minutes = 0;
+      declination_seconds = 0.0;
+      declination_decimal_degrees = 0.0;
 
    return;
 }
 
+@q **** (4) Copy constructor.@> 
+@*3 Copy constructor.
+\initials{LDF 2021.06.07.}
+
+\LOG
+\initials{LDF 2021.06.07.}
+Added this function.
+\ENDLOG
+
+@q ***** (5) Declaration.@>
+
+@<Declare |Star| functions@>=
+Star(const Star &s);
+
+@q ***** (5) Definition.  @>
+
+@
+@<Define |Star| functions@>= 
+Star::Star(const Star &s)
+{
+      common_name = s.common_name;
+      greek_name = s.greek_name;
+      latin_name = s.latin_name;
+      arabic_name = s.arabic_name;
+      flamsteed_designation_number = s.flamsteed_designation_number;
+      bayer_designation_greek_letter = s.bayer_designation_greek_letter;
+      bs_hr_number = s.bs_hr_number;
+      approx_rank_apparent_magnitude = s.approx_rank_apparent_magnitude;
+      constellation_abbreviation = s.constellation_abbreviation;
+      constellation_full_name = s.constellation_full_name;
+      constellation_number = s.constellation_number;
+      right_ascension_hours = s.right_ascension_hours;
+      right_ascension_minutes = s.right_ascension_minutes;
+      right_ascension_seconds = s.right_ascension_seconds;
+      right_ascension_decimal_hours = s.right_ascension_decimal_hours;
+      declination_degrees = s.declination_degrees;
+      declination_minutes = s.declination_minutes;
+      declination_seconds = s.declination_seconds;
+      declination_decimal_degrees = s.declination_decimal_degrees;
+
+   return;
+}
 
 @q **** (4) Setting function with individual arguments.@> 
 @*2 Setting function with individual arguments.
@@ -295,9 +369,6 @@ Star::set(real ra, real dcl, Scanner_Node scanner_node)
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   right_ascension = ra;
-   declination = dcl;
-
 @q ***** (5)@>
 
    return 0;
@@ -324,7 +395,7 @@ set(Scanner_Node scanner_node);
 @q **** (4) Definition.  @>
 
 @
-@<Define |Star| functions@>= 
+@<Define |Star| functions@>=
 int
 Star::set(Scanner_Node scanner_node)
 {
@@ -363,8 +434,63 @@ Star::set(Scanner_Node scanner_node)
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+   if (scanner_node->curr_row == 0)
+   {
+       cerr_strm << thread_name << "ERROR!  In `Star::set' with `Scanner_Node' argument:"
+                 << endl
+                 << "`scanner_node->curr_row' is NULL.  Can't set `Star'."
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 1."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   
+       return 1;
+
+   }
+
+      common_name                    = scanner_node->curr_row[0];
+      greek_name                     = scanner_node->curr_row[1];
+      latin_name                     = scanner_node->curr_row[2];
+      arabic_name                    = scanner_node->curr_row[3];     
+      flamsteed_designation_number   = atoi(scanner_node->curr_row[4]);
+      bayer_designation_greek_letter = scanner_node->curr_row[5];
+      bs_hr_number                   = atoi(scanner_node->curr_row[6]);
+      approx_rank_apparent_magnitude = atoi(scanner_node->curr_row[7]);
+      constellation_abbreviation     = scanner_node->curr_row[8];
+      constellation_full_name        = scanner_node->curr_row[9];
+      constellation_number           = atoi(scanner_node->curr_row[10]);
+      right_ascension_hours          = atoi(scanner_node->curr_row[11]);
+      right_ascension_minutes        = atoi(scanner_node->curr_row[12]);
+      right_ascension_seconds        = atof(scanner_node->curr_row[13]);
+      right_ascension_decimal_hours  = atof(scanner_node->curr_row[14]);
+      declination_degrees            = atoi(scanner_node->curr_row[15]);
+      declination_minutes            = atoi(scanner_node->curr_row[16]);
+      declination_seconds            = atof(scanner_node->curr_row[17]);
+      declination_decimal_degrees    = atof(scanner_node->curr_row[18]);
 
 @q ***** (5)@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << thread_name 
+                 << "Exiting `Star::set' with `Scanner_Node' argument successfully with return value 0."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
 
@@ -494,7 +620,7 @@ operator=(const Star& c);
 @<Define |Star| functions@>=
 
 Star&
-Star::operator=(const Star& c)
+Star::operator=(const Star& s)
 {
 
 @q ****** (6) Preliminaries.@>   
@@ -527,18 +653,34 @@ Star::operator=(const Star& c)
 
 @q ****** (6)@>
 
-    if (this == &c) /* Make sure it's not self-assignment. */
+    if (this == &s) /* Make sure it's not self-assignment. */
        return *this;
 
 @q ****** (6)@>
 
-   right_ascension = c.right_ascension;
-   declination = c.declination;
+      common_name = s.common_name;
+      greek_name = s.greek_name;
+      latin_name = s.latin_name;
+      arabic_name = s.arabic_name;
+      flamsteed_designation_number = s.flamsteed_designation_number;
+      bayer_designation_greek_letter = s.bayer_designation_greek_letter;
+      bs_hr_number = s.bs_hr_number;
+      approx_rank_apparent_magnitude = s.approx_rank_apparent_magnitude;
+      constellation_abbreviation = s.constellation_abbreviation;
+      constellation_full_name = s.constellation_full_name;
+      constellation_number = s.constellation_number;
+      right_ascension_hours = s.right_ascension_hours;
+      right_ascension_minutes = s.right_ascension_minutes;
+      right_ascension_seconds = s.right_ascension_seconds;
+      right_ascension_decimal_hours = s.right_ascension_decimal_hours;
+      declination_degrees = s.declination_degrees;
+      declination_minutes = s.declination_minutes;
+      declination_seconds = s.declination_seconds;
+      declination_decimal_degrees = s.declination_decimal_degrees;
 
     return *this;
 
-}  /* End of 
-      |Star::operator=(const Star& m)| definition.  */
+}  /* End of |Star::operator=(const Star& s)| definition.  */
 
 @q *** (3) Clear.@> 
 @*2 Clear.
@@ -583,8 +725,6 @@ Star::clear(Scanner_Node scanner_node)
 
 @q ***** (5)@>
 
-   right_ascension = 0;
-   declination = 0;
 
    return 0;
 
@@ -638,8 +778,6 @@ Star::show(string text, Scanner_Node scanner_node) const
        text = "Star:";
 
     cerr << text << endl
-         << "right_ascension == " << right_ascension << endl 
-         << "declination     == " << declination << endl 
          << endl;
 
 @q ***** (5)@>
