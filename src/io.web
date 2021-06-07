@@ -2551,6 +2551,7 @@ Added |vector <real> numeric_list_real_vector|.
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
 #ifdef HAVE_LIBMYSQLCLIENT
+#ifdef HAVE_MYSQL_H
   MYSQL_RES *result;
   MYSQL_ROW curr_row;
   MYSQL *mysql;
@@ -2558,6 +2559,7 @@ Added |vector <real> numeric_list_real_vector|.
   unsigned int field_ctr;
   long affected_rows;
   stringstream sql_strm;
+#endif 
 #endif 
 
    Input_Struct* in;

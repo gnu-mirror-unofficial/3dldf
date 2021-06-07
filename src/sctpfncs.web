@@ -4426,11 +4426,13 @@ Scanner_Type::get_astronomy(void)
 
    void* v = 0;
 
-   Star *s = 0;
+   Star *star = 0;
 
    const bool is_constant = true;
    const bool not_constant = false;
    const bool not_array = false;
+
+   vector<Star *> star_vector;
 
    stringstream sql_strm;
 
@@ -4539,7 +4541,7 @@ Scanner_Type::get_astronomy(void)
 
          try
          {
-            s = create_new<Star>(0, this);
+            star = create_new<Star>(0, this);
          }
          catch(bad_alloc)
          {
@@ -4562,7 +4564,7 @@ Scanner_Type::get_astronomy(void)
 
 @q ****** (6) @>
 
-         status = s->set(this);
+         status = star->set(this);
 
          if (status != 0)
          {
@@ -4577,6 +4579,7 @@ Scanner_Type::get_astronomy(void)
                  mysql_free_result(result);
                  result = 0;
              }         
+
              return 1;
 
          }  /* |if (status != 0)|  */
@@ -4594,6 +4597,11 @@ Scanner_Type::get_astronomy(void)
 
          }     
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
+  
+         star_vector.push_back(star);
+
 
 @q ****** (6) @>
 
@@ -4614,6 +4622,22 @@ Scanner_Type::get_astronomy(void)
    }
 
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Scanner_Type::get_astronomy':  `star_vector':"
+           << endl;
+
+      for (vector<Star *>::iterator iter = star_vector.begin();
+           iter != star_vector.end();
+           ++iter)
+      {
+         (*iter)->show();
+      }
+
+      cerr << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
 
@@ -4624,7 +4648,6 @@ Scanner_Type::get_astronomy(void)
 @q *** (3) @>
 
 @q ** (2) @>
-
 
 @q * Putting |Scanner_Type| functions together.@>
 @* Putting {\bf Scanner\_Type} functions together.
