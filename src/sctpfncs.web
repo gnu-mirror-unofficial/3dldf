@@ -4588,7 +4588,8 @@ Scanner_Type::get_astronomy(void)
          { 
             cerr << "In `Scanner_Type::get_astronomy':"
                  << endl 
-                 << "`create_new<Star>' succeeded.";
+                 << "`create_new<Star>' succeeded."
+                 << endl;
 
          }       
 #endif /* |DEBUG_COMPILE|  */@;
@@ -4624,8 +4625,9 @@ Scanner_Type::get_astronomy(void)
                   << endl 
                   << "`Star::set' succeeded, returning 0."
                   << endl;
-            
+#if 0             
               star->show("*star:");
+#endif 
    
          }     
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -4652,6 +4654,7 @@ Scanner_Type::get_astronomy(void)
        result = 0;
    }
 
+@q **** (4) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -4673,6 +4676,16 @@ Scanner_Type::get_astronomy(void)
           cerr << endl;
       }
    }  /* |if (DEBUG)| */
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Scanner_Type::get_astronomy' successfully with return value 0."
+            << endl;
+   }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
