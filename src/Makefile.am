@@ -943,9 +943,11 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 run: 3dldf$(EXEEXT)
-	touch sample1.ldf
-	-rm 3DLDFtex.dvi 3DLDFtex.ps
-	$(MAKE) 3DLDFtex.ps
+	echo "end" | 3dldf$(EXEEXT) --astro
+
+# touch sample1.ldf
+# -rm 3DLDFtex.dvi 3DLDFtex.ps
+# $(MAKE) 3DLDFtex.ps
 
 
 3DLDFtex.pdf.gz : 3DLDFtex.pdf

@@ -4436,6 +4436,8 @@ Scanner_Type::get_astronomy(void)
 
    stringstream sql_strm;
 
+   curr_row = 0;
+
    sql_strm << "select * from Stars;";
 
 #if DEBUG_COMPILE
@@ -4494,8 +4496,6 @@ Scanner_Type::get_astronomy(void)
 
    /*  Process the contents of |curr_row|  */
 
-   curr_row = 0;
-
    do 
    {
 @q ***** (5) @>
@@ -4505,7 +4505,7 @@ Scanner_Type::get_astronomy(void)
        if (curr_row == 0)
        {
          if (DEBUG) 
-           cerr << "`mysql_fetch_row' returned NULL:" 
+           cerr << "`mysql_fetch_row' returned NULL." 
                 << endl;
 
          if (*mysql_error(mysql))
@@ -4535,14 +4535,33 @@ Scanner_Type::get_astronomy(void)
            break;
          }
 
+@q ****** (6) @>
+
+       }  /* |if (curr_row == 0)|  */
+
 @q ***** (5) @>
-@
-@<Define |Scanner_Type| functions@>=
+
+       else 
+       {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+              cerr << "In `Scanner_Type::get_astronomy':"
+                   << endl 
+                   << "`mysql_fetch_row' succeeded, `curr_row' is non-NULL."
+                   << endl;
+          }      
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
 
          try
          {
             star = create_new<Star>(0, this);
          }
+
          catch(bad_alloc)
          {
              cerr << "ERROR! In `Scanner_Type::get_astronomy':"
@@ -4552,6 +4571,9 @@ Scanner_Type::get_astronomy(void)
 
              throw;
          }
+
+@q ****** (6) @>
+
 #if DEBUG_COMPILE
          if (DEBUG)
          { 
@@ -4593,8 +4615,9 @@ Scanner_Type::get_astronomy(void)
                   << endl 
                   << "`Star::set' succeeded, returning 0."
                   << endl;
+            
+              star->show("*star:");
    
-
          }     
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -4602,10 +4625,9 @@ Scanner_Type::get_astronomy(void)
   
          star_vector.push_back(star);
 
-
 @q ****** (6) @>
 
-       }  /* |if (curr_row == 0)|  */
+       }  /* |else| */
 
 @q ***** (5) @>
 
@@ -4625,18 +4647,23 @@ Scanner_Type::get_astronomy(void)
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      cerr << "In `Scanner_Type::get_astronomy':  `star_vector':"
-           << endl;
+      cerr << "In `Scanner_Type::get_astronomy':  `star_vector.size()' == "
+           << star_vector.size() << endl;
 
-      for (vector<Star *>::iterator iter = star_vector.begin();
-           iter != star_vector.end();
-           ++iter)
+      if (star_vector.size() > 0)
       {
-         (*iter)->show();
-      }
+          cerr << "`star_vector':" << endl;
 
-      cerr << endl;
-   }  
+          for (vector<Star *>::iterator iter = star_vector.begin();
+               iter != star_vector.end();
+               ++iter)
+          {
+             (*iter)->show();
+          }   
+
+          cerr << endl;
+      }
+   }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
