@@ -1081,7 +1081,7 @@ main(int argc, char *argv[])
      }
      else if (strncmp(c, "1", 1))
      {
-        cerr << "In `main':  `LDF_DATABASE' environment variable found, but value is " << c << " (not \"1\")."
+        cerr << "In `main':  `LDF_DATABASE' environment variable found, but value is \"" << c << "\" (not \"1\")."
              << endl
              << "Not enabling database.  Continuing."
              << endl;
@@ -1098,11 +1098,60 @@ main(int argc, char *argv[])
       }
   
   }  /* |if (!database_enabled)| */
+
+@q **** (4) @>
+
+  if (!astronomy_enabled)
+  {
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+        cerr << "In `main':  MySQL is available and `astronomy_enabled' is `false'."
+             << endl
+             << "Will check for `LDF_ASTRONOMY' environment variable."
+             << endl;
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+     char *c = getenv("LDF_ASTRONOMY");
+
+     if (c == 0)
+     {
+        cerr << "In `main':  `LDF_ASTRONOMY' environment variable not found."
+             << endl
+             << "Not enabling astronomy (or database).  Continuing."
+             << endl;
+     }
+     else if (strncmp(c, "1", 1))
+     {
+        cerr << "In `main':  `LDF_ASTRONOMY' environment variable found, but value is \"" << c << "\" (not \"1\")."
+             << endl
+             << "Not enabling astronomy (or database).  Continuing."
+             << endl;
+
+     }
+     else 
+     {
+        cerr << "In `main':  `LDF_ASTRONOMY' environment variable found, and value is \"1\"."
+             << endl
+             << "Setting `astronomy_enabled' and `database_enabled' to true."
+             << endl;
+
+        astronomy_enabled = true;
+        database_enabled = true;
+
+      }
+  
+  }  /* |if (!astronomy_enabled)| */
+
+@q **** (4) @>
+
 #else
 #if DEBUG_COMPILE
   if (DEBUG)
   { 
-     cerr << "In `main':  MySQL is not available.  Not checking for `LDF_DATABASE' environment variable."
+     cerr << "In `main':  MySQL is not available.  "
+          << "Not checking for `LDF_DATABASE' or `LDF_ASTRONOMY' environment variables."
           << endl;
   }  
 #endif /* |DEBUG_COMPILE|  */@; 

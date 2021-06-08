@@ -905,21 +905,8 @@ Added this rule.
 
 @q *** (3) @>
 
-#ifndef HAVE_LIBMYSQLCLIENT
+#ifndef MYSQL_AVAILABLE
     cerr_strm << "WARNING!  In `yyparse', rule:  `command --> LOAD DATABASE':" 
-              << endl
-              << "MySQL not available.  Can't load database." << endl
-              << "Continuing." 
-              << endl;
-    log_message(cerr_strm);
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-
-    goto END_LOAD_DATABASE;
-
-#endif 
-#ifndef HAVE_MYSQL_H
-    cerr_strm << "WARNING!  In `yyparse', rule:  `command --> LOAD DATABASE':"
               << endl
               << "MySQL not available.  Can't load database." << endl
               << "Continuing." 
