@@ -568,12 +568,14 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 @<Define |Scanner_Type::create|@>=
 
 #ifdef HAVE_LIBMYSQLCLIENT
+#ifdef HAVE_MYSQL_H
   scanner_node->result = 0;
   scanner_node->curr_row = 0;
   scanner_node->mysql = 0;
   scanner_node->row_ctr = 0; 
   scanner_node->field_ctr = 0;
   scanner_node->affected_rows = 0;
+#endif 
 #endif 
 
   scanner_node->mysql = mysql_init(0);
@@ -3217,6 +3219,8 @@ Added this section with calls to |scanner_node->add_entry| for
   scanner_node->add_entry("all", ALL, spark);
   scanner_node->add_entry("with", WITH, spark);
   scanner_node->add_entry("prefix", PREFIX, spark);
+  scanner_node->add_entry("load", LOAD, spark);
+  scanner_node->add_entry("astronomy", ASTRONOMY, spark);
 
   scanner_node->add_synonym("begingroup", "begin_group");
   scanner_node->add_synonym("endgroup", "end_group");
@@ -6047,14 +6051,14 @@ Added this section.
 @<Define |Scanner_Type::create|@>=          
 
 #ifndef HAVE_LIBMYSQLCLIENT
-   if (databases_enabled)
+   if (database_enabled)
    {
-       cerr << "In `Scanner_Type::create':  `databases_enabled' is `true', but `libmysqlclient' is not available."
+       cerr << "In `Scanner_Type::create':  `database_enabled' is `true', but `libmysqlclient' is not available."
             << endl 
-            << "Can't access database.  Setting `databases_enabled' to 'false' and Continuing."
+            << "Can't access database.  Setting `database_enabled' to 'false' and Continuing."
             << endl;
 
-       databases_enabled = false;
+       database_enabled = false;
 
    }
    if (astronomy_enabled)
@@ -6069,14 +6073,14 @@ Added this section.
 #endif 
 
 #ifndef HAVE_MYSQL_H
-   if (databases_enabled)
+   if (database_enabled)
    {
-       cerr << "In `Scanner_Type::create':  `databases_enabled' is `true', but `mysql.h' is not available."
+       cerr << "In `Scanner_Type::create':  `database_enabled' is `true', but `mysql.h' is not available."
             << endl 
-            << "Can't access database.  Setting `databases_enabled' to 'false' and Continuing."
+            << "Can't access database.  Setting `database_enabled' to 'false' and Continuing."
             << endl;
 
-       databases_enabled = false;
+       database_enabled = false;
 
    }
    if (astronomy_enabled)
@@ -6090,9 +6094,9 @@ Added this section.
    }
 #endif 
 
-   if (databases_enabled == false && DEBUG == true)
+   if (database_enabled == false && DEBUG == true)
    {
-       cerr << "In `Scanner_Type::create':  `databases_enabled' is `false'." << endl  
+       cerr << "In `Scanner_Type::create':  `database_enabled' is `false'." << endl  
             << "Not declaring and initializing `Star' variables."
             << endl;
    }
@@ -6103,7 +6107,7 @@ Added this section.
             << endl;
    }
 
-   if (databases_enabled && astronomy_enabled)
+   if (database_enabled && astronomy_enabled)
    {  
        /* |Stars| and |Constellations|.  */
    
@@ -6139,7 +6143,7 @@ Added this section.
        }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-  }  /* |if (databases_enabled && astronomy_enabled)|  */
+  }  /* |if (database_enabled && astronomy_enabled)|  */
 
 @q ***** (5) |Constellations|.  @>
 @*4 |Constellations|.

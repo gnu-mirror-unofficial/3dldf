@@ -860,6 +860,193 @@ Added this rule.
 
 };
 
+@q ** (2) command --> LOAD DATABASE.@> 
+@*1 \§command> $\longrightarrow$ \.{LOAD} \.{DATABASE}.
+\initials{LDF 2021.06.07.}
+
+\LOG
+\initials{LDF 2021.06.07.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: LOAD DATABASE@>@/
+{
+@q *** (3) @>
+
+   @<Common declarations for rules@>@; 
+
+   unsigned int mysql_timeout = 120;
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+       cerr_strm << "*** Parser: Rule `command --> LOAD DATABASE'."
+                 << endl;  
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q *** (3) @>
+
+#ifndef HAVE_LIBMYSQLCLIENT
+    cerr_strm << "WARNING!  In `yyparse', rule:  `command --> LOAD DATABASE':" 
+              << endl
+              << "MySQL not available.  Can't load database." << endl
+              << "Continuing." 
+              << endl;
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+
+    goto END_LOAD_DATABASE;
+
+#endif 
+#ifndef HAVE_MYSQL_H
+    cerr_strm << "WARNING!  In `yyparse', rule:  `command --> LOAD DATABASE':"
+              << endl
+              << "MySQL not available.  Can't load database." << endl
+              << "Continuing." 
+              << endl;
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+
+    goto END_LOAD_DATABASE;
+#endif 
+
+@q *** (3) @>
+
+    if (database_enabled)
+    {
+        cerr_strm << "In `yyparse', rule:  `command --> LOAD DATABASE':" 
+                  << endl
+                  << "`database_enabled' == `true'.  Database is already loaded." << endl
+                  << "Not loading database.  Continuing." 
+                  << endl;
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+        goto END_LOAD_DATABASE;
+
+    }
+
+@q *** (3) @>
+
+    scanner_node->mysql = mysql_init(0);
+
+    if (scanner_node->mysql != 0) 
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       {
+          cerr_strm << thread_name << "In `yyparse', rule:  `command --> LOAD DATABASE':"
+                    << endl
+                    << "mysql_init succeeded." << endl; 
+          cerr_message(cerr_strm); 
+          cerr_strm.str("");
+       }
+#endif /* |DEBUG_COMPILE|  */@; 
+    }
+
+@q *** (3) @>
+
+    else
+    {
+       cerr_strm << thread_name << "ERROR!  In `yyparse', rule:  `command --> LOAD DATABASE':"
+                 << endl
+                 << "`mysql_init failed'.  Failed to load database." << endl
+                 << "Will try to continue."
+                 << endl;
+       log_message(cerr_strm); 
+       cerr_message(cerr_strm, error_stop_value); 
+       cerr_strm.str("");
+
+       goto END_LOAD_DATABASE;
+
+    }
+
+@q *** (3) @>
+
+    // For some reason, this function call causes an error.
+    // \initials{LDF 2021.03.23.}
+    // mysql_options(scanner_node->mysql, MYSQL_OPT_RECONNECT, 0);
+
+    mysql_options(scanner_node->mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
+  
+    if (!mysql_real_connect(scanner_node->mysql,"localhost","3dldf",0,"3dldf",0,NULL,0))
+    {
+        cerr_strm << thread_name << "In `yyparse', rule:  `command --> LOAD DATABASE':: `mysql_real_connect' failed, returning NULL." 
+                  << endl 
+                  << "Failed to connect to database: Error: " << mysql_error(scanner_node->mysql) 
+                  << endl
+                  << "Will try to continue."
+                  << endl;
+  
+        log_message(cerr_strm); 
+        cerr_message(cerr_strm, error_stop_value); 
+        cerr_strm.str("");
+
+        goto END_LOAD_DATABASE;
+    }
+    else if (DEBUG)
+    {
+        cerr << thread_name << "In `yyparse', rule:  `command --> LOAD DATABASE':"
+                            << endl 
+                            << "`mysql_real_connect' succeeded." << endl;
+    }      
+
+    database_enabled = true;
+
+@q *** (3) @>
+
+END_LOAD_DATABASE:
+
+   @=$$@> = 0;
+
+};
+
+@q ** (2) command --> LOAD ASTRONOMY.@> 
+@*1 \§command> $\longrightarrow$ \.{LOAD} \.{ASTRONOMY}.
+\initials{LDF 2021.06.07.}
+
+\LOG
+\initials{LDF 2021.06.07.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: LOAD ASTRONOMY@>@/
+{
+
+   @<Common declarations for rules@>@; 
+ 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+       cerr_strm << "*** Parser: Rule `command --> LOAD ASTRONOMY'."
+                 << endl;  
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+
+};
+
+
+
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>

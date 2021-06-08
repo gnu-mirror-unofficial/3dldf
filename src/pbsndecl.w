@@ -146,6 +146,8 @@ when I tried to build 3DLDF from scratch.
 #include "scanprse.h++"
 #include "astronmy.h++"
 
+
+
 @q * (1) Using declarations.  @>
 @* Using declarations.
 @<Using declarations@>=
@@ -2428,6 +2430,9 @@ Added token declaration for |SCANNER_NODE|.
 @=%token <int_value> ALL@>@/
 @=%token <int_value> WITH@>@/
 @=%token <int_value> PREFIX@>@/
+@=%token <int_value> LOAD@>@/
+@=%token <int_value> ASTRONOMY@>@/
+
 
 @q *** (3) Types for transformations.@>
 @*2 Types for transformations.

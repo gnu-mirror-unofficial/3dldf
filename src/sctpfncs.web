@@ -681,9 +681,12 @@ Now deleting |tolerance| and setting it to 0.
 
    /* Close connection to database.  */
 
+#ifdef HAVE_LIBMYSQLCLIENT
+#ifndef HAVE_MYSQL_H
    mysql_close(mysql);
-
    mysql_library_end();
+#endif
+#endif 
 
 /* !! TO DO.  LDF 2004.07.02.  Figure out how to take care of 
    |rescan_stack|.  It should be empty.  */@; 
@@ -3980,7 +3983,21 @@ Scanner_Type::show_database(void)
     cerr_strm.str("");
 
     return 1;
-#else
+#endif 
+#ifndef HAVE_MYSQL_H
+    cerr_strm << "WARNING!  In `Scanner_Type::show_database':" << endl
+              << "MySQL not available.  No database to show." << endl
+              << "Exiting function unsuccessfully with return value 1." 
+              << endl;
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+
+    return 1;
+#endif 
+
+@q **** (4) @>
+
     if (DEBUG)
     {
       cerr_strm << "In `Scanner_Type::show_database':" << endl
@@ -3989,6 +4006,7 @@ Scanner_Type::show_database(void)
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
+
 
 @q **** (4) @>
 @
@@ -4358,7 +4376,7 @@ Scanner_Type::show_database(void)
 
    return 0;
 
-#endif 
+
 
 @q **** (4) @>
 

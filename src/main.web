@@ -353,7 +353,7 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short QUIET_INDEX                =  6;
   const unsigned short VERBOSE_INDEX              =  7;
   const unsigned short VERSION_INDEX              =  8;
-  const unsigned short DATABASES_INDEX            =  9;
+  const unsigned short DATABASE_INDEX             =  9;
   const unsigned short ASTRONOMY_INDEX            = 10;
 
 
@@ -696,18 +696,18 @@ Added the ``\.{databases}'' option.
 
 @<GCC command line option processing@>=
 
-        else if (option_index == DATABASES_INDEX)
+        else if (option_index == DATABASE_INDEX)
         {
 #ifdef HAVE_LIBMYSQLCLIENT
 #ifdef HAVE_MYSQL_H
 
             cerr << "Enabling databases." << endl << endl;
 
-            databases_enabled = true;
+            database_enabled = true;
 #endif 
 #endif 
 
-            if (!databases_enabled)
+            if (!database_enabled)
             {
                cerr << "MySQL unavailable.  Not enabling databases." << endl << endl;
 
@@ -735,7 +735,7 @@ Added the ``\.{astronomy}'' option.
                  << endl << endl;
 
             astronomy_enabled = true;
-            databases_enabled = true;
+            database_enabled = true;
 #endif 
 #endif 
 
@@ -1229,7 +1229,7 @@ Now calling |Shape::initialize_type_name_map|.
 
    if (DEBUG)
    {
-      cerr << "databases_enabled == " << databases_enabled << endl;
+      cerr << "database_enabled == " << database_enabled << endl;
       cerr << "astronomy_enabled == " << astronomy_enabled << endl; 
    } 
 
