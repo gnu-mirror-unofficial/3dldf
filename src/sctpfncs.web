@@ -3933,7 +3933,72 @@ surface hiding.
   
    return picture_arg;
 
-}
+}  /* |Scanner_Type::extract_picture_output_args|  */
+
+@q ** (2) Load database.  @>
+@ Load database.
+\initials{LDF 2021.06.08.}
+
+\LOG
+\initials{LDF 2021.06.08.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Definition @>
+
+@<Define |Scanner_Type| functions@>=
+int
+Scanner_Type::load_database(void)
+{
+@q **** (4) @>
+
+   bool DEBUG = true;  /* |false|  */
+
+   int status = 0;
+   
+#ifndef MYSQL_AVAILABLE
+   cerr << "ERROR!  In `Scanner_Type::load_database':  `MYSQL_AVAILABLE' isn't defined."
+        << endl
+        << "Database not available.  This function should not have been called."
+        << endl
+        << "Exiting function unsuccessfully with return value 1."
+        << endl;
+
+   return 1;
+#endif 
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Scanner_Type::load_database'."
+            << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
+ 
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Scanner_Type::load_database' successfully with return value 0."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+@q **** (4) @>
+
+}  /* End of |Scanner_Type::load_database| definition  */
+
+
 
 @q * (2) Show database.@>
 @* Show database.
@@ -4403,8 +4468,8 @@ Scanner_Type::get_astronomy(void)
 
    bool DEBUG = true;  /* |false|  */
 
-#ifndef HAVE_LIBMYSQLCLIENT
-   cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `HAVE_LIBMYSQLCLIENT' isn't defined."
+#ifndef MYSQL_AVAILABLE
+   cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `MYSQL_AVAILABLE' isn't defined."
         << endl
         << "Database not available.  This function should not have been called."
         << endl
@@ -4413,19 +4478,6 @@ Scanner_Type::get_astronomy(void)
 
    return 1;
 #endif 
-
-#ifndef HAVE_MYSQL_H
-   cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `HAVE_MYSQL_H' isn't defined."
-        << endl
-        << "Database not available.  This function should not have been called."
-        << endl
-        << "Exiting function unsuccessfully with return value 1."
-        << endl;
-
-   return 1;
-#endif 
-
-@q **** (4) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)
