@@ -891,6 +891,18 @@ Added this rule.
    }  /* |if (DEBUG)|  */
 #endif /* |DEBUG_COMPILE|  */@;
 
+#ifdef MYSQL_AVAILABLE
+   cerr << "MYSQL_AVAILABLE is defined." << endl;
+#else
+   cerr << "MYSQL_AVAILABLE is not defined." << endl;
+#endif 
+
+#ifdef MYSQL_UNAVAILABLE
+   cerr << "MYSQL_UNAVAILABLE is defined." << endl;
+#else
+   cerr << "MYSQL_UNAVAILABLE is not defined." << endl;
+#endif 
+
 @q *** (3) @>
 
 #ifndef HAVE_LIBMYSQLCLIENT

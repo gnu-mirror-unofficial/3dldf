@@ -567,77 +567,103 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 
 @<Define |Scanner_Type::create|@>=
 
-#ifdef HAVE_LIBMYSQLCLIENT
-#ifdef HAVE_MYSQL_H
-  scanner_node->result = 0;
-  scanner_node->curr_row = 0;
-  scanner_node->mysql = 0;
-  scanner_node->row_ctr = 0; 
-  scanner_node->field_ctr = 0;
+#ifdef MYSQL_AVAILABLE
+  scanner_node->result        = 0;
+  scanner_node->curr_row      = 0;
+  scanner_node->mysql         = 0;
+  scanner_node->row_ctr       = 0; 
+  scanner_node->field_ctr     = 0;
   scanner_node->affected_rows = 0;
-#endif 
-#endif 
-
-  scanner_node->mysql = mysql_init(0);
-
-  if (scanner_node->mysql != 0) 
-  {
-     if (DEBUG)
-     {
-        cerr_strm << thread_name << "In `Scanner_Type::create()':"
-                  << endl
-                  << "mysql_init succeeded." << endl; 
-        cerr_message(cerr_strm); 
-        cerr_strm.str("");
-     }
-  }
-  else
-  {
-     cerr_strm << thread_name << "ERROR!  In `Scanner_Type::create': `mysql_init failed'." << endl;
-#ifdef HAVE_PTHREAD_H  
-     cerr_strm << "Exiting thread unsuccessfully with exit status 0."
-               << endl;
-     cerr_message(cerr_strm); 
-     cerr_strm.str("");
-     pthread_exit(0);
 #else
-     cerr_strm << "Exiting function unsuccessfully with return value 0."
-               << endl;
-     cerr_message(cerr_strm); 
-     cerr_strm.str("");
-     return(0);
+  /* |database_enabled| should already be |false| in this case.
+     Setting it here just to be sure. 
+     \initials{LDF 2021.06.08.} */
+
+  database_enabled = false;  
+
+#endif 
+
+  if (database_enabled)
+  {
+@q *** (3) @>
+
+      scanner_node->mysql = mysql_init(0);
+
+      if (scanner_node->mysql != 0) 
+      {
+         if (DEBUG)
+         {
+            cerr_strm << thread_name << "In `Scanner_Type::create()':"
+                      << endl
+                      << "mysql_init succeeded." << endl; 
+            cerr_message(cerr_strm); 
+            cerr_strm.str("");
+         }
+      }
+
+      else
+      {
+         cerr_strm << thread_name << "ERROR!  In `Scanner_Type::create': `mysql_init failed'." << endl;
+
+@q *** (3) @>
+
+#ifdef HAVE_PTHREAD_H  
+         cerr_strm << "Exiting thread unsuccessfully with exit status 0."
+                   << endl;
+         cerr_message(cerr_strm); 
+         cerr_strm.str("");
+         pthread_exit(0);
+#else
+         cerr_strm << "Exiting function unsuccessfully with return value 0."
+                   << endl;
+         cerr_message(cerr_strm); 
+         cerr_strm.str("");
+         return(0);
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-  }
+      }  /* |else|  */
 
-  unsigned int mysql_timeout = 120;
+      unsigned int mysql_timeout = 120;
 
-   // For some reason, this function call causes an error.
-   // \initials{LDF 2021.03.23.}
-   // mysql_options(scanner_node->mysql, MYSQL_OPT_RECONNECT, 0);
+      // For some reason, this function call causes an error.
+      // \initials{LDF 2021.03.23.}
+      // mysql_options(scanner_node->mysql, MYSQL_OPT_RECONNECT, 0);
 
-   mysql_options(scanner_node->mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
+      mysql_options(scanner_node->mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
   
-   if (!mysql_real_connect(scanner_node->mysql,"localhost","3dldf",0,"3dldf",0,NULL,0))
-     {
-       cerr_strm << thread_name << "In `Scanner_Type::create': `mysql_real_connect' failed, returning NULL." 
-                 << endl 
-                 << "Failed to connect to database: Error: " << mysql_error(scanner_node->mysql) 
-                 << endl;
+       if (!mysql_real_connect(scanner_node->mysql,"localhost","3dldf",0,"3dldf",0,NULL,0))
+       {
+           cerr_strm << thread_name << "In `Scanner_Type::create': `mysql_real_connect' failed, returning NULL." 
+                     << endl 
+                     << "Failed to connect to database: Error: " << mysql_error(scanner_node->mysql) 
+                     << endl;
 #ifdef HAVE_PTHREAD_H  
-       cerr_strm << "Exiting thread unsuccessfully with exit status 0." << endl;
-       cerr_message(cerr_strm); 
-       pthread_exit(0);
+           cerr_strm << "Exiting thread unsuccessfully with exit status 0." << endl;
+           cerr_message(cerr_strm); 
+           pthread_exit(0);
 #else
-       cerr_strm << "Exiting function unsuccessfully with return value 0." << endl;
-       cerr_message(cerr_strm); 
-       return(0);
+           cerr_strm << "Exiting function unsuccessfully with return value 0." << endl;
+           cerr_message(cerr_strm); 
+           return(0);
 #endif /* |HAVE_PTHREAD_H|  */@; 
-     }
-   else if (DEBUG)
-   {
-       cerr << thread_name << "In `Scanner_Type::create':  `mysql_real_connect' succeeded." << endl;
-   }
+
+      }
+
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+       else if (DEBUG)
+       {
+           cerr << thread_name << "In `Scanner_Type::create':  `mysql_real_connect' succeeded." 
+                << endl;
+       }   
+#endif /* |DEBUG_COMPILE|  */
+
+@q *** (3) @>
+
+  }  /* |if (database_enabled)|  */
+
+@q ** (2) @>
 
 @*1 Switches.
 @<Define |Scanner_Type::create|@>=
@@ -6050,12 +6076,12 @@ Added this section.
 
 @<Define |Scanner_Type::create|@>=          
 
-#ifndef HAVE_LIBMYSQLCLIENT
+#ifndef MYSQL_AVAILABLE
    if (database_enabled)
    {
-       cerr << "In `Scanner_Type::create':  `database_enabled' is `true', but `libmysqlclient' is not available."
+       cerr << "In `Scanner_Type::create':  `database_enabled' is `true', but MySQL is not available."
             << endl 
-            << "Can't access database.  Setting `database_enabled' to 'false' and Continuing."
+            << "Can't access database.  Setting `database_enabled' to 'false' and continuing."
             << endl;
 
        database_enabled = false;
@@ -6063,31 +6089,9 @@ Added this section.
    }
    if (astronomy_enabled)
    {
-       cerr << "In `Scanner_Type::create':  `astronomy_enabled' is `true', but `libmysqlclient' is not available."
+       cerr << "In `Scanner_Type::create':  `astronomy_enabled' is `true', but MySQL is not available."
             << endl 
-            << "Can't access database.  Setting `astronomy_enabled' to 'false' and Continuing."
-            << endl;
-
-        astronomy_enabled = false;
-   }
-#endif 
-
-#ifndef HAVE_MYSQL_H
-   if (database_enabled)
-   {
-       cerr << "In `Scanner_Type::create':  `database_enabled' is `true', but `mysql.h' is not available."
-            << endl 
-            << "Can't access database.  Setting `database_enabled' to 'false' and Continuing."
-            << endl;
-
-       database_enabled = false;
-
-   }
-   if (astronomy_enabled)
-   {
-       cerr << "In `Scanner_Type::create':  `astronomy_enabled' is `true', but `mysql.h' is not available."
-            << endl 
-            << "Can't access database.  Setting `astronomy_enabled' to 'false' and Continuing."
+            << "Can't access database.  Setting `astronomy_enabled' to 'false' and continuing."
             << endl;
 
         astronomy_enabled = false;
@@ -6097,13 +6101,13 @@ Added this section.
    if (database_enabled == false && DEBUG == true)
    {
        cerr << "In `Scanner_Type::create':  `database_enabled' is `false'." << endl  
-            << "Not declaring and initializing `Star' variables."
+            << "Not calling `Scanner_Type::get_astronomy'."
             << endl;
    }
    if (astronomy_enabled == false && DEBUG == true)
    {
        cerr << "In `Scanner_Type::create':  `astronomy_enabled' is `false'." << endl 
-            << "Not declaring and initializing `Star' variables."
+            << "Not calling `Scanner_Type::get_astronomy'."
             << endl;
    }
 
@@ -6113,7 +6117,7 @@ Added this section.
    
        cerr << "In `Scanner_Type::create':  `database_enabled' and `astronomy_enabled' are both `true'."
             << endl 
-            << "Declaring and initializing \"Astronomy\" variables."
+            << "Calling `Scanner_Type::get_astronomy'."
             << endl;
 
        status = scanner_node->get_astronomy();
@@ -6136,8 +6140,8 @@ Added this section.
        else if (DEBUG)
        {
            cerr_strm << "In `Scanner_Type::create()':" << endl
-                     << "`Scanner_Type::get_astronomy' succeeded, "  
-                     << "returning 0."  << endl;
+                     << "`Scanner_Type::get_astronomy' succeeded, returning 0."  
+                     << endl;
            cerr_message(cerr_strm);
            cerr_strm.str("");
        }
@@ -6145,1500 +6149,12 @@ Added this section.
  
   }  /* |if (database_enabled && astronomy_enabled)|  */
 
-@q ***** (5) |Constellations|.  @>
-@*4 |Constellations|.
-
-\LOG
-\initials{LDF 2021.05.28.}  
-Added this section.
-\ENDLOG 
-@<Define |Scanner_Type::create|@>=          
-
-  {
-
-@q ***** (5) @>
-
-    Constellation s;
-    Constellation* t = 0;
-
-@q ****** (6) @>
-
-/* Andromeda 	       ;And ;19 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("andromeda", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Andromeda", "andromeda");
-
-
-
-@q ****** (6) @>
-
-/* Antlia 		       ;Ant ;62 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("antlia", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Antlia", "antlia");
-
-
-
-@q ****** (6) @>
-
-/* Apus 		       ;Aps ;67 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("apus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Apus", "apus");
-
-
-
-@q ****** (6) @>
-
-/* Aquarius 	       ;Aqr ;10 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("aquarius", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Aquarius", "aquarius");
-
-
-
-@q ****** (6) @>
-
-/* Aquila 		       ;Aql ;22 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("aquila", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Aquila", "aquila");
-
-
-
-@q ****** (6) @>
-
-/* Ara 		       ;Ara ;63 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("ara", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Ara", "ara");
-
-
-
-@q ****** (6) @>
-
-/* Aries 		       ;Ari ;39 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("aries", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Aries", "aries");
-
-
-
-@q ****** (6) @>
-
-/* Auriga 		       ;Aur ;21 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("auriga", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Auriga", "auriga");
-
-
-
-@q ****** (6) @>
-
-/* Boötes 		       ;Boo ;13 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("booetes", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Booetes", "booetes");
-
-
-
-@q ****** (6) @>
-
-/* Caelum 		       ;Cae ;81 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("caelum", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Caelum", "caelum");
-
-
-
-@q ****** (6) @>
-
-/* Camelopardalis 	       ;Cam ;18 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("camelopardalis", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Camelopardalis", "camelopardalis");
-
-
-
-@q ****** (6) @>
-
-/* Cancer 		       ;Cnc ;31 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("cancer", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Cancer", "cancer");
-
-
-
-@q ****** (6) @>
-
-/* Canes_Venatici         ;CVn ;38 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("canes", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Canes", "canes");
-
-
-
-@q ****** (6) @>
-
-/* Canis_Major   	       ;CMa ;43 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("canis_major", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Canis_Major", "canis_major");
-
-
-
-@q ****** (6) @>
-
-/* Canis_Minor   	       ;CMi ;71 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("canis_minor", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Canis_Minor", "canis_minor");
-
-
-
-@q ****** (6) @>
-
-/* Capricornus 	       ;Cap ;40 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("capricornus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Capricornus", "capricornus");
-
-
-
-@q ****** (6) @>
-
-/* Carina 		       ;Car ;34 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("carina", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Carina", "carina");
-
-
-
-@q ****** (6) @>
-
-/* Cassiopeia 	       ;Cas ;25 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("cassiopeia", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Cassiopeia", "cassiopeia");
-
-
-
-@q ****** (6) @>
-
-/* Centaurus 	       ;Cen ;09 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("centaurus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Centaurus", "centaurus");
-
-
-
-@q ****** (6) @>
-
-/* Cepheus 	       ;Cep ;27 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("cepheus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Cepheus", "cepheus");
-
-
-
-@q ****** (6) @>
-
-/* Cetus 		       ;Cet ;04 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("cetus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Cetus", "cetus");
-
-
-
-@q ****** (6) @>
-
-/* Chamaeleon 	       ;Cha ;79 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("chamaeleon", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Chamaeleon", "chamaeleon");
-
-
-
-@q ****** (6) @>
-
-/* Circinus 	       ;Cir ;85 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("circinus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Circinus", "circinus");
-
-
-
-@q ****** (6) @>
-
-/* Columba 	       ;Col ;54 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("columba", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Columba", "columba");
-
-
-
-@q ****** (6) @>
-
-/* Coma_Berenices         ;Com ;42 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("coma_berenices", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Coma_Berenices", "coma_berenices");
-
-
-
-@q ****** (6) @>
-
-/* Corona_Australis       ;CrA ;80 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("corona_australis", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Corona_Australis", "corona_australis");
-
-
-
-@q ****** (6) @>
-
-/* Corona_Borealis        ;CrB ;73 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("corona_borealis", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Corona_Borealis", "corona_borealis");
-
-
-
-@q ****** (6) @>
-
-/* Corvus 		       ;Crv ;70 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("corvus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Corvus", "corvus");
-
-
-
-@q ****** (6) @>
-
-/* Crater 		       ;Crt ;53 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("crater", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Crater", "crater");
-
-
-
-@q ****** (6) @>
-
-/* Crux 		       ;Cru ;88 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("crux", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Crux", "crux");
-
-
-
-@q ****** (6) @>
-
-/* Cygnus 		       ;Cyg ;16 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("cygnus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Cygnus", "cygnus");
-
-
-
-@q ****** (6) @>
-
-/* Delphinus 	       ;Del ;69 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("delphinus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Delphinus", "delphinus");
-
-
-
-@q ****** (6) @>
-
-/* Dorado 		       ;Dor ;72 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("dorado", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Dorado", "dorado");
-
-
-
-@q ****** (6) @>
-
-/* Draco 		       ;Dra ;08 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("draco", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Draco", "draco");
-
-
-
-@q ****** (6) @>
-
-/* Equuleus 	       ;Equ ;87 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("equuleus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Equuleus", "equuleus");
-
-
-
-@q ****** (6) @>
-
-/* Eridanus 	       ;Eri ;06 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("eridanus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Eridanus", "eridanus");
-
-
-
-@q ****** (6) @>
-
-/* Fornax 		       ;For ;41 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("fornax", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Fornax", "fornax");
-
-
-
-@q ****** (6) @>
-
-/* Gemini 		       ;Gem ;30 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("gemini", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Gemini", "gemini");
-
-
-
-@q ****** (6) @>
-
-/* Grus 		       ;Gru ;45 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("grus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Grus", "grus");
-
-
-
-@q ****** (6) @>
-
-/* Hercules 	       ;Her ;05 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("hercules", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Hercules", "hercules");
-
-
-
-@q ****** (6) @>
-
-/* Horologium 	       ;Hor ;58 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("horologium", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Horologium", "horologium");
-
-
-
-@q ****** (6) @>
-
-/* Hydra                  ;Hya ;01 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("hydra", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Hydra", "hydra");
-
-
-
-@q ****** (6) @>
-
-/* Hydrus 		       ;Hyi ;61 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("hydrus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Hydrus", "hydrus");
-
-
-
-@q ****** (6) @>
-
-/* Indus 		       ;Ind ;49 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("indus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Indus", "indus");
-
-
-
-@q ****** (6) @>
-
-/* Lacerta 	       ;Lac ;68 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("lacerta", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Lacerta", "lacerta");
-
-
-
-@q ****** (6) @>
-
-/* Leo 		       ;Leo ;12 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("leo", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Leo", "leo");
-
-
-
-@q ****** (6) @>
-
-/* Leo_Minor   	       ;LMi ;64 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("leo_minor", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Leo_Minor", "leo_minor");
-
-
-
-@q ****** (6) @>
-
-/* Lepus 		       ;Lep ;51 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("lepus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Lepus", "lepus");
-
-
-
-@q ****** (6) @>
-
-/* Libra 		       ;Lib ;29 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("libra", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Libra", "libra");
-
-
-
-@q ****** (6) @>
-
-/* Lupus 		       ;Lup ;46 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("lupus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Lupus", "lupus");
-
-
-
-@q ****** (6) @>
-
-/* Lynx 		       ;Lyn ;28 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("lynx", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Lynx", "lynx");
-
-
-
-@q ****** (6) @>
-
-/* Lyra 		       ;Lyr ;52 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("lyra", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Lyra", "lyra");
-
-
-
-@q ****** (6) @>
-
-/* Mensa 		       ;Men ;75 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("mensa", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Mensa", "mensa");
-
-
-
-@q ****** (6) @>
-
-/* Microscopium 	       ;Mic ;66 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("microscopium", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Microscopium", "microscopium");
-
-
-
-@q ****** (6) @>
-
-/* Monoceros 	       ;Mon ;35 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("monoceros", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Monoceros", "monoceros");
-
-
-
-@q ****** (6) @>
-
-/* Musca 		       ;Mus ;77 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("musca", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Musca", "musca");
-
-
-
-@q ****** (6) @>
-
-/* Norma 		       ;Nor ;74 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("norma", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Norma", "norma");
-
-
-
-@q ****** (6) @>
-
-/* Octans 		       ;Oct ;50 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("octans", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Octans", "octans");
-
-
-
-@q ****** (6) @>
-
-/* Ophiuchus 	       ;Oph ;11 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("ophiuchus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Ophiuchus", "ophiuchus");
-
-
-
-@q ****** (6) @>
-
-/* Orion 		       ;Ori ;26 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("orion", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Orion", "orion");
-
-
-
-@q ****** (6) @>
-
-/* Pavo 		       ;Pav ;44 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("pavo", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Pavo", "pavo");
-
-
-
-@q ****** (6) @>
-
-/* Pegasus 	       ;Peg ;07 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("pegasus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Pegasus", "pegasus");
-
-
-
-@q ****** (6) @>
-
-/* Perseus 	       ;Per ;24 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("perseus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Perseus", "perseus");
-
-
-
-@q ****** (6) @>
-
-/* Phoenix 	       ;Phe ;37 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("phoenix", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Phoenix", "phoenix");
-
-
-
-@q ****** (6) @>
-
-/* Pictor 		       ;Pic ;59 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("pictor", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Pictor", "pictor");
-
-
-
-@q ****** (6) @>
-
-/* Pisces 		       ;Psc ;14 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("pisces", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Pisces", "pisces");
-
-
-
-@q ****** (6) @>
-
-/* Piscis_Austrinus       ;PsA ;60 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("piscis_austrinus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Piscis_austrinus", "piscis_austrinus");
-
-
-
-@q ****** (6) @>
-
-/* Puppis 		       ;Pup ;20 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("puppis", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Puppis", "puppis");
-
-
-
-@q ****** (6) @>
-
-/* Pyxis 		       ;Pyx ;65 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("pyxis", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Pyxis", "pyxis");
-
-
-
-@q ****** (6) @>
-
-/* Reticulum 	       ;Ret ;82 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("reticulum", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Reticulum", "reticulum");
-
-
-
-@q ****** (6) @>
-
-/* Sagitta 	       ;Sge ;86 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("sagitta", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Sagitta", "sagitta");
-
-
-
-@q ****** (6) @>
-
-/* Sagittarius 	       ;Sgr ;15 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("sagittarius", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Sagittarius", "sagittarius");
-
-
-
-@q ****** (6) @>
-
-/* Scorpius 	       ;Sco ;33 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("scorpius", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Scorpius", "scorpius");
-
-
-
-@q ****** (6) @>
-
-/* Sculptor 	       ;Scl ;36 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("sculptor", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Sculptor", "sculptor");
-
-
-
-@q ****** (6) @>
-
-/* Scutum 		       ;Sct ;84 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("scutum", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Scutum", "scutum");
-
-
-
-@q ****** (6) @>
-
-/* Serpens 	       ;Ser ;23 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("serpens", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Serpens", "serpens");
-
-
-
-@q ****** (6) @>
-
-/* Sextans 	       ;Sex ;47 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("sextans", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Sextans", "sextans");
-
-
-
-@q ****** (6) @>
-
-/* Taurus 		       ;Tau ;17 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("taurus", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Taurus", "taurus");
-
-
-
-@q ****** (6) @>
-
-/* Telescopium 	       ;Tel ;57 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("telescopium", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Telescopium", "telescopium");
-
-
-
-@q ****** (6) @>
-
-/* Triangulum 	       ;Tri ;78 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("triangulum", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Triangulum", "triangulum");
-
-
-
-@q ****** (6) @>
-
-/* Triangulum_Australe    ;TrA ;83 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("triangulum_australe", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Triangulum_Australe", "triangulum_australe");
-
-
-
-@q ****** (6) @>
-
-/* Tucana 		       ;Tuc ;48 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("tucana", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Tucana", "tucana");
-
-
-
-@q ****** (6) @>
-
-/* Ursa_Major 	       ;UMa ;03 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("ursa_major", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Ursa_Major", "ursa_major");
-
-
-
-@q ****** (6) @>
-
-/* Ursa_Minor   	       ;UMi ;56 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("ursa_minor", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Ursa_Minor", "ursa_minor");
-
-
-
-@q ****** (6) @>
-
-/* Vela 		       ;Vel ;32 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("vela", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Vela", "vela");
-
-
-
-@q ****** (6) @>
-
-/* Virgo 		       ;Vir ;02 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("virgo", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Virgo", "virgo");
-
-
-
-@q ****** (6) @>
-
-/* Volans 		       ;Vol ;76 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("volans", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Volans", "volans");
-
-
-
-@q ****** (6) @>
-
-/* Vulpecula 	       ;Vul ;55 */
-
-    t = create_new<Constellation>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("vulpecula", CONSTELLATION, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Vulpecula", "vulpecula");
-
-
-@q ****** (6) @>
-
-@q ***** (5) End of group for ``Predefined variables and constants''.  @>          
-@ End of group for ``Predefined variables and constants''.
-
-@<Define |Scanner_Type::create|@>=  
-  
-  }  /* End of group for |Constellations|.  */
-
-@q ***** (5) |Planets|.  @>
-@*4 |Planets|.
-
-\LOG
-\initials{LDF 2021.05.29.}
-Added this section.
-\ENDLOG 
-@<Define |Scanner_Type::create|@>=          
-
-  {
-
-@q ***** (5) @>
-
-    Planet s;
-    Planet* t = 0;
-
-@q ****** (6) @>
-
-/* Mercury */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("mercury", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Mercury", "mercury");
-
-@q ****** (6) @>
-
-/* Venus */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("venus", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Venus", "venus");
-
-@q ****** (6) @>
-
-/* Earth */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("earth", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Earth", "earth");
-
-@q ****** (6) @>
-
-/* Mars */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("mars", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Mars", "mars");
-
-@q ****** (6) @>
-
-/* Jupiter */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("jupiter", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Jupiter", "jupiter");
-
-@q ****** (6) @>
-
-/* Saturn */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("saturn", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Saturn", "saturn");
-
-@q ****** (6) @>
-
-/* Uranus */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("uranus", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Uranus", "uranus");
-
-@q ****** (6) @>
-
-/* Neptune */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("neptune", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Neptune", "neptune");
-
-@q ****** (6) @>
-
-/* Pluto */
-
-    t = create_new<Planet>(s);
-    v = static_cast<void*>(t); 
-
-    scanner_node->add_entry("pluto", PLANET, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
-
-    scanner_node->add_synonym("Pluto", "pluto");
-
-@q ****** (6) @>
-
-@q ***** (5) End of group for ``Predefined variables and constants''.  @>          
-@ End of group for ``Predefined variables and constants''.
-
-@<Define |Scanner_Type::create|@>=  
-  
-  }  /* End of group for |Planets|.  */
-
-
-
 @q ***** (5) End of group for ``Predefined variables and constants''.  @>          
 @ End of group for ``Predefined variables and constants''.
 
 @<Define |Scanner_Type::create|@>=          
 
- }
+ }  /* Predefined variables and constants  */
 
 @
 @<Define |Scanner_Type::create|@>=
@@ -7664,14 +6180,14 @@ Added this section.
 } /* |if (top_level)|  */
  
  else 
-   {
+ {
 #if DEBUG_COMPILE
      if (DEBUG)
        cerr << "top_level == false.  Not initializing scanner_node->id_map_node." 
             << endl;
 #endif
 
-} /* |else| (|!top_level|)  */
+ } /* |else| (|!top_level|)  */
    
 @q **  End of |Scanner_Type::create|.  @>
 @ End of |Scanner_Type::create|. 

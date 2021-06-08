@@ -214,6 +214,19 @@ Now including \filename{limits}.
 #define __USE_STD_IOSTREAM  /* Needed for "sstream" below. */
 #endif 
 
+#ifdef HAVE_LIBMYSQLCLIENT
+   #ifdef HAVE_MYSQL_H
+      #define MYSQL_AVAILABLE
+      #undef MYSQL_UNAVAILABLE
+   #else
+      #define MYSQL_UNAVAILABLE
+      #undef MYSQL_AVAILABLE
+   #endif 
+#else
+   #define MYSQL_UNAVAILABLE
+   #undef MYSQL_AVAILABLE
+#endif 
+
 #include <algorithm>
 #include <bitset>
 #include <deque>

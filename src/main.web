@@ -698,13 +698,10 @@ Added the ``\.{databases}'' option.
 
         else if (option_index == DATABASE_INDEX)
         {
-#ifdef HAVE_LIBMYSQLCLIENT
-#ifdef HAVE_MYSQL_H
-
+#ifdef MYSQL_AVAILABLE
             cerr << "Enabling databases." << endl << endl;
 
             database_enabled = true;
-#endif 
 #endif 
 
             if (!database_enabled)
@@ -728,20 +725,17 @@ Added the ``\.{astronomy}'' option.
         else if (option_index == ASTRONOMY_INDEX)
         {
 
-#ifdef HAVE_LIBMYSQLCLIENT
-#ifdef HAVE_MYSQL_H
-
-            cerr << "Enabling features pertaining to astronomy."
+#ifdef MYSQL_AVAILABLE
+            cerr << "Enabling features pertaining to astronomy (including database)."
                  << endl << endl;
 
             astronomy_enabled = true;
             database_enabled = true;
 #endif 
-#endif 
 
             if (!astronomy_enabled)
             {
-               cerr << "MySQL unavailable.  Not enabling databases or features pertaing to astronomy." 
+               cerr << "MySQL unavailable.  Not enabling database or features pertaing to astronomy." 
                     << endl << endl;
 
             }
@@ -1014,7 +1008,7 @@ main(int argc, char *argv[])
   using namespace Scan_Parse;
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @;
+  bool DEBUG = true; /* |false| */ @;
 #endif /* |DEBUG_COMPILE|  */@; 
 
   string thread_name = "";
@@ -1062,6 +1056,60 @@ main(int argc, char *argv[])
   bool bison_trace = false;
 
   @<Process command line options@>;
+
+#ifdef MYSQL_AVAILABLE
+  if (!database_enabled)
+  {
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+        cerr << "In `main':  MySQL is available and `database_enabled' is `false'."
+             << endl
+             << "Will check for `LDF_DATABASE' environment variable."
+             << endl;
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+     char *c = getenv("LDF_DATABASE");
+
+     if (c == 0)
+     {
+        cerr << "In `main':  `LDF_DATABASE' environment variable not found."
+             << endl
+             << "Not enabling database.  Continuing."
+             << endl;
+     }
+     else if (strncmp(c, "1", 1))
+     {
+        cerr << "In `main':  `LDF_DATABASE' environment variable found, but value is " << c << " (not \"1\")."
+             << endl
+             << "Not enabling database.  Continuing."
+             << endl;
+
+     }
+     else 
+     {
+        cerr << "In `main':  `LDF_DATABASE' environment variable found, and value is \"1\"."
+             << endl
+             << "Setting `database_enabled' to true."
+             << endl;
+
+        database_enabled = true;
+      }
+  
+  }  /* |if (!database_enabled)| */
+#else
+#if DEBUG_COMPILE
+  if (DEBUG)
+  { 
+     cerr << "In `main':  MySQL is not available.  Not checking for `LDF_DATABASE' environment variable."
+          << endl;
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+#endif   /* |MYSQL_AVAILABLE|  */
+
+@q *** (3) @>
 
   cerr.setf(ios::fixed, ios::floatfield);
 
