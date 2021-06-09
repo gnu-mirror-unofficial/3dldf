@@ -3615,10 +3615,12 @@ Added this rule.
 
 @q ******* (7) Definition.@> 
 
-@<Define rules@>= 
+@<Define rules@>=
   
 @=command: SHOW DATABASE database_option_list@>@/
 {
+@q ******** (8) @>
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3633,14 +3635,39 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-#ifndef HAVE_LIBMYSQLCLIENT
+@q ******** (8) @>
+
+#ifndef MYSQL_AVAILABLE
     cerr_strm << "MySQL not available.  No database to show." << endl
               << "Continuing." << endl;
     log_message(cerr_strm);
     cerr_message(cerr_strm);
     cerr_strm.str("");
-#else
- 
+
+    goto END_SHOW_DATABASE;
+#endif 
+
+@q ******** (8) @>
+@
+@<Define rules@>=
+
+    if (!database_enabled)
+    {
+       cerr_strm << "*** Parser:  In rule `command --> SHOW DATABASE database_option_list':"
+                 << "`database_enabled' == `false'." << endl 
+                 << endl
+                 << "Database is not available.  Continuing." << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   
+       goto END_SHOW_DATABASE;
+    }
+
+@q ******** (8) @>
+@
+@<Define rules@>= 
+
     if (scanner_node->database_options.empty())
        scanner_node->database_options.push_back(ALL);
 
@@ -3679,7 +3706,9 @@ Added this rule.
 
     scanner_node->database_options.clear();
 
-#endif 
+@q ******** (8) @>
+
+END_SHOW_DATABASE:
 
     @=$$@> = static_cast<void*>(0);
 
