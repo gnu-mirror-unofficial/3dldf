@@ -901,7 +901,7 @@ Added this rule.
        cerr_message(cerr_strm);
        cerr_strm.str("");
 
-       goto END_LOAD DATABASE;
+       goto END_LOAD_DATABASE;
    }
 
 @q *** (3) @>
@@ -927,7 +927,7 @@ Added this rule.
        cerr_message(cerr_strm);
        cerr_strm.str("");
 
-       goto END_LOAD DATABASE;
+       goto END_LOAD_DATABASE;
 
    } 
 
@@ -947,7 +947,7 @@ Added this rule.
        cerr_message(cerr_strm);
        cerr_strm.str("");
 
-       goto END_LOAD DATABASE;
+       goto END_LOAD_DATABASE;
    } 
 #if DEBUG_COMPILE
    else if (DEBUG)
@@ -966,7 +966,7 @@ Added this rule.
 
 @q *** (3) @>
 
-END_LOAD DATABASE:
+END_LOAD_DATABASE:
 
    @=$$@> = 0;
 
