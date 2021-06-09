@@ -889,19 +889,65 @@ Added this rule.
    }  /* |if (DEBUG)|  */
 #endif /* |DEBUG_COMPILE|  */@;
 
+   if (database_enabled)
+   {
+       cerr_strm << "In `yyparse', rule `command --> LOAD DATABASE':"
+                 << endl
+                 << "`database_enabled' is already `true'."
+                 << endl 
+                 << "Not calling `Scanner_Type::load_database'.  Continuing."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       goto END_LOAD DATABASE;
+   }
+
+@q *** (3) @>
+
    status = scanner_node->load_database();
   
-   if (status != 0)
+@q *** (3) @>
+
+@ This code should never be reached.
+\initials{LDF 2021.06.09.}
+
+@<Define rules@>=
+
+   if (status == 2)
+   {
+       cerr_strm << "In `yyparse', rule `command --> LOAD DATABASE':"
+                 << endl
+                 << "`Scanner_Type::load_database' returned 2:"
+                 << endl 
+                 << "Database already loaded.  Not reloaded."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       goto END_LOAD DATABASE;
+
+   } 
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+   else if (status != 0)
    {
        cerr_strm << "ERROR!  In `yyparse', rule `command --> LOAD DATABASE':"
                  << endl
-                 << "`Scanner_Type::load_database' failed, returning " << status << "."
-                 << endl
+                 << "`Scanner_Type::load_database' failed, returning " << status "."
+                 << endl 
                  << "Failed to load database.  Will try to continue."
                  << endl;
        log_message(cerr_strm);
        cerr_message(cerr_strm);
        cerr_strm.str("");
+
+       goto END_LOAD DATABASE;
    } 
 #if DEBUG_COMPILE
    else if (DEBUG)
@@ -917,6 +963,10 @@ Added this rule.
        cerr_strm.str("");
    }  
 #endif /* |DEBUG_COMPILE|  */@;
+
+@q *** (3) @>
+
+END_LOAD DATABASE:
 
    @=$$@> = 0;
 
