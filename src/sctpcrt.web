@@ -232,6 +232,8 @@ Scanner_Type::create(string str,
 
   string thread_name = "";
 
+  int status = 0;
+
 #ifdef HAVE_PTHREAD_H  
   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
   thread_name = Thread_Info_Type::get_thread_name(thread_info);
@@ -583,83 +585,50 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 
 #endif 
 
+@q ** (2) @>
+@
+@<Define |Scanner_Type::create|@>=
+
   if (database_enabled)
   {
-@q *** (3) @>
+     status = scanner_node->load_database(true);  /* force loading database.  */
 
-      scanner_node->mysql = mysql_init(0);
-
-      if (scanner_node->mysql != 0) 
-      {
-         if (DEBUG)
-         {
-            cerr_strm << thread_name << "In `Scanner_Type::create()':"
-                      << endl
-                      << "mysql_init succeeded." << endl; 
-            cerr_message(cerr_strm); 
-            cerr_strm.str("");
-         }
-      }
-
-      else
-      {
-         cerr_strm << thread_name << "ERROR!  In `Scanner_Type::create': `mysql_init failed'." << endl;
-
-@q *** (3) @>
-
-#ifdef HAVE_PTHREAD_H  
-         cerr_strm << "Exiting thread unsuccessfully with exit status 0."
-                   << endl;
+     if (status == 2)
+     {
+         cerr_strm << thread_name << "WARNING! In `Scanner_Type::create()':"
+                   << endl 
+                   << "`Scanner_Type::load_database' returned 2."
+                   << endl
+                   << "This shouldn't be possible."
+                   << endl 
+                   << "Will try to continue.";
          cerr_message(cerr_strm); 
-         cerr_strm.str("");
-         pthread_exit(0);
-#else
-         cerr_strm << "Exiting function unsuccessfully with return value 0."
-                   << endl;
+         return 0;
+     }
+     else if (status != 0)
+     {
+         cerr_strm << thread_name << "ERROR! In `Scanner_Type::create()':"
+                   << endl 
+                   << "`Scanner_Type::load_database' failed, returning " << status << "."
+                   << endl
+                   << "Failed to load database."
+                   << endl 
+                   << "Will try to continue.";
          cerr_message(cerr_strm); 
-         cerr_strm.str("");
-         return(0);
-#endif /* |HAVE_PTHREAD_H|  */@; 
-
-      }  /* |else|  */
-
-      unsigned int mysql_timeout = 120;
-
-      // For some reason, this function call causes an error.
-      // \initials{LDF 2021.03.23.}
-      // mysql_options(scanner_node->mysql, MYSQL_OPT_RECONNECT, 0);
-
-      mysql_options(scanner_node->mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
-  
-       if (!mysql_real_connect(scanner_node->mysql,"localhost","3dldf",0,"3dldf",0,NULL,0))
-       {
-           cerr_strm << thread_name << "In `Scanner_Type::create': `mysql_real_connect' failed, returning NULL." 
-                     << endl 
-                     << "Failed to connect to database: Error: " << mysql_error(scanner_node->mysql) 
-                     << endl;
-#ifdef HAVE_PTHREAD_H  
-           cerr_strm << "Exiting thread unsuccessfully with exit status 0." << endl;
-           cerr_message(cerr_strm); 
-           pthread_exit(0);
-#else
-           cerr_strm << "Exiting function unsuccessfully with return value 0." << endl;
-           cerr_message(cerr_strm); 
-           return(0);
-#endif /* |HAVE_PTHREAD_H|  */@; 
-
-      }
-
-@q *** (3) @>
-
+         return 0;
+     }
 #if DEBUG_COMPILE
-       else if (DEBUG)
-       {
-           cerr << thread_name << "In `Scanner_Type::create':  `mysql_real_connect' succeeded." 
-                << endl;
-       }   
-#endif /* |DEBUG_COMPILE|  */
-
-@q *** (3) @>
+     else if (DEBUG)
+     { 
+         cerr_strm << thread_name << "In `Scanner_Type::create()':"
+                   << endl 
+                   << "`Scanner_Type::load_database' succeeded, returning 0."
+                   << endl
+                   << "Loaded database successfully."
+                   << endl;
+         cerr_message(cerr_strm); 
+     }  
+#endif /* |DEBUG_COMPILE|  */@;
 
   }  /* |if (database_enabled)|  */
 
@@ -1005,7 +974,7 @@ Added this section.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  int status = pthread_mutex_init(&scanner_node->thread_vector_mutex, 0);
+  status = pthread_mutex_init(&scanner_node->thread_vector_mutex, 0);
 
 @ Deleting |scanner_node| will probably fail if the |Scanner_Type| destructor tries to 
 destroy |thread_vector_mutex|.

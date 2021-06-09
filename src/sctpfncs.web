@@ -3946,7 +3946,7 @@ Added this function.
 
 @<Define |Scanner_Type| functions@>=
 int
-Scanner_Type::load_database(void)
+Scanner_Type::load_database(bool force)
 {
 @q **** (4) @>
 
@@ -4004,11 +4004,14 @@ Scanner_Type::load_database(void)
 @
 @<Define |Scanner_Type| functions@>=
 
-    if (database_enabled)
+    if (force == false && database_enabled)
     {
         cerr_strm << "In `Scanner_Type::load_database':" 
                   << endl
-                  << "`database_enabled' == `true'.  Database is already loaded." << endl
+                  << "`database_enabled' is `true' and and `force' is `false':"
+                  << endl
+                  << "Database is already loaded and not forcing load." 
+                  << endl
                   << "Exiting function successfully with return value 2." 
                   << endl;
         log_message(cerr_strm);
@@ -4899,6 +4902,8 @@ Scanner_Type::get_astronomy(void)
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
+
+   astronomy_enabled = true;
 
 #if DEBUG_COMPILE
    if (DEBUG)

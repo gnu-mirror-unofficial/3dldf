@@ -1007,7 +1007,7 @@ Added this rule.
                  << endl
                  << "`astronomy_enabled' is already `true'."
                  << endl 
-                 << "Not calling `Scanner_Type::load_astronomy'.  Continuing."
+                 << "Not calling `Scanner_Type::get_astronomy'.  Continuing."
                  << endl;
        log_message(cerr_strm);
        cerr_message(cerr_strm);
@@ -1019,8 +1019,82 @@ Added this rule.
 
 @q *** (3) @>
 
-   status = scanner_node->load_astronomy();
-  
+   if (!database_enabled)
+   {
+@q **** (4) @>
+
+      status = scanner_node->load_database();
+
+      if (status != 0)
+      {
+           cerr_strm << "ERROR!  In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                     << endl
+                     << "`Scanner_Type::load_database' failed, returning " << status << "."
+                     << endl 
+                     << "Not calling `Scanner_Type::get_astronomy'."
+                     << endl
+                     << "Will try to continue."
+                     << endl;
+           log_message(cerr_strm);
+           cerr_message(cerr_strm);
+           cerr_strm.str("");
+
+           goto END_LOAD_ASTRONOMY;
+
+      }
+@q **** (4) @>
+@
+@<Define rules@>=
+
+      else if (!database_enabled)
+      {
+           cerr_strm << "ERROR!  In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                     << endl
+                     << "`database_enabled' is `false' following successful call to `scanner_node::load_database'."
+                     << endl 
+                     << "This shouldn't be possible."
+                     << endl 
+                     << "Not calling `Scanner_Type::get_astronomy'."
+                     << endl
+                     << "Will try to continue."
+                     << endl;
+           log_message(cerr_strm);
+           cerr_message(cerr_strm);
+           cerr_strm.str("");
+
+           goto END_LOAD_ASTRONOMY;
+
+      }
+
+@q **** (4) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+      else if (DEBUG)
+      { 
+           cerr_strm << "In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                     << endl
+                     << "`Scanner_Type::load_database' succeeded, returning 0."
+                     << endl 
+                     << "Will call `Scanner_Type::get_astronomy'."
+                     << endl;
+           log_message(cerr_strm);
+           cerr_message(cerr_strm);
+           cerr_strm.str("");
+      }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   }  /* |if (!database_enabled)|  */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+   status = scanner_node->get_astronomy();
+
 @q *** (3) @>
 
 @ This code should never be reached.
@@ -1032,7 +1106,7 @@ Added this rule.
    {
        cerr_strm << "In `yyparse', rule `command --> LOAD ASTRONOMY':"
                  << endl
-                 << "`Scanner_Type::load_astronomy' returned 2:"
+                 << "`Scanner_Type::get_astronomy' returned 2:"
                  << endl 
                  << "Astronomy already loaded.  Not reloaded."
                  << endl;
@@ -1052,7 +1126,7 @@ Added this rule.
    {
        cerr_strm << "ERROR!  In `yyparse', rule `command --> LOAD ASTRONOMY':"
                  << endl
-                 << "`Scanner_Type::load_astronomy' failed, returning " << status << "."
+                 << "`Scanner_Type::get_astronomy' failed, returning " << status << "."
                  << endl 
                  << "Failed to load astronomy.  Will try to continue."
                  << endl;
@@ -1067,7 +1141,7 @@ Added this rule.
    { 
        cerr_strm << "In `yyparse', rule `command --> LOAD ASTRONOMY':"
                  << endl
-                 << "`Scanner_Type::load_astronomy' succeeded, returning 0."
+                 << "`Scanner_Type::get_astronomy' succeeded, returning 0."
                  << endl
                  << "Loaded astronomy successfully."
                  << endl;
