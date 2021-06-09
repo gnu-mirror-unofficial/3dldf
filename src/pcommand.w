@@ -939,7 +939,7 @@ Added this rule.
    {
        cerr_strm << "ERROR!  In `yyparse', rule `command --> LOAD DATABASE':"
                  << endl
-                 << "`Scanner_Type::load_database' failed, returning " << status "."
+                 << "`Scanner_Type::load_database' failed, returning " << status << "."
                  << endl 
                  << "Failed to load database.  Will try to continue."
                  << endl;

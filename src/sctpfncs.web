@@ -1176,8 +1176,6 @@ Added code for handling this case.
                       << "Showing " << iter->first << ": " 
                       << endl;
             iter->second->show("*iter->second:");
-            cerr << "Type <RETURN> to continue: ";
-            getchar(); 
             cerr_mutex.unlock();
 
 } /* |if (DEBUG)|  */
@@ -3955,7 +3953,42 @@ Scanner_Type::load_database(void)
    bool DEBUG = true;  /* |false|  */
 
    int status = 0;
+
+   using namespace Scan_Parse;
+
+   stringstream cerr_strm;
    
+   bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
+                           ? true : false;
+
+   unsigned int mysql_timeout = 120;
+
+   string thread_name;
+
+#ifdef HAVE_PTHREAD_H  
+  
+  Thread_Info_Type* thread_info;
+  
+  if (   run_state.multithread_input 
+      || run_state.multithread_output
+      || run_state.multithread_include)
+    {
+      thread_info = Thread_Info_Type::get_thread_info(true);
+      thread_name = Thread_Info_Type::get_thread_name(thread_info);
+    }
+
+  else
+    {
+      thread_info = 0;
+      thread_name = "";
+    }
+
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+
+  thread_name = "";
+
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+
 @q **** (4) @>
 
 #if DEBUG_COMPILE
@@ -3967,73 +4000,6 @@ Scanner_Type::load_database(void)
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
-
-#ifndef MYSQL_AVAILABLE
-   cerr << "ERROR!  In `Scanner_Type::load_database':  `MYSQL_AVAILABLE' isn't defined."
-        << endl
-        << "Database not available.  This function should not have been called."
-        << endl
-        << "Exiting function unsuccessfully with return value 2."
-        << endl;
-
-   return 2;
-#endif 
-
-
-@q **** (4) @>
-@
-@<Define |Scanner_Type| functions@>=
- 
-#ifdef MYSQL_AVAILABLE
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "In `Scanner_Type::load_database':  MYSQL_AVAILABLE is defined." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-#else
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "In `Scanner_Type::load_database':  MYSQL_AVAILABLE is not defined." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-#endif 
-
-#ifdef MYSQL_UNAVAILABLE
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "In `Scanner_Type::load_database':  MYSQL_UNAVAILABLE is defined." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-#else
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "In `Scanner_Type::load_database':  MYSQL_UNAVAILABLE is not defined." << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-#endif 
-
-
-@q **** (4) @>
-@
-@<Define |Scanner_Type| functions@>=
-
-#ifndef MYSQL_AVAILABLE
-    cerr_strm << "WARNING!  In `Scanner_Type::load_database':" 
-              << endl
-              << "MySQL not available.  Can't load database." << endl
-              << "Exiting function unsuccessfully with return value 2."
-              << endl;
-    log_message(cerr_strm);
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
-
-    return 2;
-#endif 
-
 @q **** (4) @>
 @
 @<Define |Scanner_Type| functions@>=
@@ -4043,15 +4009,29 @@ Scanner_Type::load_database(void)
         cerr_strm << "In `Scanner_Type::load_database':" 
                   << endl
                   << "`database_enabled' == `true'.  Database is already loaded." << endl
-                  << "Exiting function successfully with return value 0." 
+                  << "Exiting function successfully with return value 2." 
                   << endl;
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
 
-        return 0;
-
+        return 2;
     }
+
+@q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+#ifndef MYSQL_AVAILABLE
+   cerr << "ERROR!  In `Scanner_Type::load_database':  `MYSQL_AVAILABLE' isn't defined."
+        << endl
+        << "Database not available.  This function should not have been called."
+        << endl
+        << "Exiting function unsuccessfully with return value 1."
+        << endl;
+
+   return 1;
+#endif 
 
 @q **** (4) @>
 @
@@ -4067,6 +4047,7 @@ Scanner_Type::load_database(void)
           cerr_strm << thread_name << "In `Scanner_Type::load_database':"
                     << endl
                     << "mysql_init succeeded." << endl; 
+          log_message(cerr_strm); 
           cerr_message(cerr_strm); 
           cerr_strm.str("");
        }
@@ -4102,8 +4083,8 @@ Scanner_Type::load_database(void)
     // mysql_options(mysql, MYSQL_OPT_RECONNECT, 0);
 
     mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
-  
-    if (!mysql_real_connect(mysql,"localhost","3dldf",0,"3dldf",0,NULL,0))
+
+    if (!mysql_real_connect(this->mysql, "localhost", "3dldf", 0, "3dldf", 0, NULL, 0))
     {
         cerr_strm << thread_name << "ERROR!  In `Scanner_Type::load_database':: `mysql_real_connect' failed, returning NULL." 
                   << endl 
@@ -4124,7 +4105,7 @@ Scanner_Type::load_database(void)
                   << endl 
                   << "`mysql_real_connect' succeeded." << endl;
         log_message(cerr_strm); 
-        cerr_message(cerr_strm, error_stop_value); 
+        cerr_message(cerr_strm); 
         cerr_strm.str("");
 
    }  
@@ -4142,7 +4123,7 @@ Scanner_Type::load_database(void)
         cerr_strm << thread_name << "Exiting `Scanner_Type::load_database' successfully with return value 0."
                   << endl;
         log_message(cerr_strm); 
-        cerr_message(cerr_strm, error_stop_value); 
+        cerr_message(cerr_strm); 
         cerr_strm.str("");
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -4191,18 +4172,11 @@ Scanner_Type::show_database(void)
       cerr_strm.str("");
     }
 
-#ifndef HAVE_LIBMYSQLCLIENT
-    cerr_strm << "WARNING!  In `Scanner_Type::show_database':" << endl
-              << "MySQL not available.  No database to show." << endl
-              << "Exiting function unsuccessfully with return value 1." 
-              << endl;
-    log_message(cerr_strm);
-    cerr_message(cerr_strm);
-    cerr_strm.str("");
+@q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
-    return 1;
-#endif 
-#ifndef HAVE_MYSQL_H
+#ifndef MYSQL_AVAILABLE
     cerr_strm << "WARNING!  In `Scanner_Type::show_database':" << endl
               << "MySQL not available.  No database to show." << endl
               << "Exiting function unsuccessfully with return value 1." 
@@ -4215,16 +4189,39 @@ Scanner_Type::show_database(void)
 #endif 
 
 @q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
+    if (!database_enabled)
+    {
+        cerr_strm << "WARNING!  In `Scanner_Type::show_database':" << endl
+                  << "`database_enabled' == `false'.  Database not enabled." << endl
+                  << "Exiting function with return value 2." 
+                  << endl;
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+        return 2;
+
+    }
+
+@q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+#if DEBUG_COMPILE
     if (DEBUG)
     {
       cerr_strm << "In `Scanner_Type::show_database':" << endl
-                << "MySQL available.  Showing database." << endl;
+                << "MySQL available and `database_enabled' == `true'."
+                << endl 
+                << "Showing database." << endl;
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
-
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 @
