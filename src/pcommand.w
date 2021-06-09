@@ -984,9 +984,10 @@ Added this rule.
 @<Define rules@>=
 @=command: LOAD ASTRONOMY@>@/
 {
+@q *** (3) @>
 
    @<Common declarations for rules@>@; 
- 
+
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
@@ -998,15 +999,91 @@ Added this rule.
        cerr_strm.str("");
 
    }  /* |if (DEBUG)|  */
-
 #endif /* |DEBUG_COMPILE|  */@;
+
+   if (astronomy_enabled)
+   {
+       cerr_strm << "In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                 << endl
+                 << "`astronomy_enabled' is already `true'."
+                 << endl 
+                 << "Not calling `Scanner_Type::load_astronomy'.  Continuing."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       goto END_LOAD_ASTRONOMY;
+   }
+
+
+@q *** (3) @>
+
+   status = scanner_node->load_astronomy();
+  
+@q *** (3) @>
+
+@ This code should never be reached.
+\initials{LDF 2021.06.09.}
+
+@<Define rules@>=
+
+   if (status == 2)
+   {
+       cerr_strm << "In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                 << endl
+                 << "`Scanner_Type::load_astronomy' returned 2:"
+                 << endl 
+                 << "Astronomy already loaded.  Not reloaded."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       goto END_LOAD_ASTRONOMY;
+
+   } 
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+   else if (status != 0)
+   {
+       cerr_strm << "ERROR!  In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                 << endl
+                 << "`Scanner_Type::load_astronomy' failed, returning " << status << "."
+                 << endl 
+                 << "Failed to load astronomy.  Will try to continue."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       goto END_LOAD_ASTRONOMY;
+   } 
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr_strm << "In `yyparse', rule `command --> LOAD ASTRONOMY':"
+                 << endl
+                 << "`Scanner_Type::load_astronomy' succeeded, returning 0."
+                 << endl
+                 << "Loaded astronomy successfully."
+                 << endl;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q *** (3) @>
+
+END_LOAD_ASTRONOMY:
 
    @=$$@> = 0;
 
 };
-
-
-
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
