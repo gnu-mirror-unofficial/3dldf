@@ -49,7 +49,6 @@
 
 /* * (1)  */
 
-
 use 3dldf;
 
 /* ** (2) Create tables  */
@@ -109,8 +108,11 @@ create table Constellations
 (
    rank_constellation int not null default 0,
    name varchar(64) not null default "",
+   name_genitive varchar(64) not null default "",
    abbreviation varchar(16) not null default ""
 );
+
+alter table Constellations add column name_genitive varchar(64) not null default "" after name;
 
 /* ** (2) Insert into Constellations  */
 
@@ -307,13 +309,13 @@ replace into Stars (
 values
 (28, "omega", "Psc", 9072, 0, 00, 15.8, +6, 57, 57);  
 
-select * from Stars order by flamsteed_designation_number\G
+-- select * from Stars order by flamsteed_designation_number\G
 
-select * from Stars where bayer_designation_greek_letter = "omega" and constellation_abbreviation = "Psc"\G
+-- select * from Stars where bayer_designation_greek_letter = "omega" and constellation_abbreviation = "Psc"\G
 
 /* *** (3)   */
 
-select * from Stars where bayer_designation_greek_letter = "omega" and constellation_abbreviation = "Psc"\G
+-- select * from Stars where bayer_designation_greek_letter = "omega" and constellation_abbreviation = "Psc"\G
 
 /* Done  28,  "omega",    "Psc",  9072,   0, 00, 15.8, +6, 57, 57, /* Done  */
 
@@ -335,7 +337,7 @@ values
 
 /* **** (4) */
 
-select * from Stars\G
+-- select * from Stars\G
 
 replace into Stars (
    flamsteed_designation_number,
@@ -1144,7 +1146,7 @@ replace into Stars (
    declination_minutes,
    declination_seconds)
 values
-(68,              "Psc",   274,   0, 58, 50.5,   +29, 05, 31);
+(68,  "",            "Psc",   274,   0, 58, 50.5,   +29, 05, 31);
 
 /* **** (4) */
 
@@ -1178,9 +1180,9 @@ replace into Stars (
 values
 (0, "sigma",     "Scl",   293,   1, 03, 19.3,   -31, 27, 10);
 
-select * from Stars where constellation_abbreviation = "Scl"\G
+-- select * from Stars where constellation_abbreviation = "Scl"\G
 
-select bayer_designation_greek_letter from Stars where constellation_abbreviation = "Scl"\G
+-- select bayer_designation_greek_letter from Stars where constellation_abbreviation = "Scl"\G
 
 /* **** (4) */
 
@@ -1213,6 +1215,8 @@ replace into Stars (
    declination_seconds)
 values
 (0, "beta",      "Phe",   322,   1, 06, 54.3,   -46, 37, 10);
+
+select * from Stars\G
 
 /* **** (4) */
 
@@ -1580,7 +1584,7 @@ replace into Stars (
    declination_minutes,
    declination_seconds)
 values
-(48, ""           "Cet",   433,   1, 30, 29.4,   -21, 32, 03);
+(48, "",           "Cet",   433,   1, 30, 29.4,   -21, 32, 03);
 
 /* **** (4) */
 
@@ -1630,7 +1634,7 @@ replace into Stars (
 values
 (50, "upsilon",  "And",   458,   1, 37, 53.4,   +41, 29, 5);
 
-select * from Stars where bayer_designation_greek_letter = "upsilon" and constellation_abbreviation = "And"\G
+-- select * from Stars where bayer_designation_greek_letter = "upsilon" and constellation_abbreviation = "And"\G
 
 /* **** (4) */
 
@@ -7055,13 +7059,13 @@ values
 
 /* **** (4)  Sirius  */
 
-select * from Stars where right_ascension_hours = 6 and right_ascension_minutes = 45\G
+-- select * from Stars where right_ascension_hours = 6 and right_ascension_minutes = 45\G
 
 update Stars set common_name = "Sirius" where right_ascension_hours = 6 and right_ascension_minutes = 45;
 
 update Stars set constellation_full_name = "Canis Majoris" where constellation_abbreviation = "CMa";
 
-select * from Stars where bs_hr_number = 2491\G
+-- select * from Stars where bs_hr_number = 2491\G
 
   1. Alpha Canis Majoris       Sirius            06, 45, -16.7  227.2  -8.9  A1V          -1.46   1.43  379.21 1.58     9
 
@@ -23867,26 +23871,26 @@ replace into Stars (
 values
 (0, "pi",       "Phe",  9069,  23, 59, 52.9,   -52, 38, 33);
 
-select * from Stars order by bs_hr_number\G
+-- select * from Stars where common_name <> "" order by bs_hr_number\G
 
-select bs_hr_number from Stars order by bs_hr_number;
+-- select bs_hr_number from Stars order by bs_hr_number;
 
-select "Here I am.";
+-- select "Here I am.";
 
-select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars order by constellation_number\G
+-- select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars order by constellation_number\G
 
-select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars
+-- select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars
 where constellation_full_name = "Delphinus";
 
-select constellation_full_name from Stars where constellation_full_name\G
+-- select constellation_full_name from Stars where constellation_full_name\G
 
-select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars
+-- select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars
 where constellation_number = 0;
 
-select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars
+-- select distinct constellation_full_name, constellation_abbreviation, constellation_number from Stars
 order by constellation_full_name\G
 
-select * from Stars where constellation_number = 0\G
+-- select * from Stars where constellation_number = 0\G
 
 /* *** (3) */
 
@@ -24186,22 +24190,22 @@ stars_with_celestial_coordinates.txt
 
 http://www.atlasoftheuniverse.com/stars.html
 
-select * from Stars where right_ascension_hours = 6 and right_ascension_minutes = 45\G
+-- select * from Stars where right_ascension_hours = 6 and right_ascension_minutes = 45\G
 
-select * from Stars where bayer_designation_greek_letter = "Alpha"\G
-select * from Stars where bayer_designation_greek_letter = "ALPHA"\G
+-- select * from Stars where bayer_designation_greek_letter = "Alpha"\G
+-- select * from Stars where bayer_designation_greek_letter = "ALPHA"\G
 
 /* **** (4) */
 
-select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_full_name = "canis majoris";
+-- select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_full_name = "canis majoris";
 
-select constellation_full_name from Stars order by constellation_full_name\G
+-- select constellation_full_name from Stars order by constellation_full_name\G
 
-select distinct constellation_full_name from Stars order by constellation_full_name;
+-- select distinct constellation_full_name from Stars order by constellation_full_name;
 
-select * from Stars\G
+-- select * from Stars\G
 
-select * from Stars where common_name = "Sirius"\G
+-- select * from Stars where common_name = "Sirius"\G
 
 /* **** (4) */
 
