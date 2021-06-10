@@ -2432,7 +2432,9 @@ Added token declaration for |SCANNER_NODE|.
 @=%token <int_value> PREFIX@>@/
 @=%token <int_value> LOAD@>@/
 @=%token <int_value> ASTRONOMY@>@/
-
+@=%token <int_value> PLOT@>@/
+@=%token <int_value> MERCATOR@>@/
+@=%token <int_value> SINUSOIDAL@>@/
 
 @q *** (3) Types for transformations.@>
 @*2 Types for transformations.

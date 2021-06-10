@@ -114,6 +114,8 @@ create table Constellations
 
 alter table Constellations add column name_genitive varchar(64) not null default "" after name;
 
+show columns from Constellations;
+
 /* ** (2) Insert into Constellations  */
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (1, "Hya", "Hydra");
