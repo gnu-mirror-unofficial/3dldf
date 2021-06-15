@@ -69,6 +69,7 @@ create table Stars
    approx_rank_apparent_magnitude int not null default 0,
    constellation_abbreviation char(3) not null default "",
    constellation_full_name varchar(32) not null default "",
+   constellation_name_genitive varchar(64) not null default "",
    constellation_number int not null default 0,
    right_ascension_hours int not null default 0,
    right_ascension_minutes int not null default 0,
@@ -87,8 +88,8 @@ create table ttemp
 
 alter table Stars add column right_ascension_decimal_hours float not null default 0.0 after right_ascension_seconds;
 alter table Stars add column declination_decimal_degrees float not null default 0.0 after declination_seconds;
-alter table Stars add column constellation_number int not null default 0 after constellation_full_name;
-
+alter table Stars add column constellation_number int not null default 0 after constellation_name_genitive;
+alter table Stars add column constellation_name_genitive varchar(64) not null default "" after constellation_full_name;
    
 alter table Stars add column approx_rank_apparent_magnitude int not null default 0 after bs_hr_number;
 
