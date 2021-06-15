@@ -122,7 +122,7 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (02, "Vir", "Virgo");
 
-insert ignore into Constellations (rank_constellation, abbreviation, name) values (03, "UMa", "Ursa");
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (03, "UMa", "Ursa Major");
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (04, "Cet", "Cetus");
 
@@ -228,7 +228,7 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (55, "Vul", "Vulpecula");
 
-insert ignore into Constellations (rank_constellation, abbreviation, name) values (56, "UMi", "Ursa");
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (56, "UMi", "Ursa Minor");
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (57, "Tel", "Telescopium");
 
@@ -236,7 +236,7 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (59, "Pic", "Pictor");
 
-insert ignore into Constellations (rank_constellation, abbreviation, name) values (60, "PsA", "Piscis");
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (60, "PsA", "Piscis Austrinus");
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (61, "Hyi", "Hydrus");
 
@@ -244,7 +244,7 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (63, "Ara", "Ara");
 
-insert ignore into Constellations (rank_constellation, abbreviation, name) values (64, "LMi", "Leo");
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (64, "LMi", "Leo Minor");
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (65, "Pyx", "Pyxis");
 
@@ -262,7 +262,7 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (72, "Dor", "Dorado");
 
-insert ignore into Constellations (rank_constellation, abbreviation, name) values (73, "CrB", "Corona");
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (73, "CrB", "Corona Borealis");
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (74, "Nor", "Norma");
 
@@ -276,7 +276,7 @@ insert ignore into Constellations (rank_constellation, abbreviation, name) value
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (79, "Cha", "Chamaeleon");
 
-insert ignore into Constellations (rank_constellation, abbreviation, name) values (80, "CrA", "Corona");
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (80, "CrA", "Corona Australis");
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (81, "Cae", "Caelum");
 
