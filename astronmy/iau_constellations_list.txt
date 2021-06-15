@@ -2,17 +2,19 @@ https://en.wikipedia.org/wiki/IAU_designated_constellations#List
 
 Constellation   Abbreviations   Genitive        Origin  Meaning         Brightest star
 
+select * from Constellations order by name; limit 10;
+
 update Constellations set name_genitive = "Andromedae" where name = "Andromeda";
 
 update Constellations set name_genitive = "Antliae" where name = "Antlia";
 
-update Constellations set name_genitive = "Apodis" where name = "Apus";"
+update Constellations set name_genitive = "Apodis" where name = "Apus";
 
 update Constellations set name_genitive = "Aquarii" where name = "Aquarius";
 
 update Constellations set name_genitive = "Aquilae" where name = "Aquila";
 
-update Constellations set name_genitive = "Arae    Arae" where name = "Ara";
+update Constellations set name_genitive = "Arae" where name = "Ara";
 
 update Constellations set name_genitive = "Arietis" where name = "Aries";
 
@@ -26,9 +28,9 @@ update Constellations set name_genitive = "Camelopardalis" where name = "Camelop
 
 update Constellations set name_genitive = "Cancri" where name = "Cancer";
 
-/* !! START HERE:  Look this up.  Continue adding "update" commands.  */
-
 update Constellations set name_genitive = "Canum Venaticorum" where name = "Canes Venatici";
+
+select * from Constellations order by name; limit 10 offset 9;
 
 update Constellations set name = "Canis Major" where abbreviation = "CMa";
 
@@ -68,7 +70,24 @@ update Constellations set name_genitive = "Circini" where name = "Circinus";
 
 update Constellations set name_genitive = "Columbae" where name = "Columba";
 
+delete from Constellations where name = "Coma";
+
+delete from Constellations where name = "Corona";
+
 update Constellations set name_genitive = "Comae Berenices" where name = "Coma Berenices";     
+
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (80, "CrA", "Corona Australis");
+
+insert ignore into Constellations (rank_constellation, abbreviation, name) values (73, "CrB", "Corona Borealis");
+
+update Stars set constellation_full_name = "Corona_Australis" where constellation_abbreviation = "CrA";
+update Stars set constellation_number = 80 where constellation_abbreviation = "CrA";
+
+update Stars set constellation_full_name = "Corona_Borealis" where constellation_abbreviation = "CrB";
+update Stars set constellation_number = 73 where constellation_abbreviation = "CrB";
+
+select * from Constellations order by name;
+
 
 update Constellations set name_genitive = "Coronae Australis" where name = "Corona Australis";
 
@@ -83,6 +102,8 @@ update Constellations set name_genitive = "Crucis" where name = "Crux";
 update Constellations set name_genitive = "Cygni" where name = "Cygnus";
 
 update Constellations set name_genitive = "Delphini" where name = "Delphinus";
+
+update Constellations set abbreviation = "Del" where name = "Delphinus";
 
 update Constellations set name_genitive = "Doradus" where name = "Dorado";
 
@@ -202,7 +223,25 @@ update Constellations set name_genitive = "Australis" where name = "Triangulum A
 
 update Constellations set name_genitive = "Tucanae" where name = "Tucana";
 
+update Constellations set rank_constellation = 3 where abbreviation = "UMa";
+
 replace into Constellations (name, abbreviation, name_genitive) values ("Ursa Major", "UMa", "Ursae Majoris");
+
+update Constellations set rank_constellation = 56 where abbreviation = "UMi";
+
+select * from Constellations where rank_constellation = 0;
+
+select * from Constellations order by name;
+select * from Constellations order by rank;
+
+-- 0 | Leo              | Leonis          | Leo          |
+-- 0 | Leo Minor        | Leonis Minoris  | LMi          |
+-- 0 | Piscis Austrinus | Piscis Austrini | PsA          |
+
+update Constellations set rank_constellation = 12 where abbreviation = "Leo";
+update Constellations set rank_constellation = 64 where abbreviation = "LMi";
+update Constellations set rank_constellation = 60 where abbreviation = "PsA";
+
 
 replace into Constellations (name, abbreviation, name_genitive) values ("Ursa Minor", "UMi", "Ursae Minoris");
 
@@ -215,9 +254,7 @@ update Constellations set name_genitive = "Volantis" where name = "Volans";
 update Constellations set name_genitive = "Vulpeculae" where name = "Vulpecula";
 
 select * from Constellations order by name;
-
-/* !! START HERE:  Fix "Corona".  Get ranks for constellations where rank == 0.  */ 
-
+select * from Constellations order by rank_constellation;
 
 ************************************************************************
 
@@ -555,3 +592,7 @@ Vulp Vulpeculae
 1690,
 Firmamentum Sobiescianum,
 Hevelius fox Anser
+
+/* Local Variables: */
+/* mode:SQL         */
+/* End:             */
