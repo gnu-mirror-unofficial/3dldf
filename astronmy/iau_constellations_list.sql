@@ -219,7 +219,9 @@ update Constellations set name_genitive = "Telescopii" where name = "Telescopium
 
 update Constellations set name_genitive = "Trianguli" where name = "Triangulum";
 
-update Constellations set name_genitive = "Australis" where name = "Triangulum Australe TrA";
+update Stars set constellation_full_name = "Triangulum Australe" where constellation_abbreviation = "TrA";
+
+update Stars set constellation_name_genitive = "Trianguli Australis" where constellation_abbreviation = "TrA";
 
 update Constellations set name_genitive = "Tucanae" where name = "Tucana";
 

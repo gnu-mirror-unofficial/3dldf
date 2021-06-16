@@ -1356,6 +1356,19 @@ Hoffleit D, Warren Jr W, (1991), Harvard Revised Bright Star Catalogue, 5th Edit
 
 /* * (1) ***************************************************************************************************** */
 
+/* ** (2) */
+
+/* !! START HERE:  LDF 2021.06.16.  Get info for this star:  */ 
+
+insert into Stars (approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive)
+values (105,  "Zubenelgenubi", "Alpha", "Librae");
+
+update Stars set constellation_full_name = "Libra" where common_name = "Zubenelgenubi";
+
+/* ** (2) */
+
+/* * (1) ***************************************************************************************************** */
+
 select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_name_genitive = "canis majoris"\G
 
 1. Alpha Canis Majoris       Sirius            06 45 -16.7  227.2  -8.9  A1V          -1.46   1.43  379.21 1.58     9
