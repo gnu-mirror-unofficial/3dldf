@@ -1,7 +1,11 @@
 #! /bin/bash
 
+#### * (1) Top
+
 #### /home/laurence/3DLDF-3.0/astronmy/stars_with_celestial_coordinates.sh
 #### Created by Laurence D. Finston (LDF) Wed 16 Jun 2021 10:14:31 AM CEST
+
+#### * (1)
 
 a=`echo "select bayer_designation_greek_letter from Stars where \
    bayer_designation_greek_letter = \"Epsilon\" and constellation_name_genitive = \"Centauri\";" | mysql --batch --silent 3dldf`
@@ -193,6 +197,26 @@ C-ä
 -- !! 300. Xi Serpentis                                17 38 -15.4   10.6  +8.7  F0III         3.54   0.99   30.93 1.03   105
 
 exit 0
+
+#### * (1)
+
+#### This works.  LDF 2021.06.16.
+
+a=`echo 'select * from Stars where \
+   bayer_designation_greek_letter = "Epsilon" and constellation_name_genitive = "Centauri"\G' | mysql --batch 3dldf`
+
+echo "a == $a"
+
+if test -z "$a" 
+then
+   echo "a is empty.  a == $a"
+else
+   echo "a is non-empty.  a == $a"
+fi
+
+exit 0
+
+
 
 ## Local Variables:
 ## mode:plain-TeX
