@@ -693,9 +693,10 @@ and constellation_name_genitive = "Draconis";
 update Stars set approx_rank_apparent_magnitude = 73, common_name = "Mintaka" where bayer_designation_greek_letter = "Delta"
 and constellation_name_genitive = "Orionis";
 
-
 update Stars set approx_rank_apparent_magnitude = 74, common_name = "Caph" where bayer_designation_greek_letter = "Beta"
 and constellation_name_genitive = "Cassiopeiae";
+
+select * from Stars where common_name = "Caph"\G
 
 /* !! START HERE:  LDF 2021.06.15.  */ 
 
@@ -703,82 +704,201 @@ select "Here I am";
 
 -- !! 75. Epsilon Centauri                            13 40 -53.5  310.2  +8.7  B1III         2.29  -3.02    8.68 0.77   380
 
-76. Delta Scorpii             Dschubba          16 00 -22.6  350.1 +22.6  B0.5IV        2.29  -3.16    8.12 0.88   400
-77. Epsilon Scorpii           Wei               16 50 -34.3  348.8  +6.6  K2.5III       2.29   0.78   49.85 0.81    65
-78. Alpha Lupi                Men               14 42 -47.4  321.6 +11.4  B1.5III       2.30  -3.83    5.95 0.76   550
+update Stars set approx_rank_apparent_magnitude = 76, common_name = "Dschubba" where bayer_designation_greek_letter = "Delta"
+and constellation_name_genitive = "Scorpii";
+
+update Stars set approx_rank_apparent_magnitude = 77, common_name = "Wei" where bayer_designation_greek_letter = "Epsilon"
+and constellation_name_genitive = "Scorpii";
+
+update Stars set approx_rank_apparent_magnitude = 78, common_name = "Men" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Lupi";
 
 -- !! 79. Eta Centauri                                14 36 -42.2  322.9 +16.6  B1.5V         2.33v -2.55v  10.57 0.83   310
 
-80. Beta Ursae Majoris        Merak             11 02 +56.4  149.1 +54.8  A1V           2.34   0.41   41.07 0.60    79
-81. Epsilon Boötis            Izar              14 45 +27.1   39.4 +64.8  K0II-III+A2V  2.35  -1.69   15.55 0.78   210
-82. Epsilon Pegasi            Enif              21 44  +9.9   65.6 -31.4  K2Ib          2.38  -4.19    4.85 0.84   670
-83. Kappa Scorpii             Girtab            17 42 -39.0  351.0  -4.6  B1.5III       2.39  -3.38    7.03 0.73   460
-84. Alpha Phoenicis           Ankaa             00 26 -42.3  320.2 -74.0  K0III         2.40   0.52   42.14 0.78    77
-85. Gamma Ursae Majoris       Phecda            11 54 +53.7  140.8 +61.4  A0V           2.41   0.36   38.99 0.68    84
-86. Eta Ophiuchi              Sabik             17 10 -15.7    6.7 +14.1  A1V+A3V       2.43   0.37   38.77 0.86    84
-87. Beta Pegasi               Scheat            23 04 +28.1   95.8 -29.1  M2III         2.44v -1.49v  16.37 0.72   200
-88. Eta Canis Majoris         Aludra            07 24 -29.3  242.6  -6.5  B5Ia          2.45  -7.51    1.02 0.57  3000
-89. Alpha Cephei              Alderamin         21 19 +62.6  101.0  +9.1  A7IV          2.45   1.58   66.84 0.49    49
-90. Kappa Velorum             Markeb            09 22 -55.0  275.9  -3.5  B2IV          2.47  -3.62    6.05 0.48   540
-91. Epsilon Cygni             Gienah            20 46 +34.0   76.0  -5.7  K0III         2.48   0.76   45.26 0.53    72
-92. Alpha Pegasi              Markab            23 05 +15.2   88.4 -40.4  B9IV          2.49  -0.67   23.36 0.76   140
-93. Alpha Ceti                Menkar            03 02  +4.1  173.3 -45.6  M2III         2.54  -1.61   14.82 0.83   220
-94. Zeta Ophiuchi             Han               16 37 -10.6    6.2 +23.6  O9.5V         2.54  -3.20    7.12 0.71   460
-95. Zeta Centauri             Al Nair al Kent.  13 56 -47.3  314.2 +14.2  B2.5IV        2.55  -2.81    8.48 0.74   390
-96. Delta Leonis              Zosma             11 14 +20.5  224.3 +66.8  A4V           2.56   1.32   56.52 0.83    58
-97. Beta Scorpii              Graffias          16 05 -19.8  353.1 +23.7  B1V+B2V       2.56  -3.50    6.15 1.12   530
-98. Alpha Leporis             Arneb             05 33 -17.8  221.0 -25.1  F0Ib          2.58  -5.40    2.54 0.72  1300
+update Stars set approx_rank_apparent_magnitude = 80, common_name = "Merak" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Ursae Majoris";
+
+update Stars set approx_rank_apparent_magnitude = 81, common_name = "Izar" where bayer_designation_greek_letter = "Epsilon"
+and constellation_name_genitive = "Boötis";
+
+update Stars set approx_rank_apparent_magnitude = 82, common_name = "Enif" where bayer_designation_greek_letter = "Epsilon"
+and constellation_name_genitive = "Pegasi";
+
+update Stars set approx_rank_apparent_magnitude = 83, common_name = "Girtab" where bayer_designation_greek_letter = "Kappa"
+and constellation_name_genitive = "Scorpii";
+
+update Stars set approx_rank_apparent_magnitude = 84, common_name = "Ankaa" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Phoenicis";
+
+update Stars set approx_rank_apparent_magnitude = 85, common_name = "Phecda" where bayer_designation_greek_letter = "Gamma"
+and constellation_name_genitive = "Ursae Majoris";
+
+update Stars set approx_rank_apparent_magnitude = 86, common_name = "Sabik" where bayer_designation_greek_letter = "Eta"
+and constellation_name_genitive = "Ophiuchi";
+
+update Stars set approx_rank_apparent_magnitude = 87, common_name = "Scheat" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Pegasi";
+
+update Stars set approx_rank_apparent_magnitude = 88, common_name = "Aludra" where bayer_designation_greek_letter = "Eta"
+and constellation_name_genitive = "Canis Majoris";
+
+update Stars set approx_rank_apparent_magnitude = 89, common_name = "Alderamin" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Cephei";
+
+update Stars set approx_rank_apparent_magnitude = 90, common_name = "Markeb" where bayer_designation_greek_letter = "Kappa"
+and constellation_name_genitive = "Velorum";
+
+update Stars set approx_rank_apparent_magnitude = 91, common_name = "Gienah" where bayer_designation_greek_letter = "Epsilon"
+and constellation_name_genitive = "Cygni";
+
+update Stars set approx_rank_apparent_magnitude = 92, common_name = "Markab" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Pegasi";
+
+update Stars set approx_rank_apparent_magnitude = 93, common_name = "Menkar" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Ceti";
+
+update Stars set approx_rank_apparent_magnitude = 94, common_name = "Han" where bayer_designation_greek_letter = "Zeta"
+and constellation_name_genitive = "Ophiuchi";
+
+update Stars set approx_rank_apparent_magnitude = 95, common_name = "Al Nair al Kent." where bayer_designation_greek_letter = "Zeta"
+and constellation_name_genitive = "Centauri";
+
+-- select * from Stars where approx_rank_apparent_magnitude = 95\G
+
+update Stars set approx_rank_apparent_magnitude = 96, common_name = "Zosma" where bayer_designation_greek_letter = "Delta"
+and constellation_name_genitive = "Leonis";
+
+update Stars set approx_rank_apparent_magnitude = 97, common_name = "Graffias" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Scorpii";
+
+update Stars set approx_rank_apparent_magnitude = 98, common_name = "Arneb" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Leporis";
+
 
 -- !! 99. Delta Centauri                              12 08 -50.7  295.9 +11.6  B2IV          2.58v -2.84v   8.25 0.79   400
 
-100. Gamma Corvi               Gienah Ghurab     12 16 -17.5  291.1 +44.6  B8III         2.58  -0.94   19.78 0.81   165
-101. Zeta Sagittarii           Ascella           19 03 -29.9    6.9 -15.5  A2IV+A4V      2.60   0.42   36.61 1.37    89
-102. Beta Librae               Zubeneschamali    15 17  -9.4  352.0 +39.2  B8V           2.61  -0.84   20.38 0.87   160
-103. Alpha Serpentis           Unukalhai         15 44  +6.4   14.1 +44.1  K2III         2.63   0.87   44.54 0.71    73
-104. Beta Arietis              Sheratan          01 55 +20.8  142.4 -39.7  A5V           2.64   1.33   54.74 0.75    60
-105. Alpha Librae              Zubenelgenubi     14 51 -16.0  340.4 +38.0  A3IV+F4IV     2.64   0.77   42.25 1.05    77
-106. Alpha Columbae            Phact             05 40 -34.1  238.9 -28.8  B7IV          2.65  -1.93   12.16 0.60   270
-107. Theta Aurigae                               06 00 +37.2  174.4  +6.8  A0III+G2V     2.65  -0.98   18.83 0.81   170
-108. Beta Corvi                Kraz              12 34 -23.4  297.8 +39.3  G5III         2.65  -0.51   23.34 0.80   140
-109. Delta Cassiopeiae         Ruchbah           01 26 +60.2  127.2  -2.4  A5III         2.66   0.24   32.81 0.62    99
-110. Eta Boötis                Muphrid           13 55 +18.4    5.5 +73.0  G0IV          2.68   2.41   88.17 0.75    37
-111. Beta Lupi                 Ke Kouan          14 59 -43.1  326.4 +13.9  B2III         2.68  -3.35    6.23 0.71   520
-112. Iota Aurigae              Hassaleh          04 57 +33.2  170.6  -6.1  K3II          2.69  -3.29    6.37 0.96   510
+
+update Stars set approx_rank_apparent_magnitude = 100, common_name = "Gienah Ghurab" where bayer_designation_greek_letter = "Gamma"
+and constellation_name_genitive = "Corvi";
+
+update Stars set approx_rank_apparent_magnitude = 101, common_name = "Ascella" where bayer_designation_greek_letter = "Zeta"
+and constellation_name_genitive = "Sagittarii";
+
+update Stars set approx_rank_apparent_magnitude = 102, common_name = "Zubeneschamali" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Librae";
+
+update Stars set approx_rank_apparent_magnitude = 103, common_name = "Unukalhai" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Serpentis";
+
+update Stars set approx_rank_apparent_magnitude = 104, common_name = "Sheratan" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Arietis";
+
+-- !! Not found!
+-- update Stars set approx_rank_apparent_magnitude = 105, common_name = "Zubenelgenubi" where bayer_designation_greek_letter = "Alpha"
+-- and constellation_name_genitive = "Librae";
+
+update Stars set approx_rank_apparent_magnitude = 106, common_name = "Phact" where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Columbae";
+
+-- !! 107. Theta Aurigae                               06 00 +37.2  174.4  +6.8  A0III+G2V     2.65  -0.98   18.83 0.81   170
+
+update Stars set approx_rank_apparent_magnitude = 108, common_name = "Kraz" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Corvi";
+
+update Stars set approx_rank_apparent_magnitude = 109, common_name = "Ruchbah" where bayer_designation_greek_letter = "Delta"
+and constellation_name_genitive = "Cassiopeiae";
+
+update Stars set approx_rank_apparent_magnitude = 110, common_name = "Muphrid" where bayer_designation_greek_letter = "Eta"
+and constellation_name_genitive = "Boötis";
+
+update Stars set approx_rank_apparent_magnitude = 111, common_name = "Ke Kouan" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Lupi";
+
+update Stars set approx_rank_apparent_magnitude = 112, common_name = "Hassaleh" where bayer_designation_greek_letter = "Iota"
+and constellation_name_genitive = "Aurigae";
+
 
 -- !! 113. Mu Velorum                                  10 47 -49.4  283.1  +8.6  G5III+G2V     2.69  -0.06   28.18 0.49   116
 -- !! 114. Alpha Muscae                                12 37 -69.1  301.6  -6.3  B2V           2.69  -2.17   10.67 0.48   310
 
-115. Upsilon Scorpii           Lesath            17 31 -37.3  351.3  -1.9  B2IV          2.70  -3.31    6.29 0.81   520
+update Stars set approx_rank_apparent_magnitude = 115, common_name = "Lesath" where bayer_designation_greek_letter = "Upsilon"
+and constellation_name_genitive = "Scorpii";
+
 
 -- !! 116. Pi Puppis                                   07 17 -37.1  249.0 -11.3  K4Ib          2.71  -4.92    2.98 0.55  1100
 
-117. Delta Sagittarii          Kaus Meridionalis 18 21 -29.8    3.0  -7.2  K2II          2.72  -2.14   10.67 0.93   310
-118. Gamma Aquilae             Tarazed           19 46 +10.6   48.7  -7.0  K3II          2.72  -3.03    7.08 0.75   460
-119. Delta Ophiuchi            Yed Prior         16 14  -3.7    8.8 +32.3  M1III         2.73  -0.86   19.16 1.02   170
-120. Eta Draconis              Aldhibain         16 24 +61.5   92.6 +40.9  G8III         2.73   0.58   37.18 0.45    88
+update Stars set approx_rank_apparent_magnitude = 117, common_name = "Kaus Meridionalis" where bayer_designation_greek_letter = "Delta"
+and constellation_name_genitive = "Sagittarii";
+
+update Stars set approx_rank_apparent_magnitude = 118, common_name = "Tarazed" where bayer_designation_greek_letter = "Gamma"
+and constellation_name_genitive = "Aquilae";
+
+update Stars set approx_rank_apparent_magnitude = 119, common_name = "Yed Prior" where bayer_designation_greek_letter = "Delta"
+and constellation_name_genitive = "Ophiuchi";
+
+update Stars set approx_rank_apparent_magnitude = 120, common_name = "Aldhibain" where bayer_designation_greek_letter = "Eta"
+and constellation_name_genitive = "Draconis";
+
 
 -- !! 121. Theta Carinae                               10 43 -64.4  289.6  -4.9  B0V           2.74  -2.91    7.43 0.50   440
 
-122. Gamma Virginis            Porrima           12 42  -1.5  298.1 +61.3  F0V+F0V       2.74   2.38   84.53 1.18    39
-123. Iota Orionis              Hatysa            05 35  -5.9  209.5 -19.7  O9III         2.75  -5.30    2.46 0.77  1300
+update Stars set approx_rank_apparent_magnitude = 122, common_name = "Porrima" where bayer_designation_greek_letter = "Gamma"
+and constellation_name_genitive = "Virginis";
+
+update Stars set approx_rank_apparent_magnitude = 123, common_name = "Hatysa" where bayer_designation_greek_letter = "Iota"
+and constellation_name_genitive = "Orionis";
+
 
 -- !! 124. Iota Centauri                               13 21 -36.7  309.5 +25.8  A2V           2.75   1.48   55.64 0.74    59
 
-125. Beta Ophiuchi             Cebalrai          17 43  +4.6   29.2 +17.3  K2III         2.76   0.76   39.78 0.75    82
-126. Beta Eridani              Kursa             05 08  -5.1  205.4 -25.3  A3III         2.78   0.60   36.71 0.76    89
-127. Beta Herculis             Kornephoros       16 30 +21.5   39.0 +40.3  G7III         2.78  -0.50   22.07 1.00   150
+update Stars set approx_rank_apparent_magnitude = 125, common_name = "Cebalrai" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Ophiuchi";
+
+update Stars set approx_rank_apparent_magnitude = 126, common_name = "Kursa" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Eridani";
+
+update Stars set approx_rank_apparent_magnitude = 127, common_name = "Kornephoros" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Herculis";
+
 
 -- !! 128. Delta Crucis                                12 15 -58.7  298.2  +3.8  B2IV          2.79  -2.45    8.96 0.60   360
 
-129. Beta Draconis             Rastaban          17 30 +52.3   79.6 +33.4  G2II          2.79  -2.43    9.02 0.49   360
-130. Alpha Canum Venaticorum   Cor Caroli        12 56 +38.3  118.3 +78.8  A0IV+F0V      2.80v  0.16v  29.60 1.04   110
+update Stars set approx_rank_apparent_magnitude = 129, common_name = "Rastaban" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Draconis";
+
+-- !! Not found
+-- update Stars set approx_rank_apparent_magnitude = 130, common_name = "Cor Caroli" where bayer_designation_greek_letter = "Alpha"
+-- and constellation_name_genitive = "Canum Venaticorum";
+
 -- !! 131. Gamma Lupi                                  15 35 -41.2  333.2 +11.9  B2IV-V+B2IV-V 2.80  -3.40    5.75 1.24   570
-132. Beta Leporis              Nihal             05 28 -20.8  223.6 -27.3  G5III         2.81  -0.63   20.49 0.85   160
-133. Zeta Herculis             Rutilicus         16 41 +31.6   52.6 +40.3  F9IV+G7V      2.81   2.64   92.63 0.60    35
+
+update Stars set approx_rank_apparent_magnitude = 132, common_name = "Nihal" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Leporis";
+
+update Stars set approx_rank_apparent_magnitude = 133, common_name = "Rutilicus" where bayer_designation_greek_letter = "Zeta"
+and constellation_name_genitive = "Herculis";
+
 -- !! 134. Beta Hydri                                  00 26 -77.3  304.7 -39.7  G2IV          2.82   3.45  133.78 0.51    24
 -- !! 135. Tau Scorpii                                 16 36 -28.2  351.6 +12.8  B0V           2.82  -2.78    7.59 0.78   430
-136. Lambda Sagittarii         Kaus Borealis     18 28 -25.4    7.7  -6.5  K1III         2.82   0.95   42.20 0.90    77
-137. Gamma Pegasi              Algenib           00 13 +15.2  109.4 -46.7  B2IV          2.83  -2.22    9.79 0.81   330
+
+update Stars set approx_rank_apparent_magnitude = 136, common_name = "Kaus Borealis" where bayer_designation_greek_letter = "Lambda"
+and constellation_name_genitive = "Sagittarii";
+
+update Stars set approx_rank_apparent_magnitude = 137, common_name = "Algenib" where bayer_designation_greek_letter = "Gamma"
+and constellation_name_genitive = "Pegasi";
+
+/* !! START HERE:  LDF 2021.06.16.  */ 
+
+/*
+
+(fset 'temp-macro
+   [C-f12 ?c ?\C-  C-right ?\C-w up up ?\C-s ?= ?\C-  right ?\C-y down down ?\C-a ?\C-  C-right C-left ?\C-w ?\C-  escape ?d up up ?\C-e left ?\C-y down down ?\C-a ?\C-  C-right C-left ?\C-w ?\C-  escape ?\C-s ?  ?  ?\C-  C-left C-right ?\C-  ?\C-a ?\C-w up ?\C-e left left ?\C-y down ?\C-a ?\C-  C-right C-left ?\C-w ?\C-  escape ?\C-s ?\[ ?0 ?- ?9 ?\] left ?\C-  C-left C-right ?\C-  ?\C-a ?\C-w up up ?\C-s ?\" ?\" left ?\C-y ?\C-a ?\C-  down down ?\C-i ?\C-k ?\C-a ?\C-k return ?\C-x ?\C-x ?\C-x ?\C-x])
+(global-set-key [67109092] 'temp-macro)
+
+C-ä
+
+*/
+
 138. Rho Puppis                Turais            08 08 -24.3  243.2  +4.5  F6III         2.83   1.41   51.99 0.66    63
 -- !! 139. Beta Trianguli Australis                    15 55 -63.4  321.9  -7.5  F2IV          2.83   2.38   81.24 0.62    40
 -- !! 140. Zeta Persei                                 03 54 +31.9  162.3 -16.7  B1II+B8IV+A2V 2.84  -4.55    3.32 0.75   980
@@ -877,75 +997,75 @@ select "Here I am";
 /* !! START HERE:  Commenting-out lines without common names.  LDF 2021.06.15.  */ 
 
 
-232. Mu Centauri                                 13 50 -42.5  314.2 +19.1  B2IV-V        3.30v -2.74v   6.19 0.71   530
+-- !! 232. Mu Centauri                                 13 50 -42.5  314.2 +19.1  B2IV-V        3.30v -2.74v   6.19 0.71   530
 233. Eta Geminorum             Propus            06 15 +22.5  188.9  +2.5  M3III         3.31v -1.84v   9.34 1.99   350
 234. Alpha Herculis            Rasalgethi        17 15 +14.4   35.5 +27.8  M5III+G5III   3.31v -2.04v   8.53 2.80   380
-235. Gamma Arae                                  17 25 -56.4  334.6 -11.5  B1III         3.31  -4.40    2.87 0.75  1100
-236. Beta Phoenicis                              01 06 -46.7  295.5 -70.2  G8III         3.32  -0.55   16.9  9.9    190
+-- !! 235. Gamma Arae                                  17 25 -56.4  334.6 -11.5  B1III         3.31  -4.40    2.87 0.75  1100
+-- !! 236. Beta Phoenicis                              01 06 -46.7  295.5 -70.2  G8III         3.32  -0.55   16.9  9.9    190
 237. Rho Persei                Gorgonea Tertia   03 05 +38.8  149.6 -17.0  M3III         3.32v -1.67v  10.03 0.83   325
 238. Delta Ursae Majoris       Megrez            12 15 +57.0  132.6 +59.4  A3V           3.32   1.33   40.05 0.60    81
-239. Eta Scorpii                                 17 12 -43.2  344.4  -2.3  F3III-IV      3.32   1.61   45.56 0.79    72
-240. Nu Ophiuchi                                 17 59 -09.8   18.2  +7.0  K0III         3.32  -0.03   21.35 0.79   155
-241. Tau Sagittarii                              19 07 -27.7    9.3 -15.4  K1III         3.32   0.48   27.09 1.48   120
-242. Alpha Reticuli                              04 14 -62.5  274.3 -41.7  G8III         3.33  -0.17   19.98 0.45   165
+-- !! 239. Eta Scorpii                                 17 12 -43.2  344.4  -2.3  F3III-IV      3.32   1.61   45.56 0.79    72
+-- !! 240. Nu Ophiuchi                                 17 59 -09.8   18.2  +7.0  K0III         3.32  -0.03   21.35 0.79   155
+-- !! 241. Tau Sagittarii                              19 07 -27.7    9.3 -15.4  K1III         3.32   0.48   27.09 1.48   120
+-- !! 242. Alpha Reticuli                              04 14 -62.5  274.3 -41.7  G8III         3.33  -0.17   19.98 0.45   165
 243. Theta Leonis              Chort             11 14 +15.4  235.4 +64.6  A2III         3.33  -0.35   18.36 0.77   180
 244. Xi Puppis                 Asmidiske         07 49 -24.9  241.5  +0.6  G5Ib          3.34  -4.74    2.42 0.74  1300
 245. Epsilon Cassiopeiae       Segin             01 54 +63.7  129.9  +1.7  B2III         3.35  -2.31    7.38 0.57   440
 246. Eta Orionis               Algjebbah         05 24 -02.4  204.9 -20.4  B1V+B2V       3.35  -3.86    3.62 0.88   900
 247. Xi Geminorum              Alzirr            06 45 +12.9  200.7  +4.5  F5IV          3.35   2.13   57.02 0.83    57
 248. Omicron Ursae Majoris     Muscida           08 30 +60.7  156.0 +35.4  G5III         3.35v -0.40v  17.76 0.65   185
-249. Delta Aquilae                               19 25 +03.1   39.6  -6.1  F2IV          3.36   2.43   65.05 0.81    50
-250. Epsilon Lupi                                15 23 -44.7  329.2 +10.3  B2IV-V        3.37  -2.58    6.47 0.61   500
+-- !! 249. Delta Aquilae                               19 25 +03.1   39.6  -6.1  F2IV          3.36   2.43   65.05 0.81    50
+-- !! 250. Epsilon Lupi                                15 23 -44.7  329.2 +10.3  B2IV-V        3.37  -2.58    6.47 0.61   500
 251. Zeta Virginis             Heze              13 35 -00.6  325.3 +60.4  A3V           3.38   1.62   44.55 0.90    73
-252. Epsilon Hydrae                              08 47 +06.4  220.7 +28.5  G5III+A8V+F7V 3.38   0.29   24.13 1.29   135
+-- !! 252. Epsilon Hydrae                              08 47 +06.4  220.7 +28.5  G5III+A8V+F7V 3.38   0.29   24.13 1.29   135
 253. Lambda Orionis            Meissa            05 35 +09.9  195.1 -12.0  O8III         3.39  -4.16    3.09 0.78  1100
-254. q Carinae                                   10 17 -61.3  285.5  -3.8  K3II          3.39  -3.38    4.43 0.49   740
+-- !! 254. q Carinae                                   10 17 -61.3  285.5  -3.8  K3II          3.39  -3.38    4.43 0.49   740
 255. Delta Virginis            Auva              12 56 +03.4  305.5 +66.3  M3III         3.39  -0.57   16.11 0.88   200
-256. Zeta Cephei                                 22 11 +58.2  103.1  +1.7  K1II          3.39  -3.35    4.49 0.50   730
-257. Theta² Tauri                                04 29 +15.9  180.4 -22.0  A7III         3.40   0.10   21.89 0.83   150
-258. Gamma Phoenicis                             01 28 -43.3  280.5 -72.2  K5III         3.41  -0.87   13.94 0.64   235
-259. Lambda Tauri                                04 01 +12.5  178.4 -29.4  B3V+A4IV      3.41e -1.87    8.81 0.99   370
-260. Nu Centauri                                 13 50 -41.7  314.4 +19.9  B2IV          3.41  -2.41    6.87 0.77   475
-261. Zeta Lupi                                   15 12 -52.1  323.8  +5.0  G8III         3.41   0.65   28.06 0.71   116
-262. Eta Cephei                                  20 45 +61.8  097.9 +11.6  K0IV          3.41   2.63   69.73 0.49    47
+-- !! 256. Zeta Cephei                                 22 11 +58.2  103.1  +1.7  K1II          3.39  -3.35    4.49 0.50   730
+-- !! 257. Theta² Tauri                                04 29 +15.9  180.4 -22.0  A7III         3.40   0.10   21.89 0.83   150
+-- !! 258. Gamma Phoenicis                             01 28 -43.3  280.5 -72.2  K5III         3.41  -0.87   13.94 0.64   235
+-- !! 259. Lambda Tauri                                04 01 +12.5  178.4 -29.4  B3V+A4IV      3.41e -1.87    8.81 0.99   370
+-- !! 260. Nu Centauri                                 13 50 -41.7  314.4 +19.9  B2IV          3.41  -2.41    6.87 0.77   475
+-- !! 261. Zeta Lupi                                   15 12 -52.1  323.8  +5.0  G8III         3.41   0.65   28.06 0.71   116
+-- !! 262. Eta Cephei                                  20 45 +61.8  097.9 +11.6  K0IV          3.41   2.63   69.73 0.49    47
 263. Zeta Pegasi               Homam             22 41 +10.8  078.9 -40.7  B8.5V         3.41  -0.62   15.64 0.75   210
 264. Alpha Trianguli           Mothallah         01 53 +29.6  138.6 -31.4  F6IV          3.42   1.95   50.87 0.82    64
-265. Eta Lupi                                    16 00 -38.4  338.8 +11.0  B2.5IV+A5V    3.42  -2.48    6.61 0.78   495
-266. Mu Herculis                                 17 46 +27.7  052.4 +25.6  G5IV          3.42   3.80  119.05 0.62    27
-267. Beta Pavonis                                20 45 -66.2  329.0 -36.0  A7III         3.42   0.29   23.71 0.63   140
-268. a Carinae                                   09 11 -58.9  277.7  -7.4  B2IV          3.43  -2.11    7.79 0.47   420
+-- !! 265. Eta Lupi                                    16 00 -38.4  338.8 +11.0  B2.5IV+A5V    3.42  -2.48    6.61 0.78   495
+-- !! 266. Mu Herculis                                 17 46 +27.7  052.4 +25.6  G5IV          3.42   3.80  119.05 0.62    27
+-- !! 267. Beta Pavonis                                20 45 -66.2  329.0 -36.0  A7III         3.42   0.29   23.71 0.63   140
+-- !! 268. a Carinae                                   09 11 -58.9  277.7  -7.4  B2IV          3.43  -2.11    7.79 0.47   420
 269. Zeta Leonis               Adhafera          10 17 +23.4  210.2 +55.0  F0II-III      3.43  -1.08   12.56 0.78   260
 270. Lambda Aquilae            Althalimain       19 06 -04.9  030.3  -5.5  B9V           3.43   0.51   26.05 0.81   125
 271. Lambda Ursae Majoris      Tania Borealis    10 17 +42.9  175.9 +55.1  A2IV          3.45   0.38   24.27 0.79   135
 272. Beta Lyrae                Sheliak           18 50 +33.4   63.2 +14.8  B8II          3.45e -3.71    3.70 0.52   880
 273. Eta Cassiopeiae           Achird            00 49 +57.8  122.6  -5.1  G0V+K7V       3.46   4.59  167.99 0.62    19
 274. Eta Ceti                  Dheneb            01 09 -10.2  137.2 -72.6  K2III         3.46   0.67   27.73 0.71   118
-275. Chi Carinae                                 07 57 -53.0  266.7 -12.3  B3IV          3.46  -1.91    8.43 0.52   390
-276. Delta Bootis                                15 16 +33.3  053.1 +58.4  G8III         3.46   0.69   27.94 0.61   117
+-- !! 275. Chi Carinae                                 07 57 -53.0  266.7 -12.3  B3IV          3.46  -1.91    8.43 0.52   390
+-- !! 276. Delta Bootis                                15 16 +33.3  053.1 +58.4  G8III         3.46   0.69   27.94 0.61   117
 277. Gamma Ceti                Kaffaljidhma      02 43 +03.2  168.9 -49.4  A3V+F3V+K5V   3.47   1.47   39.78 0.95    82
-278. Eta Leonis                                  10 07 +16.8  219.5 +50.8  A0Ib          3.48  -5.60    1.53 0.77  2100
-279. Eta Herculis                                16 43 +38.9  062.3 +40.9  G8III         3.48   0.80   29.11 0.52   112
-280. Tau Ceti                                    01 44 -15.9  173.1 -73.4  G8V           3.49   5.68  274.17 0.80    12
-281. Sigma Canis Majoris                         07 02 -27.9  239.2 -10.3  K7Ib          3.49  -4.37    2.68 0.59  1200
+-- !! 278. Eta Leonis                                  10 07 +16.8  219.5 +50.8  A0Ib          3.48  -5.60    1.53 0.77  2100
+-- !! 279. Eta Herculis                                16 43 +38.9  062.3 +40.9  G8III         3.48   0.80   29.11 0.52   112
+-- !! 280. Tau Ceti                                    01 44 -15.9  173.1 -73.4  G8V           3.49   5.68  274.17 0.80    12
+-- !! 281. Sigma Canis Majoris                         07 02 -27.9  239.2 -10.3  K7Ib          3.49  -4.37    2.68 0.59  1200
 282. Nu Ursae Majoris          Alula Borealis    11 18 +33.1  190.7 +69.1  K3II          3.49  -2.07    7.74 0.79   420
 283. Beta Bootis               Nekkar            15 02 +40.4  067.6 +60.0  G8III         3.49  -0.64   14.91 0.57   220
-284. Alpha Telescopii                            18 27 -46.0  348.7 -15.2  B3IV          3.49  -0.93   13.08 0.71   250
-285. Epsilon Gruis                               22 49 -51.3  338.3 -56.5  A3V           3.49   0.49   25.16 0.68   130
-286. Kappa Canis Majoris                         06 50 -32.5  242.4 -14.5  B1.5IV        3.50  -3.42    4.13 0.50   790
+-- !! 284. Alpha Telescopii                            18 27 -46.0  348.7 -15.2  B3IV          3.49  -0.93   13.08 0.71   250
+-- !! 285. Epsilon Gruis                               22 49 -51.3  338.3 -56.5  A3V           3.49   0.49   25.16 0.68   130
+-- !! 286. Kappa Canis Majoris                         06 50 -32.5  242.4 -14.5  B1.5IV        3.50  -3.42    4.13 0.50   790
 287. Delta Geminorum           Wasat             07 20 +22.0  196.0 +15.9  F2IV+K3V      3.50   2.22   55.45 0.85    59
-288. Iota Cephei                                 22 50 +66.2  111.1  +6.2  K0III         3.50   0.76   28.27 0.52   115
-289. Gamma Sagittae                              19 59 +19.5   58.0  -5.2  K5III         3.51  -1.11   11.90 0.71   270
+-- !! 288. Iota Cephei                                 22 50 +66.2  111.1  +6.2  K0III         3.50   0.76   28.27 0.52   115
+-- !! 289. Gamma Sagittae                              19 59 +19.5   58.0  -5.2  K5III         3.51  -1.11   11.90 0.71   270
 290. Mu Pegasi                 Sadalbari         22 50 +24.6   90.7 -30.6  G8III         3.51   0.74   27.95 0.77   117
 291. Delta Eridani             Rana              03 43 -09.8  198.1 -46.0  K0IV          3.52   3.74  110.58 0.88    29
 292. Omicron Leonis            Subra             09 41 +09.9  224.6 +42.1  A9V+F6V       3.52   0.43   24.12 0.97   135
 293. Phi Velorum               Tseen Ke          09 57 -54.6  279.4  +0.1  B5Ib          3.52  -5.34    1.69 0.50  1900
-294. Xi² Sagittarii                              18 58 -21.1   14.6 -10.8  K0II          3.52  -1.77    8.76 0.99   370
+-- !! 294. Xi² Sagittarii                              18 58 -21.1   14.6 -10.8  K0II          3.52  -1.77    8.76 0.99   370
 295. Theta Pegasi              Baham             22 10 +06.2   67.4 -38.7  A2V           3.52   1.16   33.77 0.85    97
 296. Epsilon Tauri             Ain               04 29 +19.2  177.6 -19.9  K0III         3.53   0.15   21.04 0.82   155
 297. Beta Cancri               Tarf              08 17 +09.2  214.3 +23.1  K4III         3.53  -1.24   11.23 0.97   290
-298. Xi Hydrae                                   11 33 -31.9  284.1 +28.1  G8III         3.54   0.55   25.23 0.83   130
-299. Mu Serpentis                                15 50 -03.4    4.6 +37.3  A0V           3.54   0.14   20.94 0.82   155
-300. Xi Serpentis                                17 38 -15.4   10.6  +8.7  F0III         3.54   0.99   30.93 1.03   105
+-- !! 298. Xi Hydrae                                   11 33 -31.9  284.1 +28.1  G8III         3.54   0.55   25.23 0.83   130
+-- !! 299. Mu Serpentis                                15 50 -03.4    4.6 +37.3  A0V           3.54   0.14   20.94 0.82   155
+-- !! 300. Xi Serpentis                                17 38 -15.4   10.6  +8.7  F0III         3.54   0.99   30.93 1.03   105
 
 Column 1: Approximate rank of the star in order of apparent magnitude.
 Column 2: Bayer name for the star.
