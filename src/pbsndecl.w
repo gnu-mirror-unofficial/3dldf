@@ -576,6 +576,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> STAR@>@/
 @=%token <pointer_value> CONSTELLATION@>@/
 @=%token <pointer_value> PLANET@>@/
+@=%token <pointer_value> BRIGHTNESS@>@/
+@=%token <pointer_value> BRIGHTEST@>@/
 
 @=%token <pointer_value> PLANE@>@/
 
