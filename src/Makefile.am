@@ -943,7 +943,7 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 run: 3dldf$(EXEEXT)
-	echo "load database; end;" | 3dldf$(EXEEXT)
+	echo "load astronomy; end;" | 3dldf$(EXEEXT)
 
 .PHONY : run-1
 run-1: 3dldf$(EXEEXT)
