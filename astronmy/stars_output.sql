@@ -2,8 +2,6 @@
 
 /* ** (2) */
 
-/* !! START HERE:  Get flamsteed_designation_number.  LDF 2021.06.17.  */
-
 https://en.wikipedia.org/wiki/Gamma_Trianguli_Australis
 
 149 Gamma Trianguli Australis
@@ -16,7 +14,7 @@ Observation data
 Epoch J2000.0      Equinox J2000.0
 Constellation 	Triangulum Australe
 Right ascension 	15h 18m 54.58198s[1]
-Declination 	–68° 40′ 46.3654″[1]
+Declination 	-68° 40′ 46.3654″[1]
 Apparent magnitude (V) 	+2.87[2]
 
 replace into Stars (
@@ -32,6 +30,7 @@ approx_rank_apparent_magnitude,
 constellation_full_name,
 constellation_abbreviation,
 bs_hr_number
+, flamsteed_designation_number /* Apparently none.  LDF 2021.06.18.  */
 )
 values
 ("gamma",
@@ -52,7 +51,7 @@ select * from Stars where bayer_designation_greek_letter = "gamma" and constella
 
 delete from Stars where bayer_designation_greek_letter = "gamma" and constellation_name_genitive = "Trianguli Australis"\G
 
-show columns from constellations;
+show columns from Constellations;
 
 select * from Constellations where name like("Tr%");
 
@@ -96,8 +95,53 @@ Observation data
 Epoch J2000      Equinox J2000
 Constellation 	Canis Major
 Right ascension 	07h 03m 01.47211s[1]
-Declination 	–23° 49′ 59.8523″[1]
+Declination 	-23° 49′ 59.8523″[1]
 Apparent magnitude (V) 	3.043[2]
+
+
+/* *** (3) */
+
+select "Here I am.";
+
+replace into Stars (
+bayer_designation_greek_letter,
+constellation_name_genitive, 
+right_ascension_hours,          
+right_ascension_minutes,        
+right_ascension_seconds,       
+declination_degrees,            
+declination_minutes,            
+declination_seconds,
+approx_rank_apparent_magnitude,
+constellation_full_name,
+constellation_abbreviation,
+bs_hr_number,
+flamsteed_designation_number
+)
+values
+("omicron^2",
+"Canis Majoris",
+7,
+3,
+1.47211,
+-23,
+49,
+59.8523,
+179,
+"Canis Major",
+"CMa",
+2653,
+24
+);
+
+show columns from Constellations;
+
+select * from Constellations where name_genitive = "Canis Majoris";
+
+select * from Stars where bayer_designation_greek_letter = "omicron^2" and constellation_name_genitive = "Canis Majoris"\G
+
+delete from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
+
 
 /* ** (2) */
 
@@ -111,15 +155,15 @@ HR 3803 Observation data
 Epoch J2000      Equinox J2000
 Constellation 	Vela
 Right ascension 	09h 31m 13.31891s[1]
-Declination 	–57° 02′ 03.7578″[1]
+Declination 	-57° 02′ 03.7578″[1]
 Apparent magnitude (V) 	3.16[2]
 Characteristics
 Spectral type 	K5 III[3]
 U−B color index 	+1.88[4]
 B−V color index 	+1.55[4]
 Astrometry
-Radial velocity (Rv)	–13.9[2] km/s
-Proper motion (μ)	RA: –32.54[1] mas/yr
+Radial velocity (Rv)	-13.9[2] km/s
+Proper motion (μ)	RA: -32.54[1] mas/yr
 Dec.: +5.87[1] mas/yr
 Parallax (π)	13.65 ± 0.10[1] mas
 Distance	239 ± 2 ly
@@ -129,7 +173,39 @@ Mass	2.0[5] M☉
 Radius	29[6] R☉
 Temperature	3,860[5] K
 Other designations
-N Velorum, N Vel, CP–56 2270, HD 82668, FK5 361, HIP 46701, HR 3803, SAO 237067. 
+N Velorum, N Vel, CP-56 2270, HD 82668, FK5 361, HIP 46701, HR 3803, SAO 237067. 
+
+/* !! START HERE:  LDF 2021.06.18.  */
+
+replace into Stars (
+bayer_designation_greek_letter,
+constellation_name_genitive, 
+right_ascension_hours,          
+right_ascension_minutes,        
+right_ascension_seconds,       
+declination_degrees,            
+declination_minutes,            
+declination_seconds,
+approx_rank_apparent_magnitude,
+constellation_full_name,
+constellation_abbreviation,
+bs_hr_number,
+flamsteed_designation_number
+)
+values
+(
+
+);
+
+show columns from Constellations;
+
+select * from Constellations where name_genitive = "";
+
+select * from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
+
+delete from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
+
+
 
 /* ** (2) */
 
@@ -167,7 +243,7 @@ Observation data
 Epoch J2000.0      Equinox J2000.0
 Constellation 	Carina
 Right ascension 	10h 32m 01.46297s[1]
-Declination 	–61° 41′ 07.1963″[1]
+Declination 	-61° 41′ 07.1963″[1]
 Apparent magnitude (V) 	3.22 - 3.55[2]
 
 /* ** (2) */
