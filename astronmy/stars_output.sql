@@ -195,8 +195,6 @@ https://en.wikipedia.org/wiki/Vela_(constellation)
 
 https://en.wikipedia.org/wiki/HR_3803
 
-199 N Velorum
-
 HR 3803 Observation data
 Epoch J2000      Equinox J2000
 Constellation 	Vela
@@ -221,8 +219,6 @@ Temperature	3,860[5] K
 Other designations
 N Velorum, N Vel, CP-56 2270, HD 82668, FK5 361, HIP 46701, HR 3803, SAO 237067. 
 
-/* !! START HERE:  LDF 2021.06.18.  */
-
 replace into Stars (
 bayer_designation_greek_letter,
 constellation_name_genitive, 
@@ -239,13 +235,24 @@ bs_hr_number,
 flamsteed_designation_number
 )
 values
-(
-
+("N",
+"Velorum",
+9,  -- Right ascension
+31,
+13.31891,
+-57, -- Declination
+2,
+3.7578,
+199, -- approx_rank_apparent_magnitude
+"Vela",
+"Vel",
+3803, -- bs_hr_number
+0
 );
 
 show columns from Constellations;
 
-select * from Constellations where name_genitive = "";
+select * from Stars where constellation_name_genitive = "Velorum" and bayer_designation_greek_letter = "N"\G
 
 select * from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
 
@@ -254,6 +261,8 @@ delete from Stars where bayer_designation_greek_letter = "" and constellation_na
 
 
 /* ** (2) */
+
+/* !! START HERE:  LDF 2021.06.18.  */
 
 210 G Scorpii
 
