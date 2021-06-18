@@ -627,8 +627,6 @@ and constellation_name_genitive = "Cassiopeiae";
 
 select * from Stars where common_name = "Caph"\G
 
-/* !! START HERE:  LDF 2021.06.15.  */ 
-
 select "Here I am";
 
 update Stars set approx_rank_apparent_magnitude = where bayer_designation_greek_letter = ""
