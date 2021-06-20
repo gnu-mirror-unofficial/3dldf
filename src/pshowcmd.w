@@ -634,6 +634,486 @@ Added this rule.
 };
 
 
+@q **** (4) command --> SHOW STARS @>
+
+@*3 \§command> $\longrightarrow$ \.{SHOW} \.{STARS} \§show stars option list>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW STARS show_stars_option_list@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `command --> SHOW STARS show_stars_option_list'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
+@q ***** (5) show_stars_option_list@>  
+@*4 \§show stars option list>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> show_stars_option_list@>
+
+@q ****** (6) show_stars_option_list --> EMPTY.@> 
+@*5 \§show stars option list> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_option_list: /* Empty */@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_option_list:  EMPTY'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+@q ****** (6) show_stars_option_list --> show_stars_option_list ORDER_BY show_stars_order_by_list@> 
+@*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \.{ORDER_BY} \§show stars order by list>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_option_list: show_stars_option_list ORDER_BY show_stars_order_by_list@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_option_list: show_stars_option_list ORDER_BY show_stars_order_by_list'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+@q ***** (5) show_stars_order_by_list@>  
+@*4 \§show stars order by list>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> show_stars_order_by_list@>
+
+@q ****** (6) show_stars_order_by_list --> show_stars_order_by_element@> 
+@*5 \§show stars order by list> $\longrightarrow$ \§show stars order by element>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_list: show_stars_order_by_element@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_element'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+   @=$$@> = 0;
+};
+
+@q ****** (6) show_stars_order_by_list --> show_stars_order_by_list COMMA show_stars_order_by_element@> 
+@*5 \§show stars order by list> $\longrightarrow$ \§show stars order by list> COMMA \§show stars order by element>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+   @=$$@> = 0;
+};
+
+@q ***** (5) show_stars_order_by_element@>  
+@*4 \§show stars order by element>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> show_stars_order_by_element@>
+
+@q ****** (6) show_stars_order_by_element --> COMMON_NAME.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{COMMON\_NAME}.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: COMMON_NAME@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_order_by_element: COMMON_NAME'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+@q ****** (6) show_stars_option_list --> show_stars_option_list WHERE show_stars_where_list@> 
+@*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \.{WHERE} \§show stars where list>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_option_list: show_stars_option_list WHERE show_stars_where_list@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_option_list: show_stars_option_list WHERE show_stars_where_list'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+@q ***** (5) show_stars_where_list@>  
+@*4 \§show stars where list>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> show_stars_where_list@>
+
+@q ****** (6) show_stars_where_list --> show_stars_where_element@> 
+@*5 \§show stars where list> $\longrightarrow$ \§show stars where element>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_where_list: show_stars_where_element@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_where_list: show_stars_where_element'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+   @=$$@> = 0;
+};
+
+@q ****** (6) show_stars_where_list --> show_stars_where_list where_operator show_stars_where_element@> 
+@*5 \§show stars where list> $\longrightarrow$ \§show stars where list> \§where operator> \§show stars where element>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_where_list: show_stars_where_list where_operator show_stars_where_element@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_where_list: show_stars_where_list where_operator show_stars_where_element'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+   @=$$@> = 0;
+};
+
+@q ***** (5) show_stars_where_element@>  
+@*4 \§show stars where element>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> show_stars_where_element@>
+
+@q ****** (6) show_stars_where_element --> COMMON_NAME relation string_expression.@> 
+@*5 \§show stars where element> $\longrightarrow$ \.{COMMON\_NAME} \§relation> \§string expression>.@> 
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_where_element: COMMON_NAME relation string_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+   @=$$@> = 0;
+};
+
+
+@q ***** (5) where_operator@>  
+@*4 \§where operator>.
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> where_operator@>
+
+@q ****** (6) where_operator --> AND.@> 
+@*5 \§where operator> $\longrightarrow$ \.{AND}.@> 
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=where_operator: AND@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `where_operator: AND'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+@q ****** (6) where_operator --> OR.@> 
+@*5 \§where operator> $\longrightarrow$ \.{OR}.@> 
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=where_operator: OR@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm  
+                << "*** Parser: `where_operator: OR'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+
 
 @q **** (4) command --> SHOW plane_expression@>
 
