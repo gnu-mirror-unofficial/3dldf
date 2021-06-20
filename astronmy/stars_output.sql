@@ -260,8 +260,6 @@ delete from Stars where bayer_designation_greek_letter = "" and constellation_na
 
 /* ** (2) */
 
-/* !! START HERE:  LDF 2021.06.18.  */
-
 https://en.wikipedia.org/wiki/Scorpius
 
 https://en.wikipedia.org/wiki/G_Scorpii
@@ -327,6 +325,8 @@ https://en.wikipedia.org/wiki/List_of_stars_in_Carina
 
 https://en.wikipedia.org/wiki/PP_Carinae
 
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=HD+91465
+
 231 p Carinae
 
 p Carinae
@@ -340,7 +340,46 @@ Right ascension 	10h 32m 01.46297s[1]
 Declination 	-61° 41′ 07.1963″[1]
 Apparent magnitude (V) 	3.22 - 3.55[2]
 
+
+select * from Constellations where name_genitive = "Carinae";
+
+replace into Stars (
+bayer_designation_greek_letter,
+constellation_name_genitive, 
+right_ascension_hours,          
+right_ascension_minutes,        
+right_ascension_seconds,       
+declination_degrees,            
+declination_minutes,            
+declination_seconds,
+approx_rank_apparent_magnitude,
+constellation_full_name,
+constellation_abbreviation,
+bs_hr_number,
+flamsteed_designation_number
+)
+values
+("p",
+"Carinae",
+10,  -- Right ascension
+32,
+1.46297,
+-61, -- Declination
+41,
+7.1963,
+231, -- approx_rank_apparent_magnitude
+"Carina",
+"Car",
+4140, -- bs_hr_number
+0);
+
 /* ** (2) */
+
+https://en.wikipedia.org/wiki/V337_Carinae
+
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=V337+Car
+
+HR 4050
 
 V337 Carinae
 
@@ -361,7 +400,48 @@ Declination 	-61° 19′ 56.288″[1]
 Apparent magnitude (V) 	3.36 to 3.44[2]
 Characteristics
 
+replace into Stars (
+bayer_designation_greek_letter,
+constellation_name_genitive,    
+right_ascension_hours,          
+right_ascension_minutes,        
+right_ascension_seconds,       
+declination_degrees,            
+declination_minutes,            
+declination_seconds,
+approx_rank_apparent_magnitude,
+constellation_full_name,
+constellation_abbreviation,
+bs_hr_number,
+flamsteed_designation_number
+)
+values
+("q",      -- bayer_designation_greek_letter 
+"Carinae", --  constellation_name_genitive    
+10,        -- Right ascension
+17,
+4.9753,
+-61,       -- Declination
+19,
+56.288,
+254,       -- approx_rank_apparent_magnitude
+"Carina",  -- constellation_full_name,   
+"Car"   ,  -- constellation_abbreviation,
+4050,      -- bs_hr_number
+0          -- flamsteed_designation_number
+);
+
+select * from Constellations where name_genitive = "Carinae";
+
+select * from Stars where bayer_designation_greek_letter = "q" and constellation_name_genitive = "Carinae"\G
+
 /* ** (2) */
+
+https://en.wikipedia.org/wiki/V357_Carinae
+
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=V357+Car
+
+HR 3659
 
 268 a Carinae
 
@@ -402,6 +482,66 @@ Mass	1.10[6] M☉
 Other designations
 V357 Car, a Carinae, HR 3659, HD 79351, HIP 45080
 
+replace into Stars (
+bayer_designation_greek_letter,
+constellation_name_genitive,    
+right_ascension_hours,          
+right_ascension_minutes,        
+right_ascension_seconds,       
+declination_degrees,            
+declination_minutes,            
+declination_seconds,
+approx_rank_apparent_magnitude,
+constellation_full_name,
+constellation_abbreviation,
+bs_hr_number,
+flamsteed_designation_number
+)
+values
+("a",      -- bayer_designation_greek_letter 
+"Carinae", -- constellation_name_genitive
+9,         -- Right ascension
+10,
+58.086,
+-58,       -- Declination
+58,
+0.82,
+268,       -- approx_rank_apparent_magnitude
+"Carina",  -- constellation_full_name,   
+"Car",     -- constellation_abbreviation,
+3659,      -- bs_hr_number
+0          -- flamsteed_designation_number
+);
+
+select * from Constellations where name_genitive = "";
+
+select * from Stars where bayer_designation_greek_letter = "a" and constellation_name_genitive = "Carinae"\G
+
+/* ** (2) */
+
+/* * (1) */
+
+select * from Stars order by approx_rank_apparent_magnitude\G
+
+select approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive, bs_hr_number
+from Stars order by approx_rank_apparent_magnitude, bs_hr_number;
+
+/* !! START HERE:  Check these:  LDF 2021.06.20.  */ 
+
+select * from Stars where bayer_designation_greek_letter = ""\G
+
+select * from Stars where approx_rank_apparent_magnitude = 0\G
+
+select * from Stars where bs_hr_number = 0\G
+
+
+mysql> select count(*) from Stars where bayer_designation_greek_letter = "";
++----------+
+| count(*) |
++----------+
+|      412 |
++----------+
+1 row in set (0.01 sec)
 /* ** (2) */
 
 /* Local Variables:                   */
