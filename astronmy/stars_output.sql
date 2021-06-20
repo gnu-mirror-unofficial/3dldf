@@ -258,19 +258,15 @@ select * from Stars where bayer_designation_greek_letter = "" and constellation_
 
 delete from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
 
-
-
 /* ** (2) */
 
 /* !! START HERE:  LDF 2021.06.18.  */
-
-210 G Scorpii
 
 https://en.wikipedia.org/wiki/Scorpius
 
 https://en.wikipedia.org/wiki/G_Scorpii
 
-G Scorpii
+210 G Scorpii
 Scorpius constellation map.svg
 Red circle.svg
 Location of G Scorpii (circled)
@@ -282,7 +278,50 @@ Right ascension 	17h 49m 51.48081s[1]
 Declination 	−37° 02′ 35.8975″[1]
 Apparent magnitude (V) 	3.21[2]
 
+replace into Stars (
+bayer_designation_greek_letter,
+constellation_name_genitive, 
+right_ascension_hours,          
+right_ascension_minutes,        
+right_ascension_seconds,       
+declination_degrees,            
+declination_minutes,            
+declination_seconds,
+approx_rank_apparent_magnitude,
+constellation_full_name,
+constellation_abbreviation,
+bs_hr_number,
+flamsteed_designation_number
+)
+values
+("G",  
+"Scorpii",
+17,  -- Right ascension
+49,
+51.48081,
+-37, -- Declination
+2,
+35.8975, 
+210, -- approx_rank_apparent_magnitude
+"Scorpius",
+"Sco",
+6630, -- bs_hr_number
+0
+);
+
+show columns from Constellations;
+
+select * from Constellations where name_genitive = "Scorpii";
+
+select * from Stars where constellation_name_genitive = "" and bayer_designation_greek_letter = ""\G
+
+select * from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
+
+delete from Stars where bayer_designation_greek_letter = "" and constellation_name_genitive = ""\G
+
 /* ** (2) */
+
+/* !! START HERE:  LDF 2021.06.18.  */
 
 https://en.wikipedia.org/wiki/List_of_stars_in_Carina
 
@@ -310,8 +349,6 @@ V337 Carinae
 Other designations
 V337 Car, q Carinae, q Car,
 
-
-
 V337 Carinae
 Carina constellation map.svg
 Red circle.svg
@@ -320,7 +357,7 @@ Observation data
 Epoch J2000.0      Equinox J2000.0 (ICRS)
 Constellation 	Carina
 Right ascension 	10h 17m 04.9753s[1]
-Declination 	−61° 19′ 56.288″[1]
+Declination 	-61° 19′ 56.288″[1]
 Apparent magnitude (V) 	3.36 to 3.44[2]
 Characteristics
 
@@ -336,14 +373,14 @@ Observation data
 Epoch J2000.0      Equinox J2000.0
 Constellation 	Carina
 Right ascension 	09h 10m 58.086s[1]
-Declination 	−58° 58′ 0.82″[1]
+Declination 	-58° 58′ 0.82″[1]
 Apparent magnitude (V) 	+3.41 - 3.44[2]
 Characteristics
 Spectral type 	B2IV-V[3]
 Variable type 	Eclipsing[2]
 Astrometry
 Radial velocity (Rv)	23.3[4] km/s
-Proper motion (μ)	RA: −16.64[1] mas/yr
+Proper motion (μ)	RA: -16.64[1] mas/yr
 Dec.: 15.00 mas/yr
 Parallax (π)	7.30 ± 0.35[1] mas
 Distance	450 ± 20 ly
@@ -366,3 +403,11 @@ Other designations
 V357 Car, a Carinae, HR 3659, HD 79351, HIP 45080
 
 /* ** (2) */
+
+/* Local Variables:                   */
+/* eval:(outline-minor-mode t)        */
+/* abbrev-file-name:"~/.abbrev_defs"  */
+/* eval:(read-abbrev-file)            */
+/* outline-regexp:"/\\* \\*+"         */
+/* fill-column:80                     */
+/* End:                               */
