@@ -331,6 +331,12 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ astronmy.h++ circles.h++ cn
                      utility.h++ compile_parser.sh
 	./compile_parser.sh "$(CXXCOMPILE)"
 
+.PHONY: fp ## "force parser"
+
+fp:
+	rm -f parser.o
+	$(MAKE) parser.o
+
 #### *** (3) parser2
 
 # parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
@@ -943,7 +949,7 @@ utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 run: 3dldf$(EXEEXT)
-	echo "load astronomy; end;" | 3dldf$(EXEEXT)
+	3dldf$(EXEEXT) --astro sample1.ldf
 
 .PHONY : run-1
 run-1: 3dldf$(EXEEXT)

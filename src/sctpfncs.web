@@ -4644,16 +4644,15 @@ Scanner_Type::get_astronomy(void)
 @q **** (4) @>
 
    int status = 0;
- 
+
+   const bool is_constant = true;
+   const bool not_array = false;
+
    unsigned short regular = Id_Map_Entry_Type::REGULAR;
 
    void* v = 0;
 
    Star *star = 0;
-
-   const bool is_constant = true;
-   const bool not_constant = false;
-   const bool not_array = false;
 
    vector<Star *> star_vector;
 
@@ -4669,8 +4668,9 @@ Scanner_Type::get_astronomy(void)
             << "right_ascension_hours, right_ascension_minutes, "
             << "right_ascension_seconds, right_ascension_decimal_hours, "
             << "declination_degrees, declination_minutes, declination_seconds, "
-            << "declination_decimal_degrees from Stars order by "
-            << "approx_rank_apparent_magnitude, common_name;";
+            << "declination_decimal_degrees from Stars where common_name != \"\" "
+            << "order by common_name;";
+
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -4889,11 +4889,51 @@ Scanner_Type::get_astronomy(void)
       {
           cerr << "`star_vector':" << endl;
 
+          string s;
+          string t;
+          size_t pos;
+
           for (vector<Star *>::iterator iter = star_vector.begin();
                iter != star_vector.end();
                ++iter)
           {
              (*iter)->show();
+
+             if ((*iter)->common_name != "")
+             {
+                cerr << "`(*iter)->common_name' is non NULL:  " << (*iter)->common_name << endl;
+
+                s = (*iter)->common_name;
+
+                while (true)
+                {
+                   pos = s.find(" ");
+                   if (pos != string::npos)
+                      s.replace(pos, 1, "_");
+                   else
+                      break;
+                } 
+
+                add_entry(s, STAR, regular, is_constant, not_array, 
+                          Id_Map_Entry_Type::KNOWN, *iter);
+
+                t = s; 
+
+                for (int i = 0; i < s.size(); ++i)
+                  t[i] = tolower(t[i]);
+ 
+                if (add_synonym(t, s) == 0)
+                {
+                   cerr << "ERROR!  In `Scanner_Type::get_astronomy':" << endl
+                        << "`add_synonym' failed."
+                        << endl;
+
+                   cerr << "XXX Enter <RETURN> to continue: ";
+                   getchar();  
+                }
+             }
+
+             cerr << endl; 
           }   
 
           cerr << endl;
