@@ -226,7 +226,7 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
-  volatile bool DEBUG = true; /* |false| */ @; 
+  volatile bool DEBUG = false; /* |true| */ @; 
 
   stringstream cerr_strm;
 
@@ -6091,11 +6091,15 @@ Added this section.
    if (database_enabled && astronomy_enabled)
    {  
        /* |Stars| and |Constellations|.  */
-   
-       cerr << "In `Scanner_Type::create':  `database_enabled' and `astronomy_enabled' are both `true'."
-            << endl 
-            << "Calling `Scanner_Type::get_astronomy'."
-            << endl;
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "In `Scanner_Type::create':  `database_enabled' and `astronomy_enabled' are both `true'."
+                << endl 
+                << "Calling `Scanner_Type::get_astronomy'."
+                << endl;
+       }   
+#endif /* |DEBUG_COMPILE|  */@;    
 
        status = scanner_node->get_astronomy();
      

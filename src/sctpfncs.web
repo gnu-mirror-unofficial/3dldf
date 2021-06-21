@@ -1606,7 +1606,7 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
   bool DEBUG = debug;
 
   if (DEBUG == false)
-     DEBUG = true; /* |false| */ @;
+     DEBUG = false; /* |true| */ @;
 
 #endif /* |DEBUG_COMPILE| */ @; 
 
@@ -3950,7 +3950,7 @@ Scanner_Type::load_database(bool force)
 {
 @q **** (4) @>
 
-   bool DEBUG = true;  /* |false|  */
+   bool DEBUG = false;  /* |true|  */
 
    int status = 0;
 
@@ -4154,7 +4154,7 @@ Scanner_Type::show_database(void)
 {
 @q **** (4) Definition @>
 
-    bool DEBUG = true; /* |false| */
+    bool DEBUG = false; /* |true| */
 
     bool do_points = false;
     bool do_paths = false;
@@ -4881,6 +4881,7 @@ Scanner_Type::get_astronomy(void)
 
    if (star_vector.size() > 0)
    {
+@q ***** (5) @>
    
 #if DEBUG_COMPILE
       if (DEBUG)
@@ -4892,6 +4893,8 @@ Scanner_Type::get_astronomy(void)
       }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q ***** (5) @>
+
       string s;
       string t;
       size_t pos;
@@ -4900,10 +4903,21 @@ Scanner_Type::get_astronomy(void)
            iter != star_vector.end();
            ++iter)
       {
-         (*iter)->show();
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             (*iter)->show();
+
+         }  /* |if (DEBUG)| */
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
 
          if ((*iter)->common_name != "")
          {
+@q ******* (7) @>
 
 #if DEBUG_COMPILE
             if (DEBUG)
@@ -4914,6 +4928,8 @@ Scanner_Type::get_astronomy(void)
 
             }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
 
             s = (*iter)->common_name;
 
@@ -4937,10 +4953,15 @@ Scanner_Type::get_astronomy(void)
             if (add_synonym(t, s) == 0)
             {
                cerr << "ERROR!  In `Scanner_Type::get_astronomy':" << endl
-                    << "`add_synonym' failed.  Will try to continue."
+                    << "`add_synonym' failed:  `t' == " << t << ".  `s' == " << s << "."
+                    << endl
+                    << "Will try to continue."
                     << endl;
             }
-         }
+
+@q ******* (7) @>
+
+         }  /* |if ((*iter)->common_name != "")|  */
 
 #if DEBUG_COMPILE
          if (DEBUG)
@@ -4949,6 +4970,8 @@ Scanner_Type::get_astronomy(void)
 
          }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
 
       }  /* |for|  */   
 

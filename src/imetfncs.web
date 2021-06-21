@@ -2634,24 +2634,6 @@ Added code for the cases
       object = static_cast<void*>(o);       
     }
 
-  else if (type == STAR_VECTOR)
-    {
-      Pointer_Vector<Star>* o = new Pointer_Vector<Star>;
-      object = static_cast<void*>(o);       
-    }
-
-  else if (type == CONSTELLATION_VECTOR)
-    {
-      Pointer_Vector<Constellation>* o = new Pointer_Vector<Constellation>;
-      object = static_cast<void*>(o);       
-    }
-
-  else if (type == PLANET_VECTOR)
-    {
-      Pointer_Vector<Planet>* o = new Pointer_Vector<Planet>;
-      object = static_cast<void*>(o);       
-    }
-
 @q ****** (6) |Shape|-types.@> 
 @ |Shape|-types.
 \initials{LDF 2005.01.26.}
@@ -4026,9 +4008,6 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
       || type == MACRO_VECTOR
       || type == ORIGAMI_FIGURE_VECTOR
       || type == GLYPH_VECTOR
-      || type == STAR_VECTOR
-      || type == CONSTELLATION_VECTOR
-      || type == PLANET_VECTOR
       || type == CONIC_SECTION_LATTICE_VECTOR)
 
     return true;

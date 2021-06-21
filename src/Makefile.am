@@ -130,7 +130,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                       parser.w passign.w pastrnmy.w pblexpr.w \
                       pblvexpr.w pbpexpr.w \
                       pbpvexpr.w pbsndecl.w pcbvexpr.w pcirexpr.w \
-		      pclrcmnd.w pclvexpr.w pcnstvct.w pcnvexpr.w pcolexpr.w pcommand.w \
+		      pclrcmnd.w pclvexpr.w pcnvexpr.w pcolexpr.w pcommand.w \
 		      pcondit.w pconexpr.w pcrclslc.w pcrvexpr.w pcubexpr.w \
                       pcylexpr.w pcyvexpr.w pdpvexpr.w \
                       pdrwcmnd.w pdshexpr.w pedvexpr.w peldexpr.w \
@@ -145,12 +145,12 @@ lib_LTLIBRARIES = lib3dldflb.la
 		      popassgn.w poptions.w porgexpr.w porvexpr.w ppbvexpr.w ppdvexpr.w \
                       ppenexpr.w \
                       ppgvexpr.w pphdexpr.w pphvexpr.w ppicexpr.w pplhdslc.w \
-                      pplnexpr.w pplntvct.w pplnvxpr.w pplvexpr.w ppntexpr.w ppnvexpr.w \
+                      pplnexpr.w pplnvxpr.w pplvexpr.w ppntexpr.w ppnvexpr.w \
                       pprbexpr.w pprdexpr.w pprgstmt.w ppthexpr.w pptvexpr.w \
                       ppygexpr.w \
                       prcvexpr.w \
 		      precexpr.w prpvexpr.w prplexpr.w psetcmnd.w \
-                      pshowcmd.w psphexpr.w pspvexpr.w pstrexpr.w pstrvctr.w \
+                      pshowcmd.w psphexpr.w pspvexpr.w pstrexpr.w \
                       pstvexpr.w ptfvexpr.w \
                       ptglexpr.w ptgvexpr.w ptmastro.w \
                       ptokdecl.w ptrfcmnd.w \

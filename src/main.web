@@ -1034,13 +1034,15 @@ main(int argc, char *argv[])
   
 #if DEBUG_COMPILE
   if (DEBUG)
-    {
-      cerr_strm << thread_name << "Entering `main'.";
-      log_message(cerr_strm);
-      cerr_message(cerr_strm); 
-      cerr_strm.str(""); 
-    }
+  {
+    cerr_strm << thread_name << "Entering `main'.";
+    log_message(cerr_strm);
+    cerr_message(cerr_strm); 
+    cerr_strm.str(""); 
+  }
 #endif /* |DEBUG_COMPILE|  */@; 
+
+  @<Print version, copyright, and license information@>;
 
   filename_array_ctr = 0;
 
@@ -1170,8 +1172,6 @@ main(int argc, char *argv[])
         cerr << "filename_array_ctr == " << filename_array_ctr << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
-  @<Print version, copyright, and license information@>;
 
   if (DEBUG)
   {

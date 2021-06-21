@@ -673,10 +673,6 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 
 @=%token <pointer_value> GLYPH_VECTOR@>@/
 
-@=%token <pointer_value> STAR_VECTOR@>@/
-@=%token <pointer_value> CONSTELLATION_VECTOR@>@/
-@=%token <pointer_value> PLANET_VECTOR@>@/
-
 @=%token <pointer_value> PLANE_VECTOR@>@/
 
 @=%token <pointer_value> ORIGAMI_FIGURE@>@/

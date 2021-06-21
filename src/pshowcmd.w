@@ -631,7 +631,7 @@ Added this rule.
 };
 
 
-@q **** (4) command --> SHOW STARS @>
+@q **** (4) command --> SHOW STARS show_stars_option_list @>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW} \.{STARS} \§show stars option list>.
 \initials{LDF 2021.06.20.}
@@ -668,34 +668,34 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
-                << endl
-                << "`show_stars_option_list' (`$3' == " << hex << @=$3@> << " (hex)" 
-                << endl
-                << "`show_stars_option_list' (`$3') & `STARS_COMMON_NAME' == " << hex << (@=$3@> & STARS_COMMON_NAME) << " (hex)" 
-                << endl
-                << "`show_stars_option_list' (`$3') & `STARS_FLAMSTEED_DESIGNATION' == " << hex 
-                << (@=$3@> & STARS_FLAMSTEED_DESIGNATION) << " (hex)" 
-                << endl
-                << "`show_stars_option_list' (`$3') & `STARS_BAYER_DESIGNATION' == " << hex 
-                << (@=$3@> & STARS_BAYER_DESIGNATION) << " (hex)" 
-                << endl
-                << "`show_stars_option_list' (`$3') & `STARS_BS_NUMBER' == " << hex 
-                << (@=$3@> & STARS_BS_NUMBER) << " (hex)" 
-                << endl
-                << "`show_stars_option_list' (`$3') & `STARS_HR_NUMBER' == " << hex 
-                << (@=$3@> & STARS_HR_NUMBER) << " (hex)" 
-                << endl
-                << "`show_stars_option_list' (`$3') & `STARS_APPROX_RANK_APPARENT_MAGNITUDE' == " 
-                << hex << (@=$3@> & STARS_APPROX_RANK_APPARENT_MAGNITUDE) << " (hex)" 
-                << endl;
+        cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
+                  << endl;
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
+        int i = 0;
+
+        cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options.size()' == " 
+                  << scanner_node->stars_show_option_struct->order_by_options.size() << endl;
+
+        if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
+           cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options':"
+                     << endl;
+
+        for (vector<unsigned int>::iterator iter = scanner_node->stars_show_option_struct->order_by_options.begin();
+             iter != scanner_node->stars_show_option_struct->order_by_options.end();
+             ++iter)
+        {
+            cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
+        }
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+    delete scanner_node->stars_show_option_struct;
+    scanner_node->stars_show_option_struct = 0;
 
 };
 
@@ -740,7 +740,9 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+    scanner_node->stars_show_option_struct = new Stars_Show_Option_Struct;
+
+    @=$$@> = 0;
 };
 
 @q ****** (6) show_stars_option_list --> show_stars_option_list order_by show_stars_order_by_list@> 
@@ -772,8 +774,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> += @=$3@>;
-
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
@@ -788,6 +788,8 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
 
 };
 
@@ -912,7 +914,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = @=$1@>;
+   scanner_node->stars_show_option_struct->order_by_options.push_back(@=$1@>);
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
@@ -920,7 +922,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_element':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$1' (hex)  == " << hex << @=$1@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -928,8 +930,6 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
-
 
 };
 
@@ -952,32 +952,34 @@ Added this rule.
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'.";
+  {
+    cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'.";
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = @=$1@> + @=$3@>;
+  scanner_node->stars_show_option_struct->order_by_options.push_back(@=$3@>);
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'."
-                << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+  {
+    cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'."
+              << endl
+              << "`$3$' (hex) == " << hex << @=$3@> << endl;
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
 #endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = 0;
 
 };
 
@@ -1030,7 +1032,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: COMMON_NAME':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1077,7 +1079,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1124,7 +1126,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1171,7 +1173,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: BS_NUMBER':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1181,7 +1183,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
-
 
 @q ****** (6) show_stars_order_by_element --> HR_NUMBER.@> 
 @*5 \§show stars order by element> $\longrightarrow$ \.{HR\_NUMBER}.
@@ -1219,7 +1220,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: HR_NUMBER':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1266,7 +1267,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
