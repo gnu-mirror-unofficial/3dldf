@@ -151,6 +151,7 @@ class Star
 {
 
    friend Scanner_Type;
+   friend bool compare_common_name(Star *s, Star *);
 
    protected:
 
@@ -1715,6 +1716,32 @@ Planet::show(string text, Scanner_Node scanner_node) const
 
 } /* End of |Planet::show| definition.  */
 
+@q ***** (5) Comparison functions for |class Star|.@>
+@ Comparison functions for |class Star|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this section.
+\ENDLOG
+
+@q ****** (6) Compare |common_name|.@>
+@*7 Compare |common_name|.
+
+
+@q ****** (6) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_common_name(Star *s, Star *t)
+{
+   return s->common_name < t->common_name;
+}
+
+@q ***** (5) @>
+@
+@<Define non-member functions for |class Star|@>=
+
 @q * (1) Putting Astronomy together.@>
 @* Putting {\bf Astronomy} together.
 
@@ -1737,6 +1764,7 @@ This is what's compiled.
 @<Declare |class Planet|@>@;
 @<Initialize |static| |class Planet| data members@>@;
 @<Declare non-member template functions for |Planet|@>@;
+@<Define non-member functions for |class Star|@>@;
 @<Define |Planet| functions@>@;
 @<Global constants@>@;
 
@@ -1755,6 +1783,7 @@ This is what's compiled.
 @<Declare non-member template functions for |Constellation|@>@;
 @<Declare non-member template functions for |Planet|@>@;
 @<Declarations for the header file@>@;
+@<Declare non-member functions for |class Star|@>@;
 #endif
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
