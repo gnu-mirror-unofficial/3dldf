@@ -337,6 +337,13 @@ fp:
 	rm -f parser.o
 	$(MAKE) parser.o
 
+.PHONY: f-prog ## "force parser and prog"
+
+f-prog:
+	rm -f parser.o
+	$(MAKE) prog
+
+
 .PHONY: f-run ## "force parser and run"
 
 f-run:

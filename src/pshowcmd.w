@@ -670,7 +670,21 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
                 << endl
-                << "`show_stars_option_list' (`$3') == " << hex << @=$3@> << endl;
+                << "`show_stars_option_list' (`$3') == " << hex << @=$3@> 
+                << endl
+                << "`show_stars_option_list' (`$3') & `STARS_COMMON_NAME' == " << (@=$3@> & STARS_COMMON_NAME)
+                << endl
+                << "`show_stars_option_list' (`$3') & `STARS_FLAMSTEED_DESIGNATION' == " << (@=$3@> & STARS_FLAMSTEED_DESIGNATION)
+                << endl
+                << "`show_stars_option_list' (`$3') & `STARS_BAYER_DESIGNATION' == " << (@=$3@> & STARS_BAYER_DESIGNATION)
+                << endl
+                << "`show_stars_option_list' (`$3') & `STARS_BS_NUMBER' == " << (@=$3@> & STARS_BS_NUMBER)
+                << endl
+                << "`show_stars_option_list' (`$3') & `STARS_HR_NUMBER' == " << (@=$3@> & STARS_HR_NUMBER)
+                << endl
+                << "`show_stars_option_list' (`$3') & `STARS_APPROX_RANK_APPARENT_MAGNITUDE' == " 
+                << (@=$3@> & STARS_APPROX_RANK_APPARENT_MAGNITUDE)
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1070,7 +1084,194 @@ Added this rule.
 
 };
 
+@q ****** (6) show_stars_order_by_element --> BAYER_DESIGNATION.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{BAYER\_DESIGNATION}.
+\initials{LDF 2021.06.21.}
 
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: BAYER_DESIGNATION@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_BAYER_DESIGNATION;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) show_stars_order_by_element --> BS_NUMBER.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{BS\_NUMBER}.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: BS_NUMBER@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: BS_NUMBER'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_BS_NUMBER;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: BS_NUMBER':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+
+@q ****** (6) show_stars_order_by_element --> HR_NUMBER.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{HR\_NUMBER}.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: HR_NUMBER@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: HR_NUMBER'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_HR_NUMBER;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: HR_NUMBER':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) show_stars_order_by_element --> APPROX_RANK_APPARENT_MAGNITUDE.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{APPROX\_RANK\_APPARENT\_MAGNITUDE}.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_APPROX_RANK_APPARENT_MAGNITUDE;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
 
 @q ****** (6) show_stars_option_list --> show_stars_option_list WHERE show_stars_where_list@> 
 @*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \.{WHERE} \§show stars where list>.

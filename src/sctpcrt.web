@@ -868,6 +868,8 @@ and
    scanner_node->sphere_set_option_struct = 0;
    scanner_node->paraboloid_set_option_struct = 0;
 
+   scanner_node->stars_show_option_struct = 0;
+
 @q *** (3)  Pointers for |with_clause_draw|. @>
 @*2 Pointers for |with_clause_draw|.
 \initials{LDF 2004.06.28.} 
@@ -1256,11 +1258,11 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
      scanner_node->add_entry("origami_figure", ORIGAMI_FIGURE_DECLARATOR, spark);
      scanner_node->add_entry("glyph", GLYPH_DECLARATOR, spark);
 
-     scanner_node->add_entry("star", STAR_DECLARATOR, spark);
+     scanner_node->add_entry("star", STAR, spark);
      scanner_node->add_entry("stars", STARS, spark);
-     scanner_node->add_entry("constellation", CONSTELLATION_DECLARATOR, spark);
+     scanner_node->add_entry("constellation", CONSTELLATION, spark);
      scanner_node->add_entry("constellations", CONSTELLATIONS, spark);
-     scanner_node->add_entry("planet", PLANET_DECLARATOR, spark);
+     scanner_node->add_entry("planet", PLANET, spark);
      scanner_node->add_entry("planets", PLANETS, spark);
      scanner_node->add_entry("brightness", BRIGHTNESS, spark);
      scanner_node->add_entry("brightest", BRIGHTEST, spark);
@@ -1384,15 +1386,6 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
 
      scanner_node->add_entry("glyph_vector", 
                              GLYPH_VECTOR_DECLARATOR, spark);
-
-     scanner_node->add_entry("star_vector", 
-                             STAR_VECTOR_DECLARATOR, spark);
-
-     scanner_node->add_entry("constellation_vector", 
-                             CONSTELLATION_VECTOR_DECLARATOR, spark);
-
-     scanner_node->add_entry("planet_vector", 
-                             PLANET_VECTOR_DECLARATOR, spark);
 
      scanner_node->add_entry("plane_vector", 
                              PLANE_VECTOR_DECLARATOR, spark);
@@ -1724,10 +1717,6 @@ and |is_sphere_development_vector|.
      scanner_node->add_entry("is_origami_figure", IS_ORIGAMI_FIGURE, spark);
      scanner_node->add_entry("is_glyph", IS_GLYPH, spark);
 
-     scanner_node->add_entry("is_star", IS_STAR, spark);
-     scanner_node->add_entry("is_constellation", IS_CONSTELLATION, spark);
-     scanner_node->add_entry("is_planet", IS_PLANET, spark);
-
      scanner_node->add_entry("is_plane", IS_PLANE, spark);
 
      scanner_node->add_entry("is_nurb", IS_NURB, spark);
@@ -1825,16 +1814,6 @@ and |is_sphere_development_vector|.
 
      scanner_node->add_entry("is_glyph_vector", 
                              IS_GLYPH_VECTOR, spark);
-
-     scanner_node->add_entry("is_star_vector", 
-                             IS_STAR_VECTOR, spark);
-
-
-     scanner_node->add_entry("is_constellation_vector", 
-                             IS_CONSTELLATION_VECTOR, spark);
-
-     scanner_node->add_entry("is_planet_vector", 
-                             IS_PLANET_VECTOR, spark);
 
      scanner_node->add_entry("is_plane_vector", 
                              IS_PLANE_VECTOR, spark);

@@ -859,9 +859,6 @@ Added token declaration for |SPHERE_DEVELOPMENT_DECLARATOR|
 
 @=%token <string_value> GLYPH_DECLARATOR@>@/
 @=%token <string_value> PLANE_DECLARATOR@>@/
-@=%token <string_value> STAR_DECLARATOR@>@/
-@=%token <string_value> CONSTELLATION_DECLARATOR@>@/
-@=%token <string_value> PLANET_DECLARATOR@>@/
 
 @=%token <string_value> ORIGAMI_FIGURE_DECLARATOR@>@/
 
@@ -966,10 +963,6 @@ Added token declaration for |SPHERE_DEVELOPMENT_VECTOR_DECLARATOR|.
 
 @=%token <string_value> GLYPH_VECTOR_DECLARATOR@>@/
 @=%token <string_value> GLYPH_SLICE_VECTOR_DECLARATOR@>@/
-
-@=%token <string_value> STAR_VECTOR_DECLARATOR@>@/
-@=%token <string_value> CONSTELLATION_VECTOR_DECLARATOR@>@/
-@=%token <string_value> PLANET_VECTOR_DECLARATOR@>@/
 
 @=%token <string_value> PLANE_VECTOR_DECLARATOR@>@/
 

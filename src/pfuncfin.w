@@ -211,8 +211,7 @@ typedef void* yyscan_t;
 @ This is what's written to \filename{parser_1.h}.
 
 It's necessary to write the declaration of |LDF_LOCATION_TYPE| to
-\filename{parser.h}, because Bison does not write it to 
-\filename{parser.h++}.
+\filename{parser_1.h++}, because Bison does not write it to \filename{parser.h++}.
 \initials{LDF 2004.04.08.}   
 
 \LOG
