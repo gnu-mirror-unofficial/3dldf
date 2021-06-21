@@ -670,20 +670,24 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
                 << endl
-                << "`show_stars_option_list' (`$3') == " << hex << @=$3@> 
+                << "`show_stars_option_list' (`$3' == " << hex << @=$3@> << " (hex)" 
                 << endl
-                << "`show_stars_option_list' (`$3') & `STARS_COMMON_NAME' == " << (@=$3@> & STARS_COMMON_NAME)
+                << "`show_stars_option_list' (`$3') & `STARS_COMMON_NAME' == " << hex << (@=$3@> & STARS_COMMON_NAME) << " (hex)" 
                 << endl
-                << "`show_stars_option_list' (`$3') & `STARS_FLAMSTEED_DESIGNATION' == " << (@=$3@> & STARS_FLAMSTEED_DESIGNATION)
+                << "`show_stars_option_list' (`$3') & `STARS_FLAMSTEED_DESIGNATION' == " << hex 
+                << (@=$3@> & STARS_FLAMSTEED_DESIGNATION) << " (hex)" 
                 << endl
-                << "`show_stars_option_list' (`$3') & `STARS_BAYER_DESIGNATION' == " << (@=$3@> & STARS_BAYER_DESIGNATION)
+                << "`show_stars_option_list' (`$3') & `STARS_BAYER_DESIGNATION' == " << hex 
+                << (@=$3@> & STARS_BAYER_DESIGNATION) << " (hex)" 
                 << endl
-                << "`show_stars_option_list' (`$3') & `STARS_BS_NUMBER' == " << (@=$3@> & STARS_BS_NUMBER)
+                << "`show_stars_option_list' (`$3') & `STARS_BS_NUMBER' == " << hex 
+                << (@=$3@> & STARS_BS_NUMBER) << " (hex)" 
                 << endl
-                << "`show_stars_option_list' (`$3') & `STARS_HR_NUMBER' == " << (@=$3@> & STARS_HR_NUMBER)
+                << "`show_stars_option_list' (`$3') & `STARS_HR_NUMBER' == " << hex 
+                << (@=$3@> & STARS_HR_NUMBER) << " (hex)" 
                 << endl
                 << "`show_stars_option_list' (`$3') & `STARS_APPROX_RANK_APPARENT_MAGNITUDE' == " 
-                << (@=$3@> & STARS_APPROX_RANK_APPARENT_MAGNITUDE)
+                << hex << (@=$3@> & STARS_APPROX_RANK_APPARENT_MAGNITUDE) << " (hex)" 
                 << endl;
 
       log_message(cerr_strm);
