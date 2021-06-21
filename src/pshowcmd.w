@@ -81,8 +81,7 @@ referenced by |boolean_variables|, |boolean_primaries|,
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> SHOW boolean_expression'.";
+      cerr_strm << "*** Parser: `command --> SHOW boolean_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -137,8 +136,7 @@ Added \§fixed optional>.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> SHOW numeric_expression'.";
+      cerr_strm << "*** Parser: `command --> SHOW numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -324,8 +322,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> SHOW string_expression'.";
+      cerr_strm << "*** Parser: `command --> SHOW string_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -667,6 +664,21 @@ Added this rule.
 
     @=$$@> = static_cast<void*>(0);
 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
+                << endl
+                << "`show_stars_option_list' (`$3') == " << hex << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ***** (5) show_stars_option_list@>  
@@ -733,8 +745,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list'.";
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -743,7 +754,23 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+   @=$$@> += @=$3@>;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ***** (5) order_by@>  
@@ -788,7 +815,6 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    @=$$@> = 0;
 };
@@ -868,8 +894,25 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+   @=$$@> = @=$1@>;
 
-   @=$$@> = 0;
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_element':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+
 };
 
 @q ****** (6) show_stars_order_by_list --> show_stars_order_by_list COMMA show_stars_order_by_element@> 
@@ -901,7 +944,23 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+   @=$$@> = @=$1@> + @=$3@>;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'."
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ***** (5) show_stars_order_by_element@>  
@@ -930,15 +989,13 @@ Added this rule.
 
 @=show_stars_order_by_element: COMMON_NAME@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_order_by_element: COMMON_NAME'.";
+      cerr_strm << "*** Parser: `show_stars_order_by_element: COMMON_NAME'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -947,8 +1004,73 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+   @=$$@> = STARS_COMMON_NAME;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: COMMON_NAME':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
+
+@q ****** (6) show_stars_order_by_element --> FLAMSTEED_DESIGNATION.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION}.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: FLAMSTEED_DESIGNATION@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_FLAMSTEED_DESIGNATION;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION':"
+                << endl
+                << "`$$' == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+
 
 @q ****** (6) show_stars_option_list --> show_stars_option_list WHERE show_stars_where_list@> 
 @*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \.{WHERE} \§show stars where list>.
@@ -970,8 +1092,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_option_list: show_stars_option_list WHERE show_stars_where_list'.";
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list WHERE show_stars_where_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1016,8 +1137,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_where_list: show_stars_where_element'.";
+      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_element'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1050,8 +1170,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_where_list: show_stars_where_list where_operator show_stars_where_element'.";
+      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_list where_operator show_stars_where_element'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1096,8 +1215,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'.";
+      cerr_strm << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1143,8 +1261,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `where_operator: AND'.";
+      cerr_strm << "*** Parser: `where_operator: AND'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1175,8 +1292,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `where_operator: OR'.";
+      cerr_strm << "*** Parser: `where_operator: OR'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1364,8 +1480,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW macro_variable'.";
 
       log_message(cerr_strm);
@@ -2112,8 +2227,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser:  `command --> "
+      cerr_strm << "*** Parser:  `command --> "
                 << "SHOW boolean_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2192,8 +2306,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser:  `command --> "
+      cerr_strm << "*** Parser:  `command --> "
                 << "SHOW numeric_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2375,17 +2488,14 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW string_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW string_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2473,8 +2583,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW pen_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2539,8 +2648,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW dash_pattern_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2609,8 +2717,7 @@ Now deleting |Pointer_Vector<Color>* cv|.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW color_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2675,8 +2782,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW transform_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2741,8 +2847,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW focus_vector_expression'.";
 
       log_message(cerr_strm);
@@ -2807,8 +2912,7 @@ Added this rule.
    DEBUG = false; /* |true| */ @; 
    if (DEBUG)
       {
-          cerr_strm  
-                    << "*** Parser:  `command --> "
+          cerr_strm << "*** Parser:  `command --> "
                     << "SHOW picture_vector_variable'.";
 
           log_message(cerr_strm);
@@ -2865,7 +2969,6 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW macro_vector_variable@>@/
-
 {
 
   @<Common declarations for rules@>@; 
@@ -2874,8 +2977,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW macro_vector_variable'.";
 
       log_message(cerr_strm);
@@ -2940,8 +3042,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW origami_figure_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3006,8 +3107,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW glyph_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3072,8 +3172,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW plane_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3151,8 +3250,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW point_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3218,8 +3316,7 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW bool_point_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3285,8 +3382,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW path_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3522,8 +3618,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser:  'command --> "
+      cerr_strm << "*** Parser:  'command --> "
                 << "SHOW helix_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3588,8 +3683,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW rectangle_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3653,8 +3747,7 @@ Added this rule.
    DEBUG = false; /* |true| */ @; 
    if (DEBUG)
       {
-          cerr_strm  
-                    << "*** Parser: `command --> "
+          cerr_strm << "*** Parser: `command --> "
                     << "SHOW triangle_vector_expression'.";
 
           log_message(cerr_strm);
@@ -3719,8 +3812,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser:  `command --> "
+      cerr_strm << "*** Parser:  `command --> "
                 << "SHOW polygon_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3786,8 +3878,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW reg_polygon_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3853,8 +3944,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser:  'command --> "
+      cerr_strm << "*** Parser:  'command --> "
                 << "SHOW cone_vector_expression'.";
 
       log_message(cerr_strm);
@@ -3919,8 +4009,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser:  'command --> "
+      cerr_strm << "*** Parser:  'command --> "
                 << "SHOW cylinder_vector_expression'.";
 
       log_message(cerr_strm);
@@ -4117,8 +4206,7 @@ Added this rule.
   DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> "
+      cerr_strm << "*** Parser: `command --> "
                 << "SHOW polyhedron_vector_expression'.";
 
       log_message(cerr_strm);
