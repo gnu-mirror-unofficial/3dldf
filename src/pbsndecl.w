@@ -1599,13 +1599,8 @@ Added token declarations for
 @=%token <int_value> IS_GLYPH_SLICE_VECTOR@>@/
 
 @=%token <int_value> IS_STAR@>@/
-@=%token <int_value> IS_STAR_VECTOR@>@/
-
 @=%token <int_value> IS_CONSTELLATION@>@/
-@=%token <int_value> IS_CONSTELLATION_VECTOR@>@/
-
 @=%token <int_value> IS_PLANET@>@/
-@=%token <int_value> IS_PLANET_VECTOR@>@/
 
 @=%token <int_value> IS_PLANE@>@/
 @=%token <int_value> IS_PLANE_VECTOR@>@/
