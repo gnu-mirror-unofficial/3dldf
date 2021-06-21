@@ -4621,6 +4621,10 @@ Scanner_Type::get_astronomy(void)
 
    bool DEBUG = false;  /* |true|  */
 
+   string s;
+   string t;
+   size_t pos;
+
 #ifndef MYSQL_AVAILABLE
    cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `MYSQL_AVAILABLE' isn't defined."
         << endl
@@ -4642,6 +4646,8 @@ Scanner_Type::get_astronomy(void)
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
    int status = 0;
 
@@ -4662,13 +4668,12 @@ Scanner_Type::get_astronomy(void)
             << "arabic_name, flamsteed_designation_number, "
             << "bayer_designation_greek_letter, bs_hr_number, "
             << "approx_rank_apparent_magnitude, constellation_abbreviation, "
-            << "constellation_full_name, constellation_number, "
+            << "constellation_full_name, constellation_name_genitive, constellation_number, "
             << "right_ascension_hours, right_ascension_minutes, "
             << "right_ascension_seconds, right_ascension_decimal_hours, "
             << "declination_degrees, declination_minutes, declination_seconds, "
-            << "declination_decimal_degrees from Stars where common_name != \"\" "
-            << "order by common_name;";
-
+            << "declination_decimal_degrees from Stars "
+            << "order by constellation_abbreviation, bayer_designation_greek_letter;";
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -4682,6 +4687,8 @@ Scanner_Type::get_astronomy(void)
    sql_strm.str("");
 
 @q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
    if (status != 0)
    {
@@ -4704,6 +4711,8 @@ Scanner_Type::get_astronomy(void)
    }
 
 @q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
 #if DEBUG_COMPILE
    else if (DEBUG)
@@ -4723,6 +4732,8 @@ Scanner_Type::get_astronomy(void)
 
 
 @q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
    /*  Process the contents of |curr_row|  */
 
@@ -4770,6 +4781,8 @@ Scanner_Type::get_astronomy(void)
        }  /* |if (curr_row == 0)|  */
 
 @q ***** (5) @>
+@
+@<Define |Scanner_Type| functions@>=
 
        else 
        {
@@ -4816,6 +4829,8 @@ Scanner_Type::get_astronomy(void)
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) @>
+@
+@<Define |Scanner_Type| functions@>=
 
          status = star->set(this);
 
@@ -4876,6 +4891,8 @@ Scanner_Type::get_astronomy(void)
    }
 
 @q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
 
    if (star_vector.size() > 0)
    {
@@ -4893,10 +4910,6 @@ Scanner_Type::get_astronomy(void)
 
 @q ***** (5) @>
 
-      string s;
-      string t;
-      size_t pos;
-
       for (vector<Star *>::iterator iter = star_vector.begin();
            iter != star_vector.end();
            ++iter)
@@ -4912,6 +4925,8 @@ Scanner_Type::get_astronomy(void)
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ****** (6) @>
+@
+@<Define |Scanner_Type| functions@>=
 
          if ((*iter)->common_name != "")
          {
@@ -4960,6 +4975,25 @@ Scanner_Type::get_astronomy(void)
 @q ******* (7) @>
 
          }  /* |if ((*iter)->common_name != "")|  */
+
+@q ****** (6) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+         else if ((*iter)->bayer_designation_greek_letter != "" && (*iter)->constellation_name_genitive != "")
+         {
+            s = (*iter)->bayer_designation_greek_letter;
+            s += "_";
+            s += (*iter)->constellation_name_genitive;
+
+            cerr << "s == " << s << endl;
+
+         }
+
+
+@q ****** (6) @>
+@
+@<Define |Scanner_Type| functions@>=
 
 #if DEBUG_COMPILE
          if (DEBUG)

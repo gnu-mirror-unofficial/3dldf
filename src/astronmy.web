@@ -164,6 +164,7 @@ class Star
       int approx_rank_apparent_magnitude;
       string constellation_abbreviation;
       string constellation_full_name;
+      string constellation_name_genitive;
       int constellation_number;
       int right_ascension_hours;
       int right_ascension_minutes;
@@ -292,6 +293,7 @@ Star::Star(void)
       approx_rank_apparent_magnitude = 0;
       constellation_abbreviation = "";
       constellation_full_name = "";
+      constellation_name_genitive = "";
       constellation_number = 0;
       right_ascension_hours = 0;
       right_ascension_minutes = 0;
@@ -335,6 +337,7 @@ Star::Star(const Star &s)
       approx_rank_apparent_magnitude = s.approx_rank_apparent_magnitude;
       constellation_abbreviation = s.constellation_abbreviation;
       constellation_full_name = s.constellation_full_name;
+      constellation_name_genitive = s.constellation_name_genitive;
       constellation_number = s.constellation_number;
       right_ascension_hours = s.right_ascension_hours;
       right_ascension_minutes = s.right_ascension_minutes;
@@ -505,15 +508,16 @@ Star::set(Scanner_Node scanner_node)
       approx_rank_apparent_magnitude = atoi(scanner_node->curr_row[7]);
       constellation_abbreviation     = scanner_node->curr_row[8];
       constellation_full_name        = scanner_node->curr_row[9];
-      constellation_number           = atoi(scanner_node->curr_row[10]);
-      right_ascension_hours          = atoi(scanner_node->curr_row[11]);
-      right_ascension_minutes        = atoi(scanner_node->curr_row[12]);
-      right_ascension_seconds        = atof(scanner_node->curr_row[13]);
-      right_ascension_decimal_hours  = atof(scanner_node->curr_row[14]);
-      declination_degrees            = atoi(scanner_node->curr_row[15]);
-      declination_minutes            = atoi(scanner_node->curr_row[16]);
-      declination_seconds            = atof(scanner_node->curr_row[17]);
-      declination_decimal_degrees    = atof(scanner_node->curr_row[18]);
+      constellation_name_genitive    = scanner_node->curr_row[10];
+      constellation_number           = atoi(scanner_node->curr_row[11]);
+      right_ascension_hours          = atoi(scanner_node->curr_row[12]);
+      right_ascension_minutes        = atoi(scanner_node->curr_row[13]);
+      right_ascension_seconds        = atof(scanner_node->curr_row[14]);
+      right_ascension_decimal_hours  = atof(scanner_node->curr_row[15]);
+      declination_degrees            = atoi(scanner_node->curr_row[16]);
+      declination_minutes            = atoi(scanner_node->curr_row[17]);
+      declination_seconds            = atof(scanner_node->curr_row[18]);
+      declination_decimal_degrees    = atof(scanner_node->curr_row[19]);
 
       
       
@@ -713,6 +717,7 @@ Star::operator=(const Star& s)
       approx_rank_apparent_magnitude = s.approx_rank_apparent_magnitude;
       constellation_abbreviation = s.constellation_abbreviation;
       constellation_full_name = s.constellation_full_name;
+      constellation_name_genitive = s.constellation_name_genitive;
       constellation_number = s.constellation_number;
       right_ascension_hours = s.right_ascension_hours;
       right_ascension_minutes = s.right_ascension_minutes;
@@ -832,6 +837,7 @@ Star::show(string text, Scanner_Node scanner_node) const
          << "approx_rank_apparent_magnitude == " << approx_rank_apparent_magnitude << endl 
          << "constellation_abbreviation     == " << constellation_abbreviation << endl 
          << "constellation_full_name        == " << constellation_full_name << endl 
+         << "constellation_name_genitive    == " << constellation_name_genitive << endl 
          << "constellation_number           == " << constellation_number << endl 
          << "right_ascension_hours          == " << right_ascension_hours << endl 
          << "right_ascension_minutes        == " << right_ascension_minutes << endl 
