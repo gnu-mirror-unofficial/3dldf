@@ -2763,6 +2763,12 @@ Added |pen_vector_ptr| and |dash_pattern_vector_ptr|.
 @*4 Pointers for |with_clause_output|.
 \initials{LDF 2004.06.28.}
 
+!! PLEASE NOTE:  Do not delete the pointer elements on |star_vector|!  They are pointers
+to |Stars| that are also pointed to by pointers on the ID map.  They are deleted (and set to 0)
+when the ID map is destroyed.  If the pointers on |star_vector| are deleted, it causes a segmentation
+fault because the pointers on ID map aren't set to 0.
+\initials{LDF 2021.06.21.}
+
 \LOG
 \initials{LDF 2004.06.28.}
 Added this section.
@@ -2802,6 +2808,8 @@ Added |surface_hiding_value_ptr|.
   void* max_z_proj_ptr;
 
   void* surface_hiding_value_ptr;
+
+  vector<Star *> star_vector;
 
 @q ***** (5) Pointers for |predicate_clause|. @>
 @*4 Pointers for |predicate_clause|.

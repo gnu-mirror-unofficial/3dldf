@@ -647,6 +647,8 @@ Added this rule.
   
 @=command: SHOW STARS show_stars_option_list@>@/
 {
+@q ******* (7) @>
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -687,6 +689,17 @@ Added this rule.
             cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
         }
 
+        if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
+           cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options' reversed:"
+                     << endl;
+   
+        for (vector<unsigned int>::reverse_iterator iter = scanner_node->stars_show_option_struct->order_by_options.rbegin();
+             iter != scanner_node->stars_show_option_struct->order_by_options.rend();
+             ++iter)
+        {
+            cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
+        }
+
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
@@ -694,8 +707,25 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q ******* (7) @>
+    /* where clause  */
+
+   if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
+   {
+       for (vector<unsigned int>::reverse_iterator iter = scanner_node->stars_show_option_struct->order_by_options.rbegin();
+            iter != scanner_node->stars_show_option_struct->order_by_options.rend();
+            ++iter)
+       {
+
+
+       }  
+
+   }
+
     delete scanner_node->stars_show_option_struct;
     scanner_node->stars_show_option_struct = 0;
+
+@q ******* (7) @>
 
 };
 
