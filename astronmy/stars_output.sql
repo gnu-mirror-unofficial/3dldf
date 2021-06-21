@@ -534,6 +534,14 @@ select * from Stars where approx_rank_apparent_magnitude = 0\G
 
 select * from Stars where bs_hr_number = 0\G
 
+select approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive, bs_hr_number
+from Stars where common_name <> "" order by approx_rank_apparent_magnitude, bs_hr_number;
+
+select approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive, bs_hr_number
+from Stars order by approx_rank_apparent_magnitude, bs_hr_number;
+
+
+
 
 mysql> select count(*) from Stars where bayer_designation_greek_letter = "";
 +----------+
@@ -542,6 +550,10 @@ mysql> select count(*) from Stars where bayer_designation_greek_letter = "";
 |      412 |
 +----------+
 1 row in set (0.01 sec)
+
+-- approx_rank_apparent_magnitude == 13, 18, 23, 42 Probably just don't have common_name, but may possibly be missing.
+-- CHECK!!
+
 /* ** (2) */
 
 /* Local Variables:                   */

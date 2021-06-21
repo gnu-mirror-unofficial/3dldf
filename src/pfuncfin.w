@@ -169,10 +169,8 @@ Now setting |DEBUG_COMPILE| back to |DEBUG_COMPILE_SAVE|
 and undefining |DEBUG_COMPILE_SAVE|.
 
 \initials{LDF 2005.10.22.}
-@:BUG FIX@> BUG FIX:  Fixed the way I reset  
-|DEBUG_COMPILE| to |DEBUG_COMPILE_SAVE|.  
-The way it was before didn't work, 
-because the bodies of macros are not expanded in 
+@:BUG FIX@> BUG FIX:  Fixed the way I reset |DEBUG_COMPILE| to |DEBUG_COMPILE_SAVE|.  
+The way it was before didn't work, because the bodies of macros are not expanded in 
 definitions, but only when the macros are expanded.
 \ENDLOG 
 

@@ -656,8 +656,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `command --> SHOW STARS show_stars_option_list'.";
+      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -702,8 +701,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_option_list:  EMPTY'.";
+      cerr_strm << "*** Parser: `show_stars_option_list:  EMPTY'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -715,8 +713,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ****** (6) show_stars_option_list --> show_stars_option_list ORDER_BY show_stars_order_by_list@> 
-@*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \.{ORDER_BY} \§show stars order by list>.
+@q ****** (6) show_stars_option_list --> show_stars_option_list order_by show_stars_order_by_list@> 
+@*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \§{order by} \§show stars order by list>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -726,7 +724,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_option_list: show_stars_option_list ORDER_BY show_stars_order_by_list@>@/
+@=show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -736,12 +734,91 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm  
-                << "*** Parser: `show_stars_option_list: show_stars_option_list ORDER_BY show_stars_order_by_list'.";
+                << "*** Parser: `show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
       
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+};
+
+@q ***** (5) order_by@>  
+@*4 \§order by>.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> order_by@>
+
+@q ****** (6) order_by --> ORDER BY@> 
+@*5 \§order by> $\longrightarrow$ \.{ORDER} \.{BY}.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=order_by: ORDER BY@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `order_by: ORDER BY'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+   @=$$@> = 0;
+};
+
+@q ****** (6) order_by --> ORDER_BY@> 
+@*5 \§order by> $\longrightarrow$ \.{ORDER\_BY}.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=order_by: ORDER_BY@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `order_by: ORDER_BY'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -796,7 +873,7 @@ Added this rule.
 };
 
 @q ****** (6) show_stars_order_by_list --> show_stars_order_by_list COMMA show_stars_order_by_element@> 
-@*5 \§show stars order by list> $\longrightarrow$ \§show stars order by list> COMMA \§show stars order by element>.
+@*5 \§show stars order by list> $\longrightarrow$ \§show stars order by list> \.{COMMA} \§show stars order by element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -815,8 +892,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm  
-                << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'.";
+      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -824,7 +900,6 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
    @=$$@> = 0;
 };

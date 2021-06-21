@@ -581,12 +581,18 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     PLANETS@>@/
 @=%token <int_value>     BRIGHTNESS@>@/
 @=%token <int_value>     BRIGHTEST@>@/
+@=%token <int_value>     ORDER@>@/
 @=%token <int_value>     ORDER_BY@>@/
 @=%token <int_value>     WHERE@>@/
 @=%token <int_value>     LIMIT@>@/
 @=%token <int_value>     ASCENDING@>@/
 @=%token <int_value>     DESCENDING@>@/
 @=%token <int_value>     COMMON_NAME@>@/
+@=%token <int_value>     FLAMSTEED_DESIGNATION@>@/   
+@=%token <int_value>     BAYER_DESIGNATION@>@/ 
+@=%token <int_value>     BS_NUMBER@>@/                   
+@=%token <int_value>     HR_NUMBER@>@/                   
+@=%token <int_value>     APPROX_RANK_APPARENT_MAGNITUDE@>@/ 
 
 @=%token <pointer_value> PLANE@>@/
 
@@ -3263,6 +3269,13 @@ Scan_Parse
   extern const unsigned int MIN_SHAPE = POINT; 
   extern const unsigned int MAX_SHAPE = POLYHEDRON;
 
+  extern const unsigned int STARS_COMMON_NAME                    =  1U;   
+  extern const unsigned int STARS_FLAMSTEED_DESIGNATION          =  2U;
+  extern const unsigned int STARS_BAYER_DESIGNATION              =  4U; 
+  extern const unsigned int STARS_BS_NUMBER                      =  8U;                   
+  extern const unsigned int STARS_HR_NUMBER                      = 16U;                   
+  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE = 32U; 
+
 };
 
 @
@@ -3272,6 +3285,14 @@ Scan_Parse
 {
   extern const unsigned int MIN_SHAPE; 
   extern const unsigned int MAX_SHAPE;
+
+  extern const unsigned int STARS_COMMON_NAME;   
+  extern const unsigned int STARS_FLAMSTEED_DESIGNATION;
+  extern const unsigned int STARS_BAYER_DESIGNATION; 
+  extern const unsigned int STARS_BS_NUMBER;                   
+  extern const unsigned int STARS_HR_NUMBER;                   
+  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE; 
+
 };
 
 @q ** (2) |name_map| and |type_name_map|. @>

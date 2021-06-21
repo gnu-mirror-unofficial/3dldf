@@ -337,6 +337,13 @@ fp:
 	rm -f parser.o
 	$(MAKE) parser.o
 
+.PHONY: f-run ## "force parser and run"
+
+f-run:
+	rm -f parser.o
+	$(MAKE) parser.o
+	$(MAKE) run
+
 #### *** (3) parser2
 
 # parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
