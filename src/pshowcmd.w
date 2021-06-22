@@ -651,6 +651,8 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
+  int i = 0;
+
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
@@ -664,70 +666,183 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    @=$$@> = static_cast<void*>(0);
+@q ******* (7) @>
+@
+@<Define rules@>= 
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
+  {
+      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
+                << endl;
+
+
+
+      cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options.size()' == " 
+                << scanner_node->stars_show_option_struct->order_by_options.size() << endl;
+
+      if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
+         cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options':"
+                   << endl;
+
+
+      for (vector<unsigned int>::iterator iter = scanner_node->stars_show_option_struct->order_by_options.begin();
+           iter != scanner_node->stars_show_option_struct->order_by_options.end();
+           ++iter)
+      {
+          cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
+      }
+
+      if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
+         cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options' reversed:"
+                   << endl;
+  
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    } /* |if (DEBUG)| */
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ******* (7) @>
+@
+@<Define rules@>= 
+
+    for (vector<unsigned int>::reverse_iterator iter = scanner_node->stars_show_option_struct->order_by_options.rbegin();
+           iter != scanner_node->stars_show_option_struct->order_by_options.rend();
+           ++iter)
     {
-        cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
-                  << endl;
+@q ******** (8) @>
 
-        int i = 0;
+    /* !!START HERE  Write predicates for sorting scanner_node->star_vector.  */ 
 
-        cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options.size()' == " 
-                  << scanner_node->stars_show_option_struct->order_by_options.size() << endl;
+#if DEBUG_COMPILE
+        if (DEBUG)
+        { 
+           cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
+        }      
+#endif /* |DEBUG_COMPILE|  */@; 
+        
+@q ******** (8) @>
 
-        if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
-           cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options':"
-                     << endl;
-
-        for (vector<unsigned int>::iterator iter = scanner_node->stars_show_option_struct->order_by_options.begin();
-             iter != scanner_node->stars_show_option_struct->order_by_options.end();
-             ++iter)
+        if (*iter == STARS_COMMON_NAME)
         {
-            cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_COMMON_NAME'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_common_name);
         }
 
-        if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
-           cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options' reversed:"
-                     << endl;
-   
-        for (vector<unsigned int>::reverse_iterator iter = scanner_node->stars_show_option_struct->order_by_options.rbegin();
-             iter != scanner_node->stars_show_option_struct->order_by_options.rend();
-             ++iter)
+@q ******** (8) @>
+
+        else if (*iter == STARS_FLAMSTEED_DESIGNATION_NUMBER)
         {
-            cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
-        }
+           cerr_strm << "`*iter' == `STARS_FLAMSTEED_DESIGNATION_NUMBER'." << endl; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_flamsteed_designation_number);
+
+        }         
+
+@q ******** (8) @>
+ 
+        else if (*iter == STARS_BAYER_DESIGNATION_GREEK_LETTER)
+        {
+           cerr_strm << "`*iter' == `STARS_BAYER_DESIGNATION_GREEK_LETTER'." << endl; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_bayer_designation_greek_letter);
+
+        }         
+
+@q ******** (8) @>
+     
+        else if (*iter == STARS_BS_HR_NUMBER || *iter == STARS_BS_NUMBER || *iter == STARS_HR_NUMBER)
+        {
+           cerr_strm << "`*iter' == `STARS_BS_HR_NUMBER' (or `STARS_BS_NUMBER' or `STARS_HR_NUMBER')." 
+                     << endl; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_bs_hr_number);
+
+        }                                        
+
+@q ******** (8) @>
+                               
+        else if (*iter == STARS_APPROX_RANK_APPARENT_MAGNITUDE)
+        {
+           cerr_strm << "`*iter' == `STARS_APPROX_RANK_APPARENT_MAGNITUDE'." << endl; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_approx_rank_apparent_magnitude);
+
+        } 
+
+@q ******** (8) @>
+
+    }  /* |for| */
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+    }      
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
+                  << endl 
+                  << "After calls to `stable_sort': `scanner_node->star_vector':" << endl;
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
-      
-    }
-#endif /* |DEBUG_COMPILE|  */@;
+
+        for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
+             iter != scanner_node->star_vector.end();
+             ++iter)
+        {
+           (*iter)->show();
+        }
+
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) "where" clause @>
+@
+@<Define rules@>=
 
 @q ******* (7) @>
-    /* where clause  */
-
-   if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
-   {
-       for (vector<unsigned int>::reverse_iterator iter = scanner_node->stars_show_option_struct->order_by_options.rbegin();
-            iter != scanner_node->stars_show_option_struct->order_by_options.rend();
-            ++iter)
-       {
-
-
-       }  
-
-   }
+@
+@<Define rules@>= 
 
     delete scanner_node->stars_show_option_struct;
     scanner_node->stars_show_option_struct = 0;
 
+    @=$$@> = static_cast<void*>(0);
+
 @q ******* (7) @>
 
 };
+
+@q ****** (6) @>
 
 @q ***** (5) show_stars_option_list@>  
 @*4 \§show stars option list>.
@@ -1073,8 +1188,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> FLAMSTEED_DESIGNATION.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION}.
+@q ****** (6) show_stars_order_by_element --> FLAMSTEED_DESIGNATION_NUMBER.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION\__NUMBER}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1084,7 +1199,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: FLAMSTEED_DESIGNATION@>@/
+@=show_stars_order_by_element: FLAMSTEED_DESIGNATION_NUMBER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1092,7 +1207,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION'.";
+      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION_NUMBER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1101,13 +1216,13 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = STARS_FLAMSTEED_DESIGNATION;
+   @=$$@> = STARS_FLAMSTEED_DESIGNATION_NUMBER;
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION':"
+      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION_NUMBER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1120,8 +1235,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> BAYER_DESIGNATION.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{BAYER\_DESIGNATION}.
+@q ****** (6) show_stars_order_by_element --> BAYER_DESIGNATION_GREEK_LETTER.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{BAYER\_DESIGNATION\_GREEK\_LETTER}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1131,7 +1246,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: BAYER_DESIGNATION@>@/
+@=show_stars_order_by_element: BAYER_DESIGNATION_GREEK_LETTER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1139,7 +1254,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION'.";
+      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION_GREEK_LETTER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1148,13 +1263,13 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = STARS_BAYER_DESIGNATION;
+   @=$$@> = STARS_BAYER_DESIGNATION_GREEK_LETTER;
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION':"
+      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION_GREEK_LETTER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 

@@ -4986,7 +4986,14 @@ Scanner_Type::get_astronomy(void)
             s += "_";
             s += (*iter)->constellation_name_genitive;
 
-            cerr << "s == " << s << endl;
+/* !!START HERE  LDF 2021.06.22.  Create variable.  Move this above.  The common names should be synonyms.  */ 
+
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "s == " << s << endl;
+            }            
+#endif /* |DEBUG_COMPILE|  */@; 
 
          }
 

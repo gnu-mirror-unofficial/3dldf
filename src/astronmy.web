@@ -152,6 +152,12 @@ class Star
 
    friend Scanner_Type;
    friend bool compare_common_name(Star *s, Star *);
+   friend bool compare_flamsteed_designation_number(Star *s, Star *);
+   friend bool compare_bayer_designation_greek_letter(Star *s, Star *);
+   friend bool compare_bs_hr_number(Star *s, Star *);
+   friend bool compare_bs_number(Star *s, Star *);
+   friend bool compare_hr_number(Star *s, Star *);
+   friend bool compare_approx_rank_apparent_magnitude(Star *s, Star *);
 
    protected:
 
@@ -1717,7 +1723,7 @@ Planet::show(string text, Scanner_Node scanner_node) const
 } /* End of |Planet::show| definition.  */
 
 @q ***** (5) Comparison functions for |class Star|.@>
-@ Comparison functions for |class Star|.
+@*6 Comparison functions for |class Star|.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1727,20 +1733,171 @@ Added this section.
 
 @q ****** (6) Compare |common_name|.@>
 @*7 Compare |common_name|.
+\initials{LDF 2021.06.21.}
 
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
 
-@q ****** (6) Declaration.  @>
+@q ******* (7) Declaration.  @>
 @
 @<Declare non-member functions for |class Star|@>=
+bool
+compare_common_name(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
 bool
 compare_common_name(Star *s, Star *t)
 {
    return s->common_name < t->common_name;
 }
 
-@q ***** (5) @>
+@q ****** (6) Compare |flamsteed_designation_number|.@>
+@*7 Compare |flamsteed_designation_number|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_flamsteed_designation_number(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
 @
 @<Define non-member functions for |class Star|@>=
+bool
+compare_flamsteed_designation_number(Star *s, Star *t)
+{
+   return s->flamsteed_designation_number < t->flamsteed_designation_number;
+}
+
+@q ****** (6) Compare |bayer_designation_greek_letter|.@>
+@*7 Compare |bayer_designation_greek_letter|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter(Star *s, Star *t)
+{
+   return s->bayer_designation_greek_letter < t->bayer_designation_greek_letter;
+}
+
+@q ****** (6) Compare |bs_hr_number|.@>
+@*7 Compare |bs_hr_number|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bs_hr_number(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bs_hr_number(Star *s, Star *t)
+{
+   return s->bs_hr_number < t->bs_hr_number;
+}
+
+@q ****** (6) Compare |bs_number|.@>
+@*7 Compare |bs_number|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bs_number(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bs_number(Star *s, Star *t)
+{
+   return compare_bs_hr_number(s, t);
+}
+
+@q ****** (6) Compare |hr_number|.@>
+@*7 Compare |hr_number|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_hr_number(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_hr_number(Star *s, Star *t)
+{
+   return compare_bs_hr_number(s, t);
+}
+
+@q ****** (6) Compare |approx_rank_apparent_magnitude|.@>
+@*7 Compare |approx_rank_apparent_magnitude|.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_approx_rank_apparent_magnitude(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_approx_rank_apparent_magnitude(Star *s, Star *t)
+{
+   return s->approx_rank_apparent_magnitude < t->approx_rank_apparent_magnitude;
+}
 
 @q * (1) Putting Astronomy together.@>
 @* Putting {\bf Astronomy} together.
@@ -1755,6 +1912,7 @@ This is what's compiled.
 @<Include files@>@;
 @<Declare |class Star|@>@;
 @<Initialize |static| |class Star| data members@>@;
+@<Declare non-member functions for |class Star|@>@;
 @<Declare non-member template functions for |Star|@>@;
 @<Define |Star| functions@>@;
 @<Declare |class Constellation|@>@;
