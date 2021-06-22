@@ -240,7 +240,40 @@ struct Stars_Where_Option_Struct
       return;
    }
 
+   void show(string s = "");
+
 };
+
+@q *** (3) Show.@>
+@ Show.
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@<Define |struct Stars_Where_Option_Struct| functions@>=
+
+void
+Stars_Where_Option_Struct::show(string s)
+{
+   if (s == "")
+      cerr << "Stars_Where_Option_Struct:" << endl;
+   else
+      cerr << s << endl;
+
+   cerr << "conjunction == " << conjunction;
+ 
+   if (conjunction > 0)
+      cerr << " == " << name_map[conjunction];
+
+   cerr << endl
+        << "field       == " << field << " == " << name_map[field] << endl
+        << "value       == " << value << endl
+        << "comparison_string == \"" << comparison_string << "\"" << endl 
+        << endl;
+}
+
 
 @q ** (2) |struct Stars_Show_Option_Struct| declaration.@>
 @*1 |struct Stars_Show_Option_Struct| declaration.
@@ -2064,6 +2097,7 @@ This is what's compiled.
 @<Define non-member functions for |class Star|@>@;
 @<Define |Planet| functions@>@;
 @<Global constants@>@;
+@<Define |struct Stars_Where_Option_Struct| functions@>@;
 
 @q ** (2) This is what's written to "astronmy.h".@> 
 

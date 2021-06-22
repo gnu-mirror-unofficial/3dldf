@@ -684,7 +684,6 @@ Added this rule.
          cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options':"
                    << endl;
 
-
       for (vector<unsigned int>::iterator iter = scanner_node->stars_show_option_struct->order_by_options.begin();
            iter != scanner_node->stars_show_option_struct->order_by_options.end();
            ++iter)
@@ -914,6 +913,65 @@ Added this rule.
 @q ******* (7) "where" clause @>
 @
 @<Define rules@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      if (scanner_node->stars_show_option_struct->where_options.size() == 0)
+      {
+         cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
+                   << endl 
+                   << "`scanner_node->stars_show_option_struct->where_options' is empty."
+                   << endl 
+                   << "Not showing."<< endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+      }
+      else
+      {
+         cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
+                   << endl 
+                   << "`scanner_node->stars_show_option_struct->where_options.size()' == "
+                   << scanner_node->stars_show_option_struct->where_options.size() 
+                   << endl 
+                   << "`scanner_node->stars_show_option_struct->where_options':"
+                   << endl;
+
+         int i = 0;
+
+         for (vector<Stars_Where_Option_Struct>::iterator iter = scanner_node->stars_show_option_struct->where_options.begin();
+              iter!=  scanner_node->stars_show_option_struct->where_options.end();
+              ++iter)
+         {
+            cerr_strm << "where option " << i++ << ":" << endl
+                      << "conjunction == " << iter->conjunction;
+
+            if (iter->conjunction > 0)
+               cerr_strm << " == " << name_map[iter->conjunction];
+
+            cerr_strm << endl
+                      << "field             == " << iter->field    << " == " << name_map[iter->field]
+                      << endl
+                      << "relation          == " << iter->relation << " == " << name_map[iter->relation]
+                      << endl
+                      << "value             == " << iter->value 
+                      << endl 
+                      << "comparison_string == \"" << iter->comparison_string << "\""
+                      << endl << endl;
+
+         }  /* |for| */
+
+
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+      }  /* |else| */
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
 @
@@ -1771,7 +1829,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-
    @=$$@> = 0;
 };
 
@@ -1795,7 +1852,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_list where_operator show_stars_where_element'.";
+      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_list where_operator show_stars_where_element'."
+                << endl 
+                << "`where_operator' ($2) == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1804,7 +1863,11 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+    scanner_node->stars_show_option_struct->where_options.back().conjunction = @=$2@>;
 
+    scanner_node->stars_show_option_struct->where_options.back().show(
+      "scanner_node->stars_show_option_struct->where_options.back():");
+  
    @=$$@> = 0;
 };
 
@@ -1842,7 +1905,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'.";
 
-      cerr_strm << "`relation' == " << name_map[@=$$@>] << endl;
+      cerr_strm << "`relation' == " << name_map[@=$2@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1851,10 +1914,58 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+    Stars_Where_Option_Struct w;
+
+    w.field              = COMMON_NAME;
+    w.relation           = @=$2@>;
+    w.comparison_string = *static_cast<string *>(@=$3@>); 
+   
+    scanner_node->stars_show_option_struct->where_options.push_back(w);
 
    @=$$@> = 0;
 };
 
+@q ****** (6) show_stars_where_element --> BAYER_DESIGNATION_GREEK_LETTER relation string_expression.@> 
+@*5 \§show stars where element> $\longrightarrow$ \.{BAYER\_DESIGNATION\_GREEK\_LETTER} \§relation> 
+\§string expression>.@> 
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_where_element: BAYER_DESIGNATION_GREEK_LETTER relation string_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_where_element: BAYER_DESIGNATION_GREEK_LETTER relation string_expression'.";
+
+      cerr_strm << "`relation' == " << name_map[@=$2@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Stars_Where_Option_Struct w;
+    
+    w.field              = BAYER_DESIGNATION_GREEK_LETTER;
+    w.relation           = @=$2@>;
+    w.comparison_string = *static_cast<string *>(@=$3@>); 
+   
+    scanner_node->stars_show_option_struct->where_options.push_back(w);
+
+   @=$$@> = 0;
+};
 
 @q ***** (5) where_operator@>  
 @*4 \§where operator>.
@@ -1897,7 +2008,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+   @=$$@> = AND;
 };
 
 @q ****** (6) where_operator --> OR.@> 
@@ -1928,10 +2039,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+   @=$$@> = OR;
 };
-
-
 
 @q **** (4) command --> SHOW plane_expression@>
 
