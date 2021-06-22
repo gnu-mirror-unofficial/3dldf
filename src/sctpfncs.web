@@ -4624,6 +4624,7 @@ Scanner_Type::get_astronomy(void)
    string s;
    string t;
    string u;
+   string w;
    size_t pos;
 
 #ifndef MYSQL_AVAILABLE
@@ -5067,6 +5068,10 @@ cerr << "Here I am." << endl;
                   break;
             } 
 
+@q ******* (7) @>
+@
+@<Define |Scanner_Type| functions@>=
+
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
@@ -5088,45 +5093,120 @@ cerr << "Here I am." << endl;
             }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
+            add_entry(u, STAR, regular, is_constant, not_array, 
+                      Id_Map_Entry_Type::KNOWN, *iter);
 
             for (int i = 0; i < t.size(); ++i)
                t[i] = tolower(t[i]);
 
-            u  = s;
-            u += "_"; 
-            u += t;
-            
+            w  = s;
+            w += "_"; 
+            w += t;
+
+
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "After calls to `tolower':  `u' == " << u << " (name of synonym for `star' constant)" 
-                    << endl;
-
+               cerr << "After calls to `tolower':";
             }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-#if 0 
-            s = (*iter)->common_name;
-
-            add_entry(s, STAR, regular, is_constant, not_array, 
-                      Id_Map_Entry_Type::KNOWN, *iter);
-
-            t = s; 
-
-            for (int i = 0; i < s.size(); ++i)
-              t[i] = tolower(t[i]);
- 
-            if (add_synonym(t, s) == 0)
+            if (w != u)
             {
-               cerr << "ERROR!  In `Scanner_Type::get_astronomy':" << endl
-                    << "`add_synonym' failed:  `t' == " << t << ".  `s' == " << s << "."
-                    << endl
-                    << "Will try to continue."
-                    << endl;
-            }
 
-#endif 
+#if DEBUG_COMPILE
+               if (DEBUG)
+               { 
+                  cerr << "`w' == " << w << " (!= `u' == " << u << ")" << endl
+                       << "Calling `Scanner_Type::add_synonym'." << endl;
+               }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+               add_synonym(w, u);
+            } 
+#if DEBUG_COMPILE
+            else if (DEBUG)
+            { 
+                  cerr << "`w' == " << w << " (== `u' == " << u << ")" << endl
+                       << "Not calling `Scanner_Type::add_synonym'." << endl;
+            }          
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+            if ((*iter)->common_name != "")
+            {
+               s = (*iter)->common_name;
+
+               while (true)
+               {
+                  pos = s.find(" ");
+                  if (pos != string::npos)
+                     s.replace(pos, 1, "_");
+                  else
+                     break;
+               }
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+               { 
+                   cerr << "`(*iter)->common_name' == " << (*iter)->common_name << " (!= \"\")"
+                        << endl 
+                        << "`s' == " << s << endl 
+                        << "Calling `Scanner_Type::add_synonym'."
+                        << endl;
+               }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+               add_synonym(s, u);   
+
+               t = s;
+
+               for (int i = 0; i < t.size(); ++i)
+                  t[i] = tolower(t[i]); 
+
+               if (t != s)
+               {
+#if DEBUG_COMPILE
+                  if (DEBUG)
+                  { 
+                     cerr << "`t' == " << t << " (!= `s' == " << s << ")"
+                          << endl 
+                          << "Calling `Scanner_Type::add_synonym'."
+                          << endl;
+                  }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+                  add_synonym(t, u);   
+               }
+#if DEBUG_COMPILE
+               else if (DEBUG)
+               { 
+                   cerr << "`t' == " << t << " == `s' == " << s << endl
+                        << endl 
+                        << "Not calling `Scanner_Type::add_synonym'."
+                        << endl;
+
+               }             
+#endif /* |DEBUG_COMPILE|  */@; 
+         
+            }  /* |if ((*iter)->common_name != "")| */
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+            else if (DEBUG)
+            { 
+                cerr << "`(*iter)->common_name' is empty."
+                     << endl 
+                     << "Not calling `Scanner_Type::add_synonym'."
+                     << endl;
+            }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
 
          }  /* |if ((*iter)->bayer_designation_greek_letter != "" && (*iter)->constellation_name_genitive != "")| */
 
