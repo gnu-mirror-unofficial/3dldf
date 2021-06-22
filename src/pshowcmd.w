@@ -945,8 +945,8 @@ Added this rule.
               iter!=  scanner_node->stars_show_option_struct->where_options.end();
               ++iter)
          {
-            cerr_strm << "where option " << i++ << ":" << endl
-                      << "conjunction == " << iter->conjunction;
+            cerr_strm << "where_option " << i++ << ":" << endl
+                      << "conjunction       == " << iter->conjunction;
 
             if (iter->conjunction > 0)
                cerr_strm << " == " << name_map[iter->conjunction];
@@ -963,8 +963,6 @@ Added this rule.
 
          }  /* |for| */
 
-
-
          log_message(cerr_strm);
          cerr_message(cerr_strm);
          cerr_strm.str("");
@@ -972,6 +970,19 @@ Added this rule.
       }  /* |else| */
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+@
+@<Define rules@>= 
+
+   for (vector<Stars_Where_Option_Struct>::iterator iter = scanner_node->stars_show_option_struct->where_options.begin();
+        iter!=  scanner_node->stars_show_option_struct->where_options.end();
+        ++iter)
+   {
+       
+
+
+   }  /* |for| */
 
 @q ******* (7) @>
 @
@@ -1832,8 +1843,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ****** (6) show_stars_where_list --> show_stars_where_list where_operator show_stars_where_element@> 
-@*5 \§show stars where list> $\longrightarrow$ \§show stars where list> \§where operator> \§show stars where element>.
+@q ****** (6) show_stars_where_list --> show_stars_where_list logical_operator show_stars_where_element@> 
+@*5 \§show stars where list> $\longrightarrow$ \§show stars where list> \§logical operator> \§show stars where element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1843,7 +1854,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_where_list: show_stars_where_list where_operator show_stars_where_element@>@/
+@=show_stars_where_list: show_stars_where_list logical_operator show_stars_where_element@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1852,9 +1863,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_list where_operator show_stars_where_element'."
+      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_list logical_operator show_stars_where_element'."
                 << endl 
-                << "`where_operator' ($2) == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
+                << "`logical_operator' ($2) == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1903,9 +1914,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'.";
-
-      cerr_strm << "`relation' == " << name_map[@=$2@>] << endl;
+      cerr_strm << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'."
+                << endl 
+                << "`relation' == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1945,9 +1956,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_element: BAYER_DESIGNATION_GREEK_LETTER relation string_expression'.";
-
-      cerr_strm << "`relation' == " << name_map[@=$2@>] << endl;
+      cerr_strm << "*** Parser: `show_stars_where_element: BAYER_DESIGNATION_GREEK_LETTER relation string_expression'."
+                << endl 
+                << "`relation' == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1965,81 +1976,6 @@ Added this rule.
     scanner_node->stars_show_option_struct->where_options.push_back(w);
 
    @=$$@> = 0;
-};
-
-@q ***** (5) where_operator@>  
-@*4 \§where operator>.
-\initials{LDF 2021.06.20.}
-
-\LOG
-\initials{LDF 2021.06.20.}
-Added this type declaration.
-\ENDLOG
-
-@<Type declarations for non-terminal symbols@>=
-
-@=%type <int_value> where_operator@>
-
-@q ****** (6) where_operator --> AND.@> 
-@*5 \§where operator> $\longrightarrow$ \.{AND}.@> 
-\initials{LDF 2021.06.20.}
-
-\LOG
-\initials{LDF 2021.06.20.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-
-@=where_operator: AND@>@/
-{
-  @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `where_operator: AND'.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = AND;
-};
-
-@q ****** (6) where_operator --> OR.@> 
-@*5 \§where operator> $\longrightarrow$ \.{OR}.@> 
-\initials{LDF 2021.06.20.}
-
-\LOG
-\initials{LDF 2021.06.20.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-
-@=where_operator: OR@>@/
-{
-  @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `where_operator: OR'.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-   @=$$@> = OR;
 };
 
 @q **** (4) command --> SHOW plane_expression@>

@@ -2229,6 +2229,13 @@ Added calls to |add_entry| for |get_perpendicular| and |get_perpendicular_base|.
      scanner_node->add_entry("and", AND, spark);
      scanner_node->add_synonym("&&", "and");
 
+     scanner_node->add_entry("xor", XOR, spark);
+     scanner_node->add_synonym("^^", "xor");
+
+     scanner_node->add_entry("nand", NAND, spark);
+
+     scanner_node->add_entry("nor", NOR, spark);
+
      scanner_node->add_entry("==", EQUAL, spark);
      scanner_node->add_entry("<>", NOT_EQUAL, spark);
      scanner_node->add_entry("<", LESS, spark);
@@ -3516,7 +3523,7 @@ Added call to |scanner_node->add_entry| for |def| again.
 \initials{LDF 2004.12.29.}
 Changed the calls to |scanner_node->add_entry| for |primarydef|,
 |secondarydef|, and |tertiarydef|, so that the |type| arguments are 
-|PRIMARYDEF|, |SECONDARYDEF|, AND |TERTIARYDEF|, respectively.
+|PRIMARYDEF|, |SECONDARYDEF|, and |TERTIARYDEF|, respectively.
 
 \initials{LDF 2005.06.09.}
 Removed the call to |scanner_node->add_entry| for |defun|.

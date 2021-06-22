@@ -3634,6 +3634,23 @@ Added this rule.
 @<Define rules@>=
 @=relation: LESS@>@/
 {
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: LESS'." 
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
    @=$$@> = LESS;
 };
 
@@ -3648,6 +3665,25 @@ Added this rule.
 @<Define rules@>=
 @=relation: LESS_OR_EQUAL@>@/
 {
+
+  @<Common declarations for rules@>@; 
+
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: LESS_OR_EQUAL'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
   @=$$@> = LESS_OR_EQUAL;
 };
 
@@ -3662,6 +3698,23 @@ Added this rule.
 @<Define rules@>=
 @=relation: GREATER@>@/
 {
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: GREATER'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
    @=$$@> = GREATER;
 };
 
@@ -3676,6 +3729,23 @@ Added this rule.
 @<Define rules@>=
 @=relation: GREATER_OR_EQUAL@>@/
 {
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: GREATER_OR_EQUAL'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
    @=$$@> = GREATER_OR_EQUAL;
 };
 
@@ -3690,6 +3760,24 @@ Added this rule.
 @<Define rules@>=
 @=relation: EQUAL@>@/
 {
+  @<Common declarations for rules@>@; 
+
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: EQUAL'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
   @=$$@> = EQUAL;
 };
 
@@ -3704,7 +3792,25 @@ Added this rule.
 @<Define rules@>=
 @=relation: NOT_EQUAL@>@/
 {
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: NOT_EQUAL'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
   @=$$@> = NOT_EQUAL;
+
 };
 
 @q * (1) logical_operator.@>
@@ -3736,7 +3842,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `logical_operator: AND'.";
+      cerr_strm << "*** Parser: `logical_operator: AND'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3766,7 +3874,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `logical_operator: OR'.";
+      cerr_strm << "*** Parser: `logical_operator: OR'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3796,7 +3906,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `logical_operator: NOT'.";
+      cerr_strm << "*** Parser: `logical_operator: NOT'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3826,7 +3938,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `logical_operator: XOR'.";
+      cerr_strm << "*** Parser: `logical_operator: XOR'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3856,7 +3970,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `logical_operator: NOR'.";
+      cerr_strm << "*** Parser: `logical_operator: NOR'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3886,7 +4002,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `logical_operator: NAND'.";
+      cerr_strm << "*** Parser: `logical_operator: NAND'."
+                << endl 
+                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);

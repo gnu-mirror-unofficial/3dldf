@@ -1151,6 +1151,9 @@ Added token declarations for |GET_PERPENDICULAR| and |GET_PERPENDICULAR_BASE|.
 @=TIMES_ASSIGN DIVIDE_ASSIGN@>@/
 @=%left <int_value> OR@>@/
 @=%left <int_value> AND@>@/
+@=%left <int_value> XOR@>@/
+@=%left <int_value> NAND@>@/
+@=%left <int_value> NOR@>@/
 @=%left <int_value> EQUAL NOT_EQUAL@>@/
 @=%left <int_value> LESS LESS_OR_EQUAL GREATER GREATER_OR_EQUAL@>@/
 @=%left <int_value> PLUS MINUS PYTHAGOREAN_PLUS PYTHAGOREAN_MINUS@>@/
