@@ -4619,7 +4619,7 @@ Scanner_Type::get_astronomy(void)
 {
 @q **** (4) @>
 
-   bool DEBUG = false;  /* |true|  */
+   bool DEBUG = true;  /* |false|  */
 
    string s;
    string t;
@@ -4648,6 +4648,8 @@ Scanner_Type::get_astronomy(void)
 @q **** (4) @>
 @
 @<Define |Scanner_Type| functions@>=
+
+   DEBUG = false;  /* |true|  */
 
    int status = 0;
 
@@ -4894,6 +4896,8 @@ Scanner_Type::get_astronomy(void)
 @
 @<Define |Scanner_Type| functions@>=
 
+   DEBUG = true;  /* |false|  */
+
    if (star_vector.size() > 0)
    {
 @q ***** (5) @>
@@ -4902,13 +4906,20 @@ Scanner_Type::get_astronomy(void)
       if (DEBUG)
       { 
          cerr << "In `Scanner_Type::get_astronomy':  `star_vector.size()' == "
-              << star_vector.size() << endl
-              << "`star_vector':" << endl;
+              << star_vector.size() << endl;
+
+         if (star_vector.size() == 0)
+           cerr << "`star_vector.size()' == 0.  Not showing `star_vector'." << endl;
+         else
+           cerr << "`star_vector.size()' == " << star_vector.size() << " (> 0).  Showing `star_vector':" 
+                << endl;
 
       }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
+
+cerr << "Here I am." << endl;
 
       for (vector<Star *>::iterator iter = star_vector.begin();
            iter != star_vector.end();
@@ -4919,8 +4930,9 @@ Scanner_Type::get_astronomy(void)
 #if DEBUG_COMPILE
          if (DEBUG)
          { 
+#if 0 
              (*iter)->show();
-
+#endif 
          }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -4928,22 +4940,24 @@ Scanner_Type::get_astronomy(void)
 @
 @<Define |Scanner_Type| functions@>=
 
-         if ((*iter)->common_name != "")
+         if ((*iter)->bayer_designation_greek_letter != "" && (*iter)->constellation_name_genitive != "")
          {
-@q ******* (7) @>
+            s = (*iter)->bayer_designation_greek_letter;
+            t = (*iter)->constellation_name_genitive;
+
+/* !!START HERE  LDF 2021.06.22.  Create variable.  Move this above.  The common names should be synonyms.  */ 
 
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "In `Scanner_Type::get_astronomy':  "
-                    << "`(*iter)->common_name' is non NULL:  " << (*iter)->common_name 
-                    << endl;
-
-            }  /* |if (DEBUG)| */
+               cerr << "`s' == " << s << endl
+                    << "`t' == " << t << endl;
+            }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
 
+#if 0 
             s = (*iter)->common_name;
 
             while (true)
@@ -4972,31 +4986,37 @@ Scanner_Type::get_astronomy(void)
                     << endl;
             }
 
-@q ******* (7) @>
+#endif 
 
-         }  /* |if ((*iter)->common_name != "")|  */
+         }  /* |if ((*iter)->bayer_designation_greek_letter != "" && (*iter)->constellation_name_genitive != "")| */
 
 @q ****** (6) @>
 @
 @<Define |Scanner_Type| functions@>=
 
-         else if ((*iter)->bayer_designation_greek_letter != "" && (*iter)->constellation_name_genitive != "")
+         else 
          {
-            s = (*iter)->bayer_designation_greek_letter;
-            s += "_";
-            s += (*iter)->constellation_name_genitive;
+@q ******* (7) @>
 
-/* !!START HERE  LDF 2021.06.22.  Create variable.  Move this above.  The common names should be synonyms.  */ 
+            cerr << "In `Scanner_Type::get_astronomy':  "
+                 << "`(*iter)->bayer_designation_greek_letter' and/or (*iter)->constellation_name_genitive are/is empty."
+                 << endl
+                 << "Both of these data members are needed for the name of a `star' constant."
+                 << endl
+                 << "Not creating `star' constant."
+                 << endl
+                 << "`(*iter)->flamsteed_designation_number'   == " << (*iter)->flamsteed_designation_number
+                 << endl 
+                 << "`(*iter)->constellation_full_name'        == " << (*iter)->constellation_full_name
+                 << endl 
+                 << "`(*iter)->bs_hr_number'                   == " << (*iter)->bs_hr_number
+                 << endl 
+                 << "`(*iter)->approx_rank_apparent_magnitude' == " << (*iter)->approx_rank_apparent_magnitude
+                 << endl;
 
-#if DEBUG_COMPILE
-            if (DEBUG)
-            { 
-               cerr << "s == " << s << endl;
-            }            
-#endif /* |DEBUG_COMPILE|  */@; 
+@q ******* (7) @>
 
-         }
-
+         }  /* |else|  */
 
 @q ****** (6) @>
 @
@@ -5008,6 +5028,7 @@ Scanner_Type::get_astronomy(void)
             cerr << endl;
 
          }  /* |if (DEBUG)| */
+
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ****** (6) @>
@@ -5054,7 +5075,7 @@ Scanner_Type::get_astronomy(void)
 @<Include files@>@;
 @<Define |Scanner_Type| functions@>@;
 
-@ This is what's written to \filename{scanner.h}.
+@ This is what's written to \filename{sctpfncs.h}.
 @(sctpfncs.h@>=
 
 ; /* Nothing.  */
@@ -5070,13 +5091,6 @@ Scanner_Type::get_astronomy(void)
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>
-@q run-gxx-on-file:"main.c" @>
-@q run-cweb-on-file:"main.web" @>
-@q run-cweave-on-file:"3DLDF.web" @>
-@q makefile:"makefile" @>
-@q executable-name:"pp" @>
-@q use-g++:t @>
-@q eval:(read-abbrev-file) @>
 @q indent-tabs-mode:nil @>
 @q eval:(outline-minor-mode) @>
 @q End: @>

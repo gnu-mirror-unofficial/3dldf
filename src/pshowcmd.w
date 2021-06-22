@@ -893,6 +893,7 @@ Added this rule.
 #if DEBUG_COMPILE
     if (DEBUG)
     { 
+#if 0 
         cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
                   << endl 
                   << "After calls to `stable_sort': `scanner_node->star_vector':" << endl;
@@ -907,6 +908,7 @@ Added this rule.
         {
            (*iter)->show();
         }
+#endif 
 
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
