@@ -4623,6 +4623,7 @@ Scanner_Type::get_astronomy(void)
 
    string s;
    string t;
+   string u;
    size_t pos;
 
 #ifndef MYSQL_AVAILABLE
@@ -4950,15 +4951,13 @@ cerr << "Here I am." << endl;
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "`s' == " << s << endl
+               cerr << "Before replacing:" << endl 
+                    << "`s' == " << s << endl
                     << "`t' == " << t << endl;
             }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
-
-#if 0 
-            s = (*iter)->common_name;
 
             while (true)
             {
@@ -4968,6 +4967,147 @@ cerr << "Here I am." << endl;
                else
                   break;
             } 
+
+            while (true)
+            {
+               pos = s.find("0");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "zero");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("1");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "one");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("2");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "two");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("3");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "three");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("4");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "four");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("5");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "five");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("6");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "six");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("7");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "seven");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("8");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "eight");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = s.find("9");
+               if (pos != string::npos)
+                  s.replace(pos, 1, "nine");
+               else
+                  break;
+            } 
+
+            while (true)
+            {
+               pos = t.find(" ");
+               if (pos != string::npos)
+                  t.replace(pos, 1, "_");
+               else
+                  break;
+            } 
+
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "After replacing:" << endl 
+                    << "`s' == " << s << endl
+                    << "`t' == " << t << endl;
+            }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+            u  = s;
+            u += "_"; 
+            u += t;
+
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "`u' == " << u << " (name of `star' constant)" << endl;
+
+            }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+            for (int i = 0; i < t.size(); ++i)
+               t[i] = tolower(t[i]);
+
+            u  = s;
+            u += "_"; 
+            u += t;
+            
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "After calls to `tolower':  `u' == " << u << " (name of synonym for `star' constant)" 
+                    << endl;
+
+            }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+#if 0 
+            s = (*iter)->common_name;
 
             add_entry(s, STAR, regular, is_constant, not_array, 
                       Id_Map_Entry_Type::KNOWN, *iter);
