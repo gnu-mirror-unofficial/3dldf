@@ -3099,8 +3099,35 @@ an implicit conversion from |bool| to |int|.
   @=$$@> = static_cast<void*>(i); 
 
   delete j;
+  j = 0;
 
 };
+
+@q ** (2) boolean secondary --> boolean_secondary NAND boolean_primary.@>
+@*1 \§boolean secondary> $\longrightarrow$ \§boolean secondary> \.{NAND} 
+\§boolean primary>.
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_secondary: boolean_secondary NAND boolean_primary@>@/
+{
+
+  bool* i = static_cast<bool*>(@=$1@>);
+  bool* j = static_cast<bool*>(@=$3@>);
+
+  *i = (*i && *j) ? 0 : 1;
+
+  @=$$@> = static_cast<void*>(i); 
+
+  delete j;
+  j = 0;
+
+};
+
 
 @q * (1) boolean_tertiary.@>
 @* \§boolean tertiary>.
@@ -3149,11 +3176,62 @@ Added this rule.
   bool* i = static_cast<bool*>(@=$1@>);
   bool* j = static_cast<bool*>(@=$3@>);
 
-*i = (*i || *j) ? 1 : 0;
+  *i = (*i || *j) ? 1 : 0;
 
   @=$$@> = static_cast<void*>(i);
 
   delete j; 
+  j = 0;
+
+};
+
+@q *** (3) boolean tertiary --> boolean_tertiary XOR boolean_secondary.@>
+@*2 \§boolean tertiary> $\longrightarrow$ \§boolean tertiary> \.{XOR}
+\§boolean secondary>.
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_tertiary: boolean_tertiary XOR boolean_secondary@>@/
+{
+
+  bool* i = static_cast<bool*>(@=$1@>);
+  bool* j = static_cast<bool*>(@=$3@>);
+
+  *i = ((*i || *j) && !(*i && *j)) ? 1 : 0;
+
+  @=$$@> = static_cast<void*>(i);
+
+  delete j; 
+  j = 0;
+
+};
+
+@q *** (3) boolean tertiary --> boolean_tertiary NOR boolean_secondary.@>
+@*2 \§boolean tertiary> $\longrightarrow$ \§boolean tertiary> \.{NOR}
+\§boolean secondary>.
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_tertiary: boolean_tertiary NOR boolean_secondary@>@/
+{
+
+  bool* i = static_cast<bool*>(@=$1@>);
+  bool* j = static_cast<bool*>(@=$3@>);
+
+  *i = (*i || *j) ? 0 : 1;
+
+  @=$$@> = static_cast<void*>(i);
+
+  delete j; 
+  j = 0;
 
 };
 
@@ -3556,9 +3634,7 @@ Added this rule.
 @<Define rules@>=
 @=relation: LESS@>@/
 {
-
    @=$$@> = LESS;
-
 };
 
 @q ** (2) relation --> LESS_OR_EQUAL.@>
@@ -3572,9 +3648,7 @@ Added this rule.
 @<Define rules@>=
 @=relation: LESS_OR_EQUAL@>@/
 {
-
   @=$$@> = LESS_OR_EQUAL;
-
 };
 
 @q ** (2) relation --> GREATER.@>
@@ -3588,9 +3662,7 @@ Added this rule.
 @<Define rules@>=
 @=relation: GREATER@>@/
 {
-
    @=$$@> = GREATER;
-
 };
 
 @q ** (2) relation --> GREATER_OR_EQUAL.@>
@@ -3604,9 +3676,7 @@ Added this rule.
 @<Define rules@>=
 @=relation: GREATER_OR_EQUAL@>@/
 {
-
    @=$$@> = GREATER_OR_EQUAL;
-
 };
 
 @q ** (2) relation --> EQUAL.  @>
@@ -3620,9 +3690,7 @@ Added this rule.
 @<Define rules@>=
 @=relation: EQUAL@>@/
 {
-
   @=$$@> = EQUAL;
-
 };
 
 @q ** (2) relation --> NOT_EQUAL.@>
@@ -3636,9 +3704,198 @@ Added this rule.
 @<Define rules@>=
 @=relation: NOT_EQUAL@>@/
 {
-
   @=$$@> = NOT_EQUAL;
+};
 
+@q * (1) logical_operator.@>
+@* \§logical operator>.
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> logical_operator@>
+
+@q ** (2) logical_operator --> AND.  @>
+@*1 \§logical operator> $\longrightarrow$ \.{AND}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=logical_operator: AND@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: AND'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = AND;
+};
+
+@q ** (2) logical_operator --> OR.  @>
+@*1 \§logical operator> $\longrightarrow$ \.{OR}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=logical_operator: OR@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: OR'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = OR;
+};
+
+@q ** (2) logical_operator --> NOT.  @>
+@*1 \§logical operator> $\longrightarrow$ \.{NOT}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=logical_operator: NOT@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: NOT'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = NOT;
+};
+
+@q ** (2) logical_operator --> XOR.  @>
+@*1 \§logical operator> $\longrightarrow$ \.{XOR}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=logical_operator: XOR@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: XOR'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = XOR;
+};
+
+@q ** (2) logical_operator --> NOR.  @>
+@*1 \§logical operator> $\longrightarrow$ \.{NOR}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=logical_operator: NOR@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: NOR'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = NOR;
+};
+
+@q ** (2) logical_operator --> NAND.  @>
+@*1 \§logical operator> $\longrightarrow$ \.{NAND}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=logical_operator: NAND@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: NAND'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = NAND;
 };
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
@@ -3655,6 +3912,5 @@ Added this rule.
 @q abbrev-file-name:"~/.abbrev_defs"  @>
 @q eval:(read-abbrev-file)            @>
 @q fill-column:80                     @>
-@q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
 
