@@ -744,7 +744,13 @@ Added this rule.
 
         else if (*iter == STARS_FLAMSTEED_DESIGNATION_NUMBER)
         {
-           cerr_strm << "`*iter' == `STARS_FLAMSTEED_DESIGNATION_NUMBER'." << endl; 
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_FLAMSTEED_DESIGNATION_NUMBER'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
            stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
                        compare_flamsteed_designation_number);
@@ -755,7 +761,13 @@ Added this rule.
  
         else if (*iter == STARS_BAYER_DESIGNATION_GREEK_LETTER)
         {
-           cerr_strm << "`*iter' == `STARS_BAYER_DESIGNATION_GREEK_LETTER'." << endl; 
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_BAYER_DESIGNATION_GREEK_LETTER'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
            stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
                        compare_bayer_designation_greek_letter);
@@ -766,22 +778,96 @@ Added this rule.
      
         else if (*iter == STARS_BS_HR_NUMBER || *iter == STARS_BS_NUMBER || *iter == STARS_HR_NUMBER)
         {
-           cerr_strm << "`*iter' == `STARS_BS_HR_NUMBER' (or `STARS_BS_NUMBER' or `STARS_HR_NUMBER')." 
-                     << endl; 
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_BS_HR_NUMBER' (or `STARS_BS_NUMBER' or `STARS_HR_NUMBER')." 
+                        << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
            stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
                        compare_bs_hr_number);
-
         }                                        
 
 @q ******** (8) @>
                                
         else if (*iter == STARS_APPROX_RANK_APPARENT_MAGNITUDE)
         {
-           cerr_strm << "`*iter' == `STARS_APPROX_RANK_APPARENT_MAGNITUDE'." << endl; 
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_APPROX_RANK_APPARENT_MAGNITUDE'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
            stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
                        compare_approx_rank_apparent_magnitude);
+
+        } 
+
+
+@q ******** (8) @>
+                               
+        else if (*iter == STARS_CONSTELLATION_ABBREVIATION)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_CONSTELLATION_ABBREVIATION'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_constellation_abbreviation);
+
+        } 
+
+@q ******** (8) @>
+                               
+        else if (*iter == STARS_CONSTELLATION_FULL_NAME)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_CONSTELLATION_FULL_NAME'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_constellation_full_name);
+
+        } 
+
+@q ******** (8) @>
+                               
+        else if (*iter == STARS_CONSTELLATION_NAME_GENITIVE)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_CONSTELLATION_NAME_GENITIVE'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_constellation_name_genitive);
+
+        } 
+
+@q ******** (8) @>
+                               
+        else if (*iter == STARS_CONSTELLATION_NUMBER)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_CONSTELLATION_NUMBER'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
+                       compare_constellation_number);
 
         } 
 
@@ -1411,6 +1497,194 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) show_stars_order_by_element --> CONSTELLATION_FULL_NAME.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_FULL\_NAME}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: CONSTELLATION_FULL_NAME@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_FULL_NAME'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_CONSTELLATION_FULL_NAME;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_FULL_NAME':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) show_stars_order_by_element --> CONSTELLATION_ABBREVIATION.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_ABBREVIATION}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: CONSTELLATION_ABBREVIATION@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_ABBREVIATION'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_CONSTELLATION_ABBREVIATION;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_ABBREVIATION':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) show_stars_order_by_element --> CONSTELLATION_NAME_GENITIVE.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_NAME\_GENITIVE}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: CONSTELLATION_NAME_GENITIVE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NAME_GENITIVE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_CONSTELLATION_NAME_GENITIVE;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NAME_GENITIVE':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) show_stars_order_by_element --> CONSTELLATION_NUMBER.@> 
+@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_NUMBER}.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_order_by_element: CONSTELLATION_NUMBER@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NUMBER'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_CONSTELLATION_NUMBER;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NUMBER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 

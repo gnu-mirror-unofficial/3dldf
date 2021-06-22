@@ -158,6 +158,10 @@ class Star
    friend bool compare_bs_number(Star *s, Star *);
    friend bool compare_hr_number(Star *s, Star *);
    friend bool compare_approx_rank_apparent_magnitude(Star *s, Star *);
+   friend bool compare_constellation_abbreviation(Star *s, Star *);
+   friend bool compare_constellation_full_name(Star *s, Star *);
+   friend bool compare_constellation_name_genitive(Star *s, Star *);
+   friend bool compare_constellation_number(Star *s, Star *);
 
    protected:
 
@@ -1727,16 +1731,16 @@ Planet::show(string text, Scanner_Node scanner_node) const
 \initials{LDF 2021.06.21.}
 
 \LOG
-\initials{LDF 2021.05.29.}
+\initials{LDF 2021.06.22.}
 Added this section.
 \ENDLOG
 
 @q ****** (6) Compare |common_name|.@>
 @*7 Compare |common_name|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1757,10 +1761,10 @@ compare_common_name(Star *s, Star *t)
 
 @q ****** (6) Compare |flamsteed_designation_number|.@>
 @*7 Compare |flamsteed_designation_number|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1781,10 +1785,10 @@ compare_flamsteed_designation_number(Star *s, Star *t)
 
 @q ****** (6) Compare |bayer_designation_greek_letter|.@>
 @*7 Compare |bayer_designation_greek_letter|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1805,10 +1809,10 @@ compare_bayer_designation_greek_letter(Star *s, Star *t)
 
 @q ****** (6) Compare |bs_hr_number|.@>
 @*7 Compare |bs_hr_number|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1829,10 +1833,10 @@ compare_bs_hr_number(Star *s, Star *t)
 
 @q ****** (6) Compare |bs_number|.@>
 @*7 Compare |bs_number|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1853,10 +1857,10 @@ compare_bs_number(Star *s, Star *t)
 
 @q ****** (6) Compare |hr_number|.@>
 @*7 Compare |hr_number|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1877,10 +1881,10 @@ compare_hr_number(Star *s, Star *t)
 
 @q ****** (6) Compare |approx_rank_apparent_magnitude|.@>
 @*7 Compare |approx_rank_apparent_magnitude|.
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 
 \LOG
-\initials{LDF 2021.06.21.}
+\initials{LDF 2021.06.22.}
 Added this function.
 \ENDLOG
 
@@ -1897,6 +1901,102 @@ bool
 compare_approx_rank_apparent_magnitude(Star *s, Star *t)
 {
    return s->approx_rank_apparent_magnitude < t->approx_rank_apparent_magnitude;
+}
+
+@q ****** (6) Compare |constellation_abbreviation|.@>
+@*7 Compare |constellation_abbreviation|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_abbreviation(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_abbreviation(Star *s, Star *t)
+{
+   return s->constellation_abbreviation < t->constellation_abbreviation;
+}
+
+@q ****** (6) Compare |constellation_full_name|.@>
+@*7 Compare |constellation_full_name|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_full_name(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_full_name(Star *s, Star *t)
+{
+   return s->constellation_full_name < t->constellation_full_name;
+}
+
+@q ****** (6) Compare |constellation_name_genitive|.@>
+@*7 Compare |constellation_name_genitive|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_name_genitive(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_name_genitive(Star *s, Star *t)
+{
+   return s->constellation_name_genitive < t->constellation_name_genitive;
+}
+
+@q ****** (6) Compare |constellation_number|.@>
+@*7 Compare |constellation_number|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_number(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_number(Star *s, Star *t)
+{
+   return s->constellation_number < t->constellation_number;
 }
 
 @q * (1) Putting Astronomy together.@>

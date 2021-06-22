@@ -594,6 +594,10 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     BS_NUMBER@>@/                   
 @=%token <int_value>     HR_NUMBER@>@/                   
 @=%token <int_value>     APPROX_RANK_APPARENT_MAGNITUDE@>@/ 
+@=%token <int_value>     CONSTELLATION_ABBREVIATION@>@/  
+@=%token <int_value>     CONSTELLATION_FULL_NAME@>@/    
+@=%token <int_value>     CONSTELLATION_NAME_GENITIVE@>@/ 
+@=%token <int_value>     CONSTELLATION_NUMBER@>@/       
 
 @=%token <pointer_value> PLANE@>@/
 
@@ -3254,13 +3258,18 @@ Scan_Parse
   extern const unsigned int MIN_SHAPE = POINT; 
   extern const unsigned int MAX_SHAPE = POLYHEDRON;
 
-  extern const unsigned int STARS_COMMON_NAME                    =  1U;   
-  extern const unsigned int STARS_FLAMSTEED_DESIGNATION_NUMBER   =  2U;
-  extern const unsigned int STARS_BAYER_DESIGNATION_GREEK_LETTER =  4U; 
-  extern const unsigned int STARS_BS_HR_NUMBER                   =  8U;                   
-  extern const unsigned int STARS_BS_NUMBER                      = 16U; 
-  extern const unsigned int STARS_HR_NUMBER                      = 32U;
-  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE = 64U;
+  extern const unsigned int STARS_COMMON_NAME                    =    1U;   
+  extern const unsigned int STARS_FLAMSTEED_DESIGNATION_NUMBER   =    2U;
+  extern const unsigned int STARS_BAYER_DESIGNATION_GREEK_LETTER =    4U; 
+  extern const unsigned int STARS_BS_HR_NUMBER                   =    8U;                   
+  extern const unsigned int STARS_BS_NUMBER                      =   16U; 
+  extern const unsigned int STARS_HR_NUMBER                      =   32U;
+  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE =   64U;
+  extern const unsigned int STARS_CONSTELLATION_ABBREVIATION     =  128U;
+  extern const unsigned int STARS_CONSTELLATION_FULL_NAME        =  256U;
+  extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE    =  512U;
+  extern const unsigned int STARS_CONSTELLATION_NUMBER           = 1024U;
+
 
 };
 
@@ -3279,6 +3288,10 @@ Scan_Parse
   extern const unsigned int STARS_BS_NUMBER;                   
   extern const unsigned int STARS_HR_NUMBER;                   
   extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE; 
+  extern const unsigned int STARS_CONSTELLATION_ABBREVIATION;
+  extern const unsigned int STARS_CONSTELLATION_FULL_NAME;
+  extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE;
+  extern const unsigned int STARS_CONSTELLATION_NUMBER;
 
 };
 
