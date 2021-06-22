@@ -24435,6 +24435,40 @@ select * from Constellations order by rank_constellation;
 
 select * from Stars order by rank_constellation;
 
+show columns from Stars;
+
+select * from Stars where bayer_designation_greek_letter = "upsilon" and constellation_name_genitive = "Andromedae"\G
+
+delete from Stars where bayer_designation_greek_letter = "upsilon" and constellation_name_genitive = "Andromedae" limit 1;
+
+/* !! START HERE:  LDF 2021.06.22. */ 
+
+select * from Stars where bayer_designation_greek_letter = "theta" and constellation_name_genitive = "Octantis"\G
+
+delete from Stars where bayer_designation_greek_letter = "theta" and constellation_name_genitive = "Octantis" limit 1;
+
+select * from Stars where bayer_designation_greek_letter = "delta" and constellation_name_genitive = "Phoenicis"\G
+
+delete from Stars where bayer_designation_greek_letter = "delta" and constellation_name_genitive = "Phoenicis" limit 1;
+
+select * from Stars where bayer_designation_greek_letter = "eta" and constellation_name_genitive = "Piscium"\G
+
+delete from Stars where bayer_designation_greek_letter = "eta" and constellation_name_genitive = "Piscium" limit 1;
+
+select * from Stars where bayer_designation_greek_letter = "omega" and constellation_name_genitive = "Piscium"\G
+
+delete from Stars where bayer_designation_greek_letter = "omega" and constellation_name_genitive = "Piscium" limit 1;
+
+select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_name_genitive = "Sculptoris"\G
+
+delete from Stars where bayer_designation_greek_letter = "alpha" and constellation_name_genitive = "Sculptoris" limit 1;
+
+select * from Stars where bayer_designation_greek_letter = "epsilon" and constellation_name_genitive = "Tucanae"\G
+
+delete from Stars where bayer_designation_greek_letter = "epsilon" and constellation_name_genitive = "Tucanae" limit 1;
+
+
+
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */
 /* abbrev-file-name:"~/.abbrev_defs"  */
