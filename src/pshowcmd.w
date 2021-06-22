@@ -677,8 +677,6 @@ Added this rule.
       cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
                 << endl;
 
-
-
       cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options.size()' == " 
                 << scanner_node->stars_show_option_struct->order_by_options.size() << endl;
 
@@ -1843,6 +1841,8 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'.";
+
+      cerr_strm << "`relation' == " << name_map[@=$$@>] << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);

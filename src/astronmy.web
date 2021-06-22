@@ -208,6 +208,39 @@ Added this section.
 @
 @<Initialize |static| |class Star| data members@>=
 
+@q ** (2) |struct Stars_Where_Option_Struct| declaration.@>
+@*1 |struct Stars_Where_Option_Struct| declaration.
+\initials{LDF 2021.06.21.}
+
+\LOG
+\initials{LDF 2021.06.21.}
+Added this section.
+\ENDLOG
+
+@<Declare |struct Stars_Where_Option_Struct|@>=
+
+struct Stars_Where_Option_Struct
+{
+   int conjunction;
+   int field;
+   int relation;
+   int value;
+   string comparison_string;
+
+   Stars_Where_Option_Struct(void)
+   {
+      conjunction       = 0;  
+      field             = 0;
+      relation          = 0;
+      value             = 0;
+      comparison_string = "";
+   }
+   ~Stars_Where_Option_Struct(void)
+   {
+      return;
+   }
+
+};
 
 @q ** (2) |struct Stars_Show_Option_Struct| declaration.@>
 @*1 |struct Stars_Show_Option_Struct| declaration.
@@ -219,11 +252,14 @@ Added this section.
 \ENDLOG
 
 @<Declare |struct Stars_Show_Option_Struct|@>=
+
 struct Stars_Show_Option_Struct
 {
    vector<unsigned int> order_by_options;
    bool ascending_descending;
    unsigned int limit;
+
+   vector<Stars_Where_Option_Struct> where_options;
 
    Stars_Show_Option_Struct(void)
    {
@@ -235,35 +271,11 @@ struct Stars_Show_Option_Struct
    ~Stars_Show_Option_Struct(void)
    {
       order_by_options.clear();
+      where_options.clear();
       return;
    }   
 
 };
-
-@q ** (2) |struct Stars_Where_Option_Struct| declaration.@>
-@*1 |struct Stars_Where_Option_Struct| declaration.
-\initials{LDF 2021.06.21.}
-
-\LOG
-\initials{LDF 2021.06.21.}
-Added this section.
-\ENDLOG
-
-@<Declare |struct Stars_Where_Option_Struct|@>=
-struct Stars_Where_Option_Struct
-{
-   Stars_Where_Option_Struct(void)
-   {
-      return;
-   }  
-
-   ~Stars_Where_Option_Struct(void)
-   {
-      return;
-   }   
-
-};
-
 
 
 @q ** (2) Global constants.@>
@@ -2035,6 +2047,8 @@ This is what's compiled.
 
 @c
 @<Include files@>@;
+@<Declare |struct Stars_Where_Option_Struct|@>@;
+@<Declare |struct Stars_Show_Option_Struct|@>@;
 @<Declare |class Star|@>@;
 @<Initialize |static| |class Star| data members@>@;
 @<Declare non-member functions for |class Star|@>@;
@@ -2058,8 +2072,8 @@ This is what's compiled.
 @(astronmy.h@>=
 #ifndef LDF_ASTRONMY_KNOWN
 #define LDF_ASTRONMY_KNOWN 1
-@<Declare |struct Stars_Show_Option_Struct|@>@;
 @<Declare |struct Stars_Where_Option_Struct|@>@;
+@<Declare |struct Stars_Show_Option_Struct|@>@;
 @<Declare |class Star|@>@;
 @<Declare |class Constellation|@>@;
 @<Declare |class Planet|@>@;

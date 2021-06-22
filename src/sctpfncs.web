@@ -4619,7 +4619,7 @@ Scanner_Type::get_astronomy(void)
 {
 @q **** (4) @>
 
-   bool DEBUG = true;  /* |false|  */
+   bool DEBUG = false;  /* |true|  */
 
    string s;
    string t;
@@ -4898,7 +4898,7 @@ Scanner_Type::get_astronomy(void)
 @
 @<Define |Scanner_Type| functions@>=
 
-   DEBUG = true;  /* |false|  */
+   DEBUG = false;  /* |true|  */
 
    if (star_vector.size() > 0)
    {
@@ -4920,8 +4920,6 @@ Scanner_Type::get_astronomy(void)
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
-
-cerr << "Here I am." << endl;
 
       for (vector<Star *>::iterator iter = star_vector.begin();
            iter != star_vector.end();
@@ -5218,6 +5216,7 @@ cerr << "Here I am." << endl;
          {
 @q ******* (7) @>
 
+#if 0 
             cerr << "In `Scanner_Type::get_astronomy':  "
                  << "`(*iter)->bayer_designation_greek_letter' and/or (*iter)->constellation_name_genitive are/is empty."
                  << endl
@@ -5233,6 +5232,7 @@ cerr << "Here I am." << endl;
                  << endl 
                  << "`(*iter)->approx_rank_apparent_magnitude' == " << (*iter)->approx_rank_apparent_magnitude
                  << endl;
+#endif 
 
 @q ******* (7) @>
 
