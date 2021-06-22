@@ -975,6 +975,29 @@ Added this rule.
 @
 @<Define rules@>= 
 
+   Stars_Where_Option_Struct w; 
+
+@q ******** (8) Testing.  @>
+
+   if (scanner_node->stars_show_option_struct->where_options.size() > 0)
+   {
+      w = scanner_node->stars_show_option_struct->where_options.front();
+      w.show("w:");
+
+      if (w.field == COMMON_NAME && w.relation == NOT_EQUAL && w.comparison_string == "")
+      {
+          for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
+               iter != scanner_node->star_vector.end();
+               ++iter)
+          {
+              if ((*iter)->common_name.length() > 0)
+                 (*iter)->show();
+          }
+      }
+   }
+
+@q ******* (7) @>
+
    for (vector<Stars_Where_Option_Struct>::iterator iter = scanner_node->stars_show_option_struct->where_options.begin();
         iter!=  scanner_node->stars_show_option_struct->where_options.end();
         ++iter)

@@ -163,6 +163,8 @@ class Star
    friend bool compare_constellation_name_genitive(Star *s, Star *);
    friend bool compare_constellation_number(Star *s, Star *);
 
+   friend int yyparse(yyscan_t);
+
    protected:
 
       string common_name;
@@ -241,6 +243,17 @@ struct Stars_Where_Option_Struct
    }
 
    void show(string s = "");
+
+   void
+   operator=(const Stars_Where_Option_Struct &w)
+   {
+      conjunction       = w.conjunction;
+      field             = w.field;            
+      relation          = w.relation;         
+      value             = w.value;            
+      comparison_string = w.comparison_string;
+      return;
+   }
 
 };
 
@@ -953,6 +966,8 @@ Added this |class| definition.
 class Constellation
 {
 
+   friend int yyparse(yyscan_t);
+
    protected:
 
    public:
@@ -1382,6 +1397,8 @@ Added this |class| definition.
 
 class Planet
 {
+
+   friend int yyparse(yyscan_t);
 
    protected:
 
