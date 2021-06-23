@@ -976,36 +976,60 @@ Added this rule.
 @<Define rules@>= 
 
    Stars_Where_Option_Struct w; 
+   vector<Star *> temp_star_vector;
 
 @q ******** (8) Testing.  @>
-
-   if (scanner_node->stars_show_option_struct->where_options.size() > 0)
-   {
-      w = scanner_node->stars_show_option_struct->where_options.front();
-      w.show("w:");
-
-      if (w.field == COMMON_NAME && w.relation == NOT_EQUAL && w.comparison_string == "")
-      {
-          for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
-               iter != scanner_node->star_vector.end();
-               ++iter)
-          {
-              if ((*iter)->common_name.length() > 0)
-                 (*iter)->show();
-          }
-      }
-   }
-
-@q ******* (7) @>
 
    for (vector<Stars_Where_Option_Struct>::iterator iter = scanner_node->stars_show_option_struct->where_options.begin();
         iter!=  scanner_node->stars_show_option_struct->where_options.end();
         ++iter)
    {
+
+/* !!START HERE  LDF 2021.06.22. */ 
+
+      if (iter->field == COMMON_NAME && iter->relation == EQUAL)
+      {
+          for (vector<Star*>::iterator s_iter = scanner_node->star_vector.begin();
+               s_iter != scanner_node->star_vector.end();
+               ++s_iter)
+          {
+              if ((*s_iter)->common_name == iter->comparison_string)
+              {
+                  temp_star_vector.push_back(*s_iter);
+              }
+              
+          }
+
+      } /* |else if| */
+
+      else if (iter->field == COMMON_NAME && iter->relation == NOT_EQUAL)
+      {
+          for (vector<Star*>::iterator s_iter = scanner_node->star_vector.begin();
+               s_iter != scanner_node->star_vector.end();
+               ++s_iter)
+          {
+              if ((*s_iter)->common_name != iter->comparison_string)
+              {
+                  temp_star_vector.push_back(*s_iter);
+              }
+              
+          }
+
+      } /* |else if| */
+
+   } /* |for| */
+
+   cerr << "scanner_node->star_vector.size() == " << scanner_node->star_vector.size() << endl 
+        << "temp_star_vector.size()          == " << temp_star_vector.size() << endl
+        << "temp_star_vector:" << endl;
+   
+   for (vector<Star*>::iterator iter = temp_star_vector.begin();
+        iter != temp_star_vector.end();
+        ++iter)
+   {
+       (*iter)->show();
        
-
-
-   }  /* |for| */
+   }
 
 @q ******* (7) @>
 @

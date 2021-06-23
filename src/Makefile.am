@@ -164,6 +164,8 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 # $(3dldfsp_CWEB_files) 
 
+# scanner2.web parser2.web
+
 EXTRA_DIST = check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
@@ -171,7 +173,7 @@ EXTRA_DIST = check_scan_parse_output.sh compile_parser.sh \
              sample.ldf sample0.ldf sample1.ldf sample2.ldf \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
-             $(3dldf_PARSER_FILES) scanner2.web parser2.web
+             $(3dldf_PARSER_FILES) 
 
 
 # scanner2.c++ scanner2.h++ scanner2.l++ parser2.y++ 
@@ -1039,7 +1041,7 @@ headers:
              helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
              loader.h++ main.h++ matrices.h++ nurbs.h++ origami.h++ \
              parabola.h++ parabold.h++ paraellp.h++ parahypr.h++ \
-             parser2.h++ paths.h++ patterns.h++ pctfncs0.h++ pens.h++ \
+             paths.h++ patterns.h++ pctfncs0.h++ pens.h++ \
              pictures.h++ planes.h++ plyhdslc.h++ pntrvcf0.h++ \
              pntrvctr.h++ points.h++ polygons.h++ polyhed.h++ \
              predctes.h++ primes.h++ prrfnc0.h++ pspglb.h++ \
