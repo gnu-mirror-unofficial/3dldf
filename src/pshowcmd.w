@@ -651,8 +651,6 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
-  int i = 0;
-
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
@@ -666,377 +664,36 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ******* (7) @>
-@
-@<Define rules@>= 
+    status = show_stars_func(scanner_node);
 
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-  {
-      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
+    if (status != 0)
+    {
+      cerr_strm << "ERROR!  In Parser: `command --> SHOW STARS show_stars_option_list':"
+                << "`Scan_Parse::show_stars_func' failed, returning " << status << "."
+                << endl
+                << "Failed to show `stars'.  Will try to continue."
                 << endl;
 
-      cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options.size()' == " 
-                << scanner_node->stars_show_option_struct->order_by_options.size() << endl;
-
-      if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
-         cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options':"
-                   << endl;
-
-      for (vector<unsigned int>::iterator iter = scanner_node->stars_show_option_struct->order_by_options.begin();
-           iter != scanner_node->stars_show_option_struct->order_by_options.end();
-           ++iter)
-      {
-          cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
-      }
-
-      if (scanner_node->stars_show_option_struct->order_by_options.size() > 0)
-         cerr_strm << "`scanner_node->stars_show_option_struct->order_by_options' reversed:"
-                   << endl;
-  
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-      
-    } /* |if (DEBUG)| */
 
-#endif /* |DEBUG_COMPILE|  */@;
-
-@q ******* (7) @>
-@
-@<Define rules@>= 
-
-    for (vector<unsigned int>::reverse_iterator iter = scanner_node->stars_show_option_struct->order_by_options.rbegin();
-           iter != scanner_node->stars_show_option_struct->order_by_options.rend();
-           ++iter)
-    {
-@q ******** (8) @>
-
-    /* !!START HERE  Write predicates for sorting scanner_node->star_vector.  */ 
-
+    }
 #if DEBUG_COMPILE
-        if (DEBUG)
-        { 
-           cerr_strm << i++ << ":  " << hex << *iter << " (hex)" << endl;
-        }      
-#endif /* |DEBUG_COMPILE|  */@; 
-        
-@q ******** (8) @>
-
-        if (*iter == STARS_COMMON_NAME)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_COMMON_NAME'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_common_name);
-        }
-
-@q ******** (8) @>
-
-        else if (*iter == STARS_FLAMSTEED_DESIGNATION_NUMBER)
-        {
-
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_FLAMSTEED_DESIGNATION_NUMBER'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_flamsteed_designation_number);
-
-        }         
-
-@q ******** (8) @>
- 
-        else if (*iter == STARS_BAYER_DESIGNATION_GREEK_LETTER)
-        {
-
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_BAYER_DESIGNATION_GREEK_LETTER'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_bayer_designation_greek_letter);
-
-        }         
-
-@q ******** (8) @>
-     
-        else if (*iter == STARS_BS_HR_NUMBER || *iter == STARS_BS_NUMBER || *iter == STARS_HR_NUMBER)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_BS_HR_NUMBER' (or `STARS_BS_NUMBER' or `STARS_HR_NUMBER')." 
-                        << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_bs_hr_number);
-        }                                        
-
-@q ******** (8) @>
-                               
-        else if (*iter == STARS_APPROX_RANK_APPARENT_MAGNITUDE)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_APPROX_RANK_APPARENT_MAGNITUDE'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_approx_rank_apparent_magnitude);
-
-        } 
-
-
-@q ******** (8) @>
-                               
-        else if (*iter == STARS_CONSTELLATION_ABBREVIATION)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_CONSTELLATION_ABBREVIATION'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_constellation_abbreviation);
-
-        } 
-
-@q ******** (8) @>
-                               
-        else if (*iter == STARS_CONSTELLATION_FULL_NAME)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_CONSTELLATION_FULL_NAME'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_constellation_full_name);
-
-        } 
-
-@q ******** (8) @>
-                               
-        else if (*iter == STARS_CONSTELLATION_NAME_GENITIVE)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_CONSTELLATION_NAME_GENITIVE'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_constellation_name_genitive);
-
-        } 
-
-@q ******** (8) @>
-                               
-        else if (*iter == STARS_CONSTELLATION_NUMBER)
-        {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr_strm << "`*iter' == `STARS_CONSTELLATION_NUMBER'." << endl; 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-           stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(),
-                       compare_constellation_number);
-
-        } 
-
-@q ******** (8) @>
-
-    }  /* |for| */
-
-@q ******* (7) @>
-
-#if DEBUG_COMPILE
-    if (DEBUG)
+    else if (DEBUG)
     { 
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-    }      
-#endif /* |DEBUG_COMPILE|  */@; 
+      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
+                << "`Scan_Parse::show_stars_func' succeeded, returning 0."
+                << endl
+                << "Showed `stars' successfully."
+                << endl;
 
-@q ******* (7) @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-    if (DEBUG)
-    { 
-#if 0 
-        cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
-                  << endl 
-                  << "After calls to `stable_sort': `scanner_node->star_vector':" << endl;
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-
-        for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
-             iter != scanner_node->star_vector.end();
-             ++iter)
-        {
-           (*iter)->show();
-        }
-#endif 
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
 
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) "where" clause @>
-@
-@<Define rules@>=
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      if (scanner_node->stars_show_option_struct->where_options.size() == 0)
-      {
-         cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
-                   << endl 
-                   << "`scanner_node->stars_show_option_struct->where_options' is empty."
-                   << endl 
-                   << "Not showing."<< endl;
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-      }
-      else
-      {
-         cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':" 
-                   << endl 
-                   << "`scanner_node->stars_show_option_struct->where_options.size()' == "
-                   << scanner_node->stars_show_option_struct->where_options.size() 
-                   << endl 
-                   << "`scanner_node->stars_show_option_struct->where_options':"
-                   << endl;
-
-         int i = 0;
-
-         for (vector<Stars_Where_Option_Struct>::iterator iter = scanner_node->stars_show_option_struct->where_options.begin();
-              iter!=  scanner_node->stars_show_option_struct->where_options.end();
-              ++iter)
-         {
-            cerr_strm << "where_option " << i++ << ":" << endl
-                      << "conjunction       == " << iter->conjunction;
-
-            if (iter->conjunction > 0)
-               cerr_strm << " == " << name_map[iter->conjunction];
-
-            cerr_strm << endl
-                      << "field             == " << iter->field    << " == " << name_map[iter->field]
-                      << endl
-                      << "relation          == " << iter->relation << " == " << name_map[iter->relation]
-                      << endl
-                      << "value             == " << iter->value 
-                      << endl 
-                      << "comparison_string == \"" << iter->comparison_string << "\""
-                      << endl << endl;
-
-         }  /* |for| */
-
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-
-      }  /* |else| */
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) @>
-@
-@<Define rules@>= 
-
-   Stars_Where_Option_Struct w; 
-   vector<Star *> temp_star_vector;
-
-@q ******** (8) Testing.  @>
-
-   for (vector<Stars_Where_Option_Struct>::iterator iter = scanner_node->stars_show_option_struct->where_options.begin();
-        iter!=  scanner_node->stars_show_option_struct->where_options.end();
-        ++iter)
-   {
-
-/* !!START HERE  LDF 2021.06.22. */ 
-
-      if (iter->field == COMMON_NAME && iter->relation == EQUAL)
-      {
-          for (vector<Star*>::iterator s_iter = scanner_node->star_vector.begin();
-               s_iter != scanner_node->star_vector.end();
-               ++s_iter)
-          {
-              if ((*s_iter)->common_name == iter->comparison_string)
-              {
-                  temp_star_vector.push_back(*s_iter);
-              }
-              
-          }
-
-      } /* |else if| */
-
-      else if (iter->field == COMMON_NAME && iter->relation == NOT_EQUAL)
-      {
-          for (vector<Star*>::iterator s_iter = scanner_node->star_vector.begin();
-               s_iter != scanner_node->star_vector.end();
-               ++s_iter)
-          {
-              if ((*s_iter)->common_name != iter->comparison_string)
-              {
-                  temp_star_vector.push_back(*s_iter);
-              }
-              
-          }
-
-      } /* |else if| */
-
-   } /* |for| */
-
-   cerr << "scanner_node->star_vector.size() == " << scanner_node->star_vector.size() << endl 
-        << "temp_star_vector.size()          == " << temp_star_vector.size() << endl
-        << "temp_star_vector:" << endl;
-   
-   for (vector<Star*>::iterator iter = temp_star_vector.begin();
-        iter != temp_star_vector.end();
-        ++iter)
-   {
-       (*iter)->show();
-       
-   }
-
-@q ******* (7) @>
-@
-@<Define rules@>= 
-
-    delete scanner_node->stars_show_option_struct;
-    scanner_node->stars_show_option_struct = 0;
 
     @=$$@> = static_cast<void*>(0);
 
@@ -2023,6 +1680,56 @@ Added this rule.
     scanner_node->stars_show_option_struct->where_options.push_back(w);
 
    @=$$@> = 0;
+};
+
+@q ****** (6) show_stars_option_list --> show_stars_option_list LIMIT INTEGER@> 
+@*5 \§show stars option list> $\longrightarrow$ \.{LIMIT} \.{INTEGER}
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_option_list: show_stars_option_list LIMIT INTEGER@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list LIMIT INTEGER'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list LIMIT INTEGER':"
+                << endl
+                << "`$3' == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->stars_show_option_struct->limit = @=$3@>;
+
+   @=$$@> = 0;
+
 };
 
 @q **** (4) command --> SHOW plane_expression@>
