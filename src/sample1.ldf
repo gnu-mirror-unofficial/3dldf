@@ -52,7 +52,10 @@
 
 %% * (1) New sample code.
 
-show stars where common_name <> "" and bayer_designation_greek_letter == "alpha" order by common_name;
+show stars common_name, bayer_designation_greek_letter where common_name <> "" 
+or bayer_designation_greek_letter == "alpha" order by common_name;
+
+%and bayer_designation_greek_letter == "alpha" order by common_name;
 
 endinput;
 

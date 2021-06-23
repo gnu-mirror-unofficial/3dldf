@@ -272,6 +272,8 @@ Added this function.
 void
 Stars_Where_Option_Struct::show(string s)
 {
+   using namespace Scan_Parse;
+
    if (s == "")
       cerr << "Stars_Where_Option_Struct:" << endl;
    else
@@ -283,13 +285,88 @@ Stars_Where_Option_Struct::show(string s)
       cerr << " == " << name_map[conjunction];
 
    cerr << endl
-        << "field             == " << field << " == " << name_map[field] << endl
-        << "relation          == " << relation << " == " << name_map[relation] << endl
+        << "field             == " << field;
+
+   if (field == STARS_COMMON_NAME)
+      cerr << " == STARS_COMMON_NAME" << endl;
+
+   else if (field == STARS_GREEK_NAME)
+      cerr << " == STARS_GREEK_NAME" << endl;
+
+   else if (field == STARS_LATIN_NAME)
+      cerr << " == STARS_LATIN_NAME" << endl;
+
+   else if (field == STARS_ARABIC_NAME)
+      cerr << " == STARS_ARABIC_NAME" << endl;
+   
+   else if (field == STARS_FLAMSTEED_DESIGNATION_NUMBER)
+      cerr << " == STARS_FLAMSTEED_DESIGNATION_NUMBER" << endl;
+
+   else if (field == STARS_BAYER_DESIGNATION_GREEK_LETTER)
+      cerr << " == STARS_BAYER_DESIGNATION_GREEK_LETTER" << endl;
+
+   else if (field == STARS_BS_HR_NUMBER)
+      cerr << " == STARS_BS_HR_NUMBER" << endl;
+
+   else if (field == STARS_BS_NUMBER)
+      cerr << " == STARS_BS_NUMBER" << endl;
+
+   else if (field == STARS_HR_NUMBER)
+      cerr << " == STARS_HR_NUMBER" << endl;
+
+   else if (field == STARS_APPROX_RANK_APPARENT_MAGNITUDE)
+      cerr << " == STARS_APPROX_RANK_APPARENT_MAGNITUDE" << endl;
+
+   else if (field == STARS_CONSTELLATION_ABBREVIATION)
+      cerr << " == STARS_CONSTELLATION_ABBREVIATION" << endl;
+
+   else if (field == STARS_CONSTELLATION_FULL_NAME)
+      cerr << " == STARS_CONSTELLATION_FULL_NAME" << endl;
+
+   else if (field == STARS_CONSTELLATION_NAME_GENITIVE)
+      cerr << " == STARS_CONSTELLATION_NAME_GENITIVE" << endl;
+
+   else if (field == STARS_CONSTELLATION_NUMBER)
+      cerr << " == STARS_CONSTELLATION_NUMBER" << endl;
+
+   else if (field == STARS_RIGHT_ASCENSION_HOURS)
+      cerr << " == STARS_RIGHT_ASCENSION_HOURS" << endl;
+
+   else if (field == STARS_RIGHT_ASCENSION_MINUTES)
+      cerr << " == STARS_RIGHT_ASCENSION_MINUTES" << endl;
+
+   else if (field == STARS_RIGHT_ASCENSION_SECONDS)
+      cerr << " == STARS_RIGHT_ASCENSION_SECONDS" << endl;
+
+   else if (field == STARS_RIGHT_ASCENSION_DECIMAL_HOURS)
+      cerr << " == STARS_RIGHT_ASCENSION_DECIMAL_HOURS" << endl;
+
+   else if (field == STARS_DECLINATION_DEGREES)
+      cerr << " == STARS_DECLINATION_DEGREES" << endl;
+
+   else if (field == STARS_DECLINATION_MINUTES)
+      cerr << " == STARS_DECLINATION_MINUTES" << endl;
+
+   else if (field == STARS_DECLINATION_SECONDS)
+      cerr << " == STARS_DECLINATION_SECONDS" << endl;
+
+   else if (field == STARS_DECLINATION_DECIMAL_DEGREES)
+      cerr << " == STARS_DECLINATION_DECIMAL_DEGREES" << endl;
+
+   else if (field == STARS_RIGHT_ASCENSION)
+      cerr << " == STARS_RIGHT_ASCENSION" << endl;
+
+   else if (field == STARS_DECLINATION)
+      cerr << " == STARS_DECLINATION" << endl;
+
+   else 
+      cerr << " WARNING!  Unknown field." << endl;
+
+   cerr << "relation          == " << relation << " == " << name_map[relation] << endl
         << "value             == " << value << endl
         << "comparison_string == \"" << comparison_string << "\"" << endl 
         << endl;
 }
-
 
 @q ** (2) |struct Stars_Show_Option_Struct| declaration.@>
 @*1 |struct Stars_Show_Option_Struct| declaration.
@@ -305,17 +382,21 @@ Added this section.
 struct Stars_Show_Option_Struct
 {
 
-   bool ascending_descending;
+   bool         ascending_descending;
+   unsigned int fields;
    unsigned int limit;
    unsigned int offset;
-
+   
    vector<unsigned int> order_by_options;
    vector<Stars_Where_Option_Struct> where_options;
 
    Stars_Show_Option_Struct(void)
    {
       ascending_descending = 0;  /* 0:  ascending. 1:  descending. */
-      limit = 0U;
+      fields = 0U;
+      limit  = 0U;
+      offset = 0U;;
+
       return;
    }  
 

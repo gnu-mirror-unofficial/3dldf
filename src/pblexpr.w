@@ -3641,8 +3641,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `relation: LESS'." 
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3652,6 +3651,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
    @=$$@> = LESS;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: LESS':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) relation --> LESS_OR_EQUAL.@>
@@ -3674,8 +3688,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `relation: LESS_OR_EQUAL'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3685,6 +3698,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
   @=$$@> = LESS_OR_EQUAL;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: LESS_OR_EQUAL':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) relation --> GREATER.@>
@@ -3705,8 +3733,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `relation: GREATER'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3716,6 +3743,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
    @=$$@> = GREATER;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: GREATER':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) relation --> GREATER_OR_EQUAL.@>
@@ -3736,8 +3778,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `relation: GREATER_OR_EQUAL'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3747,6 +3788,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
    @=$$@> = GREATER_OR_EQUAL;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: GREATER_OR_EQUAL':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) relation --> EQUAL.  @>
@@ -3768,8 +3824,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `relation: EQUAL'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3779,6 +3834,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
   @=$$@> = EQUAL;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: EQUAL':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) relation --> NOT_EQUAL.@>
@@ -3799,8 +3869,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `relation: NOT_EQUAL'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl; 
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3810,6 +3879,20 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
   @=$$@> = NOT_EQUAL;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: NOT_EQUAL':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
 };
 
@@ -3843,8 +3926,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `logical_operator: AND'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3854,6 +3936,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
     @=$$@> = AND;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: AND'."
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) logical_operator --> OR.  @>
@@ -3907,8 +4004,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `logical_operator: NOT'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3918,6 +4014,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
     @=$$@> = NOT;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: NOT'."
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) logical_operator --> XOR.  @>
@@ -3939,8 +4050,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `logical_operator: XOR'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3950,6 +4060,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
     @=$$@> = XOR;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: XOR'."
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) logical_operator --> NOR.  @>
@@ -3971,8 +4096,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `logical_operator: NOR'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -3982,6 +4106,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
     @=$$@> = NOR;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: NOR'."
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q ** (2) logical_operator --> NAND.  @>
@@ -4003,8 +4142,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `logical_operator: NAND'."
-                << endl 
-                << "$1 == " << @=$1@> << " == " << name_map[@=$1@>] << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -4014,6 +4152,21 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
     @=$$@> = NAND;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `logical_operator: NAND'."
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 };
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>

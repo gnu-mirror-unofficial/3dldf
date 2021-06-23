@@ -663,6 +663,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+    scanner_node->stars_show_option_struct->fields = @=$3@>;
+
     status = show_stars_func(scanner_node);
 
     if (status != 0)
@@ -782,7 +784,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier':"
                 << endl
-                << "`$2' (hex) == " << hex << @=$2@> << endl;
+                << "`$2' (hex) == " << hex << @=$2@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -791,7 +793,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+   @=$$@> = @=$1@> | @=$2@>;
 
 };
 
@@ -830,7 +832,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier':"
                 << endl
-                << "`$3' (hex) == " << hex << @=$3@> << endl;
+                << "`$3' (hex) == " << hex << @=$3@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -839,7 +841,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0;
+      @=$$@> = @=$1@> | @=$3@>;
 
 };
 
@@ -913,21 +915,6 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list order_by stars_order_by_list'.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list order_by stars_order_by_list':"
-                << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1070,7 +1057,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element':"
                 << endl
-                << "`$1' (hex)  == " << hex << @=$1@> << endl;
+                << "`$1' (hex)  == " << hex << @=$1@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1118,7 +1105,7 @@ Added this rule.
   {
     cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'."
               << endl
-              << "`$3$' (hex) == " << hex << @=$3@> << endl;
+              << "`$3$' (hex) == " << hex << @=$3@> << dec << endl;
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -1167,7 +1154,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1227,7 +1214,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: COMMON_NAME':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1237,10 +1224,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
-
-
-
-
 
 @q ****** (6) stars_field_specifier --> FLAMSTEED_DESIGNATION_NUMBER.@> 
 @*5 \§stars field specifier> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION\__NUMBER}.
@@ -1278,7 +1261,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: FLAMSTEED_DESIGNATION_NUMBER':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1325,7 +1308,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1372,7 +1355,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BS_NUMBER':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1419,7 +1402,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: HR_NUMBER':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1466,7 +1449,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1513,7 +1496,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_FULL_NAME':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1560,7 +1543,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_ABBREVIATION':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1607,7 +1590,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NAME_GENITIVE':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1654,7 +1637,7 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NUMBER':"
                 << endl
-                << "`$$' (hex) == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1815,9 +1798,10 @@ Added this rule.
     {
       cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation string_expression'."
                 << endl 
-                << "`stars_field_specifier' == " << @=$1@> << " == " << name_map[@=$2@>] << endl
+                << "`stars_field_specifier' == " << @=$1@> << endl
                 << "`relation'              == " << @=$2@> << " == " << name_map[@=$2@>] << endl
-                << "`string_expression'     == " << *static_cast<string*>(@=$3@>);
+                << "`string_expression'     == \"" << *static_cast<string*>(@=$3@>) << "\"" 
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
