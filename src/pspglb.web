@@ -4869,9 +4869,7 @@ intersection_points_func(C* c,
                          E* e = 0);
 
 Pointer_Vector<Bool_Point>*
-convert(Bool_Point_Quadruple* bpq, 
-        void* parameter = 0,
-        bool delete_bpq = true);
+convert(Bool_Point_Quadruple* bpq, void* parameter = 0, bool delete_bpq = true);
 
 template<class C, class D>
 void*
@@ -4912,6 +4910,9 @@ restore_from_database_func(Scanner_Node scanner_node,
                            string prefix, 
                            int overwrite_option, 
                            bool debug = false);
+
+int
+show_stars_func(Scanner_Node scanner_node);
 
 template <class C>
 int

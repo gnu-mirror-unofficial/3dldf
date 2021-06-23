@@ -1732,6 +1732,56 @@ Added this rule.
 
 };
 
+@q ****** (6) show_stars_option_list --> show_stars_option_list OFFSET INTEGER@> 
+@*5 \§show stars option list> $\longrightarrow$ \.{OFFSET} \.{INTEGER}
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=show_stars_option_list: show_stars_option_list OFFSET INTEGER@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list OFFSET INTEGER'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list OFFSET INTEGER':"
+                << endl
+                << "`$3' == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->stars_show_option_struct->offset = @=$3@>;
+
+   @=$$@> = 0;
+
+};
+
 @q **** (4) command --> SHOW plane_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}

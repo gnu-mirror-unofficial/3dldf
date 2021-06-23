@@ -165,6 +165,8 @@ class Star
 
    friend int yyparse(yyscan_t);
 
+   friend int Scan_Parse::show_stars_func(Scanner_Node);
+
    protected:
 
       string common_name;
@@ -302,15 +304,17 @@ Added this section.
 
 struct Stars_Show_Option_Struct
 {
-   vector<unsigned int> order_by_options;
+
    bool ascending_descending;
    unsigned int limit;
+   unsigned int offset;
 
+   vector<unsigned int> order_by_options;
    vector<Stars_Where_Option_Struct> where_options;
 
    Stars_Show_Option_Struct(void)
    {
-      ascending_descending = 0;
+      ascending_descending = 0;  /* 0:  ascending. 1:  descending. */
       limit = 0U;
       return;
    }  
@@ -323,7 +327,6 @@ struct Stars_Show_Option_Struct
    }   
 
 };
-
 
 @q ** (2) Global constants.@>
 @*1 Global constants.
@@ -968,6 +971,8 @@ class Constellation
 
    friend int yyparse(yyscan_t);
 
+   friend int Scan_Parse::show_stars_func(Scanner_Node);
+
    protected:
 
    public:
@@ -1399,6 +1404,7 @@ class Planet
 {
 
    friend int yyparse(yyscan_t);
+   friend int Scan_Parse::show_stars_func(Scanner_Node);
 
    protected:
 

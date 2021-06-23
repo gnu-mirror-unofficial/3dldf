@@ -585,6 +585,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     ORDER_BY@>@/
 @=%token <int_value>     WHERE@>@/
 @=%token <int_value>     LIMIT@>@/
+@=%token <int_value>     OFFSET@>@/
 @=%token <int_value>     ASCENDING@>@/
 @=%token <int_value>     DESCENDING@>@/
 @=%token <int_value>     COMMON_NAME@>@/
