@@ -630,10 +630,9 @@ Added this rule.
 
 };
 
+@q **** (4) command --> SHOW STARS stars_field_list stars_option_list @>
 
-@q **** (4) command --> SHOW STARS show_stars_option_list @>
-
-@*3 \§command> $\longrightarrow$ \.{SHOW} \.{STARS} \§show stars option list>.
+@*3 \§command> $\longrightarrow$ \.{SHOW} \.{STARS} \<stars field list> \§stars option list>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -645,7 +644,7 @@ Added this rule.
 
 @<Define rules@>= 
   
-@=command: SHOW STARS show_stars_option_list@>@/
+@=command: SHOW STARS stars_field_list stars_option_list@>@/
 {
 @q ******* (7) @>
 
@@ -655,7 +654,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list'.";
+      cerr_strm << "*** Parser: `command --> SHOW STARS stars_field_list stars_option_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -668,7 +667,7 @@ Added this rule.
 
     if (status != 0)
     {
-      cerr_strm << "ERROR!  In Parser: `command --> SHOW STARS show_stars_option_list':"
+      cerr_strm << "ERROR!  In Parser: `command --> SHOW STARS stars_field_list stars_option_list':"
                 << "`Scan_Parse::show_stars_func' failed, returning " << status << "."
                 << endl
                 << "Failed to show `stars'.  Will try to continue."
@@ -682,7 +681,7 @@ Added this rule.
 #if DEBUG_COMPILE
     else if (DEBUG)
     { 
-      cerr_strm << "*** Parser: `command --> SHOW STARS show_stars_option_list':"
+      cerr_strm << "*** Parser: `command --> SHOW STARS stars_field_list stars_option_list':"
                 << "`Scan_Parse::show_stars_func' succeeded, returning 0."
                 << endl
                 << "Showed `stars' successfully."
@@ -701,10 +700,153 @@ Added this rule.
 
 };
 
+@q ***** (5) stars_field_list@>  
+@*4 \§stars field list>.
+\initials{LDF 2021.06.23.}
+
+\LOG
+\initials{LDF 2021.06.23.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> stars_field_list@>
+
+@q ****** (6) stars_field_list --> EMPTY.@> 
+@*5 \§stars field list> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.06.23.}
+
+\LOG
+\initials{LDF 2021.06.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_list: /* Empty */@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_list:  EMPTY'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    if (scanner_node->stars_show_option_struct == 0)
+       scanner_node->stars_show_option_struct = new Stars_Show_Option_Struct;
+
+    @=$$@> = 0;
+};
+
+@q ****** (6) stars_field_list --> stars_field_list stars_field_specifier@> 
+@*5 \§stars field list> $\longrightarrow$ \§stars field list> \$stars field specifier>.
+\initials{LDF 2021.06.23.}
+
+\LOG
+\initials{LDF 2021.06.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_list: stars_field_list stars_field_specifier@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier':"
+                << endl
+                << "`$2' (hex) == " << hex << @=$2@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) stars_field_list --> stars_field_list COMMA stars_field_specifier@> 
+@*5 \§stars field list> $\longrightarrow$ \§stars field list> \.{COMMA} \$stars field specifier>.
+\initials{LDF 2021.06.23.}
+
+\LOG
+\initials{LDF 2021.06.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_list: stars_field_list COMMA stars_field_specifier@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier':"
+                << endl
+                << "`$3' (hex) == " << hex << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0;
+
+};
+
 @q ****** (6) @>
 
-@q ***** (5) show_stars_option_list@>  
-@*4 \§show stars option list>.
+@q ***** (5) stars_option_list@>  
+@*4 \§stars option list>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -714,10 +856,10 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 
-@=%type <int_value> show_stars_option_list@>
+@=%type <int_value> stars_option_list@>
 
-@q ****** (6) show_stars_option_list --> EMPTY.@> 
-@*5 \§show stars option list> $\longrightarrow$ \.{EMPTY}.
+@q ****** (6) stars_option_list --> EMPTY.@> 
+@*5 \§stars option list> $\longrightarrow$ \.{EMPTY}.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -727,7 +869,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_option_list: /* Empty */@>@/
+@=stars_option_list: /* Empty */@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -735,7 +877,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list:  EMPTY'.";
+      cerr_strm << "*** Parser: `stars_option_list:  EMPTY'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -744,13 +886,14 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->stars_show_option_struct = new Stars_Show_Option_Struct;
+    if (scanner_node->stars_show_option_struct == 0)
+       scanner_node->stars_show_option_struct = new Stars_Show_Option_Struct;
 
     @=$$@> = 0;
 };
 
-@q ****** (6) show_stars_option_list --> show_stars_option_list order_by show_stars_order_by_list@> 
-@*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \§{order by} \§show stars order by list>.
+@q ****** (6) stars_option_list --> stars_option_list order_by stars_order_by_list@> 
+@*5 \§stars option list> $\longrightarrow$ \§stars option list> \§{order by} \§stars order by list>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -760,7 +903,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list@>@/
+@=stars_option_list: stars_option_list order_by stars_order_by_list@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -769,7 +912,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list order_by stars_order_by_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -782,9 +925,9 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list order_by show_stars_order_by_list':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list order_by stars_order_by_list':"
                 << endl
-                << "`$$' == " << hex << @=$$@> << endl;
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -875,21 +1018,22 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ***** (5) show_stars_order_by_list@>  
-@*4 \§show stars order by list>.
+@q ***** (5) stars_order_by_list and stars_order_by_element@>  
+@*4 \§stars order by list> and \§stars order by element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
 \initials{LDF 2021.06.20.}
-Added this type declaration.
+Added these type declarations.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
 
-@=%type <int_value> show_stars_order_by_list@>
+@=%type <int_value> stars_order_by_list@>
+@=%type <int_value> stars_order_by_element@>
 
-@q ****** (6) show_stars_order_by_list --> show_stars_order_by_element@> 
-@*5 \§show stars order by list> $\longrightarrow$ \§show stars order by element>.
+@q ****** (6) stars_order_by_list --> stars_order_by_element@> 
+@*5 \§stars order by list> $\longrightarrow$ \§stars order by element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -899,7 +1043,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_list: show_stars_order_by_element@>@/
+@=stars_order_by_list: stars_order_by_element@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -908,7 +1052,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_element'."
+      cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element'."
                 << endl;
 
       log_message(cerr_strm);
@@ -924,7 +1068,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_element':"
+      cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element':"
                 << endl
                 << "`$1' (hex)  == " << hex << @=$1@> << endl;
 
@@ -937,8 +1081,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_list --> show_stars_order_by_list COMMA show_stars_order_by_element@> 
-@*5 \§show stars order by list> $\longrightarrow$ \§show stars order by list> \.{COMMA} \§show stars order by element>.
+@q ****** (6) stars_order_by_list --> stars_order_by_list COMMA stars_order_by_element@> 
+@*5 \§stars order by list> $\longrightarrow$ \§stars order by list> \.{COMMA} \§stars order by element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -948,7 +1092,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element@>@/
+@=stars_order_by_list: stars_order_by_list COMMA stars_order_by_element@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -957,7 +1101,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'.";
+    cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -972,7 +1116,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `show_stars_order_by_list: show_stars_order_by_list COMMA show_stars_order_by_element'."
+    cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'."
               << endl
               << "`$3$' (hex) == " << hex << @=$3@> << endl;
 
@@ -987,21 +1131,68 @@ Added this rule.
 
 };
 
-@q ***** (5) show_stars_order_by_element@>  
-@*4 \§show stars order by element>.
-\initials{LDF 2021.06.20.}
+@q ****** (6) stars_order_by_element --> stars_field_specifier.@> 
+@*5 \§stars order by element> $\longrightarrow$ \<stars field specifier>.
+\initials{LDF 2021.06.23.}
 
 \LOG
-\initials{LDF 2021.06.20.}
+\initials{LDF 2021.06.23.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_order_by_element: stars_field_specifier@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = @=$1@>;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ***** (5) stars_field_specifier@>  
+@*4 \§stars order by element>.
+\initials{LDF 2021.06.23.}
+
+\LOG
+\initials{LDF 2021.06.23.}
 Added this type declaration.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
 
-@=%type <int_value> show_stars_order_by_element@>
+@=%type <int_value> stars_field_specifier@>
 
-@q ****** (6) show_stars_order_by_element --> COMMON_NAME.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{COMMON\_NAME}.
+@q ****** (6) stars_field_specifier --> COMMON_NAME.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{COMMON\_NAME}.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1011,7 +1202,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: COMMON_NAME@>@/
+@=stars_field_specifier: COMMON_NAME@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1019,7 +1210,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: COMMON_NAME'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: COMMON_NAME'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1034,7 +1225,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: COMMON_NAME':"
+      cerr_strm << "*** Parser: `stars_field_specifier: COMMON_NAME':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1047,8 +1238,12 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> FLAMSTEED_DESIGNATION_NUMBER.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION\__NUMBER}.
+
+
+
+
+@q ****** (6) stars_field_specifier --> FLAMSTEED_DESIGNATION_NUMBER.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION\__NUMBER}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1058,7 +1253,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: FLAMSTEED_DESIGNATION_NUMBER@>@/
+@=stars_field_specifier: FLAMSTEED_DESIGNATION_NUMBER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1066,7 +1261,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION_NUMBER'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: FLAMSTEED_DESIGNATION_NUMBER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1081,7 +1276,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: FLAMSTEED_DESIGNATION_NUMBER':"
+      cerr_strm << "*** Parser: `stars_field_specifier: FLAMSTEED_DESIGNATION_NUMBER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1094,8 +1289,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> BAYER_DESIGNATION_GREEK_LETTER.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{BAYER\_DESIGNATION\_GREEK\_LETTER}.
+@q ****** (6) stars_field_specifier --> BAYER_DESIGNATION_GREEK_LETTER.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{BAYER\_DESIGNATION\_GREEK\_LETTER}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1105,7 +1300,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: BAYER_DESIGNATION_GREEK_LETTER@>@/
+@=stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1113,7 +1308,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION_GREEK_LETTER'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1128,7 +1323,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: BAYER_DESIGNATION_GREEK_LETTER':"
+      cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1141,8 +1336,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> BS_NUMBER.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{BS\_NUMBER}.
+@q ****** (6) stars_field_specifier --> BS_NUMBER.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{BS\_NUMBER}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1152,7 +1347,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: BS_NUMBER@>@/
+@=stars_field_specifier: BS_NUMBER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1160,7 +1355,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: BS_NUMBER'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: BS_NUMBER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1175,7 +1370,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: BS_NUMBER':"
+      cerr_strm << "*** Parser: `stars_field_specifier: BS_NUMBER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1188,8 +1383,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> HR_NUMBER.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{HR\_NUMBER}.
+@q ****** (6) stars_field_specifier --> HR_NUMBER.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{HR\_NUMBER}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1199,7 +1394,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: HR_NUMBER@>@/
+@=stars_field_specifier: HR_NUMBER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1207,7 +1402,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: HR_NUMBER'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: HR_NUMBER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1222,7 +1417,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: HR_NUMBER':"
+      cerr_strm << "*** Parser: `stars_field_specifier: HR_NUMBER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1235,8 +1430,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> APPROX_RANK_APPARENT_MAGNITUDE.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{APPROX\_RANK\_APPARENT\_MAGNITUDE}.
+@q ****** (6) stars_field_specifier --> APPROX_RANK_APPARENT_MAGNITUDE.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{APPROX\_RANK\_APPARENT\_MAGNITUDE}.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -1246,7 +1441,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE@>@/
+@=stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1254,7 +1449,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1269,7 +1464,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: APPROX_RANK_APPARENT_MAGNITUDE':"
+      cerr_strm << "*** Parser: `stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1282,8 +1477,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> CONSTELLATION_FULL_NAME.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_FULL\_NAME}.
+@q ****** (6) stars_field_specifier --> CONSTELLATION_FULL_NAME.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{CONSTELLATION\_FULL\_NAME}.
 \initials{LDF 2021.06.22.}
 
 \LOG
@@ -1293,7 +1488,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: CONSTELLATION_FULL_NAME@>@/
+@=stars_field_specifier: CONSTELLATION_FULL_NAME@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1301,7 +1496,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_FULL_NAME'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_FULL_NAME'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1316,7 +1511,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_FULL_NAME':"
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_FULL_NAME':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1329,8 +1524,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> CONSTELLATION_ABBREVIATION.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_ABBREVIATION}.
+@q ****** (6) stars_field_specifier --> CONSTELLATION_ABBREVIATION.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{CONSTELLATION\_ABBREVIATION}.
 \initials{LDF 2021.06.22.}
 
 \LOG
@@ -1340,7 +1535,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: CONSTELLATION_ABBREVIATION@>@/
+@=stars_field_specifier: CONSTELLATION_ABBREVIATION@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1348,7 +1543,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_ABBREVIATION'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_ABBREVIATION'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1363,7 +1558,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_ABBREVIATION':"
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_ABBREVIATION':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1376,8 +1571,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> CONSTELLATION_NAME_GENITIVE.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_NAME\_GENITIVE}.
+@q ****** (6) stars_field_specifier --> CONSTELLATION_NAME_GENITIVE.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{CONSTELLATION\_NAME\_GENITIVE}.
 \initials{LDF 2021.06.22.}
 
 \LOG
@@ -1387,7 +1582,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: CONSTELLATION_NAME_GENITIVE@>@/
+@=stars_field_specifier: CONSTELLATION_NAME_GENITIVE@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1395,7 +1590,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NAME_GENITIVE'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NAME_GENITIVE'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1410,7 +1605,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NAME_GENITIVE':"
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NAME_GENITIVE':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1423,8 +1618,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_order_by_element --> CONSTELLATION_NUMBER.@> 
-@*5 \§show stars order by element> $\longrightarrow$ \.{CONSTELLATION\_NUMBER}.
+@q ****** (6) stars_field_specifier --> CONSTELLATION_NUMBER.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{CONSTELLATION\_NUMBER}.
 \initials{LDF 2021.06.22.}
 
 \LOG
@@ -1434,7 +1629,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_order_by_element: CONSTELLATION_NUMBER@>@/
+@=stars_field_specifier: CONSTELLATION_NUMBER@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1442,7 +1637,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NUMBER'.";
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NUMBER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1457,7 +1652,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_order_by_element: CONSTELLATION_NUMBER':"
+      cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NUMBER':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << endl;
 
@@ -1470,8 +1665,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_option_list --> show_stars_option_list WHERE show_stars_where_list@> 
-@*5 \§show stars option list> $\longrightarrow$ \§show stars option list> \.{WHERE} \§show stars where list>.
+@q ****** (6) stars_option_list --> stars_option_list WHERE stars_where_list@> 
+@*5 \§stars option list> $\longrightarrow$ \§stars option list> \.{WHERE} \§stars where list>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1481,7 +1676,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_option_list: show_stars_option_list WHERE show_stars_where_list@>@/
+@=stars_option_list: stars_option_list WHERE stars_where_list@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1490,7 +1685,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list WHERE show_stars_where_list'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list WHERE stars_where_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1502,8 +1697,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ***** (5) show_stars_where_list@>  
-@*4 \§show stars where list>.
+@q ***** (5) stars_where_list@>  
+@*4 \§stars where list>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1513,10 +1708,10 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 
-@=%type <int_value> show_stars_where_list@>
+@=%type <int_value> stars_where_list@>
 
-@q ****** (6) show_stars_where_list --> show_stars_where_element@> 
-@*5 \§show stars where list> $\longrightarrow$ \§show stars where element>.
+@q ****** (6) stars_where_list --> stars_where_element@> 
+@*5 \§stars where list> $\longrightarrow$ \§stars where element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1526,7 +1721,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_where_list: show_stars_where_element@>@/
+@=stars_where_list: stars_where_element@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1535,7 +1730,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_element'.";
+      cerr_strm << "*** Parser: `stars_where_list: stars_where_element'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1547,8 +1742,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ****** (6) show_stars_where_list --> show_stars_where_list logical_operator show_stars_where_element@> 
-@*5 \§show stars where list> $\longrightarrow$ \§show stars where list> \§logical operator> \§show stars where element>.
+@q ****** (6) stars_where_list --> stars_where_list logical_operator stars_where_element@> 
+@*5 \§stars where list> $\longrightarrow$ \§stars where list> \§logical operator> \§stars where element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1558,7 +1753,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_where_list: show_stars_where_list logical_operator show_stars_where_element@>@/
+@=stars_where_list: stars_where_list logical_operator stars_where_element@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1567,7 +1762,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_list: show_stars_where_list logical_operator show_stars_where_element'."
+      cerr_strm << "*** Parser: `stars_where_list: stars_where_list logical_operator stars_where_element'."
                 << endl 
                 << "`logical_operator' ($2) == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
 
@@ -1586,8 +1781,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ***** (5) show_stars_where_element@>  
-@*4 \§show stars where element>.
+@q ***** (5) stars_where_element@>  
+@*4 \§stars where element>.
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1597,10 +1792,10 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 
-@=%type <int_value> show_stars_where_element@>
+@=%type <int_value> stars_where_element@>
 
-@q ****** (6) show_stars_where_element --> COMMON_NAME relation string_expression.@> 
-@*5 \§show stars where element> $\longrightarrow$ \.{COMMON\_NAME} \§relation> \§string expression>.@> 
+@q ****** (6) stars_where_element --> stars_field_specifier relation string_expression.@> 
+@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§string expression>.@> 
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1610,7 +1805,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_where_element: COMMON_NAME relation string_expression@>@/
+@=stars_where_element: stars_field_specifier relation string_expression@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1618,9 +1813,11 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_where_element: COMMON_NAME relation string_expression'."
+      cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation string_expression'."
                 << endl 
-                << "`relation' == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
+                << "`stars_field_specifier' == " << @=$1@> << " == " << name_map[@=$2@>] << endl
+                << "`relation'              == " << @=$2@> << " == " << name_map[@=$2@>] << endl
+                << "`string_expression'     == " << *static_cast<string*>(@=$3@>);
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1631,7 +1828,7 @@ Added this rule.
 
     Stars_Where_Option_Struct w;
 
-    w.field              = COMMON_NAME;
+    w.field              = @=$1@>;
     w.relation           = @=$2@>;
     w.comparison_string = *static_cast<string *>(@=$3@>); 
    
@@ -1640,50 +1837,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ****** (6) show_stars_where_element --> BAYER_DESIGNATION_GREEK_LETTER relation string_expression.@> 
-@*5 \§show stars where element> $\longrightarrow$ \.{BAYER\_DESIGNATION\_GREEK\_LETTER} \§relation> 
-\§string expression>.@> 
-\initials{LDF 2021.06.20.}
-
-\LOG
-\initials{LDF 2021.06.20.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-
-@=show_stars_where_element: BAYER_DESIGNATION_GREEK_LETTER relation string_expression@>@/
-{
-  @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `show_stars_where_element: BAYER_DESIGNATION_GREEK_LETTER relation string_expression'."
-                << endl 
-                << "`relation' == " << @=$2@> << " == " << name_map[@=$2@>] << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-    Stars_Where_Option_Struct w;
-    
-    w.field              = BAYER_DESIGNATION_GREEK_LETTER;
-    w.relation           = @=$2@>;
-    w.comparison_string = *static_cast<string *>(@=$3@>); 
-   
-    scanner_node->stars_show_option_struct->where_options.push_back(w);
-
-   @=$$@> = 0;
-};
-
-@q ****** (6) show_stars_option_list --> show_stars_option_list LIMIT INTEGER@> 
-@*5 \§show stars option list> $\longrightarrow$ \.{LIMIT} \.{INTEGER}
+@q ****** (6) stars_option_list --> stars_option_list LIMIT INTEGER@> 
+@*5 \§stars option list> $\longrightarrow$ \.{LIMIT} \.{INTEGER}
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1693,7 +1848,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_option_list: show_stars_option_list LIMIT INTEGER@>@/
+@=stars_option_list: stars_option_list LIMIT INTEGER@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1702,7 +1857,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list LIMIT INTEGER'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT INTEGER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1715,7 +1870,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list LIMIT INTEGER':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT INTEGER':"
                 << endl
                 << "`$3' == " << @=$3@> << endl;
 
@@ -1732,8 +1887,8 @@ Added this rule.
 
 };
 
-@q ****** (6) show_stars_option_list --> show_stars_option_list OFFSET INTEGER@> 
-@*5 \§show stars option list> $\longrightarrow$ \.{OFFSET} \.{INTEGER}
+@q ****** (6) stars_option_list --> stars_option_list OFFSET INTEGER@> 
+@*5 \§stars option list> $\longrightarrow$ \.{OFFSET} \.{INTEGER}
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1743,7 +1898,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=show_stars_option_list: show_stars_option_list OFFSET INTEGER@>@/
+@=stars_option_list: stars_option_list OFFSET INTEGER@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1752,7 +1907,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list OFFSET INTEGER'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET INTEGER'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1765,7 +1920,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `show_stars_option_list: show_stars_option_list OFFSET INTEGER':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET INTEGER':"
                 << endl
                 << "`$3' == " << @=$3@> << endl;
 
