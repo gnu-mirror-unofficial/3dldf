@@ -1020,7 +1020,7 @@ prog:
 	$(MAKE) 3dldf$(EXEEXT)
 
 conveps$(EXEEXT): conveps.o
-	g++ -pthread -o conveps conveps.o
+	g++ -pthread -o $@ $<
 
 conveps.o: conveps.c++
 	g++ -DHAVE_CONFIG_H -I. -I.. -fpermissive -fdiagnostics-show-option \
@@ -1029,6 +1029,12 @@ conveps.o: conveps.c++
 conveps.c++: conveps.web
 	ctangle conveps.web
 	mv conveps.c conveps.c++
+
+accsdtbs$(EXEEXT): accsdtbs.o
+	g++ -pthread -o $@ $<
+
+accsdtbs.o: accsdtbs.cxx
+	g++ -c -o $@ $<
 
 .PHONY: headers
 
