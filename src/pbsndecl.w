@@ -3263,30 +3263,31 @@ Scan_Parse
   extern const unsigned int MAX_SHAPE = POLYHEDRON;
 
 
-  extern const unsigned int STARS_COMMON_NAME                    =       1U;                 
-  extern const unsigned int STARS_GREEK_NAME                     =       2U;                  
-  extern const unsigned int STARS_LATIN_NAME                     =       4U;                 
-  extern const unsigned int STARS_ARABIC_NAME                    =       8U;                 
-  extern const unsigned int STARS_FLAMSTEED_DESIGNATION_NUMBER   =      16U;  /* $2^4$ */    
-  extern const unsigned int STARS_BAYER_DESIGNATION_GREEK_LETTER =      32U;                 
-  extern const unsigned int STARS_BS_HR_NUMBER                   =      64U;                  
-  extern const unsigned int STARS_BS_NUMBER                      =     128U;                 
-  extern const unsigned int STARS_HR_NUMBER                      =     256U;  /* $2^8$ */    
-  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE =     512U;                 
-  extern const unsigned int STARS_CONSTELLATION_ABBREVIATION     =    1024U;                 
-  extern const unsigned int STARS_CONSTELLATION_FULL_NAME        =    2048U;                 
-  extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE    =    4096U;  /* $2^12$ */   
-  extern const unsigned int STARS_CONSTELLATION_NUMBER           =    8192U;                 
-  extern const unsigned int STARS_RIGHT_ASCENSION_HOURS          =   16384U;                 
-  extern const unsigned int STARS_RIGHT_ASCENSION_MINUTES        =   32768U;                 
-  extern const unsigned int STARS_RIGHT_ASCENSION_SECONDS        =   65536U;  /* $2^16$ */   
-  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_HOURS  =  131072U;                 
-  extern const unsigned int STARS_DECLINATION_DEGREES            =  262144U;                 
-  extern const unsigned int STARS_DECLINATION_MINUTES            =  524288U;                 
-  extern const unsigned int STARS_DECLINATION_SECONDS            = 1048576U;  /* $2^20$ */   
-  extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES    = 2097152U;  
-  extern const unsigned int STARS_RIGHT_ASCENSION                = 4194304U;  
-  extern const unsigned int STARS_DECLINATION                    = 8388608U;  /* $2^23$ */   
+  extern const unsigned int STARS_COMMON_NAME                    =        1U;                 
+  extern const unsigned int STARS_GREEK_NAME                     =        2U;                  
+  extern const unsigned int STARS_LATIN_NAME                     =        4U;                 
+  extern const unsigned int STARS_ARABIC_NAME                    =        8U;                 
+  extern const unsigned int STARS_FLAMSTEED_DESIGNATION_NUMBER   =       16U;  /* $2^4$ */    
+  extern const unsigned int STARS_BAYER_DESIGNATION_GREEK_LETTER =       32U;                 
+  extern const unsigned int STARS_BS_HR_NUMBER                   =       64U;                  
+  extern const unsigned int STARS_BS_NUMBER                      =      128U;                 
+  extern const unsigned int STARS_HR_NUMBER                      =      256U;  /* $2^8$ */    
+  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE =      512U;                 
+  extern const unsigned int STARS_CONSTELLATION_ABBREVIATION     =     1024U;                 
+  extern const unsigned int STARS_CONSTELLATION_FULL_NAME        =     2048U;                 
+  extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE    =     4096U;  /* $2^12$ */   
+  extern const unsigned int STARS_CONSTELLATION_NUMBER           =     8192U;                 
+  extern const unsigned int STARS_RIGHT_ASCENSION_HOURS          =    16384U;                 
+  extern const unsigned int STARS_RIGHT_ASCENSION_MINUTES        =    32768U;                 
+  extern const unsigned int STARS_RIGHT_ASCENSION_SECONDS        =    65536U;  /* $2^16$ */   
+  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_HOURS  =   131072U;                 
+extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_DEGREES  =   262144U; 
+  extern const unsigned int STARS_DECLINATION_DEGREES            =   524288U;                 
+  extern const unsigned int STARS_DECLINATION_MINUTES            =  1048576U;  /* $2^20$ */   
+  extern const unsigned int STARS_DECLINATION_SECONDS            =  2097152U;  
+  extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES    =  4194304U;  
+  extern const unsigned int STARS_RIGHT_ASCENSION                =  8388608U;  
+  extern const unsigned int STARS_DECLINATION                    = 16777216U;  /* $2^24$ */   
         
 };
 
@@ -3316,6 +3317,7 @@ Scan_Parse
   extern const unsigned int STARS_RIGHT_ASCENSION_MINUTES;
   extern const unsigned int STARS_RIGHT_ASCENSION_SECONDS;
   extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_HOURS;
+  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_DEGREES;
   extern const unsigned int STARS_DECLINATION_DEGREES;
   extern const unsigned int STARS_DECLINATION_MINUTES;
   extern const unsigned int STARS_DECLINATION_SECONDS;

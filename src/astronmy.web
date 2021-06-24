@@ -187,6 +187,7 @@ class Star
       int right_ascension_minutes;
       real right_ascension_seconds;
       real right_ascension_decimal_hours;
+      real right_ascension_decimal_degrees;
       int declination_degrees;
       int declination_minutes;
       real declination_seconds;
@@ -343,6 +344,9 @@ Stars_Where_Option_Struct::show(string s)
    else if (field == STARS_RIGHT_ASCENSION_DECIMAL_HOURS)
       cerr << " == STARS_RIGHT_ASCENSION_DECIMAL_HOURS" << endl;
 
+   else if (field == STARS_RIGHT_ASCENSION_DECIMAL_DEGREES)
+      cerr << " == STARS_RIGHT_ASCENSION_DECIMAL_DEGREES" << endl;
+
    else if (field == STARS_DECLINATION_DEGREES)
       cerr << " == STARS_DECLINATION_DEGREES" << endl;
 
@@ -480,6 +484,7 @@ Star::Star(void)
       right_ascension_minutes = 0;
       right_ascension_seconds = 0.0;
       right_ascension_decimal_hours = 0.0;
+      right_ascension_decimal_degrees = 0.0;
       declination_degrees = 0;
       declination_minutes = 0;
       declination_seconds = 0.0;
@@ -524,6 +529,7 @@ Star::Star(const Star &s)
       right_ascension_minutes = s.right_ascension_minutes;
       right_ascension_seconds = s.right_ascension_seconds;
       right_ascension_decimal_hours = s.right_ascension_decimal_hours;
+      right_ascension_decimal_degrees = s.right_ascension_decimal_degrees;
       declination_degrees = s.declination_degrees;
       declination_minutes = s.declination_minutes;
       declination_seconds = s.declination_seconds;
@@ -679,29 +685,27 @@ Star::set(Scanner_Node scanner_node)
 @
 @<Define |Star| functions@>=
 
-      common_name                    = scanner_node->curr_row[0];
-      greek_name                     = scanner_node->curr_row[1];
-      latin_name                     = scanner_node->curr_row[2];
-      arabic_name                    = scanner_node->curr_row[3];     
-      flamsteed_designation_number   = atoi(scanner_node->curr_row[4]);
-      bayer_designation_greek_letter = scanner_node->curr_row[5];
-      bs_hr_number                   = atoi(scanner_node->curr_row[6]);
-      approx_rank_apparent_magnitude = atoi(scanner_node->curr_row[7]);
-      constellation_abbreviation     = scanner_node->curr_row[8];
-      constellation_full_name        = scanner_node->curr_row[9];
-      constellation_name_genitive    = scanner_node->curr_row[10];
-      constellation_number           = atoi(scanner_node->curr_row[11]);
-      right_ascension_hours          = atoi(scanner_node->curr_row[12]);
-      right_ascension_minutes        = atoi(scanner_node->curr_row[13]);
-      right_ascension_seconds        = atof(scanner_node->curr_row[14]);
-      right_ascension_decimal_hours  = atof(scanner_node->curr_row[15]);
-      declination_degrees            = atoi(scanner_node->curr_row[16]);
-      declination_minutes            = atoi(scanner_node->curr_row[17]);
-      declination_seconds            = atof(scanner_node->curr_row[18]);
-      declination_decimal_degrees    = atof(scanner_node->curr_row[19]);
-
-      
-      
+      common_name                     = scanner_node->curr_row[0];
+      greek_name                      = scanner_node->curr_row[1];
+      latin_name                      = scanner_node->curr_row[2];
+      arabic_name                     = scanner_node->curr_row[3];     
+      flamsteed_designation_number    = atoi(scanner_node->curr_row[4]);
+      bayer_designation_greek_letter  = scanner_node->curr_row[5];
+      bs_hr_number                    = atoi(scanner_node->curr_row[6]);
+      approx_rank_apparent_magnitude  = atoi(scanner_node->curr_row[7]);
+      constellation_abbreviation      = scanner_node->curr_row[8];
+      constellation_full_name         = scanner_node->curr_row[9];
+      constellation_name_genitive     = scanner_node->curr_row[10];
+      constellation_number            = atoi(scanner_node->curr_row[11]);
+      right_ascension_hours           = atoi(scanner_node->curr_row[12]);
+      right_ascension_minutes         = atoi(scanner_node->curr_row[13]);
+      right_ascension_seconds         = atof(scanner_node->curr_row[14]);
+      right_ascension_decimal_hours   = atof(scanner_node->curr_row[15]);
+      right_ascension_decimal_degrees = atof(scanner_node->curr_row[16]);
+      declination_degrees             = atoi(scanner_node->curr_row[17]);
+      declination_minutes             = atoi(scanner_node->curr_row[18]);
+      declination_seconds             = atof(scanner_node->curr_row[19]);
+      declination_decimal_degrees     = atof(scanner_node->curr_row[20]);
 
 @q ***** (5)@>
 @
@@ -904,6 +908,7 @@ Star::operator=(const Star& s)
       right_ascension_minutes = s.right_ascension_minutes;
       right_ascension_seconds = s.right_ascension_seconds;
       right_ascension_decimal_hours = s.right_ascension_decimal_hours;
+      right_ascension_decimal_degrees = s.right_ascension_decimal_degrees;
       declination_degrees = s.declination_degrees;
       declination_minutes = s.declination_minutes;
       declination_seconds = s.declination_seconds;
@@ -1055,7 +1060,7 @@ Star::show(string text, unsigned int fields) const
     if (fields & STARS_RIGHT_ASCENSION)
     {
        fields |=   STARS_RIGHT_ASCENSION_HOURS | STARS_RIGHT_ASCENSION_MINUTES | STARS_RIGHT_ASCENSION_SECONDS
-                 | STARS_RIGHT_ASCENSION_DECIMAL_HOURS;
+                 | STARS_RIGHT_ASCENSION_DECIMAL_HOURS | STARS_RIGHT_ASCENSION_DECIMAL_DEGREES;
     }
 
     if (fields & STARS_DECLINATION)
@@ -1116,6 +1121,9 @@ Star::show(string text, unsigned int fields) const
 
     if (fields & STARS_RIGHT_ASCENSION_DECIMAL_HOURS)
        cerr << "right_ascension_decimal_hours  == " << right_ascension_decimal_hours << endl;
+
+    if (fields & STARS_RIGHT_ASCENSION_DECIMAL_DEGREES)
+       cerr << "right_ascension_decimal_degrees  == " << right_ascension_decimal_degrees << endl;
 
     if (fields & STARS_DECLINATION_DEGREES)
        cerr << "declination_degrees            == " << declination_degrees << endl;

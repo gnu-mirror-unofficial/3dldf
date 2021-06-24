@@ -75,6 +75,7 @@ create table Stars
    right_ascension_minutes int not null default 0,
    right_ascension_seconds float not null default 0.0,
    right_ascension_decimal_hours float not null default 0.0,
+   right_ascension_decimal_degrees float not null default 0.0,
    declination_degrees int not null default 0,
    declination_minutes int not null default 0,
    declination_seconds float not null default 0.0,
@@ -90,8 +91,8 @@ alter table Stars add column right_ascension_decimal_hours float not null defaul
 alter table Stars add column declination_decimal_degrees float not null default 0.0 after declination_seconds;
 alter table Stars add column constellation_number int not null default 0 after constellation_name_genitive;
 alter table Stars add column constellation_name_genitive varchar(64) not null default "" after constellation_full_name;
-   
 alter table Stars add column approx_rank_apparent_magnitude int not null default 0 after bs_hr_number;
+alter table Stars add column right_ascension_decimal_degrees float not null default 0.0 after right_ascension_decimal_hours;
 
 insert into ttemp (right_ascension) values ('1:45:20.02');
 
@@ -24441,8 +24442,6 @@ select * from Stars where bayer_designation_greek_letter = "upsilon" and constel
 
 delete from Stars where bayer_designation_greek_letter = "upsilon" and constellation_name_genitive = "Andromedae" limit 1;
 
-/* !! START HERE:  LDF 2021.06.22. */ 
-
 select * from Stars where bayer_designation_greek_letter = "theta" and constellation_name_genitive = "Octantis"\G
 
 delete from Stars where bayer_designation_greek_letter = "theta" and constellation_name_genitive = "Octantis" limit 1;
@@ -24468,6 +24467,47 @@ select * from Stars where bayer_designation_greek_letter = "epsilon" and constel
 delete from Stars where bayer_designation_greek_letter = "epsilon" and constellation_name_genitive = "Tucanae" limit 1;
 
 
+update Stars set bayer_designation_greek_letter = "alpha" where bayer_designation_greek_letter = "Alpha";
+
+select * from Stars where bayer_designation_greek_letter = "Alpha"\G
+
+select "Here I am";
+
+select * from Stars where bayer_designation_greek_letter = "Beta"\G
+
+select distinct bayer_designation_greek_letter from Stars order by bayer_designation_greek_letter;
+
+select * from Stars where common_name = "Zubenelgenubi"\G
+
+select count(*) from Stars;
+
+select bs_hr_number from Stars order by bs_hr_number;
+
+select distinct bs_hr_number from Stars order by bs_hr_number;
+
+delete from Stars where bs_hr_number = 1367 limit 1;
+delete from Stars where bs_hr_number = 2653 limit 1;
+delete from Stars where bs_hr_number = 3659 limit 1;
+delete from Stars where bs_hr_number = 3803 limit 1;
+delete from Stars where bs_hr_number = 4050 limit 1;
+delete from Stars where bs_hr_number = 4140 limit 1;
+delete from Stars where bs_hr_number = 5530 limit 1;
+delete from Stars where bs_hr_number = 6630 limit 1;
+
+select * from Stars where common_name != "" order by common_name limit 2\G
+
+select * from Stars where common_name != "" order by common_name limit 2\G
+
+select * from Stars where right_ascension_decimal_hours >= 12 and right_ascension_decimal_hours <= 13
+order by right_ascension_decimal_hours\G
+
+-- common_name != "" order by common_name limit 2\G
+
+update Stars set declination_decimal_degrees = 0.0, right_ascension_decimal_hours = 0.0;
+
+update Stars set declination_decimal_degrees = 0.0;
+
+select distinct right_ascension_decimal_degrees from Stars;
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */

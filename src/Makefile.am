@@ -160,13 +160,15 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 prbsnflx_SOURCES = prbsnflx.l++
 
+accsdtbs._SOURCES = accsdtbs.cxx
+
 #dummy_SOURCES = dummy.cxx
 
 # $(3dldfsp_CWEB_files) 
 
 # scanner2.web parser2.web
 
-EXTRA_DIST = check_scan_parse_output.sh compile_parser.sh \
+EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web patterns.web prelims.web runit \
@@ -182,7 +184,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
               $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
-              loader.c loader.c++ loader.h loader.h++ \
+              accsdtbs.o loader.c loader.c++ loader.h loader.h++ \
               parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
               prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
               ldf_1.log 
@@ -1030,11 +1032,16 @@ conveps.c++: conveps.web
 	ctangle conveps.web
 	mv conveps.c conveps.c++
 
+.PHONY: run-a
+
+run-a: accsdtbs$(EXEEXT)
+	accsdtbs$(EXEEXT)
+
 accsdtbs$(EXEEXT): accsdtbs.o
-	g++ -pthread -o $@ $<
+	g++ -o $@ $< -lmysqlclient
 
 accsdtbs.o: accsdtbs.cxx
-	g++ -c -o $@ $<
+	g++ -I/usr/include/mysql -c -o $@ $<
 
 .PHONY: headers
 

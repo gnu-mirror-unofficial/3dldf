@@ -500,6 +500,9 @@ and constellation_name_genitive = "Geminorum";
 update Stars set approx_rank_apparent_magnitude = 18, common_name = "Fomalhaut" where bayer_designation_greek_letter = "Alpha"
 and constellation_name_genitive = "Piscis Austrini";
 
+select * from Stars where where bayer_designation_greek_letter = "Alpha"
+and constellation_name_genitive = "Piscis Austrini"\G
+
 update Stars set approx_rank_apparent_magnitude = 19, common_name = "Deneb" where bayer_designation_greek_letter = "Alpha"
 and constellation_name_genitive = "Cygni";
 
@@ -1408,6 +1411,8 @@ insert into Stars (approx_rank_apparent_magnitude, common_name, bayer_designatio
 values (105,  "Zubenelgenubi", "Alpha", "Librae");
 
 update Stars set constellation_full_name = "Libra" where common_name = "Zubenelgenubi";
+
+update Stars set bs_hr_number = 5530 where common_name = "Zubenelgenubi";
 
 /* ** (2) */
 
