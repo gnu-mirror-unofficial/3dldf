@@ -7015,7 +7015,10 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 
   bool DEBUG = true; /* |false| */@;  
 
+  bool SAVE_DEBUG;
+
   stringstream cerr_strm;
+  stringstream s;
 
   int i = 0;
   int status = 0;
@@ -7187,6 +7190,10 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 @q ***** (5) @>
 
    /* outer |for|  */
+
+   SAVE_DEBUG = DEBUG;
+
+   DEBUG = false;
 
    for (vector<Stars_Where_Option_Struct>::iterator w_iter = scanner_node->stars_show_option_struct->where_options.begin();
         w_iter != scanner_node->stars_show_option_struct->where_options.end();
@@ -7701,6 +7708,8 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
         
    }  /* outer |for|  */
 
+   DEBUG = SAVE_DEBUG;
+
 AFTER_WHERE_CLAUSE:
 
 @q ***** (5) @>
@@ -7921,20 +7930,29 @@ AFTER_WHERE_CLAUSE:
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
+       s.str("");
+
        cerr << "`a_star_vector.size()' == " << a_star_vector.size() << endl;
 
        if (a_star_vector.size() > 0)
           cerr << "`a_star_vector':" << endl;
 
+       i = 1;
+
        for (vector<Star*>::iterator iter = a_star_vector.begin();
             iter != a_star_vector.end();
             ++iter)
        {
-           (*iter)->show();
+           s << "Star " << i++;
+
+           (*iter)->show(s.str());
+
+           s.str("");
            
        }   
 
-       cerr << "`b_star_vector.size()' == " << b_star_vector.size() << endl;
+       cerr << "`a_star_vector.size()' == " << a_star_vector.size() << endl
+            << "`b_star_vector.size()' == " << b_star_vector.size() << endl;
 
        if (b_star_vector.size() > 0)
           cerr << "`b_star_vector':" << endl;
