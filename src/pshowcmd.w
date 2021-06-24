@@ -1319,6 +1319,53 @@ Added this rule.
 
 };
 
+@q ****** (6) stars_field_specifier --> BS_HR_NUMBER.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{BS\_HR\_NUMBER}.
+\initials{LDF 2021.06.24.}
+
+\LOG
+\initials{LDF 2021.06.24.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: BS_HR_NUMBER@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: BS_HR_NUMBER'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_BS_HR_NUMBER;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: BS_HR_NUMBER':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
 @q ****** (6) stars_field_specifier --> BS_NUMBER.@> 
 @*5 \§stars field specifier> $\longrightarrow$ \.{BS\_NUMBER}.
 \initials{LDF 2021.06.21.}

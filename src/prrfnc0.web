@@ -7194,6 +7194,7 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
   vector<Star *>::iterator iter;
   vector<Star *>::iterator begin_iter;
   vector<Star *>::iterator end_iter;
+  vector<Star *>::iterator dup_iter;
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -7827,12 +7828,15 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
             if (w_iter->conjunction == OR && b_star_vector.size() > 0)
             {
+@q ******** (8) @>
+
 #if DEBUG_COMPILE
                if (DEBUG)
                { 
                   cerr << "w_iter->conjunction == OR && b_star_vector.size() > 0" 
                        << endl 
-                       << "Appending `b_star_vector' to `a_star_vector' and clearing `b_star_vector'."
+                       << "Appending `b_star_vector' to `a_star_vector', sorting `a_star_vector', "
+                       << "removing duplicates (if any) and clearing `b_star_vector'."
                        << endl
                        << "Before:" << endl 
                        << "a_star_vector.size() == " << a_star_vector.size() << endl 
@@ -7840,27 +7844,72 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
                }             
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q ******** (8) @>
+
                a_star_vector.insert(a_star_vector.end(), b_star_vector.begin(), b_star_vector.end());
+               sort(a_star_vector.begin(), a_star_vector.end(), compare_bs_hr_number);
+
+@q ******** (8) @>
 
 #if DEBUG_COMPILE
                if (DEBUG)
                { 
-                  cerr << "After:"
+                  cerr << "After appending `b_star_vector' to `a_star_vector':" << endl 
+                       << "a_star_vector.size() == " << a_star_vector.size() << endl 
+                       << "b_star_vector.size() == " << b_star_vector.size() << endl
+                       << endl;
+               }             
+#endif /* |DEBUG_COMPILE|  */@;  
+
+@q ******** (8) @>
+
+               dup_iter = unique(a_star_vector.begin(), a_star_vector.end(), compare_star_pointers);
+
+               if (dup_iter != a_star_vector.end())
+               {
+#if DEBUG_COMPILE
+                   if (DEBUG)
+                   { 
+                       cerr << "`dup_iter' != `a_star_vector.end()'." << endl
+                            << "Found duplicates.  Calling `erase'."
+                            << endl;
+                            
+                   }                 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+                   a_star_vector.erase(dup_iter, a_star_vector.end());
+               }
+
+@q ******** (8) @>
+
+#if DEBUG_COMPILE
+               else if (DEBUG)
+               { 
+                   cerr << "`dup_iter' == `a_star_vector.end()'." << endl
+                        << "Found no duplicates.  Not calling `erase'."
+                        << endl;
+
+               }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******** (8) @>
+
+               b_star_vector.clear(); 
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+               { 
+                  cerr << "After removing duplicates (if any) from `a_star_vector' "
+                       << "and clearing `b_star_vector':" << endl 
+                       << "a_star_vector.size() == " << a_star_vector.size() << endl 
+                       << "b_star_vector.size() == " << b_star_vector.size() << endl
                        << endl;
                }             
 #endif /* |DEBUG_COMPILE|  */@; 
 
-            }
+@q ******** (8) @>
 
-             b_star_vector.clear();
-
-#if DEBUG_COMPILE
-             if (DEBUG)
-             { 
-                cerr << "a_star_vector.size() == " << a_star_vector.size() << endl
-                     << "b_star_vector.size() == " << b_star_vector.size() << endl;
-             }             
-#endif /* |DEBUG_COMPILE|  */@; 
+            }  /* |if (w_iter->conjunction == OR && b_star_vector.size() > 0)| */
 
 @q ******* (7) @>
 
@@ -8102,9 +8151,7 @@ AFTER_WHERE_CLAUSE:
        if (a_star_vector.size() > 0)
           cerr << "`a_star_vector':" << endl;
 
-
        i = 1;
-
 
        for (vector<Star*>::iterator iter = a_star_vector.begin();
             iter != a_star_vector.end();

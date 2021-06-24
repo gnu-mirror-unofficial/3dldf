@@ -52,8 +52,14 @@
 
 %% * (1) New sample code.
 
-show stars common_name, bayer_designation_greek_letter, constellation_name_genitive where common_name <> "" 
-or bayer_designation_greek_letter == "alpha" order by common_name;
+
+
+show stars common_name, bs_hr_number where common_name <> "" or bayer_designation_greek_letter == "alpha" order by bs_hr_number;
+
+%end;
+
+% show stars common_name, bayer_designation_greek_letter, constellation_name_genitive where common_name <> "" 
+% or bayer_designation_greek_letter == "alpha" order by common_name;
 
 %and bayer_designation_greek_letter == "alpha" order by common_name;
 
