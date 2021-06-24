@@ -7020,6 +7020,14 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
   int i = 0;
   int status = 0;
 
+  Stars_Where_Option_Struct w; 
+  vector<Star *> a_star_vector;
+  vector<Star *> b_star_vector;
+
+  vector<Star *>::iterator iter;
+  vector<Star *>::iterator begin_iter;
+  vector<Star *>::iterator end_iter;
+
 #if DEBUG_COMPILE
   if (DEBUG)
   {
@@ -7136,35 +7144,92 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 @q **** (4) @>
 @
 @<Define parser rule functions@>=
+  
+   if (scanner_node->stars_show_option_struct->where_options.size() == 0)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr_strm << "In `Scan_Parse::show_stars_func':" 
+                   << endl 
+                   << "`scanner_node->stars_show_option_struct->where_options.size()' == 0."
+                   << endl 
+                   << "Assigning the contents of `scanner_node->star_vector' to "
+                   << "`a_star_vector' and skipping to label `AFTER_WHERE_CLAUSE'."
+                   << endl;
 
-   Stars_Where_Option_Struct w; 
-   vector<Star *> a_star_vector;
-   vector<Star *> b_star_vector;
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      a_star_vector = scanner_node->star_vector;
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr_strm << "`a_star_vector.size()'             == " << a_star_vector.size()
+                   << endl
+                   << "`scanner_node->star_vector.size()' == " << scanner_node->star_vector.size()
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       goto AFTER_WHERE_CLAUSE;
+
+   }
 
 @q ***** (5) @>
 
    /* outer |for|  */
 
-   for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
-         iter != scanner_node->star_vector.end();
-         ++iter)
+   for (vector<Stars_Where_Option_Struct>::iterator w_iter = scanner_node->stars_show_option_struct->where_options.begin();
+        w_iter != scanner_node->stars_show_option_struct->where_options.end();
+        ++w_iter)
    {
 @q ****** (6) @>
 
-        cerr << "(*iter)->bs_hr_number == " << (*iter)->bs_hr_number << endl;
-
         /* inner |for|  */
 
-        for (vector<Stars_Where_Option_Struct>::iterator w_iter = scanner_node->stars_show_option_struct->where_options.begin();
-             w_iter != scanner_node->stars_show_option_struct->where_options.end();
-             ++w_iter)
+        if (w_iter->conjunction == 0 || w_iter->conjunction == OR)
+        {
+            begin_iter = scanner_node->star_vector.begin();
+            end_iter = scanner_node->star_vector.end();
+        }
+        else if (w_iter->conjunction == AND)
+        {
+            begin_iter = a_star_vector.begin();
+            end_iter   = a_star_vector.end();
+        } 
+        else
+        {
+            cerr << "ERROR!  In `Scan_Parse::show_stars_func':" << endl 
+                 << "`w_iter->conjunction' has invalid value:  " 
+                 << w_iter->conjunction << " == " << name_map[w_iter->conjunction]
+                 << endl
+                 << "Breaking out of loop.  Will try to continue."
+                 << endl;
+
+            break;
+        }
+
+@q ****** (6) @>
+
+        for (iter = begin_iter; iter != end_iter; ++iter)
         {
 @q ******* (7) @>
+
 
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "w_iter->conjunction   == " << w_iter->conjunction;
+               cerr << "(*iter)->bs_hr_number == " << (*iter)->bs_hr_number << endl
+                    << "w_iter->conjunction   == " << w_iter->conjunction;
  
                if (w_iter->conjunction != 0)
                   cerr << " == " << name_map[w_iter->conjunction];
@@ -7636,47 +7701,13 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
         
    }  /* outer |for|  */
 
+AFTER_WHERE_CLAUSE:
+
 @q ***** (5) @>
 
 @q **** (4) @>
 @
 @<Define parser rule functions@>= 
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "`a_star_vector.size()' == " << a_star_vector.size() << endl;
-
-       if (a_star_vector.size() > 0)
-          cerr << "`a_star_vector':" << endl;
-
-       for (vector<Star*>::iterator iter = a_star_vector.begin();
-            iter != a_star_vector.end();
-            ++iter)
-       {
-           (*iter)->show();
-           
-       }   
-
-       cerr << "`b_star_vector.size()' == " << b_star_vector.size() << endl;
-
-       if (b_star_vector.size() > 0)
-          cerr << "`b_star_vector':" << endl;
-
-       for (vector<Star*>::iterator iter = b_star_vector.begin();
-            iter != b_star_vector.end();
-            ++iter)
-       {
-           (*iter)->show();
-           
-       }   
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-@
-@<Define parser rule functions@>=
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -7703,8 +7734,6 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            iter != scanner_node->stars_show_option_struct->order_by_options.rend();
            ++iter)
     {
-@q ***** (5) @>
-
 #if DEBUG_COMPILE
         if (DEBUG)
         { 
@@ -7874,7 +7903,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 @ Fields.  
 \initials{LDF 2021.06.23.}
 
-@<Define parser rule functions@>= 
+@<Define parser rule functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -7885,11 +7914,48 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q **** (4) @>
+@
+@<Define parser rule functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "`a_star_vector.size()' == " << a_star_vector.size() << endl;
+
+       if (a_star_vector.size() > 0)
+          cerr << "`a_star_vector':" << endl;
+
+       for (vector<Star*>::iterator iter = a_star_vector.begin();
+            iter != a_star_vector.end();
+            ++iter)
+       {
+           (*iter)->show();
+           
+       }   
+
+       cerr << "`b_star_vector.size()' == " << b_star_vector.size() << endl;
+
+       if (b_star_vector.size() > 0)
+          cerr << "`b_star_vector':" << endl;
+
+       for (vector<Star*>::iterator iter = b_star_vector.begin();
+            iter != b_star_vector.end();
+            ++iter)
+       {
+           (*iter)->show();
+           
+       }   
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 
 @q **** (4) @>
 @
 @<Define parser rule functions@>= 
+
+    a_star_vector.clear();
 
     delete scanner_node->stars_show_option_struct;
     scanner_node->stars_show_option_struct = 0;
