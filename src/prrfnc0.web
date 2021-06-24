@@ -7592,13 +7592,45 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 /* !!START HERE  Put b_star_vector onto a_star_vector?  */ 
 
             if (w_iter->conjunction == OR && b_star_vector.size() > 0)
-               ;   
+            {
+#if DEBUG_COMPILE
+               if (DEBUG)
+               { 
+                  cerr << "w_iter->conjunction == OR && b_star_vector.size() > 0" 
+                       << endl 
+                       << "Appending `b_star_vector' to `a_star_vector' and clearing `b_star_vector'."
+                       << endl
+                       << "Before:" << endl 
+                       << "a_star_vector.size() == " << a_star_vector.size() << endl 
+                       << "b_star_vector.size() == " << b_star_vector.size() << endl;
+               }             
+#endif /* |DEBUG_COMPILE|  */@; 
+
+               a_star_vector.insert(a_star_vector.end(), b_star_vector.begin(), b_star_vector.end());
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+               { 
+                  cerr << "After:"
+                       << endl;
+               }             
+#endif /* |DEBUG_COMPILE|  */@; 
+
+            }
+
+             b_star_vector.clear();
+
+#if DEBUG_COMPILE
+             if (DEBUG)
+             { 
+                cerr << "a_star_vector.size() == " << a_star_vector.size() << endl
+                     << "b_star_vector.size() == " << b_star_vector.size() << endl;
+             }             
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
 
-
         }  /* inner |for|  */
-      
 
 @q ****** (6) @>
         
@@ -7691,7 +7723,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_common_name);
         }
 
@@ -7707,7 +7739,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_flamsteed_designation_number);
 
         }         
@@ -7724,7 +7756,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_bayer_designation_greek_letter);
 
         }         
@@ -7741,7 +7773,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_bs_hr_number);
         }                                        
 
@@ -7756,7 +7788,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_approx_rank_apparent_magnitude);
 
         } 
@@ -7773,7 +7805,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_constellation_abbreviation);
 
         } 
@@ -7789,7 +7821,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_constellation_full_name);
 
         } 
@@ -7805,7 +7837,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_constellation_name_genitive);
 
         } 
@@ -7821,7 +7853,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_vector.begin(), a_vector.end(),
+           stable_sort(a_star_vector.begin(), a_star_vector.end(),
                        compare_constellation_number);
 
         } 
