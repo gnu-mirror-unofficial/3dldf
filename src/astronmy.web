@@ -973,12 +973,10 @@ Added this function.
 @q **** (4) Declaration.@> 
 
 @<Declare |Star| functions@>=
-
 void 
 show(string text = "", unsigned int fields = 0U) const;
 
 @q **** (4) Definition.@> 
-
 @
 @<Define |Star| functions@>=
 void 
@@ -987,7 +985,7 @@ Star::show(string text, unsigned int fields) const
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    using namespace Scan_Parse;
@@ -1003,60 +1001,91 @@ Star::show(string text, unsigned int fields) const
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-#if 0 
-STARS_COMMON_NAME
-STARS_GREEK_NAME
-STARS_LATIN_NAME
-STARS_ARABIC_NAME
-STARS_FLAMSTEED_DESIGNATION_NUMBER
-STARS_BAYER_DESIGNATION_GREEK_LETTER
-STARS_BS_HR_NUMBER
-STARS_BS_NUMBER
-STARS_HR_NUMBER
-STARS_APPROX_RANK_APPARENT_MAGNITUDE
-STARS_CONSTELLATION_ABBREVIATION
-STARS_CONSTELLATION_FULL_NAME
-STARS_CONSTELLATION_NAME_GENITIVE
-STARS_CONSTELLATION_NUMBER
-STARS_RIGHT_ASCENSION_HOURS
-STARS_RIGHT_ASCENSION_MINUTES
-STARS_RIGHT_ASCENSION_SECONDS
-STARS_RIGHT_ASCENSION_DECIMAL_HOURS
-STARS_DECLINATION_DEGREES
-STARS_DECLINATION_MINUTES
-STARS_DECLINATION_SECONDS
-STARS_DECLINATION_DECIMAL_DEGREES
-STARS_RIGHT_ASCENSION
-STARS_DECLINATION
-#endif 
-
 @q ***** (5)@>
+@
+@<Define |Star| functions@>=
+
+    if (fields == 0U)
+       fields = ~0U;
+
+    if (fields & STARS_RIGHT_ASCENSION)
+    {
+       fields |=   STARS_RIGHT_ASCENSION_HOURS | STARS_RIGHT_ASCENSION_MINUTES | STARS_RIGHT_ASCENSION_SECONDS
+                 | STARS_RIGHT_ASCENSION_DECIMAL_HOURS;
+    }
+
+    if (fields & STARS_DECLINATION)
+    {
+       fields |=   STARS_DECLINATION_DEGREES | STARS_DECLINATION_MINUTES | STARS_DECLINATION_SECONDS 
+                 | STARS_DECLINATION_DECIMAL_DEGREES;
+    }
 
     if (text == "")
        text = "Star:";
 
-    cerr << text << endl
-         << "common_name                    == " << common_name << endl 
-         << "greek_name                     == " << greek_name << endl 
-         << "latin_name                     == " << latin_name << endl 
-         << "arabic_name                    == " << arabic_name << endl 
-         << "flamsteed_designation_number   == " << flamsteed_designation_number << endl 
-         << "bayer_designation_greek_letter == " << bayer_designation_greek_letter << endl 
-         << "bs_hr_number                   == " << bs_hr_number << endl 
-         << "approx_rank_apparent_magnitude == " << approx_rank_apparent_magnitude << endl 
-         << "constellation_abbreviation     == " << constellation_abbreviation << endl 
-         << "constellation_full_name        == " << constellation_full_name << endl 
-         << "constellation_name_genitive    == " << constellation_name_genitive << endl 
-         << "constellation_number           == " << constellation_number << endl 
-         << "right_ascension_hours          == " << right_ascension_hours << endl 
-         << "right_ascension_minutes        == " << right_ascension_minutes << endl 
-         << "right_ascension_seconds        == " << right_ascension_seconds << endl 
-         << "right_ascension_decimal_hours  == " << right_ascension_decimal_hours << endl 
-         << "declination_degrees            == " << declination_degrees << endl 
-         << "declination_minutes            == " << declination_minutes << endl 
-         << "declination_seconds            == " << declination_seconds << endl 
-         << "declination_decimal_degrees    == " << declination_decimal_degrees << endl 
-         << endl;
+    cerr << text << endl;
+
+    if (fields & STARS_COMMON_NAME)
+       cerr << "common_name                    == " << common_name << endl;
+
+    if (fields & STARS_GREEK_NAME)
+       cerr << "greek_name                     == " << greek_name << endl;
+
+    if (fields & STARS_LATIN_NAME)
+       cerr << "latin_name                     == " << latin_name << endl;
+
+    if (fields & STARS_ARABIC_NAME)
+       cerr << "arabic_name                    == " << arabic_name << endl;
+
+    if (fields & STARS_FLAMSTEED_DESIGNATION_NUMBER)
+       cerr << "flamsteed_designation_number   == " << flamsteed_designation_number << endl;
+
+    if (fields & STARS_BAYER_DESIGNATION_GREEK_LETTER)
+       cerr << "bayer_designation_greek_letter == " << bayer_designation_greek_letter << endl;
+
+    if (fields & (STARS_BS_HR_NUMBER | STARS_BS_NUMBER | STARS_HR_NUMBER))
+       cerr << "bs_hr_number                   == " << bs_hr_number << endl;
+
+    if (fields & STARS_APPROX_RANK_APPARENT_MAGNITUDE)
+       cerr << "approx_rank_apparent_magnitude == " << approx_rank_apparent_magnitude << endl;
+
+    if (fields & STARS_CONSTELLATION_ABBREVIATION)
+       cerr << "constellation_abbreviation     == " << constellation_abbreviation << endl;
+
+    if (fields & STARS_CONSTELLATION_FULL_NAME)
+       cerr << "constellation_full_name        == " << constellation_full_name << endl;
+
+    if (fields & STARS_CONSTELLATION_NAME_GENITIVE)
+       cerr << "constellation_name_genitive    == " << constellation_name_genitive << endl;
+
+    if (fields & STARS_CONSTELLATION_NUMBER)
+       cerr << "constellation_number           == " << constellation_number << endl;
+
+    if (fields & STARS_RIGHT_ASCENSION_HOURS)
+       cerr << "right_ascension_hours          == " << right_ascension_hours << endl;
+
+    if (fields & STARS_RIGHT_ASCENSION_MINUTES)
+       cerr << "right_ascension_minutes        == " << right_ascension_minutes << endl;
+
+    if (fields & STARS_RIGHT_ASCENSION_SECONDS)
+       cerr << "right_ascension_seconds        == " << right_ascension_seconds << endl;
+
+    if (fields & STARS_RIGHT_ASCENSION_DECIMAL_HOURS)
+       cerr << "right_ascension_decimal_hours  == " << right_ascension_decimal_hours << endl;
+
+    if (fields & STARS_DECLINATION_DEGREES)
+       cerr << "declination_degrees            == " << declination_degrees << endl;
+
+    if (fields & STARS_DECLINATION_MINUTES)
+       cerr << "declination_minutes            == " << declination_minutes << endl;
+
+    if (fields & STARS_DECLINATION_SECONDS)
+       cerr << "declination_seconds            == " << declination_seconds << endl;
+
+    if (fields & STARS_DECLINATION_DECIMAL_DEGREES)
+       cerr << "declination_decimal_degrees    == " << declination_decimal_degrees << endl;
+
+    cerr << endl;
 
 @q ***** (5)@>
 
