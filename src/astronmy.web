@@ -165,6 +165,8 @@ class Star
 
    friend int yyparse(yyscan_t);
 
+   friend int Scan_Parse::get_stars_func(Scanner_Node, vector<Star*>&);
+   friend int Scan_Parse::plot_stars_func(Scanner_Node);
    friend int Scan_Parse::show_stars_func(Scanner_Node);
 
    protected:
@@ -368,8 +370,8 @@ Stars_Where_Option_Struct::show(string s)
         << endl;
 }
 
-@q ** (2) |struct Stars_Show_Option_Struct| declaration.@>
-@*1 |struct Stars_Show_Option_Struct| declaration.
+@q ** (2) |struct Stars_Get_Option_Struct| declaration.@>
+@*1 |struct Stars_Get_Option_Struct| declaration.
 \initials{LDF 2021.06.21.}
 
 \LOG
@@ -377,9 +379,9 @@ Stars_Where_Option_Struct::show(string s)
 Added this section.
 \ENDLOG
 
-@<Declare |struct Stars_Show_Option_Struct|@>=
+@<Declare |struct Stars_Get_Option_Struct|@>=
 
-struct Stars_Show_Option_Struct
+struct Stars_Get_Option_Struct
 {
 
    bool         ascending_descending;
@@ -390,7 +392,7 @@ struct Stars_Show_Option_Struct
    vector<unsigned int> order_by_options;
    vector<Stars_Where_Option_Struct> where_options;
 
-   Stars_Show_Option_Struct(void)
+   Stars_Get_Option_Struct(void)
    {
       ascending_descending = 0;  /* 0:  ascending. 1:  descending. */
       fields = 0U;
@@ -400,7 +402,7 @@ struct Stars_Show_Option_Struct
       return;
    }  
 
-   ~Stars_Show_Option_Struct(void)
+   ~Stars_Get_Option_Struct(void)
    {
       order_by_options.clear();
       where_options.clear();
@@ -973,32 +975,60 @@ Added this function.
 @<Declare |Star| functions@>=
 
 void 
-show(string text = "", Scanner_Node scanner_node = 0) const;
+show(string text = "", unsigned int fields = 0U) const;
 
 @q **** (4) Definition.@> 
 
 @
 @<Define |Star| functions@>=
 void 
-Star::show(string text, Scanner_Node scanner_node) const
+Star::show(string text, unsigned int fields) const
 {
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   stringstream cerr_strm;
-
-   bool error_stop_value   = true;
-   bool warning_stop_value = true;
-   string thread_name      = "";
-
-   if (scanner_node)
-      scanner_node->get_thread_name_and_stop_values(&thread_name,
-                                                    &error_stop_value,
-                                                    &warning_stop_value);
    using namespace Scan_Parse;
+
+@q ***** (5)@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Star::show'." << endl 
+           << "`fields' == " << hex << fields << " (hex)" << dec
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+#if 0 
+STARS_COMMON_NAME
+STARS_GREEK_NAME
+STARS_LATIN_NAME
+STARS_ARABIC_NAME
+STARS_FLAMSTEED_DESIGNATION_NUMBER
+STARS_BAYER_DESIGNATION_GREEK_LETTER
+STARS_BS_HR_NUMBER
+STARS_BS_NUMBER
+STARS_HR_NUMBER
+STARS_APPROX_RANK_APPARENT_MAGNITUDE
+STARS_CONSTELLATION_ABBREVIATION
+STARS_CONSTELLATION_FULL_NAME
+STARS_CONSTELLATION_NAME_GENITIVE
+STARS_CONSTELLATION_NUMBER
+STARS_RIGHT_ASCENSION_HOURS
+STARS_RIGHT_ASCENSION_MINUTES
+STARS_RIGHT_ASCENSION_SECONDS
+STARS_RIGHT_ASCENSION_DECIMAL_HOURS
+STARS_DECLINATION_DEGREES
+STARS_DECLINATION_MINUTES
+STARS_DECLINATION_SECONDS
+STARS_DECLINATION_DECIMAL_DEGREES
+STARS_RIGHT_ASCENSION
+STARS_DECLINATION
+#endif 
 
 @q ***** (5)@>
 
@@ -1030,6 +1060,14 @@ Star::show(string text, Scanner_Node scanner_node) const
 
 @q ***** (5)@>
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Star::show' successfully with `void' return value." << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
     return;
 
 } /* End of |Star::show| definition.  */
@@ -1052,6 +1090,8 @@ class Constellation
 
    friend int yyparse(yyscan_t);
 
+   friend int Scan_Parse::get_stars_func(Scanner_Node, vector<Star*>&);
+   friend int Scan_Parse::plot_stars_func(Scanner_Node);
    friend int Scan_Parse::show_stars_func(Scanner_Node);
 
    protected:
@@ -1485,7 +1525,11 @@ class Planet
 {
 
    friend int yyparse(yyscan_t);
+
+   friend int Scan_Parse::get_stars_func(Scanner_Node, vector<Star*>&);
+   friend int Scan_Parse::plot_stars_func(Scanner_Node);
    friend int Scan_Parse::show_stars_func(Scanner_Node);
+
 
    protected:
 
@@ -2186,7 +2230,7 @@ This is what's compiled.
 @c
 @<Include files@>@;
 @<Declare |struct Stars_Where_Option_Struct|@>@;
-@<Declare |struct Stars_Show_Option_Struct|@>@;
+@<Declare |struct Stars_Get_Option_Struct|@>@;
 @<Declare |class Star|@>@;
 @<Initialize |static| |class Star| data members@>@;
 @<Declare non-member functions for |class Star|@>@;
@@ -2212,7 +2256,7 @@ This is what's compiled.
 #ifndef LDF_ASTRONMY_KNOWN
 #define LDF_ASTRONMY_KNOWN 1
 @<Declare |struct Stars_Where_Option_Struct|@>@;
-@<Declare |struct Stars_Show_Option_Struct|@>@;
+@<Declare |struct Stars_Get_Option_Struct|@>@;
 @<Declare |class Star|@>@;
 @<Declare |class Constellation|@>@;
 @<Declare |class Planet|@>@;

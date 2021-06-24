@@ -663,7 +663,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->stars_show_option_struct->fields = @=$3@>;
+    scanner_node->stars_get_option_struct->fields = @=$3@>;
 
     status = show_stars_func(scanner_node);
 
@@ -743,8 +743,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    if (scanner_node->stars_show_option_struct == 0)
-       scanner_node->stars_show_option_struct = new Stars_Show_Option_Struct;
+    if (scanner_node->stars_get_option_struct == 0)
+       scanner_node->stars_get_option_struct = new Stars_Get_Option_Struct;
 
     @=$$@> = 0;
 };
@@ -888,8 +888,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    if (scanner_node->stars_show_option_struct == 0)
-       scanner_node->stars_show_option_struct = new Stars_Show_Option_Struct;
+    if (scanner_node->stars_get_option_struct == 0)
+       scanner_node->stars_get_option_struct = new Stars_Get_Option_Struct;
 
     @=$$@> = 0;
 };
@@ -1049,7 +1049,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   scanner_node->stars_show_option_struct->order_by_options.push_back(@=$1@>);
+   scanner_node->stars_get_option_struct->order_by_options.push_back(@=$1@>);
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
@@ -1097,7 +1097,7 @@ Added this rule.
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  scanner_node->stars_show_option_struct->order_by_options.push_back(@=$3@>);
+  scanner_node->stars_get_option_struct->order_by_options.push_back(@=$3@>);
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
@@ -1756,10 +1756,10 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->stars_show_option_struct->where_options.back().conjunction = @=$2@>;
+    scanner_node->stars_get_option_struct->where_options.back().conjunction = @=$2@>;
 
-    scanner_node->stars_show_option_struct->where_options.back().show(
-      "scanner_node->stars_show_option_struct->where_options.back():");
+    scanner_node->stars_get_option_struct->where_options.back().show(
+      "scanner_node->stars_get_option_struct->where_options.back():");
   
    @=$$@> = 0;
 };
@@ -1816,7 +1816,7 @@ Added this rule.
     w.relation           = @=$2@>;
     w.comparison_string = *static_cast<string *>(@=$3@>); 
    
-    scanner_node->stars_show_option_struct->where_options.push_back(w);
+    scanner_node->stars_get_option_struct->where_options.push_back(w);
 
    @=$$@> = 0;
 };
@@ -1865,7 +1865,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->stars_show_option_struct->limit = @=$3@>;
+    scanner_node->stars_get_option_struct->limit = @=$3@>;
 
    @=$$@> = 0;
 
@@ -1915,7 +1915,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->stars_show_option_struct->offset = @=$3@>;
+    scanner_node->stars_get_option_struct->offset = @=$3@>;
 
    @=$$@> = 0;
 
