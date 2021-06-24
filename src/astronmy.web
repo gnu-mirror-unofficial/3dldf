@@ -913,6 +913,50 @@ Star::operator=(const Star& s)
 
 }  /* End of |Star::operator=(const Star& s)| definition.  */
 
+@q **** (4) @>
+
+@q *** (3) operator==@>
+@ Equality operator (|operator==|).
+\initials{LDF 2021.06.24.}
+
+\LOG
+\initials{LDF 2021.06.24.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration  @>
+
+@<Declare |Star| functions@>=
+bool
+operator==(const Star &s);
+
+@q **** (4) Definition.  @>
+@
+@<Define |Star| functions@>= 
+bool
+Star::operator==(const Star &s)
+{
+   if (bs_hr_number > 0 && s.bs_hr_number > 0 && bs_hr_number == s.bs_hr_number)
+   {
+      return true;
+   }
+
+   if (common_name != "" && s.common_name != "" && common_name == s.common_name)
+   {
+      return true;
+   }
+
+   if (  bayer_designation_greek_letter != "" && s.bayer_designation_greek_letter != ""
+      && bayer_designation_greek_letter ==  s.bayer_designation_greek_letter
+      && constellation_name_genitive != "" && s.constellation_name_genitive != ""
+      && constellation_name_genitive == s.constellation_name_genitive)
+   {
+     return true;
+   }   
+
+   return false;
+}
+
 @q *** (3) Clear.@> 
 @*2 Clear.
 \initials{LDF 2021.05.28.}
@@ -2246,6 +2290,34 @@ compare_constellation_number(Star *s, Star *t)
 {
    return s->constellation_number < t->constellation_number;
 }
+
+@q ****** (6) Compare |Star| pointers.@>
+@*7 Compare |Star| pointers.
+\initials{LDF 2021.06.24.}
+
+\LOG
+\initials{LDF 2021.06.24.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_star_pointers(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_star_pointers(Star *s, Star *t)
+{
+   if (s == 0 || t == 0)
+      return false;
+
+   return *s == *t;
+}
+
 
 @q * (1) Putting Astronomy together.@>
 @* Putting {\bf Astronomy} together.
