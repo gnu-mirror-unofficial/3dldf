@@ -1871,7 +1871,7 @@ Added this rule.
 };
 
 @q ****** (6) stars_where_element --> stars_field_specifier relation INTEGER.@> 
-@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§INTEGER expression>.@> 
+@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§INTEGER>.@> 
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1912,6 +1912,50 @@ Added this rule.
 
    @=$$@> = 0;
 };
+
+@q ****** (6) stars_where_element --> stars_field_specifier relation REAL.@> 
+@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§REAL>.@> 
+\initials{LDF 2021.06.20.}
+
+\LOG
+\initials{LDF 2021.06.20.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_where_element: stars_field_specifier relation REAL@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation REAL'."
+                << endl 
+                << "`stars_field_specifier' == " << @=$1@> << endl
+                << "`relation'              == " << @=$2@> << " == " << name_map[@=$2@>] << endl
+                << "`REAL'               == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Stars_Where_Option_Struct w;
+
+    w.field     = @=$1@>;
+    w.relation  = @=$2@>;
+    w.int_value = @=$3@>; 
+   
+    scanner_node->stars_get_option_struct->where_options.push_back(w);
+
+   @=$$@> = 0;
+};
+
 
 @q ****** (6) stars_option_list --> stars_option_list LIMIT INTEGER@> 
 @*5 \§stars option list> $\longrightarrow$ \.{LIMIT} \.{INTEGER}
