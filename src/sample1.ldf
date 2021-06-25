@@ -52,7 +52,14 @@
 
 %% * (1) New sample code.
 
-show stars where bs_hr_number > 10 and right_ascension_decimal_hours > 1.1 order by bs_hr_number;
+sphere s;
+set s with_diameter 5 with_point_count 64;
+
+plot stars s where bs_hr_number >= 9000 order by bs_hr_number;
+
+%show stars common_name, bs_hr_number where bs_hr_number >= 9000 order by bs_hr_number;
+
+% > 10 and right_ascension_decimal_hours > 1.1 order by bs_hr_number;
 
 %common_name;
 

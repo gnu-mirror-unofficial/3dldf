@@ -3775,8 +3775,8 @@ Added this rule.
 {
 
   vector_type_decl<Glyph>(static_cast<Scanner_Node>(parameter),
-                                       GLYPH_VECTOR,
-                                       GLYPH);
+                          GLYPH_VECTOR,
+                          GLYPH);
 
 };
 
@@ -3796,8 +3796,8 @@ Added this rule.
 @=plane_vector_declaration: PLANE_VECTOR_DECLARATOR declaration_list@>
 {
   vector_type_decl<Plane>(static_cast<Scanner_Node>(parameter),
-                                       PLANE_VECTOR,
-                                       PLANE);
+                          PLANE_VECTOR,
+                          PLANE);
 };
 
 @q ****** (6) ellipse_slice_vector_declaration -->               @>

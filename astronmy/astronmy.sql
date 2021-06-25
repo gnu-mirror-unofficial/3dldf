@@ -24582,6 +24582,8 @@ update Stars set declination_decimal_degrees = 0.0;
 
 select distinct right_ascension_decimal_degrees from Stars;
 
+select bs_hr_number from Stars where bs_hr_number >= 9000 order by bs_hr_number;
+
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */
 /* abbrev-file-name:"~/.abbrev_defs"  */

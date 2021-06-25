@@ -7063,7 +7063,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-  bool DEBUG = true; /* |false| */@;  
+  bool DEBUG = false; /* |true| */@;  
 
   int status;
 
@@ -7210,6 +7210,199 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 
 }  /* End of |Scan_Parse::show_stars_func| definition  */
 
+
+@q ** (2) Plot stars function.  @>
+@*1 Plot stars function.
+\initials{LDF 2021.06.24.}
+
+\LOG
+\initials{LDF 2021.06.24.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Definition.  @>
+@<Define parser rule functions@>=
+int
+Scan_Parse::plot_stars_func(Sphere *sphere, Scanner_Node scanner_node)
+{
+@q **** (4) @>
+
+  bool DEBUG = true; /* |false| */@;  
+
+  int status;
+
+  vector<Star*> v;
+
+  stringstream s;
+
+  stringstream cerr_strm;
+
+  int i = 0;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  {
+      cerr_strm << "Entering `Scan_Parse::plot_stars_func'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+    } /* |if (DEBUG)| */
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
+@
+@<Define parser rule functions@>=
+
+    if (sphere == 0)
+    {
+       cerr << "ERROR!  In `Scan_Parse::plot_stars_func':"
+            << endl 
+            << "`Sphere *sphere' == NULL.  Can't plot `stars'."
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+    }
+
+@q **** (4) @>
+@
+@<Define parser rule functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "In `Scan_Parse::plot_stars_func':"
+            << endl;
+
+       sphere->show("*sphere:");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+   status = get_stars_func(scanner_node, v);
+
+   if (status == 2)
+   {
+      cerr_strm << "WARNING!  In `Scan_Parse::plot_stars_func':"
+                << endl
+                << "`Scan_Parse::get_stars_func' returned 2."
+                << endl 
+                << "Failed to find any `stars' fulfilling the search criteria."
+                << endl
+                << "Exiting function with return value 2.  Will try to continue."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      delete scanner_node->stars_get_option_struct;
+      scanner_node->stars_get_option_struct = 0;
+ 
+      return 2;
+
+   }
+   else if (status != 0)
+   {
+      cerr_strm << "ERROR!  In `Scan_Parse::plot_stars_func':"
+                << endl
+                << "`Scan_Parse::get_stars_func' failed, returning << " << status << "."
+                << endl 
+                << "Exiting function unsuccessfully with return value " << status << "."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      delete scanner_node->stars_get_option_struct;
+      scanner_node->stars_get_option_struct = 0;
+
+      return status;
+
+   }
+   else if (status == 0 && v.size() == 0)
+   {
+      cerr_strm << "ERROR!  In `Scan_Parse::plot_stars_func':"
+                << endl
+                << "`Scan_Parse::get_stars_func' returned 0 (Success) but `vector<Star*> v' is empty."
+                << endl 
+                << "This shouldn't be possible." << endl 
+                << "Exiting function unsuccessfully with return value 1."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      delete scanner_node->stars_get_option_struct;
+      scanner_node->stars_get_option_struct = 0;
+
+      return 1;
+
+   }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr_strm << "In `Scan_Parse::plot_stars_func':"
+                << endl
+                << "`Scan_Parse::get_stars_func' succeeded, returning 0  and `vector<Star*> v' is non-empty:"
+                << endl 
+                << "`v.size()' == " << v.size()
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Stars:" << endl << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   i = 1;
+
+   for (vector<Star*>::iterator iter =  v.begin();
+        iter !=  v.end();
+        ++iter)
+   {
+       status = (*iter)->plot(scanner_node);
+   }
+
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+  {
+      cerr_strm << "Exiting `Scan_Parse::plot_stars_func' successfully with return value 0."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+    } /* |if (DEBUG)| */
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+   delete scanner_node->stars_get_option_struct;
+   scanner_node->stars_get_option_struct = 0;
+
+   return 0;
+
+}  /* End of |Scan_Parse::plot_stars_func| definition  */
 
 @q ** (2) Get stars function.  @>
 @*1 Get stars function.
@@ -7409,10 +7602,6 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
    SAVE_DEBUG = DEBUG;
 
-/* !!START HERE  \initials{LDF 2021.06.25.}  Look into putting some of the following code into a function.
-   I.e., the code for the comparisons.  */
- 
-
    /* outer |for|  */
 
    for (vector<Stars_Where_Option_Struct>::iterator w_iter = scanner_node->stars_get_option_struct->where_options.begin();
@@ -7469,8 +7658,6 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 
 @q ******* (7) @>
-
-/* !!START HERE  Put in calls to function.  Code in btemp.web.  */ 
 
             status = (*iter)->process_where_option(*w_iter, a_star_vector, b_star_vector, scanner_node);
 

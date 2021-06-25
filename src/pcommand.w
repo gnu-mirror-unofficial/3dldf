@@ -1159,9 +1159,9 @@ END_LOAD_ASTRONOMY:
 
 };
 
-@q **** (4) command --> PLOT STARS stars_field_list stars_option_list @>
+@q **** (4) command --> PLOT STARS stars_option_list @>
 
-@*3 \§command> $\longrightarrow$ \.{PLOT} \.{STARS} \<stars field list> \§stars option list>.
+@*3 \§command> $\longrightarrow$ \.{PLOT} \.{STARS} \§stars option list>.
 \initials{LDF 2021.06.26.}
 
 \LOG
@@ -1173,7 +1173,7 @@ Added this rule.
 
 @<Define rules@>= 
   
-@=command: PLOT STARS stars_field_list stars_option_list@>@/
+@=command: PLOT STARS sphere_expression stars_option_list@>@/
 {
 @q ******* (7) @>
 
@@ -1183,7 +1183,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> PLOT STARS stars_field_list stars_option_list'.";
+      cerr_strm << "*** Parser: `command --> PLOT STARS sphere_expression stars_option_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1192,13 +1192,11 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->stars_get_option_struct->fields = @=$3@>;
-
-    status = plot_stars_func(scanner_node);
+    status = plot_stars_func(static_cast<Sphere*>(@=$3@>), scanner_node);
 
     if (status != 0)
     {
-      cerr_strm << "ERROR!  In Parser: `command --> PLOT STARS stars_field_list stars_option_list':"
+      cerr_strm << "ERROR!  In Parser: `command --> PLOT STARS sphere_expression stars_option_list':"
                 << "`Scan_Parse::plot_stars_func' failed, returning " << status << "."
                 << endl
                 << "Failed to plot `stars'.  Will try to continue."
@@ -1212,7 +1210,7 @@ Added this rule.
 #if DEBUG_COMPILE
     else if (DEBUG)
     { 
-      cerr_strm << "*** Parser: `command --> PLOT STARS stars_field_list stars_option_list':"
+      cerr_strm << "*** Parser: `command --> PLOT STARS sphere_expression stars_option_list':"
                 << "`Scan_Parse::plot_stars_func' succeeded, returning 0."
                 << endl
                 << "Plotted `stars' successfully."
