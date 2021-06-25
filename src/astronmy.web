@@ -1153,6 +1153,72 @@ Star::show(string text, unsigned int fields) const
 
 } /* End of |Star::show| definition.  */
 
+@q *** (3) process_where_clauseShow.@> 
+@*2 process_where_clauseShow.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Star| functions@>=
+int
+process_where_clause(Stars_Where_Option_Struct &where_option,
+                     vector<Star*> &a_star_vector,
+                     vector<Star*> &b_star_vector,
+		     Scanner_Node scanner_node = 0);
+
+@q **** (4) Definition.@> 
+@
+@<Define |Star| functions@>=
+int
+Star::process_where_clause(Stars_Where_Option_Struct &where_option,
+                           vector<Star*> &a_star_vector,
+                           vector<Star*> &b_star_vector,
+			   Scanner_Node scanner_node)
+{
+@q ***** (5) @>
+
+   using namespace Scan_Parse;
+
+   bool DEBUG = true; /* |false|  */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Star::process_where_clause'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+   
+
+
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Star::process_where_clause' successfully with return value 0." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+   return 0;
+  
+} /* End of |Star::process_where_clause| definition  */
+
+
+@q ** (2) @>
+
 @q * (1) Constellation class definition.@>
 @* {\bf Constellation} class definition.
 \initials{LDF 2021.05.28.}

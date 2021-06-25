@@ -135,8 +135,8 @@ Added this file.
 #include "astronmy.h++"
 
 
-@q * (1) Initialize |name_map| and |type_name_map|. @>
-@* Initialize {\bf name\_map} and {\bf type\_name\_map}. 
+@q * (1) Initialize |name_map|, |type_name_map| and |star_field_name_map|. @>
+@* Initialize {\bf name\_map}, {\bf type\_name\_map} and {\bf star_field_name_map}. 
 
 \LOG
 \initials{LDF Undated.}  
@@ -159,6 +159,9 @@ Removed entries for the internal quantities.
 \initials{LDF 2005.06.09.}
 Moved this function definition from \filename{pbsndecl.w} to this
 file (\filename{prrfnc0.web}).
+
+\initials{LDF 2021.06.25.}
+Added code for initializing |star_field_name_map|.
 \ENDLOG 
 
 @q ** (2) Definition. @>
@@ -167,6 +170,8 @@ file (\filename{prrfnc0.web}).
 int
 initialize_name_map(void)
 {
+
+  using namespace Scan_Parse;
 
   name_map[NULL_VALUE] = "NULL_VALUE";
 
@@ -200,6 +205,7 @@ Added entry for |ULONG_LONG_TYPE|.
 @q **** (4) Code.@> 
 
 @<Define functions@>=
+
   name_map[END] = "END";
   name_map[INPUT] = "INPUT";
   name_map[END_INPUT] = "END_INPUT";
@@ -3028,11 +3034,49 @@ Added this section.  It's currently empty.
 
 @<Define functions@>=
 
+
+@q *** (3) Initialize |star_field_name_map|.  @>
+@ Initialize |star_field_name_map|.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this section.
+\ENDLOG
+
 @q **** (4).@> 
 @
 @<Define functions@>=
 
-return 0;
+   star_field_name_map[STARS_COMMON_NAME]                     = "STARS_COMMON_NAME";
+   star_field_name_map[STARS_GREEK_NAME]                      = "STARS_GREEK_NAME";
+   star_field_name_map[STARS_LATIN_NAME]                      = "STARS_LATIN_NAME";
+   star_field_name_map[STARS_ARABIC_NAME]                     = "STARS_ARABIC_NAME";
+   star_field_name_map[STARS_FLAMSTEED_DESIGNATION_NUMBER]    = "STARS_FLAMSTEED_DESIGNATION_NUMBER";
+   star_field_name_map[STARS_BAYER_DESIGNATION_GREEK_LETTER]  = "STARS_BAYER_DESIGNATION_GREEK_LETTER";
+   star_field_name_map[STARS_BS_HR_NUMBER]                    = "STARS_BS_HR_NUMBER";
+   star_field_name_map[STARS_BS_NUMBER]                       = "STARS_BS_NUMBER";
+   star_field_name_map[STARS_HR_NUMBER]                       = "STARS_HR_NUMBER";  
+   star_field_name_map[STARS_APPROX_RANK_APPARENT_MAGNITUDE]  = "STARS_APPROX_RANK_APPARENT_MAGNITUDE";
+   star_field_name_map[STARS_CONSTELLATION_ABBREVIATION]      = "STARS_CONSTELLATION_ABBREVIATION";
+   star_field_name_map[STARS_CONSTELLATION_FULL_NAME]         = "STARS_CONSTELLATION_FULL_NAME";
+   star_field_name_map[STARS_CONSTELLATION_NAME_GENITIVE]     = "STARS_CONSTELLATION_NAME_GENITIVE";
+   star_field_name_map[STARS_CONSTELLATION_NUMBER]            = "STARS_CONSTELLATION_NUMBER";
+   star_field_name_map[STARS_RIGHT_ASCENSION_HOURS]           = "STARS_RIGHT_ASCENSION_HOURS";
+   star_field_name_map[STARS_RIGHT_ASCENSION_MINUTES]         = "STARS_RIGHT_ASCENSION_MINUTES";
+   star_field_name_map[STARS_RIGHT_ASCENSION_SECONDS]         = "STARS_RIGHT_ASCENSION_SECONDS";
+   star_field_name_map[STARS_RIGHT_ASCENSION_DECIMAL_HOURS]   = "STARS_RIGHT_ASCENSION_DECIMAL_HOURS";
+   star_field_name_map[STARS_RIGHT_ASCENSION_DECIMAL_DEGREES] = "STARS_RIGHT_ASCENSION_DECIMAL_DEGREES";
+   star_field_name_map[STARS_DECLINATION_DEGREES]             = "STARS_DECLINATION_DEGREES";
+   star_field_name_map[STARS_DECLINATION_MINUTES]             = "STARS_DECLINATION_MINUTES";
+   star_field_name_map[STARS_DECLINATION_SECONDS]             = "STARS_DECLINATION_SECONDS";
+   star_field_name_map[STARS_DECLINATION_DECIMAL_DEGREES]     = "STARS_DECLINATION_DECIMAL_DEGREES";
+   star_field_name_map[STARS_RIGHT_ASCENSION]                 = "STARS_RIGHT_ASCENSION";
+   star_field_name_map[STARS_DECLINATION]                     = "STARS_DECLINATION";
+
+@q *** (3) @>
+
+   return 0;
 
 }  /* End of |initialize_name_map| definition.  */
 
@@ -7354,22 +7398,20 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ***** (5) @>
 
-   /* outer |for|  */
 
    SAVE_DEBUG = DEBUG;
 
 /* !!START HERE  \initials{LDF 2021.06.25.}  Look into putting some of the following code into a function.
    I.e., the code for the comparisons.  */
  
-   DEBUG = false; /* |true|  */
+
+   /* outer |for|  */
 
    for (vector<Stars_Where_Option_Struct>::iterator w_iter = scanner_node->stars_get_option_struct->where_options.begin();
         w_iter != scanner_node->stars_get_option_struct->where_options.end();
         ++w_iter)
    {
 @q ****** (6) @>
-
-        /* inner |for|  */
 
         if (w_iter->conjunction == 0 || w_iter->conjunction == OR)
         {
@@ -7420,503 +7462,119 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ******* (7) @>
 
-            if (w_iter->field == STARS_COMMON_NAME && w_iter->relation == EQUAL)
+/* !!START HERE  Put in calls to function.  Code in btemp.web.  */ 
+
+            status = (*iter)->process_where_clause(*w_iter, a_star_vector, b_star_vector, scanner_node);
+
+            if (status != 0)
             {
-@q ******** (8) @>
-
+               cerr << "ERROR!  In `Scan_Parse::get_stars_func':" << endl 
+                    << "`Star::process_where_clause' failed, returning " << status << "."
+                    << endl 
+                    << "Failed to process \"where\" clause."
+                    << "Will try to continue."
+                    << endl;
+            }
 #if DEBUG_COMPILE
-                if (DEBUG)
-                { 
-                   cerr << "w_iter->field == STARS_COMMON_NAME && w_iter->relation == EQUAL" << endl;
-                }              
+            else if (DEBUG)
+            { 
+               cerr << "In `Scan_Parse::get_stars_func':" << endl 
+                    << "`Star::process_where_clause' succeeded, returning 0."
+                    << endl;
+            }          
 #endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-                if ((*iter)->common_name == w_iter->comparison_string)
-                {
-@q ********* (9) @>
-
-#if DEBUG_COMPILE
-                   if (DEBUG)
-                   { 
-                      cerr << "`(*iter)->common_name' == \"" << (*iter)->common_name 
-                           << "\" == `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                           << endl
-                           << "Pushing (*iter) onto vector'."
-                           << endl;
-                   }                
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ********* (9) @>
-
-                   if (w_iter->conjunction == 0 || w_iter->conjunction == AND)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == 0 || w_iter->conjunction == AND"
-                              << endl 
-                              << "Pushing (*iter) onto a_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      a_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else if (w_iter->conjunction == OR)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == OR"
-                              << endl 
-                              << "Pushing (*iter) onto b_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      b_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else 
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "WARNING!  `w_iter->conjunction' has invalid value:  " 
-                              << w_iter->conjunction << endl 
-                              << "`name_map[w_iter->conjunction]' == " << name_map[w_iter->conjunction]
-                              << endl
-                              << "This case hasn't been accounted for." << endl 
-                              << "Not pushing (*iter) onto a vector'.  Continuing."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                   }
-
-                }  /* |if ((*iter)->common_name == w_iter->comparison_string)|  */
-
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                else if (DEBUG)
-                { 
-                   cerr << "`(*iter)->common_name' == \"" << (*iter)->common_name 
-                        << "\" != `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                        << endl
-                        << "Not pushing (*iter) onto a vector'."
-                        << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-            } /* |if| */
        
-@q ******* (7) @>
-
-            if (w_iter->field == STARS_COMMON_NAME && w_iter->relation == NOT_EQUAL)
-            {
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                if (DEBUG)
-                { 
-                   cerr << "w_iter->field == STARS_COMMON_NAME && w_iter->relation == NOT_EQUAL" << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-                if ((*iter)->common_name != w_iter->comparison_string)
-                {
-@q ********* (9) @>
-
-#if DEBUG_COMPILE
-                   if (DEBUG)
-                   { 
-                      cerr << "`(*iter)->common_name' == \"" << (*iter)->common_name 
-                           << "\" != `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                           << endl
-                           << "Pushing (*iter) onto vector'."
-                           << endl;
-                   }                
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ********* (9) @>
-
-                   if (w_iter->conjunction == 0 || w_iter->conjunction == AND)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == 0 || w_iter->conjunction == AND"
-                              << endl 
-                              << "Pushing (*iter) onto a_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      a_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else if (w_iter->conjunction == OR)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == OR"
-                              << endl 
-                              << "Pushing (*iter) onto b_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      b_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else 
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "WARNING!  `w_iter->conjunction' has invalid value:  " 
-                              << w_iter->conjunction << endl 
-                              << "`name_map[w_iter->conjunction]' == " << name_map[w_iter->conjunction]
-                              << endl
-                              << "This case hasn't been accounted for." << endl 
-                              << "Not pushing (*iter) onto a vector'.  Continuing."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                   }
-
-                }  /* |if ((*iter)->common_name != w_iter->comparison_string)|  */
-
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                else if (DEBUG)
-                { 
-                   cerr << "`(*iter)->common_name' == \"" << (*iter)->common_name 
-                        << "\" == `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                        << endl
-                        << "Not pushing (*iter) onto a vector'."
-                        << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-            } /* |if| */
-       
-
-@q ******* (7) @>
-
-            if (w_iter->field == STARS_BAYER_DESIGNATION_GREEK_LETTER && w_iter->relation == EQUAL)
-            {
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                if (DEBUG)
-                { 
-                   cerr << "w_iter->field == STARS_BAYER_DESIGNATION_GREEK_LETTER && w_iter->relation == EQUAL" << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-                if ((*iter)->bayer_designation_greek_letter == w_iter->comparison_string)
-                {
-@q ********* (9) @>
-
-#if DEBUG_COMPILE
-                   if (DEBUG)
-                   { 
-                      cerr << "`(*iter)->bayer_designation_greek_letter' == \"" << (*iter)->bayer_designation_greek_letter 
-                           << "\" == `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                           << endl
-                           << "Pushing (*iter) onto vector'."
-                           << endl;
-                   }                
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ********* (9) @>
-
-                   if (w_iter->conjunction == 0 || w_iter->conjunction == AND)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == 0 || w_iter->conjunction == AND"
-                              << endl 
-                              << "Pushing (*iter) onto a_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      a_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else if (w_iter->conjunction == OR)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == OR"
-                              << endl 
-                              << "Pushing (*iter) onto b_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      b_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else 
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "WARNING!  `w_iter->conjunction' has invalid value:  " 
-                              << w_iter->conjunction << endl 
-                              << "`name_map[w_iter->conjunction]' == " << name_map[w_iter->conjunction]
-                              << endl
-                              << "This case hasn't been accounted for." << endl 
-                              << "Not pushing (*iter) onto a vector'.  Continuing."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                   }
-
-                }  /* |if ((*iter)->bayer_designation_greek_letter == w_iter->comparison_string)|  */
-
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                else if (DEBUG)
-                { 
-                   cerr << "`(*iter)->bayer_designation_greek_letter' == \"" << (*iter)->bayer_designation_greek_letter 
-                        << "\" != `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                        << endl
-                        << "Not pushing (*iter) onto a vector'."
-                        << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-            } /* |if| */
-       
-@q ******* (7) @>
-
-            if (w_iter->field == STARS_BAYER_DESIGNATION_GREEK_LETTER && w_iter->relation == NOT_EQUAL)
-            {
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                if (DEBUG)
-                { 
-                   cerr << "w_iter->field == STARS_BAYER_DESIGNATION_GREEK_LETTER && w_iter->relation == NOT_EQUAL" << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-                if ((*iter)->bayer_designation_greek_letter != w_iter->comparison_string)
-                {
-@q ********* (9) @>
-
-#if DEBUG_COMPILE
-                   if (DEBUG)
-                   { 
-                      cerr << "`(*iter)->bayer_designation_greek_letter' == \"" << (*iter)->bayer_designation_greek_letter 
-                           << "\" != `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                           << endl
-                           << "Pushing (*iter) onto vector'."
-                           << endl;
-                   }                
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ********* (9) @>
-
-                   if (w_iter->conjunction == 0 || w_iter->conjunction == AND)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == 0 || w_iter->conjunction == AND"
-                              << endl 
-                              << "Pushing (*iter) onto a_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      a_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else if (w_iter->conjunction == OR)
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "w_iter->conjunction == OR"
-                              << endl 
-                              << "Pushing (*iter) onto b_star_vector'."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                      b_star_vector.push_back(*iter);
-                   }
-
-@q ********* (9) @>
-
-                   else 
-                   {
-#if DEBUG_COMPILE
-                      if (DEBUG)
-                      { 
-                         cerr << "WARNING!  `w_iter->conjunction' has invalid value:  " 
-                              << w_iter->conjunction << endl 
-                              << "`name_map[w_iter->conjunction]' == " << name_map[w_iter->conjunction]
-                              << endl
-                              << "This case hasn't been accounted for." << endl 
-                              << "Not pushing (*iter) onto a vector'.  Continuing."
-                              << endl;
-                      }                    
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                   }
-
-                }  /* |if ((*iter)->bayer_designation_greek_letter != w_iter->comparison_string)|  */
-
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-                else if (DEBUG)
-                { 
-                   cerr << "`(*iter)->bayer_designation_greek_letter' == \"" << (*iter)->bayer_designation_greek_letter 
-                        << "\" == `w_iter->comparison_string' == \"" << w_iter->comparison_string << "\""
-                        << endl
-                        << "Not pushing (*iter) onto a vector'."
-                        << endl;
-                }              
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-            } /* |if| */
-       
-@q ******* (7) @>
-
-            if (w_iter->conjunction == OR && b_star_vector.size() > 0)
-            {
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-               if (DEBUG)
-               { 
-                  cerr << "w_iter->conjunction == OR && b_star_vector.size() > 0" 
-                       << endl 
-                       << "Appending `b_star_vector' to `a_star_vector', sorting `a_star_vector', "
-                       << "removing duplicates (if any) and clearing `b_star_vector'."
-                       << endl
-                       << "Before:" << endl 
-                       << "a_star_vector.size() == " << a_star_vector.size() << endl 
-                       << "b_star_vector.size() == " << b_star_vector.size() << endl;
-               }             
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-               a_star_vector.insert(a_star_vector.end(), b_star_vector.begin(), b_star_vector.end());
-               sort(a_star_vector.begin(), a_star_vector.end(), compare_bs_hr_number);
-
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-               if (DEBUG)
-               { 
-                  cerr << "After appending `b_star_vector' to `a_star_vector':" << endl 
-                       << "a_star_vector.size() == " << a_star_vector.size() << endl 
-                       << "b_star_vector.size() == " << b_star_vector.size() << endl
-                       << endl;
-               }             
-#endif /* |DEBUG_COMPILE|  */@;  
-
-@q ******** (8) @>
-
-               dup_iter = unique(a_star_vector.begin(), a_star_vector.end(), compare_star_pointers);
-
-               if (dup_iter != a_star_vector.end())
-               {
-#if DEBUG_COMPILE
-                   if (DEBUG)
-                   { 
-                       cerr << "`dup_iter' != `a_star_vector.end()'." << endl
-                            << "Found duplicates.  Calling `erase'."
-                            << endl;
-                            
-                   }                 
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                   a_star_vector.erase(dup_iter, a_star_vector.end());
-               }
-
-@q ******** (8) @>
-
-#if DEBUG_COMPILE
-               else if (DEBUG)
-               { 
-                   cerr << "`dup_iter' == `a_star_vector.end()'." << endl
-                        << "Found no duplicates.  Not calling `erase'."
-                        << endl;
-
-               }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-               b_star_vector.clear(); 
-
-#if DEBUG_COMPILE
-               if (DEBUG)
-               { 
-                  cerr << "After removing duplicates (if any) from `a_star_vector' "
-                       << "and clearing `b_star_vector':" << endl 
-                       << "a_star_vector.size() == " << a_star_vector.size() << endl 
-                       << "b_star_vector.size() == " << b_star_vector.size() << endl
-                       << endl;
-               }             
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******** (8) @>
-
-            }  /* |if (w_iter->conjunction == OR && b_star_vector.size() > 0)| */
-
 @q ******* (7) @>
 
         }  /* inner |for|  */
+
+@q ****** (6) @>
+
+        if (w_iter->conjunction == OR && b_star_vector.size() > 0)
+        {
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "w_iter->conjunction == OR && b_star_vector.size() > 0" 
+                    << endl 
+                    << "Appending `b_star_vector' to `a_star_vector', sorting `a_star_vector', "
+                    << "removing duplicates (if any) and clearing `b_star_vector'."
+                    << endl
+                    << "Before:" << endl 
+                    << "a_star_vector.size() == " << a_star_vector.size() << endl 
+                    << "b_star_vector.size() == " << b_star_vector.size() << endl;
+            }             
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+            a_star_vector.insert(a_star_vector.end(), b_star_vector.begin(), b_star_vector.end());
+            sort(a_star_vector.begin(), a_star_vector.end(), compare_bs_hr_number);
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "After appending `b_star_vector' to `a_star_vector' and sorting:" 
+                    << endl 
+                    << "a_star_vector.size() == " << a_star_vector.size() << endl 
+                    << "b_star_vector.size() == " << b_star_vector.size() << endl
+                    << endl;
+            }             
+#endif /* |DEBUG_COMPILE|  */@;  
+
+@q ******* (7) @>
+
+            dup_iter = unique(a_star_vector.begin(), a_star_vector.end(), compare_star_pointers);
+
+            if (dup_iter != a_star_vector.end())
+            {
+#if DEBUG_COMPILE
+                if (DEBUG)
+                { 
+                    cerr << "`dup_iter' != `a_star_vector.end()'." << endl
+                         << "Found duplicates.  Calling `erase'."
+                         << endl;
+                         
+                }                 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+                a_star_vector.erase(dup_iter, a_star_vector.end());
+            }
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+            else if (DEBUG)
+            { 
+                cerr << "`dup_iter' == `a_star_vector.end()'." << endl
+                     << "Found no duplicates.  Not calling `erase'."
+                     << endl;
+
+            }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+            b_star_vector.clear(); 
+
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+               cerr << "After removing duplicates (if any) from `a_star_vector' "
+                    << "and clearing `b_star_vector':" << endl 
+                    << "a_star_vector.size() == " << a_star_vector.size() << endl 
+                    << "b_star_vector.size() == " << b_star_vector.size() << endl
+                    << endl;
+            }             
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+        }  /* |if (w_iter->conjunction == OR && b_star_vector.size() > 0)| */
 
 @q ****** (6) @>
         

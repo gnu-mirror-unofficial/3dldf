@@ -238,7 +238,8 @@ If |@=%token_table@>| is declared, Bison generates
 Unfortunately, it's |static|, so it's not usable in files that include
 \filename{parser.h} and \filename{parser.h++}, like \filename{scan.web}.
 Therefore it's still necessary to declare |name_map| in 
-|@<Declare |name_map| and |type_name_map|@>|.  However, |@=%token_table@>| also 
+|@<Declare |name_map|, |type_name_map| and |star_field_name_map|@>|.
+and |type_name_map|@>|.  However, |@=%token_table@>| also 
 generates macro definitions for the following macros: |YYNTOKENS|, |YYNNTS|, 
 |YYNRULES|, and |YYNSTATES|, so it might be worthwhile to declare it after all.  
 It is currently commented out.%
@@ -3345,7 +3346,7 @@ Added declaration of |star_field_name_map|.
 
 @q *** (3) Declaration .@> 
 
-@<Declare |name_map| and |type_name_map|@>=
+@<Declare |name_map|, |type_name_map| and |star_field_name_map|@>=
 map <const int, string> name_map;
 map <const int, string> type_name_map;
 map <const unsigned int, string> star_field_name_map;
@@ -3353,20 +3354,22 @@ map <const unsigned int, string> star_field_name_map;
 @q *** (3) |extern| declaration.@> 
 
 @
-@<|extern| declaration of |name_map| and |type_name_map|@>=
+@<|extern| declaration of |name_map|, |type_name_map| and |star_field_name_map|@>=
 extern 
 map <const int, string> name_map;
 
 extern 
 map <const int, string> type_name_map;
 
+extern
+map <const unsigned int, string> star_field_name_map;
+
 @q *** (3) Initialize |name_map| and |type_name_map|. @>
 @*2 Initialize {\bf name\_map} and {\bf type\_name\_map}. 
 
 \LOG
 \initials{LDF 2005.06.09.}
-Removed the definition of this function 
-to \filename{prrfnc0.web}.
+Removed the definition of this function to \filename{prrfnc0.web}.
 \ENDLOG 
 
 @q **** (4) Declaration. @>

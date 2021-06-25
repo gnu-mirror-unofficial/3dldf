@@ -182,7 +182,7 @@ typedef void* yyscan_t;
 @q Declare location type @>
 @<Preprocessor macros not only for the parser@>@;
 @<Preprocessor macros for the parser only@>@;
-@<Declare |name_map| and |type_name_map|@>@;
+@<Declare |name_map|, |type_name_map| and |star_field_name_map|@>@;
 @=%}@>
 @<Bison declarations@>@;
 @<Union declaration for |YYSTYPE|@>@;
@@ -228,7 +228,7 @@ typedef void* yyscan_t;
 @q <Declare location type @>
 @<Preprocessor macros not only for the parser@>@;
 @<|extern| declarations in |namespace Scan_Parse|@>@;
-@<|extern| declaration of |name_map| and |type_name_map|@>@;
+@<|extern| declaration of |name_map|, |type_name_map| and |star_field_name_map|@>@;
 @<Declare functions@>@;
 @<Reset |DEBUG_COMPILE|@>@;
 

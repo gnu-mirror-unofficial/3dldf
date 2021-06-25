@@ -118,6 +118,79 @@ alter table Constellations add column name_genitive varchar(64) not null default
 
 show columns from Constellations;
 
+/* *** (3) Stars_Links  */
+
+drop table Stars_Links;
+
+create table Stars_Links
+(
+   common_name varchar(32) not null default "",
+   flamsteed_designation_number int not null default 0,
+   bayer_designation_greek_letter varchar(16) not null default "",
+   constellation_name_genitive varchar(64) not null default "",
+   bs_hr_number int not null default 0,
+   link varchar(128) not null default ""
+);
+
+/* **** (4) */
+
+show columns from Stars_Links;
+
+/* **** (4) Sirius  */
+
+delete from Stars_Links where common_name = "Sirius";
+
+replace into Stars_Links (common_name, flamsteed_designation_number, bayer_designation_greek_letter,
+                          bs_hr_number, constellation_name_genitive, link)
+values
+("Sirius", 9, "alpha", 2491, "Canis Majoris", "https://en.wikipedia.org/wiki/Sirius");
+
+
+replace into Stars_Links (common_name, flamsteed_designation_number, bayer_designation_greek_letter,
+                          bs_hr_number, constellation_name_genitive, link)
+values
+("Sirius", 9, "alpha", 2491, "Canis Majoris", "http://simbad.u-strasbg.fr/simbad/sim-id?Ident=*+alf+CMa");
+
+replace into Stars_Links (common_name, flamsteed_designation_number, bayer_designation_greek_letter,
+                          bs_hr_number, constellation_name_genitive, link)
+values
+("Sirius", 9, "alpha", 2491, "Canis Majoris", "http://simbad.u-strasbg.fr/simbad/sim-id?Ident=TYC+5949-2777-1");
+
+replace into Stars_Links (common_name, flamsteed_designation_number, bayer_designation_greek_letter,
+                          bs_hr_number, constellation_name_genitive, link)
+values
+("Sirius", 9, "alpha", 2491, "Canis Majoris", "http://simbad.u-strasbg.fr/simbad/sim-id?Ident=*+alf+CMa+B");
+
+/* **** (4) Canopus  */
+
+
+
+replace into Stars_Links (common_name, flamsteed_designation_number, bayer_designation_greek_letter,
+                          bs_hr_number, constellation_name_genitive, link)
+values
+(
+"Canopus", 0, "alpha", 2326, "Carinae", "https://en.wikipedia.org/wiki/Canopus");
+
+
+replace into Stars_Links (common_name, flamsteed_designation_number, bayer_designation_greek_letter,
+                          bs_hr_number, constellation_name_genitive, link)
+values
+(
+"Canopus", 0, "alpha", 2326, "Carinae", "http://simbad.u-strasbg.fr/simbad/sim-id?Ident=canopus");
+
+
+/* **** (4) Select from Stars_Links  */
+
+select * from Stars_Links order by bs_hr_number, link\G
+
+select * from Stars_Links where bs_hr_number = (select bs_hr_number from Stars where common_name = "Sirius")\G
+
+select * from Stars where common_name = "Canopus"\G
+
+select * from Stars_Links where bs_hr_number = (select bs_hr_number from Stars where common_name = "Canopus")\G
+
+/* *** (3) */
+
 /* ** (2) Insert into Constellations  */
 
 insert ignore into Constellations (rank_constellation, abbreviation, name) values (1, "Hya", "Hydra");
