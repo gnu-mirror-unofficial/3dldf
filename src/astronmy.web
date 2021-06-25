@@ -1189,7 +1189,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
    using namespace Scan_Parse;
 
-   bool DEBUG = true; /* |false|  */ 
+   bool DEBUG = false; /* |true|  */ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1892,13 +1892,13 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
       if (star_int_ptr != 0)
          cerr << "`this->*star_int_ptr'  == " << this->*star_int_ptr << endl
-              << "`where_option.int_value' == " << where_option.int_value;
+              << "`where_option.int_value' == " << where_option.int_value << endl;
       else 
          cerr << "`this->*star_int_ptr'  == NULL." << endl;
 
       if (star_real_ptr != 0)
          cerr << "`this->*star_real_ptr' == " << this->*star_real_ptr << endl
-              << "`where_option.real_value' == " << where_option.real_value;
+              << "`where_option.real_value' == " << where_option.real_value << endl;
       else 
          cerr << "`this->*star_real_ptr' == NULL." << endl;
       }  
@@ -1908,7 +1908,128 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 @
 @<Define |Star| functions@>=
 
-/* !!START HERE  Change the nesting.  Put the relations on the outside.  \initials{LDF 2021.06.25.}  */ 
+      if (where_option.relation == EQUAL)
+      {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == EQUAL" << endl
+                   << "Setting `fp_str' = `equal_str', `fp_int' = `equal_int' and `fp_real' = `equal_real'."
+                   << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp_str  = equal_str;
+           fp_int  = equal_int;
+           fp_real = equal_real;
+
+
+      } /* |if (where_option.relation == EQUAL)| */
+
+@q ****** (6) @>
+
+      else if (where_option.relation == NOT_EQUAL)
+      {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == NOT_EQUAL" << endl
+                   << "Setting `fp_str' = `not_equal_str', `fp_int' = `not_equal_int' and `fp_real' = `not_equal_real'."
+                   << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp_str  = not_equal_str;
+           fp_int  = not_equal_int;
+           fp_real = not_equal_real;
+      }
+
+@q ****** (6) @>
+
+      else if (where_option.relation == LESS)
+      {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == LESS" << endl
+                   << "Setting `fp_str' = `less_str', `fp_int' = `less_int' and `fp_real' = `less_real'."
+                   << endl;
+
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp_str  = less_str;
+           fp_int  = less_int;
+           fp_real = less_real;
+
+      }
+
+@q ****** (6) @>
+
+      else if (where_option.relation == LESS_OR_EQUAL)
+      {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == LESS_OR_EQUAL" << endl
+                   << "Setting `fp_str' = `less_or_equal_str', `fp_int' = `less_or_equal_int' and `fp_real' = `less_or_equal_real'."
+                   << endl;
+
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp_str  = less_or_equal_str;
+           fp_int  = less_or_equal_int;
+           fp_real = less_or_equal_real;
+
+      }
+
+@q ****** (6) @>
+
+      else if (where_option.relation == GREATER)
+      {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == GREATER" << endl
+                   << "Setting `fp_str' = `greater_str', `fp_int' = `greater_int' and `fp_real' = `greater_real'."
+                   << endl;
+
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp_str  = greater_str;
+           fp_int  = greater_int;
+           fp_real = greater_real;
+
+      }
+
+@q ****** (6) @>
+
+      else if (where_option.relation == GREATER_OR_EQUAL)
+      {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == GREATER_OR_EQUAL" << endl
+                   << "Setting `fp_str' = `greater_or_equal_str', `fp_int' = `greater_or_equal_int' and "
+                   << "`fp_real' = `greater_or_equal_real'."
+                   << endl;
+
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp_str  = greater_or_equal_str;
+           fp_int  = greater_or_equal_int;
+           fp_real = greater_or_equal_real;
+
+      }
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
 
     if (star_str_ptr != 0)
     {
@@ -1917,261 +2038,217 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
-          cerr << "`star_str_ptr' != 0" << endl;
+          cerr << "`star_str_ptr' != 0" << endl
+               << "Calling `fp_str(this->*star_str_ptr, where_option.comparison_string)'."
+               << endl;
        }  
 #endif /* |DEBUG_COMPILE|  */@;         
 
-@q ****** (6) @>
-
-       if (where_option.relation == EQUAL)
-       {
+       status = fp_str(this->*star_str_ptr, where_option.comparison_string);
 
 #if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr << "`where_option.relation' == EQUAL" << endl
-                   << "Setting `fp_str = equal_str'." << endl;
-           }     
-#endif /* |DEBUG_COMPILE|  */@;         
+       if (DEBUG)
+       { 
+           cerr << "In `Star::process_where_option':" << endl 
+                << "`fp_str' returned " << status << "." << endl;
 
-           fp_str = equal_str;
+           if (status == 1)
+           {
+              cerr << "Will push `this' onto `a_star_vector' or `b_star_vector'."
+                   << endl;
+           }
+           else
+           {
+              cerr << "Won't push `this' onto `a_star_vector' or `b_star_vector'."
+                   << endl;
+           }   
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
 
-       }
+    } /* |if (star_str_ptr != 0)| */ 
 
-@q ****** (6) @>
-
-       else if (where_option.relation == NOT_EQUAL)
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr << "`where_option.relation' == NOT_EQUAL" << endl
-                   << "Setting `fp_str = not_equal_str'." << endl;
-           }     
-#endif /* |DEBUG_COMPILE|  */@;         
-
-           fp_str = not_equal_str;
-
-       }
-
-@q ****** (6) @>
-
-       else if (where_option.relation == LESS)
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr << "`where_option.relation' == LESS" << endl
-                   << "Setting `fp_str = less_str'." << endl;
-           }     
-#endif /* |DEBUG_COMPILE|  */@;         
-
-           fp_str = less_str;
-
-       }
-
-@q ****** (6) @>
-
-       else if (where_option.relation == LESS_OR_EQUAL)
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr << "`where_option.relation' == LESS_OR_EQUAL" << endl
-                   << "Setting `fp_str = less_or_equal_str'." << endl;
-
-           }     
-#endif /* |DEBUG_COMPILE|  */@;         
-
-           fp_str = less_or_equal_str;
-
-       }
-
-@q ****** (6) @>
-
-       else if (where_option.relation == GREATER)
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr << "`where_option.relation' == GREATER" << endl
-                   << "Setting `fp_str = greater_str'." << endl;
-           }     
-#endif /* |DEBUG_COMPILE|  */@;         
-
-           fp_str = greater_str;
-
-       }
-
-@q ****** (6) @>
-
-       else if (where_option.relation == GREATER_OR_EQUAL)
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-              cerr << "`where_option.relation' == GREATER_OR_EQUAL" << endl
-                   << "Setting `fp_str = greater_or_equal_str'." << endl;
-           }     
-#endif /* |DEBUG_COMPILE|  */@;         
-
-           fp_str = greater_or_equal_str;
-
-       }
-
-@q ****** (6) @>
+@q ***** (5) @>
 @
 @<Define |Star| functions@>=
 
-       if (fp_str(this->*star_str_ptr, where_option.comparison_string) == true)
-       {
-@q ******* (7) @>
+    else if (star_int_ptr != 0)
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "`star_int_ptr' != 0" << endl
+               << "Calling `fp_int(this->*star_int_ptr, where_option.int_value)'."
+               << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;         
 
+       status = fp_int(this->*star_int_ptr, where_option.int_value);
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "In `Star::process_where_option':" << endl 
+                << "`fp_int' returned " << status << "." << endl;
+
+           if (status == 1)
+           {
+              cerr << "Will push `this' onto `a_star_vector' or `b_star_vector'."
+                   << endl;
+           }
+           else
+           {
+              cerr << "Won't push `this' onto `a_star_vector' or `b_star_vector'."
+                   << endl;
+           }   
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    }  /* |else if (star_int_ptr != 0)|  */
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+    else if (star_real_ptr != 0)
+    {
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "`star_real_ptr' != 0" << endl
+               << "Calling `fp_real(this->*star_real_ptr, where_option.real_value)'."
+               << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+       status = fp_real(this->*star_real_ptr, where_option.real_value);
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "In `Star::process_where_option':" << endl 
+                << "`fp_real' returned " << status << "." << endl;
+
+           if (status == 1)
+           {
+              cerr << "Will push `this' onto `a_star_vector' or `b_star_vector'."
+                   << endl;
+           }
+           else
+           {
+              cerr << "Won't push `this' onto `a_star_vector' or `b_star_vector'."
+                   << endl;
+           }   
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    }  /* |else if (star_real_ptr != 0)|  */
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+    else
+    {
+        cerr << "WARNING!  In `Star::process_where_option':" << endl 
+             << "`star_str_ptr', `star_int_ptr' and `star_real_ptr'"
+             << endl 
+             << "are all NULL.  This shouldn't be possible."
+             << endl
+             << "Exiting function unsuccessfully with return value 2."
+             << endl;
+
+        return 2;
+    }    
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+    if (status == 1)
+    {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "`status' == 1 (`true')." << endl;
+       }      
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
+
+       if (where_option.conjunction == 0 || where_option.conjunction == AND)
+       {
 #if DEBUG_COMPILE
            if (DEBUG)
            { 
-              cerr << "`fp_str(this->*star_str_ptr, where_option.comparison_string)' returned `true'."
+              cerr << "where_option.conjunction == 0 || where_option.conjunction == AND" << endl
+                   << "Pushing `this' onto `a_star_vector'."
+                   << endl;
+
+           }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           a_star_vector.push_back(this);
+        }
+
+@q ****** (6) @>
+
+        else if (where_option.conjunction == OR)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "where_option.conjunction == OR" << endl
+                   << "Pushing `this' onto `b_star_vector'."
                    << endl;
            }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ******* (7) @>
-
-           if (where_option.conjunction == 0 || where_option.conjunction == AND)
-           {
-#if DEBUG_COMPILE
-              if (DEBUG)
-              { 
-                 cerr << "where_option.conjunction == 0 || where_option.conjunction == AND" << endl
-                      << "Pushing `this' onto `a_star_vector'."
-                      << endl;
-
-              }            
-#endif /* |DEBUG_COMPILE|  */@; 
-
-              a_star_vector.push_back(this);
-           }
-
-@q ******* (7) @>
-
-           else if (where_option.conjunction == OR)
-           {
-#if DEBUG_COMPILE
-              if (DEBUG)
-              { 
-                 cerr << "where_option.conjunction == OR" << endl
-                      << "Pushing `this' onto `b_star_vector'."
-                      << endl;
-              }            
-#endif /* |DEBUG_COMPILE|  */@; 
-
-               b_star_vector.push_back(this);
-           }
-
-@q ******* (7) @>
-
-           else
-           {
-                 cerr << "WARNING!  In `Star::process_where_option':"
-                      << endl 
-                      << "`where_option.conjunction' has invalid value:  "
-                      << where_option.conjunction << endl 
-                      << "`name_map[where_option.conjunction]' == \"" 
-                      << name_map[where_option.conjunction] << "\""
-                      << endl 
-                      << "This case is either invalid or hasn't been accounted for."
-                      << endl
-                      << "Not pushing `this' onto `a_star_vector' or `b_star_vector'."
-                      << endl
-                      << "Continuing."
-                      << endl;
-
-           }
-
-@q ******* (7) @>
-
-       }  /* |if (fp_str(this->*star_str_ptr, where_option.comparison_string) == true)|  */
+           b_star_vector.push_back(this);
+        }
 
 @q ****** (6) @>
-     
-       else
-       {
-#if DEBUG_COMPILE
-           if (DEBUG)
-           { 
-               cerr << "`fp_str(this->*star_str_ptr, where_option.comparison_string)' returned `false'."
-                    << endl 
-                    << "Not pushing `this' onto `a_star_vector' or `b_star_vector'."
-                    << endl
-                    << "Continuing."
-                    << endl;
- 
-           }        
-#endif /* |DEBUG_COMPILE|  */@; 
+@
+@<Define |Star| functions@>=
 
-       }
+        else
+        {
+            cerr << "WARNING!  In `Star::process_where_option':"
+                 << endl 
+                 << "`where_option.conjunction' has invalid value:  "
+                 << where_option.conjunction << endl 
+                 << "`name_map[where_option.conjunction]' == \"" 
+                 << name_map[where_option.conjunction] << "\""
+                 << endl 
+                 << "This case is either invalid or hasn't been accounted for."
+                 << endl
+                 << "Not pushing `this' onto `a_star_vector' or `b_star_vector'."
+                 << endl
+                 << "Exiting function with return value 2."
+                 << endl;
 
+            return 2;
+
+        }
 @q ****** (6) @>
 
-    }  /* |if (star_str_ptr != 0)|  */
+    }  /* |if (status == true)|  */
 
 @q ***** (5) @>
-@
-@<Define |Star| functions@>=
 
-    else if (this->*star_int_ptr != 0)
-    {
 #if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-          cerr << "`this->*star_int_ptr' != 0" << endl;
-       }  
-#endif /* |DEBUG_COMPILE|  */@;         
-
-
-       /* !!START HERE  \initials{LDF 2021.06.25.}  */ 
-
-
-
-    }  /* |else if (this->*star_int_ptr != 0)|  */
+    else if (DEBUG)
+    { 
+           cerr << "`status' == 0 (`false').  Not pushing `this' onto `a_star_vector' or `b_star_vector'." 
+                << endl;
+    }     
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
 @
 @<Define |Star| functions@>=
-
-    else if (this->*star_real_ptr != 0)
-    {
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-          cerr << "`this->*star_real_ptr' != 0" << endl;
-       }  
-#endif /* |DEBUG_COMPILE|  */@;         
-
-    }  /* |else if (this->*star_real_ptr != 0)|  */
-
-@q ***** (5) @>
-@
-@<Define |Star| functions@>=
-
-    else 
-    {
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-          cerr << "In `Star::process_where_option':" << endl 
-               << "`this->*star_str_ptr', `this->*star_int_ptr' and `this->*star_real_ptr' "
-               << "are all == NULL." << endl
-               << "Not comparing anything." << endl;
-       }  
-#endif /* |DEBUG_COMPILE|  */@;         
-
-    }  /* |else if (this->*star_real_ptr != 0)|  */
-
-@q ***** (5) @>
-@
-@<Define |Star| functions@>=
-
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -2184,6 +2261,59 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    return 0;
   
 } /* End of |Star::process_where_option| definition  */
+
+
+@q *** (3) Plot.  @>
+@*2 Plot.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) @>
+
+@<Declare |Star| functions@>=
+int
+plot(Scanner_Node scanner_node = 0);
+
+@q **** (4) @>
+@
+@<Define |Star| functions@>=
+int
+Star::plot(Scanner_Node scanner_node)
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {  
+       cerr << "Entering `Star::plot'." << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@;     
+
+@q ***** (5) @>
+
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {  
+       cerr << "Exiting `Star::plot' successfully with return value 0." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;     
+
+   return 0;
+
+
+@q ***** (5) @>
+
+}  /* End of |Star::plot| definition  */
+
+@q *** (3) @>
 
 @q ** (2) @>
 
