@@ -1695,6 +1695,429 @@ Added this rule.
 
 };
 
+@q ****** (6) stars_field_specifier --> RIGHT_ASCENSION_HOURS.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{RIGHT\_ASCENSION\_HOURS}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: RIGHT_ASCENSION_HOURS@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_HOURS'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_RIGHT_ASCENSION_HOURS;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_HOURS':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> RIGHT_ASCENSION_MINUTES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{RIGHT\_ASCENSION\_MINUTES}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: RIGHT_ASCENSION_MINUTES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_MINUTES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_RIGHT_ASCENSION_MINUTES;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_MINUTES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> RIGHT_ASCENSION_SECONDS.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{RIGHT\_ASCENSION\_SECONDS}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: RIGHT_ASCENSION_SECONDS@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_SECONDS'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_RIGHT_ASCENSION_SECONDS;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_SECONDS':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> RIGHT_ASCENSION_DECIMAL_HOURS.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{RIGHT\_ASCENSION\_DECIMAL\_HOURS}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: RIGHT_ASCENSION_DECIMAL_HOURS@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_HOURS'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_RIGHT_ASCENSION_DECIMAL_HOURS;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_HOURS':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> RIGHT_ASCENSION_DECIMAL_DEGREES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{RIGHT\_ASCENSION\_DECIMAL\_DEGREES}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: RIGHT_ASCENSION_DECIMAL_DEGREES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_DEGREES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_RIGHT_ASCENSION_DECIMAL_DEGREES;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_DEGREES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> DECLINATION_DEGREES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{DECLINATION\_DEGREES}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: DECLINATION_DEGREES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DEGREES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_DECLINATION_DEGREES;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DEGREES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> DECLINATION_MINUTES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{DECLINATION\_MINUTES}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: DECLINATION_MINUTES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_MINUTES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_DECLINATION_MINUTES;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_MINUTES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> DECLINATION_SECONDS.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{DECLINATION\_SECONDS}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: DECLINATION_SECONDS@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_SECONDS'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_DECLINATION_SECONDS;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_SECONDS':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> DECLINATION_DECIMAL_DEGREES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{DECLINATION\_DECIMAL\_DEGREES}.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: DECLINATION_DECIMAL_DEGREES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DECIMAL_DEGREES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_DECLINATION_DECIMAL_DEGREES;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DECIMAL_DEGREES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
 @q ****** (6) stars_option_list --> stars_option_list WHERE stars_where_list@> 
 @*5 \§stars option list> $\longrightarrow$ \§stars option list> \.{WHERE} \§stars where list>.
 \initials{LDF 2021.06.20.}
@@ -1870,8 +2293,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ****** (6) stars_where_element --> stars_field_specifier relation INTEGER.@> 
-@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§INTEGER>.@> 
+@q ****** (6) stars_where_element --> stars_field_specifier relation numeric_expression.@> 
+@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§numeric expression>.@> 
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1881,7 +2304,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=stars_where_element: stars_field_specifier relation INTEGER@>@/
+@=stars_where_element: stars_field_specifier relation numeric_expression@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1889,11 +2312,11 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation INTEGER'."
+      cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation numeric_expression'."
                 << endl 
                 << "`stars_field_specifier' == " << @=$1@> << endl
                 << "`relation'              == " << @=$2@> << " == " << name_map[@=$2@>] << endl
-                << "`INTEGER'               == " << @=$3@> << endl;
+                << "`numeric_expression'               == " << @=$3@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1906,59 +2329,19 @@ Added this rule.
 
     w.field     = @=$1@>;
     w.relation  = @=$2@>;
-    w.int_value = @=$3@>; 
-   
+  
+    if (@=$3@> == floor(@=$3@>))
+       w.int_value = static_cast<int>(floor(@=$3@>)); 
+    else
+       w.real_value = @=$3@>; 
+
     scanner_node->stars_get_option_struct->where_options.push_back(w);
 
    @=$$@> = 0;
 };
 
-@q ****** (6) stars_where_element --> stars_field_specifier relation REAL.@> 
-@*5 \§stars where element> $\longrightarrow$ \<stars field specifier> \§relation> \§REAL>.@> 
-\initials{LDF 2021.06.20.}
-
-\LOG
-\initials{LDF 2021.06.20.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>= 
-
-@=stars_where_element: stars_field_specifier relation REAL@>@/
-{
-  @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
-  if (DEBUG)
-    {
-      cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation REAL'."
-                << endl 
-                << "`stars_field_specifier' == " << @=$1@> << endl
-                << "`relation'              == " << @=$2@> << " == " << name_map[@=$2@>] << endl
-                << "`REAL'               == " << @=$3@> << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-      
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-    Stars_Where_Option_Struct w;
-
-    w.field     = @=$1@>;
-    w.relation  = @=$2@>;
-    w.int_value = @=$3@>; 
-   
-    scanner_node->stars_get_option_struct->where_options.push_back(w);
-
-   @=$$@> = 0;
-};
-
-
-@q ****** (6) stars_option_list --> stars_option_list LIMIT INTEGER@> 
-@*5 \§stars option list> $\longrightarrow$ \.{LIMIT} \.{INTEGER}
+@q ****** (6) stars_option_list --> stars_option_list LIMIT numeric_expression@> 
+@*5 \§stars option list> $\longrightarrow$ \.{LIMIT} \§numeric expression>
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -1968,7 +2351,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=stars_option_list: stars_option_list LIMIT INTEGER@>@/
+@=stars_option_list: stars_option_list LIMIT numeric_expression@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -1977,7 +2360,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT INTEGER'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1990,7 +2373,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT INTEGER':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT numeric_expression':"
                 << endl
                 << "`$3' == " << @=$3@> << endl;
 
@@ -2007,8 +2390,8 @@ Added this rule.
 
 };
 
-@q ****** (6) stars_option_list --> stars_option_list OFFSET INTEGER@> 
-@*5 \§stars option list> $\longrightarrow$ \.{OFFSET} \.{INTEGER}
+@q ****** (6) stars_option_list --> stars_option_list OFFSET numeric_expression@> 
+@*5 \§stars option list> $\longrightarrow$ \.{OFFSET} \§numeric expression>
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -2018,7 +2401,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=stars_option_list: stars_option_list OFFSET INTEGER@>@/
+@=stars_option_list: stars_option_list OFFSET numeric_expression@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -2027,7 +2410,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET INTEGER'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2040,7 +2423,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET INTEGER':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET numeric_expression':"
                 << endl
                 << "`$3' == " << @=$3@> << endl;
 

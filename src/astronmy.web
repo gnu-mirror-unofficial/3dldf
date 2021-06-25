@@ -1884,11 +1884,11 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    if (DEBUG)
    { 
       if (star_str_ptr != 0 && this->*star_str_ptr != "")
-         cerr << "`this->*star_str_ptr'  == " << this->*star_str_ptr << endl
+         cerr << "`this->*star_str_ptr'  == \"" << this->*star_str_ptr << "\"" << endl
               << "`where_option.comparison_string' == " << where_option.comparison_string
               << endl;
       else 
-         cerr << "`this->*star_str_ptr' == NULL or this->*star_str_ptr == ""." << endl;
+         cerr << "`this->*star_str_ptr' == NULL or this->*star_str_ptr == \"\"." << endl;
 
       if (star_int_ptr != 0)
          cerr << "`this->*star_int_ptr'  == " << this->*star_int_ptr << endl

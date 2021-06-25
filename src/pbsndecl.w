@@ -600,6 +600,15 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     CONSTELLATION_FULL_NAME@>@/    
 @=%token <int_value>     CONSTELLATION_NAME_GENITIVE@>@/ 
 @=%token <int_value>     CONSTELLATION_NUMBER@>@/       
+@=%token <int_value>     RIGHT_ASCENSION_HOURS@>@/
+@=%token <int_value>     RIGHT_ASCENSION_MINUTES@>@/
+@=%token <int_value>     RIGHT_ASCENSION_SECONDS@>@/
+@=%token <int_value>     RIGHT_ASCENSION_DECIMAL_HOURS@>@/
+@=%token <int_value>     RIGHT_ASCENSION_DECIMAL_DEGREES@>@/
+@=%token <int_value>     DECLINATION_DEGREES@>@/
+@=%token <int_value>     DECLINATION_MINUTES@>@/
+@=%token <int_value>     DECLINATION_SECONDS@>@/
+@=%token <int_value>     DECLINATION_DECIMAL_DEGREES@>@/
 
 @=%token <pointer_value> PLANE@>@/
 
