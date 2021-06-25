@@ -715,8 +715,15 @@ Added this section.
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+equal_str(const string& s, const string& t);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 equal_str(const string& s, const string& t)
 {
@@ -732,8 +739,15 @@ equal_str(const string& s, const string& t)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+not_equal_str(const string& s, const string& t);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 not_equal_str(const string& s, const string& t)
 {
@@ -749,8 +763,15 @@ not_equal_str(const string& s, const string& t)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+less_str(const string& s, const string& t);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 less_str(const string& s, const string& t)
 {
@@ -766,8 +787,15 @@ less_str(const string& s, const string& t)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+less_or_equal_str(const string& s, const string& t);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 less_or_equal_str(const string& s, const string& t)
 {
@@ -783,8 +811,15 @@ less_or_equal_str(const string& s, const string& t)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+greater_str(const string& s, const string& t);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 greater_str(const string& s, const string& t)
 {
@@ -800,17 +835,20 @@ greater_str(const string& s, const string& t)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+greater_or_equal_str(const string& s, const string& t);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 greater_or_equal_str(const string& s, const string& t)
 {
   return s >= t;
 }
-
-@q *** (3) Predicates for |ints|.  @>
-@ Predicates for |ints|.
-\initials{LDF 2021.06.25.}
 
 @q **** (4) Equal int.  @>
 @ Equal int.  
@@ -821,8 +859,15 @@ greater_or_equal_str(const string& s, const string& t)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+equal_int(const int& i, const int& j);
+
+@q ***** (5) @>
+@
+@<Define comparison functions@>=
 bool
 equal_int(const int& i, const int& j)
 {
@@ -838,8 +883,15 @@ equal_int(const int& i, const int& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+not_equal_int(const int& i, const int& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 not_equal_int(const int& i, const int& j)
 {
@@ -855,8 +907,13 @@ not_equal_int(const int& i, const int& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+less_int(const int& i, const int& j);
+
+@<Define comparison functions@>=
 bool
 less_int(const int& i, const int& j)
 {
@@ -872,8 +929,15 @@ less_int(const int& i, const int& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+less_or_equal_int(const int& i, const int& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 less_or_equal_int(const int& i, const int& j)
 {
@@ -889,8 +953,15 @@ less_or_equal_int(const int& i, const int& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+greater_int(const int& i, const int& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 greater_int(const int& i, const int& j)
 {
@@ -906,8 +977,15 @@ greater_int(const int& i, const int& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+greater_or_equal_int(const int& i, const int& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 greater_or_equal_int(const int& i, const int& j)
 {
@@ -927,8 +1005,15 @@ greater_or_equal_int(const int& i, const int& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+equal_real(const real& i, const real& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 equal_real(const real& i, const real& j)
 {
@@ -944,8 +1029,15 @@ equal_real(const real& i, const real& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+not_equal_real(const real& i, const real& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 not_equal_real(const real& i, const real& j)
 {
@@ -961,8 +1053,15 @@ not_equal_real(const real& i, const real& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+less_real(const real& i, const real& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 less_real(const real& i, const real& j)
 {
@@ -978,8 +1077,15 @@ less_real(const real& i, const real& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+less_or_equal_real(const real& i, const real& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 less_or_equal_real(const real& i, const real& j)
 {
@@ -995,8 +1101,15 @@ less_or_equal_real(const real& i, const real& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+greater_real(const real& i, const real& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 greater_real(const real& i, const real& j)
 {
@@ -1012,8 +1125,15 @@ greater_real(const real& i, const real& j)
 Added this function.
 \ENDLOG 
 
+@q ***** (5) Declaration @>
+
 @<Declare comparison functions@>=
-inline
+bool
+greater_or_equal_real(const real& i, const real& j);
+
+@q ***** (5) Definition @>
+@
+@<Define comparison functions@>=
 bool
 greater_or_equal_real(const real& i, const real& j)
 {
@@ -1035,8 +1155,8 @@ This is what's compiled.
 \initials{LDF Undated.}
 @c
 @<Include files@>@;
-
 @q Define perspective functions@>@;
+@<Define comparison functions@>@;
 
 @ This is what's written to \filename{utility.h}.
 \initials{LDF Undated.}
