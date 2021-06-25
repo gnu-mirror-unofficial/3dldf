@@ -1153,8 +1153,8 @@ Star::show(string text, unsigned int fields) const
 
 } /* End of |Star::show| definition.  */
 
-@q *** (3) process_where_clauseShow.@> 
-@*2 process_where_clauseShow.
+@q *** (3) process_where_option.@> 
+@*2 process_where_option.
 \initials{LDF 2021.05.28.}
 
 \LOG
@@ -1166,20 +1166,20 @@ Added this function.
 
 @<Declare |Star| functions@>=
 int
-process_where_clause(Stars_Where_Option_Struct &where_option,
+process_where_option(Stars_Where_Option_Struct &where_option,
                      vector<Star*> &a_star_vector,
                      vector<Star*> &b_star_vector,
 		     Scanner_Node scanner_node = 0);
 
 @q **** (4) Definition.@> 
-@
-@<Define |Star| functions@>=
+@ 
+@<Define |Star| functions@>= 
 int
-Star::process_where_clause(Stars_Where_Option_Struct &where_option,
-                           vector<Star*> &a_star_vector,
+Star::process_where_option(Stars_Where_Option_Struct &where_option, 
+                           vector<Star*> &a_star_vector, 
                            vector<Star*> &b_star_vector,
-			   Scanner_Node scanner_node)
-{
+                           Scanner_Node scanner_node) 
+{ 
 @q ***** (5) @>
 
    using namespace Scan_Parse;
@@ -1189,7 +1189,7 @@ Star::process_where_clause(Stars_Where_Option_Struct &where_option,
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      cerr << "Entering `Star::process_where_clause'." << endl;
+      cerr << "Entering `Star::process_where_option'." << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@;    
 
@@ -1197,8 +1197,62 @@ Star::process_where_clause(Stars_Where_Option_Struct &where_option,
 @
 @<Define |Star| functions@>=
    
+   string Star::*star_str_ptr  = 0;
+   int    Star::*star_int_ptr  = 0;
+   real   Star::*star_real_ptr = 0;
 
+   cerr << "where_option.field == " << where_option.field << " == " 
+        << star_field_name_map[where_option.field] << endl;
 
+   if (where_option.field == STARS_COMMON_NAME)
+   {
+      star_str_ptr = &Star::common_name;
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+   }
+   else if (where_option.field == STARS_GREEK_NAME)
+   {
+      star_str_ptr = &Star::greek_name;
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+
+   }
+
+#if 0 
+STARS_GREEK_NAME
+STARS_LATIN_NAME
+STARS_ARABIC_NAME
+STARS_FLAMSTEED_DESIGNATION_NUMBER
+STARS_BAYER_DESIGNATION_GREEK_LETTER
+STARS_BS_HR_NUMBER
+STARS_BS_NUMBER
+STARS_HR_NUMBER
+STARS_APPROX_RANK_APPARENT_MAGNITUDE
+STARS_CONSTELLATION_ABBREVIATION
+STARS_CONSTELLATION_FULL_NAME
+STARS_CONSTELLATION_NAME_GENITIVE
+STARS_CONSTELLATION_NUMBER
+STARS_RIGHT_ASCENSION_HOURS
+STARS_RIGHT_ASCENSION_MINUTES
+STARS_RIGHT_ASCENSION_SECONDS
+STARS_RIGHT_ASCENSION_DECIMAL_HOURS
+STARS_RIGHT_ASCENSION_DECIMAL_DEGREES
+STARS_DECLINATION_DEGREES
+STARS_DECLINATION_MINUTES
+STARS_DECLINATION_SECONDS
+STARS_DECLINATION_DECIMAL_DEGREES
+STARS_RIGHT_ASCENSION
+STARS_DECLINATION
+#endif 
+
+   if (star_str_ptr != 0 && this->*star_str_ptr != "")
+      cerr << "`this->*star_str_ptr' == " << this->*star_str_ptr << endl;
+
+   if (star_int_ptr != 0)
+      cerr << "`this->*star_int_ptr' == " << this->*star_int_ptr << endl;
+
+   if (star_real_ptr != 0)
+      cerr << "`this->*star_real_ptr' == " << this->*star_real_ptr << endl;
 
 @q ***** (5) @>
 @
@@ -1207,14 +1261,14 @@ Star::process_where_clause(Stars_Where_Option_Struct &where_option,
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      cerr << "Exiting `Star::process_where_clause' successfully with return value 0." 
+      cerr << "Exiting `Star::process_where_option' successfully with return value 0." 
            << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@;    
 
    return 0;
   
-} /* End of |Star::process_where_clause| definition  */
+} /* End of |Star::process_where_option| definition  */
 
 
 @q ** (2) @>
