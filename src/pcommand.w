@@ -1159,6 +1159,78 @@ END_LOAD_ASTRONOMY:
 
 };
 
+@q **** (4) command --> PLOT STARS stars_field_list stars_option_list @>
+
+@*3 \§command> $\longrightarrow$ \.{PLOT} \.{STARS} \<stars field list> \§stars option list>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: PLOT STARS stars_field_list stars_option_list@>@/
+{
+@q ******* (7) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> PLOT STARS stars_field_list stars_option_list'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->stars_get_option_struct->fields = @=$3@>;
+
+    status = plot_stars_func(scanner_node);
+
+    if (status != 0)
+    {
+      cerr_strm << "ERROR!  In Parser: `command --> PLOT STARS stars_field_list stars_option_list':"
+                << "`Scan_Parse::plot_stars_func' failed, returning " << status << "."
+                << endl
+                << "Failed to plot `stars'.  Will try to continue."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+    }
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    { 
+      cerr_strm << "*** Parser: `command --> PLOT STARS stars_field_list stars_option_list':"
+                << "`Scan_Parse::plot_stars_func' succeeded, returning 0."
+                << endl
+                << "Plotted `stars' successfully."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    @=$$@> = static_cast<void*>(0);
+
+@q ******* (7) @>
+
+};
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
