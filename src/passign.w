@@ -4905,20 +4905,20 @@ defined in \filename{scanprse.web}.
 @<Define rules@>=
 
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
-    {
+  {
 
-   typedef Pointer_Vector<Point> PV;
+     typedef Pointer_Vector<Point> PV;
  
-   PV* pv = static_cast<PV*>(@=$3@>);
+     PV* pv = static_cast<PV*>(@=$3@>);
 
-   PV* entry_pv = static_cast<PV*>(entry->object);
+     PV* entry_pv = static_cast<PV*>(entry->object);
 
-   if (entry_pv)
-     entry_pv->clear();
+     if (entry_pv)
+       entry_pv->clear();
 
-int status = vector_type_assign<Point, Point>(static_cast<Scanner_Node>(parameter),
-                                                entry,
-                                                pv);
+     int status = vector_type_assign<Point, Point>(static_cast<Scanner_Node>(parameter),
+                                                   entry,
+                                                   pv);
 
 @q ******* (7) Error handling:                           @> 
 @q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
@@ -4953,7 +4953,7 @@ if (status != 0)
  
       }  /* |else| (|status == 0|)  */
 
-   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
+  }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 @q ****** (6).@> 
 
@@ -4994,11 +4994,11 @@ defined in \filename{scanprse.web}.
 @<Define rules@>=
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
-    {
+  {
 
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+  } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
 @q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
 
@@ -5008,7 +5008,7 @@ defined in \filename{scanprse.web}.
 @<Define rules@>=
 
   else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
-    {
+  {
 
    typedef Pointer_Vector<Point> PV;
    typedef Pointer_Vector<Bool_Point> BPV;
@@ -5050,14 +5050,14 @@ if (status != 0)
 @<Define rules@>=
 
    else /* |status == 0|  */
-      {
-         delete bpv;
+   {
+      delete bpv;
 
-         @=$$@> = static_cast<void*>(entry->object); 
+      @=$$@> = static_cast<void*>(entry->object); 
  
-      }  /* |else| (|status == 0|)  */
+   }  /* |else| (|status == 0|)  */
 
-   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
+  }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
 
 @q ****** (6).@> 
 
