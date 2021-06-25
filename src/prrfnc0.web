@@ -7221,7 +7221,7 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 @
 @<Define parser rule functions@>= 
 
-  bool DEBUG = true; /* |false| */@;  
+  bool DEBUG = false; /* |true| */@;  
 
   bool SAVE_DEBUG;
 
@@ -7398,7 +7398,6 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ***** (5) @>
 
-
    SAVE_DEBUG = DEBUG;
 
 /* !!START HERE  \initials{LDF 2021.06.25.}  Look into putting some of the following code into a function.
@@ -7464,12 +7463,12 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 /* !!START HERE  Put in calls to function.  Code in btemp.web.  */ 
 
-            status = (*iter)->process_where_clause(*w_iter, a_star_vector, b_star_vector, scanner_node);
+            status = (*iter)->process_where_option(*w_iter, a_star_vector, b_star_vector, scanner_node);
 
             if (status != 0)
             {
                cerr << "ERROR!  In `Scan_Parse::get_stars_func':" << endl 
-                    << "`Star::process_where_clause' failed, returning " << status << "."
+                    << "`Star::process_where_option' failed, returning " << status << "."
                     << endl 
                     << "Failed to process \"where\" clause."
                     << "Will try to continue."
@@ -7479,7 +7478,7 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
             else if (DEBUG)
             { 
                cerr << "In `Scan_Parse::get_stars_func':" << endl 
-                    << "`Star::process_where_clause' succeeded, returning 0."
+                    << "`Star::process_where_option' succeeded, returning 0."
                     << endl;
             }          
 #endif /* |DEBUG_COMPILE|  */@; 
