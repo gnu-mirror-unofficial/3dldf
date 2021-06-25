@@ -1226,10 +1226,11 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
 @q ***** (5) @>
 @
 @<Define |Star| functions@>=
+
+@q ****** (6) @>
 
    if (where_option.field == STARS_COMMON_NAME)
    {
@@ -1253,6 +1254,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_GREEK_NAME)
    {
 #if DEBUG_COMPILE
@@ -1269,6 +1273,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_LATIN_NAME)
    {
 #if DEBUG_COMPILE
@@ -1285,6 +1292,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_ARABIC_NAME)
    {
 #if DEBUG_COMPILE
@@ -1301,6 +1311,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_FLAMSTEED_DESIGNATION_NUMBER)
    {
 #if DEBUG_COMPILE
@@ -1316,7 +1329,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::flamsteed_designation_number;
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_BAYER_DESIGNATION_GREEK_LETTER)
    {
 #if DEBUG_COMPILE
@@ -1333,22 +1366,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
-   else if (where_option.field == STARS_BS_HR_NUMBER)
-   {
-#if DEBUG_COMPILE
-      if (DEBUG)
-      { 
-          cerr << "where_option.field == STARS_BS_HR_NUMBER." << endl
-               << "Setting `star_int_ptr' to `&Star::bs_hr_number'."
-               << endl;
-      }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
-      star_str_ptr  = 0; 
-      star_int_ptr  = &Star::bs_hr_number;
-      star_real_ptr = 0;
+@q ****** (6) @>
 
-   }
    else if (   where_option.field == STARS_BS_HR_NUMBER 
             || where_option.field == STARS_BS_NUMBER 
             || where_option.field == STARS_HR_NUMBER)   
@@ -1367,7 +1387,28 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::bs_hr_number; 
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
+
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_APPROX_RANK_APPARENT_MAGNITUDE)
    {
 #if DEBUG_COMPILE
@@ -1383,7 +1424,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::approx_rank_apparent_magnitude;
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_CONSTELLATION_ABBREVIATION)
    {
 #if DEBUG_COMPILE
@@ -1400,6 +1461,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_CONSTELLATION_FULL_NAME)
    {
 #if DEBUG_COMPILE
@@ -1416,6 +1480,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_CONSTELLATION_NAME_GENITIVE)
    {
 #if DEBUG_COMPILE
@@ -1432,6 +1499,9 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_real_ptr = 0;
 
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_CONSTELLATION_NUMBER)
    {
 #if DEBUG_COMPILE
@@ -1446,7 +1516,28 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::constellation_number;
       star_real_ptr = 0;
+
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_RIGHT_ASCENSION_HOURS)
    {
 #if DEBUG_COMPILE
@@ -1462,7 +1553,28 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::right_ascension_hours;
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
+
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_RIGHT_ASCENSION_MINUTES)
    {
 #if DEBUG_COMPILE
@@ -1478,7 +1590,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::right_ascension_minutes;
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_RIGHT_ASCENSION_SECONDS)
    {
 #if DEBUG_COMPILE
@@ -1494,7 +1626,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = 0;
       star_real_ptr = &Star::right_ascension_seconds;
 
+      if (where_option.int_value != 0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
+                  << endl
+                  << "Casting `where_option.int_value' to `real' and assigning it to" 
+                  << endl 
+                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.real_value  = static_cast<real>(where_option.int_value);
+         where_option.int_value = 0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (   where_option.field == STARS_RIGHT_ASCENSION_DECIMAL_HOURS
             || where_option.field == STARS_RIGHT_ASCENSION)
    {
@@ -1511,7 +1663,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = 0;
       star_real_ptr = &Star::right_ascension_decimal_hours;
 
+      if (where_option.int_value != 0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
+                  << endl
+                  << "Casting `where_option.int_value' to `real' and assigning it to" 
+                  << endl 
+                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.real_value  = static_cast<real>(where_option.int_value);
+         where_option.int_value = 0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_RIGHT_ASCENSION_DECIMAL_DEGREES)
    {
 #if DEBUG_COMPILE
@@ -1527,7 +1699,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = 0;
       star_real_ptr = &Star::right_ascension_decimal_degrees;
 
+      if (where_option.int_value != 0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
+                  << endl
+                  << "Casting `where_option.int_value' to `real' and assigning it to" 
+                  << endl 
+                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.real_value  = static_cast<real>(where_option.int_value);
+         where_option.int_value = 0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_DECLINATION_DEGREES)
    {
 #if DEBUG_COMPILE
@@ -1543,7 +1735,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::declination_degrees;
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_DECLINATION_MINUTES)
    {
 #if DEBUG_COMPILE
@@ -1559,7 +1771,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = &Star::declination_minutes;
       star_real_ptr = 0;
 
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_DECLINATION_SECONDS)
    {
 #if DEBUG_COMPILE
@@ -1575,7 +1807,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_int_ptr  = 0;
       star_real_ptr = &Star::declination_seconds;
 
+      if (where_option.int_value != 0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
+                  << endl
+                  << "Casting `where_option.int_value' to `real' and assigning it to" 
+                  << endl 
+                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.real_value  = static_cast<real>(where_option.int_value);
+         where_option.int_value = 0;
+      }
    }
+
+@q ****** (6) @>
+
    else if (   where_option.field == STARS_DECLINATION_DECIMAL_DEGREES
             || where_option.field == STARS_DECLINATION)
    {  
@@ -1591,8 +1843,27 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::declination_decimal_degrees;
-
+      if (where_option.int_value != 0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
+                  << endl
+                  << "Casting `where_option.int_value' to `real' and assigning it to" 
+                  << endl 
+                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.real_value  = static_cast<real>(where_option.int_value);
+         where_option.int_value = 0;
+      }
    }
+
+@q ****** (6) @>
+
    else
    {
        cerr << "ERROR!  In `Star::process_where_option':"
@@ -1604,6 +1875,10 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
        return 1;
    }
+
+@q ****** (6) @>
+
+@q ***** (5) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1632,6 +1907,8 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 @q ***** (5) @>
 @
 @<Define |Star| functions@>=
+
+/* !!START HERE  Change the nesting.  Put the relations on the outside.  \initials{LDF 2021.06.25.}  */ 
 
     if (star_str_ptr != 0)
     {
