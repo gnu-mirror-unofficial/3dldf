@@ -682,7 +682,7 @@ abbrev.shift(0, -.4);
 abbrev.label(picture, "r:\\space\\space\\space", "lft");
 abbrev.label(picture, "right", "rt");
 
-@q *** Output.@>
+@q *** (3)Output.@>
 @ Output.
 
 \LOG
@@ -691,6 +691,333 @@ abbrev.label(picture, "right", "rt");
 
 @<Define perspective functions@>=
   current_picture->output(s, ffocus, Projections::parallel_x_y);
+}
+
+@q ** (2) Predicates.  @>
+@ Predicates.
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this section.
+\ENDLOG 
+
+@q *** (3) Predicates for |strings|.  @>
+@ Predicates for |strings|.
+\initials{LDF 2021.06.25.}
+
+@q **** (4) Equal string.  @>
+@ Equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+equal_str(const string& s, const string& t)
+{
+  return s == t;
+}
+
+@q **** (4) Not equal string.  @>
+@ Not equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+not_equal_str(const string& s, const string& t)
+{
+  return s != t;
+}
+
+@q **** (4) Less string.  @>
+@ Less string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+less_str(const string& s, const string& t)
+{
+  return s < t;
+}
+
+@q **** (4) Less or equal string.  @>
+@ Less or equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+less_or_equal_str(const string& s, const string& t)
+{
+  return s <= t;
+}
+
+@q **** (4) Greater string.  @>
+@ Greater string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+greater_str(const string& s, const string& t)
+{
+  return s > t;
+}
+
+@q **** (4) Greater or equal string.  @>
+@ Greater or equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+greater_or_equal_str(const string& s, const string& t)
+{
+  return s >= t;
+}
+
+@q *** (3) Predicates for |ints|.  @>
+@ Predicates for |ints|.
+\initials{LDF 2021.06.25.}
+
+@q **** (4) Equal int.  @>
+@ Equal int.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+equal_int(const int& i, const int& j)
+{
+  return i == j;
+}
+
+@q **** (4) Not equal int.  @>
+@ Not equal int.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+not_equal_int(const int& i, const int& j)
+{
+  return i != j;
+}
+
+@q **** (4) Less int.  @>
+@ Less int.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+less_int(const int& i, const int& j)
+{
+  return i < j;
+}
+
+@q **** (4) Less or equal int.  @>
+@ Less or equal int.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+less_or_equal_int(const int& i, const int& j)
+{
+  return i <= j;
+}
+
+@q **** (4) Greater int.  @>
+@ Greater int.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+greater_int(const int& i, const int& j)
+{
+  return i > j;
+}
+
+@q **** (4) Greater or equal int.  @>
+@ Greater or equal int.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+greater_or_equal_int(const int& i, const int& j)
+{
+  return i >= j;
+}
+
+@q *** (3) Predicates for |reals|.  @>
+@ Predicates for |reals|.
+\initials{LDF 2021.06.25.}
+
+@q **** (4) Equal real.  @>
+@ Equal real.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+equal_real(const real& i, const real& j)
+{
+  return i == j;
+}
+
+@q **** (4) Not equal real.  @>
+@ Not equal real.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+not_equal_real(const real& i, const real& j)
+{
+  return i != j;
+}
+
+@q **** (4) Less real.  @>
+@ Less real.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+less_real(const real& i, const real& j)
+{
+  return i < j;
+}
+
+@q **** (4) Less or equal real.  @>
+@ Less or equal real.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+less_or_equal_real(const real& i, const real& j)
+{
+  return i <= j;
+}
+
+@q **** (4) Greater real.  @>
+@ Greater real.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+greater_real(const real& i, const real& j)
+{
+  return i > j;
+}
+
+@q **** (4) Greater or equal real.  @>
+@ Greater or equal real.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare comparison functions@>=
+inline
+bool
+greater_or_equal_real(const real& i, const real& j)
+{
+  return i >= j;
 }
 
 @q * (1) Putting utilities together.@>
@@ -716,6 +1043,7 @@ This is what's compiled.
 
 @(utility.h@>=
 @q Declare perspective functions@>@;
+@<Declare comparison functions@>@;
 
 @q Local Variables: @>
 @q mode:CWEB @>
