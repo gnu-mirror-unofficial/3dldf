@@ -1613,6 +1613,180 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 @
 @<Define |Star| functions@>=
 
+
+    bool (*fp) (const string&, const string&);
+    fp = 0;
+
+#if 0
+bool operator== 
+#endif 
+
+    if (star_str_ptr != 0)
+    {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "`star_str_ptr' != 0" << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+@q ****** (6) @>
+
+       if (where_option.relation == EQUAL)
+       {
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == EQUAL" << endl
+                   << "Setting `fp = equal_str'." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp = equal_str;
+
+       }
+
+@q ****** (6) @>
+
+       else if (where_option.relation == NOT_EQUAL)
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == NOT_EQUAL" << endl
+                   << "Setting `fp = '." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp = not_equal_str;
+
+       }
+
+@q ****** (6) @>
+
+       else if (where_option.relation == LESS)
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == LESS" << endl
+                   << "Setting `fp = '." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp = less_str;
+
+       }
+
+@q ****** (6) @>
+
+       else if (where_option.relation == LESS_OR_EQUAL)
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == LESS_OR_EQUAL" << endl
+                   << "Setting `fp = '." << endl;
+
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp = less_or_equal_str;
+
+       }
+
+@q ****** (6) @>
+
+       else if (where_option.relation == GREATER)
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == GREATER" << endl
+                   << "Setting `fp = '." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp = greater_str;
+
+       }
+
+@q ****** (6) @>
+
+       else if (where_option.relation == GREATER_OR_EQUAL)
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`where_option.relation' == GREATER_OR_EQUAL" << endl
+                   << "Setting `fp = '." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@;         
+
+           fp = greater_or_equal_str;
+
+       }
+
+@q ****** (6) @>
+
+    }  /* |if (star_str_ptr != 0)|  */
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+    else if (this->*star_int_ptr != 0)
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "`this->*star_int_ptr' != 0" << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+    }  /* |else if (this->*star_int_ptr != 0)|  */
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+    else if (this->*star_real_ptr != 0)
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "`this->*star_real_ptr' != 0" << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+    }  /* |else if (this->*star_real_ptr != 0)|  */
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+    else 
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "In `Star::process_where_option':" << endl 
+               << "`this->*star_str_ptr', `this->*star_int_ptr' and `this->*star_real_ptr' "
+               << "are all == NULL." << endl
+               << "Not comparing anything." << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+    }  /* |else if (this->*star_real_ptr != 0)|  */
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
+
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
@@ -1625,6 +1799,107 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
   
 } /* End of |Star::process_where_option| definition  */
 
+@q *** (3) Equal string.  @>
+@ Equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Star| functions@>=
+static
+bool
+equal_str(const string& s, const string& t)
+{
+  return s == t;
+}
+
+@q *** (3) Not equal string.  @>
+@ Not equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Star| functions@>=
+static
+bool
+not_equal_str(const string& s, const string& t)
+{
+  return s != t;
+}
+
+@q *** (3) Less string.  @>
+@ Less string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Star| functions@>=
+static
+bool
+less_str(const string& s, const string& t)
+{
+  return s < t;
+}
+
+@q *** (3) Less or equal string.  @>
+@ Less or equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Star| functions@>=
+static
+bool
+less_or_equal_str(const string& s, const string& t)
+{
+  return s <= t;
+}
+
+@q *** (3) Greater string.  @>
+@ Greater string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Star| functions@>=
+static
+bool
+greater_str(const string& s, const string& t)
+{
+  return s > t;
+}
+
+@q *** (3) Greater or equal string.  @>
+@ Greater or equal string.  
+\initials{LDF 2021.06.25.}
+
+\LOG
+\initials{LDF 2021.06.25.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Star| functions@>=
+static
+bool
+greater_or_equal_str(const string& s, const string& t)
+{
+  return s >= t;
+}
 
 @q ** (2) @>
 
