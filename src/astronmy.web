@@ -1201,8 +1201,19 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    int    Star::*star_int_ptr  = 0;
    real   Star::*star_real_ptr = 0;
 
-   cerr << "where_option.field == " << where_option.field << " == " 
-        << star_field_name_map[where_option.field] << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "where_option.field == " << where_option.field << " == " 
+           << star_field_name_map[where_option.field] << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q ***** (5) @>
+@
+@<Define |Star| functions@>=
 
    if (where_option.field == STARS_COMMON_NAME)
    {
@@ -1212,47 +1223,391 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    }
    else if (where_option.field == STARS_GREEK_NAME)
    {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_GREEK_NAME." << endl
+               << "Setting `star_str_ptr' to `&Star::greek_name'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
       star_str_ptr = &Star::greek_name;
       star_int_ptr  = 0;
       star_real_ptr = 0;
 
    }
+   else if (where_option.field == STARS_GREEK_NAME)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_GREEK_NAME." << endl
+               << "Setting `star_str_ptr' to `&Star::greek_name'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-#if 0 
-STARS_GREEK_NAME
-STARS_LATIN_NAME
-STARS_ARABIC_NAME
-STARS_FLAMSTEED_DESIGNATION_NUMBER
-STARS_BAYER_DESIGNATION_GREEK_LETTER
-STARS_BS_HR_NUMBER
-STARS_BS_NUMBER
-STARS_HR_NUMBER
-STARS_APPROX_RANK_APPARENT_MAGNITUDE
-STARS_CONSTELLATION_ABBREVIATION
-STARS_CONSTELLATION_FULL_NAME
-STARS_CONSTELLATION_NAME_GENITIVE
-STARS_CONSTELLATION_NUMBER
-STARS_RIGHT_ASCENSION_HOURS
-STARS_RIGHT_ASCENSION_MINUTES
-STARS_RIGHT_ASCENSION_SECONDS
-STARS_RIGHT_ASCENSION_DECIMAL_HOURS
-STARS_RIGHT_ASCENSION_DECIMAL_DEGREES
-STARS_DECLINATION_DEGREES
-STARS_DECLINATION_MINUTES
-STARS_DECLINATION_SECONDS
-STARS_DECLINATION_DECIMAL_DEGREES
-STARS_RIGHT_ASCENSION
-STARS_DECLINATION
-#endif 
+      star_str_ptr  = &Star::greek_name; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
 
-   if (star_str_ptr != 0 && this->*star_str_ptr != "")
-      cerr << "`this->*star_str_ptr' == " << this->*star_str_ptr << endl;
+   }
+   else if (where_option.field == STARS_LATIN_NAME)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_LATIN_NAME." << endl
+               << "Setting `star_str_ptr' to `&Star::latin_name'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-   if (star_int_ptr != 0)
-      cerr << "`this->*star_int_ptr' == " << this->*star_int_ptr << endl;
+      star_str_ptr  = &Star::latin_name; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
 
-   if (star_real_ptr != 0)
-      cerr << "`this->*star_real_ptr' == " << this->*star_real_ptr << endl;
+   }
+   else if (where_option.field == STARS_ARABIC_NAME)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_ARABIC_NAME." << endl
+               << "Setting `star_str_ptr' to `&Star::arabic_name'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = &Star::arabic_name; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_FLAMSTEED_DESIGNATION_NUMBER)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_FLAMSTEED_DESIGNATION_NUMBER." << endl
+               << "Setting `star_int_ptr' to `&Star::flamsteed_designation_number'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::flamsteed_designation_number;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_BAYER_DESIGNATION_GREEK_LETTER)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_BAYER_DESIGNATION_GREEK_LETTER." << endl
+               << "Setting `star_str_ptr' to `&Star::bayer_designation_greek_letter'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = &Star::bayer_designation_greek_letter; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_BS_HR_NUMBER)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_BS_HR_NUMBER." << endl
+               << "Setting `star_int_ptr' to `&Star::bs_hr_number'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::bs_hr_number;
+      star_real_ptr = 0;
+
+   }
+   else if (   where_option.field == STARS_BS_HR_NUMBER 
+            || where_option.field == STARS_BS_NUMBER 
+            || where_option.field == STARS_HR_NUMBER)   
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_BS_HR_NUMBER or STARS_BS_NUMBER or STARS_HR_NUMBER." 
+               << endl
+               << "Setting `star_int_ptr' to `&Star::bs_hr_number'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0;
+      star_int_ptr  = &Star::bs_hr_number; 
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_APPROX_RANK_APPARENT_MAGNITUDE)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_APPROX_RANK_APPARENT_MAGNITUDE." << endl
+               << "Setting `star_int_ptr' to `&Star::approx_rank_apparent_magnitude'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::approx_rank_apparent_magnitude;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_CONSTELLATION_ABBREVIATION)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_CONSTELLATION_ABBREVIATION." << endl
+               << "Setting `star_str_ptr' to `&Star::constellation_abbreviation'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = &Star::constellation_abbreviation; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_CONSTELLATION_FULL_NAME)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_CONSTELLATION_FULL_NAME." << endl
+               << "Setting `star_str_ptr' to `&Star::constellation_full_name'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = &Star::constellation_full_name; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_CONSTELLATION_NAME_GENITIVE)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_CONSTELLATION_NAME_GENITIVE." << endl
+               << "Setting `star_str_ptr' to `&Star::constellation_name_genitive'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = &Star::constellation_name_genitive; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_CONSTELLATION_NUMBER)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_CONSTELLATION_NUMBER." << endl
+               << "Setting `star_int_ptr' to `&Star::constellation_number'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::constellation_number;
+      star_real_ptr = 0;
+   }
+   else if (where_option.field == STARS_RIGHT_ASCENSION_HOURS)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_RIGHT_ASCENSION_HOURS." << endl
+               << "Setting `star_int_ptr' to `&Star::right_ascension_hours'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::right_ascension_hours;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_RIGHT_ASCENSION_MINUTES)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_RIGHT_ASCENSION_MINUTES." << endl
+               << "Setting `star_int_ptr' to `&Star::right_ascension_minutes'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::right_ascension_minutes;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_RIGHT_ASCENSION_SECONDS)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_RIGHT_ASCENSION_SECONDS." << endl
+               << "Setting `star_real_ptr' to `&Star::right_ascension_seconds'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = &Star::right_ascension_seconds;
+
+   }
+   else if (   where_option.field == STARS_RIGHT_ASCENSION_DECIMAL_HOURS
+            || where_option.field == STARS_RIGHT_ASCENSION)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_RIGHT_ASCENSION or STARS_RIGHT_ASCENSION." << endl
+               << "Setting `star_real_ptr' to `&Star::right_ascension_decimal_hours'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = &Star::right_ascension_decimal_hours;
+
+   }
+   else if (where_option.field == STARS_RIGHT_ASCENSION_DECIMAL_DEGREES)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_RIGHT_ASCENSION_DECIMAL_DEGREES." << endl
+               << "Setting `star_real_ptr' to `&Star::right_ascension_decimal_degrees'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = &Star::right_ascension_decimal_degrees;
+
+   }
+   else if (where_option.field == STARS_DECLINATION_DEGREES)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_DECLINATION_DEGREES." << endl
+               << "Setting `star_int_ptr' to `&Star::declination_degrees'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::declination_degrees;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_DECLINATION_MINUTES)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_DECLINATION_MINUTES." << endl
+               << "Setting `star_int_ptr' to `&Star::declination_minutes'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::declination_minutes;
+      star_real_ptr = 0;
+
+   }
+   else if (where_option.field == STARS_DECLINATION_SECONDS)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_DECLINATION_SECONDS." << endl
+               << "Setting `star_real_ptr' to `&Star::declination_seconds'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = &Star::declination_seconds;
+
+   }
+   else if (   where_option.field == STARS_DECLINATION_DECIMAL_DEGREES
+            || where_option.field == STARS_DECLINATION)
+   {  
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_DECLINATION or STARS_DECLINATION." << endl
+               << "Setting `star_real_ptr' to `&Star::declination_decimal_degrees'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = &Star::declination_decimal_degrees;
+
+   }
+   else
+   {
+       cerr << "ERROR!  In `Star::process_where_option':"
+            << "`where_option.field' has an invalid value:  " 
+            << where_option.field << "." << endl
+            << "Can't process \"where option\"." << endl
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+   }
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      if (star_str_ptr != 0 && this->*star_str_ptr != "")
+         cerr << "`this->*star_str_ptr'  == " << this->*star_str_ptr << endl;
+      else 
+         cerr << "`this->*star_str_ptr'  == NULL." << endl;
+
+      if (star_int_ptr != 0)
+         cerr << "`this->*star_int_ptr'  == " << this->*star_int_ptr << endl;
+      else 
+         cerr << "`this->*star_int_ptr'  == NULL." << endl;
+
+      if (star_real_ptr != 0)
+         cerr << "`this->*star_real_ptr' == " << this->*star_real_ptr << endl;
+      else 
+         cerr << "`this->*star_real_ptr' == NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
 @
