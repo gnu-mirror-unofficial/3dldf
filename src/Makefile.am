@@ -952,7 +952,7 @@ triangle.o: triangle.c++ triangle.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          planes.h++ nurbs.h++ paths.h++ polygons.h++ triangle.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
-utility.o: utility.c++ utility.h++ .h++ pspglb.h++ io.h++ gsltmplt.h++ \
+utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                        planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \

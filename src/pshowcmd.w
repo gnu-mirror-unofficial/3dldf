@@ -1805,9 +1805,11 @@ Added this rule.
 
     scanner_node->stars_get_option_struct->where_options.back().conjunction = @=$2@>;
 
+#if 1 /* 0   */
     scanner_node->stars_get_option_struct->where_options.back().show(
       "scanner_node->stars_get_option_struct->where_options.back():");
-  
+#endif 
+
    @=$$@> = 0;
 };
 

@@ -228,10 +228,11 @@ Added this section.
 
 struct Stars_Where_Option_Struct
 {
-   int conjunction;
-   int field;
-   int relation;
-   int value;
+   int  conjunction;
+   int  field;
+   int  relation;
+   int  int_value;
+   real real_value;
    string comparison_string;
 
    Stars_Where_Option_Struct(void)
@@ -239,7 +240,8 @@ struct Stars_Where_Option_Struct
       conjunction       = 0;  
       field             = 0;
       relation          = 0;
-      value             = 0;
+      int_value         = 0;
+      real_value        = 0.0;
       comparison_string = "";
    }
    ~Stars_Where_Option_Struct(void)
@@ -255,7 +257,8 @@ struct Stars_Where_Option_Struct
       conjunction       = w.conjunction;
       field             = w.field;            
       relation          = w.relation;         
-      value             = w.value;            
+      int_value         = w.int_value;            
+      real_value        = w.real_value;            
       comparison_string = w.comparison_string;
       return;
    }
@@ -368,11 +371,13 @@ Stars_Where_Option_Struct::show(string s)
    else 
       cerr << " WARNING!  Unknown field." << endl;
 
-   cerr << "relation          == " << relation << " == " << name_map[relation] << endl
-        << "value             == " << value << endl
-        << "comparison_string == \"" << comparison_string << "\"" << endl 
+   cerr << "relation          == "   << relation << " == " << name_map[relation] << endl
+        << "int_value         == "   << int_value << endl
+        << "real_value        == "   << real_value << endl
+        << "comparison_string == \"" << comparison_string << "\""
         << endl;
-}
+
+} /* End of |Stars_Where_Option_Struct::show| definition */
 
 @q ** (2) |struct Stars_Get_Option_Struct| declaration.@>
 @*1 |struct Stars_Get_Option_Struct| declaration.
@@ -1201,6 +1206,17 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    int    Star::*star_int_ptr  = 0;
    real   Star::*star_real_ptr = 0;
 
+   int status = 0;
+
+   bool (*fp_str) (const string&, const string&);
+   fp_str = 0;
+
+   bool (*fp_int) (const int&, const int&);
+   fp_int = 0;
+
+   bool (*fp_real) (const real&, const real&);
+   fp_real = 0;
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
@@ -1593,17 +1609,21 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    if (DEBUG)
    { 
       if (star_str_ptr != 0 && this->*star_str_ptr != "")
-         cerr << "`this->*star_str_ptr'  == " << this->*star_str_ptr << endl;
+         cerr << "`this->*star_str_ptr'  == " << this->*star_str_ptr << endl
+              << "`where_option.comparison_string' == " << where_option.comparison_string
+              << endl;
       else 
-         cerr << "`this->*star_str_ptr'  == NULL." << endl;
+         cerr << "`this->*star_str_ptr' == NULL or this->*star_str_ptr == ""." << endl;
 
       if (star_int_ptr != 0)
-         cerr << "`this->*star_int_ptr'  == " << this->*star_int_ptr << endl;
+         cerr << "`this->*star_int_ptr'  == " << this->*star_int_ptr << endl
+              << "`where_option.int_value' == " << where_option.int_value;
       else 
          cerr << "`this->*star_int_ptr'  == NULL." << endl;
 
       if (star_real_ptr != 0)
-         cerr << "`this->*star_real_ptr' == " << this->*star_real_ptr << endl;
+         cerr << "`this->*star_real_ptr' == " << this->*star_real_ptr << endl
+              << "`where_option.real_value' == " << where_option.real_value;
       else 
          cerr << "`this->*star_real_ptr' == NULL." << endl;
       }  
@@ -1612,14 +1632,6 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 @q ***** (5) @>
 @
 @<Define |Star| functions@>=
-
-
-    bool (*fp) (const string&, const string&);
-    fp = 0;
-
-#if 0
-bool operator== 
-#endif 
 
     if (star_str_ptr != 0)
     {
@@ -1641,11 +1653,11 @@ bool operator==
            if (DEBUG)
            { 
               cerr << "`where_option.relation' == EQUAL" << endl
-                   << "Setting `fp = equal_str'." << endl;
+                   << "Setting `fp_str = equal_str'." << endl;
            }     
 #endif /* |DEBUG_COMPILE|  */@;         
 
-           fp = equal_str;
+           fp_str = equal_str;
 
        }
 
@@ -1657,11 +1669,11 @@ bool operator==
            if (DEBUG)
            { 
               cerr << "`where_option.relation' == NOT_EQUAL" << endl
-                   << "Setting `fp = '." << endl;
+                   << "Setting `fp_str = not_equal_str'." << endl;
            }     
 #endif /* |DEBUG_COMPILE|  */@;         
 
-           fp = not_equal_str;
+           fp_str = not_equal_str;
 
        }
 
@@ -1673,11 +1685,11 @@ bool operator==
            if (DEBUG)
            { 
               cerr << "`where_option.relation' == LESS" << endl
-                   << "Setting `fp = '." << endl;
+                   << "Setting `fp_str = less_str'." << endl;
            }     
 #endif /* |DEBUG_COMPILE|  */@;         
 
-           fp = less_str;
+           fp_str = less_str;
 
        }
 
@@ -1689,12 +1701,12 @@ bool operator==
            if (DEBUG)
            { 
               cerr << "`where_option.relation' == LESS_OR_EQUAL" << endl
-                   << "Setting `fp = '." << endl;
+                   << "Setting `fp_str = less_or_equal_str'." << endl;
 
            }     
 #endif /* |DEBUG_COMPILE|  */@;         
 
-           fp = less_or_equal_str;
+           fp_str = less_or_equal_str;
 
        }
 
@@ -1706,11 +1718,11 @@ bool operator==
            if (DEBUG)
            { 
               cerr << "`where_option.relation' == GREATER" << endl
-                   << "Setting `fp = '." << endl;
+                   << "Setting `fp_str = greater_str'." << endl;
            }     
 #endif /* |DEBUG_COMPILE|  */@;         
 
-           fp = greater_str;
+           fp_str = greater_str;
 
        }
 
@@ -1722,11 +1734,103 @@ bool operator==
            if (DEBUG)
            { 
               cerr << "`where_option.relation' == GREATER_OR_EQUAL" << endl
-                   << "Setting `fp = '." << endl;
+                   << "Setting `fp_str = greater_or_equal_str'." << endl;
            }     
 #endif /* |DEBUG_COMPILE|  */@;         
 
-           fp = greater_or_equal_str;
+           fp_str = greater_or_equal_str;
+
+       }
+
+@q ****** (6) @>
+@
+@<Define |Star| functions@>=
+
+       if (fp_str(this->*star_str_ptr, where_option.comparison_string) == true)
+       {
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr << "`fp_str(this->*star_str_ptr, where_option.comparison_string)' returned `true'."
+                   << endl;
+           }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+           if (where_option.conjunction == 0 || where_option.conjunction == AND)
+           {
+#if DEBUG_COMPILE
+              if (DEBUG)
+              { 
+                 cerr << "where_option.conjunction == 0 || where_option.conjunction == AND" << endl
+                      << "Pushing `this' onto `a_star_vector'."
+                      << endl;
+
+              }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+              a_star_vector.push_back(this);
+           }
+
+@q ******* (7) @>
+
+           else if (where_option.conjunction == OR)
+           {
+#if DEBUG_COMPILE
+              if (DEBUG)
+              { 
+                 cerr << "where_option.conjunction == OR" << endl
+                      << "Pushing `this' onto `b_star_vector'."
+                      << endl;
+              }            
+#endif /* |DEBUG_COMPILE|  */@; 
+
+               b_star_vector.push_back(this);
+           }
+
+@q ******* (7) @>
+
+           else
+           {
+                 cerr << "WARNING!  In `Star::process_where_option':"
+                      << endl 
+                      << "`where_option.conjunction' has invalid value:  "
+                      << where_option.conjunction << endl 
+                      << "`name_map[where_option.conjunction]' == \"" 
+                      << name_map[where_option.conjunction] << "\""
+                      << endl 
+                      << "This case is either invalid or hasn't been accounted for."
+                      << endl
+                      << "Not pushing `this' onto `a_star_vector' or `b_star_vector'."
+                      << endl
+                      << "Continuing."
+                      << endl;
+
+           }
+
+@q ******* (7) @>
+
+       }  /* |if (fp_str(this->*star_str_ptr, where_option.comparison_string) == true)|  */
+
+@q ****** (6) @>
+     
+       else
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+               cerr << "`fp_str(this->*star_str_ptr, where_option.comparison_string)' returned `false'."
+                    << endl 
+                    << "Not pushing `this' onto `a_star_vector' or `b_star_vector'."
+                    << endl
+                    << "Continuing."
+                    << endl;
+ 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
        }
 
@@ -1798,108 +1902,6 @@ bool operator==
    return 0;
   
 } /* End of |Star::process_where_option| definition  */
-
-@q *** (3) Equal string.  @>
-@ Equal string.  
-\initials{LDF 2021.06.25.}
-
-\LOG
-\initials{LDF 2021.06.25.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Star| functions@>=
-static
-bool
-equal_str(const string& s, const string& t)
-{
-  return s == t;
-}
-
-@q *** (3) Not equal string.  @>
-@ Not equal string.  
-\initials{LDF 2021.06.25.}
-
-\LOG
-\initials{LDF 2021.06.25.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Star| functions@>=
-static
-bool
-not_equal_str(const string& s, const string& t)
-{
-  return s != t;
-}
-
-@q *** (3) Less string.  @>
-@ Less string.  
-\initials{LDF 2021.06.25.}
-
-\LOG
-\initials{LDF 2021.06.25.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Star| functions@>=
-static
-bool
-less_str(const string& s, const string& t)
-{
-  return s < t;
-}
-
-@q *** (3) Less or equal string.  @>
-@ Less or equal string.  
-\initials{LDF 2021.06.25.}
-
-\LOG
-\initials{LDF 2021.06.25.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Star| functions@>=
-static
-bool
-less_or_equal_str(const string& s, const string& t)
-{
-  return s <= t;
-}
-
-@q *** (3) Greater string.  @>
-@ Greater string.  
-\initials{LDF 2021.06.25.}
-
-\LOG
-\initials{LDF 2021.06.25.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Star| functions@>=
-static
-bool
-greater_str(const string& s, const string& t)
-{
-  return s > t;
-}
-
-@q *** (3) Greater or equal string.  @>
-@ Greater or equal string.  
-\initials{LDF 2021.06.25.}
-
-\LOG
-\initials{LDF 2021.06.25.}
-Added this function.
-\ENDLOG 
-
-@<Declare |Star| functions@>=
-static
-bool
-greater_or_equal_str(const string& s, const string& t)
-{
-  return s >= t;
-}
 
 @q ** (2) @>
 
