@@ -132,6 +132,20 @@ main(int argc, char *argv[])
 
    unsigned int mysql_timeout = 120;
 
+   string where_str = "";
+
+   if (argc > 1)
+   {
+       cerr << "argv[1] == " << argv[1] << endl;
+       
+       where_str = argv[1];
+
+       cerr << "where_str == " << where_str << endl;
+
+   }
+   else 
+      cerr << "argc == " << argc << " (<= 1)" << endl;
+ 
    mysql = mysql_init(0);
 
     if (mysql != 0) 
@@ -186,8 +200,12 @@ main(int argc, char *argv[])
             << "right_ascension_hours, right_ascension_minutes, "
             << "right_ascension_seconds, right_ascension_decimal_hours, "
             << "declination_degrees, declination_minutes, declination_seconds, "
-            << "declination_decimal_degrees from Stars "
-            << "order by bs_hr_number;";
+            << "declination_decimal_degrees from Stars ";
+
+   if (where_str != "")
+      sql_strm << "where " << where_str << " ";
+
+   sql_strm << "order by bs_hr_number";
 
       cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
 
@@ -330,9 +348,27 @@ main(int argc, char *argv[])
 
    cerr << "star_vector.size() == " << star_vector.size() << endl;
 
-   star_vector[0]->show("star_vector[0]:");
+   if (star_vector.size() > 0)
+      cerr << "star_vector:" << endl;
 
-#if 0 /* 1 */
+   stringstream s;
+   int i = 1;
+
+   for (vector<Star*>::iterator iter = star_vector.begin();
+        iter != star_vector.end();
+        ++iter)
+   {
+      s << "Star " << i++ << ":";
+
+      (*iter)->show(s.str());
+
+      s.str("");
+   }
+
+   exit(0);
+
+
+#if 1 /* 0 */
 
    float ra_decimal_hours;
    float decl_decimal_degrees;

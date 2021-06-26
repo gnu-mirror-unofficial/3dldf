@@ -7786,9 +7786,9 @@ END_STAR_VECTOR_ASSIGNMENT_0:
 ;
 }; 
 
-@q ***** (5) star_vector_assignment -->  star_vector_variable ASSIGN stars_option_list @>  
+@q ***** (5) star_vector_assignment -->  star_vector_variable ASSIGN STARS stars_option_list @>  
 
-@*3 \§star vector assignment> $\longrightarrow$ \§star vector variable> \.{ASSIGN} \<stars option list>.
+@*3 \§star vector assignment> $\longrightarrow$ \§star vector variable> \.{ASSIGN} \.{STARS} \<stars option list>.
 \initials{LDF 2021.06.26.}
 
 \LOG
@@ -7800,11 +7800,15 @@ Added this rule.
 
 @<Define rules@>=
 
-@=star_vector_assignment: star_vector_variable ASSIGN stars_option_list@>@/
+@=star_vector_assignment: star_vector_variable ASSIGN STARS stars_option_list@>@/
 {
    @<Common declarations for rules@>@;
 
    vector<Star*> v;
+
+   typedef Pointer_Vector<Star> PV;
+   PV *pv;
+   PV* entry_pv;
 
 #if DEBUG_COMPILE
 
@@ -7812,7 +7816,7 @@ Added this rule.
 
    if (DEBUG)
    { 
-       cerr << "*** Parser: `star_vector_assignment: star_vector_variable ASSIGN stars_option_list'."
+       cerr << "*** Parser: `star_vector_assignment: star_vector_variable ASSIGN STARS stars_option_list'."
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -7843,7 +7847,7 @@ Added this rule.
 
    if (status == 2)
    {
-      cerr_strm << "WARNING!  In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
+      cerr_strm << "WARNING!  In parser, `star_vector_assignment: star_vector_variable ASSIGN STARS stars_option_list':"
                 << endl
                 << "`Scan_Parse::get_stars_func' returned 2."
                 << endl 
@@ -7866,7 +7870,7 @@ Added this rule.
    }
    else if (status != 0)
    {
-      cerr_strm << "ERROR!  In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
+      cerr_strm << "ERROR!  In parser, `star_vector_assignment: star_vector_variable ASSIGN STARS stars_option_list':"
                 << endl
                 << "`Scan_Parse::get_stars_func' failed, returning << " << status << "."
 		<< endl 
@@ -7888,7 +7892,7 @@ Added this rule.
    }
    else if (status == 0 && v.size() == 0)
    {
-      cerr_strm << "ERROR!  In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
+      cerr_strm << "ERROR!  In parser, `star_vector_assignment: star_vector_variable ASSIGN STARS stars_option_list':"
                 << endl
                 << "`Scan_Parse::get_stars_func' returned 0 (Success) but `vector<Star*> v' is empty."
                 << endl 
@@ -7911,7 +7915,7 @@ Added this rule.
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
-      cerr_strm << "In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
+      cerr_strm << "In parser, `star_vector_assignment: star_vector_variable ASSIGN STARS stars_option_list':"
                 << endl
                 << "`Scan_Parse::get_stars_func' succeeded, returning 0  and `vector<Star*> v' is non-empty:"
                 << endl 
@@ -7949,18 +7953,16 @@ Added this rule.
 @ 
 @<Define rules@>=
 
-    typedef Pointer_Vector<Star> PV;
-
-    PV* entry_pv = static_cast<PV*>(entry->object);
-
-    PV *pv = new PV;
+    entry_pv = static_cast<PV*>(entry->object);
+    
+    pv = new PV;
 
     *pv = scanner_node->last_star_vector;
          
     if (entry_pv)
       entry_pv->clear();
 
-    int status = vector_type_assign<Star, Star>(
+    status = vector_type_assign<Star, Star>(
                     static_cast<Scanner_Node>(parameter),
                     entry,
                     pv);

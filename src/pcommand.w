@@ -1159,7 +1159,7 @@ END_LOAD_ASTRONOMY:
 
 };
 
-@q **** (4) command --> PLOT STARS stars_option_list @>
+@q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 
 @*3 \§command> $\longrightarrow$ \.{PLOT} \.{STARS} \§stars option list>.
 \initials{LDF 2021.06.26.}

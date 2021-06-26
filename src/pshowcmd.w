@@ -2300,7 +2300,7 @@ Added this rule.
                 << endl 
                 << "`stars_field_specifier' == " << @=$1@> << endl
                 << "`relation'              == " << @=$2@> << " == " << name_map[@=$2@>] << endl
-                << "`numeric_expression'               == " << @=$3@> << endl;
+                << "`numeric_expression'    == " << @=$3@> << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);

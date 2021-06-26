@@ -1420,6 +1420,47 @@ update Stars set bs_hr_number = 5530 where common_name = "Zubenelgenubi";
 
 select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_name_genitive = "canis majoris"\G
 
+
+/* * (1) ***************************************************************************************************** */
+
+18. Alpha Piscis Austrini     Fomalhaut         22 58 -29.6   20.6 -65.0  A3V           1.15   1.72  130.08 0.92    25
+
+https://en.wikipedia.org/wiki/Fomalhaut
+
+insert into Stars (
+approx_rank_apparent_magnitude,
+flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+common_name,
+bs_hr_number,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds
+)
+values (18, 24, "alpha", "Piscis Austrini", "Fomalhaut", 8728, "PsA", "Piscis Austrinus",
+60, 22, 57, 39.0465, -29, 37, 20.050);
+
+select * from Stars where common_name = "Fomalhaut"\G
+
+delete from Stars where common_name = "Fomalhaut";
+
+select * from Constellations where name_genitive = "Piscis Austrini";
+
+
+Right ascension 	
+Declination 	
+HR 8728
+
+/* * (1) ***************************************************************************************************** */
+
+
 1. Alpha Canis Majoris       Sirius            06 45 -16.7  227.2  -8.9  A1V          -1.46   1.43  379.21 1.58     9
 2. Alpha Carinae             Canopus           06 24 -52.7  261.2 -25.3  F0Ib         -0.73  -5.64   10.43 0.53   310
 3. Alpha Centauri            Rigil Kentaurus   14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4

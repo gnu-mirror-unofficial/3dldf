@@ -24296,6 +24296,8 @@ where bayer_designation_greek_letter = "Alpha" and constellation_full_name = "Ca
 
 select distinct constellation_full_name from Stars order by constellation_full_name;
 
+-- Numbers are `approx_rank_apparent_magnitude'
+
 3, Alpha Centauri,               Rigil Kentaurus
 4, Alpha Boötis,                 Arcturus
 5, Alpha Lyra,                  Vega
@@ -24583,6 +24585,12 @@ update Stars set declination_decimal_degrees = 0.0;
 select distinct right_ascension_decimal_degrees from Stars;
 
 select bs_hr_number from Stars where bs_hr_number >= 9000 order by bs_hr_number;
+
+
+select common_name, bs_hr_number, approx_rank_apparent_magnitude from Stars where
+common_name != "" and approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude
+limit 10 offset 1;
+
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */
