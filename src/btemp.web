@@ -1,27 +1,99 @@
-[Thread 1] ERROR! In `Id_Map_Entry_Type' destructor:
-`type' == MACRO (1199), `category' ==  (1), and `object' is null.
-Haven't accounted for this case, but it probably won't do any harm.
-Returning.
+@q ***** (5) star_vector_assignment -->  star_vector_variable ASSIGN LAST @>  
 
-[Thread 1] ERROR! In `Id_Map_Entry_Type' destructor:
-`type' == MACRO (1199) and `object' is non-null.
-This isn't allowed. Returning.
-Type <RETURN> to continue.
-Type <RETURN> to continue.
+@*3 \§star vector assignment> $\longrightarrow$ \§star vector variable> \.{ASSIGN} \.{LAST}. 
+\initials{LDF 2021.06.26.}
 
-@q * (0)@>
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
 
-@q * Emacs-Lisp code for use in indirect buffers when using the          @>
-@q   GNU Emacs editor.  The local variable list is not evaluated when an @>
-@q   indirect buffer is visited, so it's necessary to evaluate the       @>
-@q   following s-expression in order to use the facilities normally      @>
-@q   accessed via the local variables list.                              @>
-@q   \initials{LDF 2004.02.12}.                                          @>
-@q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
+@q ***** (5) Definition.@> 
 
-@q Local Variables: @>
-@q mode:CWEB  @>
-@q eval:(outline-minor-mode t)  @>
-@q abbrev-file-name:"~/.abbrev_defs" @>
-@q eval:(read-abbrev-file)  @>
-@q End: @>
+@<Define rules@>=
+
+@=star_vector_assignment: star_vector_variable ASSIGN LAST@>@/
+{
+
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+    {
+
+      @=$$@> = static_cast<void*>(0); 
+
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
+
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
+    {
+
+   typedef Pointer_Vector<Star> PV;
+ 
+   PV* pv;
+
+   pv->v = scanner_node->last_star_vector;
+   pv->ctr = pv->v.size();
+
+   PV* entry_pv = static_cast<PV*>(entry->object);
+
+   if (entry_pv)
+     entry_pv->clear();
+
+   int status = vector_type_assign<Star, Star>(
+                   static_cast<Scanner_Node>(parameter),
+                   entry,
+                   pv);
+
+@q ******* (7) Error handling:                           @> 
+@q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
+
+@ Error handling:  |Scan_Parse::vector_type_assign| 
+failed. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   if (status != 0)
+   {
+
+       delete pv;
+
+       @=$$@> = static_cast<void*>(0);
+
+   } /* |if (status != 0)|  */
+
+@q ******* (7) |Scan_Parse::vector_type_assign| succeeded.@> 
+
+@ |Scan_Parse::vector_type_assign| succeeded. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   else /* |status == 0|  */
+      {
+         delete pv;
+
+         @=$$@> = static_cast<void*>(entry->object); 
+ 
+      }  /* |else| (|status == 0|)  */
+
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
+
+@q ****** (6).@> 
+
+}; 
+

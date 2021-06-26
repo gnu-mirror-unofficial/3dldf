@@ -774,7 +774,6 @@ Add code for handling other vector-types.
 @<Define |Id_Map_Entry_Type| functions@>=
 
    else if (is_vector_type())
-
      {
 
 @q ******* (7) Destroy |object|, if it exists.@> 
@@ -867,6 +866,64 @@ Added this section.
              {
 
                typedef Pointer_Vector<Color> PV;
+       
+               PV* pv = static_cast<PV*>(object);
+           
+               pv->v.clear();
+           
+               delete pv;
+               pv = 0;
+
+             }
+
+@q ********* (9) |STAR_VECTOR|.@> 
+@ |STAR_VECTOR|.
+
+@<Define |Id_Map_Entry_Type| functions@>=
+
+           if (type == STAR_VECTOR)
+             {
+
+               typedef Pointer_Vector<Star> PV;
+       
+               PV* pv = static_cast<PV*>(object);
+           
+               pv->v.clear();
+           
+               delete pv;
+               pv = 0;
+
+             }
+
+
+@q ********* (9) |CONSTELLATION_VECTOR|.@> 
+@ |CONSTELLATION_VECTOR|.
+
+@<Define |Id_Map_Entry_Type| functions@>=
+
+           if (type == CONSTELLATION_VECTOR)
+             {
+
+               typedef Pointer_Vector<Constellation> PV;
+       
+               PV* pv = static_cast<PV*>(object);
+           
+               pv->v.clear();
+           
+               delete pv;
+               pv = 0;
+
+             }
+
+@q ********* (9) |PLANET_VECTOR|.@> 
+@ |PLANET_VECTOR|.
+
+@<Define |Id_Map_Entry_Type| functions@>=
+
+           if (type == PLANET_VECTOR)
+             {
+
+               typedef Pointer_Vector<Planet> PV;
        
                PV* pv = static_cast<PV*>(object);
            
@@ -1553,6 +1610,42 @@ else if (type == NUMERIC)
          {
            delete c;
            c = static_cast<Plane*>(0);
+         }
+     }
+
+   else if (type == STAR)
+     {
+       
+       Star* c = static_cast<Star*>(object);
+       
+       if (c != static_cast<Star*>(0))
+         {
+           delete c;
+           c = static_cast<Star*>(0);
+         }
+     }
+
+   else if (type == CONSTELLATION)
+     {
+       
+       Constellation* c = static_cast<Constellation*>(object);
+       
+       if (c != static_cast<Constellation*>(0))
+         {
+           delete c;
+           c = static_cast<Constellation*>(0);
+         }
+     }
+
+   else if (type == PLANET)
+     {
+       
+       Planet* c = static_cast<Planet*>(object);
+       
+       if (c != static_cast<Planet*>(0))
+         {
+           delete c;
+           c = static_cast<Planet*>(0);
          }
      }
 
@@ -4008,6 +4101,9 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
       || type == MACRO_VECTOR
       || type == ORIGAMI_FIGURE_VECTOR
       || type == GLYPH_VECTOR
+      || type == STAR_VECTOR
+      || type == CONSTELLATION_VECTOR
+      || type == PLANET_VECTOR
       || type == CONIC_SECTION_LATTICE_VECTOR)
 
     return true;

@@ -74,7 +74,6 @@ referenced by |boolean_variables|, |boolean_primaries|,
   
 @=command: SHOW boolean_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -127,9 +126,7 @@ Added \§fixed optional>.
 @<Define rules@>= 
   
 @=command: SHOW numeric_expression fixed_optional@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -276,7 +273,6 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW ulong_long_expression@>@/
-
 {
   @<Common declarations for rules@>@; 
 
@@ -313,9 +309,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW string_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -762,7 +756,6 @@ Added this rule.
 
 @=stars_field_list: stars_field_list stars_field_specifier@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -810,7 +803,6 @@ Added this rule.
 
 @=stars_field_list: stars_field_list COMMA stars_field_specifier@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -907,7 +899,6 @@ Added this rule.
 
 @=stars_option_list: stars_option_list order_by stars_order_by_list@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -953,7 +944,6 @@ Added this rule.
 
 @=order_by: ORDER BY@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -986,7 +976,6 @@ Added this rule.
 
 @=order_by: ORDER_BY@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -1032,7 +1021,6 @@ Added this rule.
 
 @=stars_order_by_list: stars_order_by_element@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -1081,7 +1069,6 @@ Added this rule.
 
 @=stars_order_by_list: stars_order_by_list COMMA stars_order_by_element@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2131,7 +2118,6 @@ Added this rule.
 
 @=stars_option_list: stars_option_list WHERE stars_where_list@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2176,7 +2162,6 @@ Added this rule.
 
 @=stars_where_list: stars_where_element@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2208,7 +2193,6 @@ Added this rule.
 
 @=stars_where_list: stars_where_list logical_operator stars_where_element@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2353,7 +2337,6 @@ Added this rule.
 
 @=stars_option_list: stars_option_list WITH_LIMIT numeric_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2403,7 +2386,6 @@ Added this rule.
 
 @=stars_option_list: stars_option_list WITH_OFFSET numeric_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2605,9 +2587,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW macro_variable@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3352,9 +3332,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW boolean_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3431,9 +3409,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW numeric_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3505,9 +3481,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW ulong_long_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
    Pointer_Vector<ulong_long>* nv = static_cast<Pointer_Vector<ulong_long>*>(@=$2@>); 
@@ -3708,9 +3682,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW pen_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3773,9 +3745,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW dash_pattern_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3842,9 +3812,7 @@ Now deleting |Pointer_Vector<Color>* cv|.
 @<Define rules@>= 
   
 @=command: SHOW color_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3907,9 +3875,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW transform_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -3974,7 +3940,6 @@ Added this rule.
   
 @=command: SHOW focus_vector_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4039,7 +4004,6 @@ Added this rule.
   
 @=command: SHOW picture_vector_variable@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4104,7 +4068,6 @@ Added this rule.
   
 @=command: SHOW macro_vector_variable@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4169,7 +4132,6 @@ Added this rule.
   
 @=command: SHOW origami_figure_vector_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4234,7 +4196,6 @@ Added this rule.
   
 @=command: SHOW glyph_vector_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4299,7 +4260,6 @@ Added this rule.
   
 @=command: SHOW plane_vector_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4346,6 +4306,197 @@ else  /* |!pv || pv->ctr <= 0|  */
    @=$$@> = static_cast<void*>(0);
 
 };
+@q ****** (6) command --> SHOW star_vector_expression@>
+
+@*5 \§command> $\longrightarrow$ \.{SHOW}
+\§star vector expression>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ******* (7) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW star_vector_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> "
+                << "SHOW star_vector_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   Pointer_Vector<Star>* pv 
+      = static_cast<Pointer_Vector<Star>*>(@=$2@>); 
+
+   cerr_strm  << ">> ";
+
+   if (pv && pv->ctr > 0)
+      {
+          
+          cerr << cerr_strm.str();
+          pv->show("star_vector:");
+          log_message(cerr_strm);
+          cerr_strm.str("");
+          
+
+          delete pv;
+
+      }  /* |if (pv && pv->ctr > 0)|  */
+
+else  /* |!pv || pv->ctr <= 0|  */
+     {
+        cerr_strm << "(unknown star_vector)";
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+     }  /* |else| (|!pv || pv->ctr <= 0|)  */
+
+   @=$$@> = static_cast<void*>(0);
+
+};
+
+@q ****** (6) command --> SHOW constellation_vector_expression@>
+
+@*5 \§command> $\longrightarrow$ \.{SHOW}
+\§constellation vector expression>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ******* (7) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW constellation_vector_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> "
+                << "SHOW constellation_vector_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   Pointer_Vector<Constellation>* pv 
+      = static_cast<Pointer_Vector<Constellation>*>(@=$2@>); 
+
+   cerr_strm  << ">> ";
+
+   if (pv && pv->ctr > 0)
+      {
+          
+          cerr << cerr_strm.str();
+          pv->show("constellation_vector:");
+          log_message(cerr_strm);
+          cerr_strm.str("");
+          
+
+          delete pv;
+
+      }  /* |if (pv && pv->ctr > 0)|  */
+
+else  /* |!pv || pv->ctr <= 0|  */
+     {
+        cerr_strm << "(unknown constellation_vector)";
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+     }  /* |else| (|!pv || pv->ctr <= 0|)  */
+
+   @=$$@> = static_cast<void*>(0);
+
+};
+
+@q ****** (6) command --> SHOW planet_vector_expression@>
+
+@*5 \§command> $\longrightarrow$ \.{SHOW}
+\§planet vector expression>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ******* (7) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW planet_vector_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> "
+                << "SHOW planet_vector_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   Pointer_Vector<Planet>* pv 
+      = static_cast<Pointer_Vector<Planet>*>(@=$2@>); 
+
+   cerr_strm  << ">> ";
+
+   if (pv && pv->ctr > 0)
+      {
+          
+          cerr << cerr_strm.str();
+          pv->show("planet_vector:");
+          log_message(cerr_strm);
+          cerr_strm.str("");
+          
+
+          delete pv;
+
+      }  /* |if (pv && pv->ctr > 0)|  */
+
+else  /* |!pv || pv->ctr <= 0|  */
+     {
+        cerr_strm << "(unknown planet_vector)";
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+     }  /* |else| (|!pv || pv->ctr <= 0|)  */
+
+   @=$$@> = static_cast<void*>(0);
+
+};
 
 @q ***** (5) |Shape| types.@> 
 @*4 {\bf Shape} types.
@@ -4375,9 +4526,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW point_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4441,9 +4590,7 @@ Now deleting |Pointer_Vector<Bool_Point>* bpv|.
 @<Define rules@>= 
   
 @=command: SHOW bool_point_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4507,9 +4654,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW path_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4743,9 +4888,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW helix_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4808,9 +4951,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW rectangle_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4874,7 +5015,6 @@ Added this rule.
   
 @=command: SHOW triangle_vector_expression@>@/
 {
-
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -4937,9 +5077,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW polygon_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -5003,9 +5141,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW reg_polygon_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -5069,9 +5205,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW cone_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -5134,9 +5268,7 @@ Added this rule.
 @<Define rules@>= 
   
 @=command: SHOW cylinder_vector_expression@>@/
-
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -5333,7 +5465,6 @@ Added this rule.
   
 @=command: SHOW polyhedron_vector_expression@>@/
 {
-
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -5515,7 +5646,6 @@ Added this rule.
 @<Define rules@>=
 @=database_option_list: /*  Empty  */@>@/
 {
-
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -5548,7 +5678,6 @@ Added this rule.
 @<Define rules@>=
 @=database_option_list: database_option_list database_option@>@/
 {
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -5590,7 +5719,6 @@ Added this rule.
 @<Define rules@>=
 @=database_option: ALL@>@/
 {
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -5623,7 +5751,6 @@ Added this rule.
 @<Define rules@>=
 @=database_option: POINTS@>@/
 {
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -5775,7 +5902,6 @@ Added this rule.
 @<Define rules@>=
 @=show_scanner_node_option_list: /*  Empty  */@>@/
 {
-
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -5808,7 +5934,6 @@ Added this rule.
 @<Define rules@>=
 @=show_scanner_node_option_list: show_scanner_node_option_list show_scanner_node_option@>@/
 {
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -5850,7 +5975,6 @@ Added this rule.
 @<Define rules@>=
 @=show_scanner_node_option: ALL@>@/
 {
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE

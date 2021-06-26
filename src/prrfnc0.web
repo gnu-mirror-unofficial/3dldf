@@ -678,6 +678,14 @@ Added entries for |ULONG_LONG_DECLARATOR|.
   type_name_map[GLYPH_SLICE_DECLARATOR] = "glyph_slice";
   type_name_map[GLYPH_SLICE_VECTOR_DECLARATOR] = "glyph_slice_vector";
 
+  type_name_map[STAR_DECLARATOR] = "star";
+  type_name_map[STAR_VECTOR_DECLARATOR] = "star_vector";
+
+  type_name_map[CONSTELLATION_DECLARATOR] = "constellation";
+  type_name_map[CONSTELLATION_VECTOR_DECLARATOR] = "constellation_vector";
+
+  type_name_map[PLANET_DECLARATOR] = "planet";
+  type_name_map[PLANET_VECTOR_DECLARATOR] = "planet_vector";
 
   type_name_map[PLANE_DECLARATOR] = "plane";
   type_name_map[PLANE_VECTOR_DECLARATOR] = "plane_vector";
@@ -8063,6 +8071,8 @@ AFTER_WHERE_CLAUSE:
 @q **** (4) @>
 
    v = a_star_vector;
+
+   scanner_node->last_star_vector = a_star_vector;
 
    a_star_vector.clear();
 

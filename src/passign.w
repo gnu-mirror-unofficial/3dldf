@@ -556,6 +556,54 @@ Added this rule.
 
 }; 
 
+@q **** (4) assignment --> star_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§star assignment>.
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=assignment: star_assignment@>
+{
+
+      @=$$@> = @=$1@>;
+
+}; 
+
+@q **** (4) assignment --> constellation_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§constellation assignment>.
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=assignment: constellation_assignment@>
+{
+
+      @=$$@> = @=$1@>;
+
+}; 
+
+@q **** (4) assignment --> planet_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§planet assignment>.
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=assignment: planet_assignment@>
+{
+
+      @=$$@> = @=$1@>;
+
+}; 
+
 @q **** (4) assignment --> origami_figure_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§origami figure assignment>.
 
@@ -1316,6 +1364,60 @@ Added this rule.
 @<Define rules@>=
   
 @=assignment: plane_vector_assignment@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) assignment --> star_vector_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§star vector assignment>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+  
+@=assignment: star_vector_assignment@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) assignment --> constellation_vector_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§constellation vector assignment>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+  
+@=assignment: constellation_vector_assignment@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) assignment --> planet_vector_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§planet vector assignment>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+  
+@=assignment: planet_vector_assignment@>
 {
 
   @=$$@> = @=$1@>;
@@ -3761,6 +3863,111 @@ Added this rule.
     @=$$@> = Scan_Parse::plane_assignment_func<Path>(@=$1@>,
                                                      static_cast<Path*>(@=$3@>),
                                                      parameter);
+};
+
+@q **** (4) star_assignment.@>
+@*2 \§star assignment>. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> star_assignment@>@/
+
+@q ***** (5) star_assignment --> star_variable ASSIGN star_expression.@>   
+
+@*4 \§star assignment> $\longrightarrow$ \§star variable> 
+\.{ASSIGN} \§star expression>. 
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+ 
+@=star_assignment: star_variable ASSIGN star_expression@>
+{
+
+  Int_Void_Ptr ivp = assign_simple<Star>(static_cast<Scanner_Node>(parameter),
+                                          "Star",
+                                          @=$1@>,
+                                          static_cast<Star*>(@=$3@>));
+  @=$$@> = ivp.v;
+
+};
+
+@q **** (4) constellation_assignment.@>
+@*2 \§constellation assignment>. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> constellation_assignment@>@/
+
+@q ***** (5) constellation_assignment --> constellation_variable ASSIGN constellation_expression.@>   
+
+@*4 \§constellation assignment> $\longrightarrow$ \§constellation variable> 
+\.{ASSIGN} \§constellation expression>. 
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+ 
+@=constellation_assignment: constellation_variable ASSIGN constellation_expression@>
+{
+
+  Int_Void_Ptr ivp = assign_simple<Constellation>(static_cast<Scanner_Node>(parameter),
+                                          "Constellation",
+                                          @=$1@>,
+                                          static_cast<Constellation*>(@=$3@>));
+  @=$$@> = ivp.v;
+
+};
+
+@q **** (4) planet_assignment.@>
+@*2 \§planet assignment>. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_assignment@>@/
+
+@q ***** (5) planet_assignment --> planet_variable ASSIGN planet_expression.@>   
+
+@*4 \§planet assignment> $\longrightarrow$ \§planet variable> 
+\.{ASSIGN} \§planet expression>. 
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+ 
+@=planet_assignment: planet_variable ASSIGN planet_expression@>
+{
+
+  Int_Void_Ptr ivp = assign_simple<Planet>(static_cast<Scanner_Node>(parameter),
+                                          "Planet",
+                                          @=$1@>,
+                                          static_cast<Planet*>(@=$3@>));
+  @=$$@> = ivp.v;
+
 };
 
 @q **** (4) origami_figure_assignment.  @>
@@ -7333,6 +7540,484 @@ if (status != 0)
 @q ****** (6).@> 
 
 }; 
+
+@q **** (4) |star_vector_assignment|.  @>
+@*2 \§star vector assignment>. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <pointer_value> star_vector_assignment@>
+
+@q ***** (5) star_vector_assignment -->  @>  
+@q ***** (5) star_vector_variable ASSIGN @>  
+@q ***** (5) star_vector_expression.     @> 
+
+@*3 \§star vector assignment>
+$\longrightarrow$ \§star vector variable> 
+\.{ASSIGN} \§star vector expression>.      
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ***** (5) Definition.@> 
+
+@<Define rules@>=
+
+@=star_vector_assignment: star_vector_variable @>  
+@=ASSIGN star_vector_expression@>@/
+{
+
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+    {
+
+      @=$$@> = static_cast<void*>(0); 
+
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
+
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
+    {
+
+   typedef Pointer_Vector<Star> PV;
+ 
+   PV* pv = static_cast<PV*>(@=$3@>);
+
+   PV* entry_pv = static_cast<PV*>(entry->object);
+
+   if (entry_pv)
+     entry_pv->clear();
+
+   int status = vector_type_assign<Star, Star>(
+                   static_cast<Scanner_Node>(parameter),
+                   entry,
+                   pv);
+
+@q ******* (7) Error handling:                           @> 
+@q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
+
+@ Error handling:  |Scan_Parse::vector_type_assign| 
+failed. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+if (status != 0)
+         {
+
+            delete pv;
+
+            @=$$@> = static_cast<void*>(0);
+
+         } /* |if (status != 0)|  */
+
+@q ******* (7) |Scan_Parse::vector_type_assign| succeeded.@> 
+
+@ |Scan_Parse::vector_type_assign| succeeded. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   else /* |status == 0|  */
+      {
+         delete pv;
+
+         @=$$@> = static_cast<void*>(entry->object); 
+ 
+      }  /* |else| (|status == 0|)  */
+
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
+
+@q ****** (6).@> 
+
+}; 
+
+@q ***** (5) star_vector_assignment -->  star_vector_variable ASSIGN LAST @>  
+
+@*3 \§star vector assignment> $\longrightarrow$ \§star vector variable> \.{ASSIGN} \.{LAST}. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ***** (5) Definition.@> 
+
+@<Define rules@>=
+
+@=star_vector_assignment: star_vector_variable ASSIGN LAST@>@/
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false|  */
+
+   if (DEBUG)
+   { 
+       cerr << "*** Parser: `star_vector_assignment: star_vector_variable ASSIGN LAST'."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+    {
+
+      @=$$@> = static_cast<void*>(0); 
+
+      goto END_STAR_VECTOR_ASSIGNMENT_0;
+
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+   else if (scanner_node->last_star_vector.size() == 0)
+   {
+
+      @=$$@> = static_cast<void*>(0); 
+
+      goto END_STAR_VECTOR_ASSIGNMENT_0;
+
+   }
+
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
+
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)| and |scanner_node->last_star_vector| is not empty. */
+  {
+
+   typedef Pointer_Vector<Star> PV;
+
+/* !!START HERE  \initials{LDF 2021.06.26.}  Try creating a new vector with copies of the stars.  */ 
+ 
+   PV* pv;
+  
+   pv = new PV;
+
+   pv->v = scanner_node->last_star_vector;
+   pv->ctr = pv->v.size();
+
+   PV* entry_pv = static_cast<PV*>(entry->object);
+
+   if (entry_pv)
+     entry_pv->clear();
+
+   int status = vector_type_assign<Star, Star>(
+                   static_cast<Scanner_Node>(parameter),
+                   entry,
+                   pv);
+
+@q ******* (7) Error handling:                           @> 
+@q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
+
+@ Error handling:  |Scan_Parse::vector_type_assign| 
+failed. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   if (status != 0)
+   {
+
+       delete pv;
+
+       @=$$@> = static_cast<void*>(0);
+
+   } /* |if (status != 0)|  */
+
+@q ******* (7) |Scan_Parse::vector_type_assign| succeeded.@> 
+
+@ |Scan_Parse::vector_type_assign| succeeded. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   else /* |status == 0|  */
+   {
+      delete pv;
+
+      @=$$@> = static_cast<void*>(entry->object); 
+ 
+   }  /* |else| (|status == 0|)  */
+
+ }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)| */
+     /* and |scanner_node->last_star_vector| is not empty.)  */
+
+@q ****** (6).@> 
+
+END_STAR_VECTOR_ASSIGNMENT_0:
+;
+
+}; 
+
+@q **** (4) |constellation_vector_assignment|.  @>
+@*2 \§constellation vector assignment>. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <pointer_value> constellation_vector_assignment@>
+
+@q ***** (5) constellation_vector_assignment -->  @>  
+@q ***** (5) constellation_vector_variable ASSIGN @>  
+@q ***** (5) constellation_vector_expression.     @> 
+
+@*3 \§constellation vector assignment>
+$\longrightarrow$ \§constellation vector variable> 
+\.{ASSIGN} \§constellation vector expression>.      
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ***** (5) Definition.@> 
+
+@<Define rules@>=
+
+@=constellation_vector_assignment: constellation_vector_variable @>  
+@=ASSIGN constellation_vector_expression@>@/
+{
+
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+    {
+
+      @=$$@> = static_cast<void*>(0); 
+
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
+
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
+    {
+
+   typedef Pointer_Vector<Constellation> PV;
+ 
+   PV* pv = static_cast<PV*>(@=$3@>);
+
+   PV* entry_pv = static_cast<PV*>(entry->object);
+
+   if (entry_pv)
+     entry_pv->clear();
+
+   int status = vector_type_assign<Constellation, Constellation>(
+                   static_cast<Scanner_Node>(parameter),
+                   entry,
+                   pv);
+
+@q ******* (7) Error handling:                           @> 
+@q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
+
+@ Error handling:  |Scan_Parse::vector_type_assign| 
+failed. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+if (status != 0)
+         {
+
+            delete pv;
+
+            @=$$@> = static_cast<void*>(0);
+
+         } /* |if (status != 0)|  */
+
+@q ******* (7) |Scan_Parse::vector_type_assign| succeeded.@> 
+
+@ |Scan_Parse::vector_type_assign| succeeded. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   else /* |status == 0|  */
+      {
+         delete pv;
+
+         @=$$@> = static_cast<void*>(entry->object); 
+ 
+      }  /* |else| (|status == 0|)  */
+
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
+
+@q ****** (6).@> 
+
+}; 
+
+
+@q **** (4) |planet_vector_assignment|.  @>
+@*2 \§planet vector assignment>. 
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <pointer_value> planet_vector_assignment@>
+
+@q ***** (5) planet_vector_assignment -->  @>  
+@q ***** (5) planet_vector_variable ASSIGN @>  
+@q ***** (5) planet_vector_expression.     @> 
+
+@*3 \§planet vector assignment>
+$\longrightarrow$ \§planet vector variable> 
+\.{ASSIGN} \§planet vector expression>.      
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@q ***** (5) Definition.@> 
+
+@<Define rules@>=
+
+@=planet_vector_assignment: planet_vector_variable @>  
+@=ASSIGN planet_vector_expression@>@/
+{
+
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+
+@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+    {
+
+      @=$$@> = static_cast<void*>(0); 
+
+    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
+
+@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
+
+@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  else /* |entry != static_cast<Id_Map_Entry_Node>(0)|  */
+    {
+
+   typedef Pointer_Vector<Planet> PV;
+ 
+   PV* pv = static_cast<PV*>(@=$3@>);
+
+   PV* entry_pv = static_cast<PV*>(entry->object);
+
+   if (entry_pv)
+     entry_pv->clear();
+
+   int status = vector_type_assign<Planet, Planet>(
+                   static_cast<Scanner_Node>(parameter),
+                   entry,
+                   pv);
+
+@q ******* (7) Error handling:                           @> 
+@q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
+
+@ Error handling:  |Scan_Parse::vector_type_assign| 
+failed. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+if (status != 0)
+         {
+
+            delete pv;
+
+            @=$$@> = static_cast<void*>(0);
+
+         } /* |if (status != 0)|  */
+
+@q ******* (7) |Scan_Parse::vector_type_assign| succeeded.@> 
+
+@ |Scan_Parse::vector_type_assign| succeeded. 
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+   else /* |status == 0|  */
+      {
+         delete pv;
+
+         @=$$@> = static_cast<void*>(entry->object); 
+ 
+      }  /* |else| (|status == 0|)  */
+
+   }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)|)  */
+
+@q ****** (6).@> 
+
+}; 
+
 
 @q **** (4) |origami_figure_vector_assignment|.  @>
 @*2 \§origami figure vector assignment>. 

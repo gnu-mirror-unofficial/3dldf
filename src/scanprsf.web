@@ -11939,6 +11939,83 @@ Added this section.
       
     } /* |if (entry->type == MACRO_VECTOR)|  */
 
+
+@q ***** (5) |STAR_VECTOR|.@>   
+
+@ |STAR_VECTOR|.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@<Define |Scan_Parse| functions@>=
+
+  else if (entry->type == STAR_VECTOR)
+    {
+      typedef Pointer_Vector<Definition_Info_Type> PV;
+      PV* pv = static_cast<PV*>(entry->object);
+      
+      if (pv != static_cast<PV*>(0))
+        {
+          pv->v.clear();
+          pv->ctr = 0;
+        }
+      
+    } /* |if (entry->type == STAR_VECTOR)|  */
+
+@q ***** (5) |CONSTELLATION_VECTOR|.@>   
+
+@ |CONSTELLATION_VECTOR|.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@<Define |Scan_Parse| functions@>=
+
+  else if (entry->type == CONSTELLATION_VECTOR)
+    {
+      typedef Pointer_Vector<Definition_Info_Type> PV;
+      PV* pv = static_cast<PV*>(entry->object);
+      
+      if (pv != static_cast<PV*>(0))
+        {
+          pv->v.clear();
+          pv->ctr = 0;
+        }
+      
+    } /* |if (entry->type == CONSTELLATION_VECTOR)|  */
+
+
+@q ***** (5) |PLANET_VECTOR|.@>   
+
+@ |PLANET_VECTOR|.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@<Define |Scan_Parse| functions@>=
+
+  else if (entry->type == PLANET_VECTOR)
+    {
+      typedef Pointer_Vector<Definition_Info_Type> PV;
+      PV* pv = static_cast<PV*>(entry->object);
+      
+      if (pv != static_cast<PV*>(0))
+        {
+          pv->v.clear();
+          pv->ctr = 0;
+        }
+      
+    } /* |if (entry->type == PLANET_VECTOR)|  */
+
 @q ***** (5) |CONIC_SECTION_LATTICE_VECTOR|.@>   
 
 @ |CONIC_SECTION_LATTICE_VECTOR|.

@@ -1076,27 +1076,33 @@ main(int argc, char *argv[])
 
      if (c == 0)
      {
+#if 0 
         cerr << "In `main':  `LDF_DATABASE' environment variable not found."
              << endl
              << "Not enabling database.  Continuing."
              << endl;
+#endif 
      }
      else if (strncmp(c, "1", 1))
      {
+#if 0 
         cerr << "In `main':  `LDF_DATABASE' environment variable found, but value is \"" << c << "\" (not \"1\")."
              << endl
              << "Not enabling database.  Continuing."
              << endl;
-
+#endif 
      }
      else 
      {
+#if 0 
         cerr << "In `main':  `LDF_DATABASE' environment variable found, and value is \"1\"."
              << endl
              << "Setting `database_enabled' to true."
              << endl;
+#endif 
 
         database_enabled = true;
+
       }
   
   }  /* |if (!database_enabled)| */
@@ -1119,25 +1125,30 @@ main(int argc, char *argv[])
 
      if (c == 0)
      {
+#if 0 
         cerr << "In `main':  `LDF_ASTRONOMY' environment variable not found."
              << endl
              << "Not enabling astronomy (or database).  Continuing."
              << endl;
+#endif 
      }
      else if (strncmp(c, "1", 1))
      {
+#if 0 
         cerr << "In `main':  `LDF_ASTRONOMY' environment variable found, but value is \"" << c << "\" (not \"1\")."
              << endl
              << "Not enabling astronomy (or database).  Continuing."
              << endl;
-
+#endif 
      }
      else 
      {
+#if 0 
         cerr << "In `main':  `LDF_ASTRONOMY' environment variable found, and value is \"1\"."
              << endl
              << "Setting `astronomy_enabled' and `database_enabled' to true."
              << endl;
+#endif 
 
         astronomy_enabled = true;
         database_enabled = true;
@@ -1145,6 +1156,13 @@ main(int argc, char *argv[])
       }
   
   }  /* |if (!astronomy_enabled)| */
+
+  if (astronomy_enabled)
+     cerr << "Astronomy features (including database)  enabled." << endl;
+  else if (database_enabled)
+     cerr << "Database enabled.  Astronomy features not enabled." << endl;
+  else 
+     cerr << "Database and astronomy features not enabled." << endl;
 
 @q **** (4) @>
 

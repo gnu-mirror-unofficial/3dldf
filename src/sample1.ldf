@@ -52,11 +52,23 @@
 
 %% * (1) New sample code.
 
-input "sphrmd00.lmc";
+star_vector sv;
+
+show stars common_name, bs_hr_number where bs_hr_number >= 9000 order by bs_hr_number;
+
+sv := last;
+
+show sv;
 
 %endinput;
 
 end;
+
+%input "sphrmd00.lmc";
+
+
+
+
 
 sphere s;
 set s with_diameter 5 with_point_count 64;

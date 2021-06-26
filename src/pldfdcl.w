@@ -1035,6 +1035,96 @@ Added this rule.
 
 };
 
+@q *** (3) declaration --> star declaration.  @>
+@*2 \§declaration> $\longrightarrow$ |star_declaration|.  
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=declaration: star_declaration@>
+{
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+   if (DEBUG)
+      {
+         stringstream cerr_strm;
+         cerr_strm  
+                   << "*** Parser:  'declaration --> star_declaration'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str();
+
+      }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
+@q *** (3) declaration --> constellation declaration.  @>
+@*2 \§declaration> $\longrightarrow$ |constellation_declaration|.  
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=declaration: constellation_declaration@>
+{
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+   if (DEBUG)
+      {
+         stringstream cerr_strm;
+         cerr_strm  
+                   << "*** Parser:  'declaration --> constellation_declaration'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str();
+
+      }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
+@q *** (3) declaration --> planet declaration.  @>
+@*2 \§declaration> $\longrightarrow$ |planet_declaration|.  
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=declaration: planet_declaration@>
+{
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+   if (DEBUG)
+      {
+         stringstream cerr_strm;
+         cerr_strm  
+                   << "*** Parser:  'declaration --> planet_declaration'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str();
+
+      }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
 @q **** (4) declaration --> ellipse_slice_declaration.  @>
 @*3 \§declaration> $\longrightarrow$ \§ellipse slice declaration>.
 \initials{LDF 2005.03.29.}
@@ -2006,6 +2096,91 @@ Added this rule.
 
 };
 
+@q ***** (5) declaration --> star_vector declaration.  @>
+@*4 \§declaration> $\longrightarrow$ \§star vector declaration>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=declaration: star_vector_declaration@>
+{
+
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @;
+  if (DEBUG)
+    {
+      stringstream cerr_strm;
+      cerr_strm << "*** Parser:  'declaration --> star_vector_declaration'.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
+@q ***** (5) declaration --> constellation_vector declaration.  @>
+@*4 \§declaration> $\longrightarrow$ \§constellation vector declaration>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=declaration: constellation_vector_declaration@>
+{
+
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @;
+  if (DEBUG)
+    {
+      stringstream cerr_strm;
+      cerr_strm << "*** Parser:  'declaration --> constellation_vector_declaration'.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
+@q ***** (5) declaration --> planet_vector declaration.  @>
+@*4 \§declaration> $\longrightarrow$ \§planet vector declaration>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=declaration: planet_vector_declaration@>
+{
+
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @;
+  if (DEBUG)
+    {
+      stringstream cerr_strm;
+      cerr_strm << "*** Parser:  'declaration --> planet_vector_declaration'.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
+
 @q ***** (5) declaration --> origami_figure_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ 
 \§origami figure vector declaration>.
@@ -2897,6 +3072,52 @@ Added this rule.
 @=plane_declaration: PLANE_DECLARATOR declaration_list@>
 {
   shape_decl_func<Plane>(static_cast<Scanner_Node>(parameter), PLANE);
+};
+
+
+@q ***** (5) star_declaration.  @>
+@*4 \§star declaration>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=star_declaration: STAR_DECLARATOR declaration_list@>
+{
+    Scan_Parse::non_shape_decl_func(static_cast<Scanner_Node>(parameter), STAR);
+};
+
+@q ***** (5) constellation_declaration.  @>
+@*4 \§constellation declaration>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=constellation_declaration: CONSTELLATION_DECLARATOR declaration_list@>
+{
+    Scan_Parse::non_shape_decl_func(static_cast<Scanner_Node>(parameter), CONSTELLATION);
+};
+
+@q ***** (5) planet_declaration.  @>
+@*4 \§planet declaration>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=planet_declaration: PLANET_DECLARATOR declaration_list@>
+{
+    Scan_Parse::non_shape_decl_func(static_cast<Scanner_Node>(parameter), PLANET);
 };
 
 @q ***** (5) ellipse_slice_declaration.  @>
@@ -3799,6 +4020,74 @@ Added this rule.
                           PLANE_VECTOR,
                           PLANE);
 };
+
+@q ****** (6) star_vector_declaration -->               @>
+@q ****** (6) STAR_VECTOR_DECLARATOR declaration_list.  @>
+
+@*5 \§star vector declaration> $\longrightarrow$ 
+\.{STAR\_VECTOR\_DECLARATOR} \§declaration list>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=star_vector_declaration: STAR_VECTOR_DECLARATOR declaration_list@>
+{
+
+  vector_type_decl<Star>(static_cast<Scanner_Node>(parameter),
+                           STAR_VECTOR,
+                           STAR);
+};
+
+
+@q ****** (6) constellation_vector_declaration -->               @>
+@q ****** (6) CONSTELLATION_VECTOR_DECLARATOR declaration_list.  @>
+
+@*5 \§constellation vector declaration> $\longrightarrow$ 
+\.{CONSTELLATION\_VECTOR\_DECLARATOR} \§declaration list>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=constellation_vector_declaration: CONSTELLATION_VECTOR_DECLARATOR declaration_list@>
+{
+
+  vector_type_decl<Constellation>(static_cast<Scanner_Node>(parameter),
+                           CONSTELLATION_VECTOR,
+                           CONSTELLATION);
+};
+
+
+
+@q ****** (6) planet_vector_declaration -->               @>
+@q ****** (6) PLANET_VECTOR_DECLARATOR declaration_list.  @>
+
+@*5 \§planet vector declaration> $\longrightarrow$ 
+\.{PLANET\_VECTOR\_DECLARATOR} \§declaration list>.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=planet_vector_declaration: PLANET_VECTOR_DECLARATOR declaration_list@>
+{
+
+  vector_type_decl<Planet>(static_cast<Scanner_Node>(parameter),
+                           PLANET_VECTOR,
+                           PLANET);
+};
+
+
 
 @q ****** (6) ellipse_slice_vector_declaration -->               @>
 @q ****** (6) ELLIPSE_SLICE_VECTOR_DECLARATOR declaration_list.  @>

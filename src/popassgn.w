@@ -4064,6 +4064,388 @@ Added this rule.
 
 };
 
+@q *** (3) |star_vectors|.@>  
+
+@*2 {\bf star\_vectors}.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@q *** (3) operation_assignment --> star_vector_variable  @>
+@q *** (3) PLUS_ASSIGN star_expression.                   @>
+
+@*3 \§operation assignment> $\longrightarrow$ \§star vector variable>
+\.{PLUS\_ASSIGN} \§star expression>.
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+
+\initials{LDF 2021.06.26.}
+Got this rule to work.
+
+\initials{LDF 2021.06.26.}
+Removed most of the code from this rule to 
+|Scan_Parse::vector_type_plus_assign()|, which is now called in this
+rule.  
+
+\initials{LDF 2021.06.26.}
+Changed the symbol on the left-hand side of this rule from 
+|star_vector_assignment| to |operation_assignment|.
+
+\initials{LDF 2021.06.26.}
+Moved this rule from \filename{passign.w} to this file 
+(\filename{popassgn.w}). 
+\ENDLOG 
+
+@q **** (4) Definition.@>   
+
+@<Define rules@>=
+ 
+@=operation_assignment: star_vector_variable PLUS_ASSIGN star_expression@>
+{
+
+   @<Common declarations for rules@>@;
+  
+#if DEBUG_COMPILE
+   DEBUG = false; /* |true| */
+   
+   if (DEBUG)
+      {
+        cerr_strm << thread_name 
+                  << "*** Parser: `operation_assignment --> "
+                  << "star_vector_variable PLUS_ASSIGN star_expression'.";
+        
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign()|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  status
+    = vector_type_plus_assign<Star>(scanner_node,
+                                     static_cast<Id_Map_Entry_Node>(@=$1@>), 
+                                     STAR_VECTOR,
+                                     STAR,
+                                     static_cast<Star*>(@=$3@>));
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign()| failed.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (status != 0)
+    {
+      cerr_strm << thread_name 
+                << "ERROR! In parser rule `operation_assignment --> "
+                << endl 
+                << "star_vector_variable PLUS_ASSIGN star_expression':"
+                << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                << "failed.  Didn't add `star' to `star_vector'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
+
+    }  /* |if (status != 0)|  */
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+else /* |status == 0|  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In parser rule `operation_assignment --> "
+                    << endl 
+                    << "star_vector_variable PLUS_ASSIGN star_expression':"
+                    << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                    << "succeeded.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@;
+
+} /* |else| (|status == 0|)  */ 
+
+@q ***** (5) Set |$$| to 0 and exit rule.@>   
+
+@ Set |@=$$@>| to 0 and exit rule.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|. 
+\ENDLOG 
+
+@<Define rules@>=
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
+@q *** (3) |constellation_vectors|.@>  
+
+@*2 {\bf constellation\_vectors}.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@q *** (3) operation_assignment --> constellation_vector_variable  @>
+@q *** (3) PLUS_ASSIGN constellation_expression.                   @>
+
+@*3 \§operation assignment> $\longrightarrow$ \§constellation vector variable>
+\.{PLUS\_ASSIGN} \§constellation expression>.
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@q **** (4) Definition.@>   
+
+@<Define rules@>=
+ 
+@=operation_assignment: constellation_vector_variable PLUS_ASSIGN constellation_expression@>
+{
+
+   @<Common declarations for rules@>@;
+  
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */
+   
+   if (DEBUG)
+      {
+        cerr_strm << thread_name 
+                  << "*** Parser: `operation_assignment --> "
+                  << "constellation_vector_variable PLUS_ASSIGN constellation_expression'.";
+        
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign()|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  status
+    = vector_type_plus_assign<Constellation>(scanner_node,
+                                     static_cast<Id_Map_Entry_Node>(@=$1@>), 
+                                     CONSTELLATION_VECTOR,
+                                     CONSTELLATION,
+                                     static_cast<Constellation*>(@=$3@>));
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign()| failed.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (status != 0)
+    {
+      cerr_strm << thread_name 
+                << "ERROR! In parser rule `operation_assignment --> "
+                << endl 
+                << "constellation_vector_variable PLUS_ASSIGN constellation_expression':"
+                << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                << "failed.  Didn't add `constellation' to `constellation_vector'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
+
+    }  /* |if (status != 0)|  */
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+else /* |status == 0|  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In parser rule `operation_assignment --> "
+                    << endl 
+                    << "constellation_vector_variable PLUS_ASSIGN constellation_expression':"
+                    << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                    << "succeeded.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@;
+
+} /* |else| (|status == 0|)  */ 
+
+@q ***** (5) Set |$$| to 0 and exit rule.@>   
+
+@ Set |@=$$@>| to 0 and exit rule.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|. 
+\ENDLOG 
+
+@<Define rules@>=
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
+@q *** (3) |planet_vectors|.@>  
+
+@*2 {\bf planet\_vectors}.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this section.
+\ENDLOG
+
+@q *** (3) operation_assignment --> planet_vector_variable  @>
+@q *** (3) PLUS_ASSIGN planet_expression.                   @>
+
+@*3 \§operation assignment> $\longrightarrow$ \§planet vector variable>
+\.{PLUS\_ASSIGN} \§planet expression>.
+
+\LOG
+\initials{LDF 2021.06.26.}
+Added this rule.
+\ENDLOG 
+
+@q **** (4) Definition.@>   
+
+@<Define rules@>=
+ 
+@=operation_assignment: planet_vector_variable PLUS_ASSIGN planet_expression@>
+{
+
+   @<Common declarations for rules@>@;
+  
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */
+   
+   if (DEBUG)
+      {
+        cerr_strm << thread_name 
+                  << "*** Parser: `operation_assignment --> "
+                  << "planet_vector_variable PLUS_ASSIGN planet_expression'.";
+        
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign()|.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  status
+    = vector_type_plus_assign<Planet>(scanner_node,
+                                     static_cast<Id_Map_Entry_Node>(@=$1@>), 
+                                     PLANET_VECTOR,
+                                     PLANET,
+                                     static_cast<Planet*>(@=$3@>));
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign()| failed.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+  if (status != 0)
+    {
+      cerr_strm << thread_name 
+                << "ERROR! In parser rule `operation_assignment --> "
+                << endl 
+                << "planet_vector_variable PLUS_ASSIGN planet_expression':"
+                << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                << "failed.  Didn't add `planet' to `planet_vector'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
+
+    }  /* |if (status != 0)|  */
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+\initials{LDF 2021.06.26.}
+
+@<Define rules@>=
+
+else /* |status == 0|  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In parser rule `operation_assignment --> "
+                    << endl 
+                    << "planet_vector_variable PLUS_ASSIGN planet_expression':"
+                    << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                    << "succeeded.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@;
+
+} /* |else| (|status == 0|)  */ 
+
+@q ***** (5) Set |$$| to 0 and exit rule.@>   
+
+@ Set |@=$$@>| to 0 and exit rule.
+\initials{LDF 2021.06.26.}
+
+\LOG
+\initials{LDF 2021.06.26.}
+Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|. 
+\ENDLOG 
+
+@<Define rules@>=
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
 @q *** (3) |Shape| types.@> 
 @*2 {\bf Shape} types.
 \initials{LDF 2005.01.17.}
