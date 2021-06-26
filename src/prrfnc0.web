@@ -7607,9 +7607,11 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
    }
 
 @q ***** (5) @>
+@
+@<Define parser rule functions@>=
 
    SAVE_DEBUG = DEBUG;
-
+   
    /* outer |for|  */
 
    for (vector<Stars_Where_Option_Struct>::iterator w_iter = scanner_node->stars_get_option_struct->where_options.begin();
@@ -7731,6 +7733,10 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ******* (7) @>
 
+    SAVE_DEBUG = DEBUG;
+
+    DEBUG = false; /* |true|  */
+
             dup_iter = unique(a_star_ptr_vector.begin(), a_star_ptr_vector.end(), compare_star_pointers);
 
             if (dup_iter != a_star_ptr_vector.end())
@@ -7775,6 +7781,8 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
             }             
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   DEBUG = SAVE_DEBUG;
+
 @q ******* (7) @>
 
         }  /* |if (w_iter->conjunction == OR && b_star_ptr_vector.size() > 0)| */
@@ -7783,9 +7791,48 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
         
    }  /* outer |for|  */
 
-   DEBUG = SAVE_DEBUG;
+
 
 AFTER_WHERE_CLAUSE:
+
+@q ***** (5) @>
+
+@q **** (4) @>
+@
+@<Define parser rule functions@>= 
+
+@q ***** (5) @>
+
+   sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(), compare_bs_hr_number);
+
+   dup_iter = unique(a_star_ptr_vector.begin(), a_star_ptr_vector.end(), compare_star_pointers);
+
+   if (dup_iter != a_star_ptr_vector.end())
+   {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "`dup_iter' != `a_star_ptr_vector.end()'." << endl
+                << "Found duplicates.  Calling `erase'."
+                << endl;
+                
+       }                 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       a_star_ptr_vector.erase(dup_iter, a_star_ptr_vector.end());
+   }
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "`dup_iter' == `a_star_ptr_vector.end()'." << endl
+            << "Found no duplicates.  Not calling `erase'."
+            << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ***** (5) @>
 
@@ -8070,17 +8117,97 @@ AFTER_WHERE_CLAUSE:
 
 @q **** (4) @>
 
+   SAVE_DEBUG = DEBUG;
+
+   DEBUG = false; /* |true|  */
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {  
+      cerr << "scanner_node->stars_get_option_struct->offset == " << scanner_node->stars_get_option_struct->offset
+           << endl 
+           << "scanner_node->stars_get_option_struct->limit == " << scanner_node->stars_get_option_struct->limit
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;  
+
+   iter = a_star_ptr_vector.begin();
+
+#if 0    
+   cerr << "(*iter)->common_name == " << (*iter)->common_name << endl;
+
+   cerr << "a_star_ptr_vector[0]->common_name  == " << a_star_ptr_vector[0]->common_name << endl 
+        << "a_star_ptr_vector[0]->bs_hr_number == " << a_star_ptr_vector[0]->bs_hr_number << endl 
+        << "a_star_ptr_vector[1]->common_name  == " << a_star_ptr_vector[1]->common_name << endl 
+        << "a_star_ptr_vector[1]->bs_hr_number == " << a_star_ptr_vector[1]->bs_hr_number << endl 
+        << "a_star_ptr_vector[2]->common_name  == " << a_star_ptr_vector[2]->common_name << endl
+        << "a_star_ptr_vector[2]->bs_hr_number == " << a_star_ptr_vector[2]->bs_hr_number << endl;
+#endif 
+
+   if (scanner_node->stars_get_option_struct->offset > 0)
+   {
+#if 0 
+      cerr << "Offset == " << scanner_node->stars_get_option_struct->offset << " (> 0).  Advancing and erasing." << endl
+           << "a_star_ptr_vector.size() == " << a_star_ptr_vector.size()
+           << endl 
+           << "scanner_node->stars_get_option_struct->offset == " << scanner_node->stars_get_option_struct->offset
+           << endl 
+           << "min(static_cast<int>(a_star_ptr_vector.size())," << endl  
+           << "    static_cast<int>(scanner_node->stars_get_option_struct->offset))"
+           << endl 
+           << "== " << min(static_cast<int>(a_star_ptr_vector.size()), static_cast<int>(scanner_node->stars_get_option_struct->offset))
+           << endl; 
+#endif 
+
+      advance(iter, min(static_cast<int>(a_star_ptr_vector.size()), 
+                        static_cast<int>(scanner_node->stars_get_option_struct->offset)));
+
+#if 0 
+      cerr << "After advance:  (*iter)->common_name == " << (*iter)->common_name << endl;
+#endif 
+
+      a_star_ptr_vector.erase(a_star_ptr_vector.begin(), iter);
+
+#if 0
+      cerr << "After erase:  (*a_star_ptr_vector.begin())->common_name == " << (*a_star_ptr_vector.begin())->common_name
+           << endl;
+#endif 
+
+   }
+
+   if (scanner_node->stars_get_option_struct->limit > 0)
+   {
+#if 0
+      cerr << "Limit == " << scanner_node->stars_get_option_struct->limit << " (> 0).  Advancing and erasing." << endl
+           << "a_star_ptr_vector.size() == " << a_star_ptr_vector.size()
+           << endl 
+           << "scanner_node->stars_get_option_struct->limit == " << scanner_node->stars_get_option_struct->limit
+           << endl 
+           << "min(static_cast<int>(a_star_ptr_vector.size())," << endl  
+           << "    static_cast<int>(scanner_node->stars_get_option_struct->limit))"
+           << endl 
+           << "== " << min(static_cast<int>(a_star_ptr_vector.size()), static_cast<int>(scanner_node->stars_get_option_struct->limit))
+           << endl; 
+#endif 
+
+       iter = a_star_ptr_vector.begin();
+       advance(iter, min(static_cast<int>(a_star_ptr_vector.size()), 
+                         static_cast<int>(scanner_node->stars_get_option_struct->limit)));
+       a_star_ptr_vector.erase(iter, a_star_ptr_vector.end());
+   }
+
    v = a_star_ptr_vector;
 
-   for (vector<Star*>::iterator iter = a_star_ptr_vector.begin();
+   for (iter = a_star_ptr_vector.begin();
         iter != a_star_ptr_vector.end();
         ++iter)
    {
       scanner_node->last_star_vector.push_back(**iter);
    }
 
-
    a_star_ptr_vector.clear();
+
+   DEBUG = SAVE_DEBUG;
 
 #if DEBUG_COMPILE
     if (DEBUG)
