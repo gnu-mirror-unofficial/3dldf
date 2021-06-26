@@ -118,6 +118,79 @@ Added this rule.
 
 };
 
+@q ***** (5) star_primary --> LAST @>
+@q ***** (5) star_vector_expression.@>
+
+@*4 \§star primary> $\longrightarrow$ 
+\.{LAST} \§star vector expression>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=star_primary: LAST star_vector_expression@>@/
+{ 
+
+    Star* c;
+
+    c = create_new<Star>(0);
+
+    Pointer_Vector<Star>* pv 
+      = static_cast<Pointer_Vector<Star>*>(@=$2@>);
+
+@q ******* (7) Error handling:  |pv == 0|.@> 
+
+@ Error handling:  |pv == 0|.
+\initials{LDF 2021.05.28.}
+
+@<Define rules@>=
+
+  if (pv == static_cast<Pointer_Vector<Star>*>(0))
+  {
+      delete c;
+
+      @=$$@> = static_cast<void*>(0);
+
+  }  /* |if (pv == 0)|  */
+
+@q ******* (7) Error handling:  |pv->ctr == 0|.@> 
+
+@ Error handling:  |pv->ctr == 0|.
+\initials{LDF 2021.05.28.}
+
+@<Define rules@>=
+
+   else if (pv->ctr == 0)
+   {
+
+       delete c;
+
+       @=$$@> = static_cast<void*>(0);
+
+   }  /* |else if (pv->ctr == 0)|  */
+
+@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+
+@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+\initials{LDF 2021.05.28.}
+
+@<Define rules@>=
+
+   else 
+   {
+      *c = *(pv->v[pv->ctr - 1]);
+      @=$$@> = static_cast<void*>(c); 
+   }
+
+@q ******* (7) @> 
+
+};
+
 @q * (1) star_secondary.  @>
 @* \§star secondary>.
 \initials{LDF 2021.05.28.}
@@ -281,6 +354,79 @@ Added this rule.
 
 };
 
+@q ***** (5) constellation_primary --> LAST @>
+@q ***** (5) constellation_vector_expression.@>
+
+@*4 \§constellation primary> $\longrightarrow$ 
+\.{LAST} \§constellation vector expression>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=constellation_primary: LAST constellation_vector_expression@>@/
+{ 
+
+    Constellation* c;
+
+    c = create_new<Constellation>(0);
+
+    Pointer_Vector<Constellation>* pv 
+      = static_cast<Pointer_Vector<Constellation>*>(@=$2@>);
+
+@q ******* (7) Error handling:  |pv == 0|.@> 
+
+@ Error handling:  |pv == 0|.
+\initials{LDF 2021.05.28.}
+
+@<Define rules@>=
+
+  if (pv == static_cast<Pointer_Vector<Constellation>*>(0))
+  {
+      delete c;
+
+      @=$$@> = static_cast<void*>(0);
+
+  }  /* |if (pv == 0)|  */
+
+@q ******* (7) Error handling:  |pv->ctr == 0|.@> 
+
+@ Error handling:  |pv->ctr == 0|.
+\initials{LDF 2021.05.28.}
+
+@<Define rules@>=
+
+   else if (pv->ctr == 0)
+   {
+
+       delete c;
+
+       @=$$@> = static_cast<void*>(0);
+
+   }  /* |else if (pv->ctr == 0)|  */
+
+@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+
+@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+\initials{LDF 2021.05.28.}
+
+@<Define rules@>=
+
+   else 
+   {
+      *c = *(pv->v[pv->ctr - 1]);
+      @=$$@> = static_cast<void*>(c); 
+   }
+
+@q ******* (7) @> 
+
+};
+
 @q * (1) constellation_secondary.  @>
 @* \§constellation secondary>.
 \initials{LDF 2021.05.28.}
@@ -441,6 +587,79 @@ Added this rule.
 @=planet_primary: LEFT_PARENTHESIS planet_expression RIGHT_PARENTHESIS@>@/
 {
   @=$$@> = @=$2@>;
+
+};
+
+@q ***** (5) planet_primary --> LAST @>
+@q ***** (5) planet_vector_expression.@>
+
+@*4 \§planet primary> $\longrightarrow$ 
+\.{LAST} \§planet vector expression>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=planet_primary: LAST planet_vector_expression@>@/
+{ 
+
+    Planet* c;
+
+    c = create_new<Planet>(0);
+
+    Pointer_Vector<Planet>* pv 
+      = static_cast<Pointer_Vector<Planet>*>(@=$2@>);
+
+@q ******* (7) Error handling:  |pv == 0|.@> 
+
+@ Error handling:  |pv == 0|.
+\initials{LDF 2021.05.29.}
+
+@<Define rules@>=
+
+  if (pv == static_cast<Pointer_Vector<Planet>*>(0))
+  {
+      delete c;
+
+      @=$$@> = static_cast<void*>(0);
+
+  }  /* |if (pv == 0)|  */
+
+@q ******* (7) Error handling:  |pv->ctr == 0|.@> 
+
+@ Error handling:  |pv->ctr == 0|.
+\initials{LDF 2021.05.29.}
+
+@<Define rules@>=
+
+   else if (pv->ctr == 0)
+   {
+
+       delete c;
+
+       @=$$@> = static_cast<void*>(0);
+
+   }  /* |else if (pv->ctr == 0)|  */
+
+@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
+
+@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
+\initials{LDF 2021.05.29.}
+
+@<Define rules@>=
+
+   else 
+   {
+      *c = *(pv->v[pv->ctr - 1]);
+      @=$$@> = static_cast<void*>(c); 
+   }
+
+@q ******* (7) @> 
 
 };
 

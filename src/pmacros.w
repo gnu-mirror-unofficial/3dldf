@@ -324,6 +324,7 @@ Rewrote this rule.
 
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
+
          cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                    << "`macro_definition --> "
                    << endl 
@@ -357,15 +358,18 @@ Rewrote this rule.
 
          if (entry->object == static_cast<void*>(0))
             {
+
                Definition_Info_Node d;
 
                try 
                   {
+
                      d = new Definition_Info_Type;
                   }
 
                catch (bad_alloc)
                   {
+
                      cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                                << "`macro_definition --> "
                                << endl 
@@ -403,8 +407,10 @@ Rewrote this rule.
 
          try  
             {
+
                status = macro_definition_func(scanner_node,
                                               entry); 
+
             }
 
 @q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
@@ -418,6 +424,7 @@ throwing |bad_alloc|.
 
          catch (bad_alloc)
             {
+
                 cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
                           << "`macro_definition --> "
                           << "DEF macro_variable equate_or_assign':"
@@ -475,6 +482,9 @@ returning a non-zero value.
 
          else /* |status == 0|  */
             {
+
+
+
                scanner_node->macro_untyped_parameter_vector.clear();
                scanner_node->macro_typed_parameter_vector.clear();
 

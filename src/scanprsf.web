@@ -9928,7 +9928,7 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::macro_definition_func()'."
+                << "Entering `Scan_Parse::macro_definition_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -9952,7 +9952,7 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
           cerr_strm << thread_name << "ERROR!  "
-                    << "In `Scan_Parse::macro_definition_func()':"
+                    << "In `Scan_Parse::macro_definition_func':"
                     << endl << "`entry' is invalid.  Not assigning "
                     << "to `macro' variable.  Returning 1.";
 
@@ -9994,7 +9994,7 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
          catch (bad_alloc)
             {
                 cerr_strm << thread_name << "ERROR!  "
-                          << "In `Scan_Parse::macro_definition_func()':"
+                          << "In `Scan_Parse::macro_definition_func':"
                           << endl << "`new Definition_Info_Type' failed, "
                           << "throwing `bad_alloc'.  Rethrowing.";
 
@@ -10058,7 +10058,7 @@ arguments with the same name that might be passed to the macro.
    if (DEBUG)
      {
         cerr_strm << thread_name 
-                  << "In `Scan_Parse::macro_definition_func()':"
+                  << "In `Scan_Parse::macro_definition_func':"
                   << endl 
                   << "Showing `scanner_node->macro_typed_parameter_vector':"
                   << endl;
@@ -10107,7 +10107,7 @@ arguments with the same name that might be passed to the macro.
      {
 
         cerr_strm << thread_name 
-                  << "In `Scan_Parse::macro_definition_func()':"
+                  << "In `Scan_Parse::macro_definition_func':"
                   << endl 
                   << "Showing `scanner_node->macro_untyped_parameter_vector':"
                   << endl;
@@ -10167,7 +10167,7 @@ arguments with the same name that might be passed to the macro.
          if (DEBUG)
             {
                 cerr_strm << thread_name 
-                          << "In `Scan_Parse::macro_definition_func()':"
+                          << "In `Scan_Parse::macro_definition_func':"
                           << endl
                           << "`curr_token' == " << name_map[curr_token]
                           << endl << "`scanner_node->token_string' == "
@@ -10191,7 +10191,7 @@ arguments with the same name that might be passed to the macro.
                if (DEBUG)
                   {
                       cerr_strm << thread_name 
-                                << "In `Scan_Parse::macro_definition_func()':"
+                                << "In `Scan_Parse::macro_definition_func':"
                                 << endl
                                 << "`curr_token' == `ENDDEF' and `nest_ctr' == 0."
                                 << endl << "Got outer `ENDDEF'.  Breaking.";
@@ -10217,7 +10217,7 @@ arguments with the same name that might be passed to the macro.
                if (DEBUG)
                   {
                       cerr_strm << thread_name 
-                                << "In `Scan_Parse::macro_definition_func()':"
+                                << "In `Scan_Parse::macro_definition_func':"
                                 << endl
                                 << "`curr_token' == `ENDDEF' and `nest_ctr' > 0."
                                 << endl << "Decrementing `nest_ctr' and continuing.";
@@ -10248,7 +10248,7 @@ arguments with the same name that might be passed to the macro.
                if (DEBUG)
                   {
                       cerr_strm << thread_name 
-                                << "In `Scan_Parse::macro_definition_func()':"
+                                << "In `Scan_Parse::macro_definition_func':"
                                 << endl
                                 << "`curr_token' == " << name_map[curr_token] << "."
                                 << endl << "Incrementing `nest_ctr'.";
@@ -10284,7 +10284,7 @@ arguments with the same name that might be passed to the macro.
            if (DEBUG)
               {
                   cerr_strm << thread_name 
-                            << "In `Scan_Parse::macro_definition_func()':"
+                            << "In `Scan_Parse::macro_definition_func':"
                             << endl
                             << "`curr_token' == " << name_map[curr_token]
                             << endl 
@@ -10380,7 +10380,7 @@ default:
 #if DEBUG_COMPILE
           if (DEBUG)
              {
-                cerr_strm << thread_name << "In `Scan_Parse::macro_definition_func()':"
+                cerr_strm << thread_name << "In `Scan_Parse::macro_definition_func':"
                           << endl << "It's symbolic: " << scanner_node->token_string;
 
                 log_message(cerr_strm);
@@ -10492,7 +10492,7 @@ default:
    if (DEBUG)
      {
          cerr_strm << thread_name 
-                   << "In `Scan_Parse::macro_definition_func()':"
+                   << "In `Scan_Parse::macro_definition_func':"
                    << endl
                    << "`din->definition_strm_ptr[1]->str()' == " 
                    << din->definition_strm_ptr[1]->str();

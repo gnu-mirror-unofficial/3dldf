@@ -1828,6 +1828,103 @@ instead of
 
 };
 
+
+@q *** (3) star_vector_variable.  @>
+@*2 \§star vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> star_vector_variable@>@/
+
+@q **** (4) star_vector_variable --> variable STAR_VECTOR.@>
+@*3 \§star vector variable> $\longrightarrow$ \§variable> 
+\.{STAR\_VECTOR}.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=star_vector_variable: variable STAR_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               STAR_VECTOR,
+                               parameter);
+
+};
+
+@q *** (3) constellation_vector_variable.  @>
+@*2 \§constellation vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> constellation_vector_variable@>@/
+
+@q **** (4) constellation_vector_variable --> variable CONSTELLATION_VECTOR.@>
+@*3 \§constellation vector variable> $\longrightarrow$ \§variable> 
+\.{CONSTELLATION\_VECTOR}.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=constellation_vector_variable: variable CONSTELLATION_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               CONSTELLATION_VECTOR,
+                               parameter);
+
+};
+
+@q *** (3) planet_vector_variable.  @>
+@*2 \§planet vector variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> planet_vector_variable@>@/
+
+@q **** (4) planet_vector_variable --> variable PLANET_VECTOR.@>
+@*3 \§planet vector variable> $\longrightarrow$ \§variable> 
+\.{PLANET\_VECTOR}.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=planet_vector_variable: variable PLANET_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               PLANET_VECTOR,
+                               parameter);
+
+};
+
 @q *** (3) plane_vector_variable.  @>
 @*2 \§plane vector variable>.
 \initials{LDF 2005.10.30.}
@@ -2628,6 +2725,64 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q **** (4) vector_type_variable --> star_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§star vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: star_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) vector_type_variable --> constellation_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§constellation vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: constellation_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) vector_type_variable --> planet_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§planet vector variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: planet_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
 
 @q **** (4) vector_type_variable --> plane_vector_variable.@>
 
@@ -5709,6 +5864,62 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q *** (3)  any_variable --> star_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§star vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: star_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3)  any_variable --> constellation_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§constellation vector variable>.
+\initials{LDF 2021.05.28.}
+
+\LOG
+\initials{LDF 2021.05.28.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: constellation_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q *** (3)  any_variable --> planet_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§planet vector variable>.
+\initials{LDF 2021.05.29.}
+
+\LOG
+\initials{LDF 2021.05.29.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: planet_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+
 
 @q *** (3)  any_variable --> plane_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 

@@ -969,6 +969,18 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 run: 3dldf$(EXEEXT)
 	3dldf$(EXEEXT) --astro sample1.ldf
 
+.PHONY : run-bi
+
+run-bi: 3dldf$(EXEEXT)
+	3dldf$(EXEEXT) --bi sample1.ldf
+
+.PHONY : run-fbi
+
+run-fbi: 
+	rm parser.o
+	$(MAKE) 3dldf$(EXEEXT)
+	3dldf$(EXEEXT) --bi sample1.ldf
+
 .PHONY : run-1
 run-1: 3dldf$(EXEEXT)
 	echo "end" | 3dldf$(EXEEXT)

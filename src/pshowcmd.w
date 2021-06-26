@@ -2340,8 +2340,8 @@ Added this rule.
    @=$$@> = 0;
 };
 
-@q ****** (6) stars_option_list --> stars_option_list LIMIT numeric_expression@> 
-@*5 \§stars option list> $\longrightarrow$ \.{LIMIT} \§numeric expression>
+@q ****** (6) stars_option_list --> stars_option_list WITH_LIMIT numeric_expression@> 
+@*5 \§stars option list> $\longrightarrow$ \.{WITH\_LIMIT} \§numeric expression>
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -2351,7 +2351,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=stars_option_list: stars_option_list LIMIT numeric_expression@>@/
+@=stars_option_list: stars_option_list WITH_LIMIT numeric_expression@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -2360,7 +2360,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT numeric_expression'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_LIMIT numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2373,7 +2373,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list LIMIT numeric_expression':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_LIMIT numeric_expression':"
                 << endl
                 << "`$3' == " << @=$3@> << endl;
 
@@ -2390,8 +2390,8 @@ Added this rule.
 
 };
 
-@q ****** (6) stars_option_list --> stars_option_list OFFSET numeric_expression@> 
-@*5 \§stars option list> $\longrightarrow$ \.{OFFSET} \§numeric expression>
+@q ****** (6) stars_option_list --> stars_option_list WITH_OFFSET numeric_expression@> 
+@*5 \§stars option list> $\longrightarrow$ \.{WITH\_OFFSET} \§numeric expression>
 \initials{LDF 2021.06.20.}
 
 \LOG
@@ -2401,7 +2401,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=stars_option_list: stars_option_list OFFSET numeric_expression@>@/
+@=stars_option_list: stars_option_list WITH_OFFSET numeric_expression@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -2410,7 +2410,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET numeric_expression'.";
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_OFFSET numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2423,7 +2423,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `stars_option_list: stars_option_list OFFSET numeric_expression':"
+      cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_OFFSET numeric_expression':"
                 << endl
                 << "`$3' == " << @=$3@> << endl;
 

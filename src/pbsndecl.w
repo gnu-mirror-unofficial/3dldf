@@ -146,8 +146,6 @@ when I tried to build 3DLDF from scratch.
 #include "scanprse.h++"
 #include "astronmy.h++"
 
-
-
 @q * (1) Using declarations.  @>
 @* Using declarations.
 @<Using declarations@>=
@@ -585,8 +583,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     ORDER@>@/
 @=%token <int_value>     ORDER_BY@>@/
 @=%token <int_value>     WHERE@>@/
-@=%token <int_value>     LIMIT@>@/
-@=%token <int_value>     OFFSET@>@/
+@=%token <int_value>     WITH_LIMIT@>@/
+@=%token <int_value>     WITH_OFFSET@>@/
 @=%token <int_value>     ASCENDING@>@/
 @=%token <int_value>     DESCENDING@>@/
 @=%token <int_value>     COMMON_NAME@>@/
@@ -688,6 +686,10 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> HYPERBOLOID_VECTOR@>@/
 
 @=%token <pointer_value> GLYPH_VECTOR@>@/
+
+@=%token <pointer_value> STAR_VECTOR@>@/
+@=%token <pointer_value> CONSTELLATION_VECTOR@>@/
+@=%token <pointer_value> PLANET_VECTOR@>@/
 
 @=%token <pointer_value> PLANE_VECTOR@>@/
 
@@ -871,6 +873,9 @@ Added token declaration for |SPHERE_DEVELOPMENT_DECLARATOR|
 
 @=%token <string_value> GLYPH_DECLARATOR@>@/
 @=%token <string_value> PLANE_DECLARATOR@>@/
+@=%token <string_value> STAR_DECLARATOR@>@/
+@=%token <string_value> CONSTELLATION_DECLARATOR@>@/
+@=%token <string_value> PLANET_DECLARATOR@>@/
 
 @=%token <string_value> ORIGAMI_FIGURE_DECLARATOR@>@/
 
@@ -975,6 +980,10 @@ Added token declaration for |SPHERE_DEVELOPMENT_VECTOR_DECLARATOR|.
 
 @=%token <string_value> GLYPH_VECTOR_DECLARATOR@>@/
 @=%token <string_value> GLYPH_SLICE_VECTOR_DECLARATOR@>@/
+
+@=%token <string_value> STAR_VECTOR_DECLARATOR@>@/
+@=%token <string_value> CONSTELLATION_VECTOR_DECLARATOR@>@/
+@=%token <string_value> PLANET_VECTOR_DECLARATOR@>@/
 
 @=%token <string_value> PLANE_VECTOR_DECLARATOR@>@/
 
@@ -1614,8 +1623,13 @@ Added token declarations for
 @=%token <int_value> IS_GLYPH_SLICE_VECTOR@>@/
 
 @=%token <int_value> IS_STAR@>@/
+@=%token <int_value> IS_STAR_VECTOR@>@/
+
 @=%token <int_value> IS_CONSTELLATION@>@/
+@=%token <int_value> IS_CONSTELLATION_VECTOR@>@/
+
 @=%token <int_value> IS_PLANET@>@/
+@=%token <int_value> IS_PLANET_VECTOR@>@/
 
 @=%token <int_value> IS_PLANE@>@/
 @=%token <int_value> IS_PLANE_VECTOR@>@/
