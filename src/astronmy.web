@@ -1172,8 +1172,8 @@ Added this function.
 @<Declare |Star| functions@>=
 int
 process_where_option(Stars_Where_Option_Struct &where_option,
-                     vector<Star*> &a_star_vector,
-                     vector<Star*> &b_star_vector,
+                     vector<Star*> &a_star_ptr_vector,
+                     vector<Star*> &b_star_ptr_vector,
 		     Scanner_Node scanner_node = 0);
 
 @q **** (4) Definition.@> 
@@ -1181,8 +1181,8 @@ process_where_option(Stars_Where_Option_Struct &where_option,
 @<Define |Star| functions@>= 
 int
 Star::process_where_option(Stars_Where_Option_Struct &where_option, 
-                           vector<Star*> &a_star_vector, 
-                           vector<Star*> &b_star_vector,
+                           vector<Star*> &a_star_ptr_vector, 
+                           vector<Star*> &b_star_ptr_vector,
                            Scanner_Node scanner_node) 
 { 
 @q ***** (5) @>
@@ -2054,12 +2054,12 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
            if (status == 1)
            {
-              cerr << "Will push `this' onto `a_star_vector' or `b_star_vector'."
+              cerr << "Will push `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                    << endl;
            }
            else
            {
-              cerr << "Won't push `this' onto `a_star_vector' or `b_star_vector'."
+              cerr << "Won't push `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                    << endl;
            }   
        }   
@@ -2092,12 +2092,12 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
            if (status == 1)
            {
-              cerr << "Will push `this' onto `a_star_vector' or `b_star_vector'."
+              cerr << "Will push `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                    << endl;
            }
            else
            {
-              cerr << "Won't push `this' onto `a_star_vector' or `b_star_vector'."
+              cerr << "Won't push `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                    << endl;
            }   
        }   
@@ -2131,12 +2131,12 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
            if (status == 1)
            {
-              cerr << "Will push `this' onto `a_star_vector' or `b_star_vector'."
+              cerr << "Will push `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                    << endl;
            }
            else
            {
-              cerr << "Won't push `this' onto `a_star_vector' or `b_star_vector'."
+              cerr << "Won't push `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                    << endl;
            }   
        }   
@@ -2184,13 +2184,13 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
            if (DEBUG)
            { 
               cerr << "where_option.conjunction == 0 || where_option.conjunction == AND" << endl
-                   << "Pushing `this' onto `a_star_vector'."
+                   << "Pushing `this' onto `a_star_ptr_vector'."
                    << endl;
 
            }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           a_star_vector.push_back(this);
+           a_star_ptr_vector.push_back(this);
         }
 
 @q ****** (6) @>
@@ -2201,12 +2201,12 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
            if (DEBUG)
            { 
               cerr << "where_option.conjunction == OR" << endl
-                   << "Pushing `this' onto `b_star_vector'."
+                   << "Pushing `this' onto `b_star_ptr_vector'."
                    << endl;
            }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           b_star_vector.push_back(this);
+           b_star_ptr_vector.push_back(this);
         }
 
 @q ****** (6) @>
@@ -2224,7 +2224,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
                  << endl 
                  << "This case is either invalid or hasn't been accounted for."
                  << endl
-                 << "Not pushing `this' onto `a_star_vector' or `b_star_vector'."
+                 << "Not pushing `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'."
                  << endl
                  << "Exiting function with return value 2."
                  << endl;
@@ -2241,7 +2241,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 #if DEBUG_COMPILE
     else if (DEBUG)
     { 
-           cerr << "`status' == 0 (`false').  Not pushing `this' onto `a_star_vector' or `b_star_vector'." 
+           cerr << "`status' == 0 (`false').  Not pushing `this' onto `a_star_ptr_vector' or `b_star_ptr_vector'." 
                 << endl;
     }     
 #endif /* |DEBUG_COMPILE|  */@; 

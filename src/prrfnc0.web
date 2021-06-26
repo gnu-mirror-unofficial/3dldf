@@ -7442,8 +7442,8 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
   int status = 0;
 
   Stars_Where_Option_Struct w; 
-  vector<Star *> a_star_vector;
-  vector<Star *> b_star_vector;
+  vector<Star *> a_star_ptr_vector;
+  vector<Star *> b_star_ptr_vector;
 
   vector<Star *>::iterator iter;
   vector<Star *>::iterator begin_iter;
@@ -7485,14 +7485,14 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 #if 0 
         cerr_strm << "`Scan_Parse::get_stars_func':" 
                   << endl 
-                  << "After calls to `stable_sort': `scanner_node->star_vector':" << endl;
+                  << "After calls to `stable_sort': `scanner_node->star_ptr_vector':" << endl;
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
 
-        for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
-             iter != scanner_node->star_vector.end();
+        for (vector<Star*>::iterator iter = scanner_node->star_ptr_vector.begin();
+             iter != scanner_node->star_ptr_vector.end();
              ++iter)
         {
            (*iter)->show();
@@ -7576,8 +7576,8 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
                    << endl 
                    << "`scanner_node->stars_get_option_struct->where_options.size()' == 0."
                    << endl 
-                   << "Assigning the contents of `scanner_node->star_vector' to "
-                   << "`a_star_vector' and skipping to label `AFTER_WHERE_CLAUSE'."
+                   << "Assigning the contents of `scanner_node->star_ptr_vector' to "
+                   << "`a_star_ptr_vector' and skipping to label `AFTER_WHERE_CLAUSE'."
                    << endl;
 
          log_message(cerr_strm);
@@ -7586,14 +7586,14 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
        }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      a_star_vector = scanner_node->star_vector;
+      a_star_ptr_vector = scanner_node->star_ptr_vector;
 
 #if DEBUG_COMPILE
       if (DEBUG)
       { 
-         cerr_strm << "`a_star_vector.size()'             == " << a_star_vector.size()
+         cerr_strm << "`a_star_ptr_vector.size()'             == " << a_star_ptr_vector.size()
                    << endl
-                   << "`scanner_node->star_vector.size()' == " << scanner_node->star_vector.size()
+                   << "`scanner_node->star_ptr_vector.size()' == " << scanner_node->star_ptr_vector.size()
                    << endl;
 
          log_message(cerr_strm);
@@ -7620,13 +7620,13 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
         if (w_iter->conjunction == 0 || w_iter->conjunction == OR)
         {
-            begin_iter = scanner_node->star_vector.begin();
-            end_iter = scanner_node->star_vector.end();
+            begin_iter = scanner_node->star_ptr_vector.begin();
+            end_iter = scanner_node->star_ptr_vector.end();
         }
         else if (w_iter->conjunction == AND)
         {
-            begin_iter = a_star_vector.begin();
-            end_iter   = a_star_vector.end();
+            begin_iter = a_star_ptr_vector.begin();
+            end_iter   = a_star_ptr_vector.end();
         } 
         else
         {
@@ -7667,7 +7667,7 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ******* (7) @>
 
-            status = (*iter)->process_where_option(*w_iter, a_star_vector, b_star_vector, scanner_node);
+            status = (*iter)->process_where_option(*w_iter, a_star_ptr_vector, b_star_ptr_vector, scanner_node);
 
             if (status != 0)
             {
@@ -7693,59 +7693,59 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ****** (6) @>
 
-        if (w_iter->conjunction == OR && b_star_vector.size() > 0)
+        if (w_iter->conjunction == OR && b_star_ptr_vector.size() > 0)
         {
 @q ******* (7) @>
 
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "w_iter->conjunction == OR && b_star_vector.size() > 0" 
+               cerr << "w_iter->conjunction == OR && b_star_ptr_vector.size() > 0" 
                     << endl 
-                    << "Appending `b_star_vector' to `a_star_vector', sorting `a_star_vector', "
-                    << "removing duplicates (if any) and clearing `b_star_vector'."
+                    << "Appending `b_star_ptr_vector' to `a_star_ptr_vector', sorting `a_star_ptr_vector', "
+                    << "removing duplicates (if any) and clearing `b_star_ptr_vector'."
                     << endl
                     << "Before:" << endl 
-                    << "a_star_vector.size() == " << a_star_vector.size() << endl 
-                    << "b_star_vector.size() == " << b_star_vector.size() << endl;
+                    << "a_star_ptr_vector.size() == " << a_star_ptr_vector.size() << endl 
+                    << "b_star_ptr_vector.size() == " << b_star_ptr_vector.size() << endl;
             }             
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
 
-            a_star_vector.insert(a_star_vector.end(), b_star_vector.begin(), b_star_vector.end());
-            sort(a_star_vector.begin(), a_star_vector.end(), compare_bs_hr_number);
+            a_star_ptr_vector.insert(a_star_ptr_vector.end(), b_star_ptr_vector.begin(), b_star_ptr_vector.end());
+            sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(), compare_bs_hr_number);
 
 @q ******* (7) @>
 
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "After appending `b_star_vector' to `a_star_vector' and sorting:" 
+               cerr << "After appending `b_star_ptr_vector' to `a_star_ptr_vector' and sorting:" 
                     << endl 
-                    << "a_star_vector.size() == " << a_star_vector.size() << endl 
-                    << "b_star_vector.size() == " << b_star_vector.size() << endl
+                    << "a_star_ptr_vector.size() == " << a_star_ptr_vector.size() << endl 
+                    << "b_star_ptr_vector.size() == " << b_star_ptr_vector.size() << endl
                     << endl;
             }             
 #endif /* |DEBUG_COMPILE|  */@;  
 
 @q ******* (7) @>
 
-            dup_iter = unique(a_star_vector.begin(), a_star_vector.end(), compare_star_pointers);
+            dup_iter = unique(a_star_ptr_vector.begin(), a_star_ptr_vector.end(), compare_star_pointers);
 
-            if (dup_iter != a_star_vector.end())
+            if (dup_iter != a_star_ptr_vector.end())
             {
 #if DEBUG_COMPILE
                 if (DEBUG)
                 { 
-                    cerr << "`dup_iter' != `a_star_vector.end()'." << endl
+                    cerr << "`dup_iter' != `a_star_ptr_vector.end()'." << endl
                          << "Found duplicates.  Calling `erase'."
                          << endl;
                          
                 }                 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-                a_star_vector.erase(dup_iter, a_star_vector.end());
+                a_star_ptr_vector.erase(dup_iter, a_star_ptr_vector.end());
             }
 
 @q ******* (7) @>
@@ -7753,7 +7753,7 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 #if DEBUG_COMPILE
             else if (DEBUG)
             { 
-                cerr << "`dup_iter' == `a_star_vector.end()'." << endl
+                cerr << "`dup_iter' == `a_star_ptr_vector.end()'." << endl
                      << "Found no duplicates.  Not calling `erase'."
                      << endl;
 
@@ -7762,22 +7762,22 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
 
 @q ******* (7) @>
 
-            b_star_vector.clear(); 
+            b_star_ptr_vector.clear(); 
 
 #if DEBUG_COMPILE
             if (DEBUG)
             { 
-               cerr << "After removing duplicates (if any) from `a_star_vector' "
-                    << "and clearing `b_star_vector':" << endl 
-                    << "a_star_vector.size() == " << a_star_vector.size() << endl 
-                    << "b_star_vector.size() == " << b_star_vector.size() << endl
+               cerr << "After removing duplicates (if any) from `a_star_ptr_vector' "
+                    << "and clearing `b_star_ptr_vector':" << endl 
+                    << "a_star_ptr_vector.size() == " << a_star_ptr_vector.size() << endl 
+                    << "b_star_ptr_vector.size() == " << b_star_ptr_vector.size() << endl
                     << endl;
             }             
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
 
-        }  /* |if (w_iter->conjunction == OR && b_star_vector.size() > 0)| */
+        }  /* |if (w_iter->conjunction == OR && b_star_ptr_vector.size() > 0)| */
 
 @q ****** (6) @>
         
@@ -7836,7 +7836,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_common_name);
         }
 
@@ -7852,7 +7852,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_flamsteed_designation_number);
 
         }         
@@ -7869,7 +7869,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_bayer_designation_greek_letter);
 
         }         
@@ -7886,7 +7886,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_bs_hr_number);
         }                                        
 
@@ -7901,7 +7901,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_approx_rank_apparent_magnitude);
 
         } 
@@ -7918,7 +7918,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_constellation_abbreviation);
 
         } 
@@ -7934,7 +7934,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_constellation_full_name);
 
         } 
@@ -7950,7 +7950,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_constellation_name_genitive);
 
         } 
@@ -7966,7 +7966,7 @@ AFTER_WHERE_CLAUSE:
            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-           stable_sort(a_star_vector.begin(), a_star_vector.end(),
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
                        compare_constellation_number);
 
         } 
@@ -8007,18 +8007,18 @@ AFTER_WHERE_CLAUSE:
    { 
        s.str("");
 
-       cerr << "`a_star_vector.size()' == " << a_star_vector.size() << endl
-            << "`b_star_vector.size()' == " << b_star_vector.size() << endl;
+       cerr << "`a_star_ptr_vector.size()' == " << a_star_ptr_vector.size() << endl
+            << "`b_star_ptr_vector.size()' == " << b_star_ptr_vector.size() << endl;
 
 #if 0 /* 1  */ 
 
-       if (a_star_vector.size() > 0)
-          cerr << "`a_star_vector':" << endl;
+       if (a_star_ptr_vector.size() > 0)
+          cerr << "`a_star_ptr_vector':" << endl;
 
        i = 1;
 
-       for (vector<Star*>::iterator iter = a_star_vector.begin();
-            iter != a_star_vector.end();
+       for (vector<Star*>::iterator iter = a_star_ptr_vector.begin();
+            iter != a_star_ptr_vector.end();
             ++iter)
        {
            s << "Star " << i++;
@@ -8029,11 +8029,11 @@ AFTER_WHERE_CLAUSE:
            
        }   
 
-       if (b_star_vector.size() > 0)
-          cerr << "`b_star_vector':" << endl;
+       if (b_star_ptr_vector.size() > 0)
+          cerr << "`b_star_ptr_vector':" << endl;
 
-       for (vector<Star*>::iterator iter = b_star_vector.begin();
-            iter != b_star_vector.end();
+       for (vector<Star*>::iterator iter = b_star_ptr_vector.begin();
+            iter != b_star_ptr_vector.end();
             ++iter)
        {
            (*iter)->show();
@@ -8049,11 +8049,11 @@ AFTER_WHERE_CLAUSE:
 @
 @<Define parser rule functions@>=
 
-   if (a_star_vector.size() == 0)
+   if (a_star_ptr_vector.size() == 0)
    {
       cerr_strm << "WARNING!  In `Scan_Parse::get_stars_func':"
                 << endl
-                << "`vector<Star*> a_star_vector' is empty."
+                << "`vector<Star*> a_star_ptr_vector' is empty."
                 << endl 
                 << "Failed to find any `stars' fulfilling the search criteria."
                 << endl
@@ -8070,11 +8070,17 @@ AFTER_WHERE_CLAUSE:
 
 @q **** (4) @>
 
-   v = a_star_vector;
+   v = a_star_ptr_vector;
 
-   scanner_node->last_star_vector = a_star_vector;
+   for (vector<Star*>::iterator iter = a_star_ptr_vector.begin();
+        iter != a_star_ptr_vector.end();
+        ++iter)
+   {
+      scanner_node->last_star_vector.push_back(**iter);
+   }
 
-   a_star_vector.clear();
+
+   a_star_ptr_vector.clear();
 
 #if DEBUG_COMPILE
     if (DEBUG)

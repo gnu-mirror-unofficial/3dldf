@@ -4875,7 +4875,7 @@ Scanner_Type::get_astronomy(void)
 
 @q ****** (6) @>
   
-         star_vector.push_back(star);
+         star_ptr_vector.push_back(star);
 
 @q ****** (6) @>
 
@@ -4901,20 +4901,20 @@ Scanner_Type::get_astronomy(void)
 
    DEBUG = false;  /* |true|  */
 
-   if (star_vector.size() > 0)
+   if (star_ptr_vector.size() > 0)
    {
 @q ***** (5) @>
    
 #if DEBUG_COMPILE
       if (DEBUG)
       { 
-         cerr << "In `Scanner_Type::get_astronomy':  `star_vector.size()' == "
-              << star_vector.size() << endl;
+         cerr << "In `Scanner_Type::get_astronomy':  `star_ptr_vector.size()' == "
+              << star_ptr_vector.size() << endl;
 
-         if (star_vector.size() == 0)
-           cerr << "`star_vector.size()' == 0.  Not showing `star_vector'." << endl;
+         if (star_ptr_vector.size() == 0)
+           cerr << "`star_ptr_vector.size()' == 0.  Not showing `star_ptr_vector'." << endl;
          else
-           cerr << "`star_vector.size()' == " << star_vector.size() << " (> 0).  Showing `star_vector':" 
+           cerr << "`star_ptr_vector.size()' == " << star_ptr_vector.size() << " (> 0).  Showing `star_ptr_vector':" 
                 << endl;
 
       }  /* |if (DEBUG)| */
@@ -4922,8 +4922,8 @@ Scanner_Type::get_astronomy(void)
 
 @q ***** (5) @>
 
-      for (vector<Star *>::iterator iter = star_vector.begin();
-           iter != star_vector.end();
+      for (vector<Star *>::iterator iter = star_ptr_vector.begin();
+           iter != star_ptr_vector.end();
            ++iter)
       {
 @q ****** (6) @>
@@ -5264,7 +5264,7 @@ Scanner_Type::get_astronomy(void)
       }  /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   }  /* |if (star_vector.size() > 0)|  */
+   }  /* |if (star_ptr_vector.size() > 0)|  */
 
 @q **** (4) @>
 

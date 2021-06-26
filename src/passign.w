@@ -4101,9 +4101,9 @@ Added this rule.
    if (entry_pv)
      entry_pv->clear();
 
-int status = vector_type_assign<bool, bool>(static_cast<Scanner_Node>(parameter),
-                                              entry,
-                                              pv);
+   int status = vector_type_assign<bool, bool>(static_cast<Scanner_Node>(parameter),
+                                               entry,
+                                               pv);
 
 @q ******* (7) Error handling:                           @> 
 @q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
@@ -7727,17 +7727,12 @@ Added this rule.
 
    typedef Pointer_Vector<Star> PV;
 
-/* !!START HERE  \initials{LDF 2021.06.26.}  Try creating a new vector with copies of the stars.  */ 
- 
-   PV* pv;
-  
-   pv = new PV;
-
-   pv->v = scanner_node->last_star_vector;
-   pv->ctr = pv->v.size();
-
    PV* entry_pv = static_cast<PV*>(entry->object);
 
+   PV *pv = new PV;
+
+   *pv = scanner_node->last_star_vector;
+        
    if (entry_pv)
      entry_pv->clear();
 
@@ -7745,6 +7740,7 @@ Added this rule.
                    static_cast<Scanner_Node>(parameter),
                    entry,
                    pv);
+
 
 @q ******* (7) Error handling:                           @> 
 @q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
@@ -7759,6 +7755,7 @@ failed.
    {
 
        delete pv;
+       pv = 0;     
 
        @=$$@> = static_cast<void*>(0);
 
@@ -7774,6 +7771,7 @@ failed.
    else /* |status == 0|  */
    {
       delete pv;
+      pv = 0;
 
       @=$$@> = static_cast<void*>(entry->object); 
  
