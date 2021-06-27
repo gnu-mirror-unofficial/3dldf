@@ -57,9 +57,11 @@
 
 star_vector sv;
 
-sv := stars where common_name == "Cor Caroli 1";
+sv := stars common_name where common_name == "Cor Caroli 1";
 
 show sv;
+
+end;
 
 show stars common_name, star_constant_name, bs_hr_number 
 where constellation_full_name == "Canis Major" order by bs_hr_number;
