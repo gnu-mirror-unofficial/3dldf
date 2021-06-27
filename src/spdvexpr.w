@@ -102,7 +102,7 @@ Added this rule.
 };
 
 @q ** (2) sphere_development_primary --> LEFT_PARENTHESIS sphere_development_expression @> 
-@q ** (2) RIGHT_PARENTHESIS                                   @>
+@q ** (2) RIGHT_PARENTHESIS                                                             @>
 
 @*1 \§sphere_development primary> $\longrightarrow$ \.{\LP} 
 \§sphere_development expression> \.{\RP}.

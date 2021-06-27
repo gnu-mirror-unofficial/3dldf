@@ -1725,8 +1725,7 @@ Added calls to |scanner_node->add_entry| for |is_complex| and
 |is_complex_vector|.
 
 \initials{LDF 2009.11.09.}
-Added calls to |scanner_node->add_entry| for 
-|is_sphere_development|, 
+Added calls to |scanner_node->add_entry| for |is_sphere_development|, 
 and |is_sphere_development_vector|.
 \ENDLOG
 
@@ -5687,7 +5686,8 @@ Changed |axis_h| and |axis_v| arguments to 2 from 1.
 @*4 |Circles|.
 
 \LOG
-\initials{LDF 2004.06.17.}  Added this section.
+\initials{LDF 2004.06.17.}  
+Added this section.
 \ENDLOG 
 
 @q ****** (6) |unit_circle|.  @>
@@ -6090,6 +6090,42 @@ Added this section.
                                 "unit_great_rhombicosidodecahedron");
 
    }
+
+@q ***** (5) |Spheres|.  @>
+@*4 |Spheres|.
+
+\LOG
+\initials{LDF 2021.06.27.}
+Added this section.
+\ENDLOG 
+
+@q ****** (6) |unit_sphere|.  @>
+
+|unit_sphere|.
+
+\LOG
+\initials{LDF 2004.06.17.}  Added this section.
+\ENDLOG 
+
+@<Define |Scanner_Type::create|@>=          
+  {
+    Sphere* s_pt = create_new<Sphere>(0);
+
+    s_pt->set(0, scanner_node);
+
+#if 0 
+    s_pt->show("s_pt:");
+#endif 
+
+    v = static_cast<void*>(s_pt); 
+
+    scanner_node->add_entry("unit_sphere", SPHERE, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    scanner_node->add_synonym("unitsphere", "unit_sphere");
+
+}
 
 @q ***** (5) |Stars|.  @>
 @*4 |Stars|.

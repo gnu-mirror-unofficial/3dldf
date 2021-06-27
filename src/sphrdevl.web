@@ -136,7 +136,7 @@ class Sphere_Development
       real radius;
       unsigned int segments;   
       unsigned int divisions_long;  /* Lines of longitude (curves)  */
-      unsigned int divisions_lat;  /* Lines of latitude  */
+      unsigned int divisions_lat;   /* Lines of latitude  */
 
       unsigned int path_point_count;
 
@@ -148,6 +148,7 @@ class Sphere_Development
       map <pair<real, real>, Point> points;
 
    public:
+      static const unsigned int DEFAULT_RADIUS;
       static const unsigned int DEFAULT_SEGMENTS;
       static const unsigned int DEFAULT_DIVISIONS_LAT;
       static const unsigned int DEFAULT_DIVISIONS_LONG;
@@ -174,6 +175,7 @@ Changed |Sphere_Development::DEFAULT_DIVISIONS| to
 
 @<Initialize |static| |class Sphere_Development| data members@>=
 
+   const unsigned int Sphere_Development::DEFAULT_RADIUS           = 10;
    const unsigned int Sphere_Development::DEFAULT_SEGMENTS         =  8;
    const unsigned int Sphere_Development::DEFAULT_DIVISIONS_LAT    = 24;  
    const unsigned int Sphere_Development::DEFAULT_DIVISIONS_LONG   = 15;  
@@ -208,13 +210,12 @@ Sphere_Development(void);
 @<Define |Sphere_Development| functions@>=
 Sphere_Development::Sphere_Development(void)
 {
-   radius = 0;
 
-   segments  = 0;
-   divisions_lat = 0;
-   divisions_long = 0;
-
-   path_point_count = 0;
+   radius           = DEFAULT_RADIUS;          
+   segments         = DEFAULT_SEGMENTS;        
+   divisions_lat    = DEFAULT_DIVISIONS_LAT;   
+   divisions_long   = DEFAULT_DIVISIONS_LONG;  
+   path_point_count = DEFAULT_PATH_POINT_COUNT;
 
    return;
 
@@ -249,7 +250,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -305,11 +306,11 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-       radius = 1;
-       segments = DEFAULT_SEGMENTS;
+       radius           = DEFAULT_RADIUS;;
+       segments         = DEFAULT_SEGMENTS;
        path_point_count = DEFAULT_PATH_POINT_COUNT;
-       divisions_lat = DEFAULT_DIVISIONS_LAT;
-       divisions_long = DEFAULT_DIVISIONS_LONG;
+       divisions_lat    = DEFAULT_DIVISIONS_LAT;
+       divisions_long   = DEFAULT_DIVISIONS_LONG;
 
     }  /* |if (options == 0)|  */
 
@@ -325,7 +326,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
             cerr << thread_name << "In `Sphere_Development::set':"
                  << endl << "`options' != 0" << endl;
                    
-#if 0
+#if 1 /* 0 */
             options->show("options:");
 #endif 
           
@@ -345,10 +346,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 
 @q ****** (6)@>
 
-/* !! START HERE:  Generate paths.  
-   Debug.  LDF 2009.11.23.
-
-    LDF 2009.11.17. */
+/* !! START HERE:  Generate paths.  Debug.  LDF 2009.11.23.    */
 
    real circumference = 2 * PI * radius;
 
@@ -406,7 +404,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
 
    }  /* |for|  */
 
-#if 0 
+#if 1 /* 0 */ 
    cerr << "Type <RETURN> to continue." << endl;
    getchar(); 
 #endif 
@@ -424,7 +422,7 @@ Sphere_Development::set(Sphere_Development_Set_Option_Struct* options,
           cerr_message(cerr_strm);
           cerr_strm.str("");
 
-#if 0 
+#if 1 /* 0 */ 
           cerr_mutex.lock();
           long_paths[make_pair(0, 0)].show("long_paths[0, 0]:");
           lat_paths[make_pair(0, 0)].show("lat_paths[0, 0]:");
@@ -565,7 +563,7 @@ Sphere_Development::map_point(real latitude,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -694,7 +692,7 @@ Sphere_Development::draw(Picture& picture,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -1104,21 +1102,21 @@ Sphere_Development::show(string text,
 
     cerr << text 
          << endl
-         << "radius == " << radius
+         << "radius              == " << radius
          << endl 
-         << "`segments' == " << segments
+         << "`segments'          == " << segments
          << endl 
-         << "`points.size()' == " << points.size()
+         << "`points.size()'     == " << points.size()
          << endl 
-         << "`path_point_count' == " << path_point_count
+         << "`path_point_count'  == " << path_point_count
          << endl 
-         << "`divisions_lat' == " << divisions_lat
+         << "`divisions_lat'     == " << divisions_lat
          << endl 
-         << "`divisions_long' == " << divisions_long
+         << "`divisions_long'    == " << divisions_long
          << endl 
          << "`long_paths.size()' == " << long_paths.size()
          << endl 
-         << "`lat_paths.size()' == " << lat_paths.size()
+         << "`lat_paths.size()'  == " << lat_paths.size()
          << endl;
 
     transform.show("transform:");  

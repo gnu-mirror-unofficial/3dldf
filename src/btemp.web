@@ -1,222 +1,32 @@
-@q ***** (5) star_vector_assignment -->  star_vector_variable ASSIGN stars_option_list @>  
-
-@*3 \§star vector assignment> $\longrightarrow$ \§star vector variable> \.{ASSIGN} \<stars option list>.
-\initials{LDF 2021.06.26.}
+@q ***** (5) |Spheres|.  @>
+@*4 |Spheres|.
 
 \LOG
-\initials{LDF 2021.06.26.}
-Added this rule.
-\ENDLOG
+\initials{LDF 2021.06.27.}
+Added this section.
+\ENDLOG 
 
-@q ***** (5) Definition.@> 
+@q ****** (6) |unit_sphere|.  @>
 
-@<Define rules@>=
+|unit_sphere|.
 
-@=star_vector_assignment: star_vector_variable ASSIGN stars_option_list@>@/
-{
-   @<Common declarations for rules@>@;
+\LOG
+\initials{LDF 2004.06.17.}  Added this section.
+\ENDLOG 
 
-   vector<Star*> v;
+@<Define |Scanner_Type::create|@>=          
+  {
+    Sphere* s_pt = create_new<Sphere>(0);
 
-#if DEBUG_COMPILE
+    s_pt->set(0, this);
 
-   DEBUG = true; /* |false|  */
+    v = statis_cast<void*>(s_pt); 
 
-   if (DEBUG)
-   { 
-       cerr << "*** Parser: `star_vector_assignment: star_vector_variable ASSIGN stars_option_list'."
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+    scanner_node->add_entry("unit_sphere", SPHERE, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
 
-   entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+    scanner_node->add_synonym("unitsphere", "unit_sphere");
 
-@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+}
 
-@ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
-\initials{LDF 2021.06.26.}
-
-@<Define rules@>=
-
-  if (entry == static_cast<Id_Map_Entry_Node>(0))
-    {
-
-      @=$$@> = static_cast<void*>(0); 
-
-      goto END_STAR_VECTOR_ASSIGNMENT_1;
-
-    } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
-
-@q ****** (6) @>
-@
-@<Define rules@>=
-
-   status = get_stars_func(scanner_node, v);
-
-   if (status == 2)
-   {
-      cerr_strm << "WARNING!  In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
-                << endl
-                << "`Scan_Parse::get_stars_func' returned 2."
-                << endl 
-                << "Failed to find any `stars' fulfilling the search criteria."
-		<< endl 
-                << "Will try to continue."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      delete scanner_node->stars_get_option_struct;
-      scanner_node->stars_get_option_struct = 0;
-
-      @=$$@> = static_cast<void*>(0);
-
-      goto END_STAR_VECTOR_ASSIGNMENT_1;
-
-   }
-   else if (status != 0)
-   {
-      cerr_strm << "ERROR!  In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
-                << endl
-                << "`Scan_Parse::get_stars_func' failed, returning << " << status << "."
-		<< endl 
-                << "Will try to continue."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      delete scanner_node->stars_get_option_struct;
-      scanner_node->stars_get_option_struct = 0;
-
-      @=$$@> = static_cast<void*>(0);
-
-      goto END_STAR_VECTOR_ASSIGNMENT_1;
-
-
-   }
-   else if (status == 0 && v.size() == 0)
-   {
-      cerr_strm << "ERROR!  In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
-                << endl
-                << "`Scan_Parse::get_stars_func' returned 0 (Success) but `vector<Star*> v' is empty."
-                << endl 
-                << "This shouldn't be possible." << endl 
-                << "Will try to continue."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      delete scanner_node->stars_get_option_struct;
-      scanner_node->stars_get_option_struct = 0;
-
-      @=$$@> = static_cast<void*>(0);
-
-      goto END_STAR_VECTOR_ASSIGNMENT_1;
-
-   }
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr_strm << "In parser, `star_vector_assignment: star_vector_variable ASSIGN stars_option_list':"
-                << endl
-                << "`Scan_Parse::get_stars_func' succeeded, returning 0  and `vector<Star*> v' is non-empty:"
-                << endl 
-                << "`v.size()' == " << v.size()
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ****** (6) @>
-
-#if 0 
-   cerr << "Stars:" << endl << endl;
-
-   i = 1;
-
-   for (vector<Star*>::iterator iter = v.begin();
-        iter !=  v.end();
-        ++iter)
-   {
-
-       s << "Star " << i++ << ":";
-
-       (*iter)->show(s.str(), scanner_node->stars_get_option_struct->fields);
-  
-       s.str("");
-   }
-#endif 
-
-@q ****** (6) @>
-@ 
-@<Define rules@>=
-
-    typedef Pointer_Vector<Star> PV;
-
-    PV* entry_pv = static_cast<PV*>(entry->object);
-
-    PV *pv = new PV;
-
-    *pv = scanner_node->last_star_vector;
-         
-    if (entry_pv)
-      entry_pv->clear();
-
-    int status = vector_type_assign<Star, Star>(
-                    static_cast<Scanner_Node>(parameter),
-                    entry,
-                    pv);
-
-
-@q ******* (7) Error handling:                           @> 
-@q ******* (7) |Scan_Parse::vector_type_assign| failed.@> 
-
-@ Error handling:  |Scan_Parse::vector_type_assign| 
-failed. 
-\initials{LDF 2021.06.26.}
-
-@<Define rules@>=
-
-   if (status != 0)
-   {
-
-       delete pv;
-       pv = 0;     
-
-       @=$$@> = static_cast<void*>(0);
-
-   } /* |if (status != 0)|  */
-
-@q ******* (7) |Scan_Parse::vector_type_assign| succeeded.@> 
-
-@ |Scan_Parse::vector_type_assign| succeeded. 
-\initials{LDF 2021.06.26.}
-
-@<Define rules@>=
-
-   else /* |status == 0|  */
-   {
-      delete pv;
-      pv = 0;
-
-      @=$$@> = static_cast<void*>(entry->object); 
- 
-   }  /* |else| (|status == 0|)  */
-
-
-@q ****** (6).@> 
-
-END_STAR_VECTOR_ASSIGNMENT_1:
-;
-
-}; 
