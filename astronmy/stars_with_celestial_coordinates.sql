@@ -862,17 +862,6 @@ and constellation_name_genitive = "Sagittarii";
 update Stars set approx_rank_apparent_magnitude = 137, common_name = "Algenib" where bayer_designation_greek_letter = "Gamma"
 and constellation_name_genitive = "Pegasi";
 
-/* !! START HERE:  LDF 2021.06.16.  */ 
-
-/*
-
-(fset 'temp-macro
-   [C-f12 ?c ?\C-  C-right ?\C-w up up ?\C-s ?= ?\C-  right ?\C-y down down ?\C-a ?\C-  C-right C-left ?\C-w ?\C-  escape ?d up up ?\C-e left ?\C-y down down ?\C-a ?\C-  C-right C-left ?\C-w ?\C-  escape ?\C-s ?  ?  ?\C-  C-left C-right ?\C-  ?\C-a ?\C-w up ?\C-e left left ?\C-y down ?\C-a ?\C-  C-right C-left ?\C-w ?\C-  escape ?\C-s ?\[ ?0 ?- ?9 ?\] left ?\C-  C-left C-right ?\C-  ?\C-a ?\C-w up up ?\C-s ?\" ?\" left ?\C-y ?\C-a ?\C-  down down ?\C-i ?\C-k ?\C-a ?\C-k return ?\C-x ?\C-x ?\C-x ?\C-x])
-(global-set-key [67109092] 'temp-macro)
-
-C-ä
-
-*/
 
 update Stars set approx_rank_apparent_magnitude = 138, common_name = "Turais" where bayer_designation_greek_letter = "Rho"
 and constellation_name_genitive = "Puppis";
@@ -1469,6 +1458,125 @@ select from Stars where common_name = "";
 -- In brightstar_2018.sql there is a star list with ra and decl. with seconds, but without common names. 
 -- Use that file to insert stars into `Stars' table, then use the following code to set the common names.
 -- LDF 2021.6.27.
+
+/* ** (2) */
+
+-- Cor Caroli:  Binary star system.
+
+https://en.wikipedia.org/wiki/Cor_Caroli
+
+-- http://simbad.u-strasbg.fr/simbad/sim-id?Ident=alf02+CVn  -- Alpha^2:  Brighter
+-- http://simbad.u-strasbg.fr/simbad/sim-id?Ident=alf01+CVn  -- Alpha^1:  Dimmer
+
+/* *** (3) */
+
+-- Alpha^2 Canum Venaticorum":  The brighter star in the binary system.
+
+insert into Stars (
+approx_rank_apparent_magnitude,
+flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+common_name,
+bs_hr_number,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_binary
+)
+values (
+130,
+0,
+"alpha^2",
+"Canum Venaticorum",
+"Cor Caroli",
+4915,
+"CVn",
+"Canes Venatici",
+38,
+12,
+56,
+01.66622,
+38,
+19,
+06.1541,
+1);
+
+/* *** (3) */
+
+-- Alpha^1 Canum Venaticorum":  The less-bright star in the binary system.
+
+insert into Stars (
+approx_rank_apparent_magnitude,
+flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+common_name,
+bs_hr_number,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_binary
+)
+values (
+130,
+0,
+"alpha^1",
+"Canum Venaticorum",
+"Cor Caroli",
+4915,
+"CVn",
+"Canes Venatici",
+38,
+12,
+56,
+0.4316668750,
+38,
+18,
+53.468304880,
+1);
+
+α1 CVn:
+HR 4914,
+
+α1 CVn
+
+12,
+56,
+0.4316668750,
+38,
+18,
+53.468304880,
+
+select * from Stars where common_name = "Cor Caroli"\G
+
+Alpha Canum Venaticorum   
+
+
+
+
+
+"CVn"
+Right ascension
+
+Declination
+
+
+)
+/* ** (2) */
+
 
 2. Alpha Carinae             Canopus           06 24 -52.7  261.2 -25.3  F0Ib         -0.73  -5.64   10.43 0.53   310
 3. Alpha Centauri            Rigil Kentaurus   14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4

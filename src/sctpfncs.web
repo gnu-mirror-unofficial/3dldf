@@ -4627,6 +4627,8 @@ Scanner_Type::get_astronomy(void)
    string w;
    size_t pos;
 
+   star_constant_name_vector.clear();
+
 #ifndef MYSQL_AVAILABLE
    cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `MYSQL_AVAILABLE' isn't defined."
         << endl
@@ -4677,7 +4679,7 @@ Scanner_Type::get_astronomy(void)
             << "right_ascension_seconds, right_ascension_decimal_hours, "
             << "right_ascension_decimal_degrees, "
             << "declination_degrees, declination_minutes, declination_seconds, "
-            << "declination_decimal_degrees from Stars "
+            << "declination_decimal_degrees, is_binary from Stars "
             << "order by constellation_abbreviation, bayer_designation_greek_letter;";
 
 #if DEBUG_COMPILE
@@ -5092,6 +5094,8 @@ Scanner_Type::get_astronomy(void)
             }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
+            star_constant_name_vector.push_back(u);
+
             add_entry(u, STAR, regular, is_constant, not_array, 
                       Id_Map_Entry_Type::KNOWN, *iter);
 
@@ -5269,6 +5273,33 @@ Scanner_Type::get_astronomy(void)
 @q **** (4) @>
 
    astronomy_enabled = true;
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false|  */
+
+   if (DEBUG)
+   { 
+       cerr << "In `Scanner_Type::get_astronomy':"
+            << endl
+            << "`star_constant_name_vector.size()' == " << star_constant_name_vector.size() << endl;
+
+       if (star_constant_name_vector.size() > 0)
+       {
+           cerr << "`star_constant_name_vector':" << endl;
+ 
+           for (vector<string>::iterator iter = star_constant_name_vector.begin();
+                iter != star_constant_name_vector.end();
+                ++iter)
+           {
+              cerr << *iter << endl;
+           }
+           cerr << endl;
+       }
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)

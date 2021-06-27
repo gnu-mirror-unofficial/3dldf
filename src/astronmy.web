@@ -192,6 +192,7 @@ class Star
       int declination_minutes;
       real declination_seconds;
       real declination_decimal_degrees;
+      int is_binary;
 
    public:
 
@@ -368,6 +369,9 @@ Stars_Where_Option_Struct::show(string s)
    else if (field == STARS_DECLINATION)
       cerr << " == STARS_DECLINATION" << endl;
 
+   else if (field == STARS_IS_BINARY)
+      cerr << " == STARS_IS_BINARY" << endl;
+
    else 
       cerr << " WARNING!  Unknown field." << endl;
 
@@ -494,6 +498,7 @@ Star::Star(void)
       declination_minutes = 0;
       declination_seconds = 0.0;
       declination_decimal_degrees = 0.0;
+      is_binary = 0;
 
    return;
 }
@@ -539,6 +544,7 @@ Star::Star(const Star &s)
       declination_minutes = s.declination_minutes;
       declination_seconds = s.declination_seconds;
       declination_decimal_degrees = s.declination_decimal_degrees;
+      is_binary = s.is_binary;
 
    return;
 }
@@ -711,6 +717,7 @@ Star::set(Scanner_Node scanner_node)
       declination_minutes             = atoi(scanner_node->curr_row[18]);
       declination_seconds             = atof(scanner_node->curr_row[19]);
       declination_decimal_degrees     = atof(scanner_node->curr_row[20]);
+      is_binary                       = atoi(scanner_node->curr_row[21]);
 
 @q ***** (5)@>
 @
@@ -918,6 +925,7 @@ Star::operator=(const Star& s)
       declination_minutes = s.declination_minutes;
       declination_seconds = s.declination_seconds;
       declination_decimal_degrees = s.declination_decimal_degrees;
+      is_binary = s.is_binary;
 
     return *this;
 
@@ -1141,6 +1149,9 @@ Star::show(string text, unsigned int fields) const
 
     if (fields & STARS_DECLINATION_DECIMAL_DEGREES)
        cerr << "declination_decimal_degrees     == " << declination_decimal_degrees << endl;
+
+    if (fields & STARS_IS_BINARY)
+       cerr << "is_binary                       == " << is_binary << endl;
 
     cerr << endl;
 
@@ -1834,7 +1845,8 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 #if DEBUG_COMPILE
       if (DEBUG)
       { 
-          cerr << "where_option.field == STARS_DECLINATION or STARS_DECLINATION." << endl
+          cerr << "where_option.field == STARS_DECLINATION_DECIMAL_DEGREES or STARS_DECLINATION." 
+               << endl
                << "Setting `star_real_ptr' to `&Star::declination_decimal_degrees'."
                << endl;
       }  
@@ -1859,6 +1871,42 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
  
          where_option.real_value  = static_cast<real>(where_option.int_value);
          where_option.int_value = 0;
+      }
+   }
+
+@q ****** (6) @>
+
+   else if (where_option.field == STARS_IS_BINARY)
+   {  
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_IS_BINARY." << endl
+               << "Setting `star_int_ptr' to `&Star::is_binary'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = &Star::is_binary;
+      star_real_ptr = 0;
+
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.int_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.int_value  = static_cast<int>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
       }
    }
 

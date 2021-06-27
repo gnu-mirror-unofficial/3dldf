@@ -65,6 +65,9 @@ To get the total decimal minutes we use the formula: m = (hours * 60) + minutes 
 To get the total decimal seconds we use the formula: s = (hours * 3600) + (minutes * 60) + seconds.
 */
 
+/* As of 2021.6.27.:  Call like this, for example, to calculate right_ascension_decimal_hours and */
+/* declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""            */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <vector>
@@ -365,8 +368,9 @@ main(int argc, char *argv[])
       s.str("");
    }
 
+#if 0 /* 1  */
    exit(0);
-
+#endif 
 
 #if 1 /* 0 */
 
@@ -426,10 +430,9 @@ main(int argc, char *argv[])
 
 #endif 
 
-#if 0 
+#if 1 /* 0   */
 
    int prev_bs_hr_number = 0;
-
 
    cerr << "Duplicates:" << endl;
 
@@ -443,35 +446,6 @@ main(int argc, char *argv[])
        prev_bs_hr_number = (*iter)->bs_hr_number;
    }
 #endif 
-
-#if 0 /* 1 */
-
-   float ra_decimal_degrees;
-
-   for (vector<Star*>::iterator iter = star_vector.begin();
-       iter != star_vector.end(); 
-       ++iter)
-   {
-      if ((*iter)->right_ascension_decimal_hours != 0)
-      {
-          ra_decimal_degrees =   ((*iter)->right_ascension_decimal_hours / 24.0) * 360.0;
-
-          sql_strm << "update Stars set right_ascension_decimal_degrees = " << ra_decimal_degrees 
-                   << " where bs_hr_number = " << (*iter)->bs_hr_number;
-
-          cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
-
-          status = submit_mysql_query(sql_strm.str());
-
-          cerr << "`submit_mysql_query' returned " << status << endl;
- 
-          sql_strm.str("");
-
-          cerr << endl;
-      }
-   }
-#endif 
-
 
    exit(0);
 

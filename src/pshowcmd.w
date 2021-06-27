@@ -2105,6 +2105,53 @@ Added this rule.
 
 };
 
+@q ****** (6) stars_field_specifier --> IS_BINARY.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{IS\_BINARY}.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: IS_BINARY@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: IS_BINARY'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_IS_BINARY;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: IS_BINARY':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
 @q ****** (6) stars_option_list --> stars_option_list WHERE stars_where_list@> 
 @*5 \§stars option list> $\longrightarrow$ \§stars option list> \.{WHERE} \§stars where list>.
 \initials{LDF 2021.06.20.}

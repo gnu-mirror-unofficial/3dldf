@@ -53,53 +53,49 @@
 #### Laurence.Finston@gmx.de
 
 
-echo "/* stars_output.sql */" > stars_output.sql
-echo "" >> stars_output.sql
+echo "/* stars_output.txt */" > stars_output.txt
+echo "" >> stars_output.txt
 
 func1()
 {
    echo $1 $2 $3
 
-a=`echo "select bayer_designation_greek_letter from Stars where \
+a=`echo "select count(*) bayer_designation_greek_letter from Stars where \
    bayer_designation_greek_letter = \"$2\" and constellation_name_genitive = \"$3\";" | mysql --batch --silent 3dldf`
 
 echo "a == $a"
 
-if test -z "$a" 
+if test $a -ge 1 
 then
-   echo "a is empty.  a == \"$a\""
-   echo "$1 $2 $3" >> stars_output.sql
-   echo >> stars_output.sql
+   echo "a is greater than or equal to 1."
+   echo "$2 $3 is known."
+#  echo "KNOWN:    $1 $2 $3" >> stars_output.txt
 else
-   echo "a is non-empty.  a == \"$a\""
-   echo "Sending update command to MySQL server."
-   b=`echo "update Stars set approx_rank_apparent_magnitude = $1 where \
-         bayer_designation_greek_letter = \"$2\" \
-         and constellation_name_genitive = \"$3\";select row_count();" | mysql --batch --silent 3dldf`
-   echo "Exit status of update command:  $?"
-   echo "b == $b"
-   if test "$b" == "1"
-   then
-      echo "Row changed."
-   elif test "$b" == "0"
-   then
-      echo "No row changed."
-   else
-      echo "b not 0 or 1, invalid."
-   fi
+   echo "a is less than 1."
+   echo "$2 $3 is unknown."
+   echo "UNKNOWN:  $1 $2 $3" >> stars_output.txt
+#   echo "Sending update command to MySQL server."
+#   b=`echo "update Stars set approx_rank_apparent_magnitude = $1 where \
+#         bayer_designation_greek_letter = \"$2\" \
+#         and constellation_name_genitive = \"$3\";select row_count();" | mysql --batch --silent 3dldf`
+#   echo "Exit status of update command:  $?"
+   # echo "b == $b"
+   # if test $b -eq 1
+   # then
+   #    echo "Row changed."
+   # elif test $b -eq 0"
+   # then
+   #    echo "No row changed."
+   # else
+   #    echo "b not 0 or 1, invalid."
+   # fi
 fi
-
 echo 
-
 }
 
 #### !! START HERE!: LDF 2021.06.16.  Check this.
 
-# -- Not found
-# -- update Stars set approx_rank_apparent_magnitude = 130, common_name = "Cor Caroli" where bayer_designation_greek_letter = "Alpha"
-# -- and constellation_name_genitive = "Canum Venaticorum";
-
-
+func1 130 Alpha "Canum Venaticorum"
 func1 139 Beta "Trianguli Australis"
 func1 149 Gamma "Trianguli Australis"
 func1 172 Beta Trianguli 
@@ -107,11 +103,6 @@ func1 173 Psi "Ursae Majoris"
 func1 179 Omicron^2 "Canis Majoris"
 func1 281 Sigma "Canis Majoris"
 func1 286 Kappa "Canis Majoris"
-
-
-exit 0
-
-
 func1 75 Epsilon Centauri
 func1 79 Eta Centauri
 func1 75 Epsilon Centauri                             
@@ -127,11 +118,11 @@ func1 128 Delta Crucis
 func1 131 Gamma Lupi                                  
 func1 134 Beta Hydri                                  
 func1 135 Tau Scorpii                                 
-func1 139 Beta Trianguli Australis                    
+func1 139 Beta "Trianguli Australis"                    
 func1 140 Zeta Persei                                 
 func1 141 Beta Arae                                   
 func1 147 Delta Cygni                                 
-func1 149 Gamma Trianguli Australis                   
+func1 149 Gamma "Trianguli Australis"                   
 func1 150 Alpha Tucanae                               
 func1 154 Pi Scorpii                                  
 func1 155 Epsilon Persei                              
@@ -141,11 +132,11 @@ func1 162 Tau Puppis
 func1 169 Gamma Hydrae                                
 func1 170 Iota^1 Scorpii                               
 func1 172 Beta Trianguli                              
-func1 173 Psi Ursae Majoris                           
+func1 173 Psi "Ursae Majoris"                           
 func1 175 Mu^1 Scorpii
 func1 176 Gamma Gruis                                 
 func1 177 Delta Persei                                
-func1 179 Omicron^2 Canis Majoris
+func1 179 Omicron^2 "Canis Majoris"
 func1 182 Beta Muscae                                 
 func1 188 Eta Sagittarii                              
 func1 189 Zeta Hydrae                                 
@@ -201,10 +192,10 @@ func1 276 Delta Bootis
 func1 278 Eta Leonis                                  
 func1 279 Eta Herculis                                
 func1 280 Tau Ceti                                    
-func1 281 Sigma Canis Majoris                         
+func1 281 Sigma "Canis Majoris"                         
 func1 284 Alpha Telescopii                            
 func1 285 Epsilon Gruis                               
-func1 286 Kappa Canis Majoris
+func1 286 Kappa "Canis Majoris"
 func1 288 Iota Cephei                                 
 func1 289 Gamma Sagittae                              
 func1 294 Xi^2 Sagittarii                              
@@ -212,10 +203,15 @@ func1 298 Xi Hydrae
 func1 299 Mu Serpentis                                
 func1 300 Xi Serpentis                                
 
+echo "stars_output.txt:"
+cat stars_output.txt
+
 exit 0
 
 #### * (1)
 
 ## Local Variables:
 ## mode:Text
+## comment-start:"#"
+## comment-end:""
 ## End:

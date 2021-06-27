@@ -53,9 +53,28 @@ use 3dldf;
 
 /* ** (2) Create tables  */
 
+-- create table XXX
+-- (
+--    abc int unique,
+
+--    constraint unique(abc)
+
+-- );
+
+
+-- drop table XXX;
+-- create table XXX
+-- (
+--    abc int not null default 1,
+--    constraint unique(abc)
+   
+-- );
+
+-- show columns from XXX;
+
 /* *** (3) Stars  */
 
-drop table Stars;
+-- drop table Stars;
 
 create table Stars
 (
@@ -65,7 +84,7 @@ create table Stars
    arabic_name varchar(32) not null default "",
    flamsteed_designation_number int not null default 0,
    bayer_designation_greek_letter varchar(16) not null default "",
-   bs_hr_number int not null default 0,
+   bs_hr_number int not null default 0 unique,
    approx_rank_apparent_magnitude int not null default 0,
    constellation_abbreviation char(3) not null default "",
    constellation_full_name varchar(32) not null default "",
@@ -79,7 +98,8 @@ create table Stars
    declination_degrees int not null default 0,
    declination_minutes int not null default 0,
    declination_seconds float not null default 0.0,
-   declination_decimal_degrees float not null default 0.0
+   declination_decimal_degrees float not null default 0.0,
+   is_binary int not null default 0
 );
 
 create table ttemp
@@ -93,6 +113,13 @@ alter table Stars add column constellation_number int not null default 0 after c
 alter table Stars add column constellation_name_genitive varchar(64) not null default "" after constellation_full_name;
 alter table Stars add column approx_rank_apparent_magnitude int not null default 0 after bs_hr_number;
 alter table Stars add column right_ascension_decimal_degrees float not null default 0.0 after right_ascension_decimal_hours;
+alter table Stars add column right_ascension_decimal_hours float not null default 0.0 after right_ascension_seconds;
+alter table Stars add column is_binary int not null default 0 after declination_decimal_degrees;
+alter table Stars add constraint unique(bs_hr_number);
+
+-- alter table Stars drop column is_binary;
+
+show columns from Stars;
 
 insert into ttemp (right_ascension) values ('1:45:20.02');
 

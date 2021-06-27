@@ -607,6 +607,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     DECLINATION_MINUTES@>@/
 @=%token <int_value>     DECLINATION_SECONDS@>@/
 @=%token <int_value>     DECLINATION_DECIMAL_DEGREES@>@/
+@=%token <int_value>     IS_BINARY@>@/
 
 @=%token <pointer_value> PLANE@>@/
 
@@ -3312,7 +3313,7 @@ Scan_Parse
   extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES     =  4194304U;  
   extern const unsigned int STARS_RIGHT_ASCENSION                 =  8388608U;  
   extern const unsigned int STARS_DECLINATION                     = 16777216U;  /* $2^24$ */   
-        
+  extern const unsigned int STARS_IS_BINARY                       = 33554432U;  /* (expt 2 25)  */
 };
 
 @
@@ -3348,7 +3349,7 @@ Scan_Parse
   extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES;
   extern const unsigned int STARS_RIGHT_ASCENSION;
   extern const unsigned int STARS_DECLINATION;
-
+  extern const unsigned int STARS_IS_BINARY;
 };
 
 @q ** (2) |name_map|, |type_name_map| and |star_field_name_map|. @>
