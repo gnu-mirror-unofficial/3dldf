@@ -595,7 +595,7 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 
      if (status == 2)
      {
-         cerr_strm << thread_name << "WARNING! In `Scanner_Type::create()':"
+         cerr_strm << thread_name << "WARNING! In `Scanner_Type::create':"
                    << endl 
                    << "`Scanner_Type::load_database' returned 2."
                    << endl
@@ -607,7 +607,7 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
      }
      else if (status != 0)
      {
-         cerr_strm << thread_name << "ERROR! In `Scanner_Type::create()':"
+         cerr_strm << thread_name << "ERROR! In `Scanner_Type::create':"
                    << endl 
                    << "`Scanner_Type::load_database' failed, returning " << status << "."
                    << endl
@@ -620,7 +620,7 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 #if DEBUG_COMPILE
      else if (DEBUG)
      { 
-         cerr_strm << thread_name << "In `Scanner_Type::create()':"
+         cerr_strm << thread_name << "In `Scanner_Type::create':"
                    << endl 
                    << "`Scanner_Type::load_database' succeeded, returning 0."
                    << endl
@@ -665,7 +665,7 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 
   else /* (|in_file == 0 && in_stream == 0|)  */
      {
-          cerr_strm << thread_name << "ERROR! In `Scanner_Type::create()':"
+          cerr_strm << thread_name << "ERROR! In `Scanner_Type::create':"
                     << endl 
                     << "No input stream. "
                     << "Returning 0 and will try to continue.";
@@ -967,7 +967,7 @@ Added this section.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << "In `Scanner_Type::create()':" << endl
+       cerr_strm << "In `Scanner_Type::create':" << endl
                  << "About to try to initialize "
                  << "`scanner_node->thread_vector_mutex'."
                  << endl;
@@ -986,7 +986,7 @@ destroy |thread_vector_mutex|.
 
   if (status != 0)
     {
-      cerr_strm << "ERROR! In `Scanner_Type::create()':" << endl
+      cerr_strm << "ERROR! In `Scanner_Type::create':" << endl
                 << "`pthread_mutex_init()' failed. "
                 << "Deleting `scanner_node' and returning 0." << endl;
 
@@ -1000,7 +1000,7 @@ destroy |thread_vector_mutex|.
 #if DEBUG_COMPILE
   else if (DEBUG)
     {
-      cerr_strm << "In `Scanner_Type::create()':" << endl
+      cerr_strm << "In `Scanner_Type::create':" << endl
                 << "`pthread_mutex_init()' succeeded."  << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -6191,7 +6191,7 @@ Added this section.
      
        if (status != 0)
        {
-           cerr_strm << "ERROR! In `Scanner_Type::create()':" << endl
+           cerr_strm << "ERROR! In `Scanner_Type::create':" << endl
                      << "`Scanner_Type::get_astronomy' failed, "
                      << "returning " << status << "." << endl 
                      << "Deleting `scanner_node' and returning 0." << endl;
@@ -6206,7 +6206,7 @@ Added this section.
 #if DEBUG_COMPILE
        else if (DEBUG)
        {
-           cerr_strm << "In `Scanner_Type::create()':" << endl
+           cerr_strm << "In `Scanner_Type::create':" << endl
                      << "`Scanner_Type::get_astronomy' succeeded, returning 0."  
                      << endl;
            cerr_message(cerr_strm);
@@ -6315,7 +6315,7 @@ the |input| command yet).
           if (*iter == in_filename)
             {
  
-              cerr << "ERROR! In `Scanner_Type::create()':"
+              cerr << "ERROR! In `Scanner_Type::create':"
                    << endl 
                    << in_filename << " is already on "
                    << "`in_filename_vector'."
@@ -6387,7 +6387,7 @@ the |input| command yet).
           if (*iter == out_filename)
             {
  
-              cerr << "ERROR! In `Scanner_Type::create()':"
+              cerr << "ERROR! In `Scanner_Type::create':"
                    << endl 
                    << out_filename << " is already on "
                    << "`out_filename_vector'."
@@ -6425,7 +6425,7 @@ return 0;
    out_file->open(out_filename.c_str());
    if (!(*out_file))
      {
-       cerr << "ERROR! In `Scanner_Type::create()':\n"
+       cerr << "ERROR! In `Scanner_Type::create':\n"
          << out_filename << " doesn't exist! "
            << "Returning 0. Will try to continue.\n\n";
        delete in_file;

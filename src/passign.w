@@ -8007,7 +8007,9 @@ failed.
 @q ****** (6).@> 
 
 END_STAR_VECTOR_ASSIGNMENT_1:
-;
+
+  delete scanner_node->stars_get_option_struct;
+  scanner_node->stars_get_option_struct = 0;
 
 }; 
 

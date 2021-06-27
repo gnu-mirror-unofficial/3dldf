@@ -55,9 +55,11 @@
 %% !! START HERE: LDF 2021.6.27.  Figure out why assigning to sv leaves superfluous stars on the
 %% vector shown by the following show command.
 
-%star_vector sv;
+star_vector sv;
 
-%sv := stars where common_name == "Cor Caroli 1";
+sv := stars where common_name == "Cor Caroli 1";
+
+show sv;
 
 show stars common_name, star_constant_name, bs_hr_number 
 where constellation_full_name == "Canis Major" order by bs_hr_number;
