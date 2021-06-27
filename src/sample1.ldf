@@ -52,13 +52,31 @@
 
 %% * (1) New sample code.
 
+% message "Showing 1, show stars command.";
+
+show stars where common_name <> "" and approx_rank_apparent_magnitude > 0 
+order by approx_rank_apparent_magnitude with_limit 10;
+
+%show stars common_name, is_binary where common_name == "Cor Caroli 1" or common_name == "Cor Caroli 2";
+
+%end;
+
 star_vector sv;
 
 sv := stars common_name, is_binary where common_name == "Cor Caroli 1" or common_name == "Cor Caroli 2";
 
-show sv;
+message "Showing 2, sv.";
 
 show sv common_name, bs_hr_number;
+
+star_vector tv;
+
+tv := last;
+
+message "Showing 3, tv.";
+
+message "tv:";
+show tv;
 
 end;
 
@@ -68,8 +86,6 @@ where constellation_full_name == "Canis Major" order by bs_hr_number;
 end;
 
 
-sv := stars where common_name <> "" and approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude
-with_limit 10;
 
 
 endinput;

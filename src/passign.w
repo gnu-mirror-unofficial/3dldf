@@ -7572,8 +7572,7 @@ Added this rule.
 
 @<Define rules@>=
 
-@=star_vector_assignment: star_vector_variable @>  
-@=ASSIGN star_vector_expression@>@/
+@=star_vector_assignment: star_vector_variable ASSIGN star_vector_expression@>@/
 {
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
@@ -7783,7 +7782,16 @@ failed.
 @q ****** (6).@> 
 
 END_STAR_VECTOR_ASSIGNMENT_0:
-;
+
+   if (scanner_node->stars_get_option_struct != 0)
+   {
+         cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
+         cerr << "XXX Enter <RETURN> to continue: ";
+         getchar(); 
+
+         delete scanner_node->stars_get_option_struct;
+         scanner_node->stars_get_option_struct = 0;
+   }
 }; 
 
 @q ***** (5) star_vector_assignment -->  star_vector_variable ASSIGN STARS stars_field_list stars_option_list @>  
@@ -7814,6 +7822,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
    vector<Star*> v;
+   vector<Star> w;
 
    typedef Pointer_Vector<Star> PV;
    PV *pv;
@@ -7970,8 +7979,23 @@ Added this rule.
     
     pv = new PV;
 
-    *pv = scanner_node->last_star_vector;
+    for (vector<Star*>::iterator iter = v.begin();
+         iter != v.end();
+         ++iter)
+    {
+       w.push_back(**iter);
+    }
+
+    *pv = w;
          
+    scanner_node->last_star_vector = w;
+
+    cerr << "scanner_node->last_star_vector.size() == " << scanner_node->last_star_vector.size()
+         << endl;
+
+    cerr << "XXX Enter <RETURN> to continue: ";
+    getchar(); 
+
     if (entry_pv)
       entry_pv->clear();
 
@@ -8020,13 +8044,17 @@ failed.
 @q ****** (6).@> 
 
 END_STAR_VECTOR_ASSIGNMENT_1:
+   if (scanner_node->stars_get_option_struct != 0)
+   {
+         cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
+         cerr << "XXX Enter <RETURN> to continue: ";
+         getchar(); 
 
-  delete scanner_node->stars_get_option_struct;
-  scanner_node->stars_get_option_struct = 0;
+         delete scanner_node->stars_get_option_struct;
+         scanner_node->stars_get_option_struct = 0;
+   }
 
 }; 
-
-
 
 @q **** (4) |constellation_vector_assignment|.  @>
 @*2 \§constellation vector assignment>. 

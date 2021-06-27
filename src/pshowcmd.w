@@ -690,6 +690,12 @@ Added this rule.
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   if (scanner_node->stars_get_option_struct != 0)
+   {
+       delete scanner_node->stars_get_option_struct;
+       scanner_node->stars_get_option_struct = 0;
+   }
+
     @=$$@> = static_cast<void*>(0);
 
 @q ******* (7) @>
@@ -737,8 +743,17 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    if (scanner_node->stars_get_option_struct == 0)
-       scanner_node->stars_get_option_struct = new Stars_Get_Option_Struct;
+    if (scanner_node->stars_get_option_struct != 0)
+    {
+       cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
+       cerr << "XXX Enter <RETURN> to continue: ";
+       getchar(); 
+
+       delete scanner_node->stars_get_option_struct;
+       scanner_node->stars_get_option_struct = 0;
+    }
+
+    scanner_node->stars_get_option_struct = new Stars_Get_Option_Struct;
 
     @=$$@> = 0;
 };
@@ -882,6 +897,8 @@ Added this rule.
 
     if (scanner_node->stars_get_option_struct == 0)
        scanner_node->stars_get_option_struct = new Stars_Get_Option_Struct;
+    else
+       scanner_node->stars_get_option_struct->where_options.clear();
 
     @=$$@> = 0;
 };
@@ -4433,6 +4450,19 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+    if (scanner_node->stars_get_option_struct != 0)
+    {
+       cerr << "scanner_node->stars_get_option_struct->where_options.size() == " 
+            << scanner_node->stars_get_option_struct->where_options.size() << endl;
+    }
+    else 
+       cerr << "scanner_node->stars_get_option_struct == 0" << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+ 
+
+
    Pointer_Vector<Star, Star>* pv 
       = static_cast<Pointer_Vector<Star, Star>*>(@=$2@>); 
 
@@ -4455,12 +4485,6 @@ Added this rule.
             s.str("");
         }
 
-         if (scanner_node->stars_get_option_struct != 0)
-         {
-            delete scanner_node->stars_get_option_struct;
-            scanner_node->stars_get_option_struct = 0;
-         }
-
          delete pv;
          pv = 0;
 
@@ -4474,6 +4498,17 @@ Added this rule.
       cerr_strm.str("");
 
    }  /* |else| (|!pv || pv->ctr <= 0|)  */
+
+   if(scanner_node->stars_get_option_struct != 0)
+   {
+       cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
+       cerr << "XXX Enter <RETURN> to continue: ";
+       getchar(); 
+
+       delete scanner_node->stars_get_option_struct;
+       scanner_node->stars_get_option_struct = 0;
+   }
+
 
    @=$$@> = static_cast<void*>(0);
 

@@ -7183,7 +7183,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 
    cerr << "Stars:" << endl << endl;
 
-   i = 1;
+   i = 0;
 
    for (vector<Star*>::iterator iter =  v.begin();
         iter !=  v.end();
@@ -7476,33 +7476,6 @@ Scan_Parse::get_stars_func(Scanner_Node scanner_node, vector<Star*> &v)
         cerr_message(cerr_strm);
         cerr_strm.str("");
     }      
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-@
-@<Define parser rule functions@>=
-
-#if DEBUG_COMPILE
-    if (DEBUG)
-    { 
-#if 0 
-        cerr_strm << "`Scan_Parse::get_stars_func':" 
-                  << endl 
-                  << "After calls to `stable_sort': `scanner_node->star_ptr_vector':" << endl;
-
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
-
-        for (vector<Star*>::iterator iter = scanner_node->star_ptr_vector.begin();
-             iter != scanner_node->star_ptr_vector.end();
-             ++iter)
-        {
-           (*iter)->show();
-        }
-#endif 
-
-    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) "where" clause @>
