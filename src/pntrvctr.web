@@ -1283,7 +1283,7 @@ Pointer_Vector<C, D>::show(string s, Scanner_Node scanner_node) const
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -1298,6 +1298,21 @@ Pointer_Vector<C, D>::show(string s, Scanner_Node scanner_node) const
                                                     &warning_stop_value);
 
    using namespace Scan_Parse;
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr_strm << "Entering `Pointer_Vector<C, D>::show' (non-specialization)." 
+                 << endl;
+
+       log_message(cerr_strm); 
+       cerr << cerr_strm.str() << endl;
+       cerr_strm.str("");       
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
 @q ***** (5)@> 
 

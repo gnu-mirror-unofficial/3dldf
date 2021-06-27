@@ -8037,28 +8037,168 @@ AFTER_WHERE_CLAUSE:
         } 
 
 @q ***** (5) @>
+                               
+        else if (*iter == STARS_RIGHT_ASCENSION_HOURS)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_RIGHT_ASCENSION_HOURS'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
-/* !!START HERE  \initials{LDF 2021.06.23.}  Add more predicates and corresponding code here.
-   Maybe think about putting it into a function.
- */ 
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_right_ascension_hours);
 
-#if 0 
-STARS_RIGHT_ASCENSION_HOURS
-STARS_RIGHT_ASCENSION_MINUTES
-STARS_RIGHT_ASCENSION_SECONDS
-STARS_RIGHT_ASCENSION_DECIMAL_HOURS
-STARS_RIGHT_ASCENSION_DECIMAL_DEGREES
-STARS_DECLINATION_DEGREES
-STARS_DECLINATION_MINUTES
-STARS_DECLINATION_SECONDS
-STARS_DECLINATION_DECIMAL_DEGREES
-STARS_RIGHT_ASCENSION
-STARS_DECLINATION
-STARS_IS_BINARY
-#endif 
+        } 
 
 
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_RIGHT_ASCENSION_MINUTES)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_RIGHT_ASCENSION_MINUTES'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
 
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_right_ascension_minutes);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_RIGHT_ASCENSION_SECONDS)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_RIGHT_ASCENSION_SECONDS'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_right_ascension_seconds);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_RIGHT_ASCENSION_DECIMAL_HOURS || *iter == STARS_RIGHT_ASCENSION)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_RIGHT_ASCENSION_DECIMAL_HOURS' "
+                        << "|| `*iter' == `STARS_RIGHT_ASCENSION)'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_right_ascension_decimal_hours);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_RIGHT_ASCENSION_DECIMAL_DEGREES)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_RIGHT_ASCENSION_DECIMAL_DEGREES'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_right_ascension_decimal_degrees);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_DECLINATION_DEGREES)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_DECLINATION_DEGREES'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_declination_degrees);
+
+        } 
+
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_DECLINATION_MINUTES)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_DECLINATION_MINUTES'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_declination_minutes);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_DECLINATION_SECONDS)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_DECLINATION_SECONDS'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_declination_seconds);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_DECLINATION_DECIMAL_DEGREES || *iter == STARS_DECLINATION)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_DECLINATION_DECIMAL_DEGREES' "
+                        << "|| `*iter' == `STARS_DECLINATION'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_declination_decimal_degrees);
+
+        } 
+
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_IS_BINARY)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_IS_BINARY'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_is_binary);
+
+        } 
 
 @q ***** (5) @>
 

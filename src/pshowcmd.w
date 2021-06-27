@@ -4401,7 +4401,7 @@ else  /* |!pv || pv->ctr <= 0|  */
    @=$$@> = static_cast<void*>(0);
 
 };
-@q ****** (6) command --> SHOW star_vector_expression@>
+@q ****** (6) command --> SHOW star_vector_expression stars_field_list @>
 
 @*5 \§command> $\longrightarrow$ \.{SHOW}
 \§star vector expression>.
@@ -4416,7 +4416,7 @@ Added this rule.
 
 @<Define rules@>= 
   
-@=command: SHOW star_vector_expression@>@/
+@=command: SHOW star_vector_expression stars_field_list@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -4424,8 +4424,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> "
-                << "SHOW star_vector_expression'.";
+      cerr_strm << "*** Parser: `command --> SHOW star_vector_expression stars_field_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -4434,32 +4433,47 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   Pointer_Vector<Star>* pv 
-      = static_cast<Pointer_Vector<Star>*>(@=$2@>); 
+   Pointer_Vector<Star, Star>* pv 
+      = static_cast<Pointer_Vector<Star, Star>*>(@=$2@>); 
 
    cerr_strm  << ">> ";
 
-   if (pv && pv->ctr > 0)
-      {
-          
-          cerr << cerr_strm.str();
-          pv->show("star_vector:");
-          log_message(cerr_strm);
-          cerr_strm.str("");
-          
+   if (pv && pv->ctr > 0 && !pv->v.empty())
+   {
 
-          delete pv;
+        stringstream s;
+        int i = 0;
+               
+        for (vector<Star*>::iterator iter = pv->v.begin();
+             iter != pv->v.end();
+             ++iter)
+        {
+            s << "Star " << i++ << ":";
 
-      }  /* |if (pv && pv->ctr > 0)|  */
+            (*iter)->show(s.str(), @=$3@>);
 
-else  /* |!pv || pv->ctr <= 0|  */
-     {
-        cerr_strm << "(unknown star_vector)";
-        log_message(cerr_strm);
-        cerr_message(cerr_strm);
-        cerr_strm.str("");
+            s.str("");
+        }
 
-     }  /* |else| (|!pv || pv->ctr <= 0|)  */
+         if (scanner_node->stars_get_option_struct != 0)
+         {
+            delete scanner_node->stars_get_option_struct;
+            scanner_node->stars_get_option_struct = 0;
+         }
+
+         delete pv;
+         pv = 0;
+
+   }  /* |if (pv && pv->ctr > 0)|  */
+
+   else  /* |!pv || pv->ctr <= 0|  */
+   {
+      cerr_strm << "(unknown star_vector)";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  /* |else| (|!pv || pv->ctr <= 0|)  */
 
    @=$$@> = static_cast<void*>(0);
 

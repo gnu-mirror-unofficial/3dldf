@@ -52,14 +52,13 @@
 
 %% * (1) New sample code.
 
-%% !! START HERE: LDF 2021.6.27.  Figure out why assigning to sv leaves superfluous stars on the
-%% vector shown by the following show command.
-
 star_vector sv;
 
-sv := stars common_name where common_name == "Cor Caroli 1";
+sv := stars common_name, is_binary where common_name == "Cor Caroli 1" or common_name == "Cor Caroli 2";
 
 show sv;
+
+show sv common_name, bs_hr_number;
 
 end;
 

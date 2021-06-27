@@ -1,32 +1,87 @@
-@q ***** (5) |Spheres|.  @>
-@*4 |Spheres|.
+@q * (1) Show.@>
+@* Show.
+\initials{LDF 2021.6.27.}
 
 \LOG
-\initials{LDF 2021.06.27.}
-Added this section.
-\ENDLOG 
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
 
-@q ****** (6) |unit_sphere|.  @>
+@q ** (2) Definition.@> 
+@
+@<Define |Pointer_Vector| specializations@>=
+template<>
+int
+Pointer_Vector<Star, Star>::show(string s, Scanner_Node scanner_node) const                 
+{
+ 
+@q *** (3) Preliminaries.@>   
 
-|unit_sphere|.
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
 
-\LOG
-\initials{LDF 2004.06.17.}  Added this section.
-\ENDLOG 
 
-@<Define |Scanner_Type::create|@>=          
-  {
-    Sphere* s_pt = create_new<Sphere>(0);
+@q ***** (5) Preliminaries.@>   
 
-    s_pt->set(0, this);
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
 
-    v = statis_cast<void*>(s_pt); 
+   stringstream cerr_strm;
 
-    scanner_node->add_entry("unit_sphere", SPHERE, 
-                            regular, is_constant,
-                            not_array, Id_Map_Entry_Type::KNOWN, v);
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
 
-    scanner_node->add_synonym("unitsphere", "unit_sphere");
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
 
-}
+   using namespace Scan_Parse;
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q ***** (5)@> 
+
+   stringstream ctr_strm;
+
+   if (s == "")
+      s = "Pointer_Vector:";
+
+   cerr_strm << s << endl
+             << "size of vector: " << ctr;
+
+   log_message(cerr_strm); 
+
+   cerr << cerr_strm.str() << endl;
+   cerr_strm.str("");
+
+   int i = 0;
+
+   for (typename vector<C*>::const_iterator iter = v.begin();
+        iter != v.end();
+        iter++)
+      {
+         ctr_strm << i++ << ":";
+
+         if (*iter != static_cast<C*>(0))
+            (*iter)->show(ctr_strm.str());
+         else 
+            cerr_strm << " 0";
+
+         ctr_strm.str(""); 
+
+      }  /* |for|  */
+
+   return 0;
+
+
+}  /* End of |Pointer_Vector<Star, Star>::show| definition.  */

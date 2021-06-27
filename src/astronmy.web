@@ -163,6 +163,16 @@ class Star
    friend bool compare_constellation_full_name(Star *s, Star *);
    friend bool compare_constellation_name_genitive(Star *s, Star *);
    friend bool compare_constellation_number(Star *s, Star *);
+   friend bool compare_right_ascension_hours(Star *s, Star *t);
+   friend bool compare_right_ascension_minutes(Star *s, Star *t);
+   friend bool compare_right_ascension_seconds(Star *s, Star *t);
+   friend bool compare_right_ascension_decimal_hours(Star *s, Star *t);
+   friend bool compare_right_ascension_decimal_degrees(Star *s, Star *t);
+   friend bool compare_declination_degrees(Star *s, Star *t);
+   friend bool compare_declination_minutes(Star *s, Star *t);
+   friend bool compare_declination_seconds(Star *s, Star *t);
+   friend bool compare_declination_decimal_degrees(Star *s, Star *t);
+   friend bool compare_is_binary(Star *s, Star *t);
 
    friend int yyparse(yyscan_t);
 
@@ -3558,6 +3568,246 @@ compare_constellation_number(Star *s, Star *t)
    return s->constellation_number < t->constellation_number;
 }
 
+@q ****** (6) Compare |compare_right_ascension_hours|.@>
+@*7 Compare |compare_right_ascension_hours|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_hours(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_hours(Star *s, Star *t)
+{
+   return s->right_ascension_hours < t->right_ascension_hours;
+}
+
+@q ****** (6) Compare |compare_right_ascension_minutes|.@>
+@*7 Compare |compare_right_ascension_minutes|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_minutes(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_minutes(Star *s, Star *t)
+{
+   return s->right_ascension_minutes < t->right_ascension_minutes;
+}
+
+@q ****** (6) Compare |compare_right_ascension_seconds|.@>
+@*7 Compare |compare_right_ascension_seconds|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_seconds(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_seconds(Star *s, Star *t)
+{
+   return s->right_ascension_seconds < t->right_ascension_seconds;
+}
+
+@q ****** (6) Compare |compare_right_ascension_decimal_hours|.@>
+@*7 Compare |compare_right_ascension_decimal_hours|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_hours(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_hours(Star *s, Star *t)
+{
+   return s->right_ascension_decimal_hours < t->right_ascension_decimal_hours;
+}
+
+@q ****** (6) Compare |compare_right_ascension_decimal_degrees|.@>
+@*7 Compare |compare_right_ascension_decimal_degrees|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_degrees(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_degrees(Star *s, Star *t)
+{
+   return s->right_ascension_decimal_degrees < t->right_ascension_decimal_degrees;
+}
+
+@q ****** (6) Compare |compare_declination_degrees|.@>
+@*7 Compare |compare_declination_degrees|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_degrees(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_degrees(Star *s, Star *t)
+{
+   return s->declination_degrees < t->declination_degrees;
+}
+
+@q ****** (6) Compare |compare_declination_minutes|.@>
+@*7 Compare |compare_declination_minutes|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_minutes(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_minutes(Star *s, Star *t)
+{
+   return s->declination_minutes < t->declination_minutes;
+}
+
+@q ****** (6) Compare |compare_declination_seconds|.@>
+@*7 Compare |compare_declination_seconds|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_seconds(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_seconds(Star *s, Star *t)
+{
+   return s->declination_seconds < t->declination_seconds;
+}
+
+@q ****** (6) Compare |compare_declination_decimal_degrees|.@>
+@*7 Compare |compare_declination_decimal_degrees|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_decimal_degrees(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_decimal_degrees(Star *s, Star *t)
+{
+   return s->declination_decimal_degrees < t->declination_decimal_degrees;
+}
+
+@q ****** (6) Compare |compare_is_binary|.@>
+@*7 Compare |compare_is_binary|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_is_binary(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_is_binary(Star *s, Star *t)
+{
+   return s->is_binary < t->is_binary;
+}
+
 @q ****** (6) Compare |Star| pointers.@>
 @*7 Compare |Star| pointers.
 \initials{LDF 2021.06.24.}
@@ -3570,8 +3820,8 @@ Added this function.
 @q ******* (7) Declaration.  @>
 @
 @<Declare non-member functions for |class Star|@>=
-bool
-compare_star_pointers(Star *s, Star *t);
+bool compare_star_pointers(Star *s, Star *t);
+
 
 @q ******* (7) Definition.  @>
 @
