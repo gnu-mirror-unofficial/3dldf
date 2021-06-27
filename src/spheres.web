@@ -132,7 +132,7 @@ Removed |Point* center|.  Now using |Point Solid::center| instead.
 
 \initials{LDF 2005.10.25.}
 Added |unsigned short sphere_type| and the |static const unsigned shorts| 
-|SPHERE_NULL_TYPE|, |GLOBE_TYPE|, and |PANEL_TYPE|.
+|SPHERE_NULL_TYPE|, |SPHERE_GLOBE_TYPE|, and |SPHERE_PANEL_TYPE|.
 
 \initials{LDF 2005.10.28.}
 Changed |diameter| to |radius| and 
@@ -164,6 +164,8 @@ class Sphere : public Ellipsoid
    static const unsigned int DEFAULT_CIRCLE_POINT_COUNT;
 
    static const unsigned short SPHERE_NULL_TYPE;
+   static const unsigned short SPHERE_GLOBE_TYPE;
+   static const unsigned short SPHERE_PANEL_TYPE;
    static const unsigned short GLOBE_TYPE;
    static const unsigned short PANEL_TYPE;
   
@@ -187,8 +189,8 @@ Now setting |const unsigned int DEFAULT_CIRCLE_POINT_COUNT = 32|.
 \initials{LDF 2005.10.25.}
 Now setting 
 |const unsigned short Sphere::SPHERE_NULL_TYPE = 0|, 
-|const unsigned short Sphere::GLOBE_TYPE = 1|, and 
-|const unsigned short Sphere::PANEL_TYPE = 2|.
+|const unsigned short Sphere::SPHERE_GLOBE_TYPE = 1|, and 
+|const unsigned short Sphere::SPHERE_PANEL_TYPE = 2|.
 
 \initials{LDF 2005.10.29.}
 Now setting |const unsigned int DEFAULT_CIRCLE_POINT_COUNT = 64|.
@@ -200,9 +202,11 @@ Now setting |const unsigned int DEFAULT_CIRCLE_POINT_COUNT = 64|.
    const real         Sphere::DEFAULT_RADIUS             =  1;  
    const unsigned int Sphere::DEFAULT_CIRCLE_POINT_COUNT = 64;
 
-const unsigned short Sphere::SPHERE_NULL_TYPE = 0;
-   const unsigned short Sphere::GLOBE_TYPE       = 1;
-   const unsigned short Sphere::PANEL_TYPE       = 2;  
+   const unsigned short Sphere::SPHERE_NULL_TYPE    = 0;
+   const unsigned short Sphere::SPHERE_GLOBE_TYPE   = 1;
+   const unsigned short Sphere::GLOBE_TYPE          = 1;
+   const unsigned short Sphere::SPHERE_PANEL_TYPE   = 2;  
+   const unsigned short Sphere::PANEL_TYPE          = 2;  
 
 @q ** (2) Constructors and setting functions.@>
 @*1 Constructors and setting functions.@>
@@ -303,11 +307,10 @@ set(Sphere_Set_Option_Struct* options, Scanner_Node scanner_node);
 int
 Sphere::set(Sphere_Set_Option_Struct* options, Scanner_Node scanner_node)
 {
-  
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -342,11 +345,14 @@ Sphere::set(Sphere_Set_Option_Struct* options, Scanner_Node scanner_node)
 
    clear();
 
-   sphere_type = options->sphere_type;
+   if (options)
+      sphere_type = options->sphere_type;
+   else
+      sphere_type = SPHERE_GLOBE_TYPE;
 
 #if DEBUG_COMPILE
    if (DEBUG)
-      {
+   {
 
 @q ******* (7).@>
 
@@ -376,7 +382,7 @@ Sphere::set(Sphere_Set_Option_Struct* options, Scanner_Node scanner_node)
 
               }  /* |else| (|options != 0|)  */
 
-      }  /* |if (DEBUG)|  */
+   }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -395,7 +401,7 @@ Changed the way |center| is set to account for the fact that I'm now using
 
 @<Define |Sphere| functions@>= 
    
-   if (options &&  options->center)
+   if (options && options->center)
       {
          center = *(options->center);
          delete options->center;
@@ -451,7 +457,7 @@ Added this section.
 @<Define |Sphere| functions@>= 
 
    if (options == static_cast<Sphere_Set_Option_Struct*>(0))
-      {
+   {
 #if DEBUG_COMPILE
           if (DEBUG)
              {
@@ -469,24 +475,24 @@ Added this section.
 
           divisions_horizontal = DEFAULT_DIVISIONS;
 
-      }  /* |if (options == 0)|  */
+   }  /* |if (options == 0)|  */
 
    else 
       divisions_horizontal = options->divisions_horizontal;                
 
 #if DEBUG_COMPILE
-          if (DEBUG)
-             {          
-                 cerr_strm << thread_name << "In `Sphere::set':"
-                           << endl
-                           << "divisions_horizontal == " 
-                           << divisions_horizontal;
+   if (DEBUG)
+   {          
+       cerr_strm << thread_name << "In `Sphere::set':"
+                 << endl
+                 << "divisions_horizontal == " 
+                 << divisions_horizontal;
 
-                 log_message(cerr_strm);
-                 cerr_message(cerr_strm);
-                 cerr_strm.str("");
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
 
-             }  /* |if (DEBUG)|  */
+   }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -687,22 +693,22 @@ Added this section.
 
 @<Define |Sphere| functions@>= 
 
-   if (!(   sphere_type == GLOBE_TYPE 
-         || sphere_type == PANEL_TYPE))
+   if (!(   sphere_type == SPHERE_GLOBE_TYPE 
+         || sphere_type == SPHERE_PANEL_TYPE))
       {
           cerr_strm << thread_name << "WARNING!  In `Sphere:set':"
                     << endl 
                     << "Invalid `sphere_type':  " << sphere_type
                     << endl 
-                    << "Setting `sphere_type' to `Sphere::GLOBE_TYPE' "
+                    << "Setting `sphere_type' to `Sphere::SPHERE_GLOBE_TYPE' "
                     << "and continuing.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm, warning_stop_value);
           cerr_strm.str("");   
 
-      }  /* |if (!(   sphere_type == GLOBE_TYPE 
-                   || sphere_type == PANEL_TYPE))|  */
+      }  /* |if (!(   sphere_type == SPHERE_GLOBE_TYPE 
+                   || sphere_type == SPHERE_PANEL_TYPE))|  */
 
 @q ****** (6) Create the circles.@>
 @ Create the circles.
@@ -838,12 +844,12 @@ Added this section.
    if (divisions_vertical >= 2)
       {   
 
-@q ********* (9) |GLOBE_TYPE|.@> 
-@ |GLOBE_TYPE|.
+@q ********* (9) |SPHERE_GLOBE_TYPE|.@> 
+@ |SPHERE_GLOBE_TYPE|.
 
 @<Define |Sphere| functions@>= 
 
-   if (sphere_type == GLOBE_TYPE)
+   if (sphere_type == SPHERE_GLOBE_TYPE)
      {
 
           for (int i = 0; i < divisions_vertical / 2; ++i)
@@ -855,14 +861,14 @@ Added this section.
                 circles.push_back(c);
              }  /* |for|  */  
 
-      } /* |if (sphere_type == GLOBE_TYPE)|  */ 
+      } /* |if (sphere_type == SPHERE_GLOBE_TYPE)|  */ 
 
-@q ********* (9) |PANEL_TYPE|.@> 
-@ |PANEL_TYPE|.
+@q ********* (9) |SPHERE_PANEL_TYPE|.@> 
+@ |SPHERE_PANEL_TYPE|.
 
 @<Define |Sphere| functions@>= 
 
-   if (sphere_type == PANEL_TYPE)
+   if (sphere_type == SPHERE_PANEL_TYPE)
      {
 
 @q ********** (10).@>
@@ -908,7 +914,7 @@ Added this section.
 
 @q ********** (10).@>
 
-      } /* |if (sphere_type == PANEL_TYPE)|  */ 
+      } /* |if (sphere_type == SPHERE_PANEL_TYPE)|  */ 
 
 @q ********* (9).@>  
 
@@ -1638,10 +1644,10 @@ Sphere::show(string text, char coords,
 
    if (sphere_type == SPHERE_NULL_TYPE)
       cerr << "SPHERE_NULL_TYPE";
-   else if (sphere_type == GLOBE_TYPE)
-      cerr << "GLOBE_TYPE";
-   else if (sphere_type == PANEL_TYPE)
-      cerr << "PANEL_TYPE";
+   else if (sphere_type == SPHERE_GLOBE_TYPE)
+      cerr << "SPHERE_GLOBE_TYPE";
+   else if (sphere_type == SPHERE_PANEL_TYPE)
+      cerr << "SPHERE_PANEL_TYPE";
    else
       cerr << "?? (Invalid type)";
    
@@ -2165,7 +2171,7 @@ Now setting |divisions|, |divisions_vertical|, and
 
 \initials{LDF 2005.10.25.}
 Changed |unsigned short type| to |sphere_type|.
-Now setting |sphere_type = Sphere::GLOBE_TYPE|.
+Now setting |sphere_type = Sphere::SPHERE_GLOBE_TYPE|.
 
 \initials{LDF 2005.10.25.}
 Now setting |divisions|, |divisions_vertical|, and
@@ -2189,7 +2195,7 @@ Sphere_Set_Option_Struct(void);
 Sphere_Set_Option_Struct::Sphere_Set_Option_Struct(void) 
 {
     center               = 0;
-    sphere_type          = Sphere::GLOBE_TYPE;
+    sphere_type          = Sphere::SPHERE_GLOBE_TYPE;
     divisions_vertical   = Sphere::DEFAULT_DIVISIONS;
     divisions_horizontal = Sphere::DEFAULT_DIVISIONS;
 }
@@ -2310,10 +2316,10 @@ Sphere_Set_Option_Struct::show(string text)
 
    if (sphere_type == Sphere::SPHERE_NULL_TYPE)
       cerr << "Sphere::SPHERE_NULL_TYPE";
-   else if (sphere_type == Sphere::GLOBE_TYPE)
-      cerr << "Sphere::GLOBE_TYPE";
-   else if (sphere_type == Sphere::PANEL_TYPE)
-      cerr << "Sphere::PANEL_TYPE";
+   else if (sphere_type == Sphere::SPHERE_GLOBE_TYPE)
+      cerr << "Sphere::SPHERE_GLOBE_TYPE";
+   else if (sphere_type == Sphere::SPHERE_PANEL_TYPE)
+      cerr << "Sphere::SPHERE_PANEL_TYPE";
    else
       cerr << "?? (Invalid type)";
    
