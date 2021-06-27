@@ -3066,6 +3066,7 @@ Added this section.
 @
 @<Define functions@>=
 
+   star_field_name_map[STARS_STAR_CONSTANT_NAME]              = "STARS_STAR_CONSTANT_NAME";
    star_field_name_map[STARS_COMMON_NAME]                     = "STARS_COMMON_NAME";
    star_field_name_map[STARS_GREEK_NAME]                      = "STARS_GREEK_NAME";
    star_field_name_map[STARS_LATIN_NAME]                      = "STARS_LATIN_NAME";
@@ -7073,7 +7074,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-  bool DEBUG = false; /* |true| */@;  
+  bool DEBUG = true; /* |false| */@;  
 
   int status;
 
@@ -7874,6 +7875,21 @@ AFTER_WHERE_CLAUSE:
         }      
 #endif /* |DEBUG_COMPILE|  */@; 
         
+@q ***** (5) @>
+
+        if (*iter == STARS_STAR_CONSTANT_NAME)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_STAR_CONSTANT_NAME'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_star_constant_name);
+        }
+
 @q ***** (5) @>
 
         if (*iter == STARS_COMMON_NAME)

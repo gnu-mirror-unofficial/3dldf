@@ -1165,6 +1165,53 @@ Added this type declaration.
 
 @=%type <int_value> stars_field_specifier@>
 
+@q ****** (6) stars_field_specifier --> STAR_CONSTANT_NAME.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{STAR\_CONSTANT\_NAME}.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: STAR_CONSTANT_NAME@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: STAR_CONSTANT_NAME'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_STAR_CONSTANT_NAME;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: STAR_CONSTANT_NAME':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
 @q ****** (6) stars_field_specifier --> COMMON_NAME.@> 
 @*5 \§stars field specifier> $\longrightarrow$ \.{COMMON\_NAME}.
 \initials{LDF 2021.06.20.}
@@ -1211,6 +1258,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
+
 
 @q ****** (6) stars_field_specifier --> FLAMSTEED_DESIGNATION_NUMBER.@> 
 @*5 \§stars field specifier> $\longrightarrow$ \.{FLAMSTEED\_DESIGNATION\__NUMBER}.

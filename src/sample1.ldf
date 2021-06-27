@@ -52,9 +52,26 @@
 
 %% * (1) New sample code.
 
-show stars where constellation_full_name == "Canis Major" order by bayer_designation_greek_letter;
+%% !! START HERE: LDF 2021.6.27.  Figure out why assigning to sv leaves superfluous stars on the
+%% vector shown by the following show command.
+
+%star_vector sv;
+
+%sv := stars where common_name == "Cor Caroli 1";
+
+show stars common_name, star_constant_name, bs_hr_number 
+where constellation_full_name == "Canis Major" order by bs_hr_number;
+
+end;
+
+
+sv := stars where common_name <> "" and approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude
+with_limit 10;
+
 
 endinput;
+
+%show stars where constellation_full_name == "Canis Major" order by bayer_designation_greek_letter;
 
 %show unit_sphere;
 

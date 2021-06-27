@@ -151,6 +151,7 @@ class Star
 {
 
    friend Scanner_Type;
+   friend bool compare_star_constant_name(Star *, Star *);
    friend bool compare_common_name(Star *s, Star *);
    friend bool compare_flamsteed_designation_number(Star *s, Star *);
    friend bool compare_bayer_designation_greek_letter(Star *s, Star *);
@@ -170,6 +171,8 @@ class Star
    friend int Scan_Parse::show_stars_func(Scanner_Node);
 
    protected:
+
+      string star_constant_name;
 
       string common_name;
       string greek_name;
@@ -293,6 +296,9 @@ Stars_Where_Option_Struct::show(string s)
 
    cerr << endl
         << "field             == " << field;
+
+   if (field == STARS_STAR_CONSTANT_NAME)
+      cerr << " == STARS_STAR_CONSTANT_NAME" << endl;
 
    if (field == STARS_COMMON_NAME)
       cerr << " == STARS_COMMON_NAME" << endl;
@@ -477,6 +483,7 @@ Star(void);
 @<Define |Star| functions@>= 
 Star::Star(void)
 {
+      star_constant_name = "";
       common_name = "";
       greek_name = "";
       latin_name = "";
@@ -523,6 +530,7 @@ Star(const Star &s);
 @<Define |Star| functions@>= 
 Star::Star(const Star &s)
 {
+      star_constant_name = s.star_constant_name;
       common_name = s.common_name;
       greek_name = s.greek_name;
       latin_name = s.latin_name;
@@ -904,6 +912,7 @@ Star::operator=(const Star& s)
 
 @q ****** (6)@>
 
+      star_constant_name = s.star_constant_name;
       common_name = s.common_name;
       greek_name = s.greek_name;
       latin_name = s.latin_name;
@@ -1052,6 +1061,8 @@ Star::show(string text, unsigned int fields) const
 
    using namespace Scan_Parse;
 
+    string s;
+
 @q ***** (5)@>
 
 #if DEBUG_COMPILE
@@ -1086,6 +1097,22 @@ Star::show(string text, unsigned int fields) const
        text = "Star:";
 
     cerr << text << endl;
+
+    if (star_constant_name != "")
+    {
+        cerr << "star_constant_name              == " << star_constant_name << endl;  
+
+        s = star_constant_name;
+
+        for (int i = 0; i < s.length(); ++i)
+            s[i] = tolower(s[i]);
+
+        if (s != star_constant_name)
+           cerr << "alternative star_constant_name  == " << s << endl;
+
+        s = "";
+
+    }
 
     if (fields & STARS_COMMON_NAME)
        cerr << "common_name                     == " << common_name << endl;
@@ -1243,27 +1270,20 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
 @q ****** (6) @>
 
-   if (where_option.field == STARS_COMMON_NAME)
+   if (where_option.field == STARS_STAR_CONSTANT_NAME)
    {
-      star_str_ptr = &Star::common_name;
+      star_str_ptr  = &Star::star_constant_name;
       star_int_ptr  = 0;
       star_real_ptr = 0;
    }
-   else if (where_option.field == STARS_GREEK_NAME)
-   {
-#if DEBUG_COMPILE
-      if (DEBUG)
-      { 
-          cerr << "where_option.field == STARS_GREEK_NAME." << endl
-               << "Setting `star_str_ptr' to `&Star::greek_name'."
-               << endl;
-      }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
-      star_str_ptr = &Star::greek_name;
+@q ****** (6) @>
+
+   else if (where_option.field == STARS_COMMON_NAME)
+   {
+      star_str_ptr  = &Star::common_name;
       star_int_ptr  = 0;
       star_real_ptr = 0;
-
    }
 
 @q ****** (6) @>
@@ -3249,6 +3269,30 @@ Planet::show(string text, Scanner_Node scanner_node) const
 \initials{LDF 2021.06.22.}
 Added this section.
 \ENDLOG
+
+@q ****** (6) Compare |star_constant_name|.@>
+@*7 Compare |star_constant_name|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_star_constant_name(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_star_constant_name(Star *s, Star *t)
+{
+   return s->star_constant_name < t->star_constant_name;
+}
 
 @q ****** (6) Compare |common_name|.@>
 @*7 Compare |common_name|.

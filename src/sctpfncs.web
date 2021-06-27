@@ -4619,15 +4619,13 @@ Scanner_Type::get_astronomy(void)
 {
 @q **** (4) @>
 
-   bool DEBUG = false;  /* |true|  */
+   bool DEBUG = true;  /* |false|  */
 
    string s;
    string t;
    string u;
    string w;
    size_t pos;
-
-   star_constant_name_vector.clear();
 
 #ifndef MYSQL_AVAILABLE
    cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `MYSQL_AVAILABLE' isn't defined."
@@ -5094,7 +5092,7 @@ Scanner_Type::get_astronomy(void)
             }            
 #endif /* |DEBUG_COMPILE|  */@; 
 
-            star_constant_name_vector.push_back(u);
+            (*iter)->star_constant_name = u; 
 
             add_entry(u, STAR, regular, is_constant, not_array, 
                       Id_Map_Entry_Type::KNOWN, *iter);
@@ -5105,7 +5103,6 @@ Scanner_Type::get_astronomy(void)
             w  = s;
             w += "_"; 
             w += t;
-
 
 #if DEBUG_COMPILE
             if (DEBUG)
@@ -5152,26 +5149,116 @@ Scanner_Type::get_astronomy(void)
                      break;
                }
 
+              while (true)
+              {
+                 pos = s.find("0");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "zero");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("1");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "one");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("2");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "two");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("3");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "three");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("4");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "four");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("5");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "five");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("6");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "six");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("7");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "seven");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("8");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "eight");
+                 else
+                    break;
+              } 
+
+              while (true)
+              {
+                 pos = s.find("9");
+                 if (pos != string::npos)
+                    s.replace(pos, 1, "nine");
+                 else
+                    break;
+              } 
+
 #if DEBUG_COMPILE
-               if (DEBUG)
-               { 
-                   cerr << "`(*iter)->common_name' == " << (*iter)->common_name << " (!= \"\")"
-                        << endl 
-                        << "`s' == " << s << endl 
-                        << "Calling `Scanner_Type::add_synonym'."
-                        << endl;
-               }  
+              if (DEBUG)
+              { 
+                  cerr << "`(*iter)->common_name' == " << (*iter)->common_name << " (!= \"\")"
+                       << endl 
+                       << "`s' == " << s << endl 
+                       << "Calling `Scanner_Type::add_synonym'."
+                       << endl;
+              }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-               add_synonym(s, u);   
+              add_synonym(s, u);   
 
-               t = s;
+              t = s;
 
-               for (int i = 0; i < t.size(); ++i)
-                  t[i] = tolower(t[i]); 
+              for (int i = 0; i < t.size(); ++i)
+                 t[i] = tolower(t[i]); 
 
-               if (t != s)
-               {
+              if (t != s)
+              {
 #if DEBUG_COMPILE
                   if (DEBUG)
                   { 
@@ -5183,16 +5270,16 @@ Scanner_Type::get_astronomy(void)
 #endif /* |DEBUG_COMPILE|  */@; 
 
                   add_synonym(t, u);   
-               }
+              }
 #if DEBUG_COMPILE
-               else if (DEBUG)
-               { 
+              else if (DEBUG)
+              { 
                    cerr << "`t' == " << t << " == `s' == " << s << endl
                         << endl 
                         << "Not calling `Scanner_Type::add_synonym'."
                         << endl;
 
-               }             
+              }             
 #endif /* |DEBUG_COMPILE|  */@; 
          
             }  /* |if ((*iter)->common_name != "")| */
@@ -5273,31 +5360,6 @@ Scanner_Type::get_astronomy(void)
 @q **** (4) @>
 
    astronomy_enabled = true;
-
-#if DEBUG_COMPILE
-
-   DEBUG = true; /* |false|  */
-
-   if (DEBUG)
-   { 
-       cerr << "In `Scanner_Type::get_astronomy':"
-            << endl
-            << "`star_constant_name_vector.size()' == " << star_constant_name_vector.size() << endl;
-
-       if (star_constant_name_vector.size() > 0)
-       {
-           cerr << "`star_constant_name_vector':" << endl;
- 
-           for (vector<string>::iterator iter = star_constant_name_vector.begin();
-                iter != star_constant_name_vector.end();
-                ++iter)
-           {
-              cerr << *iter << endl;
-           }
-           cerr << endl;
-       }
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 
