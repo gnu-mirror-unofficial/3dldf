@@ -2731,7 +2731,7 @@ Added this rule.
 
     Star *s = static_cast<Star*>(@=$2@>);
 
-#if 1     
+#if 0 /* 1 */
     s->show("*s:");
 
     cerr << "$4 == " << @=$4@> << endl;
@@ -2739,15 +2739,14 @@ Added this rule.
 
     p->set(0, 0, @=$4@>);
 
-#if 1 
+#if 0 /* 1 */
     p->show("*p before rotations:");
 #endif 
 
-    p->rotate(0, 0, s->declination_decimal_degrees);
-    p->rotate(0, s->right_ascension_decimal_degrees);
+    p->rotate(s->declination_decimal_degrees, s->right_ascension_decimal_degrees);
 
 
-#if 1
+#if 0 /* 1 */
     p->show("*p after rotations:");
 #endif 
 

@@ -24618,6 +24618,9 @@ select common_name, bs_hr_number, approx_rank_apparent_magnitude from Stars wher
 common_name != "" and approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude
 limit 10 offset 1;
 
+select approx_rank_apparent_magnitude, common_name from Stars where common_name != ""
+order by approx_rank_apparent_magnitude limit 21 offset 9;
+
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */

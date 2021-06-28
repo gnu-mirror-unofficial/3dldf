@@ -60,38 +60,92 @@ set f with_position (0, 20, -50)
        with_direction (0, 20, 10) with_distance 70; 
 
 point p[];
-
 circle c[];
 
-%show sirius;
-
 sphere s;
-
 s := unit_sphere scaled (3, 3, 3);
-
-set s with_radius 3 with_divisions 4;
-
-%p := plot sirius with_radius 3;
-
-p0 := (0, 0, 3);
-
-message "p0 before rotations:";
-show p;
-
-rotate p0 (-16.73419952, 101.48899841);
-
-message "p0 after rotations:";
-show p0;
-
 draw s;
 
-c0 := get_circle (1) s;
-
+c0 := unit_circle scaled (3, 0, 3);
 draw c0 with_color red;
+
+p1 := plot sirius     with_radius 3;
+p2 := plot canopus    with_radius 3;
+p4 := plot arcturus   with_radius 3;
+%% Get 3!
+p5 := plot vega       with_radius 3;
+p6 := plot capella    with_radius 3;
+p7 := plot rigel      with_radius 3;
+p8 := plot procyon    with_radius 3;
+p9 := plot achernar   with_radius 3;
+p10 := plot betelgeuse with_radius 3;
+p11 := plot hadar      with_radius 3;
+
+% +--------------------------------+-------------+
+% | approx_rank_apparent_magnitude | common_name |
+% +--------------------------------+-------------+
+% |                              1 | Sirius      |
+% |                              2 | Canopus     |
+% |                              4 | Arcturus    |
+% |                              5 | Vega        |
+% |                              6 | Capella     |
+% |                              7 | Rigel       |
+% |                              8 | Procyon     |
+% |                              9 | Achernar    |
+% |                             10 | Betelgeuse  |
+% |                             11 | Hadar       |
+% |                             12 | Altair      |
+% |                             14 | Aldebaran   |
+% |                             15 | Antares     |
+% |                             16 | Spica       |
+% |                             17 | Pollux      |
+% |                             18 | Fomalhaut   |
+% |                             19 | Deneb       |
+% |                             20 | Mimosa      |
+% |                             21 | Regulus     |
+% |                             22 | Adhara      |
+% |                             24 | Shaula      |
+% |                             25 | Gacrux      |
+% |                             26 | Bellatrix   |
+% |                             27 | Elnath      |
+% |                             28 | Miaplacidus |
+% |                             29 | Alnilam     |
+% |                             30 | Alnair      |
+% |                             31 | Alnitak     |
+% |                             32 | Alioth      |
+% |                             33 | Mirfak      |
+% +--------------------------------+-------------+
+
+%% !! START HERE:  LDF 2021.6.28.  Get star with rank 3!
+
+dotlabel.lft("Sirius",      p1);      
+drawdot p2 with_pen pencircle scaled (3pt, 3pt, 3pt);
+label.lft("Canopus",     p2 shifted (-10pt, 0));     
+%% Get 3!
+dotlabel.top("Arcturus",    p4);    
+dotlabel.rt("Vega",        p5);        
+dotlabel.ulft("Capella",     p6);
+drawdot p7 with_pen pencircle scaled (3pt, 3pt, 3pt);
+label.ulft("Rigel",       p7 shifted (-5pt, 0));       
+drawdot p8 with_pen pencircle scaled (3pt, 3pt, 3pt);
+label.llft("Procyon",     p8 shifted (-5pt, 0));     
+dotlabel.top("Achernar",    p9);    
+dotlabel.lft("Betelgeuse", p10);  
+dotlabel.lrt("Hadar",      p11);       
+
+
+% draw c0 with_color red;
+% draw c1 with_color green;
+% draw c2 with_color blue;
+% draw c3 with_color orange;
+% draw c4 with_color purple;
+% draw c5 with_color yellow;
+% draw c15 with_color magenta;
+
 
 %draw origin -- (3, 0) with_pen pencircle scaled (2pt, 2pt, 2pt) with_color red;
 
-dotlabel.top("Sirius", p0);
+
 
 v := currentpicture;
 
