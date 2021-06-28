@@ -6363,10 +6363,8 @@ getchar();
            {
                cerr_strm << "Field";
   
-               if (j < 10)
+               if (j < 10 && scanner_node->field_ctr >= 10)
                  cerr_strm << "  ";
-               else if (j < 100)
-                 cerr_strm << " ";
                else 
                  cerr_strm << " ";
 
