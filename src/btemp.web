@@ -1,132 +1,119 @@
+@q ** (2) Get arc_length.@>
+@ Get arc_length.
+@^\cfunc{Circle}{get\_arc_length}@>
+\initials{LDF 2021.6.28.}
+
+\LOG
+\initials{LDF 2021.6.28.}
+Added this function.
+\ENDLOG 
+ 
+@q *** (3) Declaration @>
+
+@<Declare |Circle| functions@>=
+real
+get_arc_length(real angle, Scanner_Node scanner_node = 0);
+
+@q **** (4) Definition @>
+@
+@<Define |Circle| functions@>=
+real
+Circle::get_arc_length(real angle, Scanner_Node scanner_node)
+{
+@q ***** (5) @>
+
+   bool DEBUG = true; /* |false| */
+
+   real arc_length = 0.0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Circle::get_arc_length'." << endl 
+           << "`angle' == " << angle
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 @q ***** (5) @>
 @
-@<Define rules@>=
+@<Define |Circle| functions@>=
 
-       /*  Process the contents of |curr_row|  */
+   if (angle == 0.0)
+   {
+      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
+           << "Argument `real angle' == 0:  Can't calculate arc length."
+           << endl
+           << "Exiting function unsuccessfully with return value 0."
+           << endl;
 
-       scanner_node->curr_row = 0;
-   
-       int i = 0;   
-  
+      return 0.0;
+
+   } 
+
+
 @q ***** (5) @>
- 
-       do
-       {
-@q ****** (6) @>
+@
+@<Define |Circle| functions@>=
 
+   if (!is_circular(scanner_node))
+   {
+      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
+           << "`Circle::is_circular' returned `false':" << endl
+           << "`Circle' isn't circular.  Can't calculate arc length."
+           << endl
+           << "Exiting function unsuccessfully with return value 0."
+           << endl;
 
-            curr_row = mysql_fetch_row(result);
+      return 0.0;
 
-            if (curr_row == 0)
-            {
+   } 
 
-              if (*mysql_error(mysql))
-              {
-                cerr_strm << "ERROR! In `Scanner_Type::show_database: `mysql_fetch_row' failed "
-                          << "returning NULL." << endl
-                          << "Error:  " << mysql_error(mysql) << endl
-                          << "Exiting function  unsuccessfully with exit status 1."
-                          << endl;
-                log_message(cerr_strm);
-                cerr_message(cerr_strm);
-                cerr_strm.str("");
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
 
-                if (result)
-                {
-                  mysql_free_result(result);
-                  result = 0;
-                }       
+   if (angle < 0.0)
+   {
+      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
+           << "Argument `real angle' < 0:  Converting to absolute value (, i.e., " << -real << ")."
+           << endl;
 
-                return 1;
+#if LDF_REAL_FLOAT
+      angle = fabsf(angle);
+#elif LDF_REAL_DOUBLE
+      angle = fabs(angle);
+#else /* Default.  */
+      angle = fabsf(angle);
+#endif
 
-              }
-              else if (DEBUG)
-              {
-                
-                cerr_strm << "In `Scanner_Type::show_database:" << endl 
-                          << "No more rows." << endl;
+   } 
 
-                log_message(cerr_strm);
-                cerr_message(cerr_strm);
-                cerr_strm.str("");
-              }
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
 
-              break;
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr << "In `Circle::get_arc_length':" << endl 
+           << "`Circle::is_circular' returned `true':" 
+           << endl
+           << "`Circle' is circular."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-           }  /* |if (curr_row == 0)|  */
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
 
-           cerr_strm << "Iteration " << (i + 1) << ":" << endl 
-                     << "`curr_row[0]' == `prefix' == " << curr_row[0] << endl
-                     << "`curr_row[1]' == `name'   == " << curr_row[1] << endl;
-           log_message(cerr_strm);
-           cerr_message(cerr_strm);
-           cerr_strm.str("");
-
-           curr_point.clear();
-
-           point_prefix_vector.push_back(curr_row[0]);
-           point_name_vector.push_back(curr_row[1]);
-
-           curr_point.world_coordinates[0] = static_cast<real>(atof(curr_row[2]));
-           curr_point.world_coordinates[1] = static_cast<real>(atof(curr_row[3]));
-           curr_point.world_coordinates[2] = static_cast<real>(atof(curr_row[4]));
-           curr_point.world_coordinates[3] = static_cast<real>(atof(curr_row[5]));
-
-           curr_point.user_coordinates[0] = static_cast<real>(atof(curr_row[6]));
-           curr_point.user_coordinates[1] = static_cast<real>(atof(curr_row[7]));
-           curr_point.user_coordinates[2] = static_cast<real>(atof(curr_row[8]));
-           curr_point.user_coordinates[3] = static_cast<real>(atof(curr_row[9]));
-
-           curr_point.view_coordinates[0] = static_cast<real>(atof(curr_row[10]));
-           curr_point.view_coordinates[1] = static_cast<real>(atof(curr_row[11]));
-           curr_point.view_coordinates[2] = static_cast<real>(atof(curr_row[12]));
-           curr_point.view_coordinates[3] = static_cast<real>(atof(curr_row[13]));
-
-           curr_point.pre_projective_coordinates[0] = static_cast<real>(atof(curr_row[14]));
-           curr_point.pre_projective_coordinates[1] = static_cast<real>(atof(curr_row[15]));
-           curr_point.pre_projective_coordinates[2] = static_cast<real>(atof(curr_row[16]));
-           curr_point.pre_projective_coordinates[3] = static_cast<real>(atof(curr_row[17]));
- 
-           curr_point.projective_coordinates[0] = static_cast<real>(atof(curr_row[18]));
-           curr_point.projective_coordinates[1] = static_cast<real>(atof(curr_row[19]));
-           curr_point.projective_coordinates[2] = static_cast<real>(atof(curr_row[20]));
-           curr_point.projective_coordinates[3] = static_cast<real>(atof(curr_row[21]));
- 
-           curr_point.drawdot_value = static_cast<signed short>(atoi(curr_row[22]));
-           curr_point.do_output = static_cast<bool>(atoi(curr_row[23]));
-           curr_point.measurement_units = static_cast<string>(curr_row[24]);
-
-           cerr_strm << "`curr_point.world_coordinates[0]' == " << curr_point.world_coordinates[0] 
-                     << endl
-                     << "`curr_point.world_coordinates[1]' == " << curr_point.world_coordinates[1] 
-                     << endl
-                     << "`curr_point.world_coordinates[2]' == " << curr_point.world_coordinates[2] 
-                     << endl
-                     << "`curr_point.world_coordinates[3]' == " << curr_point.world_coordinates[3] 
-                     << endl
-                     << "`currenldrawdot_value'        == " << curr_point.drawdot_value << endl 
-                     << "`curr_point.do_output'            == " << curr_point.do_output << endl         
-                     << "`curr_point.measurement_units'    == " << curr_point.measurement_units 
-                     << endl;
-
-           log_message(cerr_strm);
-           cerr_message(cerr_strm);
-           cerr_strm.str("");
-
-           point_vector.push_back(curr_point);
-           ++i;
-
-@q ****** (6) @>
-
-      } while (curr_row != 0);
+ // (2 * PI * radius) : INVALID_REAL;
+      
 
 @q ***** (5) @>
 
-     /* Free |result|  */
-     
-     if (result)
-       {
-	 mysql_free_result(result);
-	 result = 0;
-       }
+    
 
+}  /* End of |Circle::get_arc_length| definition */

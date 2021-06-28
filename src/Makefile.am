@@ -355,6 +355,13 @@ f-run:
 	$(MAKE) parser.o
 	$(MAKE) run
 
+.PHONY: f-run-bi ## "force parser and run with --bison-trace option"
+
+f-run-bi:
+	rm -f parser.o
+	$(MAKE) parser.o
+	$(MAKE) run-bi
+
 #### *** (3) parser2
 
 # parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)

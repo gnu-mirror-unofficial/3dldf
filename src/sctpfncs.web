@@ -4639,13 +4639,22 @@ Scanner_Type::get_astronomy(void)
 {
 @q **** (4) @>
 
-   bool DEBUG = true;  /* |false|  */
+   bool DEBUG = false;  /* |true|  */
 
    string s;
    string t;
    string u;
    string w;
    size_t pos;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Scanner_Type::get_astronomy'."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
+
 
 #ifndef MYSQL_AVAILABLE
    cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `MYSQL_AVAILABLE' isn't defined."
@@ -4658,20 +4667,10 @@ Scanner_Type::get_astronomy(void)
    return 1;
 #endif 
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Entering `Scanner_Type::get_astronomy'."
-            << endl;
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>
 @
 @<Define |Scanner_Type| functions@>=
-
-   DEBUG = false;  /* |true|  */
 
    int status = 0;
 
@@ -4930,8 +4929,6 @@ Scanner_Type::get_astronomy(void)
 @q **** (4) @>
 @
 @<Define |Scanner_Type| functions@>=
-
-   DEBUG = false;  /* |true|  */
 
    if (star_ptr_vector.size() > 0)
    {

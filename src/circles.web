@@ -1232,6 +1232,127 @@ Circle::get_circumference(Scanner_Node scanner_node)
       
 }
 
+
+@q ** (2) Get arc_length.@>
+@ Get arc_length.
+@^\cfunc{Circle}{get\_arc_length}@>
+\initials{LDF 2021.6.28.}
+
+\LOG
+\initials{LDF 2021.6.28.}
+Added this function.
+\ENDLOG 
+ 
+@q *** (3) Declaration @>
+
+@<Declare |Circle| functions@>=
+real
+get_arc_length(real angle, Scanner_Node scanner_node = 0);
+
+@q **** (4) Definition @>
+@
+@<Define |Circle| functions@>=
+real
+Circle::get_arc_length(real angle, Scanner_Node scanner_node)
+{
+@q ***** (5) @>
+
+   bool DEBUG = true; /* |false| */
+
+   real arc_length = 0.0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Circle::get_arc_length'." << endl 
+           << "`angle' == " << angle
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
+
+   if (angle == 0.0)
+   {
+      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
+           << "Argument `real angle' == 0:  Can't calculate arc length."
+           << endl
+           << "Exiting function unsuccessfully with return value 0."
+           << endl;
+
+      return 0.0;
+
+   } 
+
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
+
+   if (!is_circular())
+   {
+      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
+           << "`Circle::is_circular' returned `false':" << endl
+           << "`Circle' isn't circular.  Can't calculate arc length."
+           << endl
+           << "Exiting function unsuccessfully with return value 0."
+           << endl;
+
+      return 0.0;
+
+   } 
+
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
+
+   if (angle < 0.0)
+   {
+      cerr << "WARNING!  In `Circle::get_arc_length':" 
+           << endl 
+           << "Argument `real angle' < 0:  Converting to absolute value (i.e., " << -angle << ")."
+           << endl;
+
+#if LDF_REAL_FLOAT
+      angle = fabsf(angle);
+#elif LDF_REAL_DOUBLE
+      angle = fabs(angle);
+#else /* Default.  */
+      angle = fabsf(angle);
+#endif
+
+   } 
+
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr << "In `Circle::get_arc_length':" << endl 
+           << "`Circle::is_circular' returned `true':" 
+           << endl
+           << "`Circle' is circular."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Circle| functions@>=
+
+ // (2 * PI * radius) : INVALID_REAL;
+      
+@q ***** (5) @>
+
+  return arc_length;    
+
+}  /* End of |Circle::get_arc_length| definition */
+
+
 @q * (1) Locations.@>
 @* Locations.
 \initials{LDF 2007.08.26.}

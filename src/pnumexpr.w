@@ -517,6 +517,35 @@ Added this rule.
 
 };
 
+
+@q ***** (5) numeric_primary --> ARC_LENGTH circle_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{ARC\_LENGTH} \§numeric expression> 
+\§circle primary>.
+\initials{LDF 2021.6.28.}
+
+\LOG
+\initials{LDF 2021.6.28.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: ARC_LENGTH numeric_primary circle_primary@>@/
+{
+   real angle = @=$2@>;
+   real arc_length = 0;
+
+   Circle* c  = static_cast<Circle*>(@=$3@>);
+
+   arc_length = c->get_arc_length(angle);
+
+   delete c;
+   c = 0;
+
+   @=$$@> = arc_length;
+
+};
+
 @q ***** (5) numeric_primary --> SIZE circle_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§circle primary>.
@@ -538,6 +567,7 @@ Added this rule.
      @=$$@> = ZERO_REAL;
 
    delete c;
+   c = 0;
 
 };
 
