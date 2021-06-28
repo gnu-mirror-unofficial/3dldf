@@ -500,12 +500,10 @@ Added this rule.
   @=$$@> = @=$1@>;
 };
 
-@q **** (4) circle_tertiary: sphere_tertiary @> 
-@q **** (4) INTERSECTION plane_secondary.    @> 
+@q **** (4) circle_tertiary: sphere_tertiary INTERSECTION plane_secondary. @> 
 
-@*3 \§circle tertiary> $\longrightarrow$ 
-\§sphere tertiary>
-\.{INTERSECTION} \§plane secondary>.
+@*3 \§circle tertiary> $\longrightarrow$ \§sphere tertiary> \.{INTERSECTION} 
+\§plane secondary>.
 \initials{LDF 2005.10.28.}
 
 \LOG

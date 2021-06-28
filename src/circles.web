@@ -234,6 +234,8 @@ Circle::Circle(const Point& ccenter, const real ddiameter, const real angle_x,
 
 }
 
+@q ** (2) @>
+
 @q *** (3) Setting function.@>
 @*2 Setting function.
 @^\cfunc{Circle}{set}@>
@@ -1232,7 +1234,6 @@ Circle::get_circumference(Scanner_Node scanner_node)
       
 }
 
-
 @q ** (2) Get arc_length.@>
 @ Get arc_length.
 @^\cfunc{Circle}{get\_arc_length}@>
@@ -1344,7 +1345,8 @@ Circle::get_arc_length(real angle, Scanner_Node scanner_node)
 @
 @<Define |Circle| functions@>=
 
- // (2 * PI * radius) : INVALID_REAL;
+
+   arc_length = (2 * PI * radius * angle) / 360.0;
       
 @q ***** (5) @>
 

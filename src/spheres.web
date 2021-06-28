@@ -1861,6 +1861,18 @@ Circle*
 Sphere::intersection(const Plane& p, Scanner_Node scanner_node) const 
 {
 
+   bool DEBUG = true; /* |false| */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Sphere::intersection(const Plane& p, Scanner_Node scanner_node)'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+/* !!START HERE  This doesn't work.  LDF 2021.6.28.  */ 
+
     if (center == INVALID_POINT || p == INVALID_PLANE)
        return 0;
 
@@ -1892,6 +1904,15 @@ Sphere::intersection(const Plane& p, Scanner_Node scanner_node) const
     circle->set(temp_center, 2 * temp_radius, 0, 0, 0, circle_point_count);
   
     *circle *= t.inverse();
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Sphere::intersection(const Plane& p, Scanner_Node scanner_node)' successfully "
+           << "with return value `Circle *circle'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
     return circle;
 

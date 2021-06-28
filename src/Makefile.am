@@ -973,8 +973,17 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 #### && ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
 
 .PHONY : run
-run: 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) --astro sample1.ldf
+run: sample1.ps
+
+sample1.ps: sample1.dvi
+	dvips -o sample1.ps sample1.dvi
+
+sample1.dvi: sample1.tex sample1.mp
+	mpost sample1.mp
+	tex sample1.tex
+
+sample1.mp: 3dldf$(EXEEXT) sample1.ldf
+	3dldf$(EXEEXT) sample1.ldf
 
 .PHONY : run-bi
 

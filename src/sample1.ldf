@@ -52,17 +52,113 @@
 
 %% * (1) New sample code.
 
-circle c;
-c := unit_circle;
+
+path p;
+plane q;
+point r[];
+sphere s;
+circle c[];
+
+s := unit_sphere scaled (3, 3, 3);
+
+c0 := unit_circle scaled (4, 4, 4);
+
+c0 := c0 rotated (0, 0, 5);
+
+p := c0;
+
+% message "p:";
+% show p;
+
+q := get_plane p;
+
+% message "q:";
+% show q;
+
+%% !! START HERE:  This doesn't work right.  c1 is a unit circle.  LDF 2021.6.28.
+
+c1 := s intersection q;
+
+% message "c1:";
+% show c1;
+
+draw s;
+
+draw c0 with_color blue;
+draw c1 with_color red;
+
+dotlabel("origin", origin);
+
+dotlabel("(0, 3)", (0, 3));
+
+picture v;
+
+v := currentpicture;
+
+focus f;
+
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
+
 
 numeric a;
 
-message "Here I am."; 
+r0 := get_point 0 c1;
+r1 := get_center c1;
 
-a := arc_length 30 c;
+message "r0:";
+show r0;
 
-message "a:";
+message "r1:";
+show r1;
+
+r2 := r0 - r1;
+
+message "magnitude r2:";
+show magnitude r2;
+
+
+%a := r0 location s;
+
+%message "a:";
+%show a;
+
+end;
+
+
+beginfig(1);
+  currentpicture := v;
+endfig with_focus f;
+
+beginfig(2);
+  currentpicture := v;
+endfig with_projection parallel_x_y; ;
+
+beginfig(3);
+  currentpicture := v;
+endfig with_projection parallel_x_z; ;
+
+verbatim_metapost "end";
+
+end;
+
+circle c;
+c := unit_circle;
+
+numeric a, b, d;
+
+a := circumference c; 
+b := arc_length 30 c;
+d := arc_length 30.5 c;
+
+message "circumference of c ==";
 show a;
+
+message "arc_length 30 degrees of c ==";
+show b;
+
+message "arc_length 30.5 degrees of c ==";
+show d;
 
 end;
 
