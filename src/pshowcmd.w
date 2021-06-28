@@ -745,10 +745,6 @@ Added this rule.
 
     if (scanner_node->stars_get_option_struct != 0)
     {
-       cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
-       cerr << "XXX Enter <RETURN> to continue: ";
-       getchar(); 
-
        delete scanner_node->stars_get_option_struct;
        scanner_node->stars_get_option_struct = 0;
     }
@@ -4450,6 +4446,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+#if 0 
     if (scanner_node->stars_get_option_struct != 0)
     {
        cerr << "scanner_node->stars_get_option_struct->where_options.size() == " 
@@ -4457,10 +4454,7 @@ Added this rule.
     }
     else 
        cerr << "scanner_node->stars_get_option_struct == 0" << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
- 
+#endif 
 
 
    Pointer_Vector<Star, Star>* pv 
@@ -4501,10 +4495,6 @@ getchar();
 
    if(scanner_node->stars_get_option_struct != 0)
    {
-       cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
-       cerr << "XXX Enter <RETURN> to continue: ";
-       getchar(); 
-
        delete scanner_node->stars_get_option_struct;
        scanner_node->stars_get_option_struct = 0;
    }
@@ -5696,7 +5686,7 @@ Added this rule.
     cerr_message(cerr_strm);
     cerr_strm.str("");
 
-    goto END_SHOW_DATABASE;
+    goto END_SHOW_DATABASE_0;
 #endif 
 
 @q ******** (8) @>
@@ -5713,7 +5703,7 @@ Added this rule.
        cerr_message(cerr_strm);
        cerr_strm.str("");
    
-       goto END_SHOW_DATABASE;
+       goto END_SHOW_DATABASE_0;
     }
 
 @q ******** (8) @>
@@ -5760,7 +5750,7 @@ Added this rule.
 
 @q ******** (8) @>
 
-END_SHOW_DATABASE:
+END_SHOW_DATABASE_0:
 
     @=$$@> = static_cast<void*>(0);
 
@@ -6138,6 +6128,284 @@ Added this rule.
 
    @=$$@> = 0;
 };
+
+
+@q ** (2) command -->  SHOW DATABASE string_expression @>  
+
+@*3 \§> $\longrightarrow$ \.{SHOW} \.{DATABASE} \§string expression>. 
+\initials{LDF 2021.6.28.}
+
+\LOG
+\initials{LDF 2021.6.28.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+
+@=command: SHOW DATABASE string_expression@>@/
+{
+@q **** (4) @>
+
+   @<Common declarations for rules@>@;
+
+   string s;
+
+   int i = 0;
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false|  */
+
+   if (DEBUG)
+   { 
+       cerr << "*** Parser: `command: SHOW DATABASE string_expression'."
+            << endl
+            << "`*static_cast<string *>(string_expression)' == " 
+            << *static_cast<string *>(@=$3@>) << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define rules@>=
+
+   if (static_cast<string *>(@=$3@>) == 0)
+   {
+       cerr << "WARNING!  *** Parser: `command: SHOW DATABASE string_expression':"
+            << endl
+            << "`static_cast<string *>(string_expression)' is NULL."
+            << endl 
+            << "Can't query database.  Will try to continue."
+            << endl;
+ 
+       goto END_SHOW_DATABASE_1;
+   }
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+   s = *static_cast<string *>(@=$3@>);
+
+   if (s == "")
+   {
+       cerr << "WARNING!  *** Parser: `command: SHOW DATABASE string_expression':"
+            << endl
+            << "`*static_cast<string *>(string_expression)' is empty."
+            << endl 
+            << "Can't query database.  Will try to continue."
+            << endl;
+ 
+       goto END_SHOW_DATABASE_1;
+   }
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+   cerr << "*** Parser: `command: SHOW DATABASE string_expression':"
+        << endl
+        << "Before call to `Scanner_Type::submit_mysql_query':"
+        << endl
+        << "`scanner_node->row_ctr'       == " << scanner_node->row_ctr << endl 
+        << "`scanner_node->field_ctr'     == " << scanner_node->field_ctr << endl 
+        << "`scanner_node->affected_rows' == " << scanner_node->affected_rows << endl;
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   status = scanner_node->submit_mysql_query(s);
+
+   cerr << "*** Parser: `command: SHOW DATABASE string_expression':"
+        << endl
+        << "After call to `Scanner_Type::submit_mysql_query':"
+        << endl
+        << "`scanner_node->row_ctr'       == " << scanner_node->row_ctr << endl 
+        << "`scanner_node->field_ctr'     == " << scanner_node->field_ctr << endl 
+        << "`scanner_node->affected_rows' == " << scanner_node->affected_rows << endl;
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+
+   if (status != 0)
+   {
+       cerr << "ERROR!  *** Parser: `command: SHOW DATABASE string_expression':"
+            << endl
+            << "`Scanner_Type::submit_mysql_query' failed, returning " << status << "."
+            << endl 
+            << "MySQL error:  " << mysql_error(scanner_node->mysql)
+            << endl 
+            << "MySQL error number:  " << mysql_errno(scanner_node->mysql)
+            << endl 
+            << "Database query failed.  Failed to assign to `star_vector'."
+            << endl 
+            << "Will try to continue."
+            << endl;
+ 
+       if (scanner_node->result)
+       {
+          mysql_free_result(scanner_node->result);
+          scanner_node->result = 0;
+       }   
+
+       goto END_SHOW_DATABASE_1;
+
+   }
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr << "*** Parser: `command: SHOW DATABASE string_expression':"
+            << endl
+            << "`Scanner_Type::submit_mysql_query' succeeded, returning 0."
+            << endl
+            << "`scanner_node->row_ctr'       == " << scanner_node->row_ctr << endl 
+            << "`scanner_node->field_ctr'     == " << scanner_node->field_ctr << endl 
+            << "`scanner_node->affected_rows' == " << scanner_node->affected_rows << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+   if (scanner_node->affected_rows == 0 || scanner_node->row_ctr == 0 || scanner_node->field_ctr == 0)
+   {
+       cerr << "WARNING!  *** Parser: `command: SHOW DATABASE string_expression':"
+            << endl
+            << "`scanner_node->affected_rows', `scanner_node->row_ctr' and/or `scanner_node->field_ctr' == 0:"
+            << endl 
+            << "`scanner_node->affected_rows' == " << scanner_node->affected_rows << endl 
+            << "`scanner_node->row_ctr'       == " << scanner_node->row_ctr << endl      
+            << "`scanner_node->field_ctr'     == " << scanner_node->field_ctr << endl    
+            << "No results from database query.  Will try to continue."
+            << endl;
+ 
+       if (scanner_node->result)
+       {
+          mysql_free_result(scanner_node->result);
+          scanner_node->result = 0;
+       }   
+
+       goto END_SHOW_DATABASE_1;
+   }
+
+@q *** (3) @>   
+@ 
+@<Define rules@>=
+
+   /*  Process the contents of |scanner_node->curr_row|  */
+
+   scanner_node->curr_row = 0;
+   
+   i = 0;   
+  
+@q **** (4) @>
+ 
+    do
+       {
+@q ***** (5) @>
+
+            scanner_node->curr_row = mysql_fetch_row(scanner_node->result);
+
+            if (scanner_node->curr_row == 0)
+            {
+
+              if (*mysql_error(scanner_node->mysql))
+              {
+                cerr_strm << "ERROR! In `Scanner_Type::show_database: `mysql_fetch_row' failed "
+                          << "returning NULL." << endl
+                          << "Error:  " << mysql_error(scanner_node->mysql) << endl
+                          << "Exiting function  unsuccessfully with exit status 1."
+                          << endl;
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+
+                if (scanner_node->result)
+                {
+                  mysql_free_result(scanner_node->result);
+                  scanner_node->result = 0;
+                }       
+
+                return 1;
+
+              }
+              else if (DEBUG)
+              {
+                
+                cerr_strm << "In `Scanner_Type::show_database:" << endl 
+                          << "No more rows." << endl;
+
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+              }
+
+              break;
+
+           }  /* |if (scanner_node->curr_row == 0)|  */
+
+           cerr_strm << "Row " << i++ << ":" << endl;
+
+           for (int j = 0; j < scanner_node->field_ctr; ++j)
+           {
+               cerr_strm << "Field";
+  
+               if (j < 10)
+                 cerr_strm << "  ";
+               else if (j < 100)
+                 cerr_strm << " ";
+               else 
+                 cerr_strm << " ";
+
+               cerr_strm << j << ": " << scanner_node->curr_row[j] << endl;
+           }
+
+           log_message(cerr_strm);
+           cerr_message(cerr_strm);
+           cerr_strm.str("");
+
+@q ***** (5) @>
+
+      } while (scanner_node->curr_row != 0);
+
+@q **** (4) @>
+
+@q *** (3) @>   
+@ 
+@<Define rules@>=
+
+END_SHOW_DATABASE_1:
+
+   /* Free |scanner_node->result|  */
+
+   if (scanner_node->result)
+   {
+      mysql_free_result(scanner_node->result);
+      scanner_node->result = 0;
+   }   
+
+   scanner_node->row_ctr       = 0;
+   scanner_node->field_ctr     = 0;
+   scanner_node->affected_rows = 0;
+
+   @=$$@> = static_cast<void*>(0); 
+
+}; 
+
+@q ** (2) @>
 
 @q * (0)@>
 

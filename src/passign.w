@@ -7714,9 +7714,10 @@ Added this rule.
 
    }
 
-@q ****** (6) |entry != static_cast<Id_Map_Entry_Node>(0)|.@>   
+@q ****** (6) @>   
 
-@ |entry != static_cast<Id_Map_Entry_Node>(0)|.
+@ |entry != static_cast<Id_Map_Entry_Node>(0)| and |scanner_node->last_star_vector| 
+is not empty.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -7776,8 +7777,8 @@ failed.
  
    }  /* |else| (|status == 0|)  */
 
- }   /* |else| (|entry != static_cast<Id_Map_Entry_Node>(0)| */
-     /* and |scanner_node->last_star_vector| is not empty.)  */
+ }   /* |else| (|status = 0|) */
+
 
 @q ****** (6).@> 
 
@@ -7785,10 +7786,6 @@ END_STAR_VECTOR_ASSIGNMENT_0:
 
    if (scanner_node->stars_get_option_struct != 0)
    {
-         cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
-         cerr << "XXX Enter <RETURN> to continue: ";
-         getchar(); 
-
          delete scanner_node->stars_get_option_struct;
          scanner_node->stars_get_option_struct = 0;
    }
@@ -7813,12 +7810,14 @@ was specified, which is an easy error to commit.
 Added this rule.
 \ENDLOG
 
-@q ***** (5) Definition.@> 
+@q ****** (6) @>
 
 @<Define rules@>=
 
 @=star_vector_assignment: star_vector_variable ASSIGN STARS stars_field_list stars_option_list@>@/
 {
+@q ******* (7) @>
+
    @<Common declarations for rules@>@;
 
    vector<Star*> v;
@@ -7841,7 +7840,7 @@ Added this rule.
 
    entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-@q ****** (6) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
+@q ******* (7) Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0)|.@>
 
 @ Error handling for the case that |entry == static_cast<Id_Map_Entry_Node>(0) |.
 \initials{LDF 2021.06.26.}
@@ -7857,7 +7856,7 @@ Added this rule.
 
     } /* |if (entry == static_cast<Id_Map_Entry_Node>(0))|  */
 
-@q ****** (6) @>
+@q ******* (7) @>
 @
 @<Define rules@>=
 
@@ -7951,7 +7950,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ****** (6) @>
+@q ******* (7) @>
 
 #if 0 
    cerr << "Stars:" << endl << endl;
@@ -7971,7 +7970,7 @@ Added this rule.
    }
 #endif 
 
-@q ****** (6) @>
+@q ******* (7) @>
 @ 
 @<Define rules@>=
 
@@ -7990,11 +7989,10 @@ Added this rule.
          
     scanner_node->last_star_vector = w;
 
+#if 0 
     cerr << "scanner_node->last_star_vector.size() == " << scanner_node->last_star_vector.size()
          << endl;
-
-    cerr << "XXX Enter <RETURN> to continue: ";
-    getchar(); 
+#endif 
 
     if (entry_pv)
       entry_pv->clear();
@@ -8041,20 +8039,20 @@ failed.
    }  /* |else| (|status == 0|)  */
 
 
-@q ****** (6).@> 
+@q ******* (7) @>
 
 END_STAR_VECTOR_ASSIGNMENT_1:
    if (scanner_node->stars_get_option_struct != 0)
    {
-         cerr << "Deleting scanner_node->stars_get_option_struct." << endl;
-         cerr << "XXX Enter <RETURN> to continue: ";
-         getchar(); 
-
          delete scanner_node->stars_get_option_struct;
          scanner_node->stars_get_option_struct = 0;
    }
 
 }; 
+
+@q ****** (6) @>
+
+@q ***** (5) @>
 
 @q **** (4) |constellation_vector_assignment|.  @>
 @*2 \§constellation vector assignment>. 

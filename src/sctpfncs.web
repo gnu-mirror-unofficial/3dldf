@@ -911,6 +911,10 @@ and setting it to 0.
 
   tolerance = 0;
 
+  row_ctr       = 0;
+  field_ctr     = 0;
+  affected_rows = 0;
+
 @q *** (3) Copy |s.id_map_node| to |id_map_node|.@>
 
 @ Copy |s.id_map_node| to |id_map_node|.
@@ -4313,6 +4317,10 @@ Scanner_Type::show_database(void)
 
 @q ***** (5) @>
 
+        row_ctr       = 0;
+        field_ctr     = 0;
+        affected_rows = 0;
+
         status = submit_mysql_query(sql_strm.str());
 
         if (status != 0)
@@ -4334,6 +4342,10 @@ Scanner_Type::show_database(void)
               mysql_free_result(result);
               result = 0;
            }   
+
+           row_ctr       = 0;
+           field_ctr     = 0;
+           affected_rows = 0;
 
            return 1;
         }
@@ -4371,6 +4383,10 @@ Scanner_Type::show_database(void)
               mysql_free_result(result);
               result = 0;
            }   
+
+           row_ctr       = 0;
+           field_ctr     = 0;
+           affected_rows = 0;
 
            return 2;
 
@@ -4508,13 +4524,17 @@ Scanner_Type::show_database(void)
 
 @q ***** (5) @>
 
+      row_ctr       = 0;
+      field_ctr     = 0;
+      affected_rows = 0;
+
      /* Free |result|  */
      
      if (result)
-       {
+     {
 	 mysql_free_result(result);
 	 result = 0;
-       }
+     }
 
 @q ***** (5) @>
 
@@ -4687,6 +4707,10 @@ Scanner_Type::get_astronomy(void)
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   row_ctr       = 0;
+   field_ctr     = 0;
+   affected_rows = 0;
+
    status = submit_mysql_query(sql_strm.str());
 
    sql_strm.str("");
@@ -4706,6 +4730,10 @@ Scanner_Type::get_astronomy(void)
            << "MySQL error number:  " << mysql_errno(mysql)
            << endl    
            << "Exiting function unsuccessfully with return value 1." << endl;
+
+      row_ctr       = 0;
+      field_ctr     = 0;
+      affected_rows = 0;
 
       if (result)
       {
@@ -4886,6 +4914,10 @@ Scanner_Type::get_astronomy(void)
    } while (curr_row != 0);
 
 @q **** (4) @>
+
+   row_ctr       = 0;
+   field_ctr     = 0;
+   affected_rows = 0;
 
    /* Free |result|  */
 

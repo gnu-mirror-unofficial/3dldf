@@ -4331,6 +4331,10 @@ Scanner_Type::submit_mysql_query(string query_str)
 
   bool DEBUG = false; /* |true| */
   
+  row_ctr       = 0;
+  field_ctr     = 0;
+  affected_rows = 0;
+
   mysql_query(mysql, query_str.c_str());
 
    if (status != 0)
@@ -4347,6 +4351,10 @@ Scanner_Type::submit_mysql_query(string query_str)
 	     << "Exiting function unsuccessfully with return value 1." 
 	     << endl;
 
+       row_ctr       = 0;
+       field_ctr     = 0;
+       affected_rows = 0;
+
        return 1;
          
      }  /* |if| (|mysql_query| failed.)  */
@@ -4359,17 +4367,24 @@ Scanner_Type::submit_mysql_query(string query_str)
           << "`mysql_store_result' returned 0." << endl 
           << "No results.  Continuing."
           << endl;
-          
+
+     row_ctr       = 0;
+     field_ctr     = 0;
+     affected_rows = 0;
+
    }  /* |if| (No result)  */
    else
    {
-       row_ctr   = mysql_num_rows(result);
-       field_ctr = mysql_num_fields(result);
+       row_ctr       = mysql_num_rows(result);
+       field_ctr     = mysql_num_fields(result);
+       affected_rows = static_cast<long>(mysql_affected_rows(mysql));
 
        if (DEBUG)
        {
           cerr << "In `|Scanner_Type::submit_mysql_query|':  "
                << "`mysql_store_result' returned results." 
+               << endl
+               << "`affected_rows' == " << affected_rows
                << endl
                << "`row_ctr' == " << row_ctr 
                << endl
@@ -4378,13 +4393,6 @@ Scanner_Type::submit_mysql_query(string query_str)
 
        }   /* |if (DEBUG)|  */
    
-       affected_rows = (long) mysql_affected_rows(mysql);
-
-       if (DEBUG)
-       {
-         cerr << "`affected_rows' == " << affected_rows
-              << endl;
-       }
    }
 
    return 0;

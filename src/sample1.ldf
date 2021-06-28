@@ -52,6 +52,66 @@
 
 %% * (1) New sample code.
 
+star_vector sv;
+
+string s;
+
+s := "select * from Constellations";
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "select * from Constellations where common_name = \"XXX\"";
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "select * from Stars where common_name != \"\" "
+      & "and approx_rank_apparent_magnitude <= 20";
+
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "select * from Stars where common_name = \"XXX\"";
+
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "select * from Constellations where common_name = \"XXX\"";
+
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "show columns from Stars";
+
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "show columns from Constellations";
+
+message "s:";
+show s;
+show database s;
+pause;
+
+s := "select * from Constellations order by rank_constellation";
+message "s:";
+show s;
+show database s;
+pause;
+
+end;
+
 % message "Showing 1, show stars command.";
 
 show stars where common_name <> "" and approx_rank_apparent_magnitude > 0 
