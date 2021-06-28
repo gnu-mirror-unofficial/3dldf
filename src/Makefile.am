@@ -352,7 +352,6 @@ f-prog:
 
 f-run:
 	rm -f parser.o
-	$(MAKE) parser.o
 	$(MAKE) run
 
 .PHONY: f-run-bi ## "force parser and run with --bison-trace option"
@@ -973,7 +972,19 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 #### && ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
 
 .PHONY : run
-run: sample1.ps
+
+run: 3dldf$(EXEEXT)
+	3dldf$(EXEEXT) sample1.ldf
+
+.PHONY: ps
+
+ps: sample1.ps
+
+.PHONY: f-ps
+
+f-ps:
+	rm parser.o
+	$(MAKE) ps
 
 sample1.ps: sample1.dvi
 	dvips -o sample1.ps sample1.dvi

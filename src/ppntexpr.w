@@ -2698,6 +2698,66 @@ Added this rule.
 
 };
 
+@q ** (2) point_primary --> PLOT star_primary WITH_RADIUS numeric_expression@>
+@*1 \§point primary> $\longrightarrow$ \.{PLOT} \§star primary> \.{WITH\_RADIUS} \§numeric expression>.
+\initials{LDF 2021.6.28.}
+
+\LOG
+\initials{LDF 2021.6.28.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=point_primary: PLOT star_primary WITH_RADIUS numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: point_primary --> PLOT star_primary WITH_RADIUS numeric_expression.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Point *p = new Point;
+
+    Star *s = static_cast<Star*>(@=$2@>);
+
+#if 1     
+    s->show("*s:");
+
+    cerr << "$4 == " << @=$4@> << endl;
+#endif 
+
+    p->set(0, 0, @=$4@>);
+
+#if 1 
+    p->show("*p before rotations:");
+#endif 
+
+    p->rotate(0, 0, s->declination_decimal_degrees);
+    p->rotate(0, s->right_ascension_decimal_degrees);
+
+
+#if 1
+    p->show("*p after rotations:");
+#endif 
+
+    delete s;
+    s = 0;
+
+    @=$$@> = static_cast<void*>(p);
+
+};
+
 @q ** (2) point secondary.  @>
 @*1 \§point secondary>.
 \initials{LDF Undated.}
@@ -3789,6 +3849,9 @@ Added this rule.
    @=$$@> = static_cast<void*>(pv); 
 
 };
+
+
+
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>

@@ -52,6 +52,64 @@
 
 %% * (1) New sample code.
 
+picture v;
+
+focus f;
+
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
+
+point p[];
+
+circle c[];
+
+%show sirius;
+
+sphere s;
+
+s := unit_sphere scaled (3, 3, 3);
+
+set s with_radius 3 with_divisions 4;
+
+%p := plot sirius with_radius 3;
+
+p0 := (0, 0, 3);
+
+message "p0 before rotations:";
+show p;
+
+rotate p0 (-16.73419952, 101.48899841);
+
+message "p0 after rotations:";
+show p0;
+
+draw s;
+
+c0 := get_circle (1) s;
+
+draw c0 with_color red;
+
+%draw origin -- (3, 0) with_pen pencircle scaled (2pt, 2pt, 2pt) with_color red;
+
+dotlabel.top("Sirius", p0);
+
+v := currentpicture;
+
+beginfig(1);
+  currentpicture := v;
+endfig with_focus f;
+
+beginfig(2);
+  currentpicture := v;
+endfig with_projection parallel_x_y; ;
+
+beginfig(3);
+  currentpicture := v;
+endfig with_projection parallel_x_z; ;
+
+verbatim_metapost "end";
+
+end;
 
 path p;
 plane q;
@@ -75,7 +133,9 @@ q := get_plane p;
 % message "q:";
 % show q;
 
-%% !! START HERE:  This doesn't work right.  c1 is a unit circle.  LDF 2021.6.28.
+%% !! START HERE:  This doesn't work right.  c1 is a unit circle.  
+%% 
+LDF 2021.6.28.
 
 c1 := s intersection q;
 
@@ -123,24 +183,11 @@ show magnitude r2;
 %message "a:";
 %show a;
 
-end;
-
-
-beginfig(1);
-  currentpicture := v;
-endfig with_focus f;
-
-beginfig(2);
-  currentpicture := v;
-endfig with_projection parallel_x_y; ;
-
-beginfig(3);
-  currentpicture := v;
-endfig with_projection parallel_x_z; ;
-
 verbatim_metapost "end";
 
 end;
+
+
 
 circle c;
 c := unit_circle;
@@ -254,9 +301,6 @@ show stars common_name, star_constant_name, bs_hr_number
 where constellation_full_name == "Canis Major" order by bs_hr_number;
 
 end;
-
-
-
 
 endinput;
 
