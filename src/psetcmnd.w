@@ -3686,11 +3686,10 @@ Added this rule.
 Added this section.
 \ENDLOG
 
-@q *** (3) command --> SET sphere_variable @>  
-@q *** (3) set_sphere_option_list.             @> 
+@q *** (3) command --> SET sphere_variable set_sphere_option_list.@> 
 
-@*2 \§command> $\longrightarrow$ \.{SET} 
-\§sphere variable> \§set sphere option list>.
+@*2 \§command> $\longrightarrow$ \.{SET} \§sphere variable> 
+\§set sphere option list>.
 \initials{LDF 2005.06.06.}
 
 \LOG

@@ -52,19 +52,33 @@
 
 %% * (1) New sample code.
 
+numeric a[];
+point p[];
+path  q[];
+circle c[];
+sphere s;
 picture v;
-
 focus f;
+transform t[];
 
 set f with_position (0, 20, -50) 
        with_direction (0, 20, 10) with_distance 70; 
 
-point p[];
-circle c[];
+%s := unit_sphere scaled (3, 3, 3);
 
-sphere s;
-s := unit_sphere scaled (3, 3, 3);
+set s with_divisions 8 with_radius 3;
+
 draw s;
+
+show sirius;
+
+a0 := ra_decimal_degrees sirius;
+message "a0:";
+show a0;
+
+a1 := declination_decimal_degrees sirius;
+message "a1:";
+show a1;
 
 c0 := unit_circle scaled (3, 0, 3);
 draw c0 with_color red;
@@ -80,6 +94,48 @@ p8 := plot procyon    with_radius 3;
 p9 := plot achernar   with_radius 3;
 p10 := plot betelgeuse with_radius 3;
 p11 := plot hadar      with_radius 3;
+
+p12 := (xpart p5, 0, zpart p5);  % Vega
+
+dotlabel.bot("$p_{12}$", p12);
+
+q0 := origin -- p12 -- p5 -- cycle;
+
+draw q0 with_color blue;
+
+bool_point_vector bpv;
+
+bpv := c0 intersection_points (origin -- p12);
+
+message "bpv:";
+show bpv;
+
+p13 := bpv[0];
+
+dotlabel.top("$p_{13}$", p13);
+
+p14 := bpv[1];
+
+dotlabel.rt("$p_{14}$", p14);
+
+q1 := p12 -- p14 -- p5 -- cycle;
+
+draw q1 with_color blue;
+
+a2 := circumference c0; 
+
+
+a3 := arc_length (a0) c0;
+
+message "a2 (circumference of red circle):";
+show a2;
+
+message "a3 (arc length of arc from p14 to p5 (Vega):";
+show a3;
+
+pause;
+
+
 
 % +--------------------------------+-------------+
 % | approx_rank_apparent_magnitude | common_name |
@@ -122,7 +178,7 @@ dotlabel.lft("Sirius",      p1);
 drawdot p2 with_pen pencircle scaled (3pt, 3pt, 3pt);
 label.lft("Canopus",     p2 shifted (-10pt, 0));     
 %% Get 3!
-dotlabel.top("Arcturus",    p4);    
+dotlabel.bot("Arcturus",    p4);    
 dotlabel.rt("Vega",        p5);        
 dotlabel.ulft("Capella",     p6);
 drawdot p7 with_pen pencircle scaled (3pt, 3pt, 3pt);

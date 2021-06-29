@@ -517,10 +517,9 @@ Added this rule.
 
 };
 
+@q ***** (5) numeric_primary --> ARC_LENGTH numeric primary circle_primary.  @>
 
-@q ***** (5) numeric_primary --> ARC_LENGTH circle_primary.  @>
-
-@*4 \§numeric primary> $\longrightarrow$ \.{ARC\_LENGTH} \§numeric expression> 
+@*4 \§numeric primary> $\longrightarrow$ \.{ARC\_LENGTH} \§numeric primary> 
 \§circle primary>.
 \initials{LDF 2021.6.28.}
 
@@ -545,6 +544,51 @@ Added this rule.
    @=$$@> = arc_length;
 
 };
+
+@q ***** (5) numeric_primary --> RIGHT_ASCENSION_DECIMAL_DEGREES star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{RIGHT\_ASCENSION\_DECIMAL\_DEGREES} \§star primary>.
+\initials{LDF 2021.6.29.}
+
+\LOG
+\initials{LDF 2021.6.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: RIGHT_ASCENSION_DECIMAL_DEGREES star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->right_ascension_decimal_degrees;
+
+   delete s;
+   s = 0; 
+
+};
+
+@q ***** (5) numeric_primary --> DECLINATION_DECIMAL_DEGREES star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{DECLINATION\_DECIMAL\_DEGREES} \§star primary>.
+\initials{LDF 2021.6.29.}
+
+\LOG
+\initials{LDF 2021.6.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: DECLINATION_DECIMAL_DEGREES star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->declination_decimal_degrees;
+
+   delete s;
+   s = 0; 
+
+};
+
 
 @q ***** (5) numeric_primary --> SIZE circle_primary.  @>
 
