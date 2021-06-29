@@ -57,7 +57,7 @@ point p[];
 path  q[];
 circle c[];
 sphere s;
-picture v;
+picture v[];
 focus f;
 transform t[];
 
@@ -70,38 +70,38 @@ set s with_divisions 8 with_radius 3;
 
 draw s;
 
-show sirius;
+%show sirius;
 
-a0 := ra_decimal_degrees sirius;
-message "a0:";
+a0 := ra_decimal_degrees vega;
+message "RA decimal deg. Vega (a0):";
 show a0;
 
-a1 := declination_decimal_degrees sirius;
-message "a1:";
+a1 := declination_decimal_degrees vega;
+message "Declination decimal deg. Vega (a1):";
 show a1;
 
 c0 := unit_circle scaled (3, 0, 3);
 draw c0 with_color red;
 
-p1 := plot sirius     with_radius 3;
-p2 := plot canopus    with_radius 3;
-p4 := plot arcturus   with_radius 3;
-%% Get 3!
+% p1 := plot sirius     with_radius 3;
+% p2 := plot canopus    with_radius 3;
+% p4 := plot arcturus   with_radius 3;
+% %% Get 3!
+
+show vega;
+
 p5 := plot vega       with_radius 3;
-p6 := plot capella    with_radius 3;
-p7 := plot rigel      with_radius 3;
-p8 := plot procyon    with_radius 3;
-p9 := plot achernar   with_radius 3;
-p10 := plot betelgeuse with_radius 3;
-p11 := plot hadar      with_radius 3;
+
+% p6 := plot capella    with_radius 3;
+% p7 := plot rigel      with_radius 3;
+% p8 := plot procyon    with_radius 3;
+% p9 := plot achernar   with_radius 3;
+% p10 := plot betelgeuse with_radius 3;
+% p11 := plot hadar      with_radius 3;
 
 p12 := (xpart p5, 0, zpart p5);  % Vega
 
 dotlabel.bot("$p_{12}$", p12);
-
-q0 := origin -- p12 -- p5 -- cycle;
-
-draw q0 with_color blue;
 
 bool_point_vector bpv;
 
@@ -115,27 +115,147 @@ p13 := bpv[0];
 dotlabel.top("$p_{13}$", p13);
 
 p14 := bpv[1];
+dotlabel.lrt("$p_{14}$", p14);
 
-dotlabel.rt("$p_{14}$", p14);
+q0 := origin -- p5 -- p14 -- cycle;
 
-q1 := p12 -- p14 -- p5 -- cycle;
+draw q0 with_color blue;
 
-draw q1 with_color blue;
+% dotlabel.lft("Sirius",      p1);      
+% drawdot p2 with_pen pencircle scaled (3pt, 3pt, 3pt);
+% label.lft("Canopus",     p2 shifted (-10pt, 0));     
+% %% Get 3!
+% dotlabel.bot("Arcturus",    p4);    
+
+dotlabel.rt("Vega",        p5);        
+
+% dotlabel.ulft("Capella",     p6);
+% drawdot p7 with_pen pencircle scaled (3pt, 3pt, 3pt);
+% label.ulft("Rigel",       p7 shifted (-5pt, 0));       
+% drawdot p8 with_pen pencircle scaled (3pt, 3pt, 3pt);
+% label.llft("Procyon",     p8 shifted (-5pt, 0));     
+% dotlabel.top("Achernar",    p9);    
+% dotlabel.lft("Betelgeuse", p10);  
+% dotlabel.lrt("Hadar",      p11);       
+
+%% ** (2)
 
 a2 := circumference c0; 
-
-
-a3 := arc_length (a0) c0;
+a3 := arc_length (a1) c0;
 
 message "a2 (circumference of red circle):";
 show a2;
 
-message "a3 (arc length of arc from p14 to p5 (Vega):";
+message "a3 (arc length of arc from p14 to p5 (Declination of Vega):";
 show a3;
+
+message "a0 (declination):";
+show a0;
+
+%% !! START HERE: LDF 2021.6.29.  Add code for finding arc lengths for the RA.
+%% Add points on c0 for 22.5°, 67.5°, etc.
+
+if a0 == 0:
+   message "a0 (declination) == 0.";
+elseif (a0 > 0) and (a0 < 45):
+   message "a0 (declination) > 0 and a0 < 45.";
+elseif a0 == 45:
+   message "a0 (declination) == 45.";
+elseif (a0 > 45) and (a0 < 90):
+   message "a0 (declination) > 45 and a0 < 90.";
+elseif a0 == 90:
+   message "a0 (declination) == 90.";
+elseif (a0 > 90) and (a0 < 135):
+   message "a0 (declination) > 90 and a0 < 135.";
+elseif a0 == 135:
+   message "a0 (declination) == 135.";
+elseif (a0 > 135) and (a0 < 180):
+   message "a0 (declination) > 135 and a0 < 180.";
+elseif a0 == 180:
+   message "a0 (declination) == 180.";
+elseif (a0 > 180) and (a0 < 225):
+   message "a0 (declination) > 180 and a0 < 225.";
+elseif a0 == 225:
+   message "a0 (declination) == 225.";
+elseif (a0 > 225) and (a0 < 270):
+   message "a0 (declination) > 225 and a0 < 270.";
+elseif a0 == 270:
+   message "a0 (declination) == 270.";
+elseif (a0 > 270) and (a0 < 315):
+   message "a0 (declination) > 270 and a0 < 315.";
+elseif a0 == 315:
+   message "a0 (declination) == 315.";
+elseif (a0 > 315) and (a0 < 360):
+   message "a0 (declination) > 315 and a0 < 360.";
+elseif a0 == 360:
+   message "a0 (declination) == 360.";
+fi;
 
 pause;
 
+q2 := origin -- (3, 0) -- p14 -- cycle;
 
+draw q2 dashed evenly with_color green;
+
+p15 := (3, 0);
+dotlabel.llft("$0^\\circ$", p15);
+dotlabel.lrt("$360^\\circ$", p15);
+
+p16 := (3, 0) rotated (0, 45);
+dotlabel.ulft("$45^\\circ$", p16);
+
+p17 := (3, 0) rotated (0, 90);
+dotlabel.urt("$90^\\circ$", p17);
+
+p18 := (3, 0) rotated (0, 135);
+dotlabel.llft("$135^\\circ$", p18);
+
+p19 := (3, 0) rotated (0, 180);
+dotlabel.urt("$180^\\circ$", p19);
+
+p20 := (3, 0) rotated (0, 225);
+dotlabel.urt("$225^\\circ$", p20);
+
+p21 := (3, 0) rotated (0, 270);
+dotlabel.llft("$270^\\circ$", p21);
+
+p22 := (3, 0) rotated (0, 315);
+dotlabel.urt("$315^\\circ$", p22);
+
+%% Declination
+
+p23 := (3, 0) rotated (0, 0, 22.5);
+dotlabel.rt("$22.5^\\circ$", p23) with_text_color blue;
+dotlabel.rt("$22.5^\\circ$", p23 rotated (180, 0)) with_text_color blue;
+dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 180)) with_text_color blue;
+dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 0, 180)) with_text_color blue;
+
+
+p24 := (3, 0) rotated (0, 0, 45);
+dotlabel.rt("$45^\\circ$", p24) with_text_color blue;
+dotlabel.rt("$45^\\circ$", p24 rotated (180, 0)) with_text_color blue;
+dotlabel.ulft("$45^\\circ$", p24 rotated (0, 180)) with_text_color blue;
+dotlabel.ulft("$45^\\circ$", p24 rotated (0, 0, 180)) with_text_color blue;
+
+p25 := (3, 0) rotated (0, 0, 67.5);
+dotlabel.rt("$67.5^\\circ$", p25) with_text_color blue;
+dotlabel.rt("$67.5^\\circ$", p25 rotated (180, 0)) with_text_color blue;
+dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 180)) with_text_color blue;
+dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 0, 180)) with_text_color blue;
+
+p23 := (0, 3, 0);
+dotlabel.top("$90^\\circ$", p23) with_text_color blue;
+dotlabel.bot("$90^\\circ$", p23 rotated (180, 0)) with_text_color blue;
+
+v0 := currentpicture;
+
+%% ** (2)
+
+currentpicture := nullpicture;
+
+drawdot origin;
+
+v1 := currentpicture;
 
 % +--------------------------------+-------------+
 % | approx_rank_apparent_magnitude | common_name |
@@ -174,52 +294,34 @@ pause;
 
 %% !! START HERE:  LDF 2021.6.28.  Get star with rank 3!
 
-dotlabel.lft("Sirius",      p1);      
-drawdot p2 with_pen pencircle scaled (3pt, 3pt, 3pt);
-label.lft("Canopus",     p2 shifted (-10pt, 0));     
-%% Get 3!
-dotlabel.bot("Arcturus",    p4);    
-dotlabel.rt("Vega",        p5);        
-dotlabel.ulft("Capella",     p6);
-drawdot p7 with_pen pencircle scaled (3pt, 3pt, 3pt);
-label.ulft("Rigel",       p7 shifted (-5pt, 0));       
-drawdot p8 with_pen pencircle scaled (3pt, 3pt, 3pt);
-label.llft("Procyon",     p8 shifted (-5pt, 0));     
-dotlabel.top("Achernar",    p9);    
-dotlabel.lft("Betelgeuse", p10);  
-dotlabel.lrt("Hadar",      p11);       
-
-
-% draw c0 with_color red;
-% draw c1 with_color green;
-% draw c2 with_color blue;
-% draw c3 with_color orange;
-% draw c4 with_color purple;
-% draw c5 with_color yellow;
-% draw c15 with_color magenta;
-
-
-%draw origin -- (3, 0) with_pen pencircle scaled (2pt, 2pt, 2pt) with_color red;
-
-
-
-v := currentpicture;
-
 beginfig(1);
-  currentpicture := v;
+  currentpicture := v0;
+  label("{\\bf Perspective Projection}", (0, -4));
 endfig with_focus f;
 
 beginfig(2);
-  currentpicture := v;
-endfig with_projection parallel_x_y; ;
+  currentpicture := v0;
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4));
+endfig with_projection parallel_x_y; 
 
 beginfig(3);
-  currentpicture := v;
-endfig with_projection parallel_x_z; ;
+  currentpicture := v0;
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4));
+endfig with_projection parallel_x_z; 
+
+beginfig(4);
+  currentpicture := v0;
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4));
+endfig with_projection parallel_z_y; 
 
 verbatim_metapost "end";
 
+%% ** (2) *******************************************
+
 end;
+
+%% * (1) *******************************************
+
 
 path p;
 plane q;
@@ -537,6 +639,7 @@ show scanner_node;
 
 end;
 
+%% * (1) *******************************************
 
 show database points transforms;
 
@@ -556,7 +659,7 @@ show scanner_node;
 
 end;
 
-
+%% * (1) *******************************************
 
 
 point p;

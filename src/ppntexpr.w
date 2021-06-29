@@ -2731,23 +2731,45 @@ Added this rule.
 
     Star *s = static_cast<Star*>(@=$2@>);
 
+    status = plot_star_func(s, p, @=$4@>, scanner_node);
+
+    if (status != 0)
+    {
+       cerr_strm << thread_name 
+                 << "ERROR!  In parser: point_primary --> PLOT star_primary WITH_RADIUS numeric_expression:"
+                 << "`plot_star_func' failed, returning " << status << "."
+                 << endl
+                 << "Setting `point_primary' to `INVALID_POINT'." 
+                 << endl 
+                 << "Will try to continue."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       *p = INVALID_POINT; 
+
+    }
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    { 
+       cerr_strm << thread_name 
+                    << "*** Parser: point_primary --> PLOT star_primary WITH_RADIUS numeric_expression:"
+                    << "`plot_star_func' succeeded, returning 0."
+                    << endl;
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+    }  
+#endif /* |DEBUG_COMPILE|  */@;     
+
 #if 0 /* 1 */
     s->show("*s:");
 
     cerr << "$4 == " << @=$4@> << endl;
-#endif 
-
-    p->set(0, 0, @=$4@>);
-
-#if 0 /* 1 */
-    p->show("*p before rotations:");
-#endif 
-
-    p->rotate(s->declination_decimal_degrees, s->right_ascension_decimal_degrees);
-
-
-#if 0 /* 1 */
-    p->show("*p after rotations:");
 #endif 
 
     delete s;

@@ -98,6 +98,7 @@ Added this file.
 #include "arc.h++"
 #include "helices.h++"
 #include "origami.h++"
+#include "astronmy.h++"
 
 #if 0 
    #include "patterns.h++"
@@ -17363,7 +17364,105 @@ failed, returning 0.
 
 }  /* End of |Conic_Section_Lattice::label_lattice| definition.  */
 
-@q ** (2)@> 
+@q ** (2) |plot_star_func|.  @> 
+@ |plot_star_func|.  
+\initials{LDF 2021.6.29.}
+
+\LOG
+\initials{LDF 2021.6.29.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration  @>
+
+@<Declare |Scan_Parse| functions@>=
+int
+plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node = 0);
+
+
+@q *** (3) Definition @>
+@
+@<Define |Scan_Parse| functions@>=
+int
+plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node)
+{
+@q **** (4) @>
+
+  string thread_name;
+  
+#ifdef HAVE_PTHREAD_H  
+
+  Thread_Info_Type* thread_info;
+
+  if (   scanner_node == static_cast<Scanner_Node>(0)   
+      || (scanner_node->get_run_state()->multithread_input 
+      || scanner_node->get_run_state()->multithread_output)      
+      ) 
+  {
+
+     thread_info = Thread_Info_Type::get_thread_info();
+     thread_name = Thread_Info_Type::get_thread_name(thread_info);
+
+  } /* |if| (using threads or assuming we are).  */
+
+  else /* Not using threads.  */
+  {
+     thread_info = 0;
+     thread_name = "";
+
+  } /* |else| (Not using threads).  */
+
+#else /* |HAVE_PTHREAD_H| is undefined.  */@; 
+  
+  thread_name = "";
+
+#endif /* |HAVE_PTHREAD_H|  is undefined.  */@; 
+ 
+  stringstream cerr_strm;                                                          
+
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+  if (DEBUG) 
+    {
+      cerr_strm << thread_name << "Entering `Scan_Parse::plot_star_func'."
+                << endl 
+                << "`radius' == " << radius << endl 
+                << "`s->declination_decimal_degrees'     == " << s->declination_decimal_degrees
+                << endl 
+                << "`s->right_ascension_decimal_degrees' == " << s->right_ascension_decimal_degrees
+                << endl;
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    p->set(radius, 0, 0);
+    p->rotate(0, 0, s->declination_decimal_degrees);
+    p->rotate(0, s->right_ascension_decimal_degrees);
+
+#if 1 /* 0 */
+    p->show("*p after rotations:");
+#endif 
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+  if (DEBUG) 
+    {
+      cerr_strm << thread_name << "Exiting `Scan_Parse::plot_star_func' successfully with return value 0.";
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       return 0;
+
+}  /* End of |plot_star_func| definition  */
+
+@q *** (3) @>
+
+@q *** (3) @>
+
 
 @q * (1) Putting additional |Scan_Parse| functions together.@>
 @* Putting additional {\bf Scan\_Parse} functions together.

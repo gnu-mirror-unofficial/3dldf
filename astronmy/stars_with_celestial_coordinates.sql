@@ -1563,21 +1563,54 @@ HR 4914,
 select * from Stars where common_name = "Cor Caroli"\G
 
 Alpha Canum Venaticorum   
-
-
-
-
-
 "CVn"
 Right ascension
-
 Declination
-
-
 )
+
+/* ** (2) 3. Alpha Centauri, Rigil Kentaurus  */
+
+!! START HERE:  LDF 2021.6.29.  alpha Centauri is a triple star system.
+I need to account for this (add fields is_triple, is_multiple, etc.
+Acct. for "binary component" of a triple or multiple star system.
+
+
+https://en.wikipedia.org/wiki/Alpha_Centauri
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=alpha+centauri  -- Double or multiple star.
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=TYC+9007-5849-1 -- A
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=TYC+9007-5848-1 -- B
+
+insert into Stars (
+approx_rank_apparent_magnitude,
+flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+common_name,
+bs_hr_number,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_binary
+)
+values (
+3,
+. Alpha Centauri            Rigil Kentaurus   14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4
+
+α Cen A: Rigil Kentaurus, Rigil Kent, α1 Centauri, HR 5459, HD 128620, GCTP 3309.00, LHS 50, SAO 252838, HIP 71683
+α Cen B: Toliman, α2 Centauri, HR 5460, HD 128621, LHS 51, HIP 71681
+
+
+
+
 /* ** (2) */
 
-
+1.                           Sirius
 2. Alpha Carinae             Canopus           06 24 -52.7  261.2 -25.3  F0Ib         -0.73  -5.64   10.43 0.53   310
 3. Alpha Centauri            Rigil Kentaurus   14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4
 4. Alpha Boötis              Arcturus          14 16 +19.2   15.2 +69.0  K2III        -0.05  -0.31   88.85 0.74    37
