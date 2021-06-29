@@ -1,0 +1,433 @@
+%%%% sample3.ldf
+%%%% Created by Laurence D. Finston (LDF) Tue 29 Jun 2021 11:31:54 PM CEST
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2021 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+  
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+% * (1) Beginning of 3DLDF code.
+
+%% * (1) New sample code.
+
+numeric a[];
+point p[];
+path  q[];
+circle c[];
+sphere s;
+picture v[];
+focus f;
+transform t[];
+
+set f with_position (0, 20, -50) 
+       with_direction (0, 20, 10) with_distance 70; 
+
+%s := unit_sphere scaled (3, 3, 3);
+
+set s with_divisions 2 with_radius 3;
+
+draw s;
+
+%show sirius;
+
+a0 := ra_decimal_degrees vega;
+message "RA decimal deg. Vega (a0):";
+show a0;
+
+a1 := declination_decimal_degrees vega;
+message "Declination decimal deg. Vega (a1):";
+show a1;
+
+c0 := unit_circle scaled (3, 0, 3);
+draw c0 with_color red;
+
+% p1 := plot sirius     with_radius 3;
+% p2 := plot canopus    with_radius 3;
+% p4 := plot arcturus   with_radius 3;
+% %% Get 3!
+
+show vega;
+
+p5 := plot vega       with_radius 3;
+
+% p6 := plot capella    with_radius 3;
+% p7 := plot rigel      with_radius 3;
+% p8 := plot procyon    with_radius 3;
+% p9 := plot achernar   with_radius 3;
+% p10 := plot betelgeuse with_radius 3;
+% p11 := plot hadar      with_radius 3;
+
+p12 := (xpart p5, 0, zpart p5);  % Vega
+
+dotlabel.lft("$p_{12}$", p12);
+
+bool_point_vector bpv;
+
+bpv := c0 intersection_points (origin -- p12);
+
+message "bpv:";
+show bpv;
+
+%p13 := bpv[0];
+
+%dotlabel.top("$p_{13}$", p13);
+
+p14 := bpv[1];
+dotlabel.lrt("$p_{14}$", p14);
+
+q0 := origin -- p5 -- p14 -- cycle;
+
+draw q0 with_color blue;
+
+% dotlabel.lft("Sirius",      p1);      
+% drawdot p2 with_pen pencircle scaled (3pt, 3pt, 3pt);
+% label.lft("Canopus",     p2 shifted (-10pt, 0));     
+% %% Get 3!
+% dotlabel.bot("Arcturus",    p4);    
+
+dotlabel.rt("Vega",        p5);        
+
+% dotlabel.ulft("Capella",     p6);
+% drawdot p7 with_pen pencircle scaled (3pt, 3pt, 3pt);
+% label.ulft("Rigel",       p7 shifted (-5pt, 0));       
+% drawdot p8 with_pen pencircle scaled (3pt, 3pt, 3pt);
+% label.llft("Procyon",     p8 shifted (-5pt, 0));     
+% dotlabel.top("Achernar",    p9);    
+% dotlabel.lft("Betelgeuse", p10);  
+% dotlabel.lrt("Hadar",      p11);       
+
+%% ** (2)
+
+a2 := circumference c0; 
+a3 := arc_length (a1) c0;
+
+message "a2 (circumference of red circle):";
+show a2;
+
+message "a3 (arc length of arc from p14 to p5 (Declination of Vega):";
+show a3;
+
+message "a0 (declination):";
+show a0;
+
+%% !! START HERE: LDF 2021.6.29.  Add code for finding arc lengths for the RA.
+%% Add points on c0 for 22.5°, 67.5°, etc.
+
+%% 22.5
+%% 45
+%% 67.5
+%% 90
+%% 112.5
+%% 135
+%% 157.5
+%% 180
+%% 202.5
+%% 225
+%% 247.5
+%% 270
+%% 292.5
+%% 315
+%% 337.5
+%% 360 
+
+if (a0 == 337.5):
+   message "a0 (declination) == 337.5";
+elseif (a0 == 22.5):
+   message "a0 (declination) == 22.5";
+elseif (a0 > 22.5) and (a0 < 45):
+   message "a0 (declination) > 22.5 or a0 < 45";
+elseif a0 == 45:
+   message "a0 (declination) == 45.";
+elseif (a0 > 45) and (a0 < 67.5):
+   message "a0 (declination) > 45 and a0 < 67.5";
+elseif a0 == 67.5:
+   message "a0 (declination) == 67.5.";
+elseif (a0 > 67.5) and (a0 < 90):
+   message "a0 (declination) > 67.5 and a0 < 90";
+elseif a0 == 90:
+   message "a0 (declination) == 90";
+elseif (a0 > 90) and (a0 < 112.5):
+   message "a0 (declination) > 90 and a0 < 112.5";
+elseif a0 == 112.5:
+   message "a0 (declination) == 112.5";
+elseif (a0 > 112.5) and (a0 < 135):
+   message "a0 (declination) > 112.5 and a0 < 135";
+elseif a0 == 135:
+   message "a0 (declination) == 135";
+elseif (a0 > 135) and (a0 < 157.5):
+   message "a0 (declination) > 135 and a0 < 157.5";
+ elseif a0 == 157.5:
+   message "a0 (declination) == 157.5";
+elseif (a0 > 157.5) and (a0 < 180):
+   message "a0 (declination) > 157.5 and a0 < 180";
+elseif a0 == 180:
+   message "a0 (declination) == 180";
+elseif (a0 > 180) and (a0 < 202.5):
+   message "a0 (declination) > 202.5 and a0 < 225";
+elseif a0 == 225:
+   message "a0 (declination) == 225";
+elseif (a0 > 225) and (a0 < 247.5):
+   message "a0 (declination) > 225 and a0 < 247.5";
+elseif a0 == 247.5:
+   message "a0 (declination) == 247.5";
+elseif (a0 > 247.5) and (a0 < 270):
+   message "a0 (declination) > 247.5 and a0 < 270";
+elseif a0 == 270:
+   message "a0 (declination) == 270";
+elseif (a0 > 270) and (a0 < 292.5):
+   message "a0 (declination) > 270 and a0 < 292.5";
+elseif a0 == 292.5:
+   message "a0 (declination) == 292.5";
+elseif (a0 > 292.5) and (a0 < 315):
+   message "a0 (declination) > 292.5 and a0 < 315";
+elseif a0 == 315:
+  message "a0 (declination) == 315";
+elseif (a0 > 315) and (a0 < 337.5):
+  message "a0 (declination) > 315 and a0 < 337.5";
+elseif a0 == 337.5:
+  message "a0 (declination) == 337.5";
+elseif (a0 > 337.5) and (a0 < 360):
+  message "a0 (declination) > 337.5 and a0 < 360";
+elseif a0 == 360:
+  message "a0 (declination) == 360";
+elseif a0 > 360:
+  message "a0 (declination) > 360";
+fi;
+
+q2 := origin -- (3, 0) -- p14 -- cycle;
+
+draw q2 dashed evenly with_color green;
+
+p15 := (3, 0);
+dotlabel.urt("$0^\\circ$", p15);
+dotlabel.lrt("$360^\\circ$", p15);
+
+p16 := (3, 0) rotated (0, 22.5);
+dotlabel.urt("$22.5^\\circ$", p16);
+
+p17 := (3, 0) rotated (0, 45);
+dotlabel.urt("$45^\\circ$", p17);
+
+p18 := (3, 0) rotated (0, 67.5);
+dotlabel.llft("$67.5^\\circ$", p18);
+
+p19 := (3, 0) rotated (0, 90);
+dotlabel.urt("$90^\\circ$", p19);
+
+p20 := (3, 0) rotated (0, 112.5);
+dotlabel.top("$112.5^\\circ$", p20);
+
+p21 := (3, 0) rotated (0, 135.0);
+dotlabel.ulft("$135^\\circ$", p21);
+
+p22 := (3, 0) rotated (0, 157.5);
+dotlabel.lft("$157.5^\\circ$", p22);
+
+p23 := (3, 0) rotated (0, 180);
+dotlabel.lft("$180^\\circ$", p23);
+
+p24 := (3, 0) rotated (0, 202.5);
+dotlabel.lft("$202.5^\\circ$", p24);
+
+p25 := (3, 0) rotated (0, 225);
+dotlabel.lft("$225^\\circ$", p25);
+
+p26 := (3, 0) rotated (0, 247.5);
+dotlabel.llft("$247.5^\\circ$", p26);
+
+draw origin -- p26;
+
+p27 := (3, 0) rotated (0, 270);
+dotlabel.bot("$270^\\circ$", p27);
+
+draw origin -- p27;
+
+p28 := (3, 0) rotated (0, 292.5);
+dotlabel.lrt("$292.5^\\circ$", p28);
+
+draw origin -- p28;
+
+p29 := (3, 0) rotated (0, 315);
+dotlabel.lrt("$315^\\circ$", p29);
+
+p30 := (3, 0) rotated (0, 337.5);
+dotlabel.rt("$337.5^\\circ$", p30);
+
+p31 := (0, ypart p5, 0);
+dotlabel.lft("$p_{31}$", p31); 
+
+draw p31 -- p5 with_color red;
+draw origin -- p31;
+
+a4 := 2 * magnitude (p31 - p5);
+
+set c2 with_center p31 with_diameter a4;
+
+draw c2 with_color red;
+
+
+
+message "a4:";
+show a4;
+%pause;
+
+
+;% Declination
+
+% p23 := (3, 0) rotated (0, 0, 22.5);
+% dotlabel.rt("$22.5^\\circ$", p23) with_text_color blue;
+% dotlabel.rt("$22.5^\\circ$", p23 rotated (180, 0)) with_text_color blue;
+% dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 180)) with_text_color blue;
+% dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 0, 180)) with_text_color blue;
+
+
+% p24 := (3, 0) rotated (0, 0, 45);
+% dotlabel.rt("$45^\\circ$", p24) with_text_color blue;
+% dotlabel.rt("$45^\\circ$", p24 rotated (180, 0)) with_text_color blue;
+% dotlabel.ulft("$45^\\circ$", p24 rotated (0, 180)) with_text_color blue;
+% dotlabel.ulft("$45^\\circ$", p24 rotated (0, 0, 180)) with_text_color blue;
+
+% p25 := (3, 0) rotated (0, 0, 67.5);
+% dotlabel.rt("$67.5^\\circ$", p25) with_text_color blue;
+% dotlabel.rt("$67.5^\\circ$", p25 rotated (180, 0)) with_text_color blue;
+% dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 180)) with_text_color blue;
+% dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 0, 180)) with_text_color blue;
+
+% p23 := (0, 3, 0);
+% dotlabel.top("$90^\\circ$", p23) with_text_color blue;
+% dotlabel.bot("$90^\\circ$", p23 rotated (180, 0)) with_text_color blue;
+
+v0 := currentpicture;
+
+%% ** (2)
+
+currentpicture := nullpicture;
+
+drawdot origin;
+
+v1 := currentpicture;
+
+% +--------------------------------+-------------+
+% | approx_rank_apparent_magnitude | common_name |
+% +--------------------------------+-------------+
+% |                              1 | Sirius      |
+% |                              2 | Canopus     |
+% |                              4 | Arcturus    |
+% |                              5 | Vega        |
+% |                              6 | Capella     |
+% |                              7 | Rigel       |
+% |                              8 | Procyon     |
+% |                              9 | Achernar    |
+% |                             10 | Betelgeuse  |
+% |                             11 | Hadar       |
+% |                             12 | Altair      |
+% |                             14 | Aldebaran   |
+% |                             15 | Antares     |
+% |                             16 | Spica       |
+% |                             17 | Pollux      |
+% |                             18 | Fomalhaut   |
+% |                             19 | Deneb       |
+% |                             20 | Mimosa      |
+% |                             21 | Regulus     |
+% |                             22 | Adhara      |
+% |                             24 | Shaula      |
+% |                             25 | Gacrux      |
+% |                             26 | Bellatrix   |
+% |                             27 | Elnath      |
+% |                             28 | Miaplacidus |
+% |                             29 | Alnilam     |
+% |                             30 | Alnair      |
+% |                             31 | Alnitak     |
+% |                             32 | Alioth      |
+% |                             33 | Mirfak      |
+% +--------------------------------+-------------+
+
+%% !! START HERE:  LDF 2021.6.28.  Get star with rank 3!
+
+beginfig(1);
+  currentpicture := v0;
+  label("{\\bf Perspective Projection}", (0, -4));
+endfig with_focus f;
+
+beginfig(2);
+  currentpicture := v0;
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4));
+endfig with_projection parallel_x_y; 
+
+beginfig(3);
+  currentpicture := v0;
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4));
+endfig with_projection parallel_x_z; 
+
+beginfig(4);
+  currentpicture := v0;
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4));
+endfig with_projection parallel_z_y; 
+
+verbatim_metapost "end";
+
+%% ** (2) *******************************************
+
+end;
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%   	 GNU Emacs editor.  The local variable list is not evaluated when an 
+%%   	 indirect buffer is visited, so it's necessary to evaluate the       
+%%   	 following s-expression in order to use the facilities normally      
+%%   	 accessed via the local variables list.                              
+%%   	 \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metafont
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% outline-regexp:"%% [*\f]+"
+%% eval:(setq font-lock-mode nil)
+%% End:
