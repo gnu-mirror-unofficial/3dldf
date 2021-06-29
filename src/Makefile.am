@@ -172,7 +172,8 @@ EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web patterns.web prelims.web runit \
-             sample.ldf sample0.ldf sample1.ldf sample2.ldf \
+             sample.ldf sample0.ldf sample1.ldf sample2.ldf sample3.ldf \
+             sample1.tex sample2.tex sample3.tex \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
              $(3dldf_PARSER_FILES) 
@@ -974,11 +975,11 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 .PHONY : run
 
 run: 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) sample1.ldf
+	3dldf$(EXEEXT) sample3.ldf
 
 .PHONY: ps
 
-ps: sample1.ps
+ps: sample3.ps
 
 .PHONY: f-ps
 
@@ -986,27 +987,27 @@ f-ps:
 	rm parser.o
 	$(MAKE) ps
 
-sample1.ps: sample1.dvi
-	dvips -o sample1.ps sample1.dvi
+sample3.ps: sample3.dvi
+	dvips -o sample3.ps sample3.dvi
 
-sample1.dvi: sample1.tex sample1.mp
-	mpost sample1.mp
-	tex sample1.tex
+sample3.dvi: sample3.tex sample3.mp
+	mpost sample3.mp
+	tex sample3.tex
 
-sample1.mp: 3dldf$(EXEEXT) sample1.ldf
-	3dldf$(EXEEXT) sample1.ldf
+sample3.mp: 3dldf$(EXEEXT) sample3.ldf
+	3dldf$(EXEEXT) sample3.ldf
 
 .PHONY : run-bi
 
 run-bi: 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) --bi sample1.ldf
+	3dldf$(EXEEXT) --bi sample3.ldf
 
 .PHONY : run-fbi
 
 run-fbi: 
 	rm parser.o
 	$(MAKE) 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) --bi sample1.ldf
+	3dldf$(EXEEXT) --bi sample3.ldf
 
 .PHONY : run-1
 run-1: 3dldf$(EXEEXT)

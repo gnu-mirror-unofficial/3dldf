@@ -126,7 +126,7 @@ draw q0 with_color blue;
 % %% Get 3!
 % dotlabel.bot("Arcturus",    p4);    
 
-dotlabel.rt("Vega",        p5);        
+dotlabel.urt("Vega", p5);        
 
 % dotlabel.ulft("Capella",     p6);
 % drawdot p7 with_pen pencircle scaled (3pt, 3pt, 3pt);
@@ -250,7 +250,7 @@ p17 := (3, 0) rotated (0, 45);
 dotlabel.urt("$45^\\circ$", p17);
 
 p18 := (3, 0) rotated (0, 67.5);
-dotlabel.llft("$67.5^\\circ$", p18);
+dotlabel.urt("$67.5^\\circ$", p18);
 
 p19 := (3, 0) rotated (0, 90);
 dotlabel.urt("$90^\\circ$", p19);
@@ -302,16 +302,38 @@ draw origin -- p31;
 
 a4 := 2 * magnitude (p31 - p5);
 
-set c2 with_center p31 with_diameter a4;
+set c1 with_center p31 with_diameter a4;
 
-draw c2 with_color red;
+draw c1 with_color red;
 
-
-
-message "a4:";
+message "a4 (diameter of c1):";
 show a4;
 %pause;
 
+p32 := (.5a4, ypart p31) rotated (0, 270);
+dotlabel.llft("$p_{32}$", p32);
+
+p33 := (.5a4, ypart p31) rotated (0, 292.5);
+dotlabel.bot("$p_{33}$", p33); 
+
+a5 := a0 - 270;
+
+message "a5 (RA dec. deg. Vega - 270):";
+show a5;
+
+a6 := 292.5 - a0; 
+message "a6 (292.5 - RA dec. deg. Vega):";
+show a6;
+
+a7 := arc_length (a5) c1;
+message "a7 (arc length from p5 to p32):";
+show a7;
+
+a8 := arc_length (a6) c1;
+message "a8 (arc length from p5 to p33):";
+show a8;
+
+pause;
 
 ;% Declination
 
