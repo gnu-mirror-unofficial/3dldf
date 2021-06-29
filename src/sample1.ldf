@@ -66,7 +66,7 @@ set f with_position (0, 20, -50)
 
 %s := unit_sphere scaled (3, 3, 3);
 
-set s with_divisions 8 with_radius 3;
+set s with_divisions 2 with_radius 3;
 
 draw s;
 
@@ -101,7 +101,7 @@ p5 := plot vega       with_radius 3;
 
 p12 := (xpart p5, 0, zpart p5);  % Vega
 
-dotlabel.bot("$p_{12}$", p12);
+dotlabel.lft("$p_{12}$", p12);
 
 bool_point_vector bpv;
 
@@ -110,9 +110,9 @@ bpv := c0 intersection_points (origin -- p12);
 message "bpv:";
 show bpv;
 
-p13 := bpv[0];
+%p13 := bpv[0];
 
-dotlabel.top("$p_{13}$", p13);
+%dotlabel.top("$p_{13}$", p13);
 
 p14 := bpv[1];
 dotlabel.lrt("$p_{14}$", p14);
@@ -155,97 +155,189 @@ show a0;
 %% !! START HERE: LDF 2021.6.29.  Add code for finding arc lengths for the RA.
 %% Add points on c0 for 22.5°, 67.5°, etc.
 
-if a0 == 0:
-   message "a0 (declination) == 0.";
-elseif (a0 > 0) and (a0 < 45):
-   message "a0 (declination) > 0 and a0 < 45.";
+%% 22.5
+%% 45
+%% 67.5
+%% 90
+%% 112.5
+%% 135
+%% 157.5
+%% 180
+%% 202.5
+%% 225
+%% 247.5
+%% 270
+%% 292.5
+%% 315
+%% 337.5
+%% 360 
+
+if (a0 == 337.5):
+   message "a0 (declination) == 337.5";
+elseif (a0 == 22.5):
+   message "a0 (declination) == 22.5";
+elseif (a0 > 22.5) and (a0 < 45):
+   message "a0 (declination) > 22.5 or a0 < 45";
 elseif a0 == 45:
    message "a0 (declination) == 45.";
-elseif (a0 > 45) and (a0 < 90):
-   message "a0 (declination) > 45 and a0 < 90.";
+elseif (a0 > 45) and (a0 < 67.5):
+   message "a0 (declination) > 45 and a0 < 67.5";
+elseif a0 == 67.5:
+   message "a0 (declination) == 67.5.";
+elseif (a0 > 67.5) and (a0 < 90):
+   message "a0 (declination) > 67.5 and a0 < 90";
 elseif a0 == 90:
-   message "a0 (declination) == 90.";
-elseif (a0 > 90) and (a0 < 135):
-   message "a0 (declination) > 90 and a0 < 135.";
+   message "a0 (declination) == 90";
+elseif (a0 > 90) and (a0 < 112.5):
+   message "a0 (declination) > 90 and a0 < 112.5";
+elseif a0 == 112.5:
+   message "a0 (declination) == 112.5";
+elseif (a0 > 112.5) and (a0 < 135):
+   message "a0 (declination) > 112.5 and a0 < 135";
 elseif a0 == 135:
-   message "a0 (declination) == 135.";
-elseif (a0 > 135) and (a0 < 180):
-   message "a0 (declination) > 135 and a0 < 180.";
+   message "a0 (declination) == 135";
+elseif (a0 > 135) and (a0 < 157.5):
+   message "a0 (declination) > 135 and a0 < 157.5";
+ elseif a0 == 157.5:
+   message "a0 (declination) == 157.5";
+elseif (a0 > 157.5) and (a0 < 180):
+   message "a0 (declination) > 157.5 and a0 < 180";
 elseif a0 == 180:
-   message "a0 (declination) == 180.";
-elseif (a0 > 180) and (a0 < 225):
-   message "a0 (declination) > 180 and a0 < 225.";
+   message "a0 (declination) == 180";
+elseif (a0 > 180) and (a0 < 202.5):
+   message "a0 (declination) > 202.5 and a0 < 225";
 elseif a0 == 225:
-   message "a0 (declination) == 225.";
-elseif (a0 > 225) and (a0 < 270):
-   message "a0 (declination) > 225 and a0 < 270.";
+   message "a0 (declination) == 225";
+elseif (a0 > 225) and (a0 < 247.5):
+   message "a0 (declination) > 225 and a0 < 247.5";
+elseif a0 == 247.5:
+   message "a0 (declination) == 247.5";
+elseif (a0 > 247.5) and (a0 < 270):
+   message "a0 (declination) > 247.5 and a0 < 270";
 elseif a0 == 270:
-   message "a0 (declination) == 270.";
-elseif (a0 > 270) and (a0 < 315):
-   message "a0 (declination) > 270 and a0 < 315.";
+   message "a0 (declination) == 270";
+elseif (a0 > 270) and (a0 < 292.5):
+   message "a0 (declination) > 270 and a0 < 292.5";
+elseif a0 == 292.5:
+   message "a0 (declination) == 292.5";
+elseif (a0 > 292.5) and (a0 < 315):
+   message "a0 (declination) > 292.5 and a0 < 315";
 elseif a0 == 315:
-   message "a0 (declination) == 315.";
-elseif (a0 > 315) and (a0 < 360):
-   message "a0 (declination) > 315 and a0 < 360.";
+  message "a0 (declination) == 315";
+elseif (a0 > 315) and (a0 < 337.5):
+  message "a0 (declination) > 315 and a0 < 337.5";
+elseif a0 == 337.5:
+  message "a0 (declination) == 337.5";
+elseif (a0 > 337.5) and (a0 < 360):
+  message "a0 (declination) > 337.5 and a0 < 360";
 elseif a0 == 360:
-   message "a0 (declination) == 360.";
+  message "a0 (declination) == 360";
+elseif a0 > 360:
+  message "a0 (declination) > 360";
 fi;
-
-pause;
 
 q2 := origin -- (3, 0) -- p14 -- cycle;
 
 draw q2 dashed evenly with_color green;
 
 p15 := (3, 0);
-dotlabel.llft("$0^\\circ$", p15);
+dotlabel.urt("$0^\\circ$", p15);
 dotlabel.lrt("$360^\\circ$", p15);
 
-p16 := (3, 0) rotated (0, 45);
-dotlabel.ulft("$45^\\circ$", p16);
+p16 := (3, 0) rotated (0, 22.5);
+dotlabel.urt("$22.5^\\circ$", p16);
 
-p17 := (3, 0) rotated (0, 90);
-dotlabel.urt("$90^\\circ$", p17);
+p17 := (3, 0) rotated (0, 45);
+dotlabel.urt("$45^\\circ$", p17);
 
-p18 := (3, 0) rotated (0, 135);
-dotlabel.llft("$135^\\circ$", p18);
+p18 := (3, 0) rotated (0, 67.5);
+dotlabel.llft("$67.5^\\circ$", p18);
 
-p19 := (3, 0) rotated (0, 180);
-dotlabel.urt("$180^\\circ$", p19);
+p19 := (3, 0) rotated (0, 90);
+dotlabel.urt("$90^\\circ$", p19);
 
-p20 := (3, 0) rotated (0, 225);
-dotlabel.urt("$225^\\circ$", p20);
+p20 := (3, 0) rotated (0, 112.5);
+dotlabel.top("$112.5^\\circ$", p20);
 
-p21 := (3, 0) rotated (0, 270);
-dotlabel.llft("$270^\\circ$", p21);
+p21 := (3, 0) rotated (0, 135.0);
+dotlabel.ulft("$135^\\circ$", p21);
 
-p22 := (3, 0) rotated (0, 315);
-dotlabel.urt("$315^\\circ$", p22);
+p22 := (3, 0) rotated (0, 157.5);
+dotlabel.lft("$157.5^\\circ$", p22);
 
-%% Declination
+p23 := (3, 0) rotated (0, 180);
+dotlabel.lft("$180^\\circ$", p23);
 
-p23 := (3, 0) rotated (0, 0, 22.5);
-dotlabel.rt("$22.5^\\circ$", p23) with_text_color blue;
-dotlabel.rt("$22.5^\\circ$", p23 rotated (180, 0)) with_text_color blue;
-dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 180)) with_text_color blue;
-dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 0, 180)) with_text_color blue;
+p24 := (3, 0) rotated (0, 202.5);
+dotlabel.lft("$202.5^\\circ$", p24);
+
+p25 := (3, 0) rotated (0, 225);
+dotlabel.lft("$225^\\circ$", p25);
+
+p26 := (3, 0) rotated (0, 247.5);
+dotlabel.llft("$247.5^\\circ$", p26);
+
+draw origin -- p26;
+
+p27 := (3, 0) rotated (0, 270);
+dotlabel.bot("$270^\\circ$", p27);
+
+draw origin -- p27;
+
+p28 := (3, 0) rotated (0, 292.5);
+dotlabel.lrt("$292.5^\\circ$", p28);
+
+draw origin -- p28;
+
+p29 := (3, 0) rotated (0, 315);
+dotlabel.lrt("$315^\\circ$", p29);
+
+p30 := (3, 0) rotated (0, 337.5);
+dotlabel.rt("$337.5^\\circ$", p30);
+
+p31 := (0, ypart p5, 0);
+dotlabel.lft("$p_{31}$", p31); 
+
+draw p31 -- p5 with_color red;
+draw origin -- p31;
+
+a4 := 2 * magnitude (p31 - p5);
+
+set c2 with_center p31 with_diameter a4;
+
+draw c2 with_color red;
 
 
-p24 := (3, 0) rotated (0, 0, 45);
-dotlabel.rt("$45^\\circ$", p24) with_text_color blue;
-dotlabel.rt("$45^\\circ$", p24 rotated (180, 0)) with_text_color blue;
-dotlabel.ulft("$45^\\circ$", p24 rotated (0, 180)) with_text_color blue;
-dotlabel.ulft("$45^\\circ$", p24 rotated (0, 0, 180)) with_text_color blue;
 
-p25 := (3, 0) rotated (0, 0, 67.5);
-dotlabel.rt("$67.5^\\circ$", p25) with_text_color blue;
-dotlabel.rt("$67.5^\\circ$", p25 rotated (180, 0)) with_text_color blue;
-dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 180)) with_text_color blue;
-dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 0, 180)) with_text_color blue;
+message "a4:";
+show a4;
+%pause;
 
-p23 := (0, 3, 0);
-dotlabel.top("$90^\\circ$", p23) with_text_color blue;
-dotlabel.bot("$90^\\circ$", p23 rotated (180, 0)) with_text_color blue;
+
+;% Declination
+
+% p23 := (3, 0) rotated (0, 0, 22.5);
+% dotlabel.rt("$22.5^\\circ$", p23) with_text_color blue;
+% dotlabel.rt("$22.5^\\circ$", p23 rotated (180, 0)) with_text_color blue;
+% dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 180)) with_text_color blue;
+% dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 0, 180)) with_text_color blue;
+
+
+% p24 := (3, 0) rotated (0, 0, 45);
+% dotlabel.rt("$45^\\circ$", p24) with_text_color blue;
+% dotlabel.rt("$45^\\circ$", p24 rotated (180, 0)) with_text_color blue;
+% dotlabel.ulft("$45^\\circ$", p24 rotated (0, 180)) with_text_color blue;
+% dotlabel.ulft("$45^\\circ$", p24 rotated (0, 0, 180)) with_text_color blue;
+
+% p25 := (3, 0) rotated (0, 0, 67.5);
+% dotlabel.rt("$67.5^\\circ$", p25) with_text_color blue;
+% dotlabel.rt("$67.5^\\circ$", p25 rotated (180, 0)) with_text_color blue;
+% dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 180)) with_text_color blue;
+% dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 0, 180)) with_text_color blue;
+
+% p23 := (0, 3, 0);
+% dotlabel.top("$90^\\circ$", p23) with_text_color blue;
+% dotlabel.bot("$90^\\circ$", p23 rotated (180, 0)) with_text_color blue;
 
 v0 := currentpicture;
 
