@@ -409,10 +409,8 @@ of the points on the path is the same.
 @q *** (3) WITH_START numeric_expression WITH_END numeric_expression @>
 @q *** (3) with_closed_optional with_angle_optional.                 @>   
 
-@*1 \§path primary> $\longrightarrow$ \.{SEGMENT}
-\§ellipse primary> 
-\.{WITH\_START} \§numeric expression> 
-\.{WITH\_END} \§numeric expression>
+@*1 \§path primary> $\longrightarrow$ \.{SEGMENT} \§ellipse primary> 
+\.{WITH\_START} \§numeric expression> e\.{WITH\_END} \§numeric expression>
 \§with closed optional> \§with angle optional>.
 \initials{LDF 2004.11.26.}
 
@@ -429,11 +427,9 @@ Removed debugging code.
 
 @<Define rules@>=
 
-@=path_primary: SEGMENT ellipse_primary@>@/
-@=WITH_START numeric_expression WITH_END numeric_expression@>@/
-@=with_closed_optional with_angle_optional@>@/
+@=path_primary: SEGMENT ellipse_primary WITH_START numeric_expression @>@/
+@=WITH_END numeric_expression with_closed_optional with_angle_optional@>@/
 {
-
    Ellipse* e = static_cast<Ellipse*>(@=$2@>);
 
    Path* p = create_new<Path>(0);

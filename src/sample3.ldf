@@ -65,7 +65,8 @@ set f with_position (0, 20, -50)
 
 %s := unit_sphere scaled (3, 3, 3);
 
-set s with_divisions 2 with_radius 3;
+set s with_divisions_vertical 8 with_divisions_horizontal 2 with_radius 3;
+rotate s (0, 22.5);
 
 draw s;
 
@@ -120,6 +121,34 @@ q0 := origin -- p5 -- p14 -- cycle;
 
 draw q0 with_color blue;
 
+p34 := get_normal q0;
+
+message "p34:";
+show p34;
+
+%set c2 with_center origin with_diameter 6 with_normal p34;
+
+%draw c2 with_color orange;
+
+i := 1;
+q3 += p14;
+q3 += ..;
+forever:
+p35 := p14;
+message "p35 before rotating"; 
+show p35;
+rotate_around p35 (origin, p34) (i * 5);
+show p35;
+message "p35 after rotating"; 
+show p35;
+i := i + 1;
+exit_if (ypart p35) >= (ypart p5);
+%drawdot p35 with_color green with_pen pencircle scaled (3pt, 3pt, 3pt);
+q3 += p35;
+endfor; 
+
+draw q3 with_color orange;
+
 % dotlabel.lft("Sirius",      p1);      
 % drawdot p2 with_pen pencircle scaled (3pt, 3pt, 3pt);
 % label.lft("Canopus",     p2 shifted (-10pt, 0));     
@@ -171,69 +200,87 @@ show a0;
 %% 337.5
 %% 360 
 
+numeric bi_ang[];
+
 if (a0 == 337.5):
    message "a0 (declination) == 337.5";
+   bi_ang0 := 0;
+   bi_ang1 := 7;
+elseif (a0 > 337.5) or (a0 < 22.5):
+   message "a0 (declination) > 337.5 or < 22.5";
+   bi_ang0 := 0;
+   bi_ang1 := -1;
 elseif (a0 == 22.5):
    message "a0 (declination) == 22.5";
-elseif (a0 > 22.5) and (a0 < 45):
-   message "a0 (declination) > 22.5 or a0 < 45";
-elseif a0 == 45:
-   message "a0 (declination) == 45.";
-elseif (a0 > 45) and (a0 < 67.5):
-   message "a0 (declination) > 45 and a0 < 67.5";
-elseif a0 == 67.5:
-   message "a0 (declination) == 67.5.";
-elseif (a0 > 67.5) and (a0 < 90):
-   message "a0 (declination) > 67.5 and a0 < 90";
-elseif a0 == 90:
-   message "a0 (declination) == 90";
-elseif (a0 > 90) and (a0 < 112.5):
-   message "a0 (declination) > 90 and a0 < 112.5";
-elseif a0 == 112.5:
+   bi_ang0 := 0;
+   bi_ang1 := 1;
+elseif (a0 > 22.5) and (a0 < 67.5):
+   message "a0 (declination) > 22.5 or a0 < 67.5";
+   bi_ang0 := 1;
+   bi_ang1 := -1;
+elseif (a0 == 67.5):
+   message "a0 (declination) == 67.5";
+   bi_ang0 := 1;
+   bi_ang1 := 2;
+elseif (a0 > 67.5) and (a0 < 112.5):
+   message "a0 (declination) > 67.5 and a0 < 112.5";
+   bi_ang0 := 2;
+   bi_ang1 := -1;
+elseif (a0 == 112.5):
    message "a0 (declination) == 112.5";
-elseif (a0 > 112.5) and (a0 < 135):
-   message "a0 (declination) > 112.5 and a0 < 135";
-elseif a0 == 135:
-   message "a0 (declination) == 135";
-elseif (a0 > 135) and (a0 < 157.5):
-   message "a0 (declination) > 135 and a0 < 157.5";
- elseif a0 == 157.5:
+   bi_ang0 := 2;
+   bi_ang1 := 3;
+elseif (a0 > 112.5) and (a0 < 157.5):
+   bi_ang0 := 3;
+   bi_ang1 := -1;
+elseif a0 == 157.5:
    message "a0 (declination) == 157.5";
-elseif (a0 > 157.5) and (a0 < 180):
-   message "a0 (declination) > 157.5 and a0 < 180";
-elseif a0 == 180:
-   message "a0 (declination) == 180";
-elseif (a0 > 180) and (a0 < 202.5):
-   message "a0 (declination) > 202.5 and a0 < 225";
-elseif a0 == 225:
-   message "a0 (declination) == 225";
-elseif (a0 > 225) and (a0 < 247.5):
-   message "a0 (declination) > 225 and a0 < 247.5";
+   bi_ang0 := 3;
+   bi_ang1 := 4;
+elseif (a0 > 157.5) and (a0 < 202.5):
+   message "a0 (declination) > 157.5 and a0 < 202.5";
+   bi_ang0 := 4;
+   bi_ang1 := -1;
+elseif a0 == 202.5:
+   message "a0 (declination) == 202.5";
+   bi_ang0 := 4;
+   bi_ang1 := 5;
+elseif (a0 > 202.5) and (a0 < 247.5):
+   message "a0 (declination) > 202.5 and a0 < 247.5";
+   bi_ang0 := 5;
+   bi_ang1 := -1;
 elseif a0 == 247.5:
    message "a0 (declination) == 247.5";
-elseif (a0 > 247.5) and (a0 < 270):
-   message "a0 (declination) > 247.5 and a0 < 270";
-elseif a0 == 270:
-   message "a0 (declination) == 270";
-elseif (a0 > 270) and (a0 < 292.5):
-   message "a0 (declination) > 270 and a0 < 292.5";
+   bi_ang0 := 5;
+   bi_ang1 := 6;
+elseif (a0 > 247.5) and (a0 < 292.5):
+   message "a0 (declination) > 247.5 and a0 < 292.5";
+   bi_ang0 := 6;
+   bi_ang1 := -1;
 elseif a0 == 292.5:
    message "a0 (declination) == 292.5";
-elseif (a0 > 292.5) and (a0 < 315):
-   message "a0 (declination) > 292.5 and a0 < 315";
-elseif a0 == 315:
-  message "a0 (declination) == 315";
-elseif (a0 > 315) and (a0 < 337.5):
-  message "a0 (declination) > 315 and a0 < 337.5";
-elseif a0 == 337.5:
-  message "a0 (declination) == 337.5";
-elseif (a0 > 337.5) and (a0 < 360):
-  message "a0 (declination) > 337.5 and a0 < 360";
-elseif a0 == 360:
-  message "a0 (declination) == 360";
-elseif a0 > 360:
-  message "a0 (declination) > 360";
+   bi_ang0 := 6;
+   bi_ang1 := 7;
+elseif (a0 > 292.5) and (a0 < 337.5):
+  message "a0 (declination) > 292.5 and a0 < 337.5";
+   bi_ang0 := 7;
+   bi_ang1 := -1;
+else
+  errmessage "a0 (declination) has invalid value.";
 fi;
+
+message "bi_ang0:"; 
+show bi_ang0;
+
+message "bi_ang1:"; 
+show bi_ang1;
+
+% a3 (arc length of arc from p14 to p5 (Declination of Vega):
+% >> 2.03156
+% a7 (arc length from p5 to p32):
+
+
+pause;
 
 q2 := origin -- (3, 0) -- p14 -- cycle;
 
@@ -333,7 +380,7 @@ a8 := arc_length (a6) c1;
 message "a8 (arc length from p5 to p33):";
 show a8;
 
-pause;
+%pause;
 
 ;% Declination
 
@@ -426,6 +473,14 @@ beginfig(4);
   currentpicture := v0;
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4));
 endfig with_projection parallel_z_y; 
+
+beginfig(5);
+  numeric n[];
+  n0 := a2 / 8;
+  draw (0, -.25a2) -- (0, .25a2);  %% Half of circumference
+  draw (-.5n0, 0) -- (.5n0, 0);  
+endfig with_projection parallel_x_y; 
+
 
 verbatim_metapost "end";
 
