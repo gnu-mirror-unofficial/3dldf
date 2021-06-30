@@ -646,27 +646,28 @@ Added this section.
 Added this section.
 \ENDLOG
 
-@q *** (3) command --> SET circle_variable            @>  
-@q *** (3) with_center_optional with_diameter_optional    @>
-@q *** (3) with_point_count_optional with_normal_optional.@> 
+@q *** (3) command --> SET circle_variable with_center_optional @>  
+@q *** (3) with_radius_optional with_diameter_optional         @>
+@q *** (3) with_point_count_optional with_normal_optional.      @> 
 
-@*2 \§command> $\longrightarrow$ \.{SET} 
-\§circle variable> \§with center optional>  
+@*2 \§command> $\longrightarrow$ \.{SET} \§circle variable> 
+\§with center optional>  \§with radius optional> 
 \§with diameter optional> \§with point count optional> 
 \§with normal optional>.
 
 \LOG
 \initials{LDF 2004.11.01.}
 Added this rule.
+
+\initials{LDF 2021.6.30.}
+Added \§with radius optional>.
 \ENDLOG 
 
 @q *** (3) Definition.@>
 
 @<Define rules@>= 
-@=command: SET circle_variable@>@/        
-@= with_center_optional with_diameter_optional@>@/             
-@= with_point_count_optional@>@/         
-@= with_normal_optional@>@/                           
+@=command: SET circle_variable with_center_optional with_radius_optional @>@/
+@=with_diameter_optional with_point_count_optional with_normal_optional@>@/
 {
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
@@ -720,9 +721,62 @@ if |*center != origin|.
 
          Point origin(0, 0, 0);
          Point* center              = static_cast<Point*>(@=$3@>); 
-         real diameter              = @=$4@>;
-         unsigned short point_count = @=$5@>;
-         Point* normal    = static_cast<Point*>(@=$6@>); 
+         real diameter = 2.0;              
+
+         if (@=$4@> == 0.0 && @=$5@> > 0.0)
+            diameter = @=$5@>;
+         else if (@=$4@> > 0.0 && @=$5@> == 0.0)
+            diameter = 2 * @=$4@>;
+         else if (@=$4@> > 0.0 && @=$5@> > 0.0 && 2 * @=$4@> == @=$5@>)
+         { 
+             cerr << "WARNING!  In Parser, rule `command: SET circle_variable with_center_optional" 
+                  << endl 
+                  << "with_radius_optional with_diameter_optional "
+                  << endl 
+                  << "with_point_count_optional with_normal_optional':"
+                  << endl 
+                  << "Radius and diameter both specified.  However, diameter == 2 X radius,"
+                  << endl 
+                  << "so this isn't a problem.  Radius == " << @=$4@> << ", diameter == " << @=$5@>
+                  << endl
+                  << "Continuing."
+                  << endl;
+           
+             diameter = @=$5@>;
+         }
+         else if (@=$4@> < 0.0 && @=$5@> == 0.0)
+         {
+             cerr << "ERROR!  In Parser, rule `command: SET circle_variable with_center_optional" 
+                  << endl 
+                  << "with_radius_optional with_diameter_optional "
+                  << endl 
+                  << "with_point_count_optional with_normal_optional':"
+                  << endl 
+                  << "Diameter is 0 and radius has an invalid value:  " << @=$4@> << " (< 0.0)."
+                  << endl 
+                  << "Setting diameter to default value (2) and continuing."
+                  << endl:
+
+             diameter = 2;
+         }
+         else if (@=$4@> == 0.0 && @=$5@> < 0.0)
+         {
+             cerr << "ERROR!  In Parser, rule `command: SET circle_variable with_center_optional" 
+                  << endl 
+                  << "with_radius_optional with_diameter_optional "
+                  << endl 
+                  << "with_point_count_optional with_normal_optional':"
+                  << endl 
+                  << "Radius is 0 and diameter has an invalid value:  " << @=$5@> << " (< 0.0)."
+                  << endl 
+                  << "Setting diameter to default value (2) and continuing."
+                  << endl:
+
+             diameter = 2;
+         }
+
+         unsigned short point_count = @=$6@>;
+         Point* normal    = static_cast<Point*>(@=$7@>); 
 
          c->set(origin, diameter, 0, 0, 0, point_count); 
 
@@ -2199,6 +2253,55 @@ Added this rule.
  
 };
 
+@q * (1) with_radius_optional.@> 
+@* \§with radius optional>.
+\initials{LDF 2021.6.30.}
+
+\LOG
+\initials{LDF 2021.6.30.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <real_value> with_radius_optional@>
+
+@q ** (2) with_radius_optional --> EMPTY.@> 
+@*1 \§with radius optional> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.6.30.}
+
+\LOG
+\initials{LDF 2021.6.30.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+
+@=with_radius_optional: /* Empty.  */@>@/
+{
+     @=$$@> = 0.0;
+};
+
+@q ** (2) with_radius_optional --> WITH_RADIUS numeric_expression.@> 
+@*1 \§with radius optional> $\longrightarrow$ 
+\.{WITH\_RADIUS}
+\§numeric expression>.
+\initials{LDF 2004.11.02.}
+
+\LOG
+\initials{LDF 2004.11.02.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+
+@=with_radius_optional: WITH_RADIUS numeric_expression@>@/
+{
+
+   @=$$@> = @=$2@>;
+ 
+};
+
 @q * (1) with_diameter_optional.@> 
 @* \§with diameter optional>.
 \initials{LDF 2004.11.02.}
@@ -2226,7 +2329,7 @@ Added this rule.
 @=with_diameter_optional: /* Empty.  */@>@/
 {
 
-     @=$$@> = 1.0;
+     @=$$@> = 0.0;
  
 };
 
