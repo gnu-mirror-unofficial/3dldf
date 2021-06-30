@@ -51,7 +51,7 @@
 
 %% * (1) New sample code.
 
-numeric a[];
+numeric a[], b[];
 point p[];
 path  q[];
 circle c[];
@@ -59,13 +59,14 @@ sphere s;
 picture v[];
 focus f;
 transform t[];
+string u;
 
 set f with_position (0, 20, -50) 
        with_direction (0, 20, 10) with_distance 70; 
 
-%s := unit_sphere scaled (3, 3, 3);
+%s := unit_sphere scaled (6, 6, 6);
 
-set s with_divisions_vertical 8 with_divisions_horizontal 2 with_radius 3;
+set s with_divisions_vertical 8 with_divisions_horizontal 2 with_radius 6;
 rotate s (0, 22.5);
 
 draw s;
@@ -80,24 +81,24 @@ a1 := declination_decimal_degrees vega;
 message "Declination decimal deg. Vega (a1):";
 show a1;
 
-c0 := unit_circle scaled (3, 0, 3);
+c0 := unit_circle scaled (6, 0, 6);
 draw c0 with_color red;
 
-% p1 := plot sirius     with_radius 3;
-% p2 := plot canopus    with_radius 3;
-% p4 := plot arcturus   with_radius 3;
-% %% Get 3!
+% p1 := plot sirius     with_radius 6;
+% p2 := plot canopus    with_radius 6;
+% p4 := plot arcturus   with_radius 6;
+% %% Get 6!
 
 show vega;
 
-p5 := plot vega       with_radius 3;
+p5 := plot vega       with_radius 6;
 
-% p6 := plot capella    with_radius 3;
-% p7 := plot rigel      with_radius 3;
-% p8 := plot procyon    with_radius 3;
-% p9 := plot achernar   with_radius 3;
-% p10 := plot betelgeuse with_radius 3;
-% p11 := plot hadar      with_radius 3;
+% p6 := plot capella    with_radius 6;
+% p7 := plot rigel      with_radius 6;
+% p8 := plot procyon    with_radius 6;
+% p9 := plot achernar   with_radius 6;
+% p10 := plot betelgeuse with_radius 6;
+% p11 := plot hadar      with_radius 6;
 
 p12 := (xpart p5, 0, zpart p5);  % Vega
 
@@ -177,7 +178,7 @@ show a2;
 message "a3 (arc length of arc from p14 to p5 (Declination of Vega):";
 show a3;
 
-message "a0 (declination):";
+message "a0 (RA):";
 show a0;
 
 %% !! START HERE: LDF 2021.6.29.  Add code for finding arc lengths for the RA.
@@ -203,70 +204,70 @@ show a0;
 numeric bi_ang[];
 
 if (a0 == 337.5):
-   message "a0 (declination) == 337.5";
+   message "a0 (RA) == 337.5";
    bi_ang0 := 0;
    bi_ang1 := 7;
 elseif (a0 > 337.5) or (a0 < 22.5):
-   message "a0 (declination) > 337.5 or < 22.5";
+   message "a0 (RA) > 337.5 or < 22.5";
    bi_ang0 := 0;
    bi_ang1 := -1;
 elseif (a0 == 22.5):
-   message "a0 (declination) == 22.5";
+   message "a0 (RA) == 22.5";
    bi_ang0 := 0;
    bi_ang1 := 1;
 elseif (a0 > 22.5) and (a0 < 67.5):
-   message "a0 (declination) > 22.5 or a0 < 67.5";
+   message "a0 (RA) > 22.5 or a0 < 67.5";
    bi_ang0 := 1;
    bi_ang1 := -1;
 elseif (a0 == 67.5):
-   message "a0 (declination) == 67.5";
+   message "a0 (RA) == 67.5";
    bi_ang0 := 1;
    bi_ang1 := 2;
 elseif (a0 > 67.5) and (a0 < 112.5):
-   message "a0 (declination) > 67.5 and a0 < 112.5";
+   message "a0 (RA) > 67.5 and a0 < 112.5";
    bi_ang0 := 2;
    bi_ang1 := -1;
 elseif (a0 == 112.5):
-   message "a0 (declination) == 112.5";
+   message "a0 (RA) == 112.5";
    bi_ang0 := 2;
    bi_ang1 := 3;
 elseif (a0 > 112.5) and (a0 < 157.5):
    bi_ang0 := 3;
    bi_ang1 := -1;
 elseif a0 == 157.5:
-   message "a0 (declination) == 157.5";
+   message "a0 (RA) == 157.5";
    bi_ang0 := 3;
    bi_ang1 := 4;
 elseif (a0 > 157.5) and (a0 < 202.5):
-   message "a0 (declination) > 157.5 and a0 < 202.5";
+   message "a0 (RA) > 157.5 and a0 < 202.5";
    bi_ang0 := 4;
    bi_ang1 := -1;
 elseif a0 == 202.5:
-   message "a0 (declination) == 202.5";
+   message "a0 (RA) == 202.5";
    bi_ang0 := 4;
    bi_ang1 := 5;
 elseif (a0 > 202.5) and (a0 < 247.5):
-   message "a0 (declination) > 202.5 and a0 < 247.5";
+   message "a0 (RA) > 202.5 and a0 < 247.5";
    bi_ang0 := 5;
    bi_ang1 := -1;
 elseif a0 == 247.5:
-   message "a0 (declination) == 247.5";
+   message "a0 (RA) == 247.5";
    bi_ang0 := 5;
    bi_ang1 := 6;
 elseif (a0 > 247.5) and (a0 < 292.5):
-   message "a0 (declination) > 247.5 and a0 < 292.5";
+   message "a0 (RA) > 247.5 and a0 < 292.5";
    bi_ang0 := 6;
    bi_ang1 := -1;
 elseif a0 == 292.5:
-   message "a0 (declination) == 292.5";
+   message "a0 (RA) == 292.5";
    bi_ang0 := 6;
    bi_ang1 := 7;
 elseif (a0 > 292.5) and (a0 < 337.5):
-  message "a0 (declination) > 292.5 and a0 < 337.5";
+  message "a0 (RA) > 292.5 and a0 < 337.5";
    bi_ang0 := 7;
    bi_ang1 := -1;
 else
-  errmessage "a0 (declination) has invalid value.";
+  errmessage "a0 (RA) has invalid value.";
 fi;
 
 message "bi_ang0:"; 
@@ -278,67 +279,65 @@ show bi_ang1;
 % a3 (arc length of arc from p14 to p5 (Declination of Vega):
 % >> 2.03156
 % a7 (arc length from p5 to p32):
+%pause;
 
-
-pause;
-
-q2 := origin -- (3, 0) -- p14 -- cycle;
+q2 := origin -- (6, 0) -- p14 -- cycle;
 
 draw q2 dashed evenly with_color green;
 
-p15 := (3, 0);
+p15 := (6, 0);
 dotlabel.urt("$0^\\circ$", p15);
 dotlabel.lrt("$360^\\circ$", p15);
 
-p16 := (3, 0) rotated (0, 22.5);
+p16 := (6, 0) rotated (0, 22.5);
 dotlabel.urt("$22.5^\\circ$", p16);
 
-p17 := (3, 0) rotated (0, 45);
+p17 := (6, 0) rotated (0, 45);
 dotlabel.urt("$45^\\circ$", p17);
 
-p18 := (3, 0) rotated (0, 67.5);
+p18 := (6, 0) rotated (0, 67.5);
 dotlabel.urt("$67.5^\\circ$", p18);
 
-p19 := (3, 0) rotated (0, 90);
+p19 := (6, 0) rotated (0, 90);
 dotlabel.urt("$90^\\circ$", p19);
 
-p20 := (3, 0) rotated (0, 112.5);
+p20 := (6, 0) rotated (0, 112.5);
 dotlabel.top("$112.5^\\circ$", p20);
 
-p21 := (3, 0) rotated (0, 135.0);
+p21 := (6, 0) rotated (0, 135.0);
 dotlabel.ulft("$135^\\circ$", p21);
 
-p22 := (3, 0) rotated (0, 157.5);
+p22 := (6, 0) rotated (0, 157.5);
 dotlabel.lft("$157.5^\\circ$", p22);
 
-p23 := (3, 0) rotated (0, 180);
+p23 := (6, 0) rotated (0, 180);
 dotlabel.lft("$180^\\circ$", p23);
 
-p24 := (3, 0) rotated (0, 202.5);
+p24 := (6, 0) rotated (0, 202.5);
 dotlabel.lft("$202.5^\\circ$", p24);
 
-p25 := (3, 0) rotated (0, 225);
+p25 := (6, 0) rotated (0, 225);
 dotlabel.lft("$225^\\circ$", p25);
 
-p26 := (3, 0) rotated (0, 247.5);
+p26 := (6, 0) rotated (0, 247.5);
 dotlabel.llft("$247.5^\\circ$", p26);
 
 draw origin -- p26;
 
-p27 := (3, 0) rotated (0, 270);
+p27 := (6, 0) rotated (0, 270);
 dotlabel.bot("$270^\\circ$", p27);
 
 draw origin -- p27;
 
-p28 := (3, 0) rotated (0, 292.5);
+p28 := (6, 0) rotated (0, 292.5);
 dotlabel.lrt("$292.5^\\circ$", p28);
 
 draw origin -- p28;
 
-p29 := (3, 0) rotated (0, 315);
+p29 := (6, 0) rotated (0, 315);
 dotlabel.lrt("$315^\\circ$", p29);
 
-p30 := (3, 0) rotated (0, 337.5);
+p30 := (6, 0) rotated (0, 337.5);
 dotlabel.rt("$337.5^\\circ$", p30);
 
 p31 := (0, ypart p5, 0);
@@ -361,7 +360,7 @@ p32 := (.5a4, ypart p31) rotated (0, 270);
 dotlabel.llft("$p_{32}$", p32);
 
 p33 := (.5a4, ypart p31) rotated (0, 292.5);
-dotlabel.bot("$p_{33}$", p33); 
+dotlabel.bot("$p_{33}$", p33);
 
 a5 := a0 - 270;
 
@@ -384,26 +383,26 @@ show a8;
 
 ;% Declination
 
-% p23 := (3, 0) rotated (0, 0, 22.5);
+% p23 := (6, 0) rotated (0, 0, 22.5);
 % dotlabel.rt("$22.5^\\circ$", p23) with_text_color blue;
 % dotlabel.rt("$22.5^\\circ$", p23 rotated (180, 0)) with_text_color blue;
 % dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 180)) with_text_color blue;
 % dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 0, 180)) with_text_color blue;
 
 
-% p24 := (3, 0) rotated (0, 0, 45);
+% p24 := (6, 0) rotated (0, 0, 45);
 % dotlabel.rt("$45^\\circ$", p24) with_text_color blue;
 % dotlabel.rt("$45^\\circ$", p24 rotated (180, 0)) with_text_color blue;
 % dotlabel.ulft("$45^\\circ$", p24 rotated (0, 180)) with_text_color blue;
 % dotlabel.ulft("$45^\\circ$", p24 rotated (0, 0, 180)) with_text_color blue;
 
-% p25 := (3, 0) rotated (0, 0, 67.5);
+% p25 := (6, 0) rotated (0, 0, 67.5);
 % dotlabel.rt("$67.5^\\circ$", p25) with_text_color blue;
 % dotlabel.rt("$67.5^\\circ$", p25 rotated (180, 0)) with_text_color blue;
 % dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 180)) with_text_color blue;
 % dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 0, 180)) with_text_color blue;
 
-% p23 := (0, 3, 0);
+% p23 := (0, 6, 0);
 % dotlabel.top("$90^\\circ$", p23) with_text_color blue;
 % dotlabel.bot("$90^\\circ$", p23 rotated (180, 0)) with_text_color blue;
 
@@ -475,12 +474,56 @@ beginfig(4);
 endfig with_projection parallel_z_y; 
 
 beginfig(5);
+  c3 := unit_circle scaled (6, 0, 6) rotated (90, 0);
+  draw c3;
+  draw (-6, 0) -- (6, 0);
+  draw (0, -6) -- (0, 6);
+
+  j := 0;
+
+  for i = 11.25 step 11.25 until 78.75:
+     p36 := (6, 0);
+     rotate p36 (0, 0, i);
+     p37 := (0, ypart p36);
+     draw p37 -- p36;
+     b[j] := magnitude (p36 - p37);
+     show b[j];
+     message "b[" & decimal j & "], (magnitude (p36 - p37)):";
+     show b[j];
+     u := "$" & decimal i & "^\circ$";
+     dotlabel.rt(u, p36);
+     draw origin -- p36;
+     u := decimal b[j];
+     dotlabel.bot(u, mediate(p36, p37, .5));
+     j := j + 1;
+  endfor;
+
+pause;
+
+  % p36 := (3, 0);
+  % rotate p36 (0, 0, 22.5);
+  % dotlabel.rt("$22.5^\circ$", p36);
+  % p37 := (0, ypart p36);
+  % draw p37 -- p36;
+  % a9 := magnitude (p36 - p37);
+  % message "a9, (magnitude (p36 - p37)):";
+  % show a9;
+  % u := decimal a9;
+  % message "u:"; 
+  % show u;
+  % draw origin -- p36;
+  % dotlabel.bot(u, mediate(p36, p37, .5));
+
+
+
+endfig with_projection parallel_x_y; 
+
+beginfig(6);
   numeric n[];
   n0 := a2 / 8;
   draw (0, -.25a2) -- (0, .25a2);  %% Half of circumference
   draw (-.5n0, 0) -- (.5n0, 0);  
 endfig with_projection parallel_x_y; 
-
 
 verbatim_metapost "end";
 

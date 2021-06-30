@@ -755,7 +755,7 @@ if |*center != origin|.
                   << "Diameter is 0 and radius has an invalid value:  " << @=$4@> << " (< 0.0)."
                   << endl 
                   << "Setting diameter to default value (2) and continuing."
-                  << endl:
+                  << endl;
 
              diameter = 2;
          }
@@ -770,7 +770,7 @@ if |*center != origin|.
                   << "Radius is 0 and diameter has an invalid value:  " << @=$5@> << " (< 0.0)."
                   << endl 
                   << "Setting diameter to default value (2) and continuing."
-                  << endl:
+                  << endl;
 
              diameter = 2;
          }
