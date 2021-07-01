@@ -1,119 +1,99 @@
-@q ** (2) Get arc_length.@>
-@ Get arc_length.
-@^\cfunc{Circle}{get\_arc_length}@>
-\initials{LDF 2021.6.28.}
+@q ***** (5) string_primary --> LAST string_vector_expression.@>
+
+@*4 \§string primary> $\longrightarrow$ 
+\.{LAST} \§string vector expression>.
+\initials{LDF 2021.7.1.}
 
 \LOG
-\initials{LDF 2021.6.28.}
-Added this function.
-\ENDLOG 
- 
-@q *** (3) Declaration @>
+\initials{LDF 2021.7.1.}
+Added this rule.
+\ENDLOG
 
-@<Declare |Circle| functions@>=
-real
-get_arc_length(real angle, Scanner_Node scanner_node = 0);
+@q ****** (6) Definition.@> 
 
-@q **** (4) Definition @>
-@
-@<Define |Circle| functions@>=
-real
-Circle::get_arc_length(real angle, Scanner_Node scanner_node)
-{
-@q ***** (5) @>
-
-   bool DEBUG = true; /* |false| */
-
-   real arc_length = 0.0;
+@<Define rules@>=
+@=string_primary: COMMON_NAME star_expression@>@/
+{ 
+   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "Entering `Circle::get_arc_length'." << endl 
-           << "`angle' == " << angle
-           << endl;
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `string_primary --> "
+	           << "COMMON_NAME star_expression'.";
 
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
 
-@q ***** (5) @>
-@
-@<Define |Circle| functions@>=
+@q ******* (7) @> 
 
-   if (angle == 0.0)
+   string* s;
+
+   try 
+      {
+         s = new string;
+      }
+   catch (bad_alloc)
+      {
+         cerr_strm << thread_name << "ERROR!  In `yyparse()', rule `string_primary "
+                   << "--> COMMON_NAME star_expression':"
+                   << endl
+		   << "`new string' failed.  Rethrowing `bad_alloc'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
+
+         throw;
+
+      }  /* |catch (bad_alloc)|  */
+
+@q ******* (7) @> 
+
+   Star *star = static_cast<Star*>(@=$2@>);
+
+@q ******* (7) Error handling:  |star == 0|.@> 
+
+@ Error handling:  |star == 0|.
+\initials{LDF 2021.7.1.}
+
+@<Define rules@>=
+
+   if (star == static_cast<Star*>(0))
    {
-      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
-           << "Argument `real angle' == 0:  Can't calculate arc length."
-           << endl
-           << "Exiting function unsuccessfully with return value 0."
-           << endl;
+       cerr_strm << thread_name 
+                 << "ERROR!  In `yyparse()', rule `string_primary "
+                 << "--> COMMON_NAME star_expression':"
+                 << endl
+   		    << "Invalid `star_expression'.  "
+                 << "Setting `string_primary' to 0 and will try to continue.";
 
-      return 0.0;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
 
-   } 
+       delete s;
 
+       @=$$@> = static_cast<void*>(0);
 
-@q ***** (5) @>
-@
-@<Define |Circle| functions@>=
+   }  /* |if (star == 0)|  */
 
-   if (!is_circular(scanner_node))
+@q ******* (7) |star != 0|.@> 
+
+@ |star != 0 && star->ctr > 0|.  Set |@=$$@>| to |star->common_name|.
+\initials{LDF 2021.7.1.}
+
+@<Define rules@>=
+
+   else 
    {
-      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
-           << "`Circle::is_circular' returned `false':" << endl
-           << "`Circle' isn't circular.  Can't calculate arc length."
-           << endl
-           << "Exiting function unsuccessfully with return value 0."
-           << endl;
+      *s = star->common_name;
+      @=$$@> = static_cast<void*>(s); 
+   }
+@q ******* (7) @> 
 
-      return 0.0;
-
-   } 
-
-@q ***** (5) @>
-@
-@<Define |Circle| functions@>=
-
-   if (angle < 0.0)
-   {
-      cerr << "WARNING!  In `Circle::get_arc_length':" << endl 
-           << "Argument `real angle' < 0:  Converting to absolute value (, i.e., " << -real << ")."
-           << endl;
-
-#if LDF_REAL_FLOAT
-      angle = fabsf(angle);
-#elif LDF_REAL_DOUBLE
-      angle = fabs(angle);
-#else /* Default.  */
-      angle = fabsf(angle);
-#endif
-
-   } 
-
-@q ***** (5) @>
-@
-@<Define |Circle| functions@>=
-
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-      cerr << "In `Circle::get_arc_length':" << endl 
-           << "`Circle::is_circular' returned `true':" 
-           << endl
-           << "`Circle' is circular."
-           << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ***** (5) @>
-@
-@<Define |Circle| functions@>=
-
- // (2 * PI * radius) : INVALID_REAL;
-      
-
-@q ***** (5) @>
-
-    
-
-}  /* End of |Circle::get_arc_length| definition */
+};

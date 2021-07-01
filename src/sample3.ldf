@@ -343,8 +343,23 @@ plot_star_on_sphere_development {3.5, vega};
 
 beginfig(1);
   currentpicture := v0;
-  label("{\\bf Perspective Projection}", (0, -4));
+  label("{\\bf Perspective Projection}", (0, -4.5));
 endfig with_focus f;
+
+beginfig(2);
+  currentpicture := v0;
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
+endfig with_projection parallel_x_y; 
+
+beginfig(3);
+  currentpicture := v0;
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
+endfig with_projection parallel_x_z; 
+
+beginfig(4);
+  currentpicture := v0;
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
+endfig with_projection parallel_z_y; 
 
 verbatim_metapost "end";
   
@@ -457,26 +472,6 @@ v1 := currentpicture;
 beginfig(7);
   plot_star {3.5, vega};
 endfig with_projection parallel_x_y; 
-
-beginfig(1);
-  currentpicture := v0;
-  label("{\\bf Perspective Projection}", (0, -4));
-endfig with_focus f;
-
-beginfig(2);
-  currentpicture := v0;
-  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4));
-endfig with_projection parallel_x_y; 
-
-beginfig(3);
-  currentpicture := v0;
-  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4));
-endfig with_projection parallel_x_z; 
-
-beginfig(4);
-  currentpicture := v0;
-  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4));
-endfig with_projection parallel_z_y; 
 
 beginfig(5);
   c3 := unit_circle scaled (radius, 0, radius) rotated (90, 0);
