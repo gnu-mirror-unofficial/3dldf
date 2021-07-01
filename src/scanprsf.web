@@ -9920,7 +9920,6 @@ Scan_Parse::macro_definition_func(Scanner_Node scanner_node,
       scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                     &error_stop_value,
                                                     &warning_stop_value);
-
    using namespace Scan_Parse;
 
 @q ***** (5) @>   
@@ -10086,10 +10085,9 @@ arguments with the same name that might be passed to the macro.
 #endif /* |DEBUG_COMPILE|  */@; 
 
          *(din->definition_strm_ptr[0]) << type_name_map[iter->first] 
-                                        << " " << "©" << iter->second << "; "
-                                        << "©" << iter->second << " := "
-                                        << "¥" << parameter_ctr++ << "¥; ";
- 
+                                        << " " << "©" << iter->second << "; " /* Copyright symbol, decimal 169 (#o251, #xa9) */
+                                        << "©" << iter->second << " := "      
+                                        << "¥" << parameter_ctr++ << "¥; ";   /* Yen symbol, decimal 165 (#o245, #xa5) */
       }  /* |for|  */
 
 #if DEBUG_COMPILE
@@ -10154,8 +10152,7 @@ arguments with the same name that might be passed to the macro.
 @<Define |Scan_Parse| functions@>=
 
    for (;;)
-      {
-      
+   {
          prev_token = curr_token;
 
 #if 0 
@@ -10166,19 +10163,19 @@ arguments with the same name that might be passed to the macro.
 
 #if DEBUG_COMPILE
          if (DEBUG)
-            {
-                cerr_strm << thread_name 
-                          << "In `Scan_Parse::macro_definition_func':"
-                          << endl
-                          << "`curr_token' == " << name_map[curr_token]
-                          << endl << "`scanner_node->token_string' == "
-                          << scanner_node->token_string;
+         {
+             cerr_strm << thread_name 
+                       << "In `Scan_Parse::macro_definition_func':"
+                       << endl
+                       << "`curr_token' == " << name_map[curr_token]
+                       << endl << "`scanner_node->token_string' == "
+                       << scanner_node->token_string;
 
-                log_message(cerr_strm);
-                cerr_message(cerr_strm);
-                cerr_strm.str("");
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
 
-            }
+         }
 #endif /* |DEBUG_COMPILE|  */@; 
  
 @q ******* (7) @> 
@@ -10186,21 +10183,21 @@ arguments with the same name that might be passed to the macro.
 @<Define |Scan_Parse| functions@>=
 
          if (curr_token == ENDDEF && nest_ctr == 0)
-            {
+         {
 
 #if DEBUG_COMPILE
                if (DEBUG)
-                  {
-                      cerr_strm << thread_name 
-                                << "In `Scan_Parse::macro_definition_func':"
-                                << endl
-                                << "`curr_token' == `ENDDEF' and `nest_ctr' == 0."
-                                << endl << "Got outer `ENDDEF'.  Breaking.";
+               {
+                   cerr_strm << thread_name 
+                             << "In `Scan_Parse::macro_definition_func':"
+                             << endl
+                             << "`curr_token' == `ENDDEF' and `nest_ctr' == 0."
+                             << endl << "Got outer `ENDDEF'.  Breaking.";
 
-                      log_message(cerr_strm);
-                      cerr_message(cerr_strm);
-                      cerr_strm.str("");
-                  }
+                   log_message(cerr_strm);
+                   cerr_message(cerr_strm);
+                   cerr_strm.str("");
+               }
 #endif /* |DEBUG_COMPILE|  */@; 
  
                break;
