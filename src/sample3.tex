@@ -61,24 +61,32 @@
 \pageno=1
 
 %% Uncomment for A4 portrait
+\iffalse % \iftrue
 \special{papersize=210mm, 297mm}
 \hsize=210mm
 \vsize=297mm
+\fi
 
 %% Uncomment for A4 landscape.
-%% \special{papersize=297mm, 210mm}
-%% \hsize=297mm
-%% \vsize=210mm
+\iffalse % \iftrue
+\special{papersize=297mm, 210mm}
+\hsize=297mm
+\vsize=210mm
+\fi
 
 %% Uncomment for DIN A3 portrait.
-%% \special{papersize=297mm, 420mm} %% DIN A3 Portrait
-%% \vsize=420mm
-%% \hsize=297mm
+\iffalse % \iftrue
+\special{papersize=297mm, 420mm} %% DIN A3 Portrait
+\vsize=420mm
+\hsize=297mm
+\fi
 
 %% Uncomment for A3 landscape.
-%\special{papersize=420mm, 297mm} %% DIN A3 Landscape
-%\vsize=297mm
-%\hsize=420mm
+\iftrue % \iffalse
+\special{papersize=420mm, 297mm} %% DIN A3 Landscape
+\vsize=297mm
+\hsize=420mm
+\fi
 
 \advance\voffset by -1in
 \advance\voffset by 1.25cm
@@ -103,15 +111,12 @@
 
 \leftline{{\bx Sample 3}}
 \vskip\baselineskip
-\line{\epsffile{sample3.1}\hskip.25cm\epsffile{sample3.2}\hss}
+\line{\epsffile{sample3.1}\hskip.25cm\epsffile{sample3.2}\hskip.25cm\epsffile{sample3.5}\hss}
 \vskip1cm
-\line{\epsffile{sample3.3}\hskip.25cm\epsffile{sample3.4}\hss}
+\line{\epsffile{sample3.3}\hskip.25cm\epsffile{sample3.4}\hskip3cm\epsffile{sample3.6}\hss}
 \vfil\eject
 
 %% *** (3) 
-
-\line{\epsffile{sample3.5}\hskip.25cm\epsffile{sample3.6}\hss}
-\vfil\eject
 
 %% *** (3) End here
 

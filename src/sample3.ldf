@@ -49,9 +49,17 @@
 
 % * (1) Beginning of 3DLDF code.
 
-%% * (1) New sample code.
+%% * (1) Plotting stars on sphere development (spherical biangles)
 
-numeric a[], b[];
+verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
+
+numeric a[];
+numeric b[];
+numeric radius;
+numeric diameter;
+numeric m;
+numeric bi_ang[];
+
 point p[];
 path  q[];
 circle c[];
@@ -61,12 +69,15 @@ focus f;
 transform t[];
 string u;
 
+radius := 3.5;
+diameter := 2 * radius;
+
 set f with_position (0, 20, -50) 
        with_direction (0, 20, 10) with_distance 70; 
 
-%s := unit_sphere scaled (6, 6, 6);
+%s := unit_sphere scaled (radius, radius, radius);
 
-set s with_divisions_vertical 8 with_divisions_horizontal 2 with_radius 6;
+set s with_divisions_vertical 8 with_divisions_horizontal 2 with_radius radius;
 rotate s (0, 22.5);
 
 draw s;
@@ -81,24 +92,24 @@ a1 := declination_decimal_degrees vega;
 message "Declination decimal deg. Vega (a1):";
 show a1;
 
-c0 := unit_circle scaled (6, 0, 6);
+c0 := unit_circle scaled (radius, 0, radius);
 draw c0 with_color red;
 
-% p1 := plot sirius     with_radius 6;
-% p2 := plot canopus    with_radius 6;
-% p4 := plot arcturus   with_radius 6;
-% %% Get 6!
+% p1 := plot sirius     with_radius radius;
+% p2 := plot canopus    with_radius radius;
+% p4 := plot arcturus   with_radius radius;
+% %% Get 3!
 
 show vega;
 
-p5 := plot vega       with_radius 6;
+p5 := plot vega       with_radius radius;
 
-% p6 := plot capella    with_radius 6;
-% p7 := plot rigel      with_radius 6;
-% p8 := plot procyon    with_radius 6;
-% p9 := plot achernar   with_radius 6;
-% p10 := plot betelgeuse with_radius 6;
-% p11 := plot hadar      with_radius 6;
+% p6 := plot capella    with_radius radius;
+% p7 := plot rigel      with_radius radius;
+% p8 := plot procyon    with_radius radius;
+% p9 := plot achernar   with_radius radius;
+% p10 := plot betelgeuse with_radius radius;
+% p11 := plot hadar      with_radius radius;
 
 p12 := (xpart p5, 0, zpart p5);  % Vega
 
@@ -127,7 +138,7 @@ p34 := get_normal q0;
 message "p34:";
 show p34;
 
-%set c2 with_center origin with_diameter 6 with_normal p34;
+%set c2 with_center origin with_diameter diameter with_normal p34;
 
 %draw c2 with_color orange;
 
@@ -200,8 +211,6 @@ show a0;
 %% 315
 %% 337.5
 %% 360 
-
-numeric bi_ang[];
 
 if (a0 == 337.5):
    message "a0 (RA) == 337.5";
@@ -281,63 +290,63 @@ show bi_ang1;
 % a7 (arc length from p5 to p32):
 %pause;
 
-q2 := origin -- (6, 0) -- p14 -- cycle;
+q2 := origin -- (radius, 0) -- p14 -- cycle;
 
 draw q2 dashed evenly with_color green;
 
-p15 := (6, 0);
+p15 := (radius, 0);
 dotlabel.urt("$0^\\circ$", p15);
 dotlabel.lrt("$360^\\circ$", p15);
 
-p16 := (6, 0) rotated (0, 22.5);
+p16 := (radius, 0) rotated (0, 22.5);
 dotlabel.urt("$22.5^\\circ$", p16);
 
-p17 := (6, 0) rotated (0, 45);
+p17 := (radius, 0) rotated (0, 45);
 dotlabel.urt("$45^\\circ$", p17);
 
-p18 := (6, 0) rotated (0, 67.5);
+p18 := (radius, 0) rotated (0, 67.5);
 dotlabel.urt("$67.5^\\circ$", p18);
 
-p19 := (6, 0) rotated (0, 90);
+p19 := (radius, 0) rotated (0, 90);
 dotlabel.urt("$90^\\circ$", p19);
 
-p20 := (6, 0) rotated (0, 112.5);
+p20 := (radius, 0) rotated (0, 112.5);
 dotlabel.top("$112.5^\\circ$", p20);
 
-p21 := (6, 0) rotated (0, 135.0);
+p21 := (radius, 0) rotated (0, 135.0);
 dotlabel.ulft("$135^\\circ$", p21);
 
-p22 := (6, 0) rotated (0, 157.5);
+p22 := (radius, 0) rotated (0, 157.5);
 dotlabel.lft("$157.5^\\circ$", p22);
 
-p23 := (6, 0) rotated (0, 180);
+p23 := (radius, 0) rotated (0, 180);
 dotlabel.lft("$180^\\circ$", p23);
 
-p24 := (6, 0) rotated (0, 202.5);
+p24 := (radius, 0) rotated (0, 202.5);
 dotlabel.lft("$202.5^\\circ$", p24);
 
-p25 := (6, 0) rotated (0, 225);
+p25 := (radius, 0) rotated (0, 225);
 dotlabel.lft("$225^\\circ$", p25);
 
-p26 := (6, 0) rotated (0, 247.5);
+p26 := (radius, 0) rotated (0, 247.5);
 dotlabel.llft("$247.5^\\circ$", p26);
 
 draw origin -- p26;
 
-p27 := (6, 0) rotated (0, 270);
+p27 := (radius, 0) rotated (0, 270);
 dotlabel.bot("$270^\\circ$", p27);
 
 draw origin -- p27;
 
-p28 := (6, 0) rotated (0, 292.5);
+p28 := (radius, 0) rotated (0, 292.5);
 dotlabel.lrt("$292.5^\\circ$", p28);
 
 draw origin -- p28;
 
-p29 := (6, 0) rotated (0, 315);
+p29 := (radius, 0) rotated (0, 315);
 dotlabel.lrt("$315^\\circ$", p29);
 
-p30 := (6, 0) rotated (0, 337.5);
+p30 := (radius, 0) rotated (0, 337.5);
 dotlabel.rt("$337.5^\\circ$", p30);
 
 p31 := (0, ypart p5, 0);
@@ -350,7 +359,7 @@ a4 := 2 * magnitude (p31 - p5);
 
 set c1 with_center p31 with_diameter a4;
 
-draw c1 with_color red;
+draw c1 with_color cyan;
 
 message "a4 (diameter of c1):";
 show a4;
@@ -379,30 +388,37 @@ a8 := arc_length (a6) c1;
 message "a8 (arc length from p5 to p33):";
 show a8;
 
+message "circumference of  c1:";
+show circumference c1;
+
+a10 := circumference c1 / 8;
+message "a10 (circumference c1 / 8):";
+show a10;
+
 %pause;
 
 ;% Declination
 
-% p23 := (6, 0) rotated (0, 0, 22.5);
+% p23 := (radius, 0) rotated (0, 0, 22.5);
 % dotlabel.rt("$22.5^\\circ$", p23) with_text_color blue;
 % dotlabel.rt("$22.5^\\circ$", p23 rotated (180, 0)) with_text_color blue;
 % dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 180)) with_text_color blue;
 % dotlabel.lft("$22.5^\\circ$", p23 rotated (0, 0, 180)) with_text_color blue;
 
 
-% p24 := (6, 0) rotated (0, 0, 45);
+% p24 := (radius, 0) rotated (0, 0, 45);
 % dotlabel.rt("$45^\\circ$", p24) with_text_color blue;
 % dotlabel.rt("$45^\\circ$", p24 rotated (180, 0)) with_text_color blue;
 % dotlabel.ulft("$45^\\circ$", p24 rotated (0, 180)) with_text_color blue;
 % dotlabel.ulft("$45^\\circ$", p24 rotated (0, 0, 180)) with_text_color blue;
 
-% p25 := (6, 0) rotated (0, 0, 67.5);
+% p25 := (radius, 0) rotated (0, 0, 67.5);
 % dotlabel.rt("$67.5^\\circ$", p25) with_text_color blue;
 % dotlabel.rt("$67.5^\\circ$", p25 rotated (180, 0)) with_text_color blue;
 % dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 180)) with_text_color blue;
 % dotlabel.ulft("$67.5^\\circ$", p25 rotated (0, 0, 180)) with_text_color blue;
 
-% p23 := (0, 6, 0);
+% p23 := (0, radius, 0);
 % dotlabel.top("$90^\\circ$", p23) with_text_color blue;
 % dotlabel.bot("$90^\\circ$", p23 rotated (180, 0)) with_text_color blue;
 
@@ -474,31 +490,40 @@ beginfig(4);
 endfig with_projection parallel_z_y; 
 
 beginfig(5);
-  c3 := unit_circle scaled (6, 0, 6) rotated (90, 0);
+  c3 := unit_circle scaled (radius, 0, radius) rotated (90, 0);
   draw c3;
-  draw (-6, 0) -- (6, 0);
-  draw (0, -6) -- (0, 6);
+  draw (-radius, 0) -- (radius, 0);
+  draw (0, -radius) -- (0, radius);
 
-  j := 0;
+  j := 10;
+
+  numeric height[];
 
   for i = 11.25 step 11.25 until 78.75:
-     p36 := (6, 0);
+     p36 := (radius, 0);
      rotate p36 (0, 0, i);
      p37 := (0, ypart p36);
      draw p37 -- p36;
+     height[j] := ypart p36;
      b[j] := magnitude (p36 - p37);
-     show b[j];
      message "b[" & decimal j & "], (magnitude (p36 - p37)):";
      show b[j];
      u := "$" & decimal i & "^\circ$";
+     c[j] := unit_circle scaled (b[j], 0, b[j]) shifted (0, ypart p36);
+     a[j] := circumference c[j] / 16;
+     message "a[" & decimal j & "] (circumference of c[" & decimal j & "] divided by 16):";
+     show a[j];
+     message "height[" & decimal j & "] (height of c[" & decimal j & "]):";
+     show height[j];
+     draw c[j] with_color red;
      dotlabel.rt(u, p36);
      draw origin -- p36;
      u := decimal b[j];
      dotlabel.bot(u, mediate(p36, p37, .5));
-     j := j + 1;
+     j += 1;
   endfor;
 
-pause;
+%pause;
 
   % p36 := (3, 0);
   % rotate p36 (0, 0, 22.5);
@@ -514,15 +539,81 @@ pause;
   % draw origin -- p36;
   % dotlabel.bot(u, mediate(p36, p37, .5));
 
-
-
 endfig with_projection parallel_x_y; 
 
 beginfig(6);
   numeric n[];
+  path edge[];
+  string str;
+
+  edge0 += ..;
+  edge1 += ..;
+  edge2 += ..;
+  edge3 += ..;
+  
   n0 := a2 / 8;
+  n1 := a2 / 32;
+  draw (-.5n0, 0) -- (.5n0, 0);
+  edge0 += (-.5n0, 0);
+  edge1 += (.5n0, 0);
+  edge2 += (-.5n0, 0);
+  edge3 += (.5n0, 0);
   draw (0, -.25a2) -- (0, .25a2);  %% Half of circumference
-  draw (-.5n0, 0) -- (.5n0, 0);  
+
+  label.urt("{\Largebf 6}", origin);
+  dotlabel.llft("(0, 0)",  origin);
+  dotlabel.rt("$0^\circ$", (.5n0, 0));
+
+  label("RA $247.5^\circ$", (-(.5n0 + 1), 0));
+  label("RA $292.5^\circ$", ((.5n0 + 1.5), 0));
+
+  j := 0;
+  
+  for i = 10 upto 16:
+    n2 := (i - 9) * n1;
+    edge0 += (-a[i], n2);
+    edge1 += (a[i], n2);
+    edge2 += (-a[i], -n2);
+    edge3 += (a[i], -n2);
+    draw (-a[i], n2) -- (a[i], n2);
+    draw (-a[i], -n2) -- (a[i], -n2);
+    j += 11.25;
+    str := "$" & decimal
+      j & "^\circ$";
+    dotlabel.rt(str, (a[i], n2));
+    dotlabel.rt(str, (a[i], -n2));
+  endfor;
+
+  edge0 += (0, .25a2);
+  edge1 += (0, .25a2);
+  edge2 += (0, -.25a2);
+  edge3 += (0, -.25a2);  
+
+  label.top("RA $270^\circ$", (0, .25a2));
+  label.bot("RA $270^\circ$", (0, -.25a2));
+  
+  draw edge0;
+  draw edge1;
+  draw edge2;
+  draw edge3;
+
+  a10 := circumference c1 / 8;
+  
+  p40 := (0, a3);
+  dotlabel.ulft("$p_{40}$", p40);
+  p41 := (-.5a10, ypart p40);
+  p42 := (.5a10, ypart p40);
+
+  dotlabel.lft("$p_{41}$", p41);
+  dotlabel.rt("$p_{42}$", p42);
+ 
+  draw p41 -- p42;
+
+  p43 := ((xpart p40 + a7), ypart p40);
+  draw p40 -- p43 with_color red with_pen pencircle scaled (3pt, 3pt, 3pt);
+  dotlabel.bot("$p_{43}$", p43);
+  label.top("Vega", p43);
+  
 endfig with_projection parallel_x_y; 
 
 verbatim_metapost "end";
