@@ -439,7 +439,10 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
    clear current_picture;
 
 %% *** (3) Draw spherical biangle
-
+%% Take this code out of the macro.
+%% Multiple stars must be plotted on each spherical biangle.
+%% LDF 2021.7.1.
+   
    edge0 += ..;
    edge1 += ..;
    edge2 += ..;
@@ -518,7 +521,13 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
   
 enddef;
 
-plot_star_on_sphere_development {3.5, vega};
+%plot_star_on_sphere_development {3.5, vega};  %% This works.
+
+%plot_star_on_sphere_development {3.5, arcturus}; %% This seems to work.
+
+plot_star_on_sphere_development {3.5, canopus}; %% This doesn't work.  It puts
+                                                %% the point for the star on the
+                                                %% upper half of the spherical biangle.
 
 beginfig(1);
   currentpicture := v0;
@@ -551,17 +560,6 @@ endfig with_projection parallel_x_y;
 verbatim_metapost "end";
   
 end;  
-
-
-
-  
-
-
-
-
-
-
-end;
 
 %% ** (2) *******************************************
 
