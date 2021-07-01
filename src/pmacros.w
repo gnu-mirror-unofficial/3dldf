@@ -776,7 +776,6 @@ Added this rule.
 @<Define rules@>=
 @=macro_call: macro_variable SEMI_COLON@>@/
 {
-
    macro_call_func(static_cast<Scanner_Node>(parameter),
                    static_cast<Id_Map_Entry_Node>(@=$1@>));
 
