@@ -53,40 +53,51 @@
 
 verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 
-numeric a[];
-numeric b[];
-numeric radius;
-numeric diameter;
-numeric m;
-numeric bi_ang[];
+macro plot_star;
 
-point p[];
-path  q[];
-circle c[];
-sphere s;
-picture v[];
-focus f;
-transform t[];
-string u;
+def plot_star {numeric radius, star S} :=
+  numeric a[];
+  numeric b[];
+  numeric diameter;
+  numeric m;
+  numeric bi_ang[];
+  sphere s;
+  point p[];
+  path  q[];
+  circle c[];
+  picture v[];
+  focus f;
+  transform t[];
+  string u;
 
-radius := 3.5;
-diameter := 2 * radius;
+  diameter := 2 * radius;
+  message "radius:"; 
+  show radius;
+  message "S:";
+  %show S;
+  %pause;
+  s := unit_sphere scaled (radius, radius, radius);
+  rotate s (0, 22.5);
+  %message "s (sphere):"; 
+  %show s;
+  draw s;  
 
-set f with_position (0, 20, -50) 
-       with_direction (0, 20, 10) with_distance 70; 
+  set f with_position (0, 20, -50) 
+    with_direction (0, 20, 10) with_distance 70; 
 
-%s := unit_sphere scaled (radius, radius, radius);
+  a0 := ra_decimal_degrees S;
+  message "RA decimal deg. of star S (a0):";
+  show a0;
+  
 
-set s with_divisions_vertical 8 with_divisions_horizontal 2 with_radius radius;
-rotate s (0, 22.5);
+enddef;
 
-draw s;
+plot_star {3.5, vega};
 
-%show sirius;
+  
+end;  
 
-a0 := ra_decimal_degrees vega;
-message "RA decimal deg. Vega (a0):";
-show a0;
+
 
 a1 := declination_decimal_degrees vega;
 message "Declination decimal deg. Vega (a1):";
@@ -469,6 +480,10 @@ v1 := currentpicture;
 
 %% !! START HERE:  LDF 2021.6.28.  Get star with rank 3!
 
+beginfig(7);
+  plot_star {3.5, vega};
+endfig with_projection parallel_x_y; 
+
 beginfig(1);
   currentpicture := v0;
   label("{\\bf Perspective Projection}", (0, -4));
@@ -616,7 +631,11 @@ beginfig(6);
   
 endfig with_projection parallel_x_y; 
 
+
+
 verbatim_metapost "end";
+
+end;
 
 %% ** (2) *******************************************
 
