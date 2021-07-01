@@ -72,9 +72,8 @@ Added this type declaration.
 @q ** (2) macro_definition --> DEF variable UNDECLARED untyped_parameter_list @>
 @q ** (2) typed_parameter_list  equate_or_assign.                             @> 
 
-@*1 \§macro definition> $\longrightarrow$ \.{DEF} \§symbolic token>
-\§untyped parameter list> \§typed parameter list> 
-\§equate or assign>.  
+@*1 \§macro definition> $\longrightarrow$ \.{DEF} \§variable> \.{UNDECLARED}
+\§untyped parameter list> \§typed parameter list> \§equate or assign>.  
 \initials{LDF 2004.12.30.}
 
 \LOG
@@ -95,7 +94,6 @@ Added this rule.
     DEBUG = false; /* |true| */
     if (DEBUG)
        {
-
            cerr_strm << thread_name << "*** Parser: `macro_definition --> "
                      << endl 
                      << "DEF variable UNDECLARED untyped_parameter_list "
@@ -162,7 +160,8 @@ Added this rule.
                    << "DEF variable UNDECLARED untyped_parameter_list "
                    << endl 
                    << "typed_parameter_list equate_or_assign':"
-                   << endl << "`Scanner_Type::add_entry() failed.  "
+                   << endl 
+                   << "`Scanner_Type::add_entry() failed.  "
                    << "Clearing `scanner_node->macro_untyped_parameter_vector' "
                    << endl 
                    << "and `scanner_node->macro_typed_parameter_vector', "
@@ -240,38 +239,37 @@ returning a non-zero value.
 @<Define rules@>=
 
          if (status != 0)
-            {     
+         {     
+             cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
+                       << "`macro_definition --> "
+                       << "DEF variable UNDECLARED equate_or_assign':"
+                       << endl << "`Scan_Parse::macro_definition_func()' failed, "
+                       << "returning " << status << "." 
+                       << endl 
+                       << "Clearing `scanner_node->macro_untyped_parameter_vector' "
+                       << "and `scanner_node->macro_typed_parameter_vector'"
+                       << endl 
+                       << "and will try to continue.";
 
-                cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
-                          << "`macro_definition --> "
-                          << "DEF variable UNDECLARED equate_or_assign':"
-                          << endl << "`Scan_Parse::macro_definition_func()' failed, "
-                          << "returning " << status << "." 
-                          << endl 
-                          << "Clearing `scanner_node->macro_untyped_parameter_vector' "
-                          << "and `scanner_node->macro_typed_parameter_vector'"
-                          << endl 
-                          << "and will try to continue.";
+             log_message(cerr_strm);
+             cerr_message(cerr_strm, error_stop_value);
+             cerr_strm.str("");
 
-                log_message(cerr_strm);
-                cerr_message(cerr_strm, error_stop_value);
-                cerr_strm.str("");
+             scanner_node->macro_untyped_parameter_vector.clear();
+             scanner_node->macro_typed_parameter_vector.clear();
 
-                scanner_node->macro_untyped_parameter_vector.clear();
-                scanner_node->macro_typed_parameter_vector.clear();
-
-                @=$$@> = static_cast<void*>(0);
+             @=$$@> = static_cast<void*>(0);
      
-            }  /* |if (status != 0)|  */
+         }  /* |if (status != 0)|  */
 
          else /* |status == 0|  */
-            {
-               scanner_node->macro_untyped_parameter_vector.clear();
-               scanner_node->macro_typed_parameter_vector.clear();
+         {
+            scanner_node->macro_untyped_parameter_vector.clear();
+            scanner_node->macro_typed_parameter_vector.clear();
 
-               @=$$@> = static_cast<void*>(0);
+            @=$$@> = static_cast<void*>(0);
 
-            }  /* |else| (|status == 0|)  */
+         }  /* |else| (|status == 0|)  */
 
       }  /* |else| (|entry != 0|)  */
 
@@ -298,24 +296,23 @@ Rewrote this rule.
 @=macro_definition: DEF macro_variable untyped_parameter_list@>@/
 @=typed_parameter_list equate_or_assign@>@/
 {
-
    @<Common declarations for rules@>@; 
 
  #if DEBUG_COMPILE
     DEBUG = false; /* |true| */
     if (DEBUG)
-       {
+    {
 
-           cerr_strm << thread_name << "*** Parser: `macro_definition --> "
-                     << endl 
-                     << "DEF macro_variable untyped_parameter_list "
-                     << endl 
-                     << "typed_parameter_list equate_or_assign'.";
+        cerr_strm << thread_name << "*** Parser: `macro_definition --> "
+                  << endl 
+                  << "DEF macro_variable untyped_parameter_list "
+                  << endl 
+                  << "typed_parameter_list equate_or_assign'.";
 
-           log_message(cerr_strm);
-           cerr_message(cerr_strm);
-           cerr_strm.str("");
-       }
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+    }
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ****** (6).@> 
@@ -323,41 +320,40 @@ Rewrote this rule.
    entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
    if (entry == static_cast<Id_Map_Entry_Node>(0))
-      {
+   {
+      cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
+                << "`macro_definition --> "
+                << endl 
+                << "DEF macro_variable untyped_parameter_list "
+                << endl 
+                << "typed_parameter_list equate_or_assign':"
+                << endl << "`Scanner_Type::add_entry() failed.  "
+                << "Clearing `scanner_node->macro_untyped_parameter_vector' "
+                << endl 
+                << "and `scanner_node->macro_typed_parameter_vector', "
+                << "setting `macro_definition' to 0, and will "
+                << "try to continue.";
 
-         cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
-                   << "`macro_definition --> "
-                   << endl 
-                   << "DEF macro_variable untyped_parameter_list "
-                   << endl 
-                   << "typed_parameter_list equate_or_assign':"
-                   << endl << "`Scanner_Type::add_entry() failed.  "
-                   << "Clearing `scanner_node->macro_untyped_parameter_vector' "
-                   << endl 
-                   << "and `scanner_node->macro_typed_parameter_vector', "
-                   << "setting `macro_definition' to 0, and will "
-                   << "try to continue.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
+      
+      scanner_node->macro_untyped_parameter_vector.clear();
+      scanner_node->macro_typed_parameter_vector.clear();
 
-         log_message(cerr_strm);
-         cerr_message(cerr_strm, error_stop_value);
-         cerr_strm.str("");
-         
-         scanner_node->macro_untyped_parameter_vector.clear();
-         scanner_node->macro_typed_parameter_vector.clear();
+      @=$$@> = static_cast<void*>(0);         
 
-         @=$$@> = static_cast<void*>(0);         
-
-      }  /* |if (entry == 0)|  */
+   }  /* |if (entry == 0)|  */
 
 @q ****** (6).@> 
 
    else /* |entry != 0|  */
-      {
+   {
 
 @q ******* (7) @> 
 
          if (entry->object == static_cast<void*>(0))
-            {
+         {
 
                Definition_Info_Node d;
 
@@ -396,7 +392,7 @@ Rewrote this rule.
 
                 entry->object = static_cast<void*>(d); 
 
-            }  /* |if (entry->object == 0)|  */
+         }  /* |if (entry->object == 0)|  */
 
 @q ******* (7) Call |Scan_Parse::macro_definition_func()|.@> 
 
@@ -406,12 +402,10 @@ Rewrote this rule.
 @<Define rules@>=
 
          try  
-            {
-
-               status = macro_definition_func(scanner_node,
-                                              entry); 
-
-            }
+         {
+            status = macro_definition_func(scanner_node,
+                                           entry); 
+         }
 
 @q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
 @q ******* (7) throwing |bad_alloc|.                                          @>  
@@ -423,28 +417,28 @@ throwing |bad_alloc|.
 @<Define rules@>=
 
          catch (bad_alloc)
-            {
+         {
 
-                cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
-                          << "`macro_definition --> "
-                          << "DEF macro_variable equate_or_assign':"
-                          << endl << "`Scan_Parse::macro_definition_func()' failed, "
-                          << "throwing `bad_alloc'."
-                          << endl  
-                          << "Clearing `scanner_node->macro_untyped_parameter_vector' "
-                          << "and `scanner_node->macro_typed_parameter_vector'"
-                          << endl << "and rethrowing `bad_alloc'.";
+             cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
+                       << "`macro_definition --> "
+                       << "DEF macro_variable equate_or_assign':"
+                       << endl << "`Scan_Parse::macro_definition_func()' failed, "
+                       << "throwing `bad_alloc'."
+                       << endl  
+                       << "Clearing `scanner_node->macro_untyped_parameter_vector' "
+                       << "and `scanner_node->macro_typed_parameter_vector'"
+                       << endl << "and rethrowing `bad_alloc'.";
 
-                log_message(cerr_strm);
-                cerr_message(cerr_strm, error_stop_value);
-                cerr_strm.str("");
+             log_message(cerr_strm);
+             cerr_message(cerr_strm, error_stop_value);
+             cerr_strm.str("");
 
-                scanner_node->macro_untyped_parameter_vector.clear();
-                scanner_node->macro_typed_parameter_vector.clear();
+             scanner_node->macro_untyped_parameter_vector.clear();
+             scanner_node->macro_typed_parameter_vector.clear();
 
-                throw;
+             throw;
 
-            }  /* |catch (bad_alloc)|  */
+         }  /* |catch (bad_alloc)|  */
 
 @q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
 @q ******* (7) returning a non-zero value.                                    @>  
@@ -456,41 +450,41 @@ returning a non-zero value.
 @<Define rules@>=
 
          if (status != 0)
-            {     
+         {     
 
-                cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
-                          << "`macro_definition --> "
-                          << "DEF macro_variable equate_or_assign':"
-                          << endl << "`Scan_Parse::macro_definition_func()' failed, "
-                          << "returning " << status << "." 
-                          << endl 
-                          << "Clearing `scanner_node->macro_untyped_parameter_vector' "
-                          << "and `scanner_node->macro_typed_parameter_vector'"
-                          << endl 
-                          << "and will try to continue.";
+             cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
+                       << "`macro_definition --> "
+                       << "DEF macro_variable equate_or_assign':"
+                       << endl << "`Scan_Parse::macro_definition_func()' failed, "
+                       << "returning " << status << "." 
+                       << endl 
+                       << "Clearing `scanner_node->macro_untyped_parameter_vector' "
+                       << "and `scanner_node->macro_typed_parameter_vector'"
+                       << endl 
+                       << "and will try to continue.";
 
-                log_message(cerr_strm);
-                cerr_message(cerr_strm, error_stop_value);
-                cerr_strm.str("");
+             log_message(cerr_strm);
+             cerr_message(cerr_strm, error_stop_value);
+             cerr_strm.str("");
 
-                scanner_node->macro_untyped_parameter_vector.clear();
-                scanner_node->macro_typed_parameter_vector.clear();
+             scanner_node->macro_untyped_parameter_vector.clear();
+             scanner_node->macro_typed_parameter_vector.clear();
 
-                @=$$@> = static_cast<void*>(0);
+             @=$$@> = static_cast<void*>(0);
      
-            }  /* |if (status != 0)|  */
+         }  /* |if (status != 0)|  */
 
          else /* |status == 0|  */
-            {
+         {
 
 
 
-               scanner_node->macro_untyped_parameter_vector.clear();
-               scanner_node->macro_typed_parameter_vector.clear();
+            scanner_node->macro_untyped_parameter_vector.clear();
+            scanner_node->macro_typed_parameter_vector.clear();
 
-               @=$$@> = static_cast<void*>(0);
+            @=$$@> = static_cast<void*>(0);
 
-            }  /* |else| (|status == 0|)  */
+         }  /* |else| (|status == 0|)  */
 
       }  /* |else| (|entry != 0|)  */
 
@@ -769,8 +763,7 @@ Changed |defun_call| and |defun_variable| to
 
 @q ** (2) macro_call --> macro_variable SEMI_COLON@> 
 
-@*1 \§macro call> $\longrightarrow$  \§macro variable> 
-\.{SEMI\_COLON}.
+@*1 \§macro call> $\longrightarrow$  \§macro variable> \.{SEMI\_COLON}.
 \initials{LDF 2005.01.03.}
 
 \LOG
@@ -793,8 +786,7 @@ Added this rule.
 
 @q ** (2) macro_call --> macro_variable LEFT_BRACE@> 
 
-@*1 \§macro call> $\longrightarrow$  \§macro variable> 
-\.{LEFT\_BRACE}.
+@*1 \§macro call> $\longrightarrow$  \§macro variable> \.{LEFT\_BRACE}.
 \initials{LDF 2005.01.03.}
 
 \LOG
