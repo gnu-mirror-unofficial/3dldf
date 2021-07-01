@@ -394,7 +394,7 @@ Rewrote this rule.
 
          }  /* |if (entry->object == 0)|  */
 
-@q ******* (7) Call |Scan_Parse::macro_definition_func()|.@> 
+@q ******* (7) Call |Scan_Parse::macro_definition_func|.@> 
 
 @ Call |Scan_Parse::macro_definition_func()|.
 \initials{LDF 2005.01.03.}
