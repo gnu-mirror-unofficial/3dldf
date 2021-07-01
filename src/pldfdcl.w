@@ -5408,6 +5408,24 @@ Added this rule.
 
 };
 
+@q ** (2) any_declarator --> GLYPH_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{GLYPH\_DECLARATOR}.
+\initials{LDF 2021.7.1.}
+
+\LOG
+\initials{LDF 2021.7.1.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: STAR_DECLARATOR@>
+{
+
+   @=$$@> = STAR_DECLARATOR;
+
+};
+
+
 @q ** (2) any_declarator --> PLANE_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{PLANE\_DECLARATOR}.
 \initials{LDF 2005.10.30.}
@@ -5507,6 +5525,23 @@ Added this rule.
 {
 
    @=$$@> = GLYPH_VECTOR_DECLARATOR;
+
+};
+
+@q ** (2) any_declarator --> STAR_VECTOR_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{STAR\_VECTOR\_DECLARATOR}.
+\initials{LDF 2021.7.1.}
+
+\LOG
+\initials{LDF 2021.7.1.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: STAR_VECTOR_DECLARATOR@>
+{
+
+   @=$$@> = STAR_VECTOR_DECLARATOR;
 
 };
 
