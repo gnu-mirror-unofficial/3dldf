@@ -53,20 +53,196 @@
 
 verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 
-macro plot_star_on_sphere_development;
+%% *** (3) Draw spherical biangle
+%% Take this code out of the macro.
+%% Multiple stars must be plotted on each spherical biangle.
+%% LDF 2021.7.1.
 
 picture v[];
 picture bi_ang_pict[];
-focus f;
+circle c[];
+numeric a[];
+numeric radius;
+path edge[];
+numeric n[];
+string u[];
+bool_point_vector bpv;
+string str;
+point p[];
 
-set f with_position (0, 20, -50) 
-  with_direction (0, 20, 10) with_distance 70; 
+radius := 3.5;
+c0 := unit_circle scaled (radius, 0, radius) rotated (90, 0);
+a2 := circumference c0;   %% a2 == Circumference of horizontal great circle.
+
+draw c0 with_color red;
+
+p0 := (-radius, 0);
+p1 := (radius, 0);
+
+draw p0 -- p1;  %% Horizontal line through origin.
+
+dotlabel.lft("$p_0$", p0);
+dotlabel.rt("$p_1$", p1);
+
+p2 := (0, -radius);
+p3 := (0, radius);
+
+draw p2 -- p3;  %% Vertical line through origin.
+
+dotlabel.lft("$p_0$", p0);
+dotlabel.rt("$p_1$", p1);
+
+
+v0 := current_picture;
+clear current_picture;
+
+%% **** (4)
+
+%draw c0 with_color red;
+
+edge0 := null_path; 
+edge1 := null_path; 
+edge2 := null_path;  
+edge3 := null_path;  
+
+edge0 += ..;
+edge1 += ..;
+edge2 += ..;
+edge3 += ..;
+
+n0 := a2 / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
+n1 := a2 / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
+               %% increments of 11.25 deg.
+
+p20 := (-.5n0, 0);
+p21 := (.5n0, 0);
+
+draw p20 -- p21;               %% Horizontal line through origin (0 deg.), i.e., midline of spherical biangle.
+
+dotlabel.lft("$p_{20}$", p20);
+dotlabel.rt("$p_{21}$", p21);
+
+edge0 += p20;
+edge1 += p21;
+edge2 += p20;
+edge3 += p21;
+
+
+p22 := (0, -.25a2);
+p23 := (0, .25a2);
+
+dotlabel.bot("$p_{22}$", p22);
+dotlabel.top("$p_{23}$", p23);
+
+draw p22 -- p23;  %% Vertical line through origin---Half of circumference.
+
+v1 := current_picture;
+clear current_picture;
+
+beginfig(1);
+current_picture := v0;
+endfig with_projection parallel_x_y; 
+
+beginfig(2);
+current_picture := v1;
+endfig with_projection parallel_x_y; 
+verbatim_metapost "end";
+  
+end;  
+
+
+
+
+if bi_ang1 == -1: %% Star is not on border between 2 spherical biangles.
+
+label.urt("{\Largebf " & decimal k & "}", origin);
+dotlabel.llft("(0, 0)",  origin);
+dotlabel.rt("$0^\circ$", (.5n0, 0));
+
+label("RA $" & decimal min_edge_angle & "^\circ$", (-(.5n0 + 1), 0));
+label("RA $" & decimal max_edge_angle & "^\circ$", ((.5n0 + 1.5), 0));
+
+j := 0;
+m := 0;
+j := 11.25; 
+
+for i = 10 step 1 until 18:
+message "i:"; 
+show i;
+n2 := m * n1;          %% n1 := 1/32 of circumference of red circle
+edge0 += (-a[i], n2);  %% a[i] is 1/16 of the circumference of each horizontal circle
+edge1 += (a[i], n2);
+edge2 += (-a[i], -n2);
+edge3 += (a[i], -n2);
+%draw (-a[i], n2) -- (a[i], n2) with_color red;
+%draw (-a[i], -n2) -- (a[i], -n2) with_color red;
+str := "$" & decimal j & "^\circ$";
+dotlabel.rt(str, (a[i], n2));
+dotlabel.rt(str, (a[i], -n2));
+j += 11.25;
+m += 1;
+endfor;
+
+%pause;
+
+edge0 += (0, .25a2);
+edge1 += (0, .25a2);
+edge2 += (0, -.25a2);
+edge3 += (0, -.25a2);  
+
+label.top("RA $" & decimal middle_angle & "^\circ$", (0, .25a2));
+label.bot("RA $" & decimal middle_angle & "^\circ$", (0, -.25a2));
+
+draw edge0;
+draw edge1;
+draw edge2;
+draw edge3;
+
+a10 := circumference c1 / 8;
+
+p50 := (0, a3);
+dotlabel.ulft("$p_{50}$", p50);
+p51 := (-.5a10, ypart p50);
+p52 := (.5a10, ypart p50);
+
+dotlabel.lft("$p_{51}$", p51);
+dotlabel.rt("$p_{52}$", p52);
+
+draw p51 -- p52;
+
+%if a0
+p53 := ((xpart p50 + a7), ypart p50);
+draw p50 -- p53 with_color red with_pen pencircle scaled (3pt, 3pt, 3pt);
+dotlabel.bot("$p_{53}$", p53);
+label.rt("\vbox{\hbox{{\bf " & u0 & "}}\hbox{RA $" & decimal a0 & "^\circ$}\hbox{Decl.~$" & decimal a1 & "^\circ$}}",
+(.5n0 + 1.5cm, ypart p53));
+
+bi_ang_pict[k] := current_picture;
+clear current_picture;
+
+
+else: %% bi_ang1 <> -1  %% This case requires special handling.
+
+drawdot origin with_pen pencircle scaled (3pt, 3pt, 3pt);
+fi;
+
+
+
+v2 := current_picture;   
+
+
+
+
+
 
 
 def plot_star_on_sphere_development {numeric radius, star S} :=
   numeric a[];
   numeric b[];
   numeric diameter;
+  numeric i;
+  numeric j;
+  numeric k;
   numeric m;
   numeric n[];
   numeric bi_ang[];
@@ -411,132 +587,40 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
    draw (0, -radius) -- (0, radius);
 
    j := 10;
+   k := 36;
 
    for i = 11.25 step 11.25 until 78.75:
-     p36 := (radius, 0);
-     rotate p36 (0, 0, i);
-     p37 := (0, ypart p36);
-     draw p37 -- p36;
-     height[j] := ypart p36;
-     b[j] := magnitude (p36 - p37);
-     message "b[" & decimal j & "], (magnitude (p36 - p37)):";
+     p[k] := (radius, 0);
+     rotate p[k] (0, 0, i);
+     p[k + 1] := (0, ypart p[k]);
+     draw p[k + 1] -- p[k];
+     height[j] := ypart p[k];
+     b[j] := magnitude (p[k] - p[k + 1]);
+     message "b[" & decimal j & "], (magnitude (p[k] - p[k + 1])):";
      show b[j];
      u1 := "$" & decimal i & "^\circ$";
-     c[j] := unit_circle scaled (b[j], 0, b[j]) shifted (0, ypart p36);
+     c[j] := unit_circle scaled (b[j], 0, b[j]) shifted (0, ypart p[k]);
      a[j] := circumference c[j] / 16;
      message "a[" & decimal j & "] (circumference of c[" & decimal j & "] divided by 16):";
      show a[j];
      message "height[" & decimal j & "] (height of c[" & decimal j & "]):";
      show height[j];
      draw c[j] with_color red;
-     dotlabel.rt(u1, p36);
-     draw origin -- p36;
+     dotlabel.rt(u1, p[k]);
+     draw origin -- p[k];
      u1 := decimal b[j];
-     dotlabel.bot(u1, mediate(p36, p37, .5));
+     dotlabel.bot(u1, mediate(p[k], p[k + 1], .5));
+     message "k:"; 
+     show k;
+     message "k + 1:"; 
+     show (k + 1);
      j += 1;
+     k += 2;
    endfor;
 
    v1 := current_picture;
    clear current_picture;
 
-%% *** (3) Draw spherical biangle
-%% Take this code out of the macro.
-%% Multiple stars must be plotted on each spherical biangle.
-%% LDF 2021.7.1.
-
-   for ii = 0 upto 7:
-     clear current_picture;
-
-     edge0 := null_path; 
-     edge1 := null_path; 
-     edge2 := null_path;  
-     edge3 := null_path;  
-     
-     edge0 += ..;
-     edge1 += ..;
-     edge2 += ..;
-     edge3 += ..;
-     
-     n0 := a2 / 8;
-     n1 := a2 / 32;
-     draw (-.5n0, 0) -- (.5n0, 0);
-     edge0 += (-.5n0, 0);
-     edge1 += (.5n0, 0);
-     edge2 += (-.5n0, 0);
-     edge3 += (.5n0, 0);
-     draw (0, -.25a2) -- (0, .25a2);  %% Half of circumference
-
-     if bi_ang1 == -1:
-
-       label.urt("{\Largebf " & decimal ii & "}", origin);
-       dotlabel.llft("(0, 0)",  origin);
-       dotlabel.rt("$0^\circ$", (.5n0, 0));
-
-       label("RA $" & decimal min_edge_angle & "^\circ$", (-(.5n0 + 1), 0));
-       label("RA $" & decimal max_edge_angle & "^\circ$", ((.5n0 + 1.5), 0));
-
-       j := 0;
-       
-       for i = 10 upto 16:
-      	 n2 := (i - 9) * n1;
-      	 edge0 += (-a[i], n2);
-      	 edge1 += (a[i], n2);
-      	 edge2 += (-a[i], -n2);
-      	 edge3 += (a[i], -n2);
-      	 draw (-a[i], n2) -- (a[i], n2);
-      	 draw (-a[i], -n2) -- (a[i], -n2);
-      	 j += 11.25;
-      	 str := "$" & decimal j & "^\circ$";
-      	 dotlabel.rt(str, (a[i], n2));
-      	 dotlabel.rt(str, (a[i], -n2));
-       endfor;
-
-       edge0 += (0, .25a2);
-       edge1 += (0, .25a2);
-       edge2 += (0, -.25a2);
-       edge3 += (0, -.25a2);  
-
-       label.top("RA $" & decimal middle_angle & "^\circ$", (0, .25a2));
-       label.bot("RA $" & decimal middle_angle & "^\circ$", (0, -.25a2));
-       
-       draw edge0;
-       draw edge1;
-       draw edge2;
-       draw edge3;
-
-       a10 := circumference c1 / 8;
-       
-       p40 := (0, a3);
-       dotlabel.ulft("$p_{40}$", p40);
-       p41 := (-.5a10, ypart p40);
-       p42 := (.5a10, ypart p40);
-
-       dotlabel.lft("$p_{41}$", p41);
-       dotlabel.rt("$p_{42}$", p42);
-       
-       draw p41 -- p42;
-
-        %if a0
-       p43 := ((xpart p40 + a7), ypart p40);
-       draw p40 -- p43 with_color red with_pen pencircle scaled (3pt, 3pt, 3pt);
-       dotlabel.bot("$p_{43}$", p43);
-       label.rt("\vbox{\hbox{{\bf " & u0 & "}}\hbox{RA $" & decimal a0 & "^\circ$}\hbox{Decl.~$" & decimal a1 & "^\circ$}}",
-      	   (.5n0 + 1.5cm, ypart p43));
-
-       bi_ang_pict[ii] := current_picture;
-       clear current_picture;
-
-       
-     else: %% bi_ang1 <> -1  %% This case requires special handling.
-       
-       drawdot origin with_pen pencircle scaled (3pt, 3pt, 3pt);
-     fi;
-
-   endfor;
-   
-   v2 := current_picture;   
-   
-enddef;
 
 %plot_star_on_sphere_development {3.5, vega};  %% This works.
 
@@ -600,12 +684,15 @@ end;
 
 %% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
 
+
 %% * (1) Local variables for Emacs.
 
 %% Local Variables:
-%% mode:Metafont
+%% mode:Metapost
 %% eval:(outline-minor-mode t)
 %% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
 %% outline-regexp:"%% [*\f]+"
-%% eval:(setq font-lock-mode nil)
 %% End:
+
+
