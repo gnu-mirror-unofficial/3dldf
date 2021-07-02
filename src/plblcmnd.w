@@ -63,7 +63,7 @@ Added this type declaration.
 @q **** (4) label_command --> label_or_dotlabel label_suffix @>
 @q **** (4) LEFT_PARENTHESIS string_expression               @>
 @q **** (4) COMMA point_expression RIGHT_PARENTHESIS         @>
-@q **** (4) transformer_optional                        @>   
+@q **** (4) transformer_optional                             @>   
 @q **** (4) with_text_color_optional with_dot_color_optional @>   
 @q **** (4) on_picture_optional                              @>
 
