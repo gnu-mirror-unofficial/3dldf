@@ -56,6 +56,7 @@ verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 macro plot_star_on_sphere_development;
 
 picture v[];
+picture bi_ang_pict[];
 focus f;
 
 set f with_position (0, 20, -50) 
@@ -442,96 +443,115 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
 %% Take this code out of the macro.
 %% Multiple stars must be plotted on each spherical biangle.
 %% LDF 2021.7.1.
+
+   for ii = 0 upto 7:
+     clear current_picture;
+
+     edge0 := null_path; 
+     edge1 := null_path; 
+     edge2 := null_path;  
+     edge3 := null_path;  
+     
+     edge0 += ..;
+     edge1 += ..;
+     edge2 += ..;
+     edge3 += ..;
+     
+     n0 := a2 / 8;
+     n1 := a2 / 32;
+     draw (-.5n0, 0) -- (.5n0, 0);
+     edge0 += (-.5n0, 0);
+     edge1 += (.5n0, 0);
+     edge2 += (-.5n0, 0);
+     edge3 += (.5n0, 0);
+     draw (0, -.25a2) -- (0, .25a2);  %% Half of circumference
+
+     if bi_ang1 == -1:
+
+       label.urt("{\Largebf " & decimal ii & "}", origin);
+       dotlabel.llft("(0, 0)",  origin);
+       dotlabel.rt("$0^\circ$", (.5n0, 0));
+
+       label("RA $" & decimal min_edge_angle & "^\circ$", (-(.5n0 + 1), 0));
+       label("RA $" & decimal max_edge_angle & "^\circ$", ((.5n0 + 1.5), 0));
+
+       j := 0;
+       
+       for i = 10 upto 16:
+      	 n2 := (i - 9) * n1;
+      	 edge0 += (-a[i], n2);
+      	 edge1 += (a[i], n2);
+      	 edge2 += (-a[i], -n2);
+      	 edge3 += (a[i], -n2);
+      	 draw (-a[i], n2) -- (a[i], n2);
+      	 draw (-a[i], -n2) -- (a[i], -n2);
+      	 j += 11.25;
+      	 str := "$" & decimal j & "^\circ$";
+      	 dotlabel.rt(str, (a[i], n2));
+      	 dotlabel.rt(str, (a[i], -n2));
+       endfor;
+
+       edge0 += (0, .25a2);
+       edge1 += (0, .25a2);
+       edge2 += (0, -.25a2);
+       edge3 += (0, -.25a2);  
+
+       label.top("RA $" & decimal middle_angle & "^\circ$", (0, .25a2));
+       label.bot("RA $" & decimal middle_angle & "^\circ$", (0, -.25a2));
+       
+       draw edge0;
+       draw edge1;
+       draw edge2;
+       draw edge3;
+
+       a10 := circumference c1 / 8;
+       
+       p40 := (0, a3);
+       dotlabel.ulft("$p_{40}$", p40);
+       p41 := (-.5a10, ypart p40);
+       p42 := (.5a10, ypart p40);
+
+       dotlabel.lft("$p_{41}$", p41);
+       dotlabel.rt("$p_{42}$", p42);
+       
+       draw p41 -- p42;
+
+        %if a0
+       p43 := ((xpart p40 + a7), ypart p40);
+       draw p40 -- p43 with_color red with_pen pencircle scaled (3pt, 3pt, 3pt);
+       dotlabel.bot("$p_{43}$", p43);
+       label.rt("\vbox{\hbox{{\bf " & u0 & "}}\hbox{RA $" & decimal a0 & "^\circ$}\hbox{Decl.~$" & decimal a1 & "^\circ$}}",
+      	   (.5n0 + 1.5cm, ypart p43));
+
+       bi_ang_pict[ii] := current_picture;
+       clear current_picture;
+
+       
+     else: %% bi_ang1 <> -1  %% This case requires special handling.
+       
+       drawdot origin with_pen pencircle scaled (3pt, 3pt, 3pt);
+     fi;
+
+   endfor;
    
-   edge0 += ..;
-   edge1 += ..;
-   edge2 += ..;
-   edge3 += ..;
-  
-   n0 := a2 / 8;
-   n1 := a2 / 32;
-   draw (-.5n0, 0) -- (.5n0, 0);
-   edge0 += (-.5n0, 0);
-   edge1 += (.5n0, 0);
-   edge2 += (-.5n0, 0);
-   edge3 += (.5n0, 0);
-   draw (0, -.25a2) -- (0, .25a2);  %% Half of circumference
-
-   if bi_ang1 == -1:
-
-     label.urt("{\Largebf " & decimal bi_ang0 & "}", origin);
-     dotlabel.llft("(0, 0)",  origin);
-     dotlabel.rt("$0^\circ$", (.5n0, 0));
-
-     label("RA $" & decimal min_edge_angle & "^\circ$", (-(.5n0 + 1), 0));
-     label("RA $" & decimal max_edge_angle & "^\circ$", ((.5n0 + 1.5), 0));
-     
-     j := 0;
-     
-     for i = 10 upto 16:
-       n2 := (i - 9) * n1;
-       edge0 += (-a[i], n2);
-       edge1 += (a[i], n2);
-       edge2 += (-a[i], -n2);
-       edge3 += (a[i], -n2);
-       draw (-a[i], n2) -- (a[i], n2);
-       draw (-a[i], -n2) -- (a[i], -n2);
-       j += 11.25;
-       str := "$" & decimal j & "^\circ$";
-       dotlabel.rt(str, (a[i], n2));
-       dotlabel.rt(str, (a[i], -n2));
-     endfor;
-
-     edge0 += (0, .25a2);
-     edge1 += (0, .25a2);
-     edge2 += (0, -.25a2);
-     edge3 += (0, -.25a2);  
-
-     label.top("RA $" & decimal middle_angle & "^\circ$", (0, .25a2));
-     label.bot("RA $" & decimal middle_angle & "^\circ$", (0, -.25a2));
-     
-     draw edge0;
-     draw edge1;
-     draw edge2;
-     draw edge3;
-
-     a10 := circumference c1 / 8;
-     
-     p40 := (0, a3);
-     dotlabel.ulft("$p_{40}$", p40);
-     p41 := (-.5a10, ypart p40);
-     p42 := (.5a10, ypart p40);
-
-     dotlabel.lft("$p_{41}$", p41);
-     dotlabel.rt("$p_{42}$", p42);
-     
-     draw p41 -- p42;
-
-     p43 := ((xpart p40 + a7), ypart p40);
-     draw p40 -- p43 with_color red with_pen pencircle scaled (3pt, 3pt, 3pt);
-     dotlabel.bot("$p_{43}$", p43);
-     label.top(u0, p43);
-
-   else: %% bi_ang1 <> -1  %% This case requires special handling.
-     
-     drawdot origin with_pen pencircle scaled (3pt, 3pt, 3pt);
-   fi;
-
-  v2 := current_picture;   
-  
+   v2 := current_picture;   
+   
 enddef;
 
 %plot_star_on_sphere_development {3.5, vega};  %% This works.
 
-%plot_star_on_sphere_development {3.5, arcturus}; %% This seems to work.
+plot_star_on_sphere_development {3.5, arcturus}; %% This doesn't work.  The point for the star
+                                                 %% seems to lie on the wrong side.
 
-plot_star_on_sphere_development {3.5, canopus}; %% This doesn't work.  It puts
+%plot_star_on_sphere_development {3.5, canopus}; %% This doesn't work.  It puts
                                                 %% the point for the star on the
                                                 %% upper half of the spherical biangle.
 
 beginfig(1);
-  currentpicture := v0;
+  v3 := v0;
+  rotate v3 (0, 70);
   label("{\\bf Perspective Projection}", (0, -4.5));
+  current_picture := v3;
 endfig with_focus f;
 
 beginfig(2);
@@ -553,8 +573,12 @@ beginfig(5);
   currentpicture := v1;
 endfig with_projection parallel_x_y; 
 
+
+
 beginfig(6);
-  current_picture := v2;
+  current_picture := bi_ang_pict[1];
+%  shift bi_ang_pict[1] (6cm, 0);
+%  current_picture += bi_ang_pict[1];
 endfig with_projection parallel_x_y; 
 
 verbatim_metapost "end";
