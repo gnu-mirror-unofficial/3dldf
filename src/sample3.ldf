@@ -62,96 +62,201 @@ picture v[];
 picture bi_ang_pict[];
 circle c[];
 numeric a[];
-numeric radius;
+numeric radius[];
+numeric circum[];
 path edge[];
 numeric n[];
 string u[];
 bool_point_vector bpv;
 string str;
 point p[];
+numeric biangle_width[];
 
-radius := 3.5;
-c0 := unit_circle scaled (radius, 0, radius) rotated (90, 0);
-a2 := circumference c0;   %% a2 == Circumference of horizontal great circle.
+macro get_spherical_biangle;
 
-draw c0 with_color red;
+def get_spherical_biangle {numeric rad} =
 
-p0 := (-radius, 0);
-p1 := (radius, 0);
+  radius0 := rad;
+  c0 := unit_circle scaled (radius0, 0, radius0) rotated (90, 0);
+  a2 := circumference c0;   %% a2 == Circumference of horizontal great circle.
 
-draw p0 -- p1;  %% Horizontal line through origin.
+  draw c0 with_color red;
 
-dotlabel.lft("$p_0$", p0);
-dotlabel.rt("$p_1$", p1);
+  p0 := (-radius0, 0);
+  p1 := (radius0, 0);
 
-p2 := (0, -radius);
-p3 := (0, radius);
+%message "magnitude (p1 - p0) (diameter of c0):";
+%show magnitude (p1 - p0);
 
-draw p2 -- p3;  %% Vertical line through origin.
+  draw p0 -- p1;  %% Horizontal line through origin.
 
-dotlabel.lft("$p_0$", p0);
-dotlabel.rt("$p_1$", p1);
+  dotlabel.lft("$p_0$", p0);
+  dotlabel.rt("$p_1$", p1);
 
+  p2 := (0, -radius0);
+  p3 := (0, radius0);
 
-v0 := current_picture;
-clear current_picture;
+  draw p2 -- p3;  %% Vertical line through origin.
+
+  dotlabel.bot("$p_2$", p2);
+  dotlabel.top("$p_3$", p3);
+
+  j := 4;
+  for i = 11.25 step 11.25 until 78.75:
+    p[j] := p1 rotated (0, 0, i);
+    p[j + 1] := (0, ypart p[j]);
+    draw p[j + 1] -- p[j];
+    dotlabel.rt("$p_{" & decimal j & "}$", p[j]);
+    radius[j] := magnitude(p[j] - p[j + 1]);
+    c[j] := unit_circle scaled (radius[j], 0, radius[j]);
+    circum[j] := circumference c[j];
+    biangle_width[j] := circum[j] / 8;
+    message "biangle_width[" & decimal j & "]:";
+    show biangle_width[j];
+    j += 2;
+  endfor;
+
+  v0 := current_picture;
+  clear current_picture;
 
 %% **** (4)
 
 %draw c0 with_color red;
 
-edge0 := null_path; 
-edge1 := null_path; 
-edge2 := null_path;  
-edge3 := null_path;  
+  edge0 := null_path; 
+  edge1 := null_path; 
+  edge2 := null_path;  
+  edge3 := null_path;  
 
-edge0 += ..;
-edge1 += ..;
-edge2 += ..;
-edge3 += ..;
+  edge0 += ..;
+  edge1 += ..;
+  edge2 += ..;
+  edge3 += ..;
 
-n0 := a2 / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
-n1 := a2 / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
-               %% increments of 11.25 deg.
+  n0 := a2 / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
+  n1 := a2 / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
+%% increments of 11.25 deg.
 
-p20 := (-.5n0, 0);
-p21 := (.5n0, 0);
+  p20 := (-.5n0, 0);
+  p21 := (.5n0, 0);
 
-draw p20 -- p21;               %% Horizontal line through origin (0 deg.), i.e., midline of spherical biangle.
+  draw p20 -- p21;               %% Horizontal line through origin (0 deg.), i.e., midline of spherical biangle.
+  label.rt("$0^\circ$", p21 shifted (1cm, 0));
 
-dotlabel.lft("$p_{20}$", p20);
-dotlabel.rt("$p_{21}$", p21);
+  dotlabel.lft("$p_{20}$", p20);
+  dotlabel.rt("$p_{21}$", p21);
 
-edge0 += p20;
-edge1 += p21;
-edge2 += p20;
-edge3 += p21;
+  edge0 += p20;
+  edge1 += p21;
+  edge2 += p20;
+  edge3 += p21;
 
 
-p22 := (0, -.25a2);
-p23 := (0, .25a2);
+  p22 := (0, -.25a2);
+  p23 := (0, .25a2);
 
-dotlabel.bot("$p_{22}$", p22);
-dotlabel.top("$p_{23}$", p23);
+  dotlabel.bot("$p_{22}$", p22);
+  dotlabel.top("$p_{23}$", p23);
+  label("$90^\circ$", p22 shifted (0, -.75cm));
+  label("$90^\circ$", p23 shifted (0, .75cm));
 
-draw p22 -- p23;  %% Vertical line through origin---Half of circumference.
+  draw p22 -- p23;  %% Vertical line through origin---Half of circumference.
 
-v1 := current_picture;
-clear current_picture;
+  j := 24;
+  k := 4;
+  for i = 1 step 1 until 7:
+    p[j]     := (-.5biangle_width[k], (i * n1));
+    p[j + 1] := (.5biangle_width[k], (i * n1));
+    draw p[j] -- p[j + 1];
+    dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
+    dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
+    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
+    edge0 += p[j];
+    edge1 += p[j + 1];
+    j += 2;
+    k += 2;
+  endfor;
+
+  j := 1;
+
+  for i := 24 step 2 until 37:
+    p[20 + i] := p[i] rotated (180, 0);
+    p[20 + 1 + i] := p[i + 1] rotated (180, 0);
+    dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
+    dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
+    draw p[20 + i] -- p[20 + i + 1];
+    label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
+    j += 1;
+  endfor;
+
+  dotlabel.lft("$p_{24}$", p24);
+  dotlabel.rt("$p_{25}$", p25);
+
+  edge0 += p23;
+  edge1 += p23;
+
+  edge2 := edge0 rotated (180, 0);
+  edge3 := edge1 rotated (180, 0);
+
+  draw edge0;
+  draw edge1;
+  draw edge2;
+  draw edge3;
+
+  v1 := current_picture;
+  clear current_picture;
+
+  for i = 0 upto 8:
+    current_picture := v1;
+    dotlabel.urt("{\largebf " & decimal i & "}", origin);
+    bi_ang_pict[i] := current_picture;
+    clear current_picture;
+  endfor;
+
+  
+enddef;
+
+get_spherical_biangle {3.5};
+
+
+beginfig(0);
+current_picture := bi_ang_pict[0];
+endfig with_projection parallel_x_y; 
 
 beginfig(1);
-current_picture := v0;
+current_picture := bi_ang_pict[1];
 endfig with_projection parallel_x_y; 
 
 beginfig(2);
-current_picture := v1;
+current_picture := bi_ang_pict[2];
 endfig with_projection parallel_x_y; 
+
+beginfig(3);
+current_picture := bi_ang_pict[3];
+endfig with_projection parallel_x_y; 
+
+beginfig(4);
+current_picture := bi_ang_pict[4];
+endfig with_projection parallel_x_y; 
+
+beginfig(5);
+current_picture := bi_ang_pict[5];
+endfig with_projection parallel_x_y; 
+
+beginfig(6);
+current_picture := bi_ang_pict[6];
+endfig with_projection parallel_x_y;
+
+beginfig(7);
+current_picture := bi_ang_pict[7];
+endfig with_projection parallel_x_y;
+
+
 verbatim_metapost "end";
   
 end;  
 
-
-
+%% ** (2)
 
 if bi_ang1 == -1: %% Star is not on border between 2 spherical biangles.
 
@@ -229,11 +334,6 @@ fi;
 
 
 v2 := current_picture;   
-
-
-
-
-
 
 
 def plot_star_on_sphere_development {numeric radius, star S} :=
