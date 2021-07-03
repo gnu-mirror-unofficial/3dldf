@@ -55,9 +55,12 @@ verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 
 %% *** (3) Draw spherical biangle
 
+picture bi_ang_pict[];  %% Global
+point p[];
+numeric biangle_width[];
+
 begingroup;
 picture v[];
-picture bi_ang_pict[];
 circle c[];
 numeric a[];
 numeric radius[];
@@ -67,8 +70,6 @@ numeric n[];
 string u[];
 bool_point_vector bpv;
 string str;
-point p[];
-numeric biangle_width[];
 
 macro get_spherical_biangles;
 
@@ -225,8 +226,9 @@ endgroup;
 
 %% ** (2)
 
+picture v[];  %% Global
 
-picture v[];
+macro plot_star_on_sphere_development;
 
 def plot_star_on_sphere_development {numeric radius, star S} :=
   numeric a[];
@@ -283,12 +285,10 @@ enddef;
 
 plot_star_on_sphere_development {3.5, arcturus};
 
-verbatim_metapost "end";
-  
-end;  
+focus f;
 
-
-
+set f with_position (0, 20, -50) 
+  with_direction (0, 20, 10) with_distance 70; 
 
 beginfig(8);
   v3 := v0;
@@ -312,14 +312,11 @@ beginfig(11);
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
 endfig with_projection parallel_z_y; 
 
-
 %% ** (2)
 
-
-
-%% ** (2) *******************************************
-
-end;
+verbatim_metapost "end";
+  
+end;  
 
 %% ** (2) End of 3DLDF code.
 
