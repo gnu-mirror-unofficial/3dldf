@@ -61,377 +61,124 @@ for i = 0 upto 7:
   endfig;
 endfor;
 
-
-
-
 %% ** (2)
 
 picture v[];  %% Global
+numeric a[];
+numeric bi_ang[];
+numeric middle_angle;   
+numeric min_edge_angle; 
+numeric max_edge_angle;
+sphere s;
+point r[];
+path q[];
+circle c[];
+transform t[];
 
-macro plot_star_on_sphere_development;
-
-def plot_star_on_sphere_development {numeric radius, star S} :=
-  numeric a[];
-  numeric b[];
-  numeric diameter;
-  numeric i;
-  numeric j;
-  numeric k;
-  numeric m;
-  numeric n[];
-  numeric bi_ang[];
-  numeric middle_angle;   
-  numeric min_edge_angle; 
-  numeric max_edge_angle; 
-  numeric height[];
-  sphere s;
-  point r[];
-  path  q[];
-  path edge[];
-  circle c[];
-  transform t[];
-  string u[];
-  string str;
-
-  j := 0;
-  m := 0;
-  j := 11.25; 
-
-  %u0 := common_name S;
-  message "common name of S:";
-  show common_name S;
-  diameter := 2 * radius;
-  message "radius:"; 
-  show radius;
-  message "S:";
-  show S;
-  %pause;
-
-%% Find out why using the 'set' command for 'sphere s' didn't work here.  LDF 2021.7.1.
-  
-  s := unit_sphere scaled (radius, radius, radius);
-
-  draw s;
-  
-  j := 0;
-  for i = 0 step 22.5 until 337.5:
-    r[j] := (radius, 0) rotated (0, i);
-    u[j] := "$" & decimal i & "^\circ$";
-    j += 1;
-  endfor;
-  
-  v8  := current_picture;
-  v9  := current_picture;
-  v10 := current_picture;
-  v11 := current_picture;
-
-  clear current_picture;
-  
-  dotlabel.rt(u0, r0) v10;
-  dotlabel.rt(u1, r1) v10;
-  dotlabel.rt(u2, r2) v10;
-  dotlabel.urt(u3, r3) v10;
-  dotlabel.top(u4, r4) v10;
-  dotlabel.ulft(u5, r5) v10;
-  dotlabel.lft(u6, r6) v10;
-  dotlabel.lft(u7, r7) v10;
-  dotlabel.lft(u8, r8) v10;
-  dotlabel.lft(u9, r9) v10;
-  dotlabel.lft(u10, r10) v10;
-  dotlabel.llft(u11, r11) v10;
-  dotlabel.bot(u12, r12) v10;
-  dotlabel.lrt(u13, r13) v10;
-  dotlabel.rt(u14, r14) v10;
-  dotlabel.rt(u15, r15) v10;
-
-  r16 := (radius, 0);
-  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v8;
-  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v9;
-  label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
-  dotlabel.rt("$r_{16}$", r16) v11;
-
-%% *** (3) Declination
-
-  r20 := r16 rotated (0, 0, 11.25);
-  r21 := r16 rotated (0, 0, -11.25);
-  dotlabel.rt("$11.25^\circ$", r20) v9;
-  dotlabel.rt("$-11.25^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);
-  rotate r21 (0, 0, -11.25);
-  dotlabel.rt("$22.5^\circ$", r20) v9;
-  dotlabel.rt("$-22.5^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);    
-  rotate r21 (0, 0, -11.25);
-  dotlabel.rt("$33.75^\circ$", r20) v9;
-  dotlabel.rt("$-33.75^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);    
-  rotate r21 (0, 0, -11.25);
-  dotlabel.rt("$45.0^\circ$", r20) v9;
-  dotlabel.rt("$-45.0^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);    
-  rotate r21 (0, 0, -11.25);
-  dotlabel.urt("$56.25^\circ$", r20) v9;
-  dotlabel.lrt("$-56.25^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);    
-  rotate r21 (0, 0, -11.25);
-  dotlabel.urt("$67.5^\circ$", r20) v9;
-  dotlabel.lrt("$-67.5^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);    
-  rotate r21 (0, 0, -11.25);
-  dotlabel.top("$78.75^\circ$", r20) v9;
-  dotlabel.lrt("$-78.75^\circ$", r21) v9;
-  rotate r20 (0, 0, 11.25);    
-  rotate r21 (0, 0, -11.25);
-  dotlabel.top("$90^\circ$", r20) v9;
-  dotlabel.bot("$-90^\circ$", r21) v9;
-
-%% *** (3)
-  
-  c0 := unit_circle scaled (radius, 0, radius);
-  draw c0 with_color red on_picture v8;
-  draw c0 with_color red on_picture v11;
-
-  a0 := ra_decimal_degrees S;
-  message "RA decimal deg. of star S (a0):";
-  show a0;
-
-  r17 := r16 rotated (0, a0);
-  dotlabel.top("$r_{17}$", r17) v8;
-  label.lft("$r_{17}$:  $" & decimal a0 & "^\circ$", r17 shifted (-.75cm, 0)) v8;
-
-  dotlabel.top("$r_{17}$", r17) v9;
-  dotlabel.llft("$r_{17}$", r17) v10;
-  dotlabel.top("$r_{17}$", r17) v11;
-
-  r18 := r16 rotated (0, 22.5);
-  dotlabel.llft("$22.5^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.urt("$45^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.urt("$67.5^\circ$", r18) v8; 
-  rotate r18 (0, 22.5);
-  dotlabel.urt("$90^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.ulft("$112.5^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.ulft("$135^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.ulft("$157.5^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.lft("$180^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.lft("$202.5^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.urt("$225^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.urt("$247.5^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.lrt("$270^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.ulft("$292.5^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.ulft("$315^\circ$", r18) v8;
-  rotate r18 (0, 22.5);
-  dotlabel.rt("$337.5^\circ$", r18) v8;
-
-  a1 := declination_decimal_degrees S;
-  message "Declination decimal deg. S (a1):";
-  show a1;
-  
-  r19 := r16 rotated (0, 0, a1);
-  dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v8;
-  dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v9;
-
-  
-  r22 := r19 rotated (0, a0);  %% a0:  RA of star S.
-
-  q0 := origin -- r17 -- r22 --cycle;
-  draw q0 with_color blue on_picture v8;
-  draw q0 with_color blue on_picture v9;
-  draw q0 with_color blue on_picture v11;
-
-  r23 := get_normal q0;
-  show r23;
-
-  q1 += ..;
-
-  t0 := identity rotated_around (origin, r23) 3;
-
-  r24 := r17 transformed t0; 
-
-  if (magnitude (r22 - r24)) > (magnitude (r22 - r17)):
-    invert t0;
-  fi;
-  
-  forever:
-    r24 *= t0;
-    exit_if magnitude(ypart r24) >= magnitude(ypart r22);
-    q1 += r24;
-  endfor;
-
-  draw q1 on_picture v8 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
-  draw q1 on_picture v9 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
-  draw q1 on_picture v11 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
-  
-  dotlabel.top("$r_{22}$", r22) v8;
-  dotlabel.lft("$r_{22}$", r22) v9;
-  dotlabel.lft("$r_{22}$", r22) v10;
-  dotlabel.lft("$r_{22}$", r22) v11;
-
-%% Find which spherical biangle or biangles (0--7) the star must be plotted on.
-%% It can be 2, if the star is exactly on one of the edges.  This probably only occurs
-%% rarely.
-
-  message "a0 (RA of star S in decimal degrees):";
-  show a0;
-  
-  if (a0 == 337.5):
-    message "a0 (RA) == 337.5";
-    bi_ang0 := 0;
-    bi_ang1 := 7;
-  elseif (a0 > 337.5) or (a0 < 22.5):
-    message "a0 (RA) > 337.5 or < 22.5";
-    bi_ang0 := 0;
-    bi_ang1 := -1;
-    middle_angle := 0;       %% This case requires special handling.
-    min_edge_angle := 337.5;
-    max_edge_angle := 22.5;
-  elseif (a0 == 22.5):
-    message "a0 (RA) == 22.5";
-    bi_ang0 := 0;
-    bi_ang1 := 1;
-  elseif (a0 > 22.5) and (a0 < 67.5):
-    message "a0 (RA) > 22.5 or a0 < 67.5";
-    bi_ang0 := 1;
-    bi_ang1 := -1;
-    middle_angle   := 45;
-    min_edge_angle := 22.5;
-    max_edge_angle := 67.5;
-  elseif (a0 == 67.5):
-    message "a0 (RA) == 67.5";
-    bi_ang0 := 1;
-    bi_ang1 := 2;
-  elseif (a0 > 67.5) and (a0 < 112.5):
-    message "a0 (RA) > 67.5 and a0 < 112.5";
-    bi_ang0 := 2;
-    bi_ang1 := -1;
-    middle_angle   := 90;
-    min_edge_angle := 67.5;
-    max_edge_angle := 112.5;
-  elseif (a0 == 112.5):
-    message "a0 (RA) == 112.5";
-    bi_ang0 := 2;
-    bi_ang1 := 3;
-  elseif (a0 > 112.5) and (a0 < 157.5):
-    bi_ang0 := 3;
-    bi_ang1 := -1;
-    middle_angle   := 135;
-    min_edge_angle := 112.5;
-    max_edge_angle := 157.5;
-  elseif a0 == 157.5:
-    message "a0 (RA) == 157.5";
-    bi_ang0 := 3;
-    bi_ang1 := 4;
-  elseif (a0 > 157.5) and (a0 < 202.5):
-    message "a0 (RA) > 157.5 and a0 < 202.5";
-    bi_ang0 := 4;
-    bi_ang1 := -1;
-    middle_angle   := 180;
-    min_edge_angle := 157.5;
-    max_edge_angle := 202.5;
-  elseif a0 == 202.5:
-    message "a0 (RA) == 202.5";
-    bi_ang0 := 4;
-    bi_ang1 := 5;
-  elseif (a0 > 202.5) and (a0 < 247.5):
-    message "a0 (RA) > 202.5 and a0 < 247.5";
-    bi_ang0 := 5;
-    bi_ang1 := -1;
-    middle_angle   := 225;
-    min_edge_angle := 202.5;
-    max_edge_angle := 247.5;
-  elseif a0 == 247.5:
-    message "a0 (RA) == 247.5";
-    bi_ang0 := 5;
-    bi_ang1 := 6;
-  elseif (a0 > 247.5) and (a0 < 292.5):
-    message "a0 (RA) > 247.5 and a0 < 292.5";
-    bi_ang0 := 6;
-    bi_ang1 := -1;
-    middle_angle   := 270;
-    min_edge_angle := 247.5;
-    max_edge_angle := 292.5;
-  elseif a0 == 292.5:
-    message "a0 (RA) == 292.5";
-    bi_ang0 := 6;
-    bi_ang1 := 7;
-  elseif (a0 > 292.5) and (a0 < 337.5):
-    message "a0 (RA) > 292.5 and a0 < 337.5";
-    bi_ang0 := 7;
-    bi_ang1 := -1;
-    middle_angle   := 315;
-    min_edge_angle := 292.5;
-    max_edge_angle := 337.5;
-  else
-    errmessage "a0 (RA) has invalid value.";
-  fi;
-
-  message "bi_ang0:"; 
-  show bi_ang0;
-
-  message "bi_ang1:"; 
-  show bi_ang1;
-
-  message "middle_angle:";
-  show middle_angle;   
-
-  message "min_edge_angle:";
-  show min_edge_angle; 
-
-  message "max_edge_angle:";
-  show max_edge_angle; 
-
-%% !! START HERE:  LDF 2021.7.3.  Get radius.
-%% Then get arc length from r17 to r22 and from r22 to the nearest "major" RA angle.
-%%
-%% Try the code thus far on a star with negative declination.
-
-  r25 := (0, ypart r22);  %% Point on y-axis with height equal to declination of star S.
-  dotlabel.rt("$r_{25}$", r25) v8;
-  dotlabel.rt("$r_{25}$", r25) v9;
-  dotlabel.rt("$r_{25}$", r25) v11;
-
-  message "a1 (declination_decimal_degrees S)";
-  show a1;
-  
-  a2 := magnitude(r22 - r25);
-  message "a2 (radius of circle through r22):";
-  show a2;
-
-  a3 := arc_length (magnitude(a1)) c0;
-
-  message "a3 (arc length corresponding to declination of star S):";
-  show a3;
-
-  a4 := middle_angle - a0;
-
-  message "a0 (RA of star S in decimal degrees):";
-  show a0;
-  
-  message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
-  show a4;
-
-  %rotate s (0, 22.5);
-  %message "s (sphere):"; 
-  %show s;
-  draw s;  
-
-enddef;
-
-%% *** (3)
 
 %plot_star_on_sphere_development {3.5, arcturus};
 plot_star_on_sphere_development {3.5, hadar};
+
+star S;
+S := hadar;
+
+%% !! START HERE:   LDF 2021.7.3.  Save pictures v8 -- v11.  The following
+%% commands should draw on copies, so I can plot multiple stars on each picture.m
+
+
+
+a0 := ra_decimal_degrees S;
+message "RA decimal deg. of star S (a0):";
+show a0;
+
+r17 := r16 rotated (0, a0);
+dotlabel.top("$r_{17}$", r17) v8;
+label.lft("$r_{17}$:  RA $" & decimal a0 & "^\circ$", r17 shifted (-.75cm, 0)) v8;
+
+dotlabel.top("$r_{17}$", r17) v9;
+dotlabel.llft("$r_{17}$", r17) v10;
+dotlabel.top("$r_{17}$", r17) v11;
+
+r18 := r16 rotated (0, 22.5);
+dotlabel.llft("$22.5^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.urt("$45^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.urt("$67.5^\circ$", r18) v8; 
+rotate r18 (0, 22.5);
+dotlabel.urt("$90^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.ulft("$112.5^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.ulft("$135^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.ulft("$157.5^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.lft("$180^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.lft("$202.5^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.urt("$225^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.urt("$247.5^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.lrt("$270^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.ulft("$292.5^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.ulft("$315^\circ$", r18) v8;
+rotate r18 (0, 22.5);
+dotlabel.rt("$337.5^\circ$", r18) v8;
+
+
+a1 := declination_decimal_degrees S;
+message "Declination decimal deg. S (a1):";
+show a1;
+
+r19 := r16 rotated (0, 0, a1);
+dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v8;
+dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v9;
+
+r22 := r19 rotated (0, a0);  %% a0:  RA of star S.
+
+q0 := origin -- r17 -- r22 --cycle;
+draw q0 with_color blue on_picture v8;
+draw q0 with_color blue on_picture v9;
+draw q0 with_color blue on_picture v11;
+
+r23 := get_normal q0;
+show r23;
+
+q1 += ..;
+
+t0 := identity rotated_around (origin, r23) 3;
+
+r24 := r17 transformed t0; 
+
+
+if (magnitude (r22 - r24)) > (magnitude (r22 - r17)):
+  invert t0;
+fi;
+
+
+
+
+forever:
+  r24 *= t0;
+  exit_if magnitude(ypart r24) >= magnitude(ypart r22);
+  q1 += r24;
+endfor;
+
+draw q1 on_picture v8 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
+draw q1 on_picture v9 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
+draw q1 on_picture v11 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
+
+dotlabel.top("$r_{22}$", r22) v8;
+dotlabel.lft("$r_{22}$", r22) v9;
+dotlabel.lft("$r_{22}$", r22) v10;
+dotlabel.lft("$r_{22}$", r22) v11;
+
+%% *** (3)
 
 focus f;
 
@@ -459,6 +206,194 @@ beginfig(11);
   currentpicture := v11;
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
 endfig with_projection parallel_z_y; 
+
+verbatim_metapost "end";
+  
+end;  
+
+%% *** (3)
+
+
+
+
+
+%% Find which spherical biangle or biangles (0--7) the star must be plotted on.
+%% It can be 2, if the star is exactly on one of the edges.  This probably only occurs
+%% rarely.
+
+message "a0 (RA of star S in decimal degrees):";
+show a0;
+
+if (a0 == 337.5):
+  message "a0 (RA) == 337.5";
+  bi_ang0 := 0;
+  bi_ang1 := 7;
+elseif (a0 > 337.5) or (a0 < 22.5):
+  message "a0 (RA) > 337.5 or < 22.5";
+  bi_ang0 := 0;
+  bi_ang1 := -1;
+  middle_angle := 0;       %% This case requires special handling.
+  min_edge_angle := 337.5;
+  max_edge_angle := 22.5;
+elseif (a0 == 22.5):
+  message "a0 (RA) == 22.5";
+  bi_ang0 := 0;
+  bi_ang1 := 1;
+elseif (a0 > 22.5) and (a0 < 67.5):
+  message "a0 (RA) > 22.5 or a0 < 67.5";
+  bi_ang0 := 1;
+  bi_ang1 := -1;
+  middle_angle   := 45;
+  min_edge_angle := 22.5;
+  max_edge_angle := 67.5;
+elseif (a0 == 67.5):
+  message "a0 (RA) == 67.5";
+  bi_ang0 := 1;
+  bi_ang1 := 2;
+elseif (a0 > 67.5) and (a0 < 112.5):
+  message "a0 (RA) > 67.5 and a0 < 112.5";
+  bi_ang0 := 2;
+  bi_ang1 := -1;
+  middle_angle   := 90;
+  min_edge_angle := 67.5;
+  max_edge_angle := 112.5;
+elseif (a0 == 112.5):
+  message "a0 (RA) == 112.5";
+  bi_ang0 := 2;
+  bi_ang1 := 3;
+elseif (a0 > 112.5) and (a0 < 157.5):
+  bi_ang0 := 3;
+  bi_ang1 := -1;
+  middle_angle   := 135;
+  min_edge_angle := 112.5;
+  max_edge_angle := 157.5;
+elseif a0 == 157.5:
+  message "a0 (RA) == 157.5";
+  bi_ang0 := 3;
+  bi_ang1 := 4;
+elseif (a0 > 157.5) and (a0 < 202.5):
+  message "a0 (RA) > 157.5 and a0 < 202.5";
+  bi_ang0 := 4;
+  bi_ang1 := -1;
+  middle_angle   := 180;
+  min_edge_angle := 157.5;
+  max_edge_angle := 202.5;
+elseif a0 == 202.5:
+  message "a0 (RA) == 202.5";
+  bi_ang0 := 4;
+  bi_ang1 := 5;
+elseif (a0 > 202.5) and (a0 < 247.5):
+  message "a0 (RA) > 202.5 and a0 < 247.5";
+  bi_ang0 := 5;
+  bi_ang1 := -1;
+  middle_angle   := 225;
+  min_edge_angle := 202.5;
+  max_edge_angle := 247.5;
+elseif a0 == 247.5:
+  message "a0 (RA) == 247.5";
+  bi_ang0 := 5;
+  bi_ang1 := 6;
+elseif (a0 > 247.5) and (a0 < 292.5):
+  message "a0 (RA) > 247.5 and a0 < 292.5";
+  bi_ang0 := 6;
+  bi_ang1 := -1;
+  middle_angle   := 270;
+  min_edge_angle := 247.5;
+  max_edge_angle := 292.5;
+elseif a0 == 292.5:
+  message "a0 (RA) == 292.5";
+  bi_ang0 := 6;
+  bi_ang1 := 7;
+elseif (a0 > 292.5) and (a0 < 337.5):
+  message "a0 (RA) > 292.5 and a0 < 337.5";
+  bi_ang0 := 7;
+  bi_ang1 := -1;
+  middle_angle   := 315;
+  min_edge_angle := 292.5;
+  max_edge_angle := 337.5;
+else
+  errmessage "a0 (RA) has invalid value.";
+fi;
+
+message "bi_ang0:"; 
+show bi_ang0;
+
+message "bi_ang1:"; 
+show bi_ang1;
+
+message "middle_angle:";
+show middle_angle;   
+
+message "min_edge_angle:";
+show min_edge_angle; 
+
+message "max_edge_angle:";
+show max_edge_angle; 
+
+%% !! START HERE:  LDF 2021.7.3.  Get radius.
+%% Then get arc length from r17 to r22 and from r22 to the nearest "major" RA angle.
+%%
+%% Try the code thus far on a star with negative declination.
+
+r25 := (0, ypart r22);  %% Point on y-axis with height equal to declination of star S.
+dotlabel.rt("$r_{25}$", r25) v8;
+dotlabel.rt("$r_{25}$", r25) v9;
+dotlabel.rt("$r_{25}$", r25) v11;
+
+message "a1 (declination_decimal_degrees S)";
+show a1;
+
+a2 := magnitude(r22 - r25);
+message "a2 (radius of circle through r22):";
+show a2;
+
+a3 := arc_length (magnitude(a1)) c0;
+
+message "a3 (arc length corresponding to declination of star S):";
+show a3;
+
+a4 := middle_angle - a0;
+
+message "a0 (RA of star S in decimal degrees):";
+show a0;
+
+message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
+show a4;
+
+  %rotate s (0, 22.5);
+  %message "s (sphere):"; 
+  %show s;
+draw s;  
+
+%% *** (3)
+
+focus f;
+
+set f with_position (0, 20, -50) 
+  with_direction (0, 20, 10) with_distance 70; 
+
+beginfig(8);
+  %rotate v8 (0, 70);
+  current_picture := v8;
+  %dotlabel.rt("
+  label("{\\bf Perspective Projection}", (0, -4.5));
+endfig with_focus f;
+
+beginfig(9);
+  currentpicture := v9;
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
+endfig with_projection parallel_x_y; 
+
+beginfig(10);
+  currentpicture := v10;
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
+endfig with_projection parallel_x_z; 
+
+beginfig(11);
+  currentpicture := v11;
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
+endfig with_projection parallel_z_y; 
+
 
 %% ** (2)
 
