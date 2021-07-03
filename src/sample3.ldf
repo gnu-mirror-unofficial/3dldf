@@ -202,6 +202,9 @@ def get_spherical_biangles {numeric rad} =
     dotlabel.urt("{\largebf " & decimal i & "}", origin) bi_ang_pict[i];
   endfor;
 
+  label("RA $337.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[0];
+  label("RA $22.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[0];
+  
   clear current_picture;
   
 enddef;
@@ -214,6 +217,7 @@ for i = 0 upto 7:
   endfig;
 endfor;
 endgroup;
+
 
 %% ** (2)
 
@@ -271,7 +275,7 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
     u[j] := "$" & decimal i & "^\circ$";
     j += 1;
   endfor;
-
+  
   v8  := current_picture;
   v9  := current_picture;
   v10 := current_picture;
@@ -295,6 +299,142 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
   dotlabel.lrt(u13, r13) v10;
   dotlabel.rt(u14, r14) v10;
   dotlabel.rt(u15, r15) v10;
+
+  r16 := (radius, 0);
+  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v8;
+  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v9;
+  label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
+  dotlabel.rt("$r_{16}$", r16) v11;
+
+%% *** (3) Declination
+
+  r20 := r16 rotated (0, 0, 11.25);
+  r21 := r16 rotated (0, 0, -11.25);
+  dotlabel.rt("$11.25^\circ$", r20) v9;
+  dotlabel.rt("$-11.25^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$22.5^\circ$", r20) v9;
+  dotlabel.rt("$-22.5^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$33.75^\circ$", r20) v9;
+  dotlabel.rt("$-33.75^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$45.0^\circ$", r20) v9;
+  dotlabel.rt("$-45.0^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.urt("$56.25^\circ$", r20) v9;
+  dotlabel.lrt("$-56.25^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.urt("$67.5^\circ$", r20) v9;
+  dotlabel.lrt("$-67.5^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.top("$78.75^\circ$", r20) v9;
+  dotlabel.lrt("$-78.75^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.top("$90^\circ$", r20) v9;
+  dotlabel.bot("$-90^\circ$", r21) v9;
+
+%% *** (3)
+  
+  c0 := unit_circle scaled (radius, 0, radius);
+  draw c0 with_color red on_picture v8;
+  draw c0 with_color red on_picture v11;
+
+  a0 := ra_decimal_degrees S;
+  message "RA decimal deg. of star S (a0):";
+  show a0;
+
+  r17 := r16 rotated (0, a0);
+  dotlabel.top("$r_{17}$", r17) v8;
+  label.lft("$r_{17}$:  $" & decimal a0 & "^\circ$", r17 shifted (-.75cm, 0)) v8;
+
+  dotlabel.top("$r_{17}$", r17) v9;
+  dotlabel.llft("$r_{17}$", r17) v10;
+  dotlabel.top("$r_{17}$", r17) v11;
+
+  r18 := r16 rotated (0, 22.5);
+  dotlabel.llft("$22.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$45^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$67.5^\circ$", r18) v8; 
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$90^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$112.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$135^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$157.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lft("$180^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lft("$202.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$225^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$247.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lrt("$270^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$292.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$315^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.rt("$337.5^\circ$", r18) v8;
+
+  a1 := declination_decimal_degrees S;
+  message "Declination decimal deg. S (a1):";
+  show a1;
+  
+  r19 := r16 rotated (0, 0, a1);
+  dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v8;
+  dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v9;
+
+  
+  r22 := r19 rotated (0, a0);  %% a0:  RA of star S.
+
+  q0 := origin -- r17 -- r22 --cycle;
+  draw q0 with_color blue on_picture v8;
+
+  r23 := get_normal q0;
+  show r23;
+
+  q1 += ..;
+
+  t0 := identity rotated_around (origin, r23) 10;
+
+  r24 := r17 transformed t0; 
+
+  if (magnitude (r22 - r24)) > (magnitude (r22 - r17)):
+    invert t0;
+  fi;
+  
+  forever:
+    r24 *= t0;
+    q1 += r24;
+    exit_if magnitude(ypart r24) >= magnitude(ypart r22);
+  endfor;
+
+  draw q1 on_picture v8 with_color orange;
+  draw q1 on_picture v9 with_color orange;
+  
+  dotlabel.top("$r_{22}$", r22) v8;
+  dotlabel.lft("$r_{22}$", r22) v9;
+  dotlabel.lft("$r_{22}$", r22) v10;
+  dotlabel.lft("$r_{22}$", r22) v11;
+
+%% !! START HERE:  LDF 2021.7.3.  Get radius of circle by rotating r22 by 180 deg.
+%% Then get arc length from r17 to r22 and from r22 to the nearest "major" RA angle.
+%%
+%% Try the code thus far on a star with negative declination.
   
   %rotate s (0, 22.5);
   %message "s (sphere):"; 
@@ -315,6 +455,7 @@ set f with_position (0, 20, -50)
 beginfig(8);
   %rotate v8 (0, 70);
   current_picture := v8;
+  %dotlabel.rt("
   label("{\\bf Perspective Projection}", (0, -4.5));
 endfig with_focus f;
 
