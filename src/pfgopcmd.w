@@ -116,7 +116,7 @@ changes I've made to it in preparation for using it as the
 start routine of a new thread.
 
 \initials{LDF 2004.06.23.}
-Now calling |pthread_create()| with |Scan_Parse::endfig_func()| as the thread's
+Now calling |pthread_create| with |Scan_Parse::endfig_func| as the thread's
 start routine to output |current_picture|.
 
 \initials{LDF 2004.06.23.}
@@ -276,8 +276,7 @@ Added this rule.
 Now using a thread with |output_func()| as its start routine.
 
 \initials{LDF 2004.06.29.}
-Rewrote this rule.  It now handles all of the arguments 
-to |Picture::output()|.
+Rewrote this rule.  It now handles all of the arguments to |Picture::output|.
 
 \initials{LDF 2004.06.29.}
 Now using |@<Common declarations for |output| and |endfig| rules@>|.
