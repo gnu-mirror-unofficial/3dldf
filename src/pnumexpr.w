@@ -531,17 +531,12 @@ Added this rule.
 @<Define rules@>=
 @=numeric_primary: ARC_LENGTH numeric_primary circle_primary@>@/
 {
-   real angle = @=$2@>;
-   real arc_length = 0;
-
    Circle* c  = static_cast<Circle*>(@=$3@>);
 
-   arc_length = c->get_arc_length(angle);
+   @=$$@> = c->get_arc_length(@=$2@>);
 
    delete c;
    c = 0;
-
-   @=$$@> = arc_length;
 
 };
 
@@ -568,8 +563,6 @@ Added this rule.
    @=$$@> = c->get_arc_length(@=$2@>);
 
 };
-
-
 
 @q ***** (5) numeric_primary --> RIGHT_ASCENSION_DECIMAL_DEGREES star_primary.  @>
 
