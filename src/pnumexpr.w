@@ -2592,6 +2592,29 @@ Added this rule.
 
 };
 
+@q ***** (5) numeric_primary --> GET_CIRCUMFERENCE WITH_RADIUS numeric_expression.  @>
+
+@ \§numeric primary> $\longrightarrow$ \.{GET_CIRCUMFERENCE} \.{WITH\_RADIUS} \§numeric expression>.@>
+\initials{LDF 2021.7.3.}
+
+\LOG
+\initials{LDF 2021.7.3.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_primary: GET_CIRCUMFERENCE WITH_RADIUS numeric_expression@>@/
+{
+
+  Circle c;
+  Point p(0, 0, 0);
+  c.set(p, 2 * @=$3@>);
+
+  @=$$@> = c->get_circumference();
+  
+};
+
 @q ***** (5) numeric_primary --> DIRECTIONTIME picture_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ 
