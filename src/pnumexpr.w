@@ -545,6 +545,32 @@ Added this rule.
 
 };
 
+@q ***** (5) numeric_primary --> ARC_LENGTH numeric_primary WITH_RADIUS numeric_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{ARC\_LENGTH} \§numeric primary> 
+\.{WITH\_RADIUS} \§numeric primary>.
+\initials{LDF 2021.7.3.}
+
+\LOG
+\initials{LDF 2021.7.3.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: ARC_LENGTH numeric primary WITH_RADIUS numeric_primary@>@/
+{
+   Point p;
+   p.set(0, 0, 0);
+
+   Circle c;
+   c.set(p, 2 * @=$4@>);
+
+   @=$$@> = c->get_arc_length(@=$2@>);
+
+};
+
+
+
 @q ***** (5) numeric_primary --> RIGHT_ASCENSION_DECIMAL_DEGREES star_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{RIGHT\_ASCENSION\_DECIMAL\_DEGREES} \§star primary>.
