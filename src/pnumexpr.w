@@ -517,7 +517,7 @@ Added this rule.
 
 };
 
-@q ***** (5) numeric_primary --> ARC_LENGTH numeric primary circle_primary.  @>
+@q ***** (5) numeric_primary --> ARC_LENGTH numeric_primary circle_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{ARC\_LENGTH} \§numeric primary> 
 \§circle primary>.
@@ -533,7 +533,13 @@ Added this rule.
 {
    Circle* c  = static_cast<Circle*>(@=$3@>);
 
-   @=$$@> = c->get_arc_length(@=$2@>);
+#if LDF_REAL_FLOAT
+   @=$$@> = c->get_arc_length(fabsf(@=$2@>));
+#elif LDF_REAL_DOUBLE
+   @=$$@> = c->get_arc_length(fabs(@=$2@>));
+#else /* Default.  */
+   @=$$@> = c->get_arc_length(fabsf(@=$2@>));   
+#endif
 
    delete c;
    c = 0;
@@ -552,7 +558,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=numeric_primary: ARC_LENGTH numeric primary WITH_RADIUS numeric_primary@>@/
+@=numeric_primary: ARC_LENGTH numeric_primary WITH_RADIUS numeric_primary@>@/
 {
    Point p;
    p.set(0, 0, 0);
@@ -560,7 +566,13 @@ Added this rule.
    Circle c;
    c.set(p, 2 * @=$4@>);
 
-   @=$$@> = c->get_arc_length(@=$2@>);
+#if LDF_REAL_FLOAT
+   @=$$@> = c.get_arc_length(fabsf(@=$2@>));
+#elif LDF_REAL_DOUBLE
+   @=$$@> = c.get_arc_length(fabs(@=$2@>));
+#else /* Default.  */
+   @=$$@> = c.get_arc_length(fabsf(@=$2@>));   
+#endif
 
 };
 
@@ -2630,7 +2642,7 @@ Added this rule.
   Point p(0, 0, 0);
   c.set(p, 2 * @=$3@>);
 
-  @=$$@> = c->get_circumference();
+  @=$$@> = c.get_circumference();
   
 };
 

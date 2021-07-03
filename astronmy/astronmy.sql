@@ -24621,6 +24621,8 @@ limit 10 offset 1;
 select approx_rank_apparent_magnitude, common_name from Stars where common_name != ""
 order by approx_rank_apparent_magnitude limit 21 offset 9;
 
+select common_name, right_ascension_decimal_degrees, declination_decimal_degrees from Stars where common_name != ""
+and declination_decimal_degrees < 0;
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */

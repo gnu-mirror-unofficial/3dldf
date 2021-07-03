@@ -3016,6 +3016,7 @@ Added token declaration for |CIRCUMFERENCE|.
 @=%token <int_value> GET_PARALLEL@>@/ 
 
 @=%token <int_value> CIRCUMFERENCE@>@/  
+@=%token <int_value> GET_CIRCUMFERENCE@>@/  
 
 @=%token <int_value> GET_RADIUS@>@/  
 @=%token <int_value> GET_DIAMETER@>@/ 
