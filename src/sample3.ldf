@@ -67,12 +67,6 @@ input "sample3.lmc";
 
 get_spherical_biangles {3.5, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
 
-for i = 0 upto 7:
-  beginfig(i);
-    output bi_ang_pict[i] with_projection parallel_x_y; 
-  endfig;
-endfor;
-
 %% ** (2)
 
 get_sphere_for_plotting_stars {3.5};
@@ -83,12 +77,12 @@ numeric i;
 i := 0;
 
 pv += 4;
-plot_star_on_sphere (pv) {3.5, sirius, i};
+plot_star_on_sphere (pv) {3.5, arcturus, i};
 i += 4;
 
 %pv += 4;
-plot_star_on_sphere (pv) {3.5, hadar, i};
-i += 4;
+%plot_star_on_sphere (pv) {3.5, hadar, i};
+%i += 4;
 
 %% *** (3)
 
@@ -111,8 +105,22 @@ i += 4;
 macro plot_star_on_spherical_biangle;
 
 def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
+  
+  numeric decl;
+  numeric ra;
 
+  point R[];
+  
   message "Entering macro `plot_star_on_spherical_biangle'.";
+  
+  decl := declination_decimal_degrees S;
+  ra   :=  right_ascension_decimal_degrees S;
+
+  message "decl:";
+  show decl;
+
+  message "ra:";
+  show ra;
 
   message "bi_ang0:";
   show bi_ang0;
@@ -138,8 +146,38 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
   message "ra_decl_zero_pt:";
   show ra_decl_zero_pt;
 
-  message "Exiting macro `plot_star_on_spherical_biangle'.";
+  if (bi_ang0 == 5) and (bi_ang1 == -1):
+    message "bi_ang0 == 5 and bi_ang1 == -1.";
+    if decl >= 0:
+      R0 := (0, Declination_arc_length);
+    else:
+      R0 := (0, -Declination_arc_length);
+    fi;
+
+    dotlabel.rt("$R_0$", R0) bi_ang_pict[bi_ang0];
+
+    message "ra";
+    show ra;
+    message "middle_angle";
+    show middle_angle;
+    pause;
+    
+    if ra > middle_angle:
+      R1 := (RA_arc_length, ypart R0);
+    else:
+      R1 := (-RA_arc_length, ypart R0);
+    fi;
+
+    dotlabel.top("$R_1$", R1) bi_ang_pict[bi_ang0];
+    
+  fi;
+
   
+  
+  %if 
+  
+  message "Exiting macro `plot_star_on_spherical_biangle'.";
+
 enddef;
   
 
@@ -147,7 +185,7 @@ enddef;
 
 picture_vector qv;
 
-plot_star_on_spherical_biangle (qv) {3.5, sirius};
+plot_star_on_spherical_biangle (qv) {3.5, arcturus};
 
 %% *** (3) Figure and output commands.
 
@@ -172,7 +210,6 @@ end;
 %%   	 \initials{LDF 2004.02.12}.                                          
 
 %% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
-
 
 %% * (1) Local variables for Emacs.
 
