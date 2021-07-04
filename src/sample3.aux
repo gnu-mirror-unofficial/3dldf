@@ -1,0 +1,112 @@
+%%%% sample3.aux
+%%%% Created by Laurence D. Finston (LDF) Sun 04 Jul 2021 03:16:12 PM CEST
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2021 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+  
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+% * (1) Beginning of 3DLDF code.
+
+%% *** (3)
+
+focus f;
+
+set f with_position (0, 20, -50) 
+  with_direction (0, 20, 10) with_distance 70; 
+
+beginfig(8);
+  %rotate v8 (0, 70);
+  current_picture := v8;
+  i := 0;
+  forever:
+    exit_if i >= size pv;
+    message "In Fig. 8:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
+  endfor;
+  label("{\\bf Perspective Projection}", (0, -4.5));
+endfig with_focus f;
+
+beginfig(9);
+  currentpicture := v9;
+  i := 1;
+  forever:
+    exit_if i >= size pv;
+    message "In Fig. 9:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
+  endfor;
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
+endfig with_projection parallel_x_y; 
+
+beginfig(10);
+  currentpicture := v10;
+  i := 2;
+  forever:
+    exit_if i >= size pv;
+    message "In Fig. 10:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
+  endfor;
+  current_picture += pv2;
+  current_picture += pv6;
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
+endfig with_projection parallel_x_z; 
+
+beginfig(11);
+  currentpicture := v11;
+  i := 3;
+  forever:
+    exit_if i >= size pv;
+    message "In Fig. 11:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
+  endfor;
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
+endfig with_projection parallel_z_y; 
+
+verbatim_metapost "end";
+  
+end;  
