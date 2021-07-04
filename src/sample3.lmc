@@ -60,7 +60,7 @@ numeric biangle_width[];
 
 macro get_spherical_biangles;
 
-def get_spherical_biangles {numeric rad} =
+def get_spherical_biangles {numeric rad, boolean do_black} =
 
   circle c[];
   numeric a[];
@@ -70,6 +70,8 @@ def get_spherical_biangles {numeric rad} =
   numeric n[];
   string u[];
 
+  path q[];
+  
   radius0 := rad;
   c0 := unit_circle scaled (radius0, 0, radius0) rotated (90, 0);
   a2 := circumference c0;   %% a2 == Circumference of horizontal great circle.
@@ -194,11 +196,42 @@ def get_spherical_biangles {numeric rad} =
   draw edge2;
   draw edge3;
 
-  for i = 0 upto 8:
-    bi_ang_pict[i] := current_picture;
-    dotlabel.urt("{\largebf " & decimal i & "}", origin) bi_ang_pict[i];
-  endfor;
+  %drawarrow edge0 with_color blue with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p100 := get_last_point edge0;
+  %drawdot p100 with_color blue with_pen pencircle scaled (8pt, 8pt, 8pt);
 
+  %drawarrow edge1 with_color red with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p101 := get_last_point edge1;
+  %drawdot p101 with_color red with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  %drawarrow edge2 with_color green with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p102 := get_last_point edge2;
+  %drawdot p102 with_color green with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  %drawarrow edge3 with_color cyan with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p103 := get_last_point edge3;
+  %drawdot p103 with_color cyan with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  
+  q0 := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
+
+  q0 += cycle;
+
+  if do_black:
+    for i = 0 upto 7:
+      fill q0;
+    endfor;
+  fi;
+  
+  for i = 0 upto 7:
+    bi_ang_pict[i] := current_picture;
+    if do_black:
+      dotlabel.urt("{\largebf " & decimal i & "}", origin) with_text_color white with_dot_color white (bi_ang_pict[i]);
+    else:
+      dotlabel.urt("{\largebf " & decimal i & "}", origin) bi_ang_pict[i];
+    fi;
+  endfor;
+  
   label("RA $337.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[0];
   label("RA $22.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[0];
   
@@ -208,9 +241,9 @@ enddef;
 
 %% ** (2)
 
-macro plot_star_on_sphere_development;
+macro get_sphere_for_plotting_stars;
 
-def plot_star_on_sphere_development {numeric radius, star S} :=
+def get_sphere_for_plotting_stars {numeric radius} :=
 
   numeric i;
   numeric j;
@@ -223,14 +256,8 @@ def plot_star_on_sphere_development {numeric radius, star S} :=
   m := 0;
   j := 11.25; 
 
-  %u0 := common_name S;
-  message "common name of S:";
-  show common_name S;
   message "radius:"; 
   show radius;
-  message "S:";
-  show S;
-  %pause;
 
 %% Find out why using the 'set' command for 'sphere s' didn't work here.  LDF 2021.7.1.
   
