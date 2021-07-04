@@ -149,254 +149,167 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
   dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
   dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
   dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
+  message "a0 (RA of star S in decimal degrees):";
+  show a0;
+
+  if (a0 == 337.5):
+    message "a0 (RA) == 337.5";
+    bi_ang0 := 0;
+    bi_ang1 := 7;
+  elseif (a0 > 337.5) or (a0 < 22.5):
+    message "a0 (RA) > 337.5 or < 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := -1;
+    middle_angle := 0;       %% This case requires special handling.
+    min_edge_angle := 337.5;
+    max_edge_angle := 22.5;
+  elseif (a0 == 22.5):
+    message "a0 (RA) == 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := 1;
+  elseif (a0 > 22.5) and (a0 < 67.5):
+    message "a0 (RA) > 22.5 or a0 < 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := -1;
+    middle_angle   := 45;
+    min_edge_angle := 22.5;
+    max_edge_angle := 67.5;
+  elseif (a0 == 67.5):
+    message "a0 (RA) == 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := 2;
+  elseif (a0 > 67.5) and (a0 < 112.5):
+    message "a0 (RA) > 67.5 and a0 < 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := -1;
+    middle_angle   := 90;
+    min_edge_angle := 67.5;
+    max_edge_angle := 112.5;
+  elseif (a0 == 112.5):
+    message "a0 (RA) == 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := 3;
+  elseif (a0 > 112.5) and (a0 < 157.5):
+    bi_ang0 := 3;
+    bi_ang1 := -1;
+    middle_angle   := 135;
+    min_edge_angle := 112.5;
+    max_edge_angle := 157.5;
+  elseif a0 == 157.5:
+    message "a0 (RA) == 157.5";
+    bi_ang0 := 3;
+    bi_ang1 := 4;
+  elseif (a0 > 157.5) and (a0 < 202.5):
+    message "a0 (RA) > 157.5 and a0 < 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := -1;
+    middle_angle   := 180;
+    min_edge_angle := 157.5;
+    max_edge_angle := 202.5;
+  elseif a0 == 202.5:
+    message "a0 (RA) == 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := 5;
+  elseif (a0 > 202.5) and (a0 < 247.5):
+    message "a0 (RA) > 202.5 and a0 < 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := -1;
+    middle_angle   := 225;
+    min_edge_angle := 202.5;
+    max_edge_angle := 247.5;
+  elseif a0 == 247.5:
+    message "a0 (RA) == 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := 6;
+  elseif (a0 > 247.5) and (a0 < 292.5):
+    message "a0 (RA) > 247.5 and a0 < 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := -1;
+    middle_angle   := 270;
+    min_edge_angle := 247.5;
+    max_edge_angle := 292.5;
+  elseif a0 == 292.5:
+    message "a0 (RA) == 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := 7;
+  elseif (a0 > 292.5) and (a0 < 337.5):
+    message "a0 (RA) > 292.5 and a0 < 337.5";
+    bi_ang0 := 7;
+    bi_ang1 := -1;
+    middle_angle   := 315;
+    min_edge_angle := 292.5;
+    max_edge_angle := 337.5;
+  else
+    errmessage "a0 (RA) has invalid value.";
+  fi;
+
+  message "bi_ang0:"; 
+  show bi_ang0;
+
+  message "bi_ang1:"; 
+  show bi_ang1;
+
+  message "middle_angle:";
+  show middle_angle;   
+
+  message "min_edge_angle:";
+  show min_edge_angle; 
+
+  message "max_edge_angle:";
+  show max_edge_angle; 
+
+%% !! START HERE:  LDF 2021.7.3.  Get radius.
+%% Then get arc length from P17 to P22 (on great circle) and from P22 to the nearest "major" RA angle
+%% (on smaller circle).
+
+  message "P22:";
+  show P22;
   
+  P25 := (0, ypart P22);  %% Point on y-axis with height equal to declination of star S.
+
+  message "P25:";
+  show P25;
+
+  dotlabel.ulft("$P_{25}$", P25) on_picture pv[ctr];
+  dotlabel.rt("$P_{25}$", P25) pv[ctr + 1];
+  dotlabel.rt("$P_{25}$", P25) pv[ctr + 3];
+
+  message "a1 (declination_decimal_degrees S)";
+  show a1;
+
+  a2 := magnitude(P22 - P25);
+  message "a2 (radius of circle through P22):";
+  show a2;
+
+  a3 := arc_length (magnitude(a1)) c0;
+
+  message "a3 (arc length corresponding to declination of star S):";
+  show a3;
+
+  a4 := middle_angle - a0;
+
+  message "a0 (RA of star S in decimal degrees):";
+  show a0;
+
+  message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
+  show a4;
+
 enddef;
 
 picture_vector pv;
 
 pv += 4;
-
 plot_star_on_sphere (pv) {3.5, hadar, 0};
 
-pv += 4;
-
-plot_star_on_sphere (pv) {3.5, sirius, 4};
-  
-%% *** (3)
-
-focus f;
-
-set f with_position (0, 20, -50) 
-  with_direction (0, 20, 10) with_distance 70; 
-
-beginfig(8);
-  %rotate v8 (0, 70);
-  current_picture := v8;
-  i := 0;
-  forever:
-    exit_if i >= size pv;
-    message "In Fig. 8:  Outputting pv" & decimal i & ".";
-    current_picture += pv[i];
-    i += 4;
-  endfor;
-  label("{\\bf Perspective Projection}", (0, -4.5));
-endfig with_focus f;
-
-beginfig(9);
-  currentpicture := v9;
-  i := 1;
-  forever:
-    exit_if i >= size pv;
-    message "In Fig. 9:  Outputting pv" & decimal i & ".";
-    current_picture += pv[i];
-    i += 4;
-  endfor;
-  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
-endfig with_projection parallel_x_y; 
-
-beginfig(10);
-  currentpicture := v10;
-  i := 2;
-  forever:
-    exit_if i >= size pv;
-    message "In Fig. 10:  Outputting pv" & decimal i & ".";
-    current_picture += pv[i];
-    i += 4;
-  endfor;
-  current_picture += pv2;
-  current_picture += pv6;
-  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
-endfig with_projection parallel_x_z; 
-
-beginfig(11);
-  currentpicture := v11;
-  i := 3;
-  forever:
-    exit_if i >= size pv;
-    message "In Fig. 11:  Outputting pv" & decimal i & ".";
-    current_picture += pv[i];
-    i += 4;
-  endfor;
-  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
-endfig with_projection parallel_z_y; 
-
-verbatim_metapost "end";
-  
-end;  
+%pv += 4;
+%plot_star_on_sphere (pv) {3.5, sirius, 4};
+ 
+input "sample3.aux";
 
 %% *** (3)
 
-%% Find which spherical biangle or biangles (0--7) the star must be plotted on.
-%% It can be 2, if the star is exactly on one of the edges.  This probably only occurs
-%% rarely.
 
-message "a0 (RA of star S in decimal degrees):";
-show a0;
 
-if (a0 == 337.5):
-  message "a0 (RA) == 337.5";
-  bi_ang0 := 0;
-  bi_ang1 := 7;
-elseif (a0 > 337.5) or (a0 < 22.5):
-  message "a0 (RA) > 337.5 or < 22.5";
-  bi_ang0 := 0;
-  bi_ang1 := -1;
-  middle_angle := 0;       %% This case requires special handling.
-  min_edge_angle := 337.5;
-  max_edge_angle := 22.5;
-elseif (a0 == 22.5):
-  message "a0 (RA) == 22.5";
-  bi_ang0 := 0;
-  bi_ang1 := 1;
-elseif (a0 > 22.5) and (a0 < 67.5):
-  message "a0 (RA) > 22.5 or a0 < 67.5";
-  bi_ang0 := 1;
-  bi_ang1 := -1;
-  middle_angle   := 45;
-  min_edge_angle := 22.5;
-  max_edge_angle := 67.5;
-elseif (a0 == 67.5):
-  message "a0 (RA) == 67.5";
-  bi_ang0 := 1;
-  bi_ang1 := 2;
-elseif (a0 > 67.5) and (a0 < 112.5):
-  message "a0 (RA) > 67.5 and a0 < 112.5";
-  bi_ang0 := 2;
-  bi_ang1 := -1;
-  middle_angle   := 90;
-  min_edge_angle := 67.5;
-  max_edge_angle := 112.5;
-elseif (a0 == 112.5):
-  message "a0 (RA) == 112.5";
-  bi_ang0 := 2;
-  bi_ang1 := 3;
-elseif (a0 > 112.5) and (a0 < 157.5):
-  bi_ang0 := 3;
-  bi_ang1 := -1;
-  middle_angle   := 135;
-  min_edge_angle := 112.5;
-  max_edge_angle := 157.5;
-elseif a0 == 157.5:
-  message "a0 (RA) == 157.5";
-  bi_ang0 := 3;
-  bi_ang1 := 4;
-elseif (a0 > 157.5) and (a0 < 202.5):
-  message "a0 (RA) > 157.5 and a0 < 202.5";
-  bi_ang0 := 4;
-  bi_ang1 := -1;
-  middle_angle   := 180;
-  min_edge_angle := 157.5;
-  max_edge_angle := 202.5;
-elseif a0 == 202.5:
-  message "a0 (RA) == 202.5";
-  bi_ang0 := 4;
-  bi_ang1 := 5;
-elseif (a0 > 202.5) and (a0 < 247.5):
-  message "a0 (RA) > 202.5 and a0 < 247.5";
-  bi_ang0 := 5;
-  bi_ang1 := -1;
-  middle_angle   := 225;
-  min_edge_angle := 202.5;
-  max_edge_angle := 247.5;
-elseif a0 == 247.5:
-  message "a0 (RA) == 247.5";
-  bi_ang0 := 5;
-  bi_ang1 := 6;
-elseif (a0 > 247.5) and (a0 < 292.5):
-  message "a0 (RA) > 247.5 and a0 < 292.5";
-  bi_ang0 := 6;
-  bi_ang1 := -1;
-  middle_angle   := 270;
-  min_edge_angle := 247.5;
-  max_edge_angle := 292.5;
-elseif a0 == 292.5:
-  message "a0 (RA) == 292.5";
-  bi_ang0 := 6;
-  bi_ang1 := 7;
-elseif (a0 > 292.5) and (a0 < 337.5):
-  message "a0 (RA) > 292.5 and a0 < 337.5";
-  bi_ang0 := 7;
-  bi_ang1 := -1;
-  middle_angle   := 315;
-  min_edge_angle := 292.5;
-  max_edge_angle := 337.5;
-else
-  errmessage "a0 (RA) has invalid value.";
-fi;
-
-message "bi_ang0:"; 
-show bi_ang0;
-
-message "bi_ang1:"; 
-show bi_ang1;
-
-message "middle_angle:";
-show middle_angle;   
-
-message "min_edge_angle:";
-show min_edge_angle; 
-
-message "max_edge_angle:";
-show max_edge_angle; 
-
-%% !! START HERE:  LDF 2021.7.3.  Get radius.
-%% Then get arc length from P17 to P22 and from P22 to the nearest "major" RA angle.
-%%
-%% Try the code thus far on a star with negative declination.
-
-P25 := (0, ypart P22);  %% Point on y-axis with height equal to declination of star S.
-dotlabel.rt("$P_{25}$", P25) v8;
-dotlabel.rt("$P_{25}$", P25) v9;
-dotlabel.rt("$P_{25}$", P25) v11;
-
-message "a1 (declination_decimal_degrees S)";
-show a1;
-
-a2 := magnitude(P22 - P25);
-message "a2 (radius of circle through P22):";
-show a2;
-
-a3 := arc_length (magnitude(a1)) c0;
-
-message "a3 (arc length corresponding to declination of star S):";
-show a3;
-
-a4 := middle_angle - a0;
-
-message "a0 (RA of star S in decimal degrees):";
-show a0;
-
-message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
-show a4;
-
-%% *** (3)
-
-focus f;
-
-set f with_position (0, 20, -50) 
-  with_direction (0, 20, 10) with_distance 70; 
-
-beginfig(8);
-  %rotate v8 (0, 70);
-  current_picture := v8;
-  %dotlabel.rt("
-  label("{\\bf Perspective Projection}", (0, -4.5));
-endfig with_focus f;
-
-beginfig(9);
-  currentpicture := v9;
-  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
-endfig with_projection parallel_x_y; 
-
-beginfig(10);
-  currentpicture := v10;
-  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
-endfig with_projection parallel_x_z; 
-
-beginfig(11);
-  currentpicture := v11;
-  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
-endfig with_projection parallel_z_y; 
 
 
 %% ** (2)
