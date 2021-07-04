@@ -58,6 +58,10 @@ picture bi_ang_pict[];
 numeric biangle_width[];
 numeric RA_arc_length;
 numeric Declination_arc_length;
+numeric middle_angle;   
+numeric min_edge_angle; 
+numeric max_edge_angle;
+point ra_decl_zero_pt;
 
 input "sample3.lmc";
 
@@ -71,24 +75,85 @@ endfor;
 
 %% ** (2)
 
-%get_sphere_for_plotting_stars {3.5};
 get_sphere_for_plotting_stars {3.5};
-
 
 picture_vector pv;
 
+numeric i;
+i := 0;
+
 pv += 4;
-plot_star_on_sphere (pv) {3.5, hadar, 0};
+plot_star_on_sphere (pv) {3.5, sirius, i};
+i += 4;
 
 %pv += 4;
-%plot_star_on_sphere (pv) {3.5, sirius, 4};
- 
-input "sample3.aux";
+plot_star_on_sphere (pv) {3.5, hadar, i};
+i += 4;
 
 %% *** (3)
 
+%% These are the parameters I need for plotting stars on the spherical biangles.
+%% LDF 2021.7.4.
 
+% bi_ang0:
+% >> 5
+% bi_ang1:
+% >> -1
+% middle_angle:
+% >> 225
+% min_edge_angle:
+% >> 202.5
+% max_edge_angle:
+% >> 247.5
+% Declination_arc_length
+% RA_arc_length
 
+macro plot_star_on_spherical_biangle;
+
+def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
+
+  message "Entering macro `plot_star_on_spherical_biangle'.";
+
+  message "bi_ang0:";
+  show bi_ang0;
+
+  message "bi_ang1:";
+  show bi_ang1;
+
+  message "middle_angle:";
+  show middle_angle;
+
+  message "min_edge_angle:";
+  show min_edge_angle;
+
+  message "max_edge_angle:";
+  show max_edge_angle;
+
+  message "Declination_arc_length:";
+  show Declination_arc_length;
+
+  message "RA_arc_length:";
+  show RA_arc_length;
+
+  message "ra_decl_zero_pt:";
+  show ra_decl_zero_pt;
+
+  message "Exiting macro `plot_star_on_spherical_biangle'.";
+  
+enddef;
+  
+
+%% *** (3)
+
+picture_vector qv;
+
+plot_star_on_spherical_biangle (qv) {3.5, sirius};
+
+%% *** (3) Figure and output commands.
+
+input "sample3.aux";
+
+%% *** (3)
 
 
 %% ** (2)

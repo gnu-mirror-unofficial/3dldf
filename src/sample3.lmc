@@ -390,10 +390,6 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
   circle c[];
   numeric a[];
   transform t[];
-  numeric middle_angle;   
-  numeric min_edge_angle; 
-  numeric max_edge_angle;
-  point ra_decl_zero_pt;
   pen medium_pen;
   pen large_pen;
 
@@ -416,11 +412,11 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
   show a1;
 
   P17 := ra_decl_zero_pt rotated (0, a0);
-  dotlabel.top("$P_{17}$", P17) v8;
-  label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) v8;
-  dotlabel.top("$P_{17}$", P17) v9;
-  dotlabel.llft("$P_{17}$", P17) v10;
-  dotlabel.top("$P_{17}$", P17) v11;
+  dotlabel.top("$P_{17}$", P17) pv[ctr];
+  label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
+  dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
+  dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
+  dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
 
   P19 := ra_decl_zero_pt rotated (0, 0, a1);
   dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
@@ -438,7 +434,6 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
   P23 := get_normal q0;
   show P23;
 
-  q1 += ..;
 
   t0 := identity rotated_around (origin, P23) 3;
 
@@ -448,11 +443,19 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
     invert t0;
   fi;
 
+  P24 := P17;
+  
+  q1 += ..;
+
+  q1 += P17;
+
   forever:
     P24 *= t0;
     exit_if magnitude(ypart P24) >= magnitude(ypart P22);
     q1 += P24;
   endfor;
+
+  q1 += P22;
 
   draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
   draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
@@ -609,11 +612,12 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
   a4 := middle_angle - a0;
 
   if middle_angle > a0:
-    a4 := magnitude(a4);
+    a4 := -magnitude(a4);
   elseif middle_angle < a0:
     a4 := -magnitude(a4);
   fi;
 
+  
   if a0 ==  middle_angle:
     message "a0 == middle_angle == " & decimal middle_angle & ".  Don't need arc length for second arc.";
     message "Setting RA_arc_length to 0.";
@@ -644,13 +648,21 @@ def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
     a6 := magnitude(P26 - P22);
 
     q3 += ..;
-  
+    q3 += P27;
+
+    a7 := 3;
+    if a4 < 0:
+      a7 *= -1;
+    fi;
+    
     forever:
       exit_if magnitude(P27 - P22) > a6;
-      rotate P27 (0, 3);
+      rotate P27 (0, a7);
       q3 += P27;
     endfor;
 
+    q3 += P26;
+    
     draw q3 with_color green with_pen large_pen on_picture pv[ctr];
     draw q3 with_color green with_pen large_pen on_picture pv[ctr + 1];
     draw q3 with_color green with_pen large_pen on_picture pv[ctr + 2];
