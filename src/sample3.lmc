@@ -53,9 +53,6 @@ verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 
 %% *** (3) Draw spherical biangle
 
-picture bi_ang_pict[];  %% Global
-point p[];
-numeric biangle_width[];
 
 
 macro get_spherical_biangles;
@@ -63,18 +60,21 @@ macro get_spherical_biangles;
 def get_spherical_biangles {numeric rad, boolean do_black} =
 
   circle c[];
-  numeric a[];
+  numeric a;
   numeric radius[];
   numeric circum[];
   path edge[];
   numeric n[];
-  string u[];
-
-  path q[];
+  point ra_decl_zero_pt;
+  
+  path q;
   
   radius0 := rad;
+
+  ra_decl_zero_pt := (rad, 0);
+  
   c0 := unit_circle scaled (radius0, 0, radius0) rotated (90, 0);
-  a2 := circumference c0;   %% a2 == Circumference of horizontal great circle.
+  a := circumference c0;   %% a == Circumference of horizontal great circle.
 
   %draw c0 with_color red;
 
@@ -126,8 +126,8 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
   edge2 += ..;
   edge3 += ..;
 
-  n0 := a2 / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
-  n1 := a2 / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
+  n0 := a / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
+  n1 := a / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
 %% increments of 11.25 deg.
 
   p20 := (-.5n0, 0);
@@ -145,8 +145,8 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
   edge3 += p21;
 
 
-  p22 := (0, -.25a2);
-  p23 := (0, .25a2);
+  p22 := (0, -.25a);
+  p23 := (0, .25a);
 
   dotlabel.bot("$p_{22}$", p22);
   dotlabel.top("$p_{23}$", p23);
@@ -213,13 +213,13 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
   %drawdot p103 with_color cyan with_pen pencircle scaled (8pt, 8pt, 8pt);
 
   
-  q0 := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
+  q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
 
-  q0 += cycle;
+  q += cycle;
 
   if do_black:
     for i = 0 upto 7:
-      fill q0;
+      fill q;
     endfor;
   fi;
   
@@ -247,11 +247,12 @@ def get_sphere_for_plotting_stars {numeric radius} :=
 
   numeric i;
   numeric j;
-  numeric k;
-  %numeric m;
-  numeric n[];
   string u[];
-
+  point r[];
+  sphere s;
+  circle c;
+  point ra_decl_zero_pt;
+  
   j := 0;
   m := 0;
   j := 11.25; 
@@ -259,6 +260,9 @@ def get_sphere_for_plotting_stars {numeric radius} :=
   message "radius:"; 
   show radius;
 
+  ra_decl_zero_pt := (radius, 0);
+  r16 := ra_decl_zero_pt;
+  
 %% Find out why using the 'set' command for 'sphere s' didn't work here.  LDF 2021.7.1.
   
   s := unit_sphere scaled (radius, radius, radius);
@@ -295,8 +299,6 @@ def get_sphere_for_plotting_stars {numeric radius} :=
   dotlabel.lrt(u13, r13) v10;
   dotlabel.rt(u14, r14) v10;
   dotlabel.rt(u15, r15) v10;
-
-  r16 := (radius, 0);
   dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v8;
   dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v9;
   label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
@@ -367,15 +369,12 @@ def get_sphere_for_plotting_stars {numeric radius} :=
   dotlabel.ulft("$315^\circ$", r18) v8;
   rotate r18 (0, 22.5);
   dotlabel.rt("$337.5^\circ$", r18) v8;
-
   
-
-
 %% *** (3)
   
-  c0 := unit_circle scaled (radius, 0, radius);
-  draw c0 with_color red on_picture v8;
-  draw c0 with_color red on_picture v11;
+  c := unit_circle scaled (radius, 0, radius);
+  draw c with_color red on_picture v8;
+  draw c with_color red on_picture v11;
 
 enddef;
 

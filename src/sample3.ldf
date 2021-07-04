@@ -51,6 +51,11 @@
 
 %% * (1) Plotting stars on sphere development (spherical biangles)
 
+point p[];    %% Global
+picture v[];  
+picture bi_ang_pict[];
+numeric biangle_width[];
+
 input "sample3.lmc";
 
 get_spherical_biangles {3.5, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
@@ -63,36 +68,28 @@ endfor;
 
 %% ** (2)
 
-picture v[];  %% Global
-numeric a[];
-numeric bi_ang[];
-numeric middle_angle;   
-numeric min_edge_angle; 
-numeric max_edge_angle;
-sphere s;
-point r[];
-path q[];
-circle c[];
-transform t[];
-
 %get_sphere_for_plotting_stars {3.5};
 get_sphere_for_plotting_stars {3.5};
 
-
-
 macro plot_star_on_sphere;
 
-picture_vector pv;
-pv++;
-pv++;
-pv++;
-pv++;
-
-def plot_star_on_sphere (pv) {numeric radius, star S} =
+def plot_star_on_sphere (pv) {numeric radius, star S, numeric ctr} =
 
   path q[];
   string u[];
   point P[];
+  circle c[];
+  numeric a[];
+  transform t[];
+  numeric bi_ang[];  
+  numeric middle_angle;   
+  numeric min_edge_angle; 
+  numeric max_edge_angle;
+  point ra_decl_zero_pt;
+  
+  c0 := unit_circle scaled (radius, 0, radius);
+  
+  ra_decl_zero_pt := (radius, 0);
   
   u0 := common_name S;
   message "star S == " & u0 & ".";
@@ -105,25 +102,25 @@ def plot_star_on_sphere (pv) {numeric radius, star S} =
   message "Declination decimal deg. of star S (" & u0 & ") (a1):";
   show a1;
 
-  P17 := r16 rotated (0, a0);
+  P17 := ra_decl_zero_pt rotated (0, a0);
   dotlabel.top("$P_{17}$", P17) v8;
   label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) v8;
   dotlabel.top("$P_{17}$", P17) v9;
   dotlabel.llft("$P_{17}$", P17) v10;
   dotlabel.top("$P_{17}$", P17) v11;
 
-  P19 := r16 rotated (0, 0, a1);
-  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv0;
-  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv1;
+  P19 := ra_decl_zero_pt rotated (0, 0, a1);
+  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
+  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr + 1];
 
   P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
 
   q0 := origin -- P17 -- P22 --cycle;
 
-  draw q0 with_color blue on_picture pv0;
-  draw q0 with_color blue on_picture pv1;
-  draw q0 with_color blue on_picture pv2;
-  draw q0 with_color blue on_picture pv3;
+  draw q0 with_color blue on_picture pv[ctr];
+  draw q0 with_color blue on_picture pv[ctr + 1];
+  draw q0 with_color blue on_picture pv[ctr + 2];
+  draw q0 with_color blue on_picture pv[ctr + 3];
 
   P23 := get_normal q0;
   show P23;
@@ -144,19 +141,26 @@ def plot_star_on_sphere (pv) {numeric radius, star S} =
     q1 += P24;
   endfor;
 
-  draw q1 on_picture pv0 with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
-  draw q1 on_picture pv1 with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
-  draw q1 on_picture pv3 with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
+  draw q1 on_picture pv[ctr] with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
+  draw q1 on_picture pv[ctr + 1] with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
+  draw q1 on_picture pv[ctr + 3] with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
 
-  dotlabel.lft("$P_{22}$", P22) pv0;
-  dotlabel.lft("$P_{22}$", P22) pv1;
-  dotlabel.lft("$P_{22}$", P22) pv2;
-  dotlabel.lft("$P_{22}$", P22) pv3;
+  dotlabel.lft("$P_{22}$", P22) pv[ctr];
+  dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
+  dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
+  dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
   
 enddef;
 
-plot_star_on_sphere (pv) {3.5, hadar};
-plot_star_on_sphere (pv) {3.5, sirius};
+picture_vector pv;
+
+pv += 4;
+
+plot_star_on_sphere (pv) {3.5, hadar, 0};
+
+pv += 4;
+
+plot_star_on_sphere (pv) {3.5, sirius, 4};
   
 %% *** (3)
 
@@ -169,6 +173,7 @@ beginfig(8);
   %rotate v8 (0, 70);
   current_picture := v8;
   current_picture += pv0;
+  current_picture += pv4;
   %dotlabel.rt("
   label("{\\bf Perspective Projection}", (0, -4.5));
 endfig with_focus f;
@@ -176,30 +181,30 @@ endfig with_focus f;
 beginfig(9);
   currentpicture := v9;
   current_picture += pv1;
+  current_picture += pv5;
   label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
 endfig with_projection parallel_x_y; 
 
 beginfig(10);
   currentpicture := v10;
   current_picture += pv2;
+  current_picture += pv6;
   label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
 endfig with_projection parallel_x_z; 
 
 beginfig(11);
   currentpicture := v11;
-  current_picture += pv3;  
+  current_picture += pv3;
+  current_picture += pv7;
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
 endfig with_projection parallel_z_y; 
+
 
 verbatim_metapost "end";
   
 end;  
 
 %% *** (3)
-
-
-
-
 
 %% Find which spherical biangle or biangles (0--7) the star must be plotted on.
 %% It can be 2, if the star is exactly on one of the edges.  This probably only occurs
@@ -343,11 +348,6 @@ show a0;
 
 message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
 show a4;
-
-  %rotate s (0, 22.5);
-  %message "s (sphere):"; 
-  %show s;
-draw s;  
 
 %% *** (3)
 
