@@ -1324,6 +1324,22 @@ Also made debugging output thread-safe.
 
 };
 
+@*4 \§on picture optional> $\longrightarrow$ \.{ON\_PICTURE} \§picture expression>.
+
+\LOG
+\initials{LDF 2021.7.4.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=on_picture_optional: ON_PICTURE picture_expression@>
+{
+
+  @=$$@> = @=$2@>;
+
+};
+
+
 @q * (1) with_text_color_optional.@> 
 @* \§with text color optional>.
 \initials{LDF 2005.01.29.}
