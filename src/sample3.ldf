@@ -53,7 +53,7 @@
 
 input "sample3.lmc";
 
-get_spherical_biangles {3.5};
+get_spherical_biangles {3.5, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
 
 for i = 0 upto 7:
   beginfig(i);
@@ -75,109 +75,89 @@ path q[];
 circle c[];
 transform t[];
 
-
-%plot_star_on_sphere_development {3.5, arcturus};
-plot_star_on_sphere_development {3.5, hadar};
-
-star S;
-S := hadar;
-
-%% !! START HERE:   LDF 2021.7.3.  Save pictures v8 -- v11.  The following
-%% commands should draw on copies, so I can plot multiple stars on each picture.m
+%get_sphere_for_plotting_stars {3.5};
+get_sphere_for_plotting_stars {3.5};
 
 
 
-a0 := ra_decimal_degrees S;
-message "RA decimal deg. of star S (a0):";
-show a0;
+macro plot_star_on_sphere;
 
-r17 := r16 rotated (0, a0);
-dotlabel.top("$r_{17}$", r17) v8;
-label.lft("$r_{17}$:  RA $" & decimal a0 & "^\circ$", r17 shifted (-.75cm, 0)) v8;
+picture_vector pv;
+pv++;
+pv++;
+pv++;
+pv++;
 
-dotlabel.top("$r_{17}$", r17) v9;
-dotlabel.llft("$r_{17}$", r17) v10;
-dotlabel.top("$r_{17}$", r17) v11;
+def plot_star_on_sphere (pv) {numeric radius, star S} =
 
-r18 := r16 rotated (0, 22.5);
-dotlabel.llft("$22.5^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.urt("$45^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.urt("$67.5^\circ$", r18) v8; 
-rotate r18 (0, 22.5);
-dotlabel.urt("$90^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.ulft("$112.5^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.ulft("$135^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.ulft("$157.5^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.lft("$180^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.lft("$202.5^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.urt("$225^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.urt("$247.5^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.lrt("$270^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.ulft("$292.5^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.ulft("$315^\circ$", r18) v8;
-rotate r18 (0, 22.5);
-dotlabel.rt("$337.5^\circ$", r18) v8;
+  path q[];
+  string u[];
+  point P[];
+  
+  u0 := common_name S;
+  message "star S == " & u0 & ".";
 
+  a0 := ra_decimal_degrees S;
+  message "RA decimal deg. of star S (" & u0 & ") (a0):";
+  show a0;
 
-a1 := declination_decimal_degrees S;
-message "Declination decimal deg. S (a1):";
-show a1;
+  a1 := declination_decimal_degrees S;
+  message "Declination decimal deg. of star S (" & u0 & ") (a1):";
+  show a1;
 
-r19 := r16 rotated (0, 0, a1);
-dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v8;
-dotlabel.rt("$r_{19}$:  Decl.~$" & decimal a1 & "^\circ$", r19) v9;
+  P17 := r16 rotated (0, a0);
+  dotlabel.top("$P_{17}$", P17) v8;
+  label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) v8;
+  dotlabel.top("$P_{17}$", P17) v9;
+  dotlabel.llft("$P_{17}$", P17) v10;
+  dotlabel.top("$P_{17}$", P17) v11;
 
-r22 := r19 rotated (0, a0);  %% a0:  RA of star S.
+  P19 := r16 rotated (0, 0, a1);
+  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv0;
+  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv1;
 
-q0 := origin -- r17 -- r22 --cycle;
-draw q0 with_color blue on_picture v8;
-draw q0 with_color blue on_picture v9;
-draw q0 with_color blue on_picture v11;
+  P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
 
-r23 := get_normal q0;
-show r23;
+  q0 := origin -- P17 -- P22 --cycle;
 
-q1 += ..;
+  draw q0 with_color blue on_picture pv0;
+  draw q0 with_color blue on_picture pv1;
+  draw q0 with_color blue on_picture pv2;
+  draw q0 with_color blue on_picture pv3;
 
-t0 := identity rotated_around (origin, r23) 3;
+  P23 := get_normal q0;
+  show P23;
 
-r24 := r17 transformed t0; 
+  q1 += ..;
 
+  t0 := identity rotated_around (origin, P23) 3;
 
-if (magnitude (r22 - r24)) > (magnitude (r22 - r17)):
-  invert t0;
-fi;
+  P24 := P17 transformed t0; 
 
+  if (magnitude (P22 - P24)) > (magnitude (P22 - P17)):
+    invert t0;
+  fi;
 
+  forever:
+    P24 *= t0;
+    exit_if magnitude(ypart P24) >= magnitude(ypart P22);
+    q1 += P24;
+  endfor;
 
+  draw q1 on_picture pv0 with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
+  draw q1 on_picture pv1 with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
+  draw q1 on_picture pv3 with_pen pencircle scaled (2pt, 2pt, 2pt) with_color orange;
 
-forever:
-  r24 *= t0;
-  exit_if magnitude(ypart r24) >= magnitude(ypart r22);
-  q1 += r24;
-endfor;
+  dotlabel.lft("$P_{22}$", P22) pv0;
+  dotlabel.lft("$P_{22}$", P22) pv1;
+  dotlabel.lft("$P_{22}$", P22) pv2;
+  dotlabel.lft("$P_{22}$", P22) pv3;
+  
+enddef;
 
-draw q1 on_picture v8 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
-draw q1 on_picture v9 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
-draw q1 on_picture v11 with_pen pencircle scaled (3pt, 3pt, 3pt) with_color orange;
-
-dotlabel.top("$r_{22}$", r22) v8;
-dotlabel.lft("$r_{22}$", r22) v9;
-dotlabel.lft("$r_{22}$", r22) v10;
-dotlabel.lft("$r_{22}$", r22) v11;
-
+plot_star_on_sphere (pv) {3.5, hadar};
+plot_star_on_sphere (pv) {3.5, sirius};
+  
 %% *** (3)
 
 focus f;
@@ -188,22 +168,26 @@ set f with_position (0, 20, -50)
 beginfig(8);
   %rotate v8 (0, 70);
   current_picture := v8;
+  current_picture += pv0;
   %dotlabel.rt("
   label("{\\bf Perspective Projection}", (0, -4.5));
 endfig with_focus f;
 
 beginfig(9);
   currentpicture := v9;
+  current_picture += pv1;
   label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
 endfig with_projection parallel_x_y; 
 
 beginfig(10);
   currentpicture := v10;
+  current_picture += pv2;
   label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
 endfig with_projection parallel_x_z; 
 
 beginfig(11);
   currentpicture := v11;
+  current_picture += pv3;  
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
 endfig with_projection parallel_z_y; 
 
@@ -331,20 +315,20 @@ message "max_edge_angle:";
 show max_edge_angle; 
 
 %% !! START HERE:  LDF 2021.7.3.  Get radius.
-%% Then get arc length from r17 to r22 and from r22 to the nearest "major" RA angle.
+%% Then get arc length from P17 to P22 and from P22 to the nearest "major" RA angle.
 %%
 %% Try the code thus far on a star with negative declination.
 
-r25 := (0, ypart r22);  %% Point on y-axis with height equal to declination of star S.
-dotlabel.rt("$r_{25}$", r25) v8;
-dotlabel.rt("$r_{25}$", r25) v9;
-dotlabel.rt("$r_{25}$", r25) v11;
+P25 := (0, ypart P22);  %% Point on y-axis with height equal to declination of star S.
+dotlabel.rt("$P_{25}$", P25) v8;
+dotlabel.rt("$P_{25}$", P25) v9;
+dotlabel.rt("$P_{25}$", P25) v11;
 
 message "a1 (declination_decimal_degrees S)";
 show a1;
 
-a2 := magnitude(r22 - r25);
-message "a2 (radius of circle through r22):";
+a2 := magnitude(P22 - P25);
+message "a2 (radius of circle through P22):";
 show a2;
 
 a3 := arc_length (magnitude(a1)) c0;

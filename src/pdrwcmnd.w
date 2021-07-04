@@ -844,7 +844,7 @@ Added this rule.
 
 @q ***** (5) basic_drawing_command --> DRAWDBLARROW.@>
 @*4 \§basic drawing command> $\longrightarrow$ \.{DRAWDBLARROW}.
-
+1
 \LOG
 \initials{LDF 2004.11.08.}
 Added this rule.
