@@ -1298,7 +1298,76 @@ Added this rule.
 
 };
 
+@q **** (4) command --> WRITE string_expression TO newwrite_expression no_newline_optional. @>
 
+@*3 \§command> $\longrightarrow$ \.{WRITE} \§string_expression> \.{TO} \§newwrite_expression> \§no newline optional>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: WRITE string_expression TO newwrite_expression no_newline_optional@>@/
+{
+@q ******* (7) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> WRITE string_expression TO newwrite_expression no_newline_optional'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Newwrite *nw = 0;    
+
+    entry = static_cast<Id_Map_Entry_Node>(@=$4@>); 
+
+    string *s = static_cast<string*>(@=$2@>);
+
+#if 0
+    cerr << "*s == " << *s << endl;
+#endif 
+
+    if (entry == 0)
+      cerr << "entry is NULL." << endl;
+    else if (entry->object == 0)
+      cerr << "entry->object is NULL." << endl;
+
+    if (entry != 0 && entry->object != 0)
+    {
+        nw = static_cast<Newwrite*>(entry->object); 
+        
+        if (nw->out_strm.is_open())
+        {
+            nw->out_strm << *s;
+
+            if (@=$5@> == 0)
+              nw->out_strm << endl;
+        }
+    }
+
+    delete s;
+    s = 0;
+
+    @=$$@> = static_cast<void*>(0);
+
+@q ******* (7) @>
+
+};
 
 @q ***** (5) no_newline_optional.  @>
 @* \§no newline optional>.
