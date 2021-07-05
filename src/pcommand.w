@@ -1229,9 +1229,9 @@ Added this rule.
 
 };
 
-@q **** (4) command --> WRITE NEWWRITE_EXPRESSION newwrite_expression string_expression. @>
+@q **** (4) command --> WRITE newwrite_expression string_expression no_newline_optional. @>
 
-@*3 \§command> $\longrightarrow$ \.{WRITE} \§newwrite_expression> \§string_expression>.
+@*3 \§command> $\longrightarrow$ \.{WRITE} \§newwrite_expression> \§string_expression> \§no newline optional>.
 \initials{LDF 2021.7.5.}
 
 \LOG
@@ -1243,7 +1243,7 @@ Added this rule.
 
 @<Define rules@>= 
   
-@=command: WRITE newwrite_expression string_expression@>@/
+@=command: WRITE newwrite_variable string_expression no_newline_optional@>@/
 {
 @q ******* (7) @>
 
@@ -1253,7 +1253,8 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> WRITE newwrite_expression string_expression'.";
+      cerr_strm << "*** Parser: `command --> WRITE newwrite_expression string_expression no_newline_optional'."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1262,11 +1263,32 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    Newwrite *nw = static_cast<Newwrite*>(@=$2@>);
-    string   *s  = static_cast<string*>(@=$3@>);
+    Newwrite *nw = 0;    
 
-    nw->out_strm << *s << endl;
-   
+    entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
+
+    string *s = static_cast<string*>(@=$3@>);
+
+    cerr << "*s == " << *s << endl;
+
+    if (entry == 0)
+      cerr << "entry is NULL." << endl;
+    else if (entry->object == 0)
+      cerr << "entry->object is NULL." << endl;
+
+    if (entry != 0 && entry->object != 0)
+    {
+        nw = static_cast<Newwrite*>(entry->object); 
+        
+        if (nw->out_strm.is_open())
+        {
+            nw->out_strm << *s;
+
+            if (@=$4@> == 0)
+              nw->out_strm << endl;
+        }
+    }
+
     delete s;
     s = 0;
 
@@ -1275,6 +1297,49 @@ Added this rule.
 @q ******* (7) @>
 
 };
+
+
+
+@q ***** (5) no_newline_optional.  @>
+@* \§no newline optional>.
+\initials{LDF 2021.7.5.}
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> no_newline_optional@>
+
+@q ***** (6) no_newline_optional --> EMPTY.  @>
+@*5 \§no newline optional> $\longrightarrow$ \.{EMPTY}.
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=no_newline_optional: /* Empty  */@>
+{
+
+  @=$$@> = 0;
+
+};
+
+@q ***** (6) no_newline_optional --> NO_NEWLINE.  @>
+@*5 \§no newline optional> $\longrightarrow$ \.{NO_NEWLINE}.
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=no_newline_optional: NO_NEWLINE@>
+{
+  @=$$@> = 1;
+};
+
+@q ***** (5) @>
 
 @q **** (4) @>
 

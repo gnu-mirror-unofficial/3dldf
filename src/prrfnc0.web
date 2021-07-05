@@ -1386,8 +1386,9 @@ Added |name_map| entries for |IS_ON_PLANE|, |IS_IN_REG_POLYGON| and
    name_map[NEWWRITE] = "NEWWRITE";
    name_map[NEWWRITE_VECTOR] = "NEWWRITE_VECTOR";
 
-   name_map[WRITE] = "WRITE";
-   name_map[CLOSE] = "CLOSE";
+   name_map[WRITE]      = "WRITE";
+   name_map[CLOSE]      = "CLOSE";
+   name_map[NO_NEWLINE] = "NO_NEWLINE";
 
    name_map[PLANE] = "PLANE";
    name_map[PLANE_VECTOR] = "PLANE_VECTOR";
@@ -3154,7 +3155,6 @@ variables.
 @q *** (3) Definition.@> 
 
 @<Define parser rule functions@>=
-
 void*
 Scan_Parse::variable_decl_func(char* arg1,
                                void* arg2,
@@ -3165,7 +3165,7 @@ Scan_Parse::variable_decl_func(char* arg1,
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;

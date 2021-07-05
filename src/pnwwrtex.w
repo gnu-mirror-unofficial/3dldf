@@ -69,7 +69,7 @@ Created this file.
 @=newwrite_primary: newwrite_variable@>@/
 {
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
    stringstream cerr_strm;
    if (DEBUG)
       {
@@ -84,11 +84,18 @@ Created this file.
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
   if (entry == static_cast<Id_Map_Entry_Node>(0))
-    {
+  {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
 
       @=$$@> = static_cast<void*>(0);
 
-    } /* |if (entry == 0 || entry->object == 0)|  */
+  } /* |if (entry == 0 || entry->object == 0)|  */
 
 @ |entry->object| can be a |void| pointer if the |newwrite| was declared, 
 but hasn't been assigned to.  It shouldn't be necessary to assign to a 
@@ -98,10 +105,17 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @<Define rules@>=
   else if (entry->object == static_cast<void*>(0))
     {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry->object is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
       entry->known_state = Id_Map_Entry_Type::KNOWN;
  
       Newwrite* p = new Newwrite;
-      p->clear();
 
       entry->object = static_cast<void*>(p);
       
@@ -113,16 +127,20 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @<Define rules@>=
 
   else /* |entry != 0 && entry->object != 0|  */@;
-
   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry and entry->object are both non-NULL." << endl;
+
+         static_cast<Newwrite*>(entry->object)->show("Newwrite (entry->object):");      
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
     @=$$@> = static_cast<void*>(entry);
 
   }  /* |else| (|entry != 0 && entry->object != 0|)  */@;
-
 };
-
-@q *** (3) newwrite_primary --> newwrite_argument..@>
-@ \§newwrite primary> $\longrightarrow$ \§newwrite argument>.  
 
 @q *** newwrite_primary --> ( newwrite_expression )  @>
 @ \§newwrite primary> $\longrightarrow$ `\.{\LP}' \§newwrite expression> `\.{\RP}'.
@@ -131,7 +149,8 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @=newwrite_primary: LEFT_PARENTHESIS newwrite_expression RIGHT_PARENTHESIS@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
+  stringstream cerr_strm;
   if (DEBUG)
     {
       cerr << "*** Parser: newwrite_primary --> `(' newwrite_expression `)'."
@@ -139,7 +158,68 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  @=$$@> = @=$2@>;
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+  {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+      @=$$@> = static_cast<void*>(0);
+
+  } /* |if (entry == 0 || entry->object == 0)|  */
+
+@ |entry->object| can be a |void| pointer if the |newwrite| was declared, 
+but hasn't been assigned to.  It shouldn't be necessary to assign to a 
+|newwrite| before using it.
+\initials{LDF 2004.06.03.}
+
+@<Define rules@>=
+  else if (entry->object == static_cast<void*>(0))
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry->object is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+    }
+
+@
+@<Define rules@>=
+
+  else /* |entry != 0 && entry->object != 0|  */@;
+  {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry and entry->object are both non-NULL." << endl;
+
+         static_cast<Newwrite*>(entry->object)->show("Newwrite (entry->object):");      
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+  }
+
+   @=$$@> = @=$2@>;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+      {
+          cerr_strm << "*** Parser:  Exiting rule `'."
+                    << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@;
 
 };
 
@@ -156,7 +236,8 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @=newwrite_secondary: newwrite_primary@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
+  stringstream cerr_strm;
   if (DEBUG)
     {
       cerr << "\n*** Parser: newwrite_secondary --> newwrite_primary "
@@ -164,7 +245,68 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+  {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+      @=$$@> = static_cast<void*>(0);
+
+  } /* |if (entry == 0 || entry->object == 0)|  */
+
+@ |entry->object| can be a |void| pointer if the |newwrite| was declared, 
+but hasn't been assigned to.  It shouldn't be necessary to assign to a 
+|newwrite| before using it.
+\initials{LDF 2004.06.03.}
+
+@<Define rules@>=
+  else if (entry->object == static_cast<void*>(0))
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry->object is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+    }
+
+@
+@<Define rules@>=
+
+  else /* |entry != 0 && entry->object != 0|  */@;
+  {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry and entry->object are both non-NULL." << endl;
+
+         static_cast<Newwrite*>(entry->object)->show("Newwrite (entry->object):");      
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+  }
+
   @=$$@> = @=$1@>;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+      {
+          cerr_strm << "*** Parser:  Exiting rule `newwrite_secondary: newwrite_primary'."
+                    << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@;
 
 };
 
@@ -180,8 +322,78 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @<Define rules@>=
 @=newwrite_tertiary: newwrite_secondary@>@/
 {
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+  stringstream cerr_strm;
+  if (DEBUG)
+    {
+      cerr << "\n*** Parser: newwrite_tertiary --> newwrite_secondary."
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+  {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+      @=$$@> = static_cast<void*>(0);
+
+  } /* |if (entry == 0 || entry->object == 0)|  */
+
+@ |entry->object| can be a |void| pointer if the |newwrite| was declared, 
+but hasn't been assigned to.  It shouldn't be necessary to assign to a 
+|newwrite| before using it.
+\initials{LDF 2004.06.03.}
+
+@<Define rules@>=
+  else if (entry->object == static_cast<void*>(0))
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry->object is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+    }
+
+@
+@<Define rules@>=
+
+  else /* |entry != 0 && entry->object != 0|  */@;
+  {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry and entry->object are both non-NULL." << endl;
+
+         static_cast<Newwrite*>(entry->object)->show("Newwrite (entry->object):");      
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+  }
 
   @=$$@> = @=$1@>;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+      {
+          cerr_strm << "*** Parser:  Exiting rule `newwrite_tertiary: newwrite_secondary'."
+                    << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@;
 
 };
 
@@ -197,8 +409,78 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @<Define rules@>=
 @=newwrite_expression: newwrite_tertiary@>@/
 {
+#if DEBUG_COMPILE
+  bool DEBUG = true; /* |false| */ @; 
+  stringstream cerr_strm;
+  if (DEBUG)
+    {
+      cerr << "\n*** Parser: newwrite_expression --> newwrite_tertiary."
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
+
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
+  {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+      @=$$@> = static_cast<void*>(0);
+
+  } /* |if (entry == 0 || entry->object == 0)|  */
+
+@ |entry->object| can be a |void| pointer if the |newwrite| was declared, 
+but hasn't been assigned to.  It shouldn't be necessary to assign to a 
+|newwrite| before using it.
+\initials{LDF 2004.06.03.}
+
+@<Define rules@>=
+  else if (entry->object == static_cast<void*>(0))
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry->object is NULL." << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+    }
+
+@
+@<Define rules@>=
+
+  else /* |entry != 0 && entry->object != 0|  */@;
+  {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "entry and entry->object are both non-NULL." << endl;
+
+         static_cast<Newwrite*>(entry->object)->show("Newwrite (entry->object):");      
+      }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+  }
 
   @=$$@> = @=$1@>;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+      {
+          cerr_strm << "*** Parser:  Exiting rule `newwrite_expression: newwrite_tertiary'."
+                    << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@;
 
 };
 

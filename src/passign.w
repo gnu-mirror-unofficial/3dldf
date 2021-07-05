@@ -3893,6 +3893,19 @@ Added this rule.
 @=newwrite_assignment: newwrite_variable ASSIGN string_expression@>
 {
 
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false|  */
+
+   if (DEBUG)
+   { 
+       cerr << "*** Parser: newwrite_assignment: newwrite_variable ASSIGN string_expression."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   Newwrite *n;
   string *s = static_cast<string*>(@=$3@>);
 
@@ -3900,6 +3913,8 @@ Added this rule.
 
   *n = *s;
 
+  n->show("In rule newwrite_assignment ... *n:");
+  
   delete s;
   s = 0;
 
@@ -3908,6 +3923,8 @@ Added this rule.
                                              @=$1@>,
                                              n);
   @=$$@> = ivp.v;
+
+  static_cast<Newwrite*>(ivp.v)->show("*ivp.v:");
 
 };
 

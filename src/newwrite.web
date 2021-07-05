@@ -258,20 +258,49 @@ operator=(const Newwrite& n);
 void
 Newwrite::operator=(const Newwrite& n)
 {
+    cerr << "Entering `Newwrite::operator=(const Newwrite& n)'." << endl;
+ 
     if (this == &n) /* Make sure it's not self-assignment. */
+    {
+       cerr << "Self-assignment.  Exiting `Newwrite::operator=(const Newwrite& n)'." << endl;
        return;
+    }
+
 
     if (filename == n.filename && out_strm.is_open())
+    {
+       cerr << "filename == n.filename and out_strm is open."
+            << endl 
+            << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
+            << endl;
        return;
+    }
+     
 
     if (filename == n.filename && !out_strm.is_open())
     {
+       cerr << "filename == n.filename and out_strm is not open."
+            << endl
+            << "Opening out_strm with filename == " << filename
+            << endl 
+            << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
+            << endl;
+
        out_strm.open(filename.c_str());
        return;
     }
 
     if (filename != n.filename)
     {
+       cerr << "filename != n.filename."
+            << endl
+            << "Resetting filename from " << filename << " to n.filename == " << n.filename
+            << endl 
+            << "Closing and reopening out_strm with new filename."
+            << endl 
+            << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
+            << endl;
+
        filename = n.filename;
 
        if (out_strm.is_open())
@@ -279,6 +308,8 @@ Newwrite::operator=(const Newwrite& n)
 
        out_strm.open(filename.c_str());
     }
+
+    cerr << "Exiting `Newwrite::operator=(const Newwrite& n)'." << endl;
 
     return;
 
@@ -340,7 +371,6 @@ show(string text = "") const;
 @<Define |Newwrite| functions@>=
 void 
 Newwrite::show(string text) const
-
 {
     if (text == "")
        text = "Newwrite:";

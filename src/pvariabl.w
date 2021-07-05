@@ -4369,6 +4369,8 @@ Removed code from this rule.  Now calling
                                @=$2@>, 
                                NEWWRITE,
                                parameter);
+
+
 };
 
 @q *** (3) star variable --> variable STAR.  @>

@@ -565,9 +565,33 @@ Added this rule.
   
 @=command: SHOW newwrite_expression@>@/
 {
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> SHOW newwrite_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+#if 1 /* 0 */
+    entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+    static_cast<Newwrite*>(entry->object)->show("*entry->object:");
+
+#else
+
     Scan_Parse::show_func<Newwrite>(static_cast<Newwrite*>(@=$2@>),
                                     "newwrite",
                                     parameter); 
+#endif 
 
     @=$$@> = static_cast<void*>(0);
 
