@@ -478,6 +478,10 @@
 
 @i pglvexpr.w 
 
+@q *** (3) newwrite vector expressions.  'pnwwrtvx.w'.  @>
+
+@i pnwwrtvx.w
+
 @q *** (3) plane vector expressions.  'pplnvxpr.w'.  @>
 
 @i pplnvxpr.w

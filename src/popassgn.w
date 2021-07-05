@@ -4186,7 +4186,7 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
 };
 
 @q *** (3) operation_assignment --> newwrite_vector_variable  @>
-@q *** (3) PLUS_ASSIGN string_expression.                   @>
+@q *** (3) PLUS_ASSIGN string_primary.                     @>
 
 @*3 \§operation assignment> $\longrightarrow$ \§newwrite vector variable>
 \.{PLUS\_ASSIGN} \§string expression>.
@@ -4200,7 +4200,7 @@ Added this rule.
 
 @<Define rules@>=
  
-@=operation_assignment: newwrite_vector_variable PLUS_ASSIGN string_expression@>
+@=operation_assignment: newwrite_vector_variable PLUS_ASSIGN string_primary@>
 {
 
    @<Common declarations for rules@>@;
@@ -4212,7 +4212,7 @@ Added this rule.
       {
         cerr_strm << thread_name 
                   << "*** Parser: `operation_assignment --> "
-                  << "newwrite_vector_variable PLUS_ASSIGN string_expression'.";
+                  << "newwrite_vector_variable PLUS_ASSIGN string_primary'.";
         
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -4228,7 +4228,7 @@ Added this rule.
 
   Newwrite *n = new Newwrite;
 
-  s = static_cast<string *>(@=$3@>);
+  string *s = static_cast<string *>(@=$3@>);
 
   *n = *s;
 
@@ -4253,7 +4253,7 @@ Added this rule.
       cerr_strm << thread_name 
                 << "ERROR! In parser rule `operation_assignment --> "
                 << endl 
-                << "newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                << "newwrite_vector_variable PLUS_ASSIGN string_primary':"
                 << endl << "`Scan_Parse::vector_type_plus_assign()' "
                 << "failed.  Didn't add `newwrite' to `newwrite_vector'.";
 
@@ -4278,7 +4278,7 @@ else /* |status == 0|  */
           cerr_strm << thread_name 
                     << "In parser rule `operation_assignment --> "
                     << endl 
-                    << "newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                    << "newwrite_vector_variable PLUS_ASSIGN string_primary':"
                     << endl << "`Scan_Parse::vector_type_plus_assign()' "
                     << "succeeded.";
 
