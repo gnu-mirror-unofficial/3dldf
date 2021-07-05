@@ -613,6 +613,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 
 
 @=%token <pointer_value> NEWWRITE@>@/
+@=%token <int_value>     WRITE@>@/
+@=%token <int_value>     CLOSE@>@/
 
 @=%token <pointer_value> PLANE@>@/
 

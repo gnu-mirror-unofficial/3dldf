@@ -307,8 +307,7 @@ Made changes to account for these facts.
 
   @=$$@> = static_cast<void*>(entry_0);
   
-}
-;
+};
 
 @q ** (2) picture expression.  @>
 @*1 \§picture expression>.

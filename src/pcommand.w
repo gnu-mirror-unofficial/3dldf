@@ -1161,7 +1161,7 @@ END_LOAD_ASTRONOMY:
 
 @q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 
-@*3 \§command> $\longrightarrow$ \.{PLOT} \.{STARS} \§stars option list>.
+@*3 \§command> $\longrightarrow$ \.{PLOT} \.{STARS} \§sphere expression> \§stars option list>.
 \initials{LDF 2021.06.26.}
 
 \LOG
@@ -1228,6 +1228,61 @@ Added this rule.
 @q ******* (7) @>
 
 };
+
+@q **** (4) command --> WRITE NEWWRITE_EXPRESSION newwrite_expression string_expression. @>
+
+@*3 \§command> $\longrightarrow$ \.{WRITE} \§newwrite_expression> \§string_expression>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: WRITE newwrite_expression string_expression@>@/
+{
+@q ******* (7) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> WRITE newwrite_expression string_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Newwrite *nw = static_cast<Newwrite*>(@=$2@>);
+    string   *s  = static_cast<string*>(@=$3@>);
+
+    nw->out_strm << *s << endl;
+   
+    delete s;
+    s = 0;
+
+    @=$$@> = static_cast<void*>(0);
+
+@q ******* (7) @>
+
+};
+
+@q **** (4) @>
+
+@q *** (3) @>
+
+@q ** (2) @>
+
+@q * (1) @>
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
