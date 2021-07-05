@@ -50,171 +50,113 @@
 
 @q * (0) newwrite expressions.  @>
 @** newwrite expressions.
-\initials{LDF 2021.7.5.}
 
 \LOG
 \initials{LDF 2021.7.5.}
 Created this file.
 \ENDLOG 
 
-@q * (1) newwrite_primary.  @>
+@q * (1) newwrite primary.  @>
 @* \§newwrite primary>.
-\initials{LDF 2021.7.5.}  
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this type declaration.
-\ENDLOG 
-
+  
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> newwrite_primary@>@/
 
 @q ** (2) newwrite_primary --> newwrite_variable.@>
 @*1 \§newwrite primary> $\longrightarrow$ \§newwrite variable>.  
 
-\LOG
-\initials{LDF 2021.7.5.}
-Added this rule.
-\ENDLOG 
-
-@q *** (3) Definition.@> 
-
 @<Define rules@>=
 @=newwrite_primary: newwrite_variable@>@/
 {
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+   stringstream cerr_strm;
+   if (DEBUG)
+      {
+          cerr_strm << "*** Parser:  In rule `newwrite_primary: newwrite_variable':"
+                    << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@;
 
-  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>); 
 
-  if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
+  if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
 
       @=$$@> = static_cast<void*>(0);
 
     } /* |if (entry == 0 || entry->object == 0)|  */
 
-  else /* |entry != 0 && entry->object != 0|  */
+@ |entry->object| can be a |void| pointer if the |newwrite| was declared, 
+but hasn't been assigned to.  It shouldn't be necessary to assign to a 
+|newwrite| before using it.
+\initials{LDF 2004.06.03.}
 
-    @=$$@> = static_cast<void*>(create_new<Newwrite>(
-                                  static_cast<Newwrite*>(
-                                     entry->object))); 
+@<Define rules@>=
+  else if (entry->object == static_cast<void*>(0))
+    {
+      entry->known_state = Id_Map_Entry_Type::KNOWN;
+ 
+      Newwrite* p = new Newwrite;
+      p->clear();
+
+      entry->object = static_cast<void*>(p);
+      
+      @=$$@> = static_cast<void*>(entry);
+
+    }
+
+@
+@<Define rules@>=
+
+  else /* |entry != 0 && entry->object != 0|  */@;
+
+  {
+    @=$$@> = static_cast<void*>(entry);
+
+  }  /* |else| (|entry != 0 && entry->object != 0|)  */@;
 
 };
 
-@q ** (2) newwrite_primary --> LEFT_PARENTHESIS newwrite_expression @> 
-@q ** (2) RIGHT_PARENTHESIS                                         @>
+@q *** (3) newwrite_primary --> newwrite_argument..@>
+@ \§newwrite primary> $\longrightarrow$ \§newwrite argument>.  
 
-@*1 \§newwrite primary> $\longrightarrow$ \.{\LP} 
-\§newwrite expression> \.{\RP}.
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this rule.
-\ENDLOG
+@q *** newwrite_primary --> ( newwrite_expression )  @>
+@ \§newwrite primary> $\longrightarrow$ `\.{\LP}' \§newwrite expression> `\.{\RP}'.
 
 @<Define rules@>=
 @=newwrite_primary: LEFT_PARENTHESIS newwrite_expression RIGHT_PARENTHESIS@>@/
 {
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr << "*** Parser: newwrite_primary --> `(' newwrite_expression `)'."
+           << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
   @=$$@> = @=$2@>;
 
 };
 
-@q ***** (5) newwrite_primary --> LAST @>
-@q ***** (5) newwrite_vector_expression.@>
-
-@*4 \§newwrite primary> $\longrightarrow$ 
-\.{LAST} \§newwrite vector expression>.
-\initials{LDF 2021.7.5.}
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this rule.
-\ENDLOG
-
-@q ****** (6) Definition.@> 
-
-@<Define rules@>=
-@=newwrite_primary: LAST newwrite_vector_expression@>@/
-{ 
-   Newwrite* c;
-
-   c = create_new<Newwrite>(0);
-
-   Pointer_Vector<Newwrite>* pv 
-      = static_cast<Pointer_Vector<Newwrite>*>(@=$2@>);
-
-@q ******* (7) Error handling:  |pv == 0|.@> 
-
-@ Error handling:  |pv == 0|.
-\initials{LDF 2021.7.5.}
-
-@<Define rules@>=
-
-   if (pv == static_cast<Pointer_Vector<Newwrite>*>(0))
-      {
-          delete c;
-
-          @=$$@> = static_cast<void*>(0);
-
-      }  /* |if (pv == 0)|  */
-
-@q ******* (7) Error handling:  |pv->ctr == 0|.@> 
-
-@ Error handling:  |pv->ctr == 0|.
-\initials{LDF 2021.7.5.}
-
-@<Define rules@>=
-
-   else if (pv->ctr == 0)
-      {
-
-          delete c;
-
-          @=$$@> = static_cast<void*>(0);
-
-      }  /* |else if (pv->ctr == 0)|  */
-
-@q ******* (7) |pv != 0 && pv->ctr > 0|.@> 
-
-@ |pv != 0 && pv->ctr > 0|.  Set |@=$$@>| to |*(pv->v[pv->ctr - 1])|.
-\initials{LDF 2021.7.5.}
-
-@<Define rules@>=
-
-   else 
-      {
-         *c = *(pv->v[pv->ctr - 1]);
-         @=$$@> = static_cast<void*>(c); 
-      }
-@q ******* (7) @> 
-
-};
-
-@q * (1) newwrite_secondary.  @>
-@* \§newwrite secondary>.
-\initials{LDF 2021.7.5.}
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this type declaration.
-\ENDLOG
+@q ** (2) newwrite secondary.  @>
+@ \§newwrite secondary>.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> newwrite_secondary@>
   
-@q ** (2) newwrite secondary --> newwrite_primary.@>
-@*1 \§newwrite secondary> $\longrightarrow$ \§newwrite primary>.
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this rule.
-\ENDLOG
+@q *** newwrite secondary --> newwrite_primary.@>
+@ \§newwrite secondary> $\longrightarrow$ \§newwrite primary>.
 
 @<Define rules@>=
 @=newwrite_secondary: newwrite_primary@>@/
 {
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @;
+  bool DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr << "\n*** Parser: newwrite_secondary --> newwrite_primary "
@@ -226,26 +168,14 @@ Added this rule.
 
 };
 
-@q * (1) newwrite tertiary.@>
-@* \§newwrite tertiary>.
-\initials{LDF 2021.7.5.}
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this type declaration.
-\ENDLOG
+@q ** (2) newwrite tertiary.  @>
+@ \§newwrite tertiary>.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> newwrite_tertiary@>
 
-@q ** (2) newwrite tertiary --> newwrite_secondary.  @>
-@*1 \§newwrite tertiary> $\longrightarrow$ \§newwrite secondary>.
-\initials{LDF 2021.7.5.}
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this rule.
-\ENDLOG
+@q *** newwrite tertiary --> newwrite_secondary.@>
+@ \§newwrite tertiary> $\longrightarrow$ \§newwrite secondary>.
 
 @<Define rules@>=
 @=newwrite_tertiary: newwrite_secondary@>@/
@@ -255,25 +185,14 @@ Added this rule.
 
 };
 
-@q * (1) newwrite expression.@>
-@* \§newwrite expression>.
-\initials{LDF 2021.7.5.}
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this type declaration.
-\ENDLOG
+@q ** (2) newwrite expression.  @>
+@*1 \§newwrite expression>.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> newwrite_expression@>
 
-@q ** (2) newwrite expression --> newwrite_tertiary.  @>
-@*1 \§newwrite expression> $\longrightarrow$ \§newwrite tertiary>.
-
-\LOG
-\initials{LDF 2021.7.5.}
-Added this rule.
-\ENDLOG
+@q *** newwrite expression --> newwrite_tertiary.  @>
+@ \§newwrite expression> $\longrightarrow$ \§newwrite tertiary>.
 
 @<Define rules@>=
 @=newwrite_expression: newwrite_tertiary@>@/
@@ -282,6 +201,26 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q * Emacs-Lisp code for use in indirect buffers when using the          @>
+@q   GNU Emacs editor.  The local variable list is not evaluated when an @>
+@q   indirect buffer is visited, so it's necessary to evaluate the       @>
+@q   following s-expression in order to use the facilities normally      @>
+@q   accessed via the local variables list.                              @>
+@q   \initials{LDF 2004.02.12}.                                          @>
+@q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
+
+@q Local Variables:                   @>
+@q mode:CWEB                          @>
+@q eval:(outline-minor-mode t)        @>
+@q abbrev-file-name:"~/.abbrev_defs"  @>
+@q eval:(read-abbrev-file)            @>
+@q fill-column:80                     @>
+@q run-cweave-on-file:"3DLDFprg.web"  @>
+@q End:                               @>
+
+
+
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
