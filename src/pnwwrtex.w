@@ -207,35 +207,12 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
 @q   following s-expression in order to use the facilities normally      @>
 @q   accessed via the local variables list.                              @>
-@q   \initials{LDF 2004.02.12}.                                          @>
-@q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
-
-@q Local Variables:                   @>
-@q mode:CWEB                          @>
-@q eval:(outline-minor-mode t)        @>
-@q abbrev-file-name:"~/.abbrev_defs"  @>
-@q eval:(read-abbrev-file)            @>
-@q fill-column:80                     @>
-@q run-cweave-on-file:"3DLDFprg.web"  @>
-@q End:                               @>
-
-
-
-
-@q * Emacs-Lisp code for use in indirect buffers when using the          @>
-@q   GNU Emacs editor.  The local variable list is not evaluated when an @>
-@q   indirect buffer is visited, so it's necessary to evaluate the       @>
-@q   following s-expression in order to use the facilities normally      @>
-@q   accessed via the local variables list.                              @>
 @q   \initials{LDF 2021.7.5.}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
 @q Local Variables:                   @>
 @q mode:CWEB                          @>
-@q eval:(outline-minor-mode t)        @>
 @q abbrev-file-name:"~/.abbrev_defs"  @>
 @q eval:(read-abbrev-file)            @>
-@q fill-column:70                     @>
-@q run-cweave-on-file:"3DLDFprg.web"  @>
 @q End:                               @>
 
