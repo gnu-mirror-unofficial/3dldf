@@ -4083,22 +4083,6 @@ Added this section.
 \LOG
 \initials{LDF 2021.06.26.}
 Added this rule.
-
-\initials{LDF 2021.06.26.}
-Got this rule to work.
-
-\initials{LDF 2021.06.26.}
-Removed most of the code from this rule to 
-|Scan_Parse::vector_type_plus_assign()|, which is now called in this
-rule.  
-
-\initials{LDF 2021.06.26.}
-Changed the symbol on the left-hand side of this rule from 
-|star_vector_assignment| to |operation_assignment|.
-
-\initials{LDF 2021.06.26.}
-Moved this rule from \filename{passign.w} to this file 
-(\filename{popassgn.w}). 
 \ENDLOG 
 
 @q **** (4) Definition.@>   
@@ -4107,7 +4091,6 @@ Moved this rule from \filename{passign.w} to this file
  
 @=operation_assignment: star_vector_variable PLUS_ASSIGN star_expression@>
 {
-
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
@@ -4201,6 +4184,123 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
   @=$$@> = static_cast<void*>(0);
 
 };
+
+@q *** (3) operation_assignment --> newwrite_vector_variable  @>
+@q *** (3) PLUS_ASSIGN string_expression.                   @>
+
+@*3 \§operation assignment> $\longrightarrow$ \§newwrite vector variable>
+\.{PLUS\_ASSIGN} \§string expression>.
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@q **** (4) Definition.@>   
+
+@<Define rules@>=
+ 
+@=operation_assignment: newwrite_vector_variable PLUS_ASSIGN string_expression@>
+{
+
+   @<Common declarations for rules@>@;
+  
+#if DEBUG_COMPILE
+   DEBUG = false; /* |true| */
+   
+   if (DEBUG)
+      {
+        cerr_strm << thread_name 
+                  << "*** Parser: `operation_assignment --> "
+                  << "newwrite_vector_variable PLUS_ASSIGN string_expression'.";
+        
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign()|.
+\initials{LDF 2021.7.5.}
+
+@<Define rules@>=
+
+  Newwrite *n = new Newwrite;
+
+  s = static_cast<string *>(@=$3@>);
+
+  *n = *s;
+
+  delete s;
+  s = 0;
+
+  status
+    = vector_type_plus_assign<Newwrite>(scanner_node,
+                                     static_cast<Id_Map_Entry_Node>(@=$1@>), 
+                                     NEWWRITE_VECTOR,
+                                     NEWWRITE,
+                                     n);
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign()| failed.
+\initials{LDF 2021.7.5.}
+
+@<Define rules@>=
+
+  if (status != 0)
+    {
+      cerr_strm << thread_name 
+                << "ERROR! In parser rule `operation_assignment --> "
+                << endl 
+                << "newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                << "failed.  Didn't add `newwrite' to `newwrite_vector'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
+
+    }  /* |if (status != 0)|  */
+
+@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+\initials{LDF 2021.7.5.}
+
+@<Define rules@>=
+
+else /* |status == 0|  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << thread_name 
+                    << "In parser rule `operation_assignment --> "
+                    << endl 
+                    << "newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                    << endl << "`Scan_Parse::vector_type_plus_assign()' "
+                    << "succeeded.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@;
+
+} /* |else| (|status == 0|)  */ 
+
+@q ***** (5) Set |$$| to 0 and exit rule.@>   
+
+@ Set |@=$$@>| to 0 and exit rule.
+\initials{LDF 2021.7.5.}
+
+@<Define rules@>=
+
+  @=$$@> = static_cast<void*>(0);
+
+};
+
 
 @q *** (3) |constellation_vectors|.@>  
 
