@@ -47,15 +47,15 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
 
-@q * (0) Newwrites.@>
-@** Newwrites\quad ({\tt newwrites\PERIOD web}).\hfil
+@q * (0) Newwrite.@>
+@** Newwrite\quad ({\tt newwrite\PERIOD web}).\hfil
 
 \LOG
 \initials{LDF 2021.7.5.}
 Created this file.
 \ENDLOG 
 
-\immediate\write\functexifile{File:  newwrites.web^^J}
+\immediate\write\functexifile{File:  newwrite.web^^J}
 
 @q * (1) Include files.@>
 @ Include files.
@@ -125,7 +125,13 @@ Added this |class| definition.
 class Newwrite
 {
 
+   friend Scanner_Type;
+   friend int yyparse(yyscan_t);
+
    protected:
+
+   string filename;
+   ofstream out_strm;
 
    public:
 
@@ -180,6 +186,10 @@ virtual
 @<Define |Newwrite| functions@>= 
 Newwrite::~Newwrite(void)
 {
+
+   if (out_strm.is_open())
+      out_strm.close();
+
    return;
 }
 
@@ -227,7 +237,7 @@ create_new(const Newwrite& c, Scanner_Node scanner_node);
 Added this section.
 \ENDLOG
 
-@q ** (2) Assignment from a |Newwrite|.@> 
+@q ** (2) Assignment from a |Newline|.@> 
 @*1 Assignment from a |Newwrite|.
 \initials{LDF 2021.7.5.}
 
@@ -239,27 +249,75 @@ Added this function.
 @q *** (3) Declaration.@> 
 
 @<Declare |Newwrite| functions@>=
-virtual
-Newwrite&
-operator=(const Newwrite& c);
+void
+operator=(const Newwrite& n);
 
 @q *** (3) Definition.@> 
-
 @
 @<Define |Newwrite| functions@>=
-
-Newwrite&
-Newwrite::operator=(const Newwrite& c)
+void
+Newwrite::operator=(const Newwrite& n)
 {
-    if (this == &c) /* Make sure it's not self-assignment. */
-       return *this;
+    if (this == &n) /* Make sure it's not self-assignment. */
+       return;
 
-    return *this;
+    if (filename == n.filename && out_strm.is_open())
+       return;
+
+    if (filename == n.filename && !out_strm.is_open())
+    {
+       out_strm.open(filename.c_str());
+       return;
+    }
+
+    if (filename != n.filename)
+    {
+       filename = n.filename;
+
+       if (out_strm.is_open())
+         out_strm.close();
+
+       out_strm.open(filename.c_str());
+    }
+
+    return;
 
 }  /* End of |Newwrite::operator=(const Newwrite& h)| definition.  */
 
-@q * (1) Returning elements and information.@>
-@* Returning elements and information.
+@q ** (2) Assignment from a |string|.@> 
+@*1 Assignment from a |string|.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Newwrite| functions@>=
+void
+operator=(const string& s);
+
+@q *** (3) Definition.@> 
+@
+@<Define |Newwrite| functions@>=
+void
+Newwrite::operator=(const string& s)
+{
+    if (filename == s)
+       return;
+
+    if (out_strm.is_open())
+       out_strm.close();
+    
+    filename = s;
+
+    out_strm.open(s.c_str());
+
+    return;
+
+}  /* End of |Newwrite::operator=(const Newwrite& h)| definition.  */
 
 @q * (1) Show.@> 
 @* Show.
@@ -287,7 +345,13 @@ Newwrite::show(string text) const
     if (text == "")
        text = "Newwrite:";
 
-    cerr << text << endl;
+    cerr << text << endl
+         << "filename:  " << filename << endl;
+   
+    if (out_strm.is_open())
+       cerr << "out_strm is open." << endl;
+    else 
+       cerr << "out_strm is not open." << endl;
 
     return;
 
@@ -296,7 +360,7 @@ Newwrite::show(string text) const
 @q * (1) Putting Newwrite together. @>
 @* Putting {\bf Newwrite} together.
 
-\immediate\write\functexifile{^^JEnd of file:  newwrites.web^^J}
+\immediate\write\functexifile{^^JEnd of file:  newwrite.web^^J}
 
 This is what's compiled.
 @c
@@ -305,8 +369,8 @@ This is what's compiled.
 @<Define |Newwrite| functions@>@;
 @<Declare non-member template functions for |Newwrite|@>@;
 
-@ This is what's written to \filename{newwrites.h}.
-@(newwrites.h@>=
+@ This is what's written to \filename{newwrite.h}.
+@(newwrite.h@>=
 @<Define |class Newwrite|@>@;
 @<Declare non-member template functions for |Newwrite|@>@;
 

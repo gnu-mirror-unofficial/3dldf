@@ -1828,6 +1828,37 @@ instead of
 
 };
 
+@q *** (3) newwrite_vector_variable.  @>
+@*2 \§newwrite vector variable>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> newwrite_vector_variable@>@/
+
+@q **** (4) newwrite_vector_variable --> variable NEWWRITE_VECTOR.@>
+@*3 \§newwrite vector variable> $\longrightarrow$ \§variable> 
+\.{NEWWRITE\_VECTOR}.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=newwrite_vector_variable: variable NEWWRITE_VECTOR@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               NEWWRITE_VECTOR,
+                               parameter);
+
+};
 
 @q *** (3) star_vector_variable.  @>
 @*2 \§star vector variable>.
@@ -2720,6 +2751,25 @@ Added this rule.
 
 @<Define rules@>= 
 @=vector_type_variable: glyph_vector_variable@>
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) vector_type_variable --> newwrite_vector_variable.@>
+
+@*3 \§vector type variable>  $\longrightarrow$ 
+\§newwrite vector variable>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=vector_type_variable: newwrite_vector_variable@>
 {
 
   @=$$@> = @=$1@>;
@@ -4289,6 +4339,38 @@ Removed code from this rule.  Now calling
                                parameter);
 };
 
+@q *** (3) newwrite variable --> variable NEWWRITE.  @>
+@*2 \§newwrite variable> $\longrightarrow$ \§variable> 
+\.{NEWWRITE}.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> newwrite_variable@>@/
+
+@
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+
+\initials{LDF 2005.06.09.}
+Removed code from this rule.  Now calling 
+|Scan_Parse::variable_decl_func()|.
+\ENDLOG
+
+@<Define rules@>= 
+@=newwrite_variable: variable NEWWRITE@>
+{
+   @=$$@> = variable_decl_func(@=$1@>, 
+                               @=$2@>, 
+                               NEWWRITE,
+                               parameter);
+};
+
 @q *** (3) star variable --> variable STAR.  @>
 @*2 \§star variable> $\longrightarrow$ \§variable> 
 \.{STAR}.
@@ -5104,6 +5186,23 @@ Added this rule.
 
 };
 
+@q *** (3) any_variable --> newwrite_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§newwrite variable>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+
+@=any_variable: newwrite_variable@>@/
+{
+   @=$$@> = @=$1@>;
+};
+
 @q *** (3) any_variable --> star_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§star variable>.
@@ -5864,6 +5963,25 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 };
+
+@q *** (3)  any_variable --> newwrite_vector_variable.  @>
+@*2 \§any variable> $\longrightarrow$ 
+\§newwrite vector variable>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=any_variable: newwrite_vector_variable@>@/
+{
+
+  @=$$@> = @=$1@>;
+
+};
+
 
 @q *** (3)  any_variable --> star_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 

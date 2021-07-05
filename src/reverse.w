@@ -798,6 +798,27 @@ Added this rule.
 
 };
 
+@q * (1) command --> REVERSE newwrite_vector_variable.@> 
+@* \§command> $\longrightarrow$ \.{REVERSE} 
+\§newwrite vector variable>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@q **** (4) Definition.@> 
+
+@<Define rules@>=
+@=command: REVERSE newwrite_vector_variable@>@/
+{
+
+   Scan_Parse::reverse_func<Newwrite>(@=$2@>, parameter);
+
+};
+
+
 @q * (1) command --> REVERSE plane_vector_variable.@> 
 @* \§command> $\longrightarrow$ \.{REVERSE} 
 \§plane vector variable>.

@@ -83,7 +83,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                 ellpsoid.web ellpsslc.web figures.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
                 imetfncs.web io.web lines.web loader.web \
-                matrices.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
+                matrices.web newwrite.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
                 parahypr.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
@@ -91,7 +91,6 @@ lib_LTLIBRARIES = lib3dldflb.la
                 sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
                 spheres.web sphrdevl.web transfor.web triangle.web \
                 utility.web
-
 
 3dldflb_c_files = $(3dldflb_CWEB_files:.web=.c)
 3dldflb_cpp_files = $(3dldflb_CWEB_files:.web=.c++) 
@@ -141,7 +140,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                       pinptcmd.w \
                       plblcmnd.w pldfdcl.w \
                       ploops.w pmacros.w pnbvexpr.w pnmvexpr.w \
-                      pnrbexpr.w pnumexpr.w \
+                      pnrbexpr.w pnumexpr.w pnwwrtex.w pnwwrtvx.w \
 		      popassgn.w poptions.w porgexpr.w porvexpr.w ppbvexpr.w ppdvexpr.w \
                       ppenexpr.w \
                       ppgvexpr.w pphdexpr.w pphvexpr.w ppicexpr.w pplhdslc.w \
@@ -213,7 +212,7 @@ lib3dldflb.c:
 # 	touch $@
 
 dist-hook:
-	rm ./lib3dldflb.c # ./lib3dldfsp.c
+	rm -f ./lib3dldflb.c # ./lib3dldfsp.c
 
 #### *** (3) Link 3dldf
 
@@ -267,7 +266,7 @@ lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser_1.h++ parser.h++ $
               mv $*.c $*.c++; \
            else \
               echo "$*.c++ is unchanged."; \
-              rm $*.c; \
+              rm -f $*.c; \
 	      if test -s $*.o; \
 	         then \
 	         touch $*.o; \
@@ -289,7 +288,7 @@ lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser_1.h++ parser.h++ $
               mv $*.h $*.h++; \
            else \
               echo "$*.h++ is unchanged."; \
-              rm $*.h; \
+              rm -f $*.h; \
            fi; \
         else \
         echo "$*.h++ does not exist"; \
@@ -310,7 +309,7 @@ lib3dldflb.la: $(3dldflb_hpp_files) $(3dldf_hpp_files) parser_1.h++ parser.h++ $
 parser.y++ parser_1.h++: parser.w prbsnflx$(EXEEXT) $(3dldf_PARSER_FILES)
 	ctangle $<
 	./prbsnflx$(EXEEXT) parser.c parser.y
-	rm parser.c
+	rm -f parser.c
 	./check_scan_parse_output.sh parser.y parser.y++
 	touch $@
 
@@ -326,7 +325,8 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ astronmy.h++ circles.h++ cn
                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
                      ellpsslc.h++ glyphs.h++ gsltmplt.h++ helices.h++ \
-                     hyprbola.h++ io.h++ lines.h++ loader.h++ matrices.h++ nurbs.h++ \
+                     hyprbola.h++ io.h++ lines.h++ loader.h++ matrices.h++ \
+                     newwrite.h++ nurbs.h++ \
                      origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
                      parahypr.h++ paths.h++ pctfncs0.h++ pens.h++ pictures.h++ \
                      planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
@@ -368,7 +368,7 @@ f-run-bi:
 # parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
 # 	ctangle $<
 # 	./prbsnflx$(EXEEXT) parser2.c parser2.y
-# 	rm parser2.c
+# 	rm -f parser2.c
 # 	./check_scan_parse_output.sh parser2.y parser2.y++
 # 	@touch $@
 
@@ -383,7 +383,7 @@ f-run-bi:
 #                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
 #                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
 #                      ellpsslc.h++ glyphs.h++ gsltmplt.h++ helices.h++ \
-#                      hyprbola.h++ io.h++ lines.h++ matrices.h++ nurbs.h++ \
+#                      hyprbola.h++ io.h++ lines.h++ matrices.h++ newwrite.h++ nurbs.h++ \
 #                      origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
 #                      parahypr.h++ paths.h++ pctfncs0.h++ pens.h++ pictures.h++ \
 #                      planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
@@ -408,7 +408,7 @@ f-run-bi:
 # scanner2.l++ : scanner2.web prbsnflx$(EXEEXT)
 # 	ctangle scanner2.web
 # 	./prbsnflx$(EXEEXT) scanner2.c scanner2.l
-# 	rm scanner2.c
+# 	rm -f scanner2.c
 # 	./check_scan_parse_output.sh scanner2.l scanner2.l++
 # 	@touch $@
 
@@ -443,7 +443,7 @@ astronmy.o: astronmy.c++ astronmy.h++ arc.h++ circles.h++ cncsctlt.h++ colors.h+
 	    curves.h++ cylinder.h++ dashptrn.h++ ddchdrn.h++ deftfncs.h++ \
 	    ellipses.h++ ellpsoid.h++ ellpsslc.h++ figures.h++ glyphs.h++ \
 	    gsltmplt.h++ helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
-	    loader.h++ matrices.h++ origami.h++ parabola.h++ parabold.h++ \
+	    loader.h++ matrices.h++ newwrite.h++ origami.h++ parabola.h++ parabold.h++ \
 	    paraellp.h++ parahypr.h++ parser.h++ parser_1.h++ paths.h++ \
 	    pctfncs0.h++ pens.h++ pictures.h++ planes.h++ plyhdslc.h++ \
 	    pntrvcf0.h++ pntrvctr.h++ points.h++ polygons.h++ polyhed.h++ \
@@ -562,7 +562,7 @@ deftfncs.o: deftfncs.c++ deftfncs.h++ arc.h++ circles.h++ cncsctlt.h++ \
 			 cylinder.h++ dashptrn.h++ ddchdrn.h++ ellipses.h++ \
 			 ellpsoid.h++ ellpsslc.h++ figures.h++ glyphs.h++ \
 			 gsltmplt.h++ helices.h++ hyprbola.h++ imetfncs.h++ \
-			 io.h++ lines.h++ loader.h++ matrices.h++ nurbs.h++ \
+			 io.h++ lines.h++ loader.h++ matrices.h++ newwrite.h++ nurbs.h++ \
 			 origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
 			 parahypr.h++ parser_1.h++ parser.h++ paths.h++ pctfncs0.h++ \
 			 pens.h++ pictures.h++ planes.h++ plyhdslc.h++ \
@@ -604,7 +604,7 @@ figures.o: figures.c++ figures.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                        planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
-                       hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
+                       hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ newwrite.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                        paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
@@ -617,10 +617,23 @@ glyphs.o: glyphs.c++ glyphs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                      conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                      hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
-                     solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
+                     solfaced.h++ cuboid.h++ newwrite.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                      cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                     paraellp.h++ parahypr.h++ glyphs.h++
+                     paraellp.h++ parahypr.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
+
+newwrite.o: newwrite.c++ newwrite.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
+                     creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
+                     transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
+                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                     conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
+                     hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
+                     solfaced.h++ cuboid.h++ newwrite.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
+                     cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
+                     paraellp.h++ parahypr.h++ 
+	$(CXXCOMPILE) -c -o $@ $<
+
+
 
 gsltmplt.o: gsltmplt.c++ gsltmplt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++
 	$(CXXCOMPILE) -c -o $@ $<
@@ -646,7 +659,7 @@ imetfncs.o: imetfncs.c++ imetfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
-                         hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
+                         hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ newwrite.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
                          paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
@@ -733,7 +746,7 @@ pctfncs0.o: pctfncs0.c++ pctfncs0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++
+                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 pens.o: pens.c++ pens.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ \
@@ -769,7 +782,7 @@ pntrvcf0.o: pntrvcf0.c++ pntrvcf0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ astronmy.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ 
+                         paraellp.h++ parahypr.h++ glyphs.h++ astronmy.h++ pctfncs0.h++ newwrite.h++ utility.h++ pntrvcf0.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
 
 pntrvctr.o: pntrvctr.c++ pntrvctr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -804,7 +817,7 @@ predctes.o: predctes.c++ predctes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++             
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -820,7 +833,7 @@ prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ spheres.h++ sphrdevl.h++ parabold.h++ paraellp.h++ \
-                       parahypr.h++ glyphs.h++ ellpsoid.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                       parahypr.h++ glyphs.h++ newwrite.h++ ellpsoid.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ astronmy.h++
 	$(CXXCOMPILE) -c -o $@ $<
@@ -853,7 +866,7 @@ scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++
                  hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                  solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                  cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                 paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                 paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                  predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -865,7 +878,7 @@ scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -877,7 +890,7 @@ scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ astronmy.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
@@ -889,7 +902,7 @@ sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                       paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                       paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                        predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                        imetfncs.h++ deftfncs.h++ astronmy.h++ sctpcrt.h++
 	$(CXXCOMPILE) -c -o $@ $<
@@ -902,7 +915,7 @@ sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
+                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ \
                          predctes.h++ scanprse.h++ figures.h++ parser_1.h++ parser.h++ scan.h++ scanprsf.h++ \
                          imetfncs.h++ deftfncs.h++ sctpcrt.h++ astronmy.h++ sctpfncs.h++
 	$(CXXCOMPILE) -c -o $@ $<
@@ -968,7 +981,7 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                        cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                       paraellp.h++ parahypr.h++ glyphs.h++ pctfncs0.h++ utility.h++
+                       paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 #### && ps2pdf 3DLDFtex.ps 3DLDFtex.pdf
@@ -985,7 +998,7 @@ ps: sample3.ps
 .PHONY: f-ps
 
 f-ps:
-	rm parser.o
+	rm -f parser.o
 	$(MAKE) ps
 
 sample3.ps: sample3.dvi
@@ -1006,7 +1019,7 @@ run-bi: 3dldf$(EXEEXT)
 .PHONY : run-fbi
 
 run-fbi: 
-	rm parser.o
+	rm -f parser.o
 	$(MAKE) 3dldf$(EXEEXT)
 	3dldf$(EXEEXT) --bi sample3.ldf
 
@@ -1015,7 +1028,7 @@ run-1: 3dldf$(EXEEXT)
 	echo "end" | 3dldf$(EXEEXT)
 
 # touch sample1.ldf
-# -rm 3DLDFtex.dvi 3DLDFtex.ps
+# -rm -f 3DLDFtex.dvi 3DLDFtex.ps
 # $(MAKE) 3DLDFtex.ps
 
 
@@ -1059,7 +1072,7 @@ sample1.mp : sample1.ldf
 .PHONY: prog
 
 prog: 
-	-rm *.h *.c
+	-rm -f *.h *.c
 	$(MAKE) 3dldf$(EXEEXT)
 
 conveps$(EXEEXT): conveps.o
@@ -1091,7 +1104,7 @@ headers:
              conveps.h++ crclslc.h++ creatnew.h++ cuboid.h++ \
              curves.h++ cylinder.h++ dashptrn.h++ \
              ddchdrn.h++ deftfncs.h++ ellipses.h++ ellpsoid.h++ \
-             ellpsslc.h++ figures.h++ glyphs.h++ gsltmplt.h++ \
+             ellpsslc.h++ figures.h++ glyphs.h++ newwrite.h++ gsltmplt.h++ \
              helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
              loader.h++ main.h++ matrices.h++ nurbs.h++ origami.h++ \
              parabola.h++ parabold.h++ paraellp.h++ parahypr.h++ \

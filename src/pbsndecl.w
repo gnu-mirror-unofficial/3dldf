@@ -118,6 +118,7 @@ when I tried to build 3DLDF from scratch.
 #include "arc.h++"
 #include "helices.h++"
 #include "origami.h++"
+#include "newwrite.h++"
 
 #if 0 
    #include "patterns.h++"
@@ -610,6 +611,9 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     DECLINATION_DECIMAL_DEGREES@>@/
 @=%token <int_value>     IS_BINARY@>@/
 
+
+@=%token <pointer_value> NEWWRITE@>@/
+
 @=%token <pointer_value> PLANE@>@/
 
 @=%token <pointer_value> ELLIPSE_SLICE@>@/
@@ -688,6 +692,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> HYPERBOLOID_VECTOR@>@/
 
 @=%token <pointer_value> GLYPH_VECTOR@>@/
+@=%token <pointer_value> NEWWRITE_VECTOR@>@/
 
 @=%token <pointer_value> STAR_VECTOR@>@/
 @=%token <pointer_value> CONSTELLATION_VECTOR@>@/
@@ -879,6 +884,8 @@ Added token declaration for |SPHERE_DEVELOPMENT_DECLARATOR|
 @=%token <string_value> CONSTELLATION_DECLARATOR@>@/
 @=%token <string_value> PLANET_DECLARATOR@>@/
 
+@=%token <string_value> NEWWRITE_DECLARATOR@>@/
+
 @=%token <string_value> ORIGAMI_FIGURE_DECLARATOR@>@/
 
 @=%token <string_value> ELLIPSE_SLICE_DECLARATOR@>@/
@@ -982,6 +989,8 @@ Added token declaration for |SPHERE_DEVELOPMENT_VECTOR_DECLARATOR|.
 
 @=%token <string_value> GLYPH_VECTOR_DECLARATOR@>@/
 @=%token <string_value> GLYPH_SLICE_VECTOR_DECLARATOR@>@/
+
+@=%token <string_value> NEWWRITE_VECTOR_DECLARATOR@>@/
 
 @=%token <string_value> STAR_VECTOR_DECLARATOR@>@/
 @=%token <string_value> CONSTELLATION_VECTOR_DECLARATOR@>@/
@@ -1624,6 +1633,7 @@ Added token declarations for
 @=%token <int_value> IS_GLYPH_SLICE@>@/ 
 @=%token <int_value> IS_GLYPH_SLICE_VECTOR@>@/
 
+
 @=%token <int_value> IS_STAR@>@/
 @=%token <int_value> IS_STAR_VECTOR@>@/
 
@@ -1632,6 +1642,9 @@ Added token declarations for
 
 @=%token <int_value> IS_PLANET@>@/
 @=%token <int_value> IS_PLANET_VECTOR@>@/
+
+@=%token <int_value> IS_NEWWRITE@>@/
+@=%token <int_value> IS_NEWWRITE_VECTOR@>@/
 
 @=%token <int_value> IS_PLANE@>@/
 @=%token <int_value> IS_PLANE_VECTOR@>@/

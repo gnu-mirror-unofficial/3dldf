@@ -54,7 +54,7 @@ make arc.h++ circles.h++ cncsctlt.h++ cnepspng.h++ colors.h++ \
      ddchdrn.h++ deftfncs.h++ ellipses.h++ ellpsoid.h++ ellpsslc.h++ \
      figures.h++ glyphs.h++ gsltmplt.h++ helices.h++ hyprbola.h++ \
      imetfncs.h++ io.h++ lines.h++ loader.h++ main.h++ matrices.h++ \
-     nurbs.h++ origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
+     newwrite.h++ nurbs.h++ origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
      parahypr.h++ parser2.h++ paths.h++ patterns.h++ pctfncs0.h++ pens.h++ \
      pictures.h++ planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
      points.h++ polygons.h++ polyhed.h++ predctes.h++ primes.h++ \

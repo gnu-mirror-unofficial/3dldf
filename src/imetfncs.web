@@ -98,6 +98,7 @@ The first is |Id_Map_Type::operator=(const Id_Map_Type&)|.
 #include "cncsctlt.h++"
 #include "arc.h++"
 #include "helices.h++"
+#include "newwrite.h++"
 #include "origami.h++"
 
 #if 0 
@@ -1733,6 +1734,20 @@ else if (type == NUMERIC)
        }
    }
 
+   else if (type == NEWWRITE)
+     {
+       
+       Newwrite* c = static_cast<Newwrite*>(object);
+       
+       if (c != static_cast<Newwrite*>(0))
+         {
+           delete c;
+           c = static_cast<Newwrite*>(0);
+         }
+     }
+
+
+
 @q ****** (6) Handle internal quantities.@>  
 @ Handle internal quantities.
 \initials{LDF 2004.07.01.}
@@ -2724,6 +2739,12 @@ Added code for the cases
   else if (type == GLYPH_VECTOR)
     {
       Pointer_Vector<Glyph>* o = new Pointer_Vector<Glyph>;
+      object = static_cast<void*>(o);       
+    }
+
+  else if (type == NEWWRITE_VECTOR)
+    {
+      Pointer_Vector<Newwrite>* o = new Pointer_Vector<Newwrite>;
       object = static_cast<void*>(o);       
     }
 
@@ -4101,6 +4122,7 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
       || type == MACRO_VECTOR
       || type == ORIGAMI_FIGURE_VECTOR
       || type == GLYPH_VECTOR
+      || type == NEWWRITE_VECTOR
       || type == STAR_VECTOR
       || type == CONSTELLATION_VECTOR
       || type == PLANET_VECTOR

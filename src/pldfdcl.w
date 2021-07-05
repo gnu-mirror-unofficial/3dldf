@@ -1005,6 +1005,37 @@ Added this rule.
 
 };
 
+@q *** (3) declaration --> newwrite declaration.  @>
+@*2 \§declaration> $\longrightarrow$ |newwrite_declaration|.  
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=declaration: newwrite_declaration@>
+{
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+   if (DEBUG)
+      {
+         stringstream cerr_strm;
+         cerr_strm  
+                   << "*** Parser:  'declaration --> newwrite_declaration'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str();
+
+      }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
+
 @q *** (3) declaration --> plane declaration.  @>
 @*2 \§declaration> $\longrightarrow$ |plane_declaration|.  
 \initials{LDF 2005.10.30.}
@@ -2068,6 +2099,34 @@ Added this rule.
 
 };
 
+@q ***** (5) declaration --> newwrite_vector declaration.  @>
+@*4 \§declaration> $\longrightarrow$ \§newwrite vector declaration>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=declaration: newwrite_vector_declaration@>
+{
+
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @;
+  if (DEBUG)
+    {
+      stringstream cerr_strm;
+      cerr_strm << "*** Parser:  'declaration --> newwrite_vector_declaration'.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */
+
+};
+
 @q ***** (5) declaration --> plane_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§plane vector declaration>.
 \initials{LDF 2005.10.30.}
@@ -3059,6 +3118,21 @@ Added this rule.
   shape_decl_func<Glyph>(static_cast<Scanner_Node>(parameter), GLYPH);
 };
 
+@q ***** (5) newwrite_declaration.  @>
+@*4 {\bf newwrite\_declaration}.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=newwrite_declaration: NEWWRITE_DECLARATOR declaration_list@>
+{
+   Scan_Parse::non_shape_decl_func(static_cast<Scanner_Node>(parameter), NEWWRITE);
+};
+
 @q ***** (5) plane_declaration.  @>
 @*4 {\bf plane\_declaration}.
 \initials{LDF 2005.10.30.}
@@ -3998,6 +4072,28 @@ Added this rule.
   vector_type_decl<Glyph>(static_cast<Scanner_Node>(parameter),
                           GLYPH_VECTOR,
                           GLYPH);
+
+};
+
+@q ****** (6) newwrite_vector_declaration -->               @>
+@q ****** (6) NEWWRITE_VECTOR_DECLARATOR declaration_list.  @>
+
+@*3 \§newwrite vector declaration> $\longrightarrow$ 
+\.{NEWWRITE\_VECTOR\_DECLARATOR} \§declaration list>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=newwrite_vector_declaration: NEWWRITE_VECTOR_DECLARATOR declaration_list@>
+{
+
+  vector_type_decl<Newwrite>(static_cast<Scanner_Node>(parameter),
+                          NEWWRITE_VECTOR,
+                          NEWWRITE);
 
 };
 
@@ -5408,8 +5504,8 @@ Added this rule.
 
 };
 
-@q ** (2) any_declarator --> GLYPH_DECLARATOR.@> 
-@*1 \§any declarator> $\longrightarrow$ \.{GLYPH\_DECLARATOR}.
+@q ** (2) any_declarator --> STAR_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{STAR\_DECLARATOR}.
 \initials{LDF 2021.7.1.}
 
 \LOG
@@ -5426,6 +5522,55 @@ Added this rule.
 };
 
 
+@q ** (2) any_declarator --> CONSTELLATION_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{CONSTELLATION\_DECLARATOR}.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: CONSTELLATION_DECLARATOR@>
+{
+
+   @=$$@> = CONSTELLATION_DECLARATOR;
+
+};
+
+@q ** (2) any_declarator --> PLANET_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{PLANET\_DECLARATOR}.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: PLANET_DECLARATOR@>
+{
+
+   @=$$@> = PLANET_DECLARATOR;
+
+};
+
+@q ** (2) any_declarator --> NEWWRITE_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{NEWWRITE\_DECLARATOR}.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: NEWWRITE_DECLARATOR@>
+{
+   @=$$@> = NEWWRITE_DECLARATOR;
+};
+
 @q ** (2) any_declarator --> PLANE_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{PLANE\_DECLARATOR}.
 \initials{LDF 2005.10.30.}
@@ -5438,9 +5583,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: PLANE_DECLARATOR@>
 {
-
    @=$$@> = PLANE_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> ELLIPSOID_VECTOR_DECLARATOR.@> 
@@ -5455,9 +5598,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: ELLIPSOID_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = ELLIPSOID_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> SPHERE_VECTOR_DECLARATOR.@> 
@@ -5472,9 +5613,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: SPHERE_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = SPHERE_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> SPHERE_DEVELOPMENT_VECTOR_DECLARATOR.@> 
@@ -5489,9 +5628,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: SPHERE_DEVELOPMENT_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = SPHERE_DEVELOPMENT_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> PARABOLOID_VECTOR_DECLARATOR.@> 
@@ -5506,9 +5643,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: PARABOLOID_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = PARABOLOID_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> GLYPH_VECTOR_DECLARATOR.@> 
@@ -5523,9 +5658,22 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: GLYPH_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = GLYPH_VECTOR_DECLARATOR;
+};
 
+@q ** (2) any_declarator --> NEWWRITE_VECTOR_DECLARATOR.@> 
+@*1 \§any declarator> $\longrightarrow$ \.{NEWWRITE\_VECTOR\_DECLARATOR}.
+\initials{LDF 2005.06.08.}
+
+\LOG
+\initials{LDF 2005.06.08.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=any_declarator: NEWWRITE_VECTOR_DECLARATOR@>
+{
+   @=$$@> = NEWWRITE_VECTOR_DECLARATOR;
 };
 
 @q ** (2) any_declarator --> STAR_VECTOR_DECLARATOR.@> 
@@ -5540,9 +5688,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: STAR_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = STAR_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> PLANE_VECTOR_DECLARATOR.@> 
@@ -5557,9 +5703,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: PLANE_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = PLANE_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> ELLIPSE_SLICE_DECLARATOR.@> 
@@ -5574,9 +5718,7 @@ Added this rule.
 @<Define rules@>=
 @=any_declarator: ELLIPSE_SLICE_DECLARATOR@>
 {
-
    @=$$@> = ELLIPSE_SLICE_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> ELLIPSE_SLICE_VECTOR_DECLARATOR.@> 
@@ -5592,9 +5734,7 @@ Added this rule.
 
 @=any_declarator: ELLIPSE_SLICE_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = ELLIPSE_SLICE_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> CIRCLE_SLICE_DECLARATOR.@> 
@@ -5610,7 +5750,6 @@ Added this rule.
 @=any_declarator: CIRCLE_SLICE_DECLARATOR@>
 {
    @=$$@> = CIRCLE_SLICE_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> CIRCLE_SLICE_VECTOR_DECLARATOR.@> 
@@ -5627,7 +5766,6 @@ Added this rule.
 @=any_declarator: CIRCLE_SLICE_VECTOR_DECLARATOR@>
 {
    @=$$@> = CIRCLE_SLICE_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> POLYHEDRON_SLICE_DECLARATOR.@> 
@@ -5643,9 +5781,7 @@ Added this rule.
 
 @=any_declarator: POLYHEDRON_SLICE_DECLARATOR@>
 {
-
    @=$$@> = POLYHEDRON_SLICE_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> POLYHEDRON_SLICE_VECTOR_DECLARATOR.@> 
@@ -5661,9 +5797,7 @@ Added this rule.
 
 @=any_declarator: POLYHEDRON_SLICE_VECTOR_DECLARATOR@>
 {
-
    @=$$@> = POLYHEDRON_SLICE_VECTOR_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> ORIGAMI_FIGURE_DECLARATOR.@> 
@@ -5679,7 +5813,6 @@ Added this rule.
 @=any_declarator: ORIGAMI_FIGURE_DECLARATOR@>
 {
    @=$$@> = ORIGAMI_FIGURE_DECLARATOR;
-
 };
 
 @q ** (2) any_declarator --> ORIGAMI_FIGURE_VECTOR_DECLARATOR.@> 

@@ -320,6 +320,10 @@
 
 @i pglyexpr.w
 
+@q *** (3) newwrite expressions.  'pnwwrtex.w'.  @>
+
+@i pnwwrtex.w
+
 @q *** (3) plane expressions.  'pplnexpr.w'.  @>
 
 @i pplnexpr.w

@@ -548,6 +548,31 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
 };
 
+@q **** (4) command --> SHOW newwrite_expression@>
+
+@*3 \§command> $\longrightarrow$ \.{SHOW}
+\§newwrite expression>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW newwrite_expression@>@/
+{
+    Scan_Parse::show_func<Newwrite>(static_cast<Newwrite*>(@=$2@>),
+                                    "newwrite",
+                                    parameter); 
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
 @q **** (4) command --> SHOW star_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
@@ -4350,6 +4375,72 @@ else  /* |!pv || pv->ctr <= 0|  */
    @=$$@> = static_cast<void*>(0);
 
 };
+
+@q ****** (6) command --> SHOW newwrite_vector_expression@>
+
+@*5 \§command> $\longrightarrow$ \.{SHOW}
+\§newwrite vector expression>.
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@q ******* (7) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW newwrite_vector_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> "
+                << "SHOW newwrite_vector_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   Pointer_Vector<Newwrite>* pv 
+      = static_cast<Pointer_Vector<Newwrite>*>(@=$2@>); 
+
+   cerr_strm  << ">> ";
+
+   if (pv && pv->ctr > 0)
+      {
+          
+          cerr << cerr_strm.str();
+          pv->show("newwrite_vector:");
+          log_message(cerr_strm);
+          cerr_strm.str("");
+          
+
+          delete pv;
+
+      }  /* |if (pv && pv->ctr > 0)|  */
+
+else  /* |!pv || pv->ctr <= 0|  */
+     {
+        cerr_strm << "(unknown newwrite_vector)";
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+     }  /* |else| (|!pv || pv->ctr <= 0|)  */
+
+   @=$$@> = static_cast<void*>(0);
+
+};
+
+
 
 @q ****** (6) command --> SHOW plane_vector_expression@>
 

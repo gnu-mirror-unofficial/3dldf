@@ -148,8 +148,8 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
 
   dotlabel.bot("$p_{22}$", p22);
   dotlabel.top("$p_{23}$", p23);
-  label("$90^\circ$", p22 shifted (0, -.75cm));
-  label("$90^\circ$", p23 shifted (0, .75cm));
+  label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
+  label.rt("$90^\circ$", p23 shifted (.25cm, 0));
 
   draw p22 -- p23;  %% Vertical line through origin---Half of circumference.
 
@@ -231,32 +231,42 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
   endfor;
   
   label("RA $337.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[0];
-  label("RA $22.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[0];
+  label("$0^\circ$",     p22 shifted (0, -.75cm))      bi_ang_pict[0];
+  label("$22.5^\circ$",  p22 shifted (1.25cm, -.75cm))  bi_ang_pict[0];
 
   label("RA $22.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[1];
-  label("RA $67.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[1];
+  label("$45^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[1];
+  label("$67.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[1];
 
-  label("RA $67.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
-  label("RA $112.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[2];
+  label("RA $67.5^\circ$",  p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
+  label("$90^\circ$",    p22 shifted (0, -.75cm))      bi_ang_pict[2];
+  label("$112.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[2];
 
   label("RA $112.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[3];
-  label("RA $157.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[3];
+  label("$135^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[3];
+  label("$157.5^\circ$", p22 shifted (1.25cm, -.75cm)) bi_ang_pict[3];
 
   label("RA $157.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[4];
-  label("RA $202.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[4]; 
+  label("$180^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[4];
+  label("$202.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[4]; 
 
-  label("RA $202.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[5]; 
-  label("RA $247.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[5];
+  label("RA $202.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[5];
+  label("$225^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[5];
+  label("$247.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[5];
 
-  label("RA $247.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[6]; 
-  label("RA $292.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[6];
+  label("RA $247.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[6];
+  label("$270^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[6];
+  label("$292.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[6];
 
-  label("RA $292.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[7]; 
-  label("RA $337.5^\circ$",  p22 shifted (1.5cm, -.75cm)) bi_ang_pict[7];
+  label("RA $292.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[7];
+  label("$315^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[7];
+  label("$337.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[7];
   
   clear current_picture;
   
 enddef;
+
+
 
 %% ** (2)
 

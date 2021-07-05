@@ -106,9 +106,7 @@ Added this section.
   
 @=assignment: boolean_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> numeric_assignment.@>
@@ -120,7 +118,6 @@ Added this section.
 @=assignment: numeric_assignment@>
 {
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> ulong_long_assignment.@>
@@ -138,7 +135,6 @@ Added this rule.
 @=assignment: ulong_long_assignment@>
 {
   @=$$@> = @=$1@>;
-
 };
 
 @q *** (3) assignment --> string_assignment.@>
@@ -153,9 +149,7 @@ Added this rule.
   
 @=assignment: string_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q *** (3) assignment --> pen_assignment.  @>
@@ -170,9 +164,7 @@ Added this rule.
   
 @=assignment: pen_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q *** (3) assignment --> dash_pattern_assignment.@>
@@ -188,7 +180,6 @@ Added this rule.
 @=assignment: dash_pattern_assignment@>
 {
   @=$$@> = @=$1@>;
-
 };
 
 @q *** (3) assignment --> color_assignment.@>
@@ -204,7 +195,6 @@ Added this rule.
 @=assignment: color_assignment@>
 {
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> transform_assignment.@>
@@ -214,7 +204,6 @@ Added this rule.
 @=assignment: transform_assignment@>
 {
   @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> picture_assignment.@>
@@ -229,9 +218,7 @@ Added this rule.
   
 @=assignment: picture_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> focus_assignment.@>
@@ -246,9 +233,7 @@ Added this rule.
   
 @=assignment: focus_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> macro_assignment.@>
@@ -264,7 +249,6 @@ Added this rule.
 @=assignment: macro_assignment@>
 {
   @=$$@> = @=$1@>;
-
 };
 
 @q *** (3) |Shape| types.@> 
@@ -288,7 +272,6 @@ Added this rule.
   
 @=assignment: bool_point_assignment@>
 {
-
   @=$$@> = @=$1@>;
 
 };
@@ -308,9 +291,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: path_assignment@>
 {
-
  @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> ellipse_assignment.@>
@@ -324,9 +305,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: ellipse_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> circle_assignment.@>
@@ -429,7 +408,6 @@ Added this rule.
 @=assignment: rectangle_assignment@>
 {
   @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> polygon_assignment.@>
@@ -447,7 +425,6 @@ Added this rule.
   @=$$@> = @=$1@>;
 
 }; 
-
 @q **** (4) assignment --> reg_polygon_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§regular polygon assignment>.
 
@@ -463,7 +440,6 @@ Now setting |@=$$@> = @=$1@>|.
 @=assignment: reg_polygon_assignment@>
 {
   @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> triangle_assignment.@>
@@ -479,7 +455,6 @@ Added this rule.
 @=assignment: triangle_assignment@>
 {
   @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> cuboid_assignment.@>
@@ -507,9 +482,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: polyhedron_assignment@>
 {
-
       @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> sphere_assignment.@>
@@ -551,9 +524,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: plane_assignment@>
 {
-
       @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> star_assignment.@>
@@ -567,9 +538,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: star_assignment@>
 {
-
       @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> constellation_assignment.@>
@@ -583,9 +552,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: constellation_assignment@>
 {
-
       @=$$@> = @=$1@>;
-
 }; 
 
 @q **** (4) assignment --> planet_assignment.@>
@@ -599,10 +566,23 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: planet_assignment@>
 {
-
       @=$$@> = @=$1@>;
-
 }; 
+
+@q **** (4) assignment --> newwrite_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§newwrite assignment>.
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+@=assignment: newwrite_assignment@>
+{
+      @=$$@> = @=$1@>;
+}; 
+
 
 @q **** (4) assignment --> origami_figure_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§origami figure assignment>.
@@ -615,9 +595,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: origami_figure_assignment@>
 {
-
       @=$$@> = @=$1@>;
-
 }; 
 
 @q ** (2) Vector types.@> 
@@ -651,9 +629,7 @@ Added this rule.
 
 @=assignment: boolean_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q ** (2) numeric_vector_assignment.@> 
@@ -720,7 +696,6 @@ I've managed to get rid of it, but I don't know what it was.
 @=numeric_vector_assignment: numeric_vector_variable @>  
 @=ASSIGN numeric_vector_expression@>@/
 {
-
    typedef Pointer_Vector<real> PV;
 
    PV* pv = static_cast<PV*>(@=$3@>); 
@@ -848,7 +823,6 @@ Added this rule.
 @=ulong_long_vector_assignment: ulong_long_vector_variable @>  
 @=ASSIGN ulong_long_vector_expression@>@/
 {
-
    typedef Pointer_Vector<unsigned long long> PV;
 
    PV* pv = static_cast<PV*>(@=$3@>); 
@@ -875,7 +849,6 @@ Added this rule.
             @=$$@> = static_cast<void*>(0);
 
     }  /* |else|  */
-
 }; 
 
 @q **** (4) assignment --> string_vector_assignment.@>
@@ -891,9 +864,7 @@ Added this rule.
 
 @=assignment: string_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> pen_vector_assignment.@>
@@ -909,9 +880,7 @@ Added this rule.
 
 @=assignment: pen_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> dash_pattern_vector_assignment.@>
@@ -927,9 +896,7 @@ Added this rule.
 
 @=assignment: dash_pattern_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> color_vector_assignment.@>
@@ -950,9 +917,7 @@ Commented this rule back in.
 
 @=assignment: color_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> transform_vector_assignment.@>
@@ -968,9 +933,7 @@ Added this rule.
 
 @=assignment: transform_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> focus_vector_assignment.@>
@@ -986,9 +949,7 @@ Added this rule.
 
 @=assignment: focus_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q *** (3) |Shape| types.@> 
@@ -1018,9 +979,7 @@ Commented this rule back in.
 
 @=assignment: point_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> bool_point_vector_assignment.@>
@@ -1041,9 +1000,7 @@ Commented this rule in again.
    
 @=assignment: bool_point_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> path_vector_assignment.@>
@@ -1059,11 +1016,8 @@ Added this rule.
   
 @=assignment: path_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
-
 @q **** (4) assignment --> ellipse_vector_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§ellipse vector assignment>.
 \initials{LDF 2004.12.14.}
@@ -1077,9 +1031,7 @@ Added this rule.
   
 @=assignment: ellipse_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> circle_vector_assignment.@>
@@ -1095,9 +1047,7 @@ Added this rule.
   
 @=assignment: circle_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> parabola_vector_assignment.@>
@@ -1113,9 +1063,7 @@ Added this rule.
   
 @=assignment: parabola_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> hyperbola_vector_assignment.@>
@@ -1131,9 +1079,7 @@ Added this rule.
   
 @=assignment: hyperbola_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> arc_vector_assignment.@>
@@ -1149,9 +1095,7 @@ Added this rule.
   
 @=assignment: arc_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> conic_section_lattice_vector_assignment.@>
@@ -1167,9 +1111,7 @@ Added this rule.
   
 @=assignment: conic_section_lattice_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> helix_vector_assignment.@>
@@ -1185,9 +1127,7 @@ Added this rule.
   
 @=assignment: helix_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> nurb_vector_assignment.@>
@@ -1203,9 +1143,7 @@ Added this rule.
   
 @=assignment: nurb_vector_assignment@>
 {
-
    @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> triangle_vector_assignment.@>
@@ -1221,9 +1159,7 @@ Added this rule.
   
 @=assignment: triangle_vector_assignment@>
 {
-
    @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> rectangle_vector_assignment.@>
@@ -1239,9 +1175,7 @@ Added this rule.
   
 @=assignment: rectangle_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> polygon_vector_assignment.@>
@@ -1257,9 +1191,7 @@ Added this rule.
   
 @=assignment: polygon_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> reg_polygon_vector_assignment.@>
@@ -1275,9 +1207,7 @@ Added this rule.
   
 @=assignment: reg_polygon_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> cuboid_vector_assignment.@>
@@ -1293,9 +1223,7 @@ Added this rule.
   
 @=assignment: cuboid_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> polyhedron_vector_assignment.@>
@@ -1311,9 +1239,7 @@ Added this rule.
   
 @=assignment: polyhedron_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> sphere_vector_assignment.@>
@@ -1329,9 +1255,7 @@ Added this rule.
   
 @=assignment: sphere_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> sphere_development_vector_assignment.@>
@@ -1347,9 +1271,7 @@ Added this rule.
   
 @=assignment: sphere_development_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> plane_vector_assignment.@>
@@ -1365,9 +1287,7 @@ Added this rule.
   
 @=assignment: plane_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> star_vector_assignment.@>
@@ -1383,9 +1303,7 @@ Added this rule.
   
 @=assignment: star_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> constellation_vector_assignment.@>
@@ -1401,9 +1319,7 @@ Added this rule.
   
 @=assignment: constellation_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> planet_vector_assignment.@>
@@ -1419,9 +1335,7 @@ Added this rule.
   
 @=assignment: planet_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> origami_figure_vector_assignment.@>
@@ -1438,9 +1352,7 @@ Added this rule.
   
 @=assignment: origami_figure_vector_assignment@>
 {
-
   @=$$@> = @=$1@>;
-
 };
 
 @q **** (4) assignment --> assignment_command.@>
@@ -1455,10 +1367,8 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: assignment_command@>
 {
-
       @=$$@> = @=$1@>;
 }; 
-
 @q * (1) Type assignments.@> 
 @* Type assignments.
 \initials{LDF 2005.01.07.}
@@ -1516,7 +1426,6 @@ Changed |int i| to |int* i|, because I've changed the type of
  
 @=boolean_assignment: boolean_variable ASSIGN boolean_expression@>
 {
-
   bool* b = static_cast<bool*>(@=$3@>);
   
   Int_Void_Ptr ivp = Scan_Parse::assign_simple<bool>(
@@ -1581,12 +1490,11 @@ referenced by |boolean_variables|, |boolean_primaries|,
  
 @=boolean_assignment: boolean_variable ASSIGN bool_point_expression@>
 {
-
   Bool_Point* bp = static_cast<Bool_Point*>(@=$3@>);
 
   int* i; 
 
-       i = new int;
+  i = new int;
 
   *i = (bp->b) ? 1 : 0;
 
@@ -1625,7 +1533,6 @@ Now calling |Scan_Parse::assign_simple|.
  
 @=string_assignment: string_variable ASSIGN string_expression@>
 {
-
   string* string_ptr = static_cast<string*>(@=$3@>); 
 
   Int_Void_Ptr ivp = Scan_Parse::assign_simple<string>(
@@ -1658,13 +1565,11 @@ Removed code from this rule.  Now calling
  
 @=string_assignment: string_variable ASSIGN string_assignment@>
 {
-
   Int_Void_Ptr ivp = assign_chained<string>(static_cast<Scanner_Node>(parameter),
                                             @=$1@>,
 					    static_cast<string*>(@=$3@>));
 
   @=$$@> = ivp.v;
-
 };
 
 @q **** (4) pen_assignment.@>
@@ -1694,7 +1599,6 @@ Now calling |Scan_Parse::assign_simple|.
  
 @=pen_assignment: pen_variable ASSIGN pen_expression@>
 {
-
   Pen* pen_ptr = static_cast<Pen*>(@=$3@>); 
 
   Int_Void_Ptr ivp = assign_simple<Pen>(static_cast<Scanner_Node>(parameter),
@@ -1730,7 +1634,6 @@ Removed code from this rule.  Now calling
  
 @=pen_assignment: pen_variable ASSIGN pen_assignment@>
 {
-
   Int_Void_Ptr ivp = assign_chained<Pen>(static_cast<Scanner_Node>(parameter),
                                          @=$1@>,
                                          static_cast<Pen*>(@=$3@>));
@@ -1764,7 +1667,6 @@ Now calling |Scan_Parse::assign_simple|.
  
 @=dash_pattern_assignment: dash_pattern_variable ASSIGN dash_pattern_expression@>
 {
-
   Dash_Pattern* dash_pattern_ptr = static_cast<Dash_Pattern*>(@=$3@>); 
 
   Int_Void_Ptr ivp = assign_simple<Dash_Pattern>(static_cast<Scanner_Node>(parameter),
@@ -1799,7 +1701,6 @@ Removed code from this rule.  Now calling
  
 @=dash_pattern_assignment: dash_pattern_variable ASSIGN dash_pattern_assignment@>
 {
-
   Int_Void_Ptr ivp = assign_chained<Dash_Pattern>(static_cast<Scanner_Node>(parameter),
                                                   @=$1@>,
                                                   static_cast<Dash_Pattern*>(@=$3@>));
@@ -1832,7 +1733,6 @@ Now calling |Scan_Parse::assign_simple|.
  
 @=color_assignment: color_variable ASSIGN color_expression@>
 {
-
   Color* color_ptr = static_cast<Color*>(@=$3@>); 
 
   Int_Void_Ptr ivp = assign_simple<Color>(static_cast<Scanner_Node>(parameter),
@@ -1866,7 +1766,6 @@ Removed code from this rule.  Now calling
  
 @=color_assignment: color_variable ASSIGN color_assignment@>
 {
-
   Int_Void_Ptr ivp = assign_chained<Color>(static_cast<Scanner_Node>(parameter),
                                            @=$1@>,
                                            static_cast<Color*>(@=$3@>));
@@ -1904,7 +1803,6 @@ instead of |Scan_Parse::assign_real|.
  
 @=numeric_assignment: numeric_variable ASSIGN numeric_expression@>@/
 {
-
   real r = @=$3@>; 
 
   Int_Void_Ptr ivp = assign_simple<real>(static_cast<Scanner_Node>(parameter),
@@ -1935,7 +1833,6 @@ Added this rule.
  
 @=numeric_assignment: numeric_variable ASSIGN numeric_vector_expression@>@/
 {
-
     real r;
 
     Pointer_Vector<real>* pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
@@ -1982,7 +1879,6 @@ Removed code from this rule.  Now calling
  
 @=numeric_assignment: numeric_variable ASSIGN numeric_assignment@>
 {
-
   Int_Void_Ptr ivp = assign_chained<real>(static_cast<Scanner_Node>(parameter),
                                           @=$1@>,
                                           static_cast<real*>(@=$3@>));
@@ -3966,6 +3862,51 @@ Added this rule.
                                           "Planet",
                                           @=$1@>,
                                           static_cast<Planet*>(@=$3@>));
+  @=$$@> = ivp.v;
+
+};
+
+@q **** (4) newwrite_assignment.@>
+@*2 \§newwrite assignment>. 
+\initials{LDF 2021.7.5.}
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this section.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> newwrite_assignment@>@/
+
+@q ***** (5) newwrite_assignment --> newwrite_variable ASSIGN string_expression.@>   
+
+@*4 \§newwrite assignment> $\longrightarrow$ \§newwrite variable> 
+\.{ASSIGN} \§string expression>. 
+
+\LOG
+\initials{LDF 2021.7.5.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+ 
+@=newwrite_assignment: newwrite_variable ASSIGN string_expression@>
+{
+
+  Newwrite *n;
+  string *s = static_cast<string*>(@=$3@>);
+
+  n = new Newwrite;
+
+  *n = *s;
+
+  delete s;
+  s = 0;
+
+  Int_Void_Ptr ivp = assign_simple<Newwrite>(static_cast<Scanner_Node>(parameter),
+                                            "Newwrite",
+                                             @=$1@>,
+                                             n);
   @=$$@> = ivp.v;
 
 };
