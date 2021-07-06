@@ -67,12 +67,13 @@ point ra_decl_zero_pt;
 
 newwrite nw[];
 
+
 string s;
 
 for i = 0 upto 7:
   s := "sample_3_" & decimal i & ".tex";
   nw[i] := s;
-  s := "%% " & s & "\n";
+  s := "%%" & s & "\n%%";
   message "s == " & s;
   write s to nw[i];
 endfor;
@@ -183,8 +184,7 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
       R1 := (-RA_arc_length, ypart R0);
     fi;
 
-    s := "\\newbox\starboxfive\setbox\starboxfive=\vtop{\vskip-4.5in\hbox{" & common_name S & "}\hbox{RA $"
-         & decimal ra & "^\circ$}\hbox{Decl.~$" & decimal decl & "^\circ$}\vss}";
+    s := "\starinfo{1}{" & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
 
     write s to nw[bi_ang0];
     

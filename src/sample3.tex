@@ -109,7 +109,23 @@
 
 %% *** (3) 
 
+\newbox\starboxzero
+\newbox\starboxone
+\newbox\starboxtwo
+\newbox\starboxthree
+\newbox\starboxfour
+\newbox\starboxfive
+\newbox\starboxsix
+\newbox\starboxseven
+
+\def\starinfo#1#2#3#4{\begingroup\setbox0=\hbox{Decl.~}\hbox{\hbox to \wd0{$R_#1$:\hfil}#2}%
+\hbox{\hbox to \wd0{RA\hfil}$#3^\circ$}\hbox{\unhbox0 $#4^\circ$}\vskip2\baselineskip\endgroup}
+
+\setbox\starboxfive=\vtop{\vskip-4in
 \input sample_3_5.tex
+\vss}
+
+%\showbox\starboxfive
 
 %% **** (4) 
 
