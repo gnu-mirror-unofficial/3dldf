@@ -49,7 +49,7 @@
 
 % * (1) Beginning of 3DLDF code.
 
-verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
+verbatim_metapost "verbatimtex \font\small=cmr8\font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 
 %% *** (3) Draw spherical biangle
 
@@ -112,7 +112,7 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
 
 %% **** (4)
 
-%draw c0 with_color red;
+  %draw c0 with_color red;
 
   edge0 := null_path; 
   edge1 := null_path; 
@@ -126,12 +126,12 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
 
   n0 := a / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
   n1 := a / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
-%% increments of 11.25 deg.
+                %% increments of 11.25 deg.
 
   p20 := (-.5n0, 0);
   p21 := (.5n0, 0);
 
-  draw p20 -- p21;               %% Horizontal line through origin (0 deg.), i.e., midline of spherical biangle.
+  draw p20 -- p21 with_color gray;  %% Horizontal line through origin (0 deg.), i.e., midline of spherical biangle.
   label.rt("$0^\circ$", p21 shifted (1cm, 0));
 
   dotlabel.lft("$p_{20}$", p20);
@@ -151,14 +151,14 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
   label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
   label.rt("$90^\circ$", p23 shifted (.25cm, 0));
 
-  draw p22 -- p23;  %% Vertical line through origin---Half of circumference.
+  draw p22 -- p23 with_color gray;  %% Vertical line through origin---Half of circumference.
 
   j := 24;
   k := 4;
   for i = 1 step 1 until 7:
     p[j]     := (-.5biangle_width[k], (i * n1));
     p[j + 1] := (.5biangle_width[k], (i * n1));
-    draw p[j] -- p[j + 1];
+    draw p[j] -- p[j + 1] with_color gray;
     dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
     dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
     label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
@@ -175,7 +175,7 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
     p[20 + 1 + i] := p[i + 1] rotated (180, 0);
     dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
     dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
-    draw p[20 + i] -- p[20 + i + 1];
+    draw p[20 + i] -- p[20 + i + 1] with_color gray;
     label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
     j += 1;
   endfor;
@@ -752,18 +752,22 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S, numeric point_n
   message "ra_decl_zero_pt:";
   show ra_decl_zero_pt;
 
-
-%% !! START HERE: LDF 2021.7.6.  Make this code work for the other biangles.
+%% !! START HERE: LDF 2021.7.6.  Add code for the case of stars on the y-axis or on one of the edges.
   
-  if (bi_ang0 == 5) and (bi_ang1 == -1):
-    message "bi_ang0 == 5 and bi_ang1 == -1.";
+  if bi_ang1 == -1:
+    message "bi_ang0 == " & decimal bi_ang0 & " and bi_ang1 == -1.";
     if decl >= 0:
       y_axis_point := (0, Declination_arc_length);
     else:
       y_axis_point := (0, -Declination_arc_length);
     fi;
 
-    dotlabel.rt("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+
+    % if ra > middle_angle:
+    %   dotlabel.lft("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % else:
+    %   dotlabel.rt("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % fi;
 
     message "ra";
     show ra;
@@ -780,8 +784,9 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S, numeric point_n
     s := "\starinfo{" & decimal point_number & "}{" & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
 
     write s to nw[bi_ang0];
-    
-    dotlabel.lft("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
+
+    dotlabel.top("{\small " & common_name S & "}", R[point_number]) bi_ang_pict[bi_ang0];
+    %dotlabel.top("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
    
   fi;
  
