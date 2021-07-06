@@ -55,7 +55,7 @@ verbatim_metapost "verbatimtex \font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
 
 macro get_spherical_biangles;
 
-def get_spherical_biangles {numeric rad, boolean do_black} =
+def get_spherical_biangles {numeric rad, boolean ddo_black} =
 
   circle c[];
   numeric a;
@@ -215,7 +215,7 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
 
   q += cycle;
 
-  if do_black:
+  if ddo_black:
     for i = 0 upto 7:
       fill q;
     endfor;
@@ -223,7 +223,7 @@ def get_spherical_biangles {numeric rad, boolean do_black} =
   
   for i = 0 upto 7:
     bi_ang_pict[i] := current_picture;
-    if do_black:
+    if ddo_black:
       dotlabel.urt("{\largebf " & decimal i & "}", origin) with_text_color white with_dot_color white (bi_ang_pict[i]);
     else:
       dotlabel.urt("{\largebf " & decimal i & "}", origin) bi_ang_pict[i];
@@ -710,7 +710,7 @@ enddef;
 
 macro plot_star_on_spherical_biangle;
 
-def plot_star_on_spherical_biangle (pv) {numeric radius, star S, numeric point_number} =
+def plot_star_on_spherical_biangle (pv) {numeric radius, star S, numeric point_number, boolean ddo_black} =
   
   numeric decl;
   numeric ra;
@@ -752,7 +752,9 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S, numeric point_n
   message "ra_decl_zero_pt:";
   show ra_decl_zero_pt;
 
- 
+
+%% !! START HERE: LDF 2021.7.6.  Make this code work for the other biangles.
+  
   if (bi_ang0 == 5) and (bi_ang1 == -1):
     message "bi_ang0 == 5 and bi_ang1 == -1.";
     if decl >= 0:

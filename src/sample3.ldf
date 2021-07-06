@@ -51,7 +51,7 @@
 
 %% * (1) Plotting stars on sphere development (spherical biangles)
 
-point p[];    %% Global
+point p[];    %% Global, used in macros.
 picture v[];  
 numeric bi_ang[];  
 picture bi_ang_pict[];
@@ -65,10 +65,14 @@ point ra_decl_zero_pt;
 point R[];
 picture_vector pv;
 picture_vector qv;
+newwrite nw[];
+
+numeric i;  %% Global, used in the following code (not in macros).
+boolean do_black;
+
+do_black := false; %% true
 
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
-
-newwrite nw[];
 
 string s;
 
@@ -82,56 +86,43 @@ endfor;
 
 input "sample3.lmc";
 
-get_spherical_biangles {4, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
+%% ** (2) Call macros.
 
-%% ** (2)
+get_spherical_biangles {4, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
 
 get_sphere_for_plotting_stars {4};
 
-numeric i;
+%% *** (3)
+
 i := 0;
 
 pv += 4;
 plot_star_on_sphere (pv) {4, arcturus, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {4, arcturus, 0};
+plot_star_on_spherical_biangle (qv) {4, arcturus, 0, do_black};
+
+%% *** (3)
 
 pv += 4;
 plot_star_on_sphere (pv) {4, hadar, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {4, hadar, 1};
+plot_star_on_spherical_biangle (qv) {4, hadar, 1, do_black};
 
 %% *** (3)
 
-%% These are the parameters I need for plotting stars on the spherical biangles.
-%% LDF 2021.7.4.
+pv += 4;
+plot_star_on_sphere (pv) {4, sirius, i};
+i += 4;
 
-% bi_ang0:
-% >> 5
-% bi_ang1:
-% >> -1
-% middle_angle:
-% >> 225
-% min_edge_angle:
-% >> 202.5
-% max_edge_angle:
-% >> 247.5
-% Declination_arc_length
-% RA_arc_length
-
-  
+plot_star_on_spherical_biangle (qv) {4, sirius, 2, do_black};
 
 %% *** (3)
 
-
-%% *** (3) Figure and output commands.
+%% ** (2) Figure and output commands.
 
 input "sample3.aux";
-
-%% *** (3)
-
 
 %% ** (2)
 
