@@ -1410,6 +1410,84 @@ Added this rule.
 
 @q ***** (5) @>
 
+@q **** (4) command --> CLOSE newwrite_expression. @>
+
+@*3 \§command> $\longrightarrow$ \.{CLOSE} \§newwrite_expression>.
+\initials{LDF 2021.7.6.}
+
+\LOG
+\initials{LDF 2021.7.6.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: CLOSE newwrite_variable@>@/
+{
+@q ******* (7) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> CLOSE newwrite_expression'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Newwrite *nw = 0;    
+
+    entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
+
+    if (entry == 0)
+    {
+        cerr << "entry is NULL." << endl;
+    }
+
+    else if (entry->object == 0)
+    {
+       cerr << "entry->object is NULL." << endl;
+    }
+
+    if (entry != 0 && entry->object != 0)
+    {
+        nw = static_cast<Newwrite*>(entry->object); 
+        
+        if (nw->out_strm.is_open())
+        {
+           nw->out_strm.close();
+        }
+        else 
+        {
+           cerr_strm << "WARNING!  In parser, `command --> CLOSE newwrite_expression':"
+                     << endl
+                     << "`nw->out_strm' isn't open.  Not closing.  Continuing."
+                     << endl;
+
+           log_message(cerr_strm);
+           cerr_message(cerr_strm);
+           cerr_strm.str("");
+
+        }
+    }
+
+    @=$$@> = static_cast<void*>(0);
+
+@q ******* (7) @>
+
+};
+
+
+
 @q **** (4) @>
 
 @q *** (3) @>
