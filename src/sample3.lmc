@@ -708,6 +708,88 @@ enddef;
 
 %% ** (2)
 
+macro plot_star_on_spherical_biangle;
+
+def plot_star_on_spherical_biangle (pv) {numeric radius, star S, numeric point_number} =
+  
+  numeric decl;
+  numeric ra;
+  string s;
+  point y_axis_point;
+  
+  message "Entering macro `plot_star_on_spherical_biangle'.";
+  
+  decl := declination_decimal_degrees S;
+  ra   :=  right_ascension_decimal_degrees S;
+
+  message "decl:";
+  show decl;
+
+  message "ra:";
+  show ra;
+
+  message "bi_ang0:";
+  show bi_ang0;
+
+  message "bi_ang1:";
+  show bi_ang1;
+
+  message "middle_angle:";
+  show middle_angle;
+
+  message "min_edge_angle:";
+  show min_edge_angle;
+
+  message "max_edge_angle:";
+  show max_edge_angle;
+
+  message "Declination_arc_length:";
+  show Declination_arc_length;
+
+  message "RA_arc_length:";
+  show RA_arc_length;
+
+  message "ra_decl_zero_pt:";
+  show ra_decl_zero_pt;
+
+ 
+  if (bi_ang0 == 5) and (bi_ang1 == -1):
+    message "bi_ang0 == 5 and bi_ang1 == -1.";
+    if decl >= 0:
+      y_axis_point := (0, Declination_arc_length);
+    else:
+      y_axis_point := (0, -Declination_arc_length);
+    fi;
+
+    dotlabel.rt("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+
+    message "ra";
+    show ra;
+    message "middle_angle";
+    show middle_angle;
+    %pause;
+    
+    if ra > middle_angle:
+      R[point_number] := (RA_arc_length, ypart y_axis_point);
+    else:
+      R[point_number] := (-RA_arc_length, ypart y_axis_point);
+    fi;
+
+    s := "\starinfo{" & decimal point_number & "}{" & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
+
+    write s to nw[bi_ang0];
+    
+    dotlabel.lft("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
+   
+  fi;
+ 
+  message "Exiting macro `plot_star_on_spherical_biangle'.";
+
+enddef;
+
+
+%% ** (2)
+
 endinput;
 
 %% ** (2) End of 3DLDF code.

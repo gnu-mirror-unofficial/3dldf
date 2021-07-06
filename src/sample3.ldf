@@ -62,11 +62,13 @@ numeric middle_angle;
 numeric min_edge_angle; 
 numeric max_edge_angle;
 point ra_decl_zero_pt;
+point R[];
+picture_vector pv;
+picture_vector qv;
 
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
 
 newwrite nw[];
-
 
 string s;
 
@@ -80,24 +82,26 @@ endfor;
 
 input "sample3.lmc";
 
-get_spherical_biangles {3.5, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
+get_spherical_biangles {4, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
 
 %% ** (2)
 
-get_sphere_for_plotting_stars {3.5};
-
-picture_vector pv;
+get_sphere_for_plotting_stars {4};
 
 numeric i;
 i := 0;
 
 pv += 4;
-plot_star_on_sphere (pv) {3.5, arcturus, i};
+plot_star_on_sphere (pv) {4, arcturus, i};
 i += 4;
 
-%pv += 4;
-%plot_star_on_sphere (pv) {3.5, hadar, i};
-%i += 4;
+plot_star_on_spherical_biangle (qv) {4, arcturus, 0};
+
+pv += 4;
+plot_star_on_sphere (pv) {4, hadar, i};
+i += 4;
+
+plot_star_on_spherical_biangle (qv) {4, hadar, 1};
 
 %% *** (3)
 
@@ -117,91 +121,9 @@ i += 4;
 % Declination_arc_length
 % RA_arc_length
 
-macro plot_star_on_spherical_biangle;
-
-def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
-  
-  numeric decl;
-  numeric ra;
-  string s;
-  
-  point R[];
-  
-  message "Entering macro `plot_star_on_spherical_biangle'.";
-  
-  decl := declination_decimal_degrees S;
-  ra   :=  right_ascension_decimal_degrees S;
-
-  message "decl:";
-  show decl;
-
-  message "ra:";
-  show ra;
-
-  message "bi_ang0:";
-  show bi_ang0;
-
-  message "bi_ang1:";
-  show bi_ang1;
-
-  message "middle_angle:";
-  show middle_angle;
-
-  message "min_edge_angle:";
-  show min_edge_angle;
-
-  message "max_edge_angle:";
-  show max_edge_angle;
-
-  message "Declination_arc_length:";
-  show Declination_arc_length;
-
-  message "RA_arc_length:";
-  show RA_arc_length;
-
-  message "ra_decl_zero_pt:";
-  show ra_decl_zero_pt;
-
-  if (bi_ang0 == 5) and (bi_ang1 == -1):
-    message "bi_ang0 == 5 and bi_ang1 == -1.";
-    if decl >= 0:
-      R0 := (0, Declination_arc_length);
-    else:
-      R0 := (0, -Declination_arc_length);
-    fi;
-
-    %dotlabel.rt("$R_0$", R0) bi_ang_pict[bi_ang0];
-
-    message "ra";
-    show ra;
-    message "middle_angle";
-    show middle_angle;
-    %pause;
-    
-    if ra > middle_angle:
-      R1 := (RA_arc_length, ypart R0);
-    else:
-      R1 := (-RA_arc_length, ypart R0);
-    fi;
-
-    s := "\starinfo{1}{" & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
-
-    write s to nw[bi_ang0];
-    
-    dotlabel.lft("$R_1$", R1) bi_ang_pict[bi_ang0];
-   
-  fi;
- 
-  message "Exiting macro `plot_star_on_spherical_biangle'.";
-
-enddef;
   
 
 %% *** (3)
-
-picture_vector qv;
-
-plot_star_on_spherical_biangle (qv) {3.5, arcturus};
 
 
 %% *** (3) Figure and output commands.
