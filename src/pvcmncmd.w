@@ -536,8 +536,168 @@ Added this rule.
 
 };
 
+@q *** (3) command --> newwrite_vector_variable PLUS_ASSIGN string_expression. @>
+
+@*2 \§command> $\longrightarrow$ 
+\§newwrite vector variable> \.{PLUS\_ASSIGN} \§newwrite vector expression>. 
+\initials{LDF 2021.7.6.}
+
+\LOG
+\initials{LDF 2021.7.6.}
+Added this rule.
+\ENDLOG
+
+@q **** (4) Definition.@> 
+
+@<Define rules@>=
+@=command: newwrite_vector_variable PLUS_ASSIGN string_expression@>@/
+{
+
+   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+
+   Pointer_Vector<Newwrite>* pv;
+
+@q ***** (5)@> 
+
+   if (entry == static_cast<Id_Map_Entry_Node>(0))
+      {
+#if 0 
+          cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
+                    << "`command --> newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                    << endl
+		    << "`newwrite_vector_variable' is invalid.  "
+                    << "Will try to continue.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
+#endif 
+
+      }  /* |if (entry == 0)|  */
+    
+@q ***** (5)@> 
+ 
+   else /* |entry != 0|  */
+      {
+
+@q ****** (6)@> 
+
+          if (entry->object == static_cast<void*>(0))
+             {
+              
+                 pv  = new Pointer_Vector<Newwrite>;
+
+@q ******* (7)@> 
+
+                  entry->object = static_cast<void*>(pv);  
+
+             }  /* |else if (entry->object == 0)|  */
+
+@q ****** (6)@> 
+
+          pv = static_cast<Pointer_Vector<Newwrite>*>(entry->object);
+
+          stringstream name_strm;          
+          stringstream root_strm;          
+
+          name_strm << entry->name << "[" << pv->ctr << "]";
+          root_strm << entry->name << "£"; /* British pound symbol.  */
+          Id_Map_Entry_Node root = static_cast<Scanner_Node>(parameter)->lookup(root_strm.str());
+
+@q ******* (7)@> 
+
+          if (root == static_cast<Id_Map_Entry_Node>(0))
+             {
+#if 0 
+                 cerr_strm << thread_name 
+                           << "ERROR!  In `yyparse()', rule "
+                           << "`command --> newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                           << endl
+                           << "root' == 0, i.e., no `Id_Map_Entry_Node' exists "
+                           << "for `" << root_strm.str() << "'."
+                           << endl << "Will try to continue.";
+
+                 log_message(cerr_strm);
+                 cerr_message(cerr_strm, error_stop_value);
+                 cerr_strm.str("");
+#endif 
+
+             }  /* |if (root == 0)|  */
+
+@q ******* (7)@> 
+
+         else /* |root != 0|  */
+            {
+
+                Id_Map_Entry_Node temp_entry 
+                    = static_cast<Scanner_Node>(parameter)->get_array_entry(name_strm.str(), root);
+@q ******** (8)@> 
+
+                if (temp_entry == static_cast<Id_Map_Entry_Node>(0))
+                   {
+#if 0 
+                       cerr_strm << thread_name 
+                           << "ERROR!  In `yyparse()', rule "
+                           << "`command --> newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                           << endl
+                           << "`Scanner_Type::get_array_entry()' failed, "
+                           << "returning 0.  "
+                           << "Will try to continue.";
+
+                       log_message(cerr_strm);
+                       cerr_message(cerr_strm, error_stop_value);
+                       cerr_strm.str("");
+#endif 
+
+                   }  /* |if (temp_entry == 0)|  */
+
+@q ******** (8)@> 
+
+               else  /* |temp_entry != 0|  */
+               {
+                    Newwrite* p;
+
+@q ********* (9).@>  
+                    if (temp_entry->object == static_cast<void*>(0))
+                    {
+
+                        p = new Newwrite;
+
+                        temp_entry->object = static_cast<void*>(p);
+                        p = 0;
+
+@q ********** (10).@> 
+            
+                    }  /* |if (temp_entry->object == 0)|  */
+
+@q ********* (9).@>  
+
+                    p = static_cast<Newwrite*>(temp_entry->object);
+
+                    *p = *static_cast<string*>(@=$3@>);
+
+                    pv->v.push_back(p);
+
+                    ++pv->ctr;
 
 
+               }  /* |else| (|temp_entry != 0|)  */
+
+@q ******** (8)@> 
+
+   }   /* |else| (|root != 0|)  */
+
+@q ******* (7)@> 
+
+@q ****** (6)@> 
+
+      }  /* |else| (|entry != 0|)  */
+
+@q ***** (5)@> 
+
+   @=$$@> = static_cast<void*>(0);
+
+};
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
