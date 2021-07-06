@@ -258,48 +258,88 @@ operator=(const Newwrite& n);
 void
 Newwrite::operator=(const Newwrite& n)
 {
-    cerr << "Entering `Newwrite::operator=(const Newwrite& n)'." << endl;
+
+    bool DEBUG = true; /* |false| */ 
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+       cerr << "Entering `Newwrite::operator=(const Newwrite& n)'." << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
  
+@q **** (4) @>
+
     if (this == &n) /* Make sure it's not self-assignment. */
     {
-       cerr << "Self-assignment.  Exiting `Newwrite::operator=(const Newwrite& n)'." << endl;
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "Self-assignment.  Exiting `Newwrite::operator=(const Newwrite& n)'." << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
        return;
     }
 
+@q **** (4) @>
 
     if (filename == n.filename && out_strm.is_open())
     {
-       cerr << "filename == n.filename and out_strm is open."
-            << endl 
-            << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
-            << endl;
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr << "filename == n.filename and out_strm is open."
+               << endl 
+               << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
+               << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
        return;
     }
-     
+
+@q **** (4) @>
 
     if (filename == n.filename && !out_strm.is_open())
     {
-       cerr << "filename == n.filename and out_strm is not open."
-            << endl
-            << "Opening out_strm with filename == " << filename
-            << endl 
-            << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
-            << endl;
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "filename == n.filename and out_strm is not open."
+                << endl
+                << "Opening out_strm with filename == " << filename
+                << endl 
+                << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
+                << endl;
+
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
        out_strm.open(filename.c_str());
        return;
     }
 
+@q **** (4) @>
+
     if (filename != n.filename)
     {
-       cerr << "filename != n.filename."
-            << endl
-            << "Resetting filename from " << filename << " to n.filename == " << n.filename
-            << endl 
-            << "Closing and reopening out_strm with new filename."
-            << endl 
-            << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
-            << endl;
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "filename != n.filename."
+                << endl
+                << "Resetting filename from " << filename << " to n.filename == " << n.filename
+                << endl 
+                << "Closing and reopening out_strm with new filename."
+                << endl 
+                << "Exiting `Newwrite::operator=(const Newwrite& n)'." 
+                << endl;
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
        filename = n.filename;
 
@@ -309,7 +349,14 @@ Newwrite::operator=(const Newwrite& n)
        out_strm.open(filename.c_str());
     }
 
-    cerr << "Exiting `Newwrite::operator=(const Newwrite& n)'." << endl;
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr << "Exiting `Newwrite::operator=(const Newwrite& n)'." << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
     return;
 
@@ -336,8 +383,21 @@ operator=(const string& s);
 void
 Newwrite::operator=(const string& s)
 {
+
     if (filename == s)
-       return;
+    {
+        cerr << "WARNING!  In `Newwrite::operator=':" << endl 
+             << "Argument `s' == `filename' == " << filename 
+             << endl
+             << "Ignoring.  Use `reopen' to reopen file, if it's closed."
+             << endl 
+             << "Use `is_open' to determine whether file is open."
+             << endl
+             << "Exiting function with `void' return value."
+             << endl;
+
+        return;
+    }
 
     if (out_strm.is_open())
        out_strm.close();
