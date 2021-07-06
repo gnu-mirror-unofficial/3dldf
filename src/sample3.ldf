@@ -196,10 +196,10 @@ picture_vector qv;
 
 plot_star_on_spherical_biangle (qv) {3.5, arcturus};
 
-verbatim_metapost "verbatimtex YYY etex";
+newwrite nw;
+nw := "sample3_5.tex";
 
-label("XXX\box\starlistbox", p22 shifted (-.5cm, -1.5cm)) bi_ang_pict[bi_ang0];
-    
+write "%% sample3_5.tex" to nw;
 
 %% *** (3) Figure and output commands.
 
