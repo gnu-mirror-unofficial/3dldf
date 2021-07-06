@@ -536,10 +536,10 @@ Added this rule.
 
 };
 
-@q *** (3) command --> newwrite_vector_variable PLUS_ASSIGN string_expression. @>
+@q *** (3) command --> newwrite_vector_expression PLUS_ASSIGN string_expression. @>
 
 @*2 \§command> $\longrightarrow$ 
-\§newwrite vector variable> \.{PLUS\_ASSIGN} \§newwrite vector expression>. 
+\§newwrite vector expression> \.{PLUS\_ASSIGN} \§newwrite vector expression>. 
 \initials{LDF 2021.7.6.}
 
 \LOG
@@ -550,7 +550,7 @@ Added this rule.
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
-@=command: newwrite_vector_variable PLUS_ASSIGN string_expression@>@/
+@=command: newwrite_vector_expression PLUS_ASSIGN string_expression@>@/
 {
 
    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
@@ -563,9 +563,9 @@ Added this rule.
       {
 #if 0 
           cerr_strm << thread_name << "ERROR!  In `yyparse()', rule "
-                    << "`command --> newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                    << "`command --> newwrite_vector_expression PLUS_ASSIGN string_expression':"
                     << endl
-		    << "`newwrite_vector_variable' is invalid.  "
+		    << "`newwrite_vector_expression' is invalid.  "
                     << "Will try to continue.";
 
           log_message(cerr_strm);
@@ -611,7 +611,7 @@ Added this rule.
 #if 0 
                  cerr_strm << thread_name 
                            << "ERROR!  In `yyparse()', rule "
-                           << "`command --> newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                           << "`command --> newwrite_vector_expression PLUS_ASSIGN string_expression':"
                            << endl
                            << "root' == 0, i.e., no `Id_Map_Entry_Node' exists "
                            << "for `" << root_strm.str() << "'."
@@ -638,7 +638,7 @@ Added this rule.
 #if 0 
                        cerr_strm << thread_name 
                            << "ERROR!  In `yyparse()', rule "
-                           << "`command --> newwrite_vector_variable PLUS_ASSIGN string_expression':"
+                           << "`command --> newwrite_vector_expression PLUS_ASSIGN string_expression':"
                            << endl
                            << "`Scanner_Type::get_array_entry()' failed, "
                            << "returning 0.  "
@@ -674,6 +674,10 @@ Added this rule.
 
                     p = static_cast<Newwrite*>(temp_entry->object);
 
+                    p->show("p:");
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
                     *p = *static_cast<string*>(@=$3@>);
 
                     pv->v.push_back(p);
@@ -698,6 +702,7 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 
 };
+
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>

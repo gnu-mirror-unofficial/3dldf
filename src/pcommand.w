@@ -1229,9 +1229,9 @@ Added this rule.
 
 };
 
-@q **** (4) command --> WRITE newwrite_expression string_expression no_newline_optional. @>
+@q **** (4) command --> WRITE newwrite_variable string_expression no_newline_optional. @>
 
-@*3 \§command> $\longrightarrow$ \.{WRITE} \§newwrite_expression> \§string_expression> \§no newline optional>.
+@*3 \§command> $\longrightarrow$ \.{WRITE} \§newwrite variable> \§string_expression> \§no newline optional>.
 \initials{LDF 2021.7.5.}
 
 \LOG
@@ -1253,7 +1253,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> WRITE newwrite_expression string_expression no_newline_optional'."
+      cerr_strm << "*** Parser: `command --> WRITE newwrite_variable string_expression no_newline_optional'."
                 << endl;
 
       log_message(cerr_strm);
@@ -1298,9 +1298,9 @@ Added this rule.
 
 };
 
-@q **** (4) command --> WRITE string_expression TO newwrite_expression no_newline_optional. @>
+@q **** (4) command --> WRITE string_expression TO newwrite_variable no_newline_optional. @>
 
-@*3 \§command> $\longrightarrow$ \.{WRITE} \§string_expression> \.{TO} \§newwrite_expression> \§no newline optional>.
+@*3 \§command> $\longrightarrow$ \.{WRITE} \§string_expression> \.{TO} \§newwrite variable> \§no newline optional>.
 \initials{LDF 2021.7.5.}
 
 \LOG
@@ -1312,7 +1312,7 @@ Added this rule.
 
 @<Define rules@>= 
   
-@=command: WRITE string_expression TO newwrite_expression no_newline_optional@>@/
+@=command: WRITE string_expression TO newwrite_variable no_newline_optional@>@/
 {
 @q ******* (7) @>
 
@@ -1322,7 +1322,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> WRITE string_expression TO newwrite_expression no_newline_optional'."
+      cerr_strm << "*** Parser: `command --> WRITE string_expression TO newwrite_variable no_newline_optional'."
                 << endl;
 
       log_message(cerr_strm);
@@ -1410,9 +1410,9 @@ Added this rule.
 
 @q ***** (5) @>
 
-@q **** (4) command --> CLOSE newwrite_expression. @>
+@q **** (4) command --> CLOSE newwrite_variable. @>
 
-@*3 \§command> $\longrightarrow$ \.{CLOSE} \§newwrite_expression>.
+@*3 \§command> $\longrightarrow$ \.{CLOSE} \§newwrite_variable>.
 \initials{LDF 2021.7.6.}
 
 \LOG
@@ -1434,7 +1434,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> CLOSE newwrite_expression'."
+      cerr_strm << "*** Parser: `command --> CLOSE newwrite_variable'."
                 << endl;
 
       log_message(cerr_strm);
@@ -1468,7 +1468,7 @@ Added this rule.
         }
         else 
         {
-           cerr_strm << "WARNING!  In parser, `command --> CLOSE newwrite_expression':"
+           cerr_strm << "WARNING!  In parser, `command --> CLOSE newwrite_variable':"
                      << endl
                      << "`nw->out_strm' isn't open.  Not closing.  Continuing."
                      << endl;

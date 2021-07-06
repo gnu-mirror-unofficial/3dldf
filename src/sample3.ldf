@@ -63,6 +63,20 @@ numeric min_edge_angle;
 numeric max_edge_angle;
 point ra_decl_zero_pt;
 
+%% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
+
+newwrite nw[];
+
+string s;
+
+for i = 0 upto 7:
+  s := "sample_3_" & decimal i & ".tex";
+  nw[i] := s;
+  s := "%% " & s & "\n";
+  message "s == " & s;
+  write s to nw[i];
+endfor;
+
 input "sample3.lmc";
 
 get_spherical_biangles {3.5, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
@@ -108,7 +122,8 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
   
   numeric decl;
   numeric ra;
-
+  string s;
+  
   point R[];
   
   message "Entering macro `plot_star_on_spherical_biangle'.";
@@ -168,21 +183,13 @@ def plot_star_on_spherical_biangle (pv) {numeric radius, star S} =
       R1 := (-RA_arc_length, ypart R0);
     fi;
 
-    verbatim_metapost "verbatimtex \\newbox\\starlistbox\\newbox\RAbox\\newbox\Declbox\setbox\RAbox=\hbox{RA\space}"
-        & "\setbox\starlistbox=\vtop{}"
-        & "\setbox\Declbox=\hbox{Decl.~}"
-        & "\def\A#1#2#3#4{\setbox0=\hbox{#1:\space}"
-        & "\setbox\starlistbox=\vtop{\\unvcopy\starlistbox\hbox{\copy0#2}"
-        & "\hbox{\hskip\wd0\hbox to \wd\Declbox{RA\hfil}#3}"
-        & "\hbox{\hskip\wd0\copy\Declbox #4}"
-        & "}"
-        & "} etex";
+    s := "\\newbox\starboxfive\setbox\starboxfive=\vtop{\vskip-4.5in\hbox{" & common_name S & "}\hbox{RA $"
+         & decimal ra & "^\circ$}\hbox{Decl.~$" & decimal decl & "^\circ$}\vss}";
+
+    write s to nw[bi_ang0];
     
     dotlabel.lft("$R_1$", R1) bi_ang_pict[bi_ang0];
-
-    label("\A{$R_1$}{" & common_name S & "}{$" & decimal ra & "^\circ$}{$" & decimal decl & "^\circ$}",
-          p22 shifted (-1.5cm, -2cm)) bi_ang_pict[bi_ang0];
-
+   
   fi;
  
   message "Exiting macro `plot_star_on_spherical_biangle'.";
@@ -196,10 +203,6 @@ picture_vector qv;
 
 plot_star_on_spherical_biangle (qv) {3.5, arcturus};
 
-newwrite nw;
-nw := "sample3_5.tex";
-
-write "%% sample3_5.tex" to nw;
 
 %% *** (3) Figure and output commands.
 
