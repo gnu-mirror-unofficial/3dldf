@@ -51,40 +51,62 @@
 
 %% ** (2)
 
+macro draw_lines;
+
+def draw_lines =
+
+  if do_black:
+    fill Q;
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+    
+  drawdot origin with_pen medium_pen with_color ccolor;
+  draw p20 -- p21 with_color ccolor;
+  draw p22 -- p23 with_color ccolor;
+  draw p24 -- p25 with_color ccolor;
+  draw (p24 -- p25) rotated (180, 0) with_color ccolor;
+  draw p26 -- p27 with_color ccolor;
+  draw (p26 -- p27) rotated (180, 0) with_color ccolor;
+  draw p28 -- p29 with_color ccolor;
+  draw (p28 -- p29) rotated (180, 0)  with_color ccolor;
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  draw p30 -- p31 with_color ccolor;
+  draw p32 -- p33 with_color ccolor;
+  draw p34 -- p35 with_color ccolor;
+  draw p36 -- p37 with_color ccolor;
+  draw p50 -- p51 with_color ccolor;
+  draw p52 -- p53 with_color ccolor;
+  draw p54 -- p55 with_color ccolor;
+  draw p56 -- p57 with_color ccolor;
+    
+enddef;
+
+
+do_black := false;
+
 beginfig(0);
-  output bi_ang_pict[0] with_projection parallel_x_y; 
-endfig;
+  output bi_ang_pict[0] with_projection parallel_x_y;
+  draw_lines;
+endfig with_projection parallel_x_y;
 
 beginfig(1);
   output bi_ang_pict[1] with_projection parallel_x_y; 
 endfig;
 
+do_black := true;
+
 beginfig(2);
   current_picture += bi_ang_pict[2];
-  fill Q;
-  drawdot origin with_pen medium_pen with_color white;
-  draw p20 -- p21 with_color white;
-  draw p22 -- p23 with_color white;
-  draw p24 -- p25 with_color white;
-  draw (p24 -- p25) rotated (180, 0) with_color white;
-  draw p26 -- p27 with_color white;
-  draw (p26 -- p27) rotated (180, 0) with_color white;
-  draw p28 -- p29 with_color white;
-  draw (p28 -- p29) rotated (180, 0)  with_color white;
-  output current_picture with_projection parallel_x_y;
-  clear current_picture;
-  
-  draw p30 -- p31 with_color white;
-  draw p32 -- p33 with_color white;
-  draw p34 -- p35 with_color white;
-  draw p36 -- p37 with_color white;
-  draw p50 -- p51 with_color white;
-  draw p52 -- p53 with_color white;
-  draw p54 -- p55 with_color white;
-  draw p56 -- p57 with_color white;
 
-  label.top("Sirius", R2) with_text_color white;
-  dotlabel.bot("$R_2$", R2) with_text_color white with_dot_color white;
+  draw_lines;
+
+  label.top("Sirius", R2) with_text_color ccolor;
+  dotlabel.bot("$R_2$", R2) with_text_color ccolor with_dot_color ccolor;
+
 endfig with_projection parallel_x_y;
 
 beginfig(3);

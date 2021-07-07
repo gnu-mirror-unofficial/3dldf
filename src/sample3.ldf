@@ -81,7 +81,7 @@ numeric radius;
 
 radius := 4.5cm;
 
-do_black := false; %% true 
+do_black := true; %% false 
 
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
 
@@ -99,7 +99,7 @@ input "sample3.lmc";
 
 %% ** (2) Call macros.
 
-get_spherical_biangles {radius, do_black}; 
+get_spherical_biangles {radius}; 
 
 get_sphere_for_plotting_stars {radius};
 
@@ -111,7 +111,7 @@ pv += 4;
 plot_star_on_sphere (pv) {radius, arcturus, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {arcturus, 0, do_black};
+plot_star_on_spherical_biangle {arcturus, 0};
 
 %% *** (3)
 
@@ -119,7 +119,7 @@ pv += 4;
 plot_star_on_sphere (pv) {radius, hadar, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {hadar, 1, do_black};
+plot_star_on_spherical_biangle {hadar, 1};
 
 %% *** (3)
 
@@ -127,21 +127,9 @@ pv += 4;
 plot_star_on_sphere (pv) {radius, sirius, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {sirius, 2, do_black};
+plot_star_on_spherical_biangle {sirius, 2};
 
 color ccolor;
-
-% if do_black:
-%   ccolor := red; % white;
-% else:
-%   ccolor := black;
-% fi;
-
-% draw p52 -- p53 -- p55 -- p54 -- cycle with_color red with_pen Large_pen on_picture bi_ang_pict[5];
-
-% fill p52 -- p53 -- p55 -- p54 -- cycle with_color red on_picture bi_ang_pict[5];
-
-% dotlabel.top("{\largebf Hadar}", R1) with_text_color white with_dot_color white on_picture bi_ang_pict[5];
 
 %% *** (3)
 
