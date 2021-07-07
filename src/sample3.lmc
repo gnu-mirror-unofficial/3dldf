@@ -1,4 +1,4 @@
-%%%% sample3.lmc
+%%% sample3.lmc
 %%%% Created by Laurence D. Finston (LDF) Sat 03 Jul 2021 11:27:34 PM CEST
 
 %% * (1) Copyright and License.
@@ -49,7 +49,7 @@
 
 % * (1) Beginning of 3DLDF code.
 
-verbatim_metapost "verbatimtex \font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14 etex;";
+verbatim_metapost "verbatimtex \font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch etex;";
 
 %% *** (3) Draw spherical biangle
 
@@ -800,7 +800,7 @@ def plot_star_on_spherical_biangle (pv) {star S, numeric point_number, boolean d
 
     label.top("{\medium " & common_name S & "}", R[point_number]) with_text_color (ccolor) bi_ang_pict[bi_ang0];
     drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture bi_ang_pict[bi_ang0];
-    %%dotlabel.top("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
+    dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
 
   fi;
  
