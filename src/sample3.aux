@@ -60,8 +60,32 @@ beginfig(1);
 endfig;
 
 beginfig(2);
-  output bi_ang_pict[2] with_projection parallel_x_y; 
-endfig;
+  current_picture += bi_ang_pict[2];
+  fill Q;
+  drawdot origin with_pen medium_pen with_color white;
+  draw p20 -- p21 with_color white;
+  draw p22 -- p23 with_color white;
+  draw p24 -- p25 with_color white;
+  draw (p24 -- p25) rotated (180, 0) with_color white;
+  draw p26 -- p27 with_color white;
+  draw (p26 -- p27) rotated (180, 0) with_color white;
+  draw p28 -- p29 with_color white;
+  draw (p28 -- p29) rotated (180, 0)  with_color white;
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  draw p30 -- p31 with_color white;
+  draw p32 -- p33 with_color white;
+  draw p34 -- p35 with_color white;
+  draw p36 -- p37 with_color white;
+  draw p50 -- p51 with_color white;
+  draw p52 -- p53 with_color white;
+  draw p54 -- p55 with_color white;
+  draw p56 -- p57 with_color white;
+
+  label.top("Sirius", R2) with_text_color white;
+  dotlabel.bot("$R_2$", R2) with_text_color white with_dot_color white;
+endfig with_projection parallel_x_y;
 
 beginfig(3);
   output bi_ang_pict[3] with_projection parallel_x_y; 
