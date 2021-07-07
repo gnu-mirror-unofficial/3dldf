@@ -66,11 +66,22 @@ point R[];
 picture_vector pv;
 picture_vector qv;
 newwrite nw[];
+pen medium_pen;
+pen large_pen;
+pen Large_pen;
+path Q;
+
+medium_pen := pencircle scaled (2pt, 2pt, 2pt);
+large_pen  := pencircle scaled (3pt, 3pt, 3pt);
+Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 
 numeric i;  %% Global, used in the following code (not in macros).
 boolean do_black;
+numeric radius;
 
-do_black := false; %% true
+radius := 4.5cm;
+
+do_black := false; %% true %% DO NOT set do_black := true!  It doesn't work.
 
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
 
@@ -88,35 +99,43 @@ input "sample3.lmc";
 
 %% ** (2) Call macros.
 
-get_spherical_biangles {4, false};  %% Second arg. is 'do_black'.  LDF 2021.7.4.
+get_spherical_biangles {radius, do_black}; 
 
-get_sphere_for_plotting_stars {4};
+get_sphere_for_plotting_stars {radius};
 
 %% *** (3)
 
 i := 0;
 
 pv += 4;
-plot_star_on_sphere (pv) {4, arcturus, i};
+plot_star_on_sphere (pv) {radius, arcturus, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {4, arcturus, 0, do_black};
+plot_star_on_spherical_biangle (qv) {arcturus, 0, do_black};
 
 %% *** (3)
 
 pv += 4;
-plot_star_on_sphere (pv) {4, hadar, i};
+plot_star_on_sphere (pv) {radius, hadar, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {4, hadar, 1, do_black};
+plot_star_on_spherical_biangle (qv) {hadar, 1, do_black};
 
 %% *** (3)
 
 pv += 4;
-plot_star_on_sphere (pv) {4, sirius, i};
+plot_star_on_sphere (pv) {radius, sirius, i};
 i += 4;
 
-plot_star_on_spherical_biangle (qv) {4, sirius, 2, do_black};
+plot_star_on_spherical_biangle (qv) {sirius, 2, do_black};
+
+color ccolor;
+
+if do_black:
+  ccolor := red; % white;
+else:
+  ccolor := black;
+fi;
 
 %% *** (3)
 
