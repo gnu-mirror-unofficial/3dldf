@@ -64,16 +64,6 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
   path edge[];
   numeric n[];
   point ra_decl_zero_pt;
-  color ccolor;
-  color dcolor;
-
-  if ddo_black:
-    ccolor := white;
-    dcolor := gray;
-  else:
-    ccolor := black;
-    dcolor := black;
-  fi;
   
   radius0 := rad;
 
@@ -141,8 +131,8 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
 
   label.rt("$0^\circ$", p21 shifted (1cm, 0));
 
-  dotlabel.lft("$p_{20}$", p20) with_dot_color dcolor;
-  dotlabel.rt("$p_{21}$", p21) with_dot_color dcolor;
+  dotlabel.lft("$p_{20}$", p20);
+  dotlabel.rt("$p_{21}$", p21);
 
   edge0 += p20;
   edge1 += p21;
@@ -152,8 +142,8 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
   p22 := (0, -.25a);
   p23 := (0, .25a);
 
-  dotlabel.bot("$p_{22}$", p22) with_dot_color dcolor;
-  dotlabel.top("$p_{23}$", p23) with_dot_color dcolor;
+  dotlabel.bot("$p_{22}$", p22);
+  dotlabel.top("$p_{23}$", p23);
   label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
   label.rt("$90^\circ$", p23 shifted (.25cm, 0));
 
@@ -162,8 +152,8 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
   for i = 1 step 1 until 7:
     p[j]     := (-.5biangle_width[k], (i * n1));
     p[j + 1] := (.5biangle_width[k], (i * n1));
-    dotlabel.lft("$p_{" & decimal j & "}$", p[j]) with_dot_color dcolor;
-    dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]) with_dot_color dcolor;
+    dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
+    dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
     label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
     edge0 += p[j];
     edge1 += p[j + 1];
@@ -172,38 +162,40 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
   endfor;
 
 
-  dotlabel.lft("$p_{24}$", p24) with_dot_color dcolor;
-  dotlabel.rt("$p_{25}$", p25) with_dot_color dcolor;
+  dotlabel.lft("$p_{24}$", p24);
+  dotlabel.rt("$p_{25}$", p25);
   
   j := 1;
 
   for i := 24 step 2 until 37:
     p[20 + i] := p[i] rotated (180, 0);
     p[20 + 1 + i] := p[i + 1] rotated (180, 0);
-    dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]) with_dot_color dcolor;
-    dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]) with_dot_color dcolor;
+    dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
+    dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
     label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
     j += 1;
   endfor;
 
-  draw p20 -- p21 with_color ccolor;
-  draw (p20 -- p21) rotated (180, 0) with_color ccolor;
-  draw p22 -- p23 with_color ccolor;
-  draw p24 -- p25 with_color ccolor;
-  draw (p24 -- p25) rotated (180, 0) with_color ccolor;
-  draw p26 -- p27 with_color ccolor;
-  draw (p26 -- p27) rotated (180, 0) with_color ccolor;
-  draw p28 -- p29 with_color ccolor;
-  draw (p28 -- p29) rotated (180, 0)  with_color ccolor;
-  draw p30 -- p31 with_color ccolor;
-  draw (p30 -- p31) rotated (180, 0) with_color ccolor;
-  draw p32 -- p33 with_color ccolor;
-  draw (p32 -- p33) rotated (180, 0) with_color ccolor;
-  draw p34 -- p35 with_color ccolor;
-  draw (p34 -- p35) rotated (180, 0) with_color ccolor;
-  draw p36 -- p37 with_color ccolor;
-  draw (p36 -- p37) rotated (180, 0) with_color ccolor;
-  
+  if false:
+    draw p20 -- p21;
+    draw (p20 -- p21) rotated (180, 0);
+    draw p22 -- p23;
+    draw p24 -- p25;
+    draw (p24 -- p25) rotated (180, 0);
+    draw p26 -- p27;
+    draw (p26 -- p27) rotated (180, 0);
+    draw p28 -- p29;
+    draw (p28 -- p29) rotated (180, 0) ;
+    draw p30 -- p31;
+    draw (p30 -- p31) rotated (180, 0);
+    draw p32 -- p33;
+    draw (p32 -- p33) rotated (180, 0);
+    draw p34 -- p35;
+    draw (p34 -- p35) rotated (180, 0);
+    draw p36 -- p37;
+    draw (p36 -- p37) rotated (180, 0);
+  fi;
+    
   edge0 += p23;
   edge1 += p23;
 
@@ -219,9 +211,9 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
   p100 := get_last_point edge0;
   %drawdot p100 with_color blue with_pen pencircle scaled (8pt, 8pt, 8pt);
 
-  %drawarrow edge1 with_color ccolor with_pen pencircle scaled (3pt, 3pt, 3pt);
+  %drawarrow edge1 with_pen pencircle scaled (3pt, 3pt, 3pt);
   p101 := get_last_point edge1;
-  %drawdot p101 with_color ccolor with_pen pencircle scaled (8pt, 8pt, 8pt);
+  %drawdot p101 with_pen pencircle scaled (8pt, 8pt, 8pt);
 
   %drawarrow edge2 with_color green with_pen pencircle scaled (3pt, 3pt, 3pt);
   p102 := get_last_point edge2;
@@ -238,7 +230,7 @@ def get_spherical_biangles {numeric rad, boolean ddo_black} =
 
   for i = 0 upto 7:
     bi_ang_pict[i] := current_picture;
-    label.urt("{\largebf " & decimal i & "}", origin) with_text_color ccolor on_picture bi_ang_pict[i];
+    label.urt("{\largebf " & decimal i & "}", origin) on_picture bi_ang_pict[i];
   endfor;
   
   label("RA $337.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[0];
@@ -720,9 +712,6 @@ def plot_star_on_spherical_biangle (pv) {star S, numeric point_number, boolean d
   numeric ra;
   string s;
   point y_axis_point;
-  color ccolor;
-
-  
   
   message "Entering macro `plot_star_on_spherical_biangle'.";
   
@@ -769,13 +758,6 @@ def plot_star_on_spherical_biangle (pv) {star S, numeric point_number, boolean d
       y_axis_point := (0, -Declination_arc_length);
     fi;
 
-    if ddo_black == true:
-      ccolor := white;
-      fill Q on_picture bi_ang_pict[bi_ang0];
-    else:
-      ccolor := black;
-    fi;
-
     % if ra > middle_angle:
     %   dotlabel.lft("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
     % else:
@@ -794,12 +776,12 @@ def plot_star_on_spherical_biangle (pv) {star S, numeric point_number, boolean d
       R[point_number] := (-RA_arc_length, ypart y_axis_point);
     fi;
 
-    s := "\starinfo{" & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
+    s := "\starinfo{$R_{" & decimal point_number & "}$ " & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
 
     write s to nw[bi_ang0];
 
-    label.top("{\medium " & common_name S & "}", R[point_number]) with_text_color (ccolor) bi_ang_pict[bi_ang0];
-    drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture bi_ang_pict[bi_ang0];
+    label.top("{\medium " & common_name S & "}", R[point_number]) bi_ang_pict[bi_ang0];
+    drawdot R[point_number] with_pen Large_pen on_picture bi_ang_pict[bi_ang0];
     dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
 
   fi;

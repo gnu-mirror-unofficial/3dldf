@@ -172,7 +172,7 @@ EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web patterns.web prelims.web runit \
              sample.ldf sample0.ldf sample1.ldf sample2.ldf sample3.ldf \
-             sample3.lmc \
+             sample3.lmc sample3.aux \
              sample1.tex sample2.tex sample3.tex \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
@@ -1004,11 +1004,13 @@ f-ps:
 sample3.ps: sample3.dvi
 	dvips -o sample3.ps sample3.dvi
 
-sample3.dvi: sample3.tex sample3.mp
-	mpost sample3.mp
+sample3.dvi: sample3.tex sample3.0
 	tex sample3.tex
 
-sample3.mp: 3dldf$(EXEEXT) sample3.ldf sample3.lmc
+sample3.0: sample3.mp
+	mpost sample3.mp
+
+sample3.mp: 3dldf$(EXEEXT) sample3.ldf sample3.lmc sample3.aux
 	3dldf$(EXEEXT) sample3.ldf
 
 .PHONY : run-bi
