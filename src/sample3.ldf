@@ -51,7 +51,11 @@
 
 %% * (1) Plotting stars on sphere development (spherical biangles)
 
-point p[];    %% Global, used in macros.
+%% ** (2) Variable declarations
+
+%% *** (3)  Global, used in macros.
+
+point p[];    
 picture v[];  
 numeric bi_ang[];  
 picture bi_ang_pict[];
@@ -70,22 +74,25 @@ pen medium_pen;
 pen large_pen;
 pen Large_pen;
 path Q;
+color ccolor;
+boolean do_black;
 
 medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
 Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 
-numeric i;  %% Global, used in the following code (not in macros).
-boolean do_black;
+%% *** (3) Global, used in the following code (not in macros).
+
+numeric i;  
 numeric radius;
+string s;
+
+%% ** (2) Set variables
 
 radius := 4.5cm;
-
 do_black := true; %% false 
 
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
-
-string s;
 
 for i = 0 upto 7:
   s := "sample_3_" & decimal i & ".tex";
@@ -97,7 +104,7 @@ endfor;
 
 input "sample3.lmc";
 
-%% ** (2) Call macros.
+%% ** (2) Call macros for the spherical biangles and the sphere.
 
 get_spherical_biangles {radius}; 
 
@@ -105,33 +112,66 @@ get_sphere_for_plotting_stars {radius};
 
 %% *** (3)
 
+%% ** (2) Plot the stars.
+
 i := 0;
 
-pv += 4;
-plot_star_on_sphere (pv) {radius, arcturus, i};
-i += 4;
+% +-------------------+--------------------------------+
+% | common_name       | approx_rank_apparent_magnitude |
+% +-------------------+--------------------------------+
+% | Sirius            |                              1 |
+% | Canopus           |                              2 |
+% | $\alpha$ Centauri |                              3 |
+% | Arcturus          |                              4 |
+% | Vega              |                              5 |
+% | Capella           |                              6 |
+% | Rigel             |                              7 |
+% | Procyon           |                              8 |
+% | Achernar          |                              9 |
+% | Betelgeuse        |                             10 |
+% +-------------------+--------------------------------+
 
-plot_star_on_spherical_biangle {arcturus, 0};
-
-%% *** (3)
-
-pv += 4;
-plot_star_on_sphere (pv) {radius, hadar, i};
-i += 4;
-
-plot_star_on_spherical_biangle {hadar, 1};
-
-%% *** (3)
+% %% *** (3) 1. Sirius
 
 pv += 4;
 plot_star_on_sphere (pv) {radius, sirius, i};
 i += 4;
 
-plot_star_on_spherical_biangle {sirius, 2};
+plot_star_on_spherical_biangle {sirius, 1};
 
-color ccolor;
+%% *** (3) 2. Canopus 
 
-%% *** (3)
+pv += 4;
+plot_star_on_sphere (pv) {radius, canopus, i};
+i += 4;
+
+plot_star_on_spherical_biangle {canopus, 2};
+
+%% *** (3) 3. alpha Centauri
+
+pv += 4;
+plot_star_on_sphere (pv) {radius, alpha_centauri, i};
+i += 4;
+
+plot_star_on_spherical_biangle {alpha_centauri, 3};
+
+%% *** (3) 4. Arcturus
+
+pv += 4;
+plot_star_on_sphere (pv) {radius, arcturus, i};
+i += 4;
+
+plot_star_on_spherical_biangle {arcturus, 4};
+
+%% *** (3) 5. Vega
+
+pv += 4;
+plot_star_on_sphere (pv) {radius, vega, i};
+i += 4;
+
+plot_star_on_spherical_biangle {vega, 5};
+
+% %% *** (3)
 
 %% ** (2) Figure and output commands.
 

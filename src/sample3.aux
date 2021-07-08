@@ -86,7 +86,7 @@ def draw_lines =
 enddef;
 
 
-do_black := false;
+do_black := true;
 
 beginfig(0);
   output bi_ang_pict[0] with_projection parallel_x_y;
@@ -100,16 +100,10 @@ beginfig(1);
   current_picture += qv[1];
 endfig with_projection parallel_x_y;
 
-do_black := true;
-
 beginfig(2);
   current_picture += bi_ang_pict[2];
   draw_lines;
-
   current_picture += qv[2];
-  % label.top("Sirius", R2) with_text_color ccolor;
-  % dotlabel.bot("$R_2$", R2) with_text_color ccolor with_dot_color ccolor;
-
 endfig with_projection parallel_x_y;
 
 beginfig(3);
@@ -160,7 +154,7 @@ beginfig(8);
     current_picture += pv[i];
     i += 4;
   endfor;
-  label("{\\bf Perspective Projection}", (0, -4.5));
+  label("{\\bf Perspective Projection}", (0, -(radius + 1.25cm)));
 endfig with_focus f;
 
 beginfig(9);
@@ -172,7 +166,7 @@ beginfig(9);
     current_picture += pv[i];
     i += 4;
   endfor;
-  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -4.5));
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -(radius + 1.25cm)));
 endfig with_projection parallel_x_y; 
 
 beginfig(10);
@@ -184,7 +178,7 @@ beginfig(10);
     current_picture += pv[i];
     i += 4;
   endfor;
-  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -4.5));
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -(radius + 1.25cm)));
 endfig with_projection parallel_x_z; 
 
 beginfig(11);
@@ -196,7 +190,7 @@ beginfig(11);
     current_picture += pv[i];
     i += 4;
   endfor;
-  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -4.5));
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -(radius + 1.25cm)));
 endfig with_projection parallel_z_y; 
 
 verbatim_metapost "end";

@@ -995,22 +995,36 @@ run: 3dldf$(EXEEXT)
 
 ps: sample3.ps
 
+
+.PHONY: pdf
+
+pdf: sample3.pdf
+
 .PHONY: f-ps
 
 f-ps:
 	rm -f parser.o
 	$(MAKE) ps
 
+.PHONY: f-pdf
+
+f-pdf:
+	rm -f parser.o
+	$(MAKE) pdf
+
+sample3.pdf: sample3.ps
+	ps2pdf sample3.ps 
+
 sample3.ps: sample3.dvi
 	dvips -o sample3.ps sample3.dvi
 
-sample3.dvi: sample3.tex sample3.0
+sample3.dvi: sample3.tex sample3.0 
 	tex sample3.tex
 
 sample3.0: sample3.mp
 	mpost sample3.mp
 
-sample3.mp: 3dldf$(EXEEXT) sample3.ldf sample3.lmc sample3.aux
+sample3.mp: 3dldf$(EXEEXT) sample3.ldf sample3.lmc sample3.aux 
 	3dldf$(EXEEXT) sample3.ldf
 
 .PHONY : run-bi

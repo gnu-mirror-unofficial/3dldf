@@ -84,8 +84,10 @@ create table Stars
    arabic_name varchar(32) not null default "",
    flamsteed_designation_number int not null default 0,
    bayer_designation_greek_letter varchar(16) not null default "",
+   bayer_designation_extension varchar(16) not null default "",	
    bs_hr_number int not null default 0 unique,
    approx_rank_apparent_magnitude int not null default 0,
+   apparent_magnitude float default null,	
    constellation_abbreviation char(3) not null default "",
    constellation_full_name varchar(32) not null default "",
    constellation_name_genitive varchar(64) not null default "",
@@ -99,7 +101,10 @@ create table Stars
    declination_minutes int not null default 0,
    declination_seconds float not null default 0.0,
    declination_decimal_degrees float not null default 0.0,
-   is_binary int not null default 0
+   is_binary int not null default 0,
+   is_multiple int not null default 0,
+   is_binary_component int not null default 0 after is_binary,
+   notes varchar(1024) not null default ""
 );
 
 create table ttemp
@@ -115,7 +120,15 @@ alter table Stars add column approx_rank_apparent_magnitude int not null default
 alter table Stars add column right_ascension_decimal_degrees float not null default 0.0 after right_ascension_decimal_hours;
 alter table Stars add column right_ascension_decimal_hours float not null default 0.0 after right_ascension_seconds;
 alter table Stars add column is_binary int not null default 0 after declination_decimal_degrees;
-alter table Stars add constraint unique(bs_hr_number);
+alter table Stars add column is_multiple int not null default 0 after is_binary;
+alter table Stars add column is_binary_component int not null default 0 after is_multiple;
+alter table Stars add column bayer_designation_extension varchar(16) not null default "" after bayer_designation_greek_letter;
+alter table Stars add column notes varchar(1024) not null default "" after is_binary_component;
+alter table Stars add column apparent_magnitude float default null after approx_rank_apparent_magnitude;
+
+alter table Stars remove constraint unique(bs_hr_number);
+
+
 
 -- alter table Stars drop column is_binary;
 

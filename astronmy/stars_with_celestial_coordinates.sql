@@ -1470,6 +1470,8 @@ https://en.wikipedia.org/wiki/Cor_Caroli
 
 /* *** (3) */
 
+select * from Stars where approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude limit 10\G
+
 -- Alpha^2 Canum Venaticorum":  The brighter star in the binary system.
 
 insert into Stars (
@@ -1568,44 +1570,80 @@ Right ascension
 Declination
 )
 
-/* ** (2) 3. Alpha Centauri, Rigil Kentaurus  */
+/* ** (2) 3. Alpha Centauri A, Rigil Kentaurus  */
 
 !! START HERE:  LDF 2021.6.29.  alpha Centauri is a triple star system.
 I need to account for this (add fields is_triple, is_multiple, etc.
 Acct. for "binary component" of a triple or multiple star system.
-
 
 https://en.wikipedia.org/wiki/Alpha_Centauri
 http://simbad.u-strasbg.fr/simbad/sim-id?Ident=alpha+centauri  -- Double or multiple star.
 http://simbad.u-strasbg.fr/simbad/sim-id?Ident=TYC+9007-5849-1 -- A
 http://simbad.u-strasbg.fr/simbad/sim-id?Ident=TYC+9007-5848-1 -- B
 
-insert into Stars (
+-- delete from Stars where approx_rank_apparent_magnitude = 3;
+
+-- select * from Stars where approx_rank_apparent_magnitude = 3\G
+
+replace into Stars (
+common_name,
 approx_rank_apparent_magnitude,
-flamsteed_designation_number,
+apparent_magnitude,
+-- flamsteed_designation_number,
 bayer_designation_greek_letter,
 constellation_name_genitive,
-common_name,
-bs_hr_number,
+bayer_designation_extension,
 constellation_abbreviation,
 constellation_full_name,
 constellation_number,
+-- common_name,
+-- bs_hr_number,
 right_ascension_hours,
 right_ascension_minutes,
 right_ascension_seconds,
+right_ascension_decimal_hours,
+right_ascension_decimal_degrees,
 declination_degrees,
 declination_minutes,
 declination_seconds,
-is_binary
+declination_decimal_degrees,
+is_multiple,
+is_binary_component,
+notes
 )
 values (
+"$\\alpha$ Centauri", -- KLUDGE!!  This is needed for my paper model of a celestial sphere.  LDF 2021.7.8.
 3,
-. Alpha Centauri            Rigil Kentaurus   14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4
+1.33,
+"alpha",
+"Centauri",
+"AB",
+"Cen",
+"Centaurus",
+9,
+14, -- RA
+39,
+35.06311,
+14.6597,
+219.8955,
+-60, -- Declination
+50,
+15.0992,
+-60.8375,
+3,
+1,
+"alpha Centauri is a triple star system.  The two brightest stars, A and B, are a binary component of the system.  "
+"For purposes of plotting on a spherical biangle for a paper model of a celestial sphere, this entry uses the "
+"celestial coordinates of the brighter star, alpha Centauri A."
+);
+
+14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4
 
 α Cen A: Rigil Kentaurus, Rigil Kent, α1 Centauri, HR 5459, HD 128620, GCTP 3309.00, LHS 50, SAO 252838, HIP 71683
 α Cen B: Toliman, α2 Centauri, HR 5460, HD 128621, LHS 51, HIP 71681
 
-
+select common_name, approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 0
+order by approx_rank_apparent_magnitude limit 10;
 
 
 /* ** (2) */

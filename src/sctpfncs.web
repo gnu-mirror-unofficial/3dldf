@@ -4639,7 +4639,7 @@ Scanner_Type::get_astronomy(void)
 {
 @q **** (4) @>
 
-   bool DEBUG = false;  /* |true|  */
+   bool DEBUG = true;  /* |false|  */
 
    string s;
    string t;
@@ -4903,6 +4903,37 @@ Scanner_Type::get_astronomy(void)
 @q ****** (6) @>
   
          star_ptr_vector.push_back(star);
+
+         if (   star->right_ascension_hours == 0 && star->right_ascension_minutes == 0
+             && star->right_ascension_seconds == 0.0)
+         {
+             cerr << "In `Scanner_Type::get_astronomy':"
+                  << endl 
+                  << "star->right_ascension_hours, star->right_ascension_minutes and "
+                  << "star->right_ascension_seconds are all 0."
+                  << endl 
+                  << "Not setting star->right_ascension_decimal_hours or setting star->right_ascension_decimal_degrees."
+                  << endl;
+         }
+         else if (star->right_ascension_decimal_hours == 0.0)
+         {
+             /* !!START HERE  LDF 2021.7.8.  Also, fix the way the date string in my "stamps" is set.  */ 
+         }         
+
+         else if (star->right_ascension_decimal_degrees == 0.0)
+         {
+#if DEBUG_COMPILE
+            if (DEBUG)
+            { 
+
+            }          
+#endif /* |DEBUG_COMPILE|  */@; 
+
+            sql_strm << "update Stars set right_ascension_decimal_degrees = ";
+
+   
+         }
+
 
 @q ****** (6) @>
 
