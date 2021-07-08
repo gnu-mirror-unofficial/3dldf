@@ -1583,7 +1583,12 @@ http://simbad.u-strasbg.fr/simbad/sim-id?Ident=TYC+9007-5848-1 -- B
 
 -- delete from Stars where approx_rank_apparent_magnitude = 3;
 
+-- update Stars set right_ascension_decimal_hours = 0.0, right_ascension_decimal_degrees = 0.0 where approx_rank_apparent_magnitude = 3;
+
 -- select * from Stars where approx_rank_apparent_magnitude = 3\G
+
+
+update Stars set where approx_rank_apparent_magnitude = 3\G
 
 replace into Stars (
 common_name,

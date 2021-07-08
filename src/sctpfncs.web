@@ -4685,6 +4685,8 @@ Scanner_Type::get_astronomy(void)
 
    stringstream sql_strm;
 
+   vector<string> sql_string_vector;
+
    curr_row = 0;
 
    sql_strm << "select common_name, greek_name, latin_name, "
@@ -4904,37 +4906,57 @@ Scanner_Type::get_astronomy(void)
   
          star_ptr_vector.push_back(star);
 
-         if (   star->right_ascension_hours == 0 && star->right_ascension_minutes == 0
-             && star->right_ascension_seconds == 0.0)
-         {
-             cerr << "In `Scanner_Type::get_astronomy':"
-                  << endl 
-                  << "star->right_ascension_hours, star->right_ascension_minutes and "
-                  << "star->right_ascension_seconds are all 0."
-                  << endl 
-                  << "Not setting star->right_ascension_decimal_hours or setting star->right_ascension_decimal_degrees."
-                  << endl;
-         }
-         else if (star->right_ascension_decimal_hours == 0.0)
-         {
-             /* !!START HERE  LDF 2021.7.8.  Also, fix the way the date string in my "stamps" is set.  */ 
-         }         
+          if (star->right_ascension_decimal_hours == 0.0 || star->right_ascension_decimal_degrees == 0.0)
+          {
 
-         else if (star->right_ascension_decimal_degrees == 0.0)
-         {
-#if DEBUG_COMPILE
-            if (DEBUG)
-            { 
+             if (   star->right_ascension_hours == 0 && star->right_ascension_minutes == 0
+                 && star->right_ascension_seconds == 0.0)
+             {
+                 cerr << "WARNING!  In `Scanner_Type::get_astronomy':"
+                      << endl 
+                      << "star->right_ascension_hours, star->right_ascension_minutes and "
+                      << "star->right_ascension_seconds are all 0."
+                      << endl 
+                      << "Not setting star->right_ascension_decimal_hours or setting star->right_ascension_decimal_degrees."
+                      << endl;
+             }
+             else if (star->right_ascension_decimal_hours == 0.0)
+             {
+                star->right_ascension_decimal_hours =    star->right_ascension_hours + (star->right_ascension_minutes / 60.0)
+                                                       + (star->right_ascension_seconds / 3600.0);
 
-            }          
-#endif /* |DEBUG_COMPILE|  */@; 
+             }         
 
-            sql_strm << "update Stars set right_ascension_decimal_degrees = ";
+             if (star->right_ascension_decimal_hours != 0.0 && star->right_ascension_decimal_degrees == 0.0)
+             {
+                  star->right_ascension_decimal_degrees = (star->right_ascension_decimal_hours * 360.0) / 24.0;                     
+             }
+ 
 
+             if (star->right_ascension_decimal_degrees != 0.0)
+             { 
+                sql_strm << "update Stars set right_ascension_decimal_hours = "
+                         << star->right_ascension_decimal_hours << ", right_ascension_decimal_degrees "
+                         << "= " << star->right_ascension_decimal_degrees << " ";
+
+                if (star->bs_hr_number > 0)
+                   sql_strm << "where bs_hr_number = " << star->bs_hr_number << ";";
+                else 
+                {
+                   sql_strm << "where bayer_designation_greek_letter = \"" << star->bayer_designation_greek_letter
+                            << "\" and constellation_name_genitive = \"" << star->constellation_name_genitive
+                            << "\";";
+
+
+                }
+
+                sql_string_vector.push_back(sql_strm.str());               
+                sql_strm.str("");
+
+             }
    
-         }
-
-
+          }  /* |if (star->right_ascension_decimal_hours == 0.0 || star->right_ascension_decimal_degrees == 0)| */
+       
 @q ****** (6) @>
 
        }  /* |else| */
@@ -4956,6 +4978,73 @@ Scanner_Type::get_astronomy(void)
        mysql_free_result(result);
        result = 0;
    }
+
+@q **** (4) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "sql_string_vector:" << endl;
+
+       for (vector<string>::iterator iter = sql_string_vector.begin();
+            iter != sql_string_vector.end();
+            ++iter)
+       {
+           cerr << "*iter == " << *iter << endl;
+
+       }
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+   for (vector<string>::iterator iter = sql_string_vector.begin();
+        iter != sql_string_vector.end();
+        ++iter)
+   {
+       status = submit_mysql_query(iter->c_str());
+
+       if (status != 0)
+       {
+          cerr << "ERROR!  In `Scanner_Type::get_astronomy':"
+               << endl
+               << "`Scanner_Type::submit_mysql_query' failed, returning " 
+               << status << "." << endl 
+               << "MySQL error:  " << mysql_error(mysql)
+               << endl 
+               << "MySQL error number:  " << mysql_errno(mysql)
+               << endl    
+               << "Exiting function unsuccessfully with return value 1." << endl;
+
+          row_ctr       = 0;
+          field_ctr     = 0;
+          affected_rows = 0;
+
+          if (result)
+          {
+              mysql_free_result(result);
+              result = 0;
+          }
+          return 1;
+       }
+#if DEBUG_COMPILE
+       else if (DEBUG)
+       { 
+          cerr << "In `Scanner_Type::get_astronomy':"
+               << endl
+               << "`Scanner_Type::submit_mysql_query' succeeded, returning 0." 
+               << endl;
+
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       if (result)
+       {
+           mysql_free_result(result);
+           result = 0;
+       }
+
+   }  /* |for| */
 
 @q **** (4) @>
 @
