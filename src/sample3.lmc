@@ -780,9 +780,19 @@ def plot_star_on_spherical_biangle {star S, numeric point_number} =
 
     write s to nw[bi_ang0];
 
-    label.top("{\medium " & common_name S & "}", R[point_number]) bi_ang_pict[bi_ang0];
-    drawdot R[point_number] with_pen Large_pen on_picture bi_ang_pict[bi_ang0];
-    dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) bi_ang_pict[bi_ang0];
+
+    color ccolor;
+    
+    if do_black:
+      ccolor := white;
+    else:
+      ccolor := black;
+    fi;
+    
+    label.top("{\medium " & common_name S & "}", R[point_number]) with_text_color ccolor on_picture qv[bi_ang0];
+    drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture qv[bi_ang0];
+    dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
+                 on_picture qv[bi_ang0];
 
   fi;
  
