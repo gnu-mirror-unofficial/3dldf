@@ -4975,8 +4975,21 @@ Scanner_Type::get_astronomy(void)
              }
              else 
              {
-                star->declination_decimal_degrees =    star->declination_degrees + (star->declination_minutes / 60.0)
-                                                       + (star->declination_seconds / 3600.0);
+
+                real decl_deg;
+
+                int factor = (star->declination_degrees < 0) ? -1 : 1;
+
+#if LDF_REAL_FLOAT
+                decl_deg = fabsf(star->declination_degrees);
+#elif LDF_REAL_DOUBLE
+                decl_deg = fabs(star->declination_degrees);
+#else /* Default.  */
+                decl_deg = fabsf(star->declination_degrees);
+#endif
+
+                star->declination_decimal_degrees = factor * (decl_deg + (star->declination_minutes / 60.0)
+                                                    + (star->declination_seconds / 3600.0));
              }         
 
              if (star->declination_decimal_degrees != 0.0)

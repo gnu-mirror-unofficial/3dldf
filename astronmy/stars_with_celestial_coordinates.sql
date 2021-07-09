@@ -1660,45 +1660,49 @@ replace into Stars (
 common_name,
 approx_rank_apparent_magnitude,
 apparent_magnitude,
--- flamsteed_designation_number,
 bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex,
 constellation_name_genitive,
-bayer_designation_extension,
 constellation_abbreviation,
 constellation_full_name,
 constellation_number,
--- common_name,
--- bs_hr_number,
 right_ascension_hours,
 right_ascension_minutes,
 right_ascension_seconds,
-right_ascension_decimal_hours,
-right_ascension_decimal_degrees,
 declination_degrees,
 declination_minutes,
 declination_seconds,
-declination_decimal_degrees,
-is_multiple,
-is_binary_component,
-notes
+is_multiple
 )
 values (
-
-
+"Acrux",
+13,
+0.76,
+"alpha",
+"$\\alpha$",
+"Crucis",
+"Cru",
+"Crux",
+88,
+12, -- Right ascension
+26,
+35.89522,
+-63, -- Declination
+5,
+56.734,
+6 -- is_multiple
 );
 
-Right ascension
-12
-26
-35.89522
-Declination
--63
-05
-56.7343
+Apparent magnitude (V) 	[2] (1.33 + 1.75)[3]
 
+select * from Stars where approx_rank_apparent_magnitude = 13\G
 
-Apparent magnitude (V) 	0.76[2] (1.33 + 1.75)[3]
+select common_name, bayer_designation_greek_letter, constellation_name_genitive, right_ascension_decimal_degrees,
+declination_degrees, declination_minutes, declination_seconds, declination_decimal_degrees
+from Stars order by declination_decimal_degrees\G
 
+select approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive
+from Stars where approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude limit 20\G
 
 /* ** (2) */
 

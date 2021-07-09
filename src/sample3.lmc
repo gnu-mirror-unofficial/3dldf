@@ -653,7 +653,10 @@ def plot_star_on_sphere {numeric rradius, star S} =
     message "Will calculate second arc length.";
     message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
     show a4;
- 
+
+%% !! START HERE: LDF 2021.7.9.  Subtract from 360 deg., not 0.
+
+    
     q2 := q0 rotated (0, a4);
     draw q2 with_color magenta on_picture pv[ctr];
     draw q2 with_color magenta on_picture pv[ctr + 1];
