@@ -901,6 +901,7 @@ Added this rule.
 @q ***** (5) numeric_primary --> LENGTH string_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{LENGTH} \§string primary>.
+\initials{LDF 2021.07.09.}
 
 @<Define rules@>=
 @=numeric_primary: LENGTH string_primary@>@/
@@ -909,6 +910,25 @@ Added this rule.
 
    if (s)
      @=$$@> = s->length();
+   else
+     @=$$@> = ZERO_REAL;
+
+   delete s;
+
+};
+
+@q ***** (5) numeric_primary --> SIZE string_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§string primary>.
+\initials{LDF 2021.07.09.}
+
+@<Define rules@>=
+@=numeric_primary: SIZE string_primary@>@/
+{
+   string* s = static_cast<string*>(@=$2@>);
+
+   if (s)
+     @=$$@> = s->size();
    else
      @=$$@> = ZERO_REAL;
 
