@@ -84,6 +84,7 @@ create table Stars
    arabic_name varchar(32) not null default "",
    flamsteed_designation_number int not null default 0,
    bayer_designation_greek_letter varchar(16) not null default "",
+   bayer_designation_greek_letter_tex varchar(16) not null default "",	
    bayer_designation_extension varchar(16) not null default "",	
    bs_hr_number int not null default 0 unique,
    approx_rank_apparent_magnitude int not null default 0,
@@ -125,10 +126,178 @@ alter table Stars add column is_binary_component int not null default 0 after is
 alter table Stars add column bayer_designation_extension varchar(16) not null default "" after bayer_designation_greek_letter;
 alter table Stars add column notes varchar(1024) not null default "" after is_binary_component;
 alter table Stars add column apparent_magnitude float default null after approx_rank_apparent_magnitude;
+alter table Stars add column bayer_designation_greek_letter_tex varchar(16) not null default "" after bayer_designation_greek_letter;
 
 alter table Stars remove constraint unique(bs_hr_number);
 
+/* ** (2) */
 
+select distinct bayer_designation_greek_letter from Stars where bayer_designation_greek_letter
+like("%^%") order by bayer_designation_greek_letter;
+
+update Stars set bayer_designation_greek_letter_tex = "$\\alpha$" where bayer_designation_greek_letter = "alpha";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\alpha^{1}$" where bayer_designation_greek_letter = "alpha^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\alpha^{2}$" where bayer_designation_greek_letter = "alpha^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\beta$" where bayer_designation_greek_letter = "beta";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\beta^{1}$" where bayer_designation_greek_letter = "beta^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\beta^{2}$" where bayer_designation_greek_letter = "beta^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\chi$" where bayer_designation_greek_letter = "chi";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\chi^{1}$" where bayer_designation_greek_letter = "chi^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\chi^{2}$" where bayer_designation_greek_letter = "chi^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\delta$" where bayer_designation_greek_letter = "delta";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\delta^{1}$" where bayer_designation_greek_letter = "delta^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\delta^{2}$" where bayer_designation_greek_letter = "delta^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\epsilon$" where bayer_designation_greek_letter = "epsilon";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\epsilon^{1}$" where bayer_designation_greek_letter = "epsilon^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\eta$" where bayer_designation_greek_letter = "eta";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\eta^{1}$" where bayer_designation_greek_letter = "eta^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\eta^{2}$" where bayer_designation_greek_letter = "eta^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma$" where bayer_designation_greek_letter = "gamma";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma^{1}$" where bayer_designation_greek_letter = "gamma^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma^{2}$" where bayer_designation_greek_letter = "gamma^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\iota$" where bayer_designation_greek_letter = "iota";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\iota^{1}$" where bayer_designation_greek_letter = "iota^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\iota^{2}$" where bayer_designation_greek_letter = "iota^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\kappa$" where bayer_designation_greek_letter = "kappa";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\kappa^{1}$" where bayer_designation_greek_letter = "kappa^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\kappa^{2}$" where bayer_designation_greek_letter = "kappa^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\lambda$" where bayer_designation_greek_letter = "lambda";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\lambda^{1}$" where bayer_designation_greek_letter = "lambda^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\lambda^{2}$" where bayer_designation_greek_letter = "lambda^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\mu$" where bayer_designation_greek_letter = "mu";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\mu^{1}$" where bayer_designation_greek_letter = "mu^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\mu^{2}$" where bayer_designation_greek_letter = "mu^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\nu$" where bayer_designation_greek_letter = "nu";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\nu^{1}$" where bayer_designation_greek_letter = "nu^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\nu^{2}$" where bayer_designation_greek_letter = "nu^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\nu^{3}$" where bayer_designation_greek_letter = "nu^3";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\o^$" where bayer_designation_greek_letter = "o";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\o^{1}$" where bayer_designation_greek_letter = "o^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\o^{2}$" where bayer_designation_greek_letter = "o^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\omega$" where bayer_designation_greek_letter = "omega";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\omega^{1}$" where bayer_designation_greek_letter = "omega^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\omega^{2}$" where bayer_designation_greek_letter = "omega^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\omicron^{2}$" where bayer_designation_greek_letter = "omicron^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\phi$" where bayer_designation_greek_letter = "phi";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\phi^{1}$" where bayer_designation_greek_letter = "phi^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\phi^{2}$" where bayer_designation_greek_letter = "phi^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^{2}$" where bayer_designation_greek_letter = "pi^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^{3}$" where bayer_designation_greek_letter = "pi^3";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^{4}$" where bayer_designation_greek_letter = "pi^4";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^{5}$" where bayer_designation_greek_letter = "pi^5";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^{6}$" where bayer_designation_greek_letter = "pi^6";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\psi$" where bayer_designation_greek_letter = "psi";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^{1}$" where bayer_designation_greek_letter = "psi^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^{2}$" where bayer_designation_greek_letter = "psi^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^{3}$" where bayer_designation_greek_letter = "psi^3";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^{5}$" where bayer_designation_greek_letter = "psi^5";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^{6}$" where bayer_designation_greek_letter = "psi^6";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\rho$" where bayer_designation_greek_letter = "rho";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\rho^{1}$" where bayer_designation_greek_letter = "rho^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\rho^{2}$" where bayer_designation_greek_letter = "rho^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\sigma$" where bayer_designation_greek_letter = "sigma";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\sigma^{3}$" where bayer_designation_greek_letter = "sigma^3";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^{1}$" where bayer_designation_greek_letter = "tau^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau$" where bayer_designation_greek_letter = "tau";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^{2}$" where bayer_designation_greek_letter = "tau^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^{3}$" where bayer_designation_greek_letter = "tau^3";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^{4}$" where bayer_designation_greek_letter = "tau^4";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^{5}$" where bayer_designation_greek_letter = "tau^5";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^{6}$" where bayer_designation_greek_letter = "tau^6";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\theta$" where bayer_designation_greek_letter = "theta";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\theta^{1}$" where bayer_designation_greek_letter = "theta^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\theta^{2}$" where bayer_designation_greek_letter = "theta^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\upsilon$" where bayer_designation_greek_letter = "upsilon";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\upsilon^{1}$" where bayer_designation_greek_letter = "upsilon^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\upsilon^{2}$" where bayer_designation_greek_letter = "upsilon^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\xi$" where bayer_designation_greek_letter = "xi";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\xi^{1}$" where bayer_designation_greek_letter = "xi^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\xi^{2}$" where bayer_designation_greek_letter = "xi^2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\zeta^{1}$" where bayer_designation_greek_letter = "zeta^1";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\zeta$" where bayer_designation_greek_letter = "zeta";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\zeta^{2}$" where bayer_designation_greek_letter = "zeta^2";
+
+select * from Stars where bayer_designation_greek_letter_tex != "" and bayer_designation_greek_letter_tex = ""\G
 
 -- alter table Stars drop column is_binary;
 
