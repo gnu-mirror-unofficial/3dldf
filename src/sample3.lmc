@@ -650,7 +650,6 @@ def plot_star_on_sphere {numeric rradius, star S} =
   elseif middle_angle_one < a0:
     a4 := -magnitude(a4);
   fi;
-
  
   if (a0 == middle_angle) or (a0 == middle_angle_one):
     message "a0 == middle_angle (or middle_angle_one) == " & decimal middle_angle & ".  Don't need arc length for second arc.";
@@ -795,7 +794,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number} =
 
     write s to nw[bi_ang0];
 
-
     color ccolor;
     
     if do_black:
@@ -804,13 +802,24 @@ def plot_star_on_spherical_biangle {star S, numeric point_number} =
       ccolor := black;
     fi;
     
-    label.top("{\medium " & common_name S & "}", R[point_number]) with_text_color ccolor on_picture qv[bi_ang0];
+    label.top("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+             with_text_color ccolor on_picture qv[bi_ang0];
     drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture qv[bi_ang0];
+
+message "Here I am 1."; 
+    
+    if do_black:
+      message "Here I am 2."; 
+       beginfig(100 + label_picture_ctr);
+	 label.top("{\medium " & common_name S & "}", (0, 3pt)) with_text_color green;% white;
+	 drawdot origin with_pen Large_pen with_color green;
+       endfig with_projection parallel_x_y;
+       label_picture_ctr += 1;
+    fi;
+
     dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
                  on_picture qv[bi_ang0];
 
-  fi;
- 
   message "Exiting macro `plot_star_on_spherical_biangle'.";
 
 enddef;
@@ -823,11 +832,11 @@ endinput;
 %% ** (2) End of 3DLDF code.
 
 %% * (1) Emacs-Lisp code for use in indirect buffers when using the          
-%%   	 GNU Emacs editor.  The local variable list is not evaluated when an 
-%%   	 indirect buffer is visited, so it's necessary to evaluate the       
-%%   	 following s-expression in order to use the facilities normally      
-%%   	 accessed via the local variables list.                              
-%%   	 \initials{LDF 2004.02.12}.                                          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
 
 %% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
 
