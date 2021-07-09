@@ -4917,7 +4917,7 @@ Scanner_Type::get_astronomy(void)
                       << "star->right_ascension_hours, star->right_ascension_minutes and "
                       << "star->right_ascension_seconds are all 0."
                       << endl 
-                      << "Not setting star->right_ascension_decimal_hours or setting star->right_ascension_decimal_degrees."
+                      << "Not setting star->right_ascension_decimal_hours or star->right_ascension_decimal_degrees."
                       << endl;
              }
              else if (star->right_ascension_decimal_hours == 0.0)
@@ -4956,6 +4956,51 @@ Scanner_Type::get_astronomy(void)
              }
    
           }  /* |if (star->right_ascension_decimal_hours == 0.0 || star->right_ascension_decimal_degrees == 0)| */
+       
+@q ****** (6) @>
+
+          if (star->declination_decimal_degrees == 0.0)
+          {
+
+             if (   star->declination_degrees == 0 && star->declination_minutes == 0
+                 && star->declination_seconds == 0.0)
+             {
+                 cerr << "WARNING!  In `Scanner_Type::get_astronomy':"
+                      << endl 
+                      << "star->declination_degrees, star->declination_minutes and "
+                      << "star->declination_seconds are all 0."
+                      << endl 
+                      << "Not setting star->declination_decimal_degrees."
+                      << endl;
+             }
+             else 
+             {
+                star->declination_decimal_degrees =    star->declination_degrees + (star->declination_minutes / 60.0)
+                                                       + (star->declination_seconds / 3600.0);
+             }         
+
+             if (star->declination_decimal_degrees != 0.0)
+             { 
+                sql_strm << "update Stars set declination_decimal_degrees = "
+                         << star->declination_decimal_degrees << " ";
+
+                if (star->bs_hr_number > 0)
+                   sql_strm << "where bs_hr_number = " << star->bs_hr_number << ";";
+                else 
+                {
+                   sql_strm << "where bayer_designation_greek_letter = \"" << star->bayer_designation_greek_letter
+                            << "\" and constellation_name_genitive = \"" << star->constellation_name_genitive
+                            << "\";";
+
+
+                }
+
+                sql_string_vector.push_back(sql_strm.str());               
+                sql_strm.str("");
+
+             }
+   
+          }  /* |if (star->declination_decimal_degrees == 0)| */
        
 @q ****** (6) @>
 
