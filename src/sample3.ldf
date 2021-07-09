@@ -88,7 +88,8 @@ numeric label_pos_urt;
 numeric label_pos_ulft;
 numeric label_pos_lrt;
 numeric label_pos_llft;
-
+newwrite label_out;
+  
 label_pos_zero := 0;
 label_pos_top  := 1;
 label_pos_bot  := 2;
@@ -106,6 +107,8 @@ Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 label_picture_ctr := 0;
 
 do_extra_labels := false;
+
+label_out := "sample_3_labels.tex";
 
 %% *** (3) Global, used in the following code (not in macros).
 
@@ -263,7 +266,7 @@ plot_star_on_spherical_biangle {spica, 16, label_pos_top};
 
 plot_star_on_sphere {radius, pollux};
 
-plot_star_on_spherical_biangle {pollux, 17, label_pos_top};
+plot_star_on_spherical_biangle {pollux, 17, label_pos_rt};
 
 %% *** (3) 18. Fomalhaut
 
@@ -282,7 +285,7 @@ plot_star_on_spherical_biangle {deneb, 19, label_pos_top};
 
 plot_star_on_sphere {radius, mimosa};
 
-plot_star_on_spherical_biangle {mimosa, 20, label_pos_top};
+plot_star_on_spherical_biangle {mimosa, 20, label_pos_bot};
 
 %% *** (3) 21. Regulus
 
@@ -302,7 +305,7 @@ plot_star_on_spherical_biangle {adhara, 22, label_pos_top};
 
 plot_star_on_sphere {radius, castor};
 
-plot_star_on_spherical_biangle {castor, 23, label_pos_top};
+plot_star_on_spherical_biangle {castor, 23, label_pos_urt};
 
 %% *** (3) 24. Shaula
 
@@ -336,22 +339,23 @@ plot_star_on_sphere {radius, miaplacidus};
 
 plot_star_on_spherical_biangle {miaplacidus, 28, label_pos_top};
 
+%% *** (3) 29. Alnilam
 
-% approx_rank_apparent_magnitude: 29
-%                    common_name: Alnilam
-% bayer_designation_greek_letter: epsilon
-%    constellation_name_genitive: Orionis
-% *************************** 9. row ***************************
-% approx_rank_apparent_magnitude: 30
-%                    common_name: Alnair
-% bayer_designation_greek_letter: alpha
-%    constellation_name_genitive: Gruis
-% *************************** 10. row ***************************
-% approx_rank_apparent_magnitude: 31
-%                    common_name: Alnitak
-% bayer_designation_greek_letter: zeta
-%    constellation_name_genitive: Orionis
-% 10 rows in set (0.00 sec)
+plot_star_on_sphere {radius, alnilam};
+
+plot_star_on_spherical_biangle {alnilam, 29, label_pos_top};
+
+%% *** (3) 30. Alnair
+
+plot_star_on_sphere {radius, alnair};
+
+plot_star_on_spherical_biangle {alnair, 30, label_pos_top};
+
+%% *** (3) 31. Alnitak
+
+plot_star_on_sphere {radius, alnitak};
+
+plot_star_on_spherical_biangle {alnitak, 31, label_pos_lrt};
 
 
 %% *** (3)

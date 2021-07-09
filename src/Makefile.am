@@ -988,8 +988,12 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 
-run: 3dldf$(EXEEXT)
+run: 3dldf$(EXEEXT) sample_3_labels_sorted.tex
 	3dldf$(EXEEXT) sample3.ldf
+
+sample_3_labels_sorted.tex: sample3.mp
+	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
+
 
 .PHONY: ps
 
@@ -1018,7 +1022,7 @@ sample3.pdf: sample3.ps
 sample3.ps: sample3.dvi
 	dvips -o sample3.ps sample3.dvi
 
-sample3.dvi: sample3.tex sample3.0 
+sample3.dvi: sample3.tex sample3.0 sample_3_labels_sorted.tex
 	tex sample3.tex
 
 sample3.0: sample3.mp
