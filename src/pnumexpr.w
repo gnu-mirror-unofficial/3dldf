@@ -902,14 +902,20 @@ Added this rule.
 
 @*4 \§numeric primary> $\longrightarrow$ \.{LENGTH} \§string primary>.
 
-\TODO
-@q { @>
-@:TO DO}{{\bf TO DO}@>
-@q } @> 
-@q !! TO DO:  @>
-Add this rule.  \initials{LDF 2004.04.28.}
-\ENDTODO 
-  
+@<Define rules@>=
+@=numeric_primary: LENGTH string_primary@>@/
+{
+   string* s = static_cast<string*>(@=$2@>);
+
+   if (s)
+     @=$$@> = s->length();
+   else
+     @=$$@> = ZERO_REAL;
+
+   delete s;
+
+};
+
 @q ***** (5) numeric_primary --> ASCII string_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{ASCII} \§string primary>.

@@ -716,13 +716,15 @@ enddef;
 
 macro plot_star_on_spherical_biangle;
 
-def plot_star_on_spherical_biangle {star S, numeric point_number} =
+def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos} =
   
   numeric decl;
   numeric ra;
   string s;
   point y_axis_point;
-  
+  numeric box_wd;
+  numeric box_ht;
+
   message "Entering macro `plot_star_on_spherical_biangle'.";
   
   decl := declination_decimal_degrees S;
@@ -801,24 +803,32 @@ def plot_star_on_spherical_biangle {star S, numeric point_number} =
     else:
       ccolor := black;
     fi;
-    
+  
     label.top("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
              with_text_color ccolor on_picture qv[bi_ang0];
     drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture qv[bi_ang0];
 
-message "Here I am 1."; 
-    
     if do_black:
-      message "Here I am 2."; 
-       beginfig(100 + label_picture_ctr);
-	 label.top("{\medium " & common_name S & "}", (0, 3pt)) with_text_color green;% white;
-	 drawdot origin with_pen Large_pen with_color green;
-       endfig with_projection parallel_x_y;
-       label_picture_ctr += 1;
+
+      box_wd := .75cm;
+      box_ht := .5cm;
+      
+      if length (common_name S) > 8:
+	box_wd += .25cm;
+      fi;
+      
+      beginfig(100 + label_picture_ctr);
+	fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
+	label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
+	drawdot (0, -.25box_ht) with_pen Large_pen with_color white;
+      endfig with_projection parallel_x_y;
+      label_picture_ctr += 1;
     fi;
 
-    dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
-                 on_picture qv[bi_ang0];
+    if do_extra_labels:
+      dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
+	on_picture qv[bi_ang0];
+    fi;
 
   message "Exiting macro `plot_star_on_spherical_biangle'.";
 
