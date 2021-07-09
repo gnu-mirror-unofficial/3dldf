@@ -24812,6 +24812,8 @@ select approx_rank_apparent_magnitude, common_name, right_ascension_decimal_degr
 where approx_rank_apparent_magnitude > 0
 order by approx_rank_apparent_magnitude limit 10 offset 10;
 
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars
+where approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude limit 20;
 
 
 /* Local Variables:                   */
