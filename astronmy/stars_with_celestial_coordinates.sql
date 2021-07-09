@@ -1650,6 +1650,15 @@ values (
 select common_name, approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 0
 order by approx_rank_apparent_magnitude limit 10;
 
+/* ** (2) 13.  Acrux */
+
+
+13. Alpha Crucis              Acrux             12 27 -63.1  300.2  -0.4  B0.5IV+B1V    0.79  -4.17   10.17 0.67   320
+
+Right ascension 	12h 26m 35.89522s[1]
+Declination 	−63° 05′ 56.7343″[1]
+Apparent magnitude (V) 	0.76[2] (1.33 + 1.75)[3]
+
 
 /* ** (2) */
 
@@ -2295,7 +2304,7 @@ References:
 ESA, (1997), The Hipparcos Catalogue.
 Hoffleit D, Warren Jr W, (1991), Harvard Revised Bright Star Catalogue, 5th Edition.
 
-
+/* * (1) */
 
 
 /* Local Variables:            */

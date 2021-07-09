@@ -24641,7 +24641,7 @@ show columns from Stars;
 
 select approx_rank_apparent_magnitude, common_name, right_ascension_decimal_degrees, declination_decimal_degrees from Stars
 where approx_rank_apparent_magnitude > 0
-order by approx_rank_apparent_magnitude limit 10;
+order by approx_rank_apparent_magnitude limit 10 offset 10;
 
 
 
