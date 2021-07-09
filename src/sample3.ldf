@@ -76,6 +76,7 @@ pen Large_pen;
 path Q;
 color ccolor;
 boolean do_black;
+numeric i; 
 
 medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
@@ -83,13 +84,12 @@ Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 
 %% *** (3) Global, used in the following code (not in macros).
 
-numeric i;  
 numeric radius;
 string s;
 
 %% ** (2) Set variables
 
-radius := 4.5cm;
+radius := 6cm;
 do_black := true; %% false 
 
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
@@ -133,45 +133,65 @@ i := 0;
 
 % %% *** (3) 1. Sirius
 
-pv += 4;
-plot_star_on_sphere (pv) {radius, sirius, i};
-i += 4;
+plot_star_on_sphere {radius, sirius};
 
 plot_star_on_spherical_biangle {sirius, 1};
 
 %% *** (3) 2. Canopus 
 
-pv += 4;
-plot_star_on_sphere (pv) {radius, canopus, i};
-i += 4;
+plot_star_on_sphere {radius, canopus};
 
 plot_star_on_spherical_biangle {canopus, 2};
 
 %% *** (3) 3. alpha Centauri
 
-pv += 4;
-plot_star_on_sphere (pv) {radius, alpha_centauri, i};
-i += 4;
+plot_star_on_sphere {radius, alpha_centauri};
 
 plot_star_on_spherical_biangle {alpha_centauri, 3};
 
 %% *** (3) 4. Arcturus
 
-pv += 4;
-plot_star_on_sphere (pv) {radius, arcturus, i};
-i += 4;
+plot_star_on_sphere {radius, arcturus};
 
 plot_star_on_spherical_biangle {arcturus, 4};
 
 %% *** (3) 5. Vega
 
-pv += 4;
-plot_star_on_sphere (pv) {radius, vega, i};
-i += 4;
+plot_star_on_sphere {radius, vega};
 
 plot_star_on_spherical_biangle {vega, 5};
 
-% %% *** (3)
+%% *** (3) 6. Capella
+
+plot_star_on_sphere {radius, capella};
+
+plot_star_on_spherical_biangle {capella, 6};
+
+%% *** (3) @> 7. Rigel
+
+plot_star_on_sphere {radius, rigel};
+
+plot_star_on_spherical_biangle {rigel, 7};
+
+%% *** (3) 8. Procyon
+
+plot_star_on_sphere {radius, procyon};
+
+plot_star_on_spherical_biangle {procyon, 8};
+
+%% *** (3) 9. Achernar
+
+plot_star_on_sphere {radius, achernar};
+
+plot_star_on_spherical_biangle {achernar, 9};
+
+%% *** (3) 10. Betelgeuse
+
+plot_star_on_sphere {radius, betelgeuse};
+
+plot_star_on_spherical_biangle {betelgeuse, 10};
+
+%% *** (3)
 
 %% ** (2) Figure and output commands.
 

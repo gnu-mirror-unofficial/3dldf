@@ -412,7 +412,7 @@ enddef;
 
 macro plot_star_on_sphere;
 
-def plot_star_on_sphere (pv) {numeric rradius, star S, numeric ctr} =
+def plot_star_on_sphere {numeric rradius, star S} =
 
   path q[];
   string u[];
@@ -420,7 +420,8 @@ def plot_star_on_sphere (pv) {numeric rradius, star S, numeric ctr} =
   circle c[];
   numeric a[];
   transform t[];
-  
+
+  pv += 4;
   c0 := unit_circle scaled (rradius, 0, rradius);
   
   ra_decl_zero_pt := (rradius, 0);
@@ -699,6 +700,8 @@ def plot_star_on_sphere (pv) {numeric rradius, star S, numeric ctr} =
 
   message "RA_arc_length:";
   show RA_arc_length;
+
+  i += 4;
   
 enddef;
 
