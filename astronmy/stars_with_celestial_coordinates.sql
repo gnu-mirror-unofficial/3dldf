@@ -1701,9 +1701,52 @@ select * from Stars where approx_rank_apparent_magnitude = 13\G
 
 23. Alpha Geminorum           Castor            07 35 +31.9  187.5 +22.6  A1V+A2V       1.58   0.59   63.27 1.23    52
 
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_multiple
+)
+values (
+"Castor",
+23,
+1.58,
+"alpha",
+"$\\alpha$",
+"Geminorum",
+"Gem",
+"Gemini",
+30,
+7,  -- Right ascension
+34,
+35.863,
+31,  -- Declination
+53,
+17.79,
+6);
+
+
+
+select * from Constellations where name_genitive = "Geminorum";
+
+select * from Stars where common_name = "Castor"\G
+
+
 A
-Right ascension 	07h 34m 35.863s[2]
-Declination 	+31° 53′ 17.79″[2]
+
+
 Apparent magnitude (V) 	1.93[2]
 B
 
