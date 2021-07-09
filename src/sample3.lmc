@@ -62,8 +62,12 @@ def get_spherical_biangles {numeric rad} =
   numeric radius[];
   numeric circum[];
   path edge[];
+  path tab[];
   numeric n[];
   point ra_decl_zero_pt;
+  numeric tab_wd;
+
+  tab_wd := .375cm;
   
   radius0 := rad;
 
@@ -77,8 +81,8 @@ def get_spherical_biangles {numeric rad} =
   p0 := (-radius0, 0);
   p1 := (radius0, 0);
 
-%message "magnitude (p1 - p0) (diameter of c0):";
-%show magnitude (p1 - p0);
+  %message "magnitude (p1 - p0) (diameter of c0):";
+  %show magnitude (p1 - p0);
 
   %draw p0 -- p1;  %% Horizontal line through origin.
 
@@ -117,11 +121,18 @@ def get_spherical_biangles {numeric rad} =
   edge2 := null_path;  
   edge3 := null_path;  
 
+  tab0 := null_path; 
+  tab1 := null_path;  
+
   edge0 += ..;
   edge1 += ..;
   edge2 += ..;
   edge3 += ..;
 
+  tab0 += ..;
+  tab1 += ..;
+
+  
   n0 := a / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
   n1 := a / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
                 %% increments of 11.25 deg.
@@ -136,9 +147,11 @@ def get_spherical_biangles {numeric rad} =
 
   edge0 += p20;
   edge1 += p21;
-  edge2 += p20;
-  edge3 += p21;
 
+  tab0 += p20 shifted (-tab_wd, 0);
+
+  draw p20 -- p20 shifted (-tab_wd, 0) on_picture tab_picture;
+  
   p22 := (0, -.25a);
   p23 := (0, .25a);
 
@@ -157,6 +170,11 @@ def get_spherical_biangles {numeric rad} =
     label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
     edge0 += p[j];
     edge1 += p[j + 1];
+
+    tab0 += p[j] shifted (-tab_wd, 0);
+    draw p[j] -- p[j] shifted (-tab_wd, 0) on_picture tab_picture;
+    draw (p[j] -- p[j] shifted (-tab_wd, 0)) rotated (180, 0) on_picture tab_picture;
+    
     j += 2;
     k += 2;
   endfor;
@@ -195,18 +213,26 @@ def get_spherical_biangles {numeric rad} =
     draw p36 -- p37;
     draw (p36 -- p37) rotated (180, 0);
   fi;
-    
+
+  tab0 += --;
+  tab0 += p36;
+
   edge0 += p23;
   edge1 += p23;
 
   edge2 := edge0 rotated (180, 0);
   edge3 := edge1 rotated (180, 0);
 
+  tab1 := tab0 rotated (180, 0);
+  
   draw edge0;
   draw edge1;
   draw edge2;
   draw edge3;
 
+  draw tab0 on_picture tab_picture;
+  draw tab1 on_picture tab_picture;
+  
   %drawarrow edge0 with_color blue with_pen pencircle scaled (3pt, 3pt, 3pt);
   p100 := get_last_point edge0;
   %drawdot p100 with_color blue with_pen pencircle scaled (8pt, 8pt, 8pt);
@@ -795,7 +821,8 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     s := "\starinfo{$R_{" & decimal point_number & "}$ " & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
 
     write s to nw[bi_ang0];
-
+    write s to star_info_combined;
+     
     color ccolor;
     
     if do_black:
@@ -845,7 +872,8 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       fi;
 
       
-      s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr) & "}\\hskip2em plus 1em minus 1em"; 
+      s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr)
+	   & "}\\hskip2em plus 1em minus 1em"; 
       
       write (s) to label_out;
       beginfig(100 + label_picture_ctr);

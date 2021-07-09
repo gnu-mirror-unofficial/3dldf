@@ -88,54 +88,81 @@ enddef;
 
 do_black := true;
 
+picture save_picture;
+
+save_picture := tab_picture;
+
 beginfig(0);
   output bi_ang_pict[0] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[0];
-endfig with_projection parallel_x_y;
+  output current_picture with_projection parallel_x_y;
+  output qv[0] with_projection parallel_x_y;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 beginfig(1);
   output bi_ang_pict[1] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[1];
-endfig with_projection parallel_x_y;
+  output current_picture  with_projection parallel_x_y;
+  output qv[1] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 beginfig(2);
-  current_picture += bi_ang_pict[2];
+  output bi_ang_pict[2] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[2];
-endfig with_projection parallel_x_y;
+  output current_picture  with_projection parallel_x_y;
+  output qv[2] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 beginfig(3);
   output bi_ang_pict[3] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[3];
-endfig with_projection parallel_x_y;
+  output current_picture  with_projection parallel_x_y;
+  output qv[3] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
+
 
 beginfig(4);
   output bi_ang_pict[4] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[4];
-endfig with_projection parallel_x_y;
+  output current_picture  with_projection parallel_x_y;
+  output qv[4] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 beginfig(5);
   output bi_ang_pict[5] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[5];
-endfig with_projection parallel_x_y;
+  output current_picture  with_projection parallel_x_y;
+  output qv[5] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 beginfig(6);
   output bi_ang_pict[6] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[6];
-endfig with_projection parallel_x_y;
+  output current_picture  with_projection parallel_x_y;
+  output qv[6] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 beginfig(7);
   output bi_ang_pict[7] with_projection parallel_x_y;
   draw_lines;
-  current_picture += qv[7];
-endfig with_projection parallel_x_y;
-
+  output current_picture  with_projection parallel_x_y;
+  output qv[7] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+endfig;
 
 %% ** (2)
 

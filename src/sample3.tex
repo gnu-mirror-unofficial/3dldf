@@ -124,8 +124,9 @@
 \setbox0=\vbox{\epsffile{sample3.0}}
 \dimen0=\ht0
 
-\def\starinfo#1#2#3{\begingroup\setbox0=\hbox{Decl.~}\hbox{#1}%
-\hbox{\hbox to \wd0{RA\hfil}$#2^\circ$}\hbox{\unhbox0 $#3^\circ$}\vskip.5\baselineskip\endgroup}
+\def\starinfo#1#2#3{\begingroup\setbox0=\hbox{Decl.~}\hbox to 3cm{\vbox{\hbox{#1}%
+\hbox{\hbox to \wd0{RA\hfil}$#2^\circ$}\hbox{\unhbox0 $#3^\circ$}\vskip.75\baselineskip plus 6pt minus 3pt}%
+\hskip2em plus 4pt minus 2pt\hss}\endgroup}
 
 \setbox\starboxzero=\vtop{\vskip-\dimen0
 \input sample_3_0.tex
@@ -198,6 +199,17 @@
 \advance\hsize by -5cm
 \leavevmode
 \input sample_3_labels_sorted.tex
+\par
+\endgroup
+
+\vfil\eject
+
+%% *** (3)
+
+\begingroup
+\advance\hsize by -5cm
+\leavevmode
+\input sample_3_star_info_combined.tex
 \par
 \endgroup
 
