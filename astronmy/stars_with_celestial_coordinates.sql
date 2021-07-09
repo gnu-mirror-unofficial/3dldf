@@ -1655,8 +1655,48 @@ order by approx_rank_apparent_magnitude limit 10;
 
 13. Alpha Crucis              Acrux             12 27 -63.1  300.2  -0.4  B0.5IV+B1V    0.79  -4.17   10.17 0.67   320
 
-Right ascension 	12h 26m 35.89522s[1]
-Declination 	−63° 05′ 56.7343″[1]
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+-- flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+bayer_designation_extension,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+-- common_name,
+-- bs_hr_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+right_ascension_decimal_hours,
+right_ascension_decimal_degrees,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+declination_decimal_degrees,
+is_multiple,
+is_binary_component,
+notes
+)
+values (
+
+
+);
+
+Right ascension
+12
+26
+35.89522
+Declination
+-63
+05
+56.7343
+
+
 Apparent magnitude (V) 	0.76[2] (1.33 + 1.75)[3]
 
 
