@@ -1741,7 +1741,109 @@ values (
 
 select * from Constellations where name_genitive = "Geminorum";
 
-select * from Stars where common_name = "Castor"\G
+select approx_rank_apparent_magnitude, common_name from Stars where approx_rank_apparent_magnitude > 31
+order by approx_rank_apparent_magnitude limit 10;
+
+/* *** (3) */
+
+https://en.wikipedia.org/wiki/Gamma_Velorum
+
+35. Gamma Velorum             Regor             08 10 -47.3  262.8  -7.6  WC8+O9Ib      1.81  -5.25    3.88 0.53   840
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_multiple
+)
+values (
+"Regor",
+35,
+1.7,
+"gamma",
+"$\\gamma$",
+"Velorum",
+"Vel",
+"Vela",
+32,
+8, -- Right ascension
+9,
+31.95013,
+-47, -- Declination
+20,
+11.7108,
+4);
+
+quadruple star system
+
+Constellation 	Vela
+Right ascension 	08h 09m 31.95013s[1]
+Declination 	–47° 20′ 11.7108″[1]
+Apparent magnitude (V) 	1.83[2] (1.81 - 1.87[3])
+
+combined magnitude +1.7
+
+/* *** (3) */
+
+42. Alpha Trianguli Australis Atria             16 49 -69.0  321.6 -15.3  K2Ib-II       1.92  -3.61    7.85 0.63   420
+
+https://en.wikipedia.org/wiki/Alpha_Trianguli_Australis
+apparent magnitude of +1.91
+
+delete from Stars where 
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+bs_hr_number,
+bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds)
+values (
+"Atria",
+42,
+1.91,
+6217,
+"alpha",
+"$\\alpha$",
+"Trianguli Australis",
+"TrA",
+"Triangulum Australe",
+83,
+16, -- Right ascension
+48,
+39.89508,
+-69, -- Declination
+1,
+39.7626
+);
+
+Apparent magnitude (V) 	1.91[2]
+
+HR 6217
+/* ** (2) */
 
 
 A
