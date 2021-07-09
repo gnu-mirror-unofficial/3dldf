@@ -1678,8 +1678,8 @@ values (
 "Acrux",
 13,
 0.76,
-"alpha",
-"$\\alpha$",
+"alpha","
+$\\alpha$",
 "Crucis",
 "Cru",
 "Crux",
@@ -1697,12 +1697,28 @@ Apparent magnitude (V) 	[2] (1.33 + 1.75)[3]
 
 select * from Stars where approx_rank_apparent_magnitude = 13\G
 
+/* *** (3) */
+
+23. Alpha Geminorum           Castor            07 35 +31.9  187.5 +22.6  A1V+A2V       1.58   0.59   63.27 1.23    52
+
+A
+Right ascension 	07h 34m 35.863s[2]
+Declination 	+31° 53′ 17.79″[2]
+Apparent magnitude (V) 	1.93[2]
+B
+
+but it is actually a sextuple star system 
+
+select * from Stars where common_name = "Castor";
+
+select * from Stars where bayer_designation_greek_letter = "alpha" and constellation_name_genitive = "Geminorum";
+
 select common_name, bayer_designation_greek_letter, constellation_name_genitive, right_ascension_decimal_degrees,
 declination_degrees, declination_minutes, declination_seconds, declination_decimal_degrees
 from Stars order by declination_decimal_degrees\G
 
 select approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive
-from Stars where approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude limit 20\G
+from Stars where approx_rank_apparent_magnitude > 20 order by approx_rank_apparent_magnitude limit 10\G
 
 /* ** (2) */
 

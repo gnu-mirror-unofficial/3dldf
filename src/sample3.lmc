@@ -803,9 +803,36 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     else:
       ccolor := black;
     fi;
-  
-    label.top("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
-             with_text_color ccolor on_picture qv[bi_ang0];
+
+    if label_pos == label_pos_zero:
+      label("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_top:
+      label.top("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_bot:
+      label.bot("{\medium " & common_name S & "}", R[point_number] shifted (0, -3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_lft:
+      label.lft("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_rt:
+      label.rt("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_urt:
+      label.urt("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_ulft:
+      label.ulft("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_lrt:
+      label.lrt("{\medium " & common_name S & "}", R[point_number] shifted (0, -3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_llft:
+      label.llft("{\medium " & common_name S & "}", R[point_number] shifted (0, -3pt))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    fi;
+      
     drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture qv[bi_ang0];
 
     if do_black:
