@@ -634,18 +634,26 @@ def plot_star_on_sphere {numeric rradius, star S} =
   
   message "a0 (RA of star S in decimal degrees):";
   show a0;
-  
-  a4 := middle_angle - a0;
 
-  if middle_angle > a0:
+  numeric middle_angle_one;
+  
+  if a0 >= 337.5:
+    middle_angle_one := 360;
+    a4 := 360 - a0;
+  else:
+    middle_angle_one := middle_angle;
+    a4 := middle_angle - a0;
+  fi;
+
+  if middle_angle_one > a0:
     a4 := -magnitude(a4);
-  elseif middle_angle < a0:
+  elseif middle_angle_one < a0:
     a4 := -magnitude(a4);
   fi;
 
-  
-  if a0 ==  middle_angle:
-    message "a0 == middle_angle == " & decimal middle_angle & ".  Don't need arc length for second arc.";
+ 
+  if (a0 == middle_angle) or (a0 == middle_angle_one):
+    message "a0 == middle_angle (or middle_angle_one) == " & decimal middle_angle & ".  Don't need arc length for second arc.";
     message "Setting RA_arc_length to 0.";
     RA_arc_length := 0;
   else:
@@ -653,9 +661,6 @@ def plot_star_on_sphere {numeric rradius, star S} =
     message "Will calculate second arc length.";
     message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
     show a4;
-
-%% !! START HERE: LDF 2021.7.9.  Subtract from 360 deg., not 0.
-
     
     q2 := q0 rotated (0, a4);
     draw q2 with_color magenta on_picture pv[ctr];
@@ -775,6 +780,10 @@ def plot_star_on_spherical_biangle {star S, numeric point_number} =
     message "middle_angle";
     show middle_angle;
     %pause;
+
+    if ra >= 336.5:
+      middle_angle := 360.0;
+    fi;
     
     if ra > middle_angle:
       R[point_number] := (RA_arc_length, ypart y_axis_point);
