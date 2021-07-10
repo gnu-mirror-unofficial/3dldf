@@ -88,7 +88,8 @@ create table Stars
    bayer_designation_extension varchar(16) not null default "",	
    bs_hr_number int not null default 0 unique,
    approx_rank_apparent_magnitude int not null default 0,
-   apparent_magnitude float default null,	
+   apparent_magnitude float default null,
+   apparent_magnitude_varies boolean not null default 0,
    constellation_abbreviation char(3) not null default "",
    constellation_full_name varchar(32) not null default "",
    constellation_name_genitive varchar(64) not null default "",
@@ -125,8 +126,26 @@ alter table Stars add column is_multiple int not null default 0 after is_binary;
 alter table Stars add column is_binary_component int not null default 0 after is_multiple;
 alter table Stars add column bayer_designation_extension varchar(16) not null default "" after bayer_designation_greek_letter;
 alter table Stars add column notes varchar(1024) not null default "" after is_binary_component;
-alter table Stars add column apparent_magnitude float default null after approx_rank_apparent_magnitude;
+alter table Stars add column apparent_magnitude float not null default 1000 after approx_rank_apparent_magnitude;
+-- alter table Stars drop column apparent_magnitude;
 alter table Stars add column bayer_designation_greek_letter_tex varchar(16) not null default "" after bayer_designation_greek_letter;
+alter table Stars add column apparent_magnitude_varies boolean not null default 0 after apparent_magnitude;
+
+/* !! START HERE:  LDF 2021.7.10.  */ 
+
+11. Beta Centauri             Hadar             14 04 -60.4  311.8  +1.2  B1III         0.61  -5.42    6.21 0.56   530
+12. Alpha Aquilae             Altair            19 51  +8.9   47.8  -9.0  A7V           0.77   2.21  194.44 0.94    17
+13. Alpha Crucis              Acrux             12 27 -63.1  300.2  -0.4  B0.5IV+B1V    0.79  -4.17   10.17 0.67   320
+14. Alpha Tauri               Aldebaran         04 36 +16.5  181.0 -20.2  K5III         0.86v -0.64v  50.09 0.95    65
+15. Alpha Scorpii             Antares           16 29 -26.4  351.9 +15.1  M1Ib+B4V      0.95v -5.39v   5.40 1.68   600
+16. Alpha Virginis            Spica             13 25 -11.2  316.1 +50.8  B1V+B2V       0.97  -3.56   12.44 0.86   260
+17. Beta Geminorum            Pollux            07 45 +28.0  192.2 +23.3  K0III         1.14   1.07   96.74 0.87    34
+18. Alpha Piscis Austrini     Fomalhaut         22 58 -29.6   20.6 -65.0  A3V           1.15   1.72  130.08 0.92    25
+19. Alpha Cygni               Deneb             20 41 +45.3   84.3  +2.1  A2Ia          1.24  -8.74    1.01 0.57  3000
+20. Beta Crucis               Mimosa            12 48 -59.7  302.5  +3.2  B0.5III       1.26  -3.91    9.25 0.61   350
+
+
+
 
 alter table Stars remove constraint unique(bs_hr_number);
 

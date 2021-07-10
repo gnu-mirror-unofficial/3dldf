@@ -310,7 +310,7 @@ Sphere::set(Sphere_Set_Option_Struct* options, Scanner_Node scanner_node)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -421,7 +421,7 @@ Added this section.
 
    if (options == static_cast<Sphere_Set_Option_Struct*>(0))
       {
-          cerr << "options == 0" << endl;
+          cerr << "XXX options == 0" << endl;
           divisions_vertical = DEFAULT_DIVISIONS;
 
       }  /* |if (options == 0)|  */

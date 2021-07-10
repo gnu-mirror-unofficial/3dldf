@@ -1874,10 +1874,75 @@ order by approx_rank_apparent_magnitude; --  limit 30;
 select approx_rank_apparent_magnitude, common_name 
 from Stars where common_name = "Atria";
 
+/* *** (3) Set apparent_magnitude */
+
+update Stars set apparent_magnitude = -1.46 where common_name = "Sirius";            
+update Stars set apparent_magnitude = -0.73 where common_name = "Canopus";           
+update Stars set apparent_magnitude = -0.29 where bayer_designation_greek_letter = "alpha"
+   and constellation_name_genitive = "Centauri";
+update Stars set apparent_magnitude = -0.05 where common_name = "Arcturus";          
+update Stars set apparent_magnitude =  0.03 where common_name = "Vega";              
+update Stars set apparent_magnitude =  0.07 where common_name = "Capella";           
+update Stars set apparent_magnitude =  0.15 where common_name = "Rigel";             
+update Stars set apparent_magnitude_varies = 1 where common_name = "Rigel";             
+update Stars set apparent_magnitude = 0.36 where common_name = "Procyon";            
+update Stars set apparent_magnitude = 0.45 where common_name = "Achernar";           
+update Stars set apparent_magnitude = 0.55 where common_name = "Betelgeuse";         
+update Stars set apparent_magnitude_varies = 1 where common_name = "Betelgeuse";
+
+
+update Stars set apparent_magnitude = 0.61 where common_name = "Hadar";             
+update Stars set apparent_magnitude = 0.77 where common_name = "Altair";            
+update Stars set apparent_magnitude = 0.79 where common_name = "Acrux";             
+update Stars set apparent_magnitude = 0.86 where common_name = "Aldebaran";
+update Stars set apparent_magnitude_varies = 1 where common_name = "Aldebaran";
+update Stars set apparent_magnitude = 0.95 where common_name = "Antares";           
+update Stars set apparent_magnitude_varies = 1 where common_name = "Antares";
+update Stars set apparent_magnitude = 0.97 where common_name = "Spica";             
+update Stars set apparent_magnitude = 1.14 where common_name = "Pollux";            
+update Stars set apparent_magnitude = 1.15 where common_name = "Fomalhaut";         
+update Stars set apparent_magnitude = 1.24 where common_name = "Deneb";             
+update Stars set apparent_magnitude = 1.26 where common_name = "Mimosa";            
+
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars
+where apparent_magnitude < 1000 order by apparent_magnitude;
+
+update Stars set apparent_magnitude = 1.36 where common_name = "Regulus";           
+update Stars set apparent_magnitude = 1.50 where common_name = "Adhara";            
+update Stars set apparent_magnitude = 1.58 where common_name = "Castor";            
+update Stars set apparent_magnitude = 1.62 where common_name = "Shaula";            
+update Stars set apparent_magnitude = 1.63 where common_name = "Gacrux";            
+update Stars set apparent_magnitude = 1.64 where common_name = "Bellatrix";         
+update Stars set apparent_magnitude = 1.66 where common_name = "Elnath";            
+update Stars set apparent_magnitude = 1.67 where common_name = "Miaplacidus";       
+update Stars set apparent_magnitude = 1.69 where common_name = "Alnilam";           
+update Stars set apparent_magnitude = 1.74 where common_name = "Alnair";            
+
+/* !! START HERE:  LDF 2021.07.10.  */
+
+select * from Stars where common_name = "Alnitak"\G
+
+select * from Stars where common_name = "Alioth"\G
+
+31. Zeta Orionis              Alnitak           05 41  -1.9  206.5 -16.5  O9.5Ib+B0III  1.75  -5.25    3.99 0.79   820
+32. Epsilon Ursae Majoris     Alioth            12 54 +56.0  122.2 +61.1  A0IV          1.77  -0.20   40.30 0.62    81
+33. Alpha Persei              Mirfak            03 24 +49.9  146.5  -5.9  F5Ib          1.80  -4.49    5.51 0.66   590
+34. Alpha Ursae Majoris       Dubhe             11 04 +61.8  142.8 +51.0  K0III+F0V     1.80  -1.09   26.38 0.53   124
+35. Gamma Velorum             Regor             08 10 -47.3  262.8  -7.6  WC8+O9Ib      1.81  -5.25    3.88 0.53   840
+36. Delta Canis Majoris       Wezen             07 08 -26.4  238.4  -8.3  F8Ia          1.83  -6.87    1.82 0.56  1800
+37. Epsilon Sagittarii        Kaus Australis    18 24 -34.4  359.2  -9.8  B9.5III       1.84  -1.39   22.55 1.02   145
+38. Eta Ursae Majoris         Alkaid            13 48 +49.3  100.5 +65.3  B3V           1.86  -0.59   32.39 0.74   101
+39. Theta Scorpii             Sargas            17 37 -43.0  347.1  -5.9  F1II          1.86  -2.75   11.99 0.84   270
+40. Epsilon Carinae           Avior             08 23 -59.5  274.3 -12.5  K3II+B2V      1.87  -4.57    5.16 0.49   630
+
+
+
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars where apparent_magnitude != 0 order by
+approx_rank_apparent_magnitude;
 
 /* ** (2) */
 
-1.                           Sirius
+1. Alpha Canis Majoris       Sirius            06 45 -16.7  227.2  -8.9  A1V          -1.46   1.43  379.21 1.58     9
 2. Alpha Carinae             Canopus           06 24 -52.7  261.2 -25.3  F0Ib         -0.73  -5.64   10.43 0.53   310
 3. Alpha Centauri            Rigil Kentaurus   14 40 -60.8  315.8  -0.7  G2V+K1V      -0.29   4.06  742.12 1.40     4
 4. Alpha Boötis              Arcturus          14 16 +19.2   15.2 +69.0  K2III        -0.05  -0.31   88.85 0.74    37
