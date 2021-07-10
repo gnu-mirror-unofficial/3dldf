@@ -312,10 +312,10 @@ Added this rule.
 @q ***** (5) string_primary --> COMMON_NAME star_expression.@>
 
 @*4 \§string primary> $\longrightarrow$ \.{COMMON\_NAME} \§star expression>.
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 
 \LOG
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 Added this rule.
 \ENDLOG
 
@@ -369,7 +369,7 @@ Added this rule.
 @q ******* (7) Error handling:  |star == 0|.@> 
 
 @ Error handling:  |star == 0|.
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 
 @<Define rules@>=
 
@@ -395,7 +395,7 @@ Added this rule.
 @q ******* (7) |star != 0|.@> 
 
 @ |star != 0 && star->ctr > 0|.  Set |@=$$@>| to |star->common_name|.
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 
 @<Define rules@>=
 

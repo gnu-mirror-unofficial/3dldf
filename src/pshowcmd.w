@@ -552,10 +552,10 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
 \§newwrite expression>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -1592,6 +1592,53 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> APPARENT_MAGNITUDE.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{APPARENT\_MAGNITUDE}.
+\initials{LDF 2021.07.10.}
+
+\LOG
+\initials{LDF 2021.07.10.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: APPARENT_MAGNITUDE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: APPARENT_MAGNITUDE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_APPARENT_MAGNITUDE;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: APPARENT_MAGNITUDE':"
                 << endl
                 << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
 
@@ -4404,10 +4451,10 @@ else  /* |!pv || pv->ctr <= 0|  */
 
 @*5 \§command> $\longrightarrow$ \.{SHOW}
 \§newwrite vector expression>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 

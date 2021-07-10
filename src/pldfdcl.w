@@ -1007,10 +1007,10 @@ Added this rule.
 
 @q *** (3) declaration --> newwrite declaration.  @>
 @*2 \§declaration> $\longrightarrow$ |newwrite_declaration|.  
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -2101,10 +2101,10 @@ Added this rule.
 
 @q ***** (5) declaration --> newwrite_vector declaration.  @>
 @*4 \§declaration> $\longrightarrow$ \§newwrite vector declaration>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -3120,10 +3120,10 @@ Added this rule.
 
 @q ***** (5) newwrite_declaration.  @>
 @*4 {\bf newwrite\_declaration}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -4080,10 +4080,10 @@ Added this rule.
 
 @*3 \§newwrite vector declaration> $\longrightarrow$ 
 \.{NEWWRITE\_VECTOR\_DECLARATOR} \§declaration list>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -5506,10 +5506,10 @@ Added this rule.
 
 @q ** (2) any_declarator --> STAR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{STAR\_DECLARATOR}.
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 
 \LOG
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 Added this rule.
 \ENDLOG
 
@@ -5524,10 +5524,10 @@ Added this rule.
 
 @q ** (2) any_declarator --> CONSTELLATION_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{CONSTELLATION\_DECLARATOR}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -5541,10 +5541,10 @@ Added this rule.
 
 @q ** (2) any_declarator --> PLANET_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{PLANET\_DECLARATOR}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -5558,10 +5558,10 @@ Added this rule.
 
 @q ** (2) any_declarator --> NEWWRITE_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{NEWWRITE\_DECLARATOR}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -5678,10 +5678,10 @@ Added this rule.
 
 @q ** (2) any_declarator --> STAR_VECTOR_DECLARATOR.@> 
 @*1 \§any declarator> $\longrightarrow$ \.{STAR\_VECTOR\_DECLARATOR}.
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 
 \LOG
-\initials{LDF 2021.7.1.}
+\initials{LDF 2021.07.01.}
 Added this rule.
 \ENDLOG
 

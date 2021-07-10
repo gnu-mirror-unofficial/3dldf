@@ -1830,10 +1830,10 @@ instead of
 
 @q *** (3) newwrite_vector_variable.  @>
 @*2 \§newwrite vector variable>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this type declaration.
 \ENDLOG
 
@@ -1843,10 +1843,10 @@ Added this type declaration.
 @q **** (4) newwrite_vector_variable --> variable NEWWRITE_VECTOR.@>
 @*3 \§newwrite vector variable> $\longrightarrow$ \§variable> 
 \.{NEWWRITE\_VECTOR}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -2761,10 +2761,10 @@ Added this rule.
 
 @*3 \§vector type variable>  $\longrightarrow$ 
 \§newwrite vector variable>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -4342,10 +4342,10 @@ Removed code from this rule.  Now calling
 @q *** (3) newwrite variable --> variable NEWWRITE.  @>
 @*2 \§newwrite variable> $\longrightarrow$ \§variable> 
 \.{NEWWRITE}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this type declaration.
 \ENDLOG
 
@@ -4354,7 +4354,7 @@ Added this type declaration.
 
 @
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 
 \initials{LDF 2005.06.09.}
@@ -5191,10 +5191,10 @@ Added this rule.
 @q *** (3) any_variable --> newwrite_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§newwrite variable>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -5969,10 +5969,10 @@ Added this rule.
 @q *** (3)  any_variable --> newwrite_vector_variable.  @>
 @*2 \§any variable> $\longrightarrow$ 
 \§newwrite vector variable>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 

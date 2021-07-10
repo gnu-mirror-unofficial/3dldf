@@ -738,7 +738,7 @@ def plot_star_on_sphere {numeric rradius, star S} =
   
 enddef;
 
-%% ** (2)
+%% ** (2) Macro plot_star_on_spherical_biangle
 
 macro plot_star_on_spherical_biangle;
 
@@ -750,12 +750,21 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   point y_axis_point;
   numeric box_wd;
   numeric box_ht;
+  pen star_pen[];
 
   message "Entering macro `plot_star_on_spherical_biangle'.";
   
   decl := declination_decimal_degrees S;
   ra   :=  right_ascension_decimal_degrees S;
 
+  star_pen[-1] := pencircle scaled (6pt, 6pt, 6pt);       
+  star_pen[0]  := pencircle scaled (5.5pt, 5.5pt, 5.5pt); 
+  star_pen[1]  := pencircle scaled (5pt, 5pt, 5pt);       
+  star_pen[2]  := pencircle scaled (4.5pt, 4.5pt, 4.5pt); 
+  star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
+  star_pen[4]  := pencircle scaled (3.5pt, 3.5pt, 3.5pt); 
+  star_pen[5]  := pencircle scaled (3pt, 3pt, 3pt);       
+  
   message "decl:";
   show decl;
 
@@ -859,7 +868,10 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       label.llft("{\medium " & common_name S & "}", R[point_number] shifted (0, -3pt))
 	with_text_color ccolor on_picture qv[bi_ang0];
     fi;
-      
+
+
+    
+    
     drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture qv[bi_ang0];
 
     if do_black:

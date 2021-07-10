@@ -1327,7 +1327,7 @@ Also made debugging output thread-safe.
 @*4 \§on picture optional> $\longrightarrow$ \.{ON\_PICTURE} \§picture expression>.
 
 \LOG
-\initials{LDF 2021.7.4.}
+\initials{LDF 2021.07.04.}
 Added this rule.
 \ENDLOG 
 

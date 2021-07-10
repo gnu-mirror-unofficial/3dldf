@@ -52,7 +52,7 @@
 @** newwrite expressions.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Created this file.
 \ENDLOG 
 
@@ -489,7 +489,7 @@ but hasn't been assigned to.  It shouldn't be necessary to assign to a
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
 @q   following s-expression in order to use the facilities normally      @>
 @q   accessed via the local variables list.                              @>
-@q   \initials{LDF 2021.7.5.}.                                          @>
+@q   \initials{LDF 2021.07.05.}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 70))    @>
 
 @q Local Variables:                   @>

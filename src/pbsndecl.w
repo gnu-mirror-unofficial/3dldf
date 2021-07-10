@@ -596,6 +596,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     BS_NUMBER@>@/                   
 @=%token <int_value>     HR_NUMBER@>@/                   
 @=%token <int_value>     APPROX_RANK_APPARENT_MAGNITUDE@>@/ 
+@=%token <real_value>    APPARENT_MAGNITUDE@>@/ 
 @=%token <int_value>     CONSTELLATION_ABBREVIATION@>@/  
 @=%token <int_value>     CONSTELLATION_FULL_NAME@>@/    
 @=%token <int_value>     CONSTELLATION_NAME_GENITIVE@>@/ 
@@ -3308,33 +3309,34 @@ Scan_Parse
   extern const unsigned int MIN_SHAPE = POINT; 
   extern const unsigned int MAX_SHAPE = POLYHEDRON;
 
-  extern const unsigned int STARS_STAR_CONSTANT_NAME              =        1U; /* $2^0$   */                       
-  extern const unsigned int STARS_COMMON_NAME                     =        2U;                           
-  extern const unsigned int STARS_GREEK_NAME                      =        4U;                    
-  extern const unsigned int STARS_LATIN_NAME                      =        8U;                    
-  extern const unsigned int STARS_ARABIC_NAME                     =       16U;  /* $2^4$  */       
-  extern const unsigned int STARS_FLAMSTEED_DESIGNATION_NUMBER    =       32U;                    
-  extern const unsigned int STARS_BAYER_DESIGNATION_GREEK_LETTER  =       64U;                    
-  extern const unsigned int STARS_BS_HR_NUMBER                    =      128U;                    
-  extern const unsigned int STARS_BS_NUMBER                       =      256U;  /* $2^8$  */       
-  extern const unsigned int STARS_HR_NUMBER                       =      512U;                    
-  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE  =     1024U;                    
-  extern const unsigned int STARS_CONSTELLATION_ABBREVIATION      =     2048U;                    
-  extern const unsigned int STARS_CONSTELLATION_FULL_NAME         =     4096U;  /* $2^12$ */      
-  extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE     =     8192U;                    
-  extern const unsigned int STARS_CONSTELLATION_NUMBER            =    16384U;                    
-  extern const unsigned int STARS_RIGHT_ASCENSION_HOURS           =    32768U;                    
-  extern const unsigned int STARS_RIGHT_ASCENSION_MINUTES         =    65536U;  /* $2^16$ */      
-  extern const unsigned int STARS_RIGHT_ASCENSION_SECONDS         =   131072U;                    
-  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_HOURS   =   262144U;                    
-  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_DEGREES =   524288U;                    
-  extern const unsigned int STARS_DECLINATION_DEGREES             =  1048576U;  /* $2^20$ */      
-  extern const unsigned int STARS_DECLINATION_MINUTES             =  2097152U;                    
-  extern const unsigned int STARS_DECLINATION_SECONDS             =  4194304U;                    
-  extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES     =  8388608U;                    
-  extern const unsigned int STARS_RIGHT_ASCENSION                 = 16777216U;  /* $2^24$ */      
-  extern const unsigned int STARS_DECLINATION                     = 33554432U;  
-  extern const unsigned int STARS_IS_BINARY                       = 67108864U;  /* (expt 2 26)  */
+  extern const unsigned int STARS_STAR_CONSTANT_NAME              =         1U; /* $2^0$   */                       
+  extern const unsigned int STARS_COMMON_NAME                     =         2U;                           
+  extern const unsigned int STARS_GREEK_NAME                      =         4U;                    
+  extern const unsigned int STARS_LATIN_NAME                      =         8U;                    
+  extern const unsigned int STARS_ARABIC_NAME                     =        16U;  /* $2^4$  */       
+  extern const unsigned int STARS_FLAMSTEED_DESIGNATION_NUMBER    =        32U;                    
+  extern const unsigned int STARS_BAYER_DESIGNATION_GREEK_LETTER  =        64U;                    
+  extern const unsigned int STARS_BS_HR_NUMBER                    =       128U;                    
+  extern const unsigned int STARS_BS_NUMBER                       =       256U;  /* $2^8$  */       
+  extern const unsigned int STARS_HR_NUMBER                       =       512U;                    
+  extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE  =      1024U;                    
+  extern const unsigned int STARS_APPARENT_MAGNITUDE              =      2048U;                        
+  extern const unsigned int STARS_CONSTELLATION_ABBREVIATION      =      4096U;  /* $2^12$ */      
+  extern const unsigned int STARS_CONSTELLATION_FULL_NAME         =      8192U;                    
+  extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE     =     16384U;                    
+  extern const unsigned int STARS_CONSTELLATION_NUMBER            =     32768U;                    
+  extern const unsigned int STARS_RIGHT_ASCENSION_HOURS           =     65536U;  /* $2^16$ */      
+  extern const unsigned int STARS_RIGHT_ASCENSION_MINUTES         =    131072U;                    
+  extern const unsigned int STARS_RIGHT_ASCENSION_SECONDS         =    262144U;                    
+  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_HOURS   =    524288U;                    
+  extern const unsigned int STARS_RIGHT_ASCENSION_DECIMAL_DEGREES =   1048576U;  /* $2^20$ */      
+  extern const unsigned int STARS_DECLINATION_DEGREES             =   2097152U;                    
+  extern const unsigned int STARS_DECLINATION_MINUTES             =   4194304U;                    
+  extern const unsigned int STARS_DECLINATION_SECONDS             =   8388608U;                    
+  extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES     =  16777216U;  /* $2^24$ */      
+  extern const unsigned int STARS_RIGHT_ASCENSION                 =  33554432U;                    
+  extern const unsigned int STARS_DECLINATION                     =  67108864U;  
+  extern const unsigned int STARS_IS_BINARY                       = 134217728U;  /* (expt 2 27)  */
 };
 
 @
@@ -3356,6 +3358,7 @@ Scan_Parse
   extern const unsigned int STARS_BS_NUMBER;                   
   extern const unsigned int STARS_HR_NUMBER;                   
   extern const unsigned int STARS_APPROX_RANK_APPARENT_MAGNITUDE; 
+  extern const unsigned int STARS_APPARENT_MAGNITUDE; 
   extern const unsigned int STARS_CONSTELLATION_ABBREVIATION;
   extern const unsigned int STARS_CONSTELLATION_FULL_NAME;
   extern const unsigned int STARS_CONSTELLATION_NAME_GENITIVE;

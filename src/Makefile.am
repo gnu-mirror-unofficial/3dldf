@@ -1211,6 +1211,21 @@ tags:
 query:
 	@echo "CXXCOMPILE == $(CXXCOMPILE)"
 
+.PHONY: tps
+
+tps: ttemp.ps
+
+ttemp.ps: ttemp.dvi
+	dvips -o $@ $<
+
+ttemp.dvi: ttemp.tex ttemp.1
+	tex $<
+
+ttemp.1: ttemp.mp
+	mpost $<
+
+ttemp.mp: ttemp.ldf
+	3dldf $<
 
 ttemp$(EXEEXT): ttemp.cxx
 	g++ -o ttemp$(EXEEXT) ttemp.cxx

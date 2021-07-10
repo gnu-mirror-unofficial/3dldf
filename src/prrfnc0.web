@@ -1368,6 +1368,7 @@ Added |name_map| entries for |IS_ON_PLANE|, |IS_IN_REG_POLYGON| and
    name_map[BS_NUMBER]                       = "BS_NUMBER";               
    name_map[HR_NUMBER]                       = "HR_NUMBER";
    name_map[APPROX_RANK_APPARENT_MAGNITUDE]  = "APPROX_RANK_APPARENT_MAGNITUDE";
+   name_map[APPARENT_MAGNITUDE]              = "APPARENT_MAGNITUDE";
    name_map[CONSTELLATION_ABBREVIATION]      = "CONSTELLATION_ABBREVIATION";
    name_map[CONSTELLATION_FULL_NAME]         = "CONSTELLATION_FULL_NAME"; 
    name_map[CONSTELLATION_NAME_GENITIVE]     = "CONSTELLATION_NAME_GENITIVE";
@@ -3107,6 +3108,7 @@ Added this section.
    star_field_name_map[STARS_BS_NUMBER]                       = "STARS_BS_NUMBER";
    star_field_name_map[STARS_HR_NUMBER]                       = "STARS_HR_NUMBER";  
    star_field_name_map[STARS_APPROX_RANK_APPARENT_MAGNITUDE]  = "STARS_APPROX_RANK_APPARENT_MAGNITUDE";
+   star_field_name_map[STARS_APPARENT_MAGNITUDE]              = "STARS_APPARENT_MAGNITUDE";
    star_field_name_map[STARS_CONSTELLATION_ABBREVIATION]      = "STARS_CONSTELLATION_ABBREVIATION";
    star_field_name_map[STARS_CONSTELLATION_FULL_NAME]         = "STARS_CONSTELLATION_FULL_NAME";
    star_field_name_map[STARS_CONSTELLATION_NAME_GENITIVE]     = "STARS_CONSTELLATION_NAME_GENITIVE";
@@ -7973,6 +7975,21 @@ AFTER_WHERE_CLAUSE:
 
         } 
 
+@q ***** (5) @>
+                               
+        else if (*iter == STARS_APPARENT_MAGNITUDE)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+              cerr_strm << "`*iter' == `STARS_APPARENT_MAGNITUDE'." << endl; 
+           }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           stable_sort(a_star_ptr_vector.begin(), a_star_ptr_vector.end(),
+                       compare_apparent_magnitude);
+
+        } 
 
 @q ***** (5) @>
                                

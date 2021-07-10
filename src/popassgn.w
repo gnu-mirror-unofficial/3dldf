@@ -4192,7 +4192,7 @@ Now setting |@=$$@>| to 0.  Formerly, it was set to |@=$3@>|.
 \.{PLUS\_ASSIGN} \§string expression>.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -4222,7 +4222,7 @@ Added this rule.
 
 @q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
 @ Call |Scan_Parse::vector_type_plus_assign()|.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Define rules@>=
 
@@ -4244,7 +4244,7 @@ Added this rule.
 
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
 @ |Scan_Parse::vector_type_plus_assign()| failed.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Define rules@>=
 
@@ -4265,7 +4265,7 @@ Added this rule.
 
 @q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
 @ |Scan_Parse::vector_type_plus_assign()| succeeded.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Define rules@>=
 
@@ -4293,7 +4293,7 @@ else /* |status == 0|  */
 @q ***** (5) Set |$$| to 0 and exit rule.@>   
 
 @ Set |@=$$@>| to 0 and exit rule.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Define rules@>=
 

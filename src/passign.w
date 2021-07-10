@@ -573,7 +573,7 @@ Added this rule.
 @*3 \§assignment> $\longrightarrow$ \§newwrite assignment>.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -3868,10 +3868,10 @@ Added this rule.
 
 @q **** (4) newwrite_assignment.@>
 @*2 \§newwrite assignment>. 
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this section.
 \ENDLOG
 
@@ -3884,7 +3884,7 @@ Added this section.
 \.{ASSIGN} \§string expression>. 
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 

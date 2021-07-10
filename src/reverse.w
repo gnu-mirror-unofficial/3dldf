@@ -801,10 +801,10 @@ Added this rule.
 @q * (1) command --> REVERSE newwrite_vector_variable.@> 
 @* \§command> $\longrightarrow$ \.{REVERSE} 
 \§newwrite vector variable>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 

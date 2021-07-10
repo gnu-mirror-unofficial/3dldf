@@ -1232,10 +1232,10 @@ Added this rule.
 @q **** (4) command --> WRITE newwrite_variable string_expression no_newline_optional. @>
 
 @*3 \§command> $\longrightarrow$ \.{WRITE} \§newwrite variable> \§string_expression> \§no newline optional>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -1301,10 +1301,10 @@ Added this rule.
 @q **** (4) command --> WRITE string_expression TO newwrite_variable no_newline_optional. @>
 
 @*3 \§command> $\longrightarrow$ \.{WRITE} \§string_expression> \.{TO} \§newwrite variable> \§no newline optional>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -1371,7 +1371,7 @@ Added this rule.
 
 @q ***** (5) no_newline_optional.  @>
 @* \§no newline optional>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> no_newline_optional@>
@@ -1380,7 +1380,7 @@ Added this rule.
 @*5 \§no newline optional> $\longrightarrow$ \.{EMPTY}.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -1397,7 +1397,7 @@ Added this rule.
 @*5 \§no newline optional> $\longrightarrow$ \.{NO_NEWLINE}.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG 
 
@@ -1413,10 +1413,10 @@ Added this rule.
 @q **** (4) command --> CLOSE newwrite_variable. @>
 
 @*3 \§command> $\longrightarrow$ \.{CLOSE} \§newwrite_variable>.
-\initials{LDF 2021.7.6.}
+\initials{LDF 2021.07.06.}
 
 \LOG
-\initials{LDF 2021.7.6.}
+\initials{LDF 2021.07.06.}
 Added this rule.
 \ENDLOG
 

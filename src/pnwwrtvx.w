@@ -50,19 +50,19 @@
 
 @q * (0) |newwrite_vector| expressions.@>
 @** \§newwrite vector> expressions.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Created this file and wrote quite a few rules.  
 \ENDLOG 
 
 @q * (1) |newwrite_vector| primary.  @>
 @* \§newwrite vector primary>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
   
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this type declaration.
 \ENDLOG
 
@@ -72,10 +72,10 @@ Added this type declaration.
 @q ** (2) newwrite_vector_primary --> newwrite_vector_variable.@>
 @*1 \§newwrite vector primary> $\longrightarrow$ 
 \§newwrite vector variable>.  
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -89,7 +89,7 @@ Added this rule.
 @q **** (4) Error handling:  |entry == 0 || entry->object == 0|.@> 
 
 @ Error handling:  |entry == 0 || entry->object == 0|.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Define rules@>=
 
@@ -103,7 +103,7 @@ Added this rule.
 @q **** (4) |!(entry == 0 || entry->object == 0)|.@> 
 
 @ |!(entry == 0 || entry->object == 0)|.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 @<Define rules@>=
   else /* |!(entry == 0 || entry->object == 0)|  */
@@ -127,10 +127,10 @@ Added this rule.
 
 @*1 \§newwrite vector primary> $\longrightarrow$ \.{LEFT\_PARENTHESIS}
 \§newwrite vector expression> \.{RIGHT\_PARENTHESIS}.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -146,10 +146,10 @@ Added this rule.
 @q * (1) newwrite_vector secondary.@>
 
 @* \§newwrite vector secondary>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this type declaration.
 \ENDLOG
 
@@ -160,10 +160,10 @@ Added this type declaration.
 @q ** (2) newwrite_vector secondary --> newwrite_vector_primary.@>
 @*1 \§newwrite vector secondary> $\longrightarrow$ 
 \§newwrite vector primary>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -178,10 +178,10 @@ Added this rule.
 @q * (1) newwrite_vector tertiary.  @>
 
 @* \§newwrite vector tertiary>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this type declaration.
 \ENDLOG
 
@@ -192,10 +192,10 @@ Added this type declaration.
 @q ***** (5) newwrite_vector tertiary --> newwrite_vector_secondary.@>
 @ \§newwrite vector tertiary> $\longrightarrow$ 
 \§newwrite vector secondary>.
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -211,7 +211,7 @@ Added this rule.
 @* \§newwrite vector expression>.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this type declaration.
 \ENDLOG
 
@@ -223,7 +223,7 @@ Added this type declaration.
 \§newwrite vector tertiary>.
 
 \LOG
-\initials{LDF 2021.7.5.}
+\initials{LDF 2021.07.05.}
 Added this rule.
 \ENDLOG
 
@@ -238,7 +238,7 @@ Added this rule.
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
 @q   following s-expression in order to use the facilities normally      @>
 @q   accessed via the local variables list.                              @>
-@q   \initials{LDF 2021.7.5.}.                                          @>
+@q   \initials{LDF 2021.07.05.}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
 
 @q Local Variables:                   @>

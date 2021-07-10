@@ -375,10 +375,10 @@ p = new Picture;
 
 @*2 \§command> $\longrightarrow$ 
 \§picture vector variable> \.{PLUS\_ASSIGN} \§picture vector expression>. 
-\initials{LDF 2021.7.4.}
+\initials{LDF 2021.07.04.}
 
 \LOG
-\initials{LDF 2021.7.4.}
+\initials{LDF 2021.07.04.}
 Added this rule.
 \ENDLOG
 
@@ -540,10 +540,10 @@ Added this rule.
 
 @*2 \§command> $\longrightarrow$ 
 \§newwrite vector expression> \.{PLUS\_ASSIGN} \§newwrite vector expression>. 
-\initials{LDF 2021.7.6.}
+\initials{LDF 2021.07.06.}
 
 \LOG
-\initials{LDF 2021.7.6.}
+\initials{LDF 2021.07.06.}
 Added this rule.
 \ENDLOG
 

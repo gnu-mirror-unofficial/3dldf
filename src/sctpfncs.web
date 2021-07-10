@@ -4692,7 +4692,7 @@ Scanner_Type::get_astronomy(void)
    sql_strm << "select common_name, greek_name, latin_name, "
             << "arabic_name, flamsteed_designation_number, "
             << "bayer_designation_greek_letter, bs_hr_number, "
-            << "approx_rank_apparent_magnitude, constellation_abbreviation, "
+            << "approx_rank_apparent_magnitude, apparent_magnitude, constellation_abbreviation, "
             << "constellation_full_name, constellation_name_genitive, constellation_number, "
             << "right_ascension_hours, right_ascension_minutes, "
             << "right_ascension_seconds, right_ascension_decimal_hours, "
@@ -5530,6 +5530,8 @@ Scanner_Type::get_astronomy(void)
                  << "`(*iter)->bs_hr_number'                   == " << (*iter)->bs_hr_number
                  << endl 
                  << "`(*iter)->approx_rank_apparent_magnitude' == " << (*iter)->approx_rank_apparent_magnitude
+                 << endl 
+                 << "`(*iter)->apparent_magnitude'             == " << (*iter)->apparent_magnitude
                  << endl;
 #endif 
 

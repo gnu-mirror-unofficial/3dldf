@@ -550,10 +550,10 @@ Added this rule.
 
 @*4 \§numeric primary> $\longrightarrow$ \.{ARC\_LENGTH} \§numeric primary> 
 \.{WITH\_RADIUS} \§numeric primary>.
-\initials{LDF 2021.7.3.}
+\initials{LDF 2021.07.03.}
 
 \LOG
-\initials{LDF 2021.7.3.}
+\initials{LDF 2021.07.03.}
 Added this rule.
 \ENDLOG
 
@@ -620,6 +620,27 @@ Added this rule.
 
 };
 
+
+@q ***** (5) numeric_primary --> APPARENT_MAGNITUDE star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{APPARENT\_MAGNITUDE} \§star primary>.
+\initials{LDF 2021.07.10.}
+
+\LOG
+\initials{LDF 2021.07.10.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: APPARENT_MAGNITUDE star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->apparent_magnitude;
+
+   delete s;
+   s = 0; 
+};
 
 @q ***** (5) numeric_primary --> SIZE circle_primary.  @>
 
@@ -901,7 +922,7 @@ Added this rule.
 @q ***** (5) numeric_primary --> LENGTH string_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{LENGTH} \§string primary>.
-\initials{LDF 2021.07.09.}
+\initials{LDF 2021.07.009.}
 
 @<Define rules@>=
 @=numeric_primary: LENGTH string_primary@>@/
@@ -920,7 +941,7 @@ Added this rule.
 @q ***** (5) numeric_primary --> SIZE string_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§string primary>.
-\initials{LDF 2021.07.09.}
+\initials{LDF 2021.07.009.}
 
 @<Define rules@>=
 @=numeric_primary: SIZE string_primary@>@/
@@ -2652,10 +2673,10 @@ Added this rule.
 @q ***** (5) numeric_primary --> GET_CIRCUMFERENCE WITH_RADIUS numeric_expression.  @>
 
 @ \§numeric primary> $\longrightarrow$ \.{GET_CIRCUMFERENCE} \.{WITH\_RADIUS} \§numeric expression>.@>
-\initials{LDF 2021.7.3.}
+\initials{LDF 2021.07.03.}
 
 \LOG
-\initials{LDF 2021.7.3.}
+\initials{LDF 2021.07.03.}
 Added this rule.
 \ENDLOG 
 
