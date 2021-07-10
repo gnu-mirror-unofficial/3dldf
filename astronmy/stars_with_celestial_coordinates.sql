@@ -1802,7 +1802,7 @@ combined magnitude +1.7
 https://en.wikipedia.org/wiki/Alpha_Trianguli_Australis
 apparent magnitude of +1.91
 
-delete from Stars where 
+delete from Stars where bayer_designation_greek_letter = "alpha" and constellation_name_genitive = "Trianguli Australis";
 
 replace into Stars (
 common_name,
@@ -1843,8 +1843,10 @@ values (
 Apparent magnitude (V) 	1.91[2]
 
 HR 6217
-/* ** (2) */
 
+/* *** (3) */
+
+/* ** (2) */
 
 A
 
@@ -1864,6 +1866,14 @@ from Stars order by declination_decimal_degrees\G
 
 select approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive
 from Stars where approx_rank_apparent_magnitude > 20 order by approx_rank_apparent_magnitude limit 10\G
+
+select approx_rank_apparent_magnitude, common_name 
+from Stars where approx_rank_apparent_magnitude >= 31 -- and approx_rank_apparent_magnitude <= 50
+order by approx_rank_apparent_magnitude; --  limit 30;
+
+select approx_rank_apparent_magnitude, common_name 
+from Stars where common_name = "Atria";
+
 
 /* ** (2) */
 
