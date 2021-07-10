@@ -260,36 +260,36 @@ def get_spherical_biangles {numeric rad} =
   endfor;
   
   label("RA $337.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[0];
-  label("$0^\circ$",     p22 shifted (0, -.75cm))      bi_ang_pict[0];
-  label("$22.5^\circ$",  p22 shifted (1.25cm, -.75cm))  bi_ang_pict[0];
+  label("$0^\circ$",        p22 shifted (0, -.75cm))      bi_ang_pict[0];
+  label("$22.5^\circ$",     p22 shifted (1.25cm, -.75cm)) bi_ang_pict[0];
 
-  label("RA $22.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[1];
-  label("$45^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[1];
-  label("$67.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[1];
+  label("RA $22.5^\circ$", p22 shifted (-1.5cm, -.75cm))  bi_ang_pict[1];
+  label("$45^\circ$",      p22 shifted (0, -.75cm))       bi_ang_pict[1];
+  label("$67.5^\circ$",    p22 shifted (1.25cm, -.75cm))  bi_ang_pict[1];
 
-  label("RA $67.5^\circ$",  p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
-  label("$90^\circ$",    p22 shifted (0, -.75cm))      bi_ang_pict[2];
-  label("$112.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[2];
+  label("XXX RA $67.5^\circ$",  p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
+  label("$90^\circ$",       p22 shifted (0, -.75cm))      bi_ang_pict[2];
+  label("$112.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[2];
 
   label("RA $112.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[3];
-  label("$135^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[3];
-  label("$157.5^\circ$", p22 shifted (1.25cm, -.75cm)) bi_ang_pict[3];
+  label("$135^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[3];
+  label("$157.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[3];
 
   label("RA $157.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[4];
-  label("$180^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[4];
-  label("$202.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[4]; 
+  label("$180^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[4];
+  label("$202.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[4]; 
 
   label("RA $202.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[5];
-  label("$225^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[5];
-  label("$247.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[5];
+  label("$225^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[5];
+  label("$247.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[5];
 
   label("RA $247.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[6];
-  label("$270^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[6];
-  label("$292.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[6];
+  label("$270^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[6];
+  label("$292.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[6];
 
   label("RA $292.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[7];
-  label("$315^\circ$",   p22 shifted (0, -.75cm))      bi_ang_pict[7];
-  label("$337.5^\circ$", p22 shifted (1.25cm, -.75cm))  bi_ang_pict[7];
+  label("$315^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[7];
+  label("$337.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[7];
   
   clear current_picture;
   
@@ -318,6 +318,15 @@ def get_sphere_for_plotting_stars {numeric rradius} :=
 
   ra_decl_zero_pt := (rradius, 0);
   r16 := ra_decl_zero_pt;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
   
 %% Find out why using the 'set' command for 'sphere s' didn't work here.  LDF 2021.7.1.
   
@@ -752,18 +761,28 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   numeric box_ht;
   pen star_pen[];
 
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+
+
   message "Entering macro `plot_star_on_spherical_biangle'.";
   
   decl := declination_decimal_degrees S;
   ra   :=  right_ascension_decimal_degrees S;
 
-  star_pen[-1] := pencircle scaled (6pt, 6pt, 6pt);       
-  star_pen[0]  := pencircle scaled (5.5pt, 5.5pt, 5.5pt); 
-  star_pen[1]  := pencircle scaled (5pt, 5pt, 5pt);       
-  star_pen[2]  := pencircle scaled (4.5pt, 4.5pt, 4.5pt); 
+  star_pen[-1] := pencircle scaled (8pt, 8pt, 8pt);       
+  star_pen[0]  := pencircle scaled (7pt, 7pt, 7pt); 
+  star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);       
+  star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
   star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
-  star_pen[4]  := pencircle scaled (3.5pt, 3.5pt, 3.5pt); 
-  star_pen[5]  := pencircle scaled (3pt, 3pt, 3pt);       
+  star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
+  star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);       
   
   message "decl:";
   show decl;
@@ -832,14 +851,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     write s to nw[bi_ang0];
     write s to star_info_combined;
      
-    color ccolor;
-    
-    if do_black:
-      ccolor := white;
-    else:
-      ccolor := black;
-    fi;
-
     if label_pos == label_pos_zero:
       label("{\medium " & common_name S & "}", R[point_number] shifted (0, 3pt))
 	with_text_color ccolor on_picture qv[bi_ang0];
@@ -870,9 +881,28 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     fi;
 
 
+    numeric app_mag;
+    pen sstar_pen;
+
+    app_mag := apparent_magnitude S;
+
+    if app_mag < 0:
+      sstar_pen := star_pen[-1];
+    elseif app_mag < 1:
+      sstar_pen := star_pen[0];
+    elseif app_mag < 2:
+      sstar_pen := star_pen[1];
+    elseif app_mag < 3:
+      sstar_pen := star_pen[2];
+    elseif app_mag < 4:
+      sstar_pen := star_pen[3];
+    elseif app_mag < 5:
+      sstar_pen := star_pen[4];
+    else:
+      sstar_pen := star_pen[5];
+    fi;
     
-    
-    drawdot R[point_number] with_pen Large_pen with_color ccolor on_picture qv[bi_ang0];
+    drawdot R[point_number] with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
 
     if do_black:
 
@@ -891,7 +921,7 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       beginfig(100 + label_picture_ctr);
 	fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
 	label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
-	drawdot (0, -.25box_ht) with_pen Large_pen with_color white;
+	drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
       endfig with_projection parallel_x_y;
       label_picture_ctr += 1;
     fi;
