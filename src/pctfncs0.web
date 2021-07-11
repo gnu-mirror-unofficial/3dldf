@@ -278,18 +278,17 @@ If it doesn't, return.
 
 @ \initials{LDF 2002.09.17.} 
 Some |Shapes| may consist of other |Shapes|, and not have an
-|output()| function of their own, so we must extract their
+|output| function of their own, so we must extract their
 contents recursively until we get to |Shapes| that have one.  So
-far, only |Point|, |Path|, and |Solid| have |output()| functions, and all
+far, only |Point|, |Path|, and |Solid| have |output| functions, and all
 other |Shapes| reduce to |Paths| or |Solids|.  
 
 \initials{LDF 2002.09.17.} 
-|extract()| checks that all of the |Points| contained in the
+|extract| checks that all of the |Points| contained in the
 |Shape| can be projected with the |Focus| that is being used.  If any
 of them cannot be, then |extract()| returns an empty
 |vector| of |Shapes|.  This means that any |Shape| must be entirely
 projectable; partial |Shapes| will not be output.  
-problem, too. 
 
 \LOG
 \initials{LDF 2003.01.05.}  
@@ -300,9 +299,9 @@ fact that I've added |Solid|.
 @: BUG FIX@> BUG FIX:  Moved the code that causes
 |transform| to be applied to the elements of |shapes|.  This is now
 done {\it before\/} the |extremes| are set.  The way it was before
-didn't work properly, because |extract()| used the untransformed
+didn't work properly, because |extract| used the untransformed
 values to decide whether a |Shape| was projectable.  In order to do
-this, I had to make |apply_transform()| a |Shape| function.
+this, I had to make |apply_transform| a |Shape| function.
 \ENDLOG 
 
 @q **** (4).  @>
@@ -682,7 +681,7 @@ It will be needed if this function is called on |*this| again.
                }  
 #endif /* |DEBUG_COMPILE|  */@;
 
-next_position = curr_position;
+            next_position = curr_position;
             ++next_position;
 
 @q ******* (7) Inner loop.@> 
