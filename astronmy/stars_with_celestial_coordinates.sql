@@ -2065,8 +2065,22 @@ Hamal             2.01
 
 %% *** (3)
 
-select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars where apparent_magnitude != 0 order by
-approx_rank_apparent_magnitude;
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars where approx_rank_apparent_magnitude > 0 order by
+approx_rank_apparent_magnitude limit 100;
+
+Missing:      61, 97, 
+
+61. Gamma Andromedae          Almach            02 04 +42.3  137.0 -18.6  K3II+B8V+A0V  2.10  -3.08    9.19 0.73   360
+
+97. Beta Scorpii              Graffias          16 05 -19.8  353.1 +23.7  B1V+B2V       2.56  -3.50    6.15 1.12   530
+
+Name missing: 75, 79, 99 
+
+75. Epsilon Centauri                            13 40 -53.5  310.2  +8.7  B1III         2.29  -3.02    8.68 0.77   380
+
+79. Eta Centauri                                14 36 -42.2  322.9 +16.6  B1.5V         2.33v -2.55v  10.57 0.83   310
+
+99. Delta Centauri                              12 08 -50.7  295.9 +11.6  B2IV          2.58v -2.84v   8.25 0.79   400
 
 %% *** (3)
 
