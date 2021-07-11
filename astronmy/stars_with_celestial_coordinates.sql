@@ -1924,21 +1924,151 @@ select * from Stars where common_name = "Alnitak"\G
 
 select * from Stars where common_name = "Alioth"\G
 
-31. Zeta Orionis              Alnitak           05 41  -1.9  206.5 -16.5  O9.5Ib+B0III  1.75  -5.25    3.99 0.79   820
-32. Epsilon Ursae Majoris     Alioth            12 54 +56.0  122.2 +61.1  A0IV          1.77  -0.20   40.30 0.62    81
-33. Alpha Persei              Mirfak            03 24 +49.9  146.5  -5.9  F5Ib          1.80  -4.49    5.51 0.66   590
-34. Alpha Ursae Majoris       Dubhe             11 04 +61.8  142.8 +51.0  K0III+F0V     1.80  -1.09   26.38 0.53   124
-35. Gamma Velorum             Regor             08 10 -47.3  262.8  -7.6  WC8+O9Ib      1.81  -5.25    3.88 0.53   840
-36. Delta Canis Majoris       Wezen             07 08 -26.4  238.4  -8.3  F8Ia          1.83  -6.87    1.82 0.56  1800
-37. Epsilon Sagittarii        Kaus Australis    18 24 -34.4  359.2  -9.8  B9.5III       1.84  -1.39   22.55 1.02   145
-38. Eta Ursae Majoris         Alkaid            13 48 +49.3  100.5 +65.3  B3V           1.86  -0.59   32.39 0.74   101
-39. Theta Scorpii             Sargas            17 37 -43.0  347.1  -5.9  F1II          1.86  -2.75   11.99 0.84   270
-40. Epsilon Carinae           Avior             08 23 -59.5  274.3 -12.5  K3II+B2V      1.87  -4.57    5.16 0.49   630
+select * from Stars where common_name = "Alnitak"\G
+
+update Stars set apparent_magnitude = 1.75 where common_name = "Alnitak";
+
+select * from Stars where common_name = "Alioth"\G
+
+update Stars set apparent_magnitude = 1.77 where common_name = "Alioth";
+
+select * from Stars where common_name = "Mirfak"\G
+
+update Stars set apparent_magnitude = 1.80 where common_name = "Mirfak";
+
+select * from Stars where common_name = "Dubhe"\G
+
+update Stars set apparent_magnitude = 1.80 where common_name = "Dubhe";
+
+select * from Stars where common_name = "Regor"\G
+
+update Stars set apparent_magnitude = 1.81 where common_name = "Regor";
+
+select * from Stars where common_name = "Wezen"\G
+
+update Stars set apparent_magnitude = 1.83 where common_name = "Wezen";
+
+select * from Stars where common_name = "Kaus Australis"\G
+
+update Stars set apparent_magnitude = 1.84 where common_name = "Kaus Australis";
+
+select * from Stars where common_name = "Alkaid"\G
+
+update Stars set apparent_magnitude = 1.86 where common_name = "Alkaid";
+
+select * from Stars where common_name = "Sargas"\G
+
+update Stars set apparent_magnitude = 1.86 where common_name = "Sargas";
+
+select * from Stars where common_name = "Sargas"\G
+
+update Stars set apparent_magnitude = 1.86 where common_name = "Sargas";
+
+select * from Stars where common_name = "Avior"\G
+
+update Stars set apparent_magnitude = 1.87 where common_name = "Avior";
+
+/* 41 -- 50  */
+
+select * from Stars where common_name = "Menkalinan"\G
+
+update Stars set apparent_magnitude = 1.90   where common_name = "Menkalinan";
+
+select * from Stars where common_name = "Atria"\G
+
+update Stars set apparent_magnitude = 1.92   where common_name = "Atria";
+
+select * from Stars where common_name = "Alhena"\G
+
+update Stars set apparent_magnitude = 1.93   where common_name = "Alhena";
+
+select * from Stars where common_name = "Peacock"\G
+
+update Stars set apparent_magnitude = 1.93   where common_name = "Peacock";
+
+select * from Stars where common_name = "Koo She"\G
+
+update Stars set apparent_magnitude = 1.95   where common_name = "Koo She";
+
+select * from Stars where common_name = "Mirzam"\G
+
+update Stars set apparent_magnitude = 1.98   where common_name = "Mirzam";
+
+select * from Stars where common_name = "Alphard"\G
+
+update Stars set apparent_magnitude = 1.98   where common_name = "Alphard";
+
+select * from Stars where common_name = "Polaris"\G
+
+update Stars set apparent_magnitude = 1.99 where common_name = "Polaris";
+
+update Stars set apparent_magnitude_varies = 1 where common_name = "Polaris";
+
+/* !! START HERE:  Add entry */  Algieba           2.00  
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+-- flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_binary
+)
+values (
+"Algieba",
+49,
+2.00,
+"gamma",
+"Leonis",
+"Leo",
+"Leo",
+12,
+10, -- Right ascension
+19,
+58.35056,
+19, -- Declination
+50,
+29.3468,
+1
+);
+
+select * from Stars where common_name = "Algieba"\G
+
+update Stars set apparent_magnitude = 2.00   where common_name = "Algieba";
 
 
+49. Gamma Leonis              Algieba           10 20 +19.8  216.6 +54.7  K0III+G7III   2.00  -0.93   25.96 0.83   126
+
+select * from Constellations where name = "Leo";
+
+-- Right ascension 	10h 19m 58.35056s[1]
+-- Declination 	+19° 50′ 29.3468″[1]
+
+select * from Stars where bayer_designation_greek_letter = "gamma" and constellation_abbreviation = "Leonis"\G
+
+select * from Stars where common_name = "Hamal"\G
+
+update Stars set apparent_magnitude = 2.01   where common_name = "Hamal";
+
+Hamal             2.01  
+
+
+%% *** (3)
 
 select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars where apparent_magnitude != 0 order by
 approx_rank_apparent_magnitude;
+
+%% *** (3)
 
 /* ** (2) */
 
