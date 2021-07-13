@@ -267,7 +267,7 @@ def get_spherical_biangles {numeric rad} =
   label("$45^\circ$",      p22 shifted (0, -.75cm))       bi_ang_pict[1];
   label("$67.5^\circ$",    p22 shifted (1.25cm, -.75cm))  bi_ang_pict[1];
 
-  label("XXX RA $67.5^\circ$",  p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
+  label("RA $67.5^\circ$",  p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
   label("$90^\circ$",       p22 shifted (0, -.75cm))      bi_ang_pict[2];
   label("$112.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[2];
 
@@ -307,8 +307,9 @@ def get_sphere_for_plotting_stars {numeric rradius} :=
   point r[];
   sphere s;
   circle c;
+  circle ecliptic;
   point ra_decl_zero_pt;
-  
+
   j := 0;
   m := 0;
   j := 11.25; 
@@ -318,6 +319,9 @@ def get_sphere_for_plotting_stars {numeric rradius} :=
 
   ra_decl_zero_pt := (rradius, 0);
   r16 := ra_decl_zero_pt;
+
+  ecliptic := unit_circle scaled (rradius, 0, rradius) rotated (-23.4, 0);
+  draw ecliptic with_color blue;
 
   color ccolor;
   
@@ -930,6 +934,43 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 
   message "Exiting macro `plot_star_on_spherical_biangle'.";
 
+enddef;
+
+
+%% ** (2) macro draw_lines
+
+macro draw_lines;
+
+def draw_lines =
+
+  if do_black:
+    fill Q;
+    ccolor := dark_gray;
+  else:
+    ccolor := black;
+  fi;
+    
+  drawdot origin with_pen medium_pen with_color ccolor;
+  draw p20 -- p21 with_color ccolor;
+  draw p22 -- p23 with_color ccolor;
+  draw p24 -- p25 with_color ccolor;
+  draw (p24 -- p25) rotated (180, 0) with_color ccolor;
+  draw p26 -- p27 with_color ccolor;
+  draw (p26 -- p27) rotated (180, 0) with_color ccolor;
+  draw p28 -- p29 with_color ccolor;
+  draw (p28 -- p29) rotated (180, 0)  with_color ccolor;
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  draw p30 -- p31 with_color ccolor;
+  draw p32 -- p33 with_color ccolor;
+  draw p34 -- p35 with_color ccolor;
+  draw p36 -- p37 with_color ccolor;
+  draw p50 -- p51 with_color ccolor;
+  draw p52 -- p53 with_color ccolor;
+  draw p54 -- p55 with_color ccolor;
+  draw p56 -- p57 with_color ccolor;
+    
 enddef;
 
 
