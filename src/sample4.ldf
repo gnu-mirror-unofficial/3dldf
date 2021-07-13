@@ -1,0 +1,482 @@
+%%%% sample4.ldf
+%%%% Created by Laurence D. Finston (LDF) Tue 13 Jul 2021 02:55:21 PM CEST
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2021 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+  
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+% * (1) Beginning of 3DLDF code.
+
+%% * (1) Plotting stars on sphere development (spherical biangles)
+
+%% ** (2) Variable declarations
+
+%% *** (3)  Global, used in macros.
+
+point p[];    
+picture v[];  
+numeric bi_ang[];  
+picture bi_ang_pict[];
+numeric biangle_width[];
+numeric RA_arc_length;
+numeric Declination_arc_length;
+numeric middle_angle;   
+numeric min_edge_angle; 
+numeric max_edge_angle;
+point ra_decl_zero_pt;
+point R[];
+picture_vector pv;
+picture qv[];
+picture label_picture;
+numeric label_picture_ctr;
+newwrite nw[];
+pen medium_pen;
+pen large_pen;
+pen Large_pen;
+path Q;
+color ccolor;
+boolean do_black;
+boolean do_extra_labels;
+numeric i; 
+numeric label_pos_zero;
+numeric label_pos_top;
+numeric label_pos_bot;
+numeric label_pos_rt;
+numeric label_pos_urt;
+numeric label_pos_ulft;
+numeric label_pos_lrt;
+numeric label_pos_llft;
+newwrite label_out;
+picture tab_picture;
+newwrite star_info_combined;
+
+label_pos_zero := 0;
+label_pos_top  := 1;
+label_pos_bot  := 2;
+label_pos_lft  := 3;
+label_pos_rt   := 4;
+label_pos_urt  := 5;
+label_pos_ulft := 6;
+label_pos_lrt  := 7;
+label_pos_llft := 8;
+
+medium_pen := pencircle scaled (2pt, 2pt, 2pt);
+large_pen  := pencircle scaled (3pt, 3pt, 3pt);
+Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
+
+label_picture_ctr := 0;
+
+do_extra_labels := false;
+
+label_out := "sample_4_labels.tex";
+
+star_info_combined := "sample_4_star_info_combined.tex";
+
+%% *** (3) Global, used in the following code (not in macros).
+
+numeric radius;
+string s;
+
+%% ** (2) Set variables
+
+radius := 6cm;
+do_black := true; %% false 
+
+%% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
+
+for i = 0 upto 7:
+  s := "sample_4_" & decimal i & ".tex";
+  nw[i] := s;
+  s := "%%" & s & "\n%%";
+  message "s == " & s;
+  write s to nw[i];
+endfor;
+
+input "sample3.lmc";
+
+%% ** (2) Call macros for the spherical biangles and the sphere.
+
+get_spherical_biangles {radius}; 
+
+get_sphere_for_plotting_stars {radius};
+
+%% *** (3)
+
+%% ** (2) Plot the stars.
+
+i := 0;
+
+% %% *** (3) 1. Sirius
+
+plot_star_on_sphere {radius, sirius};
+
+plot_star_on_spherical_biangle {sirius, 1, label_pos_top, 0, 0};
+
+% %% *** (3) 2. Canopus 
+
+% plot_star_on_sphere {radius, canopus};
+
+% plot_star_on_spherical_biangle {canopus, 2, label_pos_top, 0, 0};
+
+% %% *** (3) 3. alpha Centauri
+
+% plot_star_on_sphere {radius, alpha_centauri};
+
+% plot_star_on_spherical_biangle {alpha_centauri, 3, label_pos_bot, 3pt, 0};
+
+% %% *** (3) 4. Arcturus
+
+% plot_star_on_sphere {radius, arcturus};
+
+% plot_star_on_spherical_biangle {arcturus, 4, label_pos_top, 0, 0};
+
+% %% *** (3) 5. Vega
+
+% plot_star_on_sphere {radius, vega};
+
+% plot_star_on_spherical_biangle {vega, 5, label_pos_top, 0, 0};
+
+% %% *** (3) 6. Capella
+
+% plot_star_on_sphere {radius, capella};
+
+% plot_star_on_spherical_biangle {capella, 6, label_pos_top, 0, 0};
+
+% %% *** (3) @> 7. Rigel
+
+% plot_star_on_sphere {radius, rigel};
+
+% plot_star_on_spherical_biangle {rigel, 7, label_pos_top, 0, 0};
+
+% %% *** (3) 8. Procyon
+
+% plot_star_on_sphere {radius, procyon};
+
+% plot_star_on_spherical_biangle {procyon, 8, label_pos_rt, 0, 0};
+
+% %% *** (3) 9. Achernar
+
+% plot_star_on_sphere {radius, achernar};
+
+% plot_star_on_spherical_biangle {achernar, 9, label_pos_urt, 0, 0};
+
+% %% *** (3) 10. Betelgeuse
+
+% plot_star_on_sphere {radius, betelgeuse};
+
+% plot_star_on_spherical_biangle {betelgeuse, 10, label_pos_top, 0, 0};
+
+% % %% *** (3) 11. Hadar
+
+% plot_star_on_sphere {radius, hadar};
+
+% plot_star_on_spherical_biangle {hadar, 11, label_pos_top, 0, 0};
+
+% %% *** (3) 12. Altair
+
+% plot_star_on_sphere {radius, altair};
+
+% plot_star_on_spherical_biangle {altair, 12, label_pos_top, 0, 0};
+
+% %% !! START HERE:  LDF 2021.7.9.  Get 13!
+
+% %% *** (3) 14. Aldebaran
+
+% plot_star_on_sphere {radius, aldebaran};
+
+% plot_star_on_spherical_biangle {aldebaran, 14, label_pos_urt, 0, 0};
+
+% %% *** (3) 15. Antares
+
+% plot_star_on_sphere {radius, antares};
+
+% plot_star_on_spherical_biangle {antares, 15, label_pos_urt, 0, 0};
+
+% % %% *** (3) 16. Spica
+
+% plot_star_on_sphere {radius, spica};
+
+% plot_star_on_spherical_biangle {spica, 16, label_pos_ulft, 0, 0};
+
+% %% *** (3) 17. Pollux
+
+% plot_star_on_sphere {radius, pollux};
+
+% plot_star_on_spherical_biangle {pollux, 17, label_pos_rt, 0, 0};
+
+% %% *** (3) 18. Fomalhaut
+
+% plot_star_on_sphere {radius, fomalhaut};
+
+% plot_star_on_spherical_biangle {fomalhaut, 18, label_pos_top, 0, 0};
+
+% %% *** (3) 19. Deneb
+
+% plot_star_on_sphere {radius, deneb};
+
+% plot_star_on_spherical_biangle {deneb, 19, label_pos_top, 0, 0};
+
+% %% *** (3) 20. Mimosa
+
+% plot_star_on_sphere {radius, mimosa};
+
+% plot_star_on_spherical_biangle {mimosa, 20, label_pos_bot, -7pt, 0};
+
+% %% *** (3) 21. Regulus
+
+% plot_star_on_sphere {radius, regulus};
+
+% plot_star_on_spherical_biangle {regulus, 21, label_pos_top, 0, 0};
+
+% %% *** (3)
+
+% %% *** (3) 22. Adhara
+
+% plot_star_on_sphere {radius, adhara};
+
+% plot_star_on_spherical_biangle {adhara, 22, label_pos_lft, 0, 0};
+
+% %% *** (3) 23. Castor
+
+% plot_star_on_sphere {radius, castor};
+
+% plot_star_on_spherical_biangle {castor, 23, label_pos_urt, 0, 0};
+
+% %% *** (3) 24. Shaula
+
+% plot_star_on_sphere {radius, shaula};
+
+% plot_star_on_spherical_biangle {shaula, 24, label_pos_top, 0, 0};
+
+% %% *** (3) 25. Gacrux
+
+% plot_star_on_sphere {radius, gacrux};
+
+% plot_star_on_spherical_biangle {gacrux, 25, label_pos_top, 0, 0};
+
+% %% *** (3) 26. Bellatrix
+
+% plot_star_on_sphere {radius, bellatrix};
+
+% plot_star_on_spherical_biangle {bellatrix, 26, label_pos_top, 0, 0};
+
+% %% *** (3) 27. Elnath
+
+% plot_star_on_sphere {radius, elnath};
+
+% plot_star_on_spherical_biangle {elnath, 27, label_pos_top, 0, 0};
+
+% %% *** (3) 28. Miaplacidus
+
+% plot_star_on_sphere {radius, miaplacidus};
+
+% plot_star_on_spherical_biangle {miaplacidus, 28, label_pos_top, 0, 0};
+
+% %% *** (3) 29. Alnilam
+
+% plot_star_on_sphere {radius, alnilam};
+
+% plot_star_on_spherical_biangle {alnilam, 29, label_pos_top, 0, 0};
+
+% %% *** (3) 30. Alnair
+
+% plot_star_on_sphere {radius, alnair};
+
+% plot_star_on_spherical_biangle {alnair, 30, label_pos_top, 0, 0};
+
+% %% *** (3) 31. Alnitak
+
+% plot_star_on_sphere {radius, alnitak};
+
+% plot_star_on_spherical_biangle {alnitak, 31, label_pos_lrt, 0, 0};
+
+% %% *** (3) 32. Alioth
+
+% plot_star_on_sphere {radius, alioth};
+
+% plot_star_on_spherical_biangle {alioth, 32, label_pos_top, -3pt, 0};
+
+% %% *** (3) 33. Mirfak
+
+% plot_star_on_sphere {radius, mirfak};
+
+% plot_star_on_spherical_biangle {mirfak, 33, label_pos_top, 0, 0};
+
+% %% *** (3) 34. Dubhe
+
+% plot_star_on_sphere {radius, dubhe};
+
+% plot_star_on_spherical_biangle {dubhe, 34, label_pos_top, 6pt, 0};
+
+% %% *** (3) 35. Regor
+
+% plot_star_on_sphere {radius, regor};
+
+% plot_star_on_spherical_biangle {regor, 35, label_pos_top, 0, 0};
+
+% %% *** (3) 36. Wezen
+
+% plot_star_on_sphere {radius, wezen};
+
+% plot_star_on_spherical_biangle {wezen, 36, label_pos_top, 0, 0};
+
+% %% *** (3) 37. Kaus Australis
+
+% plot_star_on_sphere {radius, kaus_australis};
+
+% plot_star_on_spherical_biangle {kaus_australis, 37, label_pos_top, 0, 0};
+
+% %% *** (3) 38. Alkaid
+
+% plot_star_on_sphere {radius, alkaid};
+
+% plot_star_on_spherical_biangle {alkaid, 38, label_pos_urt, 0, 0};
+
+% %% *** (3) 39. Sargas
+
+% plot_star_on_sphere {radius, sargas};
+
+% plot_star_on_spherical_biangle {sargas, 39, label_pos_top, 0, 0};
+
+% %% *** (3) 40. Avior
+
+% plot_star_on_sphere {radius, avior};
+
+% plot_star_on_spherical_biangle {avior, 40, label_pos_rt, 0, 0};
+
+% %% *** (3) 41. Menkalinan
+
+% plot_star_on_sphere {radius, menkalinan};
+
+% plot_star_on_spherical_biangle {menkalinan, 41, label_pos_bot, 0, 0};
+
+% %% *** (3) 42. Atria
+
+% plot_star_on_sphere {radius, atria};
+
+% plot_star_on_spherical_biangle {atria, 42, label_pos_top, 4pt, 0};
+
+% %% *** (3) 43. Alhena
+
+% plot_star_on_sphere {radius, alhena};
+
+% plot_star_on_spherical_biangle {alhena, 43, label_pos_top, 0, 0};
+
+% %% *** (3) 44. Peacock
+
+% plot_star_on_sphere {radius, peacock};
+
+% plot_star_on_spherical_biangle {peacock, 44, label_pos_top, 0, 0};
+
+% %% *** (3) 45. Koo_She
+
+% plot_star_on_sphere {radius, koo_she};
+
+% plot_star_on_spherical_biangle {koo_she, 45, label_pos_top, 0, 0};
+
+% %% *** (3) 46. Mirzam
+
+% plot_star_on_sphere {radius, mirzam};
+
+% plot_star_on_spherical_biangle {mirzam, 46, label_pos_lft, 0, 0};
+
+% %% *** (3) 47. Alphard
+
+% plot_star_on_sphere {radius, alphard};
+
+% plot_star_on_spherical_biangle {alphard, 47, label_pos_top, 0, 0};
+
+% %% *** (3) 48. Polaris
+
+% plot_star_on_sphere {radius, polaris};
+
+% plot_star_on_spherical_biangle {polaris, 48, label_pos_top, 0, 0};
+
+% %% *** (3) 49. Algieba
+
+% plot_star_on_sphere {radius, algieba};
+
+% plot_star_on_spherical_biangle {algieba, 49, label_pos_ulft, 0, 0};
+
+% %% *** (3) 50. Hamal
+
+% plot_star_on_sphere {radius, hamal};
+
+% plot_star_on_spherical_biangle {hamal, 50, label_pos_top, 0, 0};
+
+%% *** (3)
+
+%% ** (2) Figure and output commands.
+
+input "sample4.aux";
+
+%% ** (2)
+
+verbatim_metapost "end";
+  
+end;  
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
+
