@@ -988,17 +988,15 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 
-run: 3dldf$(EXEEXT) sample_3_labels_sorted.tex
+run: 3dldf$(EXEEXT) sample3.ldf sample3.lmc 
 	3dldf$(EXEEXT) sample3.ldf
 
-sample_3_labels_sorted.tex: sample3.mp
-	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
-
+# sample_3_labels_sorted.tex: sample3.mp
+# 	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
 
 .PHONY: ps
 
 ps: sample3.ps
-
 
 .PHONY: pdf
 
@@ -1022,7 +1020,9 @@ sample3.pdf: sample3.ps
 sample3.ps: sample3.dvi
 	dvips -o sample3.ps sample3.dvi
 
-sample3.dvi: sample3.tex sample3.0 sample_3_labels_sorted.tex
+## sample_3_labels_sorted.tex
+
+sample3.dvi: sample3.tex sample3.0 
 	tex sample3.tex
 
 sample3.0: sample3.mp
@@ -1031,17 +1031,33 @@ sample3.0: sample3.mp
 sample3.mp: 3dldf$(EXEEXT) sample3.ldf sample3.lmc sample3.aux 
 	3dldf$(EXEEXT) sample3.ldf
 
+
+sample4.pdf: sample4.ps
+	ps2pdf sample4.ps 
+
+sample4.ps: sample4.dvi
+	dvips -o sample4.ps sample4.dvi
+
+sample4.dvi: sample4.tex sample4.0 
+	tex sample4.tex
+
+sample4.0: sample4.mp
+	mpost sample4.mp
+
+sample4.mp: 3dldf$(EXEEXT) sample4.ldf sample3.lmc sample4.aux 
+	3dldf$(EXEEXT) sample4.ldf
+
 .PHONY : run-bi
 
 run-bi: 3dldf$(EXEEXT) 
-	3dldf$(EXEEXT) --bi sample3.ldf
+	3dldf$(EXEEXT) --bi sample4.ldf
 
 .PHONY : run-fbi
 
 run-fbi: 
 	rm -f parser.o
 	$(MAKE) 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) --bi sample3.ldf
+	3dldf$(EXEEXT) --bi sample4.ldf
 
 .PHONY : run-1
 run-1: 3dldf$(EXEEXT)

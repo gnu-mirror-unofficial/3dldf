@@ -51,41 +51,6 @@
 
 %% ** (2)
 
-macro draw_lines;
-
-def draw_lines =
-
-  if do_black:
-    fill Q;
-    ccolor := dark_gray;
-  else:
-    ccolor := black;
-  fi;
-    
-  drawdot origin with_pen medium_pen with_color ccolor;
-  draw p20 -- p21 with_color ccolor;
-  draw p22 -- p23 with_color ccolor;
-  draw p24 -- p25 with_color ccolor;
-  draw (p24 -- p25) rotated (180, 0) with_color ccolor;
-  draw p26 -- p27 with_color ccolor;
-  draw (p26 -- p27) rotated (180, 0) with_color ccolor;
-  draw p28 -- p29 with_color ccolor;
-  draw (p28 -- p29) rotated (180, 0)  with_color ccolor;
-  output current_picture with_projection parallel_x_y;
-  clear current_picture;
-  
-  draw p30 -- p31 with_color ccolor;
-  draw p32 -- p33 with_color ccolor;
-  draw p34 -- p35 with_color ccolor;
-  draw p36 -- p37 with_color ccolor;
-  draw p50 -- p51 with_color ccolor;
-  draw p52 -- p53 with_color ccolor;
-  draw p54 -- p55 with_color ccolor;
-  draw p56 -- p57 with_color ccolor;
-    
-enddef;
-
-
 do_black := true;
 
 picture save_picture;
@@ -164,6 +129,12 @@ beginfig(7);
   output tab_picture with_projection parallel_x_y;
 endfig;
 
+%% *** (3)
+
+verbatim_metapost "end";
+  
+end;  
+
 %% ** (2)
 
 focus f;
@@ -220,9 +191,9 @@ beginfig(11);
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -(radius + 1.25cm)));
 endfig with_projection parallel_z_y; 
 
-beginfig(12);
-  currentpicture := label_picture;
-endfig with_projection parallel_z_y; 
+% beginfig(12);
+%   currentpicture := label_picture;
+% endfig with_projection parallel_z_y; 
 
 verbatim_metapost "end";
   
