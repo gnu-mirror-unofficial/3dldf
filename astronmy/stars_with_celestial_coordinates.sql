@@ -2070,11 +2070,65 @@ approx_rank_apparent_magnitude limit 100;
 
 Missing:      61, 97, 
 
+Name missing: 75, 79, 99 
+
+%% *** (3)
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+-- flamsteed_designation_number,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_multiple
+)
+values (
+"Almach",
+61,
+2.27,
+"gamma",
+"Andromedae",
+"And",
+"Andromeda",
+19,
+2, -- Right ascension
+3,
+53.95229,
+42, -- Declination
+19,
+47.0223,
+4);
+
+select * from Stars where common_name = "Almach"\G
+
+select * from Constellations where name = "Andromeda";
+
+
 61. Gamma Andromedae          Almach            02 04 +42.3  137.0 -18.6  K3II+B8V+A0V  2.10  -3.08    9.19 0.73   360
+
+Right ascension 	02h 03m 53.95229s[1]
+Declination 	+42° 19′ 47.0223″[1]
+Apparent magnitude (V) 	2.27[2]
+quadruple star system
+
+
+/* *** (3) Graffias  */
+
+/* !! START HERE:  LDF 2021.07.13.  */ 
 
 97. Beta Scorpii              Graffias          16 05 -19.8  353.1 +23.7  B1V+B2V       2.56  -3.50    6.15 1.12   530
 
-Name missing: 75, 79, 99 
+
 
 75. Epsilon Centauri                            13 40 -53.5  310.2  +8.7  B1III         2.29  -3.02    8.68 0.77   380
 
