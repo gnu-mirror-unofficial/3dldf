@@ -1,0 +1,204 @@
+%% sample5.tex
+%% Created by Laurence D. Finston (LDF) Wed 14 Jul 2021 03:19:08 PM CEST
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
+%%%% Copyright (C) 2021 The Free Software Foundation, Inc.
+   
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version. 
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details. 
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html. 
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de.
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for the maintainer of 
+%%%% GNU 3DLDF to send announcements to users. 
+%%%% To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+
+
+%% * (1)
+
+\input eplain
+\input epsf 
+\nopagenumbers
+
+%% * (1)
+
+
+\pageno=1
+
+%% Uncomment for A4 portrait
+\iffalse % \iftrue
+\special{papersize=210mm, 297mm}
+\hsize=210mm
+\vsize=297mm
+\fi
+
+%% Uncomment for A4 landscape.
+\iffalse % \iftrue
+\special{papersize=297mm, 210mm}
+\hsize=297mm
+\vsize=210mm
+\fi
+
+%% Uncomment for DIN A3 portrait.
+\iffalse % \iftrue
+\special{papersize=297mm, 420mm} %% DIN A3 Portrait
+\vsize=420mm
+\hsize=297mm
+\fi
+
+%% Uncomment for A3 landscape.
+\iftrue % \iffalse
+\special{papersize=420mm, 297mm} %% DIN A3 Landscape
+\vsize=297mm
+\hsize=420mm
+\fi
+
+\advance\voffset by -1in
+\advance\voffset by 1.25cm
+\advance\hoffset by -1in
+\advance\hoffset by 1cm
+
+\parindent=0pt
+
+%% *** (3) 
+
+\def\epsfsize#1#2{#1}
+
+\font\bx=cmbx10
+\font\small=cmr8
+\font\smalltt=cmtt8
+\font\large=cmr12
+\font\largebx=cmbx12
+\font\Large=cmr17
+\font\huge=cmr17 scaled \magstep1
+
+%% *** (3) 
+
+\newbox\starboxzero
+\newbox\starboxone
+\newbox\starboxtwo
+\newbox\starboxthree
+\newbox\starboxfour
+\newbox\starboxfive
+\newbox\starboxsix
+\newbox\starboxseven
+
+
+%% *** (3)
+
+\setbox0=\vbox{\epsffile{sample5.0}}
+\dimen0=\ht0
+
+\def\starinfo#1#2#3{\begingroup\setbox0=\hbox{Decl.~}\hbox to 3cm{\vbox{\hbox{#1}%
+\hbox{\hbox to \wd0{RA\hfil}$#2^\circ$}\hbox{\unhbox0 $#3^\circ$}\vskip.75\baselineskip plus 6pt minus 3pt}%
+\hskip2em plus 4pt minus 2pt\hss}\endgroup}
+
+\setbox\starboxzero=\vtop{\vskip-\dimen0
+\input sample_5_0.tex
+\vss}
+
+\setbox\starboxone=\vtop{\vskip-\dimen0
+\input sample_5_1.tex
+\vss}
+
+\setbox\starboxtwo=\vtop{\vskip-\dimen0
+\input sample_5_2.tex
+\vss}
+
+\setbox\starboxthree=\vtop{\vskip-\dimen0
+\input sample_5_3.tex
+\vss}
+
+\setbox\starboxfour=\vtop{\vskip-\dimen0
+\input sample_5_4.tex
+\vss}
+
+\setbox\starboxfive=\vtop{\vskip-\dimen0
+\input sample_5_5.tex
+\vss}
+
+\setbox\starboxsix=\vtop{\vskip-\dimen0
+\input sample_5_6.tex
+\vss}
+
+\setbox\starboxseven=\vtop{\vskip-\dimen0
+\input sample_5_7.tex
+\vss}
+
+
+%% *** (3)
+
+\leftline{{\bx sample 5}}
+\vskip\baselineskip
+\line{\epsffile{sample5.0}\box\starboxzero\hskip-.5cm\epsffile{sample5.1}\box\starboxone
+\hskip-.5cm\epsffile{sample5.2}\box\starboxtwo\hskip-.5cm\epsffile{sample5.3}\box\starboxthree
+\hss}
+\vfil\eject
+
+%% *** (3)
+
+\line{\epsffile{sample5.4}\box\starboxfour\hskip-.5cm\epsffile{sample5.5}\box\starboxfive
+\hskip-.5cm
+\epsffile{sample5.6}\box\starboxsix\hskip-.5cm\epsffile{sample5.7}\box\starboxseven
+\hss}
+\vfil\eject
+
+%% %% *** (3) 
+
+\line{\epsffile{sample5.8}\hskip.25cm\epsffile{sample5.9}\hss}
+\vskip.5cm
+\line{\epsffile{sample5.10}\hskip.25cm\epsffile{sample5.11}\hss}
+\vfil\eject
+
+
+%% *** (3) End here
+
+\bye
+
+%% ** (2)
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:TeX
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
+

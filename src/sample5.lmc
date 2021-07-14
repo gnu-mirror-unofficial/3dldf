@@ -1,0 +1,1000 @@
+%%% sample3.lmc
+%%%% Created by Laurence D. Finston (LDF) Sat 03 Jul 2021 11:27:34 PM CEST
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2021 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+  
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+% * (1) Beginning of 3DLDF code.
+
+verbatim_metapost "verbatimtex \font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch etex;";
+
+%% *** (3) Draw spherical biangle
+
+macro get_spherical_biangles;
+
+def get_spherical_biangles {numeric rad} =
+
+  circle c[];
+  numeric a;
+  numeric radius[];
+  numeric circum[];
+  path edge[];
+  path tab[];
+  numeric n[];
+  point ra_decl_zero_pt;
+  numeric tab_wd;
+
+  tab_wd := .375cm;
+  
+  radius0 := rad;
+
+  ra_decl_zero_pt := (rad, 0);
+  
+  c0 := unit_circle scaled (radius0, 0, radius0) rotated (90, 0);
+  a := circumference c0;   %% a == Circumference of horizontal great circle.
+
+  %draw c0 with_color red;
+
+  p0 := (-radius0, 0);
+  p1 := (radius0, 0);
+
+  %message "magnitude (p1 - p0) (diameter of c0):";
+  %show magnitude (p1 - p0);
+
+  %draw p0 -- p1;  %% Horizontal line through origin.
+
+  %dotlabel.lft("$p_0$", p0);
+  %dotlabel.rt("$p_1$", p1);
+
+  p2 := (0, -radius0);
+  p3 := (0, radius0);
+
+  %draw p2 -- p3;  %% Vertical line through origin.
+
+  %dotlabel.bot("$p_2$", p2);
+  %dotlabel.top("$p_3$", p3);
+
+  j := 4;
+  for i = 11.25 step 11.25 until 78.75:
+    p[j] := p1 rotated (0, 0, i);
+    p[j + 1] := (0, ypart p[j]);
+    %draw p[j + 1] -- p[j];
+    %dotlabel.rt("$p_{" & decimal j & "}$", p[j]);
+    radius[j] := magnitude(p[j] - p[j + 1]);
+    c[j] := unit_circle scaled (radius[j], 0, radius[j]);
+    circum[j] := circumference c[j];
+    biangle_width[j] := circum[j] / 8;
+    message "biangle_width[" & decimal j & "]:";
+    show biangle_width[j];
+    j += 2;
+  endfor;
+
+%% **** (4)
+
+  %draw c0 with_color red;
+
+  edge0 := null_path; 
+  edge1 := null_path; 
+  edge2 := null_path;  
+  edge3 := null_path;  
+
+  tab0 := null_path; 
+  tab1 := null_path;  
+
+  edge0 += ..;
+  edge1 += ..;
+  edge2 += ..;
+  edge3 += ..;
+
+  tab0 += ..;
+  tab1 += ..;
+
+  
+  n0 := a / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
+  n1 := a / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
+                %% increments of 11.25 deg.
+
+  p20 := (-.5n0, 0);
+  p21 := (.5n0, 0);
+
+  label.rt("$0^\circ$", p21 shifted (1cm, 0));
+
+  dotlabel.lft("$p_{20}$", p20);
+  dotlabel.rt("$p_{21}$", p21);
+
+  edge0 += p20;
+  edge1 += p21;
+
+  tab0 += p20 shifted (-tab_wd, 0);
+
+  draw p20 -- p20 shifted (-tab_wd, 0) on_picture tab_picture;
+  
+  p22 := (0, -.25a);
+  p23 := (0, .25a);
+
+  dotlabel.bot("$p_{22}$", p22);
+  dotlabel.top("$p_{23}$", p23);
+  label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
+  label.rt("$90^\circ$", p23 shifted (.25cm, 0));
+
+  j := 24;
+  k := 4;
+  for i = 1 step 1 until 7:
+    p[j]     := (-.5biangle_width[k], (i * n1));
+    p[j + 1] := (.5biangle_width[k], (i * n1));
+    dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
+    dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
+    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
+    edge0 += p[j];
+    edge1 += p[j + 1];
+
+    tab0 += p[j] shifted (-tab_wd, 0);
+    draw p[j] -- p[j] shifted (-tab_wd, 0) on_picture tab_picture;
+    draw (p[j] -- p[j] shifted (-tab_wd, 0)) rotated (180, 0) on_picture tab_picture;
+    
+    j += 2;
+    k += 2;
+  endfor;
+
+
+  dotlabel.lft("$p_{24}$", p24);
+  dotlabel.rt("$p_{25}$", p25);
+  
+  j := 1;
+
+  for i := 24 step 2 until 37:
+    p[20 + i] := p[i] rotated (180, 0);
+    p[20 + 1 + i] := p[i + 1] rotated (180, 0);
+    dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
+    dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
+    label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
+    j += 1;
+  endfor;
+
+  if false:
+    draw p20 -- p21;
+    draw (p20 -- p21) rotated (180, 0);
+    draw p22 -- p23;
+    draw p24 -- p25;
+    draw (p24 -- p25) rotated (180, 0);
+    draw p26 -- p27;
+    draw (p26 -- p27) rotated (180, 0);
+    draw p28 -- p29;
+    draw (p28 -- p29) rotated (180, 0) ;
+    draw p30 -- p31;
+    draw (p30 -- p31) rotated (180, 0);
+    draw p32 -- p33;
+    draw (p32 -- p33) rotated (180, 0);
+    draw p34 -- p35;
+    draw (p34 -- p35) rotated (180, 0);
+    draw p36 -- p37;
+    draw (p36 -- p37) rotated (180, 0);
+  fi;
+
+  tab0 += --;
+  tab0 += p36;
+
+  edge0 += p23;
+  edge1 += p23;
+
+  edge2 := edge0 rotated (180, 0);
+  edge3 := edge1 rotated (180, 0);
+
+  tab1 := tab0 rotated (180, 0);
+  
+  draw edge0;
+  draw edge1;
+  draw edge2;
+  draw edge3;
+
+  draw tab0 on_picture tab_picture;
+  draw tab1 on_picture tab_picture;
+  
+  %drawarrow edge0 with_color blue with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p100 := get_last_point edge0;
+  %drawdot p100 with_color blue with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  %drawarrow edge1 with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p101 := get_last_point edge1;
+  %drawdot p101 with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  %drawarrow edge2 with_color green with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p102 := get_last_point edge2;
+  %drawdot p102 with_color green with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  %drawarrow edge3 with_color cyan with_pen pencircle scaled (3pt, 3pt, 3pt);
+  p103 := get_last_point edge3;
+  %drawdot p103 with_color cyan with_pen pencircle scaled (8pt, 8pt, 8pt);
+
+  
+  Q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
+
+  Q += cycle;
+
+  for i = 0 upto 7:
+    bi_ang_pict[i] := current_picture;
+    label.urt("{\largebf " & decimal i & "}", origin) on_picture bi_ang_pict[i];
+  endfor;
+  
+  label("RA $337.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[0];
+  label("$0^\circ$",        p22 shifted (0, -.75cm))      bi_ang_pict[0];
+  label("$22.5^\circ$",     p22 shifted (1.25cm, -.75cm)) bi_ang_pict[0];
+
+  label("RA $22.5^\circ$", p22 shifted (-1.5cm, -.75cm))  bi_ang_pict[1];
+  label("$45^\circ$",      p22 shifted (0, -.75cm))       bi_ang_pict[1];
+  label("$67.5^\circ$",    p22 shifted (1.25cm, -.75cm))  bi_ang_pict[1];
+
+  label("RA $67.5^\circ$",  p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[2];
+  label("$90^\circ$",       p22 shifted (0, -.75cm))      bi_ang_pict[2];
+  label("$112.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[2];
+
+  label("RA $112.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[3];
+  label("$135^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[3];
+  label("$157.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[3];
+
+  label("RA $157.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[4];
+  label("$180^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[4];
+  label("$202.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[4]; 
+
+  label("RA $202.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[5];
+  label("$225^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[5];
+  label("$247.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[5];
+
+  label("RA $247.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[6];
+  label("$270^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[6];
+  label("$292.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[6];
+
+  label("RA $292.5^\circ$", p22 shifted (-1.5cm, -.75cm)) bi_ang_pict[7];
+  label("$315^\circ$",      p22 shifted (0, -.75cm))      bi_ang_pict[7];
+  label("$337.5^\circ$",    p22 shifted (1.25cm, -.75cm)) bi_ang_pict[7];
+  
+  clear current_picture;
+  
+enddef;
+
+%% ** (2) macro get_sphere_for_plotting_stars
+
+macro get_sphere_for_plotting_stars;
+
+def get_sphere_for_plotting_stars {numeric rradius} :=
+
+  numeric i;
+  numeric j;
+  string u[];
+  point r[];
+  sphere s;
+  circle c;
+  circle ecliptic;
+  point ra_decl_zero_pt;
+
+  j := 0;
+  m := 0;
+  j := 11.25; 
+
+  message "rradius:"; 
+  show rradius;
+
+  ra_decl_zero_pt := (rradius, 0);
+  r16 := ra_decl_zero_pt;
+
+  ecliptic := unit_circle scaled (rradius, 0, rradius) rotated (-23.4, 0);
+  %draw ecliptic with_color blue;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+  
+%% Find out why using the 'set' command for 'sphere s' didn't work here.  LDF 2021.7.1.
+  
+  s := unit_sphere scaled (rradius, rradius, rradius);
+
+  draw s;
+  
+  j := 0;
+  for i = 0 step 22.5 until 337.5:
+    r[j] := (rradius, 0) rotated (0, i);
+    u[j] := "$" & decimal i & "^\circ$";
+    j += 1;
+  endfor;
+  
+  v8  := current_picture;
+  v9  := current_picture;
+  v10 := current_picture;
+  v11 := current_picture;
+
+  clear current_picture;
+  
+  dotlabel.rt(u0, r0) v10;
+  dotlabel.rt(u1, r1) v10;
+  dotlabel.rt(u2, r2) v10;
+  dotlabel.urt(u3, r3) v10;
+  dotlabel.top(u4, r4) v10;
+  dotlabel.ulft(u5, r5) v10;
+  dotlabel.lft(u6, r6) v10;
+  dotlabel.lft(u7, r7) v10;
+  dotlabel.lft(u8, r8) v10;
+  dotlabel.lft(u9, r9) v10;
+  dotlabel.lft(u10, r10) v10;
+  dotlabel.llft(u11, r11) v10;
+  dotlabel.bot(u12, r12) v10;
+  dotlabel.lrt(u13, r13) v10;
+  dotlabel.rt(u14, r14) v10;
+  dotlabel.rt(u15, r15) v10;
+  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v8;
+  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v9;
+  label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
+  dotlabel.rt("$r_{16}$", r16) v11;
+
+%% *** (3) Declination
+
+  r20 := r16 rotated (0, 0, 11.25);
+  r21 := r16 rotated (0, 0, -11.25);
+  dotlabel.rt("$11.25^\circ$", r20) v9;
+  dotlabel.rt("$-11.25^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$22.5^\circ$", r20) v9;
+  dotlabel.rt("$-22.5^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$33.75^\circ$", r20) v9;
+  dotlabel.rt("$-33.75^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$45.0^\circ$", r20) v9;
+  dotlabel.rt("$-45.0^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.urt("$56.25^\circ$", r20) v9;
+  dotlabel.lrt("$-56.25^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.urt("$67.5^\circ$", r20) v9;
+  dotlabel.lrt("$-67.5^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.top("$78.75^\circ$", r20) v9;
+  dotlabel.lrt("$-78.75^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.top("$90^\circ$", r20) v9;
+  dotlabel.bot("$-90^\circ$", r21) v9;
+
+  r18 := r16 rotated (0, 22.5);
+  dotlabel.llft("$22.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$45^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$67.5^\circ$", r18) v8; 
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$90^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$112.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$135^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$157.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lft("$180^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lft("$202.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$225^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$247.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lrt("$270^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$292.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$315^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.rt("$337.5^\circ$", r18) v8;
+  
+%% *** (3)
+  
+  c := unit_circle scaled (rradius, 0, rradius);
+  draw c with_color red on_picture v8;
+  draw c with_color red on_picture v11;
+
+enddef;
+
+%% ** (2) macro plot_star_on_sphere
+
+macro plot_star_on_sphere;
+
+def plot_star_on_sphere {numeric rradius, star S} =
+
+  path q[];
+  string u[];
+  point P[];
+  circle c[];
+  numeric a[];
+  transform t[];
+
+  pv += 4;
+  c0 := unit_circle scaled (rradius, 0, rradius);
+  
+  ra_decl_zero_pt := (rradius, 0);
+  
+  u0 := common_name S;
+  message "star S == " & u0 & ".";
+
+  a0 := ra_decimal_degrees S;
+  message "RA decimal deg. of star S (" & u0 & ") (a0):";
+  show a0;
+
+  a1 := declination_decimal_degrees S;
+  message "Declination decimal deg. of star S (" & u0 & ") (a1):";
+  show a1;
+
+  P17 := ra_decl_zero_pt rotated (0, a0);
+  dotlabel.top("$P_{17}$", P17) pv[ctr];
+  label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
+  dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
+  dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
+  dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
+
+  P19 := ra_decl_zero_pt rotated (0, 0, a1);
+  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
+  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr + 1];
+
+  P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
+
+  q0 := origin -- P17 -- P22 --cycle;
+
+  draw q0 with_color blue on_picture pv[ctr];
+  draw q0 with_color blue on_picture pv[ctr + 1];
+  draw q0 with_color blue on_picture pv[ctr + 2];
+  draw q0 with_color blue on_picture pv[ctr + 3];
+
+  P23 := get_normal q0;
+  show P23;
+
+
+  t0 := identity rotated_around (origin, P23) 3;
+
+  P24 := P17 transformed t0; 
+
+  if (magnitude (P22 - P24)) > (magnitude (P22 - P17)):
+    invert t0;
+  fi;
+
+  P24 := P17;
+  
+  q1 += ..;
+
+  q1 += P17;
+
+  forever:
+    P24 *= t0;
+    exit_if magnitude(ypart P24) >= magnitude(ypart P22);
+    q1 += P24;
+  endfor;
+
+  q1 += P22;
+
+  draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
+  draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
+  draw q1 on_picture pv[ctr + 3] with_pen medium_pen with_color orange;
+
+  dotlabel.lft("$P_{22}$", P22) pv[ctr];
+  dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
+  dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
+  dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
+  message "a0 (RA of star S in decimal degrees):";
+  show a0;
+
+  if (a0 == 337.5):
+    message "a0 (RA) == 337.5";
+    bi_ang0 := 0;
+    bi_ang1 := 7;
+  elseif (a0 > 337.5) or (a0 < 22.5):
+    message "a0 (RA) > 337.5 or < 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := -1;
+    middle_angle := 0;       %% This case requires special handling.
+    min_edge_angle := 337.5;
+    max_edge_angle := 22.5;
+  elseif (a0 == 22.5):
+    message "a0 (RA) == 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := 1;
+  elseif (a0 > 22.5) and (a0 < 67.5):
+    message "a0 (RA) > 22.5 or a0 < 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := -1;
+    middle_angle   := 45;
+    min_edge_angle := 22.5;
+    max_edge_angle := 67.5;
+  elseif (a0 == 67.5):
+    message "a0 (RA) == 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := 2;
+  elseif (a0 > 67.5) and (a0 < 112.5):
+    message "a0 (RA) > 67.5 and a0 < 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := -1;
+    middle_angle   := 90;
+    min_edge_angle := 67.5;
+    max_edge_angle := 112.5;
+  elseif (a0 == 112.5):
+    message "a0 (RA) == 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := 3;
+  elseif (a0 > 112.5) and (a0 < 157.5):
+    bi_ang0 := 3;
+    bi_ang1 := -1;
+    middle_angle   := 135;
+    min_edge_angle := 112.5;
+    max_edge_angle := 157.5;
+  elseif a0 == 157.5:
+    message "a0 (RA) == 157.5";
+    bi_ang0 := 3;
+    bi_ang1 := 4;
+  elseif (a0 > 157.5) and (a0 < 202.5):
+    message "a0 (RA) > 157.5 and a0 < 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := -1;
+    middle_angle   := 180;
+    min_edge_angle := 157.5;
+    max_edge_angle := 202.5;
+  elseif a0 == 202.5:
+    message "a0 (RA) == 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := 5;
+  elseif (a0 > 202.5) and (a0 < 247.5):
+    message "a0 (RA) > 202.5 and a0 < 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := -1;
+    middle_angle   := 225;
+    min_edge_angle := 202.5;
+    max_edge_angle := 247.5;
+  elseif a0 == 247.5:
+    message "a0 (RA) == 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := 6;
+  elseif (a0 > 247.5) and (a0 < 292.5):
+    message "a0 (RA) > 247.5 and a0 < 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := -1;
+    middle_angle   := 270;
+    min_edge_angle := 247.5;
+    max_edge_angle := 292.5;
+  elseif a0 == 292.5:
+    message "a0 (RA) == 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := 7;
+  elseif (a0 > 292.5) and (a0 < 337.5):
+    message "a0 (RA) > 292.5 and a0 < 337.5";
+    bi_ang0 := 7;
+    bi_ang1 := -1;
+    middle_angle   := 315;
+    min_edge_angle := 292.5;
+    max_edge_angle := 337.5;
+  else:
+    errmessage "a0 (RA) has invalid value.";
+  fi;
+
+  message "bi_ang0:"; 
+  show bi_ang0;
+
+  message "bi_ang1:"; 
+  show bi_ang1;
+
+  message "middle_angle:";
+  show middle_angle;   
+
+  message "min_edge_angle:";
+  show min_edge_angle; 
+
+  message "max_edge_angle:";
+  show max_edge_angle; 
+
+  message "P22:";
+  show P22;
+  
+  P25 := (0, ypart P22);  %% Point on y-axis with height equal to declination of star S.
+
+  message "P25:";
+  show P25;
+
+  dotlabel.ulft("$P_{25}$", P25) on_picture pv[ctr];
+  dotlabel.rt("$P_{25}$", P25) pv[ctr + 1];
+  dotlabel.rt("$P_{25}$", P25) pv[ctr + 3];
+
+  message "a1 (declination_decimal_degrees S)";
+  show a1;
+
+  a2 := magnitude(P22 - P25);
+  message "a2 (rradius of circle through P22):";
+  show a2;
+
+  c1 := unit_circle scaled (a2, 0, a2) shifted (0, ypart P25);
+  draw c1 with_color cyan on_picture pv[ctr];
+  draw c1 with_color cyan on_picture pv[ctr + 1];
+  draw c1 with_color cyan on_picture pv[ctr + 2];
+  draw c1 with_color cyan on_picture pv[ctr + 3];
+  
+  a3 := arc_length (magnitude(a1)) c0;
+
+  message "a3 (arc length corresponding to declination of star S):";
+  show a3;
+
+  Declination_arc_length := a3;
+  
+  message "a0 (RA of star S in decimal degrees):";
+  show a0;
+
+  numeric middle_angle_one;
+  
+  if a0 >= 337.5:
+    middle_angle_one := 360;
+    a4 := 360 - a0;
+  else:
+    middle_angle_one := middle_angle;
+    a4 := middle_angle - a0;
+  fi;
+
+  if middle_angle_one > a0:
+    a4 := -magnitude(a4);
+  elseif middle_angle_one < a0:
+    a4 := -magnitude(a4);
+  fi;
+ 
+  if (a0 == middle_angle) or (a0 == middle_angle_one):
+    message "a0 == middle_angle (or middle_angle_one) == " & decimal middle_angle & ".  Don't need arc length for second arc.";
+    message "Setting RA_arc_length to 0.";
+    RA_arc_length := 0;
+  else:
+    message "a0 == " & decimal a0 & " is not equal to middle_angle == " & decimal middle_angle & ".";
+    message "Will calculate second arc length.";
+    message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
+    show a4;
+    
+    q2 := q0 rotated (0, a4);
+    draw q2 with_color magenta on_picture pv[ctr];
+    draw q2 with_color magenta on_picture pv[ctr + 1];
+    draw q2 with_color magenta on_picture pv[ctr + 2];
+    draw q2 with_color magenta on_picture pv[ctr + 3];
+
+    P26 := P22 rotated (0, a4);
+    dotlabel.bot("$P_{26}$", P26) on_picture pv[ctr];
+
+    a5 := arc_length (magnitude(a4)) c1;
+    message "a5 (arc length of angle " & decimal magnitude(a4) & " of circle c1 with rradius " & decimal a2 & "):";
+    show a5;
+
+    RA_arc_length := a5;
+    
+    P27 := P22;
+
+    a6 := magnitude(P26 - P22);
+
+    q3 += ..;
+    q3 += P27;
+
+    a7 := 3;
+    if a4 < 0:
+      a7 *= -1;
+    fi;
+    
+    forever:
+      exit_if magnitude(P27 - P22) > a6;
+      rotate P27 (0, a7);
+      q3 += P27;
+    endfor;
+
+    q3 += P26;
+    
+    draw q3 with_color green with_pen large_pen on_picture pv[ctr];
+    draw q3 with_color green with_pen large_pen on_picture pv[ctr + 1];
+    draw q3 with_color green with_pen large_pen on_picture pv[ctr + 2];
+    draw q3 with_color green with_pen large_pen on_picture pv[ctr + 3];
+  fi;
+
+  message "Declination_arc_length:";
+  show Declination_arc_length;
+
+  message "RA_arc_length:";
+  show RA_arc_length;
+
+  i += 4;
+  
+enddef;
+
+%% ** (2) Macro plot_star_on_spherical_biangle
+
+macro plot_star_on_spherical_biangle;
+
+def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos, numeric shift_x, numeric shift_y} =
+  
+  numeric decl;
+  numeric ra;
+  string s;
+  point y_axis_point;
+  numeric box_wd;
+  numeric box_ht;
+  pen star_pen[];
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+  message "Entering macro `plot_star_on_spherical_biangle'.";
+  
+  decl := declination_decimal_degrees S;
+  ra   :=  right_ascension_decimal_degrees S;
+
+  star_pen[-1] := pencircle scaled (8pt, 8pt, 8pt);       
+  star_pen[0]  := pencircle scaled (7pt, 7pt, 7pt); 
+  star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);       
+  star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
+  star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
+  star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
+  star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);       
+  
+  message "decl:";
+  show decl;
+
+  message "ra:";
+  show ra;
+
+  message "bi_ang0:";
+  show bi_ang0;
+
+  message "bi_ang1:";
+  show bi_ang1;
+
+  message "middle_angle:";
+  show middle_angle;
+
+  message "min_edge_angle:";
+  show min_edge_angle;
+
+  message "max_edge_angle:";
+  show max_edge_angle;
+
+  message "Declination_arc_length:";
+  show Declination_arc_length;
+
+  message "RA_arc_length:";
+  show RA_arc_length;
+
+  message "ra_decl_zero_pt:";
+  show ra_decl_zero_pt;
+
+%% !! START HERE: LDF 2021.7.6.  Add code for the case of stars on the y-axis or on one of the edges.
+  
+  if bi_ang1 == -1:
+    message "bi_ang0 == " & decimal bi_ang0 & " and bi_ang1 == -1.";
+    if decl >= 0:
+      y_axis_point := (0, Declination_arc_length);
+    else:
+      y_axis_point := (0, -Declination_arc_length);
+    fi;
+
+    % if ra > middle_angle:
+    %   dotlabel.lft("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % else:
+    %   dotlabel.rt("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % fi;
+
+    message "ra";
+    show ra;
+    message "middle_angle";
+    show middle_angle;
+    %pause;
+
+    if ra >= 336.5:
+      middle_angle := 360.0;
+    fi;
+    
+    if ra > middle_angle:
+      R[point_number] := (RA_arc_length, ypart y_axis_point);
+    else:
+      R[point_number] := (-RA_arc_length, ypart y_axis_point);
+    fi;
+
+    s := "\starinfo{$R_{" & decimal point_number & "}$ " & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
+
+    write s to nw[bi_ang0];
+    write s to star_info_combined;
+     
+    if label_pos == label_pos_zero:
+      label("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_top:
+      label.top("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_bot:
+      label.bot("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, -3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_lft:
+      label.lft("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_rt:
+      label.rt("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_urt:
+      label.urt("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_ulft:
+      label.ulft("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_lrt:
+      label.lrt("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, -3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    elseif label_pos == label_pos_llft:
+      label.llft("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, -3pt + shift_y))
+	with_text_color ccolor on_picture qv[bi_ang0];
+    fi;
+
+    numeric app_mag;
+    pen sstar_pen;
+
+    app_mag := apparent_magnitude S;
+
+    if app_mag < 0:
+      sstar_pen := star_pen[-1];
+    elseif app_mag < 1:
+      sstar_pen := star_pen[0];
+    elseif app_mag < 2:
+      sstar_pen := star_pen[1];
+    elseif app_mag < 3:
+      sstar_pen := star_pen[2];
+    elseif app_mag < 4:
+      sstar_pen := star_pen[3];
+    elseif app_mag < 5:
+      sstar_pen := star_pen[4];
+    else:
+      sstar_pen := star_pen[5];
+    fi;
+    
+    drawdot R[point_number]with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
+
+    if do_black:
+
+      box_wd := .75cm;
+      box_ht := .5cm;
+      
+      if length (common_name S) > 8:
+	box_wd += .25cm;
+      fi;
+
+      
+      s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr)
+	   & "}\\hskip2em plus 1em minus 1em"; 
+      
+      write (s) to label_out;
+      beginfig(100 + label_picture_ctr);
+	fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
+	label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
+	drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
+      endfig with_projection parallel_x_y;
+      label_picture_ctr += 1;
+    fi;
+
+    if do_extra_labels:
+      dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
+	on_picture qv[bi_ang0];
+    fi;
+
+  message "Exiting macro `plot_star_on_spherical_biangle'.";
+
+enddef;
+
+
+%% ** (2) macro draw_lines
+
+macro draw_lines;
+
+def draw_lines =
+
+  if do_black:
+    fill Q;
+    ccolor := dark_gray;
+  else:
+    ccolor := black;
+  fi;
+    
+  drawdot origin with_pen medium_pen with_color ccolor;
+  draw p20 -- p21 with_color ccolor;
+  draw p22 -- p23 with_color ccolor;
+  draw p24 -- p25 with_color ccolor;
+  draw (p24 -- p25) rotated (180, 0) with_color ccolor;
+  draw p26 -- p27 with_color ccolor;
+  draw (p26 -- p27) rotated (180, 0) with_color ccolor;
+  draw p28 -- p29 with_color ccolor;
+  draw (p28 -- p29) rotated (180, 0)  with_color ccolor;
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  
+  draw p30 -- p31 with_color ccolor;
+  draw p32 -- p33 with_color ccolor;
+  draw p34 -- p35 with_color ccolor;
+  draw p36 -- p37 with_color ccolor;
+  draw p50 -- p51 with_color ccolor;
+  draw p52 -- p53 with_color ccolor;
+  draw p54 -- p55 with_color ccolor;
+  draw p56 -- p57 with_color ccolor;
+    
+enddef;
+
+%% ** (2)
+
+endinput;
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
