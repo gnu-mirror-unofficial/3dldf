@@ -157,64 +157,144 @@ point M[];
 picture quadrant_picture;
 point star_point;
 star_point := origin;
+boolean b[];
+path quadrant[][];
+numeric RA;
+numeric Decl;
+numeric RA_ctr;
+numeric Decl_ctr;
+bool_point_vector bpv;
+numeric i;
+numeric j;
+string str;
+
+plot_star_on_sphere (star_point) {radius, hamal};
+
+
+plot_star_on_spherical_biangle {hamal, 101, label_pos_top, 0, 0};
+
+j := 0;
+
+for i := 0 step 22.5 until 337.5:
+  K0 := (origin shifted (radius, 0)) rotated (0, 0, 0);
+  K1 := K0 rotated (0, 0, 11.25);
+  rotate K0 (0, i);
+  rotate K1 (0, i);
+  K2 := K0 rotated (0, 22.5);
+  K3 := K1 rotated (0, 22.5);
+  D[j] := (K0, K1, K3, K2);
+  draw D[j] with_color green on_picture quadrant_picture;
+  label(decimal j, mediate(K0, K3)) on_picture quadrant_picture;
+  j += 1;
+endfor;
+  
+%% !! START HERE: LDF 2021.07.14.
+
+
+
+T0 := origin -- star_point;
+
+% bpv := T0 intersection_points D0;
+
+% message "bpv:"; 
+% show bpv;
+
+% b0 := bpv0;
+% b1 := bpv1;
+
+% if b0:
+%   message "bpv0 is true";
+%   M0 := bpv0;
+% elseif b1:
+%   message "bpv1 is true";
+%   M0 := bpv1;
+% else:
+%   message "bpv0 and bpv1 are both false";
+%   message "This can't happen.";
+% fi;
+
+% message "M0:"; 
+% show M0;
+
+% RA   := right_ascension_decimal_degrees hamal;
+% Decl := declination_decimal_degrees hamal; 
+
+% message "RA of Hamal:";
+% show RA;
+
+% message "Decl of Hamal:";
+% show Decl;
+
+% RA_ctr := floor (RA / 22.5);
+
+% Decl_ctr := floor (Decl / 11.25);
+
+% message "RA_ctr for Hamal:";
+% show RA_ctr;
+
+% message "Decl_ctr for Hamal:";
+% show Decl_ctr;
+
+% drawdot M0 with_color red with_pen Large_pen on_picture quadrant_picture;
+
+% pause;
+
+%% *** (3)
 
 plot_star_on_sphere (star_point) {radius, delta_piscium};
 
-M0 := star_point;
+plot_star_on_spherical_biangle {delta_piscium, 102, label_pos_top, 0, 0};
 
-plot_star_on_spherical_biangle {delta_piscium, 101, label_pos_top, 0, 0};
+% K4 := origin shifted (radius, 0);
+% K5 := K0 rotated (0, 22.5);
+% K6 := (origin shifted (radius, 0)) rotated (0, 0, 11.25);
+% K7 := K2 rotated (0, 22.5);
 
-K0 := origin shifted (radius, 0);
-K1 := K0 rotated (0, 22.5);
-K2 := (origin shifted (radius, 0)) rotated (0, 0, 11.25);
-K3 := K2 rotated (0, 22.5);
+% D1 := (K4, K6, K7, K5);
 
-D0 := (K0, K2, K3, K1);
+% T1 := origin -- star_point;
 
-T0 := origin -- M0;
+% bpv := T1 intersection_points D1;
 
-T1 := K0 -- K2 -- K3 -- K1 -- cycle;
+% message "bpv:"; 
+% show bpv;
 
-bool_point_vector bpv;
+% b0 := bpv0;
+% b1 := bpv1;
 
-bpv := T0 intersection_points D0;
+% if b0:
+%   message "bpv0 is true";
+%   M1 := bpv0;
+% elseif b1:
+%   message "bpv1 is true";
+%   M1 := bpv1;
+% else:
+%   message "bpv0 and bpv1 are both false";
+%   message "This can't happen.";
+% fi;
 
-message "M0:"; 
-show M0;
+% message "M1:"; 
+% show M1;
 
-message "bpv:"; 
-show bpv;
+RA   := right_ascension_decimal_degrees delta_piscium;
+Decl := declination_decimal_degrees delta_piscium; 
 
-message "bpv0:";
-show bpv0;
+message "RA of delta_piscium:";
+show RA;
 
-boolean b[];
-
-b0 := bpv0;
-b1 := bpv1;
-
-if b0:
-  message "bpv0 is true";
-else:
-  message "bpv0 is false";
-fi;
-
-if b1:
-  message "bpv1 is true";
-else:
-  message "bpv1 is false";
-fi;
+message "Decl of delta_piscium:";
+show Decl;
 
 pause;
 
-draw D0 with_color blue on_picture quadrant_picture;
+%draw D0 with_color blue on_picture quadrant_picture;
 
-drawdot bpv0 with_color red with_pen Large_pen on_picture quadrant_picture;
+% drawdot M1 with_color red with_pen Large_pen on_picture quadrant_picture;
 
-dotlabel.lft("$K_0$", K0) with_text_color blue with_dot_color blue on_picture quadrant_picture;
-dotlabel.urt("$K_1$", K1) with_text_color blue with_dot_color blue on_picture quadrant_picture;
-dotlabel.urt("$K_2$", K2) with_text_color blue with_dot_color blue on_picture quadrant_picture;
-dotlabel.urt("$K_3$", K3) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+% dotlabel.lft("$K_0$", K0) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+% dotlabel.urt("$K_1$", K1) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+% dotlabel.urt("$K_2$", K2) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+% dotlabel.urt("$K_3$", K3) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 
 %T0 := K0 -- K1 -- K3 -- K2 -- cycle;
 

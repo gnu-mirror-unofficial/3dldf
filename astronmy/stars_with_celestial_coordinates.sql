@@ -2004,7 +2004,7 @@ update Stars set apparent_magnitude = 1.99 where common_name = "Polaris";
 
 update Stars set apparent_magnitude_varies = 1 where common_name = "Polaris";
 
-/* !! START HERE:  Add entry */  Algieba           2.00  
+/* *** (3)  49.  Algieba */
 
 replace into Stars (
 common_name,
@@ -2062,8 +2062,7 @@ update Stars set apparent_magnitude = 2.01   where common_name = "Hamal";
 
 Hamal             2.01  
 
-
-%% *** (3)
+/* *** (3)  */
 
 select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars where approx_rank_apparent_magnitude > 0 order by
 approx_rank_apparent_magnitude limit 100;
@@ -2072,7 +2071,7 @@ Missing:      61, 97,
 
 Name missing: 75, 79, 99 
 
-%% *** (3)
+/* *** (3)  */
 
 replace into Stars (
 common_name,
@@ -2128,6 +2127,22 @@ quadruple star system
 
 97. Beta Scorpii              Graffias          16 05 -19.8  353.1 +23.7  B1V+B2V       2.56  -3.50    6.15 1.12   530
 
+/* *** (3) Delta Piscium  (for "quadrant" model (sample5)).  */
+
+select * from Stars where declination_decimal_degrees > 0 and declination_decimal_degrees < 11.25 and
+right_ascension_decimal_degrees > 0 and right_ascension_decimal_degrees < 22.5\G
+
+
+update Stars set common_name = "$\\delta$ Piscium" where bs_hr_number = 224;
+
+select * from Stars where common_name = "$\\delta$ Piscium"\G
+
+apparent visual magnitude of +4.4,
+
+HR 224,
+
+-- common_name != ""\G
+-- and approx_rank_apparent_magnitude > 0
 
 
 75. Epsilon Centauri                            13 40 -53.5  310.2  +8.7  B1III         2.29  -3.02    8.68 0.77   380
