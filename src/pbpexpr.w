@@ -367,10 +367,8 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.12.07.}
-Changed |path_tertiary| to |path_like_tertiary|
-and |path_secondary| to |path_like_secondary|.  
-Added code for finding the intersection point 
-of a linear |Path| and a planar |Path|.
+Changed |path_tertiary| to |path_like_tertiary| and |path_secondary| to |path_like_secondary|.  
+Added code for finding the intersection point of a linear |Path| and a planar |Path|.
 
 \initials{LDF 2005.10.24.}
 Changed |path_like_tertiary| and |path_like_secondary|
@@ -384,8 +382,7 @@ Replaced the code with a call to |Scan_Parse::intersection_points_func()|.
 @q ***** (5) Definition.@> 
 
 @<Define rules@>= 
-@=bool_point_tertiary: path_tertiary INTERSECTION_POINT@>@/
-@=path_secondary@>@/
+@=bool_point_tertiary: path_tertiary INTERSECTION_POINT path_secondary@>@/
 {
 
     @=$$@> = Scan_Parse::intersection_points_func<Path, Path, Bool_Point>(
@@ -422,8 +419,7 @@ Added this rule.
 
   @=$$@> = @=$1@>;
 
-}
-;
+};
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>

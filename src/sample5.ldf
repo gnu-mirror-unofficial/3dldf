@@ -160,6 +160,8 @@ star_point := origin;
 
 plot_star_on_sphere (star_point) {radius, delta_piscium};
 
+M0 := star_point;
+
 plot_star_on_spherical_biangle {delta_piscium, 101, label_pos_top, 0, 0};
 
 K0 := origin shifted (radius, 0);
@@ -169,9 +171,45 @@ K3 := K2 rotated (0, 22.5);
 
 D0 := (K0, K2, K3, K1);
 
-T0 := origin -- star_point;
+T0 := origin -- M0;
+
+T1 := K0 -- K2 -- K3 -- K1 -- cycle;
+
+bool_point_vector bpv;
+
+bpv := T0 intersection_points D0;
+
+message "M0:"; 
+show M0;
+
+message "bpv:"; 
+show bpv;
+
+message "bpv0:";
+show bpv0;
+
+boolean b[];
+
+b0 := bpv0;
+b1 := bpv1;
+
+if b0:
+  message "bpv0 is true";
+else:
+  message "bpv0 is false";
+fi;
+
+if b1:
+  message "bpv1 is true";
+else:
+  message "bpv1 is false";
+fi;
+
+pause;
 
 draw D0 with_color blue on_picture quadrant_picture;
+
+drawdot bpv0 with_color red with_pen Large_pen on_picture quadrant_picture;
 
 dotlabel.lft("$K_0$", K0) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 dotlabel.urt("$K_1$", K1) with_text_color blue with_dot_color blue on_picture quadrant_picture;
