@@ -451,7 +451,7 @@ enddef;
 
 macro plot_star_on_sphere;
 
-def plot_star_on_sphere {numeric rradius, star S} =
+def plot_star_on_sphere (pp) {numeric rradius, star S} =
 
   path q[];
   string u[];
@@ -489,12 +489,14 @@ def plot_star_on_sphere {numeric rradius, star S} =
 
   P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
 
+  pp := P22;
+
   q0 := origin -- P17 -- P22 --cycle;
 
-  draw q0 with_color blue on_picture pv[ctr];
-  draw q0 with_color blue on_picture pv[ctr + 1];
-  draw q0 with_color blue on_picture pv[ctr + 2];
-  draw q0 with_color blue on_picture pv[ctr + 3];
+  % draw q0 with_color blue on_picture pv[ctr];
+  % draw q0 with_color blue on_picture pv[ctr + 1];
+  % draw q0 with_color blue on_picture pv[ctr + 2];
+  % draw q0 with_color blue on_picture pv[ctr + 3];
 
   P23 := get_normal q0;
   show P23;
@@ -522,9 +524,10 @@ def plot_star_on_sphere {numeric rradius, star S} =
 
   q1 += P22;
 
-  draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
-  draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
-  draw q1 on_picture pv[ctr + 3] with_pen medium_pen with_color orange;
+
+  % draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
+  % draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
+  % draw q1 on_picture pv[ctr + 3] with_pen medium_pen with_color orange;
 
   dotlabel.lft("$P_{22}$", P22) pv[ctr];
   dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
@@ -659,10 +662,11 @@ def plot_star_on_sphere {numeric rradius, star S} =
   show a2;
 
   c1 := unit_circle scaled (a2, 0, a2) shifted (0, ypart P25);
-  draw c1 with_color cyan on_picture pv[ctr];
-  draw c1 with_color cyan on_picture pv[ctr + 1];
-  draw c1 with_color cyan on_picture pv[ctr + 2];
-  draw c1 with_color cyan on_picture pv[ctr + 3];
+
+  % draw c1 with_color cyan on_picture pv[ctr];
+  % draw c1 with_color cyan on_picture pv[ctr + 1];
+  % draw c1 with_color cyan on_picture pv[ctr + 2];
+  % draw c1 with_color cyan on_picture pv[ctr + 3];
   
   a3 := arc_length (magnitude(a1)) c0;
 
@@ -701,10 +705,11 @@ def plot_star_on_sphere {numeric rradius, star S} =
     show a4;
     
     q2 := q0 rotated (0, a4);
-    draw q2 with_color magenta on_picture pv[ctr];
-    draw q2 with_color magenta on_picture pv[ctr + 1];
-    draw q2 with_color magenta on_picture pv[ctr + 2];
-    draw q2 with_color magenta on_picture pv[ctr + 3];
+
+    % draw q2 with_color magenta on_picture pv[ctr];
+    % draw q2 with_color magenta on_picture pv[ctr + 1];
+    % draw q2 with_color magenta on_picture pv[ctr + 2];
+    % draw q2 with_color magenta on_picture pv[ctr + 3];
 
     P26 := P22 rotated (0, a4);
     dotlabel.bot("$P_{26}$", P26) on_picture pv[ctr];
@@ -735,10 +740,11 @@ def plot_star_on_sphere {numeric rradius, star S} =
 
     q3 += P26;
     
-    draw q3 with_color green with_pen large_pen on_picture pv[ctr];
-    draw q3 with_color green with_pen large_pen on_picture pv[ctr + 1];
-    draw q3 with_color green with_pen large_pen on_picture pv[ctr + 2];
-    draw q3 with_color green with_pen large_pen on_picture pv[ctr + 3];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 1];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 2];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 3];
+
   fi;
 
   message "Declination_arc_length:";

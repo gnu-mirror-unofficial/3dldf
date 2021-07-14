@@ -146,6 +146,7 @@ beginfig(8);
     current_picture += pv[i];
     i += 4;
   endfor;
+  current_picture += quadrant_picture;
   label("{\\bf Perspective Projection}", (0, -(radius + 1.25cm)));
 endfig with_focus f;
 
@@ -159,6 +160,7 @@ beginfig(9);
     i += 4;
   endfor;
   label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -(radius + 1.25cm)));
+  current_picture += quadrant_picture;
 endfig with_projection parallel_x_y; 
 
 beginfig(10);
@@ -171,6 +173,7 @@ beginfig(10);
     i += 4;
   endfor;
   label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -(radius + 1.25cm)));
+  current_picture += quadrant_picture;
 endfig with_projection parallel_x_z; 
 
 beginfig(11);
@@ -183,6 +186,7 @@ beginfig(11);
     i += 4;
   endfor;
   label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -(radius + 1.25cm)));
+  current_picture += quadrant_picture;
 endfig with_projection parallel_z_y; 
 
 % beginfig(12);
