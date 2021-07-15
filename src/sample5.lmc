@@ -1,5 +1,5 @@
-%%% sample3.lmc
-%%%% Created by Laurence D. Finston (LDF) Sat 03 Jul 2021 11:27:34 PM CEST
+%%% sample5.lmc
+%%%% Created by Laurence D. Finston (LDF) Wed Jul 14 15:32:11 2021 +0200
 
 %% * (1) Copyright and License.
 
@@ -140,7 +140,7 @@ def get_spherical_biangles {numeric rad} =
   p20 := (-.5n0, 0);
   p21 := (.5n0, 0);
 
-  label.rt("$0^\circ$", p21 shifted (1cm, 0));
+  label.rt("$0^\circ$", p21);
 
   dotlabel.lft("$p_{20}$", p20);
   dotlabel.rt("$p_{21}$", p21);
@@ -167,7 +167,7 @@ def get_spherical_biangles {numeric rad} =
     p[j + 1] := (.5biangle_width[k], (i * n1));
     dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
     dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
-    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
+    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1]) with_text_color red;
     edge0 += p[j];
     edge1 += p[j + 1];
 
