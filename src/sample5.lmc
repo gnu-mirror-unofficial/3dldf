@@ -981,6 +981,154 @@ enddef;
 
 %% ** (2)
 
+macro get_panels;
+
+def get_panels {numeric rradius} =
+
+  numeric i;
+  numeric j;
+  numeric k;
+  point K[];
+  
+  j := 0;
+  m := 1;
+
+  for k := 0 step 11.25 until 67.5:  %% Declination
+    j := 0;
+    for i := 0 step 22.5 until 337.5: %% Right ascension
+      K0 := (origin shifted (rradius, 0)) rotated (0, 0, k);
+      K1 := K0 rotated (0, 0, 11.25);
+      rotate K0 (0, i);
+      rotate K1 (0, i);
+      K2 := K0 rotated (0, 22.5);
+      K3 := K1 rotated (0, 22.5);
+      
+      K4 := (origin shifted (rradius, 0)) rotated (0, 0, -k);
+      K5 := K4 rotated (0, 0, -11.25);
+      rotate K4 (0, i);
+      rotate K5 (0, i);
+      K6 := K4 rotated (0, 22.5);
+      K7 := K5 rotated (0, 22.5);
+      
+      D[j][m]  := (K0, K1, K3, K2);
+      D[j][-m] := (K4, K5, K7, K6);
+      draw D[j][m]  with_color green on_picture quadrant_picture;
+      draw D[j][-m] with_color green on_picture quadrant_picture;
+      if (k == 0) and (i < 180):
+	label(decimal j & "/" & decimal m, mediate(K0, K3))  on_picture quadrant_picture;
+	label(decimal j & "/" & decimal -m, mediate(K4, K7)) on_picture quadrant_picture;
+      fi;
+      j += 1;
+    endfor;
+    m += 1;
+  endfor;
+
+  j := 0;
+  for i := 0 step 22.5 until 337.5:
+    K0 := (origin shifted (rradius, 0)) rotated (0, 0, 78.75);
+    K1 := K0 rotated (0, 22.5);
+    K2 := (0, rradius);
+    rotate K0 (0, i);
+    rotate K1 (0, i);
+    K6 := mediate(K2, mediate(K0, K1, .5), .75);
+  %label("1/" & decimal j, K6) with_text_color magenta on_picture quadrant_picture;
+    K3 := (origin shifted (rradius, 0)) rotated (0, 0, -78.75);
+    K4 := K3 rotated (0, 22.5);
+    K5 := (0, -rradius);
+    rotate K3 (0, i);
+    rotate K4 (0, i);
+    K7 := mediate(K5, mediate(K3, K4, .5), .75);
+  %label("-1/" & decimal j, K7) with_text_color magenta on_picture quadrant_picture;;
+    set T[1][j] with_points (K0, K1, K2);
+    set T[-1][j] with_points (K3, K4, K5);
+    draw T[1][j]  with_color magenta on_picture quadrant_picture;
+    draw T[-1][j] with_color magenta on_picture quadrant_picture;
+    j += 1;
+  endfor;
+  
+enddef;
+
+%% ** (2)
+
+macro plot_star_on_panel;
+
+def plot_star_on_panel {star S, point sstar_point} =
+
+  bool_point_vector bpv;
+  numeric RA;
+  numeric Decl;
+  numeric RA_ctr;
+  numeric Decl_ctr;
+  boolean b[];
+  path E[];
+  point M[];
+
+  RA   := right_ascension_decimal_degrees S;
+  Decl := declination_decimal_degrees S; 
+
+  message "RA of " & common_name S & ":";
+  show RA;
+
+  message "Decl of " & common_name S & ":";
+  show Decl;
+
+  if Decl >= 0:
+    Decl_ctr := floor (Decl / 11.25) + 1;
+  elseif Decl < 0:
+    Decl_ctr := (floor (-Decl / 11.25) + 1) * -1;
+  fi;
+
+  RA_ctr := floor (RA / 22.5);
+
+  message "RA_ctr for " & common_name S & ":";
+  show RA_ctr;
+
+  message "Decl_ctr for " & common_name S & ":";
+  show Decl_ctr;
+
+  dotlabel.rt(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+
+  show D[RA_ctr][Decl_ctr];
+  pause;
+  
+  draw D[RA_ctr][Decl_ctr] with_color blue with_pen Large_pen on_picture quadrant_picture;
+
+  E0 := origin -- sstar_point;
+
+  draw E0 with_color red with_pen Large_pen on_picture quadrant_picture;
+
+  if ((Decl > 0) and (Decl < 78.75)) or ((Decl < 0) and (Decl > -78.75)): 
+    bpv := E0 intersection_points D[RA_ctr][Decl_ctr];
+  fi;
+
+  message "bpv:"; 
+  show bpv;
+
+  b0 := bpv0;
+  b1 := bpv1;
+
+  if b0:
+    message "bpv0 is true";
+    M0 := bpv0;
+    drawdot M0 with_color red with_pen Large_pen on_picture quadrant_picture;
+  elseif b1:
+    message "bpv1 is true";
+    M0 := bpv1;
+    drawdot M0 with_color red with_pen Large_pen on_picture quadrant_picture;
+  else:
+    message "bpv0 and bpv1 are both false";
+    message "This can't happen.";
+  fi;
+
+  message "M0:"; 
+  show M0;
+
+  
+
+enddef;
+
+%% ** (2)
+
 endinput;
 
 %% ** (2) End of 3DLDF code.
