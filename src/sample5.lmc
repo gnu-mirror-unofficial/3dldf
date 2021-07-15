@@ -1062,7 +1062,9 @@ def plot_star_on_panel {star S, point sstar_point} =
   boolean b[];
   path E[];
   point M[];
-
+  rectangle V;
+  triangle  W;
+  
   RA   := right_ascension_decimal_degrees S;
   Decl := declination_decimal_degrees S; 
 
@@ -1071,12 +1073,6 @@ def plot_star_on_panel {star S, point sstar_point} =
 
   message "Decl of " & common_name S & ":";
   show Decl;
-
-  if Decl >= 0:
-    Decl_ctr := floor (Decl / 11.25) + 1;
-  elseif Decl < 0:
-    Decl_ctr := (floor (-Decl / 11.25) + 1) * -1;
-  fi;
 
   RA_ctr := floor (RA / 22.5);
 
@@ -1088,22 +1084,36 @@ def plot_star_on_panel {star S, point sstar_point} =
 
   dotlabel.rt(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 
-  show D[RA_ctr][Decl_ctr];
-  pause;
-  
-  draw D[RA_ctr][Decl_ctr] with_color blue with_pen Large_pen on_picture quadrant_picture;
+  message "Error after here 0.";
 
   E0 := origin -- sstar_point;
-
   draw E0 with_color red with_pen Large_pen on_picture quadrant_picture;
 
-  if ((Decl > 0) and (Decl < 78.75)) or ((Decl < 0) and (Decl > -78.75)): 
-    bpv := E0 intersection_points D[RA_ctr][Decl_ctr];
+message "Error after here 1."; 
+  
+  if (Decl >= 0) and (Decl < 78.75):
+    Decl_ctr := floor (Decl / 11.25) + 1;
+    V := D[RA_ctr][Decl_ctr];
+  elseif (Decl < 0) and (Decl > -78.75):
+    Decl_ctr := (floor (-Decl / 11.25) + 1) * -1;
+    V := D[RA_ctr][Decl_ctr];
+  elseif Decl > 78.75:
+    W := T[1][RA_ctr];
+  elseif Decl < -78.75:
+    W := T[-1][RA_ctr];
   fi;
 
-  message "bpv:"; 
+  if (Decl > 78.75) or (Decl < -78.75):
+    draw W with_color blue with_pen Large_pen on_picture quadrant_picture;
+    bpv := E0 intersection_points W; 
+  else:
+    draw V with_color blue with_pen Large_pen on_picture quadrant_picture;
+    bpv := E0 intersection_points V;
+  fi;
+  
   show bpv;
-
+  pause;
+  
   b0 := bpv0;
   b1 := bpv1;
 
@@ -1122,8 +1132,6 @@ def plot_star_on_panel {star S, point sstar_point} =
 
   message "M0:"; 
   show M0;
-
-  
 
 enddef;
 
