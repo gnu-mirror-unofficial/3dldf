@@ -192,13 +192,13 @@ for k := 0 step 11.25 until 67.5:  %% Declination
     K3 := K1 rotated (0, 22.5);
     K6 := K4 rotated (0, 22.5);
     K7 := K5 rotated (0, 22.5);
-    D[m][j]  := (K0, K1, K3, K2);
-    D[m][-j] := (K4, K5, K7, K6);
-    draw D[m][j] with_color green on_picture quadrant_picture;
-    draw D[m][-j] with_color green on_picture quadrant_picture;
+    D[j][m]  := (K0, K1, K3, K2);
+    D[-j][m] := (K4, K5, K7, K6);
+    draw D[j][m] with_color green on_picture quadrant_picture;
+    draw D[-j][m] with_color green on_picture quadrant_picture;
     if (k == 0) and (i < 180):
-      label(decimal m & "/" & decimal j, mediate(K0, K3))  on_picture quadrant_picture;
-      label(decimal -m & "/" & decimal j, mediate(K4, K7)) on_picture quadrant_picture;
+      label(decimal j & "/" & decimal m, mediate(K0, K3))  on_picture quadrant_picture;
+      label(decimal j & "/" & decimal -m, mediate(K4, K7)) on_picture quadrant_picture;
     fi;
     j += 1;
   endfor;
@@ -240,13 +240,17 @@ show Decl;
 
 RA_ctr := floor (RA / 22.5);
 
-Decl_ctr := floor (Decl / 11.25);
+Decl_ctr := floor (Decl / 11.25) + 1;
 
 message "RA_ctr for Hamal:";
 show RA_ctr;
 
 message "Decl_ctr for Hamal:";
 show Decl_ctr;
+
+dotlabel.rt("Hamal", star_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+
+draw D[RA_ctr][Decl_ctr] with_color blue with_pen Large_pen on_picture quadrant_picture;
 
 pause;
 
