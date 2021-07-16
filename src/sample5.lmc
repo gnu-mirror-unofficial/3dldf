@@ -1076,12 +1076,6 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
 
   RA_ctr := floor (RA / 22.5);
 
-  message "RA_ctr for " & common_name S & ":";
-  show RA_ctr;
-
-  message "Decl_ctr for " & common_name S & ":";
-  show Decl_ctr;
-
   dotlabel.rt(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 
   E0 := origin -- sstar_point;
@@ -1099,6 +1093,15 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
     W := T[-1][RA_ctr];
   fi;
 
+  message "RA_ctr for " & common_name S & ":";
+  show RA_ctr;
+
+  message "Decl_ctr for " & common_name S & ":";
+  show Decl_ctr;
+
+  RRA_ctr   := RA_ctr;
+  DDecl_ctr := Decl_ctr;
+  
   if (Decl > 78.75) or (Decl < -78.75):
     draw W with_color blue with_pen Large_pen on_picture quadrant_picture;
     bpv := E0 intersection_points W; 
@@ -1130,6 +1133,29 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   sstar_panel_point := M0;
 
 enddef;
+
+
+%% *** (3) macro plot_star_on_flat_panel
+
+macro plot_star_on_flat_panel;
+
+def plot_star_on_flat_panel {star S, point P, numeric RA, numeric Decl} =
+
+  message "common_name S:";
+  show common_name S;
+  
+  message "P:";
+  show P;
+
+  message "RA:";
+  show RA;
+
+  message "Decl:";
+  show Decl;
+  pause;
+enddef;
+
+%% *** (3)
 
 %% ** (2)
 

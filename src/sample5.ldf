@@ -98,9 +98,16 @@ picture quadrant_picture;
 point star_point;
 star_point := origin;
 path quadrant[][];
+path flat_quadrant[][];
 
 point temp_star_panel_point;
 temp_star_panel_point := origin;
+
+numeric RRA_ctr;
+numeric DDecl_ctr;
+
+RRA_ctr := 0;
+DDecl_ctr := 0;
 
 label_pos_zero := 0;
 label_pos_top  := 1;
@@ -168,6 +175,8 @@ plot_star_on_sphere (star_point) {radius, hamal};
 plot_star_on_spherical_biangle {hamal, 101, label_pos_top, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {hamal, star_point};
+
+plot_star_on_flat_panel {hamal, temp_star_panel_point, RRA_ctr, DDecl_ctr};
 
 %% *** (3)
 
