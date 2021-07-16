@@ -3266,7 +3266,7 @@ This rule doesn't correspond to a rule in Metafont.  It replaces the rule
 ``\§numeric primary> $\longrightarrow$ \.{ANGLE} \§point primary>''.  
 The latter wouldn't make sense in 3DLDF, because 
 we can't simply use the x-axis as our reference for angles.
-The function |Point::angle()| requires two operands, so this rule is at the
+The function |Point::angle| requires two operands, so this rule is at the
 secondary rather than the primary level.
 \initials{LDF 2004.05.05.}
 

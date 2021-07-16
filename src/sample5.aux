@@ -189,9 +189,71 @@ beginfig(11);
   current_picture += quadrant_picture;
 endfig with_projection parallel_z_y; 
 
-% beginfig(12);
-%   currentpicture := label_picture;
-% endfig with_projection parallel_z_y; 
+beginfig(12);
+  point p[];
+  path q[];
+  transform t[];
+  numeric n[];
+  q0 := D[0][1];
+  draw q0;
+  p0 := get_point (3) q0;
+  p1 := get_point (0) q0;
+  p2 := get_point (1) q0;
+  p3 := get_point (2) q0;
+  dotlabel.top("$p_0$", p0);
+  dotlabel.top("$p_1$", p1);
+  dotlabel.top("$p_2$", p2);
+  dotlabel.top("$p_3$", p3);
+  n0 := (p2 - p0) angle (p1 - p0);
+  n1 := (p3 - p0) angle (p1 - p0);
+  message "n0:";
+  show n0;
+  message "n1:";
+  show n1;
+  pause;
+  n2 := magnitude(p1 - p0);
+  n3 := magnitude(p2 - p0);
+  n4 := magnitude(p3 - p0);
+  message "n2:";
+  show n2;
+  message "n3:";
+  show n3;
+  message "n4:";
+  show n4;
+
+  p4 := origin;
+  p5 := p4 shifted (n2, 0);
+  p6 := (p4 shifted (n3, 0)) rotated (0, 0, n0);
+  p7 := (p4 shifted (n4, 0)) rotated (0, 0, n1); 
+
+  q1 := p4 -- p5 -- p6 -- p7 -- cycle;
+  message "q1:";
+  show q1;
+  pause;
+  draw q1;
+
+  dotlabel.lft("$p_4$", p4);
+  dotlabel.rt("$p_5$", p5);
+  dotlabel.rt("$p_6$", p6);
+  dotlabel.lft("$p_7$", p7);
+  
+  message "star_panel_point0:";
+  show star_panel_point0;
+
+  drawdot star_panel_point0 with_color red with_pen Large_pen;
+
+  n5 := magnitude(star_panel_point0 - p0);
+  message "n5:";
+  show n5;
+  
+  n6 := (star_panel_point0 - p0) angle (p1 - p0);
+  message "n6:";
+  show n6;
+
+  p8 := (p4 shifted (n5, 0)) rotated (0, 0, n6);
+  drawdot p8 with_color red with_pen Large_pen;
+  
+endfig with_projection parallel_x_y; 
 
 verbatim_metapost "end";
   

@@ -99,6 +99,9 @@ point star_point;
 star_point := origin;
 path quadrant[][];
 
+point temp_star_panel_point;
+temp_star_panel_point := origin;
+
 label_pos_zero := 0;
 label_pos_top  := 1;
 label_pos_bot  := 2;
@@ -125,6 +128,7 @@ star_info_combined := "sample_5_star_info_combined.tex";
 
 numeric radius;
 string s;
+point star_panel_point[];
 
 %% ** (2) Set variables
 
@@ -143,14 +147,11 @@ endfor;
 
 input "sample5.lmc";
 
-
-
 %% ** (2) Call macros for the spherical biangles and the sphere.
 
 get_spherical_biangles {radius}; 
 
 get_sphere_for_plotting_stars {radius};
-
 
 %% *** (3)
 
@@ -166,7 +167,7 @@ plot_star_on_sphere (star_point) {radius, hamal};
 
 plot_star_on_spherical_biangle {hamal, 101, label_pos_top, 0, 0};
 
-plot_star_on_panel {hamal, star_point};
+plot_star_on_panel (temp_star_panel_point) {hamal, star_point};
 
 %% *** (3)
 
@@ -174,7 +175,9 @@ plot_star_on_sphere (star_point) {radius, delta_piscium};
 
 plot_star_on_spherical_biangle {delta_piscium, 102, label_pos_top, 0, 0};
 
-plot_star_on_panel {delta_piscium, star_point};
+plot_star_on_panel (temp_star_panel_point) {delta_piscium, star_point};
+
+star_panel_point0 := temp_star_panel_point;
 
 %% *** (3)
 
@@ -182,7 +185,7 @@ plot_star_on_sphere (star_point) {radius, sirius};
 
 plot_star_on_spherical_biangle {sirius, 103, label_pos_top, 0, 0};
 
-plot_star_on_panel {sirius, star_point};
+plot_star_on_panel (temp_star_panel_point) {sirius, star_point};
 
 %% *** (3)
 
@@ -190,7 +193,7 @@ plot_star_on_sphere (star_point) {radius, delta_ursae_minoris};
 
 plot_star_on_spherical_biangle {delta_ursae_minoris, 103, label_pos_top, 0, 0};
 
-plot_star_on_panel {delta_ursae_minoris, star_point};
+plot_star_on_panel (temp_star_panel_point) {delta_ursae_minoris, star_point};
 
 %% *** (3)
 
@@ -198,12 +201,14 @@ plot_star_on_sphere (star_point) {radius, gamma_apodis};
 
 plot_star_on_spherical_biangle {gamma_apodis, 104, label_pos_top, 0, 0};
 
-plot_star_on_panel {gamma_apodis, star_point};
-
+plot_star_on_panel (temp_star_panel_point) {gamma_apodis, star_point};
 
 %% ** (2) Figure and output commands.
 
 input "sample5.aux";
+
+
+
 
 %% ** (2)
 

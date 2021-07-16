@@ -1052,7 +1052,7 @@ enddef;
 
 macro plot_star_on_panel;
 
-def plot_star_on_panel {star S, point sstar_point} =
+def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
 
   bool_point_vector bpv;
   numeric RA;
@@ -1084,13 +1084,9 @@ def plot_star_on_panel {star S, point sstar_point} =
 
   dotlabel.rt(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 
-  message "Error after here 0.";
-
   E0 := origin -- sstar_point;
   draw E0 with_color red with_pen Large_pen on_picture quadrant_picture;
 
-message "Error after here 1."; 
-  
   if (Decl >= 0) and (Decl < 78.75):
     Decl_ctr := floor (Decl / 11.25) + 1;
     V := D[RA_ctr][Decl_ctr];
@@ -1112,7 +1108,6 @@ message "Error after here 1.";
   fi;
   
   show bpv;
-  pause;
   
   b0 := bpv0;
   b1 := bpv1;
@@ -1132,6 +1127,7 @@ message "Error after here 1.";
 
   message "M0:"; 
   show M0;
+  sstar_panel_point := M0;
 
 enddef;
 
