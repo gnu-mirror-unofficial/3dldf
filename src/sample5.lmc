@@ -1139,23 +1139,92 @@ enddef;
 
 macro plot_star_on_flat_panel;
 
-def plot_star_on_flat_panel {star S, point P, numeric RA, numeric Decl} =
+def plot_star_on_flat_panel (R) {star S, point P, numeric RA, numeric Decl} =
 
+  path q[];
+  point p[];
+  numeric v;
+  numeric n[];
+  
+  if RA < 8:
+    v := 0;
+  else:
+    v := 1;
+  fi;
+  
   message "common_name S:";
   show common_name S;
   
   message "P:";
   show P;
 
+  message "R:";
+  show R;
+
+  q0 := D[RA][Decl];
+  q1 := flat_quadrant[RA][Decl];
+
+  %draw q0 with_color red with_pen Large_pen on_picture v9;
+  draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
+  
   message "RA:";
   show RA;
 
   message "Decl:";
   show Decl;
+  
+  p0 := get_point (0) q0;
+  p1 := get_point (3) q0;
+  p2 := get_point (2) q0;
+  p3 := get_point (1) q0;
 
-  % message "star_panel_point0:";
-  % show star_panel_point0;
+  p4 := get_point (0) q1;
+  p5 := get_point (1) q1;
+  p6 := get_point (2) q1;
+  p7 := get_point (3) q1;
+  n0 := magnitude(P - p0);
+  n1 := (P - p0) angle (p1 - p0);
 
+  message "n0";
+  show n0;
+
+  message "n1";
+  show n1;
+
+  if Decl >= 0:
+    n2 := 1;
+  else:
+    n2 := -1;
+  fi;
+
+  p8:= p4 shifted (0, 0, n2);
+  p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
+
+  dotlabel.top("$p_0$", p0) on_picture v8;
+  dotlabel.lft("$p_1$", p1) on_picture v8;
+  dotlabel.top("$p_2$", p2) on_picture v8;
+  dotlabel.top("$p_3$", p3) on_picture v8;
+
+  dotlabel.top("$p_0$", p0) on_picture v9;
+  dotlabel.top("$p_1$", p1) on_picture v9;
+  dotlabel.top("$p_2$", p2) on_picture v9;
+  dotlabel.top("$p_3$", p3) on_picture v9;
+
+  dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
+  dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
+  dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
+  dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v]; 
+  
+  message "p9";
+  show p9;  
+
+  R := p9;
+
+  dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
+  dotlabel.top(common_name S, p9) on_picture flat_quadrant_picture[v];
+
+  %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
+  
   % drawdot star_panel_point0 with_color red with_pen Large_pen;
 
   % n5 := magnitude(star_panel_point0 - p0);
@@ -1184,6 +1253,9 @@ def get_flat_panels =
   numeric m;
   numeric n[];
   numeric v;
+  point temp_a;      
+  point temp_b;
+  point temp_c;
 
   v := 0;
   
@@ -1296,7 +1368,22 @@ def get_flat_panels =
       
       flat_quadrant[i][j] := q[m+1];
       flat_quadrant[i][-j] := q[m+1] rotated (180, 0);
-   
+
+
+      %draw ((get_point (0) flat_quadrant[i][j]) -- (get_point(2) flat_quadrant[i][j]);
+
+
+      temp_a := mediate(get_point (0) flat_quadrant[i][j], get_point (1) flat_quadrant[i][j], .5);
+      temp_b := mediate(get_point (2) flat_quadrant[i][j], get_point (3) flat_quadrant[i][j], .5);
+      temp_c := mediate(temp_a, temp_b, .5);
+      
+      %draw flat_quadrant[i][j] with_color red with_pen Large_pen on_picture flat_quadrant_picture[v];
+      %drawdot get_point (0) flat_quadrant[i][j] with_color red with_pen Large_pen on_picture flat_quadrant_picture[v];
+      %draw get_point (0) flat_quadrant[i][j] -- get_point (2) flat_quadrant[i][j]
+      %with_color red with_pen Large_pen on_picture flat_quadrant_picture[v];
+      label(decimal i & "/" & decimal j, temp_c) on_picture flat_quadrant_picture[v];
+      label(decimal i & "/" & decimal j, temp_c rotated (180, 0)) on_picture flat_quadrant_picture[v];
+      
       k += 16;
       m += 2;
     endfor;

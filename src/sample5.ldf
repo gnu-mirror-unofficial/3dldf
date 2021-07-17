@@ -104,6 +104,9 @@ path flat_quadrant[][];
 point temp_star_panel_point;
 temp_star_panel_point := origin;
 
+point temp_star_flat_panel_point;
+temp_star_flat_panel_point := origin;
+
 numeric RRA_ctr;
 numeric DDecl_ctr;
 
@@ -138,6 +141,8 @@ numeric radius;
 string s;
 point star_panel_point[];
 
+
+  
 %% ** (2) Set variables
 
 radius := 6cm;
@@ -167,7 +172,6 @@ get_sphere_for_plotting_stars {radius};
 
 get_panels {radius};
 
-
 get_flat_panels;
 
 %% *** (3)
@@ -178,7 +182,7 @@ plot_star_on_spherical_biangle {hamal, 101, label_pos_top, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {hamal, star_point};
 
-plot_star_on_flat_panel {hamal, temp_star_panel_point, RRA_ctr, DDecl_ctr};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {hamal, temp_star_panel_point, RRA_ctr, DDecl_ctr};
 
 %% *** (3)
 
@@ -188,7 +192,8 @@ plot_star_on_spherical_biangle {delta_piscium, 102, label_pos_top, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {delta_piscium, star_point};
 
-star_panel_point0 := temp_star_panel_point;
+plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_piscium, temp_star_panel_point, RRA_ctr, DDecl_ctr};
+
 
 %% *** (3)
 
@@ -197,6 +202,18 @@ plot_star_on_sphere (star_point) {radius, sirius};
 plot_star_on_spherical_biangle {sirius, 103, label_pos_top, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {sirius, star_point};
+
+plot_star_on_flat_panel (temp_star_flat_panel_point) {sirius, temp_star_panel_point, RRA_ctr, DDecl_ctr};
+
+%% ** (2)
+
+input "sample5.aux";
+
+%% ** (2)
+
+verbatim_metapost "end";
+  
+end;  
 
 %% *** (3)
 
@@ -217,9 +234,6 @@ plot_star_on_panel (temp_star_panel_point) {gamma_apodis, star_point};
 %% ** (2) Figure and output commands.
 
 input "sample5.aux";
-
-
-
 
 %% ** (2)
 
