@@ -1079,7 +1079,7 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   dotlabel.top(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 
   E0 := origin -- sstar_point;
-  draw E0 with_color red with_pen Large_pen on_picture quadrant_picture;
+  draw E0 with_color red with_pen medium_pen on_picture quadrant_picture;
 
   if (Decl >= 0) and (Decl < 78.75):
     Decl_ctr := floor (Decl / 11.25) + 1;
@@ -1105,10 +1105,10 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   DDecl_ctr := Decl_ctr;
   
   if (Decl > 78.75) or (Decl < -78.75):
-    draw W with_color blue with_pen Large_pen on_picture quadrant_picture;
+    draw W with_color blue with_pen medium_pen on_picture quadrant_picture;
     bpv := E0 intersection_points W; 
   else:
-    draw V with_color blue with_pen Large_pen on_picture quadrant_picture;
+    draw V with_color blue with_pen medium_pen on_picture quadrant_picture;
     bpv := E0 intersection_points V;
   fi;
   
@@ -1120,11 +1120,11 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   if b0:
     message "bpv0 is true";
     M0 := bpv0;
-    drawdot M0 with_color red with_pen Large_pen on_picture quadrant_picture;
+    drawdot M0 with_color red with_pen medium_pen on_picture quadrant_picture;
   elseif b1:
     message "bpv1 is true";
     M0 := bpv1;
-    drawdot M0 with_color red with_pen Large_pen on_picture quadrant_picture;
+    drawdot M0 with_color red with_pen medium_pen on_picture quadrant_picture;
   else:
     message "bpv0 and bpv1 are both false";
     message "This can't happen.";
@@ -1172,7 +1172,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     q0 := D[RA_ctr][Decl_ctr];
     q1 := flat_quadrant[RA_ctr][Decl_ctr];
-    draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
+    draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
   elseif (Decl_ctr == 8) or (Decl_ctr == -8):
     q0 := T[RA_ctr][Decl_ctr];
     q1 := flat_quadrant[RA_ctr][Decl_ctr];
@@ -1181,10 +1181,10 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     message "q1:";
     show q1;
     %pause;
-    draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
+    draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
   fi;
 
-  %draw q0 with_color red with_pen Large_pen on_picture v9;
+  %draw q0 with_color red with_pen medium_pen on_picture v9;
 
   
   message "RA_ctr:";
@@ -1280,7 +1280,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
   
-  % drawdot star_panel_point0 with_color red with_pen Large_pen;
+  % drawdot star_panel_point0 with_color red with_pen medium_pen;
 
   % n5 := magnitude(star_panel_point0 - p0);
   % message "n5:";
@@ -1291,7 +1291,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   % show n6;
 
   % p8 := (p4 shifted (n5, 0)) rotated (0, 0, n6);
-  % drawdot p8 with_color red with_pen Large_pen;
+  % drawdot p8 with_color red with_pen medium_pen;
 
 enddef;
 
@@ -1431,10 +1431,10 @@ def get_flat_panels =
       temp_b := mediate(get_point (2) flat_quadrant[i][j], get_point (3) flat_quadrant[i][j], .5);
       temp_c := mediate(temp_a, temp_b, .5);
       
-      %draw flat_quadrant[i][j] with_color red with_pen Large_pen on_picture flat_quadrant_picture[v];
-      %drawdot get_point (0) flat_quadrant[i][j] with_color red with_pen Large_pen on_picture flat_quadrant_picture[v];
+      %draw flat_quadrant[i][j] with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
+      %drawdot get_point (0) flat_quadrant[i][j] with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
       %draw get_point (0) flat_quadrant[i][j] -- get_point (2) flat_quadrant[i][j]
-      %with_color red with_pen Large_pen on_picture flat_quadrant_picture[v];
+      %with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
       label(decimal i & "/" & decimal j, temp_c) on_picture flat_quadrant_picture[v];
       label(decimal i & "/" & decimal j, temp_c rotated (180, 0)) on_picture flat_quadrant_picture[v];
       
