@@ -390,6 +390,30 @@ Replaced the code with a call to |Scan_Parse::intersection_points_func()|.
                 parameter);
 };
 
+
+@q **** (4) bool_point_tertiary: path_tertiary INTERSECTION_POINT @> 
+@q **** (4) plane_secondary                                        @> 
+
+@*3 \§bool-point tertiary> $\longrightarrow$ \§path tertiary>
+\.{INTERSECTION\_POINT} \§plane secondary>.
+\initials{LDF 2021.07.19.}
+
+\LOG
+\initials{LDF 2021.07.19.}
+Added this rule.
+\ENDLOG
+ 
+@q ***** (5) Definition.@> 
+
+@<Define rules@>= 
+@=bool_point_tertiary: path_tertiary INTERSECTION_POINT plane_secondary@>@/
+{
+
+    @=$$@> = Scan_Parse::intersection_points_func<Path, Plane, Bool_Point>(
+                static_cast<Path*>(@=$1@>), static_cast<Plane*>(@=$3@>),
+                parameter);
+};
+
 @q **** (4) bool_point expression.  @>
 @ \§bool-point expression>.
 
