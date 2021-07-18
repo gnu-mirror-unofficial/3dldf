@@ -1076,7 +1076,7 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
 
   RA_ctr := floor (RA / 22.5);
 
-  dotlabel.rt(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+  dotlabel.top(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
 
   E0 := origin -- sstar_point;
   draw E0 with_color red with_pen Large_pen on_picture quadrant_picture;
@@ -1214,6 +1214,8 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     n1 := (P - p0) angle (p1 - p0);
+  else:
+    n1 := (P - p0) angle (p3 - p0);
   fi;
 
   message "n0";
@@ -1230,46 +1232,52 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
   p8:= p4 shifted (0, 0, n2);
 
-  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
-  fi;
+  %fi;
 
-  %dotlabel.top("$p_0$", p0) on_picture v8;
+  % dotlabel.lft("$p_0$", p0) on_picture v8;
+  % dotlabel.lft("$p_0$", p0) on_picture v10;
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     %dotlabel.lft("$p_1$", p1) on_picture v8;
   fi;
   
-  %dotlabel.top("$p_2$", p2) on_picture v8;
-  %dotlabel.top("$p_3$", p3) on_picture v8;
+  % dotlabel.top("$p_2$", p2) on_picture v8;
+  % dotlabel.top("$p_3$", p3) on_picture v8;
 
-  %dotlabel.top("$p_0$", p0) on_picture v9;
+  % dotlabel.lft("$p_0$", p0) on_picture v9;
 
+  % dotlabel.lft("$p_0$", p0) on_picture v10;
+  % dotlabel.lft("$p_2$", p2) on_picture v10;
+  % dotlabel.rt("$p_3$", p3) on_picture v10;
+  
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     %dotlabel.top("$p_1$", p1) on_picture v9;
   fi;
   
-  %dotlabel.top("$p_2$", p2) on_picture v9;
-  %dotlabel.top("$p_3$", p3) on_picture v9;
+  % dotlabel.top("$p_2$", p2) on_picture v9;
+  % dotlabel.top("$p_3$", p3) on_picture v9;
 
-  %dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
-  %dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
-  %dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
 
-  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     %dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v];
-  fi;
+  %fi;
+
+  message "p9";
+  show p9;  
+  R := p9;
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    message "p9";
-    show p9;  
-    R := p9;
     dotlabel.top(common_name S, p9) on_picture flat_quadrant_picture[v];
+  else:
+    dotlabel.bot(common_name S, p9) on_picture flat_quadrant_picture[v];
   fi;
   
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
-  
-
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
   
   % drawdot star_panel_point0 with_color red with_pen Large_pen;
