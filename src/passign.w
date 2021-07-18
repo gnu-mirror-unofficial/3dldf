@@ -3897,7 +3897,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    { 
@@ -3913,8 +3913,10 @@ Added this rule.
 
   *n = *s;
 
+#if 0 
   n->show("In rule newwrite_assignment ... *n:");
-  
+#endif
+
   delete s;
   s = 0;
 
@@ -3924,7 +3926,9 @@ Added this rule.
                                              n);
   @=$$@> = ivp.v;
 
+#if 0
   static_cast<Newwrite*>(ivp.v)->show("*ivp.v:");
+#endif 
 
 };
 
@@ -7632,7 +7636,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    { 
@@ -7787,7 +7791,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    { 

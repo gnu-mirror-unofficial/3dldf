@@ -1,4 +1,4 @@
-/home/laurence/3DLDF-3.0/astronmy/stars_with_celestial_coordinates.txt
+/* /home/laurence/3DLDF-3.0/astronmy/stars_with_celestial_coordinates.txt */
 
 /* * (1) Copyright and License. */
 
@@ -777,6 +777,29 @@ and constellation_name_genitive = "Arietis";
 -- update Stars set approx_rank_apparent_magnitude = 105, common_name = "Zubenelgenubi" where bayer_designation_greek_letter = "Alpha"
 -- and constellation_name_genitive = "Librae";
 
+
+update Stars set
+common_name = "Zubenelgenubi",
+bayer_designation_greek_letter = "alpha^2",
+bayer_designation_greek_letter_tex = "$\\alpha^2$",
+right_ascension_hours = 14,
+right_ascension_minutes = 50,
+right_ascension_seconds = 52.71309, 
+declination_degrees = -16,
+declination_minutes = 2,
+declination_seconds = 30.3955,
+apparent_magnitude = 2.741,
+is_binary_component = 1
+where bs_hr_number = 5531;
+
+select * from Stars where constellation_name_genitive = "Librae" and bayer_designation_greek_letter = "alpha^2"\G
+
+α2 Lib
+Right ascension 	
+Declination 	
+Apparent magnitude (V) 	+
+
+
 update Stars set approx_rank_apparent_magnitude = 106, common_name = "Phact" where bayer_designation_greek_letter = "Alpha"
 and constellation_name_genitive = "Columbae";
 
@@ -1401,7 +1424,9 @@ values (105,  "Zubenelgenubi", "Alpha", "Librae");
 
 update Stars set constellation_full_name = "Libra" where common_name = "Zubenelgenubi";
 
-update Stars set bs_hr_number = 5530 where common_name = "Zubenelgenubi";
+update Stars set constellation_full_name = "Libra" where common_name = "Zubenelgenubi";
+
+update Stars set bs_hr_number = 5531 where common_name = "Zubenelgenubi";
 
 /* ** (2) */
 
@@ -2801,6 +2826,10 @@ ESA, (1997), The Hipparcos Catalogue.
 Hoffleit D, Warren Jr W, (1991), Harvard Revised Bright Star Catalogue, 5th Edition.
 
 update Stars set common_name = "$\\delta$ Ursae minoris" where bs_hr_number = 6789;
+
+select * from Stars where right_ascension_hours = 0 and right_ascension_minutes = 0 and right_ascension_seconds = 0 
+and declination_degrees = 0 and declination_minutes = 0 and declination_seconds = 0\G
+
 
 /* * (1) */
 

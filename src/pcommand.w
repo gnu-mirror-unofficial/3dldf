@@ -391,7 +391,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
        cerr_strm << "*** Parser: Rule `command --> SAVE any_variable_list TO DATABASE'."
@@ -479,7 +479,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `any_variable_list: /* Empty  */'."
@@ -510,7 +510,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `any_variable_list: any_variable_list any_variable'."
@@ -542,7 +542,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `any_variable_list: any_variable_list COMMA any_variable'."
@@ -585,7 +585,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `with_prefix_option: /* Empty  */'."
@@ -616,7 +616,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `with_prefix_option: WITH PREFIX any_variable'."
@@ -650,7 +650,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
        cerr_strm << "*** Parser: Rule `command --> RESTORE any_variable FROM DATABASE overwrite_option'."
@@ -750,7 +750,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `overwrite_option: /* Empty  */'."
@@ -781,7 +781,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `overwrite_option: QUERY'."
@@ -812,7 +812,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `overwrite_option: OVERWRITE'."
@@ -843,7 +843,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `overwrite_option: NO_OVERWRITE'."
@@ -877,7 +877,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
        cerr_strm << "*** Parser: Rule `command --> LOAD DATABASE'."
@@ -989,7 +989,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
        cerr_strm << "*** Parser: Rule `command --> LOAD ASTRONOMY'."
@@ -1180,7 +1180,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> PLOT STARS sphere_expression stars_option_list'.";
@@ -1250,7 +1250,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> WRITE newwrite_variable string_expression no_newline_optional'."
@@ -1319,7 +1319,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> WRITE string_expression TO newwrite_variable no_newline_optional'."
@@ -1431,7 +1431,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> CLOSE newwrite_variable'."

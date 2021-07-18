@@ -1059,7 +1059,7 @@ sample5.dvi: sample5.tex sample5.0
 sample5.0 sample5.1: sample5.mp
 	mpost sample5.mp
 
-sample5.mp: 3dldf$(EXEEXT) sample5.ldf sample5.lmc sample5.aux 
+sample5.mp: 3dldf$(EXEEXT) sample5.ldf astronmy.lmc sample5.aux 
 	3dldf$(EXEEXT) sample5.ldf
 
 .PHONY : run-bi

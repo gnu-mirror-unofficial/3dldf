@@ -1290,7 +1290,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: COMMON_NAME'.";
@@ -1305,7 +1305,7 @@ Added this rule.
    @=$$@> = STARS_COMMON_NAME;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: COMMON_NAME':"
@@ -1338,7 +1338,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: FLAMSTEED_DESIGNATION_NUMBER'.";
@@ -1353,7 +1353,7 @@ Added this rule.
    @=$$@> = STARS_FLAMSTEED_DESIGNATION_NUMBER;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: FLAMSTEED_DESIGNATION_NUMBER':"
@@ -1385,7 +1385,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER'.";
@@ -1400,7 +1400,7 @@ Added this rule.
    @=$$@> = STARS_BAYER_DESIGNATION_GREEK_LETTER;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER':"
@@ -1432,7 +1432,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BS_HR_NUMBER'.";
@@ -1447,7 +1447,7 @@ Added this rule.
    @=$$@> = STARS_BS_HR_NUMBER;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BS_HR_NUMBER':"
@@ -1479,7 +1479,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BS_NUMBER'.";
@@ -1494,7 +1494,7 @@ Added this rule.
    @=$$@> = STARS_BS_NUMBER;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: BS_NUMBER':"
@@ -1526,7 +1526,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: HR_NUMBER'.";
@@ -1541,7 +1541,7 @@ Added this rule.
    @=$$@> = STARS_HR_NUMBER;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: HR_NUMBER':"
@@ -1573,7 +1573,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE'.";
@@ -1588,7 +1588,7 @@ Added this rule.
    @=$$@> = STARS_APPROX_RANK_APPARENT_MAGNITUDE;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: APPROX_RANK_APPARENT_MAGNITUDE':"
@@ -1620,7 +1620,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: APPARENT_MAGNITUDE'.";
@@ -1635,7 +1635,7 @@ Added this rule.
    @=$$@> = STARS_APPARENT_MAGNITUDE;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: APPARENT_MAGNITUDE':"
@@ -1667,7 +1667,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_FULL_NAME'.";
@@ -1682,7 +1682,7 @@ Added this rule.
    @=$$@> = STARS_CONSTELLATION_FULL_NAME;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_FULL_NAME':"
@@ -1714,7 +1714,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_ABBREVIATION'.";
@@ -1729,7 +1729,7 @@ Added this rule.
    @=$$@> = STARS_CONSTELLATION_ABBREVIATION;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_ABBREVIATION':"
@@ -1761,7 +1761,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NAME_GENITIVE'.";
@@ -1776,7 +1776,7 @@ Added this rule.
    @=$$@> = STARS_CONSTELLATION_NAME_GENITIVE;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NAME_GENITIVE':"
@@ -1808,7 +1808,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NUMBER'.";
@@ -1823,7 +1823,7 @@ Added this rule.
    @=$$@> = STARS_CONSTELLATION_NUMBER;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: CONSTELLATION_NUMBER':"
@@ -1855,7 +1855,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_HOURS'.";
@@ -1870,7 +1870,7 @@ Added this rule.
    @=$$@> = STARS_RIGHT_ASCENSION_HOURS;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_HOURS':"
@@ -1902,7 +1902,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_MINUTES'.";
@@ -1917,7 +1917,7 @@ Added this rule.
    @=$$@> = STARS_RIGHT_ASCENSION_MINUTES;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_MINUTES':"
@@ -1949,7 +1949,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_SECONDS'.";
@@ -1964,7 +1964,7 @@ Added this rule.
    @=$$@> = STARS_RIGHT_ASCENSION_SECONDS;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_SECONDS':"
@@ -1996,7 +1996,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_HOURS'.";
@@ -2011,7 +2011,7 @@ Added this rule.
    @=$$@> = STARS_RIGHT_ASCENSION_DECIMAL_HOURS;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_HOURS':"
@@ -2043,7 +2043,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_DEGREES'.";
@@ -2058,7 +2058,7 @@ Added this rule.
    @=$$@> = STARS_RIGHT_ASCENSION_DECIMAL_DEGREES;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: RIGHT_ASCENSION_DECIMAL_DEGREES':"
@@ -2090,7 +2090,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DEGREES'.";
@@ -2105,7 +2105,7 @@ Added this rule.
    @=$$@> = STARS_DECLINATION_DEGREES;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DEGREES':"
@@ -2137,7 +2137,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_MINUTES'.";
@@ -2152,7 +2152,7 @@ Added this rule.
    @=$$@> = STARS_DECLINATION_MINUTES;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_MINUTES':"
@@ -2184,7 +2184,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_SECONDS'.";
@@ -2199,7 +2199,7 @@ Added this rule.
    @=$$@> = STARS_DECLINATION_SECONDS;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_SECONDS':"
@@ -2231,7 +2231,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DECIMAL_DEGREES'.";
@@ -2246,7 +2246,7 @@ Added this rule.
    @=$$@> = STARS_DECLINATION_DECIMAL_DEGREES;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: DECLINATION_DECIMAL_DEGREES':"
@@ -2278,7 +2278,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: IS_BINARY'.";
@@ -2293,7 +2293,7 @@ Added this rule.
    @=$$@> = STARS_IS_BINARY;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: IS_BINARY':"
@@ -2325,7 +2325,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list WHERE stars_where_list'.";
@@ -2369,7 +2369,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_where_list: stars_where_element'.";
@@ -2400,7 +2400,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_where_list: stars_where_list logical_operator stars_where_element'."
@@ -2453,7 +2453,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation string_expression'."
@@ -2497,7 +2497,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_where_element: stars_field_specifier relation numeric_expression'."
@@ -2544,7 +2544,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_LIMIT numeric_expression'.";
@@ -2557,7 +2557,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_LIMIT numeric_expression':"
@@ -2593,7 +2593,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_OFFSET numeric_expression'.";
@@ -2606,7 +2606,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list WITH_OFFSET numeric_expression':"
@@ -4596,7 +4596,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> SHOW star_vector_expression stars_field_list'.";
@@ -4686,7 +4686,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> "
@@ -4750,7 +4750,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> "
@@ -5828,7 +5828,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `command --> SHOW DATABASE database_option_list'.";
@@ -5945,7 +5945,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `database_option_list: EMPTY'.";
@@ -5977,7 +5977,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      {
        cerr_strm << "*** Parser: Rule `database_option_list: database_option_list database_option'.";
@@ -6018,7 +6018,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `database_option: ALL'.";
@@ -6050,7 +6050,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `database_option: POINTS'.";
@@ -6082,7 +6082,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `database_option: PATHS'.";
@@ -6114,7 +6114,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `database_option: TRANSFORMS'.";
@@ -6150,7 +6150,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
       cerr_strm << "*** Parser: Rule `command --> SHOW SCANNER_NODE show_scanner_node_option_list'.";
@@ -6201,7 +6201,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_scanner_node_option_list: EMPTY'.";
@@ -6233,7 +6233,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG)
      {
        cerr_strm << "*** Parser: Rule `show_scanner_node_option_list: show_scanner_node_option_list show_scanner_node_option'.";
@@ -6274,7 +6274,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_scanner_node_option: ALL'.";
