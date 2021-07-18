@@ -2132,6 +2132,9 @@ quadruple star system
 select * from Stars where declination_decimal_degrees > 0 and declination_decimal_degrees < 11.25 and
 right_ascension_decimal_degrees > 0 and right_ascension_decimal_degrees < 22.5\G
 
+select * from Stars where declination_decimal_degrees > 78.75\G
+
+select * from Stars where declination_decimal_degrees < -78.75\G
 
 update Stars set common_name = "$\\delta$ Piscium" where bs_hr_number = 224;
 
@@ -2796,6 +2799,8 @@ Column 13: The distance in light years (=3.2616/parallax).
 References:
 ESA, (1997), The Hipparcos Catalogue.
 Hoffleit D, Warren Jr W, (1991), Harvard Revised Bright Star Catalogue, 5th Edition.
+
+update Stars set common_name = "$\\delta$ Ursae minoris" where bs_hr_number = 6789;
 
 /* * (1) */
 

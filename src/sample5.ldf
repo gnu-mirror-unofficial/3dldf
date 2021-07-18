@@ -108,6 +108,7 @@ point temp_star_flat_panel_point;
 temp_star_flat_panel_point := origin;
 
 numeric RRA_ctr;
+
 numeric DDecl_ctr;
 
 RRA_ctr := 0;
@@ -140,7 +141,11 @@ star_info_combined := "sample_5_star_info_combined.tex";
 numeric radius;
 string s;
 point star_panel_point[];
+numeric tab_width;
 
+
+
+tab_width := .4cm;
 
   
 %% ** (2) Set variables
@@ -172,7 +177,7 @@ get_sphere_for_plotting_stars {radius};
 
 get_panels {radius};
 
-get_flat_panels;
+get_flat_panels {tab_width};
 
 %% *** (3) 1.  Sirius
 
