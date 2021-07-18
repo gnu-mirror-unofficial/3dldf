@@ -1039,10 +1039,10 @@ def get_panels {numeric rradius} =
     rotate K4 (0, i);
     K7 := mediate(K5, mediate(K3, K4, .5), .75);
   %label("-1/" & decimal j, K7) with_text_color magenta on_picture quadrant_picture;;
-    set T[1][j] with_points (K0, K1, K2);
-    set T[-1][j] with_points (K3, K4, K5);
-    draw T[1][j]  with_color magenta on_picture quadrant_picture;
-    draw T[-1][j] with_color magenta on_picture quadrant_picture;
+    set T[j][8] with_points (K0, K1, K2);
+    set T[j][-8] with_points (K3, K4, K5);
+    draw T[j][8]  with_color magenta on_picture quadrant_picture;
+    draw T[j][-8] with_color magenta on_picture quadrant_picture;
     j += 1;
   endfor;
   
@@ -1088,9 +1088,11 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
     Decl_ctr := (floor (-Decl / 11.25) + 1) * -1;
     V := D[RA_ctr][Decl_ctr];
   elseif Decl > 78.75:
-    W := T[1][RA_ctr];
+    Decl_ctr := 8;
+    W := T[RA_ctr][8];
   elseif Decl < -78.75:
-    W := T[-1][RA_ctr];
+    Decl_ctr := -8;
+    W := T[RA_ctr][-8];
   fi;
 
   message "RA_ctr for " & common_name S & ":";
@@ -1139,14 +1141,14 @@ enddef;
 
 macro plot_star_on_flat_panel;
 
-def plot_star_on_flat_panel (R) {star S, point P, numeric RA, numeric Decl} =
+def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_ctr} =
 
   path q[];
   point p[];
   numeric v;
   numeric n[];
   
-  if RA < 8:
+  if RA_ctr < 8:
     v := 0;
   else:
     v := 1;
@@ -1161,29 +1163,68 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA, numeric Decl} =
   message "R:";
   show R;
 
-  q0 := D[RA][Decl];
-  q1 := flat_quadrant[RA][Decl];
+  message "Error after here 100.";
+  pause;
+
+  message "RA_ctr:";
+  show RA_ctr;
+
+  message "Decl_ctr:";
+  show Decl_ctr;
+
+  pause;
+  
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    message "Error after here 101.";
+    q0 := D[RA_ctr][Decl_ctr];
+    message "Error after here 104.";
+    q1 := flat_quadrant[RA_ctr][Decl_ctr];
+    message "Error after here 105.";
+    draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
+  elseif (Decl_ctr == 8) or (Decl_ctr == -8):
+    message "Error after here 102.";
+    q0 := T[RA_ctr][Decl_ctr];
+    message "Error after here 103.";
+    q1 := flat_quadrant[RA_ctr][Decl_ctr];
+    message "q0:";
+    show q0;
+    message "q1:";
+    show q1;
+    pause;
+    draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
+  fi;
 
   %draw q0 with_color red with_pen Large_pen on_picture v9;
-  draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
-  
-  message "RA:";
-  show RA;
 
-  message "Decl:";
-  show Decl;
+  
+  message "RA_ctr:";
+  show RA_ctr;
+
+  message "Decl_ctr:";
+  show Decl_ctr;
   
   p0 := get_point (0) q0;
-  p1 := get_point (3) q0;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p1 := get_point (3) q0;
+  fi;
+
   p2 := get_point (2) q0;
   p3 := get_point (1) q0;
 
   p4 := get_point (0) q1;
   p5 := get_point (1) q1;
   p6 := get_point (2) q1;
-  p7 := get_point (3) q1;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p7 := get_point (3) q1;
+  fi;
+  
   n0 := magnitude(P - p0);
-  n1 := (P - p0) angle (p1 - p0);
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    n1 := (P - p0) angle (p1 - p0);
+  fi;
 
   message "n0";
   show n0;
@@ -1191,37 +1232,53 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA, numeric Decl} =
   message "n1";
   show n1;
 
-  if Decl >= 0:
+  if Decl_ctr > 0:
     n2 := 1;
   else:
     n2 := -1;
   fi;
 
   p8:= p4 shifted (0, 0, n2);
-  p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
+  fi;
 
   dotlabel.top("$p_0$", p0) on_picture v8;
-  dotlabel.lft("$p_1$", p1) on_picture v8;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    dotlabel.lft("$p_1$", p1) on_picture v8;
+  fi;
+  
   dotlabel.top("$p_2$", p2) on_picture v8;
   dotlabel.top("$p_3$", p3) on_picture v8;
 
   dotlabel.top("$p_0$", p0) on_picture v9;
-  dotlabel.top("$p_1$", p1) on_picture v9;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    dotlabel.top("$p_1$", p1) on_picture v9;
+  fi;
+  
   dotlabel.top("$p_2$", p2) on_picture v9;
   dotlabel.top("$p_3$", p3) on_picture v9;
 
   dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
   dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
   dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
-  dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v]; 
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v];
+  fi;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    message "p9";
+    show p9;  
+    R := p9;
+    dotlabel.top(common_name S, p9) on_picture flat_quadrant_picture[v];
+  fi;
   
-  message "p9";
-  show p9;  
-
-  R := p9;
-
   dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
-  dotlabel.top(common_name S, p9) on_picture flat_quadrant_picture[v];
+  
 
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
   
@@ -1304,9 +1361,13 @@ def get_flat_panels =
       message "q[" & decimal (m+1) & "]:";
       show q[m+1];
 
+      message "Error after here 2."; 
+
       p[k+8] := mediate(p[k+4], p[k+5]);
       p[k+9] := mediate(p[k+6], p[k+7]);
 
+      message "Error after here 3."; 
+      
       if j == 1:
 	q[m+1] *= t1;
 	draw q[m+1] on_picture flat_quadrant_picture[v];
@@ -1320,6 +1381,8 @@ def get_flat_panels =
 	  dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
 	fi;
       fi;
+
+      message "Error after here 4."; 
             
       if j > 1:
 	p[k+10] := get_point (0) q[m-1];
@@ -1330,6 +1393,8 @@ def get_flat_panels =
 	p[k+15] := mediate(p[k+12], p[k+13], .5);
 	n5 := magnitude(p[k+15] - p[k+14]);
 
+      message "Error after here 5."; 
+	
 	%t0 := identity shifted by (p[k-7] - p[k+14]);
 	%t0 := identity shifted (0, ((j-1) * 2cm));
 	t0 := identity shifted by (p[k+15]- p[k+8]);
@@ -1340,6 +1405,8 @@ def get_flat_panels =
 	p[k+7] *= t0;
 	p[k+8] *= t0;
 	p[k+9] *= t0;
+
+	message "Error after here 6."; 
 	
 	if j == 7:
 	  dotlabel.lft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
@@ -1350,11 +1417,15 @@ def get_flat_panels =
 	  dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
 	fi;
 
+	message "Error after here 7."; 
+
 	q[m+1] *= t0;
 	
 	draw q[m+1] on_picture flat_quadrant_picture[v];
 	draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
 
+	message "Error after here 8."; 
+	
 	if j == 7:
 	  dotlabel.lft("$p_{" & decimal (k+10) & "}$", p[k+10]) on_picture flat_quadrant_picture[v];
 	  dotlabel.rt("$p_{"  & decimal (k+11) & "}$", p[k+11]) on_picture flat_quadrant_picture[v];
@@ -1365,6 +1436,8 @@ def get_flat_panels =
 	fi;
 	
       fi;
+
+      message "Error after here 9."; 
       
       flat_quadrant[i][j] := q[m+1];
       flat_quadrant[i][-j] := q[m+1] rotated (180, 0);
@@ -1390,16 +1463,28 @@ def get_flat_panels =
   endfor;
 
   v := 0;
+
+  message "Error after here 10."; 
   
   for i := 0 upto 15:
     if i == 8:
       v := 1;
     fi;
-    q[m] := T[1][i];
+
+    message "Error after here 11."; 
+    
+    q[m] := T[i][8];
+
+    message "i:";
+    show i;
+
+
     p[k] := get_point (0) q[m];
     p[k+1] := get_point (1) q[m];
     p[k+2] := get_point (2) q[m];
 
+    message "Error after here 12."; 
+    
     n0 := magnitude (p[k+1] - p[k]);
     n1 := magnitude (p[k+2] - p[k]);
     n2 := (p[k+2] - p[k]) angle (p[k+1] - p[k]);
@@ -1419,7 +1504,7 @@ def get_flat_panels =
     draw q[m+2] on_picture flat_quadrant_picture[v];
 
     flat_quadrant[i][8]  := q[m+1];
-    flat_quadrant[1][-8] := q4;
+    flat_quadrant[i][-8] := q[m+2];
     k += 5;
     m += 3;
   endfor;

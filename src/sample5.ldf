@@ -194,7 +194,6 @@ plot_star_on_panel (temp_star_panel_point) {delta_piscium, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_piscium, temp_star_panel_point, RRA_ctr, DDecl_ctr};
 
-
 %% *** (3)
 
 plot_star_on_sphere (star_point) {radius, sirius};
@@ -205,6 +204,16 @@ plot_star_on_panel (temp_star_panel_point) {sirius, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {sirius, temp_star_panel_point, RRA_ctr, DDecl_ctr};
 
+%% *** (3)
+
+plot_star_on_sphere (star_point) {radius, delta_ursae_minoris};
+
+plot_star_on_spherical_biangle {delta_ursae_minoris, 104, label_pos_top, 0, 0};
+
+plot_star_on_panel (temp_star_panel_point) {delta_ursae_minoris, star_point};
+
+plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_ursae_minoris, temp_star_panel_point, RRA_ctr, DDecl_ctr};
+
 %% ** (2)
 
 input "sample5.aux";
@@ -213,21 +222,14 @@ input "sample5.aux";
 
 verbatim_metapost "end";
   
-end;  
+end;
 
-%% *** (3)
-
-plot_star_on_sphere (star_point) {radius, delta_ursae_minoris};
-
-plot_star_on_spherical_biangle {delta_ursae_minoris, 103, label_pos_top, 0, 0};
-
-plot_star_on_panel (temp_star_panel_point) {delta_ursae_minoris, star_point};
 
 %% *** (3)
 
 plot_star_on_sphere (star_point) {radius, gamma_apodis};
 
-plot_star_on_spherical_biangle {gamma_apodis, 104, label_pos_top, 0, 0};
+plot_star_on_spherical_biangle {gamma_apodis, 105, label_pos_top, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {gamma_apodis, star_point};
 
