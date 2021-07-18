@@ -142,8 +142,8 @@ def get_spherical_biangles {numeric rad} =
 
   label.rt("$0^\circ$", p21);
 
-  dotlabel.lft("$p_{20}$", p20);
-  dotlabel.rt("$p_{21}$", p21);
+  %dotlabel.lft("$p_{20}$", p20);
+  %dotlabel.rt("$p_{21}$", p21);
 
   edge0 += p20;
   edge1 += p21;
@@ -155,8 +155,8 @@ def get_spherical_biangles {numeric rad} =
   p22 := (0, -.25a);
   p23 := (0, .25a);
 
-  dotlabel.bot("$p_{22}$", p22);
-  dotlabel.top("$p_{23}$", p23);
+  %dotlabel.bot("$p_{22}$", p22);
+  %dotlabel.top("$p_{23}$", p23);
   label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
   label.rt("$90^\circ$", p23 shifted (.25cm, 0));
 
@@ -165,8 +165,8 @@ def get_spherical_biangles {numeric rad} =
   for i = 1 step 1 until 7:
     p[j]     := (-.5biangle_width[k], (i * n1));
     p[j + 1] := (.5biangle_width[k], (i * n1));
-    dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
-    dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
+    %dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
+    %dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
     label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1]) with_text_color red;
     edge0 += p[j];
     edge1 += p[j + 1];
@@ -180,16 +180,16 @@ def get_spherical_biangles {numeric rad} =
   endfor;
 
 
-  dotlabel.lft("$p_{24}$", p24);
-  dotlabel.rt("$p_{25}$", p25);
+  %dotlabel.lft("$p_{24}$", p24);
+  %dotlabel.rt("$p_{25}$", p25);
   
   j := 1;
 
   for i := 24 step 2 until 37:
     p[20 + i] := p[i] rotated (180, 0);
     p[20 + 1 + i] := p[i + 1] rotated (180, 0);
-    dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
-    dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
+    %dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
+    %dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
     label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
     j += 1;
   endfor;
@@ -370,7 +370,7 @@ def get_sphere_for_plotting_stars {numeric rradius} :=
   dotlabel.rt(u15, r15) v10;
   dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v8;
   dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v9;
-  label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
+  %label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
   dotlabel.rt("$r_{16}$", r16) v11;
 
 %% *** (3) Declination
@@ -477,15 +477,15 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
   show a1;
 
   P17 := ra_decl_zero_pt rotated (0, a0);
-  dotlabel.top("$P_{17}$", P17) pv[ctr];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr];
   label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
-  dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
-  dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
-  dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
+  %dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
 
   P19 := ra_decl_zero_pt rotated (0, 0, a1);
-  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
-  dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr + 1];
+  %dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
+  %dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr + 1];
 
   P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
 
@@ -529,10 +529,10 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
   % draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
   % draw q1 on_picture pv[ctr + 3] with_pen medium_pen with_color orange;
 
-  dotlabel.lft("$P_{22}$", P22) pv[ctr];
-  dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
-  dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
-  dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
   message "a0 (RA of star S in decimal degrees):";
   show a0;
 
@@ -650,9 +650,9 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
   message "P25:";
   show P25;
 
-  dotlabel.ulft("$P_{25}$", P25) on_picture pv[ctr];
-  dotlabel.rt("$P_{25}$", P25) pv[ctr + 1];
-  dotlabel.rt("$P_{25}$", P25) pv[ctr + 3];
+  %dotlabel.ulft("$P_{25}$", P25) on_picture pv[ctr];
+  %dotlabel.rt("$P_{25}$", P25) pv[ctr + 1];
+  %dotlabel.rt("$P_{25}$", P25) pv[ctr + 3];
 
   message "a1 (declination_decimal_degrees S)";
   show a1;
@@ -712,7 +712,7 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
     % draw q2 with_color magenta on_picture pv[ctr + 3];
 
     P26 := P22 rotated (0, a4);
-    dotlabel.bot("$P_{26}$", P26) on_picture pv[ctr];
+    %dotlabel.bot("$P_{26}$", P26) on_picture pv[ctr];
 
     a5 := arc_length (magnitude(a4)) c1;
     message "a5 (arc length of angle " & decimal magnitude(a4) & " of circle c1 with rradius " & decimal a2 & "):";
@@ -934,8 +934,8 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     fi;
 
     if do_extra_labels:
-      dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
-	on_picture qv[bi_ang0];
+      %dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
+      %	on_picture qv[bi_ang0];
     fi;
 
   message "Exiting macro `plot_star_on_spherical_biangle'.";
@@ -1163,34 +1163,24 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   message "R:";
   show R;
 
-  message "Error after here 100.";
-  pause;
-
   message "RA_ctr:";
   show RA_ctr;
 
   message "Decl_ctr:";
   show Decl_ctr;
 
-  pause;
-  
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    message "Error after here 101.";
     q0 := D[RA_ctr][Decl_ctr];
-    message "Error after here 104.";
     q1 := flat_quadrant[RA_ctr][Decl_ctr];
-    message "Error after here 105.";
     draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
   elseif (Decl_ctr == 8) or (Decl_ctr == -8):
-    message "Error after here 102.";
     q0 := T[RA_ctr][Decl_ctr];
-    message "Error after here 103.";
     q1 := flat_quadrant[RA_ctr][Decl_ctr];
     message "q0:";
     show q0;
     message "q1:";
     show q1;
-    pause;
+    %pause;
     draw q1 with_color red with_pen Large_pen on_picture flat_quadrant_picture[v]; 
   fi;
 
@@ -1244,30 +1234,30 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
   fi;
 
-  dotlabel.top("$p_0$", p0) on_picture v8;
+  %dotlabel.top("$p_0$", p0) on_picture v8;
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    dotlabel.lft("$p_1$", p1) on_picture v8;
+    %dotlabel.lft("$p_1$", p1) on_picture v8;
   fi;
   
-  dotlabel.top("$p_2$", p2) on_picture v8;
-  dotlabel.top("$p_3$", p3) on_picture v8;
+  %dotlabel.top("$p_2$", p2) on_picture v8;
+  %dotlabel.top("$p_3$", p3) on_picture v8;
 
-  dotlabel.top("$p_0$", p0) on_picture v9;
+  %dotlabel.top("$p_0$", p0) on_picture v9;
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    dotlabel.top("$p_1$", p1) on_picture v9;
+    %dotlabel.top("$p_1$", p1) on_picture v9;
   fi;
   
-  dotlabel.top("$p_2$", p2) on_picture v9;
-  dotlabel.top("$p_3$", p3) on_picture v9;
+  %dotlabel.top("$p_2$", p2) on_picture v9;
+  %dotlabel.top("$p_3$", p3) on_picture v9;
 
-  dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
-  dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
-  dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
+  %dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
+  %dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
+  %dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v];
+    %dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v];
   fi;
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
@@ -1277,7 +1267,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     dotlabel.top(common_name S, p9) on_picture flat_quadrant_picture[v];
   fi;
   
-  dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
+  %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
   
 
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
@@ -1327,7 +1317,6 @@ def get_flat_panels =
       t0 := identity; 
       q[m] := D[i][j];    
       %draw q[m] on_picture flat_quadrant_picture[v];
-      message "Error after here 1."; 
       p[k] := get_point (3) q[m];
       %dotlabel.top("$p_{" & decimal k & "}$", p[k]) on_picture flat_quadrant_picture[v];
       p[k+1] := get_point (0) q[m];
@@ -1361,29 +1350,23 @@ def get_flat_panels =
       message "q[" & decimal (m+1) & "]:";
       show q[m+1];
 
-      message "Error after here 2."; 
-
       p[k+8] := mediate(p[k+4], p[k+5]);
       p[k+9] := mediate(p[k+6], p[k+7]);
 
-      message "Error after here 3."; 
-      
       if j == 1:
 	q[m+1] *= t1;
 	draw q[m+1] on_picture flat_quadrant_picture[v];
 	draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
 	if j == 7:
-	  dotlabel.llft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
-	  dotlabel.lrt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
-	  dotlabel.urt("$p_{" & decimal (k+6) & "}$", p[k+6]) on_picture flat_quadrant_picture[v];
-	  dotlabel.ulft("$p_{" & decimal (k+7) & "}$", p[k+7]) on_picture flat_quadrant_picture[v];
-	  dotlabel.bot("$p_{" & decimal (k+8) & "}$", p[k+8]) on_picture flat_quadrant_picture[v];
-	  dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.llft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.lrt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.urt("$p_{" & decimal (k+6) & "}$", p[k+6]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.ulft("$p_{" & decimal (k+7) & "}$", p[k+7]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.bot("$p_{" & decimal (k+8) & "}$", p[k+8]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
 	fi;
       fi;
 
-      message "Error after here 4."; 
-            
       if j > 1:
 	p[k+10] := get_point (0) q[m-1];
 	p[k+11] := get_point (1) q[m-1];
@@ -1393,8 +1376,6 @@ def get_flat_panels =
 	p[k+15] := mediate(p[k+12], p[k+13], .5);
 	n5 := magnitude(p[k+15] - p[k+14]);
 
-      message "Error after here 5."; 
-	
 	%t0 := identity shifted by (p[k-7] - p[k+14]);
 	%t0 := identity shifted (0, ((j-1) * 2cm));
 	t0 := identity shifted by (p[k+15]- p[k+8]);
@@ -1406,39 +1387,31 @@ def get_flat_panels =
 	p[k+8] *= t0;
 	p[k+9] *= t0;
 
-	message "Error after here 6."; 
-	
 	if j == 7:
-	  dotlabel.lft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
-	  dotlabel.rt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
-	  dotlabel.rt("$p_{" & decimal (k+6) & "}$", p[k+6]) on_picture flat_quadrant_picture[v];
-	  dotlabel.lft("$p_{" & decimal (k+7) & "}$", p[k+7]) on_picture flat_quadrant_picture[v];
-	  dotlabel.bot("$p_{" & decimal (k+8) & "}$", p[k+8]) on_picture flat_quadrant_picture[v];
-	  dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.lft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.rt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.rt("$p_{" & decimal (k+6) & "}$", p[k+6]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.lft("$p_{" & decimal (k+7) & "}$", p[k+7]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.bot("$p_{" & decimal (k+8) & "}$", p[k+8]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
 	fi;
-
-	message "Error after here 7."; 
 
 	q[m+1] *= t0;
 	
 	draw q[m+1] on_picture flat_quadrant_picture[v];
 	draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
 
-	message "Error after here 8."; 
-	
 	if j == 7:
-	  dotlabel.lft("$p_{" & decimal (k+10) & "}$", p[k+10]) on_picture flat_quadrant_picture[v];
-	  dotlabel.rt("$p_{"  & decimal (k+11) & "}$", p[k+11]) on_picture flat_quadrant_picture[v];
-	  dotlabel.rt("$p_{"  & decimal (k+12) & "}$", p[k+12]) on_picture flat_quadrant_picture[v];
-	  dotlabel.lft("$p_{" & decimal (k+13) & "}$", p[k+13]) on_picture flat_quadrant_picture[v];
-	  dotlabel.top("$p_{"  & decimal (k+14) & "}$", p[k+14]) on_picture flat_quadrant_picture[v];
-	  dotlabel.bot("$p_{"  & decimal (k+15) & "}$", p[k+15]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.lft("$p_{" & decimal (k+10) & "}$", p[k+10]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.rt("$p_{"  & decimal (k+11) & "}$", p[k+11]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.rt("$p_{"  & decimal (k+12) & "}$", p[k+12]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.lft("$p_{" & decimal (k+13) & "}$", p[k+13]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.top("$p_{"  & decimal (k+14) & "}$", p[k+14]) on_picture flat_quadrant_picture[v];
+	  %dotlabel.bot("$p_{"  & decimal (k+15) & "}$", p[k+15]) on_picture flat_quadrant_picture[v];
 	fi;
 	
       fi;
 
-      message "Error after here 9."; 
-      
       flat_quadrant[i][j] := q[m+1];
       flat_quadrant[i][-j] := q[m+1] rotated (180, 0);
 
@@ -1464,15 +1437,11 @@ def get_flat_panels =
 
   v := 0;
 
-  message "Error after here 10."; 
-  
   for i := 0 upto 15:
     if i == 8:
       v := 1;
     fi;
 
-    message "Error after here 11."; 
-    
     q[m] := T[i][8];
 
     message "i:";
@@ -1483,8 +1452,6 @@ def get_flat_panels =
     p[k+1] := get_point (1) q[m];
     p[k+2] := get_point (2) q[m];
 
-    message "Error after here 12."; 
-    
     n0 := magnitude (p[k+1] - p[k]);
     n1 := magnitude (p[k+2] - p[k]);
     n2 := (p[k+2] - p[k]) angle (p[k+1] - p[k]);
