@@ -899,27 +899,23 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     
     drawdot R[point_number]with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
 
-    if do_black:
-
-      box_wd := .75cm;
-      box_ht := .5cm;
-      
-      if length (common_name S) > 8:
-	box_wd += .25cm;
-      fi;
-
-      
-      s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr)
-	   & "}\\hskip2em plus 1em minus 1em"; 
-      
-      write (s) to label_out;
-      beginfig(100 + label_picture_ctr);
-	fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
-	label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
-	drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
-      endfig with_projection parallel_x_y;
-      label_picture_ctr += 1;
+    box_wd := .75cm;
+    box_ht := .5cm;
+    
+    if length (common_name S) > 8:
+      box_wd += .25cm;
     fi;
+    
+    s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr)
+      & "}\\hskip2em plus 1em minus 1em"; 
+    
+    write (s) to label_out;
+    beginfig(100 + label_picture_ctr);
+      fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
+      label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
+      drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
+    endfig with_projection parallel_x_y;
+    label_picture_ctr += 1;
 
     if do_extra_labels:
       %dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
@@ -1214,7 +1210,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     %message "q1:";
     %show q1;
     %pause;
-    draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
+    %draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
   fi;
 
   %draw q0 with_color red with_pen medium_pen on_picture v9;
