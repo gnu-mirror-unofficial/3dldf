@@ -1037,12 +1037,11 @@ macro plot_star_on_panel;
 
 def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
 
-  bool_point_vector bpv;
   numeric RA;
   numeric Decl;
   numeric RA_ctr;
   numeric Decl_ctr;
-  boolean b[];
+  boolean b;
   path E[];
   point M[];
   rectangle V;
@@ -1095,57 +1094,22 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   
   if (Decl > 78.75) or (Decl < -78.75):
     draw W with_color blue with_pen medium_pen on_picture quadrant_picture;
-    bpv := E0 intersection_points W; 
+    pl := get_plane W;
   else:
     draw V with_color blue with_pen medium_pen on_picture quadrant_picture;
-    bpv := E0 intersection_points V;
+    pl := get_plane V;
   fi;
 
-%% !! START HERE:  LDF 2021.07.18.  Spica is right on the edge of a panel and no intersection is found.
-%% Account for this case.
+  bp := E0 intersection_point pl; 
+  b := bp;
   
-  %show bpv;
-  
-  b0 := bpv0;
-  b1 := bpv1;
-
-  % if ST <> "Spica":
-  %   pause;
-  % fi;
-  
-  if b0:
-    %message "bpv0 is true";
-    M0 := bpv0;
-    drawdot M0 with_color red with_pen medium_pen on_picture quadrant_picture;
-  elseif b1:
-    %message "bpv1 is true";
-    M0 := bpv1;
+  if b:
+    M0 := bp;
     drawdot M0 with_color red with_pen medium_pen on_picture quadrant_picture;
   else:
-    %message "bpv0 and bpv1 are both false";
-
-    if (Decl > 78.75) or (Decl < -78.75):
-
-      pl := get_plane W;
-
-      bp := E0 intersection_point pl; 
-    else:
-
-      pl := get_plane V;
-
-      bp := E0 intersection_point pl;
-    fi;
-
-    b2 := bp;
-    
-    if b2:
-
-      M0 := bp;
-    else:
-      %message "This can't happen.";
-      M0 := origin;
-      pause;
-    fi;
+    message "This can't happen.";
+    M0 := origin;
+    pause;
   fi;
 
   %message "M0:"; 
