@@ -409,9 +409,12 @@ Added this rule.
 @=bool_point_tertiary: path_tertiary INTERSECTION_POINT plane_secondary@>@/
 {
 
-    @=$$@> = Scan_Parse::intersection_points_func<Path, Plane, Bool_Point>(
-                static_cast<Path*>(@=$1@>), static_cast<Plane*>(@=$3@>),
-                parameter);
+    Bool_Point *bp = new Bool_Point;
+
+    *bp = static_cast<Plane*>(@=$3@>)->intersection_point(*static_cast<Path*>(@=$1@>));
+
+    @=$$@> = static_cast<void*>(bp);
+
 };
 
 @q **** (4) bool_point expression.  @>

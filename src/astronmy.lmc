@@ -140,7 +140,7 @@ def get_spherical_biangles {numeric rad} =
   p20 := (-.5n0, 0);
   p21 := (.5n0, 0);
 
-  label.rt("$0^\circ$", p21);
+  label.rt("$0^\circ$", p21 shifted (1.5cm, 0));
 
   %dotlabel.lft("$p_{20}$", p20);
   %dotlabel.rt("$p_{21}$", p21);
@@ -167,7 +167,7 @@ def get_spherical_biangles {numeric rad} =
     p[j + 1] := (.5biangle_width[k], (i * n1));
     %dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
     %dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
-    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (.5cm, 0)) with_text_color red;
+    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
     edge0 += p[j];
     edge1 += p[j + 1];
 
@@ -1064,6 +1064,10 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   point M[];
   rectangle V;
   triangle  W;
+
+  bool_point bp;
+  plane pl;
+
   
   RA   := right_ascension_decimal_degrees S;
   Decl := declination_decimal_degrees S; 
@@ -1095,11 +1099,11 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
     W := T[RA_ctr][-8];
   fi;
 
-  message "RA_ctr for " & common_name S & ":";
-  show RA_ctr;
+  % message "RA_ctr for " & common_name S & ":";
+  % show RA_ctr;
 
-  message "Decl_ctr for " & common_name S & ":";
-  show Decl_ctr;
+  % message "Decl_ctr for " & common_name S & ":";
+  % show Decl_ctr;
 
   %pause;
     
@@ -1135,12 +1139,35 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
     M0 := bpv1;
     drawdot M0 with_color red with_pen medium_pen on_picture quadrant_picture;
   else:
-    message "bpv0 and bpv1 are both false";
-    message "This can't happen.";
+    %message "bpv0 and bpv1 are both false";
+
+    if (Decl > 78.75) or (Decl < -78.75):
+
+      pl := get_plane W;
+
+      bp := E0 intersection_point pl; 
+    else:
+
+      pl := get_plane V;
+
+      bp := E0 intersection_point pl;
+    fi;
+
+    b2 := bp;
+    
+    if b2:
+
+      M0 := bp;
+    else:
+      %message "This can't happen.";
+      M0 := origin;
+      pause;
+    fi;
   fi;
 
   %message "M0:"; 
   %show M0;
+
   sstar_panel_point := M0;
 
 enddef;
