@@ -1,4 +1,4 @@
-%%% sample5.lmc
+%%% astronmy.lmc
 %%%% Created by Laurence D. Finston (LDF) Wed Jul 14 15:32:11 2021 +0200
 
 %% * (1) Copyright and License.
@@ -178,7 +178,6 @@ def get_spherical_biangles {numeric rad} =
     j += 2;
     k += 2;
   endfor;
-
 
   %dotlabel.lft("$p_{24}$", p24);
   %dotlabel.rt("$p_{25}$", p25);
@@ -501,7 +500,6 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
   P23 := get_normal q0;
   %show P23;
 
-
   t0 := identity rotated_around (origin, P23) 3;
 
   P24 := P17 transformed t0; 
@@ -523,7 +521,6 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
   endfor;
 
   q1 += P22;
-
 
   % draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
   % draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
@@ -769,7 +766,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   point y_axis_point;
   numeric box_wd;
   numeric box_ht;
-  pen star_pen[];
 
   color ccolor;
   
@@ -784,14 +780,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   decl := declination_decimal_degrees S;
   ra   :=  right_ascension_decimal_degrees S;
 
-  star_pen[-1] := pencircle scaled (8pt, 8pt, 8pt);       
-  star_pen[0]  := pencircle scaled (7pt, 7pt, 7pt); 
-  star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);       
-  star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
-  star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
-  star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
-  star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);       
-  
   %message "decl:";
   %show decl;
 
@@ -858,33 +846,33 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 
     write s to nw[bi_ang0];
     write s to star_info_combined;
-     
+
     if label_pos == label_pos_zero:
-      label("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+      label("{\medium " & common_name S & "}", R[point_number] shifted (shift_x, shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_top:
-      label.top("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+      label.top("{\medium " & common_name S & "}", R[point_number] shifted (shift_x, basic_shift_val + shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_bot:
-      label.bot("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, -3pt + shift_y))
+      label.bot("{\medium " & common_name S & "}", R[point_number] shifted (shift_x, -basic_shift_val + shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_lft:
-      label.lft("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+      label.lft("{\medium " & common_name S & "}", R[point_number] shifted (-basic_shift_val + shift_x, shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_rt:
-      label.rt("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+      label.rt("{\medium " & common_name S & "}", R[point_number] shifted (basic_shift_val + shift_x, shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_urt:
-      label.urt("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+      label.urt("{\medium " & common_name S & "}", R[point_number] shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_ulft:
-      label.ulft("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, 3pt + shift_y))
+      label.ulft("{\medium " & common_name S & "}", R[point_number] shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_lrt:
-      label.lrt("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, -3pt + shift_y))
+      label.lrt("{\medium " & common_name S & "}", R[point_number] shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     elseif label_pos == label_pos_llft:
-      label.llft("{\medium " & common_name S & "}", R[point_number] shifted (0 + shift_x, -3pt + shift_y))
+      label.llft("{\medium " & common_name S & "}", R[point_number] shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
 	with_text_color ccolor on_picture qv[bi_ang0];
     fi;
 
@@ -941,7 +929,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   %message "Exiting macro `plot_star_on_spherical_biangle'.";
 
 enddef;
-
 
 %% ** (2) macro draw_lines
 
@@ -1172,17 +1159,27 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
 
 enddef;
 
-
 %% ** (2) macro plot_star_on_flat_panel
 
 macro plot_star_on_flat_panel;
 
 def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_ctr, numeric label_pos} =
 
+  
+  
   path q[];
   point p[];
   numeric v;
   numeric n[];
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
   
   if RA_ctr < 8:
     v := 0;
@@ -1268,16 +1265,14 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
   p8:= p4 shifted (0, 0, n2);
 
-  %if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
-  %fi;
+  p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
 
   % dotlabel.lft("$p_0$", p0) on_picture v8;
   % dotlabel.lft("$p_0$", p0) on_picture v10;
 
-  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    %dotlabel.lft("$p_1$", p1) on_picture v8;
-  fi;
+  % if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %   dotlabel.lft("$p_1$", p1) on_picture v8;
+  % fi;
   
   % dotlabel.top("$p_2$", p2) on_picture v8;
   % dotlabel.top("$p_3$", p3) on_picture v8;
@@ -1288,9 +1283,9 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   % dotlabel.lft("$p_2$", p2) on_picture v10;
   % dotlabel.rt("$p_3$", p3) on_picture v10;
   
-  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    %dotlabel.top("$p_1$", p1) on_picture v9;
-  fi;
+  % if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %   dotlabel.top("$p_1$", p1) on_picture v9;
+  % fi;
   
   % dotlabel.top("$p_2$", p2) on_picture v9;
   % dotlabel.top("$p_3$", p3) on_picture v9;
@@ -1307,11 +1302,63 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   %show p9;  
   R := p9;
 
-  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
-    dotlabel.top(common_name S, p9) on_picture flat_quadrant_picture[v];
-  else:
-    dotlabel.bot(common_name S, p9) on_picture flat_quadrant_picture[v];
+  
+  
+  if label_pos == label_pos_zero:
+    label("{\medium " & common_name S & "}", R shifted (shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_top:
+    label.top("{\medium " & common_name S & "}", R shifted (shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_bot:
+    label.bot("{\medium " & common_name S & "}", R shifted (shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_lft:
+    label.lft("{\medium " & common_name S & "}", R shifted (-basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_rt:
+    label.rt("{\medium " & common_name S & "}", R shifted (basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_urt:
+    label.urt("{\medium " & common_name S & "}", R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_ulft:
+    label.ulft("{\medium " & common_name S & "}", R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_lrt:
+    label.lrt("{\medium " & common_name S & "}", R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
+  elseif label_pos == label_pos_llft:
+    label.llft("{\medium " & common_name S & "}", R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[v];
   fi;
+
+  
+  
+  numeric app_mag;
+  pen sstar_pen;
+
+  app_mag := apparent_magnitude S;
+
+  if app_mag < 0:
+    sstar_pen := star_pen[-1];
+  elseif app_mag < 1:
+    sstar_pen := star_pen[0];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+  else:
+    sstar_pen := star_pen[5];
+  fi;
+
+  
+  
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v];
   
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
@@ -1468,9 +1515,7 @@ def get_flat_panels {numeric ttab_width}=
       flat_quadrant[i][j] := q[m+1];
       flat_quadrant[i][-j] := q[m+1] rotated (180, 0);
 
-
       %draw ((get_point (0) flat_quadrant[i][j]) -- (get_point(2) flat_quadrant[i][j]);
-
 
       temp_a := mediate(get_point (0) flat_quadrant[i][j], get_point (1) flat_quadrant[i][j], .5);
       temp_b := mediate(get_point (2) flat_quadrant[i][j], get_point (3) flat_quadrant[i][j], .5);
@@ -1628,13 +1673,9 @@ def get_flat_panels {numeric ttab_width}=
       draw temp_path_d on_picture flat_quadrant_picture[1];
     endfor;
 
-
-
     k += 2;
     j += 8;
   endfor;
-
-
 
   
   
@@ -1657,7 +1698,6 @@ endinput;
 %%       \initials{LDF 2004.02.12}.                                          
 
 %% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
-
 
 %% * (1) Local variables for Emacs.
 
