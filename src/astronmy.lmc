@@ -776,7 +776,7 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   fi;
 
   %message "Entering macro `plot_star_on_spherical_biangle'.";
-  
+
   decl := declination_decimal_degrees S;
   ra   :=  right_ascension_decimal_degrees S;
 
@@ -878,7 +878,7 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 
     numeric app_mag;
     pen sstar_pen;
-
+   
     app_mag := apparent_magnitude S;
 
     if app_mag < 0:
@@ -1356,8 +1356,6 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     sstar_pen := star_pen[5];
   fi;
 
-  
-  
   drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v];
   
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];

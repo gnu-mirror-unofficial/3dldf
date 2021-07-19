@@ -111,6 +111,10 @@ numeric RRA_ctr;
 
 numeric DDecl_ctr;
 
+numeric basic_shift_val;
+
+basic_shift_val := 3pt;
+
 RRA_ctr := 0;
 DDecl_ctr := 0;
 
@@ -123,6 +127,16 @@ label_pos_urt  := 5;
 label_pos_ulft := 6;
 label_pos_lrt  := 7;
 label_pos_llft := 8;
+
+pen star_pen[];
+
+star_pen[-1] := pencircle scaled (8pt, 8pt, 8pt);       
+star_pen[0]  := pencircle scaled (7pt, 7pt, 7pt); 
+star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);       
+star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
+star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
+star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
+star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);       
 
 medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
@@ -177,9 +191,12 @@ get_panels {radius};
 
 get_flat_panels {tab_width};
 
+
+
 %% *** (3) 1.  Sirius
 
 plot_star_on_sphere (star_point) {radius, sirius};
+
 
 plot_star_on_spherical_biangle {sirius, 1, label_pos_top, 0, 0};
 
@@ -682,13 +699,6 @@ end;
 
 %% ** (2) Figure and output commands.
 
-input "sample5.aux";
-
-%% ** (2)
-
-verbatim_metapost "end";
-  
-end;  
 
 %% ** (2) End of 3DLDF code.
 
