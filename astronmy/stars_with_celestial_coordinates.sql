@@ -1417,8 +1417,6 @@ Hoffleit D, Warren Jr W, (1991), Harvard Revised Bright Star Catalogue, 5th Edit
 
 /* ** (2) */
 
-/* !! START HERE:  LDF 2021.06.16.  Get info for this star:  */ 
-
 insert into Stars (approx_rank_apparent_magnitude, common_name, bayer_designation_greek_letter, constellation_name_genitive)
 values (105,  "Zubenelgenubi", "Alpha", "Librae");
 
@@ -2173,6 +2171,10 @@ HR 224,
 -- and approx_rank_apparent_magnitude > 0
 
 
+show columns from Stars;
+
+select * from Stars where declination_decimal_degrees > 0 and declination_decimal_degrees < 11.25 and
+
 75. Epsilon Centauri                            13 40 -53.5  310.2  +8.7  B1III         2.29  -3.02    8.68 0.77   380
 
 79. Eta Centauri                                14 36 -42.2  322.9 +16.6  B1.5V         2.33v -2.55v  10.57 0.83   310
@@ -2829,6 +2831,104 @@ update Stars set common_name = "$\\delta$ Ursae minoris" where bs_hr_number = 67
 
 select * from Stars where right_ascension_hours = 0 and right_ascension_minutes = 0 and right_ascension_seconds = 0 
 and declination_degrees = 0 and declination_minutes = 0 and declination_seconds = 0\G
+
+select common_name, * from Stars where right_ascension_hours = 0 and right_ascension_minutes = 0 and right_ascension_seconds = 0 
+
+
+show columns from Stars;
+
+| apparent_magnitude                 | float         | NO   |     | 1000    |       |
+
+
+select common_name, flamsteed_designation_number, bayer_designation_greek_letter, approx_rank_apparent_magnitude,
+apparent_magnitude from Stars where approx_rank_apparent_magnitude > 50 and approx_rank_apparent_magnitude < 100
+order by approx_rank_apparent_magnitude;
+
+Diphda                                      16 | beta                           |                             51 |               1000 |
+Nunki                                       34 | sigma                          |                             52 |               1000 |
+Menkent                                      5 | theta                          |                             53 |               1000 |
+Alpheratz                                   21 | alpha                          |                             54 |               1000 |
+Mirach                                      43 | beta                           |                             55 |               1000 |
+Saiph                                       53 | kappa                          |                             56 |               1000 |
+Kochab                                       7 | beta                           |                             57 |               1000 |
+Al Dhanab                                    0 | beta                           |                             58 |               1000 |
+Rasalhague                                  55 | alpha                          |                             59 |               1000 |
+Algol                                       26 | beta                           |                             60 |               1000 |
+
+
+update Stars set absolute_magnitude = -0.30, apparent_magnitude = 2.04 where approx_rank_apparent_magnitude = 51;
+
+update Stars set absolute_magnitude = -2.14, apparent_magnitude = 2.05 where approx_rank_apparent_magnitude = 52;
+
+update Stars set absolute_magnitude =  0.70, apparent_magnitude = 2.06 where approx_rank_apparent_magnitude = 53;
+
+update Stars set absolute_magnitude = -0.30, apparent_magnitude = 2.07 where approx_rank_apparent_magnitude = 54;
+
+update Stars set absolute_magnitude = -1.86, apparent_magnitude = 2.07 where approx_rank_apparent_magnitude = 55;
+
+update Stars set absolute_magnitude = -4.65, apparent_magnitude = 2.07 where approx_rank_apparent_magnitude = 56;
+
+update Stars set absolute_magnitude = -0.87, apparent_magnitude = 2.07 where approx_rank_apparent_magnitude = 57;
+
+
+update Stars set absolute_magnitude = 1.52, apparent_magnitude = 2.07 where approx_rank_apparent_magnitude = 58;
+update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 58;
+
+update Stars set absolute_magnitude =  1.30, apparent_magnitude = 2.08 where approx_rank_apparent_magnitude = 59;
+
+update Stars set absolute_magnitude = 0.18, apparent_magnitude = 2.09 where approx_rank_apparent_magnitude = 60;
+update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 60;
+
+
+
+
+97 missing completely
+
+
++------------------+------------------------------+--------------------------------+--------------------------------+--------------------+
+| common_name      | flamsteed_designation_number | bayer_designation_greek_letter | approx_rank_apparent_magnitude | apparent_magnitude |
++------------------+------------------------------+--------------------------------+--------------------------------+--------------------+
+| Almach           |                            0 | gamma                          |                             61 |               2.27 |
+| Denebola         |                           94 | beta                           |                             62 |               1000 |
+| Cih              |                           27 | gamma                          |                             63 |               1000 |
+| Muhlifain        |                            0 | gamma                          |                             64 |               1000 |
+| Naos             |                            0 | zeta                           |                             65 |               1000 |
+| Aspidiske        |                            0 | iota                           |                             66 |               1000 |
+| Alphecca         |                            5 | alpha                          |                             67 |               1000 |
+| Suhail           |                            0 | lambda                         |                             68 |               1000 |
+| Mizar            |                           79 | zeta                           |                             69 |               1000 |
+| Sadr             |                           37 | gamma                          |                             70 |               1000 |
+| Schedar          |                           18 | alpha                          |                             71 |               1000 |
+| Eltanin          |                           33 | gamma                          |                             72 |               1000 |
+| Mintaka          |                           34 | delta                          |                             73 |               1000 |
+| Caph             |                           11 | beta                           |                             74 |               1000 |
+|                  |                            0 | epsilon                        |                             75 |               1000 |
+| Dschubba         |                            7 | delta                          |                             76 |               1000 |
+| Wei              |                           26 | epsilon                        |                             77 |               1000 |
+| Men              |                            0 | alpha                          |                             78 |               1000 |
+|                  |                            0 | eta                            |                             79 |               1000 |
+| Merak            |                           48 | beta                           |                             80 |               1000 |
+| Izar             |                           36 | epsilon                        |                             81 |               1000 |
+| Enif             |                            8 | epsilon                        |                             82 |               1000 |
+| Girtab           |                            0 | kappa                          |                             83 |               1000 |
+| Ankaa            |                            0 | alpha                          |                             84 |               1000 |
+| Phecda           |                           64 | gamma                          |                             85 |               1000 |
+| Sabik            |                           35 | eta                            |                             86 |               1000 |
+| Scheat           |                           53 | beta                           |                             87 |               1000 |
+| Aludra           |                           31 | eta                            |                             88 |               1000 |
+| Alderamin        |                            5 | alpha                          |                             89 |               1000 |
+| Markeb           |                            0 | kappa                          |                             90 |               1000 |
+| Gienah           |                           53 | epsilon                        |                             91 |               1000 |
+| Markab           |                           54 | alpha                          |                             92 |               1000 |
+| Menkar           |                           92 | alpha                          |                             93 |               1000 |
+| Han              |                           13 | zeta                           |                             94 |               1000 |
+| Al Nair al Kent. |                            0 | zeta                           |                             95 |               1000 |
+| Zosma            |                           68 | delta                          |                             96 |               1000 |
+| Arneb            |                           11 | alpha                          |                             98 |               1000 |
+|                  |                            0 | delta                          |                             99 |               1000 |
++------------------+------------------------------+--------------------------------+--------------------------------+--------------------+
+48 rows in set (0.01 sec)
+
 
 
 /* * (1) */
