@@ -2891,74 +2891,32 @@ update Stars set apparent_magnitude = 2.22, absolute_magnitude = 0.42 where appr
 
 update Stars set apparent_magnitude = 2.23, absolute_magnitude = -3.99 where approx_rank_apparent_magnitude = 68;
 
-update Stars set apparent_magnitude = 2.23, absolute_magnitude = 0.33 where approx_rank_apparent_magnitude = 69;
 
-update Stars set apparent_magnitude = 2.23, absolute_magnitude = -6.12 where approx_rank_apparent_magnitude = 70;
 
 
 update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 63;
 update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 66;
-update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 67;
+update Stars set is_eclipsing_binary = 1-1.99-1.99 where approx_rank_apparent_magnitude = 67;
+
+(fset 'insert-update-command
+   [escape ?d ?\C-d ?\C-  ?\C-s ?  left ?\C-w ?\C-d ?\C-  ?\C-e C-left C-right ?\C-w C-f12 ?c ?\C-r ?w ?h ?e ?r ?e ?\C-  left ?\C-y ?\C-r ?, ?\C-  ?\C-y escape ?y ?\C-e ?\C-r ?= right right ?\C-y escape ?y ?\C-n ?\C-a ?\C-o up])
+(global-set-key [67109078] 'insert-update-command);; C-Ö
+(set-register ?c "update Stars set apparent_magnitude = , absolute_magnitude =  where approx_rank_apparent_magnitude = ;")
+
+/* !! START HERE:  LDF 2021.07.23.  */ 
+
+71 2.24 -1.99
+72 2.24 -1.04
+73 2.25 -4.99
+74 2.28 1.17
+75 2.29 -3.02
+76 2.29 -3.16
+77 2.29  0.78
+78 2.30 -3.83
+79 2.33 -2.55
 
 
+update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 73;
+update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 79;
 
-
-
-97 missing completely
-
-
-+------------------+------------------------------+--------------------------------+--------------------------------+--------------------+
-| common_name      | flamsteed_designation_number | bayer_designation_greek_letter | approx_rank_apparent_magnitude | apparent_magnitude |
-+------------------+------------------------------+--------------------------------+--------------------------------+--------------------+
-| Almach           |                            0 | gamma                          |                             61 |               2.27 |
-| Denebola         |                           94 | beta                           |                             62 |               1000 |
-| Cih              |                           27 | gamma                          |                             63 |               1000 |
-| Muhlifain        |                            0 | gamma                          |                             64 |               1000 |
-| Naos             |                            0 | zeta                           |                             65 |               1000 |
-| Aspidiske        |                            0 | iota                           |                             66 |               1000 |
-| Alphecca         |                            5 | alpha                          |                             67 |               1000 |
-| Suhail           |                            0 | lambda                         |                             68 |               1000 |
-| Mizar            |                           79 | zeta                           |                             69 |               1000 |
-| Sadr             |                           37 | gamma                          |                             70 |               1000 |
-| Schedar          |                           18 | alpha                          |                             71 |               1000 |
-| Eltanin          |                           33 | gamma                          |                             72 |               1000 |
-| Mintaka          |                           34 | delta                          |                             73 |               1000 |
-| Caph             |                           11 | beta                           |                             74 |               1000 |
-|                  |                            0 | epsilon                        |                             75 |               1000 |
-| Dschubba         |                            7 | delta                          |                             76 |               1000 |
-| Wei              |                           26 | epsilon                        |                             77 |               1000 |
-| Men              |                            0 | alpha                          |                             78 |               1000 |
-|                  |                            0 | eta                            |                             79 |               1000 |
-| Merak            |                           48 | beta                           |                             80 |               1000 |
-| Izar             |                           36 | epsilon                        |                             81 |               1000 |
-| Enif             |                            8 | epsilon                        |                             82 |               1000 |
-| Girtab           |                            0 | kappa                          |                             83 |               1000 |
-| Ankaa            |                            0 | alpha                          |                             84 |               1000 |
-| Phecda           |                           64 | gamma                          |                             85 |               1000 |
-| Sabik            |                           35 | eta                            |                             86 |               1000 |
-| Scheat           |                           53 | beta                           |                             87 |               1000 |
-| Aludra           |                           31 | eta                            |                             88 |               1000 |
-| Alderamin        |                            5 | alpha                          |                             89 |               1000 |
-| Markeb           |                            0 | kappa                          |                             90 |               1000 |
-| Gienah           |                           53 | epsilon                        |                             91 |               1000 |
-| Markab           |                           54 | alpha                          |                             92 |               1000 |
-| Menkar           |                           92 | alpha                          |                             93 |               1000 |
-| Han              |                           13 | zeta                           |                             94 |               1000 |
-| Al Nair al Kent. |                            0 | zeta                           |                             95 |               1000 |
-| Zosma            |                           68 | delta                          |                             96 |               1000 |
-| Arneb            |                           11 | alpha                          |                             98 |               1000 |
-|                  |                            0 | delta                          |                             99 |               1000 |
-+------------------+------------------------------+--------------------------------+--------------------------------+--------------------+
-48 rows in set (0.01 sec)
-
-
-
-/* * (1) */
-
-
-/* Local Variables:            */
-/* mode:SQL                    */
-/* outline-minor-mode:t        */
-/* outline-regexp:"/\\* [*]+" */
-/* End:                        */
 
