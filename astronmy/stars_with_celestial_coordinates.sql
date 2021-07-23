@@ -2844,18 +2844,6 @@ select common_name, flamsteed_designation_number, bayer_designation_greek_letter
 apparent_magnitude from Stars where approx_rank_apparent_magnitude > 50 and approx_rank_apparent_magnitude < 100
 order by approx_rank_apparent_magnitude;
 
-Diphda                                      16 | beta                           |                             51 |               1000 |
-Nunki                                       34 | sigma                          |                             52 |               1000 |
-Menkent                                      5 | theta                          |                             53 |               1000 |
-Alpheratz                                   21 | alpha                          |                             54 |               1000 |
-Mirach                                      43 | beta                           |                             55 |               1000 |
-Saiph                                       53 | kappa                          |                             56 |               1000 |
-Kochab                                       7 | beta                           |                             57 |               1000 |
-Al Dhanab                                    0 | beta                           |                             58 |               1000 |
-Rasalhague                                  55 | alpha                          |                             59 |               1000 |
-Algol                                       26 | beta                           |                             60 |               1000 |
-
-
 update Stars set absolute_magnitude = -0.30, apparent_magnitude = 2.04 where approx_rank_apparent_magnitude = 51;
 
 update Stars set absolute_magnitude = -2.14, apparent_magnitude = 2.05 where approx_rank_apparent_magnitude = 52;
@@ -2878,6 +2866,40 @@ update Stars set absolute_magnitude =  1.30, apparent_magnitude = 2.08 where app
 
 update Stars set absolute_magnitude = 0.18, apparent_magnitude = 2.09 where approx_rank_apparent_magnitude = 60;
 update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 60;
+
+
+update Stars set apparent_magnitude = , absolute_magnitude =  where approx_rank_apparent_magnitude = ;
+
+update Stars set apparent_magnitude = 2.10, absolute_magnitude = -3.08 where approx_rank_apparent_magnitude = 61;             
+
+
+update Stars set apparent_magnitude = 2.14, absolute_magnitude = 1.92  where approx_rank_apparent_magnitude = 62;
+
+
+
+update Stars set apparent_magnitude = 2.15, absolute_magnitude = -4.22 where approx_rank_apparent_magnitude = 63;
+
+
+update Stars set apparent_magnitude = 2.20, absolute_magnitude = -0.81 where approx_rank_apparent_magnitude = 64;  
+
+update Stars set apparent_magnitude = 2.21, absolute_magnitude = -5.95 where approx_rank_apparent_magnitude = 65;  
+
+update Stars set apparent_magnitude = 2.21, absolute_magnitude = -4.42 where approx_rank_apparent_magnitude = 66; 
+
+
+update Stars set apparent_magnitude = 2.22, absolute_magnitude = 0.42 where approx_rank_apparent_magnitude = 67;
+
+update Stars set apparent_magnitude = 2.23, absolute_magnitude = -3.99 where approx_rank_apparent_magnitude = 68;
+
+update Stars set apparent_magnitude = 2.23, absolute_magnitude = 0.33 where approx_rank_apparent_magnitude = 69;
+
+update Stars set apparent_magnitude = 2.23, absolute_magnitude = -6.12 where approx_rank_apparent_magnitude = 70;
+
+
+update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 63;
+update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 66;
+update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 67;
+
 
 
 
