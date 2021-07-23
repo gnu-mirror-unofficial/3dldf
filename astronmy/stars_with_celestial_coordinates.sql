@@ -2905,18 +2905,29 @@ update Stars set is_eclipsing_binary = 1-1.99-1.99 where approx_rank_apparent_ma
 
 /* !! START HERE:  LDF 2021.07.23.  */ 
 
-71 2.24 -1.99
-72 2.24 -1.04
-73 2.25 -4.99
-74 2.28 1.17
-75 2.29 -3.02
-76 2.29 -3.16
-77 2.29  0.78
-78 2.30 -3.83
-79 2.33 -2.55
+update Stars set apparent_magnitude = 2.24, absolute_magnitude = -1.99 where approx_rank_apparent_magnitude = 71;
 
+
+update Stars set apparent_magnitude = 2.24, absolute_magnitude = -1.04 where approx_rank_apparent_magnitude = 72;
+
+update Stars set apparent_magnitude = 2.25, absolute_magnitude = -4.99 where approx_rank_apparent_magnitude = 73;
+
+update Stars set apparent_magnitude = 2.28, absolute_magnitude = 1.17 where approx_rank_apparent_magnitude = 74;
+
+update Stars set apparent_magnitude = 2.29, absolute_magnitude = -3.02 where approx_rank_apparent_magnitude = 75;
+
+update Stars set apparent_magnitude = 2.29, absolute_magnitude = -3.16 where approx_rank_apparent_magnitude = 76;
+
+update Stars set apparent_magnitude = 2.29 , absolute_magnitude = 0.78 where approx_rank_apparent_magnitude = 77;
+
+update Stars set apparent_magnitude = 2.30, absolute_magnitude = -3.83 where approx_rank_apparent_magnitude = 78;
+
+update Stars set apparent_magnitude = 2.33, absolute_magnitude = -2.55 where approx_rank_apparent_magnitude = 79;
 
 update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 73;
 update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 79;
 
+update Stars set common_name = "$\\epsilon$ Centauri" where approx_rank_apparent_magnitude = 75;
+
+update Stars set common_name = "$\\eta$ Centauri" where approx_rank_apparent_magnitude = 79;
 
