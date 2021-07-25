@@ -1129,7 +1129,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
   color ccolor;
   
   if do_black:
-    ccolor := white;
+    ccolor := white;  %% white
   else:
     ccolor := black;
   fi;
@@ -1306,7 +1306,7 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     sstar_pen := star_pen[5];
   fi;
 
-  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v];
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 2];
   
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
@@ -1403,8 +1403,18 @@ def get_flat_panels {numeric ttab_width}=
 
       if j == 1:
         q[m+1] *= t1;
-        draw q[m+1] on_picture flat_quadrant_picture[v];
-        draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
+	if do_black:
+	  fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
+ 	  draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+	else:
+	  draw q[m+1] on_picture flat_quadrant_picture[v];
+	fi;
+	if do_black:
+	  fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
+	  draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v+2];
+	else:
+	  draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
+	fi;
         if j == 7:
           %dotlabel.llft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
           %dotlabel.lrt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
@@ -1446,8 +1456,15 @@ def get_flat_panels {numeric ttab_width}=
 
         q[m+1] *= t0;
         
-        draw q[m+1] on_picture flat_quadrant_picture[v];
-        draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
+	if do_black:
+	  fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
+	  draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+	  fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
+	  draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v+2];
+	else:
+	  draw q[m+1] on_picture flat_quadrant_picture[v];
+	  draw q[m+1] rotated (180, 0) on_picture flat_quadrant_picture[v];
+	fi;
 
         if j == 7:
           %dotlabel.lft("$p_{" & decimal (k+10) & "}$", p[k+10]) on_picture flat_quadrant_picture[v];
@@ -1512,8 +1529,15 @@ def get_flat_panels {numeric ttab_width}=
 
     q[m+2] := q[m+1] rotated (180, 0);
 
-    draw q[m+1] on_picture flat_quadrant_picture[v];
-    draw q[m+2] on_picture flat_quadrant_picture[v];
+    if do_black:
+      draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+      fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
+      draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+      fill q[m+2] with_color black on_picture flat_quadrant_picture[v];
+    else:
+      draw q[m+1] on_picture flat_quadrant_picture[v];
+      draw q[m+2] on_picture flat_quadrant_picture[v];
+    fi;
 
     flat_quadrant[i][8]  := q[m+1];
     flat_quadrant[i][-8] := q[m+2];
