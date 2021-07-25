@@ -2907,7 +2907,6 @@ update Stars set is_eclipsing_binary = 1-1.99-1.99 where approx_rank_apparent_ma
 
 update Stars set apparent_magnitude = 2.24, absolute_magnitude = -1.99 where approx_rank_apparent_magnitude = 71;
 
-
 update Stars set apparent_magnitude = 2.24, absolute_magnitude = -1.04 where approx_rank_apparent_magnitude = 72;
 
 update Stars set apparent_magnitude = 2.25, absolute_magnitude = -4.99 where approx_rank_apparent_magnitude = 73;
@@ -2931,3 +2930,58 @@ update Stars set common_name = "$\\epsilon$ Centauri" where approx_rank_apparent
 
 update Stars set common_name = "$\\eta$ Centauri" where approx_rank_apparent_magnitude = 79;
 
+show columns from Stars;
+
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude, absolute_magnitude from Stars
+where approx_rank_apparent_magnitude > 90 and approx_rank_apparent_magnitude < 101
+order by approx_rank_apparent_magnitude;
+
+update Stars set common_name = "$\\zetaapparent_magnitude = 2.35 , absolute_magnitude = -1.69 where approx_rank_apparent_magnitude = 81;
+
+select * from Stars where approx_rank_apparent_magnitude = 95\G
+
+update Stars set apparent_magnitude = 2.35 , absolute_magnitude = -1.69 where approx_rank_apparent_magnitude = 81;
+
+update Stars set apparent_magnitude = 2.38 , absolute_magnitude = -4.19 where approx_rank_apparent_magnitude = 82;
+
+update Stars set apparent_magnitude = 2.39 , absolute_magnitude = -3.38 where approx_rank_apparent_magnitude = 83;
+
+update Stars set apparent_magnitude = 2.40  , absolute_magnitude = 0.52 where approx_rank_apparent_magnitude = 84;
+
+update Stars set apparent_magnitude = 2.41  , absolute_magnitude = 0.36 where approx_rank_apparent_magnitude = 85;
+
+update Stars set apparent_magnitude = 2.43  , absolute_magnitude = 0.37 where approx_rank_apparent_magnitude = 86;
+
+update Stars set apparent_magnitude = 2.44, absolute_magnitude = -1.49 where approx_rank_apparent_magnitude = 87;
+
+update Stars set apparent_magnitude = 2.45 , absolute_magnitude = -7.51 where approx_rank_apparent_magnitude = 88;
+
+update Stars set apparent_magnitude = 2.45  , absolute_magnitude = 1.58 where approx_rank_apparent_magnitude = 89;
+
+update Stars set apparent_magnitude = 2.47 , absolute_magnitude = -3.62 where approx_rank_apparent_magnitude = 90;
+
+update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 87;
+
+update Stars set common_name = "$\\zeta$ Centauri" where approx_rank_apparent_magnitude = 95;
+
+update Stars set apparent_magnitude = 2.48  , absolute_magnitude = 0.76 where approx_rank_apparent_magnitude = 91;
+
+update Stars set apparent_magnitude = 2.49 , absolute_magnitude = -0.67 where approx_rank_apparent_magnitude = 92;
+
+update Stars set apparent_magnitude = 2.54 , absolute_magnitude = -1.61 where approx_rank_apparent_magnitude = 93;
+
+update Stars set apparent_magnitude = 2.54 , absolute_magnitude = -3.20 where approx_rank_apparent_magnitude = 94;
+
+update Stars set apparent_magnitude = 2.55 , absolute_magnitude = -2.81 where approx_rank_apparent_magnitude = 95;
+
+update Stars set apparent_magnitude = 2.56  , absolute_magnitude = 1.32 where approx_rank_apparent_magnitude = 96;
+
+update Stars set apparent_magnitude = 2.56 , absolute_magnitude = -3.50 where approx_rank_apparent_magnitude = 97;
+
+update Stars set apparent_magnitude = 2.58 , absolute_magnitude = -5.40 where approx_rank_apparent_magnitude = 98;
+
+update Stars set apparent_magnitude = 2.58, absolute_magnitude = -2.84 where approx_rank_apparent_magnitude = 99;
+
+update Stars set apparent_magnitude = 2.58 , absolute_magnitude = -0.94 where approx_rank_apparent_magnitude = 100;
+
+update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 99;
