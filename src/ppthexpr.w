@@ -1452,7 +1452,7 @@ Added this rule.
 @*1 \§numeric list optional>.
   
 @<Type declarations for non-terminal symbols@>=
-@=%type <pointer_value> pnumeric_list_optional@>@/
+@=%type <pointer_value> numeric_list_optional@>@/
 
 @q *** (3) numeric_list_optional --> EMPTY.@>
 @*2 \§numeric list optional> $\longrightarrow$ \.{EMPTY}.  
@@ -1463,7 +1463,14 @@ Added this rule.
    @=$$@> = static_cast<void*>(0);
 };
 
-/* !!START HERE  LDF 2021.07.26.  */ 
+@q *** (3) numeric_list_optional --> numeric_list.@>
+@*2 \§numeric list optional> $\longrightarrow$ \§numeric list>.
+
+@<Define rules@>=
+@=numeric_list_optional: numeric_list@>@/
+{
+   @=$$@> = @=$1@>;
+};
 
 
 @q ** (2) path secondary.  @>
