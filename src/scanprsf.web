@@ -224,7 +224,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
   bool DEBUG = false; /* |true| */ @; 
   if (DEBUG) 
     {
-      cerr_strm << thread_name << "Entering `Scan_Parse::variable_func()'.";
+      cerr_strm << thread_name << "Entering `Scan_Parse::variable_func'.";
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
@@ -244,7 +244,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
     {
       if (entry == static_cast<Id_Map_Entry_Node>(0))
         {
-          cerr_strm << thread_name << "In `Scan_Parse::variable_func()':"
+          cerr_strm << thread_name << "In `Scan_Parse::variable_func':"
                     << endl << "   entry == 0";
           cerr_message(cerr_strm);
           cerr_strm.str("");
@@ -254,7 +254,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
       else /* (|entry != 0|)  */
         {
 
-          cerr_strm << thread_name << "In `Scan_Parse::variable_func()':"
+          cerr_strm << thread_name << "In `Scan_Parse::variable_func':"
                     << endl << "   entry != 0";
           cerr_message(cerr_strm);
           cerr_strm.str("");
@@ -262,7 +262,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
           if (entry->object == static_cast<void*>(0))
             {
               
-              cerr_strm << thread_name << "In `Scan_Parse::variable_func()':"
+              cerr_strm << thread_name << "In `Scan_Parse::variable_func':"
                         << endl << "   `entry->object' == 0";
               cerr_message(cerr_strm);
               cerr_strm.str("");
@@ -272,7 +272,7 @@ Scan_Parse::variable_func(Scanner_Node scanner_node,
           else /* (|entry->object != 0|)  */
             {
               
-              cerr_strm << thread_name << "In `Scan_Parse::variable_func()':"
+              cerr_strm << thread_name << "In `Scan_Parse::variable_func':"
                         << endl << "   `entry->object' != 0";
               cerr_message(cerr_strm);
               cerr_strm.str("");
@@ -7271,7 +7271,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "Entering `Scan_Parse::transformation_command_func()'.";
+                 << "Entering `Scan_Parse::transformation_command_func'.";
        
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -7289,7 +7289,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
   if (entry == static_cast<Id_Map_Entry_Node>(0))
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::transformation_command_func()':"
+                << "ERROR! In `Scan_Parse::transformation_command_func':"
                 << endl << "`entry' == 0. Exiting function with return value 1.";
 
       log_message(cerr_strm);
@@ -7310,7 +7310,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
   if (entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::transformation_command_func()':"
+                << "ERROR! In `Scan_Parse::transformation_command_func':"
                 << endl << "`entry->object' == 0. "
                 << "Exiting function with return value 1.";
 
@@ -7329,7 +7329,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
      {
        cerr_mutex.lock(); 
        cerr << thread_name 
-            << "In `Scan_Parse::transformation_command_func()':";
+            << "In `Scan_Parse::transformation_command_func':";
        
        entry->show("entry:");
 
@@ -7353,7 +7353,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::transformation_command_func()':"
+                << "ERROR! In `Scan_Parse::transformation_command_func':"
                 << endl << "`Scanner_Type::handle_numeric_list()' failed. "
                 << "Exiting function with return value 1.";
 
@@ -7377,7 +7377,7 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
        {
 
          cerr_strm << thread_name 
-                   << "In `Scan_Parse::transformation_command_func()':"
+                   << "In `Scan_Parse::transformation_command_func':"
                    << endl << "`Scanner_Type::handle_numeric_list()' succeeded.";
 
          log_message(cerr_strm);
@@ -7412,7 +7412,7 @@ if (entry->is_shape())
      {
           cerr_mutex.lock(); 
           cerr << thread_name 
-               << "In `Scan_Parse::transformation_command_func()':";
+               << "In `Scan_Parse::transformation_command_func':";
           s->show("s:");
           cerr << "Type <RETURN> to continue. ";
           getchar(); 
@@ -7502,7 +7502,7 @@ Added this section.
   else
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::transformation_command_func()':"
+                << "ERROR! In `Scan_Parse::transformation_command_func':"
                 << endl << "`entry->type' == `" << name_map[entry->type]
                 << "'. Haven't programmed this case yet.";
 
@@ -7595,7 +7595,7 @@ Signal an error and exit with return value 0 upon failure.
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "Entering `Scan_Parse::rotate_around_func()'.";
+                 << "Entering `Scan_Parse::rotate_around_func'.";
        
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -7769,7 +7769,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
   if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::transformation_assignment_command_func()':"
+                << "ERROR! In `Scan_Parse::transformation_assignment_command_func':"
                 << endl 
                 << endl << "`entry' is invalid.  Can't transform it."
                 << endl 
@@ -7800,7 +7800,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl 
                     << "`entry' is valid.";
 
@@ -7822,7 +7822,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
     {
 
       cerr_strm << thread_name << "ERROR! "
-                << "In `Scan_Parse::transformation_assignment_command_func()':"
+                << "In `Scan_Parse::transformation_assignment_command_func':"
                 << endl << "`t' is invalid. "
                 << "Can't transform `entry->object'."
                 << endl 
@@ -7850,7 +7850,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl << "`t' is valid.";
       
           log_message(cerr_strm);
@@ -7874,7 +7874,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl << "`entry->type' == `TRANSFORM'.";
       
           log_message(cerr_strm);
@@ -7902,7 +7902,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl << "`entry->type' == `PEN'.";
       
           log_message(cerr_strm);
@@ -7930,7 +7930,7 @@ Scan_Parse::transformation_assignment_command_func(Scanner_Node scanner_node,
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl << "`entry->type' == `DASH_PATTERN'.";
       
           log_message(cerr_strm);
@@ -7963,7 +7963,7 @@ Added this section.
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl << "`entry->type' == `PICTURE'.";
       
           log_message(cerr_strm);
@@ -7995,7 +7995,7 @@ Added this section.
      if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::transformation_assignment_command_func()':"
+                 << "In `Scan_Parse::transformation_assignment_command_func':"
                  << endl << "`entry->type' == `CONIC_SECTION_LATTICE'.";
     
        log_message(cerr_strm);
@@ -8023,7 +8023,7 @@ Added this section.
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::transformation_assignment_command_func()':"
+                    << "In `Scan_Parse::transformation_assignment_command_func':"
                     << endl << "`entry->is_shape()' == `true'.";
       
           log_message(cerr_strm);
@@ -8048,7 +8048,7 @@ Added this section.
     {
 
       cerr_strm << thread_name << "ERROR! "
-                << "In `Scan_Parse::transformation_assignment_command_func()':"
+                << "In `Scan_Parse::transformation_assignment_command_func':"
                 << endl << "Invalid `entry->type': "
                 << name_map[entry->type] << "." << endl 
                 << "Can't transform. Deleting `t' and exiting function "
@@ -8257,7 +8257,7 @@ Scan_Parse::for_loop_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Entering `Scan_Parse::for_loop_func()'.";
+                << "Entering `Scan_Parse::for_loop_func'.";
  
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -8293,7 +8293,7 @@ Rethrow |bad_alloc|.
     {
 
        cerr_strm << thread_name 
-                 << "ERROR! In `Scan_Parse::for_loop_func()':"
+                 << "ERROR! In `Scan_Parse::for_loop_func':"
                  << endl 
                  << "`new Loop_Info_Type' failed. Rethrowing `bad_alloc'.";
  
@@ -8329,7 +8329,7 @@ Rethrow |bad_alloc|.
        if (DEBUG)
           {
               cerr_strm << thread_name 
-                        << "In `Scan_Parse::for_loop_func()':"
+                        << "In `Scan_Parse::for_loop_func':"
                         << endl  
                         << "`curr_symbol' == " << curr_symbol << endl
                         << "`curr_loop_info_node->step_value' == " 
@@ -8383,7 +8383,7 @@ Delete |curr_loop_info_node| and rethrow |bad_alloc|.
     {
     
        cerr_strm << thread_name 
-                 << "ERROR! In `Scan_Parse::for_loop_func()':"
+                 << "ERROR! In `Scan_Parse::for_loop_func':"
                  << endl 
                  << "`new Id_Map_Type' failed. "
                  << "Deleting `curr_loop_info_node' and "
@@ -8452,7 +8452,7 @@ rethrow |bad_alloc|.
     {
     
        cerr_strm << thread_name 
-                 << "ERROR! In `Scan_Parse::for_loop_func()':"
+                 << "ERROR! In `Scan_Parse::for_loop_func':"
                  << endl 
                  << "`new real' failed. "
                  << "Deleting `curr_loop_info_node' and "
@@ -8524,7 +8524,7 @@ Added |int prev_token|.
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::for_loop_func()':"
+                    << "In `Scan_Parse::for_loop_func':"
                     << endl
                     << "`curr_token' == " << name_map[curr_token]
                     << endl << "`scanner_node->token_string' == "
@@ -8551,7 +8551,7 @@ Added |int prev_token|.
    if (DEBUG)
      {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::for_loop_func()':"
+                    << "In `Scan_Parse::for_loop_func':"
                     << endl
                     << "Got outer `END_FOR'. Breaking.";
 
@@ -8582,7 +8582,7 @@ Added |int prev_token|.
    if (DEBUG)
      {
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::for_loop_func()':"
+                    << "In `Scan_Parse::for_loop_func':"
                     << endl
                     << "Inner `END_FOR'. Decrementing `nest_ctr' and continuing.";
 
@@ -8618,7 +8618,7 @@ nest_ctr--;
         if (DEBUG)
           {
             cerr_strm << thread_name 
-                      << "In `Scan_Parse::for_loop_func()':"
+                      << "In `Scan_Parse::for_loop_func':"
                       << endl
                       << "Inner `" << name_map[curr_token] << "'. "
                       << "Incrementing `nest_ctr' and continuing.";
@@ -8671,7 +8671,7 @@ Added special handling for more tokens.
            if (DEBUG)
               {
                   cerr_strm << thread_name 
-                            << "In `Scan_Parse::for_loop_func()':"
+                            << "In `Scan_Parse::for_loop_func':"
                             << endl
                             << "`curr_token' == " << name_map[curr_token]
                             << endl 
@@ -8796,7 +8796,7 @@ default:
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "In `Scan_Parse::for_loop_func()':"
+                << "In `Scan_Parse::for_loop_func':"
                 << endl
                 << "`scanner_node->loop_info_node->loop_strm_ptr->str()' == " 
                 << scanner_node->loop_info_node->loop_strm_ptr->str();
@@ -8861,7 +8861,7 @@ Scan_Parse::for_suffixes_loop_func(Scanner_Node scanner_node,
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "Entering `Scan_Parse::for_suffixes_loop_func()'.";
+                 << "Entering `Scan_Parse::for_suffixes_loop_func'.";
   
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -8897,7 +8897,7 @@ Rethrow |bad_alloc|.
       {
 
          cerr_strm << thread_name 
-                   << "ERROR! In `Scan_Parse::for_suffixes_loop_func()':"
+                   << "ERROR! In `Scan_Parse::for_suffixes_loop_func':"
                    << endl 
                    << "`new Loop_Info_Type' failed. Rethrowing `bad_alloc'.";
   
@@ -9163,7 +9163,7 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "Entering `Scan_Parse::for_suffixes_internal_func()'.";
+                 << "Entering `Scan_Parse::for_suffixes_internal_func'.";
   
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -9185,7 +9185,7 @@ Scan_Parse::for_suffixes_internal_func(Scanner_Node scanner_node,
           if (DEBUG)
             {
                cerr_strm << thread_name 
-                         << "In `Scan_Parse::for_suffixes_internal_func()':"
+                         << "In `Scan_Parse::for_suffixes_internal_func':"
                          << endl 
                          << "First call.";
 
@@ -9205,7 +9205,7 @@ log_message(cerr_strm);
     catch (bad_alloc)
        {
            cerr_strm << thread_name << "ERROR!  "
-                     << "In `Scan_Parse::for_suffixes_internal_func()':"
+                     << "In `Scan_Parse::for_suffixes_internal_func':"
                      << endl 
                      << "`new Input_Struct' or `new stringstream' failed, "
                      << "throwing `bad_alloc'.  "
@@ -9225,7 +9225,7 @@ log_message(cerr_strm);
    if (DEBUG)
      {
          cerr_strm << thread_name 
-                   << "In `Scan_Parse::for_suffixes_internal_func()':"
+                   << "In `Scan_Parse::for_suffixes_internal_func':"
                    << endl 
                    << "`scanner_node->loop_info_node->suffix_parameter' == "
                    << scanner_node->loop_info_node->suffix_parameter;
@@ -9257,7 +9257,7 @@ log_message(cerr_strm);
           if (DEBUG)
             {
                cerr_strm << thread_name 
-                         << "In `Scan_Parse::for_suffixes_internal_func()':"
+                         << "In `Scan_Parse::for_suffixes_internal_func':"
                          << endl 
                          << "Not first call.";
    
@@ -9370,7 +9370,7 @@ log_message(cerr_strm);
    if (DEBUG)
      {
         cerr_strm << thread_name 
-                  << "In `Scan_Parse::for_suffixes_internal_func()':"
+                  << "In `Scan_Parse::for_suffixes_internal_func':"
                   << endl << "`scanner_node->loop_info_node->suffix_list':"
                   << endl;
 
@@ -9436,7 +9436,7 @@ Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::verbatim_metapost_func()'."
+                << "Entering `Scan_Parse::verbatim_metapost_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -9474,7 +9474,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (DEBUG)
     {
 
-      cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func':"
                 << endl
                   << "About to call `scanner_node->output_pending.lock()'.";
       cerr_message(cerr_strm);
@@ -9494,7 +9494,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (status != 0)
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::verbatim_metapost_func()':"
+                    << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
                     << endl
                     << "`scanner_node->output_pending.lock()' failed. "
                     << "Not writing to output file."
@@ -9521,7 +9521,7 @@ and increment |scanner_node->output_pending.value_1|.
           if (DEBUG)
             {
               cerr_strm << thread_name 
-                        << "In `Scan_Parse::verbatim_metapost_func()':"
+                        << "In `Scan_Parse::verbatim_metapost_func':"
                         << endl 
                         << "`scanner_node->output_pending.lock()' succeeded!";
 
@@ -9545,7 +9545,7 @@ and increment |scanner_node->output_pending.value_1|.
         {
 
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::verbatim_metapost_func()':"
+                    << "In `Scan_Parse::verbatim_metapost_func':"
                     << endl << "Output pending.  Going to sleep.";
 
           log_message(cerr_strm); 
@@ -9571,7 +9571,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (status == ETIMEDOUT)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::verbatim_metapost_func()':" 
+                << "ERROR! In `Scan_Parse::verbatim_metapost_func':" 
                 << endl
                 << "`scanner_node->output_pending.timedwait(&timeout)' "
                 << "timed out after " << timeout.tv_sec << "seconds." 
@@ -9602,7 +9602,7 @@ and increment |scanner_node->output_pending.value_1|.
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::verbatim_metapost_func()':"
+                << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
                 << endl << "`scanner_node->output_pending.timedwait()' failed. "
                 << "Not performing output." << endl << "Will try to unlock "
                 << "`scanner_node->output_pending' and "
@@ -9623,7 +9623,7 @@ and increment |scanner_node->output_pending.value_1|.
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::verbatim_metapost_func()':"
+                 << "In `Scan_Parse::verbatim_metapost_func':"
                  << endl << "`scanner_node->output_pending.timedwait()' "
                  << "succeeded.";
 
@@ -9640,7 +9640,7 @@ and increment |scanner_node->output_pending.value_1|.
             {
 
               cerr_strm << thread_name 
-                        << "`Scan_Parse::verbatim_metapost_func()':"
+                        << "`Scan_Parse::verbatim_metapost_func':"
                         << endl << "Output not pending. "
                         << "Setting `output_pending->value' to `true' "
                         << "and continuing.";
@@ -9695,7 +9695,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (status != 0)
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::verbatim_metapost_func()':"
+                    << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
                     << endl
                     << "`scanner_node->output_pending.unlock()' failed. "
                     << "Exiting function with return value 1.";
@@ -9719,7 +9719,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func()':"
+              cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func':"
                         << endl
                         << "`scanner_node->output_pending.unlock()' succeeded!";
               cerr_message(cerr_strm);
@@ -9750,7 +9750,7 @@ and increment |scanner_node->output_pending.value_1|.
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::verbatim_metapost_func()':"
+                 << "In `Scan_Parse::verbatim_metapost_func':"
                  << endl << "Non-multithreaded output.";
        
        log_message(cerr_strm);
@@ -9783,7 +9783,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << "Exiting `Scan_Parse::verbatim_metapost_func()'."
+      cerr_strm << "Exiting `Scan_Parse::verbatim_metapost_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -10555,7 +10555,7 @@ using namespace Scan_Parse;
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::macro_vector_definition_func()'."
+                << "Entering `Scan_Parse::macro_vector_definition_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -10568,7 +10568,7 @@ using namespace Scan_Parse;
    if (entry == static_cast<Id_Map_Entry_Node>(0))
       {
          cerr_strm << thread_name 
-                   << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
+                   << "ERROR!  In `Scan_Parse::macro_vector_definition_func':"
                    << endl << "`entry' == 0.  "
                    << "Clearing `scanner_node->macro_untyped_parameter_vector' "
                    << "and `scanner_node->macro_typed_parameter_vector',"
@@ -10601,7 +10601,7 @@ using namespace Scan_Parse;
             catch (bad_alloc)
                {
                   cerr_strm << thread_name 
-                            << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
+                            << "ERROR!  In `Scan_Parse::macro_vector_definition_func':"
                             << endl << "`new Id_Map_Entry_Type' or "
                             << "`new Definition_Info_Type' failed, "
                             << "throwing `bad_alloc'."
@@ -10635,8 +10635,8 @@ using namespace Scan_Parse;
       catch (bad_alloc)
          {
                cerr_strm << thread_name 
-                         << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
-                         << endl << "`macro_definition_func()' failed, throwing `bad_alloc'."
+                         << "ERROR!  In `Scan_Parse::macro_vector_definition_func':"
+                         << endl << "`macro_definition_func' failed, throwing `bad_alloc'."
                          << endl 
                          << "Clearing "
                          << "`scanner_node->macro_untyped_parameter_vector' "
@@ -10660,8 +10660,8 @@ using namespace Scan_Parse;
    if (status != 0)
       {
             cerr_strm << thread_name 
-                      << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
-                      << endl << "`macro_definition_func()' failed, returning "
+                      << "ERROR!  In `Scan_Parse::macro_vector_definition_func':"
+                      << endl << "`macro_definition_func' failed, returning "
                       << status << "."
                       << endl 
                       << "Clearing "
@@ -10689,8 +10689,8 @@ using namespace Scan_Parse;
           if (DEBUG)
             {
                cerr_strm << thread_name 
-                         << "In `Scan_Parse::macro_vector_definition_func()':"
-                         << endl << "`macro_definition_func()' succeeded.";
+                         << "In `Scan_Parse::macro_vector_definition_func':"
+                         << endl << "`macro_definition_func' succeeded.";
 
                log_message(cerr_strm);
                cerr_message(cerr_strm);
@@ -10721,7 +10721,7 @@ using namespace Scan_Parse;
       catch (bad_alloc)
          {
              cerr_strm << thread_name 
-                       << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
+                       << "ERROR!  In `Scan_Parse::macro_vector_definition_func':"
                        << endl 
                        << "`Scan_Parse::vector_type_plus_assign()' failed, "
                        << "throwing `bad_alloc'." 
@@ -10746,7 +10746,7 @@ using namespace Scan_Parse;
    if (status != 0)
       {
           cerr_strm << thread_name 
-                    << "ERROR!  In `Scan_Parse::macro_vector_definition_func()':"
+                    << "ERROR!  In `Scan_Parse::macro_vector_definition_func':"
                     << endl 
                     << "`Scan_Parse::vector_type_plus_assign()' failed, "
                     << "returning " << status << "."
@@ -10774,7 +10774,7 @@ using namespace Scan_Parse;
          if (DEBUG)
             {
                 cerr_strm << thread_name 
-                          << "In `Scan_Parse::macro_vector_definition_func()':"
+                          << "In `Scan_Parse::macro_vector_definition_func':"
                           << endl 
                           << "`Scan_Parse::vector_type_plus_assign()' succeeded.";
 
@@ -10847,7 +10847,7 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::macro_call_func()'."
+                << "Entering `Scan_Parse::macro_call_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -10861,7 +10861,7 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
 
    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
       {
-          cerr_strm << "ERROR!  In Scan_Parse::macro_call_func()':"
+          cerr_strm << "ERROR!  In Scan_Parse::macro_call_func':"
                     << endl << "Invalid `macro_variable'.  Can't call macro.  "
                     << "Exiting function with return value 1.";
 
@@ -10890,7 +10890,7 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
    if (DEBUG)
      {
          cerr_mutex.lock(); 
-         cerr << thread_name << "In Scan_Parse::macro_call_func()':"
+         cerr << thread_name << "In Scan_Parse::macro_call_func':"
               << endl; 
          d->show("d:");
 
@@ -10920,7 +10920,7 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
        != d->untyped_parameter_ctr)
       {
 
-          cerr_strm << "ERROR!  In Scan_Parse::macro_call_func()':"
+          cerr_strm << "ERROR!  In Scan_Parse::macro_call_func':"
                     << endl << "Number of untyped arguments does not match number "
                     << "of untyped parameters required by `" << entry->name << "'."
                     << endl << "`scanner_node->macro_untyped_parameter_vector.size()' " 
@@ -11111,7 +11111,7 @@ in the |else| case of the conditional testing |curr_token|.
                   if (DEBUG)
                      {
                          cerr_strm << thread_name 
-                                   << "In `Scan_Parse::macro_call_func()':"
+                                   << "In `Scan_Parse::macro_call_func':"
                                    << endl 
                                    << "`left_brace_predicate' == `true' || "
                                    << "`curr_token' == `LEFT_BRACE'.";
@@ -11146,7 +11146,7 @@ in the |else| case of the conditional testing |curr_token|.
 #if DEBUG_COMPILE
                           if (DEBUG)
                              {
-                                 cerr_strm << "In Scan_Parse::macro_call_func()':"
+                                 cerr_strm << "In Scan_Parse::macro_call_func':"
                                            << endl << "Got last argument:  "
                                            << "`curr_argument_strm.str()' == "
                                            << curr_argument_strm.str();
@@ -11186,7 +11186,7 @@ in the |else| case of the conditional testing |curr_token|.
 
                     else if (curr_token == RIGHT_BRACE && brace_nest_ctr < 0)
                        {
-                           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func()':"
+                           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func':"
                                      << endl << "Unmatched `RIGHT_BRACE'.  "
                                      << "Ignoring it, and will try to continue.";
 
@@ -11225,7 +11225,7 @@ in the |else| case of the conditional testing |curr_token|.
                     else if (   curr_token == RIGHT_PARENTHESIS 
                              && parenthesis_nest_ctr < 0)
                        {
-                           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func()':"
+                           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func':"
                                      << endl << "Unmatched `RIGHT_PARENTHESIS'.  "
                                      << "Ignoring it, and will try to continue.";
 
@@ -11258,7 +11258,7 @@ in the |else| case of the conditional testing |curr_token|.
                     else if (   curr_token == RIGHT_BRACKET 
                              && bracket_nest_ctr < 0)
                        {
-                           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func()':"
+                           cerr_strm << "ERROR!  In Scan_Parse::macro_call_func':"
                                      << endl << "Unmatched `RIGHT_BRACKET'.  "
                                      << "Ignoring it, and will try to continue.";
 
@@ -11283,7 +11283,7 @@ in the |else| case of the conditional testing |curr_token|.
 #if DEBUG_COMPILE
                            if (DEBUG)
                               {
-                                  cerr_strm << "In Scan_Parse::macro_call_func()':"
+                                  cerr_strm << "In Scan_Parse::macro_call_func':"
                                              << endl << "Got an argument:  "
                                              << "`curr_argument_strm.str()' == "
                                              << curr_argument_strm.str();
@@ -11326,7 +11326,7 @@ curr_position = replacement_0.find(curr_placeholder);
                               {
 
                                   cerr_strm << thread_name 
-                                            << "In `Scan_Parse::macro_call_func()':"
+                                            << "In `Scan_Parse::macro_call_func':"
                                             << endl 
                                             << "`scanner_node->token_string' == " 
                                             << scanner_node->token_string;
@@ -11345,7 +11345,7 @@ curr_position = replacement_0.find(curr_placeholder);
               if (DEBUG)
                  {
                      cerr_strm << thread_name 
-                               << "In `Scan_Parse::macro_call_func()':"
+                               << "In `Scan_Parse::macro_call_func':"
                                << endl 
                                << "`replacement_0'  == " << replacement_0;
 
@@ -11367,7 +11367,7 @@ curr_position = replacement_0.find(curr_placeholder);
 #if DEBUG_COMPILE
                if (DEBUG)
                   {
-                      cerr_strm << thread_name << "In `Scan_Parse::macro_call_func()':"
+                      cerr_strm << thread_name << "In `Scan_Parse::macro_call_func':"
                                 << endl << "`curr_token' != `LEFT_BRACE'.";
 
                       log_message(cerr_strm);
@@ -11413,7 +11413,7 @@ This is now done above anyway.
          catch (bad_alloc)
             {
                cerr_strm << thread_name 
-                         << "ERROR!  In `Scan_Parse::macro_call_func()':"
+                         << "ERROR!  In `Scan_Parse::macro_call_func':"
                          << endl 
                          << "`new Input_Struct' or `new stringstream' failed.  "
                          << "Rethrowing `bad_alloc'.";
@@ -11442,7 +11442,7 @@ Now putting |begingroup| and |endgroup| onto |*curr_stringstream|.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-         cerr_strm << thread_name << "In `Scan_Parse::macro_call_func()':"
+         cerr_strm << thread_name << "In `Scan_Parse::macro_call_func':"
                    << endl 
                    << "`curr_stringstream->str()' == " 
                    << curr_stringstream->str();
@@ -11561,7 +11561,7 @@ Scan_Parse::clear_vector_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::clear_vector_func()'."
+                << "Entering `Scan_Parse::clear_vector_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -12502,7 +12502,7 @@ Scan_Parse::pop_back_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::pop_back_func()'."
+                << "Entering `Scan_Parse::pop_back_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -13276,7 +13276,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Entering `Scan_Parse::let_func()'."
+                  << "Entering `Scan_Parse::let_func'."
                   << endl
                   << "`s' == " << s << ".";
 
@@ -13321,7 +13321,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
    if (DEBUG)
      {
          cerr_strm << thread_name
-                   << "Entering `Scan_Parse::let_func()'."
+                   << "Entering `Scan_Parse::let_func'."
                    << endl
                    << "`t' == " << t << ".";
 
@@ -13345,7 +13345,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
    if (entry_1 == static_cast<Id_Map_Entry_Node>(0))
       {
-         cerr_strm << thread_name << "ERROR!  In `Scan_Parse::let_func()':"
+         cerr_strm << thread_name << "ERROR!  In `Scan_Parse::let_func':"
                    << endl << "`" << t << "' doesn't reference an "
                    << "`Id_Map_Entry_Node'." 
                    << endl << "Exiting function with return value 1.";
@@ -13415,7 +13415,7 @@ Scan_Parse::let_func(Scanner_Node scanner_node,
 
           catch (bad_alloc)
              {
-                 cerr_strm << thread_name << "ERROR!  In `Scan_Parse::let_func()':"
+                 cerr_strm << thread_name << "ERROR!  In `Scan_Parse::let_func':"
                            << endl << "`new Id_Map_Entry_Type' failed, "
                            << "throwing `bad_alloc'.  Rethrowing.";
 
@@ -13510,7 +13510,7 @@ Scan_Parse::decompose_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Entering `Scan_Parse::decompose_func()'.";
+                  << "Entering `Scan_Parse::decompose_func'.";
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -13555,7 +13555,7 @@ Added this section.
      {
      
          cerr_strm << thread_name 
-                   << "ERROR!  In `Scan_Parse::decompose_func()':"
+                   << "ERROR!  In `Scan_Parse::decompose_func':"
                    << endl 
                    << "`Point* p' and/or `Path* q' is null."
                    << endl  
@@ -13662,7 +13662,7 @@ Polygon* r = static_cast<Polygon*>(object_0);
               || p1 == static_cast<Point*>(0))
              {
                  cerr_strm << thread_name 
-                           << "ERROR!  In `Scan_Parse::decompose_func()':"
+                           << "ERROR!  In `Scan_Parse::decompose_func':"
                            << endl 
                            << "`Polygon* r', `Point* p0', and/or "
                            << "`Point* p1' is null."
@@ -13710,7 +13710,7 @@ Pointer_Vector<Polygon>* pv
              {
 
                  cerr_strm << thread_name 
-                           << "ERROR!  In `Scan_Parse::decompose_func()':"
+                           << "ERROR!  In `Scan_Parse::decompose_func':"
                            << endl 
                            << "`Polygon::decompose()' failed, throwing "
                            << "`bad_alloc'."
@@ -13745,7 +13745,7 @@ r = 0;
           if (pv == static_cast<Pointer_Vector<Polygon>*>(0))
              {
                  cerr_strm << thread_name 
-                           << "ERROR!  In `Scan_Parse::decompose_func()':"
+                           << "ERROR!  In `Scan_Parse::decompose_func':"
                            << endl 
                            << "`Polygon::decompose()' failed, returning 0.  "
                            << "Deleting `Polygon* r', `Point* p0', and "
@@ -13811,7 +13811,7 @@ Added this section.
           if (DEBUG)
              {
                  cerr_strm << thread_name 
-                           << "In `Scan_Parse::decompose_func()':"
+                           << "In `Scan_Parse::decompose_func':"
                            << endl 
                            << "Decomposing a `Polygon' using a `Path'.";
 
@@ -13836,7 +13836,7 @@ Added this section.
    if (r == static_cast<Polygon*>(0) || p == static_cast<Path*>(0))
    {
        cerr_strm << thread_name 
-                 << "ERROR!  In `Scan_Parse::decompose_func()':"
+                 << "ERROR!  In `Scan_Parse::decompose_func':"
                  << endl 
                  << "`Polygon* r' and/or `Path* p' is null."
                  << endl  
@@ -13862,7 +13862,7 @@ Added this section.
    else if (!p->is_linear())
    {
        cerr_strm << thread_name 
-                 << "ERROR!  In `Scan_Parse::decompose_func()':"
+                 << "ERROR!  In `Scan_Parse::decompose_func':"
                  << endl 
                  << "`Path* p' points to a non-linear `Path'."
                  << endl  
@@ -13891,7 +13891,7 @@ Added this section.
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-       cerr_strm << thread_name << "In `Scan_Parse::decompose_func()':"
+       cerr_strm << thread_name << "In `Scan_Parse::decompose_func':"
                  << endl 
                  << "Calling |decompose_func| recursively.";
        cerr_message(cerr_strm);
@@ -13935,7 +13935,7 @@ Added this section.
        if (DEBUG)
        {
            cerr_strm << thread_name 
-                     << "In `Scan_Parse::decompose_func()':"
+                     << "In `Scan_Parse::decompose_func':"
                      << endl 
                      << "Decomposing two `Polygons'.";
 
@@ -14033,7 +14033,7 @@ Scan_Parse::clip_to_func(void* arg1,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Entering 'Scan_Parse::clip_to_func()'.";
+                  << "Entering 'Scan_Parse::clip_to_func'.";
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -14059,7 +14059,7 @@ Scan_Parse::clip_to_func(void* arg1,
    if (p == static_cast<Path*>(0))
       {
           cerr_strm << thread_name
-                    << "ERROR!  In 'Scan_Parse::clip_to_func()':"
+                    << "ERROR!  In 'Scan_Parse::clip_to_func':"
                     << endl << "'Path* p' is null.  Not clipping."
                     << endl << "Exiting function with return value 0.";
 
@@ -14081,7 +14081,7 @@ Scan_Parse::clip_to_func(void* arg1,
    if (!p->is_cycle())
       {
           cerr_strm << thread_name
-                    << "ERROR!  In 'Scan_Parse::clip_to_func()':"
+                    << "ERROR!  In 'Scan_Parse::clip_to_func':"
                     << endl << "The clipping 'Path' isn't a cycle.  "
                     << "Not clipping."
                     << endl << "Exiting function with return value 0.";
@@ -14163,7 +14163,7 @@ Scan_Parse::clip_to_func(void* arg1,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Exiting 'Scan_Parse::clip_to_func()'.";
+                  << "Exiting 'Scan_Parse::clip_to_func'.";
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -14230,7 +14230,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Entering 'Scan_Parse::measure_text_func()'.";
+                  << "Entering 'Scan_Parse::measure_text_func'.";
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -14248,7 +14248,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                    << "`s' == " << *s << endl;
 
          log_message(cerr_strm);
@@ -14288,7 +14288,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
                  if (DEBUG)
                    {
-                           cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+                           cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                                      << endl 
                                      << measurement_file_name << " exists.  Will try new name." 
                                      << endl;
@@ -14312,7 +14312,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
                  if (DEBUG)
                    {
-                           cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+                           cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                                      << endl 
                                      << measurement_file_name << " isn't open.  Breaking." 
                                      << endl;
@@ -14344,7 +14344,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                    << "tex_file_name == " 
                    << tex_file_name << endl
                    << "dvi_file_name == " 
@@ -14400,7 +14400,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                    << endl 
                    << "`command_string.str().c_str()' == " 
                    << command_string.str().c_str() << endl;
@@ -14414,7 +14414,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                    << endl 
                    << "`status'  == " << status << endl;
      }
@@ -14428,7 +14428,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
    if (status != 0)
       {
-          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func()':"
+          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
                     << endl 
                     << "`system(" << command_string.str() << ")' failed, returning " 
                     << status << "." << endl
@@ -14467,7 +14467,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-                cerr_strm << thread_name << "In `Scan_Parse::measure_text_func()':"
+                cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
                           << endl 
                           << measurement_file_name << " is open.  Will read.";
 
@@ -14502,7 +14502,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
    else /* |!measurement_file.is_open|  */
       {
 
-          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func()':"
+          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
                     << endl 
                     << measurement_file_name << " isn't open.  "
                     << "Can't read measurements."
@@ -14535,7 +14535,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Exiting 'Scan_Parse::measure_text_func()' "
+                  << "Exiting 'Scan_Parse::measure_text_func' "
                   << "successfully with return value 0.";
 
         log_message(cerr_strm);
@@ -14617,7 +14617,7 @@ Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
     {
 
       cerr_strm << thread_name 
-                << "ERROR!  In `numeric_vector_assignment_func()':"
+                << "ERROR!  In `numeric_vector_assignment_func':"
                 << endl 
                 << "`entry' is invalid. "
                 << "Can't assign to it."
@@ -14645,7 +14645,7 @@ Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `numeric_vector_assignment_func()':"
+                    << "In `numeric_vector_assignment_func':"
                     << endl 
                     << "`entry' is valid.";
                 
@@ -14682,7 +14682,7 @@ failed.
 if (status != 0)
          {
             cerr_strm << thread_name 
-                      << "ERROR!  In `numeric_vector_assignment_func()':"
+                      << "ERROR!  In `numeric_vector_assignment_func':"
                       << endl 
                       << "`Scan_Parse::vector_type_assign()' failed."
                       << endl << "Deleting `pv' "
@@ -14798,7 +14798,7 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
        {
            cerr_strm << thread_name 
                      << "ERROR!  "
-                     << "In `Scan_Parse::binary_number_string_func()':"
+                     << "In `Scan_Parse::binary_number_string_func':"
                      << endl 
                      << "The magnitude of `r' is "
                      << "too large."
@@ -14825,7 +14825,7 @@ Scan_Parse::binary_number_string_func(real r, Scanner_Node scanner_node)
         if (DEBUG)
           {
                cerr_strm << thread_name 
-                          << "In `Scan_Parse::binary_number_string_func()':"
+                          << "In `Scan_Parse::binary_number_string_func':"
                           << endl 
                           << "Using `short'.";
 
@@ -14848,7 +14848,7 @@ str = sub_binary_number_string_func<short>(static_cast<short>(e),
         if (DEBUG)
           {
                cerr_strm << thread_name 
-                          << "In `Scan_Parse::binary_number_string_func()':"
+                          << "In `Scan_Parse::binary_number_string_func':"
                           << endl 
                           << "Using `int'.";
 
@@ -14872,7 +14872,7 @@ str = sub_binary_number_string_func<int>(static_cast<int>(e),
         if (DEBUG)
           {
                cerr_strm << thread_name 
-                          << "In `Scan_Parse::binary_number_string_func()':"
+                          << "In `Scan_Parse::binary_number_string_func':"
                           << endl 
                           << "Using `long'.";
 
@@ -14904,7 +14904,7 @@ Now passing |true| as the |oversize_switch| argument to
         if (DEBUG)
           {
                cerr_strm << thread_name 
-                          << "In `Scan_Parse::binary_number_string_func()':"
+                          << "In `Scan_Parse::binary_number_string_func':"
                           << endl 
                           << "Using `long long'.";
 
@@ -14927,7 +14927,7 @@ Now passing |true| as the |oversize_switch| argument to
   else
      {
          cerr_strm << thread_name << "ERROR!  "
-                   << "In `Scan_Parse::binary_number_string_func()':"
+                   << "In `Scan_Parse::binary_number_string_func':"
                    << endl 
                    << "`e' has Invalid type.  "
                    << "Exiting function with return value 0.";
@@ -14945,9 +14945,9 @@ Now passing |true| as the |oversize_switch| argument to
    if (str == static_cast<string*>(0))
       {
           cerr_strm << thread_name << "WARNING!  "
-                    << "In `Scan_Parse::binary_number_string_func()':"
+                    << "In `Scan_Parse::binary_number_string_func':"
                     << endl 
-                    << "`Scan_Parse::sub_binary_number_string_func()' " 
+                    << "`Scan_Parse::sub_binary_number_string_func' " 
                     << "failed, returning 0."
                     << "Returning the empty `string' "
                     << "and continuing.";
@@ -15011,7 +15011,7 @@ Scan_Parse::is_cycle_func(void* arg1,
   if (DEBUG)
     {
         cerr_strm << thread_name
-                  << "Entering 'Scan_Parse::is_cycle_func()'.";
+                  << "Entering 'Scan_Parse::is_cycle_func'.";
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -15035,7 +15035,7 @@ Scan_Parse::is_cycle_func(void* arg1,
    if (p == static_cast<Path*>(0))
       {
 
-        cerr_strm << thread_name << "ERROR! In `Scan_Parse::is_cycle_func()':"
+        cerr_strm << thread_name << "ERROR! In `Scan_Parse::is_cycle_func':"
                   << endl 
                   << "`Path* p' is null."
                   << endl 
@@ -15067,7 +15067,7 @@ Scan_Parse::is_cycle_func(void* arg1,
         if (DEBUG)
           {
               cerr_strm << thread_name
-                        << "Exiting 'Scan_Parse::is_cycle_func()'.";
+                        << "Exiting 'Scan_Parse::is_cycle_func'.";
 
               log_message(cerr_strm);
               cerr_message(cerr_strm);
@@ -15226,7 +15226,7 @@ Scan_Parse::sphere_line_intersection_func(Sphere* s, Path* p, void* parameter)
 {
 
 #if 0 
-    cerr << "Entering `Scan_Parse::sphere_line_intersection_func()'." << endl;
+    cerr << "Entering `Scan_Parse::sphere_line_intersection_func'." << endl;
 #endif 
 
     if (!(p && s && p->is_linear()))
@@ -15261,7 +15261,7 @@ Scan_Parse::sphere_line_intersection_func(Sphere* s, Path* p, void* parameter)
      p = 0;
 
 #if 0 
-    cerr << "Exiting `Scan_Parse::sphere_line_intersection_func()'." << endl;
+    cerr << "Exiting `Scan_Parse::sphere_line_intersection_func'." << endl;
 #endif 
 
     return static_cast<void*>(bpv);
@@ -15497,7 +15497,7 @@ Added this section.
     else 
     {
            cerr_strm << thread_name 
-                     << "ERROR!  In `Scan_Parse::polyhedron_get_net_func():'"
+                     << "ERROR!  In `Scan_Parse::polyhedron_get_net_func:'"
                      << endl 
                      << "`type' == " << name_map[type] << " (" << type << ")"
                      << endl 
