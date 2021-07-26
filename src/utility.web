@@ -297,7 +297,8 @@ make_perspective_frame(Picture& picture,
   real h_offset = 0;
   real v_offset = 1;
 
-Point p0(gl_l);
+  Point p0(gl_l);
+
   p0.shift(0, - (gl_l.get_y() - f.get_y()));
   p0.shift(-h_offset, -v_offset);
 
@@ -322,7 +323,8 @@ Point p0(gl_l);
 #endif 
 
   return points;
-}
+
+}  /* End of |make_perspective_frame| definition  */
 
 @q * Perspective function 0.@>
 @ Perspective function 0.
