@@ -14195,6 +14195,9 @@ Now looking up the predefined |Id_Map_Entry_Node|
 the |string| it refers to is written to |tex_file| following
 the \.{\char`\\batchmode} and \.{\char`\\newlinechar} commands, but before
 setting the hbox containing |*s|.
+
+\initials{LDF 2021.07.26.}
+Replaced code writing to files with code using |popen|.
 \ENDLOG
 
 @q *** (3) Definition.@> 
@@ -14222,7 +14225,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
       scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                     &error_stop_value,
                                                     &warning_stop_value);
-   int status;
+   int status = 0;
 
 @q **** (4) @>   
 
@@ -14257,102 +14260,35 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   /* !!START HERE  LDF 2021.07.26.  Use popen instead.  */ 
- 
-   int fd; 
-   char tex_file_name[] = "aXXXXXX";
-   fd = mkstemp(tex_file_name);
-   close(fd);
+@q **** (4) @>   
+
+   Id_Map_Entry_Node header_entry = scanner_node->lookup("measure_text_header");
+
+   string header_string = "";
+
+   if (header_entry && header_entry->object)
+   {
+       header_string = *static_cast<string*>(header_entry->object);
+   }
 
 @q **** (4) @>   
 
-   char measurement_file_name[12];
-   char dvi_file_name[12];
-   char log_file_name[12];
+   stringstream command_string;
 
-   ifstream measurement_file;
-
-   while (true)
-      {
-          strcpy(measurement_file_name, "bXXXXXX");
-          fd = mkstemp(measurement_file_name);
-          close(fd);
-          remove(measurement_file_name);
-          strcat(measurement_file_name, ".tex");  
-          measurement_file.open(measurement_file_name);
-
-@q ***** (5)@>  
-
-          if (measurement_file.is_open())
-             {
-#if DEBUG_COMPILE
-                 if (DEBUG)
-                   {
-                           cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                                     << endl 
-                                     << measurement_file_name << " exists.  Will try new name." 
-                                     << endl;
-
-                           log_message(cerr_strm);
-                           cerr_message(cerr_strm);
-                           cerr_strm.str("");          
-                   }      
-#endif /* |DEBUG_COMPILE|  */@; 
-
-                measurement_file.close();
-                remove(measurement_file_name);
-
-             }  /* |if (measurement_file.is_open())|  */
-
-@q ***** (5)@>  
-
-          else /* |!measurement_file.is_open|  */
-             {
-
-#if DEBUG_COMPILE
-                 if (DEBUG)
-                   {
-                           cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                                     << endl 
-                                     << measurement_file_name << " isn't open.  Breaking." 
-                                     << endl;
-
-                           log_message(cerr_strm);
-                           cerr_message(cerr_strm);
-                           cerr_strm.str("");         
-                   }      
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-                 measurement_file.close();
-
-                 break;
-
-             }  /* |else| (|!measurement_file.is_open|)  */
-
-      }  /* |while (true)|  */
-
-@q **** (4) @>   
-
-   strcpy(dvi_file_name, tex_file_name);
-   strcat(dvi_file_name, ".dvi");
-
-   strcpy(log_file_name, tex_file_name);
-   strcat(log_file_name, ".log");
-
-@q **** (4) @>   
+   command_string << "echo '\\scrollmode" 
+                  << header_string 
+                  << "\\setbox0=\\hbox{" << *s << "}" 
+                  << "\\message{\\\\the\\wd0;"
+                  << "\\\\the\\ht0;\\\\the\\dp0}"
+                  << "\\\\bye' | tex | grep -E ^[0-9]";
 
 #if DEBUG_COMPILE
    if (DEBUG)
      {
          cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                   << "tex_file_name == " 
-                   << tex_file_name << endl
-                   << "dvi_file_name == " 
-                   << dvi_file_name << endl
-                   << "log_file_name == " 
-                   << log_file_name << endl
-                   << "measurement_file_name == " 
-                   << measurement_file_name << endl;
+                   << endl 
+                   << "`command_string.str().c_str()' == " 
+                   << command_string.str().c_str() << endl;
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -14362,61 +14298,30 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
  
 @q **** (4) @>   
 
-   Id_Map_Entry_Node header_entry = scanner_node->lookup("measure_text_header");
+/* !!START HERE  Add code to acct. for the case that command_string is too long.  */ 
 
-   string header_string = "";
+   char temp_str[1024];
+   memset(temp_str, 0, 1024);
 
-   if (header_entry && header_entry->object)
-      {
-          header_string = *static_cast<string*>(header_entry->object);
-      }
+   strcpy(temp_str, command_string.str().c_str());
 
-@q **** (4) @>   
-
-   ofstream tex_file;
-   tex_file.open(tex_file_name);
-
-   tex_file << "\\batchmode" << endl 
-            << "\\newlinechar=`^^J" << endl 
-            << header_string << endl      
-            << "\\newbox\\TTEXTBOX" << endl 
-            << "\\setbox\\TTEXTBOX=\\hbox{"
-            << *s << "}" << endl 
-            << "\\newwrite\\outfile" << endl 
-            << "\\openout\\outfile="
-            << measurement_file_name
-            << endl
-            << "\\write\\outfile{\\the\\wd\\TTEXTBOX^^J"
-            << "\\the\\ht\\TTEXTBOX^^J\\the\\dp\\TTEXTBOX}"
-            << endl << "\\closeout\\outfile" << endl
-            << "\\bye" << endl;
-
-   tex_file.close();
-
-   stringstream command_string;
-
-   command_string << "tex " << tex_file_name << " > /dev/null";
+   FILE *fp = popen(temp_str, "r");
 
 #if DEBUG_COMPILE
    if (DEBUG)
      {
          cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                   << endl 
-                   << "`command_string.str().c_str()' == " 
-                   << command_string.str().c_str() << endl;
-     }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-@q **** (4) @>   
+                   << endl;
 
-   status = system(command_string.str().c_str());
+         if (fp)
+           cerr_strm << "`fp' is non-NULL."<< endl;
+         else
+           cerr_strm << "`fp' is NULL.  `popen' failed."<< endl;
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-     {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                   << endl 
-                   << "`status'  == " << status << endl;
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14426,110 +14331,160 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
 @<Define |Scan_Parse| functions@>=
 
-   if (status != 0)
-      {
-          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
-                    << endl 
-                    << "`system(" << command_string.str() << ")' failed, returning " 
-                    << status << "." << endl
-                    << endl << "Deleting `pv', setting it to 0, and exiting function "
-                    << "unsuccessfully with return value 1.";
+   if (fp == 0)
+   {
+       cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
+                 << endl 
+                 << "`popen' failed, returning NULL." << endl 
+                 << "Deleting `pv', setting it to 0, and exiting function "
+                 << "unsuccessfully with return value 1.";
 
-          delete pv;
-          pv = 0;
-          delete s;
-          s = 0;
-          v = 0;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
 
-          remove(tex_file_name);
-          remove(measurement_file_name);
+       delete pv;
+       pv = 0;
+       delete s;
+       s = 0;
+       v = 0;
 
-          remove(dvi_file_name);
-          remove(log_file_name);
-
-          return 1;
+       return 1;
  
-      }   /* |if (status != 0)|  */
+   }   /* |if (status != 0)|  */
 
 @q **** (4) @>   
 @
 @<Define |Scan_Parse| functions@>=
 
-    measurement_file.clear();
+  memset(temp_str, 0, 1024);
 
-    measurement_file.open(measurement_file_name);
+  errno = 0;
+  status = fread(temp_str, 1, 64, fp);
 
-@q ***** (5)@>  
+#if 0  
+  cerr << "`status' == " << status << endl;
+#endif 
 
-   if (measurement_file.is_open())
-      {
-   
-#if DEBUG_COMPILE
-          if (DEBUG)
-            {
-                cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                          << endl 
-                          << measurement_file_name << " is open.  Will read.";
+  if (status == 0)
+  {
+      cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
+                << endl;
 
-                log_message(cerr_strm);
-                cerr_message(cerr_strm);
-                cerr_strm.str("");
-            }    
-#endif /* |DEBUG_COMPILE|  */@;
+      if (errno != 0)
+        cerr_strm << "`errno' == " << errno << ":" << endl
+                  << strerror(errno)
+                  << endl;
 
-          real* wd = new real;
-          real* ht = new real;
-          real* dp = new real;
+      cerr_strm << "Deleting `pv', setting it to 0, and exiting function "
+                << "unsuccessfully with return value 1.";
 
-          string discard_string;
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
 
-          measurement_file >> *wd >> discard_string >> *ht >> discard_string >> *dp;
+      delete pv;
+      pv = 0;
+      delete s;
+      s = 0;
+      v = 0;
 
-          *wd *= 2.54 / 72.27;
-          *ht *= 2.54 / 72.27;
-          *dp *= 2.54 / 72.27;
+      return 1;
+  }
+    
+  pclose(fp);
 
-          *pv += wd; 
-          *pv += ht;
-          *pv += dp;
+  real wd = 0;
+  real ht = 0;
+  real dp = 0;
 
-          measurement_file.close();                   
+  fp = 0;
 
-      }  /* |if (measurement_file.is_open())|  */
+#if 0 
+  cerr << "temp_str == " << temp_str << endl;
+#endif 
 
-@q ***** (5)@>  
+  int j = 0;
 
-   else /* |!measurement_file.is_open|  */
-      {
+  stringstream temp_strm;
 
-          cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
-                    << endl 
-                    << measurement_file_name << " isn't open.  "
-                    << "Can't read measurements."
-                    << endl << "Deleting `pv', setting it to 0, and exiting function "
-                    << "unsuccessfully with return value 1.";
+  for (int i = 0; i < strlen(temp_str); ++i)
+  {
+#if 0 
+      cerr << "temp_str[i] == " <<  temp_str[i] << endl;
+#endif 
 
-          log_message(cerr_strm);
-          cerr_message(cerr_strm, error_stop_value);
-          cerr_strm.str("");
+      if (isdigit(temp_str[i]) || temp_str[i] == '.')
+        temp_strm << temp_str[i];
+      else if (temp_str[i] == 'p')
+      { 
+         if (j == 0)
+         {
+#if 0 
+            cerr << "j == " << j << endl;
+            cerr << "temp_strm.str() == " <<  temp_strm.str() << endl;
+#endif 
+            temp_strm >> wd;
+            temp_strm.clear();
+         }
+         else if (j == 1)
+         {
+#if 0 
+            cerr << "j == " << j << endl;
+            cerr << "temp_strm.str() == " <<  temp_strm.str() << endl;
+#endif 
+            temp_strm >> ht;
+            temp_strm.clear();
+         }
+         else
+         {
+#if 0 
+            cerr << "j == " << j << endl;
+            cerr << "temp_strm.str() == " <<  temp_strm.str() << endl;
+#endif 
+            temp_strm >> dp;
+            temp_strm.clear();
+            break;
+         }
+         j++;
+         temp_strm.str("");
+      } 
+      else
+         continue; 
 
-          delete pv;
-          pv = 0;
-          delete s;
-          s = 0;
-          v = 0;
+  }  
+  
+#if 0 
+  cerr << "Before conversion from pt to cm:" << endl 
+       << "wd == " << wd << endl
+       << "ht == " << ht << endl
+       << "dp == " << dp << endl;
+#endif
 
-          remove(tex_file_name);
-          remove(measurement_file_name);
+  wd *= 2.54 / 72.27;
+  ht *= 2.54 / 72.27;
+  dp *= 2.54 / 72.27;
 
-          remove(dvi_file_name);
-          remove(log_file_name);
+#if 0
+  cerr << "After conversion from pt to cm:" << endl 
+       << "wd == " << wd << endl
+       << "ht == " << ht << endl
+       << "dp == " << dp << endl;
+#endif 
 
-          return 1;
-                         
-      }  /* |else|  (|!measurement_file.is_open|)  */
+  real *wwd = new real;
+  real *hht = new real;
+  real *ddp = new real;
 
-@q **** (4) @>   
+  *wwd = wd;
+  *hht = ht;
+  *ddp = dp;
+
+  *pv += wwd;
+  *pv += hht;
+  *pv += ddp;
+
+@q **** (4) @>
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -14550,12 +14505,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
    delete s;
    s = 0;
    v = 0;
-
-   remove(tex_file_name);
-   remove(measurement_file_name);
-
-   remove(dvi_file_name);
-   remove(log_file_name);
 
     return 0;
 
