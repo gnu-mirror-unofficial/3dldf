@@ -1359,7 +1359,7 @@ Added this rule.
 
 @q *** (3) path_primary --> BOX_TEXT string_expression @>
 
-@*1 \§path primary> $\longrightarrow$ \.{BOX\_TEXT} \§string expression>.
+@*1 \§path primary> $\longrightarrow$.
 \initials{LDF 2021.07.26.}
 
 \LOG
@@ -1371,7 +1371,8 @@ Added this rule.
 
 @<Define rules@>=
 
-@=path_primary: BOX_TEXT string_expression@>@/
+@=path_primary: BOX_TEXT LEFT_PARENTHESIS point_expression COMMA string_expression @>@/
+@=RIGHT_PARENTHESIS numeric_list_optional                                          @>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1380,7 +1381,8 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: `path_primary --> BOX_TEXT string_expression'.";
+                << "*** Parser: `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                << "string_expression RIGHT_PARENTHESIS numeric_list_optional'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1388,18 +1390,27 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   Path *p = new Path;
+   Path *q = new Path;
 
-   string *s = static_cast<string*>(@=$2@>);
+   Point  *p = static_cast<Point*>(@=$3@>);
+   string *s = static_cast<string*>(@=$5@>);
 
    Pointer_Vector<real>* pv = new Pointer_Vector<real>;
  
-   status = Scan_Parse::measure_text_func(
-                                static_cast<Scanner_Node>(parameter), 
-                                @=$2@>, 
-                                pv);
+   status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
+                                          @=$5@>, 
+                                          pv);
 
    int i = 0;
+ 
+   Point north;
+   Point south;
+   Point east;
+   Point west;
+   Point ne;
+   Point nw;
+   Point se;
+   Point sw;
 
    for (vector<real*>::iterator iter = pv->v.begin();
         iter != pv->v.end();
@@ -1426,9 +1437,34 @@ Added this rule.
 
        }  /* |else|  (|status != 0|)  */
 
-   @=$$@> = static_cast<void*>(p);
+   /* |s| doesn't need to be deleted, because it's deleted in |Scan_Parse::measure_text_func|.  */
+   /* \initials{LDF 2021.07.26.}                                                                */
+
+   delete p;
+   pv->clear();
+   delete pv;
+
+   @=$$@> = static_cast<void*>(q);
 
 };
+
+@q ** (2) numeric_list_optional.  @>
+@*1 \§numeric list optional>.
+  
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> pnumeric_list_optional@>@/
+
+@q *** (3) numeric_list_optional --> EMPTY.@>
+@*2 \§numeric list optional> $\longrightarrow$ \.{EMPTY}.  
+
+@<Define rules@>=
+@=numeric_list_optional: /* EMPTY  */@>@/
+{
+   @=$$@> = static_cast<void*>(0);
+};
+
+/* !!START HERE  LDF 2021.07.26.  */ 
+
 
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
