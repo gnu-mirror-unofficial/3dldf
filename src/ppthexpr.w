@@ -1397,6 +1397,8 @@ Added this rule.
 
    Pointer_Vector<real>* pv = new Pointer_Vector<real>;
  
+   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$7@>);
+
    status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
                                           @=$5@>, 
                                           pv);
@@ -1412,15 +1414,26 @@ Added this rule.
    Point se;
    Point sw;
 
+   if (pv == 0)
+      goto END_BOX_TEXT_RULE;
+
+cerr << "Here I am." << endl
+<< "Type <RETURN> to continue: ";
+getchar(); 
+
    for (vector<real*>::iterator iter = pv->v.begin();
         iter != pv->v.end();
         ++iter)
    {
        cerr << "pv->v[" << i++ << "] == " << **iter << endl;
    }
-#if 0 
-   pv->show("pv:");
-#endif 
+
+   for (vector<real*>::iterator iter = w->v.begin();
+        iter != w->v.end();
+        ++iter)
+   {
+       cerr << "w->v[" << i++ << "] == " << **iter << endl;
+   }
 
 @q ****** (6)@> 
 
@@ -1438,11 +1451,18 @@ Added this rule.
        }  /* |else|  (|status != 0|)  */
 
    /* |s| doesn't need to be deleted, because it's deleted in |Scan_Parse::measure_text_func|.  */
+
    /* \initials{LDF 2021.07.26.}                                                                */
 
+END_BOX_TEXT_RULE:
+
    delete p;
-   pv->clear();
-   delete pv;
+
+   if (pv)
+   {
+      pv->clear();
+      delete pv;
+   }
 
    @=$$@> = static_cast<void*>(q);
 
