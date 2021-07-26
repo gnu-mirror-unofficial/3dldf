@@ -162,10 +162,9 @@ Added this rule.
    
     Pointer_Vector<real>* pv = new Pointer_Vector<real>;
  
-    int status = Scan_Parse::measure_text_func(
-                                static_cast<Scanner_Node>(parameter), 
-                                @=$2@>, 
-                                pv);
+    int status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
+                                               @=$2@>, 
+                                               pv);
 
 @q ****** (6)@> 
 
