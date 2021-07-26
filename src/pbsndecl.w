@@ -1230,6 +1230,8 @@ for general options.
 @<Token and precedence declarations@>=
 
 @=%token <int_value> MEASURE_TEXT@>@/
+@=%token <int_value> BOX_TEXT@>@/
+@=%token <int_value> CIRCLE_TEXT@>@/
 
 @q *** (3) Tokens for prime numbers.@> 
 @*2 Tokens for prime numbers.

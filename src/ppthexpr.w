@@ -456,9 +456,8 @@ Removed debugging code.
 @q *** (3) with_closed_optional with_angle_optional @>
 @q *** (3) with_start_optional.                     @>
 
-@*1 \§path primary> $\longrightarrow$ \.{HALF}
-\§ellipse primary> \§with closed optional> 
-\§with angle optional> \§with start optional>.
+@*1 \§path primary> $\longrightarrow$ \.{HALF} \§ellipse primary> 
+\§with closed optional> \§with angle optional> \§with start optional>.
 \initials{LDF 2004.11.25.}
 
 \LOG
@@ -1010,11 +1009,9 @@ Added this rule.
                                        @=$2@>);
 };
 
-@q ***** (5) path_primary --> LAST @>
-@q ***** (5) path_vector_expression.@>
+@q ***** (5) path_primary --> LAST path_vector_expression.@>
 
-@*4 \§path primary> $\longrightarrow$ 
-\.{LAST} \§path vector expression>.
+@*4 \§path primary> $\longrightarrow$ \.{LAST} \§path vector expression>.
 \initials{LDF 2005.01.14.}
 
 \LOG
@@ -1358,6 +1355,79 @@ Added this rule.
       @=$$@> = c->get_pascal_line(@=$2@>, static_cast<Scanner_Node>(parameter));
       delete c;
    }
+};
+
+@q *** (3) path_primary --> BOX_TEXT string_expression @>
+
+@*1 \§path primary> $\longrightarrow$ \.{BOX\_TEXT} \§string expression>.
+\initials{LDF 2021.07.26.}
+
+\LOG
+\initials{LDF 2021.07.26.}
+Added this rule.
+\ENDLOG
+
+@q **** (4) Definition.@> 
+
+@<Define rules@>=
+
+@=path_primary: BOX_TEXT string_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_primary --> BOX_TEXT string_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   Path *p = new Path;
+
+   string *s = static_cast<string*>(@=$2@>);
+
+   Pointer_Vector<real>* pv = new Pointer_Vector<real>;
+ 
+   status = Scan_Parse::measure_text_func(
+                                static_cast<Scanner_Node>(parameter), 
+                                @=$2@>, 
+                                pv);
+
+   int i = 0;
+
+   for (vector<real*>::iterator iter = pv->v.begin();
+        iter != pv->v.end();
+        ++iter)
+   {
+       cerr << "pv->v[" << i++ << "] == " << **iter << endl;
+   }
+#if 0 
+   pv->show("pv:");
+#endif 
+
+@q ****** (6)@> 
+
+    if (status == 0)
+    {
+
+    }
+
+@q ****** (6)@> 
+
+    else /* |status != 0|  */
+       {
+
+
+       }  /* |else|  (|status != 0|)  */
+
+   @=$$@> = static_cast<void*>(p);
+
 };
 
 @q ** (2) path secondary.  @>
