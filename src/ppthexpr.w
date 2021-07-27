@@ -1372,8 +1372,10 @@ Added this rule.
 @<Define rules@>=
 
 @=path_primary: BOX_TEXT LEFT_PARENTHESIS point_expression COMMA string_expression @>@/
-@=RIGHT_PARENTHESIS numeric_list_optional                                          @>@/
+@=RIGHT_PARENTHESIS box_or_circle_text_option_list                                 @>@/
 {
+@q ***** (5) @>
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -1382,7 +1384,7 @@ Added this rule.
     {
       cerr_strm << thread_name 
                 << "*** Parser: `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
-                << "string_expression RIGHT_PARENTHESIS numeric_list_optional'.";
+                << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1397,14 +1399,34 @@ Added this rule.
 
    Pointer_Vector<real>* pv = new Pointer_Vector<real>;
  
-   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$7@>);
-
    status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
                                           @=$5@>, 
                                           pv);
 
    int i = 0;
  
+
+@q ***** (5) @>
+
+   Id_Map_Entry_Node voffset_entry = scanner_node->lookup("box_text_voffset");
+
+   if (voffset_entry && voffset_entry->object)
+   {
+      voffset = *static_cast<real*>(voffset_entry->object);
+   }
+
+   Id_Map_Entry_Node hoffset_entry = scanner_node->lookup("box_text_hoffset");
+
+   if (hoffset_entry && hoffset_entry->object)
+   {
+      hoffset = *static_cast<real*>(hoffset_entry->object);
+
+   }
+
+   cerr << "voffset == " << voffset << endl
+        << "hoffset == " << hoffset << endl;
+
+
    Point north;
    Point south;
    Point east;
@@ -1417,22 +1439,12 @@ Added this rule.
    if (pv == 0)
       goto END_BOX_TEXT_RULE;
 
-cerr << "Here I am." << endl
-<< "Type <RETURN> to continue: ";
-getchar(); 
 
    for (vector<real*>::iterator iter = pv->v.begin();
         iter != pv->v.end();
         ++iter)
    {
        cerr << "pv->v[" << i++ << "] == " << **iter << endl;
-   }
-
-   for (vector<real*>::iterator iter = w->v.begin();
-        iter != w->v.end();
-        ++iter)
-   {
-       cerr << "w->v[" << i++ << "] == " << **iter << endl;
    }
 
 @q ****** (6)@> 
@@ -1445,10 +1457,10 @@ getchar();
 @q ****** (6)@> 
 
     else /* |status != 0|  */
-       {
+    {
 
 
-       }  /* |else|  (|status != 0|)  */
+    }  /* |else|  (|status != 0|)  */
 
    /* |s| doesn't need to be deleted, because it's deleted in |Scan_Parse::measure_text_func|.  */
 
@@ -1466,31 +1478,99 @@ END_BOX_TEXT_RULE:
 
    @=$$@> = static_cast<void*>(q);
 
+@q ***** (5) @>
+
 };
 
-@q ** (2) numeric_list_optional.  @>
-@*1 \§numeric list optional>.
-  
+@q ***** (5) box_or_circle_text_option_list@>  
+@*4 \§box_or_circle_text option list>.
+\initials{LDF 2021.07.27.}
+
+\LOG
+\initials{LDF 2021.07.27.}
+Added this type declaration.
+\ENDLOG
+
 @<Type declarations for non-terminal symbols@>=
-@=%type <pointer_value> numeric_list_optional@>@/
 
-@q *** (3) numeric_list_optional --> EMPTY.@>
-@*2 \§numeric list optional> $\longrightarrow$ \.{EMPTY}.  
+@=%type <int_value> box_or_circle_text_option_list@>
 
-@<Define rules@>=
-@=numeric_list_optional: /* EMPTY  */@>@/
+@q ****** (6) box_or_circle_text_option_list --> EMPTY.@> 
+@*5 \§box_or_circle_text option list> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.07.27.}
+
+\LOG
+\initials{LDF 2021.07.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option_list: /* Empty */@>@/
 {
-   @=$$@> = static_cast<void*>(0);
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option_list:  EMPTY'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    if (scanner_node->box_or_circle_text_option_struct != 0)
+    {
+        delete scanner_node->box_or_circle_text_option_struct;
+        scanner_node->box_or_circle_text_option_struct = 0;
+    }
+
+    scanner_node->box_or_circle_text_option_struct = new Box_Or_Circle_Text_Option_Struct;
+
+    @=$$@> = 0;
 };
 
-@q *** (3) numeric_list_optional --> numeric_list.@>
-@*2 \§numeric list optional> $\longrightarrow$ \§numeric list>.
+@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_OFFSET numeric_expression.
+\§box or circle text option list> \.{WITH\_OFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.27.}
 
-@<Define rules@>=
-@=numeric_list_optional: numeric_list@>@/
+\LOG
+\initials{LDF 2021.07.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option_list: box_or_circle_text_option_list WITH_OFFSET numeric_expression@>@/
 {
-   @=$$@> = @=$1@>;
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list WITH_OFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->voffset = scanner_node->box_or_circle_text_option_struct->hoffset = @=$3@>;
+
+   @=$$@> = 0;
+
 };
+
+
+
+
 
 
 @q ** (2) path secondary.  @>
