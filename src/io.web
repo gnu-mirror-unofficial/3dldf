@@ -90,7 +90,7 @@ currently contains only the default constructor, which I've defined today.
 \initials{LDF 2004.06.29.}
 Removed |pthread_mutex_t mutex| and |pthread_cond_t cond_var|.
 Now deriving |Io_Struct| from |Mutex_Type|, if the preprocessor macro 
-|HAVE_PTHREAD_H| is defined.  Currently not using condition variables.
+p|HAVE_PTHREAD_H| is defined.  Currently not using condition variables.
 
 \initials{LDF 2004.09.09.}
 Replaced |bool is_file| with |unsigned short type|.
@@ -2365,6 +2365,40 @@ Made this function |const|.
 void
 show(string text = "") const;
 
+
+@q ** (2) |struct Box_Or_Circle_Text_Option_Struct| declaration.@>
+@*1 |struct Box_Or_Circle_Text_Option_Struct| declaration.
+\initials{LDF 2021.07.27.}
+
+\LOG
+\initials{LDF 2021.07.27.}
+Added this section.
+\ENDLOG
+
+@<Declare |struct Box_Or_Circle_Text_Option_Struct|@>=
+
+struct Box_Or_Circle_Text_Option_Struct
+{
+
+   real voffset;
+   real hoffset;
+   Transform *transform;
+   
+
+   Box_Or_Circle_Text_Option_Struct(void)
+   {
+      voffset = 0.0;
+      hoffset = 0.0;
+      transform = 0;
+      return;
+   }  
+
+   ~Box_Or_Circle_Text_Option_Struct(void)
+   {
+      return;
+   }   
+};
+
 @q * (1) Scanning.@>
 @* Scanning.
 
@@ -2728,6 +2762,8 @@ Added the declaration of
    Paraboloid_Set_Option_Struct* paraboloid_set_option_struct;
 
    Stars_Get_Option_Struct* stars_get_option_struct;
+
+   Box_Or_Circle_Text_Option_Struct* box_or_circle_text_option_struct;
 
 @q ***** (5) Pointers for |with_clause_draw|. @>
 @*4 Pointers for |with_clause_draw|.
@@ -6214,6 +6250,7 @@ Now writing declaration of |yyparse| to \filename{io.h}.
 #ifndef LDF_IO_H_KNOWN
 #define LDF_IO_H_KNOWN
 int yyparse(yyscan_t);
+class Transform;
 @<Declare I/O |structs|@>@;
 @<Declare I/O functions@>@;
 @<|Id_Map_Entry_Node| declaration@>@;
@@ -6225,6 +6262,7 @@ int yyparse(yyscan_t);
 @<|Loop_Info_Type| declaration@>@;
 @<|Definition_Info_Node| declaration@>@;
 @<|Definition_Info_Type| declaration@>@;
+@<Declare |struct Box_Or_Circle_Text_Option_Struct|@>@;
 @<|Scanner_Node| declaration@>@;
 @<|Scanner_Type| declaration@>@;
 @<|extern| variable declarations@>@;
