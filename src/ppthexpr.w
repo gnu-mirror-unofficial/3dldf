@@ -1402,69 +1402,10 @@ Added this rule.
    status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
                                           @=$5@>, 
                                           pv);
-
-   int i = 0;
- 
-
-@q ***** (5) @>
-
-   Id_Map_Entry_Node voffset_entry = scanner_node->lookup("box_text_voffset");
-
-   if (voffset_entry && voffset_entry->object)
-   {
-      voffset = *static_cast<real*>(voffset_entry->object);
-   }
-
-   Id_Map_Entry_Node hoffset_entry = scanner_node->lookup("box_text_hoffset");
-
-   if (hoffset_entry && hoffset_entry->object)
-   {
-      hoffset = *static_cast<real*>(hoffset_entry->object);
-
-   }
-
-   cerr << "voffset == " << voffset << endl
-        << "hoffset == " << hoffset << endl;
-
-
-   Point north;
-   Point south;
-   Point east;
-   Point west;
-   Point ne;
-   Point nw;
-   Point se;
-   Point sw;
-
    if (pv == 0)
       goto END_BOX_TEXT_RULE;
 
-
-   for (vector<real*>::iterator iter = pv->v.begin();
-        iter != pv->v.end();
-        ++iter)
-   {
-       cerr << "pv->v[" << i++ << "] == " << **iter << endl;
-   }
-
-@q ****** (6)@> 
-
-    if (status == 0)
-    {
-
-    }
-
-@q ****** (6)@> 
-
-    else /* |status != 0|  */
-    {
-
-
-    }  /* |else|  (|status != 0|)  */
-
-   /* |s| doesn't need to be deleted, because it's deleted in |Scan_Parse::measure_text_func|.  */
-
-   /* \initials{LDF 2021.07.26.}                                                                */
+   status = box_text_func(scanner_node, q, p, pv);
 
 END_BOX_TEXT_RULE:
 
@@ -1534,8 +1475,8 @@ Added this rule.
     @=$$@> = 0;
 };
 
-@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_OFFSET numeric_expression.
-\§box or circle text option list> \.{WITH\_OFFSET} \§numeric expression>. 
+@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_OFFSET numeric_expression.@>
+@ \§box or circle text option list> \.{WITH\_OFFSET} \§numeric expression>. 
 \initials{LDF 2021.07.27.}
 
 \LOG
@@ -1568,10 +1509,73 @@ Added this rule.
 
 };
 
+@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_VOFFSET numeric_expression.@>
+@ \§box or circle text option list> \.{WITH\_VOFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.27.}
 
+\LOG
+\initials{LDF 2021.07.27.}
+Added this rule.
+\ENDLOG
 
+@<Define rules@>= 
 
+@=box_or_circle_text_option_list: box_or_circle_text_option_list WITH_VOFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list WITH_VOFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->voffset = @=$3@>;
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_HOFFSET numeric_expression.@>
+@ \§box or circle text option list> \.{WITH\_HOFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.27.}
+
+\LOG
+\initials{LDF 2021.07.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option_list: box_or_circle_text_option_list WITH_HOFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list WITH_HOFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->hoffset = @=$3@>;
+
+   @=$$@> = 0;
+
+};
 
 @q ** (2) path secondary.  @>
 @*1 \§path secondary>.
