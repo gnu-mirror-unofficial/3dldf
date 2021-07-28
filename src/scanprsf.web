@@ -17409,8 +17409,8 @@ plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node)
 
 @q *** (3) @>
 
-@q ** (2) |box_text_func|.  @> 
-@ |box_text_func|.  
+@q ** (2) |box_or_circle_text_func|.  @> 
+@ |box_or_circle_text_func|.  
 \initials{LDF 2021.6.29.}
 
 \LOG
@@ -17422,13 +17422,13 @@ Added this function.
 
 @<Declare |Scan_Parse| functions@>=
 int
-box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t);
+box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t);
 
 @q *** (3) Definition @>
 @
 @<Define |Scan_Parse| functions@>=
 int
-box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t)
+box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t)
 {
 @q **** (4) @>
 
@@ -17439,7 +17439,7 @@ box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real>
 #if DEBUG_COMPILE
   if (DEBUG) 
     {
-      cerr_strm << "Entering `box_text_func'." << endl;
+      cerr_strm << "Entering `box_or_circle_text_func'." << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
@@ -17522,12 +17522,23 @@ box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real>
    east.shift(.5 * hval, 0);
    west.shift(-(.5 * hval), 0);
 
-   ne.set(east.get_x(), north.get_y(), 0);
-   nw.set(west.get_x(), north.get_y(), 0);
-   se.set(east.get_x(), south.get_y(), 0);
-   sw.set(west.get_x(), south.get_y(), 0);
+   if (flag == 0)
+   {
+      ne.set(east.get_x(), north.get_y(), 0);
+      nw.set(west.get_x(), north.get_y(), 0);
+      se.set(east.get_x(), south.get_y(), 0);
+      sw.set(west.get_x(), south.get_y(), 0);
+      q->set("--", true, &sw, &west, &nw, &north, &ne, &east, &se, &south, 0);
+   }
+   else 
+   {
+       /* !!START HERE  LDF 2021.07.28.  Do this a better way.  Make a circle and
+          scale it.  */ 
+       q->set("..", true, &west, &north, &east, &south, 0);
+   }
 
-   q->set("--", true, &sw, &west, &nw, &north, &ne, &east, &se, &south, 0);
+
+
 
    if (t != 0)
    {
@@ -17542,7 +17553,7 @@ box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real>
 #if DEBUG_COMPILE
   if (DEBUG) 
     {
-      cerr_strm << "Exiting `box_text_func' successfully with return value 0." 
+      cerr_strm << "Exiting `box_or_circle_text_func' successfully with return value 0." 
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -17551,7 +17562,7 @@ box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real>
 
   return 0;
 
-}  /* End of |box_text_func| definition  */
+}  /* End of |box_or_circle_text_func| definition  */
 
 @q *** (3) @>
 

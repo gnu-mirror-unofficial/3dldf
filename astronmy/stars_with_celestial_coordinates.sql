@@ -2900,7 +2900,7 @@ update Stars set is_eclipsing_binary = 1-1.99-1.99 where approx_rank_apparent_ma
 
 (fset 'insert-update-command
    [escape ?d ?\C-d ?\C-  ?\C-s ?  left ?\C-w ?\C-d ?\C-  ?\C-e C-left C-right ?\C-w C-f12 ?c ?\C-r ?w ?h ?e ?r ?e ?\C-  left ?\C-y ?\C-r ?, ?\C-  ?\C-y escape ?y ?\C-e ?\C-r ?= right right ?\C-y escape ?y ?\C-n ?\C-a ?\C-o up])
-(global-set-key [67109078] 'insert-update-command);; C-Ö
+(global-set-key [67109078] 'insert-update-command) ;; C-Ö
 (set-register ?c "update Stars set apparent_magnitude = , absolute_magnitude =  where approx_rank_apparent_magnitude = ;")
 
 /* !! START HERE:  LDF 2021.07.23.  */ 
@@ -2985,3 +2985,40 @@ update Stars set apparent_magnitude = 2.58, absolute_magnitude = -2.84 where app
 update Stars set apparent_magnitude = 2.58 , absolute_magnitude = -0.94 where approx_rank_apparent_magnitude = 100;
 
 update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 99;
+
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude, absolute_magnitude
+from Stars where approx_rank_apparent_magnitude > 100 and approx_rank_apparent_magnitude < 111
+order by  approx_rank_apparent_magnitude\G
+
+select * from Stars where common_name = "Zubenelgenubi"\G
+
+update Stars set approx_rank_apparent_magnitude = 105 where common_name = "Zubenelgenubi"\G
+
+update Stars set common_name = "$\\theta$ Aurigae" where approx_rank_apparent_magnitude = 107;
+
+show columns from Stars;
+
+update Stars set apparent_magnitude = , absolute_magnitude =  where approx_rank_apparent_magnitude = ;
+
+
+update Stars set apparent_magnitude = 2.60, absolute_magnitude =  0.42 where approx_rank_apparent_magnitude = 101;    
+update Stars set apparent_magnitude = 2.61, absolute_magnitude = -0.84 where approx_rank_apparent_magnitude = 102;    
+update Stars set apparent_magnitude = 2.63, absolute_magnitude =  0.87 where approx_rank_apparent_magnitude = 103;    
+update Stars set apparent_magnitude = 2.64, absolute_magnitude =  1.33 where approx_rank_apparent_magnitude = 104;    
+update Stars set apparent_magnitude = 2.64, absolute_magnitude =  0.77 where approx_rank_apparent_magnitude = 105;    
+update Stars set apparent_magnitude = 2.65, absolute_magnitude = -1.93 where approx_rank_apparent_magnitude = 106;    
+update Stars set apparent_magnitude = 2.65, absolute_magnitude = -0.98 where approx_rank_apparent_magnitude = 107;    
+update Stars set apparent_magnitude = 2.65, absolute_magnitude = -0.51 where approx_rank_apparent_magnitude = 108;    
+update Stars set apparent_magnitude = 2.66, absolute_magnitude =  0.24 where approx_rank_apparent_magnitude = 109;    
+update Stars set apparent_magnitude = 2.68, absolute_magnitude =  2.41 where approx_rank_apparent_magnitude = 110;    
+								 
+101. Zeta Sagittarii           Ascella           19 03 -29.9    6.9 -15.5  A2IV+A4V      2.60   0.42   36.61 1.37    89
+102. Beta Librae               Zubeneschamali    15 17  -9.4  352.0 +39.2  B8V           2.61  -0.84   20.38 0.87   160
+103. Alpha Serpentis           Unukalhai         15 44  +6.4   14.1 +44.1  K2III         2.63   0.87   44.54 0.71    73
+104. Beta Arietis              Sheratan          01 55 +20.8  142.4 -39.7  A5V           2.64   1.33   54.74 0.75    60
+105. Alpha Librae              Zubenelgenubi     14 51 -16.0  340.4 +38.0  A3IV+F4IV     2.64   0.77   42.25 1.05    77
+106. Alpha Columbae            Phact             05 40 -34.1  238.9 -28.8  B7IV          2.65  -1.93   12.16 0.60   270
+107. Theta Aurigae                               06 00 +37.2  174.4  +6.8  A0III+G2V     2.65  -0.98   18.83 0.81   170
+108. Beta Corvi                Kraz              12 34 -23.4  297.8 +39.3  G5III         2.65  -0.51   23.34 0.80   140
+109. Delta Cassiopeiae         Ruchbah           01 26 +60.2  127.2  -2.4  A5III         2.66   0.24   32.81 0.62    99
+110. Eta Boötis                Muphrid           13 55 +18.4    5.5 +73.0  G0IV          2.68   2.41   88.17 0.75    37

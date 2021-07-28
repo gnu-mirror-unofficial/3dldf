@@ -1357,10 +1357,11 @@ Added this rule.
    }
 };
 
-@q *** (3) path_primary --> BOX_TEXT ... @>
+@q *** (3) path_primary: box_or_circle_text LEFT_PARENTHESIS point_expression COMMA string_expression    @>
+@q                       RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional @>
 
-@*1 \§path primary> $\longrightarrow$ \.{BOX\_TEXT} \.{LEFT\_PARENTHESIS} \§point expression \.{COMMA} \§string expression>
-\.{RIGHT_PARENTHESIS} \§box or circle text option list> \§transformer optional>.
+@*1 \§path primary> $\longrightarrow$ \§box or circle text> \.{BOX\_TEXT} \.{LEFT\_PARENTHESIS} \§point expression \.{COMMA} 
+\§string expression> \.{RIGHT_PARENTHESIS} \§box or circle text option list> \§transformer optional>.
 \initials{LDF 2021.07.26.}
 
 \LOG
@@ -1372,8 +1373,8 @@ Added this rule.
 
 @<Define rules@>=
 
-@=path_primary: BOX_TEXT LEFT_PARENTHESIS point_expression COMMA string_expression @>@/
-@=RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional            @>@/
+@=path_primary: box_or_circle_text LEFT_PARENTHESIS point_expression COMMA string_expression @>@/
+@=RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional                      @>@/
 {
 @q ***** (5) @>
 
@@ -1384,7 +1385,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                << "*** Parser: `path_primary --> box_or_circle_text LEFT_PARENTHESIS point_expression COMMA "
                 << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional'.";
 
       log_message(cerr_strm);
@@ -1408,12 +1409,12 @@ Added this rule.
    if (status != 0)
    {
       cerr_strm << thread_name 
-                << "ERROR!  In parser, rule `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                << "ERROR!  In parser, rule `path_primary --> box_or_circle_text LEFT_PARENTHESIS point_expression COMMA "
                 << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
                 << endl
                 << "`Scan_Parse::measure_text_func' failed, returning " << status << "."
                 << endl
-                << "Not calling `box_text_func'.  Will try to continue."
+                << "Not calling `box_or_circle_text_func'.  Will try to continue."
                 << endl;
 
       log_message(cerr_strm);
@@ -1424,10 +1425,10 @@ Added this rule.
    else if (pv == 0)
    {
       cerr_strm << thread_name 
-                << "ERROR!  In parser, rule `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                << "ERROR!  In parser, rule `path_primary --> box_or_circle_text LEFT_PARENTHESIS point_expression COMMA "
                 << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
                 << endl
-                << "`pv' is NULL.  Not calling `box_text_func'.  Will try to continue."
+                << "`pv' is NULL.  Not calling `box_or_circle_text_func'.  Will try to continue."
                 << endl;
 
       log_message(cerr_strm);
@@ -1436,15 +1437,15 @@ Added this rule.
    }
    else
    {
-      status = box_text_func(scanner_node, q, p, pv, t);
+      status = box_or_circle_text_func(@=$1@>, scanner_node, q, p, pv, t);
 
       if (status != 0)
       {
          cerr_strm << thread_name 
-                   << "ERROR!  In parser, rule `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                   << "ERROR!  In parser, rule `path_primary --> box_or_circle_text LEFT_PARENTHESIS point_expression COMMA "
                    << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
                    << endl
-                   << "`box_text_func' failed, returning " << status << "." 
+                   << "`box_or_circle_text_func' failed, returning " << status << "." 
                    << endl 
                    << "Will try to continue."
                    << endl;
@@ -1472,8 +1473,56 @@ Added this rule.
 
 };
 
+@q ***** (5) box_or_circle_text  @>
+
+@ \§box or circle text>.
+\initials{LDF 2021.07.28.}
+
+\LOG
+\initials{LDF 2021.07.28.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+
+@=%type <int_value> box_or_circle_text@>
+
+@q ****** (6) box_or_circle_text --> BOX_TEXT.@> 
+@*5 \§box or circle text> $\longrightarrow$ \.{BOX\_TEXT}.
+\initials{LDF 2021.07.28.}
+
+\LOG
+\initials{LDF 2021.07.28.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text: BOX_TEXT@>@/
+{
+   @=$$@> = 0;
+
+}
+
+@q ****** (6) box_or_circle_text --> CIRCLE_TEXT.@> 
+@*5 \§box or circle text> $\longrightarrow$ \.{CIRCLE\_TEXT}.
+\initials{LDF 2021.07.28.}
+
+\LOG
+\initials{LDF 2021.07.28.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text: CIRCLE_TEXT@>@/
+{
+   @=$$@> = 1;
+
+}
+
 @q ***** (5) box_or_circle_text_option_list@>  
-@*4 \§box_or_circle_text option list>.
+@*4 \§box or circle text option list>.
 \initials{LDF 2021.07.27.}
 
 \LOG
@@ -1486,7 +1535,7 @@ Added this type declaration.
 @=%type <int_value> box_or_circle_text_option_list@>
 
 @q ****** (6) box_or_circle_text_option_list --> EMPTY.@> 
-@*5 \§box_or_circle_text option list> $\longrightarrow$ \.{EMPTY}.
+@*5 \§box or circle text option list> $\longrightarrow$ \.{EMPTY}.
 \initials{LDF 2021.07.27.}
 
 \LOG
