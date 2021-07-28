@@ -1357,9 +1357,10 @@ Added this rule.
    }
 };
 
-@q *** (3) path_primary --> BOX_TEXT string_expression @>
+@q *** (3) path_primary --> BOX_TEXT ... @>
 
-@*1 \§path primary> $\longrightarrow$.
+@*1 \§path primary> $\longrightarrow$ \.{BOX\_TEXT} \.{LEFT\_PARENTHESIS} \§point expression \.{COMMA} \§string expression>
+\.{RIGHT_PARENTHESIS} \§box or circle text option list> \§transformer optional>.
 \initials{LDF 2021.07.26.}
 
 \LOG
@@ -1372,7 +1373,7 @@ Added this rule.
 @<Define rules@>=
 
 @=path_primary: BOX_TEXT LEFT_PARENTHESIS point_expression COMMA string_expression @>@/
-@=RIGHT_PARENTHESIS box_or_circle_text_option_list                                 @>@/
+@=RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional            @>@/
 {
 @q ***** (5) @>
 
@@ -1384,7 +1385,7 @@ Added this rule.
     {
       cerr_strm << thread_name 
                 << "*** Parser: `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
-                << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list'.";
+                << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1394,22 +1395,70 @@ Added this rule.
 
    Path *q = new Path;
 
-   Point  *p = static_cast<Point*>(@=$3@>);
-   string *s = static_cast<string*>(@=$5@>);
+   Point     *p = static_cast<Point*>(@=$3@>);
+   string    *s = static_cast<string*>(@=$5@>);
+   Transform *t = static_cast<Transform*>(@=$8@>);
 
    Pointer_Vector<real>* pv = new Pointer_Vector<real>;
  
    status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
                                           @=$5@>, 
                                           pv);
-   if (pv == 0)
-      goto END_BOX_TEXT_RULE;
+   
+   if (status != 0)
+   {
+      cerr_strm << thread_name 
+                << "ERROR!  In parser, rule `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
+                << endl
+                << "`Scan_Parse::measure_text_func' failed, returning " << status << "."
+                << endl
+                << "Not calling `box_text_func'.  Will try to continue."
+                << endl;
 
-   status = box_text_func(scanner_node, q, p, pv);
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
 
-END_BOX_TEXT_RULE:
+   }
+   else if (pv == 0)
+   {
+      cerr_strm << thread_name 
+                << "ERROR!  In parser, rule `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
+                << endl
+                << "`pv' is NULL.  Not calling `box_text_func'.  Will try to continue."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+   }
+   else
+   {
+      status = box_text_func(scanner_node, q, p, pv, t);
+
+      if (status != 0)
+      {
+         cerr_strm << thread_name 
+                   << "ERROR!  In parser, rule `path_primary --> BOX_TEXT LEFT_PARENTHESIS point_expression COMMA "
+                   << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
+                   << endl
+                   << "`box_text_func' failed, returning " << status << "." 
+                   << endl 
+                   << "Will try to continue."
+                   << endl;
+      }
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+   }
+
+@q ***** (5) @>
 
    delete p;
+   delete t;
 
    if (pv)
    {
