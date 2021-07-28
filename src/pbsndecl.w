@@ -586,6 +586,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     WHERE@>@/
 @=%token <int_value>     WITH_LIMIT@>@/
 @=%token <int_value>     WITH_OFFSET@>@/
+@=%token <int_value>     WITH_VOFFSET@>@/
+@=%token <int_value>     WITH_HOFFSET@>@/
 @=%token <int_value>     ASCENDING@>@/
 @=%token <int_value>     DESCENDING@>@/
 @=%token <int_value>     STAR_CONSTANT_NAME@>@/

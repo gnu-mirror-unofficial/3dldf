@@ -1273,6 +1273,8 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
      scanner_node->add_entry("where", WHERE, spark);
      scanner_node->add_entry("with_limit", WITH_LIMIT, spark);
      scanner_node->add_entry("with_offset", WITH_OFFSET, spark);
+     scanner_node->add_entry("with_voffset", WITH_VOFFSET, spark);
+     scanner_node->add_entry("with_hoffset", WITH_HOFFSET, spark);
      scanner_node->add_entry("ascending", ASCENDING, spark);
      scanner_node->add_entry("descending", DESCENDING, spark);
      scanner_node->add_synonym("asc", "ascending");
@@ -4989,6 +4991,35 @@ Added call to |add_entry| for |ditto|.
 
       scanner_node->add_entry("measure_text_header",
                               STRING,
+                              regular,
+                              not_constant,
+                              not_array,
+                              Id_Map_Entry_Type::KNOWN,
+                              v);
+
+
+      real *rr = new real;
+
+      *rr = .125;
+
+      v = static_cast<void*>(rr); 
+
+      scanner_node->add_entry("box_text_hoffset",
+                              NUMERIC,
+                              regular,
+                              not_constant,
+                              not_array,
+                              Id_Map_Entry_Type::KNOWN,
+                              v);
+
+      rr = new real;
+
+      *rr = .125;
+
+      v = static_cast<void*>(rr); 
+
+      scanner_node->add_entry("box_text_voffset",
+                              NUMERIC,
                               regular,
                               not_constant,
                               not_array,

@@ -2387,8 +2387,8 @@ struct Box_Or_Circle_Text_Option_Struct
 
    Box_Or_Circle_Text_Option_Struct(void)
    {
-      voffset = 0.0;
-      hoffset = 0.0;
+      voffset = 1000.0;
+      hoffset = 1000.0;
       transform = 0;
       return;
    }  
@@ -2532,6 +2532,8 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
   friend int Id_Map_Entry_Type::destroy_array_subentries(Scanner_Node);
 
   friend class Point;
+
+  friend int box_text_func(Scanner_Node, Path *, Point *, Pointer_Vector<real> *);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
@@ -2763,7 +2765,7 @@ Added the declaration of
 
    Stars_Get_Option_Struct* stars_get_option_struct;
 
-   Box_Or_Circle_Text_Option_Struct* box_or_circle_text_option_struct;
+   struct Box_Or_Circle_Text_Option_Struct* box_or_circle_text_option_struct;
 
 @q ***** (5) Pointers for |with_clause_draw|. @>
 @*4 Pointers for |with_clause_draw|.
@@ -4892,6 +4894,10 @@ Added this section with the |friend| declaration for |end_group_func|.
 friend
 void
 Scan_Parse::end_group_func(void* parameter);
+
+friend 
+int 
+box_text_func(Scanner_Node, Path *, Point *, Pointer_Vector<real> *);
 
 @q **** (4) Function for numerics.@>   
 @*3 Function for numerics.

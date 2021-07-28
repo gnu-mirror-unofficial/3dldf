@@ -17409,8 +17409,147 @@ plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node)
 
 @q *** (3) @>
 
+@q ** (2) |box_text_func|.  @> 
+@ |box_text_func|.  
+\initials{LDF 2021.6.29.}
+
+\LOG
+\initials{LDF 2021.6.29.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration  @>
+
+@<Declare |Scan_Parse| functions@>=
+int
+box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv);
+
+@q *** (3) Definition @>
+@
+@<Define |Scan_Parse| functions@>=
+int
+box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv)
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */    
+
+   stringstream cerr_strm;
+
+#if DEBUG_COMPILE
+  if (DEBUG) 
+    {
+      cerr_strm << "Entering `box_text_func'." << endl;
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   int status = 0;
+
+   int i = 0;
+
+   real voffset = 1000.0;
+   real hoffset = 1000.0;
+ 
+@q **** (4) @>
+
+   if (scanner_node->box_or_circle_text_option_struct != 0)
+   {
+      if (scanner_node->box_or_circle_text_option_struct->voffset != 1000.0)
+         voffset = scanner_node->box_or_circle_text_option_struct->voffset;
+      if (scanner_node->box_or_circle_text_option_struct->hoffset != 1000.0)
+         hoffset = scanner_node->box_or_circle_text_option_struct->hoffset;
+   }
+   if (voffset == 1000.0)
+   {
+      Id_Map_Entry_Node voffset_entry = scanner_node->lookup("box_text_voffset");
+
+      if (voffset_entry && voffset_entry->object)
+      {
+         voffset = *static_cast<real*>(voffset_entry->object);
+      }
+   }
+   if (hoffset == 1000.0)
+   {
+      Id_Map_Entry_Node hoffset_entry = scanner_node->lookup("box_text_hoffset");
+
+      if (hoffset_entry && hoffset_entry->object)
+      {
+         hoffset = *static_cast<real*>(hoffset_entry->object);
+
+      }  
+   }
+
+@q **** (4) @>
+@
+@<Define |Scan_Parse| functions@>=
+
+   if (voffset == 1000.0)
+      voffset = 0.0;
+
+   if (hoffset == 1000.0)
+      hoffset = 0.0;
+
+   cerr << "voffset == " << voffset << endl
+        << "hoffset == " << hoffset << endl;
+
+   real vval = 0.0;
+   real hval = 0.0;
+
+   vval += *(pv->v[1]) + *(pv->v[2]) + 2 * voffset;
+   hval += *(pv->v[0]) + 2 * hoffset;
+
+   cerr << "vval == " << vval << endl
+        << "hval == " << hval << endl;
+
+   Point north;
+   Point south;
+   Point east;
+   Point west;
+   Point ne;
+   Point nw;
+   Point se;
+   Point sw;
+
+   north = *p;
+   south = *p;
+   east  = *p;
+   west  = *p;
+
+   north.shift(0, .5 * vval);
+   south.shift(0, -(.5 * vval));
+   east.shift(.5 * hval, 0);
+   west.shift(-(.5 * hval), 0);
+
+   ne.set(east.get_x(), north.get_y(), 0);
+   nw.set(west.get_x(), north.get_y(), 0);
+   se.set(east.get_x(), south.get_y(), 0);
+   sw.set(west.get_x(), south.get_y(), 0);
+
+   q->set("--", true, &sw, &west, &nw, &north, &ne, &east, &se, &south, 0);
+
+#if 0 
+   q->show("q:");
+#endif 
+
+#if DEBUG_COMPILE
+  if (DEBUG) 
+    {
+      cerr_strm << "Exiting `box_text_func' successfully with return value 0." 
+                << endl;
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  return 0;
+
+}  /* End of |box_text_func| definition  */
+
 @q *** (3) @>
 
+@q ** (2) @>
 
 @q * (1) Putting additional |Scan_Parse| functions together.@>
 @* Putting additional {\bf Scan\_Parse} functions together.
