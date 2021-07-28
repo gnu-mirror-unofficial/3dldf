@@ -528,23 +528,23 @@ of the |vector<real*>|.
   
   real* r;
 
-        p = new Pointer_Vector<real>;  
+  p = new Pointer_Vector<real>;  
 
-        r = new real;
-        *r = @=$2@>;
-        *p += r;
+  r = new real;
+  *r = @=$2@>;
+  *p += r;
 
-        if (transform_token == SCALED)
-           {
-              r = new real;
-              *r = @=$2@>;
-              *p += r;
-        
-              r = new real;
-              *r = @=$2@>;
-              *p += r;
+  if (transform_token == SCALED)
+  {
+     r = new real;
+     *r = @=$2@>;
+     *p += r;
+  
+     r = new real;
+     *r = @=$2@>;
+     *p += r;
 
-           } /* |if (transform_token == SCALED)|  */
+  } /* |if (transform_token == SCALED)|  */
 
 @q ****** (6).@> 
 @

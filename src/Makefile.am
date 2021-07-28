@@ -1255,8 +1255,8 @@ ttemp.dvi: ttemp.tex ttemp.1
 ttemp.1: ttemp.mp
 	mpost $<
 
-ttemp.mp: ttemp.ldf
-	3dldf $<
+ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
+	3dldf$(EXEEXT) $<
 
 ttemp$(EXEEXT): ttemp.cxx
 	g++ -o ttemp$(EXEEXT) ttemp.cxx

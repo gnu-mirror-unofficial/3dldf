@@ -17422,13 +17422,13 @@ Added this function.
 
 @<Declare |Scan_Parse| functions@>=
 int
-box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv);
+box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t);
 
 @q *** (3) Definition @>
 @
 @<Define |Scan_Parse| functions@>=
 int
-box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv)
+box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t)
 {
 @q **** (4) @>
 
@@ -17528,6 +17528,12 @@ box_text_func(Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real>
    sw.set(west.get_x(), south.get_y(), 0);
 
    q->set("--", true, &sw, &west, &nw, &north, &ne, &east, &se, &south, 0);
+
+   if (t != 0)
+   {
+       *q *= *t;
+       q->apply_transform();
+   }
 
 #if 0 
    q->show("q:");
