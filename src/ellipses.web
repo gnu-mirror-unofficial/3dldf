@@ -108,7 +108,7 @@ Added |focus0|, |focus1|, and |linear_eccentricity|.
 Added |numerical_eccentricity|.
 
 \initials{LDF 2004.10.18.}
-Added |friend| declaration for |Path::is_elliptical()|.
+Added |friend| declaration for |Path::is_elliptical|.
 
 \initials{LDF 2005.11.01.}
 Moved the following |protected| data members from here  to 
@@ -223,7 +223,7 @@ Added code for setting |numerical_eccentricity|.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.06.18.}  
 Now setting |dash_pattern| and |pen| to 0.
@@ -342,7 +342,7 @@ Ellipse::Ellipse(const Point& ccenter,
 
       }  /* |for|  */
 
-}  /* End of |Ellipse::Ellipse()| definition.  */
+}  /* End of |Ellipse::Ellipse| definition.  */
 
 @q *** (3) Setting function.@>
 @*2 Setting function.
@@ -522,7 +522,7 @@ Ellipse::Ellipse(const Point& ccenter,
 
     return;
 
-}  /* End of |Ellipse()| definition.  */
+}  /* End of |Ellipse| definition.  */
 
 @q ** (2) Pseudo-constructor for dynamic allocation.@>
 @*1 Pseudo-constructor for dynamic allocation.
@@ -535,8 +535,8 @@ Ellipse::Ellipse(const Point& ccenter,
 Added optional |const Ellipse*| argument.
 
 \initials{LDF 2003.12.30.}  
-Replaced |Ellipse::create_new_ellipse()|
-with a specialization of |template <class C> C* create_new()| for
+Replaced |Ellipse::create_new_ellipse|
+with a specialization of |template <class C> C* create_new| for
 |Ellipse|. 
 
 \initials{LDF 2004.10.11.}
@@ -556,8 +556,8 @@ create_new(const Ellipse* c, Scanner_Node scanner_node);
 Added this function.
 
 \initials{LDF 2003.12.30.}  
-Replaced |Ellipse::create_new_ellipse()|
-with a specialization of |template <class C> C* create_new()| for
+Replaced |Ellipse::create_new_ellipse|
+with a specialization of |template <class C> C* create_new| for
 |Ellipse|. 
 
 \initials{LDF 2004.10.11.}
@@ -574,8 +574,8 @@ create_new(const Ellipse& c, Scanner_Node scanner_node);
 
 \LOG
 \initials{LDF 2002.10.09.}  
-Removed the destructor.  |Path::~Path()| or
-|Path::clear()|\newline
+Removed the destructor.  |Path::~Path| or
+|Path::clear|\newline
 should be used instead, unless I add dynamically
 allocated data members to |Ellipse| (rather than |Path|).
 \ENDLOG 
@@ -757,9 +757,9 @@ try to allocate memory on the free store for it.
 
   } /* |if (ellipse_reflection == static_cast<Ellipse*>(0))|  */
 
-@q *** (3) Call |Reg_Cl_Plane_Curve::reflect_in()|.@> 
+@q *** (3) Call |Reg_Cl_Plane_Curve::reflect_in|.@> 
 
-@ Call |Reg_Cl_Plane_Curve::reflect_in()|.
+@ Call |Reg_Cl_Plane_Curve::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Ellipse| functions@>=
@@ -775,9 +775,9 @@ try to allocate memory on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Reg_Cl_Plane_Curve::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Reg_Cl_Plane_Curve::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Reg_Cl_Plane_Curve::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Reg_Cl_Plane_Curve::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Ellipse| functions@>=
@@ -800,9 +800,9 @@ try to allocate memory on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Reg_Cl_Plane_Curve::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Reg_Cl_Plane_Curve::reflect_in| returned 1.@> 
 
-@ Error handling:  |Reg_Cl_Plane_Curve::reflect_in()| returned 1.
+@ Error handling:  |Reg_Cl_Plane_Curve::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Ellipse| functions@>=
@@ -826,9 +826,9 @@ try to allocate memory on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Reg_Cl_Plane_Curve::reflect_in()| succeeded.@> 
+@q **** (4) |Reg_Cl_Plane_Curve::reflect_in| succeeded.@> 
 
-@ |Reg_Cl_Plane_Curve::reflect_in()| succeeded.
+@ |Reg_Cl_Plane_Curve::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Ellipse| functions@>=
@@ -888,7 +888,7 @@ try to allocate memory on the free store for it.
 
   return 0;
 
-} /* End of |Ellipse::reflect_in()| definition.  */
+} /* End of |Ellipse::reflect_in| definition.  */
 
 @q * (1) Reflection off of a |Plane|.@> 
 @* Reflection off of a |Plane|.
@@ -958,17 +958,17 @@ Ellipse::reflect_off(const Plane& p,
   Pointer_Vector<Ellipse>* ellipse_ptr_vector 
      = static_cast<Pointer_Vector<Ellipse>*>(v);
 
-@q *** (3) Call |Path::reflect_off()|.@> 
+@q *** (3) Call |Path::reflect_off|.@> 
 
-@ Call |Path::reflect_off()|.
+@ Call |Path::reflect_off|.
 \initials{LDF 2004.12.14.}
 
 @<Define |Ellipse| functions@>=
 
    int status = Path::reflect_off(p, direction, ellipse_ptr_vector, scanner_node);
 
-@q **** (4) Error handling:  |Path::reflect_off()| failed.@>   
-@ Error handling:  |Path::reflect_off()| failed.
+@q **** (4) Error handling:  |Path::reflect_off| failed.@>   
+@ Error handling:  |Path::reflect_off| failed.
 \initials{LDF 2004.12.14.}
 
 @<Define |Ellipse| functions@>=
@@ -1041,9 +1041,9 @@ Ellipse::reflect_off(const Plane& p,
 
       }  /* |for|  */
 
-@q *** (3)  Call |Point::reflect_off()| on |center|, |focus_0|, and |focus_1|.@> 
+@q *** (3)  Call |Point::reflect_off| on |center|, |focus_0|, and |focus_1|.@> 
 
-@ Call |Point::reflect_off()| on |center|, |focus_0|, and |focus_1|.
+@ Call |Point::reflect_off| on |center|, |focus_0|, and |focus_1|.
 Return 1 upon error.
 \initials{LDF 2004.12.14.}
 
@@ -1112,7 +1112,7 @@ Return 1 upon error.
    
    return 0;
 
-} /* End of |Ellipse::reflect_off()| definition.  */
+} /* End of |Ellipse::reflect_off| definition.  */
 
 @q * (1) Labelling. @>
 @* Labelling.
@@ -1130,10 +1130,10 @@ and removed the default, which was formerly |current_picture|.
 \initials{LDF 2005.01.31.}
 Added the arguments |Color* ttext_color| and |Color* ddot_color|, 
 both with default 0.  Passing these arguments on to 
-|Point::label()|.
+|Point::label|.
 
 \initials{LDF 2005.08.14.}
-Now passing 0 as the |Transform*| argument to |Point::label()|.
+Now passing 0 as the |Transform*| argument to |Point::label|.
 \ENDLOG 
 
 @<Declare |Ellipse| functions@>=
@@ -1178,7 +1178,7 @@ Ellipse::label(Picture& picture,
 \LOG
 \initials{LDF 2002.11.06.}  
 Changed this function so that it just calls
-|Ellipse::label()| with |dot = true|.  Made it |inline|.
+|Ellipse::label| with |dot = true|.  Made it |inline|.
 
 \initials{LDF 2004.05.25.}  
 Made |Picture& picture| the first argument
@@ -1187,10 +1187,10 @@ and removed the default, which was formerly |current_picture|.
 \initials{LDF 2005.01.31.}
 Added the arguments |Color* ttext_color| and |Color* ddot_color|, 
 both with default 0.  Passing these arguments on to 
-|Ellipse::label()|.
+|Ellipse::label|.
 
 \initials{LDF 2005.08.14.}
-Now passing 0 as the |Transform*| argument to |Point::label()|.
+Now passing 0 as the |Transform*| argument to |Point::label|.
 \ENDLOG 
 
 @<Declare |Ellipse| functions@>=
@@ -1392,7 +1392,7 @@ and test whether it's elliptical.
 
   return e.is_elliptical();
 
-} /* End of |Path::is_elliptical()| definition.  */
+} /* End of |Path::is_elliptical| definition.  */
 
 @q *** (3) |Ellipse| version.@> 
 
@@ -1400,10 +1400,10 @@ and test whether it's elliptical.
 @^\cfunc{Ellipse}{is\_elliptical}@>
 \initials{LDF 2004.10.16.}
 
-|is_elliptical()| 
+|is_elliptical| 
 first checks whether |*this| is planar by calling\newline
-|get_normal()|.  If
-the latter function returns |INVALID_POINT|, then |is_elliptical()|
+|get_normal|.  If
+the latter function returns |INVALID_POINT|, then |is_elliptical|
 returns |false|.  Otherwise, it makes a copy of |*this| called |e|,
 puts |e| into the x-z plane, and rotates it,  so that
 |*(e.points[0])| lies on the x-axis.  Then, it plugs the x and
@@ -1411,11 +1411,11 @@ z-coordinates of the |Points| on |e| into the ellipse equation, i.e.,
 $x^2/a^2 + z^2/b^2 = 1$, where $a$ is half of the horizontal axis of
 the ellipse, and $b$ is half of the vertical axis.  
 Let $r = x^2/a^2 + z^2/b^2$ and $\epsilon$ stand for the return value
-of |Point::epsilon()|.  
+of |Point::epsilon|.  
 If $\vert r-1\vert > \epsilon$ 
 for any of the
 |Points| on |e|,
-|is_elliptical()| returns |false|, otherwise it returns |true|.
+|is_elliptical| returns |false|, otherwise it returns |true|.
 \initials{LDF 2003.07.20.}  
 
 \LOG
@@ -1424,7 +1424,7 @@ Added this function.
 
 \initials{LDF 2003.07.25.}  
 Now checking |normal == INVALID_POINT|.  If it is,
-|is_elliptical()| returns |false|.  
+|is_elliptical| returns |false|.  
 
 \initials{LDF 2004.05.02.}  
 Changed |Point x_axis_pt(1)| to 
@@ -1551,7 +1551,7 @@ Ellipse::is_elliptical() const
          << endl << endl;
   return true;
 
-} /* End of |Ellipse::is_elliptical()| definition.  */
+} /* End of |Ellipse::is_elliptical| definition.  */
 
 @q ** (2) Is whatever.@>
 @*1 Is whatever.
@@ -1633,16 +1633,16 @@ Ellipse::is_quartic() const
 @q ** Solve.@>
 @*1 Solve.
 @^\cfunc{Ellipse}{solve}@>
-\initials{LDF 2002.11.06.}  |solve()| assumes that the |Ellipse| lies in a
+\initials{LDF 2002.11.06.}  |solve| assumes that the |Ellipse| lies in a
 major plane with its center at the origin.  Code that calls it
-must ensure that these conditions are fulfilled.  |solve()| returns
+must ensure that these conditions are fulfilled.  |solve| returns
 the two possible values for either the horizontal or the vertical
 coordinate. 
 
 @:!! TO DO@> TO DO:  Read through, and then explain this function.  
 
 \LOG
-\initials{LDF 2003.07.20.}  Now using |get_axis_v()| and |get_axis_h()|, instead
+\initials{LDF 2003.07.20.}  Now using |get_axis_v| and |get_axis_h|, instead
 of accessing |axis_h| and |axis_v| directly.
 
 \initials{LDF 2003.07.25.}  Removed some commented-out code, and an explanatory
@@ -1726,7 +1726,7 @@ one would expect: |r.first| is the coefficient of $x^2$, |r.second| of
 $x$ and |r.third| of the constant term ($x^0$).
 
 \LOG
-\initials{LDF 2003.07.20.}  Now using |get_axis_v()| and |get_axis_h()|, instead
+\initials{LDF 2003.07.20.}  Now using |get_axis_v| and |get_axis_h|, instead
 of accessing |axis_h| and |axis_v| directly.
 
 \initials{LDF 2003.07.27.}  Corrected a typo in the math mode material showing the
@@ -1819,8 +1819,8 @@ Added this function.
 \initials{LDF 2005.11.17.}
 Made this version |const| and removed the original |const| version.
 The return type of the other version conflicted with that of 
-|Conic_Section::get_focus()|.
-No longer calling |Point::apply_transform()| on |focus_0| or |focus_1|.
+|Conic_Section::get_focus|.
+No longer calling |Point::apply_transform| on |focus_0| or |focus_1|.
 Commented-out the error message, because it's not thread-safe.
 
 \initials{LDF 2005.11.17.}
@@ -1851,7 +1851,7 @@ Ellipse::get_focus(const unsigned short s, Scanner_Node scanner_node) const
     else
       {
 #if 0 
-          cerr << "ERROR! In |Ellipse::get_focus()|:\n"
+          cerr << "ERROR! In |Ellipse::get_focus|:\n"
                << "Invalid argument: " << s << endl
                << "Valid arguments are 0 and 1.\n"
                << "Returning INVALID_POINT.\n\n";
@@ -1938,7 +1938,7 @@ Ellipse::get_vertex(const unsigned short s, Scanner_Node scanner_node) const
 
       }  /* |else|  */
 
-}  /* End of |Ellipse::get_vertex()| definition.  */
+}  /* End of |Ellipse::get_vertex| definition.  */
 
 @q ** (2) Get linear eccentricity.@>
 @*1 Get linear eccentricity.
@@ -1988,7 +1988,7 @@ Ellipse::get_numerical_eccentricity() const
 \initials{LDF 2005.11.17.}
 Added this function.  It currently has a dummy definition, 
 returning |INVALID_REAL| immediately.  It's needed because 
-|Conic_Section::get_discriminant()| is a pure virtual function.
+|Conic_Section::get_discriminant| is a pure virtual function.
 
 \initials{LDF 2005.11.17.}
 Changed the return type of this function from |real| to |Real_Triple|.
@@ -2024,7 +2024,7 @@ Ellipse::get_discriminant(const Path& p,
 Rewrote the |const| versions of the functions in this
 section, and added non-|const| versions.  All of them now check
 whether |*this| is still elliptical using 
-|is_ellipse()|.  
+|is_ellipse|.  
 If it is, the value |axis_v| or |axis_h| should have is recalculated,
 and this value is 
 returned.  In the non-|const| versions, |axis_v| or |axis_h| is reset
@@ -2042,8 +2042,8 @@ change, so it's safer to do this here.
 
 \initials{LDF 2003.07.25.} 
 @:BUG FIX@> BUG FIX:  |axis_h| and |axis_v| were too
-small by half.  Now multiplying by 2 in all versions of |get_axis_h()|
-and |get_axis_v()|.
+small by half.  Now multiplying by 2 in all versions of |get_axis_h|
+and |get_axis_v|.
 \ENDLOG
 
 @q *** (3) Get vertical axis.@>
@@ -2133,7 +2133,7 @@ Ellipse::get_axis_h()
 @*1 Angle point.
 @^\cfunc{Ellipse}{angle\_point}@>
 
-|angle_point()| returns a point on the ellipse given an angle.  
+|angle_point| returns a point on the ellipse given an angle.  
 Effectively, |point[0]| is rotated about the center in the plane of
 the ellipse and the intersection of the ray from the center through
 |point[0]| and the ellipse is returned.
@@ -2164,12 +2164,12 @@ point lies in the proper direction.  Now that the intersection point
 doesn't have to be on the line segment, it's necessary to check this. 
 
 \initials{LDF 2003.07.20.}  
-Now using |get_axis_v()| and |get_axis_h()|, instead
+Now using |get_axis_v| and |get_axis_h|, instead
 of accessing |axis_h| and |axis_v| directly.
 
 \initials{LDF 2003.07.27.}  
 Made |const|.  Made |angle| argument |const|.  Now
-using |get_center()| instead of |center|.
+using |get_center| instead of |center|.
 \ENDLOG
 
 @<Declare |Ellipse| functions@>=
@@ -2219,7 +2219,7 @@ if (bpp.first.pt != INVALID_POINT)
 @q * (1) Equality.@>
 @* Equality.
 @:!! TO DO@> TO DO: 
-I'll need to define |Path::operator==()| in order to be able
+I'll need to define |Path::operator==| in order to be able
 to define this function.
 @<Declare |Ellipse| functions@>=
 #if 0 
@@ -2245,22 +2245,22 @@ Ellipse::operator==(const Ellipse& e)
 @^\cfunc{Ellipse}{location}@>
 \initials{LDF 2003.07.25.}  
 This function overloads\newline
-|Reg_Cl_Plane_Curve::location()|.  It's
+|Reg_Cl_Plane_Curve::location|.  It's
 simpler, because it doesn't need to copy the |Ellipse| and transform
 the copy into a major plane.  Nor does it require the use of
-|solve()|.  
+|solve|.  
 
 \initials{LDF 2003.07.25.}
 If the |Point| argument $P$ lies in the same plane as |*this|, 
-|location()| compares the sum of the distances of 
+|location| compares the sum of the distances of 
 $P$ from the foci to 2 times the maximum of |axis_h| and
 |axis_v|.   
 
 \initials{LDF 2003.07.25.}
 Let $m$ stand for 
-|(P - focus_0).magnitude() + (P - focus_0).magnitude()|,
+|(P - focus_0).magnitude() + (P - focus_0).magnitude|,
 $d$ for |2 * max(axis_h, axis_v)|, and $\epsilon$ for
-|Point::epsilon()|.  
+|Point::epsilon|.  
 The return values are as follows:
 \BRVS{-1}
 
@@ -2443,12 +2443,12 @@ Made this function |virtual|.
 
 \initials{LDF 2003.07.27.}  
 Made argument |p| a |const Path&|.  Changed, so that
-|is_linear()| is used, and\newline
-|get_last_point()| rather than |get_point(1)|. 
+|is_linear| is used, and\newline
+|get_last_point| rather than |get_point(1)|. 
 
 \initials{LDF 2005.11.03.}
 Added |Scanner_Node scanner_node| argument with default 0.
-Added code for the case |!p.is_linear() && p.is_planar()|.
+Added code for the case |!p.is_linear() && p.is_planar|.
 \ENDLOG 
 
 @q *** (3) Declaration.@> 
@@ -2566,7 +2566,7 @@ Bool_Point_Quadruple bpq = t.intersection_points(c);
 
 @ \initials{LDF 2003.07.20.}  
 When |c| was rotated by $15^\circ$ or $45^\circ$, 
-|intersection_points()| found both intersections.  Try to find out
+|intersection_points| found both intersections.  Try to find out
 why!  I want to write a |Circle| version with an |Ellipse| argument,
 and vice versa.  If I do, I may not have to worry about this problem. 
 
@@ -2633,7 +2633,7 @@ determines whether the |Ellipses| are coplanar or not.
 
 \initials{LDF 2004.06.08.}  Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.11.07.}
 Replaced the |bool verbose = false| argument with 
@@ -2697,7 +2697,7 @@ Ellipse::intersection_points(Ellipse e, Scanner_Node scanner_node) const
 @q **** (4) Coplanar case.@>
 @ Coplanar case.
 \LOG
-\initials{LDF 2003.07.20.}  Now using |get_axis_v()| and |get_axis_h()|, instead
+\initials{LDF 2003.07.20.}  Now using |get_axis_v| and |get_axis_h|, instead
 of accessing |axis_h| and |axis_v| directly.
 \ENDLOG 
 @<Define |Ellipse| functions@>=
@@ -3782,7 +3782,7 @@ if (DEBUG || verbose)
 \LOG
 \initials{LDF 2003.04.27.}  
 Finished adding the transformation functions.  I
-already had |shift()|, now I have the rest of them.
+already had |shift|, now I have the rest of them.
 \ENDLOG 
 
 @q ** (2) Performing a transformation. @>
@@ -3794,7 +3794,7 @@ already had |shift()|, now I have the rest of them.
 \initials{LDF 2003.07.20.}  
 This function performs a transformation on |*this|.  
 
-If |check == true|, |is_elliptical()| is called on |*this| following
+If |check == true|, |is_elliptical| is called on |*this| following
 the transformation.
 If the latter causes |*this| to
 become non-elliptical, |axis_h|, |axis_v|, |linear_eccentricity|,
@@ -3812,8 +3812,8 @@ become non-elliptical, |axis_h| and |axis_v| are recalculated.
 \initials{LDF 2003.07.20.}  
 Added this function.  It makes it possible to perform
 a transformation on an |Ellipse|, optionally calling
-|is_elliptical()|.  It is called in |is_elliptical()| with 
-|check ==  false|.  This prevents |operator*=()| and |is_elliptical()|
+|is_elliptical|.  It is called in |is_elliptical| with 
+|check ==  false|.  This prevents |operator*=| and |is_elliptical|
 from calling each other {\it ad infinitum}.
 
 \initials{LDF 2003.07.25.}  
@@ -3922,7 +3922,7 @@ Turned off warning message.
      }
    return t;
 
-}  /* End of |Ellipse::do_transform()| definition.  */
+}  /* End of |Ellipse::do_transform| definition.  */
 
 @q *** (3) Multiplication with assignment operator.@>
 @*2 Multiplication with assignment operator.
@@ -3934,8 +3934,8 @@ Turned off warning message.
 Added this function.
 
 \initials{LDF 2003.07.20.}  
-Changed this function, so that it calls |do_transform()| with
-|check == true|, so that |is_elliptical()| is called.  
+Changed this function, so that it calls |do_transform| with
+|check == true|, so that |is_elliptical| is called.  
 \ENDLOG 
 
 @<Declare |Ellipse| functions@>=
@@ -3957,7 +3957,7 @@ Ellipse::operator*=(const Transform& t)
 
 \LOG
 \initials{LDF 2003.07.25.}  
-Changed this function, so that |do_transform()| is called with
+Changed this function, so that |do_transform| is called with
 |check == false|.  Rotation can neither change the lengths of |axis_h|
 or |axis_v|, nor make an |Ellipse| non-elliptical, so there's no need
 to check |*this| after rotation.
@@ -4036,7 +4036,7 @@ Ellipse::shear(real xy, real xz, real yx, real yz,
 @ {\bf real} arguments. 
 @^\cfunc{Ellipse}{shift}@>
 \LOG
-\initials{LDF 2003.07.25.}  Changed, so that |do_transform()| is called with
+\initials{LDF 2003.07.25.}  Changed, so that |do_transform| is called with
 |check == false|.  Shifting can neither change the lengths of |axis_h|
 or |axis_v|, nor make an |Ellipse| non-elliptical, so there's no need
 to check |*this| after shifting.
@@ -4079,7 +4079,7 @@ Ellipse::shift(const Point& p)
 @ {\bf real} arguments. 
 @^\cfunc{Ellipse}{shift\_times}@>
 \LOG
-\initials{LDF 2003.07.25.}  Now performing |shift_times()| on |focus0| and
+\initials{LDF 2003.07.25.}  Now performing |shift_times| on |focus0| and
 |focus1|, too.
 \ENDLOG 
 @<Declare |Ellipse| functions@>=
@@ -4122,11 +4122,11 @@ Ellipse::shift_times(const Point& p)
 @ {\bf Point} arguments.
 @^\cfunc{Ellipse}{rotate}@>
 \LOG
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 
-\initials{LDF 2003.07.25.}  Changed, so that |do_transform()| is called with
+\initials{LDF 2003.07.25.}  Changed, so that |do_transform| is called with
 |check == false|.  Rotation can neither change the lengths of |axis_h|
 or |axis_v|, nor make an |Ellipse| non-elliptical, so there's no need
 to check |*this| after rotation.
@@ -4150,8 +4150,8 @@ Ellipse::rotate(const Point& p0, const Point& p1, const real angle)
 @ {\bf Path} arguments.
 @^\cfunc{Ellipse}{rotate}@>
 \LOG
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 \ENDLOG 
 @<Declare |Ellipse| functions@>=
@@ -4161,7 +4161,7 @@ rotate(const Path& p, const real angle = 180);
 
 @
 \LOG
-\initials{LDF 2003.04.27.}  Changed |get_point(1)| to |get_last_point()|.
+\initials{LDF 2003.04.27.}  Changed |get_point(1)| to |get_last_point|.
 \ENDLOG 
 @<Define |Ellipse| functions@>=
 Transform 
@@ -4253,7 +4253,7 @@ Ellipse::show(string text, char coords,
 
    return;
 
-}  /* End of |Ellipse::show()| definition.  */
+}  /* End of |Ellipse::show| definition.  */
 
 @q * Rectangles.@>
 @* Rectangles.
@@ -4408,7 +4408,7 @@ with the optional argument
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2004.05.25.}
-Change the call to |draw()| when I've made the |Picture| argument its
+Change the call to |draw| when I've made the |Picture| argument its
 first argument.
 \ENDTODO 
 
@@ -4505,7 +4505,7 @@ Ellipse::draw_in_rectangle(Picture& picture,
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2003.07.18.}
-Add |undraw_in_ellipse()|, |fill_out_ellipse()|, etc.  Also, I should add
+Add |undraw_in_ellipse|, |fill_out_ellipse|, etc.  Also, I should add
 versions with the |Picture| argument first.
 \ENDTODO 
 
@@ -4539,7 +4539,7 @@ will be reentrant.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 \ENDLOG 
 
 @q **** (4) Definition.@> 
@@ -4574,7 +4574,7 @@ Rectangle::out_ellipse() const
 
   if (M.unit_vector() != x_axis_pt)
     {
-      cerr << "WARNING! In |Rectangle::in_ellipse()|:\n"
+      cerr << "WARNING! In |Rectangle::in_ellipse|:\n"
            << "M is not (1, 0, 0)!\n";
       M.show("M:"); /* I'd rather output this to |stderr|, but
                        I don't have a way to do this yet.  
@@ -4598,7 +4598,7 @@ Rectangle::out_ellipse() const
     }
   else
     {
-      cerr << "ERROR! In |Rectangle::out_ellipse()|:\n"
+      cerr << "ERROR! In |Rectangle::out_ellipse|:\n"
            << "Couldn't find intersection point.\n"
            << "Returning empty Ellipse.\n\n";
       Ellipse r;
@@ -4633,7 +4633,7 @@ will be reentrant.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.11.02.}
 Added |Scanner_Node scanner_node| argument.  Made warning output thread-safe.
@@ -4656,7 +4656,7 @@ Added code for adjusting the position of
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2005.11.02.}
-Write a version of this function and |out_ellipse()| for quadrilateral 
+Write a version of this function and |out_ellipse| for quadrilateral 
 |Paths|.
 \ENDTODO 
 
@@ -4733,7 +4733,7 @@ Rectangle::in_ellipse(unsigned int point_count, Scanner_Node scanner_node) const
 
 @q ***** (5)@> 
 
-}  /* End of |Rectangle::in_ellipse()| definition.  */
+}  /* End of |Rectangle::in_ellipse| definition.  */
 
 @q *** (3) Draw surrounding |Ellipse|.@>
 @*2 Draw surrounding {\bf Ellipse}.
