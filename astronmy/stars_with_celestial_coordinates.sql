@@ -3019,19 +3019,30 @@ order by  approx_rank_apparent_magnitude\G
 
 update Stars set common_name = "$\\mu$ Velorum" where approx_rank_apparent_magnitude = 113;
 
-113. Mu Velorum                                  10 47 -49.4  283.1  +8.6  G5III+G2V     2.69  -0.06   28.18 0.49   116
+update Stars set common_name = "$\\pi$ Puppis" where approx_rank_apparent_magnitude = 114;
+update Stars set common_name = "$\\alpha$ Muscae" where approx_rank_apparent_magnitude = 116;
+
+update Stars set apparent_magnitude = 2.68, absolute_magnitude =  -3.35	where approx_rank_apparent_magnitude = 111;
+update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -3.29	where approx_rank_apparent_magnitude = 112;
+update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -0.06	where approx_rank_apparent_magnitude = 113;
+update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -2.17	where approx_rank_apparent_magnitude = 114;
+update Stars set apparent_magnitude = 2.70, absolute_magnitude =  -3.31	where approx_rank_apparent_magnitude = 115;
+update Stars set apparent_magnitude = 2.71, absolute_magnitude =  -4.92	where approx_rank_apparent_magnitude = 116;
+update Stars set apparent_magnitude = 2.72, absolute_magnitude =  -2.14	where approx_rank_apparent_magnitude = 117;
+update Stars set apparent_magnitude = 2.72, absolute_magnitude =  -3.03	where approx_rank_apparent_magnitude = 118;
+update Stars set apparent_magnitude = 2.73, absolute_magnitude =  -0.86	where approx_rank_apparent_magnitude = 119;
+update Stars set apparent_magnitude = 2.73, absolute_magnitude =   0.58	where approx_rank_apparent_magnitude = 120;
 
 
-
-111. Beta Lupi                 Ke Kouan          14 59 -43.1  326.4 +13.9  B2III         2.68  -3.35    6.23 0.71   520
-112. Iota Aurigae              Hassaleh          04 57 +33.2  170.6  -6.1  K3II          2.69  -3.29    6.37 0.96   510
-113. Mu Velorum                                  10 47 -49.4  283.1  +8.6  G5III+G2V     2.69  -0.06   28.18 0.49   116
-114. Alpha Muscae                                12 37 -69.1  301.6  -6.3  B2V           2.69  -2.17   10.67 0.48   310
-115. Upsilon Scorpii           Lesath            17 31 -37.3  351.3  -1.9  B2IV          2.70  -3.31    6.29 0.81   520
-116. Pi Puppis                                   07 17 -37.1  249.0 -11.3  K4Ib          2.71  -4.92    2.98 0.55  1100
-117. Delta Sagittarii          Kaus Meridionalis 18 21 -29.8    3.0  -7.2  K2II          2.72  -2.14   10.67 0.93   310
-118. Gamma Aquilae             Tarazed           19 46 +10.6   48.7  -7.0  K3II          2.72  -3.03    7.08 0.75   460
-119. Delta Ophiuchi            Yed Prior         16 14  -3.7    8.8 +32.3  M1III         2.73  -0.86   19.16 1.02   170
-120. Eta Draconis              Aldhibain         16 24 +61.5   92.6 +40.9  G8III         2.73   0.58   37.18 0.45    88
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 
