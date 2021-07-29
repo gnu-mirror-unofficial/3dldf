@@ -3088,16 +3088,32 @@ Apparent magnitude (V) 	2.74 (3.650/3.560[2])
 
 http://simbad.u-strasbg.fr/simbad/sim-id?Ident=gam+Vir
 
-121 Theta Carinae     10 43 -64.4  289.6  -4.9  B0V           2.74  -2.91    7.43 0.50   440
-123 Hatysa            05 35  -5.9  209.5 -19.7  O9III         2.75  -5.30    2.46 0.77  1300
-124 Iota Centauri     13 21 -36.7  309.5 +25.8  A2V           2.75   1.48   55.64 0.74    59
-125 Cebalrai          17 43  +4.6   29.2 +17.3  K2III         2.76   0.76   39.78 0.75    82
-126 Kursa             05 08  -5.1  205.4 -25.3  A3III         2.78   0.60   36.71 0.76    89
-127 Kornephoros       16 30 +21.5   39.0 +40.3  G7III         2.78  -0.50   22.07 1.00   150
-128 Delta Crucis      12 15 -58.7  298.2  +3.8  B2IV          2.79  -2.45    8.96 0.60   360
-129 Rastaban          17 30 +52.3   79.6 +33.4  G2II          2.79  -2.43    9.02 0.49   360
-130 Cor Caroli        12 56 +38.3  118.3 +78.8  A0IV+F0V      2.80v  0.16v  29.60 1.04   110
+update Stars set apparent_magnitude = 2.74, absolute_magnitude = -2.91 where approx_rank_apparent_magnitude = 121;
+
+update Stars set apparent_magnitude = 2.75, absolute_magnitude = -5.30 where approx_rank_apparent_magnitude = 123;
+
+update Stars set apparent_magnitude = 2.75 , absolute_magnitude = 1.48 where approx_rank_apparent_magnitude = 124;
+
+update Stars set apparent_magnitude = 2.76 , absolute_magnitude = 0.76 where approx_rank_apparent_magnitude = 125;
+
+update Stars set apparent_magnitude = 2.78 , absolute_magnitude = 0.60 where approx_rank_apparent_magnitude = 126;
+
+update Stars set apparent_magnitude = 2.78, absolute_magnitude = -0.50 where approx_rank_apparent_magnitude = 127;
+
+update Stars set apparent_magnitude = 2.79, absolute_magnitude = -2.45 where approx_rank_apparent_magnitude = 128;
+
+update Stars set apparent_magnitude = 2.79, absolute_magnitude = -2.43 where approx_rank_apparent_magnitude = 129;
+
+
    
+select * from Stars where bs_hr_number = 4915\G
+
+130 cor_caroli_two
+
+show columns from Stars;
+
+update Stars set is_binary = 0, is_binary_component = 1, absolute_magnitude = 0.16, apparent_magnitude = 2.98,
+apparent_magnitude_varies = 1 where bs_hr_number = 4915;
 
 121. Theta Carinae                               10 43 -64.4  289.6  -4.9  B0V           2.74  -2.91    7.43 0.50   440
 
@@ -3118,14 +3134,50 @@ update Stars set common_name = "$\\delta$ Crucis" where approx_rank_apparent_mag
 
 
 129. Beta Draconis             Rastaban          17 30 +52.3   79.6 +33.4  G2II          2.79  -2.43    9.02 0.49   360
+
+129. Beta Draconis             Rastaban          17 30 +52.3   79.6 +33.4  G2II          2.79  -2.43    9.02 0.49   360
+
+update Stars set common_name = "Rastaban" where approx_rank_apparent_magnitude = 129;
+
 130. Alpha Canum Venaticorum   Cor Caroli        12 56 +38.3  118.3 +78.8  A0IV+F0V      2.80v  0.16v  29.60 1.04   110
 
-   
-   
-   
-   
-   
-   
+select * from Stars where approx_rank_apparent_magnitude = 130\G
+
+
+update Stars set approx_rank_apparent_magnitude = 0 where bs_hr_number = 4914;
+
+
+/* !! START HERE:  LDF 2021.07.29.  */ 
+
+131. Gamma Lupi                Gamma Lupi        15 35 -41.2  333.2 +11.9  B2IV-V+B2IV-V 2.80  -3.40    5.75 1.24   570
+132. Beta Leporis              Nihal             05 28 -20.8  223.6 -27.3  G5III         2.81  -0.63   20.49 0.85   160
+133. Zeta Herculis             Rutilicus         16 41 +31.6   52.6 +40.3  F9IV+G7V      2.81   2.64   92.63 0.60    35
+134. Beta Hydri                Beta Hydri        00 26 -77.3  304.7 -39.7  G2IV          2.82   3.45  133.78 0.51    24
+135. Tau Scorpii               Tau Scorpii       16 36 -28.2  351.6 +12.8  B0V           2.82  -2.78    7.59 0.78   430
+136. Lambda Sagittarii         Kaus Borealis     18 28 -25.4    7.7  -6.5  K1III         2.82   0.95   42.20 0.90    77
+137. Gamma Pegasi              Algenib           00 13 +15.2  109.4 -46.7  B2IV          2.83  -2.22    9.79 0.81   330
+138. Rho Puppis                Turais            08 08 -24.3  243.2  +4.5  F6III         2.83   1.41   51.99 0.66    63
+139.                    Beta Trianguli Australis 15 55 -63.4  321.9  -7.5  F2IV          2.83   2.38   81.24 0.62    40
+140. Zeta Persei               Zeta Persei       03 54 +31.9  162.3 -16.7  B1II+B8IV+A2V 2.84  -4.55    3.32 0.75   980
+
+
+131. Gamma Lupi                                  15 35 -41.2  333.2 +11.9  B2IV-V+B2IV-V 2.80  -3.40    5.75 1.24   570
+132. Beta Leporis              Nihal             05 28 -20.8  223.6 -27.3  G5III         2.81  -0.63   20.49 0.85   160
+133. Zeta Herculis             Rutilicus         16 41 +31.6   52.6 +40.3  F9IV+G7V      2.81   2.64   92.63 0.60    35
+134. Beta Hydri                                  00 26 -77.3  304.7 -39.7  G2IV          2.82   3.45  133.78 0.51    24
+135. Tau Scorpii                                 16 36 -28.2  351.6 +12.8  B0V           2.82  -2.78    7.59 0.78   430
+136. Lambda Sagittarii         Kaus Borealis     18 28 -25.4    7.7  -6.5  K1III         2.82   0.95   42.20 0.90    77
+137. Gamma Pegasi              Algenib           00 13 +15.2  109.4 -46.7  B2IV          2.83  -2.22    9.79 0.81   330
+138. Rho Puppis                Turais            08 08 -24.3  243.2  +4.5  F6III         2.83   1.41   51.99 0.66    63
+139. Beta Trianguli Australis                    15 55 -63.4  321.9  -7.5  F2IV          2.83   2.38   81.24 0.62    40
+140. Zeta Persei                                 03 54 +31.9  162.3 -16.7  B1II+B8IV+A2V 2.84  -4.55    3.32 0.75   980
+
+
+
+
+
+
+
    
    
 

@@ -89,9 +89,10 @@
 \fi
 
 \advance\voffset by -1in
-\advance\voffset by 1.25cm
+\advance\voffset by 2cm
 \advance\hoffset by -1in
-\advance\hoffset by 1cm
+\advance\hoffset by 1.5cm
+\advance\vsize by -3.5cm
 
 \parindent=0pt
 
@@ -113,93 +114,26 @@
 
 %% *** (3) 
 
-\newbox\starboxzero
-\newbox\starboxone
-\newbox\starboxtwo
-\newbox\starboxthree
-\newbox\starboxfour
-\newbox\starboxfive
-\newbox\starboxsix
-\newbox\starboxseven
-
-
 %% *** (3)
 
-\setbox0=\vbox{\epsffile{sample5.0}}
-\dimen0=\ht0
-
-\def\starinfo#1#2#3{\begingroup\setbox0=\hbox{Decl.~}\hbox to 3cm{\vbox{\hbox{#1}%
-\hbox{\hbox to \wd0{RA\hfil}$#2^\circ$}\hbox{\unhbox0 $#3^\circ$}\vskip.75\baselineskip plus 6pt minus 3pt}%
-\hskip2em plus 4pt minus 2pt\hss}\endgroup}
-
-
-%% *** (3)
+\pageno=1
+\footline={\hfil \folio\hfil}
 
 \begingroup
 \advance\hoffset by 2cm
 
 %% **** (4)
 
-\begingroup
-\advance\vsize by -2cm
-\quadcolumns
-%
-\vbox{\hbox to 1in{{\largebx Section 0, RA 337.5${}^{\hbox{\bigcirc}}$--22.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_0.tex
-%
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 1, RA 22.5${}^{\hbox{\bigcirc}}$--67.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_1.tex
-%
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 2, RA 67.5${}^{\hbox{\bigcirc}}$--112.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_2.tex
-%
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 3, RA 112.5${}^{\hbox{\bigcirc}}$--157.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_3.tex
-% 
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 4, RA 157.5${}^{\hbox{\bigcirc}}$--202.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_4.tex
-% (+ 67.5 45 45 45 45 45)
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 5, RA 202.5${}^{\hbox{\bigcirc}}$--247.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_5.tex
-%
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 6, RA 247.5${}^{\hbox{\bigcirc}}$--292.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_6.tex
-%
-\vbox{\vskip\baselineskip\hbox to 1in{{\largebx Section 7, RA 292.5${}^{\hbox{\bigcirc}}$--337.5${}^{\hbox{\bigcirc}}$}\hss}
-\vskip\baselineskip}
-\input sample_5_7.tex
-%
-\singlecolumn
-\vfil\eject
-\endgroup
-
-%% **** (4)
-
 \leftline{{\bx sample 5}}
 \vskip\baselineskip
-\line{\epsffile{sample5.0}\hskip1cm\epsffile{sample5.1}\hskip1cm\epsffile{sample5.2}
-\hss}
-\vfil\eject
-
-
-%% **** (4)
-
-\line{\epsffile{sample5.3}\hskip1cm\epsffile{sample5.4}
-\hskip1cm\epsffile{sample5.5}
-\hss}
+\line{\epsffile{sample5.0}\hskip1cm\epsffile{sample5.1}\hskip1cm\epsffile{sample5.2}\hskip1cm
+\epsffile{sample5.3}\hss}
 \vfil\eject
 
 %% **** (4)
 
-\line{\epsffile{sample5.6}\hskip1cm\epsffile{sample5.7}
-\hss}
+\line{\epsffile{sample5.4}\hskip1cm\epsffile{sample5.5}\hskip1cm
+\epsffile{sample5.6}\hskip1cm\epsffile{sample5.7}\hss}
 \vfil\eject
 
 \endgroup
@@ -207,7 +141,10 @@
 %% *** (3) 
 
 \line{\epsffile{sample5.8}\hskip.25cm\epsffile{sample5.9}\hss}
-\vskip.5cm
+\vfil\eject
+
+%% *** (3) 
+
 \line{\epsffile{sample5.10}\hskip.25cm\epsffile{sample5.11}\hss}
 \vfil\eject
 

@@ -994,13 +994,17 @@ run: 3dldf$(EXEEXT) sample5.ldf sample3.lmc
 # sample_3_labels_sorted.tex: sample3.mp
 # 	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
 
-.PHONY: ps
-
-ps: sample5.ps
-
 .PHONY: pdf
 
 pdf: sample5.pdf
+
+.PHONY: ps
+
+ps: sample5.ps sample5_a4.ps
+
+.PHONY: dvi
+
+dvi: sample5.dvi
 
 .PHONY: f-ps
 
@@ -1047,20 +1051,31 @@ sample4.0: sample4.mp
 sample4.mp: 3dldf$(EXEEXT) sample4.ldf sample3.lmc sample4.aux 
 	3dldf$(EXEEXT) sample4.ldf
 
-sample5.pdf: sample5.ps
-	ps2pdf sample5.ps 
+sample5.pdf: sample5.dvi
+	dvipdfmx $<
 
 sample5.ps: sample5.dvi
 	dvips -o sample5.ps sample5.dvi
 
-sample5.dvi: sample5.tex sample5.0 
+sample5.dvi: sample5.tex sample5.0 sample_5_star_info_combined.tex 
+	cat sample_5_0.tex sample_5_1.tex sample_5_2.tex sample_5_3.tex sample_5_4.tex \
+            sample_5_5.tex sample_5_6.tex sample_5_7.tex | sort -n | grep -v ^% > sample_5_star_info_combined.tex
 	tex sample5.tex
 
-sample5.0 sample5.1: sample5.mp
+sample5.0 sample5.1: sample5.mp 
 	mpost sample5.mp
 
 sample5.mp: 3dldf$(EXEEXT) sample5.ldf astronmy.lmc sample5.aux 
 	3dldf$(EXEEXT) sample5.ldf
+
+sample5_a4.dvi: sample5_a4.tex sample5.1 sample_5_star_info_combined.tex
+	tex sample5_a4.tex 
+
+sample5_a4.ps: sample5_a4.dvi
+	dvips -o sample5_a4.ps sample5_a4.dvi
+
+sample5_a4.pdf: sample5_a4.dvi
+	dvipdfmx $<
 
 .PHONY : run-bi
 

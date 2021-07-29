@@ -759,6 +759,7 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   numeric decl;
   numeric ra;
   string s;
+  string u;
   point y_axis_point;
   numeric box_wd;
   numeric box_ht;
@@ -838,7 +839,17 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       R[point_number] := (-RA_arc_length, ypart y_axis_point);
     fi;
 
-    s := "\starinfo{$R_{" & decimal point_number & "}$ " & common_name S & "}{" & decimal ra & "}{" & decimal decl & "}";
+    if point_number < 10:
+      u := "00";
+    elseif point_number < 100:
+      u := "0";
+    else:
+      u := "";
+    fi;
+
+    s := "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S
+         & "}{" & decimal ra & "}{" & decimal decl & "}";
+    
 
     write s to nw[bi_ang0];
     write s to star_info_combined;
