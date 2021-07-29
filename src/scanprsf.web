@@ -17452,6 +17452,8 @@ box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, 
    real voffset = 1000.0;
    real hoffset = 1000.0;
  
+   bool force_circle = false;
+
 @q **** (4) @>
 
    if (scanner_node->box_or_circle_text_option_struct != 0)
@@ -17460,6 +17462,9 @@ box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, 
          voffset = scanner_node->box_or_circle_text_option_struct->voffset;
       if (scanner_node->box_or_circle_text_option_struct->hoffset != 1000.0)
          hoffset = scanner_node->box_or_circle_text_option_struct->hoffset;
+
+      force_circle = scanner_node->box_or_circle_text_option_struct->force_circle;
+
    }
    if (voffset == 1000.0)
    {
@@ -17491,76 +17496,128 @@ box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, 
    if (hoffset == 1000.0)
       hoffset = 0.0;
 
-   cerr << "voffset == " << voffset << endl
-        << "hoffset == " << hoffset << endl;
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+       cerr << "voffset == " << voffset << endl
+            << "hoffset == " << hoffset << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-   real vval = 0.0;
-   real hval = 0.0;
+    real vval = 0.0;
+    real hval = 0.0;
 
-   vval += *(pv->v[1]) + *(pv->v[2]) + 2 * voffset;
-   hval += *(pv->v[0]) + 2 * hoffset;
+    vval += *(pv->v[1]) + *(pv->v[2]) + 2 * voffset;
+    hval += *(pv->v[0]) + 2 * hoffset;
 
-   cerr << "vval == " << vval << endl
-        << "hval == " << hval << endl;
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+       cerr << "vval         == " << vval << endl
+            << "hval         == " << hval << endl
+            << "force_circle == " << force_circle << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-   Point north;
-   Point south;
-   Point east;
-   Point west;
-   Point ne;
-   Point nw;
-   Point se;
-   Point sw;
+    if (flag == 0)  /* Box, not circle  */
+    {
+        Point north;
+        Point south;
+        Point east;
+        Point west;
+        Point ne;
+        Point nw;
+        Point se;
+        Point sw;
 
-   north = *p;
-   south = *p;
-   east  = *p;
-   west  = *p;
+        north = *p;
+        south = *p;
+        east  = *p;
+        west  = *p;
 
-   north.shift(0, .5 * vval);
-   south.shift(0, -(.5 * vval));
-   east.shift(.5 * hval, 0);
-   west.shift(-(.5 * hval), 0);
+        north.shift(0, .5 * vval);
+ 
+        south.shift(0, -(.5 * vval));
+        east.shift(.5 * hval, 0);
+        west.shift(-(.5 * hval), 0);
 
-   if (flag == 0)
-   {
-      ne.set(east.get_x(), north.get_y(), 0);
-      nw.set(west.get_x(), north.get_y(), 0);
-      se.set(east.get_x(), south.get_y(), 0);
-      sw.set(west.get_x(), south.get_y(), 0);
-      q->set("--", true, &sw, &west, &nw, &north, &ne, &east, &se, &south, 0);
-   }
-   else 
-   {
-       /* !!START HERE  LDF 2021.07.28.  Do this a better way.  Make a circle and
-          scale it.  */ 
-       q->set("..", true, &west, &north, &east, &south, 0);
-   }
+        if (scanner_node->box_or_circle_text_option_struct != 0)
+        {
+            if (scanner_node->box_or_circle_text_option_struct->top_offset != 1000.0)
+               north.shift(0, scanner_node->box_or_circle_text_option_struct->top_offset);
+            if (scanner_node->box_or_circle_text_option_struct->bottom_offset != 1000.0)
+               south.shift(0, -scanner_node->box_or_circle_text_option_struct->bottom_offset);
+            if (scanner_node->box_or_circle_text_option_struct->left_offset != 1000.0)
+               west.shift(-scanner_node->box_or_circle_text_option_struct->left_offset);
+            if (scanner_node->box_or_circle_text_option_struct->right_offset != 1000.0)
+               east.shift(scanner_node->box_or_circle_text_option_struct->right_offset);
 
+            if (scanner_node->box_or_circle_text_option_struct->force_square == true)
+            {
+               Point north_south;
+               north_south = north - south;
+               real ns_mag = north_south.magnitude();
 
+               Point east_west;
+               east_west = east - west;
+               real ew_mag = east_west.magnitude();
 
+               if (ns_mag > ew_mag)
+               {
+                  east.shift(-(.5 * (ns_mag - ew_mag)), 0);
+                  west.shift(.5 * (ns_mag - ew_mag), 0);
+               }
+               else if (ew_mag > ns_mag)
+               {
+                  north.shift(0, .5 * (ew_mag - ns_mag));
+                  south.shift(0, -(.5 * (ew_mag - ns_mag)));
+               }
+            }
 
-   if (t != 0)
-   {
-       *q *= *t;
-       q->apply_transform();
-   }
+        }  /* |if|  */
+
+        ne.set(east.get_x(), north.get_y(), 0);
+        nw.set(west.get_x(), north.get_y(), 0);
+        se.set(east.get_x(), south.get_y(), 0);
+        sw.set(west.get_x(), south.get_y(), 0);
+
+        q->set("--", true, &sw, &west, &nw, &north, &ne, &east, &se, &south, 0);
+    }
+    else /* Circle, not box  */
+    {
+        if (force_circle)
+        {
+           Circle c(*p, max(hval, vval), 90);
+           *q = c;  
+        }
+        else
+        {
+           Ellipse e(*p, hval, vval, 90);
+           *q = e; 
+        }
+    }
+
+    if (t != 0)
+    {
+        *q *= *t;
+        q->apply_transform();
+    }
 
 #if 0 
-   q->show("q:");
+    q->show("q:");
 #endif 
 
 #if DEBUG_COMPILE
-  if (DEBUG) 
+    if (DEBUG) 
     {
-      cerr_strm << "Exiting `box_or_circle_text_func' successfully with return value 0." 
-                << endl;
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
+        cerr_strm << "Exiting `box_or_circle_text_func' successfully with return value 0." 
+                  << endl;
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  return 0;
+    return 0;
 
 }  /* End of |box_or_circle_text_func| definition  */
 

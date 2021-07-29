@@ -1521,8 +1521,8 @@ Added this rule.
 
 }
 
-@q ***** (5) box_or_circle_text_option_list@>  
-@*4 \§box or circle text option list>.
+@q ***** (5) box_or_circle_text_option_list and box_or_circle_text_option.@>  
+@*4 \§box or circle text option list> and \§box or circle text option>.
 \initials{LDF 2021.07.27.}
 
 \LOG
@@ -1533,6 +1533,7 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 
 @=%type <int_value> box_or_circle_text_option_list@>
+@=%type <int_value> box_or_circle_text_option@>
 
 @q ****** (6) box_or_circle_text_option_list --> EMPTY.@> 
 @*5 \§box or circle text option list> $\longrightarrow$ \.{EMPTY}.
@@ -1573,8 +1574,8 @@ Added this rule.
     @=$$@> = 0;
 };
 
-@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_OFFSET numeric_expression.@>
-@ \§box or circle text option list> \.{WITH\_OFFSET} \§numeric expression>. 
+@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list box_or_circle_text_option.@>
+@ \§box or circle text option list> $\longrightarrow$ \§box or circle text option list> \§box or circle text option> .
 \initials{LDF 2021.07.27.}
 
 \LOG
@@ -1584,7 +1585,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=box_or_circle_text_option_list: box_or_circle_text_option_list WITH_OFFSET numeric_expression@>@/
+@=box_or_circle_text_option_list: box_or_circle_text_option_list box_or_circle_text_option@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1592,7 +1593,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list WITH_OFFSET numeric_expression'.";
+      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list box_or_circle_text_option'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1600,15 +1601,13 @@ Added this rule.
       
     }
 #endif /* |DEBUG_COMPILE|  */@;
-
-    scanner_node->box_or_circle_text_option_struct->voffset = scanner_node->box_or_circle_text_option_struct->hoffset = @=$3@>;
 
    @=$$@> = 0;
 
 };
 
-@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_VOFFSET numeric_expression.@>
-@ \§box or circle text option list> \.{WITH\_VOFFSET} \§numeric expression>. 
+@q ****** (6) box_or_circle_text_optiont --> WITH_OFFSET numeric_expression.@>
+@ \§box or circle text option> $\longrightarrow$ \.{WITH\_OFFSET} \§numeric expression>. 
 \initials{LDF 2021.07.27.}
 
 \LOG
@@ -1618,7 +1617,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=box_or_circle_text_option_list: box_or_circle_text_option_list WITH_VOFFSET numeric_expression@>@/
+@=box_or_circle_text_option: WITH_OFFSET numeric_expression@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1626,7 +1625,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list WITH_VOFFSET numeric_expression'.";
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_OFFSET numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1635,14 +1634,14 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->box_or_circle_text_option_struct->voffset = @=$3@>;
+    scanner_node->box_or_circle_text_option_struct->voffset = scanner_node->box_or_circle_text_option_struct->hoffset = @=$2@>;
 
    @=$$@> = 0;
 
 };
 
-@q ****** (6) box_or_circle_text_option_list --> box_or_circle_text_option_list WITH_HOFFSET numeric_expression.@>
-@ \§box or circle text option list> \.{WITH\_HOFFSET} \§numeric expression>. 
+@q ****** (6) box_or_circle_text_option WITH_VOFFSET numeric_expression.@>
+@ \§box or circle text option> \.{WITH\_VOFFSET} \§numeric expression>. 
 \initials{LDF 2021.07.27.}
 
 \LOG
@@ -1652,7 +1651,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=box_or_circle_text_option_list: box_or_circle_text_option_list WITH_HOFFSET numeric_expression@>@/
+@=box_or_circle_text_option: WITH_VOFFSET numeric_expression@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -1660,7 +1659,7 @@ Added this rule.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list WITH_HOFFSET numeric_expression'.";
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_VOFFSET numeric_expression'.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1669,9 +1668,248 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    scanner_node->box_or_circle_text_option_struct->hoffset = @=$3@>;
+    scanner_node->box_or_circle_text_option_struct->voffset = @=$2@>;
 
    @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option WITH_HOFFSET numeric_expression.@>
+@ \§box or circle text option> \.{WITH\_HOFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.27.}
+
+\LOG
+\initials{LDF 2021.07.27.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: WITH_HOFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_HOFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->hoffset = @=$2@>;
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option WITH_TOP_OFFSET numeric_expression.@>
+@ \§box or circle text option> \.{WITH\_TOP\_OFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.29.}
+
+\LOG
+\initials{LDF 2021.07.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: WITH_TOP_OFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_TOP_OFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->top_offset = @=$2@>;
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option WITH_BOTTOM_OFFSET numeric_expression.@>
+@ \§box or circle text option> \.{WITH\_BOTTOM\_OFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.29.}
+
+\LOG
+\initials{LDF 2021.07.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: WITH_BOTTOM_OFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_BOTTOM_OFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->bottom_offset = @=$2@>;
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option WITH_LEFT_OFFSET numeric_expression.@>
+@ \§box or circle text option> \.{WITH\_LEFT\_OFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.29.}
+
+\LOG
+\initials{LDF 2021.07.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: WITH_LEFT_OFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_LEFT_OFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->left_offset = @=$2@>;
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option WITH_RIGHT_OFFSET numeric_expression.@>
+@ \§box or circle text option> \.{WITH\_RIGHT\_OFFSET} \§numeric expression>. 
+\initials{LDF 2021.07.29.}
+
+\LOG
+\initials{LDF 2021.07.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: WITH_RIGHT_OFFSET numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_RIGHT_OFFSET numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->right_offset = @=$2@>;
+
+   @=$$@> = 0;
+
+};
+
+
+@q ****** (6) box_or_circle_text_option FORCE_CIRCLE.@>
+@ \§box or circle text option> \.{WITH\_HOFFSET} \.{FORCE\_CIRCLE}. 
+\initials{LDF 2021.07.29.}
+
+\LOG
+\initials{LDF 2021.07.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: FORCE_CIRCLE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: FORCE_CIRCLE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->force_circle = true;
+
+    @=$$@> = 0;
+
+};
+
+@q ****** (6) box_or_circle_text_option FORCE_SQUARE.@>
+@ \§box or circle text option> \.{WITH\_HOFFSET} \.{FORCE\_SQUARE}. 
+\initials{LDF 2021.07.29.}
+
+\LOG
+\initials{LDF 2021.07.29.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=box_or_circle_text_option: FORCE_SQUARE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `box_or_circle_text_option: FORCE_SQUARE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    scanner_node->box_or_circle_text_option_struct->force_square = true;
+
+    @=$$@> = 0;
 
 };
 

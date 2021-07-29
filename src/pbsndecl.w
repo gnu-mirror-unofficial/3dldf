@@ -592,6 +592,8 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <int_value>     WITH_BOTTOM_OFFSET@>@/
 @=%token <int_value>     WITH_LEFT_OFFSET@>@/
 @=%token <int_value>     WITH_RIGHT_OFFSET@>@/
+@=%token <int_value>     FORCE_CIRCLE@>@/
+@=%token <int_value>     FORCE_SQUARE@>@/
 @=%token <int_value>     ASCENDING@>@/
 @=%token <int_value>     DESCENDING@>@/
 @=%token <int_value>     STAR_CONSTANT_NAME@>@/

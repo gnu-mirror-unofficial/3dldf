@@ -2382,14 +2382,27 @@ struct Box_Or_Circle_Text_Option_Struct
 
    real voffset;
    real hoffset;
+   real top_offset;
+   real bottom_offset;
+   real left_offset;
+   real right_offset;
+
    Transform *transform;
-   
+   bool force_circle;
+   bool force_square;
 
    Box_Or_Circle_Text_Option_Struct(void)
    {
-      voffset = 1000.0;
-      hoffset = 1000.0;
+      voffset       = 1000.0;
+      hoffset       = 1000.0;
+      top_offset    = 1000.0;
+      bottom_offset = 1000.0;
+      left_offset   = 1000.0;
+      right_offset  = 1000.0;
+
       transform = 0;
+      force_circle = false;
+      force_square = false;
       return;
    }  
 
