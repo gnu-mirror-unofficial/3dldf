@@ -2892,8 +2892,6 @@ update Stars set apparent_magnitude = 2.22, absolute_magnitude = 0.42 where appr
 update Stars set apparent_magnitude = 2.23, absolute_magnitude = -3.99 where approx_rank_apparent_magnitude = 68;
 
 
-
-
 update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 63;
 update Stars set apparent_magnitude_varies = 1 where approx_rank_apparent_magnitude = 66;
 update Stars set is_eclipsing_binary = 1-1.99-1.99 where approx_rank_apparent_magnitude = 67;
@@ -3034,8 +3032,94 @@ update Stars set apparent_magnitude = 2.73, absolute_magnitude =  -0.86	where ap
 update Stars set apparent_magnitude = 2.73, absolute_magnitude =   0.58	where approx_rank_apparent_magnitude = 120;
 
 
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude, absolute_magnitude
+from Stars where approx_rank_apparent_magnitude > 120 and approx_rank_apparent_magnitude < 131
+order by  approx_rank_apparent_magnitude\G
+
+122 Porrima           12 42  -1.5  298.1 +61.3  F0V+F0V       2.74   2.38   84.53 1.18    39
+
+https://en.wikipedia.org/wiki/Gamma_Virginis
+Gamma Virginis (γ Virginis, abbreviated Gamma Vir, γ Vir), officially named Porrima /ˈpɒrɪmə/,[8][9] is a binary star 
+Virginis (γ Virginis, abbreviated Gamma Vir, γ Vir), officially named Porrima /ˈpɒrɪmə/,[8][9] is a binary star 
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+absolute_magnitude,
+bayer_designation_greek_letter,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+-- bs_hr_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_binary
+)
+values (
+"Porrima",
+122,
+2.74,
+2.38,
+"gamma",
+"Virginis",
+"Vir",
+"Virgo",
+2,
+12, -- Right ascension
+41,
+39.64344,
+-1, -- Declination
+26,
+57.7421,
+1
+);
+
+select * from Constellations where name = "Virgo"\G
+
+Right ascension 	12h 41m 39.64344s[1]
+Declination 	-01° 26′ 57.7421″[1]
+Apparent magnitude (V) 	2.74 (3.650/3.560[2])
+
+http://simbad.u-strasbg.fr/simbad/sim-id?Ident=gam+Vir
+
+121 Theta Carinae     10 43 -64.4  289.6  -4.9  B0V           2.74  -2.91    7.43 0.50   440
+123 Hatysa            05 35  -5.9  209.5 -19.7  O9III         2.75  -5.30    2.46 0.77  1300
+124 Iota Centauri     13 21 -36.7  309.5 +25.8  A2V           2.75   1.48   55.64 0.74    59
+125 Cebalrai          17 43  +4.6   29.2 +17.3  K2III         2.76   0.76   39.78 0.75    82
+126 Kursa             05 08  -5.1  205.4 -25.3  A3III         2.78   0.60   36.71 0.76    89
+127 Kornephoros       16 30 +21.5   39.0 +40.3  G7III         2.78  -0.50   22.07 1.00   150
+128 Delta Crucis      12 15 -58.7  298.2  +3.8  B2IV          2.79  -2.45    8.96 0.60   360
+129 Rastaban          17 30 +52.3   79.6 +33.4  G2II          2.79  -2.43    9.02 0.49   360
+130 Cor Caroli        12 56 +38.3  118.3 +78.8  A0IV+F0V      2.80v  0.16v  29.60 1.04   110
    
-   
+
+121. Theta Carinae                               10 43 -64.4  289.6  -4.9  B0V           2.74  -2.91    7.43 0.50   440
+
+update Stars set common_name = "$\\theta$ Carinae" where approx_rank_apparent_magnitude = 121;
+
+122. Gamma Virginis            Porrima           12 42  -1.5  298.1 +61.3  F0V+F0V       2.74   2.38   84.53 1.18    39
+123. Iota Orionis              Hatysa            05 35  -5.9  209.5 -19.7  O9III         2.75  -5.30    2.46 0.77  1300
+124. Iota Centauri                               13 21 -36.7  309.5 +25.8  A2V           2.75   1.48   55.64 0.74    59
+
+update Stars set common_name = "$\\iota$ Centauri" where approx_rank_apparent_magnitude = 124;
+
+125. Beta Ophiuchi             Cebalrai          17 43  +4.6   29.2 +17.3  K2III         2.76   0.76   39.78 0.75    82
+126. Beta Eridani              Kursa             05 08  -5.1  205.4 -25.3  A3III         2.78   0.60   36.71 0.76    89
+127. Beta Herculis             Kornephoros       16 30 +21.5   39.0 +40.3  G7III         2.78  -0.50   22.07 1.00   150
+128. Delta Crucis                                12 15 -58.7  298.2  +3.8  B2IV          2.79  -2.45    8.96 0.60   360
+
+update Stars set common_name = "$\\delta$ Crucis" where approx_rank_apparent_magnitude = 129;
+
+
+129. Beta Draconis             Rastaban          17 30 +52.3   79.6 +33.4  G2II          2.79  -2.43    9.02 0.49   360
+130. Alpha Canum Venaticorum   Cor Caroli        12 56 +38.3  118.3 +78.8  A0IV+F0V      2.80v  0.16v  29.60 1.04   110
+
    
    
    

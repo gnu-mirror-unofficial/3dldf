@@ -473,7 +473,7 @@ def plot_star_on_sphere (pp) {numeric rradius, star S} =
 
   P17 := ra_decl_zero_pt rotated (0, a0);
   %dotlabel.top("$P_{17}$", P17) pv[ctr];
-  label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
+  %label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
   %dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
   %dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
   %dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
@@ -1010,18 +1010,18 @@ def get_panels {numeric rradius} =
     rotate K0 (0, i);
     rotate K1 (0, i);
     K6 := mediate(K2, mediate(K0, K1, .5), .75);
-  %label("1/" & decimal j, K6) with_text_color magenta on_picture quadrant_picture;
+    %label("1/" & decimal j, K6) with_text_color magenta on_picture quadrant_picture;
     K3 := (origin shifted (rradius, 0)) rotated (0, 0, -78.75);
     K4 := K3 rotated (0, 22.5);
     K5 := (0, -rradius);
     rotate K3 (0, i);
     rotate K4 (0, i);
     K7 := mediate(K5, mediate(K3, K4, .5), .75);
-  %label("-1/" & decimal j, K7) with_text_color magenta on_picture quadrant_picture;;
+    %label("-1/" & decimal j, K7) with_text_color magenta on_picture quadrant_picture;;
     set T[j][8] with_points (K0, K1, K2);
     set T[j][-8] with_points (K3, K4, K5);
-    draw T[j][8]  with_color magenta on_picture quadrant_picture;
-    draw T[j][-8] with_color magenta on_picture quadrant_picture;
+    draw T[j][8]  with_color green on_picture quadrant_picture;   % magenta
+    draw T[j][-8] with_color green on_picture quadrant_picture; % magenta
     j += 1;
   endfor;
   
@@ -1057,10 +1057,10 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
 
   RA_ctr := floor (RA / 22.5);
 
-  dotlabel.top(common_name S, sstar_point) with_text_color blue with_dot_color blue on_picture quadrant_picture;
+  dotlabel.top(common_name S, sstar_point) on_picture quadrant_picture; % with_text_color blue with_dot_color blue
 
   E0 := origin -- sstar_point;
-  draw E0 with_color red with_pen medium_pen on_picture quadrant_picture;
+  %draw E0 with_color red with_pen medium_pen on_picture quadrant_picture;
 
   if (Decl >= 0) and (Decl < 78.75):
     Decl_ctr := floor (Decl / 11.25) + 1;
@@ -1088,10 +1088,10 @@ def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
   DDecl_ctr := Decl_ctr;
   
   if (Decl > 78.75) or (Decl < -78.75):
-    draw W with_color blue with_pen medium_pen on_picture quadrant_picture;
+    %draw W with_color blue with_pen medium_pen on_picture quadrant_picture;
     pl := get_plane W;
   else:
-    draw V with_color blue with_pen medium_pen on_picture quadrant_picture;
+    %draw V with_color blue with_pen medium_pen on_picture quadrant_picture;
     pl := get_plane V;
   fi;
 

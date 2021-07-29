@@ -4416,7 +4416,9 @@ Scanner_Type::submit_mysql_query(string query_str)
    {
      cerr  << "In `|Scanner_Type::submit_mysql_query|':  "
           << "`mysql_store_result' returned 0." << endl 
-          << "No results.  Continuing."
+          << "No results.  `query_str' == " << endl 
+          << query_str << endl
+          << "Continuing."
           << endl;
 
      row_ctr       = 0;
