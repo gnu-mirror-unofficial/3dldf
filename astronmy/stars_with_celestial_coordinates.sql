@@ -3012,13 +3012,26 @@ update Stars set apparent_magnitude = 2.65, absolute_magnitude = -0.51 where app
 update Stars set apparent_magnitude = 2.66, absolute_magnitude =  0.24 where approx_rank_apparent_magnitude = 109;    
 update Stars set apparent_magnitude = 2.68, absolute_magnitude =  2.41 where approx_rank_apparent_magnitude = 110;    
 								 
-101. Zeta Sagittarii           Ascella           19 03 -29.9    6.9 -15.5  A2IV+A4V      2.60   0.42   36.61 1.37    89
-102. Beta Librae               Zubeneschamali    15 17  -9.4  352.0 +39.2  B8V           2.61  -0.84   20.38 0.87   160
-103. Alpha Serpentis           Unukalhai         15 44  +6.4   14.1 +44.1  K2III         2.63   0.87   44.54 0.71    73
-104. Beta Arietis              Sheratan          01 55 +20.8  142.4 -39.7  A5V           2.64   1.33   54.74 0.75    60
-105. Alpha Librae              Zubenelgenubi     14 51 -16.0  340.4 +38.0  A3IV+F4IV     2.64   0.77   42.25 1.05    77
-106. Alpha Columbae            Phact             05 40 -34.1  238.9 -28.8  B7IV          2.65  -1.93   12.16 0.60   270
-107. Theta Aurigae                               06 00 +37.2  174.4  +6.8  A0III+G2V     2.65  -0.98   18.83 0.81   170
-108. Beta Corvi                Kraz              12 34 -23.4  297.8 +39.3  G5III         2.65  -0.51   23.34 0.80   140
-109. Delta Cassiopeiae         Ruchbah           01 26 +60.2  127.2  -2.4  A5III         2.66   0.24   32.81 0.62    99
-110. Eta Boötis                Muphrid           13 55 +18.4    5.5 +73.0  G0IV          2.68   2.41   88.17 0.75    37
+
+select approx_rank_apparent_magnitude, common_name, apparent_magnitude, absolute_magnitude
+from Stars where approx_rank_apparent_magnitude > 110 and approx_rank_apparent_magnitude < 121
+order by  approx_rank_apparent_magnitude\G
+
+update Stars set common_name = "$\\mu$ Velorum" where approx_rank_apparent_magnitude = 113;
+
+113. Mu Velorum                                  10 47 -49.4  283.1  +8.6  G5III+G2V     2.69  -0.06   28.18 0.49   116
+
+
+
+111. Beta Lupi                 Ke Kouan          14 59 -43.1  326.4 +13.9  B2III         2.68  -3.35    6.23 0.71   520
+112. Iota Aurigae              Hassaleh          04 57 +33.2  170.6  -6.1  K3II          2.69  -3.29    6.37 0.96   510
+113. Mu Velorum                                  10 47 -49.4  283.1  +8.6  G5III+G2V     2.69  -0.06   28.18 0.49   116
+114. Alpha Muscae                                12 37 -69.1  301.6  -6.3  B2V           2.69  -2.17   10.67 0.48   310
+115. Upsilon Scorpii           Lesath            17 31 -37.3  351.3  -1.9  B2IV          2.70  -3.31    6.29 0.81   520
+116. Pi Puppis                                   07 17 -37.1  249.0 -11.3  K4Ib          2.71  -4.92    2.98 0.55  1100
+117. Delta Sagittarii          Kaus Meridionalis 18 21 -29.8    3.0  -7.2  K2II          2.72  -2.14   10.67 0.93   310
+118. Gamma Aquilae             Tarazed           19 46 +10.6   48.7  -7.0  K3II          2.72  -3.03    7.08 0.75   460
+119. Delta Ophiuchi            Yed Prior         16 14  -3.7    8.8 +32.3  M1III         2.73  -0.86   19.16 1.02   170
+120. Eta Draconis              Aldhibain         16 24 +61.5   92.6 +40.9  G8III         2.73   0.58   37.18 0.45    88
+
+
