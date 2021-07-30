@@ -1381,7 +1381,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -1405,7 +1405,6 @@ Added this rule.
    status = Scan_Parse::measure_text_func(static_cast<Scanner_Node>(parameter), 
                                           @=$5@>, 
                                           pv);
-   
    if (status != 0)
    {
       cerr_strm << thread_name 
@@ -1449,12 +1448,13 @@ Added this rule.
                    << endl 
                    << "Will try to continue."
                    << endl;
+  
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
       }
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-   }
+   }  /* |else| */
 
 @q ***** (5) @>
 
@@ -1551,7 +1551,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option_list:  EMPTY'.";
@@ -1590,7 +1590,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option_list: box_or_circle_text_option_list box_or_circle_text_option'.";
@@ -1622,7 +1622,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_OFFSET numeric_expression'.";
@@ -1656,7 +1656,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_VOFFSET numeric_expression'.";
@@ -1690,7 +1690,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_HOFFSET numeric_expression'.";
@@ -1724,7 +1724,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_TOP_OFFSET numeric_expression'.";
@@ -1758,7 +1758,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_BOTTOM_OFFSET numeric_expression'.";
@@ -1792,7 +1792,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_LEFT_OFFSET numeric_expression'.";
@@ -1826,7 +1826,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: WITH_RIGHT_OFFSET numeric_expression'.";
@@ -1861,7 +1861,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: FORCE_CIRCLE'.";
@@ -1895,7 +1895,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `box_or_circle_text_option: FORCE_SQUARE'.";
