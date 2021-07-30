@@ -1012,6 +1012,12 @@ f-ps:
 	rm -f parser.o
 	$(MAKE) ps
 
+.PHONY: ff-ps
+
+ff-ps:
+	touch sample5.ldf
+	$(MAKE) ps
+
 .PHONY: f-pdf
 
 f-pdf:
