@@ -3199,15 +3199,11 @@ update Stars set common_name = "$\\zeta$ Persei" where approx_rank_apparent_magn
 150 Alpha Tucanae             2.87  -1.05 
 
 
-
 select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
-approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 140
-and approx_rank_apparent_magnitude < 151 order by approx_rank_apparent_magnitude\G
-
+approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 149
+and approx_rank_apparent_magnitude < 161 order by approx_rank_apparent_magnitude\G
 
 select * from Stars where approx_rank_apparent_magnitude = 149\G
-
-
 
 update Stars set apparent_magnitude_varies = 1, absolute_magnitude_varies = 1 where approx_rank_apparent_magnitude = 148;
 
@@ -3233,9 +3229,8 @@ update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 
 
 update Stars set apparent_magnitude = 2.85 , absolute_magnitude =2.49 where approx_rank_apparent_magnitude = 145;
 
-
-
 update Stars set apparent_magnitude = 2.86  , absolute_magnitude =1.16 where approx_rank_apparent_magnitude = 146;
+
 
 update Stars set apparent_magnitude = 2.86 , absolute_magnitude =-0.74 where approx_rank_apparent_magnitude = 147;
 
@@ -3248,6 +3243,97 @@ update Stars set apparent_magnitude = 2.87 , absolute_magnitude =-1.05 where app
 
 update Stars set apparent_magnitude_varies = 1, absolute_magnitude_varies = 1 where approx_rank_apparent_magnitude = 148;
 
+select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
+approx_rank_apparent_magnitude from Stars where bayer_designation_greek_letter = "theta^1"
+and constellation_name_genitive = "Eridani"\G
+
+delete from Stars where bayer_designation_greek_letter = "theta^1" and constellation_name_genitive = "Eridani"
+and common_name = "";
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+absolute_magnitude,
+bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+bs_hr_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_binary_component,
+notes
+)
+values (
+"Acamar",
+151,
+2.88,
+-0.59,
+"theta^1",
+"$\\theta^1$",
+"Eridani",
+"Eri",
+"Eridanus",
+6,
+897,
+02, -- right ascension
+58,
+15.6792190187,
+-40, -- declination
+18,
+16.845665573,
+1,
+"Apparent magnitude and absolute magnitude may be those of the system rather than the single component theta^1 Eridani."
+);
+
+select * from Constellations where name = "Eridanus";
+
+
+θ1 Eri: Acamar, HD 18622, HR 897
+
+https://en.wikipedia.org/wiki/Theta_Eridani
+
+
+02 58 15.6792190187 -40 18 16.845665573
+
+Theta Eridani, Latinized from θ Eridani, is a binary system in the constellation of Eridanus
+
+Right ascension 	02h 58m 15.67922s[1]
+Declination 	−40° 18′ 16.8457″[1]
+Apparent magnitude (V) 	2.88[2]
+
+Missing: 151
+
+update Stars set apparent_magnitude_varies = 1, absolute_magnitude_varies = 1 where approx_rank_apparent_magnitude = 156;
+
+
+-- Store this in register c:
+update Stars set apparent_magnitude = , absolute_magnitude = where approx_rank_apparent_magnitude = ;
+
+update Stars set apparent_magnitude = 2.88 , absolute_magnitude =-2.77 where approx_rank_apparent_magnitude = 152; 
+
+update Stars set apparent_magnitude = 2.89 , absolute_magnitude =-0.70 where approx_rank_apparent_magnitude = 153; 
+
+update Stars set apparent_magnitude = 2.89 , absolute_magnitude =-2.85 where approx_rank_apparent_magnitude = 154; 
+
+update Stars set apparent_magnitude = 2.90 , absolute_magnitude =-3.19 where approx_rank_apparent_magnitude = 155; 
+
+update Stars set apparent_magnitude = 2.90 , absolute_magnitude =-3.86 where approx_rank_apparent_magnitude = 156;
+
+update Stars set apparent_magnitude = 2.90 , absolute_magnitude =-2.31 where approx_rank_apparent_magnitude = 157; 
+
+update Stars set apparent_magnitude = 2.90 , absolute_magnitude =-3.47 where approx_rank_apparent_magnitude = 158; 
+
+update Stars set apparent_magnitude = 2.91 , absolute_magnitude =-1.57 where approx_rank_apparent_magnitude = 159; 
+
+update Stars set apparent_magnitude = 2.92 , absolute_magnitude =-5.56 where approx_rank_apparent_magnitude = 160; 
 
 
 
