@@ -91,6 +91,7 @@ create table Stars
    apparent_magnitude float default null,
    apparent_magnitude_varies boolean not null default 0,
    absolute_magnitude float not null default 0,
+   absolute_magnitude_varies boolean not null default 0,
    constellation_abbreviation char(3) not null default "",
    constellation_full_name varchar(32) not null default "",
    constellation_name_genitive varchar(64) not null default "",
@@ -133,6 +134,10 @@ alter table Stars add column apparent_magnitude float not null default 1000 afte
 alter table Stars add column bayer_designation_greek_letter_tex varchar(16) not null default "" after bayer_designation_greek_letter;
 alter table Stars add column apparent_magnitude_varies boolean not null default 0 after apparent_magnitude;
 alter table Stars add column absolute_magnitude float not null default 0 after apparent_magnitude_varies;
+
+   
+alter table Stars add column absolute_magnitude_varies boolean not null default 0 after absolute_magnitude; 
+
 
 alter table Stars add column is_eclipsing_binary int not null default 0 after is_binary_component;
 

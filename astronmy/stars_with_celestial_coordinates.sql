@@ -3184,6 +3184,48 @@ update Stars set common_name = "$\\tau$ Scorpii" where approx_rank_apparent_magn
 update Stars set common_name = "$\\zeta$ Persei" where approx_rank_apparent_magnitude = 140;
 
 
+141 Beta Arae         	      2.84  -3.49 
+142 Choo              	      2.84  -1.51 
+143 Alcyone           	      2.85  -2.41 
+144 Vindemiatrix      	      2.85   0.37 
+145 Deneb Algedi      	      2.85e  2.49 
+146 Head of Hydrus    	      2.86   1.16 
+147 Delta Cygni       	      2.86  -0.74 
+
+148 Tejat             	      2.87v -1.39v
+
+
+149 Gamma Trianguli Australis 2.87  -0.87 
+150 Alpha Tucanae             2.87  -1.05 
+
+
+
+select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
+approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 140
+and approx_rank_apparent_magnitude < 151 order by approx_rank_apparent_magnitude\G
+
+
+select * from Stars where approx_rank_apparent_magnitude = 149\G
+
+
+
+update Stars set apparent_magnitude_varies = 1, absolute_magnitude_varies = 1 where approx_rank_apparent_magnitude = 148;
+
+update Stars set approx_rank_apparent_magnitude = 0 where bs_hr_number =  664;
+
+
+
+141. Beta Arae                                   17 25 -55.5  335.4 -11.0  K3Ib-II       2.84  -3.49    5.41 0.76   600
+142. Alpha Arae                Choo              17 32 -49.9  340.8  -8.9  B2V           2.84  -1.51   13.46 0.95   240
+143. Eta Tauri                 Alcyone           03 47 +24.1  166.6 -23.5  B7III         2.85  -2.41    8.87 0.99   370
+144. Epsilon Virginis          Vindemiatrix      13 02 +11.0  312.3 +73.7  G8III         2.85   0.37   31.90 0.87   102
+145. Delta Capricorni          Deneb Algedi      21 47 -16.1   37.6 -46.0  A5V           2.85e  2.49   84.58 0.88    39
+146. Alpha Hydri               Head of Hydrus    01 59 -61.6  289.4 -53.7  F0III         2.86   1.16   45.74 0.55    71
+147. Delta Cygni                                 19 45 +45.1   78.7 +10.2  B9.5III+F1V   2.86  -0.74   19.07 0.45   170
+148. Mu Geminorum              Tejat             06 23 +22.5  189.8  +4.2  M3III         2.87v -1.39v  14.07 0.93   230
+149. Gamma Trianguli Australis                   15 19 -68.7  316.5  -8.4  A1III         2.87  -0.87   17.85 0.52   180
+150. Alpha Tucanae                               22 19 -60.3  330.1 -48.0  K3III         2.87  -1.05   16.42 0.59   200
+
 
   
   
