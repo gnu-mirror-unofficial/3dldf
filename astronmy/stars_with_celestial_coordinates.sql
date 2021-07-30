@@ -3340,9 +3340,30 @@ update Stars set common_name = "$\\epsilon$ Persei"  where approx_rank_apparent_
 update Stars set common_name = "$\\gamma$ Persei"    where approx_rank_apparent_magnitude = 159;
 update Stars set common_name = "$\\upsilon$ Carinae" where approx_rank_apparent_magnitude = 160;
 
+select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
+approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 160
+and approx_rank_apparent_magnitude < 171 order by approx_rank_apparent_magnitude\G
+
+update Stars set common_name = "$\\tau$ Puppis" where approx_rank_apparent_magnitude = 162;
+update Stars set common_name = "$\\gamma$ Hydrae" where approx_rank_apparent_magnitude = 169;
+update Stars set common_name = "$\\iota^1$ Scorpii" where approx_rank_apparent_magnitude = 170;
   
-  
-  
+update Stars set apparent_magnitude = 2.93, absolute_magnitude =-1.16 where approx_rank_apparent_magnitude = 161;
+
+update Stars set apparent_magnitude = 2.94, absolute_magnitude =-0.80 where approx_rank_apparent_magnitude = 162;
+
+update Stars set apparent_magnitude = 2.94 , absolute_magnitude =0.79 where approx_rank_apparent_magnitude = 163;
+update Stars set apparent_magnitude = 2.95, absolute_magnitude =-3.88 where approx_rank_apparent_magnitude = 164;
+update Stars set apparent_magnitude = 2.97, absolute_magnitude =-1.19 where approx_rank_apparent_magnitude = 165;
+update Stars set apparent_magnitude = 2.97, absolute_magnitude =-2.56 where approx_rank_apparent_magnitude = 166;
+update Stars set apparent_magnitude = 2.97, absolute_magnitude =-1.46 where approx_rank_apparent_magnitude = 167;
+update Stars set apparent_magnitude = 2.98 , absolute_magnitude =0.63 where approx_rank_apparent_magnitude = 168;
+update Stars set apparent_magnitude = 2.99, absolute_magnitude =-0.05 where approx_rank_apparent_magnitude = 169;
+update Stars set apparent_magnitude = 2.99, absolute_magnitude =-5.71 where approx_rank_apparent_magnitude = 170;
+
+
+
+
   
 
 
