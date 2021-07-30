@@ -14298,8 +14298,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
  
 @q **** (4) @>   
 
-/* !!START HERE  Add code to acct. for the case that command_string is too long.  */ 
-
    char temp_str[1024];
    memset(temp_str, 0, 1024);
 
@@ -14527,9 +14525,7 @@ void*
 Scan_Parse::numeric_vector_assignment_func(Scanner_Node scanner_node,
                                            void* v,
                                            void* w)
-
 {
-
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
