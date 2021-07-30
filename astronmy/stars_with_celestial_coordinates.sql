@@ -3335,6 +3335,15 @@ update Stars set apparent_magnitude = 2.91 , absolute_magnitude =-1.57 where app
 
 update Stars set apparent_magnitude = 2.92 , absolute_magnitude =-5.56 where approx_rank_apparent_magnitude = 160; 
 
+update Stars set common_name = "$\\pi$ Scorpii"      where approx_rank_apparent_magnitude = 154;
+update Stars set common_name = "$\\epsilon$ Persei"  where approx_rank_apparent_magnitude = 155;
+update Stars set common_name = "$\\gamma$ Persei"    where approx_rank_apparent_magnitude = 159;
+update Stars set common_name = "$\\upsilon$ Carinae" where approx_rank_apparent_magnitude = 160;
+
+  
+  
+  
+  
 
 
 
