@@ -37,10 +37,10 @@
 
 /* The author can be contacted at:     */
 
-/* Laurence D. Finston 		       */
+/* Laurence D. Finston                 */
 /* c/o Free Software Foundation, Inc.  */
-/* 51 Franklin St, Fifth Floor 	       */
-/* Boston, MA  02110-1301  	       */
+/* 51 Franklin St, Fifth Floor         */
+/* Boston, MA  02110-1301              */
 /* USA                                 */                             
 
 /* Laurence.Finston@gmx.de  */
@@ -795,9 +795,9 @@ where bs_hr_number = 5531;
 select * from Stars where constellation_name_genitive = "Librae" and bayer_designation_greek_letter = "alpha^2"\G
 
 α2 Lib
-Right ascension 	
-Declination 	
-Apparent magnitude (V) 	+
+Right ascension         
+Declination     
+Apparent magnitude (V)  +
 
 
 update Stars set approx_rank_apparent_magnitude = 106, common_name = "Phact" where bayer_designation_greek_letter = "Alpha"
@@ -1466,8 +1466,8 @@ delete from Stars where common_name = "Fomalhaut";
 select * from Constellations where name_genitive = "Piscis Austrini";
 
 
-Right ascension 	
-Declination 	
+Right ascension         
+Declination     
 HR 8728
 
 
@@ -1716,7 +1716,7 @@ $\\alpha$",
 6 -- is_multiple
 );
 
-Apparent magnitude (V) 	[2] (1.33 + 1.75)[3]
+Apparent magnitude (V)  [2] (1.33 + 1.75)[3]
 
 select * from Stars where approx_rank_apparent_magnitude = 13\G
 
@@ -1811,10 +1811,10 @@ values (
 
 quadruple star system
 
-Constellation 	Vela
-Right ascension 	08h 09m 31.95013s[1]
-Declination 	–47° 20′ 11.7108″[1]
-Apparent magnitude (V) 	1.83[2] (1.81 - 1.87[3])
+Constellation   Vela
+Right ascension         08h 09m 31.95013s[1]
+Declination     –47° 20′ 11.7108″[1]
+Apparent magnitude (V)  1.83[2] (1.81 - 1.87[3])
 
 combined magnitude +1.7
 
@@ -1863,7 +1863,7 @@ values (
 39.7626
 );
 
-Apparent magnitude (V) 	1.91[2]
+Apparent magnitude (V)  1.91[2]
 
 HR 6217
 
@@ -1874,7 +1874,7 @@ HR 6217
 A
 
 
-Apparent magnitude (V) 	1.93[2]
+Apparent magnitude (V)  1.93[2]
 B
 
 but it is actually a sextuple star system 
@@ -2074,8 +2074,8 @@ update Stars set apparent_magnitude = 2.00   where common_name = "Algieba";
 
 select * from Constellations where name = "Leo";
 
--- Right ascension 	10h 19m 58.35056s[1]
--- Declination 	+19° 50′ 29.3468″[1]
+-- Right ascension      10h 19m 58.35056s[1]
+-- Declination  +19° 50′ 29.3468″[1]
 
 select * from Stars where bayer_designation_greek_letter = "gamma" and constellation_abbreviation = "Leonis"\G
 
@@ -2138,9 +2138,9 @@ select * from Constellations where name = "Andromeda";
 
 61. Gamma Andromedae          Almach            02 04 +42.3  137.0 -18.6  K3II+B8V+A0V  2.10  -3.08    9.19 0.73   360
 
-Right ascension 	02h 03m 53.95229s[1]
-Declination 	+42° 19′ 47.0223″[1]
-Apparent magnitude (V) 	2.27[2]
+Right ascension         02h 03m 53.95229s[1]
+Declination     +42° 19′ 47.0223″[1]
+Apparent magnitude (V)  2.27[2]
 quadruple star system
 
 
@@ -3006,7 +3006,7 @@ update Stars set apparent_magnitude = 2.65, absolute_magnitude = -0.98 where app
 update Stars set apparent_magnitude = 2.65, absolute_magnitude = -0.51 where approx_rank_apparent_magnitude = 108;    
 update Stars set apparent_magnitude = 2.66, absolute_magnitude =  0.24 where approx_rank_apparent_magnitude = 109;    
 update Stars set apparent_magnitude = 2.68, absolute_magnitude =  2.41 where approx_rank_apparent_magnitude = 110;    
-								 
+                                                                 
 
 select approx_rank_apparent_magnitude, common_name, apparent_magnitude, absolute_magnitude
 from Stars where approx_rank_apparent_magnitude > 110 and approx_rank_apparent_magnitude < 121
@@ -3017,16 +3017,16 @@ update Stars set common_name = "$\\mu$ Velorum" where approx_rank_apparent_magni
 update Stars set common_name = "$\\pi$ Puppis" where approx_rank_apparent_magnitude = 114;
 update Stars set common_name = "$\\alpha$ Muscae" where approx_rank_apparent_magnitude = 116;
 
-update Stars set apparent_magnitude = 2.68, absolute_magnitude =  -3.35	where approx_rank_apparent_magnitude = 111;
-update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -3.29	where approx_rank_apparent_magnitude = 112;
-update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -0.06	where approx_rank_apparent_magnitude = 113;
-update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -2.17	where approx_rank_apparent_magnitude = 114;
-update Stars set apparent_magnitude = 2.70, absolute_magnitude =  -3.31	where approx_rank_apparent_magnitude = 115;
-update Stars set apparent_magnitude = 2.71, absolute_magnitude =  -4.92	where approx_rank_apparent_magnitude = 116;
-update Stars set apparent_magnitude = 2.72, absolute_magnitude =  -2.14	where approx_rank_apparent_magnitude = 117;
-update Stars set apparent_magnitude = 2.72, absolute_magnitude =  -3.03	where approx_rank_apparent_magnitude = 118;
-update Stars set apparent_magnitude = 2.73, absolute_magnitude =  -0.86	where approx_rank_apparent_magnitude = 119;
-update Stars set apparent_magnitude = 2.73, absolute_magnitude =   0.58	where approx_rank_apparent_magnitude = 120;
+update Stars set apparent_magnitude = 2.68, absolute_magnitude =  -3.35 where approx_rank_apparent_magnitude = 111;
+update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -3.29 where approx_rank_apparent_magnitude = 112;
+update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -0.06 where approx_rank_apparent_magnitude = 113;
+update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -2.17 where approx_rank_apparent_magnitude = 114;
+update Stars set apparent_magnitude = 2.70, absolute_magnitude =  -3.31 where approx_rank_apparent_magnitude = 115;
+update Stars set apparent_magnitude = 2.71, absolute_magnitude =  -4.92 where approx_rank_apparent_magnitude = 116;
+update Stars set apparent_magnitude = 2.72, absolute_magnitude =  -2.14 where approx_rank_apparent_magnitude = 117;
+update Stars set apparent_magnitude = 2.72, absolute_magnitude =  -3.03 where approx_rank_apparent_magnitude = 118;
+update Stars set apparent_magnitude = 2.73, absolute_magnitude =  -0.86 where approx_rank_apparent_magnitude = 119;
+update Stars set apparent_magnitude = 2.73, absolute_magnitude =   0.58 where approx_rank_apparent_magnitude = 120;
 
 
 select approx_rank_apparent_magnitude, common_name, apparent_magnitude, absolute_magnitude
@@ -3079,9 +3079,9 @@ values (
 
 select * from Constellations where name = "Virgo"\G
 
-Right ascension 	12h 41m 39.64344s[1]
-Declination 	-01° 26′ 57.7421″[1]
-Apparent magnitude (V) 	2.74 (3.650/3.560[2])
+Right ascension         12h 41m 39.64344s[1]
+Declination     -01° 26′ 57.7421″[1]
+Apparent magnitude (V)  2.74 (3.650/3.560[2])
 
 http://simbad.u-strasbg.fr/simbad/sim-id?Ident=gam+Vir
 
@@ -3184,15 +3184,15 @@ update Stars set common_name = "$\\tau$ Scorpii" where approx_rank_apparent_magn
 update Stars set common_name = "$\\zeta$ Persei" where approx_rank_apparent_magnitude = 140;
 
 
-141 Beta Arae         	      2.84  -3.49 
-142 Choo              	      2.84  -1.51 
-143 Alcyone           	      2.85  -2.41 
-144 Vindemiatrix      	      2.85   0.37 
-145 Deneb Algedi      	      2.85e  2.49 
-146 Head of Hydrus    	      2.86   1.16 
-147 Delta Cygni       	      2.86  -0.74 
+141 Beta Arae                 2.84  -3.49 
+142 Choo                      2.84  -1.51 
+143 Alcyone                   2.85  -2.41 
+144 Vindemiatrix              2.85   0.37 
+145 Deneb Algedi              2.85e  2.49 
+146 Head of Hydrus            2.86   1.16 
+147 Delta Cygni               2.86  -0.74 
 
-148 Tejat             	      2.87v -1.39v
+148 Tejat                     2.87v -1.39v
 
 
 149 Gamma Trianguli Australis 2.87  -0.87 
@@ -3305,17 +3305,15 @@ https://en.wikipedia.org/wiki/Theta_Eridani
 
 Theta Eridani, Latinized from θ Eridani, is a binary system in the constellation of Eridanus
 
-Right ascension 	02h 58m 15.67922s[1]
-Declination 	−40° 18′ 16.8457″[1]
-Apparent magnitude (V) 	2.88[2]
+Right ascension         02h 58m 15.67922s[1]
+Declination     −40° 18′ 16.8457″[1]
+Apparent magnitude (V)  2.88[2]
 
 Missing: 151
 
 update Stars set apparent_magnitude_varies = 1, absolute_magnitude_varies = 1 where approx_rank_apparent_magnitude = 156;
 
 
--- Store this in register c:
-update Stars set apparent_magnitude = , absolute_magnitude = where approx_rank_apparent_magnitude = ;
 
 update Stars set apparent_magnitude = 2.88 , absolute_magnitude =-2.77 where approx_rank_apparent_magnitude = 152; 
 
@@ -3362,9 +3360,44 @@ update Stars set apparent_magnitude = 2.99, absolute_magnitude =-0.05 where appr
 update Stars set apparent_magnitude = 2.99, absolute_magnitude =-5.71 where approx_rank_apparent_magnitude = 170;
 
 
+update Stars set common_name = "Ras Elased Australis" where bs_hr_number = 3873;
 
-
+-- Store this in register c:
+update Stars set apparent_magnitude = , absolute_magnitude = where approx_rank_apparent_magnitude = ;
   
+select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
+approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 170
+and approx_rank_apparent_magnitude < 181 order by approx_rank_apparent_magnitude\G
+
+update Stars set common_name = "$\\beta$ Trianguli"           where approx_rank_apparent_magnitude = 172;
+update Stars set common_name = "$\\psi$ Ursae Majoris"        where approx_rank_apparent_magnitude = 173;
+update Stars set common_name = "$\\mu^1$ Scorpii"             where approx_rank_apparent_magnitude = 175;
+update Stars set common_name = "$\\gamma$ Gruis"              where approx_rank_apparent_magnitude = 176;
+update Stars set common_name = "$\\delta$ Persei"             where approx_rank_apparent_magnitude = 177;
+
+update Stars set common_name = "$o^2$ Canis Majoris"  where approx_rank_apparent_magnitude = 179;
+
+update Stars set apparent_magnitude = 2.99, absolute_magnitude =  0.96  where approx_rank_apparent_magnitude = 171;
+update Stars set apparent_magnitude = 3.00, absolute_magnitude =  0.09  where approx_rank_apparent_magnitude = 172;
+update Stars set apparent_magnitude = 3.00, absolute_magnitude = -0.27  where approx_rank_apparent_magnitude = 173;
+update Stars set apparent_magnitude = 3.00, absolute_magnitude = -2.84  where approx_rank_apparent_magnitude = 174;
+update Stars set apparent_magnitude = 3.00, absolute_magnitude = -4.01  where approx_rank_apparent_magnitude = 175;
+update Stars set apparent_magnitude = 3.00, absolute_magnitude = -0.97  where approx_rank_apparent_magnitude = 176;
+update Stars set apparent_magnitude = 3.01, absolute_magnitude = -3.04  where approx_rank_apparent_magnitude = 177;
+update Stars set apparent_magnitude = 3.02, absolute_magnitude = -2.05  where approx_rank_apparent_magnitude = 178;
+update Stars set apparent_magnitude = 3.02, absolute_magnitude = -6.46  where approx_rank_apparent_magnitude = 179;
+update Stars set apparent_magnitude = 3.02, absolute_magnitude = -1.82  where approx_rank_apparent_magnitude = 180;
+
+171. Zeta Aquilae              Deneb el Okab     19 05 +13.9   46.9  +3.3  A0V           2.99   0.96
+172. Beta Trianguli                              02 10 +35.0  140.6 -25.2  A5III         3.00   0.09
+173. Psi Ursae Majoris                           11 10 +44.5  165.8 +63.2  K1III         3.00  -0.27
+174. Gamma Ursae Minoris       Pherkad Major     15 21 +71.8  108.5 +40.8  A3II          3.00  -2.84
+175. Mu¹ Scorpii                                 16 52 -38.0  346.1  +3.9  B1.5V+B6.5V   3.00  -4.01
+176. Gamma Gruis                                 21 54 -37.4    6.1 -51.5  B8III         3.00  -0.97
+177. Delta Persei                                03 43 +47.8  150.3  -5.8  B5III         3.01  -3.04
+178. Zeta Canis Majoris        Phurad            06 20 -30.1  237.5 -19.4  B2.5V         3.02  -2.05
+179. Omicron² Canis Majoris                      07 03 -23.8  235.6  -8.2  B3Ia          3.02  -6.46
+180. Epsilon Corvi             Minkar            12 10 -22.6  290.6 +39.3  K2II          3.02  -1.82
 
 
 
