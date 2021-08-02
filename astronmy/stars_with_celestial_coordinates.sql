@@ -3447,6 +3447,22 @@ select * from Stars where common_name = "N Velorum"\G
 199 n_velorum
 200 pi_herculis
 
+select common_name from Stars where common_name is not null and common_name <> ""
+and right_ascension_decimal_degrees > 67.5 and right_ascension_decimal_degrees < 90
+and declination_decimal_degrees >= -11.25 and declination_decimal_degrees < 5 order by common_name;
+
++-------------+
+| common_name |
++-------------+
+| Algjebbah   |
+| Alnilam     |
+| Alnitak     |
+| Hatysa      |
+| Kursa       |
+| Mintaka     |
+| Rigel       |
+| Saiph       |
++-------------+
 
 
 
