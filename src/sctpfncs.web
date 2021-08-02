@@ -5457,7 +5457,8 @@ Scanner_Type::get_astronomy(void)
               }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-              add_synonym(s, u);   
+              if (s != u)
+                 add_synonym(s, u);   
 
               t = s;
 
@@ -5476,7 +5477,8 @@ Scanner_Type::get_astronomy(void)
                   }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-                  add_synonym(t, u);   
+                  if (t != u)
+                     add_synonym(t, u);   
               }
 #if DEBUG_COMPILE
               else if (DEBUG)
