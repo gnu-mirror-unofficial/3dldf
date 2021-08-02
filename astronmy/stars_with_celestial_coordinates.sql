@@ -3388,22 +3388,64 @@ update Stars set apparent_magnitude = 3.02, absolute_magnitude = -2.05  where ap
 update Stars set apparent_magnitude = 3.02, absolute_magnitude = -6.46  where approx_rank_apparent_magnitude = 179;
 update Stars set apparent_magnitude = 3.02, absolute_magnitude = -1.82  where approx_rank_apparent_magnitude = 180;
 
-171. Zeta Aquilae              Deneb el Okab     19 05 +13.9   46.9  +3.3  A0V           2.99   0.96
-172. Beta Trianguli                              02 10 +35.0  140.6 -25.2  A5III         3.00   0.09
-173. Psi Ursae Majoris                           11 10 +44.5  165.8 +63.2  K1III         3.00  -0.27
-174. Gamma Ursae Minoris       Pherkad Major     15 21 +71.8  108.5 +40.8  A3II          3.00  -2.84
-175. Mu¹ Scorpii                                 16 52 -38.0  346.1  +3.9  B1.5V+B6.5V   3.00  -4.01
-176. Gamma Gruis                                 21 54 -37.4    6.1 -51.5  B8III         3.00  -0.97
-177. Delta Persei                                03 43 +47.8  150.3  -5.8  B5III         3.01  -3.04
-178. Zeta Canis Majoris        Phurad            06 20 -30.1  237.5 -19.4  B2.5V         3.02  -2.05
-179. Omicron² Canis Majoris                      07 03 -23.8  235.6  -8.2  B3Ia          3.02  -6.46
-180. Epsilon Corvi             Minkar            12 10 -22.6  290.6 +39.3  K2II          3.02  -1.82
+select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
+approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 180
+and approx_rank_apparent_magnitude < 191 order by approx_rank_apparent_magnitude\G
+
+update Stars set common_name = "$\\beta$ Muscae" where approx_rank_apparent_magnitude = 182;
+update Stars set common_name = "$\\eta$ Sagittarii" where approx_rank_apparent_magnitude = 188;
+update Stars set common_name = "$\\zeta$ Hydrae" where approx_rank_apparent_magnitude = 189;
+update Stars set common_name = "$\\nu$ Hydrae" where approx_rank_apparent_magnitude = 190;
+
+update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 181;
+update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 186;
 
 
+update Stars set apparent_magnitude = 3.03, absolute_magnitude = -5.95 where approx_rank_apparent_magnitude = 181;
+update Stars set apparent_magnitude = 3.04, absolute_magnitude = -1.86 where approx_rank_apparent_magnitude = 182;
+update Stars set apparent_magnitude = 3.04, absolute_magnitude =  0.96 where approx_rank_apparent_magnitude = 183;
+update Stars set apparent_magnitude = 3.05, absolute_magnitude = -2.07 where approx_rank_apparent_magnitude = 184;
+update Stars set apparent_magnitude = 3.06, absolute_magnitude = -4.15 where approx_rank_apparent_magnitude = 185;
+update Stars set apparent_magnitude = 3.06, absolute_magnitude = -1.35 where approx_rank_apparent_magnitude = 186;
+update Stars set apparent_magnitude = 3.07, absolute_magnitude =  0.63 where approx_rank_apparent_magnitude = 187;
+update Stars set apparent_magnitude = 3.10, absolute_magnitude = -0.20 where approx_rank_apparent_magnitude = 188;
+update Stars set apparent_magnitude = 3.11, absolute_magnitude = -0.21 where approx_rank_apparent_magnitude = 189;
+update Stars set apparent_magnitude = 3.11, absolute_magnitude = -0.03 where approx_rank_apparent_magnitude = 190;
+
+update Stars set common_name = "$\\lambda$ Centauri" where approx_rank_apparent_magnitude = 191;
+update Stars set common_name = "$\\zeta$ Arae" where approx_rank_apparent_magnitude = 195;
+update Stars set common_name = "$\\alpha$ Lyncis" where approx_rank_apparent_magnitude = 198;
+update Stars set common_name = "N Velorum" where approx_rank_apparent_magnitude = 199;
+update Stars set common_name = "$\\pi$ Herculis" where approx_rank_apparent_magnitude = 200;
+                                                          
+update Stars set apparent_magnitude = 3.11, absolute_magnitude = -2.39 where approx_rank_apparent_magnitude = 191;
+update Stars set apparent_magnitude = 3.11, absolute_magnitude =  0.65 where approx_rank_apparent_magnitude = 192;
+update Stars set apparent_magnitude = 3.12, absolute_magnitude =  1.02 where approx_rank_apparent_magnitude = 193;
+update Stars set apparent_magnitude = 3.12, absolute_magnitude =  2.29 where approx_rank_apparent_magnitude = 194;
+update Stars set apparent_magnitude = 3.12, absolute_magnitude = -3.11 where approx_rank_apparent_magnitude = 195;
+update Stars set apparent_magnitude = 3.12, absolute_magnitude =  1.21 where approx_rank_apparent_magnitude = 196;
+update Stars set apparent_magnitude = 3.13, absolute_magnitude = -2.96 where approx_rank_apparent_magnitude = 197;
+update Stars set apparent_magnitude = 3.14, absolute_magnitude = -1.02 where approx_rank_apparent_magnitude = 198;
+update Stars set apparent_magnitude = 3.16, absolute_magnitude = -1.15 where approx_rank_apparent_magnitude = 199;
+update Stars set apparent_magnitude = 3.16, absolute_magnitude = -2.10 where approx_rank_apparent_magnitude = 200;                          
+                              
+select common_name, bayer_designation_greek_letter_tex, constellation_name_genitive, bayer_designation_extension,
+approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 190
+and approx_rank_apparent_magnitude < 201 order by approx_rank_apparent_magnitude\G
 
 
+select * from Stars where common_name = "N Velorum"\G
 
-
+191 lambda_centauri
+192 persian
+193 wazn
+194 talita
+195 zeta_arae
+196 sarin
+197 ke_kwan
+198 alpha_lyncis
+199 n_velorum
+200 pi_herculis
 
 
 
@@ -3411,5 +3453,6 @@ update Stars set apparent_magnitude = 3.02, absolute_magnitude = -1.82  where ap
 
    
    
+
 
 
