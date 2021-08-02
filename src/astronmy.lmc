@@ -222,10 +222,10 @@ def get_spherical_biangles {numeric rad} =
 
   tab1 := tab0 rotated (180, 0);
   
-  draw edge0;
-  draw edge1;
-  draw edge2;
-  draw edge3;
+  draw edge0 with_color dark_gray;
+  draw edge1 with_color dark_gray;
+  draw edge2 with_color dark_gray;
+  draw edge3 with_color dark_gray;
 
   draw tab0 on_picture tab_picture;
   draw tab1 on_picture tab_picture;
@@ -939,11 +939,10 @@ macro draw_lines;
 
 def draw_lines =
 
+  ccolor := dark_gray;
+  
   if do_black:
     fill Q;
-    ccolor := dark_gray;
-  else:
-    ccolor := black;
   fi;
     
   drawdot origin with_pen medium_pen with_color ccolor;
