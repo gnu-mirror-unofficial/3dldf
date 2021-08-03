@@ -1284,6 +1284,75 @@ plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {ruchbah, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt, false};
 
+%drawdot temp_star_flat_panel_point with_color red with_pen pencircle scaled (.5cm, .5cm) on_picture flat_quadrant_picture[2];
+
+draw flat_quadrant[0][6] with_color red with_pen pencircle scaled (3pt, 3pt) on_picture flat_quadrant_picture[2];
+
+point temp_pt[];
+
+for i = 0 upto 3:
+  temp_pt[i] := get_point (i) flat_quadrant[0][6];
+endfor;
+
+for i = 0 upto 3:
+  
+  temp_pt[i+4] := get_point (i) flat_quadrant[1][6];
+endfor;
+
+
+dotlabel.lft("0", temp_pt[0]) on_picture flat_quadrant_picture[2];
+dotlabel.rt("1", temp_pt[1]) on_picture flat_quadrant_picture[2];
+dotlabel.rt("2", temp_pt[2]) on_picture flat_quadrant_picture[2];
+dotlabel.lft("3", temp_pt[3]) on_picture flat_quadrant_picture[2];
+
+dotlabel.lft("4", temp_pt[4]) on_picture flat_quadrant_picture[2];
+dotlabel.rt("5", temp_pt[5]) on_picture flat_quadrant_picture[2];
+dotlabel.rt("6", temp_pt[6]) on_picture flat_quadrant_picture[2];
+dotlabel.lft("7", temp_pt[7]) on_picture flat_quadrant_picture[2];
+
+
+temp_pt[12] := mediate(temp_pt[1], temp_pt[4], .5);
+temp_pt[13] := mediate(temp_pt[2], temp_pt[7], .5);
+
+dotlabel.bot("12", temp_pt[12]) on_picture flat_quadrant_picture[2];
+dotlabel.top("13", temp_pt[13]) on_picture flat_quadrant_picture[2];
+
+temp_pt[14] := temp_star_flat_panel_point rotated_around (temp_pt[13], temp_pt[12]) 180;
+
+
+numeric app_mag;
+pen sstar_pen;
+
+app_mag := apparent_magnitude ruchbah;
+
+if app_mag < 0:
+  sstar_pen := star_pen[-1];
+elseif app_mag < 1:
+  sstar_pen := star_pen[0];
+elseif app_mag < 2:
+  sstar_pen := star_pen[1];
+elseif app_mag < 3:
+  sstar_pen := star_pen[2];
+elseif app_mag < 4:
+  sstar_pen := star_pen[3];
+elseif app_mag < 5:
+  sstar_pen := star_pen[4];
+else:
+  sstar_pen := star_pen[5];
+fi;
+
+%% !! START HERE: LDF 2021.08.03.  Rotating doesn't position the dot correctly.  It must
+be shifted over.
+
+label.rt("{\small Ruchbah}", temp_pt[14]) on_picture flat_quadrant_picture[2];
+drawdot temp_pt[14] with_pen sstar_pen on_picture flat_quadrant_picture[2];
+
+
+%temp_pt[6] := 
+
+%dotlabel.lft("6", temp_pt[6]) on_picture flat_quadrant_picture[2];
+
+
 %% *** (3) 110.  muphrid
 
 plot_star_on_sphere (star_point) {radius, muphrid};
