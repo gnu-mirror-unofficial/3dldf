@@ -1,4 +1,3 @@
-
 @q pnumexpr.w @> 
 @q Created by Laurence Finston Thu Jan 29 19:09:21 MET 2004  @>
 
