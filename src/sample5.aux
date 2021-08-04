@@ -56,20 +56,20 @@ picture save_picture;
 save_picture := tab_picture;
 
 beginfig(0);
+  output bi_ang_pict[0] with_projection parallel_x_y;
   draw_lines;
   output current_picture with_projection parallel_x_y;
   output qv[0] with_projection parallel_x_y;
   output tab_picture with_projection parallel_x_y;
-  output bi_ang_pict[0] with_projection parallel_x_y;
 endfig;
 
 beginfig(1);
+  output bi_ang_pict[1] with_projection parallel_x_y;
   draw_lines;
   output current_picture with_projection parallel_x_y;
   output qv[1] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-  output bi_ang_pict[1] with_projection parallel_x_y;
 endfig;
 
 beginfig(2);

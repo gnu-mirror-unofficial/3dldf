@@ -91,6 +91,7 @@ numeric label_pos_llft;
 newwrite label_out;
 picture tab_picture;
 newwrite star_info_combined;
+path edge[];
 
 rectangle D[][];
 triangle T[][];
@@ -695,16 +696,16 @@ plot_star_on_panel (temp_star_panel_point) {alphard, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {alphard, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false};
 
-%% *** (3) 48. Polaris
+% %% *** (3) 48. Polaris
 
-plot_star_on_sphere (star_point) {radius, polaris};
+% plot_star_on_sphere (star_point) {radius, polaris};
 
-plot_star_on_spherical_biangle {polaris, 48, label_pos_top, 0, 0};
+% plot_star_on_spherical_biangle {polaris, 48, label_pos_top, 0, 0};
 
-plot_star_on_panel (temp_star_panel_point) {polaris, star_point};
+% plot_star_on_panel (temp_star_panel_point) {polaris, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {polaris, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false};
+% plot_star_on_flat_panel (temp_star_flat_panel_point) {polaris, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+%                          0, 0, false};
 
 %% *** (3) 49. Algieba
 
@@ -1384,7 +1385,9 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {kraz, temp_star_panel_poin
 
 plot_star_on_sphere (star_point) {radius, ruchbah};
 
-plot_star_on_spherical_biangle {ruchbah, 109, label_pos_top, .33cm, 0};
+plot_star_on_spherical_biangle {ruchbah, 109, label_pos_rt, 0, 0};
+
+draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, true, true, label_pos_rt, 0, 0, false};
 
 plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
 
