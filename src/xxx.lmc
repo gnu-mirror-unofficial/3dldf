@@ -3,11 +3,22 @@ macro draw_extra_label_on_spherical_biangle;
 def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_ang_one, numeric bi_ang_two,
                                            boolean left_or_right, boolean bottom_or_top, numeric label_pos,
                                            numeric shift_x, numeric shift_y, boolean do_labels} =
+
+
+
   point P[];
 
   numeric RA;
   numeric Decl;
 
+  color ccolor;
+
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+  
   RA := right_ascension_decimal_degrees S;
 
   Decl := declination_decimal_degrees S;
@@ -80,7 +91,7 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
   P36 :=star_point shifted (-1cm, 0);
   P37 := star_point shifted (1cm, 0);
 
-  draw P36 -- P37 with_color red on_picture qv[bi_ang_one];
+  %draw P36 -- P37 with_color red on_picture qv[bi_ang_one];
 
   P38 := (P36 -- P37) intersection_point (P27 -- P8);
 
@@ -92,18 +103,49 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
 
   message "mag:";
   show mag;
-  
+
   P39 := star_point rotated_around (P8, P27) 180;
   label.rt("{\medium " & common_name S & "}", P39 shifted (shift_x, shift_y)) on_picture qv[bi_ang_two];
 
-%% !! START HERE: LDF 2021.08.04.  Get a circle with the radius corresponding to the declination
-%% of star_point.  That will get me the intersection point I need to place the new point correctly.
-%% Add code for the other cases (top left, bottom right, etc.).
-  
-  P40 := P5 shifted (0, 1cm);
-  P41 := (star_point rotated_around (P5, P40) 180) shifted by (P12 - P5);
+  circle c;
 
-  drawdot P41 with_pen pencircle scaled (5pt, 5pt)on_picture qv[bi_ang_one];  
+  P40 := (radius, 0);    
+  
+  P41 := P40 rotated (0, 0, declination_decimal_degrees S);
+
+  numeric rad;
+  rad := xpart P41;
+
+  c := unit_circle scaled (rad, 0, rad) rotated (90, 0);
+
+  numeric circum;
+
+  circum := circumference c;
+  
+  mag := circum / 16;
+  message "mag:";
+  show mag;
+
+  P42 := P38 shifted (-mag, 0);
+  P43 := P38 shifted (mag, 0);
+
+  message "P42:";
+  show P42;
+
+  message "P43:";
+  show P43;
+
+  %pause;
+  
+  draw P42 -- P43 with_color red on_picture qv[bi_ang_one];
+
+  P44 := P43 shifted (0, -1cm);
+  P45 := P43 shifted (0, 1cm);
+
+  P46 := (star_point rotated_around (P44, P45) 180) rotated_around (P8, P27) 180;
+
+  drawdot P46 with_pen pencircle scaled (5pt, 5pt) with_color red on_picture qv[bi_ang_one];
+  drawdot P46 with_pen pencircle scaled (5pt, 5pt) with_color ccolor on_picture qv[bi_ang_two];
   
   draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];  
 
