@@ -337,11 +337,13 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {aldebaran, temp_star_panel
 
 plot_star_on_sphere (star_point) {radius, antares};
 
-plot_star_on_spherical_biangle {antares, 15, label_pos_top, 0, 0};
+plot_star_on_spherical_biangle {antares, 15, label_pos_llft, 0, 0};
+
+draw_extra_label_on_spherical_biangle {antares, R15, 6, 5, false, false, label_pos_llft, 0, 0, false, false}; 
 
 plot_star_on_panel (temp_star_panel_point) {antares, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {antares, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {antares, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_llft,
                          0, 0, false};
 
 %% *** (3) 16. Spica
@@ -1013,14 +1015,12 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {epsilon_centauri, temp_sta
 
 plot_star_on_sphere (star_point) {radius, dschubba};
 
-plot_star_on_spherical_biangle {dschubba, 76, label_pos_top, 0, 0};
+plot_star_on_spherical_biangle {dschubba, 76, label_pos_lft, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {dschubba, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {dschubba, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false};
-
-
 %% *** (3) 77.  Wei
 
 plot_star_on_sphere (star_point) {radius, wei};
@@ -1387,7 +1387,7 @@ plot_star_on_sphere (star_point) {radius, ruchbah};
 
 plot_star_on_spherical_biangle {ruchbah, 109, label_pos_rt, 0, 0};
 
-draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, true, true, label_pos_rt, 0, 0, false};
+draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, true, true, label_pos_rt, 0, 0, false, false}; % true
 
 plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
 
@@ -1886,7 +1886,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {gomeisa, temp_star_panel_p
 
 plot_star_on_sphere (star_point) {radius, pi_scorpii};
 
-plot_star_on_spherical_biangle {pi_scorpii, 154, label_pos_top, 0, 0};
+plot_star_on_spherical_biangle {pi_scorpii, 154, label_pos_lft, 0, 0};
 
 plot_star_on_panel (temp_star_panel_point) {pi_scorpii, star_point};
 
@@ -1908,11 +1908,13 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {epsilon_persei, temp_star_
 
 plot_star_on_sphere (star_point) {radius, alniyat};
 
-plot_star_on_spherical_biangle {alniyat, 156, label_pos_top, 0, 0};
+plot_star_on_spherical_biangle {alniyat, 156, label_pos_zero, -.333cm, .6275cm};
+
+draw R156 -- (R156 shifted (0, .5cm)) with_color dark_gray on_picture bi_ang_pict[5];
 
 plot_star_on_panel (temp_star_panel_point) {alniyat, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {alniyat, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {alniyat, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_ulft,
                          0, 0, false};
 
 %% *** (3) 157.  albireo

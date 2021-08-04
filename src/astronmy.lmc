@@ -937,7 +937,243 @@ enddef;
 
 %% ** (2) macro draw_extra_label_on_spherical_biangle
 
-input "xxx.lmc";
+macro draw_extra_label_on_spherical_biangle;
+
+def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_ang_one, numeric bi_ang_two,
+                                           boolean left_or_right, boolean bottom_or_top, numeric label_pos,
+                                           numeric shift_x, numeric shift_y, boolean do_labels,
+                                           boolean suppress_text_label} =
+
+  point P[];
+
+  numeric RA;
+  numeric Decl;
+
+  color ccolor;
+
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+  
+  RA := right_ascension_decimal_degrees S;
+
+  Decl := declination_decimal_degrees S;
+
+  %message "Star: " & common_name S & ":";
+  %pause;
+
+  % show RA;
+
+  % message "Decl:";
+  % show Decl;
+
+  path curr_edge[];
+
+  % draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[bi_ang_one];
+  % draw edge2 with_pen pencircle scaled (3pt, 3pt) with_color blue on_picture qv[bi_ang_one];
+  % draw edge3 with_pen pencircle scaled (3pt, 3pt) with_color red on_picture qv[bi_ang_one];
+  
+  if bottom_or_top and left_or_right:         %% top right
+    %message "top right.";
+    curr_edge0 := edge1;
+  elseif bottom_or_top and not left_or_right: %% top left
+    %message "top left.";
+    curr_edge0 := edge0;
+  elseif not bottom_or_top and left_or_right: %% bottom right
+    %message "bottom right.";
+    curr_edge0 := edge3;
+  else:                                       %% bottom left
+    %message "bottom left.";
+    curr_edge0 := edge2;
+  fi;
+
+  for i = 0 upto (length Q - 1):
+    P[i] := get_point (i) Q;
+  endfor;
+
+  if do_labels:
+    dotlabel.rt("$P_{0}$", P0) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{1}$", P1) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{2}$", P2) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{3}$", P3) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{4}$", P4) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{5}$", P5) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{6}$", P6) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{7}$", P7) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{8}$", P8) on_picture qv[bi_ang_one];
+    dotlabel.rt("$P_{9}$", P9) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{10}$", P10) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{11}$", P11) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{12}$", P12) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{13}$", P13) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{14}$", P14) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{15}$", P15) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{16}$", P16) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{17}$", P17) on_picture qv[bi_ang_one];
+    dotlabel.rt("$P_{18}$", P18) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{19}$", P19) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{20}$", P20) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{21}$", P21) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{22}$", P22) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{23}$", P23) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{24}$", P24) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{25}$", P25) on_picture qv[bi_ang_one];
+    dotlabel.rt("$P_{26}$", P26) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{27}$", P27) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{28}$", P28) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{29}$", P29) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{30}$", P30) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{31}$", P31) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{32}$", P32) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{33}$", P33) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{34}$", P34) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{35}$", P35) on_picture qv[bi_ang_one];
+  fi;
+  
+  P36 :=star_point shifted (-1cm, 0);
+  P37 := star_point shifted (1cm, 0);
+
+  %draw P36 -- P37 with_color red on_picture qv[bi_ang_one];
+
+  P38 := (P36 -- P37) intersection_point (P27 -- P8);
+
+  if do_labels:
+    dotlabel.urt("$P_{38}$", P38) on_picture qv[bi_ang_one];
+  fi;
+  
+  numeric mag[];
+
+  mag0 := magnitude(xpart star_point - xpart P38);
+
+  circle c;
+
+  P39 := (radius, 0);    
+  
+  P40 := P39 rotated (0, 0, declination_decimal_degrees S);
+
+  numeric rad;
+  rad := xpart P40;
+
+  c := unit_circle scaled (rad, 0, rad) rotated (90, 0);
+
+  numeric circum;
+
+  circum := circumference c;
+  
+  mag0 := circum / 16;
+
+  % message "mag0:";
+  % show mag0;
+
+  P41 := P38 shifted (-mag0, 0);
+  P42 := P38 shifted (mag0, 0);
+
+  if do_labels:
+    dotlabel.lft("$P_{41}$", P41) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{42}$", P42) on_picture qv[bi_ang_one];
+  fi;
+  
+  % message "P41:";
+  % show P42;
+
+  % message "P42:";
+  % show P42;
+
+  %pause;
+  
+  %draw P41 -- P42 with_color red on_picture qv[bi_ang_one];
+
+  mag1 := magnitude(xpart P41 - xpart star_point);
+  mag2 := magnitude(xpart P42 - xpart star_point);
+ 
+  if mag1 < mag2:
+    P43 := P41 shifted (0, -1cm);
+    P44 := P41 shifted (0, 1cm);
+  else:
+    P43 := P42 shifted (0, -1cm);
+    P44 := P42 shifted (0, 1cm);
+  fi;
+
+  P45 := (star_point rotated_around (P43, P44) 180) rotated_around (P8, P27) 180;
+
+  % drawdot P45 with_pen pencircle scaled (5pt, 5pt) with_color red on_picture qv[bi_ang_one];
+  % drawdot P45 with_pen pencircle scaled (5pt, 5pt) with_color ccolor on_picture qv[bi_ang_two];
+  
+  % message "suppress_text_label:";
+  % show suppress_text_label;
+  % pause;
+
+%% !! START HERE: LDF 2021.08.04.  BUG!  The following nested conditional works, but other
+%% variants did not, e.g., using 'not', having the second-level conditional in the "if" clause,
+%% etc.  !! TODO:  Try to fix this!
+  
+  if suppress_text_label:
+    ;
+  else:
+    if label_pos == label_pos_zero:
+      label("{\medium " & common_name S & "}", P45 shifted (shift_x, shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_top:
+      label.top("{\medium " & common_name S & "}", P45 shifted (shift_x, basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_bot:
+      label.bot("{\medium " & common_name S & "}", P45 shifted (shift_x, -basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_lft:
+      label.lft("{\medium " & common_name S & "}", P45 shifted (-basic_shift_val + shift_x, shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_rt:
+      label.rt("{\medium " & common_name S & "}", P45 shifted (basic_shift_val + shift_x, shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_urt:
+      label.urt("{\medium " & common_name S & "}", P45
+    	  shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_ulft:
+      label.ulft("{\medium " & common_name S & "}", P45
+    	  shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_lrt:
+      label.lrt("{\medium " & common_name S & "}", P45
+    	  shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    elseif label_pos == label_pos_llft:
+      label.llft("{\medium " & common_name S & "}", P45
+    	  shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+    fi;
+  fi;
+  
+  numeric app_mag;
+  pen sstar_pen;
+  
+  app_mag := apparent_magnitude S;
+
+  if app_mag < 0:
+    sstar_pen := star_pen[-1];
+  elseif app_mag < 1:
+    sstar_pen := star_pen[0];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+  else:
+    sstar_pen := star_pen[5];
+  fi;
+  
+  drawdot P45 with_pen sstar_pen with_color ccolor on_picture qv[bi_ang_two];
+
+  %draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];  
+
+enddef;
+ 
+%input "xxx.lmc";
 
 %% ** (2) macro draw_lines
 

@@ -200,24 +200,8 @@ beginfig(13);
   current_picture += flat_quadrant_picture[3];
 endfig with_projection parallel_x_y; 
 
-beginfig(14);
-  begingroup;
-    circle c;
-    point p[];
-    numeric mag;
-    c := (unit_circle scaled (radius, 0, radius)) rotated (90, 0, 0);
-    p0 := (radius, 0);    
-    p1 := p0 rotated (0, 0, declination_decimal_degrees ruchbah);
-    p2 := p1 rotated (0, 180);
-    dotlabel.rt("$p_0$", p0);
-    dotlabel.rt("$p_1$", p1);
-    dotlabel.rt("$p_2$", p2);
-    mag := magnitude(xpart p1 - xpart p2);
-    message "mag:";
-    show mag;
-    draw c;
-  endgroup;
-endfig with_projection parallel_x_y; 
+% beginfig(14);
+% endfig with_projection parallel_x_y; 
 
 verbatim_metapost "end";
   
