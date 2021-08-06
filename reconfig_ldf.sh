@@ -7,6 +7,13 @@
 #### Copied from 'reconfig.sh'.  This version contains site-specific code
 #### for my PC.  LDF 2013.11.13.
 
+echo "DO NOT USE THIS SHELLSCRIPT!"
+echo "Use 'reconfig.sh' instead."
+echo "Exiting."
+
+exit 0
+
+
 #### Usage:  reconfig_ldf.sh [ARG_0 [ARG_1]]
 ####
 #### Arguments:
