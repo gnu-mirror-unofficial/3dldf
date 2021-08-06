@@ -234,7 +234,7 @@ Pointers to these variables, and to |string thread_name|, are passed to
 @<Define scanning functions@>=
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   using namespace Scan_Parse;
@@ -266,7 +266,8 @@ Added this section.
       cerr_strm << "ERROR! In `yylex()':"
                 << "`scanner_node' == 0." 
                 << endl << "Can't continue. Exiting function "
-                << "with return value `TERMINATE'.";
+                << "with return value `TERMINATE'."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -292,8 +293,8 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 #if DEBUG_COMPILE
   else if (DEBUG)  /* |scanner_node != 0|  */
     {
-      cerr_strm << "In `yylex()':"
-                << "`scanner_node' != 0.";
+      cerr_strm << "In `yylex':  `scanner_node' != 0."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -314,7 +315,8 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "Entering `yylex()'.";
+      cerr_strm << thread_name << "Entering `yylex'."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -351,8 +353,9 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
    if (DEBUG)
       {
          cerr_strm << thread_name  
-                   << "In `yylex()': "
-                   << "`scanner_node->rescan_stack.size()' > 0.";
+                   << "In `yylex':  `scanner_node->rescan_stack.size()' == " 
+                   << scanner_node->rescan_stack.size() << " (> 0)."
+                   << endl;
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -369,7 +372,7 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << thread_name << "In `yylex()':" 
+       cerr_strm << thread_name << "In `yylex':" 
                  << endl << "`rescan_catcode' == `" 
                  << name_map[rescan_catcode] << "'." 
                  << endl;
@@ -405,9 +408,10 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 #if DEBUG_COMPILE
             if (DEBUG)
                {
-                   cerr_strm << "In `yylex()':  Returning `" 
+                   cerr_strm << "In `yylex':  Returning `" 
                             << name_map[rescan_catcode]
-                            << "' immediately."; 
+                            << "' immediately."
+                            << endl;
 
                    log_message(cerr_strm);
                    cerr_message(cerr_strm);
@@ -434,9 +438,10 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
            if (DEBUG)
              {
 
-               cerr_strm << "In `yylex()': `rescan_value' == 0 and "
+               cerr_strm << "In `yylex': `rescan_value' == 0 and "
                          << "`rescan_retest' == " << rescan_retest 
-                         << "." << endl << "Will retest.";
+                         << "." << endl << "Will retest."
+                         << endl;
 
                log_message(cerr_strm); 
                cerr_message(cerr_strm); 
@@ -465,10 +470,18 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
 #if DEBUG_COMPILE
          if (DEBUG)
             {
-                cerr_strm << thread_name << "In `yylex()':  "  
-                          << "`scanner_node->rescan_stack.size()' <= 0."
-                          << endl 
-                          << "Calling `sub_yylex()' to get new token.";
+                cerr_strm << thread_name << "In `yylex':  ";
+
+                if (scanner_node->rescan_stack.size() < 0)
+                   cerr_strm  << "`scanner_node->rescan_stack.size()' < 0."
+                              << endl;
+
+                else if (scanner_node->rescan_stack.size() == 0)
+                   cerr_strm  << "`scanner_node->rescan_stack.size()' == 0."
+                              << endl; 
+
+                cerr_strm << "Calling `sub_yylex' to get new token."
+                          << endl;
 
                 log_message(cerr_strm);
                 cerr_message(cerr_strm);
@@ -590,7 +603,8 @@ Added code to this section for popping |scanner_node->in| if
 #if DEBUG_COMPILE
        if (DEBUG) 
          {
-           cerr_strm << "In `yylex()': `sub_yylex()' returned TERMINATE."; 
+           cerr_strm << "In `yylex': `sub_yylex' returned TERMINATE."
+                     << endl;
            
            log_message(cerr_strm); 
            cerr_message(cerr_strm); 
@@ -615,9 +629,10 @@ Added code to this section for popping |scanner_node->in| if
 #if DEBUG_COMPILE
             if (DEBUG) 
               {
-                cerr_strm << thread_name << "In `yylex()':"
+                cerr_strm << thread_name << "In `yylex':"
                           << endl 
-                          << "`scanner_node->pop_in()' succeeded.";
+                          << "`scanner_node->pop_in()' succeeded."
+                          << endl;
           
                 log_message(cerr_strm); 
                 cerr_message(cerr_strm); 
@@ -677,9 +692,10 @@ Do I need to change anything here?
 #if DEBUG_COMPILE
            if (DEBUG) 
              {
-               cerr_strm << thread_name << "In `yylex()':"
+               cerr_strm << thread_name << "In `yylex':"
                          << endl 
-                         << "`scanner_node->pop_in()' failed.";
+                         << "`scanner_node->pop_in()' failed."
+                         << endl;
                        
                log_message(cerr_strm); 
                cerr_message(cerr_strm); 
@@ -707,13 +723,14 @@ Added this section.
 
 {
       
-      cerr_strm << thread_name << "WARNING! In `yylex()':"
+      cerr_strm << thread_name << "WARNING! In `yylex':"
                 << endl 
                 << "End-of-file found and multithreaded input and/or "
                 << "multithreaded inclusion is enabled."
                 << endl << "In these cases, input files should contain "
                 << "an `end' or `endinput' command."
-                << endl << "I'll pretend this one does and continue.";
+                << endl << "I'll pretend this one does and continue."
+                << endl;
 
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -747,14 +764,17 @@ Now returning |END| rather than |TERMINATE|.
   
     {
 
-      cerr_strm << thread_name << "ERROR! In `yylex()':"
+      cerr_strm << thread_name << "ERROR! In `yylex':"
                 << endl 
-                << "End-of-file found when using single-threaded input "
-                << "and single-threaded inclusion and "
-                << "`scanner_node->pop_in()' failed."
-                << endl << "This should never happen. "
-                << endl << "Exiting function with return value `END' "
-                << "and will try to continue.";
+                << "End-of-file found when using single-threaded input and"
+                << endl 
+                << "single-threaded inclusion and `scanner_node->pop_in' failed."
+                << endl 
+                << "This should never happen."
+                << endl 
+                << "Exiting function with return value `END' "
+                << "and will try to continue."
+                << endl;
 
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -792,9 +812,10 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << "In `yylex()': Special assignment."
+          cerr_strm << "In `yylex':  Special assignment."
                     << endl << "Returning `curr_catcode' == "
-                    << name_map[curr_catcode] << ".";
+                    << name_map[curr_catcode] << "."
+                    << endl;
 
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
@@ -817,10 +838,11 @@ scanner_node->set_first_call_yylex(false);
 #if DEBUG_COMPILE
         if (DEBUG)
           {  
-            cerr_strm << "In `yylex()': `curr_catcode' == `" 
+            cerr_strm << "In `yylex':  `curr_catcode' == `" 
                       << name_map[curr_catcode] << "'" << endl 
                       << "`value->string_value' == \"" 
-                      << value->string_value << "\".";
+                      << value->string_value << "\"."
+                      << endl;
 
             log_message(cerr_strm); 
             cerr_message(cerr_strm); 
@@ -850,8 +872,8 @@ scanner_node->set_first_call_yylex(false);
        if (DEBUG) 
          {
            cerr_strm << thread_name 
-                     << "In `yylex()': \"" 
-                     << value->string_value << "\" is not in `id_map'.";
+                     << "In `yylex':  \"" << value->string_value << "\" is not in `id_map'."
+                     << endl;
            
            log_message(cerr_strm);
            cerr_message(cerr_strm);
@@ -878,9 +900,9 @@ Now checking for |!entry->is_true_internal|.
        if (DEBUG)
        {
            cerr_strm << thread_name 
-                     << "In `yylex()': `lookup(" << value->string_value
+                     << "In `yylex':  `lookup(" << value->string_value
                      << ")' succeeded." << endl 
-                     << "`type' == `" << name_map[entry->get_type()] << "'.";
+                     << "`type' == `" << name_map[entry->get_type()] << "'." << endl;
 
            if (entry->is_spark())
            {
@@ -916,7 +938,7 @@ Now checking for |!entry->is_true_internal|.
                && !entry->is_true_internal()
                && !entry->is_regular())
              {
-                 cerr_strm << thread_name << "ERROR! In `yylex()':"
+                 cerr_strm << thread_name << "ERROR! In `yylex':"
                            << endl                         
                            << value->string_value << " has an invalid category."
                            << "This shouldn't be possible. "
@@ -937,9 +959,8 @@ Now checking for |!entry->is_true_internal|.
              {  
                  cerr_strm << thread_name << "Spark `"
                            << value->string_value
-                           << "'." << "Returning `"
-                           << name_map[entry->get_type()]
-                           << "'.";
+                           << "'.  Returning `" << name_map[entry->get_type()] << "'."
+                           << endl;
 
                   log_message(cerr_strm);
                   cerr_message(cerr_strm);
@@ -972,8 +993,9 @@ Now checking for |!entry->is_true_internal|.
   if (DEBUG)
     {
         cerr_strm << thread_name 
-                  << "Exiting `yylex()' with return value `" 
-             << name_map[curr_catcode] << "'.";
+                  << "Exiting `yylex' with return value `" 
+                  << name_map[curr_catcode] << "'."
+                  << endl;
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -1067,7 +1089,8 @@ Added this section.
    bool DEBUG = false; /* |true| */@;
    if (DEBUG)
       {
-         cerr_strm << "Entering `sub_yylex()'.";
+         cerr_strm << "Entering `sub_yylex'."
+                   << endl;
 
          log_message(cerr_strm); 
          cerr_message(cerr_strm); 
@@ -1096,10 +1119,11 @@ Added this section.
   if (scanner_node == static_cast<Scanner_Node>(0))
     {
 
-      cerr_strm << "ERROR! In `sub_yylex()':"
+      cerr_strm << "ERROR! In `sub_yylex':"
                 << "`scanner_node' == 0." 
                 << endl << "Can't continue. Exiting function "
-                << "with return value `TERMINATE'.";
+                << "with return value `TERMINATE'."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1122,8 +1146,8 @@ Added this section.
 #if DEBUG_COMPILE
   else if (DEBUG)  /* |scanner_node != 0|  */
     {
-      cerr_strm << "In `sub_yylex()':"
-                << "`scanner_node' != 0.";
+      cerr_strm << "In `sub_yylex':  `scanner_node' != 0."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1145,10 +1169,11 @@ Added this section.
   if (!scanner_node->is_open_in())
     {
 
-      cerr_strm << "ERROR! in `sub_yylex()': \""  
+      cerr_strm << "ERROR! in `sub_yylex': \""  
                 << scanner_node->get_in_filename()
                 << "\" isn't open. "
-                << "Returning `TERMINATE'.";
+                << "Returning `TERMINATE'."
+                << endl;
 
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -1210,8 +1235,9 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << "In `sub_yylex()':" << endl
-                    << "`curr_char' == `" << curr_char << "'.";
+          cerr_strm << "In `sub_yylex':" << endl
+                    << "`curr_char' == `" << curr_char << "'."
+                    << endl;
             
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
@@ -1263,9 +1289,10 @@ Added this section.
 #if DEBUG_COMPILE
               if (DEBUG)
                 {
-                  cerr_strm << "In `sub_yylex()': End of file. "
-                   << "Returning "
-                   << name_map[TERMINATE] << ".";
+                  cerr_strm << "In `sub_yylex': End of file. "
+                            << "Returning "
+                            << name_map[TERMINATE] << "."
+                            << endl;
                   
                   log_message(cerr_strm); 
                   cerr_message(cerr_strm); 
@@ -1291,7 +1318,8 @@ Added this section.
 #if DEBUG_COMPILE
               if (DEBUG)
                 {
-                  cerr_strm << "In `sub_yylex()': Going to `finish'.";
+                  cerr_strm << "In `sub_yylex': Going to `finish'."
+                            << endl;
 
                   log_message(cerr_strm); 
                   cerr_message(cerr_strm); 
@@ -1317,8 +1345,8 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << "In `sub_yylex()': `curr_char' == `" 
-                    << curr_char << "'.";
+          cerr_strm << "In `sub_yylex': `curr_char' == `" 
+                    << curr_char << "'." << endl;
           
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
@@ -1331,8 +1359,8 @@ Added this section.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << "In `sub_yylex()': `temp_catcode' == `"
-                 << name_map[temp_catcode] << "'.";
+       cerr_strm << "In `sub_yylex': `temp_catcode' == `"
+                 << name_map[temp_catcode] << "'." << endl;
        
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -1353,7 +1381,7 @@ Added this section.
                     << endl 
                     << curr_char << " has invalid catcode."
                     << endl << "Returning `" << name_map[INVALID_CATCODE]
-                    << "'.";
+                    << "'." << endl;
 
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
@@ -1424,9 +1452,9 @@ Added code for handling Pythagorean addition and subtraction.
       if (DEBUG)
         {
           cerr_strm << thread_name 
-                    << "In `sub_yylex()':  Possible special assignment "
+                    << "In `sub_yylex':  Possible special assignment "
                     << "or Pythagorean addition or subtraction "
-                    << "(first char).";
+                    << "(first char)." << endl;
 
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
@@ -1460,8 +1488,9 @@ Added this section.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << "In `sub_yylex()': Returning " 
-                        << name_map[PYTHAGOREAN_PLUS] << ".";
+              cerr_strm << "In `sub_yylex': Returning " 
+                        << name_map[PYTHAGOREAN_PLUS] << "."
+                        << endl;
 
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1506,8 +1535,9 @@ Added this section.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << "In `sub_yylex()': Returning " 
-                        << name_map[PYTHAGOREAN_MINUS] << ".";
+              cerr_strm << "In `sub_yylex': Returning " 
+                        << name_map[PYTHAGOREAN_MINUS] << "."
+                        << endl;
 
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1526,9 +1556,10 @@ Added this section.
       else /* (|next_char != '+'|)  */
         {
 
-          cerr_strm << "ERROR! In `sub_yylex()': Invalid input: `+-"
+          cerr_strm << "ERROR! In `sub_yylex': Invalid input: `+-"
                     << next_char << "'." << endl 
-                    << "Will try to continue.";
+                    << "Will try to continue."
+                    << endl;
 
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1572,8 +1603,9 @@ Added this section.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << "In `sub_yylex()': Returning " 
-                        << name_map[HYPHEN_TRIPLE] << ".";
+              cerr_strm << "In `sub_yylex': Returning " 
+                        << name_map[HYPHEN_TRIPLE] << "."
+                        << endl;
 
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1595,8 +1627,9 @@ Added this section.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << "In `sub_yylex()': Returning "
-                        << name_map[HYPHEN_PAIR] << "'.";
+              cerr_strm << "In `sub_yylex': Returning "
+                        << name_map[HYPHEN_PAIR] << "'."
+                        << endl;
 
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1688,8 +1721,9 @@ Added this section.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << "In `sub_yylex()': Returning `" 
-                        << name_map[i] << "'.";
+              cerr_strm << "In `sub_yylex': Returning `" 
+                        << name_map[i] << "'."
+                        << endl;
 
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1722,8 +1756,9 @@ This seems to work, but I'll have to keep an eye on it.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << "In `sub_yylex()': Not a special assignment."
-                        << "Returning `" << name_map[temp_catcode] << "'.";
+              cerr_strm << "In `sub_yylex': Not a special assignment."
+                        << "Returning `" << name_map[temp_catcode] << "'."
+                        << endl;
               
               log_message(cerr_strm); 
               cerr_message(cerr_strm); 
@@ -1771,8 +1806,9 @@ Added code that tests for two or three
         if (DEBUG)
           {
               cerr_strm << thread_name 
-                        << "In `sub_yylex()':  First character in token is "
-                        << "`PERIOD'.";
+                        << "In `sub_yylex':  First character in token is "
+                        << "`PERIOD'."
+                        << endl;
 
               log_message(cerr_strm);
               cerr_message(cerr_strm);
@@ -1800,8 +1836,9 @@ Added code that tests for two or three
           if (DEBUG)
              {
                 cerr_strm << thread_name 
-                          << "In `sub_yylex()':  "
-                          << "Two `PERIODS'.";
+                          << "In `sub_yylex':  "
+                          << "Two `PERIODS'."
+                          << endl;
 
                 log_message(cerr_strm);
                 cerr_message(cerr_strm);
@@ -1829,8 +1866,9 @@ Added code that tests for two or three
               if (DEBUG)
                  {
                     cerr_strm << thread_name 
-                              << "In `sub_yylex()':  "
-                              << "Three `PERIODS'. Returning `PERIOD_TRIPLE'."; 
+                              << "In `sub_yylex':  "
+                              << "Three `PERIODS'. Returning `PERIOD_TRIPLE'."
+                              << endl;
 
                     log_message(cerr_strm);
                     cerr_message(cerr_strm);
@@ -1856,8 +1894,9 @@ Added code that tests for two or three
               if (DEBUG)
                  {
                     cerr_strm << thread_name 
-                              << "In `sub_yylex()':  "
-                              << "Returning `PERIOD_PAIR'.";
+                              << "In `sub_yylex':  "
+                              << "Returning `PERIOD_PAIR'."
+                              << endl;
 
                     log_message(cerr_strm);
                     cerr_message(cerr_strm);
@@ -1915,7 +1954,8 @@ Commented this out.  It caused an error.
                            << endl 
                            << "Setting `curr_token_string' to \"0.\", "
                            << "changing `curr_catcode' to `REAL', "
-                           << "and continuing.";
+                           << "and continuing."
+                           << endl;
 
                  log_message(cerr_strm);
                  cerr_message(cerr_strm);
@@ -1937,10 +1977,11 @@ Commented this out.  It caused an error.
          if (DEBUG)
             {
                 cerr_strm << thread_name 
-                          << "In `sub_yylex()':  "
+                          << "In `sub_yylex':  "
                           << "Next character isn't a digit."
                           << endl 
-                          << "Ignoring period and going to `loop_start'.";
+                          << "Ignoring period and going to `loop_start'." 
+                          << endl;
 
                 log_message(cerr_strm);
                 cerr_message(cerr_strm);
@@ -1971,8 +2012,9 @@ Commented this out.  It caused an error.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << "In `sub_yylex()': Continuing here. "
-                 << "`curr_char' == `" << curr_char << "'";
+       cerr_strm << "In `sub_yylex': Continuing here. "
+                 << "`curr_char' == `" << curr_char << "'"
+                 << endl;
 
        log_message(cerr_strm); 
        cerr_message(cerr_strm); 
@@ -2010,10 +2052,11 @@ curr_catcode = temp_catcode;
 #if DEBUG_COMPILE
         if (DEBUG)
            {
-              cerr_strm << thread_name << "In `sub_yylex()':  `" 
+              cerr_strm << thread_name << "In `sub_yylex':  `" 
                         << name_map[curr_catcode]
                         << "'." << endl 
-                        << "Going to `finish'.";
+                        << "Going to `finish'."
+                        << endl;
 
               log_message(cerr_strm);
               cerr_message(cerr_strm);
@@ -2037,9 +2080,10 @@ curr_catcode = temp_catcode;
 #if DEBUG_COMPILE
          if (DEBUG)
             {
-               cerr_strm << thread_name << "In `sub_yylex()':  "
+               cerr_strm << thread_name << "In `sub_yylex':  "
                          << "`LEFT_PARENTHESIS'.  "
-                         << "going to `finish'.";
+                         << "going to `finish'."
+                         << endl;
 
                log_message(cerr_strm);
                cerr_message(cerr_strm);
@@ -2063,9 +2107,10 @@ goto finish;
 #if DEBUG_COMPILE
          if (DEBUG)
             {
-                cerr_strm << thread_name << "In `sub_yylex()':  "
+                cerr_strm << thread_name << "In `sub_yylex':  "
                           << "`RIGHT_PARENTHESIS'.  "
-                          << "going to `finish'.";
+                          << "going to `finish'."
+                          << endl;
 
                 log_message(cerr_strm);
                 cerr_message(cerr_strm);
@@ -2116,7 +2161,8 @@ redirection.
                 if (DEBUG)
                   {
                       cerr_strm << thread_name 
-                                << "In `sub_yylex()':  Handling comment.";   
+                                << "In `sub_yylex':  Handling comment."
+                                << endl;
 
                       log_message(cerr_strm);
                       cerr_message(cerr_strm);
@@ -2134,7 +2180,7 @@ redirection.
                     if (curr_char == EOF)
                        {
                           cerr_strm << thread_name 
-                                    << "WARNING! In `sub_yylex()':"
+                                    << "WARNING! In `sub_yylex':"
                                     << endl 
                                     << "File \"" 
                                     << scanner_node->get_in_filename()  
@@ -2142,7 +2188,8 @@ redirection.
                                     << endl 
                                     << "This is probably nothing to worry about, "
                                     << "though." << endl << "Returning `"
-                                    << name_map[TERMINATE] << "'.";
+                                    << name_map[TERMINATE] << "'."
+                                    << endl;
 
                           log_message(cerr_strm);
                           cerr_message(cerr_strm);
@@ -2171,9 +2218,10 @@ redirection.
                           if (DEBUG)
                              {
                                  cerr_strm << thread_name 
-                                           << "`sub_yylex()':  "
+                                           << "`sub_yylex':  "
                                            << "End of comment.  "
-                                           << "Going to `loop_start'.";
+                                           << "Going to `loop_start'."
+                                           << endl;
 
                                  log_message(cerr_strm);
                                  cerr_message(cerr_strm);
@@ -2233,10 +2281,11 @@ else if (curr_catcode == DOUBLE_QUOTE)
 #if DEBUG_COMPILE
           if (DEBUG)
              {
-                 cerr_strm << thread_name << "In `sub_yylex()':"
+                 cerr_strm << thread_name << "In `sub_yylex':"
                            << endl 
                            << "Double quote character.  "
-                           << "Collecting string.";
+                           << "Collecting string."
+                           << endl;
 
                  log_message(cerr_strm);
                  cerr_message(cerr_strm);
@@ -2262,12 +2311,13 @@ else if (curr_catcode == DOUBLE_QUOTE)
 #if DEBUG_COMPILE
                   if (DEBUG)
                     {
-                        cerr_strm << thread_name << "In `sub_yylex()':  "
+                        cerr_strm << thread_name << "In `sub_yylex':  "
                                   << "Ending string."
                                   << endl 
                                   << "`curr_token_string' == \"" 
                                   << curr_token_string << "\".  "
-                                  << "Going to `finish'.";
+                                  << "Going to `finish'."
+                                  << endl;
 
                         log_message(cerr_strm);
                         cerr_message(cerr_strm);
@@ -2288,14 +2338,15 @@ else if (curr_catcode == DOUBLE_QUOTE)
                   curr_column = 0;
 
                   cerr_strm << thread_name 
-                            << "ERROR! In `sub_yylex()':"
+                            << "ERROR! In `sub_yylex':"
                             << endl 
                             << "Line ends before string does:  \"" 
                             << curr_token_string << "\""
                             << endl << "Setting value->string_value to \"" 
                             << curr_token_string 
                             << "\", returning `STRING', and will try "
-                            << "to continue.";
+                            << "to continue."
+                            << endl;
 
                   log_message(cerr_strm);
                   cerr_message(cerr_strm);
@@ -2309,7 +2360,7 @@ else if (curr_catcode == DOUBLE_QUOTE)
 
             else if (curr_char == EOF)
                {
-                  cerr_strm << thread_name << "ERROR! In `sub_yylex()':"
+                  cerr_strm << thread_name << "ERROR! In `sub_yylex':"
                             << endl 
                             << "File ends before string does:  \"" 
                             << curr_token_string << "\"" 
@@ -2317,7 +2368,8 @@ else if (curr_catcode == DOUBLE_QUOTE)
                             << "Setting `value->string_value' to \"" 
                             << curr_token_string 
                             << "\", returning `STRING', and will try "
-                            << "to continue.";
+                            << "to continue."
+                            << endl;
 
                   log_message(cerr_strm);
                   cerr_message(cerr_strm);
@@ -2382,10 +2434,11 @@ else if (curr_catcode == DOUBLE_QUOTE)
                 if (DEBUG)
                   {
                       cerr_strm << thread_name 
-                                << "In `sub_yylex()':  "
+                                << "In `sub_yylex':  "
                                 << "`PERIOD' following `DIGIT'."
                                 << endl 
-                                << "Changing `curr_catcode' to `REAL'.";
+                                << "Changing `curr_catcode' to `REAL'."
+                                << endl;
 
                       log_message(cerr_strm);
                       cerr_message(cerr_strm);
@@ -2435,8 +2488,9 @@ we just skip over the whitespace.
                        if (DEBUG)
                           {
                               cerr_strm << thread_name 
-                                        << "In `sub_yylex()':  Whitespace.  "
-                                        << "Going to `loop_start'.";
+                                        << "In `sub_yylex':  Whitespace.  "
+                                        << "Going to `loop_start'."
+                                        << endl;
 
                               log_message(cerr_strm);
                               cerr_message(cerr_strm);
@@ -2488,7 +2542,7 @@ Added code for converting |INTEGERS| greater than |INT_MAX| to |reals|.
                     if (DEBUG)
                        {
                            cerr_strm << thread_name 
-                                     << "In `sub_yylex()':"
+                                     << "In `sub_yylex':"
                                      << endl 
                                      << "s.str() == " 
                                      << s.str() << endl;
@@ -2534,7 +2588,7 @@ unsigned long long ull = strtoull(s.str().c_str(), 0, 10);
 #if DEBUG_COMPILE
                     if (DEBUG)
                        {
-                           cerr_strm << "In `sub_yylex()':"
+                           cerr_strm << "In `sub_yylex':"
                                      << endl 
                                      << thread_name << "ll == " 
                                      << ll << endl;
@@ -2572,7 +2626,7 @@ Added this section.
                     if (ll >= long_long_limits.max())
                        {
                            cerr_strm << thread_name 
-                                     << "ERROR!  In `sub_yylex()':"
+                                     << "ERROR!  In `sub_yylex':"
                                      << endl
                                      << "integer value is greater "
                                      << "than or equal to `LONG_LONG_MAX'."
@@ -2581,7 +2635,8 @@ Added this section.
                                      << "to `INVALID_REAL' "
                                      << endl 
                                      << "and `curr_catcode' to `REAL' and "
-                                     << "continuing.";
+                                     << "continuing."
+                                     << endl;
 
                           log_message(cerr_strm);   
                           cerr_message(cerr_strm);
@@ -2602,7 +2657,7 @@ Added this section.
                            if (DEBUG)
                               {
                                   cerr_strm << thread_name
-                                            << "In `sub_yylex()':"
+                                            << "In `sub_yylex':"
                                             << endl 
                                             << "ll > int_limits.max()" 
                                             << endl;
@@ -2630,7 +2685,7 @@ Added this section.
                            if (DEBUG)
                               {
                                   cerr_strm << thread_name 
-                                            << "In `sub_yylex()':"
+                                            << "In `sub_yylex':"
                                             << endl 
                                             << "value->real_value == " 
                                             << value->real_value
@@ -2655,7 +2710,7 @@ Added this section.
                            if (DEBUG)
                               {
                                   cerr_strm << thread_name 
-                                            << "In `sub_yylex()':"
+                                            << "In `sub_yylex':"
                                             << endl 
                                             << "ll <= int_limits.max()" 
                                             << endl;
@@ -2673,12 +2728,13 @@ Added this section.
                         if (DEBUG)
                           {
                               cerr_strm << thread_name 
-                                        << "In `sub_yylex()':"
+                                        << "In `sub_yylex':"
                                         << endl 
                                         << "s.str() == " << s.str()
                                         << endl << "value->int_value' == `"
                                         << static_cast<int>(value->int_value) 
-                                        << "'.";
+                                        << "'."                      
+                                        << endl;
 
                               log_message(cerr_strm);
                               cerr_message(cerr_strm);
@@ -2713,9 +2769,10 @@ Added this section.
 #if DEBUG_COMPILE
                   if (DEBUG)
                     {
-                        cerr_strm << thread_name << "In `sub_yylex()':"
+                        cerr_strm << thread_name << "In `sub_yylex':"
                                   << endl << "`value->real_value' == `"
-                                  << value->real_value << "'.";
+                                  << value->real_value << "'."
+                                  << endl;
 
                         log_message(cerr_strm);
                         cerr_message(cerr_strm);
@@ -2752,9 +2809,10 @@ upon failure.
                    catch (bad_alloc)
                       {
                          cerr_strm << thread_name 
-                                   << "ERROR!  In `sub_yylex()':"
+                                   << "ERROR!  In `sub_yylex':"
                                    << endl << "`new string' failed.  "
-                                   << "Rethrowing `bad_alloc'.";
+                                   << "Rethrowing `bad_alloc'."
+                                   << endl;
 
                          log_message(cerr_strm);
                          cerr_message(cerr_strm);
@@ -2786,10 +2844,11 @@ to check the token string in |yyparse|.
 #if DEBUG_COMPILE
                    if (DEBUG)
                      {
-                       cerr_strm << "In `sub_yylex()': `value->string_value' == "
+                       cerr_strm << "In `sub_yylex': `value->string_value' == "
                                  << value->string_value << endl 
                                  << "catcode == `" << name_map[curr_catcode]
-                                 << "'.";
+                                 << "'."
+                                 << endl;
 
                        log_message(cerr_strm); 
                        cerr_message(cerr_strm);
@@ -2836,7 +2895,7 @@ This seems to work, but I'll have to keep an eye on it.
          cerr << "location->position == "
               << location->position << endl;
 #endif 
-         cerr_strm << thread_name << "Exiting `sub_yylex()'.";
+         cerr_strm << thread_name << "Exiting `sub_yylex'." << endl;
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -2916,6 +2975,7 @@ get_catcode(const char c)
 
   if (c == '(') // )
     return LEFT_PARENTHESIS;
+
 // (
 
   if (c == ')')
@@ -2930,7 +2990,7 @@ get_catcode(const char c)
   if (c == '\"')
     return DOUBLE_QUOTE;
 
-  if (isalpha(c) || c == '_' || c == '©')
+  if (isalpha(c) || c == '_' || c == '©')  
     return SYMBOL_0;
 
   if (c == '<' || c == '=' || c == '>'
