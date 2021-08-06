@@ -3471,6 +3471,20 @@ select * from Stars where bs_hr_number = 2773 or bs_hr_number = 4798\G
 
 update Stars set common_name = "$\alpha$ Muscae" where bs_hr_number = 4798;
 
+select common_name, approx_rank_apparent_magnitude, right_ascension_decimal_degrees, declination_decimal_degrees
+from Stars where common_name is not null and common_name <> ""
+and right_ascension_decimal_degrees >= 112.5 and right_ascension_decimal_degrees <= 157.5
+and declination_decimal_degrees >= -67.5 and declination_decimal_degrees <= -45
+and approx_rank_apparent_magnitude <= 200 order by approx_rank_apparent_magnitude;
+
++--------------------+--------------------------------+---------------------------------+-----------------------------+
+| Avior              |                             40 |                         125.723 |                    -59.5694 |
+| Koo She            |                             45 |                         131.304 |                    -54.7772 |
+| Aspidiske          |                             66 |                         139.396 |                    -59.3533 |
+| Markeb             |                             90 |                         140.672 |                    -55.0903 |
+| $\upsilon$ Carinae |                            160 |                         146.891 |                    -65.1581 |
+| N Velorum          |                            199 |                         142.806 |                    -57.0344 |
++--------------------+--------------------------------+---------------------------------+-----------------------------+
 
 
 

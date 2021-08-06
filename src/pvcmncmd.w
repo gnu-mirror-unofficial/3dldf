@@ -675,8 +675,6 @@ Added this rule.
                     p = static_cast<Newwrite*>(temp_entry->object);
 
                     p->show("p:");
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
                     *p = *static_cast<string*>(@=$3@>);
 

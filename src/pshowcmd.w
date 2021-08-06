@@ -6376,9 +6376,6 @@ Added this rule.
         << "`scanner_node->affected_rows' == " << scanner_node->affected_rows << endl;
 
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    status = scanner_node->submit_mysql_query(s);
 
    cerr << "*** Parser: `command: SHOW DATABASE string_expression':"
@@ -6388,12 +6385,6 @@ getchar();
         << "`scanner_node->row_ctr'       == " << scanner_node->row_ctr << endl 
         << "`scanner_node->field_ctr'     == " << scanner_node->field_ctr << endl 
         << "`scanner_node->affected_rows' == " << scanner_node->affected_rows << endl;
-
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
 
    if (status != 0)
    {

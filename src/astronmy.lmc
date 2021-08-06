@@ -1108,6 +1108,9 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
 %% !! START HERE: LDF 2021.08.04.  BUG!  The following nested conditional works, but other
 %% variants did not, e.g., using 'not', having the second-level conditional in the "if" clause,
 %% etc.  !! TODO:  Try to fix this!
+
+  
+  message "In `draw_extra_label_on_spherical_biangle':  Before conditional.";
   
   if suppress_text_label:
     ;
@@ -1146,6 +1149,9 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
     fi;
   fi;
   
+  message "After conditional.";
+
+
   numeric app_mag;
   pen sstar_pen;
   

@@ -5416,8 +5416,7 @@ It can have the following values:\hfil\break
 \smallskip
 \item{1} Condition is |true|.
 \smallskip
-\item{2} Condition is |false| and |else| clause, if present, 
-should be discarded.
+\item{2} Condition is |false| and |else| clause, if present, should be discarded.
 \ENDLOG
 
 @q *** (3) Definition.@> 
@@ -5429,7 +5428,7 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
                         int arg)
 {
 #if DEBUG_COMPILE
-    bool DEBUG = true; /* |false| */ @; 
+    bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
     stringstream cerr_strm;
@@ -5555,7 +5554,7 @@ int save_if_ctr = scanner_node->if_ctr;
 @<Define |Scan_Parse| functions@>=
 
   if (curr_catcode == IF)
-    {
+  {
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -5573,9 +5572,9 @@ int save_if_ctr = scanner_node->if_ctr;
      }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-   scanner_node->if_ctr++;
+       scanner_node->if_ctr++;
 
- } /* |if (curr_catcode == IF)|  */
+  } /* |if (curr_catcode == IF)|  */
 
 @q ******* (7) |curr_catcode == FI|.@> 
 
@@ -5584,27 +5583,30 @@ int save_if_ctr = scanner_node->if_ctr;
 
 @<Define |Scan_Parse| functions@>=
 
-          if (curr_catcode == FI)
-            {
-
+    if (curr_catcode == FI)
+    {
+    
 #if DEBUG_COMPILE
-              if (DEBUG)
-                {
+        if (DEBUG)
+          {
 
-                  cerr_strm << thread_name 
-                            << "In `Scan_Parse::conditional()':"
-                            << endl 
-                            << "`curr_catcode' == `FI'. "
-                            << "Decrementing `scanner_node->if_ctr'.";
+            cerr_strm << thread_name 
+                      << "In `Scan_Parse::conditional()':"
+                      << endl 
+                      << "`curr_catcode' == `FI'. "
+                      << "Decrementing `scanner_node->if_ctr'.";
 
-                  log_message(cerr_strm);
-                  cerr_message(cerr_strm);
-                  cerr_strm.str("");
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
 
-                }
+            cerr << "scanner_node->rescan_stack.size() == " << scanner_node->rescan_stack.size() << endl;
+
+
+          }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-              scanner_node->if_ctr--;
+          scanner_node->if_ctr--;
 
 @q ******** (8) |scanner_node->if_ctr < save_if_ctr|.@> 
 @q ******** (8) Return 0.@> 
@@ -5620,7 +5622,7 @@ int save_if_ctr = scanner_node->if_ctr;
 @<Define |Scan_Parse| functions@>=
 
               if (scanner_node->if_ctr < save_if_ctr)
-                {
+              {
 
 #if DEBUG_COMPILE
                   if (DEBUG)
@@ -5641,7 +5643,7 @@ cerr_strm << thread_name
                   
                   return 0;
 
-} /* |if (if_ctr < save_if_ctr)|  */
+              } /* |if (if_ctr < save_if_ctr)|  */
    
 @q ******** (8) |scanner_node->if_ctr >= save_if_ctr|.@> 
 @q ******** (8) Continue.@> 
@@ -5655,36 +5657,36 @@ cerr_strm << thread_name
 \ENDLOG 
 @<Define |Scan_Parse| functions@>=
 
-  else /* |scanner_node->if_ctr >= save_if_ctr|  */
-    {
-
-#if DEBUG_COMPILE
-      if (DEBUG)
+        else /* |scanner_node->if_ctr >= save_if_ctr|  */
         {
 
-cerr_strm << thread_name 
-                    << "In `Scan_Parse::conditional()':"
-                    << endl 
-                    << "`scanner_node->if_ctr' >= `save_if_ctr'."
-                    << endl << "Continuing.";
+#if DEBUG_COMPILE
+            if (DEBUG)
+            {
 
-log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
+                cerr_strm << thread_name 
+                          << "In `Scan_Parse::conditional()':"
+                          << endl 
+                          << "`scanner_node->if_ctr' >= `save_if_ctr'."
+                          << endl << "Continuing.";
 
-        }
+                log_message(cerr_strm);
+                cerr_message(cerr_strm);
+                cerr_strm.str("");
+
+            }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      continue;
+            continue;
 
-}    /* |else| (|scanner_node->if_ctr >= save_if_ctr|)  */
+        }    /* |else| (|scanner_node->if_ctr >= save_if_ctr|)  */
 
-@q ******** (8) End of |curr_catcode == FI)| case.@> 
-@ End of |curr_catcode == FI)| case.
+@q ******** (8) End of |curr_catcode == FI| case.@> 
+@ End of |curr_catcode == FI| case.
 \initials{LDF 2004.09.10.}
 @<Define |Scan_Parse| functions@>=
 
-            } /* |if (curr_catcode == FI)|  */
+       } /* |if (curr_catcode == FI)|  */
           
 @q ******* (7) |curr_catcode == ELSE|.@> 
 
@@ -5751,7 +5753,7 @@ log_message(cerr_strm);
 @<Define |Scan_Parse| functions@>=
 
               else /* |curr_catcode == COLON|  */
-                {
+              {
 
 @q ********* (9) @> 
 
@@ -5769,7 +5771,7 @@ log_message(cerr_strm);
                           {
                               cerr_strm << thread_name 
                                         << "In `Scan_Parse::conditional()':"
-                                        << endl << "`else' is followed by `COLON'. "
+                                        << endl << "`scanner_node->if_ctr' <= `save_if_ctr'. "
                                         << "Returning 0."; 
 
                               log_message(cerr_strm); 
