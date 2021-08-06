@@ -3900,45 +3900,45 @@ Int_Void_Ptr
 variable_type(Scanner_Node scanner_node,
               Id_Map_Entry_Node entry,
               string curr_name,
-                   int curr_type);
+              int curr_type);
 
 template <class C>
-  int 
-    vector_type_decl(Scanner_Node scanner_node,
+int 
+vector_type_decl(Scanner_Node scanner_node,
                      int vector_type_num,
                      int array_type_num,
                      C* dummy = 0);
 
 template <class C>
-  int 
-    vector_type_plus_assign(Scanner_Node scanner_node,
-                            Id_Map_Entry_Node entry,
-                            int vector_type_num,
-                            int array_type_num,
-                            C* object,
-                            bool copy_object = true);
+int 
+vector_type_plus_assign(Scanner_Node scanner_node,
+                        Id_Map_Entry_Node entry,
+                        int vector_type_num,
+                        int array_type_num,
+                        C* object,
+                        bool copy_object = true);
 
- template <class C, class D>
-   int 
-      vector_type_assign(Scanner_Node scanner_node,
-                         Id_Map_Entry_Node entry,
-                         const Pointer_Vector<D>* object_vector,
-                         C* dummy = 0);
+template <class C, class D>
+int 
+vector_type_assign(Scanner_Node scanner_node,
+                   Id_Map_Entry_Node entry,
+                   const Pointer_Vector<D>* object_vector,
+                   C* dummy = 0);
 
 int 
-  conditional(Scanner_Node scanner_node,
+conditional(Scanner_Node scanner_node,
               int arg);
 
 int
-  input_command(Scanner_Node scanner_node, string* filename);
+input_command(Scanner_Node scanner_node, string* filename);
 
 int
-  transformation_command_func(Scanner_Node scanner_node,
+transformation_command_func(Scanner_Node scanner_node,
                               int transformation_type,
                               Id_Map_Entry_Node entry,
                               void* v);
 Transform* 
-  rotate_around_func(Scanner_Node scanner_node,
+rotate_around_func(Scanner_Node scanner_node,
                      Point* p,
                      Point* q,
                      real r);
@@ -3949,7 +3949,7 @@ transformation_assignment_command_func(Scanner_Node scanner_node,
                                        Transform* t);
 template <class C>
 C*
- reflect_in_func(Scanner_Node scanner_node,
+reflect_in_func(Scanner_Node scanner_node,
                  C* object,
                  Path* plane_path);
 
@@ -4170,8 +4170,8 @@ Added the argument |int with_z| to |path_secondary_rule_0|.
 
 @<Declare |namespace Scan_Parse|@>=
 
-   void*
-   path_secondary_rule_func_0(void* ppath, 
+void*
+path_secondary_rule_func_0(void* ppath, 
                               void* ffocus,
                               int with_z,
                               Scanner_Node scanner_node = 0);
@@ -4193,8 +4193,8 @@ Added the argument |int with_z| to |polygon_secondary_rule_0|.
 
 @<Declare |namespace Scan_Parse|@>=
 
-   void*
-   polygon_secondary_rule_func_0(void* ppolygon, 
+void*
+polygon_secondary_rule_func_0(void* ppolygon, 
                                  void* ffocus,
                                  int with_z,
                                  Scanner_Node scanner_node = 0);
@@ -4393,8 +4393,8 @@ Added this section with the declaration of
 
 @<Declare |namespace Scan_Parse|@>=
 
-   int
-   operation_assignment_picture_rule_func_0(void* to_picture_entry,
+int
+operation_assignment_picture_rule_func_0(void* to_picture_entry,
                                             void* from_picture_entry,
                                             Scanner_Node scanner_node = 0);
 

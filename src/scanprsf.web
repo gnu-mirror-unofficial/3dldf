@@ -5429,15 +5429,14 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
                         int arg)
 {
 #if DEBUG_COMPILE
-    bool DEBUG = false; /* |true| */ @; 
+    bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
     stringstream cerr_strm;
 
     string thread_name = "";
 
-    bool error_stop_value = (scanner_node->run_state.error_stop_mode
-                       == Run_State::STOPPING)
+    bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
       ? true : false;
 
 #ifdef HAVE_PTHREAD_H
@@ -5495,17 +5494,17 @@ int save_if_ctr = scanner_node->if_ctr;
 @<Define |Scan_Parse| functions@>=
 
   if (arg == 0 || arg == 2)
-    {
+  {
 #if DEBUG_COMPILE
       if (DEBUG)
-        {
+      {
           cerr_strm << thread_name << "In `Scan_Parse::conditional()':"
                     << endl << "Eating tokens.";
 
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
           cerr_strm.str(""); 
-        }
+      }
 #endif /* |DEBUG_COMPILE|  */@; 
  
       YYSTYPE value; 
@@ -5807,7 +5806,7 @@ log_message(cerr_strm);
                 {
                   cerr_strm << thread_name 
                             << "In `Scan_Parse::conditional()':"
-                            << endl << "`curr_catcode' == `ELSEIF'."
+                            << endl << "`curr_catcode' == `ELSEIF'." << endl 
                             << "Pushing `IF' onto `scanner_node->rescan_stack' "
                             << "and returning 0."; 
 

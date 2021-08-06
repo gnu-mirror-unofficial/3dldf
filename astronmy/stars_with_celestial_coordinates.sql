@@ -3014,8 +3014,10 @@ order by  approx_rank_apparent_magnitude\G
 
 update Stars set common_name = "$\\mu$ Velorum" where approx_rank_apparent_magnitude = 113;
 
-update Stars set common_name = "$\\pi$ Puppis" where approx_rank_apparent_magnitude = 114;
-update Stars set common_name = "$\\alpha$ Muscae" where approx_rank_apparent_magnitude = 116;
+update Stars set common_name = "$\\alpha$ Muscae" where approx_rank_apparent_magnitude = 114;
+update Stars set common_name = "$\\pi$ Puppis" where approx_rank_apparent_magnitude = 116;
+
+
 
 update Stars set apparent_magnitude = 2.68, absolute_magnitude =  -3.35 where approx_rank_apparent_magnitude = 111;
 update Stars set apparent_magnitude = 2.69, absolute_magnitude =  -3.29 where approx_rank_apparent_magnitude = 112;
@@ -3462,11 +3464,14 @@ and declination_decimal_degrees >= -11.25 and declination_decimal_degrees < 5 or
 | Saiph       |
 +-------------+
 
+select * from Stars where common_name = "$\\pi$ Puppis"\G
+
+select * from Stars where bs_hr_number = 2773 or bs_hr_number = 4798\G
 
 
+update Stars set common_name = "$\alpha$ Muscae" where bs_hr_number = 4798;
 
-   
-   
+
 
 
 
