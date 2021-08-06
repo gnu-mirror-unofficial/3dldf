@@ -1,0 +1,252 @@
+
+scantokens "message \"here i am.\"";
+
+end;
+
+
+
+
+beginfig(1);
+
+  boolean a;
+  a := true; % false
+  boolean b;
+  b := false; % true
+  boolean c;
+  c := false; % true
+
+%% !! START HERE:  LDF 2021.08.06.  This doesn't work.  I'm going to have to
+%% rewrite the way conditionals work completely.
+  
+  if not a:
+    message "a is false.";
+    if c:
+      message "c is true.";
+    elseif not c:
+      message "c is false.";
+    fi;
+  elseif a:
+    message "a is true";
+    if c:
+      message "elseif case:  c is true.";
+    elseif not c:
+      message "elseif case:  c is false.";
+    fi;
+
+  fi;
+
+
+  % elseif b:
+  %   message "a is true and b is true.";
+  % else:
+  %   message "a is true and b is false.";
+
+  
+endfig with_projection parallel_x_y;
+
+verbatim_metapost "end";
+
+end;
+
+measure_text_header 
+   := "\setbox1=\hbox to 3cm{\lower .25cm\vbox to 1cm{\vfil}\hfil}%";
+
+numeric_vector nv;
+nv := measure_text "\box1";
+message "nv:";
+show nv;
+
+measure_text_header := "";  
+
+nv := measure_text "AAAAyyyy";
+message "nv:";
+show nv;
+
+end;
+
+show Diphda;
+show Nunki;
+show Menkent;
+show Alpheratz;
+show Mirach;
+show Saiph;
+show Kochab;
+show Al_Dhanab;
+show Rasalhague;
+show Algol;
+
+end;
+
+
+
+
+
+point p;
+path q;
+plane r;
+rectangle t;
+%show unit_rectangle;
+q := (0, -1);
+q += --;
+q += (0, 1);
+r := get_plane unit_rectangle;
+
+bool_point bp;
+
+bp := q intersection_point r;
+
+show bp;
+
+end;
+
+
+beginfig(1);
+
+  point p;
+  p := origin;
+
+  drawdot p with_pen pencircle scaled (6pt, 6pt, 6pt);
+  shift p (.5cm, 0);
+  drawdot p with_pen pencircle scaled (5.5pt, 5.5pt, 5.5pt);
+  shift p (.5cm, 0);
+  drawdot p with_pen pencircle scaled (5pt, 5pt, 5pt);
+  shift p (.5cm, 0);
+  drawdot p with_pen pencircle scaled (4.5pt, 4.5pt, 4.5pt);
+  shift p (.5cm, 0);
+  drawdot p with_pen pencircle scaled (4pt, 4pt, 4pt);
+  shift p (.5cm, 0);
+  drawdot p with_pen pencircle scaled (3.5pt, 3.5pt, 3.5pt);
+  shift p (.5cm, 0);
+  drawdot p with_pen pencircle scaled (3pt, 3pt, 3pt);
+endfig with_projection parallel_x_y;
+
+verbatim_metapost "end;";
+
+end;
+
+
+string s;
+%s := common_name alpha_centauri;
+
+
+s := "";
+show s;
+
+
+if (s == "abc"):
+  message "empty";
+else:
+  message "not empty";
+fi;
+
+
+
+end;
+
+
+
+picture pv[];
+
+draw origin -- (1, 1) on_picture pv0;
+
+output pv0 with_projection parallel_x_y;
+
+end;
+
+
+end;
+
+w := "abc.tex";
+
+string s;
+
+s := "abc";
+
+%% !! START HERE:  LDF 2021.7.5.  Add command for making writes append to file.
+%% Add command for closing.
+
+write s to w;
+
+%write w ("nnn");
+
+% write w (s);
+% write w (s);
+% write w (s);
+% write w (s);
+% write w ("def");
+
+end;
+
+
+%write w "def";
+
+%write w ("efg");
+
+5s:= "hij";
+
+%write w (s);
+
+%write w "ghi";
+% newwrite_vector wv;
+
+% wv += "abc";
+
+% show wv;
+
+end;
+
+
+
+
+wv += "def.tex";
+
+% show wv;
+% show wv0;
+
+
+end;
+
+def abc (a, b) {string s, point p} :=
+  message "Here I am";
+  show a;
+enddef;
+
+
+show abc;
+
+string s;
+string t;
+point p, q;
+q := p := origin;
+
+s := "def";
+abc (q, t) {s, p};
+
+end;
+
+%% ** (2)
+
+verbatim_metapost "end";
+  
+end;  
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
