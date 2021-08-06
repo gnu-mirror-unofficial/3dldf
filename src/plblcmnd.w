@@ -161,7 +161,7 @@ Added \§with text color optional> and \§with dot color optional>.
 
   string* s;
   
-      s = new string;
+  s = new string;
 
   *s = label_strm.str();
 
@@ -1198,7 +1198,6 @@ Added this rule.
 @=label_suffix: URT@>@/
 {
   @=$$@> = URT;
-
 };
 
 @q ***** (5) label_suffix --> ULFT.@>
@@ -1216,9 +1215,7 @@ Added this rule.
 
 @=label_suffix: ULFT@>@/
 {
-
   @=$$@> = ULFT;
-
 };
 
 @q ***** (5) label_suffix --> LRT.@>
@@ -1236,9 +1233,7 @@ Added this rule.
 
 @=label_suffix: LRT@>@/
 {
-
   @=$$@> = LRT;
-
 };
 
 @q ***** (5) label_suffix --> LLFT.@>

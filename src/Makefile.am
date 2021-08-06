@@ -1068,13 +1068,14 @@ sample5.dvi: sample5.tex sample5.0 sample_5_star_info_combined.tex
             sample_5_5.tex sample_5_6.tex sample_5_7.tex | sort -n | grep -v ^% > sample_5_star_info_combined.tex
 	tex sample5.tex
 
-sample5.0 sample5.1: sample5.mp 
+sample5.0 sample5.1 sample_5_star_info_combined.tex: sample5.mp 
 	mpost sample5.mp
 
 sample5.mp: 3dldf$(EXEEXT) sample5.ldf astronmy.lmc sample5.aux xxx.lmc
 	3dldf$(EXEEXT) sample5.ldf
 
-sample5_a4.dvi: sample5_a4.tex sample5.1 sample_5_star_info_combined.tex
+sample5_a4.dvi: sample5_a4.tex sample_5_star_info_combined.tex
+	tex sample5_a4.tex
 	tex sample5_a4.tex 
 
 sample5_a4.ps: sample5_a4.dvi
