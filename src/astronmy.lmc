@@ -754,7 +754,8 @@ enddef;
 
 macro plot_star_on_spherical_biangle;
 
-def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos, numeric shift_x, numeric shift_y} =
+def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos, numeric shift_x, numeric shift_y,
+                                    boolean suppress_dot, boolean suppress_text_label} =
   
   numeric decl;
   numeric ra;
@@ -763,6 +764,13 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   point y_axis_point;
   numeric box_wd;
   numeric box_ht;
+  string label_str;
+  string label_suffix;
+  
+  numeric shift_x_val;
+  numeric shift_y_val;
+
+  string temp_str;
 
   color ccolor;
   
@@ -845,46 +853,72 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       u := "";
     fi;
 
-    s := "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S
+    if suppress_text_label and suppress_dot:
+      temp_str := " {\bf (Not plotted)}";
+    else:
+      temp_str := "";
+    fi;
+    
+    s := "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
          & "}{" & decimal ra & "}{" & decimal decl & "}{" & decimal (bi_ang0 + 1) & "}";
     
-
     write s to nw[bi_ang0];
     write s to star_info_combined;
 
     if label_pos == label_pos_zero:
-      label("{\medium " & common_name S & "}", R[point_number] shifted (shift_x, shift_y))
-        with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := "";
+      shift_x_val := shift_x;
+      shift_y_val := shift_y;
     elseif label_pos == label_pos_top:
-      label.top("{\medium " & common_name S & "}", R[point_number] shifted (shift_x, basic_shift_val + shift_y))
-        with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".top";
+      shift_x_val := shift_x;
+      shift_y_val := basic_shift_val + shift_y;
     elseif label_pos == label_pos_bot:
-      label.bot("{\medium " & common_name S & "}", R[point_number] shifted (shift_x, -basic_shift_val + shift_y))
-        with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".bot";
+      shift_x_val := shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
     elseif label_pos == label_pos_lft:
-      label.lft("{\medium " & common_name S & "}", R[point_number] shifted (-basic_shift_val + shift_x, shift_y))
-        with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".lft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := shift_y;
     elseif label_pos == label_pos_rt:
-      label.rt("{\medium " & common_name S & "}", R[point_number] shifted (basic_shift_val + shift_x, shift_y))
-        with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".rt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := shift_y;
     elseif label_pos == label_pos_urt:
-      label.urt("{\medium " & common_name S & "}", R[point_number]
-	  shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
-          with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".urt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := basic_shift_val + shift_y;
     elseif label_pos == label_pos_ulft:
-      label.ulft("{\medium " & common_name S & "}", R[point_number]
-	  shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
-          with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".ulft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := basic_shift_val + shift_y;
     elseif label_pos == label_pos_lrt:
-      label.lrt("{\medium " & common_name S & "}", R[point_number]
-	  shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
-          with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".lrt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
     elseif label_pos == label_pos_llft:
-      label.llft("{\medium " & common_name S & "}", R[point_number]
-	  shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
-          with_text_color ccolor on_picture qv[bi_ang0];
+      label_suffix := ".llft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
     fi;
 
+    s := "{\medium " & common_name S & "}";
+
+    label_str := "label" & label_suffix & "(s, R[" & decimal point_number & "] shifted ("
+                 & decimal shift_x_val & ", " & decimal shift_y_val & ")) with_text_color ccolor on_picture qv["
+                 & decimal bi_ang0 & "];";
+    
+    % message "s == " & s;
+    % message "label_str == " & label_str;
+
+    if not suppress_text_label:
+      scantokens label_str;
+    else:
+      message "Suppressing text label for " & common_name S & ".";
+      %pause;
+    fi;
+    
     numeric app_mag;
     pen sstar_pen;
    
@@ -905,8 +939,13 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     else:
       sstar_pen := star_pen[5];
     fi;
-    
-    drawdot R[point_number] with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
+
+    if not suppress_dot:
+      drawdot R[point_number] with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
+    else:
+      message "Suppressing dot for " & common_name S & ".";
+      %pause;
+    fi;
 
     box_wd := .75cm;
     box_ht := .5cm;
@@ -1110,7 +1149,7 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
 %% etc.  !! TODO:  Try to fix this!
 
   
-  message "In `draw_extra_label_on_spherical_biangle':  Before conditional.";
+  %message "In `draw_extra_label_on_spherical_biangle':  Before conditional.";
   
   if suppress_text_label:
     ;
@@ -1149,7 +1188,7 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
     fi;
   fi;
   
-  message "After conditional.";
+  %message "After conditional.";
 
 
   numeric app_mag;
