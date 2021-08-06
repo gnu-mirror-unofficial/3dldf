@@ -1,11 +1,4 @@
 
-scantokens "message \"here i am.\"";
-
-end;
-
-
-
-
 beginfig(1);
 
   boolean a;
@@ -17,16 +10,38 @@ beginfig(1);
 
 %% !! START HERE:  LDF 2021.08.06.  This doesn't work.  I'm going to have to
 %% rewrite the way conditionals work completely.
+
+  message "*** Conditionals start here.";
+
+  message "*** Conditional 1.";
   
-  if not a:
-    message "a is false.";
+  if a:
+    message "a is true.";
     if c:
       message "c is true.";
     elseif not c:
       message "c is false.";
     fi;
-  elseif a:
-    message "a is true";
+  elseif not a:
+    message "a is false";
+    if c:
+      message "elseif case:  c is true.";
+    elseif not c:
+      message "elseif case:  c is false.";
+    fi;
+  fi;
+
+  message "*** Conditional 2.";
+ 
+  if not b:
+    message "b is false.";
+    if c:
+      message "c is true.";
+    elseif not c:
+      message "c is false.";
+    fi;
+  elseif b:
+    message "b is true";
     if c:
       message "elseif case:  c is true.";
     elseif not c:
@@ -35,11 +50,7 @@ beginfig(1);
 
   fi;
 
-
-  % elseif b:
-  %   message "a is true and b is true.";
-  % else:
-  %   message "a is true and b is false.";
+  message "*** End of Conditionals.";
 
   
 endfig with_projection parallel_x_y;

@@ -247,6 +247,18 @@ Pointers to these variables, and to |string thread_name|, are passed to
   bool warning_stop_value = true;
   string thread_name      = "";
 
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << thread_name << "Entering `yylex'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif
+
 @q **** (4) Error handling:  |scanner_node == 0|.@> 
 
 @ Error handling:  |scanner_node == 0|.  Signal an error and return 
@@ -263,7 +275,7 @@ Added this section.
   if (scanner_node == static_cast<Scanner_Node>(0))
     {
 
-      cerr_strm << "ERROR! In `yylex()':"
+      cerr_strm << "ERROR! In `yylex':"
                 << "`scanner_node' == 0." 
                 << endl << "Can't continue. Exiting function "
                 << "with return value `TERMINATE'."
@@ -309,20 +321,6 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
                                                 &warning_stop_value);
 
   const Run_State* run_state = scanner_node->get_run_state();
-
-@q *** (3)@> 
-
-#if DEBUG_COMPILE
-  if (DEBUG)
-    {
-      cerr_strm << thread_name << "Entering `yylex'."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif
 
 @q *** (3).@> 
 @
