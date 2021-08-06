@@ -157,8 +157,8 @@ Now including \filename{pens.web}.
 #include "parser.h++"   
 #include "parser_1.h++"   
 
-@q * (1) yylex(). @>
-@* {\bf yylex()} definition.
+@q * (1) yylex. @>
+@* {\bf yylex} definition.
 |yylex| is declared in \filename{parser.w}, and the declaration is written to
 \filename{parser.h++}, which this file includes, so there's no need to
 repeat it here.
@@ -377,12 +377,11 @@ Now calling |scanner_node->get_thread_name_and_stop_values|.
        if (rescan_value == static_cast<void*>(0))
          cerr_strm << "`rescan_value' == 0" << endl;
        else
-         {
-           cerr_strm << "`rescan_value' != 0" << endl;
-         }
+       {
+          cerr_strm << "`rescan_value' != 0" << endl;
+       }
 
-cerr_strm << "`rescan_retest' == " 
-                 << rescan_retest << ".";
+       cerr_strm << "`rescan_retest' == " << rescan_retest << "." << endl;
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
@@ -484,8 +483,7 @@ cerr_strm << "`rescan_retest' == "
 @q **** (4) (actually ``NEWLINES'') must be handled specially.     @>
 
 @ |scanner_node->get_in_type() == Io_Struct::STDIN_TYPE|.
-Reading from standard input.  ``RETURNS'' 
-(actually ``NEWLINES'') must be handled specially.
+Reading from standard input.  ``RETURNS'' (actually ``NEWLINES'') must be handled specially.
 \initials{LDF 2004.09.09.}
 
 \LOG
@@ -612,7 +610,7 @@ Added code to this section for popping |scanner_node->in| if
 @<Define scanning functions@>=
  
       if (status == 0)
-          {
+      {
 
 #if DEBUG_COMPILE
             if (DEBUG) 
@@ -627,13 +625,12 @@ Added code to this section for popping |scanner_node->in| if
               }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4) Single-threaded input and inclusion.  Return |SEMI_COLON| @>   
-@q **** (4) and continue reading from standard input when             @>   
-@q **** (4) this function is called again.                            @>   
+@q **** (4) Single-threaded input and inclusion.  Return |SEMI_COLON|   @>   
+@q **** (4) and continue reading from standard input when this function @>   
+@q **** (4) is called again.                                            @>   
 
-@ Single-threaded input and inclusion.  Return |SEMI_COLON| and
-continue reading from standard input when this function is called
-again. 
+@ Single-threaded input and inclusion.  Return |SEMI_COLON| and continue reading from 
+standard input when this function is called again. 
 \initials{LDF 2004.09.30.}
 
 \LOG
@@ -655,20 +652,20 @@ Do I need to change anything here?
 
 @<Define scanning functions@>=
 
-  if (   scanner_node->get_in_type() == Io_Struct::STDIN_TYPE 
-      && !(   run_state->multithread_input 
-           || run_state->multithread_include))
+            if (   scanner_node->get_in_type() == Io_Struct::STDIN_TYPE 
+                && !(   run_state->multithread_input 
+                     || run_state->multithread_include))
 
-    {
-      scanner_node->set_first_call_yylex(true);
-      return SEMI_COLON;
-    }
+            {
+               scanner_node->set_first_call_yylex(true);
+               return SEMI_COLON;
+            }
 
-goto yylex_start;
+             goto yylex_start;
 
 @q **** (4) @>   
 
-          } /* |if (status == 0)|  */
+        } /* |if (status == 0)|  */
  
 @q *** (3).@> 
 @
@@ -718,7 +715,7 @@ Added this section.
                 << "an `end' or `endinput' command."
                 << endl << "I'll pretend this one does and continue.";
 
-log_message(cerr_strm); 
+      log_message(cerr_strm); 
       cerr_message(cerr_strm); 
       cerr_strm.str(""); 
       
@@ -879,39 +876,39 @@ Now checking for |!entry->is_true_internal|.
       
 #if DEBUG_COMPILE
        if (DEBUG)
-         {
+       {
            cerr_strm << thread_name 
                      << "In `yylex()': `lookup(" << value->string_value
-                << ")' succeeded." << endl 
-                << "`type' == `" << name_map[entry->get_type()] << "'.";
+                     << ")' succeeded." << endl 
+                     << "`type' == `" << name_map[entry->get_type()] << "'.";
 
-if (entry->is_spark())
-             {
+           if (entry->is_spark())
+           {
                cerr << value->string_value << " is a spark. Will return " 
                     << name_map[entry->get_type()]
                     << endl;
-             }
+           }
 
            else if (entry->is_internal())
-             {
+           {
                cerr << value->string_value << " is an internal quantity. "
                     << "Will return " 
                     << name_map[curr_catcode]
                     << endl;
-             }
+           }
 
            else if (entry->is_regular())
-             {
+           {
                cerr << value->string_value << " is regular symbolic token. "
                     << "Will return " << name_map[curr_catcode]
                     << endl;
-             }
+           }
 
            log_message(cerr_strm);
            cerr_message(cerr_strm);
            cerr_strm.str();
 
-         } /* |if (DEBUG)|  */
+       } /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -2114,7 +2111,7 @@ redirection.
 @<Define scanning functions@>=
 
          else if (curr_catcode == PERCENT)
-	    {
+            {
 #if DEBUG_COMPILE
                 if (DEBUG)
                   {
@@ -2126,17 +2123,17 @@ redirection.
                       cerr_strm.str();      
                   }
 #endif /* |DEBUG_COMPILE|  */@; 
- 	
-	       for (;;)
-		  {
+        
+               for (;;)
+                  {
                     prev_char = curr_char;
-		    curr_char = scanner_node->get();
+                    curr_char = scanner_node->get();
                     ++curr_position;
 
 @q ******* (7).@> 
-		    if (curr_char == EOF)
-		       {
-			  cerr_strm << thread_name 
+                    if (curr_char == EOF)
+                       {
+                          cerr_strm << thread_name 
                                     << "WARNING! In `sub_yylex()':"
                                     << endl 
                                     << "File \"" 
@@ -2153,16 +2150,16 @@ redirection.
 
 #if 0 
                           location->first_line    = start_line;
-          		  location->first_column = start_column;
-          		  location->last_line     = curr_line;
-          		  location->last_column  = curr_column;
-          		  location->position     = curr_position;
+                          location->first_column = start_column;
+                          location->last_line     = curr_line;
+                          location->last_column  = curr_column;
+                          location->position     = curr_position;
 #endif 
 
                           scanner_node->set_token_string(curr_token_string);
-			  return TERMINATE;  
+                          return TERMINATE;  
 
-		       } /* |if (curr_char == EOF)|  */
+                       } /* |if (curr_char == EOF)|  */
 
 @q ******* (7).@> 
                     else if (curr_char == '\n')
@@ -2260,7 +2257,7 @@ else if (curr_catcode == DOUBLE_QUOTE)
 @q ******* (7).@>
 
             if (curr_char == '\"' && prev_char != '\\')
-	       {
+               {
                   ++curr_column;
 #if DEBUG_COMPILE
                   if (DEBUG)
@@ -2279,18 +2276,18 @@ else if (curr_catcode == DOUBLE_QUOTE)
                     }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-	          goto finish;
+                  goto finish;
 
                } /* |if (curr_char == '\"' && prev_char != '\\')|  */
 
 @q ******* (7).@> 
 
-	    else if (curr_char == '\n')
-	       {
+            else if (curr_char == '\n')
+               {
                   ++curr_line;
                   curr_column = 0;
 
-	          cerr_strm << thread_name 
+                  cerr_strm << thread_name 
                             << "ERROR! In `sub_yylex()':"
                             << endl 
                             << "Line ends before string does:  \"" 
@@ -2311,8 +2308,8 @@ else if (curr_catcode == DOUBLE_QUOTE)
 @q ******* (7).@> 
 
             else if (curr_char == EOF)
- 	       {
-	          cerr_strm << thread_name << "ERROR! In `sub_yylex()':"
+               {
+                  cerr_strm << thread_name << "ERROR! In `sub_yylex()':"
                             << endl 
                             << "File ends before string does:  \"" 
                             << curr_token_string << "\"" 
