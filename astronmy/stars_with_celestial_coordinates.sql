@@ -3145,8 +3145,6 @@ update Stars set approx_rank_apparent_magnitude = 0 where bs_hr_number = 4914;
 
 update Stars set apparent_magnitude = , absolute_magnitude = where approx_rank_apparent_magnitude = ;
 
-/* !! START HERE:  LDF 2021.07.29.  */ 
-
 update Stars set apparent_magnitude = 2.80, absolute_magnitude =-3.40 where approx_rank_apparent_magnitude = 131;
 
 update Stars set apparent_magnitude = 2.81, absolute_magnitude =-0.63 where approx_rank_apparent_magnitude = 132;

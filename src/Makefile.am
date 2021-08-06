@@ -1000,7 +1000,7 @@ pdf: sample5.pdf
 
 .PHONY: ps
 
-ps: sample5.ps sample5_a4.ps
+ps: sample5.ps # sample5_a4.ps
 
 .PHONY: dvi
 
