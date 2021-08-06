@@ -5428,7 +5428,7 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
                         int arg)
 {
 #if DEBUG_COMPILE
-    bool DEBUG = false; /* |true| */ @; 
+    bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
     stringstream cerr_strm;
@@ -5466,7 +5466,7 @@ Scan_Parse::conditional(Scanner_Node scanner_node,
     if (DEBUG)
       {
           cerr_strm << thread_name 
-                    << "Entering `Scan_Parse::conditional()'.";
+                    << "Entering `Scan_Parse::conditional'.";
           
           log_message(cerr_strm); 
           cerr_message(cerr_strm); 
@@ -5497,7 +5497,7 @@ int save_if_ctr = scanner_node->if_ctr;
 #if DEBUG_COMPILE
       if (DEBUG)
       {
-          cerr_strm << thread_name << "In `Scan_Parse::conditional()':"
+          cerr_strm << thread_name << "In `Scan_Parse::conditional':"
                     << endl << "Eating tokens.";
 
           log_message(cerr_strm); 
@@ -5534,7 +5534,7 @@ int save_if_ctr = scanner_node->if_ctr;
             {
 
               cerr_strm << thread_name 
-                        << "In `Scan_Parse::conditional()':"
+                        << "In `Scan_Parse::conditional':"
                         << endl 
                         << "`curr_catcode' == " << name_map[curr_catcode]
                         << ".";
@@ -5560,7 +5560,7 @@ int save_if_ctr = scanner_node->if_ctr;
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::conditional()':"
+                 << "In `Scan_Parse::conditional':"
                  << endl 
                  << "`curr_catcode' == `IF'. " 
                  << "Incrementing `scanner_node->if_ctr'.";
@@ -5591,7 +5591,7 @@ int save_if_ctr = scanner_node->if_ctr;
           {
 
             cerr_strm << thread_name 
-                      << "In `Scan_Parse::conditional()':"
+                      << "In `Scan_Parse::conditional':"
                       << endl 
                       << "`curr_catcode' == `FI'. "
                       << "Decrementing `scanner_node->if_ctr'.";
@@ -5629,7 +5629,7 @@ int save_if_ctr = scanner_node->if_ctr;
                     {
 
 cerr_strm << thread_name 
-                                << "In `Scan_Parse::conditional()':"
+                                << "In `Scan_Parse::conditional':"
                                 << endl 
                                 << "`scanner_node->if_ctr' < `save_if_ctr'."
                                 << endl << "Returning 0.";
@@ -5665,7 +5665,7 @@ cerr_strm << thread_name
             {
 
                 cerr_strm << thread_name 
-                          << "In `Scan_Parse::conditional()':"
+                          << "In `Scan_Parse::conditional':"
                           << endl 
                           << "`scanner_node->if_ctr' >= `save_if_ctr'."
                           << endl << "Continuing.";
@@ -5703,7 +5703,7 @@ cerr_strm << thread_name
                 {
 
                   cerr_strm << thread_name 
-                            << "In `Scan_Parse::conditional()':"
+                            << "In `Scan_Parse::conditional':"
                             << endl 
                             << "`curr_catcode' == `ELSE'. " 
                             << "Scanning next token.";
@@ -5729,7 +5729,7 @@ cerr_strm << thread_name
               if (curr_catcode != COLON)
                 {
                   cerr_strm << thread_name 
-                            << "ERROR! In `Scan_Parse::conditional()':"
+                            << "ERROR! In `Scan_Parse::conditional':"
                             << endl << "`else' not followed by `COLON'."
                             << endl << "Returning 1."; 
 
@@ -5770,7 +5770,7 @@ cerr_strm << thread_name
                         if (DEBUG) 
                           {
                               cerr_strm << thread_name 
-                                        << "In `Scan_Parse::conditional()':"
+                                        << "In `Scan_Parse::conditional':"
                                         << endl << "`scanner_node->if_ctr' <= `save_if_ctr'. "
                                         << "Returning 0."; 
 
@@ -5807,7 +5807,7 @@ cerr_strm << thread_name
               if (DEBUG) 
                 {
                   cerr_strm << thread_name 
-                            << "In `Scan_Parse::conditional()':"
+                            << "In `Scan_Parse::conditional':"
                             << endl << "`curr_catcode' == `ELSEIF'." << endl 
                             << "Pushing `IF' onto `scanner_node->rescan_stack' "
                             << "and returning 0."; 
@@ -5835,7 +5835,7 @@ cerr_strm << thread_name
                 if (DEBUG) 
                   {
                     cerr_strm << thread_name 
-                              << "In `Scan_Parse::conditional()':"
+                              << "In `Scan_Parse::conditional':"
                               << endl << "`curr_catcode' == "
                               << name_map[curr_catcode] << ". Continuing."; 
                     
@@ -5878,7 +5878,7 @@ cerr_strm << thread_name
 #if DEBUG_COMPILE
    else if (DEBUG)
      {
-         cerr_strm << thread_name << "In `Scan_Parse::conditional()':"
+         cerr_strm << thread_name << "In `Scan_Parse::conditional':"
                    << endl << "Will continue parsing.";
 
          log_message(cerr_strm); 
