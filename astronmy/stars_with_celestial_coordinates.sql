@@ -3469,13 +3469,18 @@ select * from Stars where common_name = "$\\pi$ Puppis"\G
 select * from Stars where bs_hr_number = 2773 or bs_hr_number = 4798\G
 
 
-update Stars set common_name = "$\alpha$ Muscae" where bs_hr_number = 4798;
+select * from Stars where bs_hr_number = 4798\G
+
+update Stars set common_name = "$\\alpha$ Muscae" where bs_hr_number = 4798;
 
 select common_name, approx_rank_apparent_magnitude, right_ascension_decimal_degrees, declination_decimal_degrees
 from Stars where common_name is not null and common_name <> ""
 and right_ascension_decimal_degrees >= 112.5 and right_ascension_decimal_degrees <= 157.5
 and declination_decimal_degrees >= -67.5 and declination_decimal_degrees <= -45
 and approx_rank_apparent_magnitude <= 200 order by approx_rank_apparent_magnitude;
+
+select common_name, approx_rank_apparent_magnitude, apparent_magnitude, absolute_magnitude from Stars
+where common_name = "Merak";
 
 +--------------------+--------------------------------+---------------------------------+-----------------------------+
 | Avior              |                             40 |                         125.723 |                    -59.5694 |
@@ -3487,5 +3492,8 @@ and approx_rank_apparent_magnitude <= 200 order by approx_rank_apparent_magnitud
 +--------------------+--------------------------------+---------------------------------+-----------------------------+
 
 
+select * from Stars where common_name = "Merak"\G
 
+update Stars set apparent_magnitude = 2.34, absolute_magnitude = 0.41 where common_name = "Merak"\G
 
+80. Beta Ursae Majoris        Merak             11 02 +56.4  149.1 +54.8  A1V           2.34   0.41   41.07 0.60    79
