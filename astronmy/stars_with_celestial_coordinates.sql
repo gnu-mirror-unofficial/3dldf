@@ -3497,3 +3497,32 @@ select * from Stars where common_name = "Merak"\G
 update Stars set apparent_magnitude = 2.34, absolute_magnitude = 0.41 where common_name = "Merak"\G
 
 80. Beta Ursae Majoris        Merak             11 02 +56.4  149.1 +54.8  A1V           2.34   0.41   41.07 0.60    79
+
+select common_name from Stars where common_name is not null and common_name <> ""
+and approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200
+and right_ascension_decimal_degrees > 247.5 and right_ascension_decimal_degrees < 292.5
+and declination_decimal_degrees >= -56.25 and declination_decimal_degrees < -22.5 order by common_name;
+
++-------------------+
+| common_name       |
++-------------------+
+| $\beta$ Arae      |
+| $\eta$ Sagittarii |
+| $\iota^1$ Scorpii |
+| $\mu^1$ Scorpii   |
+| $\tau$ Scorpii    |
+| $\zeta$ Arae      |
+| Alnasl            |
+| Antares           |
+| Ascella           |
+| Choo              |
+| Girtab            |
+| Kaus Australis    |
+| Kaus Borealis     |
+| Kaus Meridionalis |
+| Lesath            |
+| Nunki             |
+| Sargas            |
+| Shaula            |
+| Wei               |
++-------------------+
