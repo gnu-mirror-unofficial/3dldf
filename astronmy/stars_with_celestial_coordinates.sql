@@ -3503,6 +3503,8 @@ and approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200
 and right_ascension_decimal_degrees > 247.5 and right_ascension_decimal_degrees < 292.5
 and declination_decimal_degrees >= -56.25 and declination_decimal_degrees < -22.5 order by common_name;
 
+select * from Stars where approx_rank_apparent_magnitude = 175\G
+
 +-------------------+
 | common_name       |
 +-------------------+
