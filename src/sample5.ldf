@@ -177,7 +177,7 @@ color line_color;
 %% ** (2) 
 
 radius := 7cm;
-do_black := true; %% false
+do_black := false; %% true
 
 if do_black:
   line_color := white;
@@ -809,8 +809,8 @@ plot_star_on_spherical_biangle {alpheratz, 54, label_pos_urt, -.4cm, 0, false, f
 
 plot_star_on_panel (temp_star_panel_point) {alpheratz, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {alpheratz, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, true};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {alpheratz, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_rt, 0, 0, true};
 
 %% *** (3) 55. Mirach
 
@@ -821,7 +821,7 @@ plot_star_on_spherical_biangle {mirach, 55, label_pos_top, -.25cm + 2pt, 0, fals
 plot_star_on_panel (temp_star_panel_point) {mirach, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {mirach, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false};
+                         -2pt, 0, false};
 
 %% *** (3) 56. Saiph
 
@@ -1021,6 +1021,8 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {mintaka, temp_star_panel_p
                          0, 0, false};
 
 %% *** (3) 74. Caph
+
+%% !! START HERE: LDF 2021.08.09.  Add box for `do_black'.
 
 plot_star_on_sphere (star_point) {radius, caph};
 
@@ -1703,6 +1705,9 @@ plot_star_on_spherical_biangle {beta_hydri, 134, label_pos_top, -.125, 0, false,
 
 plot_star_on_panel (temp_star_panel_point) {beta_hydri, star_point};
 
+%% !! START HERE: LDF 2021.08.09.  Do I have arg. for suppressing label?  Find out what picture I have
+%% to draw on.
+
 plot_star_on_flat_panel (temp_star_flat_panel_point) {beta_hydri, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false};
 
@@ -1737,7 +1742,7 @@ plot_star_on_spherical_biangle {algenib, 137, label_pos_top, 6pt, 0, false, fals
 
 plot_star_on_panel (temp_star_panel_point) {algenib, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {algenib, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {algenib, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
                          0, 0, false};
 
 %% *** (3) 138. Turais
