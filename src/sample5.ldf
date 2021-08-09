@@ -102,7 +102,6 @@ path quadrant[][];
 path flat_quadrant[][];
 path temp_path[];
 
-
 point temp_star_panel_point;
 temp_star_panel_point := origin;
 
@@ -163,6 +162,7 @@ boolean Left;
 boolean Right;
 boolean Bottom;
 boolean Top;
+color label_color;
 
 Left   := false;
 Right  := true;
@@ -173,15 +173,18 @@ tab_width := .4cm;
 
 color line_color;
 
+
 %% ** (2) 
 
 radius := 7cm;
-do_black := false; %% true
+do_black := true; %% false
 
 if do_black:
   line_color := white;
+  label_color := white;
 else:
-  line_color := dark_gray;  
+  line_color  := dark_gray;  
+  label_color := black;
 fi;
   
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
@@ -2138,10 +2141,11 @@ plot_star_on_sphere (star_point) {radius, psi_ursae_majoris};
 
 plot_star_on_spherical_biangle {psi_ursae_majoris, 173, label_pos_top, 0, 0, false, true};
 
-%% !! START HERE: LDF 2021.08.09.  Fix this!  Color needs to be set to white for `do_black'.
+%% !! START HERE: LDF 2021.08.09.  Fix this for other labels.  Note that picture needs
+%% to be changed to qv[x].
 
 label.bot("{\medium\vbox{\hbox{$\psi$ Ursae}\vskip-2pt\hbox{\hskip 4pt Majoris}}}", R173 shifted (0, 0pt))
-         on_picture bi_ang_pict[4];
+         with_text_color label_color on_picture qv[4];
 
 plot_star_on_panel (temp_star_panel_point) {psi_ursae_majoris, star_point};
 
