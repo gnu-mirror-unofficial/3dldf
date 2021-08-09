@@ -1298,10 +1298,25 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
     sstar_pen_one := star_pen[6];
   fi;
 
+%% Drawing the edges twice is necessary in order to ensure that the drawn paths
+%% aren't covered up by the drawdots, depending on the order in which the drawing
+%% commands are executed.  TODO:  Look into this!
+%% In addition, the partial dot on the right side for Gomeisa is so small that it's
+%% nearly completely covered by the drawn edge.  Think about changing this.  Maybe
+%% add a conditional for drawing the edge or edges.
+%% LDF 2021.08.09.
+  
   if do_black and edge_point:
+    draw curr_edge0 on_picture qv[bi_ang_one];
+    draw curr_edge0 on_picture qv[bi_ang_two];
+    draw curr_edge1 on_picture qv[bi_ang_one];
     draw curr_edge1 on_picture qv[bi_ang_two];
-    drawdot P45 with_pen sstar_pen_one with_color white on_picture qv[bi_ang_two];
-    drawdot P45 with_pen sstar_pen with_color dark_gray on_picture qv[bi_ang_two];
+    drawdot P45 with_pen sstar_pen with_color white on_picture qv[bi_ang_one];
+    drawdot P45 with_pen sstar_pen with_color white on_picture qv[bi_ang_two];
+    draw curr_edge0 on_picture qv[bi_ang_one];
+    draw curr_edge0 on_picture qv[bi_ang_two];
+    draw curr_edge1 on_picture qv[bi_ang_one];
+    draw curr_edge1 on_picture qv[bi_ang_two];
   else:
     drawdot P45 with_pen sstar_pen with_color ccolor on_picture qv[bi_ang_two];
   fi;
