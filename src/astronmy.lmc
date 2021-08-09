@@ -92,8 +92,8 @@ def get_spherical_biangles {numeric rad} =
 
   %draw p2 -- p3;  %% Vertical line through origin.
 
-  %dotlabel.bot("$p_2$", p2);
-  %dotlabel.top("$p_3$", p3);
+  dotlabel.bot("$p_2$", p2);
+  dotlabel.top("$p_3$", p3);
 
   j := 4;
   for i = 11.25 step 11.25 until 78.75:
@@ -152,8 +152,8 @@ def get_spherical_biangles {numeric rad} =
   p22 := (0, -.25a);
   p23 := (0, .25a);
 
-  %dotlabel.bot("$p_{22}$", p22);
-  %dotlabel.top("$p_{23}$", p23);
+  dotlabel.bot("$p_{22}$", p22);
+  dotlabel.top("$p_{23}$", p23);
   label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
   label.rt("$90^\circ$", p23 shifted (.25cm, 0));
 
@@ -975,27 +975,31 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 enddef;
 
 %% ** (2) macro draw_extra_label_on_spherical_biangle
-
+    
 macro draw_extra_label_on_spherical_biangle;
 
 def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_ang_one, numeric bi_ang_two,
                                            boolean left_or_right, boolean bottom_or_top, numeric label_pos,
                                            numeric shift_x, numeric shift_y, boolean do_labels,
-                                           boolean suppress_text_label} =
+                                           boolean suppress_text_label, boolean draw_box, boolean edge_point} =
 
   point P[];
-
+  path A;
+  
   numeric RA;
   numeric Decl;
 
   color ccolor;
+  color line_color;
 
   if do_black:
     ccolor := white;
+    line_color := dark_gray;
   else:
     ccolor := black;
+    line_color := black;
   fi;
-  
+
   RA := right_ascension_decimal_degrees S;
 
   Decl := declination_decimal_degrees S;
@@ -1010,22 +1014,31 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
 
   path curr_edge[];
 
-  % draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[bi_ang_one];
+  % draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[bi_ang_one];
+  % draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];
   % draw edge2 with_pen pencircle scaled (3pt, 3pt) with_color blue on_picture qv[bi_ang_one];
   % draw edge3 with_pen pencircle scaled (3pt, 3pt) with_color red on_picture qv[bi_ang_one];
   
   if bottom_or_top and left_or_right:         %% top right
     %message "top right.";
-    curr_edge0 := edge1;
+    curr_edge0 := edge1;                      %% top right 
+    curr_edge1 := edge0;                      %% top left
+
   elseif bottom_or_top and not left_or_right: %% top left
-    %message "top left.";
-    curr_edge0 := edge0;
+
+    %message "top left.";                     
+    curr_edge0 := edge0;                      %% top left
+    curr_edge1 := edge1;                      %% top right
+
   elseif not bottom_or_top and left_or_right: %% bottom right
     %message "bottom right.";
-    curr_edge0 := edge3;
+    curr_edge0 := edge3;                      %% bottom right
+    curr_edge1 := edge2;                      %% bottom left
+
   else:                                       %% bottom left
     %message "bottom left.";
-    curr_edge0 := edge2;
+    curr_edge0 := edge2;                      %% bottom left
+    curr_edge1 := edge3;                      %% bottom right
   fi;
 
   for i = 0 upto (length Q - 1):
@@ -1137,6 +1150,26 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
 
   P45 := (star_point rotated_around (P43, P44) 180) rotated_around (P8, P27) 180;
 
+  numeric_vector nv;
+  numeric n;
+  numeric labeloffset;
+  labeloffset := 3pt;
+  
+  string s;
+
+  s := "{\medium " & common_name S & "}";
+    
+  nv := measure_text s;
+
+  % message "nv:";
+  % show nv;
+
+  n := nv0;
+  
+  %pause;
+    
+  A := box_text (P45, s);
+  
   % drawdot P45 with_pen pencircle scaled (5pt, 5pt) with_color red on_picture qv[bi_ang_one];
   % drawdot P45 with_pen pencircle scaled (5pt, 5pt) with_color ccolor on_picture qv[bi_ang_two];
   
@@ -1150,6 +1183,9 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
 
   
   %message "In `draw_extra_label_on_spherical_biangle':  Before conditional.";
+
+%% !! START HERE: LDF 2021.08.09.  Add code for putting boxes around text in the other
+%% cases, i.e., not "rt".  I only need to do this for cases that actually occur.
   
   if suppress_text_label:
     ;
@@ -1157,18 +1193,37 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
     if label_pos == label_pos_zero:
       label("{\medium " & common_name S & "}", P45 shifted (shift_x, shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	draw A shifted (shift_x, shift_y) on_picture qv[bi_ang_two];
+      fi;
     elseif label_pos == label_pos_top:
       label.top("{\medium " & common_name S & "}", P45 shifted (shift_x, basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	draw A shifted (shift_x, basic_shift_val + shift_y) on_picture qv[bi_ang_two];
+      fi;
     elseif label_pos == label_pos_bot:
       label.bot("{\medium " & common_name S & "}", P45 shifted (shift_x, -basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	draw A shifted (shift_x, -basic_shift_val + shift_y) on_picture qv[bi_ang_two];
+      fi;
     elseif label_pos == label_pos_lft:
       label.lft("{\medium " & common_name S & "}", P45 shifted (-basic_shift_val + shift_x, shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	draw A shifted (-basic_shift_val + shift_x, shift_y) on_picture qv[bi_ang_two];
+      fi;
     elseif label_pos == label_pos_rt:
       label.rt("{\medium " & common_name S & "}", P45 shifted (basic_shift_val + shift_x, shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	draw A shifted (labeloffset + .5n + basic_shift_val + shift_x, shift_y) with_color line_color
+	  on_picture bi_ang_pict[bi_ang_two];
+	if do_black:
+	  fill A shifted (labeloffset + .5n + basic_shift_val + shift_x, shift_y) on_picture bi_ang_pict[bi_ang_two];
+	fi;
+      fi;
     elseif label_pos == label_pos_urt:
       label.urt("{\medium " & common_name S & "}", P45
     	  shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
@@ -1191,29 +1246,44 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
   %message "After conditional.";
 
 
+
   numeric app_mag;
   pen sstar_pen;
+  pen sstar_pen_one;
   
   app_mag := apparent_magnitude S;
 
   if app_mag < 0:
-    sstar_pen := star_pen[-1];
+    sstar_pen   := star_pen[-1];
+    sstar_pen_one := star_pen[0];
   elseif app_mag < 1:
-    sstar_pen := star_pen[0];
+    sstar_pen   := star_pen[0];
+    sstar_pen_one := star_pen[1];
   elseif app_mag < 2:
     sstar_pen := star_pen[1];
+    sstar_pen_one := star_pen[2];
   elseif app_mag < 3:
     sstar_pen := star_pen[2];
+    sstar_pen_one := star_pen[3];
   elseif app_mag < 4:
     sstar_pen := star_pen[3];
+    sstar_pen_one := star_pen[4];
   elseif app_mag < 5:
     sstar_pen := star_pen[4];
+    sstar_pen_one := star_pen[56];
   else:
     sstar_pen := star_pen[5];
+    sstar_pen_one := star_pen[6];
   fi;
-  
-  drawdot P45 with_pen sstar_pen with_color ccolor on_picture qv[bi_ang_two];
 
+  if do_black and edge_point:
+    draw curr_edge1 on_picture qv[bi_ang_two];
+    drawdot P45 with_pen sstar_pen_one with_color white on_picture qv[bi_ang_two];
+    drawdot P45 with_pen sstar_pen with_color dark_gray on_picture qv[bi_ang_two];
+  else:
+    drawdot P45 with_pen sstar_pen with_color ccolor on_picture qv[bi_ang_two];
+  fi;
+    
   %draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];  
 
 enddef;
