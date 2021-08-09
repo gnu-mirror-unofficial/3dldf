@@ -1194,24 +1194,32 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
       label("{\medium " & common_name S & "}", P45 shifted (shift_x, shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
       if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
 	draw A shifted (shift_x, shift_y) on_picture qv[bi_ang_two];
       fi;
     elseif label_pos == label_pos_top:
       label.top("{\medium " & common_name S & "}", P45 shifted (shift_x, basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
       if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
 	draw A shifted (shift_x, basic_shift_val + shift_y) on_picture qv[bi_ang_two];
       fi;
     elseif label_pos == label_pos_bot:
       label.bot("{\medium " & common_name S & "}", P45 shifted (shift_x, -basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
       if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
 	draw A shifted (shift_x, -basic_shift_val + shift_y) on_picture qv[bi_ang_two];
       fi;
     elseif label_pos == label_pos_lft:
       label.lft("{\medium " & common_name S & "}", P45 shifted (-basic_shift_val + shift_x, shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
       if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
 	draw A shifted (-basic_shift_val + shift_x, shift_y) on_picture qv[bi_ang_two];
       fi;
     elseif label_pos == label_pos_rt:
@@ -1228,24 +1236,38 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
       label.urt("{\medium " & common_name S & "}", P45
     	  shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
     elseif label_pos == label_pos_ulft:
       label.ulft("{\medium " & common_name S & "}", P45
     	  shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
     elseif label_pos == label_pos_lrt:
       label.lrt("{\medium " & common_name S & "}", P45
     	  shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
     elseif label_pos == label_pos_llft:
       label.llft("{\medium " & common_name S & "}", P45
     	  shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
     	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
     fi;
   fi;
   
   %message "After conditional.";
-
-
 
   numeric app_mag;
   pen sstar_pen;

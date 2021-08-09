@@ -100,6 +100,8 @@ point star_point;
 star_point := origin;
 path quadrant[][];
 path flat_quadrant[][];
+path temp_path[];
+
 
 point temp_star_panel_point;
 temp_star_panel_point := origin;
@@ -136,7 +138,8 @@ star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);
 star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
 star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
 star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
-star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);       
+star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);
+star_pen[6]  := pencircle scaled (1pt, 1pt, 1pt);       
 
 medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
@@ -173,13 +176,14 @@ color line_color;
 %% ** (2) 
 
 radius := 7cm;
-do_black := false; %% true 
+do_black := false; %% true
 
 if do_black:
   line_color := white;
 else:
   line_color := dark_gray;  
-
+fi;
+  
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
 
 for i = 0 upto 7:
@@ -355,7 +359,7 @@ plot_star_on_sphere (star_point) {radius, antares};
 
 plot_star_on_spherical_biangle {antares, 15, label_pos_urt, 0, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {antares, R15, 6, 5, Left, Bottom, label_pos_rt, 0, 0, false, false}; 
+draw_extra_label_on_spherical_biangle {antares, R15, 6, 5, Left, Bottom, label_pos_rt, 3pt, 0, false, false, true, true}; 
 
 plot_star_on_panel (temp_star_panel_point) {antares, star_point};
 
@@ -368,7 +372,7 @@ plot_star_on_sphere (star_point) {radius, spica};
 
 plot_star_on_spherical_biangle {spica, 16, label_pos_top, -.4cm, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {spica, R16, 4, 5, Right, Bottom, label_pos_rt, 0, 0, false, true}; 
+draw_extra_label_on_spherical_biangle {spica, R16, 4, 5, Right, Bottom, label_pos_rt, 0, 0, false, true, false, false}; 
 
 plot_star_on_panel (temp_star_panel_point) {spica, star_point};
 
@@ -1178,7 +1182,7 @@ plot_star_on_sphere (star_point) {radius, aludra};
 
 plot_star_on_spherical_biangle {aludra, 88, label_pos_rt, 2pt, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {aludra, R88, 2, 3, Right, Top, label_pos_rt, 2pt, 0, false, false}; % true
+draw_extra_label_on_spherical_biangle {aludra, R88, 2, 3, Right, Top, label_pos_rt, 2pt, 0, false, false, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {aludra, star_point};
 
@@ -1407,7 +1411,7 @@ plot_star_on_sphere (star_point) {radius, ruchbah};
 
 plot_star_on_spherical_biangle {ruchbah, 109, label_pos_rt, 0, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_pos_rt, -2.5pt, 0, false, false}; % true
+draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_pos_rt, -2.5pt, 0, false, false, false, false}; % true
 
 plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
 
@@ -1615,7 +1619,7 @@ plot_star_on_sphere (star_point) {radius, kornephoros};
 
 plot_star_on_spherical_biangle {kornephoros, 127, label_pos_rt, 0, -2pt, false, false};
 
-draw_extra_label_on_spherical_biangle {kornephoros, R127, 6, 5, Left, Top, label_pos_rt, 0, 0, false, true}; % false
+draw_extra_label_on_spherical_biangle {kornephoros, R127, 6, 5, Left, Top, label_pos_rt, 0, 0, false, true, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {kornephoros, star_point};
 
@@ -1910,7 +1914,7 @@ plot_star_on_sphere (star_point) {radius, gomeisa};
 
 plot_star_on_spherical_biangle {gomeisa, 153, label_pos_lft, 0, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {gomeisa, R153, 2, 3, Right, Top, label_pos_rt, 2pt, 0, false, true}; % false
+draw_extra_label_on_spherical_biangle {gomeisa, R153, 2, 3, Right, Top, label_pos_rt, 2pt, 0, false, true, false, false}; 
 
 plot_star_on_panel (temp_star_panel_point) {gomeisa, star_point};
 
@@ -2133,6 +2137,8 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {beta_trianguli, temp_star_
 plot_star_on_sphere (star_point) {radius, psi_ursae_majoris};
 
 plot_star_on_spherical_biangle {psi_ursae_majoris, 173, label_pos_top, 0, 0, false, true};
+
+%% !! START HERE: LDF 2021.08.09.  Fix this!  Color needs to be set to white for `do_black'.
 
 label.bot("{\medium\vbox{\hbox{$\psi$ Ursae}\vskip-2pt\hbox{\hskip 4pt Majoris}}}", R173 shifted (0, 0pt))
          on_picture bi_ang_pict[4];
