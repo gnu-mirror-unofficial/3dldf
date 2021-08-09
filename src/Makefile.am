@@ -1065,10 +1065,28 @@ sample5.pdf: sample5.dvi
 sample5.ps: sample5.dvi
 	dvips -o sample5.ps sample5.dvi
 
+#### psc and pdfc are to be used for updating the TOC in sample5.tex.
+#### They run TeX twice.
+#### LDF 2021.08.09.
+
+.PHONY psc:
+
+psc:
+	$(MAKE) sample5.dvi
+	tex sample5.tex
+	$(MAKE) sample5.ps
+
+.PHONY pdfc:
+
+pdfc:
+	$(MAKE) sample5.dvi
+	tex sample5.tex
+	$(MAKE) sample5.pdf
+
+
 sample5.dvi: sample5.tex sample5.0 sample_5_star_info_combined.tex 
 	cat sample_5_0.tex sample_5_1.tex sample_5_2.tex sample_5_3.tex sample_5_4.tex \
             sample_5_5.tex sample_5_6.tex sample_5_7.tex | sort -n | grep -v ^% > sample_5_star_info_combined.tex
-	tex sample5.tex
 	tex sample5.tex
 
 sample5.0 sample5.1 sample_5_star_info_combined.tex: sample5.mp 

@@ -48,7 +48,10 @@
 
 % * (1) Beginning of 3DLDF code.
 
-verbatim_metapost "verbatimtex \font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch etex;";
+verbatim_metapost "verbatimtex \font\SMALL=cmr6\font\Small=cmr7"
+  & "\font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch"
+  & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\font\SMALLgreek=cmmi6 "
+  & "etex;";
 
 %% ** (2) macro get_spherical_biangles
 
@@ -1889,7 +1892,7 @@ enddef;
 macro plot_star_on_flat_panel;
 
 def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_ctr, numeric label_pos,
-                                 numeric shift_x, numeric shift_y, boolean do_box} =
+                                 numeric shift_x, numeric shift_y, boolean do_box, boolean suppress_text_label} =
 
   path q[];
   point p[];
@@ -2027,60 +2030,64 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
   s := "{\small " & common_name S & "}";
 
-  if label_pos == label_pos_zero:
-    label(s, R shifted (shift_x, shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (shift_x, shift_y), s);
-    fi;
-  elseif label_pos == label_pos_top:
-    label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (shift_x, basic_shift_val + shift_y), s)
-     	with_top_offset 0 with_bottom_offset 0 with_left_offset 0 with_right_offset 0;
-    fi;
-  elseif label_pos == label_pos_bot:
-    label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (shift_x, -basic_shift_val + shift_y), s);
-    fi;
-  elseif label_pos == label_pos_lft:
-    label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (-basic_shift_val + shift_x, shift_y), s);
-    fi;
-  elseif label_pos == label_pos_rt:
-    label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (basic_shift_val + shift_x, shift_y), s);
-    fi;
-  elseif label_pos == label_pos_urt:
-    label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y), s);
-    fi;
-  elseif label_pos == label_pos_ulft:
-    label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y), s);
-    fi;
-  elseif label_pos == label_pos_lrt:
-    label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
-    fi;
-  elseif label_pos == label_pos_llft:
-    label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
-      with_text_color ccolor on_picture flat_quadrant_picture[v];
-    if do_box:
-      q2 := box_text (R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+  if suppress_text_label:
+    ;
+  else:
+    if label_pos == label_pos_zero:
+      label(s, R shifted (shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_top:
+      label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, basic_shift_val + shift_y), s)
+	  with_top_offset 0 with_bottom_offset 0 with_left_offset 0 with_right_offset 0;
+      fi;
+    elseif label_pos == label_pos_bot:
+      label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_lft:
+      label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_rt:
+      label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_urt:
+      label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_ulft:
+      label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_lrt:
+      label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_llft:
+      label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+      fi;
     fi;
   fi;
 
