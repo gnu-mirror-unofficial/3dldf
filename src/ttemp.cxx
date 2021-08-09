@@ -6,6 +6,7 @@
 #include <errno.h>
 #include <limits.h>
 #include <math.h>
+#include <string.h>
 
 #include <sys/types.h>
 
@@ -25,8 +26,98 @@
 #include <string>
 #include <valarray>
 #include <vector>
+#include <fstream>
+
+using namespace std;
+
+typedef unsigned int i_type;
+
+int
+main(void)
+{
+   cerr << "Entering ttemp." << endl;
+
+   FILE *fp;
+   FILE *fp_1;
+
+   string s;
+
+   ofstream out_file;
+
+   out_file.open("sample_5_star_info_alpha_temp.tex");
+
+   char buffer[256];
+   memset(buffer, 0, 256);
+
+   char buffer_1[256];
+   memset(buffer_1, 0, 256);
+
+   size_t size;
+   size_t size_1;
+
+   fp = popen("cat sample_5_star_info_combined.tex | cut -d{ -f4 | tr -d \"}\"", "r");
+   fp_1 = popen("cat sample_5_star_info_combined.tex", "r");
+
+   if (fp == 0 || fp_1 == 0)
+      cerr << "`popen' failed, returning NULL." << endl;
+   else    
+      cerr << "`popen' succeeded, returning non-NULL." << endl;
+
+   do 
+   {
+       fgets(buffer, 256, fp);
+       fgets(buffer_1, 256, fp_1);
+
+#if 0 
+       cerr << "strlen(buffer)   == " << strlen(buffer) << endl
+            << "strlen(buffer_1) == " << strlen(buffer_1) << endl;
+#endif 
+
+       if (strlen(buffer) > 0)
+          cerr << "buffer:" << endl << buffer;
+       if (strlen(buffer_1) > 0)
+          cerr << "buffer_1:" << endl << buffer_1;
+
+       s   = buffer;
+
+       do 
+       {
+
+          size = s.find_first_of("\\${}\n");
+          if (size != string::npos)
+             s.erase(size, 1);          
+
+          size_1 = s.find("^");
+          if (size_1 != string::npos)
+             s.replace(size_1, 1, " ");          
+
+       } while (!(size == string::npos && size_1 == string::npos));
+
+       for (int i = 0; i < s.length(); ++i)
+          s[i] = tolower(s[i]);
+
+       cerr << "s == " << s << endl;
+
+       out_file << "{" << s << "}" << buffer_1;
+
+   }
+   while (strlen(buffer) > 0 && strlen(buffer_1) > 0 && !feof(fp) && !feof(fp_1));
+
+   pclose(fp);
+   pclose(fp_1);
+
+   fp   = 0;
+   fp_1 = 0;
+   out_file.close();
+
+   cerr << "Exiting ttemp successfully with return value 0." << endl;
+
+   return 0;
+
+}
 
 
+#if 0 
 
 /* ** (2) |main| definition  */
 
@@ -257,8 +348,10 @@ main(void)
 }  /* End of |main| definition  */
 
 
+#endif 
+
 /* Local Variables:  */
-/* mode:C            */
+/* mode:CWEB         */
 /* mode:show-paren   */
 /* abbrev-mode:t     */
 /* End:              */

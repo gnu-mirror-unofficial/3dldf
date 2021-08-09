@@ -63,6 +63,7 @@ To get the total decimal hours we use the formula: h = hours + (minutes / 60) + 
 To get the total decimal minutes we use the formula: m = (hours * 60) + minutes + (seconds / 60).
 
 To get the total decimal seconds we use the formula: s = (hours * 3600) + (minutes * 60) + seconds.
+
 */
 
 /* As of 2021.6.27.:  Call like this, for example, to calculate right_ascension_decimal_hours and */

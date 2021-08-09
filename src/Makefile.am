@@ -69,7 +69,7 @@
 
 # dummy$(EXEEXT) 
 
-bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT)  
+bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT) 
 
 # lib3dldfsp.la
 
@@ -159,7 +159,9 @@ lib_LTLIBRARIES = lib3dldflb.la
 
 prbsnflx_SOURCES = prbsnflx.l++
 
-accsdtbs._SOURCES = accsdtbs.cxx
+srtstrin_SOURCES = srtstrin.cxx
+
+accsdtbs_SOURCES = accsdtbs.cxx
 
 #dummy_SOURCES = dummy.cxx
 
@@ -173,7 +175,7 @@ EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              format.web patterns.web prelims.web runit \
              sample.ldf sample0.ldf sample1.ldf sample2.ldf sample3.ldf \
              sample3.lmc sample3.aux \
-             sample1.tex sample2.tex sample3.tex \
+             sample1.tex sample2.tex sample3.tex srtstrin.cxx \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
              $(3dldf_PARSER_FILES) 
@@ -1074,9 +1076,18 @@ sample5.0 sample5.1 sample_5_star_info_combined.tex: sample5.mp
 sample5.mp: 3dldf$(EXEEXT) sample5.ldf astronmy.lmc sample5.aux xxx.lmc
 	3dldf$(EXEEXT) sample5.ldf
 
-sample5_a4.dvi: sample5_a4.tex sample_5_star_info_combined.tex
+sample5_a4.dvi: sample5_a4.tex sample_5_star_info_combined.tex sample_5_star_info_alpha.tex
 	tex sample5_a4.tex
 	tex sample5_a4.tex 
+
+sample_5_star_info_alpha.tex: sample_5_star_info_combined.tex sample_5_star_info_alpha_temp.tex
+	cat sample_5_star_info_alpha_temp.tex | sort | cut -d} -f 2- > sample_5_star_info_alpha.tex 
+
+sample_5_star_info_alpha_temp.tex: srtstrin$(EXEEXT)
+	srtstrin$(EXEEXT)
+
+srtstrin$(EXEEXT): srtstrin.cxx
+	g++ -o srtstrin srtstrin.cxx
 
 sample5_a4.ps: sample5_a4.dvi
 	dvips -o sample5_a4.ps sample5_a4.dvi
