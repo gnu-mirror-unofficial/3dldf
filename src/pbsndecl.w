@@ -3345,7 +3345,8 @@ Scan_Parse
   extern const unsigned int STARS_DECLINATION_DECIMAL_DEGREES     =  16777216U;  /* $2^24$ */      
   extern const unsigned int STARS_RIGHT_ASCENSION                 =  33554432U;                    
   extern const unsigned int STARS_DECLINATION                     =  67108864U;  
-  extern const unsigned int STARS_IS_BINARY                       = 134217728U;  /* (expt 2 27)  */
+  extern const unsigned int STARS_IS_BINARY                       = 134217728U;  
+  extern const unsigned int STARS_ABSOLUTE_MAGNITUDE              = 268435456U;  /* (expt 2 28)  */
 };
 
 @
@@ -3384,6 +3385,7 @@ Scan_Parse
   extern const unsigned int STARS_RIGHT_ASCENSION;
   extern const unsigned int STARS_DECLINATION;
   extern const unsigned int STARS_IS_BINARY;
+  extern const unsigned int STARS_ABSOLUTE_MAGNITUDE;
 };
 
 @q ** (2) |name_map|, |type_name_map| and |star_field_name_map|. @>

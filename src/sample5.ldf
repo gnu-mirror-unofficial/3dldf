@@ -232,7 +232,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {canopus, temp_star_panel_p
 
 plot_star_on_sphere (star_point) {radius, alpha_centauri};
 
-plot_star_on_spherical_biangle {alpha_centauri, 3, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {alpha_centauri, 3, label_pos_urt, -3pt, 1.5pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {alpha_centauri, star_point};
 
@@ -243,7 +243,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {alpha_centauri, temp_star_
 
 plot_star_on_sphere (star_point) {radius, arcturus};
 
-plot_star_on_spherical_biangle {arcturus, 4, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {arcturus, 4, label_pos_bot, .5cm, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {arcturus, star_point};
 
@@ -622,7 +622,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {kaus_australis, temp_star_
 
 plot_star_on_sphere (star_point) {radius, alkaid};
 
-plot_star_on_spherical_biangle {alkaid, 38, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {alkaid, 38, label_pos_rt, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {alkaid, star_point};
 
@@ -829,11 +829,9 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {saiph, temp_star_panel_poi
 
 %% *** (3) 57. Kochab
 
-%% !! START HERE: LDF 2021.08.07.  Working on adjusting label positions on spherical biangle 5 (page 2).
-
 plot_star_on_sphere (star_point) {radius, kochab};
 
-plot_star_on_spherical_biangle {kochab, 57, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {kochab, 57, label_pos_top, 2pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {kochab, star_point};
 
@@ -1032,7 +1030,7 @@ draw_extra_label_on_flat_panel {caph, temp_star_flat_panel_point, Left, 2, 3, 0,
 
 plot_star_on_sphere (star_point) {radius, epsilon_centauri};
 
-plot_star_on_spherical_biangle {epsilon_centauri, 75, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {epsilon_centauri, 75, label_pos_rt, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {epsilon_centauri, star_point};
 
@@ -1043,7 +1041,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {epsilon_centauri, temp_sta
 
 plot_star_on_sphere (star_point) {radius, dschubba};
 
-plot_star_on_spherical_biangle {dschubba, 76, label_pos_lft, 0, 0, false, false};
+plot_star_on_spherical_biangle {dschubba, 76, label_pos_lft, 2pt, -4pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {dschubba, star_point};
 
@@ -1064,7 +1062,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {wei, temp_star_panel_point
 
 plot_star_on_sphere (star_point) {radius, men};
 
-plot_star_on_spherical_biangle {men, 78, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {men, 78, label_pos_rt, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {men, star_point};
 
@@ -1075,7 +1073,9 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {men, temp_star_panel_point
 
 plot_star_on_sphere (star_point) {radius, eta_centauri};
 
-plot_star_on_spherical_biangle {eta_centauri, 79, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {eta_centauri, 79, label_pos_lft, 0, 0, false, true};
+
+label.lft("{\medium $\eta$ Cent.}", R79 shifted (-3pt, 0)) on_picture bi_ang_pict[5];
 
 plot_star_on_panel (temp_star_panel_point) {eta_centauri, star_point};
 
@@ -1260,7 +1260,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {han, temp_star_panel_point
 
 plot_star_on_sphere (star_point) {radius, zeta_centauri};
 
-plot_star_on_spherical_biangle {zeta_centauri, 95, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {zeta_centauri, 95, label_pos_bot, .4cm + 1pt, 1pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {zeta_centauri, star_point};
 
@@ -1328,7 +1328,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {ascella, temp_star_panel_p
 
 plot_star_on_sphere (star_point) {radius, zubeneschamali};
 
-plot_star_on_spherical_biangle {zubeneschamali, 102, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {zubeneschamali, 102, label_pos_top, .6667cm, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {zubeneschamali, star_point};
 
@@ -1361,7 +1361,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {sheratan, temp_star_panel_
 
 plot_star_on_sphere (star_point) {radius, zubenelgenubi};
 
-plot_star_on_spherical_biangle {zubenelgenubi, 105, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {zubenelgenubi, 105, label_pos_rt, 2pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {zubenelgenubi, star_point};
 
@@ -1420,7 +1420,7 @@ draw_extra_label_on_flat_panel {ruchbah, temp_star_flat_panel_point, Right, 2, 2
 
 plot_star_on_sphere (star_point) {radius, muphrid};
 
-plot_star_on_spherical_biangle {muphrid, 110, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {muphrid, 110, label_pos_top, -1pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {muphrid, star_point};
 
@@ -1431,7 +1431,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {muphrid, temp_star_panel_p
 
 plot_star_on_sphere (star_point) {radius, ke_kouan};
 
-plot_star_on_spherical_biangle {ke_kouan, 111, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {ke_kouan, 111, label_pos_rt, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {ke_kouan, star_point};
 
@@ -1523,7 +1523,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {tarazed, temp_star_panel_p
 
 plot_star_on_sphere (star_point) {radius, yed_prior};
 
-plot_star_on_spherical_biangle {yed_prior, 119, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {yed_prior, 119, label_pos_top, -.25cm - 2pt, -1pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {yed_prior, star_point};
 
@@ -1534,7 +1534,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {yed_prior, temp_star_panel
 
 plot_star_on_sphere (star_point) {radius, aldhibain};
 
-plot_star_on_spherical_biangle {aldhibain, 120, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {aldhibain, 120, label_pos_lft, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {aldhibain, star_point};
 
@@ -1659,7 +1659,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {cor_caroli_two, temp_star_
 
 plot_star_on_sphere (star_point) {radius, gamma_lupi};
 
-plot_star_on_spherical_biangle {gamma_lupi, 131, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {gamma_lupi, 131, label_pos_urt, -.125cm, -.125cm, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {gamma_lupi, star_point};
 
@@ -1748,7 +1748,10 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {turais, temp_star_panel_po
 
 plot_star_on_sphere (star_point) {radius, beta_trianguli_australis};
 
-plot_star_on_spherical_biangle {beta_trianguli_australis, 139, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {beta_trianguli_australis, 139, label_pos_lft, 0, 0, false, true};
+
+label.lft("{\small\vbox{\hbox{$\beta$ Trianguli}\vskip-3.5pt\hbox{Aust.}}}", R139 shifted (-.125cm, -4pt))
+         on_picture bi_ang_pict[5];
 
 plot_star_on_panel (temp_star_panel_point) {beta_trianguli_australis, star_point};
 
@@ -1846,7 +1849,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_cygni, temp_star_pan
 %% *** (3) 148. Tejat
 
 plot_star_on_sphere (star_point) {radius, tejat};
-%-.25cm + 2pt
+
 plot_star_on_spherical_biangle {tejat, 148, label_pos_top, 0, -1.5pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {tejat, star_point};
@@ -1858,7 +1861,10 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {tejat, temp_star_panel_poi
 
 plot_star_on_sphere (star_point) {radius, gamma_trianguli_australis};
 
-plot_star_on_spherical_biangle {gamma_trianguli_australis, 149, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {gamma_trianguli_australis, 149, label_pos_bot, 0, 0, false, true};
+
+label.bot("{\small\vbox{\hbox{\hskip-12.5pt$\gamma$ Triangulae}\vskip-2pt\hbox{\hskip 5.25pt Aust.}}}", R149 shifted (0, 0pt))
+         on_picture bi_ang_pict[5];
 
 plot_star_on_panel (temp_star_panel_point) {gamma_trianguli_australis, star_point};
 
@@ -1915,7 +1921,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {gomeisa, temp_star_panel_p
 
 plot_star_on_sphere (star_point) {radius, pi_scorpii};
 
-plot_star_on_spherical_biangle {pi_scorpii, 154, label_pos_lft, 0, 0, false, false};
+plot_star_on_spherical_biangle {pi_scorpii, 154, label_pos_bot, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {pi_scorpii, star_point};
 
@@ -2140,7 +2146,10 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {psi_ursae_majoris, temp_st
 
 plot_star_on_sphere (star_point) {radius, pherkad_major};
 
-plot_star_on_spherical_biangle {pherkad_major, 174, label_pos_top, 0, 0, false, false};
+plot_star_on_spherical_biangle {pherkad_major, 174, label_pos_bot, 0, 0, false, true};
+
+label.bot("{\medium\vbox{\hbox{Pherkad}\vskip-2pt\hbox{Majoris}}}", R174 shifted (0, -4pt))
+         on_picture bi_ang_pict[5];
 
 plot_star_on_panel (temp_star_panel_point) {pherkad_major, star_point};
 

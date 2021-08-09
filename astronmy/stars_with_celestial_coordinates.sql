@@ -3494,7 +3494,10 @@ where common_name = "Merak";
 
 select * from Stars where common_name = "Merak"\G
 
-update Stars set apparent_magnitude = 2.34, absolute_magnitude = 0.41 where common_name = "Merak"\G
+update Stars set apparent_magnitude = 2.83, absolute_magnitude = 2.38 where approx_rank_apparent_magnitude = 139;
+
+. Beta Trianguli Australis                    15 55 -63.4  321.9  -7.5  F2IV                81.24 0.62    40
+
 
 80. Beta Ursae Majoris        Merak             11 02 +56.4  149.1 +54.8  A1V           2.34   0.41   41.07 0.60    79
 

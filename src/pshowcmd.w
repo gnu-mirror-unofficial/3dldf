@@ -2309,6 +2309,8 @@ Added this rule.
 
 };
 
+@q !!START HERE:  LDF 2021.08.08.  Add code for |Star::absolute_magnitude|.   @>
+
 @q ****** (6) stars_option_list --> stars_option_list WHERE stars_where_list@> 
 @*5 \§stars option list> $\longrightarrow$ \§stars option list> \.{WHERE} \§stars where list>.
 \initials{LDF 2021.06.20.}
