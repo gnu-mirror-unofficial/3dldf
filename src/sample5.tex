@@ -54,9 +54,53 @@
 \input eplain
 \input epsf 
 \nopagenumbers
+\input colordvi
+
+\enablehyperlinks[dvipdfm]
+\hlopts{bwidth=0}
+
+\font\small=cmr8
+\font\smalltt=cmtt8
+\font\medium=cmr10 scaled \magstephalf
+\font\mediumbx=cmbx10 scaled \magstephalf
+\font\mediumit=cmti10 scaled \magstephalf
+\font\mediumtt=cmtt10 scaled \magstephalf
+\font\bx=cmbx10
+\font\large=cmr12
+\font\largebx=cmbx12
+\font\largeit=cmti12
+\font\largett=cmtt12
+\font\largesy=cmsy10 scaled 1200
+\font\Largebx=cmbx12 scaled \magstephalf
+\font\huge=cmr12 scaled \magstep2
+\font\hugebx=cmbx12 scaled \magstep2
+\font\mediumsy=cmsy10 scaled \magstephalf
+\font\mediumcy=cmcyr10 scaled \magstephalf
+
+\def\bigcirc{{\largesy\char"0E}}
+
+\newdimen\twozerosdimen
+\setbox0=\hbox{{\medium 00}}
+\twozerosdimen=\wd0
+
+\newcount\chapctr
+\chapctr=0
+
+\newcount\temppagecnt
+\temppagecnt=0
+
+\newcount\sectionctr
+\sectionctr=0
+
+\def\tocchapterentry#1#2#3{\line{\hbox to \twozerosdimen{\hss #2}. {\medium #1 \dotfill\ #3}}}
+\def\tocsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip3em\ifdim\wd0>0pt{#2}. \fi{\medium #1} \dotfill\ #3}}
+
+\def\Chapter#1#2{\global\advance\chapctr by 1\sectionctr=0%
+\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\the\chapctr}}
+\def\Section#1#2{\global\advance\sectionctr by 1\edef\A{\the\chapctr .\the\sectionctr}%
+\writenumberedtocentry{section}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\A}}
 
 %% * (1)
-
 
 \pageno=1
 
@@ -99,18 +143,6 @@
 %% *** (3) 
 
 \def\epsfsize#1#2{#1}
-
-\font\bx=cmbx10
-\font\small=cmr8
-\font\smalltt=cmtt8
-\font\large=cmr12
-\font\largebx=cmbx12
-\font\Large=cmr17
-\font\huge=cmr17 scaled \magstep1
-
-\font\largesy=cmsy10 scaled 1200
-
-\def\bigcirc{{\largesy\char"0E}}
 
 %% *** (3) 
 
@@ -162,8 +194,14 @@ c/o Free Software Foundation, Inc.\hfil\break
 51 Franklin St, Fifth Floor \hfil\break
 Boston, MA  02110-1301 USA\hfil\break
 {\smalltt Laurence.Finston@gmx.de}
-\vfil\eject
+\vskip\baselineskip
+\centerline{{\largebx Table of Contents}}
+\advance\baselineskip by 2pt
+%\advance\parskip by 2pt
+\readtocfile
 \endgroup
+\vfil\eject
+
 
 %% *** (3)
 
@@ -175,8 +213,10 @@ Boston, MA  02110-1301 USA\hfil\break
 
 %% **** (4)
 
-\leftline{{\bx sample 5}}
+\Chapter{spherical biangles}{Spherical Biangles}
+\centerline{{\largebx Spherical Biangles}}
 \vskip\baselineskip
+\hldest{fit}{}{spherical biangles}
 \line{\epsffile{sample5.0}\hskip1cm\epsffile{sample5.1}\hskip1cm\epsffile{sample5.2}\hskip1cm
 \epsffile{sample5.3}\hss}
 \vfil\eject
@@ -186,21 +226,16 @@ Boston, MA  02110-1301 USA\hfil\break
 \line{\epsffile{sample5.4}\hskip1cm\epsffile{sample5.5}\hskip1cm
 \epsffile{sample5.6}\hskip1cm\epsffile{sample5.7}\hss}
 \vfil\eject
-
 \endgroup
 
-%% *** (3) 
-
-\line{\epsffile{sample5.8}\hskip.25cm\epsffile{sample5.9}\hss}
-\vfil\eject
-
-%% *** (3) 
-
-\line{\epsffile{sample5.10}\hskip.25cm\epsffile{sample5.11}\hss}
-\vfil\eject
+%% ** (2) Panels
 
 %% *** (3)
 
+\Chapter{panels}{Panels (Isoceles Trapezoids and Triangles)}
+\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}
+\hldest{fit}{}{panels}
+\vskip2\baselineskip
 \line{\epsffile{sample5.12}\hss}
 \vfil\eject
 
@@ -208,6 +243,30 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \line{\epsffile{sample5.13}\hss}
 \vfil\eject
+
+%% ** (2) Globes
+
+\Chapter{globes}{Globes}
+\centerline{{\largebx Globes}}
+\hldest{fit}{}{globes}
+\vskip2\baselineskip
+\line{\epsffile{sample5.8}\hskip.25cm\epsffile{sample5.9}\hss}
+\vfil\eject
+
+\line{\epsffile{sample5.10}\hskip.25cm\epsffile{sample5.11}\hss}
+\vfil\eject
+
+%% *** (3)
+
+\begingroup
+\advance\hsize by -.5\hsize
+\advance\hsize by -6cm
+\parskip=\baselineskip
+\Chapter{copying}{Copying}
+\hldest{fit}{}{copying}
+%\advance\baselineskip by -6pt
+\listing{gpl-3.0.txt}
+\endgroup
 
 %% *** (3)
 
