@@ -1,6 +1,12 @@
-%%%% ttemp.mp.
-%%%% Generated on Fri Aug  6 22:44:25 2021
-%%%% from ttemp.ldf by GNU 3DLDF 3.0.
+%%%% test_transparent.mp
+%%%% Created by Laurence D. Finston (LDF) Thu 12 Aug 2021 03:48:37 PM CEST
+
+%% This also tests using the "double number system.
+%%
+%% run like this:
+%% mpost -numbersystem "double" test_transparent.mp
+%%
+%% LDF 2021.08.12.
 
 outputformat := "png";
 
@@ -8,8 +14,8 @@ outputformatoptions := "format=rgba";
 
 beginfig(1);
 
-  message "numbersystem";
-  show numbersystem;
+  % message "numbersystem";
+  % show numbersystem;
   
   pickup pencircle xscaled 2pt yscaled 2pt;
   
@@ -24,7 +30,6 @@ beginfig(1);
   p1 = fullcircle xscaled 2in yscaled 2in;
 
   draw q;
-
 
   fill p0 withcolor red;
   draw p0;
