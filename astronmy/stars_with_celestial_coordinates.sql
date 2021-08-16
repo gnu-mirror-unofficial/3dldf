@@ -3192,6 +3192,15 @@ update Stars set common_name = "$\\zeta$ Persei" where approx_rank_apparent_magn
 146 Head of Hydrus            2.86   1.16 
 147 Delta Cygni               2.86  -0.74 
 
+update Stars set common_name = "$\\alpha$ Hydri" where approx_rank_apparent_magnitude = 146;
+
+
+-- update Stars set common_name = "XXX" where approx_rank_apparent_magnitude = 146;
+
+select * from Stars where common_name = "Head of Hydrus"\G
+
+select * from Stars where approx_rank_apparent_magnitude = 146\G
+
 148 Tejat                     2.87v -1.39v
 
 

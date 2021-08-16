@@ -1090,7 +1090,7 @@ sample5.dvi: sample5.tex sample5.0 sample_5_star_info_combined.tex
 	tex sample5.tex
 
 sample5.0 sample5.1 sample_5_star_info_combined.tex: sample5.mp 
-	mpost sample5.mp
+	mpost -numbersystem "double" sample5.mp
 
 sample5.mp: 3dldf$(EXEEXT) sample5.ldf astronmy.lmc sample5.aux xxx.lmc
 	3dldf$(EXEEXT) sample5.ldf
