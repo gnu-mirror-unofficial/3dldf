@@ -512,8 +512,6 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {elnath, temp_star_panel_po
 
 plot_star_on_sphere (star_point) {radius, miaplacidus};
 
-%plot_star_on_spherical_biangle {miaplacidus, 28, label_pos_top, -4pt, -2pt, false, false};
-
 plot_star_on_spherical_biangle {miaplacidus, 28, label_pos_bot, 0pt, 0pt, false, true};
 
 label.bot("{\medium\vbox{\hbox{Miapla-}\vskip-4pt\hbox{\hskip 4pt cidus}}}", R28 shifted (0, -4pt)) on_picture qv[3];
@@ -521,7 +519,21 @@ label.bot("{\medium\vbox{\hbox{Miapla-}\vskip-4pt\hbox{\hskip 4pt cidus}}}", R28
 plot_star_on_panel (temp_star_panel_point) {miaplacidus, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {miaplacidus, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                         0, 0, false, true};
+
+
+%% !! START HERE: LDF 2021.08.17.  Check which pen is being used.  Check other invocations.
+%% Make a way of passing the label string to the macro.
+
+draw_extra_label_on_flat_panel {miaplacidus, temp_star_flat_panel_point, Left, 2, 2, 6, 5, -7, label_pos_lft, 0, 0, false};
+
+
+% label.rt("{\SMALL\vbox{\hbox{\hskip0pt{Mia-}}\vskip-5pt\hbox{pla-}\vskip-5pt\hbox{\hskip-2pt cidus}}}",
+%     temp_star_flat_panel_point shifted (0pt, -6pt))
+%     with_text_color label_color on_picture flat_quadrant_picture[2]; 
+
+
+
 
 %% *** (3) 29. Alnilam
 
@@ -942,7 +954,7 @@ plot_star_on_spherical_biangle {aspidiske, 66, label_pos_bot, 0, 0, false, false
 
 plot_star_on_panel (temp_star_panel_point) {aspidiske, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {aspidiske, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {aspidiske, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
                          0, 0, false, false};
  
 %% *** (3) 67. Alphecca
@@ -964,7 +976,7 @@ plot_star_on_spherical_biangle {suhail, 68, label_pos_rt, 0, 1pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {suhail, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {suhail, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {suhail, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
                          0, 0, false, false};
  
 %% *** (3) 69. Mizar
@@ -2013,8 +2025,12 @@ plot_star_on_spherical_biangle {upsilon_carinae, 160, label_pos_lft, 0, 0, false
 
 plot_star_on_panel (temp_star_panel_point) {upsilon_carinae, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {upsilon_carinae, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {upsilon_carinae, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 0, 0, false, true};
+
+label.top("{\Small {\Smallgreek\char29} Carin{\ae}}", temp_star_flat_panel_point shifted (-1.3pt, 2pt))
+         with_text_color label_color on_picture flat_quadrant_picture[2]; 
+
 
 %% *** (3) 161. Matar
 
@@ -2462,7 +2478,7 @@ draw R199 -- (R199 shifted (.25cm, .46cm)) with_color line_color on_picture qv[3
 
 plot_star_on_panel (temp_star_panel_point) {n_velorum, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {n_velorum, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {n_velorum, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
                          0, 0, false, false};
 
 %% *** (3) 200. Pi Herculis
