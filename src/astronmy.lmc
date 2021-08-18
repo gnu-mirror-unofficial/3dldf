@@ -95,8 +95,9 @@ def get_spherical_biangles {numeric rad} =
 
   %draw p2 -- p3;  %% Vertical line through origin.
 
-  dotlabel.bot("$p_2$", p2);
-  dotlabel.top("$p_3$", p3);
+  % dotlabel.bot("$p_2$", p2);
+  % dotlabel.top("$p_3$", p3);
+
 
   j := 4;
   for i = 11.25 step 11.25 until 78.75:
@@ -2142,17 +2143,23 @@ enddef;
 
 macro draw_extra_label_on_flat_panel;
 
-def draw_extra_label_on_flat_panel {star R, point S, boolean left_or_right, numeric picture_ctr_one, numeric picture_ctr_two,
+def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or_right,
+                                    numeric picture_ctr_one,
+                                    numeric picture_ctr_two,
                                     numeric RA_one, numeric RA_two, numeric Decl,
-                                    numeric label_pos, numeric shift_x, numeric shift_y, boolean do_labels} =
-
+                                    numeric label_pos, numeric shift_x, numeric shift_y,
+                                    boolean do_labels} =
   point P[];
 
   string star_name;
 
   color ccolor;
-  
-  star_name := common_name R;
+
+  if length str > 0: 
+    star_name := str;
+  else:
+    star_name := common_name R;
+  fi;
 
   if do_black:
     ccolor := white;
@@ -2216,7 +2223,7 @@ def draw_extra_label_on_flat_panel {star R, point S, boolean left_or_right, nume
   numeric app_mag;
   pen sstar_pen;
 
-  app_mag := apparent_magnitude ruchbah;
+  app_mag := apparent_magnitude R;
 
   if app_mag < 0:
     sstar_pen := star_pen[-1];
@@ -2234,6 +2241,7 @@ def draw_extra_label_on_flat_panel {star R, point S, boolean left_or_right, nume
     sstar_pen := star_pen[5];
   fi;
 
+  
   if label_pos == label_pos_zero:
     label("{\small " & star_name & "}", P12 shifted (shift_x, shift_y))
       with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
