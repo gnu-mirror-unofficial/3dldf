@@ -152,6 +152,10 @@ label_out := "sample_5_labels.tex";
 
 star_info_combined := "sample_5_star_info_combined.tex";
 
+string empty_str;
+
+empty_str := "";
+
 %% *** (3) Global, used in the following code (not in macros).
 
 numeric radius;
@@ -514,26 +518,19 @@ plot_star_on_sphere (star_point) {radius, miaplacidus};
 
 plot_star_on_spherical_biangle {miaplacidus, 28, label_pos_bot, 0pt, 0pt, false, true};
 
-label.bot("{\medium\vbox{\hbox{Miapla-}\vskip-4pt\hbox{\hskip 4pt cidus}}}", R28 shifted (0, -4pt)) on_picture qv[3];
+label.bot("{\medium\vbox{\hbox{Miapla-}\vskip-4pt\hbox{\hskip 4pt cidus}}}", R28 shifted (0, -4pt))
+         on_picture qv[3];
 
 plot_star_on_panel (temp_star_panel_point) {miaplacidus, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {miaplacidus, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {miaplacidus, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, true};
 
-
-%% !! START HERE: LDF 2021.08.17.  Check which pen is being used.  Check other invocations.
-%% Make a way of passing the label string to the macro.
-
-draw_extra_label_on_flat_panel {miaplacidus, temp_star_flat_panel_point, Left, 2, 2, 6, 5, -7, label_pos_lft, 0, 0, false};
-
-
-% label.rt("{\SMALL\vbox{\hbox{\hskip0pt{Mia-}}\vskip-5pt\hbox{pla-}\vskip-5pt\hbox{\hskip-2pt cidus}}}",
-%     temp_star_flat_panel_point shifted (0pt, -6pt))
-%     with_text_color label_color on_picture flat_quadrant_picture[2]; 
-
-
-
+label.rt("{\Small\vbox{\hbox{Mia-}" & "\vskip-5pt\hbox{\hskip-1pt pla-}"
+         & "\vskip-5pt\hbox{\hskip-1pt cid-}\vskip-5pt\hbox{\hskip-2pt dus}}}",
+         temp_star_flat_panel_point shifted (2pt, -.25cm - 2pt))
+         with_text_color label_color on_picture flat_quadrant_picture[2];
 
 %% *** (3) 29. Alnilam
 
@@ -943,7 +940,8 @@ plot_star_on_spherical_biangle {naos, 65, label_pos_top, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {naos, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {naos, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {naos, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top,
                          0, 0, false, false};
  
 %% *** (3) 66. Aspidiske
@@ -954,8 +952,14 @@ plot_star_on_spherical_biangle {aspidiske, 66, label_pos_bot, 0, 0, false, false
 
 plot_star_on_panel (temp_star_panel_point) {aspidiske, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {aspidiske, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {aspidiske, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_rt,
+                         0, 0, false, true};
+
+label.rt("{\Small\vbox{\hbox{\hskip0pt Aspi-}\vskip-5pt\hbox{\hskip0pt diske}}}",
+         temp_star_flat_panel_point shifted (2pt, -1.5pt))
+         with_text_color label_color on_picture flat_quadrant_picture[2];
+
  
 %% *** (3) 67. Alphecca
 
@@ -1044,7 +1048,8 @@ plot_star_on_panel (temp_star_panel_point) {caph, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {caph, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
 
-draw_extra_label_on_flat_panel {caph, temp_star_flat_panel_point, Left, 2, 3, 0, 15, 6, label_pos_lft, 0, 0, false};
+draw_extra_label_on_flat_panel {caph, temp_star_flat_panel_point, empty_str, Left, 2, 3, 0, 15, 6,
+                                label_pos_lft, 0, 0, false};
 
 %% *** (3) 75. Epsilon Centauri
 
@@ -1205,9 +1210,8 @@ plot_star_on_panel (temp_star_panel_point) {aludra, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {aludra, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, true};
 
-%draw_extra_label_on_flat_panel {caph, temp_star_flat_panel_point, Left, 2, 3, 0, 15, 6, label_pos_lft, 0, 0, false};
-
-draw_extra_label_on_flat_panel {aludra, temp_star_flat_panel_point, Right, 2, 2, 4, 5, -3, label_pos_rt, 0, 0, false};
+draw_extra_label_on_flat_panel {aludra, temp_star_flat_panel_point, empty_str, Right, 2, 2, 4, 5, -3,
+                                label_pos_rt, 0, 0, false};
 
 %% *** (3) 89. Alderamin
 
@@ -1230,8 +1234,12 @@ draw R90 -- (R90 shifted (0, .75cm)) with_color line_color on_picture qv[3];
 
 plot_star_on_panel (temp_star_panel_point) {markeb, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {markeb, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {markeb, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
+                         2pt, .5cm, false, false};
+
+draw temp_star_flat_panel_point -- (temp_star_flat_panel_point shifted (0, .75cm -4pt))
+   with_color line_color on_picture flat_quadrant_picture[2];
 
 %% *** (3) 91. Gienah
 
@@ -1253,7 +1261,8 @@ plot_star_on_spherical_biangle {markab, 92, label_pos_top, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {markab, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {markab, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {markab, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
 %% *** (3) 93. Menkar
@@ -1430,15 +1439,16 @@ plot_star_on_sphere (star_point) {radius, ruchbah};
 
 plot_star_on_spherical_biangle {ruchbah, 109, label_pos_rt, 0, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_pos_rt, -2.5pt, 0, false, false, false, false}; % true
+draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_pos_rt, -2.5pt, 0,
+                                       false, false, false, false}; % true
 
 plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {ruchbah, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
-                         .25cm, -.25cm, true, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {ruchbah, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_rt, .25cm, -.25cm, true, false};
 
-draw_extra_label_on_flat_panel {ruchbah, temp_star_flat_panel_point, Right, 2, 2, 0, 1, 6, label_pos_rt,
-  -2pt, 0, false};
+draw_extra_label_on_flat_panel {ruchbah, temp_star_flat_panel_point, empty_str, Right, 2, 2, 0, 1, 6,
+                                label_pos_rt, -2pt, 0, false};
 
 %% *** (3) 110. Muphrid
 
@@ -1448,7 +1458,8 @@ plot_star_on_spherical_biangle {muphrid, 110, label_pos_top, -1pt, 0, false, fal
 
 plot_star_on_panel (temp_star_panel_point) {muphrid, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {muphrid, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {muphrid, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
 %% *** (3) 111. Ke Kouan
@@ -1505,7 +1516,8 @@ draw R115 -- (R115 shifted (-8pt, 2.5pt)) with_color line_color on_picture qv[6]
 
 plot_star_on_panel (temp_star_panel_point) {lesath, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {lesath, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {lesath, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
 %% *** (3) 116. Pi Puppis
@@ -1575,7 +1587,8 @@ draw R121 -- (R121 shifted (.25cm + 1pt, .3cm - 2.5pt)) with_color line_color on
 
 plot_star_on_panel (temp_star_panel_point) {theta_carinae, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {theta_carinae, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {theta_carinae, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
 %% *** (3) 122. Porrima
@@ -2331,7 +2344,8 @@ plot_star_on_spherical_biangle {tania_australis, 186, label_pos_lft, 0, 0, false
 
 plot_star_on_panel (temp_star_panel_point) {tania_australis, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {tania_australis, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {tania_australis, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
 
 %% *** (3) 187. Tais
@@ -2421,7 +2435,8 @@ plot_star_on_spherical_biangle {talita, 194, label_pos_rt, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {talita, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {talita, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {talita, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_rt,
                          0, 0, false, false};
 
 %% *** (3) 195. Zeta Arae
@@ -2465,8 +2480,9 @@ plot_star_on_spherical_biangle {alpha_lyncis, 198, label_pos_urt, 0, -.25cm + 1.
 
 plot_star_on_panel (temp_star_panel_point) {alpha_lyncis, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {alpha_lyncis, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {alpha_lyncis, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
+                         4pt, -2pt, false, false};
 
 %% *** (3) 199. N Velorum
 
@@ -2478,8 +2494,15 @@ draw R199 -- (R199 shifted (.25cm, .46cm)) with_color line_color on_picture qv[3
 
 plot_star_on_panel (temp_star_panel_point) {n_velorum, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {n_velorum, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {n_velorum, temp_star_panel_point, RRA_ctr,
+                         DDecl_ctr, label_pos_rt,
+                         0, 0, false, true};
+
+label.rt("{\Small\vbox{\hbox{\hskip2pt N Velo-}\vskip-5pt\hbox{\hskip6pt rum}}}",
+         temp_star_flat_panel_point shifted (-.125cm - 2pt, .5cm))
+         with_text_color label_color on_picture flat_quadrant_picture[2];
+
+
 
 %% *** (3) 200. Pi Herculis
 
