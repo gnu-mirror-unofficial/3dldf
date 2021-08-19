@@ -993,6 +993,11 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 run: 3dldf$(EXEEXT) sample5.ldf sample3.lmc 
 	3dldf$(EXEEXT) sample5.ldf
 
+.PHONY : rrun
+
+rrun:
+	3dldf sample5 && mpost sample5 && tex sample5 && dvips -o sample5.ps sample5.dvi 
+
 # sample_3_labels_sorted.tex: sample3.mp
 # 	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
 

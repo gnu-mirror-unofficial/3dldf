@@ -3406,9 +3406,12 @@ update Stars set common_name = "$\\eta$ Sagittarii" where approx_rank_apparent_m
 update Stars set common_name = "$\\zeta$ Hydrae" where approx_rank_apparent_magnitude = 189;
 update Stars set common_name = "$\\nu$ Hydrae" where approx_rank_apparent_magnitude = 190;
 
+update Stars set common_name = "$\\nu$ Hydr{\\ae}" where approx_rank_apparent_magnitude = 190;
+
+select * from Stars where approx_rank_apparent_magnitude = 190\G
+
 update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 181;
 update Stars set is_eclipsing_binary = 1 where approx_rank_apparent_magnitude = 186;
-
 
 update Stars set apparent_magnitude = 3.03, absolute_magnitude = -5.95 where approx_rank_apparent_magnitude = 181;
 update Stars set apparent_magnitude = 3.04, absolute_magnitude = -1.86 where approx_rank_apparent_magnitude = 182;
@@ -3540,3 +3543,20 @@ select * from Stars where approx_rank_apparent_magnitude = 175\G
 | Shaula            |
 | Wei               |
 +-------------------+
+
+select approx_rank_apparent_magnitude, common_name from Stars where common_name like ("%ae") order by approx_rank_apparent_magnitude;
+
+update Stars set common_name = "$\\theta$ Aurig{\\ae}" where approx_rank_apparent_magnitude = 107;
+update Stars set common_name = "$\\alpha$ Musc{\\ae}" where approx_rank_apparent_magnitude =    114;
+update Stars set common_name = "$\\theta$ Carin{\\ae}" where approx_rank_apparent_magnitude =   121;
+update Stars set common_name = "$\\beta$ Ar{\\ae}" where approx_rank_apparent_magnitude =       141;
+update Stars set common_name = "$\\alpha$ Tucan{\\ae}" where approx_rank_apparent_magnitude =   150;
+update Stars set common_name = "$\\upsilon$ Carin{\\ae}" where approx_rank_apparent_magnitude = 160;
+update Stars set common_name = "$\\gamma$ Hydr{\\ae}" where approx_rank_apparent_magnitude =    169;
+update Stars set common_name = "$\\beta$ Musc{\\ae}" where approx_rank_apparent_magnitude =     182;
+update Stars set common_name = "$\\zeta$ Hydr{\\ae}" where approx_rank_apparent_magnitude =     189;
+update Stars set common_name = "$\\zeta$ Ar{\\ae}" where approx_rank_apparent_magnitude =       195;
+
+
+select distinct constellation_name_genitive from Stars
+where constellation_name_genitive like ("%ae") order by constellation_name_genitive;
