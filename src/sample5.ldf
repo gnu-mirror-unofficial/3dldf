@@ -595,8 +595,12 @@ plot_star_on_spherical_biangle {dubhe, 34, label_pos_top, 6pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {dubhe, star_point};
 
+%% !! START HERE: LDF 2021.08.19.
+
 plot_star_on_flat_panel (temp_star_flat_panel_point) {dubhe, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
+
+
 
 %% *** (3) 35. Regor
 
@@ -764,7 +768,8 @@ plot_star_on_spherical_biangle {algieba, 49, label_pos_lft, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {algieba, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {algieba, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {algieba, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
 
 %% *** (3) 50. Hamal
@@ -775,7 +780,7 @@ plot_star_on_spherical_biangle {hamal, 50, label_pos_top, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {hamal, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {hamal, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {hamal, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
 
 %% *** (3) 51. Diphda
@@ -2120,7 +2125,10 @@ plot_star_on_spherical_biangle {ras_elased_australis, 167, label_pos_top, -.5cm 
 plot_star_on_panel (temp_star_panel_point) {ras_elased_australis, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {ras_elased_australis, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_top, 0, 0, false, false};
+                         label_pos_top, 0, 0, false, true};
+
+label.top("{\small\vbox{\hbox{Ras Elased}\vskip-4pt\hbox{Australis}}}", temp_star_flat_panel_point shifted (0pt, 3pt))
+          with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 168. Alnasl
 
@@ -2346,7 +2354,10 @@ plot_star_on_panel (temp_star_panel_point) {tania_australis, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {tania_australis, temp_star_panel_point,
                          RRA_ctr, DDecl_ctr, label_pos_lft,
-                         0, 0, false, false};
+                         0, 0, false, true};
+
+label.lft("{\small\vbox{\hbox{Tania}\vskip-4pt\hbox{Australis}}}", temp_star_flat_panel_point shifted (0pt, 0pt))
+          with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 187. Tais
 
