@@ -573,6 +573,8 @@ plot_star_on_spherical_biangle {alioth, 32, label_pos_top, -3pt, 0, false, false
 
 plot_star_on_panel (temp_star_panel_point) {alioth, star_point};
 
+%% !! START HERE: LDF 2021.08.19.
+
 plot_star_on_flat_panel (temp_star_flat_panel_point) {alioth, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
@@ -595,12 +597,8 @@ plot_star_on_spherical_biangle {dubhe, 34, label_pos_top, 6pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {dubhe, star_point};
 
-%% !! START HERE: LDF 2021.08.19.
-
 plot_star_on_flat_panel (temp_star_flat_panel_point) {dubhe, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
-
-
+                         2pt, 0, false, false};
 
 %% *** (3) 35. Regor
 
@@ -912,7 +910,7 @@ plot_star_on_spherical_biangle {denebola, 62, label_pos_lft, 0, 0, false, false}
 
 plot_star_on_panel (temp_star_panel_point) {denebola, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {denebola, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {denebola, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
  
 %% *** (3) 63. Cih
@@ -1121,7 +1119,7 @@ plot_star_on_spherical_biangle {merak, 80, label_pos_top, 3pt, 0, false, false};
 plot_star_on_panel (temp_star_panel_point) {merak, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {merak, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                         1pt, -1pt, false, false};
 
 %% *** (3) 81. Izar
 
@@ -1177,8 +1175,8 @@ plot_star_on_spherical_biangle {phecda, 85, label_pos_lft, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {phecda, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {phecda, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {phecda, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
+                         1pt, 0, false, false};
 
 %% *** (3) 86. Sabik
 
@@ -1312,7 +1310,7 @@ plot_star_on_spherical_biangle {zosma, 96, label_pos_lft, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {zosma, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {zosma, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {zosma, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
 
              
@@ -1497,8 +1495,8 @@ plot_star_on_spherical_biangle {mu_velorum, 113, label_pos_top, .5cm, -2pt, fals
 
 plot_star_on_panel (temp_star_panel_point) {mu_velorum, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {mu_velorum, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {mu_velorum, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_urt,
+                         -10pt, -1pt, false, false};
 
 %% *** (3) 114. Alpha Muscae
 
@@ -1593,8 +1591,11 @@ draw R121 -- (R121 shifted (.25cm + 1pt, .3cm - 2.5pt)) with_color line_color on
 plot_star_on_panel (temp_star_panel_point) {theta_carinae, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {theta_carinae, temp_star_panel_point,
-                         RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                         RRA_ctr, DDecl_ctr, label_pos_bot,
+                         0, 0, false, true};
+
+label.lrt("{\Small\vbox{\hbox{{\Smallgreek\char18} Cari-}\vskip-4pt\hbox{n{\ae}}}}", temp_star_flat_panel_point shifted (-2pt, -2pt))
+          with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 122. Porrima
 
@@ -1913,7 +1914,7 @@ plot_star_on_sphere (star_point) {radius, gamma_trianguli_australis};
 
 plot_star_on_spherical_biangle {gamma_trianguli_australis, 149, label_pos_bot, 0, 0, false, true};
 
-label.bot("{\small\vbox{\hbox{\hskip-12.5pt$\gamma$ Triangulae}\vskip-2pt\hbox{\hskip 5.25pt Aust.}}}", R149 shifted (0, 0pt))
+label.bot("{\small\vbox{\hbox{\hskip-12.5pt$\gamma$ Triangul{\ae}}\vskip-2pt\hbox{\hskip 5.25pt Aust.}}}", R149 shifted (0, 0pt))
          on_picture qv[5];
 
 plot_star_on_panel (temp_star_panel_point) {gamma_trianguli_australis, star_point};
@@ -2191,17 +2192,16 @@ plot_star_on_sphere (star_point) {radius, psi_ursae_majoris};
 
 plot_star_on_spherical_biangle {psi_ursae_majoris, 173, label_pos_top, 0, 0, false, true};
 
-%% !! START HERE: LDF 2021.08.09.  Fix this for other labels.  Note that picture needs
-%% to be changed to qv[x].
-%% Also, the lines from the stars to the labels don't work with `do_black'.  Check this!
-
-label.bot("{\medium\vbox{\hbox{$\psi$ Ursae}\vskip-2pt\hbox{\hskip 4pt Majoris}}}", R173 shifted (0, 0pt))
+label.bot("{\medium\vbox{\hbox{$\psi$ Urs{\ae}}\vskip-2pt\hbox{\hskip 4pt Majoris}}}", R173 shifted (0, 0pt))
          with_text_color label_color on_picture qv[4];
 
 plot_star_on_panel (temp_star_panel_point) {psi_ursae_majoris, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {psi_ursae_majoris, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_top, 0, 0, false, false};
+                         label_pos_top, 0, 0, false, true};
+
+label.bot("{\small\vbox{\hbox{$\psi$ Urs{\ae}}\vskip-4pt\hbox{\hskip4pt Majoris}}}", temp_star_flat_panel_point shifted (0pt, 0pt))
+          with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 174. Pherkad Major
 
@@ -2401,7 +2401,7 @@ plot_star_on_spherical_biangle {nu_hydrae, 190, label_pos_top, 4pt, -1pt, false,
 plot_star_on_panel (temp_star_panel_point) {nu_hydrae, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {nu_hydrae, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                         1pt, -1pt, false, false};
 
 %% *** (3) 191. Lambda Centauri
 
@@ -2414,7 +2414,11 @@ label.rt("{\medium\hbox{$\lambda$ Cent.}}", R191 shifted (0, -2pt)) on_picture q
 plot_star_on_panel (temp_star_panel_point) {lambda_centauri, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {lambda_centauri, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                                                      0, 0, false, true};
+
+label.ulft("{\Small\vbox{\hbox{{\Smallgreek\char21} Cen-}\vskip-5pt\hbox{\hskip 6pt tauri}}}",
+           temp_star_flat_panel_point shifted (.25cm + 3pt, 3pt))
+           with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 192. Persian
 
