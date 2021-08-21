@@ -431,7 +431,7 @@ draw R20 -- (R20 shifted (0, .5cm + 1pt)) with_color line_color on_picture bi_an
 plot_star_on_panel (temp_star_panel_point) {mimosa, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {mimosa, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_bot,
-                         0, 0, false, false};
+                         0, 2pt, false, false};
 
 %% *** (3) 21. Regulus
 
@@ -487,8 +487,14 @@ plot_star_on_spherical_biangle {gacrux, 25, label_pos_lft, 0, 4pt, false, false}
 
 plot_star_on_panel (temp_star_panel_point) {gacrux, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {gacrux, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {gacrux, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_rt, 0, 0pt, false, true};
+
+label.rt("{\Small\vbox{\hbox{Ga-}\vskip-6pt\hbox{crux}}}",
+         temp_star_flat_panel_point shifted (3pt, 2.5pt))
+         with_text_color label_color on_picture flat_quadrant_picture[3];
+
+
 
 %% *** (3) 26. Bellatrix
 
@@ -1575,6 +1581,8 @@ plot_star_on_spherical_biangle {yed_prior, 119, label_pos_top, -.25cm - 2pt, -1p
 
 plot_star_on_panel (temp_star_panel_point) {yed_prior, star_point};
 
+%% !! START HERE: LDF 2021.08.21.
+
 plot_star_on_flat_panel (temp_star_flat_panel_point) {yed_prior, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
@@ -1682,8 +1690,14 @@ plot_star_on_spherical_biangle {delta_crucis, 128, label_pos_lft, 0, 0, false, f
 
 plot_star_on_panel (temp_star_panel_point) {delta_crucis, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_crucis, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_crucis, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_urt, 0, 0, false, true};
+
+label.urt("{\small $\delta$ Crucis}", temp_star_flat_panel_point shifted (-.333cm, .5cm))
+         with_text_color label_color on_picture flat_quadrant_picture[3];
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, .333cm + 5.5pt)
+  with_color line_color on_picture flat_quadrant_picture[3];
 
 %% *** (3) 129. Rastaban
 
@@ -2324,8 +2338,13 @@ plot_star_on_spherical_biangle {beta_muscae, 182, label_pos_top, -.25cm, -4pt, f
 
 plot_star_on_panel (temp_star_panel_point) {beta_muscae, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {beta_muscae, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {beta_muscae, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 0, -4pt, false, true};
+
+label.top("{\small\vbox{\hbox{\hskip-1pt$\beta$ Mus-}\vskip-6.5pt\hbox{\hskip4pt cae}}}",
+         temp_star_flat_panel_point shifted (0pt, 1.5pt))
+         with_text_color label_color on_picture flat_quadrant_picture[3];
+
 
 %% *** (3) 183. Seginus
 
