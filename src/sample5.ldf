@@ -50,111 +50,9 @@
 
 %% * (1) Plotting stars on sphere development (spherical biangles)
 
+input "astronmy.lmc";
+
 %% ** (2) Variable declarations
-
-%% *** (3)  Global, used in macros.
-
-point p[];    
-picture v[];  
-numeric bi_ang[];  
-picture bi_ang_pict[];
-numeric biangle_width[];
-numeric RA_arc_length;
-numeric Declination_arc_length;
-numeric middle_angle;   
-numeric min_edge_angle; 
-numeric max_edge_angle;
-point ra_decl_zero_pt;
-point R[];
-picture_vector pv;
-picture qv[];
-picture label_picture;
-picture flat_quadrant_picture[];
-numeric label_picture_ctr;
-newwrite nw[];
-pen medium_pen;
-pen large_pen;
-pen Large_pen;
-path Q;
-color ccolor;
-boolean do_black;
-boolean do_extra_labels;
-numeric i;
-numeric label_pos_zero;
-numeric label_pos_top;
-numeric label_pos_bot;
-numeric label_pos_rt;
-numeric label_pos_urt;
-numeric label_pos_ulft;
-numeric label_pos_lrt;
-numeric label_pos_llft;
-newwrite label_out;
-picture tab_picture;
-newwrite star_info_combined;
-path edge[];
-
-rectangle D[][];
-triangle T[][];
-picture quadrant_picture;
-point star_point;
-star_point := origin;
-path quadrant[][];
-path flat_quadrant[][];
-path temp_path[];
-
-point temp_star_panel_point;
-temp_star_panel_point := origin;
-
-point temp_star_flat_panel_point;
-temp_star_flat_panel_point := origin;
-
-numeric RRA_ctr;
-
-numeric DDecl_ctr;
-
-numeric basic_shift_val;
-
-basic_shift_val := 3pt;
-
-RRA_ctr := 0;
-DDecl_ctr := 0;
-
-label_pos_zero := 0;
-label_pos_top  := 1;
-label_pos_bot  := 2;
-label_pos_lft  := 3;
-label_pos_rt   := 4;
-label_pos_urt  := 5;
-label_pos_ulft := 6;
-label_pos_lrt  := 7;
-label_pos_llft := 8;
-
-pen star_pen[];
-
-star_pen[-1] := pencircle scaled (8pt, 8pt, 8pt);       
-star_pen[0]  := pencircle scaled (7pt, 7pt, 7pt); 
-star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);       
-star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
-star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
-star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
-star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);
-star_pen[6]  := pencircle scaled (1pt, 1pt, 1pt);       
-
-medium_pen := pencircle scaled (2pt, 2pt, 2pt);
-large_pen  := pencircle scaled (3pt, 3pt, 3pt);
-Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
-
-label_picture_ctr := 0;
-
-do_extra_labels := false;
-
-label_out := "sample_5_labels.tex";
-
-star_info_combined := "sample_5_star_info_combined.tex";
-
-string empty_str;
-
-empty_str := "";
 
 %% *** (3) Global, used in the following code (not in macros).
 
@@ -179,8 +77,6 @@ color line_color;
 
 numeric V;
 
-%% ** (2) 
-
 radius := 7cm;
 do_black := false; %% true
 
@@ -201,8 +97,6 @@ for i = 0 upto 7:
   %message "s == " & s;
   write s to nw[i];
 endfor;
-
-input "astronmy.lmc";
 
 %% ** (2) Call macros for the spherical biangles and the sphere.
 
@@ -2206,8 +2100,6 @@ label.top("{\small\vbox{\hbox{Ras Elased}\vskip-4pt\hbox{Australis}}}", temp_sta
           with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 168. Alnasl
-
-%% !! START HERE: LDF 2021.08.19.
 
 plot_star_on_sphere (star_point) {radius, alnasl};
 
