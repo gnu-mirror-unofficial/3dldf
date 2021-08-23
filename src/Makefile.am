@@ -991,7 +991,7 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 .PHONY : run
 
 run: 3dldf$(EXEEXT) sample5.ldf sample3.lmc 
-	3dldf$(EXEEXT) sample5.ldf
+	3dldf$(EXEEXT) --stars-limit 200 sample5.ldf
 
 .PHONY : rrun
 
