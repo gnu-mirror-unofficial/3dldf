@@ -355,8 +355,7 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short VERSION_INDEX              =  8;
   const unsigned short DATABASE_INDEX             =  9;
   const unsigned short ASTRONOMY_INDEX            = 10;
-
-
+  const unsigned short STARS_LIMIT_INDEX          = 11;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -380,6 +379,7 @@ Added the ``\.{--quiet}'' option.
     {"version", 0, 0, 0},
     {"database", 0, 0, 0},
     {"astronomy", 0, 0, 0},
+    {"stars-limit", 1, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -505,6 +505,8 @@ Edited the output.
                  << "--database:              Enables the use of the MySQL databases."
                  << endl << endl 
                  << "--astronomy:             Enables the features of GNU 3DLDF pertaining to astronomy."
+                 << endl << endl 
+                 << "--stars-limit:           Sets the limit for the number of stars to be read from the database."
                  << endl << endl; 
 
 #if DEBUG_COMPILE
@@ -741,6 +743,21 @@ Added the ``\.{astronomy}'' option.
             }
         }
 
+@q **** (4) stars_limit.@>
+@ stars_limit.
+
+\LOG
+\initials{LDF 2021.06.03.}
+Added the ``\.{stars_limit}'' option.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == STARS_LIMIT_INDEX)
+        {
+           stars_limit = atoi(optarg);
+        }
+
 @q **** (4) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
 
@@ -762,11 +779,11 @@ Added the ``\.{astronomy}'' option.
 @<GCC command line option processing@>=
 
     else if (option_ctr == '?')
-      {
-        cerr << "getopt_long() returned ambiguous match. Breaking."
+    {
+        cerr << "`getopt_long_only' returned ambiguous match. Breaking."
              << endl << endl ;
         break;
-      }
+    }
 
 @q **** (4) Invalid option.@>
 @ Invalid option.
