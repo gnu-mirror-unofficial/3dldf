@@ -2050,6 +2050,9 @@ after this.  Their values should never change after this!
 |MAX_REAL_SQRT| must be initialized here,
 because it's used in |Point::magnitude|.  
 \initials{LDF 2003.12.29.}  
+
+\initials{LDF 2021.08.23.}
+Added |int stars_limit|.
 \ENDLOG 
 
 @<Global variables@>=
@@ -2066,6 +2069,8 @@ extern const real INVALID_REAL = FLT_MAX;
 
 real MAX_REAL = 0;
 real MAX_REAL_SQRT = 0;
+
+int stars_limit = 1500;
 
 @ |VERBOSE_GLOBAL| is |false| by default.  
 It is set to |true| by the command line option ``{\tt --verbose}''.  
@@ -2095,6 +2100,7 @@ extern const bool ldf_real_float;
 extern const bool ldf_real_double;
 extern real MAX_REAL;
 extern real MAX_REAL_SQRT;
+extern int stars_limit;
 
 @
 \LOG
