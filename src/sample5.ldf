@@ -270,8 +270,8 @@ draw_extra_label_on_spherical_biangle {antares, R15, 6, 5, Left, Bottom, label_p
 
 plot_star_on_panel (temp_star_panel_point) {antares, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {antares, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_urt,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {antares, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_urt, -1pt, -3pt, false, false};
 
 %% *** (3) 16. Spica
 
@@ -375,8 +375,8 @@ draw R24 -- (R24 shifted (-.18cm, .575cm)) with_color line_color on_picture bi_a
 
 plot_star_on_panel (temp_star_panel_point) {shaula, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {shaula, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {shaula, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 0, .4cm, false, false};
 
 %% *** (3) 25. Gacrux
 
@@ -789,8 +789,8 @@ plot_star_on_spherical_biangle {rasalhague, 59, label_pos_top, -5pt, 0, false, f
 
 plot_star_on_panel (temp_star_panel_point) {rasalhague, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {rasalhague, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {rasalhague, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, -3pt, -2pt, false, false};
 
 %% *** (3) 60. Algol
 
@@ -938,9 +938,8 @@ plot_star_on_spherical_biangle {eltanin, 72, label_pos_rt, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {eltanin, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {eltanin, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_llft,
-                         0, 0, false, false};
-
+plot_star_on_flat_panel (temp_star_flat_panel_point) {eltanin, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_llft, 5pt, 2pt, false, false};
 %% *** (3) 73. Mintaka
 
 plot_star_on_sphere (star_point) {radius, mintaka};
@@ -999,8 +998,8 @@ plot_star_on_spherical_biangle {wei, 77, label_pos_top, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {wei, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {wei, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {wei, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 0, -1pt, false, false};
 
 %% *** (3) 78. Men
 
@@ -1208,8 +1207,8 @@ plot_star_on_spherical_biangle {han, 94, label_pos_top, 2pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {han, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {han, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {han, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 2pt, -1.25pt, false, false};
 
 %% *** (3) 95. Zeta Centauri
 
@@ -1456,7 +1455,7 @@ draw R115 -- (R115 shifted (-8pt, 2.5pt)) with_color line_color on_picture qv[6]
 plot_star_on_panel (temp_star_panel_point) {lesath, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {lesath, temp_star_panel_point,
-                         RRA_ctr, DDecl_ctr, label_pos_lft,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
 %% *** (3) 116. Pi Puppis
@@ -1579,8 +1578,8 @@ plot_star_on_spherical_biangle {cebalrai, 125, label_pos_top, -.125cm - 3pt, 0, 
 
 plot_star_on_panel (temp_star_panel_point) {cebalrai, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {cebalrai, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {cebalrai, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, -4pt, -1pt, false, false};
 
 %% *** (3) 126. Kursa
 
@@ -1599,12 +1598,13 @@ plot_star_on_sphere (star_point) {radius, kornephoros};
 
 plot_star_on_spherical_biangle {kornephoros, 127, label_pos_rt, 0, -2pt, false, false};
 
-draw_extra_label_on_spherical_biangle {kornephoros, R127, 6, 5, Left, Top, label_pos_rt, 0, 0, false, true, false, false};
+draw_extra_label_on_spherical_biangle {kornephoros, R127, 6, 5, Left, Top, label_pos_rt, 0, 0,
+                                       false, true, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {kornephoros, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {kornephoros, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {kornephoros, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_rt, -1.5pt, -2pt, false, false};
 
 %% *** (3) 128. Delta Crucis
 
@@ -1631,10 +1631,8 @@ plot_star_on_spherical_biangle {rastaban, 129, label_pos_top, -.125cm - 2pt, 0, 
 
 plot_star_on_panel (temp_star_panel_point) {rastaban, star_point};
 
-%% !! START HERE:  LDF 2021.08.21.
-
 plot_star_on_flat_panel (temp_star_flat_panel_point) {rastaban, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_top, 0, 0, false, false};
+                         label_pos_top, -.125cm - 2pt, -.5pt, false, false};
 
 %% *** (3) 130. Cor Caroli Two
 
@@ -1677,8 +1675,8 @@ plot_star_on_spherical_biangle {rutilicus, 133, label_pos_rt, 0, 0, false, false
 
 plot_star_on_panel (temp_star_panel_point) {rutilicus, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {rutilicus, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_rt,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {rutilicus, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_rt, -2pt, 0, false, false};
 
 %% *** (3) 134. Beta Hydri
 
@@ -1709,7 +1707,7 @@ plot_star_on_spherical_biangle {tau_scorpii, 135, label_pos_rt, 0, 0, false, fal
 plot_star_on_panel (temp_star_panel_point) {tau_scorpii, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {tau_scorpii, temp_star_panel_point,
-                         RRA_ctr, DDecl_ctr, label_pos_rt, 0, 0, false, false};
+                         RRA_ctr, DDecl_ctr, label_pos_rt, -2pt, 0, false, false};
 
 %% *** (3) 136. Kaus Borealis
 
@@ -2199,8 +2197,14 @@ plot_star_on_spherical_biangle {mu^one_scorpii, 175, label_pos_bot, .25cm + 3pt,
 
 plot_star_on_panel (temp_star_panel_point) {mu^one_scorpii, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {mu^one_scorpii, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_ulft,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {mu^one_scorpii, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 0, 0, false, true};
+
+%% !! START HERE:  LDF 2021.08.23.  Figure out how to get small superscript.
+
+label.top("\vbox{{\Small\hbox{$\scriptstyle \mu^1$\hskip1.5pt Scorpii}}}",
+          temp_star_flat_panel_point shifted (1.5pt, -1pt))
+          with_text_color label_color on_picture flat_quadrant_picture[3];
 
 %% *** (3) 176. Gamma Gruis
 
@@ -2224,10 +2228,8 @@ plot_star_on_panel (temp_star_panel_point) {delta_persei, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {delta_persei, temp_star_panel_point, RRA_ctr, DDecl_ctr,
                          label_pos_lft, 0, 0, false, true};
 
-label.lft("\\vbox{{\\small\\hbox{$\\delta$ Per-}\\vskip-4pt\\hbox{Sei}}}", temp_star_flat_panel_point shifted (2pt, -.25cm))
+label.lft("\vbox{{\small\hbox{$\delta$ Per-}\vskip-4pt\hbox{Sei}}}", temp_star_flat_panel_point shifted (2pt, -.25cm))
      with_text_color label_color on_picture flat_quadrant_picture[2];
-
-
 
 %% *** (3) 178. Phurad
 
@@ -2441,8 +2443,8 @@ plot_star_on_spherical_biangle {zeta_arae, 195, label_pos_top, 0, 0, false, fals
 
 plot_star_on_panel (temp_star_panel_point) {zeta_arae, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {zeta_arae, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_bot,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {zeta_arae, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_bot, 0, 0, false, false};
 
 %% *** (3) 196. Sarin
 
@@ -2452,8 +2454,8 @@ plot_star_on_spherical_biangle {sarin, 196, label_pos_top, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {sarin, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {sarin, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {sarin, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_top, 0, -1.75pt, false, false};
 
 %% *** (3) 197. Ke Kwan
 
@@ -2509,7 +2511,7 @@ plot_star_on_spherical_biangle {pi_herculis, 200, label_pos_top, 0, 0, false, fa
 plot_star_on_panel (temp_star_panel_point) {pi_herculis, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {pi_herculis, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_top, 0, 0, false, false};
+                         label_pos_top, 0, -1pt, false, false};
 
 %% ** (2)
 
