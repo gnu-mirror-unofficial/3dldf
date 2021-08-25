@@ -376,7 +376,10 @@ draw R24 -- (R24 shifted (-.18cm, .575cm)) with_color line_color on_picture bi_a
 plot_star_on_panel (temp_star_panel_point) {shaula, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {shaula, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_top, 0, .4cm, false, false};
+                         label_pos_top, .25cm - 2pt, .5cm - 2pt, false, false};
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (.25cm - .5pt, .6cm)
+   with_color line_color on_picture flat_quadrant_picture[3];
 
 %% *** (3) 25. Gacrux
 
@@ -560,7 +563,7 @@ plot_star_on_spherical_biangle {sargas, 39, label_pos_lft, 0, -3pt, false, false
 plot_star_on_panel (temp_star_panel_point) {sargas, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {sargas, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
-                         0, 0, false, false};
+                         1pt, -.125cm + 2.5pt, false, false};
 
 %% *** (3) 40. Avior
 
@@ -999,7 +1002,7 @@ plot_star_on_spherical_biangle {wei, 77, label_pos_top, 0, 0, false, false};
 plot_star_on_panel (temp_star_panel_point) {wei, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {wei, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_top, 0, -1pt, false, false};
+                         label_pos_ulft, 4pt, -1pt, false, false};
 
 %% *** (3) 78. Men
 
@@ -1068,8 +1071,13 @@ draw R83 -- (R83 shifted (0, .5cm)) with_color line_color on_picture qv[6];
 
 plot_star_on_panel (temp_star_panel_point) {girtab, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {girtab, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {girtab, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+                         label_pos_lft, 0, 0, false, true};
+
+label.lft("{\SMALL\vbox{\hbox{Girtab}}}", temp_star_flat_panel_point shifted (-1pt, 0pt))
+         with_text_color label_color on_picture flat_quadrant_picture[3];
+
+
 
 %% *** (3) 84. Ankaa
 
@@ -1456,7 +1464,10 @@ plot_star_on_panel (temp_star_panel_point) {lesath, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {lesath, temp_star_panel_point,
                          RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                         -.333cm, .25cm - 1pt, false, false};
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (-.25cm - 2pt, .333cm)
+    with_color line_color on_picture flat_quadrant_picture[3];
 
 %% *** (3) 116. Pi Puppis
 
@@ -1707,7 +1718,12 @@ plot_star_on_spherical_biangle {tau_scorpii, 135, label_pos_rt, 0, 0, false, fal
 plot_star_on_panel (temp_star_panel_point) {tau_scorpii, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {tau_scorpii, temp_star_panel_point,
-                         RRA_ctr, DDecl_ctr, label_pos_rt, -2pt, 0, false, false};
+                         RRA_ctr, DDecl_ctr, label_pos_rt, -2pt, 0, false, true};
+
+label.rt("{\small\vbox{\hbox{$\delta$\hskip.75pt Centauri}}}",
+         temp_star_flat_panel_point shifted (1pt, 0pt))
+         with_text_color label_color on_picture flat_quadrant_picture[3];
+
 
 %% *** (3) 136. Kaus Borealis
 
@@ -1792,6 +1808,8 @@ plot_star_on_spherical_biangle {choo, 142, label_pos_top, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {choo, star_point};
 
+%% !! START HERE: LDF 2021.08.25.
+
 plot_star_on_flat_panel (temp_star_flat_panel_point) {choo, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                          0, 0, false, false};
 
@@ -1875,7 +1893,7 @@ plot_star_on_panel (temp_star_panel_point) {gamma_trianguli_australis, star_poin
 plot_star_on_flat_panel (temp_star_flat_panel_point) {gamma_trianguli_australis, temp_star_panel_point, RRA_ctr, DDecl_ctr,
                          label_pos_top, 0, 0, false, true};
 
-label.lrt("{\SMALL\vbox{\hbox{\hskip1pt{\SMALLgreek\char13} Tri-}\vskip-6pt\hbox{\hskip-1.5pt anguli}"
+label.lrt("{\SMALL\vbox{\hbox{\hskip1.5pt{\SMALLgreek\char13} Tri-}\vskip-6pt\hbox{\hskip-1.5pt anguli}"
          & "\vskip-6pt\hbox{\hskip-1.5pt Aust-}\vskip-6pt\hbox{\hskip-1.5pt ralis}}}",
          temp_star_flat_panel_point shifted (-.5pt, 4.5pt))
          with_text_color label_color on_picture flat_quadrant_picture[3];
@@ -2128,7 +2146,11 @@ plot_star_on_spherical_biangle {iota^one_scorpii, 170, label_pos_rt, -2pt, -3pt,
 plot_star_on_panel (temp_star_panel_point) {iota^one_scorpii, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {iota^one_scorpii, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_lft, 0, 0, false, false};
+                         label_pos_lft, 0, 0, false, true};
+
+label.lft("{\SMALL\vbox{\hbox{$\scriptstyle\iota^1$\hskip.75pt Centauri}}}",
+         temp_star_flat_panel_point shifted (0pt, -1.5pt))
+         with_text_color label_color on_picture flat_quadrant_picture[3];
 
 %% *** (3) 171. Deneb El Okab
 
@@ -2200,10 +2222,8 @@ plot_star_on_panel (temp_star_panel_point) {mu^one_scorpii, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {mu^one_scorpii, temp_star_panel_point, RRA_ctr, DDecl_ctr,
                          label_pos_top, 0, 0, false, true};
 
-%% !! START HERE:  LDF 2021.08.23.  Figure out how to get small superscript.
-
-label.top("\vbox{{\Small\hbox{$\scriptstyle \mu^1$\hskip1.5pt Scorpii}}}",
-          temp_star_flat_panel_point shifted (1.5pt, -1pt))
+label.top("\vbox{{\Small\hbox{$\scriptstyle \mu^1$\hskip1pt Scorpii}}}",
+          temp_star_flat_panel_point shifted (2pt, -.5pt))
           with_text_color label_color on_picture flat_quadrant_picture[3];
 
 %% *** (3) 176. Gamma Gruis
