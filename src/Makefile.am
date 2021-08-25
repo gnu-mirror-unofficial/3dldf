@@ -365,6 +365,11 @@ f-run-bi:
 	$(MAKE) parser.o
 	$(MAKE) run-bi
 
+.PHONY: run-s
+
+run-s:
+	3dldf sample5 && mpost sample5 && tex sample5 && dvips -o sample5.ps sample5.dvi
+
 #### *** (3) parser2
 
 # parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
