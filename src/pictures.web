@@ -93,7 +93,7 @@ versions are now in their own RCS repository.
 \initials{LDF 2002.10.20.} 
 |Labels| are the only objects, other than |Shapes|, that can be put
 onto |Pictures|.  They are
-created by the functions |label()| and |dotlabel()|, which are
+created by the functions |label| and |dotlabel|, which are
 currently defined for |Points| and |Paths|.
 
 @q * (1) {\bf Label} class definition.@>
@@ -411,10 +411,6 @@ Picture(void);
 Picture::Picture(void)  
 {
 
-#if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
-#endif /* |DEBUG_COMPILE|  */@; 
-
   do_labels = true;
 
   return;
@@ -425,11 +421,12 @@ Picture::Picture(void)
 @ Copy constructor.
 @^\cfunc{Picture}{Picture}@>
 !! PORTING.  
-\initials{LDF 2002.12.05.}  Moved to \filename{points.web} because
-I've moved |Picture::operator=()| to \filename{points.web}, so the
-latter is undefined in this 
-file.  I've had to do these things because of differences between the
-DEC compiler and the GNU compiler.
+\initials{LDF 2002.12.05.}  
+Moved to \filename{points.web} because I've moved
+|Picture::operator=()| to \filename{points.web}, so the latter is
+undefined in this file.  I've had to do these things because of
+differences between the DEC compiler and the GNU compiler.
+
 @<Declare |Picture| functions@>=
 Picture(const Picture& p);
 
