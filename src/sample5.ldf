@@ -78,7 +78,7 @@ color line_color;
 numeric V;
 
 radius := 7cm;
-do_black := true; %% false
+do_black := false; %% true
 
 if do_black:
   line_color := white;
@@ -100,7 +100,10 @@ endfor;
 
 %% ** (2) Call macros for the spherical biangles and the sphere.
 
-get_spherical_biangles {radius}; 
+boolean do_labels;
+do_labels := true;
+
+get_spherical_biangles {radius, do_labels}; 
 
 get_sphere_for_plotting_stars {radius};
 
