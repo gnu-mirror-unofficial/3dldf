@@ -243,30 +243,31 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
   % fi;
 
   %% !! START HERE: LDF 2021.08.29.  Do this differently.
-  
-  p200 := p20 shifted (0, 0, -1);
-  p201 := (p20 shifted (-tab_wd, 0)) rotated_around (p20, p200) 45;
-  if ddo_labels:
-    dotlabel.lft("$p_{201}$", p201) on_picture tab_picture;
-  fi;
+
+
+  % p200 := p20 shifted (0, 0, -1);
+  % p201 := (p20 shifted (-tab_wd, 0)) rotated_around (p20, p200) 45;
+  % if ddo_labels:
+  %   dotlabel.lft("$p_{201}$", p201) on_picture tab_picture;
+  % fi;
     
-  p202 := p24 shifted (0, 0, -1);
-  p203 := (p24 shifted (-tab_wd, 0)) rotated_around (p24, p202) -45;
-  if ddo_labels:
-    dotlabel.lft("$p_{203}$", p203) on_picture tab_picture;
-  fi;
+  % p202 := p24 shifted (0, 0, -1);
+  % p203 := (p24 shifted (-tab_wd, 0)) rotated_around (p24, p202) -45;
+  % if ddo_labels:
+  %   dotlabel.lft("$p_{203}$", p203) on_picture tab_picture;
+  % fi;
 
-  draw p20 -- p201 -- p203 -- p24  on_picture tab_picture;
-  draw (p20 -- p201 -- p203 -- p24) rotated_around (p20, p21) 180 on_picture tab_picture;
+  % draw p20 -- p201 -- p203 -- p24  on_picture tab_picture;
+  % draw (p20 -- p201 -- p203 -- p24) rotated_around (p20, p21) 180 on_picture tab_picture;
 
-  for i = 24 step 2 until 34:
-    p200 := p[i] shifted (0, 0, -1);
-    p201 := (p[i] shifted (-tab_wd, 0)) rotated_around (p[i], p200) 45;
-    p202 := p[i+2] shifted (0, 0, -1);
-    p203 := (p[i+2] shifted (-tab_wd, 0)) rotated_around (p[i+2], p202) -20;
-    draw p[i] -- p201 -- p203 -- p[i+2]  on_picture tab_picture;
-    draw (p[i] -- p201 -- p203 -- p[i+2]) rotated_around (p20, p21) 180 on_picture tab_picture;
-  endfor;
+  % for i = 24 step 2 until 34:
+  %   p200 := p[i] shifted (0, 0, -1);
+  %   p201 := (p[i] shifted (-tab_wd, 0)) rotated_around (p[i], p200) 45;
+  %   p202 := p[i+2] shifted (0, 0, -1);
+  %   p203 := (p[i+2] shifted (-tab_wd, 0)) rotated_around (p[i+2], p202) -20;
+  %   draw p[i] -- p201 -- p203 -- p[i+2]  on_picture tab_picture;
+  %   draw (p[i] -- p201 -- p203 -- p[i+2]) rotated_around (p20, p21) 180 on_picture tab_picture;
+  % endfor;
   
   if false:  
     draw tab0 with_color red  on_picture tab_picture;
@@ -333,3 +334,25 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
   clear current_picture;
   
 enddef;
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
