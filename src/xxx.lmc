@@ -55,9 +55,7 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
   point ra_decl_zero_pt;
   numeric tab_wd;
 
-  path tab_path;
-  
-  tab_wd := .5cm;
+  tab_wd := .25cm;
   
   radius0 := rad;
 
@@ -117,16 +115,10 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
   edge2 := null_path;  
   edge3 := null_path;  
 
-  tab0 := null_path; 
-  tab1 := null_path;  
-
   edge0 += ..;
   edge1 += ..;
   edge2 += ..;
   edge3 += ..;
-
-  tab0 += ..;
-  tab1 += ..;
 
   n0 := a / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
   n1 := a / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
@@ -145,10 +137,6 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
   edge0 += p20;
   edge1 += p21;
 
-  tab0 += p20 shifted (-tab_wd, 0);
-
-  %draw p20 -- p20 shifted (-tab_wd, 0) on_picture tab_picture;
-  
   p22 := (0, -.25a);
   p23 := (0, .25a);
 
@@ -173,10 +161,6 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
     edge0 += p[j];
     edge1 += p[j + 1];
 
-    tab0 += p[j] shifted (-tab_wd, 0);
-    %draw p[j] -- p[j] shifted (-tab_wd, 0) on_picture tab_picture;
-    %draw (p[j] -- p[j] shifted (-tab_wd, 0)) rotated (180, 0) on_picture tab_picture;
-    
     j += 2;
     k += 2;
   endfor;
@@ -219,65 +203,95 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
     draw (p36 -- p37) rotated (180, 0);
   fi;
 
-  tab0 += --;
-  tab0 += p36;
-
   edge0 += p23;
   edge1 += p23;
 
   edge2 := edge0 rotated (180, 0);
   edge3 := edge1 rotated (180, 0);
 
-  tab1 := tab0 rotated (180, 0);
-  
   draw edge0 with_color dark_gray;
   draw edge1 with_color dark_gray;
   draw edge2 with_color dark_gray;
   draw edge3 with_color dark_gray;
 
-  Q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
+  p38 := p23;
 
-  Q += cycle;
+  p39 := p22; %% We need to use p22 in the following loop.
+              %% It's original value is restored below.
+              %% LDF 2021.08.30.
 
-  for i = 0 upto 7:
-    bi_ang_pict[i] := current_picture;
-    label("{\largebf " & decimal (i+1) & "}", p22 shifted (0, -.5cm)) on_picture bi_ang_pict[i];
+  p22 := p20;
+
+  for i = 22 step 2 until 34:
+    p100 := mediate(p[i], p[i+2], .5);
+  %dotlabel.rt("$p_{100}$", p100) on_picture tab_picture;
+    p101 := p100 shifted (0, 0, 1);
+    p102 := p[i+2] rotated_around (p100, p101) 90;
+    p103 := mediate(p100, p102, .6);
+  %dotlabel.lft("$p_{103}$", p103) on_picture tab_picture;
+    p104 := p[i] shifted by (p103 - p100);
+    p105 := p[i+2] shifted by (p103 - p100);
+  %dotlabel.lft("$p_{104}$", p104) on_picture tab_picture;
+  %dotlabel.lft("$p_{105}$", p105) on_picture tab_picture;
+    p106 := mediate(p103, p104, .6);
+    p107 := mediate(p103, p105, .6);
+  %dotlabel.lft("$p_{106}$", p106) on_picture tab_picture;
+  %dotlabel.lft("$p_{107}$", p107) on_picture tab_picture;
+
+    tab0 := p[i] -- p106 -- p107 -- p[i+2];
+    draw tab0 on_picture tab_picture;
+    draw tab0 rotated (180, 0) on_picture tab_picture;
+
   endfor;
+
+  p22 := p39;  %% Restoring old value of p22.  LDF 2021.08.30.
+    
+
   
-  label("RA $337.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[0];
-  label("$0^\circ$",        p22 shifted (0, -1cm))      bi_ang_pict[0];
-  label("$22.5^\circ$",     p22 shifted (1.25cm, -1cm)) bi_ang_pict[0];
+ Q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
 
-  label("RA $22.5^\circ$", p22 shifted (-1.5cm, -1cm))  bi_ang_pict[1];
-  label("$45^\circ$",      p22 shifted (0, -1cm))       bi_ang_pict[1];
-  label("$67.5^\circ$",    p22 shifted (1.25cm, -1cm))  bi_ang_pict[1];
+ Q += cycle;
 
-  label("RA $67.5^\circ$",  p22 shifted (-1.5cm, -1cm)) bi_ang_pict[2];
-  label("$90^\circ$",       p22 shifted (0, -1cm))      bi_ang_pict[2];
-  label("$112.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[2];
+ for i = 0 upto 7:
+   bi_ang_pict[i] := current_picture;
+   label("{\largebf " & decimal (i+1) & "}", p22 shifted (0, -.5cm)) on_picture bi_ang_pict[i];
+ endfor;
+ 
+ label("RA $337.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[0];
+ label("$0^\circ$",        p22 shifted (0, -1cm))      bi_ang_pict[0];
+ label("$22.5^\circ$",     p22 shifted (1.25cm, -1cm)) bi_ang_pict[0];
 
-  label("RA $112.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[3];
-  label("$135^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[3];
-  label("$157.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[3];
+ label("RA $22.5^\circ$", p22 shifted (-1.5cm, -1cm))  bi_ang_pict[1];
+ label("$45^\circ$",      p22 shifted (0, -1cm))       bi_ang_pict[1];
+ label("$67.5^\circ$",    p22 shifted (1.25cm, -1cm))  bi_ang_pict[1];
 
-  label("RA $157.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[4];
-  label("$180^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[4];
-  label("$202.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[4]; 
+ label("RA $67.5^\circ$",  p22 shifted (-1.5cm, -1cm)) bi_ang_pict[2];
+ label("$90^\circ$",       p22 shifted (0, -1cm))      bi_ang_pict[2];
+ label("$112.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[2];
 
-  label("RA $202.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[5];
-  label("$225^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[5];
-  label("$247.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[5];
+ label("RA $112.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[3];
+ label("$135^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[3];
+ label("$157.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[3];
 
-  label("RA $247.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[6];
-  label("$270^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[6];
-  label("$292.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[6];
+ label("RA $157.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[4];
+ label("$180^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[4];
+ label("$202.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[4]; 
 
-  label("RA $292.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[7];
-  label("$315^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[7];
-  label("$337.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[7];
-  
-  clear current_picture;
-  
+ label("RA $202.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[5];
+ label("$225^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[5];
+ label("$247.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[5];
+
+ label("RA $247.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[6];
+ label("$270^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[6];
+ label("$292.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[6];
+
+ label("RA $292.5^\circ$", p22 shifted (-1.5cm, -1cm)) bi_ang_pict[7];
+ label("$315^\circ$",      p22 shifted (0, -1cm))      bi_ang_pict[7];
+ label("$337.5^\circ$",    p22 shifted (1.25cm, -1cm)) bi_ang_pict[7];
+ 
+ clear current_picture;
+
+
 enddef;
 
 %% ** (2) End of 3DLDF code.
