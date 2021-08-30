@@ -370,6 +370,11 @@ f-run-bi:
 run-s:
 	3dldf sample5 && mpost -numbersystem "double" sample5 && tex sample5 && dvips -o sample5.ps sample5.dvi
 
+.PHONY: run-p
+
+run-p:
+	3dldf sample5 && mpost -numbersystem "double" sample5 && tex sample5 && dvipdfmx sample5.dvi
+
 #### *** (3) parser2
 
 # parser2.y++ : parser2.web prbsnflx$(EXEEXT) $(3dldf_PARSER2_FILES)
