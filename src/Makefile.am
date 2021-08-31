@@ -172,7 +172,7 @@ accsdtbs_SOURCES = accsdtbs.cxx
 EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
-             format.web patterns.web prelims.web runit \
+             format.web gpl-3.0.txt gpl-3.0_a3.txt patterns.web prelims.web runit \
              sample.ldf sample0.ldf sample1.ldf sample2.ldf sample3.ldf \
              sample3.lmc sample3.aux \
              sample1.tex sample2.tex sample3.tex srtstrin.cxx \

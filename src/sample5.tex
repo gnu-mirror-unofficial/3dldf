@@ -102,8 +102,6 @@
 
 %% * (1)
 
-\pageno=1
-
 %% Uncomment for A4 portrait
 \iffalse % \iftrue
 \special{papersize=210mm, 297mm}
@@ -146,11 +144,13 @@
 
 %% *** (3) 
 
+\pageno=1
+\footline={\hfil \folio\hfil}
+
 \begingroup
-\advance\hsize by -.5\hsize
-\advance\hsize by -6cm
+\advance\hsize by -1in
 \parskip=.5\baselineskip
-\centerline{{\largebx Celestial Sphere Models}}
+\centerline{{\largebx Celestial Sphere Models 1}}
 \vskip\baselineskip
 
 \small
@@ -199,22 +199,14 @@ Boston, MA  02110-1301 USA\hfil\break
 \advance\baselineskip by 2pt
 %\advance\parskip by 2pt
 \readtocfile
-\endgroup
-\vfil\eject
-
+\vskip1.5\baselineskip
 
 %% *** (3)
 
-\pageno=1
-\footline={\hfil \folio\hfil}
-
-
-\begingroup
 \medium
 \Chapter{instructions}{Instructions}
 \centerline{{\largebx Instructions}}
 \hldest{fit}{}{instructions}
-\advance\hsize by -2in
 \advance\baselineskip by 4pt
 \parskip=.5\baselineskip
 {\bf PLEASE NOTE!}  The author has tried to ensure that the following
@@ -326,7 +318,8 @@ it.
 \Chapter{copying}{Copying}
 \hldest{fit}{}{copying}
 %\advance\baselineskip by -6pt
-\listing{gpl-3.0.txt}
+\advance\hsize by 10in
+\listing{gpl-3.0_a3.txt}
 \endgroup
 
 %% *** (3)
