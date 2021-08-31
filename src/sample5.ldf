@@ -970,11 +970,11 @@ plot_star_on_spherical_biangle {caph, 74, label_pos_lft, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {caph, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {caph, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {caph, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_urt,
+                         -7pt, -2pt, false, true};
 
-draw_extra_label_on_flat_panel {caph, temp_star_flat_panel_point, empty_str, Left, 2, 3, 0, 15, 6,
-                                label_pos_lft, 0, 0, false};
+label.urt("{\Small Caph}", temp_star_flat_panel_point shifted (-4pt, 1pt))
+         with_text_color label_color on_picture flat_quadrant_picture[2];
 
 %% *** (3) 75. Epsilon Centauri
 
@@ -1393,7 +1393,7 @@ draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_
 plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {ruchbah, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_rt, .25cm, -.25cm, true, false};
+                         label_pos_rt, 2pt, 0, true, false};
 
 draw_extra_label_on_flat_panel {ruchbah, temp_star_flat_panel_point, empty_str, Right, 2, 2, 0, 1, 6,
                                 label_pos_rt, -2pt, 0, false};
@@ -1558,7 +1558,8 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {theta_carinae, temp_star_p
                          RRA_ctr, DDecl_ctr, label_pos_bot,
                          0, 0, false, true};
 
-label.lrt("{\Small\vbox{\hbox{{\Smallgreek\char18} Cari-}\vskip-4pt\hbox{n{\ae}}}}", temp_star_flat_panel_point shifted (-2pt, -2pt))
+label.lrt("{\Small\vbox{\hbox{{\Smallgreek\char18} Cari-}\vskip-4pt\hbox{n{\ae}}}}",
+          temp_star_flat_panel_point shifted (-2pt, -2pt))
           with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
 %% *** (3) 122. Porrima
