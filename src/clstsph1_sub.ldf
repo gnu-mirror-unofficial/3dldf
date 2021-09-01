@@ -1,6 +1,51 @@
 %% clstsph1_sub.ldf
 %% Created by Laurence D. Finston (LDF) Wed 01 Sep 2021 10:55:58 PM CEST
 
+%% ** (2) Variable declarations
+
+%% *** (3) Global, used in the following code (not in macros).
+
+numeric radius;
+string s;
+point star_panel_point[];
+numeric tab_width;
+boolean Left;
+boolean Right;
+boolean Bottom;
+boolean Top;
+color label_color;
+
+Left   := false;
+Right  := true;
+Bottom := false;
+Top    := true;
+
+tab_width := .4cm;
+
+color line_color;
+
+numeric V;
+
+radius := 7cm;
+
+if do_black:
+  line_color := white;
+  label_color := white;
+else:
+  line_color  := dark_gray;  
+  label_color := black;
+fi;
+  
+%% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
+
+for i = 0 upto 7:
+  s := "clstsph_1_" & decimal i & ".tex";
+  nw[i] := s;
+  s := "%%" & s & "\n%%";
+  %message "s == " & s;
+  write s to nw[i];
+endfor;
+
 %% ** (2) Call macros for the spherical biangles and the sphere.
 
 boolean do_labels;

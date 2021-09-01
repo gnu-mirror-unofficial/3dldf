@@ -178,7 +178,7 @@ EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              sample1.tex sample2.tex sample3.tex srtstrin.cxx \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
-             $(3dldf_PARSER_FILES) 
+             $(3dldf_PARSER_FILES) astronmy.lmc clstsph1.ldf clstsph1_sub.ldf clstsph1.tex
 
 
 # scanner2.c++ scanner2.h++ scanner2.l++ parser2.y++ 
@@ -1000,7 +1000,9 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 
-run: 3dldf$(EXEEXT) clstsph1.ldf sample3.lmc 
+#### sample3.lmc 
+
+run: 3dldf$(EXEEXT) clstsph1.ldf clstsph1_sub.ldf clstsph1.aux astronmy.lmc 
 	3dldf$(EXEEXT) --stars-limit 200 clstsph1.ldf
 
 .PHONY : rrun
