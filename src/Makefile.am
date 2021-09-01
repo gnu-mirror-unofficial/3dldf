@@ -131,7 +131,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                       pbpvexpr.w pbsndecl.w pcbvexpr.w pcirexpr.w \
 		      pclrcmnd.w pclvexpr.w pcnvexpr.w pcolexpr.w pcommand.w \
 		      pcondit.w pconexpr.w pcrclslc.w pcrvexpr.w pcubexpr.w \
-                      pcylexpr.w pcyvexpr.w pdpvexpr.w \
+                      pcylexpr.w pcyvexpr.w pdatbase.w pdpvexpr.w \
                       pdrwcmnd.w pdshexpr.w pedvexpr.w peldexpr.w \
                       pellexpr.w pellpslc.w pelvexpr.w peqexpr.w \
                       pfcvexpr.w pfgopcmd.w pfocexpr.w pfuncfin.w \
