@@ -178,8 +178,8 @@ EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              sample1.tex sample2.tex sample3.tex srtstrin.cxx \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
-             $(3dldf_PARSER_FILES) astronmy.lmc clstsph1.ldf clstsph1_sub.ldf clstsph1.tex
-
+             $(3dldf_PARSER_FILES) astronmy.lmc clstsph1.ldf clstsph1.aux clstsph1_sub.ldf clstsph1.tex \
+             clstsph2.ldf clstsph2.aux
 
 # scanner2.c++ scanner2.h++ scanner2.l++ parser2.y++ 
 
@@ -368,7 +368,8 @@ f-run-bi:
 .PHONY: run-s
 
 run-s:
-	3dldf clstsph1 && mpost -numbersystem "double" clstsph1 && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi
+	3dldf clstsph1 && 3dldf clstsph2 && mpost -numbersystem "double" clstsph1 && mpost -numbersystem "double" clstsph2 \
+           && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi
 
 .PHONY: run-p
 
@@ -1082,6 +1083,16 @@ clstsph1.pdf: clstsph1.dvi
 clstsph1.ps: clstsph1.dvi
 	dvips -o clstsph1.ps clstsph1.dvi
 
+
+clstsph2.pdf: clstsph2.dvi
+	dvipdfmx $<
+
+clstsph2.0: clstsph2.mp
+	mpost -numbersystem "double" clstsph2.mp
+
+clstsph2.mp: clstsph2.ldf clstsph2.aux clstsph1_sub.ldf astronmy.lmc
+	3dldf$(EXEEXT) clstsph2.ldf
+
 #### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
 #### They run TeX twice.
 #### LDF 2021.08.09.
@@ -1101,7 +1112,7 @@ pdfc:
 	$(MAKE) clstsph1.pdf
 
 
-clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph_1_star_info_combined.tex 
+clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph2.0 clstsph_1_star_info_combined.tex 
 	cat clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
             clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex | sort -n | grep -v ^% > clstsph_1_star_info_combined.tex
 	tex clstsph1.tex
