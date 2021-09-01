@@ -368,12 +368,12 @@ f-run-bi:
 .PHONY: run-s
 
 run-s:
-	3dldf sample5 && mpost -numbersystem "double" sample5 && tex sample5 && dvips -o sample5.ps sample5.dvi
+	3dldf clstsph1 && mpost -numbersystem "double" clstsph1 && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi
 
 .PHONY: run-p
 
 run-p:
-	3dldf sample5 && mpost -numbersystem "double" sample5 && tex sample5 && dvipdfmx sample5.dvi
+	3dldf clstsph1 && mpost -numbersystem "double" clstsph1 && tex clstsph1 && dvipdfmx clstsph1.dvi
 
 #### *** (3) parser2
 
@@ -1000,28 +1000,28 @@ utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 .PHONY : run
 
-run: 3dldf$(EXEEXT) sample5.ldf sample3.lmc 
-	3dldf$(EXEEXT) --stars-limit 200 sample5.ldf
+run: 3dldf$(EXEEXT) clstsph1.ldf sample3.lmc 
+	3dldf$(EXEEXT) --stars-limit 200 clstsph1.ldf
 
 .PHONY : rrun
 
 rrun:
-	3dldf sample5 && mpost sample5 && tex sample5 && dvips -o sample5.ps sample5.dvi 
+	3dldf clstsph1 && mpost clstsph1 && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi 
 
 # sample_3_labels_sorted.tex: sample3.mp
 # 	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
 
 .PHONY: pdf
 
-pdf: sample5.pdf
+pdf: clstsph1.pdf
 
 .PHONY: ps
 
-ps: sample5.ps # sample5_a4.ps
+ps: clstsph1.ps # clstsph1_a4.ps
 
 .PHONY: dvi
 
-dvi: sample5.dvi
+dvi: clstsph1.dvi
 
 .PHONY: f-ps
 
@@ -1032,7 +1032,7 @@ f-ps:
 .PHONY: ff-ps
 
 ff-ps:
-	touch sample5.ldf
+	touch clstsph1.ldf
 	$(MAKE) ps
 
 .PHONY: f-pdf
@@ -1074,72 +1074,72 @@ sample4.0: sample4.mp
 sample4.mp: 3dldf$(EXEEXT) sample4.ldf sample3.lmc sample4.aux 
 	3dldf$(EXEEXT) sample4.ldf
 
-sample5.pdf: sample5.dvi
+clstsph1.pdf: clstsph1.dvi
 	dvipdfmx $<
 
-sample5.ps: sample5.dvi
-	dvips -o sample5.ps sample5.dvi
+clstsph1.ps: clstsph1.dvi
+	dvips -o clstsph1.ps clstsph1.dvi
 
-#### psc and pdfc are to be used for updating the TOC in sample5.tex.
+#### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
 #### They run TeX twice.
 #### LDF 2021.08.09.
 
 .PHONY psc:
 
 psc:
-	$(MAKE) sample5.dvi
-	tex sample5.tex
-	$(MAKE) sample5.ps
+	$(MAKE) clstsph1.dvi
+	tex clstsph1.tex
+	$(MAKE) clstsph1.ps
 
 .PHONY pdfc:
 
 pdfc:
-	$(MAKE) sample5.dvi
-	tex sample5.tex
-	$(MAKE) sample5.pdf
+	$(MAKE) clstsph1.dvi
+	tex clstsph1.tex
+	$(MAKE) clstsph1.pdf
 
 
-sample5.dvi: sample5.tex sample5.0 sample_5_star_info_combined.tex 
-	cat sample_5_0.tex sample_5_1.tex sample_5_2.tex sample_5_3.tex sample_5_4.tex \
-            sample_5_5.tex sample_5_6.tex sample_5_7.tex | sort -n | grep -v ^% > sample_5_star_info_combined.tex
-	tex sample5.tex
+clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph_1_star_info_combined.tex 
+	cat clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
+            clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex | sort -n | grep -v ^% > clstsph_1_star_info_combined.tex
+	tex clstsph1.tex
 
-sample5.0 sample5.1 sample_5_star_info_combined.tex: sample5.mp 
-	mpost -numbersystem "double" sample5.mp
+clstsph1.0 clstsph1.1 clstsph_1_star_info_combined.tex: clstsph1.mp 
+	mpost -numbersystem "double" clstsph1.mp
 
-sample5.mp: 3dldf$(EXEEXT) sample5.ldf astronmy.lmc sample5.aux xxx.lmc
-	3dldf$(EXEEXT) sample5.ldf
+clstsph1.mp: 3dldf$(EXEEXT) clstsph1.ldf astronmy.lmc clstsph1.aux xxx.lmc
+	3dldf$(EXEEXT) clstsph1.ldf
 
-sample5_a4.dvi: sample5_a4.tex sample_5_star_info_combined.tex sample_5_star_info_alpha.tex
-	tex sample5_a4.tex
-	tex sample5_a4.tex 
+clstsph1_a4.dvi: clstsph1_a4.tex clstsph_1_star_info_combined.tex clstsph_1_star_info_alpha.tex
+	tex clstsph1_a4.tex
+	tex clstsph1_a4.tex 
 
-sample_5_star_info_alpha.tex: sample_5_star_info_combined.tex sample_5_star_info_alpha_temp.tex
-	cat sample_5_star_info_alpha_temp.tex | sort | cut -d} -f 2- > sample_5_star_info_alpha.tex 
+clstsph_1_star_info_alpha.tex: clstsph_1_star_info_combined.tex clstsph_1_star_info_alpha_temp.tex
+	cat clstsph_1_star_info_alpha_temp.tex | sort | cut -d} -f 2- > clstsph_1_star_info_alpha.tex 
 
-sample_5_star_info_alpha_temp.tex: srtstrin$(EXEEXT)
+clstsph_1_star_info_alpha_temp.tex: srtstrin$(EXEEXT)
 	srtstrin$(EXEEXT)
 
 srtstrin$(EXEEXT): srtstrin.cxx
 	g++ -o srtstrin srtstrin.cxx
 
-sample5_a4.ps: sample5_a4.dvi
-	dvips -o sample5_a4.ps sample5_a4.dvi
+clstsph1_a4.ps: clstsph1_a4.dvi
+	dvips -o clstsph1_a4.ps clstsph1_a4.dvi
 
-sample5_a4.pdf: sample5_a4.dvi
+clstsph1_a4.pdf: clstsph1_a4.dvi
 	dvipdfmx $<
 
 .PHONY : run-bi
 
 run-bi: 3dldf$(EXEEXT) 
-	3dldf$(EXEEXT) --bi sample5.ldf
+	3dldf$(EXEEXT) --bi clstsph1.ldf
 
 .PHONY : run-fbi
 
 run-fbi: 
 	rm -f parser.o
 	$(MAKE) 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) --bi sample5.ldf
+	3dldf$(EXEEXT) --bi clstsph1.ldf
 
 .PHONY : run-1
 run-1: 3dldf$(EXEEXT)

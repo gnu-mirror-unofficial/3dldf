@@ -48,7 +48,7 @@
 
 /* Laurence.Finston@gmx.de             */
 
-/* srtstrin sorts the contents of the file 'sample_5_star_info_combined.tex' */
+/* srtstrin sorts the contents of the file 'clstsph_1_star_info_combined.tex' */
 /* alphabetically by star name.  Greek letters are converted to the English  */
 /* equivalents, e.g., "$\alpha$" is converted to "alpha". The character '^'  */
 /* (for superscripts) is converted to a space.                               */
@@ -78,7 +78,7 @@ main(void)
 
    ofstream out_file;
 
-   out_file.open("sample_5_star_info_alpha_temp.tex");
+   out_file.open("clstsph_1_star_info_alpha_temp.tex");
 
    char buffer[256];
    memset(buffer, 0, 256);
@@ -89,8 +89,8 @@ main(void)
    size_t size;
    size_t size_1;
 
-   fp = popen("cat sample_5_star_info_combined.tex | cut -d{ -f4 | tr -d \"}\"", "r");
-   fp_1 = popen("cat sample_5_star_info_combined.tex", "r");
+   fp = popen("cat clstsph_1_star_info_combined.tex | cut -d{ -f4 | tr -d \"}\"", "r");
+   fp_1 = popen("cat clstsph_1_star_info_combined.tex", "r");
 
    if (fp == 0 || fp_1 == 0)
       cerr << "`popen' failed, returning NULL." << endl;
