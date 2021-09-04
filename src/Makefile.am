@@ -179,7 +179,7 @@ EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
              3DLDFmp.mp 3DLDFtex.bas 3DLDFtex.tex \
              $(3dldflb_CWEB_files) $(3dldf_SOURCES) \
              $(3dldf_PARSER_FILES) astronmy.lmc clstsph1.ldf clstsph1.aux clstsph1_sub.ldf clstsph1.tex \
-             clstsph2.ldf clstsph2.aux
+             clstsph2.ldf
 
 # scanner2.c++ scanner2.h++ scanner2.l++ parser2.y++ 
 
@@ -1090,7 +1090,7 @@ clstsph2.pdf: clstsph2.dvi
 clstsph2.0: clstsph2.mp
 	mpost -numbersystem "double" clstsph2.mp
 
-clstsph2.mp: clstsph2.ldf clstsph2.aux clstsph1_sub.ldf astronmy.lmc xxx.lmc
+clstsph2.mp: clstsph2.ldf clstsph1.aux clstsph1_sub.ldf astronmy.lmc xxx.lmc
 	3dldf$(EXEEXT) clstsph2.ldf
 
 #### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
