@@ -55,13 +55,37 @@ picture save_picture;
 
 save_picture := tab_picture;
 
+color label_color;
+
+numeric_vector nv;
+
+if do_black:
+  label_color := white;
+else:
+  label_color := black;
+fi;
+
 beginfig(0);
   output bi_ang_pict[0] with_projection parallel_x_y;
   draw_lines;
   output current_picture with_projection parallel_x_y;
   output qv[0] with_projection parallel_x_y;
   output tab_picture with_projection parallel_x_y;
-endfig;
+  
+  label.urt("{$\scriptstyle 0^\circ$}", origin) with_text_color label_color;
+  p200 := origin shifted by .5 * (p24 - p20);
+  label.rt("{$\scriptstyle 0^\circ$}", p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+  %nv := measure_text "$0^\circ$";
+  nv := measure_text "$\scriptstyle 0^\circ$";
+
+  message "nv:";
+  show nv;
+  pause;
+  
+  
+  
+endfig with_projection parallel_x_y;
 
 beginfig(1);
   output bi_ang_pict[1] with_projection parallel_x_y;
