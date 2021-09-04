@@ -72,18 +72,26 @@ beginfig(0);
   output qv[0] with_projection parallel_x_y;
   output tab_picture with_projection parallel_x_y;
   
-  label.urt("{$\scriptstyle 0^\circ$}", origin) with_text_color label_color;
+  label.urt("$\scriptstyle 0^\circ$", origin) with_text_color label_color;
+
   p200 := origin shifted by .5 * (p24 - p20);
-  label.rt("{$\scriptstyle 0^\circ$}", p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
 
-  %nv := measure_text "$0^\circ$";
-  nv := measure_text "$\scriptstyle 0^\circ$";
+  label.rt("$\scriptstyle 0\rm{h}$", p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
 
-  message "nv:";
-  show nv;
-  pause;
-  
-  
+  %draw p24 -- p20 with_color red;
+
+  p201 := mediate(p20, p24, .5);
+
+  numeric n;
+  n := (p24 - p20) angle (p21 - p20);
+
+  % message "n:";
+  % show n;
+  % pause;
+
+  label.rt("$\scriptstyle 22.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, .n) with_text_color label_color;
+
+  %drawdot mediate(mediate(p24, p25, .5), mediate(p20, p21, .5), .5) with_pen medium_pen;
   
 endfig with_projection parallel_x_y;
 
@@ -94,7 +102,14 @@ beginfig(1);
   output qv[1] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  label.rt("$\scriptstyle 1.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, .n) with_text_color label_color;
+
+  label.rt("$\scriptstyle 3\rm{h}$",
+           p200 shifted (-2pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
+
+  
+endfig with_projection parallel_x_y;
 
 beginfig(2);
   output bi_ang_pict[2] with_projection parallel_x_y;
@@ -103,7 +118,13 @@ beginfig(2);
   output qv[2] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  label.rt("$\scriptstyle 4.5\rm{h}$", p201 shifted (-2pt, -.25cm - 2.5pt)) rotated (0, 0, .n) with_text_color label_color;
+  
+  label.rt("$\scriptstyle 6\rm{h}$",
+           p200 shifted (-2pt, 0pt)) rotated (0, 0, 90) with_text_color label_color;
+  
+endfig with_projection parallel_x_y;
 
 beginfig(3);
   output bi_ang_pict[3] with_projection parallel_x_y;
@@ -112,7 +133,14 @@ beginfig(3);
   output qv[3] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  label.rt("$\scriptstyle 7.5\rm{h}$", p201 shifted (-1pt, .5cm - 4pt)) rotated (0, 0, .n) with_text_color label_color;
+  
+  label.rt("$\scriptstyle 9\rm{h}$",
+           p200 shifted (-2pt, -.333cm - 2pt)) rotated (0, 0, 90) with_text_color label_color;
+
+  
+endfig with_projection parallel_x_y;
 
 beginfig(4);
   output bi_ang_pict[4] with_projection parallel_x_y;
@@ -121,7 +149,16 @@ beginfig(4);
   output qv[4] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  %% !! START HERE:  LDF 2021.09.04.  
+  
+  label.rt("$\scriptstyle 10.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, .n) with_text_color label_color;
+  
+  label.rt("$\scriptstyle 12\rm{h}$",
+           p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+  
+endfig with_projection parallel_x_y;
 
 beginfig(5);
   output bi_ang_pict[5] with_projection parallel_x_y;
@@ -130,7 +167,11 @@ beginfig(5);
   output qv[5] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  % label.rt("$\scriptstyle 15$\hbox to 0pt{\hskip1pt$\scriptstyle\rm{h}$\hss}",
+  %          p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+  
+endfig with_projection parallel_x_y;
 
 beginfig(6);
   output bi_ang_pict[6] with_projection parallel_x_y;
@@ -139,7 +180,11 @@ beginfig(6);
   output qv[6] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  % label.rt("$\scriptstyle 18$\hbox to 0pt{\hskip1pt$\scriptstyle\rm{h}$\hss}",
+  %          p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+endfig with_projection parallel_x_y;
 
 beginfig(7);
   output bi_ang_pict[7] with_projection parallel_x_y;
@@ -148,7 +193,12 @@ beginfig(7);
   output qv[7] with_projection parallel_x_y;
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
-endfig;
+
+  % label.rt("$\scriptstyle 21$\hbox to 0pt{\hskip1pt$\scriptstyle\rm{h}$\hss}",
+  %          p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+
+endfig with_projection parallel_x_y;
 
 %% ** (2)
 
