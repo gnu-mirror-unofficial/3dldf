@@ -66,6 +66,8 @@ else:
   label_color := black;
 fi;
 
+%% !! START HERE: LDF 2021.09.04.  Replace decimal degrees and hours with minutes.
+
 beginfig(0);
   output bi_ang_pict[0] with_projection parallel_x_y;
   draw_lines;
@@ -88,8 +90,8 @@ beginfig(0);
   
   label.urt("$\scriptstyle 0^\circ$", origin) with_text_color label_color;
   p202 := origin shifted (0, n1);
-  label.urt("$\scriptstyle 11.25^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -11.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 11^\circ 15^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
   label.urt("$\scriptstyle 22.25^\circ$", p202) with_text_color label_color;
   label.urt("$\scriptstyle -22.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
@@ -175,8 +177,8 @@ beginfig(4);
  
   label.urt("$\scriptstyle 0^\circ$", origin) with_text_color label_color;
   p202 := origin shifted (0, n1);
-  label.urt("$\scriptscriptstyle 11.25^\circ$", p202 shifted (-2pt, 0)) with_text_color label_color;
-  label.urt("$\scriptstyle -11.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptscriptstyle 11^\circ 15^\prime$", p202 shifted (-2pt, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
   label.urt("$\scriptstyle 22.25^\circ$", p202) with_text_color label_color;
   label.urt("$\scriptstyle -22.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
