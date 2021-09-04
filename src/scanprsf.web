@@ -14199,6 +14199,10 @@ setting the hbox containing |*s|.
 
 \initials{LDF 2021.07.26.}
 Replaced code writing to files with code using |popen|.
+
+\initials{LDF 2021.09.04.}
+BUG FIX:  Now using |system| instead of |popen|.  I don't know why it didn't 
+work to use |popen|.
 \ENDLOG
 
 @q *** (3) Definition.@> 
@@ -14213,7 +14217,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -14227,6 +14231,9 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
                                                     &error_stop_value,
                                                     &warning_stop_value);
    int status = 0;
+
+   ofstream out_strm;
+   ifstream in_strm;
 
 @q **** (4) @>   
 
@@ -14272,107 +14279,50 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
        header_string = *static_cast<string*>(header_entry->object);
    }
 
+
+   int fd; 
+   char out_file_name[] = "aXXXXXX";
+   fd = mkstemp(out_file_name);
+   close(fd);
+
+   out_strm.open(out_file_name);
+
+   char in_file_name[] = "bXXXXXX";
+   fd = mkstemp(in_file_name);
+   close(fd);
+
 @q **** (4) @>   
 
    stringstream command_string;
 
-#if 1 
-   command_string << "echo \"\\scrollmode" 
-                  << header_string 
-                  << "\\setbox0=\\hbox{" << *s << "}" 
-                  << "\\message{\\" << "the\\wd0;"
-                  << "\\" << "the\\ht0;\\" << "the\\dp0}"
-                  << "\\bye\" | tex | grep -E ^[0-9]";
+   out_strm << "\\scrollmode" << header_string << "\\setbox0=\\hbox{" << *s << "}" 
+            << "\\message{\\the\\wd0;\\the\\ht0;\\the\\dp0}\\bye" << endl;
 
-#else
-    command_string << "echo \\\"message{0pt;1pt;2pt;}\\\" | tex";
+   out_strm.close();
 
-#endif 
+   command_string.str("");
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-     {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                   << endl 
-                   << "`command_string.str().c_str()' == " 
-                   << command_string.str().c_str() << endl;
+   command_string << "tex " << out_file_name << " | grep -E ^[0-9] > " << in_file_name;
 
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-@q **** (4) @>   
+   cerr << "command_string.str() == " << command_string.str() << endl;
 
-   char temp_str[1024];
-   memset(temp_str, 0, 1024);
-
-#if 1 
-   FILE *fp = popen(command_string.str().c_str(), "r");
-#else
    status = system(command_string.str().c_str());
-#endif 
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-     {
-         cerr_strm << thread_name << "In `Scan_Parse::measure_text_func':"
-                   << endl;
+   cerr << "status == " << status << endl;
 
-         if (fp)
-           cerr_strm << "`fp' is non-NULL."<< endl;
-         else
-           cerr_strm << "`fp' is NULL.  `popen' failed."<< endl;
+   in_strm.open(in_file_name);
 
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
+   string temp_str;
 
-     }
-#endif /* |DEBUG_COMPILE|  */@; 
+   in_strm >> temp_str;
 
-@q ***** (5) Error handling:  |popen| failed.@>  
-@ Error handling:  |system| failed.
-\initials{LDF 2005.08.30.}
+   cerr << "temp_str == " << temp_str << endl;
 
-@<Define |Scan_Parse| functions@>=
+   in_strm.close();
 
-   if (fp == 0)
-   {
-       cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
-                 << endl 
-#if 1 
-                 << "`popen' failed, returning NULL." << endl 
-#endif 
-
-#if 0 
-                 << "`system' failed." << endl 
-#endif 
-
-                 << "Deleting `pv', setting it to 0, and exiting function "
-                 << "unsuccessfully with return value 1.";
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm);
-       cerr_strm.str("");
-
-       delete pv;
-       pv = 0;
-       delete s;
-       s = 0;
-       v = 0;
-
-       return 1;
- 
-   }   /* |if (status != 0)|  */
-
-  pclose(fp);
-  fp = 0;
-
-  real wd = 0;
-  real ht = 0;
-  real dp = 0;
+   real wd = 0;
+   real ht = 0;
+   real dp = 0;
 
 #if 1 
   cerr << "temp_str == " << temp_str << endl;
@@ -14382,7 +14332,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
   stringstream temp_strm;
 
-  for (int i = 0; i < strlen(temp_str); ++i)
+  for (int i = 0; i < temp_str.length(); ++i)
   {
 #if 1 
       cerr << "temp_str[i] == " <<  temp_str[i] << endl;
@@ -14470,7 +14420,13 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
     }
+
+
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
