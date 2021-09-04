@@ -14213,7 +14213,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -14276,12 +14276,18 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
    stringstream command_string;
 
-   command_string << "echo '\\scrollmode" 
+#if 1 
+   command_string << "echo \"\\scrollmode" 
                   << header_string 
                   << "\\setbox0=\\hbox{" << *s << "}" 
-                  << "\\message{\\\\the\\wd0;"
-                  << "\\\\the\\ht0;\\\\the\\dp0}"
-                  << "\\\\bye' | tex | grep -E ^[0-9]";
+                  << "\\message{\\" << "the\\wd0;"
+                  << "\\" << "the\\ht0;\\" << "the\\dp0}"
+                  << "\\bye\" | tex | grep -E ^[0-9]";
+
+#else
+    command_string << "echo \\\"message{0pt;1pt;2pt;}\\\" | tex";
+
+#endif 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14302,9 +14308,11 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
    char temp_str[1024];
    memset(temp_str, 0, 1024);
 
-   strcpy(temp_str, command_string.str().c_str());
-
-   FILE *fp = popen(temp_str, "r");
+#if 1 
+   FILE *fp = popen(command_string.str().c_str(), "r");
+#else
+   status = system(command_string.str().c_str());
+#endif 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14324,7 +14332,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ***** (5) Error handling:  |system| failed.@>  
+@q ***** (5) Error handling:  |popen| failed.@>  
 @ Error handling:  |system| failed.
 \initials{LDF 2005.08.30.}
 
@@ -14334,7 +14342,14 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
    {
        cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
                  << endl 
+#if 1 
                  << "`popen' failed, returning NULL." << endl 
+#endif 
+
+#if 0 
+                 << "`system' failed." << endl 
+#endif 
+
                  << "Deleting `pv', setting it to 0, and exiting function "
                  << "unsuccessfully with return value 1.";
 
@@ -14352,54 +14367,14 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
  
    }   /* |if (status != 0)|  */
 
-@q **** (4) @>   
-@
-@<Define |Scan_Parse| functions@>=
-
-  memset(temp_str, 0, 1024);
-
-  errno = 0;
-  status = fread(temp_str, 1, 64, fp);
-
-#if 0  
-  cerr << "`status' == " << status << endl;
-#endif 
-
-  if (status == 0)
-  {
-      cerr_strm << thread_name << "ERROR!  In `Scan_Parse::measure_text_func':"
-                << endl;
-
-      if (errno != 0)
-        cerr_strm << "`errno' == " << errno << ":" << endl
-                  << strerror(errno)
-                  << endl;
-
-      cerr_strm << "Deleting `pv', setting it to 0, and exiting function "
-                << "unsuccessfully with return value 1.";
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-
-      delete pv;
-      pv = 0;
-      delete s;
-      s = 0;
-      v = 0;
-
-      return 1;
-  }
-    
   pclose(fp);
+  fp = 0;
 
   real wd = 0;
   real ht = 0;
   real dp = 0;
 
-  fp = 0;
-
-#if 0 
+#if 1 
   cerr << "temp_str == " << temp_str << endl;
 #endif 
 
@@ -14409,7 +14384,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
   for (int i = 0; i < strlen(temp_str); ++i)
   {
-#if 0 
+#if 1 
       cerr << "temp_str[i] == " <<  temp_str[i] << endl;
 #endif 
 
@@ -14419,7 +14394,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
       { 
          if (j == 0)
          {
-#if 0 
+#if 1 
             cerr << "j == " << j << endl;
             cerr << "temp_strm.str() == " <<  temp_strm.str() << endl;
 #endif 
@@ -14428,7 +14403,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
          }
          else if (j == 1)
          {
-#if 0 
+#if 1 
             cerr << "j == " << j << endl;
             cerr << "temp_strm.str() == " <<  temp_strm.str() << endl;
 #endif 
@@ -14437,7 +14412,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
          }
          else
          {
-#if 0 
+#if 1 
             cerr << "j == " << j << endl;
             cerr << "temp_strm.str() == " <<  temp_strm.str() << endl;
 #endif 
@@ -14453,7 +14428,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
   }  
   
-#if 0 
+#if 1 
   cerr << "Before conversion from pt to cm:" << endl 
        << "wd == " << wd << endl
        << "ht == " << ht << endl
@@ -14464,7 +14439,7 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
   ht *= 2.54 / 72.27;
   dp *= 2.54 / 72.27;
 
-#if 0
+#if 1
   cerr << "After conversion from pt to cm:" << endl 
        << "wd == " << wd << endl
        << "ht == " << ht << endl
