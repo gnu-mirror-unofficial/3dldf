@@ -1090,7 +1090,7 @@ clstsph2.pdf: clstsph2.dvi
 clstsph2.0: clstsph2.mp
 	mpost -numbersystem "double" clstsph2.mp
 
-clstsph2.mp: clstsph2.ldf clstsph2.aux clstsph1_sub.ldf astronmy.lmc
+clstsph2.mp: clstsph2.ldf clstsph2.aux clstsph1_sub.ldf astronmy.lmc xxx.lmc
 	3dldf$(EXEEXT) clstsph2.ldf
 
 #### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
