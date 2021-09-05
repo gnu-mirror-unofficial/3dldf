@@ -426,7 +426,8 @@ def get_flat_panels {numeric ttab_width}=
 
   n10 := (r2 - r0) angle (r1 - r0);
 
-  label.rt("$\scriptstyle 0\rm{h}$", mediate(r0, r2) shifted (-1pt, 0)) rotated (0, 0, n10) on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 0\rm{h}$", mediate(r0, r2) shifted (-1pt, 0)) rotated (0, 0, n10)
+    on_picture flat_quadrant_picture[2];
   label.rt("$\scriptstyle 1.5\rm{h}$", mediate(r0, r2) shifted (5cm - 1pt, 0)) rotated (0, 0, n10) on_picture flat_quadrant_picture[2];
   label.rt("$\scriptstyle 3\rm{h}$", mediate(r0, r2) shifted ((2 * 5cm) - 1pt, 6pt)) rotated (0, 0, n10)
     on_picture flat_quadrant_picture[2];
@@ -444,30 +445,25 @@ def get_flat_panels {numeric ttab_width}=
   n11 := ypart r2 - ypart r0;
   
   label.urt("$\scriptstyle 0^\circ$", r0) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 11.25^\circ$", r2) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -11.25^\circ$", r2 rotated_around(r0, r1) 180) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 22.5^\circ$", r4) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -22.5^\circ$", r4 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 33.75^\circ$", r6) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -33.75^\circ$", r6 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 11^\circ 15^\prime$", r2) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", r2 rotated_around(r0, r1) 180) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", r4) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", r4 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", r6) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", r6 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
   label.urt("$\scriptstyle 45^\circ$", r8) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -45^\circ$", (r8 rotated_around (r0, r1) 180) shifted (0, -1pt)) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptscriptstyle 56.25^\circ$", r10 shifted (0, .5pt)) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -56.25^\circ$", r10 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 67.5^\circ$", r12) on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -67.5^\circ$", r12 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
-  label.top("$\scriptscriptstyle 78.75^\circ$", (mediate(r14, r15)) shifted (0, -1pt)) rotated (0, 0, 90)
+  label.urt("$\scriptstyle -45^\circ$", (r8 rotated_around (r0, r1) 180) shifted (0, -1pt))
      on_picture flat_quadrant_picture[2];
-
-  label.bot("$\scriptscriptstyle -78.75^\circ$", (mediate(r14, r15) rotated_around (r0, r1) 180) shifted (0, 2pt))
+  label.ulft("$\scriptscriptstyle 56^\circ 15^\prime$", r11 shifted (0, 2.5pt)) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -56^\circ 15^\prime$", r10 rotated_around (r0, r1) 180) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", r12) on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -67^\circ 30^\prime$", (r12 rotated_around (r0, r1) 180) shifted (-2pt, 0))
+     on_picture flat_quadrant_picture[2];
+  label.top("$\scriptscriptstyle 78^\circ 45^\prime$", (mediate(r14, r15)) shifted (0, -1pt)) rotated (0, 0, 90)
+     on_picture flat_quadrant_picture[2];
+  label.bot("$\scriptscriptstyle -78^\circ 45^\prime$",
+  (mediate(r14, r15) rotated_around (r0, r1) 180) shifted (0, 2pt))
       rotated (0, 0, 90) on_picture flat_quadrant_picture[2];
-
-
-
-
-
-  
-  
 
   %draw flat_quadrant[8][1] with_color cyan with_pen medium_pen on_picture flat_quadrant_picture[3];
 
@@ -485,8 +481,10 @@ def get_flat_panels {numeric ttab_width}=
 
   n12 := (r35 - r33) angle (r34 - r33);
 
-  label.rt("$\scriptstyle 12\rm{h}$", mediate(r33, r35) shifted (-1pt, 0)) rotated (0, 0, n12) on_picture flat_quadrant_picture[3];
-  label.rt("$\scriptstyle 13.5\rm{h}$", mediate(r33, r35) shifted (5cm - 1pt, 0)) rotated (0, 0, n12) on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 12\rm{h}$", mediate(r33, r35) shifted (-1pt, 0)) rotated (0, 0, n12)
+     on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 13.5\rm{h}$", mediate(r33, r35) shifted (5cm - 1pt, 0)) rotated (0, 0, n12)
+     on_picture flat_quadrant_picture[3];
   label.rt("$\scriptstyle 15\rm{h}$", mediate(r33, r35) shifted ((2 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     on_picture flat_quadrant_picture[3];
   label.rt("$\scriptstyle 16.5\rm{h}$", mediate(r33, r35) shifted ((3 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
@@ -501,8 +499,33 @@ def get_flat_panels {numeric ttab_width}=
     on_picture flat_quadrant_picture[3];
 
   label.urt("$\scriptstyle 0^\circ$", r33) on_picture flat_quadrant_picture[3];
-  
-  
+  label.urt("$\\scriptscriptstyle 11^\circ 15^\prime$", r35) on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", r35 rotated_around (r33, r34) 180)
+     on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", r37) on_picture flat_quadrant_picture[3];
+  label.bot("$\scriptscriptstyle -22^\circ 30^\prime$",
+     (mediate(r37, r38) rotated_around (r33, r34) 180) shifted (.5cm - 4pt, 1pt))
+     on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", r39) on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", r39 rotated_around (r33, r34) 180)
+     on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 45^\circ$", r41) on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle -45^\circ$", (r41 rotated_around (r33, r34) 180) shifted (0, -1pt))
+     on_picture flat_quadrant_picture[3];
+  label.ulft("$\scriptscriptstyle 56^\circ 15^\prime$", r43 shifted (0, 2.5pt))
+     on_picture flat_quadrant_picture[3];
+  %label.urt("$\scriptstyle -56^\circ 15^\prime$", r43 rotated_around (r33, r34) 180)
+  %   on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", r45) on_picture flat_quadrant_picture[3];
+  %label.urt("$\scriptstyle -67^\circ 30^\prime$", (r45 rotated_around (r33, r34) 180) shifted (-2pt, 0))
+  %   on_picture flat_quadrant_picture[3];
+  label.top("$\scriptscriptstyle 78^\circ 45^\prime$",
+     (mediate(r47, r48)) shifted (0, -1pt)) rotated (0, 0, 90)
+     on_picture flat_quadrant_picture[3];
+  label.bot("$\scriptscriptstyle -78^\circ 45^\prime$",
+     (mediate(r47, r48) rotated_around (r33, r34) 180) shifted (0, 2pt))
+     rotated (0, 0, 90) on_picture flat_quadrant_picture[3];
+ 
   % r33 := get_point (0) flat_quadrant[8][1];
   % r34 := get_point (1) flat_quadrant[8][1];
   % r35 := get_point (2) flat_quadrant[8][1];
