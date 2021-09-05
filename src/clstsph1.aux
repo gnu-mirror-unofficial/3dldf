@@ -77,14 +77,16 @@ beginfig(0);
   
   p200 := origin shifted by .5 * (p24 - p20);
 
-  label.rt("$\scriptstyle 0\rm{h}$", p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+  label.rt("$\scriptstyle 0\rm{h}$", p200 shifted (-1pt, 0)) rotated (0, 0, 90)
+    with_text_color label_color;
 
   %draw p24 -- p20 with_color red;
 
   p201 := mediate(p20, p24, .5);
 
   n0 := (p24 - p20) angle (p21 - p20);
-  label.rt("$\scriptstyle 22.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 22\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
 
   n1 := ypart p25 - ypart p21;
   
@@ -93,23 +95,24 @@ beginfig(0);
   label.urt("$\scriptstyle 11^\circ 15^\prime$", p202) with_text_color label_color;
   label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
-  label.urt("$\scriptstyle 22.25^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -22.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
-  label.urt("$\scriptstyle 33.75^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -33.75^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
   label.urt("$\scriptstyle 45^\circ$", p202) with_text_color label_color;
-  label.lrt("$\scriptstyle -45^\circ$", p202 rotated (180, 0))  with_text_color label_color;
+  label.urt("$\scriptscriptstyle -45^\circ$", (p202 rotated (180, 0)) shifted (0, -1.5pt))  with_text_color label_color;
   shift p202 (0, n1);
-  label.llft("$\scriptstyle 56.25^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -56.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.llft("$\scriptstyle 56^\circ 15^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -56^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
-  label.urt("$\scriptstyle 67.5^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -67.5^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -67^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
-  label.top("$\scriptscriptstyle 78.75^\circ$", p202 shifted (1pt, 0)) with_text_color label_color;
-  label.bot("$\scriptscriptstyle -78.75^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.top("$\scriptscriptstyle 78^\circ \hskip2pt 45^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
+  label.bot("$\scriptscriptstyle -78^\circ\hskip-.5pt 45^\prime$", (p202 rotated (180, 0)) shifted (.5pt, 0))
+    with_text_color label_color;
   
   %drawdot mediate(mediate(p24, p25, .5), mediate(p20, p21, .5), .5) with_pen medium_pen;
  
@@ -123,10 +126,11 @@ beginfig(1);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 1.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 1\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
 
   label.rt("$\scriptstyle 3\rm{h}$",
-           p200 shifted (-2pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
+           p200 shifted (-1pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
 
   
 endfig with_projection parallel_x_y;
@@ -139,10 +143,12 @@ beginfig(2);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 4.5\rm{h}$", p201 shifted (-2pt, -.25cm - 2.5pt)) rotated (0, 0, n0) with_text_color label_color;
+  
+  label.rt("$\scriptscriptstyle 4\rm{h}\kern .11111em 30^\prime$",
+      p201 shifted (-2pt, 0)) rotated (0, 0, n0) with_text_color label_color;
   
   label.rt("$\scriptstyle 6\rm{h}$",
-           p200 shifted (-2pt, 0pt)) rotated (0, 0, 90) with_text_color label_color;
+           p200 shifted (-1pt, 0pt)) rotated (0, 0, 90) with_text_color label_color;
   
 endfig with_projection parallel_x_y;
 
@@ -154,10 +160,11 @@ beginfig(3);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 7.5\rm{h}$", p201 shifted (-1pt, .5cm - 4pt)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptscriptstyle 7\rm{h}\kern .11111em 30^\prime$",
+      p201 shifted (-1.5pt, .5cm - 3pt)) rotated (0, 0, n0) with_text_color label_color;
   
   label.rt("$\scriptstyle 9\rm{h}$",
-           p200 shifted (-2pt, -.333cm - 2pt)) rotated (0, 0, 90) with_text_color label_color;
+           p200 shifted (-1pt, -.333cm - 2pt)) rotated (0, 0, 90) with_text_color label_color;
 
   
 endfig with_projection parallel_x_y;
@@ -170,33 +177,36 @@ beginfig(4);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 10.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 10\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
   
   label.rt("$\scriptstyle 12\rm{h}$",
            p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
  
   label.urt("$\scriptstyle 0^\circ$", origin) with_text_color label_color;
   p202 := origin shifted (0, n1);
-  label.urt("$\scriptscriptstyle 11^\circ 15^\prime$", p202 shifted (-2pt, 0)) with_text_color label_color;
+  label.lrt("$\scriptstyle 11^\circ 15^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
   label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
-  label.urt("$\scriptstyle 22.25^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -22.25^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", (p202 rotated (180, 0)) shifted (0, 1pt))
+    with_text_color label_color;
   shift p202 (0, n1);
-  label.urt("$\scriptstyle 33.75^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -33.75^\circ$", p202 rotated (180, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", p202 rotated (180, 0)) with_text_color label_color;
   shift p202 (0, n1);
   label.urt("$\scriptstyle 45^\circ$", p202) with_text_color label_color;
   label.urt("$\scriptstyle -45^\circ$", p202 rotated (180, 0))  with_text_color label_color;
   shift p202 (0, n1);
-  label.lrt("$\scriptstyle 56.25^\circ$", p202 shifted (-1pt, -1pt)) with_text_color label_color;
-  label.urt("$\scriptstyle -56.25^\circ$", p52 shifted (-2.8pt, .5pt)) with_text_color label_color;
+  label.lrt("$\scriptstyle 56^\circ 15^\prime$", p202 shifted (-1pt, -1pt)) with_text_color label_color;
+  label.urt("$\scriptscriptstyle -56^\circ 15^\prime$", p52 shifted (-2pt, .5pt)) with_text_color label_color;
   shift p202 (0, n1);
-  label.urt("$\scriptstyle 67.5^\circ$", p202) with_text_color label_color;
-  label.llft("$\scriptstyle -67.5^\circ$", (p202 rotated (180, 0)) shifted (1pt, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", p202) with_text_color label_color;
+  label.llft("$\scriptscriptstyle -67^\circ 30^\prime$", (p202 rotated (180, 0)) shifted (1.5pt, 0pt))
+    with_text_color label_color;
   shift p202 (0, n1);
-  label.top("$\scriptscriptstyle 78.75^\circ$", p202 shifted (1pt, 0)) with_text_color label_color;
-  label.top("$\scriptscriptstyle -78.75^\circ$", (p202 rotated (180, 0)) shifted (-1pt, -2pt)) with_text_color label_color;
+  label.top("$\scriptscriptstyle 78^\circ \hskip2pt 45^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
+  label.bot("$\scriptscriptstyle -78^\circ\hskip-.5pt 45^\prime$", (p202 rotated (180, 0)) shifted (.5pt, 0))
+    with_text_color label_color;
 endfig with_projection parallel_x_y;
 
 beginfig(5);
@@ -207,7 +217,7 @@ beginfig(5);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 13.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 13\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
   
   label.rt("$\scriptstyle 15\rm{h}$",
            p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
@@ -223,7 +233,7 @@ beginfig(6);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 16.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 16\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
   
   label.rt("$\scriptstyle 18\rm{h}$",
            p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
@@ -238,7 +248,8 @@ beginfig(7);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 19.5\rm{h}$", p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 19\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+    with_text_color label_color;
   
   label.rt("$\scriptstyle 21\rm{h}$",
            p200 shifted (-2pt, 0)) rotated (0, 0, 90) with_text_color label_color;
