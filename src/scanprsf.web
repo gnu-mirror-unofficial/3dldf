@@ -14330,8 +14330,15 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 
    /* !!START HERE:  LDF 2021.09.04.  Add error handling.  */ 
 
+   stringstream temp_strm;
+
+   temp_strm << out_file_name << ".log";
+
    unlink(in_file_name);
    unlink(out_file_name);
+   unlink(temp_strm.str().c_str());
+
+   temp_strm.str("");
 
    real wd = 0;
    real ht = 0;
@@ -14342,8 +14349,6 @@ Scan_Parse::measure_text_func(Scanner_Node scanner_node,
 #endif 
 
   int j = 0;
-
-  stringstream temp_strm;
 
   for (int i = 0; i < temp_str.length(); ++i)
   {
