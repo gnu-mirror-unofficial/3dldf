@@ -278,7 +278,16 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
       dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
       dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
     fi;
-    label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
+
+    if (11.25 * i) ==  floor (11.25 * i):
+      label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
+    elseif (11.25 * i) - floor (11.25 * i) == .25:
+      label("$" & decimal (floor (11.25 * i)) & "^\circ 15^\prime$", p[j + 1] shifted (1.5cm, 0));
+    elseif (11.25 * i) - floor (11.25 * i) == .5:
+      label("$" & decimal (floor (11.25 * i)) & "^\circ 30^\prime$", p[j + 1] shifted (1.5cm, 0));
+    elseif (11.25 * i) - floor (11.25 * i) == .75:
+      label("$" & decimal (floor (11.25 * i)) & "^\circ 45^\prime$", p[j + 1] shifted (1.5cm, 0));
+    fi;
     edge0 += p[j];
     edge1 += p[j + 1];
 
@@ -300,7 +309,18 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
       dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
       dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
     fi;
-    label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
+
+    if (11.25 * j) ==  floor (11.25 * j):
+      label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
+    elseif (11.25 * j) - floor (11.25 * j) == .25:
+      label("$-" & decimal (floor (11.25 * j)) & "^\circ 15^\prime$", p[20 + i + 1] shifted (1.5cm, 0));
+    elseif (11.25 * j) - floor (11.25 * j) == .5:
+      label("$-" & decimal (floor (11.25 * j)) & "^\circ 30^\prime$", p[20 + i + 1] shifted (1.5cm, 0));
+    elseif (11.25 * j) - floor (11.25 * j) == .75:
+      label("$-" & decimal (floor (11.25 * j)) & "^\circ 45^\prime$", p[20 + i + 1] shifted (1.5cm, 0));
+    fi;
+    
+    %label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
     j += 1;
   endfor;
 
