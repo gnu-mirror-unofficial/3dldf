@@ -929,6 +929,40 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
   decl := declination_decimal_degrees S;
   ra   :=  right_ascension_decimal_degrees S;
 
+  numeric ra_h;
+  numeric ra_m;
+  numeric ra_s;
+
+  numeric decl_d;
+  numeric decl_m;
+  numeric decl_s;
+  
+  
+  ra_h := right_ascension_hours S;
+  ra_m := right_ascension_minutes S;
+  ra_s := right_ascension_seconds S;
+
+  % message "ra_h:";
+  % show ra_h;
+  % message "ra_m:";
+  % show ra_m;
+  % message "ra_s:";
+  % show ra_s;
+
+
+  decl_d := declination_degrees S;
+  decl_m := declination_minutes S;
+  decl_s := declination_seconds S;
+
+  % message "decl_d:";
+  % show decl_h;
+  % message "decl_m:";
+  % show decl_m;
+  % message "decl_s:";
+  % show decl_s;
+  
+  % pause;
+  
   %message "decl:";
   %show decl;
 
@@ -1004,7 +1038,9 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     fi;
     
     s := "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
-         & "}{" & decimal ra & "}{" & decimal decl & "}{" & decimal (bi_ang0 + 1) & "}";
+      & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
+      & "^{\prime\prime}$}{$" & decimal decl_d & "^\circ\\thinspace " & decimal decl_m & "^\prime\\thinspace " & decimal decl_s
+      & "^{\prime\prime}$}{" & decimal (bi_ang0 + 1) & "}";
     
     write s to nw[bi_ang0];
     write s to star_info_combined;

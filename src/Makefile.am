@@ -1127,6 +1127,9 @@ clstsph1_a4.dvi: clstsph1_a4.tex clstsph_1_star_info_combined.tex clstsph_1_star
 	tex clstsph1_a4.tex
 	tex clstsph1_a4.tex 
 
+#### !! START HERE:  LDF 2021.09.05.  Make clstsph_1_star_info_alpha.tex be regenerated
+#### when making clstsph1_a4.pdf or clstsph1_a4.ps.
+
 clstsph_1_star_info_alpha.tex: clstsph_1_star_info_combined.tex clstsph_1_star_info_alpha_temp.tex
 	cat clstsph_1_star_info_alpha_temp.tex | sort | cut -d} -f 2- > clstsph_1_star_info_alpha.tex 
 
