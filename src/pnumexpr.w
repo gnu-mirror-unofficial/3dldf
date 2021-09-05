@@ -598,6 +598,72 @@ Added this rule.
 
 };
 
+@q ***** (5) numeric_primary --> RIGHT_ASCENSION_HOURS star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{RIGHT\_ASCENSION\_HOURS} \§star primary>.
+\initials{LDF 2021.09.05.}
+
+\LOG
+\initials{LDF 2021.09.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: RIGHT_ASCENSION_HOURS star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->right_ascension_hours;
+
+   delete s;
+   s = 0; 
+
+};
+
+@q ***** (5) numeric_primary --> RIGHT_ASCENSION_MINUTES star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{RIGHT\_ASCENSION\_MINUTES} \§star primary>.
+\initials{LDF 2021.09.05.}
+
+\LOG
+\initials{LDF 2021.09.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: RIGHT_ASCENSION_MINUTES star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->right_ascension_minutes;
+
+   delete s;
+   s = 0; 
+
+};
+
+@q ***** (5) numeric_primary --> RIGHT_ASCENSION_SECONDS star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{RIGHT\_ASCENSION\_SECONDS} \§star primary>.
+\initials{LDF 2021.09.05.}
+
+\LOG
+\initials{LDF 2021.09.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: RIGHT_ASCENSION_SECONDS star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->right_ascension_seconds;
+
+   delete s;
+   s = 0; 
+
+};
+
 @q ***** (5) numeric_primary --> DECLINATION_DECIMAL_DEGREES star_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{DECLINATION\_DECIMAL\_DEGREES} \§star primary>.
@@ -620,6 +686,71 @@ Added this rule.
 
 };
 
+@q ***** (5) numeric_primary --> DECLINATION_DEGREES star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{DECLINATION\_DEGREES} \§star primary>.
+\initials{LDF 2021.09.05.}
+
+\LOG
+\initials{LDF 2021.09.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: DECLINATION_DEGREES star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->declination_degrees;
+
+   delete s;
+   s = 0; 
+
+};
+
+@q ***** (5) numeric_primary --> DECLINATION_MINUTES star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{DECLINATION\_MINUTES} \§star primary>.
+\initials{LDF 2021.09.05.}
+
+\LOG
+\initials{LDF 2021.09.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: DECLINATION_MINUTES star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->declination_minutes;
+
+   delete s;
+   s = 0; 
+
+};
+
+@q ***** (5) numeric_primary --> DECLINATION_SECONDS star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{DECLINATION\_SECONDS} \§star primary>.
+\initials{LDF 2021.09.05.}
+
+\LOG
+\initials{LDF 2021.09.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: DECLINATION_SECONDS star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->declination_seconds;
+
+   delete s;
+   s = 0; 
+
+};
 
 @q ***** (5) numeric_primary --> APPARENT_MAGNITUDE star_primary.  @>
 
