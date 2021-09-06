@@ -159,6 +159,8 @@ This document is part of GNU 3DLDF, a package for three-dimensional drawing.
 
 Copyright (C) 2021 The Free Software Foundation
 
+Last updated:  September 6, 2021
+
 GNU 3DLDF is free software; you can redistribute it and/or modify 
 it under the terms of the GNU General Public License as published by 
 the Free Software Foundation; either version 3 of the License, or 
@@ -208,40 +210,82 @@ Boston, MA  02110-1301 USA\hfil\break
 \Chapter{instructions}{Instructions}
 \centerline{{\largebx Instructions}}
 \hldest{fit}{}{instructions}
-\advance\baselineskip by 4pt
+%\advance\baselineskip by 4pt
 \parskip=.5\baselineskip
 {\bf PLEASE NOTE!}  The author has tried to ensure that the following
-plans are correct, but as of August 30, 2021, he has not tested them
-yet himself.  As mentioned above, this material is distributed {\bf without
-a warranty}.  I recommend that users check it themselves before
-investing a lot of time and effort into cutting out the paper model.
+plans are correct, but as of September 6, 2021, he has not tested them
+yet himself.  As mentioned above, this material is distributed
+{\bf without a warranty}.  I recommend that users check it themselves before
+investing a lot of time and effort into cutting out the paper models.
 
 Any corrections will be gratefully received by the author.  Contact
 information can be found on the title page.
 
-The two models are provided in two versions, white on black and black
+The two models are provided in two versions each, white on black and black
 on white. They include the 200 brightest stars, except for Polaris,
 which would have been at an inconvenient location on the models,
 namely at the north pole.
 
+The separate file
+\href{https://www.gnu.org/software/3dldf/graphics/clstsph1_a4.pdf}{\Blue{clstsph1{\tt\char`\_}a4.pdf}}
+in DIN A4 format contains data for the stars on the models.
+
 The first model is made up of spherical biangles. They should not be
 folded but rather bent and attached to each other using the tabs on
-the left side.
+the left side, forming a sphere.
 
-The second model uses ``panels''. While the left and
-right sides of the sections appear to be curved, they are in fact made
-up of straight lines. The sections should be folded on the horizontal
-lines (latitude) and again attached using the tabs. The result is an
-irregular polyhedron approximating a sphere.
+The second model uses ``panels''. While the left and right sides of the sections
+appear to be curved, they are in fact made up of straight lines. The sections should
+be folded on the horizontal lines (declination) and again attached using the tabs.
+The result is an irregular polyhedron approximating a sphere.
 
-The ``globes'' on pages 10--11 illustrate how the positions of the stars on the spherical biangles
-and panels were derived.
+The ``globes'' on pages 11--12 illustrate how the positions of the
+stars on the spherical biangles and panels were derived.
+
+Assembling the models should present no particular difficulty except possibly for
+keeping the spherical biangles from slipping while attaching them to each other.
+A fast-setting glue might be helpful in this case, and/or patience.
+
+The longitudes of the stars are found by rotating counter-clockwise
+from right ascension $0\rm{h}\thinspace 0^\prime\thinspace 0^{\prime\prime}$.
+I believe that the result of this is that the model represents the celestial sphere
+as seen by an observer looking at it from the outside. I hope someone will correct me
+if I'm wrong. The famous early star atlas of Hevelius from 1690 also shows the stars
+in this way.
+
+However, in principle it wouldn't be difficult to reverse the representation. The difficulty would be
+in reversing the labels, but I think this problem could be solved.
+
+The limit of 200 stars is arbitrary and was chosen to correspond to the size of these versions of
+the models (sphere radius 7cm).  As of September 6, 2021, the database table containing the star data has
+entries for over 1400 stars.  However, not all of the entries contain all of the necessary data yet.
+If you want to make models with more stars, please send an email to the author at the address listed above.
+
+The models can be scaled by simply scaling the EPS (Encapsulated PostScript)
+files containing the images in this {\TeX} file by means of redefining the macro
+\verbatim \epsfsize|endverbatim .  For more information, see the
+\href{https://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/generic/epsf/epsf-doc.pdf}{\Blue{EPSF documentation}}
+at CTAN.
+
+To make a version with more stars, the same GNU 3DLDF code (with additions for the additional stars)
+could be used and the images magnified to a larger scale.
+The practical upper limit with respect to size using a normal copier or printer would be one section
+per DIN A3 page, which should be sufficiently large for any model.  Of course, depending on the new scale,
+some changes would be necessary in this file and possibly in the GNU 3DLDF code.
+
+The only problem with this approach is that the fonts used for the
+labels will also simply be scaled, whereas the different design sizes
+for the Computer Modern fonts used have different proportions. For example,
+the 5pt version of Computer Modern Roman has quite different proportions from the 12pt version.
+However, considering how much work it is to adjust the size and position of the labels, I think this
+is a fine point that could be disregarded. For very large versions, it might be worthwhile to use
+different font sizes.
 \vfil\eject
 \endgroup
 
-
 \begingroup
 \advance\hoffset by 2cm
+
 %% **** (4)
 
 \Chapter{spherical biangles}{Spherical Biangles}
