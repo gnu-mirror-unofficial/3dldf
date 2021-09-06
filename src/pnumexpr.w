@@ -773,6 +773,27 @@ Added this rule.
    s = 0; 
 };
 
+@q ***** (5) numeric_primary --> ABSOLUTE_MAGNITUDE star_primary.  @>
+
+@*4 \§numeric primary> $\longrightarrow$ \.{ABSOLUTE\_MAGNITUDE} \§star primary>.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=numeric_primary: ABSOLUTE_MAGNITUDE star_primary@>@/
+{
+   Star* s = static_cast<Star*>(@=$2@>);
+
+   @=$$@> = s->absolute_magnitude;
+
+   delete s;
+   s = 0; 
+};
+
 @q ***** (5) numeric_primary --> SIZE circle_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ \.{SIZE} \§circle primary>.
