@@ -772,6 +772,17 @@ Star::set(Scanner_Node scanner_node)
       apparent_magnitude_varies       = static_cast<bool>(atoi(scanner_node->curr_row[24])); 
       absolute_magnitude_varies       = static_cast<bool>(atoi(scanner_node->curr_row[25]));       
 
+
+      size_t pos;
+
+      do
+      {
+         pos = constellation_full_name.find("ö");
+         if (pos != string::npos)
+           constellation_full_name.replace(pos, 2, "@@{o}");
+
+      } while (pos != string::npos);
+
 @q ***** (5)@>
 @
 @<Define |Star| functions@>=

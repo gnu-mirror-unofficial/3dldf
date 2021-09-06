@@ -423,10 +423,10 @@ Added this rule.
 @<Define rules@>=
 @=string_primary: CONSTELLATION_FULL_NAME star_expression@>@/
 { 
-   @<Constellation_Full declarations for rules@>@; 
+   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `string_primary --> "

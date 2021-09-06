@@ -1133,7 +1133,7 @@ clstsph1_a4.dvi: clstsph1_a4.tex clstsph_1_star_info_combined.tex clstsph_1_star
 clstsph_1_star_info_alpha.tex: clstsph_1_star_info_combined.tex clstsph_1_star_info_alpha_temp.tex
 	cat clstsph_1_star_info_alpha_temp.tex | sort | cut -d} -f 2- > clstsph_1_star_info_alpha.tex 
 
-clstsph_1_star_info_alpha_temp.tex: srtstrin$(EXEEXT)
+clstsph_1_star_info_alpha_temp.tex: srtstrin$(EXEEXT) clstsph1_a4.tex clstsph1.0
 	srtstrin$(EXEEXT)
 
 srtstrin$(EXEEXT): srtstrin.cxx

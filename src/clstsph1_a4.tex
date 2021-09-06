@@ -158,11 +158,13 @@
 \setbox0=\vbox{\epsffile{clstsph1.0}}
 \dimen0=\ht0
 
-
-\def\starinfo#1#2#3#4#5#6{\begingroup\setbox0=\hbox{Decl.~}%
+\def\starinfo#1#2#3#4#5#6#7#8#9{\begingroup\setbox0=\hbox{Decl.\ }%
+\setbox1=\hbox{Apparent magnitude:\ }%
 \hbox to 3cm{\vbox{\hbox{#2.  #3}%
 \hbox{Section #6}\hbox{\hbox to \wd0{RA\hfil}#4}\hbox{\unhbox0 #5}%
-\vskip.75\baselineskip plus 6pt minus 3pt}%
+\hbox{\copy1 #7}\hbox{\hbox to \wd1{Absolute magnitude:\ \hss}#8}%
+\hbox{Constellation: #9}%
+\vskip1\baselineskip plus 6pt minus 3pt}%
 \hskip2em plus 4pt minus 2pt\hss}\endgroup}
 
 %% *** (3)
@@ -218,6 +220,13 @@ Boston, MA  02110-1301 USA\hfil\break
 \vskip.5\baselineskip
 \advance\baselineskip by 4pt
 \readtocfile
+\vskip\baselineskip
+\begingroup
+\medium
+The number preceding the name of the star (or binary or multiple system of stars) refers to its approximate rank 
+according to apparent brightness.
+A ``v'' following the apparent or absolute magnitude of a star (or system of stars) means that this value varies.
+\endgroup
 \vfil\eject
 \endgroup
 
@@ -226,6 +235,9 @@ Boston, MA  02110-1301 USA\hfil\break
 \gutter=.125cm
 
 %% **** (4)
+
+\catcode`\@=\active
+\let@=\"
 
 \begingroup
 \global\advance\chapctr by 1
@@ -236,9 +248,6 @@ Boston, MA  02110-1301 USA\hfil\break
 \begingroup
 \noindent
 \advance\hsize by -1.25in
-The number preceding the name of the star (or binary or multiple system of stars) refers to its approximate rank 
-according to apparent brightness.
-\vskip\baselineskip
 \endgroup
 \triplecolumns
 %
@@ -353,5 +362,6 @@ according to apparent brightness.
 %% eval:(read-abbrev-file abbrev-file-name)
 %% abbrev-mode:t
 %% outline-regexp:"%% [*\f]+"
+%% auto-fill-function:nil
 %% End:
 
