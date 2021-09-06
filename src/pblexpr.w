@@ -2962,6 +2962,64 @@ Removed debugging code.
 
 };
 
+@q ***** (5) boolean_primary --> APPARENT_MAGNITUDE_VARIES star_primary.  @>
+
+@*4 \§boolean primary> $\longrightarrow$ \.{APPARENT\_MAGNITUDE\_VARIES} \§star primary>.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=boolean_primary: APPARENT_MAGNITUDE_VARIES star_primary@>@/
+{
+
+   bool* b = new bool;
+   Star* s = static_cast<Star*>(@=$2@>);
+
+#if 0
+   s->show("s:");
+#endif 
+
+   *b = s->apparent_magnitude_varies;
+
+   @=$$@> = static_cast<void*>(b);
+
+   delete s;
+   s = 0; 
+};
+
+@q ***** (5) boolean_primary --> ABSOLUTE_MAGNITUDE_VARIES star_primary.  @>
+
+@*4 \§boolean primary> $\longrightarrow$ \.{ABSOLUTE\_MAGNITUDE\_VARIES} \§star primary>.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=boolean_primary: ABSOLUTE_MAGNITUDE_VARIES star_primary@>@/
+{
+
+   bool* b = new bool;
+   Star* s = static_cast<Star*>(@=$2@>);
+
+#if 0
+   s->show("s:");
+#endif 
+
+   *b = s->absolute_magnitude_varies;
+
+   @=$$@> = static_cast<void*>(b);
+
+   delete s;
+   s = 0; 
+};
+
 @q ***** (5) boolean_primary --> LAST boolean_vector_expression.@>
 
 @*4 \§boolean primary> $\longrightarrow$ 
@@ -3042,6 +3100,10 @@ Now deleting |Pointer_Vector<bool>* pv|.
    delete pv;
    
 };
+
+
+
+
 
 @q * (1) boolean_secondary.  @>
 @* \§boolean secondary>.

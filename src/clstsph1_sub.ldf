@@ -93,22 +93,20 @@ for i = 0 upto 7:
   write s to nw[i];
 endfor;
 
-%% ** (2) Call macros for the spherical biangles and the sphere.
+%% ** (2) Call macros for the sphere, the spherical biangles, the panels, the flat panels and the stitches.
 
 boolean do_labels;
-do_labels := false; %% true 
+do_labels := false ; %% true
 
 get_spherical_biangles {radius, do_labels}; 
 
 get_sphere_for_plotting_stars {radius};
 
-%% *** (3)
-
-%% ** (2) Plot the stars.
-
 get_panels {radius};
 
 get_flat_panels {tab_width};
+
+%% ** (2) Plot the stars.
 
 %% *** (3) 1. Sirius
 

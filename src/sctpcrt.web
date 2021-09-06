@@ -1298,8 +1298,11 @@ Added calls to |scanner_node->add_entry| for |sphere_development| and
      scanner_node->add_entry("bs_number", BS_NUMBER, spark);
      scanner_node->add_entry("hr_number", HR_NUMBER, spark);
      scanner_node->add_entry("approx_rank_apparent_magnitude", APPROX_RANK_APPARENT_MAGNITUDE, spark);
-     scanner_node->add_entry("apparent_magnitude", APPARENT_MAGNITUDE, spark);
      scanner_node->add_synonym("rank_magnitude", "approx_rank_apparent_magnitude");
+     scanner_node->add_entry("apparent_magnitude", APPARENT_MAGNITUDE, spark);
+     scanner_node->add_entry("absolute_magnitude", ABSOLUTE_MAGNITUDE, spark);  
+     scanner_node->add_entry("apparent_magnitude_varies", APPARENT_MAGNITUDE_VARIES, spark);
+     scanner_node->add_entry("absolute_magnitude_varies", ABSOLUTE_MAGNITUDE_VARIES, spark);  
      scanner_node->add_entry("constellation_abbreviation", CONSTELLATION_ABBREVIATION, spark);
      scanner_node->add_synonym("constellation_abbrev", "constellation_abbreviation");
      scanner_node->add_entry("constellation_full_name", CONSTELLATION_FULL_NAME, spark);
@@ -4107,6 +4110,7 @@ Added this section.
 @<Define |Scanner_Type::create|@>=
 
    scanner_node->add_entry("apparent", APPARENT, spark);
+   scanner_node->add_entry("absolute", ABSOLUTE, spark);
    scanner_node->add_entry("right_ascension", RIGHT_ASCENSION, spark);
    scanner_node->add_entry("declination", DECLINATION, spark);
    scanner_node->add_entry("earth", EARTH, spark);

@@ -4700,7 +4700,8 @@ Scanner_Type::get_astronomy(void)
             << "right_ascension_seconds, right_ascension_decimal_hours, "
             << "right_ascension_decimal_degrees, "
             << "declination_degrees, declination_minutes, declination_seconds, "
-            << "declination_decimal_degrees, is_binary, absolute_magnitude from Stars "
+            << "declination_decimal_degrees, is_binary, absolute_magnitude, "
+            << "apparent_magnitude_varies, absolute_magnitude_varies from Stars "
             << "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= "
             << stars_limit << " "
             << "order by constellation_abbreviation, bayer_designation_greek_letter;";
@@ -4893,14 +4894,14 @@ Scanner_Type::get_astronomy(void)
 
 @q ****** (6) @>
  
-#if DEBUG_COMPILE
+ #if DEBUG_COMPILE
          else if (DEBUG)
          { 
              cerr << "In `Scanner_Type::get_astronomy':"
                   << endl 
                   << "`Star::set' succeeded, returning 0."
                   << endl;
-#if 0             
+#if 0 /* 1 */
               star->show("*star:");
 #endif 
    
@@ -5539,6 +5540,12 @@ Scanner_Type::get_astronomy(void)
                  << "`(*iter)->approx_rank_apparent_magnitude' == " << (*iter)->approx_rank_apparent_magnitude
                  << endl 
                  << "`(*iter)->apparent_magnitude'             == " << (*iter)->apparent_magnitude
+                 << endl
+                 << "`(*iter)->absolute_magnitude'             == " << (*iter)->absolute_magnitude
+                 << endl
+                 << "`(*iter)->apparent_magnitude_varies'      == " << (*iter)->apparent_magnitude_varies
+                 << endl
+                 << "`(*iter)->absolute_magnitude_varies'      == " << (*iter)->absolute_magnitude_varies
                  << endl;
 #endif 
 

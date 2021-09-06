@@ -1651,6 +1651,149 @@ Added this rule.
 
 };
 
+@q ****** (6) stars_field_specifier --> ABSOLUTE_MAGNITUDE.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{ABSOLUTE\_MAGNITUDE}.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: ABSOLUTE_MAGNITUDE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: ABSOLUTE_MAGNITUDE'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_ABSOLUTE_MAGNITUDE;
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: ABSOLUTE_MAGNITUDE':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> APPARENT_MAGNITUDE_VARIES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{APPARENT\_MAGNITUDE\_VARIES}.
+\initials{LDF 2021.07.10.}
+
+\LOG
+\initials{LDF 2021.07.10.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: APPARENT_MAGNITUDE_VARIES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: APPARENT_MAGNITUDE_VARIES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_APPARENT_MAGNITUDE_VARIES;
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: APPARENT_MAGNITUDE_VARIES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+@q ****** (6) stars_field_specifier --> ABSOLUTE_MAGNITUDE_VARIES.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{ABSOLUTE\_MAGNITUDE\_VARIES}.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: ABSOLUTE_MAGNITUDE_VARIES@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: ABSOLUTE_MAGNITUDE_VARIES'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_ABSOLUTE_MAGNITUDE_VARIES;
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: ABSOLUTE_MAGNITUDE_VARIES':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+
+
 @q ****** (6) stars_field_specifier --> CONSTELLATION_FULL_NAME.@> 
 @*5 \§stars field specifier> $\longrightarrow$ \.{CONSTELLATION\_FULL\_NAME}.
 \initials{LDF 2021.06.22.}
@@ -2308,8 +2451,6 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
-
-@q !!START HERE:  LDF 2021.08.08.  Add code for |Star::absolute_magnitude|.   @>
 
 @q ****** (6) stars_option_list --> stars_option_list WHERE stars_where_list@> 
 @*5 \§stars option list> $\longrightarrow$ \§stars option list> \.{WHERE} \§stars where list>.

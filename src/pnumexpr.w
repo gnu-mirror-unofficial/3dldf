@@ -788,6 +788,10 @@ Added this rule.
 {
    Star* s = static_cast<Star*>(@=$2@>);
 
+#if 0
+   s->show("s:");
+#endif 
+
    @=$$@> = s->absolute_magnitude;
 
    delete s;

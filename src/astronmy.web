@@ -160,6 +160,7 @@ class Star
    friend bool compare_hr_number(Star *s, Star *);
    friend bool compare_approx_rank_apparent_magnitude(Star *s, Star *);
    friend bool compare_apparent_magnitude(Star *s, Star *); 
+   friend bool compare_absolute_magnitude(Star *s, Star *);     
    friend bool compare_constellation_abbreviation(Star *s, Star *);
    friend bool compare_constellation_full_name(Star *s, Star *);
    friend bool compare_constellation_name_genitive(Star *s, Star *);
@@ -195,6 +196,9 @@ class Star
       int bs_hr_number;
       int approx_rank_apparent_magnitude;
       real apparent_magnitude;
+      real absolute_magnitude;
+      bool apparent_magnitude_varies;
+      bool absolute_magnitude_varies;
       string constellation_abbreviation;
       string constellation_full_name;
       string constellation_name_genitive;
@@ -209,7 +213,6 @@ class Star
       real declination_seconds;
       real declination_decimal_degrees;
       int is_binary;
-      real absolute_magnitude;
 
    public:
 
@@ -251,6 +254,7 @@ struct Stars_Where_Option_Struct
    int  relation;
    int  int_value;
    real real_value;
+   bool bool_value;
    string comparison_string;
 
    Stars_Where_Option_Struct(void)
@@ -260,6 +264,7 @@ struct Stars_Where_Option_Struct
       relation          = 0;
       int_value         = 0;
       real_value        = 0.0;
+      bool_value        = false;
       comparison_string = "";
    }
    ~Stars_Where_Option_Struct(void)
@@ -277,6 +282,7 @@ struct Stars_Where_Option_Struct
       relation          = w.relation;         
       int_value         = w.int_value;            
       real_value        = w.real_value;            
+      bool_value        = w.bool_value;            
       comparison_string = w.comparison_string;
       return;
    }
@@ -347,6 +353,15 @@ Stars_Where_Option_Struct::show(string s)
    else if (field == STARS_APPARENT_MAGNITUDE)
       cerr << " == STARS_APPARENT_MAGNITUDE" << endl;
 
+   else if (field == STARS_ABSOLUTE_MAGNITUDE)
+      cerr << " == STARS_ABSOLUTE_MAGNITUDE" << endl;
+
+   else if (field == STARS_APPARENT_MAGNITUDE_VARIES)
+      cerr << " == STARS_APPARENT_MAGNITUDE_VARIES" << endl;
+
+   else if (field == STARS_ABSOLUTE_MAGNITUDE_VARIES)
+      cerr << " == STARS_ABSOLUTE_MAGNITUDE_VARIES" << endl;
+
    else if (field == STARS_CONSTELLATION_ABBREVIATION)
       cerr << " == STARS_CONSTELLATION_ABBREVIATION" << endl;
 
@@ -395,15 +410,13 @@ Stars_Where_Option_Struct::show(string s)
    else if (field == STARS_IS_BINARY)
       cerr << " == STARS_IS_BINARY" << endl;
 
-   else if (field == STARS_ABSOLUTE_MAGNITUDE)
-      cerr << " == STARS_ABSOLUTE_MAGNITUDE" << endl;
-
    else 
       cerr << " WARNING!  Unknown field." << endl;
 
    cerr << "relation          == "   << relation << " == " << name_map[relation] << endl
         << "int_value         == "   << int_value << endl
         << "real_value        == "   << real_value << endl
+        << "bool_value        == "   << bool_value << endl
         << "comparison_string == \"" << comparison_string << "\""
         << endl;
 
@@ -513,6 +526,9 @@ Star::Star(void)
       bs_hr_number = 0;
       approx_rank_apparent_magnitude = 0;
       apparent_magnitude = 0.0;       
+      absolute_magnitude = 0.0;
+      apparent_magnitude_varies = false;
+      absolute_magnitude_varies = false;
       constellation_abbreviation = "";
       constellation_full_name = "";
       constellation_name_genitive = "";
@@ -527,7 +543,6 @@ Star::Star(void)
       declination_seconds = 0.0;
       declination_decimal_degrees = 0.0;
       is_binary = 0;
-      absolute_magnitude = 0.0;
 
    return;
 }
@@ -562,6 +577,9 @@ Star::Star(const Star &s)
       bs_hr_number = s.bs_hr_number;
       approx_rank_apparent_magnitude = s.approx_rank_apparent_magnitude;
       apparent_magnitude = s.apparent_magnitude;        
+      absolute_magnitude = s.absolute_magnitude;
+      apparent_magnitude_varies = s.apparent_magnitude_varies;        
+      absolute_magnitude_varies = s.absolute_magnitude_varies;
       constellation_abbreviation = s.constellation_abbreviation;
       constellation_full_name = s.constellation_full_name;
       constellation_name_genitive = s.constellation_name_genitive;
@@ -576,7 +594,6 @@ Star::Star(const Star &s)
       declination_seconds = s.declination_seconds;
       declination_decimal_degrees = s.declination_decimal_degrees;
       is_binary = s.is_binary;
-      absolute_magnitude = s.absolute_magnitude;
 
    return;
 }
@@ -752,6 +769,8 @@ Star::set(Scanner_Node scanner_node)
       declination_decimal_degrees     = atof(scanner_node->curr_row[21]);
       is_binary                       = atoi(scanner_node->curr_row[22]);
       absolute_magnitude              = atof(scanner_node->curr_row[23]);
+      apparent_magnitude_varies       = static_cast<bool>(atoi(scanner_node->curr_row[24])); 
+      absolute_magnitude_varies       = static_cast<bool>(atoi(scanner_node->curr_row[25]));       
 
 @q ***** (5)@>
 @
@@ -948,6 +967,9 @@ Star::operator=(const Star& s)
       bs_hr_number                    = s.bs_hr_number;
       approx_rank_apparent_magnitude  = s.approx_rank_apparent_magnitude;
       apparent_magnitude              = s.apparent_magnitude;        
+      absolute_magnitude              = s.absolute_magnitude;
+      apparent_magnitude_varies       = s.apparent_magnitude_varies;        
+      absolute_magnitude_varies       = s.absolute_magnitude_varies;
       constellation_abbreviation      = s.constellation_abbreviation;
       constellation_full_name         = s.constellation_full_name;
       constellation_name_genitive     = s.constellation_name_genitive;
@@ -962,7 +984,6 @@ Star::operator=(const Star& s)
       declination_seconds             = s.declination_seconds;
       declination_decimal_degrees     = s.declination_decimal_degrees;
       is_binary                       = s.is_binary;
-      absolute_magnitude              = s.absolute_magnitude;
  
       return *this;
 
@@ -1169,6 +1190,15 @@ Star::show(string text, unsigned int fields) const
     if (fields & STARS_APPARENT_MAGNITUDE)
        cerr << "apparent_magnitude              == " << apparent_magnitude << endl;
 
+    if (fields & STARS_ABSOLUTE_MAGNITUDE)
+       cerr << "absolute_magnitude              == " << absolute_magnitude << endl;
+
+    if (fields & STARS_APPARENT_MAGNITUDE_VARIES)
+       cerr << "apparent_magnitude_varies       == " << apparent_magnitude_varies << endl;
+
+    if (fields & STARS_ABSOLUTE_MAGNITUDE_VARIES)
+       cerr << "absolute_magnitude_varies       == " << absolute_magnitude_varies << endl;
+
     if (fields & STARS_CONSTELLATION_ABBREVIATION)
        cerr << "constellation_abbreviation      == " << constellation_abbreviation << endl;
 
@@ -1211,8 +1241,6 @@ Star::show(string text, unsigned int fields) const
     if (fields & STARS_IS_BINARY)
        cerr << "is_binary                       == " << is_binary << endl;
 
-    if (fields & STARS_ABSOLUTE_MAGNITUDE)
-       cerr << "absolute_magnitude              == " << absolute_magnitude << endl;
 
     cerr << endl;
 
@@ -1277,6 +1305,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
    string Star::*star_str_ptr  = 0;
    int    Star::*star_int_ptr  = 0;
    real   Star::*star_real_ptr = 0;
+   bool   Star::*star_bool_ptr = 0;
 
    int status = 0;
 
@@ -1309,6 +1338,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::star_constant_name;
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
    }
 
 @q ****** (6) @>
@@ -1318,6 +1348,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::common_name;
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
    }
 
 @q ****** (6) @>
@@ -1336,6 +1367,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::greek_name; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1355,6 +1387,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::latin_name; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1374,6 +1407,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::arabic_name; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1393,6 +1427,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::flamsteed_designation_number;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1429,6 +1464,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::bayer_designation_greek_letter; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1451,6 +1487,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0;
       star_int_ptr  = &Star::bs_hr_number; 
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1488,6 +1525,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::approx_rank_apparent_magnitude;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1516,7 +1554,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       if (DEBUG)
       { 
           cerr << "where_option.field == STARS_APPARENT_MAGNITUDE." << endl
-               << "Setting `star_int_ptr' to `&Star::apparent_magnitude'."
+               << "Setting `star_real_ptr' to `&Star::apparent_magnitude'."
                << endl;
       }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -1524,6 +1562,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::apparent_magnitude;
+      star_bool_ptr = 0;
 
       if (where_option.int_value != 0)
       {
@@ -1546,6 +1585,120 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 
 @q ****** (6) @>
 
+   else if (where_option.field == STARS_ABSOLUTE_MAGNITUDE)
+   {  
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_ABSOLUTE_MAGNITUDE." << endl
+               << "Setting `star_real_ptr' to `&Star::absolute_magnitude'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = &Star::absolute_magnitude;
+      star_bool_ptr = 0;
+
+      if (where_option.int_value != 0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
+                  << endl
+                  << "Casting `where_option.int_value' to `real' and assigning it to" 
+                  << endl 
+                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.real_value  = static_cast<real>(where_option.int_value);
+         where_option.int_value = 0;
+      }
+   }
+
+@q ****** (6) @>
+
+   else if (where_option.field == STARS_APPARENT_MAGNITUDE_VARIES)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_APPARENT_MAGNITUDE_VARIES." << endl
+               << "Setting `star_int_ptr' to `&Star::apparent_magnitude_varies'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+      star_bool_ptr = &Star::apparent_magnitude_varies;
+
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `bool' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.real_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.bool_value  = static_cast<bool>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
+
+   }
+
+
+@q ****** (6) @>
+
+   else if (where_option.field == STARS_ABSOLUTE_MAGNITUDE_VARIES)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_ABSOLUTE_MAGNITUDE_VARIES." << endl
+               << "Setting `star_int_ptr' to `&Star::absolute_magnitude_varies'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = 0; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+      star_bool_ptr = &Star::absolute_magnitude_varies;
+
+      if (where_option.real_value != 0.0)
+      {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << "`where_option.real_value' == " <<  where_option.real_value << " (!= 0.0)" 
+                  << endl
+                  << "Casting `floor(where_option.real_value)' to `int' and assigning it to" 
+                  << endl 
+                  << "`where_option.int_value' and setting `where_option.real_value' to 0.0."
+                  << endl;
+         }       
+#endif /* |DEBUG_COMPILE|  */@;  
+ 
+         where_option.bool_value  = static_cast<bool>(floor(where_option.real_value));
+         where_option.real_value = 0.0;
+      }
+
+   }
+
+@q ****** (6) @>
+
    else if (where_option.field == STARS_CONSTELLATION_ABBREVIATION)
    {
 #if DEBUG_COMPILE
@@ -1560,6 +1713,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::constellation_abbreviation; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1579,6 +1733,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::constellation_full_name; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1598,6 +1753,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = &Star::constellation_name_genitive; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
    }
 
@@ -1617,6 +1773,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::constellation_number;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1653,6 +1810,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::right_ascension_hours;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1690,6 +1848,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::right_ascension_minutes;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1726,6 +1885,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::right_ascension_seconds;
+      star_bool_ptr = 0;
 
       if (where_option.int_value != 0)
       {
@@ -1763,6 +1923,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::right_ascension_decimal_hours;
+      star_bool_ptr = 0;
 
       if (where_option.int_value != 0)
       {
@@ -1799,6 +1960,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::right_ascension_decimal_degrees;
+      star_bool_ptr = 0;
 
       if (where_option.int_value != 0)
       {
@@ -1835,6 +1997,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::declination_degrees;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1871,6 +2034,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::declination_minutes;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -1907,6 +2071,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::declination_seconds;
+      star_bool_ptr = 0;
 
       if (where_option.int_value != 0)
       {
@@ -1945,6 +2110,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = 0;
       star_real_ptr = &Star::declination_decimal_degrees;
+      star_bool_ptr = 0;
 
       if (where_option.int_value != 0)
       {
@@ -1981,6 +2147,7 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       star_str_ptr  = 0; 
       star_int_ptr  = &Star::is_binary;
       star_real_ptr = 0;
+      star_bool_ptr = 0;
 
       if (where_option.real_value != 0.0)
       {
@@ -2001,39 +2168,6 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
       }
    }
 
-   else if (where_option.field == STARS_ABSOLUTE_MAGNITUDE)
-   {  
-#if DEBUG_COMPILE
-      if (DEBUG)
-      { 
-          cerr << "where_option.field == STARS_ABSOLUTE_MAGNITUDE." << endl
-               << "Setting `star_int_ptr' to `&Star::absolute_magnitude'."
-               << endl;
-      }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-      star_str_ptr  = 0; 
-      star_int_ptr  = 0;
-      star_real_ptr = &Star::absolute_magnitude;
-
-      if (where_option.int_value != 0)
-      {
-#if DEBUG_COMPILE
-         if (DEBUG)
-         { 
-             cerr << "`where_option.int_value' == " <<  where_option.int_value << " (!= 0)" 
-                  << endl
-                  << "Casting `where_option.int_value' to `real' and assigning it to" 
-                  << endl 
-                  << "`where_option.real_value' and setting `where_option.int_value' to 0."
-                  << endl;
-         }       
-#endif /* |DEBUG_COMPILE|  */@;  
- 
-         where_option.real_value  = static_cast<real>(where_option.int_value);
-         where_option.int_value = 0;
-      }
-   }
 
 @q ****** (6) @>
 
@@ -2074,6 +2208,13 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
               << "`where_option.real_value' == " << where_option.real_value << endl;
       else 
          cerr << "`this->*star_real_ptr' == NULL." << endl;
+
+      if (star_bool_ptr != 0)
+         cerr << "`this->*star_bool_ptr'  == " << this->*star_bool_ptr << endl
+              << "`where_option.bool_value' == " << where_option.bool_value << endl;
+      else 
+         cerr << "`this->*star_bool_ptr'  == NULL." << endl;
+
       }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -3591,7 +3732,29 @@ compare_apparent_magnitude(Star *s, Star *t)
    return s->apparent_magnitude < t->apparent_magnitude;
 }
 
+@q ****** (6) Compare |absolute_magnitude|.@>
+@*7 Compare |absolute_magnitude|.
+\initials{LDF 2021.09.06.}
 
+\LOG
+\initials{LDF 2021.09.06.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_absolute_magnitude(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_absolute_magnitude(Star *s, Star *t)
+{
+   return s->absolute_magnitude < t->absolute_magnitude;
+}
 
 @q ****** (6) Compare |constellation_abbreviation|.@>
 @*7 Compare |constellation_abbreviation|.
