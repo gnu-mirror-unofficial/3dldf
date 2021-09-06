@@ -1,6 +1,7 @@
 #! /bin/bash
 
 #### ttemp.sh
+#### Created by Laurence D. Finston (LDF) Mon 06 Sep 2021 10:32:01 PM CEST
 
 #### The "files" clstsph1.txt and clstsph1_a4.txt are symbolic links to the corresponding
 #### .tex files.  The latter therefore do not need to be copied explicitly to the *.txt files in
