@@ -3,11 +3,10 @@
 #### ttemp.sh
 #### Created by Laurence D. Finston (LDF) Mon 06 Sep 2021 10:32:01 PM CEST
 
-#### The "files" clstsph1.txt and clstsph1_a4.txt are symbolic links to the corresponding
-#### .tex files.  The latter therefore do not need to be copied explicitly to the *.txt files in
-#### the web pages directory.
+#### The "files" clstsph1.txt and clstsph1_a4.txt in this directory are symbolic links to the 
+#### corresponding .tex files (in this directory).  The latter therefore do not need to be copied 
+#### explicitly to the *.txt files in the web pages directory.
 #### LDF 2021.09.06.
-
 
 cp -f clstsph1.pdf clstsph1_a4.pdf ~/3DLDF-3.0_web/3dldf/graphics/
 
