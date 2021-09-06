@@ -408,6 +408,108 @@ Added this rule.
 
 };
 
+@q ***** (5) string_primary --> CONSTELLATION_FULL_NAME star_expression.@>
+
+@*4 \§string primary> $\longrightarrow$ \.{CONSTELLATION\_FULL\_NAME} \§star expression>.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=string_primary: CONSTELLATION_FULL_NAME star_expression@>@/
+{ 
+   @<Constellation_Full declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `string_primary --> "
+	           << "CONSTELLATION_FULL_NAME star_expression'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q ******* (7) @> 
+
+   string* s;
+
+   try 
+      {
+         s = new string;
+      }
+   catch (bad_alloc)
+      {
+         cerr_strm << thread_name << "ERROR!  In `yyparse()', rule `string_primary "
+                   << "--> CONSTELLATION_FULL_NAME star_expression':"
+                   << endl
+		   << "`new string' failed.  Rethrowing `bad_alloc'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
+
+         throw;
+
+      }  /* |catch (bad_alloc)|  */
+
+@q ******* (7) @> 
+
+   Star *star = static_cast<Star*>(@=$2@>);
+
+@q ******* (7) Error handling:  |star == 0|.@> 
+
+@ Error handling:  |star == 0|.
+\initials{LDF 2021.07.01.}
+
+@<Define rules@>=
+
+   if (star == static_cast<Star*>(0))
+   {
+       cerr_strm << thread_name 
+                 << "ERROR!  In `yyparse()', rule `string_primary "
+                 << "--> CONSTELLATION_FULL_NAME star_expression':"
+                 << endl
+   		    << "Invalid `star_expression'.  "
+                 << "Setting `string_primary' to 0 and will try to continue.";
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       delete s;
+
+       @=$$@> = static_cast<void*>(0);
+
+   }  /* |if (star == 0)|  */
+
+@q ******* (7) |star != 0|.@> 
+
+@ |star != 0 && star->ctr > 0|.  Set |@=$$@>| to |star->constellation_full_name|.
+\initials{LDF 2021.07.01.}
+
+@<Define rules@>=
+
+   else 
+   {
+      *s = star->constellation_full_name;
+      @=$$@> = static_cast<void*>(s); 
+   }
+@q ******* (7) @> 
+
+};
+
+
+
+
 @q ***** (5) string_primary --> BINARY numeric_expression.@>
 
 @*4 \§string primary> $\longrightarrow$ 
