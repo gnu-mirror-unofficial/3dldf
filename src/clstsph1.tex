@@ -289,15 +289,54 @@ the 5pt version of Computer Modern Roman has quite different proportions from th
 However, considering how much work it is to adjust the size and position of the labels, I think this
 is a fine point that could be disregarded. For very large versions, it might be worthwhile to use
 different font sizes.
-\vfil\eject
+\vskip2\baselineskip
 \endgroup
+
+\Chapter{greek alphabet}{Greek Alphabet}
+\hldest{fit}{}{greek alphabet}
+\begingroup
+\medium
+\obeylines
+\setbox0=\hbox{$\displaystyle \theta$, $\vartheta$\quad}
+\setbox1=\vbox{\hbox{\hbox to \wd0{$\displaystyle \alpha$\hss} alpha}
+\hbox{\hbox to \wd0{$\displaystyle \beta$\hss} beta}
+\hbox{\hbox to \wd0{$\displaystyle \gamma$\hss} gamma}
+\hbox{\hbox to \wd0{$\displaystyle \delta$\hss} delta}
+\hbox{\hbox to \wd0{$\displaystyle \epsilon$, $\varepsilon$\hss} epsilon}
+\hbox{\hbox to \wd0{$\displaystyle \zeta$\hss} zeta}
+\hbox{\hbox to \wd0{$\displaystyle \eta$\hss} eta}
+\hbox{\hbox to \wd0{$\displaystyle \theta$, $\vartheta$\hss} theta}
+\hbox{\hbox to \wd0{$\displaystyle \iota$\hss} iota}
+\hbox{\hbox to \wd0{$\displaystyle \kappa$\hss} kappa}
+\hbox{\hbox to \wd0{$\displaystyle \lambda$\hss} lambda}
+\hbox{\hbox to \wd0{$\displaystyle \mu$\hss} mu}}
+
+\setbox2=\vbox{\hbox{\hbox to \wd0{$\displaystyle \nu$\hss} nu}
+\hbox{\hbox to \wd0{$\displaystyle \xi$\hss} xi}
+\hbox{\hbox to \wd0{$\displaystyle o$\hss} omicron}
+\hbox{\hbox to \wd0{$\displaystyle \pi$, $\varpi$\hss} pi}
+\hbox{\hbox to \wd0{$\displaystyle \rho$, $\varrho$\hss} rho}
+\hbox{\hbox to \wd0{$\displaystyle \sigma$, $\varsigma$\hss} sigma}
+\hbox{\hbox to \wd0{$\displaystyle \tau$\hss} tau}
+\hbox{\hbox to \wd0{$\displaystyle \upsilon$\hss} upsilon}
+\hbox{\hbox to \wd0{$\displaystyle \phi$, $\varphi$\hss} phi}
+\hbox{\hbox to \wd0{$\displaystyle \chi$\hss} chi}
+\hbox{\hbox to \wd0{$\displaystyle \psi$\hss} psi}
+\hbox{\hbox to \wd0{$\displaystyle \omega$\hss} omega}}
+
+\setbox3=\hbox{\box1\hskip4em\box2}
+\hbox to \wd3{\hfil{\largebx Greek Alphabet}\hfil}
+\vskip1.5\baselineskip
+\box3
+\endgroup
+\vfil\eject
+
+%% **** (4)
 
 \headline={\hfil {\tt \timestamp}\hskip4.5cm}
 
 \begingroup
 \advance\hoffset by 2cm
-
-%% **** (4)
 
 \Chapter{spherical biangles}{Spherical Biangles}
 \centerline{{\largebx Spherical Biangles}}
