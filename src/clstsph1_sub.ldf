@@ -104,7 +104,7 @@ get_sphere_for_plotting_stars {radius};
 
 get_panels {radius};
 
-get_flat_panels {tab_width};
+get_flat_panels;
 
 %% ** (2) Plot the stars.
 
@@ -384,6 +384,9 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {shaula, temp_star_panel_po
 
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (.25cm - .5pt, .6cm)
    with_color line_color on_picture flat_quadrant_picture[3];
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (.25cm - .5pt, .6cm)
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 %% *** (3) 25. Gacrux
 
@@ -1216,6 +1219,11 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {markeb, temp_star_panel_po
 draw temp_star_flat_panel_point -- (temp_star_flat_panel_point shifted (0, .75cm -4pt))
    with_color line_color on_picture flat_quadrant_picture[2];
 
+
+draw temp_star_flat_panel_point -- (temp_star_flat_panel_point shifted (0, .75cm -4pt))
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
+
 %% *** (3) 91. Gienah
 
 plot_star_on_sphere (star_point) {radius, gienah};
@@ -1530,6 +1538,10 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {lesath, temp_star_panel_po
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (-.25cm - 2pt, .333cm)
     with_color line_color on_picture flat_quadrant_picture[3];
 
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (-.25cm - 2pt, .333cm)
+    with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
+
 %% *** (3) 116. Pi Puppis
 
 plot_star_on_sphere (star_point) {radius, pi_puppis};
@@ -1564,6 +1576,10 @@ label.lrt("{\SMALL Kaus Meridionalis}",
 
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (.25cm - 2pt, -.25cm - .5pt)
    with_color line_color on_picture flat_quadrant_picture[3];
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (.25cm - 2pt, -.25cm - .5pt)
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
 
 %% *** (3) 118. Tarazed
 
@@ -1721,6 +1737,10 @@ label.urt("{\small $\delta$ Crucis}", temp_star_flat_panel_point shifted (-.333c
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, .333cm + 5.5pt)
   with_color line_color on_picture flat_quadrant_picture[3];
 
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, .333cm + 5.5pt)
+  with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
+
 %% *** (3) 129. Rastaban
 
 plot_star_on_sphere (star_point) {radius, rastaban};
@@ -1844,6 +1864,10 @@ label.top("{\small\vbox{\hbox{Kaus}\vskip-4pt\hbox{Borealis}}}",
 
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, .25cm + 1pt)
    with_color line_color on_picture flat_quadrant_picture[3];
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, .25cm + 1pt)
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
 
 %% *** (3) 137. Algenib
 
@@ -2109,6 +2133,10 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {alniyat, temp_star_panel_p
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (-.25cm -1pt, -.25cm)
    with_color line_color on_picture flat_quadrant_picture[3];
 
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (-.25cm -1pt, -.25cm)
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
+
 %% *** (3) 157. Albireo
 
 plot_star_on_sphere (star_point) {radius, albireo};
@@ -2257,6 +2285,11 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {alnasl, temp_star_panel_po
 
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (7.5pt, 6.5pt)
    with_color line_color on_picture flat_quadrant_picture[3];
+
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (7.5pt, 6.5pt)
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
+
 
 %% *** (3) 169. Gamma Hydrae
 
@@ -2546,6 +2579,10 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {eta_sagittarii, temp_star_
 draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, -.333cm)
    with_color line_color on_picture flat_quadrant_picture[3];
 
+draw temp_star_flat_panel_point -- temp_star_flat_panel_point shifted (0, -.333cm)
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
+
 %% *** (3) 189. Zeta Hydrae
 
 plot_star_on_sphere (star_point) {radius, zeta_hydrae};
@@ -2694,6 +2731,10 @@ label.rt("{\Small\vbox{\hbox{\hskip2pt N Velo-}\vskip-5pt\hbox{\hskip6pt rum}}}"
 
 draw temp_star_flat_panel_point -- (temp_star_flat_panel_point shifted (10pt, 6.5pt))
    with_color line_color on_picture flat_quadrant_picture[2];
+
+draw temp_star_flat_panel_point -- (temp_star_flat_panel_point shifted (10pt, 6.5pt))
+   with_color line_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+
 
 %% *** (3) 200. Pi Herculis
 

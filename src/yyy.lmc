@@ -21,8 +21,8 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     v := 1;
   fi;
   
-  message "common_name S:";
-  show common_name S;
+  %message "common_name S:";
+  %show common_name S;
 
   % if common_name S contains "$":
   %   message "Got a math character";
@@ -150,12 +150,16 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     if label_pos == label_pos_zero:
       label(s, R shifted (shift_x, shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label(s, R shifted (shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (shift_x, shift_y), s);
       fi;
     elseif label_pos == label_pos_top:
       label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (shift_x, basic_shift_val + shift_y), s)
 	  with_top_offset 0 with_bottom_offset 0 with_left_offset 0 with_right_offset 0;
@@ -163,42 +167,56 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     elseif label_pos == label_pos_bot:
       label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (shift_x, -basic_shift_val + shift_y), s);
       fi;
     elseif label_pos == label_pos_lft:
       label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (-basic_shift_val + shift_x, shift_y), s);
       fi;
     elseif label_pos == label_pos_rt:
       label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (basic_shift_val + shift_x, shift_y), s);
       fi;
     elseif label_pos == label_pos_urt:
       label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y), s);
       fi;
     elseif label_pos == label_pos_ulft:
       label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y), s);
       fi;
     elseif label_pos == label_pos_lrt:
       label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
       fi;
     elseif label_pos == label_pos_llft:
       label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
 	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
       if do_box:
 	q2 := box_text (R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
       fi;
@@ -232,9 +250,9 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
   drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 2];
   drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 4];
- 
 
-
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+  
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
   

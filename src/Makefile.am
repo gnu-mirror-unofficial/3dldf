@@ -1115,7 +1115,7 @@ clstsph3.dvi: clstsph3.tex clstsph3.0
 clstsph3.0 clstsph3.1: clstsph3.mp 
 	mpost -numbersystem "double" clstsph3.mp
 
-clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
+clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph3.ldf
 
 #### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
