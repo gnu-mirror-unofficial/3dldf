@@ -1,0 +1,134 @@
+def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or_right,
+                                    numeric picture_ctr_one,
+                                    numeric picture_ctr_two,
+                                    numeric RA_one, numeric RA_two, numeric Decl,
+                                    numeric label_pos, numeric shift_x, numeric shift_y,
+                                    boolean do_labels} =
+  point P[];
+
+  string star_name;
+
+  color ccolor;
+
+  if length str > 0: 
+    star_name := str;
+  else:
+    star_name := common_name R;
+  fi;
+
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+  
+  for i = 0 upto 3:
+    P[i] := get_point (i) flat_quadrant[RA_one][Decl];
+  endfor;
+
+  for i = 0 upto 3:
+    P[i+4] := get_point (i) flat_quadrant[RA_two][Decl];
+  endfor;
+
+  if do_labels:
+    dotlabel.lft("0", P0) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.rt("1", P1) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.rt("2", P2) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.lft("3", P3) on_picture flat_quadrant_picture[picture_ctr_one];
+
+    dotlabel.lft("4", P4) on_picture flat_quadrant_picture[picture_ctr_two];
+    dotlabel.rt("5", P5) on_picture flat_quadrant_picture[picture_ctr_two];
+    dotlabel.rt("6", P6) on_picture flat_quadrant_picture[picture_ctr_two];
+    dotlabel.lft("7", P7) on_picture flat_quadrant_picture[picture_ctr_two];
+  fi;
+
+  numeric temp_mag;
+
+  P8 := S shifted (-1cm, 0);
+  P9 := S shifted (1cm, 0);
+
+  if left_or_right: %% true is "right"
+    P10 := (P1 -- P2) intersection_point (P8 -- P9);
+  else:
+    P10 := (P0 -- P3) intersection_point (P8 -- P9);
+  fi;
+
+  temp_mag := magnitude(xpart P10 - xpart S);
+
+  if left_or_right: %% true is "right"
+    P11 := (P4 -- P7) intersection_point (P8 -- P9);
+  else:
+    P11 := (P5 -- P6) intersection_point (P8 -- P9);
+  fi;
+
+  if do_labels:
+    dotlabel.ulft("$P_{10}$", P10) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.ulft("$P_{11}$", P11) on_picture flat_quadrant_picture[picture_ctr_two];
+  fi;
+
+  if left_or_right: %% true is "right"
+    P12 := P11 shifted (-temp_mag, 0);
+  else:
+    P12 := P11 shifted (temp_mag, 0);
+  fi;
+
+% message "P9:";
+% show P9;
+
+  numeric app_mag;
+  pen sstar_pen;
+
+  app_mag := apparent_magnitude R;
+
+  if app_mag < 0:
+    sstar_pen := star_pen[-1];
+  elseif app_mag < 1:
+    sstar_pen := star_pen[0];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+  else:
+    sstar_pen := star_pen[5];
+  fi;
+
+  
+  if label_pos == label_pos_zero:
+    label("{\small " & star_name & "}", P12 shifted (shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_top:
+    label.top("{\small " & star_name & "}", P12 shifted (shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_bot:
+    label.bot("{\small " & star_name & "}", P12 shifted (shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_lft:
+    label.lft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_rt:
+    label.rt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_urt:
+    label.urt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_ulft:
+    label.ulft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_lrt:
+    label.lrt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  elseif label_pos == label_pos_llft:
+    label.llft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+  fi;
+  
+  % label.rt("{\small " & star_name & "}", P12 shifted (basic_shift_val, 0))
+  %   on_picture flat_quadrant_picture[picture_ctr_two];
+
+  drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[picture_ctr_two];
+
+enddef;
