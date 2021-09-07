@@ -4264,6 +4264,39 @@ Added this rule.
 
 };
 
+@q ** (2) boolean expression --> string_expression NOT_EQUAL string_tertiary.@>
+@*1 \§boolean expression> $\longrightarrow$ \§string expression> 
+\.{NOT\_EQUAL} \§string tertiary>.
+\initials{LDF 2021.09.07.}
+
+\LOG
+\initials{LDF 2021.09.07.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_expression: string_expression NOT_EQUAL string_tertiary@>@/
+{
+   bool* b;
+   
+   b = new bool;
+
+   string *s = static_cast<string*>(@=$1@>); 
+   string *t = static_cast<string*>(@=$3@>);    
+
+   *b = (*s == *t) ? false : true;
+
+   delete s;
+   delete t;
+ 
+   s = 0;
+   t = 0;
+
+   @=$$@> = static_cast<void*>(b);
+
+};
+
+
 
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
