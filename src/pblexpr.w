@@ -4231,6 +4231,41 @@ Added this rule.
 
 };
 
+
+@q ** (2) boolean expression --> string_expression EQUAL string_tertiary.@>
+@*1 \§boolean expression> $\longrightarrow$ \§string expression> 
+\.{EQUAL} \§string tertiary>.
+\initials{LDF 2021.09.07.}
+
+\LOG
+\initials{LDF 2021.09.07.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_expression: string_expression EQUAL string_tertiary@>@/
+{
+   bool* i;
+   
+   i = new bool;
+
+   string *s = static_cast<string*>(@=$1@>); 
+   string *t = static_cast<string*>(@=$3@>);    
+
+   *i = (*s == *t) ? true : false;
+
+   delete s;
+   delete t;
+ 
+   s = 0;
+   t = 0;
+
+   @=$$@> = static_cast<void*>(i);
+
+};
+
+
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
