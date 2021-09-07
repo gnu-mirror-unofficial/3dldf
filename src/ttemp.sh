@@ -26,6 +26,8 @@ gzip clstsph.tar
 
 mv clstsph.tar.gz clstsph.tgz 
 
+cp -f clstsph.tgz ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+
 exit 0
 
 
