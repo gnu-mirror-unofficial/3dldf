@@ -21,20 +21,27 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     v := 1;
   fi;
   
-  %message "common_name S:";
-  %show common_name S;
+  message "common_name S:";
+  show common_name S;
+
+  % if common_name S contains "$":
+  %   message "Got a math character";
+  % fi;
   
+  % message "RA_ctr:";
+  % show RA_ctr;
+
+  % message "Decl_ctr:";
+  % show Decl_ctr;
+
+  %pause; 
+
   %message "P:";
   %show P;
 
   %message "R:";
   %show R;
 
-  %message "RA_ctr:";
-  %show RA_ctr;
-
-  %message "Decl_ctr:";
-  %show Decl_ctr;
 
   if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
     q0 := D[RA_ctr][Decl_ctr];
@@ -225,7 +232,9 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
   drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 2];
   drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 4];
-  
+ 
+
+
   %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
   %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
   
