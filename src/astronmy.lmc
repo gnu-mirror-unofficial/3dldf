@@ -1035,8 +1035,14 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     else:
       temp_str := "";
     fi;
+
+    %% !! START HERE:  LDF 2021.09.07.  Rewriting.
     
-    s := "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
+    s := "\ignore{" & u & decimal point_number & "}";
+
+    s := "\starinfo{";
+
+    s := s & "}{" & decimal point_number & "}{" & common_name S & temp_str 
       & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
       & "^{\prime\prime}$}{$" & decimal decl_d & "^\circ\\thinspace " & decimal decl_m & "^\prime\\thinspace " & decimal decl_s
       & "^{\prime\prime}$}{" & decimal (bi_ang0 + 1) & "}{" & decimal apparent_magnitude S;
