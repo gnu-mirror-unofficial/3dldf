@@ -104,7 +104,7 @@
 %% * (1)
 
 %% Uncomment for A4 portrait
-\iffalse % \iftrue
+\iftrue % \iffalse
 \special{papersize=210mm, 297mm}
 \hsize=210mm
 \vsize=297mm
@@ -125,7 +125,7 @@
 \fi
 
 %% Uncomment for A3 landscape.
-\iftrue % \iffalse
+\iffalse % \iftrue
 \special{papersize=420mm, 297mm} %% DIN A3 Landscape
 \vsize=297mm
 \hsize=420mm
@@ -212,161 +212,13 @@ Boston, MA  02110-1301 USA\hfil\break
 %\advance\parskip by 2pt
 \readtocfile
 \vskip1.5\baselineskip
-
-%% *** (3)
-
-\medium
-\Chapter{instructions}{Instructions}
-\centerline{{\largebx Instructions}}
-\hldest{fit}{}{instructions}
-%\advance\baselineskip by 4pt
-\parskip=.5\baselineskip
-{\bf PLEASE NOTE!}  The author has tried to ensure that the following
-plans are correct, but as of September 6, 2021, he has not tested them
-yet himself.  As mentioned above, this material is distributed
-{\bf without a warranty}.  I recommend that users check it themselves before
-investing a lot of time and effort into cutting out the paper models.
-
-Any corrections will be gratefully received by the author.  Contact
-information can be found on the title page.
-
-The two models are provided in two versions each, white on black and black
-on white. They include the 200 brightest stars, except for Polaris,
-which would have been at an inconvenient location on the models,
-namely at the north pole.
-
-The separate file
-\href{https://www.gnu.org/software/3dldf/graphics/clstsph1_a4.pdf}{\Blue{clstsph1{\tt\char`\_}a4.pdf}}
-in DIN A4 format contains data for the stars on the models.
-
-The first model is made up of spherical biangles. They should not be
-folded but rather bent and attached to each other using the tabs on
-the left side, forming a sphere.
-
-The second model uses ``panels''. While the left and right sides of the sections
-appear to be curved, they are in fact made up of straight lines. The sections should
-be folded on the horizontal lines (declination) and again attached using the tabs.
-The result is an irregular polyhedron approximating a sphere.
-
-The ``globes'' on pages 11--12 illustrate how the positions of the
-stars on the spherical biangles and panels were derived.
-
-Assembling the models should present no particular difficulty except possibly for
-keeping the spherical biangles from slipping while attaching them to each other.
-A fast-setting glue might be helpful in this case, and/or patience.
-
-The longitudes of the stars are found by rotating counter-clockwise
-from right ascension $0\rm{h}\thinspace 0^\prime\thinspace 0^{\prime\prime}$.
-I believe that the result of this is that the model represents the celestial sphere
-as seen by an observer looking at it from the outside. I hope someone will correct me
-if I'm wrong. The famous early star atlas of Johannes Hevelius from 1690 also shows the stars
-in this way\numberedfootnote{Menzel, Donald H.~and Pasachoff, Jay M., {\it Stars and Planets.  Peterson Field Guides}, p.~21.}.
-
-However, in principle it wouldn't be difficult to reverse the representation. The difficulty would be
-in reversing the labels, but I think this problem could be solved.
-
-The limit of 200 stars is arbitrary and was chosen to correspond to the size of these versions of
-the models (sphere radius 7cm).  As of September 6, 2021, the database table containing the star data has
-entries for over 1400 stars.  However, not all of the entries contain all of the necessary data yet.
-If you want to make models with more stars, please send an email to the author at the address listed above.
-
-The models can be scaled by simply scaling the EPS (Encapsulated PostScript)
-files containing the images in this {\TeX} file by means of redefining the macro
-\verbatim \epsfsize|endverbatim .  For more information, see the
-\href{https://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/generic/epsf/epsf-doc.pdf}{\Blue{EPSF documentation}}
-at CTAN.
-
-To make a version with more stars, the same GNU 3DLDF code (with additions for the additional stars)
-could be used and the images magnified to a larger scale.
-The practical upper limit with respect to size using a normal copier or printer would be one section
-per DIN A3 page, which should be sufficiently large for any model.  Of course, depending on the new scale,
-some changes would be necessary in this file and possibly in the GNU 3DLDF code.
-
-The only problem with this approach is that the fonts used for the
-labels will also simply be scaled, whereas the different design sizes
-for the Computer Modern fonts used have different proportions. For example,
-the 5pt version of Computer Modern Roman has quite different proportions from the 12pt version.
-However, considering how much work it is to adjust the size and position of the labels, I think this
-is a fine point that could be disregarded. For very large versions, it might be worthwhile to use
-different font sizes.
-\vskip2\baselineskip
-\endgroup
-
-\Chapter{greek alphabet}{Greek Alphabet}
-\hldest{xyz}{}{greek alphabet}
-\begingroup
-\medium
-\obeylines
-\setbox0=\hbox{$\displaystyle \theta$, $\vartheta$\quad}
-\setbox1=\vbox{\hbox{\hbox to \wd0{$\displaystyle \alpha$\hss} alpha}
-\hbox{\hbox to \wd0{$\displaystyle \beta$\hss} beta}
-\hbox{\hbox to \wd0{$\displaystyle \gamma$\hss} gamma}
-\hbox{\hbox to \wd0{$\displaystyle \delta$\hss} delta}
-\hbox{\hbox to \wd0{$\displaystyle \epsilon$, $\varepsilon$\hss} epsilon}
-\hbox{\hbox to \wd0{$\displaystyle \zeta$\hss} zeta}
-\hbox{\hbox to \wd0{$\displaystyle \eta$\hss} eta}
-\hbox{\hbox to \wd0{$\displaystyle \theta$, $\vartheta$\hss} theta}
-\hbox{\hbox to \wd0{$\displaystyle \iota$\hss} iota}
-\hbox{\hbox to \wd0{$\displaystyle \kappa$\hss} kappa}
-\hbox{\hbox to \wd0{$\displaystyle \lambda$\hss} lambda}
-\hbox{\hbox to \wd0{$\displaystyle \mu$\hss} mu}}
-
-\setbox2=\vbox{\hbox{\hbox to \wd0{$\displaystyle \nu$\hss} nu}
-\hbox{\hbox to \wd0{$\displaystyle \xi$\hss} xi}
-\hbox{\hbox to \wd0{$\displaystyle o$\hss} omicron}
-\hbox{\hbox to \wd0{$\displaystyle \pi$, $\varpi$\hss} pi}
-\hbox{\hbox to \wd0{$\displaystyle \rho$, $\varrho$\hss} rho}
-\hbox{\hbox to \wd0{$\displaystyle \sigma$, $\varsigma$\hss} sigma}
-\hbox{\hbox to \wd0{$\displaystyle \tau$\hss} tau}
-\hbox{\hbox to \wd0{$\displaystyle \upsilon$\hss} upsilon}
-\hbox{\hbox to \wd0{$\displaystyle \phi$, $\varphi$\hss} phi}
-\hbox{\hbox to \wd0{$\displaystyle \chi$\hss} chi}
-\hbox{\hbox to \wd0{$\displaystyle \psi$\hss} psi}
-\hbox{\hbox to \wd0{$\displaystyle \omega$\hss} omega}}
-
-\setbox3=\hbox{\box1\hskip4em\box2}
-\hbox to \wd3{\hfil{\largebx Greek Alphabet}\hfil}
-\vskip1.5\baselineskip
-\box3
 \endgroup
 \vfil\eject
 
 %% **** (4)
-
-\headline={\hfil {\tt \timestamp}\hskip4.5cm}
 
 \begingroup
 \advance\hoffset by 2cm
-
-\Chapter{spherical biangles}{Spherical Biangles}
-\centerline{{\largebx Spherical Biangles}}
-\vskip\baselineskip
-\hldest{fit}{}{spherical biangles}
-\line{\epsffile{clstsph1.0}\hskip1cm\epsffile{clstsph1.1}\hskip1cm\epsffile{clstsph1.2}\hskip1cm
-\epsffile{clstsph1.3}\hss}
-\vfil\eject
-
-%% **** (4)
-
-\line{\epsffile{clstsph1.4}\hskip1cm\epsffile{clstsph1.5}\hskip1cm
-\epsffile{clstsph1.6}\hskip1cm\epsffile{clstsph1.7}\hss}
-\vfil\eject
-
-%% **** (4)
-
-\line{\epsffile{clstsph2.0}\hskip1cm\epsffile{clstsph2.1}\hskip1cm\epsffile{clstsph2.2}\hskip1cm
-\epsffile{clstsph2.3}\hss}
-\vfil\eject
-
-%% **** (4)
-
-\line{\epsffile{clstsph2.4}\hskip1cm\epsffile{clstsph2.5}\hskip1cm
-\epsffile{clstsph2.6}\hskip1cm\epsffile{clstsph2.7}\hss}
-\vfil\eject
-\endgroup
-
-%% ** (2) Panels
-
 \headline={\hfil {\tt \timestamp}\hskip2.5cm}
 
 %% *** (3)
@@ -375,66 +227,9 @@ different font sizes.
 \centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}
 \hldest{fit}{}{panels}
 \vskip2\baselineskip
-\line{\epsffile{clstsph1.12}\hss}
-\vfil\eject
-
-\line{\epsffile{clstsph1.13}\hss}
-\vfil\eject
-
-%% *** (3)
-
-\line{\epsffile{clstsph2.12}\hss}
-\vfil\eject
-
-%% *** (3)
-
-\line{\epsffile{clstsph2.13}\hss}
-\vfil\eject
-
-%% ** (2) Globes
-
-\Chapter{globes}{Globes}
-\centerline{{\largebx Globes}}
-\hldest{fit}{}{globes}
-\vskip2\baselineskip
-\line{\epsffile{clstsph1.8}\hskip.25cm\epsffile{clstsph1.9}\hss}
-\vfil\eject
-
-\line{\epsffile{clstsph1.10}\hskip.25cm\epsffile{clstsph1.11}\hss}
-\vfil\eject
-
-%% ** (2) Testing
-
-%% \line{\epsffile{clstsph1.14}\hss}
-%% \vfil\eject
-
-%% *** (3)
-
-\begingroup
-\advance\hsize by -.5\hsize
-\advance\hsize by -6cm
-\parskip=\baselineskip
-\Chapter{copying}{Copying}
-\hldest{fit}{}{copying}
-%\advance\baselineskip by -6pt
-\advance\hsize by 10in
-\Section{GPL}{GNU General Public License}
-\hldest{fit}{}{GPL}
-\listing{gpl-3.0_a3.txt}
-\vfil\eject
-\Section{FDL}{GNU Free Documentation License}
-\hldest{fit}{}{FDL}
-\listing{fdl-1.3_a3.txt}
-\vfil\eject
+\line{\epsffile{clstsph3.0}\hskip2cm\epsffile{clstsph3.1}\hss}
 \endgroup
-
-%% *** (3)
-
-%% \line{\epsffile{clstsph1.14}\hss}
-%% \vfil\eject
-
-
-%% *** (3) End here
+\vfil\eject
 
 \bye
 
