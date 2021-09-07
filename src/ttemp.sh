@@ -28,6 +28,10 @@ mv clstsph.tar.gz clstsph.tgz
 
 cp -f clstsph.tgz ~/3DLDF-3.0_web/3dldf/SRC_CODE/
 
+cd ~/3DLDF-3.0_web/3dldf/
+
+cvs commit -m "Edited."
+
 exit 0
 
 
