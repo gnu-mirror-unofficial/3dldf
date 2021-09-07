@@ -67,13 +67,17 @@ else:
 fi;
 
 beginfig(0);
-  draw flat_quadrant[0][1];
-  draw flat_quadrant[0][-1];
+  for i = 1 upto 8:
+    draw flat_quadrant[0][i];
+    draw flat_quadrant[0][-i];
+  endfor;
 endfig with_projection parallel_x_y; 
 
 beginfig(1);
-  draw flat_quadrant[1][1];
-  draw flat_quadrant[1][-1];
+  for i = 1 upto 8:
+    draw flat_quadrant[1][i];
+    draw flat_quadrant[1][-i];
+  endfor;
 endfig with_projection parallel_x_y no_sort no_sort; 
   
 endinput;  
