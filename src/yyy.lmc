@@ -1,0 +1,245 @@
+def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_ctr, numeric label_pos,
+                                 numeric shift_x, numeric shift_y, boolean do_box, boolean suppress_text_label} =
+
+  path q[];
+  point p[];
+  numeric v;
+  numeric n[];
+  string s;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;  %% white
+  else:
+    ccolor := black;
+  fi;
+
+  if RA_ctr < 8:
+    v := 0;
+  else:
+    v := 1;
+  fi;
+  
+  %message "common_name S:";
+  %show common_name S;
+  
+  %message "P:";
+  %show P;
+
+  %message "R:";
+  %show R;
+
+  %message "RA_ctr:";
+  %show RA_ctr;
+
+  %message "Decl_ctr:";
+  %show Decl_ctr;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    q0 := D[RA_ctr][Decl_ctr];
+    q1 := flat_quadrant[RA_ctr][Decl_ctr];
+    %draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
+  elseif (Decl_ctr == 8) or (Decl_ctr == -8):
+    q0 := T[RA_ctr][Decl_ctr];
+    q1 := flat_quadrant[RA_ctr][Decl_ctr];
+    %message "q0:";
+    %show q0;
+    %message "q1:";
+    %show q1;
+    %pause;
+    %draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
+  fi;
+
+  %draw q0 with_color red with_pen medium_pen on_picture v9;
+
+  %message "RA_ctr:";
+  %show RA_ctr;
+
+  %message "Decl_ctr:";
+  %show Decl_ctr;
+  
+  p0 := get_point (0) q0;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p1 := get_point (3) q0;
+  fi;
+
+  p2 := get_point (2) q0;
+  p3 := get_point (1) q0;
+
+  p4 := get_point (0) q1;
+  p5 := get_point (1) q1;
+  p6 := get_point (2) q1;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p7 := get_point (3) q1;
+  fi;
+  
+  n0 := magnitude(P - p0);
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    n1 := (P - p0) angle (p1 - p0);
+  else:
+    n1 := (P - p0) angle (p3 - p0);
+  fi;
+
+  %message "n0";
+  %show n0;
+
+  %message "n1";
+  %show n1;
+
+  if Decl_ctr > 0:
+    n2 := 1;
+  else:
+    n2 := -1;
+  fi;
+
+  p8:= p4 shifted (0, 0, n2);
+
+  p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
+
+  % dotlabel.lft("$p_0$", p0) on_picture v8;
+  % dotlabel.lft("$p_0$", p0) on_picture v10;
+
+  % if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %   dotlabel.lft("$p_1$", p1) on_picture v8;
+  % fi;
+  
+  % dotlabel.top("$p_2$", p2) on_picture v8;
+  % dotlabel.top("$p_3$", p3) on_picture v8;
+
+  % dotlabel.lft("$p_0$", p0) on_picture v9;
+
+  % dotlabel.lft("$p_0$", p0) on_picture v10;
+  % dotlabel.lft("$p_2$", p2) on_picture v10;
+  % dotlabel.rt("$p_3$", p3) on_picture v10;
+  
+  % if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %   dotlabel.top("$p_1$", p1) on_picture v9;
+  % fi;
+  
+  % dotlabel.top("$p_2$", p2) on_picture v9;
+  % dotlabel.top("$p_3$", p3) on_picture v9;
+
+  % dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
+
+  %if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    %dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v];
+  %fi;
+
+  %message "p9";
+  %show p9;  
+  R := p9;
+
+  s := "{\small " & common_name S & "}";
+
+  if suppress_text_label:
+    ;
+  else:
+    if label_pos == label_pos_zero:
+      label(s, R shifted (shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_top:
+      label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, basic_shift_val + shift_y), s)
+	  with_top_offset 0 with_bottom_offset 0 with_left_offset 0 with_right_offset 0;
+      fi;
+    elseif label_pos == label_pos_bot:
+      label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_lft:
+      label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_rt:
+      label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_urt:
+      label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_ulft:
+      label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_lrt:
+      label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_llft:
+      label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    fi;
+  fi;
+
+  % if do_box:
+  %   draw q2 with_color ccolor on_picture flat_quadrant_picture[v];
+  % fi;
+  
+  numeric app_mag;
+  pen sstar_pen;
+
+  app_mag := apparent_magnitude S;
+
+  if app_mag < 0:
+    sstar_pen := star_pen[-1];
+  elseif app_mag < 1:
+    sstar_pen := star_pen[0];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+  else:
+    sstar_pen := star_pen[5];
+  fi;
+
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 2];
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 4];
+  
+  %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
+  %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
+  
+  % drawdot star_panel_point0 with_color red with_pen medium_pen;
+
+  % n5 := magnitude(star_panel_point0 - p0);
+  % message "n5:";
+  %show n5;
+  
+  % n6 := (star_panel_point0 - p0) angle (p1 - p0);
+  % message "n6:";
+  % show n6;
+
+  % p8 := (p4 shifted (n5, 0)) rotated (0, 0, n6);
+  % drawdot p8 with_color red with_pen medium_pen;
+
+enddef;
