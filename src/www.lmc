@@ -16,6 +16,8 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 
   string temp_str;
 
+  string f_sect_str;
+
   color ccolor;
   
   if do_black:
@@ -146,7 +148,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       u := "";
     fi;
 
-
 % (progn
 % (setq i 90)      
 % (insert "\n")
@@ -156,75 +157,61 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 % (setq i (+ i 22.5)))	  
 % )
 
+    f_sect_str := "";
+
     message "ra == " & decimal ra;
 
-    if ra == 0:
-      message "ra == 0";
-    elseif (ra > 0) and (ra < 22.5):
+    if (ra > 0) and (ra < 22.5):
       message "0 < ra < 22.5";
-    elseif ra == 22.5:
-      message "ra == 22.5";
+      f_sect_str := "1";
     elseif (ra > 22.5) and (ra < 45):
       message "22.5 < ra < 45";
-    elseif ra == 45:
-      message "ra == 45";
+      f_sect_str := "2";
     elseif (ra > 45) and (ra < 67.5):
       message "45 < ra < 67.5";
-    elseif ra == 67.5:
-      message "ra == 67.5";
+      f_sect_str := "3";
     elseif (ra > 67.5) and (ra < 90):
       message "67.5 < ra < 90";
-    elseif ra == 90:
-      message "ra == 90";
+      f_sect_str := "4";
     elseif (ra > 90.0) and (ra < 112.5):
       message "90.0 < ra < 112.5";
-    elseif ra == 112.5:
-      message "ra == 112.5";
+      f_sect_str := "5";
     elseif (ra > 112.5) and (ra < 135.0):
       message "112.5 < ra < 135.0";
-    elseif ra == 135.0:
-      message "ra == 135.0";
+      f_sect_str := "6";
     elseif (ra > 135.0) and (ra < 157.5):
       message "135.0 < ra < 157.5";
-    elseif ra == 157.5:
-      message "ra == 157.5";
+      f_sect_str := "7";
     elseif (ra > 157.5) and (ra < 180.0):
       message "157.5 < ra < 180.0";
-    elseif ra == 180.0:
-      message "ra == 180.0";
+      f_sect_str := "8";
     elseif (ra > 180.0) and (ra < 202.5):
       message "180.0 < ra < 202.5";
-    elseif ra == 202.5:
-      message "ra == 202.5";
+      f_sect_str := "9";
     elseif (ra > 202.5) and (ra < 225.0):
       message "202.5 < ra < 225.0";
-    elseif ra == 225.0:
-      message "ra == 225.0";
+      f_sect_str := "10";
     elseif (ra > 225.0) and (ra < 247.5):
       message "225.0 < ra < 247.5";
-    elseif ra == 247.5:
-      message "ra == 247.5";
+      f_sect_str := "11";
     elseif (ra > 247.5) and (ra < 270.0):
       message "247.5 < ra < 270.0";
-    elseif ra == 270.0:
-      message "ra == 270.0";
+      f_sect_str := "12";
     elseif (ra > 270.0) and (ra < 292.5):
       message "270.0 < ra < 292.5";
-    elseif ra == 292.5:
-      message "ra == 292.5";
+      f_sect_str := "13";
     elseif (ra > 292.5) and (ra < 315.0):
       message "292.5 < ra < 315.0";
-    elseif ra == 315.0:
-      message "ra == 315.0";
+      f_sect_str := "14";
     elseif (ra > 315.0) and (ra < 337.5):
       message "315.0 < ra < 337.5";
-    elseif ra == 337.5:
-      message "ra == 337.5";
+      f_sect_str := "15";
     elseif (ra > 337.5) and (ra < 360.0):
       message "337.5 < ra < 360.0";
-    elseif ra == 360.0:
-      message "ra == 360.0";
+      f_sect_str := "16";
     fi;
+
+    %% & "/" & f_sect_str & 
 
     s := s & "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
       & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
@@ -251,7 +238,9 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     write s to nw[bi_ang0];
     write s to star_info_combined;
 
-    if label_pos == label_pos_zero:
+    f_sect_str := "";
+    
+if label_pos == label_pos_zero:
       label_suffix := "";
       shift_x_val := shift_x;
       shift_y_val := shift_y;

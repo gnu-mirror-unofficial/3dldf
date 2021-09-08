@@ -1092,7 +1092,7 @@ clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph2.0 clstsph_1_star_info_combined.te
 clstsph1.0 clstsph1.1 clstsph_1_star_info_combined.tex: clstsph1.mp 
 	mpost -numbersystem "double" clstsph1.mp
 
-clstsph1.mp: 3dldf$(EXEEXT) clstsph1.ldf astronmy.lmc clstsph1.aux xxx.lmc yyy.lmc zzz.lmc
+clstsph1.mp: 3dldf$(EXEEXT) clstsph1.ldf astronmy.lmc clstsph1.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph1.ldf
 
 clstsph2.pdf: clstsph2.dvi
@@ -1101,7 +1101,7 @@ clstsph2.pdf: clstsph2.dvi
 clstsph2.0: clstsph2.mp
 	mpost -numbersystem "double" clstsph2.mp
 
-clstsph2.mp: clstsph2.ldf clstsph1.aux clstsph1_sub.ldf astronmy.lmc xxx.lmc yyy.lmc zzz.lmc
+clstsph2.mp: clstsph2.ldf clstsph1.aux clstsph1_sub.ldf astronmy.lmc www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph2.ldf
 
 clstsph3.pdf: clstsph3.dvi
@@ -1120,10 +1120,10 @@ clstsph3.0 clstsph3.1: clstsph3.mp
 clstsph4.0 clstsph4.1: clstsph4.mp 
 	mpost -numbersystem "double" clstsph4.mp
 
-clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
+clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph3.ldf
 
-clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
+clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph4.ldf
 
 clstsph5.pdf: clstsph5.dvi
@@ -1139,7 +1139,7 @@ clstsph5.dvi: clstsph5.tex clstsph5.0
 clstsph5.0 clstsph5.1: clstsph5.mp 
 	mpost -numbersystem "double" clstsph5.mp
 
-clstsph5.mp: 3dldf$(EXEEXT) clstsph5.ldf clstsph5_sub.ldf astronmy.lmc clstsph5.aux xxx.lmc yyy.lmc zzz.lmc
+clstsph5.mp: 3dldf$(EXEEXT) clstsph5.ldf clstsph5_sub.ldf astronmy.lmc clstsph5.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph5.ldf
 
 PHONY: purge-5
