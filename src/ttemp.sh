@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -v
 
 #### ttemp.sh
 #### Created by Laurence D. Finston (LDF) Mon 06 Sep 2021 10:32:01 PM CEST
@@ -7,6 +7,8 @@
 #### corresponding .tex files (in this directory).  The latter therefore do not need to be copied 
 #### explicitly to the *.txt files in the web pages directory.
 #### LDF 2021.09.06.
+
+echo "Arg 1 == $1"
 
 cp -f clstsph1.pdf clstsph1_a4.pdf ~/3DLDF-3.0_web/3dldf/graphics/
 
@@ -30,7 +32,15 @@ cp -f clstsph.tgz ~/3DLDF-3.0_web/3dldf/SRC_CODE/
 
 cd ~/3DLDF-3.0_web/3dldf/
 
-cvs commit -m "Edited."
+if test -n "$1"
+then
+    echo "Arg 1 is non-empty."
+    cvs commit -m "$1"
+else
+    echo "Arg 1 is empty."
+    cvs commit -m "Edited."
+fi
+
 
 #cvs commit -m "Minor corrections."
 
