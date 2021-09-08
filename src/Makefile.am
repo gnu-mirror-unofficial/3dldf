@@ -1087,6 +1087,7 @@ clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph2.0 clstsph_1_star_info_combined.te
 	cat clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
             clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex | sort -n | grep -v ^% > clstsph_1_star_info_combined.tex
 	tex clstsph1.tex
+	tex clstsph1.tex
 
 clstsph1.0 clstsph1.1 clstsph_1_star_info_combined.tex: clstsph1.mp 
 	mpost -numbersystem "double" clstsph1.mp
@@ -1111,6 +1112,7 @@ clstsph3.ps: clstsph3.dvi
 
 clstsph3.dvi: clstsph3.tex clstsph3.0 clstsph4.0  
 	tex clstsph3.tex
+	tex clstsph3.tex
 
 clstsph3.0 clstsph3.1: clstsph3.mp 
 	mpost -numbersystem "double" clstsph3.mp
@@ -1123,6 +1125,27 @@ clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.
 
 clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph4.ldf
+
+clstsph5.pdf: clstsph5.dvi
+	dvipdfmx $<
+
+clstsph5.ps: clstsph5.dvi
+	dvips -o clstsph5.ps clstsph5.dvi
+
+clstsph5.dvi: clstsph5.tex clstsph5.0 
+	tex clstsph5.tex
+	tex clstsph5.tex
+
+clstsph5.0 clstsph5.1: clstsph5.mp 
+	mpost -numbersystem "double" clstsph5.mp
+
+clstsph5.mp: 3dldf$(EXEEXT) clstsph5.ldf clstsph5_sub.ldf astronmy.lmc clstsph5.aux xxx.lmc yyy.lmc zzz.lmc
+	3dldf$(EXEEXT) clstsph5.ldf
+
+PHONY: purge-5
+
+purge-5:
+	rm -f clstsph5.pdf clstsph5.ps clstsph5.dvi clstsph5.log clstsph5.toc clstsph5.mp clstsph5.mpx clstsph5.0 clstsph5.1
 
 #### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
 #### They run TeX twice.
