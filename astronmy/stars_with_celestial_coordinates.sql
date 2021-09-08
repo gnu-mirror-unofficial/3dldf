@@ -4121,3 +4121,30 @@ where common_name = "Almach";
 
 update Stars set bayer_designation_greek_letter_tex = "$\\gamma$", bayer_designation_greek_letter = "gamma"
 where common_name = "Porrima";
+
+
+-- (- 360.0 22.5) (- (+ 337.5 45) 360)22.5
+-- (+ 360.0 -22.5)
+
+select approx_rank_apparent_magnitude, common_name bs_hr_number, right_ascension_decimal_degrees from Stars
+where right_ascension_decimal_degrees = 337.5
+or right_ascension_decimal_degrees = 22.5
+or right_ascension_decimal_degrees = 67.5
+or right_ascension_decimal_degrees = 112.5
+or right_ascension_decimal_degrees = 157.5
+or right_ascension_decimal_degrees = 202.5
+or right_ascension_decimal_degrees = 247.5
+or right_ascension_decimal_degrees = 292.5
+or right_ascension_decimal_degrees = 337.5;
+
+
+-- (progn
+-- (setq i 22.5)      
+-- (insert "\n")
+-- (while (<= i 360)
+-- (insert (concat (number-to-string i) "\n"))
+-- (setq i (+ i 45)))	  
+-- )
+
+
+
