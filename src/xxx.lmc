@@ -101,14 +101,24 @@ def get_flat_panels =
         if do_black:
           fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
           draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+
+          fill q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+	  
         else:
           draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v];
+	  draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
         fi;
         if do_black:
           fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
           draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v+2];
+
+          fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+	  
         else:
           draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v];
+	  draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[10 + i];
         fi;
         if j == 7:
           if do_labels:
@@ -160,9 +170,20 @@ def get_flat_panels =
           draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
           fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
           draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v+2];
-        else:
+
+	  fill q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+          fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+
+
+	else:
           draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v];
           draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v];
+
+	  draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+	  
         fi;
 
         if j == 7:
@@ -235,9 +256,19 @@ def get_flat_panels =
       fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
       draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[v+2];
       fill q[m+2] with_color black on_picture flat_quadrant_picture[v];
+
+      draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+      fill q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+      draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+      fill q[m+2] with_color black on_picture flat_quadrant_picture[10 + i];
+
     else:
       draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v];
       draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[v];
+
+      draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+      draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+      
     fi;
     
     flat_quadrant[i][8]  := q[m+1];

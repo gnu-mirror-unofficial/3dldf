@@ -141,6 +141,8 @@
 
 %% *** (3) 
 
+%% 12.25cm sphere radius: (* 7cm 1.75)
+
 \def\epsfsize#1#2{1.75#1}
 
 %% *** (3) 
@@ -218,27 +220,43 @@ Boston, MA  02110-1301 USA\hfil\break
 %% **** (4)
 
 \begingroup
-\advance\hoffset by 2cm
-\advance\hsize by -2cm
-\headline={\hfil {\tt \timestamp}\hskip2.5cm}
-
-
-\begingroup
-\advance\voffset by -1cm
+\advance\hoffset by -.25cm
+\advance\voffset by -1.5cm
+\headline={\lower1cm\hbox to \hsize{\hfil {\tt \timestamp}\hskip2.5cm}}
 \Chapter{spherical biangles}{Spherical Biangles}
-\centerline{{\largebx Spherical Biangles}}
-\vskip\baselineskip
 \hldest{fit}{}{spherical biangles}
-\line{\epsffile{clstsph2.0}\hskip1cm\epsffile{clstsph2.1}\hss}
+\vbox to 0pt{\centerline{{\largebx Spherical Biangles}}\vskip\baselineskip
+\line{\epsffile{clstsph1.0}\hskip0cm\epsffile{clstsph1.1}\hss}\vss}
+\vfil\eject
+\line{\epsffile{clstsph1.2}\hskip0cm\epsffile{clstsph1.3}\hss}
+\vfil\eject
+\line{\epsffile{clstsph1.4}\hskip0cm\epsffile{clstsph1.5}\hss}
+\vfil\eject
+\line{\epsffile{clstsph1.6}\hskip0cm\epsffile{clstsph1.7}\hss}
+\vfil\eject
+
+%% **** (4)
+
+\vbox to 0pt{\centerline{{\largebx Spherical Biangles}}\vskip\baselineskip
+\line{\epsffile{clstsph2.0}\hskip0cm\epsffile{clstsph2.1}\hss}\vss}
+\vfil\eject
+\line{\epsffile{clstsph2.2}\hskip0cm\epsffile{clstsph2.3}\hss}
+\vfil\eject
+\line{\epsffile{clstsph2.4}\hskip0cm\epsffile{clstsph2.5}\hss}
+\vfil\eject
+\line{\epsffile{clstsph2.6}\hskip0cm\epsffile{clstsph2.7}\hss}
 \vfil\eject
 \endgroup
 
 %% *** (3)
 
+%% ** (2) Panels
+
+\begingroup
+\advance\hoffset by 1.5cm
+\advance\hsize by -4cm
 \setbox0=\hbox{\epsffile{clstsph3.1}}
-
 \Chapter{panels}{Panels (Isoceles Trapezoids and Triangles)}
-
 \vbox to 0pt{\vbox to 0pt{\vskip-2cm\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}\vss}%
 \hldest{fit}{}{panels}%
 %\vskip2\baselineskip
@@ -261,7 +279,48 @@ Boston, MA  02110-1301 USA\hfil\break
 \hbox to \wd0{\epsffile{clstsph3.14}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph3.15}\hss}\hss}%
 \vss}
 \vfil\eject
+
+%% *** (3)
+
+\vbox to 0pt{\vbox to 0pt{\vskip-2cm\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}\vss}%
+\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.0}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.1}\hss}\hskip1.5cm
+\hbox to \wd0{\epsffile{clstsph4.2}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.3}\hss}\hss}%
+\vss}
+\vfil\eject
+
+\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.4}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.5}\hss}\hskip1.5cm
+\hbox to \wd0{\epsffile{clstsph4.6}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.7}\hss}\hss}%
+\vss}
+\vfil\eject
+
+\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.8}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.9}\hss}\hskip1.5cm
+\hbox to \wd0{\epsffile{clstsph4.10}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.11}\hss}\hss}%
+\vss}
+\vfil\eject
+
+\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.12}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.13}\hss}\hskip1.5cm
+\hbox to \wd0{\epsffile{clstsph4.14}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.15}\hss}\hss}%
+\vss}
+\vfil\eject
 \endgroup
+
+
+%% *** (3) Copying
+
+\begingroup
+\parskip=\baselineskip
+\global\advance\chapctr by 1
+\Chapter{Copying}{Copying}
+\hldest{fit}{}{Copying}
+\Section{GPL}{GNU General Public License}
+\hldest{fit}{}{GPL}
+\listing{gpl-3.0.txt}
+\vfil\break
+\Section{FDL}{GNU Free Documentation License}
+\hldest{fit}{}{FDL}
+\listing{fdl-1.3.txt}
+\endgroup
+
 
 \bye
 

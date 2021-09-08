@@ -1109,14 +1109,20 @@ clstsph3.pdf: clstsph3.dvi
 clstsph3.ps: clstsph3.dvi
 	dvips -o clstsph3.ps clstsph3.dvi
 
-clstsph3.dvi: clstsph3.tex clstsph3.0  
+clstsph3.dvi: clstsph3.tex clstsph3.0 clstsph4.0  
 	tex clstsph3.tex
 
 clstsph3.0 clstsph3.1: clstsph3.mp 
 	mpost -numbersystem "double" clstsph3.mp
 
+clstsph4.0 clstsph4.1: clstsph4.mp 
+	mpost -numbersystem "double" clstsph4.mp
+
 clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph3.ldf
+
+clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux xxx.lmc yyy.lmc zzz.lmc
+	3dldf$(EXEEXT) clstsph4.ldf
 
 #### psc and pdfc are to be used for updating the TOC in clstsph1.tex.
 #### They run TeX twice.
