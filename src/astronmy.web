@@ -155,6 +155,7 @@ class Star
    friend bool compare_common_name(Star *s, Star *);
    friend bool compare_flamsteed_designation_number(Star *s, Star *);
    friend bool compare_bayer_designation_greek_letter(Star *s, Star *);
+   friend bool compare_bayer_designation_greek_letter_tex(Star *s, Star *);
    friend bool compare_bs_hr_number(Star *s, Star *);
    friend bool compare_bs_number(Star *s, Star *);
    friend bool compare_hr_number(Star *s, Star *);
@@ -193,6 +194,7 @@ class Star
       string arabic_name;
       int flamsteed_designation_number;
       string bayer_designation_greek_letter;
+      string bayer_designation_greek_letter_tex;
       int bs_hr_number;
       int approx_rank_apparent_magnitude;
       real apparent_magnitude;
@@ -337,6 +339,9 @@ Stars_Where_Option_Struct::show(string s)
 
    else if (field == STARS_BAYER_DESIGNATION_GREEK_LETTER)
       cerr << " == STARS_BAYER_DESIGNATION_GREEK_LETTER" << endl;
+
+   else if (field == STARS_BAYER_DESIGNATION_GREEK_LETTER_TEX)
+      cerr << " == STARS_BAYER_DESIGNATION_GREEK_LETTER_TEX" << endl;
 
    else if (field == STARS_BS_HR_NUMBER)
       cerr << " == STARS_BS_HR_NUMBER" << endl;
@@ -523,6 +528,7 @@ Star::Star(void)
       arabic_name = "";
       flamsteed_designation_number = 0;
       bayer_designation_greek_letter = "";
+      bayer_designation_greek_letter_tex = "";
       bs_hr_number = 0;
       approx_rank_apparent_magnitude = 0;
       apparent_magnitude = 0.0;       
@@ -574,6 +580,7 @@ Star::Star(const Star &s)
       arabic_name = s.arabic_name;
       flamsteed_designation_number = s.flamsteed_designation_number;
       bayer_designation_greek_letter = s.bayer_designation_greek_letter;
+      bayer_designation_greek_letter_tex = s.bayer_designation_greek_letter_tex;
       bs_hr_number = s.bs_hr_number;
       approx_rank_apparent_magnitude = s.approx_rank_apparent_magnitude;
       apparent_magnitude = s.apparent_magnitude;        
@@ -745,33 +752,33 @@ Star::set(Scanner_Node scanner_node)
 @
 @<Define |Star| functions@>=
 
-      common_name                     = scanner_node->curr_row[0];
-      greek_name                      = scanner_node->curr_row[1];
-      latin_name                      = scanner_node->curr_row[2];
-      arabic_name                     = scanner_node->curr_row[3];     
-      flamsteed_designation_number    = atoi(scanner_node->curr_row[4]);
-      bayer_designation_greek_letter  = scanner_node->curr_row[5];
-      bs_hr_number                    = atoi(scanner_node->curr_row[6]);
-      approx_rank_apparent_magnitude  = atoi(scanner_node->curr_row[7]);
-      apparent_magnitude              = atof(scanner_node->curr_row[8]);        
-      constellation_abbreviation      = scanner_node->curr_row[9];
-      constellation_full_name         = scanner_node->curr_row[10];
-      constellation_name_genitive     = scanner_node->curr_row[11];
-      constellation_number            = atoi(scanner_node->curr_row[12]);
-      right_ascension_hours           = atoi(scanner_node->curr_row[13]);
-      right_ascension_minutes         = atoi(scanner_node->curr_row[14]);
-      right_ascension_seconds         = atof(scanner_node->curr_row[15]);
-      right_ascension_decimal_hours   = atof(scanner_node->curr_row[16]);
-      right_ascension_decimal_degrees = atof(scanner_node->curr_row[17]);
-      declination_degrees             = atoi(scanner_node->curr_row[18]);
-      declination_minutes             = atoi(scanner_node->curr_row[19]);
-      declination_seconds             = atof(scanner_node->curr_row[20]);
-      declination_decimal_degrees     = atof(scanner_node->curr_row[21]);
-      is_binary                       = atoi(scanner_node->curr_row[22]);
-      absolute_magnitude              = atof(scanner_node->curr_row[23]);
-      apparent_magnitude_varies       = static_cast<bool>(atoi(scanner_node->curr_row[24])); 
-      absolute_magnitude_varies       = static_cast<bool>(atoi(scanner_node->curr_row[25]));       
-
+      common_name                        = scanner_node->curr_row[0];
+      greek_name                         = scanner_node->curr_row[1];
+      latin_name                         = scanner_node->curr_row[2];
+      arabic_name                        = scanner_node->curr_row[3];     
+      flamsteed_designation_number       = atoi(scanner_node->curr_row[4]);
+      bayer_designation_greek_letter     = scanner_node->curr_row[5];
+      bs_hr_number                       = atoi(scanner_node->curr_row[6]);
+      approx_rank_apparent_magnitude     = atoi(scanner_node->curr_row[7]);
+      apparent_magnitude                 = atof(scanner_node->curr_row[8]);        
+      constellation_abbreviation         = scanner_node->curr_row[9];
+      constellation_full_name            = scanner_node->curr_row[10];
+      constellation_name_genitive        = scanner_node->curr_row[11];
+      constellation_number               = atoi(scanner_node->curr_row[12]);
+      right_ascension_hours              = atoi(scanner_node->curr_row[13]);
+      right_ascension_minutes            = atoi(scanner_node->curr_row[14]);
+      right_ascension_seconds            = atof(scanner_node->curr_row[15]);
+      right_ascension_decimal_hours      = atof(scanner_node->curr_row[16]);
+      right_ascension_decimal_degrees    = atof(scanner_node->curr_row[17]);
+      declination_degrees                = atoi(scanner_node->curr_row[18]);
+      declination_minutes                = atoi(scanner_node->curr_row[19]);
+      declination_seconds                = atof(scanner_node->curr_row[20]);
+      declination_decimal_degrees        = atof(scanner_node->curr_row[21]);
+      is_binary                          = atoi(scanner_node->curr_row[22]);
+      absolute_magnitude                 = atof(scanner_node->curr_row[23]);
+      apparent_magnitude_varies          = static_cast<bool>(atoi(scanner_node->curr_row[24])); 
+      absolute_magnitude_varies          = static_cast<bool>(atoi(scanner_node->curr_row[25]));       
+      bayer_designation_greek_letter_tex = scanner_node->curr_row[26];
 
       size_t pos;
 
@@ -969,32 +976,33 @@ Star::operator=(const Star& s)
 @q ****** (6)@>
 
       star_constant_name = s.star_constant_name;
-      common_name                     = s.common_name;
-      greek_name                      = s.greek_name;     
-      latin_name                      = s.latin_name;
-      arabic_name                     = s.arabic_name;
-      flamsteed_designation_number    = s.flamsteed_designation_number;
-      bayer_designation_greek_letter  = s.bayer_designation_greek_letter;
-      bs_hr_number                    = s.bs_hr_number;
-      approx_rank_apparent_magnitude  = s.approx_rank_apparent_magnitude;
-      apparent_magnitude              = s.apparent_magnitude;        
-      absolute_magnitude              = s.absolute_magnitude;
-      apparent_magnitude_varies       = s.apparent_magnitude_varies;        
-      absolute_magnitude_varies       = s.absolute_magnitude_varies;
-      constellation_abbreviation      = s.constellation_abbreviation;
-      constellation_full_name         = s.constellation_full_name;
-      constellation_name_genitive     = s.constellation_name_genitive;
-      constellation_number            = s.constellation_number;
-      right_ascension_hours           = s.right_ascension_hours;
-      right_ascension_minutes         = s.right_ascension_minutes;
-      right_ascension_seconds         = s.right_ascension_seconds;
-      right_ascension_decimal_hours   = s.right_ascension_decimal_hours;
-      right_ascension_decimal_degrees = s.right_ascension_decimal_degrees;
-      declination_degrees             = s.declination_degrees;
-      declination_minutes             = s.declination_minutes;
-      declination_seconds             = s.declination_seconds;
-      declination_decimal_degrees     = s.declination_decimal_degrees;
-      is_binary                       = s.is_binary;
+      common_name                        = s.common_name;
+      greek_name                         = s.greek_name;     
+      latin_name                         = s.latin_name;
+      arabic_name                        = s.arabic_name;
+      flamsteed_designation_number       = s.flamsteed_designation_number;
+      bayer_designation_greek_letter     = s.bayer_designation_greek_letter;
+      bayer_designation_greek_letter_tex = s.bayer_designation_greek_letter_tex;
+      bs_hr_number                       = s.bs_hr_number;
+      approx_rank_apparent_magnitude     = s.approx_rank_apparent_magnitude;
+      apparent_magnitude                 = s.apparent_magnitude;        
+      absolute_magnitude                 = s.absolute_magnitude;
+      apparent_magnitude_varies          = s.apparent_magnitude_varies;        
+      absolute_magnitude_varies          = s.absolute_magnitude_varies;
+      constellation_abbreviation         = s.constellation_abbreviation;
+      constellation_full_name            = s.constellation_full_name;
+      constellation_name_genitive        = s.constellation_name_genitive;
+      constellation_number               = s.constellation_number;
+      right_ascension_hours              = s.right_ascension_hours;
+      right_ascension_minutes            = s.right_ascension_minutes;
+      right_ascension_seconds            = s.right_ascension_seconds;
+      right_ascension_decimal_hours      = s.right_ascension_decimal_hours;
+      right_ascension_decimal_degrees    = s.right_ascension_decimal_degrees;
+      declination_degrees                = s.declination_degrees;
+      declination_minutes                = s.declination_minutes;
+      declination_seconds                = s.declination_seconds;
+      declination_decimal_degrees        = s.declination_decimal_degrees;
+      is_binary                          = s.is_binary;
  
       return *this;
 
@@ -1033,10 +1041,10 @@ Star::operator==(const Star &s)
       return true;
    }
 
-   if (  bayer_designation_greek_letter != "" && s.bayer_designation_greek_letter != ""
-      && bayer_designation_greek_letter ==  s.bayer_designation_greek_letter
-      && constellation_name_genitive != "" && s.constellation_name_genitive != ""
-      && constellation_name_genitive == s.constellation_name_genitive)
+   if (   bayer_designation_greek_letter     != "" && bayer_designation_greek_letter ==  s.bayer_designation_greek_letter
+       && bayer_designation_greek_letter_tex != "" && bayer_designation_greek_letter_tex ==  s.bayer_designation_greek_letter_tex
+       && constellation_name_genitive        != "" && s.constellation_name_genitive != ""
+       && constellation_name_genitive        == s.constellation_name_genitive)
    {
      return true;
    }   
@@ -1175,83 +1183,86 @@ Star::show(string text, unsigned int fields) const
     }
 
     if (fields & STARS_COMMON_NAME)
-       cerr << "common_name                     == " << common_name << endl;
+       cerr << "common_name                         == " << common_name << endl;
 
     if (fields & STARS_GREEK_NAME)
-       cerr << "greek_name                      == " << greek_name << endl;
+       cerr << "greek_name                          == " << greek_name << endl;
 
     if (fields & STARS_LATIN_NAME)
-       cerr << "latin_name                      == " << latin_name << endl;
+       cerr << "latin_name                          == " << latin_name << endl;
 
     if (fields & STARS_ARABIC_NAME)
-       cerr << "arabic_name                     == " << arabic_name << endl;
+       cerr << "arabic_name                         == " << arabic_name << endl;
 
     if (fields & STARS_FLAMSTEED_DESIGNATION_NUMBER)
-       cerr << "flamsteed_designation_number    == " << flamsteed_designation_number << endl;
+       cerr << "flamsteed_designation_number        == " << flamsteed_designation_number << endl;
 
     if (fields & STARS_BAYER_DESIGNATION_GREEK_LETTER)
-       cerr << "bayer_designation_greek_letter  == " << bayer_designation_greek_letter << endl;
+       cerr << "bayer_designation_greek_letter      == " << bayer_designation_greek_letter << endl;
+
+    if (fields & STARS_BAYER_DESIGNATION_GREEK_LETTER_TEX)
+       cerr << "bayer_designation_greek_letter_tex  == " << bayer_designation_greek_letter_tex << endl;
+
 
     if (fields & (STARS_BS_HR_NUMBER | STARS_BS_NUMBER | STARS_HR_NUMBER))
-       cerr << "bs_hr_number                    == " << bs_hr_number << endl;
+       cerr << "bs_hr_number                        == " << bs_hr_number << endl;
 
     if (fields & STARS_APPROX_RANK_APPARENT_MAGNITUDE)
-       cerr << "approx_rank_apparent_magnitude  == " << approx_rank_apparent_magnitude << endl;
+       cerr << "approx_rank_apparent_magnitude      == " << approx_rank_apparent_magnitude << endl;
 
     if (fields & STARS_APPARENT_MAGNITUDE)
-       cerr << "apparent_magnitude              == " << apparent_magnitude << endl;
+       cerr << "apparent_magnitude                  == " << apparent_magnitude << endl;
 
     if (fields & STARS_ABSOLUTE_MAGNITUDE)
-       cerr << "absolute_magnitude              == " << absolute_magnitude << endl;
+       cerr << "absolute_magnitude                  == " << absolute_magnitude << endl;
 
     if (fields & STARS_APPARENT_MAGNITUDE_VARIES)
-       cerr << "apparent_magnitude_varies       == " << apparent_magnitude_varies << endl;
+       cerr << "apparent_magnitude_varies           == " << apparent_magnitude_varies << endl;
 
     if (fields & STARS_ABSOLUTE_MAGNITUDE_VARIES)
-       cerr << "absolute_magnitude_varies       == " << absolute_magnitude_varies << endl;
+       cerr << "absolute_magnitude_varies           == " << absolute_magnitude_varies << endl;
 
     if (fields & STARS_CONSTELLATION_ABBREVIATION)
-       cerr << "constellation_abbreviation      == " << constellation_abbreviation << endl;
+       cerr << "constellation_abbreviation          == " << constellation_abbreviation << endl;
 
     if (fields & STARS_CONSTELLATION_FULL_NAME)
-       cerr << "constellation_full_name         == " << constellation_full_name << endl;
+       cerr << "constellation_full_name             == " << constellation_full_name << endl;
 
     if (fields & STARS_CONSTELLATION_NAME_GENITIVE)
-       cerr << "constellation_name_genitive     == " << constellation_name_genitive << endl;
+       cerr << "constellation_name_genitive         == " << constellation_name_genitive << endl;
 
     if (fields & STARS_CONSTELLATION_NUMBER)
-       cerr << "constellation_number            == " << constellation_number << endl;
+       cerr << "constellation_number                == " << constellation_number << endl;
 
     if (fields & STARS_RIGHT_ASCENSION_HOURS)
-       cerr << "right_ascension_hours           == " << right_ascension_hours << endl;
+       cerr << "right_ascension_hours               == " << right_ascension_hours << endl;
 
     if (fields & STARS_RIGHT_ASCENSION_MINUTES)
-       cerr << "right_ascension_minutes         == " << right_ascension_minutes << endl;
+       cerr << "right_ascension_minutes             == " << right_ascension_minutes << endl;
 
     if (fields & STARS_RIGHT_ASCENSION_SECONDS)
-       cerr << "right_ascension_seconds         == " << right_ascension_seconds << endl;
+       cerr << "right_ascension_seconds             == " << right_ascension_seconds << endl;
 
     if (fields & STARS_RIGHT_ASCENSION_DECIMAL_HOURS)
-       cerr << "right_ascension_decimal_hours   == " << right_ascension_decimal_hours << endl;
+       cerr << "right_ascension_decimal_hours       == " << right_ascension_decimal_hours << endl;
 
     if (fields & STARS_RIGHT_ASCENSION_DECIMAL_DEGREES)
-       cerr << "right_ascension_decimal_degrees == " << right_ascension_decimal_degrees << endl;
+       cerr << "right_ascension_decimal_degrees     == " << right_ascension_decimal_degrees << endl;
 
     if (fields & STARS_DECLINATION_DEGREES)
-       cerr << "declination_degrees             == " << declination_degrees << endl;
+       cerr << "declination_degrees                 == " << declination_degrees << endl;
 
     if (fields & STARS_DECLINATION_MINUTES)
-       cerr << "declination_minutes             == " << declination_minutes << endl;
+       cerr << "declination_minutes                 == " << declination_minutes << endl;
 
     if (fields & STARS_DECLINATION_SECONDS)
-       cerr << "declination_seconds             == " << declination_seconds << endl;
+       cerr << "declination_seconds                 == " << declination_seconds << endl;
 
     if (fields & STARS_DECLINATION_DECIMAL_DEGREES)
-       cerr << "declination_decimal_degrees     == " << declination_decimal_degrees << endl;
+       cerr << "declination_decimal_degrees         == " << declination_decimal_degrees << endl;
 
     if (fields & STARS_IS_BINARY)
-       cerr << "is_binary                       == " << is_binary << endl;
-
+       cerr << "is_binary                           == " << is_binary << endl;
 
     cerr << endl;
 
@@ -1473,6 +1484,26 @@ Star::process_where_option(Stars_Where_Option_Struct &where_option,
 #endif /* |DEBUG_COMPILE|  */@; 
 
       star_str_ptr  = &Star::bayer_designation_greek_letter; 
+      star_int_ptr  = 0;
+      star_real_ptr = 0;
+      star_bool_ptr = 0;
+
+   }
+
+@q ****** (6) @>
+
+   else if (where_option.field == STARS_BAYER_DESIGNATION_GREEK_LETTER_TEX)
+   {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "where_option.field == STARS_BAYER_DESIGNATION_GREEK_LETTER_TEX." << endl
+               << "Setting `star_str_ptr' to `&Star::bayer_designation_greek_letter_tex'."
+               << endl;
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      star_str_ptr  = &Star::bayer_designation_greek_letter_tex; 
       star_int_ptr  = 0;
       star_real_ptr = 0;
       star_bool_ptr = 0;
@@ -3622,6 +3653,32 @@ compare_bayer_designation_greek_letter(Star *s, Star *t)
 {
    return s->bayer_designation_greek_letter < t->bayer_designation_greek_letter;
 }
+
+
+@q ****** (6) Compare |bayer_designation_greek_letter_tex|.@>
+@*7 Compare |bayer_designation_greek_letter_tex|.
+\initials{LDF 2021.09.08.}
+
+\LOG
+\initials{LDF 2021.09.08.}
+Added this function.
+\ENDLOG
+
+@q ******* (7) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter_tex(Star *s, Star *t);
+
+@q ******* (7) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter_tex(Star *s, Star *t)
+{
+   return s->bayer_designation_greek_letter_tex < t->bayer_designation_greek_letter_tex;
+}
+
 
 @q ****** (6) Compare |bs_hr_number|.@>
 @*7 Compare |bs_hr_number|.

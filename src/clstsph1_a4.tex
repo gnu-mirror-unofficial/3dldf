@@ -162,15 +162,13 @@
 \setbox0=\vbox{\epsffile{clstsph1.0}}
 \dimen0=\ht0
 
-\newbox\bayerbox
-\setbox\bayerbox=\hbox{$\alpha$ Centauri}
-
-\def\A{\box\bayerbox}
+\newtoks\bayertoks
 
 \def\starinfo#1#2#3#4#5#6#7#8#9{\begingroup\setbox0=\hbox{Decl.\ }%
 \setbox1=\hbox{Apparent magnitude:\ }%
+\setbox2=\hbox{\the\bayertoks}
 \hbox to 3cm{\vbox{\hbox{#2.  #3}%
-\A
+\ifdim\wd2>0pt\box2\fi
 \hbox{Section #6}\hbox{\hbox to \wd0{RA\hfil}#4}\hbox{\unhbox0 #5}%
 \hbox{\copy1 #7}\hbox{\hbox to \wd1{Absolute magnitude:\ \hss}#8}%
 \hbox{Constellation: #9}%

@@ -1416,6 +1416,53 @@ Added this rule.
 
 };
 
+@q ****** (6) stars_field_specifier --> BAYER_DESIGNATION_GREEK_LETTER_TEX.@> 
+@*5 \§stars field specifier> $\longrightarrow$ \.{BAYER\_DESIGNATION\_GREEK\_LETTER\_TEX}.
+\initials{LDF 2021.09.08.}
+
+\LOG
+\initials{LDF 2021.09.08.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+
+@=stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER_TEX@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER_TEX'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = STARS_BAYER_DESIGNATION_GREEK_LETTER_TEX;
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `stars_field_specifier: BAYER_DESIGNATION_GREEK_LETTER_TEX':"
+                << endl
+                << "`$$' (hex) == " << hex << @=$$@> << dec << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
 @q ****** (6) stars_field_specifier --> BS_HR_NUMBER.@> 
 @*5 \§stars field specifier> $\longrightarrow$ \.{BS\_HR\_NUMBER}.
 \initials{LDF 2021.06.24.}

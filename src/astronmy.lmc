@@ -1036,11 +1036,13 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       temp_str := "";
     fi;
 
-    %% !! START HERE:  LDF 2021.09.07.  Rewriting.
-    
-    s := "\ignore{" & u & decimal point_number & "}";
+    if (common_name S) contains "$":
+      s := "\bayertoks={}\n";
+    else:
+      s := "\bayertoks={" & bayer_designation_greek_letter_tex S & "}\n";
+    fi;
 
-    s := "\starinfo{";
+    s := s & "\starinfo{";
 
     s := s & "}{" & decimal point_number & "}{" & common_name S & temp_str 
       & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
@@ -2334,8 +2336,8 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     v := 1;
   fi;
   
-  %message "common_name S:";
-  %show common_name S;
+  message "common_name S:";
+  show common_name S;
 
   % if common_name S contains "$":
   %   message "Got a math character";
