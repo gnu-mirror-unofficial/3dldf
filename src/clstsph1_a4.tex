@@ -46,7 +46,6 @@
 %%%% USA
 
 %%%% Laurence.Finston@gmx.de
-
 
 
 %% * (1)
@@ -164,14 +163,15 @@
 
 \newtoks\bayertoks
 
-\def\starinfo#1#2#3#4#5#6#7#8#9{\begingroup\setbox0=\hbox{Decl.\ }%
+\def\starinfo#1#2#3#4#5#6#7#8#9{\begingroup
+\setbox0=\hbox{Decl.\ }%
 \setbox1=\hbox{Apparent magnitude:\ }%
 \setbox2=\hbox{\the\bayertoks}
-\hbox to 3cm{\vbox{\hbox{#2.  #3}%
+\hbox to 3cm{\vbox{\hbox{{\bf #2.  #3}}%
 \ifdim\wd2>0pt\box2\fi
-\hbox{Section #6}\hbox{\hbox to \wd0{RA\hfil}#4}\hbox{\unhbox0 #5}%
-\hbox{\copy1 #7}\hbox{\hbox to \wd1{Absolute magnitude:\ \hss}#8}%
-\hbox{Constellation: #9}%
+\hbox{Constellation: #9}
+\hbox{\hbox to \wd0{RA\hfil}#4}\hbox{\unhbox0 #5}%
+\hbox{Section #6}\hbox{\copy1 #7}\hbox{\hbox to \wd1{Absolute magnitude:\ \hss}#8}%
 \vskip1\baselineskip plus 6pt minus 3pt}%
 \hskip2em plus 4pt minus 2pt\hss}\endgroup}
 
@@ -240,7 +240,7 @@ Boston, MA  02110-1301 USA\hfil\break
 \begingroup
 \medium
 The number preceding the name of the star (or binary or multiple system of stars) refers to its approximate rank 
-according to apparent magnitude.
+according to apparent magnitude.  ``RA'' stands for ``Right Ascension''.
 A ``v'' following the apparent or absolute magnitude of a star (or system of stars) means that this value varies.
 \vskip\baselineskip
 \endgroup
