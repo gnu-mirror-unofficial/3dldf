@@ -897,7 +897,358 @@ enddef;
 
 macro plot_star_on_spherical_biangle;
 
-input "www.lmc";
+%input "www.lmc";
+
+def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos, numeric shift_x, numeric shift_y,
+                                    boolean suppress_dot, boolean suppress_text_label} =
+  
+  numeric decl;
+  numeric ra;
+  string s;
+  string u;
+  point y_axis_point;
+  numeric box_wd;
+  numeric box_ht;
+  string label_str;
+  string label_suffix;
+  
+  numeric shift_x_val;
+  numeric shift_y_val;
+
+  string temp_str;
+
+  string f_sect_str;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+  %message "Entering macro `plot_star_on_spherical_biangle'.";
+
+  decl := declination_decimal_degrees S;
+  ra   :=  right_ascension_decimal_degrees S;
+
+  numeric ra_h;
+  numeric ra_m;
+  numeric ra_s;
+
+  numeric decl_d;
+  numeric decl_m;
+  numeric decl_s;
+  
+  
+  ra_h := right_ascension_hours S;
+  ra_m := right_ascension_minutes S;
+  ra_s := right_ascension_seconds S;
+
+  % message "ra_h:";
+  % show ra_h;
+  % message "ra_m:";
+  % show ra_m;
+  % message "ra_s:";
+  % show ra_s;
+
+
+  decl_d := declination_degrees S;
+  decl_m := declination_minutes S;
+  decl_s := declination_seconds S;
+
+  % message "decl_d:";
+  % show decl_h;
+  % message "decl_m:";
+  % show decl_m;
+  % message "decl_s:";
+  % show decl_s;
+  
+  % pause;
+  
+  %message "decl:";
+  %show decl;
+
+  %message "ra:";
+  %show ra;
+
+  % message "bi_ang0:";
+  % show bi_ang0;
+
+  % message "bi_ang1:";
+  % show bi_ang1;
+
+  %message "middle_angle:";
+  %show middle_angle;
+
+  %message "min_edge_angle:";
+  %show min_edge_angle;
+
+  %message "max_edge_angle:";
+  %show max_edge_angle;
+
+  %message "Declination_arc_length:";
+  %show Declination_arc_length;
+
+  %message "RA_arc_length:";
+  %show RA_arc_length;
+
+  %message "ra_decl_zero_pt:";
+  %show ra_decl_zero_pt;
+
+  if bi_ang1 == -1:
+    %message "bi_ang0 == " & decimal bi_ang0 & " and bi_ang1 == -1.";
+    if decl >= 0:
+      y_axis_point := (0, Declination_arc_length);
+    else:
+      y_axis_point := (0, -Declination_arc_length);
+    fi;
+
+    % if ra > middle_angle:
+    %   dotlabel.lft("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % else:
+    %   dotlabel.rt("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % fi;
+
+    %message "ra";
+    %show ra;
+    %message "middle_angle";
+    %show middle_angle;
+    %pause;
+
+    if ra >= 336.5:
+      middle_angle := 360.0;
+    fi;
+    
+    if ra > middle_angle:
+      R[point_number] := (RA_arc_length, ypart y_axis_point);
+    else:
+      R[point_number] := (-RA_arc_length, ypart y_axis_point);
+    fi;
+
+
+    if suppress_text_label and suppress_dot:
+      temp_str := " {\bf (Not plotted)}";
+    else:
+      temp_str := "";
+    fi;
+
+    if (common_name S) contains "$":
+      s := "\bayertoks={}";
+    elseif common_name S == "N Velorum":
+      s := "\bayertoks={}";
+    else:
+      s := "\bayertoks={" & bayer_designation_greek_letter_tex S & " " & constellation_name_genitive S & "}";
+    fi;
+
+    if point_number < 10:
+      u := "00";
+    elseif point_number < 100:
+      u := "0";
+    else:
+      u := "";
+    fi;
+
+% (progn
+% (setq i 90)      
+% (insert "\n")
+% (while (<= i 360)
+% (insert (concat (number-to-string i) "\n"))
+% (insert (concat (number-to-string i) "\n"))
+% (setq i (+ i 22.5)))	  
+% )
+
+    f_sect_str := "";
+
+    %message "ra == " & decimal ra;
+
+    if (ra > 0) and (ra < 22.5):
+      %message "0 < ra < 22.5";
+      f_sect_str := "1";
+    elseif (ra > 22.5) and (ra < 45):
+      %message "22.5 < ra < 45";
+      f_sect_str := "2";
+    elseif (ra > 45) and (ra < 67.5):
+      %message "45 < ra < 67.5";
+      f_sect_str := "3";
+    elseif (ra > 67.5) and (ra < 90):
+      %message "67.5 < ra < 90";
+      f_sect_str := "4";
+    elseif (ra > 90.0) and (ra < 112.5):
+      %message "90.0 < ra < 112.5";
+      f_sect_str := "5";
+    elseif (ra > 112.5) and (ra < 135.0):
+      %message "112.5 < ra < 135.0";
+      f_sect_str := "6";
+    elseif (ra > 135.0) and (ra < 157.5):
+      %message "135.0 < ra < 157.5";
+      f_sect_str := "7";
+    elseif (ra > 157.5) and (ra < 180.0):
+      %message "157.5 < ra < 180.0";
+      f_sect_str := "8";
+    elseif (ra > 180.0) and (ra < 202.5):
+      %message "180.0 < ra < 202.5";
+      f_sect_str := "9";
+    elseif (ra > 202.5) and (ra < 225.0):
+      %message "202.5 < ra < 225.0";
+      f_sect_str := "10";
+    elseif (ra > 225.0) and (ra < 247.5):
+      %message "225.0 < ra < 247.5";
+      f_sect_str := "11";
+    elseif (ra > 247.5) and (ra < 270.0):
+      %message "247.5 < ra < 270.0";
+      f_sect_str := "12";
+    elseif (ra > 270.0) and (ra < 292.5):
+      %message "270.0 < ra < 292.5";
+      f_sect_str := "13";
+    elseif (ra > 292.5) and (ra < 315.0):
+      %message "292.5 < ra < 315.0";
+      f_sect_str := "14";
+    elseif (ra > 315.0) and (ra < 337.5):
+      %message "315.0 < ra < 337.5";
+      f_sect_str := "15";
+    elseif (ra > 337.5) and (ra < 360.0):
+      %message "337.5 < ra < 360.0";
+      f_sect_str := "16";
+    fi;
+
+    %% & "/" & f_sect_str & 
+
+    s := s & "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
+      & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
+      & "^{\prime\prime}$}{$" & decimal decl_d & "^\circ\\thinspace " & decimal decl_m & "^\prime\\thinspace " & decimal decl_s
+      & "^{\prime\prime}$}{" & decimal (bi_ang0 + 1) & "/" & f_sect_str & "}{" & decimal apparent_magnitude S;
+
+    if apparent_magnitude_varies S:
+       s := s & "v";
+    fi;
+
+    s := s & "}{" & decimal absolute_magnitude S;
+
+    if absolute_magnitude_varies S:
+       s := s & "v";
+    fi;
+    
+    s := s & "}{" & constellation_full_name S & "}";
+    
+    % message "s:";
+    % show s;
+    % pause;
+    
+
+    write s to nw[bi_ang0];
+    write s to star_info_combined;
+
+    f_sect_str := "";
+    
+if label_pos == label_pos_zero:
+      label_suffix := "";
+      shift_x_val := shift_x;
+      shift_y_val := shift_y;
+    elseif label_pos == label_pos_top:
+      label_suffix := ".top";
+      shift_x_val := shift_x;
+      shift_y_val := basic_shift_val + shift_y;
+    elseif label_pos == label_pos_bot:
+      label_suffix := ".bot";
+      shift_x_val := shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
+    elseif label_pos == label_pos_lft:
+      label_suffix := ".lft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := shift_y;
+    elseif label_pos == label_pos_rt:
+      label_suffix := ".rt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := shift_y;
+    elseif label_pos == label_pos_urt:
+      label_suffix := ".urt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := basic_shift_val + shift_y;
+    elseif label_pos == label_pos_ulft:
+      label_suffix := ".ulft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := basic_shift_val + shift_y;
+    elseif label_pos == label_pos_lrt:
+      label_suffix := ".lrt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
+    elseif label_pos == label_pos_llft:
+      label_suffix := ".llft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
+    fi;
+
+    s := "{\medium " & common_name S & "}";
+
+    label_str := "label" & label_suffix & "(s, R[" & decimal point_number & "] shifted ("
+                 & decimal shift_x_val & ", " & decimal shift_y_val & ")) with_text_color ccolor on_picture qv["
+                 & decimal bi_ang0 & "];";
+    
+    % message "s == " & s;
+    % message "label_str == " & label_str;
+
+    if not suppress_text_label:
+      scantokens label_str;
+    % else:
+    %   message "Suppressing text label for " & common_name S & ".";
+      %pause;
+    fi;
+    
+    numeric app_mag;
+    pen sstar_pen;
+   
+    app_mag := apparent_magnitude S;
+
+    if app_mag < 0:
+      sstar_pen := star_pen[-1];
+    elseif app_mag < 1:
+      sstar_pen := star_pen[0];
+    elseif app_mag < 2:
+      sstar_pen := star_pen[1];
+    elseif app_mag < 3:
+      sstar_pen := star_pen[2];
+    elseif app_mag < 4:
+      sstar_pen := star_pen[3];
+    elseif app_mag < 5:
+      sstar_pen := star_pen[4];
+    else:
+      sstar_pen := star_pen[5];
+    fi;
+
+    if not suppress_dot:
+      drawdot R[point_number] with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
+    % else:
+    %   message "Suppressing dot for " & common_name S & ".";
+      %pause;
+    fi;
+
+    box_wd := .75cm;
+    box_ht := .5cm;
+    
+    if length (common_name S) > 8:
+      box_wd += .25cm;
+    fi;
+    
+    s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr)
+      & "}\\hskip2em plus 1em minus 1em"; 
+    
+    write (s) to label_out;
+    beginfig(100 + label_picture_ctr);
+      fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
+      label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
+      drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
+    endfig with_projection parallel_x_y;
+    label_picture_ctr += 1;
+
+    if do_extra_labels:
+      %dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
+      % on_picture qv[bi_ang0];
+    fi;
+
+  %message "Exiting macro `plot_star_on_spherical_biangle'.";
+
+enddef;
 
 
 %% ** (2) macro draw_extra_label_on_spherical_biangle
