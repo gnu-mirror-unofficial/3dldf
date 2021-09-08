@@ -1022,13 +1022,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
       R[point_number] := (-RA_arc_length, ypart y_axis_point);
     fi;
 
-    if point_number < 10:
-      u := "00";
-    elseif point_number < 100:
-      u := "0";
-    else:
-      u := "";
-    fi;
 
     if suppress_text_label and suppress_dot:
       temp_str := " {\bf (Not plotted)}";
@@ -1037,14 +1030,22 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     fi;
 
     if (common_name S) contains "$":
-      s := "\bayertoks={}\n";
+      s := "\bayertoks={}";
+    elseif common_name S == "N Velorum":
+      s := "\bayertoks={}";
     else:
-      s := "\bayertoks={" & bayer_designation_greek_letter_tex S & "}\n";
+      s := "\bayertoks={" & bayer_designation_greek_letter_tex S & " " & constellation_name_genitive S & "}";
     fi;
 
-    s := s & "\starinfo{";
+    if point_number < 10:
+      u := "00";
+    elseif point_number < 100:
+      u := "0";
+    else:
+      u := "";
+    fi;
 
-    s := s & "}{" & decimal point_number & "}{" & common_name S & temp_str 
+    s := s & "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
       & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
       & "^{\prime\prime}$}{$" & decimal decl_d & "^\circ\\thinspace " & decimal decl_m & "^\prime\\thinspace " & decimal decl_s
       & "^{\prime\prime}$}{" & decimal (bi_ang0 + 1) & "}{" & decimal apparent_magnitude S;
@@ -2336,8 +2337,8 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
     v := 1;
   fi;
   
-  message "common_name S:";
-  show common_name S;
+  % message "common_name S:";
+  % show common_name S;
 
   % if common_name S contains "$":
   %   message "Got a math character";

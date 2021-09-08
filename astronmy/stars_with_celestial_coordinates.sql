@@ -458,6 +458,8 @@ and constellation_name_genitive = "Centauri";
 update Stars set approx_rank_apparent_magnitude = 4, common_name = "Arcturus" where bayer_designation_greek_letter = "Alpha"
 and constellation_name_genitive = "Boötis";
 
+select common_name from Stars where constellation_name_genitive = "Boötis";
+
 update Stars set approx_rank_apparent_magnitude = 5, common_name = "Vega" where bayer_designation_greek_letter = "Alpha"
 and constellation_name_genitive = "Lyrae";
 
@@ -3560,3 +3562,562 @@ update Stars set common_name = "$\\zeta$ Ar{\\ae}" where approx_rank_apparent_ma
 
 select distinct constellation_name_genitive from Stars
 where constellation_name_genitive like ("%ae") order by constellation_name_genitive;
+
+/* !! START HERE:  LDF 2021.09.06.  Get absolute magnitudes.  */ 
+
+
+*************************** 1. row ***************************
+approx_rank_apparent_magnitude: 1
+bayer_designation_greek_letter: Sirius
+    constellation_abbreviation: CMa
+            apparent_magnitude: -1.46
+            absolute_magnitude: 0
+                  bs_hr_number: 2491
+*************************** 2. row ***************************
+approx_rank_apparent_magnitude: 2
+bayer_designation_greek_letter: Canopus
+    constellation_abbreviation: Car
+            apparent_magnitude: -0.73
+            absolute_magnitude: 0
+                  bs_hr_number: 2326
+*************************** 3. row ***************************
+approx_rank_apparent_magnitude: 3
+bayer_designation_greek_letter: $\alpha$ Centauri
+    constellation_abbreviation: Cen
+            apparent_magnitude: -0.29
+            absolute_magnitude: 0
+                  bs_hr_number: 0
+*************************** 4. row ***************************
+approx_rank_apparent_magnitude: 4
+bayer_designation_greek_letter: Arcturus
+    constellation_abbreviation: Boo
+            apparent_magnitude: -0.05
+            absolute_magnitude: 0
+                  bs_hr_number: 5340
+*************************** 5. row ***************************
+approx_rank_apparent_magnitude: 5
+bayer_designation_greek_letter: Vega
+    constellation_abbreviation: Lyr
+            apparent_magnitude: 0.03
+            absolute_magnitude: 0
+                  bs_hr_number: 7001
+*************************** 6. row ***************************
+approx_rank_apparent_magnitude: 6
+bayer_designation_greek_letter: Capella
+    constellation_abbreviation: Aur
+            apparent_magnitude: 0.07
+            absolute_magnitude: 0
+                  bs_hr_number: 1708
+*************************** 7. row ***************************
+approx_rank_apparent_magnitude: 7
+bayer_designation_greek_letter: Rigel
+    constellation_abbreviation: Ori
+            apparent_magnitude: 0.15
+            absolute_magnitude: 0
+                  bs_hr_number: 1713
+*************************** 8. row ***************************
+approx_rank_apparent_magnitude: 8
+bayer_designation_greek_letter: Procyon
+    constellation_abbreviation: CMi
+            apparent_magnitude: 0.36
+            absolute_magnitude: 0
+                  bs_hr_number: 2943
+*************************** 9. row ***************************
+approx_rank_apparent_magnitude: 9
+bayer_designation_greek_letter: Achernar
+    constellation_abbreviation: Eri
+            apparent_magnitude: 0.45
+            absolute_magnitude: 0
+                  bs_hr_number: 472
+*************************** 10. row ***************************
+approx_rank_apparent_magnitude: 10
+bayer_designation_greek_letter: Betelgeuse
+    constellation_abbreviation: Ori
+            apparent_magnitude: 0.55
+            absolute_magnitude: 0
+                  bs_hr_number: 2061
+*************************** 11. row ***************************
+approx_rank_apparent_magnitude: 11
+bayer_designation_greek_letter: Hadar
+    constellation_abbreviation: Cen
+            apparent_magnitude: 0.61
+            absolute_magnitude: 0
+                  bs_hr_number: 5267
+*************************** 12. row ***************************
+approx_rank_apparent_magnitude: 12
+bayer_designation_greek_letter: Altair
+    constellation_abbreviation: Aql
+            apparent_magnitude: 0.77
+            absolute_magnitude: 0
+                  bs_hr_number: 7557
+*************************** 13. row ***************************
+approx_rank_apparent_magnitude: 13
+bayer_designation_greek_letter: Acrux
+    constellation_abbreviation: Cru
+            apparent_magnitude: 0.79
+            absolute_magnitude: 0
+                  bs_hr_number: 0
+*************************** 14. row ***************************
+approx_rank_apparent_magnitude: 14
+bayer_designation_greek_letter: Aldebaran
+    constellation_abbreviation: Tau
+            apparent_magnitude: 0.86
+            absolute_magnitude: 0
+                  bs_hr_number: 1457
+*************************** 15. row ***************************
+approx_rank_apparent_magnitude: 15
+bayer_designation_greek_letter: Antares
+    constellation_abbreviation: Sco
+            apparent_magnitude: 0.95
+            absolute_magnitude: 0
+                  bs_hr_number: 6134
+*************************** 16. row ***************************
+approx_rank_apparent_magnitude: 16
+bayer_designation_greek_letter: Spica
+    constellation_abbreviation: Vir
+            apparent_magnitude: 0.97
+            absolute_magnitude: 0
+                  bs_hr_number: 5056
+*************************** 17. row ***************************
+approx_rank_apparent_magnitude: 17
+bayer_designation_greek_letter: Pollux
+    constellation_abbreviation: Gem
+            apparent_magnitude: 1.14
+            absolute_magnitude: 0
+                  bs_hr_number: 2990
+*************************** 18. row ***************************
+approx_rank_apparent_magnitude: 18
+bayer_designation_greek_letter: Fomalhaut
+    constellation_abbreviation: PsA
+            apparent_magnitude: 1.15
+            absolute_magnitude: 0
+                  bs_hr_number: 8728
+*************************** 19. row ***************************
+approx_rank_apparent_magnitude: 19
+bayer_designation_greek_letter: Deneb
+    constellation_abbreviation: Cyg
+            apparent_magnitude: 1.24
+            absolute_magnitude: 0
+                  bs_hr_number: 7924
+*************************** 20. row ***************************
+approx_rank_apparent_magnitude: 20
+bayer_designation_greek_letter: Mimosa
+    constellation_abbreviation: Cru
+            apparent_magnitude: 1.26
+            absolute_magnitude: 0
+                  bs_hr_number: 4853
+*************************** 21. row ***************************
+approx_rank_apparent_magnitude: 21
+bayer_designation_greek_letter: Regulus
+    constellation_abbreviation: Leo
+            apparent_magnitude: 1.36
+            absolute_magnitude: 0
+                  bs_hr_number: 3982
+*************************** 22. row ***************************
+approx_rank_apparent_magnitude: 22
+bayer_designation_greek_letter: Adhara
+    constellation_abbreviation: CMa
+            apparent_magnitude: 1.5
+            absolute_magnitude: 0
+                  bs_hr_number: 2618
+*************************** 23. row ***************************
+approx_rank_apparent_magnitude: 23
+bayer_designation_greek_letter: Castor
+    constellation_abbreviation: Gem
+            apparent_magnitude: 1.58
+            absolute_magnitude: 0
+                  bs_hr_number: 0
+*************************** 24. row ***************************
+approx_rank_apparent_magnitude: 24
+bayer_designation_greek_letter: Shaula
+    constellation_abbreviation: Sco
+            apparent_magnitude: 1.62
+            absolute_magnitude: 0
+                  bs_hr_number: 6527
+*************************** 25. row ***************************
+approx_rank_apparent_magnitude: 25
+bayer_designation_greek_letter: Gacrux
+    constellation_abbreviation: Cru
+            apparent_magnitude: 1.63
+            absolute_magnitude: 0
+                  bs_hr_number: 4763
+*************************** 26. row ***************************
+approx_rank_apparent_magnitude: 26
+bayer_designation_greek_letter: Bellatrix
+    constellation_abbreviation: Ori
+            apparent_magnitude: 1.64
+            absolute_magnitude: 0
+                  bs_hr_number: 1790
+*************************** 27. row ***************************
+approx_rank_apparent_magnitude: 27
+bayer_designation_greek_letter: Elnath
+    constellation_abbreviation: Tau
+            apparent_magnitude: 1.66
+            absolute_magnitude: 0
+                  bs_hr_number: 1791
+*************************** 28. row ***************************
+approx_rank_apparent_magnitude: 28
+bayer_designation_greek_letter: Miaplacidus
+    constellation_abbreviation: Car
+            apparent_magnitude: 1.67
+            absolute_magnitude: 0
+                  bs_hr_number: 3685
+*************************** 29. row ***************************
+approx_rank_apparent_magnitude: 29
+bayer_designation_greek_letter: Alnilam
+    constellation_abbreviation: Ori
+            apparent_magnitude: 1.69
+            absolute_magnitude: 0
+                  bs_hr_number: 1903
+*************************** 30. row ***************************
+approx_rank_apparent_magnitude: 30
+bayer_designation_greek_letter: Alnair
+    constellation_abbreviation: Gru
+            apparent_magnitude: 1.74
+            absolute_magnitude: 0
+                  bs_hr_number: 8425
+*************************** 31. row ***************************
+approx_rank_apparent_magnitude: 31
+bayer_designation_greek_letter: Alnitak
+    constellation_abbreviation: Ori
+            apparent_magnitude: 1.75
+            absolute_magnitude: 0
+                  bs_hr_number: 1948
+*************************** 32. row ***************************
+approx_rank_apparent_magnitude: 32
+bayer_designation_greek_letter: Alioth
+    constellation_abbreviation: UMa
+            apparent_magnitude: 1.77
+            absolute_magnitude: 0
+                  bs_hr_number: 4905
+*************************** 33. row ***************************
+approx_rank_apparent_magnitude: 33
+bayer_designation_greek_letter: Mirfak
+    constellation_abbreviation: Per
+            apparent_magnitude: 1.8
+            absolute_magnitude: 0
+                  bs_hr_number: 1017
+*************************** 34. row ***************************
+approx_rank_apparent_magnitude: 34
+bayer_designation_greek_letter: Dubhe
+    constellation_abbreviation: UMa
+            apparent_magnitude: 1.8
+            absolute_magnitude: 0
+                  bs_hr_number: 4301
+*************************** 35. row ***************************
+approx_rank_apparent_magnitude: 35
+bayer_designation_greek_letter: Regor
+    constellation_abbreviation: Vel
+            apparent_magnitude: 1.81
+            absolute_magnitude: 0
+                  bs_hr_number: 0
+*************************** 36. row ***************************
+approx_rank_apparent_magnitude: 36
+bayer_designation_greek_letter: Wezen
+    constellation_abbreviation: CMa
+            apparent_magnitude: 1.83
+            absolute_magnitude: 0
+                  bs_hr_number: 2693
+*************************** 37. row ***************************
+approx_rank_apparent_magnitude: 37
+bayer_designation_greek_letter: Kaus Australis
+    constellation_abbreviation: Sgr
+            apparent_magnitude: 1.84
+            absolute_magnitude: 0
+                  bs_hr_number: 6879
+*************************** 38. row ***************************
+approx_rank_apparent_magnitude: 38
+bayer_designation_greek_letter: Alkaid
+    constellation_abbreviation: UMa
+            apparent_magnitude: 1.86
+            absolute_magnitude: 0
+                  bs_hr_number: 5191
+*************************** 39. row ***************************
+approx_rank_apparent_magnitude: 39
+bayer_designation_greek_letter: Sargas
+    constellation_abbreviation: Sco
+            apparent_magnitude: 1.86
+            absolute_magnitude: 0
+                  bs_hr_number: 6553
+*************************** 40. row ***************************
+approx_rank_apparent_magnitude: 40
+bayer_designation_greek_letter: Avior
+    constellation_abbreviation: Car
+            apparent_magnitude: 1.87
+            absolute_magnitude: 0
+                  bs_hr_number: 3307
+*************************** 41. row ***************************
+approx_rank_apparent_magnitude: 41
+bayer_designation_greek_letter: Menkalinan
+    constellation_abbreviation: Aur
+            apparent_magnitude: 1.9
+            absolute_magnitude: 0
+                  bs_hr_number: 2088
+*************************** 42. row ***************************
+approx_rank_apparent_magnitude: 42
+bayer_designation_greek_letter: Atria
+    constellation_abbreviation: TrA
+            apparent_magnitude: 1.92
+            absolute_magnitude: 0
+                  bs_hr_number: 6217
+*************************** 43. row ***************************
+approx_rank_apparent_magnitude: 43
+bayer_designation_greek_letter: Alhena
+    constellation_abbreviation: Gem
+            apparent_magnitude: 1.93
+            absolute_magnitude: 0
+                  bs_hr_number: 2421
+*************************** 44. row ***************************
+approx_rank_apparent_magnitude: 44
+bayer_designation_greek_letter: Peacock
+    constellation_abbreviation: Pav
+            apparent_magnitude: 1.93
+            absolute_magnitude: 0
+                  bs_hr_number: 7790
+*************************** 45. row ***************************
+approx_rank_apparent_magnitude: 45
+bayer_designation_greek_letter: Koo She
+    constellation_abbreviation: Vel
+            apparent_magnitude: 1.95
+            absolute_magnitude: 0
+                  bs_hr_number: 3485
+*************************** 46. row ***************************
+approx_rank_apparent_magnitude: 46
+bayer_designation_greek_letter: Mirzam
+    constellation_abbreviation: CMa
+            apparent_magnitude: 1.98
+            absolute_magnitude: 0
+                  bs_hr_number: 2294
+*************************** 47. row ***************************
+approx_rank_apparent_magnitude: 47
+bayer_designation_greek_letter: Alphard
+    constellation_abbreviation: Hya
+            apparent_magnitude: 1.98
+            absolute_magnitude: 0
+                  bs_hr_number: 3748
+*************************** 48. row ***************************
+approx_rank_apparent_magnitude: 48
+bayer_designation_greek_letter: Polaris
+    constellation_abbreviation: UMi
+            apparent_magnitude: 1.99
+            absolute_magnitude: 0
+                  bs_hr_number: 424
+*************************** 49. row ***************************
+approx_rank_apparent_magnitude: 49
+bayer_designation_greek_letter: Algieba
+    constellation_abbreviation: Leo
+            apparent_magnitude: 2
+            absolute_magnitude: 0
+                  bs_hr_number: 0
+*************************** 50. row ***************************
+approx_rank_apparent_magnitude: 50
+bayer_designation_greek_letter: Hamal
+    constellation_abbreviation: Ari
+            apparent_magnitude: 2.01
+            absolute_magnitude: 0
+                  bs_hr_number: 617
+50 rows in set (0.00 sec)
+
+show columns from Stars;
+
+select common_name from Stars where approx_rank_apparent_magnitude = 7;
+
+update Stars set absolute_magnitude_varies = true where approx_rank_apparent_magnitude = 7;
+update Stars set absolute_magnitude_varies = true where approx_rank_apparent_magnitude = 10;
+update Stars set absolute_magnitude_varies = true where approx_rank_apparent_magnitude = 14;
+update Stars set absolute_magnitude_varies = true where approx_rank_apparent_magnitude = 15;
+update Stars set absolute_magnitude_varies = true where approx_rank_apparent_magnitude = 48;
+
+update Stars set absolute_magnitude = 1.43 where approx_rank_apparent_magnitude = 1;   
+update Stars set absolute_magnitude = -5.64 where approx_rank_apparent_magnitude = 2;  
+update Stars set absolute_magnitude = 4.06 where approx_rank_apparent_magnitude = 3;   
+update Stars set absolute_magnitude = -0.31 where approx_rank_apparent_magnitude = 4;  
+update Stars set absolute_magnitude = 0.58 where approx_rank_apparent_magnitude = 5;   
+update Stars set absolute_magnitude = -0.49 where approx_rank_apparent_magnitude = 6;  
+update Stars set absolute_magnitude = -6.72 where approx_rank_apparent_magnitude = 7;  
+update Stars set absolute_magnitude = 2.64 where approx_rank_apparent_magnitude = 8;   
+update Stars set absolute_magnitude = -2.77 where approx_rank_apparent_magnitude = 9;  
+update Stars set absolute_magnitude = -5.04 where approx_rank_apparent_magnitude = 10; 
+update Stars set absolute_magnitude = -5.42 where approx_rank_apparent_magnitude = 11; 
+update Stars set absolute_magnitude = 2.21 where approx_rank_apparent_magnitude = 12;  
+update Stars set absolute_magnitude = -4.17 where approx_rank_apparent_magnitude = 13; 
+update Stars set absolute_magnitude = -0.64 where approx_rank_apparent_magnitude = 14; 
+update Stars set absolute_magnitude = -5.39 where approx_rank_apparent_magnitude = 15; 
+update Stars set absolute_magnitude = -3.56 where approx_rank_apparent_magnitude = 16; 
+update Stars set absolute_magnitude = 1.07 where approx_rank_apparent_magnitude = 17;  
+update Stars set absolute_magnitude = 1.72 where approx_rank_apparent_magnitude = 18;  
+update Stars set absolute_magnitude = -8.74 where approx_rank_apparent_magnitude = 19; 
+update Stars set absolute_magnitude = -3.91 where approx_rank_apparent_magnitude = 20; 
+update Stars set absolute_magnitude = -0.52 where approx_rank_apparent_magnitude = 21; 
+update Stars set absolute_magnitude = -4.10 where approx_rank_apparent_magnitude = 22; 
+update Stars set absolute_magnitude = 0.59 where approx_rank_apparent_magnitude = 23;  
+update Stars set absolute_magnitude = -5.05 where approx_rank_apparent_magnitude = 24; 
+update Stars set absolute_magnitude = -0.52 where approx_rank_apparent_magnitude = 25; 
+update Stars set absolute_magnitude = -2.72 where approx_rank_apparent_magnitude = 26; 
+update Stars set absolute_magnitude = -1.36 where approx_rank_apparent_magnitude = 27; 
+update Stars set absolute_magnitude = -0.99 where approx_rank_apparent_magnitude = 28; 
+update Stars set absolute_magnitude = -6.38 where approx_rank_apparent_magnitude = 29; 
+update Stars set absolute_magnitude = -0.72 where approx_rank_apparent_magnitude = 30; 
+update Stars set absolute_magnitude = -5.25 where approx_rank_apparent_magnitude = 31; 
+update Stars set absolute_magnitude = -0.20 where approx_rank_apparent_magnitude = 32; 
+update Stars set absolute_magnitude = -4.49 where approx_rank_apparent_magnitude = 33; 
+update Stars set absolute_magnitude = -1.09 where approx_rank_apparent_magnitude = 34; 
+update Stars set absolute_magnitude = -5.25 where approx_rank_apparent_magnitude = 35; 
+update Stars set absolute_magnitude = -6.87 where approx_rank_apparent_magnitude = 36; 
+update Stars set absolute_magnitude = -1.39 where approx_rank_apparent_magnitude = 37; 
+update Stars set absolute_magnitude = -0.59 where approx_rank_apparent_magnitude = 38; 
+update Stars set absolute_magnitude = -2.75 where approx_rank_apparent_magnitude = 39; 
+update Stars set absolute_magnitude = -4.57 where approx_rank_apparent_magnitude = 40; 
+update Stars set absolute_magnitude = -0.10 where approx_rank_apparent_magnitude = 41; 
+update Stars set absolute_magnitude = -3.61 where approx_rank_apparent_magnitude = 42; 
+update Stars set absolute_magnitude = -0.60 where approx_rank_apparent_magnitude = 43; 
+update Stars set absolute_magnitude = -1.82 where approx_rank_apparent_magnitude = 44; 
+update Stars set absolute_magnitude = 0.01 where approx_rank_apparent_magnitude = 45;  
+update Stars set absolute_magnitude = -3.95 where approx_rank_apparent_magnitude = 46; 
+update Stars set absolute_magnitude = -1.70 where approx_rank_apparent_magnitude = 47; 
+update Stars set absolute_magnitude = -3.62 where approx_rank_apparent_magnitude = 48; 
+update Stars set absolute_magnitude = -0.93 where approx_rank_apparent_magnitude = 49; 
+update Stars set absolute_magnitude = 0.48 where approx_rank_apparent_magnitude = 50;  
+
+show columns from Stars;
+
++------------------------------------+---------------+------+-----+---------+-------+
+| Field                              | Type          | Null | Key | Default | Extra |
++------------------------------------+---------------+------+-----+---------+-------+
+| common_name                        | varchar(32)   | NO   |     |         |       |
+| greek_name                         | varchar(32)   | NO   |     |         |       |
+| latin_name                         | varchar(32)   | NO   |     |         |       |
+| arabic_name                        | varchar(32)   | NO   |     |         |       |
+| flamsteed_designation_number       | int           | NO   |     | 0       |       |
+| bayer_designation_greek_letter     | varchar(16)   | NO   |     |         |       |
+| bayer_designation_greek_letter_tex | varchar(16)   | NO   |     |         |       |
+| bayer_designation_extension        | varchar(16)   | NO   |     |         |       |
+| bs_hr_number                       | int           | NO   |     | 0       |       |
+| approx_rank_apparent_magnitude     | int           | NO   |     | 0       |       |
+| apparent_magnitude                 | float         | NO   |     | 1000    |       |
+| apparent_magnitude_varies          | tinyint(1)    | NO   |     | 0       |       |
+| absolute_magnitude                 | float         | NO   |     | 0       |       |
+| absolute_magnitude_varies          | tinyint(1)    | NO   |     | 0       |       |
+| constellation_abbreviation         | char(3)       | NO   |     |         |       |
+| constellation_full_name            | varchar(32)   | NO   |     |         |       |
+| constellation_name_genitive        | varchar(64)   | NO   |     |         |       |
+| constellation_number               | int           | NO   |     | 0       |       |
+| right_ascension_hours              | int           | NO   |     | 0       |       |
+| right_ascension_minutes            | int           | NO   |     | 0       |       |
+| right_ascension_seconds            | float         | NO   |     | 0       |       |
+| right_ascension_decimal_hours      | float         | NO   |     | 0       |       |
+| right_ascension_decimal_degrees    | float         | NO   |     | 0       |       |
+| declination_degrees                | int           | NO   |     | 0       |       |
+| declination_minutes                | int           | NO   |     | 0       |       |
+| declination_seconds                | float         | NO   |     | 0       |       |
+| declination_decimal_degrees        | float         | NO   |     | 0       |       |
+| is_binary                          | int           | NO   |     | 0       |       |
+| is_multiple                        | int           | NO   |     | 0       |       |
+| is_binary_component                | int           | NO   |     | 0       |       |
+| is_eclipsing_binary                | int           | NO   |     | 0       |       |
+| notes                              | varchar(1024) | NO   |     |         |       |
++------------------------------------+---------------+------+-----+---------+-------+
+
+select common_name, bayer_designation_extension from Stars
+where bayer_designation_extension <> "" order by common_name;
+
+select * from Stars where common_name = "Arcturus"\G
+
+update Stars set constellation_full_name = "Bo@otes" where constellation_full_name = "Bo{@o}tes";
+
+update Stars set constellation_name_genitive = "Bo@otis" where constellation_name_genitive = "Bo{@o}tis";
+
+Boötes
+
+select common_name, bayer_designation_greek_letter_tex from Stars where bayer_designation_greek_letter_tex like("%\{%");
+
+select distinct bayer_designation_greek_letter_tex from Stars where bayer_designation_greek_letter_tex like("%\{%");
+
+
+
+select distinct bayer_designation_greek_letter_tex from Stars where bayer_designation_greek_letter_tex = "$\\kappa^{2}$";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\kappa^2$" where bayer_designation_greek_letter_tex = "$\\kappa^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\lambda^1$" where bayer_designation_greek_letter_tex = "$\\lambda^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\beta^1$" where bayer_designation_greek_letter_tex = "$\\beta^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\phi^2$" where bayer_designation_greek_letter_tex = "$\\phi^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\lambda^2$" where bayer_designation_greek_letter_tex = "$\\lambda^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\eta^2$" where bayer_designation_greek_letter_tex = "$\\eta^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma^1$" where bayer_designation_greek_letter_tex = "$\\gamma^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\xi^1$" where bayer_designation_greek_letter_tex = "$\\xi^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\xi^2$" where bayer_designation_greek_letter_tex = "$\\xi^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^1$" where bayer_designation_greek_letter_tex = "$\\tau^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^2$" where bayer_designation_greek_letter_tex = "$\\tau^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^3$" where bayer_designation_greek_letter_tex = "$\\tau^{3}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^4$" where bayer_designation_greek_letter_tex = "$\\tau^{4}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^5$" where bayer_designation_greek_letter_tex = "$\\tau^{5}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\tau^6$" where bayer_designation_greek_letter_tex = "$\\tau^{6}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\o^1$" where bayer_designation_greek_letter_tex = "$\\o^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\o^2$" where bayer_designation_greek_letter_tex = "$\\o^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\kappa^1$" where bayer_designation_greek_letter_tex = "$\\kappa^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\theta^1$" where bayer_designation_greek_letter_tex = "$\\theta^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\theta^2$" where bayer_designation_greek_letter_tex = "$\\theta^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\upsilon^1$" where bayer_designation_greek_letter_tex = "$\\upsilon^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\upsilon^2$" where bayer_designation_greek_letter_tex = "$\\upsilon^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^3$" where bayer_designation_greek_letter_tex = "$\\pi^{3}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^2$" where bayer_designation_greek_letter_tex = "$\\pi^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^4$" where bayer_designation_greek_letter_tex = "$\\pi^{4}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^5$" where bayer_designation_greek_letter_tex = "$\\pi^{5}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\pi^6$" where bayer_designation_greek_letter_tex = "$\\pi^{6}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\phi^1$" where bayer_designation_greek_letter_tex = "$\\phi^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\chi^1$" where bayer_designation_greek_letter_tex = "$\\chi^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\chi^2$" where bayer_designation_greek_letter_tex = "$\\chi^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^1$" where bayer_designation_greek_letter_tex = "$\\psi^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\nu^2$" where bayer_designation_greek_letter_tex = "$\\nu^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\nu^3$" where bayer_designation_greek_letter_tex = "$\\nu^{3}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^5$" where bayer_designation_greek_letter_tex = "$\\psi^{5}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^6$" where bayer_designation_greek_letter_tex = "$\\psi^{6}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\omicron^2$" where bayer_designation_greek_letter_tex = "$\\omicron^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma^2$" where bayer_designation_greek_letter_tex = "$\\gamma^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\alpha^2$" where bayer_designation_greek_letter_tex = "$\\alpha^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\alpha^1$" where bayer_designation_greek_letter_tex = "$\\alpha^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\sigma^3$" where bayer_designation_greek_letter_tex = "$\\sigma^{3}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\delta^2$" where bayer_designation_greek_letter_tex = "$\\delta^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\mu^1$" where bayer_designation_greek_letter_tex = "$\\mu^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\nu^1$" where bayer_designation_greek_letter_tex = "$\\nu^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\beta^2$" where bayer_designation_greek_letter_tex = "$\\beta^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\omega^1$" where bayer_designation_greek_letter_tex = "$\\omega^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\omega^2$" where bayer_designation_greek_letter_tex = "$\\omega^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\delta^1$" where bayer_designation_greek_letter_tex = "$\\delta^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\mu^2$" where bayer_designation_greek_letter_tex = "$\\mu^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\zeta^2$" where bayer_designation_greek_letter_tex = "$\\zeta^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\epsilon^1$" where bayer_designation_greek_letter_tex = "$\\epsilon^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\iota^1$" where bayer_designation_greek_letter_tex = "$\\iota^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\zeta^1$" where bayer_designation_greek_letter_tex = "$\\zeta^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\eta^1$" where bayer_designation_greek_letter_tex = "$\\eta^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\rho^1$" where bayer_designation_greek_letter_tex = "$\\rho^{1}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\iota^2$" where bayer_designation_greek_letter_tex = "$\\iota^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\rho^2$" where bayer_designation_greek_letter_tex = "$\\rho^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^2$" where bayer_designation_greek_letter_tex = "$\\psi^{2}$";
+update Stars set bayer_designation_greek_letter_tex = "$\\psi^3$" where bayer_designation_greek_letter_tex = "$\\psi^{3}$";
+
+select "Here I am.";
+
+select bayer_designation_greek_letter_tex from Stars where common_name = "Cor Caroli 2";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\alpha^2$" where bayer_designation_greek_letter_tex = "$\\alpha^{2}$";
+
+select bayer_designation_greek_letter_tex, bayer_designation_greek_letter from Stars where common_name = "Albaldah";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\pi$" where bayer_designation_greek_letter = "pi";
+
+select bayer_designation_greek_letter_tex, bayer_designation_greek_letter from Stars 
+
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma$", bayer_designation_greek_letter = "gamma"
+where common_name = "Algieba";
+
+select approx_rank_apparent_magnitude, common_name, bs_hr_number from Stars
+where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200
+and (bayer_designation_greek_letter = "" or bayer_designation_greek_letter_tex = "");
+
+
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma$", bayer_designation_greek_letter = "gamma"
+where common_name = "Almach";
+
+update Stars set bayer_designation_greek_letter_tex = "$\\gamma$", bayer_designation_greek_letter = "gamma"
+where common_name = "Porrima";

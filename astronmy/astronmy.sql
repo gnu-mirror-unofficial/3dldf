@@ -24844,6 +24844,17 @@ order by approx_rank_apparent_magnitude limit 10 offset 10;
 select approx_rank_apparent_magnitude, common_name, apparent_magnitude from Stars
 where approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude limit 20;
 
+select approx_rank_apparent_magnitude, common_name bayer_designation_greek_letter, constellation_abbreviation,
+apparent_magnitude, absolute_magnitude, bs_hr_number
+from Stars where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200 and
+apparent_magnitude = 0 order by approx_rank_apparent_magnitude\G
+
+select approx_rank_apparent_magnitude, common_name bayer_designation_greek_letter, constellation_abbreviation,
+apparent_magnitude, absolute_magnitude, bs_hr_number
+from Stars where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200 and
+absolute_magnitude = 0 order by approx_rank_apparent_magnitude\G
+
+
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */

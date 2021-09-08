@@ -89,7 +89,7 @@ main(void)
    size_t size;
    size_t size_1;
 
-   fp = popen("cat clstsph_1_star_info_combined.tex | cut -d{ -f4 | tr -d \"}\"", "r");
+   fp = popen("cat clstsph_1_star_info_combined.tex | grep \"starinfo\" | cut -d{ -f5 | tr -d \"}\"", "r");
    fp_1 = popen("cat clstsph_1_star_info_combined.tex", "r");
 
    if (fp == 0 || fp_1 == 0)
@@ -114,7 +114,7 @@ main(void)
           cerr << "buffer_1:" << endl << buffer_1;
 #endif 
 
-       s   = buffer;
+       s = buffer;
 
        do 
        {
@@ -146,6 +146,9 @@ main(void)
 
    fp   = 0;
    fp_1 = 0;
+
+
+
    out_file.close();
 
    cerr << "Exiting `srtstrin' successfully with return value 0." << endl;

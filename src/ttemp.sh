@@ -30,9 +30,9 @@ cp -f clstsph.tgz ~/3DLDF-3.0_web/3dldf/SRC_CODE/
 
 cd ~/3DLDF-3.0_web/3dldf/
 
-#cvs commit -m "Edited."
+cvs commit -m "Edited."
 
-cvs commit -m "Minor corrections."
+#cvs commit -m "Minor corrections."
 
 exit 0
 
