@@ -55,7 +55,7 @@ elif test $# -gt 0
 then
    if test $1 -ne 0 
    then
-      echo "Not building  shared libraries"
+      echo "Not building shared libraries"
    else
       echo "Building shared libraries"
    fi
