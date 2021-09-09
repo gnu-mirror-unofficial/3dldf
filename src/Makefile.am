@@ -1009,7 +1009,7 @@ run: 3dldf$(EXEEXT) clstsph1.ldf clstsph1_sub.ldf clstsph1.aux astronmy.lmc
 .PHONY : rrun
 
 rrun:
-	3dldf clstsph1 && mpost clstsph1 && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi 
+	3dldf clstsph1 && mpost clstsph1 -numbersystem "double" && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi 
 
 # sample_3_labels_sorted.tex: sample3.mp
 # 	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
@@ -1056,7 +1056,7 @@ sample3.dvi: sample3.tex sample3.0
 	tex sample3.tex
 
 sample3.0: sample3.mp
-	mpost sample3.mp
+	mpost -numbersystem "double" sample3.mp
 
 sample3.mp: 3dldf$(EXEEXT) sample3.ldf sample3.lmc sample3.aux 
 	3dldf$(EXEEXT) sample3.ldf
@@ -1072,7 +1072,7 @@ sample4.dvi: sample4.tex sample4.0
 	tex sample4.tex
 
 sample4.0: sample4.mp
-	mpost sample4.mp
+	mpost -numbersystem "double" sample4.mp
 
 sample4.mp: 3dldf$(EXEEXT) sample4.ldf sample3.lmc sample4.aux 
 	3dldf$(EXEEXT) sample4.ldf
@@ -1235,7 +1235,7 @@ run-1: 3dldf$(EXEEXT)
 
 3DLDFtex.dvi : 3DLDFtex.tex 3DLDFtex.bas 3DLDFmp.mp sample1.mp
 	@echo "Running MetaPost on 3DLDFmp.mp to create EPS files."
-	mpost 3DLDFmp.mp
+	mpost -numbersystem "double" 3DLDFmp.mp
 	@echo "Running TeX on 3DLDFtex.tex to create 3DLDFtex.dvi."
 	tex 3DLDFtex
 
@@ -1384,7 +1384,7 @@ ttemp.dvi: ttemp.tex ttemp.1
 	tex $<
 
 ttemp.1: ttemp.mp
-	mpost $<
+	mpost -numbersystem "double" $<
 
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
 	3dldf$(EXEEXT) $<
@@ -1422,11 +1422,35 @@ zikhron.dvi: zikhron.txt zikhron.1
 	tex zikhron.txt
 
 zikhron.1: zikhron.mp
-	mpost zikhron.mp
+	mpost -numbersystem "double" zikhron.mp
 
 zikhron.mp: zikhron.ldf sundl_03.lmc
 	3dldf zikhron.ldf
 
+sundl_04.mp:
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sundl_04.ldf
+
+sundl_04.1 sundl_04.2:
+	mpost -numbersystem "double" sundl_04.mp
+
+sundl_04.dvi: sundl_04.tex 
+	tex sundl_04.tex
+	tex sundl_04.tex
+
+sundl_04.ps: sundl_04.dvi
+	dvips -o sundl_04.ps sundl_04.dvi
+
+sundl_04.pdf: sundl_04.dvi
+	dvipdfmx sundl_04.dvi
+
+.PHONY: run-sn
+
+run-sn: sundl_04.pdf
+
+.PHONY: purge-s
+
+purge-s:
+	rm -f sundl_04.mp sundl_04.[0-9] sundl_04.[0-9]* sundl_04.dvi sundl_04.ps sundl_04.pdf 
 
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
 # @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"

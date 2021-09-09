@@ -49,9 +49,17 @@
 
 %% * (1)
 
-\input epsf 
+\input epsf
+\input eplain
+\input colordvi
+\enablehyperlinks[dvipdfm]
+\hlopts{bwidth=0}
 
 \font\small=cmr8
+\font\medium=cmr10 scaled \magstephalf
+\font\mediumbx=cmbx10 scaled \magstephalf
+\font\mediumit=cmti10 scaled \magstephalf
+\font\mediumtt=cmtt10 scaled \magstephalf
 \font\large=cmr12
 \font\Large=cmr17
 \font\huge=cmr17 scaled \magstep2
@@ -88,25 +96,21 @@
 
 \headline={\hfil}
 
-\iftrue % \iffalse
 \pageno=-1
 %\pageno=0
 \vskip.5cm
-\centerline{Sundials 3}
+\centerline{Sundials 4}
 \vskip\baselineskip
-\centerline{Laurence D. Finston}
+\centerline{Laurence D.~Finston}
 \vskip\baselineskip
-\centerline{Last updated:  October 11, 2007}
+\centerline{Last updated:  September 9, 2021}
 \vskip2cm
-%\centerline{\hskip.5cm\epsffile{3DLDFmp.0}}
-%
-\iftrue % \iffalse
+
 {\small
 \hsize=.75\hsize
 %\hskip1cm
 \vbox{\vskip2\baselineskip
-This document is part of GNU 3DLDF, a package for three-dimensional
-drawing.
+This document is part of GNU 3DLDF, a package for three-dimensional drawing.
 \vskip\baselineskip
 
 Copyright (C) 2021 The Free Software Foundation, Inc.
@@ -114,7 +118,7 @@ Copyright (C) 2021 The Free Software Foundation, Inc.
 
 GNU 3DLDF is free software; you can redistribute it and/or modify 
 it under the terms of the GNU General Public License as published by 
-the Free Software Foundation; either version 3 of the License, or 
+the Free Software Foundation, Inc.; either version 3 of the License, or 
 (at your option) any later version. 
 \vskip\baselineskip
 
@@ -137,151 +141,58 @@ that apply to this document.
 You should have received a copy of the GNU Free Documentation License 
 along with GNU 3DLDF; if not, write to the Free Software 
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA}}
-\fi
 \vskip2cm
-\fi
+
 
 %% *** (3) Contents
 
 \advance\voffset by 1in
 \advance\hoffset by 1in
 
-\iftrue % \iffalse
-\ifnum\pageno<0\else\pageno=-1\fi
-\begingroup
+\pageno=-1
 
 \parindent=0pt
 \parskip=0pt
 \advance\baselineskip by 2pt
 \dimen0=15cm
 
-\centerline{\bf Contents}
-\vskip 2cm
-%\hbox to \dimen0{Projection onto Equatorial Plane %
-%(Same for Any Latitude)\leaderfill 1}
-%
-%% **** (4) 
-%
-\hbox to \dimen0{Perspective Projections\hfil}
+\newcount\chapctr
+\chapctr=0
 
-\hbox to \dimen0{Jerusalem, Israel 
-                 $31^\circ$ $47'$ N, $35^\circ$ $13'$ E
-                 \leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{Athens, Greece $37^\circ$ $58'$ N 
-                 $23^\circ$ $43'$ E\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{Chicago, Illlinois, USA 
-                 $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W
-                 \leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{London, UK $51^\circ$ $30'$ $28''$ N 
-                 $0^\circ$ $7'$ $41''$ W\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{G{\"o}ttingen, Germany $51^\circ$ $32'$ N 
-                 $9^\circ$ $56'$ E\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{St.~Petersburg, Russia
-                  $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\leaderfill \the\currpg}
-\global\advance\currpg by 1
-%%
-%% Jerusalem
-%%
-\hbox to \dimen0{Jerusalem, Israel 
-                 $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
-\hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Horizontal Dial\leaderfill \the\currpg}
-\global\advance\currpg by 1
+\newcount\sectionctr
+\sectionctr=0
 
-%%
-%% Athens
-%%
-\hbox to \dimen0{Athens, Greece $37^\circ$ $58'$ N 
-                 $23^\circ$ $43'$ E\hfil}
-\hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Horizontal Dial\leaderfill \the\currpg}
-\global\advance\currpg by 1
-%%
-%% Chicago
-%%
-\hbox to \dimen0{Chicago, Illlinois, USA 
-                 $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
-\hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Horizontal Dial\leaderfill \the\currpg}
-\global\advance\currpg by 1
-%%
-%% London
-%%
-% latitude := 51.5777 %% London
-\hbox to \dimen0{London, UK $51^\circ$ $30'$ $28''$ N 
-                 $0^\circ$ $7'$ $41''$ W\hfil}
-\hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Horizontal Dial\leaderfill \the\currpg}
-\global\advance\currpg by 1
-%%
-%% Goettingen
-%%
-\hbox to \dimen0{G{\"o}ttingen, Germany $51^\circ$ $32'$ N 
-                 $9^\circ$ $56'$ E\hfil}
-\hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Horizontal Dial\leaderfill \the\currpg}
-\global\advance\currpg by 1
-%%
-%% St.~Petersburg, Russia $59^\circ$ $56'$ N, $30^\circ$ $20'$ E
-%%
-\hbox to \dimen0{St.~Petersburg, Russia 
-                 $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\hfil}
-\hbox to \dimen0{\hskip2em Perspective projection\leaderfill \the\currpg}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Vertical Dial, Facing Due South\leaderfill 19}
-\global\advance\currpg by 1
-\hbox to \dimen0{\hskip2em Horizontal Dial\leaderfill \the\currpg}
-\global\advance\currpg by 1
-%%
-\endgroup
-\vfil\eject
-\fi
+\newdimen\twozerosdimen
+\setbox0=\hbox{{\medium 00}}
+\twozerosdimen=\wd0
+
+
+\def\tocchapterentry#1#2#3{\line{\hbox to \twozerosdimen{\hss #2}. {\medium #1 \dotfill\ #3}}}
+\def\tocsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip3em\ifdim\wd0>0pt{#2}. \fi{\medium #1 \dotfill\ #3}}}
+
+\def\Chapter#1#2{\global\advance\chapctr by 1\sectionctr=0%
+\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\the\chapctr}}
+\def\Section#1#2{\global\advance\sectionctr by 1\edef\A{\the\chapctr .\the\sectionctr}%
+\writenumberedtocentry{section}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\A}}
 
 \advance\voffset by -.5in
 \advance\hoffset by -1in
 
-%% **** (4) End of contents
 
-%% *** (3) Page 0 (conditional)
+%% **** (4) Contents
 
-%\iftrue
-\iffalse
-\pageno=0
-
-\vbox to \vsize{%
-\vskip.5cm
-\line{\hskip1cm\epsffile{sundl_03.0}\hss}
-\vss
-}
-\vfil\eject
-\fi
+\centerline{{\largebx Table of Contents}}
+\begingroup
+\advance\baselineskip by 2pt
+\readtocfile
+\vskip1.5\baselineskip
+\endgroup
 
 %% *** (3) Headline
 
-\iftrue % \iffalse
-\headline={Sundials 3\quad Copyright {\copyright} 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc.\hfil %
-   \folio\hfil Author:  Laurence D. Finston\hfil}
-\fi
+\headline={Sundials 4\quad Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hfil\folio
+\hfil Author:  Laurence D.~Finston\hfil}
+
 
 %% *** (3) Perspective projections
 
@@ -289,12 +200,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA}}
 
 %% **** (4) Jerusalem, Israel 
 
+\Chapter{jerusalem}{Jerusalem, Israel}
 \vbox to \vsize{%
+\hldest{xyz}{}{jerusalem}
 \vskip1cm
 \centerline{{\bf Jerusalem, Israel} 
 $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.1}\hss}
+\line{\hskip1cm\epsffile{sundl_04.1}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Jerusalem, Israel $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
@@ -309,12 +222,13 @@ $\rm{distance} = 10$\hfil}
 
 %% **** (4) Athens
 
-
+\Chapter{athens}{Athens, Greece}
+\hldest{xyz}{}{athens}
 \vbox to \vsize{%
 \vskip1cm
 \centerline{{\bf Athens, Greece} $37^\circ$ $58'$ N $23^\circ$ $43'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.4}\hss}
+\line{\hskip1cm\epsffile{sundl_04.4}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $41^\circ$ $54'$ N (Athens, Greece)\hfil}
@@ -327,6 +241,8 @@ $\rm{distance} = 10$\hfil}
 
 \vfil\eject
 
+!! START HERE! Add calls to \Chapter and \Section (?)
+
 %% **** (4) Chicago
 
 \vbox to \vsize{%
@@ -334,7 +250,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf Chicago, Illinois, USA} 
 $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.7}\hss}
+\line{\hskip1cm\epsffile{sundl_04.7}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Chicago, Illinois, USA
@@ -355,7 +271,7 @@ $\rm{distance} = 10$\hfil}
 \vskip1cm
 \centerline{{\bf London, UK} $51^\circ$ $30'$ $28''$ N, $0^\circ$ $7'$ $41''$ W\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.10}\hss}
+\line{\hskip1cm\epsffile{sundl_04.10}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $51^\circ$ $30'$ $28''$ N (London, UK)\hfil}
@@ -374,7 +290,7 @@ $\rm{distance} = 10$\hfil}
 \vskip1cm
 \centerline{{\bf G{\"o}ttingen, Germany} $51^\circ$ $32'$ N, $9^\circ$ $56'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.13}\hss}
+\line{\hskip1cm\epsffile{sundl_04.13}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $51^\circ$ $32'$ N (G{\"o}ttingen, Germany)\hfil}
@@ -395,7 +311,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf St.~Petersburg, Russia} 
               $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.16}\hss}
+\line{\hskip1cm\epsffile{sundl_04.16}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $51^\circ$ $32'$ N (G{\"o}ttingen, Germany)\hfil}
@@ -417,7 +333,7 @@ $\rm{distance} = 10$\hfil}
 \vskip1cm
 \centerline{{\bf Jerusalem, Israel} $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.1}\hss}
+\line{\hskip1cm\epsffile{sundl_04.1}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Jerusalem, Israel $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
@@ -434,7 +350,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf Jerusalem, Israel} $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
 \vskip1cm
-\line{\hskip 2cm\epsffile{sundl_03.2}\hss}
+\line{\hskip 2cm\epsffile{sundl_04.2}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
@@ -446,7 +362,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf Jerusalem, Israel} $31^\circ$ $47'$ N, $35^\circ$ $13'$ E\hfil}
 \vskip1cm
-\line{\hskip 0cm\epsffile{sundl_03.3}\hss}
+\line{\hskip 0cm\epsffile{sundl_04.3}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$)\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
@@ -462,7 +378,7 @@ $\rm{distance} = 10$\hfil}
 \vskip1cm
 \centerline{{\bf Athens, Greece} $37^\circ$ $58'$ N $23^\circ$ $43'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.4}\hss}
+\line{\hskip1cm\epsffile{sundl_04.4}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $41^\circ$ $54'$ N (Athens, Greece)\hfil}
@@ -480,7 +396,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf Athens, Greece} $37^\circ$ $58'$ N $23^\circ$ $43'$ E\hfil}
 \vskip1cm
-\line{\hskip 2cm\epsffile{sundl_03.5}\hss}
+\line{\hskip 2cm\epsffile{sundl_04.5}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
@@ -492,7 +408,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf Athens, Greece} $37^\circ$ $58'$ N $23^\circ$ $43'$ E\hfil}
 \vskip1cm
-\line{\hskip 0cm\epsffile{sundl_03.6}\hss}
+\line{\hskip 0cm\epsffile{sundl_04.6}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$)\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
@@ -507,7 +423,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf Chicago, Illinois, USA} 
 $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.7}\hss}
+\line{\hskip1cm\epsffile{sundl_04.7}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Chicago, Illinois, USA 
@@ -527,7 +443,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf Chicago, Illinois, USA} 
 $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
 \vskip1cm
-\line{\hskip 2cm\epsffile{sundl_03.8}\hss}
+\line{\hskip 2cm\epsffile{sundl_04.8}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
@@ -541,7 +457,7 @@ $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
 \centerline{{\bf Chicago, Illinois, USA} 
               $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
 \vskip1cm
-\line{\hskip 0cm\epsffile{sundl_03.9}\hss}
+\line{\hskip 0cm\epsffile{sundl_04.9}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$)\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
@@ -556,7 +472,7 @@ $41^\circ$ $52'$ $55''$ N $87^\circ$ $37'$ $40''$ W\hfil}
 \vskip1cm
 \centerline{{\bf London, UK} $51^\circ$ $30'$ $28''$ N, $0^\circ$ $7'$ $41''$ W\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.10}\hss}
+\line{\hskip1cm\epsffile{sundl_04.10}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $51^\circ$ $30'$ $28''$ N (London, UK)\hfil}
@@ -574,7 +490,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf London, UK} $51^\circ$ $30'$ $28''$ N, $0^\circ$ $7'$ $41''$ W\hfil}
 \vskip1cm
-\line{\hskip 2cm\epsffile{sundl_03.11}\hss}
+\line{\hskip 2cm\epsffile{sundl_04.11}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
@@ -586,7 +502,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf London, UK} $51^\circ$ $30'$ $28''$ N, $0^\circ$ $7'$ $41''$ W\hfil}
 \vskip1cm
-\line{\hskip 0cm\epsffile{sundl_03.12}\hss}
+\line{\hskip 0cm\epsffile{sundl_04.12}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$)\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
@@ -600,7 +516,7 @@ $\rm{distance} = 10$\hfil}
 \vskip1cm
 \centerline{{\bf G{\"o}ttingen, Germany} $51^\circ$ $32'$ N, $9^\circ$ $56'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.13}\hss}
+\line{\hskip1cm\epsffile{sundl_04.13}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm Latitude $51^\circ$ $32'$ N (G{\"o}ttingen, Germany)\hfil}
@@ -617,7 +533,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf G{\"o}ttingen, Germany} $51^\circ$ $32'$ N, $9^\circ$ $56'$ E\hfil}
 \vskip1cm
-\line{\hskip 2cm\epsffile{sundl_03.14}\hss}
+\line{\hskip 2cm\epsffile{sundl_04.14}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
@@ -629,7 +545,7 @@ $\rm{distance} = 10$\hfil}
 \vskip2cm
 \centerline{{\bf G{\"o}ttingen, Germany} $51^\circ$ $32'$ N, $9^\circ$ $56'$ E\hfil}
 \vskip1cm
-\line{\hskip 0cm\epsffile{sundl_03.15}\hss}
+\line{\hskip 0cm\epsffile{sundl_04.15}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$).\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
@@ -644,7 +560,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf St.~Petersburg, Russia} 
             $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\hfil}
 \vskip1cm
-\line{\hskip1cm\epsffile{sundl_03.16}\hss}
+\line{\hskip1cm\epsffile{sundl_04.16}\hss}
 \vskip1cm
 \line{\hskip 2cm{\bf Perspective projection}\hfil}
 \line{\hskip 2cm St.~Petersburg, Russia $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\hfil}
@@ -662,7 +578,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf St.~Petersburg, Russia} 
             $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\hfil}
 \vskip1cm
-\line{\hskip 2cm\epsffile{sundl_03.17}\hss}
+\line{\hskip 2cm\epsffile{sundl_04.17}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the vertical plane} (plane of $r_1$)\hfil}
 \line{\hskip 2cm Vertical dial facing due south\hfil}
@@ -675,7 +591,7 @@ $\rm{distance} = 10$\hfil}
 \centerline{{\bf St.~Petersburg, Russia} 
             $59^\circ$ $56'$ N, $30^\circ$ $20'$ E\hfil}
 \vskip1cm
-\line{\hskip 0cm\epsffile{sundl_03.18}\hss}
+\line{\hskip 0cm\epsffile{sundl_04.18}\hss}
 \vskip2cm
 \line{\hskip 2cm{\bf Parallel projection onto the horizontal plane} (plane of $r_6$).\hfil}
 \line{\hskip 2cm Horizontal dial\hfil}
