@@ -4143,8 +4143,195 @@ or right_ascension_decimal_degrees = 337.5;
 -- (insert "\n")
 -- (while (<= i 360)
 -- (insert (concat (number-to-string i) "\n"))
--- (setq i (+ i 45)))	  
+-- (setq i (+ i 45)))     
 -- )
+
+
+
+select distinct constellation_full_name from Stars where approx_rank_apparent_magnitude > 0 and
+approx_rank_apparent_magnitude <= 200 order by constellation_full_name;
+
+
+select distinct constellation_full_name from Stars order by constellation_full_name;
+
+Andromeda                  Andromeda                
+Antlia                     Antlia                           
+Apus                       Apus                     
+Aquarius                   Aquarius                 
+Aquila                     Aquila                           
+Ara                        Ara                      
+Aries                      Aries                            
+Auriga                     Auriga                           
+Bo@otes                    Boötes                           
+Caelum                     Caelum                           
+Camelopardalis             Camelopardalis                   
+Cancer                     Cancer                           
+Canes Venatici             Canes Venatici                   
+Canis Major                Canis Major              
+Canis Minor                Canis Minor              
+Capricornus                Capricornus              
+Carina                     Carina                           
+Cassiopeia                 Cassiopeia               
+Centaurus                  Centaurus                
+Cepheus                    Cepheus                          
+Cetus                      Cetus                            
+Chamaeleon                 Chamaeleon               
+Circinus                   Circinus                 
+Columba                    Columba                          
+Coma Berenices             Coma Berenices                   
+Corona Borealis            Corona Australis         
+Corona_Australis           Corona Borealis                  
+Corvus                     Corvus                           
+Crater                     Crater                           
+Crux                       Crux                     
+Cygnus                     Cygnus                           
+Delphinus                  Delphinus                
+Dorado                     Dorado                           
+Draco                      Draco                            
+Equuleus                   Equuleus                 
+Eridanus                   Eridanus                 
+Fornax                     Fornax                           
+Gemini                     Gemini                           
+Grus                       Grus                     
+Hercules                   Hercules                 
+Horologium                 Horologium               
+Hydra                      Hydra                            
+Hydrus                     Hydrus                           
+Indus                      Indus                            
+Lacerta                    Lacerta                          
+Leo                        Leo                      
+Leo Minor                  Leo Minor                
+Lepus                      Lepus                            
+Libra                      Libra                            
+Lupus                      Lupus                            
+Lynx                       Lynx                     
+Lyra                       Lyra                     
+Mensa                      Mensa                            
+Microscopium               Microscopium             
+Monoceros                  Monoceros                
+Musca                      Musca                            
+Norma                      Norma                            
+Octans                     Octans                           
+Ophiuchus                  Ophiuchus                
+Orion                      Orion                            
+Pavo                       Pavo                     
+Pegasus                    Pegasus                          
+Perseus                    Perseus                          
+Phoenix                    Phoenix                          
+Pictor                     Pictor                           
+Pisces                     Pisces                           
+Piscis Austrinus           Piscis Austrinus         
+Puppis                     Puppis                           
+Pyxis                      Pyxis                            
+Reticulum                  Reticulum                
+Sagitta                    Sagitta                          
+Sagittarius                Sagittarius              
+Scorpius                   Scorpius                 
+Sculptor                   Sculptor                 
+Scutum                     Scutum                           
+Serpens                    Serpens                          
+Sextans                    Sextans                          
+Taurus                     Taurus                           
+Telescopium                Telescopium              
+Triangulum                 Triangulum               
+Triangulum Australe        Triangulum Australe      
+Tucana                     Tucana                           
+Ursa Major                 Ursa Major               
+Ursa Minor                 Ursa Minor               
+Vela                       Vela                     
+Virgo                      Virgo                            
+Volans                     Volans                           
+Vulpecula                  Vulpecula                   
+
+Andromeda
+Antlia
+Apus
+Aquarius
+Aquila
+Ara
+Aries
+Auriga
+Bo@otes
+Caelum
+Camelopardalis
+Cancer
+Canes Venatici
+Canis Major
+Canis Minor
+Capricornus
+Carina
+Cassiopeia
+Centaurus
+Cepheus
+Cetus
+Chamaeleon
+Circinus
+Columba
+Coma Berenices
+Corona Australis
+Corona Borealis
+Corvus
+Crater
+Crux
+Cygnus
+Delphinus
+Dorado
+Draco
+Equuleus
+Eridanus
+Fornax
+Gemini
+Grus
+Hercules
+Horologium
+Hydra
+Hydrus
+Indus
+Lacerta
+Leo
+Leo Minor
+Lepus
+Libra
+Lupus
+Lynx
+Lyra
+Mensa
+Microscopium
+Monoceros
+Musca
+Norma
+Octans
+Ophiuchus
+Orion
+Pavo
+Pegasus
+Perseus
+Phoenix
+Pictor
+Pisces
+Piscis Austrinus
+Puppis
+Pyxis
+Reticulum
+Sagitta
+Sagittarius
+Scorpius
+Sculptor
+Scutum
+Serpens
+Sextans
+Taurus
+Telescopium
+Triangulum
+Triangulum Australe
+Tucana
+Ursa Major
+Ursa Minor
+Vela
+Virgo
+Volans
+Vulpecula
+
 
 
 
