@@ -10910,6 +10910,10 @@ select distinct constellation_full_name from Stars where approx_rank_apparent_ma
 and approx_rank_apparent_magnitude <= 200 order by constellation_full_name;
 
 
+select distinct constellation_full_name, constellation_name_genitive, constellation_abbreviation
+from Stars order by constellation_full_name;
+
+
 
 
 show columns from Stars;
