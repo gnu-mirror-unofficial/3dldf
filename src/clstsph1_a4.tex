@@ -56,12 +56,16 @@
 
 \font\small=cmr8
 \font\smalltt=cmtt8
+\font\normalbsy=cmbsy10 %% normal bold math symbols (10pt)
 \font\medium=cmr10 scaled \magstephalf
 \font\mediumbx=cmbx10 scaled \magstephalf
 \font\mediumit=cmti10 scaled \magstephalf
 \font\mediumtt=cmtt10 scaled \magstephalf
+\font\mediumbsy=cmbsy10 scaled \magstephalf %% medium bold math symbols
 \font\large=cmr12
 \font\largebx=cmbx12
+\font\largebx=cmbx12
+\font\largebsy=cmbsy12  %% large bold math symbols
 \font\largeit=cmti12
 \font\largett=cmtt12
 \font\Largebx=cmbx12 scaled \magstephalf
@@ -69,6 +73,8 @@
 \font\hugebx=cmbx12 scaled \magstep2
 \font\mediumsy=cmsy10 scaled \magstephalf
 \font\mediumcy=cmcyr10 scaled \magstephalf
+
+\def\largeprime#1{${\hbox{{\mediumbx #1}}}^{\hbox{{\normalbsy \char"30}}}$}
 
 \enablehyperlinks[dvipdfm]
 
@@ -289,8 +295,8 @@ sections and the second to the panel sections.
 \endgroup
 \begingroup
 \medium
-\count1=1
-\def\A{\begingroup\leavevmode\hbox to \twozerosperioddimen{\the\count1\global\advance\count1 by 1.\hss}~\endgroup}
+\count255=1
+\def\A{\begingroup\leavevmode\hbox to \twozerosperioddimen{\the\count255\global\advance\count255 by 1.\hss}~\endgroup}
 \global\advance\chapctr by 1
 \writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{constellations}\Blue{Constellations}\hlend}{\the\chapctr}
 \hldest{xyz}{}{constellations}
@@ -450,49 +456,49 @@ to the two corresponding panel sections.}
 \triplecolumns
 %
 \vbox{\hbox{{\largebx Section 1/16--1}}\vskip.5\baselineskip
-\hbox{{\largebx RA 22h 30m--1h 30m}}
+\hbox{{\largebx RA 22h \largeprime{30}--1h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_0.tex
 %
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 2/2--3}}\vskip.5\baselineskip
-\hbox{{\largebx RA 1h 30m--4h 30m}}
+\hbox{{\largebx RA 1h \largeprime{30}--4h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_1.tex
 %
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 3/4--5}}\vskip.5\baselineskip
-\hbox{{\largebx RA 4h 30m--7h 30m}}
+\hbox{{\largebx RA 4h \largeprime{30}--7h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_2.tex
 %
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 4/6--7}}\vskip.5\baselineskip
-\hbox{{\largebx RA 7h 30m--10h 30m}}
+\hbox{{\largebx RA 7h \largeprime{30}--10h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_3.tex
 % 
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 5/8--9}}\vskip.5\baselineskip
-\hbox{{\largebx RA 10h 30m--13h 30m}}
+\hbox{{\largebx RA 10h \largeprime{30}--13h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_4.tex
 %
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 6/10--11}}\vskip.5\baselineskip
-\hbox{{\largebx RA 13h 30m--16h 30m}}
+\hbox{{\largebx RA 13h \largeprime{30}--16h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_5.tex
 %
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 7/12--13}}\vskip.5\baselineskip
-\hbox{{\largebx RA 16h 30m--19h 30m}}
+\hbox{{\largebx RA 16h \largeprime{30}--19h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_6.tex
 %
 \vbox{\vskip\baselineskip
 \hbox{{\largebx Section 8/14--15}}\vskip.5\baselineskip
-\hbox{{\largebx RA 19h 30m--22h 30m}}
+\hbox{{\largebx RA 19h \largeprime{30}--22h \largeprime{30}}}
 \vskip\baselineskip}
 \input clstsph_1_7.tex
 %
