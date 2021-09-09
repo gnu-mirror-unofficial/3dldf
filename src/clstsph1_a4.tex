@@ -81,10 +81,6 @@
 %% * (1)
 
 
-%% TODO:  LDF 2021.09.07.  Add Greek alphabet.  Explain about the sections corresponding to
-%% the sections of the panel model.
-%% Add references section.
-
 \pageno=1
 \footline={\hfil \folio\hfil}
 
@@ -253,9 +249,6 @@ sections and the second to the panel sections.
 \endgroup
 
 %% *** (3)
-\global\advance\chapctr by 1
-\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{greek alphabet}\Blue{Greek Alphabet}\hlend}{\the\chapctr}
-\hldest{xyz}{}{greek alphabet}
 \begingroup
 \medium
 \obeylines
@@ -286,6 +279,9 @@ sections and the second to the panel sections.
 \hbox{\hbox to \wd0{$\displaystyle \omega$\hss} omega}}
 \setbox4=\hbox{\box1\hskip3em\box2\hskip3em\box3}
 \vbox{\vskip-10pt
+\global\advance\chapctr by 1
+\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{greek alphabet}\Blue{Greek Alphabet}\hlend}{\the\chapctr}
+\hldest{xyz}{}{greek alphabet}
 \line{\hfil{\largebx Greek Alphabet}\hfil}
 \vskip\baselineskip
 \box4\vss}
