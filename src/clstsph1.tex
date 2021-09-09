@@ -218,7 +218,7 @@ Boston, MA  02110-1301 USA\hfil\break
 \medium
 \Chapter{instructions}{Instructions}
 \centerline{{\largebx Instructions}}
-\hldest{fit}{}{instructions}
+\hldest{xyz}{}{instructions}
 %\advance\baselineskip by 4pt
 \parskip=.5\baselineskip
 {\bf PLEASE NOTE!}  The author has tried to ensure that the following
@@ -308,11 +308,124 @@ an email to the author at the address listed above.
 \hbox{\hbox to \wd0{$\displaystyle \omega$\hss} omega}}
 
 \setbox3=\hbox{\box1\hskip4em\box2}
-\hbox to \wd3{\hfil{\largebx Greek Alphabet}\hfil}
+\global\dimen3=\wd3
+\hbox to \dimen3{\hfil{\largebx Greek Alphabet}\hfil}
 \vskip1.5\baselineskip
 \box3
 \endgroup
+\begingroup
+\parskip=0pt
+\baselineskip=12pt
+\count1=1
+\def\A{\begingroup\setbox0=\hbox{\medium 00.}\leavevmode\hbox to \wd0{\the\count1\global\advance\count1 by 1.\hss}~\endgroup}
+\Chapter{constellations}{Constellations}
+\hldest{xyz}{}{constellations}
+\vskip.5\baselineskip
+\advance\baselineskip by 2pt
+\obeylines
+\setbox0=\hbox to 0pt{\vtop{\A Andromeda
+\A Antlia
+\A Apus
+\A Aquarius
+\A Aquila
+\A Ara
+\A Aries
+\A Auriga
+\A Bo{\"o}tes
+\A Caelum
+\A Camelopardalis
+\A Cancer
+\A Canes Venatici
+\A Canis Major
+\A Canis Minor
+\A Capricornus
+\A Carina
+\A Cassiopeia
+\A Centaurus
+\A Cepheus}\hss}
+
+\setbox1=\hbox to 0pt{\vtop{\A Cetus
+\A Chamaeleon
+\A Circinus
+\A Columba
+\A Coma Berenices
+\A Corona Australis
+\A Corona Borealis
+\A Corvus
+\A Crater
+\A Crux
+\A Cygnus
+\A Delphinus
+\A Dorado
+\A Draco
+\A Equuleus
+\A Eridanus
+\A Fornax
+\A Gemini
+\A Grus
+\A Hercules}\hss}
+
+
+\setbox2=\hbox to 0pt{\vtop{\A Horologium
+\A Hydra
+\A Hydrus
+\A Indus
+\A Lacerta
+\A Leo
+\A Leo Minor
+\A Lepus
+\A Libra
+\A Lupus
+\A Lynx
+\A Lyra
+\A Mensa
+\A Microscopium
+\A Monoceros
+\A Musca
+\A Norma
+\A Octans
+\A Ophiuchus
+\A Orion
+}\hss}
+
+\setbox3=\hbox to 0pt{\vtop{\A Pavo
+\A Pegasus
+\A Perseus
+\A Phoenix
+\A Pictor
+\A Pisces
+\A Piscis Austrinus
+\A Puppis
+\A Pyxis
+\A Reticulum
+\A Sagitta
+\A Sagittarius
+\A Scorpius
+\A Sculptor
+\A Scutum
+\A Serpens
+\A Sextans
+\A Taurus
+\A Telescopium}\hss}
+
+\setbox4=\hbox to 0pt{\vtop{\A Triangulum
+\A Triangulum Australe
+\A Tucana
+\A Ursa Major
+\A Ursa Minor
+\A Vela
+\A Virgo
+\A Volans
+\A Vulpecula}\hss}
+
+\vskip1.5\baselineskip
+\line{\hskip.25\hsize {\largebx Constellations}\hss}
+\vskip1.5\baselineskip
+\line{\box0\hskip.125\hsize\box1\hskip.125\hsize\box2\hskip.125\hsize\box3\hskip.125\hsize\box4}
+
+
 \vfil\eject
+\endgroup
 
 %% **** (4)
 
@@ -324,7 +437,9 @@ an email to the author at the address listed above.
 \Chapter{spherical biangles}{Spherical Biangles}
 \centerline{{\largebx Spherical Biangles}}
 \vskip\baselineskip
-\hldest{fit}{}{spherical biangles}
+\hldest{xyz}{}{spherical biangles}
+\Section{sb white on black}{White on Black Background}
+\hldest{xyz}{}{sb white on black}
 \line{\epsffile{clstsph1.0}\hskip1cm\epsffile{clstsph1.1}\hskip1cm\epsffile{clstsph1.2}\hskip1cm
 \epsffile{clstsph1.3}\hss}
 \vfil\eject
@@ -337,11 +452,14 @@ an email to the author at the address listed above.
 
 %% **** (4)
 
+\Section{sb black on white}{Black on White Background}
+\hldest{xyz}{}{sb black on white}
 \line{\epsffile{clstsph2.0}\hskip1cm\epsffile{clstsph2.1}\hskip1cm\epsffile{clstsph2.2}\hskip1cm
 \epsffile{clstsph2.3}\hss}
 \vfil\eject
 
 %% **** (4)
+
 
 \line{\epsffile{clstsph2.4}\hskip1cm\epsffile{clstsph2.5}\hskip1cm
 \epsffile{clstsph2.6}\hskip1cm\epsffile{clstsph2.7}\hss}
@@ -356,8 +474,10 @@ an email to the author at the address listed above.
 
 \Chapter{panels}{Panels (Isoceles Trapezoids and Triangles)}
 \centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}
-\hldest{fit}{}{panels}
+\hldest{xyz}{}{panels}
 \vskip2\baselineskip
+\Section{panels white on black}{White on Black Background}
+\hldest{xyz}{}{panels white on black}
 \line{\epsffile{clstsph1.12}\hss}
 \vfil\eject
 
@@ -366,6 +486,8 @@ an email to the author at the address listed above.
 
 %% *** (3)
 
+\Section{panels black on white}{Black On White Background}
+\hldest{xyz}{}{panels black on white}
 \line{\epsffile{clstsph2.12}\hss}
 \vfil\eject
 
@@ -378,7 +500,7 @@ an email to the author at the address listed above.
 
 \Chapter{globes}{Globes}
 \centerline{{\largebx Globes}}
-\hldest{fit}{}{globes}
+\hldest{xyz}{}{globes}
 \vskip2\baselineskip
 \line{\epsffile{clstsph1.8}\hskip.25cm\epsffile{clstsph1.9}\hss}
 \vfil\eject
@@ -398,15 +520,15 @@ an email to the author at the address listed above.
 \advance\hsize by -6cm
 \parskip=\baselineskip
 \Chapter{copying}{Copying}
-\hldest{fit}{}{copying}
+\hldest{xyz}{}{copying}
 %\advance\baselineskip by -6pt
 \advance\hsize by 10in
 \Section{GPL}{GNU General Public License}
-\hldest{fit}{}{GPL}
+\hldest{xyz}{}{GPL}
 \listing{gpl-3.0_a3.txt}
 \vfil\eject
 \Section{FDL}{GNU Free Documentation License}
-\hldest{fit}{}{FDL}
+\hldest{xyz}{}{FDL}
 \listing{fdl-1.3_a3.txt}
 \vfil\eject
 \endgroup
