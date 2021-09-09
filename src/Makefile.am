@@ -1087,7 +1087,8 @@ clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph2.0 clstsph_1_star_info_combined.te
 	tex clstsph1.tex
 	tex clstsph1.tex
 
-clstsph_1_star_info_combined.tex: clstsph1.mp clstsph_1_0.tex
+clstsph_1_star_info_combined.tex: clstsph_1_0.tex
+	echo "Creating clstsph_1_star_info_combined.tex."
 	rm -f clstsph_1_star_info_combined.tex
 	cat clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
            clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex | sort -n | grep -v ^% > clstsph_1_star_info_combined.tex

@@ -85,13 +85,15 @@ fi;
   
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
 
-for i = 0 upto 7:
-  s := "clstsph_1_" & decimal i & ".tex";
-  nw[i] := s;
-  s := "%%" & s & "\n%%";
+if do_write:
+  for i = 0 upto 7:
+    s := "clstsph_1_" & decimal i & ".tex";
+    nw[i] := s;
+    s := "%%" & s & "\n%%";
   %message "s == " & s;
-  write s to nw[i];
-endfor;
+    write s to nw[i];
+  endfor;
+fi;
 
 %% ** (2) Call macros for the sphere, the spherical biangles, the panels, the flat panels and the stitches.
 
@@ -2748,3 +2750,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {pi_herculis, temp_star_pan
                          label_pos_top, 0, -1pt, false, false};
 
 endinput;
+
+%% Local Variables:
+%% mode:MetaPost
+%% End:
