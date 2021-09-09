@@ -4334,4 +4334,6585 @@ Vulpecula
 
 
 
+select * from Stars where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200
+order by constellation_full_name\G
+
+
+                       common_name: Alpheratz
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 21
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 15
+    approx_rank_apparent_magnitude: 54
+                apparent_magnitude: 2.07
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.3
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: And
+           constellation_full_name: Andromeda
+       constellation_name_genitive: Andromedae
+              constellation_number: 19
+             right_ascension_hours: 0
+           right_ascension_minutes: 9
+           right_ascension_seconds: 20.9
+     right_ascension_decimal_hours: 0.155806
+   right_ascension_decimal_degrees: 2.33709
+               declination_degrees: 29
+               declination_minutes: 11
+               declination_seconds: 3
+       declination_decimal_degrees: 29.1842
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 2. row ***************************
+                       common_name: Almach
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 61
+                apparent_magnitude: 2.1
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.08
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: And
+           constellation_full_name: Andromeda
+       constellation_name_genitive: Andromedae
+              constellation_number: 19
+             right_ascension_hours: 2
+           right_ascension_minutes: 3
+           right_ascension_seconds: 53.9523
+     right_ascension_decimal_hours: 2.06499
+   right_ascension_decimal_degrees: 30.9748
+               declination_degrees: 42
+               declination_minutes: 19
+               declination_seconds: 47.0223
+       declination_decimal_degrees: 42.3297
+                         is_binary: 0
+                       is_multiple: 4
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 3. row ***************************
+                       common_name: Mirach
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 43
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 337
+    approx_rank_apparent_magnitude: 55
+                apparent_magnitude: 2.07
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.86
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: And
+           constellation_full_name: Andromeda
+       constellation_name_genitive: Andromedae
+              constellation_number: 19
+             right_ascension_hours: 1
+           right_ascension_minutes: 10
+           right_ascension_seconds: 46.4
+     right_ascension_decimal_hours: 1.17956
+   right_ascension_decimal_degrees: 17.6934
+               declination_degrees: 35
+               declination_minutes: 43
+               declination_seconds: 0
+       declination_decimal_degrees: 35.7167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 4. row ***************************
+                       common_name: Sadalsuud
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 22
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 8232
+    approx_rank_apparent_magnitude: 158
+                apparent_magnitude: 2.9
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.47
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aqr
+           constellation_full_name: Aquarius
+       constellation_name_genitive: Aquarii
+              constellation_number: 10
+             right_ascension_hours: 21
+           right_ascension_minutes: 32
+           right_ascension_seconds: 31.9
+     right_ascension_decimal_hours: 21.5422
+   right_ascension_decimal_degrees: 323.133
+               declination_degrees: -5
+               declination_minutes: 29
+               declination_seconds: 2
+       declination_decimal_degrees: -5.48389
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 5. row ***************************
+                       common_name: Sadalmelik
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 8414
+    approx_rank_apparent_magnitude: 164
+                apparent_magnitude: 2.95
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.88
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aqr
+           constellation_full_name: Aquarius
+       constellation_name_genitive: Aquarii
+              constellation_number: 10
+             right_ascension_hours: 22
+           right_ascension_minutes: 6
+           right_ascension_seconds: 44
+     right_ascension_decimal_hours: 22.1122
+   right_ascension_decimal_degrees: 331.683
+               declination_degrees: 0
+               declination_minutes: 13
+               declination_seconds: 4
+       declination_decimal_degrees: 0.217778
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 6. row ***************************
+                       common_name: Deneb el Okab
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 17
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 7235
+    approx_rank_apparent_magnitude: 171
+                apparent_magnitude: 2.99
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.96
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aql
+           constellation_full_name: Aquila
+       constellation_name_genitive: Aquilae
+              constellation_number: 22
+             right_ascension_hours: 19
+           right_ascension_minutes: 6
+           right_ascension_seconds: 15.6
+     right_ascension_decimal_hours: 19.1043
+   right_ascension_decimal_degrees: 286.564
+               declination_degrees: 13
+               declination_minutes: 53
+               declination_seconds: 3
+       declination_decimal_degrees: 13.8842
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 7. row ***************************
+                       common_name: Tarazed
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 50
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 7525
+    approx_rank_apparent_magnitude: 118
+                apparent_magnitude: 2.72
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.03
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aql
+           constellation_full_name: Aquila
+       constellation_name_genitive: Aquilae
+              constellation_number: 22
+             right_ascension_hours: 19
+           right_ascension_minutes: 47
+           right_ascension_seconds: 8.3
+     right_ascension_decimal_hours: 19.7856
+   right_ascension_decimal_degrees: 296.784
+               declination_degrees: 10
+               declination_minutes: 39
+               declination_seconds: 3
+       declination_decimal_degrees: 10.6508
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 8. row ***************************
+                       common_name: Altair
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 53
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 7557
+    approx_rank_apparent_magnitude: 12
+                apparent_magnitude: 0.77
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.21
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aql
+           constellation_full_name: Aquila
+       constellation_name_genitive: Aquilae
+              constellation_number: 22
+             right_ascension_hours: 19
+           right_ascension_minutes: 51
+           right_ascension_seconds: 41.1
+     right_ascension_decimal_hours: 19.8614
+   right_ascension_decimal_degrees: 297.921
+               declination_degrees: 8
+               declination_minutes: 55
+               declination_seconds: 0
+       declination_decimal_degrees: 8.91667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 9. row ***************************
+                       common_name: $\zeta$ Ar{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6285
+    approx_rank_apparent_magnitude: 195
+                apparent_magnitude: 3.12
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.11
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ara
+           constellation_full_name: Ara
+       constellation_name_genitive: Arae
+              constellation_number: 63
+             right_ascension_hours: 17
+           right_ascension_minutes: 0
+           right_ascension_seconds: 9.4
+     right_ascension_decimal_hours: 17.0026
+   right_ascension_decimal_degrees: 255.039
+               declination_degrees: -56
+               declination_minutes: 1
+               declination_seconds: 2
+       declination_decimal_degrees: -56.0172
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 10. row ***************************
+                       common_name: Choo
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 6510
+    approx_rank_apparent_magnitude: 142
+                apparent_magnitude: 2.84
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.51
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ara
+           constellation_full_name: Ara
+       constellation_name_genitive: Arae
+              constellation_number: 63
+             right_ascension_hours: 17
+           right_ascension_minutes: 33
+           right_ascension_seconds: 16.4
+     right_ascension_decimal_hours: 17.5546
+   right_ascension_decimal_degrees: 263.319
+               declination_degrees: -49
+               declination_minutes: 53
+               declination_seconds: 20
+       declination_decimal_degrees: -49.8889
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 11. row ***************************
+                       common_name: $\beta$ Ar{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6461
+    approx_rank_apparent_magnitude: 141
+                apparent_magnitude: 2.84
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.49
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ara
+           constellation_full_name: Ara
+       constellation_name_genitive: Arae
+              constellation_number: 63
+             right_ascension_hours: 17
+           right_ascension_minutes: 26
+           right_ascension_seconds: 50.5
+     right_ascension_decimal_hours: 17.4474
+   right_ascension_decimal_degrees: 261.711
+               declination_degrees: -55
+               declination_minutes: 32
+               declination_seconds: 43
+       declination_decimal_degrees: -55.5453
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 12. row ***************************
+                       common_name: Sheratan
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 6
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 553
+    approx_rank_apparent_magnitude: 104
+                apparent_magnitude: 2.64
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.33
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ari
+           constellation_full_name: Aries
+       constellation_name_genitive: Arietis
+              constellation_number: 39
+             right_ascension_hours: 1
+           right_ascension_minutes: 55
+           right_ascension_seconds: 40
+     right_ascension_decimal_hours: 1.92778
+   right_ascension_decimal_degrees: 28.9167
+               declination_degrees: 20
+               declination_minutes: 53
+               declination_seconds: 5
+       declination_decimal_degrees: 20.8847
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 13. row ***************************
+                       common_name: Hamal
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 13
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 617
+    approx_rank_apparent_magnitude: 50
+                apparent_magnitude: 2.01
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.48
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ari
+           constellation_full_name: Aries
+       constellation_name_genitive: Arietis
+              constellation_number: 39
+             right_ascension_hours: 2
+           right_ascension_minutes: 8
+           right_ascension_seconds: 13.2
+     right_ascension_decimal_hours: 2.137
+   right_ascension_decimal_degrees: 32.055
+               declination_degrees: 23
+               declination_minutes: 32
+               declination_seconds: 5
+       declination_decimal_degrees: 23.5347
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 14. row ***************************
+                       common_name: Capella
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 13
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 1708
+    approx_rank_apparent_magnitude: 6
+                apparent_magnitude: 0.07
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.49
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aur
+           constellation_full_name: Auriga
+       constellation_name_genitive: Aurigae
+              constellation_number: 21
+             right_ascension_hours: 5
+           right_ascension_minutes: 18
+           right_ascension_seconds: 3.5
+     right_ascension_decimal_hours: 5.30097
+   right_ascension_decimal_degrees: 79.5145
+               declination_degrees: 46
+               declination_minutes: 0
+               declination_seconds: 5
+       declination_decimal_degrees: 46.0014
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 15. row ***************************
+                       common_name: Menkalinan
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2088
+    approx_rank_apparent_magnitude: 41
+                apparent_magnitude: 1.9
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.1
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aur
+           constellation_full_name: Auriga
+       constellation_name_genitive: Aurigae
+              constellation_number: 21
+             right_ascension_hours: 6
+           right_ascension_minutes: 0
+           right_ascension_seconds: 53.2
+     right_ascension_decimal_hours: 6.01478
+   right_ascension_decimal_degrees: 90.2217
+               declination_degrees: 44
+               declination_minutes: 56
+               declination_seconds: 5
+       declination_decimal_degrees: 44.9347
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 16. row ***************************
+                       common_name: $\theta$ Aurig{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 37
+    bayer_designation_greek_letter: theta
+bayer_designation_greek_letter_tex: $\theta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2095
+    approx_rank_apparent_magnitude: 107
+                apparent_magnitude: 2.65
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.98
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aur
+           constellation_full_name: Auriga
+       constellation_name_genitive: Aurigae
+              constellation_number: 21
+             right_ascension_hours: 6
+           right_ascension_minutes: 0
+           right_ascension_seconds: 59
+     right_ascension_decimal_hours: 6.01639
+   right_ascension_decimal_degrees: 90.2458
+               declination_degrees: 37
+               declination_minutes: 12
+               declination_seconds: 4
+       declination_decimal_degrees: 37.2011
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 17. row ***************************
+                       common_name: Almaaz
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 7
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 1605
+    approx_rank_apparent_magnitude: 181
+                apparent_magnitude: 3.03
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.95
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aur
+           constellation_full_name: Auriga
+       constellation_name_genitive: Aurigae
+              constellation_number: 21
+             right_ascension_hours: 5
+           right_ascension_minutes: 3
+           right_ascension_seconds: 18
+     right_ascension_decimal_hours: 5.055
+   right_ascension_decimal_degrees: 75.825
+               declination_degrees: 43
+               declination_minutes: 50
+               declination_seconds: 5
+       declination_decimal_degrees: 43.8347
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 1
+                             notes: 
+*************************** 18. row ***************************
+                       common_name: Hassaleh
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 3
+    bayer_designation_greek_letter: iota
+bayer_designation_greek_letter_tex: $\iota$
+       bayer_designation_extension: 
+                      bs_hr_number: 1577
+    approx_rank_apparent_magnitude: 112
+                apparent_magnitude: 2.69
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.29
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Aur
+           constellation_full_name: Auriga
+       constellation_name_genitive: Aurigae
+              constellation_number: 21
+             right_ascension_hours: 4
+           right_ascension_minutes: 58
+           right_ascension_seconds: 12.1
+     right_ascension_decimal_hours: 4.97003
+   right_ascension_decimal_degrees: 74.5504
+               declination_degrees: 33
+               declination_minutes: 11
+               declination_seconds: 3
+       declination_decimal_degrees: 33.1842
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 19. row ***************************
+                       common_name: Izar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 36
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 5506
+    approx_rank_apparent_magnitude: 81
+                apparent_magnitude: 2.35
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.69
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Boo
+           constellation_full_name: Bo@otes
+       constellation_name_genitive: Bo@otis
+              constellation_number: 13
+             right_ascension_hours: 14
+           right_ascension_minutes: 45
+           right_ascension_seconds: 47.7
+     right_ascension_decimal_hours: 14.7633
+   right_ascension_decimal_degrees: 221.449
+               declination_degrees: 26
+               declination_minutes: 59
+               declination_seconds: 4
+       declination_decimal_degrees: 26.9844
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 20. row ***************************
+                       common_name: Muphrid
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 8
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5235
+    approx_rank_apparent_magnitude: 110
+                apparent_magnitude: 2.68
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.41
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Boo
+           constellation_full_name: Bo@otes
+       constellation_name_genitive: Bo@otis
+              constellation_number: 13
+             right_ascension_hours: 13
+           right_ascension_minutes: 55
+           right_ascension_seconds: 33.9
+     right_ascension_decimal_hours: 13.9261
+   right_ascension_decimal_degrees: 208.891
+               declination_degrees: 18
+               declination_minutes: 18
+               declination_seconds: 2
+       declination_decimal_degrees: 18.3006
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 21. row ***************************
+                       common_name: Arcturus
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 16
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 5340
+    approx_rank_apparent_magnitude: 4
+                apparent_magnitude: -0.05
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.31
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Boo
+           constellation_full_name: Bo@otes
+       constellation_name_genitive: Bo@otis
+              constellation_number: 13
+             right_ascension_hours: 14
+           right_ascension_minutes: 16
+           right_ascension_seconds: 30.3
+     right_ascension_decimal_hours: 14.2751
+   right_ascension_decimal_degrees: 214.126
+               declination_degrees: 19
+               declination_minutes: 5
+               declination_seconds: 1
+       declination_decimal_degrees: 19.0836
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 22. row ***************************
+                       common_name: Seginus
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 27
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 5435
+    approx_rank_apparent_magnitude: 183
+                apparent_magnitude: 3.04
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.96
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Boo
+           constellation_full_name: Bo@otes
+       constellation_name_genitive: Bo@otis
+              constellation_number: 13
+             right_ascension_hours: 14
+           right_ascension_minutes: 32
+           right_ascension_seconds: 49.3
+     right_ascension_decimal_hours: 14.547
+   right_ascension_decimal_degrees: 218.205
+               declination_degrees: 38
+               declination_minutes: 13
+               declination_seconds: 4
+       declination_decimal_degrees: 38.2178
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 23. row ***************************
+                       common_name: Cor Caroli 2
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha^2
+bayer_designation_greek_letter_tex: $\alpha^2$
+       bayer_designation_extension: 
+                      bs_hr_number: 4915
+    approx_rank_apparent_magnitude: 130
+                apparent_magnitude: 2.98
+         apparent_magnitude_varies: 1
+                absolute_magnitude: 0.16
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CVn
+           constellation_full_name: Canes Venatici
+       constellation_name_genitive: Canum Venaticorum
+              constellation_number: 38
+             right_ascension_hours: 12
+           right_ascension_minutes: 56
+           right_ascension_seconds: 1.66622
+     right_ascension_decimal_hours: 12.9338
+   right_ascension_decimal_degrees: 194.007
+               declination_degrees: 38
+               declination_minutes: 19
+               declination_seconds: 6.1541
+       declination_decimal_degrees: 38.3184
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 1
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 24. row ***************************
+                       common_name: Mirzam
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 2
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2294
+    approx_rank_apparent_magnitude: 46
+                apparent_magnitude: 1.98
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.95
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 43
+             right_ascension_hours: 6
+           right_ascension_minutes: 23
+           right_ascension_seconds: 30.9
+     right_ascension_decimal_hours: 6.39192
+   right_ascension_decimal_degrees: 95.8788
+               declination_degrees: -17
+               declination_minutes: 57
+               declination_seconds: 5
+       declination_decimal_degrees: -17.9514
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 25. row ***************************
+                       common_name: $o^2$ Canis Majoris
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 24
+    bayer_designation_greek_letter: omicron^2
+bayer_designation_greek_letter_tex: $\omicron^2$
+       bayer_designation_extension: 
+                      bs_hr_number: 2653
+    approx_rank_apparent_magnitude: 179
+                apparent_magnitude: 3.02
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -6.46
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 0
+             right_ascension_hours: 7
+           right_ascension_minutes: 3
+           right_ascension_seconds: 1.47211
+     right_ascension_decimal_hours: 7.05041
+   right_ascension_decimal_degrees: 105.756
+               declination_degrees: -23
+               declination_minutes: 49
+               declination_seconds: 59.8523
+       declination_decimal_degrees: -23.8333
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 26. row ***************************
+                       common_name: Adhara
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 21
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 2618
+    approx_rank_apparent_magnitude: 22
+                apparent_magnitude: 1.5
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.1
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 43
+             right_ascension_hours: 6
+           right_ascension_minutes: 59
+           right_ascension_seconds: 21.2
+     right_ascension_decimal_hours: 6.98922
+   right_ascension_decimal_degrees: 104.838
+               declination_degrees: -28
+               declination_minutes: 59
+               declination_seconds: 5
+       declination_decimal_degrees: -28.9847
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 27. row ***************************
+                       common_name: Wezen
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 25
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2693
+    approx_rank_apparent_magnitude: 36
+                apparent_magnitude: 1.83
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -6.87
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 43
+             right_ascension_hours: 7
+           right_ascension_minutes: 9
+           right_ascension_seconds: 8.6
+     right_ascension_decimal_hours: 7.15239
+   right_ascension_decimal_degrees: 107.286
+               declination_degrees: -26
+               declination_minutes: 25
+               declination_seconds: 2
+       declination_decimal_degrees: -26.4172
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 28. row ***************************
+                       common_name: Aludra
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 31
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2827
+    approx_rank_apparent_magnitude: 88
+                apparent_magnitude: 2.45
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -7.51
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 43
+             right_ascension_hours: 7
+           right_ascension_minutes: 24
+           right_ascension_seconds: 49.6
+     right_ascension_decimal_hours: 7.41378
+   right_ascension_decimal_degrees: 111.207
+               declination_degrees: -29
+               declination_minutes: 20
+               declination_seconds: 2
+       declination_decimal_degrees: -29.3339
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 29. row ***************************
+                       common_name: Phurad
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 1
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2282
+    approx_rank_apparent_magnitude: 178
+                apparent_magnitude: 3.02
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.05
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 43
+             right_ascension_hours: 6
+           right_ascension_minutes: 21
+           right_ascension_seconds: 1.4
+     right_ascension_decimal_hours: 6.35039
+   right_ascension_decimal_degrees: 95.2559
+               declination_degrees: -30
+               declination_minutes: 4
+               declination_seconds: 2
+       declination_decimal_degrees: -30.0672
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 30. row ***************************
+                       common_name: Sirius
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 9
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 2491
+    approx_rank_apparent_magnitude: 1
+                apparent_magnitude: -1.46
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.43
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMa
+           constellation_full_name: Canis Major
+       constellation_name_genitive: Canis Majoris
+              constellation_number: 43
+             right_ascension_hours: 6
+           right_ascension_minutes: 45
+           right_ascension_seconds: 57.4
+     right_ascension_decimal_hours: 6.76594
+   right_ascension_decimal_degrees: 101.489
+               declination_degrees: -16
+               declination_minutes: 44
+               declination_seconds: 3
+       declination_decimal_degrees: -16.7342
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 31. row ***************************
+                       common_name: Gomeisa
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 3
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2845
+    approx_rank_apparent_magnitude: 153
+                apparent_magnitude: 2.89
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.7
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMi
+           constellation_full_name: Canis Minor
+       constellation_name_genitive: Canis Minoris
+              constellation_number: 71
+             right_ascension_hours: 7
+           right_ascension_minutes: 28
+           right_ascension_seconds: 9.2
+     right_ascension_decimal_hours: 7.46922
+   right_ascension_decimal_degrees: 112.038
+               declination_degrees: 8
+               declination_minutes: 15
+               declination_seconds: 0
+       declination_decimal_degrees: 8.25
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 32. row ***************************
+                       common_name: Procyon
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 10
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 2943
+    approx_rank_apparent_magnitude: 8
+                apparent_magnitude: 0.36
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.64
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CMi
+           constellation_full_name: Canis Minor
+       constellation_name_genitive: Canis Minoris
+              constellation_number: 71
+             right_ascension_hours: 7
+           right_ascension_minutes: 40
+           right_ascension_seconds: 16.3
+     right_ascension_decimal_hours: 7.67119
+   right_ascension_decimal_degrees: 115.068
+               declination_degrees: 5
+               declination_minutes: 10
+               declination_seconds: 3
+       declination_decimal_degrees: 5.1675
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 33. row ***************************
+                       common_name: Dabih
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 9
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 7776
+    approx_rank_apparent_magnitude: 184
+                apparent_magnitude: 3.05
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.07
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cap
+           constellation_full_name: Capricornus
+       constellation_name_genitive: Capricorni
+              constellation_number: 40
+             right_ascension_hours: 20
+           right_ascension_minutes: 22
+           right_ascension_seconds: 2.9
+     right_ascension_decimal_hours: 20.3675
+   right_ascension_decimal_degrees: 305.513
+               declination_degrees: -14
+               declination_minutes: 43
+               declination_seconds: 1
+       declination_decimal_degrees: -14.7169
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 34. row ***************************
+                       common_name: Deneb Algedi
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 49
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 8322
+    approx_rank_apparent_magnitude: 145
+                apparent_magnitude: 2.85
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.49
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cap
+           constellation_full_name: Capricornus
+       constellation_name_genitive: Capricorni
+              constellation_number: 40
+             right_ascension_hours: 21
+           right_ascension_minutes: 48
+           right_ascension_seconds: 3.6
+     right_ascension_decimal_hours: 21.801
+   right_ascension_decimal_degrees: 327.015
+               declination_degrees: -16
+               declination_minutes: 2
+               declination_seconds: 3
+       declination_decimal_degrees: -16.0342
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 1
+                             notes: 
+*************************** 35. row ***************************
+                       common_name: Aspidiske
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: iota
+bayer_designation_greek_letter_tex: $\iota$
+       bayer_designation_extension: 
+                      bs_hr_number: 3699
+    approx_rank_apparent_magnitude: 66
+                apparent_magnitude: 2.21
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -4.42
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Car
+           constellation_full_name: Carina
+       constellation_name_genitive: Carinae
+              constellation_number: 34
+             right_ascension_hours: 9
+           right_ascension_minutes: 17
+           right_ascension_seconds: 35.1
+     right_ascension_decimal_hours: 9.29308
+   right_ascension_decimal_degrees: 139.396
+               declination_degrees: -59
+               declination_minutes: 21
+               declination_seconds: 12
+       declination_decimal_degrees: -59.3533
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 36. row ***************************
+                       common_name: Canopus
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 2326
+    approx_rank_apparent_magnitude: 2
+                apparent_magnitude: -0.73
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.64
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Car
+           constellation_full_name: Carina
+       constellation_name_genitive: Carinae
+              constellation_number: 34
+             right_ascension_hours: 6
+           right_ascension_minutes: 24
+           right_ascension_seconds: 21.8
+     right_ascension_decimal_hours: 6.40606
+   right_ascension_decimal_degrees: 96.0909
+               declination_degrees: -52
+               declination_minutes: 42
+               declination_seconds: 23
+       declination_decimal_degrees: -52.7064
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 37. row ***************************
+                       common_name: $\upsilon$ Carin{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: upsilon
+bayer_designation_greek_letter_tex: $\upsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 3890
+    approx_rank_apparent_magnitude: 160
+                apparent_magnitude: 2.92
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.56
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Car
+           constellation_full_name: Carina
+       constellation_name_genitive: Carinae
+              constellation_number: 34
+             right_ascension_hours: 9
+           right_ascension_minutes: 47
+           right_ascension_seconds: 33.8
+     right_ascension_decimal_hours: 9.79272
+   right_ascension_decimal_degrees: 146.891
+               declination_degrees: -65
+               declination_minutes: 9
+               declination_seconds: 29
+       declination_decimal_degrees: -65.1581
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 38. row ***************************
+                       common_name: $\theta$ Carin{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: theta
+bayer_designation_greek_letter_tex: $\theta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4199
+    approx_rank_apparent_magnitude: 121
+                apparent_magnitude: 2.74
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.91
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Car
+           constellation_full_name: Carina
+       constellation_name_genitive: Carinae
+              constellation_number: 34
+             right_ascension_hours: 10
+           right_ascension_minutes: 43
+           right_ascension_seconds: 37.3
+     right_ascension_decimal_hours: 10.727
+   right_ascension_decimal_degrees: 160.905
+               declination_degrees: -64
+               declination_minutes: 29
+               declination_seconds: 30
+       declination_decimal_degrees: -64.4917
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 39. row ***************************
+                       common_name: Avior
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 3307
+    approx_rank_apparent_magnitude: 40
+                apparent_magnitude: 1.87
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.57
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Car
+           constellation_full_name: Carina
+       constellation_name_genitive: Carinae
+              constellation_number: 34
+             right_ascension_hours: 8
+           right_ascension_minutes: 22
+           right_ascension_seconds: 53.5
+     right_ascension_decimal_hours: 8.38153
+   right_ascension_decimal_degrees: 125.723
+               declination_degrees: -59
+               declination_minutes: 34
+               declination_seconds: 10
+       declination_decimal_degrees: -59.5694
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 40. row ***************************
+                       common_name: Miaplacidus
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 3685
+    approx_rank_apparent_magnitude: 28
+                apparent_magnitude: 1.67
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.99
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Car
+           constellation_full_name: Carina
+       constellation_name_genitive: Carinae
+              constellation_number: 34
+             right_ascension_hours: 9
+           right_ascension_minutes: 13
+           right_ascension_seconds: 23.7
+     right_ascension_decimal_hours: 9.22325
+   right_ascension_decimal_degrees: 138.349
+               declination_degrees: -69
+               declination_minutes: 47
+               declination_seconds: 37
+       declination_decimal_degrees: -69.7936
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 41. row ***************************
+                       common_name: Caph
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 11
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 21
+    approx_rank_apparent_magnitude: 74
+                apparent_magnitude: 2.28
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.17
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cas
+           constellation_full_name: Cassiopeia
+       constellation_name_genitive: Cassiopeiae
+              constellation_number: 25
+             right_ascension_hours: 0
+           right_ascension_minutes: 10
+           right_ascension_seconds: 10.6
+     right_ascension_decimal_hours: 0.169611
+   right_ascension_decimal_degrees: 2.54417
+               declination_degrees: 59
+               declination_minutes: 15
+               declination_seconds: 0
+       declination_decimal_degrees: 59.25
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 42. row ***************************
+                       common_name: Cih
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 27
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 264
+    approx_rank_apparent_magnitude: 63
+                apparent_magnitude: 2.15
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -4.22
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cas
+           constellation_full_name: Cassiopeia
+       constellation_name_genitive: Cassiopeiae
+              constellation_number: 25
+             right_ascension_hours: 0
+           right_ascension_minutes: 57
+           right_ascension_seconds: 50.4
+     right_ascension_decimal_hours: 0.964
+   right_ascension_decimal_degrees: 14.46
+               declination_degrees: 60
+               declination_minutes: 48
+               declination_seconds: 5
+       declination_decimal_degrees: 60.8014
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 43. row ***************************
+                       common_name: Schedar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 18
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 168
+    approx_rank_apparent_magnitude: 71
+                apparent_magnitude: 2.24
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.99
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cas
+           constellation_full_name: Cassiopeia
+       constellation_name_genitive: Cassiopeiae
+              constellation_number: 25
+             right_ascension_hours: 0
+           right_ascension_minutes: 41
+           right_ascension_seconds: 34.1
+     right_ascension_decimal_hours: 0.692806
+   right_ascension_decimal_degrees: 10.3921
+               declination_degrees: 56
+               declination_minutes: 38
+               declination_seconds: 1
+       declination_decimal_degrees: 56.6336
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 44. row ***************************
+                       common_name: Ruchbah
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 37
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 403
+    approx_rank_apparent_magnitude: 109
+                apparent_magnitude: 2.66
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.24
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cas
+           constellation_full_name: Cassiopeia
+       constellation_name_genitive: Cassiopeiae
+              constellation_number: 25
+             right_ascension_hours: 1
+           right_ascension_minutes: 27
+           right_ascension_seconds: 2.5
+     right_ascension_decimal_hours: 1.45069
+   right_ascension_decimal_degrees: 21.7604
+               declination_degrees: 60
+               declination_minutes: 19
+               declination_seconds: 5
+       declination_decimal_degrees: 60.3181
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 45. row ***************************
+                       common_name: Muhlifain
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 4819
+    approx_rank_apparent_magnitude: 64
+                apparent_magnitude: 2.2
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.81
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 12
+           right_ascension_minutes: 42
+           right_ascension_seconds: 32.8
+     right_ascension_decimal_hours: 12.7091
+   right_ascension_decimal_degrees: 190.636
+               declination_degrees: -49
+               declination_minutes: 3
+               declination_seconds: 40
+       declination_decimal_degrees: -49.0611
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 46. row ***************************
+                       common_name: $\iota$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: iota
+bayer_designation_greek_letter_tex: $\iota$
+       bayer_designation_extension: 
+                      bs_hr_number: 5028
+    approx_rank_apparent_magnitude: 124
+                apparent_magnitude: 2.75
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.48
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 13
+           right_ascension_minutes: 21
+           right_ascension_seconds: 38.6
+     right_ascension_decimal_hours: 13.3607
+   right_ascension_decimal_degrees: 200.41
+               declination_degrees: -36
+               declination_minutes: 48
+               declination_seconds: 34
+       declination_decimal_degrees: -36.8094
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 47. row ***************************
+                       common_name: $\epsilon$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 5132
+    approx_rank_apparent_magnitude: 75
+                apparent_magnitude: 2.29
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.02
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 13
+           right_ascension_minutes: 41
+           right_ascension_seconds: 4.3
+     right_ascension_decimal_hours: 13.6845
+   right_ascension_decimal_degrees: 205.268
+               declination_degrees: -53
+               declination_minutes: 33
+               declination_seconds: 35
+       declination_decimal_degrees: -53.5597
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 48. row ***************************
+                       common_name: $\zeta$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5231
+    approx_rank_apparent_magnitude: 95
+                apparent_magnitude: 2.55
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.81
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 13
+           right_ascension_minutes: 56
+           right_ascension_seconds: 42.2
+     right_ascension_decimal_hours: 13.9451
+   right_ascension_decimal_degrees: 209.176
+               declination_degrees: -47
+               declination_minutes: 22
+               declination_seconds: 43
+       declination_decimal_degrees: -47.3786
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 49. row ***************************
+                       common_name: $\alpha$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: AB
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 3
+                apparent_magnitude: -0.29
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 4.06
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 14
+           right_ascension_minutes: 39
+           right_ascension_seconds: 35.0631
+     right_ascension_decimal_hours: 14.6597
+   right_ascension_decimal_degrees: 219.896
+               declination_degrees: -60
+               declination_minutes: 50
+               declination_seconds: 15.0992
+       declination_decimal_degrees: -60.8375
+                         is_binary: 0
+                       is_multiple: 3
+               is_binary_component: 1
+               is_eclipsing_binary: 0
+                             notes: alpha Centauri is a triple star system.  The two brightest stars, A and B, are a binary component of the system.  For purposes of plotting on a spherical biangle for a paper model of a celestial sphere, this entry uses the celestial coordinates of the brighter star, alpha Centauri A.
+*************************** 50. row ***************************
+                       common_name: Hadar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5267
+    approx_rank_apparent_magnitude: 11
+                apparent_magnitude: 0.61
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.42
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 14
+           right_ascension_minutes: 5
+           right_ascension_seconds: 8.7
+     right_ascension_decimal_hours: 14.0857
+   right_ascension_decimal_degrees: 211.286
+               declination_degrees: -60
+               declination_minutes: 27
+               declination_seconds: 41
+       declination_decimal_degrees: -60.4614
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 51. row ***************************
+                       common_name: Menkent
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 5
+    bayer_designation_greek_letter: theta
+bayer_designation_greek_letter_tex: $\theta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5288
+    approx_rank_apparent_magnitude: 53
+                apparent_magnitude: 2.06
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.7
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 14
+           right_ascension_minutes: 7
+           right_ascension_seconds: 46.7
+     right_ascension_decimal_hours: 14.1296
+   right_ascension_decimal_degrees: 211.944
+               declination_degrees: -36
+               declination_minutes: 27
+               declination_seconds: 3
+       declination_decimal_degrees: -36.4508
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 52. row ***************************
+                       common_name: $\eta$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5440
+    approx_rank_apparent_magnitude: 79
+                apparent_magnitude: 2.33
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -2.55
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 14
+           right_ascension_minutes: 36
+           right_ascension_seconds: 41.4
+     right_ascension_decimal_hours: 14.6115
+   right_ascension_decimal_degrees: 219.173
+               declination_degrees: -42
+               declination_minutes: 14
+               declination_seconds: 17
+       declination_decimal_degrees: -42.2381
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 53. row ***************************
+                       common_name: $\lambda$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: lambda
+bayer_designation_greek_letter_tex: $\lambda$
+       bayer_designation_extension: 
+                      bs_hr_number: 4467
+    approx_rank_apparent_magnitude: 191
+                apparent_magnitude: 3.11
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.39
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 11
+           right_ascension_minutes: 36
+           right_ascension_seconds: 38.6
+     right_ascension_decimal_hours: 11.6107
+   right_ascension_decimal_degrees: 174.16
+               declination_degrees: -63
+               declination_minutes: 7
+               declination_seconds: 20
+       declination_decimal_degrees: -63.1222
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 54. row ***************************
+                       common_name: Ke Kwan
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: kappa
+bayer_designation_greek_letter_tex: $\kappa$
+       bayer_designation_extension: 
+                      bs_hr_number: 5576
+    approx_rank_apparent_magnitude: 197
+                apparent_magnitude: 3.13
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.96
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 15
+           right_ascension_minutes: 0
+           right_ascension_seconds: 22.3
+     right_ascension_decimal_hours: 15.0062
+   right_ascension_decimal_degrees: 225.093
+               declination_degrees: -42
+               declination_minutes: 10
+               declination_seconds: 38
+       declination_decimal_degrees: -42.1772
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 55. row ***************************
+                       common_name: $\delta$ Centauri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4621
+    approx_rank_apparent_magnitude: 99
+                apparent_magnitude: 2.58
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -2.84
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cen
+           constellation_full_name: Centaurus
+       constellation_name_genitive: Centauri
+              constellation_number: 9
+             right_ascension_hours: 12
+           right_ascension_minutes: 9
+           right_ascension_seconds: 19.5
+     right_ascension_decimal_hours: 12.1554
+   right_ascension_decimal_degrees: 182.331
+               declination_degrees: -50
+               declination_minutes: 49
+               declination_seconds: 31
+       declination_decimal_degrees: -50.8253
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 56. row ***************************
+                       common_name: Alderamin
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 5
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 8162
+    approx_rank_apparent_magnitude: 89
+                apparent_magnitude: 2.45
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.58
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cep
+           constellation_full_name: Cepheus
+       constellation_name_genitive: Cephei
+              constellation_number: 27
+             right_ascension_hours: 21
+           right_ascension_minutes: 19
+           right_ascension_seconds: 1.2
+     right_ascension_decimal_hours: 21.317
+   right_ascension_decimal_degrees: 319.755
+               declination_degrees: 62
+               declination_minutes: 39
+               declination_seconds: 5
+       declination_decimal_degrees: 62.6514
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 57. row ***************************
+                       common_name: Diphda
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 16
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 188
+    approx_rank_apparent_magnitude: 51
+                apparent_magnitude: 2.04
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.3
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cet
+           constellation_full_name: Cetus
+       constellation_name_genitive: Ceti
+              constellation_number: 4
+             right_ascension_hours: 0
+           right_ascension_minutes: 44
+           right_ascension_seconds: 31
+     right_ascension_decimal_hours: 0.741944
+   right_ascension_decimal_degrees: 11.1292
+               declination_degrees: -17
+               declination_minutes: 53
+               declination_seconds: 0
+       declination_decimal_degrees: -17.8833
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 58. row ***************************
+                       common_name: Menkar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 92
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 911
+    approx_rank_apparent_magnitude: 93
+                apparent_magnitude: 2.54
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.61
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cet
+           constellation_full_name: Cetus
+       constellation_name_genitive: Ceti
+              constellation_number: 4
+             right_ascension_hours: 3
+           right_ascension_minutes: 3
+           right_ascension_seconds: 14.9
+     right_ascension_decimal_hours: 3.05414
+   right_ascension_decimal_degrees: 45.8121
+               declination_degrees: 4
+               declination_minutes: 9
+               declination_seconds: 4
+       declination_decimal_degrees: 4.15111
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 59. row ***************************
+                       common_name: Phact
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 1956
+    approx_rank_apparent_magnitude: 106
+                apparent_magnitude: 2.65
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.93
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Col
+           constellation_full_name: Columba
+       constellation_name_genitive: Columbae
+              constellation_number: 54
+             right_ascension_hours: 5
+           right_ascension_minutes: 40
+           right_ascension_seconds: 19.2
+     right_ascension_decimal_hours: 5.672
+   right_ascension_decimal_degrees: 85.08
+               declination_degrees: -34
+               declination_minutes: 3
+               declination_seconds: 55
+       declination_decimal_degrees: -34.0653
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 60. row ***************************
+                       common_name: Wazn
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2040
+    approx_rank_apparent_magnitude: 193
+                apparent_magnitude: 3.12
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.02
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Col
+           constellation_full_name: Columba
+       constellation_name_genitive: Columbae
+              constellation_number: 54
+             right_ascension_hours: 5
+           right_ascension_minutes: 51
+           right_ascension_seconds: 36.8
+     right_ascension_decimal_hours: 5.86022
+   right_ascension_decimal_degrees: 87.9033
+               declination_degrees: -35
+               declination_minutes: 45
+               declination_seconds: 44
+       declination_decimal_degrees: -35.7622
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 61. row ***************************
+                       common_name: Alphecca
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 5
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 5793
+    approx_rank_apparent_magnitude: 67
+                apparent_magnitude: 2.22
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.42
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: CrB
+           constellation_full_name: Corona Borealis
+       constellation_name_genitive: Coronae Borealis
+              constellation_number: 73
+             right_ascension_hours: 15
+           right_ascension_minutes: 35
+           right_ascension_seconds: 28.3
+     right_ascension_decimal_hours: 15.5912
+   right_ascension_decimal_degrees: 233.868
+               declination_degrees: 26
+               declination_minutes: 39
+               declination_seconds: 1
+       declination_decimal_degrees: 26.6503
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 1
+                             notes: 
+*************************** 62. row ***************************
+                       common_name: Minkar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 2
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 4630
+    approx_rank_apparent_magnitude: 180
+                apparent_magnitude: 3.02
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.82
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Crv
+           constellation_full_name: Corvus
+       constellation_name_genitive: Corvi
+              constellation_number: 70
+             right_ascension_hours: 12
+           right_ascension_minutes: 11
+           right_ascension_seconds: 4.7
+     right_ascension_decimal_hours: 12.1846
+   right_ascension_decimal_degrees: 182.769
+               declination_degrees: -22
+               declination_minutes: 43
+               declination_seconds: 2
+       declination_decimal_degrees: -22.7172
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 63. row ***************************
+                       common_name: Gienah Ghurab
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 4
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 4662
+    approx_rank_apparent_magnitude: 100
+                apparent_magnitude: 2.58
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.94
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Crv
+           constellation_full_name: Corvus
+       constellation_name_genitive: Corvi
+              constellation_number: 70
+             right_ascension_hours: 12
+           right_ascension_minutes: 16
+           right_ascension_seconds: 45.6
+     right_ascension_decimal_hours: 12.2793
+   right_ascension_decimal_degrees: 184.189
+               declination_degrees: -17
+               declination_minutes: 38
+               declination_seconds: 4
+       declination_decimal_degrees: -17.6344
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 64. row ***************************
+                       common_name: Algorel
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 7
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4757
+    approx_rank_apparent_magnitude: 163
+                apparent_magnitude: 2.94
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.79
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Crv
+           constellation_full_name: Corvus
+       constellation_name_genitive: Corvi
+              constellation_number: 70
+             right_ascension_hours: 12
+           right_ascension_minutes: 30
+           right_ascension_seconds: 49.4
+     right_ascension_decimal_hours: 12.5137
+   right_ascension_decimal_degrees: 187.705
+               declination_degrees: -16
+               declination_minutes: 37
+               declination_seconds: 0
+       declination_decimal_degrees: -16.6167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 65. row ***************************
+                       common_name: Kraz
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 9
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4786
+    approx_rank_apparent_magnitude: 108
+                apparent_magnitude: 2.65
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.51
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Crv
+           constellation_full_name: Corvus
+       constellation_name_genitive: Corvi
+              constellation_number: 70
+             right_ascension_hours: 12
+           right_ascension_minutes: 35
+           right_ascension_seconds: 21.7
+     right_ascension_decimal_hours: 12.5894
+   right_ascension_decimal_degrees: 188.841
+               declination_degrees: -23
+               declination_minutes: 29
+               declination_seconds: 5
+       declination_decimal_degrees: -23.4847
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 66. row ***************************
+                       common_name: $\delta$ Crucis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4656
+    approx_rank_apparent_magnitude: 128
+                apparent_magnitude: 2.79
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.45
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cru
+           constellation_full_name: Crux
+       constellation_name_genitive: Crucis
+              constellation_number: 88
+             right_ascension_hours: 12
+           right_ascension_minutes: 16
+           right_ascension_seconds: 8.3
+     right_ascension_decimal_hours: 12.269
+   right_ascension_decimal_degrees: 184.035
+               declination_degrees: -58
+               declination_minutes: 51
+               declination_seconds: 6
+       declination_decimal_degrees: -58.8517
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 67. row ***************************
+                       common_name: Gacrux
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 4763
+    approx_rank_apparent_magnitude: 25
+                apparent_magnitude: 1.63
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.52
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cru
+           constellation_full_name: Crux
+       constellation_name_genitive: Crucis
+              constellation_number: 88
+             right_ascension_hours: 12
+           right_ascension_minutes: 32
+           right_ascension_seconds: 12.2
+     right_ascension_decimal_hours: 12.5367
+   right_ascension_decimal_degrees: 188.051
+               declination_degrees: -57
+               declination_minutes: 13
+               declination_seconds: 0
+       declination_decimal_degrees: -57.2167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 68. row ***************************
+                       common_name: Acrux
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 13
+                apparent_magnitude: 0.79
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.17
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cru
+           constellation_full_name: Crux
+       constellation_name_genitive: Crucis
+              constellation_number: 88
+             right_ascension_hours: 12
+           right_ascension_minutes: 26
+           right_ascension_seconds: 35.8952
+     right_ascension_decimal_hours: 12.4433
+   right_ascension_decimal_degrees: 186.65
+               declination_degrees: -63
+               declination_minutes: 5
+               declination_seconds: 56.734
+       declination_decimal_degrees: -63.0991
+                         is_binary: 0
+                       is_multiple: 6
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 69. row ***************************
+                       common_name: Mimosa
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4853
+    approx_rank_apparent_magnitude: 20
+                apparent_magnitude: 1.26
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.91
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cru
+           constellation_full_name: Crux
+       constellation_name_genitive: Crucis
+              constellation_number: 88
+             right_ascension_hours: 12
+           right_ascension_minutes: 48
+           right_ascension_seconds: 48.9
+     right_ascension_decimal_hours: 12.8136
+   right_ascension_decimal_degrees: 192.204
+               declination_degrees: -59
+               declination_minutes: 47
+               declination_seconds: 22
+       declination_decimal_degrees: -59.7894
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 70. row ***************************
+                       common_name: Albireo
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 6
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 7417
+    approx_rank_apparent_magnitude: 157
+                apparent_magnitude: 2.9
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.31
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cyg
+           constellation_full_name: Cygnus
+       constellation_name_genitive: Cygni
+              constellation_number: 16
+             right_ascension_hours: 19
+           right_ascension_minutes: 31
+           right_ascension_seconds: 28.1
+     right_ascension_decimal_hours: 19.5245
+   right_ascension_decimal_degrees: 292.867
+               declination_degrees: 27
+               declination_minutes: 59
+               declination_seconds: 5
+       declination_decimal_degrees: 27.9847
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 71. row ***************************
+                       common_name: $\delta$ Cygni
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 18
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 7528
+    approx_rank_apparent_magnitude: 147
+                apparent_magnitude: 2.86
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.74
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cyg
+           constellation_full_name: Cygnus
+       constellation_name_genitive: Cygni
+              constellation_number: 16
+             right_ascension_hours: 19
+           right_ascension_minutes: 45
+           right_ascension_seconds: 33.2
+     right_ascension_decimal_hours: 19.7592
+   right_ascension_decimal_degrees: 296.388
+               declination_degrees: 45
+               declination_minutes: 10
+               declination_seconds: 3
+       declination_decimal_degrees: 45.1675
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 72. row ***************************
+                       common_name: Sadr
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 37
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 7796
+    approx_rank_apparent_magnitude: 70
+                apparent_magnitude: 2.23
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -6.12
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cyg
+           constellation_full_name: Cygnus
+       constellation_name_genitive: Cygni
+              constellation_number: 16
+             right_ascension_hours: 20
+           right_ascension_minutes: 22
+           right_ascension_seconds: 53.6
+     right_ascension_decimal_hours: 20.3816
+   right_ascension_decimal_degrees: 305.724
+               declination_degrees: 40
+               declination_minutes: 19
+               declination_seconds: 0
+       declination_decimal_degrees: 40.3167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 73. row ***************************
+                       common_name: Deneb
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 50
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 7924
+    approx_rank_apparent_magnitude: 19
+                apparent_magnitude: 1.24
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -8.74
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cyg
+           constellation_full_name: Cygnus
+       constellation_name_genitive: Cygni
+              constellation_number: 16
+             right_ascension_hours: 20
+           right_ascension_minutes: 42
+           right_ascension_seconds: 3.8
+     right_ascension_decimal_hours: 20.7011
+   right_ascension_decimal_degrees: 310.516
+               declination_degrees: 45
+               declination_minutes: 20
+               declination_seconds: 5
+       declination_decimal_degrees: 45.3347
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 74. row ***************************
+                       common_name: Gienah
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 53
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 7949
+    approx_rank_apparent_magnitude: 91
+                apparent_magnitude: 2.48
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.76
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Cyg
+           constellation_full_name: Cygnus
+       constellation_name_genitive: Cygni
+              constellation_number: 16
+             right_ascension_hours: 20
+           right_ascension_minutes: 46
+           right_ascension_seconds: 57.6
+     right_ascension_decimal_hours: 20.7827
+   right_ascension_decimal_degrees: 311.74
+               declination_degrees: 34
+               declination_minutes: 2
+               declination_seconds: 2
+       declination_decimal_degrees: 34.0339
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 75. row ***************************
+                       common_name: Eltanin
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 33
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 6705
+    approx_rank_apparent_magnitude: 72
+                apparent_magnitude: 2.24
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.04
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Dra
+           constellation_full_name: Draco
+       constellation_name_genitive: Draconis
+              constellation_number: 8
+             right_ascension_hours: 17
+           right_ascension_minutes: 57
+           right_ascension_seconds: 2.2
+     right_ascension_decimal_hours: 17.9506
+   right_ascension_decimal_degrees: 269.259
+               declination_degrees: 51
+               declination_minutes: 29
+               declination_seconds: 1
+       declination_decimal_degrees: 51.4836
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 76. row ***************************
+                       common_name: Rastaban
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 23
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6536
+    approx_rank_apparent_magnitude: 129
+                apparent_magnitude: 2.79
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.43
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Dra
+           constellation_full_name: Draco
+       constellation_name_genitive: Draconis
+              constellation_number: 8
+             right_ascension_hours: 17
+           right_ascension_minutes: 30
+           right_ascension_seconds: 51.1
+     right_ascension_decimal_hours: 17.5142
+   right_ascension_decimal_degrees: 262.713
+               declination_degrees: 52
+               declination_minutes: 17
+               declination_seconds: 1
+       declination_decimal_degrees: 52.2836
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 77. row ***************************
+                       common_name: Tais
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 57
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 7310
+    approx_rank_apparent_magnitude: 187
+                apparent_magnitude: 3.07
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.63
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Dra
+           constellation_full_name: Draco
+       constellation_name_genitive: Draconis
+              constellation_number: 8
+             right_ascension_hours: 19
+           right_ascension_minutes: 12
+           right_ascension_seconds: 33.3
+     right_ascension_decimal_hours: 19.2092
+   right_ascension_decimal_degrees: 288.138
+               declination_degrees: 67
+               declination_minutes: 41
+               declination_seconds: 3
+       declination_decimal_degrees: 67.6842
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 78. row ***************************
+                       common_name: Aldhibain
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 14
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6132
+    approx_rank_apparent_magnitude: 120
+                apparent_magnitude: 2.73
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.58
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Dra
+           constellation_full_name: Draco
+       constellation_name_genitive: Draconis
+              constellation_number: 8
+             right_ascension_hours: 16
+           right_ascension_minutes: 24
+           right_ascension_seconds: 14.7
+     right_ascension_decimal_hours: 16.4041
+   right_ascension_decimal_degrees: 246.062
+               declination_degrees: 61
+               declination_minutes: 28
+               declination_seconds: 2
+       declination_decimal_degrees: 61.4672
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 79. row ***************************
+                       common_name: Acamar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: theta^1
+bayer_designation_greek_letter_tex: $\theta^1$
+       bayer_designation_extension: 
+                      bs_hr_number: 897
+    approx_rank_apparent_magnitude: 151
+                apparent_magnitude: 2.88
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.59
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Eri
+           constellation_full_name: Eridanus
+       constellation_name_genitive: Eridani
+              constellation_number: 6
+             right_ascension_hours: 2
+           right_ascension_minutes: 58
+           right_ascension_seconds: 15.6792
+     right_ascension_decimal_hours: 2.97102
+   right_ascension_decimal_degrees: 44.5653
+               declination_degrees: -40
+               declination_minutes: 18
+               declination_seconds: 16.8457
+       declination_decimal_degrees: -40.3047
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 1
+               is_eclipsing_binary: 0
+                             notes: Apparent magnitude and absolute magnitude may be those of the system rather than the single component theta^1 Eridani.
+*************************** 80. row ***************************
+                       common_name: Zaurak
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 1231
+    approx_rank_apparent_magnitude: 165
+                apparent_magnitude: 2.97
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.19
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Eri
+           constellation_full_name: Eridanus
+       constellation_name_genitive: Eridani
+              constellation_number: 6
+             right_ascension_hours: 3
+           right_ascension_minutes: 58
+           right_ascension_seconds: 53.6
+     right_ascension_decimal_hours: 3.98156
+   right_ascension_decimal_degrees: 59.7234
+               declination_degrees: -13
+               declination_minutes: 27
+               declination_seconds: 2
+       declination_decimal_degrees: -13.4506
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 81. row ***************************
+                       common_name: Kursa
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 67
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1666
+    approx_rank_apparent_magnitude: 126
+                apparent_magnitude: 2.78
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.6
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Eri
+           constellation_full_name: Eridanus
+       constellation_name_genitive: Eridani
+              constellation_number: 6
+             right_ascension_hours: 5
+           right_ascension_minutes: 8
+           right_ascension_seconds: 45.6
+     right_ascension_decimal_hours: 5.146
+   right_ascension_decimal_degrees: 77.19
+               declination_degrees: -5
+               declination_minutes: 3
+               declination_seconds: 5
+       declination_decimal_degrees: -5.05139
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 82. row ***************************
+                       common_name: Achernar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 472
+    approx_rank_apparent_magnitude: 9
+                apparent_magnitude: 0.45
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.77
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Eri
+           constellation_full_name: Eridanus
+       constellation_name_genitive: Eridani
+              constellation_number: 6
+             right_ascension_hours: 1
+           right_ascension_minutes: 38
+           right_ascension_seconds: 24
+     right_ascension_decimal_hours: 1.64
+   right_ascension_decimal_degrees: 24.6
+               declination_degrees: -57
+               declination_minutes: 8
+               declination_seconds: 36
+       declination_decimal_degrees: -57.1433
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 83. row ***************************
+                       common_name: Castor
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 23
+                apparent_magnitude: 1.58
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.59
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gem
+           constellation_full_name: Gemini
+       constellation_name_genitive: Geminorum
+              constellation_number: 30
+             right_ascension_hours: 7
+           right_ascension_minutes: 34
+           right_ascension_seconds: 35.863
+     right_ascension_decimal_hours: 7.57663
+   right_ascension_decimal_degrees: 113.649
+               declination_degrees: 31
+               declination_minutes: 53
+               declination_seconds: 17.79
+       declination_decimal_degrees: 31.8883
+                         is_binary: 0
+                       is_multiple: 6
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 84. row ***************************
+                       common_name: Pollux
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 78
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 2990
+    approx_rank_apparent_magnitude: 17
+                apparent_magnitude: 1.14
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.07
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gem
+           constellation_full_name: Gemini
+       constellation_name_genitive: Geminorum
+              constellation_number: 30
+             right_ascension_hours: 7
+           right_ascension_minutes: 46
+           right_ascension_seconds: 26.7
+     right_ascension_decimal_hours: 7.77408
+   right_ascension_decimal_degrees: 116.611
+               declination_degrees: 27
+               declination_minutes: 58
+               declination_seconds: 4
+       declination_decimal_degrees: 27.9678
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 85. row ***************************
+                       common_name: Mebsuta
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 27
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 2473
+    approx_rank_apparent_magnitude: 185
+                apparent_magnitude: 3.06
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.15
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gem
+           constellation_full_name: Gemini
+       constellation_name_genitive: Geminorum
+              constellation_number: 30
+             right_ascension_hours: 6
+           right_ascension_minutes: 45
+           right_ascension_seconds: 4.2
+     right_ascension_decimal_hours: 6.75117
+   right_ascension_decimal_degrees: 101.268
+               declination_degrees: 25
+               declination_minutes: 6
+               declination_seconds: 4
+       declination_decimal_degrees: 25.1011
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 86. row ***************************
+                       common_name: Alhena
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 24
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 2421
+    approx_rank_apparent_magnitude: 43
+                apparent_magnitude: 1.93
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.6
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gem
+           constellation_full_name: Gemini
+       constellation_name_genitive: Geminorum
+              constellation_number: 30
+             right_ascension_hours: 6
+           right_ascension_minutes: 38
+           right_ascension_seconds: 46.8
+     right_ascension_decimal_hours: 6.64633
+   right_ascension_decimal_degrees: 99.6949
+               declination_degrees: 16
+               declination_minutes: 22
+               declination_seconds: 5
+       declination_decimal_degrees: 16.3681
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 87. row ***************************
+                       common_name: Tejat
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 13
+    bayer_designation_greek_letter: mu
+bayer_designation_greek_letter_tex: $\mu$
+       bayer_designation_extension: 
+                      bs_hr_number: 2286
+    approx_rank_apparent_magnitude: 148
+                apparent_magnitude: 2.87
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -1.39
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: Gem
+           constellation_full_name: Gemini
+       constellation_name_genitive: Geminorum
+              constellation_number: 30
+             right_ascension_hours: 6
+           right_ascension_minutes: 24
+           right_ascension_seconds: 4.8
+     right_ascension_decimal_hours: 6.40133
+   right_ascension_decimal_degrees: 96.02
+               declination_degrees: 22
+               declination_minutes: 30
+               declination_seconds: 0
+       declination_decimal_degrees: 22.5
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 88. row ***************************
+                       common_name: Alnair
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 8425
+    approx_rank_apparent_magnitude: 30
+                apparent_magnitude: 1.74
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.72
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gru
+           constellation_full_name: Grus
+       constellation_name_genitive: Gruis
+              constellation_number: 45
+             right_ascension_hours: 22
+           right_ascension_minutes: 9
+           right_ascension_seconds: 23.4
+     right_ascension_decimal_hours: 22.1565
+   right_ascension_decimal_degrees: 332.348
+               declination_degrees: -46
+               declination_minutes: 52
+               declination_seconds: 14
+       declination_decimal_degrees: -46.8706
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 89. row ***************************
+                       common_name: Al Dhanab
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 8636
+    approx_rank_apparent_magnitude: 58
+                apparent_magnitude: 2.07
+         apparent_magnitude_varies: 1
+                absolute_magnitude: 1.52
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gru
+           constellation_full_name: Grus
+       constellation_name_genitive: Gruis
+              constellation_number: 45
+             right_ascension_hours: 22
+           right_ascension_minutes: 43
+           right_ascension_seconds: 45.8
+     right_ascension_decimal_hours: 22.7294
+   right_ascension_decimal_degrees: 340.941
+               declination_degrees: -46
+               declination_minutes: 47
+               declination_seconds: 14
+       declination_decimal_degrees: -46.7872
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 90. row ***************************
+                       common_name: $\gamma$ Gruis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 8353
+    approx_rank_apparent_magnitude: 176
+                apparent_magnitude: 3
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.97
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Gru
+           constellation_full_name: Grus
+       constellation_name_genitive: Gruis
+              constellation_number: 45
+             right_ascension_hours: 21
+           right_ascension_minutes: 55
+           right_ascension_seconds: 2.6
+     right_ascension_decimal_hours: 21.9174
+   right_ascension_decimal_degrees: 328.761
+               declination_degrees: -37
+               declination_minutes: 16
+               declination_seconds: 37
+       declination_decimal_degrees: -37.2769
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 91. row ***************************
+                       common_name: Kornephoros
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 27
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6148
+    approx_rank_apparent_magnitude: 127
+                apparent_magnitude: 2.78
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.5
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Her
+           constellation_full_name: Hercules
+       constellation_name_genitive: Herculis
+              constellation_number: 5
+             right_ascension_hours: 16
+           right_ascension_minutes: 31
+           right_ascension_seconds: 1
+     right_ascension_decimal_hours: 16.5169
+   right_ascension_decimal_degrees: 247.753
+               declination_degrees: 21
+               declination_minutes: 27
+               declination_seconds: 0
+       declination_decimal_degrees: 21.45
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 92. row ***************************
+                       common_name: Rutilicus
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 40
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6212
+    approx_rank_apparent_magnitude: 133
+                apparent_magnitude: 2.81
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.64
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Her
+           constellation_full_name: Hercules
+       constellation_name_genitive: Herculis
+              constellation_number: 5
+             right_ascension_hours: 16
+           right_ascension_minutes: 41
+           right_ascension_seconds: 59.1
+     right_ascension_decimal_hours: 16.6998
+   right_ascension_decimal_degrees: 250.497
+               declination_degrees: 31
+               declination_minutes: 34
+               declination_seconds: 1
+       declination_decimal_degrees: 31.5669
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 93. row ***************************
+                       common_name: $\pi$ Herculis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 67
+    bayer_designation_greek_letter: pi
+bayer_designation_greek_letter_tex: $\pi$
+       bayer_designation_extension: 
+                      bs_hr_number: 6418
+    approx_rank_apparent_magnitude: 200
+                apparent_magnitude: 3.16
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.1
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Her
+           constellation_full_name: Hercules
+       constellation_name_genitive: Herculis
+              constellation_number: 5
+             right_ascension_hours: 17
+           right_ascension_minutes: 15
+           right_ascension_seconds: 41.5
+     right_ascension_decimal_hours: 17.2615
+   right_ascension_decimal_degrees: 258.922
+               declination_degrees: 36
+               declination_minutes: 47
+               declination_seconds: 2
+       declination_decimal_degrees: 36.7839
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 94. row ***************************
+                       common_name: Sarin
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 65
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6410
+    approx_rank_apparent_magnitude: 196
+                apparent_magnitude: 3.12
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.21
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Her
+           constellation_full_name: Hercules
+       constellation_name_genitive: Herculis
+              constellation_number: 5
+             right_ascension_hours: 17
+           right_ascension_minutes: 15
+           right_ascension_seconds: 47.5
+     right_ascension_decimal_hours: 17.2632
+   right_ascension_decimal_degrees: 258.948
+               declination_degrees: 24
+               declination_minutes: 49
+               declination_seconds: 0
+       declination_decimal_degrees: 24.8167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 95. row ***************************
+                       common_name: Alphard
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 30
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 3748
+    approx_rank_apparent_magnitude: 47
+                apparent_magnitude: 1.98
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.7
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Hya
+           constellation_full_name: Hydra
+       constellation_name_genitive: Hydrae
+              constellation_number: 1
+             right_ascension_hours: 9
+           right_ascension_minutes: 28
+           right_ascension_seconds: 29.8
+     right_ascension_decimal_hours: 9.47494
+   right_ascension_decimal_degrees: 142.124
+               declination_degrees: -8
+               declination_minutes: 44
+               declination_seconds: 2
+       declination_decimal_degrees: -8.73389
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 96. row ***************************
+                       common_name: $\zeta$ Hydr{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 16
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 3547
+    approx_rank_apparent_magnitude: 189
+                apparent_magnitude: 3.11
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.21
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Hya
+           constellation_full_name: Hydra
+       constellation_name_genitive: Hydrae
+              constellation_number: 1
+             right_ascension_hours: 8
+           right_ascension_minutes: 56
+           right_ascension_seconds: 22.2
+     right_ascension_decimal_hours: 8.9395
+   right_ascension_decimal_degrees: 134.092
+               declination_degrees: 5
+               declination_minutes: 52
+               declination_seconds: 2
+       declination_decimal_degrees: 5.86722
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 97. row ***************************
+                       common_name: $\gamma$ Hydr{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 46
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 5020
+    approx_rank_apparent_magnitude: 169
+                apparent_magnitude: 2.99
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.05
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Hya
+           constellation_full_name: Hydra
+       constellation_name_genitive: Hydrae
+              constellation_number: 1
+             right_ascension_hours: 13
+           right_ascension_minutes: 19
+           right_ascension_seconds: 55.9
+     right_ascension_decimal_hours: 13.3322
+   right_ascension_decimal_degrees: 199.983
+               declination_degrees: -23
+               declination_minutes: 16
+               declination_seconds: 0
+       declination_decimal_degrees: -23.2667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 98. row ***************************
+                       common_name: $\nu$ Hydr{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: nu
+bayer_designation_greek_letter_tex: $\nu$
+       bayer_designation_extension: 
+                      bs_hr_number: 4232
+    approx_rank_apparent_magnitude: 190
+                apparent_magnitude: 3.11
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.03
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Hya
+           constellation_full_name: Hydra
+       constellation_name_genitive: Hydrae
+              constellation_number: 1
+             right_ascension_hours: 10
+           right_ascension_minutes: 50
+           right_ascension_seconds: 32.3
+     right_ascension_decimal_hours: 10.8423
+   right_ascension_decimal_degrees: 162.635
+               declination_degrees: -16
+               declination_minutes: 17
+               declination_seconds: 27
+       declination_decimal_degrees: -16.2908
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 99. row ***************************
+                       common_name: $\alpha$ Hydri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 591
+    approx_rank_apparent_magnitude: 146
+                apparent_magnitude: 2.86
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.16
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Hyi
+           constellation_full_name: Hydrus
+       constellation_name_genitive: Hydri
+              constellation_number: 61
+             right_ascension_hours: 1
+           right_ascension_minutes: 59
+           right_ascension_seconds: 21.1
+     right_ascension_decimal_hours: 1.98919
+   right_ascension_decimal_degrees: 29.8379
+               declination_degrees: -61
+               declination_minutes: 28
+               declination_seconds: 49
+       declination_decimal_degrees: -61.4803
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 100. row ***************************
+                       common_name: $\beta$ Hydri
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 98
+    approx_rank_apparent_magnitude: 134
+                apparent_magnitude: 2.82
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 3.45
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Hyi
+           constellation_full_name: Hydrus
+       constellation_name_genitive: Hydri
+              constellation_number: 61
+             right_ascension_hours: 0
+           right_ascension_minutes: 26
+           right_ascension_seconds: 41.9
+     right_ascension_decimal_hours: 0.444972
+   right_ascension_decimal_degrees: 6.67458
+               declination_degrees: -77
+               declination_minutes: 9
+               declination_seconds: 1
+       declination_decimal_degrees: -77.1503
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 101. row ***************************
+                       common_name: Persian
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 7869
+    approx_rank_apparent_magnitude: 192
+                apparent_magnitude: 3.11
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.65
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ind
+           constellation_full_name: Indus
+       constellation_name_genitive: Indi
+              constellation_number: 49
+             right_ascension_hours: 20
+           right_ascension_minutes: 38
+           right_ascension_seconds: 51.6
+     right_ascension_decimal_hours: 20.6477
+   right_ascension_decimal_degrees: 309.715
+               declination_degrees: -47
+               declination_minutes: 13
+               declination_seconds: 32
+       declination_decimal_degrees: -47.2256
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 102. row ***************************
+                       common_name: Algieba
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 49
+                apparent_magnitude: 2
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.93
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Leo
+           constellation_full_name: Leo
+       constellation_name_genitive: Leonis
+              constellation_number: 12
+             right_ascension_hours: 10
+           right_ascension_minutes: 19
+           right_ascension_seconds: 58.3506
+     right_ascension_decimal_hours: 10.3329
+   right_ascension_decimal_degrees: 154.993
+               declination_degrees: 19
+               declination_minutes: 50
+               declination_seconds: 29.3468
+       declination_decimal_degrees: 19.8415
+                         is_binary: 1
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 103. row ***************************
+                       common_name: Regulus
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 32
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 3982
+    approx_rank_apparent_magnitude: 21
+                apparent_magnitude: 1.36
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.52
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Leo
+           constellation_full_name: Leo
+       constellation_name_genitive: Leonis
+              constellation_number: 12
+             right_ascension_hours: 10
+           right_ascension_minutes: 9
+           right_ascension_seconds: 21.3
+     right_ascension_decimal_hours: 10.1559
+   right_ascension_decimal_degrees: 152.339
+               declination_degrees: 11
+               declination_minutes: 52
+               declination_seconds: 3
+       declination_decimal_degrees: 11.8675
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 104. row ***************************
+                       common_name: Ras Elased Australis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 17
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 3873
+    approx_rank_apparent_magnitude: 167
+                apparent_magnitude: 2.97
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.46
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Leo
+           constellation_full_name: Leo
+       constellation_name_genitive: Leonis
+              constellation_number: 12
+             right_ascension_hours: 9
+           right_ascension_minutes: 46
+           right_ascension_seconds: 53.9
+     right_ascension_decimal_hours: 9.78164
+   right_ascension_decimal_degrees: 146.725
+               declination_degrees: 23
+               declination_minutes: 41
+               declination_seconds: 1
+       declination_decimal_degrees: 23.6836
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 105. row ***************************
+                       common_name: Denebola
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 94
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4534
+    approx_rank_apparent_magnitude: 62
+                apparent_magnitude: 2.14
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.92
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Leo
+           constellation_full_name: Leo
+       constellation_name_genitive: Leonis
+              constellation_number: 12
+             right_ascension_hours: 11
+           right_ascension_minutes: 50
+           right_ascension_seconds: 0.1
+     right_ascension_decimal_hours: 11.8334
+   right_ascension_decimal_degrees: 177.501
+               declination_degrees: 14
+               declination_minutes: 28
+               declination_seconds: 0
+       declination_decimal_degrees: 14.4667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 106. row ***************************
+                       common_name: Zosma
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 68
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4357
+    approx_rank_apparent_magnitude: 96
+                apparent_magnitude: 2.56
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.32
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Leo
+           constellation_full_name: Leo
+       constellation_name_genitive: Leonis
+              constellation_number: 12
+             right_ascension_hours: 11
+           right_ascension_minutes: 15
+           right_ascension_seconds: 5.4
+     right_ascension_decimal_hours: 11.2515
+   right_ascension_decimal_degrees: 168.773
+               declination_degrees: 20
+               declination_minutes: 25
+               declination_seconds: 1
+       declination_decimal_degrees: 20.4169
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 107. row ***************************
+                       common_name: Arneb
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 11
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 1865
+    approx_rank_apparent_magnitude: 98
+                apparent_magnitude: 2.58
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.4
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lep
+           constellation_full_name: Lepus
+       constellation_name_genitive: Leporis
+              constellation_number: 51
+             right_ascension_hours: 5
+           right_ascension_minutes: 33
+           right_ascension_seconds: 32.8
+     right_ascension_decimal_hours: 5.55911
+   right_ascension_decimal_degrees: 83.3867
+               declination_degrees: -17
+               declination_minutes: 48
+               declination_seconds: 3
+       declination_decimal_degrees: -17.8008
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 108. row ***************************
+                       common_name: Nihal
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 9
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1829
+    approx_rank_apparent_magnitude: 132
+                apparent_magnitude: 2.81
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.63
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lep
+           constellation_full_name: Lepus
+       constellation_name_genitive: Leporis
+              constellation_number: 51
+             right_ascension_hours: 5
+           right_ascension_minutes: 29
+           right_ascension_seconds: 2.3
+     right_ascension_decimal_hours: 5.48397
+   right_ascension_decimal_degrees: 82.2596
+               declination_degrees: -20
+               declination_minutes: 44
+               declination_seconds: 4
+       declination_decimal_degrees: -20.7344
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 109. row ***************************
+                       common_name: Zubeneschamali
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 27
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5685
+    approx_rank_apparent_magnitude: 102
+                apparent_magnitude: 2.61
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.84
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lib
+           constellation_full_name: Libra
+       constellation_name_genitive: Librae
+              constellation_number: 29
+             right_ascension_hours: 15
+           right_ascension_minutes: 18
+           right_ascension_seconds: 0.3
+     right_ascension_decimal_hours: 15.3001
+   right_ascension_decimal_degrees: 229.502
+               declination_degrees: -9
+               declination_minutes: 27
+               declination_seconds: 0
+       declination_decimal_degrees: -9.45
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 110. row ***************************
+                       common_name: Zubenelgenubi
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 9
+    bayer_designation_greek_letter: alpha^2
+bayer_designation_greek_letter_tex: $\alpha^2$
+       bayer_designation_extension: 
+                      bs_hr_number: 5531
+    approx_rank_apparent_magnitude: 105
+                apparent_magnitude: 2.64
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.77
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lib
+           constellation_full_name: Libra
+       constellation_name_genitive: Librae
+              constellation_number: 29
+             right_ascension_hours: 14
+           right_ascension_minutes: 50
+           right_ascension_seconds: 52.7131
+     right_ascension_decimal_hours: 14.8651
+   right_ascension_decimal_degrees: 222.977
+               declination_degrees: -16
+               declination_minutes: 2
+               declination_seconds: 30.3955
+       declination_decimal_degrees: -16.1167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 1
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 111. row ***************************
+                       common_name: $\gamma$ Lupi
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 5776
+    approx_rank_apparent_magnitude: 131
+                apparent_magnitude: 2.8
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.4
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lup
+           constellation_full_name: Lupus
+       constellation_name_genitive: Lupi
+              constellation_number: 46
+             right_ascension_hours: 15
+           right_ascension_minutes: 36
+           right_ascension_seconds: 22.8
+     right_ascension_decimal_hours: 15.6063
+   right_ascension_decimal_degrees: 234.095
+               declination_degrees: -41
+               declination_minutes: 13
+               declination_seconds: 39
+       declination_decimal_degrees: -41.2275
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 112. row ***************************
+                       common_name: Ke Kouan
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5571
+    approx_rank_apparent_magnitude: 111
+                apparent_magnitude: 2.68
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.35
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lup
+           constellation_full_name: Lupus
+       constellation_name_genitive: Lupi
+              constellation_number: 46
+             right_ascension_hours: 14
+           right_ascension_minutes: 59
+           right_ascension_seconds: 45.1
+     right_ascension_decimal_hours: 14.9959
+   right_ascension_decimal_degrees: 224.939
+               declination_degrees: -43
+               declination_minutes: 12
+               declination_seconds: 26
+       declination_decimal_degrees: -43.2072
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 113. row ***************************
+                       common_name: Men
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 5469
+    approx_rank_apparent_magnitude: 78
+                apparent_magnitude: 2.3
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.83
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lup
+           constellation_full_name: Lupus
+       constellation_name_genitive: Lupi
+              constellation_number: 46
+             right_ascension_hours: 14
+           right_ascension_minutes: 43
+           right_ascension_seconds: 10.1
+     right_ascension_decimal_hours: 14.7195
+   right_ascension_decimal_degrees: 220.792
+               declination_degrees: -47
+               declination_minutes: 27
+               declination_seconds: 59
+       declination_decimal_degrees: -47.4664
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 114. row ***************************
+                       common_name: $\alpha$ Lyncis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 40
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 3705
+    approx_rank_apparent_magnitude: 198
+                apparent_magnitude: 3.14
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.02
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lyn
+           constellation_full_name: Lynx
+       constellation_name_genitive: Lyncis
+              constellation_number: 28
+             right_ascension_hours: 9
+           right_ascension_minutes: 22
+           right_ascension_seconds: 10.6
+     right_ascension_decimal_hours: 9.36961
+   right_ascension_decimal_degrees: 140.544
+               declination_degrees: 34
+               declination_minutes: 18
+               declination_seconds: 4
+       declination_decimal_degrees: 34.3011
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 115. row ***************************
+                       common_name: Vega
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 3
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 7001
+    approx_rank_apparent_magnitude: 5
+                apparent_magnitude: 0.03
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.58
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Lyr
+           constellation_full_name: Lyra
+       constellation_name_genitive: Lyrae
+              constellation_number: 52
+             right_ascension_hours: 18
+           right_ascension_minutes: 37
+           right_ascension_seconds: 33.9
+     right_ascension_decimal_hours: 18.6261
+   right_ascension_decimal_degrees: 279.392
+               declination_degrees: 38
+               declination_minutes: 48
+               declination_seconds: 0
+       declination_decimal_degrees: 38.8
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 116. row ***************************
+                       common_name: $\beta$ Musc{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4844
+    approx_rank_apparent_magnitude: 182
+                apparent_magnitude: 3.04
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.86
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Mus
+           constellation_full_name: Musca
+       constellation_name_genitive: Muscae
+              constellation_number: 77
+             right_ascension_hours: 12
+           right_ascension_minutes: 47
+           right_ascension_seconds: 26.1
+     right_ascension_decimal_hours: 12.7906
+   right_ascension_decimal_degrees: 191.859
+               declination_degrees: -68
+               declination_minutes: 12
+               declination_seconds: 32
+       declination_decimal_degrees: -68.2089
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 117. row ***************************
+                       common_name: $\alpha$ Musc{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 4798
+    approx_rank_apparent_magnitude: 114
+                apparent_magnitude: 2.69
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.17
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Mus
+           constellation_full_name: Musca
+       constellation_name_genitive: Muscae
+              constellation_number: 77
+             right_ascension_hours: 12
+           right_ascension_minutes: 38
+           right_ascension_seconds: 18.4
+     right_ascension_decimal_hours: 12.6384
+   right_ascension_decimal_degrees: 189.576
+               declination_degrees: -69
+               declination_minutes: 14
+               declination_seconds: 14
+       declination_decimal_degrees: -69.2372
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 118. row ***************************
+                       common_name: Yed Prior
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 1
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6056
+    approx_rank_apparent_magnitude: 119
+                apparent_magnitude: 2.73
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.86
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Oph
+           constellation_full_name: Ophiuchus
+       constellation_name_genitive: Ophiuchi
+              constellation_number: 11
+             right_ascension_hours: 16
+           right_ascension_minutes: 15
+           right_ascension_seconds: 19
+     right_ascension_decimal_hours: 16.2553
+   right_ascension_decimal_degrees: 243.83
+               declination_degrees: -3
+               declination_minutes: 44
+               declination_seconds: 2
+       declination_decimal_degrees: -3.73389
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 119. row ***************************
+                       common_name: Cebalrai
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 60
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6603
+    approx_rank_apparent_magnitude: 125
+                apparent_magnitude: 2.76
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.76
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Oph
+           constellation_full_name: Ophiuchus
+       constellation_name_genitive: Ophiuchi
+              constellation_number: 11
+             right_ascension_hours: 17
+           right_ascension_minutes: 44
+           right_ascension_seconds: 23.2
+     right_ascension_decimal_hours: 17.7398
+   right_ascension_decimal_degrees: 266.097
+               declination_degrees: 4
+               declination_minutes: 33
+               declination_seconds: 3
+       declination_decimal_degrees: 4.55083
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 120. row ***************************
+                       common_name: Han
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 13
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6175
+    approx_rank_apparent_magnitude: 94
+                apparent_magnitude: 2.54
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.2
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Oph
+           constellation_full_name: Ophiuchus
+       constellation_name_genitive: Ophiuchi
+              constellation_number: 11
+             right_ascension_hours: 16
+           right_ascension_minutes: 38
+           right_ascension_seconds: 10.8
+     right_ascension_decimal_hours: 16.6363
+   right_ascension_decimal_degrees: 249.544
+               declination_degrees: -10
+               declination_minutes: 36
+               declination_seconds: 1
+       declination_decimal_degrees: -10.6003
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 121. row ***************************
+                       common_name: Sabik
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 35
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6378
+    approx_rank_apparent_magnitude: 86
+                apparent_magnitude: 2.43
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.37
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Oph
+           constellation_full_name: Ophiuchus
+       constellation_name_genitive: Ophiuchi
+              constellation_number: 11
+             right_ascension_hours: 17
+           right_ascension_minutes: 11
+           right_ascension_seconds: 26.4
+     right_ascension_decimal_hours: 17.1907
+   right_ascension_decimal_degrees: 257.861
+               declination_degrees: -15
+               declination_minutes: 44
+               declination_seconds: 4
+       declination_decimal_degrees: -15.7344
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 122. row ***************************
+                       common_name: Rasalhague
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 55
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 6556
+    approx_rank_apparent_magnitude: 59
+                apparent_magnitude: 2.08
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.3
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Oph
+           constellation_full_name: Ophiuchus
+       constellation_name_genitive: Ophiuchi
+              constellation_number: 11
+             right_ascension_hours: 17
+           right_ascension_minutes: 35
+           right_ascension_seconds: 47.6
+     right_ascension_decimal_hours: 17.5966
+   right_ascension_decimal_degrees: 263.949
+               declination_degrees: 12
+               declination_minutes: 32
+               declination_seconds: 5
+       declination_decimal_degrees: 12.5347
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 123. row ***************************
+                       common_name: Rigel
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 19
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1713
+    approx_rank_apparent_magnitude: 7
+                apparent_magnitude: 0.15
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -6.72
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 15
+           right_ascension_seconds: 25.7
+     right_ascension_decimal_hours: 5.25714
+   right_ascension_decimal_degrees: 78.8571
+               declination_degrees: -8
+               declination_minutes: 10
+               declination_seconds: 5
+       declination_decimal_degrees: -8.16806
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 124. row ***************************
+                       common_name: Bellatrix
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 24
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 1790
+    approx_rank_apparent_magnitude: 26
+                apparent_magnitude: 1.64
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.72
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 26
+           right_ascension_seconds: 7.5
+     right_ascension_decimal_hours: 5.43542
+   right_ascension_decimal_degrees: 81.5313
+               declination_degrees: 6
+               declination_minutes: 21
+               declination_seconds: 5
+       declination_decimal_degrees: 6.35139
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 125. row ***************************
+                       common_name: Mintaka
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1852
+    approx_rank_apparent_magnitude: 73
+                apparent_magnitude: 2.25
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.99
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 32
+           right_ascension_seconds: 57.2
+     right_ascension_decimal_hours: 5.54922
+   right_ascension_decimal_degrees: 83.2383
+               declination_degrees: 0
+               declination_minutes: 17
+               declination_seconds: 1
+       declination_decimal_degrees: 0.283611
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 1
+                             notes: 
+*************************** 126. row ***************************
+                       common_name: Hatysa
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 44
+    bayer_designation_greek_letter: iota
+bayer_designation_greek_letter_tex: $\iota$
+       bayer_designation_extension: 
+                      bs_hr_number: 1899
+    approx_rank_apparent_magnitude: 123
+                apparent_magnitude: 2.75
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.3
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 36
+           right_ascension_seconds: 20.3
+     right_ascension_decimal_hours: 5.60564
+   right_ascension_decimal_degrees: 84.0846
+               declination_degrees: -5
+               declination_minutes: 53
+               declination_seconds: 5
+       declination_decimal_degrees: -5.88472
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 127. row ***************************
+                       common_name: Alnilam
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 46
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 1903
+    approx_rank_apparent_magnitude: 29
+                apparent_magnitude: 1.69
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -6.38
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 37
+           right_ascension_seconds: 9.2
+     right_ascension_decimal_hours: 5.61922
+   right_ascension_decimal_degrees: 84.2883
+               declination_degrees: -1
+               declination_minutes: 11
+               declination_seconds: 2
+       declination_decimal_degrees: -1.18389
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 128. row ***************************
+                       common_name: Alnitak
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 50
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1948
+    approx_rank_apparent_magnitude: 31
+                apparent_magnitude: 1.75
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.25
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 41
+           right_ascension_seconds: 41.6
+     right_ascension_decimal_hours: 5.69489
+   right_ascension_decimal_degrees: 85.4233
+               declination_degrees: -1
+               declination_minutes: 56
+               declination_seconds: 0
+       declination_decimal_degrees: -1.93333
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 129. row ***************************
+                       common_name: Saiph
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 53
+    bayer_designation_greek_letter: kappa
+bayer_designation_greek_letter_tex: $\kappa$
+       bayer_designation_extension: 
+                      bs_hr_number: 2004
+    approx_rank_apparent_magnitude: 56
+                apparent_magnitude: 2.07
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.65
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 48
+           right_ascension_seconds: 38.1
+     right_ascension_decimal_hours: 5.81058
+   right_ascension_decimal_degrees: 87.1587
+               declination_degrees: -9
+               declination_minutes: 39
+               declination_seconds: 5
+       declination_decimal_degrees: -9.65139
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 130. row ***************************
+                       common_name: Betelgeuse
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 58
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 2061
+    approx_rank_apparent_magnitude: 10
+                apparent_magnitude: 0.55
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -5.04
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: Ori
+           constellation_full_name: Orion
+       constellation_name_genitive: Orionis
+              constellation_number: 26
+             right_ascension_hours: 5
+           right_ascension_minutes: 56
+           right_ascension_seconds: 10.4
+     right_ascension_decimal_hours: 5.93622
+   right_ascension_decimal_degrees: 89.0433
+               declination_degrees: 7
+               declination_minutes: 24
+               declination_seconds: 3
+       declination_decimal_degrees: 7.40083
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 131. row ***************************
+                       common_name: Peacock
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 7790
+    approx_rank_apparent_magnitude: 44
+                apparent_magnitude: 1.93
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.82
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Pav
+           constellation_full_name: Pavo
+       constellation_name_genitive: Pavonis
+              constellation_number: 44
+             right_ascension_hours: 20
+           right_ascension_minutes: 27
+           right_ascension_seconds: 6
+     right_ascension_decimal_hours: 20.4517
+   right_ascension_decimal_degrees: 306.776
+               declination_degrees: -56
+               declination_minutes: 40
+               declination_seconds: 27
+       declination_decimal_degrees: -56.6742
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 132. row ***************************
+                       common_name: Algenib
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 88
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 39
+    approx_rank_apparent_magnitude: 137
+                apparent_magnitude: 2.83
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.22
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Peg
+           constellation_full_name: Pegasus
+       constellation_name_genitive: Pegasi
+              constellation_number: 7
+             right_ascension_hours: 0
+           right_ascension_minutes: 14
+           right_ascension_seconds: 11.4
+     right_ascension_decimal_hours: 0.2365
+   right_ascension_decimal_degrees: 3.5475
+               declination_degrees: 15
+               declination_minutes: 17
+               declination_seconds: 1
+       declination_decimal_degrees: 15.2836
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 133. row ***************************
+                       common_name: Scheat
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 53
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 8775
+    approx_rank_apparent_magnitude: 87
+                apparent_magnitude: 2.44
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -1.49
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Peg
+           constellation_full_name: Pegasus
+       constellation_name_genitive: Pegasi
+              constellation_number: 7
+             right_ascension_hours: 23
+           right_ascension_minutes: 4
+           right_ascension_seconds: 40.4
+     right_ascension_decimal_hours: 23.0779
+   right_ascension_decimal_degrees: 346.168
+               declination_degrees: 28
+               declination_minutes: 11
+               declination_seconds: 0
+       declination_decimal_degrees: 28.1833
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 134. row ***************************
+                       common_name: Markab
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 54
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 8781
+    approx_rank_apparent_magnitude: 92
+                apparent_magnitude: 2.49
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.67
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Peg
+           constellation_full_name: Pegasus
+       constellation_name_genitive: Pegasi
+              constellation_number: 7
+             right_ascension_hours: 23
+           right_ascension_minutes: 5
+           right_ascension_seconds: 41
+     right_ascension_decimal_hours: 23.0947
+   right_ascension_decimal_degrees: 346.421
+               declination_degrees: 15
+               declination_minutes: 18
+               declination_seconds: 1
+       declination_decimal_degrees: 15.3003
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 135. row ***************************
+                       common_name: Matar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 44
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 8650
+    approx_rank_apparent_magnitude: 161
+                apparent_magnitude: 2.93
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.16
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Peg
+           constellation_full_name: Pegasus
+       constellation_name_genitive: Pegasi
+              constellation_number: 7
+             right_ascension_hours: 22
+           right_ascension_minutes: 43
+           right_ascension_seconds: 52.3
+     right_ascension_decimal_hours: 22.7312
+   right_ascension_decimal_degrees: 340.968
+               declination_degrees: 30
+               declination_minutes: 19
+               declination_seconds: 0
+       declination_decimal_degrees: 30.3167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 136. row ***************************
+                       common_name: Enif
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 8
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 8308
+    approx_rank_apparent_magnitude: 82
+                apparent_magnitude: 2.38
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.19
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Peg
+           constellation_full_name: Pegasus
+       constellation_name_genitive: Pegasi
+              constellation_number: 7
+             right_ascension_hours: 21
+           right_ascension_minutes: 45
+           right_ascension_seconds: 5.7
+     right_ascension_decimal_hours: 21.7516
+   right_ascension_decimal_degrees: 326.274
+               declination_degrees: 9
+               declination_minutes: 57
+               declination_seconds: 3
+       declination_decimal_degrees: 9.95083
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 137. row ***************************
+                       common_name: Algol
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 26
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 936
+    approx_rank_apparent_magnitude: 60
+                apparent_magnitude: 2.09
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.18
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Per
+           constellation_full_name: Perseus
+       constellation_name_genitive: Persei
+              constellation_number: 24
+             right_ascension_hours: 3
+           right_ascension_minutes: 9
+           right_ascension_seconds: 22.8
+     right_ascension_decimal_hours: 3.15633
+   right_ascension_decimal_degrees: 47.345
+               declination_degrees: 41
+               declination_minutes: 1
+               declination_seconds: 3
+       declination_decimal_degrees: 41.0175
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 1
+                             notes: 
+*************************** 138. row ***************************
+                       common_name: $\zeta$ Persei
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 44
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1203
+    approx_rank_apparent_magnitude: 140
+                apparent_magnitude: 2.84
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.55
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Per
+           constellation_full_name: Perseus
+       constellation_name_genitive: Persei
+              constellation_number: 24
+             right_ascension_hours: 3
+           right_ascension_minutes: 55
+           right_ascension_seconds: 18
+     right_ascension_decimal_hours: 3.92167
+   right_ascension_decimal_degrees: 58.8251
+               declination_degrees: 31
+               declination_minutes: 56
+               declination_seconds: 1
+       declination_decimal_degrees: 31.9336
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 139. row ***************************
+                       common_name: $\epsilon$ Persei
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 45
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 1220
+    approx_rank_apparent_magnitude: 155
+                apparent_magnitude: 2.9
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.19
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Per
+           constellation_full_name: Perseus
+       constellation_name_genitive: Persei
+              constellation_number: 24
+             right_ascension_hours: 3
+           right_ascension_minutes: 59
+           right_ascension_seconds: 6.1
+     right_ascension_decimal_hours: 3.98503
+   right_ascension_decimal_degrees: 59.7754
+               declination_degrees: 40
+               declination_minutes: 3
+               declination_seconds: 4
+       declination_decimal_degrees: 40.0511
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 140. row ***************************
+                       common_name: Mirfak
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 33
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 1017
+    approx_rank_apparent_magnitude: 33
+                apparent_magnitude: 1.8
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.49
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Per
+           constellation_full_name: Perseus
+       constellation_name_genitive: Persei
+              constellation_number: 24
+             right_ascension_hours: 3
+           right_ascension_minutes: 25
+           right_ascension_seconds: 39.2
+     right_ascension_decimal_hours: 3.42756
+   right_ascension_decimal_degrees: 51.4134
+               declination_degrees: 49
+               declination_minutes: 55
+               declination_seconds: 3
+       declination_decimal_degrees: 49.9175
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 141. row ***************************
+                       common_name: $\gamma$ Persei
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 23
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 915
+    approx_rank_apparent_magnitude: 159
+                apparent_magnitude: 2.91
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.57
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Per
+           constellation_full_name: Perseus
+       constellation_name_genitive: Persei
+              constellation_number: 24
+             right_ascension_hours: 3
+           right_ascension_minutes: 6
+           right_ascension_seconds: 8.9
+     right_ascension_decimal_hours: 3.10247
+   right_ascension_decimal_degrees: 46.537
+               declination_degrees: 53
+               declination_minutes: 34
+               declination_seconds: 3
+       declination_decimal_degrees: 53.5675
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 142. row ***************************
+                       common_name: $\delta$ Persei
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 39
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1122
+    approx_rank_apparent_magnitude: 177
+                apparent_magnitude: 3.01
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.04
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Per
+           constellation_full_name: Perseus
+       constellation_name_genitive: Persei
+              constellation_number: 24
+             right_ascension_hours: 3
+           right_ascension_minutes: 44
+           right_ascension_seconds: 15
+     right_ascension_decimal_hours: 3.7375
+   right_ascension_decimal_degrees: 56.0625
+               declination_degrees: 47
+               declination_minutes: 50
+               declination_seconds: 4
+       declination_decimal_degrees: 47.8344
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 143. row ***************************
+                       common_name: Ankaa
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 99
+    approx_rank_apparent_magnitude: 84
+                apparent_magnitude: 2.4
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.52
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Phe
+           constellation_full_name: Phoenix
+       constellation_name_genitive: Phoenicis
+              constellation_number: 37
+             right_ascension_hours: 0
+           right_ascension_minutes: 27
+           right_ascension_seconds: 11.7
+     right_ascension_decimal_hours: 0.45325
+   right_ascension_decimal_degrees: 6.79875
+               declination_degrees: -42
+               declination_minutes: 12
+               declination_seconds: 20
+       declination_decimal_degrees: -42.2056
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 144. row ***************************
+                       common_name: Fomalhaut
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 24
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 8728
+    approx_rank_apparent_magnitude: 18
+                apparent_magnitude: 1.15
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.72
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: PsA
+           constellation_full_name: Piscis Austrinus
+       constellation_name_genitive: Piscis Austrini
+              constellation_number: 60
+             right_ascension_hours: 22
+           right_ascension_minutes: 57
+           right_ascension_seconds: 39.0465
+     right_ascension_decimal_hours: 22.9608
+   right_ascension_decimal_degrees: 344.412
+               declination_degrees: -29
+               declination_minutes: 37
+               declination_seconds: 20.05
+       declination_decimal_degrees: -29.6222
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 145. row ***************************
+                       common_name: $\tau$ Puppis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: tau
+bayer_designation_greek_letter_tex: $\tau$
+       bayer_designation_extension: 
+                      bs_hr_number: 2553
+    approx_rank_apparent_magnitude: 162
+                apparent_magnitude: 2.94
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.8
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Pup
+           constellation_full_name: Puppis
+       constellation_name_genitive: Puppis
+              constellation_number: 20
+             right_ascension_hours: 6
+           right_ascension_minutes: 50
+           right_ascension_seconds: 23.7
+     right_ascension_decimal_hours: 6.83992
+   right_ascension_decimal_degrees: 102.599
+               declination_degrees: -50
+               declination_minutes: 38
+               declination_seconds: 14
+       declination_decimal_degrees: -50.6372
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 146. row ***************************
+                       common_name: $\pi$ Puppis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: pi
+bayer_designation_greek_letter_tex: $\pi$
+       bayer_designation_extension: 
+                      bs_hr_number: 2773
+    approx_rank_apparent_magnitude: 116
+                apparent_magnitude: 2.71
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.92
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Pup
+           constellation_full_name: Puppis
+       constellation_name_genitive: Puppis
+              constellation_number: 20
+             right_ascension_hours: 7
+           right_ascension_minutes: 17
+           right_ascension_seconds: 47.8
+     right_ascension_decimal_hours: 7.29661
+   right_ascension_decimal_degrees: 109.449
+               declination_degrees: -37
+               declination_minutes: 7
+               declination_seconds: 54
+       declination_decimal_degrees: -37.1317
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 147. row ***************************
+                       common_name: Naos
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 3165
+    approx_rank_apparent_magnitude: 65
+                apparent_magnitude: 2.21
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.95
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Pup
+           constellation_full_name: Puppis
+       constellation_name_genitive: Puppis
+              constellation_number: 20
+             right_ascension_hours: 8
+           right_ascension_minutes: 4
+           right_ascension_seconds: 14.1
+     right_ascension_decimal_hours: 8.07058
+   right_ascension_decimal_degrees: 121.059
+               declination_degrees: -40
+               declination_minutes: 3
+               declination_seconds: 22
+       declination_decimal_degrees: -40.0561
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 148. row ***************************
+                       common_name: Turais
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 15
+    bayer_designation_greek_letter: rho
+bayer_designation_greek_letter_tex: $\rho$
+       bayer_designation_extension: 
+                      bs_hr_number: 3185
+    approx_rank_apparent_magnitude: 138
+                apparent_magnitude: 2.83
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 1.41
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Pup
+           constellation_full_name: Puppis
+       constellation_name_genitive: Puppis
+              constellation_number: 20
+             right_ascension_hours: 8
+           right_ascension_minutes: 8
+           right_ascension_seconds: 19.9
+     right_ascension_decimal_hours: 8.13886
+   right_ascension_decimal_degrees: 122.083
+               declination_degrees: -24
+               declination_minutes: 21
+               declination_seconds: 3
+       declination_decimal_degrees: -24.3508
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 149. row ***************************
+                       common_name: Kaus Borealis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 22
+    bayer_designation_greek_letter: lambda
+bayer_designation_greek_letter_tex: $\lambda$
+       bayer_designation_extension: 
+                      bs_hr_number: 6913
+    approx_rank_apparent_magnitude: 136
+                apparent_magnitude: 2.82
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.95
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 18
+           right_ascension_minutes: 29
+           right_ascension_seconds: 6.7
+     right_ascension_decimal_hours: 18.4852
+   right_ascension_decimal_degrees: 277.278
+               declination_degrees: -25
+               declination_minutes: 24
+               declination_seconds: 3
+       declination_decimal_degrees: -25.4008
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 150. row ***************************
+                       common_name: Alnasl
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 10
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 6746
+    approx_rank_apparent_magnitude: 168
+                apparent_magnitude: 2.98
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.63
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 18
+           right_ascension_minutes: 6
+           right_ascension_seconds: 59.8
+     right_ascension_decimal_hours: 18.1166
+   right_ascension_decimal_degrees: 271.749
+               declination_degrees: -30
+               declination_minutes: 25
+               declination_seconds: 2
+       declination_decimal_degrees: -30.4172
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 151. row ***************************
+                       common_name: $\eta$ Sagittarii
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6832
+    approx_rank_apparent_magnitude: 188
+                apparent_magnitude: 3.1
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.2
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 18
+           right_ascension_minutes: 18
+           right_ascension_seconds: 52.7
+     right_ascension_decimal_hours: 18.3146
+   right_ascension_decimal_degrees: 274.719
+               declination_degrees: -36
+               declination_minutes: 45
+               declination_seconds: 16
+       declination_decimal_degrees: -36.7544
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 152. row ***************************
+                       common_name: Kaus Meridionalis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 19
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6859
+    approx_rank_apparent_magnitude: 117
+                apparent_magnitude: 2.72
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.14
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 18
+           right_ascension_minutes: 22
+           right_ascension_seconds: 10.7
+     right_ascension_decimal_hours: 18.3696
+   right_ascension_decimal_degrees: 275.544
+               declination_degrees: -29
+               declination_minutes: 49
+               declination_seconds: 0
+       declination_decimal_degrees: -29.8167
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 153. row ***************************
+                       common_name: Kaus Australis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 20
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 6879
+    approx_rank_apparent_magnitude: 37
+                apparent_magnitude: 1.84
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.39
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 18
+           right_ascension_minutes: 25
+           right_ascension_seconds: 24
+     right_ascension_decimal_hours: 18.4233
+   right_ascension_decimal_degrees: 276.349
+               declination_degrees: -34
+               declination_minutes: 22
+               declination_seconds: 2
+       declination_decimal_degrees: -34.3672
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 154. row ***************************
+                       common_name: Nunki
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: sigma
+bayer_designation_greek_letter_tex: $\sigma$
+       bayer_designation_extension: 
+                      bs_hr_number: 7121
+    approx_rank_apparent_magnitude: 52
+                apparent_magnitude: 2.05
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.14
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 18
+           right_ascension_minutes: 56
+           right_ascension_seconds: 24.7
+     right_ascension_decimal_hours: 18.9402
+   right_ascension_decimal_degrees: 284.103
+               declination_degrees: -26
+               declination_minutes: 16
+               declination_seconds: 2
+       declination_decimal_degrees: -26.2672
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 155. row ***************************
+                       common_name: Albaldah
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 41
+    bayer_designation_greek_letter: pi
+bayer_designation_greek_letter_tex: $\pi$
+       bayer_designation_extension: 
+                      bs_hr_number: 7264
+    approx_rank_apparent_magnitude: 152
+                apparent_magnitude: 2.88
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.77
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 19
+           right_ascension_minutes: 10
+           right_ascension_seconds: 51.8
+     right_ascension_decimal_hours: 19.1811
+   right_ascension_decimal_degrees: 287.717
+               declination_degrees: -20
+               declination_minutes: 59
+               declination_seconds: 3
+       declination_decimal_degrees: -20.9842
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 156. row ***************************
+                       common_name: Ascella
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 38
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 7194
+    approx_rank_apparent_magnitude: 101
+                apparent_magnitude: 2.6
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.42
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sgr
+           constellation_full_name: Sagittarius
+       constellation_name_genitive: Sagittarii
+              constellation_number: 15
+             right_ascension_hours: 19
+           right_ascension_minutes: 3
+           right_ascension_seconds: 47.2
+     right_ascension_decimal_hours: 19.0631
+   right_ascension_decimal_degrees: 285.947
+               declination_degrees: -29
+               declination_minutes: 51
+               declination_seconds: 0
+       declination_decimal_degrees: -29.85
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 157. row ***************************
+                       common_name: Antares
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 21
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 6134
+    approx_rank_apparent_magnitude: 15
+                apparent_magnitude: 0.95
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -5.39
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 16
+           right_ascension_minutes: 30
+           right_ascension_seconds: 32.7
+     right_ascension_decimal_hours: 16.5091
+   right_ascension_decimal_degrees: 247.637
+               declination_degrees: -26
+               declination_minutes: 28
+               declination_seconds: 1
+       declination_decimal_degrees: -26.4669
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 158. row ***************************
+                       common_name: Girtab
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: kappa
+bayer_designation_greek_letter_tex: $\kappa$
+       bayer_designation_extension: 
+                      bs_hr_number: 6580
+    approx_rank_apparent_magnitude: 83
+                apparent_magnitude: 2.39
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.38
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 17
+           right_ascension_minutes: 43
+           right_ascension_seconds: 46.1
+     right_ascension_decimal_hours: 17.7295
+   right_ascension_decimal_degrees: 265.943
+               declination_degrees: -39
+               declination_minutes: 2
+               declination_seconds: 16
+       declination_decimal_degrees: -39.0378
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 159. row ***************************
+                       common_name: Sargas
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: theta
+bayer_designation_greek_letter_tex: $\theta$
+       bayer_designation_extension: 
+                      bs_hr_number: 6553
+    approx_rank_apparent_magnitude: 39
+                apparent_magnitude: 1.86
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.75
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 17
+           right_ascension_minutes: 38
+           right_ascension_seconds: 39
+     right_ascension_decimal_hours: 17.6442
+   right_ascension_decimal_degrees: 264.663
+               declination_degrees: -43
+               declination_minutes: 0
+               declination_seconds: 28
+       declination_decimal_degrees: -43.0078
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 160. row ***************************
+                       common_name: Shaula
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 35
+    bayer_designation_greek_letter: lambda
+bayer_designation_greek_letter_tex: $\lambda$
+       bayer_designation_extension: 
+                      bs_hr_number: 6527
+    approx_rank_apparent_magnitude: 24
+                apparent_magnitude: 1.62
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.05
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 17
+           right_ascension_minutes: 34
+           right_ascension_seconds: 52
+     right_ascension_decimal_hours: 17.5811
+   right_ascension_decimal_degrees: 263.716
+               declination_degrees: -37
+               declination_minutes: 6
+               declination_seconds: 5
+       declination_decimal_degrees: -37.1014
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 161. row ***************************
+                       common_name: $\pi$ Scorpii
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 6
+    bayer_designation_greek_letter: pi
+bayer_designation_greek_letter_tex: $\pi$
+       bayer_designation_extension: 
+                      bs_hr_number: 5944
+    approx_rank_apparent_magnitude: 154
+                apparent_magnitude: 2.89
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.85
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 15
+           right_ascension_minutes: 59
+           right_ascension_seconds: 58.5
+     right_ascension_decimal_hours: 15.9996
+   right_ascension_decimal_degrees: 239.994
+               declination_degrees: -26
+               declination_minutes: 9
+               declination_seconds: 5
+       declination_decimal_degrees: -26.1514
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 162. row ***************************
+                       common_name: Lesath
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: upsilon
+bayer_designation_greek_letter_tex: $\upsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 6508
+    approx_rank_apparent_magnitude: 115
+                apparent_magnitude: 2.7
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.31
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 17
+           right_ascension_minutes: 32
+           right_ascension_seconds: 1.4
+     right_ascension_decimal_hours: 17.5337
+   right_ascension_decimal_degrees: 263.006
+               declination_degrees: -37
+               declination_minutes: 18
+               declination_seconds: 3
+       declination_decimal_degrees: -37.3008
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 163. row ***************************
+                       common_name: $\mu^1$ Scorpii
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: mu^1
+bayer_designation_greek_letter_tex: $\mu^1$
+       bayer_designation_extension: 
+                      bs_hr_number: 6247
+    approx_rank_apparent_magnitude: 175
+                apparent_magnitude: 3
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -4.01
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 16
+           right_ascension_minutes: 53
+           right_ascension_seconds: 7.6
+     right_ascension_decimal_hours: 16.8854
+   right_ascension_decimal_degrees: 253.281
+               declination_degrees: -38
+               declination_minutes: 4
+               declination_seconds: 39
+       declination_decimal_degrees: -38.0775
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 164. row ***************************
+                       common_name: Wei
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 26
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 6241
+    approx_rank_apparent_magnitude: 77
+                apparent_magnitude: 2.29
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.78
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 16
+           right_ascension_minutes: 51
+           right_ascension_seconds: 21.9
+     right_ascension_decimal_hours: 16.8561
+   right_ascension_decimal_degrees: 252.842
+               declination_degrees: -34
+               declination_minutes: 19
+               declination_seconds: 3
+       declination_decimal_degrees: -34.3175
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 165. row ***************************
+                       common_name: $\tau$ Scorpii
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 23
+    bayer_designation_greek_letter: tau
+bayer_designation_greek_letter_tex: $\tau$
+       bayer_designation_extension: 
+                      bs_hr_number: 6165
+    approx_rank_apparent_magnitude: 135
+                apparent_magnitude: 2.82
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.78
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 16
+           right_ascension_minutes: 37
+           right_ascension_seconds: 2.2
+     right_ascension_decimal_hours: 16.6173
+   right_ascension_decimal_degrees: 249.26
+               declination_degrees: -28
+               declination_minutes: 15
+               declination_seconds: 1
+       declination_decimal_degrees: -28.2503
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 166. row ***************************
+                       common_name: $\iota^1$ Scorpii
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: iota^1
+bayer_designation_greek_letter_tex: $\iota^1$
+       bayer_designation_extension: 
+                      bs_hr_number: 6615
+    approx_rank_apparent_magnitude: 170
+                apparent_magnitude: 2.99
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.71
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 17
+           right_ascension_minutes: 48
+           right_ascension_seconds: 52.8
+     right_ascension_decimal_hours: 17.8147
+   right_ascension_decimal_degrees: 267.22
+               declination_degrees: -40
+               declination_minutes: 7
+               declination_seconds: 56
+       declination_decimal_degrees: -40.1322
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 167. row ***************************
+                       common_name: Alniyat
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 20
+    bayer_designation_greek_letter: sigma
+bayer_designation_greek_letter_tex: $\sigma$
+       bayer_designation_extension: 
+                      bs_hr_number: 6084
+    approx_rank_apparent_magnitude: 156
+                apparent_magnitude: 2.9
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -3.86
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 16
+           right_ascension_minutes: 22
+           right_ascension_seconds: 19
+     right_ascension_decimal_hours: 16.3719
+   right_ascension_decimal_degrees: 245.579
+               declination_degrees: -25
+               declination_minutes: 38
+               declination_seconds: 0
+       declination_decimal_degrees: -25.6333
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 168. row ***************************
+                       common_name: Dschubba
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 7
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5953
+    approx_rank_apparent_magnitude: 76
+                apparent_magnitude: 2.29
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.16
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Sco
+           constellation_full_name: Scorpius
+       constellation_name_genitive: Scorpii
+              constellation_number: 33
+             right_ascension_hours: 16
+           right_ascension_minutes: 1
+           right_ascension_seconds: 25.8
+     right_ascension_decimal_hours: 16.0238
+   right_ascension_decimal_degrees: 240.357
+               declination_degrees: -22
+               declination_minutes: 40
+               declination_seconds: 2
+       declination_decimal_degrees: -22.6672
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 169. row ***************************
+                       common_name: Unukalhai
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 24
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 5854
+    approx_rank_apparent_magnitude: 103
+                apparent_magnitude: 2.63
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.87
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Ser
+           constellation_full_name: Serpens
+       constellation_name_genitive: Serpentis
+              constellation_number: 23
+             right_ascension_hours: 15
+           right_ascension_minutes: 45
+           right_ascension_seconds: 10.8
+     right_ascension_decimal_hours: 15.753
+   right_ascension_decimal_degrees: 236.295
+               declination_degrees: 6
+               declination_minutes: 22
+               declination_seconds: 0
+       declination_decimal_degrees: 6.36667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 170. row ***************************
+                       common_name: Alcyone
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 25
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1165
+    approx_rank_apparent_magnitude: 143
+                apparent_magnitude: 2.85
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.41
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Tau
+           constellation_full_name: Taurus
+       constellation_name_genitive: Tauri
+              constellation_number: 17
+             right_ascension_hours: 3
+           right_ascension_minutes: 48
+           right_ascension_seconds: 35.3
+     right_ascension_decimal_hours: 3.80981
+   right_ascension_decimal_degrees: 57.1471
+               declination_degrees: 24
+               declination_minutes: 9
+               declination_seconds: 4
+       declination_decimal_degrees: 24.1511
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 171. row ***************************
+                       common_name: Aldebaran
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 87
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 1457
+    approx_rank_apparent_magnitude: 14
+                apparent_magnitude: 0.86
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -0.64
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: Tau
+           constellation_full_name: Taurus
+       constellation_name_genitive: Tauri
+              constellation_number: 17
+             right_ascension_hours: 4
+           right_ascension_minutes: 36
+           right_ascension_seconds: 59.1
+     right_ascension_decimal_hours: 4.61642
+   right_ascension_decimal_degrees: 69.2463
+               declination_degrees: 16
+               declination_minutes: 32
+               declination_seconds: 4
+       declination_decimal_degrees: 16.5344
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 172. row ***************************
+                       common_name: Elnath
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 112
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1791
+    approx_rank_apparent_magnitude: 27
+                apparent_magnitude: 1.66
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.36
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Tau
+           constellation_full_name: Taurus
+       constellation_name_genitive: Tauri
+              constellation_number: 17
+             right_ascension_hours: 5
+           right_ascension_minutes: 27
+           right_ascension_seconds: 27.8
+     right_ascension_decimal_hours: 5.45772
+   right_ascension_decimal_degrees: 81.8658
+               declination_degrees: 28
+               declination_minutes: 37
+               declination_seconds: 1
+       declination_decimal_degrees: 28.6169
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 173. row ***************************
+                       common_name: Alheka
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 123
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 1910
+    approx_rank_apparent_magnitude: 166
+                apparent_magnitude: 2.97
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.56
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Tau
+           constellation_full_name: Taurus
+       constellation_name_genitive: Tauri
+              constellation_number: 17
+             right_ascension_hours: 5
+           right_ascension_minutes: 38
+           right_ascension_seconds: 45.1
+     right_ascension_decimal_hours: 5.64586
+   right_ascension_decimal_degrees: 84.6879
+               declination_degrees: 21
+               declination_minutes: 9
+               declination_seconds: 0
+       declination_decimal_degrees: 21.15
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 174. row ***************************
+                       common_name: $\beta$ Trianguli
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 4
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 622
+    approx_rank_apparent_magnitude: 172
+                apparent_magnitude: 3
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.09
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Tri
+           constellation_full_name: Triangulum
+       constellation_name_genitive: Trianguli
+              constellation_number: 78
+             right_ascension_hours: 2
+           right_ascension_minutes: 10
+           right_ascension_seconds: 39.1
+     right_ascension_decimal_hours: 2.17753
+   right_ascension_decimal_degrees: 32.663
+               declination_degrees: 35
+               declination_minutes: 4
+               declination_seconds: 2
+       declination_decimal_degrees: 35.0672
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 175. row ***************************
+                       common_name: $\beta$ Trianguli Australis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5897
+    approx_rank_apparent_magnitude: 139
+                apparent_magnitude: 2.83
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.38
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: TrA
+           constellation_full_name: Triangulum Australe
+       constellation_name_genitive: Trianguli Australis
+              constellation_number: 83
+             right_ascension_hours: 15
+           right_ascension_minutes: 56
+           right_ascension_seconds: 47.3
+     right_ascension_decimal_hours: 15.9465
+   right_ascension_decimal_degrees: 239.197
+               declination_degrees: -63
+               declination_minutes: 29
+               declination_seconds: 9
+       declination_decimal_degrees: -63.4858
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 176. row ***************************
+                       common_name: Atria
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 6217
+    approx_rank_apparent_magnitude: 42
+                apparent_magnitude: 1.92
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.61
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: TrA
+           constellation_full_name: Triangulum Australe
+       constellation_name_genitive: Trianguli Australis
+              constellation_number: 83
+             right_ascension_hours: 16
+           right_ascension_minutes: 48
+           right_ascension_seconds: 39.8951
+     right_ascension_decimal_hours: 16.8111
+   right_ascension_decimal_degrees: 252.166
+               declination_degrees: -69
+               declination_minutes: 1
+               declination_seconds: 39.7626
+       declination_decimal_degrees: -69.0277
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 177. row ***************************
+                       common_name: $\gamma$ Trianguli Australis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 5671
+    approx_rank_apparent_magnitude: 149
+                apparent_magnitude: 2.87
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.87
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: TrA
+           constellation_full_name: Triangulum Australe
+       constellation_name_genitive: Trianguli Australis
+              constellation_number: 0
+             right_ascension_hours: 15
+           right_ascension_minutes: 18
+           right_ascension_seconds: 54.582
+     right_ascension_decimal_hours: 15.3152
+   right_ascension_decimal_degrees: 229.728
+               declination_degrees: -68
+               declination_minutes: 40
+               declination_seconds: 46.3654
+       declination_decimal_degrees: -68.6795
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 178. row ***************************
+                       common_name: $\alpha$ Tucan{\ae}
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 8502
+    approx_rank_apparent_magnitude: 150
+                apparent_magnitude: 2.87
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.05
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Tuc
+           constellation_full_name: Tucana
+       constellation_name_genitive: Tucanae
+              constellation_number: 48
+             right_ascension_hours: 22
+           right_ascension_minutes: 19
+           right_ascension_seconds: 45.2
+     right_ascension_decimal_hours: 22.3292
+   right_ascension_decimal_degrees: 334.938
+               declination_degrees: -60
+               declination_minutes: 10
+               declination_seconds: 0
+       declination_decimal_degrees: -60.1667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 179. row ***************************
+                       common_name: Talita
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 9
+    bayer_designation_greek_letter: iota
+bayer_designation_greek_letter_tex: $\iota$
+       bayer_designation_extension: 
+                      bs_hr_number: 3569
+    approx_rank_apparent_magnitude: 194
+                apparent_magnitude: 3.12
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.29
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 9
+           right_ascension_minutes: 0
+           right_ascension_seconds: 28
+     right_ascension_decimal_hours: 9.00778
+   right_ascension_decimal_degrees: 135.117
+               declination_degrees: 47
+               declination_minutes: 58
+               declination_seconds: 0
+       declination_decimal_degrees: 47.9667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 180. row ***************************
+                       common_name: Tania Australis
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 34
+    bayer_designation_greek_letter: mu
+bayer_designation_greek_letter_tex: $\mu$
+       bayer_designation_extension: 
+                      bs_hr_number: 4069
+    approx_rank_apparent_magnitude: 186
+                apparent_magnitude: 3.06
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.35
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 10
+           right_ascension_minutes: 23
+           right_ascension_seconds: 25.5
+     right_ascension_decimal_hours: 10.3904
+   right_ascension_decimal_degrees: 155.856
+               declination_degrees: 41
+               declination_minutes: 24
+               declination_seconds: 2
+       declination_decimal_degrees: 41.4006
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 1
+                             notes: 
+*************************** 181. row ***************************
+                       common_name: Merak
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 48
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 4295
+    approx_rank_apparent_magnitude: 80
+                apparent_magnitude: 2.34
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.41
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 11
+           right_ascension_minutes: 2
+           right_ascension_seconds: 56.8
+     right_ascension_decimal_hours: 11.0491
+   right_ascension_decimal_degrees: 165.736
+               declination_degrees: 56
+               declination_minutes: 16
+               declination_seconds: 5
+       declination_decimal_degrees: 56.2681
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 182. row ***************************
+                       common_name: Dubhe
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 50
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 4301
+    approx_rank_apparent_magnitude: 34
+                apparent_magnitude: 1.8
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.09
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 11
+           right_ascension_minutes: 4
+           right_ascension_seconds: 51.2
+     right_ascension_decimal_hours: 11.0809
+   right_ascension_decimal_degrees: 166.214
+               declination_degrees: 61
+               declination_minutes: 39
+               declination_seconds: 0
+       declination_decimal_degrees: 61.65
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 183. row ***************************
+                       common_name: $\psi$ Ursae Majoris
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 52
+    bayer_designation_greek_letter: psi
+bayer_designation_greek_letter_tex: $\psi$
+       bayer_designation_extension: 
+                      bs_hr_number: 4335
+    approx_rank_apparent_magnitude: 173
+                apparent_magnitude: 3
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.27
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 11
+           right_ascension_minutes: 10
+           right_ascension_seconds: 41.8
+     right_ascension_decimal_hours: 11.1783
+   right_ascension_decimal_degrees: 167.674
+               declination_degrees: 44
+               declination_minutes: 23
+               declination_seconds: 5
+       declination_decimal_degrees: 44.3847
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 184. row ***************************
+                       common_name: Phecda
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 64
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 4554
+    approx_rank_apparent_magnitude: 85
+                apparent_magnitude: 2.41
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.36
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 11
+           right_ascension_minutes: 54
+           right_ascension_seconds: 47.8
+     right_ascension_decimal_hours: 11.9133
+   right_ascension_decimal_degrees: 178.699
+               declination_degrees: 53
+               declination_minutes: 35
+               declination_seconds: 3
+       declination_decimal_degrees: 53.5842
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 185. row ***************************
+                       common_name: Alioth
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 77
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 4905
+    approx_rank_apparent_magnitude: 32
+                apparent_magnitude: 1.77
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.2
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 12
+           right_ascension_minutes: 54
+           right_ascension_seconds: 50.3
+     right_ascension_decimal_hours: 12.914
+   right_ascension_decimal_degrees: 193.71
+               declination_degrees: 55
+               declination_minutes: 51
+               declination_seconds: 3
+       declination_decimal_degrees: 55.8508
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 186. row ***************************
+                       common_name: Mizar
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 79
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5054
+    approx_rank_apparent_magnitude: 69
+                apparent_magnitude: 2.23
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.33
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 13
+           right_ascension_minutes: 24
+           right_ascension_seconds: 40.1
+     right_ascension_decimal_hours: 13.4111
+   right_ascension_decimal_degrees: 201.167
+               declination_degrees: 54
+               declination_minutes: 49
+               declination_seconds: 4
+       declination_decimal_degrees: 54.8178
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 187. row ***************************
+                       common_name: Alkaid
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 85
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5191
+    approx_rank_apparent_magnitude: 38
+                apparent_magnitude: 1.86
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.59
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMa
+           constellation_full_name: Ursa Major
+       constellation_name_genitive: Ursae Majoris
+              constellation_number: 3
+             right_ascension_hours: 13
+           right_ascension_minutes: 48
+           right_ascension_seconds: 16.1
+     right_ascension_decimal_hours: 13.8045
+   right_ascension_decimal_degrees: 207.067
+               declination_degrees: 49
+               declination_minutes: 13
+               declination_seconds: 1
+       declination_decimal_degrees: 49.2169
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 188. row ***************************
+                       common_name: Polaris
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 1
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 424
+    approx_rank_apparent_magnitude: 48
+                apparent_magnitude: 1.99
+         apparent_magnitude_varies: 1
+                absolute_magnitude: -3.62
+         absolute_magnitude_varies: 1
+        constellation_abbreviation: UMi
+           constellation_full_name: Ursa Minor
+       constellation_name_genitive: Ursae Minoris
+              constellation_number: 56
+             right_ascension_hours: 2
+           right_ascension_minutes: 55
+           right_ascension_seconds: 0
+     right_ascension_decimal_hours: 2.91667
+   right_ascension_decimal_degrees: 43.75
+               declination_degrees: 89
+               declination_minutes: 20
+               declination_seconds: 3
+       declination_decimal_degrees: 89.3342
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 189. row ***************************
+                       common_name: Kochab
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 7
+    bayer_designation_greek_letter: beta
+bayer_designation_greek_letter_tex: $\beta$
+       bayer_designation_extension: 
+                      bs_hr_number: 5563
+    approx_rank_apparent_magnitude: 57
+                apparent_magnitude: 2.07
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.87
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMi
+           constellation_full_name: Ursa Minor
+       constellation_name_genitive: Ursae Minoris
+              constellation_number: 56
+             right_ascension_hours: 14
+           right_ascension_minutes: 50
+           right_ascension_seconds: 40.2
+     right_ascension_decimal_hours: 14.8445
+   right_ascension_decimal_degrees: 222.667
+               declination_degrees: 74
+               declination_minutes: 4
+               declination_seconds: 4
+       declination_decimal_degrees: 74.0678
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 190. row ***************************
+                       common_name: Pherkad Major
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 13
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 5735
+    approx_rank_apparent_magnitude: 174
+                apparent_magnitude: 3
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -2.84
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: UMi
+           constellation_full_name: Ursa Minor
+       constellation_name_genitive: Ursae Minoris
+              constellation_number: 56
+             right_ascension_hours: 15
+           right_ascension_minutes: 20
+           right_ascension_seconds: 42.8
+     right_ascension_decimal_hours: 15.3452
+   right_ascension_decimal_degrees: 230.178
+               declination_degrees: 71
+               declination_minutes: 46
+               declination_seconds: 0
+       declination_decimal_degrees: 71.7667
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 191. row ***************************
+                       common_name: $\mu$ Velorum
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: mu
+bayer_designation_greek_letter_tex: $\mu$
+       bayer_designation_extension: 
+                      bs_hr_number: 4216
+    approx_rank_apparent_magnitude: 113
+                apparent_magnitude: 2.69
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -0.06
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vel
+           constellation_full_name: Vela
+       constellation_name_genitive: Velorum
+              constellation_number: 32
+             right_ascension_hours: 10
+           right_ascension_minutes: 47
+           right_ascension_seconds: 34.2
+     right_ascension_decimal_hours: 10.7928
+   right_ascension_decimal_degrees: 161.892
+               declination_degrees: -49
+               declination_minutes: 31
+               declination_seconds: 6
+       declination_decimal_degrees: -49.5183
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 192. row ***************************
+                       common_name: Koo She
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: delta
+bayer_designation_greek_letter_tex: $\delta$
+       bayer_designation_extension: 
+                      bs_hr_number: 3485
+    approx_rank_apparent_magnitude: 45
+                apparent_magnitude: 1.95
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.01
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vel
+           constellation_full_name: Vela
+       constellation_name_genitive: Velorum
+              constellation_number: 32
+             right_ascension_hours: 8
+           right_ascension_minutes: 45
+           right_ascension_seconds: 12.9
+     right_ascension_decimal_hours: 8.75358
+   right_ascension_decimal_degrees: 131.304
+               declination_degrees: -54
+               declination_minutes: 46
+               declination_seconds: 38
+       declination_decimal_degrees: -54.7772
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 193. row ***************************
+                       common_name: Regor
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 35
+                apparent_magnitude: 1.81
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -5.25
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vel
+           constellation_full_name: Vela
+       constellation_name_genitive: Velorum
+              constellation_number: 32
+             right_ascension_hours: 8
+           right_ascension_minutes: 9
+           right_ascension_seconds: 31.9501
+     right_ascension_decimal_hours: 8.15888
+   right_ascension_decimal_degrees: 122.383
+               declination_degrees: -47
+               declination_minutes: 20
+               declination_seconds: 11.7108
+       declination_decimal_degrees: -47.3366
+                         is_binary: 0
+                       is_multiple: 4
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 194. row ***************************
+                       common_name: N Velorum
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: N
+bayer_designation_greek_letter_tex: 
+       bayer_designation_extension: 
+                      bs_hr_number: 3803
+    approx_rank_apparent_magnitude: 199
+                apparent_magnitude: 3.16
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -1.15
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vel
+           constellation_full_name: Vela
+       constellation_name_genitive: Velorum
+              constellation_number: 0
+             right_ascension_hours: 9
+           right_ascension_minutes: 31
+           right_ascension_seconds: 13.3189
+     right_ascension_decimal_hours: 9.52037
+   right_ascension_decimal_degrees: 142.806
+               declination_degrees: -57
+               declination_minutes: 2
+               declination_seconds: 3.7578
+       declination_decimal_degrees: -57.0344
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 195. row ***************************
+                       common_name: Markeb
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: kappa
+bayer_designation_greek_letter_tex: $\kappa$
+       bayer_designation_extension: 
+                      bs_hr_number: 3734
+    approx_rank_apparent_magnitude: 90
+                apparent_magnitude: 2.47
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.62
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vel
+           constellation_full_name: Vela
+       constellation_name_genitive: Velorum
+              constellation_number: 32
+             right_ascension_hours: 9
+           right_ascension_minutes: 22
+           right_ascension_seconds: 41.2
+     right_ascension_decimal_hours: 9.37811
+   right_ascension_decimal_degrees: 140.672
+               declination_degrees: -55
+               declination_minutes: 5
+               declination_seconds: 25
+       declination_decimal_degrees: -55.0903
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 196. row ***************************
+                       common_name: Suhail
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: lambda
+bayer_designation_greek_letter_tex: $\lambda$
+       bayer_designation_extension: 
+                      bs_hr_number: 3634
+    approx_rank_apparent_magnitude: 68
+                apparent_magnitude: 2.23
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.99
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vel
+           constellation_full_name: Vela
+       constellation_name_genitive: Velorum
+              constellation_number: 32
+             right_ascension_hours: 9
+           right_ascension_minutes: 8
+           right_ascension_seconds: 40.7
+     right_ascension_decimal_hours: 9.14464
+   right_ascension_decimal_degrees: 137.17
+               declination_degrees: -43
+               declination_minutes: 30
+               declination_seconds: 29
+       declination_decimal_degrees: -43.5081
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 197. row ***************************
+                       common_name: Vindemiatrix
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 47
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+       bayer_designation_extension: 
+                      bs_hr_number: 4932
+    approx_rank_apparent_magnitude: 144
+                apparent_magnitude: 2.85
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0.37
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vir
+           constellation_full_name: Virgo
+       constellation_name_genitive: Virginis
+              constellation_number: 2
+             right_ascension_hours: 13
+           right_ascension_minutes: 3
+           right_ascension_seconds: 5.9
+     right_ascension_decimal_hours: 13.0516
+   right_ascension_decimal_degrees: 195.774
+               declination_degrees: 10
+               declination_minutes: 51
+               declination_seconds: 3
+       declination_decimal_degrees: 10.8508
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 198. row ***************************
+                       common_name: Spica
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 67
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+       bayer_designation_extension: 
+                      bs_hr_number: 5056
+    approx_rank_apparent_magnitude: 16
+                apparent_magnitude: 0.97
+         apparent_magnitude_varies: 0
+                absolute_magnitude: -3.56
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vir
+           constellation_full_name: Virgo
+       constellation_name_genitive: Virginis
+              constellation_number: 2
+             right_ascension_hours: 13
+           right_ascension_minutes: 26
+           right_ascension_seconds: 10.2
+     right_ascension_decimal_hours: 13.4362
+   right_ascension_decimal_degrees: 201.543
+               declination_degrees: -11
+               declination_minutes: 15
+               declination_seconds: 2
+       declination_decimal_degrees: -11.2506
+                         is_binary: 0
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+*************************** 199. row ***************************
+                       common_name: Porrima
+                        greek_name: 
+                        latin_name: 
+                       arabic_name: 
+      flamsteed_designation_number: 0
+    bayer_designation_greek_letter: gamma
+bayer_designation_greek_letter_tex: $\gamma$
+       bayer_designation_extension: 
+                      bs_hr_number: 0
+    approx_rank_apparent_magnitude: 122
+                apparent_magnitude: 2.74
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 2.38
+         absolute_magnitude_varies: 0
+        constellation_abbreviation: Vir
+           constellation_full_name: Virgo
+       constellation_name_genitive: Virginis
+              constellation_number: 2
+             right_ascension_hours: 12
+           right_ascension_minutes: 41
+           right_ascension_seconds: 39.6434
+     right_ascension_decimal_hours: 12.6943
+   right_ascension_decimal_degrees: 190.415
+               declination_degrees: -1
+               declination_minutes: 26
+               declination_seconds: 57.7421
+       declination_decimal_degrees: -1.44937
+                         is_binary: 1
+                       is_multiple: 0
+               is_binary_component: 0
+               is_eclipsing_binary: 0
+                             notes: 
+199 rows in set (0.00 sec)
+
+select distinct constellation_full_name from Stars where approx_rank_apparent_magnitude > 0
+and approx_rank_apparent_magnitude <= 200 order by constellation_full_name;
+
+
+
+
+show columns from Stars;
+
+
 
