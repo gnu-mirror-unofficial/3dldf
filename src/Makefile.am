@@ -1084,16 +1084,21 @@ clstsph1.ps: clstsph1.dvi
 	dvips -o clstsph1.ps clstsph1.dvi
 
 clstsph1.dvi: clstsph1.tex clstsph1.0 clstsph2.0 clstsph_1_star_info_combined.tex 
-	cat clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
-            clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex | sort -n | grep -v ^% > clstsph_1_star_info_combined.tex
 	tex clstsph1.tex
 	tex clstsph1.tex
 
-clstsph1.0 clstsph1.1 clstsph_1_star_info_combined.tex: clstsph1.mp 
+clstsph_1_star_info_combined.tex: clstsph1.mp clstsph_1_0.tex
+	rm -f clstsph_1_star_info_combined.tex
+	cat clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
+           clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex | sort -n | grep -v ^% > clstsph_1_star_info_combined.tex
+
+clstsph1.0 clstsph1.1: clstsph1.mp 
 	mpost -numbersystem "double" clstsph1.mp
 
-clstsph1.mp: 3dldf$(EXEEXT) clstsph1.ldf astronmy.lmc clstsph1.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
-	3dldf$(EXEEXT) clstsph1.ldf
+clstsph1.mp clstsph_1_0.tex: 3dldf$(EXEEXT) clstsph1.ldf astronmy.lmc clstsph1.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+	rm -f clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
+            clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex
+	3dldf$(EXEEXT) --stars-limit 200 clstsph1.ldf
 
 clstsph2.pdf: clstsph2.dvi
 	dvipdfmx $<
@@ -1102,7 +1107,7 @@ clstsph2.0: clstsph2.mp
 	mpost -numbersystem "double" clstsph2.mp
 
 clstsph2.mp: clstsph2.ldf clstsph1.aux clstsph1_sub.ldf astronmy.lmc www.lmc xxx.lmc yyy.lmc zzz.lmc
-	3dldf$(EXEEXT) clstsph2.ldf
+	3dldf$(EXEEXT) --stars-limit 200 clstsph2.ldf
 
 clstsph3.pdf: clstsph3.dvi
 	dvipdfmx $<
