@@ -1033,8 +1033,8 @@ plot_star_on_spherical_biangle {dschubba, 76, label_pos_lft, 2pt, -4pt, false, f
 
 plot_star_on_panel (temp_star_panel_point) {dschubba, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {dschubba, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {dschubba, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_ulft,
+                         1pt, -1pt, false, false};
 %% *** (3) 77. Wei
 
 plot_star_on_sphere (star_point) {radius, wei};
@@ -1305,7 +1305,7 @@ plot_star_on_spherical_biangle {graffias, 97, label_pos_lft, 0, 0, false, false}
 plot_star_on_panel (temp_star_panel_point) {graffias, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {graffias, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, 0, false, false};
+                         0, -1pt, false, false};
 
 %% *** (3) 98. Arneb
 
@@ -1378,13 +1378,12 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {zubeneschamali, temp_star_
                          label_pos_rt, 0, 0, false, true};
 
 label.rt("{\Small\vbox{\hbox{Zubeneschamali}}}", % \vskip-5pt\hbox{\hskip-1pt crux}}}",
-         temp_star_flat_panel_point shifted (1pt, 0pt))
+         temp_star_flat_panel_point shifted (.45pt, 0pt))
          with_text_color label_color on_picture flat_quadrant_picture[3];
 
 label.rt("{\Small\vbox{\hbox{Zubeneschamali}}}", % \vskip-5pt\hbox{\hskip-1pt crux}}}",
-         temp_star_flat_panel_point shifted (1pt, 0pt))
+         temp_star_flat_panel_point shifted (.45pt, 0pt))
          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
-
 
 %% *** (3) 103. Unukalhai
 
@@ -1414,7 +1413,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {sheratan, temp_star_panel_
 
 plot_star_on_sphere (star_point) {radius, zubenelgenubi};
 
-plot_star_on_spherical_biangle {zubenelgenubi, 105, label_pos_rt, 2pt, 0, false, false};
+plot_star_on_spherical_biangle {zubenelgenubi, 105, label_pos_lft, 0pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {zubenelgenubi, star_point};
 
@@ -2136,9 +2135,9 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {epsilon_persei, temp_star_
 
 plot_star_on_sphere (star_point) {radius, alniyat};
 
-plot_star_on_spherical_biangle {alniyat, 156, label_pos_zero, -.333cm, .6275cm, false, false};
+plot_star_on_spherical_biangle {alniyat, 156, label_pos_zero, -.333cm, 1cm + 1pt, false, false};
 
-draw R156 -- (R156 shifted (0, .5cm)) with_color line_color on_picture qv[5];
+draw R156 -- (R156 shifted (0, .75cm + 3pt)) with_color line_color on_picture qv[5];
 
 plot_star_on_panel (temp_star_panel_point) {alniyat, star_point};
 

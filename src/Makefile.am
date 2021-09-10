@@ -1096,7 +1096,7 @@ clstsph_1_star_info_combined.tex: clstsph_1_0.tex
 clstsph1.0 clstsph1.1: clstsph1.mp 
 	mpost -numbersystem "double" clstsph1.mp
 
-clstsph1.mp clstsph_1_0.tex: 3dldf$(EXEEXT) clstsph1.ldf astronmy.lmc clstsph1.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+clstsph1.mp clstsph_1_0.tex: 3dldf$(EXEEXT) clstsph1.ldf clstsph1_sub.ldf astronmy.lmc clstsph1.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	rm -f clstsph_1_0.tex clstsph_1_1.tex clstsph_1_2.tex clstsph_1_3.tex clstsph_1_4.tex \
             clstsph_1_5.tex clstsph_1_6.tex clstsph_1_7.tex
 	3dldf$(EXEEXT) --stars-limit 200 clstsph1.ldf

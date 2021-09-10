@@ -2150,6 +2150,9 @@ quadruple star system
 
 /* !! START HERE:  LDF 2021.07.13.  */ 
 
+update Stars set approx_rank_apparent_magnitude = 97, common_name = "Graffias" where bayer_designation_greek_letter = "Beta"
+and constellation_name_genitive = "Scorpii";
+
 97. Beta Scorpii              Graffias          16 05 -19.8  353.1 +23.7  B1V+B2V       2.56  -3.50    6.15 1.12   530
 
 /* *** (3) Delta Piscium  (for "quadrant" model (sample5)).  */
@@ -10877,28 +10880,10 @@ bayer_designation_greek_letter_tex: $\alpha$
                         latin_name: 
                        arabic_name: 
       flamsteed_designation_number: 0
-    bayer_designation_greek_letter: gamma
-bayer_designation_greek_letter_tex: $\gamma$
-       bayer_designation_extension: 
-                      bs_hr_number: 0
-    approx_rank_apparent_magnitude: 122
-                apparent_magnitude: 2.74
-         apparent_magnitude_varies: 0
-                absolute_magnitude: 2.38
-         absolute_magnitude_varies: 0
         constellation_abbreviation: Vir
            constellation_full_name: Virgo
        constellation_name_genitive: Virginis
               constellation_number: 2
-             right_ascension_hours: 12
-           right_ascension_minutes: 41
-           right_ascension_seconds: 39.6434
-     right_ascension_decimal_hours: 12.6943
-   right_ascension_decimal_degrees: 190.415
-               declination_degrees: -1
-               declination_minutes: 26
-               declination_seconds: 57.7421
-       declination_decimal_degrees: -1.44937
                          is_binary: 1
                        is_multiple: 0
                is_binary_component: 0
@@ -10913,7 +10898,294 @@ and approx_rank_apparent_magnitude <= 200 order by constellation_full_name;
 select distinct constellation_full_name, constellation_name_genitive, constellation_abbreviation
 from Stars order by constellation_full_name;
 
+select approx_rank_apparent_magnitude, common_name,
+bayer_designation_greek_letter, bayer_designation_greek_letter_tex,
+constellation_full_name, bs_hr_number, apparent_magnitude,
+apparent_magnitude_varies, absolute_magnitude,
+absolute_magnitude_varies, right_ascension_hours,
+right_ascension_minutes, right_ascension_seconds,
+right_ascension_decimal_hours, right_ascension_decimal_degrees,
+declination_degrees, declination_minutes, declination_seconds,
+declination_decimal_degrees from Stars where approx_rank_apparent_magnitude > 200
+and approx_rank_apparent_magnitude <= 210 order by approx_rank_apparent_magnitude\G
 
+
+*************************** 1. row ***************************
+    approx_rank_apparent_magnitude: 201
+                       common_name: 
+    bayer_designation_greek_letter: nu
+bayer_designation_greek_letter_tex: $\nu$
+           constellation_full_name: Puppis
+                      bs_hr_number: 2451
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 6
+           right_ascension_minutes: 38
+           right_ascension_seconds: 19.7
+     right_ascension_decimal_hours: 6.63881
+   right_ascension_decimal_degrees: 99.5822
+               declination_degrees: -43
+               declination_minutes: 12
+               declination_seconds: 47
+       declination_decimal_degrees: -43.2131
+*************************** 2. row ***************************
+    approx_rank_apparent_magnitude: 202
+                       common_name: Al Haud
+    bayer_designation_greek_letter: theta
+bayer_designation_greek_letter_tex: $\theta$
+           constellation_full_name: Ursa Major
+                      bs_hr_number: 3775
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 9
+           right_ascension_minutes: 34
+           right_ascension_seconds: 5.1
+     right_ascension_decimal_hours: 9.56808
+   right_ascension_decimal_degrees: 143.521
+               declination_degrees: 51
+               declination_minutes: 35
+               declination_seconds: 3
+       declination_decimal_degrees: 51.5842
+*************************** 3. row ***************************
+    approx_rank_apparent_magnitude: 203
+                       common_name: Aldhibah
+    bayer_designation_greek_letter: zeta
+bayer_designation_greek_letter_tex: $\zeta$
+           constellation_full_name: Draco
+                      bs_hr_number: 6396
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 17
+           right_ascension_minutes: 8
+           right_ascension_seconds: 50.6
+     right_ascension_decimal_hours: 17.1474
+   right_ascension_decimal_degrees: 257.211
+               declination_degrees: 65
+               declination_minutes: 41
+               declination_seconds: 3
+       declination_decimal_degrees: 65.6842
+*************************** 4. row ***************************
+    approx_rank_apparent_magnitude: 204
+                       common_name: 
+    bayer_designation_greek_letter: phi
+bayer_designation_greek_letter_tex: $\phi$
+           constellation_full_name: Sagittarius
+                      bs_hr_number: 7039
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 18
+           right_ascension_minutes: 46
+           right_ascension_seconds: 48.7
+     right_ascension_decimal_hours: 18.7802
+   right_ascension_decimal_degrees: 281.703
+               declination_degrees: -26
+               declination_minutes: 58
+               declination_seconds: 1
+       declination_decimal_degrees: -26.9669
+*************************** 5. row ***************************
+    approx_rank_apparent_magnitude: 205
+                       common_name: Hoedus II
+    bayer_designation_greek_letter: eta
+bayer_designation_greek_letter_tex: $\eta$
+           constellation_full_name: Auriga
+                      bs_hr_number: 1641
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 5
+           right_ascension_minutes: 7
+           right_ascension_seconds: 48.9
+     right_ascension_decimal_hours: 5.13025
+   right_ascension_decimal_degrees: 76.9538
+               declination_degrees: 41
+               declination_minutes: 15
+               declination_seconds: 2
+       declination_decimal_degrees: 41.2506
+*************************** 6. row ***************************
+    approx_rank_apparent_magnitude: 206
+                       common_name: 
+    bayer_designation_greek_letter: alpha
+bayer_designation_greek_letter_tex: $\alpha$
+           constellation_full_name: Circinus
+                      bs_hr_number: 5463
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 14
+           right_ascension_minutes: 44
+           right_ascension_seconds: 1.4
+     right_ascension_decimal_hours: 14.7337
+   right_ascension_decimal_degrees: 221.005
+               declination_degrees: -65
+               declination_minutes: 3
+               declination_seconds: 15
+       declination_decimal_degrees: -65.0542
+*************************** 7. row ***************************
+    approx_rank_apparent_magnitude: 208
+                       common_name: 
+    bayer_designation_greek_letter: epsilon
+bayer_designation_greek_letter_tex: $\epsilon$
+           constellation_full_name: Lepus
+                      bs_hr_number: 1654
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 5
+           right_ascension_minutes: 6
+           right_ascension_seconds: 14.7
+     right_ascension_decimal_hours: 5.10408
+   right_ascension_decimal_degrees: 76.5612
+               declination_degrees: -22
+               declination_minutes: 20
+               declination_seconds: 5
+       declination_decimal_degrees: -22.3347
+*************************** 8. row ***************************
+    approx_rank_apparent_magnitude: 209
+                       common_name: 
+    bayer_designation_greek_letter: kappa
+bayer_designation_greek_letter_tex: $\kappa$
+           constellation_full_name: Ophiuchus
+                      bs_hr_number: 6299
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 16
+           right_ascension_minutes: 58
+           right_ascension_seconds: 32.7
+     right_ascension_decimal_hours: 16.9757
+   right_ascension_decimal_degrees: 254.635
+               declination_degrees: 9
+               declination_minutes: 20
+               declination_seconds: 5
+       declination_decimal_degrees: 9.33472
+*************************** 9. row ***************************
+    approx_rank_apparent_magnitude: 210
+                       common_name: 
+    bayer_designation_greek_letter: G
+bayer_designation_greek_letter_tex: 
+           constellation_full_name: Scorpius
+                      bs_hr_number: 6630
+                apparent_magnitude: 1000
+         apparent_magnitude_varies: 0
+                absolute_magnitude: 0
+         absolute_magnitude_varies: 0
+             right_ascension_hours: 17
+           right_ascension_minutes: 49
+           right_ascension_seconds: 51.4808
+     right_ascension_decimal_hours: 17.831
+   right_ascension_decimal_degrees: 267.465
+               declination_degrees: -37
+               declination_minutes: 2
+               declination_seconds: 35.8975
+       declination_decimal_degrees: -37.0433
+
+
+select "&&&";
+
+
+select approx_rank_apparent_magnitude, common_name,
+bayer_designation_greek_letter, bayer_designation_greek_letter_tex,
+constellation_full_name, bs_hr_number, apparent_magnitude,
+apparent_magnitude_varies, absolute_magnitude,
+absolute_magnitude_varies, right_ascension_hours,
+right_ascension_minutes, right_ascension_seconds,
+right_ascension_decimal_hours, right_ascension_decimal_degrees,
+declination_degrees, declination_minutes, declination_seconds,
+declination_decimal_degrees from Stars where approx_rank_apparent_magnitude > 0
+and approx_rank_apparent_magnitude <= 200 order by
+approx_rank_apparent_magnitude\G
+
+select approx_rank_apparent_magnitude from Stars where approx_rank_apparent_magnitude > 0
+and approx_rank_apparent_magnitude <= 200 order by
+approx_rank_apparent_magnitude\G
+
+select approx_rank_apparent_magnitude, common_name from Stars where approx_rank_apparent_magnitude = 97;
+
+select * from Stars where common_name = "Graffias"\G
+
+
+from Stars where approx_rank_apparent_magnitude = 97;
+
+
+replace into Stars (
+common_name,
+approx_rank_apparent_magnitude,
+apparent_magnitude,
+absolute_magnitude,
+bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex,
+constellation_name_genitive,
+constellation_abbreviation,
+constellation_full_name,
+constellation_number,
+right_ascension_hours,
+right_ascension_minutes,
+right_ascension_seconds,
+declination_degrees,
+declination_minutes,
+declination_seconds,
+is_multiple,
+is_binary_component,
+bs_hr_number
+)
+values (
+"Graffias",
+97,
+2.56,
+-3.50,
+"beta",
+"$\\beta$",
+"Scorpii",
+"Sco",
+"Scorpius",
+33,
+16, -- Right ascension
+5,
+26.23198,
+-19, -- Declination
+48,
+19.6300,
+3,
+1,
+5984
+);
+
+
+delete from Stars where common_name = "Graffias"\G
+
+select * from Stars where common_name = "Graffias"\G
+
+
+https://en.wikipedia.org/wiki/Beta_Scorpii
+show columns from Constellations;
+select rank_constellation from Constellations where name = "Scorpius";
+
+https://simbad.u-strasbg.fr/simbad/sim-id?Ident=beta+Sco
+
+replace into Stars
+
+
+97. Beta Scorpii              Graffias          16 05 -19.8  353.1 +23.7  B1V+B2V       2.56  -3.50    6.15 1.12   530
+
+
+
+Apparent magnitude (V) 	2.62[2]
+
+HR 5984
+
+-- constellation_full_name, 
 
 
 show columns from Stars;
