@@ -1293,11 +1293,19 @@ plot_star_on_panel (temp_star_panel_point) {zosma, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {zosma, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
 
-
 %% *** (3) 97.  Graffias
 
-%% !! START HERE: LDF 2021.09.09.  Add this!
+%% !! TODO:  LDF 2021.09.10.  This isn't quite right.  Graffias is a multiple star system and I'm using the data
+%% for the brightest member.  
 
+plot_star_on_sphere (star_point) {radius, graffias};
+
+plot_star_on_spherical_biangle {graffias, 97, label_pos_lft, 0, 0, false, false};
+
+plot_star_on_panel (temp_star_panel_point) {graffias, star_point};
+
+plot_star_on_flat_panel (temp_star_flat_panel_point) {graffias, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+                         0, 0, false, false};
 
 %% *** (3) 98. Arneb
 
