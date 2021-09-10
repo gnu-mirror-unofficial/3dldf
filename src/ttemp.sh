@@ -34,10 +34,9 @@ cd ~/3DLDF-3.0_web/3dldf/
 
 if test -n "$1"
 then
-    echo "Arg 1 is non-empty."
-    cvs commit -m "$1"
+    echo "Arg 1 is non-empty.  Not committing."
 else
-    echo "Arg 1 is empty."
+    echo "Arg 1 is empty.  Committing."
     cvs commit -m "Edited."
 fi
 
