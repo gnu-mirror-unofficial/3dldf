@@ -1279,6 +1279,9 @@ accsdtbs$(EXEEXT): accsdtbs.o
 accsdtbs.o: accsdtbs.cxx
 	g++ -I/usr/include/mysql -c -o $@ $<
 
+accsdtbs.cxx:
+	$(CTANGLE) accsdtbs.web - accsdtbs.cxx
+
 .PHONY: headers
 
 headers:

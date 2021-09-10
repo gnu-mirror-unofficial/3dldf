@@ -1,73 +1,73 @@
-/* /home/laurence/3DLDF-3.0/src/accsdtbs.cxx  */
-/* Created by Laurence D. Finston (LDF) Thu 24 Jun 2021 08:45:33 PM CEST */
+@q accsdtbs.web  @>
+@q Created by Laurence D. Finston (LDF) Thu 24 Jun 2021 08:45:33 PM CEST @>
 
-/* * (1) Copyright and License. */
+@q * (1) Copyright and License. @>
 
-/* This file is part of GNU 3DLDF, a package for three-dimensional drawing.  */
-/* Copyright (C) 2021 The Free Software Foundation, Inc. */
+@q This file is part of GNU 3DLDF, a package for three-dimensional drawing.  @>
+@q Copyright (C) 2021 The Free Software Foundation, Inc. @>
 
-/* GNU 3DLDF is free software; you can redistribute it and/or modify  */
-/* it under the terms of the GNU General Public License as published by  */
-/* the Free Software Foundation; either version 3 of the License, or  */
-/* (at your option) any later version.   */
+@q GNU 3DLDF is free software; you can redistribute it and/or modify  @>
+@q it under the terms of the GNU General Public License as published by  @>
+@q the Free Software Foundation; either version 3 of the License, or  @>
+@q (at your option) any later version.   @>
 
-/* GNU 3DLDF is distributed in the hope that it will be useful,  */
-/* but WITHOUT ANY WARRANTY; without even the implied warranty of  */
-/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  */
-/* GNU General Public License for more details.   */
+@q GNU 3DLDF is distributed in the hope that it will be useful,  @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of  @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  @>
+@q GNU General Public License for more details.   @>
 
-/* You should have received a copy of the GNU General Public License  */
-/* along with GNU 3DLDF; if not, write to the Free Software  */
-/* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA */
+@q You should have received a copy of the GNU General Public License  @>
+@q along with GNU 3DLDF; if not, write to the Free Software  @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
 
-/* GNU 3DLDF is a GNU package.   */
-/* It is part of the GNU Project of the   */
-/* Free Software Foundation  */
-/* and is published under the GNU General Public License.  */
-/* See the website http://www.gnu.org  */
-/* for more information.    */
-/* GNU 3DLDF is available for downloading from  */
-/* http://www.gnu.org/software/3dldf/LDF.html. */
+@q GNU 3DLDF is a GNU package.   @>
+@q It is part of the GNU Project of the   @>
+@q Free Software Foundation  @>
+@q and is published under the GNU General Public License.  @>
+@q See the website http://www.gnu.org  @>
+@q for more information.    @>
+@q GNU 3DLDF is available for downloading from  @>
+@q http://www.gnu.org/software/3dldf/LDF.html. @>
 
-/* Please send bug reports to Laurence.Finston@gmx.de */
-/* The mailing list help-3dldf@gnu.org is available for people to  */
-/* ask other users for help.   */
-/* The mailing list info-3dldf@gnu.org is for sending  */
-/* announcements to users. To subscribe to these mailing lists, send an  */
-/* email with ``subscribe <email-address>'' as the subject.   */
+@q Please send bug reports to Laurence.Finston@gmx.de @>
+@q The mailing list help-3dldf@gnu.org is available for people to  @>
+@q ask other users for help.   @>
+@q The mailing list info-3dldf@gnu.org is for sending  @>
+@q announcements to users. To subscribe to these mailing lists, send an  @>
+@q email with ``subscribe <email-address>'' as the subject.   @>
 
-/* The author can be contacted at:     */
+@q The author can be contacted at:     @>
 
-/* Laurence D. Finston 		       */
-/* c/o Free Software Foundation, Inc.  */
-/* 51 Franklin St, Fifth Floor 	       */
-/* Boston, MA  02110-1301  	       */
-/* USA                                 */                             
+@q Laurence D. Finston 		       @>
+@q c/o Free Software Foundation, Inc.  @>
+@q 51 Franklin St, Fifth Floor 	       @>
+@q Boston, MA  02110-1301  	       @>
+@q USA                                 @>                             
 
-/* Laurence.Finston@gmx.de  */
+@q Laurence.Finston@gmx.de  @>
 
 
-/* Access database  */
+@ Access database.
 
-/* This program can be used to access the database.                                 */
-/* It can contain "one-off" or "throwaway" code for updating tables in the database */
-/* with calculated values or for other purposes.                                    */
-/* LDF 2021.06.24.  */
+This program can be used to access the database.                                 
+It can contain ``one-off'' or ``"throwaway'' code for updating tables in 
+the database with calculated values or for other purposes.                                    
+\initials{LDF 2021.09.10.}
 
-/* https://www.timecalculator.net/time-to-decimal
+https://www.timecalculator.net/time-to-decimal
 
 How to Calculate Decimal from Time
 
 To get the total decimal hours we use the formula: h = hours + (minutes / 60) + (seconds / 3600).
-
 To get the total decimal minutes we use the formula: m = (hours * 60) + minutes + (seconds / 60).
-
 To get the total decimal seconds we use the formula: s = (hours * 3600) + (minutes * 60) + seconds.
 
-*/
+@ As of 2021.6.27.:  Call like this, for example, to calculate right_ascension_decimal_hours and */
+declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""
 
-/* As of 2021.6.27.:  Call like this, for example, to calculate right_ascension_decimal_hours and */
-/* declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""            */
+@q ** (2) @>
+@
+@<Include files@>=
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -86,6 +86,12 @@ To get the total decimal seconds we use the formula: s = (hours * 3600) + (minut
 
 using namespace std;
 
+@q ** (2) @>
+@
+@<Global variable declarations@>=
+
+vector<Star*> star_vector;
+
 MYSQL_RES *result;
 MYSQL_ROW curr_row;
 MYSQL *mysql;
@@ -97,40 +103,29 @@ stringstream sql_strm;
 int
 submit_mysql_query(string query_str);
 
-struct Star
+@q ** (2) @>
+@
+@<|class Star| declaration@>=
+
+class Star
 {
-      string common_name;
-      string greek_name;
-      string latin_name;
-      string arabic_name;
-      int flamsteed_designation_number;
-      string bayer_designation_greek_letter;
-      int bs_hr_number;
-      int approx_rank_apparent_magnitude;
-      string constellation_abbreviation;
-      string constellation_full_name;
-      string constellation_name_genitive;
-      int constellation_number;
-      int right_ascension_hours;
-      int right_ascension_minutes;
-      float right_ascension_seconds;
-      float right_ascension_decimal_hours;
-      int declination_degrees;
-      int declination_minutes;
-      float declination_seconds;
-      float declination_decimal_degrees;
 
-      int set(MYSQL_ROW curr_row);
 
-      void show(string text) const;
+
+
+   public:
+
+      @<Declare |Star| functions@>@;
 
 };
 
-vector<Star*> star_vector;
-
+@q ** (2) @>
+@
+@<|main| definition@>=
 int
 main(int argc, char *argv[])
 {
+@q *** (3) @>
 
    int status = 0;
 
@@ -196,15 +191,7 @@ main(int argc, char *argv[])
 
    curr_row = 0;
 
-   sql_strm << "select common_name, greek_name, latin_name, "
-            << "arabic_name, flamsteed_designation_number, "
-            << "bayer_designation_greek_letter, bs_hr_number, "
-            << "approx_rank_apparent_magnitude, constellation_abbreviation, "
-            << "constellation_full_name, constellation_name_genitive, constellation_number, "
-            << "right_ascension_hours, right_ascension_minutes, "
-            << "right_ascension_seconds, right_ascension_decimal_hours, "
-            << "declination_degrees, declination_minutes, declination_seconds, "
-            << "declination_decimal_degrees from Stars ";
+   sql_strm << "select from Stars ";
 
    if (where_str != "")
       sql_strm << "where " << where_str << " ";
@@ -212,6 +199,8 @@ main(int argc, char *argv[])
    sql_strm << "order by bs_hr_number";
 
       cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
+
+#if 0 
 
    status = submit_mysql_query(sql_strm.str());
 
@@ -448,11 +437,26 @@ main(int argc, char *argv[])
    }
 #endif 
 
-   exit(0);
+@q *** (3) @>
 
+#endif 
+
+   exit(0);
 
 }  /* End of |main| definition  */
 
+@q ** (2) Star functions.  @>
+@ Star functions.  
+
+@q *** (3) Set @>
+@ Set.
+
+@<Declare |Star| functions@>=
+int 
+set(MYSQL_ROW curr_row);
+
+@
+@<Define |Star| functions@>=
 int
 Star::set(MYSQL_ROW curr_row)
 {
@@ -470,32 +474,44 @@ Star::set(MYSQL_ROW curr_row)
 
    }
 
-   common_name                    = curr_row[0];
-   greek_name                     = curr_row[1];
-   latin_name                     = curr_row[2];
-   arabic_name                    = curr_row[3];     
-   flamsteed_designation_number   = atoi(curr_row[4]);
-   bayer_designation_greek_letter = curr_row[5];
-   bs_hr_number                   = atoi(curr_row[6]);
-   approx_rank_apparent_magnitude = atoi(curr_row[7]);
-   constellation_abbreviation     = curr_row[8];
-   constellation_full_name        = curr_row[9];
-   constellation_name_genitive    = curr_row[10];
-   constellation_number           = atoi(curr_row[11]);
-   right_ascension_hours          = atoi(curr_row[12]);
-   right_ascension_minutes        = atoi(curr_row[13]);
-   right_ascension_seconds        = atof(curr_row[14]);
-   right_ascension_decimal_hours  = atof(curr_row[15]);
-   declination_degrees            = atoi(curr_row[16]);
-   declination_minutes            = atoi(curr_row[17]);
-   declination_seconds            = atof(curr_row[18]);
-   declination_decimal_degrees    = atof(curr_row[19]);
 
    return 0;
 
 }
-      
-      
+
+@q ** (2) @>
+@
+@<Declare |Star| functions@>=
+void 
+show(string text) const;
+
+@
+@<Define |Star| functions@>=
+void 
+Star::show(string text) const
+{
+    cerr << "Entering `Star::show'." << endl;
+
+    if (text == "")
+       text = "Star:";
+
+    cerr 
+         << endl;
+
+    return;
+
+} /* End of |Star::show| definition.  */
+
+
+@q ** (2) @>
+@      
+@<Function declarations@>=
+int
+submit_mysql_query(string query_str);
+
+@q *** (3) Definition @>
+@
+@<|submit_mysql_query| definition@>=      
 int
 submit_mysql_query(string query_str)
 {
@@ -561,43 +577,17 @@ submit_mysql_query(string query_str)
    
 }  /* |submit_mysql_query| definition */
 
-void 
-Star::show(string text) const
-{
-    cerr << "Entering `Star::show'." << endl;
 
-    if (text == "")
-       text = "Star:";
-
-    cerr << text << endl
-         << "common_name                    == " << common_name << endl
-         << "greek_name                     == " << greek_name << endl
-         << "latin_name                     == " << latin_name << endl
-         << "arabic_name                    == " << arabic_name << endl
-         << "flamsteed_designation_number   == " << flamsteed_designation_number << endl
-         << "bayer_designation_greek_letter == " << bayer_designation_greek_letter << endl
-         << "bs_hr_number                   == " << bs_hr_number << endl
-         << "approx_rank_apparent_magnitude == " << approx_rank_apparent_magnitude << endl
-         << "constellation_abbreviation     == " << constellation_abbreviation << endl
-         << "constellation_full_name        == " << constellation_full_name << endl
-         << "constellation_name_genitive    == " << constellation_name_genitive << endl
-         << "constellation_number           == " << constellation_number << endl
-         << "right_ascension_hours          == " << right_ascension_hours << endl
-         << "right_ascension_minutes        == " << right_ascension_minutes << endl
-         << "right_ascension_seconds        == " << right_ascension_seconds << endl
-         << "right_ascension_decimal_hours  == " << right_ascension_decimal_hours << endl
-         << "declination_degrees            == " << declination_degrees << endl
-         << "declination_minutes            == " << declination_minutes << endl
-         << "declination_seconds            == " << declination_seconds << endl
-         << "declination_decimal_degrees    == " << declination_decimal_degrees << endl
-         << endl;
-
-    return;
-
-} /* End of |Star::show| definition.  */
-
-
-
+@q ** (2) @>
+@
+@c
+@<Include files@>@;
+@<|class Star| declaration@>@;
+@<Global variable declarations@>@;
+@<Function declarations@>@;
+@<Define |Star| functions@>@;
+@<|main| definition@>@;
+@<|submit_mysql_query| definition@>@;
 
 /* Local Variables:  */
 /* mode:CWEB         */
