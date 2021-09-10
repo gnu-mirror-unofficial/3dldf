@@ -161,6 +161,10 @@ main(int argc, char *argv[])
 {
 @q *** (3) @>
 
+   bool DEBUG = true; /* |false| */ 
+
+   cerr << "Entering `accsdtbs'." << endl;
+
    int status = 0;
 
    unsigned int mysql_timeout = 120;
@@ -373,10 +377,12 @@ main(int argc, char *argv[])
        else 
        {
 
+#if 0
               cerr << "In `main':"
                    << endl 
                    << "`mysql_fetch_row' succeeded, `curr_row' is non-NULL."
                    << endl;
+#endif 
           }      
 
          try
@@ -394,10 +400,12 @@ main(int argc, char *argv[])
              throw;
          }
 
+#if 0
             cerr << "In `main':"
                  << endl 
                  << "`new Star' succeeded."
                  << endl;
+#endif 
 
          status = star->set(curr_row);
 
@@ -419,10 +427,12 @@ main(int argc, char *argv[])
 
          }  /* |if (status != 0)|  */
 
+#if 0
              cerr << "In `main':"
                   << endl 
                   << "`Star::set' succeeded, returning 0."
                   << endl;
+#endif 
   
          star_vector.push_back(star);
 
@@ -445,17 +455,20 @@ main(int argc, char *argv[])
 
    cerr << "star_vector.size() == " << star_vector.size() << endl;
 
+#if 0 
    if (star_vector.size() > 0)
       cerr << "star_vector:" << endl;
-
+#endif 
 
 @q *** (3) @>
 @
 @<|main| definition@>=
 
+
    stringstream s;
    int i = 1;
 
+#if 0 
    for (vector<Star*>::iterator iter = star_vector.begin();
         iter != star_vector.end();
         ++iter)
@@ -466,11 +479,11 @@ main(int argc, char *argv[])
 
       s.str("");
    }
+#endif 
 
 #if 0 /* 1  */
    exit(0);
 #endif 
-
 
 #if 0 /* 1   */
 
@@ -492,6 +505,8 @@ main(int argc, char *argv[])
 @q *** (3) @>
 
 #endif 
+
+   cerr << "Exiting `accsdtbs' successfully exit status 0." << endl;
 
    exit(0);
 
@@ -517,7 +532,7 @@ Star::set(MYSQL_ROW curr_row)
 {
 @q ***** (5) @>
 
-   bool DEBUG = true;  /* |false|  */
+   bool DEBUG = false;  /* |true|  */
 
    if (DEBUG)
       cerr << "Entering `Star::set'." << endl;
