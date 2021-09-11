@@ -34,8 +34,9 @@ using namespace std;
 @
 @<Global variables@>=
 
-string where_str;
-string order_str;
+string where_str = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
+string order_str = "order by approx_rank_apparent_magnitude";
+int star_limit   = 200;
 
 @q ** (2) @>
 @
@@ -43,6 +44,7 @@ string order_str;
 
 extern string where_str;
 extern string order_str;
+extern int star_limit;
 
 @q * (1) @>
 @ Process command line options.
@@ -70,6 +72,7 @@ process_command_line_options(int argc, char *argv[])
   const unsigned int WHERE_INDEX    = 1;
   const unsigned int NO_WHERE_INDEX = 2;
   const unsigned int ORDER_BY_INDEX = 3;
+  const unsigned int LIMIT_INDEX    = 4;
 
 @q **** (4) Option struct.@>
 @ Option struct.
@@ -81,6 +84,7 @@ process_command_line_options(int argc, char *argv[])
     {"where", 1, 0, 0},
     {"no-where", 1, 0, 0},
     {"order-by", 1, 0, 0},
+    {"limit", 1, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -98,7 +102,6 @@ process_command_line_options(int argc, char *argv[])
 
     option_ctr = getopt_long_only(argc, argv, "", long_options, &option_index);
 
-#if 0 
     if (DEBUG)
     {
         cerr << "option_ctr == " << option_ctr << endl;
@@ -106,7 +109,8 @@ process_command_line_options(int argc, char *argv[])
         if (optarg)
           cerr << "optarg == " << optarg << endl;
     }
-#endif     
+
+@q ***** (5) @>
 
     if (option_ctr == -1)
     {
@@ -115,13 +119,15 @@ process_command_line_options(int argc, char *argv[])
         break;
     }
 
+@q ***** (5) @>
+
     if (option_ctr == 0)
     {
         if (DEBUG)
           {
-            cerr << "option " << long_options[option_index].name;
+            cerr << "option \"" << long_options[option_index].name << "\"";
             if (optarg)
-              cerr << " with arg " << optarg;
+              cerr << " with arg \"" << optarg << "\"";
             cerr << endl;
           }
 
@@ -144,6 +150,64 @@ process_command_line_options(int argc, char *argv[])
             exit(0);
 
         } /* |if (option_index == HELP_INDEX)|  */
+
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == WHERE_INDEX)
+        {
+            cerr << "`option_index' == `WHERE_INDEX'" << endl;
+
+            where_str = optarg;
+
+            where_str.insert(0, "where ");
+
+            if (DEBUG)
+            { 
+               cerr << "`where_str' == " <<  where_str << endl;
+            }          
+
+        } /* |else if (option_index == WHERE_INDEX)|  */
+
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == ORDER_BY_INDEX)
+        {
+            cerr << "`option_index' == `ORDER_BY_INDEX'" << endl;
+
+            order_str = optarg;
+
+            order_str.insert(0, "order by ");
+
+            if (DEBUG)
+            { 
+               cerr << "`order_str' == " <<  order_str << endl;
+            }          
+
+        } /* |else if (option_index == ORDER_BY_INDEX)|  */
+
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == LIMIT_INDEX)
+        {
+            cerr << "`option_index' == `LIMIT_INDEX'" << endl;
+
+            star_limit = atoi(optarg);
+
+            if (DEBUG)
+            { 
+               cerr << "`star_limit' == " <<  star_limit << endl;
+            }          
+
+        } /* |else if (option_index == LIMIT_INDEX)|  */
 
 @q ***** (5) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
@@ -190,8 +254,8 @@ process_command_line_options(int argc, char *argv[])
 
    }  /* |while|  */
 
-@q **** (4) Filename arguments.@>
-@*2 Filename arguments.
+@q **** (4) Non-option arguments.@>
+@*2 Non-option arguments.
 
 @<|process_command_line_options| definition@>=
         

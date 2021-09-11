@@ -175,8 +175,6 @@ main(int argc, char *argv[])
 
    unsigned int mysql_timeout = 120;
 
-   string where_str = "";
-   string order_str = "";
 
    cerr << "argc == " << argc << "." << endl;
 
@@ -201,46 +199,9 @@ main(int argc, char *argv[])
             << endl;
    }  
 
-return 0;
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-
-   if (argc > 1)
-   {
-       cerr << "argv[1] == " << argv[1] << endl;
-     
-       where_str = argv[1];
-
-       if (tolower(where_str[0]) == '-')
-          where_str = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
-       else if (tolower(where_str[0]) == 'x')
-          where_str = "";
-       else
-          where_str.insert(0, "where "); 
-   }
-   else 
-      where_str = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
-
-   if (argc > 2)
-   {
-       cerr << "argv[2] == " << argv[2] << endl;
-       
-       order_str = argv[2];
-
-       if (tolower(order_str[0]) == '-')
-          order_str = "order by approx_rank_apparent_magnitude";
-       else if (tolower(order_str[0]) == 'x')
-          order_str = "";
-       else
-          order_str.insert(0, "order by ");
-   }
-   else
-     order_str = "order by approx_rank_apparent_magnitude";
-
-   cerr << "where_str == " << where_str << endl
-        << "order_str == " << order_str << endl;
+   cerr << "where_str  == " << where_str << endl
+        << "order_str  == " << order_str << endl
+        << "star_limit == " << star_limit << endl;
 
 @q *** (3) @>
 @
@@ -326,9 +287,11 @@ return 0;
             << "is_eclipsing_binary "
             << "from Stars ";
 
-      sql_strm << where_str << " " << order_str << ";";
+      sql_strm << where_str << " " << order_str << " limit " << star_limit <<";";
 
       cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
+
+      return 0;  /* Testing  */
 
 #if 1 /* 0  */
 

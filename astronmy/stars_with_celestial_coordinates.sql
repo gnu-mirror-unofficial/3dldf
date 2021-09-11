@@ -11190,5 +11190,8 @@ HR 5984
 
 show columns from Stars;
 
+select * from Stars where common_name = "sirius"\G
 
+select * from Stars where approx_rank_apparent_magnitude > 0 order by approx_rank_apparent_magnitude
+limit 1\G
 
