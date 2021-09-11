@@ -36,7 +36,7 @@ using namespace std;
 
 string where_str = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
 string order_str = "order by approx_rank_apparent_magnitude";
-int star_limit   = 200;
+int limit_stars   = 200;
 int show_stars   = 0;
 int decimals_calculate = 0;
 int stars_query = 0;
@@ -50,7 +50,7 @@ int pictures_query = 0;
 
 extern string where_str;
 extern string order_str;
-extern int star_limit;
+extern int limit_stars;
 extern int show_stars;
 extern int show_stars;
 extern int decimals_calculate;
@@ -166,8 +166,25 @@ process_command_line_options(int argc, char *argv[])
         {
             cerr << "accsdtbs 1.0" << endl 
                  << "Valid options for accsdtbs are:" << endl
-                 << "--help:  Prints this message and exits with exit status 0."
-                 << endl << endl; 
+                 << endl 
+                 << "--help:                Prints this message and exits with exit status 0." << endl 
+                 << endl 
+                 << "--where:               `where' clause for database query (without keyword \"where\")." 
+                 << endl << endl 
+                 << "--no-where:            Suppress `where' clause for database query." << endl << endl 
+                 << "--order-by:            `order by' clause for database query (without keywords \"order by\")." 
+                 << endl << endl 
+                 << "--limit:               `limit' clause for database query (integer > 0)" << endl << endl 
+                 << "--show-stars:          Show the `Stars' returned by the database query." << endl << endl 
+                 << "--decimals-calculate:  Calculate right ascension and declination decimal degrees" << endl 
+                 << "                       for the `Stars' returned by the database query." << endl << endl 
+                 << "--stars-query:         Query the database for `Stars'." << endl << endl
+                 << "--points-query:        Query the database for `Points'." << endl << endl
+                 << "--paths-query:         Query the database for `Paths'." << endl << endl
+                 << "--pictures-query:      Query the database for `Pictures'." << endl << endl
+                 << "--all-query:           Query the database for all types, currently" << endl 
+                 << "                       `Stars', `Points', `Paths' and `Pictures'." << endl
+                 << endl; 
 
             if (DEBUG)
             {
@@ -237,11 +254,11 @@ process_command_line_options(int argc, char *argv[])
         {
             cerr << "`option_index' == `LIMIT_INDEX'" << endl;
 
-            star_limit = atoi(optarg);
+            limit_stars = atoi(optarg);
 
             if (DEBUG)
             { 
-               cerr << "`star_limit' == " <<  star_limit << endl;
+               cerr << "`limit_stars' == " <<  limit_stars << endl;
             }          
 
         } /* |else if (option_index == LIMIT_INDEX)|  */

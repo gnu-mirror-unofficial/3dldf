@@ -200,9 +200,9 @@ main(int argc, char *argv[])
             << endl;
    }  
 
-   cerr << "where_str  == " << where_str << endl
-        << "order_str  == " << order_str << endl
-        << "star_limit == " << star_limit << endl;
+   cerr << "where_str   == " << where_str << endl
+        << "order_str   == " << order_str << endl
+        << "limit_stars == " << limit_stars << endl;
 
 @q *** (3) @>
 @
@@ -258,7 +258,7 @@ main(int argc, char *argv[])
                 << "Calling `query_database_for_stars'." << endl;
        }     
 
-       status = query_database_for_stars(where_str, order_str, star_limit);
+       status = query_database_for_stars(where_str, order_str, limit_stars);
 
 @q ***** (5) @>
 
@@ -667,14 +667,14 @@ calculate_decimals(void)
 
 @<Function declarations@>=
 int
-query_database_for_stars(string wwhere_str, string oorder_str, int sstar_limit);
+query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars);
 
 @q *** (3) Definition  @>
 @
 @<|query_database_for_stars| definition@>=
 
 int
-query_database_for_stars(string wwhere_str, string oorder_str, int sstar_limit)
+query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars)
 {
 @q **** (4) @>
 
@@ -727,7 +727,7 @@ query_database_for_stars(string wwhere_str, string oorder_str, int sstar_limit)
             << "is_eclipsing_binary "
             << "from Stars ";
 
-      sql_strm << wwhere_str << " " << oorder_str << " limit " << sstar_limit <<";";
+      sql_strm << wwhere_str << " " << oorder_str << " limit " << llimit_stars <<";";
 
       cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
 
