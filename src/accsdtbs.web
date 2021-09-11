@@ -394,7 +394,11 @@ show(string text) const;
 void 
 Star::show(string text) const
 {
-    cerr << "Entering `Star::show'." << endl;
+
+    bool DEBUG = false; /* |true| */ 
+
+    if (DEBUG)
+       cerr << "Entering `Star::show'." << endl;
 
     if (text == "")
        text = "Star:";
@@ -432,6 +436,9 @@ Star::show(string text) const
          << "is_eclipsing_binary:                 " << is_eclipsing_binary << endl 
          << "notes:                               " << notes << endl 
          << endl; 
+
+    if (DEBUG)
+       cerr << "Exiting `Star::show' successfully with void return value." << endl;
 
     return;
 
@@ -920,7 +927,9 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
           (*iter)->show(s.str());
 
           s.str("");
-       }   
+       }
+
+       cerr << "Showed " << star_vector.size() << " stars." << endl;   
 
    }  /* |if| */
 
