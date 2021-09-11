@@ -291,10 +291,6 @@ main(int argc, char *argv[])
 
       cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
 
-      return 0;  /* Testing  */
-
-#if 1 /* 0  */
-
    status = submit_mysql_query(sql_strm.str());
 
    sql_strm.str("");
@@ -372,7 +368,6 @@ main(int argc, char *argv[])
 
        else 
        {
-
 #if 0
               cerr << "In `main':"
                    << endl 
@@ -451,35 +446,71 @@ main(int argc, char *argv[])
 
    cerr << "star_vector.size() == " << star_vector.size() << endl;
 
-#if 0 
-   if (star_vector.size() > 0)
-      cerr << "star_vector:" << endl;
-#endif 
 
 @q *** (3) @>
 @
 @<|main| definition@>=
 
-
    stringstream s;
    int i = 1;
 
-#if 0 
-   for (vector<Star*>::iterator iter = star_vector.begin();
-        iter != star_vector.end();
-        ++iter)
+   if (show_stars > 0)
    {
-      s << "Star " << i++ << ":";
 
-      (*iter)->show(s.str());
+       if (star_vector.size() > 0)
+          cerr << "`star_vector':" << endl;
+       else
+          cerr << "`star_vector' is empty.  Not showing." << endl;
 
-      s.str("");
-   }
-#endif 
+       for (vector<Star*>::iterator iter = star_vector.begin();
+            iter != star_vector.end();
+            ++iter)
+       {
+          s << "Star " << i++ << ":";
 
-#if 0 /* 1  */
-   exit(0);
-#endif 
+          (*iter)->show(s.str());
+
+          s.str("");
+       }   
+
+   }  /* |if| */
+
+
+@q *** (3) Calculate right ascension decimal hours and decimal degrees and declination decimal degrees.  @>
+
+@ Calculate right ascension decimal hours and decimal degrees and declination decimal degrees.  
+
+@<|main| definition@>=
+
+   if (decimals_calculate > 0)
+   {
+
+       if (DEBUG)
+       { 
+           cerr << "Calculating right ascension decimal hours and decimal degrees and declination decimal degrees."
+                << endl;  
+       }     
+
+       status = calculate_decimals();
+
+       if (status != 0)
+       {
+           cerr << "ERROR!  In `main':  `calculate_decimals' failed, returning " << status << "."
+                << endl
+                << "Will try to continue."
+                << endl;
+       }
+       else if (DEBUG)
+       { 
+           cerr << "In `main':  `calculate_decimals' succeeded, returning 0."
+                << endl;
+       }   
+
+   }  /* |if (decimals_calculate > 0)|  */
+
+@q *** (3) @>
+@
+@<|main| definition@>=
 
 #if 0 /* 1   */
 
@@ -499,8 +530,6 @@ main(int argc, char *argv[])
 #endif 
 
 @q *** (3) @>
-
-#endif 
 
    cerr << "Exiting `accsdtbs' successfully exit status 0." << endl;
 
@@ -745,8 +774,22 @@ calculate_decimals(void)
    
    int decl_sign;
 
-   cerr << "Calculating `right_ascension_decimal_hours' and `declination_decimal_degrees'." 
+   cerr << "Entering `calculate_decimals'." << endl
+        << "Calculating right_ascension_decimal_hours and `declination_decimal_degrees'." 
         << endl; 
+
+
+   cerr << "`star_vector.size()' == " << star_vector.size() << endl;
+
+   if (star_vector.size() == 0)
+   {
+      cerr << "In `calculate_decimals':" << endl 
+           << "`star_vector' is empty."  << endl 
+           << "Exiting function successfully with return value 0." 
+           << endl;
+
+      return 0;
+   }
 
 @q **** (4) @>
 
@@ -755,6 +798,32 @@ calculate_decimals(void)
        ++iter)
    {
 @q ***** (5) @>
+
+      if (   (*iter)->right_ascension_decimal_hours != 0
+          && (*iter)->right_ascension_decimal_degrees != 0
+          && (*iter)->declination_decimal_degrees != 0)
+      {
+           cerr << "For star ";
+
+           if (!(*iter)->common_name.empty())
+              cerr << (*iter)->common_name << ", ";
+
+           cerr << (*iter)->bayer_designation_greek_letter << " " 
+                << (*iter)->constellation_abbreviation << ":" << endl
+                << "`right_ascension_decimal_hours', "
+                << "`right_ascension_decimal_degrees' and"
+                << endl 
+                << "`declination_decimal_degrees' are all non-zero."
+                << endl 
+                << "No need to calculate them.  Continuing." << endl;
+
+           continue;  
+
+      }  /* |if|  */
+
+@q ***** (5) @>
+@
+@<|calculate_decimals| definition@>=
 
       ra_decimal_hours =   (*iter)->right_ascension_hours + ((*iter)->right_ascension_minutes / 60.0)
                          + ((*iter)->right_ascension_seconds / 3600.0);
@@ -769,8 +838,24 @@ calculate_decimals(void)
 
       if (ra_decimal_hours == 0.0 && decl_decimal_degrees == 0.0)
       {
+
+           cerr << "For star ";
+
+           if (!(*iter)->common_name.empty())
+              cerr << (*iter)->common_name << ", ";
+
+           cerr << (*iter)->bayer_designation_greek_letter << " " 
+                << (*iter)->constellation_abbreviation << ":" << endl
+                << "`ra_decimal_degrees' and `decl_decimal_degrees' are both 0.0."
+                << endl 
+                << "Not updating database for star.  Continuing." << endl;
+
          continue;
       }
+
+@q ***** (5) @>
+@
+@<|calculate_decimals| definition@>=
 
       sql_strm << "update Stars set ";
 
