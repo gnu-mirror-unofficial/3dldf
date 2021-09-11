@@ -740,6 +740,8 @@ calculate_decimals(void)
 {
 @q **** (4) @>
 
+   bool DEBUG = true; /* |false| */ 
+
    float ra_decimal_hours;
    float decl_decimal_degrees;
 
@@ -803,9 +805,14 @@ calculate_decimals(void)
 
 @q **** (4) @>
 
+   if (DEBUG)
+   { 
+      cerr << "Exiting `calculate_decimals' successfully with return value 0." << endl;
+   }  
+
+   return 0;
+
 }  /* End of |calculate_decimals| definition  */
-
-
 
 
 @q ** (2) @>
