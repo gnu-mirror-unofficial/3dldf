@@ -114,6 +114,7 @@ class Star
 
       friend int main(int argc, char *argv[]);
       friend int calculate_decimals(void);
+      friend int query_database_for_stars(string wwhere_string, string oorder_string);
 
       string common_name;                                   
       string greek_name;                                    
@@ -232,7 +233,7 @@ main(int argc, char *argv[])
 
     if (!mysql_real_connect(mysql, "localhost", "3dldf", 0, "3dldf", 0, NULL, 0))
     {
-        cerr << "ERROR! `mysql_real_connect' failed, returning NULL." 
+        cerr << "ERROR! In `main':  `mysql_real_connect' failed, returning NULL." 
                   << endl 
                   << "Failed to connect to database: Error: " << mysql_error(mysql) 
                   << endl
@@ -242,296 +243,59 @@ main(int argc, char *argv[])
     }
     else
     { 
-        cerr << "In `main':"
-                  << endl 
-                  << "`mysql_real_connect' succeeded." << endl;
+        cerr << "In `main':  `mysql_real_connect' succeeded." << endl;
    }  
 
-   Star *star = 0;
-
-   stringstream sql_strm;
-
-   curr_row = 0;
-
-   sql_strm << "select "
-            << "common_name, "
-            << "greek_name, "
-            << "latin_name, "
-            << "arabic_name, "
-            << "flamsteed_designation_number, "
-            << "bayer_designation_greek_letter, "
-            << "bayer_designation_greek_letter_tex, "
-            << "bayer_designation_extension, "
-            << "bs_hr_number, "
-            << "approx_rank_apparent_magnitude, "
-            << "apparent_magnitude, "
-            << "absolute_magnitude, "
-            << "apparent_magnitude_varies, "
-            << "absolute_magnitude_varies, "
-            << "constellation_abbreviation, "
-            << "constellation_full_name, "
-            << "constellation_name_genitive, "
-            << "constellation_number, "
-            << "right_ascension_hours, "
-            << "right_ascension_minutes, "
-            << "right_ascension_seconds, "
-            << "right_ascension_decimal_hours, "
-            << "right_ascension_decimal_degrees, "
-            << "declination_degrees, "
-            << "declination_minutes, "
-            << "declination_seconds, "
-            << "declination_decimal_degrees, "
-            << "is_binary, "
-            << "is_multiple, "
-            << "is_binary_component, "
-            << "is_eclipsing_binary "
-            << "from Stars ";
-
-      sql_strm << where_str << " " << order_str << " limit " << star_limit <<";";
-
-      cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
-
-   status = submit_mysql_query(sql_strm.str());
-
-   sql_strm.str("");
-
-   if (status != 0)
-   {
-      cerr << "ERROR!"
-           << endl
-           << "`submit_mysql_query' failed, returning " 
-           << status << "." << endl 
-           << "MySQL error:  " << mysql_error(mysql)
-           << endl 
-           << "MySQL error number:  " << mysql_errno(mysql)
-           << endl;
-   }
-
-   else 
-   {
-      cerr << "In `main':"
-           << endl
-           << "`submit_mysql_query' succeeded, returning 0."
-           << endl 
-           << "`affected_rows' == " << affected_rows
-           << endl 
-           << "`row_ctr' == " << row_ctr
-           << endl 
-           << "`field_ctr' == " << field_ctr
-           << endl;
-   }
-
-@q *** (3) @>
-
-@ Process the contents of |curr_row|.
-
-@<|main| definition@>=
-
-   do 
-   {
 @q **** (4) @>
 
-       curr_row = mysql_fetch_row(result);
-
-       if (curr_row == 0)
-       {
-
-         cerr << "`mysql_fetch_row' returned NULL." 
-              << endl;
-
-         if (*mysql_error(mysql))
-         {
-            cerr << "ERROR!  In `main':  `mysql_fetch_row' failed "
-                 << "returning NULL." << endl
-                 << "Error:  " << mysql_error(mysql) << endl
-                 << "Exiting program unsuccessfully with exit status 1."
-                 << endl;
-
-            if (result)
-            {
-                mysql_free_result(result);
-                result = 0;
-            }
-
-            return 1;
-
-         }
-
-         else
-         {
-           cerr << "No more rows." << endl;
-          
-           break;
-         }
-
-       }  /* |if (curr_row == 0)|  */
-
-       else 
-       {
-#if 0
-              cerr << "In `main':"
-                   << endl 
-                   << "`mysql_fetch_row' succeeded, `curr_row' is non-NULL."
-                   << endl;
-#endif 
-          }      
-
-         try
-         {
-            star = new Star;
-         }
-
-         catch(bad_alloc)
-         {
-             cerr << "ERROR! In `main':"
-                  << endl 
-                  << "`create_new<Star>' failed.  Rethrowing `bad_alloc'."
-                  << endl;
-
-             throw;
-         }
-
-#if 0
-            cerr << "In `main':"
-                 << endl 
-                 << "`new Star' succeeded."
-                 << endl;
-#endif 
-
-         status = star->set(curr_row);
-
-         if (status != 0)
-         {
-             cerr << "ERROR! In `main':"
-                  << endl 
-                  << "`Star::set' failed, returning " << status << "." << endl
-                  << "Exiting program unsuccessfully with exit status 1."
-                  << endl;
-
-             if (result)
-             {
-                 mysql_free_result(result);
-                 result = 0;
-             }         
-
-             exit(1);
-
-         }  /* |if (status != 0)|  */
-
-#if 0
-             cerr << "In `main':"
-                  << endl 
-                  << "`Star::set' succeeded, returning 0."
-                  << endl;
-#endif 
-  
-         star_vector.push_back(star);
-
-
-@q **** (4) @>
-
-   } while (curr_row != 0);
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-
-   /* Free |result|  */
-
-   if (result)
+   if (stars_query > 0)
    {
-       mysql_free_result(result);
-       result = 0;
-   }
-
-   cerr << "star_vector.size() == " << star_vector.size() << endl;
-
-
-@q *** (3) @>
-@
-@<|main| definition@>=
-
-   stringstream s;
-   int i = 1;
-
-   if (show_stars > 0)
-   {
-
-       if (star_vector.size() > 0)
-          cerr << "`star_vector':" << endl;
-       else
-          cerr << "`star_vector' is empty.  Not showing." << endl;
-
-       for (vector<Star*>::iterator iter = star_vector.begin();
-            iter != star_vector.end();
-            ++iter)
-       {
-          s << "Star " << i++ << ":";
-
-          (*iter)->show(s.str());
-
-          s.str("");
-       }   
-
-   }  /* |if| */
-
-
-@q *** (3) Calculate right ascension decimal hours and decimal degrees and declination decimal degrees.  @>
-
-@ Calculate right ascension decimal hours and decimal degrees and declination decimal degrees.  
-
-@<|main| definition@>=
-
-   if (decimals_calculate > 0)
-   {
+@q ***** (5) @>
 
        if (DEBUG)
        { 
-           cerr << "Calculating right ascension decimal hours and decimal degrees and declination decimal degrees."
-                << endl;  
+           cerr << "In `main':  `stars_query' == " << stars_query << " (> 1)" << endl 
+                << "Calling `query_database_for_stars'." << endl;
        }     
 
-       status = calculate_decimals();
+       status = query_database_for_stars(where_str, order_str, star_limit);
+
+@q ***** (5) @>
 
        if (status != 0)
        {
-           cerr << "ERROR!  In `main':  `calculate_decimals' failed, returning " << status << "."
-                << endl
-                << "Will try to continue."
-                << endl;
-       }
-       else if (DEBUG)
-       { 
-           cerr << "In `main':  `calculate_decimals' succeeded, returning 0."
-                << endl;
+          cerr << "ERROR! In `main':  `query_database_for_stars' failed, returning " << status << "." 
+                    << endl
+                    << "Exiting program unsuccessfully with exit status 1."
+                    << endl;
+
+          exit(1);
        }   
 
-   }  /* |if (decimals_calculate > 0)|  */
+@q ***** (5) @>
+
+       else if (DEBUG)
+       { 
+          cerr << "In `main':  `query_database_for_stars' succeeded, returning 0."
+                    << endl;
+
+       }   
+
+@q ***** (5) @>
+
+   }  /* |if (stars_query > 0)| */
+
+   else if (DEBUG)
+   { 
+       cerr << "In `main':  `stars_query' == " << stars_query << " (<= 0)" << endl 
+            << "Not calling `query_database_for_stars'." << endl;
+   }     
+
+@q **** (4) @>
 
 @q *** (3) @>
-@
-@<|main| definition@>=
 
-#if 0 /* 1   */
-
-   int prev_bs_hr_number = 0;
-
-   cerr << "Duplicates:" << endl;
-
-   for (vector<Star*>::iterator iter = star_vector.begin();
-       iter != star_vector.end(); 
-       ++iter)
-   {
-       if ((*iter)->bs_hr_number == prev_bs_hr_number)
-          cerr << prev_bs_hr_number << endl;
-        
-       prev_bs_hr_number = (*iter)->bs_hr_number;
-   }
-#endif 
-
-@q *** (3) @>
-
-   cerr << "Exiting `accsdtbs' successfully exit status 0." << endl;
+   cerr << "Exiting `accsdtbs' successfully with exit status 0." << endl;
 
    exit(0);
 
@@ -778,7 +542,6 @@ calculate_decimals(void)
         << "Calculating right_ascension_decimal_hours and `declination_decimal_degrees'." 
         << endl; 
 
-
    cerr << "`star_vector.size()' == " << star_vector.size() << endl;
 
    if (star_vector.size() == 0)
@@ -896,6 +659,329 @@ calculate_decimals(void)
 }  /* End of |calculate_decimals| definition  */
 
 
+@q ** (2) Query database for |Stars|.  @>
+
+@ Query database for |Stars|.
+
+@q *** (3) Declaration  @>
+
+@<Function declarations@>=
+int
+query_database_for_stars(string wwhere_str, string oorder_str, int sstar_limit);
+
+@q *** (3) Definition  @>
+@
+@<|query_database_for_stars| definition@>=
+
+int
+query_database_for_stars(string wwhere_str, string oorder_str, int sstar_limit)
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+   { 
+      cerr << "Entering `query_database_for_stars'." << endl;
+   }  
+
+   int status = 0;
+
+   Star *star = 0;
+
+   stringstream sql_strm;
+
+   curr_row = 0;
+
+   sql_strm << "select "
+            << "common_name, "
+            << "greek_name, "
+            << "latin_name, "
+            << "arabic_name, "
+            << "flamsteed_designation_number, "
+            << "bayer_designation_greek_letter, "
+            << "bayer_designation_greek_letter_tex, "
+            << "bayer_designation_extension, "
+            << "bs_hr_number, "
+            << "approx_rank_apparent_magnitude, "
+            << "apparent_magnitude, "
+            << "absolute_magnitude, "
+            << "apparent_magnitude_varies, "
+            << "absolute_magnitude_varies, "
+            << "constellation_abbreviation, "
+            << "constellation_full_name, "
+            << "constellation_name_genitive, "
+            << "constellation_number, "
+            << "right_ascension_hours, "
+            << "right_ascension_minutes, "
+            << "right_ascension_seconds, "
+            << "right_ascension_decimal_hours, "
+            << "right_ascension_decimal_degrees, "
+            << "declination_degrees, "
+            << "declination_minutes, "
+            << "declination_seconds, "
+            << "declination_decimal_degrees, "
+            << "is_binary, "
+            << "is_multiple, "
+            << "is_binary_component, "
+            << "is_eclipsing_binary "
+            << "from Stars ";
+
+      sql_strm << wwhere_str << " " << oorder_str << " limit " << sstar_limit <<";";
+
+      cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
+
+   status = submit_mysql_query(sql_strm.str());
+
+   sql_strm.str("");
+
+   if (status != 0)
+   {
+      cerr << "ERROR!"
+           << endl
+           << "`submit_mysql_query' failed, returning " 
+           << status << "." << endl 
+           << "MySQL error:  " << mysql_error(mysql)
+           << endl 
+           << "MySQL error number:  " << mysql_errno(mysql)
+           << endl;
+   }
+
+   else 
+   {
+      cerr << "In `query_database_for_stars':"
+           << endl
+           << "`submit_mysql_query' succeeded, returning 0."
+           << endl 
+           << "`affected_rows' == " << affected_rows
+           << endl 
+           << "`row_ctr' == " << row_ctr
+           << endl 
+           << "`field_ctr' == " << field_ctr
+           << endl;
+   }
+
+@q **** (4) @>
+
+@ Process the contents of |curr_row|.
+
+@<|query_database_for_stars| definition@>=
+
+   do 
+   {
+@q ***** (5) @>
+
+       curr_row = mysql_fetch_row(result);
+
+       if (curr_row == 0)
+       {
+
+         cerr << "`mysql_fetch_row' returned NULL." 
+              << endl;
+
+         if (*mysql_error(mysql))
+         {
+            cerr << "ERROR!  In `query_database_for_stars':  `mysql_fetch_row' failed "
+                 << "returning NULL." << endl
+                 << "Error:  " << mysql_error(mysql) << endl
+                 << "Exiting function unsuccessfully with return value 1."
+                 << endl;
+
+            if (result)
+            {
+                mysql_free_result(result);
+                result = 0;
+            }
+
+            return 1;
+
+         }
+
+         else
+         {
+           cerr << "No more rows." << endl;
+          
+           break;
+         }
+
+       }  /* |if (curr_row == 0)|  */
+
+       else 
+       {
+#if 0
+              cerr << "In `query_database_for_stars':"
+                   << endl 
+                   << "`mysql_fetch_row' succeeded, `curr_row' is non-NULL."
+                   << endl;
+#endif 
+          }      
+
+         try
+         {
+            star = new Star;
+         }
+
+         catch(bad_alloc)
+         {
+             cerr << "ERROR! In `query_database_for_stars':"
+                  << endl 
+                  << "`create_new<Star>' failed.  Rethrowing `bad_alloc'."
+                  << endl;
+
+             throw;
+         }
+
+#if 0
+            cerr << "In `query_database_for_stars':"
+                 << endl 
+                 << "`new Star' succeeded."
+                 << endl;
+#endif 
+
+         status = star->set(curr_row);
+
+         if (status != 0)
+         {
+             cerr << "ERROR! In `query_database_for_stars':"
+                  << endl 
+                  << "`Star::set' failed, returning " << status << "." << endl
+                  << "Exiting function unsuccessfully with return value 1."
+                  << endl;
+
+             if (result)
+             {
+                 mysql_free_result(result);
+                 result = 0;
+             }         
+
+             exit(1);
+
+         }  /* |if (status != 0)|  */
+
+#if 0
+             cerr << "In `query_database_for_stars':"
+                  << endl 
+                  << "`Star::set' succeeded, returning 0."
+                  << endl;
+#endif 
+  
+         star_vector.push_back(star);
+
+
+@q ***** (5) @>
+
+   } while (curr_row != 0);
+
+@q **** (4) @>
+@
+@<|query_database_for_stars| definition@>=
+
+   /* Free |result|  */
+
+   if (result)
+   {
+       mysql_free_result(result);
+       result = 0;
+   }
+
+   cerr << "star_vector.size() == " << star_vector.size() << endl;
+
+
+@q **** (4) @>
+@
+@<|query_database_for_stars| definition@>=
+
+   stringstream s;
+   int i = 1;
+
+   if (show_stars > 0)
+   {
+
+       if (star_vector.size() > 0)
+          cerr << "`star_vector':" << endl;
+       else
+          cerr << "`star_vector' is empty.  Not showing." << endl;
+
+       for (vector<Star*>::iterator iter = star_vector.begin();
+            iter != star_vector.end();
+            ++iter)
+       {
+          s << "Star " << i++ << ":";
+
+          (*iter)->show(s.str());
+
+          s.str("");
+       }   
+
+   }  /* |if| */
+
+@q **** (4) Calculate right ascension decimal hours and decimal degrees and declination decimal degrees.  @>
+
+@ Calculate right ascension decimal hours and decimal degrees and declination decimal degrees.  
+
+@<|query_database_for_stars| definition@>=
+
+   if (decimals_calculate > 0)
+   {
+
+       if (DEBUG)
+       { 
+           cerr << "Calculating right ascension decimal hours and decimal degrees and declination decimal degrees."
+                << endl;  
+       }     
+
+       status = calculate_decimals();
+
+       if (status != 0)
+       {
+           cerr << "ERROR!  In `query_database_for_stars':  `calculate_decimals' failed, returning " << status << "."
+                << endl
+                << "Will try to continue."
+                << endl;
+       }
+       else if (DEBUG)
+       { 
+           cerr << "In `query_database_for_stars':  `calculate_decimals' succeeded, returning 0."
+                << endl;
+       }   
+
+   }  /* |if (decimals_calculate > 0)|  */
+
+@q **** (4) @>
+@
+@<|query_database_for_stars| definition@>=
+
+#if 0 /* 1   */
+
+   int prev_bs_hr_number = 0;
+
+   cerr << "Duplicates:" << endl;
+
+   for (vector<Star*>::iterator iter = star_vector.begin();
+       iter != star_vector.end(); 
+       ++iter)
+   {
+       if ((*iter)->bs_hr_number == prev_bs_hr_number)
+          cerr << prev_bs_hr_number << endl;
+        
+       prev_bs_hr_number = (*iter)->bs_hr_number;
+   }
+#endif 
+
+@q **** (4) @>
+
+   if (DEBUG)
+   { 
+      cerr << "Exiting `query_database_for_stars' successfully with return value 0." 
+           << endl;
+   }  
+
+   return 0;
+
+}  /* End of |query_database_for_stars| definition  */
+
+@q *** (3) @>
+
 @q ** (2) @>
 @
 @c
@@ -908,6 +994,7 @@ typedef float real;
 @<|main| definition@>@;
 @<|submit_mysql_query| definition@>@;
 @<|calculate_decimals| definition@>@;
+@<|query_database_for_stars| definition@>@;
 
 /* Local Variables:       */
 /* mode:CWEB              */

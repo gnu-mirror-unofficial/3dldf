@@ -39,6 +39,10 @@ string order_str = "order by approx_rank_apparent_magnitude";
 int star_limit   = 200;
 int show_stars   = 0;
 int decimals_calculate = 0;
+int stars_query = 0;
+int points_query = 0;
+int paths_query = 0;
+int pictures_query = 0;
 
 @q ** (2) @>
 @
@@ -50,6 +54,10 @@ extern int star_limit;
 extern int show_stars;
 extern int show_stars;
 extern int decimals_calculate;
+extern int stars_query;
+extern int points_query;
+extern int paths_query;
+extern int pictures_query;
 
 @q * (1) @>
 @ Process command line options.
@@ -73,13 +81,18 @@ process_command_line_options(int argc, char *argv[])
   int status = 0;
   int option_ctr = 0;
 
-  const unsigned int HELP_INDEX               = 0;    
-  const unsigned int WHERE_INDEX              = 1;
-  const unsigned int NO_WHERE_INDEX           = 2;
-  const unsigned int ORDER_BY_INDEX           = 3;
-  const unsigned int LIMIT_INDEX              = 4;
-  const unsigned int SHOW_STARS_INDEX         = 5;
-  const unsigned int DECIMALS_CALCULATE_INDEX = 6;
+  const unsigned int HELP_INDEX               =  0;    
+  const unsigned int WHERE_INDEX              =  1;
+  const unsigned int NO_WHERE_INDEX           =  2;
+  const unsigned int ORDER_BY_INDEX           =  3;
+  const unsigned int LIMIT_INDEX              =  4;
+  const unsigned int SHOW_STARS_INDEX         =  5;
+  const unsigned int DECIMALS_CALCULATE_INDEX =  6;
+  const unsigned int STARS_QUERY_INDEX        =  7;
+  const unsigned int POINTS_QUERY_INDEX       =  8;
+  const unsigned int PATHS_QUERY_INDEX        =  9;
+  const unsigned int PICTURES_QUERY_INDEX     = 10;
+  const unsigned int ALL_QUERY_INDEX          = 11;
 
 @q **** (4) Option struct.@>
 @ Option struct.
@@ -94,6 +107,11 @@ process_command_line_options(int argc, char *argv[])
     {"limit", 1, 0, 0},
     {"show-stars", 2, 0, 0},
     {"decimals-calculate", 0, 0, 0},
+    {"stars-query", 0, 0, 0},    
+    {"points-query", 0, 0, 0},    
+    {"paths-query", 0, 0, 0},    
+    {"pictures-query", 0, 0, 0},
+    {"all-query", 0, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -160,7 +178,6 @@ process_command_line_options(int argc, char *argv[])
 
         } /* |if (option_index == HELP_INDEX)|  */
 
-
 @q ***** (5) @>
 @
 @<|process_command_line_options| definition@>=
@@ -179,7 +196,6 @@ process_command_line_options(int argc, char *argv[])
             }          
 
         } /* |else if (option_index == WHERE_INDEX)|  */
-
 
 @q ***** (5) @>
 @
@@ -212,7 +228,6 @@ process_command_line_options(int argc, char *argv[])
             }          
 
         } /* |else if (option_index == ORDER_BY_INDEX)|  */
-
 
 @q ***** (5) @>
 @
@@ -252,7 +267,6 @@ process_command_line_options(int argc, char *argv[])
 
         } /* |else if (option_index == SHOW_STARS_INDEX)|  */
 
-
 @q ***** (5) @>
 @
 @<|process_command_line_options| definition@>=
@@ -265,6 +279,65 @@ process_command_line_options(int argc, char *argv[])
 
         } /* |else if (option_index == DECIMALS_CALCULATE_INDEX)|  */
 
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == STARS_QUERY_INDEX)
+        {
+            cerr << "`option_index' == `STARS_QUERY_INDEX'" << endl;
+
+            stars_query = 1;
+
+        } /* |else if (option_index == STARS_QUERY_INDEX)|  */
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == POINTS_QUERY_INDEX)
+        {
+            cerr << "`option_index' == `POINTS_QUERY_INDEX'" << endl;
+
+            points_query = 1;
+
+        } /* |else if (option_index == POINTS_QUERY_INDEX)|  */
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == PATHS_QUERY_INDEX)
+        {
+            cerr << "`option_index' == `PATHS_QUERY_INDEX'" << endl;
+
+            paths_query = 1;
+
+        } /* |else if (option_index == PATHS_QUERY_INDEX)|  */
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == PICTURES_QUERY_INDEX)
+        {
+            cerr << "`option_index' == `PICTURES_QUERY_INDEX'" << endl;
+
+            pictures_query = 1;
+
+        } /* |else if (option_index == PICTURES_QUERY_INDEX)|  */
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == ALL_QUERY_INDEX)
+        {
+            cerr << "`option_index' == `ALL_QUERY_INDEX'" << endl;
+
+            pictures_query = paths_query = points_query = stars_query = 1;
+
+        } /* |else if (option_index == ALL_QUERY_INDEX)|  */
 
 @q ***** (5) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
