@@ -1,5 +1,5 @@
-#### 3DLDF-2.0/src/Makefile.am
-#### Created by Laurence D. Finston (LDF).
+#### /src/Makefile.am
+#### Created by Laurence D. Finston (LDF) 2003.
 
 #### * Copyright and License.
 
@@ -46,8 +46,6 @@
 #### USA
 
 #### Laurence.Finston@gmx.de 
-
-
 
 
 ## * Top.
@@ -69,7 +67,7 @@
 
 # dummy$(EXEEXT) 
 
-bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT) 
+bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT) accsdtbs$(EXEEXT)
 
 # lib3dldfsp.la
 
@@ -161,7 +159,7 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 srtstrin_SOURCES = srtstrin.cxx
 
-accsdtbs_SOURCES = accsdtbs.cxx
+accsdtbs_SOURCES = accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx
 
 #dummy_SOURCES = dummy.cxx
 
@@ -169,7 +167,7 @@ accsdtbs_SOURCES = accsdtbs.cxx
 
 # scanner2.web parser2.web
 
-EXTRA_DIST = accsdtbs.cxx check_scan_parse_output.sh compile_parser.sh \
+EXTRA_DIST = accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web gpl-3.0.txt gpl-3.0_a3.txt patterns.web prelims.web runit \
@@ -187,7 +185,8 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
               $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
-              accsdtbs.o loader.c loader.c++ loader.h loader.h++ \
+              accsdtbs$(EXEEXT) accsdtbs.cxx accsdtbs.o accsgtpt.cxx accsgtpt.hxx accsgtpt.o  \
+              loader.c loader.c++ loader.h loader.h++ \
               parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
               prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
               ldf_1.log 
@@ -1273,14 +1272,25 @@ conveps.c++: conveps.web
 run-a: accsdtbs$(EXEEXT)
 	accsdtbs$(EXEEXT)
 
-accsdtbs$(EXEEXT): accsdtbs.o
-	g++ -o $@ $< -lmysqlclient
+accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o
+	g++ -o $@ $^ -lmysqlclient
 
-accsdtbs.o: accsdtbs.cxx
-	g++ -I/usr/include/mysql -c -o $@ $<
+accsdtbs.o: accsdtbs.cxx accsgtpt.hxx
+	g++ -I/usr/include/mysql -c -o accsdtbs.o accsdtbs.cxx
 
 accsdtbs.cxx: accsdtbs.web
 	$(CTANGLE) accsdtbs.web - accsdtbs.cxx
+
+accsgtpt.o: accsgtpt.cxx 
+	g++ -I/usr/include/mysql -c -o accsgtpt.o accsgtpt.cxx
+
+accsgtpt.cxx accsgtpt.hxx: accsgtpt.web
+	$(CTANGLE) accsgtpt.web - accsgtpt.cxx
+
+.PHONY: purge-a
+
+purge-a:
+	rm -f accsdtbs.cxx accsdtbs.o accsdtbs$(EXEEXT) accsgtpt.cxx accsgtpt.hxx accsgtpt.o
 
 .PHONY: headers
 

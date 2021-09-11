@@ -86,6 +86,8 @@ declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""
 
 using namespace std;
 
+#include "accsgtpt.hxx"
+
 @q ** (2) @>
 @
 @<Global variable declarations@>=
@@ -163,7 +165,11 @@ main(int argc, char *argv[])
 
    bool DEBUG = true; /* |false| */ 
 
-   cerr << "Entering `accsdtbs'." << endl;
+   cerr << "accsdtbs 1.0" << endl
+        << "Copyright (C) 2021 The Free Software Foundation, Inc."
+        << endl 
+        << "Author:  Laurence D. Finston"
+        << endl;
 
    int status = 0;
 
@@ -173,6 +179,33 @@ main(int argc, char *argv[])
    string order_str = "";
 
    cerr << "argc == " << argc << "." << endl;
+
+@q *** (3) @>
+@
+@<|main| definition@>=
+
+   status = process_command_line_options(argc, argv);
+
+   if (status != 0)
+   {
+       cerr << "ERROR!  In `main':  `process_command_line_options' failed, returning " << status << "."
+            << endl 
+            << "Exiting `accsdtbs' unsuccessfully with exit status 1." 
+            << endl;
+
+       exit(1);
+   }
+   else if (DEBUG)
+   { 
+       cerr << "In `main':  `process_command_line_options' succeeded, returning 0."
+            << endl;
+   }  
+
+return 0;
+
+@q *** (3) @>
+@
+@<|main| definition@>=
 
    if (argc > 1)
    {
