@@ -34,15 +34,16 @@ using namespace std;
 @
 @<Global variables@>=
 
-string where_str = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
-string order_str = "order by approx_rank_apparent_magnitude";
-int limit_stars   = 200;
-int show_stars   = 0;
+string where_str       = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
+string order_str       = "order by approx_rank_apparent_magnitude";
+int limit_stars        = 200;
+int offset_stars       = 0;
+int show_stars         = 0;  
 int decimals_calculate = 0;
-int stars_query = 0;
-int points_query = 0;
-int paths_query = 0;
-int pictures_query = 0;
+int stars_query        = 0;
+int points_query       = 0;
+int paths_query        = 0;
+int pictures_query     = 0;
 
 @q ** (2) @>
 @
@@ -51,6 +52,7 @@ int pictures_query = 0;
 extern string where_str;
 extern string order_str;
 extern int limit_stars;
+extern int offset_stars;
 extern int show_stars;
 extern int show_stars;
 extern int decimals_calculate;
@@ -86,13 +88,14 @@ process_command_line_options(int argc, char *argv[])
   const unsigned int NO_WHERE_INDEX           =  2;
   const unsigned int ORDER_BY_INDEX           =  3;
   const unsigned int LIMIT_INDEX              =  4;
-  const unsigned int SHOW_STARS_INDEX         =  5;
-  const unsigned int DECIMALS_CALCULATE_INDEX =  6;
-  const unsigned int STARS_QUERY_INDEX        =  7;
-  const unsigned int POINTS_QUERY_INDEX       =  8;
-  const unsigned int PATHS_QUERY_INDEX        =  9;
-  const unsigned int PICTURES_QUERY_INDEX     = 10;
-  const unsigned int ALL_QUERY_INDEX          = 11;
+  const unsigned int OFFSET_INDEX             =  5;
+  const unsigned int SHOW_STARS_INDEX         =  6;
+  const unsigned int DECIMALS_CALCULATE_INDEX =  7;
+  const unsigned int STARS_QUERY_INDEX        =  8;
+  const unsigned int POINTS_QUERY_INDEX       =  9;
+  const unsigned int PATHS_QUERY_INDEX        = 10;
+  const unsigned int PICTURES_QUERY_INDEX     = 11;
+  const unsigned int ALL_QUERY_INDEX          = 12;
 
 @q **** (4) Option struct.@>
 @ Option struct.
@@ -105,6 +108,7 @@ process_command_line_options(int argc, char *argv[])
     {"no-where", 0, 0, 0},
     {"order-by", 1, 0, 0},
     {"limit", 1, 0, 0},
+    {"offset", 1, 0, 0},
     {"show-stars", 2, 0, 0},
     {"decimals-calculate", 0, 0, 0},
     {"stars-query", 0, 0, 0},    
@@ -175,6 +179,7 @@ process_command_line_options(int argc, char *argv[])
                  << "--order-by:            `order by' clause for database query (without keywords \"order by\")." 
                  << endl << endl 
                  << "--limit:               `limit' clause for database query (integer > 0)" << endl << endl 
+                 << "--offset:              `offset' clause for database query (integer > 0)" << endl << endl 
                  << "--show-stars:          Show the `Stars' returned by the database query." << endl << endl 
                  << "--decimals-calculate:  Calculate right ascension and declination decimal degrees" << endl 
                  << "                       for the `Stars' returned by the database query." << endl << endl 
@@ -262,6 +267,24 @@ process_command_line_options(int argc, char *argv[])
             }          
 
         } /* |else if (option_index == LIMIT_INDEX)|  */
+
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == OFFSET_INDEX)
+        {
+            cerr << "`option_index' == `OFFSET_INDEX'" << endl;
+
+            offset_stars = atoi(optarg);
+
+            if (DEBUG)
+            { 
+               cerr << "`offset_stars' == " <<  offset_stars << endl;
+            }          
+
+        } /* |else if (option_index == OFFSET_INDEX)|  */
 
 @q ***** (5) @>
 @
