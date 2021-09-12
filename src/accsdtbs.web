@@ -119,7 +119,33 @@ class Star
 
       friend int main(int argc, char *argv[]);
       friend int calculate_decimals(void);
-      friend int query_database_for_stars(string wwhere_string, string oorder_string);
+      friend int query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars, int ooffset_stars);
+
+      friend bool compare_star_constant_name(Star *, Star *);
+      friend bool compare_common_name(Star *s, Star *);
+      friend bool compare_flamsteed_designation_number(Star *s, Star *);
+      friend bool compare_bayer_designation_greek_letter(Star *s, Star *);
+      friend bool compare_bayer_designation_greek_letter_tex(Star *s, Star *);
+      friend bool compare_bs_hr_number(Star *s, Star *);
+      friend bool compare_bs_number(Star *s, Star *);
+      friend bool compare_hr_number(Star *s, Star *);
+      friend bool compare_approx_rank_apparent_magnitude(Star *s, Star *);
+      friend bool compare_apparent_magnitude(Star *s, Star *); 
+      friend bool compare_absolute_magnitude(Star *s, Star *);     
+      friend bool compare_constellation_abbreviation(Star *s, Star *);
+      friend bool compare_constellation_full_name(Star *s, Star *);
+      friend bool compare_constellation_name_genitive(Star *s, Star *);
+      friend bool compare_constellation_number(Star *s, Star *);
+      friend bool compare_right_ascension_hours(Star *s, Star *t);
+      friend bool compare_right_ascension_minutes(Star *s, Star *t);
+      friend bool compare_right_ascension_seconds(Star *s, Star *t);
+      friend bool compare_right_ascension_decimal_hours(Star *s, Star *t);
+      friend bool compare_right_ascension_decimal_degrees(Star *s, Star *t);
+      friend bool compare_declination_degrees(Star *s, Star *t);
+      friend bool compare_declination_minutes(Star *s, Star *t);
+      friend bool compare_declination_seconds(Star *s, Star *t);
+      friend bool compare_declination_decimal_degrees(Star *s, Star *t);
+      friend bool compare_is_binary(Star *s, Star *t);
 
       string common_name;                                   
       string greek_name;                                    
@@ -160,6 +186,190 @@ class Star
 
 
 };
+
+@q ** (2) Star functions.  @>
+@ Star functions.  
+
+@q *** (3) Set @>
+@ Set.
+
+@q **** (4) Declaration  @>
+
+@<Declare |Star| functions@>=
+int 
+set(MYSQL_ROW curr_row);
+
+@q **** (4) Definition  @>
+@
+@<Define |Star| functions@>=
+int
+Star::set(MYSQL_ROW curr_row)
+{
+@q ***** (5) @>
+
+   bool DEBUG = false;  /* |true|  */
+
+   if (DEBUG)
+      cerr << "Entering `Star::set'." << endl;
+
+   if (curr_row == 0)
+   {
+       cerr << "ERROR!  In `Star::set':"
+                 << endl
+                 << "`curr_row' is NULL.  Can't set `Star'."
+                 << endl 
+                 << "Exiting program unsuccessfully with exit status 1."
+                 << endl;
+
+       return 1;
+
+   }
+
+@q ***** (5) @>
+
+      int i = 0;
+
+      common_name = curr_row[i++];
+      greek_name = curr_row[i++];
+      latin_name = curr_row[i++];
+      arabic_name = curr_row[i++];
+      flamsteed_designation_number = atoi(curr_row[i++]);
+      bayer_designation_greek_letter = curr_row[i++];
+      bayer_designation_greek_letter_tex = curr_row[i++];
+      bayer_designation_extension = curr_row[i++];
+      bs_hr_number = atoi(curr_row[i++]);
+      approx_rank_apparent_magnitude = atoi(curr_row[i++]);
+      apparent_magnitude = atof(curr_row[i++]);
+      absolute_magnitude = atof(curr_row[i++]);
+      apparent_magnitude_varies = static_cast<bool>(atoi(curr_row[i++]));
+      absolute_magnitude_varies = static_cast<bool>(atoi(curr_row[i++]));
+      constellation_abbreviation = curr_row[i++];
+      constellation_full_name = curr_row[i++];
+      constellation_name_genitive = curr_row[i++];
+      constellation_number = atoi(curr_row[i++]);
+      right_ascension_hours = atoi(curr_row[i++]);
+      right_ascension_minutes = atoi(curr_row[i++]);
+      right_ascension_seconds = atof(curr_row[i++]);
+      right_ascension_decimal_hours = atof(curr_row[i++]);
+      right_ascension_decimal_degrees = atof(curr_row[i++]);
+      declination_degrees = atoi(curr_row[i++]);
+      declination_minutes = atoi(curr_row[i++]);
+      declination_seconds = atof(curr_row[i++]);
+      declination_decimal_degrees = atof(curr_row[i++]);
+      is_binary = atoi(curr_row[i++]);
+      is_multiple = atoi(curr_row[i++]);
+      is_binary_component = atoi(curr_row[i++]);
+      is_eclipsing_binary = atoi(curr_row[i++]);
+      notes = curr_row[i++];
+
+@q ***** (5) @>
+
+   return 0;
+
+}  /* End of |Star::set| definition  */
+
+@q ** (2) @>
+@
+@<Declare |Star| functions@>=
+void 
+show(string text) const;
+
+@
+@<Define |Star| functions@>=
+void 
+Star::show(string text) const
+{
+
+    bool DEBUG = false; /* |true| */ 
+
+    if (DEBUG)
+       cerr << "Entering `Star::show'." << endl;
+
+    if (text == "")
+       text = "Star:";
+
+    cerr << "common_name:                         " << common_name << endl
+         << "greek_name:                          " << greek_name << endl 
+         << "latin_name:                          " << latin_name << endl 
+         << "arabic_name:                         " << arabic_name << endl 
+         << "flamsteed_designation_number:        " << flamsteed_designation_number << endl 
+         << "bayer_designation_greek_letter:      " << bayer_designation_greek_letter << endl 
+         << "bayer_designation_greek_letter_tex:  " << bayer_designation_greek_letter_tex << endl 
+         << "bayer_designation_extension:         " << bayer_designation_extension << endl 
+         << "bs_hr_number:                        " << bs_hr_number << endl 
+         << "approx_rank_apparent_magnitude:      " << approx_rank_apparent_magnitude << endl 
+         << "apparent_magnitude:                  " << apparent_magnitude << endl 
+         << "absolute_magnitude:                  " << absolute_magnitude << endl 
+         << "apparent_magnitude_varies:           " << apparent_magnitude_varies << endl 
+         << "absolute_magnitude_varies:           " << absolute_magnitude_varies << endl 
+         << "constellation_abbreviation:          " << constellation_abbreviation << endl 
+         << "constellation_full_name:             " << constellation_full_name << endl 
+         << "constellation_name_genitive:         " << constellation_name_genitive << endl 
+         << "constellation_number:                " << constellation_number << endl 
+         << "right_ascension_hours:               " << right_ascension_hours << endl 
+         << "right_ascension_minutes:             " << right_ascension_minutes << endl 
+         << "right_ascension_seconds:             " << right_ascension_seconds << endl 
+         << "right_ascension_decimal_hours:       " << right_ascension_decimal_hours << endl 
+         << "right_ascension_decimal_degrees:     " << right_ascension_decimal_degrees << endl 
+         << "declination_degrees:                 " << declination_degrees << endl 
+         << "declination_minutes:                 " << declination_minutes << endl 
+         << "declination_seconds:                 " << declination_seconds << endl 
+         << "declination_decimal_degrees:         " << declination_decimal_degrees << endl 
+         << "is_binary:                           " << is_binary << endl
+         << "is_multiple:                         " << is_multiple << endl 
+         << "is_binary_component:                 " << is_binary_component << endl 
+         << "is_eclipsing_binary:                 " << is_eclipsing_binary << endl 
+         << "notes:                               " << notes << endl 
+         << endl; 
+
+    if (DEBUG)
+       cerr << "Exiting `Star::show' successfully with void return value." << endl;
+
+    return;
+
+} /* End of |Star::show| definition.  */
+
+@q *** (3) operator==@>
+@ Equality operator (|operator==|).
+\initials{LDF 2021.06.24.}
+
+\LOG
+\initials{LDF 2021.06.24.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration  @>
+
+@<Declare |Star| functions@>=
+bool
+operator==(const Star &s);
+
+@q **** (4) Definition.  @>
+@
+@<Define |Star| functions@>= 
+bool
+Star::operator==(const Star &s)
+{
+   if (bs_hr_number > 0 && s.bs_hr_number > 0 && bs_hr_number == s.bs_hr_number)
+   {
+      return true;
+   }
+
+   if (common_name != "" && s.common_name != "" && common_name == s.common_name)
+   {
+      return true;
+   }
+
+   if (   bayer_designation_greek_letter     != "" && bayer_designation_greek_letter ==  s.bayer_designation_greek_letter
+       && bayer_designation_greek_letter_tex != "" && bayer_designation_greek_letter_tex ==  s.bayer_designation_greek_letter_tex
+       && constellation_name_genitive        != "" && s.constellation_name_genitive != ""
+       && constellation_name_genitive        == s.constellation_name_genitive)
+   {
+     return true;
+   }   
+
+   return false;
+}
 
 @q ** (2) @>
 @
@@ -307,147 +517,6 @@ main(int argc, char *argv[])
 
 }  /* End of |main| definition  */
 
-@q ** (2) Star functions.  @>
-@ Star functions.  
-
-@q *** (3) Set @>
-@ Set.
-
-@q **** (4) Declaration  @>
-
-@<Declare |Star| functions@>=
-int 
-set(MYSQL_ROW curr_row);
-
-@q **** (4) Definition  @>
-@
-@<Define |Star| functions@>=
-int
-Star::set(MYSQL_ROW curr_row)
-{
-@q ***** (5) @>
-
-   bool DEBUG = false;  /* |true|  */
-
-   if (DEBUG)
-      cerr << "Entering `Star::set'." << endl;
-
-   if (curr_row == 0)
-   {
-       cerr << "ERROR!  In `Star::set':"
-                 << endl
-                 << "`curr_row' is NULL.  Can't set `Star'."
-                 << endl 
-                 << "Exiting program unsuccessfully with exit status 1."
-                 << endl;
-
-       return 1;
-
-   }
-
-@q ***** (5) @>
-
-      int i = 0;
-
-      common_name = curr_row[i++];
-      greek_name = curr_row[i++];
-      latin_name = curr_row[i++];
-      arabic_name = curr_row[i++];
-      flamsteed_designation_number = atoi(curr_row[i++]);
-      bayer_designation_greek_letter = curr_row[i++];
-      bayer_designation_greek_letter_tex = curr_row[i++];
-      bayer_designation_extension = curr_row[i++];
-      bs_hr_number = atoi(curr_row[i++]);
-      approx_rank_apparent_magnitude = atoi(curr_row[i++]);
-      apparent_magnitude = atof(curr_row[i++]);
-      absolute_magnitude = atof(curr_row[i++]);
-      apparent_magnitude_varies = static_cast<bool>(atoi(curr_row[i++]));
-      absolute_magnitude_varies = static_cast<bool>(atoi(curr_row[i++]));
-      constellation_abbreviation = curr_row[i++];
-      constellation_full_name = curr_row[i++];
-      constellation_name_genitive = curr_row[i++];
-      constellation_number = atoi(curr_row[i++]);
-      right_ascension_hours = atoi(curr_row[i++]);
-      right_ascension_minutes = atoi(curr_row[i++]);
-      right_ascension_seconds = atof(curr_row[i++]);
-      right_ascension_decimal_hours = atof(curr_row[i++]);
-      right_ascension_decimal_degrees = atof(curr_row[i++]);
-      declination_degrees = atoi(curr_row[i++]);
-      declination_minutes = atoi(curr_row[i++]);
-      declination_seconds = atof(curr_row[i++]);
-      declination_decimal_degrees = atof(curr_row[i++]);
-      is_binary = atoi(curr_row[i++]);
-      is_multiple = atoi(curr_row[i++]);
-      is_binary_component = atoi(curr_row[i++]);
-      is_eclipsing_binary = atoi(curr_row[i++]);
-      notes = curr_row[i++];
-
-@q ***** (5) @>
-
-   return 0;
-
-}  /* End of |Star::set| definition  */
-
-@q ** (2) @>
-@
-@<Declare |Star| functions@>=
-void 
-show(string text) const;
-
-@
-@<Define |Star| functions@>=
-void 
-Star::show(string text) const
-{
-
-    bool DEBUG = false; /* |true| */ 
-
-    if (DEBUG)
-       cerr << "Entering `Star::show'." << endl;
-
-    if (text == "")
-       text = "Star:";
-
-    cerr << "common_name:                         " << common_name << endl
-         << "greek_name:                          " << greek_name << endl 
-         << "latin_name:                          " << latin_name << endl 
-         << "arabic_name:                         " << arabic_name << endl 
-         << "flamsteed_designation_number:        " << flamsteed_designation_number << endl 
-         << "bayer_designation_greek_letter:      " << bayer_designation_greek_letter << endl 
-         << "bayer_designation_greek_letter_tex:  " << bayer_designation_greek_letter_tex << endl 
-         << "bayer_designation_extension:         " << bayer_designation_extension << endl 
-         << "bs_hr_number:                        " << bs_hr_number << endl 
-         << "approx_rank_apparent_magnitude:      " << approx_rank_apparent_magnitude << endl 
-         << "apparent_magnitude:                  " << apparent_magnitude << endl 
-         << "absolute_magnitude:                  " << absolute_magnitude << endl 
-         << "apparent_magnitude_varies:           " << apparent_magnitude_varies << endl 
-         << "absolute_magnitude_varies:           " << absolute_magnitude_varies << endl 
-         << "constellation_abbreviation:          " << constellation_abbreviation << endl 
-         << "constellation_full_name:             " << constellation_full_name << endl 
-         << "constellation_name_genitive:         " << constellation_name_genitive << endl 
-         << "constellation_number:                " << constellation_number << endl 
-         << "right_ascension_hours:               " << right_ascension_hours << endl 
-         << "right_ascension_minutes:             " << right_ascension_minutes << endl 
-         << "right_ascension_seconds:             " << right_ascension_seconds << endl 
-         << "right_ascension_decimal_hours:       " << right_ascension_decimal_hours << endl 
-         << "right_ascension_decimal_degrees:     " << right_ascension_decimal_degrees << endl 
-         << "declination_degrees:                 " << declination_degrees << endl 
-         << "declination_minutes:                 " << declination_minutes << endl 
-         << "declination_seconds:                 " << declination_seconds << endl 
-         << "declination_decimal_degrees:         " << declination_decimal_degrees << endl 
-         << "is_binary:                           " << is_binary << endl
-         << "is_multiple:                         " << is_multiple << endl 
-         << "is_binary_component:                 " << is_binary_component << endl 
-         << "is_eclipsing_binary:                 " << is_eclipsing_binary << endl 
-         << "notes:                               " << notes << endl 
-         << endl; 
-
-    if (DEBUG)
-       cerr << "Exiting `Star::show' successfully with void return value." << endl;
-
-    return;
-
-} /* End of |Star::show| definition.  */
 
 
 @q ** (2) @>
@@ -1056,6 +1125,8 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
               errno = 0;
               status = fread(timestamp_str, 1, 32, fp);
 
+              timestamp_str[strlen(timestamp_str) - 1] = '\0';
+
               if (status == 0)
               {
                   cerr << "ERROR:  In `query_database_for_stars':  `fread' failed, returning 0:" 
@@ -1075,10 +1146,6 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
               fclose(fp),
               fp = 0;
 
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 @q ******* (7) @>
 
            }  /* |else|  */
@@ -1091,17 +1158,173 @@ getchar();
            out_strm.open(temp_filename);
 
            out_strm << "%% " << temp_filename << endl 
-                    << "Generated by `accsdtbs' " << timestamp_str << endl << endl;
+                    << "%% Generated by `accsdtbs' " << timestamp_str 
+                    << endl << endl;
 
 @q ****** (6) @>
 @
 @<|query_database_for_stars| definition@>=
 
+           string u;
+
+           for (vector<Star*>::iterator iter = star_vector.begin();
+                iter != star_vector.end();
+                ++iter)
+           {
+
+@q ******* (7) @>
+
+/* !!START HERE:  LDF 2021.09.12.  */ 
+
+             if ((*iter)->approx_rank_apparent_magnitude <= 0)
+                continue;
+             else if ((*iter)->approx_rank_apparent_magnitude < 10)
+                u = "00";
+             else if ((*iter)->approx_rank_apparent_magnitude < 100)
+                u = "0";
+             else 
+                u = "";
+
+              out_strm << "%% " << (*iter)->common_name << " " << (*iter)->right_ascension_decimal_degrees << endl;
+
+              out_strm << "\\bayertoks={" << (*iter)->common_name << "}"
+                       << "\\starinfo{" << u << (*iter)->approx_rank_apparent_magnitude << "}"
+                       << "{" << (*iter)->approx_rank_apparent_magnitude << "}"
+                       << "{" << (*iter)->common_name << "}"
+                       << "{$" << (*iter)->right_ascension_hours << "\\rm{h}\\thinspace "
+                       << (*iter)->right_ascension_minutes << "^\\prime\\thinspace "
+                       << (*iter)->right_ascension_seconds << "^{\\prime\\prime}$}"
+                       << "{$" << (*iter)->declination_degrees << "^\\circ\\thinspace "
+                       << (*iter)->declination_minutes << "^\\prime\\thinspace "
+                       << (*iter)->declination_seconds << "^{\\prime\\prime}$}"
+                       << "{";
+
+@q ******* (7) @>
+
+              if (   ((*iter)->right_ascension_decimal_degrees >= 337.5)
+                  && ((*iter)->right_ascension_decimal_degrees  <  22.5))
+                 out_strm << "1/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 22.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 67.5))
+                 out_strm << "2/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 67.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 112.5))
+                 out_strm << "3/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 112.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 157.5))
+                 out_strm << "4/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 157.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 202.5))
+                 out_strm << "5/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 202.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 247.5))
+                 out_strm << "6/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 247.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 292.5))
+                 out_strm << "7/";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 247.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 337.5))
+                 out_strm << "8/";
+
+
+@q ******* (7) @>
+
+              if (   ((*iter)->right_ascension_decimal_degrees >= 0.0)
+                  && ((*iter)->right_ascension_decimal_degrees  <  22.5))
+                 out_strm << "1";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 22.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 45.0))
+                 out_strm << "2";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 45.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 67.5))
+                 out_strm << "3";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 67.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 90.0))
+                 out_strm << "4";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 90.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 112.5))
+                 out_strm << "5";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 112.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 135.0))
+                 out_strm << "6";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 135.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 157.5))
+                 out_strm << "7";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 157.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 180.0))
+                 out_strm << "8";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 180.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 202.5))
+                 out_strm << "9";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 202.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 225.0))
+                 out_strm << "10";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 225.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 247.5))
+                 out_strm << "11";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 247.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 270.0))
+                 out_strm << "12";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 270.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 292.5))
+                 out_strm << "13";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 292.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 315.0))
+                 out_strm << "14";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 315.0)
+                       && ((*iter)->right_ascension_decimal_degrees  < 337.5))
+                 out_strm << "15";
+
+              else if (   ((*iter)->right_ascension_decimal_degrees >= 337.5)
+                       && ((*iter)->right_ascension_decimal_degrees  < 360.0))
+                 out_strm << "16";
+
+@q ******* (7) @>
+
+              out_strm << "}"
+                       << "{" << (*iter)->apparent_magnitude;
+
+
+              if ((*iter)->apparent_magnitude_varies)
+                  out_strm  << "v";
+
+              out_strm << "}{" << (*iter)->absolute_magnitude;
+
+              if ((*iter)->absolute_magnitude_varies)
+                  out_strm  << "v";
+ 
+              out_strm << "}{" << (*iter)->constellation_full_name << "}" << endl;
+
+
+           }
+
 @q ****** (6) @>
 @
 @<|query_database_for_stars| definition@>=
 
-           out_strm << "%% Local Variables:"       << endl 
+           out_strm << endl 
+                    << "%% Local Variables:"       << endl 
                     << "%% mode:plain-TeX"         << endl 
                     << "%% auto-fill-function:nil" << endl 
                     << "%% abbrev-mode:t"          << endl 
@@ -1123,8 +1346,6 @@ getchar();
 @q **** (4) @>
 @
 @<|query_database_for_stars| definition@>=
-
-
 
 #if 0 /* 1   */
 
@@ -1155,6 +1376,617 @@ getchar();
 
 }  /* End of |query_database_for_stars| definition  */
 
+
+@q ** (2) Comparison functions for |class Star|.  @>
+@ Comparison functions for |class Star|.
+
+@q *** (3) Compare |common_name|.@>
+@*7 Compare |common_name|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_common_name(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_common_name(Star *s, Star *t)
+{
+   return s->common_name < t->common_name;
+}
+
+@q *** (3) Compare |flamsteed_designation_number|.@>
+@*7 Compare |flamsteed_designation_number|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_flamsteed_designation_number(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_flamsteed_designation_number(Star *s, Star *t)
+{
+   return s->flamsteed_designation_number < t->flamsteed_designation_number;
+}
+
+@q *** (3) Compare |bayer_designation_greek_letter|.@>
+@*7 Compare |bayer_designation_greek_letter|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter(Star *s, Star *t)
+{
+   return s->bayer_designation_greek_letter < t->bayer_designation_greek_letter;
+}
+
+
+@q *** (3) Compare |bayer_designation_greek_letter_tex|.@>
+@*7 Compare |bayer_designation_greek_letter_tex|.
+\initials{LDF 2021.09.08.}
+
+\LOG
+\initials{LDF 2021.09.08.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter_tex(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bayer_designation_greek_letter_tex(Star *s, Star *t)
+{
+   return s->bayer_designation_greek_letter_tex < t->bayer_designation_greek_letter_tex;
+}
+
+
+@q *** (3) Compare |bs_hr_number|.@>
+@*7 Compare |bs_hr_number|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bs_hr_number(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bs_hr_number(Star *s, Star *t)
+{
+   return s->bs_hr_number < t->bs_hr_number;
+}
+
+@q *** (3) Compare |bs_number|.@>
+@*7 Compare |bs_number|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_bs_number(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_bs_number(Star *s, Star *t)
+{
+   return compare_bs_hr_number(s, t);
+}
+
+@q *** (3) Compare |hr_number|.@>
+@*7 Compare |hr_number|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_hr_number(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_hr_number(Star *s, Star *t)
+{
+   return compare_bs_hr_number(s, t);
+}
+
+@q *** (3) Compare |approx_rank_apparent_magnitude|.@>
+@*7 Compare |approx_rank_apparent_magnitude|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_approx_rank_apparent_magnitude(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_approx_rank_apparent_magnitude(Star *s, Star *t)
+{
+   return s->approx_rank_apparent_magnitude < t->approx_rank_apparent_magnitude;
+}
+
+@q *** (3) Compare |apparent_magnitude|.@>
+@*7 Compare |apparent_magnitude|.
+\initials{LDF 2021.07.10.}
+
+\LOG
+\initials{LDF 2021.07.10.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_apparent_magnitude(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_apparent_magnitude(Star *s, Star *t)
+{
+   return s->apparent_magnitude < t->apparent_magnitude;
+}
+
+@q *** (3) Compare |absolute_magnitude|.@>
+@*7 Compare |absolute_magnitude|.
+\initials{LDF 2021.09.06.}
+
+\LOG
+\initials{LDF 2021.09.06.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_absolute_magnitude(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_absolute_magnitude(Star *s, Star *t)
+{
+   return s->absolute_magnitude < t->absolute_magnitude;
+}
+
+@q *** (3) Compare |constellation_abbreviation|.@>
+@*7 Compare |constellation_abbreviation|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_abbreviation(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_abbreviation(Star *s, Star *t)
+{
+   return s->constellation_abbreviation < t->constellation_abbreviation;
+}
+
+@q *** (3) Compare |constellation_full_name|.@>
+@*7 Compare |constellation_full_name|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_full_name(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_full_name(Star *s, Star *t)
+{
+   return s->constellation_full_name < t->constellation_full_name;
+}
+
+@q *** (3) Compare |constellation_name_genitive|.@>
+@*7 Compare |constellation_name_genitive|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_name_genitive(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_name_genitive(Star *s, Star *t)
+{
+   return s->constellation_name_genitive < t->constellation_name_genitive;
+}
+
+@q *** (3) Compare |constellation_number|.@>
+@*7 Compare |constellation_number|.
+\initials{LDF 2021.06.22.}
+
+\LOG
+\initials{LDF 2021.06.22.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_constellation_number(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_constellation_number(Star *s, Star *t)
+{
+   return s->constellation_number < t->constellation_number;
+}
+
+@q *** (3) Compare |compare_right_ascension_hours|.@>
+@*7 Compare |compare_right_ascension_hours|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_hours(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_hours(Star *s, Star *t)
+{
+   return s->right_ascension_hours < t->right_ascension_hours;
+}
+
+@q *** (3) Compare |compare_right_ascension_minutes|.@>
+@*7 Compare |compare_right_ascension_minutes|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_minutes(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_minutes(Star *s, Star *t)
+{
+   return s->right_ascension_minutes < t->right_ascension_minutes;
+}
+
+@q *** (3) Compare |compare_right_ascension_seconds|.@>
+@*7 Compare |compare_right_ascension_seconds|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_seconds(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_seconds(Star *s, Star *t)
+{
+   return s->right_ascension_seconds < t->right_ascension_seconds;
+}
+
+@q *** (3) Compare |compare_right_ascension_decimal_hours|.@>
+@*7 Compare |compare_right_ascension_decimal_hours|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_hours(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_hours(Star *s, Star *t)
+{
+   return s->right_ascension_decimal_hours < t->right_ascension_decimal_hours;
+}
+
+@q *** (3) Compare |compare_right_ascension_decimal_degrees|.@>
+@*7 Compare |compare_right_ascension_decimal_degrees|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_degrees(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_right_ascension_decimal_degrees(Star *s, Star *t)
+{
+   return s->right_ascension_decimal_degrees < t->right_ascension_decimal_degrees;
+}
+
+@q *** (3) Compare |compare_declination_degrees|.@>
+@*7 Compare |compare_declination_degrees|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_degrees(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_degrees(Star *s, Star *t)
+{
+   return s->declination_degrees < t->declination_degrees;
+}
+
+@q *** (3) Compare |compare_declination_minutes|.@>
+@*7 Compare |compare_declination_minutes|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_minutes(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_minutes(Star *s, Star *t)
+{
+   return s->declination_minutes < t->declination_minutes;
+}
+
+@q *** (3) Compare |compare_declination_seconds|.@>
+@*7 Compare |compare_declination_seconds|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_seconds(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_seconds(Star *s, Star *t)
+{
+   return s->declination_seconds < t->declination_seconds;
+}
+
+@q *** (3) Compare |compare_declination_decimal_degrees|.@>
+@*7 Compare |compare_declination_decimal_degrees|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_declination_decimal_degrees(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_declination_decimal_degrees(Star *s, Star *t)
+{
+   return s->declination_decimal_degrees < t->declination_decimal_degrees;
+}
+
+@q *** (3) Compare |compare_is_binary|.@>
+@*7 Compare |compare_is_binary|.
+\initials{LDF 2021.6.27.}
+
+\LOG
+\initials{LDF 2021.6.27.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool
+compare_is_binary(Star *s, Star *t);
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_is_binary(Star *s, Star *t)
+{
+   return s->is_binary < t->is_binary;
+}
+
+@q *** (3) Compare |Star| pointers.@>
+@*7 Compare |Star| pointers.
+\initials{LDF 2021.06.24.}
+
+\LOG
+\initials{LDF 2021.06.24.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration.  @>
+@
+@<Declare non-member functions for |class Star|@>=
+bool compare_star_pointers(Star *s, Star *t);
+
+
+@q **** (4) Definition.  @>
+@
+@<Define non-member functions for |class Star|@>=
+bool
+compare_star_pointers(Star *s, Star *t)
+{
+   if (s == 0 || t == 0)
+      return false;
+
+   return *s == *t;
+}
+
+
+
 @q *** (3) @>
 
 @q ** (2) @>
@@ -1163,9 +1995,11 @@ getchar();
 @<Include files@>@;
 typedef float real;
 @<|class Star| declaration@>@;
+@<Declare non-member functions for |class Star|@>@;
 @<Global variable declarations@>@;
 @<Function declarations@>@;
 @<Define |Star| functions@>@;
+@<Define non-member functions for |class Star|@>@;
 @<|main| definition@>@;
 @<|submit_mysql_query| definition@>@;
 @<|calculate_decimals| definition@>@;
