@@ -1,4 +1,4 @@
-/* /home/laurence/3DLDF-3.0/astronmy/astronmy.sql    */
+/* astronmy.sql    */
 /* Created by Laurence D. Finston (LDF) 2021.05.29.  */
 
 /* * (1) Copyright notice  */
