@@ -1273,7 +1273,7 @@ conveps.c++: conveps.web
 .PHONY: run-a
 
 run-a: accsdtbs$(EXEEXT)
-	accsdtbs$(EXEEXT)
+	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
 
 accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o
 	g++ -o $@ $^ -lmysqlclient

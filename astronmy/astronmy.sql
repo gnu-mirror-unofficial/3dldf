@@ -24855,6 +24855,10 @@ from Stars where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_mag
 absolute_magnitude = 0 order by approx_rank_apparent_magnitude\G
 
 
+select * from Stars where constellation_name_genitive = "Velorum"\G
+
+update Stars set bayer_designation_greek_letter_tex = "N" where common_name = "N Velorum";
+
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */

@@ -1191,6 +1191,9 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
            int constellation_ctr = 1;
 
+           string common_name_str;
+           string bayer_designation_str;
+
            for (vector<Star*>::iterator iter = star_vector.begin();
                 iter != star_vector.end();
                 ++iter)
@@ -1215,13 +1218,23 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
              else 
                 u = "";
 
+              common_name_str = (*iter)->common_name;
+              bayer_designation_str = (*iter)->bayer_designation_greek_letter_tex;
+              bayer_designation_str.append(" ");
+              bayer_designation_str.append((*iter)->constellation_name_genitive);
+
+/* !!START HERE:  LDF 2021.09.12.  Figure out a way to get large, bold italic Greek letters in headings. */
+/* (Use \fam).                                                                                           */ 
+
+              if (common_name_str == bayer_designation_str)
+                 bayer_designation_str = "";
+
               out_strm << "%% " << (*iter)->common_name << endl;
 
-              out_strm << "\\bayertoks={" << (*iter)->bayer_designation_greek_letter_tex << " " 
-                       << (*iter)->constellation_name_genitive << "}"
+              out_strm << "\\bayertoks={" << bayer_designation_str << "}"
                        << "\\starinfo{" << u << (*iter)->approx_rank_apparent_magnitude << "}"
                        << "{" << (*iter)->approx_rank_apparent_magnitude << "}"
-                       << "{" << (*iter)->common_name << "}"
+                       << "{" << common_name_str << "}"
                        << "{$" << (*iter)->right_ascension_hours << "\\rm{h}\\thinspace "
                        << (*iter)->right_ascension_minutes << "^\\prime\\thinspace "
                        << (*iter)->right_ascension_seconds << "^{\\prime\\prime}$}"
