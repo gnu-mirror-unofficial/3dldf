@@ -52,6 +52,9 @@
 
 \input eplain
 \input epsf 
+\input colordvi
+\enablehyperlinks[dvipdfm]
+
 \nopagenumbers
 
 \font\small=cmr8
@@ -76,13 +79,14 @@
 
 \def\largeprime#1{${\hbox{{\mediumbx #1}}}^{\hbox{{\normalbsy \char"30}}}$}
 
-\enablehyperlinks[dvipdfm]
-
-\input colordvi
-
 \newdimen\twozerosperioddimen
 \setbox0=\hbox{\medium 00.}
 \twozerosperioddimen=\wd0
+
+\newif\ifdoconstellations
+\doconstellationstrue
+
+\def\omicron{o}
 
 %% * (1)
 
@@ -175,7 +179,7 @@
 \setbox2=\hbox{\the\bayertoks}
 \hbox to 3cm{\vbox{\hbox{{\bf #2.  #3}}%
 \ifdim\wd2>0pt\box2\fi
-\hbox{Constellation: #9}
+\ifdoconstellations\hbox{Constellation: #9}\fi
 \hbox{\hbox to \wd0{RA\hfil}#4}\hbox{\unhbox0 #5}%
 \hbox{Section #6}\hbox{\copy1 #7}\hbox{\hbox to \wd1{Absolute magnitude:\ \hss}#8}%
 \vskip1\baselineskip plus 6pt minus 3pt}%
@@ -510,13 +514,15 @@ to the two corresponding panel sections.}
 
 \begingroup
 \global\advance\chapctr by 1
-\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{stars by constellation}\Blue{Stars By Constellation}\hlend}{\the\chapctr}
-\hldest{fit}{}{stars by constellation}
-\centerline{{\largebx Stars By Constellation}}
+\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}%
+{stars according to constellation}\Blue{Stars According to Constellation}\hlend}{\the\chapctr}
+\hldest{fit}{}{stars according to constellation}
+\centerline{{\largebx Stars According to Constellation}}
 \vskip\baselineskip
 \triplecolumns
 %
-\input starinfo_xxU4af.tex
+\doconstellationsfalse
+\input starinfo_constellations.tex
 %
 \singlecolumn
 \vfil\eject

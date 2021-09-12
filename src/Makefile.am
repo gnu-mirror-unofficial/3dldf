@@ -1170,7 +1170,7 @@ pdfc:
 	tex clstsph1.tex
 	$(MAKE) clstsph1.pdf
 
-clstsph1_a4.dvi: clstsph1_a4.tex clstsph_1_star_info_combined.tex clstsph_1_star_info_alpha.tex
+clstsph1_a4.dvi: clstsph1_a4.tex clstsph_1_star_info_combined.tex clstsph_1_star_info_alpha.tex starinfo_constellations.tex
 	tex clstsph1_a4.tex
 	tex clstsph1_a4.tex 
 
@@ -1191,6 +1191,9 @@ clstsph1_a4.ps: clstsph1_a4.dvi
 
 clstsph1_a4.pdf: clstsph1_a4.dvi
 	dvipdfmx $<
+
+starinfo_constellations.tex: accsdtbs$(EXEEXT)
+	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
 
 .PHONY : run-bi
 
@@ -1468,7 +1471,7 @@ purge-s:
 .PHONY: purge-st
 
 purge-st:
-	rm -f starinfo_*.tex
+	rm -f starinfo_*.tex 
 
 
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
