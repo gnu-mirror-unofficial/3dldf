@@ -34,17 +34,18 @@ using namespace std;
 @
 @<Global variables@>=
 
-string where_str       = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
-string order_str       = "order by approx_rank_apparent_magnitude";
-int limit_stars        = 200;
-int offset_stars       = 0;
-int show_stars         = 0;  
-int decimals_calculate = 0;
-int stars_query        = 0;
-int points_query       = 0;
-int paths_query        = 0;
-int pictures_query     = 0;
-int write_tex          = 0;
+string where_str        = "where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
+string order_str        = "order by approx_rank_apparent_magnitude";
+int limit_stars         = 200;
+int offset_stars        = 0;
+int show_stars          = 0;  
+int decimals_calculate  = 0;
+int stars_query         = 0;
+int points_query        = 0;
+int paths_query         = 0;
+int pictures_query      = 0;
+int write_tex           = 0;
+bool constellation_sort = false;
 
 @q ** (2) @>
 @
@@ -62,6 +63,7 @@ extern int points_query;
 extern int paths_query;
 extern int pictures_query;
 extern int write_tex;
+extern int constellation_sort;
 
 @q * (1) @>
 @ Process command line options.
@@ -99,6 +101,7 @@ process_command_line_options(int argc, char *argv[])
   const unsigned int PICTURES_QUERY_INDEX     = 11;
   const unsigned int ALL_QUERY_INDEX          = 12;
   const unsigned int WRITE_TEX_INDEX          = 13; 
+  const unsigned int CONSTELLATION_SORT_INDEX = 14; 
 
 @q **** (4) Option struct.@>
 @ Option struct.
@@ -120,6 +123,7 @@ process_command_line_options(int argc, char *argv[])
     {"pictures-query", 0, 0, 0},
     {"all-query", 0, 0, 0},
     {"write-tex", 2, 0, 0},
+    {"constellation-sort", 0, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -182,8 +186,8 @@ process_command_line_options(int argc, char *argv[])
                  << "--no-where:            Suppress `where' clause for database query." << endl << endl 
                  << "--order-by:            `order by' clause for database query (without keywords \"order by\")." 
                  << endl << endl 
-                 << "--limit:               `limit' clause for database query (integer > 0)" << endl << endl 
-                 << "--offset:              `offset' clause for database query (integer > 0)" << endl << endl 
+                 << "--limit:               `limit' clause for database query (integer > 0)." << endl << endl 
+                 << "--offset:              `offset' clause for database query (integer > 0)." << endl << endl 
                  << "--show-stars:          Show the `Stars' returned by the database query (optional argument:  integer)." 
                  << endl << endl 
                  << "--decimals-calculate:  Calculate right ascension and declination decimal degrees" << endl 
@@ -194,10 +198,11 @@ process_command_line_options(int argc, char *argv[])
                  << "--pictures-query:      Query the database for `Pictures'." << endl << endl
                  << "--all-query:           Query the database for all types, currently" << endl 
                  << "                       `Stars', `Points', `Paths' and `Pictures'." << endl
-                 << "--write-tex:           Write TeX file with calls to the macro \"\\starinfo\""
-                 << endl 
-                 << "                       (optional argument:  integer)." 
-                 << endl << endl 
+                 << "--write-tex:           Write TeX file with calls to the macro \"\\starinfo\"" << endl
+                 << "                       (optional argument:  integer)." << endl 
+                 << "--all-query:           Query the database for all types, currently" << endl 
+                 << "                       Stars, Points, Paths and Pictures." << endl 
+                 << "constellation-sort:    Sort stars by constellation full name." << endl 
                  << endl; 
 
             if (DEBUG)
@@ -407,6 +412,19 @@ process_command_line_options(int argc, char *argv[])
             }
 
         } /* |else if (option_index == WRITE_TEX_INDEX)|  */
+
+@q ***** (5) @>
+@
+@<|process_command_line_options| definition@>=
+
+        else if (option_index == CONSTELLATION_SORT_INDEX)
+        {
+            cerr << "`option_index' == `CONSTELLATION_SORT_INDEX'" << endl;
+
+            constellation_sort = true;
+
+        } /* |else if (option_index == CONSTELLATION_SORT_INDEX)|  */
+
 
 @q ***** (5) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.

@@ -86,6 +86,7 @@ declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""
 #include <sstream>   
 #include <fstream>   
 #include <vector>
+#include <algorithm>
 
 #include <mysql.h>
 
@@ -1167,14 +1168,15 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
            string u;
 
+           if (constellation_sort)
+              stable_sort(star_vector.begin(), star_vector.end(), compare_constellation_full_name);
+
            for (vector<Star*>::iterator iter = star_vector.begin();
                 iter != star_vector.end();
                 ++iter)
            {
 
 @q ******* (7) @>
-
-/* !!START HERE:  LDF 2021.09.12.  */ 
 
              if ((*iter)->approx_rank_apparent_magnitude <= 0)
                 continue;

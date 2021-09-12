@@ -1465,6 +1465,12 @@ run-sn: sundl_04.pdf
 purge-s:
 	rm -f sundl_04.mp sundl_04.[0-9] sundl_04.[0-9]* sundl_04.dvi sundl_04.ps sundl_04.pdf 
 
+.PHONY: purge-st
+
+purge-st:
+	rm -f starinfo_*.tex
+
+
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
 # @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
 # @echo "CLEANFILES == $(CLEANFILES)"
