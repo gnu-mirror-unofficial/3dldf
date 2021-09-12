@@ -1388,6 +1388,9 @@ tags:
 
 query:
 	@echo "CXXCOMPILE == $(CXXCOMPILE)"
+	@echo "TEX == $(TEX)"
+	@echo "MPOST == $(MPOST)"
+	@echo "METAPOST == $(METAPOST)"
 
 .PHONY: tps
 
@@ -1462,6 +1465,21 @@ sundl_04.pdf: sundl_04.dvi
 .PHONY: run-sn
 
 run-sn: sundl_04.pdf
+
+small_rhombi.pdf: small_rhombi.dvi
+	dvipdfmx small_rhombi.dvi
+
+small_rhombi.ps: small_rhombi.dvi
+	dvips -o small_rhombi.ps small_rhombi.dvi
+
+small_rhombi.dvi: small_rhombi.tex small_rhombi.1
+	$(TEX) small_rhombi.tex
+
+small_rhombi.1: small_rhombi.mp
+	mpost -numbersystem "double" small_rhombi.mp
+
+small_rhombi.mp: small_rhombi.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) small_rhombi.ldf
 
 .PHONY: purge-s
 
