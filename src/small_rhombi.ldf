@@ -48,10 +48,61 @@
 
 % * (1) Beginning of 3DLDF code.
 
+verbatim_metapost "verbatimtex \font\small=cmr8 etex;";
+
 %% ** (2)  Global variables
 
 point p[];
 path tab_path[];
+reg_polygon rp[];
+numeric side_length;
+
+%% ** (2) Macro thin_tab
+
+macro thin_tab;
+
+def thin_tab {numeric pp, numeric qq, numeric offset, numeric offset_one, boolean ddo_labels,
+              numeric width, boolean do_rotate, numeric tab_path_ctr} =
+
+  point P[];
+
+  P0 := mediate(p[pp], p[qq], offset);
+  P1 := mediate(p[qq], p[pp], offset_one);
+
+  if ddo_labels:
+    dotlabel.top("$P_0$", P0);
+    dotlabel.top("$P_1$", P1);
+  fi;
+
+  P2 := (width * unit_vector(P1 - P0)) shifted by P1;
+
+  P3 := P1 shifted (0, 1);
+
+  rotate_around P2 (P1, P3) -90;
+
+  if ddo_labels:
+    dotlabel.top("$P_2$", P2);
+  fi;
+
+  tab_path[tab_path_ctr] := P0 -- P2 -- P1;
+
+  if do_rotate:
+    rotate_around tab_path[tab_path_ctr] (P0, P1) 180;
+  fi;
+
+  draw tab_path[tab_path_ctr];
+
+  P4 := mediate(P0, P2, .5);
+
+  if do_rotate:
+    rotate_around P4 (P0, P1) 180;
+  fi;
+
+  if ddo_labels:
+    label(decimal tab_path_ctr, P4) with_text_color red;
+  fi;
+  
+enddef;    
 
 %% ** (2) Macro tab
 
@@ -91,30 +142,32 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
 
   P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
 
-  label(decimal tab_path_ctr, P6) with_text_color red;
- 
+  if ddo_labels:
+    label(decimal tab_path_ctr, P6) with_text_color red;
+  fi;
   
 enddef;
-  
 
 %% ** (2) Fig. 1:  Net
 
 beginfig(1);
 
 %% *** (3)  
-  
 
   path q[];
-  reg_polygon rp[];
   rectangle r[];
   transform t[];
   bool do_labels;
   picture v[];
   numeric n[];
+
+  numeric scale_val;
+
+  scale_val := 2.375;
   
-  do_labels := true; % false
+  do_labels := false; % true
   
-  rp0 := (unit_pentagon scaled (2, 0, 2)) rotated (0, 18);
+  rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
   draw rp0;
 
@@ -170,7 +223,7 @@ beginfig(1);
   p10 := p6 rotated_around (p4, p5) 60;
 
   if do_labels:
-    dotlabel.top("$p_{10}$", p10);
+    dotlabel.rt("$p_{10}$", p10);
   fi;
   
   q1 := p4 -- p6 -- p10 -- cycle;
@@ -199,7 +252,7 @@ beginfig(1);
 
   if do_labels:
     dotlabel.lft("$p_{12}$", p12);
-    dotlabel.top("$p_{13}$", p13);
+    dotlabel.lft("$p_{13}$", p13);
   fi;
 
   p23 := mediate(p13, p4, .5);
@@ -382,7 +435,7 @@ beginfig(1);
   shift rp3 by (4 * (p31 - p16));
   shift p39 by (4 * (p31 - p16));
 
-  draw rp3 with_color blue;  
+  draw rp3; %%  with_color blue;  
 
   if do_labels:
     dotlabel.top("$rp_3$", p39) with_text_color blue;
@@ -391,7 +444,7 @@ beginfig(1);
   
   p35 *= rp2 *= t1;
  
-  draw rp2  with_color blue;
+  draw rp2; %% with_color blue;
   
   if do_labels:
     dotlabel.top("$rp_2$", p35) with_text_color blue;
@@ -433,6 +486,18 @@ beginfig(1);
     dotlabel.top("$p_{49}$", p49);
   fi;
 
+  for i = 0 upto 4:
+    p[50+i] := get_point (i) rp3;
+  endfor;
+
+  if do_labels:
+    dotlabel.top("$p_{50}$", p50);
+    dotlabel.top("$p_{51}$", p51);
+    dotlabel.bot("$p_{52}$", p52) with_text_color blue;
+    dotlabel.rt ("$p_{53}$", p53); %with_text_color blue;
+    dotlabel.top("$p_{54}$", p54);
+  fi;
+  
 
 %% *** (3) Tabs
 
@@ -454,16 +519,188 @@ beginfig(1);
   n1 += 1;
   tab {47, 46, .2, false, .4, n1};
   n1 += 1;
+  tab {51, 52, .2, false, .4, n1};
+  n1 += 1;
+  tab {50, 51, .2, false, .4, n1};
+  n1 += 1;
+  tab {32, 18, .2, false, .3, n1};
+  n1 += 1;
 
+  thin_tab {3, 2, .2, .15, false, .35, true, n1};
+  n1 += 1;
+
+  thin_tab {17, 42, .15, .2, false, .35, true, n1};
+  n1 += 1;
+
+  thin_tab {4, 0, .15, .2, false, .35, false, n1};
+  n1 += 1;
+
+  thin_tab {28, 44, .15, .2, false, .35, false, n1};
+  n1 += 1;
+  
   draw tab_path[0] shifted by (p31 - p16);
   draw tab_path[1] shifted by (p31 - p16);
   draw tab_path[2] shifted by (p31 - p16);
   draw tab_path[4] shifted by (p31 - p16);
   draw tab_path[5] shifted by (p31 - p16);
   draw tab_path[6] shifted by (p31 - p16);
+  draw tab_path[10] shifted by (p31 - p16);
+  draw tab_path[11] shifted by (p31 - p16);
+  draw tab_path[12] shifted by (p31 - p16);
+  draw tab_path[13] shifted by (p31 - p16);
+  draw tab_path[14] shifted by (p31 - p16);
+
+  draw tab_path[0] shifted by 2 * (p31 - p16);
+  draw tab_path[1] shifted by 2 * (p31 - p16);
+  draw tab_path[2] shifted by 2 * (p31 - p16);
+  draw tab_path[4] shifted by 2 * (p31 - p16);
+  draw tab_path[5] shifted by 2 * (p31 - p16);
+  draw tab_path[6] shifted by 2 * (p31 - p16);
+  draw tab_path[10] shifted by 2 * (p31 - p16);
+  draw tab_path[11] shifted by 2 * (p31 - p16);
+  draw tab_path[12] shifted by 2 * (p31 - p16);
+  draw tab_path[13] shifted by 2 * (p31 - p16);
+  draw tab_path[14] shifted by 2 * (p31 - p16);
+
+  draw tab_path[0] shifted by 3 * (p31 - p16);
+  draw tab_path[1] shifted by 3 * (p31 - p16);
+  draw tab_path[2] shifted by 3 * (p31 - p16);
+  draw tab_path[4] shifted by 3 * (p31 - p16);
+  draw tab_path[5] shifted by 3 * (p31 - p16);
+  draw tab_path[6] shifted by 3 * (p31 - p16);
+  draw tab_path[10] shifted by 3 * (p31 - p16);
+  draw tab_path[11] shifted by 3 * (p31 - p16);
+  draw tab_path[12] shifted by 3 * (p31 - p16);
+  draw tab_path[13] shifted by 3 * (p31 - p16);
+  draw tab_path[14] shifted by 3 * (p31 - p16);
+
+  draw tab_path[0] shifted by 4 * (p31 - p16);
+  draw tab_path[1] shifted by 4 * (p31 - p16);
+  draw tab_path[2] shifted by 4 * (p31 - p16);
+  draw tab_path[4] shifted by 4 * (p31 - p16);
+  draw tab_path[5] shifted by 4 * (p31 - p16);
+  draw tab_path[10] shifted by 4 * (p31 - p16);
+  draw tab_path[11] shifted by 4 * (p31 - p16);
+  draw tab_path[12] shifted by 4 * (p31 - p16);
+  draw tab_path[13] shifted by 4 * (p31 - p16);
+  draw tab_path[14] shifted by 4 * (p31 - p16);
+  
+  tab {46, 45, .2, false, .4, n1};
+  n1 += 1;
+  tab {45, 49, .2, false, .4, n1};
+  n1 += 1;
+  
+  
+%% *** (3)
 
   
 endfig with_projection parallel_x_z;
+
+%% ** (2)
+
+beginfig(2);
+  draw rp0;
+  draw p9 -- p0;
+  n5 := magnitude(p0 - p9);
+
+  message "n5:";
+  show n5;
+  %pause;
+
+  drawdot p9 with_pen pencircle scaled (3pt, 3pt, 3pt);
+  
+  label.rt("{\small " & decimal n5 & "\\thinspace cm}", mediate(p0, p9));
+
+  p63 := p14 shifted (.5cm, 0);
+
+  p64 := p63 shifted (1cm, 0);
+
+  draw (p63 shifted (.25pt, 0)) -- (p64 shifted (-.25pt, 0)) with_pen pencircle scaled (.5pt, .5pt, .5pt);
+
+  drawdot (p63 shifted (.5pt, 0, .5pt)) with_pen pensquare scaled (1pt, 1pt, 1pt);
+  drawdot (p64 shifted (-.5pt, 0, .5pt)) with_pen pensquare scaled (1pt, 1pt, 1pt);
+
+  label.top("{\small 1\\thinspace cm}", mediate(p63, p64, .5));
+
+  if do_labels:
+    dotlabel.lft("$p_0$", p0);
+    dotlabel.lft("$p_1$", p1);
+    dotlabel.lft("$p_2$", p2);
+    dotlabel.urt("$p_3$", p3);
+    dotlabel.lrt("$p_4$", p4);
+  fi;
+
+  p55 := (.5 * unit_vector(p4 - p0)) shifted by p0;
+  p56 := (.5 * unit_vector(p0 - p4)) shifted by p4;
+
+  p57 := p0 shifted (0, 1);
+
+  rotate_around p55 (p0, p57) 90;
+
+  p58 := mediate(p0, p55, .3);
+
+  p59 := p55 shifted by (p4 - p0);
+
+  p60 := mediate(p4, p59, .3);
+
+  draw p58 -- p55;
+  draw p60 -- p59;
+
+  side_length := magnitude(p4 - p0);
+
+  p61 := (xpart p0, 0, zpart p4);
+
+  n2 := (p0 - p4) angle (p61 - p4);
+  
+  label("{\small " & decimal side_length & "\\thinspace cm}", mediate(p55, p59, .5)) rotated (0, 0, -n2);
+
+  p62 := mediate(p55, p59, .2);
+  p63 := mediate(p59, p55, .2);
+
+  draw p55 -- p62;
+  draw p59 -- p63;
+  
+  if do_labels:
+    dotlabel.lft("$p_{55}$", p55);
+    dotlabel.lft("$p_{56}$", p56);
+    dotlabel.rt("$p_{59}$", p59);
+  %   dotlabel.rt("$p_{58}$", p58);
+  fi;
+
+
+
+  % p59 := mediate(p56, p58, .5);
+
+  % p60 := (xpart p13, 0, zpart p10);
+
+  % if do_labels:
+  %   dotlabel.lft("$p_{60}$", p60);
+  % fi;
+ 
+  % % message "side_length:";
+  % % show side_length;
+
+  
+  % p61 := mediate(p56, p58, .2);
+  % p62 := mediate(p58, p56, .2);
+
+  % if do_labels:
+  %   dotlabel.top("$p_{61}$", p61);
+  %   dotlabel.top("$p_{62}$", p62);
+  % fi;
+
+  % draw p55 -- p56 -- p61;
+  % draw p57 -- p58 -- p62;
+
+
+  
+  
+  %label("{\small " & decimal side_length & "\\thinspace cm}", p59) rotated (0, 0, -30);
+
+
+  
+endfig with_projection parallel_x_z;
+
 
 %% ** (2)
 
