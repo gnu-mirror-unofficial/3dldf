@@ -62,6 +62,7 @@
 
 \font\small=cmr8
 \font\smalltt=cmtt8
+\font\normalbx=cmbx10
 \font\medium=cmr10 scaled \magstephalf
 \font\mediumbx=cmbx10 scaled \magstephalf
 \font\mediumit=cmti10 scaled \magstephalf
@@ -79,6 +80,10 @@
 \font\mediumcy=cmcyr10 scaled \magstephalf
 
 \def\bigcirc{{\largesy\char"0E}}
+
+\newdimen\twozerosdimen
+\setbox0=\hbox{\medium 00}
+\twozerosdimen=\wd0
 
 \newcount\chapctr
 \chapctr=0
@@ -135,7 +140,7 @@
 \begingroup
 \advance\hsize by -1in
 \parskip=.5\baselineskip
-\centerline{{\largebx Small Rhombiicosidodecahedron}}
+\centerline{{\largebx Small Rhombicosidodecahedron}}
 \vskip\baselineskip
 
 \small
@@ -145,9 +150,9 @@ Copyright (C) 2021 The Free Software Foundation
 
 \setbox0=\hbox{Last updated:\quad}
 
-\leavevmode\hbox to \wd0{Created:\hfil}September 12, 2021
+\leavevmode\hbox to \wd0{Created:\hfil}September 14, 2021
 
-\leavevmode\box0 September 12, 2021
+\leavevmode\box0 September 14, 2021
 
 GNU 3DLDF is free software; you can redistribute it and/or modify 
 it under the terms of the GNU General Public License as published by 
@@ -158,6 +163,9 @@ GNU 3DLDF is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of 
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
 GNU General Public License for more details. 
+
+See the GNU General Public License and the GNU Free Documentation License at the end of this
+document.
 
 You should have received a copy of the GNU General Public License 
 along with GNU 3DLDF; if not, write to the Free Software 
@@ -192,14 +200,53 @@ Boston, MA  02110-1301 USA\hfil\break
 \centerline{{\largebx Table of Contents}}
 \advance\baselineskip by 2pt
 %\advance\parskip by 2pt
-%\readtocfile
+\readtocfile
+\vskip\baselineskip
+\Chapter{instructions}{Instructions}
+\hldest{xyz}{}{instructions}
+\centerline{{\largebx Instructions}}
+\vskip\baselineskip
+\begingroup
+\medium
+The net for this polyhedron can be found in H.M.~Cundy and A.P.~Rollett, {\mediumbx Mathematical Models},
+Second edition, Oxford University Press, 1961, p.~111.\hfil\break
+\begingroup
+\catcode`\_=\active
+\def_{{\tt \char`\_}}
+Wikipedia article:  \href{https://en.wikipedia.org/wiki/Mathematical_Models_(Cundy_and_Rollett)}%
+{\Blue{https://en.wikipedia.org/wiki/Mathematical_Models_(Cundy_and_Rollett)}}
+\endgroup
+\endgroup
 \vfil\eject
 \endgroup
 
 %% * (1)
 
-\line{\epsffile{small_rhombi.1}\hss}
+\begingroup
+\advance\hsize by -1in
+\centerline{{\largebx Small Rhombicosidodecahedron 3.4.5.4}}
+\vbox to 0pt{\vskip-.5cm\hbox to 0pt{\line{\epsffile{small_rhombi.2}}\hss}\vss}%
+\vbox to 0pt{\vskip2cm\line{\hskip-.5cm\epsffile{small_rhombi.1}\hss}\vss}
 \vfil\eject
+\endgroup
+
+\begingroup
+\advance\hsize by -.5\hsize
+\advance\hsize by -6cm
+\parskip=\baselineskip
+\Chapter{copying}{Copying}
+\hldest{xyz}{}{copying}
+%\advance\baselineskip by -6pt
+\advance\hsize by 10in
+\Section{GPL}{GNU General Public License}
+\hldest{xyz}{}{GPL}
+\listing{gpl-3.0_a3.txt}
+\vfil\eject
+\Section{FDL}{GNU Free Documentation License}
+\hldest{xyz}{}{FDL}
+\listing{fdl-1.3_a3.txt}
+\vfil\eject
+\endgroup
 
 %% *** (3) End here
 
