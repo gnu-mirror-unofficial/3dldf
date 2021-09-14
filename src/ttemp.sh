@@ -10,6 +10,17 @@
 
 echo "Arg 1 == $1"
 
+cp small_rhombi.ldf small_rhombi.txt ~/3DLDF-3.0_web/SRC_CODE/
+cp small_rhombi.pdf ~/3DLDF-3.0_web/
+
+cd ~/3DLDF-3.0_web/3dldf/
+
+cvs commit -m "Edited."
+
+
+exit 0 
+
+
 cp -f clstsph1.pdf clstsph1_a4.pdf ~/3DLDF-3.0_web/3dldf/graphics/
 
 cp -f clstsph1.ldf clstsph2.ldf clstsph1_sub.ldf clstsph1.aux astronmy.lmc clstsph1.txt clstsph1_a4.txt \
@@ -47,3 +58,8 @@ exit 0
 
 
 #clstsph.tgz
+
+## Local Variables:
+## mode:shell-script
+## abbrev-mode:t
+## End:

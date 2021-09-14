@@ -1474,6 +1474,7 @@ small_rhombi.ps: small_rhombi.dvi
 
 small_rhombi.dvi: small_rhombi.tex small_rhombi.1
 	$(TEX) small_rhombi.tex
+	$(TEX) small_rhombi.tex
 
 small_rhombi.1: small_rhombi.mp
 	mpost -numbersystem "double" small_rhombi.mp
@@ -1491,6 +1492,11 @@ purge-s:
 purge-st:
 	rm -f starinfo_*.tex 
 
+.PHONY: purge-sm
+
+purge-sm:
+	rm -f small_rhombi.1 small_rhombi.log  small_rhombi.mpx  small_rhombi.toc small_rhombi.dvi  \
+           small_rhombi.mp small_rhombi.pdf
 
 # @echo "3dldflb_c_files == $(3dldflb_c_files)"
 # @echo "3dldflb_cpp_files == $(3dldflb_cpp_files)"
