@@ -19,7 +19,6 @@ if test -n "$1"
 then
     echo "Arg 1 is non-empty.  Not committing."
 else
-    cvs commit -m "Edited."
     echo "Arg 1 is empty.  Committing."
     cvs commit -m "Edited."
 fi
