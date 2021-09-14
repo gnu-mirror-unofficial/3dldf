@@ -131,6 +131,8 @@ transforming @code{points} and other objects---unless you're afraid of hurting
 the computer's feelings.  The commands are named @code{shift}, @code{scale},
 @code{rotate}, etc.:
 
+%% !! TODO: LDF 2021.09.14.  Explain why "by" is needed.
+
 @example
 point p, q, r;
 p := q := r := origin;
@@ -318,7 +320,7 @@ draw p dashed evenly;
 
 @c !! TO DO:  Make illustration. 
 
-The function @code{rotate()} rotates a @code{Point} about one or more of
+The function @code{rotate} rotates a @code{Point} about one or more of
 the main axes.
 It takes three @code{real} arguments, specifying the 
 angles of rotation in degrees about the x, y, and z-axes respectively.
@@ -343,7 +345,7 @@ p.show("p:");
 The rotations are performed successively about the 
 x, y, and z-axes.  However, rotation is not a commutative
 operation, so if rotation about the main axes in a different
-order is required, then @code{rotate()} must be invoked more than once:
+order is required, then @code{rotate} must be invoked more than once:
 
 @example
 Point A(2, 3, 4);
@@ -359,7 +361,7 @@ B.show("B:");
 @end example
  
 Rotation need not be about the main axes;  it can also be performed
-about a line defined by two @code{Points}.  The function @code{rotate()}
+about a line defined by two @code{Points}.  The function @code{rotate}
 with two @code{Point} arguments and a @code{real} argument for the
 angle of rotation (in degrees) about the axis.  The @code{real} argument
 is optional, with 
@@ -457,7 +459,7 @@ Fig. 2.
 @end ifinfo
 
 @cindex bugs 
-I have sometimes gotten erroneous results using @code{rotate()} for
+I have sometimes gotten erroneous results using @code{rotate} for
 rotation about two @code{Points}.  It's usually worked to reverse the
 order of the @code{Point} arguments, or to change sign of the angle
 argument.  I think I've fixed the problem, though.
