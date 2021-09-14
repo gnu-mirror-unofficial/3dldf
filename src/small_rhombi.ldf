@@ -48,7 +48,7 @@
 
 % * (1) Beginning of 3DLDF code.
 
-verbatim_metapost "verbatimtex \font\small=cmr8 etex;";
+verbatim_metapost "verbatimtex \font\small=cmr8 \font\largebx=cmbx12 \font\Largebx=cmbx12 scaled \magstep1 etex;";
 
 %% ** (2)  Global variables
 
@@ -165,7 +165,7 @@ beginfig(1);
   bool do_labels;
   numeric n[];
 
-  do_labels := true; % false; % 
+  do_labels := false; %  true; % 
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -712,7 +712,7 @@ endfig with_projection parallel_x_z;
 beginfig(3);
 
   boolean do_labels;
-  do_labels := true; % false;
+  do_labels := false; % true;
   numeric n[];
   transform t[];
   
@@ -907,7 +907,7 @@ beginfig(4);
 
   boolean do_labels;
 
-  do_labels := true; % false
+  do_labels := false; % true
   
   draw q0;
   
@@ -962,19 +962,175 @@ beginfig(4);
   shift v20 (5cm, 0);
   current_picture += v20;
 
-  q30 := q1 shifted (0, 0, -8cm);
+  output current_picture with_projection parallel_x_z;
+
+  clear current_picture;
+  
+  q30 := q1 shifted (0, 0, -7cm);
 
   draw q30;
-
+  
   for i = 0 upto 2:
     m[40+i] := get_point (i) q30;
   endfor;
   
   if do_labels:
-    dotlabel.top("$m_{40}$", m40);
-    dotlabel.top("$m_{41}$", m41);
+    dotlabel.lft("$m_{40}$", m40);
+    dotlabel.rt("$m_{41}$", m41);
     dotlabel.top("$m_{42}$", m42);
   fi;
+
+  m43 := unit_vector(m42 - m40) shifted by m42;
+  m44 := unit_vector(m42 - m41) shifted by m42;
+  m45 := unit_vector(m40 - m41) shifted by m40;
+  m46 := unit_vector(m40 - m42) shifted by m40;
+  m47 := unit_vector(m41 - m40) shifted by m41;
+  m48 := unit_vector(m41 - m42) shifted by m41;
+  
+  if do_labels:
+    dotlabel.lft("$m_{43}$", m43);
+    dotlabel.lft("$m_{44}$", m44);
+    dotlabel.lft("$m_{45}$", m45);
+    dotlabel.lft("$m_{46}$", m46);
+    dotlabel.rt("$m_{47}$", m47);
+    dotlabel.rt("$m_{48}$", m48);
+  fi;
+
+  draw m42 -- m44 dashed evenly;
+  draw m42 -- m43 dashed evenly;
+  draw m40 -- m45 dashed evenly;
+  draw m40 -- m46 dashed evenly;
+  draw m41 -- m47 dashed evenly;
+  draw m41 -- m48 dashed evenly;
+
+  v21 := current_picture;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  v22 := current_picture;
+
+  shift v22 (0, 0, -4cm);
+
+  current_picture += v22;
+
+  output current_picture with_projection parallel_x_z;
+  
+  clear current_picture;
+ 
+  shift v21 (-35cm, 0, -8cm);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  shift v21 (5cm, 0);
+  current_picture += v21;
+
+  m49 := mediate(p6, p7);
+
+  shift m49 (15cm, 0, -11cm);
+  
+  label.rt("{\Largebx Extras}", m49);
+
+  output current_picture with_projection parallel_x_z;
+  clear current_picture;  
+  
+  rp5 := rp4;
+
+  t2 := identity shifted (23cm, 0, -13cm);
+  
+  rp5 *= t2;
+  
+  draw rp5;
+
+  for i = 0 upto 14:
+    m[50+i] := m[i];
+    m[50+i] *= t2;
+  endfor;
+  
+  draw m50 -- m55 dashed evenly;
+  draw m50 -- m58 dashed evenly;
+  draw m51 -- m57 dashed evenly;
+  draw m51 -- m60 dashed evenly;
+  draw m52 -- m59 dashed evenly;
+  draw m52 -- m64 dashed evenly;
+  draw m53 -- m62 dashed evenly;
+  draw m53 -- m63 dashed evenly;
+  draw m54 -- m56 dashed evenly;
+  draw m54 -- m61 dashed evenly;
+
+  v23 := current_picture;
+
+  shift v23 (6cm, 0);
+  current_picture += v23;
+
+  shift v23 (6cm, 0);
+  current_picture += v23;
+
+  shift v23 (0, 0, -6cm);
+  current_picture += v23;
+
+  shift v23 (-6cm, 0);
+  current_picture += v23;
+
+  shift v23 (-6cm, 0);
+  current_picture += v23;
+
+  output current_picture with_projection parallel_x_z;
+  clear current_picture;
+
+  v24 := v21;
+
+  shift v24 (0, 0, -3.5cm);
+  current_picture += v24;
+
+  shift v24 (-5cm, 0);
+  current_picture += v24;
+
+  shift v24 (-5cm, 0);
+  current_picture += v24;
+  
+  shift v24 (-5cm, 0);
+  current_picture += v24;
+
+  output current_picture with_projection parallel_x_z;
+  clear current_picture;
+  
+  v25 := v20;
+
+  shift v25 (-25cm, 0, -20cm);
+  current_picture += v25;
+
+  shift v25 (5cm, 0);
+  current_picture += v25;
+
+  shift v25 (5cm, 0);
+  current_picture += v25;
+
+  shift v25 (5cm, 0);
+  current_picture += v25;
   
 endfig with_projection parallel_x_z;
 
