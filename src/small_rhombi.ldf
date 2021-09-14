@@ -53,9 +53,15 @@ verbatim_metapost "verbatimtex \font\small=cmr8 etex;";
 %% ** (2)  Global variables
 
 point p[];
+point m[];
 path tab_path[];
 reg_polygon rp[];
 numeric side_length;
+path q[];
+picture v[];
+
+numeric scale_val;
+scale_val := 2.375;
 
 %% ** (2) Macro thin_tab
 
@@ -154,18 +160,12 @@ beginfig(1);
 
 %% *** (3)  
 
-  path q[];
   rectangle r[];
   transform t[];
   bool do_labels;
-  picture v[];
   numeric n[];
 
-  numeric scale_val;
-
-  scale_val := 2.375;
-  
-  do_labels := false; % true; % 
+  do_labels := true; % false; % 
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -707,6 +707,278 @@ beginfig(2);
   
 endfig with_projection parallel_x_z;
 
+%% ** (2) Fig. 3
+
+beginfig(3);
+
+  boolean do_labels;
+  do_labels := true; % false;
+  numeric n[];
+  transform t[];
+  
+  rp4 := rp0 rotated (0, -18);
+  draw rp4;
+
+  for i = 0 upto 4:
+    m[i] := get_point (i) rp4;
+  endfor;
+
+  if do_labels:
+    dotlabel.top("$m_0$", m0);
+    dotlabel.top("$m_1$", m1);
+    dotlabel.top("$m_2$", m2);
+    dotlabel.top("$m_3$", m3);
+    dotlabel.top("$m_4$", m4);
+  fi;
+
+  n0 := 1.333;
+  
+  m5  := mediate(m4, m0, n0);
+  m6  := mediate(m0, m4, n0);
+  m7  := mediate(m0, m1, n0);
+  m8  := mediate(m1, m0, n0);
+  m9  := mediate(m1, m2, n0);
+  m10 := mediate(m2, m1, n0);
+  m11 := mediate(m3, m4, n0);
+  m12 := mediate(m4, m3, n0);
+  m13 := mediate(m2, m3, n0);
+  m14 := mediate(m3, m2, n0);
+
+  if do_labels:
+    dotlabel.top("$m_5$", m5);
+    dotlabel.top("$m_6$", m6);
+    dotlabel.top("$m_7$", m7);
+    dotlabel.top("$m_8$", m8);
+    dotlabel.top("$m_9$", m9);
+    dotlabel.top("$m_{10}$", m10);
+    dotlabel.top("$m_{11}$", m11);
+    dotlabel.top("$m_{12}$", m12);
+    dotlabel.top("$m_{13}$", m13);
+    dotlabel.top("$m_{14}$", m14);
+  fi;
+
+  draw m0 -- m5 dashed evenly;
+  draw m0 -- m8 dashed evenly;
+  draw m1 -- m7 dashed evenly;
+  draw m1 -- m10 dashed evenly;
+  draw m2 -- m9 dashed evenly;
+  draw m2 -- m14 dashed evenly;
+  draw m3 -- m12 dashed evenly;
+  draw m3 -- m13 dashed evenly;
+  draw m4 -- m6 dashed evenly;
+  draw m4 -- m11 dashed evenly;
+
+  v10 := current_picture;
+
+  shift v10 (6cm, 0);
+  current_picture += v10;
+
+  shift v10 (6cm, 0);
+  current_picture += v10;
+
+  shift v10 (6cm, 0);
+  current_picture += v10;
+
+
+  shift v10 (6cm, 0);
+  current_picture += v10;
+
+
+  shift v10 (6cm, 0);
+  current_picture += v10; 
+
+  v11 := current_picture;
+
+  shift v11 (0, 0, -6cm);
+
+  current_picture += v11;
+
+
+  output current_picture  with_projection parallel_x_z;
+  clear current_picture;
+    
+%% *** (3)
+
+  q20 := q0;
+
+  if do_labels:
+    dotlabel.top("$p_3$", p3);
+    dotlabel.top("$p_4$", p4);
+    dotlabel.top("$p_6$", p6);
+    dotlabel.top("$p_7$", p7);
+    dotlabel.top("$q_0$", p22);
+    dotlabel.bot("$p_{22}$", p22);
+  fi;
+
+  t0 := ((identity shifted by (m7 - p4)) shifted (0, 0, -6cm)) shifted (0, 0, zpart m9 - zpart m7);
+
+  shift t0 (0, 0, -.5cm);
+  
+  q20 *= t0;
+  
+  draw q20;
+
+  for i := 0 upto 3:
+    m[15+i] := get_point (i) q20;
+  endfor;
+
+  if do_labels:
+    dotlabel.bot("$m_{15}$", m15);
+    dotlabel.bot("$m_{16}$", m16);
+    dotlabel.top("$m_{17}$", m17);
+    dotlabel.top("$m_{18}$", m18);
+  fi;
+
+  n1 := magnitude(m14 - m2);
+
+  message "n1:";
+  show n1;
+
+  m19 := (n1 * unit_vector(m18 - m17)) shifted by m18;
+  m20 := m18 shifted by (m17 - m19);
+  m21 := m18 shifted by (m16 - m19);
+  m22 := m19 shifted by (m15 - m18);
+
+  m23 := (n1 * unit_vector(m18 - m15)) shifted by m18;
+  m24 := m23 shifted by (m17 - m18);
+  m25 := m18 shifted by (m15 - m23);
+  m26 := m18 shifted by (m16 - m23);
+  
+  if do_labels:
+    dotlabel.lft("$m_{19}$", m19);
+    dotlabel.rt("$m_{20}$", m20);
+    dotlabel.top("$m_{21}$", m21);
+    dotlabel.top("$m_{22}$", m22);
+    dotlabel.top("$m_{23}$", m23);
+    dotlabel.top("$m_{24}$", m24);
+    dotlabel.bot("$m_{25}$", m25);
+    dotlabel.bot("$m_{26}$", m26);
+  fi;
+
+  draw m19 -- m18 dashed evenly;
+  draw m18 -- m23 dashed evenly;
+  draw m17 -- m24 dashed evenly;
+  draw m17 -- m20 dashed evenly;
+  draw m22 -- m15 dashed evenly;
+  draw m25 -- m15 dashed evenly;
+  draw m26 -- m16 dashed evenly;
+  draw m21 -- m16 dashed evenly;
+
+  v12 := current_picture;
+  
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+
+if false:
+  shift v12 (5cm, 0);
+  current_picture += v12;
+  shift v12 (5cm, 0);
+  current_picture += v12;
+fi;
+
+  v13 := current_picture;
+
+  shift v13 (0, 0, -4cm);
+  current_picture += v13;
+  shift v13 (0, 0, -4cm);
+  current_picture += v13;
+
+
+%% *** (3)  
+
+  
+endfig with_projection parallel_x_z;
+
+%% ** (2) Fig. 4
+
+beginfig(4);
+
+  boolean do_labels;
+
+  do_labels := true; % false
+  
+  draw q0;
+  
+  m30 := m19 shifted by (p4 - m18);
+  m31 := m20 shifted by (p6 - m17);
+  m32 := m31 shifted by (p7 - p6);
+  m33 := m30 shifted by (p3 - p4);
+  m34 := m23 shifted by (p4 - m18);
+  m35 := m34 shifted by (p6 - p4);
+  m36 := p4 shifted by (p3 - m34);
+  m37 := m36 shifted by (p7 - p3);
+
+  
+  if do_labels:
+    dotlabel.lft("$p_{3}$", p3);
+    dotlabel.rt("$p_{4}$", p4);
+    dotlabel.top("$p_{6}$", p6);
+    dotlabel.top("$p_{7}$", p7);
+    dotlabel.top("$m_{30}$", m30);
+    dotlabel.top("$m_{31}$", m31);
+    dotlabel.top("$m_{32}$", m32);
+    dotlabel.top("$m_{33}$", m33);
+    dotlabel.top("$m_{34}$", m34);
+    dotlabel.top("$m_{35}$", m35);
+    dotlabel.bot("$m_{36}$", m36);
+    dotlabel.bot("$m_{37}$", m37);
+  fi;
+
+  draw m30 -- p4 dashed evenly;
+  draw p4 -- m34 dashed evenly;
+  draw p6 -- m35 dashed evenly;
+  draw p6 -- m31 dashed evenly;
+  draw p3 -- m33 dashed evenly;
+  draw p3 -- m36 dashed evenly;
+  draw p7 -- m32 dashed evenly;
+  draw p7 -- m37 dashed evenly;
+
+  v20 := current_picture;
+
+  shift v20 (5cm, 0);
+  current_picture += v20;
+
+  shift v20 (5cm, 0);
+  current_picture += v20;
+
+  shift v20 (5cm, 0);
+  current_picture += v20;
+
+  shift v20 (5cm, 0);
+  current_picture += v20;
+
+  shift v20 (5cm, 0);
+  current_picture += v20;
+
+  q30 := q1 shifted (0, 0, -8cm);
+
+  draw q30;
+
+  for i = 0 upto 2:
+    m[40+i] := get_point (i) q30;
+  endfor;
+  
+  if do_labels:
+    dotlabel.top("$m_{40}$", m40);
+    dotlabel.top("$m_{41}$", m41);
+    dotlabel.top("$m_{42}$", m42);
+  fi;
+  
+endfig with_projection parallel_x_z;
+
+
 
 %% ** (2)
 
@@ -733,5 +1005,6 @@ end;
 %% eval:(outline-minor-mode t)
 %% eval:(read-abbrev-file abbrev-file-name)
 %% abbrev-mode:t
+%% auto-fill-function:nil
 %% outline-regexp:"%% [*\f]+"
 %% End:

@@ -10,13 +10,19 @@
 
 echo "Arg 1 == $1"
 
-cp small_rhombi.ldf small_rhombi.txt ~/3DLDF-3.0_web/SRC_CODE/
-cp small_rhombi.pdf ~/3DLDF-3.0_web/
+cp small_rhombi.ldf small_rhombi.txt ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+cp small_rhombi.pdf ~/3DLDF-3.0_web/3dldf/graphics
 
 cd ~/3DLDF-3.0_web/3dldf/
 
-cvs commit -m "Edited."
-
+if test -n "$1"
+then
+    echo "Arg 1 is non-empty.  Not committing."
+else
+    cvs commit -m "Edited."
+    echo "Arg 1 is empty.  Committing."
+    cvs commit -m "Edited."
+fi
 
 exit 0 
 
