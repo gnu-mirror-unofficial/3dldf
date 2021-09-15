@@ -382,6 +382,8 @@ main(int argc, char *argv[])
 
    bool DEBUG = true; /* |false| */ 
 
+   ifstream in_strm;
+
    cerr << "accsdtbs 1.0" << endl
         << "Copyright (C) 2021 The Free Software Foundation, Inc."
         << endl 
@@ -416,11 +418,83 @@ main(int argc, char *argv[])
             << endl;
    }  
 
-   cerr << "where_str    == " << where_str << endl
-        << "order_str    == " << order_str << endl
-        << "limit_stars  == " << limit_stars << endl
-        << "offset_stars == " << offset_stars << endl;
+   cerr << "where_str_vector.size()  == " << where_str_vector.size() << endl
+        << "order_str_vector.size()  == " << order_str_vector.size() << endl
+        << "limit_stars              == " << limit_stars << endl
+        << "offset_stars             == " << offset_stars << endl
+        << "query_type_vector.size() == " << query_type_vector.size() 
+        << endl;
 
+   int i = 0;
+
+   if (query_type_vector.size() > 0)
+      cerr << "query_type_vector:" << endl;
+   else 
+      cerr << "query_type_vector is empty.  Not showing." << endl;
+
+   for (vector<int>::iterator iter = query_type_vector.begin();
+        iter != query_type_vector.end();
+        ++iter)
+   {
+      cerr << i++ << ".  " << *iter << " ==  ";
+
+      if (*iter == STARS_QUERY)
+          cerr << "STARS_QUERY";
+      else if (*iter == POINTS_QUERY)
+          cerr << "POINTS_QUERY";
+      else if (*iter == PATHS_QUERY)
+          cerr << "PATHS_QUERY";
+      else if (*iter == PICTURES_QUERY)
+          cerr << "PICTURES_QUERY";
+
+      cerr << endl;
+   }   
+
+   i = 0;
+
+   if (where_str_vector.size() > 0)
+      cerr << "where_str_vector:" << endl;
+   else 
+      cerr << "where_str_vector is empty.  Not showing." << endl;
+
+   for (vector<string>::iterator iter = where_str_vector.begin();
+        iter != where_str_vector.end();
+        ++iter)
+   {
+      cerr << i++ << ".  " << *iter << endl;
+   }   
+
+   i = 0;
+
+   if (order_str_vector.size() > 0)
+      cerr << "order_str_vector:" << endl;
+   else 
+      cerr << "order_str_vector is empty.  Not showing." << endl;
+
+   for (vector<string>::iterator iter = order_str_vector.begin();
+        iter != order_str_vector.end();
+        ++iter)
+   {
+      cerr << i++ << ".  " << *iter << endl;
+   }   
+
+   if (instruction_filename.length() > 0)
+   {
+       cerr << "instruction_filename.length() == " << instruction_filename.length() << " (> 0)"
+            << endl 
+            << "Will read instructions from instruction file \"" << instruction_filename << endl "\"."
+            << endl
+            << "Ignoring other options.  Will clear vectors." << endl;
+
+        query_type_vector.clear();
+        where_str_vector.clear();
+        order_str_vector.clear();
+
+        
+
+   }
+
+ 
 @q *** (3) @>
 @
 @<|main| definition@>=
@@ -465,6 +539,7 @@ main(int argc, char *argv[])
 
 @q **** (4) @>
 
+#if 0 
    if (stars_query > 0)
    {
 @q ***** (5) @>
@@ -507,6 +582,8 @@ main(int argc, char *argv[])
        cerr << "In `main':  `stars_query' == " << stars_query << " (<= 0)" << endl 
             << "Not calling `query_database_for_stars'." << endl;
    }     
+
+#endif 
 
 @q **** (4) @>
 
