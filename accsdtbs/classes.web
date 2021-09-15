@@ -2,8 +2,6 @@
           
 @q Created by Laurence D. Finston (LDF) Wed 15 Sep 2021 02:30:53 PM CEST @>
 
-@q * (1) Copyright and License.@>
-
 @q * (1) Copyright and License. @>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing.  @>
@@ -149,37 +147,6 @@ Scanner_Type
 };
 
 typedef Scanner_Type *Scanner_Node;
-
-@*1 |class Kingdom|.
-
-@<class declarations@>=
-class Kingdom
-{
-
-   friend int main(int, char *[]);
-   friend int get_data_from_database(MYSQL *&mysql);
-
-   int id;
-   string name;
-
-public:   
-
-   Kingdom(void) : id(0), name("") {return;}
-   int clear(void) {id = 0; name = ""; return 0;}
-   void show(string s = "") 
-   {
-      if (s.length() == 0)
-         s = "Kingdom:";
-
-      cerr << s << endl 
-           << "id:    " << id << endl 
-           << "name:  " << name << endl;
-           
-      return;
-   }
- 
-
-};
 
 @q * (1) Putting classes together.@>
 @* Putting classes together.

@@ -66,7 +66,7 @@
 
 bin_PROGRAMS = accsdtbs$(EXEEXT)
 
-accsdtbs_SOURCES = accsdtbs.web accsgtpt.web
+accsdtbs_SOURCES = accsdtbs.web accsgtpt.web classes.web parser.web scanner.web 
 
 EXTRA_DIST = 00README accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx Makefile.in 
 
@@ -94,7 +94,7 @@ run: accsdtbs$(EXEEXT)
 accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o
 	g++ -o $@ $^ -lmysqlclient
 
-accsdtbs.o: accsdtbs.cxx accsgtpt.hxx
+accsdtbs.o: accsdtbs.cxx accsgtpt.hxx classes.hxx parser.hxx scanner.hxx
 	g++ -I/usr/include/mysql -c -o accsdtbs.o accsdtbs.cxx
 
 accsdtbs.cxx: accsdtbs.web
@@ -106,16 +106,53 @@ accsgtpt.o: accsgtpt.cxx
 accsgtpt.cxx accsgtpt.hxx: accsgtpt.web
 	$(CTANGLE) accsgtpt.web - accsgtpt.cxx
 
+classes.cxx classes.hxx: classes.web
+	$(CTANGLE) classes.web - classes.cxx
+
+classes.o: classes.cxx parser.hxx scanner.hxx
+	g++ -o classes.o -DHAVE_CONFIG_H=1 -I/usr/include/mysql -g -c classes.cxx
+
+parser.y++: parser.web
+	$(CTANGLE) $<
+	prbsnflx$(EXEEXT) parser.c parser.yxx
+	rm parser.c
+	check_scan_parse_output.sh parser.yxx parser.y++
+
+parser.cxx parser.hxx: parser.y++ 
+	bison --debug -d -o parser.cxx $<
+
+parser.o: parser.cxx parser.hxx scanner.hxx
+	g++ -c -DHAVE_CONFIG_H=1 -I/usr/include/mysql -o $@ $<
+
+scanner.o: scanner.cxx scanner.hxx parser.hxx 
+	g++ -c -DHAVE_CONFIG_H=1 -I/usr/include/mysql -o $@ $<
+
+scanner.cxx scanner.hxx : scanner.l++ 
+	$(LEX) -o scanner.cxx $<
+
+scanner.l++: scanner.web 
+	$(CTANGLE) scanner.web
+	prbsnflx$(EXEEXT) scanner.c scanner.lxx
+	rm scanner.c
+	check_scan_parse_output.sh scanner.lxx scanner.l++
+
+
 .PHONY: purge-a
 
 purge-a:
 	rm -f accsdtbs.cxx accsdtbs.o accsdtbs$(EXEEXT) accsgtpt.cxx accsgtpt.hxx accsgtpt.o
 
+.PHONY: query
 
-# 
-# @echo "CXX == $(CXX)"
-# @echo "CXXLINK == $(CXXLINK)"
-# @echo "CXXFLAGS == $(CXXFLAGS)"
+query:
+	@echo "LEX == $(LEX)"
+	@echo "FLEX == $(FLEX)"
+	@echo "YACC == $(YACC)"
+	@echo "BISON == $(BISON)"
+	@echo "CXX == $(CXX)"
+	@echo "CXXCOMPILE == $(CXXCOMPILE)"
+	@echo "CXXLINK == $(CXXLINK)"
+	@echo "CXXFLAGS == $(CXXFLAGS)"
 
 ## Local Variables:
 ## mode:Makefile
