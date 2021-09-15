@@ -67,7 +67,7 @@
 
 # dummy$(EXEEXT) 
 
-bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT) accsdtbs$(EXEEXT)
+bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT)
 
 # lib3dldfsp.la
 
@@ -159,15 +159,13 @@ prbsnflx_SOURCES = prbsnflx.l++
 
 srtstrin_SOURCES = srtstrin.cxx
 
-accsdtbs_SOURCES = accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx
-
 #dummy_SOURCES = dummy.cxx
 
 # $(3dldfsp_CWEB_files) 
 
 # scanner2.web parser2.web
 
-EXTRA_DIST = accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx check_scan_parse_output.sh compile_parser.sh \
+EXTRA_DIST = check_scan_parse_output.sh compile_parser.sh \
              cpyrtcpp.txt cpyrtasc.txt cpyrtcpp.txt cpyrtc.txt cpyrtel.txt \
              cpyrtss.txt cpyrttex.txt cpyrtweb.txt \
              format.web gpl-3.0.txt gpl-3.0_a3.txt patterns.web prelims.web runit \
@@ -185,7 +183,6 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               $(3dldf_OBJECTS) $(3dldf_rpo_files) \
               $(3dldflb_c_files) $(3dldflb_cpp_files) $(3dldflb_h_files) \
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
-              accsdtbs$(EXEEXT) accsdtbs.cxx accsdtbs.o accsgtpt.cxx accsgtpt.hxx accsgtpt.o  \
               loader.c loader.c++ loader.h loader.h++ \
               parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
               prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
@@ -1192,8 +1189,6 @@ clstsph1_a4.ps: clstsph1_a4.dvi
 clstsph1_a4.pdf: clstsph1_a4.dvi
 	dvipdfmx $<
 
-starinfo_constellations.tex: accsdtbs$(EXEEXT)
-	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
 
 .PHONY : run-bi
 
@@ -1270,30 +1265,6 @@ conveps.c++: conveps.web
 	ctangle conveps.web
 	mv conveps.c conveps.c++
 
-.PHONY: run-a
-
-run-a: accsdtbs$(EXEEXT)
-	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
-
-accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o
-	g++ -o $@ $^ -lmysqlclient
-
-accsdtbs.o: accsdtbs.cxx accsgtpt.hxx
-	g++ -I/usr/include/mysql -c -o accsdtbs.o accsdtbs.cxx
-
-accsdtbs.cxx: accsdtbs.web
-	$(CTANGLE) accsdtbs.web - accsdtbs.cxx
-
-accsgtpt.o: accsgtpt.cxx 
-	g++ -I/usr/include/mysql -c -o accsgtpt.o accsgtpt.cxx
-
-accsgtpt.cxx accsgtpt.hxx: accsgtpt.web
-	$(CTANGLE) accsgtpt.web - accsgtpt.cxx
-
-.PHONY: purge-a
-
-purge-a:
-	rm -f accsdtbs.cxx accsdtbs.o accsdtbs$(EXEEXT) accsgtpt.cxx accsgtpt.hxx accsgtpt.o
 
 .PHONY: headers
 
