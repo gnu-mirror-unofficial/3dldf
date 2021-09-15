@@ -1,0 +1,648 @@
+@q scanner.web                                                     @>
+@q Created by Laurence D. Finston Sun 15 Aug 2021 12:29:50 PM CEST @>
+
+@q * (1) Copyright and License.@>
+
+@q This file is part of Taxonomy-Database, a package for long-term archiving.  @>
+@q Copyright (C) 2021 Laurence D. Finston @>
+
+@q Taxonomy-Database is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version.  @>
+
+@q Taxonomy-Database is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details.  @>
+
+@q You should have received a copy of the GNU General Public License          @>
+@q along with Taxonomy-Database; if not, write to the Free Software           @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
+
+@q Taxonomy-Database is available for downloading via Git from @>
+@q https://github.com/gwdg/Taxonomy-Database.git               @>
+
+@q ("@@" stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de@>
+
+
+@q  * (1) Scanner.  @>
+@* Scanner.
+\initials{LDF 2021.08.15.}
+
+@
+@<Include files@>=
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <fstream>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <map>
+#include <string>
+#include <time.h>
+#include <math.h>
+#include <limits.h>
+
+#include <sstream>   
+
+#include <vector>
+#include <deque>
+
+// #include <stack>
+// #include <set>
+
+#if 0
+#include <pthread.h>
+#endif 
+
+#include "../config.h"
+
+#include <mysql.h>
+
+#undef NAME_LEN
+#undef LOCAL_HOST
+
+#include "parser.hxx"
+#include "classes.hxx"
+
+@q  ** (2) Start conditions.  @>
+@ Start conditions.
+
+@<Start conditions@>=
+
+@q  ** (2) Options.  @>
+@ Options.
+
+@<Options@>=
+@=%option header-file="scanner.hxx"@>
+@=%option bison-bridge@>
+@=%option reentrant@>
+
+@q ** (2) Name definitions.  @>
+@ Name definitions.  
+@<Name definitions@>=
+
+@q * (1) Local variables for |yylex|.  @>
+@ Local variables for {\bf yylex}.
+\initials{LDF 2012.06.25.}
+
+@<Local variables for |yylex|@>=
+
+bool DEBUG = true;  /* |false|  */
+
+@q ** (2) Code to be executed each time |yylex| is entered.  @>
+
+@ Code to be executed each time {\bf yylex} is entered.  This code must be
+indented or it causes an error when FLEX is run.  The start condition on entry
+to {\bf yylex} can be set here.
+\initials{LDF 2012.06.27.}
+
+@<Execute on entry to |yylex|@>=
+
+   cerr << "Entering `yylex'." << endl;
+
+@q = Scan_Parse_Parameter_Type* param = static_cast<Scan_Parse_Parameter_Type*>(yyextra); @>
+@q = if (scanner_trace == true) SCANNER_DEBUG = true;                                     @>
+
+@q ** (2) Rules.  @>
+@ Rules.
+
+@q *** (3) Punctuation.  @>
+
+@ Punctuation.
+
+@q **** (4) Asterisk.  @>
+@ Asterisk (\.{\*}).
+
+@<Rules@>=
+@=\* {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << " (asterisk)" << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return ASTERISK; 
+
+@=}@>
+
+
+@q **** (4) Semi-Colon.  @>
+@ Semi-colon.
+
+@<Rules@>=
+@=; {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << " (semi-colon)" << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return SEMI_COLON; 
+
+@=}@>
+
+@q **** SELECT (4) @> 
+@ SELECT
+@<Rules@>=
+@=select|SELECT {@>
+
+   return SELECT;
+
+@=}@>
+
+@q **** ALL (4) @> 
+@ ALL
+@<Rules@>=
+@=all|ALL {@>
+
+   return ALL;
+
+@=}@>
+
+@q **** FROM (4) @> 
+@ FROM
+@<Rules@>=
+@=from|FROM {@>
+
+   return FROM;
+
+@=}@>
+
+@q **** BY (4) @> 
+@ BY
+@<Rules@>=
+@=by|BY {@>
+
+   return BY;
+
+@=}@>
+
+@q **** ASCENDING (4) @> 
+@ ASCENDING
+@<Rules@>=
+@=ascending|ASCENDING {@>
+
+   return ASCENDING;
+
+@=}@>
+
+@q **** ASC (ASCENDING) (4) @> 
+@ ASC (ASCENDING)
+@<Rules@>=
+@=asc|ASC {@>
+
+   return ASCENDING;   
+
+@=}@>
+
+
+@q **** DESCENDING (4) @> 
+@ DESCENDING
+@<Rules@>=
+@=descending|DESCENDING {@>
+
+   return DESCENDING;
+
+@=}@>
+
+@q **** DES (DESCENDING) (4) @> 
+@ DES (DESCENDING)
+@<Rules@>=
+@=descending|DESCENDING {@>
+
+   return DESCENDING;
+
+@=}@>
+
+@q **** UNIQUE (4) @> 
+@ UNIQUE
+@<Rules@>=
+@=unique|UNIQUE {@>
+
+   return UNIQUE;
+
+@=}@>
+
+@q **** LIMIT (4) @> 
+@ LIMIT
+@<Rules@>=
+@=limit|LIMIT {@>
+
+   return LIMIT;
+
+@=}@>
+
+@q **** KINGDOM (4) @> 
+@ KINGDOM
+@<Rules@>=
+@=kingdom|KINGDOM {@>
+
+   return KINGDOM;
+
+@=}@>
+
+@q **** KINGDOMS (4) @> 
+@ KINGDOMS
+@<Rules@>=
+@=kingdoms|KINGDOMS {@>
+
+   return KINGDOMS;
+
+@=}@>
+
+@q **** PHYLUM (4) @> 
+@ PHYLUM
+@<Rules@>=
+@=phylum|PHYLUM {@>
+
+   return PHYLUM;
+
+@=}@>
+
+@q **** PHYLA (4) @> 
+@ PHYLA
+@<Rules@>=
+@=phyla|PHYLA {@>
+
+   return PHYLA;
+
+@=}@>
+
+@q **** CLASS (4) @> 
+@ CLASS
+@<Rules@>=
+@=class|CLASS {@>
+
+   return CLASS;
+
+@=}@>
+
+@q **** CLASSES (4) @> 
+@ CLASSES
+@<Rules@>=
+@=classes|CLASSES {@>
+
+   return CLASSES;
+
+@=}@>
+
+@q **** ORDER (4) @> 
+@ ORDER
+@<Rules@>=
+@=order|ORDER {@>
+
+   return ORDER;
+
+@=}@>
+
+@q **** ORDERS (4) @> 
+@ ORDERS
+@<Rules@>=
+@=orders|ORDERS {@>
+
+   return ORDERS;
+
+@=}@>
+
+@q **** FAMILY (4) @> 
+@ FAMILY
+@<Rules@>=
+@=family|FAMILY {@>
+
+   return FAMILY;
+
+@=}@>
+
+@q **** FAMILIES (4) @> 
+@ FAMILIES
+@<Rules@>=
+@=families|FAMILIES {@>
+
+   return FAMILIES;
+
+@=}@>
+
+@q **** GENUS (4) @> 
+@ GENUS
+@<Rules@>=
+@=genus|GENUS {@>
+
+   return GENUS;
+
+@=}@>
+
+@q **** GENERA (4) @> 
+@ GENERA
+@<Rules@>=
+@=genera|GENERA {@>
+
+   return GENERA;
+
+@=}@>
+
+@q **** SPECIES (4) @> 
+@ SPECIES
+@<Rules@>=
+@=species|SPECIES {@>
+
+   return SPECIES;
+
+@=}@>
+
+@q **** SUBSPECIES (4) @> 
+@ SUBSPECIES
+@<Rules@>=
+@=subspecies|SUBSPECIES {@>
+
+   return SUBSPECIES;
+
+@=}@>
+
+@q **** VARIETY (4) @> 
+@ VARIETY
+@<Rules@>=
+@=variety|VARIETY {@>
+
+   return VARIETY;
+
+@=}@>
+
+@q **** VARIETIES (4) @> 
+@ VARIETIES
+@<Rules@>=
+@=varieties|VARIETIES {@>
+
+   return VARIETIES;
+
+@=}@>
+
+@q **** ID (4) @> 
+@ ID
+@<Rules@>=
+@=id|ID {@>
+
+   return ID;
+
+@=}@>
+
+
+@q **** QUERY (4) @> 
+@ QUERY
+@<Rules@>=
+@=query|QUERY {@>
+
+   return QUERY;
+
+@=}@>
+
+@q *** (3) INPUT.  @>
+@ \.{INPUT}.
+
+@<Rules@>=
+@=INPUT|input {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return INPUT;
+
+@=}@>
+
+
+
+
+@q *** (3) END.  @>
+@ END.
+
+@<Rules@>=
+@=END|end {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return END;
+
+@=}@>
+
+@q *** (3) ENDINPUT.  @>
+@ \.{ENDINPUT}.
+
+@<Rules@>=
+@=ENDINPUT|endinput {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return ENDINPUT;
+
+@=}@>
+
+@q *** (3) ditto.  @>
+@ ditto (double-quote character as string).
+
+@<Rules@>=
+@=ditto|DITTO|Ditto {@>
+
+   strcpy(yylval->string_value, "\"");
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  ditto == " << yytext
+            << endl
+            << "Returning `STRING'."
+            << endl;
+
+   }  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return STRING;
+
+@=}@>
+
+@q *** (3) Comments.  @>
+@ Comments.  
+
+@<Rules@>=
+@=(%|#).*$ {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      cerr << "In `yylex':  Comment: " << yytext << endl;
+     
+   }  /* |if (DEBUG)|  */
+
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   /* Ignore  */
+
+@=}@>
+
+
+@q *** (3) Whitespace.  @>
+@ Whitespace.
+
+@<Rules@>=
+@=[[:space:]\x0d]+ {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  Whitespace." << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) Undelimited string:  "...".  @>
+@ Undelimited string.
+
+@<Rules@>=
+@=[[:alnum:]./~@@()+\?$][[:alnum:]./\-_~+@@()\?$]* {@>
+
+   strcpy(yylval->string_value, yytext);
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  Undelimited string == " << yytext
+            << endl
+            << "Returning `STRING'."
+            << endl;
+
+   }  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   return STRING;
+
+@=}@>
+
+
+
+
+
+@q *** (3) Delimited string:  "...".  @>
+@ Delimited string:  \.{\char`\"}$\ldots$\.{\char`\"}.  
+
+@<Rules@>=
+@=\"[^\"]*\" {@>
+
+   string temp_str = yytext;
+
+   string::size_type s = temp_str.size();
+
+   temp_str.erase(0, 1);
+   temp_str.erase(s - 2, s - 1);
+
+   size_t pos = string::npos;
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  Delimited string == " << yytext
+            << endl
+            << "Returning `STRING'."
+            << endl;
+   }  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   strcpy(yylval->string_value, temp_str.c_str());
+  
+   return STRING;
+
+@=}@>
+
+@q ** (2) Additional functions.  @>
+
+@ Additional functions.
+
+@<|yywrap| definition@>=
+
+int
+yywrap(yyscan_t parameter)
+{
+
+    cerr << "Entering `yywrap'." << endl;
+
+    return 1;
+}
+
+@
+@<|yyerror| definition@>=
+
+int
+yyerror(void* v, char const* s)
+{
+    cerr << "Entering `yyerror'." << endl;
+
+    return 0;
+}
+
+@ Putting scanner together.
+@c
+@=%{@>
+@<Include files@>@;@/
+using namespace std;
+@=%}@>
+@<Start conditions@>@;@/
+@<Options@>@;@/
+@<Name definitions@>@;@/
+@=%%@>
+@=%{@>
+@<Local variables for |yylex|@>@;@/
+@=%}@>
+@<Execute on entry to |yylex|@>@;@/
+@q Rules @>
+@<Rules@>@;@/
+@=%%@>
+@q User code@>
+@<|yywrap| definition@>@;@/
+@<|yyerror| definition@>@;@/
+
+ 
+@q * (1) Emacs-Lisp code for use in indirect buffers  @>
+
+@q (progn (cweb-mode) (outline-minor-mode))           @>
+
+@q * (1) Local variables for Emacs @>
+
+@q * Local variables for Emacs.@>
+@q Local Variables: @>
+@q mode:CWEB @>
+@q eval:(display-time) @>
+@q abbrev-mode:t @>
+@q eval:(read-abbrev-file) @>
+@q indent-tabs-mode:nil @>
+@q eval:(outline-minor-mode) @>
+@q fill-column:80 @>
+@q End: @>
+

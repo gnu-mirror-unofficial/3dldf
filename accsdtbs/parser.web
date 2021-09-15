@@ -1,0 +1,472 @@
+@q parser.web                    @>
+
+@q Created by Laurence D. Finston (LDF) Sun 15 Aug 2021 01:07:26 AM CEST  @>
+
+@q * (1) Copyright and License.@>
+
+@q This file is part of Taxonomy-Database, a package for long-term archiving.  @>
+@q Copyright (C) 2021 Laurence D. Finston @>
+
+@q Taxonomy-Database is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version.  @>
+
+@q Taxonomy-Database is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details.  @>
+
+@q You should have received a copy of the GNU General Public License          @>
+@q along with Taxonomy-Database; if not, write to the Free Software           @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA @>
+
+@q Taxonomy-Database is available for downloading via Git from @>
+@q https://github.com/gwdg/Taxonomy-Database.git               @>
+
+@q ("@@" stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de@>
+
+
+@q * (1) Parser.  @>
+@* Parser.
+\initials{LDF 2021.08.15.}
+
+@q ** (2) Include files.@>
+@ Include files.
+
+@<Include files@>=
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <limits.h>
+#include <ctype.h>
+#include <signal.h>
+
+#include <algorithm>
+#include <bitset>
+#include <fstream>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <iterator>
+#include <time.h>
+#include <math.h>
+#include <sstream>   
+#include <map>
+#include <vector>
+#include <deque>
+// #include <stack>
+// #include <set>
+
+#include "../config.h"
+
+#include <mysql.h>
+
+typedef void* yyscan_t;
+
+#include "parser.hxx"
+#include "scanner.hxx"
+#include "classes.hxx"
+
+@q ** (2) Declarations of additional functions.@>
+@ Declarations of additional functions.
+
+@<Declarations of additional functions@>=
+
+int 
+yylex(YYSTYPE* lvalp, yyscan_t parameter);
+
+int
+yywrap(void);
+
+int
+yyerror(void* v, char const* s);
+
+@q ** (2) Options.@>
+@ Options.
+
+@<Options@>=
+@=%verbose@>@;@/
+@=%define api.pure@>@;@/
+@=%parse-param {yyscan_t parameter}@>@;@/
+@=%lex-param {yyscan_t parameter}@>@;@/
+@=%debug@>
+
+@q ** (2) |union| declaration.@>
+@ {\bf union} declaration.
+
+@<|union| declaration@>=
+
+@=%union {@>
+
+  int int_value;
+  unsigned int uint_value;
+  unsigned long int ulint_value;
+  float float_value;
+  char string_value[1024];
+  void *pointer_value;
+
+@=}@>
+
+@q ** (2) Token and type declarations.@>
+@ Token and type declarations.
+
+@q *** (3) Code @>
+
+@<Token and type declarations@>=
+
+%token<int_value> ASTERISK@;@/
+%token<int_value> SEMI_COLON@;@/
+%token<int_value> INPUT@;@/
+%token<int_value> END@;@/
+%token<int_value> ENDINPUT@;@/
+%token<int_value> SELECT@;@/
+%token<int_value> ALL@;@/
+%token<int_value> FROM@;@/
+%token<int_value> BY@;@/
+%token<int_value> ASCENDING@;@/
+%token<int_value> DESCENDING@;@/
+%token<int_value> UNIQUE@;@/
+%token<int_value> LIMIT@;@/
+%token<int_value> KINGDOM@;@/
+%token<int_value> KINGDOMS@;@/
+%token<int_value> PHYLUM@;@/
+%token<int_value> PHYLA@;@/
+%token<int_value> CLASS@;@/
+%token<int_value> CLASSES@;@/
+%token<int_value> ORDER@;@/
+%token<int_value> ORDERS@;@/
+%token<int_value> FAMILY@;@/
+%token<int_value> FAMILIES@;@/
+%token<int_value> GENUS@;@/
+%token<int_value> GENERA@;@/
+%token<int_value> SPECIES@;@/
+%token<int_value> SUBSPECIES@;@/
+%token<int_value> VARIETY@;@/
+%token<int_value> VARIETIES@;@/
+%token<int_value> ID@;@/
+%token<int_value> QUERY@;@/
+
+%token<float_value> FLOAT@;@/
+
+%token<string_value> STRING@;@/
+
+@q ** (2) Rules.  @>
+@ Rules.
+
+@<Rules@>=
+
+@q *** (3) Program.  @>
+@ Program.
+
+@<Rules@>=
+
+@=program: statement_list END@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  END'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+    scanner_node->end_flag = true;
+
+#if 1 
+    cerr << "scanner_node->id       == " << scanner_node->id << endl
+         << "scanner_node->end_flag == " << scanner_node->end_flag << endl;
+#endif 
+
+    return 0;
+};
+
+@q *** (3) statement_list:  EMPTY.  @>
+@ \<statement list>.
+
+@q **** (4) statement_list --> EMPTY.  @>
+
+@<Rules@>=
+
+@=statement_list: /* EMPTY  */  @>
+{
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "In `yyparse', rule `statement_list:  EMPTY'." 
+             << endl;
+    }
+#endif  /* |DEBUG_COMPILE|  */ 
+
+};
+
+@q **** (4) statement_list --> statement_list statement.  @>
+
+@ \<statement list> $\longrightarrow$ \<statement list> \<statement>.
+
+@<Rules@>=
+
+@=statement_list: statement_list statement @>
+{
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement_list: statement_list statement'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+};
+
+@q *** (3) Statement.  @>
+@ Statement.
+
+@q **** (4) statement --> SELECT ASTERISK FROM KINGDOMS  @>
+
+@ \<statement> $\longrightarrow$ \.{SELECT} \.{ASTERISK} \.{FROM} \.{KINGDOMS}.
+
+@<Rules@>=
+
+@=statement: SELECT ASTERISK FROM KINGDOMS@>
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  SELECT ASTERISK FROM KINGDOMS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@q ***** (5) @>
+
+};
+
+@q *** (3) Statement:  INPUT STRING.  @>
+
+@ Statement: INPUT STRING.
+
+@q **** (4) statement --> INPUT STRING @>
+
+@ \<statement> $\longrightarrow$ \.{INPUT} \.{STRING}.
+
+@<Rules@>=
+
+@=statement: INPUT STRING@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  INPUT STRING'." 
+             << endl 
+             << "$2 == " << @=$2@>
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+    scanner_node->input_filename.assign(@=$2@>);        
+
+    return 2;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) Statement:  ENDINPUT.  @>
+@ Statement.
+
+@q **** (4) statement --> ENDINPUT  @>
+
+@ \<statement> $\longrightarrow$ \.{ENDINPUT}. 
+
+@<Rules@>=
+
+@=statement: ENDINPUT@>
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  ENDINPUT'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@q ***** (5) @>
+   
+    return 0;
+
+};
+
+@q *** (3) @>
+@
+@<Token and type declarations@>=
+%type<string_value> combined_string@;@/
+
+@q *** (3) Statement:  QUERY combined_string.  @>
+@ Statement: QUERY combined_string.
+
+@q **** (4) statement --> QUERY combined_string  @>
+
+@ \<statement> $\longrightarrow$ \.{QUERY} \<combined_string>.
+
+@<Rules@>=
+
+@=statement: QUERY combined_string@>
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  QUERY combined_string'." 
+             << endl 
+             << "combined_string == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@q ***** (5) @>
+
+};
+
+@q **** (4) combined_string --> STRING  @>
+
+@ \<combined string> $\longrightarrow$ \.{STRING}.
+
+@<Rules@>=
+
+@=combined_string: STRING@>
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  combined_string:  STRING'."  
+             << endl 
+             << "STRING == " << @=$1@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+    memset(@=$$@>, 0,  1024);
+    strcat(@=$$@>, @=$1@>);
+
+@q ***** (5) @>
+
+};
+
+@q **** (4) combined_string --> combined_string STRING  @>
+
+@ \<combined string> $\longrightarrow$ \<combined string> \.{STRING}.
+
+@<Rules@>=
+
+@=combined_string: combined_string STRING@>
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `combined_string: combined_string STRING'." 
+             << endl 
+             << "combined_string == " << @=$1@> << endl
+             << "STRING          == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+     strcat(@=$$@>, @=$2@>);
+
+@q ***** (5) @>
+
+};
+
+@q *** (3) Statement:  SEMI_COLON.  @>
+@ Statement.
+
+@q **** (4) statement --> SEMI_COLON  @>
+
+@ \<statement> $\longrightarrow$ \.{SEMI\_COLON}. 
+
+@<Rules@>=
+
+@=statement: SEMI_COLON@>
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE 
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  SEMI_COLON'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@q ***** (5) @>
+   
+};
+
+@
+@<Garbage@>=
+/* Empty  */
+
+@ Putting parser together.
+@c
+@=%{@>
+@<Include files@>@;@/
+using namespace std;
+bool DEBUG = true;  /* |false|  */
+static stringstream temp_strm;
+static int status;
+@<Declarations of additional functions@>@;@/
+#if 0 
+@<Garbage@>@;@/
+#endif 
+@=%}@>
+@<Options@>@;@/
+@<|union| declaration@>@;@/
+@<Token and type declarations@>@;@/
+@=%%@>
+@q Rules @>
+@<Rules@>@;@/
+
+@q * (1) Emacs-Lisp code for use in indirect buffers  @>
+
+@q (progn (cweb-mode) (outline-minor-mode) (setq abbrev-mode t)        @>
+
+@q * (1) Local variables for Emacs @>
+
+@q * Local variables for Emacs.@>
+@q Local Variables: @>
+@q mode:CWEB @>
+@q eval:(display-time) @>
+@q abbrev-mode:t @>
+@q eval:(read-abbrev-file) @>
+@q indent-tabs-mode:nil @>
+@q eval:(outline-minor-mode) @>
+@q fill-column:80 @>
+@q End: @>
+
