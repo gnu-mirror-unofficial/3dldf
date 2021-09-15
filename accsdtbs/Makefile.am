@@ -91,7 +91,7 @@ starinfo_constellations.tex: accsdtbs$(EXEEXT)
 run: accsdtbs$(EXEEXT)
 	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
 
-accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o
+accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o classes.o scanner.o parser.o
 	g++ -o $@ $^ -lmysqlclient
 
 accsdtbs.o: accsdtbs.cxx accsgtpt.hxx classes.hxx parser.hxx scanner.hxx
