@@ -79,6 +79,10 @@ AM_CXXFLAGS = -fpermissive -fdiagnostics-show-option -Wno-return-type
 
 #### ** (2) Rules
 
+.PHONY: all
+
+all: accsdtbs$(EXEEXT)
+
 starinfo_constellations.tex: accsdtbs$(EXEEXT)
 	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
 
