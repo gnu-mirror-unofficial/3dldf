@@ -68,9 +68,9 @@ bin_PROGRAMS = accsdtbs$(EXEEXT)
 
 accsdtbs_SOURCES = accsdtbs.web accsgtpt.web
 
-EXTRA_DIST = accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx Makefile.in
+EXTRA_DIST = 00README accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx Makefile.in 
 
-CLEANFILES := accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx accsdtbs.o accsgtpt.o
+CLEANFILES := accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx accsdtbs.o accsgtpt.o starinfo_constellations.tex
  
 AM_CXXFLAGS = -fpermissive -fdiagnostics-show-option -Wno-return-type
 
