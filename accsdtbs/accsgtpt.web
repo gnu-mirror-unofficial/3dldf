@@ -112,26 +112,14 @@ process_command_line_options(int argc, char *argv[])
 
   bool DEBUG = true; /* |false| */ 
 
+  IO_Type curr_io_type;
+
   int status = 0;
   int option_ctr = 0;
 
   string temp_str;
 
   const unsigned int HELP_INDEX                  =  0;    
-  const unsigned int WHERE_INDEX                 =  1;
-  const unsigned int NO_WHERE_INDEX              =  2;
-  const unsigned int ORDER_BY_INDEX              =  3;
-  const unsigned int LIMIT_INDEX                 =  4;
-  const unsigned int OFFSET_INDEX                =  5;
-  const unsigned int SHOW_STARS_INDEX            =  6;
-  const unsigned int DECIMALS_CALCULATE_INDEX    =  7;
-  const unsigned int STARS_QUERY_INDEX           =  8;
-  const unsigned int POINTS_QUERY_INDEX          =  9;
-  const unsigned int PATHS_QUERY_INDEX           = 10;
-  const unsigned int PICTURES_QUERY_INDEX        = 11;
-  const unsigned int WRITE_TEX_INDEX             = 12; 
-  const unsigned int CONSTELLATION_SORT_INDEX    = 13; 
-  const unsigned int INSTRUCTION_FILE_INDEX      = 14;     
 
 @q **** (4) Option struct.@>
 @ Option struct.
@@ -140,20 +128,6 @@ process_command_line_options(int argc, char *argv[])
 
   static struct option long_options[] = {
     {"help", 0, 0, 0},
-    {"where", 2, 0, 0},
-    {"no-where", 0, 0, 0},
-    {"order-by", 2, 0, 0},
-    {"limit", 1, 0, 0},
-    {"offset", 1, 0, 0},
-    {"show-stars", 2, 0, 0},
-    {"decimals-calculate", 0, 0, 0},
-    {"stars-query", 0, 0, 0},    
-    {"points-query", 0, 0, 0},    
-    {"paths-query", 0, 0, 0},    
-    {"pictures-query", 0, 0, 0},
-    {"write-tex", 2, 0, 0},
-    {"constellation-sort", 0, 0, 0},
-    {"instruction-file", 1, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -211,30 +185,7 @@ process_command_line_options(int argc, char *argv[])
             cerr << "accsdtbs 1.0" << endl 
                  << "Valid options for accsdtbs are:" << endl
                  << endl 
-                 << "--help:                Prints this message and exits with exit status 0." << endl 
-                 << endl 
-                 << "--where:               `where' clause for database query (without keyword \"where\")." << endl
-                 << "                       Optional argument.  If omitted, the default is used." 
-                 << endl << endl 
-                 << "--no-where:            Suppress `where' clause for database query." << endl << endl 
-                 << "--order-by:            `order by' clause for database query (without keywords \"order by\")." << endl 
-                 << "                       Optional argument.  If omitted, the default is used." 
-                 << endl << endl 
-                 << "--limit:               `limit' clause for database query (integer > 0)." << endl << endl 
-                 << "--offset:              `offset' clause for database query (integer > 0)." << endl << endl 
-                 << "--show-stars:          Show the `Stars' returned by the database query (optional argument:  integer)." 
-                 << endl << endl 
-                 << "--decimals-calculate:  Calculate right ascension and declination decimal degrees" << endl 
-                 << "                       for the `Stars' returned by the database query." << endl << endl 
-                 << "--stars-query:         Query the database for `Stars'." << endl << endl
-                 << "--points-query:        Query the database for `Points'." << endl << endl
-                 << "--paths-query:         Query the database for `Paths'." << endl << endl
-                 << "--pictures-query:      Query the database for `Pictures'." << endl << endl
-                 << "--write-tex:           Write TeX file with calls to the macro \"\\starinfo\"" << endl
-                 << "                       (optional argument:  integer)." << endl 
-                 << "--constellation-sort:  Sort stars by constellation full name." << endl << endl 
-                 << "--instruction-file:    Ignore other command-line options and read instructions from" << endl 
-                 << "                       the file specified in the required argument." << endl 
+                 << "--help:  Prints this message and exits with exit status 0." << endl 
                  << endl; 
 
             if (DEBUG)
@@ -245,250 +196,6 @@ process_command_line_options(int argc, char *argv[])
             exit(0);
 
         } /* |if (option_index == HELP_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == WHERE_INDEX)
-        {
-            cerr << "`option_index' == `WHERE_INDEX'" << endl;
-
-            temp_str = "";
-
-            if (optarg && strlen(optarg) > 0)
-            {
-               temp_str = optarg;
-            }  
-            else
-               temp_str = "approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200";
-
-            temp_str.insert(0, "where ");
-
-            if (DEBUG)
-            { 
-               cerr << "`temp_str' == " <<  temp_str << endl;
-            }
-
-            where_str_vector.push_back(temp_str);
-
-
-        } /* |else if (option_index == WHERE_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == NO_WHERE_INDEX)
-        {
-            cerr << "`option_index' == `NO_WHERE_INDEX'" << endl;
-
-            where_str_vector.push_back("");
-
-        } /* |else if (option_index == NO_WHERE_INDEX)|  */
-
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == ORDER_BY_INDEX)
-        {
-            cerr << "`option_index' == `ORDER_BY_INDEX'" << endl;
-
-            temp_str = "";
-
-            if (optarg && strlen(optarg) > 0)
-            {
-               temp_str = optarg;
-            }  
-            else
-               temp_str = "approx_rank_apparent_magnitude";
-
-            temp_str.insert(0, "order_by ");
-
-            if (DEBUG)
-            { 
-               cerr << "`temp_str' == " <<  temp_str << endl;
-            }
-
-            order_str_vector.push_back(temp_str);
-
-        } /* |else if (option_index == ORDER_BY_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == LIMIT_INDEX)
-        {
-            cerr << "`option_index' == `LIMIT_INDEX'" << endl;
-
-            limit_stars = atoi(optarg);
-
-            if (DEBUG)
-            { 
-               cerr << "`limit_stars' == " <<  limit_stars << endl;
-            }          
-
-        } /* |else if (option_index == LIMIT_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == OFFSET_INDEX)
-        {
-            cerr << "`option_index' == `OFFSET_INDEX'" << endl;
-
-            offset_stars = atoi(optarg);
-
-            if (DEBUG)
-            { 
-               cerr << "`offset_stars' == " <<  offset_stars << endl;
-            }          
-
-        } /* |else if (option_index == OFFSET_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == SHOW_STARS_INDEX)
-        {
-            cerr << "`option_index' == `SHOW_STARS_INDEX'" << endl;
-
-            if (optarg && strlen(optarg) > 0)
-               show_stars = atoi(optarg);
-            else
-               show_stars = 1;
-
-            if (DEBUG)
-            { 
-               cerr << "`show_stars' == " << show_stars << endl;
-            }
-
-
-        } /* |else if (option_index == SHOW_STARS_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == DECIMALS_CALCULATE_INDEX)
-        {
-            cerr << "`option_index' == `DECIMALS_CALCULATE_INDEX'" << endl;
-
-            decimals_calculate = 1;
-
-        } /* |else if (option_index == DECIMALS_CALCULATE_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == STARS_QUERY_INDEX)
-        {
-            cerr << "`option_index' == `STARS_QUERY_INDEX'" << endl;
-
-            query_type_vector.push_back(STARS_QUERY); 
-
-            stars_query = 1;
-
-        } /* |else if (option_index == STARS_QUERY_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == POINTS_QUERY_INDEX)
-        {
-            cerr << "`option_index' == `POINTS_QUERY_INDEX'" << endl;
-
-            query_type_vector.push_back(POINTS_QUERY); 
-
-            points_query = 1;
-
-        } /* |else if (option_index == POINTS_QUERY_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == PATHS_QUERY_INDEX)
-        {
-            cerr << "`option_index' == `PATHS_QUERY_INDEX'" << endl;
-
-            query_type_vector.push_back(PATHS_QUERY); 
-
-            paths_query = 1;
-
-        } /* |else if (option_index == PATHS_QUERY_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == PICTURES_QUERY_INDEX)
-        {
-            cerr << "`option_index' == `PICTURES_QUERY_INDEX'" << endl;
-
-            query_type_vector.push_back(PICTURES_QUERY); 
-
-            pictures_query = 1;
-
-        } /* |else if (option_index == PICTURES_QUERY_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == WRITE_TEX_INDEX)
-        {
-            cerr << "`option_index' == `WRITE_TEX_INDEX'" << endl;
-
-            if (optarg && strlen(optarg) > 0)
-               write_tex = atoi(optarg);
-            else
-               write_tex = 1;
-
-            if (DEBUG)
-            { 
-               cerr << "`write_tex' == " << write_tex << endl;
-            }
-
-        } /* |else if (option_index == WRITE_TEX_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == CONSTELLATION_SORT_INDEX)
-        {
-            cerr << "`option_index' == `CONSTELLATION_SORT_INDEX'" << endl;
-
-            constellation_sort = true;
-
-        } /* |else if (option_index == CONSTELLATION_SORT_INDEX)|  */
-
-@q ***** (5) @>
-@
-@<|process_command_line_options| definition@>=
-
-        else if (option_index == INSTRUCTION_FILE_INDEX)
-        {
-            cerr << "`option_index' == `INSTRUCTION_FILE_INDEX'" << endl;
-
-            instruction_filename = optarg;
-
-            if (DEBUG)
-            { 
-               cerr << "`instruction_filename' == " << instruction_filename << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-            }          
-
-        } /* |else if (option_index == INSTRUCTION_FILE_INDEX)|  */
 
 @q ***** (5) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
@@ -539,23 +246,55 @@ getchar();
 @*2 Non-option arguments.
 
 @<|process_command_line_options| definition@>=
+
+@q  *** (3) Non-option command line arguments.   @>
         
-     if (optind < argc)
-     {
-         if (DEBUG)
-           cerr << "non-option ARGV-elements: ";
+@q  **** (4)  @>
 
-         for (int i = 0; optind < argc; ++i, ++optind)
-         {
-             if (DEBUG)
-             {
-               cerr << "argv[" << optind << "] == " << argv[optind] << endl ;
-               cerr << "strlen(argv[optind]) == " << strlen(argv[optind]) << endl;
-             }
+  if (optind < argc)
+  {
+@q  ***** (5)  @>
 
-         } /* |for| */ 
-            
-     }  
+       if (DEBUG)
+       {
+          cerr << "non-option ARGV-elements: ";
+
+       }  /* |if (DEBUG)|  */ 
+
+       int j = optind;
+
+@q  ***** (5)  @>
+
+       for (int i = 0; j < argc;  ++i, ++j)
+       {
+@q  ****** (6)  @>
+
+           if (DEBUG)
+           {
+               cerr << "argv[" << j << "] == " << argv[j] << endl
+                    << "strlen(argv[j]) == " << strlen(argv[j]) << endl;
+
+           }  /* |if (DEBUG)|  */ 
+
+           curr_io_type.in_filename.assign(argv[j]);
+           io_deque.push_back(curr_io_type);
+
+
+@q  ****** (6)  @>
+
+
+       }  /* |for| */ 
+   
+@q  ***** (5)  @>
+ 
+  } /* |if (optind < argc)|  */
+  
+@q **** (4) @>
+
+   if (DEBUG)
+   { 
+      cerr << "io_deque.size() == " << io_deque.size() << endl;
+   }  
 
 @q **** (4) @>
 @

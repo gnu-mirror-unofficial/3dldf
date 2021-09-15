@@ -89,7 +89,7 @@ starinfo_constellations.tex: accsdtbs$(EXEEXT)
 .PHONY: run
 
 run: accsdtbs$(EXEEXT)
-	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
+	accsdtbs$(EXEEXT) input.txt
 
 accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o classes.o scanner.o parser.o
 	g++ -o $@ $^ -lmysqlclient
