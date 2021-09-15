@@ -1,26 +1,14 @@
 Terminals unused in grammar
 
+    ASTERISK
+    SELECT
     ALL
+    FROM
     BY
     ASCENDING
     DESCENDING
     UNIQUE
     LIMIT
-    KINGDOM
-    PHYLUM
-    PHYLA
-    CLASS
-    CLASSES
-    ORDER
-    ORDERS
-    FAMILY
-    FAMILIES
-    GENUS
-    GENERA
-    SPECIES
-    SUBSPECIES
-    VARIETY
-    VARIETIES
     ID
     FLOAT
 
@@ -34,72 +22,55 @@ Grammar
     2 statement_list: %empty
     3               | statement_list statement
 
-    4 statement: SELECT ASTERISK FROM KINGDOMS
-    5          | INPUT STRING
-    6          | ENDINPUT
-    7          | QUERY combined_string
+    4 statement: INPUT STRING
+    5          | ENDINPUT
+    6          | QUERY combined_string
 
-    8 combined_string: STRING
-    9                | combined_string STRING
+    7 combined_string: STRING
+    8                | combined_string STRING
 
-   10 statement: SEMI_COLON
+    9 statement: SEMI_COLON
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    ASTERISK <int_value> (258) 4
-    SEMI_COLON <int_value> (259) 10
-    INPUT <int_value> (260) 5
+    ASTERISK <int_value> (258)
+    SEMI_COLON <int_value> (259) 9
+    INPUT <int_value> (260) 4
     END <int_value> (261) 1
-    ENDINPUT <int_value> (262) 6
-    SELECT <int_value> (263) 4
+    ENDINPUT <int_value> (262) 5
+    SELECT <int_value> (263)
     ALL <int_value> (264)
-    FROM <int_value> (265) 4
+    FROM <int_value> (265)
     BY <int_value> (266)
     ASCENDING <int_value> (267)
     DESCENDING <int_value> (268)
     UNIQUE <int_value> (269)
     LIMIT <int_value> (270)
-    KINGDOM <int_value> (271)
-    KINGDOMS <int_value> (272) 4
-    PHYLUM <int_value> (273)
-    PHYLA <int_value> (274)
-    CLASS <int_value> (275)
-    CLASSES <int_value> (276)
-    ORDER <int_value> (277)
-    ORDERS <int_value> (278)
-    FAMILY <int_value> (279)
-    FAMILIES <int_value> (280)
-    GENUS <int_value> (281)
-    GENERA <int_value> (282)
-    SPECIES <int_value> (283)
-    SUBSPECIES <int_value> (284)
-    VARIETY <int_value> (285)
-    VARIETIES <int_value> (286)
-    ID <int_value> (287)
-    QUERY <int_value> (288) 7
-    FLOAT <float_value> (289)
-    STRING <string_value> (290) 5 8 9
+    ID <int_value> (271)
+    QUERY <int_value> (272) 6
+    FLOAT <float_value> (273)
+    STRING <string_value> (274) 4 7 8
 
 
 Nonterminals, with rules where they appear
 
-    $accept (36)
+    $accept (20)
         on left: 0
-    program (37)
+    program (21)
         on left: 1
         on right: 0
-    statement_list (38)
+    statement_list (22)
         on left: 2 3
         on right: 1 3
-    statement (39)
-        on left: 4 5 6 7 10
+    statement (23)
+        on left: 4 5 6 9
         on right: 3
-    combined_string <string_value> (40)
-        on left: 8 9
-        on right: 7 9
+    combined_string <string_value> (24)
+        on left: 7 8
+        on right: 6 8
 
 
 State 0
@@ -128,10 +99,9 @@ State 2
     INPUT       shift, and go to state 5
     END         shift, and go to state 6
     ENDINPUT    shift, and go to state 7
-    SELECT      shift, and go to state 8
-    QUERY       shift, and go to state 9
+    QUERY       shift, and go to state 8
 
-    statement  go to state 10
+    statement  go to state 9
 
 
 State 3
@@ -143,16 +113,16 @@ State 3
 
 State 4
 
-   10 statement: SEMI_COLON .
+    9 statement: SEMI_COLON .
 
-    $default  reduce using rule 10 (statement)
+    $default  reduce using rule 9 (statement)
 
 
 State 5
 
-    5 statement: INPUT . STRING
+    4 statement: INPUT . STRING
 
-    STRING  shift, and go to state 11
+    STRING  shift, and go to state 10
 
 
 State 6
@@ -164,81 +134,53 @@ State 6
 
 State 7
 
-    6 statement: ENDINPUT .
+    5 statement: ENDINPUT .
 
-    $default  reduce using rule 6 (statement)
+    $default  reduce using rule 5 (statement)
 
 
 State 8
 
-    4 statement: SELECT . ASTERISK FROM KINGDOMS
+    6 statement: QUERY . combined_string
 
-    ASTERISK  shift, and go to state 12
+    STRING  shift, and go to state 11
+
+    combined_string  go to state 12
 
 
 State 9
-
-    7 statement: QUERY . combined_string
-
-    STRING  shift, and go to state 13
-
-    combined_string  go to state 14
-
-
-State 10
 
     3 statement_list: statement_list statement .
 
     $default  reduce using rule 3 (statement_list)
 
 
+State 10
+
+    4 statement: INPUT STRING .
+
+    $default  reduce using rule 4 (statement)
+
+
 State 11
 
-    5 statement: INPUT STRING .
+    7 combined_string: STRING .
 
-    $default  reduce using rule 5 (statement)
+    $default  reduce using rule 7 (combined_string)
 
 
 State 12
 
-    4 statement: SELECT ASTERISK . FROM KINGDOMS
+    6 statement: QUERY combined_string .
+    8 combined_string: combined_string . STRING
 
-    FROM  shift, and go to state 15
+    STRING  shift, and go to state 13
+
+    $default  reduce using rule 6 (statement)
 
 
 State 13
 
-    8 combined_string: STRING .
+    8 combined_string: combined_string STRING .
 
     $default  reduce using rule 8 (combined_string)
-
-
-State 14
-
-    7 statement: QUERY combined_string .
-    9 combined_string: combined_string . STRING
-
-    STRING  shift, and go to state 16
-
-    $default  reduce using rule 7 (statement)
-
-
-State 15
-
-    4 statement: SELECT ASTERISK FROM . KINGDOMS
-
-    KINGDOMS  shift, and go to state 17
-
-
-State 16
-
-    9 combined_string: combined_string STRING .
-
-    $default  reduce using rule 9 (combined_string)
-
-
-State 17
-
-    4 statement: SELECT ASTERISK FROM KINGDOMS .
-
-    $default  reduce using rule 4 (statement)

@@ -10,23 +10,34 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <vector>
+#include <unistd.h>
+#include <getopt.h>
 #include <errno.h>
-#include <exception>
-#include <iomanip>
+
+#include <mysql.h>
+
 #include <ios>
 #include <iostream>
 #include <iterator>
 #include <new>
+#include <exception>
+#include <iomanip>
 #include <sstream>   
+#include <fstream>
 #include <stdexcept>
-#include <mysql.h>
 #include <string> 
 #include <cstring> 
-#include <unistd.h>
-#include <getopt.h>
+#include <vector>
+#include <deque>
 
 using namespace std;
+
+typedef void* yyscan_t;
+
+#include "parser.hxx"
+#include "scanner.hxx"
+#include "classes.hxx"
+
 
 @q * (1) @>
 

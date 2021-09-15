@@ -100,13 +100,13 @@ accsdtbs.o: accsdtbs.cxx accsgtpt.hxx classes.hxx parser.hxx scanner.hxx
 accsdtbs.cxx: accsdtbs.web
 	$(CTANGLE) accsdtbs.web - accsdtbs.cxx
 
-accsgtpt.o: accsgtpt.cxx 
+accsgtpt.o: accsgtpt.cxx classes.hxx parser.hxx scanner.hxx
 	g++ -I/usr/include/mysql -c -o accsgtpt.o accsgtpt.cxx
 
 accsgtpt.cxx accsgtpt.hxx: accsgtpt.web
 	$(CTANGLE) accsgtpt.web - accsgtpt.cxx
 
-classes.cxx classes.hxx: classes.web
+classes.cxx classes.hxx: classes.web parser.hxx scanner.hxx
 	$(CTANGLE) classes.web - classes.cxx
 
 classes.o: classes.cxx parser.hxx scanner.hxx

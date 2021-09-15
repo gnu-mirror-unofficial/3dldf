@@ -75,24 +75,32 @@ declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""
 #include <errno.h>
 #include <string.h>
 
-#include <new>
-#include <string> 
-#include <exception>
-#include <stdexcept>
+#include <mysql.h>
+
 #include <ios>
 #include <iostream>
 #include <iomanip>
 #include <iterator>
+#include <new>
+#include <algorithm>
+#include <string> 
+#include <exception>
+#include <stdexcept>
 #include <sstream>   
 #include <fstream>   
 #include <vector>
-#include <algorithm>
+#include <deque>
 
-#include <mysql.h>
 
 using namespace std;
 
+typedef void* yyscan_t;
+
+#include "parser.hxx"
+#include "scanner.hxx"
+#include "classes.hxx"
 #include "accsgtpt.hxx"
+
 
 @q ** (2) @>
 @

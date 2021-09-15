@@ -150,22 +150,6 @@ yyerror(void* v, char const* s);
 %token<int_value> DESCENDING@;@/
 %token<int_value> UNIQUE@;@/
 %token<int_value> LIMIT@;@/
-%token<int_value> KINGDOM@;@/
-%token<int_value> KINGDOMS@;@/
-%token<int_value> PHYLUM@;@/
-%token<int_value> PHYLA@;@/
-%token<int_value> CLASS@;@/
-%token<int_value> CLASSES@;@/
-%token<int_value> ORDER@;@/
-%token<int_value> ORDERS@;@/
-%token<int_value> FAMILY@;@/
-%token<int_value> FAMILIES@;@/
-%token<int_value> GENUS@;@/
-%token<int_value> GENERA@;@/
-%token<int_value> SPECIES@;@/
-%token<int_value> SUBSPECIES@;@/
-%token<int_value> VARIETY@;@/
-%token<int_value> VARIETIES@;@/
 %token<int_value> ID@;@/
 %token<int_value> QUERY@;@/
 
@@ -249,29 +233,6 @@ yyerror(void* v, char const* s);
 
 @q *** (3) Statement.  @>
 @ Statement.
-
-@q **** (4) statement --> SELECT ASTERISK FROM KINGDOMS  @>
-
-@ \<statement> $\longrightarrow$ \.{SELECT} \.{ASTERISK} \.{FROM} \.{KINGDOMS}.
-
-@<Rules@>=
-
-@=statement: SELECT ASTERISK FROM KINGDOMS@>
-{
-@q ***** (5) @>
-
-#if DEBUG_COMPILE 
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `statement:  SELECT ASTERISK FROM KINGDOMS'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
-
-@q ***** (5) @>
-
-};
 
 @q *** (3) Statement:  INPUT STRING.  @>
 
