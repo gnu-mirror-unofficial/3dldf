@@ -53,6 +53,7 @@ ACLOCAL_AMFLAGS = -I m4
 SOURCEDIR := src
 DOCDIR    := doc
 OLDDOCDIR := doc/old_doc
+ACCSDTBSDIR := accsdtbs
 
 EXAMPLESDIR := examples
 
@@ -60,18 +61,18 @@ export SOURCEDIR
 export DOCDIR
 export OLDDOCDIR
 export EXAMPLESDIR
+export ACCSDTBSDIR
 
 vpath %.web $(SOURCEDIR)
 vpath %.h $(SOURCEDIR)
 vpath %.c $(SOURCEDIR)
 vpath %.o $(SOURCEDIR)
 
-
 EXTRA_DIST = ChangeLog reconfig.sh
 
 .DELETE_ON_ERROR :
 
-SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) $(EXAMPLESDIR)
+SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) $(EXAMPLESDIR) $(ACCSDTBSDIR)
 
 
 .PHONY: dummy
@@ -147,4 +148,5 @@ query:
 
 ## Local Variables:
 ## mode:Makefile
+## abbrev-mode:t
 ## End:

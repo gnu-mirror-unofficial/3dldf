@@ -388,9 +388,10 @@ ACLOCAL_AMFLAGS = -I m4
 SOURCEDIR := src
 DOCDIR := doc
 OLDDOCDIR := doc/old_doc
+ACCSDTBSDIR := accsdtbs
 EXAMPLESDIR := examples
 EXTRA_DIST = ChangeLog reconfig.sh
-SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) $(EXAMPLESDIR)
+SUBDIRS = $(SOURCEDIR) $(DOCDIR) $(OLDDOCDIR) $(EXAMPLESDIR) $(ACCSDTBSDIR)
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -876,6 +877,7 @@ export SOURCEDIR
 export DOCDIR
 export OLDDOCDIR
 export EXAMPLESDIR
+export ACCSDTBSDIR
 
 vpath %.web $(SOURCEDIR)
 vpath %.h $(SOURCEDIR)
