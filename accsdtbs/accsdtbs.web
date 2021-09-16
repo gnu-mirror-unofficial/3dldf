@@ -116,7 +116,6 @@ unsigned int row_ctr;
 unsigned int field_ctr;
 long affected_rows;
 
-
 stringstream sql_strm;
 
 int trace_value = 0;
@@ -172,83 +171,6 @@ main(int argc, char *argv[])
             << endl;
    }  
 
-   cerr << "where_str_vector.size()  == " << where_str_vector.size() << endl
-        << "order_str_vector.size()  == " << order_str_vector.size() << endl
-        << "limit_stars              == " << limit_stars << endl
-        << "offset_stars             == " << offset_stars << endl
-        << "query_type_vector.size() == " << query_type_vector.size() 
-        << endl;
-
-   int i = 0;
-
-   if (query_type_vector.size() > 0)
-      cerr << "query_type_vector:" << endl;
-   else 
-      cerr << "query_type_vector is empty.  Not showing." << endl;
-
-   for (vector<int>::iterator iter = query_type_vector.begin();
-        iter != query_type_vector.end();
-        ++iter)
-   {
-      cerr << i++ << ".  " << *iter << " ==  ";
-
-      if (*iter == STARS_QUERY)
-          cerr << "STARS_QUERY";
-      else if (*iter == POINTS_QUERY)
-          cerr << "POINTS_QUERY";
-      else if (*iter == PATHS_QUERY)
-          cerr << "PATHS_QUERY";
-      else if (*iter == PICTURES_QUERY)
-          cerr << "PICTURES_QUERY";
-
-      cerr << endl;
-   }   
-
-   i = 0;
-
-   if (where_str_vector.size() > 0)
-      cerr << "where_str_vector:" << endl;
-   else 
-      cerr << "where_str_vector is empty.  Not showing." << endl;
-
-   for (vector<string>::iterator iter = where_str_vector.begin();
-        iter != where_str_vector.end();
-        ++iter)
-   {
-      cerr << i++ << ".  " << *iter << endl;
-   }   
-
-   i = 0;
-
-   if (order_str_vector.size() > 0)
-      cerr << "order_str_vector:" << endl;
-   else 
-      cerr << "order_str_vector is empty.  Not showing." << endl;
-
-   for (vector<string>::iterator iter = order_str_vector.begin();
-        iter != order_str_vector.end();
-        ++iter)
-   {
-      cerr << i++ << ".  " << *iter << endl;
-   }   
-
-   if (instruction_filename.length() > 0)
-   {
-       cerr << "instruction_filename.length() == " << instruction_filename.length() << " (> 0)"
-            << endl 
-            << "Will read instructions from instruction file \"" << instruction_filename << "\"."
-            << endl
-            << "Ignoring other options.  Will clear vectors." << endl;
-
-        query_type_vector.clear();
-        where_str_vector.clear();
-        order_str_vector.clear();
-
-        
-
-   }
-
- 
 @q *** (3) @>
 @
 @<|main| definition@>=
@@ -279,80 +201,25 @@ main(int argc, char *argv[])
     if (!mysql_real_connect(mysql, "localhost", "3dldf", 0, "3dldf", 0, NULL, 0))
     {
         cerr << "ERROR! In `main':  `mysql_real_connect' failed, returning NULL." 
-                  << endl 
-                  << "Failed to connect to database: Error: " << mysql_error(mysql) 
-                  << endl
-                  << "Exiting program unsuccessfully with exit status 1."
-                  << endl;
-        return 1;
+             << endl 
+             << "Failed to connect to database: Error: " << mysql_error(mysql) 
+             << endl
+             << "Exiting program unsuccessfully with exit status 1."
+             << endl;
+
+        exit(1);
     }
     else
     { 
         cerr << "In `main':  `mysql_real_connect' succeeded." << endl;
    }  
 
-@q **** (4) @>
-
-#if 0 
-   if (stars_query > 0)
-   {
-@q ***** (5) @>
-
-       if (DEBUG)
-       { 
-           cerr << "In `main':  `stars_query' == " << stars_query << " (> 1)" << endl 
-                << "Calling `query_database_for_stars'." << endl;
-       }     
-
-       status = query_database_for_stars(where_str, order_str, limit_stars, offset_stars);
-
-@q ***** (5) @>
-
-       if (status != 0)
-       {
-          cerr << "ERROR! In `main':  `query_database_for_stars' failed, returning " << status << "." 
-                    << endl
-                    << "Exiting program unsuccessfully with exit status 1."
-                    << endl;
-
-          exit(1);
-       }   
-
-@q ***** (5) @>
-
-       else if (DEBUG)
-       { 
-          cerr << "In `main':  `query_database_for_stars' succeeded, returning 0."
-                    << endl;
-
-       }   
-
-@q ***** (5) @>
-
-   }  /* |if (stars_query > 0)| */
-
-   else if (DEBUG)
-   { 
-       cerr << "In `main':  `stars_query' == " << stars_query << " (<= 0)" << endl 
-            << "Not calling `query_database_for_stars'." << endl;
-   }     
-
-#endif 
 
 @q **** (4) @>
 
 @q *** (3) @>
 @
 @<|main| definition@>=
-
-#if 0 
-   int BUFFER_SIZE = 256;
-
-   char buffer[BUFFER_SIZE];
-   memset(buffer, 0, BUFFER_SIZE);
-
-   char *buffer_ptr = 0;
-#endif 
 
    Scanner_Node scanner_node = new Scanner_Type(1);
 
