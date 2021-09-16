@@ -66,9 +66,11 @@
 
 bin_PROGRAMS = accsdtbs$(EXEEXT)
 
-accsdtbs_SOURCES = accsdtbs.web accsgtpt.web classes.web parser.web scanner.web 
+accsdtbs_SOURCES = accsdtbs.web accsgtpt.web classes.web parser.web scanner.web stars.web
 
-EXTRA_DIST = 00README accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx Makefile.in 
+EXTRA_DIST = 00README accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx stars.cxx stars.hxx \
+             parser.output parser.y++ parser.hxx parser.cxx scanner.cxx scanner.hxx scanner.l++ \
+             Makefile.in 
 
 CLEANFILES := accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx accsdtbs.o accsgtpt.o starinfo_constellations.tex \
               stars.cxx stars.hxx
@@ -87,10 +89,31 @@ all: accsdtbs$(EXEEXT)
 starinfo_constellations.tex: accsdtbs$(EXEEXT)
 	accsdtbs$(EXEEXT) --stars-query --limit 200 --write-tex --constellation-sort
 
+
+.PHONY: prog
+
+prog: accsdtbs$(EXEEXT)
+
 .PHONY: run
 
 run: accsdtbs$(EXEEXT)
+	accsdtbs$(EXEEXT)
+
+.PHONY: run-i
+
+run-i: accsdtbs$(EXEEXT)
 	accsdtbs$(EXEEXT) input.txt
+
+.PHONY: run-t
+
+run-t: accsdtbs$(EXEEXT)
+	accsdtbs$(EXEEXT) --trace 
+
+.PHONY: run-ti
+
+run-ti: accsdtbs$(EXEEXT)
+	accsdtbs$(EXEEXT) --trace input.txt
+
 
 accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o classes.o scanner.o parser.o stars.o
 	g++ -o $@ $^ -lmysqlclient

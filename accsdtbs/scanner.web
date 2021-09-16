@@ -141,13 +141,13 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=\* {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << " (asterisk)" << endl;
 
    }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return ASTERISK; 
 
@@ -160,69 +160,15 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=; {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << " (semi-colon)" << endl;
 
    }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return SEMI_COLON; 
-
-@=}@>
-
-@q **** SELECT (4) @> 
-@ SELECT
-@<Rules@>=
-@=select|SELECT {@>
-
-   return SELECT;
-
-@=}@>
-
-@q **** ALL (4) @> 
-@ ALL
-@<Rules@>=
-@=all|ALL {@>
-
-   return ALL;
-
-@=}@>
-
-@q **** FROM (4) @> 
-@ FROM
-@<Rules@>=
-@=from|FROM {@>
-
-   return FROM;
-
-@=}@>
-
-@q **** ORDER (4) @> 
-@ ORDER
-@<Rules@>=
-@=order|ORDER {@>
-
-   return ORDER;
-
-@=}@>
-
-@q **** BY (4) @> 
-@ BY
-@<Rules@>=
-@=by|BY {@>
-
-   return BY;
-
-@=}@>
-
-@q **** ASCENDING (4) @> 
-@ ASCENDING
-@<Rules@>=
-@=ascending|ASCENDING {@>
-
-   return ASCENDING;
 
 @=}@>
 
@@ -235,16 +181,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
-@q **** DESCENDING (4) @> 
-@ DESCENDING
-@<Rules@>=
-@=descending|DESCENDING {@>
-
-   return DESCENDING;
-
-@=}@>
-
 @q **** DES (DESCENDING) (4) @> 
 @ DES (DESCENDING)
 @<Rules@>=
@@ -254,56 +190,19 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-@q **** UNIQUE (4) @> 
-@ UNIQUE
-@<Rules@>=
-@=unique|UNIQUE {@>
-
-   return UNIQUE;
-
-@=}@>
-
-@q **** LIMIT (4) @> 
-@ LIMIT
-@<Rules@>=
-@=limit|LIMIT {@>
-
-   return LIMIT;
-
-@=}@>
-
-@q **** ID (4) @> 
-@ ID
-@<Rules@>=
-@=id|ID {@>
-
-   return ID;
-
-@=}@>
-
-
-@q **** QUERY (4) @> 
-@ QUERY
-@<Rules@>=
-@=query|QUERY {@>
-
-   return QUERY;
-
-@=}@>
-
 @q *** (3) INPUT.  @>
 @ \.{INPUT}.
 
 @<Rules@>=
 @=INPUT|input {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return INPUT;
 
@@ -317,13 +216,13 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=END|end {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return END;
 
@@ -335,17 +234,1056 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=ENDINPUT|endinput {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return ENDINPUT;
 
 @=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SELECT|select {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+
+
+   return SELECT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ALL|all {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ALL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=FROM|from {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return FROM;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=BY|by {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return BY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ORDER|order {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ORDER;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ASCENDING|ascending {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ASCENDING;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DESCENDING|descending {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DESCENDING;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=UNIQUE|unique {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return UNIQUE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LIMIT|limit {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LIMIT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ID|id {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ID;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=QUERY|query {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return QUERY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=APPROX|approx {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPROX;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RANK|rank {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RANK;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=APPARENT|apparent {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPARENT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ABSOLUTE|absolute {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ABSOLUTE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=MAGNITUDE|magnitude {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return MAGNITUDE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=VARIES|varies {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return VARIES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=IS|is {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return IS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=BINARY|binary {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return BINARY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=MULTIPLE|multiple {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return MULTIPLE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=COMMON|common {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return COMMON;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NAME|name {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NAME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GREEK|greek {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GREEK;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LATIN|latin {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LATIN;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ARABIC|arabic {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ARABIC;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GENITIVE|genitive {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GENITIVE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=FLAMSTEED|flamsteed {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return FLAMSTEED;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=BAYER|bayer {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return BAYER;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=BS|bs {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return BS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=HR|hr {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return HR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NUMBER|number {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NUMBER;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DESIGNATION|designation {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DESIGNATION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ABBREVIATION|abbreviation {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ABBREVIATION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RIGHT|right {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ASCENSION|ascension {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ASCENSION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DECLINATION|declination {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DECLINATION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ECLIPTIC|ecliptic {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ECLIPTIC;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=HOUR|hour {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return HOUR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=HOURS|hours {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return HOURS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=MINUTE|minute {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return MINUTE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=MINUTES|minutes {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return MINUTES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SECOND|second {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SECOND;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SECONDS|seconds {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SECONDS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DEGREES|degrees {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DEGREES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DECIMAL|decimal {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DECIMAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTANT|constant {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTANT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=COMPARE|compare {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return COMPARE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LOWEST|lowest {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LOWEST;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=HIGHEST|highest {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return HIGHEST;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=STAR|star {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return STAR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=STARS|stars {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return STARS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTELLATION|constellation {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTELLATIONS|constellations {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATIONS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PLANET|planet {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PLANET;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PLANETS|planets {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PLANETS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=TIME|time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return TIME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SIDEREAL|sidereal {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SIDEREAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=UNIVERSAL|universal {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return UNIVERSAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GREENWICH|greenwich {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GREENWICH;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LOCAL|local {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LOCAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SOLAR|solar {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SOLAR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=TRANSFORM|transform {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return TRANSFORM;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=TRANSFORMS|transforms {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return TRANSFORMS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=POINT|point {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return POINT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=POINTS|points {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return POINTS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PATH|path {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PATH;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PATHS|paths {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PATHS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PICTURE|picture {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PICTURE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PICTURES|pictures {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PICTURES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SONG|song {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SONG;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SONGS|songs {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SONGS;
+
+@=}@>
+
+@q *** (3) INTEGER @>
+
+@ \.{INTEGER}.  
+
+@<Rules@>=
+@=[0-9]+ {@>
+
+   yylval->int_value = atoi(yytext);   
+ 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  INTEGER == " << yylval->int_value
+            << endl
+            << "Returning `INTEGER'."
+            << endl;
+   }  
+
+   return INTEGER;
+
+@=}@>
+
+@q *** (3) FLOAT @>
+
+@ \.{FLOAT}.  
+
+@<Rules@>=
+@=([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+) {@>
+
+   yylval->float_value = atof(yytext);   
+ 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  FLOAT == " << yylval->float_value
+            << endl
+            << "Returning `FLOAT'."
+            << endl;
+   }  
+
+   return FLOAT;
+
+@=}@>
+
 
 @q *** (3) ditto.  @>
 @ ditto (double-quote character as string).
@@ -355,7 +1293,7 @@ to {\bf yylex} can be set here.
 
    strcpy(yylval->string_value, "\"");
 
-#if DEBUG_COMPILE 
+ 
    if (DEBUG)
    {
        cerr << "In `yylex':  ditto == " << yytext
@@ -364,7 +1302,7 @@ to {\bf yylex} can be set here.
             << endl;
 
    }  
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return STRING;
 
@@ -376,14 +1314,14 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=(%|#).*$ {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
       cerr << "In `yylex':  Comment: " << yytext << endl;
      
    }  /* |if (DEBUG)|  */
 
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    /* Ignore  */
 
@@ -395,15 +1333,16 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=[[:space:]\x0d]+ {@>
 
-#if DEBUG_COMPILE
+
    if (DEBUG)
    {
        cerr << "In `yylex':  Whitespace." << endl;
 
    }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
 @=}@>
+
 
 @q *** (3) Undelimited string:  "...".  @>
 @ Undelimited string.
@@ -413,7 +1352,7 @@ to {\bf yylex} can be set here.
 
    strcpy(yylval->string_value, yytext);
 
-#if DEBUG_COMPILE 
+ 
    if (DEBUG)
    {
        cerr << "In `yylex':  Undelimited string == " << yytext
@@ -422,13 +1361,11 @@ to {\bf yylex} can be set here.
             << endl;
 
    }  
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    return STRING;
 
 @=}@>
-
-
 
 @q *** (3) Delimited string:  "...".  @>
 @ Delimited string:  \.{\char`\"}$\ldots$\.{\char`\"}.  
@@ -445,7 +1382,7 @@ to {\bf yylex} can be set here.
 
    size_t pos = string::npos;
 
-#if DEBUG_COMPILE 
+ 
    if (DEBUG)
    {
        cerr << "In `yylex':  Delimited string == " << yytext
@@ -453,13 +1390,15 @@ to {\bf yylex} can be set here.
             << "Returning `STRING'."
             << endl;
    }  
-#endif  /* |DEBUG_COMPILE|  */ 
+
 
    strcpy(yylval->string_value, temp_str.c_str());
   
    return STRING;
 
 @=}@>
+
+
 
 @q ** (2) Additional functions.  @>
 

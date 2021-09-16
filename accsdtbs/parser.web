@@ -153,10 +153,71 @@ yyerror(void* v, char const* s);
 %token<int_value> LIMIT@;@/
 %token<int_value> ID@;@/
 %token<int_value> QUERY@;@/
-
+%token<int_value> APPROX@;@/
+%token<int_value> RANK@;@/
+%token<int_value> APPARENT@;@/
+%token<int_value> ABSOLUTE@;@/
+%token<int_value> MAGNITUDE@;@/
+%token<int_value> VARIES@;@/
+%token<int_value> IS@;@/
+%token<int_value> BINARY@;@/
+%token<int_value> MULTIPLE@;@/
+%token<int_value> COMMON@;@/
+%token<int_value> NAME@;@/
+%token<int_value> GREEK@;@/
+%token<int_value> LATIN@;@/
+%token<int_value> ARABIC@;@/
+%token<int_value> GENITIVE@;@/
+%token<int_value> FLAMSTEED@;@/
+%token<int_value> BAYER@;@/
+%token<int_value> BS@;@/
+%token<int_value> HR@;@/
+%token<int_value> NUMBER@;@/
+%token<int_value> DESIGNATION@;@/
+%token<int_value> ABBREVIATION@;@/
+%token<int_value> RIGHT@;@/
+%token<int_value> ASCENSION@;@/
+%token<int_value> DECLINATION@;@/
+%token<int_value> ECLIPTIC@;@/
+%token<int_value> HOUR@;@/
+%token<int_value> HOURS@;@/
+%token<int_value> MINUTE@;@/
+%token<int_value> MINUTES@;@/
+%token<int_value> SECOND@;@/
+%token<int_value> SECONDS@;@/
+%token<int_value> DEGREES@;@/
+%token<int_value> DECIMAL@;@/
+%token<int_value> CONSTANT@;@/
+%token<int_value> COMPARE@;@/
+%token<int_value> LOWEST@;@/
+%token<int_value> HIGHEST@;@/
+%token<int_value> INTEGER@;@/
 %token<float_value> FLOAT@;@/
-
 %token<string_value> STRING@;@/
+%token<int_value> STAR@;@/
+%token<int_value> STARS@;@/
+%token<int_value> CONSTELLATION@;@/
+%token<int_value> CONSTELLATIONS@;@/
+%token<int_value> PLANET@;@/
+%token<int_value> PLANETS@;@/
+%token<int_value> TIME@;@/
+%token<int_value> SIDEREAL@;@/
+%token<int_value> UNIVERSAL@;@/
+%token<int_value> GREENWICH@;@/
+%token<int_value> LOCAL@;@/
+%token<int_value> SOLAR@;@/
+
+%token<int_value> TRANSFORM@;@/
+%token<int_value> TRANSFORMS@;@/
+%token<int_value> POINT@;@/
+%token<int_value> POINTS@;@/
+%token<int_value> PATH@;@/
+%token<int_value> PATHS@;@/
+%token<int_value> PICTURE@;@/
+%token<int_value> PICTURES@;@/
+%token<int_value> SONG@;@/
+%token<int_value> SONGS@;@/
+
 
 @q ** (2) Rules.  @>
 @ Rules.
@@ -173,14 +234,12 @@ yyerror(void* v, char const* s);
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  END'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
 
     scanner_node->end_flag = true;
@@ -202,13 +261,11 @@ yyerror(void* v, char const* s);
 
 @=statement_list: /* EMPTY  */  @>
 {
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "In `yyparse', rule `statement_list:  EMPTY'." 
              << endl;
     }
-#endif  /* |DEBUG_COMPILE|  */ 
 
 };
 
@@ -221,14 +278,12 @@ yyerror(void* v, char const* s);
 @=statement_list: statement_list statement @>
 {
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement_list: statement_list statement'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
 };
 
@@ -251,7 +306,6 @@ yyerror(void* v, char const* s);
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  INPUT STRING'." 
@@ -260,7 +314,6 @@ yyerror(void* v, char const* s);
              << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
     scanner_node->input_filename.assign(@=$2@>);        
 
@@ -283,14 +336,12 @@ yyerror(void* v, char const* s);
 {
 @q ***** (5) @>
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  ENDINPUT'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
 @q ***** (5) @>
    
@@ -302,33 +353,146 @@ yyerror(void* v, char const* s);
 @
 @<Token and type declarations@>=
 %type<string_value> combined_string@;@/
+%type<int_value> modifier_list@;@/
+%type<int_value> table_name@;@/
 
-@q *** (3) Statement:  QUERY combined_string.  @>
-@ Statement: QUERY combined_string.
+@q *** (3) Statement:  QUERY table_name modifier_list.  @>
 
-@q **** (4) statement --> QUERY combined_string  @>
-
-@ \<statement> $\longrightarrow$ \.{QUERY} \<combined_string>.
+@ Statement: QUERY table_name modifier_list.
 
 @<Rules@>=
-
-@=statement: QUERY combined_string@>
+@=statement: QUERY table_name modifier_list@>
 {
 @q ***** (5) @>
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `statement:  QUERY combined_string'." 
-             << endl 
-             << "combined_string == " << @=$2@> << endl;
+        cerr << "*** Parser:  Rule `statement:  QUERY table_name modifier_list'." 
+             << endl;
+
+
+        cerr << "`table_name' == ";
+
+        if (@=$2@> == STARS) 
+        {
+           cerr << "`STARS'." << endl;
+        }
+
+        else if (@=$2@> == SONGS) 
+        {
+           cerr << "`SONGS'." << endl;
+        }
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+        if (@=$2@> == STARS) 
+        {
+
+        }
+
+@q ***** (5) @>  
+   
+        else if (@=$2@> == SONGS) 
+        {
+           sql_strm.str("");
+
+           sql_strm << "select * from Songs.Songs order by title limit 1;";
+
+           status = submit_mysql_query(sql_strm.str());
+
+           if (status != 0)
+           {
+               cerr << "ERROR!  In parser, rule `statement: QUERY table_name modifier_list':"
+                    << endl
+                    << "`submit_mysql_query' failed, returning " << status << "." << endl
+                    << "Failed to query database for `Songs'." << endl 
+                    << "Will try to continue." << endl;
+           }
+           else if (DEBUG)
+           { 
+               cerr << "In parser, rule `statement: QUERY table_name modifier_list':"
+                    << endl
+                    << "`submit_mysql_query' succeeded, returning 0." << endl
+                    << "Queried database for `Songs' successfully." << endl;
+           }       
+
+        }  /* |else if (@=$2@> == SONGS)|  */
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q ***** (5) @>
 
 };
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: STARS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  STARS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = STARS;
+
+};
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: SONGS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  SONGS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = SONGS;
+
+};
+
+
+@ modifier_list: \.{EMPTY}.
+
+@<Rules@>=
+@=modifier_list: /* EMPTY */@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier_list: EMPTY'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = 0;
+
+};
+
+@q *** (3) @>
 
 @q **** (4) combined_string --> STRING  @>
 
@@ -340,7 +504,6 @@ yyerror(void* v, char const* s);
 {
 @q ***** (5) @>
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  combined_string:  STRING'."  
@@ -348,7 +511,6 @@ yyerror(void* v, char const* s);
              << "STRING == " << @=$1@> << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
     memset(@=$$@>, 0,  1024);
     strcat(@=$$@>, @=$1@>);
@@ -367,7 +529,6 @@ yyerror(void* v, char const* s);
 {
 @q ***** (5) @>
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `combined_string: combined_string STRING'." 
@@ -376,7 +537,6 @@ yyerror(void* v, char const* s);
              << "STRING          == " << @=$2@> << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
     memset(@=$$@>, '\0',  1024);
 
@@ -421,14 +581,12 @@ yyerror(void* v, char const* s);
 {
 @q ***** (5) @>
 
-#if DEBUG_COMPILE 
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  SEMI_COLON'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
-#endif  /* |DEBUG_COMPILE|  */ 
 
 @q ***** (5) @>
    
@@ -443,8 +601,10 @@ yyerror(void* v, char const* s);
 @=%{@>
 @<Include files@>@;@/
 using namespace std;
+int submit_mysql_query(string query_str);
 bool DEBUG = true;  /* |false|  */
 static stringstream temp_strm;
+static stringstream sql_strm;
 static int status;
 @<Declarations of additional functions@>@;@/
 #if 0 

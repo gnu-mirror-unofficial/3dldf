@@ -90,9 +90,8 @@ typedef void* yyscan_t;
 @<|class Star| declaration@>=
 class Star
 {
-
       friend int main(int argc, char *argv[]);
-      friend int calculate_decimals(void);
+      friend int calculate_decimals(vector<Star*> &star_vector);
       friend int query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars, int ooffset_stars);
 
       friend bool compare_star_constant_name(Star *, Star *);
@@ -1788,9 +1787,9 @@ calculate_decimals(vector<Star*> &star_vector)
 @q *** (3) @>
 @
 @(stars.hxx@>=
-@<Function declarations@>@;
 @<|class Star| declaration@>@;
 @<Declare non-member functions for |class Star|@>@;
+@<Function declarations@>@;
 
 @q *** (3) @>
 @

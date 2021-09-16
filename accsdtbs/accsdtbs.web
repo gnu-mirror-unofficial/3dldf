@@ -107,8 +107,6 @@ typedef void* yyscan_t;
 @
 @<Global variable declarations@>=
 
-vector<Star*> star_vector;
-
 MYSQL_RES *result;
 MYSQL_ROW curr_row;
 MYSQL *mysql;
@@ -198,7 +196,7 @@ main(int argc, char *argv[])
 
     mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
 
-    if (!mysql_real_connect(mysql, "localhost", "3dldf", 0, "3dldf", 0, NULL, 0))
+    if (!mysql_real_connect(mysql, "localhost", "laurence", 0, "3dldf", 0, NULL, 0))
     {
         cerr << "ERROR! In `main':  `mysql_real_connect' failed, returning NULL." 
              << endl 
@@ -433,7 +431,16 @@ submit_mysql_query(string query_str);
 int
 submit_mysql_query(string query_str)
 {
-  int status = 0;
+ 
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+   { 
+      cerr << "Entering `submit_mysql_query'." << endl
+           << "`query_str' == " << query_str << endl;
+   }  
+
+   int status = 0;
 
    mysql_query(mysql, query_str.c_str());
 

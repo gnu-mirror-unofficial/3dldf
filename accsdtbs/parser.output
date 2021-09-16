@@ -1,3 +1,8 @@
+Nonterminals useless in grammar
+
+    combined_string
+
+
 Terminals unused in grammar
 
     ASTERISK
@@ -11,7 +16,72 @@ Terminals unused in grammar
     UNIQUE
     LIMIT
     ID
+    APPROX
+    RANK
+    APPARENT
+    ABSOLUTE
+    MAGNITUDE
+    VARIES
+    IS
+    BINARY
+    MULTIPLE
+    COMMON
+    NAME
+    GREEK
+    LATIN
+    ARABIC
+    GENITIVE
+    FLAMSTEED
+    BAYER
+    BS
+    HR
+    NUMBER
+    DESIGNATION
+    ABBREVIATION
+    RIGHT
+    ASCENSION
+    DECLINATION
+    ECLIPTIC
+    HOUR
+    HOURS
+    MINUTE
+    MINUTES
+    SECOND
+    SECONDS
+    DEGREES
+    DECIMAL
+    CONSTANT
+    COMPARE
+    LOWEST
+    HIGHEST
+    INTEGER
     FLOAT
+    STAR
+    CONSTELLATION
+    CONSTELLATIONS
+    PLANET
+    PLANETS
+    TIME
+    SIDEREAL
+    UNIVERSAL
+    GREENWICH
+    LOCAL
+    SOLAR
+    TRANSFORM
+    TRANSFORMS
+    POINT
+    POINTS
+    PATH
+    PATHS
+    PICTURE
+    PICTURES
+    SONG
+
+
+Rules useless in grammar
+
+   11 combined_string: STRING
+   12                | combined_string STRING
 
 
 Grammar
@@ -25,12 +95,14 @@ Grammar
 
     4 statement: INPUT STRING
     5          | ENDINPUT
-    6          | QUERY combined_string
+    6          | QUERY table_name modifier_list
 
-    7 combined_string: STRING
-    8                | combined_string STRING
+    7 table_name: STARS
+    8           | SONGS
 
-    9 statement: SEMI_COLON
+    9 modifier_list: %empty
+
+   10 statement: SEMI_COLON
 
 
 Terminals, with rules where they appear
@@ -38,7 +110,7 @@ Terminals, with rules where they appear
     $end (0) 0
     error (256)
     ASTERISK <int_value> (258)
-    SEMI_COLON <int_value> (259) 9
+    SEMI_COLON <int_value> (259) 10
     INPUT <int_value> (260) 4
     END <int_value> (261) 1
     ENDINPUT <int_value> (262) 5
@@ -53,26 +125,90 @@ Terminals, with rules where they appear
     LIMIT <int_value> (271)
     ID <int_value> (272)
     QUERY <int_value> (273) 6
-    FLOAT <float_value> (274)
-    STRING <string_value> (275) 4 7 8
+    APPROX <int_value> (274)
+    RANK <int_value> (275)
+    APPARENT <int_value> (276)
+    ABSOLUTE <int_value> (277)
+    MAGNITUDE <int_value> (278)
+    VARIES <int_value> (279)
+    IS <int_value> (280)
+    BINARY <int_value> (281)
+    MULTIPLE <int_value> (282)
+    COMMON <int_value> (283)
+    NAME <int_value> (284)
+    GREEK <int_value> (285)
+    LATIN <int_value> (286)
+    ARABIC <int_value> (287)
+    GENITIVE <int_value> (288)
+    FLAMSTEED <int_value> (289)
+    BAYER <int_value> (290)
+    BS <int_value> (291)
+    HR <int_value> (292)
+    NUMBER <int_value> (293)
+    DESIGNATION <int_value> (294)
+    ABBREVIATION <int_value> (295)
+    RIGHT <int_value> (296)
+    ASCENSION <int_value> (297)
+    DECLINATION <int_value> (298)
+    ECLIPTIC <int_value> (299)
+    HOUR <int_value> (300)
+    HOURS <int_value> (301)
+    MINUTE <int_value> (302)
+    MINUTES <int_value> (303)
+    SECOND <int_value> (304)
+    SECONDS <int_value> (305)
+    DEGREES <int_value> (306)
+    DECIMAL <int_value> (307)
+    CONSTANT <int_value> (308)
+    COMPARE <int_value> (309)
+    LOWEST <int_value> (310)
+    HIGHEST <int_value> (311)
+    INTEGER <int_value> (312)
+    FLOAT <float_value> (313)
+    STRING <string_value> (314) 4
+    STAR <int_value> (315)
+    STARS <int_value> (316) 7
+    CONSTELLATION <int_value> (317)
+    CONSTELLATIONS <int_value> (318)
+    PLANET <int_value> (319)
+    PLANETS <int_value> (320)
+    TIME <int_value> (321)
+    SIDEREAL <int_value> (322)
+    UNIVERSAL <int_value> (323)
+    GREENWICH <int_value> (324)
+    LOCAL <int_value> (325)
+    SOLAR <int_value> (326)
+    TRANSFORM <int_value> (327)
+    TRANSFORMS <int_value> (328)
+    POINT <int_value> (329)
+    POINTS <int_value> (330)
+    PATH <int_value> (331)
+    PATHS <int_value> (332)
+    PICTURE <int_value> (333)
+    PICTURES <int_value> (334)
+    SONG <int_value> (335)
+    SONGS <int_value> (336) 8
 
 
 Nonterminals, with rules where they appear
 
-    $accept (21)
+    $accept (82)
         on left: 0
-    program (22)
+    program (83)
         on left: 1
         on right: 0
-    statement_list (23)
+    statement_list (84)
         on left: 2 3
         on right: 1 3
-    statement (24)
-        on left: 4 5 6 9
+    statement (85)
+        on left: 4 5 6 10
         on right: 3
-    combined_string <string_value> (25)
+    table_name <int_value> (86)
         on left: 7 8
-        on right: 6 8
+        on right: 6
+    modifier_list <int_value> (87)
+        on left: 9
+        on right: 6
 
 
 State 0
@@ -115,9 +251,9 @@ State 3
 
 State 4
 
-    9 statement: SEMI_COLON .
+   10 statement: SEMI_COLON .
 
-    $default  reduce using rule 9 (statement)
+    $default  reduce using rule 10 (statement)
 
 
 State 5
@@ -143,11 +279,12 @@ State 7
 
 State 8
 
-    6 statement: QUERY . combined_string
+    6 statement: QUERY . table_name modifier_list
 
-    STRING  shift, and go to state 11
+    STARS  shift, and go to state 11
+    SONGS  shift, and go to state 12
 
-    combined_string  go to state 12
+    table_name  go to state 13
 
 
 State 9
@@ -166,23 +303,29 @@ State 10
 
 State 11
 
-    7 combined_string: STRING .
+    7 table_name: STARS .
 
-    $default  reduce using rule 7 (combined_string)
+    $default  reduce using rule 7 (table_name)
 
 
 State 12
 
-    6 statement: QUERY combined_string .
-    8 combined_string: combined_string . STRING
+    8 table_name: SONGS .
 
-    STRING  shift, and go to state 13
-
-    $default  reduce using rule 6 (statement)
+    $default  reduce using rule 8 (table_name)
 
 
 State 13
 
-    8 combined_string: combined_string STRING .
+    6 statement: QUERY table_name . modifier_list
 
-    $default  reduce using rule 8 (combined_string)
+    $default  reduce using rule 9 (modifier_list)
+
+    modifier_list  go to state 14
+
+
+State 14
+
+    6 statement: QUERY table_name modifier_list .
+
+    $default  reduce using rule 6 (statement)
