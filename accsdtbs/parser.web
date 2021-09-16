@@ -146,6 +146,7 @@ yyerror(void* v, char const* s);
 %token<int_value> ALL@;@/
 %token<int_value> FROM@;@/
 %token<int_value> BY@;@/
+%token<int_value> ORDER@;@/
 %token<int_value> ASCENDING@;@/
 %token<int_value> DESCENDING@;@/
 %token<int_value> UNIQUE@;@/
@@ -377,7 +378,31 @@ yyerror(void* v, char const* s);
     }  /* |if (DEBUG)|  */  
 #endif  /* |DEBUG_COMPILE|  */ 
 
-     strcat(@=$$@>, @=$2@>);
+    memset(@=$$@>, '\0',  1024);
+
+    if (strlen(@=$1@>) + strlen(@=$2@>) > 1023)
+    {
+       cerr << "ERROR!  In parser, rule `combined_string: combined_string STRING':"
+            << endl 
+            << "Total length of `$1' (`combined_string') and `$2' (`STRING') exceeds limit:"
+            << endl 
+            << strlen(@=$1@>) << " + " << strlen(@=$1@>) << " == " << (strlen(@=$1@>) + strlen(@=$2@>))
+            << endl
+            << "Setting value of rule (`$$' == `combined_string') to the empty string and will try to continue."
+            << endl;
+
+    }
+    else
+    {
+        strcat(@=$$@>, @=$1@>);
+        strcat(@=$$@>, " ");
+        strcat(@=$$@>, @=$2@>);
+    }
+    
+   if (DEBUG)
+   { 
+       cerr << "`$$' == " << @=$$@> << endl;
+   }  
 
 @q ***** (5) @>
 

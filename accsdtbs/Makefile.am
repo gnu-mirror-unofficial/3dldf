@@ -70,7 +70,8 @@ accsdtbs_SOURCES = accsdtbs.web accsgtpt.web classes.web parser.web scanner.web
 
 EXTRA_DIST = 00README accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx Makefile.in 
 
-CLEANFILES := accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx accsdtbs.o accsgtpt.o starinfo_constellations.tex
+CLEANFILES := accsdtbs.cxx accsgtpt.cxx accsgtpt.hxx accsdtbs.o accsgtpt.o starinfo_constellations.tex \
+              stars.cxx stars.hxx
  
 AM_CXXFLAGS = -fpermissive -fdiagnostics-show-option -Wno-return-type
 
@@ -91,10 +92,10 @@ starinfo_constellations.tex: accsdtbs$(EXEEXT)
 run: accsdtbs$(EXEEXT)
 	accsdtbs$(EXEEXT) input.txt
 
-accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o classes.o scanner.o parser.o
+accsdtbs$(EXEEXT): accsdtbs.o accsgtpt.o classes.o scanner.o parser.o stars.o
 	g++ -o $@ $^ -lmysqlclient
 
-accsdtbs.o: accsdtbs.cxx accsgtpt.hxx classes.hxx parser.hxx scanner.hxx
+accsdtbs.o: accsdtbs.cxx accsgtpt.hxx classes.hxx parser.hxx scanner.hxx stars.hxx
 	g++ -I/usr/include/mysql -c -o accsdtbs.o accsdtbs.cxx
 
 accsdtbs.cxx: accsdtbs.web
@@ -105,6 +106,12 @@ accsgtpt.o: accsgtpt.cxx classes.hxx parser.hxx scanner.hxx
 
 accsgtpt.cxx accsgtpt.hxx: accsgtpt.web
 	$(CTANGLE) accsgtpt.web - accsgtpt.cxx
+
+stars.o: stars.cxx classes.hxx parser.hxx scanner.hxx accsgtpt.hxx
+	g++ -I/usr/include/mysql -c -o stars.o stars.cxx
+
+stars.cxx stars.hxx: stars.web
+	$(CTANGLE) stars.web - stars.cxx
 
 classes.cxx classes.hxx: classes.web parser.hxx scanner.hxx
 	$(CTANGLE) classes.web - classes.cxx
