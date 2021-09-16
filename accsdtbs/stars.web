@@ -976,6 +976,8 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
    stringstream sql_strm;
 
+   vector<Star*> star_vector;
+
    if (DEBUG)
    { 
       cerr << "Entering `query_database_for_stars'." << endl;
@@ -1234,7 +1236,7 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
                 << endl;  
        }     
 
-       status = calculate_decimals();
+       status = calculate_decimals(star_vector);
 
        if (status != 0)
        {
@@ -1641,13 +1643,13 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
 @<Function declarations@>=
 int
-calculate_decimals(void);
+calculate_decimals(vector<Star*> &star_vector);
 
 @q *** (3) Definition  @>
 @
 @<|calculate_decimals| definition@>=
 int
-calculate_decimals(void)
+calculate_decimals(vector<Star*> &star_vector)
 {
 @q **** (4) @>
 
