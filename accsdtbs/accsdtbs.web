@@ -135,6 +135,9 @@ main(int argc, char *argv[])
 
    FILE *fp = 0;
 
+   char buffer[32];
+   memset(buffer, '\0', 32);
+
    cerr << "accsdtbs 1.0" << endl
         << "Copyright (C) 2021 The Free Software Foundation, Inc."
         << endl 
@@ -196,7 +199,42 @@ main(int argc, char *argv[])
 
     mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
 
-    if (!mysql_real_connect(mysql, "localhost", "laurence", 0, "3dldf", 0, NULL, 0))
+@q *** (3) @>
+@
+@<|main| definition@>=
+
+    errno = 0;
+    status = getlogin_r(buffer, 32);
+
+    if (status != 0)
+    {
+        cerr << "ERROR! In `main':  `getlogin_r' failed, returning " << status << ":" 
+             << endl 
+             << "Error:  " << strerror(errno)
+             << endl 
+             << "Failed to find username.  Can't connect to MySQL database."
+             << endl
+             << "Exiting program unsuccessfully with exit status 1."
+             << endl;
+
+        exit(1);
+
+    }
+
+@q **** (4) @>
+
+    else if (DEBUG)
+    {
+        cerr << "In `main':  `getlogin_r' succeeded, returning 0." << endl 
+             << "Username:  " << buffer << endl;              
+
+    }  /* |else if (DEBUG)|  */
+   
+@q *** (3) @>
+@
+@<|main| definition@>=
+
+    if (!mysql_real_connect(mysql, "localhost", buffer, 0, "3dldf", 0, NULL, 0))
     {
         cerr << "ERROR! In `main':  `mysql_real_connect' failed, returning NULL." 
              << endl 
@@ -210,8 +248,10 @@ main(int argc, char *argv[])
     else
     { 
         cerr << "In `main':  `mysql_real_connect' succeeded." << endl;
-   }  
+    }  
 
+
+    memset(buffer, '\0', 32);
 
 @q **** (4) @>
 

@@ -133,18 +133,15 @@ Scanner_Type
     friend int main(int argc, char *argv[]);
 
     int id;
-  
     bool end_flag;
-
     string input_filename;
-
     int limit;
+    string where_str;
+    string order_by_str;
 
     public:
 
        @<Declare |Scanner_Type| functions@>@;
-
-       int clear(void) {id = 0; end_flag = false; limit = 0; return 0;};
 
 };
 
@@ -156,8 +153,10 @@ Scanner_Type
 
 @q **** (4) Default constructor @>
 
+@ Default constructor.
+
 @q ***** (5) Declaration  @>
-@
+
 @<Declare |Scanner_Type| functions@>=
 Scanner_Type(void);
 
@@ -173,10 +172,12 @@ Scanner_Type::Scanner_Type(void)
   return;
 }
 
-@q **** (4) Default constructor @>
+@q **** (4) Constructor with single |int| argument.  @>
+
+@ Constructor with single |int| argument.
 
 @q ***** (5) Declaration  @>
-@
+
 @<Declare |Scanner_Type| functions@>=
 Scanner_Type(int iid);
 
@@ -191,8 +192,32 @@ Scanner_Type::Scanner_Type(int iid) : id(iid)
   return;
 }
 
-@q ** (2) @>
+@q *** (3) Clear.  @>
 
+@ Clear.
+
+@q **** (4) Declaration  @>
+
+@<Declare |Scanner_Type| functions@>=
+int clear(void);
+
+@q **** (4) Definition  @>
+@
+@<Define |Scanner_Type| functions@>=
+int Scanner_Type::clear(void) 
+{
+   id = 0; 
+   end_flag = false; 
+   limit = 0; 
+
+   where_str    = "";
+   order_by_str = "";
+  
+   return 0;
+
+}  /* End of |Scanner_Type::clear| definition  */
+
+@q ** (2) @>
 
 
 @q * (1) Putting classes together.@>

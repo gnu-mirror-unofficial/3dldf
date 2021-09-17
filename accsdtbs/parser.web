@@ -352,9 +352,10 @@ yyerror(void* v, char const* s);
 @q *** (3) @>
 @
 @<Token and type declarations@>=
-%type<string_value> combined_string@;@/
+%type<int_value> modifier@;@/
 %type<int_value> modifier_list@;@/
 %type<int_value> table_name@;@/
+%type<string_value> combined_string@;@/
 
 @q *** (3) Statement:  QUERY table_name modifier_list.  @>
 
@@ -364,6 +365,8 @@ yyerror(void* v, char const* s);
 @=statement: QUERY table_name modifier_list@>
 {
 @q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
     if (DEBUG)
     {
@@ -383,6 +386,11 @@ yyerror(void* v, char const* s);
            cerr << "`SONGS'." << endl;
         }
 
+        cerr << "`scanner_node->limit' == " << scanner_node->limit << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
     }  /* |if (DEBUG)|  */  
 
 
@@ -392,6 +400,10 @@ yyerror(void* v, char const* s);
 
         if (@=$2@> == STARS) 
         {
+@q ****** (6) @>
+
+
+@q ****** (6) @>
 
         }
 
@@ -488,6 +500,71 @@ getchar();
 
 @q ***** (5) @>
 
+    @=$$@> = 0;
+
+};
+
+@ modifier_list: modifier.
+
+@<Rules@>=
+@=modifier_list: modifier@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier_list: modifier'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = 0;
+
+};
+
+@ modifier_list: modifier_list modifier.
+
+@<Rules@>=
+@=modifier_list: modifier_list modifier@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier_list: modifier_list modifier'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = 0;
+
+};
+
+@ modifier: LIMIT INTEGER.
+
+@<Rules@>=
+@=modifier: LIMIT INTEGER@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: LIMIT INTEGER'." 
+             << endl
+             << "`INTEGER' == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+ 
+    scanner_node->limit = @=$2@>;
+   
     @=$$@> = 0;
 
 };
