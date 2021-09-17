@@ -124,7 +124,7 @@ accsdtbs.o: accsdtbs.cxx accsgtpt.hxx classes.hxx parser.hxx scanner.hxx stars.h
 accsdtbs.cxx: accsdtbs.web
 	$(CTANGLE) accsdtbs.web - accsdtbs.cxx
 
-accsgtpt.o: accsgtpt.cxx classes.hxx parser.hxx scanner.hxx
+accsgtpt.o: accsgtpt.cxx classes.hxx parser.hxx scanner.hxx stars.hxx
 	g++ -I/usr/include/mysql -c -o accsgtpt.o accsgtpt.cxx
 
 accsgtpt.cxx accsgtpt.hxx: accsgtpt.web
@@ -139,7 +139,7 @@ stars.cxx stars.hxx: stars.web
 classes.cxx classes.hxx: classes.web parser.hxx scanner.hxx
 	$(CTANGLE) classes.web - classes.cxx
 
-classes.o: classes.cxx parser.hxx scanner.hxx
+classes.o: classes.cxx parser.hxx scanner.hxx stars.hxx
 	g++ -o classes.o -DHAVE_CONFIG_H=1 -I/usr/include/mysql -g -c classes.cxx
 
 parser.y++: parser.web
@@ -151,10 +151,10 @@ parser.y++: parser.web
 parser.cxx parser.hxx: parser.y++ 
 	bison --debug -d -o parser.cxx $<
 
-parser.o: parser.cxx parser.hxx scanner.hxx
+parser.o: parser.cxx parser.hxx scanner.hxx stars.hxx classes.hxx
 	g++ -c -DHAVE_CONFIG_H=1 -I/usr/include/mysql -o $@ $<
 
-scanner.o: scanner.cxx scanner.hxx parser.hxx 
+scanner.o: scanner.cxx scanner.hxx parser.hxx stars.hxx classes.hxx
 	g++ -c -DHAVE_CONFIG_H=1 -I/usr/include/mysql -o $@ $<
 
 scanner.cxx scanner.hxx : scanner.l++ 
