@@ -78,6 +78,10 @@ using namespace std;
 
 typedef void* yyscan_t;
 
+class Star;
+class Scanner_Type;
+typedef Scanner_Type *Scanner_Node;
+
 #include "parser.hxx"
 #include "scanner.hxx"
 #include "classes.hxx"
@@ -91,8 +95,12 @@ typedef void* yyscan_t;
 class Star
 {
       friend int main(int argc, char *argv[]);
-      friend int calculate_decimals(vector<Star*> &star_vector);
-      friend int query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars, int ooffset_stars);
+      friend int calculate_decimals(Scanner_Node scanner_node);
+      friend int query_database_for_stars(Scanner_Node scanner_node, 
+                                          string wwhere_str, 
+                                          string oorder_str, 
+                                          int llimit_stars, 
+                                          int ooffset_stars);
 
       friend bool compare_star_constant_name(Star *, Star *);
       friend bool compare_common_name(Star *s, Star *);
@@ -960,22 +968,28 @@ compare_star_pointers(Star *s, Star *t)
 
 @<Function declarations@>=
 int
-query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars, int ooffset_stars);
+query_database_for_stars(Scanner_Node scanner_node,
+                         string wwhere_str, 
+                         string oorder_str, 
+                         int llimit_stars, 
+                         int ooffset_stars);
 
 @q *** (3) Definition  @>
 @
 @<|query_database_for_stars| definition@>=
 
 int
-query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars, int ooffset_stars)
+query_database_for_stars(Scanner_Node scanner_node,
+                         string wwhere_str, 
+                         string oorder_str, 
+                         int llimit_stars, 
+                         int ooffset_stars)
 {
 @q **** (4) @>
 
    bool DEBUG = true; /* |false| */ 
 
    stringstream sql_strm;
-
-   vector<Star*> star_vector;
 
    if (DEBUG)
    { 
@@ -1166,10 +1180,9 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
                   << endl 
                   << "`Star::set' succeeded, returning 0."
                   << endl;
-#endif 
-  
-         star_vector.push_back(star);
 
+           scanner_node->star_vector.push_back(star);
+#endif 
 
 @q ***** (5) @>
 
@@ -1187,7 +1200,7 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
        result = 0;
    }
 
-   cerr << "star_vector.size() == " << star_vector.size() << endl;
+   cerr << "scanner_node->star_vector.size() == " << scanner_node->star_vector.size() << endl;
 
 
 @q **** (4) @>
@@ -1200,13 +1213,15 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
    if (show_stars > 0)
    {
 
-       if (star_vector.size() > 0)
-          cerr << "`star_vector':" << endl;
+#if 0 
+       if (scanner_node->star_vector.size() > 0)
+          cerr << "`scanner_node->star_vector':" << endl;
        else
-          cerr << "`star_vector' is empty.  Not showing." << endl;
+          cerr << "`scanner_node->star_vector' is empty.  Not showing." << endl;
 
-       for (vector<Star*>::iterator iter = star_vector.begin();
-            iter != star_vector.end();
+
+       for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
+            iter != scanner_node->star_vector.end();
             ++iter)
        {
           s << "Star " << i++ << ":";
@@ -1216,7 +1231,9 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
           s.str("");
        }
 
-       cerr << "Showed " << star_vector.size() << " stars." << endl;   
+       cerr << "Showed " << scanner_node->star_vector.size() << " stars." << endl;   
+
+#endif 
 
    }  /* |if| */
 
@@ -1235,7 +1252,7 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
                 << endl;  
        }     
 
-       status = calculate_decimals(star_vector);
+       status = calculate_decimals(scanner_node);
 
        if (status != 0)
        {
@@ -1396,9 +1413,10 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 /* !!START HERE:  LDF 2021.09.12.  Add code for headings with constellations.  Use a different macro */ 
 /* instead of \starinfo.   */
 
+#if 0 
            if (constellation_sort)
-              stable_sort(star_vector.begin(), star_vector.end(), compare_constellation_full_name);
-
+              stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(), compare_constellation_full_name);
+#endif 
            string prev_constellation;
 
            int constellation_ctr = 1;
@@ -1406,8 +1424,9 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
            string common_name_str;
            string bayer_designation_str;
 
-           for (vector<Star*>::iterator iter = star_vector.begin();
-                iter != star_vector.end();
+#if 0 
+           for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
+                iter != scanner_node->star_vector.end();
                 ++iter)
            {
 
@@ -1577,6 +1596,8 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
            }
 
+#endif 
+
 @q ****** (6) @>
 @
 @<|query_database_for_stars| definition@>=
@@ -1611,8 +1632,8 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
    cerr << "Duplicates:" << endl;
 
-   for (vector<Star*>::iterator iter = star_vector.begin();
-       iter != star_vector.end(); 
+   for (vector<Star*>::iterator iter = scanner_node->star_vector.begin();
+       iter != scanner_node->star_vector.end(); 
        ++iter)
    {
        if ((*iter)->bs_hr_number == prev_bs_hr_number)
@@ -1642,13 +1663,13 @@ query_database_for_stars(string wwhere_str, string oorder_str, int llimit_stars,
 
 @<Function declarations@>=
 int
-calculate_decimals(vector<Star*> &star_vector);
+calculate_decimals(Scanner_Node scanner_node);
 
 @q *** (3) Definition  @>
 @
 @<|calculate_decimals| definition@>=
 int
-calculate_decimals(vector<Star*> &star_vector)
+calculate_decimals(Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
@@ -1667,6 +1688,7 @@ calculate_decimals(vector<Star*> &star_vector)
         << "Calculating right_ascension_decimal_hours and `declination_decimal_degrees'." 
         << endl; 
 
+#if 0 
    cerr << "`star_vector.size()' == " << star_vector.size() << endl;
 
    if (star_vector.size() == 0)
@@ -1679,8 +1701,10 @@ calculate_decimals(vector<Star*> &star_vector)
       return 0;
    }
 
+#endif 
 @q **** (4) @>
 
+#if 0 
    for (vector<Star*>::iterator iter = star_vector.begin();
        iter != star_vector.end(); 
        ++iter)
@@ -1772,6 +1796,8 @@ calculate_decimals(vector<Star*> &star_vector)
 
    }  /* |for|  */
 
+#endif 
+
 @q **** (4) @>
 
    if (DEBUG)
@@ -1808,7 +1834,6 @@ extern long affected_rows;
 @<Declare non-member functions for |class Star|@>@;
 @<Define |Star| functions@>@;
 @<Define non-member functions for |class Star|@>@;
-extern vector<Star*> star_vector;
 @<|query_database_for_stars| definition@>@;
 @<|calculate_decimals| definition@>@;
 

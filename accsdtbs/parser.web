@@ -86,8 +86,11 @@
 
 typedef void* yyscan_t;
 
+using namespace std;
+
 #include "parser.hxx"
 #include "scanner.hxx"
+#include "stars.hxx"
 #include "classes.hxx"
 
 @q ** (2) Declarations of additional functions.@>
@@ -138,6 +141,7 @@ yyerror(void* v, char const* s);
 @<Token and type declarations@>=
 
 %token<int_value> ASTERISK@;@/
+%token<int_value> COMMA@;@/
 %token<int_value> SEMI_COLON@;@/
 %token<int_value> INPUT@;@/
 %token<int_value> OUTPUT@;@/
@@ -733,9 +737,11 @@ getchar();
 @ 
 @<Rules@>=
 
-@=statement: SORT item_vector BY sort_field_list@>
+@=statement: SORT item_vector sort_field_list@>
 {
 @q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
     if (DEBUG)
     {
@@ -747,8 +753,18 @@ getchar();
         else if (@=$2@> == SONG_VECTOR)
            cerr << "Will sort `song_vector'." << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+        cerr << "`scanner_node->sort_field_vector.size()' == " 
+             << scanner_node->sort_field_vector.size() << endl;
+
+        int i = 0;
+
+        for (vector<int>::iterator iter = scanner_node->sort_field_vector.begin();
+             iter != scanner_node->sort_field_vector.end();
+             ++iter)
+        {
+            cerr << "`sort_field' " << i++ << ":  " << *iter << endl;
+        }
+         
 
     }  /* |if (DEBUG)|  */  
 
@@ -799,42 +815,67 @@ getchar();
 
 };
 
-@q *** (3) @>
-@ 
-@<Rules@>=
-
-@=sort_field_list: sort_field@>
+@=sort_field_list: /* Empty  */ @>
 {
 @q ***** (5) @>
 
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `sort_field_list: sort_field'." 
+        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list BY sort_field'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
+
+    scanner_node->sort_field_vector.clear();
 
 @q ***** (5) @>
    
 };
 
+@=sort_field_list: sort_field_list BY sort_field@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list BY sort_field'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    scanner_node->sort_field_vector.clear();
+    scanner_node->sort_field_vector.push_back(@=$3@>);
+
+@q ***** (5) @>
+   
+};
+
+
 @q *** (3) @>
 @ 
 @<Rules@>=
 
-@=sort_field_list: sort_field_list sort_field@>
+@=sort_field_list: sort_field_list COMMA sort_field@>
 {
 @q ***** (5) @>
 
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list sort_field'." 
+        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list COMMA sort_field'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
 @q ***** (5) @>
-   
+
+    scanner_node->sort_field_vector.push_back(@=$3@>);
+  
 };
 
 @q *** (3) @>
@@ -867,8 +908,10 @@ getchar();
 @ Putting parser together.
 @c
 @=%{@>
+typedef float real;
+class Scanner_Type;
+typedef Scanner_Type *Scanner_Node;
 @<Include files@>@;@/
-using namespace std;
 int submit_mysql_query(string query_str);
 bool DEBUG = true;  /* |false|  */
 static stringstream temp_strm;

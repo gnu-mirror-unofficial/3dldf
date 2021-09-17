@@ -86,7 +86,10 @@
 #undef NAME_LEN
 #undef LOCAL_HOST
 
+using namespace std;
+
 #include "parser.hxx"
+#include "stars.hxx"
 #include "classes.hxx"
 
 @q  ** (2) Start conditions.  @>
@@ -169,6 +172,25 @@ to {\bf yylex} can be set here.
 
 
    return SEMI_COLON; 
+
+@=}@>
+
+
+@q **** (4) Comma.  @>
+@ comma.
+
+@<Rules@>=
+@=, {@>
+
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << " (comma)" << endl;
+
+   }  /* |if (DEBUG)|  */
+
+
+   return COMMA; 
 
 @=}@>
 
@@ -1634,8 +1656,10 @@ yyerror(void* v, char const* s)
 @ Putting scanner together.
 @c
 @=%{@>
+typedef float real;
+class Scanner_Type;
+typedef Scanner_Type *Scanner_Node;
 @<Include files@>@;@/
-using namespace std;
 @=%}@>
 @<Start conditions@>@;@/
 @<Options@>@;@/
