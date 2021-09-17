@@ -2625,9 +2625,11 @@ plot_star_on_sphere (star_point) {radius, lambda_centauri};
 
 plot_star_on_spherical_biangle {lambda_centauri, 191, label_pos_none, 0, 0, false, true};
 
-label.rt("{\medium\hbox{$\lambda$ Cent.}}", R191 shifted (0, -2pt)) on_picture qv[4];
+label.rt("{\medium\hbox{$\lambda$ Cent.}}", R191 shifted (0, -2pt)) with_text_color label_color on_picture qv[4];
 
 plot_star_on_panel (temp_star_panel_point) {lambda_centauri, star_point};
+
+%% !! START HERE:  LDF 2021.09.17.  Error.  Segment 5.
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {lambda_centauri, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                                                       0, 0, false, true};
