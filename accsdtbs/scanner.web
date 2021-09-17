@@ -208,6 +208,19 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=OUTPUT|output {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return OUTPUT;
+
+@=}@>
 
 
 @q *** (3) END.  @>
@@ -1241,6 +1254,93 @@ to {\bf yylex} can be set here.
    return SONGS;
 
 @=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=COUNT|count {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return COUNT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=FILE|file {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return FILE_YY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=WRITE|write {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return WRITE;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=OPEN|open {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return OPEN;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CLOSE|close {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CLOSE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CLOSED|closed {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CLOSED;
+
+@=}@>
+
+
 
 @q *** (3) INTEGER @>
 

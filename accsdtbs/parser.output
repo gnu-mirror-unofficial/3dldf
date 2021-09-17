@@ -6,6 +6,11 @@ Nonterminals useless in grammar
 Terminals unused in grammar
 
     ASTERISK
+    OUTPUT
+    FILE_YY
+    OPEN
+    CLOSE
+    CLOSED
     SELECT
     ALL
     FROM
@@ -74,6 +79,8 @@ Terminals unused in grammar
     PICTURE
     PICTURES
     SONG
+    COUNT
+    WRITE
 
 
 Rules useless in grammar
@@ -117,104 +124,111 @@ Terminals, with rules where they appear
     ASTERISK <int_value> (258)
     SEMI_COLON <int_value> (259) 13
     INPUT <int_value> (260) 4
-    END <int_value> (261) 1
-    ENDINPUT <int_value> (262) 5
-    SELECT <int_value> (263)
-    ALL <int_value> (264)
-    FROM <int_value> (265)
-    BY <int_value> (266)
-    ORDER <int_value> (267)
-    ASCENDING <int_value> (268)
-    DESCENDING <int_value> (269)
-    UNIQUE <int_value> (270)
-    LIMIT <int_value> (271) 12
-    ID <int_value> (272)
-    QUERY <int_value> (273) 6
-    APPROX <int_value> (274)
-    RANK <int_value> (275)
-    APPARENT <int_value> (276)
-    ABSOLUTE <int_value> (277)
-    MAGNITUDE <int_value> (278)
-    VARIES <int_value> (279)
-    IS <int_value> (280)
-    BINARY <int_value> (281)
-    MULTIPLE <int_value> (282)
-    COMMON <int_value> (283)
-    NAME <int_value> (284)
-    GREEK <int_value> (285)
-    LATIN <int_value> (286)
-    ARABIC <int_value> (287)
-    GENITIVE <int_value> (288)
-    FLAMSTEED <int_value> (289)
-    BAYER <int_value> (290)
-    BS <int_value> (291)
-    HR <int_value> (292)
-    NUMBER <int_value> (293)
-    DESIGNATION <int_value> (294)
-    ABBREVIATION <int_value> (295)
-    RIGHT <int_value> (296)
-    ASCENSION <int_value> (297)
-    DECLINATION <int_value> (298)
-    ECLIPTIC <int_value> (299)
-    HOUR <int_value> (300)
-    HOURS <int_value> (301)
-    MINUTE <int_value> (302)
-    MINUTES <int_value> (303)
-    SECOND <int_value> (304)
-    SECONDS <int_value> (305)
-    DEGREES <int_value> (306)
-    DECIMAL <int_value> (307)
-    CONSTANT <int_value> (308)
-    COMPARE <int_value> (309)
-    LOWEST <int_value> (310)
-    HIGHEST <int_value> (311)
-    INTEGER <int_value> (312) 12
-    FLOAT <float_value> (313)
-    STRING <string_value> (314) 4
-    STAR <int_value> (315)
-    STARS <int_value> (316) 7
-    CONSTELLATION <int_value> (317)
-    CONSTELLATIONS <int_value> (318)
-    PLANET <int_value> (319)
-    PLANETS <int_value> (320)
-    TIME <int_value> (321)
-    SIDEREAL <int_value> (322)
-    UNIVERSAL <int_value> (323)
-    GREENWICH <int_value> (324)
-    LOCAL <int_value> (325)
-    SOLAR <int_value> (326)
-    TRANSFORM <int_value> (327)
-    TRANSFORMS <int_value> (328)
-    POINT <int_value> (329)
-    POINTS <int_value> (330)
-    PATH <int_value> (331)
-    PATHS <int_value> (332)
-    PICTURE <int_value> (333)
-    PICTURES <int_value> (334)
-    SONG <int_value> (335)
-    SONGS <int_value> (336) 8
+    OUTPUT <int_value> (261)
+    FILE_YY <int_value> (262)
+    OPEN <int_value> (263)
+    CLOSE <int_value> (264)
+    CLOSED <int_value> (265)
+    END <int_value> (266) 1
+    ENDINPUT <int_value> (267) 5
+    SELECT <int_value> (268)
+    ALL <int_value> (269)
+    FROM <int_value> (270)
+    BY <int_value> (271)
+    ORDER <int_value> (272)
+    ASCENDING <int_value> (273)
+    DESCENDING <int_value> (274)
+    UNIQUE <int_value> (275)
+    LIMIT <int_value> (276) 12
+    ID <int_value> (277)
+    QUERY <int_value> (278) 6
+    APPROX <int_value> (279)
+    RANK <int_value> (280)
+    APPARENT <int_value> (281)
+    ABSOLUTE <int_value> (282)
+    MAGNITUDE <int_value> (283)
+    VARIES <int_value> (284)
+    IS <int_value> (285)
+    BINARY <int_value> (286)
+    MULTIPLE <int_value> (287)
+    COMMON <int_value> (288)
+    NAME <int_value> (289)
+    GREEK <int_value> (290)
+    LATIN <int_value> (291)
+    ARABIC <int_value> (292)
+    GENITIVE <int_value> (293)
+    FLAMSTEED <int_value> (294)
+    BAYER <int_value> (295)
+    BS <int_value> (296)
+    HR <int_value> (297)
+    NUMBER <int_value> (298)
+    DESIGNATION <int_value> (299)
+    ABBREVIATION <int_value> (300)
+    RIGHT <int_value> (301)
+    ASCENSION <int_value> (302)
+    DECLINATION <int_value> (303)
+    ECLIPTIC <int_value> (304)
+    HOUR <int_value> (305)
+    HOURS <int_value> (306)
+    MINUTE <int_value> (307)
+    MINUTES <int_value> (308)
+    SECOND <int_value> (309)
+    SECONDS <int_value> (310)
+    DEGREES <int_value> (311)
+    DECIMAL <int_value> (312)
+    CONSTANT <int_value> (313)
+    COMPARE <int_value> (314)
+    LOWEST <int_value> (315)
+    HIGHEST <int_value> (316)
+    INTEGER <int_value> (317) 12
+    FLOAT <float_value> (318)
+    STRING <string_value> (319) 4
+    STAR <int_value> (320)
+    STARS <int_value> (321) 7
+    CONSTELLATION <int_value> (322)
+    CONSTELLATIONS <int_value> (323)
+    PLANET <int_value> (324)
+    PLANETS <int_value> (325)
+    TIME <int_value> (326)
+    SIDEREAL <int_value> (327)
+    UNIVERSAL <int_value> (328)
+    GREENWICH <int_value> (329)
+    LOCAL <int_value> (330)
+    SOLAR <int_value> (331)
+    TRANSFORM <int_value> (332)
+    TRANSFORMS <int_value> (333)
+    POINT <int_value> (334)
+    POINTS <int_value> (335)
+    PATH <int_value> (336)
+    PATHS <int_value> (337)
+    PICTURE <int_value> (338)
+    PICTURES <int_value> (339)
+    SONG <int_value> (340)
+    SONGS <int_value> (341) 8
+    COUNT <int_value> (342)
+    WRITE <int_value> (343)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (82)
+    $accept (89)
         on left: 0
-    program (83)
+    program (90)
         on left: 1
         on right: 0
-    statement_list (84)
+    statement_list (91)
         on left: 2 3
         on right: 1 3
-    statement (85)
+    statement (92)
         on left: 4 5 6 13
         on right: 3
-    table_name <int_value> (86)
+    table_name <int_value> (93)
         on left: 7 8
         on right: 6
-    modifier_list <int_value> (87)
+    modifier_list <int_value> (94)
         on left: 9 10 11
         on right: 6 11
-    modifier <int_value> (88)
+    modifier <int_value> (95)
         on left: 12
         on right: 10 11
 
