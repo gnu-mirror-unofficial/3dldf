@@ -136,6 +136,7 @@ Scanner_Type
     bool end_flag;
     string input_filename;
     int limit;
+    int count;
     string where_str;
     string order_by_str;
 
@@ -168,6 +169,7 @@ Scanner_Type::Scanner_Type(void)
   id       = 0; 
   end_flag = false; 
   limit    = 0; 
+  count    = 0; 
 
   return;
 }
@@ -188,6 +190,7 @@ Scanner_Type::Scanner_Type(int iid) : id(iid)
 {
   end_flag = false; 
   limit    = 0; 
+  count    = 0; 
 
   return;
 }
@@ -209,6 +212,7 @@ int Scanner_Type::clear(void)
    id = 0; 
    end_flag = false; 
    limit = 0; 
+   count = 0; 
 
    where_str    = "";
    order_by_str = "";

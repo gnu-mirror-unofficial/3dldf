@@ -7,6 +7,8 @@ Terminals unused in grammar
 
     ASTERISK
     OUTPUT
+    OUT
+    APPEND
     FILE_YY
     OPEN
     CLOSE
@@ -14,13 +16,13 @@ Terminals unused in grammar
     SELECT
     ALL
     FROM
-    BY
     ORDER
     ASCENDING
     DESCENDING
     UNIQUE
     ID
     APPROX
+    VECTOR
     RANK
     APPARENT
     ABSOLUTE
@@ -79,17 +81,16 @@ Terminals unused in grammar
     PICTURE
     PICTURES
     SONG
-    COUNT
     WRITE
 
 
 Rules useless in grammar
 
-   14 combined_string: STRING
-   15                | combined_string STRING
+   21 combined_string: STRING
+   22                | combined_string STRING
 
 
-State 13 conflicts: 1 shift/reduce
+State 14 conflicts: 2 shift/reduce
 
 
 Grammar
@@ -113,8 +114,18 @@ Grammar
    11              | modifier_list modifier
 
    12 modifier: LIMIT INTEGER
+   13         | COUNT INTEGER
 
-   13 statement: SEMI_COLON
+   14 statement: SEMI_COLON
+   15          | SORT item_vector BY sort_field_list
+
+   16 item_vector: STAR_VECTOR
+   17            | SONG_VECTOR
+
+   18 sort_field_list: sort_field
+   19                | sort_field_list sort_field
+
+   20 sort_field: APPROX_RANK_APPARENT_MAGNITUDE
 
 
 Terminals, with rules where they appear
@@ -122,115 +133,131 @@ Terminals, with rules where they appear
     $end (0) 0
     error (256)
     ASTERISK <int_value> (258)
-    SEMI_COLON <int_value> (259) 13
+    SEMI_COLON <int_value> (259) 14
     INPUT <int_value> (260) 4
     OUTPUT <int_value> (261)
-    FILE_YY <int_value> (262)
-    OPEN <int_value> (263)
-    CLOSE <int_value> (264)
-    CLOSED <int_value> (265)
-    END <int_value> (266) 1
-    ENDINPUT <int_value> (267) 5
-    SELECT <int_value> (268)
-    ALL <int_value> (269)
-    FROM <int_value> (270)
-    BY <int_value> (271)
-    ORDER <int_value> (272)
-    ASCENDING <int_value> (273)
-    DESCENDING <int_value> (274)
-    UNIQUE <int_value> (275)
-    LIMIT <int_value> (276) 12
-    ID <int_value> (277)
-    QUERY <int_value> (278) 6
-    APPROX <int_value> (279)
-    RANK <int_value> (280)
-    APPARENT <int_value> (281)
-    ABSOLUTE <int_value> (282)
-    MAGNITUDE <int_value> (283)
-    VARIES <int_value> (284)
-    IS <int_value> (285)
-    BINARY <int_value> (286)
-    MULTIPLE <int_value> (287)
-    COMMON <int_value> (288)
-    NAME <int_value> (289)
-    GREEK <int_value> (290)
-    LATIN <int_value> (291)
-    ARABIC <int_value> (292)
-    GENITIVE <int_value> (293)
-    FLAMSTEED <int_value> (294)
-    BAYER <int_value> (295)
-    BS <int_value> (296)
-    HR <int_value> (297)
-    NUMBER <int_value> (298)
-    DESIGNATION <int_value> (299)
-    ABBREVIATION <int_value> (300)
-    RIGHT <int_value> (301)
-    ASCENSION <int_value> (302)
-    DECLINATION <int_value> (303)
-    ECLIPTIC <int_value> (304)
-    HOUR <int_value> (305)
-    HOURS <int_value> (306)
-    MINUTE <int_value> (307)
-    MINUTES <int_value> (308)
-    SECOND <int_value> (309)
-    SECONDS <int_value> (310)
-    DEGREES <int_value> (311)
-    DECIMAL <int_value> (312)
-    CONSTANT <int_value> (313)
-    COMPARE <int_value> (314)
-    LOWEST <int_value> (315)
-    HIGHEST <int_value> (316)
-    INTEGER <int_value> (317) 12
-    FLOAT <float_value> (318)
-    STRING <string_value> (319) 4
-    STAR <int_value> (320)
-    STARS <int_value> (321) 7
-    CONSTELLATION <int_value> (322)
-    CONSTELLATIONS <int_value> (323)
-    PLANET <int_value> (324)
-    PLANETS <int_value> (325)
-    TIME <int_value> (326)
-    SIDEREAL <int_value> (327)
-    UNIVERSAL <int_value> (328)
-    GREENWICH <int_value> (329)
-    LOCAL <int_value> (330)
-    SOLAR <int_value> (331)
-    TRANSFORM <int_value> (332)
-    TRANSFORMS <int_value> (333)
-    POINT <int_value> (334)
-    POINTS <int_value> (335)
-    PATH <int_value> (336)
-    PATHS <int_value> (337)
-    PICTURE <int_value> (338)
-    PICTURES <int_value> (339)
-    SONG <int_value> (340)
-    SONGS <int_value> (341) 8
-    COUNT <int_value> (342)
-    WRITE <int_value> (343)
+    OUT <int_value> (262)
+    APPEND <int_value> (263)
+    FILE_YY <int_value> (264)
+    OPEN <int_value> (265)
+    CLOSE <int_value> (266)
+    CLOSED <int_value> (267)
+    END <int_value> (268) 1
+    ENDINPUT <int_value> (269) 5
+    SELECT <int_value> (270)
+    ALL <int_value> (271)
+    FROM <int_value> (272)
+    BY <int_value> (273) 15
+    ORDER <int_value> (274)
+    ASCENDING <int_value> (275)
+    DESCENDING <int_value> (276)
+    UNIQUE <int_value> (277)
+    LIMIT <int_value> (278) 12
+    ID <int_value> (279)
+    QUERY <int_value> (280) 6
+    APPROX <int_value> (281)
+    APPROX_RANK_APPARENT_MAGNITUDE <int_value> (282) 20
+    SORT <int_value> (283) 15
+    VECTOR <int_value> (284)
+    RANK <int_value> (285)
+    APPARENT <int_value> (286)
+    ABSOLUTE <int_value> (287)
+    MAGNITUDE <int_value> (288)
+    VARIES <int_value> (289)
+    IS <int_value> (290)
+    BINARY <int_value> (291)
+    MULTIPLE <int_value> (292)
+    COMMON <int_value> (293)
+    NAME <int_value> (294)
+    GREEK <int_value> (295)
+    LATIN <int_value> (296)
+    ARABIC <int_value> (297)
+    GENITIVE <int_value> (298)
+    FLAMSTEED <int_value> (299)
+    BAYER <int_value> (300)
+    BS <int_value> (301)
+    HR <int_value> (302)
+    NUMBER <int_value> (303)
+    DESIGNATION <int_value> (304)
+    ABBREVIATION <int_value> (305)
+    RIGHT <int_value> (306)
+    ASCENSION <int_value> (307)
+    DECLINATION <int_value> (308)
+    ECLIPTIC <int_value> (309)
+    HOUR <int_value> (310)
+    HOURS <int_value> (311)
+    MINUTE <int_value> (312)
+    MINUTES <int_value> (313)
+    SECOND <int_value> (314)
+    SECONDS <int_value> (315)
+    DEGREES <int_value> (316)
+    DECIMAL <int_value> (317)
+    CONSTANT <int_value> (318)
+    COMPARE <int_value> (319)
+    LOWEST <int_value> (320)
+    HIGHEST <int_value> (321)
+    INTEGER <int_value> (322) 12 13
+    FLOAT <float_value> (323)
+    STRING <string_value> (324) 4
+    STAR <int_value> (325)
+    STARS <int_value> (326) 7
+    STAR_VECTOR <int_value> (327) 16
+    CONSTELLATION <int_value> (328)
+    CONSTELLATIONS <int_value> (329)
+    PLANET <int_value> (330)
+    PLANETS <int_value> (331)
+    TIME <int_value> (332)
+    SIDEREAL <int_value> (333)
+    UNIVERSAL <int_value> (334)
+    GREENWICH <int_value> (335)
+    LOCAL <int_value> (336)
+    SOLAR <int_value> (337)
+    TRANSFORM <int_value> (338)
+    TRANSFORMS <int_value> (339)
+    POINT <int_value> (340)
+    POINTS <int_value> (341)
+    PATH <int_value> (342)
+    PATHS <int_value> (343)
+    PICTURE <int_value> (344)
+    PICTURES <int_value> (345)
+    SONG <int_value> (346)
+    SONGS <int_value> (347) 8
+    SONG_VECTOR <int_value> (348) 17
+    COUNT <int_value> (349) 13
+    WRITE <int_value> (350)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (89)
+    $accept (96)
         on left: 0
-    program (90)
+    program (97)
         on left: 1
         on right: 0
-    statement_list (91)
+    statement_list (98)
         on left: 2 3
         on right: 1 3
-    statement (92)
-        on left: 4 5 6 13
+    statement (99)
+        on left: 4 5 6 14 15
         on right: 3
-    table_name <int_value> (93)
+    table_name <int_value> (100)
         on left: 7 8
         on right: 6
-    modifier_list <int_value> (94)
+    modifier_list <int_value> (101)
         on left: 9 10 11
         on right: 6 11
-    modifier <int_value> (95)
-        on left: 12
+    modifier <int_value> (102)
+        on left: 12 13
         on right: 10 11
+    item_vector <int_value> (103)
+        on left: 16 17
+        on right: 15
+    sort_field_list <pointer_value> (104)
+        on left: 18 19
+        on right: 15 19
+    sort_field <int_value> (105)
+        on left: 20
+        on right: 18 19
 
 
 State 0
@@ -260,8 +287,9 @@ State 2
     END         shift, and go to state 6
     ENDINPUT    shift, and go to state 7
     QUERY       shift, and go to state 8
+    SORT        shift, and go to state 9
 
-    statement  go to state 9
+    statement  go to state 10
 
 
 State 3
@@ -273,16 +301,16 @@ State 3
 
 State 4
 
-   13 statement: SEMI_COLON .
+   14 statement: SEMI_COLON .
 
-    $default  reduce using rule 13 (statement)
+    $default  reduce using rule 14 (statement)
 
 
 State 5
 
     4 statement: INPUT . STRING
 
-    STRING  shift, and go to state 10
+    STRING  shift, and go to state 11
 
 
 State 6
@@ -303,88 +331,179 @@ State 8
 
     6 statement: QUERY . table_name modifier_list
 
-    STARS  shift, and go to state 11
-    SONGS  shift, and go to state 12
+    STARS  shift, and go to state 12
+    SONGS  shift, and go to state 13
 
-    table_name  go to state 13
+    table_name  go to state 14
 
 
 State 9
+
+   15 statement: SORT . item_vector BY sort_field_list
+
+    STAR_VECTOR  shift, and go to state 15
+    SONG_VECTOR  shift, and go to state 16
+
+    item_vector  go to state 17
+
+
+State 10
 
     3 statement_list: statement_list statement .
 
     $default  reduce using rule 3 (statement_list)
 
 
-State 10
+State 11
 
     4 statement: INPUT STRING .
 
     $default  reduce using rule 4 (statement)
 
 
-State 11
+State 12
 
     7 table_name: STARS .
 
     $default  reduce using rule 7 (table_name)
 
 
-State 12
+State 13
 
     8 table_name: SONGS .
 
     $default  reduce using rule 8 (table_name)
 
 
-State 13
+State 14
 
     6 statement: QUERY table_name . modifier_list
 
-    LIMIT  shift, and go to state 14
+    LIMIT  shift, and go to state 18
+    COUNT  shift, and go to state 19
 
     LIMIT     [reduce using rule 9 (modifier_list)]
+    COUNT     [reduce using rule 9 (modifier_list)]
     $default  reduce using rule 9 (modifier_list)
 
-    modifier_list  go to state 15
-    modifier       go to state 16
-
-
-State 14
-
-   12 modifier: LIMIT . INTEGER
-
-    INTEGER  shift, and go to state 17
+    modifier_list  go to state 20
+    modifier       go to state 21
 
 
 State 15
 
-    6 statement: QUERY table_name modifier_list .
-   11 modifier_list: modifier_list . modifier
+   16 item_vector: STAR_VECTOR .
 
-    LIMIT  shift, and go to state 14
-
-    $default  reduce using rule 6 (statement)
-
-    modifier  go to state 18
+    $default  reduce using rule 16 (item_vector)
 
 
 State 16
+
+   17 item_vector: SONG_VECTOR .
+
+    $default  reduce using rule 17 (item_vector)
+
+
+State 17
+
+   15 statement: SORT item_vector . BY sort_field_list
+
+    BY  shift, and go to state 22
+
+
+State 18
+
+   12 modifier: LIMIT . INTEGER
+
+    INTEGER  shift, and go to state 23
+
+
+State 19
+
+   13 modifier: COUNT . INTEGER
+
+    INTEGER  shift, and go to state 24
+
+
+State 20
+
+    6 statement: QUERY table_name modifier_list .
+   11 modifier_list: modifier_list . modifier
+
+    LIMIT  shift, and go to state 18
+    COUNT  shift, and go to state 19
+
+    $default  reduce using rule 6 (statement)
+
+    modifier  go to state 25
+
+
+State 21
 
    10 modifier_list: modifier .
 
     $default  reduce using rule 10 (modifier_list)
 
 
-State 17
+State 22
+
+   15 statement: SORT item_vector BY . sort_field_list
+
+    APPROX_RANK_APPARENT_MAGNITUDE  shift, and go to state 26
+
+    sort_field_list  go to state 27
+    sort_field       go to state 28
+
+
+State 23
 
    12 modifier: LIMIT INTEGER .
 
     $default  reduce using rule 12 (modifier)
 
 
-State 18
+State 24
+
+   13 modifier: COUNT INTEGER .
+
+    $default  reduce using rule 13 (modifier)
+
+
+State 25
 
    11 modifier_list: modifier_list modifier .
 
     $default  reduce using rule 11 (modifier_list)
+
+
+State 26
+
+   20 sort_field: APPROX_RANK_APPARENT_MAGNITUDE .
+
+    $default  reduce using rule 20 (sort_field)
+
+
+State 27
+
+   15 statement: SORT item_vector BY sort_field_list .
+   19 sort_field_list: sort_field_list . sort_field
+
+    APPROX_RANK_APPARENT_MAGNITUDE  shift, and go to state 26
+
+    $default  reduce using rule 15 (statement)
+
+    sort_field  go to state 29
+
+
+State 28
+
+   18 sort_field_list: sort_field .
+
+    $default  reduce using rule 18 (sort_field_list)
+
+
+State 29
+
+   19 sort_field_list: sort_field_list sort_field .
+
+    $default  reduce using rule 19 (sort_field_list)

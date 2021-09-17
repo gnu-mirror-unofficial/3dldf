@@ -223,6 +223,111 @@ to {\bf yylex} can be set here.
 @=}@>
 
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=OUT|out {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return OUT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SORT|sort {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SORT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=APPROX(\_|\ )RANK(\_|\ )APPARENT(\_|\ )MAGNITUDE|approx(\_|\ )rank(\_|\ )apparent(\_|\ )magnitude {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPROX_RANK_APPARENT_MAGNITUDE;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=STAR(\_|\ )VECTOR|star(\_|\ )vector {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return STAR_VECTOR;
+
+@=}@>
+
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SONG(\_|\ )VECTOR|song(\_|\ )vector {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SONG_VECTOR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=VECTOR|vector {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return VECTOR;
+
+@=}@>
+
+
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=APPEND|append {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPEND;
+
+@=}@>
+
+
 @q *** (3) END.  @>
 @ END.
 

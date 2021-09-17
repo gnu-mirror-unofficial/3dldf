@@ -141,6 +141,8 @@ yyerror(void* v, char const* s);
 %token<int_value> SEMI_COLON@;@/
 %token<int_value> INPUT@;@/
 %token<int_value> OUTPUT@;@/
+%token<int_value> OUT@;@/
+%token<int_value> APPEND@;@/
 %token<int_value> FILE_YY@;@/
 %token<int_value> OPEN@;@/
 %token<int_value> CLOSE@;@/
@@ -159,6 +161,9 @@ yyerror(void* v, char const* s);
 %token<int_value> ID@;@/
 %token<int_value> QUERY@;@/
 %token<int_value> APPROX@;@/
+%token<int_value> APPROX_RANK_APPARENT_MAGNITUDE@;
+%token<int_value> SORT@;@/
+%token<int_value> VECTOR@;@/
 %token<int_value> RANK@;@/
 %token<int_value> APPARENT@;@/
 %token<int_value> ABSOLUTE@;@/
@@ -201,6 +206,7 @@ yyerror(void* v, char const* s);
 %token<string_value> STRING@;@/
 %token<int_value> STAR@;@/
 %token<int_value> STARS@;@/
+%token<int_value> STAR_VECTOR@;@/
 %token<int_value> CONSTELLATION@;@/
 %token<int_value> CONSTELLATIONS@;@/
 %token<int_value> PLANET@;@/
@@ -222,6 +228,7 @@ yyerror(void* v, char const* s);
 %token<int_value> PICTURES@;@/
 %token<int_value> SONG@;@/
 %token<int_value> SONGS@;@/
+%token<int_value> SONG_VECTOR@;@/
 
 %token<int_value> COUNT@;@/
 %token<int_value> WRITE@;@/
@@ -395,7 +402,8 @@ yyerror(void* v, char const* s);
            cerr << "`SONGS'." << endl;
         }
 
-        cerr << "`scanner_node->limit' == " << scanner_node->limit << endl;
+        cerr << "`scanner_node->limit' == " << scanner_node->limit << endl
+             << "`scanner_node->count' == " << scanner_node->count << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
@@ -553,6 +561,8 @@ getchar();
 
 };
 
+@q **** (4) @>
+
 @ modifier: LIMIT INTEGER.
 
 @<Rules@>=
@@ -577,6 +587,35 @@ getchar();
     @=$$@> = 0;
 
 };
+
+@q **** (4) @>
+
+@ modifier: COUNT INTEGER.
+
+@<Rules@>=
+@=modifier: COUNT INTEGER@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: COUNT INTEGER'." 
+             << endl
+             << "`INTEGER' == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+ 
+    scanner_node->count = @=$2@>;
+   
+    @=$$@> = 0;
+
+};
+
+
 
 @q *** (3) @>
 
@@ -655,7 +694,7 @@ getchar();
 };
 
 @q *** (3) Statement:  SEMI_COLON.  @>
-@ Statement.
+@ Statement:  SEMI_COLON.
 
 @q **** (4) statement --> SEMI_COLON  @>
 
@@ -677,6 +716,149 @@ getchar();
 @q ***** (5) @>
    
 };
+
+@q *** (3) @>
+@
+@<Token and type declarations@>=
+%type<int_value> item_vector@;@/
+%type<pointer_value> sort_field_list@;@/
+%type<int_value> sort_field@;@/
+
+@q *** (3) Statement  @>
+
+@ Statement:  SORT item_vector BY sort_field_list.
+
+@q **** (4) statement --> :  SORT item_vector BY sort_field_list  @>
+
+@ 
+@<Rules@>=
+
+@=statement: SORT item_vector BY sort_field_list@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  SORT item_vector BY sort_field_list'." 
+             << endl;
+
+        if (@=$2@> == STAR_VECTOR)
+           cerr << "Will sort `star_vector'." << endl;
+        else if (@=$2@> == SONG_VECTOR)
+           cerr << "Will sort `song_vector'." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=item_vector: STAR_VECTOR@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `item_vector: STAR_VECTOR'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = STAR_VECTOR;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=item_vector: SONG_VECTOR@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `item_vector: SONG_VECTOR'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+
+    @=$$@> = SONG_VECTOR;
+
+@q ***** (5) @>
+
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=sort_field_list: sort_field@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `sort_field_list: sort_field'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=sort_field_list: sort_field_list sort_field@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list sort_field'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=sort_field: APPROX_RANK_APPARENT_MAGNITUDE@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `sort_field: APPROX_RANK_APPARENT_MAGNITUDE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = APPROX_RANK_APPARENT_MAGNITUDE;
+
+@q ***** (5) @>
+   
+};
+
+
 
 @
 @<Garbage@>=
