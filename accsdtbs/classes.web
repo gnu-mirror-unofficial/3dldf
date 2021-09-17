@@ -138,16 +138,62 @@ Scanner_Type
 
     string input_filename;
 
+    int limit;
+
     public:
 
-       Scanner_Type(void) {id = 0; end_flag = false; return;};
-       Scanner_Type(int i) : id(i) {end_flag = false; return;};
+       @<Declare |Scanner_Type| functions@>@;
 
-       int clear(void) {id = 0; end_flag = false; return 0;};
+       int clear(void) {id = 0; end_flag = false; limit = 0; return 0;};
 
 };
 
-typedef Scanner_Type *Scanner_Node;
+@q ** (2) |Scanner_Type| functions.  @>
+
+@ |Scanner_Type| functions.  
+
+@q *** (3) Constructors @>
+
+@q **** (4) Default constructor @>
+
+@q ***** (5) Declaration  @>
+@
+@<Declare |Scanner_Type| functions@>=
+Scanner_Type(void);
+
+@q ***** (5) Definition  @>
+@
+@<Define |Scanner_Type| functions@>=
+Scanner_Type::Scanner_Type(void)
+{
+  id       = 0; 
+  end_flag = false; 
+  limit    = 0; 
+
+  return;
+}
+
+@q **** (4) Default constructor @>
+
+@q ***** (5) Declaration  @>
+@
+@<Declare |Scanner_Type| functions@>=
+Scanner_Type(int iid);
+
+@q ***** (5) Definition  @>
+@
+@<Define |Scanner_Type| functions@>=
+Scanner_Type::Scanner_Type(int iid) : id(iid)
+{
+  end_flag = false; 
+  limit    = 0; 
+
+  return;
+}
+
+@q ** (2) @>
+
+
 
 @q * (1) Putting classes together.@>
 @* Putting classes together.
@@ -159,7 +205,9 @@ typedef Scanner_Type *Scanner_Node;
 @<Include files@>@;
 typedef float real;
 @<class declarations@>@;@/
+typedef Scanner_Type *Scanner_Node;
 deque<IO_Type> io_deque;
+@<Define |Scanner_Type| functions@>@;
 
 @q **** (4) This is what's written to the header file `classes.hxx'.  @>
 
@@ -171,6 +219,7 @@ deque<IO_Type> io_deque;
 using namespace std;
 typedef float real;
 @<class declarations@>@;@/
+typedef Scanner_Type *Scanner_Node;
 extern deque<IO_Type> io_deque;
 #endif 
 
