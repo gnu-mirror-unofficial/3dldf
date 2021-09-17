@@ -732,7 +732,7 @@ getchar();
 
 @ Statement:  SORT item_vector BY sort_field_list.
 
-@q **** (4) statement --> :  SORT item_vector BY sort_field_list  @>
+@q **** (4) statement:  SORT item_vector BY sort_field_list  @>
 
 @ 
 @<Rules@>=
@@ -767,6 +767,38 @@ getchar();
          
 
     }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    if (@=$2@> == STAR_VECTOR)
+    {
+        if (scanner_node->star_vector.empty())
+        {
+            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY sort_field_list':" 
+                 << endl 
+                 << "`scanner_node->star_vector' is empty.  Nothing to sort." << endl 
+                 << "Continuing." << endl;
+        }  
+
+    }  /* |if (@=$2@> == STAR_VECTOR)| */
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    else if (@=$2@> == SONG_VECTOR)
+    {
+        if (scanner_node->song_vector.empty())
+        {
+            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY sort_field_list':" 
+                 << endl 
+                 << "`scanner_node->song_vector' is empty.  Nothing to sort." << endl 
+                 << "Continuing." << endl;
+        }  
+
+    }  /* |if (@=$2@> == SONG_VECTOR)| */
 
 @q ***** (5) @>
    
