@@ -853,6 +853,149 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=RIGHT(\_|\ )ASCENSION(\_|\ )HOURS|right(\_|\ )ascension(\_|\ )hours {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION_HOURS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RIGHT(\_|\ )ASCENSION(\_|\ )DECIMAL(\_|\ )HOURS|right(\_|\ )ascension(\_|\ )decimal(\_|\ )hours {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION_DECIMAL_HOURS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RIGHT(\_|\ )ASCENSION(\_|\ )DECIMAL(\_|\ )DEGREES|right(\_|\ )ascension(\_|\ )decimal(\_|\ )degrees {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION_DECIMAL_DEGREES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RIGHT(\_|\ )ASCENSION(\_|\ )DEGREES|right(\_|\ )ascension(\_|\ )degrees {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION_DEGREES;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RIGHT(\_|\ )ASCENSION(\_|\ )MINUTES|right(\_|\ )ascension(\_|\ )minutes {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION_MINUTES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=RIGHT(\_|\ )ASCENSION(\_|\ )SECONDS|right(\_|\ )ascension(\_|\ )seconds {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION_SECONDS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DECLINATION(\_|\ )DECIMAL(\_|\ )DEGREES|declination(\_|\ )decimal(\_|\ )degrees {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DECLINATION_DECIMAL_DEGREES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DECLINATION(\_|\ )DEGREES|declination(\_|\ )degrees {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DECLINATION_DEGREES;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DECLINATION(\_|\ )MINUTES|declination(\_|\ )minutes {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DECLINATION_MINUTES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=DECLINATION(\_|\ )SECONDS|declination(\_|\ )seconds {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return DECLINATION_SECONDS;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=RIGHT|right {@>
 
    if (DEBUG)
@@ -863,6 +1006,9 @@ to {\bf yylex} can be set here.
    return RIGHT;
 
 @=}@>
+
+
+
 
 @q *** (3) @>
 @
