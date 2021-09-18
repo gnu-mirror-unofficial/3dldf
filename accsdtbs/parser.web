@@ -170,27 +170,41 @@ yyerror(void* v, char const* s);
 %token<int_value> VECTOR@;@/
 %token<int_value> RANK@;@/
 %token<int_value> APPARENT@;@/
+%token<int_value> APPARENT_MAGNITUDE@;@/
 %token<int_value> ABSOLUTE@;@/
+%token<int_value> ABSOLUTE_MAGNITUDE@;@/
 %token<int_value> MAGNITUDE@;@/
 %token<int_value> VARIES@;@/
 %token<int_value> IS@;@/
 %token<int_value> BINARY@;@/
 %token<int_value> MULTIPLE@;@/
 %token<int_value> COMMON@;@/
+%token<int_value> COMMON_NAME@;@/
 %token<int_value> NAME@;@/
 %token<int_value> GREEK@;@/
+%token<int_value> GREEK_NAME@;@/
 %token<int_value> LATIN@;@/
+%token<int_value> LATIN_NAME@;@/
 %token<int_value> ARABIC@;@/
+%token<int_value> ARABIC_NAME@;@/
 %token<int_value> GENITIVE@;@/
 %token<int_value> FLAMSTEED@;@/
+%token<int_value> FLAMSTEED_DESIGNATION_NUMBER@;@/
 %token<int_value> BAYER@;@/
 %token<int_value> BS@;@/
 %token<int_value> HR@;@/
 %token<int_value> NUMBER@;@/
+%token<int_value> BS_HR_NUMBER@;@/
 %token<int_value> DESIGNATION@;@/
+%token<int_value> BAYER_DESIGNATION_GREEK_LETTER@;@/
+%token<int_value> BAYER_DESIGNATION_GREEK_LETTER_TEX@;@/
+%token<int_value> BAYER_DESIGNATION_EXTENSION@;@/
 %token<int_value> ABBREVIATION@;@/
 %token<int_value> RIGHT@;@/
 %token<int_value> ASCENSION@;@/
+
+/* !!START HERE:  LDF 2021.09.18.  Declare tokens "DECLINATION_HOURS" ... */ 
+
 %token<int_value> DECLINATION@;@/
 %token<int_value> ECLIPTIC@;@/
 %token<int_value> HOUR@;@/
@@ -201,6 +215,16 @@ yyerror(void* v, char const* s);
 %token<int_value> SECONDS@;@/
 %token<int_value> DEGREES@;@/
 %token<int_value> DECIMAL@;@/
+%token<int_value> RIGHT_ASCENSION_HOURS@;@/
+%token<int_value> RIGHT_ASCENSION_MINUTES@;@/
+%token<float_value> RIGHT_ASCENSION_SECONDS@;@/
+%token<int_value> RIGHT_ASCENSION_DEGREES@;@/
+%token<float_value> RIGHT_ASCENSION_DECIMAL_DEGREES@;@/
+%token<float_value> RIGHT_ASCENSION_DECIMAL_HOURS@;@/
+%token<int_value> DECLINATION_DEGREES@;@/
+%token<int_value> DECLINATION_MINUTES@;@/
+%token<float_value> DECLINATION_SECONDS@;@/
+%token<float_value> DECLINATION_DECIMAL_DEGREES@;@/
 %token<int_value> CONSTANT@;@/
 %token<int_value> COMPARE@;@/
 %token<int_value> LOWEST@;@/
@@ -212,6 +236,10 @@ yyerror(void* v, char const* s);
 %token<int_value> STARS@;@/
 %token<int_value> STAR_VECTOR@;@/
 %token<int_value> CONSTELLATION@;@/
+%token<int_value> CONSTELLATION_FULL_NAME@;@/
+%token<int_value> CONSTELLATION_ABBREVIATION@;@/
+%token<int_value> CONSTELLATION_NAME_GENITIVE@;@/
+%token<int_value> CONSTELLATION_NUMBER@;@/
 %token<int_value> CONSTELLATIONS@;@/
 %token<int_value> PLANET@;@/
 %token<int_value> PLANETS@;@/
@@ -676,6 +704,30 @@ getchar();
 
 };
 
+@q **** (4) @>
+
+@ modifier: ORDER BY table_field_list.
+
+@<Rules@>=
+@=modifier: ORDER BY table_field_list@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: ORDER BY TABLE_FIELD'." 
+             << endl
+             << "`INTEGER' == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+    @=$$@> = 0;
+
+};
 
 
 @q *** (3) @>
@@ -782,19 +834,18 @@ getchar();
 @
 @<Token and type declarations@>=
 %type<int_value> item_vector@;@/
-%type<pointer_value> sort_field_list@;@/
-%type<int_value> sort_field@;@/
+%type<pointer_value> table_field_list@;@/
+%type<int_value> table_field@;@/
 
 @q *** (3) Statement  @>
 
-@ Statement:  SORT item_vector BY sort_field_list.
+@ Statement:  SORT item_vector BY table_field_list.
 
-@q **** (4) statement:  SORT item_vector BY sort_field_list  @>
+@q **** (4) statement:  SORT item_vector BY table_field_list  @>
 
 @ 
 @<Rules@>=
-
-@=statement: SORT item_vector sort_field_list@>
+@=statement: SORT item_vector BY table_field_list@>
 {
 @q ***** (5) @>
 
@@ -802,7 +853,7 @@ getchar();
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `statement:  SORT item_vector BY sort_field_list'." 
+        cerr << "*** Parser:  Rule `statement:  SORT item_vector BY table_field_list'." 
              << endl;
 
         if (@=$2@> == STAR_VECTOR)
@@ -810,16 +861,16 @@ getchar();
         else if (@=$2@> == SONG_VECTOR)
            cerr << "Will sort `song_vector'." << endl;
 
-        cerr << "`scanner_node->sort_field_vector.size()' == " 
-             << scanner_node->sort_field_vector.size() << endl;
+        cerr << "`scanner_node->table_field_vector.size()' == " 
+             << scanner_node->table_field_vector.size() << endl;
 
         int i = 0;
 
-        for (vector<int>::iterator iter = scanner_node->sort_field_vector.begin();
-             iter != scanner_node->sort_field_vector.end();
+        for (vector<int>::iterator iter = scanner_node->table_field_vector.begin();
+             iter != scanner_node->table_field_vector.end();
              ++iter)
         {
-            cerr << "`sort_field' " << i++ << ":  " << *iter << endl;
+            cerr << "`table_field' " << i++ << ":  " << *iter << endl;
         }
          
 
@@ -833,7 +884,7 @@ getchar();
     {
         if (scanner_node->star_vector.empty())
         {
-            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY sort_field_list':" 
+            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY table_field_list':" 
                  << endl 
                  << "`scanner_node->star_vector' is empty.  Nothing to sort." << endl 
                  << "Continuing." << endl;
@@ -849,7 +900,7 @@ getchar();
     {
         if (scanner_node->song_vector.empty())
         {
-            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY sort_field_list':" 
+            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY table_field_list':" 
                  << endl 
                  << "`scanner_node->song_vector' is empty.  Nothing to sort." << endl 
                  << "Continuing." << endl;
@@ -904,7 +955,7 @@ getchar();
 
 };
 
-@=sort_field_list: /* Empty  */ @>
+@=table_field_list: /* Empty  */ @>
 {
 @q ***** (5) @>
 
@@ -912,18 +963,18 @@ getchar();
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list BY sort_field'." 
+        cerr << "*** Parser:  Rule `table_field_list: EMPTY'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
-    scanner_node->sort_field_vector.clear();
+    scanner_node->table_field_vector.clear();
 
 @q ***** (5) @>
    
 };
 
-@=sort_field_list: sort_field_list BY sort_field@>
+@=table_field_list: table_field_list table_field@>
 {
 @q ***** (5) @>
 
@@ -931,13 +982,12 @@ getchar();
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list BY sort_field'." 
+        cerr << "*** Parser:  Rule `table_field_list: table_field_list table_field'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
-    scanner_node->sort_field_vector.clear();
-    scanner_node->sort_field_vector.push_back(@=$3@>);
+    scanner_node->table_field_vector.push_back(@=$2@>);
 
 @q ***** (5) @>
    
@@ -948,7 +998,7 @@ getchar();
 @ 
 @<Rules@>=
 
-@=sort_field_list: sort_field_list COMMA sort_field@>
+@=table_field_list: table_field_list COMMA table_field@>
 {
 @q ***** (5) @>
 
@@ -956,14 +1006,14 @@ getchar();
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `sort_field_list: sort_field_list COMMA sort_field'." 
+        cerr << "*** Parser:  Rule `table_field_list: table_field_list COMMA table_field'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
 @q ***** (5) @>
 
-    scanner_node->sort_field_vector.push_back(@=$3@>);
+    scanner_node->table_field_vector.push_back(@=$3@>);
   
 };
 
@@ -971,13 +1021,13 @@ getchar();
 @ 
 @<Rules@>=
 
-@=sort_field: APPROX_RANK_APPARENT_MAGNITUDE@>
+@=table_field: APPROX_RANK_APPARENT_MAGNITUDE@>
 {
 @q ***** (5) @>
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `sort_field: APPROX_RANK_APPARENT_MAGNITUDE'." 
+        cerr << "*** Parser:  Rule `table_field: APPROX_RANK_APPARENT_MAGNITUDE'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
@@ -987,6 +1037,515 @@ getchar();
 @q ***** (5) @>
    
 };
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: COMMON_NAME@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: COMMON_NAME'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = COMMON_NAME;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: GREEK_NAME@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: GREEK_NAME'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = GREEK_NAME;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: LATIN_NAME@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: LATIN_NAME'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = LATIN_NAME;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: ARABIC_NAME@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: ARABIC_NAME'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = ARABIC_NAME;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: FLAMSTEED_DESIGNATION_NUMBER@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: FLAMSTEED_DESIGNATION_NUMBER'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = FLAMSTEED_DESIGNATION_NUMBER;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: BAYER_DESIGNATION_GREEK_LETTER@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: BAYER_DESIGNATION_GREEK_LETTER'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = BAYER_DESIGNATION_GREEK_LETTER;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: BAYER_DESIGNATION_GREEK_LETTER_TEX@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: BAYER_DESIGNATION_GREEK_LETTER_TEX'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = BAYER_DESIGNATION_GREEK_LETTER_TEX;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: BAYER_DESIGNATION_EXTENSION@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: BAYER_DESIGNATION_EXTENSION'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = BAYER_DESIGNATION_EXTENSION;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: BS_HR_NUMBER@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: BS_HR_NUMBER'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = BS_HR_NUMBER;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: APPARENT_MAGNITUDE@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: APPARENT_MAGNITUDE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = APPARENT_MAGNITUDE;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: ABSOLUTE_MAGNITUDE@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: ABSOLUTE_MAGNITUDE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = ABSOLUTE_MAGNITUDE;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: CONSTELLATION_ABBREVIATION@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: CONSTELLATION_ABBREVIATION'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = CONSTELLATION_ABBREVIATION;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: CONSTELLATION_FULL_NAME@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: CONSTELLATION_FULL_NAME'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = CONSTELLATION_FULL_NAME;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: CONSTELLATION_NAME_GENITIVE@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: CONSTELLATION_NAME_GENITIVE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = CONSTELLATION_NAME_GENITIVE;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: CONSTELLATION_NUMBER@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: CONSTELLATION_NUMBER'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = CONSTELLATION_NUMBER;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: RIGHT_ASCENSION_HOURS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: RIGHT_ASCENSION_HOURS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = RIGHT_ASCENSION_HOURS;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: RIGHT_ASCENSION_MINUTES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: RIGHT_ASCENSION_MINUTES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = RIGHT_ASCENSION_MINUTES;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: RIGHT_ASCENSION_SECONDS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: RIGHT_ASCENSION_SECONDS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = RIGHT_ASCENSION_SECONDS;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: RIGHT_ASCENSION_DECIMAL_HOURS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: RIGHT_ASCENSION_DECIMAL_HOURS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = RIGHT_ASCENSION_DECIMAL_HOURS;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: RIGHT_ASCENSION_DECIMAL_DEGREES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: RIGHT_ASCENSION_DECIMAL_DEGREES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = RIGHT_ASCENSION_DECIMAL_DEGREES;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: DECLINATION_DEGREES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: DECLINATION_DEGREES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = DECLINATION_DEGREES;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: DECLINATION_MINUTES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: DECLINATION_MINUTES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = DECLINATION_MINUTES;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: DECLINATION_SECONDS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: DECLINATION_SECONDS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = DECLINATION_SECONDS;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: DECLINATION_DECIMAL_DEGREES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: DECLINATION_DECIMAL_DEGREES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = DECLINATION_DECIMAL_DEGREES;
+
+@q ***** (5) @>
+   
+};
+
+
+
+
+
 
 
 
