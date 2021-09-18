@@ -71,6 +71,7 @@
 
 #include <vector>
 #include <deque>
+#include <map>
 
 // #include <stack>
 // #include <set>
@@ -671,16 +672,59 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=COMMON|common {@>
+@=COMMON(\_|\ )NAME|common(\_|\ )name {@>
 
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
    }
 
-   return COMMON;
+   return COMMON_NAME;
 
 @=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GREEK(\_|\ )NAME|greek(\_|\ )name {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GREEK_NAME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LATIN(\_|\ )NAME|latin(\_|\ )name {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LATIN_NAME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ARABIC(\_|\ )NAME|arabic(\_|\ )name {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ARABIC_NAME;
+
+@=}@>
+
 
 @q *** (3) @>
 @
@@ -752,61 +796,77 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
+
 @q *** (3) @>
 @
 @<Rules@>=
-@=FLAMSTEED|flamsteed {@>
+@=FLAMSTEED(\_|\ )DESIGNATION(\_|\ )NUMBER|flamsteed(\_|\ )designation(\_|\ )number {@>
 
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
    }
 
-   return FLAMSTEED;
+   return FLAMSTEED_DESIGNATION_NUMBER;
 
 @=}@>
 
 @q *** (3) @>
 @
 @<Rules@>=
-@=BAYER|bayer {@>
+@=BAYER(\_|\ )DESIGNATION(\_|\ )GREEK(\_|\ )LETTER|bayer(\_|\ )designation(\_|\ )greek(\_|\ )letter {@>
 
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
    }
 
-   return BAYER;
+   return BAYER_DESIGNATION_GREEK_LETTER;
 
 @=}@>
 
 @q *** (3) @>
 @
 @<Rules@>=
-@=BS|bs {@>
+@=BAYER(\_|\ )DESIGNATION(\_|\ )GREEK(\_|\ )LETTER(\_|\ )TEX|bayer(\_|\ )designation(\_|\ )greek(\_|\ )letter(\_|\ )tex {@>
 
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
    }
 
-   return BS;
+   return BAYER_DESIGNATION_GREEK_LETTER_TEX;
 
 @=}@>
 
 @q *** (3) @>
 @
 @<Rules@>=
-@=HR|hr {@>
+@=BAYER(\_|\ )DESIGNATION(\_|\ )EXTENSION|bayer(\_|\ )designation(\_|\ )extension {@>
 
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
    }
 
-   return HR;
+   return BAYER_DESIGNATION_EXTENSION;
 
 @=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=BS(\_|\ )HR(\_|\ )NUMBER|bs(\_|\ )hr(\_|\ )number {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return BS_HR_NUMBER;
+
+@=}@>
+
 
 @q *** (3) @>
 @

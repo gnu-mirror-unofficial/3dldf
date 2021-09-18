@@ -77,6 +77,8 @@
 #include <map>
 #include <vector>
 #include <deque>
+#include <map>
+
 // #include <stack>
 // #include <set>
 
@@ -174,6 +176,13 @@ yyerror(void* v, char const* s);
 %token<int_value> ABSOLUTE@;@/
 %token<int_value> ABSOLUTE_MAGNITUDE@;@/
 %token<int_value> MAGNITUDE@;@/
+%token<int_value> APPARENT_MAGNITUDE_VARIES@;@/
+%token<int_value> ABSOLUTE_MAGNITUDE_VARIES@;@/
+%token<int_value> IS_BINARY@;@/
+%token<int_value> IS_MULTIPLE@;@/
+%token<int_value> IS_BINARY_COMPONENT@;@/
+%token<int_value> IS_ECLIPSING_BINARY@;@/
+%token<int_value> NOTES@;@/
 %token<int_value> VARIES@;@/
 %token<int_value> IS@;@/
 %token<int_value> BINARY@;@/
@@ -188,11 +197,7 @@ yyerror(void* v, char const* s);
 %token<int_value> ARABIC@;@/
 %token<int_value> ARABIC_NAME@;@/
 %token<int_value> GENITIVE@;@/
-%token<int_value> FLAMSTEED@;@/
 %token<int_value> FLAMSTEED_DESIGNATION_NUMBER@;@/
-%token<int_value> BAYER@;@/
-%token<int_value> BS@;@/
-%token<int_value> HR@;@/
 %token<int_value> NUMBER@;@/
 %token<int_value> BS_HR_NUMBER@;@/
 %token<int_value> DESIGNATION@;@/
@@ -264,8 +269,6 @@ yyerror(void* v, char const* s);
 
 %token<int_value> COUNT@;@/
 %token<int_value> WRITE@;@/
-
-
 
 @q ** (2) Rules.  @>
 @ Rules.
@@ -416,6 +419,8 @@ yyerror(void* v, char const* s);
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
+    bool DEBUG = true; /* |false| */ 
+
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  QUERY table_name modifier_list'." 
@@ -439,11 +444,61 @@ yyerror(void* v, char const* s);
              << "`scanner_node->lowest' == " << scanner_node->lowest << endl
              << "`scanner_node->highest' == " << scanner_node->highest << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
     }  /* |if (DEBUG)|  */  
 
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    if (DEBUG) 
+       cerr << "`scanner_node->table_field_vector.size()' == " << scanner_node->table_field_vector.size() 
+            << endl;
+
+    if (DEBUG && scanner_node->table_field_vector.size() > 0)
+       cerr << "`scanner_node->table_field_vector':" << endl;
+
+    for (vector<int>::iterator iter = scanner_node->table_field_vector.begin();
+         iter != scanner_node->table_field_vector.end();
+         ++iter)
+    {
+@q ****** (6) @>
+
+        if (*iter == COMMON_NAME)
+        {
+           if (DEBUG) 
+              cerr << "Field:  `COMMON_NAME'." << endl;
+        }
+        else if (*iter == GREEK_NAME)
+        {
+           if (DEBUG) 
+              cerr << "Field:  `GREEK_NAME'." << endl;
+        }
+
+        else if (*iter == LATIN_NAME)
+        {
+           if (DEBUG) 
+              cerr << "Field:  `LATIN_NAME'." << endl;
+        }
+
+
+        else if (*iter == ARABIC_NAME)
+        {
+           if (DEBUG) 
+              cerr << "Field:  `ARABIC_NAME'." << endl;
+        }
+
+        else if (*iter == ARABIC_NAME)
+        {
+           if (DEBUG) 
+              cerr << "Field:  `ARABIC_NAME'." << endl;
+        }
+
+
+
+@q ****** (6) @>
+
+    }  /* |for| */
+            
 
 @q ***** (5) @>
 @
@@ -1108,6 +1163,8 @@ getchar();
 @=table_field: ARABIC_NAME@>
 {
 @q ***** (5) @>
+
+    bool DEBUG = true; /* |false| */ 
 
     if (DEBUG)
     {

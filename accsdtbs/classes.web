@@ -79,6 +79,7 @@
 #include <string> 
 #include <vector>
 #include <deque>
+#include <map>
 
 using namespace std;
 
@@ -243,7 +244,6 @@ int Scanner_Type::clear(void)
 
 @q ** (2) @>
 
-
 @q * (1) Putting classes together.@>
 @* Putting classes together.
 
@@ -260,6 +260,7 @@ class Song {};
 typedef Scanner_Type *Scanner_Node;
 deque<IO_Type> io_deque;
 @<Define |Scanner_Type| functions@>@;
+map<int, string> table_field_map;
 
 @q **** (4) This is what's written to the header file `classes.hxx'.  @>
 
@@ -274,6 +275,7 @@ class Song;
 @<class declarations@>@;@/
 typedef Scanner_Type *Scanner_Node;
 extern deque<IO_Type> io_deque;
+extern map<int, string> table_field_map;
 #endif 
 
 

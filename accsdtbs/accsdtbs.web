@@ -90,7 +90,7 @@ declination_decimal_degrees:  accsdtbs "common_name = \"Cor Caroli\""
 #include <fstream>   
 #include <vector>
 #include <deque>
-
+#include <map>
 
 using namespace std;
 
@@ -129,6 +129,7 @@ main(int argc, char *argv[])
 {
 @q *** (3) @>
 
+
    bool DEBUG = true; /* |false| */ 
 
    ifstream in_strm;
@@ -150,6 +151,45 @@ main(int argc, char *argv[])
 
 
    cerr << "argc == " << argc << "." << endl;
+
+@q *** (3) @>
+@
+@<|main| definition@>=
+
+   table_field_map[COMMON_NAME]                        = "common_name";
+   table_field_map[GREEK_NAME]                         = "greek_name";
+   table_field_map[LATIN_NAME]                         = "latin_name";
+   table_field_map[ARABIC_NAME]                        = "arabic_name"; 
+   table_field_map[FLAMSTEED_DESIGNATION_NUMBER]       = "flamsteed_designation_number";
+   table_field_map[BAYER_DESIGNATION_GREEK_LETTER]     = "bayer_designation_greek_letter";
+   table_field_map[BAYER_DESIGNATION_GREEK_LETTER_TEX] = "bayer_designation_greek_letter_tex";
+   table_field_map[BAYER_DESIGNATION_EXTENSION]        = "bayer_designation_extension";
+   table_field_map[BS_HR_NUMBER]                       = "bs_hr_number";
+   table_field_map[APPROX_RANK_APPARENT_MAGNITUDE]     = "approx_rank_apparent_magnitude";
+   table_field_map[APPARENT_MAGNITUDE]                 = "apparent_magnitude";
+   table_field_map[ABSOLUTE_MAGNITUDE]                 = "absolute_magnitude";
+   table_field_map[APPARENT_MAGNITUDE_VARIES]          = "apparent_magnitude_varies";
+   table_field_map[ABSOLUTE_MAGNITUDE_VARIES]          = "absolute_magnitude_varies";
+   table_field_map[CONSTELLATION_ABBREVIATION]         = "constellation_abbreviation";
+   table_field_map[CONSTELLATION_FULL_NAME]            = "constellation_full_name";
+   table_field_map[CONSTELLATION_NAME_GENITIVE]        = "constellation_name_genitive";
+   table_field_map[CONSTELLATION_NUMBER]               = "constellation_number";
+   table_field_map[RIGHT_ASCENSION_HOURS]              = "right_ascension_hours";
+   table_field_map[RIGHT_ASCENSION_MINUTES]            = "right_ascension_minutes";
+   table_field_map[RIGHT_ASCENSION_SECONDS]            = "right_ascension_seconds";
+   table_field_map[RIGHT_ASCENSION_DECIMAL_HOURS]      = "right_ascension_decimal_hours";
+   table_field_map[RIGHT_ASCENSION_DECIMAL_DEGREES]    = "right_ascension_decimal_degrees";
+   table_field_map[DECLINATION_DEGREES]                = "declination_degrees";
+   table_field_map[DECLINATION_MINUTES]                = "declination_minutes";
+   table_field_map[DECLINATION_SECONDS]                = "declination_seconds";
+   table_field_map[DECLINATION_DECIMAL_DEGREES]        = "declination_decimal_degrees";
+   table_field_map[IS_BINARY]                          = "is_binary";
+   table_field_map[IS_MULTIPLE]                        = "is_multiple";
+   table_field_map[IS_BINARY_COMPONENT]                = "is_binary_component";
+   table_field_map[IS_ECLIPSING_BINARY]                = "is_eclipsing_binary";
+   table_field_map[NOTES]                              = "notes";
+
+
 
 @q *** (3) @>
 @

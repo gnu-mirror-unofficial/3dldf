@@ -26,6 +26,13 @@ Terminals unused in grammar
     APPARENT
     ABSOLUTE
     MAGNITUDE
+    APPARENT_MAGNITUDE_VARIES
+    ABSOLUTE_MAGNITUDE_VARIES
+    IS_BINARY
+    IS_MULTIPLE
+    IS_BINARY_COMPONENT
+    IS_ECLIPSING_BINARY
+    NOTES
     VARIES
     IS
     BINARY
@@ -36,10 +43,6 @@ Terminals unused in grammar
     LATIN
     ARABIC
     GENITIVE
-    FLAMSTEED
-    BAYER
-    BS
-    HR
     NUMBER
     DESIGNATION
     ABBREVIATION
@@ -192,122 +195,125 @@ Terminals, with rules where they appear
     ABSOLUTE <int_value> (289)
     ABSOLUTE_MAGNITUDE <int_value> (290) 35
     MAGNITUDE <int_value> (291)
-    VARIES <int_value> (292)
-    IS <int_value> (293)
-    BINARY <int_value> (294)
-    MULTIPLE <int_value> (295)
-    COMMON <int_value> (296)
-    COMMON_NAME <int_value> (297) 25
-    NAME <int_value> (298)
-    GREEK <int_value> (299)
-    GREEK_NAME <int_value> (300) 26
-    LATIN <int_value> (301)
-    LATIN_NAME <int_value> (302) 27
-    ARABIC <int_value> (303)
-    ARABIC_NAME <int_value> (304) 28
-    GENITIVE <int_value> (305)
-    FLAMSTEED <int_value> (306)
-    FLAMSTEED_DESIGNATION_NUMBER <int_value> (307) 29
-    BAYER <int_value> (308)
-    BS <int_value> (309)
-    HR <int_value> (310)
-    NUMBER <int_value> (311)
-    BS_HR_NUMBER <int_value> (312) 33
-    DESIGNATION <int_value> (313)
-    BAYER_DESIGNATION_GREEK_LETTER <int_value> (314) 30
-    BAYER_DESIGNATION_GREEK_LETTER_TEX <int_value> (315) 31
-    BAYER_DESIGNATION_EXTENSION <int_value> (316) 32
-    ABBREVIATION <int_value> (317)
-    RIGHT <int_value> (318)
-    ASCENSION <int_value> (319)
-    DECLINATION <int_value> (320)
-    ECLIPTIC <int_value> (321)
-    HOUR <int_value> (322)
-    HOURS <int_value> (323)
-    MINUTE <int_value> (324)
-    MINUTES <int_value> (325)
-    SECOND <int_value> (326)
-    SECONDS <int_value> (327)
-    DEGREES <int_value> (328)
-    DECIMAL <int_value> (329)
-    RIGHT_ASCENSION_HOURS <int_value> (330) 40
-    RIGHT_ASCENSION_MINUTES <int_value> (331) 41
-    RIGHT_ASCENSION_SECONDS <float_value> (332) 42
-    RIGHT_ASCENSION_DEGREES <int_value> (333)
-    RIGHT_ASCENSION_DECIMAL_DEGREES <float_value> (334) 44
-    RIGHT_ASCENSION_DECIMAL_HOURS <float_value> (335) 43
-    DECLINATION_DEGREES <int_value> (336) 45
-    DECLINATION_MINUTES <int_value> (337) 46
-    DECLINATION_SECONDS <float_value> (338) 47
-    DECLINATION_DECIMAL_DEGREES <float_value> (339) 48
-    CONSTANT <int_value> (340)
-    COMPARE <int_value> (341)
-    LOWEST <int_value> (342) 14
-    HIGHEST <int_value> (343) 15
-    INTEGER <int_value> (344) 12 13 14 15
-    FLOAT <float_value> (345)
-    STRING <string_value> (346) 4
-    STAR <int_value> (347)
-    STARS <int_value> (348) 7
-    STAR_VECTOR <int_value> (349) 19
-    CONSTELLATION <int_value> (350)
-    CONSTELLATION_FULL_NAME <int_value> (351) 37
-    CONSTELLATION_ABBREVIATION <int_value> (352) 36
-    CONSTELLATION_NAME_GENITIVE <int_value> (353) 38
-    CONSTELLATION_NUMBER <int_value> (354) 39
-    CONSTELLATIONS <int_value> (355)
-    PLANET <int_value> (356)
-    PLANETS <int_value> (357)
-    TIME <int_value> (358)
-    SIDEREAL <int_value> (359)
-    UNIVERSAL <int_value> (360)
-    GREENWICH <int_value> (361)
-    LOCAL <int_value> (362)
-    SOLAR <int_value> (363)
-    TRANSFORM <int_value> (364)
-    TRANSFORMS <int_value> (365)
-    POINT <int_value> (366)
-    POINTS <int_value> (367)
-    PATH <int_value> (368)
-    PATHS <int_value> (369)
-    PICTURE <int_value> (370)
-    PICTURES <int_value> (371)
-    SONG <int_value> (372)
-    SONGS <int_value> (373) 8
-    SONG_VECTOR <int_value> (374) 20
-    COUNT <int_value> (375) 13
-    WRITE <int_value> (376)
+    APPARENT_MAGNITUDE_VARIES <int_value> (292)
+    ABSOLUTE_MAGNITUDE_VARIES <int_value> (293)
+    IS_BINARY <int_value> (294)
+    IS_MULTIPLE <int_value> (295)
+    IS_BINARY_COMPONENT <int_value> (296)
+    IS_ECLIPSING_BINARY <int_value> (297)
+    NOTES <int_value> (298)
+    VARIES <int_value> (299)
+    IS <int_value> (300)
+    BINARY <int_value> (301)
+    MULTIPLE <int_value> (302)
+    COMMON <int_value> (303)
+    COMMON_NAME <int_value> (304) 25
+    NAME <int_value> (305)
+    GREEK <int_value> (306)
+    GREEK_NAME <int_value> (307) 26
+    LATIN <int_value> (308)
+    LATIN_NAME <int_value> (309) 27
+    ARABIC <int_value> (310)
+    ARABIC_NAME <int_value> (311) 28
+    GENITIVE <int_value> (312)
+    FLAMSTEED_DESIGNATION_NUMBER <int_value> (313) 29
+    NUMBER <int_value> (314)
+    BS_HR_NUMBER <int_value> (315) 33
+    DESIGNATION <int_value> (316)
+    BAYER_DESIGNATION_GREEK_LETTER <int_value> (317) 30
+    BAYER_DESIGNATION_GREEK_LETTER_TEX <int_value> (318) 31
+    BAYER_DESIGNATION_EXTENSION <int_value> (319) 32
+    ABBREVIATION <int_value> (320)
+    RIGHT <int_value> (321)
+    ASCENSION <int_value> (322)
+    DECLINATION <int_value> (323)
+    ECLIPTIC <int_value> (324)
+    HOUR <int_value> (325)
+    HOURS <int_value> (326)
+    MINUTE <int_value> (327)
+    MINUTES <int_value> (328)
+    SECOND <int_value> (329)
+    SECONDS <int_value> (330)
+    DEGREES <int_value> (331)
+    DECIMAL <int_value> (332)
+    RIGHT_ASCENSION_HOURS <int_value> (333) 40
+    RIGHT_ASCENSION_MINUTES <int_value> (334) 41
+    RIGHT_ASCENSION_SECONDS <float_value> (335) 42
+    RIGHT_ASCENSION_DEGREES <int_value> (336)
+    RIGHT_ASCENSION_DECIMAL_DEGREES <float_value> (337) 44
+    RIGHT_ASCENSION_DECIMAL_HOURS <float_value> (338) 43
+    DECLINATION_DEGREES <int_value> (339) 45
+    DECLINATION_MINUTES <int_value> (340) 46
+    DECLINATION_SECONDS <float_value> (341) 47
+    DECLINATION_DECIMAL_DEGREES <float_value> (342) 48
+    CONSTANT <int_value> (343)
+    COMPARE <int_value> (344)
+    LOWEST <int_value> (345) 14
+    HIGHEST <int_value> (346) 15
+    INTEGER <int_value> (347) 12 13 14 15
+    FLOAT <float_value> (348)
+    STRING <string_value> (349) 4
+    STAR <int_value> (350)
+    STARS <int_value> (351) 7
+    STAR_VECTOR <int_value> (352) 19
+    CONSTELLATION <int_value> (353)
+    CONSTELLATION_FULL_NAME <int_value> (354) 37
+    CONSTELLATION_ABBREVIATION <int_value> (355) 36
+    CONSTELLATION_NAME_GENITIVE <int_value> (356) 38
+    CONSTELLATION_NUMBER <int_value> (357) 39
+    CONSTELLATIONS <int_value> (358)
+    PLANET <int_value> (359)
+    PLANETS <int_value> (360)
+    TIME <int_value> (361)
+    SIDEREAL <int_value> (362)
+    UNIVERSAL <int_value> (363)
+    GREENWICH <int_value> (364)
+    LOCAL <int_value> (365)
+    SOLAR <int_value> (366)
+    TRANSFORM <int_value> (367)
+    TRANSFORMS <int_value> (368)
+    POINT <int_value> (369)
+    POINTS <int_value> (370)
+    PATH <int_value> (371)
+    PATHS <int_value> (372)
+    PICTURE <int_value> (373)
+    PICTURES <int_value> (374)
+    SONG <int_value> (375)
+    SONGS <int_value> (376) 8
+    SONG_VECTOR <int_value> (377) 20
+    COUNT <int_value> (378) 13
+    WRITE <int_value> (379)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (122)
+    $accept (125)
         on left: 0
-    program (123)
+    program (126)
         on left: 1
         on right: 0
-    statement_list (124)
+    statement_list (127)
         on left: 2 3
         on right: 1 3
-    statement (125)
+    statement (128)
         on left: 4 5 6 17 18
         on right: 3
-    table_name <int_value> (126)
+    table_name <int_value> (129)
         on left: 7 8
         on right: 6
-    modifier_list <int_value> (127)
+    modifier_list <int_value> (130)
         on left: 9 10 11
         on right: 6 11
-    modifier <int_value> (128)
+    modifier <int_value> (131)
         on left: 12 13 14 15 16
         on right: 10 11
-    item_vector <int_value> (129)
+    item_vector <int_value> (132)
         on left: 19 20
         on right: 18
-    table_field_list <pointer_value> (130)
+    table_field_list <pointer_value> (133)
         on left: 21 22 23
         on right: 16 18 22 23
-    table_field <int_value> (131)
+    table_field <int_value> (134)
         on left: 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48
         on right: 22 23
 
