@@ -158,6 +158,13 @@ yyerror(void* v, char const* s);
 %token<int_value> SELECT@;@/
 %token<int_value> ALL@;@/
 %token<int_value> FROM@;@/
+%token<int_value> WHERE@;@/
+%token<int_value> EQUAL@;@/
+%token<int_value> NOT@;@/
+%token<int_value> GREATER_THAN@;@/
+%token<int_value> LESS_THAN;@/
+%token<int_value> GREATER_THAN_OR_EQUAL@;@/
+%token<int_value> LESS_THAN_OR_EQUAL@;@/
 %token<int_value> BY@;@/
 %token<int_value> ORDER@;@/
 %token<int_value> ASCENDING@;@/
@@ -463,42 +470,16 @@ yyerror(void* v, char const* s);
     {
 @q ****** (6) @>
 
-        if (*iter == COMMON_NAME)
-        {
-           if (DEBUG) 
-              cerr << "Field:  `COMMON_NAME'." << endl;
-        }
-        else if (*iter == GREEK_NAME)
-        {
-           if (DEBUG) 
-              cerr << "Field:  `GREEK_NAME'." << endl;
-        }
-
-        else if (*iter == LATIN_NAME)
-        {
-           if (DEBUG) 
-              cerr << "Field:  `LATIN_NAME'." << endl;
-        }
-
-
-        else if (*iter == ARABIC_NAME)
-        {
-           if (DEBUG) 
-              cerr << "Field:  `ARABIC_NAME'." << endl;
-        }
-
-        else if (*iter == ARABIC_NAME)
-        {
-           if (DEBUG) 
-              cerr << "Field:  `ARABIC_NAME'." << endl;
-        }
-
-
+        if (DEBUG) 
+           cerr << "Field:  `" << table_field_map[*iter] << "'." << endl;
 
 @q ****** (6) @>
 
     }  /* |for| */
             
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q ***** (5) @>
 @
@@ -541,8 +522,6 @@ yyerror(void* v, char const* s);
 
         }  /* |else if (@=$2@> == SONGS)|  */
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
 @q ***** (5) @>
 
