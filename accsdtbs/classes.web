@@ -139,6 +139,8 @@ Scanner_Type
     string input_filename;
     int limit;
     int count;
+    int lowest;
+    int highest;
     string where_str;
     string order_by_str;
 
@@ -177,7 +179,8 @@ Scanner_Type::Scanner_Type(void)
   end_flag = false; 
   limit    = 0; 
   count    = 0; 
-
+  lowest   = 0;
+  highest  = 0;
 
 
   return;
@@ -200,6 +203,8 @@ Scanner_Type::Scanner_Type(int iid) : id(iid)
   end_flag = false; 
   limit    = 0; 
   count    = 0; 
+  lowest   = 0;
+  highest  = 0;
 
   return;
 }
@@ -222,6 +227,8 @@ int Scanner_Type::clear(void)
    end_flag = false; 
    limit = 0; 
    count = 0; 
+   lowest   = 0;
+   highest  = 0;
 
    where_str    = "";
    order_by_str = "";

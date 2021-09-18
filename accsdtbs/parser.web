@@ -407,7 +407,9 @@ yyerror(void* v, char const* s);
         }
 
         cerr << "`scanner_node->limit' == " << scanner_node->limit << endl
-             << "`scanner_node->count' == " << scanner_node->count << endl;
+             << "`scanner_node->count' == " << scanner_node->count << endl
+             << "`scanner_node->lowest' == " << scanner_node->lowest << endl
+             << "`scanner_node->highest' == " << scanner_node->highest << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
@@ -614,6 +616,61 @@ getchar();
 @q ***** (5) @>
  
     scanner_node->count = @=$2@>;
+   
+    @=$$@> = 0;
+
+};
+
+
+@q **** (4) @>
+
+@ modifier: LOWEST INTEGER.
+
+@<Rules@>=
+@=modifier: LOWEST INTEGER@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: LOWEST INTEGER'." 
+             << endl
+             << "`INTEGER' == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+ 
+    scanner_node->lowest = @=$2@>;
+   
+    @=$$@> = 0;
+
+};
+
+@q **** (4) @>
+
+@ modifier: HIGHEST INTEGER.
+
+@<Rules@>=
+@=modifier: HIGHEST INTEGER@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: HIGHEST INTEGER'." 
+             << endl
+             << "`INTEGER' == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+ 
+    scanner_node->highest = @=$2@>;
    
     @=$$@> = 0;
 
