@@ -172,6 +172,58 @@ class Star
 @q ** (2) Star functions.  @>
 @ Star functions.  
 
+@q *** (3) @>
+
+@q **** (4) Declaration  @>
+@
+@<Declare |Star| functions@>=
+void
+clear(void);
+
+
+@q **** (4) Definition  @>
+@
+@<Define |Star| functions@>=
+void
+Star::clear(void)
+{
+   common_name = "";
+   greek_name = "";
+   latin_name = "";
+   arabic_name = "";
+   flamsteed_designation_number = 0;
+   bayer_designation_greek_letter = "";
+   bayer_designation_greek_letter_tex = "";
+   bayer_designation_extension = "";
+   bs_hr_number = 0;
+   approx_rank_apparent_magnitude = 0;
+   apparent_magnitude = 0.0;
+   absolute_magnitude = 0.0;
+   apparent_magnitude_varies = false;
+   absolute_magnitude_varies = false;
+   constellation_abbreviation = "";
+   constellation_full_name = "";
+   constellation_name_genitive = "";
+   constellation_number = 0;
+   right_ascension_hours = 0;
+   right_ascension_minutes = 0;
+   right_ascension_seconds = 0.0;
+   right_ascension_decimal_hours = 0.0;
+   right_ascension_decimal_degrees = 0.0;
+   declination_degrees = 0;
+   declination_minutes = 0;
+   declination_seconds = 0.0;
+   declination_decimal_degrees = 0.0;
+   is_binary = false;
+   is_multiple = 0;
+   is_binary_component = false;
+   is_eclipsing_binary = false;
+   notes = "";
+
+   return;
+
+}  /* End of |Star::clear| definition  */
+
 @q *** (3) Set @>
 @ Set.
 

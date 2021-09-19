@@ -454,6 +454,8 @@ yyerror(void* v, char const* s);
 
     bool DEBUG = true; /* |false| */ 
 
+    Star curr_star;
+
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `statement:  QUERY table_name modifier_list'." 
@@ -586,6 +588,67 @@ yyerror(void* v, char const* s);
 @
 @<Rules@>=
 
+           scanner_node->star_vector.clear();
+
+           do      
+           {
+@q ******* (7) @>
+
+
+/* !!START HERE:  LDF 2021.09.19.  Add APPEND argument to rule.  Then, if it's true,
+   don't clear star_vector.  */ 
+
+
+               curr_row = mysql_fetch_row(result);
+
+               if (curr_row == 0)
+               {
+                   if (DEBUG) 
+                     cerr << "`mysql_fetch_row' returned NULL:" 
+                	  << endl;
+
+                   if (*mysql_error(mysql))
+                     {
+                       cerr << "ERROR!  In parser, rule `statement: QUERY table_name modifier_list':"
+                            << endl 
+                            << "`mysql_fetch_row' failed, returning NULL." << endl
+                	    << "Error:  " << mysql_error(mysql) << endl
+                	    << "Will try to continue."
+                	    << endl;
+
+                       if (result)
+                       {
+                           mysql_free_result(result);
+                           result = 0;
+                       }
+                       goto END_QUERY_RULE;
+
+                     }
+                   else if (DEBUG)
+                     {
+                       cerr << "No more rows." << endl;
+                     }
+
+                   break;
+
+               }  /* |if (curr_row == 0)|  */
+
+               else
+               {
+                  curr_star.clear();
+                  curr_star.set(curr_row);
+                  scanner_node->star_vector.push_back(curr_star);
+
+                  if (DEBUG) 
+                  {
+                     curr_star.show("curr_star:");
+                  }
+               }
+               
+
+@q ******* (7) @>
+
+           } while (curr_row != 0);
 
 @q ****** (6) @>
 
