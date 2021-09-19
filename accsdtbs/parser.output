@@ -37,11 +37,6 @@ Terminals unused in grammar
     MAGNITUDE
     APPARENT_MAGNITUDE_VARIES
     ABSOLUTE_MAGNITUDE_VARIES
-    IS_BINARY
-    IS_MULTIPLE
-    IS_BINARY_COMPONENT
-    IS_ECLIPSING_BINARY
-    NOTES
     VARIES
     IS
     BINARY
@@ -112,8 +107,8 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-   55 combined_string: STRING
-   56                | combined_string STRING
+   60 combined_string: STRING
+   61                | combined_string STRING
 
 
 Grammar
@@ -183,6 +178,11 @@ Grammar
    52            | DECLINATION_MINUTES
    53            | DECLINATION_SECONDS
    54            | DECLINATION_DECIMAL_DEGREES
+   55            | IS_BINARY
+   56            | IS_MULTIPLE
+   57            | IS_BINARY_COMPONENT
+   58            | IS_ECLIPSING_BINARY
+   59            | NOTES
 
 
 Terminals, with rules where they appear
@@ -234,11 +234,11 @@ Terminals, with rules where they appear
     MAGNITUDE <int_value> (300)
     APPARENT_MAGNITUDE_VARIES <int_value> (301)
     ABSOLUTE_MAGNITUDE_VARIES <int_value> (302)
-    IS_BINARY <int_value> (303)
-    IS_MULTIPLE <int_value> (304)
-    IS_BINARY_COMPONENT <int_value> (305)
-    IS_ECLIPSING_BINARY <int_value> (306)
-    NOTES <int_value> (307)
+    IS_BINARY <int_value> (303) 55
+    IS_MULTIPLE <int_value> (304) 56
+    IS_BINARY_COMPONENT <int_value> (305) 57
+    IS_ECLIPSING_BINARY <int_value> (306) 58
+    NOTES <int_value> (307) 59
     VARIES <int_value> (308)
     IS <int_value> (309)
     BINARY <int_value> (310)
@@ -374,7 +374,7 @@ Nonterminals, with rules where they appear
         on left: 27 28 29
         on right: 22 24 28 29
     table_field <int_value> (166)
-        on left: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54
+        on left: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59
         on right: 28 29
 
 
@@ -658,32 +658,37 @@ State 33
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 40
     APPARENT_MAGNITUDE                  shift, and go to state 41
     ABSOLUTE_MAGNITUDE                  shift, and go to state 42
-    COMMON_NAME                         shift, and go to state 43
-    GREEK_NAME                          shift, and go to state 44
-    LATIN_NAME                          shift, and go to state 45
-    ARABIC_NAME                         shift, and go to state 46
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 47
-    BS_HR_NUMBER                        shift, and go to state 48
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 49
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 50
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 51
-    RIGHT_ASCENSION_HOURS               shift, and go to state 52
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 53
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 54
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 55
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 56
-    DECLINATION_DEGREES                 shift, and go to state 57
-    DECLINATION_MINUTES                 shift, and go to state 58
-    DECLINATION_SECONDS                 shift, and go to state 59
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 60
-    CONSTELLATION_FULL_NAME             shift, and go to state 61
-    CONSTELLATION_ABBREVIATION          shift, and go to state 62
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 63
-    CONSTELLATION_NUMBER                shift, and go to state 64
+    IS_BINARY                           shift, and go to state 43
+    IS_MULTIPLE                         shift, and go to state 44
+    IS_BINARY_COMPONENT                 shift, and go to state 45
+    IS_ECLIPSING_BINARY                 shift, and go to state 46
+    NOTES                               shift, and go to state 47
+    COMMON_NAME                         shift, and go to state 48
+    GREEK_NAME                          shift, and go to state 49
+    LATIN_NAME                          shift, and go to state 50
+    ARABIC_NAME                         shift, and go to state 51
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 52
+    BS_HR_NUMBER                        shift, and go to state 53
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 54
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 55
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 56
+    RIGHT_ASCENSION_HOURS               shift, and go to state 57
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 58
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 59
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 60
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 61
+    DECLINATION_DEGREES                 shift, and go to state 62
+    DECLINATION_MINUTES                 shift, and go to state 63
+    DECLINATION_SECONDS                 shift, and go to state 64
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 65
+    CONSTELLATION_FULL_NAME             shift, and go to state 66
+    CONSTELLATION_ABBREVIATION          shift, and go to state 67
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 68
+    CONSTELLATION_NUMBER                shift, and go to state 69
 
     $default  reduce using rule 24 (statement)
 
-    table_field  go to state 65
+    table_field  go to state 70
 
 
 State 34
@@ -696,32 +701,37 @@ State 34
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 40
     APPARENT_MAGNITUDE                  shift, and go to state 41
     ABSOLUTE_MAGNITUDE                  shift, and go to state 42
-    COMMON_NAME                         shift, and go to state 43
-    GREEK_NAME                          shift, and go to state 44
-    LATIN_NAME                          shift, and go to state 45
-    ARABIC_NAME                         shift, and go to state 46
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 47
-    BS_HR_NUMBER                        shift, and go to state 48
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 49
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 50
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 51
-    RIGHT_ASCENSION_HOURS               shift, and go to state 52
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 53
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 54
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 55
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 56
-    DECLINATION_DEGREES                 shift, and go to state 57
-    DECLINATION_MINUTES                 shift, and go to state 58
-    DECLINATION_SECONDS                 shift, and go to state 59
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 60
-    CONSTELLATION_FULL_NAME             shift, and go to state 61
-    CONSTELLATION_ABBREVIATION          shift, and go to state 62
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 63
-    CONSTELLATION_NUMBER                shift, and go to state 64
+    IS_BINARY                           shift, and go to state 43
+    IS_MULTIPLE                         shift, and go to state 44
+    IS_BINARY_COMPONENT                 shift, and go to state 45
+    IS_ECLIPSING_BINARY                 shift, and go to state 46
+    NOTES                               shift, and go to state 47
+    COMMON_NAME                         shift, and go to state 48
+    GREEK_NAME                          shift, and go to state 49
+    LATIN_NAME                          shift, and go to state 50
+    ARABIC_NAME                         shift, and go to state 51
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 52
+    BS_HR_NUMBER                        shift, and go to state 53
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 54
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 55
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 56
+    RIGHT_ASCENSION_HOURS               shift, and go to state 57
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 58
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 59
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 60
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 61
+    DECLINATION_DEGREES                 shift, and go to state 62
+    DECLINATION_MINUTES                 shift, and go to state 63
+    DECLINATION_SECONDS                 shift, and go to state 64
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 65
+    CONSTELLATION_FULL_NAME             shift, and go to state 66
+    CONSTELLATION_ABBREVIATION          shift, and go to state 67
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 68
+    CONSTELLATION_NUMBER                shift, and go to state 69
 
     $default  reduce using rule 22 (modifier)
 
-    table_field  go to state 65
+    table_field  go to state 70
 
 
 State 35
@@ -759,30 +769,35 @@ State 39
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 40
     APPARENT_MAGNITUDE                  shift, and go to state 41
     ABSOLUTE_MAGNITUDE                  shift, and go to state 42
-    COMMON_NAME                         shift, and go to state 43
-    GREEK_NAME                          shift, and go to state 44
-    LATIN_NAME                          shift, and go to state 45
-    ARABIC_NAME                         shift, and go to state 46
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 47
-    BS_HR_NUMBER                        shift, and go to state 48
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 49
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 50
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 51
-    RIGHT_ASCENSION_HOURS               shift, and go to state 52
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 53
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 54
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 55
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 56
-    DECLINATION_DEGREES                 shift, and go to state 57
-    DECLINATION_MINUTES                 shift, and go to state 58
-    DECLINATION_SECONDS                 shift, and go to state 59
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 60
-    CONSTELLATION_FULL_NAME             shift, and go to state 61
-    CONSTELLATION_ABBREVIATION          shift, and go to state 62
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 63
-    CONSTELLATION_NUMBER                shift, and go to state 64
+    IS_BINARY                           shift, and go to state 43
+    IS_MULTIPLE                         shift, and go to state 44
+    IS_BINARY_COMPONENT                 shift, and go to state 45
+    IS_ECLIPSING_BINARY                 shift, and go to state 46
+    NOTES                               shift, and go to state 47
+    COMMON_NAME                         shift, and go to state 48
+    GREEK_NAME                          shift, and go to state 49
+    LATIN_NAME                          shift, and go to state 50
+    ARABIC_NAME                         shift, and go to state 51
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 52
+    BS_HR_NUMBER                        shift, and go to state 53
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 54
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 55
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 56
+    RIGHT_ASCENSION_HOURS               shift, and go to state 57
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 58
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 59
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 60
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 61
+    DECLINATION_DEGREES                 shift, and go to state 62
+    DECLINATION_MINUTES                 shift, and go to state 63
+    DECLINATION_SECONDS                 shift, and go to state 64
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 65
+    CONSTELLATION_FULL_NAME             shift, and go to state 66
+    CONSTELLATION_ABBREVIATION          shift, and go to state 67
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 68
+    CONSTELLATION_NUMBER                shift, and go to state 69
 
-    table_field  go to state 66
+    table_field  go to state 71
 
 
 State 40
@@ -808,166 +823,201 @@ State 42
 
 State 43
 
+   55 table_field: IS_BINARY .
+
+    $default  reduce using rule 55 (table_field)
+
+
+State 44
+
+   56 table_field: IS_MULTIPLE .
+
+    $default  reduce using rule 56 (table_field)
+
+
+State 45
+
+   57 table_field: IS_BINARY_COMPONENT .
+
+    $default  reduce using rule 57 (table_field)
+
+
+State 46
+
+   58 table_field: IS_ECLIPSING_BINARY .
+
+    $default  reduce using rule 58 (table_field)
+
+
+State 47
+
+   59 table_field: NOTES .
+
+    $default  reduce using rule 59 (table_field)
+
+
+State 48
+
    31 table_field: COMMON_NAME .
 
     $default  reduce using rule 31 (table_field)
 
 
-State 44
+State 49
 
    32 table_field: GREEK_NAME .
 
     $default  reduce using rule 32 (table_field)
 
 
-State 45
+State 50
 
    33 table_field: LATIN_NAME .
 
     $default  reduce using rule 33 (table_field)
 
 
-State 46
+State 51
 
    34 table_field: ARABIC_NAME .
 
     $default  reduce using rule 34 (table_field)
 
 
-State 47
+State 52
 
    35 table_field: FLAMSTEED_DESIGNATION_NUMBER .
 
     $default  reduce using rule 35 (table_field)
 
 
-State 48
+State 53
 
    39 table_field: BS_HR_NUMBER .
 
     $default  reduce using rule 39 (table_field)
 
 
-State 49
+State 54
 
    36 table_field: BAYER_DESIGNATION_GREEK_LETTER .
 
     $default  reduce using rule 36 (table_field)
 
 
-State 50
+State 55
 
    37 table_field: BAYER_DESIGNATION_GREEK_LETTER_TEX .
 
     $default  reduce using rule 37 (table_field)
 
 
-State 51
+State 56
 
    38 table_field: BAYER_DESIGNATION_EXTENSION .
 
     $default  reduce using rule 38 (table_field)
 
 
-State 52
+State 57
 
    46 table_field: RIGHT_ASCENSION_HOURS .
 
     $default  reduce using rule 46 (table_field)
 
 
-State 53
+State 58
 
    47 table_field: RIGHT_ASCENSION_MINUTES .
 
     $default  reduce using rule 47 (table_field)
 
 
-State 54
+State 59
 
    48 table_field: RIGHT_ASCENSION_SECONDS .
 
     $default  reduce using rule 48 (table_field)
 
 
-State 55
+State 60
 
    50 table_field: RIGHT_ASCENSION_DECIMAL_DEGREES .
 
     $default  reduce using rule 50 (table_field)
 
 
-State 56
+State 61
 
    49 table_field: RIGHT_ASCENSION_DECIMAL_HOURS .
 
     $default  reduce using rule 49 (table_field)
 
 
-State 57
+State 62
 
    51 table_field: DECLINATION_DEGREES .
 
     $default  reduce using rule 51 (table_field)
 
 
-State 58
+State 63
 
    52 table_field: DECLINATION_MINUTES .
 
     $default  reduce using rule 52 (table_field)
 
 
-State 59
+State 64
 
    53 table_field: DECLINATION_SECONDS .
 
     $default  reduce using rule 53 (table_field)
 
 
-State 60
+State 65
 
    54 table_field: DECLINATION_DECIMAL_DEGREES .
 
     $default  reduce using rule 54 (table_field)
 
 
-State 61
+State 66
 
    43 table_field: CONSTELLATION_FULL_NAME .
 
     $default  reduce using rule 43 (table_field)
 
 
-State 62
+State 67
 
    42 table_field: CONSTELLATION_ABBREVIATION .
 
     $default  reduce using rule 42 (table_field)
 
 
-State 63
+State 68
 
    44 table_field: CONSTELLATION_NAME_GENITIVE .
 
     $default  reduce using rule 44 (table_field)
 
 
-State 64
+State 69
 
    45 table_field: CONSTELLATION_NUMBER .
 
     $default  reduce using rule 45 (table_field)
 
 
-State 65
+State 70
 
    28 table_field_list: table_field_list table_field .
 
     $default  reduce using rule 28 (table_field_list)
 
 
-State 66
+State 71
 
    29 table_field_list: table_field_list COMMA table_field .
 

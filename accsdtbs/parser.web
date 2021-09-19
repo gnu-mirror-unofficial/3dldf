@@ -502,10 +502,6 @@ yyerror(void* v, char const* s);
 
     }  /* |for| */
             
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 @q ***** (5) @>
 @
 @<Rules@>=
@@ -514,11 +510,99 @@ getchar();
         {
 @q ****** (6) @>
 
+           sql_strm.str("");
+
+           sql_strm << "select common_name, greek_name, latin_name, "
+                    << "arabic_name, flamsteed_designation_number, "
+                    << "bayer_designation_greek_letter, bayer_designation_greek_letter_tex, "
+                    << "bayer_designation_extension, bs_hr_number, "
+                    << "approx_rank_apparent_magnitude, apparent_magnitude, "
+                    << "absolute_magnitude, apparent_magnitude_varies, "
+                    << "absolute_magnitude_varies, constellation_abbreviation, "
+                    << "constellation_full_name, constellation_name_genitive, "
+                    << "constellation_number, right_ascension_hours, right_ascension_minutes, "
+                    << "right_ascension_seconds, right_ascension_decimal_hours, "
+                    << "right_ascension_decimal_degrees, declination_degrees, "
+                    << "declination_minutes, declination_seconds, declination_decimal_degrees, "
+                    << "is_binary, is_multiple, is_binary_component, is_eclipsing_binary, "
+                    << "notes "
+                    << "from 3dldf.Stars";
+
+           if (scanner_node->table_field_vector.size() > 0)
+             sql_strm << " order by ";
+
+           string comma_str = "";
+
+           for (vector<int>::iterator iter = scanner_node->table_field_vector.begin();
+                iter != scanner_node->table_field_vector.end();
+                ++iter)
+           {
+               sql_strm << comma_str << table_field_map[*iter];
+
+               if (comma_str.empty())
+                  comma_str = ", ";
+           }
+
+           sql_strm << ";";
+
+           if (DEBUG)
+           {
+               cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
+           }
+
+@q ****** (6) @>
+@
+@<Rules@>=
+
+           status = submit_mysql_query(sql_strm.str());
+
+           if (status != 0)
+           {
+               cerr << "ERROR!  In parser, rule `statement: QUERY table_name modifier_list':"
+                    << endl
+                    << "`submit_mysql_query' failed, returning " << status << "." << endl
+                    << "Failed to query database for `Stars'." << endl 
+                    << "Will try to continue." << endl;
+
+               if (result)
+               {
+                   mysql_free_result(result);
+                   result = 0;
+               }
+               goto END_QUERY_RULE;
+           }
+
 @q ****** (6) @>
 
-        }
+           else if (DEBUG)
+           { 
+               cerr << "In parser, rule `statement: QUERY table_name modifier_list':"
+                    << endl
+                    << "`submit_mysql_query' succeeded, returning 0." << endl
+                    << "Queried database for `Stars' successfully." << endl;
+           }       
+
+@q ****** (6) @>
+@
+@<Rules@>=
+
+
+@q ****** (6) @>
+
+           if (result)
+           {
+               mysql_free_result(result);
+               result = 0;
+           }
+
+@q ****** (6) @>
+
+        }  /* |if (@=$2@> == STARS) | */
+
 
 @q ***** (5) @>  
+@
+@<Rules@>=
    
         else if (@=$2@> == SONGS) 
         {
@@ -535,6 +619,14 @@ getchar();
                     << "`submit_mysql_query' failed, returning " << status << "." << endl
                     << "Failed to query database for `Songs'." << endl 
                     << "Will try to continue." << endl;
+
+               if (result)
+               {
+                   mysql_free_result(result);
+                   result = 0;
+               }
+               goto END_QUERY_RULE;
+
            }
            else if (DEBUG)
            { 
@@ -546,7 +638,21 @@ getchar();
 
         }  /* |else if (@=$2@> == SONGS)|  */
 
+
+@q ****** (6) @>
+@
+@<Rules@>=
+
+       if (result)
+       {
+           mysql_free_result(result);
+           result = 0;
+       }
+
 @q ***** (5) @>
+
+END_QUERY_RULE:
+;
 
 };
 
@@ -1718,6 +1824,111 @@ getchar();
    
 };
 
+@q *** (3) @>
+@ 
+@<Rules@>=
+
+@=table_field: IS_BINARY@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field: IS_BINARY'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = IS_BINARY;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_field: IS_MULTIPLE@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field:  IS_MULTIPLE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = IS_MULTIPLE;
+
+};
+  
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_field: IS_BINARY_COMPONENT@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field:  IS_BINARY_COMPONENT'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = IS_BINARY_COMPONENT;
+
+};
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_field: IS_ECLIPSING_BINARY@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field:  IS_ECLIPSING_BINARY'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = IS_ECLIPSING_BINARY;
+
+};
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_field: NOTES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field:  NOTES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = NOTES;
+
+};
+
+
 @
 @<Garbage@>=
 /* Empty  */
@@ -1734,6 +1945,12 @@ bool DEBUG = true;  /* |false|  */
 static stringstream temp_strm;
 static stringstream sql_strm;
 static int status;
+extern MYSQL_RES *result;
+extern MYSQL_ROW curr_row;
+extern MYSQL *mysql;
+extern unsigned int row_ctr; 
+extern unsigned int field_ctr;
+extern long affected_rows;
 @<Declarations of additional functions@>@;@/
 #if 0 
 @<Garbage@>@;@/
