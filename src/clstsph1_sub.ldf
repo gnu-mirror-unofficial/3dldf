@@ -440,7 +440,7 @@ plot_star_on_sphere (star_point) {radius, miaplacidus};
 plot_star_on_spherical_biangle {miaplacidus, 28, label_pos_bot, 0pt, 0pt, false, true};
 
 label.bot("{\medium\vbox{\hbox{Miapla-}\vskip-4pt\hbox{\hskip 4pt cidus}}}", R28 shifted (0, -4pt))
-         on_picture qv[3];
+         with_text_color label_color on_picture qv[3];
 
 plot_star_on_panel (temp_star_panel_point) {miaplacidus, star_point};
 
@@ -1665,7 +1665,10 @@ label.lrt("{\Small\vbox{\hbox{{\Smallgreek\char18} Cari-}\vskip-4pt\hbox{n{\ae}}
 
 plot_star_on_sphere (star_point) {radius, porrima};
 
-plot_star_on_spherical_biangle {porrima, 122, label_pos_top, 0, 2pt, false, false};
+plot_star_on_spherical_biangle {porrima, 122, label_pos_top, 0, 0pt, false, true};
+
+label.top("{\Small Porrima}", R122 shifted (4pt, 0pt))
+          with_text_color label_color on_picture qv[4];
 
 plot_star_on_panel (temp_star_panel_point) {porrima, star_point};
 
@@ -2625,11 +2628,9 @@ plot_star_on_sphere (star_point) {radius, lambda_centauri};
 
 plot_star_on_spherical_biangle {lambda_centauri, 191, label_pos_none, 0, 0, false, true};
 
-label.rt("{\medium\hbox{$\lambda$ Cent.}}", R191 shifted (0, -2pt)) with_text_color label_color on_picture qv[4];
+label.rt("{\Small\hbox{$\scriptstyle\lambda$\hskip.5pt Cent.}}", R191 shifted (-2pt, -2pt)) with_text_color label_color on_picture qv[4];
 
 plot_star_on_panel (temp_star_panel_point) {lambda_centauri, star_point};
-
-%% !! START HERE:  LDF 2021.09.17.  Error.  Segment 5.
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {lambda_centauri, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
                                                       0, 0, false, true};
