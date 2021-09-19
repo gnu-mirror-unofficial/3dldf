@@ -145,18 +145,15 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=\* {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << " (asterisk)" << endl;
 
    }  /* |if (DEBUG)|  */
 
-
    return ASTERISK; 
 
 @=}@>
-
 
 @q **** (4) Semi-Colon.  @>
 @ Semi-colon.
@@ -164,18 +161,15 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=; {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << " (semi-colon)" << endl;
 
    }  /* |if (DEBUG)|  */
 
-
    return SEMI_COLON; 
 
 @=}@>
-
 
 @q **** (4) Comma.  @>
 @ comma.
@@ -183,13 +177,11 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=, {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << " (comma)" << endl;
 
    }  /* |if (DEBUG)|  */
-
 
    return COMMA; 
 
@@ -219,13 +211,11 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=INPUT|input {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-
 
    return INPUT;
 
@@ -245,7 +235,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -257,6 +246,20 @@ to {\bf yylex} can be set here.
    }
 
    return OUT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=IN|in {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return IN;
 
 @=}@>
 
@@ -277,21 +280,6 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=APPROX(\_|\ )RANK(\_|\ )APPARENT(\_|\ )MAGNITUDE|approx(\_|\ )rank(\_|\ )apparent(\_|\ )magnitude {@>
-
-   if (DEBUG)
-   {
-       cerr << "In `yylex':  " << yytext << endl;
-   }
-
-   return APPROX_RANK_APPARENT_MAGNITUDE;
-
-@=}@>
-
-
-@q *** (3) @>
-@
-@<Rules@>=
 @=STAR(\_|\ )VECTOR|star(\_|\ )vector {@>
 
    if (DEBUG)
@@ -300,22 +288,6 @@ to {\bf yylex} can be set here.
    }
 
    return STAR_VECTOR;
-
-@=}@>
-
-
-
-@q *** (3) @>
-@
-@<Rules@>=
-@=SONG(\_|\ )VECTOR|song(\_|\ )vector {@>
-
-   if (DEBUG)
-   {
-       cerr << "In `yylex':  " << yytext << endl;
-   }
-
-   return SONG_VECTOR;
 
 @=}@>
 
@@ -333,9 +305,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
-
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -350,20 +319,17 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) END.  @>
 @ END.
 
 @<Rules@>=
 @=END|end {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-
 
    return END;
 
@@ -375,13 +341,11 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=ENDINPUT|endinput {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-
 
    return ENDINPUT;
 
@@ -397,7 +361,6 @@ to {\bf yylex} can be set here.
        cerr << "In `yylex':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
-
 
    return SELECT;
 
@@ -434,6 +397,104 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=EQUAL|equal {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return EQUAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NOT|not {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NOT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GREATER(\_|\ )THAN|greater(\_|\ )than {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GREATER_THAN;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GREATER(\_|\ )THAN(\_|\ )OR(\_|\ )EQUAL|greater(\_|\ )than(\_|\ )or(\_|\ )equal {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GREATER_THAN_OR_EQUAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LESS(\_|\ )THAN(\_|\ )OR(\_|\ )EQUAL|less(\_|\ )than(\_|\ )or(\_|\ )equal {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LESS_THAN_OR_EQUAL;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=WHERE|where {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return WHERE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ORDER(\_|\ )BY|order(\_|\ )by {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ORDER_BY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=BY|by {@>
 
    if (DEBUG)
@@ -442,20 +503,6 @@ to {\bf yylex} can be set here.
    }
 
    return BY;
-
-@=}@>
-
-@q *** (3) @>
-@
-@<Rules@>=
-@=ORDER|order {@>
-
-   if (DEBUG)
-   {
-       cerr << "In `yylex':  " << yytext << endl;
-   }
-
-   return ORDER;
 
 @=}@>
 
@@ -546,6 +593,20 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=APPROX(\_|\ )RANK(\_|\ )APPARENT(\_|\ )MAGNITUDE|approx(\_|\ )rank(\_|\ )apparent(\_|\ )magnitude {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPROX_RANK_APPARENT_MAGNITUDE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=APPROX|approx {@>
 
    if (DEBUG)
@@ -616,6 +677,34 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=APPARENT(\_|\ )MAGNITUDE(\_|\ )VARIES|apparent(\_|\ )magnitude(\_|\ )varies {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPARENT_MAGNITUDE_VARIES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ABSOLUTE(\_|\ )MAGNITUDE(\_|\ )VARIES|absolute(\_|\ )magnitude(\_|\ )varies {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ABSOLUTE_MAGNITUDE_VARIES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=VARIES|varies {@>
 
    if (DEBUG)
@@ -624,6 +713,76 @@ to {\bf yylex} can be set here.
    }
 
    return VARIES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=IS(\_|\ )BINARY(\_|\ )COMPONENT|is(\_|\ )binary(\_|\ )component {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return IS_BINARY_COMPONENT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=IS(\_|\ )BINARY|is(\_|\ )binary {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return IS_BINARY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=IS(\_|\ )ECLIPSING(\_|\ )BINARY|is(\_|\ )eclipsing(\_|\ )binary {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return IS_ECLIPSING_BINARY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=IS(\_|\ )MULTIPLE|is(\_|\ )multiple {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return IS_MULTIPLE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NOTES|notes {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NOTES;
 
 @=}@>
 
@@ -725,7 +884,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -796,7 +954,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -814,20 +971,6 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=BAYER(\_|\ )DESIGNATION(\_|\ )GREEK(\_|\ )LETTER|bayer(\_|\ )designation(\_|\ )greek(\_|\ )letter {@>
-
-   if (DEBUG)
-   {
-       cerr << "In `yylex':  " << yytext << endl;
-   }
-
-   return BAYER_DESIGNATION_GREEK_LETTER;
-
-@=}@>
-
-@q *** (3) @>
-@
-@<Rules@>=
 @=BAYER(\_|\ )DESIGNATION(\_|\ )GREEK(\_|\ )LETTER(\_|\ )TEX|bayer(\_|\ )designation(\_|\ )greek(\_|\ )letter(\_|\ )tex {@>
 
    if (DEBUG)
@@ -836,6 +979,20 @@ to {\bf yylex} can be set here.
    }
 
    return BAYER_DESIGNATION_GREEK_LETTER_TEX;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=BAYER(\_|\ )DESIGNATION(\_|\ )GREEK(\_|\ )LETTER|bayer(\_|\ )designation(\_|\ )greek(\_|\ )letter {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return BAYER_DESIGNATION_GREEK_LETTER;
 
 @=}@>
 
@@ -866,7 +1023,6 @@ to {\bf yylex} can be set here.
    return BS_HR_NUMBER;
 
 @=}@>
-
 
 @q *** (3) @>
 @
@@ -966,7 +1122,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -998,6 +1153,20 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=RIGHT(\_|\ )ASCENSION|right(\_|\ )ascension {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return RIGHT_ASCENSION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=DECLINATION(\_|\ )DECIMAL(\_|\ )DEGREES|declination(\_|\ )decimal(\_|\ )degrees {@>
 
    if (DEBUG)
@@ -1022,7 +1191,6 @@ to {\bf yylex} can be set here.
    return DECLINATION_DEGREES;
 
 @=}@>
-
 
 @q *** (3) @>
 @
@@ -1052,7 +1220,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -1066,9 +1233,6 @@ to {\bf yylex} can be set here.
    return RIGHT;
 
 @=}@>
-
-
-
 
 @q *** (3) @>
 @
@@ -1227,6 +1391,20 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=STAR(\_|\ )CONSTANT(\_|\ )NAME|star(\_|\ )constant(\_|\ )name {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return STAR_CONSTANT_NAME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=CONSTANT|constant {@>
 
    if (DEBUG)
@@ -1311,6 +1489,76 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=CONSTELLATION(\_|\ )VECTOR|constellation(\_|\ )vector {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATION_VECTOR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTELLATION(\_|\ )ABBREVIATION|constellation(\_|\ )abbreviation {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATION_ABBREVIATION;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTELLATION(\_|\ )NAME(\_|\ )GENITIVE|constellation(\_|\ )name(\_|\ )genitive {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATION_NAME_GENITIVE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTELLATION(\_|\ )NUMBER|constellation(\_|\ )number {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATION_NUMBER;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CONSTELLATION(\_|\ )FULL(\_|\ )NAME|constellation(\_|\ )full(\_|\ )name {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CONSTELLATION_FULL_NAME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=CONSTELLATION|constellation {@>
 
    if (DEBUG)
@@ -1353,6 +1601,20 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=PLANET(\_|\ )VECTOR|planet(\_|\ )vector {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PLANET_VECTOR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=PLANETS|planets {@>
 
    if (DEBUG)
@@ -1361,6 +1623,90 @@ to {\bf yylex} can be set here.
    }
 
    return PLANETS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SIDEREAL(\_|\ )TIME|sidereal(\_|\ )time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SIDEREAL_TIME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=UNIVERSAL(\_|\ )TIME|universal(\_|\ )time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return UNIVERSAL_TIME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GREENWICH(\_|\ )TIME|greenwich(\_|\ )time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GREENWICH_TIME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=LOCAL(\_|\ )TIME|local(\_|\ )time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LOCAL_TIME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SOLAR(\_|\ )TIME|solar(\_|\ )time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SOLAR_TIME;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=MEDIAN(\_|\ )SOLAR(\_|\ )TIME|median(\_|\ )solar(\_|\ )time {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return MEDIAN_SOLAR_TIME;
 
 @=}@>
 
@@ -1563,6 +1909,20 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=SONG(\_|\ )VECTOR|song(\_|\ )vector {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SONG_VECTOR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=SONG|song {@>
 
    if (DEBUG)
@@ -1630,7 +1990,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -1673,7 +2032,201 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=TAXONOMY|taxonomy {@>
 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return TAXONOMY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=KINGDOMS|kingdoms {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return KINGDOMS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=KINGDOM|kingdom {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return KINGDOM;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PHYLUM|phylum {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PHYLUM;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=PHYLA|phyla {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return PHYLA;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CLASSES|classes {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CLASSES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=CLASS|class {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return CLASS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ORDERS|orders {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ORDERS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ORDER|order {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ORDER;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=FAMILIES|families {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return FAMILIES;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=FAMILY|family {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return FAMILY;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GENERA|genera {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GENERA;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=GENUS|genus {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return GENUS;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SPECIES|species {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SPECIES;
+
+@=}@>
 
 @q *** (3) INTEGER @>
 
@@ -1717,7 +2270,6 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-
 @q *** (3) ditto.  @>
 @ ditto (double-quote character as string).
 
@@ -1736,7 +2288,6 @@ to {\bf yylex} can be set here.
 
    }  
 
-
    return STRING;
 
 @=}@>
@@ -1747,14 +2298,11 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=(%|#).*$ {@>
 
-
    if (DEBUG)
    {
       cerr << "In `yylex':  Comment: " << yytext << endl;
      
    }  /* |if (DEBUG)|  */
-
-
 
    /* Ignore  */
 
@@ -1766,16 +2314,13 @@ to {\bf yylex} can be set here.
 @<Rules@>=
 @=[[:space:]\x0d]+ {@>
 
-
    if (DEBUG)
    {
        cerr << "In `yylex':  Whitespace." << endl;
 
    }  /* |if (DEBUG)|  */
 
-
 @=}@>
-
 
 @q *** (3) Undelimited string:  "...".  @>
 @ Undelimited string.
@@ -1794,7 +2339,6 @@ to {\bf yylex} can be set here.
             << endl;
 
    }  
-
 
    return STRING;
 
@@ -1824,14 +2368,11 @@ to {\bf yylex} can be set here.
             << endl;
    }  
 
-
    strcpy(yylval->string_value, temp_str.c_str());
   
    return STRING;
 
 @=}@>
-
-
 
 @q ** (2) Additional functions.  @>
 

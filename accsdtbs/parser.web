@@ -148,6 +148,7 @@ yyerror(void* v, char const* s);
 %token<int_value> INPUT@;@/
 %token<int_value> OUTPUT@;@/
 %token<int_value> OUT@;@/
+%token<int_value> IN@;@/
 %token<int_value> APPEND@;@/
 %token<int_value> FILE_YY@;@/
 %token<int_value> OPEN@;@/
@@ -165,6 +166,7 @@ yyerror(void* v, char const* s);
 %token<int_value> LESS_THAN;@/
 %token<int_value> GREATER_THAN_OR_EQUAL@;@/
 %token<int_value> LESS_THAN_OR_EQUAL@;@/
+%token<int_value> ORDER_BY@;@/
 %token<int_value> BY@;@/
 %token<int_value> ORDER@;@/
 %token<int_value> ASCENDING@;@/
@@ -212,6 +214,7 @@ yyerror(void* v, char const* s);
 %token<int_value> BAYER_DESIGNATION_GREEK_LETTER_TEX@;@/
 %token<int_value> BAYER_DESIGNATION_EXTENSION@;@/
 %token<int_value> ABBREVIATION@;@/
+%token<int_value> RIGHT_ASCENSION@;@/
 %token<int_value> RIGHT@;@/
 %token<int_value> ASCENSION@;@/
 
@@ -237,6 +240,7 @@ yyerror(void* v, char const* s);
 %token<int_value> DECLINATION_MINUTES@;@/
 %token<float_value> DECLINATION_SECONDS@;@/
 %token<float_value> DECLINATION_DECIMAL_DEGREES@;@/
+%token<int_value> STAR_CONSTANT_NAME@;@/
 %token<int_value> CONSTANT@;@/
 %token<int_value> COMPARE@;@/
 %token<int_value> LOWEST@;@/
@@ -248,6 +252,7 @@ yyerror(void* v, char const* s);
 %token<int_value> STARS@;@/
 %token<int_value> STAR_VECTOR@;@/
 %token<int_value> CONSTELLATION@;@/
+%token<int_value> CONSTELLATION_VECTOR@;@/
 %token<int_value> CONSTELLATION_FULL_NAME@;@/
 %token<int_value> CONSTELLATION_ABBREVIATION@;@/
 %token<int_value> CONSTELLATION_NAME_GENITIVE@;@/
@@ -255,6 +260,13 @@ yyerror(void* v, char const* s);
 %token<int_value> CONSTELLATIONS@;@/
 %token<int_value> PLANET@;@/
 %token<int_value> PLANETS@;@/
+%token<int_value> PLANET_VECTOR@;@/
+%token<int_value> SIDEREAL_TIME@;@/
+%token<int_value> UNIVERSAL_TIME@;@/
+%token<int_value> GREENWICH_TIME@;@/
+%token<int_value> LOCAL_TIME@;@/
+%token<int_value> SOLAR_TIME@;@/
+%token<int_value> MEDIAN_SOLAR_TIME@;@/
 %token<int_value> TIME@;@/
 %token<int_value> SIDEREAL@;@/
 %token<int_value> UNIVERSAL@;@/
@@ -277,6 +289,21 @@ yyerror(void* v, char const* s);
 %token<int_value> COUNT@;@/
 %token<int_value> WRITE@;@/
 
+%token<int_value> TAXONOMY@;@/
+%token<int_value> KINGDOM@;@/
+%token<int_value> KINGDOMS@;@/
+%token<int_value> PHYLUM@;@/
+%token<int_value> PHYLA@;@/
+%token<int_value> CLASS@;@/
+%token<int_value> CLASSES@;@/
+@q ORDER already declared.  @>
+%token<int_value> ORDERS@;@/
+%token<int_value> FAMILY@;@/
+%token<int_value> FAMILIES@;@/
+%token<int_value> GENUS@;@/
+%token<int_value> GENERA@;@/
+%token<int_value> SPECIES@;@/
+
 @q ** (2) Rules.  @>
 @ Rules.
 
@@ -298,7 +325,6 @@ yyerror(void* v, char const* s);
              << endl;
 
     }  /* |if (DEBUG)|  */  
-
 
     scanner_node->end_flag = true;
 
@@ -433,7 +459,6 @@ yyerror(void* v, char const* s);
         cerr << "*** Parser:  Rule `statement:  QUERY table_name modifier_list'." 
              << endl;
 
-
         cerr << "`table_name' == ";
 
         if (@=$2@> == STARS) 
@@ -489,7 +514,6 @@ getchar();
         {
 @q ****** (6) @>
 
-
 @q ****** (6) @>
 
         }
@@ -522,7 +546,6 @@ getchar();
 
         }  /* |else if (@=$2@> == SONGS)|  */
 
-
 @q ***** (5) @>
 
 };
@@ -547,7 +570,6 @@ getchar();
 
 };
 
-
 @q *** (3) @>
 @
 @<Rules@>=
@@ -569,6 +591,148 @@ getchar();
 };
 
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: KINGDOMS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  KINGDOMS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = KINGDOMS;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: PHYLA@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  PHYLA'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = PHYLA;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: CLASSES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  CLASSES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = CLASSES;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: ORDERS@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  ORDERS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = ORDERS;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: FAMILIES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  FAMILIES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = FAMILIES;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: GENERA@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  GENERA'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = GENERA;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_name: SPECIES@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_name:  SPECIES'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = SPECIES;
+
+};
+
+@q *** (3) @>
+
 @ modifier_list: \.{EMPTY}.
 
 @<Rules@>=
@@ -579,26 +743,6 @@ getchar();
     if (DEBUG)
     {
         cerr << "*** Parser:  Rule `modifier_list: EMPTY'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    @=$$@> = 0;
-
-};
-
-@ modifier_list: modifier.
-
-@<Rules@>=
-@=modifier_list: modifier@>
-{
-@q ***** (5) @>
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `modifier_list: modifier'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
@@ -683,7 +827,6 @@ getchar();
 
 };
 
-
 @q **** (4) @>
 
 @ modifier: LOWEST INTEGER.
@@ -740,10 +883,10 @@ getchar();
 
 @q **** (4) @>
 
-@ modifier: ORDER BY table_field_list.
+@ modifier: ORDER_BY table_field_list.
 
 @<Rules@>=
-@=modifier: ORDER BY table_field_list@>
+@=modifier: ORDER_BY table_field_list@>
 {
 @q ***** (5) @>
 
@@ -751,7 +894,7 @@ getchar();
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `modifier: ORDER BY TABLE_FIELD'." 
+        cerr << "*** Parser:  Rule `modifier: ORDER_BY TABLE_FIELD'." 
              << endl
              << "`INTEGER' == " << @=$2@> << endl;
 
@@ -762,7 +905,6 @@ getchar();
     @=$$@> = 0;
 
 };
-
 
 @q *** (3) @>
 
@@ -982,7 +1124,6 @@ getchar();
 
     }  /* |if (DEBUG)|  */  
 
-
     @=$$@> = SONG_VECTOR;
 
 @q ***** (5) @>
@@ -1026,7 +1167,6 @@ getchar();
 @q ***** (5) @>
    
 };
-
 
 @q *** (3) @>
 @ 
@@ -1577,13 +1717,6 @@ getchar();
 @q ***** (5) @>
    
 };
-
-
-
-
-
-
-
 
 @
 @<Garbage@>=
