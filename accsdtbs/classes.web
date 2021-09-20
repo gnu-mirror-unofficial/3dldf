@@ -156,6 +156,8 @@ Where_Type
    float arg_float;
    string arg_str;
    bool arg_bool;
+   bool left_paren_flag;
+   bool right_paren_flag;
 
    void show(string s = "Where_Type:");
 
@@ -169,6 +171,9 @@ Where_Type
        arg_float        = 0.0;
        arg_str          = "";
        arg_bool         = false;
+       left_paren_flag  = false;
+       right_paren_flag = false;
+
    }
 
    Where_Type(const Where_Type &w) 
@@ -181,6 +186,8 @@ Where_Type
        arg_float        = w.arg_float;
        arg_str          = w.arg_str;
        arg_bool         = w.arg_bool;
+       left_paren_flag  = w.left_paren_flag;
+       right_paren_flag = w.right_paren_flag;
    }
 };
 
@@ -191,7 +198,14 @@ void
 Where_Type::show(string s)
 {
    cerr << s << endl 
-        << "logical_operator:  " << operator_map[logical_operator] << " (" << logical_operator << ")" << endl
+        << "logical_operator:  ";
+
+   if (operator_map[logical_operator].empty())
+      cerr << "(Empty string)";
+   else
+      cerr << operator_map[logical_operator];
+
+   cerr << " (" << logical_operator << ")" << endl
         << "field:             " << table_field_map[field] << " (" << field << ")" << endl  
         << "operator_wt:       " << operator_map[operator_wt] << " (" << operator_wt << ")" << endl;
 
@@ -215,6 +229,9 @@ Where_Type::show(string s)
       cerr << "arg_type:          Where_Type::BOOL_TYPE" << endl
            << "arg_bool:          " << arg_bool << endl;
    }
+   cerr << "left_paren_flag:   " << left_paren_flag << endl 
+        << "right_paren_flag:  " << right_paren_flag << endl
+        << endl; 
 
    return;
 

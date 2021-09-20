@@ -257,7 +257,7 @@ yyerror(void* v, char const* s);
 %token<int_value> LOWEST@;@/
 %token<int_value> HIGHEST@;@/
 %token<int_value> INTEGER@;@/
-%token<bool_value> BOOLEAN@;@/
+%token<bool_value> BOOL@;@/
 %token<float_value> FLOAT@;@/
 %token<string_value> STRING@;@/
 %token<int_value> STAR@;@/
@@ -454,7 +454,9 @@ yyerror(void* v, char const* s);
 %type<int_value> where_list@;@/
 %type<int_value> where_item@;@/
 %type<string_value> combined_string@;@/
-
+%type<int_value> comparison_operator@;@/
+%type<int_value> left_parenthesis_optional@;@/
+%type<int_value> right_parenthesis_optional@;@/
 
 @q *** (3) Statement:  QUERY table_name modifier_list.  @>
 
@@ -509,6 +511,9 @@ yyerror(void* v, char const* s);
         {
            iter->show();
         }
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 
     }  /* |if (DEBUG)|  */  
@@ -567,36 +572,18 @@ yyerror(void* v, char const* s);
 @<Rules@>=
 
            if (scanner_node->where_vector.size() > 0) 
-              sql_strm << " where";
+              sql_strm << " where ";
   
-           bool left_paren_prev  = false;
-
            for (vector<Where_Type>::iterator iter = scanner_node->where_vector.begin();
                 iter != scanner_node->where_vector.end();
                 ++iter)
            {
 
-               if (iter->operator_wt == Where_Type::LEFT_PARENTHESIS_TYPE)
-               {
-                  sql_strm << "(";
-                  left_paren_prev = true;
-                  continue;
-               }
-               else if (iter->operator_wt == Where_Type::RIGHT_PARENTHESIS_TYPE)
-               {
-                  sql_strm << ")";
-                  continue;
-               }
-
-               if (left_paren_prev)
-               {
-                  left_paren_prev = false; 
-               }
-               else 
-                  sql_strm << " ";
-
                if (iter->logical_operator > Where_Type::NULL_TYPE)
-                   sql_strm << operator_map[iter->logical_operator] << " ";
+                   sql_strm << " " << operator_map[iter->logical_operator] << " ";
+
+               if (iter->left_paren_flag)
+                   sql_strm << "(";
 
                sql_strm << table_field_map[iter->field] << " " << operator_map[iter->operator_wt];
 
@@ -608,7 +595,11 @@ yyerror(void* v, char const* s);
                   sql_strm << " " << iter->arg_bool;
                else if (iter->arg_type == Where_Type::STRING_TYPE)
                   sql_strm << " \"" << iter->arg_str << "\"";
-           }
+
+               if (iter->right_paren_flag)
+                   sql_strm << ")";
+
+           }  /* |for|  */
 
 @q ****** (6) @>
 @
@@ -1307,25 +1298,62 @@ END_QUERY_RULE:
 
 @q **** (4) @>
 
+@q *** (3) @>
+
 @q **** (4) @>
+@
+@<Rules@>=
+@=left_parenthesis_optional: /* Empty  */@>
+{
+   @=$$@> = 0;
 
+};
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=left_parenthesis_optional: LEFT_PARENTHESIS@>
+{
+    
+    @=$$@> = Where_Type::LEFT_PARENTHESIS_TYPE;
 
-@ where_item: logical_operator table_field EQUAL INTEGER.
+};
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=right_parenthesis_optional: /* Empty  */@>
+{
+    
+   @=$$@> = 0;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=right_parenthesis_optional: RIGHT_PARENTHESIS@>
+{
+    
+    @=$$@> = Where_Type::RIGHT_PARENTHESIS_TYPE;
+
+};
+
+@q **** (4) @>
+@ where_item: logical_operator left_parenthesis_optional table_field comparison_operator INTEGER right_parenthesis_optional.
 
 @<Rules@>=
-@=where_item: logical_operator table_field EQUAL INTEGER@>
+@=where_item: logical_operator left_parenthesis_optional table_field comparison_operator INTEGER right_parenthesis_optional@>
 {
-
-/* !!START HERE:  LDF 2021.09.20.  Combine the rules that are similar to this one and add optional parentheses.  */ 
-
 @q ***** (5) @>
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field EQUAL INTEGER'." 
+        cerr << "*** Parser:  Rule `where_item: logical_operator left_parenthesis_optional"
+             << endl 
+             << "table_field comparison_operator INTEGER right_parenthesis_optional'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
@@ -1335,79 +1363,13 @@ END_QUERY_RULE:
     Where_Type w;
 
     w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::EQUAL_TYPE;
+    w.field            = @=$3@>;
+    w.operator_wt      = @=$4@>;
     w.arg_type         = Where_Type::INT_TYPE;
-    w.arg_int          = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field NOT_EQUAL INTEGER.
-
-@<Rules@>=
-@=where_item: logical_operator table_field NOT_EQUAL INTEGER@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field NOT_EQUAL INTEGER'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::NOT_EQUAL_TYPE;
-    w.arg_type         = Where_Type::INT_TYPE;
-    w.arg_int          = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field GREATER_THAN INTEGER.
-
-@<Rules@>=
-@=where_item: logical_operator table_field GREATER_THAN INTEGER@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field GREATER_THAN INTEGER'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::GREATER_THAN_TYPE;
-    w.arg_type         = Where_Type::INT_TYPE;
-    w.arg_int          = @=$4@>;
-   
+    w.arg_int          = @=$5@>;
+    w.left_paren_flag  = (@=$2@> == Where_Type::LEFT_PARENTHESIS_TYPE)  ? true : false;
+    w.right_paren_flag = (@=$6@> == Where_Type::RIGHT_PARENTHESIS_TYPE) ? true : false;
+       
     scanner_node->where_vector.push_back(w);
 
     @=$$@> = 0;
@@ -1417,10 +1379,10 @@ END_QUERY_RULE:
 
 @q **** (4) @>
 
-@ where_item: logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER.
+@ where_item: logical_operator left_parenthesis_optional table_field comparison_operator FLOAT right_parenthesis_optional.
 
 @<Rules@>=
-@=where_item: logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER@>
+@=where_item: logical_operator left_parenthesis_optional table_field comparison_operator FLOAT right_parenthesis_optional@>
 {
 @q ***** (5) @>
 
@@ -1428,7 +1390,9 @@ END_QUERY_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER'." 
+        cerr << "*** Parser:  Rule `where_item: logical_operator left_parenthesis_optional"
+             << endl 
+             << "table_field comparison_operator FLOAT right_parenthesis_optional right_parenthesis_optional'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
@@ -1438,112 +1402,12 @@ END_QUERY_RULE:
     Where_Type w;
 
     w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::GREATER_THAN_OR_EQUAL_TYPE;
-    w.arg_type         = Where_Type::INT_TYPE;
-    w.arg_int          = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field LESS_THAN INTEGER.
-
-@<Rules@>=
-@=where_item: logical_operator table_field LESS_THAN INTEGER@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field LESS_THAN INTEGER'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::LESS_THAN_TYPE;
-    w.arg_type         = Where_Type::INT_TYPE;
-    w.arg_int          = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field LESS_THAN_OR_EQUAL INTEGER.
-
-@<Rules@>=
-@=where_item: logical_operator table_field LESS_THAN_OR_EQUAL INTEGER@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field LESS_THAN_OR_EQUAL INTEGER'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::LESS_THAN_OR_EQUAL_TYPE;
-    w.arg_type         = Where_Type::INT_TYPE;
-    w.arg_int          = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field EQUAL FLOAT.
-
-@<Rules@>=
-@=where_item: logical_operator table_field EQUAL FLOAT@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field EQUAL FLOAT'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::EQUAL_TYPE;
+    w.field            = @=$3@>;
+    w.operator_wt      = @=$4@>;
     w.arg_type         = Where_Type::FLOAT_TYPE;
-    w.arg_float        = @=$4@>;
+    w.arg_float        = @=$5@>;
+    w.left_paren_flag  = (@=$2@> == Where_Type::LEFT_PARENTHESIS_TYPE)  ? true : false;
+    w.right_paren_flag = (@=$6@> == Where_Type::RIGHT_PARENTHESIS_TYPE) ? true : false;
    
     scanner_node->where_vector.push_back(w);
 
@@ -1553,10 +1417,10 @@ END_QUERY_RULE:
 
 @q **** (4) @>
 
-@ where_item: logical_operator table_field NOT_EQUAL FLOAT.
+@ where_item: logical_operator left_parenthesis_optional table_field comparison_operator STRING right_parenthesis_optional.
 
 @<Rules@>=
-@=where_item: logical_operator table_field NOT_EQUAL FLOAT@>
+@=where_item: logical_operator left_parenthesis_optional table_field comparison_operator STRING right_parenthesis_optional@>
 {
 @q ***** (5) @>
 
@@ -1564,7 +1428,9 @@ END_QUERY_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field NOT_EQUAL FLOAT'." 
+        cerr << "*** Parser:  Rule `where_item: logical_operator left_parenthesis_optional"
+             << endl 
+             << "table_field comparison_operator STRING right_parenthesis_optional'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
@@ -1574,182 +1440,12 @@ END_QUERY_RULE:
     Where_Type w;
 
     w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::NOT_EQUAL_TYPE;
-    w.arg_type         = Where_Type::FLOAT_TYPE;
-    w.arg_float        = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field GREATER_THAN FLOAT.
-
-@<Rules@>=
-@=where_item: logical_operator table_field GREATER_THAN FLOAT@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field GREATER_THAN FLOAT'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::GREATER_THAN_TYPE;
-    w.arg_type         = Where_Type::FLOAT_TYPE;
-    w.arg_float        = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT.
-
-@<Rules@>=
-@=where_item: logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::GREATER_THAN_OR_EQUAL_TYPE;
-    w.arg_type         = Where_Type::FLOAT_TYPE;
-    w.arg_float        = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field LESS_THAN FLOAT.
-
-@<Rules@>=
-@=where_item: logical_operator table_field LESS_THAN FLOAT@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field LESS_THAN FLOAT'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::LESS_THAN_TYPE;
-    w.arg_type         = Where_Type::FLOAT_TYPE;
-    w.arg_float        = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field LESS_THAN_OR_EQUAL FLOAT.
-
-@<Rules@>=
-@=where_item: logical_operator table_field LESS_THAN_OR_EQUAL FLOAT@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field LESS_THAN_OR_EQUAL FLOAT'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::LESS_THAN_OR_EQUAL_TYPE;
-    w.arg_type         = Where_Type::FLOAT_TYPE;
-    w.arg_float        = @=$4@>;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-
-@q **** (4) @>
-
-@ where_item: logical_operator table_field EQUAL STRING.
-
-@<Rules@>=
-@=where_item: logical_operator table_field EQUAL STRING@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field EQUAL STRING'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::EQUAL_TYPE;
+    w.field            = @=$3@>;
+    w.operator_wt      = @=$4@>;
     w.arg_type         = Where_Type::STRING_TYPE;
-    w.arg_str          = @=$4@>;
+    w.arg_str          = @=$5@>;
+    w.left_paren_flag  = (@=$2@> == Where_Type::LEFT_PARENTHESIS_TYPE)  ? true : false;
+    w.right_paren_flag = (@=$6@> == Where_Type::RIGHT_PARENTHESIS_TYPE) ? true : false;
    
     scanner_node->where_vector.push_back(w);
 
@@ -1759,10 +1455,10 @@ END_QUERY_RULE:
 
 @q **** (4) @>
 
-@ where_item: logical_operator table_field NOT_EQUAL STRING.
+@ where_item: logical_operator left_parenthesis_optional table_field comparison_operator BOOL right_parenthesis_optional.
 
 @<Rules@>=
-@=where_item: logical_operator table_field NOT_EQUAL STRING@>
+@=where_item: logical_operator left_parenthesis_optional table_field comparison_operator BOOL right_parenthesis_optional@>
 {
 @q ***** (5) @>
 
@@ -1770,7 +1466,9 @@ END_QUERY_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `where_item: logical_operator table_field NOT_EQUAL STRING'." 
+        cerr << "*** Parser:  Rule `where_item: logical_operator left_parenthesis_optional"
+             << endl 
+             << "table_field comparison_operator BOOL right_parenthesis_optional'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
@@ -1780,16 +1478,151 @@ END_QUERY_RULE:
     Where_Type w;
 
     w.logical_operator = @=$1@>; 
-    w.field            = @=$2@>;
-    w.operator_wt      = Where_Type::NOT_EQUAL_TYPE;
-    w.arg_type         = Where_Type::STRING_TYPE;
-    w.arg_str          = @=$4@>;
-   
+    w.field            = @=$3@>;
+    w.operator_wt      = @=$4@>;
+    w.arg_type         = Where_Type::BOOL_TYPE;
+    w.arg_bool         = @=$5@>;
+    w.left_paren_flag  = (@=$2@> == Where_Type::LEFT_PARENTHESIS_TYPE)  ? true : false;
+    w.right_paren_flag = (@=$6@> == Where_Type::RIGHT_PARENTHESIS_TYPE) ? true : false;   
+
     scanner_node->where_vector.push_back(w);
 
     @=$$@> = 0;
 
 };
+
+@q **** (4) @>
+
+@q *** (3) @>
+@ \<comparison operator>.
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=comparison_operator: EQUAL@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `logical_operator: EQUAL'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = Where_Type::EQUAL_TYPE;
+
+};
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=comparison_operator: NOT_EQUAL@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `logical_operator: NOT_EQUAL'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = Where_Type::NOT_EQUAL_TYPE;
+
+};
+
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=comparison_operator: GREATER_THAN@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `logical_operator: GREATER_THAN'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = Where_Type::GREATER_THAN_TYPE;
+
+};
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=comparison_operator: GREATER_THAN_OR_EQUAL@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `logical_operator: GREATER_THAN_OR_EQUAL'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = Where_Type::GREATER_THAN_OR_EQUAL_TYPE;
+
+};
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=comparison_operator: LESS_THAN@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `logical_operator: LESS_THAN'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = Where_Type::LESS_THAN_TYPE;
+
+};
+
+@q **** (4) @>
+@
+@<Rules@>=
+@=comparison_operator: LESS_THAN_OR_EQUAL@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `logical_operator: LESS_THAN_OR_EQUAL'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    @=$$@> = Where_Type::LESS_THAN_OR_EQUAL_TYPE;
+
+};
+
 
 @q *** (3) logical_operator.  @>
 @ |logical_operator|.  

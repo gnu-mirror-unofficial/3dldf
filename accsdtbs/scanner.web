@@ -445,7 +445,7 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=\!\=|<> {@>
+@=\!\=|\<\> {@>
 
    if (DEBUG)
    {
@@ -792,6 +792,36 @@ to {\bf yylex} can be set here.
    }
 
    return RANK;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=APPARENT(\_|\ )MAGNITUDE|apparent(\_|\ )magnitude {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return APPARENT_MAGNITUDE;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ABSOLUTE(\_|\ )MAGNITUDE|absolute(\_|\ )magnitude {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return ABSOLUTE_MAGNITUDE;
 
 @=}@>
 
@@ -2412,7 +2442,7 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
-@q *** (3) BOOLEAN @>
+@q *** (3) BOOL @>
 @ 
 @<Rules@>=
 @=TRUE|true {@>
@@ -2421,13 +2451,13 @@ to {\bf yylex} can be set here.
  
    if (DEBUG)
    {
-       cerr << "In `yylex':  BOOLEAN == true"
+       cerr << "In `yylex':  BOOL == true"
             << endl
-            << "Returning `BOOLEAN'."
+            << "Returning `BOOL'."
             << endl;
    }  
 
-   return BOOLEAN;
+   return BOOL;
 
 @=}@>
 
@@ -2439,13 +2469,13 @@ to {\bf yylex} can be set here.
  
    if (DEBUG)
    {
-       cerr << "In `yylex':  BOOLEAN == false"
+       cerr << "In `yylex':  BOOL == false"
             << endl
-            << "Returning `BOOLEAN'."
+            << "Returning `BOOL'."
             << endl;
    }  
 
-   return BOOLEAN;
+   return BOOL;
 
 @=}@>
 
