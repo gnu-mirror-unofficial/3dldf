@@ -2421,6 +2421,20 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=PAUSE|pause {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }  
+
+   return PAUSE;
+
+@=}@>
+
 @q *** (3) INTEGER @>
 
 @ \.{INTEGER}.  

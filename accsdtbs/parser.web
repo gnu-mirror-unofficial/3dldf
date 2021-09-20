@@ -256,6 +256,7 @@ yyerror(void* v, char const* s);
 %token<int_value> COMPARE@;@/
 %token<int_value> LOWEST@;@/
 %token<int_value> HIGHEST@;@/
+%token<int_value> PAUSE@;@/
 %token<int_value> INTEGER@;@/
 %token<bool_value> BOOL@;@/
 %token<float_value> FLOAT@;@/
@@ -512,10 +513,6 @@ yyerror(void* v, char const* s);
            iter->show();
         }
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
     }  /* |if (DEBUG)|  */  
 
 @q ***** (5) @>
@@ -631,12 +628,9 @@ getchar();
            if (DEBUG)
            {
                cerr << "`sql_strm.str()' == " << sql_strm.str() << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
            }
 
 @q ****** (6) @>
-
 
            status = submit_mysql_query(sql_strm.str());
 
@@ -2734,6 +2728,27 @@ END_QUERY_RULE:
 
 };
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=statement: PAUSE@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  PAUSE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    cerr << "Type <RETURN> to continue:";
+
+    getchar();
+
+};
 
 @
 @<Garbage@>=
