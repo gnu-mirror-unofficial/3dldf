@@ -402,6 +402,21 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=SHOW|show {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+
+   return SHOW;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=ALL|all {@>
 
    if (DEBUG)

@@ -263,6 +263,7 @@ Scanner_Type
     string order_by_str;
 
     int ascending_descending_flag;
+    bool append_flag;
 
     vector<int> table_field_vector;
     vector<Star> star_vector;
@@ -304,6 +305,7 @@ Scanner_Type::Scanner_Type(void)
   lowest   = 0;
   highest  = 0;
   ascending_descending_flag = 0;
+  append_flag = false;
 
   return;
 }
@@ -329,6 +331,7 @@ Scanner_Type::Scanner_Type(int iid) : id(iid)
   lowest   = 0;
   highest  = 0;
   ascending_descending_flag  = 0;
+  append_flag = false;
 
   return;
 }
@@ -359,6 +362,7 @@ int Scanner_Type::clear(void)
    where_str    = "";
    order_by_str = "";
    ascending_descending_flag = 0;
+   append_flag = false;
 
    table_field_vector.clear();
    star_vector.clear();
