@@ -569,6 +569,8 @@ yyerror(void* v, char const* s);
            if (scanner_node->where_vector.size() > 0) 
               sql_strm << " where";
   
+           bool left_paren_prev  = false;
+
            for (vector<Where_Type>::iterator iter = scanner_node->where_vector.begin();
                 iter != scanner_node->where_vector.end();
                 ++iter)
@@ -576,19 +578,27 @@ yyerror(void* v, char const* s);
 
                if (iter->operator_wt == Where_Type::LEFT_PARENTHESIS_TYPE)
                {
-                  sql_strm << " (";
+                  sql_strm << "(";
+                  left_paren_prev = true;
                   continue;
                }
                else if (iter->operator_wt == Where_Type::RIGHT_PARENTHESIS_TYPE)
                {
-                  sql_strm << ") ";
+                  sql_strm << ")";
                   continue;
                }
 
-               if (iter->logical_operator > Where_Type::NULL_TYPE)
-                   sql_strm << " " << operator_map[iter->logical_operator];
+               if (left_paren_prev)
+               {
+                  left_paren_prev = false; 
+               }
+               else 
+                  sql_strm << " ";
 
-               sql_strm << " " << table_field_map[iter->field] << " " << operator_map[iter->operator_wt];
+               if (iter->logical_operator > Where_Type::NULL_TYPE)
+                   sql_strm << operator_map[iter->logical_operator] << " ";
+
+               sql_strm << table_field_map[iter->field] << " " << operator_map[iter->operator_wt];
 
                if (iter->arg_type == Where_Type::INT_TYPE)
                   sql_strm << " " << iter->arg_int;
@@ -745,8 +755,6 @@ getchar();
            if (DEBUG) 
            {
                cerr << "`scanner_node->star_vector.size()'  == " << scanner_node->star_vector.size() << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
            }
 
 @q ****** (6) @>
@@ -1299,79 +1307,18 @@ END_QUERY_RULE:
 
 @q **** (4) @>
 
-@ where_item: LEFT_PARENTHESIS.
-
-@<Rules@>=
-@=where_item: LEFT_PARENTHESIS@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: LEFT_PARENTHESIS'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = 0;
-    w.field            = 0;
-    w.operator_wt      = Where_Type::LEFT_PARENTHESIS_TYPE;
-    w.arg_type         = 0;
-    w.arg_int          = 0;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
 @q **** (4) @>
 
-@ where_item: RIGHT_PARENTHESIS.
 
-@<Rules@>=
-@=where_item: RIGHT_PARENTHESIS@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_item: RIGHT_PARENTHESIS'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-
-    Where_Type w;
-
-    w.logical_operator = 0;
-    w.field            = 0;
-    w.operator_wt      = Where_Type::RIGHT_PARENTHESIS_TYPE;
-    w.arg_type         = 0;
-    w.arg_int          = 0;
-   
-    scanner_node->where_vector.push_back(w);
-
-    @=$$@> = 0;
-
-};
-
-@q **** (4) @>
 
 @ where_item: logical_operator table_field EQUAL INTEGER.
 
 @<Rules@>=
 @=where_item: logical_operator table_field EQUAL INTEGER@>
 {
+
+/* !!START HERE:  LDF 2021.09.20.  Combine the rules that are similar to this one and add optional parentheses.  */ 
+
 @q ***** (5) @>
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
