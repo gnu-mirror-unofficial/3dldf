@@ -102,7 +102,6 @@ typedef void* yyscan_t;
 #include "classes.hxx"
 #include "accsgtpt.hxx"
 
-
 @q ** (2) @>
 @
 @<Global variable declarations@>=
@@ -207,6 +206,34 @@ main(int argc, char *argv[])
    operator_map[Where_Type::NOT_AND_TYPE]               = "nand";
    operator_map[Where_Type::NOT_OR_TYPE]                = "nor";
    operator_map[Where_Type::NOT_XOR_TYPE]               = "nxor";     
+
+
+@q *** (3) @>
+@
+@<|main| definition@>=
+
+   compare_function_map[COMMON_NAME]                        = compare_common_name;
+   compare_function_map[FLAMSTEED_DESIGNATION_NUMBER]       = compare_flamsteed_designation_number;
+   compare_function_map[BAYER_DESIGNATION_GREEK_LETTER]     = compare_bayer_designation_greek_letter;
+   compare_function_map[BAYER_DESIGNATION_GREEK_LETTER_TEX] = compare_bayer_designation_greek_letter_tex;
+   compare_function_map[BS_HR_NUMBER]                       = compare_bs_hr_number;
+   compare_function_map[APPROX_RANK_APPARENT_MAGNITUDE]     = compare_approx_rank_apparent_magnitude;
+   compare_function_map[APPARENT_MAGNITUDE]                 = compare_apparent_magnitude ;
+   compare_function_map[ABSOLUTE_MAGNITUDE]                 = compare_absolute_magnitude     ;
+   compare_function_map[CONSTELLATION_ABBREVIATION]         = compare_constellation_abbreviation;
+   compare_function_map[CONSTELLATION_FULL_NAME]            = compare_constellation_full_name;
+   compare_function_map[CONSTELLATION_NAME_GENITIVE]        = compare_constellation_name_genitive;
+   compare_function_map[CONSTELLATION_NUMBER]               = compare_constellation_number;
+   compare_function_map[RIGHT_ASCENSION_HOURS]              = compare_right_ascension_hours;
+   compare_function_map[RIGHT_ASCENSION_MINUTES]            = compare_right_ascension_minutes;
+   compare_function_map[RIGHT_ASCENSION_SECONDS]            = compare_right_ascension_seconds;
+   compare_function_map[RIGHT_ASCENSION_DECIMAL_HOURS]      = compare_right_ascension_decimal_hours;
+   compare_function_map[RIGHT_ASCENSION_DECIMAL_DEGREES]    = compare_right_ascension_decimal_degrees;
+   compare_function_map[DECLINATION_DEGREES]                = compare_declination_degrees;
+   compare_function_map[DECLINATION_MINUTES]                = compare_declination_minutes;
+   compare_function_map[DECLINATION_SECONDS]                = compare_declination_seconds;
+   compare_function_map[DECLINATION_DECIMAL_DEGREES]        = compare_declination_decimal_degrees;
+   compare_function_map[IS_BINARY]                          = compare_is_binary;
 
 
 @q *** (3) @>

@@ -1331,32 +1331,6 @@ END_QUERY_RULE:
 
 };
 
-
-@q **** (4) @>
-
-@ where_list: where_list where_item.
-
-@<Rules@>=
-@=where_list: where_list where_item@>
-{
-@q ***** (5) @>
-
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `where_list: where_list where_item'." 
-             << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-@q ***** (5) @>
-   
-    @=$$@> = 0;
-
-};
-
-
 @q **** (4) @>
 
 @ where_list: where_list where_item.
@@ -1921,19 +1895,19 @@ END_QUERY_RULE:
 @q *** (3) @>
 @
 @<Token and type declarations@>=
-%type<int_value> item_vector@;@/
+%type<int_value> item_name@;@/
 %type<pointer_value> table_field_list@;@/
 %type<int_value> table_field@;@/
 
 @q *** (3) Statement  @>
 
-@ Statement:  SORT item_vector BY table_field_list.
+@ Statement:  SORT item_name BY table_field_list.
 
-@q **** (4) statement:  SORT item_vector BY table_field_list  @>
+@q **** (4) statement:  SORT item_name BY table_field_list  @>
 
 @ 
 @<Rules@>=
-@=statement: SORT item_vector BY table_field_list@>
+@=statement: SORT item_name BY table_field_list@>
 {
 @q ***** (5) @>
 
@@ -1941,12 +1915,12 @@ END_QUERY_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `statement:  SORT item_vector BY table_field_list'." 
+        cerr << "*** Parser:  Rule `statement:  SORT item_name BY table_field_list'." 
              << endl;
 
-        if (@=$2@> == STAR_VECTOR)
+        if (@=$2@> == STARS)
            cerr << "Will sort `star_vector'." << endl;
-        else if (@=$2@> == SONG_VECTOR)
+        else if (@=$2@> == SONGS)
            cerr << "Will sort `song_vector'." << endl;
 
         cerr << "`scanner_node->table_field_vector.size()' == " 
@@ -1958,9 +1932,9 @@ END_QUERY_RULE:
              iter != scanner_node->table_field_vector.end();
              ++iter)
         {
-            cerr << "`table_field' " << i++ << ":  " << *iter << endl;
+            cerr << "`table_field' " << i++ << ":  " << table_field_map[*iter] << " (" << *iter << ")"
+                 << endl;
         }
-         
 
     }  /* |if (DEBUG)|  */  
 
@@ -1968,35 +1942,85 @@ END_QUERY_RULE:
 @
 @<Rules@>=
 
-    if (@=$2@> == STAR_VECTOR)
+    if (scanner_node->table_field_vector.empty())
     {
-        if (scanner_node->star_vector.empty())
-        {
-            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY table_field_list':" 
-                 << endl 
-                 << "`scanner_node->star_vector' is empty.  Nothing to sort." << endl 
-                 << "Continuing." << endl;
-        }  
+         cerr << "WARNING:  In parser, rule `statement:  SORT item_name BY table_field_list':" 
+              << endl 
+              << "`scanner_node->table_field_vector' is empty.  No specifications for sorting." << endl 
+              << "Continuing." << endl;
 
-    }  /* |if (@=$2@> == STAR_VECTOR)| */
+         goto END_SORT_RULE;  
+    }  
 
 @q ***** (5) @>
 @
 @<Rules@>=
 
-    else if (@=$2@> == SONG_VECTOR)
+    if (@=$2@> == STARS)
+    {
+@q ****** (6) @>
+
+        if (scanner_node->star_vector.empty())
+        {
+            cerr << "WARNING:  In parser, rule `statement:  SORT item_name BY table_field_list':" 
+                 << endl 
+                 << "`scanner_node->star_vector' is empty.  Nothing to sort." << endl 
+                 << "Continuing." << endl;
+
+            goto END_SORT_RULE;  
+        }  
+
+@q ****** (6) @>
+
+        else
+        {
+
+             cerr << "`scanner_node->table_field_vector' in reverse:" << endl;
+
+             for (vector<int>::reverse_iterator iter = scanner_node->table_field_vector.rbegin();
+                  iter != scanner_node->table_field_vector.rend();
+                  ++iter)
+             {
+                 if (DEBUG) 
+                    cerr << table_field_map[*iter] << " (" << *iter << ")" << endl;
+
+                 stable_sort(scanner_node->star_vector.begin(), scanner_node->star_vector.end(), compare_function_map[*iter]);
+
+             }
+
+             cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+        }  /* |else|  */
+
+@q ****** (6) @>
+
+    }  /* |if (@=$2@> == STARS)| */
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    else if (@=$2@> == SONGS)
     {
         if (scanner_node->song_vector.empty())
         {
-            cerr << "WARNING:  In parser, rule `statement:  SORT item_vector BY table_field_list':" 
+            cerr << "WARNING:  In parser, rule `statement:  SORT item_name BY table_field_list':" 
                  << endl 
                  << "`scanner_node->song_vector' is empty.  Nothing to sort." << endl 
                  << "Continuing." << endl;
+
+
+            goto END_SORT_RULE;  
         }  
 
-    }  /* |if (@=$2@> == SONG_VECTOR)| */
+    }  /* |if (@=$2@> == SONGS)| */
 
 @q ***** (5) @>
+
+END_SORT_RULE:
+
+;
    
 };
 
@@ -2004,18 +2028,18 @@ END_QUERY_RULE:
 @ 
 @<Rules@>=
 
-@=item_vector: STAR_VECTOR@>
+@=item_name: STARS@>
 {
 @q **** (4) @>
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `item_vector: STAR_VECTOR'." 
+        cerr << "*** Parser:  Rule `item_name: STARS'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
-    @=$$@> = STAR_VECTOR;
+    @=$$@> = STARS;
 
 @q **** (4) @>
    
@@ -2025,13 +2049,13 @@ END_QUERY_RULE:
 @ 
 @<Rules@>=
 
-@=item_vector: SONG_VECTOR@>
+@=item_name: SONGS@>
 {
 @q **** (4) @>
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `item_vector: SONG_VECTOR'." 
+        cerr << "*** Parser:  Rule `item_name: SONG_VECTOR'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
