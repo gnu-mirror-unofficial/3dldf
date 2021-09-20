@@ -455,7 +455,6 @@ yyerror(void* v, char const* s);
 %type<int_value> table_name@;@/
 %type<int_value> where_list@;@/
 %type<int_value> where_item@;@/
-%type<string_value> combined_string@;@/
 %type<int_value> comparison_operator@;@/
 %type<int_value> left_parenthesis_optional@;@/
 %type<int_value> right_parenthesis_optional@;@/
@@ -1892,84 +1891,6 @@ END_QUERY_RULE:
 @q ***** (5) @>
 
     @=$$@> = Where_Type::NOT_XOR_TYPE;
-
-};
-
-
-
-@q *** (3) @>
-
-@q **** (4) combined_string --> STRING  @>
-
-@ \<combined string> $\longrightarrow$ \.{STRING}.
-
-@<Rules@>=
-
-@=combined_string: STRING@>
-{
-@q ***** (5) @>
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `statement:  combined_string:  STRING'."  
-             << endl 
-             << "STRING == " << @=$1@> << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-    memset(@=$$@>, 0,  1024);
-    strcat(@=$$@>, @=$1@>);
-
-@q ***** (5) @>
-
-};
-
-@q **** (4) combined_string --> combined_string STRING  @>
-
-@ \<combined string> $\longrightarrow$ \<combined string> \.{STRING}.
-
-@<Rules@>=
-
-@=combined_string: combined_string STRING@>
-{
-@q ***** (5) @>
-
-    if (DEBUG)
-    {
-        cerr << "*** Parser:  Rule `combined_string: combined_string STRING'." 
-             << endl 
-             << "combined_string == " << @=$1@> << endl
-             << "STRING          == " << @=$2@> << endl;
-
-    }  /* |if (DEBUG)|  */  
-
-    memset(@=$$@>, '\0',  1024);
-
-    if (strlen(@=$1@>) + strlen(@=$2@>) > 1023)
-    {
-       cerr << "ERROR!  In parser, rule `combined_string: combined_string STRING':"
-            << endl 
-            << "Total length of `$1' (`combined_string') and `$2' (`STRING') exceeds limit:"
-            << endl 
-            << strlen(@=$1@>) << " + " << strlen(@=$1@>) << " == " << (strlen(@=$1@>) + strlen(@=$2@>))
-            << endl
-            << "Setting value of rule (`$$' == `combined_string') to the empty string and will try to continue."
-            << endl;
-
-    }
-    else
-    {
-        strcat(@=$$@>, @=$1@>);
-        strcat(@=$$@>, " ");
-        strcat(@=$$@>, @=$2@>);
-    }
-    
-   if (DEBUG)
-   { 
-       cerr << "`$$' == " << @=$$@> << endl;
-   }  
-
-@q ***** (5) @>
 
 };
 
