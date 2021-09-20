@@ -175,7 +175,7 @@ to {\bf yylex} can be set here.
 @ comma.
 
 @<Rules@>=
-@=, {@>
+@=\, {@>
 
    if (DEBUG)
    {
@@ -408,6 +408,22 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=\!\=|<> {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NOT_EQUAL;
+
+@=}@>
+
+
 @q *** (3) @>
 @
 @<Rules@>=
@@ -425,7 +441,7 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=GREATER(\_|\ )THAN|greater(\_|\ )than {@>
+@=\> {@>
 
    if (DEBUG)
    {
@@ -439,7 +455,7 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=GREATER(\_|\ )THAN(\_|\ )OR(\_|\ )EQUAL|greater(\_|\ )than(\_|\ )or(\_|\ )equal {@>
+@=\>\= {@>
 
    if (DEBUG)
    {
@@ -453,7 +469,21 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=LESS(\_|\ )THAN(\_|\ )OR(\_|\ )EQUAL|less(\_|\ )than(\_|\ )or(\_|\ )equal {@>
+@=\< {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return LESS_THAN;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=\<\= {@>
 
    if (DEBUG)
    {
@@ -461,6 +491,91 @@ to {\bf yylex} can be set here.
    }
 
    return LESS_THAN_OR_EQUAL;
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=AND|and {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return AND;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=OR|or {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return OR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=XOR|xor {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return XOR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NOT(\_|\ )AND|not(\_|\ )and {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NOT_AND;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NOT(\_|\ )OR|not(\_|\ )or {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NOT_OR;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=NOT(\_|\ )XOR|not(\_|\ )xor {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return NOT_XOR;
 
 @=}@>
 
@@ -477,6 +592,7 @@ to {\bf yylex} can be set here.
    return WHERE;
 
 @=}@>
+
 
 @q *** (3) @>
 @
@@ -559,6 +675,20 @@ to {\bf yylex} can be set here.
    }
 
    return LIMIT;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=OFFSET|offset {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return OFFSET;
 
 @=}@>
 
@@ -2246,6 +2376,43 @@ to {\bf yylex} can be set here.
    }  
 
    return INTEGER;
+
+@=}@>
+
+@q *** (3) BOOLEAN @>
+@ 
+@<Rules@>=
+@=TRUE|true {@>
+
+   yylval->bool_value = true;
+ 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  BOOLEAN == true"
+            << endl
+            << "Returning `BOOLEAN'."
+            << endl;
+   }  
+
+   return BOOLEAN;
+
+@=}@>
+
+@ 
+@<Rules@>=
+@=FALSE|false {@>
+
+   yylval->bool_value = false;
+ 
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  BOOLEAN == false"
+            << endl
+            << "Returning `BOOLEAN'."
+            << endl;
+   }  
+
+   return BOOLEAN;
 
 @=}@>
 

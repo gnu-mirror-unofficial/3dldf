@@ -122,16 +122,101 @@ IO_Type
 };
 
 @q ** (2) @>
-
 @
 @<class declarations@>=
 struct
 Where_Type
 {
+   static const unsigned int NULL_TYPE                  =  0;
+   static const unsigned int INT_TYPE                   =  1;
+   static const unsigned int FLOAT_TYPE                 =  2;
+   static const unsigned int STRING_TYPE                =  3;         
+   static const unsigned int BOOL_TYPE                  =  4;
+   static const unsigned int EQUAL_TYPE                 =  5; 
+   static const unsigned int NOT_EQUAL_TYPE             =  6;
+   static const unsigned int GREATER_THAN_TYPE          =  7;
+   static const unsigned int GREATER_THAN_OR_EQUAL_TYPE =  8;
+   static const unsigned int LESS_THAN_TYPE             =  9;
+   static const unsigned int LESS_THAN_OR_EQUAL_TYPE    = 10;
+   static const unsigned int AND_TYPE                   = 11;
+   static const unsigned int OR_TYPE                    = 12;
+   static const unsigned int XOR_TYPE                   = 13;
+   static const unsigned int NOT_TYPE                   = 14;
+   static const unsigned int NOT_AND_TYPE               = 15;
+   static const unsigned int NOT_OR_TYPE                = 16;
+   static const unsigned int NOT_XOR_TYPE               = 17;             
 
+   int field;
+   int operator_wt;
+   int logical_operator;
+   int arg_type;
+   int arg_int;
+   float arg_float;
+   string arg_str;
+   bool arg_bool;
 
+   void show(string s = "Where_Type:");
+
+   Where_Type(void) 
+   {
+       field            = 0; 
+       operator_wt      = 0; 
+       logical_operator = 0;
+       arg_type         = 0;
+       arg_int          = 0;
+       arg_float        = 0.0;
+       arg_str          = "";
+       arg_bool         = false;
+   }
+
+   Where_Type(const Where_Type &w) 
+   {
+       field            = w.field;
+       operator_wt      = w.operator_wt;
+       logical_operator = w.logical_operator;
+       arg_type         = w.arg_type;
+       arg_int          = w.arg_int;
+       arg_float        = w.arg_float;
+       arg_str          = w.arg_str;
+       arg_bool         = w.arg_bool;
+   }
 };
 
+@q *** (3) @>
+@
+@<Define |Where_Type| functions@>=
+void 
+Where_Type::show(string s)
+{
+   cerr << s << endl 
+        << "logical_operator:  " << operator_map[logical_operator] << " (" << logical_operator << ")" << endl
+        << "field:             " << table_field_map[field] << " (" << field << ")" << endl  
+        << "operator_wt:       " << operator_map[operator_wt] << " (" << operator_wt << ")" << endl;
+
+   if (arg_type == Where_Type::INT_TYPE)
+   {
+      cerr << "arg_type:          Where_Type::INT_TYPE" << endl
+           << "arg_int:           " << arg_int << endl;
+   }
+   else if (arg_type == Where_Type::FLOAT_TYPE)
+   {
+      cerr << "arg_type:          Where_Type::FLOAT_TYPE" << endl 
+           << "arg_float:         " << arg_float << endl;
+   }
+   else if (arg_type == Where_Type::STRING_TYPE)
+   {
+      cerr << "arg_type:          Where_Type::STRING_TYPE" << endl
+           << "arg_str:           " << arg_str << endl;
+   }
+   else if (arg_type == Where_Type::BOOL_TYPE)
+   {
+      cerr << "arg_type:          Where_Type::BOOL_TYPE" << endl
+           << "arg_bool:          " << arg_bool << endl;
+   }
+
+   return;
+
+}  /* End of |Where_Type::show| definition  */
 
 
 @q ** (2) @>
@@ -151,6 +236,7 @@ Scanner_Type
     bool end_flag;
     string input_filename;
     int limit;
+    int offset;
     int count;
     int lowest;
     int highest;
@@ -192,6 +278,7 @@ Scanner_Type::Scanner_Type(void)
   id       = 0; 
   end_flag = false; 
   limit    = 0; 
+  offset   = 0; 
   count    = 0; 
   lowest   = 0;
   highest  = 0;
@@ -216,6 +303,7 @@ Scanner_Type::Scanner_Type(int iid) : id(iid)
 {
   end_flag = false; 
   limit    = 0; 
+  offset   = 0; 
   count    = 0; 
   lowest   = 0;
   highest  = 0;
@@ -237,10 +325,11 @@ int clear(void);
 @<Define |Scanner_Type| functions@>=
 int Scanner_Type::clear(void) 
 {
-   id = 0; 
+   id       = 0; 
    end_flag = false; 
-   limit = 0; 
-   count = 0; 
+   limit    = 0; 
+   offset   = 0; 
+   count    = 0; 
    lowest   = 0;
    highest  = 0;
 
@@ -269,11 +358,15 @@ class Scanner_Type;
 typedef Scanner_Type *Scanner_Node;
 @<Include files@>@;
 class Song {};
+map<int, string> table_field_map;
+map<int, string> operator_map;
 @<class declarations@>@;@/
 typedef Scanner_Type *Scanner_Node;
 deque<IO_Type> io_deque;
+@<Define |Where_Type| functions@>@;
 @<Define |Scanner_Type| functions@>@;
-map<int, string> table_field_map;
+
+
 
 @q **** (4) This is what's written to the header file `classes.hxx'.  @>
 
@@ -289,6 +382,7 @@ class Song;
 typedef Scanner_Type *Scanner_Node;
 extern deque<IO_Type> io_deque;
 extern map<int, string> table_field_map;
+extern map<int, string> operator_map;
 #endif 
 
 
