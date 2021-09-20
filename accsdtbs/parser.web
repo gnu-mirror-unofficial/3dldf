@@ -617,6 +617,11 @@ yyerror(void* v, char const* s);
                   comma_str = ", ";
            }
 
+           if (scanner_node->ascending_descending_flag == 1)
+              sql_strm << " asc";
+           else if (scanner_node->ascending_descending_flag == 2)
+              sql_strm << " desc";
+
            if (scanner_node->limit > 0)
               sql_strm << " limit " << scanner_node->limit;
 
@@ -799,7 +804,10 @@ yyerror(void* v, char const* s);
 @q ***** (5) @>
 
 END_QUERY_RULE:
-;
+
+      scanner_node->ascending_descending_flag = 0;
+      scanner_node->table_field_vector.clear();
+      scanner_node->where_vector.clear();
 
 };
 
@@ -1164,12 +1172,16 @@ END_QUERY_RULE:
 
 };
 
+@q *** (3) @>
+@
+%type<int_value> ascending_descending_optional@;@/
+
 @q **** (4) @>
 
-@ modifier: ORDER_BY table_field_list.
+@ modifier: ORDER_BY table_field_list ascending_descending_optional.
 
 @<Rules@>=
-@=modifier: ORDER_BY table_field_list@>
+@=modifier: ORDER_BY table_field_list ascending_descending_optional@>
 {
 @q ***** (5) @>
 
@@ -1177,18 +1189,73 @@ END_QUERY_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `modifier: ORDER_BY TABLE_FIELD'." 
-             << endl
-             << "`INTEGER' == " << @=$2@> << endl;
+        cerr << "*** Parser:  Rule `modifier: ORDER_BY table_field_list ascending_descending_optional'." 
+             << endl;
 
     }  /* |if (DEBUG)|  */  
 
 @q ***** (5) @>
-   
+
     @=$$@> = 0;
 
 };
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=ascending_descending_optional: /* Empty  */@>
+{
+
+  Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+  if (DEBUG)
+  {
+      cerr << "*** Parser:  Rule `ascending_descending_optional: EMPTY'." 
+           << endl;
+
+  }  /* |if (DEBUG)|  */  
+
+  scanner_node->ascending_descending_flag = 0;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ascending_descending_optional: ASCENDING@>
+{
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `ascending_descending_optional: ASCENDING'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+
+    scanner_node->ascending_descending_flag = 1;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=ascending_descending_optional: DESCENDING@>
+{
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `ascending_descending_optional: DESCENDING'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    scanner_node->ascending_descending_flag = 2;
+
+};
 
 @q **** (4) @>
 
