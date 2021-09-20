@@ -160,6 +160,7 @@ yyerror(void* v, char const* s);
 %token<int_value> END@;@/
 %token<int_value> ENDINPUT@;@/
 %token<int_value> SELECT@;@/
+%token<int_value> SHOW@;@/
 %token<int_value> ALL@;@/
 %token<int_value> FROM@;@/
 %token<int_value> WHERE@;@/
@@ -669,15 +670,12 @@ yyerror(void* v, char const* s);
 @
 @<Rules@>=
 
-           scanner_node->star_vector.clear();
+           if (!scanner_node->append_flag)
+              scanner_node->star_vector.clear();
 
            do      
            {
 @q ******* (7) @>
-
-
-/* !!START HERE:  LDF 2021.09.19.  Add APPEND argument to rule.  Then, if it's true,
-   don't clear star_vector.  */ 
 
 
                curr_row = mysql_fetch_row(result);
@@ -806,6 +804,7 @@ yyerror(void* v, char const* s);
 END_QUERY_RULE:
 
       scanner_node->ascending_descending_flag = 0;
+      scanner_node->append_flag = false;
       scanner_node->table_field_vector.clear();
       scanner_node->where_vector.clear();
 
@@ -1281,6 +1280,32 @@ END_QUERY_RULE:
 
 };
 
+@q **** (4) @>
+
+@ modifier: APPEND.
+
+@<Rules@>=
+@=modifier: APPEND@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: APPEND'." 
+             << endl;
+
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+ 
+    scanner_node->append_flag = true;
+   
+    @=$$@> = 0;
+
+};
 
 
 @q **** (4) @>
@@ -2815,6 +2840,48 @@ END_QUERY_RULE:
 
     getchar();
 
+};
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=statement: SHOW STARS@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  SHOW STARS'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    if (scanner_node->star_vector.empty())
+       cerr << "`scanner_node->star_vector' is empty.  No stars to show."
+            << endl 
+            << "Call `query stars ...' to fill `scanner_node->star_vector'."
+            << endl;
+
+    else
+    {
+        cerr << "`scanner_node->star_vector.size()' == " << scanner_node->star_vector.size() << endl
+             << "`scanner_node->star_vector':" << endl;
+
+        for (vector<Star>::iterator iter = scanner_node->star_vector.begin();
+             iter != scanner_node->star_vector.end();
+             ++iter)
+        {
+            iter->show();
+        }
+
+        cerr << endl;
+        
+    }  
 };
 
 @
