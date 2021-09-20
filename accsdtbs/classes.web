@@ -121,6 +121,18 @@ IO_Type
 
 };
 
+@q ** (2) @>
+
+@
+@<class declarations@>=
+struct
+Where_Type
+{
+
+
+};
+
+
 
 @q ** (2) @>
 
@@ -148,6 +160,7 @@ Scanner_Type
     vector<int> table_field_vector;
     vector<Star> star_vector;
     vector<Song> song_vector;
+    vector<Where_Type> where_vector;
 
     public:
 
@@ -235,8 +248,8 @@ int Scanner_Type::clear(void)
    order_by_str = "";
 
    table_field_vector.clear();
-
    star_vector.clear();
+   where_vector.clear();
   
    return 0;
 

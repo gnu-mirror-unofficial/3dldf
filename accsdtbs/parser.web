@@ -439,7 +439,10 @@ yyerror(void* v, char const* s);
 %type<int_value> modifier@;@/
 %type<int_value> modifier_list@;@/
 %type<int_value> table_name@;@/
+%type<int_value> where_list@;@/
+%type<int_value> where_item@;@/
 %type<string_value> combined_string@;@/
+
 
 @q *** (3) Statement:  QUERY table_name modifier_list.  @>
 
@@ -639,10 +642,13 @@ yyerror(void* v, char const* s);
                   curr_star.set(curr_row);
                   scanner_node->star_vector.push_back(curr_star);
 
+#if 0
                   if (DEBUG) 
                   {
                      curr_star.show("curr_star:");
                   }
+#endif 
+
                }
                
 
@@ -656,6 +662,13 @@ yyerror(void* v, char const* s);
            {
                mysql_free_result(result);
                result = 0;
+           }
+
+           if (DEBUG) 
+           {
+               cerr << "`scanner_node->star_vector.size()'  == " << scanner_node->star_vector.size() << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
            }
 
 @q ****** (6) @>
@@ -1066,6 +1079,104 @@ END_QUERY_RULE:
         cerr << "*** Parser:  Rule `modifier: ORDER_BY TABLE_FIELD'." 
              << endl
              << "`INTEGER' == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+    @=$$@> = 0;
+
+};
+
+
+@q **** (4) @>
+
+@ modifier: WHERE where_list.
+
+@<Rules@>=
+@=modifier: WHERE where_list@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `modifier: where_list'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+    @=$$@> = 0;
+
+};
+
+@q **** (4) @>
+
+@ where_list: where_item.
+
+@<Rules@>=
+@=where_list: where_item@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `where_list: where_item'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+
+    @=$$@> = 0;
+
+};
+
+@q **** (4) @>
+
+@ where_list: where_list where_item.
+
+@<Rules@>=
+@=where_list: where_list where_item@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `where_list: where_list where_item'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+   
+    @=$$@> = 0;
+
+};
+
+@q **** (4) @>
+
+@ where_item.
+
+@<Rules@>=
+@=where_item: table_field EQUAL INTEGER@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `where_item: table_field EQUAL INTEGER'." 
+             << endl;
 
     }  /* |if (DEBUG)|  */  
 
