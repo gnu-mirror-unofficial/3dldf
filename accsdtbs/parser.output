@@ -100,8 +100,8 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-   87 combined_string: STRING
-   88                | combined_string STRING
+   89 combined_string: STRING
+   90                | combined_string STRING
 
 
 Rules useless in parser due to conflicts
@@ -109,7 +109,7 @@ Rules useless in parser due to conflicts
    27 where_list: where_list where_item
 
 
-State 82 conflicts: 50 reduce/reduce
+State 84 conflicts: 52 reduce/reduce
 
 
 Grammar
@@ -150,70 +150,72 @@ Grammar
    26           | where_list where_item
    27           | where_list where_item
 
-   28 where_item: logical_operator table_field EQUAL INTEGER
-   29           | logical_operator table_field NOT_EQUAL INTEGER
-   30           | logical_operator table_field GREATER_THAN INTEGER
-   31           | logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER
-   32           | logical_operator table_field LESS_THAN INTEGER
-   33           | logical_operator table_field LESS_THAN_OR_EQUAL INTEGER
-   34           | logical_operator table_field EQUAL FLOAT
-   35           | logical_operator table_field NOT_EQUAL FLOAT
-   36           | logical_operator table_field GREATER_THAN FLOAT
-   37           | logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT
-   38           | logical_operator table_field LESS_THAN FLOAT
-   39           | logical_operator table_field LESS_THAN_OR_EQUAL FLOAT
-   40           | logical_operator table_field EQUAL STRING
-   41           | logical_operator table_field NOT_EQUAL STRING
+   28 where_item: LEFT_PARENTHESIS
+   29           | RIGHT_PARENTHESIS
+   30           | logical_operator table_field EQUAL INTEGER
+   31           | logical_operator table_field NOT_EQUAL INTEGER
+   32           | logical_operator table_field GREATER_THAN INTEGER
+   33           | logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER
+   34           | logical_operator table_field LESS_THAN INTEGER
+   35           | logical_operator table_field LESS_THAN_OR_EQUAL INTEGER
+   36           | logical_operator table_field EQUAL FLOAT
+   37           | logical_operator table_field NOT_EQUAL FLOAT
+   38           | logical_operator table_field GREATER_THAN FLOAT
+   39           | logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT
+   40           | logical_operator table_field LESS_THAN FLOAT
+   41           | logical_operator table_field LESS_THAN_OR_EQUAL FLOAT
+   42           | logical_operator table_field EQUAL STRING
+   43           | logical_operator table_field NOT_EQUAL STRING
 
-   42 logical_operator: %empty
-   43                 | AND
-   44                 | OR
-   45                 | NOT
-   46                 | XOR
-   47                 | NOT_AND
-   48                 | NOT_OR
-   49                 | NOT_XOR
+   44 logical_operator: %empty
+   45                 | AND
+   46                 | OR
+   47                 | NOT
+   48                 | XOR
+   49                 | NOT_AND
+   50                 | NOT_OR
+   51                 | NOT_XOR
 
-   50 statement: SEMI_COLON
-   51          | SORT item_vector BY table_field_list
+   52 statement: SEMI_COLON
+   53          | SORT item_vector BY table_field_list
 
-   52 item_vector: STAR_VECTOR
-   53            | SONG_VECTOR
+   54 item_vector: STAR_VECTOR
+   55            | SONG_VECTOR
 
-   54 table_field_list: %empty
-   55                 | table_field_list table_field
-   56                 | table_field_list COMMA table_field
+   56 table_field_list: %empty
+   57                 | table_field_list table_field
+   58                 | table_field_list COMMA table_field
 
-   57 table_field: APPROX_RANK_APPARENT_MAGNITUDE
-   58            | COMMON_NAME
-   59            | GREEK_NAME
-   60            | LATIN_NAME
-   61            | ARABIC_NAME
-   62            | FLAMSTEED_DESIGNATION_NUMBER
-   63            | BAYER_DESIGNATION_GREEK_LETTER
-   64            | BAYER_DESIGNATION_GREEK_LETTER_TEX
-   65            | BAYER_DESIGNATION_EXTENSION
-   66            | BS_HR_NUMBER
-   67            | APPARENT_MAGNITUDE
-   68            | ABSOLUTE_MAGNITUDE
-   69            | CONSTELLATION_ABBREVIATION
-   70            | CONSTELLATION_FULL_NAME
-   71            | CONSTELLATION_NAME_GENITIVE
-   72            | CONSTELLATION_NUMBER
-   73            | RIGHT_ASCENSION_HOURS
-   74            | RIGHT_ASCENSION_MINUTES
-   75            | RIGHT_ASCENSION_SECONDS
-   76            | RIGHT_ASCENSION_DECIMAL_HOURS
-   77            | RIGHT_ASCENSION_DECIMAL_DEGREES
-   78            | DECLINATION_DEGREES
-   79            | DECLINATION_MINUTES
-   80            | DECLINATION_SECONDS
-   81            | DECLINATION_DECIMAL_DEGREES
-   82            | IS_BINARY
-   83            | IS_MULTIPLE
-   84            | IS_BINARY_COMPONENT
-   85            | IS_ECLIPSING_BINARY
-   86            | NOTES
+   59 table_field: APPROX_RANK_APPARENT_MAGNITUDE
+   60            | COMMON_NAME
+   61            | GREEK_NAME
+   62            | LATIN_NAME
+   63            | ARABIC_NAME
+   64            | FLAMSTEED_DESIGNATION_NUMBER
+   65            | BAYER_DESIGNATION_GREEK_LETTER
+   66            | BAYER_DESIGNATION_GREEK_LETTER_TEX
+   67            | BAYER_DESIGNATION_EXTENSION
+   68            | BS_HR_NUMBER
+   69            | APPARENT_MAGNITUDE
+   70            | ABSOLUTE_MAGNITUDE
+   71            | CONSTELLATION_ABBREVIATION
+   72            | CONSTELLATION_FULL_NAME
+   73            | CONSTELLATION_NAME_GENITIVE
+   74            | CONSTELLATION_NUMBER
+   75            | RIGHT_ASCENSION_HOURS
+   76            | RIGHT_ASCENSION_MINUTES
+   77            | RIGHT_ASCENSION_SECONDS
+   78            | RIGHT_ASCENSION_DECIMAL_HOURS
+   79            | RIGHT_ASCENSION_DECIMAL_DEGREES
+   80            | DECLINATION_DEGREES
+   81            | DECLINATION_MINUTES
+   82            | DECLINATION_SECONDS
+   83            | DECLINATION_DECIMAL_DEGREES
+   84            | IS_BINARY
+   85            | IS_MULTIPLE
+   86            | IS_BINARY_COMPONENT
+   87            | IS_ECLIPSING_BINARY
+   88            | NOTES
 
 
 Terminals, with rules where they appear
@@ -221,210 +223,212 @@ Terminals, with rules where they appear
     $end (0) 0
     error (256)
     ASTERISK <int_value> (258)
-    COMMA <int_value> (259) 56
-    SEMI_COLON <int_value> (260) 50
-    INPUT <int_value> (261) 4
-    OUTPUT <int_value> (262)
-    OUT <int_value> (263)
-    IN <int_value> (264)
-    APPEND <int_value> (265)
-    FILE_YY <int_value> (266)
-    OPEN <int_value> (267)
-    CLOSE <int_value> (268)
-    CLOSED <int_value> (269)
-    END <int_value> (270) 1
-    ENDINPUT <int_value> (271) 5
-    SELECT <int_value> (272)
-    ALL <int_value> (273)
-    FROM <int_value> (274)
-    WHERE <int_value> (275) 24
-    EQUAL <int_value> (276) 28 34 40
-    NOT_EQUAL <int_value> (277) 29 35 41
-    NOT <int_value> (278) 45
-    GREATER_THAN <int_value> (279) 30 36
-    LESS_THAN <int_value> (280) 32 38
-    GREATER_THAN_OR_EQUAL <int_value> (281) 31 37
-    LESS_THAN_OR_EQUAL <int_value> (282) 33 39
-    ORDER_BY <int_value> (283) 23
-    BY <int_value> (284) 51
-    ORDER <int_value> (285)
-    ASCENDING <int_value> (286)
-    DESCENDING <int_value> (287)
-    UNIQUE <int_value> (288)
-    LIMIT <int_value> (289) 18
-    OFFSET <int_value> (290) 19
-    ID <int_value> (291)
-    QUERY <int_value> (292) 6
-    AND <int_value> (293) 43
-    OR <int_value> (294) 44
-    XOR <int_value> (295) 46
-    NOT_AND <int_value> (296) 47
-    NOT_OR <int_value> (297) 48
-    NOT_XOR <int_value> (298) 49
-    APPROX <int_value> (299)
-    APPROX_RANK_APPARENT_MAGNITUDE <int_value> (300) 57
-    SORT <int_value> (301) 51
-    VECTOR <int_value> (302)
-    RANK <int_value> (303)
-    APPARENT <int_value> (304)
-    APPARENT_MAGNITUDE <int_value> (305) 67
-    ABSOLUTE <int_value> (306)
-    ABSOLUTE_MAGNITUDE <int_value> (307) 68
-    MAGNITUDE <int_value> (308)
-    APPARENT_MAGNITUDE_VARIES <int_value> (309)
-    ABSOLUTE_MAGNITUDE_VARIES <int_value> (310)
-    IS_BINARY <int_value> (311) 82
-    IS_MULTIPLE <int_value> (312) 83
-    IS_BINARY_COMPONENT <int_value> (313) 84
-    IS_ECLIPSING_BINARY <int_value> (314) 85
-    NOTES <int_value> (315) 86
-    VARIES <int_value> (316)
-    IS <int_value> (317)
-    BINARY <int_value> (318)
-    MULTIPLE <int_value> (319)
-    COMMON <int_value> (320)
-    COMMON_NAME <int_value> (321) 58
-    NAME <int_value> (322)
-    GREEK <int_value> (323)
-    GREEK_NAME <int_value> (324) 59
-    LATIN <int_value> (325)
-    LATIN_NAME <int_value> (326) 60
-    ARABIC <int_value> (327)
-    ARABIC_NAME <int_value> (328) 61
-    GENITIVE <int_value> (329)
-    FLAMSTEED_DESIGNATION_NUMBER <int_value> (330) 62
-    NUMBER <int_value> (331)
-    BS_HR_NUMBER <int_value> (332) 66
-    DESIGNATION <int_value> (333)
-    BAYER_DESIGNATION_GREEK_LETTER <int_value> (334) 63
-    BAYER_DESIGNATION_GREEK_LETTER_TEX <int_value> (335) 64
-    BAYER_DESIGNATION_EXTENSION <int_value> (336) 65
-    ABBREVIATION <int_value> (337)
-    RIGHT_ASCENSION <int_value> (338)
-    RIGHT <int_value> (339)
-    ASCENSION <int_value> (340)
-    DECLINATION <int_value> (341)
-    ECLIPTIC <int_value> (342)
-    HOUR <int_value> (343)
-    HOURS <int_value> (344)
-    MINUTE <int_value> (345)
-    MINUTES <int_value> (346)
-    SECOND <int_value> (347)
-    SECONDS <int_value> (348)
-    DEGREES <int_value> (349)
-    DECIMAL <int_value> (350)
-    RIGHT_ASCENSION_HOURS <int_value> (351) 73
-    RIGHT_ASCENSION_MINUTES <int_value> (352) 74
-    RIGHT_ASCENSION_SECONDS <float_value> (353) 75
-    RIGHT_ASCENSION_DEGREES <int_value> (354)
-    RIGHT_ASCENSION_DECIMAL_DEGREES <float_value> (355) 77
-    RIGHT_ASCENSION_DECIMAL_HOURS <float_value> (356) 76
-    DECLINATION_DEGREES <int_value> (357) 78
-    DECLINATION_MINUTES <int_value> (358) 79
-    DECLINATION_SECONDS <float_value> (359) 80
-    DECLINATION_DECIMAL_DEGREES <float_value> (360) 81
-    STAR_CONSTANT_NAME <int_value> (361)
-    CONSTANT <int_value> (362)
-    COMPARE <int_value> (363)
-    LOWEST <int_value> (364) 21
-    HIGHEST <int_value> (365) 22
-    INTEGER <int_value> (366) 18 19 20 21 22 28 29 30 31 32 33
-    BOOLEAN <bool_value> (367)
-    FLOAT <float_value> (368) 34 35 36 37 38 39
-    STRING <string_value> (369) 4 40 41
-    STAR <int_value> (370)
-    STARS <int_value> (371) 7
-    STAR_VECTOR <int_value> (372) 52
-    CONSTELLATION <int_value> (373)
-    CONSTELLATION_VECTOR <int_value> (374)
-    CONSTELLATION_FULL_NAME <int_value> (375) 70
-    CONSTELLATION_ABBREVIATION <int_value> (376) 69
-    CONSTELLATION_NAME_GENITIVE <int_value> (377) 71
-    CONSTELLATION_NUMBER <int_value> (378) 72
-    CONSTELLATIONS <int_value> (379)
-    PLANET <int_value> (380)
-    PLANETS <int_value> (381)
-    PLANET_VECTOR <int_value> (382)
-    SIDEREAL_TIME <int_value> (383)
-    UNIVERSAL_TIME <int_value> (384)
-    GREENWICH_TIME <int_value> (385)
-    LOCAL_TIME <int_value> (386)
-    SOLAR_TIME <int_value> (387)
-    MEDIAN_SOLAR_TIME <int_value> (388)
-    TIME <int_value> (389)
-    SIDEREAL <int_value> (390)
-    UNIVERSAL <int_value> (391)
-    GREENWICH <int_value> (392)
-    LOCAL <int_value> (393)
-    SOLAR <int_value> (394)
-    TRANSFORM <int_value> (395)
-    TRANSFORMS <int_value> (396)
-    POINT <int_value> (397)
-    POINTS <int_value> (398)
-    PATH <int_value> (399)
-    PATHS <int_value> (400)
-    PICTURE <int_value> (401)
-    PICTURES <int_value> (402)
-    SONG <int_value> (403)
-    SONGS <int_value> (404) 8
-    SONG_VECTOR <int_value> (405) 53
-    COUNT <int_value> (406) 20
-    WRITE <int_value> (407)
-    TAXONOMY <int_value> (408)
-    KINGDOM <int_value> (409)
-    KINGDOMS <int_value> (410) 9
-    PHYLUM <int_value> (411)
-    PHYLA <int_value> (412) 10
-    CLASS <int_value> (413)
-    CLASSES <int_value> (414) 11
-    ORDERS <int_value> (415) 12
-    FAMILY <int_value> (416)
-    FAMILIES <int_value> (417) 13
-    GENUS <int_value> (418)
-    GENERA <int_value> (419) 14
-    SPECIES <int_value> (420) 15
+    COMMA <int_value> (259) 58
+    SEMI_COLON <int_value> (260) 52
+    LEFT_PARENTHESIS <int_value> (261) 28
+    RIGHT_PARENTHESIS <int_value> (262) 29
+    INPUT <int_value> (263) 4
+    OUTPUT <int_value> (264)
+    OUT <int_value> (265)
+    IN <int_value> (266)
+    APPEND <int_value> (267)
+    FILE_YY <int_value> (268)
+    OPEN <int_value> (269)
+    CLOSE <int_value> (270)
+    CLOSED <int_value> (271)
+    END <int_value> (272) 1
+    ENDINPUT <int_value> (273) 5
+    SELECT <int_value> (274)
+    ALL <int_value> (275)
+    FROM <int_value> (276)
+    WHERE <int_value> (277) 24
+    EQUAL <int_value> (278) 30 36 42
+    NOT_EQUAL <int_value> (279) 31 37 43
+    NOT <int_value> (280) 47
+    GREATER_THAN <int_value> (281) 32 38
+    LESS_THAN <int_value> (282) 34 40
+    GREATER_THAN_OR_EQUAL <int_value> (283) 33 39
+    LESS_THAN_OR_EQUAL <int_value> (284) 35 41
+    ORDER_BY <int_value> (285) 23
+    BY <int_value> (286) 53
+    ORDER <int_value> (287)
+    ASCENDING <int_value> (288)
+    DESCENDING <int_value> (289)
+    UNIQUE <int_value> (290)
+    LIMIT <int_value> (291) 18
+    OFFSET <int_value> (292) 19
+    ID <int_value> (293)
+    QUERY <int_value> (294) 6
+    AND <int_value> (295) 45
+    OR <int_value> (296) 46
+    XOR <int_value> (297) 48
+    NOT_AND <int_value> (298) 49
+    NOT_OR <int_value> (299) 50
+    NOT_XOR <int_value> (300) 51
+    APPROX <int_value> (301)
+    APPROX_RANK_APPARENT_MAGNITUDE <int_value> (302) 59
+    SORT <int_value> (303) 53
+    VECTOR <int_value> (304)
+    RANK <int_value> (305)
+    APPARENT <int_value> (306)
+    APPARENT_MAGNITUDE <int_value> (307) 69
+    ABSOLUTE <int_value> (308)
+    ABSOLUTE_MAGNITUDE <int_value> (309) 70
+    MAGNITUDE <int_value> (310)
+    APPARENT_MAGNITUDE_VARIES <int_value> (311)
+    ABSOLUTE_MAGNITUDE_VARIES <int_value> (312)
+    IS_BINARY <int_value> (313) 84
+    IS_MULTIPLE <int_value> (314) 85
+    IS_BINARY_COMPONENT <int_value> (315) 86
+    IS_ECLIPSING_BINARY <int_value> (316) 87
+    NOTES <int_value> (317) 88
+    VARIES <int_value> (318)
+    IS <int_value> (319)
+    BINARY <int_value> (320)
+    MULTIPLE <int_value> (321)
+    COMMON <int_value> (322)
+    COMMON_NAME <int_value> (323) 60
+    NAME <int_value> (324)
+    GREEK <int_value> (325)
+    GREEK_NAME <int_value> (326) 61
+    LATIN <int_value> (327)
+    LATIN_NAME <int_value> (328) 62
+    ARABIC <int_value> (329)
+    ARABIC_NAME <int_value> (330) 63
+    GENITIVE <int_value> (331)
+    FLAMSTEED_DESIGNATION_NUMBER <int_value> (332) 64
+    NUMBER <int_value> (333)
+    BS_HR_NUMBER <int_value> (334) 68
+    DESIGNATION <int_value> (335)
+    BAYER_DESIGNATION_GREEK_LETTER <int_value> (336) 65
+    BAYER_DESIGNATION_GREEK_LETTER_TEX <int_value> (337) 66
+    BAYER_DESIGNATION_EXTENSION <int_value> (338) 67
+    ABBREVIATION <int_value> (339)
+    RIGHT_ASCENSION <int_value> (340)
+    RIGHT <int_value> (341)
+    ASCENSION <int_value> (342)
+    DECLINATION <int_value> (343)
+    ECLIPTIC <int_value> (344)
+    HOUR <int_value> (345)
+    HOURS <int_value> (346)
+    MINUTE <int_value> (347)
+    MINUTES <int_value> (348)
+    SECOND <int_value> (349)
+    SECONDS <int_value> (350)
+    DEGREES <int_value> (351)
+    DECIMAL <int_value> (352)
+    RIGHT_ASCENSION_HOURS <int_value> (353) 75
+    RIGHT_ASCENSION_MINUTES <int_value> (354) 76
+    RIGHT_ASCENSION_SECONDS <float_value> (355) 77
+    RIGHT_ASCENSION_DEGREES <int_value> (356)
+    RIGHT_ASCENSION_DECIMAL_DEGREES <float_value> (357) 79
+    RIGHT_ASCENSION_DECIMAL_HOURS <float_value> (358) 78
+    DECLINATION_DEGREES <int_value> (359) 80
+    DECLINATION_MINUTES <int_value> (360) 81
+    DECLINATION_SECONDS <float_value> (361) 82
+    DECLINATION_DECIMAL_DEGREES <float_value> (362) 83
+    STAR_CONSTANT_NAME <int_value> (363)
+    CONSTANT <int_value> (364)
+    COMPARE <int_value> (365)
+    LOWEST <int_value> (366) 21
+    HIGHEST <int_value> (367) 22
+    INTEGER <int_value> (368) 18 19 20 21 22 30 31 32 33 34 35
+    BOOLEAN <bool_value> (369)
+    FLOAT <float_value> (370) 36 37 38 39 40 41
+    STRING <string_value> (371) 4 42 43
+    STAR <int_value> (372)
+    STARS <int_value> (373) 7
+    STAR_VECTOR <int_value> (374) 54
+    CONSTELLATION <int_value> (375)
+    CONSTELLATION_VECTOR <int_value> (376)
+    CONSTELLATION_FULL_NAME <int_value> (377) 72
+    CONSTELLATION_ABBREVIATION <int_value> (378) 71
+    CONSTELLATION_NAME_GENITIVE <int_value> (379) 73
+    CONSTELLATION_NUMBER <int_value> (380) 74
+    CONSTELLATIONS <int_value> (381)
+    PLANET <int_value> (382)
+    PLANETS <int_value> (383)
+    PLANET_VECTOR <int_value> (384)
+    SIDEREAL_TIME <int_value> (385)
+    UNIVERSAL_TIME <int_value> (386)
+    GREENWICH_TIME <int_value> (387)
+    LOCAL_TIME <int_value> (388)
+    SOLAR_TIME <int_value> (389)
+    MEDIAN_SOLAR_TIME <int_value> (390)
+    TIME <int_value> (391)
+    SIDEREAL <int_value> (392)
+    UNIVERSAL <int_value> (393)
+    GREENWICH <int_value> (394)
+    LOCAL <int_value> (395)
+    SOLAR <int_value> (396)
+    TRANSFORM <int_value> (397)
+    TRANSFORMS <int_value> (398)
+    POINT <int_value> (399)
+    POINTS <int_value> (400)
+    PATH <int_value> (401)
+    PATHS <int_value> (402)
+    PICTURE <int_value> (403)
+    PICTURES <int_value> (404)
+    SONG <int_value> (405)
+    SONGS <int_value> (406) 8
+    SONG_VECTOR <int_value> (407) 55
+    COUNT <int_value> (408) 20
+    WRITE <int_value> (409)
+    TAXONOMY <int_value> (410)
+    KINGDOM <int_value> (411)
+    KINGDOMS <int_value> (412) 9
+    PHYLUM <int_value> (413)
+    PHYLA <int_value> (414) 10
+    CLASS <int_value> (415)
+    CLASSES <int_value> (416) 11
+    ORDERS <int_value> (417) 12
+    FAMILY <int_value> (418)
+    FAMILIES <int_value> (419) 13
+    GENUS <int_value> (420)
+    GENERA <int_value> (421) 14
+    SPECIES <int_value> (422) 15
 
 
 Nonterminals, with rules where they appear
 
-    $accept (166)
+    $accept (168)
         on left: 0
-    program (167)
+    program (169)
         on left: 1
         on right: 0
-    statement_list (168)
+    statement_list (170)
         on left: 2 3
         on right: 1 3
-    statement (169)
-        on left: 4 5 6 50 51
+    statement (171)
+        on left: 4 5 6 52 53
         on right: 3
-    table_name <int_value> (170)
+    table_name <int_value> (172)
         on left: 7 8 9 10 11 12 13 14 15
         on right: 6
-    modifier_list <int_value> (171)
+    modifier_list <int_value> (173)
         on left: 16 17
         on right: 6 17
-    modifier <int_value> (172)
+    modifier <int_value> (174)
         on left: 18 19 20 21 22 23 24
         on right: 17
-    where_list <int_value> (173)
+    where_list <int_value> (175)
         on left: 25 26 27
         on right: 24 26 27
-    where_item <int_value> (174)
-        on left: 28 29 30 31 32 33 34 35 36 37 38 39 40 41
+    where_item <int_value> (176)
+        on left: 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43
         on right: 26 27
-    logical_operator <int_value> (175)
-        on left: 42 43 44 45 46 47 48 49
-        on right: 28 29 30 31 32 33 34 35 36 37 38 39 40 41
-    item_vector <int_value> (176)
-        on left: 52 53
-        on right: 51
-    table_field_list <pointer_value> (177)
-        on left: 54 55 56
-        on right: 23 51 55 56
-    table_field <int_value> (178)
-        on left: 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86
-        on right: 28 29 30 31 32 33 34 35 36 37 38 39 40 41 55 56
+    logical_operator <int_value> (177)
+        on left: 44 45 46 47 48 49 50 51
+        on right: 30 31 32 33 34 35 36 37 38 39 40 41 42 43
+    item_vector <int_value> (178)
+        on left: 54 55
+        on right: 53
+    table_field_list <pointer_value> (179)
+        on left: 56 57 58
+        on right: 23 53 57 58
+    table_field <int_value> (180)
+        on left: 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88
+        on right: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 57 58
 
 
 State 0
@@ -468,9 +472,9 @@ State 3
 
 State 4
 
-   50 statement: SEMI_COLON .
+   52 statement: SEMI_COLON .
 
-    $default  reduce using rule 50 (statement)
+    $default  reduce using rule 52 (statement)
 
 
 State 5
@@ -513,7 +517,7 @@ State 8
 
 State 9
 
-   51 statement: SORT . item_vector BY table_field_list
+   53 statement: SORT . item_vector BY table_field_list
 
     STAR_VECTOR  shift, and go to state 22
     SONG_VECTOR  shift, and go to state 23
@@ -609,21 +613,21 @@ State 21
 
 State 22
 
-   52 item_vector: STAR_VECTOR .
+   54 item_vector: STAR_VECTOR .
 
-    $default  reduce using rule 52 (item_vector)
+    $default  reduce using rule 54 (item_vector)
 
 
 State 23
 
-   53 item_vector: SONG_VECTOR .
+   55 item_vector: SONG_VECTOR .
 
-    $default  reduce using rule 53 (item_vector)
+    $default  reduce using rule 55 (item_vector)
 
 
 State 24
 
-   51 statement: SORT item_vector . BY table_field_list
+   53 statement: SORT item_vector . BY table_field_list
 
     BY  shift, and go to state 26
 
@@ -648,9 +652,9 @@ State 25
 
 State 26
 
-   51 statement: SORT item_vector BY . table_field_list
+   53 statement: SORT item_vector BY . table_field_list
 
-    $default  reduce using rule 54 (table_field_list)
+    $default  reduce using rule 56 (table_field_list)
 
     table_field_list  go to state 35
 
@@ -668,7 +672,7 @@ State 28
 
    23 modifier: ORDER_BY . table_field_list
 
-    $default  reduce using rule 54 (table_field_list)
+    $default  reduce using rule 56 (table_field_list)
 
     table_field_list  go to state 37
 
@@ -717,9 +721,9 @@ State 34
 
 State 35
 
-   51 statement: SORT item_vector BY table_field_list .
-   55 table_field_list: table_field_list . table_field
-   56                 | table_field_list . COMMA table_field
+   53 statement: SORT item_vector BY table_field_list .
+   57 table_field_list: table_field_list . table_field
+   58                 | table_field_list . COMMA table_field
 
     COMMA                               shift, and go to state 43
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 44
@@ -753,7 +757,7 @@ State 35
     CONSTELLATION_NAME_GENITIVE         shift, and go to state 72
     CONSTELLATION_NUMBER                shift, and go to state 73
 
-    $default  reduce using rule 51 (statement)
+    $default  reduce using rule 53 (statement)
 
     table_field  go to state 74
 
@@ -764,13 +768,15 @@ State 36
    26 where_list: where_list . where_item
    27           | where_list . where_item
 
-    NOT      shift, and go to state 75
-    AND      shift, and go to state 76
-    OR       shift, and go to state 77
-    XOR      shift, and go to state 78
-    NOT_AND  shift, and go to state 79
-    NOT_OR   shift, and go to state 80
-    NOT_XOR  shift, and go to state 81
+    LEFT_PARENTHESIS   shift, and go to state 75
+    RIGHT_PARENTHESIS  shift, and go to state 76
+    NOT                shift, and go to state 77
+    AND                shift, and go to state 78
+    OR                 shift, and go to state 79
+    XOR                shift, and go to state 80
+    NOT_AND            shift, and go to state 81
+    NOT_OR             shift, and go to state 82
+    NOT_XOR            shift, and go to state 83
 
     SEMI_COLON  reduce using rule 24 (modifier)
     INPUT       reduce using rule 24 (modifier)
@@ -785,17 +791,17 @@ State 36
     LOWEST      reduce using rule 24 (modifier)
     HIGHEST     reduce using rule 24 (modifier)
     COUNT       reduce using rule 24 (modifier)
-    $default    reduce using rule 42 (logical_operator)
+    $default    reduce using rule 44 (logical_operator)
 
-    where_item        go to state 82
-    logical_operator  go to state 83
+    where_item        go to state 84
+    logical_operator  go to state 85
 
 
 State 37
 
    23 modifier: ORDER_BY table_field_list .
-   55 table_field_list: table_field_list . table_field
-   56                 | table_field_list . COMMA table_field
+   57 table_field_list: table_field_list . table_field
+   58                 | table_field_list . COMMA table_field
 
     COMMA                               shift, and go to state 43
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 44
@@ -871,7 +877,7 @@ State 42
 
 State 43
 
-   56 table_field_list: table_field_list COMMA . table_field
+   58 table_field_list: table_field_list COMMA . table_field
 
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 44
     APPARENT_MAGNITUDE                  shift, and go to state 45
@@ -904,282 +910,300 @@ State 43
     CONSTELLATION_NAME_GENITIVE         shift, and go to state 72
     CONSTELLATION_NUMBER                shift, and go to state 73
 
-    table_field  go to state 84
+    table_field  go to state 86
 
 
 State 44
 
-   57 table_field: APPROX_RANK_APPARENT_MAGNITUDE .
-
-    $default  reduce using rule 57 (table_field)
-
-
-State 45
-
-   67 table_field: APPARENT_MAGNITUDE .
-
-    $default  reduce using rule 67 (table_field)
-
-
-State 46
-
-   68 table_field: ABSOLUTE_MAGNITUDE .
-
-    $default  reduce using rule 68 (table_field)
-
-
-State 47
-
-   82 table_field: IS_BINARY .
-
-    $default  reduce using rule 82 (table_field)
-
-
-State 48
-
-   83 table_field: IS_MULTIPLE .
-
-    $default  reduce using rule 83 (table_field)
-
-
-State 49
-
-   84 table_field: IS_BINARY_COMPONENT .
-
-    $default  reduce using rule 84 (table_field)
-
-
-State 50
-
-   85 table_field: IS_ECLIPSING_BINARY .
-
-    $default  reduce using rule 85 (table_field)
-
-
-State 51
-
-   86 table_field: NOTES .
-
-    $default  reduce using rule 86 (table_field)
-
-
-State 52
-
-   58 table_field: COMMON_NAME .
-
-    $default  reduce using rule 58 (table_field)
-
-
-State 53
-
-   59 table_field: GREEK_NAME .
+   59 table_field: APPROX_RANK_APPARENT_MAGNITUDE .
 
     $default  reduce using rule 59 (table_field)
 
 
-State 54
+State 45
 
-   60 table_field: LATIN_NAME .
-
-    $default  reduce using rule 60 (table_field)
-
-
-State 55
-
-   61 table_field: ARABIC_NAME .
-
-    $default  reduce using rule 61 (table_field)
-
-
-State 56
-
-   62 table_field: FLAMSTEED_DESIGNATION_NUMBER .
-
-    $default  reduce using rule 62 (table_field)
-
-
-State 57
-
-   66 table_field: BS_HR_NUMBER .
-
-    $default  reduce using rule 66 (table_field)
-
-
-State 58
-
-   63 table_field: BAYER_DESIGNATION_GREEK_LETTER .
-
-    $default  reduce using rule 63 (table_field)
-
-
-State 59
-
-   64 table_field: BAYER_DESIGNATION_GREEK_LETTER_TEX .
-
-    $default  reduce using rule 64 (table_field)
-
-
-State 60
-
-   65 table_field: BAYER_DESIGNATION_EXTENSION .
-
-    $default  reduce using rule 65 (table_field)
-
-
-State 61
-
-   73 table_field: RIGHT_ASCENSION_HOURS .
-
-    $default  reduce using rule 73 (table_field)
-
-
-State 62
-
-   74 table_field: RIGHT_ASCENSION_MINUTES .
-
-    $default  reduce using rule 74 (table_field)
-
-
-State 63
-
-   75 table_field: RIGHT_ASCENSION_SECONDS .
-
-    $default  reduce using rule 75 (table_field)
-
-
-State 64
-
-   77 table_field: RIGHT_ASCENSION_DECIMAL_DEGREES .
-
-    $default  reduce using rule 77 (table_field)
-
-
-State 65
-
-   76 table_field: RIGHT_ASCENSION_DECIMAL_HOURS .
-
-    $default  reduce using rule 76 (table_field)
-
-
-State 66
-
-   78 table_field: DECLINATION_DEGREES .
-
-    $default  reduce using rule 78 (table_field)
-
-
-State 67
-
-   79 table_field: DECLINATION_MINUTES .
-
-    $default  reduce using rule 79 (table_field)
-
-
-State 68
-
-   80 table_field: DECLINATION_SECONDS .
-
-    $default  reduce using rule 80 (table_field)
-
-
-State 69
-
-   81 table_field: DECLINATION_DECIMAL_DEGREES .
-
-    $default  reduce using rule 81 (table_field)
-
-
-State 70
-
-   70 table_field: CONSTELLATION_FULL_NAME .
-
-    $default  reduce using rule 70 (table_field)
-
-
-State 71
-
-   69 table_field: CONSTELLATION_ABBREVIATION .
+   69 table_field: APPARENT_MAGNITUDE .
 
     $default  reduce using rule 69 (table_field)
 
 
-State 72
+State 46
 
-   71 table_field: CONSTELLATION_NAME_GENITIVE .
+   70 table_field: ABSOLUTE_MAGNITUDE .
 
-    $default  reduce using rule 71 (table_field)
+    $default  reduce using rule 70 (table_field)
 
 
-State 73
+State 47
 
-   72 table_field: CONSTELLATION_NUMBER .
+   84 table_field: IS_BINARY .
+
+    $default  reduce using rule 84 (table_field)
+
+
+State 48
+
+   85 table_field: IS_MULTIPLE .
+
+    $default  reduce using rule 85 (table_field)
+
+
+State 49
+
+   86 table_field: IS_BINARY_COMPONENT .
+
+    $default  reduce using rule 86 (table_field)
+
+
+State 50
+
+   87 table_field: IS_ECLIPSING_BINARY .
+
+    $default  reduce using rule 87 (table_field)
+
+
+State 51
+
+   88 table_field: NOTES .
+
+    $default  reduce using rule 88 (table_field)
+
+
+State 52
+
+   60 table_field: COMMON_NAME .
+
+    $default  reduce using rule 60 (table_field)
+
+
+State 53
+
+   61 table_field: GREEK_NAME .
+
+    $default  reduce using rule 61 (table_field)
+
+
+State 54
+
+   62 table_field: LATIN_NAME .
+
+    $default  reduce using rule 62 (table_field)
+
+
+State 55
+
+   63 table_field: ARABIC_NAME .
+
+    $default  reduce using rule 63 (table_field)
+
+
+State 56
+
+   64 table_field: FLAMSTEED_DESIGNATION_NUMBER .
+
+    $default  reduce using rule 64 (table_field)
+
+
+State 57
+
+   68 table_field: BS_HR_NUMBER .
+
+    $default  reduce using rule 68 (table_field)
+
+
+State 58
+
+   65 table_field: BAYER_DESIGNATION_GREEK_LETTER .
+
+    $default  reduce using rule 65 (table_field)
+
+
+State 59
+
+   66 table_field: BAYER_DESIGNATION_GREEK_LETTER_TEX .
+
+    $default  reduce using rule 66 (table_field)
+
+
+State 60
+
+   67 table_field: BAYER_DESIGNATION_EXTENSION .
+
+    $default  reduce using rule 67 (table_field)
+
+
+State 61
+
+   75 table_field: RIGHT_ASCENSION_HOURS .
+
+    $default  reduce using rule 75 (table_field)
+
+
+State 62
+
+   76 table_field: RIGHT_ASCENSION_MINUTES .
+
+    $default  reduce using rule 76 (table_field)
+
+
+State 63
+
+   77 table_field: RIGHT_ASCENSION_SECONDS .
+
+    $default  reduce using rule 77 (table_field)
+
+
+State 64
+
+   79 table_field: RIGHT_ASCENSION_DECIMAL_DEGREES .
+
+    $default  reduce using rule 79 (table_field)
+
+
+State 65
+
+   78 table_field: RIGHT_ASCENSION_DECIMAL_HOURS .
+
+    $default  reduce using rule 78 (table_field)
+
+
+State 66
+
+   80 table_field: DECLINATION_DEGREES .
+
+    $default  reduce using rule 80 (table_field)
+
+
+State 67
+
+   81 table_field: DECLINATION_MINUTES .
+
+    $default  reduce using rule 81 (table_field)
+
+
+State 68
+
+   82 table_field: DECLINATION_SECONDS .
+
+    $default  reduce using rule 82 (table_field)
+
+
+State 69
+
+   83 table_field: DECLINATION_DECIMAL_DEGREES .
+
+    $default  reduce using rule 83 (table_field)
+
+
+State 70
+
+   72 table_field: CONSTELLATION_FULL_NAME .
 
     $default  reduce using rule 72 (table_field)
 
 
+State 71
+
+   71 table_field: CONSTELLATION_ABBREVIATION .
+
+    $default  reduce using rule 71 (table_field)
+
+
+State 72
+
+   73 table_field: CONSTELLATION_NAME_GENITIVE .
+
+    $default  reduce using rule 73 (table_field)
+
+
+State 73
+
+   74 table_field: CONSTELLATION_NUMBER .
+
+    $default  reduce using rule 74 (table_field)
+
+
 State 74
 
-   55 table_field_list: table_field_list table_field .
+   57 table_field_list: table_field_list table_field .
 
-    $default  reduce using rule 55 (table_field_list)
+    $default  reduce using rule 57 (table_field_list)
 
 
 State 75
 
-   45 logical_operator: NOT .
+   28 where_item: LEFT_PARENTHESIS .
 
-    $default  reduce using rule 45 (logical_operator)
+    $default  reduce using rule 28 (where_item)
 
 
 State 76
 
-   43 logical_operator: AND .
+   29 where_item: RIGHT_PARENTHESIS .
 
-    $default  reduce using rule 43 (logical_operator)
+    $default  reduce using rule 29 (where_item)
 
 
 State 77
 
-   44 logical_operator: OR .
-
-    $default  reduce using rule 44 (logical_operator)
-
-
-State 78
-
-   46 logical_operator: XOR .
-
-    $default  reduce using rule 46 (logical_operator)
-
-
-State 79
-
-   47 logical_operator: NOT_AND .
+   47 logical_operator: NOT .
 
     $default  reduce using rule 47 (logical_operator)
 
 
+State 78
+
+   45 logical_operator: AND .
+
+    $default  reduce using rule 45 (logical_operator)
+
+
+State 79
+
+   46 logical_operator: OR .
+
+    $default  reduce using rule 46 (logical_operator)
+
+
 State 80
 
-   48 logical_operator: NOT_OR .
+   48 logical_operator: XOR .
 
     $default  reduce using rule 48 (logical_operator)
 
 
 State 81
 
-   49 logical_operator: NOT_XOR .
+   49 logical_operator: NOT_AND .
 
     $default  reduce using rule 49 (logical_operator)
 
 
 State 82
 
+   50 logical_operator: NOT_OR .
+
+    $default  reduce using rule 50 (logical_operator)
+
+
+State 83
+
+   51 logical_operator: NOT_XOR .
+
+    $default  reduce using rule 51 (logical_operator)
+
+
+State 84
+
    26 where_list: where_list where_item .
    27           | where_list where_item .
 
     SEMI_COLON                          reduce using rule 26 (where_list)
     SEMI_COLON                          [reduce using rule 27 (where_list)]
+    LEFT_PARENTHESIS                    reduce using rule 26 (where_list)
+    LEFT_PARENTHESIS                    [reduce using rule 27 (where_list)]
+    RIGHT_PARENTHESIS                   reduce using rule 26 (where_list)
+    RIGHT_PARENTHESIS                   [reduce using rule 27 (where_list)]
     INPUT                               reduce using rule 26 (where_list)
     INPUT                               [reduce using rule 27 (where_list)]
     END                                 reduce using rule 26 (where_list)
@@ -1281,22 +1305,22 @@ State 82
     $default                            reduce using rule 26 (where_list)
 
 
-State 83
+State 85
 
-   28 where_item: logical_operator . table_field EQUAL INTEGER
-   29           | logical_operator . table_field NOT_EQUAL INTEGER
-   30           | logical_operator . table_field GREATER_THAN INTEGER
-   31           | logical_operator . table_field GREATER_THAN_OR_EQUAL INTEGER
-   32           | logical_operator . table_field LESS_THAN INTEGER
-   33           | logical_operator . table_field LESS_THAN_OR_EQUAL INTEGER
-   34           | logical_operator . table_field EQUAL FLOAT
-   35           | logical_operator . table_field NOT_EQUAL FLOAT
-   36           | logical_operator . table_field GREATER_THAN FLOAT
-   37           | logical_operator . table_field GREATER_THAN_OR_EQUAL FLOAT
-   38           | logical_operator . table_field LESS_THAN FLOAT
-   39           | logical_operator . table_field LESS_THAN_OR_EQUAL FLOAT
-   40           | logical_operator . table_field EQUAL STRING
-   41           | logical_operator . table_field NOT_EQUAL STRING
+   30 where_item: logical_operator . table_field EQUAL INTEGER
+   31           | logical_operator . table_field NOT_EQUAL INTEGER
+   32           | logical_operator . table_field GREATER_THAN INTEGER
+   33           | logical_operator . table_field GREATER_THAN_OR_EQUAL INTEGER
+   34           | logical_operator . table_field LESS_THAN INTEGER
+   35           | logical_operator . table_field LESS_THAN_OR_EQUAL INTEGER
+   36           | logical_operator . table_field EQUAL FLOAT
+   37           | logical_operator . table_field NOT_EQUAL FLOAT
+   38           | logical_operator . table_field GREATER_THAN FLOAT
+   39           | logical_operator . table_field GREATER_THAN_OR_EQUAL FLOAT
+   40           | logical_operator . table_field LESS_THAN FLOAT
+   41           | logical_operator . table_field LESS_THAN_OR_EQUAL FLOAT
+   42           | logical_operator . table_field EQUAL STRING
+   43           | logical_operator . table_field NOT_EQUAL STRING
 
     APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 44
     APPARENT_MAGNITUDE                  shift, and go to state 45
@@ -1329,192 +1353,192 @@ State 83
     CONSTELLATION_NAME_GENITIVE         shift, and go to state 72
     CONSTELLATION_NUMBER                shift, and go to state 73
 
-    table_field  go to state 85
-
-
-State 84
-
-   56 table_field_list: table_field_list COMMA table_field .
-
-    $default  reduce using rule 56 (table_field_list)
-
-
-State 85
-
-   28 where_item: logical_operator table_field . EQUAL INTEGER
-   29           | logical_operator table_field . NOT_EQUAL INTEGER
-   30           | logical_operator table_field . GREATER_THAN INTEGER
-   31           | logical_operator table_field . GREATER_THAN_OR_EQUAL INTEGER
-   32           | logical_operator table_field . LESS_THAN INTEGER
-   33           | logical_operator table_field . LESS_THAN_OR_EQUAL INTEGER
-   34           | logical_operator table_field . EQUAL FLOAT
-   35           | logical_operator table_field . NOT_EQUAL FLOAT
-   36           | logical_operator table_field . GREATER_THAN FLOAT
-   37           | logical_operator table_field . GREATER_THAN_OR_EQUAL FLOAT
-   38           | logical_operator table_field . LESS_THAN FLOAT
-   39           | logical_operator table_field . LESS_THAN_OR_EQUAL FLOAT
-   40           | logical_operator table_field . EQUAL STRING
-   41           | logical_operator table_field . NOT_EQUAL STRING
-
-    EQUAL                  shift, and go to state 86
-    NOT_EQUAL              shift, and go to state 87
-    GREATER_THAN           shift, and go to state 88
-    LESS_THAN              shift, and go to state 89
-    GREATER_THAN_OR_EQUAL  shift, and go to state 90
-    LESS_THAN_OR_EQUAL     shift, and go to state 91
+    table_field  go to state 87
 
 
 State 86
 
-   28 where_item: logical_operator table_field EQUAL . INTEGER
-   34           | logical_operator table_field EQUAL . FLOAT
-   40           | logical_operator table_field EQUAL . STRING
+   58 table_field_list: table_field_list COMMA table_field .
 
-    INTEGER  shift, and go to state 92
-    FLOAT    shift, and go to state 93
-    STRING   shift, and go to state 94
+    $default  reduce using rule 58 (table_field_list)
 
 
 State 87
 
-   29 where_item: logical_operator table_field NOT_EQUAL . INTEGER
-   35           | logical_operator table_field NOT_EQUAL . FLOAT
-   41           | logical_operator table_field NOT_EQUAL . STRING
+   30 where_item: logical_operator table_field . EQUAL INTEGER
+   31           | logical_operator table_field . NOT_EQUAL INTEGER
+   32           | logical_operator table_field . GREATER_THAN INTEGER
+   33           | logical_operator table_field . GREATER_THAN_OR_EQUAL INTEGER
+   34           | logical_operator table_field . LESS_THAN INTEGER
+   35           | logical_operator table_field . LESS_THAN_OR_EQUAL INTEGER
+   36           | logical_operator table_field . EQUAL FLOAT
+   37           | logical_operator table_field . NOT_EQUAL FLOAT
+   38           | logical_operator table_field . GREATER_THAN FLOAT
+   39           | logical_operator table_field . GREATER_THAN_OR_EQUAL FLOAT
+   40           | logical_operator table_field . LESS_THAN FLOAT
+   41           | logical_operator table_field . LESS_THAN_OR_EQUAL FLOAT
+   42           | logical_operator table_field . EQUAL STRING
+   43           | logical_operator table_field . NOT_EQUAL STRING
 
-    INTEGER  shift, and go to state 95
-    FLOAT    shift, and go to state 96
-    STRING   shift, and go to state 97
+    EQUAL                  shift, and go to state 88
+    NOT_EQUAL              shift, and go to state 89
+    GREATER_THAN           shift, and go to state 90
+    LESS_THAN              shift, and go to state 91
+    GREATER_THAN_OR_EQUAL  shift, and go to state 92
+    LESS_THAN_OR_EQUAL     shift, and go to state 93
 
 
 State 88
 
-   30 where_item: logical_operator table_field GREATER_THAN . INTEGER
-   36           | logical_operator table_field GREATER_THAN . FLOAT
+   30 where_item: logical_operator table_field EQUAL . INTEGER
+   36           | logical_operator table_field EQUAL . FLOAT
+   42           | logical_operator table_field EQUAL . STRING
 
-    INTEGER  shift, and go to state 98
-    FLOAT    shift, and go to state 99
+    INTEGER  shift, and go to state 94
+    FLOAT    shift, and go to state 95
+    STRING   shift, and go to state 96
 
 
 State 89
 
-   32 where_item: logical_operator table_field LESS_THAN . INTEGER
-   38           | logical_operator table_field LESS_THAN . FLOAT
+   31 where_item: logical_operator table_field NOT_EQUAL . INTEGER
+   37           | logical_operator table_field NOT_EQUAL . FLOAT
+   43           | logical_operator table_field NOT_EQUAL . STRING
+
+    INTEGER  shift, and go to state 97
+    FLOAT    shift, and go to state 98
+    STRING   shift, and go to state 99
+
+
+State 90
+
+   32 where_item: logical_operator table_field GREATER_THAN . INTEGER
+   38           | logical_operator table_field GREATER_THAN . FLOAT
 
     INTEGER  shift, and go to state 100
     FLOAT    shift, and go to state 101
 
 
-State 90
+State 91
 
-   31 where_item: logical_operator table_field GREATER_THAN_OR_EQUAL . INTEGER
-   37           | logical_operator table_field GREATER_THAN_OR_EQUAL . FLOAT
+   34 where_item: logical_operator table_field LESS_THAN . INTEGER
+   40           | logical_operator table_field LESS_THAN . FLOAT
 
     INTEGER  shift, and go to state 102
     FLOAT    shift, and go to state 103
 
 
-State 91
+State 92
 
-   33 where_item: logical_operator table_field LESS_THAN_OR_EQUAL . INTEGER
-   39           | logical_operator table_field LESS_THAN_OR_EQUAL . FLOAT
+   33 where_item: logical_operator table_field GREATER_THAN_OR_EQUAL . INTEGER
+   39           | logical_operator table_field GREATER_THAN_OR_EQUAL . FLOAT
 
     INTEGER  shift, and go to state 104
     FLOAT    shift, and go to state 105
 
 
-State 92
-
-   28 where_item: logical_operator table_field EQUAL INTEGER .
-
-    $default  reduce using rule 28 (where_item)
-
-
 State 93
 
-   34 where_item: logical_operator table_field EQUAL FLOAT .
+   35 where_item: logical_operator table_field LESS_THAN_OR_EQUAL . INTEGER
+   41           | logical_operator table_field LESS_THAN_OR_EQUAL . FLOAT
 
-    $default  reduce using rule 34 (where_item)
+    INTEGER  shift, and go to state 106
+    FLOAT    shift, and go to state 107
 
 
 State 94
 
-   40 where_item: logical_operator table_field EQUAL STRING .
-
-    $default  reduce using rule 40 (where_item)
-
-
-State 95
-
-   29 where_item: logical_operator table_field NOT_EQUAL INTEGER .
-
-    $default  reduce using rule 29 (where_item)
-
-
-State 96
-
-   35 where_item: logical_operator table_field NOT_EQUAL FLOAT .
-
-    $default  reduce using rule 35 (where_item)
-
-
-State 97
-
-   41 where_item: logical_operator table_field NOT_EQUAL STRING .
-
-    $default  reduce using rule 41 (where_item)
-
-
-State 98
-
-   30 where_item: logical_operator table_field GREATER_THAN INTEGER .
+   30 where_item: logical_operator table_field EQUAL INTEGER .
 
     $default  reduce using rule 30 (where_item)
 
 
-State 99
+State 95
 
-   36 where_item: logical_operator table_field GREATER_THAN FLOAT .
+   36 where_item: logical_operator table_field EQUAL FLOAT .
 
     $default  reduce using rule 36 (where_item)
 
 
+State 96
+
+   42 where_item: logical_operator table_field EQUAL STRING .
+
+    $default  reduce using rule 42 (where_item)
+
+
+State 97
+
+   31 where_item: logical_operator table_field NOT_EQUAL INTEGER .
+
+    $default  reduce using rule 31 (where_item)
+
+
+State 98
+
+   37 where_item: logical_operator table_field NOT_EQUAL FLOAT .
+
+    $default  reduce using rule 37 (where_item)
+
+
+State 99
+
+   43 where_item: logical_operator table_field NOT_EQUAL STRING .
+
+    $default  reduce using rule 43 (where_item)
+
+
 State 100
 
-   32 where_item: logical_operator table_field LESS_THAN INTEGER .
+   32 where_item: logical_operator table_field GREATER_THAN INTEGER .
 
     $default  reduce using rule 32 (where_item)
 
 
 State 101
 
-   38 where_item: logical_operator table_field LESS_THAN FLOAT .
+   38 where_item: logical_operator table_field GREATER_THAN FLOAT .
 
     $default  reduce using rule 38 (where_item)
 
 
 State 102
 
-   31 where_item: logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER .
+   34 where_item: logical_operator table_field LESS_THAN INTEGER .
 
-    $default  reduce using rule 31 (where_item)
+    $default  reduce using rule 34 (where_item)
 
 
 State 103
 
-   37 where_item: logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT .
+   40 where_item: logical_operator table_field LESS_THAN FLOAT .
 
-    $default  reduce using rule 37 (where_item)
+    $default  reduce using rule 40 (where_item)
 
 
 State 104
 
-   33 where_item: logical_operator table_field LESS_THAN_OR_EQUAL INTEGER .
+   33 where_item: logical_operator table_field GREATER_THAN_OR_EQUAL INTEGER .
 
     $default  reduce using rule 33 (where_item)
 
 
 State 105
 
-   39 where_item: logical_operator table_field LESS_THAN_OR_EQUAL FLOAT .
+   39 where_item: logical_operator table_field GREATER_THAN_OR_EQUAL FLOAT .
 
     $default  reduce using rule 39 (where_item)
+
+
+State 106
+
+   35 where_item: logical_operator table_field LESS_THAN_OR_EQUAL INTEGER .
+
+    $default  reduce using rule 35 (where_item)
+
+
+State 107
+
+   41 where_item: logical_operator table_field LESS_THAN_OR_EQUAL FLOAT .
+
+    $default  reduce using rule 41 (where_item)

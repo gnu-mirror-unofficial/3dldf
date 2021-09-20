@@ -3,8 +3,8 @@
 
 #query stars 
 
-query stars where common_name != "Sirius" and approx_rank_apparent_magnitude > 10 and right_ascension_seconds < 59.5
-order_by arabic name, common_name, flamsteed_designation_number, is_eclipsing_binary limit 10;
+query stars where (common_name != "Sirius" and approx_rank_apparent_magnitude > 10) and right_ascension_seconds < 59.5
+order_by arabic name, common_name, flamsteed_designation_number, is_eclipsing_binary offset 6 limit 10;
 
 end;
 
