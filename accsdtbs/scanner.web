@@ -2201,6 +2201,36 @@ to {\bf yylex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
+@=SUPPRESS(\_|\ )NEWLINE|suppress(\_|\ )newline {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SUPPRESS_NEWLINE;
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=SUPPRESS|suppress {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }
+
+   return SUPPRESS;
+
+@=}@>
+
+
+
+@q *** (3) @>
+@
+@<Rules@>=
 @=OPEN|open {@>
 
    if (DEBUG)

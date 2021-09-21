@@ -4,8 +4,6 @@ Terminals unused in grammar
     OUT
     IN
     FILE_YY
-    OPEN
-    CLOSE
     CLOSED
     SELECT
     FROM
@@ -80,7 +78,6 @@ Terminals unused in grammar
     PICTURES
     SONG
     SONG_VECTOR
-    WRITE
     TAXONOMY
     KINGDOM
     PHYLUM
@@ -212,6 +209,22 @@ Grammar
    96             | ALL
    97             | ASTERISK
 
+   98 statement: OPEN STRING append_optional
+
+   99 append_optional: %empty
+  100                | APPEND
+
+  101 statement: WRITE combined_string suppress_newline_optional
+
+  102 suppress_newline_optional: %empty
+  103                          | SUPPRESS_NEWLINE
+  104                          | SUPPRESS
+
+  105 statement: CLOSE
+
+  106 combined_string: STRING
+  107                | combined_string STRING
+
 
 Terminals, with rules where they appear
 
@@ -226,10 +239,10 @@ Terminals, with rules where they appear
     OUTPUT <int_value> (264)
     OUT <int_value> (265)
     IN <int_value> (266)
-    APPEND <int_value> (267) 28
+    APPEND <int_value> (267) 28 100
     FILE_YY <int_value> (268)
-    OPEN <int_value> (269)
-    CLOSE <int_value> (270)
+    OPEN <int_value> (269) 98
+    CLOSE <int_value> (270) 105
     CLOSED <int_value> (271)
     END <int_value> (272) 1
     ENDINPUT <int_value> (273) 5
@@ -333,7 +346,7 @@ Terminals, with rules where they appear
     INTEGER <int_value> (371) 18 19 20 21 22 35
     BOOL <bool_value> (372) 38
     FLOAT <float_value> (373) 36
-    STRING <string_value> (374) 4 37
+    STRING <string_value> (374) 4 37 98 106 107
     STAR <int_value> (375)
     STARS <int_value> (376) 7 55 94
     STAR_VECTOR <int_value> (377)
@@ -371,80 +384,91 @@ Terminals, with rules where they appear
     SONGS <int_value> (409) 8 56
     SONG_VECTOR <int_value> (410)
     COUNT <int_value> (411) 20
-    WRITE <int_value> (412)
-    TAXONOMY <int_value> (413)
-    KINGDOM <int_value> (414)
-    KINGDOMS <int_value> (415) 9
-    PHYLUM <int_value> (416)
-    PHYLA <int_value> (417) 10
-    CLASS <int_value> (418)
-    CLASSES <int_value> (419) 11
-    ORDERS <int_value> (420) 12
-    FAMILY <int_value> (421)
-    FAMILIES <int_value> (422) 13
-    GENUS <int_value> (423)
-    GENERA <int_value> (424) 14
-    SPECIES <int_value> (425) 15
+    WRITE <int_value> (412) 101
+    SUPPRESS <int_value> (413) 104
+    SUPPRESS_NEWLINE <int_value> (414) 103
+    TAXONOMY <int_value> (415)
+    KINGDOM <int_value> (416)
+    KINGDOMS <int_value> (417) 9
+    PHYLUM <int_value> (418)
+    PHYLA <int_value> (419) 10
+    CLASS <int_value> (420)
+    CLASSES <int_value> (421) 11
+    ORDERS <int_value> (422) 12
+    FAMILY <int_value> (423)
+    FAMILIES <int_value> (424) 13
+    GENUS <int_value> (425)
+    GENERA <int_value> (426) 14
+    SPECIES <int_value> (427) 15
 
 
 Nonterminals, with rules where they appear
 
-    $accept (171)
+    $accept (173)
         on left: 0
-    program (172)
+    program (174)
         on left: 1
         on right: 0
-    statement_list (173)
+    statement_list (175)
         on left: 2 3
         on right: 1 3
-    statement (174)
-        on left: 4 5 6 53 54 93 94
+    statement (176)
+        on left: 4 5 6 53 54 93 94 98 101 105
         on right: 3
-    table_name <int_value> (175)
+    table_name <int_value> (177)
         on left: 7 8 9 10 11 12 13 14 15
         on right: 6
-    modifier_list <int_value> (176)
+    modifier_list <int_value> (178)
         on left: 16 17
         on right: 6 17 94
-    modifier <int_value> (177)
+    modifier <int_value> (179)
         on left: 18 19 20 21 22 23 27 28
         on right: 17
-    ascending_descending_optional (178)
+    ascending_descending_optional (180)
         on left: 24 25 26
         on right: 23
-    where_list <int_value> (179)
+    where_list <int_value> (181)
         on left: 29 30
         on right: 27 30
-    left_parenthesis_optional <int_value> (180)
+    left_parenthesis_optional <int_value> (182)
         on left: 31 32
         on right: 35 36 37 38
-    right_parenthesis_optional <int_value> (181)
+    right_parenthesis_optional <int_value> (183)
         on left: 33 34
         on right: 35 36 37 38
-    where_item <int_value> (182)
+    where_item <int_value> (184)
         on left: 35 36 37 38
         on right: 30
-    comparison_operator <int_value> (183)
+    comparison_operator <int_value> (185)
         on left: 39 40 41 42 43 44
         on right: 35 36 37 38
-    logical_operator <int_value> (184)
+    logical_operator <int_value> (186)
         on left: 45 46 47 48 49 50 51 52
         on right: 35 36 37 38
-    item_name <int_value> (185)
+    item_name <int_value> (187)
         on left: 55 56
         on right: 54
-    table_field_list <pointer_value> (186)
+    table_field_list <pointer_value> (188)
         on left: 57 58 61 62
         on right: 23 54 58 61 62 94
-    comma_optional <int_value> (187)
+    comma_optional <int_value> (189)
         on left: 59 60
         on right: 58
-    table_field <int_value> (188)
+    table_field <int_value> (190)
         on left: 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92
         on right: 35 36 37 38 58 61 62
-    all_optional <int_value> (189)
+    all_optional <int_value> (191)
         on left: 95 96 97
         on right: 94
+    append_optional <int_value> (192)
+        on left: 99 100
+        on right: 98
+    suppress_newline_optional <int_value> (193)
+        on left: 102 103 104
+        on right: 101
+    combined_string <string_value> (194)
+        on left: 106 107
+        on right: 101 107
 
 
 State 0
@@ -471,14 +495,17 @@ State 2
 
     SEMI_COLON  shift, and go to state 4
     INPUT       shift, and go to state 5
-    END         shift, and go to state 6
-    ENDINPUT    shift, and go to state 7
-    SHOW        shift, and go to state 8
-    QUERY       shift, and go to state 9
-    SORT        shift, and go to state 10
-    PAUSE       shift, and go to state 11
+    OPEN        shift, and go to state 6
+    CLOSE       shift, and go to state 7
+    END         shift, and go to state 8
+    ENDINPUT    shift, and go to state 9
+    SHOW        shift, and go to state 10
+    QUERY       shift, and go to state 11
+    SORT        shift, and go to state 12
+    PAUSE       shift, and go to state 13
+    WRITE       shift, and go to state 14
 
-    statement  go to state 12
+    statement  go to state 15
 
 
 State 3
@@ -499,247 +526,346 @@ State 5
 
     4 statement: INPUT . STRING
 
-    STRING  shift, and go to state 13
+    STRING  shift, and go to state 16
 
 
 State 6
+
+   98 statement: OPEN . STRING append_optional
+
+    STRING  shift, and go to state 17
+
+
+State 7
+
+  105 statement: CLOSE .
+
+    $default  reduce using rule 105 (statement)
+
+
+State 8
 
     1 program: statement_list END .
 
     $default  reduce using rule 1 (program)
 
 
-State 7
+State 9
 
     5 statement: ENDINPUT .
 
     $default  reduce using rule 5 (statement)
 
 
-State 8
+State 10
 
    94 statement: SHOW . STARS all_optional table_field_list modifier_list
 
-    STARS  shift, and go to state 14
-
-
-State 9
-
-    6 statement: QUERY . table_name modifier_list
-
-    STARS     shift, and go to state 15
-    SONGS     shift, and go to state 16
-    KINGDOMS  shift, and go to state 17
-    PHYLA     shift, and go to state 18
-    CLASSES   shift, and go to state 19
-    ORDERS    shift, and go to state 20
-    FAMILIES  shift, and go to state 21
-    GENERA    shift, and go to state 22
-    SPECIES   shift, and go to state 23
-
-    table_name  go to state 24
-
-
-State 10
-
-   54 statement: SORT . item_name BY table_field_list
-
-    STARS  shift, and go to state 25
-    SONGS  shift, and go to state 26
-
-    item_name  go to state 27
+    STARS  shift, and go to state 18
 
 
 State 11
+
+    6 statement: QUERY . table_name modifier_list
+
+    STARS     shift, and go to state 19
+    SONGS     shift, and go to state 20
+    KINGDOMS  shift, and go to state 21
+    PHYLA     shift, and go to state 22
+    CLASSES   shift, and go to state 23
+    ORDERS    shift, and go to state 24
+    FAMILIES  shift, and go to state 25
+    GENERA    shift, and go to state 26
+    SPECIES   shift, and go to state 27
+
+    table_name  go to state 28
+
+
+State 12
+
+   54 statement: SORT . item_name BY table_field_list
+
+    STARS  shift, and go to state 29
+    SONGS  shift, and go to state 30
+
+    item_name  go to state 31
+
+
+State 13
 
    93 statement: PAUSE .
 
     $default  reduce using rule 93 (statement)
 
 
-State 12
+State 14
+
+  101 statement: WRITE . combined_string suppress_newline_optional
+
+    STRING  shift, and go to state 32
+
+    combined_string  go to state 33
+
+
+State 15
 
     3 statement_list: statement_list statement .
 
     $default  reduce using rule 3 (statement_list)
 
 
-State 13
+State 16
 
     4 statement: INPUT STRING .
 
     $default  reduce using rule 4 (statement)
 
 
-State 14
+State 17
+
+   98 statement: OPEN STRING . append_optional
+
+    APPEND  shift, and go to state 34
+
+    $default  reduce using rule 99 (append_optional)
+
+    append_optional  go to state 35
+
+
+State 18
 
    94 statement: SHOW STARS . all_optional table_field_list modifier_list
 
-    ASTERISK  shift, and go to state 28
-    ALL       shift, and go to state 29
+    ASTERISK  shift, and go to state 36
+    ALL       shift, and go to state 37
 
     $default  reduce using rule 95 (all_optional)
 
-    all_optional  go to state 30
+    all_optional  go to state 38
 
 
-State 15
+State 19
 
     7 table_name: STARS .
 
     $default  reduce using rule 7 (table_name)
 
 
-State 16
+State 20
 
     8 table_name: SONGS .
 
     $default  reduce using rule 8 (table_name)
 
 
-State 17
+State 21
 
     9 table_name: KINGDOMS .
 
     $default  reduce using rule 9 (table_name)
 
 
-State 18
+State 22
 
    10 table_name: PHYLA .
 
     $default  reduce using rule 10 (table_name)
 
 
-State 19
+State 23
 
    11 table_name: CLASSES .
 
     $default  reduce using rule 11 (table_name)
 
 
-State 20
+State 24
 
    12 table_name: ORDERS .
 
     $default  reduce using rule 12 (table_name)
 
 
-State 21
+State 25
 
    13 table_name: FAMILIES .
 
     $default  reduce using rule 13 (table_name)
 
 
-State 22
+State 26
 
    14 table_name: GENERA .
 
     $default  reduce using rule 14 (table_name)
 
 
-State 23
+State 27
 
    15 table_name: SPECIES .
 
     $default  reduce using rule 15 (table_name)
 
 
-State 24
+State 28
 
     6 statement: QUERY table_name . modifier_list
 
     $default  reduce using rule 16 (modifier_list)
 
-    modifier_list  go to state 31
+    modifier_list  go to state 39
 
 
-State 25
+State 29
 
    55 item_name: STARS .
 
     $default  reduce using rule 55 (item_name)
 
 
-State 26
+State 30
 
    56 item_name: SONGS .
 
     $default  reduce using rule 56 (item_name)
 
 
-State 27
+State 31
 
    54 statement: SORT item_name . BY table_field_list
 
-    BY  shift, and go to state 32
+    BY  shift, and go to state 40
 
 
-State 28
+State 32
+
+  106 combined_string: STRING .
+
+    $default  reduce using rule 106 (combined_string)
+
+
+State 33
+
+  101 statement: WRITE combined_string . suppress_newline_optional
+  107 combined_string: combined_string . STRING
+
+    STRING            shift, and go to state 41
+    SUPPRESS          shift, and go to state 42
+    SUPPRESS_NEWLINE  shift, and go to state 43
+
+    $default  reduce using rule 102 (suppress_newline_optional)
+
+    suppress_newline_optional  go to state 44
+
+
+State 34
+
+  100 append_optional: APPEND .
+
+    $default  reduce using rule 100 (append_optional)
+
+
+State 35
+
+   98 statement: OPEN STRING append_optional .
+
+    $default  reduce using rule 98 (statement)
+
+
+State 36
 
    97 all_optional: ASTERISK .
 
     $default  reduce using rule 97 (all_optional)
 
 
-State 29
+State 37
 
    96 all_optional: ALL .
 
     $default  reduce using rule 96 (all_optional)
 
 
-State 30
+State 38
 
    94 statement: SHOW STARS all_optional . table_field_list modifier_list
 
     $default  reduce using rule 57 (table_field_list)
 
-    table_field_list  go to state 33
+    table_field_list  go to state 45
 
 
-State 31
+State 39
 
     6 statement: QUERY table_name modifier_list .
    17 modifier_list: modifier_list . modifier
 
-    APPEND    shift, and go to state 34
-    WHERE     shift, and go to state 35
-    ORDER_BY  shift, and go to state 36
-    LIMIT     shift, and go to state 37
-    OFFSET    shift, and go to state 38
-    LOWEST    shift, and go to state 39
-    HIGHEST   shift, and go to state 40
-    COUNT     shift, and go to state 41
+    APPEND    shift, and go to state 46
+    WHERE     shift, and go to state 47
+    ORDER_BY  shift, and go to state 48
+    LIMIT     shift, and go to state 49
+    OFFSET    shift, and go to state 50
+    LOWEST    shift, and go to state 51
+    HIGHEST   shift, and go to state 52
+    COUNT     shift, and go to state 53
 
     $default  reduce using rule 6 (statement)
 
-    modifier  go to state 42
+    modifier  go to state 54
 
 
-State 32
+State 40
 
    54 statement: SORT item_name BY . table_field_list
 
     $default  reduce using rule 57 (table_field_list)
 
-    table_field_list  go to state 43
+    table_field_list  go to state 55
 
 
-State 33
+State 41
+
+  107 combined_string: combined_string STRING .
+
+    $default  reduce using rule 107 (combined_string)
+
+
+State 42
+
+  104 suppress_newline_optional: SUPPRESS .
+
+    $default  reduce using rule 104 (suppress_newline_optional)
+
+
+State 43
+
+  103 suppress_newline_optional: SUPPRESS_NEWLINE .
+
+    $default  reduce using rule 103 (suppress_newline_optional)
+
+
+State 44
+
+  101 statement: WRITE combined_string suppress_newline_optional .
+
+    $default  reduce using rule 101 (statement)
+
+
+State 45
 
    58 table_field_list: table_field_list . comma_optional table_field
    61                 | table_field_list . MINUS table_field
    62                 | table_field_list . COMMA MINUS table_field
    94 statement: SHOW STARS all_optional table_field_list . modifier_list
 
-    COMMA  shift, and go to state 44
-    MINUS  shift, and go to state 45
+    COMMA  shift, and go to state 56
+    MINUS  shift, and go to state 57
 
     SEMI_COLON  reduce using rule 16 (modifier_list)
     INPUT       reduce using rule 16 (modifier_list)
     APPEND      reduce using rule 16 (modifier_list)
+    OPEN        reduce using rule 16 (modifier_list)
+    CLOSE       reduce using rule 16 (modifier_list)
     END         reduce using rule 16 (modifier_list)
     ENDINPUT    reduce using rule 16 (modifier_list)
     SHOW        reduce using rule 16 (modifier_list)
@@ -753,223 +879,229 @@ State 33
     HIGHEST     reduce using rule 16 (modifier_list)
     PAUSE       reduce using rule 16 (modifier_list)
     COUNT       reduce using rule 16 (modifier_list)
+    WRITE       reduce using rule 16 (modifier_list)
     $default    reduce using rule 59 (comma_optional)
 
-    modifier_list   go to state 46
-    comma_optional  go to state 47
+    modifier_list   go to state 58
+    comma_optional  go to state 59
 
 
-State 34
+State 46
 
    28 modifier: APPEND .
 
     $default  reduce using rule 28 (modifier)
 
 
-State 35
+State 47
 
    27 modifier: WHERE . where_list
 
     $default  reduce using rule 29 (where_list)
 
-    where_list  go to state 48
+    where_list  go to state 60
 
 
-State 36
+State 48
 
    23 modifier: ORDER_BY . table_field_list ascending_descending_optional
 
     $default  reduce using rule 57 (table_field_list)
 
-    table_field_list  go to state 49
+    table_field_list  go to state 61
 
 
-State 37
+State 49
 
    18 modifier: LIMIT . INTEGER
 
-    INTEGER  shift, and go to state 50
+    INTEGER  shift, and go to state 62
 
 
-State 38
+State 50
 
    19 modifier: OFFSET . INTEGER
 
-    INTEGER  shift, and go to state 51
+    INTEGER  shift, and go to state 63
 
 
-State 39
+State 51
 
    21 modifier: LOWEST . INTEGER
 
-    INTEGER  shift, and go to state 52
+    INTEGER  shift, and go to state 64
 
 
-State 40
+State 52
 
    22 modifier: HIGHEST . INTEGER
 
-    INTEGER  shift, and go to state 53
+    INTEGER  shift, and go to state 65
 
 
-State 41
+State 53
 
    20 modifier: COUNT . INTEGER
 
-    INTEGER  shift, and go to state 54
+    INTEGER  shift, and go to state 66
 
 
-State 42
+State 54
 
    17 modifier_list: modifier_list modifier .
 
     $default  reduce using rule 17 (modifier_list)
 
 
-State 43
+State 55
 
    54 statement: SORT item_name BY table_field_list .
    58 table_field_list: table_field_list . comma_optional table_field
    61                 | table_field_list . MINUS table_field
    62                 | table_field_list . COMMA MINUS table_field
 
-    COMMA  shift, and go to state 44
-    MINUS  shift, and go to state 45
+    COMMA  shift, and go to state 56
+    MINUS  shift, and go to state 57
 
     SEMI_COLON  reduce using rule 54 (statement)
     INPUT       reduce using rule 54 (statement)
+    OPEN        reduce using rule 54 (statement)
+    CLOSE       reduce using rule 54 (statement)
     END         reduce using rule 54 (statement)
     ENDINPUT    reduce using rule 54 (statement)
     SHOW        reduce using rule 54 (statement)
     QUERY       reduce using rule 54 (statement)
     SORT        reduce using rule 54 (statement)
     PAUSE       reduce using rule 54 (statement)
+    WRITE       reduce using rule 54 (statement)
     $default    reduce using rule 59 (comma_optional)
 
-    comma_optional  go to state 47
+    comma_optional  go to state 59
 
 
-State 44
+State 56
 
    60 comma_optional: COMMA .
    62 table_field_list: table_field_list COMMA . MINUS table_field
 
-    MINUS  shift, and go to state 55
+    MINUS  shift, and go to state 67
 
     $default  reduce using rule 60 (comma_optional)
 
 
-State 45
+State 57
 
    61 table_field_list: table_field_list MINUS . table_field
 
-    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 56
-    APPARENT_MAGNITUDE                  shift, and go to state 57
-    ABSOLUTE_MAGNITUDE                  shift, and go to state 58
-    IS_BINARY                           shift, and go to state 59
-    IS_MULTIPLE                         shift, and go to state 60
-    IS_BINARY_COMPONENT                 shift, and go to state 61
-    IS_ECLIPSING_BINARY                 shift, and go to state 62
-    NOTES                               shift, and go to state 63
-    COMMON_NAME                         shift, and go to state 64
-    GREEK_NAME                          shift, and go to state 65
-    LATIN_NAME                          shift, and go to state 66
-    ARABIC_NAME                         shift, and go to state 67
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 68
-    BS_HR_NUMBER                        shift, and go to state 69
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 70
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 71
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 72
-    RIGHT_ASCENSION_HOURS               shift, and go to state 73
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 74
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 75
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 76
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 77
-    DECLINATION_DEGREES                 shift, and go to state 78
-    DECLINATION_MINUTES                 shift, and go to state 79
-    DECLINATION_SECONDS                 shift, and go to state 80
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 81
-    CONSTELLATION_FULL_NAME             shift, and go to state 82
-    CONSTELLATION_ABBREVIATION          shift, and go to state 83
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 84
-    CONSTELLATION_NUMBER                shift, and go to state 85
+    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 68
+    APPARENT_MAGNITUDE                  shift, and go to state 69
+    ABSOLUTE_MAGNITUDE                  shift, and go to state 70
+    IS_BINARY                           shift, and go to state 71
+    IS_MULTIPLE                         shift, and go to state 72
+    IS_BINARY_COMPONENT                 shift, and go to state 73
+    IS_ECLIPSING_BINARY                 shift, and go to state 74
+    NOTES                               shift, and go to state 75
+    COMMON_NAME                         shift, and go to state 76
+    GREEK_NAME                          shift, and go to state 77
+    LATIN_NAME                          shift, and go to state 78
+    ARABIC_NAME                         shift, and go to state 79
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 80
+    BS_HR_NUMBER                        shift, and go to state 81
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 82
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 83
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 84
+    RIGHT_ASCENSION_HOURS               shift, and go to state 85
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 86
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 87
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 88
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 89
+    DECLINATION_DEGREES                 shift, and go to state 90
+    DECLINATION_MINUTES                 shift, and go to state 91
+    DECLINATION_SECONDS                 shift, and go to state 92
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 93
+    CONSTELLATION_FULL_NAME             shift, and go to state 94
+    CONSTELLATION_ABBREVIATION          shift, and go to state 95
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 96
+    CONSTELLATION_NUMBER                shift, and go to state 97
 
-    table_field  go to state 86
+    table_field  go to state 98
 
 
-State 46
+State 58
 
    17 modifier_list: modifier_list . modifier
    94 statement: SHOW STARS all_optional table_field_list modifier_list .
 
-    APPEND    shift, and go to state 34
-    WHERE     shift, and go to state 35
-    ORDER_BY  shift, and go to state 36
-    LIMIT     shift, and go to state 37
-    OFFSET    shift, and go to state 38
-    LOWEST    shift, and go to state 39
-    HIGHEST   shift, and go to state 40
-    COUNT     shift, and go to state 41
+    APPEND    shift, and go to state 46
+    WHERE     shift, and go to state 47
+    ORDER_BY  shift, and go to state 48
+    LIMIT     shift, and go to state 49
+    OFFSET    shift, and go to state 50
+    LOWEST    shift, and go to state 51
+    HIGHEST   shift, and go to state 52
+    COUNT     shift, and go to state 53
 
     $default  reduce using rule 94 (statement)
 
-    modifier  go to state 42
+    modifier  go to state 54
 
 
-State 47
+State 59
 
    58 table_field_list: table_field_list comma_optional . table_field
 
-    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 56
-    APPARENT_MAGNITUDE                  shift, and go to state 57
-    ABSOLUTE_MAGNITUDE                  shift, and go to state 58
-    IS_BINARY                           shift, and go to state 59
-    IS_MULTIPLE                         shift, and go to state 60
-    IS_BINARY_COMPONENT                 shift, and go to state 61
-    IS_ECLIPSING_BINARY                 shift, and go to state 62
-    NOTES                               shift, and go to state 63
-    COMMON_NAME                         shift, and go to state 64
-    GREEK_NAME                          shift, and go to state 65
-    LATIN_NAME                          shift, and go to state 66
-    ARABIC_NAME                         shift, and go to state 67
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 68
-    BS_HR_NUMBER                        shift, and go to state 69
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 70
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 71
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 72
-    RIGHT_ASCENSION_HOURS               shift, and go to state 73
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 74
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 75
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 76
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 77
-    DECLINATION_DEGREES                 shift, and go to state 78
-    DECLINATION_MINUTES                 shift, and go to state 79
-    DECLINATION_SECONDS                 shift, and go to state 80
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 81
-    CONSTELLATION_FULL_NAME             shift, and go to state 82
-    CONSTELLATION_ABBREVIATION          shift, and go to state 83
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 84
-    CONSTELLATION_NUMBER                shift, and go to state 85
+    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 68
+    APPARENT_MAGNITUDE                  shift, and go to state 69
+    ABSOLUTE_MAGNITUDE                  shift, and go to state 70
+    IS_BINARY                           shift, and go to state 71
+    IS_MULTIPLE                         shift, and go to state 72
+    IS_BINARY_COMPONENT                 shift, and go to state 73
+    IS_ECLIPSING_BINARY                 shift, and go to state 74
+    NOTES                               shift, and go to state 75
+    COMMON_NAME                         shift, and go to state 76
+    GREEK_NAME                          shift, and go to state 77
+    LATIN_NAME                          shift, and go to state 78
+    ARABIC_NAME                         shift, and go to state 79
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 80
+    BS_HR_NUMBER                        shift, and go to state 81
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 82
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 83
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 84
+    RIGHT_ASCENSION_HOURS               shift, and go to state 85
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 86
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 87
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 88
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 89
+    DECLINATION_DEGREES                 shift, and go to state 90
+    DECLINATION_MINUTES                 shift, and go to state 91
+    DECLINATION_SECONDS                 shift, and go to state 92
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 93
+    CONSTELLATION_FULL_NAME             shift, and go to state 94
+    CONSTELLATION_ABBREVIATION          shift, and go to state 95
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 96
+    CONSTELLATION_NUMBER                shift, and go to state 97
 
-    table_field  go to state 87
+    table_field  go to state 99
 
 
-State 48
+State 60
 
    27 modifier: WHERE where_list .
    30 where_list: where_list . where_item
 
-    NOT      shift, and go to state 88
-    AND      shift, and go to state 89
-    OR       shift, and go to state 90
-    XOR      shift, and go to state 91
-    NOT_AND  shift, and go to state 92
-    NOT_OR   shift, and go to state 93
-    NOT_XOR  shift, and go to state 94
+    NOT      shift, and go to state 100
+    AND      shift, and go to state 101
+    OR       shift, and go to state 102
+    XOR      shift, and go to state 103
+    NOT_AND  shift, and go to state 104
+    NOT_OR   shift, and go to state 105
+    NOT_XOR  shift, and go to state 106
 
     SEMI_COLON  reduce using rule 27 (modifier)
     INPUT       reduce using rule 27 (modifier)
     APPEND      reduce using rule 27 (modifier)
+    OPEN        reduce using rule 27 (modifier)
+    CLOSE       reduce using rule 27 (modifier)
     END         reduce using rule 27 (modifier)
     ENDINPUT    reduce using rule 27 (modifier)
     SHOW        reduce using rule 27 (modifier)
@@ -983,27 +1115,30 @@ State 48
     HIGHEST     reduce using rule 27 (modifier)
     PAUSE       reduce using rule 27 (modifier)
     COUNT       reduce using rule 27 (modifier)
+    WRITE       reduce using rule 27 (modifier)
     $default    reduce using rule 45 (logical_operator)
 
-    where_item        go to state 95
-    logical_operator  go to state 96
+    where_item        go to state 107
+    logical_operator  go to state 108
 
 
-State 49
+State 61
 
    23 modifier: ORDER_BY table_field_list . ascending_descending_optional
    58 table_field_list: table_field_list . comma_optional table_field
    61                 | table_field_list . MINUS table_field
    62                 | table_field_list . COMMA MINUS table_field
 
-    COMMA       shift, and go to state 44
-    ASCENDING   shift, and go to state 97
-    DESCENDING  shift, and go to state 98
-    MINUS       shift, and go to state 45
+    COMMA       shift, and go to state 56
+    ASCENDING   shift, and go to state 109
+    DESCENDING  shift, and go to state 110
+    MINUS       shift, and go to state 57
 
     SEMI_COLON  reduce using rule 24 (ascending_descending_optional)
     INPUT       reduce using rule 24 (ascending_descending_optional)
     APPEND      reduce using rule 24 (ascending_descending_optional)
+    OPEN        reduce using rule 24 (ascending_descending_optional)
+    CLOSE       reduce using rule 24 (ascending_descending_optional)
     END         reduce using rule 24 (ascending_descending_optional)
     ENDINPUT    reduce using rule 24 (ascending_descending_optional)
     SHOW        reduce using rule 24 (ascending_descending_optional)
@@ -1017,600 +1152,601 @@ State 49
     HIGHEST     reduce using rule 24 (ascending_descending_optional)
     PAUSE       reduce using rule 24 (ascending_descending_optional)
     COUNT       reduce using rule 24 (ascending_descending_optional)
+    WRITE       reduce using rule 24 (ascending_descending_optional)
     $default    reduce using rule 59 (comma_optional)
 
-    ascending_descending_optional  go to state 99
-    comma_optional                 go to state 47
+    ascending_descending_optional  go to state 111
+    comma_optional                 go to state 59
 
 
-State 50
+State 62
 
    18 modifier: LIMIT INTEGER .
 
     $default  reduce using rule 18 (modifier)
 
 
-State 51
+State 63
 
    19 modifier: OFFSET INTEGER .
 
     $default  reduce using rule 19 (modifier)
 
 
-State 52
+State 64
 
    21 modifier: LOWEST INTEGER .
 
     $default  reduce using rule 21 (modifier)
 
 
-State 53
+State 65
 
    22 modifier: HIGHEST INTEGER .
 
     $default  reduce using rule 22 (modifier)
 
 
-State 54
+State 66
 
    20 modifier: COUNT INTEGER .
 
     $default  reduce using rule 20 (modifier)
 
 
-State 55
+State 67
 
    62 table_field_list: table_field_list COMMA MINUS . table_field
 
-    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 56
-    APPARENT_MAGNITUDE                  shift, and go to state 57
-    ABSOLUTE_MAGNITUDE                  shift, and go to state 58
-    IS_BINARY                           shift, and go to state 59
-    IS_MULTIPLE                         shift, and go to state 60
-    IS_BINARY_COMPONENT                 shift, and go to state 61
-    IS_ECLIPSING_BINARY                 shift, and go to state 62
-    NOTES                               shift, and go to state 63
-    COMMON_NAME                         shift, and go to state 64
-    GREEK_NAME                          shift, and go to state 65
-    LATIN_NAME                          shift, and go to state 66
-    ARABIC_NAME                         shift, and go to state 67
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 68
-    BS_HR_NUMBER                        shift, and go to state 69
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 70
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 71
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 72
-    RIGHT_ASCENSION_HOURS               shift, and go to state 73
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 74
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 75
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 76
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 77
-    DECLINATION_DEGREES                 shift, and go to state 78
-    DECLINATION_MINUTES                 shift, and go to state 79
-    DECLINATION_SECONDS                 shift, and go to state 80
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 81
-    CONSTELLATION_FULL_NAME             shift, and go to state 82
-    CONSTELLATION_ABBREVIATION          shift, and go to state 83
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 84
-    CONSTELLATION_NUMBER                shift, and go to state 85
+    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 68
+    APPARENT_MAGNITUDE                  shift, and go to state 69
+    ABSOLUTE_MAGNITUDE                  shift, and go to state 70
+    IS_BINARY                           shift, and go to state 71
+    IS_MULTIPLE                         shift, and go to state 72
+    IS_BINARY_COMPONENT                 shift, and go to state 73
+    IS_ECLIPSING_BINARY                 shift, and go to state 74
+    NOTES                               shift, and go to state 75
+    COMMON_NAME                         shift, and go to state 76
+    GREEK_NAME                          shift, and go to state 77
+    LATIN_NAME                          shift, and go to state 78
+    ARABIC_NAME                         shift, and go to state 79
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 80
+    BS_HR_NUMBER                        shift, and go to state 81
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 82
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 83
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 84
+    RIGHT_ASCENSION_HOURS               shift, and go to state 85
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 86
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 87
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 88
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 89
+    DECLINATION_DEGREES                 shift, and go to state 90
+    DECLINATION_MINUTES                 shift, and go to state 91
+    DECLINATION_SECONDS                 shift, and go to state 92
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 93
+    CONSTELLATION_FULL_NAME             shift, and go to state 94
+    CONSTELLATION_ABBREVIATION          shift, and go to state 95
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 96
+    CONSTELLATION_NUMBER                shift, and go to state 97
 
-    table_field  go to state 100
+    table_field  go to state 112
 
 
-State 56
+State 68
 
    63 table_field: APPROX_RANK_APPARENT_MAGNITUDE .
 
     $default  reduce using rule 63 (table_field)
 
 
-State 57
+State 69
 
    73 table_field: APPARENT_MAGNITUDE .
 
     $default  reduce using rule 73 (table_field)
 
 
-State 58
+State 70
 
    74 table_field: ABSOLUTE_MAGNITUDE .
 
     $default  reduce using rule 74 (table_field)
 
 
-State 59
+State 71
 
    88 table_field: IS_BINARY .
 
     $default  reduce using rule 88 (table_field)
 
 
-State 60
+State 72
 
    89 table_field: IS_MULTIPLE .
 
     $default  reduce using rule 89 (table_field)
 
 
-State 61
+State 73
 
    90 table_field: IS_BINARY_COMPONENT .
 
     $default  reduce using rule 90 (table_field)
 
 
-State 62
+State 74
 
    91 table_field: IS_ECLIPSING_BINARY .
 
     $default  reduce using rule 91 (table_field)
 
 
-State 63
+State 75
 
    92 table_field: NOTES .
 
     $default  reduce using rule 92 (table_field)
 
 
-State 64
+State 76
 
    64 table_field: COMMON_NAME .
 
     $default  reduce using rule 64 (table_field)
 
 
-State 65
+State 77
 
    65 table_field: GREEK_NAME .
 
     $default  reduce using rule 65 (table_field)
 
 
-State 66
+State 78
 
    66 table_field: LATIN_NAME .
 
     $default  reduce using rule 66 (table_field)
 
 
-State 67
+State 79
 
    67 table_field: ARABIC_NAME .
 
     $default  reduce using rule 67 (table_field)
 
 
-State 68
+State 80
 
    68 table_field: FLAMSTEED_DESIGNATION_NUMBER .
 
     $default  reduce using rule 68 (table_field)
 
 
-State 69
+State 81
 
    72 table_field: BS_HR_NUMBER .
 
     $default  reduce using rule 72 (table_field)
 
 
-State 70
+State 82
 
    69 table_field: BAYER_DESIGNATION_GREEK_LETTER .
 
     $default  reduce using rule 69 (table_field)
 
 
-State 71
+State 83
 
    70 table_field: BAYER_DESIGNATION_GREEK_LETTER_TEX .
 
     $default  reduce using rule 70 (table_field)
 
 
-State 72
+State 84
 
    71 table_field: BAYER_DESIGNATION_EXTENSION .
 
     $default  reduce using rule 71 (table_field)
 
 
-State 73
+State 85
 
    79 table_field: RIGHT_ASCENSION_HOURS .
 
     $default  reduce using rule 79 (table_field)
 
 
-State 74
+State 86
 
    80 table_field: RIGHT_ASCENSION_MINUTES .
 
     $default  reduce using rule 80 (table_field)
 
 
-State 75
+State 87
 
    81 table_field: RIGHT_ASCENSION_SECONDS .
 
     $default  reduce using rule 81 (table_field)
 
 
-State 76
+State 88
 
    83 table_field: RIGHT_ASCENSION_DECIMAL_DEGREES .
 
     $default  reduce using rule 83 (table_field)
 
 
-State 77
+State 89
 
    82 table_field: RIGHT_ASCENSION_DECIMAL_HOURS .
 
     $default  reduce using rule 82 (table_field)
 
 
-State 78
+State 90
 
    84 table_field: DECLINATION_DEGREES .
 
     $default  reduce using rule 84 (table_field)
 
 
-State 79
+State 91
 
    85 table_field: DECLINATION_MINUTES .
 
     $default  reduce using rule 85 (table_field)
 
 
-State 80
+State 92
 
    86 table_field: DECLINATION_SECONDS .
 
     $default  reduce using rule 86 (table_field)
 
 
-State 81
+State 93
 
    87 table_field: DECLINATION_DECIMAL_DEGREES .
 
     $default  reduce using rule 87 (table_field)
 
 
-State 82
+State 94
 
    76 table_field: CONSTELLATION_FULL_NAME .
 
     $default  reduce using rule 76 (table_field)
 
 
-State 83
+State 95
 
    75 table_field: CONSTELLATION_ABBREVIATION .
 
     $default  reduce using rule 75 (table_field)
 
 
-State 84
+State 96
 
    77 table_field: CONSTELLATION_NAME_GENITIVE .
 
     $default  reduce using rule 77 (table_field)
 
 
-State 85
+State 97
 
    78 table_field: CONSTELLATION_NUMBER .
 
     $default  reduce using rule 78 (table_field)
 
 
-State 86
+State 98
 
    61 table_field_list: table_field_list MINUS table_field .
 
     $default  reduce using rule 61 (table_field_list)
 
 
-State 87
+State 99
 
    58 table_field_list: table_field_list comma_optional table_field .
 
     $default  reduce using rule 58 (table_field_list)
 
 
-State 88
+State 100
 
    48 logical_operator: NOT .
 
     $default  reduce using rule 48 (logical_operator)
 
 
-State 89
+State 101
 
    46 logical_operator: AND .
 
     $default  reduce using rule 46 (logical_operator)
 
 
-State 90
+State 102
 
    47 logical_operator: OR .
 
     $default  reduce using rule 47 (logical_operator)
 
 
-State 91
+State 103
 
    49 logical_operator: XOR .
 
     $default  reduce using rule 49 (logical_operator)
 
 
-State 92
+State 104
 
    50 logical_operator: NOT_AND .
 
     $default  reduce using rule 50 (logical_operator)
 
 
-State 93
+State 105
 
    51 logical_operator: NOT_OR .
 
     $default  reduce using rule 51 (logical_operator)
 
 
-State 94
+State 106
 
    52 logical_operator: NOT_XOR .
 
     $default  reduce using rule 52 (logical_operator)
 
 
-State 95
+State 107
 
    30 where_list: where_list where_item .
 
     $default  reduce using rule 30 (where_list)
 
 
-State 96
+State 108
 
    35 where_item: logical_operator . left_parenthesis_optional table_field comparison_operator INTEGER right_parenthesis_optional
    36           | logical_operator . left_parenthesis_optional table_field comparison_operator FLOAT right_parenthesis_optional
    37           | logical_operator . left_parenthesis_optional table_field comparison_operator STRING right_parenthesis_optional
    38           | logical_operator . left_parenthesis_optional table_field comparison_operator BOOL right_parenthesis_optional
 
-    LEFT_PARENTHESIS  shift, and go to state 101
+    LEFT_PARENTHESIS  shift, and go to state 113
 
     $default  reduce using rule 31 (left_parenthesis_optional)
 
-    left_parenthesis_optional  go to state 102
+    left_parenthesis_optional  go to state 114
 
 
-State 97
+State 109
 
    25 ascending_descending_optional: ASCENDING .
 
     $default  reduce using rule 25 (ascending_descending_optional)
 
 
-State 98
+State 110
 
    26 ascending_descending_optional: DESCENDING .
 
     $default  reduce using rule 26 (ascending_descending_optional)
 
 
-State 99
+State 111
 
    23 modifier: ORDER_BY table_field_list ascending_descending_optional .
 
     $default  reduce using rule 23 (modifier)
 
 
-State 100
+State 112
 
    62 table_field_list: table_field_list COMMA MINUS table_field .
 
     $default  reduce using rule 62 (table_field_list)
 
 
-State 101
+State 113
 
    32 left_parenthesis_optional: LEFT_PARENTHESIS .
 
     $default  reduce using rule 32 (left_parenthesis_optional)
 
 
-State 102
+State 114
 
    35 where_item: logical_operator left_parenthesis_optional . table_field comparison_operator INTEGER right_parenthesis_optional
    36           | logical_operator left_parenthesis_optional . table_field comparison_operator FLOAT right_parenthesis_optional
    37           | logical_operator left_parenthesis_optional . table_field comparison_operator STRING right_parenthesis_optional
    38           | logical_operator left_parenthesis_optional . table_field comparison_operator BOOL right_parenthesis_optional
 
-    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 56
-    APPARENT_MAGNITUDE                  shift, and go to state 57
-    ABSOLUTE_MAGNITUDE                  shift, and go to state 58
-    IS_BINARY                           shift, and go to state 59
-    IS_MULTIPLE                         shift, and go to state 60
-    IS_BINARY_COMPONENT                 shift, and go to state 61
-    IS_ECLIPSING_BINARY                 shift, and go to state 62
-    NOTES                               shift, and go to state 63
-    COMMON_NAME                         shift, and go to state 64
-    GREEK_NAME                          shift, and go to state 65
-    LATIN_NAME                          shift, and go to state 66
-    ARABIC_NAME                         shift, and go to state 67
-    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 68
-    BS_HR_NUMBER                        shift, and go to state 69
-    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 70
-    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 71
-    BAYER_DESIGNATION_EXTENSION         shift, and go to state 72
-    RIGHT_ASCENSION_HOURS               shift, and go to state 73
-    RIGHT_ASCENSION_MINUTES             shift, and go to state 74
-    RIGHT_ASCENSION_SECONDS             shift, and go to state 75
-    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 76
-    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 77
-    DECLINATION_DEGREES                 shift, and go to state 78
-    DECLINATION_MINUTES                 shift, and go to state 79
-    DECLINATION_SECONDS                 shift, and go to state 80
-    DECLINATION_DECIMAL_DEGREES         shift, and go to state 81
-    CONSTELLATION_FULL_NAME             shift, and go to state 82
-    CONSTELLATION_ABBREVIATION          shift, and go to state 83
-    CONSTELLATION_NAME_GENITIVE         shift, and go to state 84
-    CONSTELLATION_NUMBER                shift, and go to state 85
+    APPROX_RANK_APPARENT_MAGNITUDE      shift, and go to state 68
+    APPARENT_MAGNITUDE                  shift, and go to state 69
+    ABSOLUTE_MAGNITUDE                  shift, and go to state 70
+    IS_BINARY                           shift, and go to state 71
+    IS_MULTIPLE                         shift, and go to state 72
+    IS_BINARY_COMPONENT                 shift, and go to state 73
+    IS_ECLIPSING_BINARY                 shift, and go to state 74
+    NOTES                               shift, and go to state 75
+    COMMON_NAME                         shift, and go to state 76
+    GREEK_NAME                          shift, and go to state 77
+    LATIN_NAME                          shift, and go to state 78
+    ARABIC_NAME                         shift, and go to state 79
+    FLAMSTEED_DESIGNATION_NUMBER        shift, and go to state 80
+    BS_HR_NUMBER                        shift, and go to state 81
+    BAYER_DESIGNATION_GREEK_LETTER      shift, and go to state 82
+    BAYER_DESIGNATION_GREEK_LETTER_TEX  shift, and go to state 83
+    BAYER_DESIGNATION_EXTENSION         shift, and go to state 84
+    RIGHT_ASCENSION_HOURS               shift, and go to state 85
+    RIGHT_ASCENSION_MINUTES             shift, and go to state 86
+    RIGHT_ASCENSION_SECONDS             shift, and go to state 87
+    RIGHT_ASCENSION_DECIMAL_DEGREES     shift, and go to state 88
+    RIGHT_ASCENSION_DECIMAL_HOURS       shift, and go to state 89
+    DECLINATION_DEGREES                 shift, and go to state 90
+    DECLINATION_MINUTES                 shift, and go to state 91
+    DECLINATION_SECONDS                 shift, and go to state 92
+    DECLINATION_DECIMAL_DEGREES         shift, and go to state 93
+    CONSTELLATION_FULL_NAME             shift, and go to state 94
+    CONSTELLATION_ABBREVIATION          shift, and go to state 95
+    CONSTELLATION_NAME_GENITIVE         shift, and go to state 96
+    CONSTELLATION_NUMBER                shift, and go to state 97
 
-    table_field  go to state 103
+    table_field  go to state 115
 
 
-State 103
+State 115
 
    35 where_item: logical_operator left_parenthesis_optional table_field . comparison_operator INTEGER right_parenthesis_optional
    36           | logical_operator left_parenthesis_optional table_field . comparison_operator FLOAT right_parenthesis_optional
    37           | logical_operator left_parenthesis_optional table_field . comparison_operator STRING right_parenthesis_optional
    38           | logical_operator left_parenthesis_optional table_field . comparison_operator BOOL right_parenthesis_optional
 
-    EQUAL                  shift, and go to state 104
-    NOT_EQUAL              shift, and go to state 105
-    GREATER_THAN           shift, and go to state 106
-    LESS_THAN              shift, and go to state 107
-    GREATER_THAN_OR_EQUAL  shift, and go to state 108
-    LESS_THAN_OR_EQUAL     shift, and go to state 109
+    EQUAL                  shift, and go to state 116
+    NOT_EQUAL              shift, and go to state 117
+    GREATER_THAN           shift, and go to state 118
+    LESS_THAN              shift, and go to state 119
+    GREATER_THAN_OR_EQUAL  shift, and go to state 120
+    LESS_THAN_OR_EQUAL     shift, and go to state 121
 
-    comparison_operator  go to state 110
+    comparison_operator  go to state 122
 
 
-State 104
+State 116
 
    39 comparison_operator: EQUAL .
 
     $default  reduce using rule 39 (comparison_operator)
 
 
-State 105
+State 117
 
    40 comparison_operator: NOT_EQUAL .
 
     $default  reduce using rule 40 (comparison_operator)
 
 
-State 106
+State 118
 
    41 comparison_operator: GREATER_THAN .
 
     $default  reduce using rule 41 (comparison_operator)
 
 
-State 107
+State 119
 
    43 comparison_operator: LESS_THAN .
 
     $default  reduce using rule 43 (comparison_operator)
 
 
-State 108
+State 120
 
    42 comparison_operator: GREATER_THAN_OR_EQUAL .
 
     $default  reduce using rule 42 (comparison_operator)
 
 
-State 109
+State 121
 
    44 comparison_operator: LESS_THAN_OR_EQUAL .
 
     $default  reduce using rule 44 (comparison_operator)
 
 
-State 110
+State 122
 
    35 where_item: logical_operator left_parenthesis_optional table_field comparison_operator . INTEGER right_parenthesis_optional
    36           | logical_operator left_parenthesis_optional table_field comparison_operator . FLOAT right_parenthesis_optional
    37           | logical_operator left_parenthesis_optional table_field comparison_operator . STRING right_parenthesis_optional
    38           | logical_operator left_parenthesis_optional table_field comparison_operator . BOOL right_parenthesis_optional
 
-    INTEGER  shift, and go to state 111
-    BOOL     shift, and go to state 112
-    FLOAT    shift, and go to state 113
-    STRING   shift, and go to state 114
+    INTEGER  shift, and go to state 123
+    BOOL     shift, and go to state 124
+    FLOAT    shift, and go to state 125
+    STRING   shift, and go to state 126
 
 
-State 111
+State 123
 
    35 where_item: logical_operator left_parenthesis_optional table_field comparison_operator INTEGER . right_parenthesis_optional
 
-    RIGHT_PARENTHESIS  shift, and go to state 115
+    RIGHT_PARENTHESIS  shift, and go to state 127
 
     $default  reduce using rule 33 (right_parenthesis_optional)
 
-    right_parenthesis_optional  go to state 116
+    right_parenthesis_optional  go to state 128
 
 
-State 112
+State 124
 
    38 where_item: logical_operator left_parenthesis_optional table_field comparison_operator BOOL . right_parenthesis_optional
 
-    RIGHT_PARENTHESIS  shift, and go to state 115
+    RIGHT_PARENTHESIS  shift, and go to state 127
 
     $default  reduce using rule 33 (right_parenthesis_optional)
 
-    right_parenthesis_optional  go to state 117
+    right_parenthesis_optional  go to state 129
 
 
-State 113
+State 125
 
    36 where_item: logical_operator left_parenthesis_optional table_field comparison_operator FLOAT . right_parenthesis_optional
 
-    RIGHT_PARENTHESIS  shift, and go to state 115
+    RIGHT_PARENTHESIS  shift, and go to state 127
 
     $default  reduce using rule 33 (right_parenthesis_optional)
 
-    right_parenthesis_optional  go to state 118
+    right_parenthesis_optional  go to state 130
 
 
-State 114
+State 126
 
    37 where_item: logical_operator left_parenthesis_optional table_field comparison_operator STRING . right_parenthesis_optional
 
-    RIGHT_PARENTHESIS  shift, and go to state 115
+    RIGHT_PARENTHESIS  shift, and go to state 127
 
     $default  reduce using rule 33 (right_parenthesis_optional)
 
-    right_parenthesis_optional  go to state 119
+    right_parenthesis_optional  go to state 131
 
 
-State 115
+State 127
 
    34 right_parenthesis_optional: RIGHT_PARENTHESIS .
 
     $default  reduce using rule 34 (right_parenthesis_optional)
 
 
-State 116
+State 128
 
    35 where_item: logical_operator left_parenthesis_optional table_field comparison_operator INTEGER right_parenthesis_optional .
 
     $default  reduce using rule 35 (where_item)
 
 
-State 117
+State 129
 
    38 where_item: logical_operator left_parenthesis_optional table_field comparison_operator BOOL right_parenthesis_optional .
 
     $default  reduce using rule 38 (where_item)
 
 
-State 118
+State 130
 
    36 where_item: logical_operator left_parenthesis_optional table_field comparison_operator FLOAT right_parenthesis_optional .
 
     $default  reduce using rule 36 (where_item)
 
 
-State 119
+State 131
 
    37 where_item: logical_operator left_parenthesis_optional table_field comparison_operator STRING right_parenthesis_optional .
 

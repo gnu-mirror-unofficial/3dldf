@@ -300,6 +300,8 @@ yyerror(void* v, char const* s);
 
 %token<int_value> COUNT@;@/
 %token<int_value> WRITE@;@/
+%token<int_value> SUPPRESS@;@/
+%token<int_value> SUPPRESS_NEWLINE@;@/
 
 %token<int_value> TAXONOMY@;@/
 %token<int_value> KINGDOM@;@/
@@ -453,6 +455,7 @@ yyerror(void* v, char const* s);
 %type<int_value> table_name@;@/
 %type<int_value> where_list@;@/
 %type<int_value> where_item@;@/
+%type<string_value> combined_string@;@/
 %type<int_value> comparison_operator@;@/
 %type<int_value> left_parenthesis_optional@;@/
 %type<int_value> right_parenthesis_optional@;@/
@@ -3148,6 +3151,238 @@ END_SHOW_RULE:
 
 };
 
+@q *** (3) @>
+@
+@<Token and type declarations@>=
+%type<int_value> append_optional@;@/
+%type<int_value> suppress_newline_optional@;@/
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=statement: OPEN STRING append_optional@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    ios_base::openmode mode;
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  OPEN STRING append_optional'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    scanner_node->out_filename = @=$2@>;
+
+    if (@=$3@> == 1)
+       mode = ios_base::app;
+    else
+       mode = ios_base::out;
+
+    scanner_node->out_strm.open(scanner_node->out_filename.c_str(), mode);
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=append_optional: /* EMPTY  */@>
+{
+   @=$$@> = 0;
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=append_optional: APPEND@>
+{
+   @=$$@> = 1;
+
+};
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=statement: WRITE combined_string suppress_newline_optional@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  WRITE combined_string'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    if (scanner_node->out_strm.is_open())
+    {
+       scanner_node->out_strm << @=$2@>;
+
+       if (!@=$3@>)
+          scanner_node->out_strm << endl;
+
+    }
+
+    else
+    {
+        cerr << "*** Parser:  Rule `statement:  WRITE combined_string':" 
+             << endl 
+             << "ERROR!  `scanner_node->out_strm' isn't open.  Can't write to it."
+             << endl
+             << "Continuing."
+             << endl;
+    }
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=suppress_newline_optional:  /* Empty  */@>
+{
+
+  @=$$@> = 0; 
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=suppress_newline_optional:  SUPPRESS_NEWLINE@>
+{
+
+  @=$$@> = 1; 
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=suppress_newline_optional:  SUPPRESS@>
+{
+
+  @=$$@> = 1; 
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=statement: CLOSE@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  CLOSE'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+
+    scanner_node->out_strm.close();
+
+};
+
+@q *** (3) @>
+
+@q **** (4) combined_string --> STRING  @>
+
+@ \<combined string> $\longrightarrow$ \.{STRING}.
+
+@<Rules@>=
+
+@=combined_string: STRING@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  combined_string:  STRING'."  
+             << endl 
+             << "STRING == " << @=$1@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    memset(@=$$@>, 0,  1024);
+    strcat(@=$$@>, @=$1@>);
+
+@q ***** (5) @>
+
+};
+
+@q **** (4) combined_string --> combined_string STRING  @>
+
+@ \<combined string> $\longrightarrow$ \<combined string> \.{STRING}.
+
+@<Rules@>=
+
+@=combined_string: combined_string STRING@>
+{
+@q ***** (5) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `combined_string: combined_string STRING'." 
+             << endl 
+             << "combined_string == " << @=$1@> << endl
+             << "STRING          == " << @=$2@> << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    memset(@=$$@>, '\0',  1024);
+
+    if (strlen(@=$1@>) + strlen(@=$2@>) > 1023)
+    {
+       cerr << "ERROR!  In parser, rule `combined_string: combined_string STRING':"
+            << endl 
+            << "Total length of `$1' (`combined_string') and `$2' (`STRING') exceeds limit:"
+            << endl 
+            << strlen(@=$1@>) << " + " << strlen(@=$1@>) << " == " << (strlen(@=$1@>) + strlen(@=$2@>))
+            << endl
+            << "Setting value of rule (`$$' == `combined_string') to the empty string and will try to continue."
+            << endl;
+
+    }
+    else
+    {
+        strcat(@=$$@>, @=$1@>);
+        strcat(@=$$@>, " ");
+        strcat(@=$$@>, @=$2@>);
+    }
+    
+   if (DEBUG)
+   { 
+       cerr << "`$$' == " << @=$$@> << endl;
+   }  
+
+@q ***** (5) @>
+
+};
+
+@q *** (3) @>
 @
 @<Garbage@>=
 /* Empty  */
