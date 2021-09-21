@@ -179,6 +179,7 @@ yyerror(void* v, char const* s);
 %token<int_value> UNIQUE@;@/
 %token<int_value> LIMIT@;@/
 %token<int_value> OFFSET@;@/
+%token<int_value> MINUS@;@/
 %token<int_value> ID@;@/
 %token<int_value> QUERY@;@/
 %token<int_value> AND@;@/
@@ -805,6 +806,7 @@ END_QUERY_RULE:
       scanner_node->ascending_descending_flag = 0;
       scanner_node->append_flag = false;
       scanner_node->table_field_vector.clear();
+      scanner_node->table_field_exclude_vector.clear();
       scanner_node->where_vector.clear();
 
 };
@@ -1012,6 +1014,7 @@ END_QUERY_RULE:
 
     scanner_node->where_vector.clear();
     scanner_node->table_field_vector.clear();
+    scanner_node->table_field_exclude_vector.clear();
 
     @=$$@> = 0;
 
@@ -2092,7 +2095,7 @@ END_SORT_RULE:
 @q *** (3) @>
 @
 @<Rules@>=
-@=table_field_list: table_field_list table_field@>
+@=table_field_list: table_field_list comma_optional table_field@>
 {
 @q ***** (5) @>
 
@@ -2105,7 +2108,85 @@ END_SORT_RULE:
 
     }  /* |if (DEBUG)|  */  
 
-    scanner_node->table_field_vector.push_back(@=$2@>);
+    if (DEBUG) 
+       cerr << "At beginning of rule:"
+            << endl 
+            << "scanner_node->table_field_vector.size() == " << scanner_node->table_field_vector.size() << endl;
+
+    vector<int>::iterator iter = find(scanner_node->table_field_vector.begin(),
+                                      scanner_node->table_field_vector.end(),
+                                      @=$3@>);
+
+    if (iter == scanner_node->table_field_vector.end())
+    {
+        if (DEBUG)
+        { 
+           cerr << "*** Parser:  Rule `table_field_list: table_field_list table_field':" 
+                << endl
+                << "`iter' == `scanner_node->table_field_vector.end()'" << endl 
+                << "Pushing " << table_field_map[@=$3@>] << " (" << @=$3@> << ") onto the vector."
+                << endl;
+
+        }  
+        scanner_node->table_field_vector.push_back(@=$3@>);
+    }
+    else if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field_list: table_field_list table_field':" 
+             << endl
+             << "WARNING:  `table_field' == " << table_field_map[@=$3@>] << " (" << @=$3@> << ") is already on "
+             << "`scanner_node->table_field_vector'." << endl 
+             << "Not pushing it onto the vector.  Continuing." << endl;
+    }
+
+    if (DEBUG) 
+       cerr << "At end of rule:"
+            << endl 
+            << "scanner_node->table_field_vector.size() == " << scanner_node->table_field_vector.size() << endl;
+
+@q ***** (5) @>
+   
+};
+
+@q *** (3) @>
+@
+@<Token and type declarations@>=
+%type<int_value> comma_optional@;@/
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=comma_optional: /* Empty */@>
+{
+   @=$$@> = COMMA;
+   
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=comma_optional: COMMA@>
+{
+   @=$$@> = COMMA;
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=table_field_list: table_field_list MINUS table_field@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `table_field_list: table_field_list MINUS table_field'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    scanner_node->table_field_exclude_vector.push_back(@=$3@>);
 
 @q ***** (5) @>
    
@@ -2115,7 +2196,7 @@ END_SORT_RULE:
 @ 
 @<Rules@>=
 
-@=table_field_list: table_field_list COMMA table_field@>
+@=table_field_list: table_field_list COMMA MINUS table_field@>
 {
 @q ***** (5) @>
 
@@ -2123,16 +2204,17 @@ END_SORT_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `table_field_list: table_field_list COMMA table_field'." 
+        cerr << "*** Parser:  Rule `table_field_list: table_field_list COMMA MINUS table_field'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
 @q ***** (5) @>
 
-    scanner_node->table_field_vector.push_back(@=$3@>);
+    scanner_node->table_field_exclude_vector.push_back(@=$4@>);
   
 };
+
 
 @q *** (3) @>
 @ 
@@ -2787,11 +2869,171 @@ END_SORT_RULE:
 
 };
 
+@q *** (3) @>
+@
+@<Token and type declarations@>=
+%type<int_value> all_optional@;@/
 
 @q *** (3) @>
 @
 @<Rules@>=
-@=statement: SHOW STARS@>
+@=statement: SHOW STARS all_optional table_field_list@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    vector<int>::iterator i_iter;
+    bool vector_empty = scanner_node->table_field_vector.empty();
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional'." 
+             << endl
+             << "`all_optional' == " << @=$3@> << endl
+             << "`scanner_node->table_field_vector.size()' == " << scanner_node->table_field_vector.size() 
+             << endl 
+             << "`scanner_node->table_field_exclude_vector.size()' == " << scanner_node->table_field_exclude_vector.size() 
+             << endl; 
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    if (scanner_node->star_vector.empty())
+    {
+       cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+            << endl 
+            << "WARNING:  `scanner_node->star_vector' is empty.  No stars to show."
+            << endl 
+            << "Call `query stars ...' to fill `scanner_node->star_vector'."
+            << endl
+            << "Exiting rule." << endl;
+
+       goto END_SHOW_RULE;
+
+    }
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    if (@=$3@> == 1 && scanner_node->table_field_vector.size() > 0)
+    {
+       cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+            << endl 
+            << "WARNING:  `all_optional' == 1 and `scanner_node->table_field_vector.size()' == " 
+            << scanner_node->table_field_vector.size() << " (> 0)" << endl 
+            << endl 
+            << "Clearing `scanner_node->table_field_vector'."
+            << endl;
+
+       scanner_node->table_field_vector.clear();
+    }
+
+@q ***** (5) @>
+
+@ If ``all'' or ``*'' were specified, first clear |scanner_node->table_field_vector| and 
+then add all fields to it.
+
+@<Rules@>=
+
+    if (@=$3@> == 1)
+    {
+@q ****** (6) @>
+
+       for (map<int, string>::iterator iter = table_field_map.begin(); 
+            iter != table_field_map.end(); 
+            ++iter)
+       {
+           if (vector_empty)
+              scanner_node->table_field_vector.push_back(iter->first);
+   
+           else 
+           {
+              i_iter = find(scanner_node->table_field_vector.begin(), scanner_node->table_field_vector.end(), iter->first);
+
+              if (i_iter == scanner_node->table_field_vector.end())
+                 scanner_node->table_field_vector.push_back(iter->first);     
+           }
+
+       }  /* |for| */
+
+@q ****** (6) @>
+
+       if (DEBUG)
+       {
+           cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+                << endl
+                << "After insert commands.  `scanner_node->table_field_vector.size()' == " 
+                << scanner_node->table_field_vector.size() 
+                << endl; 
+
+       }  /* |if (DEBUG)|  */  
+
+@q ****** (6) @>
+
+    }  /* |if (@=$3@> == 1)|  */
+
+@q ***** (5) @>
+@ Exclude the fields specified with ``$-$'' (minus).
+@<Rules@>=
+
+    for (vector<int>::iterator iter = scanner_node->table_field_exclude_vector.begin();
+         iter != scanner_node->table_field_exclude_vector.end(); 
+         ++iter)
+    {
+        i_iter = find(scanner_node->table_field_vector.begin(), scanner_node->table_field_vector.end(), *iter);
+         
+        if (i_iter != scanner_node->table_field_vector.end())
+           scanner_node->table_field_vector.erase(i_iter);
+    }  
+
+@q ****** (6) @>
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+             << endl
+             << "After erase commands.  `scanner_node->table_field_vector.size()' == " 
+             << scanner_node->table_field_vector.size() 
+             << endl; 
+
+    }  /* |if (DEBUG)|  */  
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+    cout << "`scanner_node->star_vector.size()' == " << scanner_node->star_vector.size() << endl
+         << "`scanner_node->star_vector':" << endl;
+
+    for (vector<Star>::iterator iter = scanner_node->star_vector.begin();
+         iter != scanner_node->star_vector.end();
+         ++iter)
+    {
+            iter->show("", &scanner_node->table_field_vector);
+    }
+
+    cout << endl;
+
+@q ***** (5) @>
+@
+@<Rules@>=
+
+END_SHOW_RULE:
+
+    scanner_node->table_field_vector.clear();
+    scanner_node->table_field_exclude_vector.clear();
+  
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=all_optional: /* Empty  */@>
 {
 @q ***** (5) @>
 
@@ -2799,34 +3041,59 @@ END_SORT_RULE:
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `statement:  SHOW STARS'." 
+        cerr << "*** Parser:  Rule `statement:  all_optional: EMPTY'." 
              << endl;
 
     }  /* |if (DEBUG)|  */  
 
+    @=$$@> = 0;
+
 @q ***** (5) @>
 
-    if (scanner_node->star_vector.empty())
-       cerr << "`scanner_node->star_vector' is empty.  No stars to show."
-            << endl 
-            << "Call `query stars ...' to fill `scanner_node->star_vector'."
-            << endl;
+};
 
-    else
+@q *** (3) @>
+@
+@<Rules@>=
+@=all_optional: ALL@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
     {
-        cerr << "`scanner_node->star_vector.size()' == " << scanner_node->star_vector.size() << endl
-             << "`scanner_node->star_vector':" << endl;
+        cerr << "*** Parser:  Rule `statement:  all_optional: ALL'." 
+             << endl;
 
-        for (vector<Star>::iterator iter = scanner_node->star_vector.begin();
-             iter != scanner_node->star_vector.end();
-             ++iter)
-        {
-            iter->show();
-        }
+    }  /* |if (DEBUG)|  */  
 
-        cerr << endl;
-        
-    }  
+    @=$$@> = 1;
+
+@q ***** (5) @>
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=all_optional: ASTERISK@>
+{
+@q ***** (5) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  all_optional: ASTERISK'." 
+             << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    @=$$@> = 1;
+
+@q ***** (5) @>
+
 };
 
 @

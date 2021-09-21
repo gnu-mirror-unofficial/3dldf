@@ -6,12 +6,16 @@
 query stars where approx_rank_apparent_magnitude > 0 and approx_rank_apparent_magnitude <= 200
 order_by approx_rank_apparent_magnitude limit 10;
 
-sort stars by common_name;
+#sort stars by common_name;
 
-show stars;
+#pause;
+
+
+show stars approx_rank_apparent_magnitude, approx_rank_apparent_magnitude;
+
+#show stars approx_rank_apparent_magnitude, -common_name, -absolute_magnitude;
 
 pause;
-
 
 end;
 

@@ -2450,6 +2450,20 @@ to {\bf yylex} can be set here.
 
 @=}@>
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=\- {@>
+
+   if (DEBUG)
+   {
+       cerr << "In `yylex':  " << yytext << endl;
+   }  
+
+   return MINUS;
+
+@=}@>
+
 @q *** (3) INTEGER @>
 
 @ \.{INTEGER}.  
@@ -2585,7 +2599,7 @@ to {\bf yylex} can be set here.
 @ Undelimited string.
 
 @<Rules@>=
-@=[[:alnum:]./~@@+\?$][[:alnum:]./\-_~+@@\?$]* {@>
+@=[[:alnum:]./~@@+\?$][[:alnum:]./\_~+@@\?$]* {@>
 
    strcpy(yylval->string_value, yytext);
 

@@ -307,12 +307,12 @@ Star::set(MYSQL_ROW curr_row)
 @
 @<Declare |Star| functions@>=
 void 
-show(string text = "") const;
+show(string text = "", vector<int> *v = 0) const;
 
 @
 @<Define |Star| functions@>=
 void 
-Star::show(string text) const
+Star::show(string text, vector<int> *v) const
 {
 
     bool DEBUG = false; /* |true| */ 
@@ -322,6 +322,8 @@ Star::show(string text) const
 
     if (text == "")
        text = "Star:";
+
+/* !!START HERE:  LDF 2021.09.21.  */ 
 
     cout << "common_name:                         " << common_name << endl
          << "greek_name:                          " << greek_name << endl 
