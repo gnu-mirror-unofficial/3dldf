@@ -230,9 +230,6 @@ yyerror(void* v, char const* s);
 %token<int_value> RIGHT_ASCENSION@;@/
 %token<int_value> RIGHT@;@/
 %token<int_value> ASCENSION@;@/
-
-/* !!START HERE:  LDF 2021.09.18.  Declare tokens "DECLINATION_HOURS" ... */ 
-
 %token<int_value> DECLINATION@;@/
 %token<int_value> ECLIPTIC@;@/
 %token<int_value> HOUR@;@/
@@ -803,8 +800,14 @@ yyerror(void* v, char const* s);
 
 END_QUERY_RULE:
 
-      scanner_node->ascending_descending_flag = 0;
-      scanner_node->append_flag = false;
+      scanner_node->limit                     = 0;              
+      scanner_node->offset                    = 0;
+      scanner_node->count                     = 0;
+      scanner_node->lowest                    = 0;
+      scanner_node->highest                   = 0;
+      scanner_node->ascending_descending_flag = false;
+      scanner_node->append_flag               = false;
+
       scanner_node->table_field_vector.clear();
       scanner_node->table_field_exclude_vector.clear();
       scanner_node->where_vector.clear();
@@ -1013,7 +1016,6 @@ END_QUERY_RULE:
 @q ***** (5) @>
 
     scanner_node->where_vector.clear();
-    scanner_node->table_field_vector.clear();
     scanner_node->table_field_exclude_vector.clear();
 
     @=$$@> = 0;
@@ -1991,9 +1993,6 @@ END_QUERY_RULE:
 
              }
 
-             cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
         }  /* |else|  */
 
 @q ****** (6) @>
@@ -2877,25 +2876,29 @@ END_SORT_RULE:
 @q *** (3) @>
 @
 @<Rules@>=
-@=statement: SHOW STARS all_optional table_field_list@>
+@=statement: SHOW STARS all_optional table_field_list modifier_list@>
 {
 @q ***** (5) @>
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
 
+    int i = 0;
     vector<int>::iterator i_iter;
+    vector<Star>::iterator star_iter;
+
     bool vector_empty = scanner_node->table_field_vector.empty();
+
+@q ***** (5) @>
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional'." 
+        cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional table_field_list modifier_list'." 
              << endl
              << "`all_optional' == " << @=$3@> << endl
              << "`scanner_node->table_field_vector.size()' == " << scanner_node->table_field_vector.size() 
              << endl 
              << "`scanner_node->table_field_exclude_vector.size()' == " << scanner_node->table_field_exclude_vector.size() 
              << endl; 
-
     }  /* |if (DEBUG)|  */  
 
 @q ***** (5) @>
@@ -2904,7 +2907,7 @@ END_SORT_RULE:
 
     if (scanner_node->star_vector.empty())
     {
-       cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+       cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional table_field_list modifier_list':" 
             << endl 
             << "WARNING:  `scanner_node->star_vector' is empty.  No stars to show."
             << endl 
@@ -2922,7 +2925,7 @@ END_SORT_RULE:
 
     if (@=$3@> == 1 && scanner_node->table_field_vector.size() > 0)
     {
-       cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+       cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional table_field_list modifier_list':" 
             << endl 
             << "WARNING:  `all_optional' == 1 and `scanner_node->table_field_vector.size()' == " 
             << scanner_node->table_field_vector.size() << " (> 0)" << endl 
@@ -2965,7 +2968,7 @@ then add all fields to it.
 
        if (DEBUG)
        {
-           cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+           cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional table_field_list modifier_list':" 
                 << endl
                 << "After insert commands.  `scanner_node->table_field_vector.size()' == " 
                 << scanner_node->table_field_vector.size() 
@@ -2995,7 +2998,7 @@ then add all fields to it.
 
     if (DEBUG)
     {
-        cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional':" 
+        cerr << "*** Parser:  Rule `statement:  SHOW STARS all_optional table_field_list modifier_list':" 
              << endl
              << "After erase commands.  `scanner_node->table_field_vector.size()' == " 
              << scanner_node->table_field_vector.size() 
@@ -3010,11 +3013,51 @@ then add all fields to it.
     cout << "`scanner_node->star_vector.size()' == " << scanner_node->star_vector.size() << endl
          << "`scanner_node->star_vector':" << endl;
 
-    for (vector<Star>::iterator iter = scanner_node->star_vector.begin();
-         iter != scanner_node->star_vector.end();
-         ++iter)
+    i = 0;
+    star_iter = scanner_node->star_vector.begin();
+
+    if (scanner_node->offset > 0)
     {
-            iter->show("", &scanner_node->table_field_vector);
+        for (i = 0; i < scanner_node->offset && star_iter != scanner_node->star_vector.end(); ++i)
+        {
+     
+           if (DEBUG)             
+              cerr << "Advancing `star_iter'." << endl;
+
+           ++star_iter;
+        }
+    }
+
+    if (star_iter == scanner_node->star_vector.end())
+    {
+        cout << "`scanner_node->offset' may be too large.  Not showing `scanner_node->star_vector'." 
+             << endl 
+             << "`scanner_node->star_vector.size()'   == " << scanner_node->star_vector.size() << endl 
+             << "`scanner_node->offset'               == " << scanner_node->offset << endl;
+
+        goto END_SHOW_RULE;
+    }
+
+@q ***** (5) @>
+
+    for (i = 0;
+            star_iter != scanner_node->star_vector.end() 
+         && (scanner_node->limit == 0 || i < scanner_node->limit); 
+         ++star_iter)
+    {
+
+        if (DEBUG) 
+           cerr << "Calling `Star::show'." << endl;
+
+        star_iter->show("", &scanner_node->table_field_vector);
+        ++i;
+        
+        if (scanner_node->limit > 0 && i >= scanner_node->limit)
+        {
+           cerr << "`i' == " << i << ".  Breaking." << endl;
+           break;
+        }
+         
     }
 
     cout << endl;
@@ -3025,8 +3068,17 @@ then add all fields to it.
 
 END_SHOW_RULE:
 
-    scanner_node->table_field_vector.clear();
-    scanner_node->table_field_exclude_vector.clear();
+      scanner_node->limit                     = 0;              
+      scanner_node->offset                    = 0;
+      scanner_node->count                     = 0;
+      scanner_node->lowest                    = 0;
+      scanner_node->highest                   = 0;
+      scanner_node->ascending_descending_flag = false;
+      scanner_node->append_flag               = false;
+
+      scanner_node->table_field_vector.clear();
+      scanner_node->table_field_exclude_vector.clear();
+      scanner_node->where_vector.clear();
   
 };
 
