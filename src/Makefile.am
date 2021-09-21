@@ -1453,6 +1453,24 @@ small_rhombi.1: small_rhombi.mp
 small_rhombi.mp: small_rhombi.ldf
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) small_rhombi.ldf
 
+
+.PHONY: run-ph
+
+pentahex.pdf: pentahex.dvi
+	dvipdfmx pentahex.dvi
+
+pentahex.ps: pentahex.dvi
+	dvips -o pentahex.ps pentahex.dvi
+
+pentahex.dvi: pentahex.tex pentahex.1
+	$(TEX) pentahex.tex
+
+pentahex.1: pentahex.mp
+	mpost -numbersystem "double" pentahex.mp
+
+pentahex.mp: pentahex.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) pentahex.ldf
+
 .PHONY: purge-s
 
 purge-s:
