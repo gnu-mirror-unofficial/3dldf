@@ -3156,6 +3156,7 @@ END_SHOW_RULE:
 @<Token and type declarations@>=
 %type<int_value> append_optional@;@/
 %type<int_value> suppress_newline_optional@;@/
+%type<string_value> string_optional@;@/
 
 @q *** (3) @>
 @
@@ -3381,6 +3382,209 @@ END_SHOW_RULE:
 @q ***** (5) @>
 
 };
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=statement: WRITE STARS string_optional append_optional@>
+{
+@q **** (4) @>
+
+    Scanner_Node scanner_node = static_cast<Scanner_Node>(yyget_extra(parameter));
+
+    ofstream local_out_strm;
+    ofstream *out_strm_ptr;
+
+    ios_base::openmode mode;
+
+    if (DEBUG)
+    {
+        cerr << "*** Parser:  Rule `statement:  WRITE STARS string_optional append_optional'." 
+             << endl
+             << "`string_optional' ($3) == \"" << @=$3@> << "\"" << endl;
+
+    }  /* |if (DEBUG)|  */  
+
+    if (@=$4@> == 1)
+       mode = ios_base::app;
+    else
+       mode = ios_base::out;
+
+    if (strlen(@=$3@>) > 0)
+    {
+        out_strm_ptr = &local_out_strm;
+        local_out_strm.open(@=$3@>, mode);
+    }
+    else
+       out_strm_ptr = &scanner_node->out_strm;
+
+@q **** (4) @>
+
+    if (out_strm_ptr->is_open())
+    {
+@q ***** (5) @>
+
+        if (DEBUG) 
+           cerr << "`*out_strm_ptr' is open." << endl;
+
+        string zero_str;
+        string f_sect_str;
+
+@q ***** (5) @>
+
+        for (vector<Star>::iterator iter = scanner_node->star_vector.begin();
+             iter != scanner_node->star_vector.end();
+             ++iter)
+        {
+@q ****** (6) @>
+
+            if (iter->approx_rank_apparent_magnitude < 10)
+               zero_str = "00";
+            else if (iter->approx_rank_apparent_magnitude < 100)
+               zero_str = "0";
+            else
+               zero_str = "";
+
+            if (iter->right_ascension_decimal_degrees > 0 && iter->right_ascension_decimal_degrees < 22.5)
+            {
+                f_sect_str = "1/1";
+            }
+            else if (iter->right_ascension_decimal_degrees > 22.5 && iter->right_ascension_decimal_degrees < 45)
+            {
+                f_sect_str = "2/2";
+            }
+            else if (iter->right_ascension_decimal_degrees > 45 && iter->right_ascension_decimal_degrees < 67.5)
+            {
+                f_sect_str = "2/3";
+            }
+            else if (iter->right_ascension_decimal_degrees > 67.5 && iter->right_ascension_decimal_degrees < 90)
+            {
+                f_sect_str = "3/4";
+            }
+            else if (iter->right_ascension_decimal_degrees > 90.0 && iter->right_ascension_decimal_degrees < 112.5)
+            {
+                f_sect_str = "3/5";
+            }
+            else if (iter->right_ascension_decimal_degrees > 112.5 && iter->right_ascension_decimal_degrees < 135.0)
+            {
+                f_sect_str = "4/6";
+            }
+            else if (iter->right_ascension_decimal_degrees > 135.0 && iter->right_ascension_decimal_degrees < 157.5)
+            {
+                f_sect_str = "4/7";
+            }
+            else if (iter->right_ascension_decimal_degrees > 157.5 && iter->right_ascension_decimal_degrees < 180.0)
+            {
+                f_sect_str = "5/8";
+            }
+            else if (iter->right_ascension_decimal_degrees > 180.0 && iter->right_ascension_decimal_degrees < 202.5)
+            {
+                f_sect_str = "5/9";
+            }
+            else if (iter->right_ascension_decimal_degrees > 202.5 && iter->right_ascension_decimal_degrees < 225.0)
+            {
+                f_sect_str = "6/10";
+            }
+            else if (iter->right_ascension_decimal_degrees > 225.0 && iter->right_ascension_decimal_degrees < 247.5)
+            {
+                f_sect_str = "6/11";
+            }
+            else if (iter->right_ascension_decimal_degrees > 247.5 && iter->right_ascension_decimal_degrees < 270.0)
+            {
+                f_sect_str = "7/12";
+            }
+            else if (iter->right_ascension_decimal_degrees > 270.0 && iter->right_ascension_decimal_degrees < 292.5)
+            {
+                f_sect_str = "7/13";
+            }
+            else if (iter->right_ascension_decimal_degrees > 292.5 && iter->right_ascension_decimal_degrees < 315.0)
+            {
+                f_sect_str = "8/14";
+            }
+            else if (iter->right_ascension_decimal_degrees > 315.0 && iter->right_ascension_decimal_degrees < 337.5)
+            {
+                f_sect_str = "8/15";
+            }
+            else if (iter->right_ascension_decimal_degrees > 337.5 && iter->right_ascension_decimal_degrees < 360.0)
+            {
+                f_sect_str = "1/16";
+            }
+
+@q ****** (6) @>
+
+            *out_strm_ptr << "\\bayertoks={" << iter->bayer_designation_greek_letter_tex << " "
+                          << iter->constellation_name_genitive << "}\\starinfo{" << zero_str
+                          << iter->approx_rank_apparent_magnitude << "}"
+                          << "{" << iter->common_name << "}{" 
+                          << iter->right_ascension_hours << "\\rm{h}\\thinspace "
+                          << iter->right_ascension_minutes << "^\\prime\\thinspace "
+                          << iter->right_ascension_seconds << "^{\\prime\\prime}$}"
+                          << "{" << iter->declination_degrees << "^\\circ\\thinspace "
+                          << iter->declination_minutes << "^\\prime\\thinspace "
+                          << iter->declination_seconds << "^{\\prime\\prime}$}"
+                          << "{" << f_sect_str << "}{" << iter->apparent_magnitude << "}{" << iter->absolute_magnitude << "}{"
+                          << iter->constellation_full_name << "}"
+                          << endl;
+@q ****** (6) @>
+
+        }  /* |for|  */
+
+@q ***** (5) @>
+
+        if (local_out_strm.is_open())
+           local_out_strm.close();
+
+@q ***** (5) @>
+
+    }  /* |if (out_strm_ptr->is_open())| */
+
+@q **** (4) @>
+
+    else
+    {
+        cerr << "*** Parser:  Rule `statement:  WRITE STARS string_optional append_optional':" 
+             << endl
+             << "ERROR!  `*out_strm_ptr' isn't open.  Can't write to output file."
+             << endl 
+             << "Continuing." << endl;
+    }
+
+@q **** (4) @>
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=string_optional:  /* EMPTY  */@>
+{
+@q **** (4) @>
+
+   memset(@=$$@>, '\0', 1024);
+
+@q **** (4) @>
+
+};
+
+@q *** (3) @>
+@
+@<Rules@>=
+
+@=string_optional: combined_string@>
+{
+@q **** (4) @>
+
+   strcpy(@=$$@>, @=$1@>);
+
+@q **** (4) @>
+
+};
+
+
+
 
 @q *** (3) @>
 @
