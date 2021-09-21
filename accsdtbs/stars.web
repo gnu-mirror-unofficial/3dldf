@@ -304,16 +304,20 @@ Star::set(MYSQL_ROW curr_row)
 }  /* End of |Star::set| definition  */
 
 @q ** (2) @>
+
+@q *** (3) Declaration @>
 @
 @<Declare |Star| functions@>=
 void 
 show(string text = "", vector<int> *v = 0) const;
 
+@q *** (3) Definition @>
 @
 @<Define |Star| functions@>=
 void 
 Star::show(string text, vector<int> *v) const
 {
+@q **** (4) @>
 
     bool DEBUG = false; /* |true| */ 
 
@@ -325,39 +329,124 @@ Star::show(string text, vector<int> *v) const
 
 /* !!START HERE:  LDF 2021.09.21.  */ 
 
-    cout << "common_name:                         " << common_name << endl
-         << "greek_name:                          " << greek_name << endl 
-         << "latin_name:                          " << latin_name << endl 
-         << "arabic_name:                         " << arabic_name << endl 
-         << "flamsteed_designation_number:        " << flamsteed_designation_number << endl 
-         << "bayer_designation_greek_letter:      " << bayer_designation_greek_letter << endl 
-         << "bayer_designation_greek_letter_tex:  " << bayer_designation_greek_letter_tex << endl 
-         << "bayer_designation_extension:         " << bayer_designation_extension << endl 
-         << "bs_hr_number:                        " << bs_hr_number << endl 
-         << "approx_rank_apparent_magnitude:      " << approx_rank_apparent_magnitude << endl 
-         << "apparent_magnitude:                  " << apparent_magnitude << endl 
-         << "absolute_magnitude:                  " << absolute_magnitude << endl 
-         << "apparent_magnitude_varies:           " << apparent_magnitude_varies << endl 
-         << "absolute_magnitude_varies:           " << absolute_magnitude_varies << endl 
-         << "constellation_abbreviation:          " << constellation_abbreviation << endl 
-         << "constellation_full_name:             " << constellation_full_name << endl 
-         << "constellation_name_genitive:         " << constellation_name_genitive << endl 
-         << "constellation_number:                " << constellation_number << endl 
-         << "right_ascension_hours:               " << right_ascension_hours << endl 
-         << "right_ascension_minutes:             " << right_ascension_minutes << endl 
-         << "right_ascension_seconds:             " << right_ascension_seconds << endl 
-         << "right_ascension_decimal_hours:       " << right_ascension_decimal_hours << endl 
-         << "right_ascension_decimal_degrees:     " << right_ascension_decimal_degrees << endl 
-         << "declination_degrees:                 " << declination_degrees << endl 
-         << "declination_minutes:                 " << declination_minutes << endl 
-         << "declination_seconds:                 " << declination_seconds << endl 
-         << "declination_decimal_degrees:         " << declination_decimal_degrees << endl 
-         << "is_binary:                           " << is_binary << endl
-         << "is_multiple:                         " << is_multiple << endl 
-         << "is_binary_component:                 " << is_binary_component << endl 
-         << "is_eclipsing_binary:                 " << is_eclipsing_binary << endl 
-         << "notes:                               " << notes << endl 
-         << endl; 
+    if (v == 0)
+    {
+        cout << "common_name:                         " << common_name << endl
+             << "greek_name:                          " << greek_name << endl 
+             << "latin_name:                          " << latin_name << endl 
+             << "arabic_name:                         " << arabic_name << endl 
+             << "flamsteed_designation_number:        " << flamsteed_designation_number << endl 
+             << "bayer_designation_greek_letter:      " << bayer_designation_greek_letter << endl 
+             << "bayer_designation_greek_letter_tex:  " << bayer_designation_greek_letter_tex << endl 
+             << "bayer_designation_extension:         " << bayer_designation_extension << endl 
+             << "bs_hr_number:                        " << bs_hr_number << endl 
+             << "approx_rank_apparent_magnitude:      " << approx_rank_apparent_magnitude << endl 
+             << "apparent_magnitude:                  " << apparent_magnitude << endl 
+             << "absolute_magnitude:                  " << absolute_magnitude << endl 
+             << "apparent_magnitude_varies:           " << apparent_magnitude_varies << endl 
+             << "absolute_magnitude_varies:           " << absolute_magnitude_varies << endl 
+             << "constellation_abbreviation:          " << constellation_abbreviation << endl 
+             << "constellation_full_name:             " << constellation_full_name << endl 
+             << "constellation_name_genitive:         " << constellation_name_genitive << endl 
+             << "constellation_number:                " << constellation_number << endl 
+             << "right_ascension_hours:               " << right_ascension_hours << endl 
+             << "right_ascension_minutes:             " << right_ascension_minutes << endl 
+             << "right_ascension_seconds:             " << right_ascension_seconds << endl 
+             << "right_ascension_decimal_hours:       " << right_ascension_decimal_hours << endl 
+             << "right_ascension_decimal_degrees:     " << right_ascension_decimal_degrees << endl 
+             << "declination_degrees:                 " << declination_degrees << endl 
+             << "declination_minutes:                 " << declination_minutes << endl 
+             << "declination_seconds:                 " << declination_seconds << endl 
+             << "declination_decimal_degrees:         " << declination_decimal_degrees << endl 
+             << "is_binary:                           " << is_binary << endl
+             << "is_multiple:                         " << is_multiple << endl 
+             << "is_binary_component:                 " << is_binary_component << endl 
+             << "is_eclipsing_binary:                 " << is_eclipsing_binary << endl 
+             << "notes:                               " << notes << endl 
+             << endl; 
+
+    }  /* |if (v == 0)| */
+
+@q **** (4) @>
+@
+@<Define |Star| functions@>=
+
+    else
+    {
+        for (vector<int>::iterator iter = v->begin();
+             iter != v->end();
+             ++iter)
+        {
+            if (*iter == COMMON_NAME)
+               cout << "common_name:                         " << common_name << endl;
+            else if (*iter == GREEK_NAME)
+               cout << "greek_name:                          " << greek_name << endl; 
+            else if (*iter == LATIN_NAME)
+               cout << "latin_name:                          " << latin_name << endl; 
+            else if (*iter == ARABIC_NAME)
+               cout << "arabic_name:                         " << arabic_name << endl; 
+            else if (*iter == FLAMSTEED_DESIGNATION_NUMBER)
+               cout << "flamsteed_designation_number:        " << flamsteed_designation_number << endl; 
+            else if (*iter == BAYER_DESIGNATION_GREEK_LETTER)
+               cout << "bayer_designation_greek_letter:      " << bayer_designation_greek_letter << endl; 
+            else if (*iter == BAYER_DESIGNATION_GREEK_LETTER_TEX)
+               cout << "bayer_designation_greek_letter_tex:  " << bayer_designation_greek_letter_tex << endl; 
+            else if (*iter == BAYER_DESIGNATION_EXTENSION)
+               cout << "bayer_designation_extension:         " << bayer_designation_extension << endl; 
+            else if (*iter == BS_HR_NUMBER)
+               cout << "bs_hr_number:                        " << bs_hr_number << endl; 
+            else if (*iter == APPROX_RANK_APPARENT_MAGNITUDE)
+               cout << "approx_rank_apparent_magnitude:      " << approx_rank_apparent_magnitude << endl; 
+            else if (*iter == APPARENT_MAGNITUDE)
+               cout << "apparent_magnitude:                  " << apparent_magnitude << endl; 
+            else if (*iter == ABSOLUTE_MAGNITUDE)
+               cout << "absolute_magnitude:                  " << absolute_magnitude << endl; 
+            else if (*iter == APPARENT_MAGNITUDE_VARIES)
+               cout << "apparent_magnitude_varies:           " << apparent_magnitude_varies << endl; 
+            else if (*iter == ABSOLUTE_MAGNITUDE_VARIES)
+               cout << "absolute_magnitude_varies:           " << absolute_magnitude_varies << endl; 
+            else if (*iter == CONSTELLATION_ABBREVIATION)
+               cout << "constellation_abbreviation:          " << constellation_abbreviation << endl; 
+            else if (*iter == CONSTELLATION_FULL_NAME)
+               cout << "constellation_full_name:             " << constellation_full_name << endl; 
+            else if (*iter == CONSTELLATION_NAME_GENITIVE)
+               cout << "constellation_name_genitive:         " << constellation_name_genitive << endl; 
+            else if (*iter == CONSTELLATION_NUMBER)
+               cout << "constellation_number:                " << constellation_number << endl; 
+            else if (*iter == RIGHT_ASCENSION_HOURS)
+               cout << "right_ascension_hours:               " << right_ascension_hours << endl; 
+            else if (*iter == RIGHT_ASCENSION_MINUTES)
+               cout << "right_ascension_minutes:             " << right_ascension_minutes << endl; 
+            else if (*iter == RIGHT_ASCENSION_SECONDS)
+               cout << "right_ascension_seconds:             " << right_ascension_seconds << endl; 
+            else if (*iter == RIGHT_ASCENSION_DECIMAL_HOURS)
+               cout << "right_ascension_decimal_hours:       " << right_ascension_decimal_hours << endl; 
+            else if (*iter == RIGHT_ASCENSION_DECIMAL_DEGREES)
+               cout << "right_ascension_decimal_degrees:     " << right_ascension_decimal_degrees << endl; 
+            else if (*iter == DECLINATION_DEGREES)
+               cout << "declination_degrees:                 " << declination_degrees << endl; 
+            else if (*iter == DECLINATION_MINUTES)
+               cout << "declination_minutes:                 " << declination_minutes << endl; 
+            else if (*iter == DECLINATION_SECONDS)
+               cout << "declination_seconds:                 " << declination_seconds << endl; 
+            else if (*iter == DECLINATION_DECIMAL_DEGREES)
+               cout << "declination_decimal_degrees:         " << declination_decimal_degrees << endl; 
+            else if (*iter == IS_BINARY)
+               cout << "is_binary:                           " << is_binary << endl;
+            else if (*iter == IS_MULTIPLE)
+               cout << "is_multiple:                         " << is_multiple << endl; 
+            else if (*iter == IS_BINARY_COMPONENT)
+               cout << "is_binary_component:                 " << is_binary_component << endl; 
+            else if (*iter == IS_ECLIPSING_BINARY)
+               cout << "is_eclipsing_binary:                 " << is_eclipsing_binary << endl; 
+            else if (*iter == NOTES)
+               cout << "notes:                               " << notes << endl; 
+        }
+        cout << endl; 
+
+    }  /* |else| */
+
+@q **** (4) @>
 
     if (DEBUG)
        cerr << "Exiting `Star::show' successfully with void return value." << endl;
