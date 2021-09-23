@@ -24859,6 +24859,22 @@ select * from Stars where constellation_name_genitive = "Velorum"\G
 
 update Stars set bayer_designation_greek_letter_tex = "N" where common_name = "N Velorum";
 
+select common_name, greek_name, latin_name, arabic_name,
+flamsteed_designation_number, bayer_designation_greek_letter,
+bayer_designation_greek_letter_tex, bayer_designation_extension, bs_hr_number,
+approx_rank_apparent_magnitude, apparent_magnitude, absolute_magnitude,
+apparent_magnitude_varies, absolute_magnitude_varies,
+constellation_abbreviation, constellation_full_name,
+constellation_name_genitive, constellation_number, right_ascension_hours,
+right_ascension_minutes, right_ascension_seconds, right_ascension_decimal_hours,
+right_ascension_decimal_degrees, declination_degrees, declination_minutes,
+declination_seconds, declination_decimal_degrees, is_binary, is_multiple,
+is_binary_component, is_eclipsing_binary, notes from 3dldf.Stars
+where common_name != "Sirius" and approx_rank_apparent_magnitude > 10 and
+right_ascension_seconds < 59.5 order by arabic_name common_name
+flamsteed_designation_number is_eclipsing_binary limit 10 offset 6;
+
+
 
 /* Local Variables:                   */
 /* eval:(outline-minor-mode t)        */
