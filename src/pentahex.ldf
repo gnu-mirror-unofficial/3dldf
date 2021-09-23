@@ -77,9 +77,17 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
     
   point P[];
 
-  P0 := mediate(p[pp], p[qq], offset);
+  if offset == 0:
+    P0 := p[pp];
+  else:
+    P0 := mediate(p[pp], p[qq], offset);
+  fi;
 
-  P1 := mediate(p[qq], p[pp], offset_one);
+  if offset_one == 0:
+    P1 := p[qq];
+  else:
+    P1 := mediate(p[qq], p[pp], offset_one);
+  fi;
 
   if ddo_labels:
     dotlabel.top("$P_0$", P0) with_text_color red;
@@ -88,12 +96,21 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
 
   P2 := P0 shifted (0, 1);
 
-  P3 := (width * unit_vector(p[pp] - P0)) shifted by P0;
-  rotate_around P3 (P0, P2) -angle_zero;
+  if (offset  == 0) or (width == 0):
+    P3 := P0;
+  else:
+    P3 := (width * unit_vector(p[pp] - P0)) shifted by P0;
+    rotate_around P3 (P0, P2) -angle_zero;
+  fi;
 
-  P4 := (width_one * unit_vector(p[qq] - P1)) shifted by P1;
   P5 := P1 shifted (0, 1);
-  rotate_around P4 (P1, P5) angle_one;
+
+  if (offset_one == 0) or (width_one == 0):
+    P4 := P1;
+  else:
+    P4 := (width_one * unit_vector(p[qq] - P1)) shifted by P1;
+    rotate_around P4 (P1, P5) angle_one;
+  fi;
 
   if ddo_labels:
     dotlabel.top("$P_3$", P3) with_text_color red;
@@ -111,10 +128,6 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   fi;
   
 enddef;
-
-
-
-
 
 %% * (1)
 
@@ -216,7 +229,7 @@ beginfig(1);
     dotlabel.bot("$p_{22}$", p22);
   fi;
 
-  tab {12, 22, .225, .1, 112.5, 112.5, true, 0, .333, 1};
+  tab {12, 22, .225, .1, 112.5, 112.5, true, .25, .4, 1};
   
   q2 := q0 rotated_around (p5, p12) 180;
   draw q2;
