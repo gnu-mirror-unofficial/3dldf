@@ -90,8 +90,8 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   fi;
 
   if ddo_labels:
-    dotlabel.top("$P_0$", P0) with_text_color red;
-    dotlabel.top("$P_1$", P1) with_text_color red;
+    %dotlabel.top("$P_0$", P0) with_text_color red;
+    %dotlabel.top("$P_1$", P1) with_text_color red;
   fi;
 
   P2 := P0 shifted (0, 1);
@@ -113,8 +113,8 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   fi;
 
   if ddo_labels:
-    dotlabel.top("$P_3$", P3) with_text_color red;
-    dotlabel.top("$P_4$", P4) with_text_color red;
+    %dotlabel.top("$P_3$", P3) with_text_color red;
+    %dotlabel.top("$P_4$", P4) with_text_color red;
   fi;
 
   tab_path[tab_path_ctr] := P0 -- P3 -- P4 -- P1;
@@ -129,8 +129,12 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   
 enddef;
 
-%% * (1)
+%% * (1) Global variables
 
+picture v[];
+
+
+%% * (1)
 
 beginfig(1);
 
@@ -212,10 +216,6 @@ beginfig(1);
  
   draw q0;
 
-  if false:
-    thin_tab {3, 1, .125, .125, true, .333, true, 0};
-  fi;
-  
   q1 := q0 rotated_around (p3, p12) 180;
   draw q1;
 
@@ -262,7 +262,7 @@ beginfig(1);
     label.bot("$p_{19}$", p19);
   fi;
 
-  q200 := q0 shifted (-4cm, 0, 10cm);
+  q200 := q0 shifted (-4cm, 0, 11cm);
 
   for i = 0 upto 3:
     p[23+i] := get_point (i) q200;
@@ -279,11 +279,10 @@ beginfig(1);
     label.bot("$p_{59}$", p59);
   fi;
 
-  label.urt("$\alpha$", p23);
-  label.bot("$\beta$", p26 shifted (0, 0, -3pt));
+  label.urt("$\alpha$", p23 shifted (-2pt, 0, 2pt)) on_picture v0;
+  label.bot("$\beta$", p26 shifted (0, 0, -3pt)) on_picture v0;
 
-  
-  p27 := (.6667cm * unit_vector(p25 - p26)) shifted by p26;
+    p27 := (.6667cm * unit_vector(p25 - p26)) shifted by p26;
 
   p68 := (.5 * unit_vector(p24 - p23)) shifted by p23;
   p69 := p23 shifted (0, 1);
@@ -317,12 +316,43 @@ beginfig(1);
 
   q201 += p71;
 
-  draw q201;
+  draw q201 on_picture v0;
   
+  p73 := (.575cm * unit_vector(p25 - p26)) shifted by p26;
+  p74 := (.575cm * unit_vector(p70 - p26)) shifted by p26;
+
   if do_labels:
+    dotlabel.rt("$p_{73}$", p73);
+    dotlabel.lft("$p_{74}$", p74);
     %label.top("$p_{30}$", p30);
   fi;
 
+  q202 += ..;
+  q202 += p73;
+  
+  forever:
+    rotate_around p73 (p26, p28) -1;
+    exitif xpart p73 <= xpart p74;
+    q202 += p73;
+  endfor;
+
+  draw q202 on_picture v0;
+
+%% ** (2)
+
+  p75 := p23 shifted (0, 0, -.9cm);
+
+  label.rt("\vbox{\hbox{$\alpha\approx 118.137^\circ$}"
+           & "\vskip2pt\hbox{$\beta\approx 67.4535^\circ$}}", p75) on_picture v0;
+  
+  if do_labels:
+    dotlabel.lft("$p_{75}$", p75);
+  fi;
+
+
+%% ** (2)  
+
+  
   p31 := p30 rotated_around (p26, p28) 90;
 
   if do_labels:
@@ -348,9 +378,9 @@ beginfig(1);
   show n0;
   %pause;
   
-  draw p31 -- p29;
+  draw p31 -- p29 on_picture v0;
   
-  draw q200;
+  draw q200 on_picture v0;;
 
   p34 := mediate(p29, p33);
 
@@ -372,7 +402,7 @@ beginfig(1);
   show ang4;
   %pause;
 
-  label("{\small" & decimal n0 & "\\thinspace cm}", p34) rotated (0, 0, -ang4);
+  label("{\small" & decimal n0 & "\\thinspace cm}", p34) rotated (0, 0, -ang4) on_picture v0;
 
   p60 := p25 shifted (0, 1);
 
@@ -387,25 +417,43 @@ beginfig(1);
   p66 := mediate(p63, p64, .275);
   p67 := mediate(p64, p63, .275);
 
-  %draw p64 -- p63;
+  p76 := p64 shifted (1cm);
+  p77 := p76 shifted (0, 0, .25cm);
+  p78 := p77 shifted (1cm);
+  p79 := p78 shifted (0, 0, -.25cm);
+
+  
+  if do_labels:
+    dotlabel.lft("$p_{76}$", p76);
+    dotlabel.lft("$p_{77}$", p77);
+    dotlabel.rt("$p_{78}$", p78);
+    dotlabel.rt("$p_{79}$", p79);
+  fi;
+    
+  draw p77 -- p76 -- p79 -- p78 on_picture v0;
+
+  p80 := mediate(p77, p78);
+
+  label("{\small 1\\thinspace cm}", p80 shifted (0, 0, 1pt)) on_picture v0;
 
   ang6 := (p64 - p63) angle (p25 - p35);
 
   n1 := magnitude(p24 - p25);
+
+  label("{\small" & decimal n1 & "\\thinspace cm}", p65) rotated (0, 0, -ang6) on_picture v0;
   
   if do_labels:
     dotlabel.urt("$p_{61}$", p61);
     dotlabel.bot("$p_{62}$", p62);
     dotlabel.top("$p_{63}$", p63);
     dotlabel.bot("$p_{64}$", p64);
-    label("{\small" & decimal n1 & "\\thinspace cm}", p65) rotated (0, 0, -ang6);
     %dotlabel.rt("$p_{65}$", p65);
     dotlabel.rt("$p_{66}$", p66);
     dotlabel.rt("$p_{67}$", p67);
   fi;
 
-  draw p62 -- p64 -- p67;
-  draw p66 -- p63 -- p61;
+  draw p62 -- p64 -- p67 on_picture v0;
+  draw p66 -- p63 -- p61 on_picture v0;
   
 %% ** (2)
   
@@ -417,9 +465,9 @@ beginfig(1);
     label.rt("$p_{37}$", p37);
   fi;
 
-  draw p29 -- p36;
-  draw p33 -- p37;
-  draw p32 -- p33;
+  draw p29 -- p36 on_picture v0;
+  draw p33 -- p37 on_picture v0;
+  draw p32 -- p33 on_picture v0;
 
   q3 := q2 rotated_around (p15, p12) 180;
   draw q3;
@@ -428,7 +476,17 @@ beginfig(1);
   p39 := p13 rotated_around (p15, p12) 180;
   p40 := p5 rotated_around (p15, p12) 180;
   p41 := p19 rotated_around (p15, p12) 180;
-  
+
+  tab {38, 39, .15, .15, 112.5, 112.5, true, .333, .333, 3};
+  tab {39, 40, .15, .15, 112.5, 112.5, true, .333, .333, 4};
+  tab {15, 38, .15, .15, 112.5, 112.5, true, .333, .333, 5};
+  tab {14, 15, .15, .15, 112.5, 112.5, true, .333, .333, 6};
+  tab {13, 14, .15, .15, 112.5, 112.5, true, .333, .333, 7};
+  tab {5, 13, .15, .15, 112.5, 112.5, true, .333, .333, 8};
+  tab {0, 5, .15, .15, 112.5, 112.5, true, .333, .333, 9};
+  tab {1, 0, .15, .15, 112.5, 112.5, true, .333, .333, 10};
+
+    
   if do_labels:
     dotlabel.lft("$p_{38}$", p38);
     dotlabel.lft("$p_{39}$", p39);
@@ -453,6 +511,10 @@ beginfig(1);
     label.bot("$p_{42}$", p42);
   fi;
 
+  tab {40, 43, .1, .1, 112.5, 112.5, true, .333, .333, 2};
+  
+
+  
   p46 := p20 shifted (0, 1);
 
   t1 := (identity rotated_around (p20, p46) ang0) shifted by (p21 - p3);
@@ -471,7 +533,7 @@ beginfig(1);
     label.bot("$p_{47}$", p47);
     dotlabel.bot("$p_{48}$", p48);
     dotlabel.lrt("$p_{49}$", p49);
-    dotlabel.rt("$p_{50}$", p50);
+    dotlabel.llft("$p_{50}$", p50);
   fi;
 
   t2 := identity shifted by (p50 - p1);
@@ -501,6 +563,8 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
+  tab {57, 56, .1, .1, 112.5, 112.5, true, .333, 0, 0};
+ 
   if do_labels:
     dotlabel.top("$q_{7}$", p55);
     label.bot("$p_{55}$", p55);
@@ -509,10 +573,78 @@ beginfig(1);
     dotlabel.bot("$p_{58}$", p58);
   fi;
 
+  q8 := q7 rotated_around (p58, p48) 180;
+  draw q8;
+
+  p81 := p55 rotated_around (p58, p48) 180;
+
+  p82 := p57 rotated_around (p58, p48) 180;
+  p83 := p56 rotated_around (p58, p48) 180;
+  p84 := p20 rotated_around (p58, p48) 180;
+
+  if do_labels:
+    dotlabel.top("$q_{8}$", p81);
+    label.bot("$p_{81}$", p81);
+    dotlabel.lft("$p_{82}$", p82);
+    dotlabel.lft("$p_{83}$", p83);
+    dotlabel.rt("$p_{84}$", p84);
+  fi;
+
+
+  q9 := q8 rotated_around (p48, p84) 180;
+  draw q9;
+
+  p85 := p81 rotated_around (p48, p84) 180;
+  p86 := p83 rotated_around (p48, p84) 180;
+  p87 := p82 rotated_around (p48, p84) 180;
+  p88 := p58 rotated_around (p48, p84) 180;
+
+  if do_labels:
+    dotlabel.top("$q_{9}$", p85);
+    label.bot("$p_{85}$", p85);
+    dotlabel.lft("$p_{86}$", p86);
+    dotlabel.lft("$p_{87}$", p87);
+    dotlabel.rt("$p_{88}$", p88);
+  fi;
+
+  tab {48, 88, .225, .1, 112.5, 112.5, true, .25, .4, 11};
+  tab {58, 57, .15, .15, 112.5, 112.5, true, .333, .333, 12};
+  tab {82, 58, .15, .15, 112.5, 112.5, true, .333, .333, 13};
+  tab {83, 82, .15, .15, 112.5, 112.5, true, .333, .333, 14};
+  tab {84, 83, .15, .15, 112.5, 112.5, true, .333, .333, 15};
+  tab {86, 84, .15, .15, 112.5, 112.5, true, .333, .333, 16};
+  tab {87, 86, .15, .15, 112.5, 112.5, true, .333, .333, 17};
+
+  q10 := q0 shifted by (p52 - p1);
+  draw q10;
   
+  p89 := p17 shifted by (p52 - p1);
+  p90 := p5 shifted by (p52 - p1);
+
+  if do_labels:
+    dotlabel.top("$q_{10}$", p89);
+    label.bot("$p_{89}$", p89);
+    dotlabel.lft("$p_{90}$", p90);
+  fi;
+
+  v1 := current_picture;
+
+  current_picture += v0;
+
   
+%% ** (2)
+  
+endfig with_projection parallel_x_z;
 
 %% ** (2)
+
+beginfig(2);
+
+  v2 := v1;
+
+  rotate v2 (180, 0);
+
+  current_picture := v2;
   
 endfig with_projection parallel_x_z;
 
@@ -531,7 +663,7 @@ end;
 %%       accessed via the local variables list.                              
 %%       \initials{LDF 2004.02.12}.                                          
 
-%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80) (setq outline-regexp "%% [*\f]+")    
 
 %% * (1) Local variables for Emacs.
 
