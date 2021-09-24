@@ -627,7 +627,7 @@ beginfig(1);
   if do_labels:
     dotlabel.top("$q_{10}$", p89);
     label.bot("$p_{89}$", p89);
-    dotlabel.lft("$p_{90}$", p90);
+    dotlabel.rt("$p_{90}$", p90);
     dotlabel.top("$p_{91}$", p91);
     dotlabel.rt("$p_{92}$", p92);
   fi;
@@ -636,12 +636,35 @@ beginfig(1);
   draw q11;
 
   p93 := p89 rotated_around (p90, p91) 180;
-
+  p94 := p49 rotated_around (p90, p91) 180;
+  p95 := p52 rotated_around (p90, p91) 180;
+  p96 := p92 rotated_around (p90, p91) 180;
+  
   if do_labels:
     dotlabel.top("$q_{11}$", p93);
     label.bot("$p_{93}$", p93);
-    dotlabel.lft("$p_{90}$", p90);
+    dotlabel.urt("$p_{94}$", p94);
+    dotlabel.rt("$p_{95}$", p95);
+    dotlabel.lrt("$p_{96}$", p96);
   fi;
+
+  q12 := q11 rotated_around (p96, p91) 180;
+  draw q12;
+
+  p97 := p93 rotated_around (p96, p91) 180;
+  p98 := p95 rotated_around (p96, p91) 180;
+  p99 := p94 rotated_around (p96, p91) 180;
+  p100 := p90 rotated_around (p96, p91) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{12}$", p97);
+    label.bot("$p_{97}$", p97);
+    dotlabel.rt("$p_{98}$", p98);
+    dotlabel.lrt("$p_{99}$", p99);
+    dotlabel.llft("$p_{100}$", p100);
+  fi;
+  
+
   
 %% ** (2)
   

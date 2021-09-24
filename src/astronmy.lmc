@@ -900,7 +900,8 @@ macro plot_star_on_spherical_biangle;
 
 %input "www.lmc";
 
-def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos, numeric shift_x, numeric shift_y,
+def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos,
+                                    numeric shift_x, numeric shift_y,
                                     boolean suppress_dot, boolean suppress_text_label} =
   
   numeric decl;
@@ -1601,8 +1602,8 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
     draw curr_edge0 on_picture qv[bi_ang_two];
     draw curr_edge1 on_picture qv[bi_ang_one];
     draw curr_edge1 on_picture qv[bi_ang_two];
-    drawdot P45 with_pen sstar_pen with_color white on_picture qv[bi_ang_one];
-    drawdot P45 with_pen sstar_pen with_color white on_picture qv[bi_ang_two];
+    %drawdot P45 with_pen sstar_pen with_color red on_picture qv[bi_ang_one]; % white
+    drawdot P45 with_pen sstar_pen with_color white on_picture qv[bi_ang_two]; % blue
     draw curr_edge0 on_picture qv[bi_ang_one];
     draw curr_edge0 on_picture qv[bi_ang_two];
     draw curr_edge1 on_picture qv[bi_ang_one];
