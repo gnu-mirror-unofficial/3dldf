@@ -1464,6 +1464,7 @@ pentahex.ps: pentahex.dvi
 
 pentahex.dvi: pentahex.tex pentahex.1
 	$(TEX) pentahex.tex
+	$(TEX) pentahex.tex
 
 pentahex.1: pentahex.mp
 	mpost -numbersystem "double" pentahex.mp

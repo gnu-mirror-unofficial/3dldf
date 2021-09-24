@@ -57,82 +57,7 @@
 
 %% * (1)
 
-verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
-  & "\font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch"
-  & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\font\SMALLgreek=cmmi6 "
-  & "etex;";
-
-%% * (1)
-
-path tab_path[];
-
-
-%% ** (2) Macro tab
-
-macro tab;
-
-def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric angle_zero, numeric angle_one,
-         boolean ddo_labels, numeric width, numeric width_one, numeric tab_path_ctr} =
-
-    
-  point P[];
-
-  if offset == 0:
-    P0 := p[pp];
-  else:
-    P0 := mediate(p[pp], p[qq], offset);
-  fi;
-
-  if offset_one == 0:
-    P1 := p[qq];
-  else:
-    P1 := mediate(p[qq], p[pp], offset_one);
-  fi;
-
-  if ddo_labels:
-    %dotlabel.top("$P_0$", P0) with_text_color red;
-    %dotlabel.top("$P_1$", P1) with_text_color red;
-  fi;
-
-  P2 := P0 shifted (0, 1);
-
-  if (offset  == 0) or (width == 0):
-    P3 := P0;
-  else:
-    P3 := (width * unit_vector(p[pp] - P0)) shifted by P0;
-    rotate_around P3 (P0, P2) -angle_zero;
-  fi;
-
-  P5 := P1 shifted (0, 1);
-
-  if (offset_one == 0) or (width_one == 0):
-    P4 := P1;
-  else:
-    P4 := (width_one * unit_vector(p[qq] - P1)) shifted by P1;
-    rotate_around P4 (P1, P5) angle_one;
-  fi;
-
-  if ddo_labels:
-    %dotlabel.top("$P_3$", P3) with_text_color red;
-    %dotlabel.top("$P_4$", P4) with_text_color red;
-  fi;
-
-  tab_path[tab_path_ctr] := P0 -- P3 -- P4 -- P1;
-
-  draw tab_path[tab_path_ctr];
-
-  P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
-
-  if ddo_labels:
-    label(decimal tab_path_ctr, P6) with_text_color red;
-  fi;
-  
-enddef;
-
-%% * (1) Global variables
-
-picture v[];
-
+input "pentahex.lmc";
 
 %% * (1)
 
@@ -146,10 +71,14 @@ beginfig(1);
   point p[];
   path q[];
   transform t[];
+
+  numeric tab_ctr;
   
   boolean do_labels;
 
   do_labels := true; % false
+
+  tab_ctr := 0;
   
   ang0 := 118.137;
   ang1 := 67.4535;
@@ -228,8 +157,9 @@ beginfig(1);
     dotlabel.bot("$p_{21}$", p21);
     dotlabel.bot("$p_{22}$", p22);
   fi;
-
-  tab {12, 22, .225, .1, 112.5, 112.5, true, .25, .4, 1};
+  
+  tab {12, 22, .225, .1, 112.5, 112.5, true, .25, .4, tab_ctr};
+  tab_ctr += 1;
   
   q2 := q0 rotated_around (p5, p12) 180;
   draw q2;
@@ -262,21 +192,21 @@ beginfig(1);
     label.bot("$p_{19}$", p19);
   fi;
 
-  q200 := q0 shifted (-4cm, 0, 11cm);
-
+  q200 := q0 shifted (-4cm, 0, 10cm);
+  p59 := p17 shifted (-4cm, 0, 10cm);
+  
   for i = 0 upto 3:
     p[23+i] := get_point (i) q200;
   endfor;
-
-  p59 := p17 shifted (-4cm, 0, 10cm);
   
   if do_labels:
-    dotlabel.lft("$p_{23}$", p23);
-    dotlabel.llft("$p_{24}$", p24);
-    dotlabel.ulft("$p_{25}$", p25);
-    label.lft("$p_{26}$", p26);
-    dotlabel.top("$q_{200}$", p59);
-    label.bot("$p_{59}$", p59);
+    dotlabel.top("$q_{200}$", p59) on_picture v0;
+    label.bot("$p_{59}$", p59) on_picture v0;
+    dotlabel.lft("$p_{23}$", p23) on_picture v0;
+    dotlabel.llft("$p_{24}$", p24) on_picture v0;
+    dotlabel.ulft("$p_{25}$", p25) on_picture v0;
+    label.lft("$p_{26}$", p26) on_picture v0;
+
   fi;
 
   label.urt("$\alpha$", p23 shifted (-2pt, 0, 2pt)) on_picture v0;
@@ -293,9 +223,9 @@ beginfig(1);
   
   if do_labels:
     %dotlabel.rt("$p_{27}$", p27);
-    dotlabel.lrt("$p_{68}$", p68);
-    dotlabel.lft("$p_{70}$", p70);
-    dotlabel.lft("$p_{71}$", p71);
+    dotlabel.lrt("$p_{68}$", p68) on_picture v0;
+    dotlabel.lft("$p_{70}$", p70) on_picture v0;
+    dotlabel.lft("$p_{71}$", p71) on_picture v0;
   fi;
   
   p28 := p26 shifted (0, 1);
@@ -322,8 +252,8 @@ beginfig(1);
   p74 := (.575cm * unit_vector(p70 - p26)) shifted by p26;
 
   if do_labels:
-    dotlabel.rt("$p_{73}$", p73);
-    dotlabel.lft("$p_{74}$", p74);
+    dotlabel.rt("$p_{73}$", p73) on_picture v0;
+    dotlabel.lft("$p_{74}$", p74) on_picture v0;
     %label.top("$p_{30}$", p30);
   fi;
 
@@ -346,7 +276,7 @@ beginfig(1);
            & "\vskip2pt\hbox{$\beta\approx 67.4535^\circ$}}", p75) on_picture v0;
   
   if do_labels:
-    dotlabel.lft("$p_{75}$", p75);
+    dotlabel.lft("$p_{75}$", p75) on_picture v0;
   fi;
 
 
@@ -356,20 +286,20 @@ beginfig(1);
   p31 := p30 rotated_around (p26, p28) 90;
 
   if do_labels:
-    dotlabel.lft("$p_{29}$", p29);
-    dotlabel.rt("$p_{31}$", p31);
+    dotlabel.lft("$p_{29}$", p29) on_picture v0;
+    dotlabel.rt("$p_{31}$", p31) on_picture v0;
   fi;
 
   p32 := p31 shifted by (p25 - p26);
 
   if do_labels:
-    dotlabel.top("$p_{32}$", p32);
+    dotlabel.top("$p_{32}$", p32) on_picture v0;
   fi;
 
   p33 := p29 shifted by (p25 - p26);
 
   if do_labels:
-    dotlabel.urt("$p_{33}$", p33);
+    dotlabel.urt("$p_{33}$", p33) on_picture v0;
   fi;
 
   n0 := magnitude(p25 - p26);
@@ -391,7 +321,7 @@ beginfig(1);
   p35 := p25 shifted (-1cm, 0);
 
   if do_labels:
-    dotlabel.bot("$p_{35}$", p35);
+    dotlabel.bot("$p_{35}$", p35) on_picture v0;
   fi;
 
   %% ** (2)
@@ -424,10 +354,10 @@ beginfig(1);
 
   
   if do_labels:
-    dotlabel.lft("$p_{76}$", p76);
-    dotlabel.lft("$p_{77}$", p77);
-    dotlabel.rt("$p_{78}$", p78);
-    dotlabel.rt("$p_{79}$", p79);
+    dotlabel.lft("$p_{76}$", p76) on_picture v0;
+    dotlabel.lft("$p_{77}$", p77) on_picture v0;
+    dotlabel.rt("$p_{78}$", p78) on_picture v0;
+    dotlabel.rt("$p_{79}$", p79) on_picture v0;
   fi;
     
   draw p77 -- p76 -- p79 -- p78 on_picture v0;
@@ -443,13 +373,13 @@ beginfig(1);
   label("{\small" & decimal n1 & "\\thinspace cm}", p65) rotated (0, 0, -ang6) on_picture v0;
   
   if do_labels:
-    dotlabel.urt("$p_{61}$", p61);
-    dotlabel.bot("$p_{62}$", p62);
-    dotlabel.top("$p_{63}$", p63);
-    dotlabel.bot("$p_{64}$", p64);
-    %dotlabel.rt("$p_{65}$", p65);
-    dotlabel.rt("$p_{66}$", p66);
-    dotlabel.rt("$p_{67}$", p67);
+    dotlabel.urt("$p_{61}$", p61) on_picture v0;
+    dotlabel.bot("$p_{62}$", p62) on_picture v0;
+    dotlabel.top("$p_{63}$", p63) on_picture v0;
+    dotlabel.bot("$p_{64}$", p64) on_picture v0;
+    %dotlabel.rt("$p_{65}$", p65) on_picture v0;
+    dotlabel.rt("$p_{66}$", p66) on_picture v0;
+    dotlabel.rt("$p_{67}$", p67) on_picture v0;
   fi;
 
   draw p62 -- p64 -- p67 on_picture v0;
@@ -461,8 +391,8 @@ beginfig(1);
   p37 := mediate(p33, p29, .275);
 
   if do_labels:
-    label.rt("$p_{36}$", p36);
-    label.rt("$p_{37}$", p37);
+    label.rt("$p_{36}$", p36) on_picture v0;
+    label.rt("$p_{37}$", p37) on_picture v0;
   fi;
 
   draw p29 -- p36 on_picture v0;
@@ -477,14 +407,22 @@ beginfig(1);
   p40 := p5 rotated_around (p15, p12) 180;
   p41 := p19 rotated_around (p15, p12) 180;
 
-  tab {38, 39, .15, .15, 112.5, 112.5, true, .333, .333, 3};
-  tab {39, 40, .15, .15, 112.5, 112.5, true, .333, .333, 4};
-  tab {15, 38, .15, .15, 112.5, 112.5, true, .333, .333, 5};
-  tab {14, 15, .15, .15, 112.5, 112.5, true, .333, .333, 6};
-  tab {13, 14, .15, .15, 112.5, 112.5, true, .333, .333, 7};
-  tab {5, 13, .15, .15, 112.5, 112.5, true, .333, .333, 8};
-  tab {0, 5, .15, .15, 112.5, 112.5, true, .333, .333, 9};
-  tab {1, 0, .15, .15, 112.5, 112.5, true, .333, .333, 10};
+  tab {38, 39, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {39, 40, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {15, 38, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {14, 15, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {13, 14, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {5, 13, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {0, 5, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+  tab {1, 0, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
 
     
   if do_labels:
@@ -511,7 +449,8 @@ beginfig(1);
     label.bot("$p_{42}$", p42);
   fi;
 
-  tab {40, 43, .1, .1, 112.5, 112.5, true, .333, .333, 2};
+  tab {40, 43, .1, .1, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
   
 
   
@@ -536,6 +475,9 @@ beginfig(1);
     dotlabel.llft("$p_{50}$", p50);
   fi;
 
+  tab {21, 50, .1, .1, 112.5, 112.5, true, .333, 0, tab_ctr};
+  tab_ctr += 1;
+  
   t2 := identity shifted by (p50 - p1);
 
   q6 := q5 rotated_around (p48, p49) 180;
@@ -563,8 +505,9 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
-  tab {57, 56, .1, .1, 112.5, 112.5, true, .333, 0, 0};
- 
+  tab {57, 56, .1, .1, 112.5, 112.5, true, .333, 0, tab_ctr};
+  tab_ctr += 1;
+
   if do_labels:
     dotlabel.top("$q_{7}$", p55);
     label.bot("$p_{55}$", p55);
@@ -585,7 +528,7 @@ beginfig(1);
   if do_labels:
     dotlabel.top("$q_{8}$", p81);
     label.bot("$p_{81}$", p81);
-    dotlabel.lft("$p_{82}$", p82);
+    dotlabel.rt("$p_{82}$", p82);
     dotlabel.lft("$p_{83}$", p83);
     dotlabel.rt("$p_{84}$", p84);
   fi;
@@ -602,18 +545,13 @@ beginfig(1);
   if do_labels:
     dotlabel.top("$q_{9}$", p85);
     label.bot("$p_{85}$", p85);
-    dotlabel.lft("$p_{86}$", p86);
+    dotlabel.top("$p_{86}$", p86);
     dotlabel.lft("$p_{87}$", p87);
     dotlabel.rt("$p_{88}$", p88);
   fi;
 
-  tab {48, 88, .225, .1, 112.5, 112.5, true, .25, .4, 11};
-  tab {58, 57, .15, .15, 112.5, 112.5, true, .333, .333, 12};
-  tab {82, 58, .15, .15, 112.5, 112.5, true, .333, .333, 13};
-  tab {83, 82, .15, .15, 112.5, 112.5, true, .333, .333, 14};
-  tab {84, 83, .15, .15, 112.5, 112.5, true, .333, .333, 15};
-  tab {86, 84, .15, .15, 112.5, 112.5, true, .333, .333, 16};
-  tab {87, 86, .15, .15, 112.5, 112.5, true, .333, .333, 17};
+  tab {48, 88, .225, .1, 112.5, 112.5, true, .25, .4, tab_ctr};
+  tab_ctr += 1;
 
   q10 := q0 shifted by (p52 - p1);
   draw q10;
@@ -648,6 +586,9 @@ beginfig(1);
     dotlabel.lrt("$p_{96}$", p96);
   fi;
 
+  tab {91, 92, .225, .1, 112.5, 112.5, true, .25, .4, tab_ctr};
+  tab_ctr += 1;
+  
   q12 := q11 rotated_around (p96, p91) 180;
   draw q12;
 
@@ -655,7 +596,16 @@ beginfig(1);
   p98 := p95 rotated_around (p96, p91) 180;
   p99 := p94 rotated_around (p96, p91) 180;
   p100 := p90 rotated_around (p96, p91) 180;
-  
+    
+  tab {94, 95, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {95, 96, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {96, 98, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
   if do_labels:
     dotlabel.top("$q_{12}$", p97);
     label.bot("$p_{97}$", p97);
@@ -663,15 +613,284 @@ beginfig(1);
     dotlabel.lrt("$p_{99}$", p99);
     dotlabel.llft("$p_{100}$", p100);
   fi;
+
+  q13 := q12 rotated_around (p91, p100) 180;
+  draw q13;
+
+  p[101] := p97 rotated_around (p91, p100) 180;
+  p[102] := p99 rotated_around (p91, p100) 180;
+  p[103] := p98 rotated_around (p91, p100) 180;
+  p[104] := p96 rotated_around (p91, p100) 180;
+
+  tab {98, 99, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+
+  tab {99, 100, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {100, 102, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+ 
+  if do_labels:
+    dotlabel.top("$q_{13}$", p101);
+    label.bot("$p_{101}$", p101);
+    dotlabel.top("$p_{102}$", p102);
+    dotlabel.rt("$p_{103}$", p103);
+    dotlabel.rt("$p_{104}$", p104);
+  fi;
+
+  q14 := q13 rotated_around (p91, p104) 180;
+  draw q14;
   
+  p[105] := p101 rotated_around (p91, p104) 180;
+  p[106] := p103 rotated_around (p91, p104) 180;
+  p[107] := p102 rotated_around (p91, p104) 180;
+  p[108] := p100 rotated_around (p91, p104) 180;
+
+  if do_labels:
+    dotlabel.top("$q_{14}$", p105);
+    label.bot("$p_{105}$", p105);
+    dotlabel.top("$p_{106}$", p106);
+    dotlabel.rt("$p_{107}$", p107);
+    dotlabel.rt("$p_{108}$", p108);
+  fi;
+
+
+%% ** (2)
+
+  q15 := q13 shifted by (p57 - p102);
+
+  p109 := p101 shifted by (p57 - p102);
+  p110 := p103 shifted by (p57 - p102);
+  p111 := p57 shifted (0, 1);
+
+  n2 := (p57 - p110) angle (p57 - p58);
+
+  % message "n2:";
+  % show n2;
+
+  rotate_around q15 (p57, p111) -n2;
+
+  rotate_around p109 (p57, p111) -n2;
+  rotate_around p110 (p57, p111) -n2;
+  
+  draw q15;
+
+  p112 := get_point (2) q15;
+  p113 := get_point (3) q15;
+  p114 := get_point (4) q15;
+  
+  if do_labels:
+    dotlabel.top("$q_{15}$", p109);
+    label.bot("$p_{109}$", p109);
+    dotlabel.ulft("$p_{112}$", p112);
+    dotlabel.top("$p_{113}$", p113);
+    dotlabel.top("$p_{114}$", p114);
+  fi;
+
+  q16 := q15 rotated_around (p112, p113) 180;
+  draw q16;
+
+  p115 := p109 rotated_around (p112, p113) 180;
+  p116 := p58 rotated_around (p112, p113) 180;
+  p117 := p57 rotated_around (p112, p113) 180;
+  p118 := p114 rotated_around (p112, p113) 180;
 
   
+  if do_labels:
+    dotlabel.top("$q_{16}$", p115);
+    label.bot("$p_{115}$", p115);
+    dotlabel.lrt("$p_{116}$", p116);
+    dotlabel.bot("$p_{117}$", p117);
+    dotlabel.lrt("$p_{118}$", p118);
+  fi;
+
+  q17 := q16 rotated_around (p113, p118) 180;
+  draw q17;
+
+  p119 := p115 rotated_around (p113, p118) 180;
+  p120 := p117 rotated_around (p113, p118) 180;
+  p121 := p116 rotated_around (p113, p118) 180;
+  p122 := p112 rotated_around (p113, p118) 180;
+
+  if do_labels:
+    dotlabel.top("$q_{17}$", p119);
+    label.bot("$p_{119}$", p119);
+    dotlabel.lrt("$p_{120}$", p120);
+    dotlabel.bot("$p_{121}$", p121);
+    dotlabel.rt("$p_{122}$", p122);
+  fi;
+
+  q18 := q17 rotated_around (p113, p122);
+  draw q18;
+
+  p123 := p119 rotated_around (p113, p122);
+
+  p124 := p121 rotated_around (p113, p122);
+  p125 := p120 rotated_around (p113, p122);
+  p126 := p118 rotated_around (p113, p122);
+  
+  
+  if do_labels:
+    dotlabel.top("$q_{18}$", p123);
+    label.bot("$p_{123}$", p123);
+    dotlabel.bot("$p_{124}$", p124);
+    dotlabel.rt("$p_{125}$", p125);
+    dotlabel.lrt("$p_{126}$", p126);
+  fi;
+
+  q19  := q18 rotated_around (p113, p126) 180;
+  p127 := p123 rotated_around (p113, p126) 180;
+  p128 := p125 rotated_around (p113, p126) 180;
+  p129 := p124 rotated_around (p113, p126) 180;
+  p130 := p122 rotated_around (p113, p126) 180;
+
+  draw q19;
+
+  if do_labels:
+    dotlabel.top("$q_{19}$", p127);
+    label.bot("$p_{127}$", p127);
+    dotlabel.rt("$p_{128}$", p128);
+    dotlabel.top("$p_{129}$", p129);
+    dotlabel.rt("$p_{130}$", p130);
+  fi;
+
+  tab {130, 113, .1, .225, 112.5, 112.5, true, .4, .25, tab_ctr};
+  tab_ctr += 1;
+
+  tab {129, 130, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {128, 129, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {126, 128, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {125, 126, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {124, 125, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {122, 124, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {121, 122, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {120, 121, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {118, 120, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {117, 118, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {116, 117, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
+  tab_ctr += 1;
+
+  tab {112, 116, .1, .1, 112.5, 112.5, true, 0, .333, tab_ctr};
+  tab_ctr += 1;
+
+  q20 := q5 shifted by (p84 - p50);
+
+
+  p131 := p47 shifted by (p84 - p50);
+  p132 := p21 shifted by (p84 - p50);
+  p133 := p84 shifted (0, 1);
+
+  n3 := (p84 - p132) angle (p84 - p83);
+  
+  rotate_around q20 (p84, p133) n3;
+  rotate_around p131 (p84, p133) n3;
+  rotate_around p132 (p84, p133) n3;
+
+  draw q20;
+
+  p134 := get_point (2) q20;
+  p135 := get_point (3) q20;
+  p136 := get_point (4) q20;
+  
+  if do_labels:
+    dotlabel.top("$q_{20}$", p131);
+    label.bot("$p_{131}$", p131);
+    dotlabel.rt("$p_{132}$", p132);
+    dotlabel.rt("$p_{134}$", p134);
+    dotlabel.rt("$p_{135}$", p135);
+    dotlabel.rt("$p_{136}$", p136);
+    % dotlabel.rt("$p_{130}$", p130);
+  fi;
+
+  % message "n3:";
+  % show n3;
+  % pause;
+
+  q21 := q20 rotated_around (p134, p135) 180;
+  draw q21;
+  p137 := p131 rotated_around (p134, p135) 180;
+  p138 := p84 rotated_around (p134, p135) 180;
+  p139 := p132 rotated_around (p134, p135) 180;
+  p140 := p136 rotated_around (p134, p135) 180;
+
+  if do_labels:
+    dotlabel.top("$q_{21}$", p137);
+    label.bot("$p_{137}$", p137);
+    dotlabel.rt("$p_{138}$", p138);
+    dotlabel.rt("$p_{139}$", p139);
+    dotlabel.rt("$p_{140}$", p140);
+  fi;
+
+  q22 := q21 rotated_around (p140, p135);
+  p141 := p137 rotated_around (p140, p135);
+  p142 := p139 rotated_around (p140, p135);
+  p143 := p138 rotated_around (p140, p135);
+  p144 := p134 rotated_around (p140, p135);
+
+  draw q22;
+  
+  if do_labels:
+    dotlabel.top("$q_{22}$", p141);
+    label.bot("$p_{141}$", p141);
+    dotlabel.rt("$p_{142}$", p142);
+    dotlabel.rt("$p_{143}$", p143);
+    dotlabel.rt("$p_{144}$", p144);
+  fi;
+
+  q23 := q22 rotated_around (p144, p135) 180;
+  draw q23;
+
+  p145 := p141 rotated_around (p144, p135) 180;
+  p146 := p143 rotated_around (p144, p135) 180;
+  p147 := p142 rotated_around (p144, p135) 180;
+  p148 := p140 rotated_around (p144, p135) 180;
+
+  if do_labels:
+    dotlabel.top("$q_{23}$", p145);
+    label.bot("$p_{145}$", p145);
+    dotlabel.rt("$p_{146}$", p146);
+    dotlabel.bot("$p_{147}$", p147);
+    dotlabel.rt("$p_{148}$", p148);
+  fi;
+
+  q24 := q23 rotated_around (p148, p135) 180;
+  draw q24;
+  p149 := p145 rotated_around (p148, p135) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{24}$", p149);
+    label.bot("$p_{149}$", p149);
+    % dotlabel.rt("$p_{146}$", p146);
+    % dotlabel.bot("$p_{147}$", p147);
+    % dotlabel.rt("$p_{148}$", p148);
+  fi;
+
+
 %% ** (2)
   
   v1 := current_picture;
-
-  current_picture += v0;
-
   
 %% ** (2)
   
@@ -687,6 +906,14 @@ beginfig(2);
 
   current_picture := v2;
   
+endfig with_projection parallel_x_z;
+
+%% ** (2)
+
+beginfig(3);
+
+  current_picture += v0;
+
 endfig with_projection parallel_x_z;
 
 %% ** (2)
