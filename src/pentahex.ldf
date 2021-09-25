@@ -523,7 +523,7 @@ beginfig(1);
     dotlabel.top("$q_{6}$", p51);
     label.bot("$p_{51}$", p51);
     dotlabel.top("$p_{52}$", p52);
-    dotlabel.rt("$p_{53}$", p53);
+    dotlabel.lft("$p_{53}$", p53);
     dotlabel.bot("$p_{54}$", p54);
   fi;
 
@@ -576,7 +576,7 @@ beginfig(1);
     dotlabel.top("$q_{9}$", p85);
     label.bot("$p_{85}$", p85);
     dotlabel.top("$p_{86}$", p86);
-    dotlabel.lft("$p_{87}$", p87);
+    dotlabel.urt("$p_{87}$", p87);
     dotlabel.rt("$p_{88}$", p88);
   fi;
 
@@ -924,9 +924,233 @@ beginfig(1);
   tab_short {146, 147, true, false};
   tab_thin {134, 138, true, false};
   
+%% *** (3)
 
+  q25 := q7 shifted by (p88 - p56);
+
+
+  p159 := p55 shifted by (p88 - p56);
+  p160 := p57 shifted by (p88 - p56);
   
 
+  n5 := (p87 - p88) angle (p160 - p88);
+
+  p161 := p88 shifted (0, 1);
+
+  rotate_around q25 (p88, p161) n5;
+  rotate_around p159 (p88, p161) n5;
+  rotate_around p160 (p88, p161) n5;
+  
+  draw q25;
+
+  p162 := get_point (2) q25;
+  p163 := get_point (3) q25;
+  p164 := get_point (4) q25;
+
+  if do_labels:
+    dotlabel.top("$q_{25}$", p159);
+    label.bot("$p_{159}$", p159);
+    dotlabel.lft("$p_{160}$", p160);
+    dotlabel.bot("$p_{162}$", p162);
+    dotlabel.rt("$p_{163}$", p163);
+    dotlabel.top("$p_{164}$", p164);
+  fi;
+
+%% *** (3)  
+
+  q26 := q25 rotated_around (p164, p163) 180;
+  draw q26;
+
+  p165 := p159 rotated_around (p164, p163) 180;
+  p166 := p88 rotated_around (p164, p163) 180;
+  p167 := p87 rotated_around (p164, p163) 180;
+  p168 := p162 rotated_around (p164, p163) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{26}$", p165);
+    label.bot("$p_{165}$", p165);
+    dotlabel.rt("$p_{166}$", p166);
+    dotlabel.bot("$p_{167}$", p167);
+    dotlabel.rt("$p_{168}$", p168);
+    % dotlabel.top("$p_{164}$", p164);
+  fi;
+
+%% *** (3)
+
+  q27 := q26 rotated_around (p168, p163) 180;
+  draw q27;
+
+  p169 := p165 rotated_around (p168, p163) 180;
+  p170 := p164 rotated_around (p168, p163) 180;
+  p171 := p166 rotated_around (p168, p163) 180;
+  p172 := p167 rotated_around (p168, p163) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{27}$", p169);
+    label.bot("$p_{169}$", p169);
+    dotlabel.rt("$p_{170}$", p170);
+    dotlabel.rt("$p_{171}$", p171);
+    dotlabel.bot("$p_{172}$", p172);
+  fi;
+
+%% *** (3)
+
+  q28 := q27 rotated_around (p163, p170) 180;
+  draw q28;
+
+  p173 := p169 rotated_around (p163, p170) 180;
+  p174 := p171 rotated_around (p163, p170) 180;
+  p175 := p172 rotated_around (p163, p170) 180;
+  p176 := p168 rotated_around (p163, p170) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{28}$", p173);
+    label.bot("$p_{173}$", p173);
+    dotlabel.lft("$p_{174}$", p174);
+    dotlabel.rt("$p_{175}$", p175);
+    dotlabel.rt("$p_{176}$", p176);
+  fi;
+
+%% *** (3)
+
+  q29 := q28 rotated_around (p163, p176) 180;
+  draw q29;
+
+  p177 := p173 rotated_around (p163, p176) 180;
+  p178 := p175 rotated_around (p163, p176) 180;
+  p179 := p174 rotated_around (p163, p176) 180;
+  p180 := p170 rotated_around (p163, p176) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{29}$", p177);
+    label.bot("$p_{177}$", p177);
+    dotlabel.rt("$p_{178}$", p178);
+    dotlabel.rt("$p_{179}$", p179);
+    dotlabel.rt("$p_{180}$", p180);
+  fi;
+
+  tab_short {88, 164, true, false};
+  tab_short {164, 166, true, false};
+  tab_short {166, 167, true, false};
+  tab_short {168, 172, true, false};
+  tab_short {162, 87, true, false};
+  tab_short {179, 180, true, false};
+  tab_short {178, 179, true, false};
+  tab_short {175, 176, true, false};
+  tab_short {174, 175, true, false};
+  tab_long {163, 180, true, true};
+  
+%% *** (3)
+
+  n6 := (p171 - p170) angle (p58 - p82);
+
+  q30 := q8 shifted by (p171 - p58);
+  p181 := p81 shifted by (p171 - p58);
+  
+  p182 := p171 shifted (0, 1);
+  
+  rotate_around q30 (p171, p182) -n6;
+  rotate_around p181 (p171, p182) -n6;
+ 
+  draw q30;
+
+  p[183] := get_point (0) q30;
+  p[184] := get_point (3) q30;
+  p[185] := get_point (4) q30;
+  
+  
+  if do_labels:
+    dotlabel.top("$q_{30}$", p181);
+    label.bot("$p_{181}$", p181);
+    dotlabel.rt("$p_{183}$", p183);
+    dotlabel.rt("$p_{184}$", p184);
+    dotlabel.rt("$p_{185}$", p185);
+  fi;
+
+%% *** (3)
+
+  q31 := q30 rotated_around (p171, p184) 180;
+  draw q31;
+
+  p186 := p181 rotated_around (p171, p184) 180;
+  p187 := p170 rotated_around (p171, p184) 180;
+  p188 := p185 rotated_around (p171, p184) 180;
+  p189 := p183 rotated_around (p171, p184) 180;
+  
+  if do_labels:
+    dotlabel.top("$q_{31}$", p186);
+    label.bot("$p_{186}$", p186);
+    dotlabel.rt("$p_{187}$", p187);
+    dotlabel.rt("$p_{188}$", p188);
+    dotlabel.top("$p_{189}$", p189);
+  fi;
+
+
+%% *** (3)
+
+  q32 := q31 rotated_around (p188, p184) 180;
+  draw q32;
+
+  p190 := p186 rotated_around (p188, p184) 180;
+  p191 := p171 rotated_around (p188, p184) 180;
+  p192 := p187 rotated_around (p188, p184) 180;
+  p193 := p189 rotated_around (p188, p184) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{32}$", p190);
+    label.bot("$p_{190}$", p190);
+    dotlabel.rt("$p_{191}$", p191);
+    dotlabel.rt("$p_{192}$", p192);
+    dotlabel.top("$p_{193}$", p193);
+  fi;
+
+%% *** (3)
+
+  q33 := q30 rotated_around (p185, p184) 180;
+  draw q33;
+
+  p194 := p181 rotated_around (p185, p184) 180;
+  p195 := p183 rotated_around (p185, p184) 180;
+  p196 := p170 rotated_around (p185, p184) 180;
+  p197 := p171 rotated_around (p185, p184) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{33}$", p194);
+    label.bot("$p_{194}$", p194);
+    dotlabel.bot("$p_{195}$", p195);
+    dotlabel.ulft("$p_{196}$", p196);
+    dotlabel.lft("$p_{197}$", p197);
+  fi;
+
+%% *** (3)
+
+  q34 := q33 rotated_around (p197, p184) 180;
+  draw q34;
+
+  p198 := p194 rotated_around (p197, p184) 180;
+  p199 := p196 rotated_around (p197, p184) 180;
+  p200 := p195 rotated_around (p197, p184) 180;
+  p201 := p185 rotated_around (p197, p184) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{34}$", p198);
+    label.bot("$p_{198}$", p198);
+    dotlabel.bot("$p_{199}$", p199);
+    dotlabel.ulft("$p_{200}$", p200);
+    dotlabel.lft("$p_{201}$", p201);
+  fi;
+
+  tab_short {185, 183, true, false};
+  tab_short {195, 185, true, false};
+  tab_short {187, 189, true, false};
+  tab_short {189, 188, true, false};
+  tab_short {188, 193, true, false};
+  tab_short {193, 192, true, false};
+  tab_long {184, 201, true, false};  
+  
 %% ** (2)
 
   %rotate current_picture (0, -90);
