@@ -1150,6 +1150,11 @@ beginfig(1);
   tab_short {188, 193, true, false};
   tab_short {193, 192, true, false};
   tab_long {184, 201, true, false};  
+
+  p202 := mediate(p200, p199) shifted (.25cm);
+
+  label.rt("{\largebx A}", p202);
+  label.rt("{\medium Connect right half here}", p202 shifted (0, 0, -.5cm));
   
 %% ** (2)
 
@@ -1164,8 +1169,146 @@ beginfig(1);
 endfig with_projection parallel_x_z;
 
 %% ** (2)
+  
+%% * (1) Figure 2:  Dextro, right side.
 
 beginfig(2);
+
+%% ** (2)
+
+  %draw q34;
+  
+  if do_labels:
+    dotlabel.bot("$p_{199}$", p199);
+    dotlabel.ulft("$p_{200}$", p200);
+    % dotlabel.lft("$p_{201}$", p201);
+    % dotlabel.lft("$p_{184}$", p184);
+    % dotlabel.lft("$p_{197}$", p197);
+  fi;
+
+  n7 := (p200 - p199) angle (p132 - p136);
+
+  q35 := q20 shifted by (p200 - p132);
+  
+  p203 := p200 shifted (0, 1);
+  
+  rotate_around q35 (p200, p203) n7;
+  draw q35;
+
+  p204 := (p131 shifted by (p200 - p132)) rotated_around (p200, p203) n7;
+
+  p205 := get_point 1 q35;
+  p206 := get_point 2 q35;
+  p207 := get_point 3 q35;
+ 
+  if do_labels:
+    dotlabel.top("$q_{35}$", p204);
+    label.bot("$p_{204}$", p204);
+    dotlabel.bot("$p_{205}$", p205);
+    dotlabel.lft("$p_{206}$", p206);
+    dotlabel.ulft("$p_{207}$", p207);
+  fi;
+
+  p208 := mediate(p200, p199) shifted (-.5cm);
+
+  tab_short {199, 200, true, false};
+  
+  label.lft("{\largebx A}", p208);
+  label.lft("{\medium Connect left half here}", p208 shifted (0, 0, -.5cm));
+  
+%% ** (2)
+
+  q36 := q35 rotated_around (p206, p207) 180;
+  draw q36;
+
+  p209 := p204 rotated_around (p206, p207) 180;
+  p210 := p205 rotated_around (p206, p207) 180;
+  p211 := p200 rotated_around (p206, p207) 180;
+  p212 := p199 rotated_around (p206, p207) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{36}$", p209);
+    label.bot("$p_{209}$", p209);
+    dotlabel.bot("$p_{210}$", p210);
+    dotlabel.ulft("$p_{211}$", p211);
+    dotlabel.lft("$p_{212}$", p212);
+  fi;
+
+%% ** (2)
+
+  q37 := q36 rotated_around (p207, p212) 180;
+  draw q37;
+
+  p213 := p209 rotated_around (p207, p212) 180;
+  p214 := p211 rotated_around (p207, p212) 180;
+  p215 := p210 rotated_around (p207, p212) 180;
+  p216 := p206 rotated_around (p207, p212) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{37}$", p213);
+    label.bot("$p_{213}$", p213);
+    dotlabel.rt("$p_{214}$", p214);
+    dotlabel.ulft("$p_{215}$", p215);
+    dotlabel.urt("$p_{216}$", p216);
+  fi;
+
+%% ** (2)
+
+  q38 := q37 rotated_around (p216, p207) 180;
+  draw q38;
+
+  p217 := p213 rotated_around (p216, p207) 180;
+  p218 := p215 rotated_around (p216, p207) 180;
+  p219 := p214 rotated_around (p216, p207) 180;
+  p220 := p212 rotated_around (p216, p207) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{38}$", p217);
+    label.bot("$p_{217}$", p217);
+    dotlabel.ulft("$p_{218}$", p218);
+    dotlabel.urt("$p_{219}$", p219);
+    dotlabel.urt("$p_{220}$", p220);
+  fi;
+
+%% ** (2)
+
+  q39 := q38 rotated_around (p220, p207) 180;
+  draw q39;
+
+  p221 := p217rotated_around (p220, p207) 180;
+  p222 := p219 rotated_around (p220, p207) 180;
+  p223 := p218 rotated_around (p220, p207) 180;
+  p224 := p216 rotated_around (p220, p207) 180;
+
+  
+  if do_labels:
+    dotlabel.top("$q_{39}$", p221);
+    label.bot("$p_{221}$", p221);
+    dotlabel.ulft("$p_{222}$", p222);
+    dotlabel.urt("$p_{223}$", p223);
+    dotlabel.urt("$p_{224}$", p224);
+  fi;
+  
+  tab_short {200, 205, true, false};
+  tab_long  {207, 224, true, true};
+  tab_short {223, 224, true, false};
+  tab_short {222, 223, true, false};
+  
+%% ** (2)
+
+  
+%% ** (2)
+  
+endfig with_projection parallel_x_z;
+
+%% ** (2)
+
+%% * (1) Figure 3:  Laevo, left side.
+
+beginfig(3);
 
   v2 := v1;
 
@@ -1177,7 +1320,7 @@ endfig with_projection parallel_x_z;
 
 %% ** (2)
 
-beginfig(3);
+beginfig(5);
 
   current_picture += v0;
 
