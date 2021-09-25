@@ -1469,7 +1469,7 @@ pentahex.dvi: pentahex.tex pentahex.1
 pentahex.1: pentahex.mp
 	mpost -numbersystem "double" pentahex.mp
 
-pentahex.mp: pentahex.ldf
+pentahex.mp: pentahex.ldf pentahex.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) pentahex.ldf
 
 .PHONY: purge-s

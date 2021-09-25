@@ -72,8 +72,6 @@ beginfig(1);
   path q[];
   transform t[];
 
-  numeric tab_ctr;
-  
   boolean do_labels;
 
   do_labels := true; % false
@@ -158,8 +156,8 @@ beginfig(1);
     dotlabel.bot("$p_{22}$", p22);
   fi;
   
-  tab {12, 22, .225, .1, 112.5, 112.5, true, .25, .4, tab_ctr};
-  tab_ctr += 1;
+  tab {12, 22, .225, .1, 112.5, 112.5, true, .25, .4, false};
+  
   
   q2 := q0 rotated_around (p5, p12) 180;
   draw q2;
@@ -407,22 +405,22 @@ beginfig(1);
   p40 := p5 rotated_around (p15, p12) 180;
   p41 := p19 rotated_around (p15, p12) 180;
 
-  tab {38, 39, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {39, 40, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {15, 38, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {14, 15, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {13, 14, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {5, 13, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {0, 5, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
-  tab {1, 0, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {38, 39, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {39, 40, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {15, 38, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {14, 15, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {13, 14, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {5, 13, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {0, 5, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
+  tab {1, 0, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
     
   if do_labels:
@@ -449,8 +447,8 @@ beginfig(1);
     label.bot("$p_{42}$", p42);
   fi;
 
-  tab {40, 43, .1, .1, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {40, 43, .1, .1, 112.5, 112.5, true, .333, .333, false};
+  
   
 
   
@@ -475,8 +473,8 @@ beginfig(1);
     dotlabel.llft("$p_{50}$", p50);
   fi;
 
-  tab {21, 50, .1, .1, 112.5, 112.5, true, .333, 0, tab_ctr};
-  tab_ctr += 1;
+  tab {21, 50, .1, .1, 112.5, 112.5, true, .333, 0, false};
+  
   
   t2 := identity shifted by (p50 - p1);
 
@@ -505,8 +503,8 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
-  tab {57, 56, .1, .1, 112.5, 112.5, true, .333, 0, tab_ctr};
-  tab_ctr += 1;
+  tab {57, 56, .1, .1, 112.5, 112.5, true, .333, 0, false};
+  
 
   if do_labels:
     dotlabel.top("$q_{7}$", p55);
@@ -550,8 +548,8 @@ beginfig(1);
     dotlabel.rt("$p_{88}$", p88);
   fi;
 
-  tab {48, 88, .225, .1, 112.5, 112.5, true, .25, .4, tab_ctr};
-  tab_ctr += 1;
+  tab {48, 88, .225, .1, 112.5, 112.5, true, .25, .4, false};
+  
 
   q10 := q0 shifted by (p52 - p1);
   draw q10;
@@ -586,8 +584,8 @@ beginfig(1);
     dotlabel.lrt("$p_{96}$", p96);
   fi;
 
-  tab {91, 92, .225, .1, 112.5, 112.5, true, .25, .4, tab_ctr};
-  tab_ctr += 1;
+  tab {91, 92, .225, .1, 112.5, 112.5, true, .25, .4, false};
+  
   
   q12 := q11 rotated_around (p96, p91) 180;
   draw q12;
@@ -597,14 +595,14 @@ beginfig(1);
   p99 := p94 rotated_around (p96, p91) 180;
   p100 := p90 rotated_around (p96, p91) 180;
     
-  tab {94, 95, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {94, 95, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {95, 96, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {95, 96, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {96, 98, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {96, 98, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
   if do_labels:
     dotlabel.top("$q_{12}$", p97);
@@ -622,15 +620,15 @@ beginfig(1);
   p[103] := p98 rotated_around (p91, p100) 180;
   p[104] := p96 rotated_around (p91, p100) 180;
 
-  tab {98, 99, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {98, 99, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
 
-  tab {99, 100, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {99, 100, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {100, 102, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {100, 102, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
  
   if do_labels:
     dotlabel.top("$q_{13}$", p101);
@@ -756,44 +754,44 @@ beginfig(1);
     dotlabel.rt("$p_{130}$", p130);
   fi;
 
-  tab {130, 113, .1, .225, 112.5, 112.5, true, .4, .25, tab_ctr};
-  tab_ctr += 1;
+  tab {130, 113, .1, .225, 112.5, 112.5, true, .4, .25, false};
+  
 
-  tab {129, 130, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {129, 130, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {128, 129, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {128, 129, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {126, 128, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {126, 128, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {125, 126, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {125, 126, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {124, 125, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {124, 125, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {122, 124, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {122, 124, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {121, 122, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {121, 122, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {120, 121, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {120, 121, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {118, 120, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {118, 120, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {117, 118, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {117, 118, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {116, 117, .15, .15, 112.5, 112.5, true, .333, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {116, 117, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  
 
-  tab {112, 116, .1, .1, 112.5, 112.5, true, 0, .333, tab_ctr};
-  tab_ctr += 1;
+  tab {112, 116, .1, .1, 112.5, 112.5, true, 0, .333, false};  
+  
 
   q20 := q5 shifted by (p84 - p50);
 
@@ -887,10 +885,16 @@ beginfig(1);
     % dotlabel.rt("$p_{148}$", p148);
   fi;
 
+  
+  
 
 %% ** (2)
+
+  %rotate current_picture (0, -90);
   
   v1 := current_picture;
+
+
   
 %% ** (2)
   

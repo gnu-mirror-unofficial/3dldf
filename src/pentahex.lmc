@@ -52,17 +52,19 @@ verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
   & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\font\SMALLgreek=cmmi6 "
   & "etex;";
 
-%% * (1)
+%% * (1) Global variables
 
 path tab_path[];
-
+picture v[];
+numeric tab_ctr;
+tab_ctr := 0; 
 
 %% ** (2) Macro tab
 
 macro tab;
 
 def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric angle_zero, numeric angle_one,
-         boolean ddo_labels, numeric width, numeric width_one, numeric tab_path_ctr} =
+         boolean ddo_labels, numeric width, numeric width_one, boolean rotate_tab} =
     
   point P[];
 
@@ -105,22 +107,24 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
     %dotlabel.top("$P_3$", P3) with_text_color red;
     %dotlabel.top("$P_4$", P4) with_text_color red;
   fi;
+  
+  tab_path[tab_ctr] := P0 -- P3 -- P4 -- P1;
 
-  tab_path[tab_path_ctr] := P0 -- P3 -- P4 -- P1;
-
-  draw tab_path[tab_path_ctr];
+  if rotate_tab:
+    rotate_around tab_path[tab_ctr] (P0, P1) 180;
+  fi;
+  
+  draw tab_path[tab_ctr];
 
   P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
 
   if ddo_labels:
-    label(decimal tab_path_ctr, P6) with_text_color red;
+    label(decimal tab_ctr, P6) with_text_color red;
   fi;
+
+  tab_ctr += 1;
   
 enddef;
-
-%% * (1) Global variables
-
-picture v[];
 
 endinput;
 
