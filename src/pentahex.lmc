@@ -59,9 +59,15 @@ picture v[];
 numeric tab_ctr;
 tab_ctr := 0; 
 
-numeric tab_factor;
+numeric tab_width_factor;
+numeric tab_width_one_factor;
+numeric tab_offset_factor;
+numeric tab_offset_one_factor;
 
-tab_factor := 1;
+tab_width_factor      := 1;
+tab_width_one_factor  := 1;
+tab_offset_factor     := 1;
+tab_offset_one_factor := 1;
 
 %% ** (2) Macro tab
 
@@ -77,13 +83,13 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   if offset == 0:
     P0 := p[pp];
   else:
-    P0 := mediate(p[pp], p[qq], offset);
+    P0 := mediate(p[pp], p[qq], offset * tab_offset_factor);
   fi;
 
   if offset_one == 0:
     P1 := p[qq];
   else:
-    P1 := mediate(p[qq], p[pp], offset_one);
+    P1 := mediate(p[qq], p[pp], offset_one * tab_offset_one_factor);
   fi;
 
   if ddo_labels:
@@ -96,7 +102,7 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   if (offset  == 0) or (width == 0):
     P3 := P0;
   else:
-    P3 := (width * unit_vector(p[pp] - P0)) shifted by P0;
+    P3 := ((width  * tab_width_factor) * unit_vector(p[pp] - P0)) shifted by P0;
     rotate_around P3 (P0, P2) -angle_zero;
   fi;
 
@@ -105,7 +111,7 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   if (offset_one == 0) or (width_one == 0):
     P4 := P1;
   else:
-    P4 := (width_one * unit_vector(p[qq] - P1)) shifted by P1;
+    P4 := ((width_one * tab_width_one_factor) * unit_vector(p[qq] - P1)) shifted by P1;
     rotate_around P4 (P1, P5) angle_one;
   fi;
 

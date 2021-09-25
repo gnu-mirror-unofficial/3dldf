@@ -59,6 +59,11 @@
 
 input "pentahex.lmc";
 
+tab_width_factor      := 1;
+tab_width_one_factor  := 1;
+tab_offset_factor     := 1;
+tab_offset_one_factor := 1;
+
 %% * (1)
 
 beginfig(1);
@@ -196,7 +201,8 @@ beginfig(1);
   for i = 0 upto 3:
     p[23+i] := get_point (i) q200;
   endfor;
-  
+
+
   if do_labels:
     dotlabel.top("$q_{200}$", p59) on_picture v0;
     label.bot("$p_{59}$", p59) on_picture v0;
@@ -204,7 +210,6 @@ beginfig(1);
     dotlabel.llft("$p_{24}$", p24) on_picture v0;
     dotlabel.ulft("$p_{25}$", p25) on_picture v0;
     label.lft("$p_{26}$", p26) on_picture v0;
-
   fi;
 
   label.urt("$\alpha$", p23 shifted (-2pt, 0, 2pt)) on_picture v0;
@@ -218,12 +223,42 @@ beginfig(1);
   p70 := get_point (4) q200;
 
   p71 := (.5 * unit_vector(p70 - p23)) shifted by p23;
+
+
+  p150 := mediate(p23, p24);
+
+  n4 := magnitude(p26 - p150);
+
+  % message "n4:";
+  % show n4;
+
+  p151 := (.333cm * unit_vector(p24 - p150)) shifted by (p150);
+  p152 := p151 shifted by (p26 - p150);
+
+  q203 := p151 -- p150 -- p26 -- p152;
+
+  p153 := 2.5unit_vector(p70 - p25);
+  p154 := p26;
+  
+  t3 := identity shifted by p153;
+
+  q203 *= p154 *= p150 *= p151 *= p152 *= t3;
+  
+  draw q203 on_picture v0;
+
+  p155 := mediate(p150, p154);
+
+  label.lft("{\small" & decimal n4 & "\\thinspace cm}", p155) on_picture v0;
   
   if do_labels:
     %dotlabel.rt("$p_{27}$", p27);
     dotlabel.lrt("$p_{68}$", p68) on_picture v0;
     dotlabel.lft("$p_{70}$", p70) on_picture v0;
     dotlabel.lft("$p_{71}$", p71) on_picture v0;
+    dotlabel.lft("$p_{150}$", p150) on_picture v0;
+    dotlabel.top("$p_{151}$", p151) on_picture v0;
+    dotlabel.top("$p_{152}$", p152) on_picture v0;
+    dotlabel.lft("$p_{154}$", p154) on_picture v0;
   fi;
   
   p28 := p26 shifted (0, 1);
@@ -448,7 +483,7 @@ beginfig(1);
     label.bot("$p_{42}$", p42);
   fi;
 
-  %tab_thin {40, 43, true, false};
+  tab_short {40, 43, true, false};
   
   p46 := p20 shifted (0, 1);
 
@@ -471,7 +506,7 @@ beginfig(1);
     dotlabel.llft("$p_{50}$", p50);
   fi;
 
-  %tab_thin {21, 50, true, false};
+  tab_thin {50, 21, true, true};
   
   
   t2 := identity shifted by (p50 - p1);
@@ -501,7 +536,7 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
-  %tab_thin {57, 56, true, false};
+  tab_thin {56, 57, true, true};
   
 
   if do_labels:
