@@ -89,7 +89,7 @@
 
 %% * (1)
 
-\pageno=1
+\pageno=-1
 \footline={\hfil \folio\hfil}
 
 %% Uncomment for A4 portrait
@@ -179,6 +179,7 @@ Boston, MA  02110-1301 USA\hfil\break
 \centerline{{\largebx Table of Contents}}
 \vskip.5\baselineskip
 \advance\baselineskip by 4pt
+\rm
 \readtocfile
 \vskip.5\baselineskip
 \begingroup
@@ -186,6 +187,20 @@ Boston, MA  02110-1301 USA\hfil\break
 \vfil\eject
 \endgroup
 
+\pageno=1
+%% **** (4)
+
+\medium
+\advance\parskip by 2pt
+\advance\chapctr by 1
+\writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{references}\Blue{References}\hlend}{\the\chapctr}
+\hldest{fit}{}{references}
+\centerline{{\largebx References}}
+\vskip.5\baselineskip
+Cundy, H.M.~and Rollett, . {\bf Mathematical Models}.
+
+Wenninger, Marcus.  {\bf Dual Models}.
+\vfil\eject
 
 %% **** (4)
 
@@ -214,7 +229,7 @@ Boston, MA  02110-1301 USA\hfil\break
 %% * (1) Local variables for Emacs.
 
 %% Local Variables:
-%% mode:TeX
+%% mode:plain-TeX
 %% eval:(outline-minor-mode t)
 %% eval:(read-abbrev-file abbrev-file-name)
 %% abbrev-mode:t

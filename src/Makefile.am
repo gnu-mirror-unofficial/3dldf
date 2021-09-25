@@ -1472,6 +1472,16 @@ pentahex.1: pentahex.mp
 pentahex.mp: pentahex.ldf pentahex.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) pentahex.ldf
 
+polymdls_a4.ps: polymdls_a4.dvi
+	dvips -o polymdls_a4.ps polymdls_a4.dvi
+
+polymdls_a4.pdf: polymdls_a4.dvi
+	dvipdfmx polymdls_a4.dvi
+
+polymdls_a4.dvi: polymdls_a4.tex
+	$(TEX) polymdls_a4.tex
+	$(TEX) polymdls_a4.tex
+
 .PHONY: purge-s
 
 purge-s:

@@ -163,7 +163,6 @@ beginfig(1);
   
   tab_long {12, 22, true, false};
   
-  
   q2 := q0 rotated_around (p5, p12) 180;
   draw q2;
 
@@ -904,16 +903,28 @@ beginfig(1);
   q24 := q23 rotated_around (p148, p135) 180;
   draw q24;
   p149 := p145 rotated_around (p148, p135) 180;
+  p156 := p147 rotated_around (p148, p135) 180;
+  p157 := p146 rotated_around (p148, p135) 180;
+  p158 := p144 rotated_around (p148, p135) 180;
+
   
   if do_labels:
     dotlabel.top("$q_{24}$", p149);
     label.bot("$p_{149}$", p149);
-    % dotlabel.rt("$p_{146}$", p146);
-    % dotlabel.bot("$p_{147}$", p147);
-    % dotlabel.rt("$p_{148}$", p148);
+    dotlabel.bot("$p_{156}$", p156);
+    dotlabel.lft("$p_{157}$", p157);
+    dotlabel.top("$p_{158}$", p158);
   fi;
 
+  tab_long {135, 158, true, true};
+  tab_short {157, 158, true, false};
+  tab_short {156, 157, true, false};
+  tab_short {148, 156, true, false};
+  tab_short {147, 148, true, false};
+  tab_short {146, 147, true, false};
+  tab_thin {134, 138, true, false};
   
+
   
 
 %% ** (2)
