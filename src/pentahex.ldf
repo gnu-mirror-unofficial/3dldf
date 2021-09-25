@@ -156,7 +156,7 @@ beginfig(1);
     dotlabel.bot("$p_{22}$", p22);
   fi;
   
-  tab {12, 22, .225, .1, 112.5, 112.5, true, .25, .4, false};
+  tab_long {12, 22, true, false};
   
   
   q2 := q0 rotated_around (p5, p12) 180;
@@ -405,21 +405,22 @@ beginfig(1);
   p40 := p5 rotated_around (p15, p12) 180;
   p41 := p19 rotated_around (p15, p12) 180;
 
-  tab {38, 39, .15, .15, 112.5, 112.5, true, .333, .333, false};
+
+  tab_short {38, 39, true, false};
   
-  tab {39, 40, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {39, 40, true, false};
   
-  tab {15, 38, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {15, 38, true, false};
   
-  tab {14, 15, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {14, 15, true, false};
   
-  tab {13, 14, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {13, 14, true, false};
   
-  tab {5, 13, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {5, 13, true, false};
   
-  tab {0, 5, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {0, 5, true, false};
   
-  tab {1, 0, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {1, 0, true, false};
   
 
     
@@ -447,10 +448,7 @@ beginfig(1);
     label.bot("$p_{42}$", p42);
   fi;
 
-  tab {40, 43, .1, .1, 112.5, 112.5, true, .333, .333, false};
-  
-  
-
+  %tab_thin {40, 43, true, false};
   
   p46 := p20 shifted (0, 1);
 
@@ -473,7 +471,7 @@ beginfig(1);
     dotlabel.llft("$p_{50}$", p50);
   fi;
 
-  tab {21, 50, .1, .1, 112.5, 112.5, true, .333, 0, false};
+  %tab_thin {21, 50, true, false};
   
   
   t2 := identity shifted by (p50 - p1);
@@ -503,7 +501,7 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
-  tab {57, 56, .1, .1, 112.5, 112.5, true, .333, 0, false};
+  %tab_thin {57, 56, true, false};
   
 
   if do_labels:
@@ -548,12 +546,11 @@ beginfig(1);
     dotlabel.rt("$p_{88}$", p88);
   fi;
 
-  tab {48, 88, .225, .1, 112.5, 112.5, true, .25, .4, false};
+  tab_long {48, 88, true, false};
   
-
   q10 := q0 shifted by (p52 - p1);
   draw q10;
-  
+
   p89 := p17 shifted by (p52 - p1);
   p90 := p5 shifted by (p52 - p1);
 
@@ -584,7 +581,7 @@ beginfig(1);
     dotlabel.lrt("$p_{96}$", p96);
   fi;
 
-  tab {91, 92, .225, .1, 112.5, 112.5, true, .25, .4, false};
+  tab_long {91, 92, true, false};
   
   
   q12 := q11 rotated_around (p96, p91) 180;
@@ -595,13 +592,13 @@ beginfig(1);
   p99 := p94 rotated_around (p96, p91) 180;
   p100 := p90 rotated_around (p96, p91) 180;
     
-  tab {94, 95, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {94, 95, true, false};
   
 
-  tab {95, 96, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {95, 96, true, false};
   
 
-  tab {96, 98, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {96, 98, true, false};
   
 
   if do_labels:
@@ -620,14 +617,14 @@ beginfig(1);
   p[103] := p98 rotated_around (p91, p100) 180;
   p[104] := p96 rotated_around (p91, p100) 180;
 
-  tab {98, 99, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {98, 99, true, false};
   
 
 
-  tab {99, 100, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {99, 100, true, false};
   
 
-  tab {100, 102, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {100, 102, true, false};
   
  
   if do_labels:
@@ -754,45 +751,41 @@ beginfig(1);
     dotlabel.rt("$p_{130}$", p130);
   fi;
 
-  tab {130, 113, .1, .225, 112.5, 112.5, true, .4, .25, false};
+  tab_long {113, 130, true, true};
+  
+  tab_short {129, 130, true, false};
+  
+  tab_short {128, 129, true, false};
+  
+  tab_short {126, 128, true, false};
+  
+  tab_short {125, 126, true, false};
   
 
-  tab {129, 130, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {124, 125, true, false};
   
 
-  tab {128, 129, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {122, 124, true, false};
   
 
-  tab {126, 128, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {121, 122, true, false};
   
 
-  tab {125, 126, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {120, 121, true, false};
   
 
-  tab {124, 125, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {118, 120, true, false};
   
 
-  tab {122, 124, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {117, 118, true, false};
   
 
-  tab {121, 122, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_short {116, 117, true, false};
   
 
-  tab {120, 121, .15, .15, 112.5, 112.5, true, .333, .333, false};
+  tab_thin {112, 116, true, false};
   
-
-  tab {118, 120, .15, .15, 112.5, 112.5, true, .333, .333, false};
   
-
-  tab {117, 118, .15, .15, 112.5, 112.5, true, .333, .333, false};
-  
-
-  tab {116, 117, .15, .15, 112.5, 112.5, true, .333, .333, false};
-  
-
-  tab {112, 116, .1, .1, 112.5, 112.5, true, 0, .333, false};  
-  
-
   q20 := q5 shifted by (p84 - p50);
 
 

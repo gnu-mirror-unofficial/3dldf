@@ -65,7 +65,9 @@ macro tab;
 
 def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric angle_zero, numeric angle_one,
          boolean ddo_labels, numeric width, numeric width_one, boolean rotate_tab} =
-    
+
+  %message "Entering tab.";
+ 
   point P[];
 
   if offset == 0:
@@ -110,10 +112,20 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   
   tab_path[tab_ctr] := P0 -- P3 -- P4 -- P1;
 
+  % message "tab_ctr == ";
+  % show tab_ctr;
+
+  % message "tab_path[tab_ctr] == ";
+  % show tab_path[tab_ctr];
+
+  
   if rotate_tab:
     rotate_around tab_path[tab_ctr] (P0, P1) 180;
+    rotate_around P3 (P0, P1) 180;
+    rotate_around P4 (P0, P1) 180;
   fi;
-  
+
+    
   draw tab_path[tab_ctr];
 
   P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
@@ -123,8 +135,55 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   fi;
 
   tab_ctr += 1;
+
+  %message "Exiting tab.";
   
 enddef;
+
+%% ** (2)
+
+macro tab_short;
+
+def tab_short {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab} =
+
+  %message "Entering tab_short.";
+
+  tab {ppp, qqq, .15, .15, 112.5, 112.5, dddo_labels, .333, .333, rrotate_tab};
+  
+  %message "Exiting tab_short.";
+  
+enddef;
+
+%% ** (2)
+
+macro tab_thin;
+
+def tab_thin {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab} =
+
+  %message "Entering tab_thin.";
+
+  tab {ppp, qqq, .1, .1, 112.5, 112.5, dddo_labels, 0, .333, rrotate_tab};
+  
+  %message "Exiting tab_thin.";
+  
+enddef;
+
+%% ** (2)
+
+macro tab_long;
+
+def tab_long {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab} =
+
+  %message "Entering tab_long.";
+
+  tab {ppp, qqq, .225, .1, 112.5, 112.5, dddo_labels, .25, .4, rrotate_tab};
+
+  %message "Exiting tab_short.";
+  
+enddef;
+
+
+%% ** (2)
 
 endinput;
 
@@ -137,7 +196,7 @@ endinput;
 %%       accessed via the local variables list.                              
 %%       \initials{LDF 2004.02.12}.                                          
 
-%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80) (setq outline-regexp "%% [*\f]+")    
+%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80) (setq outline-regexp "%% [*\f]+"))
 
 %% * (1) Local variables for Emacs.
 
