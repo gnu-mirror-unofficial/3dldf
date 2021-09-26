@@ -378,7 +378,7 @@ beginfig(1);
   show ang4;
   %pause;
 
-  label("{\small" & decimal n0 & "\\thinspace cm}", p34) rotated (0, 0, -ang4) on_picture v0;
+  label("{\small" & decimal n0 & "\\thinspace cm}", p34) rotated (0, 0, -ang4) on_picture v0; 
 
   p60 := p25 shifted (0, 1);
 
@@ -390,8 +390,8 @@ beginfig(1);
   p64 := p63 shifted by (p24 - p25);
   p65 := mediate(p64, p63);
 
-  p66 := mediate(p63, p64, .275);
-  p67 := mediate(p64, p63, .275);
+  p66 := mediate(p63, p64, .375);
+  p67 := mediate(p64, p63, .375);
 
   p76 := p64 shifted (1cm);
   p77 := p76 shifted (0, 0, .25cm);
@@ -416,7 +416,7 @@ beginfig(1);
 
   n1 := magnitude(p24 - p25);
 
-  label("{\small" & decimal n1 & "\\thinspace cm}", p65) rotated (0, 0, -ang6) on_picture v0;
+  label("{\small" & decimal n1 & "\\thinspace cm}", p65 shifted (3pt, 0, 1pt)) on_picture v0; 
   
   if do_labels:
     dotlabel.urt("$p_{61}$", p61) on_picture v0;
@@ -424,8 +424,8 @@ beginfig(1);
     dotlabel.top("$p_{63}$", p63) on_picture v0;
     dotlabel.bot("$p_{64}$", p64) on_picture v0;
     %dotlabel.rt("$p_{65}$", p65) on_picture v0;
-    dotlabel.rt("$p_{66}$", p66) on_picture v0;
-    dotlabel.rt("$p_{67}$", p67) on_picture v0;
+    %dotlabel.rt("$p_{66}$", p66) on_picture v0;
+    %dotlabel.rt("$p_{67}$", p67) on_picture v0;
   fi;
 
   draw p62 -- p64 -- p67 on_picture v0;
@@ -437,8 +437,8 @@ beginfig(1);
   p37 := mediate(p33, p29, .275);
 
   if do_labels:
-    label.rt("$p_{36}$", p36) on_picture v0;
-    label.rt("$p_{37}$", p37) on_picture v0;
+    %label.rt("$p_{36}$", p36) on_picture v0;
+    %label.rt("$p_{37}$", p37) on_picture v0;
   fi;
 
   draw p29 -- p36 on_picture v0;
@@ -1306,19 +1306,13 @@ beginfig(2);
     dotlabel.urt("$p_{224}$", p224);
   fi;
   
-  tab_short {200, 205, true, false};
   tab_long  {207, 224, true, true};
   tab_short {223, 224, true, false};
   tab_short {222, 223, true, false};
   
 %% ** (2)
 
-
-
-
-
   q39 := q9 shifted by (p206 - p86);
-
 
   p225 := p160 shifted by (p206 - p86);
   p226 := p206 shifted (0, 1);
@@ -1345,7 +1339,7 @@ beginfig(2);
     dotlabel.rt("$p_{230}$", p230);
   fi;
 
-
+  v3 := current_picture;
   
 %% ** (2)
   
@@ -1362,6 +1356,19 @@ beginfig(3);
   rotate v2 (180, 0);
 
   current_picture := v2;
+  
+endfig with_projection parallel_x_z;
+
+
+%% * (1) Figure 3:  Laevo, right side.
+
+beginfig(4);
+
+  v4 := v3;
+
+  rotate v4 (180, 0);
+
+  current_picture := v4;
   
 endfig with_projection parallel_x_z;
 
