@@ -201,7 +201,21 @@ beginfig(1);
     p[23+i] := get_point (i) q200;
   endfor;
 
+  n9 := (p24 - p23) angle (1, 0);
 
+  % message "n9:";
+  % show n9;
+  % pause;
+
+  p231 := p23 shifted (0, 1);
+
+  rotate_around q200 (p23, p231) -n9;
+  rotate_around p59 (p23, p231) -n9;
+    
+  for i = 0 upto 3:
+    rotate_around p[23+i] (p23, p231) -n9;
+  endfor;
+  
   if do_labels:
     dotlabel.top("$q_{200}$", p59) on_picture v0;
     label.bot("$p_{59}$", p59) on_picture v0;
@@ -214,7 +228,7 @@ beginfig(1);
   label.urt("$\alpha$", p23 shifted (-2pt, 0, 2pt)) on_picture v0;
   label.bot("$\beta$", p26 shifted (0, 0, -3pt)) on_picture v0;
 
-    p27 := (.6667cm * unit_vector(p25 - p26)) shifted by p26;
+  p27 := (.6667cm * unit_vector(p25 - p26)) shifted by p26;
 
   p68 := (.5 * unit_vector(p24 - p23)) shifted by p23;
   p69 := p23 shifted (0, 1);
@@ -500,7 +514,7 @@ beginfig(1);
   if do_labels:
     dotlabel.top("$q_{5}$", p47);
     label.bot("$p_{47}$", p47);
-    dotlabel.bot("$p_{48}$", p48);
+    dotlabel.lrt("$p_{48}$", p48);
     dotlabel.lrt("$p_{49}$", p49);
     dotlabel.llft("$p_{50}$", p50);
   fi;
@@ -1298,6 +1312,39 @@ beginfig(2);
   tab_short {222, 223, true, false};
   
 %% ** (2)
+
+
+
+
+
+  q39 := q9 shifted by (p206 - p86);
+
+
+  p225 := p160 shifted by (p206 - p86);
+  p226 := p206 shifted (0, 1);
+  p227 := p85 shifted by (p206 - p86);
+  
+  n8 := (p225 - p206) angle (p210 - p206);
+
+  rotate_around q39 (p206, p226) -n8;
+  rotate_around p225 (p206, p226) -n8;
+  rotate_around p227 (p206, p226) -n8;
+
+  p228 := get_point 2 q39;
+  p229 := get_point 3 q39;
+  p230 := get_point 4 q39;
+  
+  draw q39;
+
+  if do_labels:
+    dotlabel.top("$q_{39}$", p227);
+    label.bot("$p_{2271}$", p227);
+    dotlabel.ulft("$p_{225}$", p225);
+    dotlabel.rt("$p_{228}$", p228);
+    dotlabel.bot("$p_{229}$", p229);
+    dotlabel.rt("$p_{230}$", p230);
+  fi;
+
 
   
 %% ** (2)
