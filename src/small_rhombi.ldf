@@ -165,7 +165,7 @@ beginfig(1);
   bool do_labels;
   numeric n[];
 
-  do_labels := false; %  true; % 
+  do_labels :=  true; % false; % 
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -180,11 +180,11 @@ beginfig(1);
   % show xpart p3;
 
   if do_labels:
-    dotlabel.top("$p_0$", p0);
-    dotlabel.lft("$p_1$", p1);
-    dotlabel.lft("$p_2$", p2);
-    dotlabel.urt("$p_3$", p3);
-    dotlabel.lrt("$p_4$", p4);
+    dotlabel.top("$p_0$", p0) on_picture v3;
+    dotlabel.lft("$p_1$", p1) on_picture v3;
+    dotlabel.lft("$p_2$", p2) on_picture v3;
+    dotlabel.urt("$p_3$", p3) on_picture v3;
+    dotlabel.lrt("$p_4$", p4) on_picture v3;
   fi;
   
   p5 := p4 shifted (0, 1);
@@ -192,13 +192,13 @@ beginfig(1);
   p6 := p3 rotated_around (p4, p5) 90;
 
   if do_labels:
-    dotlabel.rt("$p_6$", p6);
+    dotlabel.rt("$p_6$", p6) on_picture v3;
   fi;
 
   p7 := (p6 - p4) shifted by p3;
 
   if do_labels:
-    dotlabel.rt("$p_7$", p7);
+    dotlabel.rt("$p_7$", p7) on_picture v3;
   fi;
 
   q0 := p3 -- p7 -- p6 -- p4 -- cycle;
@@ -206,8 +206,8 @@ beginfig(1);
   p22 := mediate(p6, p3, .5);
 
   if do_labels:
-    dotlabel.top("$q_0$", p22);
-    dotlabel.bot("$p_{22}$", p22);
+    dotlabel.top("$q_0$", p22) on_picture v3;
+    dotlabel.bot("$p_{22}$", p22) on_picture v3;
   fi;
   
   
@@ -216,14 +216,14 @@ beginfig(1);
   p9 := get_center rp0;
 
   if do_labels:
-    dotlabel.top("$rp_0$", p9);
-    dotlabel.bot("$p_9$", p9);
+    dotlabel.top("$rp_0$", p9) on_picture v3;
+    dotlabel.bot("$p_9$", p9) on_picture v3;
   fi;
   
   p10 := p6 rotated_around (p4, p5) 60;
 
   if do_labels:
-    dotlabel.rt("$p_{10}$", p10);
+    dotlabel.rt("$p_{10}$", p10) on_picture v3;
   fi;
   
   q1 := p4 -- p6 -- p10 -- cycle;
@@ -237,9 +237,11 @@ beginfig(1);
 
   p11 := q2 intersection_point q3;
 
+  label("1", p11) on_picture v1;    
+  
   if do_labels:
-    dotlabel.top("$q_1$", p11);
-    dotlabel.bot("$p_{11}$", p11);
+    dotlabel.top("$q_1$", p11) on_picture v3;
+    dotlabel.bot("$p_{11}$", p11) on_picture v3;
   fi;
 
   q4 := (q0 rotated_around (p4, p5) 60) rotated_around (p4, p10) 180;
@@ -251,23 +253,25 @@ beginfig(1);
   endfor;
 
   if do_labels:
-    dotlabel.lft("$p_{12}$", p12);
-    dotlabel.lft("$p_{13}$", p13);
+    dotlabel.lft("$p_{12}$", p12) on_picture v3;
+    dotlabel.lft("$p_{13}$", p13) on_picture v3;
   fi;
 
   p23 := mediate(p13, p4, .5);
 
+  label("0", p23) on_picture v1;    
+  
   if do_labels:
-    dotlabel.top("$q_4$", p23);
-    dotlabel.bot("$p_{23}$", p23);
+    dotlabel.top("$q_4$", p23) on_picture v3;
+    dotlabel.bot("$p_{23}$", p23) on_picture v3;
   fi;
 
   p14 := mediate(p4, p3, .5);
   p15 := mediate(p6, p7, .5);
 
   if do_labels:
-    dotlabel.lft("$p_{14}$", p14);
-    dotlabel.rt("$p_{15}$", p15);
+    dotlabel.lft("$p_{14}$", p14) on_picture v3;
+    dotlabel.rt("$p_{15}$", p15) on_picture v3;
   fi;
   
   q5 := q1 rotated_around (p14, p15) 180;
@@ -277,8 +281,8 @@ beginfig(1);
   p24 := p11 rotated_around (p14, p15) 180;
 
   if do_labels:
-    dotlabel.top("$q_5$", p24);
-    dotlabel.bot("$p_{24}$", p24);
+    dotlabel.top("$q_5$", p24) on_picture v3;
+    dotlabel.bot("$p_{24}$", p24) on_picture v3;
   fi;
 
   q6 := q4 rotated_around (p14, p15) 180;
@@ -288,8 +292,8 @@ beginfig(1);
   p25 := mediate(p13, p4, .5) rotated_around (p14, p15) 180;
 
   if do_labels:
-    dotlabel.top("$q_6$", p25);
-    dotlabel.bot("$p_{25}$", p25);
+    dotlabel.top("$q_6$", p25) on_picture v3;
+    dotlabel.bot("$p_{25}$", p25) on_picture v3;
   fi;
 
   for i = 0 upto 3:
@@ -297,17 +301,17 @@ beginfig(1);
   endfor;
 
   if do_labels:
-    dotlabel.lft("$p_{16}$", p16);
-    dotlabel.ulft("$p_{17}$", p17);
-    dotlabel.rt("$p_{18}$", p18) with_text_color blue;
+    dotlabel.lft("$p_{16}$", p16) on_picture v3;
+    dotlabel.ulft("$p_{17}$", p17) on_picture v3;
+    dotlabel.rt("$p_{18}$", p18) with_text_color blue on_picture v3;
   fi;
 
   p19 := mediate(p16, p3, .5);
   p20 := mediate(p17, p18, .5);
 
   if do_labels:
-    dotlabel.top("$p_{19}$", p19);
-    dotlabel.bot("$p_{20}$", p20);
+    dotlabel.top("$p_{19}$", p19) on_picture v3;
+    dotlabel.bot("$p_{20}$", p20) on_picture v3;
   fi;
 
   q7 := q5 rotated_around (p19, p20) 180;
@@ -317,14 +321,14 @@ beginfig(1);
   p26 := (p11 rotated_around (p14, p15) 180) rotated_around (p19, p20) 180;
 
   if do_labels:
-    dotlabel.top("$q_7$", p26);
-    dotlabel.bot("$p_{26}$", p26);
+    dotlabel.top("$q_7$", p26) on_picture v3;
+    dotlabel.bot("$p_{26}$", p26) on_picture v3;
   fi;
 
   p21 := get_point (1) q7;
 
   if do_labels:
-    dotlabel.lft("$p_{21}$", p21);
+    dotlabel.lft("$p_{21}$", p21) on_picture v3;
   fi;
 
   q8 := q0 shifted by (p21 - p4);
@@ -332,16 +336,16 @@ beginfig(1);
   draw q8;
 
   if do_labels:
-    dotlabel.top("$q_8$", p27);
-    dotlabel.bot("$p_{27}$", p27);
+    dotlabel.top("$q_8$", p27) on_picture v3;
+    dotlabel.bot("$p_{27}$", p27) on_picture v3;
   fi;
   
   p28 := mediate(p21, p27, 2);
   p29 := mediate(p17, p27, 2);
 
   if do_labels:
-    dotlabel.rt("$p_{28}$", p28);
-    dotlabel.lft("$p_{29}$", p29);
+    dotlabel.rt("$p_{28}$", p28) on_picture v3;
+    dotlabel.lft("$p_{29}$", p29) on_picture v3;
   fi;
 
   rp1 := (rp0 shifted by (p21 - p4)) rotated_around (p26, p27) 180;
@@ -350,8 +354,8 @@ beginfig(1);
   draw rp1;
 
   if do_labels:
-    dotlabel.top("$rp_1$", p30);
-    dotlabel.bot("$p_{30}$", p30);
+    dotlabel.top("$rp_1$", p30) on_picture v3;
+    dotlabel.bot("$p_{30}$", p30) on_picture v3;
   fi;
 
   q9 := q7 rotated_around (p27, p30) 180;
@@ -360,8 +364,8 @@ beginfig(1);
   p36 := p26 rotated_around (p27, p30) 180;
 
   if do_labels:
-    dotlabel.top("$q_9$", p36);
-    dotlabel.bot("$p_{36}$", p36);
+    dotlabel.top("$q_9$", p36) on_picture v3;
+    dotlabel.bot("$p_{36}$", p36) on_picture v3;
   fi;
     
   q10 := q6 rotated_around (p27, p30) 180;
@@ -372,9 +376,9 @@ beginfig(1);
   draw q10;
 
   if do_labels:
-    dotlabel.top("$q_{10}$", p37);
-    dotlabel.bot("$p_{37}$", p37);
-    dotlabel.lft("$p_{38}$", p38);
+    dotlabel.top("$q_{10}$", p37) on_picture v3;
+    dotlabel.bot("$p_{37}$", p37) on_picture v3;
+    dotlabel.lft("$p_{38}$", p38) on_picture v3;
   fi;
 
   q11 := q6 rotated_around (p22, p24) 180;
@@ -384,12 +388,14 @@ beginfig(1);
   p32 := p17 rotated_around (p22, p24) 180;
 
   if do_labels:
-    dotlabel.top("$p_{31}$", p31);
-    dotlabel.top("$p_{32}$", p32) with_text_color blue;
+    dotlabel.top("$p_{31}$", p31) on_picture v3;
+    dotlabel.top("$p_{32}$", p32) with_text_color blue on_picture v3;
   fi;
 
 
 %% *** (3)
+
+  v4 := v0;  %% Save single unit.
   
   v0 := current_picture;
   suppress_labels v0;
@@ -399,13 +405,13 @@ beginfig(1);
  
   shift v0 by (p31 - p16);
   current_picture += v0;
-
+ 
   shift v0 by (p31 - p16);
   current_picture += v0;
 
   shift v0 by (p31 - p16);
   current_picture += v0;
-
+  
   rp2 := rp0 shifted by (p13 - p2);
   p35 := p9 shifted by (p13 - p2);
   
@@ -438,8 +444,8 @@ beginfig(1);
   draw rp3; %%  with_color blue;  
 
   if do_labels:
-    dotlabel.top("$rp_3$", p39) with_text_color blue;
-    dotlabel.bot("$p_{39}$", p39) with_text_color blue;
+    dotlabel.top("$rp_3$", p39) with_text_color blue on_picture v3;
+    dotlabel.bot("$p_{39}$", p39) with_text_color blue on_picture v3;
   fi;
   
   p35 *= rp2 *= t1;
@@ -447,12 +453,12 @@ beginfig(1);
   draw rp2; %% with_color blue;
   
   if do_labels:
-    dotlabel.top("$rp_2$", p35) with_text_color blue;
-    dotlabel.bot("$p_{35}$", p35) with_text_color blue;
+    dotlabel.top("$rp_2$", p35) with_text_color blue on_picture v3;
+    dotlabel.bot("$p_{35}$", p35) with_text_color blue on_picture v3;
   fi;
    
   if do_labels:
-    dotlabel.top("$p_{33}$", p33);
+    dotlabel.top("$p_{33}$", p33) on_picture v3;
   fi;
 
   p40 := p32 shifted by (p38 - p18);
@@ -460,8 +466,8 @@ beginfig(1);
   
 
   if do_labels:
-    dotlabel.rt("$p_{40}$", p40);
-    dotlabel.rt("$p_{41}$", p41);
+    dotlabel.rt("$p_{40}$", p40) on_picture v3;
+    dotlabel.rt("$p_{41}$", p41) on_picture v3;
   fi;
 
   for i = 0 upto 2:
@@ -469,9 +475,9 @@ beginfig(1);
   endfor;
 
   if do_labels:
-    dotlabel.top("$p_{42}$", p42);
-    dotlabel.top("$p_{43}$", p43);
-    dotlabel.top("$p_{44}$", p44);
+    dotlabel.top("$p_{42}$", p42) on_picture v3;
+    dotlabel.top("$p_{43}$", p43) on_picture v3;
+    dotlabel.top("$p_{44}$", p44) on_picture v3;
   fi;
   
   for i = 0 upto 4:
@@ -479,11 +485,11 @@ beginfig(1);
   endfor;
 
   if do_labels:
-    dotlabel.top("$p_{45}$", p45);
-    dotlabel.top("$p_{46}$", p46);
-    dotlabel.lft("$p_{47}$", p47) with_text_color blue;
-    dotlabel.rt("$p_{48}$", p48) with_text_color blue;
-    dotlabel.top("$p_{49}$", p49);
+    dotlabel.top("$p_{45}$", p45) on_picture v3;
+    dotlabel.top("$p_{46}$", p46) on_picture v3;
+    dotlabel.lft("$p_{47}$", p47) with_text_color blue on_picture v3;
+    dotlabel.rt("$p_{48}$", p48) with_text_color blue on_picture v3;
+    dotlabel.top("$p_{49}$", p49) on_picture v3;
   fi;
 
   for i = 0 upto 4:
@@ -491,11 +497,11 @@ beginfig(1);
   endfor;
 
   if do_labels:
-    dotlabel.top("$p_{50}$", p50);
-    dotlabel.top("$p_{51}$", p51);
-    dotlabel.bot("$p_{52}$", p52) with_text_color blue;
-    dotlabel.rt ("$p_{53}$", p53); %with_text_color blue;
-    dotlabel.top("$p_{54}$", p54);
+    dotlabel.top("$p_{50}$", p50) on_picture v3;
+    dotlabel.top("$p_{51}$", p51) on_picture v3;
+    dotlabel.bot("$p_{52}$", p52) with_text_color blue on_picture v3;
+    dotlabel.rt ("$p_{53}$", p53) on_picture v3; %with_text_color blue;
+    dotlabel.top("$p_{54}$", p54) on_picture v3;
   fi;
   
 
@@ -595,10 +601,14 @@ beginfig(1);
   n1 += 1;
   tab {53, 54, .2, false, .4, n1};
   n1 += 1;
-  
+
+  if do_labels:
+    output v3 with_projection parallel_x_z;
+  fi;
+
+  v2 := current_picture;
   
 %% *** (3)
-
   
 endfig with_projection parallel_x_z;
 
@@ -697,14 +707,10 @@ beginfig(2);
 
   % draw p55 -- p56 -- p61;
   % draw p57 -- p58 -- p62;
-
-
-  
   
   %label("{\small " & decimal side_length & "\\thinspace cm}", p59) rotated (0, 0, -30);
 
-
-  
+ 
 endfig with_projection parallel_x_z;
 
 %% ** (2) Fig. 3
@@ -1134,7 +1140,14 @@ beginfig(4);
   
 endfig with_projection parallel_x_z;
 
+%% ** (2)
 
+beginfig(5);
+
+  current_picture := v1;
+  current_picture += v2;
+  
+endfig with_projection parallel_x_z;
 
 %% ** (2)
 
