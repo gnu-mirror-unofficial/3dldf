@@ -165,7 +165,7 @@ beginfig(1);
   bool do_labels;
   numeric n[];
 
-  do_labels :=  true; % false; % 
+  do_labels :=  false; % true; % 
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -205,6 +205,8 @@ beginfig(1);
 
   p22 := mediate(p6, p3, .5);
 
+
+  
   if do_labels:
     dotlabel.top("$q_0$", p22) on_picture v3;
     dotlabel.bot("$p_{22}$", p22) on_picture v3;
@@ -214,6 +216,7 @@ beginfig(1);
   draw q0;
 
   p9 := get_center rp0;
+
 
   if do_labels:
     dotlabel.top("$rp_0$", p9) on_picture v3;
@@ -237,7 +240,7 @@ beginfig(1);
 
   p11 := q2 intersection_point q3;
 
-  label("1", p11) on_picture v1;    
+
   
   if do_labels:
     dotlabel.top("$q_1$", p11) on_picture v3;
@@ -259,8 +262,6 @@ beginfig(1);
 
   p23 := mediate(p13, p4, .5);
 
-  label("0", p23) on_picture v1;    
-  
   if do_labels:
     dotlabel.top("$q_4$", p23) on_picture v3;
     dotlabel.bot("$p_{23}$", p23) on_picture v3;
@@ -291,6 +292,8 @@ beginfig(1);
 
   p25 := mediate(p13, p4, .5) rotated_around (p14, p15) 180;
 
+
+  
   if do_labels:
     dotlabel.top("$q_6$", p25) on_picture v3;
     dotlabel.bot("$p_{25}$", p25) on_picture v3;
@@ -503,7 +506,90 @@ beginfig(1);
     dotlabel.rt ("$p_{53}$", p53) on_picture v3; %with_text_color blue;
     dotlabel.top("$p_{54}$", p54) on_picture v3;
   fi;
+
+%% *** (3) Numbered Centers
   
+  t3 := identity shifted by (p31 - p16); 
+  
+  label("0", p23) on_picture v1;
+  label("13", (p23 * t3)) on_picture v1;
+  label("25", (p23 * t3 * t3)) on_picture v1;
+  label("37", (p23 * t3 * t3 * t3)) on_picture v1;
+  label("49", (p23 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("1", p11) on_picture v1;
+  label("14", (p11 * t3)) on_picture v1;
+  label("27", (p11 * t3 * t3)) on_picture v1;
+  label("39", (p11 * t3 * t3 * t3)) on_picture v1;
+  label("51", (p11 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+
+  label("2", p9) on_picture v1;
+  label("15", (p9 * t3)) on_picture v1;
+  label("26", (p9 * t3 * t3)) on_picture v1;
+  label("38", (p9 * t3 * t3 * t3)) on_picture v1;
+  label("50", (p9 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("3", p22) on_picture v1;
+  label("16", (p22 * t3)) on_picture v1;
+  label("28", (p22 * t3 * t3)) on_picture v1;
+  label("40", (p22 * t3 * t3 * t3)) on_picture v1;
+  label("52", (p22 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("4", p25) on_picture v1;
+  label("17", (p25 * t3)) on_picture v1;
+  label("29", (p25 * t3 * t3)) on_picture v1;
+  label("41", (p25 * t3 * t3 * t3)) on_picture v1;
+  label("53", (p25 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("5", p24) on_picture v1;
+  label("18", (p24 * t3)) on_picture v1;
+  label("30", (p24 * t3 * t3)) on_picture v1;
+  label("42", (p24 * t3 * t3 * t3)) on_picture v1;
+  label("54", (p24 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  p70 := mediate(p18, p31);
+  
+  label("6", p70) on_picture v1;
+  label("24", (p70 * t3)) on_picture v1;
+  label("31", (p70 * t3 * t3)) on_picture v1;
+  label("43", (p70 * t3 * t3 * t3)) on_picture v1;
+  label("55", (p70 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("7", p26) on_picture v1;
+  label("19", (p26 * t3)) on_picture v1;
+  label("32", (p26 * t3 * t3)) on_picture v1;
+  label("44", (p26 * t3 * t3 * t3)) on_picture v1;
+  label("56", (p26 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("8", p27) on_picture v1;
+  label("20", (p27 * t3)) on_picture v1;
+  label("33", (p27 * t3 * t3)) on_picture v1;
+  label("45", (p27 * t3 * t3 * t3)) on_picture v1;
+  label("57", (p27 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("9", p30) on_picture v1;
+  label("21", (p30 * t3)) on_picture v1;
+  label("34", (p30 * t3 * t3)) on_picture v1;
+  label("46", (p30 * t3 * t3 * t3)) on_picture v1;
+  label("58", (p30 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("10", p36) on_picture v1;
+  label("22", (p36 * t3)) on_picture v1;
+  label("35", (p36 * t3 * t3)) on_picture v1;
+  label("47", (p36 * t3 * t3 * t3)) on_picture v1;
+  label("59", (p36 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  label("11", p37) on_picture v1;
+  label("23", (p37 * t3)) on_picture v1;
+  label("36", (p37 * t3 * t3)) on_picture v1;
+  label("48", (p37 * t3 * t3 * t3)) on_picture v1;
+  label("61", (p37 * t3 * t3 * t3 * t3)) on_picture v1;    
+
+  
+  label("12", p35) on_picture v1;
+  label("61", p39) on_picture v1;
+
 
 %% *** (3) Tabs
 
