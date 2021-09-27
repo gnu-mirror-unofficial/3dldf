@@ -115,7 +115,7 @@ enddef;
 macro tab;
 
 def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
-         numeric width, numeric tab_path_ctr} =
+         numeric width, numeric tab_path_ctr, boolean suppress_draw} =
 
   point P[];
 
@@ -595,27 +595,27 @@ beginfig(1);
 
   n1 := 0;
   
-  tab {2, 1, .2, false, .4, n1};
+  tab {2, 1, .2, false, .4, n1, false};
   n1 += 1;
-  tab {1, 0, .2, false, .4, n1};
+  tab {1, 0, .2, false, .4, n1, false};
   n1 += 1;
-  tab {12, 13, .2, false, .4, n1};
+  tab {12, 13, .2, false, .4, n1, false};
   n1 += 1;
-  tab {21, 16, .2, false, .4, n1};
+  tab {21, 16, .2, false, .4, n1, false};
   n1 += 1;
-  tab {29, 21, .2, false, .3, n1};
+  tab {29, 21, .2, false, .3, n1, false};
   n1 += 1;
-  tab {38, 29, .2, false, .4, n1};
+  tab {38, 29, .2, false, .4, n1, false};
   n1 += 1;
-  tab {40, 38, .2, false, .4, n1};
+  tab {40, 38, .2, false, .4, n1, false};
   n1 += 1;
-  tab {47, 46, .2, false, .4, n1};
+  tab {47, 46, .2, false, .4, n1, false};
   n1 += 1;
-  tab {51, 52, .2, false, .4, n1};
+  tab {51, 52, .2, false, .4, n1, false};
   n1 += 1;
-  tab {50, 51, .2, false, .4, n1};
+  tab {50, 51, .2, false, .4, n1, false};
   n1 += 1;
-  tab {32, 18, .2, false, .3, n1};
+  tab {32, 18, .2, false, .3, n1, false};
   n1 += 1;
 
   thin_tab {3, 2, .2, .15, false, .35, true, n1};
@@ -677,15 +677,15 @@ beginfig(1);
   draw tab_path[13] shifted by 4 * (p31 - p16);
   draw tab_path[14] shifted by 4 * (p31 - p16);
   
-  tab {46, 45, .2, false, .4, n1};
+  tab {46, 45, .2, false, .4, n1, false};
   n1 += 1;
-  tab {45, 49, .2, false, .4, n1};
+  tab {45, 49, .2, false, .4, n1, false};
   n1 += 1;
-  tab {49, 48, .2, false, .4, n1};
+  tab {49, 48, .2, false, .4, n1, false};
   n1 += 1;
-  tab {54, 50, .2, false, .4, n1};
+  tab {54, 50, .2, false, .4, n1, false};
   n1 += 1;
-  tab {53, 54, .2, false, .4, n1};
+  tab {53, 54, .2, false, .4, n1, false};
   n1 += 1;
 
   if do_labels:
