@@ -1472,6 +1472,23 @@ pentahex.1: pentahex.mp
 pentahex.mp: pentahex.ldf pentahex.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) pentahex.ldf
 
+
+disdyakis.pdf: disdyakis.dvi
+	dvipdfmx disdyakis.dvi
+
+disdyakis.ps: disdyakis.dvi
+	dvips -o disdyakis.ps disdyakis.dvi
+
+disdyakis.dvi: disdyakis.tex disdyakis.1
+	$(TEX) disdyakis.tex
+	$(TEX) disdyakis.tex
+
+disdyakis.1: disdyakis.mp
+	mpost -numbersystem "double" disdyakis.mp
+
+disdyakis.mp: disdyakis.ldf disdyakis.lmc
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) disdyakis.ldf
+
 polymdls_a4.ps: polymdls_a4.dvi
 	dvips -o polymdls_a4.ps polymdls_a4.dvi
 
