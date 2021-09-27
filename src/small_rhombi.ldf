@@ -143,8 +143,10 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
   fi;
 
   tab_path[tab_path_ctr] := P0 -- P3 -- P4 -- P1;
-  
-  draw tab_path[tab_path_ctr];
+
+  if not suppress_draw:
+    draw tab_path[tab_path_ctr];
+  fi;
 
   P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
 
@@ -165,7 +167,7 @@ beginfig(1);
   bool do_labels;
   numeric n[];
 
-  do_labels :=  true; % false; true; % 
+  do_labels :=  false; % true;
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -611,9 +613,9 @@ beginfig(1);
   n1 += 1;
   tab {47, 46, .2, false, .4, n1, false};
   n1 += 1;
-  tab {51, 52, .2, false, .4, n1, false};
+  tab {51, 52, .2, false, .4, n1, true};
   n1 += 1;
-  tab {50, 51, .2, false, .4, n1, false};
+  tab {50, 51, .2, false, .4, n1, true};
   n1 += 1;
   tab {32, 18, .2, false, .3, n1, false};
   n1 += 1;
@@ -683,9 +685,9 @@ beginfig(1);
   n1 += 1;
   tab {49, 48, .2, false, .4, n1, false};
   n1 += 1;
-  tab {54, 50, .2, false, .4, n1, false};
+  tab {54, 50, .2, false, .4, n1, true};
   n1 += 1;
-  tab {53, 54, .2, false, .4, n1, false};
+  tab {53, 54, .2, false, .4, n1, true};
   n1 += 1;
 
   if do_labels:
