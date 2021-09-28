@@ -56,7 +56,7 @@ verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
 %% * (1) Global variables
 
 path tab_path[];
-picture v[];
+
 numeric tab_ctr;
 tab_ctr := 0; 
 
@@ -70,79 +70,75 @@ tab_width_one_factor  := 1;
 tab_offset_factor     := 1;
 tab_offset_one_factor := 1;
 
+picture tab_picture[];
+
 %% ** (2) Macro tab
 
 macro tab;
 
 def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric angle_zero, numeric angle_one,
-         boolean ddo_labels, numeric width, numeric width_one, boolean rotate_tab} =
+        boolean ddo_labels, numeric width, numeric width_one, boolean rotate_tab,
+        numeric tab_picture_ctr} =
 
   %message "Entering tab.";
- 
-  point P[];
+
+  point PP[];
 
   if offset == 0:
-    P0 := p[pp];
+    PP0 := p[pp];
   else:
-    P0 := mediate(p[pp], p[qq], offset * tab_offset_factor);
+    PP0 := mediate(p[pp], p[qq], offset * tab_offset_factor);
   fi;
 
   if offset_one == 0:
-    P1 := p[qq];
+    PP1 := p[qq];
   else:
-    P1 := mediate(p[qq], p[pp], offset_one * tab_offset_one_factor);
+    PP1 := mediate(p[qq], p[pp], offset_one * tab_offset_one_factor);
   fi;
 
   if ddo_labels:
-    %dotlabel.top("$P_0$", P0) with_text_color red;
-    %dotlabel.top("$P_1$", P1) with_text_color red;
+    %dotlabel.top("$P_0$", PP0) with_text_color red;
+    %dotlabel.top("$P_1$", PP1) with_text_color red;
   fi;
 
-  P2 := P0 shifted (0, 1);
+  PP2 := PP0 shifted (0, 1);
 
   if (offset  == 0) or (width == 0):
-    P3 := P0;
+    PP3 := PP0;
   else:
-    P3 := ((width  * tab_width_factor) * unit_vector(p[pp] - P0)) shifted by P0;
-    rotate_around P3 (P0, P2) -angle_zero;
+    PP3 := ((width  * tab_width_factor) * unit_vector(p[pp] - PP0)) shifted by PP0;
+    rotate_around PP3 (PP0, PP2) -angle_zero;
   fi;
 
-  P5 := P1 shifted (0, 1);
+  PP5 := PP1 shifted (0, 1);
 
   if (offset_one == 0) or (width_one == 0):
-    P4 := P1;
+    PP4 := PP1;
   else:
-    P4 := ((width_one * tab_width_one_factor) * unit_vector(p[qq] - P1)) shifted by P1;
-    rotate_around P4 (P1, P5) angle_one;
+    PP4 := ((width_one * tab_width_one_factor) * unit_vector(p[qq] - PP1)) shifted by PP1;
+    rotate_around PP4 (PP1, PP5) angle_one;
   fi;
 
   if ddo_labels:
-    %dotlabel.top("$P_3$", P3) with_text_color red;
-    %dotlabel.top("$P_4$", P4) with_text_color red;
+    %dotlabel.top("$P_3$", PP3) with_text_color red;
+    %dotlabel.top("$P_4$", PP4) with_text_color red;
   fi;
   
-  tab_path[tab_ctr] := P0 -- P3 -- P4 -- P1;
+  tab_path[tab_ctr] := PP0 -- PP3 -- PP4 -- PP1;
 
-  % message "tab_ctr == ";
-  % show tab_ctr;
-
-  % message "tab_path[tab_ctr] == ";
-  % show tab_path[tab_ctr];
-
-  
   if rotate_tab:
-    rotate_around tab_path[tab_ctr] (P0, P1) 180;
-    rotate_around P3 (P0, P1) 180;
-    rotate_around P4 (P0, P1) 180;
+    rotate_around tab_path[tab_ctr] (PP0, PP1) 180;
+    rotate_around PP3 (PP0, PP1) 180;
+    rotate_around PP4 (PP0, PP1) 180;
   fi;
 
     
-  draw tab_path[tab_ctr];
+  draw tab_path[tab_ctr] on_picture tab_picture[tab_picture_ctr];
 
-  P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
+  PP6 := mediate(mediate(PP0, PP1, .5), mediate(PP3, PP4, .5), .5);
 
   if ddo_labels:
-    label(decimal tab_ctr, P6) with_text_color red;
+    label(decimal tab_ctr, PP6) with_text_color red on_picture draft_label_picture[tab_picture_ctr];
   fi;
 
   tab_ctr += 1;
@@ -155,11 +151,13 @@ enddef;
 
 macro tab_short;
 
-def tab_short {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab} =
+def tab_short {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab,
+               numeric ttab_picture_ctr} =
 
   %message "Entering tab_short.";
 
-  tab {ppp, qqq, .15, .15, 112.5, 112.5, dddo_labels, .333, .333, rrotate_tab};
+  
+  tab {ppp, qqq, .15, .15, 112.5, 112.5, dddo_labels, .333, .333, rrotate_tab, ttab_picture_ctr};
   
   %message "Exiting tab_short.";
   
@@ -169,11 +167,12 @@ enddef;
 
 macro tab_thin;
 
-def tab_thin {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab} =
+def tab_thin {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab,
+              numeric ttab_picture_ctr} =
 
   %message "Entering tab_thin.";
 
-  tab {ppp, qqq, .1, .1, 112.5, 112.5, dddo_labels, 0, .333, rrotate_tab};
+  tab {ppp, qqq, .1, .1, 112.5, 112.5, dddo_labels, 0, .333, rrotate_tab, ttab_picture_ctr};
   
   %message "Exiting tab_thin.";
   
@@ -183,13 +182,14 @@ enddef;
 
 macro tab_long;
 
-def tab_long {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab} =
+def tab_long {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab,
+              numeric ttab_picture_ctr} =
 
   %message "Entering tab_long.";
 
-  tab {ppp, qqq, .225, .1, 112.5, 112.5, dddo_labels, .25, .4, rrotate_tab};
+  tab {ppp, qqq, .225, .1, 112.5, 112.5, dddo_labels, .25, .4, rrotate_tab, ttab_picture_ctr};
 
-  %message "Exiting tab_short.";
+  %message "Exiting tab_long.";
   
 enddef;
 
