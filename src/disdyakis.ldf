@@ -79,7 +79,8 @@ picture gray_picture[];
 macro disdyakis;
 
 def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_one,
-              numeric tab_width_zero, numeric tab_width_one} =
+               numeric tab_width_zero, numeric tab_width_one,
+               numeric point_offset, numeric path_offset} =
 
   point p[];
   path q[];
@@ -329,7 +330,30 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   label.bot("$p_{33}$", p33) on_picture draft_label_picture1;
   dotlabel.lft("$p_{34}$", p34) on_picture draft_label_picture1;
 
- %% ** (2)
+%% ** (2)
+
+  q14 := q13 rotated_around (p28, p34) 180;
+  draw q14 on_picture v1;
+
+  p35 := p33 rotated_around (p28, p34) 180;
+  p36 := p32 rotated_around (p28, p34) 180;
+  
+  dotlabel.top("$q_{14}$", p35) on_picture draft_label_picture1;
+  label.bot("$p_{35}$", p35) on_picture draft_label_picture1;
+  dotlabel.lft("$p_{36}$", p36) on_picture draft_label_picture1;
+
+%% ** (2)
+
+  for i = 0 upto 30:
+    P[i+point_offset]  := p[i];
+  endfor;
+
+  for i = 0 upto 14:
+    Q[i+path_offset] := q[i];
+  endfor;
+  
+  
+%% ** (2)
 
 enddef;
 
@@ -337,8 +361,14 @@ enddef;
   
 beginfig(1);
 
-  disdyakis {2, 1, 1, 1, 1};	
+  disdyakis {2, 1, 1, 1, 1, 0, 0};	
 
+  % message "P30:";
+  % show P30;
+
+  % message "Q0:";
+  % show Q0;
+  
   current_picture += v0;
   current_picture += draft_label_picture0;
   current_picture += gray_picture0;
@@ -352,6 +382,36 @@ beginfig(1);
     
 endfig with_projection parallel_x_z;
 
+%% * (1)
+
+
+beginfig(2);
+
+  clear v0;
+  clear draft_label_picture0;
+  clear gray_picture0;
+  clear center_label_picture0;
+
+  clear v1;
+  clear draft_label_picture1;
+  clear gray_picture1;
+  clear center_label_picture1;
+  
+  disdyakis {4, 1, 1, 1, 1, 100, 100};	
+      
+  current_picture += v0;
+  current_picture += draft_label_picture0;
+  current_picture += gray_picture0;
+  %current_picture += center_label_picture0;
+
+  current_picture += v1;
+  current_picture += draft_label_picture1;
+  current_picture += gray_picture1;
+  %current_picture += center_label_picture1;
+
+  rotate current_picture (0, -30);
+  
+endfig with_projection parallel_x_z;
 
 %% ** (2)
 
