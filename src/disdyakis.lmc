@@ -71,14 +71,16 @@ tab_offset_factor     := 1;
 tab_offset_one_factor := 1;
 
 picture tab_picture[];
+picture tab_dot_picture[];
 
 %% ** (2) Macro tab
 
 macro tab;
 
-def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric angle_zero, numeric angle_one,
-        boolean ddo_labels, numeric width, numeric width_one, boolean rotate_tab,
-        numeric tab_picture_ctr} =
+def tab {numeric pp, numeric qq, numeric offset, numeric offset_one,
+         numeric angle_zero, numeric angle_one,
+         boolean ddo_labels, numeric width, numeric width_one, boolean rotate_tab,
+         numeric tab_picture_ctr} =
 
   %message "Entering tab.";
 
@@ -96,10 +98,10 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
     PP1 := mediate(p[qq], p[pp], offset_one * tab_offset_one_factor);
   fi;
 
-  if ddo_labels:
-    %dotlabel.top("$P_0$", PP0) with_text_color red;
-    %dotlabel.top("$P_1$", PP1) with_text_color red;
-  fi;
+  % if ddo_labels:
+  %   dotlabel.top("$PP_0$", PP0) with_text_color red on_picture draft_label_picture[tab_picture_ctr];
+  %   dotlabel.top("$PP_1$", PP1) with_text_color red on_picture draft_label_picture[tab_picture_ctr];
+  % fi;
 
   PP2 := PP0 shifted (0, 1);
 
@@ -119,10 +121,10 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
     rotate_around PP4 (PP1, PP5) angle_one;
   fi;
 
-  if ddo_labels:
-    %dotlabel.top("$P_3$", PP3) with_text_color red;
-    %dotlabel.top("$P_4$", PP4) with_text_color red;
-  fi;
+  % if ddo_labels:
+  %   dotlabel.top("$PP_3$", PP3) with_text_color red on_picture draft_label_picture[tab_picture_ctr];
+  %   dotlabel.top("$PP_4$", PP4) with_text_color red on_picture draft_label_picture[tab_picture_ctr];
+  % fi;
   
   tab_path[tab_ctr] := PP0 -- PP3 -- PP4 -- PP1;
 
@@ -144,7 +146,38 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   tab_ctr += 1;
 
   %message "Exiting tab.";
+
+%% (/ 3.0 5)
+ 
+  PP7  := mediate(PP0, PP1, .5);
+  PP8  := mediate(PP0, PP1, .2);
+  PP9  := mediate(PP0, PP1, .4);
+  PP10 := mediate(PP0, PP1, .6);
+  PP11 := mediate(PP0, PP1, .8);
   
+  % if ddo_labels:
+  %   dotlabel.ulft("$\scriptstyle PP_7$", PP7) with_text_color blue
+  %     on_picture draft_label_picture[tab_picture_ctr];
+  %   dotlabel.ulft("$\scriptstyle PP_8$", PP8) with_text_color blue
+  %     on_picture draft_label_picture[tab_picture_ctr];
+  %   dotlabel.ulft("$\scriptstyle PP_9$", PP9) with_text_color blue
+  %     on_picture draft_label_picture[tab_picture_ctr];
+  %   dotlabel.ulft("$\scriptstyle PP_{10}$", PP10) with_text_color blue
+  %     on_picture draft_label_picture[tab_picture_ctr];
+  %   dotlabel.ulft("$\scriptstyle PP_{11}$", PP11) with_text_color blue
+  %     on_picture draft_label_picture[tab_picture_ctr];
+  % fi;
+
+  PP12 := PP6 shifted by (PP9 - PP7);
+  drawdot PP12 with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture tab_dot_picture[tab_picture_ctr];
+  PP13 := PP6 shifted by (PP8 - PP7);
+  drawdot PP13 with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture tab_dot_picture[tab_picture_ctr];
+
+  PP14 := PP6 shifted by (PP10 - PP7);
+  drawdot PP14 with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture tab_dot_picture[tab_picture_ctr];
+  PP15 := PP6 shifted by (PP11 - PP7);
+  drawdot PP15 with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture tab_dot_picture[tab_picture_ctr];
+    
 enddef;
 
 %% ** (2)
@@ -187,7 +220,7 @@ def tab_long {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab
 
   %message "Entering tab_long.";
 
-  tab {ppp, qqq, .225, .1, 112.5, 112.5, dddo_labels, .25, .4, rrotate_tab, ttab_picture_ctr};
+  tab {ppp, qqq, .125, .25, 112.5, 112.5, dddo_labels, .4, .4, rrotate_tab, ttab_picture_ctr};
 
   %message "Exiting tab_long.";
   

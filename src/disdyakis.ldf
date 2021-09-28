@@ -56,6 +56,8 @@
 %% Lower right of q0:  58.23791962089 deg.
 %% Top of q0:          32.77027847129 deg.
 
+
+
 input "disdyakis.lmc";
 
 tab_width_factor      := 1;
@@ -66,11 +68,13 @@ tab_offset_one_factor := 1;
 point P[];
 path Q[];
 picture v[];
+point p[];
+path q[];
 
 picture draft_label_picture[];
 picture center_label_picture[];
-
 picture gray_picture[];
+
 
 %% * (1)
 
@@ -80,10 +84,9 @@ macro disdyakis;
 
 def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_one,
                numeric tab_width_zero, numeric tab_width_one,
-               numeric point_offset, numeric path_offset} =
+               numeric point_offset, numeric path_offset,
+               numeric inner_dot_size, numeric outer_dot_size} =
 
-  point p[];
-  path q[];
 
 % llft 88 right 58 top 32
   
@@ -91,13 +94,10 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   numeric ang[];
   numeric side_length[];
   transform t[];
-  numeric tab_ctr;
 
   ang0 := 88.99180190782;
   ang1 := 58.23791962089;
-
-  tab_ctr := 0;
-    
+   
   p0 := origin;
   p1 := (side_length, 0);
 
@@ -145,19 +145,13 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   
   draw q0 on_picture v0;
   
-  drawdot p6 with_pen pencircle scaled (2pt, 2pt, 2pt) on_picture v0;
-  drawdot p6 with_pen pencircle scaled (4pt, 4pt, 4pt) with_color white on_picture v0;
- 
   fill q0 with_color light_gray on_picture gray_picture0;
 
+  
 %% ** (2)
-
-
   
   q1 := q0 rotated_around (p0, p6) 180;
   draw q1 on_picture v0;
-
-
   
   p9 := p8 rotated_around (p0, p6) 180;
   p10 := p1 rotated_around (p0, p6) 180;
@@ -166,12 +160,13 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   label.bot("$p_9$", p9) on_picture draft_label_picture0;
   dotlabel.rt("$p_{10}$", p10) on_picture draft_label_picture0;
 
-
+  
 %% ** (2)
   
   q2 := q1 rotated_around (p10, p6) 180;
   draw q2 on_picture v0;
 
+  
   fill q2 with_color light_gray on_picture gray_picture0;
   
   p11 := p9 rotated_around (p10, p6) 180;
@@ -181,7 +176,7 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   label.bot("$p_{11}$", p11) on_picture draft_label_picture0;
   dotlabel.lft("$p_{12}$", p12) on_picture draft_label_picture0;
 
-
+  
 %% ** (2)
   
   q3 := q2 rotated_around (p12, p6) 180;
@@ -194,6 +189,7 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   label.bot("$p_{13}$", p13) on_picture draft_label_picture0;
   dotlabel.lft("$p_{14}$", p14) on_picture draft_label_picture0;
 
+  
 %% ** (2)
   
   q4 := q3 rotated_around (p14, p6) 180;
@@ -220,7 +216,6 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   label.bot("$p_{17}$", p17) on_picture draft_label_picture0;
   dotlabel.lft("$p_{18}$", p18) on_picture draft_label_picture0;
 
-
 %% ** (2)
   
   q6 := q5 rotated_around (p18, p6) 180;
@@ -235,6 +230,7 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   label.bot("$p_{19}$", p19) on_picture draft_label_picture0;
   dotlabel.lft("$p_{20}$", p20) on_picture draft_label_picture0;
 
+  
 %% ** (2)
   
   q7 := q0 rotated_around (p1, p6) 180;
@@ -273,7 +269,12 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   dotlabel.top("$q_9$", p25) on_picture draft_label_picture0;
   label.bot("$p_{25}$", p25) on_picture draft_label_picture0;
   dotlabel.rt("$p_{26}$", p26) on_picture draft_label_picture0;
-
+  
+  drawdot p6 with_pen pencircle scaled (outer_dot_size * pt, outer_dot_size * pt, outer_dot_size * pt)
+    with_color white on_picture v0;
+  drawdot p6 with_pen pencircle scaled (inner_dot_size * pt, inner_dot_size * pt, inner_dot_size * pt)
+    on_picture v0;
+  
 %% ** (2)
 
   q10 := q9 rotated_around (p26, p24) 180;
@@ -284,14 +285,12 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
   p27 := p25 rotated_around (p26, p24) 180;
   p28 := p6  rotated_around (p26, p24) 180;
 
-  drawdot p28 with_pen pencircle scaled (2pt, 2pt, 2pt) on_picture v1;
-  drawdot p28 with_pen pencircle scaled (4pt, 4pt, 4pt) with_color white on_picture v1;
-  
   dotlabel.top("$q_{10}$", p27) on_picture draft_label_picture1;
   label.bot("$p_{27}$", p27) on_picture draft_label_picture1;
   label.top("{\Largebx 1}", p28) on_picture draft_label_picture1;
   label.bot("$p_{28}$", p28) on_picture draft_label_picture1;
 
+ 
 %% ** (2)
 
   q11 := q10 rotated_around (p28, p24) 180;
@@ -344,11 +343,178 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
 
 %% ** (2)
 
-  for i = 0 upto 30:
+  q15 := q14 rotated_around (p28, p36) 180;
+  draw q15 on_picture v1;
+
+  p37 := p35 rotated_around (p28, p36) 180;
+  p38 := p34 rotated_around (p28, p36) 180;
+
+  fill q15 with_color light_gray on_picture gray_picture1;
+  
+  dotlabel.top("$q_{15}$", p37) on_picture draft_label_picture1;
+  label.bot("$p_{37}$", p37) on_picture draft_label_picture1;
+  dotlabel.lft("$p_{38}$", p38) on_picture draft_label_picture1;
+
+%% ** (2)
+
+  q16 := q15 rotated_around (p28, p38) 180;
+  draw q16 on_picture v1;
+
+  p39 := p37 rotated_around (p28, p38) 180;
+  p40 := p36 rotated_around (p28, p38) 180;
+
+  dotlabel.top("$q_{16}$", p39) on_picture draft_label_picture1;
+  label.bot("$p_{39}$", p39) on_picture draft_label_picture1;
+  dotlabel.lft("$p_{40}$", p40) on_picture draft_label_picture1;
+
+%% ** (2)
+ 
+  q17 := q16 rotated_around (p28, p40) 180;
+  draw q17 on_picture v1;
+
+  fill q17 with_color light_gray on_picture gray_picture1;
+  
+  p41 := p39 rotated_around (p28, p40) 180;
+  p42 := p38 rotated_around (p28, p40) 180;
+
+  dotlabel.top("$q_{17}$", p41) on_picture draft_label_picture1;
+  label.bot("$p_{41}$", p41) on_picture draft_label_picture1;
+  dotlabel.lft("$p_{42}$", p42) on_picture draft_label_picture1;
+
+%% ** (2)
+
+  q18:= q17 rotated_around (p28, p42) 180;
+  draw q18 on_picture v1;
+
+  p43 := p41 rotated_around (p28, p42) 180;
+  p44 := p40 rotated_around (p28, p42) 180;
+
+  dotlabel.top("$q_{18}$", p43) on_picture draft_label_picture1;
+  label.bot("$p_{43}$", p43) on_picture draft_label_picture1;
+  dotlabel.lft("$p_{44}$", p44) on_picture draft_label_picture1;
+
+%% ** (2)
+
+  q19:= q18 rotated_around (p28, p44) 180;
+  draw q19 on_picture v1;
+
+  fill q19 with_color light_gray on_picture gray_picture1;
+
+  p45 := p43 rotated_around (p28, p44) 180;
+  p46 := p42 rotated_around (p28, p44) 180;
+
+  dotlabel.top("$q_{19}$", p45) on_picture draft_label_picture1;
+  label.bot("$p_{45}$", p45) on_picture draft_label_picture1;
+  dotlabel.lft("$p_{46}$", p46) on_picture draft_label_picture1;
+
+%% *** (3)
+  
+  drawdot p28 with_pen pencircle scaled (outer_dot_size * pt, outer_dot_size * pt, outer_dot_size * pt)
+    with_color white on_picture v1;
+  drawdot p28 with_pen pencircle scaled (inner_dot_size * pt, inner_dot_size * pt, inner_dot_size * pt)
+    on_picture v1;
+  
+
+%% ** (2) Pentagon 2
+
+%% *** (3) 
+
+  q20:= q13 rotated_around (p32, p34) 180;
+  draw q20 on_picture v2;
+
+  p47 := p33 rotated_around (p32, p34) 180;
+  p48 := p28 rotated_around (p32, p34) 180;
+
+  dotlabel.top("$q_{20}$", p47) on_picture draft_label_picture2;
+  label.bot("$p_{47}$", p47) on_picture draft_label_picture2;
+  dotlabel.rt("$p_{48}$", p48) on_picture draft_label_picture2;
+  label.top("{\Largebx 2}", p48) on_picture draft_label_picture2;
+  
+%% *** (3) 
+
+  q21:= q20 rotated_around (p32, p48) 180;
+  draw q21 on_picture v2;
+
+  fill q21 with_color light_gray on_picture gray_picture2;
+
+  p49 := p47 rotated_around (p32, p48) 180;
+  p50 := p34 rotated_around (p32, p48) 180;
+
+  dotlabel.top("$q_{21}$", p49) on_picture draft_label_picture2;
+  label.bot("$p_{49}$", p49) on_picture draft_label_picture2;
+  dotlabel.rt("$p_{50}$", p50) on_picture draft_label_picture2;
+
+%% *** (3) 
+
+  q22:= q21 rotated_around (p50, p48) 180;
+  draw q22 on_picture v2;
+
+  p51 := p49 rotated_around (p50, p48) 180;
+  p52 := p32 rotated_around (p50, p48) 180;
+
+  dotlabel.top("$q_{22}$", p51) on_picture draft_label_picture2;
+  label.bot("$p_{51}$", p51) on_picture draft_label_picture2;
+  dotlabel.rt("$p_{52}$", p52) on_picture draft_label_picture2;
+
+%% *** (3) 
+
+  q23:= q22 rotated_around (p52, p48) 180;
+  draw q23 on_picture v2;
+
+  fill q23 with_color light_gray on_picture gray_picture2;
+  
+  p53 := p51 rotated_around (p52, p48) 180;
+  p54 := p50 rotated_around (p52, p48) 180;
+
+  
+  dotlabel.top("$q_{23}$", p53) on_picture draft_label_picture2;
+  label.bot("$p_{53}$", p53) on_picture draft_label_picture2;
+  dotlabel.rt("$p_{54}$", p54) on_picture draft_label_picture2;
+
+%% *** (3) 
+
+  q24:= q23 rotated_around (p54, p48) 180;
+  draw q24 on_picture v2;
+
+  p55 := p53 rotated_around (p54, p48) 180;
+  p56 := p52 rotated_around (p54, p48) 180;
+
+  
+  dotlabel.top("$q_{24}$", p55) on_picture draft_label_picture2;
+  label.bot("$p_{55}$", p55) on_picture draft_label_picture2;
+  dotlabel.rt("$p_{56}$", p56) on_picture draft_label_picture2;
+
+%% *** (3) 
+
+  q25:= q24 rotated_around (p56, p48) 180;
+  draw q25 on_picture v2;
+
+  p57 := p55 rotated_around (p56, p48) 180;
+  p58 := p54 rotated_around (p56, p48) 180;
+
+  fill q25 with_color light_gray on_picture gray_picture2;
+  
+  dotlabel.top("$q_{25}$", p57) on_picture draft_label_picture2;
+  label.bot("$p_{57}$", p57) on_picture draft_label_picture2;
+  dotlabel.lft("$p_{58}$", p58) on_picture draft_label_picture2;
+  
+%% *** (3)
+
+  drawdot p48 with_pen pencircle scaled (outer_dot_size * pt, outer_dot_size * pt, outer_dot_size * pt)
+    with_color white on_picture v2;
+  drawdot p48 with_pen pencircle scaled (inner_dot_size * pt, inner_dot_size * pt, inner_dot_size * pt)
+    on_picture v2;
+  
+
+%% *** (3)
+  
+%% ** (2)
+
+  for i = 0 upto 48:
     P[i+point_offset]  := p[i];
   endfor;
 
-  for i = 0 upto 14:
+  for i = 0 upto 20:
     Q[i+path_offset] := q[i];
   endfor;
   
@@ -361,26 +527,37 @@ enddef;
   
 beginfig(1);
 
-  disdyakis {2, 1, 1, 1, 1, 0, 0};	
+  disdyakis {2, 1, 1, 1, 1, 0, 0, 2, 4};	
 
   % message "P30:";
   % show P30;
 
   % message "Q0:";
   % show Q0;
-  
-  current_picture += v0;
-  current_picture += draft_label_picture0;
+
   current_picture += gray_picture0;
+  current_picture += v0;
+  current_picture += tab_picture0;
+  current_picture += draft_label_picture0;
+  %current_picture += tab_dot_picture0;
   %current_picture += center_label_picture0;
-  
-  current_picture += v1;
-  current_picture += draft_label_picture1;
+
   current_picture += gray_picture1;
+  current_picture += v1;
+  current_picture += tab_picture1;
+  current_picture += draft_label_picture1;
+  %current_picture += tab_dot_picture1;
   %current_picture += center_label_picture1;
 
+  current_picture += gray_picture2;
+  current_picture += v2;
+  current_picture += tab_picture2;
+  current_picture += draft_label_picture2;
+  %current_picture += tab_dot_picture2;
+  %current_picture += center_label_picture2;
+  
     
-endfig with_projection parallel_x_z;
+endfig with_projection parallel_x_z no_sort;
 
 %% * (1)
 
@@ -388,30 +565,48 @@ endfig with_projection parallel_x_z;
 beginfig(2);
 
   clear v0;
+  clear tab_picture0;
   clear draft_label_picture0;
   clear gray_picture0;
   clear center_label_picture0;
 
   clear v1;
+  clear tab_picture1;
   clear draft_label_picture1;
   clear gray_picture1;
   clear center_label_picture1;
-  
-  disdyakis {4, 1, 1, 1, 1, 100, 100};	
-      
-  current_picture += v0;
-  current_picture += draft_label_picture0;
-  current_picture += gray_picture0;
-  %current_picture += center_label_picture0;
 
-  current_picture += v1;
-  current_picture += draft_label_picture1;
+  clear v2;
+  clear tab_picture2;
+  clear draft_label_picture2;
+  clear gray_picture2;
+  clear center_label_picture2;
+
+  
+  disdyakis {4, 1, 1, 1, 1, 100, 100, 4, 8};
+  
+  current_picture += gray_picture0;
+  current_picture += v0;
+  current_picture += tab_picture0;
+  current_picture += draft_label_picture0;
+  %current_picture += center_label_picture0;
+  
   current_picture += gray_picture1;
+  current_picture += v1;
+  current_picture += tab_picture1;
+  current_picture += draft_label_picture1;
   %current_picture += center_label_picture1;
+
+  current_picture += gray_picture2;
+  current_picture += v2;
+  current_picture += tab_picture2;
+  current_picture += draft_label_picture2;
+  %current_picture += tab_dot_picture2;
+  %current_picture += center_label_picture2;
 
   rotate current_picture (0, -30);
   
-endfig with_projection parallel_x_z;
+endfig with_projection parallel_x_z no_sort;
 
 %% ** (2)
 
