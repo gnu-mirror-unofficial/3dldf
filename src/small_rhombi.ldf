@@ -48,7 +48,8 @@
 
 % * (1) Beginning of 3DLDF code.
 
-verbatim_metapost "verbatimtex \font\small=cmr8 \font\largebx=cmbx12 \font\Largebx=cmbx12 scaled \magstep1 etex;";
+verbatim_metapost   "verbatimtex \font\small=cmr8 \font\largebx=cmbx12 \font\Large=cmr12 scaled \magstep1"
+                  & "\font\Largebx=cmbx12 scaled \magstep1 etex;";
 
 %% ** (2)  Global variables
 
@@ -167,7 +168,7 @@ beginfig(1);
   bool do_labels;
   numeric n[];
 
-  do_labels :=  false; % true;
+  do_labels :=  true; % false
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -210,8 +211,8 @@ beginfig(1);
 
   
   if do_labels:
-    dotlabel.top("$q_0$", p22) on_picture v3;
-    dotlabel.bot("$p_{22}$", p22) on_picture v3;
+    label.top("$q_0$", p22) on_picture v3; % dot
+    label.bot("$p_{22}$", p22) on_picture v3;  % dot
   fi;
   
   
@@ -221,8 +222,8 @@ beginfig(1);
 
 
   if do_labels:
-    dotlabel.top("$rp_0$", p9) on_picture v3;
-    dotlabel.bot("$p_9$", p9) on_picture v3;
+    label.top("$rp_0$", p9) on_picture v3; % dot
+    label.bot("$p_9$", p9) on_picture v3;  % dot
   fi;
   
   p10 := p6 rotated_around (p4, p5) 60;
@@ -245,8 +246,8 @@ beginfig(1);
 
   
   if do_labels:
-    dotlabel.top("$q_1$", p11) on_picture v3;
-    dotlabel.bot("$p_{11}$", p11) on_picture v3;
+    label.top("$q_1$", p11) on_picture v3; % dot
+    label.bot("$p_{11}$", p11) on_picture v3;  % dot
   fi;
 
   q4 := (q0 rotated_around (p4, p5) 60) rotated_around (p4, p10) 180;
@@ -265,8 +266,8 @@ beginfig(1);
   p23 := mediate(p13, p4, .5);
 
   if do_labels:
-    dotlabel.top("$q_4$", p23) on_picture v3;
-    dotlabel.bot("$p_{23}$", p23) on_picture v3;
+    label.top("$q_4$", p23) on_picture v3; % dot
+    label.bot("$p_{23}$", p23) on_picture v3;  % dot
   fi;
 
   p14 := mediate(p4, p3, .5);
@@ -284,8 +285,8 @@ beginfig(1);
   p24 := p11 rotated_around (p14, p15) 180;
 
   if do_labels:
-    dotlabel.top("$q_5$", p24) on_picture v3;
-    dotlabel.bot("$p_{24}$", p24) on_picture v3;
+    label.top("$q_5$", p24) on_picture v3; % dot
+    label.bot("$p_{24}$", p24) on_picture v3;  % dot
   fi;
 
   q6 := q4 rotated_around (p14, p15) 180;
@@ -297,8 +298,8 @@ beginfig(1);
 
   
   if do_labels:
-    dotlabel.top("$q_6$", p25) on_picture v3;
-    dotlabel.bot("$p_{25}$", p25) on_picture v3;
+    label.top("$q_6$", p25) on_picture v3; % dot
+    label.bot("$p_{25}$", p25) on_picture v3;  % dot
   fi;
 
   for i = 0 upto 3:
@@ -326,8 +327,8 @@ beginfig(1);
   p26 := (p11 rotated_around (p14, p15) 180) rotated_around (p19, p20) 180;
 
   if do_labels:
-    dotlabel.top("$q_7$", p26) on_picture v3;
-    dotlabel.bot("$p_{26}$", p26) on_picture v3;
+    label.top("$q_7$", p26) on_picture v3; % dot
+    label.bot("$p_{26}$", p26) on_picture v3;  % dot
   fi;
 
   p21 := get_point (1) q7;
@@ -341,8 +342,8 @@ beginfig(1);
   draw q8;
 
   if do_labels:
-    dotlabel.top("$q_8$", p27) on_picture v3;
-    dotlabel.bot("$p_{27}$", p27) on_picture v3;
+    label.top("$q_8$", p27) on_picture v3; % dot
+    label.bot("$p_{27}$", p27) on_picture v3;  % dot
   fi;
   
   p28 := mediate(p21, p27, 2);
@@ -359,8 +360,8 @@ beginfig(1);
   draw rp1;
 
   if do_labels:
-    dotlabel.top("$rp_1$", p30) on_picture v3;
-    dotlabel.bot("$p_{30}$", p30) on_picture v3;
+    label.top("$rp_1$", p30) on_picture v3; % dot
+    label.bot("$p_{30}$", p30) on_picture v3;  % dot
   fi;
 
   q9 := q7 rotated_around (p27, p30) 180;
@@ -369,8 +370,8 @@ beginfig(1);
   p36 := p26 rotated_around (p27, p30) 180;
 
   if do_labels:
-    dotlabel.top("$q_9$", p36) on_picture v3;
-    dotlabel.bot("$p_{36}$", p36) on_picture v3;
+    label.top("$q_9$", p36) on_picture v3; % dot
+    label.bot("$p_{36}$", p36) on_picture v3;  % dot
   fi;
     
   q10 := q6 rotated_around (p27, p30) 180;
@@ -381,8 +382,8 @@ beginfig(1);
   draw q10;
 
   if do_labels:
-    dotlabel.top("$q_{10}$", p37) on_picture v3;
-    dotlabel.bot("$p_{37}$", p37) on_picture v3;
+    label.top("$q_{10}$", p37) on_picture v3; % dot
+    label.bot("$p_{37}$", p37) on_picture v3;  % dot
     dotlabel.lft("$p_{38}$", p38) on_picture v3;
   fi;
 
@@ -423,8 +424,8 @@ beginfig(1);
   p33 := get_point (3) rp2;
   n0 := (p33 - p13) angle (p10 - p13);
 
-  message "n0:";
-  show n0;
+  % message "n0:";
+  % show n0;
 
   p34 := p13 shifted (0, 1);
 
@@ -449,8 +450,8 @@ beginfig(1);
   draw rp3; %%  with_color blue;  
 
   if do_labels:
-    dotlabel.top("$rp_3$", p39) with_text_color blue on_picture v3;
-    dotlabel.bot("$p_{39}$", p39) with_text_color blue on_picture v3;
+    label.top("$rp_3$", p39) with_text_color blue on_picture v3; % dot
+    label.bot("$p_{39}$", p39) with_text_color blue on_picture v3;  % dot
   fi;
   
   p35 *= rp2 *= t1;
@@ -458,8 +459,8 @@ beginfig(1);
   draw rp2; %% with_color blue;
   
   if do_labels:
-    dotlabel.top("$rp_2$", p35) with_text_color blue on_picture v3;
-    dotlabel.bot("$p_{35}$", p35) with_text_color blue on_picture v3;
+    label.top("$rp_2$", p35) with_text_color blue on_picture v3; % dot
+    label.bot("$p_{35}$", p35) with_text_color blue on_picture v3;  % dot
   fi;
    
   if do_labels:
@@ -513,84 +514,181 @@ beginfig(1);
   
   t3 := identity shifted by (p31 - p16); 
   
-  label("0", p23) on_picture v1;
-  label("13", (p23 * t3)) on_picture v1;
-  label("25", (p23 * t3 * t3)) on_picture v1;
-  label("37", (p23 * t3 * t3 * t3)) on_picture v1;
-  label("49", (p23 * t3 * t3 * t3 * t3)) on_picture v1;    
-
-  label("1", p11) on_picture v1;
-  label("14", (p11 * t3)) on_picture v1;
-  label("27", (p11 * t3 * t3)) on_picture v1;
-  label("39", (p11 * t3 * t3 * t3)) on_picture v1;
-  label("51", (p11 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 0}", p23) with_text_color blue on_picture v1;
+  label("{\Large 13}", (p23 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 25}", (p23 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 37}", (p23 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 49}", (p23 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
 
-  label("2", p9) on_picture v1;
-  label("15", (p9 * t3)) on_picture v1;
-  label("26", (p9 * t3 * t3)) on_picture v1;
-  label("38", (p9 * t3 * t3 * t3)) on_picture v1;
-  label("50", (p9 * t3 * t3 * t3 * t3)) on_picture v1;    
+  numeric top_pos;
+  numeric bot_pos;
+  numeric lft_pos;
+  numeric rt_pos;
+  numeric ulft_pos;
+  numeric urt_pos;
+  numeric llft_pos;
+  numeric lrt_pos;
 
-  label("3", p22) on_picture v1;
-  label("16", (p22 * t3)) on_picture v1;
-  label("28", (p22 * t3 * t3)) on_picture v1;
-  label("40", (p22 * t3 * t3 * t3)) on_picture v1;
-  label("52", (p22 * t3 * t3 * t3 * t3)) on_picture v1;    
+  top_pos  := 0;
+  bot_pos  := 1;
+  lft_pos  := 2;
+  rt_pos   := 3;
+  ulft_pos := 4;
+  urt_pos  := 5;
+  llft_pos := 6;
+  lrt_pos  := 7;
 
-  label("4", p25) on_picture v1;
-  label("17", (p25 * t3)) on_picture v1;
-  label("29", (p25 * t3 * t3)) on_picture v1;
-  label("41", (p25 * t3 * t3 * t3)) on_picture v1;
-  label("53", (p25 * t3 * t3 * t3 * t3)) on_picture v1;    
+  
+  string rt_str;
+  string lft_str;
+  string top_str;
+  string bot_str;
+  string urt_str;
+  string lrt_str;
+  string ulft_str;
+  string llft_str;
 
-  label("5", p24) on_picture v1;
-  label("18", (p24 * t3)) on_picture v1;
-  label("30", (p24 * t3 * t3)) on_picture v1;
-  label("42", (p24 * t3 * t3 * t3)) on_picture v1;
-  label("54", (p24 * t3 * t3 * t3 * t3)) on_picture v1;    
+  top_str := "\\thinspace t";
+  bot_str := "\\thinspace b";
+  
+  rt_str := "\\thinspace r";
+  lft_str := "\\thinspace l";
+
+  urt_str := "\\thinspace ur";
+  ulft_str := "\\thinspace ul";
+
+  lrt_str := "\\thinspace lr";
+  llft_str := "\\thinspace ll";
+ 
+  macro label_side;
+
+  def label_side {numeric pp, numeric qq, numeric nnumber, string s, boolean rrotate, boolean ddo_labels, numeric position} =
+
+    message "Entering `label_side'.";
+
+    point P[];
+    numeric ang[];
+    
+    P0 := p[pp];
+    P1 := p[qq];
+
+    P3 := mediate(P0, P1);
+
+    P4 := P0 shifted (1, 0);
+
+    ang0 := (P1 - P0) angle (P4 - P0);
+
+    if rrotate:
+      ang0 *= -1;
+    fi;
+    
+    message "ang0:";
+    show ang0;
+
+    if position == top_pos:
+      label.top(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == bot_pos:
+      label.bot(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == lft_pos:
+      label.lft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == rt_pos:
+      label.rt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == ulft_pos:
+      label.ulft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == urt_pos:
+      label.urt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == llft_pos:
+      label.llft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == lrt_pos:
+      label.lrt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    fi;
+    
+    message "Exiting `label_side'.";
+    
+  enddef;
+
+
+  % def label_side {numeric pp, numeric qq, numeric nnumber, string s, boolean rrotate, boolean ddo_labels, numeric position}
+
+  %% !! START HERE: LDF 2021.09.29.  
+  
+  label_side {12, 13, 51, rt_str, false, true, rt_pos};
+  label_side {13, 10, 12, ulft_str, true, true, bot_pos};
+  label_side {10, 6, 13, lft_str, true, true, lft_pos};
+
+  label("{\Large 1}", p11) with_text_color blue on_picture v1;
+  label("{\Large 14}", (p11 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 27}", (p11 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 39}", (p11 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 51}", (p11 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+
+
+  label("{\Large 2}", p9) with_text_color blue on_picture v1;
+  label("{\Large 15}", (p9 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 26}", (p9 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 38}", (p9 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 50}", (p9 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+
+  label("{\Large 3}", p22) with_text_color blue on_picture v1;
+  label("{\Large 16}", (p22 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 28}", (p22 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 40}", (p22 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 52}", (p22 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+
+  label("{\Large 4}", p25) with_text_color blue on_picture v1;
+  label("{\Large 17}", (p25 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 29}", (p25 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 41}", (p25 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 53}", (p25 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+
+  label("{\Large 5}", p24) with_text_color blue on_picture v1;
+  label("{\Large 18}", (p24 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 30}", (p24 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 42}", (p24 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 54}", (p24 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
   p70 := mediate(p18, p31);
   
-  label("6", p70) on_picture v1;
-  label("24", (p70 * t3)) on_picture v1;
-  label("31", (p70 * t3 * t3)) on_picture v1;
-  label("43", (p70 * t3 * t3 * t3)) on_picture v1;
-  label("55", (p70 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 6}", p70) with_text_color blue on_picture v1;
+  label("{\Large 24}", (p70 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 31}", (p70 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 43}", (p70 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 55}", (p70 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
-  label("7", p26) on_picture v1;
-  label("19", (p26 * t3)) on_picture v1;
-  label("32", (p26 * t3 * t3)) on_picture v1;
-  label("44", (p26 * t3 * t3 * t3)) on_picture v1;
-  label("56", (p26 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 7}", p26) with_text_color blue on_picture v1;
+  label("{\Large 19}", (p26 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 32}", (p26 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 44}", (p26 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 56}", (p26 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
-  label("8", p27) on_picture v1;
-  label("20", (p27 * t3)) on_picture v1;
-  label("33", (p27 * t3 * t3)) on_picture v1;
-  label("45", (p27 * t3 * t3 * t3)) on_picture v1;
-  label("57", (p27 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 8}", p27) with_text_color blue on_picture v1;
+  label("{\Large 20}", (p27 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 33}", (p27 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 45}", (p27 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 57}", (p27 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
-  label("9", p30) on_picture v1;
-  label("21", (p30 * t3)) on_picture v1;
-  label("34", (p30 * t3 * t3)) on_picture v1;
-  label("46", (p30 * t3 * t3 * t3)) on_picture v1;
-  label("58", (p30 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 9}", p30) with_text_color blue on_picture v1;
+  label("{\Large 21}", (p30 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 34}", (p30 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 46}", (p30 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 58}", (p30 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
-  label("10", p36) on_picture v1;
-  label("22", (p36 * t3)) on_picture v1;
-  label("35", (p36 * t3 * t3)) on_picture v1;
-  label("47", (p36 * t3 * t3 * t3)) on_picture v1;
-  label("59", (p36 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 10}", p36) with_text_color blue on_picture v1;
+  label("{\Large 22}", (p36 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 35}", (p36 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 47}", (p36 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 59}", (p36 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
-  label("11", p37) on_picture v1;
-  label("23", (p37 * t3)) on_picture v1;
-  label("36", (p37 * t3 * t3)) on_picture v1;
-  label("48", (p37 * t3 * t3 * t3)) on_picture v1;
-  label("61", (p37 * t3 * t3 * t3 * t3)) on_picture v1;    
+  label("{\Large 11}", p37) with_text_color blue on_picture v1;
+  label("{\Large 23}", (p37 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 36}", (p37 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 48}", (p37 * t3 * t3 * t3)) with_text_color blue on_picture v1;
+  label("{\Large 61}", (p37 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
 
   
-  label("12", p35) on_picture v1;
-  label("61", p39) on_picture v1;
+  label("{\Large 12}", p35) with_text_color blue on_picture v1;
+  label("{\Large 61}", p39) with_text_color blue on_picture v1;
 
 
 %% *** (3) Tabs
@@ -707,8 +805,8 @@ beginfig(2);
   draw p9 -- p0;
   n5 := magnitude(p0 - p9);
 
-  message "n5:";
-  show n5;
+  % message "{\Large n5:}";
+  % show n5;
   %pause;
 
   drawdot p9 with_pen pencircle scaled (3pt, 3pt, 3pt);
@@ -900,8 +998,8 @@ beginfig(3);
     dotlabel.top("$p_4$", p4);
     dotlabel.top("$p_6$", p6);
     dotlabel.top("$p_7$", p7);
-    dotlabel.top("$q_0$", p22);
-    dotlabel.bot("$p_{22}$", p22);
+    label.top("$q_0$", p22); % dot
+    label.bot("$p_{22}$", p22);  % dot
   fi;
 
   t0 := ((identity shifted by (m7 - p4)) shifted (0, 0, -6cm)) shifted (0, 0, zpart m9 - zpart m7);
@@ -925,8 +1023,8 @@ beginfig(3);
 
   n1 := magnitude(m14 - m2);
 
-  message "n1:";
-  show n1;
+  % message "n1:";
+  % show n1;
 
   m19 := (n1 * unit_vector(m18 - m17)) shifted by m18;
   m20 := m18 shifted by (m17 - m19);
@@ -1234,10 +1332,14 @@ beginfig(5);
 
   current_picture := v1;
   current_picture += v2;
+  current_picture += v3;
   
 endfig with_projection parallel_x_z;
 
 %% ** (2)
+
+
+
 
 verbatim_metapost "end";
   
