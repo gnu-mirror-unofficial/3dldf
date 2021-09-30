@@ -80,7 +80,7 @@ beginfig(1);
 
   boolean do_labels;
 
-  do_labels := false; % true;
+  do_labels := false; % true; % 
 
   tab_ctr := 0;
   
@@ -469,10 +469,6 @@ beginfig(1);
   
   tab_short {13, 14, do_labels, false};
   
-  tab_short {5, 13, do_labels, false};
-  
-  tab_short {0, 5, do_labels, false};
-  
   tab_short {1, 0, do_labels, false};
   
   label("{\Largebx 3}", p41) on_picture v5;
@@ -715,7 +711,7 @@ beginfig(1);
   p[105] := p101 rotated_around (p91, p104) 180;
   p[106] := p103 rotated_around (p91, p104) 180;
   p[107] := p102 rotated_around (p91, p104) 180;
-  p[108] := p100 rotated_around (p91, p104) 180;
+  p[108 ] := p100 rotated_around (p91, p104) 180;
 
   label("{\Largebx 14}", p105) on_picture v5;
 
@@ -727,6 +723,8 @@ beginfig(1);
     dotlabel.rt("$p_{108}$", p108);
   fi;
 
+  tab_short {107, 108, do_labels, false};
+  
 
 %% ** (2)
 
@@ -979,8 +977,6 @@ beginfig(1);
   fi;
 
   tab_long {135, 158, do_labels, true};
-  tab_short {157, 158, do_labels, false};
-  tab_short {156, 157, do_labels, false};
   tab_short {148, 156, do_labels, false};
   tab_short {147, 148, do_labels, false};
   tab_short {146, 147, do_labels, false};
