@@ -227,6 +227,168 @@ def tab_long {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab
 enddef;
 
 
+%% * (1)
+
+macro take_measurements;
+
+def take_measurements {numeric offset_zero, numeric offset_one, numeric offset_two, numeric offset_three,
+                       boolean ddo_labels, numeric measurement_picture_ctr} =
+
+%% ** (2)
+    
+  message "Entering `take_measurements'.";
+
+  point m[];
+  path a[];
+  numeric n[];
+
+  %draw Q0 on_picture measurement_picture[measurement_picture_ctr];
+  m4 := P0 shifted (1, 0);
+  n0 := P1 angle m4;
+  show n0;
+  a0 := Q0 rotated (0, -n0);
+  m0 := P0;
+  m1 := P1 rotated (0, -n0);
+  m2 := P6 rotated (0, -n0);
+  
+  draw a0 on_picture measurement_picture[measurement_picture_ctr];
+
+  if ddo_labels:
+    dotlabel.lrt("$m_0$", m0) on_picture measurement_picture[measurement_picture_ctr];
+    dotlabel.llft("$m_1$", m1) on_picture measurement_picture[measurement_picture_ctr];
+    dotlabel.ulft("$m_2$", m2) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+
+  m5 := m0 shifted (-.25cm, 0);
+  m6 := m0 shifted (-.75cm, 0);
+
+  m7 := m2 shifted (-.25cm, 0);
+  m8 := m2 shifted (-.75cm, 0);
+
+  draw m5 -- m6 on_picture measurement_picture[measurement_picture_ctr];
+  draw m7 -- m8 on_picture measurement_picture[measurement_picture_ctr];
+
+  m9 := mediate(m6, m8);
+  n1 := magnitude(m2);
+
+  if ddo_labels:
+  % dotlabel.rt("$m_9$", m9) on_picture measurement_picture[measurement_picture_ctr];
+  % dotlabel.lft("$m_6$", m6) on_picture measurement_picture[measurement_picture_ctr];
+  % dotlabel.lft("$m_8$", m8) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+  
+  label(decimal n1 & "\\thinspace cm", m9 shifted (-.25cm, 0))
+    on_picture measurement_picture[measurement_picture_ctr];
+
+  m10 := mediate(m6, m9, .8);
+  m11 := mediate(m8, m9, .8);
+
+  if ddo_labels:
+     % dotlabel.lft("$m_{10}$", m10) on_picture measurement_picture[measurement_picture_ctr];
+     % dotlabel.lft("$m_{11}$", m11) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+  
+  draw m6 -- m10 on_picture measurement_picture[measurement_picture_ctr];
+  draw m8 -- m11 on_picture measurement_picture[measurement_picture_ctr];
+  %show n1;
+
+  n2 := magnitude(m1);
+  show n2;
+  %pause;
+
+  m12 := m2 shifted (0, 1);
+  m13 := (.25 * unit_vector(m1 - m2)) shifted by m2;
+
+  rotate_around m13 (m2, m12) 90;
+
+  if ddo_labels:
+    dotlabel.top("$m_{13}$", m13) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+  
+  m14 := (.5 * unit_vector(m13 - m2)) shifted by m13;
+
+  if ddo_labels:
+    dotlabel.top("$m_{14}$", m14) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+
+  m15 := m13 shifted by (m1 - m2);
+  m16 := m14 shifted by (m1 - m2);
+
+  if ddo_labels:
+    dotlabel.bot("$m_{15}$", m15) on_picture measurement_picture[measurement_picture_ctr];
+    dotlabel.bot("$m_{16}$", m16) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+
+  m17 := mediate(m14, m16);
+
+  n3 := magnitude(m15 - m2);
+  
+  label(decimal n3 & "\\thinspace cm", m17 shifted (.5cm)) on_picture measurement_picture[measurement_picture_ctr];
+
+  m18 := mediate(m14, m17, .8);
+  m19 := mediate(m16, m17, .8);
+
+  draw m13 -- m14 -- m18 on_picture measurement_picture[measurement_picture_ctr];
+  draw m15 -- m16 -- m19 on_picture measurement_picture[measurement_picture_ctr];
+
+  m20 := m0 shifted (0, 0, -.25cm);
+
+  if ddo_labels:
+    dotlabel.lft("$m_{20}$", m20) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+
+  m21 := m0 shifted (0, 0, -.75cm);
+
+  if ddo_labels:
+    dotlabel.lft("$m_{21}$", m21) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+
+  m22 := m20 shifted by (m1 - m0);
+  m23 := m21 shifted by (m1 - m0);
+
+  if ddo_labels:
+    dotlabel.rt("$m_{22}$", m22) on_picture measurement_picture[measurement_picture_ctr];
+    dotlabel.rt("$m_{23}$", m23) on_picture measurement_picture[measurement_picture_ctr];
+  fi;
+
+  n4 := magnitude(m1 - m0);
+
+  m24 := mediate(m21, m23);
+  
+  label(decimal n4 & "\\thinspace cm", m24 shifted (0cm)) on_picture measurement_picture[measurement_picture_ctr];
+
+  m25 := mediate(m21, m24, .5);
+  m26 := mediate(m23, m24, .5);
+
+  draw m20 -- m21 -- m25 on_picture measurement_picture[measurement_picture_ctr];
+  draw m22 -- m23 -- m26 on_picture measurement_picture[measurement_picture_ctr];
+
+  label.urt("$\alpha$", m0) on_picture measurement_picture[measurement_picture_ctr];
+  label.ulft("$\beta$", m1 shifted (-.25cm, 0)) on_picture measurement_picture[measurement_picture_ctr];
+  label.bot("$\gamma$", m2 shifted (3pt, 0, -.333cm)) on_picture measurement_picture[measurement_picture_ctr];
+
+  m27 := m21 shifted (0, 0, -.5cm);
+
+  show ang0;
+  show ang1;
+  show ang2;
+  %pause;
+  
+  label.rt("$\alpha\approx " & decimal ang0 & "^\circ$", m27 shifted (-5pt))
+    on_picture measurement_picture[measurement_picture_ctr];
+  label.rt("$\beta\approx " & decimal ang1 & "^\circ$", m27 shifted (-5pt, 0, -12pt))
+    on_picture measurement_picture[measurement_picture_ctr];
+  label.rt("$\gamma\approx " & decimal ang2 & "^\circ$", m27 shifted (-5pt, 0, -24pt))
+    on_picture measurement_picture[measurement_picture_ctr];
+
+%% ** (2)
+  
+  message "Exiting `take_measurements'.";
+  
+enddef;
+
+%% * (1)
+
 %% ** (2)
 
 endinput;
