@@ -80,7 +80,7 @@ beginfig(1);
 
   boolean do_labels;
 
-  do_labels := false; % true; % 
+  do_labels := true; % false; % 
 
   tab_ctr := 0;
   
@@ -149,6 +149,13 @@ beginfig(1);
  
   draw q0;
 
+  tab_short {5, 0, do_labels, false, true};
+  
+  
+%% *** (3)
+
+  
+  
   q1 := q0 rotated_around (p3, p12) 180;
   draw q1;
 
@@ -156,13 +163,17 @@ beginfig(1);
   p21 := p0 rotated_around (p3, p12) 180;
   p22 := p5 rotated_around (p3, p12) 180;
 
+  tab_short {21, 22, do_labels, false, true};
+
   if do_labels:
     dotlabel.bot("$p_{20}$", p20);
     dotlabel.bot("$p_{21}$", p21);
     dotlabel.bot("$p_{22}$", p22);
   fi;
   
-  tab_long {12, 22, do_labels, false};
+  tab_long {12, 22, do_labels, false, false};
+
+%% *** (3)
   
   q2 := q0 rotated_around (p5, p12) 180;
   draw q2;
@@ -171,7 +182,9 @@ beginfig(1);
   p14 := p1 rotated_around (p5, p12) 180;
   p15 := p3 rotated_around (p5, p12) 180;
 
-
+  tab_short {13, 5, do_labels, false, true};
+  tab_short {14, 13, do_labels, false, true};
+  
   if do_labels:
     dotlabel.bot("$p_{13}$", p13);
     dotlabel.lft("$p_{14}$", p14);
@@ -181,7 +194,6 @@ beginfig(1);
   p16 := mediate(p0, p1);
 
   p17 := mediate(p16, p12, .45);
-
   
   p18 := p17 rotated_around (p3, p12) 180;
   p19 := p17 rotated_around (p5, p12) 180;
@@ -458,9 +470,13 @@ beginfig(1);
   p40 := p5 rotated_around (p15, p12) 180;
   p41 := p19 rotated_around (p15, p12) 180;
 
-  tab_short {14, 15, do_labels, false};
-  tab_short {1, 0, do_labels, false};
-  
+  tab_short {14, 15, do_labels, false, false};
+  tab_short {1, 0, do_labels, false, false};
+
+  tab_short {38, 15, do_labels, false, true};
+  tab_short {39, 38, do_labels, false, true};
+  tab_short {40, 39, do_labels, false, true};
+    
   label("{\Largebx 3}", p41) on_picture v5;
       
   if do_labels:
@@ -471,6 +487,8 @@ beginfig(1);
     label.bot("$p_{41}$", p41);
   fi;
 
+%% *** (3)
+  
   q4 := q3 rotated_around (p12, p40) 180;
   draw q4;
 
@@ -478,7 +496,7 @@ beginfig(1);
   p43 := p39 rotated_around (p12, p40) 180;
   p44 := p38 rotated_around (p12, p40) 180;
   p45 := p15 rotated_around (p12, p40) 180;
-
+  
   label("{\Largebx 4}", p42) on_picture v5;
 
   if do_labels:
@@ -492,6 +510,14 @@ beginfig(1);
   p46 := p20 shifted (0, 1);
 
   t1 := (identity rotated_around (p20, p46) ang0) shifted by (p21 - p3);
+
+  tab_short {43, 40, do_labels, false, true};
+  tab_short {44, 43, do_labels, false, true};
+  tab_short {45, 44, do_labels, false, true};
+  tab_long  {12, 45, do_labels, false, true};
+
+  
+%% *** (3)
   
   q5 := q1 * t1;
 
@@ -512,11 +538,13 @@ beginfig(1);
     dotlabel.llft("$p_{50}$", p50);
   fi;
 
-  tab_thin {50, 21, do_labels, true};
+  tab_thin {50, 21, do_labels, true, false};
   
   
   t2 := identity shifted by (p50 - p1);
 
+%% *** (3)
+  
   q6 := q5 rotated_around (p48, p49) 180;
 
   draw q6;
@@ -526,6 +554,11 @@ beginfig(1);
   p53 := p21 rotated_around (p48, p49) 180;
   p54 := p20 rotated_around (p48, p49) 180;
 
+  tab_short {53, 52, do_labels, false, true};
+  tab_short {54, 53, do_labels, false, true};
+  tab_long {48, 54, do_labels, false, true};
+
+  
   label("{\Largebx 6}", p51) on_picture v5;
   
   if do_labels:
@@ -536,6 +569,8 @@ beginfig(1);
     dotlabel.bot("$p_{54}$", p54);
   fi;
 
+%% *** (3)
+  
   q7 := q5 rotated_around (p20, p48) 180;
   draw q7;
 
@@ -544,7 +579,7 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
-  tab_thin {56, 57, do_labels, true};
+  tab_thin {56, 57, do_labels, true, false};
 
   label("{\Largebx 7}", p55) on_picture v5;
 
@@ -596,7 +631,9 @@ beginfig(1);
     dotlabel.rt("$p_{88}$", p88);
   fi;
 
-  tab_long {48, 88, do_labels, false};
+  tab_long {48, 88, do_labels, false, false};
+
+%% *** (3)
   
   q10 := q0 shifted by (p52 - p1);
   draw q10;
@@ -606,6 +643,8 @@ beginfig(1);
 
   p91 := p12 shifted by (p52 - p1);
   p92 := p3 shifted by (p52 - p1);
+
+  tab_short {52, 92, do_labels, false, true};
   
   label("{\Largebx 10}", p89) on_picture v5;
 
@@ -635,7 +674,9 @@ beginfig(1);
     dotlabel.lrt("$p_{96}$", p96);
   fi;
 
-  tab_long {91, 92, do_labels, false};
+  tab_long {91, 92, do_labels, false, false};
+
+%% *** (3)
   
   
   q12 := q11 rotated_around (p96, p91) 180;
@@ -645,14 +686,14 @@ beginfig(1);
   p98 := p95 rotated_around (p96, p91) 180;
   p99 := p94 rotated_around (p96, p91) 180;
   p100 := p90 rotated_around (p96, p91) 180;
-    
-  tab_short {94, 95, do_labels, false};
+
   
 
-  tab_short {95, 96, do_labels, false};
-  
+  tab_short {94, 95, do_labels, false, false};
+  tab_short {95, 96, do_labels, false, false};
+  tab_short {96, 98, do_labels, false, false};
 
-  tab_short {96, 98, do_labels, false};
+  tab_short {99, 98, do_labels, false, true};    
   
 
   label("{\Largebx 12}", p97) on_picture v5;
@@ -673,8 +714,13 @@ beginfig(1);
   p[103] := p98 rotated_around (p91, p100) 180;
   p[104] := p96 rotated_around (p91, p100) 180;
 
-  tab_short {99, 100, do_labels, false};
-   
+  
+  tab_short {99, 100, do_labels, false, false};
+
+  tab_short {102, 100, do_labels, false, true};
+  tab_short {103, 102, do_labels, false, true};
+  tab_short {104, 103, do_labels, false, true};
+  
   label("{\Largebx 13}", p101) on_picture v5;
 
   if do_labels:
@@ -693,6 +739,10 @@ beginfig(1);
   p[107] := p102 rotated_around (p91, p104) 180;
   p[108 ] := p100 rotated_around (p91, p104) 180;
 
+  tab_short {106, 104, do_labels, false, true};
+  tab_short {107, 106, do_labels, false, true};
+  tab_long  {91, 108, do_labels, false, true};    
+  
   label("{\Largebx 14}", p105) on_picture v5;
 
   if do_labels:
@@ -703,7 +753,7 @@ beginfig(1);
     dotlabel.rt("$p_{108}$", p108);
   fi;
 
-  tab_short {107, 108, do_labels, false};
+  tab_short {107, 108, do_labels, false, false};
   
 
 %% ** (2)
@@ -815,39 +865,39 @@ beginfig(1);
     dotlabel.rt("$p_{130}$", p130);
   fi;
 
-  tab_long {113, 130, do_labels, true};
+  tab_long {113, 130, do_labels, true, false};
   
-  tab_short {129, 130, do_labels, false};
+  tab_short {129, 130, do_labels, false, false};
   
-  tab_short {128, 129, do_labels, false};
+  tab_short {128, 129, do_labels, false, false};
   
-  tab_short {126, 128, do_labels, false};
+  tab_short {126, 128, do_labels, false, false};
   
-  tab_short {125, 126, do_labels, false};
-  
-
-  tab_short {124, 125, do_labels, false};
+  tab_short {125, 126, do_labels, false, false};
   
 
-  tab_short {122, 124, do_labels, false};
+  tab_short {124, 125, do_labels, false, false};
   
 
-  tab_short {121, 122, do_labels, false};
+  tab_short {122, 124, do_labels, false, false};
   
 
-  tab_short {120, 121, do_labels, false};
+  tab_short {121, 122, do_labels, false, false};
   
 
-  tab_short {118, 120, do_labels, false};
+  tab_short {120, 121, do_labels, false, false};
   
 
-  tab_short {117, 118, do_labels, false};
+  tab_short {118, 120, do_labels, false, false};
   
 
-  tab_short {116, 117, do_labels, false};
+  tab_short {117, 118, do_labels, false, false};
   
 
-  tab_thin {112, 116, do_labels, false};
+  tab_short {116, 117, do_labels, false, false};
+  
+
+  tab_thin {112, 116, do_labels, false, false};
   
   
   q20 := q5 shifted by (p84 - p50);
@@ -945,7 +995,7 @@ beginfig(1);
   p157 := p146 rotated_around (p148, p135) 180;
   p158 := p144 rotated_around (p148, p135) 180;
 
-  tab_short {144, 146, do_labels, false};
+  tab_short {144, 146, do_labels, false, false};
     
   label("{\Largebx 24}", p149) on_picture v5;
 
@@ -957,11 +1007,11 @@ beginfig(1);
     dotlabel.top("$p_{158}$", p158);
   fi;
 
-  tab_long {135, 158, do_labels, true};
-  tab_short {148, 156, do_labels, false};
-  tab_short {147, 148, do_labels, false};
-  tab_short {146, 147, do_labels, false};
-  tab_thin {134, 138, do_labels, false};
+  tab_long {135, 158, do_labels, true, false};
+  tab_short {148, 156, do_labels, false, false};
+  tab_short {147, 148, do_labels, false, false};
+  tab_short {146, 147, do_labels, false, false};
+  tab_thin {134, 138, do_labels, false, false};
   
 %% *** (3)
 
@@ -1078,16 +1128,16 @@ beginfig(1);
     dotlabel.rt("$p_{180}$", p180);
   fi;
 
-  tab_short {88, 164, do_labels, false};
-  tab_short {164, 166, do_labels, false};
-  tab_short {166, 167, do_labels, false};
-  tab_short {168, 172, do_labels, false};
-  tab_short {162, 87, do_labels, false};
-  tab_short {179, 180, do_labels, false};
-  tab_short {178, 179, do_labels, false};
-  tab_short {175, 176, do_labels, false};
-  tab_short {174, 175, do_labels, false};
-  tab_long {163, 180, do_labels, true};
+  tab_short {88, 164, do_labels, false, false};
+  tab_short {164, 166, do_labels, false, false};
+  tab_short {166, 167, do_labels, false, false};
+  tab_short {168, 172, do_labels, false, false};
+  tab_short {162, 87, do_labels, false, false};
+  tab_short {179, 180, do_labels, false, false};
+  tab_short {178, 179, do_labels, false, false};
+  tab_short {175, 176, do_labels, false, false};
+  tab_short {174, 175, do_labels, false, false};
+  tab_long {163, 180, do_labels, true, false};
   
 %% *** (3)
 
@@ -1201,12 +1251,11 @@ beginfig(1);
     dotlabel.lft("$p_{201}$", p201);
   fi;
 
-  tab_short {185, 183, do_labels, false};
-  tab_short {195, 185, do_labels, false};
-  tab_short {187, 189, do_labels, false};
-  tab_short {189, 188, do_labels, false};
-  tab_short {188, 193, do_labels, false};
-  tab_long {184, 201, do_labels, false};  
+  tab_short {195, 185, do_labels, false, false};
+  tab_short {187, 189, do_labels, false, false};
+  tab_short {189, 188, do_labels, false, false};
+  tab_short {188, 193, do_labels, false, false};
+  tab_long {184, 201, do_labels, false, false};  
 
   p202 := mediate(p200, p199) shifted (.25cm);
 
@@ -1269,7 +1318,7 @@ beginfig(2);
 
   p208 := mediate(p200, p199) shifted (-.5cm);
 
-  tab_short {199, 200, do_labels, false};
+  tab_short {199, 200, do_labels, false, false};
   
   label.lft("{\largebx A}", p208);
   label.lft("{\medium Connect left half here}", p208 shifted (0, 0, -.5cm));
@@ -1358,9 +1407,9 @@ beginfig(2);
     dotlabel.urt("$p_{224}$", p224);
   fi;
   
-  tab_long  {207, 224, do_labels, true};
-  tab_short {223, 224, do_labels, false};
-  tab_short {222, 223, do_labels, false};
+  tab_long  {207, 224, do_labels, true, false};
+  tab_short {223, 224, do_labels, false, false};
+  tab_short {222, 223, do_labels, false, false};
   
 %% ** (2)
 
@@ -1814,52 +1863,52 @@ beginfig(2);
 
 %% ** (2)
 
-  tab_short {238, 240, do_labels, false};
-  tab_short {237, 238, do_labels, false};
-  tab_short {236, 237, do_labels, false};
-  tab_short {234, 236, do_labels, false};
-  tab_short {233, 234, do_labels, false};
-  tab_short {232, 233, do_labels, false};
-  tab_thin  {205, 200, do_labels, true};
+  tab_short {238, 240, do_labels, false, false};
+  tab_short {237, 238, do_labels, false, false};
+  tab_short {236, 237, do_labels, false, false};
+  tab_short {234, 236, do_labels, false, false};
+  tab_short {233, 234, do_labels, false, false};
+  tab_short {232, 233, do_labels, false, false};
+  tab_thin  {205, 200, do_labels, true, false};
   
-  tab_short {274, 222, do_labels, false};
-  tab_long {273, 274, do_labels, false};
-  tab_short {289, 290, do_labels, false};
-  tab_short {288, 289, do_labels, false};
-  tab_short {286, 288, do_labels, false};
-  tab_short {285, 286, do_labels, false};
-  tab_short {284, 285, do_labels, false};
-  tab_short {282, 284, do_labels, false};
-  tab_short {281, 282, do_labels, false};
+  tab_short {274, 222, do_labels, false, false};
+  tab_long {273, 274, do_labels, false, false};
+  tab_short {289, 290, do_labels, false, false};
+  tab_short {288, 289, do_labels, false, false};
+  tab_short {286, 288, do_labels, false, false};
+  tab_short {285, 286, do_labels, false, false};
+  tab_short {284, 285, do_labels, false, false};
+  tab_short {282, 284, do_labels, false, false};
+  tab_short {281, 282, do_labels, false, false};
 
-  tab_short {240, 241, do_labels, false};
-  tab_short {241, 242, do_labels, false};
-  tab_short {242, 244, do_labels, false};
-  tab_short {228, 210, do_labels, false};
-  tab_thin  {211, 210, do_labels, true};  
+  tab_short {240, 241, do_labels, false, false};
+  tab_short {241, 242, do_labels, false, false};
+  tab_short {242, 244, do_labels, false, false};
+  tab_short {228, 210, do_labels, false, false};
+  tab_thin  {211, 210, do_labels, true, false};  
 
-  tab_long  {229, 228, do_labels, false};  
+  tab_long  {229, 228, do_labels, false, false};  
 
-  tab_short {255, 256, do_labels, false};
-  tab_short {256, 258, do_labels, false};
-  tab_short {258, 259, do_labels, false};
-  tab_short {260, 262, do_labels, false};
+  tab_short {255, 256, do_labels, false, false};
+  tab_short {256, 258, do_labels, false, false};
+  tab_short {258, 259, do_labels, false, false};
+  tab_short {260, 262, do_labels, false, false};
 
-  tab_long  {251, 252, do_labels, false};
-  tab_thin  {215, 214, do_labels, true};
+  tab_long  {251, 252, do_labels, false, false};
+  tab_thin  {215, 214, do_labels, true, false};
   
-  tab_short {298, 299, do_labels, false};
+  tab_short {298, 299, do_labels, false, false};
 
-  tab_thin  {272, 276, do_labels, false};
-  tab_short {276, 277, do_labels, false};
+  tab_thin  {272, 276, do_labels, false, false};
+  tab_short {276, 277, do_labels, false, false};
 
-  tab_long  {295, 312, do_labels, true};
+  tab_long  {295, 312, do_labels, true, false};
 
-  tab_short {311, 312, do_labels, false};
-  tab_short {310, 311, do_labels, false};
+  tab_short {311, 312, do_labels, false, false};
+  tab_short {310, 311, do_labels, false, false};
 
-  tab_short {266, 267, do_labels, false};
-  tab_short {267, 268, do_labels, false};
+  tab_short {266, 267, do_labels, false, false};
+  tab_short {267, 268, do_labels, false, false};
   
 %% ** (2)
 

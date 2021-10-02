@@ -840,6 +840,19 @@ def disdyakis {numeric side_length, numeric tab_offset_zero, numeric tab_offset_
 
 %% ** (2) Pentagon 5
 
+%% *** (3) 
+
+  q50 := q19 rotated_around (p44, p46) 180;
+  draw q50 on_picture v5;
+
+  p107 := p45 rotated_around (p44, p46) 180;
+  p108 := p28 rotated_around (p44, p46) 180;
+
+  dotlabel.top("$q_{50}$", p107) on_picture draft_label_picture5;
+  dotlabel.bot("$p_{107}$", p107) on_picture draft_label_picture5;
+  label.rt("$p_{108}$", p108) on_picture draft_label_picture5;
+  
+  
   %% !! START HERE: LDF 2021.09.30.
   
 %% *** (3)
@@ -907,6 +920,13 @@ beginfig(1);
   %current_picture += tab_dot_picture4;
   %current_picture += center_label_picture4;
 
+  current_picture += gray_picture5;
+  current_picture += v5;
+  current_picture += tab_picture5;
+  current_picture += draft_label_picture5;
+  %current_picture += tab_dot_picture5;
+  %current_picture += center_label_picture5;
+
   
     
 endfig with_projection parallel_x_z no_sort;
@@ -955,12 +975,19 @@ beginfig(2);
   %current_picture += tab_dot_picture3;
   %current_picture += center_label_picture3;
      
-  current_picture += gray_picture4;
+  %current_picture += gray_picture4;
   current_picture += v4;
   current_picture += tab_picture4;
   current_picture += draft_label_picture4;
   %current_picture += tab_dot_picture4;
   %current_picture += center_label_picture4;
+
+  %current_picture += gray_picture5;
+  current_picture += v5;
+  current_picture += tab_picture5;
+  current_picture += draft_label_picture5;
+  %current_picture += tab_dot_picture5;
+  %current_picture += center_label_picture5;
 
 endfig with_projection parallel_x_z no_sort;
 
@@ -998,6 +1025,12 @@ beginfig(10);
   clear draft_label_picture4;
   clear gray_picture4;
   clear center_label_picture4;
+
+  clear v5;
+  clear tab_picture5;
+  clear draft_label_picture5;
+  clear gray_picture5;
+  clear center_label_picture5;
 
   
   disdyakis {4, 1, 1, 1, 1, 200, 200, 4, 8};
@@ -1042,7 +1075,15 @@ beginfig(11);
   current_picture += draft_label_picture4;
   %current_picture += tab_dot_picture4;
   %current_picture += center_label_picture4;
-  
+
+  current_picture += gray_picture5;
+  current_picture += v5;
+  current_picture += tab_picture5;
+  current_picture += draft_label_picture5;
+  %current_picture += tab_dot_picture5;
+  %current_picture += center_label_picture5;
+
+ 
   rotate current_picture (0, -70);
   
 endfig with_projection parallel_x_z no_sort;
@@ -1084,7 +1125,19 @@ beginfig(20);
   clear draft_label_picture3;
   clear gray_picture3;
   clear center_label_picture3;
-  
+
+  clear v4;
+  clear tab_picture4;
+  clear draft_label_picture4;
+  clear gray_picture4;
+  clear center_label_picture4;
+
+  clear v5;
+  clear tab_picture5;
+  clear draft_label_picture5;
+  clear gray_picture5;
+  clear center_label_picture5;
+
   disdyakis {6, 1, 1, 1, 1, 400, 400, 4, 8};
   
   current_picture += gray_picture0;
@@ -1179,6 +1232,18 @@ beginfig(50);
   clear draft_label_picture3;
   clear gray_picture3;
   clear center_label_picture3;
+
+  clear v4;
+  clear tab_picture4;
+  clear draft_label_picture4;
+  clear gray_picture4;
+  clear center_label_picture4;
+  
+  clear v5;
+  clear tab_picture5;
+  clear draft_label_picture5;
+  clear gray_picture5;
+  clear center_label_picture5;
   
   disdyakis {1, 1, 1, 1, 1, 600, 600, 4, 8};
   
@@ -1209,6 +1274,22 @@ beginfig(50);
   %current_picture += tab_dot_picture3;
   %current_picture += center_label_picture3;
 
+  current_picture += gray_picture4;
+  current_picture += v4;
+  current_picture += tab_picture4;
+  current_picture += draft_label_picture4;
+  %current_picture += tab_dot_picture4;
+  %current_picture += center_label_picture4;
+
+
+  current_picture += gray_picture5;
+  current_picture += v5;
+  current_picture += tab_picture5;
+  current_picture += draft_label_picture5;
+  %current_picture += tab_dot_picture5;
+  %current_picture += center_label_picture5;
+ 
+  
 %rotate current_picture (0, -70);
   
 endfig with_projection parallel_x_z no_sort;
