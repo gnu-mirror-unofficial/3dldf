@@ -50,6 +50,47 @@
 
 % * (1) Beginning of 3DLDF code.
 
+%% ** (2) Global variables.
+
+  numeric top_pos;
+  numeric bot_pos;
+  numeric lft_pos;
+  numeric rt_pos;
+  numeric ulft_pos;
+  numeric urt_pos;
+  numeric llft_pos;
+  numeric lrt_pos;
+
+  top_pos  := 0;
+  bot_pos  := 1;
+  lft_pos  := 2;
+  rt_pos   := 3;
+  ulft_pos := 4;
+  urt_pos  := 5;
+  llft_pos := 6;
+  lrt_pos  := 7;
+  
+  string rt_str;
+  string lft_str;
+  string top_str;
+  string bot_str;
+  string urt_str;
+  string lrt_str;
+  string ulft_str;
+  string llft_str;
+
+  top_str := "\\thinspace t";
+  bot_str := "\\thinspace b";
+  
+  rt_str := "\\thinspace r";
+  lft_str := "\\thinspace l";
+
+  urt_str := "\\thinspace ur";
+  ulft_str := "\\thinspace ul";
+
+  lrt_str := "\\thinspace lr";
+  llft_str := "\\thinspace ll";
+ 
 %% ** (2) Macro thin_tab
 
 macro thin_tab;
@@ -102,10 +143,21 @@ enddef;
 macro tab;
 
 def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
-         numeric width, numeric tab_path_ctr, boolean suppress_draw} =
+         numeric width, numeric tab_path_ctr, boolean suppress_draw,
+         numeric sewing_val, boolean inner_tab} =
 
   point P[];
 
+  numeric n;
+
+  color tab_color;
+
+  if inner_tab:
+    tab_color := dark_gray;
+  else:
+    tab_color := black;
+  fi;
+  
   P0 := mediate(p[pp], p[qq], offset);
 
   P1 := mediate(p[qq], p[pp], offset);
@@ -131,8 +183,9 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
 
   tab_path[tab_path_ctr] := P0 -- P3 -- P4 -- P1;
 
+    
   if not suppress_draw:
-    draw tab_path[tab_path_ctr];
+    draw tab_path[tab_path_ctr] with_color tab_color;
   fi;
 
   P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
@@ -140,8 +193,81 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
   if ddo_labels:
     label(decimal tab_path_ctr, P6) with_text_color red;
   fi;
+
+  P7 := mediate(P0, P3, .5);
+  P8 := mediate(P1, P4, .5);
+
+  dotlabel.lft("$P_7$", P7) with_text_color blue;
+  dotlabel.rt("$P_8$", P8) with_text_color blue;
+
+  sewing_val += 1;
+  
+  n := 1 / sewing_val;
+  
+  forever:
+    drawdot mediate(P7, P8, n) with_pen pencircle scaled (2pt, 2pt, 2pt)
+      on_picture dot_picture[tab_path_ctr];
+    n += (1 / sewing_val);
+    exitif n >= 1;
+  endfor;
+
+  current_picture += dot_picture[tab_path_ctr];
+  
+  %message "Exiting tab.";
+
   
 enddef;
+
+%% ** (2) macro label_side
+
+  macro label_side;
+
+  def label_side {numeric pp, numeric qq, numeric nnumber, string s,
+                  boolean rrotate, boolean ddo_labels, numeric position} =
+
+    message "Entering `label_side'.";
+
+    point P[];
+    numeric ang[];
+    
+    P0 := p[pp];
+    P1 := p[qq];
+
+    P3 := mediate(P0, P1);
+
+    P4 := P0 shifted (1, 0);
+
+    ang0 := (P1 - P0) angle (P4 - P0);
+
+    if rrotate:
+      ang0 *= -1;
+    fi;
+    
+    message "ang0:";
+    show ang0;
+
+    if position == top_pos:
+      label.top(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == bot_pos:
+      label.bot(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == lft_pos:
+      label.lft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == rt_pos:
+      label.rt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == ulft_pos:
+      label.ulft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == urt_pos:
+      label.urt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == llft_pos:
+      label.llft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    elseif position == lrt_pos:
+      label.lrt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
+    fi;
+    
+    message "Exiting `label_side'.";
+    
+  enddef;
+
 
 %% ** (2)
 

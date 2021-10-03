@@ -60,9 +60,14 @@ reg_polygon rp[];
 numeric side_length;
 path q[];
 picture v[];
+picture dot_picture[];
 
 numeric scale_val;
 scale_val := 2.375;
+
+color label_text_color;
+
+label_text_color := black; % blue; %
 
 input "small_rhombi.lmc";
 
@@ -77,7 +82,7 @@ beginfig(1);
   bool do_labels;
   numeric n[];
 
-  do_labels :=  true; % false
+  do_labels := true; % false; % 
   
   rp0 := (unit_pentagon scaled (scale_val, 0, scale_val)) rotated (0, 18);
 
@@ -218,7 +223,7 @@ beginfig(1);
   if do_labels:
     dotlabel.lft("$p_{16}$", p16) on_picture v3;
     dotlabel.ulft("$p_{17}$", p17) on_picture v3;
-    dotlabel.rt("$p_{18}$", p18) with_text_color blue on_picture v3;
+    dotlabel.rt("$p_{18}$", p18) with_text_color label_text_color on_picture v3;
   fi;
 
   p19 := mediate(p16, p3, .5);
@@ -304,7 +309,7 @@ beginfig(1);
 
   if do_labels:
     dotlabel.top("$p_{31}$", p31) on_picture v3;
-    dotlabel.top("$p_{32}$", p32) with_text_color blue on_picture v3;
+    dotlabel.top("$p_{32}$", p32) with_text_color label_text_color on_picture v3;
   fi;
 
 
@@ -359,8 +364,8 @@ beginfig(1);
   draw rp3; %%  with_color blue;  
 
   if do_labels:
-    label.top("$rp_3$", p39) with_text_color blue on_picture v3; % dot
-    label.bot("$p_{39}$", p39) with_text_color blue on_picture v3;  % dot
+    label.top("$rp_3$", p39) with_text_color label_text_color on_picture v3; % dot
+    label.bot("$p_{39}$", p39) with_text_color label_text_color on_picture v3;  % dot
   fi;
   
   p35 *= rp2 *= t1;
@@ -368,8 +373,8 @@ beginfig(1);
   draw rp2; %% with_color blue;
   
   if do_labels:
-    label.top("$rp_2$", p35) with_text_color blue on_picture v3; % dot
-    label.bot("$p_{35}$", p35) with_text_color blue on_picture v3;  % dot
+    label.top("$rp_2$", p35) with_text_color label_text_color on_picture v3; % dot
+    label.bot("$p_{35}$", p35) with_text_color label_text_color on_picture v3;  % dot
   fi;
    
   if do_labels:
@@ -402,8 +407,8 @@ beginfig(1);
   if do_labels:
     dotlabel.top("$p_{45}$", p45) on_picture v3;
     dotlabel.top("$p_{46}$", p46) on_picture v3;
-    dotlabel.lft("$p_{47}$", p47) with_text_color blue on_picture v3;
-    dotlabel.rt("$p_{48}$", p48) with_text_color blue on_picture v3;
+    dotlabel.lft("$p_{47}$", p47) with_text_color label_text_color on_picture v3;
+    dotlabel.rt("$p_{48}$", p48) with_text_color label_text_color on_picture v3;
     dotlabel.top("$p_{49}$", p49) on_picture v3;
   fi;
 
@@ -414,8 +419,8 @@ beginfig(1);
   if do_labels:
     dotlabel.top("$p_{50}$", p50) on_picture v3;
     dotlabel.top("$p_{51}$", p51) on_picture v3;
-    dotlabel.bot("$p_{52}$", p52) with_text_color blue on_picture v3;
-    dotlabel.rt ("$p_{53}$", p53) on_picture v3; %with_text_color blue;
+    dotlabel.bot("$p_{52}$", p52) with_text_color label_text_color on_picture v3;
+    dotlabel.rt ("$p_{53}$", p53) on_picture v3; %with_text_color label_text_color;
     dotlabel.top("$p_{54}$", p54) on_picture v3;
   fi;
 
@@ -423,279 +428,301 @@ beginfig(1);
   
   t3 := identity shifted by (p31 - p16); 
   
-  label("{\Large 0}", p23) with_text_color blue on_picture v1;
-  label("{\Large 13}", (p23 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 25}", (p23 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 37}", (p23 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 49}", (p23 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
-
-
-  numeric top_pos;
-  numeric bot_pos;
-  numeric lft_pos;
-  numeric rt_pos;
-  numeric ulft_pos;
-  numeric urt_pos;
-  numeric llft_pos;
-  numeric lrt_pos;
-
-  top_pos  := 0;
-  bot_pos  := 1;
-  lft_pos  := 2;
-  rt_pos   := 3;
-  ulft_pos := 4;
-  urt_pos  := 5;
-  llft_pos := 6;
-  lrt_pos  := 7;
-
-  
-  string rt_str;
-  string lft_str;
-  string top_str;
-  string bot_str;
-  string urt_str;
-  string lrt_str;
-  string ulft_str;
-  string llft_str;
-
-  top_str := "\\thinspace t";
-  bot_str := "\\thinspace b";
-  
-  rt_str := "\\thinspace r";
-  lft_str := "\\thinspace l";
-
-  urt_str := "\\thinspace ur";
-  ulft_str := "\\thinspace ul";
-
-  lrt_str := "\\thinspace lr";
-  llft_str := "\\thinspace ll";
- 
-  macro label_side;
-
-  def label_side {numeric pp, numeric qq, numeric nnumber, string s, boolean rrotate, boolean ddo_labels, numeric position} =
-
-    message "Entering `label_side'.";
-
-    point P[];
-    numeric ang[];
-    
-    P0 := p[pp];
-    P1 := p[qq];
-
-    P3 := mediate(P0, P1);
-
-    P4 := P0 shifted (1, 0);
-
-    ang0 := (P1 - P0) angle (P4 - P0);
-
-    if rrotate:
-      ang0 *= -1;
-    fi;
-    
-    message "ang0:";
-    show ang0;
-
-    if position == top_pos:
-      label.top(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == bot_pos:
-      label.bot(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == lft_pos:
-      label.lft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == rt_pos:
-      label.rt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == ulft_pos:
-      label.ulft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == urt_pos:
-      label.urt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == llft_pos:
-      label.llft(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    elseif position == lrt_pos:
-      label.lrt(decimal nnumber & s, P3) rotated (0, 0, ang0) on_picture v1;
-    fi;
-    
-    message "Exiting `label_side'.";
-    
-  enddef;
-
-
-  % def label_side {numeric pp, numeric qq, numeric nnumber, string s, boolean rrotate, boolean ddo_labels, numeric position}
+  label("{\Large 0}", p23) with_text_color label_text_color on_picture v1;
+  label("{\Large 13}", (p23 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 25}", (p23 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 37}", (p23 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 49}", (p23 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
   %% !! START HERE: LDF 2021.09.29.  
   
-  label_side {12, 13, 51, rt_str, false, true, rt_pos};
-  label_side {13, 10, 12, ulft_str, true, true, bot_pos};
-  label_side {10, 6, 13, lft_str, true, true, lft_pos};
+  % label_side {12, 13, 51, rt_str, false, true, rt_pos};
+  % label_side {13, 10, 12, ulft_str, true, true, bot_pos};
+  % label_side {10, 6, 13, lft_str, true, true, lft_pos};
 
-  label("{\Large 1}", p11) with_text_color blue on_picture v1;
-  label("{\Large 14}", (p11 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 27}", (p11 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 39}", (p11 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 51}", (p11 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  
+  label("{\Large 1}", p11) with_text_color label_text_color on_picture v1;
+  label("{\Large 14}", (p11 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 27}", (p11 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 39}", (p11 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 51}", (p11 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
 
-  label("{\Large 2}", p9) with_text_color blue on_picture v1;
-  label("{\Large 15}", (p9 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 26}", (p9 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 38}", (p9 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 50}", (p9 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 2}", p9) with_text_color label_text_color on_picture v1;
+  label("{\Large 15}", (p9 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 26}", (p9 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 38}", (p9 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 50}", (p9 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 3}", p22) with_text_color blue on_picture v1;
-  label("{\Large 16}", (p22 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 28}", (p22 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 40}", (p22 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 52}", (p22 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 3}", p22) with_text_color label_text_color on_picture v1;
+  label("{\Large 16}", (p22 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 28}", (p22 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 40}", (p22 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 52}", (p22 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 4}", p25) with_text_color blue on_picture v1;
-  label("{\Large 17}", (p25 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 29}", (p25 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 41}", (p25 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 53}", (p25 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 4}", p25) with_text_color label_text_color on_picture v1;
+  label("{\Large 17}", (p25 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 29}", (p25 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 41}", (p25 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 53}", (p25 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 5}", p24) with_text_color blue on_picture v1;
-  label("{\Large 18}", (p24 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 30}", (p24 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 42}", (p24 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 54}", (p24 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 5}", p24) with_text_color label_text_color on_picture v1;
+  label("{\Large 18}", (p24 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 30}", (p24 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 42}", (p24 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 54}", (p24 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
   p70 := mediate(p18, p31);
   
-  label("{\Large 6}", p70) with_text_color blue on_picture v1;
-  label("{\Large 24}", (p70 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 31}", (p70 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 43}", (p70 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 55}", (p70 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 6}", p70) with_text_color label_text_color on_picture v1;
+  label("{\Large 24}", (p70 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 31}", (p70 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 43}", (p70 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 55}", (p70 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 7}", p26) with_text_color blue on_picture v1;
-  label("{\Large 19}", (p26 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 32}", (p26 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 44}", (p26 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 56}", (p26 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 7}", p26) with_text_color label_text_color on_picture v1;
+  label("{\Large 19}", (p26 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 32}", (p26 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 44}", (p26 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 56}", (p26 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 8}", p27) with_text_color blue on_picture v1;
-  label("{\Large 20}", (p27 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 33}", (p27 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 45}", (p27 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 57}", (p27 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 8}", p27) with_text_color label_text_color on_picture v1;
+  label("{\Large 20}", (p27 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 33}", (p27 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 45}", (p27 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 57}", (p27 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 9}", p30) with_text_color blue on_picture v1;
-  label("{\Large 21}", (p30 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 34}", (p30 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 46}", (p30 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 58}", (p30 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 9}", p30) with_text_color label_text_color on_picture v1;
+  label("{\Large 21}", (p30 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 34}", (p30 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 46}", (p30 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 58}", (p30 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 10}", p36) with_text_color blue on_picture v1;
-  label("{\Large 22}", (p36 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 35}", (p36 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 47}", (p36 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 59}", (p36 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
+  label("{\Large 10}", p36) with_text_color label_text_color on_picture v1;
+  label("{\Large 22}", (p36 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 35}", (p36 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 47}", (p36 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 59}", (p36 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;    
 
-  label("{\Large 11}", p37) with_text_color blue on_picture v1;
-  label("{\Large 23}", (p37 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 36}", (p37 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 48}", (p37 * t3 * t3 * t3)) with_text_color blue on_picture v1;
-  label("{\Large 61}", (p37 * t3 * t3 * t3 * t3)) with_text_color blue on_picture v1;    
-
+  label("{\Large 11}", p37) with_text_color label_text_color on_picture v1;
+  label("{\Large 23}", (p37 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 36}", (p37 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 48}", (p37 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
+  label("{\Large 61}", (p37 * t3 * t3 * t3 * t3)) with_text_color label_text_color on_picture v1;
   
-  label("{\Large 12}", p35) with_text_color blue on_picture v1;
-  label("{\Large 61}", p39) with_text_color blue on_picture v1;
+  label("{\Large 12}", p35) with_text_color label_text_color on_picture v1;
+  label("{\Large 61}", p39) with_text_color label_text_color on_picture v1;
 
 
 %% *** (3) Tabs
 
   n1 := 0;
   
-  tab {2, 1, .2, false, .4, n1, false};
+  tab {2, 1, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {1, 0, .2, false, .4, n1, false};
+  tab {1, 0, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {12, 13, .2, false, .4, n1, false};
+  tab {12, 13, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {21, 16, .2, false, .4, n1, false};
+  tab {21, 16, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {29, 21, .2, false, .3, n1, false};
+  tab {29, 21, .2, true, .3, n1, false, 4, false};
   n1 += 1;
-  tab {38, 29, .2, false, .4, n1, false};
+  tab {38, 29, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {40, 38, .2, false, .4, n1, false};
+  tab {40, 38, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {47, 46, .2, false, .4, n1, false};
+  tab {47, 46, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {51, 52, .2, false, .4, n1, true};
+  tab {51, 52, .2, true, .4, n1, true, 4, false};
   n1 += 1;
-  tab {50, 51, .2, false, .4, n1, true};
+  tab {50, 51, .2, true, .4, n1, true, 4, false};
   n1 += 1;
-  tab {32, 18, .2, false, .3, n1, false};
-  n1 += 1;
-
-  thin_tab {3, 2, .2, .15, false, .35, true, n1};
+  tab {32, 18, .2, true, .4, n1, false, 4, false};
   n1 += 1;
 
-  thin_tab {17, 42, .15, .2, false, .35, true, n1};
-  n1 += 1;
-
-  thin_tab {4, 0, .15, .2, false, .35, false, n1};
-  n1 += 1;
-
-  thin_tab {28, 44, .15, .2, false, .35, false, n1};
-  n1 += 1;
+  %% !! START HERE: LDF 2021.10.03.
   
-  draw tab_path[0] shifted by (p31 - p16);
-  draw tab_path[1] shifted by (p31 - p16);
-  draw tab_path[2] shifted by (p31 - p16);
-  draw tab_path[4] shifted by (p31 - p16);
-  draw tab_path[5] shifted by (p31 - p16);
-  draw tab_path[6] shifted by (p31 - p16);
-  draw tab_path[10] shifted by (p31 - p16);
-  draw tab_path[11] shifted by (p31 - p16);
-  draw tab_path[12] shifted by (p31 - p16);
-  draw tab_path[13] shifted by (p31 - p16);
-  draw tab_path[14] shifted by (p31 - p16);
+  message "n1 - 1 == ";
+  show (n1 - 1);
+  pause;
 
-  draw tab_path[0] shifted by 2 * (p31 - p16);
+  
+  % draw tab_path[0] shifted by (p31 - p16);
+  % v5 := dot_picture[0];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+  
+  % draw tab_path[1] shifted by (p31 - p16);
+  % v5 := dot_picture[1];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[2] shifted by (p31 - p16);
+  % v5 := dot_picture[2];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[4] shifted by (p31 - p16);
+  % v5 := dot_picture[4];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[5] shifted by (p31 - p16);
+  % v5 := dot_picture[5];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[6] shifted by (p31 - p16);
+  % v5 := dot_picture[6];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[10] shifted by (p31 - p16);
+  % v5 := dot_picture[10];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[11] shifted by (p31 - p16);
+  % v5 := dot_picture[11];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[12] shifted by (p31 - p16);
+  % v5 := dot_picture[12];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[13] shifted by (p31 - p16);
+  % v5 := dot_picture[13];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+
+  % draw tab_path[14] shifted by (p31 - p16);
+  % v5 := dot_picture[14];
+  % shift v5 by (p31 - p16);
+  % current_picture += v5;
+  
+  % draw tab_path[0] shifted by 2 * (p31 - p16);
+  % v5 := dot_picture[0];
+  % shift v5 by (2 * (p31 - p16));
+  % current_picture += v5;
+
+ message "Error after here 0.";
+  
   draw tab_path[1] shifted by 2 * (p31 - p16);
+
   draw tab_path[2] shifted by 2 * (p31 - p16);
+
+ message "Error after here 2.";
+  
   draw tab_path[4] shifted by 2 * (p31 - p16);
+
   draw tab_path[5] shifted by 2 * (p31 - p16);
+
   draw tab_path[6] shifted by 2 * (p31 - p16);
+
+
+  
   draw tab_path[10] shifted by 2 * (p31 - p16);
-  draw tab_path[11] shifted by 2 * (p31 - p16);
-  draw tab_path[12] shifted by 2 * (p31 - p16);
-  draw tab_path[13] shifted by 2 * (p31 - p16);
-  draw tab_path[14] shifted by 2 * (p31 - p16);
+
+   message "Error after here 11.";
+
+  % draw tab_path[11] shifted by 2 * (p31 - p16);
+
+
+  %  message "Error after here 12.";
+  
+  %draw tab_path[12] shifted by 2 * (p31 - p16);
+
+  %  message "Error after here 13.";
+  
+  % draw tab_path[13] shifted by 2 * (p31 - p16);
+
+  %  message "Error after here 14.";
+  
+  % draw tab_path[14] shifted by 2 * (p31 - p16);
+
+  %  message "Error after here 15.";
+
 
   draw tab_path[0] shifted by 3 * (p31 - p16);
+
   draw tab_path[1] shifted by 3 * (p31 - p16);
+
   draw tab_path[2] shifted by 3 * (p31 - p16);
+
   draw tab_path[4] shifted by 3 * (p31 - p16);
+
   draw tab_path[5] shifted by 3 * (p31 - p16);
+
   draw tab_path[6] shifted by 3 * (p31 - p16);
-  draw tab_path[10] shifted by 3 * (p31 - p16);
-  draw tab_path[11] shifted by 3 * (p31 - p16);
-  draw tab_path[12] shifted by 3 * (p31 - p16);
-  draw tab_path[13] shifted by 3 * (p31 - p16);
-  draw tab_path[14] shifted by 3 * (p31 - p16);
+
+  % draw tab_path[10] shifted by 3 * (p31 - p16);
+
+  % draw tab_path[11] shifted by 3 * (p31 - p16);
+
+  % draw tab_path[12] shifted by 3 * (p31 - p16);
+
+  % draw tab_path[13] shifted by 3 * (p31 - p16);
+
+  % draw tab_path[14] shifted by 3 * (p31 - p16);
 
   draw tab_path[0] shifted by 4 * (p31 - p16);
+
   draw tab_path[1] shifted by 4 * (p31 - p16);
+
   draw tab_path[2] shifted by 4 * (p31 - p16);
+
   draw tab_path[4] shifted by 4 * (p31 - p16);
+
   draw tab_path[5] shifted by 4 * (p31 - p16);
-  draw tab_path[10] shifted by 4 * (p31 - p16);
-  draw tab_path[11] shifted by 4 * (p31 - p16);
-  draw tab_path[12] shifted by 4 * (p31 - p16);
-  draw tab_path[13] shifted by 4 * (p31 - p16);
-  draw tab_path[14] shifted by 4 * (p31 - p16);
+
+  % draw tab_path[10] shifted by 4 * (p31 - p16);
+
+  % draw tab_path[11] shifted by 4 * (p31 - p16);
+
+  % draw tab_path[12] shifted by 4 * (p31 - p16);
+
+  % draw tab_path[13] shifted by 4 * (p31 - p16);
+
+  % draw tab_path[14] shifted by 4 * (p31 - p16);
+
+
   
-  tab {46, 45, .2, false, .4, n1, false};
+  tab {46, 45, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {45, 49, .2, false, .4, n1, false};
+  tab {45, 49, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {49, 48, .2, false, .4, n1, false};
+  tab {49, 48, .2, true, .4, n1, false, 4, false};
   n1 += 1;
-  tab {54, 50, .2, false, .4, n1, true};
+  tab {54, 50, .2, true, .4, n1, true, 4, false};
   n1 += 1;
-  tab {53, 54, .2, false, .4, n1, true};
+  tab {53, 54, .2, true, .4, n1, true, 4, false};
   n1 += 1;
+
+
+%% *** (3) Traces
+
+
+  
+  tab {2, 3, .2, true, .4, n1, false, 4, true};
+  n1 += 1;
+
+  tab {42, 17, .2, true, .4, n1, false, 4, true};
+  n1 += 1;
+
+  tab {4, 0, .2, true, .4, n1, false, 4, true};
+  n1 += 1;
+
+  tab {28, 44, .2, true, .4, n1, false, 4, true};
+  n1 += 1;
+
+  
+  
+
+
+
 
   if do_labels:
     output v3 with_projection parallel_x_z;

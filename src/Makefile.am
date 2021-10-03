@@ -1450,9 +1450,8 @@ small_rhombi.dvi: small_rhombi.tex small_rhombi.1
 small_rhombi.1: small_rhombi.mp
 	mpost -numbersystem "double" small_rhombi.mp
 
-small_rhombi.mp: small_rhombi.ldf
+small_rhombi.mp: small_rhombi.ldf small_rhombi.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) small_rhombi.ldf
-
 
 .PHONY: run-ph
 
