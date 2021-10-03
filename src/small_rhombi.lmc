@@ -91,53 +91,6 @@
   lrt_str := "\\thinspace lr";
   llft_str := "\\thinspace ll";
  
-%% ** (2) Macro thin_tab
-
-macro thin_tab;
-
-def thin_tab {numeric pp, numeric qq, numeric offset, numeric offset_one, boolean ddo_labels,
-              numeric width, boolean do_rotate, numeric tab_path_ctr} =
-
-  point P[];
-
-  P0 := mediate(p[pp], p[qq], offset);
-  P1 := mediate(p[qq], p[pp], offset_one);
-
-  if ddo_labels:
-    dotlabel.top("$P_0$", P0);
-    dotlabel.top("$P_1$", P1);
-  fi;
-
-  P2 := (width * unit_vector(P1 - P0)) shifted by P1;
-
-  P3 := P1 shifted (0, 1);
-
-  rotate_around P2 (P1, P3) -90;
-
-  if ddo_labels:
-    dotlabel.top("$P_2$", P2);
-  fi;
-
-  tab_path[tab_path_ctr] := P0 -- P2 -- P1;
-
-  if do_rotate:
-    rotate_around tab_path[tab_path_ctr] (P0, P1) 180;
-  fi;
-
-  draw tab_path[tab_path_ctr];
-
-  P4 := mediate(P0, P2, .5);
-
-  if do_rotate:
-    rotate_around P4 (P0, P1) 180;
-  fi;
-
-  if ddo_labels:
-    label(decimal tab_path_ctr, P4) with_text_color red;
-  fi;
-  
-enddef;    
-
 %% ** (2) Macro tab
 
 macro tab;
