@@ -162,10 +162,10 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
 
   P1 := mediate(p[qq], p[pp], offset);
 
-  if ddo_labels:
-    dotlabel.top("$P_0$", P0) with_text_color red;
-    dotlabel.top("$P_1$", P1) with_text_color red;
-  fi;
+  % if ddo_labels:
+  %   dotlabel.top("$P_0$", P0) with_text_color red;
+  %   dotlabel.top("$P_1$", P1) with_text_color red;
+  % fi;
 
   P2 := P0 shifted (0, 1);
 
@@ -176,13 +176,12 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
   P5 := P1 shifted (0, 1);
   rotate_around P4 (P1, P5) 112.5;
 
-  if ddo_labels:
-    dotlabel.top("$P_3$", P3) with_text_color red;
-    dotlabel.top("$P_4$", P4) with_text_color red;
-  fi;
+  % if ddo_labels:
+  %   dotlabel.top("$P_3$", P3) with_text_color red;
+  %   dotlabel.top("$P_4$", P4) with_text_color red;
+  % fi;
 
   tab_path[tab_path_ctr] := P0 -- P3 -- P4 -- P1;
-
     
   if not suppress_draw:
     draw tab_path[tab_path_ctr] with_color tab_color;
@@ -197,8 +196,10 @@ def tab {numeric pp, numeric qq, numeric offset, boolean ddo_labels,
   P7 := mediate(P0, P3, .5);
   P8 := mediate(P1, P4, .5);
 
-  dotlabel.lft("$P_7$", P7) with_text_color blue;
-  dotlabel.rt("$P_8$", P8) with_text_color blue;
+  if ddo_labels:
+    dotlabel.lft("$P_7$", P7) with_text_color blue;
+    dotlabel.rt("$P_8$", P8) with_text_color blue;
+  fi;
 
   sewing_val += 1;
   
