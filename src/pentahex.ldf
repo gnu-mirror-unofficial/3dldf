@@ -2226,6 +2226,10 @@ endfig with_projection parallel_x_z;
 
 beginfig(14); 
 
+  boolean do_labels;
+
+  do_labels := false; % true; % 
+  
   p400 := origin;
   p401 := (0, 0, side_length0);
 
@@ -2239,42 +2243,51 @@ beginfig(14);
     p[402+i+4] := get_point (i) tab_path[185];
   endfor;
 
-  % dotlabel.llft("$p_{402}$", p402);
-  % dotlabel.lft("$p_{403}$", p403);
-  % dotlabel.lft("$p_{404}$", p404);
-  % dotlabel.ulft("$p_{405}$", p405);
-
-  % dotlabel.urt("$p_{407}$", p407);
-  % dotlabel.rt("$p_{408}$", p408);
+  if do_labels:
+    dotlabel.llft("$p_{402}$", p402);
+    dotlabel.lft("$p_{403}$", p403);
+    dotlabel.lft("$p_{404}$", p404);
+    dotlabel.ulft("$p_{405}$", p405);
+    dotlabel.urt("$p_{407}$", p407);
+    dotlabel.rt("$p_{408}$", p408);
+  fi;
 
   draw p402 -- p405;
 
   p410 := p405 shifted (0, 0, .5cm);
-  % dotlabel.top("$p_{410}$", p410);
-
   p411 := p402 shifted (0, 0, -.5cm);
-  % dotlabel.bot("$p_{411}$", p411);  
+
 
   draw p405 -- p410;
   draw p402 -- p411;
 
   p412 := (.5 * unit_vector(p407 - p405)) shifted by p407;
-  % dotlabel.rt("$p_{412}$", p412);
-
   p413 := (.5 * unit_vector(p405 - p407)) shifted by p405;
-  % dotlabel.ulft("$p_{413}$", p413);  
+
+  if do_labels:
+    dotlabel.top("$p_{410}$", p410);
+    dotlabel.bot("$p_{411}$", p411);  
+    dotlabel.rt("$p_{412}$", p412);
+    dotlabel.ulft("$p_{413}$", p413);  
+  fi;
   
   draw p412 -- p413;
-
   draw (p412 -- p413) rotated_around (p410, p411) 180;
-
   draw ((p412 -- p413) rotated_around (p410, p411) 180) rotated_around (mediate(p403, p404), mediate(p407, p408)) 180;
-
   draw (((p412 -- p413) rotated_around (p410, p411) 180) rotated_around (mediate(p403, p404), mediate(p407, p408)) 180)
     rotated_around (p410, p411) 180;
 
-  v20 := current_picture;
 
+  p414 := (.5 * unit_vector(p404 - p403)) shifted by p404;
+  p415 := (.5 * unit_vector(p403 - p404)) shifted by p403;
+
+  draw p404 -- p414;
+  draw p403 -- p415;
+
+  draw (p404 -- p414) rotated_around (p410, p411) 180;
+  draw (p403 -- p415) rotated_around (p410, p411) 180;
+  
+  v20 := current_picture;
   
   for i = 0 upto 18:
     shift v20 (2cm, 0);
@@ -2288,8 +2301,6 @@ beginfig(14);
     current_picture += v21;
   endfor;
     
-  
-  
 endfig with_projection parallel_x_z no_sort;
 
 
