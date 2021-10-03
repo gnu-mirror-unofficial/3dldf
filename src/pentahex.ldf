@@ -66,7 +66,8 @@ tab_offset_one_factor := 1;
 
 point p[];
 path q[];
-  
+numeric side_length[];
+
 %% * (1)
 
 beginfig(1);
@@ -75,12 +76,12 @@ beginfig(1);
   
   numeric n[];
   numeric ang[];
-  numeric side_length[];
+
   transform t[];
 
   boolean do_labels;
 
-  do_labels := true; % false; % 
+  do_labels := false; % true; % 
 
   tab_ctr := 0;
   
@@ -151,10 +152,9 @@ beginfig(1);
 
   tab_short {5, 0, do_labels, false, true};
   
+  tab_short {3, 1, do_labels, true, true};
   
 %% *** (3)
-
-  
   
   q1 := q0 rotated_around (p3, p12) 180;
   draw q1;
@@ -164,6 +164,8 @@ beginfig(1);
   p22 := p5 rotated_around (p3, p12) 180;
 
   tab_short {21, 22, do_labels, false, true};
+
+  tab_short {3, 20, do_labels, false, true};
 
   if do_labels:
     dotlabel.bot("$p_{20}$", p20);
@@ -538,7 +540,7 @@ beginfig(1);
     dotlabel.llft("$p_{50}$", p50);
   fi;
 
-  tab_thin {50, 21, do_labels, true, false};
+  tab_short {21, 50, do_labels, true, true};
   
   
   t2 := identity shifted by (p50 - p1);
@@ -579,8 +581,9 @@ beginfig(1);
   p57 := p50 rotated_around (p20, p48) 180;
   p58 := p49 rotated_around (p20, p48) 180;
 
-  tab_thin {56, 57, do_labels, true, false};
-
+  tab_short {57, 56, do_labels, true, true};
+  tab_short {56, 20, do_labels, true, true};
+  
   label("{\Largebx 7}", p55) on_picture v5;
 
   if do_labels:
@@ -600,7 +603,7 @@ beginfig(1);
   p83 := p56 rotated_around (p58, p48) 180;
   p84 := p20 rotated_around (p58, p48) 180;
 
-  
+  tab_short {82, 83, do_labels, false, true};
   
   label("{\Largebx 8}", p81) on_picture v5;
 
@@ -632,6 +635,7 @@ beginfig(1);
   fi;
 
   tab_long {48, 88, do_labels, false, false};
+  tab_short {84, 86, do_labels, false, true};
 
 %% *** (3)
   
@@ -645,6 +649,9 @@ beginfig(1);
   p92 := p3 shifted by (p52 - p1);
 
   tab_short {52, 92, do_labels, false, true};
+
+  tab_short {49, 50, do_labels, false, true};
+  tab_short {90, 49, do_labels, false, true};
   
   label("{\Largebx 10}", p89) on_picture v5;
 
@@ -676,9 +683,10 @@ beginfig(1);
 
   tab_long {91, 92, do_labels, false, false};
 
+  tab_short {90, 94, do_labels, true, true};
+  
 %% *** (3)
-  
-  
+    
   q12 := q11 rotated_around (p96, p91) 180;
   draw q12;
 
@@ -756,7 +764,7 @@ beginfig(1);
   tab_short {107, 108, do_labels, false, false};
   
 
-%% ** (2)
+%% *** (3)
 
   q15 := q13 shifted by (p57 - p102);
 
@@ -782,6 +790,13 @@ beginfig(1);
   
   label("{\Largebx 15}", p109) on_picture v5;
 
+  tab_long {113, 114, do_labels, true, true};
+
+  tab_short {57, 114, do_labels, false, true};
+  tab_short {58, 82, do_labels, false, true};
+  tab_short {112, 58, do_labels, false, true};
+
+
   if do_labels:
     dotlabel.top("$q_{15}$", p109);
     label.bot("$p_{109}$", p109);
@@ -790,6 +805,8 @@ beginfig(1);
     dotlabel.top("$p_{114}$", p114);
   fi;
 
+%% *** (3)
+  
   q16 := q15 rotated_around (p112, p113) 180;
   draw q16;
 
@@ -797,7 +814,6 @@ beginfig(1);
   p116 := p58 rotated_around (p112, p113) 180;
   p117 := p57 rotated_around (p112, p113) 180;
   p118 := p114 rotated_around (p112, p113) 180;
-
   
   label("{\Largebx 16}", p115) on_picture v5;
 
@@ -809,6 +825,8 @@ beginfig(1);
     dotlabel.lrt("$p_{118}$", p118);
   fi;
 
+%% *** (3)
+  
   q17 := q16 rotated_around (p113, p118) 180;
   draw q17;
 
@@ -897,9 +915,8 @@ beginfig(1);
   tab_short {116, 117, do_labels, false, false};
   
 
-  tab_thin {112, 116, do_labels, false, false};
-  
-  
+  tab_short {116, 112, do_labels, false, true};
+    
   q20 := q5 shifted by (p84 - p50);
 
 
@@ -921,6 +938,10 @@ beginfig(1);
   
   label("{\Largebx 20}", p131) on_picture v5;
 
+  tab_short {132, 136, do_labels, false, true};
+  tab_long {135, 136, do_labels, true, true};
+  tab_short {134, 84, do_labels, false, true};
+  
   if do_labels:
     dotlabel.top("$q_{20}$", p131);
     label.bot("$p_{131}$", p131);
@@ -935,6 +956,8 @@ beginfig(1);
   % show n3;
   % pause;
 
+%% *** (3)  
+
   q21 := q20 rotated_around (p134, p135) 180;
   draw q21;
   p137 := p131 rotated_around (p134, p135) 180;
@@ -943,7 +966,8 @@ beginfig(1);
   p140 := p136 rotated_around (p134, p135) 180;
 
   label("{\Largebx 21}", p137) on_picture v5;
-
+  
+  
   if do_labels:
     dotlabel.top("$q_{21}$", p137);
     label.bot("$p_{137}$", p137);
@@ -952,7 +976,13 @@ beginfig(1);
     dotlabel.rt("$p_{140}$", p140);
   fi;
 
+  tab_short {139, 138, do_labels, false, true};
+  tab_short {140, 139, do_labels, false, true};
+  
+%% *** (3)
+  
   q22 := q21 rotated_around (p140, p135);
+
   p141 := p137 rotated_around (p140, p135);
   p142 := p139 rotated_around (p140, p135);
   p143 := p138 rotated_around (p140, p135);
@@ -970,6 +1000,12 @@ beginfig(1);
     dotlabel.rt("$p_{144}$", p144);
   fi;
 
+  tab_short {142, 140, do_labels, false, true};
+  tab_short {143, 142, do_labels, false, true};
+  tab_short {144, 143, do_labels, false, true};
+
+%% *** (3)
+  
   q23 := q22 rotated_around (p144, p135) 180;
   draw q23;
 
@@ -995,8 +1031,13 @@ beginfig(1);
   p157 := p146 rotated_around (p148, p135) 180;
   p158 := p144 rotated_around (p148, p135) 180;
 
+  
   tab_short {144, 146, do_labels, false, false};
-    
+  tab_short {157, 156, do_labels, false, true};
+  tab_short {158, 157, do_labels, false, true};
+  
+
+  
   label("{\Largebx 24}", p149) on_picture v5;
 
   if do_labels:
@@ -1011,7 +1052,8 @@ beginfig(1);
   tab_short {148, 156, do_labels, false, false};
   tab_short {147, 148, do_labels, false, false};
   tab_short {146, 147, do_labels, false, false};
-  tab_thin {134, 138, do_labels, false, false};
+
+  tab_short {138, 134, do_labels, false, true};
   
 %% *** (3)
 
@@ -1021,7 +1063,6 @@ beginfig(1);
   p159 := p55 shifted by (p88 - p56);
   p160 := p57 shifted by (p88 - p56);
   
-
   n5 := (p87 - p88) angle (p160 - p88);
 
   p161 := p88 shifted (0, 1);
@@ -1047,6 +1088,9 @@ beginfig(1);
     dotlabel.top("$p_{164}$", p164);
   fi;
 
+  tab_short {86, 160, do_labels, false, true};
+  tab_long {163, 162, do_labels, true, true};
+  
 %% *** (3)  
 
   q26 := q25 rotated_around (p164, p163) 180;
@@ -1056,6 +1100,8 @@ beginfig(1);
   p166 := p88 rotated_around (p164, p163) 180;
   p167 := p87 rotated_around (p164, p163) 180;
   p168 := p162 rotated_around (p164, p163) 180;
+
+  tab_short {168, 167, do_labels, false, true};
   
   label("{\Largebx 26}", p165) on_picture v5;
 
@@ -1088,6 +1134,8 @@ beginfig(1);
     dotlabel.bot("$p_{172}$", p172);
   fi;
 
+  tab_short {171, 172, do_labels, false, true};
+  
 %% *** (3)
 
   q28 := q27 rotated_around (p163, p170) 180;
@@ -1188,6 +1236,7 @@ beginfig(1);
     dotlabel.top("$p_{189}$", p189);
   fi;
 
+  tab_short {187, 171, do_labels, false, true};
 
 %% *** (3)
 
@@ -1209,6 +1258,9 @@ beginfig(1);
     dotlabel.top("$p_{193}$", p193);
   fi;
 
+  tab_short {192, 193, do_labels, false, true};
+  tab_short {191, 192, do_labels, false, true};
+  
 %% *** (3)
 
   q33 := q30 rotated_around (p185, p184) 180;
@@ -1239,7 +1291,6 @@ beginfig(1);
   p199 := p196 rotated_around (p197, p184) 180;
   p200 := p195 rotated_around (p197, p184) 180;
   p201 := p185 rotated_around (p197, p184) 180;
-
   
   label("{\Largebx 34}", p198) on_picture v5;
 
@@ -1251,12 +1302,22 @@ beginfig(1);
     dotlabel.lft("$p_{201}$", p201);
   fi;
 
+  tab_short {170, 183, do_labels, false, true};
+  tab_short {174, 170, do_labels, false, true};
+  tab_short {178, 176, do_labels, false, true};
+  tab_short {183, 185, do_labels, false, true};
+  tab_long  {184, 191, do_labels, false, true};
   tab_short {195, 185, do_labels, false, false};
   tab_short {187, 189, do_labels, false, false};
   tab_short {189, 188, do_labels, false, false};
   tab_short {188, 193, do_labels, false, false};
-  tab_long {184, 201, do_labels, false, false};  
-
+  tab_long  {184, 201, do_labels, false, false};
+  tab_short {195, 196, do_labels, false, true};
+  tab_short {196, 197, do_labels, false, true};
+  tab_short {197, 199, do_labels, false, true};
+  tab_short {199, 200, do_labels, false, true};
+  tab_short {200, 201, do_labels, false, true};
+    
   p202 := mediate(p200, p199) shifted (.25cm);
 
   label.rt("{\largebx A}", p202);
@@ -1464,6 +1525,9 @@ beginfig(2);
     dotlabel.rt("$p_{234}$", p234);
   fi;
 
+  tab_short {232, 230, do_labels, false, true};
+
+  
 %% ** (2)
 
   q42 := q41 rotated_around (p234, p229) 180;
@@ -1869,7 +1933,13 @@ beginfig(2);
   tab_short {234, 236, do_labels, false, false};
   tab_short {233, 234, do_labels, false, false};
   tab_short {232, 233, do_labels, false, false};
-  tab_thin  {205, 200, do_labels, true, false};
+  tab_short {200, 205, do_labels, true, true};
+  tab_short {205, 206, do_labels, true, true};
+  tab_short {206, 230, do_labels, true, true};
+  tab_long  {207, 199, do_labels, true, true};
+  tab_long  {229, 246, do_labels, false, true};
+  tab_short {245, 244, do_labels, false, true};
+  tab_short {246, 245, do_labels, false, true};
   
   tab_short {274, 222, do_labels, false, false};
   tab_long {273, 274, do_labels, false, false};
@@ -1885,30 +1955,55 @@ beginfig(2);
   tab_short {241, 242, do_labels, false, false};
   tab_short {242, 244, do_labels, false, false};
   tab_short {228, 210, do_labels, false, false};
-  tab_thin  {211, 210, do_labels, true, false};  
-
-  tab_long  {229, 228, do_labels, false, false};  
-
+  tab_short {211, 210, do_labels, false, true};
+  tab_short {254, 250, do_labels, false, true};
+  tab_short {255, 254, do_labels, false, true};  
+  tab_long  {229, 228, do_labels, false, false};
+  tab_short {260, 259, do_labels, false, true};
+  tab_short {212, 211, do_labels, false, true};
+  tab_short {250, 212, do_labels, false, true};  
   tab_short {255, 256, do_labels, false, false};
   tab_short {256, 258, do_labels, false, false};
   tab_short {258, 259, do_labels, false, false};
   tab_short {260, 262, do_labels, false, false};
-
   tab_long  {251, 252, do_labels, false, false};
-  tab_thin  {215, 214, do_labels, true, false};
-  
+  tab_short {214, 215, do_labels, true, true};
+  tab_short {294, 298, do_labels, true, true};
   tab_short {298, 299, do_labels, false, false};
-
-  tab_thin  {272, 276, do_labels, false, false};
+  tab_short {276, 272, do_labels, false, true};
+  tab_short {219, 218, do_labels, false, true};
   tab_short {276, 277, do_labels, false, false};
-
+  tab_short {278, 277, do_labels, false, true};
+  tab_short {218, 296, do_labels, false, true};
   tab_long  {295, 312, do_labels, true, false};
-
   tab_short {311, 312, do_labels, false, false};
   tab_short {310, 311, do_labels, false, false};
 
   tab_short {266, 267, do_labels, false, false};
   tab_short {267, 268, do_labels, false, false};
+  tab_short {281, 280, do_labels, false, true};
+  tab_short {280, 278, do_labels, false, true};
+  tab_short {300, 299, do_labels, false, true};
+  tab_short {272, 220, do_labels, false, true};
+  tab_short {220, 219, do_labels, false, true};
+  tab_short {216, 215, do_labels, false, true};
+  tab_short {294, 216, do_labels, false, true};
+  tab_short {214, 252, do_labels, false, true};
+  tab_short {263, 262, do_labels, false, true};
+  tab_short {264, 263, do_labels, false, true};
+  tab_short {266, 264, do_labels, false, true};
+  tab_short {303, 302, do_labels, false, true};
+  tab_short {304, 303, do_labels, false, true};
+  tab_short {302, 300, do_labels, false, true};
+  tab_short {310, 308, do_labels, false, true};
+  tab_short {308, 307, do_labels, false, true};
+  tab_short {307, 306, do_labels, false, true};
+  tab_short {306, 304, do_labels, false, true};
+  tab_long  {251, 268, do_labels, false, true};
+  tab_long  {273, 290, do_labels, false, true};
+  tab_long  {295, 296, do_labels, true, true};
+  
+  
   
 %% ** (2)
 
@@ -2126,6 +2221,78 @@ beginfig(13);
   current_picture += v11;
   
 endfig with_projection parallel_x_z;
+
+%% ** (2) Separate tabs
+
+beginfig(14); 
+
+  p400 := origin;
+  p401 := (0, 0, side_length0);
+
+  tab_short {400, 401, false, false, false};
+  tab_short {401, 400, false, false, false};
+  
+  %draw p400 -- p401;
+
+  for i = 0 upto 3:
+    p[402+i]   := get_point (i) tab_path[184];
+    p[402+i+4] := get_point (i) tab_path[185];
+  endfor;
+
+  % dotlabel.llft("$p_{402}$", p402);
+  % dotlabel.lft("$p_{403}$", p403);
+  % dotlabel.lft("$p_{404}$", p404);
+  % dotlabel.ulft("$p_{405}$", p405);
+
+  % dotlabel.urt("$p_{407}$", p407);
+  % dotlabel.rt("$p_{408}$", p408);
+
+  draw p402 -- p405;
+
+  p410 := p405 shifted (0, 0, .5cm);
+  % dotlabel.top("$p_{410}$", p410);
+
+  p411 := p402 shifted (0, 0, -.5cm);
+  % dotlabel.bot("$p_{411}$", p411);  
+
+  draw p405 -- p410;
+  draw p402 -- p411;
+
+  p412 := (.5 * unit_vector(p407 - p405)) shifted by p407;
+  % dotlabel.rt("$p_{412}$", p412);
+
+  p413 := (.5 * unit_vector(p405 - p407)) shifted by p405;
+  % dotlabel.ulft("$p_{413}$", p413);  
+  
+  draw p412 -- p413;
+
+  draw (p412 -- p413) rotated_around (p410, p411) 180;
+
+  draw ((p412 -- p413) rotated_around (p410, p411) 180) rotated_around (mediate(p403, p404), mediate(p407, p408)) 180;
+
+  draw (((p412 -- p413) rotated_around (p410, p411) 180) rotated_around (mediate(p403, p404), mediate(p407, p408)) 180)
+    rotated_around (p410, p411) 180;
+
+  v20 := current_picture;
+
+  
+  for i = 0 upto 18:
+    shift v20 (2cm, 0);
+    current_picture += v20;
+  endfor;
+
+  v21 := current_picture;
+
+  for i = 0 upto 3:
+    shift v21 (0, 0, -2.4cm);
+    current_picture += v21;
+  endfor;
+    
+  
+  
+endfig with_projection parallel_x_z no_sort;
+
+
 
 %% ** (2)
 

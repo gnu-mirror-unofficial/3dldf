@@ -105,7 +105,7 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
   fi;
 
   
-  if inner_tab: % ddo_labels
+  if ddo_labels:
     dotlabel.top("$P_0$", P0) with_text_color red;
     dotlabel.top("$P_1$", P1) with_text_color red;
   fi;
@@ -128,7 +128,7 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
     rotate_around P4 (P1, P5) angle_one;
   fi;
 
-  if inner_tab: % ddo_labels
+  if ddo_labels:
     dotlabel.top("$P_3$", P3) with_text_color red;
     dotlabel.top("$P_4$", P4) with_text_color red;
   fi;
@@ -153,7 +153,7 @@ def tab {numeric pp, numeric qq, numeric offset, numeric offset_one, numeric ang
 
   P6 := mediate(mediate(P0, P1, .5), mediate(P3, P4, .5), .5);
 
-  if inner_tab: % ddo_labels
+  if ddo_labels:
     label(decimal tab_ctr, P6) with_text_color red;
   fi;
 
@@ -200,7 +200,7 @@ def tab_thin {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab
 
   %message "Entering tab_thin.";
 
-  tab {ppp, qqq, .1, .1, 112.5, 112.5, dddo_labels, 0, .333, rrotate_tab, 4, iinner_tab};
+  tab {ppp, qqq, .1, .1, 112.5, 112.5, false, 0, .333, rrotate_tab, 4, iinner_tab};
   
   %message "Exiting tab_thin.";
   
@@ -214,7 +214,7 @@ def tab_long {numeric ppp, numeric qqq, boolean dddo_labels, boolean rrotate_tab
 
   %message "Entering tab_long.";
 
-  tab {ppp, qqq, .225, .1, 112.5, 112.5, dddo_labels, .25, .4, rrotate_tab, 6, iinner_tab};
+  tab {ppp, qqq, .225, .1, 112.5, 112.5, false, .25, .4, rrotate_tab, 6, iinner_tab};
 
   %message "Exiting tab_long.";
   
