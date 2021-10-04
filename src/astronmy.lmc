@@ -1833,7 +1833,7 @@ def get_flat_panels =
 
   boolean do_labels;
 
-  do_labels := false;
+  do_labels := false; % true; % 
 
   color label_color;
 
@@ -2033,6 +2033,8 @@ def get_flat_panels =
 
   v := 0;
 
+  do_labels := true; % false; % 
+  
   for i := 0 upto 15:
     if i == 8:
       v := 1;
@@ -2190,18 +2192,39 @@ def get_flat_panels =
     fi;
 
     u0 := r21 -- r25 -- r26 -- r22;
-    
-    draw u0  on_picture flat_quadrant_picture[0];
-    draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
 
+    dotlabel.rt("$r_{21}$", r21) on_picture flat_quadrant_picture[0];
+    dotlabel.lft("$r_{25}$", r25) on_picture flat_quadrant_picture[0];
+    dotlabel.lft("$r_{26}$", r26) on_picture flat_quadrant_picture[0];
+    dotlabel.rt("$r_{22}$", r22) on_picture flat_quadrant_picture[0];
+
+    r40 := mediate(r22, r26);
+    r41 := mediate(r21, r25);
+
+    
+    draw u0 on_picture flat_quadrant_picture[0];
+    drawdot mediate(r40, r41, .333) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
+    drawdot mediate(r40, r41, .667) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
+
+    draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
+    drawdot (mediate(r40, r41, .333) rotated (180, 0))
+      with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
+    drawdot (mediate(r40, r41, .667) rotated (180, 0))
+      with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
+    
     draw u0 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
       on_picture flat_quadrant_picture[1];
+
     draw (u0 rotated (180, 0)) shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
       on_picture flat_quadrant_picture[1];
 
+
     for i = 0 upto 7:
       draw u0 shifted (i * 5cm, 0) on_picture flat_quadrant_picture[10 + i];
+
+      
       draw (u0 rotated (180, 0)) shifted (i * 5cm, 0) on_picture flat_quadrant_picture[10 + i];
+
     endfor;
 
     for i = 8 upto 15:
