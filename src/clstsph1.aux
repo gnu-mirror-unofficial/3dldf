@@ -66,6 +66,10 @@ else:
   label_color := black;
 fi;
 
+%% ** (2)
+
+%% *** (3)
+
 beginfig(0);
   output bi_ang_pict[0] with_projection parallel_x_y;
   draw_lines;
@@ -116,6 +120,8 @@ beginfig(0);
  
 endfig with_projection parallel_x_y;
 
+%% *** (3)
+
 beginfig(1);
   output bi_ang_pict[1] with_projection parallel_x_y;
   draw_lines;
@@ -132,6 +138,8 @@ beginfig(1);
 
   
 endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(2);
   output bi_ang_pict[2] with_projection parallel_x_y;
@@ -150,6 +158,8 @@ beginfig(2);
   
 endfig with_projection parallel_x_y;
 
+%% *** (3)
+
 beginfig(3);
   output bi_ang_pict[3] with_projection parallel_x_y;
   draw_lines;
@@ -166,6 +176,8 @@ beginfig(3);
 
   
 endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(4);
   output bi_ang_pict[4] with_projection parallel_x_y;
@@ -208,6 +220,8 @@ beginfig(4);
     with_text_color label_color;
 endfig with_projection parallel_x_y;
 
+%% *** (3)
+
 beginfig(5);
   output bi_ang_pict[5] with_projection parallel_x_y;
   draw_lines;
@@ -225,6 +239,8 @@ beginfig(5);
  
 endfig with_projection parallel_x_y;
 
+%% *** (3)
+
 beginfig(6);
   output bi_ang_pict[6] with_projection parallel_x_y;
   draw_lines;
@@ -240,6 +256,8 @@ beginfig(6);
            p200 shifted (-1pt, 0)) rotated (0, 0, 90) with_text_color label_color;
 
 endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(7);
   output bi_ang_pict[7] with_projection parallel_x_y;
@@ -257,12 +275,16 @@ beginfig(7);
 
 endfig with_projection parallel_x_y;
 
+%% *** (3)
+
 %% ** (2)
 
 focus f;
 
 set f with_position (0, 20, -50) 
   with_direction (0, 20, 10) with_distance 70; 
+
+%% *** (3)
 
 beginfig(8);
   rotate v8 (0, 22.5);
@@ -278,6 +300,8 @@ beginfig(8);
   label("{\\bf Perspective Projection}", (0, -(radius + 1.25cm)));
 endfig with_focus f;
 
+%% *** (3)
+
 beginfig(9);
   currentpicture := v9;
   i := 1;
@@ -290,6 +314,8 @@ beginfig(9);
   label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -(radius + 1.25cm)));
   current_picture += quadrant_picture;
 endfig with_projection parallel_x_y; 
+
+%% *** (3)
 
 beginfig(10);
   currentpicture := v10;
@@ -304,6 +330,8 @@ beginfig(10);
   current_picture += quadrant_picture;
 endfig with_projection parallel_x_z; 
 
+%% *** (3)
+
 beginfig(11);
   currentpicture := v11;
   i := 3;
@@ -317,6 +345,8 @@ beginfig(11);
   current_picture += quadrant_picture;
 endfig with_projection parallel_z_y; 
 
+%% *** (3)
+
 beginfig(12);
   current_picture += flat_quadrant_picture[0];
   output current_picture with_projection parallel_x_y;
@@ -328,6 +358,8 @@ beginfig(12);
 
 endfig with_projection parallel_x_y; 
 
+%% *** (3)
+
 beginfig(13);
   current_picture += flat_quadrant_picture[1];
   output current_picture with_projection parallel_x_y no_sort;
@@ -335,8 +367,12 @@ beginfig(13);
   current_picture += flat_quadrant_picture[3];
 endfig with_projection parallel_x_y no_sort no_sort; 
 
+%% *** (3)
+
 % beginfig(14);
 % endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 if do_write:
   write "\n%% Local " & "Variables:\n%% auto-fill-function:nil\n%% End:\n\n" to star_info_combined;
