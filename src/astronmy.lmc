@@ -366,29 +366,43 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
 
   for i = 22 step 2 until 34:
     p100 := mediate(p[i], p[i+2], .5);
-  %dotlabel.rt("$p_{100}$", p100) on_picture tab_picture;
+
     p101 := p100 shifted (0, 0, 1);
     p102 := p[i+2] rotated_around (p100, p101) 90;
     p103 := mediate(p100, p102, .6);
-  %dotlabel.lft("$p_{103}$", p103) on_picture tab_picture;
+
     p104 := p[i] shifted by (p103 - p100);
     p105 := p[i+2] shifted by (p103 - p100);
-  %dotlabel.lft("$p_{104}$", p104) on_picture tab_picture;
-  %dotlabel.lft("$p_{105}$", p105) on_picture tab_picture;
     p106 := mediate(p103, p104, .6);
     p107 := mediate(p103, p105, .6);
-  %dotlabel.lft("$p_{106}$", p106) on_picture tab_picture;
-  %dotlabel.lft("$p_{107}$", p107) on_picture tab_picture;
+    p108 := mediate(p24, p107, .5);
+    p109 := mediate(p22, p106, .5);
+    p110 := mediate(p100, p103, .5);
 
     tab0 := p[i] -- p106 -- p107 -- p[i+2];
     draw tab0 on_picture tab_picture;
     draw tab0 rotated (180, 0) on_picture tab_picture;
 
+    if i == 22:
+      dotlabel.rt("$p_{22}$", p22) on_picture tab_picture;
+      dotlabel.rt("$p_{24}$", p24) on_picture tab_picture;
+      dotlabel.rt("$p_{100}$", p100) on_picture tab_picture;
+      dotlabel.lft("$p_{103}$", p103) on_picture tab_picture;
+      dotlabel.lft("$p_{106}$", p106) on_picture tab_picture;
+      dotlabel.lft("$p_{107}$", p107) on_picture tab_picture;
+      dotlabel.top("$p_{108}$", p108) on_picture tab_picture;
+      dotlabel.bot("$p_{109}$", p109) on_picture tab_picture;
+      %dotlabel.top("$p_{110}$", p110) on_picture tab_picture;
+
+%% !! START HERE: LDF 2021.10.04.
+
+      drawdot mediate(p108, p109, .20) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture tab_picture;
+    fi;
+    
+    
   endfor;
 
   p22 := p39;  %% Restoring old value of p22.  LDF 2021.08.30.
-    
-
   
  Q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
 
