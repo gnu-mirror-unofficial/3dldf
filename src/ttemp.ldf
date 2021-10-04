@@ -1,275 +1,170 @@
-n := 1;
-p := 2;
+%% ** (2) macro draw_stitches
+    
+macro draw_stitches;
 
-if n == 1:
-  message "okay.";
-fi;
+def draw_stitches {numeric RA, numeric Decl, point stitch_point, numeric bi_ang_one,
+                   boolean left_or_right, boolean bottom_or_top, boolean do_labels} =
 
+    message "Entering draw_stitches.";
 
-if (n == 1) and (p == 2):
-  message "okay.";
-fi;
-
-
-
-end;
-
-
-
-
-numeric_vector nv;
-
-
-nv := measure_text "abc";
-
-nv := measure_text "$0^\circ$";
-
-end;
-
-
-
-
-beginfig(1);
-
-  boolean a;
-  a := true; % false
-  boolean b;
-  b := false; % true
-  boolean c;
-  c := false; % true
-
-%% !! START HERE:  LDF 2021.08.06.  This doesn't work.  I'm going to have to
-%% rewrite the way conditionals work completely.
-
-  message "*** Conditionals start here.";
-
-  message "*** Conditional 1.";
+    message "Exiting draw_stitches.";
+    
+  % point P[];
   
-  if a:
-    message "a is true.";
-    if c:
-      message "c is true.";
-    elseif not c:
-      message "c is false.";
-    fi;
-  elseif not a:
-    message "a is false";
-    if c:
-      message "elseif case:  c is true.";
-    elseif not c:
-      message "elseif case:  c is false.";
-    fi;
-  fi;
+  % color ccolor;
 
-  message "*** Conditional 2.";
+  % if do_black:
+  %   ccolor := white;
+  % else:
+  %   ccolor := black;
+  % fi;
+
+  % path curr_edge[];
+
+  draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[bi_ang_one];
+  draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];
+  draw edge2 with_pen pencircle scaled (3pt, 3pt) with_color blue on_picture qv[bi_ang_one];
+  draw edge3 with_pen pencircle scaled (3pt, 3pt) with_color red on_picture qv[bi_ang_one];
+  
+  % if bottom_or_top and left_or_right:         %% top right
+  %   %message "top right.";
+  %   curr_edge0 := edge1;                      %% top right 
+
+  % elseif bottom_or_top and not left_or_right: %% top left
+
+  %   %message "top left.";                     
+  %   curr_edge0 := edge0;                      %% top left
+
+  % elseif not bottom_or_top and left_or_right: %% bottom right
+  %   %message "bottom right.";
+  %   curr_edge0 := edge3;                      %% bottom right
+
+  % else:                                       %% bottom left
+  %   %message "bottom left.";
+  %   curr_edge0 := edge2;                      %% bottom left
+  % fi;
+
+  % for i = 0 upto (length Q - 1):
+  %   P[i] := get_point (i) Q;
+  % endfor;
+
+  % if do_labels:
+  %   dotlabel.rt("$P_{0}$", P0) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{1}$", P1) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{2}$", P2) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{3}$", P3) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{4}$", P4) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{5}$", P5) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{6}$", P6) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{7}$", P7) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{8}$", P8) on_picture qv[bi_ang_one];
+  %   dotlabel.rt("$P_{9}$", P9) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{10}$", P10) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{11}$", P11) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{12}$", P12) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{13}$", P13) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{14}$", P14) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{15}$", P15) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{16}$", P16) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{17}$", P17) on_picture qv[bi_ang_one];
+  %   dotlabel.rt("$P_{18}$", P18) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{19}$", P19) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{20}$", P20) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{21}$", P21) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{22}$", P22) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{23}$", P23) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{24}$", P24) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{25}$", P25) on_picture qv[bi_ang_one];
+  %   dotlabel.rt("$P_{26}$", P26) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{27}$", P27) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{28}$", P28) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{29}$", P29) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{30}$", P30) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{31}$", P31) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{32}$", P32) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{33}$", P33) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{34}$", P34) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{35}$", P35) on_picture qv[bi_ang_one];
+  % fi;
+  
+  % P36 :=stitch_point shifted (-1cm, 0);
+  % P37 := stitch_point shifted (1cm, 0);
+
+  % %draw P36 -- P37 with_color red on_picture qv[bi_ang_one];
+
+  % P38 := (P36 -- P37) intersection_point (P27 -- P8);
+
+  % if do_labels:
+  %   dotlabel.urt("$P_{38}$", P38) on_picture qv[bi_ang_one];
+  % fi;
+  
+  % numeric mag[];
+
+  % mag0 := magnitude(xpart stitch_point - xpart P38);
+
+  % circle c;
+
+  % P39 := (radius, 0);    
+  
+  % P40 := P39 rotated (0, 0, declination_decimal_degrees S);
+
+  % numeric rad;
+  % rad := xpart P40;
+
+  % c := unit_circle scaled (rad, 0, rad) rotated (90, 0);
+
+  % numeric circum;
+
+  % circum := circumference c;
+  
+  % mag0 := circum / 16;
+
+  % % message "mag0:";
+  % % show mag0;
+
+  % P41 := P38 shifted (-mag0, 0);
+  % P42 := P38 shifted (mag0, 0);
+
+  % if do_labels:
+  %   dotlabel.lft("$P_{41}$", P41) on_picture qv[bi_ang_one];
+  %   dotlabel.lft("$P_{42}$", P42) on_picture qv[bi_ang_one];
+  % fi;
+  
+  % % message "P41:";
+  % % show P42;
+
+  % % message "P42:";
+  % % show P42;
+
+  % %pause;
+  
+  % %draw P41 -- P42 with_color red on_picture qv[bi_ang_one];
+
+  % mag1 := magnitude(xpart P41 - xpart stitch_point);
+  % mag2 := magnitude(xpart P42 - xpart stitch_point);
  
-  if not b:
-    message "b is false.";
-    if c:
-      message "c is true.";
-    elseif not c:
-      message "c is false.";
-    fi;
-  elseif b:
-    message "b is true";
-    if c:
-      message "elseif case:  c is true.";
-    elseif not c:
-      message "elseif case:  c is false.";
-    fi;
+  % if mag1 < mag2:
+  %   P43 := P41 shifted (0, -1cm);
+  %   P44 := P41 shifted (0, 1cm);
+  % else:
+  %   P43 := P42 shifted (0, -1cm);
+  %   P44 := P42 shifted (0, 1cm);
+  % fi;
 
-  fi;
+  % % dotlabel.lft("$P_{41}$", P41) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % % dotlabel.lft("$P_{43}$", P43) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % % dotlabel.rt("$P_{44}$", P44) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % % dotlabel.top("$P_{8}$", P8) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % % dotlabel.top("$P_{27}$", P27) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
 
-  message "*** End of Conditionals.";
+  % P45 := (stitch_point rotated_around (P43, P44) 180) rotated_around (P8, P27) 180;
+
+  % % dotlabel.rt("$P_{45}$", P45) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
 
   
-endfig with_projection parallel_x_y;
+  % drawdot P45 with_pen sstar_pen with_color red on_picture qv[bi_ang_one]; % white
 
-verbatim_metapost "end";
-
-end;
-
-measure_text_header 
-   := "\setbox1=\hbox to 3cm{\lower .25cm\vbox to 1cm{\vfil}\hfil}%";
-
-numeric_vector nv;
-nv := measure_text "\box1";
-message "nv:";
-show nv;
-
-measure_text_header := "";  
-
-nv := measure_text "AAAAyyyy";
-message "nv:";
-show nv;
-
-end;
-
-show Diphda;
-show Nunki;
-show Menkent;
-show Alpheratz;
-show Mirach;
-show Saiph;
-show Kochab;
-show Al_Dhanab;
-show Rasalhague;
-show Algol;
-
-end;
-
-
-
-
-
-point p;
-path q;
-plane r;
-rectangle t;
-%show unit_rectangle;
-q := (0, -1);
-q += --;
-q += (0, 1);
-r := get_plane unit_rectangle;
-
-bool_point bp;
-
-bp := q intersection_point r;
-
-show bp;
-
-end;
-
-
-beginfig(1);
-
-  point p;
-  p := origin;
-
-  drawdot p with_pen pencircle scaled (6pt, 6pt, 6pt);
-  shift p (.5cm, 0);
-  drawdot p with_pen pencircle scaled (5.5pt, 5.5pt, 5.5pt);
-  shift p (.5cm, 0);
-  drawdot p with_pen pencircle scaled (5pt, 5pt, 5pt);
-  shift p (.5cm, 0);
-  drawdot p with_pen pencircle scaled (4.5pt, 4.5pt, 4.5pt);
-  shift p (.5cm, 0);
-  drawdot p with_pen pencircle scaled (4pt, 4pt, 4pt);
-  shift p (.5cm, 0);
-  drawdot p with_pen pencircle scaled (3.5pt, 3.5pt, 3.5pt);
-  shift p (.5cm, 0);
-  drawdot p with_pen pencircle scaled (3pt, 3pt, 3pt);
-endfig with_projection parallel_x_y;
-
-verbatim_metapost "end;";
-
-end;
-
-
-string s;
-%s := common_name alpha_centauri;
-
-
-s := "";
-show s;
-
-
-if (s == "abc"):
-  message "empty";
-else:
-  message "not empty";
-fi;
-
-
-
-end;
-
-
-
-picture pv[];
-
-draw origin -- (1, 1) on_picture pv0;
-
-output pv0 with_projection parallel_x_y;
-
-end;
-
-
-end;
-
-w := "abc.tex";
-
-string s;
-
-s := "abc";
-
-%% !! START HERE:  LDF 2021.7.5.  Add command for making writes append to file.
-%% Add command for closing.
-
-write s to w;
-
-%write w ("nnn");
-
-% write w (s);
-% write w (s);
-% write w (s);
-% write w (s);
-% write w ("def");
-
-end;
-
-
-%write w "def";
-
-%write w ("efg");
-
-5s:= "hij";
-
-%write w (s);
-
-%write w "ghi";
-% newwrite_vector wv;
-
-% wv += "abc";
-
-% show wv;
-
-end;
-
-
-
-
-wv += "def.tex";
-
-% show wv;
-% show wv0;
-
-
-end;
-
-def abc (a, b) {string s, point p} :=
-  message "Here I am";
-  show a;
 enddef;
-
-
-show abc;
-
-string s;
-string t;
-point p, q;
-q := p := origin;
-
-s := "def";
-abc (q, t) {s, p};
-
-end;
-
-%% ** (2)
-
-verbatim_metapost "end";
-  
-end;  
 
 %% ** (2) End of 3DLDF code.
 
