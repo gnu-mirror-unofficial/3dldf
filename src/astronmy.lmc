@@ -1261,14 +1261,14 @@ if label_pos == label_pos_zero:
     label_picture_ctr += 1;
 
     if do_extra_labels:
-      %dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number]) with_text_color ccolor with_dot_color ccolor
+      %dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number])
+      % with_text_color ccolor with_dot_color ccolor
       % on_picture qv[bi_ang0];
     fi;
 
   %message "Exiting macro `plot_star_on_spherical_biangle'.";
 
 enddef;
-
 
 %% ** (2) macro draw_extra_label_on_spherical_biangle
     
