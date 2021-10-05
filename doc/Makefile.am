@@ -173,7 +173,10 @@ TAGS : $(3dldf_TEXINFOS)
 
 
 
-exm examples: examples.ps
+exm examples: examples.pdf
+
+examples.pdf: examples.dvi
+	dvipdfmx $<
 
 examples.ps: examples.dvi
 	dvips -o $@ $<
@@ -182,10 +185,10 @@ examples.dvi: examples.tex examples.1
 	tex $<
 
 examples.1: examples.mp
-	mpost $<
+	mpost -numbersystem "double" $<
 
 examples.mp: examples.ldf ../src/3dldf$(EXEEXT)
-	../src/3dldf$(EXEEXT) $< 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 ../src/3dldf$(EXEEXT) $< 
 
 .PHONY : show
 show:
