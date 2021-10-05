@@ -85,6 +85,11 @@ fi;
   
 %% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
 
+%% !! PLEASE NOTE:  LDF 2021.10.05.  Some of the labels that had to be done specially on 
+%% the flat quadrants may not be on the right element of `flat_quadrant_picture'.  
+%% This applies to Regor and a couple of other stars where I had to fix the labels
+%% on this date.
+
 if do_write:
   for i = 0 upto 7:
     s := "clstsph_1_" & decimal i & ".tex";
@@ -339,7 +344,13 @@ draw R20 -- (R20 shifted (0, .5cm + 1pt)) with_color line_color on_picture bi_an
 plot_star_on_panel (temp_star_panel_point) {mimosa, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {mimosa, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_bot,
-                         0, 2pt, false, false};
+                         0, 2pt, false, true};
+
+label.rt("\vbox{{\SMALL\hbox{Mi-}\vskip-.25cm\hbox{\hskip-4pt mosa}}}", temp_star_flat_panel_point shifted (0pt, -3.5pt))
+          with_text_color label_color on_picture flat_quadrant_picture[3]; 
+
+label.rt("\vbox{{\SMALL\hbox{Mi-}\vskip-.25cm\hbox{\hskip-4pt mosa}}}", temp_star_flat_panel_point shifted (0pt, -3.5pt))
+          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 %% *** (3) 21. Regulus
 
@@ -379,7 +390,7 @@ fi;
 plot_star_on_panel (temp_star_panel_point) {castor, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {castor, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_rt, 0, 0, false, false};
+                         label_pos_lrt, -3pt, 2pt, false, false};
 
 %% *** (3) 24. Shaula
 
@@ -411,15 +422,13 @@ plot_star_on_panel (temp_star_panel_point) {gacrux, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {gacrux, temp_star_panel_point, RRA_ctr, DDecl_ctr,
                          label_pos_rt, 0, 0pt, false, true};
 
-label.rt("{\Small\vbox{\hbox{Ga-}\vskip-6pt\hbox{crux}}}",
-         temp_star_flat_panel_point shifted (3pt, 2.5pt))
+label.rt("{\SMALL\vbox{\hbox{Ga-}\vskip-6pt\hbox{crux}}}",
+         temp_star_flat_panel_point shifted (1pt, 2.5pt))
          with_text_color label_color on_picture flat_quadrant_picture[3];
 
-label.rt("{\Small\vbox{\hbox{Ga-}\vskip-6pt\hbox{crux}}}",
-         temp_star_flat_panel_point shifted (3pt, 2.5pt))
+label.rt("{\SMALL\vbox{\hbox{Ga-}\vskip-6pt\hbox{crux}}}",
+         temp_star_flat_panel_point shifted (1pt, 2.5pt))
          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
-
-
 
 %% *** (3) 26. Bellatrix
 
@@ -548,7 +557,13 @@ label.bot("{\small Regor}", R35 shifted (1pt, -.5pt)) on_picture qv[3];
 plot_star_on_panel (temp_star_panel_point) {regor, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {regor, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_rt, -1pt, 0, false, false};
+                         label_pos_ulft, -1pt, 0, false, true};
+
+label.top("{\Small Regor}", temp_star_flat_panel_point shifted (6pt, .5pt))
+          with_text_color label_color on_picture flat_quadrant_picture[0];
+
+label.top("{\Small Regor}", temp_star_flat_panel_point shifted (6pt, .5pt))
+          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 %% *** (3) 36. Wezen
 
@@ -604,7 +619,7 @@ plot_star_on_spherical_biangle {sargas, 39, label_pos_lft, 0, -3pt, false, false
 plot_star_on_panel (temp_star_panel_point) {sargas, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {sargas, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         abel_pos_lft, 1pt, -.125cm + 2.5pt, false, false};
+                         label_pos_lft, 1pt, -.125cm + 2.5pt, false, false};
 
 %% *** (3) 40. Avior
 
@@ -617,7 +632,7 @@ plot_star_on_spherical_biangle {avior, 40, label_pos_top, 0, 0, false, false};
 plot_star_on_panel (temp_star_panel_point) {avior, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {avior, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_bot, 0, 0, false, false};
+                         label_pos_top, 0, -2pt, false, false};
 
 %% *** (3) 41. Menkalinan
 
@@ -716,8 +731,15 @@ plot_star_on_spherical_biangle {algieba, 49, label_pos_lft, 1pt, 0, false, false
 plot_star_on_panel (temp_star_panel_point) {algieba, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {algieba, temp_star_panel_point,
-                         RRA_ctr, DDecl_ctr, label_pos_lft,
-                         0, 0, false, false};
+                         RRA_ctr, DDecl_ctr, label_pos_rt,
+                         0, 0, false, true};
+
+
+label.lft("{\Small Algieba}", temp_star_flat_panel_point shifted (-.75pt, 0pt))
+  with_text_color label_color on_picture flat_quadrant_picture[0];
+
+label.lft("{\Small Algieba}", temp_star_flat_panel_point shifted (-.75pt, 0pt))
+  with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 %% *** (3) 50. Hamal
 
@@ -858,8 +880,15 @@ plot_star_on_spherical_biangle {almach, 61, label_pos_bot, 0, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {almach, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {almach, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         0, -2pt, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {almach, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
+                         0, -2pt, false, true};
+
+label.bot("{\small Almach}", temp_star_flat_panel_point shifted (4.5pt, -1pt))
+  with_text_color label_color on_picture flat_quadrant_picture[0];
+
+%on_picture flat_quadrant_picture[10 + RRA_ctr];
+
 
 %% *** (3) 62. Denebola
 
@@ -869,7 +898,8 @@ plot_star_on_spherical_biangle {denebola, 62, label_pos_lft, 0, 0, false, false}
 
 plot_star_on_panel (temp_star_panel_point) {denebola, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {denebola, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_lft,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {denebola, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_lft,
                          0, 0, false, false};
  
 %% *** (3) 63. Cih
@@ -1692,7 +1722,13 @@ label.top("{\Small Porrima}", R122 shifted (4pt, 0pt))
 plot_star_on_panel (temp_star_panel_point) {porrima, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {porrima, temp_star_panel_point, RRA_ctr, DDecl_ctr,
-                         label_pos_rt, -1pt, 0, false, false};
+                         label_pos_rt, -1pt, 0, false, true};
+
+label.ulft("\vbox{{\SMALL\hbox{Porr-}\vskip-.25cm\hbox{ima}}}", temp_star_flat_panel_point shifted (3.5pt, -1.5pt))
+           with_text_color label_color on_picture flat_quadrant_picture[3];
+
+label.ulft("\vbox{{\SMALL\hbox{Porr-}\vskip-.25cm\hbox{ima}}}", temp_star_flat_panel_point shifted (3.5pt, -1.5pt))
+          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 %% *** (3) 123. Hatysa
 
@@ -2015,10 +2051,11 @@ plot_star_on_spherical_biangle {deneb_algedi, 145, label_pos_top, 0, 0, false, f
 
 plot_star_on_panel (temp_star_panel_point) {deneb_algedi, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {deneb_algedi, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {deneb_algedi, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr,
                          label_pos_top, 0, -3pt, false, false};
 
-%% *** (3) 146. Head Of Hydrus
+%% *** (3) 146. Head Of Hydrus, Alpha Hydri
 
 plot_star_on_sphere (star_point) {radius, alpha_hydri};
 
@@ -2026,8 +2063,16 @@ plot_star_on_spherical_biangle {alpha_hydri, 146, label_pos_lrt, -.425cm - .5pt,
 
 plot_star_on_panel (temp_star_panel_point) {alpha_hydri, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {alpha_hydri, temp_star_panel_point, RRA_ctr,
-                         DDecl_ctr, label_pos_bot, .125cm + 2.75pt, 0, false, false};
+plot_star_on_flat_panel (temp_star_flat_panel_point) {alpha_hydri, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_bot, .125cm + 2.75pt, -4pt, false, true};
+
+label.top("{\small{\smallgreek\char11} Hydri}",
+         temp_star_flat_panel_point shifted (4pt, 0pt))
+         with_text_color label_color on_picture flat_quadrant_picture[0];
+
+label.top("{\small{\smallgreek\char11} Hydri}",
+         temp_star_flat_panel_point shifted (4pt, 0pt))
+         with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 %% *** (3) 147. Delta Cygni
 
@@ -2048,7 +2093,8 @@ plot_star_on_spherical_biangle {tejat, 148, label_pos_top, 0, -1.5pt, false, fal
 
 plot_star_on_panel (temp_star_panel_point) {tejat, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {tejat, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {tejat, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr, label_pos_top,
                          0, -2pt, false, false};
 
 %% *** (3) 149. Gamma Trianguli Australis
@@ -2062,7 +2108,8 @@ label.bot("{\small\vbox{\hbox{\hskip-12.5pt$\gamma$ Triangul{\ae}}\vskip-2pt\hbo
 
 plot_star_on_panel (temp_star_panel_point) {gamma_trianguli_australis, star_point};
 
-plot_star_on_flat_panel (temp_star_flat_panel_point) {gamma_trianguli_australis, temp_star_panel_point, RRA_ctr, DDecl_ctr,
+plot_star_on_flat_panel (temp_star_flat_panel_point) {gamma_trianguli_australis, temp_star_panel_point,
+                         RRA_ctr, DDecl_ctr,
                          label_pos_top, 0, 0, false, true};
 
 label.lrt("{\SMALL\vbox{\hbox{\hskip1.5pt{\SMALLgreek\char13} Tri-}\vskip-6pt\hbox{\hskip-1.5pt anguli}"
@@ -2218,11 +2265,11 @@ plot_star_on_panel (temp_star_panel_point) {upsilon_carinae, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {upsilon_carinae, temp_star_panel_point, RRA_ctr, DDecl_ctr,
                          label_pos_top, 0, 0, false, true};
 
-label.top("{\Small {\Smallgreek\char29} Carin{\ae}}", temp_star_flat_panel_point shifted (-1.3pt, 2pt))
+label.bot("{\SMALL {\SMALLgreek\char29} Carin{\ae}}", temp_star_flat_panel_point shifted (-1.3pt, 0pt))
          with_text_color label_color on_picture flat_quadrant_picture[2]; 
 
-label.top("{\Small {\Smallgreek\char29} Carin{\ae}}", temp_star_flat_panel_point shifted (-1.3pt, 2pt))
-         with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
+label.bot("{\SMALL {\SMALLgreek\char29} Carin{\ae}}", temp_star_flat_panel_point shifted (-1.3pt, 0pt))
+          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
 
 
 %% *** (3) 161. Matar
@@ -2529,14 +2576,13 @@ plot_star_on_panel (temp_star_panel_point) {beta_muscae, star_point};
 plot_star_on_flat_panel (temp_star_flat_panel_point) {beta_muscae, temp_star_panel_point, RRA_ctr, DDecl_ctr,
                          label_pos_top, 0, -4pt, false, true};
 
-label.top("{\small\vbox{\hbox{\hskip-1pt$\beta$ Mus-}\vskip-6.5pt\hbox{\hskip4pt cae}}}",
-         temp_star_flat_panel_point shifted (0pt, 1.5pt))
+label.top("{\Small\vbox{\hbox{\hskip-1pt{\Smallgreek\char12} Mus-}\vskip-6.5pt\hbox{\hskip4pt cae}}}",
+         temp_star_flat_panel_point shifted (0pt, .5pt))
          with_text_color label_color on_picture flat_quadrant_picture[3];
 
-label.top("{\small\vbox{\hbox{\hskip-1pt$\beta$ Mus-}\vskip-6.5pt\hbox{\hskip4pt cae}}}",
-         temp_star_flat_panel_point shifted (0pt, 1.5pt))
+label.top("{\Small\vbox{\hbox{\hskip-1pt{\Smallgreek\char12} Mus-}\vskip-6.5pt\hbox{\hskip4pt cae}}}",
+         temp_star_flat_panel_point shifted (0pt, .5pt))
          with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
-
 
 
 %% *** (3) 183. Seginus
