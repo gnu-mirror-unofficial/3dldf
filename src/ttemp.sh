@@ -10,20 +10,20 @@
 
 echo "Arg 1 == $1"
 
-cp small_rhombi.ldf small_rhombi.txt ~/3DLDF-3.0_web/3dldf/SRC_CODE/
-cp small_rhombi.pdf ~/3DLDF-3.0_web/3dldf/graphics
+# cp small_rhombi.ldf small_rhombi.txt ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+# cp small_rhombi.pdf ~/3DLDF-3.0_web/3dldf/graphics
 
-cd ~/3DLDF-3.0_web/3dldf/
+# cd ~/3DLDF-3.0_web/3dldf/
 
-if test -n "$1"
-then
-    echo "Arg 1 is non-empty.  Not committing."
-else
-    echo "Arg 1 is empty.  Committing."
-    cvs commit -m "Edited."
-fi
+# if test -n "$1"
+# then
+#     echo "Arg 1 is non-empty.  Not committing."
+# else
+#     echo "Arg 1 is empty.  Committing."
+#     cvs commit -m "Edited."
+# fi
 
-exit 0 
+# exit 0 
 
 
 cp -f clstsph1.pdf clstsph1_a4.pdf ~/3DLDF-3.0_web/3dldf/graphics/
