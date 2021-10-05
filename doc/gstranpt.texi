@@ -302,7 +302,7 @@ show q;
 path p;
 p := (0, 0) -- (4, 0) -- (4, 3) -- (0, 3) -- cycle;
 draw p;
-shear p (1.5);
+shear p by 1.5;
 draw p dashed evenly;
 @end example
 
@@ -320,8 +320,8 @@ draw p dashed evenly;
 
 @c !! TO DO:  Make illustration. 
 
-The function @code{rotate} rotates a @code{Point} about one or more of
-the main axes.
+The transformation @code{rotated} or the corresponding command @code{rotate} rotates a
+@code{point} about one or more of the main axes.
 It takes three @code{real} arguments, specifying the 
 angles of rotation in degrees about the x, y, and z-axes respectively.
 Only the first argument is required, the other two are 0 by default.  If
@@ -330,13 +330,19 @@ must be used as a placeholder for the first and possibly the second
 argument.  
 
 @example
-Point p(0, 1);
-p.rotate(90);
-p.show("p:");
-@print{} p: (0, 0, -1)
-p.rotate(0, 90);
-p.show("p:");
-@print{} p: (1, 0, 0)
+point p;
+point q;
+p := (0, 1);
+q := q rotated (90);
+message "q:";
+show q;
+@print{} q:
+(0, 0, -1)
+rotate q (0, 90);
+message "q:";
+show q;
+@print{} q:
+(1, 0, 0)
 p.rotate(0, 0, 90);
 p.show("p:");
 @print{} p: (0, 1, 0)
