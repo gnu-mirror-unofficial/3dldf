@@ -1807,8 +1807,6 @@ enddef;
 
 macro get_flat_panels;
 
-%input "xxx.lmc";
-
 def get_flat_panels =
 
   point p[];
@@ -1831,6 +1829,12 @@ def get_flat_panels =
   path temp_path_c;
   path temp_path_d;
 
+  pen stitch_pen;
+  stitch_pen := pencircle scaled (2.5pt, 2.5pt, 2.5pt);
+
+  pen large_pen;
+  large_pen := pencircle scaled (3pt, 3pt, 3pt);
+  
   boolean do_labels;
 
   do_labels := false; % true; % 
@@ -2020,7 +2024,8 @@ def get_flat_panels =
       temp_c := mediate(temp_a, temp_b, .5) shifted (-1.75cm, 0);
       
       %draw flat_quadrant[i][j] with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
-      %drawdot get_point (0) flat_quadrant[i][j] with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
+      %drawdot get_point (0) flat_quadrant[i][j] with_color red with_pen medium_pen
+      %on_picture flat_quadrant_picture[v];
       %draw get_point (0) flat_quadrant[i][j] -- get_point (2) flat_quadrant[i][j]
       %with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
       %label(decimal i & "/" & decimal j, temp_c) on_picture flat_quadrant_picture[v];
@@ -2033,8 +2038,6 @@ def get_flat_panels =
 
   v := 0;
 
-  do_labels := true; % false; % 
-  
   for i := 0 upto 15:
     if i == 8:
       v := 1;
@@ -2162,8 +2165,6 @@ def get_flat_panels =
      dotlabel.top("$r_{17}$", r17) on_picture flat_quadrant_picture[0];
   fi;
 
-  do_labels := false;
-  
   for i = 0 step 2 until 12:
     r18 := mediate(r[i], r[i+2], .5);
     if do_labels:
@@ -2193,60 +2194,112 @@ def get_flat_panels =
 
     u0 := r21 -- r25 -- r26 -- r22;
 
-    dotlabel.rt("$r_{21}$", r21) on_picture flat_quadrant_picture[0];
-    dotlabel.lft("$r_{25}$", r25) on_picture flat_quadrant_picture[0];
-    dotlabel.lft("$r_{26}$", r26) on_picture flat_quadrant_picture[0];
-    dotlabel.rt("$r_{22}$", r22) on_picture flat_quadrant_picture[0];
-
+    if do_labels:
+      dotlabel.rt("$r_{21}$", r21) on_picture flat_quadrant_picture[0];
+      dotlabel.lft("$r_{25}$", r25) on_picture flat_quadrant_picture[0];
+      dotlabel.lft("$r_{26}$", r26) on_picture flat_quadrant_picture[0];
+      dotlabel.rt("$r_{22}$", r22) on_picture flat_quadrant_picture[0];
+    fi;
+    
     r40 := mediate(r22, r26);
     r41 := mediate(r21, r25);
 
+    r42 := mediate(r40, r41, .333);
+    r43 := mediate(r40, r41, .667); 
     
     draw u0 on_picture flat_quadrant_picture[0];
-    drawdot mediate(r40, r41, .333) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
-    drawdot mediate(r40, r41, .667) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
-
-    draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
-    drawdot (mediate(r40, r41, .333) rotated (180, 0))
-      with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
-    drawdot (mediate(r40, r41, .667) rotated (180, 0))
-      with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture flat_quadrant_picture[0];
+    drawdot r42 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 with_pen stitch_pen on_picture flat_quadrant_picture[0];
     
-    draw u0 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
-      on_picture flat_quadrant_picture[1];
+    draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
 
-    draw (u0 rotated (180, 0)) shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
-      on_picture flat_quadrant_picture[1];
+    drawdot r42 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
+    t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+    
+    draw u0 transformed t5 on_picture flat_quadrant_picture[1];
+
+    drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
+    t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+    t6 := identity rotated (180, 0);
+    t6 *= t5;
+    
+    draw u0 transformed t6 on_picture flat_quadrant_picture[1];
+    drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
     for i = 0 upto 7:
-      draw u0 shifted (i * 5cm, 0) on_picture flat_quadrant_picture[10 + i];
-
-      
-      draw (u0 rotated (180, 0)) shifted (i * 5cm, 0) on_picture flat_quadrant_picture[10 + i];
-
+      t5 := identity shifted (i * 5cm, 0);
+      t6 := identity rotated (180, 0);
+      t6 *= t5;
+      draw u0 transformed t5 on_picture flat_quadrant_picture[10 + i];
+      draw u0 transformed t6 on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
     endfor;
 
+    
+    
     for i = 8 upto 15:
-      draw (u0 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1])))
-	shifted ((i - 8) * 5cm, 0)
-	on_picture flat_quadrant_picture[10 + i];
-      draw ((u0 rotated (180, 0)) shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1])))
-	shifted ((i - 8) * 5cm, 0)
-	on_picture flat_quadrant_picture[10 + i];
+
+      t5 := identity shifted by
+	(get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+
+      t6 := identity shifted ((i - 8) * 5cm, 0);
+
+      t5 *= t6;
+      
+      draw u0 transformed t5 with_color blue with_pen large_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+
+      t5 := identity rotated (180, 0);
+      t6 := identity
+	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+      t7 := identity shifted ((i - 8) * 5cm, 0);
+      t5 *= t6;
+      t5 *= t7;
+      draw u0 transformed t5 with_color red with_pen large_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
     endfor;
     
     u1 := u0;
+    r44 := r42;
+    r45 := r43;
     t3 := identity shifted (5cm, 0);
     
     for j = 1 upto 7:
-      u1 *= t3;
+      r45 *= r44 *= u1 *= t3;
       draw u1 on_picture flat_quadrant_picture[0];
-      draw u1 rotated (180, 0) on_picture flat_quadrant_picture[0];
-      draw u1 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
-	on_picture flat_quadrant_picture[1];
-      draw (u1 rotated (180, 0)) shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
-	on_picture flat_quadrant_picture[1];
+      drawdot r44 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r45 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
+      t5 := identity rotated (180, 0);      
+      draw u1 transformed t5 on_picture flat_quadrant_picture[0];
+      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      
+      t5 := identity
+	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+      
+      draw u1 transformed t5 on_picture flat_quadrant_picture[1];
+      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
+      t5 := identity rotated (180, 0);
+      t6 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+      t5 *= t6;
+      
+      draw u1 transformed t5 on_picture flat_quadrant_picture[1];
+      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      
     endfor;
 
     u1 := u0;
@@ -2319,7 +2372,8 @@ def get_flat_panels =
 
   label.rt("$\scriptstyle 0\rm{h}$", mediate(r0, r2) shifted (-1pt, 0)) rotated (0, 0, n10)
     with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.rt("$\scriptstyle 1\rm{h}\\thinspace 30^\prime$", mediate(r0, r2) shifted (5cm - 1pt, 0)) rotated (0, 0, n10)
+  label.rt("$\scriptstyle 1\rm{h}\\thinspace 30^\prime$", mediate(r0, r2) shifted (5cm - 1pt, 0))
+    rotated (0, 0, n10)
      with_text_color label_color on_picture flat_quadrant_picture[2];
   label.rt("$\scriptstyle 3\rm{h}$", mediate(r0, r2) shifted ((2 * 5cm) - 1pt, 6pt)) rotated (0, 0, n10)
     with_text_color label_color on_picture flat_quadrant_picture[2];
@@ -2337,38 +2391,47 @@ def get_flat_panels =
   n11 := ypart r2 - ypart r0;
   
   label.urt("$\scriptstyle 0^\circ$", r0) with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 11^\circ 15^\prime$", r2) with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -11^\circ 15^\prime$", r2 rotated_around(r0, r1) 180) with_text_color label_color
+  label.urt("$\scriptstyle 11^\circ 15^\prime$", r2) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", r2 rotated_around(r0, r1) 180)
+    with_text_color label_color
      on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 22^\circ 30^\prime$", r4) with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -22^\circ 30^\prime$", r4 rotated_around (r0, r1) 180) with_text_color label_color
-     on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 33^\circ 45^\prime$", r6) with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -33^\circ 45^\prime$", r6 rotated_around (r0, r1) 180) with_text_color label_color
-     on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 45^\circ$", r8) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", r4) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", r4 rotated_around (r0, r1) 180)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", r6) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", r6 rotated_around (r0, r1) 180)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 45^\circ$", r8) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
   label.urt("$\scriptstyle -45^\circ$", (r8 rotated_around (r0, r1) 180) shifted (0, -1pt))
      with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.ulft("$\scriptscriptstyle 56^\circ 15^\prime$", r11 shifted (0, 2.5pt)) with_text_color label_color
-     on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle -56^\circ 15^\prime$", r10 rotated_around (r0, r1) 180) with_text_color label_color
-     on_picture flat_quadrant_picture[2];
-  label.urt("$\scriptstyle 67^\circ 30^\prime$", r12) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.ulft("$\scriptscriptstyle 56^\circ 15^\prime$", r11 shifted (0, 2.5pt))
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -56^\circ 15^\prime$", r10 rotated_around (r0, r1) 180)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", r12) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
   label.urt("$\scriptstyle -67^\circ 30^\prime$", (r12 rotated_around (r0, r1) 180) shifted (-2pt, 0))
      with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.top("$\scriptscriptstyle 78^\circ 45^\prime$", (mediate(r14, r15)) shifted (0, -1pt)) rotated (0, 0, 90)
-     with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.top("$\scriptscriptstyle 78^\circ 45^\prime$",
+      (mediate(r14, r15)) shifted (0, -1pt)) rotated (0, 0, 90)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
   label.bot("$\scriptscriptstyle -78^\circ 45^\prime$",
-  (mediate(r14, r15) rotated_around (r0, r1) 180) shifted (0, 2pt))
-      rotated (0, 0, 90) with_text_color label_color on_picture flat_quadrant_picture[2];
+      (mediate(r14, r15) rotated_around (r0, r1) 180) shifted (0, 2pt))
+    rotated (0, 0, 90) with_text_color label_color on_picture flat_quadrant_picture[2];
 
-  %draw flat_quadrant[8][1] with_color cyan with_pen medium_pen with_text_color label_color on_picture flat_quadrant_picture[3];
+  %draw flat_quadrant[8][1] with_color cyan with_pen medium_pen with_text_color label_color
+  %on_picture flat_quadrant_picture[3];
 
   j := 0;
   for i := 1 upto 8:
     r[33 + j] := get_point (0) flat_quadrant[8][i];
     r[33 + j + 1] := get_point (1) flat_quadrant[8][i];
-    dotlabel.lft("$r_{" & decimal (33 + j) & "}$", r[33 + j]) with_text_color label_color on_picture flat_quadrant_picture[3];
+    dotlabel.lft("$r_{" & decimal (33 + j) & "}$", r[33 + j]) with_text_color label_color
+      on_picture flat_quadrant_picture[3];
     dotlabel.rt("$r_{" & decimal (33 + j + 1) & "}$", r[33 + j + 1]) with_text_color label_color
        on_picture flat_quadrant_picture[3];
     j += 2;
@@ -2381,40 +2444,50 @@ def get_flat_panels =
 
   label.rt("$\scriptstyle 12\rm{h}$", mediate(r33, r35) shifted (-1pt, 0)) rotated (0, 0, n12)
      with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.rt("$\scriptstyle 13\rm{h}\\thinspace 30^\prime$", mediate(r33, r35) shifted (5cm - 1pt, 0)) rotated (0, 0, n12)
+  label.rt("$\scriptstyle 13\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted (5cm - 1pt, 0)) rotated (0, 0, n12)
      with_text_color label_color on_picture flat_quadrant_picture[3];
   label.rt("$\scriptstyle 15\rm{h}$", mediate(r33, r35) shifted ((2 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.rt("$\scriptstyle 16\rm{h}\\thinspace 30^\prime$", mediate(r33, r35) shifted ((3 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+  label.rt("$\scriptstyle 16\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted ((3 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     with_text_color label_color on_picture flat_quadrant_picture[3];
   label.rt("$\scriptstyle 18\rm{h}$", mediate(r33, r35) shifted ((4 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.rt("$\scriptstyle 19\rm{h}\\thinspace 30^\prime$", mediate(r33, r35) shifted ((5 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+  label.rt("$\scriptstyle 19\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted ((5 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     with_text_color label_color on_picture flat_quadrant_picture[3];
   label.rt("$\scriptstyle 21\rm{h}$", mediate(r33, r35) shifted ((6 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.rt("$\scriptstyle 22\rm{h}\\thinspace 30^\prime$", mediate(r33, r35) shifted ((7 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+  label.rt("$\scriptstyle 22\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted ((7 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
     with_text_color label_color on_picture flat_quadrant_picture[3];
 
-  label.urt("$\scriptstyle 0^\circ$", r33) with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.urt("$\\scriptscriptstyle 11^\circ 15^\prime$", r35) with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 0^\circ$", r33) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  label.urt("$\\scriptscriptstyle 11^\circ 15^\prime$", r35) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
   label.urt("$\scriptstyle -11^\circ 15^\prime$", r35 rotated_around (r33, r34) 180)
      with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.urt("$\scriptstyle 22^\circ 30^\prime$", r37) with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", r37) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
   label.bot("$\scriptscriptstyle -22^\circ 30^\prime$",
      (mediate(r37, r38) rotated_around (r33, r34) 180) shifted (.5cm - 4pt, 1pt))
      with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.urt("$\scriptstyle 33^\circ 45^\prime$", r39) with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", r39) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
   label.urt("$\scriptstyle -33^\circ 45^\prime$", r39 rotated_around (r33, r34) 180)
      with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.urt("$\scriptstyle 45^\circ$", r41) with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 45^\circ$", r41) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
   label.urt("$\scriptstyle -45^\circ$", (r41 rotated_around (r33, r34) 180) shifted (0, -1pt))
      with_text_color label_color on_picture flat_quadrant_picture[3];
   label.lrt("$\scriptscriptstyle 56^\circ 15^\prime$", r43 shifted (-1pt, 0))
      with_text_color label_color on_picture flat_quadrant_picture[3];
   %label.urt("$\scriptstyle -56^\circ 15^\prime$", r43 rotated_around (r33, r34) 180)
   %   with_text_color label_color on_picture flat_quadrant_picture[3];
-  label.urt("$\scriptstyle 67^\circ 30^\prime$", r45) with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", r45) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
   %label.urt("$\scriptstyle -67^\circ 30^\prime$", (r45 rotated_around (r33, r34) 180) shifted (-2pt, 0))
   %   with_text_color label_color on_picture flat_quadrant_picture[3];
   label.top("$\scriptscriptstyle 78^\circ 45^\prime$",
@@ -2430,9 +2503,6 @@ def get_flat_panels =
   % r36 := get_point (3) flat_quadrant[8][1];
     
 enddef;
-
-
-
 
 %% *** (3)
 
@@ -2715,8 +2785,6 @@ def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_c
 
 enddef;
 
-%% !! START HERE: LDF 2021.08.04.  Write an "extra label" macro for the large spherical biangles.
-
 %% ** (2) macro draw_extra_label_on_flat_panel
 
 macro draw_extra_label_on_flat_panel;
@@ -2877,6 +2945,106 @@ def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or
 
 enddef;
 
+
+%% ** (2) macro draw_stitches
+    
+macro draw_stitches;
+
+def draw_stitches {boolean do_labels} =
+
+  message "Entering draw_stitches.";
+    
+  point P[];
+  
+  if false:
+    draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[0];
+    draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[0];
+    draw edge2 with_pen pencircle scaled (3pt, 3pt) with_color blue on_picture qv[0];
+    draw edge3 with_pen pencircle scaled (3pt, 3pt) with_color red on_picture qv[0];
+  fi;
+  
+  %edge1  %% top right 
+  %edge0  %% top left
+  %edge3  %% bottom right
+  %edge2  %% bottom left
+
+  for i = 0 upto (length Q - 1):
+    P[i] := get_point (i) Q;
+  endfor;
+
+  if do_labels:
+    dotlabel.rt("$P_{0}$", P0) on_picture qv[0];
+    dotlabel.rt("$P_{1}$", P1) on_picture qv[0];
+    dotlabel.rt("$P_{2}$", P2) on_picture qv[0];
+    dotlabel.rt("$P_{3}$", P3) on_picture qv[0];
+    dotlabel.rt("$P_{4}$", P4) on_picture qv[0];
+    dotlabel.rt("$P_{5}$", P5) on_picture qv[0];
+    dotlabel.rt("$P_{6}$", P6) on_picture qv[0];
+    dotlabel.rt("$P_{7}$", P7) on_picture qv[0];
+    dotlabel.lft("$P_{8}$", P8) on_picture qv[0];
+    dotlabel.lrt("$P_{9}$", P9) on_picture qv[0];
+    dotlabel.lft("$P_{10}$", P10) on_picture qv[0];
+    dotlabel.lft("$P_{11}$", P11) on_picture qv[0];
+    dotlabel.lft("$P_{12}$", P12) on_picture qv[0];
+    dotlabel.lft("$P_{13}$", P13) on_picture qv[0];
+    dotlabel.lft("$P_{14}$", P14) on_picture qv[0];
+    dotlabel.lft("$P_{15}$", P15) on_picture qv[0];
+    dotlabel.lft("$P_{16}$", P16) on_picture qv[0];
+    dotlabel.lft("$P_{17}$", P17) on_picture qv[0];
+    dotlabel.rt("$P_{18}$", P18) on_picture qv[0];
+    dotlabel.lft("$P_{19}$", P19) on_picture qv[0];
+    dotlabel.lft("$P_{20}$", P20) on_picture qv[0];
+    %dotlabel.lft("$P_{21}$", P21) on_picture qv[0];
+    dotlabel.lft("$P_{22}$", P22) on_picture qv[0];
+    dotlabel.lft("$P_{23}$", P23) on_picture qv[0];
+    dotlabel.lft("$P_{24}$", P24) on_picture qv[0];
+    dotlabel.lft("$P_{25}$", P25) on_picture qv[0];
+    dotlabel.rt("$P_{26}$", P26) on_picture qv[0];
+    dotlabel.lft("$P_{27}$", P27) on_picture qv[0];
+    dotlabel.rt("$P_{28}$", P28) on_picture qv[0];
+    dotlabel.rt("$P_{29}$", P29) on_picture qv[0];
+    dotlabel.rt("$P_{30}$", P30) on_picture qv[0];
+    dotlabel.rt("$P_{31}$", P31) on_picture qv[0];
+    dotlabel.rt("$P_{32}$", P32) on_picture qv[0];
+    dotlabel.rt("$P_{33}$", P33) on_picture qv[0];
+    dotlabel.rt("$P_{34}$", P34) on_picture qv[0];
+    dotlabel.lrt("$P_{35}$", P35) on_picture qv[0];
+  fi;
+
+  for j = 0 upto 7:
+    for i = 0 upto 6:
+      P36 := get_point 0 tab[i];
+      P37 := get_point 1 tab[i]; 
+      P38 := get_point 2 tab[i];
+      P39 := get_point 3 tab[i];
+
+      P40 := mediate(P38, P39);
+      P41 := mediate(P36, P37);
+
+      P42 := P40 rotated_around (P0, P17) 180;
+      P43 := P41 rotated_around (P0, P17) 180;
+      
+      drawdot mediate(P40, P41, .25) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P40, P41, .5) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P40, P41, .75) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+
+      drawdot mediate(P42, P43, .25) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P42, P43, .5) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P42, P43, .75) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+    endfor;
+  endfor;
+
+% if do_labels:
+  %   dotlabel.llft("$P_{36}$", P36) on_picture qv[0];
+  %   dotlabel.lft("$P_{37}$", P37) on_picture qv[0];
+  %   dotlabel.lft("$P_{38}$", P38) on_picture qv[0];
+  %   dotlabel.urt("$P_{39}$", P39) on_picture qv[0];
+  % fi;
+
+    
+  message "Exiting draw_stitches.";
+  
+enddef;
 
 %% *** (3)
 
