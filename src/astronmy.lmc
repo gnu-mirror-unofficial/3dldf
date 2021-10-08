@@ -2522,15 +2522,20 @@ def get_flat_panels =
   for i := 1 upto 8:
     r[33 + j] := get_point (0) flat_quadrant[8][i];
     r[33 + j + 1] := get_point (1) flat_quadrant[8][i];
-    dotlabel.lft("$r_{" & decimal (33 + j) & "}$", r[33 + j]) with_text_color label_color
-      on_picture flat_quadrant_picture[3];
-    dotlabel.rt("$r_{" & decimal (33 + j + 1) & "}$", r[33 + j + 1]) with_text_color label_color
-       on_picture flat_quadrant_picture[3];
+    if do_labels:
+      dotlabel.lft("$r_{" & decimal (33 + j) & "}$", r[33 + j]) with_text_color label_color
+	on_picture flat_quadrant_picture[3];
+      dotlabel.rt("$r_{" & decimal (33 + j + 1) & "}$", r[33 + j + 1]) with_text_color label_color
+	on_picture flat_quadrant_picture[3];
+    fi;
     j += 2;
   endfor;
 
   r49 := get_point (2) flat_quadrant[8][8];
-  dotlabel.rt("$r_{49}$", r49) with_text_color label_color on_picture flat_quadrant_picture[3];
+
+  if do_labels:
+    dotlabel.rt("$r_{49}$", r49) with_text_color label_color on_picture flat_quadrant_picture[3];
+  fi;
 
   n12 := (r35 - r33) angle (r34 - r33);
 
