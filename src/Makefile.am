@@ -1510,6 +1510,25 @@ polymdls_a4.dvi: polymdls_a4.tex
 	$(TEX) polymdls_a4.tex
 	$(TEX) polymdls_a4.tex
 
+.PHONY: trchd
+
+trchd: trchd_1.pdf trchd_1.ps
+
+trchd_1.mp: trchd_1.ldf 
+	3dldf trchd_1.ldf 
+
+trchd_1.1: trchd_1.mp
+	mpost trchd_1.mp 
+
+trchd_1.dvi
+	tex trchd_1.tex
+
+trchd_1.pdf: trchd_1.dvi
+	dvipdfmx trchd_1.dvi
+
+trchd_1.ps: trchd_1.dvi
+	dvips -o trchd_1.ps trchd_1.dvi 
+
 .PHONY: purge-s
 
 purge-s:
