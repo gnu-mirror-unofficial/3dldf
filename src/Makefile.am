@@ -1266,6 +1266,17 @@ conveps.c++: conveps.web
 	ctangle conveps.web
 	mv conveps.c conveps.c++
 
+conveps.tex: conveps.web
+	cweave conveps.web
+
+conveps.dvi: conveps.tex
+	tex conveps.tex
+
+conveps.ps: conveps.dvi
+	dvips -o conveps.ps conveps.dvi
+
+conveps.pdf: conveps.dvi
+	dvipdfmx conveps.dvi
 
 .PHONY: headers
 
