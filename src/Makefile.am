@@ -1515,12 +1515,12 @@ polymdls_a4.dvi: polymdls_a4.tex
 trchd: trchd_1.pdf trchd_1.ps
 
 trchd_1.mp: trchd_1.ldf 
-	3dldf trchd_1.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf trchd_1.ldf 
 
 trchd_1.1: trchd_1.mp
 	mpost trchd_1.mp 
 
-trchd_1.dvi
+trchd_1.dvi: trchd_1.tex trchd_1.1
 	tex trchd_1.tex
 
 trchd_1.pdf: trchd_1.dvi
@@ -1528,6 +1528,21 @@ trchd_1.pdf: trchd_1.dvi
 
 trchd_1.ps: trchd_1.dvi
 	dvips -o trchd_1.ps trchd_1.dvi 
+
+grrhm_06.mp: grrhm_06.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf grrhm_06.ldf 
+
+grrhm_06.1: grrhm_06.mp
+	mpost grrhm_06.mp 
+
+grrhm_06.dvi: grrhm_06.tex grrhm_06.1
+	tex grrhm_06.txt 
+
+grrhm_06.ps: grrhm_06.dvi
+	dvips -o grrhm_06.ps grrhm_06.dvi
+
+grrhm_06.pdf: grrhm_06.dvi
+	dvipdfmx grrhm_06.dvi
 
 .PHONY: purge-s
 
