@@ -92,6 +92,10 @@ path w[];
 pen dot_pen;
 pen tiny_pen;
 
+boolean do_labels;
+
+do_labels := true; % false; %
+
 dot_pen := pencircle scaled (.5mm, .5mm, .5mm);
 tiny_pen := pencircle scaled (.25mm, .25mm, .25mm);
 
@@ -144,27 +148,34 @@ q0 := ((p[0][1] - p[0][0]) / 5) shifted p[0][0];
 
 q1 := mediate(p[0][0], p[0][1]);
 
-%dotlabel.lft("$q_{0}$", q0);
-%dotlabel.lft("$q_{1}$", q1);
+if do_labels:
+  dotlabel.lft("$q_{0}$", q0);
+  dotlabel.lft("$q_{1}$", q1);
+fi;
 
 q2 := q0 rotated_around (c0, q1) 180;
 
-%dotlabel.lft("$q_{2}$", q2);
+if do_labels:
+  dotlabel.lft("$q_{2}$", q2);
+fi;
 
 draw p[0][0] -- q0;
 draw q0 -- q2 dashed evenly;
 draw q2 -- p[0][1];
 
-
 q3 := q0 shifted (0, 1);
 
 q4 := p[0][0] rotated_around (q0, q3) 114;
 
-%dotlabel.rt("$q_{4}$", q4);
+if do_labels:
+  dotlabel.rt("$q_{4}$", q4);
+fi;
 
 q5 := (unit_vector(q4 - q0) / 2) shifted q0;
 
-%dotlabel.rt("$q_{5}$", q5);
+if do_labels:
+  dotlabel.rt("$q_{5}$", q5);
+fi;
 
 a := (q5 - q0) angle (q2 - q0);
 
@@ -179,24 +190,30 @@ a := (q5 - q0) angle (q2 - q0);
 
 q6 := q5 rotated_around (c0, q1) 180;
 
-%dotlabel.rt("$q_{6}$", q6);
+if do_labels:
+  dotlabel.rt("$q_{6}$", q6);
+fi;
 
 q7 := mediate(q0, q5, 1/3);
 q8 := mediate(q2, q6, 1/3);
 
-% dotlabel.bot("$q_{7}$", q7);
-% dotlabel.ulft("$q_{8}$", q8);
+if do_labels:
+  dotlabel.bot("$q_{7}$", q7);
+  dotlabel.ulft("$q_{8}$", q8);
+fi;
 
 q9 := mediate(q0, q5, 2/3);
 q10 := mediate(q2, q6, 2/3);
 
-% dotlabel.lrt("$q_{9}$", q9);
-% dotlabel.urt("$q_{10}$", q10);
+if do_labels:
+  dotlabel.lrt("$q_{9}$", q9);
+  dotlabel.urt("$q_{10}$", q10);
+fi;
 
 draw q0 -- q5 -- q6 -- q2;
 
-draw q7 -- q8 with_pen tiny_pen;
-draw q9 -- q10 with_pen tiny_pen;
+%draw q7 -- q8 with_pen tiny_pen;
+%draw q9 -- q10 with_pen tiny_pen;
 
 %% Dots for stitches (q[11] -- q[20])
 
@@ -207,17 +224,14 @@ for i = 1 upto 5:
    q[25 + i] := (q[10 + i] -- q[15 + i]) intersection_point (q5 -- q6);
    q[30 + i] := q[20 + i];
    q[35 + i] := q[25 + i];
-   drawdot q[10 + i] with_pen dot_pen;
-   drawdot q[15 + i] with_pen dot_pen;
-   draw q[20 + i] -- q[25 + i] with_pen tiny_pen;
+   %drawdot q[10 + i] with_pen dot_pen;
+   %drawdot q[15 + i] with_pen dot_pen;
+   %draw q[20 + i] -- q[25 + i] with_pen tiny_pen;
 endfor;
-
 
 w0 := q0 -- q5 -- q6 -- q2;
 w1 := q7 -- q11 -- q12 -- q13 -- q14 -- q15 -- q8;
 w2 := q9 -- q16 -- q17 -- q18 -- q19 -- q20 -- q10;
-
-
 
 %% **** (4) Additional outer tabs on rpv[0]
 
@@ -661,7 +675,6 @@ fi;
 
 %% ***** (5) End of outer tabs on rpv31
 
-
 %% **** (4) Outer tabs on rpv37;
 
 %dotlabel.rt(0, p[37][0]);
@@ -895,7 +908,6 @@ fi;
 
 %% ***** (5) End of outer tabs on rpv49
 
-
 %% **** (4) Outer tabs on rpv50;
 
 %dotlabel.rt(0, p[50][0]);
@@ -978,8 +990,6 @@ for i := 2 upto 6:
        drawdot q[15 + j] with_pen dot_pen;
        draw q[20 + j] -- q[25 + j] with_pen tiny_pen;
     endfor;
-
-
 
 endfor;
 fi;
@@ -2079,9 +2089,6 @@ draw p[56][2] -- p[56][3];
 draw p[56][3] -- p[56][4];
 draw p[56][5] -- p[56][6];
 
-
-
-
 %% **** (4) Inner tabs on the hexagons
 %%
 %%          I believe there are no outer tabs on the hexagons or squares,
@@ -2287,8 +2294,6 @@ endfor;
 fi;
 
 %% ***** (5) Inner tabs on rpv[6]
-
-
 
 t0 := identity shifted by (c[6] - c[3]);
 
