@@ -1889,6 +1889,8 @@ enddef;
 
 %% ** (2) macro get_flat_panels
 
+%input "xxx.lmc";
+
 macro get_flat_panels;
 
 def get_flat_panels =
@@ -2267,8 +2269,8 @@ def get_flat_panels =
     if do_labels:
       dotlabel.lft("$r_{20}$", r20) on_picture flat_quadrant_picture[0];
     fi;
-    r21 := mediate(r[i], r[i+2], .2);
-    r22 := mediate(r[i+2], r[i], .2);
+    r21 := mediate(r[i], r[i+2], .125);
+    r22 := mediate(r[i+2], r[i], .125);
     if do_labels:
       dotlabel.rt("$r_{21}$", r21) on_picture flat_quadrant_picture[0];
     fi;
@@ -2277,8 +2279,8 @@ def get_flat_panels =
     fi;
     r23 := r21 shifted by (r20 - r18);
     r24 := r22 shifted by (r20 - r18);
-    r25 := mediate(r23, r24, .2);
-    r26 := mediate(r24, r23, .2);
+    r25 := mediate(r23, r24, .125);
+    r26 := mediate(r24, r23, .125);
     if do_labels:
       dotlabel.lft("$r_{25}$", r25) on_picture flat_quadrant_picture[0];
       dotlabel.lft("$r_{26}$", r26) on_picture flat_quadrant_picture[0];
@@ -2296,17 +2298,21 @@ def get_flat_panels =
     r40 := mediate(r22, r26);
     r41 := mediate(r21, r25);
 
-    r42 := mediate(r40, r41, .333);
-    r43 := mediate(r40, r41, .667); 
+    r42 := mediate(r40, r41, .25);
+    r43 := mediate(r40, r41, .5); 
+    r50 := mediate(r40, r41, .75); 
+
     
     draw u0 on_picture flat_quadrant_picture[0];
     drawdot r42 with_pen stitch_pen on_picture flat_quadrant_picture[0];
     drawdot r43 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 with_pen stitch_pen on_picture flat_quadrant_picture[0];
     
     draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
 
     drawdot r42 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
     drawdot r43 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
     t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
     
@@ -2314,6 +2320,7 @@ def get_flat_panels =
 
     drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
     drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
     t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
     t6 := identity rotated (180, 0);
@@ -2322,6 +2329,7 @@ def get_flat_panels =
     draw u0 transformed t6 on_picture flat_quadrant_picture[1];
     drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
     drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
     for i = 0 upto 7:
       t5 := identity shifted (i * 5cm, 0);
@@ -2331,10 +2339,11 @@ def get_flat_panels =
       draw u0 transformed t6 on_picture flat_quadrant_picture[10 + i];
       drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
     endfor;
-
     
     
     for i = 8 upto 15:
@@ -2349,6 +2358,7 @@ def get_flat_panels =
       draw u0 transformed t5 with_color blue with_pen large_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
 
       t5 := identity rotated (180, 0);
       t6 := identity
@@ -2359,23 +2369,27 @@ def get_flat_panels =
       draw u0 transformed t5 with_color red with_pen large_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
     endfor;
     
     u1 := u0;
     r44 := r42;
     r45 := r43;
+    r51 := r50;
     t3 := identity shifted (5cm, 0);
     
     for j = 1 upto 7:
-      r45 *= r44 *= u1 *= t3;
+      r51 *= r45 *= r44 *= u1 *= t3;
       draw u1 on_picture flat_quadrant_picture[0];
       drawdot r44 with_pen stitch_pen on_picture flat_quadrant_picture[0];
       drawdot r45 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r51 with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
       t5 := identity rotated (180, 0);      
       draw u1 transformed t5 on_picture flat_quadrant_picture[0];
       drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
       drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
       
       t5 := identity
 	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
@@ -2383,6 +2397,7 @@ def get_flat_panels =
       draw u1 transformed t5 on_picture flat_quadrant_picture[1];
       drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
       drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
       t5 := identity rotated (180, 0);
       t6 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
@@ -2391,6 +2406,7 @@ def get_flat_panels =
       draw u1 transformed t5 on_picture flat_quadrant_picture[1];
       drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
       drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
       
     endfor;
 
@@ -2600,6 +2616,7 @@ def get_flat_panels =
   % r36 := get_point (3) flat_quadrant[8][1];
     
 enddef;
+
 
 %% *** (3)
 
@@ -2893,7 +2910,7 @@ def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or
                                     numeric picture_ctr_two,
                                     numeric RA_one, numeric RA_two, numeric Decl,
                                     numeric label_pos, numeric shift_x, numeric shift_y,
-                                    boolean do_labels} =
+                                    boolean do_labels, boolean suppress_dot} =
   point P[];
 
   string star_name;
@@ -3037,8 +3054,10 @@ def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or
   % label.rt("{\small " & star_name & "}", P12 shifted (basic_shift_val, 0))
   %   on_picture flat_quadrant_picture[picture_ctr_two];
 
-  drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[picture_ctr_two];
-  drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[10 + RA_two];	
+  if not suppress_dot:
+    drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[picture_ctr_two];
+    drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[10 + RA_two];
+  fi;
 
 enddef;
 
