@@ -229,7 +229,9 @@ insert into paths (prefix, name) values ("abc", "r");
 
 select * from points where up = "r"\G
 
+show tables;
 
+select * from connectors;
 
 
 
@@ -245,6 +247,8 @@ create table connectors
    counter int not null default 0,
    connector varchar(2) default ""
 );
+
+
 
 insert into connectors () values ();
 select * from connectors\G
