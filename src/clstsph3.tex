@@ -1,6 +1,6 @@
 %% clstsph3.tex
 
-%% Created by Laurence D. Finston (LDF) Tue 07 Sep 2021 06:04:51 PM CEST
+%% Created by Laurence D. Finston (LDF) Tue Sep 7 18:05:02 2021 +0200
 
 %% * (1) Copyright and License.
 
@@ -47,7 +47,6 @@
 %%%% USA
 
 %%%% Laurence.Finston@gmx.de
-
 
 
 %% * (1)
@@ -94,7 +93,7 @@
 \sectionctr=0
 
 \def\tocchapterentry#1#2#3{\line{\hbox to \twozerosdimen{\hss #2}. {\medium #1 \dotfill\ #3}}}
-\def\tocsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip3em\ifdim\wd0>0pt{#2}. \fi{\medium #1} \dotfill\ #3}}
+\def\tocsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip3em\ifdim\wd0>0pt{#2}. \fi{\medium #1 \dotfill\ #3}}}
 
 \def\Chapter#1#2{\global\advance\chapctr by 1\sectionctr=0%
 \writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\the\chapctr}}
@@ -118,14 +117,14 @@
 \fi
 
 %% Uncomment for DIN A3 portrait.
-\iftrue % \iffalse
+\iffalse % \iftrue
 \special{papersize=297mm, 420mm} %% DIN A3 Portrait
 \vsize=420mm
 \hsize=297mm
 \fi
 
 %% Uncomment for A3 landscape.
-\iffalse % \iftrue
+\iftrue % \iffalse
 \special{papersize=420mm, 297mm} %% DIN A3 Landscape
 \vsize=297mm
 \hsize=420mm
@@ -141,9 +140,7 @@
 
 %% *** (3) 
 
-%% 12.25cm sphere radius: (* 7cm 1.75)
-
-\def\epsfsize#1#2{1.75#1}
+\def\epsfsize#1#2{#1}
 
 %% *** (3) 
 
@@ -165,9 +162,9 @@ Copyright (C) 2021 The Free Software Foundation
 
 \setbox0=\hbox{Last updated:\quad}
 
-\leavevmode\hbox to \wd0{Created:\hfil}September 7, 2021
+\leavevmode\hbox to \wd0{Created:\hfil}September 3, 2021
 
-\leavevmode\box0 September 7, 2021
+\leavevmode\box0 October 11, 2021 %% Last updated
 
 GNU 3DLDF is free software; you can redistribute it and/or modify 
 it under the terms of the GNU General Public License as published by 
@@ -214,113 +211,310 @@ Boston, MA  02110-1301 USA\hfil\break
 %\advance\parskip by 2pt
 \readtocfile
 \vskip1.5\baselineskip
+
+%% *** (3)
+
+\medium
+\Chapter{instructions}{Instructions}
+\centerline{{\largebx Instructions}}
+\hldest{xyz}{}{instructions}
+%\advance\baselineskip by 4pt
+\parskip=.5\baselineskip
+{\bf PLEASE NOTE!}  The author has tried to ensure that the following
+plans are correct, but as of September 6, 2021, he has not tested them
+yet himself.  As mentioned above, this material is distributed
+{\bf without a warranty}.  I recommend that users check it themselves before
+investing a lot of time and effort into cutting out the paper models.
+
+Any corrections will be gratefully received by the author.  Contact
+information can be found on the title page.
+
+The two models are provided in two versions each, white on black and black
+on white. They include the 200 brightest stars, except for Polaris,
+which would have been at an inconvenient location on the models,
+namely at the north pole.
+
+The separate file
+\href{https://www.gnu.org/software/3dldf/graphics/clstsph1_a4.pdf}{\Blue{clstsph1{\tt\char`\_}a4.pdf}}
+in DIN A4 format contains data for the stars on the models.
+
+The first model is made up of spherical biangles. They should not be
+folded but rather bent and attached to each other using the tabs on
+the left side, forming a sphere.
+
+The second model uses ``panels''. While the left and right sides of the sections
+appear to be curved, they are in fact made up of straight lines. The sections should
+be folded on the horizontal lines (declination) and again attached using the tabs.
+The result is an irregular polyhedron approximating a sphere.
+
+The ``globes'' on pages 11--12 illustrate how the positions of the
+stars on the spherical biangles and panels were derived.
+
+Assembling the models should present no particular difficulty except possibly for
+keeping the spherical biangles from slipping while attaching them to each other.
+A fast-setting glue might be helpful in this case, and/or patience.
+
+The longitudes of the stars are found by rotating counter-clockwise
+from right ascension $0\rm{h}\thinspace 0^\prime\thinspace 0^{\prime\prime}$.
+I believe that the result of this is that the model represents the celestial sphere
+as seen by an observer looking at it from the outside. I hope someone will correct me
+if I'm wrong. The famous early star atlas of Johannes Hevelius from 1690 also shows the stars
+in this way\numberedfootnote{Menzel, Donald H.~and Pasachoff, Jay M., {\it Stars and Planets.  Peterson Field Guides}, p.~21.}.
+
+However, in principle it wouldn't be difficult to reverse the representation. The difficulty would be
+in reversing the labels, but I think this problem could be solved.
+
+The plans could also be generated for larger or smaller models.
+In addition, the limit of 200 stars is arbitrary and was chosen to correspond to the size of
+these versions of the models (sphere radius 7cm).  
+As of September 6, 2021, the database table containing the star data has
+entries for over 1400 stars.  However, not all of the entries contain all of the necessary data yet.
+If you want to make models of a different size and/or with a different number of stars, please send
+an email to the author at the address listed above.
+\vskip2\baselineskip
 \endgroup
+
+\advance\hsize by -3cm
+
+\Chapter{greek alphabet}{Greek Alphabet}
+\hldest{xyz}{}{greek alphabet}
+\begingroup
+\medium
+\obeylines
+\setbox0=\hbox{$\displaystyle \theta$, $\vartheta$\quad}
+\setbox1=\vbox{\hbox{\hbox to \wd0{$\displaystyle \alpha$\hss} alpha}
+\hbox{\hbox to \wd0{$\displaystyle \beta$\hss} beta}
+\hbox{\hbox to \wd0{$\displaystyle \gamma$\hss} gamma}
+\hbox{\hbox to \wd0{$\displaystyle \delta$\hss} delta}
+\hbox{\hbox to \wd0{$\displaystyle \epsilon$, $\varepsilon$\hss} epsilon}
+\hbox{\hbox to \wd0{$\displaystyle \zeta$\hss} zeta}
+\hbox{\hbox to \wd0{$\displaystyle \eta$\hss} eta}
+\hbox{\hbox to \wd0{$\displaystyle \theta$, $\vartheta$\hss} theta}
+\hbox{\hbox to \wd0{$\displaystyle \iota$\hss} iota}
+\hbox{\hbox to \wd0{$\displaystyle \kappa$\hss} kappa}
+\hbox{\hbox to \wd0{$\displaystyle \lambda$\hss} lambda}
+\hbox{\hbox to \wd0{$\displaystyle \mu$\hss} mu}}
+
+\setbox2=\vbox{\hbox{\hbox to \wd0{$\displaystyle \nu$\hss} nu}
+\hbox{\hbox to \wd0{$\displaystyle \xi$\hss} xi}
+\hbox{\hbox to \wd0{$\displaystyle o$\hss} omicron}
+\hbox{\hbox to \wd0{$\displaystyle \pi$, $\varpi$\hss} pi}
+\hbox{\hbox to \wd0{$\displaystyle \rho$, $\varrho$\hss} rho}
+\hbox{\hbox to \wd0{$\displaystyle \sigma$, $\varsigma$\hss} sigma}
+\hbox{\hbox to \wd0{$\displaystyle \tau$\hss} tau}
+\hbox{\hbox to \wd0{$\displaystyle \upsilon$\hss} upsilon}
+\hbox{\hbox to \wd0{$\displaystyle \phi$, $\varphi$\hss} phi}
+\hbox{\hbox to \wd0{$\displaystyle \chi$\hss} chi}
+\hbox{\hbox to \wd0{$\displaystyle \psi$\hss} psi}
+\hbox{\hbox to \wd0{$\displaystyle \omega$\hss} omega}}
+
+\setbox3=\hbox{\box1\hskip4em\box2}
+\global\dimen3=\wd3
+\hbox to \dimen3{\hfil{\largebx Greek Alphabet}\hfil}
+\vskip1.5\baselineskip
+\box3
+\endgroup
+\begingroup
+\medium
+\parskip=0pt
+\baselineskip=12pt
+\count255=1
+\def\A{\begingroup\setbox0=\hbox{\medium 00.}\leavevmode\hbox to \wd0{\the\count255\global\advance\count255 by 1.\hss}~\endgroup}
+\Chapter{constellations}{Constellations}
+\hldest{xyz}{}{constellations}
+\vskip2.5\baselineskip
+\hbox to \dimen3{\hfil{\largebx Constellations}\hfil}
+\vskip1.5\baselineskip
+{\mediumbx Full name}, genitive, abbreviation.
+\vskip.5\baselineskip
+\triplecolumns
+\obeylines
+\parskip=0pt
+\baselineskip=16pt
+\A {\mediumbx Andromeda}, Andromedae, And
+\A {\mediumbx Antlia}, Antliae, Ant
+\A {\mediumbx Apus}, Apodis, Aps
+\A {\mediumbx Aquarius}, Aquarii, Aqr
+\A {\mediumbx Aquila}, Aquilae, Aql
+\A {\mediumbx Ara}, Arae, Ara
+\A {\mediumbx Aries}, Arietis, Ari
+\A {\mediumbx Auriga}, Aurigae, Aur
+\A {\mediumbx Bo{\"o}tes}, Bo{\"o}tis, Boo
+\A {\mediumbx Caelum}, Caeli, Cae
+\A {\mediumbx Camelopardalis}, Camelopardalis, Cam
+\A {\mediumbx Cancer}, Cancri, Cnc
+\A {\mediumbx Canes Venatici}, Canum Venaticorum, CVn
+\A {\mediumbx Canis Major}, Canis Majoris, CMa
+\A {\mediumbx Canis Minor}, Canis Minoris, CMi
+\A {\mediumbx Capricornus}, Capricorni, Cap
+\A {\mediumbx Carina}, Carinae, Car
+\A {\mediumbx Cassiopeia}, Cassiopeiae, Cas
+\A {\mediumbx Centaurus}, Centauri, Cen
+\A {\mediumbx Cepheus}, Cephei, Cep
+\A {\mediumbx Cetus}, Ceti, Cet
+\A {\mediumbx Chamaeleon}, Chamaeleontis, Cha
+\A {\mediumbx Circinus}, Circini, Cir
+\A {\mediumbx Columba}, Columbae, Col
+\A {\mediumbx Coma Berenices}, Comae Berenices, Com
+\A {\mediumbx Corona Borealis}, Coronae Borealis, CrB
+\A {\mediumbx Corona Australis}, Coronae Australis, Cra
+\A {\mediumbx Corvus}, Corvi, Crv
+\A {\mediumbx Crater}, Crateris, Crt
+\A {\mediumbx Crux}, Crucis, Cru
+\A {\mediumbx Cygnus}, Cygni, Cyg
+\A {\mediumbx Delphinus}, Delphini, Del
+\A {\mediumbx Dorado}, Doradus, Dor
+\A {\mediumbx Draco}, Draconis, Dra
+\A {\mediumbx Equuleus}, Equulei, Equ
+\A {\mediumbx Eridanus}, Eridani, Eri
+\A {\mediumbx Fornax}, Fornacis, For
+\A {\mediumbx Gemini}, Geminorum, Gem
+\A {\mediumbx Grus}, Gruis, Gru
+\A {\mediumbx Hercules}, Herculis, Her
+\A {\mediumbx Horologium}, Horologii, Hor
+\A {\mediumbx Hydra}, Hydrae, Hya
+\A {\mediumbx Hydrus}, Hydri, Hyi
+\A {\mediumbx Indus}, Indi, Ind
+\A {\mediumbx Lacerta}, Lacertae, Lac
+\A {\mediumbx Leo}, Leonis, Leo
+\A {\mediumbx Leo Minor}, Leonis Minoris, LMi
+\A {\mediumbx Lepus}, Leporis, Lep
+\A {\mediumbx Libra}, Librae, Lib
+\A {\mediumbx Lupus}, Lupi, Lup
+\A {\mediumbx Lynx}, Lyncis, Lyn
+\A {\mediumbx Lyra}, Lyrae, Lyr
+\A {\mediumbx Mensa}, Mensae, Men
+\A {\mediumbx Microscopium}, Microscopii, Mic
+\A {\mediumbx Monoceros}, Monocerotis, Mon
+\A {\mediumbx Musca}, Muscae, Mus
+\A {\mediumbx Norma}, Normae, Nor
+\A {\mediumbx Octans}, Octantis, Oct
+\A {\mediumbx Ophiuchus}, Ophiuchi, Oph
+\A {\mediumbx Orion}, Orionis, Ori
+\A {\mediumbx Pavo}, Pavonis, Pav
+\A {\mediumbx Pegasus}, Pegasi, Peg
+\A {\mediumbx Perseus}, Persei, Per
+\A {\mediumbx Phoenix}, Phoenicis, Phe
+\A {\mediumbx Pictor}, Pictoris, Pic
+\A {\mediumbx Pisces}, Piscium, Psc
+\A {\mediumbx Piscis Austrinus}, Piscis Austrini, PsA
+\A {\mediumbx Puppis}, Puppis, Pup
+\A {\mediumbx Pyxis}, Pyxidis, Pyx
+\A {\mediumbx Reticulum}, Reticuli, Ret
+\A {\mediumbx Sagitta}, Sagittae, Sge
+\A {\mediumbx Sagittarius}, Sagittarii, Sgr
+\A {\mediumbx Scorpius}, Scorpii, Sco
+\A {\mediumbx Sculptor}, Sculptoris, Scl
+\A {\mediumbx Scutum}, Scuti, Sct
+\A {\mediumbx Serpens}, Serpentis, Ser
+\A {\mediumbx Sextans}, Sextantis, Sex
+\A {\mediumbx Taurus}, Tauri, Tau
+\A {\mediumbx Telescopium}, Telescopii, Tel
+\A {\mediumbx Triangulum}, Trianguli, Tri
+\A {\mediumbx Triangulum Australe}, Trianguli Australis, TrA
+\A {\mediumbx Tucana}, Tucanae, Tuc
+\A {\mediumbx Ursa Major}, Ursae Majoris, UMa
+\A {\mediumbx Ursa Minor}, Ursae Minoris, UMi
+\A {\mediumbx Vela}, Velorum, Vel
+\A {\mediumbx Virgo}, Virginis, Vir
+\A {\mediumbx Volans}, Volantis, Vol
+\A {\mediumbx Vulpecula}, Vulpeculae, Vul
+\singlecolumn
 \vfil\eject
+\endgroup
+\advance\hsize by 3cm
 
 %% **** (4)
 
+\headline={\hfil {\tt \timestamp}\hskip4.5cm}
+
 \begingroup
-\advance\hoffset by -.25cm
-\advance\voffset by -1.5cm
-\headline={\lower1cm\hbox to \hsize{\hfil {\tt \timestamp}\hskip2.5cm}}
+\advance\hoffset by 2cm
+
+%% **** (4) Spherical biangles
+
+%% ***** (5) black on white 1
+
 \Chapter{spherical biangles}{Spherical Biangles}
-\hldest{fit}{}{spherical biangles}
-\vbox to 0pt{\centerline{{\largebx Spherical Biangles}}\vskip\baselineskip
-\line{\epsffile{clstsph1.0}\hskip0cm\epsffile{clstsph1.1}\hss}\vss}
+\vskip\baselineskip
+\hldest{xyz}{}{spherical biangles}
+\centerline{{\largebx Spherical Biangles}}
+\vskip3\baselineskip
+\Section{sb white on black}{White on Black Background}
+\hldest{xyz}{}{sb white on black}
+\line{\epsffile{clstsph3.0}\hskip1cm\epsffile{clstsph3.1}\hskip1cm\epsffile{clstsph3.2}\hskip1cm
+\epsffile{clstsph3.3}\hss}
 \vfil\eject
-\line{\epsffile{clstsph1.2}\hskip0cm\epsffile{clstsph1.3}\hss}
+
+%% ***** (5) Black on white 2
+
+\line{\epsffile{clstsph3.4}\hskip1cm\epsffile{clstsph3.5}\hskip1cm
+\epsffile{clstsph3.6}\hskip1cm\epsffile{clstsph3.7}\hss}
 \vfil\eject
-\line{\epsffile{clstsph1.4}\hskip0cm\epsffile{clstsph1.5}\hss}
+\endgroup
+
+%% **** (4) Panels
+
+\headline={\hfil {\tt \timestamp}\hskip2.5cm}
+
+%% ***** (5)
+
+\Chapter{panels}{Panels (Isoceles Trapezoids and Triangles)}
+\hldest{xyz}{}{panels}
+\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}
+\vskip3\baselineskip
+\Section{panels black on white}{Black on White Background}
+\hldest{xyz}{}{panels black on white}
+\line{\epsffile{clstsph3.12}\hss}
 \vfil\eject
-\line{\epsffile{clstsph1.6}\hskip0cm\epsffile{clstsph1.7}\hss}
+
+\line{\epsffile{clstsph3.13}\hss}
 \vfil\eject
 
 %% **** (4)
 
-\vbox to 0pt{\centerline{{\largebx Spherical Biangles}}\vskip\baselineskip
-\line{\epsffile{clstsph2.0}\hskip0cm\epsffile{clstsph2.1}\hss}\vss}
+\Chapter{globes}{Globes}
+\hldest{xyz}{}{globes}
+\centerline{{\largebx Globes}}
+\vskip2\baselineskip
+\line{\epsffile{clstsph3.8}\hskip.25cm\epsffile{clstsph3.9}\hss}
 \vfil\eject
-\line{\epsffile{clstsph2.2}\hskip0cm\epsffile{clstsph2.3}\hss}
+
+\line{\epsffile{clstsph3.10}\hskip.25cm\epsffile{clstsph3.11}\hss}
 \vfil\eject
-\line{\epsffile{clstsph2.4}\hskip0cm\epsffile{clstsph2.5}\hss}
-\vfil\eject
-\line{\epsffile{clstsph2.6}\hskip0cm\epsffile{clstsph2.7}\hss}
-\vfil\eject
-\endgroup
+
+%% ** (2) Testing
+
+%% \line{\epsffile{clstsph3.14}\hss}
+%% \vfil\eject
 
 %% *** (3)
 
-%% ** (2) Panels
-
 \begingroup
-\advance\hoffset by 1.5cm
-\advance\hsize by -4cm
-\setbox0=\hbox{\epsffile{clstsph3.1}}
-\Chapter{panels}{Panels (Isoceles Trapezoids and Triangles)}
-\vbox to 0pt{\vbox to 0pt{\vskip-2cm\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}\vss}%
-\hldest{fit}{}{panels}%
-%\vskip2\baselineskip
-\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph3.0}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph3.1}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph3.2}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph3.3}\hss}\hss}%
-\vss}
-\vfil\eject
-
-\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph3.4}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph3.5}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph3.6}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph3.7}\hss}\hss}%
-\vss}
-\vfil\eject
-
-\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph3.8}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph3.9}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph3.10}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph3.11}\hss}\hss}%
-\vss}
-\vfil\eject
-
-\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph3.12}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph3.13}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph3.14}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph3.15}\hss}\hss}%
-\vss}
-\vfil\eject
-
-%% *** (3)
-
-\vbox to 0pt{\vbox to 0pt{\vskip-2cm\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}\vss}%
-\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.0}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.1}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph4.2}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.3}\hss}\hss}%
-\vss}
-\vfil\eject
-
-\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.4}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.5}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph4.6}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.7}\hss}\hss}%
-\vss}
-\vfil\eject
-
-\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.8}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.9}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph4.10}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.11}\hss}\hss}%
-\vss}
-\vfil\eject
-
-\vbox to 0pt{\line{\hskip-2cm\hbox to\wd0{\epsffile{clstsph4.12}\hss}\hskip1.5cm\hbox to\wd0{\epsffile{clstsph4.13}\hss}\hskip1.5cm
-\hbox to \wd0{\epsffile{clstsph4.14}\hss}\hskip1.5cm\hbox to \wd0{\epsffile{clstsph4.15}\hss}\hss}%
-\vss}
-\vfil\eject
-\endgroup
-
-
-%% *** (3) Copying
-
-\begingroup
+\advance\hsize by -.5\hsize
+\advance\hsize by -6cm
 \parskip=\baselineskip
-\global\advance\chapctr by 1
-\Chapter{Copying}{Copying}
-\hldest{fit}{}{Copying}
+\Chapter{copying}{Copying}
+\hldest{xyz}{}{copying}
+%\advance\baselineskip by -6pt
+\advance\hsize by 10in
 \Section{GPL}{GNU General Public License}
-\hldest{fit}{}{GPL}
-\listing{gpl-3.0.txt}
-\vfil\break
+\hldest{xyz}{}{GPL}
+\listing{gpl-3.0_a3.txt}
+\vfil\eject
 \Section{FDL}{GNU Free Documentation License}
-\hldest{fit}{}{FDL}
-\listing{fdl-1.3.txt}
+\hldest{xyz}{}{FDL}
+\listing{fdl-1.3_a3.txt}
+\vfil\eject
 \endgroup
 
+%% *** (3)
+
+%% \line{\epsffile{clstsph3.14}\hss}
+%% \vfil\eject
+
+
+%% *** (3) End here
 
 \bye
 

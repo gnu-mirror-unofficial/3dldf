@@ -1,5 +1,5 @@
-%%%% clstsph3.aux
-%%%% Created by Laurence D. Finston (LDF) Tue 07 Sep 2021 05:51:19 PM CEST
+%%%% clstsph1.aux
+%%%% Created by Laurence D. Finston (LDF) Wed 14 Jul 2021 03:22:02 PM CEST
 
 %% * (1) Copyright and License.
 
@@ -66,134 +66,318 @@ else:
   label_color := black;
 fi;
 
+%% ** (2)
+
+%% *** (3)
+
 beginfig(0);
-  for i = 1 upto 8:
-    draw flat_quadrant[0][i];
-    draw flat_quadrant[0][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[10];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[0] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture with_projection parallel_x_y;
+  output qv[0] with_projection parallel_x_y;
+  output tab_picture with_projection parallel_x_y;
+  
+  p200 := origin shifted by .5 * (p24 - p20);
+
+  label.rt("$\scriptstyle 0\rm{h}$", p200 shifted (-1pt, 0)) rotated (0, 0, 90)
+    with_text_color label_color;
+
+  %draw p24 -- p20 with_color red;
+
+  p201 := mediate(p20, p24, .5);
+
+  n0 := (p24 - p20) angle (p21 - p20);
+  label.rt("$\scriptstyle 22\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+
+  n1 := ypart p25 - ypart p21;
+  
+  label.urt("$\scriptstyle 0^\circ$", origin) with_text_color label_color;
+  p202 := origin shifted (0, n1);
+  label.urt("$\scriptstyle 11^\circ 15^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 45^\circ$", p202) with_text_color label_color;
+  label.urt("$\scriptscriptstyle -45^\circ$", (p202 rotated (180, 0)) shifted (0, -1.5pt))  with_text_color label_color;
+  shift p202 (0, n1);
+  label.llft("$\scriptstyle 56^\circ 15^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -56^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -67^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.top("$\scriptscriptstyle 78^\circ \hskip2pt 45^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
+  label.bot("$\scriptscriptstyle -78^\circ\hskip-.5pt 45^\prime$", (p202 rotated (180, 0)) shifted (.5pt, 0))
+    with_text_color label_color;
+  
+  %drawdot mediate(mediate(p24, p25, .5), mediate(p20, p21, .5), .5) with_pen medium_pen;
+ 
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(1);
-  for i = 1 upto 8:
-    draw flat_quadrant[1][i];
-    draw flat_quadrant[1][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[11];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[1] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture with_projection parallel_x_y;
+  output qv[1] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  label.rt("$\scriptstyle 1\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+
+  label.rt("$\scriptstyle 3\rm{h}$",
+           p200 shifted (-1pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
+
+  
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(2);
-  for i = 1 upto 8:
-    draw flat_quadrant[2][i];
-    draw flat_quadrant[2][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[12];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[2] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture  with_projection parallel_x_y;
+  output qv[2] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  
+  label.rt("$\scriptscriptstyle 4\rm{h}\kern .11111em 30^\prime$",
+      p201 shifted (-2pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+  
+  label.rt("$\scriptstyle 6\rm{h}$",
+           p200 shifted (-1pt, 0pt)) rotated (0, 0, 90) with_text_color label_color;
+  
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(3);
-  for i = 1 upto 8:
-    draw flat_quadrant[3][i];
-    draw flat_quadrant[3][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[13];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[3] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture  with_projection parallel_x_y;
+  output qv[3] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  label.rt("$\scriptscriptstyle 7\rm{h}\kern .11111em 30^\prime$",
+      p201 shifted (-1.5pt, .5cm - 3pt)) rotated (0, 0, n0) with_text_color label_color;
+  
+  label.rt("$\scriptstyle 9\rm{h}$",
+           p200 shifted (-1pt, -.333cm - 2pt)) rotated (0, 0, 90) with_text_color label_color;
+
+  
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(4);
-  for i = 1 upto 8:
-    draw flat_quadrant[4][i];
-    draw flat_quadrant[4][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[14];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[4] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture  with_projection parallel_x_y;
+  output qv[4] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  label.rt("$\scriptstyle 10\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+    with_text_color label_color;
+  
+  label.rt("$\scriptstyle 12\rm{h}$",
+           p200 shifted (-1pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+ 
+  label.urt("$\scriptstyle 0^\circ$", origin) with_text_color label_color;
+  p202 := origin shifted (0, n1);
+  label.lrt("$\scriptstyle 11^\circ 15^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", (p202 rotated (180, 0)) shifted (0, 1pt))
+    with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 45^\circ$", p202) with_text_color label_color;
+  label.urt("$\scriptstyle -45^\circ$", p202 rotated (180, 0))  with_text_color label_color;
+  shift p202 (0, n1);
+  label.lrt("$\scriptstyle 56^\circ 15^\prime$", p202 shifted (-1pt, -1pt)) with_text_color label_color;
+  label.urt("$\scriptscriptstyle -56^\circ 15^\prime$", p52 shifted (-2pt, .5pt)) with_text_color label_color;
+  shift p202 (0, n1);
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", p202) with_text_color label_color;
+  label.llft("$\scriptscriptstyle -67^\circ 30^\prime$", (p202 rotated (180, 0)) shifted (1.5pt, 0pt))
+    with_text_color label_color;
+  shift p202 (0, n1);
+  label.top("$\scriptscriptstyle 78^\circ \hskip2pt 45^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
+  label.bot("$\scriptscriptstyle -78^\circ\hskip-.5pt 45^\prime$", (p202 rotated (180, 0)) shifted (.5pt, 0))
+    with_text_color label_color;
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(5);
-  for i = 1 upto 8:
-    draw flat_quadrant[5][i];
-    draw flat_quadrant[5][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[15];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[5] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture  with_projection parallel_x_y;
+  output qv[5] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  label.rt("$\scriptstyle 13\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+    with_text_color label_color;
+  
+  label.rt("$\scriptstyle 15\rm{h}$",
+           p200 shifted (-1pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+ 
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(6);
-  for i = 1 upto 8:
-    draw flat_quadrant[6][i];
-    draw flat_quadrant[6][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[16];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[6] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture  with_projection parallel_x_y;
+  output qv[6] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  label.rt("$\scriptstyle 16\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+    with_text_color label_color;
+  
+  label.rt("$\scriptstyle 18\rm{h}$",
+           p200 shifted (-1pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+endfig with_projection parallel_x_y;
+
+%% *** (3)
 
 beginfig(7);
-  for i = 1 upto 8:
-    draw flat_quadrant[7][i];
-    draw flat_quadrant[7][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[17];
-endfig with_projection parallel_x_y no_sort; 
+  output bi_ang_pict[7] with_projection parallel_x_y;
+  draw_lines;
+  output current_picture  with_projection parallel_x_y;
+  output qv[7] with_projection parallel_x_y;
+  tab_picture := save_picture;
+  output tab_picture with_projection parallel_x_y;
+
+  label.rt("$\scriptstyle 19\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+    with_text_color label_color;
+  
+  label.rt("$\scriptstyle 21\rm{h}$",
+           p200 shifted (-1pt, 0)) rotated (0, 0, 90) with_text_color label_color;
+
+endfig with_projection parallel_x_y;
+
+%% *** (3)
+
+%% ** (2)
+
+focus f;
+
+set f with_position (0, 20, -50) 
+  with_direction (0, 20, 10) with_distance 70; 
+
+%% *** (3)
 
 beginfig(8);
-  for i = 1 upto 8:
-    draw flat_quadrant[8][i];
-    draw flat_quadrant[8][-i];
+  rotate v8 (0, 22.5);
+  current_picture := v8;
+  i := 0;
+  forever:
+    exit_if i >= size pv;
+    %message "In Fig. 8:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
   endfor;
-  current_picture += flat_quadrant_picture[18];
-endfig with_projection parallel_x_y no_sort; 
+  current_picture += quadrant_picture;
+  label("{\\bf Perspective Projection}", (0, -(radius + 1.25cm)));
+endfig with_focus f;
+
+%% *** (3)
 
 beginfig(9);
-  for i = 1 upto 8:
-    draw flat_quadrant[9][i];
-    draw flat_quadrant[9][-i];
+  currentpicture := v9;
+  i := 1;
+  forever:
+    exit_if i >= size pv;
+    %message "In Fig. 9:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
   endfor;
-  current_picture += flat_quadrant_picture[19];
-endfig with_projection parallel_x_y no_sort; 
+  label("{\\bf Parallel X-Y} (Viewed from the front)", (0, -(radius + 1.25cm)));
+  current_picture += quadrant_picture;
+endfig with_projection parallel_x_y; 
+
+%% *** (3)
 
 beginfig(10);
-  for i = 1 upto 8:
-    draw flat_quadrant[10][i];
-    draw flat_quadrant[10][-i];
+  currentpicture := v10;
+  i := 2;
+  forever:
+    exit_if i >= size pv;
+    %message "In Fig. 10:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
   endfor;
-  current_picture += flat_quadrant_picture[20];
-endfig with_projection parallel_x_y no_sort; 
+  label("{\\bf Parallel X-Z} (Viewed from above)", (0, 0, -(radius + 1.25cm)));
+  current_picture += quadrant_picture;
+endfig with_projection parallel_x_z; 
+
+%% *** (3)
 
 beginfig(11);
-  for i = 1 upto 8:
-    draw flat_quadrant[11][i];
-    draw flat_quadrant[11][-i];
+  currentpicture := v11;
+  i := 3;
+  forever:
+    exit_if i >= size pv;
+    %message "In Fig. 11:  Outputting pv" & decimal i & ".";
+    current_picture += pv[i];
+    i += 4;
   endfor;
-  current_picture += flat_quadrant_picture[21];
-endfig with_projection parallel_x_y no_sort; 
+  label("{\\bf Parallel Z-Y} (Viewed from the right side)", (0, -(radius + 1.25cm)));
+  current_picture += quadrant_picture;
+endfig with_projection parallel_z_y; 
+
+%% *** (3)
 
 beginfig(12);
-  for i = 1 upto 8:
-    draw flat_quadrant[12][i];
-    draw flat_quadrant[12][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[22];
-endfig with_projection parallel_x_y no_sort; 
+  current_picture += flat_quadrant_picture[0];
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  current_picture += flat_quadrant_picture[2];
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+  current_picture += flat_quadrant_picture[4];
+
+endfig with_projection parallel_x_y; 
+
+%% *** (3)
 
 beginfig(13);
-  for i = 1 upto 8:
-    draw flat_quadrant[13][i];
-    draw flat_quadrant[13][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[23];
-endfig with_projection parallel_x_y no_sort; 
+  current_picture += flat_quadrant_picture[1];
+  output current_picture with_projection parallel_x_y no_sort;
+  clear current_picture;
+  current_picture += flat_quadrant_picture[3];
+endfig with_projection parallel_x_y no_sort no_sort; 
 
-beginfig(14);
-  for i = 1 upto 8:
-    draw flat_quadrant[14][i];
-    draw flat_quadrant[14][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[24];
-endfig with_projection parallel_x_y no_sort; 
+%% *** (3)
 
-beginfig(15);
-  for i = 1 upto 8:
-    draw flat_quadrant[15][i];
-    draw flat_quadrant[15][-i];
-  endfor;
-  current_picture += flat_quadrant_picture[25];
-endfig with_projection parallel_x_y no_sort; 
+% beginfig(14);
+% endfig with_projection parallel_x_y;
 
+%% *** (3)
+
+if do_write:
+  write "\n%% Local " & "Variables:\n%% auto-fill-function:nil\n%% End:\n\n" to star_info_combined;
+  close star_info_combined;
+fi;
 
 endinput;  
 
