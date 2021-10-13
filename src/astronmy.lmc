@@ -383,8 +383,8 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
     p107 := mediate(p103, p105, .6);
 
     tab[j] := p[i] -- p106 -- p107 -- p[i+2];
-    draw tab[j] on_picture tab_picture;
-    draw tab[j] rotated (180, 0) on_picture tab_picture;
+    %draw tab[j] on_picture tab_picture;
+    %draw tab[j] rotated (180, 0) on_picture tab_picture;
     j += 1;
   endfor;
 
@@ -981,8 +981,6 @@ enddef;
 %% ** (2) Macro plot_star_on_spherical_biangle
 
 macro plot_star_on_spherical_biangle;
-
-%input "www.lmc";
 
 def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos,
                                     numeric shift_x, numeric shift_y,
@@ -1699,7 +1697,6 @@ def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_
   %draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];  
 
 enddef;
-
 
 %% ** (2) macro draw_lines
 
@@ -3166,6 +3163,14 @@ def draw_stitches {boolean do_labels} =
   %message "Exiting draw_stitches.";
   
 enddef;
+
+%% ** (2) macro plot_stitches_on_spherical_biangle
+
+%input "xxx.lmc";
+
+input "www.lmc";
+
+
 
 %% *** (3)
 

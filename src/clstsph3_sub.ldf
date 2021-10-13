@@ -111,7 +111,7 @@ fi;
 boolean do_labels;
 do_labels := false; % true; % 
 
-get_spherical_biangles {radius, do_labels}; 
+get_spherical_biangles {radius, true}; % false %% (do_labels)
 
 get_sphere_for_plotting_stars {radius};
 
@@ -119,7 +119,9 @@ get_panels {radius};
 
 get_flat_panels;
 
-draw_stitches {false};
+%draw_stitches {false};
+
+plot_stitches_on_spherical_biangles;
 
 %% ** (2) Plot the stars.
 
