@@ -1120,7 +1120,7 @@ clstsph3.dvi: clstsph3.tex clstsph3.0
 clstsph3.0 clstsph3.1: clstsph3.mp 
 	mpost -numbersystem "double" clstsph3.mp
 
-clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph1_sub.ldf astronmy.lmc clstsph3.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph3_sub.ldf astronmy.lmc clstsph3.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph3.ldf
 
 clstsph5.pdf: clstsph5.dvi
