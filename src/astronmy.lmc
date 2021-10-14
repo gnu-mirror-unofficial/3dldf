@@ -3173,11 +3173,155 @@ enddef;
 
 %% ** (2) macro plot_stitches_on_spherical_biangles
 
-input "www.lmc";
+macro get_point_on_spherical_biangle;
 
+def get_point_on_spherical_biangle (pp) {numeric index, numeric ra, numeric decl,
+                                         numeric rradius, boolean ddraw_dot, numeric biangle,
+                                         boolean ddo_black} =
 
+  %message "Entering macro `get_point_on_spherical_biangle'.";
+  
+  point P[];
+  circle c[];
+  numeric a[];
 
+  color ccolor;
+  
+  if ddo_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+  c0 := unit_circle scaled (rradius, 0, rradius);
+
+  P0 := (rradius, 0) rotated (0, 0, decl);
+
+  % message "P0:";
+  % show P0;
+  
+  P1 := P0 rotated (0, ra);
+
+  % message "P1:";
+  % show P1;
+
+  P2 := (0, ypart P1);  %% Point on y-axis with height corresponding to declination
+
+  % message "P2:";
+  % show P2;
+
+  a0 := magnitude(P1 - P2);
+
+  % message "a0 (radius of circle through P1):";
+  % show a0;
+
+  c1 := unit_circle scaled (a0, 0, a0) shifted (0, ypart P2);
+
+  if decl == 0:
+    a1 := 0;
+  else:
+    a1 := arc_length (magnitude(decl)) c0;
+  fi;
+
+  % message "a1 (arc length corresponding to declination):";
+  % show a1;
+
+  a2 := circumference c1;   %% a2 == Circumference of circle at height corresponding to declination
+
+  a3 := (a2 * ra) / 360;
+
+  % message "a3:";
+  % show a3;
+  
 %% *** (3)
+
+  pp[index] := (a3, a1);
+
+  if ddraw_dot:
+    drawdot  pp[index] with_color ccolor with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[biangle];
+  fi;
+  
+  % message "Exiting macro `get_point_on_spherical_biangle'.";  
+  
+enddef;
+
+%% ** (2) macro plot_stitches_on_spherical_biangles
+
+macro plot_stitches_on_spherical_biangles;
+
+def plot_stitches_on_spherical_biangles =
+
+  % message "Entering macro `plot_stitches_on_spherical_biangles'.";
+
+  point m[];
+  point n[];
+  color ccolor;
+  path q[];
+
+  q0 += ..;
+  q1 += ..;
+  
+  j := 0;
+  for i := 0 step 3 until 80:
+    get_point_on_spherical_biangle (m) {j, 27.5, i, radius, false, 0, do_black};
+    get_point_on_spherical_biangle (n) {j, 17.5, i, radius, false, 0, do_black};
+    rotate n[j] (0, 180);
+    %drawdot n[j] with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[0];
+    q0 += m[j];
+    q1 += n[j];
+    % message "m[" & decimal j & "]:";
+    % show m[j];
+    j += 1;
+  endfor;
+
+  get_point_on_spherical_biangle (m) {j, 27.5, 78.75, radius, false, 0, do_black};
+  get_point_on_spherical_biangle (n) {j, 27.5, 78.75, radius, false, 0, do_black};
+  q0 += m[j];
+  rotate n[j] (0, 180);
+  q1 += n[j];
+
+  last_pt_ctr := j;
+
+  point A[];
+  point B[];
+  
+  j := 0;
+  for i := 0 step 2.5 until 78:
+    get_point_on_spherical_biangle (A) {j, 25, i, radius, false, 0, do_black};
+    get_point_on_spherical_biangle (B) {j, 20, i, radius, false, 0, do_black};
+    rotate B[j] (0, 180);
+    for k = 0 upto 7:
+      drawdot A[j] with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[k];
+      drawdot B[j] with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[k];
+      drawdot A[j] rotated (180, 0) with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[k];
+      drawdot B[j] rotated (180, 0) with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[k];
+    endfor;
+    j += 1;
+  endfor;
+  
+  for i = 0 upto 7:
+
+    draw q0 on_picture qv[i];
+    %draw q1 with_color dark_gray on_picture qv[i];
+
+    draw m[last_pt_ctr] -- p37 on_picture qv[i];
+    %draw n[last_pt_ctr] -- p36 with_color dark_gray on_picture qv[i];
+
+    draw q0 rotated (180, 0) on_picture qv[i];
+    %draw q1 rotated (180, 0) with_color dark_gray on_picture qv[i];
+  
+    draw (m[last_pt_ctr] -- p37) rotated (180, 0) on_picture qv[i];
+    %draw (n[j] -- p36) rotated (180, 0) with_color dark_gray on_picture qv[i];
+  endfor;
+    
+%% *** (3)
+  
+  % message "Exiting plot_stitches_on_spherical_biangles";
+
+enddef;
+
+
+%% ** (2)
 
 endinput;
 
