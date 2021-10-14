@@ -61,7 +61,6 @@ numeric Declination_arc_length;
 numeric middle_angle;   
 numeric min_edge_angle; 
 numeric max_edge_angle;
-point ra_decl_zero_pt;
 point R[];
 picture_vector pv;
 picture qv[];
@@ -98,6 +97,9 @@ path quadrant[][];
 path flat_quadrant[][];
 path temp_path[];
 path tab[];
+
+point stitch_pt_sphere[];
+point stitch_pt_biangle[];
 
 point temp_star_panel_point;
 temp_star_panel_point := origin;
@@ -527,7 +529,312 @@ enddef;
 
 macro plot_star_on_sphere;
 
-input "yyy.lmc";
+def plot_star_on_sphere (pp) {numeric rradius, star S} =
+
+  path q[];
+  string u[];
+  point P[];
+  circle c[];
+  numeric a[];
+  transform t[];
+  point ra_decl_zero_pt;
+  
+  pv += 4;
+  c0 := unit_circle scaled (rradius, 0, rradius);
+  
+  ra_decl_zero_pt := (rradius, 0);
+  
+  u0 := common_name S;
+  %message "star S == " & u0 & ".";
+
+  a0 := ra_decimal_degrees S;
+  %message "RA decimal deg. of star S (" & u0 & ") (a0):";
+  %show a0;
+
+  a1 := declination_decimal_degrees S;
+  %message "Declination decimal deg. of star S (" & u0 & ") (a1):";
+  %show a1;
+
+  P17 := ra_decl_zero_pt rotated (0, a0);
+  %dotlabel.top("$P_{17}$", P17) pv[ctr];
+  %label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
+  %dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
+
+  P19 := ra_decl_zero_pt rotated (0, 0, a1);
+  %dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
+  %dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr + 1];
+
+  P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
+
+  pp := P22;
+
+  q0 := origin -- P17 -- P22 --cycle;
+
+  % draw q0 with_color blue on_picture pv[ctr];
+  % draw q0 with_color blue on_picture pv[ctr + 1];
+  % draw q0 with_color blue on_picture pv[ctr + 2];
+  % draw q0 with_color blue on_picture pv[ctr + 3];
+
+  P23 := get_normal q0;
+  %show P23;
+
+  t0 := identity rotated_around (origin, P23) 3;
+
+  P24 := P17 transformed t0; 
+
+  if (magnitude (P22 - P24)) > (magnitude (P22 - P17)):
+    invert t0;
+  fi;
+
+  P24 := P17;
+  
+  q1 += ..;
+
+  q1 += P17;
+
+  forever:
+    P24 *= t0;
+    exit_if magnitude(ypart P24) >= magnitude(ypart P22);
+    q1 += P24;
+  endfor;
+
+  q1 += P22;
+
+  % draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
+  % draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
+  % draw q1 on_picture pv[ctr + 3] with_pen medium_pen with_color orange;
+
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
+  %message "a0 (RA of star S in decimal degrees):";
+  %show a0;
+
+  if (a0 == 337.5):
+    %message "a0 (RA) == 337.5";
+    bi_ang0 := 0;
+    bi_ang1 := 7;
+  elseif (a0 > 337.5) or (a0 < 22.5):
+    %message "a0 (RA) > 337.5 or < 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := -1;
+    middle_angle := 0;       %% This case requires special handling.
+    min_edge_angle := 337.5;
+    max_edge_angle := 22.5;
+  elseif (a0 == 22.5):
+    %message "a0 (RA) == 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := 1;
+  elseif (a0 > 22.5) and (a0 < 67.5):
+    %message "a0 (RA) > 22.5 or a0 < 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := -1;
+    middle_angle   := 45;
+    min_edge_angle := 22.5;
+    max_edge_angle := 67.5;
+  elseif (a0 == 67.5):
+    %message "a0 (RA) == 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := 2;
+  elseif (a0 > 67.5) and (a0 < 112.5):
+    %message "a0 (RA) > 67.5 and a0 < 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := -1;
+    middle_angle   := 90;
+    min_edge_angle := 67.5;
+    max_edge_angle := 112.5;
+  elseif (a0 == 112.5):
+    %message "a0 (RA) == 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := 3;
+  elseif (a0 > 112.5) and (a0 < 157.5):
+    bi_ang0 := 3;
+    bi_ang1 := -1;
+    middle_angle   := 135;
+    min_edge_angle := 112.5;
+    max_edge_angle := 157.5;
+  elseif a0 == 157.5:
+    %message "a0 (RA) == 157.5";
+    bi_ang0 := 3;
+    bi_ang1 := 4;
+  elseif (a0 > 157.5) and (a0 < 202.5):
+    %message "a0 (RA) > 157.5 and a0 < 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := -1;
+    middle_angle   := 180;
+    min_edge_angle := 157.5;
+    max_edge_angle := 202.5;
+  elseif a0 == 202.5:
+    %message "a0 (RA) == 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := 5;
+  elseif (a0 > 202.5) and (a0 < 247.5):
+    %message "a0 (RA) > 202.5 and a0 < 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := -1;
+    middle_angle   := 225;
+    min_edge_angle := 202.5;
+    max_edge_angle := 247.5;
+  elseif a0 == 247.5:
+    %message "a0 (RA) == 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := 6;
+  elseif (a0 > 247.5) and (a0 < 292.5):
+    %message "a0 (RA) > 247.5 and a0 < 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := -1;
+    middle_angle   := 270;
+    min_edge_angle := 247.5;
+    max_edge_angle := 292.5;
+  elseif a0 == 292.5:
+    %message "a0 (RA) == 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := 7;
+  elseif (a0 > 292.5) and (a0 < 337.5):
+    %message "a0 (RA) > 292.5 and a0 < 337.5";
+    bi_ang0 := 7;
+    bi_ang1 := -1;
+    middle_angle   := 315;
+    min_edge_angle := 292.5;
+    max_edge_angle := 337.5;
+  else:
+    errmessage "a0 (RA) has invalid value.";
+  fi;
+
+  %message "bi_ang0:"; 
+  %show bi_ang0;
+
+  %message "bi_ang1:"; 
+  %show bi_ang1;
+
+  %message "middle_angle:";
+  %show middle_angle;   
+
+  %message "min_edge_angle:";
+  %show min_edge_angle; 
+
+  %message "max_edge_angle:";
+  %show max_edge_angle; 
+
+  %message "P22:";
+  %show P22;
+  
+  P25 := (0, ypart P22);  %% Point on y-axis with height corresponding to declination of star S.
+
+  %message "P25:";
+  %show P25;
+
+  %dotlabel.ulft("$P_{25}$", P25) on_picture pv[ctr];
+  %dotlabel.rt("$P_{25}$", P25) pv[ctr + 1];
+  %dotlabel.rt("$P_{25}$", P25) pv[ctr + 3];
+
+  %message "a1 (declination_decimal_degrees S)";
+  %show a1;
+
+  a2 := magnitude(P22 - P25);
+  %message "a2 (rradius of circle through P22):";
+  %show a2;
+
+  c1 := unit_circle scaled (a2, 0, a2) shifted (0, ypart P25);
+
+  % draw c1 with_color cyan on_picture pv[ctr];
+  % draw c1 with_color cyan on_picture pv[ctr + 1];
+  % draw c1 with_color cyan on_picture pv[ctr + 2];
+  % draw c1 with_color cyan on_picture pv[ctr + 3];
+  
+  a3 := arc_length (magnitude(a1)) c0;
+
+  %message "a3 (arc length corresponding to declination of star S):";
+  %show a3;
+
+  Declination_arc_length := a3;
+  
+  %message "a0 (RA of star S in decimal degrees):";
+  %show a0;
+
+  numeric middle_angle_one;
+  
+  if a0 >= 337.5:
+    middle_angle_one := 360;
+    a4 := 360 - a0;
+  else:
+    middle_angle_one := middle_angle;
+    a4 := middle_angle - a0;
+  fi;
+
+  if middle_angle_one > a0:
+    a4 := -magnitude(a4);
+  elseif middle_angle_one < a0:
+    a4 := -magnitude(a4);
+  fi;
+ 
+  if (a0 == middle_angle) or (a0 == middle_angle_one):
+    %message "a0 == middle_angle (or middle_angle_one) == " & decimal middle_angle
+    %  & ".  Don't need arc length for second arc.";
+    %message "Setting RA_arc_length to 0.";
+    RA_arc_length := 0;
+  else:
+    %message "a0 == " & decimal a0 & " is not equal to middle_angle == " & decimal middle_angle & ".";
+    %message "Will calculate second arc length.";
+    %message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
+    %show a4;
+    
+    q2 := q0 rotated (0, a4);
+
+    % draw q2 with_color magenta on_picture pv[ctr];
+    % draw q2 with_color magenta on_picture pv[ctr + 1];
+    % draw q2 with_color magenta on_picture pv[ctr + 2];
+    % draw q2 with_color magenta on_picture pv[ctr + 3];
+
+    P26 := P22 rotated (0, a4);
+    %dotlabel.bot("$P_{26}$", P26) on_picture pv[ctr];
+
+    a5 := arc_length (magnitude(a4)) c1;
+    %message "a5 (arc length of angle " & decimal magnitude(a4) & " of circle c1 with rradius " & decimal a2 & "):";
+    %show a5;
+
+    RA_arc_length := a5;
+    
+    P27 := P22;
+
+    a6 := magnitude(P26 - P22);
+
+    q3 += ..;
+    q3 += P27;
+
+    a7 := 3;
+    if a4 < 0:
+      a7 *= -1;
+    fi;
+    
+    forever:
+      exit_if magnitude(P27 - P22) > a6;
+      rotate P27 (0, a7);
+      q3 += P27;
+    endfor;
+
+    q3 += P26;
+    
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 1];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 2];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 3];
+
+  fi;
+
+  %message "Declination_arc_length:";
+  %show Declination_arc_length;
+
+  %message "RA_arc_length:";
+  %show RA_arc_length;
+
+  i += 4;
+  
+enddef;
+
 
 %% ** (2) macro get_sphere_for_plotting_stars
 
@@ -779,9 +1086,6 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
 
   %message "RA_arc_length:";
   %show RA_arc_length;
-
-  %message "ra_decl_zero_pt:";
-  %show ra_decl_zero_pt;
 
   if bi_ang1 == -1:
     %message "bi_ang0 == " & decimal bi_ang0 & " and bi_ang1 == -1.";
@@ -2867,7 +3171,7 @@ def draw_stitches {boolean do_labels} =
   
 enddef;
 
-%% ** (2) macro plot_stitches_on_spherical_biangle
+%% ** (2) macro plot_stitches_on_spherical_biangles
 
 input "www.lmc";
 
