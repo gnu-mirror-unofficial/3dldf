@@ -111,7 +111,7 @@ fi;
 boolean do_labels;
 do_labels := false; % true; % 
 
-get_spherical_biangles {radius, true}; % false %% (do_labels)
+get_spherical_biangles {radius, false}; % true %% (do_labels)
 
 get_sphere_for_plotting_stars {radius};
 
@@ -321,7 +321,7 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {pollux, temp_star_panel_po
 
 plot_star_on_sphere (star_point) {radius, fomalhaut};
 
-plot_star_on_spherical_biangle {fomalhaut, 18, label_pos_top, 3pt, 0, false, false};
+plot_star_on_spherical_biangle {fomalhaut, 18, label_pos_top, .25cm + 3pt, 0, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {fomalhaut, star_point};
 
@@ -849,7 +849,7 @@ label.lft("{\Small\vbox{\hbox{\hskip2pt Ko-}\vskip-5pt\hbox{chab}}}",
 
 plot_star_on_sphere (star_point) {radius, al_dhanab};
 
-plot_star_on_spherical_biangle {al_dhanab, 58, label_pos_top, .5cm, .125cm - 1pt, false, false};
+plot_star_on_spherical_biangle {al_dhanab, 58, label_pos_top, .75cm, .125cm - 1pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {al_dhanab, star_point};
 
@@ -1512,9 +1512,9 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {kraz, temp_star_panel_poin
 
 plot_star_on_sphere (star_point) {radius, ruchbah};
 
-plot_star_on_spherical_biangle {ruchbah, 109, label_pos_rt, 0, 0, false, false};
+plot_star_on_spherical_biangle {ruchbah, 109, label_pos_rt, .25cm + 2pt, 0, false, false};
 
-draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_pos_rt, -2.5pt, 0,
+draw_extra_label_on_spherical_biangle {ruchbah, R[109], 0, 1, Right, Top, label_pos_rt, 3pt, 0,
                                        false, false, false, false}; % true
 
 plot_star_on_panel (temp_star_panel_point) {ruchbah, star_point};
@@ -1971,6 +1971,8 @@ plot_star_on_flat_panel (temp_star_flat_panel_point) {turais, temp_star_panel_po
 
 %% *** (3) 139. Beta Trianguli Australis
 
+%% !! START HERE: LDF 2021.10.14.  Adjusting positions of labels.
+
 plot_star_on_sphere (star_point) {radius, beta_trianguli_australis};
 
 plot_star_on_spherical_biangle {beta_trianguli_australis, 139, label_pos_lft, 0, 0, false, true};
@@ -2282,7 +2284,7 @@ label.bot("{\SMALL {\SMALLgreek\char29} Carin{\ae}}", temp_star_flat_panel_point
 
 plot_star_on_sphere (star_point) {radius, matar};
 
-plot_star_on_spherical_biangle {matar, 161, label_pos_top, .25cm, -1.5pt, false, false};
+plot_star_on_spherical_biangle {matar, 161, label_pos_top, .5cm, -1.5pt, false, false};
 
 plot_star_on_panel (temp_star_panel_point) {matar, star_point};
 
