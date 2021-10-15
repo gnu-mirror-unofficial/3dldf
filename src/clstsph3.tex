@@ -102,33 +102,14 @@
 
 %% * (1)
 
-%% Uncomment for A4 portrait
-\iffalse % \iftrue
+%% DIN A4 portrait
+
+\iftrue % \iffalse
 \special{papersize=210mm, 297mm}
 \hsize=210mm
 \vsize=297mm
 \fi
 
-%% Uncomment for A4 landscape.
-\iffalse % \iftrue
-\special{papersize=297mm, 210mm}
-\hsize=297mm
-\vsize=210mm
-\fi
-
-%% Uncomment for DIN A3 portrait.
-\iffalse % \iftrue
-\special{papersize=297mm, 420mm} %% DIN A3 Portrait
-\vsize=420mm
-\hsize=297mm
-\fi
-
-%% Uncomment for A3 landscape.
-\iftrue % \iffalse
-\special{papersize=420mm, 297mm} %% DIN A3 Landscape
-\vsize=297mm
-\hsize=420mm
-\fi
 
 \advance\voffset by -1in
 \advance\voffset by 2cm
@@ -246,13 +227,6 @@ appear to be curved, they are in fact made up of straight lines. The sections sh
 be folded on the horizontal lines (declination) and again attached using the tabs.
 The result is an irregular polyhedron approximating a sphere.
 
-The ``globes'' on pages 11--12 illustrate how the positions of the
-stars on the spherical biangles and panels were derived.
-
-Assembling the models should present no particular difficulty except possibly for
-keeping the spherical biangles from slipping while attaching them to each other.
-A fast-setting glue might be helpful in this case, and/or patience.
-
 The longitudes of the stars are found by rotating counter-clockwise
 from right ascension $0\rm{h}\thinspace 0^\prime\thinspace 0^{\prime\prime}$.
 I believe that the result of this is that the model represents the celestial sphere
@@ -266,7 +240,7 @@ in reversing the labels, but I think this problem could be solved.
 The plans could also be generated for larger or smaller models.
 In addition, the limit of 200 stars is arbitrary and was chosen to correspond to the size of
 these versions of the models (sphere radius 7cm).  
-As of September 6, 2021, the database table containing the star data has
+As of October 15, 2021, the database table containing the star data has
 entries for over 1400 stars.  However, not all of the entries contain all of the necessary data yet.
 If you want to make models of a different size and/or with a different number of stars, please send
 an email to the author at the address listed above.
@@ -326,7 +300,7 @@ an email to the author at the address listed above.
 \vskip1.5\baselineskip
 {\mediumbx Full name}, genitive, abbreviation.
 \vskip.5\baselineskip
-\triplecolumns
+\doublecolumns
 \obeylines
 \parskip=0pt
 \baselineskip=16pt
@@ -410,7 +384,7 @@ an email to the author at the address listed above.
 \A {\mediumbx Taurus}, Tauri, Tau
 \A {\mediumbx Telescopium}, Telescopii, Tel
 \A {\mediumbx Triangulum}, Trianguli, Tri
-\A {\mediumbx Triangulum Australe}, Trianguli Australis, TrA
+\A {\mediumbx Triangulum Australe}, \hbox to 0pt{Trianguli Australis, TrA\hss}
 \A {\mediumbx Tucana}, Tucanae, Tuc
 \A {\mediumbx Ursa Major}, Ursae Majoris, UMa
 \A {\mediumbx Ursa Minor}, Ursae Minoris, UMi
@@ -428,11 +402,9 @@ an email to the author at the address listed above.
 \headline={\hfil {\tt \timestamp}\hskip4.5cm}
 
 \begingroup
-\advance\hoffset by 2cm
+%\advance\hoffset by 2cm
 
 %% **** (4) Spherical biangles
-
-%% ***** (5) black on white 1
 
 \Chapter{spherical biangles}{Spherical Biangles}
 \vskip\baselineskip
@@ -441,14 +413,16 @@ an email to the author at the address listed above.
 \vskip.5\baselineskip
 \centerline{{\large Radius 7.5cm}}
 \vskip3\baselineskip\vss}
-\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph3.0}\hskip1cm\epsffile{clstsph3.1}\hskip1cm\epsffile{clstsph3.2}\hskip1cm
-\epsffile{clstsph3.3}\hss}\vss}
+\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph3.0}\hskip1cm\epsffile{clstsph3.1}\hss}\vss}
 \vfil\eject
 
-%% ***** (5) Black on white 2
+\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph3.2}\hskip1cm\epsffile{clstsph3.3}\hss}\vss}
+\vfil\eject
 
-\line{\epsffile{clstsph3.4}\hskip1cm\epsffile{clstsph3.5}\hskip1cm
-\epsffile{clstsph3.6}\hskip1cm\epsffile{clstsph3.7}\hss}
+\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph3.4}\hskip1cm\epsffile{clstsph3.5}\hss}\vss}
+\vfil\eject
+
+\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph3.6}\hskip1cm\epsffile{clstsph3.7}\hss}\vss}
 \vfil\eject
 \endgroup
 
@@ -465,25 +439,16 @@ an email to the author at the address listed above.
 \line{\epsffile{clstsph3.12}\hss}
 \vfil\eject
 
+\line{\hss\hskip-2.5cm\epsffile{clstsph3.12}\hss}
+\vfil\eject
+
 \line{\epsffile{clstsph3.13}\hss}
 \vfil\eject
 
+\line{\hss\hskip-2.5cm\epsffile{clstsph3.13}\hss}
+\vfil\eject
+
 %% **** (4)
-
-\Chapter{globes}{Globes}
-\hldest{xyz}{}{globes}
-\centerline{{\largebx Globes}}
-\vskip2\baselineskip
-\line{\epsffile{clstsph3.8}\hskip.25cm\epsffile{clstsph3.9}\hss}
-\vfil\eject
-
-\line{\epsffile{clstsph3.10}\hskip.25cm\epsffile{clstsph3.11}\hss}
-\vfil\eject
-
-%% ** (2) Testing
-
-%% \line{\epsffile{clstsph3.14}\hss}
-%% \vfil\eject
 
 %% *** (3)
 
@@ -497,11 +462,11 @@ an email to the author at the address listed above.
 \advance\hsize by 10in
 \Section{GPL}{GNU General Public License}
 \hldest{xyz}{}{GPL}
-\listing{gpl-3.0_a3.txt}
+\listing{gpl-3.0.txt}
 \vfil\eject
 \Section{FDL}{GNU Free Documentation License}
 \hldest{xyz}{}{FDL}
-\listing{fdl-1.3_a3.txt}
+\listing{fdl-1.3.txt}
 \vfil\eject
 \endgroup
 
