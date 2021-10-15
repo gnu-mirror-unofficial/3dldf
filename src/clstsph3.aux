@@ -70,6 +70,10 @@ fi;
 
 %% *** (3)
 
+numeric vertical_label_shift_val;
+vertical_label_shift_val := .25cm + 2pt;
+
+
 beginfig(0);
   output bi_ang_pict[0] with_projection parallel_x_y;
   draw_lines;
@@ -88,7 +92,7 @@ beginfig(0);
 
   n0 := (p24 - p20) angle (p21 - p20);
   label.rt("$\scriptstyle 22\rm{h}\kern .16667em 30^\prime$",
-      p201 shifted (-1pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
 
   n1 := ypart p25 - ypart p21;
   
@@ -122,6 +126,7 @@ endfig with_projection parallel_x_y;
 
 %% *** (3)
 
+
 beginfig(1);
   output bi_ang_pict[1] with_projection parallel_x_y;
   draw_lines;
@@ -131,10 +136,8 @@ beginfig(1);
   output tab_picture with_projection parallel_x_y;
 
   label.rt("$\scriptstyle 1\rm{h}\kern .16667em 30^\prime$",
-      p201 shifted (.25cm + 3pt, 0)) rotated (0, 0, n0) with_text_color label_color;
+      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
 
-%% !! START HERE: LDF 2021.10.14.  Adjust label positions.
-  
   label.rt("$\scriptstyle 3\rm{h}$",
            p200 shifted (-1pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
 
@@ -170,8 +173,8 @@ beginfig(3);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptscriptstyle 7\rm{h}\kern .11111em 30^\prime$",
-      p201 shifted (-1.5pt, .5cm - 3pt)) rotated (0, 0, n0) with_text_color label_color;
+  label.rt("$\scriptstyle 7\rm{h}\kern .11111em 30^\prime$",
+      p201 shifted (vertical_label_shift_val, .5cm)) rotated (0, 0, n0) with_text_color label_color;
   
   label.rt("$\scriptstyle 9\rm{h}$",
            p200 shifted (-1pt, -.333cm - 2pt)) rotated (0, 0, 90) with_text_color label_color;
@@ -189,7 +192,8 @@ beginfig(4);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 10\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+  label.rt("$\scriptstyle 10\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0)
     with_text_color label_color;
   
   label.rt("$\scriptstyle 12\rm{h}$",
@@ -232,7 +236,8 @@ beginfig(5);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 13\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+  label.rt("$\scriptstyle 13\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0)
     with_text_color label_color;
   
   label.rt("$\scriptstyle 15\rm{h}$",
@@ -251,7 +256,8 @@ beginfig(6);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 16\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+  label.rt("$\scriptstyle 16\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0)
     with_text_color label_color;
   
   label.rt("$\scriptstyle 18\rm{h}$",
@@ -269,7 +275,8 @@ beginfig(7);
   tab_picture := save_picture;
   output tab_picture with_projection parallel_x_y;
 
-  label.rt("$\scriptstyle 19\rm{h}\kern .16667em 30^\prime$", p201 shifted (-1pt, 0)) rotated (0, 0, n0)
+  label.rt("$\scriptstyle 19\rm{h}\kern .16667em 30^\prime$",
+      p201 shifted (vertical_label_shift_val, -3pt)) rotated (0, 0, n0)
     with_text_color label_color;
   
   label.rt("$\scriptstyle 21\rm{h}$",
