@@ -1,5 +1,5 @@
 %%%% clstsph4.ldf
-%%%% Created by Laurence D. Finston (LDF) Wed 08 Sep 2021 03:41:35 PM CEST
+%%%% Created by Laurence D. Finston (LDF) Tue Sep 7 17:51:02 2021 +0200
 
 %% * (1) Copyright and License.
 
@@ -45,16 +45,23 @@
 %%%% USA
 
 %%%% Laurence.Finston@gmx.de
+
 
 % * (1) Beginning of 3DLDF code.
 
 %% * (1) Plotting stars on sphere development (spherical biangles)
 
-input "astronmy.lmc";
+%% Global, used outside of macros.
+
+boolean do_write;
+boolean do_black;
 
 do_black := false;
+do_write := true;
 
-input "clstsph1_sub.ldf";
+input "astronmy3.lmc";
+
+input "clstsph3_sub.ldf";
 
 %% ** (2)
 
