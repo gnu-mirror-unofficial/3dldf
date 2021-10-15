@@ -8,6 +8,29 @@
 #### explicitly to the *.txt files in the web pages directory.
 #### LDF 2021.09.06.
 
+A=`ls clstsph3*`
+
+for i in $A
+do
+    echo "i == $i"
+    B=`expr index "$i" "3"`
+    echo "B == $B"
+    C=`expr $B - 1`
+    echo "C == $C"
+    D=`expr substr $i 1 $C`
+    echo "D == $D"
+    E=`expr $B + 1`
+    F=`expr substr $i $E 100`
+    echo "F == $F"
+    G="${D}4${F}"
+    echo "G == $G"
+    cp $i $G
+done
+
+
+exit 0
+
+
 echo "Arg 1 == $1"
 
 # cp small_rhombi.ldf small_rhombi.txt ~/3DLDF-3.0_web/3dldf/SRC_CODE/

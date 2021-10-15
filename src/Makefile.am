@@ -1120,8 +1120,27 @@ clstsph3.dvi: clstsph3.tex clstsph3.0
 clstsph3.0 clstsph3.1: clstsph3.mp 
 	mpost -numbersystem "double" clstsph3.mp
 
-clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph3_sub.ldf astronmy.lmc clstsph3.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+clstsph3.mp: 3dldf$(EXEEXT) clstsph3.ldf clstsph3_sub.ldf astronmy3.lmc clstsph3.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph3.ldf
+
+clstsph4.pdf: clstsph4.dvi
+	dvipdfmx $<
+
+clstsph4.ps: clstsph4.dvi
+	dvips -o clstsph4.ps clstsph4.dvi
+
+clstsph4.dvi: clstsph4.tex clstsph4.0 
+	tex clstsph4.tex
+	tex clstsph4.tex
+
+clstsph4.0 clstsph4.1: clstsph4.mp 
+	mpost -numbersystem "double" clstsph4.mp
+
+clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph4_sub.ldf astronmy3.lmc clstsph4.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+	3dldf$(EXEEXT) clstsph4.ldf
+
+
+
 
 clstsph5.pdf: clstsph5.dvi
 	dvipdfmx $<
@@ -1352,8 +1371,10 @@ purge:
 	-rm -f sphrmd0[0-9].[0-9]* sphrmd0[0-9].ps sphrmd0[0-9].pdf sphrmd0[0-9].dvi sphrmd0[0-9].mp \
                sphrmd0[0-9].log sphrmd0[0-9].toc
 	-rm -f texput.log
-	-rm -f *.toc clstsph1.dvi clstsph1.mp clstsph1.ps clstsph3.dvi clstsph3.mp clstsph3.pdf
+	-rm -f *.toc clstsph1.dvi clstsph1.mp clstsph1.ps clstsph3.dvi clstsph3.mp 
 	-rm -f clstsph3.ps clstsph4.mp clstsph5.dvi clstsph5.mp
+	-rm -f clstsph3.[0-9]* clstsph3.log
+	-rm -f clstsph4.ps clstsph4.mp clstsph4.[0-9]* clstsph4.log clstsph4.dvi clstsph4.toc
 
 #### *** (3)
 
