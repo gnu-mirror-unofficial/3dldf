@@ -7339,9 +7339,49 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
        cerr_mutex.unlock(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
- 
-   Bool_Void_Pointer bvp
-     = scanner_node->handle_numeric_list(transformation_type, v);
+
+@q **** (4) @>
+
+@ if |v| is a |Pointer_Vector<real>|, this is necessary because after calling |Scanner_Type::handle_numeric_list|, 
+the |reals| on |vector v| on the |Pointer_Vector| have apparently been deallocated.  However, the values
+are needed for the case that |entry->type == PICTURE| below, so we save the values here in |real_vector|.
+\initials{LDF 2021.10.16.}
+
+\LOG
+\initials{LDF 2021.10.16.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+   vector<real> real_vector;
+
+   if (entry->type == PICTURE)
+   {
+       Pointer_Vector<real> *pv = static_cast<Pointer_Vector<real>*>(v); 
+
+#if 0 
+       cerr << "pv->ctr == " << pv->ctr << endl;
+     
+       if (pv->v[0] == NULL)
+          cerr << "pv->v[0] is NULL" << endl;
+#endif 
+
+       for (vector<real*>::iterator iter = pv->v.begin(); iter != pv->v.end(); ++iter)
+       {
+#if 0 
+          cerr << "**iter == == " << **iter << endl;
+#endif 
+          real_vector.push_back(**iter);
+       }
+   } /* |if (entry->type == PICTURE)| */
+
+
+@q **** (4) @>
+@
+@<Define |Scan_Parse| functions@>=
+
+   Bool_Void_Pointer bvp = scanner_node->handle_numeric_list(transformation_type, v);
 
 @q **** (4) Error handling:  |Scanner_Type::handle_numeric_list| failed.@>   
 
@@ -7470,9 +7510,79 @@ Added code for handling |Pictures|.
 
   else if (entry->type == PICTURE)
     {
-           
-      Picture* p = static_cast<Picture*>(entry->object); 
+
+      real r;
+      real r0 = 0;
+      real r1 = 0;
+      real r2 = 0;
       
+      for (vector<real>::iterator iter = real_vector.begin(); iter != real_vector.end(); ++iter)
+      {
+          cerr << "*iter == " << *iter << endl;
+      }
+
+      /* !!START HERE:  LDF 2021.10.16.  Add function for rotating the label positions.  */ 
+
+      if (real_vector.size() > 0)
+      {
+          r0 = real_vector[0];
+      }
+      if (real_vector.size() > 1)
+      {
+          r1 = real_vector[1];
+      }
+      if (real_vector.size() > 2)
+      {
+          r2 = real_vector[2];
+      }
+
+      if (r0 == 0 && r1 == 0 && r2 == 0)
+      {
+          /* Do nothing */
+      }
+      else if ((r0 == 0 && r1 == 0) || (r0 == 0 && r2 == 0) || (r1 == 0 && r2 == 0))
+      {
+         r = r0;
+         if (r == 0)
+           r = r1;
+         if (r == 0)
+           r = r2;         
+      }
+      if (r == 0)  /* This shouldn't be possible */
+      {
+         /* Do nothing */
+      }
+      else
+      {
+          cerr << "Only one value is non-zero:  r == " << r << endl;
+
+          if (r == floor(r))
+          {
+
+             cerr << "r == floor(r)" << endl;
+
+             if (static_cast<int>(floor(r)) % 45 == 0)
+             {
+                 cerr << "floor(r) % 45 is 0." << endl;
+
+                 /* !!START HERE:  LDF 2021.10.16.  */ 
+
+             }
+             else
+                 cerr << "floor(r) % 45 is not 0." << endl;
+          }
+          else 
+          {
+             cerr << "r != floor(r)" << endl;
+          }
+      }
+
+
+      cerr << "XXX Enter <RETURN> to continue: ";
+      getchar(); 
+       
+      Picture* p = static_cast<Picture*>(entry->object); 
+
       *p *= *t;
 
     } /* |else if (entry->type == TRANSFORM)|  */
