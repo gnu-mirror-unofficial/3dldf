@@ -97,6 +97,12 @@ Added this rule.
 @=command: ROTATE picture_variable numeric_list@>@/
 {
 
+    /* !!START HERE:  LDF 2021.10.16.  Set a flag on |scanner_node|
+       So that I can pass info about the rotation to |Picture::operator*=|
+       and |Scan_Parse::transformation_command_func| so that I can change
+       the positions, if necessary.
+    */ 
+
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),

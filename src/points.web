@@ -196,6 +196,8 @@ surface hiding.
 class Point: protected Shape
 {
   friend Transform Transform::align_with_axis(Point, Point, char);
+  friend Transform Picture::operator*=(const Transform& t);
+  friend Transform Transform::align_with_axis(Point, Point, char);
   friend int Scanner_Type::show_database(void);
   friend int yyparse(yyscan_t);
 
@@ -4452,6 +4454,12 @@ Transform
 Picture::rotate(const Point& p0, const Point& p1,
                        const real angle)
 {
+
+cerr << "Here I am 1." << endl
+<< "Type <RETURN> to continue: ";
+getchar(); 
+
+
   Transform t;
   t.rotate(p0, p1, angle);
   transform *= t;
@@ -4489,6 +4497,10 @@ Transform
 Picture::rotate(const real x, const real y, const real z)
 {
 
+cerr << "Here I am." << endl
+<< "Type <RETURN> to continue: ";
+getchar(); 
+
   Transform t;
   t.rotate(x, y, z);
   transform *= t;
@@ -4507,7 +4519,7 @@ Picture::rotate(const real x, const real y, const real z)
 
      (*iter)->transform->show("transform before rotation:");  
 
-     *(*iter)->transform *= t;
+     (*iter)->transform->rotate(x, y, z);
      (*iter)->pt->rotate(x, y, z);
 
      (*iter)->transform->show("transform after rotation:");         
@@ -10326,6 +10338,47 @@ Picture::operator=(const Picture& p)
     }
 }
 
+@q ** Multiplying |transform|.@>
+@ Multiplying {\bf transform}.
+@
+@<Define |Picture| functions@>=
+Transform
+Picture::operator*=(const Transform& t)
+{  
+  transform *= t;
+
+  for (vector<Label*>::iterator iter = labels.begin(); iter != labels.end(); ++iter) 
+  { 
+
+     cerr << "(*iter)->position == " << (*iter)->position << endl;
+
+     if ((*iter)->transform == 0)
+     {
+#if 0 
+        cerr << "(*iter)->transform is NULL." << endl;
+#endif 
+        (*iter)->transform = new Transform;
+     }
+#if 0 
+     else
+     {
+        cerr << "(*iter)->transform is non-NULL." << endl;
+     }
+     (*iter)->transform->show("transform before rotation:");  
+#endif 
+
+     *(*iter)->transform *= t;
+
+#if 0
+     (*iter)->transform->show("transform after rotation:");         
+#endif 
+     
+  } /* |for| */
+
+  return t;
+
+}  /* End of |Picture::operator*=(const Transform& t)| definition */
+
 
 @q ** (2) @>
 
@@ -10393,7 +10446,9 @@ Picture::rotate_labels(real r, Scanner_Node scanner_node)
 @
 @<Define |Picture| functions@>= 
 
+#if 0
    cerr << "labels.size() == " << labels.size() << endl; 
+#endif 
 
    Transform t;
    t.rotate(0, 0, r);
@@ -10402,22 +10457,31 @@ Picture::rotate_labels(real r, Scanner_Node scanner_node)
    { 
       if ((*iter)->transform == 0)
       {
+
+         cerr << "(*iter)->position == " << (*iter)->position << endl;
+
+#if 0
          cerr << "(*iter)->transform is NULL." << endl;
+#endif 
          (*iter)->transform = new Transform;
       }
+#if 0 
       else
       {
          cerr << "(*iter)->transform is non-NULL." << endl;
       }
-
       (*iter)->transform->show("transform before rotation:");  
+
+#endif 
 
       (*iter)->transform->rotate(0, 0, r);
       (*iter)->pt->rotate(0, 0, r);
-
+#if 0 
       (*iter)->transform->show("transform after rotation:");         
-      
-   } 
+#endif       
+
+   }  /* |for|  */ 
+
 
 @q **** (4) @>
 @
