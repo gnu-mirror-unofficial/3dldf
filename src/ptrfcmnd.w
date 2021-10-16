@@ -106,6 +106,133 @@ Added this rule.
 
 };
 
+@q **** (4) command: ROTATE_LABELS picture_variable numeric_expression.@> 
+
+@*3 \§command> $\longrightarrow$ \.{ROTATE\_LABELS} \§picture variable> 
+\§numeric expression>.
+\initials{LDF 2021.10.16.}
+
+\LOG
+\initials{LDF 2021.10.16.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: ROTATE_LABELS picture_variable by_optional numeric_expression@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `transformation_command --> "
+                << "ROTATE_LABELS picture_variable numeric_expression'."
+                << endl;
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str(""); 
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    real r = @=$4@>;
+
+    cerr_strm << "`r' ($4) == " << r << endl;
+
+    log_message(cerr_strm); 
+    cerr_message(cerr_strm); 
+    cerr_strm.str(""); 
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+    
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
+@q **** (4) by_optional @> 
+@
+\LOG
+\initials{LDF 2021.10.16.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> by_optional@>
+
+@q **** (4) by_optional: /* Empty  */ @> 
+
+@*3 \§by optional> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.10.16.}
+
+\LOG
+\initials{LDF 2021.10.16.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=by_optional: /* Empty  */@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `by_optional: /* Empty  */."
+                << endl;
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str(""); 
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = 0;
+
+};
+
+@q **** (4) by_optional: BY @> 
+
+@*3 \§by optional> $\longrightarrow$ \.{BY}.
+\initials{LDF 2021.10.16.}
+
+\LOG
+\initials{LDF 2021.10.16.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=by_optional: BY @>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `by_optional: BY."
+                << endl;
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str(""); 
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = 0;
+
+};
+
+
 @q **** (4) command: ROTATE point_variable numeric_list.@> 
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE} \§point variable> 
