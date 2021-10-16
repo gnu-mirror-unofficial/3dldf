@@ -1,15 +1,28 @@
 
+picture v[];
+
 beginfig(0);
 
-  label("ABC", origin);
+  draw (-2, 0) -- (2, 0);
+  
+  dotlabel.top("ABC", origin);
 
-  rotate_labels current_picture (90);
-
-  rotate_labels current_picture by 45;
+  v0 := current_picture;
   
 endfig;
 
+beginfig(1);
 
+  current_picture := v0;
+  rotate current_picture (0, 0, -90);
+  rotate_labels current_picture (-90);  
+
+endfig;
+
+
+
+
+verbatim_metapost "end;";
 
 end;
 

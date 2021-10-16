@@ -648,13 +648,6 @@ the y and/or z-axis requires one or two dummy 0 arguments so that |rotate()|
 Transform 
 rotate(const real x, const real y = 0, const real z = 0);
 
-@
-@<Define |Picture| functions@>=
-Transform 
-Picture::rotate(const real x, const real y, const real z)
-{
-  return transform.rotate(x, y, z);
-}
 
 @q *** (3) Rotation around an arbitrary axis.@>
 @*2 Rotation around an arbitrary axis.
@@ -903,6 +896,23 @@ reset_transform()
 {
   transform.reset();
 }
+
+
+@q ** (2) @>
+
+@q * Rotate labels.@>
+@ Rotate labels.  
+@^\cfunc{Picture}{rotate_labels}@>
+
+Defined in \filename{points.web}.
+\initials{LDF 2021.10.16.}
+
+@q *** (3) Declaration @>
+
+@<Declare |Picture| functions@>=
+int
+rotate_labels(real r, Scanner_Node scanner_node = 0);
+
 
 @q * Global variables@>
 @ Global variables.

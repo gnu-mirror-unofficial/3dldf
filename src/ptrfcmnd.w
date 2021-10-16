@@ -106,7 +106,7 @@ Added this rule.
 
 };
 
-@q **** (4) command: ROTATE_LABELS picture_variable numeric_expression.@> 
+@q **** (4) command: ROTATE_LABELS picture_expression numeric_expression.@> 
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE\_LABELS} \§picture variable> 
 \§numeric expression>.
@@ -118,8 +118,9 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=command: ROTATE_LABELS picture_variable by_optional numeric_expression@>@/
+@=command: ROTATE_LABELS picture_expression by_optional numeric_expression@>@/
 {
+@q ***** (5) @>
 
   @<Common declarations for rules@>@; 
 
@@ -129,7 +130,7 @@ Added this rule.
     {
       cerr_strm << thread_name 
                 << "*** Parser: `transformation_command --> "
-                << "ROTATE_LABELS picture_variable numeric_expression'."
+                << "ROTATE_LABELS picture_expression numeric_expression'."
                 << endl;
 
       log_message(cerr_strm); 
@@ -138,19 +139,70 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q ***** (5) @>
+
     real r = @=$4@>;
 
-    cerr_strm << "`r' ($4) == " << r << endl;
+    Id_Map_Entry_Node i = static_cast<Id_Map_Entry_Node>($2);
+    Picture *p = static_cast<Picture*>(i->object);
 
-    log_message(cerr_strm); 
-    cerr_message(cerr_strm); 
-    cerr_strm.str(""); 
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_strm << "`r' ($4) == " << r << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-    
+        log_message(cerr_strm); 
+        cerr_message(cerr_strm); 
+        cerr_strm.str(""); 
 
-    @=$$@> = static_cast<void*>(0);
+        p->show("p:");
+
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ***** (5) @>
+
+    status = p->rotate_labels(r);
+
+    if (status != 0)
+    {
+       cerr_strm << thread_name 
+                 << "ERROR!  In Parser: `transformation_command --> "
+                 << "ROTATE_LABELS picture_expression numeric_expression':"
+                 << endl
+                 << "`Picture::rotate_labels' failed, returning " << status << "."
+                 << endl 
+                 << "Failed to rotate labels on Picture."
+                 << endl 
+                 << "Will try to continue." << endl;
+
+       log_message(cerr_strm); 
+       cerr_message(cerr_strm); 
+       cerr_strm.str(""); 
+    }
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr_strm << thread_name 
+                 << "In Parser: `transformation_command --> "
+                 << "ROTATE_LABELS picture_expression numeric_expression':"
+                 << endl
+                 << "`Picture::rotate_labels' succeeded, returning 0."
+                 << endl;
+
+       log_message(cerr_strm); 
+       cerr_message(cerr_strm); 
+       cerr_strm.str(""); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+  @=$$@> = static_cast<void*>(0);
 
 };
 

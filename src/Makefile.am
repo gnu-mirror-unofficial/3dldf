@@ -1393,17 +1393,20 @@ query:
 
 tps: ttemp.ps
 
+ttemp.pdf: ttemp.dvi
+	dvipdfmx $<
+
 ttemp.ps: ttemp.dvi
 	dvips -o $@ $<
 
-ttemp.dvi: ttemp.tex ttemp.1
+ttemp.dvi: ttemp.tex ttemp.0
 	tex $<
 
-ttemp.1: ttemp.mp
+ttemp.0: ttemp.mp
 	mpost -numbersystem "double" $<
 
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
-	3dldf$(EXEEXT) $<
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf ttemp.ldf
 
 ttemp$(EXEEXT): ttemp.cxx
 	g++ -o ttemp$(EXEEXT) ttemp.cxx
