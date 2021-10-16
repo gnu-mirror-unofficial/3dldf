@@ -1524,6 +1524,12 @@ mathmdls.dvi: mathmdls.tex
 	$(TEX) mathmdls.tex
 	$(TEX) mathmdls.tex
 
+.PHONY math-upd
+
+math-upd:
+	cp mathmdls.tex ~/3DLDF-3.0_web/3dldf/SRC_CODE/mathmdls.txt 
+	cp mathmdls.pdf ~/3DLDF-3.0_web/3dldf/graphics/mathmdls.pdf
+
 .PHONY: trchd
 
 trchd: trchd_1.pdf trchd_1.ps
