@@ -101,14 +101,37 @@
 
 %% * (1)
 
-%% DIN A4 portrait
-
-\iftrue % \iffalse
+%% Uncomment for DIN A4 portrait
+%\iftrue
+\iffalse
 \special{papersize=210mm, 297mm}
 \hsize=210mm
 \vsize=297mm
 \fi
 
+%% Uncomment for DIN A3 portrait.
+\iftrue 
+%\iffalse
+\special{papersize=297mm, 420mm} %% DIN A3 Portrait
+\vsize=420mm
+\hsize=297mm
+\fi
+
+%% Uncomment for DIN A3 landscape.
+%\iftrue 
+\iffalse
+\special{papersize=420mm, 297mm} %% DIN A3 Landscape
+\vsize=297mm
+\hsize=420mm
+\fi
+
+%% Uncomment for DIN A4 landscape.
+%\iftrue
+\iffalse
+\special{papersize=297mm, 210mm}
+\hsize=297mm
+\vsize=210mm
+\fi
 
 \advance\voffset by -1in
 \advance\voffset by 2cm
@@ -410,70 +433,21 @@ an email to the author at the address listed above.
 \hldest{xyz}{}{spherical biangles}
 \vbox to 0pt{\vskip-\baselineskip\centerline{{\largebx Spherical Biangles}}
 \vskip.5\baselineskip
-\centerline{{\large Radius 7.5cm}}
+\centerline{{\large Radius 10cm}}
 \vskip3\baselineskip\vss}
-\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.0}\hskip1cm\epsffile{clstsph4.1}\hss}\vss}
+\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.0}\hss}\vss}
+%\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.0}\hskip1cm\epsffile{clstsph4.1}\hss}\vss}
 \vfil\eject
 
-\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.2}\hskip1cm\epsffile{clstsph4.3}\hss}\vss}
-\vfil\eject
-
-\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.4}\hskip1cm\epsffile{clstsph4.5}\hss}\vss}
-\vfil\eject
-
-\vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.6}\hskip1cm\epsffile{clstsph4.7}\hss}\vss}
-\vfil\eject
-\endgroup
-
-%% **** (4) Panels
-
-\headline={\hfil {\tt \timestamp}\hskip2.5cm}
-
-%% ***** (5)
-
-\Chapter{panels}{Panels (Isoceles Trapezoids and Triangles)}
-\hldest{xyz}{}{panels}
-\centerline{{\largebx Panels (Isoceles Trapezoids and Triangles)}}
-\vskip3\baselineskip
-\line{\epsffile{clstsph4.12}\hss}
-\vfil\eject
-
-\line{\hss\hskip-2.5cm\epsffile{clstsph4.12}\hss}
-\vfil\eject
-
-\line{\epsffile{clstsph4.13}\hss}
-\vfil\eject
-
-\line{\hss\hskip-2.5cm\epsffile{clstsph4.13}\hss}
-\vfil\eject
-
-%% **** (4)
-
-%% *** (3)
-
-\begingroup
-\advance\hsize by -.5\hsize
-\advance\hsize by -6cm
-\parskip=\baselineskip
-\Chapter{copying}{Copying}
-\hldest{xyz}{}{copying}
-%\advance\baselineskip by -6pt
-\advance\hsize by 10in
-\Section{GPL}{GNU General Public License}
-\hldest{xyz}{}{GPL}
-\listing{gpl-3.0.txt}
-\vfil\eject
-\Section{FDL}{GNU Free Documentation License}
-\hldest{xyz}{}{FDL}
-\listing{fdl-1.3.txt}
-\vfil\eject
-\endgroup
-
-%% *** (3)
-
-%% \line{\epsffile{clstsph4.14}\hss}
+%% \vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.2}\hskip1cm\epsffile{clstsph4.3}\hss}\vss}
 %% \vfil\eject
 
+%% \vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.4}\hskip1cm\epsffile{clstsph4.5}\hss}\vss}
+%% \vfil\eject
+
+%% \vbox to 0pt{\vskip.5cm\line{\epsffile{clstsph4.6}\hskip1cm\epsffile{clstsph4.7}\hss}\vss}
+%% \vfil\eject
+\endgroup
 
 %% *** (3) End here
 
