@@ -892,18 +892,281 @@ reset_transform()
 
 @q ** (2) @>
 
-@q * Rotate labels.@>
-@ Rotate labels.  
-@^\cfunc{Picture}{rotate_labels}@>
+@q * Rotate label positions.@>
+@ Rotate label positions.  
+@^\cfunc{Picture}{rotate_label_positions}@>
 
-Defined in \filename{points.web}.
+\LOG
 \initials{LDF 2021.10.16.}
+Added this function.
+\ENDLOG
 
 @q *** (3) Declaration @>
 
 @<Declare |Picture| functions@>=
 int
-rotate_labels(real r, Scanner_Node scanner_node = 0);
+rotate_label_positions(vector<real> &v);
+
+@q *** (3) Definition @>
+@
+@<Define |Picture| functions@>=
+int
+Picture::rotate_label_positions(vector<real> &v)
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* false  */
+
+   using namespace Scan_Parse;
+
+   stringstream cerr_strm;
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr_strm << "Entering `Picture::rotate_label_positions'."
+                 << endl;
+
+       log_message(cerr_strm); 
+       cerr_message(cerr_strm); 
+       cerr_strm.str(""); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Picture| functions@>=
+
+   real r;
+   real r0 = 0;
+   real r1 = 0;
+   real r2 = 0;
+   
+   for (vector<real>::iterator iter = v.begin(); iter != v.end(); ++iter)
+   {
+       cerr << "*iter == " << *iter << endl;
+   }
+
+
+   if (v.size() > 0)
+   {
+       r0 = v[0];
+   }
+   if (v.size() > 1)
+   {
+       r1 = v[1];
+   }
+   if (v.size() > 2)
+   {
+       r2 = v[2];
+   }
+
+   if (r0 == 0 && r1 == 0 && r2 == 0)
+   {
+       /* Do nothing */
+   }
+   else if ((r0 == 0 && r1 == 0) || (r0 == 0 && r2 == 0) || (r1 == 0 && r2 == 0))
+   {
+      r = r0;
+      if (r == 0)
+        r = r1;
+      if (r == 0)
+        r = r2;         
+   }
+   if (r == 0)  /* This shouldn't be possible */
+   {
+      /* Do nothing */
+   }
+
+@q **** (4) @>
+
+   else
+   {
+@q ***** (5) @>
+
+       cerr << "Only one value is non-zero:  r == " << r << endl;
+
+       if (r == floor(r))
+       {
+@q ****** (6) @>
+
+          cerr << "r == floor(r)" << endl;
+
+          int i = static_cast<int>(floor(r));
+
+          if (i == 0 || i == 360)
+             return 0;
+
+          if (i % 90 == 0)
+          {
+@q ******* (7) @>
+
+              cerr << "i % 90 is 0." << endl;
+
+              vector<string> string_vector;
+              string_vector.push_back("top");
+              string_vector.push_back("ulft");
+              string_vector.push_back("lft");
+              string_vector.push_back("llft");
+              string_vector.push_back("bot");
+              string_vector.push_back("lrt");
+              string_vector.push_back("rt");
+              string_vector.push_back("urt");
+              string_vector.push_back("top");
+              string_vector.push_back("ulft");
+              string_vector.push_back("lft");
+              string_vector.push_back("llft");
+              string_vector.push_back("bot");
+              string_vector.push_back("lrt");
+              string_vector.push_back("rt");
+              string_vector.push_back("urt");
+              string_vector.push_back("top");
+
+              vector<string>::iterator s_iter;
+              vector<string>::reverse_iterator s_r_iter;
+
+              for (vector<Label*>::iterator iter = labels.begin();
+                   iter != labels.end();
+                   ++iter)
+              {
+                 cerr << "*** Beginning of loop." << endl;
+
+                 s_iter   = string_vector.begin();
+                 s_r_iter = string_vector.rbegin();
+
+                 cerr << "(*iter)->position == " << (*iter)->position << endl;
+                 
+                 if ((*iter)->position == "")
+                 {
+                    cerr << "position is empty.  Continuing." << endl;
+                    continue;
+                 }
+                 else if ((*iter)->position == "top")
+                 ;  /* Do nothing */
+                 else if ((*iter)->position == "ulft") 
+                 {
+                    s_iter++;
+                    s_r_iter += 7;
+                 }
+                 else if ((*iter)->position == "lft") 
+                 {
+                    s_iter += 2;
+                    s_r_iter += 6;
+                 }
+                 else if ((*iter)->position == "llft") 
+                 {
+                    s_iter += 3;
+                    s_r_iter += 5;
+                 }
+                 else if ((*iter)->position == "bot") 
+                 {
+                    s_iter += 4;
+                    s_r_iter += 4;
+                 }
+                 else if ((*iter)->position == "lrt") 
+                 {
+                    s_iter += 5;
+                    s_r_iter += 3;
+                 }
+                 else if ((*iter)->position == "rt") 
+                 {
+                    s_iter += 6;
+                    s_r_iter += 2;
+                 }
+                 else if ((*iter)->position == "urt") 
+                 {
+                    s_iter += 7;
+                    s_r_iter++;
+
+                 }
+                 if (r == 90)
+                 {
+                    s_iter += 2;
+                    (*iter)->position = *s_iter;
+                 }
+                 else if (r == -90)
+                 {
+                    s_r_iter += 2;
+                    (*iter)->position = *s_r_iter;
+                 }
+                 else if (r == 180)
+                 {
+                    s_iter += 3;
+                    (*iter)->position = *s_iter;
+                 }
+                 else if (r == -180)
+                 {
+                    s_r_iter += 3;
+                    (*iter)->position = *s_r_iter;
+                 }
+                 else if (r == 270)
+                 {
+                    s_iter += 5;
+                    (*iter)->position = *s_iter;
+                 }
+                 else if (r == -270)
+                 {
+                    s_r_iter += 5;
+                    (*iter)->position = *s_r_iter;
+                 }
+#if 0
+                 cerr << "*s_iter == " << *s_iter << endl;
+                 cerr << "*s_r_iter == " << *s_r_iter << endl;
+#endif 
+
+                 cerr << "(*iter)->position == " << (*iter)->position << endl;
+
+
+                 cerr << "*** End of loop." << endl;
+
+              }  /* |for| */
+              
+@q ******* (7) @>
+          }
+          
+@q ****** (6) @>
+         
+          else
+              cerr << "floor(r) % 90 is not 0." << endl;
+       }
+
+@q ***** (5) @>
+
+       else 
+       {
+          cerr << "r != floor(r)" << endl;
+       }
+
+@q ***** (5) @>
+
+   } /* |else| */
+
+@q **** (4) @>
+@
+@<Define |Picture| functions@>= 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr_strm << "Exiting `Picture::rotate_label_positions' successfully with return value 0."
+                 << endl;
+
+       log_message(cerr_strm); 
+       cerr_message(cerr_strm); 
+       cerr_strm.str(""); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+   return 0;
+
+} /* End of |Picture::rotate_label_positions| definition  */
+
+
 
 
 @q * Global variables@>
