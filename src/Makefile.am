@@ -1139,9 +1139,6 @@ clstsph4.0 clstsph4.1: clstsph4.mp
 clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph4_sub.ldf astronmy3.lmc clstsph4.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph4.ldf
 
-
-
-
 clstsph5.pdf: clstsph5.dvi
 	dvipdfmx $<
 
@@ -1517,15 +1514,15 @@ disdyakis.1: disdyakis.mp
 disdyakis.mp: disdyakis.ldf disdyakis.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) disdyakis.ldf
 
-polymdls_a4.ps: polymdls_a4.dvi
-	dvips -o polymdls_a4.ps polymdls_a4.dvi
+mathmdls.ps: mathmdls.dvi
+	dvips -o mathmdls.ps mathmdls.dvi
 
-polymdls_a4.pdf: polymdls_a4.dvi
-	dvipdfmx polymdls_a4.dvi
+mathmdls.pdf: mathmdls.dvi
+	dvipdfmx mathmdls.dvi
 
-polymdls_a4.dvi: polymdls_a4.tex
-	$(TEX) polymdls_a4.tex
-	$(TEX) polymdls_a4.tex
+mathmdls.dvi: mathmdls.tex
+	$(TEX) mathmdls.tex
+	$(TEX) mathmdls.tex
 
 .PHONY: trchd
 
