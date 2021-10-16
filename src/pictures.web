@@ -915,7 +915,7 @@ Picture::rotate_label_positions(vector<real> &v)
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* false  */
+   bool DEBUG = false; /* true  */
 
    using namespace Scan_Parse;
 
@@ -945,11 +945,12 @@ Picture::rotate_label_positions(vector<real> &v)
    real r1 = 0;
    real r2 = 0;
    
+#if 0 
    for (vector<real>::iterator iter = v.begin(); iter != v.end(); ++iter)
    {
        cerr << "*iter == " << *iter << endl;
    }
-
+#endif 
 
    if (v.size() > 0)
    {
@@ -987,13 +988,17 @@ Picture::rotate_label_positions(vector<real> &v)
    {
 @q ***** (5) @>
 
+#if 0 
        cerr << "Only one value is non-zero:  r == " << r << endl;
+#endif 
 
        if (r == floor(r))
        {
 @q ****** (6) @>
 
+#if 0 
           cerr << "r == floor(r)" << endl;
+#endif 
 
           int i = static_cast<int>(floor(r));
 
@@ -1032,16 +1037,21 @@ Picture::rotate_label_positions(vector<real> &v)
                    iter != labels.end();
                    ++iter)
               {
+#if 0
                  cerr << "*** Beginning of loop." << endl;
-
+#endif
                  s_iter   = string_vector.begin();
                  s_r_iter = string_vector.rbegin();
 
+#if 0 
                  cerr << "(*iter)->position == " << (*iter)->position << endl;
+#endif 
                  
                  if ((*iter)->position == "")
                  {
+#if 0 
                     cerr << "position is empty.  Continuing." << endl;
+#endif 
                     continue;
                  }
                  else if ((*iter)->position == "top")
@@ -1113,14 +1123,11 @@ Picture::rotate_label_positions(vector<real> &v)
                     (*iter)->position = *s_r_iter;
                  }
 #if 0
-                 cerr << "*s_iter == " << *s_iter << endl;
-                 cerr << "*s_r_iter == " << *s_r_iter << endl;
+                 cerr << "*s_iter == " << *s_iter << endl
+                      << "*s_r_iter == " << *s_r_iter << endl
+                      << "(*iter)->position == " << (*iter)->position << endl
+                      << "*** End of loop." << endl;
 #endif 
-
-                 cerr << "(*iter)->position == " << (*iter)->position << endl;
-
-
-                 cerr << "*** End of loop." << endl;
 
               }  /* |for| */
               
@@ -1128,17 +1135,22 @@ Picture::rotate_label_positions(vector<real> &v)
           }
           
 @q ****** (6) @>
-         
+
+#if 0          
           else
               cerr << "floor(r) % 90 is not 0." << endl;
-       }
+#endif 
+
+       }  /* |if (r == floor(r))| */
 
 @q ***** (5) @>
 
+#if 0 
        else 
        {
           cerr << "r != floor(r)" << endl;
        }
+#endif 
 
 @q ***** (5) @>
 
@@ -1161,13 +1173,9 @@ Picture::rotate_label_positions(vector<real> &v)
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
    return 0;
 
 } /* End of |Picture::rotate_label_positions| definition  */
-
-
-
 
 @q * Global variables@>
 @ Global variables.
