@@ -4497,10 +4497,6 @@ Transform
 Picture::rotate(const real x, const real y, const real z)
 {
 
-cerr << "Here I am." << endl
-<< "Type <RETURN> to continue: ";
-getchar(); 
-
   Transform t;
   t.rotate(x, y, z);
   transform *= t;
@@ -10350,7 +10346,9 @@ Picture::operator*=(const Transform& t)
   for (vector<Label*>::iterator iter = labels.begin(); iter != labels.end(); ++iter) 
   { 
 
+#if 0 
      cerr << "(*iter)->position == " << (*iter)->position << endl;
+#endif 
 
      if ((*iter)->transform == 0)
      {
@@ -10382,136 +10380,9 @@ Picture::operator*=(const Transform& t)
 
 @q ** (2) @>
 
-@q * Rotate labels.@>
-@ Rotate labels.  
-@^\cfunc{Picture}{rotate_labels}@>
-
-@q *** (3) Definition @>
-@
-@<Define |Picture| functions@>= 
-int
-Picture::rotate_labels(real r, Scanner_Node scanner_node)
-{
-@q **** (4) @>
-
-   bool DEBUG = true; /* false  */
-
-   using namespace Scan_Parse;
-
-   stringstream cerr_strm;
-
-   string thread_name;
-
-@q **** (4) @>
-@
-@<Define |Picture| functions@>= 
-
-#ifdef HAVE_PTHREAD_H  
-   if (   scanner_node != static_cast<Scanner_Node>(0) 
-       && scanner_node->thread_info != static_cast<Thread_Info_Type*>(0)
-       && (   scanner_node->run_state.multithread_input 
-           || scanner_node->run_state.multithread_output))      
-
-      thread_name = scanner_node->thread_info->name;
-
-#else /* |HAVE_PTHREAD_H| is undefined.  */@; 
-
-   if (0)  /* Dummy conditional.  */
-      ;
-
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
-
-   else  /* Threads not available or not using them.  */
-      thread_name = "";
-
-@q **** (4) @>
-@
-@<Define |Picture| functions@>= 
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name 
-                 << "Entering `Picture::rotate_labels'."
-                 << endl;
-
-       log_message(cerr_strm); 
-       cerr_message(cerr_strm); 
-       cerr_strm.str(""); 
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-@
-@<Define |Picture| functions@>= 
-
-#if 0
-   cerr << "labels.size() == " << labels.size() << endl; 
-#endif 
-
-   Transform t;
-   t.rotate(0, 0, r);
-
-   for (vector<Label*>::iterator iter = labels.begin(); iter != labels.end(); ++iter) 
-   { 
-      if ((*iter)->transform == 0)
-      {
-
-         cerr << "(*iter)->position == " << (*iter)->position << endl;
-
-#if 0
-         cerr << "(*iter)->transform is NULL." << endl;
-#endif 
-         (*iter)->transform = new Transform;
-      }
-#if 0 
-      else
-      {
-         cerr << "(*iter)->transform is non-NULL." << endl;
-      }
-      (*iter)->transform->show("transform before rotation:");  
-
-#endif 
-
-      (*iter)->transform->rotate(0, 0, r);
-      (*iter)->pt->rotate(0, 0, r);
-#if 0 
-      (*iter)->transform->show("transform after rotation:");         
-#endif       
-
-   }  /* |for|  */ 
-
-
-@q **** (4) @>
-@
-@<Define |Picture| functions@>= 
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr_strm << thread_name 
-                 << "Exiting `Picture::rotate_labels' successfully with return value 0."
-                 << endl;
-
-       log_message(cerr_strm); 
-       cerr_message(cerr_strm); 
-       cerr_strm.str(""); 
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-
-   return 0;
-
-} /* End of |Picture::rotate_labels| definition  */
-
-@q ** (2) @>
-
-
-@q *** (3) Save |Point| to database.@>
-@*2 Save |Point| to database.
-@^\cfunc{Point}{save\_point\_to\_database}@>
+@q *** (3) Save |Points| to database.@>
+@*2 Save |Points| to database.
+@^\cfunc{Point}{save\_points\_to\_database}@>
 \initials{LDF 2021.03.25.}
 
 \LOG

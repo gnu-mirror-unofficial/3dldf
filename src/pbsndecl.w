@@ -1108,7 +1108,6 @@ Added token declaration for |ALIGN|.
 @=%token <int_value> REFLECT@>@/
 @=%token <int_value> ROTATE@>@/
 @=%token <int_value> ROTATE_AROUND@>@/
-@=%token <int_value> ROTATE_LABELS@>@/
 @=%token <int_value> SCALE@>@/
 @=%token <int_value> SHEAR@>@/
 @=%token <int_value> SHIFT@>@/

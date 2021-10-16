@@ -5,7 +5,9 @@ beginfig(0);
 
   draw (-2, 0) -- (2, 0);
   
-  dotlabel.rt("ABC", origin);
+  label("ABC", (0, 1));
+
+  shift current_picture (1, 2, 3);
   
   v0 := current_picture;
   
@@ -13,10 +15,16 @@ endfig with_projection parallel_x_y;
 
 beginfig(1);
 
+  drawdot origin;
   current_picture := v0;
-  rotate current_picture (0, 0, -70);
+  rotate current_picture (0, 0, 45);
 
-  % rotate_labels current_picture by 45;
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+
+  current_picture:= v0;
+
+  %rotate current_picture (0, 0, -45);
 
 
 endfig with_projection parallel_x_y;
