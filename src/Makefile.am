@@ -1168,9 +1168,8 @@ sphrdoms.dvi: sphrdoms.tex sphrdoms.0
 sphrdoms.0 sphrdoms.1: sphrdoms.mp 
 	mpost -numbersystem "double" sphrdoms.mp
 
-sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms_sub.ldf sphrdoms.lmc sphrdoms.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
-	3dldf$(EXEEXT) sphrdoms.ldf
-
+sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms.lmc sphrdoms.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrdoms.ldf
 
 PHONY: purge-5
 
@@ -1389,6 +1388,8 @@ purge:
 	-rm -f clstsph3.ps clstsph4.mp clstsph5.dvi clstsph5.mp
 	-rm -f clstsph3.[0-9]* clstsph3.log
 	-rm -f clstsph4.ps clstsph4.mp clstsph4.[0-9]* clstsph4.log clstsph4.dvi clstsph4.toc
+	-rm -f sphrdoms.ps sphrdoms.mp sphrdoms.[0-9]* sphrdoms.log sphrdoms.dvi sphrdoms.toc
+	-rm -f sundl_04.[0-9]*
 
 #### *** (3)
 
@@ -1423,7 +1424,7 @@ ttemp.0: ttemp.mp
 	mpost -numbersystem "double" $<
 
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf ttemp.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) ttemp.ldf
 
 ttemp$(EXEEXT): ttemp.cxx
 	g++ -o ttemp$(EXEEXT) ttemp.cxx
@@ -1464,7 +1465,7 @@ zikhron.mp: zikhron.ldf sundl_03.lmc
 	3dldf zikhron.ldf
 
 sundl_04.mp:
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sundl_04.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sundl_04.ldf
 
 sundl_04.1 sundl_04.2:
 	mpost -numbersystem "double" sundl_04.mp
@@ -1555,7 +1556,7 @@ math-upd:
 trchd: trchd_1.pdf trchd_1.ps
 
 trchd_1.mp: trchd_1.ldf 
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf trchd_1.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) trchd_1.ldf 
 
 trchd_1.1: trchd_1.mp
 	mpost trchd_1.mp 
@@ -1570,7 +1571,7 @@ trchd_1.ps: trchd_1.dvi
 	dvips -o trchd_1.ps trchd_1.dvi 
 
 grrhm_06.mp: grrhm_06.ldf 
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf grrhm_06.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) grrhm_06.ldf 
 
 grrhm_06.1: grrhm_06.mp
 	mpost grrhm_06.mp 
