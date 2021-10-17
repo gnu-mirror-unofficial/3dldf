@@ -3185,9 +3185,10 @@ def plot_stitches_on_spherical_biangles =
 
   point A[];
   point B[];
+
   
   j := 0;
-  for i := 0 step 2.5 until 67:
+  for i := 0 step 2.5 until 67.5:
     get_point_on_spherical_biangle (A) {j, 25, i, radius, false, 0, do_black};
     get_point_on_spherical_biangle (B) {j, 20, i, radius, false, 0, do_black};
     rotate B[j] (0, 180);
@@ -3211,7 +3212,7 @@ def plot_stitches_on_spherical_biangles =
     draw q0 rotated (180, 0) on_picture tab_picture[i];
     %draw q1 rotated (180, 0) with_color dark_gray on_picture tab_picture[i];
   
-    draw (M[last_pt_ctr] -- p37) rotated (180, 0) on_picture tab_picture[i];
+    draw (M[last_pt_ctr] -- p35) rotated (180, 0) on_picture tab_picture[i];
     %draw (N[j] -- p36) rotated (180, 0) with_color dark_gray on_picture tab_picture[i];
   endfor;
 
@@ -3234,7 +3235,90 @@ def plot_stitches_on_spherical_biangles =
       k += 2;
     endfor;
   endfor;
+
+
+%% *** (3)
+
+  point D[];
+  point E[];
+  point F[];
+  point T[];
+  point U[];
   
+  q2 += ..;
+  q3 += ..;
+  
+  j := 0;
+  for i := 67.5 step 3 until 78.75:
+    get_point_on_spherical_biangle (T) {j, 32.5, i, radius, false, 0, do_black};
+    get_point_on_spherical_biangle (U) {j, 22.5, i, radius, false, 0, do_black};
+    rotate U[j] (0, 180);
+    %drawdot U[j] with_pen dot_pen on_picture tab_picture[0];
+    q2 += T[j];
+    q3 += U[j];
+    % message "T[" & decimal j & "]:";
+    % show T[j];
+    j += 1;
+  endfor;
+
+  get_point_on_spherical_biangle (T) {j, 32.5, 78.75, radius, false, 0, do_black};
+  get_point_on_spherical_biangle (U) {j, 37.5, 78.75, radius, false, 0, do_black};
+  q2 += T[j];
+  rotate U[j] (0, 180);
+  q3 += U[j];
+
+  last_pt_ctr := j;
+
+  %% Draw the dots
+  
+  j := 0;
+  for i := 69 step 2 until 78.75:
+    get_point_on_spherical_biangle (D) {j, 27.5, i, radius, false, 0, do_black};
+    get_point_on_spherical_biangle (E) {j, 17.5, i, radius, false, 0, do_black};
+    rotate E[j] (0, 180);
+    for k = 0 upto 7:
+      drawdot D[j] with_pen dot_pen on_picture tab_picture[k];
+      drawdot E[j] with_pen dot_pen on_picture tab_picture[k];
+      drawdot D[j] rotated (180, 0) with_pen dot_pen on_picture tab_picture[k];
+      drawdot E[j] rotated (180, 0) with_pen dot_pen on_picture tab_picture[k];
+    endfor;
+    j += 1;
+  endfor;
+ 
+  for i = 0 upto 7:
+
+    draw q2 on_picture tab_picture[i];
+    %draw q3 with_color dark_gray on_picture tab_picture[i];
+
+    draw T[last_pt_ctr] -- p37 on_picture tab_picture[i];
+    %draw U[last_pt_ctr] -- p36 with_color dark_gray on_picture tab_picture[i];
+
+    draw q2 rotated (180, 0) on_picture tab_picture[i];
+    %draw q3 rotated (180, 0) with_color dark_gray on_picture tab_picture[i];
+  
+    draw (T[last_pt_ctr] -- p37) rotated (180, 0) on_picture tab_picture[i];
+
+  endfor;
+
+  %% Draw the extensions of the lines of declination over the tab.
+
+  for m = 0 upto 7:
+    draw p35 -- T[0] on_picture tab_picture[m];
+    draw (p35 -- T[0]) rotated (180, 0) on_picture tab_picture[m];
+  endfor;
+
+%% *** (3)
+
+  point V[];
+  
+  get_point_on_spherical_biangle (V) {0, 10.5, 84.5, radius, false, 0, do_black};
+
+  for i = 0 upto 7:
+    drawdot V0 with_pen dot_pen on_picture tab_picture[i];
+    drawdot V0 rotated (0, 0, 180) with_pen dot_pen on_picture tab_picture[i];
+    drawdot V0 rotated (180, 0) with_pen dot_pen on_picture tab_picture[i];
+    drawdot V0 rotated (180, 0, 180) with_pen dot_pen on_picture tab_picture[i];
+  endfor;
   
 %% *** (3)
   
