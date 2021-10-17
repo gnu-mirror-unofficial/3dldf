@@ -76,16 +76,21 @@ beginfig(0);
   
   p200 := origin shifted by .5 * (p24 - p20);
 
-  label.rt("$\scriptstyle 0\rm{h}$", p200 shifted (-1pt, 0)) rotated (0, 0, 90)
-    with_text_color label_color;
+  if do_labels_ra_decl:
+    label.rt("$\scriptstyle 0\rm{h}$", p200 shifted (-1pt, 0)) rotated (0, 0, 90)
+      with_text_color label_color;
+  fi;
 
   %draw p24 -- p20 with_color red;
 
   p201 := mediate(p20, p24, .5);
 
   n0 := (p24 - p20) angle (p21 - p20);
-  label.rt("$\scriptstyle 22\rm{h}\kern .16667em 30^\prime$",
-      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
+
+  if do_labels_ra_decl:
+    label.rt("$\scriptstyle 22\rm{h}\kern .16667em 30^\prime$",
+	p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
+  fi;
 
   n1 := ypart p25 - ypart p21;
 
@@ -95,31 +100,32 @@ beginfig(0);
   
   numeric label_rotate_val;
   label_rotate_val := 0;
-  
-  label.urt("$\scriptstyle 0^\circ$", origin) rotated (0, 0, label_rotate_val) with_text_color label_color;
-  p202 := origin shifted (0, n1);
-  label.urt("$\scriptstyle 11^\circ 15^\prime$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
-  shift p202 (0, n1);
-  label.urt("$\scriptstyle 22^\circ 30^\prime$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -22^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
-  shift p202 (0, n1);
-  label.urt("$\scriptstyle 33^\circ 45^\prime$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -33^\circ 45^\prime$", p202 rotated (180, 0)) with_text_color label_color;
-  shift p202 (0, n1);
-  label.urt("$\scriptstyle 45^\circ$", p202) with_text_color label_color;
-  label.urt("$\scriptscriptstyle -45^\circ$", (p202 rotated (180, 0)) shifted (0, -1.5pt))  with_text_color label_color;
-  shift p202 (0, n1);
-  label.llft("$\scriptstyle 56^\circ 15^\prime$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -56^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
-  shift p202 (0, n1);
-  label.urt("$\scriptstyle 67^\circ 30^\prime$", p202) with_text_color label_color;
-  label.urt("$\scriptstyle -67^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
-  shift p202 (0, n1);
-  label.top("$\scriptscriptstyle 78^\circ \hskip2pt 45^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
-  label.bot("$\scriptscriptstyle -78^\circ\hskip-.5pt 45^\prime$", (p202 rotated (180, 0)) shifted (.5pt, 0))
-    with_text_color label_color;
-  
+
+  if do_labels_ra_decl:
+    label.urt("$\scriptstyle 0^\circ$", origin) rotated (0, 0, label_rotate_val) with_text_color label_color;
+    p202 := origin shifted (0, n1);
+    label.urt("$\scriptstyle 11^\circ 15^\prime$", p202) with_text_color label_color;
+    label.urt("$\scriptstyle -11^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+    shift p202 (0, n1);
+    label.urt("$\scriptstyle 22^\circ 30^\prime$", p202) with_text_color label_color;
+    label.urt("$\scriptstyle -22^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+    shift p202 (0, n1);
+    label.urt("$\scriptstyle 33^\circ 45^\prime$", p202) with_text_color label_color;
+    label.urt("$\scriptstyle -33^\circ 45^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+    shift p202 (0, n1);
+    label.urt("$\scriptstyle 45^\circ$", p202) with_text_color label_color;
+    label.urt("$\scriptscriptstyle -45^\circ$", (p202 rotated (180, 0)) shifted (0, -1.5pt))  with_text_color label_color;
+    shift p202 (0, n1);
+    label.llft("$\scriptstyle 56^\circ 15^\prime$", p202) with_text_color label_color;
+    label.urt("$\scriptstyle -56^\circ 15^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+    shift p202 (0, n1);
+    label.urt("$\scriptstyle 67^\circ 30^\prime$", p202) with_text_color label_color;
+    label.urt("$\scriptstyle -67^\circ 30^\prime$", p202 rotated (180, 0)) with_text_color label_color;
+    shift p202 (0, n1);
+    label.top("$\scriptscriptstyle 78^\circ \hskip2pt 45^\prime$", p202 shifted (0pt, 0)) with_text_color label_color;
+    label.bot("$\scriptscriptstyle -78^\circ\hskip-.5pt 45^\prime$", (p202 rotated (180, 0)) shifted (.5pt, 0))
+      with_text_color label_color;
+  fi;  
   %drawdot mediate(mediate(p24, p25, .5), mediate(p20, p21, .5), .5) with_pen medium_pen;
 
   %rotate current_picture (0, 0, 90);
@@ -127,27 +133,24 @@ beginfig(0);
   
 endfig with_projection parallel_x_y;
 
-endinput;  
-
 %% *** (3)
 
-
 beginfig(1);
-  output bi_ang_pict[1] with_projection parallel_x_y;
+  current_picture := bi_ang_pict[1];
   draw_lines;
-  output current_picture with_projection parallel_x_y;
-  output qv[1] with_projection parallel_x_y;
-  tab_picture[0] := save_picture;
-  output tab_picture[0] with_projection parallel_x_y;
+  current_picture += tab_picture[1];
 
-  label.rt("$\scriptstyle 1\rm{h}\kern .16667em 30^\prime$",
-      p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
+  if do_labels_ra_decl:
+    label.rt("$\scriptstyle 1\rm{h}\kern .16667em 30^\prime$",
+	p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
 
-  label.rt("$\scriptstyle 3\rm{h}$",
-           p200 shifted (-1pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
+    label.rt("$\scriptstyle 3\rm{h}$",
+	p200 shifted (-1pt, 4pt)) rotated (0, 0, 90) with_text_color label_color;
+  fi;
 
-  
 endfig with_projection parallel_x_y;
+
+endinput;  
 
 %% *** (3)
 
