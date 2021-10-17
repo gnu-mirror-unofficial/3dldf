@@ -50,19 +50,54 @@
 
 % * (1) Beginning of 3DLDF code.
 
-%% * (1) Plotting stars on sphere development (spherical biangles)
-
-%% Global, used outside of macros.
-
-boolean do_write;
-boolean do_black;
-
-do_black := false;
-do_write := true;
+%% * (1) Spheres and domes (spherical biangles)
 
 input "sphrdoms.lmc";
 
-input "sphrdoms_sub.ldf";
+%% *** (3) Global, used in the following code (not in macros).
+
+numeric radius;
+string s;
+numeric tab_width;
+boolean Left;
+boolean Right;
+boolean Bottom;
+boolean Top;
+color label_color;
+
+Left   := false;
+Right  := true;
+Bottom := false;
+Top    := true;
+
+tab_width := .4cm;
+
+color line_color;
+
+numeric V;
+
+%radius := 7.5cm; % 6cm; % 7cm; %  %% 7cm is the value used for the version on the web page.
+                                   %% 7.5cm seems to work well.  I tested it to try using
+                                   %% a styrofoam ball of 15cm diameter for assembling the
+				   %% model.
+				   %% With 6cm, the labels need to be printed in smaller fonts
+				   %% and their positions need to be adjusted.
+				   %% LDF 2021.10.11.
+
+radius := 5cm;
+
+line_color  := black;
+label_color := black;
+  
+%% ** (2) Call macros
+
+boolean do_labels;
+do_labels := false; % true; % 
+
+get_spherical_biangles {radius, false}; % true %% (do_labels)
+
+plot_stitches_on_spherical_biangles;
+
 
 %% ** (2)
 
