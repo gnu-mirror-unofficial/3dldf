@@ -1136,7 +1136,7 @@ clstsph4.dvi: clstsph4.tex clstsph4.0
 clstsph4.0 clstsph4.1: clstsph4.mp 
 	mpost -numbersystem "double" clstsph4.mp
 
-clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph4_sub.ldf astronmy3.lmc clstsph4.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+clstsph4.mp: 3dldf$(EXEEXT) clstsph4.ldf clstsph4_sub.ldf astronmy4.lmc clstsph4.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph4.ldf
 
 clstsph5.pdf: clstsph5.dvi
@@ -1152,8 +1152,25 @@ clstsph5.dvi: clstsph5.tex clstsph5.0
 clstsph5.0 clstsph5.1: clstsph5.mp 
 	mpost -numbersystem "double" clstsph5.mp
 
-clstsph5.mp: 3dldf$(EXEEXT) clstsph5.ldf clstsph5_sub.ldf astronmy.lmc clstsph5.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+clstsph5.mp: 3dldf$(EXEEXT) clstsph5.ldf clstsph5_sub.ldf astronmy5.lmc clstsph5.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph5.ldf
+
+sphrdoms.pdf: sphrdoms.dvi
+	dvipdfmx $<
+
+sphrdoms.ps: sphrdoms.dvi
+	dvips -o sphrdoms.ps sphrdoms.dvi
+
+sphrdoms.dvi: sphrdoms.tex sphrdoms.0 
+	tex sphrdoms.tex
+	tex sphrdoms.tex
+
+sphrdoms.0 sphrdoms.1: sphrdoms.mp 
+	mpost -numbersystem "double" sphrdoms.mp
+
+sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms_sub.ldf sphrdoms.lmc sphrdoms.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
+	3dldf$(EXEEXT) sphrdoms.ldf
+
 
 PHONY: purge-5
 
