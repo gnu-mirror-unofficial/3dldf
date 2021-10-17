@@ -3310,14 +3310,19 @@ def plot_stitches_on_spherical_biangles =
 %% *** (3)
 
   point V[];
-  
-  get_point_on_spherical_biangle (V) {0, 10.5, 84.5, radius, false, 0, do_black};
+
+  get_point_on_spherical_biangle (V) {0, 16, 80.5, radius, false, 0, do_black};
+  get_point_on_spherical_biangle (V) {1, 13, 82.5, radius, false, 0, do_black};
+  get_point_on_spherical_biangle (V) {2, 10, 84.5, radius, false, 0, do_black};
+
 
   for i = 0 upto 7:
-    drawdot V0 with_pen dot_pen on_picture tab_picture[i];
-    drawdot V0 rotated (0, 0, 180) with_pen dot_pen on_picture tab_picture[i];
-    drawdot V0 rotated (180, 0) with_pen dot_pen on_picture tab_picture[i];
-    drawdot V0 rotated (180, 0, 180) with_pen dot_pen on_picture tab_picture[i];
+    for j = 0 upto 2:
+      drawdot V[j] with_pen dot_pen on_picture tab_picture[i];
+      drawdot V[j] rotated (0, 0, 180) with_pen dot_pen on_picture tab_picture[i];
+      drawdot V[j] rotated (180, 0) with_pen dot_pen on_picture tab_picture[i];
+      drawdot V[j] rotated (180, 0, 180) with_pen dot_pen on_picture tab_picture[i];
+    endfor;
   endfor;
   
 %% *** (3)
