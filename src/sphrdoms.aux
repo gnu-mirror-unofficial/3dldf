@@ -53,18 +53,13 @@
 
 picture save_picture;
 
-save_picture := tab_picture;
+%save_picture := tab_picture;
 
 color label_color;
-
 numeric n[];
 numeric_vector nv;
 
-if do_black:
-  label_color := white;
-else:
-  label_color := black;
-fi;
+label_color := black;
 
 %% ** (2)
 
@@ -77,8 +72,7 @@ vertical_label_shift_val := .25cm + 2pt;
 beginfig(0);
   current_picture := bi_ang_pict[0];
   draw_lines;
-  %current_picture += qv[0];
-  current_picture += tab_picture;
+  current_picture += tab_picture[0];
   
   p200 := origin shifted by .5 * (p24 - p20);
 
@@ -133,6 +127,8 @@ beginfig(0);
   
 endfig with_projection parallel_x_y;
 
+endinput;  
+
 %% *** (3)
 
 
@@ -141,8 +137,8 @@ beginfig(1);
   draw_lines;
   output current_picture with_projection parallel_x_y;
   output qv[1] with_projection parallel_x_y;
-  tab_picture := save_picture;
-  output tab_picture with_projection parallel_x_y;
+  tab_picture[0] := save_picture;
+  output tab_picture[0] with_projection parallel_x_y;
 
   label.rt("$\scriptstyle 1\rm{h}\kern .16667em 30^\prime$",
       p201 shifted (vertical_label_shift_val, 0)) rotated (0, 0, n0) with_text_color label_color;
@@ -160,7 +156,7 @@ beginfig(2);
   draw_lines;
   output current_picture  with_projection parallel_x_y;
   output qv[2] with_projection parallel_x_y;
-  tab_picture := save_picture;
+  tab_picture[0] := save_picture;
   output tab_picture with_projection parallel_x_y;
 
   
@@ -397,7 +393,7 @@ if do_write:
   close star_info_combined;
 fi;
 
-endinput;  
+
 
 %% * (1) Local variables for Emacs.
 
