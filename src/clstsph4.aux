@@ -75,11 +75,10 @@ vertical_label_shift_val := .25cm + 2pt;
 
 
 beginfig(0);
-  output bi_ang_pict[0] with_projection parallel_x_y;
+  current_picture := bi_ang_pict[0];
   draw_lines;
-  output current_picture with_projection parallel_x_y;
-  %output qv[0] with_projection parallel_x_y;
-  output tab_picture with_projection parallel_x_y;
+  %current_picture += qv[0];
+  current_picture += tab_picture;
   
   p200 := origin shifted by .5 * (p24 - p20);
 
@@ -128,7 +127,10 @@ beginfig(0);
     with_text_color label_color;
   
   %drawdot mediate(mediate(p24, p25, .5), mediate(p20, p21, .5), .5) with_pen medium_pen;
- 
+
+  %rotate current_picture (0, 0, 90);
+
+  
 endfig with_projection parallel_x_y;
 
 %% *** (3)
