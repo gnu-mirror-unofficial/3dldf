@@ -84,7 +84,7 @@ numeric label_pos_ulft;
 numeric label_pos_lrt;
 numeric label_pos_llft;
 newwrite label_out;
-picture tab_picture;
+picture tab_picture[];
 newwrite star_info_combined;
 path edge[];
 
@@ -390,8 +390,8 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
     p107 := mediate(p103, p105, .6);
 
     tab[j] := p[i] -- p106 -- p107 -- p[i+2];
-    %draw tab[j] on_picture tab_picture;
-    %draw tab[j] rotated (180, 0) on_picture tab_picture;
+    %draw tab[j] on_picture tab_picture[0];
+    %draw tab[j] rotated (180, 0) on_picture tab_picture[0];
     j += 1;
   endfor;
 
@@ -3068,7 +3068,7 @@ def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or
 
 enddef;
 
-%% ** (2) macro plot_stitches_on_spherical_biangles
+%% ** (2) macro get_point_on_spherical_biangle
 
 macro get_point_on_spherical_biangle;
 
@@ -3167,7 +3167,7 @@ def plot_stitches_on_spherical_biangles =
     get_point_on_spherical_biangle (M) {j, 27.5, i, radius, false, 0, do_black};
     get_point_on_spherical_biangle (N) {j, 17.5, i, radius, false, 0, do_black};
     rotate N[j] (0, 180);
-    %drawdot N[j] with_pen dot_pen on_picture qv[0];
+    %drawdot N[j] with_pen dot_pen on_picture tab_picture[0];
     q0 += M[j];
     q1 += N[j];
     % message "M[" & decimal j & "]:";
@@ -3192,27 +3192,27 @@ def plot_stitches_on_spherical_biangles =
     get_point_on_spherical_biangle (B) {j, 20, i, radius, false, 0, do_black};
     rotate B[j] (0, 180);
     for k = 0 upto 7:
-      drawdot A[j] with_pen dot_pen on_picture qv[k];
-      drawdot B[j] with_pen dot_pen on_picture qv[k];
-      drawdot A[j] rotated (180, 0) with_pen dot_pen on_picture qv[k];
-      drawdot B[j] rotated (180, 0) with_pen dot_pen on_picture qv[k];
+      drawdot A[j] with_pen dot_pen on_picture tab_picture[k];
+      drawdot B[j] with_pen dot_pen on_picture tab_picture[k];
+      drawdot A[j] rotated (180, 0) with_pen dot_pen on_picture tab_picture[k];
+      drawdot B[j] rotated (180, 0) with_pen dot_pen on_picture tab_picture[k];
     endfor;
     j += 1;
   endfor;
   
   for i = 0 upto 7:
 
-    draw q0 on_picture qv[i];
-    %draw q1 with_color dark_gray on_picture qv[i];
+    draw q0 on_picture tab_picture[i];
+    %draw q1 with_color dark_gray on_picture tab_picture[i];
 
-    draw M[last_pt_ctr] -- p37 on_picture qv[i];
-    %draw N[last_pt_ctr] -- p36 with_color dark_gray on_picture qv[i];
+    draw M[last_pt_ctr] -- p37 on_picture tab_picture[i];
+    %draw N[last_pt_ctr] -- p36 with_color dark_gray on_picture tab_picture[i];
 
-    draw q0 rotated (180, 0) on_picture qv[i];
-    %draw q1 rotated (180, 0) with_color dark_gray on_picture qv[i];
+    draw q0 rotated (180, 0) on_picture tab_picture[i];
+    %draw q1 rotated (180, 0) with_color dark_gray on_picture tab_picture[i];
   
-    draw (M[last_pt_ctr] -- p37) rotated (180, 0) on_picture qv[i];
-    %draw (N[j] -- p36) rotated (180, 0) with_color dark_gray on_picture qv[i];
+    draw (M[last_pt_ctr] -- p37) rotated (180, 0) on_picture tab_picture[i];
+    %draw (N[j] -- p36) rotated (180, 0) with_color dark_gray on_picture tab_picture[i];
   endfor;
 
   point C[];
@@ -3224,10 +3224,10 @@ def plot_stitches_on_spherical_biangles =
     for i = 0 step 11.25 until 67.5:
       get_point_on_spherical_biangle (C) {j, 27.5, i, radius, false, 0, do_black};
       if j == 0:
-	draw p21 -- C[j] on_picture qv[m];
+	draw p21 -- C[j] on_picture tab_picture[m];
       else:
-	draw p[k] -- C[j] on_picture qv[m];
-	draw (p[k] -- C[j]) rotated 180 on_picture qv[m];
+	draw p[k] -- C[j] on_picture tab_picture[m];
+	draw (p[k] -- C[j]) rotated 180 on_picture tab_picture[m];
       fi;
       j += 1;
       k += 2;
