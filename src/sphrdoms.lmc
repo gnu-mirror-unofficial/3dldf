@@ -1,0 +1,3371 @@
+%%% sphrdoms.lmc
+%%%% Created by Laurence D. Finston (LDF) Sun 17 Oct 2021 10:05:09 AM CEST
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2021 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+  
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+%% ** (2) Variable declarations
+
+%% *** (3)  Global, used in macros.
+
+
+point p[];    
+picture v[];  
+numeric bi_ang[];  
+picture bi_ang_pict[];
+numeric biangle_width[];
+numeric RA_arc_length;
+numeric Declination_arc_length;
+numeric middle_angle;   
+numeric min_edge_angle; 
+numeric max_edge_angle;
+point R[];
+picture_vector pv;
+picture qv[];
+picture label_picture;
+picture flat_quadrant_picture[];
+numeric label_picture_ctr;
+newwrite nw[];
+pen medium_pen;
+pen large_pen;
+pen Large_pen;
+path Q;
+color ccolor;
+boolean do_extra_labels;
+numeric i;
+numeric label_pos_zero;
+numeric label_pos_top;
+numeric label_pos_bot;
+numeric label_pos_rt;
+numeric label_pos_urt;
+numeric label_pos_ulft;
+numeric label_pos_lrt;
+numeric label_pos_llft;
+newwrite label_out;
+picture tab_picture;
+newwrite star_info_combined;
+path edge[];
+
+rectangle D[][];
+triangle T[][];
+picture quadrant_picture;
+point star_point;
+star_point := origin;
+path quadrant[][];
+path flat_quadrant[][];
+path temp_path[];
+path tab[];
+
+point stitch_pt_sphere[];
+point stitch_pt_biangle[];
+
+point temp_star_panel_point;
+temp_star_panel_point := origin;
+
+point temp_star_flat_panel_point;
+temp_star_flat_panel_point := origin;
+
+numeric RRA_ctr;
+
+numeric DDecl_ctr;
+
+numeric basic_shift_val;
+
+basic_shift_val := 3pt;
+
+RRA_ctr := 0;
+DDecl_ctr := 0;
+
+
+label_pos_zero := 0;
+label_pos_top  := 1;
+label_pos_bot  := 2;
+label_pos_lft  := 3;
+label_pos_rt   := 4;
+label_pos_urt  := 5;
+label_pos_ulft := 6;
+label_pos_lrt  := 7;
+label_pos_llft := 8;
+
+pen star_pen[];
+
+star_pen[-1] := pencircle scaled (8pt, 8pt, 8pt);       
+star_pen[0]  := pencircle scaled (7pt, 7pt, 7pt); 
+star_pen[1]  := pencircle scaled (6pt, 6pt, 6pt);       
+star_pen[2]  := pencircle scaled (5pt, 5pt, 5pt); 
+star_pen[3]  := pencircle scaled (4pt, 4pt, 4pt);       
+star_pen[4]  := pencircle scaled (3pt, 3pt, 3pt); 
+star_pen[5]  := pencircle scaled (2pt, 2pt, 2pt);
+star_pen[6]  := pencircle scaled (1pt, 1pt, 1pt);       
+
+medium_pen := pencircle scaled (2pt, 2pt, 2pt);
+large_pen  := pencircle scaled (3pt, 3pt, 3pt);
+Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
+
+label_picture_ctr := 0;
+
+do_extra_labels := false;
+
+label_out := "clstsph_1_labels.tex";
+
+if do_write:
+  star_info_combined := "clstsph_1_star_info_combined.tex";
+fi;
+
+string empty_str;
+
+empty_str := "";
+
+% * (1) Beginning of 3DLDF code.
+
+%\font\TINY=cmr3\font\Tiny=cmr4
+
+verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
+  & "\font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch"
+  & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\font\SMALLgreek=cmmi6 "
+  & "etex;";
+
+%% ** (2) macro get_spherical_biangles
+
+macro get_spherical_biangles;
+
+def get_spherical_biangles {numeric rad, boolean ddo_labels} =
+
+  circle c[];
+  numeric a;
+  numeric radius[];
+  numeric circum[];
+  numeric n[];
+  point ra_decl_zero_pt;
+  numeric tab_wd;
+
+  boolean testing;
+
+  testing := false; % true; %
+  
+  tab_wd := .25cm;
+  
+  radius0 := rad;
+
+  ra_decl_zero_pt := (rad, 0);
+
+  c0 := unit_circle scaled (radius0, 0, radius0) rotated (90, 0);
+  a := circumference c0;   %% a == Circumference of horizontal great circle.
+
+  if testing:
+    draw c0 with_color red;
+  fi;
+
+  p0 := (-radius0, 0);
+  p1 := (radius0, 0);
+
+  %message "magnitude (p1 - p0) (diameter of c0):";
+  %show magnitude (p1 - p0);
+
+  if testing:
+    draw p0 -- p1;  %% Horizontal line through origin.
+  fi;
+
+  if ddo_labels and testing:
+    dotlabel.lft("$p_0$", p0);
+    dotlabel.rt("$p_1$", p1);
+  fi;
+
+  p2 := (0, -radius0);
+  p3 := (0, radius0);
+
+  if testing:
+    draw p2 -- p3;  %% Vertical line through origin.
+  fi;
+
+  if ddo_labels and testing:
+    dotlabel.bot("$p_2$", p2);
+    dotlabel.top("$p_3$", p3);
+  fi;
+
+  j := 4;
+  for i = 11.25 step 11.25 until 78.75:
+    p[j] := p1 rotated (0, 0, i);
+    p[j + 1] := (0, ypart p[j]);
+    %draw p[j + 1] -- p[j];
+    if ddo_labels and testing:
+      dotlabel.rt("$p_{" & decimal j & "}$", p[j]);
+    fi;
+    radius[j] := magnitude(p[j] - p[j + 1]);
+    c[j] := unit_circle scaled (radius[j], 0, radius[j]);
+    circum[j] := circumference c[j];
+    biangle_width[j] := circum[j] / 8;
+    %message "biangle_width[" & decimal j & "]:";
+    %show biangle_width[j];
+    j += 2;
+  endfor;
+
+%% **** (4)
+
+  edge0 := null_path; 
+  edge1 := null_path; 
+  edge2 := null_path;  
+  edge3 := null_path;  
+
+  edge0 += ..;
+  edge1 += ..;
+  edge2 += ..;
+  edge3 += ..;
+
+  n0 := a / 8;  %% 1/8 of circumference of c0 == width of spherical biangles at 0 deg. declination.
+  n1 := a / 32; %% 1/32 of circumference of red circle == Distance between the declination lines in 
+                %% increments of 11.25 deg.
+
+  p20 := (-.5n0, 0);
+  p21 := (.5n0, 0);
+
+  label.rt("$0^\circ$", p21 shifted (1.5cm, 0));
+
+  if ddo_labels:
+    dotlabel.lft("$p_{20}$", p20);
+    dotlabel.rt("$p_{21}$", p21);
+  fi;
+
+  edge0 += p20;
+  edge1 += p21;
+
+  p22 := (0, -.25a);
+  p23 := (0, .25a);
+
+  if ddo_labels:
+    dotlabel.bot("$p_{22}$", p22);
+    dotlabel.top("$p_{23}$", p23);
+  fi;
+
+  label.rt("$-90^\circ$", p22 shifted (.25cm, 0));
+  label.rt("$90^\circ$", p23 shifted (.25cm, 0));
+
+  j := 24;
+  k := 4;
+  for i = 1 step 1 until 7:
+    p[j]     := (-.5biangle_width[k], (i * n1));
+    p[j + 1] := (.5biangle_width[k], (i * n1));
+    if ddo_labels:
+      dotlabel.lft("$p_{" & decimal j & "}$", p[j]);
+      dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]);
+    fi;
+
+    if (11.25 * i) ==  floor (11.25 * i):
+      label("$" & decimal (11.25 * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0));
+    elseif (11.25 * i) - floor (11.25 * i) == .25:
+      label("$" & decimal (floor (11.25 * i)) & "^\circ 15^\prime$", p[j + 1] shifted (1.5cm, 0));
+    elseif (11.25 * i) - floor (11.25 * i) == .5:
+      label("$" & decimal (floor (11.25 * i)) & "^\circ 30^\prime$", p[j + 1] shifted (1.5cm, 0));
+    elseif (11.25 * i) - floor (11.25 * i) == .75:
+      label("$" & decimal (floor (11.25 * i)) & "^\circ 45^\prime$", p[j + 1] shifted (1.5cm, 0));
+    fi;
+    edge0 += p[j];
+    edge1 += p[j + 1];
+
+    j += 2;
+    k += 2;
+  endfor;
+
+  if ddo_labels:
+    dotlabel.lft("$p_{24}$", p24);
+    dotlabel.rt("$p_{25}$", p25);
+  fi;
+
+  j := 1;
+
+  for i := 24 step 2 until 37:
+    p[20 + i] := p[i] rotated (180, 0);
+    p[20 + 1 + i] := p[i + 1] rotated (180, 0);
+    if ddo_labels:
+      dotlabel.lft("$p_{" & decimal (20 + i) & "}$", p[20 + i]);
+      dotlabel.rt("$p_{" & decimal (20 + i + 1) & "}$", p[20 + i + 1]);
+    fi;
+
+    if (11.25 * j) ==  floor (11.25 * j):
+      label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
+    elseif (11.25 * j) - floor (11.25 * j) == .25:
+      label("$-" & decimal (floor (11.25 * j)) & "^\circ 15^\prime$", p[20 + i + 1] shifted (1.5cm, 0));
+    elseif (11.25 * j) - floor (11.25 * j) == .5:
+      label("$-" & decimal (floor (11.25 * j)) & "^\circ 30^\prime$", p[20 + i + 1] shifted (1.5cm, 0));
+    elseif (11.25 * j) - floor (11.25 * j) == .75:
+      label("$-" & decimal (floor (11.25 * j)) & "^\circ 45^\prime$", p[20 + i + 1] shifted (1.5cm, 0));
+    fi;
+    
+    %label("$-" & decimal (11.25 * j) & "^\circ$", p[20 + i + 1] shifted (1.5cm, 0));
+    j += 1;
+  endfor;
+
+  if false:
+    draw p20 -- p21;
+    draw (p20 -- p21) rotated (180, 0);
+    draw p22 -- p23;
+    draw p24 -- p25;
+    draw (p24 -- p25) rotated (180, 0);
+    draw p26 -- p27;
+    draw (p26 -- p27) rotated (180, 0);
+    draw p28 -- p29;
+    draw (p28 -- p29) rotated (180, 0) ;
+    draw p30 -- p31;
+    draw (p30 -- p31) rotated (180, 0);
+    draw p32 -- p33;
+    draw (p32 -- p33) rotated (180, 0);
+    draw p34 -- p35;
+    draw (p34 -- p35) rotated (180, 0);
+    draw p36 -- p37;
+    draw (p36 -- p37) rotated (180, 0);
+  fi;
+
+  edge0 += p23;
+  edge1 += p23;
+
+  edge2 := edge0 rotated (180, 0);
+  edge3 := edge1 rotated (180, 0);
+
+  draw edge0; % with_color dark_gray;
+  draw edge1; % with_color dark_gray;
+  draw edge2; % with_color dark_gray;
+  draw edge3; % with_color dark_gray;
+
+  p38 := p23;
+
+  p39 := p22; %% We need to use p22 in the following loop.
+              %% It's original value is restored below.
+              %% LDF 2021.08.30.
+
+  p22 := p20;
+
+  j := 0;
+  for i = 22 step 2 until 34:
+    p100 := mediate(p[i], p[i+2], .5);
+
+    p101 := p100 shifted (0, 0, 1);
+    p102 := p[i+2] rotated_around (p100, p101) 90;
+    p103 := mediate(p100, p102, .6);
+
+    p104 := p[i] shifted by (p103 - p100);
+    p105 := p[i+2] shifted by (p103 - p100);
+    p106 := mediate(p103, p104, .6);
+    p107 := mediate(p103, p105, .6);
+
+    tab[j] := p[i] -- p106 -- p107 -- p[i+2];
+    %draw tab[j] on_picture tab_picture;
+    %draw tab[j] rotated (180, 0) on_picture tab_picture;
+    j += 1;
+  endfor;
+
+  p22 := p39;  %% Restoring old value of p22.  LDF 2021.08.30.
+  
+ Q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
+
+ Q += cycle;
+
+ for i = 0 upto 7:
+   bi_ang_pict[i] := current_picture;
+   label("{\largebf " & decimal (i+1) & "}", p22 shifted (0, -.5cm)) on_picture bi_ang_pict[i];
+ endfor;
+
+%% **** (4)
+
+ label(  "\setbox0=\hbox{RA \vtop{\hbox{$22\rm{h}\\thinspace 30^\prime$}\hbox{$337.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[0];
+
+ label(  "\setbox0=\vtop{\hbox{$0\rm{h}$}\hbox{$0^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[0];
+
+ label(  "\setbox0=\vtop{\hbox{$1\rm{h}\\thinspace 30^\prime$}\hbox{$22.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[0];
+
+%% **** (4)
+ 
+ label(  "\setbox0=\hbox{RA \vtop{\hbox{$1\rm{h}\\thinspace 30^\prime$}\hbox{$22.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[1];
+
+ label(  "\setbox0=\vtop{\hbox{$3\rm{h}$}\hbox{$45^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[1];
+
+ label(  "\setbox0=\vtop{\hbox{$4\rm{h}\\thinspace 30^\prime$}\hbox{$67.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[1];
+
+%% **** (4)
+
+ label(  "\setbox0=\hbox{RA \vtop{\hbox{$4\rm{h}\\thinspace 30^\prime$}\hbox{$67.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[2];
+
+label(  "\setbox0=\vtop{\hbox{$6\rm{h}$}\hbox{$90.0^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[2];
+
+ label(  "\setbox0=\vtop{\hbox{$7\rm{h}\\thinspace 30^\prime$}\hbox{$112.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[2];
+
+%% **** (4)
+ 
+ label(  "\setbox0=\hbox{RA \vtop{\hbox{$7\rm{h}\\thinspace 30^\prime$}\hbox{$112.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[3];
+
+label(  "\setbox0=\vtop{\hbox{$9\rm{h}$}\hbox{$135^\circ$}}"
+      & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[3];
+
+ label(  "\setbox0=\vtop{\hbox{$10\rm{h}\\thinspace 30^\prime$}\hbox{$157.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[3];
+
+%% **** (4)
+
+label(  "\setbox0=\hbox{RA \vtop{\hbox{$10\rm{h}\\thinspace 30^\prime$}\hbox{$157.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[4];
+
+label(  "\setbox0=\vtop{\hbox{$12\rm{h}$}\hbox{$180^\circ$}}"
+      & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[4];
+
+ label(  "\setbox0=\vtop{\hbox{$13\rm{h}\\thinspace 30^\prime$}\hbox{$202.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[4];
+
+%% **** (4)
+
+label(  "\setbox0=\hbox{RA \vtop{\hbox{$13\rm{h}\\thinspace 30^\prime$}\hbox{$202.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[5];
+
+label(  "\setbox0=\vtop{\hbox{$15\rm{h}$}\hbox{$225^\circ$}}"
+      & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[5];
+
+ label(  "\setbox0=\vtop{\hbox{$16\rm{h}\\thinspace 30^\prime$}\hbox{$247.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[5];
+
+%% **** (4)
+
+label(  "\setbox0=\hbox{RA \vtop{\hbox{$16\rm{h}\\thinspace 30^\prime$}\hbox{$247.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[6];
+
+label(  "\setbox0=\vtop{\hbox{$18\rm{h}$}\hbox{$270^\circ$}}"
+      & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[6];
+
+ label(  "\setbox0=\vtop{\hbox{$19\rm{h}\\thinspace 30^\prime$}\hbox{$292.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[6];
+
+%% **** (4)
+
+label(  "\setbox0=\hbox{RA \vtop{\hbox{$19\rm{h}\\thinspace 30^\prime$}\hbox{$292.5^\circ$}}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (-1.5cm, -1cm)) bi_ang_pict[7];
+
+label(  "\setbox0=\vtop{\hbox{$21\rm{h}$}\hbox{$315^\circ$}}"
+      & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (0, -1cm)) bi_ang_pict[7];
+
+ label(  "\setbox0=\vtop{\hbox{$22\rm{h}\\thinspace 30^\prime$}\hbox{$337.5^\circ$}}"
+       & "\vbox{\vskip\dp0\box0}",
+     p22 shifted (1.25cm, -1cm)) bi_ang_pict[7];
+
+%% **** (4)
+
+%% *** (3)
+ 
+ clear current_picture;
+enddef;
+
+%% ** (2) macro plot_star_on_sphere
+
+macro plot_star_on_sphere;
+
+def plot_star_on_sphere (pp) {numeric rradius, star S} =
+
+  path q[];
+  string u[];
+  point P[];
+  circle c[];
+  numeric a[];
+  transform t[];
+  point ra_decl_zero_pt;
+  
+  pv += 4;
+  c0 := unit_circle scaled (rradius, 0, rradius);
+  
+  ra_decl_zero_pt := (rradius, 0);
+  
+  u0 := common_name S;
+  %message "star S == " & u0 & ".";
+
+  a0 := ra_decimal_degrees S;
+  %message "RA decimal deg. of star S (" & u0 & ") (a0):";
+  %show a0;
+
+  a1 := declination_decimal_degrees S;
+  %message "Declination decimal deg. of star S (" & u0 & ") (a1):";
+  %show a1;
+
+  P17 := ra_decl_zero_pt rotated (0, a0);
+  %dotlabel.top("$P_{17}$", P17) pv[ctr];
+  %label.lft("$P_{17}$:  RA $" & decimal a0 & "^\circ$", P17 shifted (-.75cm, 0)) pv[ctr];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr + 1];
+  %dotlabel.llft("$P_{17}$", P17) pv[ctr + 2];
+  %dotlabel.top("$P_{17}$", P17) pv[ctr + 3];
+
+  P19 := ra_decl_zero_pt rotated (0, 0, a1);
+  %dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr];
+  %dotlabel.rt("$P_{19}$:  Decl.~$" & decimal a1 & "^\circ$", P19) pv[ctr + 1];
+
+  P22 := P19 rotated (0, a0);  %% a0:  RA of star S.
+
+  pp := P22;
+
+  q0 := origin -- P17 -- P22 --cycle;
+
+  % draw q0 with_color blue on_picture pv[ctr];
+  % draw q0 with_color blue on_picture pv[ctr + 1];
+  % draw q0 with_color blue on_picture pv[ctr + 2];
+  % draw q0 with_color blue on_picture pv[ctr + 3];
+
+  P23 := get_normal q0;
+  %show P23;
+
+  t0 := identity rotated_around (origin, P23) 3;
+
+  P24 := P17 transformed t0; 
+
+  if (magnitude (P22 - P24)) > (magnitude (P22 - P17)):
+    invert t0;
+  fi;
+
+  P24 := P17;
+  
+  q1 += ..;
+
+  q1 += P17;
+
+  forever:
+    P24 *= t0;
+    exit_if magnitude(ypart P24) >= magnitude(ypart P22);
+    q1 += P24;
+  endfor;
+
+  q1 += P22;
+
+  % draw q1 on_picture pv[ctr] with_pen medium_pen     with_color orange;
+  % draw q1 on_picture pv[ctr + 1] with_pen medium_pen with_color orange;
+  % draw q1 on_picture pv[ctr + 3] with_pen medium_pen with_color orange;
+
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 1];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 2];
+  %dotlabel.lft("$P_{22}$", P22) pv[ctr + 3];
+  %message "a0 (RA of star S in decimal degrees):";
+  %show a0;
+
+  if (a0 == 337.5):
+    %message "a0 (RA) == 337.5";
+    bi_ang0 := 0;
+    bi_ang1 := 7;
+  elseif (a0 > 337.5) or (a0 < 22.5):
+    %message "a0 (RA) > 337.5 or < 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := -1;
+    middle_angle := 0;       %% This case requires special handling.
+    min_edge_angle := 337.5;
+    max_edge_angle := 22.5;
+  elseif (a0 == 22.5):
+    %message "a0 (RA) == 22.5";
+    bi_ang0 := 0;
+    bi_ang1 := 1;
+  elseif (a0 > 22.5) and (a0 < 67.5):
+    %message "a0 (RA) > 22.5 or a0 < 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := -1;
+    middle_angle   := 45;
+    min_edge_angle := 22.5;
+    max_edge_angle := 67.5;
+  elseif (a0 == 67.5):
+    %message "a0 (RA) == 67.5";
+    bi_ang0 := 1;
+    bi_ang1 := 2;
+  elseif (a0 > 67.5) and (a0 < 112.5):
+    %message "a0 (RA) > 67.5 and a0 < 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := -1;
+    middle_angle   := 90;
+    min_edge_angle := 67.5;
+    max_edge_angle := 112.5;
+  elseif (a0 == 112.5):
+    %message "a0 (RA) == 112.5";
+    bi_ang0 := 2;
+    bi_ang1 := 3;
+  elseif (a0 > 112.5) and (a0 < 157.5):
+    bi_ang0 := 3;
+    bi_ang1 := -1;
+    middle_angle   := 135;
+    min_edge_angle := 112.5;
+    max_edge_angle := 157.5;
+  elseif a0 == 157.5:
+    %message "a0 (RA) == 157.5";
+    bi_ang0 := 3;
+    bi_ang1 := 4;
+  elseif (a0 > 157.5) and (a0 < 202.5):
+    %message "a0 (RA) > 157.5 and a0 < 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := -1;
+    middle_angle   := 180;
+    min_edge_angle := 157.5;
+    max_edge_angle := 202.5;
+  elseif a0 == 202.5:
+    %message "a0 (RA) == 202.5";
+    bi_ang0 := 4;
+    bi_ang1 := 5;
+  elseif (a0 > 202.5) and (a0 < 247.5):
+    %message "a0 (RA) > 202.5 and a0 < 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := -1;
+    middle_angle   := 225;
+    min_edge_angle := 202.5;
+    max_edge_angle := 247.5;
+  elseif a0 == 247.5:
+    %message "a0 (RA) == 247.5";
+    bi_ang0 := 5;
+    bi_ang1 := 6;
+  elseif (a0 > 247.5) and (a0 < 292.5):
+    %message "a0 (RA) > 247.5 and a0 < 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := -1;
+    middle_angle   := 270;
+    min_edge_angle := 247.5;
+    max_edge_angle := 292.5;
+  elseif a0 == 292.5:
+    %message "a0 (RA) == 292.5";
+    bi_ang0 := 6;
+    bi_ang1 := 7;
+  elseif (a0 > 292.5) and (a0 < 337.5):
+    %message "a0 (RA) > 292.5 and a0 < 337.5";
+    bi_ang0 := 7;
+    bi_ang1 := -1;
+    middle_angle   := 315;
+    min_edge_angle := 292.5;
+    max_edge_angle := 337.5;
+  else:
+    errmessage "a0 (RA) has invalid value.";
+  fi;
+
+  %message "bi_ang0:"; 
+  %show bi_ang0;
+
+  %message "bi_ang1:"; 
+  %show bi_ang1;
+
+  %message "middle_angle:";
+  %show middle_angle;   
+
+  %message "min_edge_angle:";
+  %show min_edge_angle; 
+
+  %message "max_edge_angle:";
+  %show max_edge_angle; 
+
+  %message "P22:";
+  %show P22;
+  
+  P25 := (0, ypart P22);  %% Point on y-axis with height corresponding to declination of star S.
+
+  %message "P25:";
+  %show P25;
+
+  %dotlabel.ulft("$P_{25}$", P25) on_picture pv[ctr];
+  %dotlabel.rt("$P_{25}$", P25) pv[ctr + 1];
+  %dotlabel.rt("$P_{25}$", P25) pv[ctr + 3];
+
+  %message "a1 (declination_decimal_degrees S)";
+  %show a1;
+
+  a2 := magnitude(P22 - P25);
+  %message "a2 (rradius of circle through P22):";
+  %show a2;
+
+  c1 := unit_circle scaled (a2, 0, a2) shifted (0, ypart P25);
+
+  % draw c1 with_color cyan on_picture pv[ctr];
+  % draw c1 with_color cyan on_picture pv[ctr + 1];
+  % draw c1 with_color cyan on_picture pv[ctr + 2];
+  % draw c1 with_color cyan on_picture pv[ctr + 3];
+  
+  a3 := arc_length (magnitude(a1)) c0;
+
+  %message "a3 (arc length corresponding to declination of star S):";
+  %show a3;
+
+  Declination_arc_length := a3;
+  
+  %message "a0 (RA of star S in decimal degrees):";
+  %show a0;
+
+  numeric middle_angle_one;
+  
+  if a0 >= 337.5:
+    middle_angle_one := 360;
+    a4 := 360 - a0;
+  else:
+    middle_angle_one := middle_angle;
+    a4 := middle_angle - a0;
+  fi;
+
+  if middle_angle_one > a0:
+    a4 := -magnitude(a4);
+  elseif middle_angle_one < a0:
+    a4 := -magnitude(a4);
+  fi;
+ 
+  if (a0 == middle_angle) or (a0 == middle_angle_one):
+    %message "a0 == middle_angle (or middle_angle_one) == " & decimal middle_angle
+    %  & ".  Don't need arc length for second arc.";
+    %message "Setting RA_arc_length to 0.";
+    RA_arc_length := 0;
+  else:
+    %message "a0 == " & decimal a0 & " is not equal to middle_angle == " & decimal middle_angle & ".";
+    %message "Will calculate second arc length.";
+    %message "a4 (difference between middle_angle == " & decimal middle_angle & " and RA of  of star S):";
+    %show a4;
+    
+    q2 := q0 rotated (0, a4);
+
+    % draw q2 with_color magenta on_picture pv[ctr];
+    % draw q2 with_color magenta on_picture pv[ctr + 1];
+    % draw q2 with_color magenta on_picture pv[ctr + 2];
+    % draw q2 with_color magenta on_picture pv[ctr + 3];
+
+    P26 := P22 rotated (0, a4);
+    %dotlabel.bot("$P_{26}$", P26) on_picture pv[ctr];
+
+    a5 := arc_length (magnitude(a4)) c1;
+    %message "a5 (arc length of angle " & decimal magnitude(a4) & " of circle c1 with rradius " & decimal a2 & "):";
+    %show a5;
+
+    RA_arc_length := a5;
+    
+    P27 := P22;
+
+    a6 := magnitude(P26 - P22);
+
+    q3 += ..;
+    q3 += P27;
+
+    a7 := 3;
+    if a4 < 0:
+      a7 *= -1;
+    fi;
+    
+    forever:
+      exit_if magnitude(P27 - P22) > a6;
+      rotate P27 (0, a7);
+      q3 += P27;
+    endfor;
+
+    q3 += P26;
+    
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 1];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 2];
+    % draw q3 with_color green with_pen large_pen on_picture pv[ctr + 3];
+
+  fi;
+
+  %message "Declination_arc_length:";
+  %show Declination_arc_length;
+
+  %message "RA_arc_length:";
+  %show RA_arc_length;
+
+  i += 4;
+  
+enddef;
+
+
+%% ** (2) macro get_sphere_for_plotting_stars
+
+macro get_sphere_for_plotting_stars;
+
+def get_sphere_for_plotting_stars {numeric rradius} :=
+
+  numeric i;
+  numeric j;
+  string u[];
+  point r[];
+  sphere s;
+  circle c;
+  circle ecliptic;
+  point ra_decl_zero_pt;
+
+  j := 0;
+  m := 0;
+  j := 11.25; 
+
+  %message "rradius:"; 
+  %show rradius;
+
+  ra_decl_zero_pt := (rradius, 0);
+  r16 := ra_decl_zero_pt;
+
+  ecliptic := unit_circle scaled (rradius, 0, rradius) rotated (-23.4, 0);
+  %draw ecliptic with_color blue;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+%% Find out why using the 'set' command for 'sphere s' didn't work here.  LDF 2021.7.1.
+  
+  s := unit_sphere scaled (rradius, rradius, rradius);
+
+  draw s;
+  
+  j := 0;
+  for i = 0 step 22.5 until 337.5:
+    r[j] := (rradius, 0) rotated (0, i);
+    u[j] := "$" & decimal i & "^\circ$";
+    j += 1;
+  endfor;
+  
+  v8  := current_picture;
+  v9  := current_picture;
+  v10 := current_picture;
+  v11 := current_picture;
+
+  clear current_picture;
+  
+  dotlabel.rt(u0, r0) v10;
+  dotlabel.rt(u1, r1) v10;
+  dotlabel.rt(u2, r2) v10;
+  dotlabel.urt(u3, r3) v10;
+  dotlabel.top(u4, r4) v10;
+  dotlabel.ulft(u5, r5) v10;
+  dotlabel.lft(u6, r6) v10;
+  dotlabel.lft(u7, r7) v10;
+  dotlabel.lft(u8, r8) v10;
+  dotlabel.lft(u9, r9) v10;
+  dotlabel.lft(u10, r10) v10;
+  dotlabel.llft(u11, r11) v10;
+  dotlabel.bot(u12, r12) v10;
+  dotlabel.lrt(u13, r13) v10;
+  dotlabel.rt(u14, r14) v10;
+  dotlabel.rt(u15, r15) v10;
+  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v8;
+  dotlabel.rt("$r_{16}$:  $0^\circ$", r16) v9;
+  %label.rt("$r_{16}$", r16 shifted (0, 0, -.3cm)) v10;
+  dotlabel.rt("$r_{16}$", r16) v11;
+
+%% *** (3) Declination
+
+  r20 := r16 rotated (0, 0, 11.25);
+  r21 := r16 rotated (0, 0, -11.25);
+  dotlabel.rt("$11.25^\circ$", r20) v9;
+  dotlabel.rt("$-11.25^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$22.5^\circ$", r20) v9;
+  dotlabel.rt("$-22.5^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$33.75^\circ$", r20) v9;
+  dotlabel.rt("$-33.75^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.rt("$45.0^\circ$", r20) v9;
+  dotlabel.rt("$-45.0^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.urt("$56.25^\circ$", r20) v9;
+  dotlabel.lrt("$-56.25^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.urt("$67.5^\circ$", r20) v9;
+  dotlabel.lrt("$-67.5^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.top("$78.75^\circ$", r20) v9;
+  dotlabel.lrt("$-78.75^\circ$", r21) v9;
+  rotate r20 (0, 0, 11.25);    
+  rotate r21 (0, 0, -11.25);
+  dotlabel.top("$90^\circ$", r20) v9;
+  dotlabel.bot("$-90^\circ$", r21) v9;
+
+  r18 := r16 rotated (0, 22.5);
+  dotlabel.llft("$22.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$45^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$67.5^\circ$", r18) v8; 
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$90^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$112.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$135^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$157.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lft("$180^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lft("$202.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$225^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.urt("$247.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.lrt("$270^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$292.5^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.ulft("$315^\circ$", r18) v8;
+  rotate r18 (0, 22.5);
+  dotlabel.rt("$337.5^\circ$", r18) v8;
+  
+%% *** (3)
+  
+  c := unit_circle scaled (rradius, 0, rradius);
+  draw c on_picture v8;   %% with_color red 
+  draw c on_picture v11;  %% with_color red 
+
+enddef;
+
+
+%% ** (2) Macro plot_star_on_spherical_biangle
+
+macro plot_star_on_spherical_biangle;
+
+def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_pos,
+                                    numeric shift_x, numeric shift_y,
+                                    boolean suppress_dot, boolean suppress_text_label} =
+  
+  numeric decl;
+  numeric ra;
+  string s;
+  string u;
+  point y_axis_point;
+  numeric box_wd;
+  numeric box_ht;
+  string label_str;
+  string label_suffix;
+  
+  numeric shift_x_val;
+  numeric shift_y_val;
+
+  string temp_str;
+
+  string f_sect_str;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+  %message "Entering macro `plot_star_on_spherical_biangle'.";
+
+  decl := declination_decimal_degrees S;
+  ra   :=  right_ascension_decimal_degrees S;
+
+  numeric ra_h;
+  numeric ra_m;
+  numeric ra_s;
+
+  numeric decl_d;
+  numeric decl_m;
+  numeric decl_s;
+  
+  
+  ra_h := right_ascension_hours S;
+  ra_m := right_ascension_minutes S;
+  ra_s := right_ascension_seconds S;
+
+  % message "ra_h:";
+  % show ra_h;
+  % message "ra_m:";
+  % show ra_m;
+  % message "ra_s:";
+  % show ra_s;
+
+
+  decl_d := declination_degrees S;
+  decl_m := declination_minutes S;
+  decl_s := declination_seconds S;
+
+  % message "decl_d:";
+  % show decl_h;
+  % message "decl_m:";
+  % show decl_m;
+  % message "decl_s:";
+  % show decl_s;
+  
+  % pause;
+  
+  %message "decl:";
+  %show decl;
+
+  %message "ra:";
+  %show ra;
+
+  % message "bi_ang0:";
+  % show bi_ang0;
+
+  % message "bi_ang1:";
+  % show bi_ang1;
+
+  %message "middle_angle:";
+  %show middle_angle;
+
+  %message "min_edge_angle:";
+  %show min_edge_angle;
+
+  %message "max_edge_angle:";
+  %show max_edge_angle;
+
+  %message "Declination_arc_length:";
+  %show Declination_arc_length;
+
+  %message "RA_arc_length:";
+  %show RA_arc_length;
+
+  if bi_ang1 == -1:
+    %message "bi_ang0 == " & decimal bi_ang0 & " and bi_ang1 == -1.";
+    if decl >= 0:
+      y_axis_point := (0, Declination_arc_length);
+    else:
+      y_axis_point := (0, -Declination_arc_length);
+    fi;
+
+    % if ra > middle_angle:
+    %   dotlabel.lft("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % else:
+    %   dotlabel.rt("$R^\prime_{" & decimal point_number & "}$", y_axis_point) bi_ang_pict[bi_ang0];
+    % fi;
+
+    %message "ra";
+    %show ra;
+    %message "middle_angle";
+    %show middle_angle;
+    %pause;
+
+    if ra >= 336.5:
+      middle_angle := 360.0;
+    fi;
+    
+    if ra > middle_angle:
+      R[point_number] := (RA_arc_length, ypart y_axis_point);
+    else:
+      R[point_number] := (-RA_arc_length, ypart y_axis_point);
+    fi;
+
+
+    if suppress_text_label and suppress_dot:
+      temp_str := " {\bf (Not plotted)}";
+    else:
+      temp_str := "";
+    fi;
+
+    if (common_name S) contains "$":
+      s := "\bayertoks={}";
+    elseif common_name S == "N Velorum":
+      s := "\bayertoks={}";
+    else:
+      s := "\bayertoks={" & bayer_designation_greek_letter_tex S & " " & constellation_name_genitive S & "}";
+    fi;
+
+    if point_number < 10:
+      u := "00";
+    elseif point_number < 100:
+      u := "0";
+    else:
+      u := "";
+    fi;
+
+% (progn
+% (setq i 90)      
+% (insert "\n")
+% (while (<= i 360)
+% (insert (concat (number-to-string i) "\n"))
+% (insert (concat (number-to-string i) "\n"))
+% (setq i (+ i 22.5)))	  
+% )
+
+    f_sect_str := "";
+
+    %message "ra == " & decimal ra;
+
+    if (ra > 0) and (ra < 22.5):
+      %message "0 < ra < 22.5";
+      f_sect_str := "1";
+    elseif (ra > 22.5) and (ra < 45):
+      %message "22.5 < ra < 45";
+      f_sect_str := "2";
+    elseif (ra > 45) and (ra < 67.5):
+      %message "45 < ra < 67.5";
+      f_sect_str := "3";
+    elseif (ra > 67.5) and (ra < 90):
+      %message "67.5 < ra < 90";
+      f_sect_str := "4";
+    elseif (ra > 90.0) and (ra < 112.5):
+      %message "90.0 < ra < 112.5";
+      f_sect_str := "5";
+    elseif (ra > 112.5) and (ra < 135.0):
+      %message "112.5 < ra < 135.0";
+      f_sect_str := "6";
+    elseif (ra > 135.0) and (ra < 157.5):
+      %message "135.0 < ra < 157.5";
+      f_sect_str := "7";
+    elseif (ra > 157.5) and (ra < 180.0):
+      %message "157.5 < ra < 180.0";
+      f_sect_str := "8";
+    elseif (ra > 180.0) and (ra < 202.5):
+      %message "180.0 < ra < 202.5";
+      f_sect_str := "9";
+    elseif (ra > 202.5) and (ra < 225.0):
+      %message "202.5 < ra < 225.0";
+      f_sect_str := "10";
+    elseif (ra > 225.0) and (ra < 247.5):
+      %message "225.0 < ra < 247.5";
+      f_sect_str := "11";
+    elseif (ra > 247.5) and (ra < 270.0):
+      %message "247.5 < ra < 270.0";
+      f_sect_str := "12";
+    elseif (ra > 270.0) and (ra < 292.5):
+      %message "270.0 < ra < 292.5";
+      f_sect_str := "13";
+    elseif (ra > 292.5) and (ra < 315.0):
+      %message "292.5 < ra < 315.0";
+      f_sect_str := "14";
+    elseif (ra > 315.0) and (ra < 337.5):
+      %message "315.0 < ra < 337.5";
+      f_sect_str := "15";
+    elseif (ra > 337.5) and (ra < 360.0):
+      %message "337.5 < ra < 360.0";
+      f_sect_str := "16";
+    fi;
+
+    %% & "/" & f_sect_str & 
+
+    s := s & "\starinfo{" & u & decimal point_number & "}{" & decimal point_number & "}{" & common_name S & temp_str 
+      & "}{$" & decimal ra_h & "\rm{h}\\thinspace " & decimal ra_m & "^\prime\\thinspace " & decimal ra_s
+      & "^{\prime\prime}$}{$" & decimal decl_d & "^\circ\\thinspace " & decimal decl_m & "^\prime\\thinspace " & decimal decl_s
+      & "^{\prime\prime}$}{" & decimal (bi_ang0 + 1) & "/" & f_sect_str & "}{" & decimal apparent_magnitude S;
+
+    if apparent_magnitude_varies S:
+       s := s & "v";
+    fi;
+
+    s := s & "}{" & decimal absolute_magnitude S;
+
+    if absolute_magnitude_varies S:
+       s := s & "v";
+    fi;
+    
+    s := s & "}{" & constellation_full_name S & "}";
+    
+    % message "s:";
+    % show s;
+    % pause;
+    
+
+    if do_write:
+      write s to nw[bi_ang0];
+      write s to star_info_combined;
+    fi;
+      
+    f_sect_str := "";
+    
+if label_pos == label_pos_zero:
+      label_suffix := "";
+      shift_x_val := shift_x;
+      shift_y_val := shift_y;
+    elseif label_pos == label_pos_top:
+      label_suffix := ".top";
+      shift_x_val := shift_x;
+      shift_y_val := basic_shift_val + shift_y;
+    elseif label_pos == label_pos_bot:
+      label_suffix := ".bot";
+      shift_x_val := shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
+    elseif label_pos == label_pos_lft:
+      label_suffix := ".lft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := shift_y;
+    elseif label_pos == label_pos_rt:
+      label_suffix := ".rt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := shift_y;
+    elseif label_pos == label_pos_urt:
+      label_suffix := ".urt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := basic_shift_val + shift_y;
+    elseif label_pos == label_pos_ulft:
+      label_suffix := ".ulft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := basic_shift_val + shift_y;
+    elseif label_pos == label_pos_lrt:
+      label_suffix := ".lrt";
+      shift_x_val := basic_shift_val + shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
+    elseif label_pos == label_pos_llft:
+      label_suffix := ".llft";
+      shift_x_val := -basic_shift_val + shift_x;
+      shift_y_val := -basic_shift_val + shift_y;
+    fi;
+
+    s := "{\medium " & common_name S & "}";
+
+    label_str := "label" & label_suffix & "(s, R[" & decimal point_number & "] shifted ("
+                 & decimal shift_x_val & ", " & decimal shift_y_val & ")) with_text_color ccolor on_picture qv["
+                 & decimal bi_ang0 & "];";
+    
+    % message "s == " & s;
+    % message "label_str == " & label_str;
+
+    if not suppress_text_label:
+      scantokens label_str;
+    % else:
+    %   message "Suppressing text label for " & common_name S & ".";
+      %pause;
+    fi;
+    
+    numeric app_mag;
+    pen sstar_pen;
+   
+    app_mag := apparent_magnitude S;
+
+    if app_mag < 0:
+      sstar_pen := star_pen[-1];
+    elseif app_mag < 1:
+      sstar_pen := star_pen[0];
+    elseif app_mag < 2:
+      sstar_pen := star_pen[1];
+    elseif app_mag < 3:
+      sstar_pen := star_pen[2];
+    elseif app_mag < 4:
+      sstar_pen := star_pen[3];
+    elseif app_mag < 5:
+      sstar_pen := star_pen[4];
+    else:
+      sstar_pen := star_pen[5];
+    fi;
+
+    if not suppress_dot:
+      drawdot R[point_number] with_pen sstar_pen with_color ccolor on_picture qv[bi_ang0];
+    % else:
+    %   message "Suppressing dot for " & common_name S & ".";
+      %pause;
+    fi;
+
+    box_wd := .75cm;
+    box_ht := .5cm;
+    
+    if length (common_name S) > 8:
+      box_wd += .25cm;
+    fi;
+    
+    s := "\\iffalse " & common_name S & "\\fi\\epsffile{sample3." & decimal (100 + label_picture_ctr)
+      & "}\\hskip2em plus 1em minus 1em"; 
+    
+    write (s) to label_out;
+
+    beginfig(100 + label_picture_ctr);
+      fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
+      label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
+      drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
+    endfig with_projection parallel_x_y;
+    label_picture_ctr += 1;
+
+    if do_extra_labels:
+      %dotlabel.bot("$R_{" & decimal point_number & "}$", R[point_number])
+      % with_text_color ccolor with_dot_color ccolor
+      % on_picture qv[bi_ang0];
+    fi;
+
+  %message "Exiting macro `plot_star_on_spherical_biangle'.";
+
+enddef;
+
+%% ** (2) macro draw_extra_label_on_spherical_biangle
+    
+macro draw_extra_label_on_spherical_biangle;
+
+def draw_extra_label_on_spherical_biangle {star S, point star_point, numeric bi_ang_one, numeric bi_ang_two,
+                                           boolean left_or_right, boolean bottom_or_top, numeric label_pos,
+                                           numeric shift_x, numeric shift_y, boolean do_labels,
+                                           boolean suppress_text_label, boolean draw_box, boolean edge_point} =
+
+  point P[];
+  path A;
+  
+  numeric RA;
+  numeric Decl;
+
+  color ccolor;
+  color line_color;
+
+  if do_black:
+    ccolor := white;
+    line_color := dark_gray;
+  else:
+    ccolor := black;
+    line_color := black;
+  fi;
+
+  RA := right_ascension_decimal_degrees S;
+
+  Decl := declination_decimal_degrees S;
+
+  %message "Star: " & common_name S & ":";
+  %pause;
+
+  % show RA;
+
+  % message "Decl:";
+  % show Decl;
+
+  path curr_edge[];
+
+  % draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[bi_ang_one];
+  % draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];
+  % draw edge2 with_pen pencircle scaled (3pt, 3pt) with_color blue on_picture qv[bi_ang_one];
+  % draw edge3 with_pen pencircle scaled (3pt, 3pt) with_color red on_picture qv[bi_ang_one];
+  
+  if bottom_or_top and left_or_right:         %% top right
+    %message "top right.";
+    curr_edge0 := edge1;                      %% top right 
+    curr_edge1 := edge0;                      %% top left
+
+  elseif bottom_or_top and not left_or_right: %% top left
+
+    %message "top left.";                     
+    curr_edge0 := edge0;                      %% top left
+    curr_edge1 := edge1;                      %% top right
+
+  elseif not bottom_or_top and left_or_right: %% bottom right
+    %message "bottom right.";
+    curr_edge0 := edge3;                      %% bottom right
+    curr_edge1 := edge2;                      %% bottom left
+
+  else:                                       %% bottom left
+    %message "bottom left.";
+    curr_edge0 := edge2;                      %% bottom left
+    curr_edge1 := edge3;                      %% bottom right
+  fi;
+
+  for i = 0 upto (length Q - 1):
+    P[i] := get_point (i) Q;
+  endfor;
+
+  if do_labels:
+    dotlabel.rt("$P_{0}$", P0) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{1}$", P1) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{2}$", P2) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{3}$", P3) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{4}$", P4) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{5}$", P5) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{6}$", P6) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{7}$", P7) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{8}$", P8) on_picture qv[bi_ang_one];
+    dotlabel.rt("$P_{9}$", P9) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{10}$", P10) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{11}$", P11) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{12}$", P12) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{13}$", P13) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{14}$", P14) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{15}$", P15) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{16}$", P16) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{17}$", P17) on_picture qv[bi_ang_one];
+    dotlabel.rt("$P_{18}$", P18) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{19}$", P19) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{20}$", P20) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{21}$", P21) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{22}$", P22) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{23}$", P23) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{24}$", P24) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{25}$", P25) on_picture qv[bi_ang_one];
+    dotlabel.rt("$P_{26}$", P26) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{27}$", P27) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{28}$", P28) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{29}$", P29) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{30}$", P30) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{31}$", P31) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{32}$", P32) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{33}$", P33) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{34}$", P34) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{35}$", P35) on_picture qv[bi_ang_one];
+  fi;
+  
+  P36 :=star_point shifted (-1cm, 0);
+  P37 := star_point shifted (1cm, 0);
+
+  %draw P36 -- P37 with_color red on_picture qv[bi_ang_one];
+
+  P38 := (P36 -- P37) intersection_point (P27 -- P8);
+
+  if do_labels:
+    dotlabel.urt("$P_{38}$", P38) on_picture qv[bi_ang_one];
+  fi;
+  
+  numeric mag[];
+
+  mag0 := magnitude(xpart star_point - xpart P38);
+
+  circle c;
+
+  P39 := (radius, 0);    
+  
+  P40 := P39 rotated (0, 0, declination_decimal_degrees S);
+
+  numeric rad;
+  rad := xpart P40;
+
+  c := unit_circle scaled (rad, 0, rad) rotated (90, 0);
+
+  numeric circum;
+
+  circum := circumference c;
+  
+  mag0 := circum / 16;
+
+  % message "mag0:";
+  % show mag0;
+
+  P41 := P38 shifted (-mag0, 0);
+  P42 := P38 shifted (mag0, 0);
+
+  if do_labels:
+    dotlabel.lft("$P_{41}$", P41) on_picture qv[bi_ang_one];
+    dotlabel.lft("$P_{42}$", P42) on_picture qv[bi_ang_one];
+  fi;
+  
+  % message "P41:";
+  % show P42;
+
+  % message "P42:";
+  % show P42;
+
+  %pause;
+  
+  %draw P41 -- P42 with_color red on_picture qv[bi_ang_one];
+
+  mag1 := magnitude(xpart P41 - xpart star_point);
+  mag2 := magnitude(xpart P42 - xpart star_point);
+ 
+  if mag1 < mag2:
+    P43 := P41 shifted (0, -1cm);
+    P44 := P41 shifted (0, 1cm);
+  else:
+    P43 := P42 shifted (0, -1cm);
+    P44 := P42 shifted (0, 1cm);
+  fi;
+
+  % dotlabel.lft("$P_{41}$", P41) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % dotlabel.lft("$P_{43}$", P43) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % dotlabel.rt("$P_{44}$", P44) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % dotlabel.top("$P_{8}$", P8) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % dotlabel.top("$P_{27}$", P27) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+
+  P45 := (star_point rotated_around (P43, P44) 180) rotated_around (P8, P27) 180;
+
+  % dotlabel.rt("$P_{45}$", P45) with_text_color red with_dot_color red on_picture qv[bi_ang_one];
+  % dotlabel.lft("$P_{45}$", P45) with_text_color red with_dot_color blue on_picture qv[bi_ang_two];
+  
+  numeric_vector nv;
+  numeric n;
+  numeric labeloffset;
+  labeloffset := 3pt;
+  
+  string s;
+
+  s := "{\medium " & common_name S & "}";
+    
+  nv := measure_text s;
+
+  % message "nv:";
+  % show nv;
+
+  n := nv0;
+  
+  %pause;
+    
+  A := box_text (P45, s);
+  
+  % drawdot P45 with_pen pencircle scaled (5pt, 5pt) with_color red on_picture qv[bi_ang_one];
+  % drawdot P45 with_pen pencircle scaled (5pt, 5pt) with_color ccolor on_picture qv[bi_ang_two];
+  
+  % message "suppress_text_label:";
+  % show suppress_text_label;
+  % pause;
+
+%% !! START HERE: LDF 2021.08.04.  BUG!  The following nested conditional works, but other
+%% variants did not, e.g., using 'not', having the second-level conditional in the "if" clause,
+%% etc.  !! TODO:  Try to fix this!
+
+  
+  %message "In `draw_extra_label_on_spherical_biangle':  Before conditional.";
+
+%% !! START HERE: LDF 2021.08.09.  Add code for putting boxes around text in the other
+%% cases, i.e., not "rt".  I only need to do this for cases that actually occur.
+  
+  if suppress_text_label:
+    ;
+  else:
+    if label_pos == label_pos_zero:
+      label("{\medium " & common_name S & "}", P45 shifted (shift_x, shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+	draw A shifted (shift_x, shift_y) on_picture qv[bi_ang_two];
+      fi;
+    elseif label_pos == label_pos_top:
+      label.top("{\medium " & common_name S & "}", P45 shifted (shift_x, basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+	draw A shifted (shift_x, basic_shift_val + shift_y) on_picture qv[bi_ang_two];
+      fi;
+    elseif label_pos == label_pos_bot:
+      label.bot("{\medium " & common_name S & "}", P45 shifted (shift_x, -basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+	draw A shifted (shift_x, -basic_shift_val + shift_y) on_picture qv[bi_ang_two];
+      fi;
+    elseif label_pos == label_pos_lft:
+      label.lft("{\medium " & common_name S & "}", P45 shifted (-basic_shift_val + shift_x, shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+	draw A shifted (-basic_shift_val + shift_x, shift_y) on_picture qv[bi_ang_two];
+      fi;
+    elseif label_pos == label_pos_rt:
+      label.rt("{\medium " & common_name S & "}", P45 shifted (basic_shift_val + shift_x, shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	draw A shifted (labeloffset + .5n + basic_shift_val + shift_x, shift_y) with_color line_color
+	  on_picture bi_ang_pict[bi_ang_two];
+	if do_black:
+	  fill A shifted (labeloffset + .5n + basic_shift_val + shift_x, shift_y) on_picture bi_ang_pict[bi_ang_two];
+	fi;
+      fi;
+    elseif label_pos == label_pos_urt:
+      label.urt("{\medium " & common_name S & "}", P45
+    	  shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
+    elseif label_pos == label_pos_ulft:
+      label.ulft("{\medium " & common_name S & "}", P45
+    	  shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
+    elseif label_pos == label_pos_lrt:
+      label.lrt("{\medium " & common_name S & "}", P45
+    	  shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
+    elseif label_pos == label_pos_llft:
+      label.llft("{\medium " & common_name S & "}", P45
+    	  shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+    	with_text_color ccolor on_picture qv[bi_ang_two];
+      if draw_box:
+	message "ERROR!  In macro `draw_extra_label_on_spherical_biangle;':";
+	errmessage "This case hasn't been programmed yet.";
+      fi;
+    fi;
+  fi;
+  
+  %message "After conditional.";
+
+  numeric app_mag;
+  pen sstar_pen;
+  pen sstar_pen_one;
+  
+  app_mag := apparent_magnitude S;
+
+  if app_mag < 0:
+    sstar_pen   := star_pen[-1];
+    sstar_pen_one := star_pen[0];
+  elseif app_mag < 1:
+    sstar_pen   := star_pen[0];
+    sstar_pen_one := star_pen[1];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+    sstar_pen_one := star_pen[2];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+    sstar_pen_one := star_pen[3];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+    sstar_pen_one := star_pen[4];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+    sstar_pen_one := star_pen[56];
+  else:
+    sstar_pen := star_pen[5];
+    sstar_pen_one := star_pen[6];
+  fi;
+
+%% Drawing the edges twice is necessary in order to ensure that the drawn paths
+%% aren't covered up by the drawdots, depending on the order in which the drawing
+%% commands are executed.  TODO:  Look into this!
+%% In addition, the partial dot on the right side for Gomeisa is so small that it's
+%% nearly completely covered by the drawn edge.  Think about changing this.  Maybe
+%% add a conditional for drawing the edge or edges.
+%% LDF 2021.08.09.
+  
+  if do_black and edge_point:
+    draw curr_edge0 on_picture qv[bi_ang_one];
+    draw curr_edge0 on_picture qv[bi_ang_two];
+    draw curr_edge1 on_picture qv[bi_ang_one];
+    draw curr_edge1 on_picture qv[bi_ang_two];
+    %drawdot P45 with_pen sstar_pen with_color red on_picture qv[bi_ang_one]; % white
+    drawdot P45 with_pen sstar_pen with_color white on_picture qv[bi_ang_two]; % blue
+    draw curr_edge0 on_picture qv[bi_ang_one];
+    draw curr_edge0 on_picture qv[bi_ang_two];
+    draw curr_edge1 on_picture qv[bi_ang_one];
+    draw curr_edge1 on_picture qv[bi_ang_two];
+  else:
+    drawdot P45 with_pen sstar_pen with_color ccolor on_picture qv[bi_ang_two];
+  fi;
+    
+  %draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[bi_ang_one];  
+
+enddef;
+
+%% ** (2) macro draw_lines
+
+macro draw_lines;
+
+def draw_lines =
+
+  ccolor := dark_gray;
+  
+  if do_black:
+    fill Q;
+  fi;
+    
+  drawdot origin with_pen medium_pen with_color ccolor;
+  draw p20 -- p21 with_color ccolor;
+  draw p22 -- p23 with_color ccolor;
+  draw p24 -- p25 with_color ccolor;
+  draw (p24 -- p25) rotated (180, 0) with_color ccolor;
+  draw p26 -- p27 with_color ccolor;
+  draw (p26 -- p27) rotated (180, 0) with_color ccolor;
+  draw p28 -- p29 with_color ccolor;
+  draw (p28 -- p29) rotated (180, 0)  with_color ccolor;
+  
+  draw p30 -- p31 with_color ccolor;
+  draw p32 -- p33 with_color ccolor;
+  draw p34 -- p35 with_color ccolor;
+  draw p36 -- p37 with_color ccolor;
+  draw p50 -- p51 with_color ccolor;
+  draw p52 -- p53 with_color ccolor;
+  draw p54 -- p55 with_color ccolor;
+  draw p56 -- p57 with_color ccolor;
+    
+enddef;
+
+%% ** (2) macro get_panels
+
+macro get_panels;
+
+def get_panels {numeric rradius} =
+
+  numeric i;
+  numeric j;
+  numeric k;
+  point K[];
+  
+  j := 0;
+  m := 1;
+
+  for k := 0 step 11.25 until 67.5:  %% Declination
+    j := 0;
+    for i := 0 step 22.5 until 337.5: %% Right ascension
+      K0 := (origin shifted (rradius, 0)) rotated (0, 0, k);
+      K1 := K0 rotated (0, 0, 11.25);
+      rotate K0 (0, i);
+      rotate K1 (0, i);
+      K2 := K0 rotated (0, 22.5);
+      K3 := K1 rotated (0, 22.5);
+      
+      K4 := (origin shifted (rradius, 0)) rotated (0, 0, -k);
+      K5 := K4 rotated (0, 0, -11.25);
+      rotate K4 (0, i);
+      rotate K5 (0, i);
+      K6 := K4 rotated (0, 22.5);
+      K7 := K5 rotated (0, 22.5);
+      
+      D[j][m]  := (K0, K1, K3, K2);
+      D[j][-m] := (K4, K5, K7, K6);
+      %draw D[j][m]  with_color green on_picture quadrant_picture;
+      %draw D[j][-m] with_color green on_picture quadrant_picture;
+      if (k == 0) and (i < 180):
+        label(decimal j & "/" & decimal m, mediate(K0, K3))  on_picture quadrant_picture;
+        label(decimal j & "/" & decimal -m, mediate(K4, K7)) on_picture quadrant_picture;
+      fi;
+      j += 1;
+    endfor;
+    m += 1;
+  endfor;
+
+  j := 0;
+  for i := 0 step 22.5 until 337.5:
+    K0 := (origin shifted (rradius, 0)) rotated (0, 0, 78.75);
+    K1 := K0 rotated (0, 22.5);
+    K2 := (0, rradius);
+    rotate K0 (0, i);
+    rotate K1 (0, i);
+    K6 := mediate(K2, mediate(K0, K1, .5), .75);
+    %label("1/" & decimal j, K6) with_text_color magenta on_picture quadrant_picture;
+    K3 := (origin shifted (rradius, 0)) rotated (0, 0, -78.75);
+    K4 := K3 rotated (0, 22.5);
+    K5 := (0, -rradius);
+    rotate K3 (0, i);
+    rotate K4 (0, i);
+    K7 := mediate(K5, mediate(K3, K4, .5), .75);
+    %label("-1/" & decimal j, K7) with_text_color magenta on_picture quadrant_picture;;
+    set T[j][8] with_points (K0, K1, K2);
+    set T[j][-8] with_points (K3, K4, K5);
+    %draw T[j][8]  with_color green on_picture quadrant_picture;   % magenta
+    %draw T[j][-8] with_color green on_picture quadrant_picture;   % magenta
+    j += 1;
+  endfor;
+  
+enddef;
+
+%% ** (2) macro plot_star_on_panel
+
+macro plot_star_on_panel;
+
+def plot_star_on_panel (sstar_panel_point) {star S, point sstar_point} =
+
+  numeric RA;
+  numeric Decl;
+  numeric RA_ctr;
+  numeric Decl_ctr;
+  boolean b;
+  path E[];
+  point M[];
+  rectangle V;
+  triangle  W;
+
+  bool_point bp;
+  plane pl;
+
+  RA   := right_ascension_decimal_degrees S;
+  Decl := declination_decimal_degrees S; 
+
+  %message "RA of " & common_name S & ":";
+  %show RA;
+
+  %message "Decl of " & common_name S & ":";
+  %show Decl;
+
+  RA_ctr := floor (RA / 22.5);
+
+  dotlabel.top(common_name S, sstar_point) on_picture quadrant_picture; % with_text_color blue with_dot_color blue
+
+  E0 := origin -- sstar_point;
+  %draw E0 with_color red with_pen medium_pen on_picture quadrant_picture;
+
+  if (Decl >= 0) and (Decl < 78.75):
+    Decl_ctr := floor (Decl / 11.25) + 1;
+    V := D[RA_ctr][Decl_ctr];
+  elseif (Decl < 0) and (Decl > -78.75):
+    Decl_ctr := (floor (-Decl / 11.25) + 1) * -1;
+    V := D[RA_ctr][Decl_ctr];
+  elseif Decl > 78.75:
+    Decl_ctr := 8;
+    W := T[RA_ctr][8];
+  elseif Decl < -78.75:
+    Decl_ctr := -8;
+    W := T[RA_ctr][-8];
+  fi;
+
+  % message "RA_ctr for " & common_name S & ":";
+  % show RA_ctr;
+
+  % message "Decl_ctr for " & common_name S & ":";
+  % show Decl_ctr;
+
+  %pause;
+    
+  RRA_ctr   := RA_ctr;
+  DDecl_ctr := Decl_ctr;
+  
+  if (Decl > 78.75) or (Decl < -78.75):
+    %draw W with_color blue with_pen medium_pen on_picture quadrant_picture;
+    pl := get_plane W;
+  else:
+    %draw V with_color blue with_pen medium_pen on_picture quadrant_picture;
+    pl := get_plane V;
+  fi;
+
+  bp := E0 intersection_point pl; 
+  b := bp;
+  
+  if b:
+    M0 := bp;
+    %drawdot M0 with_color red with_pen medium_pen on_picture quadrant_picture;
+  else:
+    message "This can't happen.";
+    M0 := origin;
+    pause;
+  fi;
+
+  %message "M0:"; 
+  %show M0;
+
+  sstar_panel_point := M0;
+
+enddef;
+
+%% ** (2) macro get_flat_panels
+
+%input "xxx.lmc";
+
+macro get_flat_panels;
+
+def get_flat_panels =
+
+  point p[];
+  path q[];
+  point r[];
+  point W[];
+  path u[];
+  transform t[];
+  numeric k;
+  numeric m;
+  numeric n[];
+  numeric v;
+  point temp_a;      
+  point temp_b;
+  point temp_c;
+
+  path temp_path_a;
+  path temp_path_b;
+
+  path temp_path_c;
+  path temp_path_d;
+
+  pen stitch_pen;
+  stitch_pen := pencircle scaled (2.5pt, 2.5pt, 2.5pt);
+
+  pen large_pen;
+  large_pen := pencircle scaled (3pt, 3pt, 3pt);
+  
+  boolean do_labels;
+
+  do_labels := false; % true; % 
+
+  color label_color;
+
+  if do_black:
+    label_color := white;
+  else:
+     label_color := black;
+  fi;
+
+  v := 0;
+  
+  k := 0;
+  m := 0;
+
+  for i = 0 upto 15:   % 15:
+    t1 := identity shifted ((i * 5cm), 0);
+    if i == 8:
+      v := 1;
+    fi;
+    for j = 1 upto 7: 
+      t0 := identity; 
+      q[m] := D[i][j];    
+      %draw q[m] on_picture flat_quadrant_picture[v];
+      p[k] := get_point (3) q[m];
+      if do_labels:
+        dotlabel.top("$p_{" & decimal k & "}$", p[k]) on_picture flat_quadrant_picture[v];
+      fi;
+      p[k+1] := get_point (0) q[m];
+      if do_labels:
+        dotlabel.top("$p_{" & decimal (k+1) & "}$", p[k+1]) on_picture flat_quadrant_picture[v];
+      fi;
+      p[k+2] := get_point (1) q[m];
+      if do_labels:
+        dotlabel.top("$p_{" & decimal (k+2) & "}$", p[k+2]) on_picture flat_quadrant_picture[v];
+      fi;
+      p[k+3] := get_point (2) q[m];
+      if do_labels:
+        dotlabel.top("$p_{" & decimal (k+3) & "}$", p[k+3]) on_picture flat_quadrant_picture[v];
+      fi;
+      n0 := (p[k+2] - p[k]) angle (p[k+1] - p[k]);
+      n1 := (p[k+3] - p[k]) angle (p[k+1] - p[k]);
+      %message "n0:";
+      %show n0;
+      %message "n1:";
+      %show n1;
+      n2 := magnitude(p[k+1] - p[k]);
+      n3 := magnitude(p[k+2] - p[k]);
+      n4 := magnitude(p[k+3] - p[k]);
+      %message "n2:";
+      %show n2;
+      %message "n3:";
+      %show n3;
+      %message "n4:";
+      %show n4;
+
+      p[k+4] := origin;
+      p[k+5] := p[k+4] shifted (n2, 0);
+      p[k+6] := (p[k+4] shifted (n3, 0)) rotated (0, 0, n0);
+      p[k+7] := (p[k+4] shifted (n4, 0)) rotated (0, 0, n1); 
+
+      q[m+1] := p[k+4] -- p[k+5] -- p[k+6] -- p[k+7] -- cycle;
+      %message "q[" & decimal (m+1) & "]:";
+      %show q[m+1];
+
+      p[k+8] := mediate(p[k+4], p[k+5]);
+      p[k+9] := mediate(p[k+6], p[k+7]);
+
+      if j == 1:
+        q[m+1] *= t1;
+
+        % if v == 1:
+        %   message "m+1 == " & decimal (m+1);
+        %   pause;
+        % fi;
+        
+        if do_black:
+          fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
+          draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+
+          fill q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+        else:
+          draw q[m+1] with_color black on_picture flat_quadrant_picture[v];      % dark_gray
+	  draw q[m+1] with_color black on_picture flat_quadrant_picture[10 + i]; % dark_gray
+        fi;
+        if do_black:
+          fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v+2];
+
+          fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+        else:
+          draw q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
+	  draw q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[10 + i];
+        fi;
+        if j == 7:
+          if do_labels:
+            dotlabel.llft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
+	    dotlabel.lrt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
+	    dotlabel.urt("$p_{" & decimal (k+6) & "}$", p[k+6]) on_picture flat_quadrant_picture[v];
+	    dotlabel.ulft("$p_{" & decimal (k+7) & "}$", p[k+7]) on_picture flat_quadrant_picture[v];
+	    dotlabel.bot("$p_{" & decimal (k+8) & "}$", p[k+8]) on_picture flat_quadrant_picture[v];
+	    dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
+          fi;
+        fi;
+      fi;
+
+
+      
+      if j > 1:
+        p[k+10] := get_point (0) q[m-1];
+        p[k+11] := get_point (1) q[m-1];
+        p[k+12] := get_point (2) q[m-1];
+        p[k+13] := get_point (3) q[m-1];
+        p[k+14] := mediate(p[k+10], p[k+11], .5);
+        p[k+15] := mediate(p[k+12], p[k+13], .5);
+        n5 := magnitude(p[k+15] - p[k+14]);
+
+        %t0 := identity shifted by (p[k-7] - p[k+14]);
+        %t0 := identity shifted (0, ((j-1) * 2cm));
+        t0 := identity shifted by (p[k+15]- p[k+8]);
+
+        p[k+4] *= t0;
+        p[k+5] *= t0;
+        p[k+6] *= t0;
+        p[k+7] *= t0;
+        p[k+8] *= t0;
+        p[k+9] *= t0;
+
+        if j == 7:
+          % if do_labels:
+          %   dotlabel.lft("$p_{" & decimal (k+4) & "}$", p[k+4]) on_picture flat_quadrant_picture[v];
+          %   dotlabel.rt("$p_{" & decimal (k+5) & "}$", p[k+5]) on_picture flat_quadrant_picture[v];
+          %   dotlabel.rt("$p_{" & decimal (k+6) & "}$", p[k+6]) on_picture flat_quadrant_picture[v];
+          %   dotlabel.lft("$p_{" & decimal (k+7) & "}$", p[k+7]) on_picture flat_quadrant_picture[v];
+          %   dotlabel.bot("$p_{" & decimal (k+8) & "}$", p[k+8]) on_picture flat_quadrant_picture[v];
+          %   dotlabel.top("$p_{" & decimal (k+9) & "}$", p[k+9]) on_picture flat_quadrant_picture[v];
+          % fi;
+        fi;
+
+        q[m+1] *= t0;
+        
+        if do_black:
+          fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
+          draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+          fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[v+2];
+
+	  fill q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+          fill q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] rotated (180, 0) with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+
+
+	else:
+          draw q[m+1] with_color black on_picture flat_quadrant_picture[v];
+          draw q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[v];
+
+	  draw q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+          draw q[m+1] rotated (180, 0) with_color black on_picture flat_quadrant_picture[10 + i];
+	  
+        fi;
+
+        if j == 7:
+          if do_labels:
+            dotlabel.lft("$p_{" & decimal (k+10) & "}$", p[k+10]) on_picture flat_quadrant_picture[v];
+            dotlabel.rt("$p_{"  & decimal (k+11) & "}$", p[k+11]) on_picture flat_quadrant_picture[v];
+            dotlabel.rt("$p_{"  & decimal (k+12) & "}$", p[k+12]) on_picture flat_quadrant_picture[v];
+            dotlabel.lft("$p_{" & decimal (k+13) & "}$", p[k+13]) on_picture flat_quadrant_picture[v];
+            dotlabel.top("$p_{"  & decimal (k+14) & "}$", p[k+14]) on_picture flat_quadrant_picture[v];
+            dotlabel.bot("$p_{"  & decimal (k+15) & "}$", p[k+15]) on_picture flat_quadrant_picture[v];
+          fi;
+        fi;
+        
+      fi;
+
+
+
+      flat_quadrant[i][j] := q[m+1];
+      flat_quadrant[i][-j] := q[m+1] rotated (180, 0);
+
+      %draw ((get_point (0) flat_quadrant[i][j]) -- (get_point(2) flat_quadrant[i][j]);
+
+      temp_a := mediate(get_point (0) flat_quadrant[i][j], get_point (1) flat_quadrant[i][j], .5);
+      temp_b := mediate(get_point (2) flat_quadrant[i][j], get_point (3) flat_quadrant[i][j], .5);
+      temp_c := mediate(temp_a, temp_b, .5) shifted (-1.75cm, 0);
+      
+      %draw flat_quadrant[i][j] with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
+      %drawdot get_point (0) flat_quadrant[i][j] with_color red with_pen medium_pen
+      %on_picture flat_quadrant_picture[v];
+      %draw get_point (0) flat_quadrant[i][j] -- get_point (2) flat_quadrant[i][j]
+      %with_color red with_pen medium_pen on_picture flat_quadrant_picture[v];
+      %label(decimal i & "/" & decimal j, temp_c) on_picture flat_quadrant_picture[v];
+      %label(decimal i & "/-" & decimal j, temp_c rotated (180, 0)) on_picture flat_quadrant_picture[v];
+      
+      k += 16;
+      m += 2;
+    endfor;
+  endfor;
+
+  do_labels := false; % true; % 
+  
+  v := 0;
+
+  for i := 0 upto 15:
+    if i == 8:
+      v := 1;
+    fi;
+
+    q[m] := T[i][8];
+
+    % message "m:";
+    % show m;
+
+    p[k] := get_point (0) q[m];
+    p[k+1] := get_point (1) q[m];
+    p[k+2] := get_point (2) q[m];
+
+    n0 := magnitude (p[k+1] - p[k]);
+    n1 := magnitude (p[k+2] - p[k]);
+    n2 := (p[k+2] - p[k]) angle (p[k+1] - p[k]);
+
+    p[k+3] := (n1, 0) rotated (0, 0, n2); 
+    p[k+4] := (.5n0, 0);
+    
+    q[m+1] := origin -- (n0, 0) -- p[k+3] -- cycle; 
+
+    t2 := identity shifted by (p[105 + (i * 112)] - p[k+4]);
+
+    q[m+1] *= t2;
+
+    q[m+2] := q[m+1] rotated (180, 0);
+
+    if do_black:
+      draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+      fill q[m+1] with_color black on_picture flat_quadrant_picture[v];
+      draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[v+2];
+      fill q[m+2] with_color black on_picture flat_quadrant_picture[v];
+
+      draw q[m+1] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+      fill q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+      draw q[m+2] with_color dark_gray on_picture flat_quadrant_picture[10 + i];
+      fill q[m+2] with_color black on_picture flat_quadrant_picture[10 + i];
+
+    else:
+      draw q[m+1] with_color black on_picture flat_quadrant_picture[v];
+      draw q[m+2] with_color black on_picture flat_quadrant_picture[v];
+
+      draw q[m+1] with_color black on_picture flat_quadrant_picture[10 + i];
+      draw q[m+2] with_color black on_picture flat_quadrant_picture[10 + i];
+      
+    fi;
+    
+    flat_quadrant[i][8]  := q[m+1];
+    flat_quadrant[i][-8] := q[m+2];
+    k += 5;
+    m += 3;
+  endfor;
+  
+  point temp_pt;
+
+
+  
+  v := 0;
+  j := 0;
+  m := 226;
+  for i = 0 upto 15:
+    if i == 8:
+      v := 1;
+    fi;
+    temp_pt := get_point (2) q[m];
+    if j == floor j:
+      label.lft("RA $" & decimal j & "\rm{h}$", temp_pt shifted (-.375cm, 0)) on_picture flat_quadrant_picture[v];
+      label.rt("RA $" & decimal (floor (j + 1.5)) & "\rm{h}\\thinspace 30^\prime$",
+	  temp_pt shifted (.375cm, 0)) on_picture flat_quadrant_picture[v];
+    else:
+      label.lft("RA $" & decimal (floor j) & "\rm{h}\\thinspace 30^\prime$",
+	  temp_pt shifted (-.375cm, 0)) on_picture flat_quadrant_picture[v];
+      label.rt("RA $" & decimal (floor (j + 1.5)) & "\rm{h}$",
+	  temp_pt shifted (.375cm, 0)) on_picture flat_quadrant_picture[v];
+    fi;      
+    j += 1.5;
+    m += 3;
+  endfor;
+  
+
+
+  % drawdot get_point (2) q[229] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot get_point (2) q[232] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot get_point (2) q[235] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot get_point (2) q[238] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot get_point (2) q[241] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot get_point (2) q[244] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot get_point (2) q[247] with_color green with_pen Large_pen on_picture flat_quadrant_picture[0];
+
+  % drawdot get_point (2) q[250] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[253] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[256] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[259] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[262] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[265] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[268] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  % drawdot get_point (2) q[271] with_color green with_pen Large_pen on_picture flat_quadrant_picture[1];
+  
+  r0 := p4;
+  r1 := p5;
+    
+  % drawdot q[2] with_color red with_pen Large_pen on_picture flat_quadrant_picture[0];
+  % drawdot q[2] with_color red with_pen Large_pen on_picture flat_quadrant_picture[0];
+
+  if do_labels:
+    dotlabel.lft("$r_0$", r0) on_picture flat_quadrant_picture[0];
+    dotlabel.rt("$r_1$", r1) on_picture flat_quadrant_picture[0];
+  fi;
+
+  j := 2;
+  for i := 1 step 2 until 13:
+    %draw q[i] with_color cyan with_pen medium_pen on_picture flat_quadrant_picture[0];
+    r[j]   := get_point (3) q[i];
+    r[j+1] := get_point (2) q[i];
+    if do_labels:
+      dotlabel.lft("$r_{" & decimal j & "}$", r[j]) on_picture flat_quadrant_picture[0];
+      dotlabel.rt("$r_{" & decimal (j+1) & "}$", r[j+1]) on_picture flat_quadrant_picture[0];
+    fi;
+    j += 2;
+  endfor;
+
+  %draw q225 with_color cyan with_pen medium_pen on_picture flat_quadrant_picture[0];
+
+  r[17] := get_point (2) q[225];
+
+  if do_labels:
+     dotlabel.top("$r_{17}$", r17) on_picture flat_quadrant_picture[0];
+  fi;
+
+  for i = 0 step 2 until 12:
+    r18 := mediate(r[i], r[i+2], .5);
+    if do_labels:
+      dotlabel.lft("$r_{18}$", r18) on_picture flat_quadrant_picture[0];
+    fi;
+    r19 := r18 shifted (0, 0, 1);
+    r20 := (mediate(r[i], r[i+2], .75)) rotated_around (r18, r19) 90;
+    if do_labels:
+      dotlabel.lft("$r_{20}$", r20) on_picture flat_quadrant_picture[0];
+    fi;
+    r21 := mediate(r[i], r[i+2], .125);
+    r22 := mediate(r[i+2], r[i], .125);
+    if do_labels:
+      dotlabel.rt("$r_{21}$", r21) on_picture flat_quadrant_picture[0];
+    fi;
+    if do_labels:
+      dotlabel.rt("$r_{22}$", r22) on_picture flat_quadrant_picture[0];
+    fi;
+    r23 := r21 shifted by (r20 - r18);
+    r24 := r22 shifted by (r20 - r18);
+    r25 := mediate(r23, r24, .125);
+    r26 := mediate(r24, r23, .125);
+    if do_labels:
+      dotlabel.lft("$r_{25}$", r25) on_picture flat_quadrant_picture[0];
+      dotlabel.lft("$r_{26}$", r26) on_picture flat_quadrant_picture[0];
+    fi;
+
+    u0 := r21 -- r25 -- r26 -- r22;
+
+    if do_labels:
+      dotlabel.rt("$r_{21}$", r21) on_picture flat_quadrant_picture[0];
+      dotlabel.lft("$r_{25}$", r25) on_picture flat_quadrant_picture[0];
+      dotlabel.lft("$r_{26}$", r26) on_picture flat_quadrant_picture[0];
+      dotlabel.rt("$r_{22}$", r22) on_picture flat_quadrant_picture[0];
+    fi;
+    
+    r40 := mediate(r22, r26);
+    r41 := mediate(r21, r25);
+
+    r42 := mediate(r40, r41, .25);
+    r43 := mediate(r40, r41, .5); 
+    r50 := mediate(r40, r41, .75); 
+
+    
+    draw u0 on_picture flat_quadrant_picture[0];
+    drawdot r42 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    
+    draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
+
+    drawdot r42 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
+    t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+    
+    draw u0 transformed t5 on_picture flat_quadrant_picture[1];
+
+    drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
+    t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+    t6 := identity rotated (180, 0);
+    t6 *= t5;
+    
+    draw u0 transformed t6 on_picture flat_quadrant_picture[1];
+    drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
+    for i = 0 upto 7:
+      t5 := identity shifted (i * 5cm, 0);
+      t6 := identity rotated (180, 0);
+      t6 *= t5;
+      draw u0 transformed t5 on_picture flat_quadrant_picture[10 + i];
+      draw u0 transformed t6 on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+    endfor;
+    
+    
+    for i = 8 upto 15:
+
+      t5 := identity shifted by
+	(get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+
+      t6 := identity shifted ((i - 8) * 5cm, 0);
+
+      t5 *= t6;
+      
+      draw u0 transformed t5 with_color blue with_pen large_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+
+      t5 := identity rotated (180, 0);
+      t6 := identity
+	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+      t7 := identity shifted ((i - 8) * 5cm, 0);
+      t5 *= t6;
+      t5 *= t7;
+      draw u0 transformed t5 with_color red with_pen large_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+    endfor;
+    
+    u1 := u0;
+    r44 := r42;
+    r45 := r43;
+    r51 := r50;
+    t3 := identity shifted (5cm, 0);
+    
+    for j = 1 upto 7:
+      r51 *= r45 *= r44 *= u1 *= t3;
+      draw u1 on_picture flat_quadrant_picture[0];
+      drawdot r44 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r45 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r51 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
+      t5 := identity rotated (180, 0);      
+      draw u1 transformed t5 on_picture flat_quadrant_picture[0];
+      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      
+      t5 := identity
+	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+      
+      draw u1 transformed t5 on_picture flat_quadrant_picture[1];
+      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
+      t5 := identity rotated (180, 0);
+      t6 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
+      t5 *= t6;
+      
+      draw u1 transformed t5 on_picture flat_quadrant_picture[1];
+      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      
+    endfor;
+
+    u1 := u0;
+    
+    %draw u0 on_picture flat_quadrant_picture[1];
+    %draw u0 rotated (180, 0) on_picture flat_quadrant_picture[1];
+    
+    % for j = 0 upto 7:
+    %   u1 *= t3;
+    %   draw u1 on_picture flat_quadrant_picture[1];
+    %   draw u1 rotated (180, 0) on_picture flat_quadrant_picture[1];
+    % endfor;
+
+  endfor;
+
+  r27 := mediate(r14, r17, .2);
+  r28 := mediate(r17, r14, .3);
+  r29 := mediate(r27, r28, .5);
+  r30 := r29 shifted (0, 0, 1);
+  r31 := r28 rotated_around (r29, r30) 90;
+
+  r32 := (.125cm * unit_vector(r31 - r29)) shifted r29;
+
+  u2 := (r27 -- r28) shifted by (r32 - r29);
+  u3 := r27 -- (r27 shifted by (r32 - r29));
+  u4 := r28 -- (r28 shifted by (r32 - r29));
+
+  t4 := identity shifted (5cm, 0);
+  
+  for i = 0 upto 7:
+    draw u2 on_picture flat_quadrant_picture[0];
+    draw u3 on_picture flat_quadrant_picture[0];
+    draw u4 on_picture flat_quadrant_picture[0];
+    draw u2 rotated (180, 0) on_picture flat_quadrant_picture[0];
+    draw u3 rotated (180, 0) on_picture flat_quadrant_picture[0];
+    draw u4 rotated (180, 0) on_picture flat_quadrant_picture[0];
+
+    draw u2 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
+      on_picture flat_quadrant_picture[1];
+    draw u3 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
+      on_picture flat_quadrant_picture[1];
+    draw u4 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]))
+      on_picture flat_quadrant_picture[1];
+
+    draw (u2 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1])))
+      rotated (180, 0) on_picture flat_quadrant_picture[1];
+    draw (u3 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1])))
+      rotated (180, 0) on_picture flat_quadrant_picture[1];
+    draw (u4 shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1])))
+      rotated (180, 0) on_picture flat_quadrant_picture[1];
+
+    u2 *= u3 *= u4 *= t4;
+  endfor;
+
+  if do_labels:
+    dotlabel.rt("$r_{27}$", r27) on_picture flat_quadrant_picture[0];
+    dotlabel.rt("$r_{28}$", r28) on_picture flat_quadrant_picture[0];
+    dotlabel.rt("$r_{29}$", r29) on_picture flat_quadrant_picture[0];
+    dotlabel.lft("$r_{32}$", r32) on_picture flat_quadrant_picture[0];
+  fi;
+  
+  
+  % draw flat_quadrant[8][1] with_color blue with_pen medium_pen on_picture flat_quadrant_picture[1];
+  % draw flat_quadrant[8][2] with_color red with_pen medium_pen on_picture flat_quadrant_picture[1];
+  % draw flat_quadrant[8][3] with_color green with_pen medium_pen on_picture flat_quadrant_picture[1];
+  % draw flat_quadrant[8][4] with_color cyan with_pen medium_pen on_picture flat_quadrant_picture[1];
+  %draw flat_quadrant[8][8] with_color cyan with_pen medium_pen on_picture flat_quadrant_picture[1];
+
+  n10 := (r2 - r0) angle (r1 - r0);
+
+  label.rt("$\scriptstyle 0\rm{h}$", mediate(r0, r2) shifted (-1pt, 0)) rotated (0, 0, n10)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 1\rm{h}\\thinspace 30^\prime$", mediate(r0, r2) shifted (5cm - 1pt, 0))
+    rotated (0, 0, n10)
+     with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 3\rm{h}$", mediate(r0, r2) shifted ((2 * 5cm) - 1pt, 6pt)) rotated (0, 0, n10)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 4\rm{h}\\thinspace 30^\prime$", mediate(r0, r2) shifted ((3 * 5cm) - 1.5pt, 0))
+    rotated (0, 0, n10) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 6\rm{h}$", mediate(r0, r2) shifted ((4 * 5cm) - 1pt, 0))
+    rotated (0, 0, n10) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.lrt("$\scriptstyle 7\rm{h}\\thinspace 30^\prime$", mediate(r0, r2) shifted ((5 * 5cm) + 0pt, -6pt))
+    rotated (0, 0, n10) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 9\rm{h}$", mediate(r0, r2) shifted ((6 * 5cm) - 1pt, 0))
+    rotated (0, 0, n10) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.rt("$\scriptstyle 10\rm{h}\\thinspace 30^\prime$", mediate(r0, r2) shifted ((7 * 5cm) - 1pt, 0))
+    rotated (0, 0, n10) with_text_color label_color on_picture flat_quadrant_picture[2];
+
+  n11 := ypart r2 - ypart r0;
+  
+  label.urt("$\scriptstyle 0^\circ$", r0) with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 11^\circ 15^\prime$", r2) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", r2 rotated_around(r0, r1) 180)
+    with_text_color label_color
+     on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", r4) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -22^\circ 30^\prime$", r4 rotated_around (r0, r1) 180)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", r6) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", r6 rotated_around (r0, r1) 180)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 45^\circ$", r8) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -45^\circ$", (r8 rotated_around (r0, r1) 180) shifted (0, -1pt))
+     with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.ulft("$\scriptscriptstyle 56^\circ 15^\prime$", r11 shifted (0, 2.5pt))
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -56^\circ 15^\prime$", r10 rotated_around (r0, r1) 180)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", r12) with_text_color label_color
+    on_picture flat_quadrant_picture[2];
+  label.urt("$\scriptstyle -67^\circ 30^\prime$", (r12 rotated_around (r0, r1) 180) shifted (-2pt, 0))
+     with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.top("$\scriptscriptstyle 78^\circ 45^\prime$",
+      (mediate(r14, r15)) shifted (0, -1pt)) rotated (0, 0, 90)
+    with_text_color label_color on_picture flat_quadrant_picture[2];
+  label.bot("$\scriptscriptstyle -78^\circ 45^\prime$",
+      (mediate(r14, r15) rotated_around (r0, r1) 180) shifted (0, 2pt))
+    rotated (0, 0, 90) with_text_color label_color on_picture flat_quadrant_picture[2];
+
+  %draw flat_quadrant[8][1] with_color cyan with_pen medium_pen with_text_color label_color
+  %on_picture flat_quadrant_picture[3];
+
+  j := 0;
+  for i := 1 upto 8:
+    r[33 + j] := get_point (0) flat_quadrant[8][i];
+    r[33 + j + 1] := get_point (1) flat_quadrant[8][i];
+    if do_labels:
+      dotlabel.lft("$r_{" & decimal (33 + j) & "}$", r[33 + j]) with_text_color label_color
+	on_picture flat_quadrant_picture[3];
+      dotlabel.rt("$r_{" & decimal (33 + j + 1) & "}$", r[33 + j + 1]) with_text_color label_color
+	on_picture flat_quadrant_picture[3];
+    fi;
+    j += 2;
+  endfor;
+
+  r49 := get_point (2) flat_quadrant[8][8];
+
+  if do_labels:
+    dotlabel.rt("$r_{49}$", r49) with_text_color label_color on_picture flat_quadrant_picture[3];
+  fi;
+
+  n12 := (r35 - r33) angle (r34 - r33);
+
+  label.rt("$\scriptstyle 12\rm{h}$", mediate(r33, r35) shifted (-1pt, 0)) rotated (0, 0, n12)
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 13\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted (5cm - 1pt, 0)) rotated (0, 0, n12)
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 15\rm{h}$", mediate(r33, r35) shifted ((2 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+    with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 16\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted ((3 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+    with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 18\rm{h}$", mediate(r33, r35) shifted ((4 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+    with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 19\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted ((5 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+    with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 21\rm{h}$", mediate(r33, r35) shifted ((6 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+    with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.rt("$\scriptstyle 22\rm{h}\\thinspace 30^\prime$",
+      mediate(r33, r35) shifted ((7 * 5cm) - 1pt, 0)) rotated (0, 0, n12)
+    with_text_color label_color on_picture flat_quadrant_picture[3];
+
+  label.urt("$\scriptstyle 0^\circ$", r33) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  label.urt("$\\scriptscriptstyle 11^\circ 15^\prime$", r35) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle -11^\circ 15^\prime$", r35 rotated_around (r33, r34) 180)
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 22^\circ 30^\prime$", r37) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  label.bot("$\scriptscriptstyle -22^\circ 30^\prime$",
+     (mediate(r37, r38) rotated_around (r33, r34) 180) shifted (.5cm - 4pt, 1pt))
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 33^\circ 45^\prime$", r39) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle -33^\circ 45^\prime$", r39 rotated_around (r33, r34) 180)
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 45^\circ$", r41) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle -45^\circ$", (r41 rotated_around (r33, r34) 180) shifted (0, -1pt))
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.lrt("$\scriptscriptstyle 56^\circ 15^\prime$", r43 shifted (-1pt, 0))
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  %label.urt("$\scriptstyle -56^\circ 15^\prime$", r43 rotated_around (r33, r34) 180)
+  %   with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.urt("$\scriptstyle 67^\circ 30^\prime$", r45) with_text_color label_color
+    on_picture flat_quadrant_picture[3];
+  %label.urt("$\scriptstyle -67^\circ 30^\prime$", (r45 rotated_around (r33, r34) 180) shifted (-2pt, 0))
+  %   with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.top("$\scriptscriptstyle 78^\circ 45^\prime$",
+     (mediate(r47, r48)) shifted (0, -1pt)) rotated (0, 0, 90)
+     with_text_color label_color on_picture flat_quadrant_picture[3];
+  label.bot("$\scriptscriptstyle -78^\circ 45^\prime$",
+     (mediate(r47, r48) rotated_around (r33, r34) 180) shifted (0, 2pt))
+     rotated (0, 0, 90) with_text_color label_color on_picture flat_quadrant_picture[3];
+ 
+  % r33 := get_point (0) flat_quadrant[8][1];
+  % r34 := get_point (1) flat_quadrant[8][1];
+  % r35 := get_point (2) flat_quadrant[8][1];
+  % r36 := get_point (3) flat_quadrant[8][1];
+    
+enddef;
+
+
+%% *** (3)
+
+%% ** (2) macro plot_star_on_flat_panel
+
+macro plot_star_on_flat_panel;
+
+%input "yyy.lmc";
+
+def plot_star_on_flat_panel (R) {star S, point P, numeric RA_ctr, numeric Decl_ctr, numeric label_pos,
+                                 numeric shift_x, numeric shift_y, boolean do_box, boolean suppress_text_label} =
+
+  path q[];
+  point p[];
+  numeric v;
+  numeric n[];
+  string s;
+
+  color ccolor;
+  
+  if do_black:
+    ccolor := white;  %% white
+  else:
+    ccolor := black;
+  fi;
+
+  if RA_ctr < 8:
+    v := 0;
+  else:
+    v := 1;
+  fi;
+  
+  % message "common_name S:";
+  % show common_name S;
+
+  % if common_name S contains "$":
+  %   message "Got a math character";
+  % fi;
+  
+  % message "RA_ctr:";
+  % show RA_ctr;
+
+  % message "Decl_ctr:";
+  % show Decl_ctr;
+
+  %pause; 
+
+  %message "P:";
+  %show P;
+
+  %message "R:";
+  %show R;
+
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    q0 := D[RA_ctr][Decl_ctr];
+    q1 := flat_quadrant[RA_ctr][Decl_ctr];
+    %draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
+  elseif (Decl_ctr == 8) or (Decl_ctr == -8):
+    q0 := T[RA_ctr][Decl_ctr];
+    q1 := flat_quadrant[RA_ctr][Decl_ctr];
+    %message "q0:";
+    %show q0;
+    %message "q1:";
+    %show q1;
+    %pause;
+    %draw q1 with_color red with_pen medium_pen on_picture flat_quadrant_picture[v]; 
+  fi;
+
+  %draw q0 with_color red with_pen medium_pen on_picture v9;
+
+  %message "RA_ctr:";
+  %show RA_ctr;
+
+  %message "Decl_ctr:";
+  %show Decl_ctr;
+  
+  p0 := get_point (0) q0;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p1 := get_point (3) q0;
+  fi;
+
+  p2 := get_point (2) q0;
+  p3 := get_point (1) q0;
+
+  p4 := get_point (0) q1;
+  p5 := get_point (1) q1;
+  p6 := get_point (2) q1;
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    p7 := get_point (3) q1;
+  fi;
+  
+  n0 := magnitude(P - p0);
+
+  if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    n1 := (P - p0) angle (p1 - p0);
+  else:
+    n1 := (P - p0) angle (p3 - p0);
+  fi;
+
+  %message "n0";
+  %show n0;
+
+  %message "n1";
+  %show n1;
+
+  if Decl_ctr > 0:
+    n2 := 1;
+  else:
+    n2 := -1;
+  fi;
+
+  p8:= p4 shifted (0, 0, n2);
+
+  p9 := (p4 shifted (n0, 0)) rotated_around (p4, p8) n1;
+
+  % dotlabel.lft("$p_0$", p0) on_picture v8;
+  % dotlabel.lft("$p_0$", p0) on_picture v10;
+
+  % if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %   dotlabel.lft("$p_1$", p1) on_picture v8;
+  % fi;
+  
+  % dotlabel.top("$p_2$", p2) on_picture v8;
+  % dotlabel.top("$p_3$", p3) on_picture v8;
+
+  % dotlabel.lft("$p_0$", p0) on_picture v9;
+
+  % dotlabel.lft("$p_0$", p0) on_picture v10;
+  % dotlabel.lft("$p_2$", p2) on_picture v10;
+  % dotlabel.rt("$p_3$", p3) on_picture v10;
+  
+  % if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+  %   dotlabel.top("$p_1$", p1) on_picture v9;
+  % fi;
+  
+  % dotlabel.top("$p_2$", p2) on_picture v9;
+  % dotlabel.top("$p_3$", p3) on_picture v9;
+
+  % dotlabel.lft("$p_4$", p4) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.rt("$p_5$", p5) on_picture flat_quadrant_picture[v]; 
+  % dotlabel.rt("$p_6$", p6) on_picture flat_quadrant_picture[v]; 
+
+  %if ((Decl_ctr > 0) and (Decl_ctr < 8)) or ((Decl_ctr < 0) and (Decl_ctr > -8)):
+    %dotlabel.lft("$p_7$", p7) on_picture flat_quadrant_picture[v];
+  %fi;
+
+  %message "p9";
+  %show p9;  
+  R := p9;
+
+  s := "{\small " & common_name S & "}";
+
+  if suppress_text_label:
+    ;
+  else:
+    if label_pos == label_pos_zero:
+      label(s, R shifted (shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label(s, R shifted (shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_top:
+      label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.top(s, R shifted (shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, basic_shift_val + shift_y), s)
+	  with_top_offset 0 with_bottom_offset 0 with_left_offset 0 with_right_offset 0;
+      fi;
+    elseif label_pos == label_pos_bot:
+      label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.bot(s, R shifted (shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_lft:
+      label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.lft(s, R shifted (-basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_rt:
+      label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.rt(s, R shifted (basic_shift_val + shift_x, shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, shift_y), s);
+      fi;
+    elseif label_pos == label_pos_urt:
+      label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.urt(s, R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_ulft:
+      label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.ulft(s, R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_lrt:
+      label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.lrt(s, R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    elseif label_pos == label_pos_llft:
+      label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[v];
+      label.llft(s, R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+	with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+      if do_box:
+	q2 := box_text (R shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y), s);
+      fi;
+    fi;
+  fi;
+
+  % if do_box:
+  %   draw q2 with_color ccolor on_picture flat_quadrant_picture[v];
+  % fi;
+  
+  numeric app_mag;
+  pen sstar_pen;
+
+  app_mag := apparent_magnitude S;
+
+  if app_mag < 0:
+    sstar_pen := star_pen[-1];
+  elseif app_mag < 1:
+    sstar_pen := star_pen[0];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+  else:
+    sstar_pen := star_pen[5];
+  fi;
+
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 2];
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[v + 4];
+
+  drawdot R with_pen sstar_pen with_color ccolor on_picture flat_quadrant_picture[10 + RA_ctr];
+  
+  %dotlabel.bot("$p_8$", p8) on_picture flat_quadrant_picture[v];
+  %dotlabel.top("$p_9$", p9) on_picture flat_quadrant_picture[v]; 
+  
+  % drawdot star_panel_point0 with_color red with_pen medium_pen;
+
+  % n5 := magnitude(star_panel_point0 - p0);
+  % message "n5:";
+  %show n5;
+  
+  % n6 := (star_panel_point0 - p0) angle (p1 - p0);
+  % message "n6:";
+  % show n6;
+
+  % p8 := (p4 shifted (n5, 0)) rotated (0, 0, n6);
+  % drawdot p8 with_color red with_pen medium_pen;
+
+enddef;
+
+%% ** (2) macro draw_extra_label_on_flat_panel
+
+macro draw_extra_label_on_flat_panel;
+
+%input "zzz.lmc";
+
+def draw_extra_label_on_flat_panel {star R, point S, string str, boolean left_or_right,
+                                    numeric picture_ctr_one,
+                                    numeric picture_ctr_two,
+                                    numeric RA_one, numeric RA_two, numeric Decl,
+                                    numeric label_pos, numeric shift_x, numeric shift_y,
+                                    boolean do_labels, boolean suppress_dot} =
+  point P[];
+
+  string star_name;
+
+  color ccolor;
+
+  if length str > 0: 
+    star_name := str;
+  else:
+    star_name := common_name R;
+  fi;
+
+  if do_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+  
+  for i = 0 upto 3:
+    P[i] := get_point (i) flat_quadrant[RA_one][Decl];
+  endfor;
+
+  for i = 0 upto 3:
+    P[i+4] := get_point (i) flat_quadrant[RA_two][Decl];
+  endfor;
+
+  if do_labels:
+    dotlabel.lft("0", P0) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.rt("1", P1) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.rt("2", P2) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.lft("3", P3) on_picture flat_quadrant_picture[picture_ctr_one];
+
+    dotlabel.lft("4", P4) on_picture flat_quadrant_picture[picture_ctr_two];
+    dotlabel.rt("5", P5) on_picture flat_quadrant_picture[picture_ctr_two];
+    dotlabel.rt("6", P6) on_picture flat_quadrant_picture[picture_ctr_two];
+    dotlabel.lft("7", P7) on_picture flat_quadrant_picture[picture_ctr_two];
+  fi;
+
+  numeric temp_mag;
+
+  P8 := S shifted (-1cm, 0);
+  P9 := S shifted (1cm, 0);
+
+  if left_or_right: %% true is "right"
+    P10 := (P1 -- P2) intersection_point (P8 -- P9);
+  else:
+    P10 := (P0 -- P3) intersection_point (P8 -- P9);
+  fi;
+
+  temp_mag := magnitude(xpart P10 - xpart S);
+
+  if left_or_right: %% true is "right"
+    P11 := (P4 -- P7) intersection_point (P8 -- P9);
+  else:
+    P11 := (P5 -- P6) intersection_point (P8 -- P9);
+  fi;
+
+  if do_labels:
+    dotlabel.ulft("$P_{10}$", P10) on_picture flat_quadrant_picture[picture_ctr_one];
+    dotlabel.ulft("$P_{11}$", P11) on_picture flat_quadrant_picture[picture_ctr_two];
+  fi;
+
+  if left_or_right: %% true is "right"
+    P12 := P11 shifted (-temp_mag, 0);
+  else:
+    P12 := P11 shifted (temp_mag, 0);
+  fi;
+
+% message "P9:";
+% show P9;
+
+  numeric app_mag;
+  pen sstar_pen;
+
+  app_mag := apparent_magnitude R;
+
+  if app_mag < 0:
+    sstar_pen := star_pen[-1];
+  elseif app_mag < 1:
+    sstar_pen := star_pen[0];
+  elseif app_mag < 2:
+    sstar_pen := star_pen[1];
+  elseif app_mag < 3:
+    sstar_pen := star_pen[2];
+  elseif app_mag < 4:
+    sstar_pen := star_pen[3];
+  elseif app_mag < 5:
+    sstar_pen := star_pen[4];
+  else:
+    sstar_pen := star_pen[5];
+  fi;
+
+  
+  if label_pos == label_pos_zero:
+    label("{\small " & star_name & "}", P12 shifted (shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label("{\small " & star_name & "}", P12 shifted (shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_top:
+    label.top("{\small " & star_name & "}", P12 shifted (shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.top("{\small " & star_name & "}", P12 shifted (shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_bot:
+    label.bot("{\small " & star_name & "}", P12 shifted (shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.bot("{\small " & star_name & "}", P12 shifted (shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_lft:
+    label.lft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.lft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_rt:
+    label.rt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.rt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_urt:
+    label.urt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.urt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_ulft:
+    label.ulft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.ulft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_lrt:
+    label.lrt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.lrt("{\small " & star_name & "}", P12 shifted (basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  elseif label_pos == label_pos_llft:
+    label.llft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[picture_ctr_two];
+    label.llft("{\small " & star_name & "}", P12 shifted (-basic_shift_val + shift_x, -basic_shift_val + shift_y))
+      with_text_color ccolor on_picture flat_quadrant_picture[10 + RA_two];
+  fi;
+  
+  % label.rt("{\small " & star_name & "}", P12 shifted (basic_shift_val, 0))
+  %   on_picture flat_quadrant_picture[picture_ctr_two];
+
+  if not suppress_dot:
+    drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[picture_ctr_two];
+    drawdot P12 with_color ccolor with_pen sstar_pen on_picture flat_quadrant_picture[10 + RA_two];
+  fi;
+
+enddef;
+
+
+%% ** (2) macro draw_stitches
+    
+macro draw_stitches;
+
+def draw_stitches {boolean do_labels} =
+
+  %message "Entering draw_stitches.";
+    
+  point P[];
+  
+  if false:
+    draw edge0 with_pen pencircle scaled (3pt, 3pt) with_color green on_picture qv[0];
+    draw edge1 with_pen pencircle scaled (3pt, 3pt) with_color cyan on_picture qv[0];
+    draw edge2 with_pen pencircle scaled (3pt, 3pt) with_color blue on_picture qv[0];
+    draw edge3 with_pen pencircle scaled (3pt, 3pt) with_color red on_picture qv[0];
+  fi;
+  
+  %edge1  %% top right 
+  %edge0  %% top left
+  %edge3  %% bottom right
+  %edge2  %% bottom left
+
+  for i = 0 upto (length Q - 1):
+    P[i] := get_point (i) Q;
+  endfor;
+
+  if do_labels:
+    dotlabel.rt("$P_{0}$", P0) on_picture qv[0];
+    dotlabel.rt("$P_{1}$", P1) on_picture qv[0];
+    dotlabel.rt("$P_{2}$", P2) on_picture qv[0];
+    dotlabel.rt("$P_{3}$", P3) on_picture qv[0];
+    dotlabel.rt("$P_{4}$", P4) on_picture qv[0];
+    dotlabel.rt("$P_{5}$", P5) on_picture qv[0];
+    dotlabel.rt("$P_{6}$", P6) on_picture qv[0];
+    dotlabel.rt("$P_{7}$", P7) on_picture qv[0];
+    dotlabel.lft("$P_{8}$", P8) on_picture qv[0];
+    dotlabel.lrt("$P_{9}$", P9) on_picture qv[0];
+    dotlabel.lft("$P_{10}$", P10) on_picture qv[0];
+    dotlabel.lft("$P_{11}$", P11) on_picture qv[0];
+    dotlabel.lft("$P_{12}$", P12) on_picture qv[0];
+    dotlabel.lft("$P_{13}$", P13) on_picture qv[0];
+    dotlabel.lft("$P_{14}$", P14) on_picture qv[0];
+    dotlabel.lft("$P_{15}$", P15) on_picture qv[0];
+    dotlabel.lft("$P_{16}$", P16) on_picture qv[0];
+    dotlabel.lft("$P_{17}$", P17) on_picture qv[0];
+    dotlabel.rt("$P_{18}$", P18) on_picture qv[0];
+    dotlabel.lft("$P_{19}$", P19) on_picture qv[0];
+    dotlabel.lft("$P_{20}$", P20) on_picture qv[0];
+    %dotlabel.lft("$P_{21}$", P21) on_picture qv[0];
+    dotlabel.lft("$P_{22}$", P22) on_picture qv[0];
+    dotlabel.lft("$P_{23}$", P23) on_picture qv[0];
+    dotlabel.lft("$P_{24}$", P24) on_picture qv[0];
+    dotlabel.lft("$P_{25}$", P25) on_picture qv[0];
+    dotlabel.rt("$P_{26}$", P26) on_picture qv[0];
+    dotlabel.lft("$P_{27}$", P27) on_picture qv[0];
+    dotlabel.rt("$P_{28}$", P28) on_picture qv[0];
+    dotlabel.rt("$P_{29}$", P29) on_picture qv[0];
+    dotlabel.rt("$P_{30}$", P30) on_picture qv[0];
+    dotlabel.rt("$P_{31}$", P31) on_picture qv[0];
+    dotlabel.rt("$P_{32}$", P32) on_picture qv[0];
+    dotlabel.rt("$P_{33}$", P33) on_picture qv[0];
+    dotlabel.rt("$P_{34}$", P34) on_picture qv[0];
+    dotlabel.lrt("$P_{35}$", P35) on_picture qv[0];
+  fi;
+
+  for j = 0 upto 7:
+    for i = 0 upto 6:
+      P36 := get_point 0 tab[i];
+      P37 := get_point 1 tab[i]; 
+      P38 := get_point 2 tab[i];
+      P39 := get_point 3 tab[i];
+
+      P40 := mediate(P38, P39);
+      P41 := mediate(P36, P37);
+
+      P42 := P40 rotated_around (P0, P17) 180;
+      P43 := P41 rotated_around (P0, P17) 180;
+      
+      drawdot mediate(P40, P41, .25) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P40, P41, .5) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P40, P41, .75) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+
+      drawdot mediate(P42, P43, .25) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P42, P43, .5) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+      drawdot mediate(P42, P43, .75) with_pen pencircle scaled (2.5pt, 2.5pt, 2.5pt) on_picture qv[j];
+    endfor;
+  endfor;
+
+% if do_labels:
+  %   dotlabel.llft("$P_{36}$", P36) on_picture qv[0];
+  %   dotlabel.lft("$P_{37}$", P37) on_picture qv[0];
+  %   dotlabel.lft("$P_{38}$", P38) on_picture qv[0];
+  %   dotlabel.urt("$P_{39}$", P39) on_picture qv[0];
+  % fi;
+
+    
+  %message "Exiting draw_stitches.";
+  
+enddef;
+
+%% ** (2) macro plot_stitches_on_spherical_biangles
+
+macro get_point_on_spherical_biangle;
+
+def get_point_on_spherical_biangle (pp) {numeric index, numeric ra, numeric decl,
+                                         numeric rradius, boolean ddraw_dot, numeric biangle,
+                                         boolean ddo_black} =
+
+  %message "Entering macro `get_point_on_spherical_biangle'.";
+  
+  point P[];
+  circle c[];
+  numeric a[];
+
+  color ccolor;
+  
+  if ddo_black:
+    ccolor := white;
+  else:
+    ccolor := black;
+  fi;
+
+  c0 := unit_circle scaled (rradius, 0, rradius);
+
+  P0 := (rradius, 0) rotated (0, 0, decl);
+
+  % message "P0:";
+  % show P0;
+  
+  P1 := P0 rotated (0, ra);
+
+  % message "P1:";
+  % show P1;
+
+  P2 := (0, ypart P1);  %% Point on y-axis with height corresponding to declination
+
+  % message "P2:";
+  % show P2;
+
+  a0 := magnitude(P1 - P2);
+
+  % message "a0 (radius of circle through P1):";
+  % show a0;
+
+  c1 := unit_circle scaled (a0, 0, a0) shifted (0, ypart P2);
+
+  if decl == 0:
+    a1 := 0;
+  else:
+    a1 := arc_length (magnitude(decl)) c0;
+  fi;
+
+  % message "a1 (arc length corresponding to declination):";
+  % show a1;
+
+  a2 := circumference c1;   %% a2 == Circumference of circle at height corresponding to declination
+
+  a3 := (a2 * ra) / 360;
+
+  % message "a3:";
+  % show a3;
+  
+%% *** (3)
+
+  pp[index] := (a3, a1);
+
+  if ddraw_dot:
+    drawdot  pp[index] with_color ccolor with_pen pencircle scaled (3pt, 3pt, 3pt) on_picture qv[biangle];
+  fi;
+  
+  % message "Exiting macro `get_point_on_spherical_biangle'.";  
+  
+enddef;
+
+%% ** (2) macro plot_stitches_on_spherical_biangles
+
+macro plot_stitches_on_spherical_biangles;
+
+def plot_stitches_on_spherical_biangles =
+
+  % message "Entering macro `plot_stitches_on_spherical_biangles'.";
+
+  point M[];
+  point N[];
+  color ccolor;
+  path q[];
+
+  pen dot_pen;
+
+  dot_pen := pencircle scaled (2.5pt, 2.5pt, 2.5pt);
+
+  q0 += ..;
+  q1 += ..;
+  
+  j := 0;
+  for i := 0 step 3 until 80:
+    get_point_on_spherical_biangle (M) {j, 27.5, i, radius, false, 0, do_black};
+    get_point_on_spherical_biangle (N) {j, 17.5, i, radius, false, 0, do_black};
+    rotate N[j] (0, 180);
+    %drawdot N[j] with_pen dot_pen on_picture qv[0];
+    q0 += M[j];
+    q1 += N[j];
+    % message "M[" & decimal j & "]:";
+    % show M[j];
+    j += 1;
+  endfor;
+
+  get_point_on_spherical_biangle (M) {j, 27.5, 78.75, radius, false, 0, do_black};
+  get_point_on_spherical_biangle (N) {j, 27.5, 78.75, radius, false, 0, do_black};
+  q0 += M[j];
+  rotate N[j] (0, 180);
+  q1 += N[j];
+
+  last_pt_ctr := j;
+
+  point A[];
+  point B[];
+  
+  j := 0;
+  for i := 0 step 2.5 until 78:
+    get_point_on_spherical_biangle (A) {j, 25, i, radius, false, 0, do_black};
+    get_point_on_spherical_biangle (B) {j, 20, i, radius, false, 0, do_black};
+    rotate B[j] (0, 180);
+    for k = 0 upto 7:
+      drawdot A[j] with_pen dot_pen on_picture qv[k];
+      drawdot B[j] with_pen dot_pen on_picture qv[k];
+      drawdot A[j] rotated (180, 0) with_pen dot_pen on_picture qv[k];
+      drawdot B[j] rotated (180, 0) with_pen dot_pen on_picture qv[k];
+    endfor;
+    j += 1;
+  endfor;
+  
+  for i = 0 upto 7:
+
+    draw q0 on_picture qv[i];
+    %draw q1 with_color dark_gray on_picture qv[i];
+
+    draw M[last_pt_ctr] -- p37 on_picture qv[i];
+    %draw N[last_pt_ctr] -- p36 with_color dark_gray on_picture qv[i];
+
+    draw q0 rotated (180, 0) on_picture qv[i];
+    %draw q1 rotated (180, 0) with_color dark_gray on_picture qv[i];
+  
+    draw (M[last_pt_ctr] -- p37) rotated (180, 0) on_picture qv[i];
+    %draw (N[j] -- p36) rotated (180, 0) with_color dark_gray on_picture qv[i];
+  endfor;
+
+  point C[];
+
+
+  for m = 0 upto 7:
+    j := 0;
+    k := 23;
+    for i = 0 step 11.25 until 67.5:
+      get_point_on_spherical_biangle (C) {j, 27.5, i, radius, false, 0, do_black};
+      if j == 0:
+	draw p21 -- C[j] on_picture qv[m];
+      else:
+	draw p[k] -- C[j] on_picture qv[m];
+	draw (p[k] -- C[j]) rotated 180 on_picture qv[m];
+      fi;
+      j += 1;
+      k += 2;
+    endfor;
+  endfor;
+  
+  
+%% *** (3)
+  
+  % message "Exiting plot_stitches_on_spherical_biangles";
+
+enddef;
+
+
+%% ** (2)
+
+endinput;
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
+
