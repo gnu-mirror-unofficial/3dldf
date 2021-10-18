@@ -99,7 +99,7 @@ Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 %\font\TINY=cmr3\font\Tiny=cmr4
 
 verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
-  & "\font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14\font\huge=cminch"
+  & "\font\small=cmr8\font\medium=cmr9\font\largebf=cmbx12\font\Largebf=cmbx14"
   & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\font\SMALLgreek=cmmi6 "
   & "etex;";
 
@@ -350,11 +350,6 @@ def get_spherical_biangles {numeric rad, boolean ddo_labels} =
  Q := edge0 .. (reverse edge1) .. edge3 .. (reverse edge2);
 
  Q += cycle;
-
- for i = 0 upto 7:
-   bi_ang_pict[i] := current_picture;
-   label("{\largebf " & decimal (i+1) & "}", p22 shifted (0, -.5cm)) on_picture bi_ang_pict[i];
- endfor;
 
 %% **** (4)
 
