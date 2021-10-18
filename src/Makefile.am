@@ -1390,6 +1390,9 @@ purge:
 	-rm -f clstsph4.ps clstsph4.mp clstsph4.[0-9]* clstsph4.log clstsph4.dvi clstsph4.toc
 	-rm -f sphrdoms.ps sphrdoms.mp sphrdoms.[0-9]* sphrdoms.log sphrdoms.dvi sphrdoms.toc
 	-rm -f sundl_04.[0-9]*
+	-rm -f clstsph_1_6.tex clstsph_1_labels.tex clstsph_1_3.tex clstsph_1_5.tex \
+               clstsph_1_2.tex clstsph_1_7.tex clstsph_1_4.tex clstsph_1_1.tex \
+               clstsph_1_0.tex
 
 #### *** (3)
 

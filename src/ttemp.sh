@@ -8,6 +8,20 @@
 #### explicitly to the *.txt files in the web pages directory.
 #### LDF 2021.09.06.
 
+cp -f clstsph3.pdf ~/3DLDF-3.0_web/3dldf/graphics/
+
+cp -f clstsph3.ldf  clstsph3_sub.ldf clstsph3.aux astronmy3.lmc clstsph3.txt ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+
+cd ~/3DLDF-3.0_web/3dldf/graphics/
+cvs commit -m "Edited." clstsph3.pdf
+
+cd ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+cvs commit -m "Edited." clstsph3.ldf clstsph3_sub.ldf clstsph3.aux astronmy3.lmc clstsph3.txt
+
+exit 0
+
+
+
 A=`ls clstsph3*`
 
 for i in $A

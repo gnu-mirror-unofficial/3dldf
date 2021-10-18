@@ -1,4 +1,4 @@
-%%% astronmy3.lmc
+%%%% astronmy3.lmc
 %%%% Created by Laurence D. Finston (LDF) Fri 15 Oct 2021 10:44:33 AM CEST
 
 %% * (1) Copyright and License.
@@ -148,11 +148,8 @@ label_picture_ctr := 0;
 
 do_extra_labels := false;
 
-label_out := "clstsph_1_labels.tex";
+label_out := "clstsph_3_labels.tex";
 
-if do_write:
-  star_info_combined := "clstsph_1_star_info_combined.tex";
-fi;
 
 string empty_str;
 
@@ -1227,14 +1224,9 @@ def plot_star_on_spherical_biangle {star S, numeric point_number, numeric label_
     % pause;
     
 
-    if do_write:
-      write s to nw[bi_ang0];
-      write s to star_info_combined;
-    fi;
-      
     f_sect_str := "";
     
-if label_pos == label_pos_zero:
+    if label_pos == label_pos_zero:
       label_suffix := "";
       shift_x_val := shift_x;
       shift_y_val := shift_y;
@@ -1328,11 +1320,14 @@ if label_pos == label_pos_zero:
     
     write (s) to label_out;
 
-    beginfig(100 + label_picture_ctr);
-      fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
-      label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
+    if false:
+      beginfig(100 + label_picture_ctr);
+	fill (-box_wd, -box_ht) -- (box_wd, -box_ht) -- (box_wd, box_ht) -- (-box_wd, box_ht) -- cycle;
+	label.top("{\medium " & common_name S & "}", (0, 0)) with_text_color white;
       drawdot (0, -.25box_ht) with_pen sstar_pen with_color white;
-    endfig with_projection parallel_x_y;
+      endfig with_projection parallel_x_y;
+    fi;
+
     label_picture_ctr += 1;
 
     if do_extra_labels:

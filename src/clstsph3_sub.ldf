@@ -89,23 +89,6 @@ else:
   label_color := black;
 fi;
   
-%% !! TODO:  LDF 2021.7.6.  Find out why using a newwrite_vector didn't work.
-
-%% !! PLEASE NOTE:  LDF 2021.10.05.  Some of the labels that had to be done specially on 
-%% the flat quadrants may not be on the right element of `flat_quadrant_picture'.  
-%% This applies to Regor and a couple of other stars where I had to fix the labels
-%% on this date.
-
-if do_write:
-  for i = 0 upto 7:
-    s := "clstsph_1_" & decimal i & ".tex";
-    nw[i] := s;
-    s := "%%" & s & "\n%%";
-  %message "s == " & s;
-    write s to nw[i];
-  endfor;
-fi;
-
 %% ** (2) Call macros for the sphere, the spherical biangles, the panels, the flat panels and the stitches.
 
 boolean do_labels;
