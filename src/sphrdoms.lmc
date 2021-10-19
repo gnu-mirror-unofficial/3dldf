@@ -372,7 +372,8 @@ enddef;
 macro get_point_on_spherical_biangle;
 
 def get_point_on_spherical_biangle (pp) {numeric index, numeric ra, numeric decl,
-                                         numeric rradius, boolean ddraw_dot, numeric biangle} =
+                                         numeric rradius, boolean ddraw_dot,
+                                         numeric biangle} =
 
   %message "Entering macro `get_point_on_spherical_biangle'.";
   
@@ -440,7 +441,7 @@ enddef;
 
 macro plot_stitches_on_spherical_biangles;
 
-def plot_stitches_on_spherical_biangles =
+def plot_stitches_on_spherical_biangles {numeric decl_divisions} =
 
   % message "Entering macro `plot_stitches_on_spherical_biangles'.";
 
@@ -449,14 +450,16 @@ def plot_stitches_on_spherical_biangles =
   color ccolor;
   path q[];
 
-  numeric decl_increment;  
-  
-  decl_increment := 11.25;  %% !! TODO: LDF 2021.10.19. Change this!
-  
   pen dot_pen;
 
   dot_pen := pencircle scaled (2.5pt, 2.5pt, 2.5pt);
 
+  numeric decl_increment;  
+  numeric k;
+  
+  k := 2 * decl_divisions;
+  decl_increment := 360 / k;
+  
   q0 += ..;
   q1 += ..;
   
