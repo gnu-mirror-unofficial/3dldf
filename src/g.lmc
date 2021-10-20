@@ -44,11 +44,11 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
   pp0 := (-radius0, 0);
   pp1 := (radius0, 0);
 
-  %message "magnitude (p1 - p0) (diameter of c0):";
-  %show magnitude (p1 - p0);
+  %message "magnitude (pp1 - pp0) (diameter of c0):";
+  %show magnitude (pp1 - pp0);
 
   if testing:
-    draw p0 -- p1 on_picture bi_ang_pict[biangle_picture_ctr];  %% Horizontal line through origin.
+    draw pp0 -- pp1 on_picture bi_ang_pict[biangle_picture_ctr];  %% Horizontal line through origin.
   fi;
 
   if ddo_labels and testing:
@@ -56,16 +56,16 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
     dotlabel.rt("$p_1$", p1) on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
 
-  p2 := (0, -radius0);
-  p3 := (0, radius0);
+  pp2 := (0, -radius0);
+  pp3 := (0, radius0);
 
   if testing:
-    draw p2 -- p3 on_picture bi_ang_pict[biangle_picture_ctr];  %% Vertical line through origin.
+    draw pp2 -- pp3 on_picture bi_ang_pict[biangle_picture_ctr];  %% Vertical line through origin.
   fi;
 
   if ddo_labels and testing:
-    dotlabel.bot("$p_2$", p2) on_picture bi_ang_pict[biangle_picture_ctr];
-    dotlabel.top("$p_3$", p3) on_picture bi_ang_pict[biangle_picture_ctr];
+    dotlabel.bot("$p_2$", pp2) on_picture bi_ang_pict[biangle_picture_ctr];
+    dotlabel.top("$p_3$", pp3) on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
 
   k := 2 * decl_divisions;
@@ -74,15 +74,15 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
 
   j := 4;
   for i = decl_increment step decl_increment until n:
-    p[j] := p1 rotated (0, 0, i);
-    p[j + 1] := (0, ypart p[j]);
+    pp[j] := pp1 rotated (0, 0, i);
+    pp[j + 1] := (0, ypart pp[j]);
     if testing:
-      draw p[j + 1] -- p[j] on_picture bi_ang_pict[biangle_picture_ctr];
+      draw pp[j + 1] -- pp[j] on_picture bi_ang_pict[biangle_picture_ctr];
     fi;
     if ddo_labels and testing:
-      dotlabel.rt("$p_{" & decimal j & "}$", p[j]) on_picture bi_ang_pict[biangle_picture_ctr];
+      dotlabel.rt("$p_{" & decimal j & "}$", pp[j]) on_picture bi_ang_pict[biangle_picture_ctr];
     fi;
-    radius[j] := magnitude(p[j] - p[j + 1]);
+    radius[j] := magnitude(pp[j] - pp[j + 1]);
     c[j] := unit_circle scaled (radius[j], 0, radius[j]);
     circum[j] := circumference c[j];
     biangle_width[j] := circum[j] / ra_divisions;
@@ -90,6 +90,11 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
     show biangle_width[j];
     j += 2;
   endfor;
+
+  message "After first loop:  j == ";
+  show j;
+  pause;
+
 
 %% **** (4)
 
@@ -109,80 +114,82 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
   n1 := a / (2 * decl_divisions);  %% Distance between the declination lines in increments of (360 / decl_divisions)
                                    %% deg.
 
-  p20 := (-.5n0, 0);
-  p21 := (.5n0, 0);
+  %% !! START HERE: LDF 2021.10.20.  Change the point numbers.
+  
+  pp20 := (-.5n0, 0);
+  pp21 := (.5n0, 0);
 
   if draw_lines:
-    draw p20 -- p21 with_color line_color on_picture bi_ang_pict[biangle_picture_ctr];
+    draw pp20 -- pp21 with_color line_color on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
   
   if do_labels_ra_decl:
-    label.rt("$0^\circ$", p21 shifted (1.5cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
+    label.rt("$0^\circ$", pp21 shifted (1.5cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
   
   if ddo_labels:
-    dotlabel.lft("$p_{20}$", p20) on_picture bi_ang_pict[biangle_picture_ctr];
-    dotlabel.rt("$p_{21}$", p21) on_picture bi_ang_pict[biangle_picture_ctr];
+    dotlabel.lft("$p_{20}$", pp20) on_picture bi_ang_pict[biangle_picture_ctr];
+    dotlabel.rt("$p_{21}$", pp21) on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
 
-  edge0 += p20;
-  edge1 += p21;
+  edge0 += pp20;
+  edge1 += pp21;
 
-  p22 := (0, -.25a);
-  p23 := (0, .25a);
+  pp22 := (0, -.25a);
+  pp23 := (0, .25a);
 
   if draw_vertical:
-    draw p22 -- p23 with_color black on_picture bi_ang_pict[biangle_picture_ctr];
+    draw pp22 -- pp23 with_color black on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
   
   if ddo_labels:
-    dotlabel.bot("$p_{22}$", p22) on_picture bi_ang_pict[biangle_picture_ctr];
-    dotlabel.top("$p_{23}$", p23) on_picture bi_ang_pict[biangle_picture_ctr];
+    dotlabel.bot("$p_{22}$", pp22) on_picture bi_ang_pict[biangle_picture_ctr];
+    dotlabel.top("$p_{23}$", pp23) on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
 
   if do_labels_ra_decl:
-    label.rt("$-90^\circ$", p22 shifted (.25cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
-    label.rt("$90^\circ$", p23 shifted (.25cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
+    label.rt("$-90^\circ$", pp22 shifted (.25cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
+    label.rt("$90^\circ$", pp23 shifted (.25cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
   fi;
 
   j := 24;
   k := 4;
   for i = 1 step 1 until ((decl_divisions / 2) - 1):
-    p[j]     := (-.5biangle_width[k], (i * n1));
-    p[j + 1] := (.5biangle_width[k], (i * n1));
+    pp[j]     := (-.5biangle_width[k], (i * n1));
+    pp[j + 1] := (.5biangle_width[k], (i * n1));
 
 
     
     if draw_lines:
-      draw p[j] -- p[j+1] with_color line_color on_picture bi_ang_pict[biangle_picture_ctr];
-      draw (p[j] -- p[j+1]) rotated 180 with_color line_color on_picture bi_ang_pict[biangle_picture_ctr];
+      draw pp[j] -- pp[j+1] with_color line_color on_picture bi_ang_pict[biangle_picture_ctr];
+      draw (pp[j] -- pp[j+1]) rotated 180 with_color line_color on_picture bi_ang_pict[biangle_picture_ctr];
     fi;
 
     if ddo_labels:
-      dotlabel.lft("$p_{" & decimal j & "}$", p[j]) on_picture bi_ang_pict[biangle_picture_ctr];
-      dotlabel.rt("$p_{" & decimal (j + 1) & "}$", p[j + 1]) on_picture bi_ang_pict[biangle_picture_ctr];
+      dotlabel.lft("$p_{" & decimal j & "}$", pp[j]) on_picture bi_ang_pict[biangle_picture_ctr];
+      dotlabel.rt("$p_{" & decimal (j + 1) & "}$", pp[j + 1]) on_picture bi_ang_pict[biangle_picture_ctr];
     fi;
 
     if not do_labels_ra_decl:
       ;
     else:
       if (decl_increment * i) ==  floor (decl_increment * i):
-	label("$" & decimal (decl_increment * i) & "^\circ$", p[j + 1] shifted (1.5cm, 0))
+	label("$" & decimal (decl_increment * i) & "^\circ$", pp[j + 1] shifted (1.5cm, 0))
 	  on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * i) - floor (decl_increment * i) == .25:
-	label("$" & decimal (floor (decl_increment * i)) & "^\circ 15^\prime$", p[j + 1] shifted (1.5cm, 0))
+	label("$" & decimal (floor (decl_increment * i)) & "^\circ 15^\prime$", pp[j + 1] shifted (1.5cm, 0))
 	   on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * i) - floor (decl_increment * i) == .5:
-	label("$" & decimal (floor (decl_increment * i)) & "^\circ 30^\prime$", p[j + 1] shifted (1.5cm, 0))
+	label("$" & decimal (floor (decl_increment * i)) & "^\circ 30^\prime$", pp[j + 1] shifted (1.5cm, 0))
 	   on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * i) - floor (decl_increment * i) == .75:
-	label("$" & decimal (floor (decl_increment * i)) & "^\circ 45^\prime$", p[j + 1] shifted (1.5cm, 0))
+	label("$" & decimal (floor (decl_increment * i)) & "^\circ 45^\prime$", pp[j + 1] shifted (1.5cm, 0))
 	   on_picture bi_ang_pict[biangle_picture_ctr];
       fi;
     fi;
 
-    edge0 += p[j];
-    edge1 += p[j + 1];
+    edge0 += pp[j];
+    edge1 += pp[j + 1];
 
     j += 2;
     k += 2;
@@ -200,11 +207,11 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
   k := last_point_pair_ctr + 2;
   
   for i := 24 step 2 until last_point_pair_ctr:
-    p[k] := p[i] rotated (180, 0);
-    p[k+1] := p[i+1] rotated (180, 0);
+    pp[k] := pp[i] rotated (180, 0);
+    pp[k+1] := pp[i+1] rotated (180, 0);
     if ddo_labels:
-      dotlabel.lft("$p_{" & decimal (k) & "}$", p[k]) on_picture bi_ang_pict[biangle_picture_ctr];
-      dotlabel.rt("$p_{" & decimal (k+1) & "}$", p[k+1]) on_picture bi_ang_pict[biangle_picture_ctr];
+      dotlabel.lft("$p_{" & decimal (k) & "}$", pp[k]) on_picture bi_ang_pict[biangle_picture_ctr];
+      dotlabel.rt("$p_{" & decimal (k+1) & "}$", pp[k+1]) on_picture bi_ang_pict[biangle_picture_ctr];
     fi;
 
     if not do_labels_ra_decl:
@@ -235,32 +242,32 @@ def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
       %% 0.25
       
       if (decl_increment * j) ==  floor (decl_increment * j):
-	label("$-" & decimal (decl_increment * j) & "^\circ$", p[k+1] shifted (1.5cm, 0))
+	label("$-" & decimal (decl_increment * j) & "^\circ$", pp[k+1] shifted (1.5cm, 0))
 	  on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * j) - floor (decl_increment * j) == .125:
 	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 7^\prime 30^{\prime\prime}$",
-	    p[k+1] shifted (1.5cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
+	    pp[k+1] shifted (1.5cm, 0)) on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * j) - floor (decl_increment * j) == .25:
-	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 15^\prime$", p[k+1] shifted (1.5cm, 0))
+	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 15^\prime$", pp[k+1] shifted (1.5cm, 0))
 	   on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * j) - floor (decl_increment * j) == .5:
-	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 30^\prime$", p[k+1] shifted (1.5cm, 0))
+	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 30^\prime$", pp[k+1] shifted (1.5cm, 0))
 	   on_picture bi_ang_pict[biangle_picture_ctr];
       elseif (decl_increment * j) - floor (decl_increment * j) == .75:
-	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 45^\prime$", p[k+1] shifted (1.5cm, 0))
+	label("$-" & decimal (floor (decl_increment * j)) & "^\circ 45^\prime$", pp[k+1] shifted (1.5cm, 0))
 	   on_picture bi_ang_pict[biangle_picture_ctr];
       fi;
     fi;
   
-    %label("$-" & decimal (decl_increment * j) & "^\circ$", p[k+1] shifted (1.5cm, 0))
+    %label("$-" & decimal (decl_increment * j) & "^\circ$", pp[k+1] shifted (1.5cm, 0))
     % on_picture bi_ang_pict[biangle_picture_ctr];
     j += 1;
     k += 2;
   endfor;
 
 
-  edge0 += p23;
-  edge1 += p23;
+  edge0 += pp23;
+  edge1 += pp23;
 
   edge2 := edge0 rotated (180, 0);
   edge3 := edge1 rotated (180, 0);
