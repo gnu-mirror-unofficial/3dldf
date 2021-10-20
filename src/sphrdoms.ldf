@@ -76,13 +76,15 @@ label_color := black;
 
 %% ** (2) Call macros
 
-% def get_spherical_biangle {numeric rad, numeric biangle_picture_ctr,
-%                            boolean ddo_labels,
-%                            numeric ra_divisions, numeric decl_divisions,
-%			     boolean draw_lines, boolean draw_vertical} 
+% def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
+%                            	  boolean ddo_labels,
+%                            	  numeric ra_divisions, numeric decl_divisions,
+%                                 numeric draw_biangle,
+%                                 numeric draw_portion,
+%			     	  boolean draw_lines, boolean draw_vertical} 
 
-%get_spherical_biangle {radius, 0, true, 8, 16, true, true}; 
-get_spherical_biangle {radius, 0, true, 16, 32, true, true}; 
+%get_spherical_biangle {radius, 0, true, 8, 16, true, 1, true, true}; 
+get_spherical_biangle (p) {radius, 0, true, 16, 32, true, 1, true, true}; 
 
 plot_stitches_on_spherical_biangles {32};
 
