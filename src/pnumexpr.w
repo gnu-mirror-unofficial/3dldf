@@ -3055,8 +3055,7 @@ Added this rule.
 
   @=$$@> = MEXP;
 
-}
-;
+};
 
 @q ***** (5) numeric_operator --> FLOOR.  @>
 @q           numeric_operator 6. @>                       
@@ -3080,6 +3079,54 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */
 
   @=$$@> = FLOOR;
+
+};
+
+@q ***** (5) numeric_operator --> CEILING.  @>
+
+@ \§numeric operator> $\longrightarrow$ \.{CEILING}.
+
+\LOG
+\initials{LDF 2021.10.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_operator: CEILING@>@;  
+{
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @; 
+    if (DEBUG) 
+      cerr << "\n*** Parser: numeric_operator "
+           << "(CEILING)." << endl;
+#endif /* |DEBUG_COMPILE|  */
+
+  @=$$@> = CEILING;
+
+};
+
+@q ***** (5) numeric_operator --> ROUND.  @>
+
+@ \§numeric operator> $\longrightarrow$ \.{ROUND}.
+
+\LOG
+\initials{LDF 2021.10.22.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_operator: ROUND@>@;  
+{
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @; 
+    if (DEBUG) 
+      cerr << "\n*** Parser: numeric_operator "
+           << "(ROUND)." << endl;
+#endif /* |DEBUG_COMPILE|  */
+
+  @=$$@> = ROUND;
 
 };
 
@@ -3895,6 +3942,26 @@ Removed debugging code.
 
    delete p;
    delete q;   
+
+};
+
+@q ***** (5) numeric_secondary --> numeric_secondary MODULUS numeric_primary.@>
+
+@*4 \§numeric secondary> $\longrightarrow$ \§numeric secondary> 
+\.{MODULUS} \§numeric primary>. 
+\initials{LDF 2021.10.22.}
+
+\LOG
+\initials{LDF 2021.10.22.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@>  
+
+@<Define rules@>= 
+@=numeric_secondary: numeric_secondary MODULUS numeric_primary@>
+{
+   @=$$@> = fmod(@=$1@>, @=$3@>);
 
 };
 

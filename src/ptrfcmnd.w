@@ -76,7 +76,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<void*>(@=$3@>));
+                                static_cast<void*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -124,7 +124,8 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
+                                false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -148,7 +149,8 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
+                                false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -172,7 +174,8 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
+                                false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -196,7 +199,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -220,7 +223,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -244,7 +247,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -268,7 +271,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -292,7 +295,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -316,7 +319,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -340,7 +343,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -364,7 +367,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -388,7 +391,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -412,7 +415,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -436,7 +439,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -460,7 +463,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -484,7 +487,7 @@ Added this rule.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 ROTATE,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -517,7 +520,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -550,7 +553,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -583,7 +586,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -616,7 +619,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -649,7 +652,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -682,7 +685,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -715,7 +718,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -748,7 +751,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -781,7 +784,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -814,7 +817,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -847,7 +850,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -880,7 +883,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -913,7 +916,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -946,7 +949,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -979,7 +982,7 @@ Added this rule.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                ROTATE,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -1029,7 +1032,7 @@ Removed debugging output and error-handling code.
    transformation_command_func(static_cast<Scanner_Node>(parameter),
                                @=$1@>,
                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                               pv);
+                               pv, false);
 
    @=$$@> = static_cast<void*>(0);
 
@@ -1070,7 +1073,7 @@ Added this rule.
         transformation_command_func(static_cast<Scanner_Node>(parameter),
                                  @=$1@>,
                                  static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                 pv);
+                                 pv, false);
 
    }  /* |else|  */  
   
@@ -1091,7 +1094,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.09.24.}
-Now calling |Scan_Parse::transformation_command_func()|, which contains code
+Now calling |Scan_Parse::transformation_command_func|, which contains code
 I've removed from this rule. 
 
 \initials{LDF 2005.10.25.}
@@ -1110,7 +1113,7 @@ Removed all unnecessary code.
     transformation_command_func(static_cast<Scanner_Node>(parameter),
                                 @=$1@>,
                                 static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>));
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
 
     @=$$@> = static_cast<void*>(0);
 

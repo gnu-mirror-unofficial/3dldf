@@ -18,7 +18,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   boolean testing;
 
   testing := false; % true; % 
-  ddo_labels := true;
+
   
   tab_wd := .25cm;
   
@@ -145,7 +145,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   show ddo_labels;
     
   if (draw_portion >= .5) and do_labels_ra_decl:
-    label.rt("$0^\circ$", pp[1][0] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
+    label("\hbox to \labeldimen{$0^\circ$\hss}", pp[1][0] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
   fi;
   
   if ddo_labels:
@@ -265,23 +265,24 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     message "m3 == ";
     show m3;
 
-    if draw_lines and (magnitude i <> 90) and ((m3 == floor m3) or (m3 == (floor m3 + .5))):
-      message "m3 == floor m3 or floor m3 + .5.";
-      if i > m0:
-	draw pp[0][i] -- pp[1][i] with_color line_color on_picture bi_ang_pict[0];
+    m6 := m3 modulus decl_increment;
+
+    if draw_lines and (m6 == 0) and (magnitude i < 90):
+      draw pp[0][i] -- pp[1][i] with_color line_color on_picture bi_ang_pict[0];
+      if i <> -0:
+	label("\hbox to \labeldimen{$" & decimal i & "^\circ$\hss}", pp[1][i] shifted (1.5cm, 0))
+	  on_picture bi_ang_pict[0];
+      fi;
+      if ddo_labels and (i <> -0):
+    	dotlabel.lft("$pp_0^{" & decimal i & "}$", pp[0][i]) on_picture bi_ang_pict[0];
+    	dotlabel.rt("$pp_1^{" & decimal i & "}$", pp[1][i]) on_picture bi_ang_pict[0];
       fi;
     fi;
+
     
     % if m2 == floor m2:
-    %   if ddo_labels:
-    % 	dotlabel.lft("$pp_0^{" & decimal i & "}$", pp[0][i]) on_picture bi_ang_pict[0];
-    % 	dotlabel.rt("$pp_1^{" & decimal i & "}$", pp[1][i]) on_picture bi_ang_pict[0];
-    % 	dotlabel.lft("$pp_0^{-" & decimal i & "}$", pp[0][-i]) on_picture bi_ang_pict[0];
-    % 	dotlabel.rt("$pp_1^{-" & decimal i & "}$", pp[1][-i]) on_picture bi_ang_pict[0];
-    %   fi;
     %   if do_labels_ra_decl:
-    % 	label("$" & decimal (decl_increment * j) & "^\circ$", pp[1][i] shifted (2.5cm, 0))
-    % 	  on_picture bi_ang_pict[0];
+
     % 	label("$-" & decimal (decl_increment * j) & "^\circ$", pp[1][-i] shifted (2.5cm, 0))
     % 	  on_picture bi_ang_pict[0];
     %   fi;

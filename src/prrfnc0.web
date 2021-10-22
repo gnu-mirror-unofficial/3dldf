@@ -1102,8 +1102,11 @@ Added |name_map| entries for |IS_ON_PLANE|, |IS_IN_REG_POLYGON| and
    name_map[MLOG] = "MLOG";  
    name_map[MEXP] = "MEXP";
    name_map[FLOOR] = "FLOOR";  
-   name_map[UNIFORMDEVIATE] = "UNIFORMDEVIATE";
+   name_map[CEILING] = "CEILING";
+   name_map[ROUND] = "ROUND";
+   name_map[MODULUS] = "MODULUS";
 
+   name_map[UNIFORMDEVIATE] = "UNIFORMDEVIATE";
    name_map[PYTHAGOREAN_PLUS] = "PYTHAGOREAN_PLUS"; 
    name_map[PYTHAGOREAN_MINUS] = "PYTHAGOREAN_MINUS"; 
 
@@ -4039,6 +4042,27 @@ Programmed this case.
   else if (operator_value == FLOOR)
     {
       *result = floor(operand);
+      return 0;
+    }
+
+@q **** (4) CEILING. @>
+@ \.{CEILING}.
+@<Define parser rule functions@>=
+
+  else if (operator_value == CEILING)
+    {
+      *result = ceil(operand);
+      return 0;
+    }
+
+@q **** (4) ROUND. @>
+@ \.{ROUND}.
+
+@<Define parser rule functions@>=
+
+  else if (operator_value == ROUND)
+    {
+      *result = round(operand);
       return 0;
     }
 

@@ -58,24 +58,24 @@ input "sphrdoms.lmc";
 
 radius := 10cm;
 do_labels := true; % ; false % 
-do_labels_ra_decl := false; % true; % 
+do_labels_ra_decl := true; % false; % 
 line_color  := dark_gray; % black;
 label_color := black;
 
 %% ** (2) Call macros
 
-% def get_spherical_biangle (pp) {numeric rad, numeric biangle_picture_ctr,
+% def get_spherical_biangle (pp) {numeric rad, 
 %                            	  boolean ddo_labels,
 %                            	  numeric ra_divisions, numeric decl_divisions,
 %                                 numeric draw_biangle,
 %                                 numeric draw_portion,
 %			     	  boolean draw_lines, boolean draw_vertical} 
 
-%get_spherical_biangle {radius, 0, true, 8, 16, true, 1, true, true}; 
+%get_spherical_biangle {radius, true, 10, 16, true, 1, true, true}; 
 
 point p[][];
 
-get_spherical_biangle (p) {radius, 0, true, 8, 16, true, .5, true, true}; 
+get_spherical_biangle (p) {radius, false, 8, 16, true, .5, true, true}; 
 
 %plot_stitches_on_spherical_biangles {32};
 
