@@ -5,9 +5,11 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
   circle c[];
   numeric a;
+  numeric m[];
   numeric radius[];
   numeric circum[];
   numeric n[];
+  numeric angle_divisions;
   point ra_decl_zero_pt;
   numeric tab_wd;
 
@@ -38,11 +40,22 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
 % (* 3 32)
 
+  
   message "decl_divisions:";
   show decl_divisions;
+
+  m2 := 90 / decl_divisions;
+
+  message "m2 == ";
+  show m2;
+
   message "draw_portion:";
   show draw_portion;
 
+  m0 := ((draw_portion * 180) - 90) * -1;
+  message "m0 == ";
+  show m0;
+  
   r0 := (-radius0, 0);
   r1 := (radius0, 0);
 
@@ -61,22 +74,13 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   r2 := (0, -radius0);
   r3 := (0, radius0);
 
-  if testing:
-    draw r2 -- r3 on_picture bi_ang_pict[0];  %% Vertical line through origin.
-  fi;
-
   if ddo_labels and testing:
     dotlabel.bot("$r_2$", r2) on_picture bi_ang_pict[0];
     dotlabel.top("$r_3$", r3) on_picture bi_ang_pict[0];
   fi;
-
   
-  k := 2 * decl_divisions;
-  decl_increment := 360 / k;
+  decl_increment := .25;
   n := 90 - decl_increment;
-
-  message "k == ";
-  show k;
 
   message "decl_increment == ";
   show decl_increment;
@@ -102,8 +106,6 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     show biangle_width[i];
     j += 2;
   endfor;
-
-
   
 % %% **** (4)
 
@@ -117,15 +119,22 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   edge2 += ..;
   edge3 += ..;
 
-  n0 := a / ra_divisions;          %% 1/ra_divisions of circumference of c0 == width of spherical biangles 
-                                   %% at 0 deg. declination. 
+  n0 := a / ra_divisions;          %% 1/ra_divisions of circumference of c0 == width of
+                                   %% spherical biangles at 0 deg. declination. 
 
-  n1 := a / (2 * decl_divisions);  %% Distance between the declination lines in increments of (360 / decl_divisions)
-                                   %% deg.
+
+  numeric b;
+  b := 1 / decl_increment;
+  b *= 360;
+  
+  n1 := a / b;                   %% Distance between the declination lines in increments
+                                 %% of decl_increment degrees.
 
   
-  pp[0][0] := (-.5n0, 0);
-  pp[1][0] := (.5n0, 0);
+
+
+  pp[0][-0] := pp[0][0] := (-.5n0, 0);
+  pp[1][-0] := pp[1][0] := (.5n0, 0);
 
   message "draw_lines:";
   show draw_lines;
@@ -135,12 +144,8 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   message "ddo_labels:";
   show ddo_labels;
     
-  if true or draw_lines:
-    draw pp[0][0] -- pp[1][0] with_color line_color on_picture bi_ang_pict[0];
-  fi;
-  
-  if true or do_labels_ra_decl:
-    label.rt("$0^\circ$", pp[1][0] shifted (2.5cm, 0)) on_picture bi_ang_pict[0];
+  if (draw_portion >= .5) and do_labels_ra_decl:
+    label.rt("$0^\circ$", pp[1][0] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
   fi;
   
   if ddo_labels:
@@ -148,18 +153,9 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture bi_ang_pict[0];
   fi;
   
-  edge0 += pp[0][0];
-  edge1 += pp[1][0];
-  edge2 += pp[0][0];
-  edge3 += pp[1][0];
-
   pp[0][90]  := pp[1][90]  := (0, .25a);
   pp[0][-90] := pp[1][-90] := (0, -.25a);
 
-
-  if draw_vertical:
-    draw pp[0][90] -- pp[0][-90] with_color black on_picture bi_ang_pict[0];
-  fi;
   
   if ddo_labels:
     dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture bi_ang_pict[0];
@@ -168,7 +164,9 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
   if do_labels_ra_decl:
     label.rt("$90^\circ$", pp[0][90] shifted (.25cm, 0)) on_picture bi_ang_pict[0];
-    label.rt("$-90^\circ$", pp[0][-90] shifted (.25cm, 0)) on_picture bi_ang_pict[0];
+    if draw_portion >= 1:
+      label.rt("$-90^\circ$", pp[0][-90] shifted (1cm, 0)) on_picture bi_ang_pict[0];
+    fi;
   fi;
 
   message "decl_increment == ";
@@ -189,54 +187,122 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     pp[0][-i] := pp[0][i] rotated 180; 
     pp[1][-i] := pp[1][i] rotated 180; 
 
-    edge0 += pp[0][i];
-    edge1 += pp[1][i];
-    edge2 += pp[0][-i];
-    edge3 += pp[1][-i];
-    
-    if draw_lines:
-      draw pp[0][i] -- pp[1][i] with_color line_color on_picture bi_ang_pict[0];
-      draw pp[0][-i] -- pp[1][-i] with_color line_color on_picture bi_ang_pict[0];
-    fi;
-
-    if ddo_labels:
-      dotlabel.lft("$pp_0^{" & decimal i & "}$", pp[0][i]) on_picture bi_ang_pict[0];
-      dotlabel.rt("$pp_1^{" & decimal i & "}$", pp[1][i]) on_picture bi_ang_pict[0];
-      dotlabel.lft("$pp_0^{-" & decimal i & "}$", pp[0][-i]) on_picture bi_ang_pict[0];
-      dotlabel.rt("$pp_1^{-" & decimal i & "}$", pp[1][-i]) on_picture bi_ang_pict[0];
-    fi;
-
-    if not do_labels_ra_decl:
-      ;
-    else:
-      label("$" & decimal (decl_increment * j) & "^\circ$", pp[1][i] shifted (2.5cm, 0))
-	on_picture bi_ang_pict[0];
-    fi;
     j += 1;
   endfor;
 
 %% *** (3)
 
+  numeric flag;
 
+  if m0 >= 0:
+    flag := 1;
+  else:
+    flag := -1;
+  fi;
 
+  message "flag:";
+  show flag;
   
+  message "m0 before multiplication:";
+  show m0;
+  
+  m0 *= flag;
+
+  message "m0 after multiplication:";
+  show m0;
+
+  message "floor m0:";
+  show floor m0;
+  
+  m1 := m0 modulus decl_increment;
+  message "m1:";
+  show m1;
+
+  m4 := .5 * decl_increment;
+  m5 := 3 * m4;
+
+  if m1 == 0:
+    ; % Do nothing
+  elseif m1 < m4:
+    m0 := floor m0;
+  elseif (m1 >= m4) and (m1 < m5):
+    m0 := floor m0 + decl_increment;
+  elseif (m1 >= m5) and (m1 < m1 + 1):
+    m0 := (floor m0) + 1;
+  fi;
+
+  message "m0 after conditional:";
+  show m0;
+
+  m0 *= flag;
+  
+  message "m0 after multiplication:";
+  show m0;
+
+  %pause;
+  
+  i := m0;  %% It doesn't work to use m0 as a subscript.  Apparently,
+            %% only simple variables can be used, not ones with numerical
+            %% subscripts.
+
+  if draw_vertical:
+    draw (mediate(pp[0][i], pp[1][i])) -- pp[0][90] on_picture bi_ang_pict[0];
+  fi;
+
+  if draw_portion < 1:
+    draw pp[0][i] -- pp[1][i] on_picture bi_ang_pict[0];
+  fi;
+  
+  for i = m0 step decl_increment until n:
+    edge0 += pp[0][i];
+    edge1 += pp[1][i];
+    
+    m3 := (magnitude i) / m2;
+
+    message "i == ";
+    show i;
+    
+    message "m3 == ";
+    show m3;
+
+    if draw_lines and (magnitude i <> 90) and ((m3 == floor m3) or (m3 == (floor m3 + .5))):
+      message "m3 == floor m3 or floor m3 + .5.";
+      if i > m0:
+	draw pp[0][i] -- pp[1][i] with_color line_color on_picture bi_ang_pict[0];
+      fi;
+    fi;
+    
+    % if m2 == floor m2:
+    %   if ddo_labels:
+    % 	dotlabel.lft("$pp_0^{" & decimal i & "}$", pp[0][i]) on_picture bi_ang_pict[0];
+    % 	dotlabel.rt("$pp_1^{" & decimal i & "}$", pp[1][i]) on_picture bi_ang_pict[0];
+    % 	dotlabel.lft("$pp_0^{-" & decimal i & "}$", pp[0][-i]) on_picture bi_ang_pict[0];
+    % 	dotlabel.rt("$pp_1^{-" & decimal i & "}$", pp[1][-i]) on_picture bi_ang_pict[0];
+    %   fi;
+    %   if do_labels_ra_decl:
+    % 	label("$" & decimal (decl_increment * j) & "^\circ$", pp[1][i] shifted (2.5cm, 0))
+    % 	  on_picture bi_ang_pict[0];
+    % 	label("$-" & decimal (decl_increment * j) & "^\circ$", pp[1][-i] shifted (2.5cm, 0))
+    % 	  on_picture bi_ang_pict[0];
+    %   fi;
+    % fi;
+    %   ;
+    % else:
+    % fi;    
+
+
+
+
+    
+  endfor;
+
+%% *** (3)
+ 
   edge0 += pp[0][90];
   edge1 += pp[1][90];
 
-  edge2 += pp[0][-90];
-  edge3 += pp[1][-90];
-
-  draw edge0 on_picture bi_ang_pict[0]; % with_color dark_gray;
-  draw edge1 on_picture bi_ang_pict[0]; % with_color dark_gray;
-
-  if draw_portion >= 1:
-    draw edge2 on_picture bi_ang_pict[0]; % with_color dark_gray;
-    draw edge3 on_picture bi_ang_pict[0]; % with_color dark_gray;
-  fi;
-  
-  if draw_portion == .5:
-    draw pp[0][0] -- pp[1][0] with_color black on_picture bi_ang_pict[0];
-  fi;
+  draw edge0 on_picture bi_ang_pict[0];
+  draw edge1 on_picture bi_ang_pict[0]; 
 
 
   
