@@ -3,16 +3,17 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
                                 numeric draw_portion,
 			   	boolean draw_lines, boolean draw_vertical} = 
 
-  circle c[];
+  circle c[][];
+  numeric biangle_width[][];
   numeric aa[];
   numeric a[];
   numeric m[];
   numeric radius[][];
-  numeric circum[];
+  numeric circum[][];
   numeric n[];
   numeric angle_divisions;
   point ra_decl_zero_pt;
-  numeric tab_wd;
+  numeric tab_wd[];
   numeric flag;
   numeric j;
   numeric k;
@@ -35,22 +36,22 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   
   draw_portion := min(draw_portion, 1);
 
-  tab_wd := .25cm;
+  tab_wd[3] := 2cm;
   
   radius[0][0] := rad;
 
-  radius[3] := rad + tab_wd;
+  radius[3][0] := rad + tab_wd[3];
   
   ra_decl_zero_pt := (rad, 0);
 
-  c0 := unit_circle scaled (radius[0][0], 0, radius[0][0]) rotated (90, 0);
-  a := a0 := circumference c0;   %% a == Circumference of horizontal great circle.
+  c[0][0] := unit_circle scaled (radius[0][0], 0, radius[0][0]) rotated (90, 0);
+  a := a0 := circumference c[0][0];   %% a == Circumference of horizontal great circle.
 
   message "a0:";
   show a0;
   
   if testing:
-    draw c0 with_color red on_picture bi_ang_pict[0];
+    draw c[0][0] with_color red on_picture bi_ang_pict[0];
   fi;
 
 % (% 100 32)
@@ -95,7 +96,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   r[2][0] := (-radius[0][0], 0);
   r[2][1] := (radius[0][0], 0);
 
-  % message "magnitude (r[2][1] - r[2][0]) (diameter of c0):";
+  % message "magnitude (r[2][1] - r[2][0]) (diameter of c[0][0]):";
   % show magnitude (r[2][1] - r[2][0]);
 
   r[5][0] := (-radius[3][0], 0);
@@ -143,7 +144,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   edge2 += ..;
   edge3 += ..;
 
-  n0 := a0 / ra_divisions;  %% 1/ra_divisions of circumference of c0 == width of
+  n0 := a0 / ra_divisions;  %% 1/ra_divisions of circumference of c[0][0] == width of
   			    %% spherical biangles at 0 deg. declination.        
 
   a1 := 360 / decl_increment;
@@ -178,20 +179,31 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     if ddo_labels and testing:
       dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture bi_ang_pict[0];
     fi;
+
     radius[0][i] := magnitude(r[0][i] - r[1][i]);
-    c[i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
-    circum[i] := circumference c[i];
-    biangle_width[i] := circum[i] / ra_divisions;
+    c[0][i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
+    circum[0][i] := circumference c[0][i];
+    biangle_width[0][i] := circum[0][i] / ra_divisions;
 
-    % message "circum[" & decimal i & "]:";
-    % show circum[i];
 
-    % message "biangle_width[" & decimal i & "]:";
-    % show biangle_width[i];
+    radius[3][i] := magnitude(r[3][i] - r[4][i]);
+    c[3][i] := unit_circle scaled (radius[3][i], 0, radius[3][i]);
+    circum[3][i] := circumference c[3][i];
+    biangle_width[3][i] := circum[3][i] / ra_divisions;
 
-    pp[0][i] := (-.5biangle_width[i], j);
-    pp[1][i] := (.5biangle_width[i], j);
+    
+    % message "circum[0][" & decimal i & "]:";
+    % show circum[0][i];
 
+    % message "biangle_width[0][" & decimal i & "]:";
+    % show biangle_width[0][i];
+
+    pp[0][i] := (-.5biangle_width[0][i], j);
+    pp[1][i] := (.5biangle_width[0][i], j);
+
+    pp[3][i] := (-.5biangle_width[3][i], j);
+    pp[4][i] := (.5biangle_width[3][i], j);
+    
     % message "m0:";
     % show m0;
     % message "i == ";
@@ -200,6 +212,10 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     if i >= m0:
       edge0 += pp[0][i];
       edge1 += pp[1][i];
+
+      edge3 += pp[3][i];
+      edge4 += pp[4][i];
+      
     fi;
     j += n1;
   endfor;
@@ -213,7 +229,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   % show ddo_labels;
 
   if (draw_portion >= .5) and do_labels_ra_decl:
-    label("\hbox to \labeldimen{$0^\circ$\hss}", pp[1][0] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
+    label("\hbox to \labeldimen{$0^\circ$\hss}", pp[1][0] shifted (2cm, 0)) on_picture bi_ang_pict[0];
   fi;
 
   if ddo_labels:
@@ -227,9 +243,9 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   fi;
 
   if do_labels_ra_decl:
-    label("\hbox to \labeldimen{$90^\circ$\hss}", pp[0][90] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
+    label("\hbox to \labeldimen{$90^\circ$\hss}", pp[0][90] shifted (2cm, 0)) on_picture bi_ang_pict[0];
     if draw_portion >= 1:
-      label("\hbox to \labeldimen{$-90^\circ$\hss}", pp[0][-90] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
+      label("\hbox to \labeldimen{$-90^\circ$\hss}", pp[0][-90] shifted (2cm, 0)) on_picture bi_ang_pict[0];
     fi;
   fi;
 
@@ -268,26 +284,41 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   	if ddo_labels and testing:
   	  dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture bi_ang_pict[0];
   	fi;
+
   	radius[0][i] := magnitude(r[0][i] - r[1][i]);
-  	c[i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
-  	circum[i] := circumference c[i];
-  	biangle_width[i] := circum[i] / ra_divisions;
+  	c[0][i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
+  	circum[0][i] := circumference c[0][i];
+  	biangle_width[0][i] := circum[0][i] / ra_divisions;
 
-  	% message "circum[" & decimal i & "]:";
-  	% show circum[i];
+  	radius[3][i] := magnitude(r[3][i] - r[4][i]);
+  	c[3][i] := unit_circle scaled (radius[3][i], 0, radius[3][i]);
+  	circum[3][i] := circumference c[3][i];
+  	biangle_width[3][i] := circum[3][i] / ra_divisions;
 
-  	% message "biangle_width[" & decimal i & "]:";
-  	% show biangle_width[i];
 
-  	pp[0][i] := (-.5biangle_width[i], j);
-  	pp[1][i] := (.5biangle_width[i], j);
+	
+  	% message "circum[0][" & decimal i & "]:";
+  	% show circum[0][i];
+
+  	% message "biangle_width[0][" & decimal i & "]:";
+  	% show biangle_width[0][i];
+
+  	pp[0][i] := (-.5biangle_width[0][i], j);
+  	pp[1][i] := (.5biangle_width[0][i], j);
+
+  	pp[3][i] := (-.5biangle_width[3][i], j);
+  	pp[4][i] := (.5biangle_width[3][i], j);
+	
 
   	if do_labels_ra_decl:
   	   label("\hbox to \labeldimen{$" & decimal i & "^\circ$\hss}",
-  	      pp[1][i] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
+  	      pp[1][i] shifted (2cm, 0)) on_picture bi_ang_pict[0];
   	fi;
 	
   	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture bi_ang_pict[0];
+
+  	draw pp[1][i] -- pp[4][i] with_color red on_picture bi_ang_pict[0];
+	
 
       fi;
       j += m2;
