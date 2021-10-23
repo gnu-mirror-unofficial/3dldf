@@ -11342,11 +11342,13 @@ Commented-out warning.
   if (iter == points.end() && b0 == origin_pt)
   {
     if (DEBUG) 
-    cerr_mutex.lock(); 
-    cerr << "Exiting Path::get_normal(). "
-         << "Points are all colinear.\n"
-         << "Returning origin_pt.\n\n";
-    cerr_mutex.unlock();  
+    {
+        cerr_mutex.lock(); 
+        cerr << "Exiting Path::get_normal(). "
+             << "Points are all colinear.\n"
+             << "Returning origin_pt.\n\n";
+        cerr_mutex.unlock();  
+    }
 
     return origin_pt;
   }
