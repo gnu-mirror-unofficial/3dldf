@@ -64,14 +64,16 @@ label_color := black;
 
 %% ** (2) Call macros
 
-% def get_spherical_biangle (pp) {numeric rad, 
-%                            	  boolean ddo_labels,
-%                            	  numeric ra_divisions, numeric decl_divisions,
-%                                 numeric draw_biangle,
-%                                 numeric draw_portion,
-%			     	  boolean draw_lines, boolean draw_vertical} 
-
-%get_spherical_biangle {radius, true, 10, 16, true, 1, true, true}; 
+% def get_spherical_biangle (pp, vv) {numeric rad, 
+%                            	      boolean ddo_labels,
+%                            	      numeric ra_divisions, numeric decl_divisions,
+%                                     numeric draw_biangle,
+%                                     numeric draw_portion,
+%			     	      boolean draw_lines,
+%                                     boolean draw_vertical,
+%                                     numeric tab_width
+%                                     numeric tab_interval
+%                                     numeric picture_ctr} 
 
 point p[][];
 
@@ -79,7 +81,9 @@ point p[][];
 
 radius := 10cm;
 
-get_spherical_biangle (p) {radius, false, 8, 16, true, 1, true, true}; 
+picture v[];
+
+get_spherical_biangle (p, v) {radius, false, 8, 16, true, .75, true, true, 2cm, 10, 0}; 
 
 %plot_stitches_on_spherical_biangles {32};
 

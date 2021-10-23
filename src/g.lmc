@@ -1,8 +1,11 @@
-def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divisions,
-                                numeric decl_divisions, boolean draw_biangle,
-                                numeric draw_portion,
-			   	boolean draw_lines, boolean draw_vertical} = 
-
+def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_divisions,
+                                    numeric decl_divisions, boolean draw_biangle,
+                                    numeric draw_portion,
+                                    boolean draw_lines, boolean draw_vertical,
+                                    numeric tab_width,
+                                    numeric tab_interval,
+                                    numeric picture_ctr} = 
+    
   circle c[][];
   numeric biangle_width[][];
   numeric aa[];
@@ -36,19 +39,22 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   
   draw_portion := min(draw_portion, 1);
 
-  tab_wd[3] := 2cm;
+  tab_wd[3] := tab_width;
+  tab_wd[6] := .5tab_width;
   
   radius[0][0] := rad;
 
   radius[3][0] := rad + tab_wd[3];
+
+  radius[6][0] := rad + tab_wd[6];
   
   ra_decl_zero_pt := (rad, 0);
 
   c[0][0] := unit_circle scaled (radius[0][0], 0, radius[0][0]) rotated (90, 0);
   a := a0 := circumference c[0][0];   %% a == Circumference of horizontal great circle.
 
-  message "a0:";
-  show a0;
+  % message "a0:";
+  % show a0;
   
   if testing:
     draw c[0][0] with_color red on_picture bi_ang_pict[0];
@@ -102,6 +108,10 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   r[5][0] := (-radius[3][0], 0);
   r[5][1] := (radius[3][0], 0);
 
+
+  r[8][0] := (-radius[6][0], 0);
+  r[8][1] := (radius[6][0], 0);
+
   if testing:
     draw r[2][0] -- r[2][1] on_picture bi_ang_pict[0];  %% Horizontal line through origin.
   fi;
@@ -116,6 +126,9 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   
   r[5][2] := (0, -radius[3][0]);
   r[5][3] := (0, radius[3][0]);
+
+  r[8][5] := (0, -radius[6][0]);
+  r[8][6] := (0, radius[6][0]);
 
 
   if ddo_labels and testing:
@@ -170,6 +183,10 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     r[3][i] := r[5][1] rotated (0, 0, i);
     r[4][i] := (0, ypart r[3][i]);
 
+    r[6][i] := r[8][1] rotated (0, 0, i);
+    r[7][i] := (0, ypart r[6][i]);
+    
+
     %% !! START HERE: LDF 2021.10.23.  Add suffix to circum and c.  Add code for
     %% outer points.
     
@@ -191,6 +208,11 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     circum[3][i] := circumference c[3][i];
     biangle_width[3][i] := circum[3][i] / ra_divisions;
 
+    radius[6][i] := magnitude(r[6][i] - r[7][i]);
+    c[6][i] := unit_circle scaled (radius[6][i], 0, radius[6][i]);
+    circum[6][i] := circumference c[6][i];
+    biangle_width[6][i] := circum[6][i] / ra_divisions;
+   
     
     % message "circum[0][" & decimal i & "]:";
     % show circum[0][i];
@@ -203,6 +225,10 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
     pp[3][i] := (-.5biangle_width[3][i], j);
     pp[4][i] := (.5biangle_width[3][i], j);
+
+    pp[6][i] := (-.5biangle_width[6][i], j);
+    pp[7][i] := (.5biangle_width[6][i], j);
+    
     
     % message "m0:";
     % show m0;
@@ -213,8 +239,12 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
       edge0 += pp[0][i];
       edge1 += pp[1][i];
 
-      edge3 += pp[3][i];
-      edge4 += pp[4][i];
+      if (magnitude i) <=67.5:
+	edge3 += pp[3][i];
+	edge4 += pp[4][i];
+	edge6 += pp[6][i];
+	edge7 += pp[7][i];
+      fi;
       
     fi;
     j += n1;
@@ -268,7 +298,10 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   % show edge0;
   
   draw edge0 on_picture bi_ang_pict[0];
-  draw edge1 on_picture bi_ang_pict[0]; 
+  draw edge1 on_picture bi_ang_pict[0];
+  draw edge4 on_picture bi_ang_pict[0];
+  draw edge7 on_picture bi_ang_pict[0]; 
+  
 
 %% *** (3)
 
@@ -317,14 +350,26 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 	
   	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture bi_ang_pict[0];
 
-  	draw pp[1][i] -- pp[4][i] with_color red on_picture bi_ang_pict[0];
-	
+	if (magnitude i) <= 67.5:
+	  draw pp[1][i] -- pp[4][i] on_picture bi_ang_pict[0];
+	fi;
 
       fi;
       j += m2;
     endfor;
   fi;  
 
+%% *** (3)
+
+  n2 := (length edge7) - 2;
+  
+  
+  for i := tab_interval step tab_interval until n2:
+    drawdot (get_point (i) edge7) with_pen Large_pen on_picture bi_ang_pict[0];
+  endfor;
+
+  vv[picture_ctr] := bi_ang_pict[0];
+  
   
 %% *** (3)
   
