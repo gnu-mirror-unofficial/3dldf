@@ -2621,15 +2621,6 @@ however.
 Now calling |Scan_Parse::numeric_primary_rule_func_0|.
 \ENDLOG 
 
-\TODO
-@q { @>
-@:TO DO}{{\bf TO DO}@>
-@q } @> 
-@q !! TO DO:  @>
-\initials{LDF Undated.}
-Program the |UNIFORMDEVIATE| case. 
-\ENDTODO 
-
 @<Define rules@>=
 @=numeric_primary: numeric_operator numeric_primary@>
 { 
@@ -3147,6 +3138,44 @@ Added this rule.
   @=$$@> = UNIFORMDEVIATE;
 
 };
+
+
+@q ***** (5) numeric_operator --> MAX.  @>
+
+@ \§numeric operator> $\longrightarrow$ \.{MAX}.
+
+\LOG
+\initials{LDF 2021.10.23.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_operator: MAX@>@;  
+{
+
+  @=$$@> = MAX;
+
+};
+
+@q ***** (5) numeric_operator --> MIN.  @>
+
+@ \§numeric operator> $\longrightarrow$ \.{MIN}.
+
+\LOG
+\initials{LDF 2021.10.23.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_operator: MIN@>@;  
+{
+
+  @=$$@> = MIN;
+
+};
+
 
 @q **** (4) Numeric secondary.  @>
 @*3 Numeric secondary.
@@ -4289,8 +4318,40 @@ subtraction to work.
     cerr << "$$ == " << @=$$@> << endl;
 #endif /* |DEBUG_COMPILE|  */ 
 
-}
-;
+};
+
+@q **** (4) MAX.  @>
+@
+@<Define rules@>= 
+@=numeric_expression: MAX LEFT_PARENTHESIS numeric_primary COMMA numeric_secondary RIGHT_PARENTHESIS@>
+{
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @; 
+    if (DEBUG) 
+      cerr << "\n*** Parser: numeric_expression: MAX LEFT_PARENTHESIS numeric_primary" << endl 
+           << "COMMA numeric_secondary RIGHT_PARENTHESIS." << endl;
+#endif /* |DEBUG_COMPILE|  */
+
+  @=$$@> = max(@=$3@>, @=$5@>);
+  
+};
+
+@q **** (4) MIN.  @>
+@
+@<Define rules@>= 
+@=numeric_expression: MIN LEFT_PARENTHESIS numeric_primary COMMA numeric_secondary RIGHT_PARENTHESIS@>
+{
+#if DEBUG_COMPILE
+  bool DEBUG = false; /* |true| */ @; 
+    if (DEBUG) 
+      cerr << "\n*** Parser: numeric_expression: MIN LEFT_PARENTHESIS numeric_primary" << endl 
+           << "COMMA numeric_secondary RIGHT_PARENTHESIS." << endl;
+#endif /* |DEBUG_COMPILE|  */
+
+  @=$$@> = min(@=$3@>, @=$5@>);
+  
+};
+
 
 @q **** (4) numeric_token.  @>
 @ \§numeric token>.  
