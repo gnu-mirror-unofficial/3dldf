@@ -23,7 +23,31 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   testing := false; % true; % 
 
   draw_portion := min(draw_portion, 1);
+
+  message "draw_portion:";
+  show draw_portion;
+
+%% !! START HERE: LDF 2021.10.23.  This doesn't work.  The mod function works
+%% differently from what I want.
   
+  if (draw_portion mod .625) <> 0:
+    m3 := draw_portion / .125;
+    message "m3 == draw_portion / .125 == ";
+    show m3;
+    m4 := round m3;
+    message "m4 == round m3 == ";
+    show m4;
+    m5 := m4 * .125;
+    message "m5 == (m4 * .125):";
+    show m5;
+    draw_portion := m5;
+    message "draw_portion after modification:";
+    show draw_portion;
+  else:
+    message "draw_portion is okay.";
+  fi;
+
+  pause;
   
   tab_wd := .25cm;
   
@@ -217,34 +241,39 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   draw edge1 on_picture bi_ang_pict[0]; 
 
 %% *** (3)
-  
+
   if draw_lines:
     j := -.25a;
     for i = -90 step m1 until 90:
       if i >= m0:
-	r[0][i] := r[2][1] rotated (0, 0, i);
-	r[1][i] := (0, ypart r[0][i]);
-	if testing:
-	  draw r[1][i] -- r[0][i] on_picture bi_ang_pict[0];
-	fi;
-	if ddo_labels and testing:
-	  dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture bi_ang_pict[0];
-	fi;
-	radius[i] := magnitude(r[0][i] - r[1][i]);
-	c[i] := unit_circle scaled (radius[i], 0, radius[i]);
-	circum[i] := circumference c[i];
-	biangle_width[i] := circum[i] / ra_divisions;
+  	r[0][i] := r[2][1] rotated (0, 0, i);
+  	r[1][i] := (0, ypart r[0][i]);
+  	if testing:
+  	  draw r[1][i] -- r[0][i] on_picture bi_ang_pict[0];
+  	fi;
+  	if ddo_labels and testing:
+  	  dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture bi_ang_pict[0];
+  	fi;
+  	radius[i] := magnitude(r[0][i] - r[1][i]);
+  	c[i] := unit_circle scaled (radius[i], 0, radius[i]);
+  	circum[i] := circumference c[i];
+  	biangle_width[i] := circum[i] / ra_divisions;
 
-	message "circum[" & decimal i & "]:";
-	show circum[i];
+  	message "circum[" & decimal i & "]:";
+  	show circum[i];
 
-	message "biangle_width[" & decimal i & "]:";
-	show biangle_width[i];
+  	message "biangle_width[" & decimal i & "]:";
+  	show biangle_width[i];
 
-	pp[0][i] := (-.5biangle_width[i], j);
-	pp[1][i] := (.5biangle_width[i], j);
+  	pp[0][i] := (-.5biangle_width[i], j);
+  	pp[1][i] := (.5biangle_width[i], j);
 
-	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture bi_ang_pict[0];
+  	if do_labels_ra_decl:
+  	   label("\hbox to \labeldimen{$" & decimal i & "^\circ$\hss}",
+  	      pp[1][i] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
+  	fi;
+	
+  	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture bi_ang_pict[0];
 
       fi;
       j += m2;
