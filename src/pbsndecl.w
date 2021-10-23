@@ -2469,6 +2469,7 @@ Added token declaration for |FOR_SUFFIXES_INTERNAL_START|.
 @=%token <int_value> FOREVER@>@/
 @=%token <int_value> EXIT_IF@>@/
 @=%token <int_value> EXIT_UNLESS@>@/
+@=%token <int_value> EXIT_MACRO@>@/
 @=%token <int_value> STEP@>@/
 @=%token <int_value> UNTIL@>@/
 @=%token <int_value> END_FOR@>@/

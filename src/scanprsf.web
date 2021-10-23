@@ -10894,6 +10894,9 @@ Scan_Parse::macro_call_func(Scanner_Node scanner_node,
                                                     &error_stop_value,
                                                     &warning_stop_value);
 
+
+   scanner_node->in_macro_call_flag = true;
+
    using namespace Scan_Parse;
 
 @q **** (4) @>   
@@ -11056,7 +11059,9 @@ parameters with arguments if the macro has untyped parameters, i.e.,
                       ++iter)
                      {
                        curr_placeholder_strm.str("");
-                       curr_placeholder_strm << "¥" << ctr << "¥";
+                       curr_placeholder_strm << "¥" << ctr << "¥"; /* Yen symbol,          */       
+                                                                   /* dec. 165             */
+                                                                   /* (oct. 245,  hex. a5) */
 
                        curr_placeholder = curr_placeholder_strm.str();
 

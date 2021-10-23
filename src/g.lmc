@@ -22,6 +22,16 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
   testing := false; % true; % 
 
+  if draw_portion == 0:
+    message "WARNING!  `draw_portion' == 0.  This is invalid.  Setting it to 1.";
+    pause;
+    draw_portion := 1;
+  fi;
+  
+  if draw_portion < 0:
+    draw_portion *= -1;
+  fi;
+  
   draw_portion := min(draw_portion, 1);
 
   

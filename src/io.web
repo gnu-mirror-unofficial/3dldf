@@ -2591,6 +2591,8 @@ Added |vector <real> numeric_list_real_vector|.
 
   Run_State run_state;
 
+  bool in_macro_call_flag;
+
 #ifdef HAVE_PTHREAD_H  
 
   Thread_Info_Type* thread_info;
@@ -3458,12 +3460,15 @@ Scanner_Type::pop_in(void)
 
     } /* |if (in->up == static_cast<Input_Struct*>(0))|  */
 
+  /* !!START HERE:  LDF 2021.10.23.  Try to figure out a way to tell if we're leaving a */       
+  /* macro.  I want to implement an `exit_macro' function.                              */
+
   Input_Struct* i = in;
   in = in->up;
   i->up = static_cast<Input_Struct*>(0);
   delete i;
   i = static_cast<Input_Struct*>(0);
-  
+
   return 0;
   
 }   /* End of |Scanner_Type::pop_in| definition.  */
