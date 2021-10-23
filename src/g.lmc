@@ -13,6 +13,8 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   point ra_decl_zero_pt;
   numeric tab_wd;
   numeric flag;
+  numeric j;
+  numeric k;
   
   point r[];
 
@@ -124,16 +126,16 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   n1 := a / b;                   %% Distance between the declination lines in increments
                                  %% of decl_increment degrees.
 
-  
-
-
   pp[0][-0] := pp[0][0] := (-.5n0, 0);
   pp[1][-0] := pp[1][0] := (.5n0, 0);
 
-
-
   j := 4;
+  k := 1;
   for i = decl_increment step decl_increment until n:
+
+    message "i == ";
+    show i;
+
     r[j] := r1 rotated (0, 0, i);
     r[j+1] := (0, ypart r[j]);
     if testing:
@@ -148,9 +150,21 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     biangle_width[i] := circum[j] / ra_divisions;
     message "biangle_width[" & decimal i & "]:";
     show biangle_width[i];
+
+    pp[0][i] := (-.5biangle_width[i], (k * n1));
+    pp[1][i] := (.5biangle_width[i], (k * n1));
+
+    pp[0][-i] := pp[0][i] rotated 180; 
+    pp[1][-i] := pp[1][i] rotated 180; 
+
+    if i >= m0:
+      edge0 += pp[0][i];
+      edge1 += pp[1][i];
+    fi;
+
     j += 2;
+    k += 1;
   endfor;
-  
 
   message "draw_lines:";
   show draw_lines;
@@ -179,37 +193,11 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   fi;
 
   if do_labels_ra_decl:
-    label.rt("$90^\circ$", pp[0][90] shifted (.25cm, 0)) on_picture bi_ang_pict[0];
+    label("\hbox to \labeldimen{$90^\circ$\hss}", pp[0][90] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
     if draw_portion >= 1:
-      label.rt("$-90^\circ$", pp[0][-90] shifted (1cm, 0)) on_picture bi_ang_pict[0];
+      label("\hbox to \labeldimen{$-90^\circ$\hss}", pp[0][-90] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
     fi;
   fi;
-
-  message "decl_increment == ";
-  show decl_increment;
-
-  message "n == ";
-  show n;
-  
-  j := 1;
-  for i = decl_increment step decl_increment until n:
-
-    message "i == ";
-    show i;
-
-    pp[0][i] := (-.5biangle_width[i], (j * n1));
-    pp[1][i] := (.5biangle_width[i], (j * n1));
-
-    pp[0][-i] := pp[0][i] rotated 180; 
-    pp[1][-i] := pp[1][i] rotated 180; 
-
-    if i >= m0:
-      edge0 += pp[0][i];
-      edge1 += pp[1][i];
-    fi;
-
-    j += 1;
-  endfor;
 
 %% *** (3)
 
@@ -242,9 +230,10 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   message "m1 == ";
   show m1;
 
-  % for i = -90 step m1 until 90:
-  %   if i >= m0:
-  %     p[0][i] := 
+  for i = -90 step m1 until 90:
+    if i >= m0:
+    fi;
+    endfor;
   
 
   
