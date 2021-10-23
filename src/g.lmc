@@ -22,6 +22,8 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
   testing := false; % true; % 
 
+  draw_portion := min(draw_portion, 1);
+  
   
   tab_wd := .25cm;
   
@@ -50,58 +52,49 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   message "draw_portion:";
   show draw_portion;
 
-  m0 := ((draw_portion * 180) - 90) * -1;
+  m0 := -((draw_portion * 180) - 90);
   message "m0 == ";
   show m0;
 
-  if m0 >= 0:
-    flag := 1;
-  else:
-    flag := -1;
-  fi;
-
-  message "flag:";
-  show flag;
+  m1 := 180 / decl_divisions;
+  m2 := .5a / decl_divisions;
   
-  message "m0 before multiplication:";
-  show m0;
-  
-  m0 *= flag;
+  message "decl_divisions:";
+  show decl_divisions;
 
-  message "m0 after multiplication:";
-  show m0;
+  message "decl_increment:";
+  show decl_increment;
+  
+  message "m1 == ";
+  show m1;
   
   r[2][0] := (-radius0, 0);
   r[2][1] := (radius0, 0);
 
-  %message "magnitude (r[2][1] - r[2][0]) (diameter of c0):";
-  %show magnitude (r[2][1] - r[2][0]);
+  message "magnitude (r[2][1] - r[2][0]) (diameter of c0):";
+  show magnitude (r[2][1] - r[2][0]);
 
   if testing:
     draw r[2][0] -- r[2][1] on_picture bi_ang_pict[0];  %% Horizontal line through origin.
   fi;
 
   if ddo_labels and testing:
-    dotlabel.lft("$r_0$", r[2][0]) on_picture bi_ang_pict[0];
-    dotlabel.rt("$r_1$", r[2][1]) on_picture bi_ang_pict[0];
+    dotlabel.lft("$r_2^0$", r[2][0]) on_picture bi_ang_pict[0];
+    dotlabel.rt("$r_2^1$", r[2][1]) on_picture bi_ang_pict[0];
   fi;
 
   r[2][2] := (0, -radius0);
   r[2][3] := (0, radius0);
 
   if ddo_labels and testing:
-    dotlabel.bot("$r_2$", r[2][2]) on_picture bi_ang_pict[0];
-    dotlabel.top("$r_3$", r[2][3]) on_picture bi_ang_pict[0];
+    dotlabel.bot("$r_2^2$", r[2][2]) on_picture bi_ang_pict[0];
+    dotlabel.top("$r_2^3$", r[2][3]) on_picture bi_ang_pict[0];
   fi;
   
   decl_increment := .25;
-  n := 90 - decl_increment;
 
   message "decl_increment == ";
   show decl_increment;
-
-  message "n == ";
-  show n;
 
 % %% **** (4)
 
@@ -129,11 +122,15 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   pp[0][-0] := pp[0][0] := (-.5n0, 0);
   pp[1][-0] := pp[1][0] := (.5n0, 0);
 
-  j := 1;
-  for i = decl_increment step decl_increment until n:
-
+%% !! START HERE: LDF 2021.10.23.  Find value for j.
+  
+  j := -.25a;
+  for i = -90 step decl_increment until 90:
+    
     message "i == ";
     show i;
+    message "j == ";
+    show j;
 
     r[0][i] := r[2][1] rotated (0, 0, i);
     r[1][i] := (0, ypart r[0][i]);
@@ -147,21 +144,26 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
     c[i] := unit_circle scaled (radius[i], 0, radius[i]);
     circum[i] := circumference c[i];
     biangle_width[i] := circum[i] / ra_divisions;
+
+    message "circum[" & decimal i & "]:";
+    show circum[i];
+
     message "biangle_width[" & decimal i & "]:";
     show biangle_width[i];
 
-    pp[0][i] := (-.5biangle_width[i], (j * n1));
-    pp[1][i] := (.5biangle_width[i], (j * n1));
+    pp[0][i] := (-.5biangle_width[i], j);
+    pp[1][i] := (.5biangle_width[i], j);
 
-    pp[0][-i] := pp[0][i] rotated 180; 
-    pp[1][-i] := pp[1][i] rotated 180; 
-
+    message "m0:";
+    show m0;
+    message "i == ";
+    show i;
+    
     if i >= m0:
       edge0 += pp[0][i];
       edge1 += pp[1][i];
     fi;
-
-    j += 1;
+    j += n1;
   endfor;
 
   message "draw_lines:";
@@ -171,19 +173,15 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
   message "ddo_labels:";
   show ddo_labels;
-    
+
   if (draw_portion >= .5) and do_labels_ra_decl:
     label("\hbox to \labeldimen{$0^\circ$\hss}", pp[1][0] shifted (1.5cm, 0)) on_picture bi_ang_pict[0];
   fi;
-  
+
   if ddo_labels:
     dotlabel.lft("$pp_0^0$", pp[0][0]) on_picture bi_ang_pict[0];
     dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture bi_ang_pict[0];
   fi;
-  
-  pp[0][90]  := pp[1][90]  := (0, .25a);
-  pp[0][-90] := pp[1][-90] := (0, -.25a);
-
   
   if ddo_labels:
     dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture bi_ang_pict[0];
@@ -199,8 +197,6 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 
 %% *** (3)
 
-  %pause;
-  
   i := m0;  %% It doesn't work to use m0 as a subscript.  Apparently,
             %% only simple variables can be used, not ones with numerical
             %% subscripts.
@@ -214,25 +210,46 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   fi;
 
 %% *** (3)
- 
-  edge0 += pp[0][90];
-  edge1 += pp[1][90];
 
+  % show edge0;
+  
   draw edge0 on_picture bi_ang_pict[0];
   draw edge1 on_picture bi_ang_pict[0]; 
 
 %% *** (3)
-
-  m1 := 90 / decl_divisions;
-
-  message "m1 == ";
-  show m1;
-
-  for i = -90 step m1 until 90:
-    if i >= m0:
-    fi;
-    endfor;
   
+  if draw_lines:
+    j := -.25a;
+    for i = -90 step m1 until 90:
+      if i >= m0:
+	r[0][i] := r[2][1] rotated (0, 0, i);
+	r[1][i] := (0, ypart r[0][i]);
+	if testing:
+	  draw r[1][i] -- r[0][i] on_picture bi_ang_pict[0];
+	fi;
+	if ddo_labels and testing:
+	  dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture bi_ang_pict[0];
+	fi;
+	radius[i] := magnitude(r[0][i] - r[1][i]);
+	c[i] := unit_circle scaled (radius[i], 0, radius[i]);
+	circum[i] := circumference c[i];
+	biangle_width[i] := circum[i] / ra_divisions;
+
+	message "circum[" & decimal i & "]:";
+	show circum[i];
+
+	message "biangle_width[" & decimal i & "]:";
+	show biangle_width[i];
+
+	pp[0][i] := (-.5biangle_width[i], j);
+	pp[1][i] := (.5biangle_width[i], j);
+
+	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture bi_ang_pict[0];
+
+      fi;
+      j += m2;
+    endfor;
+  fi;  
 
   
 %% *** (3)
