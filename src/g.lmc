@@ -4,6 +4,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
 			   	boolean draw_lines, boolean draw_vertical} = 
 
   circle c[];
+  numeric aa[];
   numeric a;
   numeric m[];
   numeric radius[];
@@ -41,8 +42,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   ra_decl_zero_pt := (rad, 0);
 
   c0 := unit_circle scaled (radius0, 0, radius0) rotated (90, 0);
-  a := circumference c0;   %% a == Circumference of horizontal great circle.
-
+  aa0 := a := circumference c0;   %% a == Circumference of horizontal great circle.
   
   if testing:
     draw c0 with_color red on_picture bi_ang_pict[0];
@@ -127,16 +127,21 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   edge2 += ..;
   edge3 += ..;
 
-  n0 := a / ra_divisions;          %% 1/ra_divisions of circumference of c0 == width of
-                                   %% spherical biangles at 0 deg. declination. 
+  % n0 := 1 / ra_divisions;         %% 1/ra_divisions of circumference of c0 == width of
+  %                                 %% spherical biangles at 0 deg. declination.
+
+  % n0 *= aa0;
+
+  n0 := aa0 / ra_divisions;
 
 
+  
   numeric b;
   b := 1 / decl_increment;
   b *= 360;
   
-  n1 := a / b;                   %% Distance between the declination lines in increments
-                                 %% of decl_increment degrees.
+  n1 := aa01 / b;                   %% Distance between the declination lines in increments
+                                    %% of decl_increment degrees.
 
   pp[0][-0] := pp[0][0] := (-.5n0, 0);
   pp[1][-0] := pp[1][0] := (.5n0, 0);
