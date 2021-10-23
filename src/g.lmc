@@ -92,23 +92,15 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   %% be overwritten in the loop below.
   %% LDF 2021.10.23.
 
-  message "Error after here 0."; 
-  
   r[2][0] := (-radius[0][0], 0);
   r[2][1] := (radius[0][0], 0);
 
-  message "Error after here 1."; 
-  
-  
   % message "magnitude (r[2][1] - r[2][0]) (diameter of c0):";
   % show magnitude (r[2][1] - r[2][0]);
 
   r[5][0] := (-radius[3][0], 0);
   r[5][1] := (radius[3][0], 0);
 
-  message "Error after here 2."; 
-  
- 
   if testing:
     draw r[2][0] -- r[2][1] on_picture bi_ang_pict[0];  %% Horizontal line through origin.
   fi;
@@ -124,8 +116,6 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   r[5][2] := (0, -radius[3][0]);
   r[5][3] := (0, radius[3][0]);
 
-
-  message "Error after here 3."; 
 
   if ddo_labels and testing:
     dotlabel.bot("$r_2^2$", r[2][2]) on_picture bi_ang_pict[0];
@@ -160,8 +150,6 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   
   n1 := a0 / a1;                   %% Distance between the declination lines in increments
                                    %% of decl_increment degrees.
-
-  message "Error after here 4."; 
 
   
   pp[0][-0] := pp[0][0] := (-.5n0, 0);
