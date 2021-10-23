@@ -16,7 +16,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   numeric j;
   numeric k;
   
-  point r[];
+  point r[][];
 
   boolean testing;
 
@@ -71,27 +71,27 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   message "m0 after multiplication:";
   show m0;
   
-  r0 := (-radius0, 0);
-  r1 := (radius0, 0);
+  r[2][0] := (-radius0, 0);
+  r[2][1] := (radius0, 0);
 
-  %message "magnitude (r1 - r0) (diameter of c0):";
-  %show magnitude (r1 - r0);
+  %message "magnitude (r[2][1] - r[2][0]) (diameter of c0):";
+  %show magnitude (r[2][1] - r[2][0]);
 
   if testing:
-    draw r0 -- r1 on_picture bi_ang_pict[0];  %% Horizontal line through origin.
+    draw r[2][0] -- r[2][1] on_picture bi_ang_pict[0];  %% Horizontal line through origin.
   fi;
 
   if ddo_labels and testing:
-    dotlabel.lft("$r_0$", r0) on_picture bi_ang_pict[0];
-    dotlabel.rt("$r_1$", r1) on_picture bi_ang_pict[0];
+    dotlabel.lft("$r_0$", r[2][0]) on_picture bi_ang_pict[0];
+    dotlabel.rt("$r_1$", r[2][1]) on_picture bi_ang_pict[0];
   fi;
 
-  r2 := (0, -radius0);
-  r3 := (0, radius0);
+  r[2][2] := (0, -radius0);
+  r[2][3] := (0, radius0);
 
   if ddo_labels and testing:
-    dotlabel.bot("$r_2$", r2) on_picture bi_ang_pict[0];
-    dotlabel.top("$r_3$", r3) on_picture bi_ang_pict[0];
+    dotlabel.bot("$r_2$", r[2][2]) on_picture bi_ang_pict[0];
+    dotlabel.top("$r_3$", r[2][3]) on_picture bi_ang_pict[0];
   fi;
   
   decl_increment := .25;
@@ -129,30 +129,29 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
   pp[0][-0] := pp[0][0] := (-.5n0, 0);
   pp[1][-0] := pp[1][0] := (.5n0, 0);
 
-  j := 4;
-  k := 1;
+  j := 1;
   for i = decl_increment step decl_increment until n:
 
     message "i == ";
     show i;
 
-    r[j] := r1 rotated (0, 0, i);
-    r[j+1] := (0, ypart r[j]);
+    r[0][i] := r[2][1] rotated (0, 0, i);
+    r[1][i] := (0, ypart r[0][i]);
     if testing:
-      draw r[j + 1] -- r[j] on_picture bi_ang_pict[0];
+      draw r[1][i] -- r[0][i] on_picture bi_ang_pict[0];
     fi;
     if ddo_labels and testing:
-      dotlabel.rt("$r_{" & decimal j & "}$", r[j]) on_picture bi_ang_pict[0];
+      dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture bi_ang_pict[0];
     fi;
-    radius[j] := magnitude(r[j] - r[j + 1]);
-    c[j] := unit_circle scaled (radius[j], 0, radius[j]);
-    circum[j] := circumference c[j];
-    biangle_width[i] := circum[j] / ra_divisions;
+    radius[i] := magnitude(r[0][i] - r[1][i]);
+    c[i] := unit_circle scaled (radius[i], 0, radius[i]);
+    circum[i] := circumference c[i];
+    biangle_width[i] := circum[i] / ra_divisions;
     message "biangle_width[" & decimal i & "]:";
     show biangle_width[i];
 
-    pp[0][i] := (-.5biangle_width[i], (k * n1));
-    pp[1][i] := (.5biangle_width[i], (k * n1));
+    pp[0][i] := (-.5biangle_width[i], (j * n1));
+    pp[1][i] := (.5biangle_width[i], (j * n1));
 
     pp[0][-i] := pp[0][i] rotated 180; 
     pp[1][-i] := pp[1][i] rotated 180; 
@@ -162,8 +161,7 @@ def get_spherical_biangle (pp) {numeric rad, boolean ddo_labels, numeric ra_divi
       edge1 += pp[1][i];
     fi;
 
-    j += 2;
-    k += 1;
+    j += 1;
   endfor;
 
   message "draw_lines:";
