@@ -411,19 +411,18 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
 
   % show edge0;
   
-  draw edge0 with_color red on_picture vv[picture_ctr];
-  draw edge1 with_color blue on_picture vv[picture_ctr];
+  draw edge0 on_picture vv[picture_ctr];  %% Left, biangle %% with_color red 
+  draw edge1 on_picture vv[picture_ctr]; %% Blue, biangle  %% with_color blue 
 
-  draw edge4 with_color green on_picture vv[picture_ctr];
+  draw edge4 on_picture vv[picture_ctr]; %% Right outside, tab middle. %% with_color green 
   %draw edge7 on_picture vv[picture_ctr];
 
   %draw edge9 on_picture vv[picture_ctr];
 
-  draw edge13 with_color cyan on_picture vv[picture_ctr];
+  draw edge13 on_picture vv[picture_ctr];  %% Top, tab right %% with_color cyan 
   
-
   if m0 <= -78.75:
-    draw edge14 on_picture vv[picture_ctr];
+    draw edge14 on_picture vv[picture_ctr];  %% Bottom, tab right %% with_color magenta 
   fi;
 
 
@@ -436,15 +435,14 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   draw pp[1][78.75] -- pp[13][78.75] on_picture vv[picture_ctr];
 
   %% Add conditionals
-  
-  draw pp[1][-67.5] -- pp[4][-67.5] on_picture vv[picture_ctr];
-  draw pp[1][-78.75] -- pp[4][-78.75] on_picture vv[picture_ctr];
 
+  if m0 <= -67.5:
+    draw pp[1][-67.5] -- pp[4][-67.5] on_picture vv[picture_ctr];
+  fi;
 
-  % draw pp[1][67.5] -- pp[13][67.5] on_picture vv[picture_ctr];
-  % draw pp[1][78.75] -- pp[13][78.75] on_picture vv[picture_ctr];
-
-
+  if m0 <= -78.75:
+    draw pp[1][-78.75] -- pp[4][-78.75] on_picture vv[picture_ctr];
+  fi;
 
   if m0 <= -78.75:
     draw pp[1][-67.5] -- pp[13][-67.5] on_picture vv[picture_ctr];
@@ -505,11 +503,9 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
 	  draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture vv[picture_ctr];
 	fi;
 
-if false:	
 	if (magnitude i) < 67.5:
 	  draw pp[1][i] -- pp[4][i] on_picture vv[picture_ctr];
 	fi;
-      fi;
 
       fi;
       j += m2;
@@ -536,6 +532,29 @@ if false:
     fi;
   endfor;
   
+  drawdot p[1][80] shifted (-.25cm, 0) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot p[1][83] shifted (-.25cm, 0) with_pen Large_pen on_picture vv[picture_ctr];
+
+  drawdot (p[1][80] shifted (-.25cm, 0)) rotated (0, 180) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot (p[1][83] shifted (-.25cm, 0)) rotated (0, 180) with_pen Large_pen on_picture vv[picture_ctr];
+  
+  drawdot mediate(p[0][86], p[1][86]) with_pen Large_pen on_picture vv[picture_ctr];
+
+  if m0 == -90:
+    drawdot (p[1][80] shifted (-.25cm, 0)) rotated 180 with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (p[1][83] shifted (-.25cm, 0)) rotated 180with_pen Large_pen on_picture vv[picture_ctr];
+    
+    drawdot ((p[1][80] shifted (-.25cm, 0)) rotated (0, 180)) rotated 180
+      with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot ((p[1][83] shifted (-.25cm, 0)) rotated (0, 180)) rotated 180
+      with_pen Large_pen on_picture vv[picture_ctr];
+    
+    drawdot mediate(p[0][86], p[1][86]) rotated 180
+      with_pen Large_pen on_picture vv[picture_ctr];
+  fi;
+
+  
+
   
 %% *** (3)
   
