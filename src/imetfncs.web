@@ -3065,13 +3065,15 @@ and error output.
   
   string thread_name;
 
-  bool error_stop_value;
+  bool error_stop_value = false;
 
+#if 0 
   if (scanner_node != static_cast<Scanner_Node>(0))
     error_stop_value = (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
       ? true : false;
   else 
     error_stop_value = true;  /* |false|  */
+#endif 
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -3592,13 +3594,15 @@ and error output.
   
   string thread_name;
 
-  bool error_stop_value;
+  bool error_stop_value = false;
 
+#if 0 
   if (scanner_node != static_cast<Scanner_Node>(0))
     error_stop_value = (scanner_node->get_run_state()->error_stop_mode == Run_State::STOPPING)
       ? true : false;
   else 
     error_stop_value = true;  /* |false|  */
+#endif 
 
 #ifdef HAVE_PTHREAD_H  
 
@@ -4417,8 +4421,10 @@ Id_Map_Entry_Type::show(string s,
 
 @<Define |Id_Map_Entry_Type| functions@>=
 
-  bool error_stop_value;
 
+  bool error_stop_value = false;
+
+#if 0 
   if (scanner_node != static_cast<Scanner_Node>(0))
     error_stop_value 
        = (   scanner_node->get_run_state()->error_stop_mode 
@@ -4427,6 +4433,7 @@ Id_Map_Entry_Type::show(string s,
 
   else 
     error_stop_value = true;  /* |false|  */
+#endif 
 
 @q **** (4) @>   
 @

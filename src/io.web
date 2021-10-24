@@ -3217,6 +3217,7 @@ Scanner_Type::get_thread_name_and_stop_values(string* thread_name,
    if (thread_name)
       *thread_name = "";
 
+#if 0 
    if (error_stop_value)
       *error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
                           ? true : false;
@@ -3224,6 +3225,9 @@ Scanner_Type::get_thread_name_and_stop_values(string* thread_name,
    if (warning_stop_value)
       *warning_stop_value = (run_state.warning_stop_mode == Run_State::STOPPING)
                             ? true : false;
+#endif 
+
+  *error_stop_value = *warning_stop_value = false;
 
 #ifdef HAVE_PTHREAD_H  
    if (thread_name)
@@ -3824,8 +3828,12 @@ Scanner_Type::get_array_entry(string s,
  
   stringstream cerr_strm;
 
+#if 0 
   bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
                      ? true : false;
+#endif 
+
+  bool error_stop_value = false;
 
   int status;
 

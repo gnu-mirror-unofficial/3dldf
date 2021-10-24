@@ -435,8 +435,12 @@ Scan_Parse::parse_func(void* arg)
 
   int* return_value = new int;
 
+#if 0
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
-                   ? true : false;
+                           ? true : false;
+#endif 
+
+  bool error_stop_value = false;
 
   *return_value = yyparse(arg);
 
@@ -877,8 +881,8 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
   stringstream cerr_strm;
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -1410,9 +1414,13 @@ If it's not, set |*return_value = 1| and exit with return value
 
   Scanner_Node scanner_node = picture_ptr_arg->scanner_node;
 
+#if 0 
   bool error_stop_value = (scanner_node->get_run_state()->error_stop_mode
                      == Run_State::STOPPING)
                       ? true : false;
+#endif 
+  
+  bool error_stop_value = false;
 
 @q ***** (5) Error handling:  Multithreading is not supported.@>
 @ Multithreading is not supported.
@@ -2170,7 +2178,11 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
    bool multithread_output  = scanner_node->run_state.multithread_output;
    unsigned short error_stop_mode = scanner_node->run_state.error_stop_mode;
 
+#if 0 
    bool error_stop_value = (error_stop_mode == Run_State::STOPPING) ? true : false;
+#endif 
+
+   bool error_stop_value = false;
 
    bool is_endfig = false; 
 
@@ -3223,8 +3235,8 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
   using namespace Scan_Parse;
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -3234,9 +3246,11 @@ Scan_Parse::assign_simple(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
+#if 0 
   dummy_func();  /* Useful for use with GDB, when the latter can't recognize the 
                     name of a function.  This can occur with template functions.
                     \initials{LDF 2021.03.23.}  */
+#endif 
 
 @q ***** (5).@> 
 
@@ -3693,8 +3707,9 @@ Scan_Parse::assign_chained(Scanner_Node scanner_node,
 
   using namespace Scan_Parse;
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
+
   string thread_name      = "";
 
   if (scanner_node)
@@ -3968,8 +3983,8 @@ Scan_Parse::assign_picture_simple(Scanner_Node scanner_node,
 
    stringstream cerr_strm;
 
-   bool error_stop_value   = true;
-   bool warning_stop_value = true;
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
    string thread_name      = "";
 
   if (scanner_node)
@@ -4511,8 +4526,12 @@ Scan_Parse::assign_picture_chained(Scanner_Node scanner_node,
 
    string thread_name = "";
 
+#if 0 
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
                     ? true : false;
+#endif 
+
+   bool error_stop_value = false;
 
 #ifdef HAVE_PTHREAD_H  
   Thread_Info_Type* thread_info;
@@ -5047,8 +5066,12 @@ Scan_Parse::assign_point_numeric(Scanner_Node scanner_node,
 
    string thread_name = "";
 
+  bool error_stop_value   = false;
+
+#if 0 
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
                     ? true : false;
+#endif 
 
 #ifdef HAVE_PTHREAD_H  
   Thread_Info_Type* thread_info;
@@ -5280,8 +5303,12 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 
   string thread_name = "";
 
+#if 0   
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
     ? true : false;
+#endif 
+
+  bool error_stop_value   = false;
 
 #ifdef HAVE_PTHREAD_H  
   Thread_Info_Type* thread_info;
@@ -5529,8 +5556,12 @@ Int_Void_Ptr
 
   string thread_name = "";
 
+  bool error_stop_value   = false;
+
+#if 0 
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
     ? true : false;
+#endif 
 
 #ifdef HAVE_PTHREAD_H  
   Thread_Info_Type* thread_info;
@@ -5829,8 +5860,12 @@ Scan_Parse::on_picture_optional_0(Scanner_Node scanner_node)
 
   string thread_name = "";
 
+#if 0 
   bool error_stop_value = (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
     ? true : false;
+#endif 
+
+  bool error_stop_value   = false;
 
 #ifdef HAVE_PTHREAD_H  
   Thread_Info_Type* thread_info;
@@ -5980,11 +6015,13 @@ Scan_Parse::vector_type_decl(Scanner_Node scanner_node,
   bool DEBUG = false; /* |true| */@; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   bool error_stop_value;
+   bool error_stop_value   = false;
 
+#if 0 
    error_stop_value = (scanner_node->get_run_state()->error_stop_mode
                     == Run_State::STOPPING) 
                 ? true : false;
+#endif 
    
 @q ***** (5) Get thread information.@>   
 
@@ -7000,8 +7037,8 @@ Scan_Parse::vector_type_plus_assign(Scanner_Node scanner_node,
 
   using namespace Scan_Parse;
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -7392,8 +7429,8 @@ Scan_Parse::vector_type_assign(Scanner_Node scanner_node,
 
   using namespace Scan_Parse;
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -7786,8 +7823,8 @@ Scan_Parse::cull_func(void* v,
 
    stringstream cerr_strm;
 
-   bool error_stop_value   = true;
-   bool warning_stop_value = true;
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
    string thread_name      = "";
 
    if (scanner_node)
@@ -7958,8 +7995,8 @@ Scan_Parse::rectify_func(void* v,
 
    stringstream cerr_strm;
 
-   bool error_stop_value   = true;
-   bool warning_stop_value = true;
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
    string thread_name      = "";
 
    if (scanner_node)
@@ -8223,8 +8260,8 @@ Scan_Parse::reverse_func(void* v, void* parameter, C* c)
 
    stringstream cerr_strm;
 
-   bool error_stop_value   = true;
-   bool warning_stop_value = true;
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
    string thread_name      = "";
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
@@ -8473,8 +8510,8 @@ Scan_Parse::reflect_in_func(Scanner_Node scanner_node,
 
   bool DEBUG = false; /* |true| */
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -8905,8 +8942,8 @@ Scan_Parse::reflect_off_func(Scanner_Node scanner_node,
 
   bool DEBUG = false; /* |true| */
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -9304,8 +9341,8 @@ Scan_Parse::pickup_command(Scanner_Node scanner_node,
 
   stringstream cerr_strm;
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -9459,8 +9496,8 @@ Scan_Parse::drop_command(Scanner_Node scanner_node,
 
   bool DEBUG = false; /* |true| */
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
+  bool error_stop_value   = false;
+  bool warning_stop_value = false;
   string thread_name      = "";
 
   if (scanner_node)
@@ -9571,16 +9608,23 @@ Scan_Parse::sub_binary_number_string_func(C c,
 
   bool DEBUG = false; /* |true| */
 
-  bool error_stop_value   = true;
-  bool warning_stop_value = true;
   string thread_name      = "";
 
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
+
+
   if (scanner_node)
-     scanner_node->get_thread_name_and_stop_values(&thread_name,
+     scanner_node->get_thread_name_and_stop_values(&thread_name,                                                 
                                                    &error_stop_value,
                                                    &warning_stop_value);
 
-  stringstream cerr_strm;
+   error_stop_value   = false;
+   warning_stop_value = false;
+
+
+
+   stringstream cerr_strm;
 
 @q ***** (5)@>  
 
@@ -9945,16 +9989,21 @@ Scan_Parse::get_point_func<Conic_Section_Lattice>(real r,
 
    stringstream cerr_strm;
 
-   bool error_stop_value   = true;
-   bool warning_stop_value = true;
    string thread_name      = "";
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
 
    if (scanner_node)
       scanner_node->get_thread_name_and_stop_values(&thread_name,
                                                     &error_stop_value,
                                                     &warning_stop_value);
+
+   error_stop_value   = false;
+   warning_stop_value = false;
+
 
    using namespace Scan_Parse;
 

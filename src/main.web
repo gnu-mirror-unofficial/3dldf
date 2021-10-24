@@ -1044,9 +1044,13 @@ main(int argc, char *argv[])
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+#if 0 
   bool error_stop_value = (run_state_initial.error_stop_mode == Run_State::STOPPING)
                     ? true : false;
+#endif 
   
+  bool error_stop_value = false;
+
   stringstream cerr_strm;
   
 #if DEBUG_COMPILE
