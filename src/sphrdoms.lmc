@@ -116,7 +116,581 @@ verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
 
 macro get_spherical_biangle;
 
-input "g.lmc";
+def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_divisions,
+                                    numeric decl_divisions, boolean draw_biangle,
+                                    numeric draw_portion,
+                                    boolean draw_lines, boolean draw_vertical,
+                                    numeric tab_width,
+                                    numeric tab_interval_zero,
+                                    numeric tab_interval_one,
+                                    numeric picture_ctr} = 
+    
+  circle c[][];
+  numeric biangle_width[][];
+  numeric aa[];
+  numeric a[];
+  numeric m[];
+  numeric radius[][];
+  numeric circum[][];
+  numeric n[];
+  numeric angle_divisions;
+  point ra_decl_zero_pt;
+  numeric tab_wd[];
+  numeric flag;
+  numeric j;
+  numeric k;
+  
+  point r[][];
+
+  boolean testing;
+
+  testing := false; % true; % 
+
+  if draw_portion == 0:
+    message "WARNING!  `draw_portion' == 0.  This is invalid.  Setting it to 1.";
+    pause;
+    draw_portion := 1;
+  fi;
+  
+  if draw_portion < 0:
+    draw_portion *= -1;
+  fi;
+  
+  draw_portion := min(draw_portion, 1);
+
+  tab_wd[3] := tab_width;
+  tab_wd[6] := .5tab_width;
+
+  tab_wd[12] := 2tab_width;
+  tab_wd[15] := tab_width;
+
+  
+  radius[0][0] := rad;
+
+  radius[3][0] := rad + tab_wd[3];
+  radius[6][0] := rad + tab_wd[6];
+  radius[9][0] := rad - tab_wd[6];  %% Trace
+
+  radius[12][0] := rad + tab_wd[12];
+  radius[15][0] := rad + tab_wd[15];
+  radius[18][0] := rad - tab_wd[15];  %% Trace
+  
+  ra_decl_zero_pt := (rad, 0);
+
+  c[0][0] := unit_circle scaled (radius[0][0], 0, radius[0][0]) rotated (90, 0);
+  a := a0 := circumference c[0][0];   %% a == Circumference of horizontal great circle.
+
+  % message "a0:";
+  % show a0;
+  
+  if testing:
+    draw c[0][0] with_color red on_picture vv[picture_ctr];
+  fi;
+
+% (% 100 32)
+% (/ 100 32)
+% (/ 100 32.0)
+
+% (* 3 32)
+
+  
+  % message "decl_divisions:";
+  % show decl_divisions;
+
+  % message "draw_portion:";
+  % show draw_portion;
+
+  m0 := -((draw_portion * 180) - 90);
+
+  % message "Before rounding:  m0  ==";
+  % show m0;
+
+  m0 := (round (4 * m0)) / 4;
+
+  % message "After rounding:  m0 ==";
+  % show m0;
+  
+  m1 := 180 / decl_divisions;
+  m2 := .5a / decl_divisions;
+  
+  % message "decl_divisions:";
+  % show decl_divisions;
+
+  % message "decl_increment:";
+  % show decl_increment;
+  
+  % message "m1 == ";
+  % show m1;
+
+  %% r[2][] is needed because r[0][0], r[0][1], r[1][0] and r[0][1] could
+  %% be overwritten in the loop below.
+  %% LDF 2021.10.23.
+
+  r[2][0] := (-radius[0][0], 0);
+  r[2][1] := (radius[0][0], 0);
+
+  % message "magnitude (r[2][1] - r[2][0]) (diameter of c[0][0]):";
+  % show magnitude (r[2][1] - r[2][0]);
+
+  r[5][0] := (-radius[3][0], 0);
+  r[5][1] := (radius[3][0], 0);
+
+  r[8][0] := (-radius[6][0], 0);
+  r[8][1] := (radius[6][0], 0);
+
+  r[11][0] := (-radius[9][0], 0);
+  r[11][1] := (radius[9][0], 0);
+
+  r[14][0] := (-radius[12][0], 0);
+  r[14][1] := (radius[12][0], 0);
+
+  r[17][0] := (-radius[15][0], 0);
+  r[17][1] := (radius[15][0], 0);
+
+  r[20][0] := (-radius[18][0], 0);
+  r[20][1] := (radius[18][0], 0);
+
+  
+  if testing:
+    draw r[2][0] -- r[2][1] on_picture vv[picture_ctr];  %% Horizontal line through origin.
+  fi;
+
+  if ddo_labels and testing:
+    dotlabel.lft("$r_2^0$", r[2][0]) on_picture vv[picture_ctr];
+    dotlabel.rt("$r_2^1$", r[2][1]) on_picture vv[picture_ctr];
+  fi;
+
+  r[2][2] := (0, -radius[0][0]);
+  r[2][3] := (0, radius[0][0]);
+  
+  r[5][2] := (0, -radius[3][0]);
+  r[5][3] := (0, radius[3][0]);
+
+  r[8][5] := (0, -radius[6][0]);
+  r[8][6] := (0, radius[6][0]);
+
+  r[11][8] := (0, -radius[9][0]);
+  r[11][9] := (0, radius[9][0]);
+
+  r[14][8] := (0, -radius[12][0]);
+  r[14][9] := (0, radius[12][0]);
+
+  r[17][8] := (0, -radius[15][0]);
+  r[17][9] := (0, radius[15][0]);
+
+  r[20][8] := (0, -radius[18][0]);
+  r[20][9] := (0, radius[18][0]);
+  
+    
+
+  if ddo_labels and testing:
+    dotlabel.bot("$r_2^2$", r[2][2]) on_picture vv[picture_ctr];
+    dotlabel.top("$r_2^3$", r[2][3]) on_picture vv[picture_ctr];
+  fi;
+  
+  decl_increment := .25;  %% DO NOT CHANGE THIS!  The way m0 is calculated using
+                          %% `round' and multiplication depends on `decl_increment'
+                          %% having the value .25.  This value is sufficiently small
+                          %% for any reasonably sized spherical biangle.
+                          %% LDF 2021.10.23.
+  
+  % message "decl_increment == ";
+  % show decl_increment;
+
+% %% **** (4)
+
+  edge0 := null_path; 
+  edge1 := null_path; 
+  edge2 := null_path;  
+  edge3 := null_path;
+
+  edge6 := null_path;
+  edge7 := null_path;
+
+  edge9 := null_path;
+  edge10 := null_path;
+
+  edge13 := null_path;
+  edge14 := null_path;
+
+  edge15 := null_path;
+  edge16 := null_path;
+
+  edge0 += ..;
+  edge1 += ..;
+  edge2 += ..;
+  edge3 += ..;
+
+  edge6 += ..;
+  edge7 += ..;
+
+  edge9 += ..;
+  edge10+= ..;
+
+  edge13 += ..;
+  edge14 += ..;
+  edge15 += ..;
+  edge16 += ..;
+  
+  n0 := a0 / ra_divisions;  %% 1/ra_divisions of circumference of c[0][0] == width of
+  			    %% spherical biangles at 0 deg. declination.        
+
+  a1 := 360 / decl_increment;
+  
+  n1 := a0 / a1;                   %% Distance between the declination lines in increments
+                                   %% of decl_increment degrees.
+
+  
+  pp[0][-0] := pp[0][0] := (-.5n0, 0);
+  pp[1][-0] := pp[1][0] := (.5n0, 0);
+
+  j := -.25a;
+  for i = -90 step decl_increment until 90:
+    
+    % message "i == ";
+    % show i;
+    % message "j == ";
+    % show j;
+
+    r[0][i] := r[2][1] rotated (0, 0, i);
+    r[1][i] := (0, ypart r[0][i]);
+
+    r[3][i] := r[5][1] rotated (0, 0, i);
+    r[4][i] := (0, ypart r[3][i]);
+
+    r[6][i] := r[8][1] rotated (0, 0, i);
+    r[7][i] := (0, ypart r[6][i]);
+
+    r[9][i] := r[11][1] rotated (0, 0, i);
+    r[10][i] := (0, ypart r[9][i]);
+
+    r[12][i] := r[14][1] rotated (0, 0, i);
+    r[13][i] := (0, ypart r[12][i]);
+
+    r[15][i] := r[17][1] rotated (0, 0, i);
+    r[16][i] := (0, ypart r[15][i]);
+
+    r[18][i] := r[20][1] rotated (0, 0, i);
+    r[19][i] := (0, ypart r[18][i]);
+    
+    if testing:
+      draw r[1][i] -- r[0][i] on_picture vv[picture_ctr];
+    fi;
+    if ddo_labels and testing:
+      dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture vv[picture_ctr];
+    fi;
+
+    radius[0][i] := magnitude(r[0][i] - r[1][i]);
+    c[0][i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
+    circum[0][i] := circumference c[0][i];
+    biangle_width[0][i] := circum[0][i] / ra_divisions;
+
+
+    radius[3][i] := magnitude(r[3][i] - r[4][i]);
+    c[3][i] := unit_circle scaled (radius[3][i], 0, radius[3][i]);
+    circum[3][i] := circumference c[3][i];
+    biangle_width[3][i] := circum[3][i] / ra_divisions;
+
+    radius[6][i] := magnitude(r[6][i] - r[7][i]);
+    c[6][i] := unit_circle scaled (radius[6][i], 0, radius[6][i]);
+    circum[6][i] := circumference c[6][i];
+    biangle_width[6][i] := circum[6][i] / ra_divisions;
+
+
+    radius[9][i] := magnitude(r[9][i] - r[10][i]);
+    c[9][i] := unit_circle scaled (radius[9][i], 0, radius[9][i]);
+    circum[9][i] := circumference c[9][i];
+    biangle_width[9][i] := circum[9][i] / ra_divisions;
+
+    radius[12][i] := magnitude(r[12][i] - r[13][i]);
+    c[12][i] := unit_circle scaled (radius[12][i], 0, radius[12][i]);
+    circum[12][i] := circumference c[12][i];
+    biangle_width[12][i] := circum[12][i] / ra_divisions;
+
+    radius[15][i] := magnitude(r[15][i] - r[16][i]);
+    c[15][i] := unit_circle scaled (radius[15][i], 0, radius[15][i]);
+    circum[15][i] := circumference c[15][i];
+    biangle_width[15][i] := circum[15][i] / ra_divisions;
+
+    radius[18][i] := magnitude(r[18][i] - r[19][i]);
+    c[18][i] := unit_circle scaled (radius[18][i], 0, radius[18][i]);
+    circum[18][i] := circumference c[18][i];
+    biangle_width[18][i] := circum[18][i] / ra_divisions;
+
+        
+    % message "circum[0][" & decimal i & "]:";
+    % show circum[0][i];
+
+    % message "biangle_width[0][" & decimal i & "]:";
+    % show biangle_width[0][i];
+
+    pp[0][i] := (-.5biangle_width[0][i], j);
+    pp[1][i] := (.5biangle_width[0][i], j);
+
+    pp[3][i] := (-.5biangle_width[3][i], j);
+    pp[4][i] := (.5biangle_width[3][i], j);
+
+    pp[6][i] := (-.5biangle_width[6][i], j);
+    pp[7][i] := (.5biangle_width[6][i], j);
+
+    pp[9][i] := (-.5biangle_width[9][i], j);
+    pp[10][i] := (.5biangle_width[9][i], j);
+
+    pp[12][i] := (-.5biangle_width[12][i], j);
+    pp[13][i] := (.5biangle_width[12][i], j);
+
+    pp[15][i] := (.5biangle_width[15][i], j);
+
+    pp[18][i] := (-.5biangle_width[18][i], j); %% Trace
+    
+        
+    % message "m0:";
+    % show m0;
+    % message "i == ";
+    % show i;
+    
+    if i >= m0:
+      edge0 += pp[0][i];
+      edge1 += pp[1][i];
+
+      if (magnitude i) <= 67.5:
+	edge3 += pp[3][i];
+	edge4 += pp[4][i];
+
+	edge6 += pp[6][i];
+	edge7 += pp[7][i];
+
+	edge9  += pp[9][i];
+	edge10 += pp[10][i];
+      fi;
+
+      if (i >= 67.5) and (i <= 78.75):
+	edge13 += pp[13][i];
+	edge15 += pp[15][i];
+
+	edge18 += pp[18][i];
+      fi;
+
+      if (i <= -67.5) and (i >= -78.75):
+	edge14 += pp[13][i];
+	edge16 += pp[15][i];
+
+	edge19 += pp[18][i];
+	
+      fi;
+    fi;
+    j += n1;
+  endfor;
+
+  % message "draw_lines:";
+  % show draw_lines;
+  % message "line_color:";
+  % show line_color;
+
+  % message "ddo_labels:";
+  % show ddo_labels;
+
+  if (draw_portion >= .5) and do_labels_ra_decl:
+    label("\hbox to \labeldimen{$0^\circ$\hss}", pp[1][0] shifted (2cm, 0)) on_picture vv[picture_ctr];
+  fi;
+
+  if ddo_labels:
+    dotlabel.lft("$pp_0^0$", pp[0][0]) on_picture vv[picture_ctr];
+    dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture vv[picture_ctr];
+  fi;
+  
+  if ddo_labels:
+    dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture vv[picture_ctr];
+    dotlabel.bot("$pp_0^{-90}$", pp[0][-90]) on_picture vv[picture_ctr];
+  fi;
+
+  if do_labels_ra_decl:
+    label("\hbox to \labeldimen{$90^\circ$\hss}", pp[0][90] shifted (2cm, 0)) on_picture vv[picture_ctr];
+    if draw_portion >= 1:
+      label("\hbox to \labeldimen{$-90^\circ$\hss}", pp[0][-90] shifted (2cm, 0)) on_picture vv[picture_ctr];
+    fi;
+  fi;
+
+%% *** (3)
+
+  i := m0;  %% It doesn't work to use m0 as a subscript.  Apparently,
+            %% only simple variables can be used, not ones with numerical
+            %% subscripts.
+
+  if draw_vertical:
+    draw (mediate(pp[0][i], pp[1][i])) -- pp[0][90] on_picture vv[picture_ctr];
+  fi;
+
+  if draw_portion < 1:
+    draw pp[0][i] -- pp[1][i] on_picture vv[picture_ctr];
+  fi;
+
+%% *** (3)
+
+  % show edge0;
+  
+  draw edge0 on_picture vv[picture_ctr];  %% Left, biangle %% with_color red 
+  draw edge1 on_picture vv[picture_ctr]; %% Blue, biangle  %% with_color blue 
+
+  draw edge4 on_picture vv[picture_ctr]; %% Right outside, tab middle. %% with_color green 
+  %draw edge7 on_picture vv[picture_ctr];
+
+  %draw edge9 on_picture vv[picture_ctr];
+
+  draw edge13 on_picture vv[picture_ctr];  %% Top, tab right %% with_color cyan 
+  
+  if m0 <= -78.75:
+    draw edge14 on_picture vv[picture_ctr];  %% Bottom, tab right %% with_color magenta 
+  fi;
+
+  draw pp[1][67.5] -- pp[13][67.5] on_picture vv[picture_ctr];
+  draw pp[1][78.75] -- pp[13][78.75] on_picture vv[picture_ctr];
+
+  if m0 <= -67.5:
+    draw pp[1][-67.5] -- pp[4][-67.5] on_picture vv[picture_ctr];
+  fi;
+
+  if m0 <= -78.75:
+    draw pp[1][-78.75] -- pp[4][-78.75] on_picture vv[picture_ctr];
+  fi;
+
+  if m0 <= -78.75:
+    draw pp[1][-67.5] -- pp[13][-67.5] on_picture vv[picture_ctr];
+  fi;
+
+
+  if m0 <= -78.75:
+    draw pp[1][-78.75] -- pp[13][-78.75] on_picture vv[picture_ctr];
+  fi;
+
+%% *** (3)
+
+  if draw_lines:
+    j := -.25a;
+    for i = -90 step m1 until 90:
+      if i >= m0:
+  	r[0][i] := r[2][1] rotated (0, 0, i);
+  	r[1][i] := (0, ypart r[0][i]);
+  	if testing:
+  	  draw r[1][i] -- r[0][i] on_picture vv[picture_ctr];
+  	fi;
+  	if ddo_labels and testing:
+  	  dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture vv[picture_ctr];
+  	fi;
+
+  	radius[0][i] := magnitude(r[0][i] - r[1][i]);
+  	c[0][i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
+  	circum[0][i] := circumference c[0][i];
+  	biangle_width[0][i] := circum[0][i] / ra_divisions;
+
+  	radius[3][i] := magnitude(r[3][i] - r[4][i]);
+  	c[3][i] := unit_circle scaled (radius[3][i], 0, radius[3][i]);
+  	circum[3][i] := circumference c[3][i];
+  	biangle_width[3][i] := circum[3][i] / ra_divisions;
+
+
+	
+  	% message "circum[0][" & decimal i & "]:";
+  	% show circum[0][i];
+
+  	% message "biangle_width[0][" & decimal i & "]:";
+  	% show biangle_width[0][i];
+
+  	pp[0][i] := (-.5biangle_width[0][i], j);
+  	pp[1][i] := (.5biangle_width[0][i], j);
+
+  	pp[3][i] := (-.5biangle_width[3][i], j);
+  	pp[4][i] := (.5biangle_width[3][i], j);
+	
+
+  	if do_labels_ra_decl:
+  	   label("\hbox to \labeldimen{$" & decimal i & "^\circ$\hss}",
+  	      pp[1][i] shifted (2cm, 0)) on_picture vv[picture_ctr];
+  	fi;
+
+	if i > m0:
+	  draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture vv[picture_ctr];
+	fi;
+
+	if (magnitude i) < 67.5:
+	  draw pp[1][i] -- pp[4][i] on_picture vv[picture_ctr];
+	fi;
+
+      fi;
+      j += m2;
+    endfor;
+  fi;  
+
+%% *** (3)
+
+  n2 := (length edge7) - 1;
+  
+  for i := tab_interval_zero step tab_interval_zero until n2:
+    drawdot (get_point (i) edge7) with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (get_point (i) edge9) with_pen Large_pen on_picture vv[picture_ctr];
+  endfor;
+
+  n3 := (length edge15) - 1;
+  
+  for i := tab_interval_one step tab_interval_one until n3:
+    drawdot (get_point (i) edge15) with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (get_point (i) edge18) with_pen Large_pen on_picture vv[picture_ctr];
+    if m0 <= -78.75:
+      drawdot (get_point (i) edge16) with_pen Large_pen on_picture vv[picture_ctr];
+      drawdot (get_point (i) edge19) with_pen Large_pen on_picture vv[picture_ctr];
+    fi;
+  endfor;
+  
+  drawdot p[1][80] shifted (-.25cm, 0) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot p[1][83] shifted (-.25cm, 0) with_pen Large_pen on_picture vv[picture_ctr];
+
+  drawdot (p[1][80] shifted (-.25cm, 0)) rotated (0, 180) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot (p[1][83] shifted (-.25cm, 0)) rotated (0, 180) with_pen Large_pen on_picture vv[picture_ctr];
+  
+  drawdot mediate(p[0][86], p[1][86]) with_pen Large_pen on_picture vv[picture_ctr];
+
+  if m0 == -90:
+    drawdot (p[1][80] shifted (-.25cm, 0)) rotated 180 with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (p[1][83] shifted (-.25cm, 0)) rotated 180with_pen Large_pen on_picture vv[picture_ctr];
+    
+    drawdot ((p[1][80] shifted (-.25cm, 0)) rotated (0, 180)) rotated 180
+      with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot ((p[1][83] shifted (-.25cm, 0)) rotated (0, 180)) rotated 180
+      with_pen Large_pen on_picture vv[picture_ctr];
+    
+    drawdot mediate(p[0][86], p[1][86]) rotated 180
+      with_pen Large_pen on_picture vv[picture_ctr];
+  fi;
+
+%% *** (3)
+  
+enddef;
+
+endinput;
+
+
+%% ** (2) End of 3DLDF code.
+
+%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
+%%       GNU Emacs editor.  The local variable list is not evaluated when an 
+%%       indirect buffer is visited, so it's necessary to evaluate the       
+%%       following s-expression in order to use the facilities normally      
+%%       accessed via the local variables list.                              
+%%       \initials{LDF 2004.02.12}.                                          
+
+%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metapost
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
+
 
 
 %% ** (2)
