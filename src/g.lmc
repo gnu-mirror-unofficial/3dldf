@@ -425,16 +425,8 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
     draw edge14 on_picture vv[picture_ctr];  %% Bottom, tab right %% with_color magenta 
   fi;
 
-
-
-  
-  %% !! START HERE: LDF 2021.10.24.  Figure out what lines to draw.
-
-
   draw pp[1][67.5] -- pp[13][67.5] on_picture vv[picture_ctr];
   draw pp[1][78.75] -- pp[13][78.75] on_picture vv[picture_ctr];
-
-  %% Add conditionals
 
   if m0 <= -67.5:
     draw pp[1][-67.5] -- pp[4][-67.5] on_picture vv[picture_ctr];
@@ -452,7 +444,6 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   if m0 <= -78.75:
     draw pp[1][-78.75] -- pp[13][-78.75] on_picture vv[picture_ctr];
   fi;
-
 
 %% *** (3)
 
@@ -553,9 +544,6 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
       with_pen Large_pen on_picture vv[picture_ctr];
   fi;
 
-  
-
-  
 %% *** (3)
   
 enddef;
