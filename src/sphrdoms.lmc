@@ -75,14 +75,16 @@ verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
 
 macro get_spherical_biangle;
 
-def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_divisions,
-                                    numeric decl_divisions, boolean draw_biangle,
-                                    numeric draw_portion,
-                                    boolean draw_lines, boolean draw_vertical,
-                                    numeric tab_width,
-                                    numeric tab_interval_zero,
-                                    numeric tab_interval_one,
-                                    numeric picture_ctr} = 
+def get_spherical_biangle (pp, vv, dot_pen) {numeric rad, boolean ddo_labels, numeric ra_divisions,
+                                    	     numeric decl_divisions, boolean draw_biangle,
+                                    	     numeric draw_portion,
+                                    	     boolean draw_lines, boolean draw_vertical,
+                                    	     numeric tab_width,
+                                    	     numeric tab_interval_zero,
+                                    	     numeric tab_interval_one,
+                                    	     numeric picture_ctr} =
+
+
     
   circle c[][];
   numeric biangle_width[][];
@@ -99,6 +101,7 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   numeric j;
   numeric k;
   path edge[];
+
   
   point r[][];
 
@@ -106,6 +109,8 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
 
   testing := false; % true; % 
 
+
+  
   if draw_portion == 0:
     message "WARNING!  `draw_portion' == 0.  This is invalid.  Setting it to 1.";
     pause;
@@ -568,42 +573,46 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
 %% *** (3)
 
   n2 := (length edge7) - 1;
+
+
   
   for i := tab_interval_zero step tab_interval_zero until n2:
-    drawdot (get_point (i) edge7) with_pen Large_pen on_picture vv[picture_ctr];
-    drawdot (get_point (i) edge9) with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (get_point (i) edge7) with_pen dot_pen on_picture vv[picture_ctr];
+    drawdot (get_point (i) edge9) with_pen dot_pen on_picture vv[picture_ctr];
   endfor;
 
+
+  
   n3 := (length edge15) - 1;
   
   for i := tab_interval_one step tab_interval_one until n3:
-    drawdot (get_point (i) edge15) with_pen Large_pen on_picture vv[picture_ctr];
-    drawdot (get_point (i) edge18) with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (get_point (i) edge15) with_pen dot_pen on_picture vv[picture_ctr];
+    drawdot (get_point (i) edge18) with_pen dot_pen on_picture vv[picture_ctr];
     if m0 <= -78.75:
-      drawdot (get_point (i) edge16) with_pen Large_pen on_picture vv[picture_ctr];
-      drawdot (get_point (i) edge19) with_pen Large_pen on_picture vv[picture_ctr];
+      drawdot (get_point (i) edge16) with_pen dot_pen on_picture vv[picture_ctr];
+      drawdot (get_point (i) edge19) with_pen dot_pen on_picture vv[picture_ctr];
     fi;
   endfor;
   
-  drawdot p[1][80] shifted (-.25cm, 0) with_pen Large_pen on_picture vv[picture_ctr];
-  drawdot p[1][83] shifted (-.25cm, 0) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot p[1][80] shifted (-.25cm, 0) with_pen dot_pen on_picture vv[picture_ctr];
+  drawdot p[1][83] shifted (-.25cm, 0) with_pen dot_pen on_picture vv[picture_ctr];
 
-  drawdot (p[1][80] shifted (-.25cm, 0)) rotated (0, 180) with_pen Large_pen on_picture vv[picture_ctr];
-  drawdot (p[1][83] shifted (-.25cm, 0)) rotated (0, 180) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot (p[1][80] shifted (-.25cm, 0)) rotated (0, 180) with_pen dot_pen on_picture vv[picture_ctr];
+  drawdot (p[1][83] shifted (-.25cm, 0)) rotated (0, 180) with_pen dot_pen on_picture vv[picture_ctr];
   
-  drawdot mediate(p[0][86], p[1][86]) with_pen Large_pen on_picture vv[picture_ctr];
+  drawdot mediate(p[0][86], p[1][86]) with_pen dot_pen on_picture vv[picture_ctr];
 
   if m0 == -90:
-    drawdot (p[1][80] shifted (-.25cm, 0)) rotated 180 with_pen Large_pen on_picture vv[picture_ctr];
-    drawdot (p[1][83] shifted (-.25cm, 0)) rotated 180with_pen Large_pen on_picture vv[picture_ctr];
+    drawdot (p[1][80] shifted (-.25cm, 0)) rotated 180 with_pen dot_pen on_picture vv[picture_ctr];
+    drawdot (p[1][83] shifted (-.25cm, 0)) rotated 180with_pen dot_pen on_picture vv[picture_ctr];
     
     drawdot ((p[1][80] shifted (-.25cm, 0)) rotated (0, 180)) rotated 180
-      with_pen Large_pen on_picture vv[picture_ctr];
+      with_pen dot_pen on_picture vv[picture_ctr];
     drawdot ((p[1][83] shifted (-.25cm, 0)) rotated (0, 180)) rotated 180
-      with_pen Large_pen on_picture vv[picture_ctr];
+      with_pen dot_pen on_picture vv[picture_ctr];
     
     drawdot mediate(p[0][86], p[1][86]) rotated 180
-      with_pen Large_pen on_picture vv[picture_ctr];
+      with_pen dot_pen on_picture vv[picture_ctr];
   fi;
 
 %% *** (3)
