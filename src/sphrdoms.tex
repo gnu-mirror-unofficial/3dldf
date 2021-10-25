@@ -96,6 +96,8 @@
 \def\tocchapterentry#1#2#3{\line{\hbox to \twozerosdimen{\hss #2}. {\medium #1 \dotfill\ #3}}}
 \def\tocsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip3em\ifdim\wd0>0pt{#2}. \fi{\medium #1 \dotfill\ #3}}}
 
+%% !! START HERE!  LDF 2021.10.25.  Add subsections.
+
 \def\Chapter#1#2{\global\advance\chapctr by 1\sectionctr=0%
 \writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\the\chapctr}}
 \def\Section#1#2{\global\advance\sectionctr by 1\edef\A{\the\chapctr .\the\sectionctr}%
@@ -214,7 +216,9 @@ Boston, MA  02110-1301 USA\hfil\break
 \centerline{{\largebx Table of Contents}}
 \advance\baselineskip by 2pt
 %\advance\parskip by 2pt
+{\medium
 \readtocfile
+}
 \vskip1.5\baselineskip
 
 %% *** (3)

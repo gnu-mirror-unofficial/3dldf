@@ -74,11 +74,12 @@ label_color := black;
 
 
 picture v[];
+picture line_picture[];
 
 j := 0;
 for ii = 5 step .5 until 6:
   point p[][];
-  get_spherical_biangle (p, v, medium_pen) {ii, false, 8, 16, true, 1, 2cm, 9, 8, j};
+  get_spherical_biangle (p, v, line_picture, medium_pen) {ii, false, 8, 16, true, 1, 2cm, 9, 8, j};
   beginfig(j);
     current_picture := v[j];
     current_picture += line_picture[j];

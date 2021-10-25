@@ -61,7 +61,7 @@ medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
 Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 
-picture line_picture[];
+
 
 % * (1) Beginning of 3DLDF code.
 
@@ -79,13 +79,13 @@ macro get_spherical_biangle;
 
 
 
-def get_spherical_biangle (pp, vv, dot_pen) {numeric rad, boolean ddo_labels, numeric ra_divisions,
-                                    	     numeric decl_divisions, boolean draw_biangle,
-                                    	     numeric draw_portion,
-                                    	     numeric tab_width,
-                                    	     numeric tab_interval_zero,
-                                    	     numeric tab_interval_one,
-                                    	     numeric picture_ctr} =
+def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean ddo_labels, numeric ra_divisions,
+                                    	     		    numeric decl_divisions, boolean draw_biangle,
+                                    	     		    numeric draw_portion,
+                                    	     		    numeric tab_width,
+                                    	     		    numeric tab_interval_zero,
+                                    	     		    numeric tab_interval_one,
+                                    	     		    numeric picture_ctr} =
 
 
 
@@ -476,7 +476,7 @@ def get_spherical_biangle (pp, vv, dot_pen) {numeric rad, boolean ddo_labels, nu
             %% only simple variables can be used, not ones with numerical
             %% subscripts.
 
-  draw (mediate(pp[0][i], pp[1][i])) -- pp[0][90] on_picture line_picture[picture_ctr];
+  draw (mediate(pp[0][i], pp[1][i])) -- pp[0][90] on_picture lline_picture[picture_ctr];
   
   if draw_portion < 1:
     draw pp[0][i] -- pp[1][i] on_picture vv[picture_ctr];
@@ -529,10 +529,10 @@ def get_spherical_biangle (pp, vv, dot_pen) {numeric rad, boolean ddo_labels, nu
       r[0][i] := r[2][1] rotated (0, 0, i);
       r[1][i] := (0, ypart r[0][i]);
       if testing:
-	draw r[1][i] -- r[0][i] on_picture line_picture[picture_ctr];
+	draw r[1][i] -- r[0][i] on_picture lline_picture[picture_ctr];
       fi;
       if ddo_labels and testing:
-	dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture line_picture[picture_ctr];
+	dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture lline_picture[picture_ctr];
       fi;
 
       radius[0][i] := magnitude(r[0][i] - r[1][i]);
@@ -561,11 +561,11 @@ def get_spherical_biangle (pp, vv, dot_pen) {numeric rad, boolean ddo_labels, nu
       
 
       if i > m0:
-	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture line_picture[picture_ctr];
+	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture lline_picture[picture_ctr];
       fi;
 
       if (magnitude i) < 67.5:
-	draw pp[1][i] -- pp[4][i] on_picture line_picture[picture_ctr];
+	draw pp[1][i] -- pp[4][i] on_picture lline_picture[picture_ctr];
       fi;
 
     fi;
