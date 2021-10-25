@@ -1168,7 +1168,7 @@ sphrdoms.dvi: sphrdoms.tex sphrdoms.0
 sphrdoms.0 sphrdoms.1: sphrdoms.mp 
 	mpost -numbersystem "double" sphrdoms.mp
 
-sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms.lmc sphrdoms.aux g.lmc
+sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrdoms.ldf
 
 PHONY: purge-5
