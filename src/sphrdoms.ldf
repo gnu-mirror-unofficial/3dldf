@@ -67,8 +67,6 @@ label_color := black;
 %                            	      	       numeric ra_divisions, numeric decl_divisions,
 %                                     	       numeric draw_biangle,
 %                                     	       numeric draw_portion,
-%			     	      	       boolean draw_lines,
-%                                     	       boolean draw_vertical,
 %                                     	       numeric tab_width
 %                                     	       numeric tab_interval_zero,
 %                                     	       numeric tab_interval_one,
@@ -77,28 +75,16 @@ label_color := black;
 
 picture v[];
 
-point p[][];
-get_spherical_biangle (p, v, medium_pen) {5, false, 8, 16, true, 1, true, true, 2cm, 9, 8, 0}; 
-
-point p[][];
-get_spherical_biangle (p, v, large_pen) {10, false, 8, 16, true, 1, true, true, 2cm, 9, 8, 1};
-
-
-%% ** (2)
-
-%% *** (3)
-
-beginfig(0);
-  current_picture := v0;
-endfig with_projection parallel_x_y no_sort;
-
-
-%% *** (3)
-
-beginfig(1);
-  current_picture := v1;
-endfig with_projection parallel_x_y no_sort;
-
+j := 0;
+for ii = 5 step .5 until 6:
+  point p[][];
+  get_spherical_biangle (p, v, medium_pen) {ii, false, 8, 16, true, 1, 2cm, 9, 8, j};
+  beginfig(j);
+    current_picture := v[j];
+    current_picture += line_picture[j];
+  endfig with_projection parallel_x_y no_sort;
+  j += 1;
+endfor;
 
 %% ** (2)
 
