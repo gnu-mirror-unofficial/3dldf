@@ -53,49 +53,9 @@
 color label_color;
 color line_color;
 
-boolean do_labels;
-
-boolean do_labels_ra_decl;
-
-numeric radius;
-
-picture v[];  
-numeric bi_ang[];  
-picture bi_ang_pict[];
-numeric middle_angle;   
-numeric min_edge_angle; 
-numeric max_edge_angle;
-point R[];
-picture qv[];
-
 pen medium_pen;
 pen large_pen;
 pen Large_pen;
-path Q;
-color ccolor;
-
-numeric label_pos_zero;
-numeric label_pos_top;
-numeric label_pos_bot;
-numeric label_pos_rt;
-numeric label_pos_urt;
-numeric label_pos_ulft;
-numeric label_pos_lrt;
-numeric label_pos_llft;
-
-picture tab_picture[];
-path edge[];
-path tab[];
-
-label_pos_zero := 0;
-label_pos_top  := 1;
-label_pos_bot  := 2;
-label_pos_lft  := 3;
-label_pos_rt   := 4;
-label_pos_urt  := 5;
-label_pos_ulft := 6;
-label_pos_lrt  := 7;
-label_pos_llft := 8;
 
 medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
@@ -138,6 +98,7 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   numeric flag;
   numeric j;
   numeric k;
+  path edge[];
   
   point r[][];
 
@@ -489,10 +450,6 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   % message "ddo_labels:";
   % show ddo_labels;
 
-  if (draw_portion >= .5) and do_labels_ra_decl:
-    label("\hbox to \labeldimen{$0^\circ$\hss}", pp[1][0] shifted (2cm, 0)) on_picture vv[picture_ctr];
-  fi;
-
   if ddo_labels:
     dotlabel.lft("$pp_0^0$", pp[0][0]) on_picture vv[picture_ctr];
     dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture vv[picture_ctr];
@@ -501,13 +458,6 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   if ddo_labels:
     dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture vv[picture_ctr];
     dotlabel.bot("$pp_0^{-90}$", pp[0][-90]) on_picture vv[picture_ctr];
-  fi;
-
-  if do_labels_ra_decl:
-    label("\hbox to \labeldimen{$90^\circ$\hss}", pp[0][90] shifted (2cm, 0)) on_picture vv[picture_ctr];
-    if draw_portion >= 1:
-      label("\hbox to \labeldimen{$-90^\circ$\hss}", pp[0][-90] shifted (2cm, 0)) on_picture vv[picture_ctr];
-    fi;
   fi;
 
 %% *** (3)
@@ -601,11 +551,6 @@ def get_spherical_biangle (pp, vv) {numeric rad, boolean ddo_labels, numeric ra_
   	pp[3][i] := (-.5biangle_width[3][i], j);
   	pp[4][i] := (.5biangle_width[3][i], j);
 	
-
-  	if do_labels_ra_decl:
-  	   label("\hbox to \labeldimen{$" & decimal i & "^\circ$\hss}",
-  	      pp[1][i] shifted (2cm, 0)) on_picture vv[picture_ctr];
-  	fi;
 
 	if i > m0:
 	  draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture vv[picture_ctr];
