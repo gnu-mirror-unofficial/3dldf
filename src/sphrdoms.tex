@@ -93,15 +93,19 @@
 \newcount\sectionctr
 \sectionctr=0
 
+\newcount\subsectionctr
+\subsectionctr=0
+
 \def\tocchapterentry#1#2#3{\line{\hbox to \twozerosdimen{\hss #2}. {\medium #1 \dotfill\ #3}}}
 \def\tocsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip3em\ifdim\wd0>0pt{#2}. \fi{\medium #1 \dotfill\ #3}}}
-
-%% !! START HERE!  LDF 2021.10.25.  Add subsections.
+\def\tocsubsectionentry#1#2#3{\setbox0=\hbox{#2}\line{\hskip6em\ifdim\wd0>0pt{#2}. \fi{\medium #1 \dotfill\ #3}}}
 
 \def\Chapter#1#2{\global\advance\chapctr by 1\sectionctr=0%
 \writenumberedtocentry{chapter}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\the\chapctr}}
 \def\Section#1#2{\global\advance\sectionctr by 1\edef\A{\the\chapctr .\the\sectionctr}%
 \writenumberedtocentry{section}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\A}}
+\def\Subsection#1#2{\global\advance\subsectionctr by 1\edef\A{\the\chapctr .\the\sectionctr .\the\subsectionctr}%
+\writenumberedtocentry{subsection}{\hlstart{}{bwidth=0}{#1}\Blue{#2}\hlend}{\A}}
 
 %% * (1)
 
@@ -260,11 +264,13 @@ information can be found on the title page.
 \centerline{{\Largebx Spheres}}\vskip2\baselineskip
 %
 
-%% *** (3) 10cm, 8 Sections, 45°
+%% *** (3) Sphere, Diameter 10cm, 8 Sections, 45°
+
+%% **** (4) With Lines
 
 \Section{Diameter 10cm, 8 Sections}{Diameter 10cm, 8 Sections}
 \hldest{xyz}{}{Diameter 10cm, 8 Sections}
-\centerline{{\largebx Diameter 10cm, 8 Sections, 45\raise1ex\hbox{\bigcircbf}}}\vskip3\baselineskip
+\centerline{{\largebx Diameter 10cm, 8 Sections, 45\raise1ex\hbox{\bigcircbf}, With Lines}}\vskip3\baselineskip
 \setbox0=\hbox{\epsffile{sphrdoms.0}}
 \vbox to 0pt{\vskip0cm
 \line{\hskip0pt
@@ -281,12 +287,10 @@ information can be found on the title page.
 \vss}
 \vfil\eject
 
-%% *** (3) 11cm, 8 Sections, 45°
+%% **** (4) Without Lines
 
-\Section{Diameter 11cm, 8 Sections}{Diameter 11cm, 8 Sections}
-\hldest{xyz}{}{Diameter 11cm, 8 Sections}
-\centerline{{\largebx Diameter 11cm, 8 Sections, 45\raise1ex\hbox{\bigcircbf}}}\vskip3\baselineskip
-\setbox0=\hbox{\epsffile{sphrdoms.0}}
+\centerline{{\largebx Diameter 10cm, 8 Sections, 45\raise1ex\hbox{\bigcircbf}, Without Lines}}\vskip3\baselineskip
+\setbox0=\hbox{\epsffile{sphrdoms.1}}
 \vbox to 0pt{\vskip0cm
 \line{\hskip0pt
 \vbox{\hbox{\epsffile{sphrdoms.1}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 1}}}\hskip1cm
@@ -301,6 +305,52 @@ information can be found on the title page.
 \vbox{\hbox{\epsffile{sphrdoms.1}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 8}}}}
 \vss}
 \vfil\eject
+
+
+
+
+%% *** (3) 11cm, 8 Sections, 45°
+
+%% **** (4) With Lines
+
+\Section{Diameter 11cm, 8 Sections}{Diameter 11cm, 8 Sections}
+\hldest{xyz}{}{Diameter 11cm, 8 Sections}
+\centerline{{\largebx Diameter 11cm, 8 Sections, 45\raise1ex\hbox{\bigcircbf}, With Lines}}\vskip3\baselineskip
+\setbox0=\hbox{\epsffile{sphrdoms.2}}
+\vbox to 0pt{\vskip0cm
+\line{\hskip0pt
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 1}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 2}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 3}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 4}}}}
+\vskip1cm
+\line{\hskip0pt
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 5}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 6}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 7}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.2}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 8}}}}
+\vss}
+\vfil\eject
+
+%% **** (4) Without Lines
+
+\centerline{{\largebx Diameter 11cm, 8 Sections, 45\raise1ex\hbox{\bigcircbf}, Without Lines}}\vskip3\baselineskip
+\setbox0=\hbox{\epsffile{sphrdoms.3}}
+\vbox to 0pt{\vskip0cm
+\line{\hskip0pt
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 1}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 2}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 3}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 4}}}}
+\vskip1cm
+\line{\hskip0pt
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 5}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 6}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 7}}}\hskip1cm
+\vbox{\hbox{\epsffile{sphrdoms.3}}\vskip.5cm\hbox{\hskip.4\wd0{\largebx 8}}}}
+\vss}
+\vfil\eject
+
 
 
 

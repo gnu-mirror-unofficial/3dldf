@@ -79,13 +79,15 @@ macro get_spherical_biangle;
 
 
 
-def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean ddo_labels, numeric ra_divisions,
-                                    	     		    numeric decl_divisions, boolean draw_biangle,
-                                    	     		    numeric draw_portion,
-                                    	     		    numeric tab_width,
-                                    	     		    numeric tab_interval_zero,
-                                    	     		    numeric tab_interval_one,
-                                    	     		    numeric picture_ctr} =
+def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {numeric rad,
+									    numeric ra_divisions,
+                                    	     		    		    numeric decl_divisions,
+									    boolean draw_biangle,
+                                    	     		    		    numeric draw_portion,
+                                    	     		    		    numeric tab_width,
+                                    	     		    		    numeric tab_interval_zero,
+                                    	     		    		    numeric tab_interval_one,
+                                    	     		    		    numeric picture_ctr} =
 
 
 
@@ -105,18 +107,14 @@ def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean
   point ra_decl_zero_pt;
   numeric tab_wd[];
   numeric flag;
-  numeric j;
-  numeric k;
+  numeric jj;
   path edge[];
-
   
   point r[][];
 
   boolean testing;
 
   testing := false; % true; % 
-
-
   
   if draw_portion == 0:
     message "WARNING!  `draw_portion' == 0.  This is invalid.  Setting it to 1.";
@@ -227,9 +225,9 @@ def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean
     draw r[2][0] -- r[2][1] on_picture vv[picture_ctr];  %% Horizontal line through origin.
   fi;
 
-  if ddo_labels and testing:
-    dotlabel.lft("$r_2^0$", r[2][0]) on_picture vv[picture_ctr];
-    dotlabel.rt("$r_2^1$", r[2][1]) on_picture vv[picture_ctr];
+  if testing:
+    dotlabel.lft("$r_2^0$", r[2][0]) on_picture llabel_picture[picture_ctr];
+    dotlabel.rt("$r_2^1$", r[2][1]) on_picture llabel_picture[picture_ctr];
   fi;
 
   r[2][2] := (0, -radius[0][0]);
@@ -252,12 +250,10 @@ def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean
 
   r[20][8] := (0, -radius[18][0]);
   r[20][9] := (0, radius[18][0]);
-  
-    
 
-  if ddo_labels and testing:
-    dotlabel.bot("$r_2^2$", r[2][2]) on_picture vv[picture_ctr];
-    dotlabel.top("$r_2^3$", r[2][3]) on_picture vv[picture_ctr];
+  if testing:
+    dotlabel.bot("$r_2^2$", r[2][2]) on_picture llabel_picture[picture_ctr];
+    dotlabel.top("$r_2^3$", r[2][3]) on_picture llabel_picture[picture_ctr];
   fi;
   
   decl_increment := .25;  %% DO NOT CHANGE THIS!  The way m0 is calculated using
@@ -316,170 +312,168 @@ def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean
   pp[0][-0] := pp[0][0] := (-.5n0, 0);
   pp[1][-0] := pp[1][0] := (.5n0, 0);
 
-  j := -.25a;
-  for i = -90 step decl_increment until 90:
+  jj := -.25a;
+  for ii = -90 step decl_increment until 90:
     
-    % message "i == ";
-    % show i;
-    % message "j == ";
-    % show j;
+    % message "ii == ";
+    % show ii;
+    % message "jj == ";
+    % show jj;
 
-    r[0][i] := r[2][1] rotated (0, 0, i);
-    r[1][i] := (0, ypart r[0][i]);
+    r[0][ii] := r[2][1] rotated (0, 0, ii);
+    r[1][ii] := (0, ypart r[0][ii]);
 
-    r[3][i] := r[5][1] rotated (0, 0, i);
-    r[4][i] := (0, ypart r[3][i]);
+    r[3][ii] := r[5][1] rotated (0, 0, ii);
+    r[4][ii] := (0, ypart r[3][ii]);
 
-    r[6][i] := r[8][1] rotated (0, 0, i);
-    r[7][i] := (0, ypart r[6][i]);
+    r[6][ii] := r[8][1] rotated (0, 0, ii);
+    r[7][ii] := (0, ypart r[6][ii]);
 
-    r[9][i] := r[11][1] rotated (0, 0, i);
-    r[10][i] := (0, ypart r[9][i]);
+    r[9][ii] := r[11][1] rotated (0, 0, ii);
+    r[10][ii] := (0, ypart r[9][ii]);
 
-    r[12][i] := r[14][1] rotated (0, 0, i);
-    r[13][i] := (0, ypart r[12][i]);
+    r[12][ii] := r[14][1] rotated (0, 0, ii);
+    r[13][ii] := (0, ypart r[12][ii]);
 
-    r[15][i] := r[17][1] rotated (0, 0, i);
-    r[16][i] := (0, ypart r[15][i]);
+    r[15][ii] := r[17][1] rotated (0, 0, ii);
+    r[16][ii] := (0, ypart r[15][ii]);
 
-    r[18][i] := r[20][1] rotated (0, 0, i);
-    r[19][i] := (0, ypart r[18][i]);
+    r[18][ii] := r[20][1] rotated (0, 0, ii);
+    r[19][ii] := (0, ypart r[18][ii]);
     
     if testing:
-      draw r[1][i] -- r[0][i] on_picture vv[picture_ctr];
-    fi;
-    if ddo_labels and testing:
-      dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture vv[picture_ctr];
+      draw r[1][ii] -- r[0][ii] on_picture vv[picture_ctr];
     fi;
 
-    radius[0][i] := magnitude(r[0][i] - r[1][i]);
-    c[0][i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
-    circum[0][i] := circumference c[0][i];
-    biangle_width[0][i] := circum[0][i] / ra_divisions;
+    if testing:
+      dotlabel.rt("$r_0^{" & decimal ii & "}$", r[0][ii]) on_picture llabel_picture[picture_ctr];
+    fi;
+
+    radius[0][ii] := magnitude(r[0][ii] - r[1][ii]);
+    c[0][ii] := unit_circle scaled (radius[0][ii], 0, radius[0][ii]);
+    circum[0][ii] := circumference c[0][ii];
+    biangle_width[0][ii] := circum[0][ii] / ra_divisions;
 
 
-    radius[3][i] := magnitude(r[3][i] - r[4][i]);
-    c[3][i] := unit_circle scaled (radius[3][i], 0, radius[3][i]);
-    circum[3][i] := circumference c[3][i];
-    biangle_width[3][i] := circum[3][i] / ra_divisions;
+    radius[3][ii] := magnitude(r[3][ii] - r[4][ii]);
+    c[3][ii] := unit_circle scaled (radius[3][ii], 0, radius[3][ii]);
+    circum[3][ii] := circumference c[3][ii];
+    biangle_width[3][ii] := circum[3][ii] / ra_divisions;
 
-    radius[6][i] := magnitude(r[6][i] - r[7][i]);
-    c[6][i] := unit_circle scaled (radius[6][i], 0, radius[6][i]);
-    circum[6][i] := circumference c[6][i];
-    biangle_width[6][i] := circum[6][i] / ra_divisions;
+    radius[6][ii] := magnitude(r[6][ii] - r[7][ii]);
+    c[6][ii] := unit_circle scaled (radius[6][ii], 0, radius[6][ii]);
+    circum[6][ii] := circumference c[6][ii];
+    biangle_width[6][ii] := circum[6][ii] / ra_divisions;
 
 
-    radius[9][i] := magnitude(r[9][i] - r[10][i]);
-    c[9][i] := unit_circle scaled (radius[9][i], 0, radius[9][i]);
-    circum[9][i] := circumference c[9][i];
-    biangle_width[9][i] := circum[9][i] / ra_divisions;
+    radius[9][ii] := magnitude(r[9][ii] - r[10][ii]);
+    c[9][ii] := unit_circle scaled (radius[9][ii], 0, radius[9][ii]);
+    circum[9][ii] := circumference c[9][ii];
+    biangle_width[9][ii] := circum[9][ii] / ra_divisions;
 
-    radius[12][i] := magnitude(r[12][i] - r[13][i]);
-    c[12][i] := unit_circle scaled (radius[12][i], 0, radius[12][i]);
-    circum[12][i] := circumference c[12][i];
-    biangle_width[12][i] := circum[12][i] / ra_divisions;
+    radius[12][ii] := magnitude(r[12][ii] - r[13][ii]);
+    c[12][ii] := unit_circle scaled (radius[12][ii], 0, radius[12][ii]);
+    circum[12][ii] := circumference c[12][ii];
+    biangle_width[12][ii] := circum[12][ii] / ra_divisions;
 
-    radius[15][i] := magnitude(r[15][i] - r[16][i]);
-    c[15][i] := unit_circle scaled (radius[15][i], 0, radius[15][i]);
-    circum[15][i] := circumference c[15][i];
-    biangle_width[15][i] := circum[15][i] / ra_divisions;
+    radius[15][ii] := magnitude(r[15][ii] - r[16][ii]);
+    c[15][ii] := unit_circle scaled (radius[15][ii], 0, radius[15][ii]);
+    circum[15][ii] := circumference c[15][ii];
+    biangle_width[15][ii] := circum[15][ii] / ra_divisions;
 
-    radius[18][i] := magnitude(r[18][i] - r[19][i]);
-    c[18][i] := unit_circle scaled (radius[18][i], 0, radius[18][i]);
-    circum[18][i] := circumference c[18][i];
-    biangle_width[18][i] := circum[18][i] / ra_divisions;
+    radius[18][ii] := magnitude(r[18][ii] - r[19][ii]);
+    c[18][ii] := unit_circle scaled (radius[18][ii], 0, radius[18][ii]);
+    circum[18][ii] := circumference c[18][ii];
+    biangle_width[18][ii] := circum[18][ii] / ra_divisions;
 
         
-    % message "circum[0][" & decimal i & "]:";
-    % show circum[0][i];
+    % message "circum[0][" & decimal ii & "]:";
+    % show circum[0][ii];
 
-    % message "biangle_width[0][" & decimal i & "]:";
-    % show biangle_width[0][i];
+    % message "biangle_width[0][" & decimal ii & "]:";
+    % show biangle_width[0][ii];
 
-    pp[0][i] := (-.5biangle_width[0][i], j);
-    pp[1][i] := (.5biangle_width[0][i], j);
+    pp[0][ii] := (-.5biangle_width[0][ii], jj);
+    pp[1][ii] := (.5biangle_width[0][ii], jj);
 
-    pp[3][i] := (-.5biangle_width[3][i], j);
-    pp[4][i] := (.5biangle_width[3][i], j);
+    pp[3][ii] := (-.5biangle_width[3][ii], jj);
+    pp[4][ii] := (.5biangle_width[3][ii], jj);
 
-    pp[6][i] := (-.5biangle_width[6][i], j);
-    pp[7][i] := (.5biangle_width[6][i], j);
+    pp[6][ii] := (-.5biangle_width[6][ii], jj);
+    pp[7][ii] := (.5biangle_width[6][ii], jj);
 
-    pp[9][i] := (-.5biangle_width[9][i], j);
-    pp[10][i] := (.5biangle_width[9][i], j);
+    pp[9][ii] := (-.5biangle_width[9][ii], jj);
+    pp[10][ii] := (.5biangle_width[9][ii], jj);
 
-    pp[12][i] := (-.5biangle_width[12][i], j);
-    pp[13][i] := (.5biangle_width[12][i], j);
+    pp[12][ii] := (-.5biangle_width[12][ii], jj);
+    pp[13][ii] := (.5biangle_width[12][ii], jj);
 
-    pp[15][i] := (.5biangle_width[15][i], j);
+    pp[15][ii] := (.5biangle_width[15][ii], jj);
 
-    pp[18][i] := (-.5biangle_width[18][i], j); %% Trace
+    pp[18][ii] := (-.5biangle_width[18][ii], jj); %% Trace
     
         
     % message "m0:";
     % show m0;
-    % message "i == ";
-    % show i;
+    % message "ii == ";
+    % show ii;
     
-    if i >= m0:
-      edge0 += pp[0][i];
-      edge1 += pp[1][i];
+    if ii >= m0:
+      edge0 += pp[0][ii];
+      edge1 += pp[1][ii];
 
-      if (magnitude i) <= 67.5:
-	edge3 += pp[3][i];
-	edge4 += pp[4][i];
+      if (magnitude ii) <= 67.5:
+	edge3 += pp[3][ii];
+	edge4 += pp[4][ii];
 
-	edge6 += pp[6][i];
-	edge7 += pp[7][i];
+	edge6 += pp[6][ii];
+	edge7 += pp[7][ii];
 
-	edge9  += pp[9][i];
-	edge10 += pp[10][i];
+	edge9  += pp[9][ii];
+	edge10 += pp[10][ii];
       fi;
 
-      if (i >= 67.5) and (i <= 78.75):
-	edge13 += pp[13][i];
-	edge15 += pp[15][i];
+      if (ii >= 67.5) and (ii <= 78.75):
+	edge13 += pp[13][ii];
+	edge15 += pp[15][ii];
 
-	edge18 += pp[18][i];
+	edge18 += pp[18][ii];
       fi;
 
-      if (i <= -67.5) and (i >= -78.75):
-	edge14 += pp[13][i];
-	edge16 += pp[15][i];
+      if (ii <= -67.5) and (ii >= -78.75):
+	edge14 += pp[13][ii];
+	edge16 += pp[15][ii];
 
-	edge19 += pp[18][i];
+	edge19 += pp[18][ii];
 	
       fi;
     fi;
-    j += n1;
+    jj += n1;
   endfor;
 
   % message "line_color:";
   % show line_color;
 
-  % message "ddo_labels:";
-  % show ddo_labels;
-
-  if ddo_labels:
-    dotlabel.lft("$pp_0^0$", pp[0][0]) on_picture vv[picture_ctr];
-    dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture vv[picture_ctr];
+  if testing:
+    dotlabel.lft("$pp_0^0$", pp[0][0]) on_picture llabel_picture[picture_ctr];
+    dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture llabel_picture[picture_ctr];
   fi;
-  
-  if ddo_labels:
-    dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture vv[picture_ctr];
-    dotlabel.bot("$pp_0^{-90}$", pp[0][-90]) on_picture vv[picture_ctr];
+
+  if false:
+    dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture llabel_picture[picture_ctr];
+    dotlabel.bot("$pp_0^{-90}$", pp[0][-90]) on_picture llabel_picture[picture_ctr];
   fi;
 
 %% *** (3)
 
-  i := m0;  %% It doesn't work to use m0 as a subscript.  Apparently,
+  ii := m0;  %% It doesn't work to use m0 as a subscript.  Apparently,
             %% only simple variables can be used, not ones with numerical
             %% subscripts.
 
-  draw (mediate(pp[0][i], pp[1][i])) -- pp[0][90] on_picture lline_picture[picture_ctr];
+  draw (mediate(pp[0][ii], pp[1][ii])) -- pp[0][90] on_picture lline_picture[picture_ctr];
   
   if draw_portion < 1:
-    draw pp[0][i] -- pp[1][i] on_picture vv[picture_ctr];
+    draw pp[0][ii] -- pp[1][ii] on_picture vv[picture_ctr];
   fi;
 
 %% *** (3)
@@ -523,53 +517,53 @@ def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean
 %% *** (3)
 
 
-  j := -.25a;
-  for i = -90 step m1 until 90:
-    if i >= m0:
-      r[0][i] := r[2][1] rotated (0, 0, i);
-      r[1][i] := (0, ypart r[0][i]);
+  jj := -.25a;
+  for ii = -90 step m1 until 90:
+    if ii >= m0:
+      r[0][ii] := r[2][1] rotated (0, 0, ii);
+      r[1][ii] := (0, ypart r[0][ii]);
       if testing:
-	draw r[1][i] -- r[0][i] on_picture lline_picture[picture_ctr];
+	draw r[1][ii] -- r[0][ii] on_picture lline_picture[picture_ctr];
       fi;
-      if ddo_labels and testing:
-	dotlabel.rt("$r_0^{" & decimal i & "}$", r[0][i]) on_picture lline_picture[picture_ctr];
+      if testing:
+	dotlabel.rt("$r_0^{" & decimal ii & "}$", r[0][ii]) on_picture llabel_picture[picture_ctr];
       fi;
 
-      radius[0][i] := magnitude(r[0][i] - r[1][i]);
-      c[0][i] := unit_circle scaled (radius[0][i], 0, radius[0][i]);
-      circum[0][i] := circumference c[0][i];
-      biangle_width[0][i] := circum[0][i] / ra_divisions;
+      radius[0][ii] := magnitude(r[0][ii] - r[1][ii]);
+      c[0][ii] := unit_circle scaled (radius[0][ii], 0, radius[0][ii]);
+      circum[0][ii] := circumference c[0][ii];
+      biangle_width[0][ii] := circum[0][ii] / ra_divisions;
 
-      radius[3][i] := magnitude(r[3][i] - r[4][i]);
-      c[3][i] := unit_circle scaled (radius[3][i], 0, radius[3][i]);
-      circum[3][i] := circumference c[3][i];
-      biangle_width[3][i] := circum[3][i] / ra_divisions;
+      radius[3][ii] := magnitude(r[3][ii] - r[4][ii]);
+      c[3][ii] := unit_circle scaled (radius[3][ii], 0, radius[3][ii]);
+      circum[3][ii] := circumference c[3][ii];
+      biangle_width[3][ii] := circum[3][ii] / ra_divisions;
 
 
       
-  	% message "circum[0][" & decimal i & "]:";
-  	% show circum[0][i];
+  	% message "circum[0][" & decimal ii & "]:";
+  	% show circum[0][ii];
 
-  	% message "biangle_width[0][" & decimal i & "]:";
-  	% show biangle_width[0][i];
+  	% message "biangle_width[0][" & decimal ii & "]:";
+  	% show biangle_width[0][ii];
 
-      pp[0][i] := (-.5biangle_width[0][i], j);
-      pp[1][i] := (.5biangle_width[0][i], j);
+      pp[0][ii] := (-.5biangle_width[0][ii], jj);
+      pp[1][ii] := (.5biangle_width[0][ii], jj);
 
-      pp[3][i] := (-.5biangle_width[3][i], j);
-      pp[4][i] := (.5biangle_width[3][i], j);
+      pp[3][ii] := (-.5biangle_width[3][ii], jj);
+      pp[4][ii] := (.5biangle_width[3][ii], jj);
       
 
-      if i > m0:
-	draw pp[0][i] -- pp[1][i] with_color dark_gray on_picture lline_picture[picture_ctr];
+      if ii > m0:
+	draw pp[0][ii] -- pp[1][ii] with_color dark_gray on_picture lline_picture[picture_ctr];
       fi;
 
-      if (magnitude i) < 67.5:
-	draw pp[1][i] -- pp[4][i] on_picture lline_picture[picture_ctr];
+      if (magnitude ii) < 67.5:
+	draw pp[1][ii] -- pp[4][ii] on_picture lline_picture[picture_ctr];
       fi;
 
     fi;
-    j += m2;
+    jj += m2;
   endfor;
 
 
@@ -579,21 +573,21 @@ def get_spherical_biangle (pp, vv, lline_picture, dot_pen) {numeric rad, boolean
 
 
   
-  for i := tab_interval_zero step tab_interval_zero until n2:
-    drawdot (get_point (i) edge7) with_pen dot_pen on_picture vv[picture_ctr];
-    drawdot (get_point (i) edge9) with_pen dot_pen on_picture vv[picture_ctr];
+  for ii := tab_interval_zero step tab_interval_zero until n2:
+    drawdot (get_point (ii) edge7) with_pen dot_pen on_picture vv[picture_ctr];
+    drawdot (get_point (ii) edge9) with_pen dot_pen on_picture vv[picture_ctr];
   endfor;
 
 
   
   n3 := (length edge15) - 1;
   
-  for i := tab_interval_one step tab_interval_one until n3:
-    drawdot (get_point (i) edge15) with_pen dot_pen on_picture vv[picture_ctr];
-    drawdot (get_point (i) edge18) with_pen dot_pen on_picture vv[picture_ctr];
+  for ii := tab_interval_one step tab_interval_one until n3:
+    drawdot (get_point (ii) edge15) with_pen dot_pen on_picture vv[picture_ctr];
+    drawdot (get_point (ii) edge18) with_pen dot_pen on_picture vv[picture_ctr];
     if m0 <= -78.75:
-      drawdot (get_point (i) edge16) with_pen dot_pen on_picture vv[picture_ctr];
-      drawdot (get_point (i) edge19) with_pen dot_pen on_picture vv[picture_ctr];
+      drawdot (get_point (ii) edge16) with_pen dot_pen on_picture vv[picture_ctr];
+      drawdot (get_point (ii) edge19) with_pen dot_pen on_picture vv[picture_ctr];
     fi;
   endfor;
   
