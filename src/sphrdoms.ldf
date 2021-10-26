@@ -154,8 +154,8 @@ get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16,
 %% *** (3) With Lines
 
 beginfig(200);
-  fill (-10cm, -10cm) -- (10cm, -10cm) -- (10cm, 10cm) -- (-10cm, 10cm) -- cycle
-    with_color white;
+  % fill (pp[]-10cm, -10cm) -- (10cm, -10cm) -- (10cm, 10cm) -- (-10cm, 10cm) -- cycle
+  %   with_color white;
   current_picture += v[200];
   current_picture += line_picture[200];
 endfig with_projection parallel_x_y no_sort;
@@ -163,8 +163,6 @@ endfig with_projection parallel_x_y no_sort;
 %% *** (3) Without Lines
 
 beginfig(201);
-  fill (-10cm, -10cm) -- (10cm, -10cm) -- (10cm, 10cm) -- (-10cm, 10cm) -- cycle
-    with_color white;
   current_picture += v[200];
 endfig with_projection parallel_x_y no_sort;
 
