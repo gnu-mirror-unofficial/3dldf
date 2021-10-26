@@ -1172,12 +1172,16 @@ sphrdoms.pdf: sphrdoms.dvi
 sphrdoms.ps: sphrdoms.dvi
 	dvips -o sphrdoms.ps sphrdoms.dvi
 
-sphrdoms.dvi: sphrdoms.tex sphrdoms.0 
+sphrdoms.dvi: sphrdoms.tex sphrdoms_0.eps
 	tex sphrdoms.tex
 	tex sphrdoms.tex
 
-sphrdoms.0 sphrdoms.1: sphrdoms.mp 
+sphrdoms_0.eps sphrdoms_1.eps sphrdoms_100.eps sphrdoms_101.eps sphrdoms_200.eps sphrdoms_201.eps: sphrdoms.mp
 	mpost -numbersystem "double" sphrdoms.mp
+
+sphrdoms_0.svg sphrdoms_1.svg sphrdoms_100.svg sphrdoms_101.svg sphrdoms_200.svg sphrdoms_201.svg: \
+   sphrdoms_svg.mp sphrdoms.mp
+	mpost -numbersystem "double" sphrdoms_svg.mp
 
 sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms.lmc
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrdoms.ldf

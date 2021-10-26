@@ -61,15 +61,18 @@ medium_pen := pencircle scaled (2pt, 2pt, 2pt);
 large_pen  := pencircle scaled (3pt, 3pt, 3pt);
 Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 
-
-
 % * (1) Beginning of 3DLDF code.
 
 %\font\TINY=cmr3\font\Tiny=cmr4
 
-verbatim_metapost "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7"
-  & "\font\small=cmr8\font\medium=cmr9\font\large=cmr12\font\largebf=cmbx12\font\Largebf=cmbx14"
-  & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\font\SMALLgreek=cmmi6 "
+verbatim_metapost "if known do_svg_output: outputformat := \"svg\";\n"
+  & "outputtemplate := \"%j_%c.svg\";\n"
+  & "else: outputtemplate := \"%j_%c.eps\";fi;\n"
+  & "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7\n"
+  & "\font\small=cmr8\font\medium=cmr9\font\large=cmr12\n"
+  & "\font\largebf=cmbx12\font\Largebf=cmbx14\n"
+  & "\font\smallgreek=cmmi8\font\Smallgreek=cmmi7\n"
+  & "\font\SMALLgreek=cmmi6\n"
   & "\\newdimen\labeldimen\box0=\hbox{$00.00^\circ$}\labeldimen=\wd0\advance\labeldimen by 1.5cm "
   & "etex;";
 

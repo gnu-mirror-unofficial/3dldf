@@ -50,7 +50,9 @@
 % * (1) Beginning of MetaPost code.
 
 prologues := 3;
-outputformat := "svg";
+
+boolean do_svg_output;
+do_svg_output := true;
 
 outputformatoptions := "format=rgb";
 
