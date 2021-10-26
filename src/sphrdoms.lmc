@@ -82,7 +82,6 @@ macro get_spherical_biangle;
 def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {numeric rad,
 									    numeric ra_divisions,
                                     	     		    		    numeric decl_divisions,
-									    boolean draw_biangle,
                                     	     		    		    numeric draw_portion,
                                     	     		    		    numeric tab_width,
                                     	     		    		    numeric tab_interval_zero,
@@ -559,7 +558,10 @@ def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {nume
       fi;
 
       if (magnitude ii) < 67.5:
-	draw pp[1][ii] -- pp[4][ii] on_picture lline_picture[picture_ctr];
+	draw pp[1][ii] -- pp[4][ii] on_picture vv[picture_ctr]; %% Horizontal lines on tab.
+                                                                %% Draw on main picture.
+	                                                        %% These lines should always be drawn.
+                                                                %% LDF 2021.10.26.
       fi;
 
     fi;

@@ -65,7 +65,6 @@ label_color := black;
 % def get_spherical_biangle (pp, vv, llabel_picture, dot_pen) {numeric rad, 
 %                            	      	       		       numeric ra_divisions,
 %                                                              numeric decl_divisions,
-%                                     	       		       numeric draw_biangle,
 %                                     	       		       numeric draw_portion,
 %                                     	       		       numeric tab_width
 %                                     	       		       numeric tab_interval_zero,
@@ -79,12 +78,14 @@ picture label_picture[];
 
 point p[][];
 
+%% * (1) Spheres
+
 %% ** (2) Sphere, 10cm Diameter
 
 %% *** (3) With Lines
 
-if false:
-get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16, true, 1, 1cm, 9, 8, 0};    
+if true: % false: % 
+get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16, 1, 1cm, 9, 8, 0};    
 beginfig(0);
   current_picture := v[0];
   current_picture += line_picture[0];
@@ -102,7 +103,7 @@ fi;
 %% ** (2) Sphere, 11cm Diameter
 
 point p[][];
-get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5.5, 8, 16, true, 1, 1cm, 9, 8, 2};
+get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5.5, 8, 16, 1, 1cm, 9, 8, 2};
 
 %% *** (3) With Lines
 
@@ -117,8 +118,28 @@ beginfig(3);
   current_picture := v[2];
 endfig with_projection parallel_x_y no_sort;
 
+
 %% ** (2)
 
+%% * (1) Domes, Half-Spheres
+
+%% ** (2) Dome, Half-Sphere, 10cm Diameter
+
+point p[][];
+get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16, .5, 1cm, 9, 8, 100};
+
+%% *** (3) With Lines
+
+beginfig(100);
+  current_picture := v[100];
+  current_picture += line_picture[100];
+endfig with_projection parallel_x_y no_sort;
+
+%% *** (3) Without Lines
+
+beginfig(101);
+  current_picture := v[100];
+endfig with_projection parallel_x_y no_sort;
 
 
 
