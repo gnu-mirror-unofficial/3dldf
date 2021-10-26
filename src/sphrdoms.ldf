@@ -1,5 +1,4 @@
 %%%% sphrdoms.ldf
-
 %%%% Created by Laurence D. Finston (LDF) Sun 17 Oct 2021 10:04:10 AM CEST
 
 %% * (1) Copyright and License.
@@ -84,7 +83,7 @@ point p[][];
 
 %% *** (3) With Lines
 
-if true: % false: % 
+if false: % true: % 
 get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16, 1, 1cm, 9, 8, 0};    
 beginfig(0);
   current_picture := v[0];
@@ -96,7 +95,7 @@ endfig with_projection parallel_x_y no_sort;
 beginfig(1);
   current_picture := v[0];
 endfig with_projection parallel_x_y no_sort;
-fi;
+
 
 %% ** (2)
 
@@ -141,9 +140,38 @@ beginfig(101);
   current_picture := v[100];
 endfig with_projection parallel_x_y no_sort;
 
+%% ** (2)
+
+fi;  %% End of commenting-out (or -in) code for generating figures.
+
+%% * (1) Domes, Three-Quarter-Spheres
+
+%% ** (2) Dome, Three-Quarter-Sphere, 10cm Diameter
+
+point p[][];
+get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16, .75, 1cm, 9, 8, 200};
+
+%% *** (3) With Lines
+
+beginfig(200);
+  fill (-10cm, -10cm) -- (10cm, -10cm) -- (10cm, 10cm) -- (-10cm, 10cm) -- cycle
+    with_color white;
+  current_picture += v[200];
+  current_picture += line_picture[200];
+endfig with_projection parallel_x_y no_sort;
+
+%% *** (3) Without Lines
+
+beginfig(201);
+  fill (-10cm, -10cm) -- (10cm, -10cm) -- (10cm, 10cm) -- (-10cm, 10cm) -- cycle
+    with_color white;
+  current_picture += v[200];
+endfig with_projection parallel_x_y no_sort;
 
 
 %% ** (2)
+
+
 
 verbatim_metapost "end";
   

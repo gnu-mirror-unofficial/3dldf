@@ -49,7 +49,7 @@
 
 % * (1) Beginning of MetaPost code.
 
-
+prologues := 3;
 outputformat := "svg";
 
 outputformatoptions := "format=rgb";

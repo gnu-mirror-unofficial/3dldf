@@ -1155,6 +1155,17 @@ clstsph5.0 clstsph5.1: clstsph5.mp
 clstsph5.mp: 3dldf$(EXEEXT) clstsph5.ldf clstsph5_sub.ldf astronmy5.lmc clstsph5.aux www.lmc xxx.lmc yyy.lmc zzz.lmc
 	3dldf$(EXEEXT) clstsph5.ldf
 
+.PHONY: ssvg
+
+ssvg:
+	mpost -numbersystem "double" sphrdoms_svg.mp
+	if test -f sphrdoms_svg.200; then echo "Renaming sphrdoms_svg.200 to sphrdoms_svg_200.svg"; \
+           mv sphrdoms_svg.200 sphrdoms_svg_200.svg; \
+           else echo "sphrdoms_svg.200 doesn't exist."; fi;
+	if test -f sphrdoms_svg.201; then echo "Renaming sphrdoms_svg.201 to sphrdoms_svg_201.svg"; \
+           mv sphrdoms_svg.201 sphrdoms_svg_201.svg; \
+           else echo "sphrdoms_svg.201 doesn't exist."; fi; 
+
 sphrdoms.pdf: sphrdoms.dvi
 	dvipdfmx $<
 
