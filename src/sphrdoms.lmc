@@ -106,7 +106,6 @@ def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {nume
   numeric circum[][];
   numeric n[];
   numeric angle_divisions;
-  point ra_decl_zero_pt;
   numeric tab_wd[];
   numeric flag;
   numeric jj;
@@ -114,6 +113,8 @@ def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {nume
   
   point r[][];
 
+
+  
   boolean testing;
 
   testing := false; % true; % 
@@ -147,7 +148,6 @@ def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {nume
   radius[15][0] := rad + tab_wd[15];
   radius[18][0] := rad - tab_wd[15];  %% Trace
   
-  ra_decl_zero_pt := (rad, 0);
 
   c[0][0] := unit_circle scaled (radius[0][0], 0, radius[0][0]) rotated (90, 0);
   a := a0 := circumference c[0][0];   %% a == Circumference of horizontal great circle.
@@ -461,7 +461,9 @@ def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {nume
     dotlabel.rt("$pp_1^0$", pp[1][0]) on_picture llabel_picture[picture_ctr];
   fi;
 
-  if false:
+  if true: % false: %
+    dotlabel.lft("$pp_0^{0}$", pp[0][0]) on_picture llabel_picture[picture_ctr];
+    dotlabel.rt("$pp_4^{0}$", pp[4][0]) on_picture llabel_picture[picture_ctr];
     dotlabel.top("$pp_0^{90}$", pp[0][90]) on_picture llabel_picture[picture_ctr];
     dotlabel.bot("$pp_0^{-90}$", pp[0][-90]) on_picture llabel_picture[picture_ctr];
   fi;
@@ -619,6 +621,23 @@ def get_spherical_biangle (pp, vv, lline_picture, llabel_picture, dot_pen) {nume
 
 %% *** (3)
 
+  numeric border_width;
+  border_width := .5cm;
+
+  point border_pt[];
+
+  ii := m0;
+  
+  border_pt0 := (xpart pp[0][0], ypart pp[0][ii]) shifted (-border_width, -border_width);
+  border_pt1 := (xpart pp[4][0], ypart pp[0][ii]) shifted (border_width, -border_width);
+  border_pt2 := (xpart pp[4][0], ypart pp[0][90]) shifted (border_width, border_width);
+  border_pt3 := (xpart pp[0][0], ypart pp[0][90]) shifted (-border_width, border_width);
+
+  draw border_pt0 -- border_pt1 -- border_pt2 -- border_pt3 -- cycle with_color white
+    on_picture vv[picture_ctr];
+
+%% *** (3)
+  
   message "Exiting `get_spherical_biangle'.";
   
 enddef;

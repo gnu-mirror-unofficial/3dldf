@@ -90,11 +90,15 @@ beginfig(0);
   current_picture += line_picture[0];
 endfig with_projection parallel_x_y no_sort;
 
+fi;  %% End of commenting-out (or -in) code for generating figures.
+if true: % false: % 
+
 %% *** (3) Without Lines
 
 beginfig(1);
   current_picture := v[0];
 endfig with_projection parallel_x_y no_sort;
+
 
 
 %% ** (2)
@@ -105,6 +109,8 @@ point p[][];
 get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5.5, 8, 16, 1, 1cm, 9, 8, 2};
 
 %% *** (3) With Lines
+
+
 
 beginfig(2);
   current_picture := v[2];
@@ -129,6 +135,8 @@ get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16,
 
 %% *** (3) With Lines
 
+
+
 beginfig(100);
   current_picture := v[100];
   current_picture += line_picture[100];
@@ -142,7 +150,6 @@ endfig with_projection parallel_x_y no_sort;
 
 %% ** (2)
 
-fi;  %% End of commenting-out (or -in) code for generating figures.
 
 %% * (1) Domes, Three-Quarter-Spheres
 
@@ -166,6 +173,7 @@ beginfig(201);
   current_picture += v[200];
 endfig with_projection parallel_x_y no_sort;
 
+fi;  %% End of commenting-out (or -in) code for generating figures.
 
 %% ** (2)
 
