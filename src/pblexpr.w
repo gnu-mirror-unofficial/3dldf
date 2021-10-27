@@ -424,6 +424,64 @@ else if (entry->known_state == Id_Map_Entry_Type::KNOWN)
     
 };
 
+@q *** (3) boolean_primary --> FILE_EXISTS string_expression. @>
+@*2 \§boolean primary> $\longrightarrow$ `\.{FILE\_EXISTS}' 
+\§string expression>. 
+
+\LOG
+\initials{LDF 2021.10.27.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_primary: FILE_EXISTS string_expression@>@/
+{
+
+    bool* b;
+
+    b = new bool;
+
+    string *s = static_cast<string*>(@=$2@>);
+    struct stat statbuf;
+
+    int status = 0;
+
+    if (s)
+    {
+       cerr << "string_expression == *s == \"" << *s << "\"." << endl;
+
+       errno = 0;
+       status = stat(s->c_str(), &statbuf);
+
+       if (status == -1)
+       {
+#if 0 
+          cerr << "`stat' failed, returning -1.  Error:  "
+               << strerror(errno) << endl;
+          if (errno == ENOENT)
+             cerr << "ENOENT" << endl;
+#endif 
+          *b = false;        
+       }
+       else
+          *b = true;
+
+    }
+    else  /* This should never happen  */
+    {
+#if 0 
+       cerr << "string_expression not found."<< endl;
+#endif 
+       *b = false;
+    }
+
+    delete s;
+    s = 0;
+
+    @=$$@> = static_cast<void*>(b);
+
+};
+
 @q ** (2) Validity.@>
 @*1 Validity.
 \initials{LDF 2005.11.21.}
