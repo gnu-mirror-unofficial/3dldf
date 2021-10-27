@@ -67,7 +67,7 @@ Large_pen  := pencircle scaled (4pt, 4pt, 4pt);
 
 %\font\TINY=cmr3\font\Tiny=cmr4
 
-verbatim_metapost "if known do_svg_output: outputformat := \"svg\";\n"
+verbatim_metapost "prologues := 3;\nif known do_svg_output: outputformat := \"svg\";\n"
   & "outputtemplate := \"%j_%c.svg\";\n"
   & "else: outputtemplate := \"%j_%c.eps\";fi;\n"
   & "verbatimtex \font\Tiny=cmr4\font\SMALL=cmr6\font\Small=cmr7\n"

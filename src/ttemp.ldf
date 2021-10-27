@@ -1,3 +1,101 @@
+beginfig(0);
+  point p[];
+  path q[];
+  
+  ellipse e;
+  
+  message "sqrt 2:";
+  show sqrt 2;
+
+
+  e := unit_ellipse scaled (5, 0, 3);
+
+  rotate e (90, 0);
+
+  show e;
+  
+  q0 := origin -- (5, 0) rotated (0, 0, 20); 
+  q1 := origin -- (10, 0) rotated (0, 0, 60);
+
+  bool_point_vector cpv;
+
+  cpv := q0 intersection_points e;
+
+  boolean b[];
+
+  b0 := cpv0;
+  b1 := cpv1;
+  
+  if b0:
+    message "b0 is true";
+    p0 := cpv0;
+  else:
+    message "b0 is false";
+  fi;
+  
+  if b1:
+    message "b1 is true";
+    p0 := cpv1;
+  else:
+    message "b1 is false";
+  fi;
+  
+  cpv := q1 intersection_points e;
+
+  if b0:
+    message "b0 is true";
+    p1 := cpv0;
+  else:
+    message "b0 is false";
+  fi;
+
+  b1 := cpv1;
+  
+  if b1:
+    message "b1 is true";
+    p1 := cpv1;
+  else:
+    message "b1 is false";
+  fi;
+
+    
+  dotlabel.top("$p_0$", p0);
+  dotlabel.top("$p_1$", p1);
+
+  draw p0 -- p1 with_color red;
+  
+  message "magnitude (p1 - p0):";
+  show magnitude (p1 - p0);
+
+  m := magnitude (p1 - p0);
+    
+  message "pi:";
+  show pi;
+
+  a := ((sqrt 2) * 2);
+
+  message "a:";
+  show a;
+  
+  a := (m*pi)/a;
+
+  message "a:";
+  show a;
+  
+  pause;
+  
+  draw e;
+
+
+  
+  
+endfig with_projection parallel_x_y;
+
+verbatim_metapost "end;";
+
+end;
+
+
 if file_exists "abc":
   message "abc exists.";
 else:

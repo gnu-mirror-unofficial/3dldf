@@ -4730,6 +4730,26 @@ Added call to |add_entry| for |register_width|.
                                Id_Map_Entry_Type::KNOWN,
                                v);
 
+@q ****** (6) |PI|.@> 
+@ |PI|.
+\initials{LDF 2021.10.27.}
+
+@<Define |Scanner_Type::create|@>=
+
+       r = new real;
+
+       *r = 3.141592653589793;
+
+       v = static_cast<void*>(r); 
+
+       scanner_node->add_entry("pi",
+                               NUMERIC,
+                               regular,
+                               is_constant,
+                               not_array,
+                               Id_Map_Entry_Type::KNOWN,
+                               v);
+
 @q ****** (6) |register_width|.@> 
 
 @ |register_width|.

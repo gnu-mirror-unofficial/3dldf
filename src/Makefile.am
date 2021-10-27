@@ -1169,6 +1169,10 @@ sphrdoms.dvi: sphrdoms.tex sphrdoms_0.eps
 sphrdoms_0.eps sphrdoms_1.eps sphrdoms_100.eps sphrdoms_101.eps sphrdoms_200.eps sphrdoms_201.eps: sphrdoms.mp
 	mpost -numbersystem "double" sphrdoms.mp
 
+sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms.lmc
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrdoms.ldf
+
+
 .PHONY: ssvg
 
 ssvg: sphrdoms_0.svg
@@ -1177,8 +1181,22 @@ sphrdoms_0.svg sphrdoms_1.svg sphrdoms_100.svg sphrdoms_101.svg sphrdoms_200.svg
    sphrdoms_svg.mp sphrdoms.mp
 	mpost -numbersystem "double" sphrdoms_svg.mp
 
-sphrdoms.mp: 3dldf$(EXEEXT) sphrdoms.ldf sphrdoms.lmc
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrdoms.ldf
+sphrdoms1.pdf: sphrdoms1.dvi
+	dvipdfmx $<
+
+sphrdoms1.ps: sphrdoms1.dvi
+	dvips -o sphrdoms1.ps sphrdoms1.dvi
+
+sphrdoms1.dvi: sphrdoms1.tex sphrdoms1_0.eps
+	tex sphrdoms1.tex
+	tex sphrdoms1.tex
+
+sphrdoms1_0.svg: sphrdoms1.mp
+	mpost -numbersystem "double" sphrdoms1.mp
+
+sphrdoms1.mp: 3dldf$(EXEEXT) sphrdoms1.ldf sphrdoms.lmc
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrdoms1.ldf
+
 
 PHONY: purge-5
 

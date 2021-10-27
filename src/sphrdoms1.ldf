@@ -51,6 +51,7 @@
 
 %% * (1) Spheres and domes (spherical biangles)
 
+verbatim_metapost "boolean do_svg_output;\ndo_svg_output := true;\n";
 
 input "sphrdoms.lmc";
 
@@ -83,24 +84,21 @@ point p[][];
 
 %% *** (3) With Lines
 
-if true: % false: % 
+
 get_spherical_biangle (p, v, line_picture, label_picture, medium_pen) {5, 8, 16, 1, .5cm, 12, 12, 0};    
+
 beginfig(0);
-  current_picture := v[0];
-  current_picture += line_picture[0];
+  v100 := v0;
+  v100 += line_picture0;
+  current_picture := v0;
+  current_picture += line_picture0;
+  shift v100 (5cm, 0);
+  current_picture += v100;
+  shift v100 (5cm, 0);
+  current_picture += v100;
+  shift v100 (5cm, 0);
+  current_picture += v100;
 endfig with_projection parallel_x_y no_sort;
-
-fi;  %% End of commenting-out (or -in) code for generating figures.
-if true: % false: % 
-
-%% *** (3) Without Lines
-
-beginfig(1);
-  current_picture := v[0];
-endfig with_projection parallel_x_y no_sort;
-
-
-
 
 
 %% ** (2)
