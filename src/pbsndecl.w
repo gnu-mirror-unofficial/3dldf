@@ -83,6 +83,7 @@ when I tried to build 3DLDF from scratch.
 #include "loader.h++"
 
 #include <time.h>
+#include <sys/stat.h>
  
 #include "pspglb.h++"
 #include "io.h++"
@@ -1540,6 +1541,7 @@ Added token declarations for
 @=%token <int_value> IS_KNOWN@>@/
 @=%token <int_value> IS_UNKNOWN@>@/
 @=%token <int_value> CHAREXISTS@>@/
+@=%token <int_value> FILE_EXISTS@>@/
 
 @=%token <int_value> IS_VALID@>@/
 @=%token <int_value> IS_INVALID@>@/
