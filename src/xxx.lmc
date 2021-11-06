@@ -499,8 +499,9 @@ if false:
 
       t5 *= t6;
 
-%% !! START HERE: LDF 2021.11.01.
-      
+      %% !! TODO:  The pictures drawn on here don't seem to be used anywhere.
+      %% If they ever are, I'll have to add code for the stitches on the faces.
+      %% LDF 2021.11.06.
       
       draw u0 transformed t5 with_color blue with_pen large_pen on_picture flat_quadrant_picture[10 + i];
       drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
@@ -524,6 +525,8 @@ if false:
     r45 := r43;
     r51 := r50;
     t3 := identity shifted (5cm, 0);
+
+%% !! START HERE: LDF 2021.11.06.
     
     for j = 1 upto 7:
       r51 *= r45 *= r44 *= u1 *= t3;
