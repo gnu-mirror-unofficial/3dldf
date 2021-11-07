@@ -432,7 +432,7 @@ def get_flat_panels =
     drawdot r42 transformed t9 with_pen stitch_pen on_picture flat_quadrant_picture[0];
     drawdot r43 transformed t9 with_pen stitch_pen on_picture flat_quadrant_picture[0];
     drawdot r50 transformed t9 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    
+
     t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
     t10 := t8;
     shift t10 by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
@@ -541,8 +541,19 @@ def get_flat_panels =
 
     r63 := mediate(mediate(r14, r15), r17, .2);
     r64 := mediate(mediate(r14, r15), r17, .4);
+
     drawdot r63 with_pen stitch_pen on_picture flat_quadrant_picture[0];
     drawdot r64 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
+    drawdot r63 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r64 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
+    drawdot r63 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r64 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
+    drawdot (r63 transformed t6) rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot (r64 transformed t6) rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[1];
+ 
     
     for j = 1 upto 7:
       r63 *= r64 *= r60 *= r61 *= r62 *= r51 *= r45 *= r44 *= u1 *= t3;
@@ -570,8 +581,9 @@ def get_flat_panels =
       drawdot r61 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
       drawdot r62 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
-      %% !! START HERE: LDF 2021.11.07.  r63 and r64.
-      
+      drawdot r63 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r64 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
       t5 := identity
 	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
       
@@ -585,6 +597,9 @@ def get_flat_panels =
       drawdot r61 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
       drawdot r62 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
+      drawdot r63 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r64 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      
       t5 := identity rotated (180, 0);
       t6 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
       t5 *= t6;
@@ -598,6 +613,9 @@ def get_flat_panels =
       drawdot r61 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
       drawdot r62 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
       
+      drawdot r63 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r64 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+
     endfor;
 
     u1 := u0;
@@ -720,16 +738,9 @@ def get_flat_panels =
   label.urt("$\scriptstyle -67^\circ 30^\prime$", (r12 rotated_around (r0, r1) 180) shifted (-2pt, 0))
      with_text_color label_color on_picture flat_quadrant_picture[2];
 
-%% !! START HERE: LDF 2021.11.07.
-  
-if false:
-  label.top("$\scriptscriptstyle 78^\circ 45^\prime$",
-      (mediate(r14, r15)) shifted (0, -1pt)) rotated (0, 0, 90)
+  label.bot("$\scriptscriptstyle 78^\circ 45^\prime$",
+      (mediate(r14, r15)) shifted (-.25cm + 1pt, 1.5pt)) rotated (0, 0, 80)
     with_text_color label_color on_picture flat_quadrant_picture[2];
-  label.bot("$\scriptscriptstyle -78^\circ 45^\prime$",
-      (mediate(r14, r15) rotated_around (r0, r1) 180) shifted (0, 2pt))
-    rotated (0, 0, 90) with_text_color label_color on_picture flat_quadrant_picture[2];
-fi;
 
   %draw flat_quadrant[8][1] with_color cyan with_pen medium_pen with_text_color label_color
   %on_picture flat_quadrant_picture[3];
