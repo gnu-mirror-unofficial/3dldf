@@ -414,23 +414,24 @@ def get_flat_panels =
     t9 := t8 rotated (180, 0);
     
     draw u0 on_picture flat_quadrant_picture[0];
-    drawdot r42 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r43 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r50 with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
-    drawdot r42 transformed t8 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r43 transformed t8 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r50 transformed t8 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r42 with_color orange with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 with_color orange with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 with_color orange with_pen stitch_pen on_picture flat_quadrant_picture[0];
+
+    drawdot r42 transformed t8 with_color brown with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 transformed t8 with_color brown with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 transformed t8 with_color brown with_pen stitch_pen on_picture flat_quadrant_picture[0];
     
     draw u0 rotated (180, 0) on_picture flat_quadrant_picture[0];
+    
+    drawdot r42 rotated (180, 0) with_color magenta with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 rotated (180, 0) with_color magenta with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 rotated (180, 0) with_color magenta with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
-    drawdot r42 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r43 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r50 rotated (180, 0) with_pen stitch_pen on_picture flat_quadrant_picture[0];
-
-    drawdot r42 transformed t9 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r43 transformed t9 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-    drawdot r50 transformed t9 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r42 transformed t9 with_color yellow with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r43 transformed t9 with_color yellow with_pen stitch_pen on_picture flat_quadrant_picture[0];
+    drawdot r50 transformed t9 with_color yellow with_pen stitch_pen on_picture flat_quadrant_picture[0];
     
     t5 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
     t10 := t8;
@@ -438,13 +439,13 @@ def get_flat_panels =
 
     draw u0 transformed t5 on_picture flat_quadrant_picture[1];
 
-    drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r42 transformed t5 with_color violet with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t5 with_color violet with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t5 with_color violet with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
-    drawdot r42 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[1]; 
-    drawdot r43 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r50 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r42 transformed t10 with_color pink with_pen stitch_pen on_picture flat_quadrant_picture[1]; 
+    drawdot r43 transformed t10 with_color pink with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t10 with_color pink with_pen stitch_pen on_picture flat_quadrant_picture[1];
     
     t6 := identity rotated (180, 0);
     t6 *= t5;
@@ -454,41 +455,45 @@ def get_flat_panels =
     
     draw u0 transformed t6 on_picture flat_quadrant_picture[1];
 
-    drawdot r42 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r43 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r50 transformed t6 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r42 transformed t6 with_color blue_violet with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t6 with_color blue_violet with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t6 with_color blue_violet with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
-    drawdot r42 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r43 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-    drawdot r50 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r42 transformed t11 with_color green_yellow with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r43 transformed t11 with_color green_yellow with_pen stitch_pen on_picture flat_quadrant_picture[1];
+    drawdot r50 transformed t11 with_color green_yellow with_pen stitch_pen on_picture flat_quadrant_picture[1];
     
-if false:
-    for i = 0 upto 7:
-      t5 := identity shifted (i * 5cm, 0);
-      t6 := identity rotated (180, 0);
-      t6 *= t5;
-      t10 := t9 shifted (i * 5cm, 0);
-      t11 := t9 rotated (180, 0);
-      t11 *= t5;
-      draw u0 transformed t5 on_picture flat_quadrant_picture[10 + i];
-      draw u0 transformed t6 on_picture flat_quadrant_picture[10 + i];
 
-      drawdot r42 transformed t5 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r43 transformed t5 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r50 transformed t5 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r42 transformed t6 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r43 transformed t6 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r50 transformed t6 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+    %% The pictures |flat_quadrant_picture[10+i]| are apparently not used anywhere at the present time.
+    %% LDF 2021.11.07.
 
-      drawdot r42 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r43 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r50 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r42 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r43 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r50 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+    if false:
+      for i = 0 upto 7:
+	t5 := identity shifted (i * 5cm, 0);
+	t6 := identity rotated (180, 0);
+	t6 *= t5;
+	t10 := t9 shifted (i * 5cm, 0);
+	t11 := t9 rotated (180, 0);
+	t11 *= t5;
+	draw u0 transformed t5 on_picture flat_quadrant_picture[10 + i];
+	draw u0 transformed t6 on_picture flat_quadrant_picture[10 + i];
 
-    endfor;
-  fi;
+	drawdot r42 transformed t5 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r43 transformed t5 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r50 transformed t5 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r42 transformed t6 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r43 transformed t6 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r50 transformed t6 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+
+	drawdot r42 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r43 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r50 transformed t10 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r42 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r43 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+	drawdot r50 transformed t11 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+
+      endfor;
+    fi;
     
     for i = 8 upto 15:
 
@@ -515,9 +520,9 @@ if false:
       t5 *= t6;
       t5 *= t7;
       draw u0 transformed t5 with_color red with_pen large_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r42 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r43 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
-      drawdot r50 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r42 transformed t5 with_color dark_green with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r43 transformed t5 with_color dark_green with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
+      drawdot r50 transformed t5 with_color dark_green with_pen stitch_pen on_picture flat_quadrant_picture[10 + i];
     endfor;
     
     u1 := u0;
@@ -531,32 +536,32 @@ if false:
     for j = 1 upto 7:
       r51 *= r45 *= r44 *= u1 *= t3;
       draw u1 on_picture flat_quadrant_picture[0];
-      drawdot r44 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-      drawdot r45 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-      drawdot r51 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r44 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r45 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r51 with_color red with_pen stitch_pen on_picture flat_quadrant_picture[0];
 
       t5 := identity rotated (180, 0);      
       draw u1 transformed t5 on_picture flat_quadrant_picture[0];
-      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
-      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r44 transformed t5 with_color blue with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r45 transformed t5 with_color blue with_pen stitch_pen on_picture flat_quadrant_picture[0];
+      drawdot r51 transformed t5 with_color blue with_pen stitch_pen on_picture flat_quadrant_picture[0];
       
       t5 := identity
 	shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
       
       draw u1 transformed t5 on_picture flat_quadrant_picture[1];
-      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r44 transformed t5 with_color green with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r45 transformed t5 with_color green with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r51 transformed t5 with_color green with_pen stitch_pen on_picture flat_quadrant_picture[1];
 
       t5 := identity rotated (180, 0);
       t6 := identity shifted by (get_point (1) flat_quadrant[8][1] - (get_point (1) flat_quadrant[0][1]));
       t5 *= t6;
       
       draw u1 transformed t5 on_picture flat_quadrant_picture[1];
-      drawdot r44 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-      drawdot r45 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
-      drawdot r51 transformed t5 with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r44 transformed t5 with_color cyan with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r45 transformed t5 with_color cyan with_pen stitch_pen on_picture flat_quadrant_picture[1];
+      drawdot r51 transformed t5 with_color cyan with_pen stitch_pen on_picture flat_quadrant_picture[1];
       
     endfor;
 
