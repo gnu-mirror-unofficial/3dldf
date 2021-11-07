@@ -816,7 +816,7 @@ plot_star_on_spherical_biangle {mirach, 55, label_pos_top, -.25cm + 2pt, 0, fals
 plot_star_on_panel (temp_star_panel_point) {mirach, star_point};
 
 plot_star_on_flat_panel (temp_star_flat_panel_point) {mirach, temp_star_panel_point, RRA_ctr, DDecl_ctr, label_pos_top,
-                         -2pt, 0, false, false};
+                         -8pt, -1pt, false, false};
 
 %% *** (3) 56. Saiph
 
@@ -1893,14 +1893,9 @@ else:
   V := 1;
 fi;
 
-label.top("{\SMALL\vbox{\hbox{\hskip8pt{\SMALLgreek\char12}}\vskip-6pt\hbox{Hydri}}}",
+label.top("{\SMALL\vbox{\hbox{\hskip-5pt{\SMALLgreek\char12}}\vskip-5pt\hbox{\hskip-5pt Hyd-}\vskip-5pt\hbox{\hskip-3pt ri}}}",
     temp_star_flat_panel_point shifted (3.25pt, 3pt))
   with_text_color label_color on_picture flat_quadrant_picture[V]; 
-
-label.top("{\SMALL\vbox{\hbox{\hskip8pt{\SMALLgreek\char12}}\vskip-6pt\hbox{Hydri}}}",
-    temp_star_flat_panel_point shifted (3.25pt, 3pt))
-  with_text_color label_color on_picture flat_quadrant_picture[10 + RRA_ctr];
-
 
 %% *** (3) 135. Tau Scorpii
 
