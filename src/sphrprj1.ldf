@@ -80,59 +80,59 @@ fi;
 
 %% ** (2) Plans for a paper or cardboard model of a sphere (Sphere Model 3)
 
-verbatim_metapost "verbatimtex \font\large=cmr17 etex;";
+verbatim_metapost "verbatimtex \font\large=cmr12 etex;";
 verbatim_metapost "verbatimtex \font\small=cmr7 etex;";
 
 verbatim_metapost "prologues := 3;";
 
-% verbatim_metapost "verbatimtex \font\large=cmr12 scaled \magstep2 etex;";
-% verbatim_metapost "verbatimtex \font\Large=cmr17 scaled \magstep2 etex;";
-
 %% *** (3) Declarations
 
-point p[];
+macro draw_sphere_projection;
 
-path q[];
+def draw_sphere_projection {numeric rradius} =
 
-transform t[];
+  point p[];
 
-picture v[];
+  transform t[];
 
-pen dashed_pen;
-pen border_pen;
+  picture v[];
 
-r := 12;  %% Radius of sphere
+  pen dashed_pen;
+  pen border_pen;
+  pen large_pen;
 
-string s;
+  large_pen := pencircle scaled (.75mm, .75mm, .75mm);
+  
+  string s;
 
-ang_0 := 15;  %% Arcs of (2 * ang_0 == 30) degrees are used to find the points
-              %% on the sphere that represent the corners of the trapezoids
-              %% into which the surface of the sphere is divided.
-              %% LDF 2010.08.06.
+  ang_0 := 15;  %% Arcs of (2 * ang_0 == 30) degrees are used to find the points
+                %% on the sphere that represent the corners of the trapezoids
+                %% into which the surface of the sphere is divided.
+                %% LDF 2010.08.06.
 
-focus f[];
+  focus f[];
 
-set f0 with_position  (3, 10, -20) 
-       with_direction (3, 10, 10) with_distance 20; 
+  boolean do_thick_pens;
 
+  set f0 with_position  (3, 10, -20) 
+    with_direction (3, 10, 10) with_distance 20; 
 
-boolean do_thick_pens;
 
 %% *** (3) Set boolean values
 
 %% These can be used for testing.  LDF 2010.08.04.
 
-do_thick_pens  	   := false; % true % true for testing
+  do_thick_pens  	   := false; % true % true for testing
 
-if do_thick_pens:
-   message "Using thick pens";
-   dashed_pen := pencircle scaled (.75mm, .75mm, .75mm);
-   border_pen := pencircle scaled (.75mm, .75mm, .75mm);
-else:
-   message "Not using thick pens";
-   dashed_pen := pencircle scaled (.5mm, .5mm, .5mm);
-   border_pen := pencircle scaled (.5mm, .5mm, .5mm);
-fi;
+  if do_thick_pens:
+    %message "Using thick pens";
+    dashed_pen := pencircle scaled (.75mm, .75mm, .75mm);
+    border_pen := pencircle scaled (.75mm, .75mm, .75mm);
+  else:
+    %message "Not using thick pens";
+    dashed_pen := pencircle scaled (.5mm, .5mm, .5mm);
+    border_pen := pencircle scaled (.5mm, .5mm, .5mm);
+  fi;
 
 % message "dashed_pen:"; 
 % show dashed_pen;
@@ -142,30 +142,26 @@ fi;
 
 %% **** (4)
 
-pickup pencircle scaled (.5mm, .5mm, .5mm);
-
-%% *** (3) Figure 1
-
-beginfig(1); 
+  pickup pencircle scaled (.25mm, .25mm, .25mm);
 
 %% **** (4)
 
-p0 := origin;
-p1 := (0, 1, 0);
+  p0 := origin;
+  p1 := (0, 1, 0);
 
-p2 := (r, 0);
+  p2 := (rradius, 0);
 
-p3 := p2 rotated (0, 0,  ang_0);
-p4 := p2 rotated (0, 0, -ang_0);
+  p3 := p2 rotated (0, 0,  ang_0);
+  p4 := p2 rotated (0, 0, -ang_0);
 
-rotate p3 (0, ang_0);
-rotate p4 (0, ang_0);
+  rotate p3 (0, ang_0);
+  rotate p4 (0, ang_0);
 
-p5 := p2 rotated (0, 0, ang_0);
-p6 := p2 rotated (0, 0, -ang_0);
+  p5 := p2 rotated (0, 0, ang_0);
+  p6 := p2 rotated (0, 0, -ang_0);
 
-rotate p5 (0, -ang_0);
-rotate p6 (0, -ang_0);
+  rotate p5 (0, -ang_0);
+  rotate p6 (0, -ang_0);
 
 % message "p2:";
 % show p2;
@@ -189,25 +185,25 @@ rotate p6 (0, -ang_0);
 % draw p0 -- p6;
 
 
-% dotlabel.top("$p_{0}$", p0);
-% dotlabel.rt("$p_{2}$", p2);
-% dotlabel.rt("$p_{3}$", p3);
+ % dotlabel.top("$p_{0}$", p0);
+ % dotlabel.rt("$p_{2}$", p2);
+ % dotlabel.rt("$p_{3}$", p3);
 
-draw p5 -- p3 -- p2 -- cycle; % with_color red;
-draw p5 -- p2 -- p6 -- cycle; % with_color blue;
-draw p6 -- p4 -- p2 -- cycle; % with_color green;;
-draw p4 -- p3 -- p2 -- cycle; % with_color cyan;
+  draw p5 -- p3 -- p2 -- cycle with_color red;    % ; % 
+  draw p5 -- p2 -- p6 -- cycle with_color blue;	  % ; % 
+  draw p6 -- p4 -- p2 -- cycle with_color green;  % ; % 
+  draw p4 -- p3 -- p2 -- cycle with_color cyan;	  % ; % 
 
 %% **** (4)
 
-p7 := p2 rotated (0, 0,  3ang_0);
-rotate p7 (0, ang_0);
+  p7 := p2 rotated (0, 0,  3ang_0);
+  rotate p7 (0, ang_0);
 
-p8  := p2 rotated (0, 0, 3ang_0);
+  p8  := p2 rotated (0, 0, 3ang_0);
 
-rotate p8 (0, -ang_0);
+  rotate p8 (0, -ang_0);
 
-p9 := p2 rotated (0, 0, 2ang_0);
+  p9 := p2 rotated (0, 0, 2ang_0);
 
 % message "magnitude (p9 - p7):"; 
 % show magnitude (p9 - p7);
@@ -224,27 +220,21 @@ p9 := p2 rotated (0, 0, 2ang_0);
 % message "p9:";
 % show p9;
 
-draw p8 -- p9 -- p7 -- cycle; % with_color red;
-draw p8 -- p9 -- p5 -- cycle; % with_color blue;
-draw p5 -- p9 -- p3 -- cycle; % with_color green;;
-draw p3 -- p9 -- p7 -- cycle; % with_color cyan;
+  draw p8 -- p9 -- p7 -- cycle with_color red;    % ; %   
+  draw p8 -- p9 -- p5 -- cycle with_color blue;	  % ; % 
+  draw p5 -- p9 -- p3 -- cycle with_color green;  % ; % 
+  draw p3 -- p9 -- p7 -- cycle with_color cyan;	  % ; %
 
-% draw p5 -- p3 -- p2 -- cycle; % with_color red;
-% draw p5 -- p2 -- p6 -- cycle; % with_color blue;
-% draw p6 -- p4 -- p2 -- cycle; % with_color green;;
-% draw p4 -- p3 -- p2 -- cycle; % with_color cyan;
+%% **** (4)
 
+  p10 := p2 rotated (0, 0,  -3ang_0);
+  rotate p10 (0, ang_0);
 
-% %% **** (4)
+  p11  := p2 rotated (0, 0, -3ang_0);
 
-p10 := p2 rotated (0, 0,  -3ang_0);
-rotate p10 (0, ang_0);
+  rotate p11 (0, -ang_0);
 
-p11  := p2 rotated (0, 0, -3ang_0);
-
-rotate p11 (0, -ang_0);
-
-p12 := p2 rotated (0, 0, -2ang_0);
+  p12 := p2 rotated (0, 0, -2ang_0);
 
 % message "magnitude (p12 - p10):"; 
 % show magnitude (p12 - p10);
@@ -261,21 +251,21 @@ p12 := p2 rotated (0, 0, -2ang_0);
 % message "p12:";
 % show p12;
 
-draw p6 -- p12 -- p11  -- cycle; % with_color red;
-draw p11 -- p12 -- p10 -- cycle; % with_color blue;
-draw p10 -- p12 -- p4  -- cycle; % with_color green;;
-draw p4 -- p12 -- p6   -- cycle; % with_color cyan;
+  draw p6 -- p12 -- p11  -- cycle with_color red;    % with_color red    % ; %
+  draw p11 -- p12 -- p10 -- cycle with_color blue;   % with_color blue   % ; %
+  draw p10 -- p12 -- p4  -- cycle with_color green;  % with_color green  % ; %
+  draw p4 -- p12 -- p6   -- cycle with_color cyan;   % with_color cyan   % ; %
 
 
 % %% **** (4)
 
-p13 := p2 rotated (0, 0,  5ang_0);
-rotate p13 (0, ang_0);
+  p13 := p2 rotated (0, 0,  5ang_0);
+  rotate p13 (0, ang_0);
 
-p14  := p2 rotated (0, 0, 5ang_0);
-rotate p14 (0, -ang_0);
+  p14  := p2 rotated (0, 0, 5ang_0);
+  rotate p14 (0, -ang_0);
 
-p15 := p2 rotated (0, 0, 4ang_0);
+  p15 := p2 rotated (0, 0, 4ang_0);
 
 % message "magnitude (p15 - p13):"; 
 % show magnitude (p15 - p13);
@@ -292,21 +282,20 @@ p15 := p2 rotated (0, 0, 4ang_0);
 % message "p15:";
 % show p15;
 
-draw p14 -- p15 -- p8 -- cycle; % with_color red;
-draw p8 -- p15 -- p7 -- cycle; % with_color blue;
-draw p7 -- p15 -- p13 -- cycle; % with_color green;;
-draw p13 -- p15 -- p14 -- cycle; % with_color cyan;
-
+  draw p14 -- p15 -- p8 -- cycle  with_color red;     % ; % with_color red;    
+  draw p8 -- p15 -- p7 -- cycle   with_color blue;    % ; % with_color blue; 
+  draw p7 -- p15 -- p13 -- cycle  with_color green;   % ; % with_color green;
+  draw p13 -- p15 -- p14 -- cycle with_color cyan;    % ; % with_color cyan; 
 
 % %% **** (4)
 
-p16 := p2 rotated (0, 0,  -5ang_0);
-rotate p16 (0, ang_0);
+  p16 := p2 rotated (0, 0,  -5ang_0);
+  rotate p16 (0, ang_0);
 
-p17  := p2 rotated (0, 0, -5ang_0);
-rotate p17 (0, -ang_0);
+  p17  := p2 rotated (0, 0, -5ang_0);
+  rotate p17 (0, -ang_0);
 
-p18 := p2 rotated (0, 0, -4ang_0);
+  p18 := p2 rotated (0, 0, -4ang_0);
 
 % message "magnitude (p18 - p16):"; 
 % show magnitude (p18 - p16);
@@ -323,38 +312,117 @@ p18 := p2 rotated (0, 0, -4ang_0);
 % message "p18:";
 % show p18;
 
-draw p17 -- p18 -- p11 -- cycle; % with_color red;
-draw p10 -- p18 -- p11 -- cycle; % with_color blue;
-draw p10 -- p18 -- p16 -- cycle; % with_color green;;
-draw p16 -- p18 -- p17 -- cycle; % with_color cyan;
+  draw p17 -- p18 -- p11 -- cycle; % with_color red;
+  draw p10 -- p18 -- p11 -- cycle; % with_color blue;
+  draw p10 -- p18 -- p16 -- cycle; % with_color green;;
+  draw p16 -- p18 -- p17 -- cycle; % with_color cyan;
 
 % %% **** (4)
 
-p19 := (0, r);
-p20 := (0, -r);
+  p19 := (0, rradius);
+  p20 := (0, -rradius);
 
-draw p14 -- p19 -- p13 ;
-draw p16 -- p20 -- p17;
+  draw p14 -- p19 -- p13;
+  draw p16 -- p20 -- p17;
 
 %% **** (4)
 
-v1 := current_picture;
-clear current_picture;
+  v1 := current_picture;
+  clear current_picture;
 
-v2 := v1;
-v0 := v1;
+  v2 := v1;
+  v0 := v1;
 
-if true:  %% false
+  for i = 1 upto 11:
+    rotate v2 (0, 2ang_0);
+    v0 += v2;
+  endfor;
 
-   for i = 1 upto 11:
-      rotate v2 (0, 2ang_0);
-      v0 += v2;
-   endfor;
-fi;
+  %fill p16 -- p20 -- p17 -- cycle with_color blue;
+  
+%% **** (4) Tick marks and gray lines
+  
+  point q[];
+  
+  q0 := (-(radius+1), 0, radius+1);
+  q1 := (0, 0, (radius+1));
+  q2 := (radius+1, 0, radius+1);
+  q3 := (-(radius+1), 0);
+  q4 := (radius+1, 0);
+  q5 := (-(radius+1), 0, -(radius+1));
+  q6 := (0, 0, -(radius+1));
+  draw q3 -- q4 dashed evenly with_color dark_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
+  draw q1 -- q6 dashed evenly with_color dark_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
 
-current_picture := v0;
+%% **** (4)
+  
+  current_picture += v0;
 
-endfig with_projection parallel_x_z no_sort;
+  drawdot origin with_color white with_pen pencircle scaled (.25cm, .25cm, .25cm);
+  drawdot origin with_color black with_pen pencircle scaled (1mm, 1mm, 1mm);
+
+  draw q0 -- (q0 shifted (-.5cm, 0));
+  draw q0 -- (q0 shifted (.5cm, 0));
+  draw q0 -- (q0 shifted (0, 0, .5cm));
+  draw q0 -- (q0 shifted (0, 0, -.5cm));
+
+  draw q1 -- (q1 shifted (-.5cm, 0));
+  draw q1 -- (q1 shifted (.5cm, 0));
+  draw q1 -- (q1 shifted (0, 0, .5cm));
+  draw q1 -- (q1 shifted (0, 0, -.5cm));
+
+  label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
+  
+  draw q2 -- (q2 shifted (-.5cm, 0));
+  draw q2 -- (q2 shifted (.5cm, 0));
+  draw q2 -- (q2 shifted (0, 0, .5cm));
+  draw q2 -- (q2 shifted (0, 0, -.5cm));
+
+
+  draw q3 -- (q3 shifted (-.5cm, 0));
+  draw q3 -- (q3 shifted (.5cm, 0));
+  draw q3 -- (q3 shifted (0, 0, .5cm));
+  draw q3 -- (q3 shifted (0, 0, -.5cm));
+
+
+  draw q4 -- (q4 shifted (-.5cm, 0));
+  draw q4 -- (q4 shifted (.5cm, 0));
+  draw q4 -- (q4 shifted (0, 0, .5cm));
+  draw q4 -- (q4 shifted (0, 0, -.5cm));
+
+  draw q5 -- (q5 shifted (-.5cm, 0));
+  draw q5 -- (q5 shifted (.5cm, 0));
+  draw q5 -- (q5 shifted (0, 0, .5cm));
+  draw q5 -- (q5 shifted (0, 0, -.5cm));
+
+  draw q6 -- (q6 shifted (-.5cm, 0));
+  draw q6 -- (q6 shifted (.5cm, 0));
+  draw q6 -- (q6 shifted (0, 0, .5cm));
+  draw q6 -- (q6 shifted (0, 0, -.5cm));
+
+  q7 := (radius+1, 0, -(radius+1));
+  draw q7 -- (q7 shifted (-.5cm, 0));
+  draw q7 -- (q7 shifted (.5cm, 0));
+  draw q7 -- (q7 shifted (0, 0, .5cm));
+  draw q7 -- (q7 shifted (0, 0, -.5cm));
+
+  
+%% **** (4)
+
+enddef;
+
+
+%% *** (3) Figure 1--9, 5cm--13cm radius
+
+numeric radius;
+
+for i = 1 upto 14:
+  beginfig(i);
+    radius := 3 + i;
+    draw_sphere_projection {radius};
+  endfig with_projection parallel_x_z no_sort;
+endfor;
+
 
 %% *** (3) End of 3DLDF code
 
