@@ -60,7 +60,7 @@
 \input eplain
 \nopagenumbers
 
-\pageno=1
+\pageno=-1
 
 \parindent=0pt
 
@@ -160,6 +160,7 @@ USA
 
 {\smalltt Laurence.Finston@gmx.de}}}
 \par
+\endgroup
 
 \vskip2cm
 
@@ -167,33 +168,68 @@ USA
 
 \vfil\eject
 
-%% *** (3) Headline
-
-\pageno=2
+\pageno=1
 
 \headline={\hskip 2cm Sphere Projection 1\quad %
-           Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hfil %
-           \folio\hfil Author:  Laurence D. Finston\hskip2cm{\tt \timestamp}\hfil}
+           Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hskip2cm %
+           \folio\hskip2cm Author:  Laurence D. Finston\hskip2cm{\tt \timestamp}\hss}
 
 \advance\hoffset by -1in
 \advance\hoffset by 1.5cm
 
 
-\setbox0=\hbox{\epsffile{sphrprj1.1}}
-\setbox1=\hbox to \wd0{\hss Parallel Projection onto the x-z plane\hss}
+\pageno=1
 
-\setbox2=\vbox{\box0
-  \vskip 1cm
-  \box1}
+%% *** (3) Radius 4cm, 5cm, 6cm, 7cm
 
-\vbox to \vsize{%
+\vbox to \vsize{\vskip1cm\line{\hskip.25cm\epsffile{sphrprj1.1}\hskip1cm\epsffile{sphrprj1.3}\hss}
 \vskip1cm
-\centerline{Radius of sphere:  12$\rm{cm}$}
-\vskip5cm
-\line{\hskip2cm \box2\hss}
+\vbox to 0pt{\vskip-1cm\hbox to 0pt{\hskip.5cm\epsffile{sphrprj1.2}\hss}\vss}
+\vbox to 0pt{\vskip.5cm\hbox to 0pt{\hskip12cm\epsffile{sphrprj1.4}\hss}\vss}
 \vss}
+\vfil\eject
+
+%% *** (3) Radius 8cm, 9cm 
+
+\begingroup
+\headline={}
+\vbox to \vsize{\vskip-2.5cm
+\line{\hskip2cm\epsffile{sphrprj1.5}\hss}
+\vskip0cm
+\line{\hskip7cm\epsffile{sphrprj1.6}\hss}
+\vss}
+\vfil\eject
+\endgroup
+
+%% *** (3) Radius 10cm 
+
+\vbox to \vsize{\vskip3cm\line{\hskip2cm\epsffile{sphrprj1.7}\hss}\vss}
 
 \vfil\eject
+
+%% *** (3) Radius 11cm 
+
+\vbox to \vsize{\vskip3cm\line{\hskip2cm\epsffile{sphrprj1.8}\hss}
+\vss}
+\vfil\eject
+
+
+%% *** (3) Radius 12cm 
+
+\vbox to \vsize{\vskip3cm\line{\hskip2cm\epsffile{sphrprj1.9}\hss}
+\vss}
+\vfil\eject
+
+
+%% *** (3) Radius 13cm 
+
+\vbox to \vsize{\vskip3cm\line{\hskip.5cm\epsffile{sphrprj1.10}\hss}
+\vss}
+\vfil\eject
+
+
+
+
 \bye
 
 %% *** (3) End here
@@ -204,11 +240,9 @@ USA
 
 %% Local Variables:
 %% mode:TeX
-%% eval:(local-set-key [C-kp-add] 'vc-diff) 
 %% eval:(local-set-key "\"" 'self-insert-command)
 %% eval:(outline-minor-mode t)
-%% eval:(read-abbrev-file abbrev-file-name)
-%% abbrev-mode:t
+%% auto-fill-function:nil
 %% outline-regexp:"%% [*\f]+"
 %% End:
 

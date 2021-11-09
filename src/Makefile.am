@@ -1616,7 +1616,7 @@ grrhm_06.pdf: grrhm_06.dvi
 	dvipdfmx grrhm_06.dvi
 
 sphrprj1.mp: sphrprj1.ldf 
-	3dldf sphrprj1.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj1.ldf 
 
 sphrprj1.1: sphrprj1.mp
 	mpost -numbersystem "double" sphrprj1.mp
