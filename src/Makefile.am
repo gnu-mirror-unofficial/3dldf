@@ -1615,6 +1615,18 @@ grrhm_06.ps: grrhm_06.dvi
 grrhm_06.pdf: grrhm_06.dvi
 	dvipdfmx grrhm_06.dvi
 
+sphrprj1.mp: sphrprj1.ldf 
+	3dldf sphrprj1.ldf 
+
+sphrprj1.1: sphrprj1.mp
+	mpost -numbersystem "double" sphrprj1.mp
+
+sphrprj1.dvi: sphrprj1.txt sphrprj1.1
+	tex sphrprj1.txt
+
+sphrprj1.pdf: sphrprj1.dvi
+	dvipdfmx sphrprj1.dvi 
+
 .PHONY: purge-s
 
 purge-s:
