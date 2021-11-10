@@ -1441,6 +1441,19 @@ query:
 	@echo "MPOST == $(MPOST)"
 	@echo "METAPOST == $(METAPOST)"
 
+ttemp1.pdf: ttemp1.dvi
+	dvipdfmx $<
+
+ttemp1.ps: ttemp1.dvi
+	dvips -o $@ $<
+
+ttemp1.dvi: ttemp1.txt ttemp1.0
+	tex $<
+
+ttemp1.0 ttemp1.1: ttemp1.mp
+	mpost -numbersystem "double" $<
+
+
 .PHONY: tps
 
 tps: ttemp.ps

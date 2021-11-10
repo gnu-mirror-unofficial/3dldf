@@ -106,7 +106,7 @@ and |CMYK_COLOR| for setting it.
 class Color
 {
 
-  /* !!START HERE:  LDF 2021.11.10.  Add string name.  */ 
+  string name;
 
   real red_part;
   real green_part;
@@ -117,8 +117,6 @@ class Color
   real yellow_part;
   real black_part;
   real grey_part;
-
-  
 
   Unsigned_Byte type;
 
@@ -181,6 +179,8 @@ Color();
 @<Define |Color| functions@>=
 Color::Color()
 {
+  name = "";
+
   grey_part = cyan_part = magenta_part = yellow_part = black_part = grey_part 
      = red_part = green_part = blue_part = 0;
 
@@ -222,6 +222,8 @@ Color(const Color& c);
 Color::Color(const Color& c)
 {
   
+  name = c.name;
+
   grey_part    = c.get_grey_part();
   cyan_part    = c.get_cyan_part();
   magenta_part = c.get_magenta_part();
@@ -280,6 +282,8 @@ Color(const real r, const real g, const real b);
 @<Define |Color| functions@>=
 Color::Color(const real r, const real g, const real b)
 {
+
+  name = "";
 
   if (r < 0)
     {
@@ -351,6 +355,8 @@ set(const real r, const real g, const real b);
 void
 Color::set(const real r, const real g, const real b)
 {
+
+  name = "";
 
   if (r < 0)
     {
@@ -475,6 +481,8 @@ operator=(const Color& c);
 void
 Color::operator=(const Color& c)
 {
+  name = c.name;
+
   red_part   = c.red_part;
   green_part = c.green_part;
   blue_part  = c.blue_part;
@@ -629,7 +637,11 @@ Color::operator+=(const Color& c)
 
 @<Define |Color| functions@>=
 
-/* !!START HERE:  LDF 2021.11.10.  */ 
+       cyan_part    = min(static_cast<real>(1.0), cyan_part + c.cyan_part);
+       magenta_part = min(static_cast<real>(1.0), magenta_part + c.magenta_part);
+       yellow_part  = min(static_cast<real>(1.0), yellow_part + c.yellow_part);
+       black_part   = min(static_cast<real>(1.0), black_part + c.black_part);
+       grey_part    = min(static_cast<real>(1.0), grey_part + c.grey_part);
 
        red_part   = min(static_cast<real>(1.0), red_part + c.red_part);
        green_part = min(static_cast<real>(1.0), green_part + c.green_part);
@@ -807,18 +819,24 @@ Color::operator/=(const real& r)
 \cfunctexi{Color}{modify}
 @<Declare |Color| functions@>=
 void
-modify(const real r, const real g = 0, const real b = 0);
+modify(const real red, const real green = 0, const real blue = 0, const real cyan = 0,
+       const real magenta = 0, const real yellow = 0, const real black = 0, const real grey = 0);
 
 @
 @<Define |Color| functions@>=
 void
-Color::modify(const real r, const real g, const real b)
+Color::modify(const real red, const real green, const real blue, const real cyan,
+       const real magenta, const real yellow, const real black, const real grey)
 {
-  red_part   += r;
-  green_part += g;
-  blue_part  += b;
+  red_part     += red;
+  green_part   += green;
+  blue_part    += blue;
 
-/* !!START HERE:  LDF 2021.11.10.  */ 
+  cyan_part    += cyan;
+  magenta_part += magenta;
+  yellow_part  += yellow;
+  black_part   += black;
+  grey_part    += grey;
 
   if (red_part > 1)
     {
@@ -868,7 +886,110 @@ Color::modify(const real r, const real g, const real b)
       blue_part = 0;
     }
 
+  if (cyan_part > 1)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "cyan_part is greater than 1: " << cyan_part << endl
+           << "Setting cyan_part to 1.\n\n";
+      cyan_part = 1;
+    }
+
+  else if (cyan_part < 0)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "cyan_part is less than 0: " << cyan_part << endl
+           << "Setting cyan_part to 0.\n\n";
+      cyan_part = 0;
+    }
+
+  if (magenta_part > 1)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "magenta_part is greater than 1: " << magenta_part << endl
+           << "Setting magenta_part to 1.\n\n";
+      magenta_part = 1;
+    }
+
+  else if (magenta_part < 0)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "magenta_part is less than 0: " << magenta_part << endl
+           << "Setting magenta_part to 0.\n\n";
+      magenta_part = 0;
+    }
+
+  if (yellow_part > 1)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "yellow_part is greater than 1: " << yellow_part << endl
+           << "Setting yellow_part to 1.\n\n";
+      yellow_part = 1;
+    }
+
+  else if (yellow_part < 0)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "yellow_part is less than 0: " << yellow_part << endl
+           << "Setting yellow_part to 0.\n\n";
+      yellow_part = 0;
+    }
+
+  if (black_part > 1)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "black_part is greater than 1: " << black_part << endl
+           << "Setting black_part to 1.\n\n";
+      black_part = 1;
+    }
+
+  else if (black_part < 0)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "black_part is less than 0: " << black_part << endl
+           << "Setting black_part to 0.\n\n";
+      black_part = 0;
+    }
+
+  if (grey_part > 1)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "grey_part is greater than 1: " << grey_part << endl
+           << "Setting grey_part to 1.\n\n";
+      grey_part = 1;
+    }
+
+  else if (grey_part < 0)
+    {
+      cerr << "WARNING! In Color::modify():\n"
+           << "grey_part is less than 0: " << grey_part << endl
+           << "Setting grey_part to 0.\n\n";
+      grey_part = 0;
+    }
+
+
   return;
+}
+
+
+@q ** (2) Get type.@>
+@*1 Get type.
+@^\cfunc{Color}{get\_type}@>
+\cfunctexi{Color}{get\_type}
+\initials{LDF 2021.11.10.}
+
+\LOG
+\initials{LDF 2021.11.10.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+inline
+Unsigned_Byte
+get_type(void)
+{
+   return type;
 }
 
 @q ** (2) Set red part.@>
@@ -1141,7 +1262,455 @@ Color::set_blue_part(const real b, Scanner_Node scanner_node)
 
 }  /* End of |Color::set_blue_part|  definition.  */
 
-/* !!START HERE:  LDF 2021.11.10.  */ 
+@q ** (2) Set cyan part.@>
+@*1 Set cyan part.
+@^\cfunc{Color}{set\_cyan\_part}@>
+\cfunctexi{Color}{set\_cyan\_part}
+\initials{LDF 2021.11.10.}
+
+\LOG
+\initials{LDF 2021.11.10.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+void
+set_cyan_part(const real b, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition.@> 
+
+@
+@<Define |Color| functions@>=
+void
+Color::set_cyan_part(const real b, Scanner_Node scanner_node)
+{
+
+@q **** (4) Preliminaries.@>
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q **** (4) @> 
+
+   if (b > 1)
+      {
+         cerr_strm << thread_name 
+                   << "WARNING!  In `Color::set_cyan_part()':"
+                   << endl 
+                   << "`b' is greater than 1: " << b << endl
+                   << "Setting `cyan_part' to 1.";
+         
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+         
+         cyan_part = 1;
+
+      } /* |if (b > 1)|  */
+
+@q **** (4) @> 
+
+  else if (b < 0)
+    {
+      cerr_strm << thread_name 
+                << "WARNING!  In `Color::set_cyan_part()':"
+                << endl 
+                << "`b' is less than 0: " << b << endl
+                << "Setting `cyan_part' to 0.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+
+         cyan_part = 0;
+
+     } /* |else if (b < 0)|  */
+
+@q **** (4) @> 
+
+  else
+    cyan_part = b;
+
+  return;
+
+}  /* End of |Color::set_cyan_part|  definition.  */
+
+@q ** (2) Set magenta part.@>
+@*1 Set magenta part.
+@^\cfunc{Color}{set\_magenta\_part}@>
+\cfunctexi{Color}{set\_magenta\_part}
+\initials{LDF Undated.} 
+
+\LOG
+\initials{LDF 2004.12.19.}
+Added |Scanner_Node scanner_node| argument with default 0.
+Made warning output thread-safe.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+void
+set_magenta_part(const real b, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition.@> 
+
+@
+@<Define |Color| functions@>=
+void
+Color::set_magenta_part(const real b, Scanner_Node scanner_node)
+{
+
+@q **** (4) Preliminaries.@>
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q **** (4) @> 
+
+   if (b > 1)
+      {
+         cerr_strm << thread_name 
+                   << "WARNING!  In `Color::set_magenta_part()':"
+                   << endl 
+                   << "`b' is greater than 1: " << b << endl
+                   << "Setting `magenta_part' to 1.";
+         
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+         
+         magenta_part = 1;
+
+      } /* |if (b > 1)|  */
+
+@q **** (4) @> 
+
+  else if (b < 0)
+    {
+      cerr_strm << thread_name 
+                << "WARNING!  In `Color::set_magenta_part()':"
+                << endl 
+                << "`b' is less than 0: " << b << endl
+                << "Setting `magenta_part' to 0.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+
+         magenta_part = 0;
+
+     } /* |else if (b < 0)|  */
+
+@q **** (4) @> 
+
+  else
+    magenta_part = b;
+
+  return;
+
+}  /* End of |Color::set_magenta_part|  definition.  */
+
+@q ** (2) Set yellow part.@>
+@*1 Set yellow part.
+@^\cfunc{Color}{set\_yellow\_part}@>
+\cfunctexi{Color}{set\_yellow\_part}
+\initials{LDF Undated.} 
+
+\LOG
+\initials{LDF 2004.12.19.}
+Added |Scanner_Node scanner_node| argument with default 0.
+Made warning output thread-safe.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+void
+set_yellow_part(const real b, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition.@> 
+
+@
+@<Define |Color| functions@>=
+void
+Color::set_yellow_part(const real b, Scanner_Node scanner_node)
+{
+
+@q **** (4) Preliminaries.@>
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q **** (4) @> 
+
+   if (b > 1)
+      {
+         cerr_strm << thread_name 
+                   << "WARNING!  In `Color::set_yellow_part()':"
+                   << endl 
+                   << "`b' is greater than 1: " << b << endl
+                   << "Setting `yellow_part' to 1.";
+         
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+         
+         yellow_part = 1;
+
+      } /* |if (b > 1)|  */
+
+@q **** (4) @> 
+
+  else if (b < 0)
+    {
+      cerr_strm << thread_name 
+                << "WARNING!  In `Color::set_yellow_part()':"
+                << endl 
+                << "`b' is less than 0: " << b << endl
+                << "Setting `yellow_part' to 0.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+
+         yellow_part = 0;
+
+     } /* |else if (b < 0)|  */
+
+@q **** (4) @> 
+
+  else
+    yellow_part = b;
+
+  return;
+
+}  /* End of |Color::set_yellow_part|  definition.  */
+
+@q ** (2) Set black part.@>
+@*1 Set black part.
+@^\cfunc{Color}{set\_black\_part}@>
+\cfunctexi{Color}{set\_black\_part}
+\initials{LDF Undated.} 
+
+\LOG
+\initials{LDF 2004.12.19.}
+Added |Scanner_Node scanner_node| argument with default 0.
+Made warning output thread-safe.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+void
+set_black_part(const real b, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition.@> 
+
+@
+@<Define |Color| functions@>=
+void
+Color::set_black_part(const real b, Scanner_Node scanner_node)
+{
+
+@q **** (4) Preliminaries.@>
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q **** (4) @> 
+
+   if (b > 1)
+      {
+         cerr_strm << thread_name 
+                   << "WARNING!  In `Color::set_black_part()':"
+                   << endl 
+                   << "`b' is greater than 1: " << b << endl
+                   << "Setting `black_part' to 1.";
+         
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+         
+         black_part = 1;
+
+      } /* |if (b > 1)|  */
+
+@q **** (4) @> 
+
+  else if (b < 0)
+    {
+      cerr_strm << thread_name 
+                << "WARNING!  In `Color::set_black_part()':"
+                << endl 
+                << "`b' is less than 0: " << b << endl
+                << "Setting `black_part' to 0.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+
+         black_part = 0;
+
+     } /* |else if (b < 0)|  */
+
+@q **** (4) @> 
+
+  else
+    black_part = b;
+
+  return;
+
+}  /* End of |Color::set_black_part|  definition.  */
+
+@q ** (2) Set grey part.@>
+@*1 Set grey part.
+@^\cfunc{Color}{set\_grey\_part}@>
+\cfunctexi{Color}{set\_grey\_part}
+\initials{LDF Undated.} 
+
+\LOG
+\initials{LDF 2004.12.19.}
+Added |Scanner_Node scanner_node| argument with default 0.
+Made warning output thread-safe.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+void
+set_grey_part(const real b, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition.@> 
+
+@
+@<Define |Color| functions@>=
+void
+Color::set_grey_part(const real b, Scanner_Node scanner_node)
+{
+
+@q **** (4) Preliminaries.@>
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q **** (4) @> 
+
+   if (b > 1)
+      {
+         cerr_strm << thread_name 
+                   << "WARNING!  In `Color::set_grey_part()':"
+                   << endl 
+                   << "`b' is greater than 1: " << b << endl
+                   << "Setting `grey_part' to 1.";
+         
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+         
+         grey_part = 1;
+
+      } /* |if (b > 1)|  */
+
+@q **** (4) @> 
+
+  else if (b < 0)
+    {
+      cerr_strm << thread_name 
+                << "WARNING!  In `Color::set_grey_part()':"
+                << endl 
+                << "`b' is less than 0: " << b << endl
+                << "Setting `grey_part' to 0.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, warning_stop_value);
+         cerr_strm.str();
+
+         grey_part = 0;
+
+     } /* |else if (b < 0)|  */
+
+@q **** (4) @> 
+
+  else
+    grey_part = b;
+
+  return;
+
+}  /* End of |Color::set_grey_part|  definition.  */
+
 
 @q * (1) Show.@>
 @* Show.
@@ -1177,12 +1746,15 @@ Color::show(string text) const
   else
      cerr << "(WARNING!  Invalid `type' value.)" << endl;         
 
-  cerr << "red_part   == " << get_red_part() << endl
-       << "green_part == " << get_green_part() << endl
-       << "blue_part  == " << get_blue_part() << endl << endl;
-
-/* !!START HERE:  LDF 2021.11.10.  */ 
-
+  cerr << "red_part     == " << get_red_part()     << endl
+       << "green_part   == " << get_green_part()   << endl
+       << "blue_part    == " << get_blue_part()    << endl 
+       << "cyan_part    == " << get_cyan_part()    << endl 
+       << "magenta_part == " << get_magenta_part() << endl 
+       << "yellow_part  == " << get_yellow_part()  << endl 
+       << "black_part   == " << get_black_part()   << endl 
+       << "grey_part    == " << get_grey_part()    << endl 
+       << endl;
 
   return;
 }
@@ -1350,15 +1922,27 @@ ostream& operator<<(ostream& o, const Color& c);
 ostream& operator<<(ostream& o, const Color& c)
 {
 
-  /* !!START HERE:  LDF 2021.11.10.  Account for CMYK and greyscale colors.  */       
-
   c.show("c:");
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
-  o <<  "(" << c.get_red_part() << ", "
-    << c.get_green_part() << ", " 
-    << c.get_blue_part() << ")";
+  if (c.get_type() == Color::RGB_COLOR)
+  {
+      o << "(" << c.get_red_part() << ", "
+        << c.get_green_part() << ", " 
+        << c.get_blue_part() << ")";
+  }
+  else if (c.get_type() == Color::CMYK_COLOR)
+  {
+      o << "(" << c.get_cyan_part() << ", "
+        << c.get_magenta_part() << ", " 
+        << c.get_yellow_part() << ", " 
+        << c.get_black_part() << ")";
+  }
+  else if (c.get_type() == Color::GREYSCALE_COLOR)
+  {
+      o << c.get_grey_part();
+  }
 
   return o;   
 }
