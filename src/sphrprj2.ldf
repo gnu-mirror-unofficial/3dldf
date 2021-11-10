@@ -56,18 +56,21 @@ verbatim_metapost "prologues := 3;";
 
 %% **** (4) Global variables
 
+triangle b[][];
+path a[][];
 path r[][];
 
 %% **** (4) Macro draw_sphere_projection
 
 macro draw_sphere_projection;
 
-def draw_sphere_projection {numeric rradius} =
+def draw_sphere_projection {numeric rradius, boolean do_labels} =
 
   numeric i, j;
 
   point p[];
-
+  point temp_pt[];
+  
   transform t[];
 
   picture v[];
@@ -160,13 +163,13 @@ def draw_sphere_projection {numeric rradius} =
 
 
   m0 := p5 -- p3 -- p2 -- cycle;
-  draw m0;
+  %draw m0;
   m1 := p5 -- p2 -- p6 -- cycle;
-  draw m1;
+  %draw m1;
   m2 := p6 -- p4 -- p2 -- cycle;
-  draw m2;
+  %draw m2;
   m3 := p4 -- p3 -- p2 -- cycle;
-  draw m3;
+  %draw m3;
 
   
 %% **** (4)
@@ -196,13 +199,13 @@ def draw_sphere_projection {numeric rradius} =
 % show p9;
 
   m4 := p8 -- p9 -- p7 -- cycle;
-  draw m4;
+  %draw m4;
   m5 := p8 -- p9 -- p5 -- cycle;
-  draw m5;
+  %draw m5;
   m6 := p5 -- p9 -- p3 -- cycle;
-  draw m6;
+  %draw m6;
   m7 := p3 -- p9 -- p7 -- cycle;
-  draw m7;
+  %draw m7;
 
   
 %% **** (4)
@@ -232,13 +235,13 @@ def draw_sphere_projection {numeric rradius} =
 % show p12;
 
   m8 := p6 -- p12 -- p11  -- cycle;
-  draw m8;
+  %draw m8;
   m9 := p11 -- p12 -- p10 -- cycle;
-  draw m9;
+  %draw m9;
   m10 := p10 -- p12 -- p4  -- cycle;
-  draw m10;
+  %draw m10;
   m11 := p4 -- p12 -- p6   -- cycle;
-  draw m11;
+  %draw m11;
 
 %% **** (4)
 
@@ -266,13 +269,13 @@ def draw_sphere_projection {numeric rradius} =
 % show p15;
 
   m12 := p14 -- p15 -- p8 -- cycle;
-  draw m12;
+  %draw m12;
   m13 := p8 -- p15 -- p7 -- cycle;
-  draw m13;
+  %draw m13;
   m14 := p7 -- p15 -- p13 -- cycle;
-  draw m14;
+  %draw m14;
   m15 := p13 -- p15 -- p14 -- cycle;
-  draw m15;
+  %draw m15;
 
 %% **** (4)
 
@@ -300,13 +303,13 @@ def draw_sphere_projection {numeric rradius} =
 % show p18;
 
   m16 := p17 -- p18 -- p11 -- cycle;
-  draw m16;
+  %draw m16;
   m17 := p10 -- p18 -- p11 -- cycle;
-  draw m17;
+  %draw m17;
   m18 := p10 -- p18 -- p16 -- cycle;
-  draw m18;
+  %draw m18;
   m19 := p16 -- p18 -- p17 -- cycle;
-  draw m19;
+  %draw m19;
 
 
 %% **** (4)
@@ -315,46 +318,25 @@ def draw_sphere_projection {numeric rradius} =
   p20 := (0, -rradius);
 
   m20 := p14 -- p19 -- p13 -- cycle;
-  draw m20;
+  %draw m20;
   m21 := p16 -- p20 -- p17 -- cycle;
-  draw m21;
+  %draw m21;
 
 %% **** (4)
 
-  v1 := current_picture;
-  clear current_picture;
+  % v1 := current_picture;
+  % clear current_picture;
 
-  v2 := v1;
-  v0 := v1;
+  % v2 := v1;
+  % v0 := v1;
 
-  for i = 1 upto 11:
-    rotate v2 (0, 2ang);
-    v0 += v2;
-  endfor;
+  % for i = 1 upto 11:
+  %   rotate v2 (0, 2ang);
+  %   v0 += v2;
+  % endfor;
+
 
 %% **** (4)
-
-  % color_vector cv;
-  
-  % cv += red;
-  % cv += green;
-  % cv += blue;
-  % cv += cyan;
-  % cv += magenta;
-  % cv += yellow;
-  % cv += orange;
-  % cv += violet;
-  % cv += brown;
-  % cv += yellow_green;
-  % cv += green_yellow;
-  % cv += dark_green;
-  % cv += blue_violet;
-  % cv += gray;
-  % cv += light_gray;
-  % cv += dark_gray;
-  % cv += violet_red;
-  % cv += pink;
-
 
   % numeric_vector nv;
   
@@ -395,37 +377,44 @@ def draw_sphere_projection {numeric rradius} =
   r[0][8] := m6;
   r[0][9] := m0;
 
-  for i = 0 upto 9:
-    label("$r_{0}^{" & decimal i & "}$",
-  	mediate(mediate(get_point 0 r[0][i], get_point 1 r[0][i]), get_point 2 r[0][i]));
-  endfor;
-
   for j = 1 upto 11:
     for i = 0 upto 9:
       r[j][i] := r[0][i] rotated (0, j * 2ang);
-      label("$r_{" & decimal j & "}^{" & decimal i & "}$",
-  	  mediate(mediate(get_point 0 r[j][i], get_point 1 r[j][i]), get_point 2 r[j][i]));
     endfor;
   endfor;
 
-  % j := 1;
-  % i := 0;
+  for i = 0 upto 11:
+    for j = 0 upto 9:
+      temp_pt0 := get_point 0 r[i][j];
+      temp_pt1 := get_point 1 r[i][j];
+      temp_pt2 := get_point 2 r[i][j];
 
-  % label("$r_{" & decimal j & "}^{" & decimal i & "}$",
-  %     mediate(mediate(get_point 0 r[j][i], get_point 1 r[j][i]), get_point 2 r[j][i]));
+      temp_pt3 := (xpart temp_pt0, 0, zpart temp_pt0);
+      temp_pt4 := (xpart temp_pt1, 0, zpart temp_pt1);
+      temp_pt5 := (xpart temp_pt2, 0, zpart temp_pt2);
+      a[i][j] := temp_pt3 -- temp_pt4 -- temp_pt5 -- cycle;
+      draw a[i][j];
 
-  % for j = 0 upto 10:
-  %   for i = 0 upto 9:
-  %     if j > 0:
-  % 	r[j][i] := r[0][i] rotated (0, i * .5ang);
-  %     fi;
-  %     label("$r_{" & decimal j & "}^{" & decimal i & "}$",
-  % 	  mediate(mediate(get_point 0 r[j][i], get_point 1 r[j][i]), get_point 2 r[j][i]));
-  %   endfor;
-  % endfor;
+      if do_labels:
+	dotlabel.top("$a_{" & decimal i & "}^{" & decimal j & "}$",
+	    mediate(mediate(get_point 0 a[i][j], get_point 1 a[i][j]), get_point 2 a[i][j]));
+      fi;
+      
+    endfor;
+  endfor;
 
+  set b[0][0] with_points (get_point 0 a[0][0], get_point 1 a[0][0], get_point 2 a[0][0]);
+  show b[0][0];
+  pause; 
+  
+  % temp_pt6 := get_center a[11][9];
+  % show temp_pt6;
+  % pause;
 
-
+  dotlabel.top("0", get_point 0 a[11][9]);
+  dotlabel.rt("1", get_point 1 a[11][9]);
+  dotlabel.top("2", get_point 2 a[11][9]);
+  
 %% **** (4) Tick marks and gray lines
   
   point q[];
@@ -498,16 +487,37 @@ def draw_sphere_projection {numeric rradius} =
 enddef;
 
 
-%% *** (3) Figure 1--9, 5cm--13cm radius
+%% *** (3) Figure 0, 8cm
+
+
 
 numeric radius;
 
-for i = 1 upto 14:
-  beginfig(i);
-    radius := 3 + i;
-    draw_sphere_projection {radius};
-  endfig with_projection parallel_x_z no_sort;
-endfor;
+% color_vector cv;
+
+% cv += red;
+% cv += green;
+% cv += blue;
+% cv += cyan;
+% cv += magenta;
+% cv += yellow;
+% cv += orange;
+% cv += violet;
+% cv += brown;
+% cv += yellow_green;
+% cv += green_yellow;
+% cv += dark_green;
+% cv += blue_violet;
+% cv += gray;
+% cv += light_gray;
+% cv += dark_gray;
+% cv += violet_red;
+% cv += pink;
+
+beginfig(0);
+  radius := 8;
+  draw_sphere_projection {radius, true};
+endfig with_projection parallel_x_z no_sort;
 
 
 %% *** (3) End of 3DLDF code
