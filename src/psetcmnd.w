@@ -123,7 +123,7 @@ Removed code from this rule and put it into
 
 @<Define rules@>=
    
-  else /* (|ivp.i == 0|,  |set_color()| succeeded.)  */
+  else /* (|ivp.i == 0|,  |set_color| succeeded.)  */
     {
 
         @=$$@> = ivp.v;

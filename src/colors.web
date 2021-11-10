@@ -105,9 +105,20 @@ and |CMYK_COLOR| for setting it.
 @<Define |class Color|@>=
 class Color
 {
+
+  /* !!START HERE:  LDF 2021.11.10.  Add string name.  */ 
+
   real red_part;
   real green_part;
   real blue_part;
+
+  real cyan_part;
+  real magenta_part;
+  real yellow_part;
+  real black_part;
+  real grey_part;
+
+  
 
   Unsigned_Byte type;
 
@@ -117,6 +128,7 @@ class Color
     static const Unsigned_Byte RGB_COLOR; 
     static const Unsigned_Byte CMY_COLOR; 
     static const Unsigned_Byte CMYK_COLOR;
+    static const Unsigned_Byte GREYSCALE_COLOR;
 
 @<Declare |Color| functions@>@;
 };
@@ -136,10 +148,11 @@ Added this section.
 
 @<Define |static Color| data members@>=
 
-    const Unsigned_Byte Color::NULL_COLOR = 0;
-    const Unsigned_Byte Color::CMY_COLOR  = 1;
-    const Unsigned_Byte Color::CMYK_COLOR = 2;
-    const Unsigned_Byte Color::RGB_COLOR  = 3;
+    const Unsigned_Byte Color::NULL_COLOR      = 0; 
+    const Unsigned_Byte Color::CMY_COLOR       = 1;
+    const Unsigned_Byte Color::CMYK_COLOR      = 2;
+    const Unsigned_Byte Color::RGB_COLOR       = 3; 
+    const Unsigned_Byte Color::GREYSCALE_COLOR = 4;
 
 @q * (1) Constructors and setting functions.@>
 @* Constructors and setting functions.
@@ -168,7 +181,9 @@ Color();
 @<Define |Color| functions@>=
 Color::Color()
 {
-  red_part = green_part = blue_part = 0;
+  grey_part = cyan_part = magenta_part = yellow_part = black_part = grey_part 
+     = red_part = green_part = blue_part = 0;
+
   type = RGB_COLOR;
 }
 
@@ -207,6 +222,13 @@ Color(const Color& c);
 Color::Color(const Color& c)
 {
   
+  grey_part    = c.get_grey_part();
+  cyan_part    = c.get_cyan_part();
+  magenta_part = c.get_magenta_part();
+  yellow_part  = c.get_yellow_part();
+  black_part   = c.get_black_part();
+  grey_part    = c.get_grey_part();
+
   red_part   = c.get_red_part();
   green_part = c.get_green_part();
   blue_part  = c.get_blue_part();
@@ -457,6 +479,13 @@ Color::operator=(const Color& c)
   green_part = c.green_part;
   blue_part  = c.blue_part;
 
+  grey_part    = c.grey_part;
+  cyan_part    = c.cyan_part;
+  magenta_part = c.magenta_part;
+  yellow_part  = c.yellow_part;
+  black_part   = c.black_part;
+  grey_part    = c.grey_part;
+
   type = c.type;
 
 }
@@ -488,10 +517,16 @@ bool
 Color::operator==(const Color& c) const
 {
     
-    return ((red_part == c.red_part)
-            && (green_part == c.green_part)
-            && (blue_part == c.blue_part)
-            && (type == c.type));
+    return (   red_part     == c.red_part
+            && green_part   == c.green_part
+            && blue_part    == c.blue_part
+            && grey_part    == c.grey_part
+            && cyan_part    == c.cyan_part
+            && magenta_part == c.magenta_part
+            && yellow_part  == c.yellow_part
+            && black_part   == c.black_part
+            && grey_part    == c.grey_part
+            && type         == c.type);
 }
 
 @q ** (2) Inequality.@>
@@ -593,6 +628,8 @@ Color::operator+=(const Color& c)
 \ENDLOG
 
 @<Define |Color| functions@>=
+
+/* !!START HERE:  LDF 2021.11.10.  */ 
 
        red_part   = min(static_cast<real>(1.0), red_part + c.red_part);
        green_part = min(static_cast<real>(1.0), green_part + c.green_part);
@@ -704,9 +741,15 @@ operator*=(const real& r);
 real
 Color::operator*=(const real& r)
 {
-   red_part *= r;
-   green_part *= r;
-   blue_part *= r;
+   red_part     *= r;
+   green_part   *= r;
+   blue_part    *= r;
+   cyan_part    *= r;
+   magenta_part *= r;
+   yellow_part  *= r;
+   black_part   *= r;
+   grey_part    *= r;
+
    return r;
 }
 
@@ -745,6 +788,13 @@ Color::operator/=(const real& r)
    red_part   /= r;
    green_part /= r;
    blue_part  /= r;
+
+   cyan_part    /= r;
+   magenta_part /= r;
+   yellow_part  /= r;
+   black_part   /= r;
+   grey_part    /= r;
+
    return r;
 }
 
@@ -767,6 +817,8 @@ Color::modify(const real r, const real g, const real b)
   red_part   += r;
   green_part += g;
   blue_part  += b;
+
+/* !!START HERE:  LDF 2021.11.10.  */ 
 
   if (red_part > 1)
     {
@@ -1087,7 +1139,9 @@ Color::set_blue_part(const real b, Scanner_Node scanner_node)
 
   return;
 
-}  /* End of |Color::set_blue_part()|  definition.  */
+}  /* End of |Color::set_blue_part|  definition.  */
+
+/* !!START HERE:  LDF 2021.11.10.  */ 
 
 @q * (1) Show.@>
 @* Show.
@@ -1107,11 +1161,29 @@ Color::show(string text) const
   if (text == "")
     text = "Color:";
   
-  cerr << text << endl;
-  
-  cerr << "red_part == " << get_red_part() << endl;
-  cerr << "green_part == " << get_green_part() << endl;
-  cerr << "blue_part == " << get_blue_part() << endl << endl;
+  cerr << text << endl
+       << "type       == " << static_cast<int>(type) << " ";
+
+  if (type == NULL_COLOR)
+     cerr << "(NULL_COLOR)" << endl;
+  else if (type == CMY_COLOR)
+     cerr << "(CMY_COLOR)" << endl;    
+  else if (type == CMYK_COLOR)   
+     cerr << "(CMYK_COLOR)" << endl;    
+  else if (type == RGB_COLOR)   
+     cerr << "(RGB_COLOR)" << endl;    
+  else if (type == GREYSCALE_COLOR)           
+     cerr << "(GREYSCALE_COLOR)" << endl;    
+  else
+     cerr << "(WARNING!  Invalid `type' value.)" << endl;         
+
+  cerr << "red_part   == " << get_red_part() << endl
+       << "green_part == " << get_green_part() << endl
+       << "blue_part  == " << get_blue_part() << endl << endl;
+
+/* !!START HERE:  LDF 2021.11.10.  */ 
+
+
   return;
 }
 
@@ -1177,6 +1249,92 @@ get_blue_part(bool decimal = false) const
   else
     return blue_part;
 }
+
+@q *** (3) Get cyan part.@>
+@*2 Get cyan part.
+@^\cfunc{Color}{get\_cyan\_part}@>
+\cfunctexi{Color}{get\_cyan\_part}
+\initials{LDF 2021.11.10.}
+
+@<Declare |Color| functions@>=
+inline
+real
+get_cyan_part(bool decimal = false) const
+{
+  if (decimal)
+    return trunc((cyan_part * 255) + .5);
+  else
+    return cyan_part;
+}
+
+@q *** (3) Get magenta part.@>
+@*2 Get magenta part.
+@^\cfunc{Color}{get\_magenta\_part}@>
+\cfunctexi{Color}{get\_magenta\_part}
+\initials{LDF 2021.11.10.}
+
+@<Declare |Color| functions@>=
+inline
+real
+get_magenta_part(bool decimal = false) const
+{
+  if (decimal)
+    return trunc((magenta_part * 255) + .5);
+  else
+    return magenta_part;
+}
+
+
+@q *** (3) Get yellow part.@>
+@*2 Get yellow part.
+@^\cfunc{Color}{get\_yellow\_part}@>
+\cfunctexi{Color}{get\_yellow\_part}
+\initials{LDF 2021.11.10.}
+
+@<Declare |Color| functions@>=
+inline
+real
+get_yellow_part(bool decimal = false) const
+{
+  if (decimal)
+    return trunc((yellow_part * 255) + .5);
+  else
+    return yellow_part;
+}
+
+@q *** (3) Get black part.@>
+@*2 Get black part.
+@^\cfunc{Color}{get\_black\_part}@>
+\cfunctexi{Color}{get\_black\_part}
+\initials{LDF 2021.11.10.}
+
+@<Declare |Color| functions@>=
+inline
+real
+get_black_part(bool decimal = false) const
+{
+  if (decimal)
+    return trunc((black_part * 255) + .5);
+  else
+    return black_part;
+}
+
+@q *** (3) Get grey part.@>
+@*2 Get grey part.
+@^\cfunc{Color}{get\_grey\_part}@>
+\cfunctexi{Color}{get\_grey\_part}
+\initials{LDF 2021.11.10.}
+
+@<Declare |Color| functions@>=
+inline
+real
+get_grey_part(bool decimal = false) const
+{
+  if (decimal)
+    return trunc((grey_part * 255) + .5);
+  else
+    return grey_part;
+}
     
 @q * (1) Output operator@>
 @* Output operator. 
@@ -1191,6 +1349,13 @@ ostream& operator<<(ostream& o, const Color& c);
 @<Define non-member non-template functions for |Color|@>=
 ostream& operator<<(ostream& o, const Color& c)
 {
+
+  /* !!START HERE:  LDF 2021.11.10.  Account for CMYK and greyscale colors.  */       
+
+  c.show("c:");
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
   o <<  "(" << c.get_red_part() << ", "
     << c.get_green_part() << ", " 
     << c.get_blue_part() << ")";

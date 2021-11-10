@@ -56,15 +56,14 @@ verbatim_metapost "prologues := 3;";
 
 %% **** (4) Global variables
 
-triangle b[][];
-path a[][];
+triangle a[][];
 path r[][];
 
 %% **** (4) Macro draw_sphere_projection
 
 macro draw_sphere_projection;
 
-def draw_sphere_projection {numeric rradius, boolean do_labels} =
+def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashed} =
 
   numeric i, j;
 
@@ -73,7 +72,7 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
   
   transform t[];
 
-  picture v[];
+  picture vv[];
 
   pen dashed_pen;
   pen border_pen;
@@ -322,21 +321,10 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
   m21 := p16 -- p20 -- p17 -- cycle;
   %draw m21;
 
-%% **** (4)
-
-  % v1 := current_picture;
-  % clear current_picture;
-
-  % v2 := v1;
-  % v0 := v1;
-
-  % for i = 1 upto 11:
-  %   rotate v2 (0, 2ang);
-  %   v0 += v2;
-  % endfor;
-
-
-%% **** (4)
+%% **** (4) This can be used to determine which triangles are on or above the x-z plane.
+%%          Since it's always the same, there's no need to calculate it.  The values
+%%          found are used explicitly below.
+%%          LDF 2021.11.10.
 
   % numeric_vector nv;
   
@@ -364,7 +352,7 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
   %   label("{\largebx " & decimal j & "}", mediate(mediate(get_point 0 m[j], get_point 1 m[j]), get_point 2 m[j]));
   % endfor;
 
-%% **** (4)
+%% **** (4) These are the triangles that are on or above the x-z plane.
 
   r[0][0] := m20;
   r[0][1] := m15;
@@ -383,6 +371,11 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
     endfor;
   endfor;
 
+%% **** (4) "Flatten" the triangles onto the x-z plane.  That is, the `r' triangles are
+%%          copied (to `a') and the y-coordinates of all the points on the `a' triangles
+%%          are set to 0.  The resulting triangles are then drawn.
+%%          LDF 2021.11.10.
+  
   for i = 0 upto 11:
     for j = 0 upto 9:
       temp_pt0 := get_point 0 r[i][j];
@@ -392,28 +385,24 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
       temp_pt3 := (xpart temp_pt0, 0, zpart temp_pt0);
       temp_pt4 := (xpart temp_pt1, 0, zpart temp_pt1);
       temp_pt5 := (xpart temp_pt2, 0, zpart temp_pt2);
-      a[i][j] := temp_pt3 -- temp_pt4 -- temp_pt5 -- cycle;
+
+      set a[i][j] with_points (temp_pt3, temp_pt4, temp_pt5);
       draw a[i][j];
 
       if do_labels:
-	dotlabel.top("$a_{" & decimal i & "}^{" & decimal j & "}$",
-	    mediate(mediate(get_point 0 a[i][j], get_point 1 a[i][j]), get_point 2 a[i][j]));
+	label("$a_{" & decimal i & "}^{" & decimal j & "}$",
+	    get_center a[i][j]);
       fi;
       
     endfor;
   endfor;
-
-  set b[0][0] with_points (get_point 0 a[0][0], get_point 1 a[0][0], get_point 2 a[0][0]);
-  show b[0][0];
-  pause; 
   
   % temp_pt6 := get_center a[11][9];
   % show temp_pt6;
-  % pause;
 
-  dotlabel.top("0", get_point 0 a[11][9]);
-  dotlabel.rt("1", get_point 1 a[11][9]);
-  dotlabel.top("2", get_point 2 a[11][9]);
+  % dotlabel.top("0", get_point 0 a[11][9]);
+  % dotlabel.rt("1", get_point 1 a[11][9]);
+  % dotlabel.top("2", get_point 2 a[11][9]);
   
 %% **** (4) Tick marks and gray lines
   
@@ -431,7 +420,7 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
 
 %% **** (4)
   
-  current_picture += v0;
+  current_picture += vv0;
 
   drawdot origin with_color white with_pen pencircle scaled (.25cm, .25cm, .25cm);
   drawdot origin with_color black with_pen pencircle scaled (1mm, 1mm, 1mm);
@@ -448,39 +437,41 @@ def draw_sphere_projection {numeric rradius, boolean do_labels} =
 
   label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
   
-  draw q2 -- (q2 shifted (-.5cm, 0));
-  draw q2 -- (q2 shifted (.5cm, 0));
-  draw q2 -- (q2 shifted (0, 0, .5cm));
-  draw q2 -- (q2 shifted (0, 0, -.5cm));
+
+  if do_dashed:
+    draw q2 -- (q2 shifted (-.5cm, 0));
+    draw q2 -- (q2 shifted (.5cm, 0));
+    draw q2 -- (q2 shifted (0, 0, .5cm));
+    draw q2 -- (q2 shifted (0, 0, -.5cm));
 
 
-  draw q3 -- (q3 shifted (-.5cm, 0));
-  draw q3 -- (q3 shifted (.5cm, 0));
-  draw q3 -- (q3 shifted (0, 0, .5cm));
-  draw q3 -- (q3 shifted (0, 0, -.5cm));
+    draw q3 -- (q3 shifted (-.5cm, 0));
+    draw q3 -- (q3 shifted (.5cm, 0));
+    draw q3 -- (q3 shifted (0, 0, .5cm));
+    draw q3 -- (q3 shifted (0, 0, -.5cm));
 
 
-  draw q4 -- (q4 shifted (-.5cm, 0));
-  draw q4 -- (q4 shifted (.5cm, 0));
-  draw q4 -- (q4 shifted (0, 0, .5cm));
-  draw q4 -- (q4 shifted (0, 0, -.5cm));
+    draw q4 -- (q4 shifted (-.5cm, 0));
+    draw q4 -- (q4 shifted (.5cm, 0));
+    draw q4 -- (q4 shifted (0, 0, .5cm));
+    draw q4 -- (q4 shifted (0, 0, -.5cm));
 
-  draw q5 -- (q5 shifted (-.5cm, 0));
-  draw q5 -- (q5 shifted (.5cm, 0));
-  draw q5 -- (q5 shifted (0, 0, .5cm));
-  draw q5 -- (q5 shifted (0, 0, -.5cm));
+    draw q5 -- (q5 shifted (-.5cm, 0));
+    draw q5 -- (q5 shifted (.5cm, 0));
+    draw q5 -- (q5 shifted (0, 0, .5cm));
+    draw q5 -- (q5 shifted (0, 0, -.5cm));
 
-  draw q6 -- (q6 shifted (-.5cm, 0));
-  draw q6 -- (q6 shifted (.5cm, 0));
-  draw q6 -- (q6 shifted (0, 0, .5cm));
-  draw q6 -- (q6 shifted (0, 0, -.5cm));
+    draw q6 -- (q6 shifted (-.5cm, 0));
+    draw q6 -- (q6 shifted (.5cm, 0));
+    draw q6 -- (q6 shifted (0, 0, .5cm));
+    draw q6 -- (q6 shifted (0, 0, -.5cm));
 
-  q7 := (radius+1, 0, -(radius+1));
-  draw q7 -- (q7 shifted (-.5cm, 0));
-  draw q7 -- (q7 shifted (.5cm, 0));
-  draw q7 -- (q7 shifted (0, 0, .5cm));
-  draw q7 -- (q7 shifted (0, 0, -.5cm));
-
+    q7 := (radius+1, 0, -(radius+1));
+    draw q7 -- (q7 shifted (-.5cm, 0));
+    draw q7 -- (q7 shifted (.5cm, 0));
+    draw q7 -- (q7 shifted (0, 0, .5cm));
+    draw q7 -- (q7 shifted (0, 0, -.5cm));
+  fi;
   
 %% **** (4)
 
@@ -514,9 +505,22 @@ numeric radius;
 % cv += violet_red;
 % cv += pink;
 
+picture v[];
 beginfig(0);
   radius := 8;
-  draw_sphere_projection {radius, true};
+  draw_sphere_projection {radius, true, true};
+  fill a[0][0] with_color blue;
+  fill a[6][0] with_color blue;
+  fill a[3][0] with_color red;
+  fill a[9][0] with_color red;
+  fill a[1][0] with_color yellow;
+  fill a[11][0] with_color yellow;
+  fill a[5][0] with_color yellow;
+  fill a[7][0] with_color yellow;
+  fill a[2][0] with_color orange;
+  fill a[4][0] with_color orange;
+  fill a[8][0] with_color orange;
+  fill a[10][0] with_color orange;
 endfig with_projection parallel_x_z no_sort;
 
 

@@ -80,8 +80,8 @@ Removed code from this rule to the function |Scan_Parse::drawing_command()|,
 which is defined in \filename{scanprsf.web}.
 
 \initials{LDF 2004.08.30.}
-Changed name of |Scan_Parse::drawing_command()| to
-|drawing_command_path()|. 
+Changed name of |Scan_Parse::drawing_command| to
+|drawing_command_path|. 
 
 \initials{LDF 2005.10.24.}
 Changed |path_like_expression| to |path_expression|.  Removed
@@ -117,7 +117,7 @@ Added this rule.
 
 \initials{LDF 2005.11.09.}
 Now casting |@=$2@>| to |Ellipse*| rather than |Path*| 
-in the call to |Scan_Parse::drawing_command_path()|.
+in the call to |Scan_Parse::drawing_command_path|.
 \ENDLOG
 
 @q ** (2) Definition.@> 
@@ -149,7 +149,7 @@ Added this rule.
 
 \initials{LDF 2005.11.09.}
 Now casting |@=$2@>| to |Circle*| rather than |Path*| 
-in the call to |Scan_Parse::drawing_command_path()|.
+in the call to |Scan_Parse::drawing_command_path|.
 \ENDLOG
 
 @q ** (2) Definition.@> 
@@ -572,7 +572,7 @@ Added this rule.
 
 \initials{LDF 2004.08.30.}
 Finished writing this rule.  It now calls 
-|Scan_Parse::drawing_command_solid()|, which is defined in 
+|Scan_Parse::drawing_command_solid|, which is defined in 
 \filename{scanprsf.web}.
 
 \initials{LDF 2005.10.22.}

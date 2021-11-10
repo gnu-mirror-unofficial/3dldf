@@ -1451,7 +1451,7 @@ ttemp.pdf: ttemp.dvi
 ttemp.ps: ttemp.dvi
 	dvips -o $@ $<
 
-ttemp.dvi: ttemp.tex ttemp.1
+ttemp.dvi: ttemp.txt ttemp.0
 	tex $<
 
 ttemp.0 ttemp.1: ttemp.mp
