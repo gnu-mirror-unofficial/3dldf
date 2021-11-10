@@ -16077,7 +16077,7 @@ Scan_Parse::numeric_list_rule_func_0(void* v, void* parameter)
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -16143,6 +16143,17 @@ Scan_Parse::numeric_list_rule_func_0(void* v, void* parameter)
        iter != scanner_node->numeric_list_real_vector.end();
        ++iter)
     {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr_strm << "*iter == " << *iter << endl;
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
       *w += new real(*iter);
     }
 

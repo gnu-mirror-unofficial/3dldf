@@ -82,7 +82,7 @@ Added this rule.
 
 \initials{LDF 2004.08.14.}
 Removed code from this rule and put it into 
-|Scan_Parse::set_color()|, which is defined in 
+|Scan_Parse::set_color|, which is defined in 
 \filename{scanprse.web}.
 \ENDLOG 
 
@@ -90,21 +90,112 @@ Removed code from this rule and put it into
 
 @<Define rules@>=
 
-@=command: SET color_variable LEFT_PARENTHESIS @>@/
-@=numeric_expression COMMA numeric_expression COMMA @>@/
-@=numeric_expression RIGHT_PARENTHESIS@>@/
+@q !!START HERE:  LDF 2021.11.10.  Use this: @>
+@q with_type_optional @>
+
+@=command: SET color_variable numeric_list @>@/
 {
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `command: SET color_variable numeric_list'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$3@>); 
+
+  for (vector<float*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
+  {
+     cerr << "**iter == " << **iter << endl;
+  }
+
+  real red_part     = 0.0;
+  real green_part   = 0.0;
+  real blue_part    = 0.0;
+  real cyan_part    = 0.0;
+  real magenta_part = 0.0;
+  real yellow_part  = 0.0;
+  real black_part   = 0.0;
+  real grey_part    = 0.0;
+
+  if (w->v.size() == 1)
+  {
+     grey_part = *(w->v[0]);
+  }
+  else if (w->v.size() > 1)
+  {
+     red_part = *(w->v[0]);
+  }
+  if (w->v.size() > 1)
+  {
+     green_part = *(w->v[1]);
+  }
+  if (w->v.size() > 2)
+  {
+     blue_part = *(w->v[2]);
+  }
+  if (w->v.size() > 3)
+  {
+     cyan_part = *(w->v[3]);
+  }
+  if (w->v.size() > 4)
+  {
+     magenta_part = *(w->v[4]);
+  }
+  if (w->v.size() > 5)
+  {
+     yellow_part = *(w->v[5]);
+  }
+  if (w->v.size() > 6)
+  {
+     black_part = *(w->v[6]);
+  }
+
+/* !!START HERE:  LDF 2021.11.10.  Use this. */ 
+#if LDF_REAL_FLOAT
+#endif 
+
+
+  red_part = fmaxf(red_part, 0);
+  red_part = fminf(red_part, 1);
+
+  green_part = fmaxf(green_part, 0);
+  green_part = fminf(green_part, 1);
+
+  blue_part = fmaxf(blue_part, 0);
+  blue_part = fminf(blue_part, 1);
+
+  cyan_part = fmaxf(cyan_part, 0);
+  cyan_part = fminf(cyan_part, 1);
+
+  magenta_part = fmaxf(magenta_part, 0);
+  magenta_part = fminf(magenta_part, 1);
+
+  yellow_part = fmaxf(yellow_part, 0);
+  yellow_part = fminf(yellow_part, 1);
+
+  black_part = fmaxf(black_part, 0);
+  black_part = fminf(black_part, 1);
+
+  grey_part = fmaxf(grey_part, 0);
+  grey_part = fminf(grey_part, 1);
 
   Int_Void_Ptr ivp
     = set_color(static_cast<Scanner_Node>(parameter),
-                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                @=$4@>,
-                @=$6@>,
-                @=$8@>);
+                static_cast<Id_Map_Entry_Node>(@=$2@>), red_part, green_part, blue_part);
+
 
 @q ***** (5) Error handling:  |Scan_Parse::set_color()| failed.@>
 
-@ Error handling:  |Scan_Parse::set_color()| failed.
+@ Error handling:  |Scan_Parse::set_color| failed.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
@@ -114,11 +205,11 @@ Removed code from this rule and put it into
       
       @=$$@> = static_cast<void*>(0); 
       
-    } /* |if (ivp.i != 0)| (|set_color()| failed.)  */
+    } /* |if (ivp.i != 0)| (|set_color| failed.)  */
 
-@q ***** (5) |Scan_Parse::set_color()| succeeded.@>
+@q ***** (5) |Scan_Parse::set_color| succeeded.@>
 
-@ |Scan_Parse::set_color()| succeeded.
+@ |Scan_Parse::set_color| succeeded.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
