@@ -1,6 +1,104 @@
 
-%% !! START HERE: LDF 2021.11.09.
 
+beginfig(0);
+
+  point p[][];
+  reg_polygon r[];
+  r0 := unit_dodecagon scaled (6cm, 0, 6cm);
+  draw r0;
+  label("$r_0$", get_center r0);
+
+  for i = 0 upto 11:
+    p[0][i] := get_point (i) r0;
+  endfor;
+
+  r1 := r0 shifted by (p[0][8] - p[0][3]);
+  draw r1;
+  label("$r_1$", get_center r1);
+
+  for i = 0 upto 11:
+    p[1][i] := get_point (i) r1;
+  endfor;
+  
+  r2 := r0 shifted by (p[0][11] - p[0][6]);
+  draw r2;
+  label("$r_2$", get_center r2);
+
+  for i = 0 upto 11:
+    p[2][i] := get_point (i) r2;
+  endfor;
+
+  r3 := r2 shifted by (p[1][0] - p[0][0]);
+  draw r3;
+  label("$r_3$", get_center r3);
+
+  for i = 0 upto 11:
+    p[3][i] := get_point (i) r3;
+  endfor;
+
+
+  
+    
+  dotlabel.bot("$p_0^0$",    p[0][0]);
+  dotlabel.top("$p_0^1$",    p[0][1]);
+  dotlabel.top("$p_0^2$",    p[0][2]);
+  dotlabel.top("$p_0^3$",    p[0][3]);
+  dotlabel.top("$p_0^4$",    p[0][4]);
+  dotlabel.top("$p_0^5$",    p[0][5]);
+  dotlabel.top("$p_0^6$",    p[0][6]);
+  dotlabel.top("$p_0^7$",    p[0][7]);
+  dotlabel.top("$p_0^8$",    p[0][8]);
+  dotlabel.top("$p_0^9$",    p[0][9]);
+  dotlabel.top("$p_0^{10}$", p[0][10]);
+  dotlabel.bot("$p_0^{11}$", p[0][11]);
+
+  dotlabel.top("$p_1^0$",    p[1][0]);
+  dotlabel.top("$p_1^1$",    p[1][1]);
+  dotlabel.top("$p_1^2$",    p[1][2]);
+  dotlabel.top("$p_1^3$",    p[1][3]);
+  dotlabel.top("$p_1^4$",    p[1][4]);
+  dotlabel.top("$p_1^5$",    p[1][5]);
+  dotlabel.top("$p_1^6$",    p[1][6]);
+  dotlabel.top("$p_1^7$",    p[1][7]);
+  dotlabel.top("$p_1^8$",    p[1][8]);
+  dotlabel.top("$p_1^9$",    p[1][9]);
+  dotlabel.top("$p_1^{10}$", p[1][10]);
+  dotlabel.top("$p_1^{11}$", p[1][11]);
+
+
+  dotlabel.top("$p_2^0$",    p[2][0]);
+  dotlabel.top("$p_2^1$",    p[2][1]);
+  dotlabel.top("$p_2^2$",    p[2][2]);
+  dotlabel.top("$p_2^3$",    p[2][3]);
+  dotlabel.top("$p_2^4$",    p[2][4]);
+  dotlabel.top("$p_2^5$",    p[2][5]);
+  dotlabel.top("$p_2^6$",    p[2][6]);
+  dotlabel.top("$p_2^7$",    p[2][7]);
+  dotlabel.top("$p_2^8$",    p[2][8]);
+  dotlabel.top("$p_2^9$",    p[2][9]);
+  dotlabel.top("$p_2^{10}$", p[2][10]);
+  dotlabel.top("$p_2^{11}$", p[2][11]);
+
+
+  dotlabel.rt("$p_3^0$",    p[3][0]);
+  dotlabel.rt("$p_3^1$",    p[3][1]);
+  dotlabel.rt("$p_3^2$",    p[3][2]);
+  dotlabel.rt("$p_3^3$",    p[3][3]);
+  dotlabel.rt("$p_3^4$",    p[3][4]);
+  dotlabel.rt("$p_3^5$",    p[3][5]);
+  dotlabel.rt("$p_3^6$",    p[3][6]);
+  dotlabel.rt("$p_3^7$",    p[3][7]);
+  dotlabel.rt("$p_3^8$",    p[3][8]);
+  dotlabel.rt("$p_3^9$",    p[3][9]);
+  dotlabel.rt("$p_3^{10}$", p[3][10]);
+  dotlabel.rt("$p_3^{11}$", p[3][11]);
+
+
+  
+
+endfig with_projection parallel_x_z;
+
+verbatim_metapost "end;";
 
 
 end;
