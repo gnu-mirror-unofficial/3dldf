@@ -1420,6 +1420,10 @@ purge:
 	-rm -f clstsph_1_6.tex clstsph_1_labels.tex clstsph_1_3.tex clstsph_1_5.tex \
                clstsph_1_2.tex clstsph_1_7.tex clstsph_1_4.tex clstsph_1_1.tex \
                clstsph_1_0.tex
+	-rm -f sphrprj1.[0-9]* sphrprj1.mp sphrprj1.dvi sphrprj1.log sphrprj1.ps
+	-rm -f sphrprj2.[0-9]* sphrprj2.mp sphrprj2.dvi sphrprj2.log sphrprj2.ps
+	-rm 3DLDFput.mp testfont.log ttemp.dvi ttemp.log mpout.log
+
 
 #### *** (3)
 
@@ -1626,6 +1630,19 @@ sphrprj1.dvi: sphrprj1.txt sphrprj1.1
 
 sphrprj1.pdf: sphrprj1.dvi
 	dvipdfmx sphrprj1.dvi 
+
+sphrprj2.mp: sphrprj2.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj2.ldf 
+
+sphrprj2.1: sphrprj2.mp
+	mpost -numbersystem "double" sphrprj2.mp
+
+sphrprj2.dvi: sphrprj2.txt sphrprj2.1
+	tex sphrprj2.txt
+
+sphrprj2.pdf: sphrprj2.dvi
+	dvipdfmx sphrprj2.dvi 
+
 
 .PHONY: purge-s
 
