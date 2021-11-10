@@ -159,11 +159,7 @@ Removed code from this rule and put it into
      black_part = *(w->v[6]);
   }
 
-/* !!START HERE:  LDF 2021.11.10.  Use this. */ 
 #if LDF_REAL_FLOAT
-#endif 
-
-
   red_part = fmaxf(red_part, 0);
   red_part = fminf(red_part, 1);
 
@@ -187,6 +183,32 @@ Removed code from this rule and put it into
 
   grey_part = fmaxf(grey_part, 0);
   grey_part = fminf(grey_part, 1);
+#else 
+  red_part = fmax(red_part, 0);
+  red_part = fmin(red_part, 1);
+
+  green_part = fmax(green_part, 0);
+  green_part = fmin(green_part, 1);
+
+  blue_part = fmax(blue_part, 0);
+  blue_part = fmin(blue_part, 1);
+
+  cyan_part = fmax(cyan_part, 0);
+  cyan_part = fmin(cyan_part, 1);
+
+  magenta_part = fmax(magenta_part, 0);
+  magenta_part = fmin(magenta_part, 1);
+
+  yellow_part = fmax(yellow_part, 0);
+  yellow_part = fmin(yellow_part, 1);
+
+  black_part = fmax(black_part, 0);
+  black_part = fmin(black_part, 1);
+
+  grey_part = fmax(grey_part, 0);
+  grey_part = fmin(grey_part, 1);
+#endif 
+
 
   Int_Void_Ptr ivp
     = set_color(static_cast<Scanner_Node>(parameter),
