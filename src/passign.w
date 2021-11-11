@@ -1756,8 +1756,7 @@ This rule makes it possible to chain |color_assignments|.
 Added this rule.
 
 \initials{LDF 2004.07.27.}
-Removed code from this rule.  Now calling 
-|Scan_Parse::assign_chained<Color>|.
+Removed code from this rule.  Now calling |Scan_Parse::assign_chained<Color>|.
 \ENDLOG 
   
 @q ***** (5) Definition.@> 
@@ -1774,9 +1773,9 @@ Removed code from this rule.  Now calling
 
 };
 
-@q **** (4) color_assignment --> color_variable := numeric_list.@>
-@*3 \§color assignment> $\longrightarrow$ \§color variable>
-\.{:=} \§numeric list>.
+@q **** (4) color_assignment --> color_variable ASSIGN numeric_list with_type_optional.@>
+@*3 \§color assignment> $\longrightarrow$ \§color variable> \.{ASSIGN} \§numeric list>
+\<with type optional>.
 
 \LOG
 \initials{LDF 2021.11.11.}
@@ -1787,7 +1786,7 @@ Added this rule.
  
 @<Define rules@>= 
  
-@=color_assignment: color_variable ASSIGN numeric_list@>
+@=color_assignment: color_variable ASSIGN numeric_list with_type_optional@>
 {
 @q ****** (6) @>
 
@@ -1795,15 +1794,17 @@ Added this rule.
          
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-  cerr << "entry->name == " << entry->name << endl;
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: `color_assignment: color_variable ASSIGN numeric_list'.";
+                << "*** Parser: `color_assignment: color_variable ASSIGN numeric_list with_type_optional'."
+                << endl 
+                << "`with_type_optional' ($4) == " << @=$4@> << endl;
 
+      cerr << "entry->name == " << entry->name << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -1819,9 +1820,35 @@ Added this rule.
 
   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$3@>); 
 
+  vector<real> rv;
+
+  if (@=$4@> == Color::CMYK_COLOR)
+  {
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+  }
+  else if (@=$4@> == Color::GREYSCALE_COLOR)
+  {
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+     rv.push_back(0.0);
+  }
+
   for (vector<float*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
   {
-     cerr << "**iter == " << **iter << endl;
+     rv.push_back(**iter);
+  }
+
+  cerr << "rv == " << endl;
+
+  for (vector<float>::iterator iter = rv.begin(); iter != rv.end(); ++iter)
+  {
+     cerr << "*iter == " << *iter << endl;
   }
 
   real red_part     = 0.0;
@@ -1833,37 +1860,37 @@ Added this rule.
   real black_part   = 0.0;
   real grey_part    = 0.0;
 
-  if (w->v.size() == 1)
+  if (rv.size() > 1)
   {
-     grey_part = *(w->v[0]);
+     red_part = rv[0];
   }
-  else if (w->v.size() > 1)
+  if (rv.size() > 1)
   {
-     red_part = *(w->v[0]);
+     green_part = rv[1];
   }
-  if (w->v.size() > 1)
+  if (rv.size() > 2)
   {
-     green_part = *(w->v[1]);
+     blue_part = rv[2];
   }
-  if (w->v.size() > 2)
+  if (rv.size() > 3)
   {
-     blue_part = *(w->v[2]);
+     cyan_part = rv[3];
   }
-  if (w->v.size() > 3)
+  if (rv.size() > 4)
   {
-     cyan_part = *(w->v[3]);
+     magenta_part = rv[4];
   }
-  if (w->v.size() > 4)
+  if (rv.size() > 5)
   {
-     magenta_part = *(w->v[4]);
+     yellow_part = rv[5];
   }
-  if (w->v.size() > 5)
+  if (rv.size() > 6)
   {
-     yellow_part = *(w->v[5]);
+     black_part = rv[6];
   }
-  if (w->v.size() > 6)
+  if (rv.size() > 7)
   {
-     black_part = *(w->v[6]);
+     grey_part = rv[7];
   }
 
 @q ****** (6) @>
@@ -1928,12 +1955,12 @@ Added this rule.
                                entry, 
                                red_part, green_part, blue_part,
                                cyan_part, magenta_part, yellow_part,
-                               black_part, grey_part, entry->name);
+                               black_part, grey_part, entry->name, @=$4@>);
 
 @q ****** (6) Error handling:  |Scan_Parse::set_color| failed.@>
 
 @ Error handling:  |Scan_Parse::set_color| failed.
-\initials{LDF 2004.10.28.}
+\initials{LDF 2021.11.11.}
 
 @<Define rules@>=
 
@@ -1947,7 +1974,85 @@ Added this rule.
 @q ****** (6) |Scan_Parse::set_color| succeeded.@>
 
 @ |Scan_Parse::set_color| succeeded.
-\initials{LDF 2004.10.28.}
+\initials{LDF 2021.11.11.}
+
+@<Define rules@>=
+   
+  else /* (|ivp.i == 0|,  |set_color| succeeded.)  */
+  {
+      @=$$@> = ivp.v;
+
+  } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
+
+@q ****** (6) @>
+
+  delete w;
+  w = 0;
+
+};
+
+
+@q **** (4) color_assignment --> color_variable ASSIGN numeric_expression.@>
+@*3 \§color assignment> $\longrightarrow$ \§color variable> \.{ASSIGN} \§numeric expression>.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG 
+  
+@q ***** (5) Definition.@> 
+ 
+@<Define rules@>= 
+ 
+@=color_assignment: color_variable ASSIGN numeric_expression@>
+{
+@q ****** (6) @>
+
+  @<Common declarations for rules@>@;
+         
+  entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `color_assignment: color_variable ASSIGN numeric_expression'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+  Int_Void_Ptr ivp = set_color(static_cast<Scanner_Node>(parameter), entry,
+                               0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, @=$3@>,
+                               entry->name, Color::GREYSCALE_COLOR);
+
+@q ****** (6) Error handling:  |Scan_Parse::set_color| failed.@>
+
+@ Error handling:  |Scan_Parse::set_color| failed.
+\initials{LDF 2021.11.11.}
+
+@<Define rules@>=
+
+  if (ivp.i != 0) /*   */
+  {
+    
+    @=$$@> = static_cast<void*>(0); 
+    
+  } /* |if (ivp.i != 0)| (|set_color| failed.)  */
+
+@q ****** (6) |Scan_Parse::set_color| succeeded.@>
+
+@ |Scan_Parse::set_color| succeeded.
+\initials{LDF 2021.11.11.}
 
 @<Define rules@>=
    
@@ -1961,7 +2066,128 @@ Added this rule.
 
 };
 
+
+
 @q ***** (5) @>
+
+
+@q **** (4) with_type_optional.  @>
+
+@ \§with type optional>.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> with_type_optional@>
+
+@q ***** (5) with_type_optional: EMPTY.  @>
+@ \§with type optional> $\longrightarrow$ \.{EMPTY}. 
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional:  /* EMPTY */@>@/
+{
+   @=$$@> = Color::RGB_COLOR;
+
+};
+
+@q ***** (5) with_type_optional: RGB.  @>
+@ \§with type optional> $\longrightarrow$ \.{RGB}.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional: RGB@>@/
+{
+   @=$$@> = Color::RGB_COLOR;
+
+};
+
+@q ***** (5) with_type_optional: CMYK.  @>
+@ \§with type optional> $\longrightarrow$ \.{CMYK}.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional: CMYK@>@/
+{
+   @=$$@> = Color::CMYK_COLOR;
+
+};
+
+@q ***** (5) with_type_optional: GREYSCALE.  @>
+@ \§with type optional> $\longrightarrow$ \.{GREYSCALE}.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional: GREYSCALE@>@/
+{
+   @=$$@> = Color::GREYSCALE_COLOR;
+
+};
+
+
+@q ***** (5) with_type_optional: WITH_TYPE RGB.  @>
+@ \§with type optional> $\longrightarrow$ \.{WITH\_TYPE} \.{RGB}.  @>
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional: WITH_TYPE RGB@>@/
+{
+   @=$$@> = Color::RGB_COLOR;
+
+};
+
+@q ***** (5) with_type_optional: WITH_TYPE CMYK.  @>
+@ \§with type optional> $\longrightarrow$ \.{WITH\_TYPE} \.{CMYK}.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional: WITH_TYPE CMYK@>@/
+{
+   @=$$@> = Color::CMYK_COLOR;
+
+};
+
+@q ***** (5) with_type_optional: WITH_TYPE GREYSCALE.  @>
+@ \§with type optional> $\longrightarrow$ \.{WITH\_TYPE} \.{GREYSCALE}.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_type_optional: WITH_TYPE GREYSCALE@>@/
+{
+   @=$$@> = Color::GREYSCALE_COLOR;
+
+};
 
 @q **** (4) numeric_assignment.  @>
 @*2 \§numeric assignment>. 
