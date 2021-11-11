@@ -76,6 +76,11 @@ Added this section.
 \§numeric expression> \.{COMMA} \§numeric expression> 
 \.{RIGHT\_PARENTHESIS}.                
 
+!! PLEASE NOTE!  Using this rule is deprecated!  It's been replaced by the 
+rule \§color assignment> $\longrightarrow$ \§color variable> \.{ASSIGN} \§numeric list>
+\<with type optional> in \filename{passign.w}.
+\initials{LDF 2021.11.11.}
+
 \LOG
 \initials{LDF 2004.06.30.}
 Added this rule.
@@ -86,12 +91,12 @@ Removed code from this rule and put it into
 \filename{scanprse.web}.
 \ENDLOG 
 
+@q !!START HERE:  LDF 2021.11.10.  Use this: @>
+@q with_type_optional @>
+
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
-
-@q !!START HERE:  LDF 2021.11.10.  Use this: @>
-@q with_type_optional @>
 
 @=command: SET color_variable numeric_list @>@/
 {
@@ -232,7 +237,7 @@ Removed code from this rule and put it into
 @<Define rules@>=
 
   Int_Void_Ptr ivp = set_color(static_cast<Scanner_Node>(parameter),
-                               static_cast<Id_Map_Entry_Node>(@=$2@>), 
+                               entry, 
                                red_part, green_part, blue_part,
                                cyan_part, magenta_part, yellow_part,
                                black_part, grey_part, entry->name);
@@ -265,6 +270,9 @@ Removed code from this rule and put it into
   } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
 
 @q ***** (5).@> 
+
+  delete w;
+  w = 0;
 
 };
 
