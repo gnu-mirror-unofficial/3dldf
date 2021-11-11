@@ -1974,6 +1974,7 @@ Added token declaration for |CLIP_TO|.
 @=%token <int_value> CMY@>@/
 @=%token <int_value> CMYK@>@/
 @=%token <int_value> RGB@>@/
+@=%token <int_value> GREYSCALE@>@/
 
 @=%token <int_value> DROP_ALL@>@/
 

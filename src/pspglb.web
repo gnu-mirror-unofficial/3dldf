@@ -3797,12 +3797,17 @@ Int_Void_Ptr
             real red_part,
             real green_part,
             real blue_part,
-            real cyan_part    = 0.0,
-            real magenta_part = 0.0,
-            real yellow_part  = 0.0,
-            real black_part   = 0.0,
-            real grey_part    = 0.0,
-            string nname      = "");
+            real cyan_part     = 0.0,
+            real magenta_part  = 0.0,
+            real yellow_part   = 0.0,
+            real black_part    = 0.0,
+            real grey_part     = 0.0,
+            string nname       = "",
+            Unsigned_Byte type = 3);  /* 3 is the value of |Color::RGB_COLOR|.
+                                         The latter cannot be used here because
+                                         |class Color| has not yet been declared
+                                         at this point.
+                                         \initials{LDF 2021.11.11.}  */
 
 Int_Void_Ptr
   set_focus(Scanner_Node scanner_node,

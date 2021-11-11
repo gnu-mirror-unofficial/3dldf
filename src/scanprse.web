@@ -5298,7 +5298,8 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
                       real yellow_part,
                       real black_part,
                       real grey_part,
-                      string nname)
+                      string nname,
+                      Unsigned_Byte type)
 {
 #if DEBUG_COMPILE
   bool DEBUG = true; /* |false| */ @; 
@@ -5333,18 +5334,19 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
 
    Int_Void_Ptr ivp;
 
-   cerr_strm << thread_name 
-             << "Entering `Scan_Parse::set_color'.";
- 
-   log_message(cerr_strm); 
-
 #if DEBUG_COMPILE
-   if (DEBUG) 
-     cerr_message(cerr_strm); 
+   if (DEBUG)
+   { 
+      cerr_strm << thread_name 
+                << "Entering `Scan_Parse::set_color'." << endl 
+                << "`type' == " << static_cast<int>(type) << endl;
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str(""); 
+   }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-   cerr_strm.str(""); 
-
+ 
   int status;
 
 @q ***** (5) Error handling for the case that |entry == 0|.@>
@@ -5447,7 +5449,7 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
        c = static_cast<Color*>(entry->object); 
     }
 
-  c->set(red_part, green_part, blue_part, cyan_part, magenta_part, yellow_part, black_part, grey_part, nname);
+  c->set(red_part, green_part, blue_part, cyan_part, magenta_part, yellow_part, black_part, grey_part, nname, type);
 
   entry->known_state = Id_Map_Entry_Type::KNOWN;
 

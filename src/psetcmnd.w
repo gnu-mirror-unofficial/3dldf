@@ -96,7 +96,7 @@ Removed code from this rule and put it into
 
 @<Define rules@>=
 
-@=command: SET color_variable numeric_list @>@/
+@=command: SET color_variable numeric_list with_type_optional@>@/
 {
 @q ***** (5) @>
 
@@ -238,7 +238,7 @@ Removed code from this rule and put it into
                                entry, 
                                red_part, green_part, blue_part,
                                cyan_part, magenta_part, yellow_part,
-                               black_part, grey_part, entry->name);
+                               black_part, grey_part, entry->name, @=$4@>);
 
 @q ***** (5) Error handling:  |Scan_Parse::set_color| failed.@>
 
