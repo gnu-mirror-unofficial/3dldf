@@ -91,9 +91,6 @@ Removed code from this rule and put it into
 \filename{scanprse.web}.
 \ENDLOG 
 
-@q !!START HERE:  LDF 2021.11.10.  Use this: @>
-@q with_type_optional @>
-
 @q **** (4) Definition.@> 
 
 @<Define rules@>=
