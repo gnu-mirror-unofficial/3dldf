@@ -78,7 +78,8 @@ Added this section.
 
 !! PLEASE NOTE!  Using this rule is deprecated!  It's been replaced by the 
 rule \§color assignment> $\longrightarrow$ \§color variable> \.{ASSIGN} \§numeric list>
-\<with type optional> in \filename{passign.w}.
+\<with type optional> in \filename{passign.w}.  It won't be removed because doing so might
+break old (3dldf) code.
 \initials{LDF 2021.11.11.}
 
 \LOG
