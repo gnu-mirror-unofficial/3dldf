@@ -95,7 +95,13 @@ Removed code from this rule and put it into
 
 @=command: SET color_variable numeric_list @>@/
 {
+@q ***** (5) @>
+
   @<Common declarations for rules@>@;
+         
+  entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+  cerr << "entry->name == " << entry->name << endl;
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
@@ -104,11 +110,19 @@ Removed code from this rule and put it into
       cerr_strm << thread_name 
                 << "*** Parser: `command: SET color_variable numeric_list'.";
 
+
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
+
+
+
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+@q ***** (5) @>
+@
+@<Define rules@>=
 
   Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$3@>); 
 
@@ -158,6 +172,10 @@ Removed code from this rule and put it into
   {
      black_part = *(w->v[6]);
   }
+
+@q ***** (5) @>
+@
+@<Define rules@>=
 
 #if LDF_REAL_FLOAT
   red_part = fmaxf(red_part, 0);
@@ -209,13 +227,17 @@ Removed code from this rule and put it into
   grey_part = fmin(grey_part, 1);
 #endif 
 
+@q ***** (5) @>
+@
+@<Define rules@>=
 
-  Int_Void_Ptr ivp
-    = set_color(static_cast<Scanner_Node>(parameter),
-                static_cast<Id_Map_Entry_Node>(@=$2@>), red_part, green_part, blue_part);
+  Int_Void_Ptr ivp = set_color(static_cast<Scanner_Node>(parameter),
+                               static_cast<Id_Map_Entry_Node>(@=$2@>), 
+                               red_part, green_part, blue_part,
+                               cyan_part, magenta_part, yellow_part,
+                               black_part, grey_part, entry->name);
 
-
-@q ***** (5) Error handling:  |Scan_Parse::set_color()| failed.@>
+@q ***** (5) Error handling:  |Scan_Parse::set_color| failed.@>
 
 @ Error handling:  |Scan_Parse::set_color| failed.
 \initials{LDF 2004.10.28.}
@@ -223,11 +245,11 @@ Removed code from this rule and put it into
 @<Define rules@>=
 
   if (ivp.i != 0) /*   */
-    {
-      
-      @=$$@> = static_cast<void*>(0); 
-      
-    } /* |if (ivp.i != 0)| (|set_color| failed.)  */
+  {
+    
+    @=$$@> = static_cast<void*>(0); 
+    
+  } /* |if (ivp.i != 0)| (|set_color| failed.)  */
 
 @q ***** (5) |Scan_Parse::set_color| succeeded.@>
 
@@ -237,11 +259,10 @@ Removed code from this rule and put it into
 @<Define rules@>=
    
   else /* (|ivp.i == 0|,  |set_color| succeeded.)  */
-    {
+  {
+      @=$$@> = ivp.v;
 
-        @=$$@> = ivp.v;
-
-    } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
+  } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
 
 @q ***** (5).@> 
 

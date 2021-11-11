@@ -348,65 +348,167 @@ Added this function.
 
 @<Declare |Color| functions@>=
 void
-set(const real r, const real g, const real b);
+set(const real red, const real green = 0.0, const real blue = 0.0, 
+    const real cyan = 0.0, const real magenta = 0.0, const real yellow = 0.0, 
+    const real black = 0.0, const real grey = 0.0, string nname = "");
 
 @
 @<Define |Color| functions@>=
 void
-Color::set(const real r, const real g, const real b)
+Color::set(const real red, const real green, const real blue, 
+           const real cyan, const real magenta, const real yellow, 
+           const real black, const real grey, string nname)
 {
 
-  name = "";
+  bool DEBUG = true; /* |false| */ 
 
-  if (r < 0)
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Color::set'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  name = nname;
+
+  if (red < 0)
     {
-      cerr << "WARNING! In Color::Color() (three real arguments):\n"
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
         << "Red part argument < 0.  Setting red_part to 0.\n\n";
       red_part = 0;
     }
-  else if (r > 1)
+  else if (red > 1)
     {
-      cerr << "WARNING! In Color::Color() (three real arguments):\n"
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
         << "Red part argument > 1.  Setting red_part to 1.\n\n";
       red_part = 1;
     }
   else
-    red_part = r;
+    red_part = red;
 
-  if (g < 0)
+  if (green < 0)
     {
-      cerr << "WARNING! In Color::Color() (three real arguments):\n"
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
         << "Green part argument < 0.  Setting green_part to 0.\n\n";
       green_part = 0;
     }
-  else if (g > 1)
+  else if (green > 1)
     {
-      cerr << "WARNING! In Color::Color() (three real arguments):\n"
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
         << "Green part argument > 1.  Setting green_part to 1.\n\n";
       green_part = 1;
     }    
   else 
-    green_part = g;
+    green_part = green;
 
-  if (b < 0)
+  if (blue < 0)
     {
-      cerr << "WARNING! In Color::Color() (three real arguments):\n"
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
         << "Blue part argument < 0.  Setting blue_part to 0.\n\n";
       blue_part = 0;
     }
-  else if (b > 1)
+  else if (blue > 1)
     {
-      cerr << "WARNING! In Color::Color() (three real arguments):\n"
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
         << "Blue part argument > 1.  Setting blue_part to 1.\n\n";
       blue_part = 1;
     }    
   else
-    blue_part = b;
+    blue_part = blue;
+
+  if (cyan < 0)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Cyan part argument < 0.  Setting cyan_part to 0.\n\n";
+      cyan_part = 0;
+    }
+  else if (cyan > 1)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Cyan part argument > 1.  Setting cyan_part to 1.\n\n";
+      cyan_part = 1;
+    }    
+  else
+    cyan_part = cyan;
+
+  if (magenta < 0)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Magenta part argument < 0.  Setting magenta_part to 0.\n\n";
+      magenta_part = 0;
+    }
+  else if (magenta > 1)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Magenta part argument > 1.  Setting magenta_part to 1.\n\n";
+      magenta_part = 1;
+    }    
+  else
+    magenta_part = magenta;
+
+  if (yellow < 0)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Yellow part argument < 0.  Setting yellow_part to 0.\n\n";
+      yellow_part = 0;
+    }
+  else if (yellow > 1)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Yellow part argument > 1.  Setting yellow_part to 1.\n\n";
+      yellow_part = 1;
+    }    
+  else
+    yellow_part = yellow;
+
+  if (black < 0)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Black part argument < 0.  Setting black_part to 0.\n\n";
+      black_part = 0;
+    }
+  else if (black > 1)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Black part argument > 1.  Setting black_part to 1.\n\n";
+      black_part = 1;
+    }    
+  else
+    black_part = black;
+
+  if (grey < 0)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Grey part argument < 0.  Setting grey_part to 0.\n\n";
+      grey_part = 0;
+    }
+  else if (grey > 1)
+    {
+      cerr << "WARNING! In Color::Color() (`real' arguments):\n"
+        << "Grey part argument > 1.  Setting grey_part to 1.\n\n";
+      grey_part = 1;
+    }    
+  else
+    grey_part = grey;
+
+  if (cyan_part > 0 || magenta_part > 0 || yellow_part > 0 || black_part > 0)
+     type = CMYK_COLOR;
+  else if (grey_part > 0)
+    type = GREYSCALE_COLOR;
+  else 
+    type = RGB_COLOR;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Color::set' successfully with void return value." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    return;
 
-} /* End of |Color::set(const real r, const real g, const real b)|
-     definition.  */
+} /* End of |Color::set| definition.  */
 
 @q * (1) Pseudo-constructor for dynamic allocation. @>
 @* Pseudo-constructor for dynamic allocation. 
@@ -987,7 +1089,7 @@ Added this function.
 @<Declare |Color| functions@>=
 inline
 Unsigned_Byte
-get_type(void)
+get_type(void) const
 {
    return type;
 }
@@ -1921,11 +2023,6 @@ ostream& operator<<(ostream& o, const Color& c);
 @<Define non-member non-template functions for |Color|@>=
 ostream& operator<<(ostream& o, const Color& c)
 {
-
-  c.show("c:");
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
   if (c.get_type() == Color::RGB_COLOR)
   {
       o << "(" << c.get_red_part() << ", "

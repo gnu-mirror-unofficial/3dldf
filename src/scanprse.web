@@ -5297,10 +5297,11 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
                       real magenta_part,
                       real yellow_part,
                       real black_part,
-                      real grey_part)
+                      real grey_part,
+                      string nname)
 {
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -5446,7 +5447,7 @@ Scan_Parse::set_color(Scanner_Node scanner_node,
        c = static_cast<Color*>(entry->object); 
     }
 
-  c->set(red_part, green_part, blue_part);
+  c->set(red_part, green_part, blue_part, cyan_part, magenta_part, yellow_part, black_part, grey_part, nname);
 
   entry->known_state = Id_Map_Entry_Type::KNOWN;
 
