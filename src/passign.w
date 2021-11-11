@@ -1774,6 +1774,195 @@ Removed code from this rule.  Now calling
 
 };
 
+@q **** (4) color_assignment --> color_variable := numeric_list.@>
+@*3 \§color assignment> $\longrightarrow$ \§color variable>
+\.{:=} \§numeric list>.
+
+\LOG
+\initials{LDF 2021.11.11.}
+Added this rule.
+\ENDLOG 
+  
+@q ***** (5) Definition.@> 
+ 
+@<Define rules@>= 
+ 
+@=color_assignment: color_variable ASSIGN numeric_list@>
+{
+@q ****** (6) @>
+
+  @<Common declarations for rules@>@;
+         
+  entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+
+  cerr << "entry->name == " << entry->name << endl;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `color_assignment: color_variable ASSIGN numeric_list'.";
+
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+  Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(@=$3@>); 
+
+  for (vector<float*>::iterator iter = w->v.begin(); iter != w->v.end(); ++iter)
+  {
+     cerr << "**iter == " << **iter << endl;
+  }
+
+  real red_part     = 0.0;
+  real green_part   = 0.0;
+  real blue_part    = 0.0;
+  real cyan_part    = 0.0;
+  real magenta_part = 0.0;
+  real yellow_part  = 0.0;
+  real black_part   = 0.0;
+  real grey_part    = 0.0;
+
+  if (w->v.size() == 1)
+  {
+     grey_part = *(w->v[0]);
+  }
+  else if (w->v.size() > 1)
+  {
+     red_part = *(w->v[0]);
+  }
+  if (w->v.size() > 1)
+  {
+     green_part = *(w->v[1]);
+  }
+  if (w->v.size() > 2)
+  {
+     blue_part = *(w->v[2]);
+  }
+  if (w->v.size() > 3)
+  {
+     cyan_part = *(w->v[3]);
+  }
+  if (w->v.size() > 4)
+  {
+     magenta_part = *(w->v[4]);
+  }
+  if (w->v.size() > 5)
+  {
+     yellow_part = *(w->v[5]);
+  }
+  if (w->v.size() > 6)
+  {
+     black_part = *(w->v[6]);
+  }
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+#if LDF_REAL_FLOAT
+  red_part = fmaxf(red_part, 0);
+  red_part = fminf(red_part, 1);
+
+  green_part = fmaxf(green_part, 0);
+  green_part = fminf(green_part, 1);
+
+  blue_part = fmaxf(blue_part, 0);
+  blue_part = fminf(blue_part, 1);
+
+  cyan_part = fmaxf(cyan_part, 0);
+  cyan_part = fminf(cyan_part, 1);
+
+  magenta_part = fmaxf(magenta_part, 0);
+  magenta_part = fminf(magenta_part, 1);
+
+  yellow_part = fmaxf(yellow_part, 0);
+  yellow_part = fminf(yellow_part, 1);
+
+  black_part = fmaxf(black_part, 0);
+  black_part = fminf(black_part, 1);
+
+  grey_part = fmaxf(grey_part, 0);
+  grey_part = fminf(grey_part, 1);
+#else 
+  red_part = fmax(red_part, 0);
+  red_part = fmin(red_part, 1);
+
+  green_part = fmax(green_part, 0);
+  green_part = fmin(green_part, 1);
+
+  blue_part = fmax(blue_part, 0);
+  blue_part = fmin(blue_part, 1);
+
+  cyan_part = fmax(cyan_part, 0);
+  cyan_part = fmin(cyan_part, 1);
+
+  magenta_part = fmax(magenta_part, 0);
+  magenta_part = fmin(magenta_part, 1);
+
+  yellow_part = fmax(yellow_part, 0);
+  yellow_part = fmin(yellow_part, 1);
+
+  black_part = fmax(black_part, 0);
+  black_part = fmin(black_part, 1);
+
+  grey_part = fmax(grey_part, 0);
+  grey_part = fmin(grey_part, 1);
+#endif 
+
+@q ****** (6) @>
+@
+@<Define rules@>=
+
+  Int_Void_Ptr ivp = set_color(static_cast<Scanner_Node>(parameter),
+                               entry, 
+                               red_part, green_part, blue_part,
+                               cyan_part, magenta_part, yellow_part,
+                               black_part, grey_part, entry->name);
+
+@q ****** (6) Error handling:  |Scan_Parse::set_color| failed.@>
+
+@ Error handling:  |Scan_Parse::set_color| failed.
+\initials{LDF 2004.10.28.}
+
+@<Define rules@>=
+
+  if (ivp.i != 0) /*   */
+  {
+    
+    @=$$@> = static_cast<void*>(0); 
+    
+  } /* |if (ivp.i != 0)| (|set_color| failed.)  */
+
+@q ****** (6) |Scan_Parse::set_color| succeeded.@>
+
+@ |Scan_Parse::set_color| succeeded.
+\initials{LDF 2004.10.28.}
+
+@<Define rules@>=
+   
+  else /* (|ivp.i == 0|,  |set_color| succeeded.)  */
+  {
+      @=$$@> = ivp.v;
+
+  } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
+
+@q ****** (6) @>
+
+};
+
+@q ***** (5) @>
+
 @q **** (4) numeric_assignment.  @>
 @*2 \§numeric assignment>. 
 
