@@ -1265,6 +1265,48 @@ Added error handling.
 
 };
 
+@q ***** (5) string_secondary --> UPCASE string_primary.@>
+
+@*4 \§string secondary> $\longrightarrow$ \.{UPCASE} \§string primary>.
+\initials{LDF 2021.11.12.}
+
+\LOG
+\initials{LDF 2021.11.12.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=string_secondary: UPCASE string_primary@>@/
+{ 
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `string_secondary "
+                   << "--> UPCASE string_primary'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q ******* (7) @> 
+
+     string *s = static_cast<string*>(@=$2@>);
+
+     for (int i = 0; i < s->length(); ++i)
+        s[i] = toupper(s[i]);
+
+     @=$$@> = static_cast<void*>(s); 
+
+};
+
+
 @q ** (2) string tertiary.  @>
 @*1 \§string tertiary>.
 \initials{LDF Undated.}
