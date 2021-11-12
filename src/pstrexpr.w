@@ -1300,12 +1300,97 @@ Added this rule.
      string *s = static_cast<string*>(@=$2@>);
 
      for (int i = 0; i < s->length(); ++i)
-        s[i] = toupper(s[i]);
+        (*s)[i] = toupper((*s)[i]);
 
      @=$$@> = static_cast<void*>(s); 
 
 };
 
+@q ***** (5) string_secondary --> DOWNCASE string_primary.@>
+
+@*4 \§string secondary> $\longrightarrow$ \.{DOWNCASE} \§string primary>.
+\initials{LDF 2021.11.12.}
+
+\LOG
+\initials{LDF 2021.11.12.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=string_secondary: DOWNCASE string_primary@>@/
+{ 
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `string_secondary "
+                   << "--> DOWNCASE string_primary'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q ******* (7) @> 
+
+     string *s = static_cast<string*>(@=$2@>);
+
+     for (int i = 0; i < s->length(); ++i)
+        (*s)[i] = tolower((*s)[i]);
+
+     @=$$@> = static_cast<void*>(s); 
+
+};
+
+@q ***** (5) string_secondary --> CAPITALIZE string_primary.@>
+
+@*4 \§string secondary> $\longrightarrow$ \.{CAPITALIZE} \§string primary>.
+\initials{LDF 2021.11.12.}
+
+\LOG
+\initials{LDF 2021.11.12.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=string_secondary: CAPITALIZE string_primary@>@/
+{ 
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `string_secondary "
+                   << "--> CAPITALIZE string_primary'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q ******* (7) @> 
+
+     string *s = static_cast<string*>(@=$2@>);
+
+
+     if (!s->empty())
+        (*s)[0] = toupper((*s)[0]);
+
+     for (int i = 1; i < s->length(); ++i)
+        (*s)[i] = tolower((*s)[i]);
+
+     @=$$@> = static_cast<void*>(s); 
+
+};
 
 @q ** (2) string tertiary.  @>
 @*1 \§string tertiary>.
