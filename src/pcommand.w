@@ -702,7 +702,53 @@ Added this rule.
 
 };
 
+@q **** (4) command --> SET_NAME color_variable string_expression.@>
 
+@*4 \§command> $\longrightarrow$ \.{SET\_NAME} \§color variable primary> \§string expression>.
+\initials{LDF 2021.11.12.}
+
+\LOG
+\initials{LDF 2021.11.12.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=command: SET_NAME color_variable string_expression@>@/
+{ 
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `string_primary "
+                   << "--> SET_NAME color_variable string_expression'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q ******* (7) @> 
+
+     entry = static_cast<Id_Map_Entry_Node>(@=$2@>);  
+
+     Color *c = static_cast<Color*>(entry->object);
+
+     string *s = static_cast<string*>(@=$3@>);
+
+     if (c != 0)
+        c->set_name(*s);
+
+     delete s;
+     s = 0;
+
+     @=$$@> = 0;
+
+};
 
 @q **** (4) @>
 
