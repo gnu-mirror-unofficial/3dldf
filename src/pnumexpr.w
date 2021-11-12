@@ -2074,17 +2074,17 @@ Now setting \§numeric primary> to 0 if \§color part> is
   else if (part == BLUE_PART)
     @=$$@> = c->get_blue_part();
 
-  else if (part == YELLOW_PART)
-    @=$$@> = 0;
-
   else if (part == CYAN_PART)
-    @=$$@> = ZERO_REAL;
+    @=$$@> = c->get_cyan_part();
+
+  else if (part == YELLOW_PART)
+    @=$$@> = c->get_yellow_part();
 
   else if (part == MAGENTA_PART)
-    @=$$@> = ZERO_REAL;
+    @=$$@> = c->get_magenta_part();
 
   else if (part == BLACK_PART)
-    @=$$@> = ZERO_REAL;
+    @=$$@> = c->get_black_part();
 
   else if (part == WHITE_PART)
     @=$$@> = ZERO_REAL;

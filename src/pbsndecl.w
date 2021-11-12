@@ -1863,6 +1863,9 @@ Added the declarations of |BINARY|, |OCTAL|, and |HEXADECIMAL|.
 @=%token <int_value> OCTAL@>@/
 @=%token <int_value> DECIMAL@>@/
 @=%token <int_value> HEXADECIMAL@>@/
+@=%token <int_value> UPCASE@>@/
+@=%token <int_value> DOWNCASE@>@/
+@=%token <int_value> CAPITALIZE@>@/
 
 @q *** (3) Types for drawing.@>
 @*2 Types for drawing.

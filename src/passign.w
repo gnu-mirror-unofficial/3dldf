@@ -1822,13 +1822,19 @@ Added this rule.
 
   vector<real> rv;
 
-  if (@=$4@> == Color::CMYK_COLOR)
+  int ttype = @=$4@>;
+
+  if (w->v.size() == 4)
+    ttype = Color::CMYK_COLOR;
+
+
+  if (ttype == Color::CMYK_COLOR)
   {
      rv.push_back(0.0);
      rv.push_back(0.0);
      rv.push_back(0.0);
   }
-  else if (@=$4@> == Color::GREYSCALE_COLOR)
+  else if (ttype == Color::GREYSCALE_COLOR)
   {
      rv.push_back(0.0);
      rv.push_back(0.0);
@@ -1955,7 +1961,7 @@ Added this rule.
                                entry, 
                                red_part, green_part, blue_part,
                                cyan_part, magenta_part, yellow_part,
-                               black_part, grey_part, entry->name, @=$4@>);
+                               black_part, grey_part, entry->name, ttype);
 
 @q ****** (6) Error handling:  |Scan_Parse::set_color| failed.@>
 

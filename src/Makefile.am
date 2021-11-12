@@ -1422,6 +1422,7 @@ purge:
                clstsph_1_0.tex
 	-rm -f sphrprj1.[0-9]* sphrprj1.mp sphrprj1.dvi sphrprj1.log sphrprj1.ps
 	-rm -f sphrprj2.[0-9]* sphrprj2.mp sphrprj2.dvi sphrprj2.log sphrprj2.ps
+	-rm -f cmyk_test.[0-9]* cmyk_test.mp cmyk_test.dvi cmyk_test.log cmyk_test.ps
 	-rm 3DLDFput.mp testfont.log ttemp.dvi ttemp.log mpout.log
 
 
@@ -1579,7 +1580,7 @@ disdyakis.dvi: disdyakis.tex disdyakis.1
 disdyakis.1: disdyakis.mp
 	mpost -numbersystem "double" disdyakis.mp
 
-disdyakis.mp: disdyakis.ldf disdyakis.lmc
+disdyakis.mp: disdyakis.ldf disdyakis.lmc 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) disdyakis.ldf
 
 mathmdls.ps: mathmdls.dvi
@@ -1602,7 +1603,7 @@ math-upd:
 
 trchd: trchd_1.pdf trchd_1.ps
 
-trchd_1.mp: trchd_1.ldf 
+trchd_1.mp: trchd_1.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) trchd_1.ldf 
 
 trchd_1.1: trchd_1.mp
@@ -1617,7 +1618,7 @@ trchd_1.pdf: trchd_1.dvi
 trchd_1.ps: trchd_1.dvi
 	dvips -o trchd_1.ps trchd_1.dvi 
 
-grrhm_06.mp: grrhm_06.ldf 
+grrhm_06.mp: grrhm_06.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) grrhm_06.ldf 
 
 grrhm_06.1: grrhm_06.mp
@@ -1632,7 +1633,7 @@ grrhm_06.ps: grrhm_06.dvi
 grrhm_06.pdf: grrhm_06.dvi
 	dvipdfmx grrhm_06.dvi
 
-sphrprj1.mp: sphrprj1.ldf 
+sphrprj1.mp: sphrprj1.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj1.ldf 
 
 sphrprj1.1: sphrprj1.mp
@@ -1644,7 +1645,7 @@ sphrprj1.dvi: sphrprj1.txt sphrprj1.1
 sphrprj1.pdf: sphrprj1.dvi
 	dvipdfmx sphrprj1.dvi 
 
-sphrprj2.mp: sphrprj2.ldf 
+sphrprj2.mp: sphrprj2.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj2.ldf 
 
 sphrprj2.1: sphrprj2.mp
@@ -1655,6 +1656,20 @@ sphrprj2.dvi: sphrprj2.txt sphrprj2.1
 
 sphrprj2.pdf: sphrprj2.dvi
 	dvipdfmx sphrprj2.dvi 
+
+
+cmyk_test.mp: cmyk_test.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf cmyk_test.ldf 
+
+cmyk_test.0 cmyk_test.1: cmyk_test.mp
+	mpost -numbersystem "double" cmyk_test.mp
+
+cmyk_test.dvi: cmyk_test.txt cmyk_test.1
+	tex cmyk_test.txt
+
+cmyk_test.pdf: cmyk_test.dvi
+	dvipdfmx cmyk_test.dvi 
+
 
 
 .PHONY: purge-s
