@@ -1234,7 +1234,7 @@ Added error handling.
 
 @q ***** (5) string_primary --> GET_NAME color_variable.@>
 
-@*4 \§string primary> $\longrightarrow$ \.{GET\_NAME} \§string primary>.
+@*4 \§string primary> $\longrightarrow$ \.{GET\_NAME} \§color variable>.
 \initials{LDF 2021.11.12.}
 
 \LOG

@@ -54,36 +54,6 @@ verbatim_metapost "prologues := 3;";
 
 %% *** (3) Declarations
 
-macro ttest;
-
-def ttest {color c} =
-  message "color c:";
-  show c;
-  pause;
-enddef;
-
-ttest {red};
-
-end;
-
-
-macro draw_sample;
-
-
-def draw_sample (c) {string nname, numeric xx_shift, numeric yy_shift} =
-
-  fill q0 shifted (xx_shift, yy_shift) with_color c;
-  label.bot(get_name c, p0 shifted (xx_shift, -(yy_shift + .125cm)));
-  label.bot("\vbox{\hbox to 2cm{\hss " & nname & "\hss}\hbox to 2cm{(" &
-      decimal cyan_part c & ", " & decimal magenta_part c & ", " & decimal yellow_part c & ", " &
-      decimal black_part c & ")\hss}}", p0 shifted -(yy_shift + .5cm));
-enddef;
-
-verbatim_metapost "end;";
-
-end;
-
-
 %% **** (4) Global variables
 
   point p[];
@@ -92,6 +62,72 @@ end;
   q0 := origin -- (2cm, 0) -- (2cm, 2cm) -- (0, 2cm) -- cycle;
   p0 := (1cm, 0);
 
+%% **** (4)
+
+macro draw_sample;
+
+def draw_sample {color c, numeric xx_shift, numeric yy_shift} =
+  % message "get_name c:";
+  % show get_name c;
+  fill q0 shifted (xx_shift, -yy_shift) with_color c;
+  label.bot("\hbox to 2cm{\hss " & capitalize (get_name c) & "\hss}",
+      p0 shifted (xx_shift, -(yy_shift + .1cm)));
+  label.bot("\hbox to 2cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
+      ", " & decimal yellow_part c & ", " & decimal black_part c &
+      ")\hss}", p0 shifted (xx_shift, -(yy_shift + .5cm)));
+enddef;
+
+%% *** (3)
+
+color cyan;
+cyan := (1, 0, 0, 0);
+
+color magenta;
+magenta := (0, 1, 0, 0);
+
+color yellow;
+yellow := (0, 0, 1, 0);
+
+color black;
+black := (0, 0, 0, 1);
+
+color red;
+red := (0, 1, 1, 0);
+
+message "red:";
+show red;
+
+color green;
+green := (1, 0, 1, 0);
+
+message "green:";
+show green;
+
+color blue;
+blue := (1, 1, 0, 0);
+
+message "blue:";
+show blue;
+
+color orange;
+orange := (0, .5, 1, 0);
+
+message "orange:";
+show orange;
+
+color violet;
+violet := (.5, 1, 0, 0);
+
+message "violet:";
+show violet;
+
+% color cerulean_blue;
+% cerulean_blue := (1, .5, 0, 0);
+
+% message "cerulean_blue:";
+% show cerulean_blue;
+
+
 %% *** (3) Figures
 
 %% **** (4) Figure 1
@@ -99,53 +135,25 @@ end;
 beginfig(0);
 
 %% ***** (5)
-  
-  % In the CMYK color model, orange has the values (0, 50, 100, 0).
-  % red   = magenta + yellow
-  % green = cyan + yellow
-  % blue  = cyan + magenta
 
-  color red;
-  red := (0, 1, 1, 0);
+  draw_sample {cyan,  0, 0};
+  draw_sample {magenta, 3, 0};
+  draw_sample {yellow,  6, 0};
+  draw_sample {black,   9, 0};
 
-  message "red:";
-  show red;
+  draw_sample {red, 0, 3};
+  draw_sample {green, 3, 3};
+  draw_sample {blue, 6, 3};
 
-  color green;
-  green := (1, 0, 1, 0);
+  draw_sample {orange, 0, 6};
+  draw_sample {violet, 3, 6};
+%  draw_sample {cerulean_blue, 6, 6};
 
-  message "green:";
-  show green;
 
-  color blue;
-  blue := (1, 1, 0, 0);
+endfig with_projection parallel_x_y;
+verbatim_metapost "end;";
+end;
 
-  message "blue:";
-  show blue;
-
-  color orange;
-  orange := (0, .5, 1, 0);
-
-  message "orange:";
-  show orange;
-
-  color violet;
-  violet := (.5, 1, 0, 0);
-
-  message "violet:";
-  show violet;
-  
-  color cerulean_blue;
-  cerulean_blue := (1, .5, 0, 0);
-
-  message "cerulean_blue:";
-  show cerulean_blue;
-
-%% ***** (5)
-
-%% ****** (6)
-  
-  draw_sample (cyan) {"Cyan", 0, 0};
 
   % fill q0 with_color cyan;
   % label.bot("Cyan", p0 shifted (0, -.125cm));
@@ -153,28 +161,6 @@ beginfig(0);
 
 
   
-  fill q0 shifted (3cm, 0) with_color magenta;
-  label.bot("\vbox{\hbox to 2cm{\hss Magenta\hss}\hbox to 2cm{\hss(0, 1, 0, 0)\hss}}", p0 shifted (3cm, -.125cm));
-
-  fill q0 shifted (6cm, 0) with_color yellow;
-  label.bot("\vbox{\hbox to 2cm{\hss Yellow\hss}\hbox to 2cm{(0, 0, 1, 0)\hss}}", p0 shifted (6cm, -.125cm));
-
-  fill q0 shifted (9cm, 0) with_color black;
-  label.bot("\vbox{\hbox to 2cm{\hss Black\hss}\hbox to 2cm{(0, 0, 0, 1)\hss}}", p0 shifted (9cm, -.125cm));
-
-%% ****** (6)
-
-  message "red:";
-  show red;
-  message "yellow_part red:";
-  show yellow_part red;
-  
-  fill q0 shifted (12cm, 0) with_color red;
-  label.bot("\vbox{\hbox to 2cm{\hss Red\hss}\hbox to 2cm{(" &
-      decimal cyan_part red & ", " & decimal magenta_part red & ", " & decimal yellow_part red & ", " &
-      decimal black_part red & ")\hss}}", p0 shifted (12cm, -.125cm));
-
-  fill q0 shifted (15cm, 0) with_color green;
 
   fill q0 shifted (0, -3.5cm) with_color blue;
 

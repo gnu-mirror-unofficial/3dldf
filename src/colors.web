@@ -356,7 +356,7 @@ Color::set(const real red, const real green, const real blue,
            const real black, const real grey, string nname, Unsigned_Byte ttype)
 {
 
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1099,6 +1099,54 @@ Color::modify(const real red, const real green, const real blue, const real cyan
 }
 
 
+@q ** (2) Get name.@>
+@*1 Get name.
+@^\cfunc{Color}{get\_name}@>
+\cfunctexi{Color}{get\_name}
+\initials{LDF 2021.11.12.}
+
+\LOG
+\initials{LDF 2021.11.12.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+inline
+string
+get_name(void) const
+{
+
+   cerr << "In `Color::get_name':  `name' == " << name << endl;
+
+   return name;
+}
+
+@q ** (2) Set name.@>
+@*1 Set name.
+@^\cfunc{Color}{set\_name}@>
+\cfunctexi{Color}{set\_name}
+\initials{LDF 2021.11.12.}
+
+\LOG
+\initials{LDF 2021.11.12.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Color| functions@>=
+inline
+void
+set_name(string nname)
+{
+
+   cerr << "In `Color::set_name':  `nname' == " << nname << endl;
+
+   name = nname;
+}
+
 @q ** (2) Get type.@>
 @*1 Get type.
 @^\cfunc{Color}{get\_type}@>
@@ -1119,6 +1167,7 @@ get_type(void) const
 {
    return type;
 }
+
 
 @q ** (2) Set red part.@>
 @*1 Set red part.
