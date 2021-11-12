@@ -10486,8 +10486,11 @@ default:
               {
                  if (scanner_node->token_string == typed_parameter_iter->second)
                     {
-                       *(din->definition_strm_ptr[1]) << "©"
-                                                      << typed_parameter_iter->second;
+
+                     /* ``Copyright'' character, decimal 169, octal 251, hex A9  */ 
+
+                     *(din->definition_strm_ptr[1]) << "©" 
+                                                    << typed_parameter_iter->second;
 
                        is_parameter = true;
                        break;
