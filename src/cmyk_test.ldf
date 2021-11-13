@@ -64,9 +64,11 @@ verbatim_metapost "prologues := 3;";
 
 %% **** (4)
 
-macro draw_sample;
+macro draw_sample[];
 
-def draw_sample {color c, numeric xx_shift, numeric yy_shift} =
+%% ***** (5)
+
+def draw_sample[0] {color c, numeric xx_shift, numeric yy_shift} =
   string s;
   numeric shift_val;
   shift_val := .1cm;
@@ -74,14 +76,30 @@ def draw_sample {color c, numeric xx_shift, numeric yy_shift} =
   fill q0 shifted (xx_shift, -yy_shift) with_color c;
   if length s > 0:
     s := capitalize s;
-    label.bot("\hbox to 2.5cm{\hss " & s & "\hss}",
+    label.bot("\hbox to 3cm{\hss " & s & "\hss}",
 	p0 shifted (xx_shift, -(yy_shift + .1cm)));
     shift_val := .5cm;
   fi;
-  label.bot("\hbox to 2.5cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
+  label.bot("\hbox to 3cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
       ", " & decimal yellow_part c & ", " & decimal black_part c &
       ")\hss}", p0 shifted (xx_shift, -(yy_shift + shift_val)));
 enddef;
+
+%% ***** (5)
+
+def draw_sample[1] {numeric ccyan, numeric mmagenta, numeric yyellow,
+                    numeric bblack, numeric xx_shift, numeric yy_shift} =
+  string s;
+  color c;
+  c := (ccyan, mmagenta, yyellow, bblack);
+  unset_name c;
+  fill q0 shifted (xx_shift, -yy_shift) with_color c;
+  label.bot("\hbox to 3cm{\hss(" & decimal cyan_part c & ", "  & decimal magenta_part c &
+      ", " & decimal yellow_part c & ", " & decimal black_part c & ")\hss}",
+      p0 shifted (xx_shift, -(yy_shift + .1)));
+enddef;
+
+
 
 %% *** (3)
 
@@ -118,9 +136,6 @@ show blue;
 color cerulean_blue;
 cerulean_blue := (1, .5, 0, 0);
 
-%% !! START HERE:  LDF 2021.11.12.  I may need a `TO' token (or something)
-%% for "cerulean blue" to be recognized as a `string_expression'.
-
 set_name cerulean_blue to "cerulean blue";
 show cerulean_blue;
 
@@ -129,11 +144,12 @@ turquoise := (1, 0, .5, 0);
 message "turquoise:";
 show turquoise;
 
-color prussian_blue;
-prussian_blue := (1, 0, 0, .5);
-set_name prussian_blue to "prussian blue";
-message "prussian_blue:";
-show prussian_blue;
+%% Get rid of this!  See below.  LDF 2021.11.13.
+% color prussian_blue;
+% prussian_blue := (1, 0, 0, .5);
+% set_name prussian_blue to "prussian blue";
+% message "prussian_blue:";
+% show prussian_blue;
 
 color violet;
 violet := (.5, 1, 0, 0);
@@ -211,11 +227,6 @@ show I;
 
 
 
-% color orange;
-% orange := (0, .5, 1, 0);
-% message "orange:";
-% show orange;
-
 
 %% *** (3) Figures
 
@@ -225,44 +236,48 @@ beginfig(0);
 
 %% ***** (5)
 
-  draw_sample {cyan,  0, 0};
-  draw_sample {magenta, 3, 0};
-  draw_sample {yellow,  6, 0};
-  draw_sample {black,   9, 0};
+  draw_sample[0] {cyan,  0, 0};
+  draw_sample[0] {magenta, 3, 0};
+  draw_sample[0] {yellow,  6, 0};
+  draw_sample[0] {black,   9, 0};
 endfig with_projection parallel_x_y;
 
 beginfig(1);
-  draw_sample {red, 0, 3};
-  draw_sample {green, 3, 3};
-  draw_sample {blue, 6, 3};
+  draw_sample[0] {red, 0, 3};
+  draw_sample[0] {green, 3, 3};
+  draw_sample[0] {blue, 6, 3};
 endfig with_projection parallel_x_y;
 
-%% !! START HERE:  LDF 2021.11.13.  Add missing ones (orange, etc.?)
+%% Tertiaries
 
 beginfig(2);
-  draw_sample {cerulean_blue, 0, 6};
-  draw_sample {turquoise, 3, 6};
-  draw_sample {prussian_blue, 6, 6};
-  draw_sample {violet, 9, 6};
-  draw_sample {rose_madder, 12, 6};
-  draw_sample {burgundy, 15, 6};
+  draw_sample[0] {cerulean_blue, 0, 0};
+  draw_sample[0] {turquoise, 3, 0};
+  draw_sample[1] {1, 0, 0, .5, 6, 0};
+  draw_sample[0] {violet, 9, 0};
+  draw_sample[0] {rose_madder, 12, 0};
+  draw_sample[0] {burgundy, 15, 0};
+  draw_sample[1] {.5, 0, 1, 0, 0, 3.5}; %% Lime Green
+  draw_sample[1] {0, .5, 1, 0, 3, 3.5}; %% Orange
+  draw_sample[1] {0, 0, 1, .5, 6, 3.5}; %% Olive Green
+  draw_sample[1] {.5, 0, 0, 1, 9, 3.5};  %% Blacks
+  draw_sample[1] {0, .5, 0, 1, 12, 3.5}; %%
+  draw_sample[1] {0, 0, .5, 1, 15, 3.5}; %% 
 endfig with_projection parallel_x_y;
 
 beginfig(3);
-  draw_sample {A, 0, 9.5};
-  draw_sample {B, 3, 9.5};
-  draw_sample {C, 6, 9.5};
-  draw_sample {D, 9, 9.5};
-  draw_sample {E, 12, 9.5};
-  draw_sample {F, 15, 9.5};
-
-  draw_sample {G, 0, 13};
-  draw_sample {H, 3, 13};
-  draw_sample {I, 6, 13};
-
+   draw_sample[0] {A, 0, 0};
+   draw_sample[0] {B, 3, 0};
+   draw_sample[0] {C, 6, 0};
+   draw_sample[0] {D, 9, 0};
+   draw_sample[0] {E, 12, 0};
+   draw_sample[0] {F, 15, 0};
+   draw_sample[0] {G, 0, 3.5};
+   draw_sample[0] {H, 3, 3.5};
+   draw_sample[0] {I, 6, 3.5};
 endfig with_projection parallel_x_y;
 
-% draw_sample {orange, 9, 6};
+% draw_sample[0] {orange, 9, 0};
 
 %% *** (3)
 
