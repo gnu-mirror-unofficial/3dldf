@@ -70,19 +70,16 @@ macro draw_sample[];
 
 def draw_sample[0] {color c, numeric xx_shift, numeric yy_shift} =
   string s;
-  numeric shift_val;
-  shift_val := .1cm;
+  label.bot("\hbox to 3cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
+      ", " & decimal yellow_part c & ", " & decimal black_part c &
+      ")\hss}", p0 shifted (xx_shift, -(yy_shift + .1cm)));
   s := get_name c;
   fill q0 shifted (xx_shift, -yy_shift) with_color c;
   if length s > 0:
     s := capitalize s;
     label.bot("\hbox to 3cm{\hss " & s & "\hss}",
-	p0 shifted (xx_shift, -(yy_shift + .1cm)));
-    shift_val := .5cm;
+	p0 shifted (xx_shift, -(yy_shift + .5cm)));
   fi;
-  label.bot("\hbox to 3cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
-      ", " & decimal yellow_part c & ", " & decimal black_part c &
-      ")\hss}", p0 shifted (xx_shift, -(yy_shift + shift_val)));
 enddef;
 
 %% ***** (5)
@@ -118,20 +115,11 @@ black := (0, 0, 0, 1);
 color red;
 red := (0, 1, 1, 0);
 
-message "red:";
-show red;
-
 color green;
 green := (1, 0, 1, 0);
 
-message "green:";
-show green;
-
 color blue;
 blue := (1, 1, 0, 0);
-
-message "blue:";
-show blue;
 
 color cerulean_blue;
 cerulean_blue := (1, .5, 0, 0);
@@ -141,91 +129,20 @@ show cerulean_blue;
 
 color turquoise;
 turquoise := (1, 0, .5, 0);
-message "turquoise:";
-show turquoise;
-
-%% Get rid of this!  See below.  LDF 2021.11.13.
-% color prussian_blue;
-% prussian_blue := (1, 0, 0, .5);
-% set_name prussian_blue to "prussian blue";
-% message "prussian_blue:";
-% show prussian_blue;
 
 color violet;
 violet := (.5, 1, 0, 0);
-message "violet:";
-show violet;
 
 color rose_madder;
 rose_madder := (0, 1, .5, 0);
 set_name rose_madder to "rose madder";
-message "rose_madder:";
-show rose_madder;
 
-color burgundy;
-burgundy := (0, 1, 0, .5);
-message "burgundy:";
-show burgundy;
+color lime_green;
+lime_green := (.5, 0, 1, 0);
+set_name lime_green to "lime green";
 
-color A;
-A := (1, .5, .5, 0);
-unset_name A;
-message "A:";
-show A;
-
-color B;
-B := (1, .5, 0, .5);
-unset_name B;
-message "B:";
-show B;
-
-color C;
-C := (1, 0, .5, .5);
-unset_name C;
-message "C:";
-show C;
-
-color D;
-D := (.5, 1, .5, 0);
-unset_name D;
-message "D:";
-show D;
-
-color E;
-E := (0, 1, .5, .5);
-unset_name E;
-message "E:";
-show E;
-
-color F;
-F := (.5, 0, 1, .5);
-unset_name F;
-message "F:";
-show F;
-
-color G;
-G := (0, .5, 1, .5);
-unset_name G;
-message "G:";
-show G;
-
-color H;
-H := (.5, .5, 1, 0);
-unset_name H;
-message "H:";
-show H;
-
-color I;
-I := (.5, 0, 1, .5);
-unset_name I;
-message "I:";
-show I;
-
-
-
-
-
-
+color orange;
+orange := (0, .5, 1, 0);
 
 
 %% *** (3) Figures
@@ -248,38 +165,137 @@ beginfig(1);
   draw_sample[0] {blue, 6, 3};
 endfig with_projection parallel_x_y;
 
-%% Tertiaries
+%% Combinations of 1 (Once) and 0.5 (Once) Without Black
 
 beginfig(2);
   draw_sample[0] {cerulean_blue, 0, 0};
   draw_sample[0] {turquoise, 3, 0};
-  draw_sample[1] {1, 0, 0, .5, 6, 0};
-  draw_sample[0] {violet, 9, 0};
-  draw_sample[0] {rose_madder, 12, 0};
-  draw_sample[0] {burgundy, 15, 0};
-  draw_sample[1] {.5, 0, 1, 0, 0, 3.5}; %% Lime Green
-  draw_sample[1] {0, .5, 1, 0, 3, 3.5}; %% Orange
-  draw_sample[1] {0, 0, 1, .5, 6, 3.5}; %% Olive Green
-  draw_sample[1] {.5, 0, 0, 1, 9, 3.5};  %% Blacks
-  draw_sample[1] {0, .5, 0, 1, 12, 3.5}; %%
-  draw_sample[1] {0, 0, .5, 1, 15, 3.5}; %% 
+  draw_sample[0] {violet, 6, 0};
+  draw_sample[0] {rose_madder, 9, 0};
+  draw_sample[0] {lime_green, 12, 0};
+  draw_sample[0] {orange, 15, 0};
 endfig with_projection parallel_x_y;
+
+%% Combinations of 1 (Once) and 0.5 (Twice) Without Black
 
 beginfig(3);
-   draw_sample[0] {A, 0, 0};
-   draw_sample[0] {B, 3, 0};
-   draw_sample[0] {C, 6, 0};
-   draw_sample[0] {D, 9, 0};
-   draw_sample[0] {E, 12, 0};
-   draw_sample[0] {F, 15, 0};
-   draw_sample[0] {G, 0, 3.5};
-   draw_sample[0] {H, 3, 3.5};
-   draw_sample[0] {I, 6, 3.5};
+   draw_sample[1] {1, .5, .5, 0, 0, 0}; 
+   draw_sample[1] {.5, 1, .5, 0, 3, 0}; %% Mauve
+   draw_sample[1] {.5, .5, 1, 0, 6, 0}; %% Olive Green
 endfig with_projection parallel_x_y;
 
-% draw_sample[0] {orange, 9, 0};
+%% Combinations of 1 (Twice) and 0.5 (Once) Without Black
+
+beginfig(4);
+  draw_sample[1] {1, 1, .5, 0, 0, 0}; %% Prussian Blue
+  draw_sample[1] {1, .5, 1, 0, 3, 0}; %% Forest Green
+  draw_sample[1] {.5, 1, 1, 0, 6, 0}; %% Burnt Sienna
+endfig with_projection parallel_x_y;
+
+%% Cyan to Blue:  Cyan 1 Plus Magenta in steps of .125 
+
+beginfig(5);
+  draw_sample[0] {cyan, 0, 0};
+  draw_sample[1] {1, .125, 0, 0, 3, 0};
+  draw_sample[1] {1, .25, 0, 0, 6, 0};
+  draw_sample[1] {1, .375, 0, 0, 9, 0};
+  draw_sample[1] {1, .5, 0, 0, 12, 0};
+  draw_sample[1] {1, .625, 0, 0, 15, 0};
+  draw_sample[1] {1, .75, 0, 0, 0, 3.5};
+  draw_sample[1] {1, .875, 0, 0, 3, 3.5};
+  draw_sample[0] {blue, 6, 3.5}; 
+endfig with_projection parallel_x_y;
+
+
+%% Cyan to Green:  Cyan 1 Plus Yellow in steps of .125 
+
+beginfig(6);
+  draw_sample[0] {cyan, 0, 0};
+  draw_sample[1] {1, 0, .125, 0, 3, 0};
+  draw_sample[1] {1, 0, .25, 0, 6, 0};
+  draw_sample[1] {1, 0, .375, 0, 9, 0};
+  draw_sample[1] {1, 0, .5, 0, 12, 0};
+  draw_sample[1] {1, 0, .625, 0, 15, 0};
+  draw_sample[1] {1, 0, .75, 0, 0, 3.5};
+  draw_sample[1] {1, 0, .875, 0, 3, 3.5};
+  draw_sample[0] {green, 6, 3.5}; 
+endfig with_projection parallel_x_y;
+
+%% Magenta to Red:  Magenta 1 Plus Yellow in steps of .125 
+
+beginfig(7);
+  draw_sample[0] {magenta, 0, 0};
+  draw_sample[1] {0, 1, .125, 0, 3, 0};
+  draw_sample[1] {0, 1, .25, 0, 6, 0};
+  draw_sample[1] {0, 1, .375, 0, 9, 0};
+  draw_sample[1] {0, 1, .5, 0, 12, 0};
+  draw_sample[1] {0, 1, .625, 0, 15, 0};
+  draw_sample[1] {0, 1, .75, 0, 0, 3.5};
+  draw_sample[1] {0, 1, .875, 0, 3, 3.5};
+  draw_sample[0] {red, 6, 3.5}; 
+endfig with_projection parallel_x_y;
+
+%% Cyan to Black:  Cyan 1 Plus Black in steps of .125 
+
+beginfig(8);
+  draw_sample[0] {cyan, 0, 0};
+  draw_sample[1] {1, 0, 0, .125, 3, 0};
+  draw_sample[1] {1, 0, 0, .25, 6, 0};
+  draw_sample[1] {1, 0, 0, .375, 9, 0};
+  draw_sample[1] {1, 0, 0, .5, 12, 0};
+  draw_sample[1] {1, 0, 0, .625, 15, 0};
+  draw_sample[1] {1, 0, 0, .75, 0, 3.5};
+  draw_sample[1] {1, 0, 0, .875, 3, 3.5};
+  draw_sample[1] {1, 0, 0, 1, 6, 3.5}; 
+endfig with_projection parallel_x_y;
+
+
+%% Magenta to Black:  Magenta 1 Plus Black in steps of .125 
+
+beginfig(9);
+  draw_sample[0] {magenta, 0, 0};
+  draw_sample[1] {0, 1, 0, .125, 3, 0};
+  draw_sample[1] {0, 1, 0, .25, 6, 0};
+  draw_sample[1] {0, 1, 0, .375, 9, 0};
+  draw_sample[1] {0, 1, 0, .5, 12, 0};
+  draw_sample[1] {0, 1, 0, .625, 15, 0};
+  draw_sample[1] {0, 1, 0, .75, 0, 3.5};
+  draw_sample[1] {0, 1, 0, .875, 3, 3.5};
+  draw_sample[1] {0, 1, 0, 1, 6, 3.5}; 
+endfig with_projection parallel_x_y;
+
+%% Yellow to Black:  Yellow 1 Plus Black in steps of .125 
+
+beginfig(10);
+  draw_sample[0] {yellow, 0, 0};
+  draw_sample[1] {0, 0, 1, .125, 3, 0};
+  draw_sample[1] {0, 0, 1, .25, 6, 0};
+  draw_sample[1] {0, 0, 1, .375, 9, 0};
+  draw_sample[1] {0, 0, 1, .5, 12, 0};
+  draw_sample[1] {0, 0, 1, .625, 15, 0};
+  draw_sample[1] {0, 0, 1, .75, 0, 3.5};
+  draw_sample[1] {0, 0, 1, .875, 3, 3.5};
+  draw_sample[1] {0, 0, 1, 1, 6, 3.5}; 
+endfig with_projection parallel_x_y;
+
+
+%% Light Lavender to Blue:  Cyan and Magenta in synchronized steps of .125 
+
+beginfig(11);
+  draw_sample[1] {.125, .125,  0, 0,  0, 0};
+  draw_sample[1] {.25,  .25,   0, 0,  3, 0};
+  draw_sample[1] {.375, .375,  0, 0,  6, 0};
+  draw_sample[1] {.5,   .5,    0, 0,  9, 0};
+  draw_sample[1] {.625, .625,  0, 0, 12, 0};
+  draw_sample[1] {.75,  .75,   0, 0, 15, 0};
+  draw_sample[1] {.875, .875,  0, 0,  0, 3.5};
+  draw_sample[0] {blue,               3, 3.5}; 
+endfig with_projection parallel_x_y;
+
+
 
 %% *** (3)
+
 
 verbatim_metapost "end;";
 end;
