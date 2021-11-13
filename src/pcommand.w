@@ -277,8 +277,8 @@ Added this rule.
 
           Input_Struct* curr_input_struct;
 
-                str_strm_ptr = new stringstream;
-                curr_input_struct = new Input_Struct;
+          str_strm_ptr = new stringstream;
+          curr_input_struct = new Input_Struct;
 
           *str_strm_ptr << *str_ptr << ";";
 
@@ -345,7 +345,7 @@ Added this rule.
 @<Define rules@>=
  
          if (status != 0)
-            {
+         {
 
 #if 0 
                 cerr_strm << thread_name 
@@ -360,13 +360,13 @@ Added this rule.
                 cerr_strm.str("");
 #endif 
 
-            } /* |if (status != 0)|  */
+         } /* |if (status != 0)|  */
 
 @q ***** (5) @>   
 
-          delete s;
+         delete s;
 
-          @=$$@> = static_cast<void*>(0);
+         @=$$@> = static_cast<void*>(0);
 
 @q ***** (5).@> 
 
@@ -702,10 +702,14 @@ Added this rule.
 
 };
 
-@q **** (4) command --> SET_NAME color_variable string_expression.@>
+@q **** (4) command --> SET_NAME color_variable TO string_expression.@>
 
-@*4 \§command> $\longrightarrow$ \.{SET\_NAME} \§color variable primary> \§string expression>.
+@*4 \§command> $\longrightarrow$ \.{SET\_NAME} \§color variable primary> \.{TO} \§string expression>.
 \initials{LDF 2021.11.12.}
+
+The \.{TO} token is needed in order for the \§string expression> to be recognized by the 
+scanner/parser pair.  I don't know why this is so.
+\initials{LDF 2021.11.13.}
 
 \LOG
 \initials{LDF 2021.11.12.}
@@ -715,7 +719,60 @@ Added this rule.
 @q ****** (6) Definition.@> 
 
 @<Define rules@>=
-@=command: SET_NAME color_variable string_expression@>@/
+@=command: SET_NAME color_variable TO string_expression@>@/
+{ 
+   @<Common declarations for rules@>@; 
+
+   string *s = static_cast<string*>(@=$4@>);
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `command --> SET_NAME color_variable TO "
+                   << "string_expression'." << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+         cerr << "*s == " << *s << endl;
+
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q ******* (7) @> 
+
+     entry = static_cast<Id_Map_Entry_Node>(@=$2@>);  
+
+     Color *c = static_cast<Color*>(entry->object);
+
+     if (c != 0)
+     {
+        c->set_name(*s);
+     }
+
+     delete s;
+     s = 0;   
+
+     @=$$@> = 0;
+
+};
+
+@q **** (4) command --> UNSET_NAME color_variable.@>
+
+@*4 \§command> $\longrightarrow$ \.{UNSET\_NAME} \§color variable primary>.
+\initials{LDF 2021.11.13.}
+
+\LOG
+\initials{LDF 2021.11.13.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=command: UNSET_NAME color_variable@>@/
 { 
    @<Common declarations for rules@>@; 
 
@@ -723,8 +780,8 @@ Added this rule.
    DEBUG = true; /* |false| */ @; 
    if (DEBUG) 
      {
-         cerr_strm << thread_name << "*** Parser:  `string_primary "
-                   << "--> SET_NAME color_variable string_expression'.";
+         cerr_strm << thread_name << "*** Parser:  `command --> UNSET_NAME color_variable'."
+                   << endl;
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -738,13 +795,10 @@ Added this rule.
 
      Color *c = static_cast<Color*>(entry->object);
 
-     string *s = static_cast<string*>(@=$3@>);
-
      if (c != 0)
-        c->set_name(*s);
-
-     delete s;
-     s = 0;
+     {
+        c->set_name("");
+     }
 
      @=$$@> = 0;
 
