@@ -187,6 +187,28 @@ unset_name F;
 message "F:";
 show F;
 
+color G;
+G := (0, .5, 1, .5);
+unset_name G;
+message "G:";
+show G;
+
+color H;
+H := (.5, .5, 1, 0);
+unset_name H;
+message "H:";
+show H;
+
+color I;
+I := (.5, 0, 1, .5);
+unset_name I;
+message "I:";
+show I;
+
+
+
+
+
 
 
 % color orange;
@@ -215,6 +237,8 @@ beginfig(1);
   draw_sample {blue, 6, 3};
 endfig with_projection parallel_x_y;
 
+%% !! START HERE:  LDF 2021.11.13.  Add missing ones (orange, etc.?)
+
 beginfig(2);
   draw_sample {cerulean_blue, 0, 6};
   draw_sample {turquoise, 3, 6};
@@ -231,49 +255,18 @@ beginfig(3);
   draw_sample {D, 9, 9.5};
   draw_sample {E, 12, 9.5};
   draw_sample {F, 15, 9.5};
+
+  draw_sample {G, 0, 13};
+  draw_sample {H, 3, 13};
+  draw_sample {I, 6, 13};
+
 endfig with_projection parallel_x_y;
-
-
-
 
 % draw_sample {orange, 9, 6};
 
-
-
-verbatim_metapost "end;";
-end;
-
-
-
-  % fill q0 with_color cyan;
-  % label.bot("Cyan", p0 shifted (0, -.125cm));
-  % label.bot("(1, 0, 0, 0)", p0 shifted (0, -.5cm));
-
-
-  
-
-  fill q0 shifted (0, -3.5cm) with_color blue;
-
-%% ****** (6)
-
-  fill q0 shifted (3cm, -3.5cm) with_color orange;
-
-  fill q0 shifted (6cm, -3.5cm) with_color violet;
-
-%% ****** (6)
-
-  fill q0 shifted (9cm, -3.5cm) with_color cerulean_blue;
-
-%% ****** (6)
-
-%% ***** (5)    
-    
-endfig with_projection parallel_x_y;
-
-%% **** (4)
+%% *** (3)
 
 verbatim_metapost "end;";
-
 end;
 
 %% *** (3)
