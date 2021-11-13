@@ -1,19 +1,18 @@
 beginfig(0);
 
-  color c[];
-  c0 := .4;
+  color cerulean_blue;
+  cerulean_blue := .4;
 
-  message "In ttemp.mp:  c0:";
+  message "Before:  c0:";
   show c0;
+
+  set_name cerulean_blue to "cerulean blue";
+
+  message "After:  cerulean_blue:";
+  show cerulean_blue;
+
+  show capitalize "cerulean blue";
   
-  draw origin -- (1cm, 0, 0) with_color c0;
-
-  c1 := (.5, .3) cmyk;
-  message "In ttemp.mp:  c1:";
-  show c1;
-
-  draw origin -- (0, 0, 1cm) with_color c1;
-    
 endfig with_projection parallel_x_z;
 
 verbatim_metapost "end;";

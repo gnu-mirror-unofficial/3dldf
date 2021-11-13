@@ -1657,6 +1657,7 @@ Added entries for |binary|, |octal|, and |hexadecimal|.
   name_map[CAPITALIZE] = "CAPITALIZE";
   name_map[GET_NAME]   = "GET_NAME";
   name_map[SET_NAME]   = "SET_NAME";
+  name_map[UNSET_NAME] = "UNSET_NAME";
 
 @q **** (4) Types for conic sections, quadric surfaces, and related types.@> 
 @*3 Types for conic sections, quadric surfaces, and related types.
@@ -3451,8 +3452,7 @@ Added this section.
 @*1 {\bf string\_primary\_rule\_func}.
 \initials{LDF 2005.11.03.}
 
-This function uses the ``Registered Trademark'' character,
-decimal 174, octal 256.
+This function uses the ``Registered Trademark'' character, decimal 174, octal 256, hexadecimal AE.
 \initials{LDF 2005.11.03.}
 
 \LOG
@@ -3467,54 +3467,73 @@ Added this function.
 void*
 Scan_Parse::string_primary_rule_func(void* v, void* parameter)
 {
+    bool DEBUG = false; /* |true| */ 
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr << "Entering `Scan_Parse::string_primary_rule_func'." << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
     if (!v)
        return 0;
 
     string* s = static_cast<string*>(v); 
 
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr << "In `Scan_Parse::string_primary_rule_func':" << endl
+             << "`*s' == " << *s << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
     string::size_type t;
 
     while(1)
-       {
-           t = s->find("\\\\"); 
-           if (t == string::npos)
-              break;
-           s->replace(t, 2, "®");  /* ``Registered Trademark'' symbol.  */
-       }
+    {
+        t = s->find("\\\\"); 
+        if (t == string::npos)
+           break;
+        s->replace(t, 2, "®");  /* ``Registered Trademark'' symbol.  */
+    }
 
     while(1)
-       {
-           t = s->find("\\n"); 
-           if (t == string::npos)
-              break;
-           s->replace(t, 2, "\n");
-       }
+    {
+        t = s->find("\\n"); 
+        if (t == string::npos)
+           break;
+        s->replace(t, 2, "\n");
+    }
 
     while(1)
-       {
-           t = s->find("\\t"); 
-           if (t == string::npos)
-              break;
-           s->replace(t, 2, "\t");
-       }
+    {
+        t = s->find("\\t"); 
+        if (t == string::npos)
+           break;
+        s->replace(t, 2, "\t");
+    }
 
     while(1)
-       {
-           t = s->find("\\\""); 
-           if (t == string::npos)
-              break;
-           s->replace(t, 2, "\"");
-       }
+    {
+        t = s->find("\\\""); 
+        if (t == string::npos)
+           break;
+        s->replace(t, 2, "\"");
+    }
 
     while(1)
-       {
-           t = s->find("®"); 
-           if (t == string::npos)
-              break;
-           s->replace(t, 1, "\\");
-       }
+    {
+        t = s->find("®"); 
+        if (t == string::npos)
+           break;
+        s->replace(t, 1, "\\");
+    }
 
-return v;
+    return v;
 
 }  /* End of |Scan_Parse::string_primary_rule_func| definition.  */
 

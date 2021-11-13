@@ -1117,8 +1117,9 @@ inline
 string
 get_name(void) const
 {
-
+#if 0
    cerr << "In `Color::get_name':  `name' == " << name << endl;
+#endif 
 
    return name;
 }
@@ -1141,8 +1142,14 @@ inline
 void
 set_name(string nname)
 {
+   bool DEBUG = false; /* |true| */ 
 
-   cerr << "In `Color::set_name':  `nname' == " << nname << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Color::set_name':  `nname' == " << nname << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    name = nname;
 }

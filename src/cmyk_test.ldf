@@ -67,14 +67,20 @@ verbatim_metapost "prologues := 3;";
 macro draw_sample;
 
 def draw_sample {color c, numeric xx_shift, numeric yy_shift} =
-  % message "get_name c:";
-  % show get_name c;
+  string s;
+  numeric shift_val;
+  shift_val := .1cm;
+  s := get_name c;
   fill q0 shifted (xx_shift, -yy_shift) with_color c;
-  label.bot("\hbox to 2cm{\hss " & capitalize (get_name c) & "\hss}",
-      p0 shifted (xx_shift, -(yy_shift + .1cm)));
-  label.bot("\hbox to 2cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
+  if length s > 0:
+    s := capitalize s;
+    label.bot("\hbox to 2.5cm{\hss " & s & "\hss}",
+	p0 shifted (xx_shift, -(yy_shift + .1cm)));
+    shift_val := .5cm;
+  fi;
+  label.bot("\hbox to 2.5cm{\hss (" & decimal cyan_part c & ", " & decimal magenta_part c &
       ", " & decimal yellow_part c & ", " & decimal black_part c &
-      ")\hss}", p0 shifted (xx_shift, -(yy_shift + .5cm)));
+      ")\hss}", p0 shifted (xx_shift, -(yy_shift + shift_val)));
 enddef;
 
 %% *** (3)
@@ -109,23 +115,84 @@ blue := (1, 1, 0, 0);
 message "blue:";
 show blue;
 
-color orange;
-orange := (0, .5, 1, 0);
+color cerulean_blue;
+cerulean_blue := (1, .5, 0, 0);
 
-message "orange:";
-show orange;
+%% !! START HERE:  LDF 2021.11.12.  I may need a `TO' token (or something)
+%% for "cerulean blue" to be recognized as a `string_expression'.
+
+set_name cerulean_blue to "cerulean blue";
+show cerulean_blue;
+
+color turquoise;
+turquoise := (1, 0, .5, 0);
+message "turquoise:";
+show turquoise;
+
+color prussian_blue;
+prussian_blue := (1, 0, 0, .5);
+set_name prussian_blue to "prussian blue";
+message "prussian_blue:";
+show prussian_blue;
 
 color violet;
 violet := (.5, 1, 0, 0);
-
 message "violet:";
 show violet;
 
-% color cerulean_blue;
-% cerulean_blue := (1, .5, 0, 0);
+color rose_madder;
+rose_madder := (0, 1, .5, 0);
+set_name rose_madder to "rose madder";
+message "rose_madder:";
+show rose_madder;
 
-% message "cerulean_blue:";
-% show cerulean_blue;
+color burgundy;
+burgundy := (0, 1, 0, .5);
+message "burgundy:";
+show burgundy;
+
+color A;
+A := (1, .5, .5, 0);
+unset_name A;
+message "A:";
+show A;
+
+color B;
+B := (1, .5, 0, .5);
+unset_name B;
+message "B:";
+show B;
+
+color C;
+C := (1, 0, .5, .5);
+unset_name C;
+message "C:";
+show C;
+
+color D;
+D := (.5, 1, .5, 0);
+unset_name D;
+message "D:";
+show D;
+
+color E;
+E := (0, 1, .5, .5);
+unset_name E;
+message "E:";
+show E;
+
+color F;
+F := (.5, 0, 1, .5);
+unset_name F;
+message "F:";
+show F;
+
+
+
+% color orange;
+% orange := (0, .5, 1, 0);
+% message "orange:";
+% show orange;
 
 
 %% *** (3) Figures
@@ -140,19 +207,42 @@ beginfig(0);
   draw_sample {magenta, 3, 0};
   draw_sample {yellow,  6, 0};
   draw_sample {black,   9, 0};
+endfig with_projection parallel_x_y;
 
+beginfig(1);
   draw_sample {red, 0, 3};
   draw_sample {green, 3, 3};
   draw_sample {blue, 6, 3};
-
-  draw_sample {orange, 0, 6};
-  draw_sample {violet, 3, 6};
-%  draw_sample {cerulean_blue, 6, 6};
-
-
 endfig with_projection parallel_x_y;
+
+beginfig(2);
+  draw_sample {cerulean_blue, 0, 6};
+  draw_sample {turquoise, 3, 6};
+  draw_sample {prussian_blue, 6, 6};
+  draw_sample {violet, 9, 6};
+  draw_sample {rose_madder, 12, 6};
+  draw_sample {burgundy, 15, 6};
+endfig with_projection parallel_x_y;
+
+beginfig(3);
+  draw_sample {A, 0, 9.5};
+  draw_sample {B, 3, 9.5};
+  draw_sample {C, 6, 9.5};
+  draw_sample {D, 9, 9.5};
+  draw_sample {E, 12, 9.5};
+  draw_sample {F, 15, 9.5};
+endfig with_projection parallel_x_y;
+
+
+
+
+% draw_sample {orange, 9, 6};
+
+
+
 verbatim_metapost "end;";
 end;
+
 
 
   % fill q0 with_color cyan;
