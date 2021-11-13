@@ -1411,7 +1411,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `string_secondary "
@@ -1427,12 +1427,27 @@ Added this rule.
 
      string *s = static_cast<string*>(@=$2@>);
 
+     bool upper_flag = true;
 
      if (!s->empty())
-        (*s)[0] = toupper((*s)[0]);
-
-     for (int i = 1; i < s->length(); ++i)
-        (*s)[i] = tolower((*s)[i]);
+     {
+        for (int i = 0; i < s->length(); ++i)
+        {
+            if (upper_flag && isalpha((*s)[i]))
+            {
+               (*s)[i] = toupper((*s)[i]);
+               upper_flag = false;
+            }
+            else if (isblank((*s)[i]))
+            {
+               upper_flag = true;
+            }
+            else if (isalpha((*s)[i]))
+            {
+               (*s)[i] = tolower((*s)[i]);
+            }
+        }        
+     }
 
      @=$$@> = static_cast<void*>(s); 
 
