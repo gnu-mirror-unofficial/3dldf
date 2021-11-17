@@ -1657,18 +1657,25 @@ sphrprj2.dvi: sphrprj2.txt sphrprj2.1
 sphrprj2.pdf: sphrprj2.dvi
 	dvipdfmx sphrprj2.dvi 
 
+color_samples.mp: color_samples.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf color_samples.ldf 
 
-cmyk_test.mp: cmyk_test.ldf 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf cmyk_test.ldf 
+color_samples.0 color_samples.1: color_samples.mp
+	mpost -numbersystem "double" color_samples.mp
 
-cmyk_test.0 cmyk_test.1: cmyk_test.mp
-	mpost -numbersystem "double" cmyk_test.mp
+color_samples.dvi: color_samples.txt color_samples.0
+	tex color_samples.txt
 
-cmyk_test.dvi: cmyk_test.txt cmyk_test.1
-	tex cmyk_test.txt
+color_samples.pdf: color_samples.dvi
+	dvipdfmx color_samples.dvi 
 
-cmyk_test.pdf: cmyk_test.dvi
-	dvipdfmx cmyk_test.dvi 
+color_samples_a3.dvi: color_samples_a3.txt color_samples.1
+	tex color_samples_a3.txt
+
+color_samples_a3.pdf: color_samples_a3.dvi
+	dvipdfmx color_samples_a3.dvi 
+
+
 
 
 
