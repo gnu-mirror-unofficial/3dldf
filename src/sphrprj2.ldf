@@ -58,13 +58,24 @@ verbatim_metapost "prologues := 3;";
 
 triangle a[][];
 path r[][];
+point A[][][];
+point P[];
+path Q[];
+
+
 
 %% **** (4) Macro draw_sphere_projection
 
 macro draw_sphere_projection;
 
+%% !! START HERE:  LDF 2021.11.18.  Add parameters to macro.
+% numeric small_pen_diam;
+% numeric medium_pen_diam;
+% numeric large_pen_diam;
+
 def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashed} =
 
+  
   numeric i, j;
 
   point p[];
@@ -99,6 +110,8 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
 
 
   path m[];
+
+
   
 %% *** (3) Set boolean values
 
@@ -475,11 +488,59 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
   
 %% **** (4)
 
+  for i = 0 upto 11:
+    for j = 0 upto 9:
+      A[i][j][0] := get_point 0 a[i][j];
+      A[i][j][1] := get_point 1 a[i][j];
+      A[i][j][2] := get_point 2 a[i][j];
+      A[i][j][3] := mediate(get_point 0 a[i][j], get_point 1 a[i][j]);
+      A[i][j][4] := mediate(get_point 1 a[i][j], get_point 2 a[i][j]);
+      A[i][j][5] := mediate(get_point 2 a[i][j], get_point 0 a[i][j]);
+    endfor;
+  endfor;
+      
+  
+  P0 := A[0][9][2];
+  P1 := A[1][9][2];
+  P2 := (.5 * unit_vector(P1 - P0)) shifted by P0;
+  P3 := (.5 * unit_vector(P0 - P1)) shifted by P1;
+  P4 := P2 shifted (0, 1);
+  P5 := P0 rotated_around (P2, P4) 90;
+  P6 := P5 shifted by (P3 - P2);
+
+  P7 := mediate(P0, P2);
+  P8 := P7 rotated (180, 0);
+
+  P9  := P7 shifted (.5cm, 0);
+  P10 := P8 shifted (.5cm, 0);
+
+  Q0 := P2 -- P5 -- P6 -- P3;
+
+  Q1 := P8 -- P10 -- P9 -- P7;
+
+  % dotlabel.top("${A_0^9}_0$", A[0][9][0]);
+  % dotlabel.top("${A_0^9}_1$", A[0][9][1]);
+  % dotlabel.top("${A_0^9}_2$", A[0][9][2]);
+  % dotlabel.top("${A_0^9}_3$", A[0][9][3]);
+  % dotlabel.top("${A_0^9}_4$", A[0][9][4]);
+  % dotlabel.top("${A_0^9}_5$", A[0][9][5]);
+
+  
+  % dotlabel.rt("$P_0$", P0);
+  % dotlabel.rt("$P_1$", P1);
+  % dotlabel.rt("$P_2$", P2);
+  % dotlabel.rt("$P_3$", P3);
+  % dotlabel.rt("$P_5$", P5);
+  % dotlabel.rt("$P_6$", P6);
+  % dotlabel.rt("$P_7$", P7);
+  % dotlabel.rt("$P_8$", P8);
+  % dotlabel.rt("$P_9$", P10);
+  % dotlabel.rt("$P_10$", P10);
+
 enddef;
 
 
 %% *** (3) Figure 0, 8cm
-
 
 
 numeric radius;
@@ -506,7 +567,87 @@ numeric radius;
 % cv += pink;
 
 picture v[];
+
+%% *** (3)
+
 beginfig(0);
+  radius := 8;
+  draw_sphere_projection {radius, true, true};
+
+  for i = 0 step 30 until 330:
+    draw (Q0 rotated (0, i)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    undrawdot P2 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    undrawdot P3 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+    draw (Q1 rotated (0, i)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    undrawdot P7 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    undrawdot P8 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    
+  endfor;
+
+  for i = 0 upto 11:
+    for j = 0 upto 9:
+      draw a[i][j] with_pen pencircle scaled (1mm, 1mm, 1mm);
+    endfor;
+  endfor;
+
+  for i = 0 upto 11:
+    for j = 0 upto 9:
+      undraw a[i][j] with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    endfor;
+  endfor;
+
+
+  
+  drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
+  undrawdot origin with_pen pencircle scaled (.25cm, .25cm, .25cm);
+  draw (-.25cm, 0) -- (.25cm, 0) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  drawdot origin with_pen pencircle scaled (.5mm, .5mm, .5mm);
+
+
+
+
+  
+endfig with_projection parallel_x_z no_sort;
+
+%% *** (3)
+
+beginfig(1);
+  radius := 8;
+  draw_sphere_projection {radius, true, true};
+
+  for i = 0 step 30 until 330:
+    draw (Q0 rotated (0, i)) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    undrawdot P2 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    undrawdot P3 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+
+    draw (Q1 rotated (0, i)) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    undrawdot P7 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    undrawdot P8 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    
+  endfor;
+
+  for i = 0 upto 11:
+    for j = 0 upto 9:
+      draw a[i][j] with_pen pencircle scaled (2mm, 2mm, 2mm);
+      undraw a[i][j] with_pen pencircle scaled (1mm, 1mm, 1mm);
+    endfor;
+  endfor;
+
+
+  drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
+  undrawdot origin with_pen pencircle scaled (.25cm, .25cm, .25cm);
+  drawdot origin with_pen pencircle scaled (.5mm, .5mm, .5mm);
+  draw (-.25cm, 0) -- (.25cm, 0) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+endfig with_projection parallel_x_z no_sort;
+
+
+
+%% *** (3)
+
+beginfig(2);
   radius := 8;
   draw_sphere_projection {radius, true, true};
   fill a[0][0] with_color blue;
@@ -522,7 +663,6 @@ beginfig(0);
   fill a[8][0] with_color orange;
   fill a[10][0] with_color orange;
 endfig with_projection parallel_x_z no_sort;
-
 
 %% *** (3) End of 3DLDF code
 
