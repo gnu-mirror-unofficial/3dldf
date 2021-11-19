@@ -1,4 +1,4 @@
-%%%% sphrprj2.ldf
+%%% sphrprj2.ldf
 %%%% Created by Laurence D. Finston (LDF) Wed 10 Nov 2021 07:31:55 AM CET
 
 %% * (1) Copyright and License.
@@ -516,7 +516,7 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
 
   Q0 := P2 -- P5 -- P6 -- P3;
 
-  Q1 := P8 -- P10 -- P9 -- P7;
+  Q1 := P8 -- P10 -- P9 -- P7 -- A[0][9][2] -- cycle;
 
   % dotlabel.top("${A_0^9}_0$", A[0][9][0]);
   % dotlabel.top("${A_0^9}_1$", A[0][9][1]);
@@ -534,8 +534,40 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
   % dotlabel.rt("$P_6$", P6);
   % dotlabel.rt("$P_7$", P7);
   % dotlabel.rt("$P_8$", P8);
-  % dotlabel.rt("$P_9$", P10);
-  % dotlabel.rt("$P_10$", P10);
+  % dotlabel.rt("$P_9$", P9);
+  % dotlabel.rt("$P_{10}$", P10);
+
+  P11 := mediate(P2, P3, .2);
+  P12 := mediate(P2, P3, .3);
+
+  P13 := mediate(P5, P6, .2);
+  P14 := mediate(P5, P6, .3);
+
+  P15 := mediate(P3, P2, .2);
+  P16 := mediate(P3, P2, .3);
+
+  P17 := mediate(P6, P5, .2);
+  P18 := mediate(P6, P5, .3);
+
+  % dotlabel.lft("$P_{11}$", P11);
+  % dotlabel.lft("$P_{12}$", P12);
+
+  % dotlabel.rt("$P_{13}$", P13);
+  % dotlabel.rt("$P_{14}$", P14);
+
+  % dotlabel.lft("$P_{15}$", P15);
+  % dotlabel.lft("$P_{16}$", P16);
+
+  % dotlabel.rt("$P_{17}$", P17);
+  % dotlabel.rt("$P_{18}$", P18);
+  
+  Q2 := P11 -- P13 -- P14 -- P12 -- cycle;
+  Q3 := P16 -- P18 -- P17 -- P15 -- cycle;
+
+  Q4 := P2 -- P5 -- P13 -- P11 -- cycle;
+  Q5 := P12 -- P14 -- P18 -- P16 -- cycle;
+  Q6 := P15 -- P17 -- P6 -- P3 -- cycle;
+  
 
 enddef;
 
@@ -575,14 +607,18 @@ beginfig(0);
   draw_sphere_projection {radius, true, true};
 
   for i = 0 step 30 until 330:
-    draw (Q0 rotated (0, i)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    %draw (Q0 rotated (0, i)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
     undrawdot P2 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
     undrawdot P3 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
-    draw (Q1 rotated (0, i)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    filldraw (Q1 rotated (0, i)) with_fill_color grey with_pen pencircle scaled (.25mm, .25mm, .25mm);
     undrawdot P7 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
     undrawdot P8 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    
+
+    filldraw (Q4 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    filldraw (Q5 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    filldraw (Q6 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
+        
   endfor;
 
   for i = 0 upto 11:
@@ -597,17 +633,13 @@ beginfig(0);
     endfor;
   endfor;
 
-
-  
   drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
   undrawdot origin with_pen pencircle scaled (.25cm, .25cm, .25cm);
+  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
   draw (-.25cm, 0) -- (.25cm, 0) with_pen pencircle scaled (.25mm, .25mm, .25mm);
   draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  drawdot origin with_pen pencircle scaled (.5mm, .5mm, .5mm);
-
-
-
-
+  undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
+  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
   
 endfig with_projection parallel_x_z no_sort;
 
@@ -618,30 +650,57 @@ beginfig(1);
   draw_sphere_projection {radius, true, true};
 
   for i = 0 step 30 until 330:
-    draw (Q0 rotated (0, i)) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    %draw (Q0 rotated (0, i)) with_pen pencircle scaled (.5mm, .5mm, .5mm);
     undrawdot P2 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
     undrawdot P3 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
 
-    draw (Q1 rotated (0, i)) with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    filldraw (Q1 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
     undrawdot P7 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
     undrawdot P8 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    
+
+    filldraw (Q4 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    filldraw (Q5 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
+    filldraw (Q6 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
   endfor;
 
   for i = 0 upto 11:
     for j = 0 upto 9:
       draw a[i][j] with_pen pencircle scaled (2mm, 2mm, 2mm);
+    endfor;
+  endfor;
+
+  for i = 0 upto 11:
+    for j = 0 upto 9:
       undraw a[i][j] with_pen pencircle scaled (1mm, 1mm, 1mm);
+    endfor;
+  endfor;
+
+
+  for i = 0 upto 11:
+    for j = 0 upto 9:
+      undraw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+      draw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm) dashed with_dots scaled (.5mm, .5mm);
+      drawdot A[i][j][0] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+      drawdot A[i][j][1] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+      drawdot A[i][j][2] with_pen pencircle scaled (.75mm, .75mm, .75mm);
     endfor;
   endfor;
 
 
   drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
   undrawdot origin with_pen pencircle scaled (.25cm, .25cm, .25cm);
-  drawdot origin with_pen pencircle scaled (.5mm, .5mm, .5mm);
+  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
   draw (-.25cm, 0) -- (.25cm, 0) with_pen pencircle scaled (.25mm, .25mm, .25mm);
   draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
+  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
+
+
+
+
 endfig with_projection parallel_x_z no_sort;
+
+
 
 
 
