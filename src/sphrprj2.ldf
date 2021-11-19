@@ -107,6 +107,11 @@ def draw_sphere_projection {numeric rradius,
 
   pickup small_pen;
 
+  if not do_bands:
+    do_dots := false;
+  fi;
+
+
 %% **** (4)
 
   p0 := origin;
@@ -564,28 +569,44 @@ def draw_sphere_projection {numeric rradius,
 
     for i = 0 upto 11:
       for j = 0 upto 9:
-	undraw a[i][j] with_pen pencircle scaled (.5mm, .5mm, .5mm);
+	undraw a[i][j] with_pen medium_pen;
       endfor;
     endfor;
   fi;
 
+%% **** (4)
 
+  if do_dots:
+    for i = 0 upto 11:
+      for j = 0 upto 9:
+	undraw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+	draw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm) dashed with_dots scaled (.5mm, .5mm);
+	drawdot A[i][j][0] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+	drawdot A[i][j][1] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+	drawdot A[i][j][2] with_pen pencircle scaled (.75mm, .75mm, .75mm);
+      endfor;
+    endfor;
+  fi;
 
+%% **** (4) Draw dot and cross-hairs at origin.
   
-  drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
-  undrawdot origin with_pen small_pen;
-  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
+  % drawdot origin with_pen pencircle scaled (small_pen_size + 2pt,
+  %                                           small_pen_size + 2pt, 
+  %                                           small_pen_size + 2pt);
+
+  % undrawdot origin with_pen small_pen;
+  % drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
   draw (-.25cm, 0) -- (.25cm, 0) with_pen small_pen;
   draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen small_pen;
   undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
   drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
 
+%% **** (4)
   
 enddef;
 
 
 %% *** (3) Figure 0, 8cm
-
 
 numeric radius;
 
@@ -593,79 +614,22 @@ numeric radius;
 
 beginfig(0);
   radius := 8;
-  draw_sphere_projection {radius, .25mm, .5mm, 1mm, true, true, true, true};
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, true, false, true, true};
 endfig with_projection parallel_x_z no_sort;
-
-verbatim_metapost "end;";
-
-end;
 
 %% *** (3)
 
 beginfig(1);
   radius := 8;
-  draw_sphere_projection {radius, true, true};
-
-  for i = 0 step 30 until 330:
-    %draw (Q0 rotated (0, i)) with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    undrawdot P2 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    undrawdot P3 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
-
-    filldraw (Q1 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    undrawdot P7 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    undrawdot P8 rotated (0, i) with_pen pencircle scaled (.5mm, .5mm, .5mm);
-
-    filldraw (Q4 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    filldraw (Q5 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    filldraw (Q6 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
-  endfor;
-
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      draw a[i][j] with_pen pencircle scaled (2mm, 2mm, 2mm);
-    endfor;
-  endfor;
-
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      undraw a[i][j] with_pen large_pen;
-    endfor;
-  endfor;
-
-
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      undraw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-      draw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm) dashed with_dots scaled (.5mm, .5mm);
-      drawdot A[i][j][0] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-      drawdot A[i][j][1] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-      drawdot A[i][j][2] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-    endfor;
-  endfor;
-
-
-  drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
-  undrawdot origin with_pen small_pen;
-  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-  draw (-.25cm, 0) -- (.25cm, 0) with_pen small_pen;
-  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen small_pen;
-  undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
-  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-
-
-
-
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, true, true, true, true};
 endfig with_projection parallel_x_z no_sort;
-
-
-
 
 
 %% *** (3)
 
 beginfig(2);
   radius := 8;
-  draw_sphere_projection {radius, true, true};
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, false, false, true, true};
   fill a[0][0] with_color blue;
   fill a[6][0] with_color blue;
   fill a[3][0] with_color red;
