@@ -4,7 +4,7 @@
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
-%%%% Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc.  
+%%%% Copyright (C) 2021 The Free Software Foundation, Inc.  
 
 %%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
 %%%% it under the terms of the GNU General Public License as published by 
@@ -63,548 +63,7 @@ point P[];
 path Q[];
 
 
-
-%% **** (4) Macro draw_sphere_projection
-
-macro draw_sphere_projection;
-
-def draw_sphere_projection {numeric rradius,
-                            numeric small_pen_size,
-                            numeric medium_pen_size,
-                            numeric large_pen_size,
-                            boolean do_bands,
-                            boolean do_dots,
-                            boolean do_labels,
-                            boolean do_dashed} =
-  
-  numeric i, j;
-
-  point p[];
-  point temp_pt[];
-  
-  transform t[];
-
-  picture vv[];
-
-  pen small_pen;
-  pen medium_pen;
-  pen large_pen;
-
-  small_pen := pencircle scaled (small_pen_size, small_pen_size, small_pen_size);  
-  medium_pen := pencircle scaled (medium_pen_size, medium_pen_size, medium_pen_size);
-  large_pen  := pencircle scaled (large_pen_size, large_pen_size, large_pen_size);
-
-  string s;
-
-  numeric ang;
-  
-  ang := 15;  %% Arcs of (2 * ang == 30) degrees are used to find the points
-              %% on the sphere that represent the corners of the trapezoids
-              %% into which the surface of the sphere is divided.
-              %% LDF 2010.08.06.
-
-  path m[];
-
-  pickup small_pen;
-
-  if not do_bands:
-    do_dots := false;
-  fi;
-
-
-%% **** (4)
-
-  p0 := origin;
-  p1 := (0, 1, 0);
-
-  p2 := (rradius, 0);
-
-  p3 := p2 rotated (0, 0,  ang);
-  p4 := p2 rotated (0, 0, -ang);
-
-  rotate p3 (0, ang);
-  rotate p4 (0, ang);
-
-  p5 := p2 rotated (0, 0, ang);
-  p6 := p2 rotated (0, 0, -ang);
-
-  rotate p5 (0, -ang);
-  rotate p6 (0, -ang);
-
-% message "p2:";
-% show p2;
-
-% message "p3:";
-% show p3;
-
-% message "p4:";
-% show p4;
-
-% message "p5:";
-% show p5;
-
-% message "p6:";
-% show p6;
-
-
-  m0 := p5 -- p3 -- p2 -- cycle;
-  %draw m0;
-  m1 := p5 -- p2 -- p6 -- cycle;
-  %draw m1;
-  m2 := p6 -- p4 -- p2 -- cycle;
-  %draw m2;
-  m3 := p4 -- p3 -- p2 -- cycle;
-  %draw m3;
-
-  
-%% **** (4)
-
-  p7 := p2 rotated (0, 0,  3ang);
-  rotate p7 (0, ang);
-
-  p8  := p2 rotated (0, 0, 3ang);
-
-  rotate p8 (0, -ang);
-
-  p9 := p2 rotated (0, 0, 2ang);
-
-% message "magnitude (p9 - p7):"; 
-% show magnitude (p9 - p7);
-
-% message "magnitude (p9 - p8):"; 
-% show magnitude (p9 - p8);
-
-% message "p7:";
-% show p7;
-
-% message "p8:";
-% show p8;
-
-% message "p9:";
-% show p9;
-
-  m4 := p8 -- p9 -- p7 -- cycle;
-  %draw m4;
-  m5 := p8 -- p9 -- p5 -- cycle;
-  %draw m5;
-  m6 := p5 -- p9 -- p3 -- cycle;
-  %draw m6;
-  m7 := p3 -- p9 -- p7 -- cycle;
-  %draw m7;
-
-  
-%% **** (4)
-
-  p10 := p2 rotated (0, 0,  -3ang);
-  rotate p10 (0, ang);
-
-  p11  := p2 rotated (0, 0, -3ang);
-
-  rotate p11 (0, -ang);
-
-  p12 := p2 rotated (0, 0, -2ang);
-
-% message "magnitude (p12 - p10):"; 
-% show magnitude (p12 - p10);
-
-% message "magnitude (p12 - p11):"; 
-% show magnitude (p12 - p11);
-
-% message "p10:";
-% show p10;
-
-% message "p11:";
-% show p11;
-
-% message "p12:";
-% show p12;
-
-  m8 := p6 -- p12 -- p11  -- cycle;
-  %draw m8;
-  m9 := p11 -- p12 -- p10 -- cycle;
-  %draw m9;
-  m10 := p10 -- p12 -- p4  -- cycle;
-  %draw m10;
-  m11 := p4 -- p12 -- p6   -- cycle;
-  %draw m11;
-
-%% **** (4)
-
-  p13 := p2 rotated (0, 0,  5ang);
-  rotate p13 (0, ang);
-
-  p14  := p2 rotated (0, 0, 5ang);
-  rotate p14 (0, -ang);
-
-  p15 := p2 rotated (0, 0, 4ang);
-
-% message "magnitude (p15 - p13):"; 
-% show magnitude (p15 - p13);
-
-% message "magnitude (p15 - p14):"; 
-% show magnitude (p15 - p14);
-
-% message "p13:";
-% show p13;
-
-% message "p14:";
-% show p14;
-
-% message "p15:";
-% show p15;
-
-  m12 := p14 -- p15 -- p8 -- cycle;
-  %draw m12;
-  m13 := p8 -- p15 -- p7 -- cycle;
-  %draw m13;
-  m14 := p7 -- p15 -- p13 -- cycle;
-  %draw m14;
-  m15 := p13 -- p15 -- p14 -- cycle;
-  %draw m15;
-
-%% **** (4)
-
-  p16 := p2 rotated (0, 0,  -5ang);
-  rotate p16 (0, ang);
-
-  p17  := p2 rotated (0, 0, -5ang);
-  rotate p17 (0, -ang);
-
-  p18 := p2 rotated (0, 0, -4ang);
-
-% message "magnitude (p18 - p16):"; 
-% show magnitude (p18 - p16);
-
-% message "magnitude (p18 - p17):"; 
-% show magnitude (p18 - p17);
-
-% message "p16:";
-% show p16;
-
-% message "p17:";
-% show p17;
-
-% message "p18:";
-% show p18;
-
-  m16 := p17 -- p18 -- p11 -- cycle;
-  %draw m16;
-  m17 := p10 -- p18 -- p11 -- cycle;
-  %draw m17;
-  m18 := p10 -- p18 -- p16 -- cycle;
-  %draw m18;
-  m19 := p16 -- p18 -- p17 -- cycle;
-  %draw m19;
-
-
-%% **** (4)
-
-  p19 := (0, rradius);
-  p20 := (0, -rradius);
-
-  m20 := p14 -- p19 -- p13 -- cycle;
-  %draw m20;
-  m21 := p16 -- p20 -- p17 -- cycle;
-  %draw m21;
-
-%% **** (4) This can be used to determine which triangles are on or above the x-z plane.
-%%          Since it's always the same, there's no need to calculate it.  The values
-%%          found are used explicitly below.
-%%          LDF 2021.11.10.
-
-  % numeric_vector nv;
-  
-  % n := 0;
-  % for i = 0 upto 21:
-  %   j := ypart (get_point 0 m[i]);
-  %   message "ypart (get_point 0 m[" & decimal i & "]):";
-  %   show j;
-  %   if j >= 0:
-  %     message "filling.";
-  %     fill m[i] with_color cv[n];
-  %     n += 1;
-  %     nv += i;
-  %   else:
-  %     message "Not filling.";
-  %   fi;
-  % endfor;
-
-  % message "size nv:";
-  % show size nv;
-  
-  % for i = 0 upto ((size nv) - 1):
-  %   message "nv[" & decimal i & "] == " & decimal nv[i];
-  %   j := nv[i];
-  %   label("{\largebx " & decimal j & "}", mediate(mediate(get_point 0 m[j], get_point 1 m[j]), get_point 2 m[j]));
-  % endfor;
-
-%% **** (4) These are the triangles that are on or above the x-z plane.
-
-  r[0][0] := m20;
-  r[0][1] := m15;
-  r[0][2] := m14;
-  r[0][3] := m12;
-  r[0][4] := m13;
-  r[0][5] := m4;
-  r[0][6] := m7;
-  r[0][7] := m5;
-  r[0][8] := m6;
-  r[0][9] := m0;
-
-  for j = 1 upto 11:
-    for i = 0 upto 9:
-      r[j][i] := r[0][i] rotated (0, j * 2ang);
-    endfor;
-  endfor;
-
-%% **** (4) "Flatten" the triangles onto the x-z plane.  That is, the `r' triangles are
-%%          copied (to `a') and the y-coordinates of all the points on the `a' triangles
-%%          are set to 0.  The resulting triangles are then drawn.
-%%          LDF 2021.11.10.
-  
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      temp_pt0 := get_point 0 r[i][j];
-      temp_pt1 := get_point 1 r[i][j];
-      temp_pt2 := get_point 2 r[i][j];
-
-      temp_pt3 := (xpart temp_pt0, 0, zpart temp_pt0);
-      temp_pt4 := (xpart temp_pt1, 0, zpart temp_pt1);
-      temp_pt5 := (xpart temp_pt2, 0, zpart temp_pt2);
-
-      set a[i][j] with_points (temp_pt3, temp_pt4, temp_pt5);
-      draw a[i][j];
-
-      if do_labels:
-	label("$a_{" & decimal i & "}^{" & decimal j & "}$",
-	    get_center a[i][j]);
-      fi;
-      
-    endfor;
-  endfor;
-  
-  % temp_pt6 := get_center a[11][9];
-  % show temp_pt6;
-
-  % dotlabel.top("0", get_point 0 a[11][9]);
-  % dotlabel.rt("1", get_point 1 a[11][9]);
-  % dotlabel.top("2", get_point 2 a[11][9]);
-
-%% **** (4) Tick marks and gray lines
-
-  point q[];
-  
-  q0 := (-(radius+1), 0, radius+1);
-  q1 := (0, 0, (radius+1));
-  q2 := (radius+1, 0, radius+1);
-  q3 := (-(radius+1), 0);
-  q4 := (radius+1, 0);
-  q5 := (-(radius+1), 0, -(radius+1));
-  q6 := (0, 0, -(radius+1));
-  draw q3 -- q4 dashed evenly with_color dark_gray with_pen medium_pen;
-  draw q1 -- q6 dashed evenly with_color dark_gray with_pen medium_pen;
-
-
-  
-%% **** (4)
-  
-  drawdot origin with_color white with_pen small_pen;
-  drawdot origin with_color black with_pen large_pen;
-
-  draw q0 -- (q0 shifted (-.5cm, 0));
-  draw q0 -- (q0 shifted (.5cm, 0));
-  draw q0 -- (q0 shifted (0, 0, .5cm));
-  draw q0 -- (q0 shifted (0, 0, -.5cm));
-
-  draw q1 -- (q1 shifted (-.5cm, 0));
-  draw q1 -- (q1 shifted (.5cm, 0));
-  draw q1 -- (q1 shifted (0, 0, .5cm));
-  draw q1 -- (q1 shifted (0, 0, -.5cm));
-
-  label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
-
-  if do_dashed:
-    draw q2 -- (q2 shifted (-.5cm, 0));
-    draw q2 -- (q2 shifted (.5cm, 0));
-    draw q2 -- (q2 shifted (0, 0, .5cm));
-    draw q2 -- (q2 shifted (0, 0, -.5cm));
-
-
-    draw q3 -- (q3 shifted (-.5cm, 0));
-    draw q3 -- (q3 shifted (.5cm, 0));
-    draw q3 -- (q3 shifted (0, 0, .5cm));
-    draw q3 -- (q3 shifted (0, 0, -.5cm));
-
-
-    draw q4 -- (q4 shifted (-.5cm, 0));
-    draw q4 -- (q4 shifted (.5cm, 0));
-    draw q4 -- (q4 shifted (0, 0, .5cm));
-    draw q4 -- (q4 shifted (0, 0, -.5cm));
-
-    draw q5 -- (q5 shifted (-.5cm, 0));
-    draw q5 -- (q5 shifted (.5cm, 0));
-    draw q5 -- (q5 shifted (0, 0, .5cm));
-    draw q5 -- (q5 shifted (0, 0, -.5cm));
-
-    draw q6 -- (q6 shifted (-.5cm, 0));
-    draw q6 -- (q6 shifted (.5cm, 0));
-    draw q6 -- (q6 shifted (0, 0, .5cm));
-    draw q6 -- (q6 shifted (0, 0, -.5cm));
-
-    q7 := (radius+1, 0, -(radius+1));
-    draw q7 -- (q7 shifted (-.5cm, 0));
-    draw q7 -- (q7 shifted (.5cm, 0));
-    draw q7 -- (q7 shifted (0, 0, .5cm));
-    draw q7 -- (q7 shifted (0, 0, -.5cm));
-  fi;
-
-
-  
-%% **** (4)
-
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      A[i][j][0] := get_point 0 a[i][j];
-      A[i][j][1] := get_point 1 a[i][j];
-      A[i][j][2] := get_point 2 a[i][j];
-      A[i][j][3] := mediate(get_point 0 a[i][j], get_point 1 a[i][j]);
-      A[i][j][4] := mediate(get_point 1 a[i][j], get_point 2 a[i][j]);
-      A[i][j][5] := mediate(get_point 2 a[i][j], get_point 0 a[i][j]);
-    endfor;
-  endfor;
-      
-  
-  P0 := A[0][9][2];
-  P1 := A[1][9][2];
-  P2 := (.5 * unit_vector(P1 - P0)) shifted by P0;
-  P3 := (.5 * unit_vector(P0 - P1)) shifted by P1;
-  P4 := P2 shifted (0, 1);
-  P5 := P0 rotated_around (P2, P4) 90;
-  P6 := P5 shifted by (P3 - P2);
-
-  P7 := mediate(P0, P2);
-  P8 := P7 rotated (180, 0);
-
-  P9  := P7 shifted (.5cm, 0);
-  P10 := P8 shifted (.5cm, 0);
-
-  Q0 := P2 -- P5 -- P6 -- P3;
-
-  Q1 := P8 -- P10 -- P9 -- P7 -- A[0][9][2] -- cycle;
-
-  % dotlabel.top("${A_0^9}_0$", A[0][9][0]);
-  % dotlabel.top("${A_0^9}_1$", A[0][9][1]);
-  % dotlabel.top("${A_0^9}_2$", A[0][9][2]);
-  % dotlabel.top("${A_0^9}_3$", A[0][9][3]);
-  % dotlabel.top("${A_0^9}_4$", A[0][9][4]);
-  % dotlabel.top("${A_0^9}_5$", A[0][9][5]);
-
-  
-  % dotlabel.rt("$P_0$", P0);
-  % dotlabel.rt("$P_1$", P1);
-  % dotlabel.rt("$P_2$", P2);
-  % dotlabel.rt("$P_3$", P3);
-  % dotlabel.rt("$P_5$", P5);
-  % dotlabel.rt("$P_6$", P6);
-  % dotlabel.rt("$P_7$", P7);
-  % dotlabel.rt("$P_8$", P8);
-  % dotlabel.rt("$P_9$", P9);
-  % dotlabel.rt("$P_{10}$", P10);
-
-  P11 := mediate(P2, P3, .2);
-  P12 := mediate(P2, P3, .3);
-
-  P13 := mediate(P5, P6, .2);
-  P14 := mediate(P5, P6, .3);
-
-  P15 := mediate(P3, P2, .2);
-  P16 := mediate(P3, P2, .3);
-
-  P17 := mediate(P6, P5, .2);
-  P18 := mediate(P6, P5, .3);
-
-  % dotlabel.lft("$P_{11}$", P11);
-  % dotlabel.lft("$P_{12}$", P12);
-
-  % dotlabel.rt("$P_{13}$", P13);
-  % dotlabel.rt("$P_{14}$", P14);
-
-  % dotlabel.lft("$P_{15}$", P15);
-  % dotlabel.lft("$P_{16}$", P16);
-
-  % dotlabel.rt("$P_{17}$", P17);
-  % dotlabel.rt("$P_{18}$", P18);
-  
-  Q2 := P11 -- P13 -- P14 -- P12 -- cycle;
-  Q3 := P16 -- P18 -- P17 -- P15 -- cycle;
-
-  Q4 := P2 -- P5 -- P13 -- P11 -- cycle;
-  Q5 := P12 -- P14 -- P18 -- P16 -- cycle;
-  Q6 := P15 -- P17 -- P6 -- P3 -- cycle;
-
-  if do_bands:
-    for i = 0 step 30 until 330:
-    %draw (Q0 rotated (0, i)) with_pen small_pen;
-      undrawdot P2 rotated (0, i) with_pen small_pen;
-      undrawdot P3 rotated (0, i) with_pen small_pen;
-
-      filldraw (Q1 rotated (0, i)) with_fill_color grey with_pen small_pen;
-      undrawdot P7 rotated (0, i) with_pen small_pen;
-      undrawdot P8 rotated (0, i) with_pen small_pen;
-
-      filldraw (Q4 rotated (0, i)) with_fill_color light_gray
-	with_pen small_pen;
-      filldraw (Q5 rotated (0, i)) with_fill_color light_gray
-	with_pen small_pen;
-      filldraw (Q6 rotated (0, i)) with_fill_color light_gray
-	with_pen small_pen;
-      
-    endfor;
-
-    for i = 0 upto 11:
-      for j = 0 upto 9:
-	draw a[i][j] with_pen large_pen;
-      endfor;
-    endfor;
-
-    for i = 0 upto 11:
-      for j = 0 upto 9:
-	undraw a[i][j] with_pen medium_pen;
-      endfor;
-    endfor;
-  fi;
-
-%% **** (4)
-
-  if do_dots:
-    for i = 0 upto 11:
-      for j = 0 upto 9:
-	undraw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-	draw a[i][j] with_pen pencircle scaled (.75mm, .75mm, .75mm) dashed with_dots scaled (.5mm, .5mm);
-	drawdot A[i][j][0] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-	drawdot A[i][j][1] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-	drawdot A[i][j][2] with_pen pencircle scaled (.75mm, .75mm, .75mm);
-      endfor;
-    endfor;
-  fi;
-
-%% **** (4) Draw dot and cross-hairs at origin.
-  
-  % drawdot origin with_pen pencircle scaled (small_pen_size + 2pt,
-  %                                           small_pen_size + 2pt, 
-  %                                           small_pen_size + 2pt);
-
-  % undrawdot origin with_pen small_pen;
-  % drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-  draw (-.25cm, 0) -- (.25cm, 0) with_pen small_pen;
-  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen small_pen;
-  undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
-  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-
-%% **** (4)
-  
-enddef;
-
+input "sphrproj.lmc";
 
 %% *** (3) Figure 0, 8cm
 
@@ -614,22 +73,37 @@ numeric radius;
 
 beginfig(0);
   radius := 8;
-  draw_sphere_projection {radius, .25mm, .5mm, 1mm, true, false, true, true};
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, true, false, false, true};
 endfig with_projection parallel_x_z no_sort;
 
 %% *** (3)
 
 beginfig(1);
   radius := 8;
-  draw_sphere_projection {radius, .25mm, .5mm, 1mm, true, true, true, true};
+  draw_sphere_projection {radius, .75mm, 1mm, 2.5mm, .75mm, true, true, false, true};
 endfig with_projection parallel_x_z no_sort;
-
 
 %% *** (3)
 
 beginfig(2);
+  radius := 10;
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, true, false, false, true};
+endfig with_projection parallel_x_z no_sort;
+
+%% *** (3)
+
+beginfig(3);
+  radius := 10;
+  draw_sphere_projection {radius, .75mm, 1mm, 2.5mm, .75mm, true, true, false, true};
+endfig with_projection parallel_x_z no_sort;
+
+
+
+%% *** (3) Colored fields
+
+beginfig(10);
   radius := 8;
-  draw_sphere_projection {radius, .25mm, .5mm, 1mm, false, false, true, true};
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, false, false, true, true};
   fill a[0][0] with_color blue;
   fill a[6][0] with_color blue;
   fill a[3][0] with_color red;
@@ -649,8 +123,6 @@ endfig with_projection parallel_x_z no_sort;
 verbatim_metapost "end;";
 
 end;
-
-
 
 %% ** (2) 
 

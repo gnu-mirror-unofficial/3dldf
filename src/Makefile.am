@@ -1645,7 +1645,8 @@ sphrprj1.dvi: sphrprj1.txt sphrprj1.1
 sphrprj1.pdf: sphrprj1.dvi
 	dvipdfmx sphrprj1.dvi 
 
-sphrprj2.mp: sphrprj2.ldf 3dldf$(EXEEXT)
+
+sphrprj2.mp: sphrprj2.ldf sphrproj.lmc 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj2.ldf 
 
 sphrprj2.1: sphrprj2.mp
@@ -1656,6 +1657,12 @@ sphrprj2.dvi: sphrprj2.txt sphrprj2.1
 
 sphrprj2.pdf: sphrprj2.dvi
 	dvipdfmx sphrprj2.dvi 
+
+sphrprj2_a3.dvi: sphrprj2_a3.txt sphrprj2.1
+	tex sphrprj2_a3.txt
+
+sphrprj2_a3.pdf: sphrprj2_a3.dvi
+	dvipdfmx sphrprj2_a3.dvi 
 
 color_samples.mp: color_samples.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf color_samples.ldf 
