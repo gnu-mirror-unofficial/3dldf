@@ -68,13 +68,14 @@ path Q[];
 
 macro draw_sphere_projection;
 
-%% !! START HERE:  LDF 2021.11.18.  Add parameters to macro.
-% numeric small_pen_diam;
-% numeric medium_pen_diam;
-% numeric large_pen_diam;
-
-def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashed} =
-
+def draw_sphere_projection {numeric rradius,
+                            numeric small_pen_size,
+                            numeric medium_pen_size,
+                            numeric large_pen_size,
+                            boolean do_bands,
+                            boolean do_dots,
+                            boolean do_labels,
+                            boolean do_dashed} =
   
   numeric i, j;
 
@@ -85,12 +86,14 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
 
   picture vv[];
 
-  pen dashed_pen;
-  pen border_pen;
+  pen small_pen;
+  pen medium_pen;
   pen large_pen;
 
-  large_pen := pencircle scaled (.75mm, .75mm, .75mm);
-  
+  small_pen := pencircle scaled (small_pen_size, small_pen_size, small_pen_size);  
+  medium_pen := pencircle scaled (medium_pen_size, medium_pen_size, medium_pen_size);
+  large_pen  := pencircle scaled (large_pen_size, large_pen_size, large_pen_size);
+
   string s;
 
   numeric ang;
@@ -100,44 +103,9 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
               %% into which the surface of the sphere is divided.
               %% LDF 2010.08.06.
 
-  focus f[];
-
-  boolean do_thick_pens;
-
-  set f0 with_position  (3, 10, -20) 
-    with_direction (3, 10, 10) with_distance 20; 
-
-
-
   path m[];
 
-
-  
-%% *** (3) Set boolean values
-
-%% These can be used for testing.  LDF 2010.08.04.
-
-  do_thick_pens  	   := false; % true % true for testing
-
-  if do_thick_pens:
-    %message "Using thick pens";
-    dashed_pen := pencircle scaled (.75mm, .75mm, .75mm);
-    border_pen := pencircle scaled (.75mm, .75mm, .75mm);
-  else:
-    %message "Not using thick pens";
-    dashed_pen := pencircle scaled (.5mm, .5mm, .5mm);
-    border_pen := pencircle scaled (.5mm, .5mm, .5mm);
-  fi;
-
-% message "dashed_pen:"; 
-% show dashed_pen;
-
-% message "border_pen:"; 
-% show border_pen;
-
-%% **** (4)
-
-  pickup pencircle scaled (.25mm, .25mm, .25mm);
+  pickup small_pen;
 
 %% **** (4)
 
@@ -416,9 +384,9 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
   % dotlabel.top("0", get_point 0 a[11][9]);
   % dotlabel.rt("1", get_point 1 a[11][9]);
   % dotlabel.top("2", get_point 2 a[11][9]);
-  
+
 %% **** (4) Tick marks and gray lines
-  
+
   point q[];
   
   q0 := (-(radius+1), 0, radius+1);
@@ -428,15 +396,15 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
   q4 := (radius+1, 0);
   q5 := (-(radius+1), 0, -(radius+1));
   q6 := (0, 0, -(radius+1));
-  draw q3 -- q4 dashed evenly with_color dark_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
-  draw q1 -- q6 dashed evenly with_color dark_gray with_pen pencircle scaled (.5mm, .5mm, .5mm);
+  draw q3 -- q4 dashed evenly with_color dark_gray with_pen medium_pen;
+  draw q1 -- q6 dashed evenly with_color dark_gray with_pen medium_pen;
 
+
+  
 %% **** (4)
   
-  current_picture += vv0;
-
-  drawdot origin with_color white with_pen pencircle scaled (.25cm, .25cm, .25cm);
-  drawdot origin with_color black with_pen pencircle scaled (1mm, 1mm, 1mm);
+  drawdot origin with_color white with_pen small_pen;
+  drawdot origin with_color black with_pen large_pen;
 
   draw q0 -- (q0 shifted (-.5cm, 0));
   draw q0 -- (q0 shifted (.5cm, 0));
@@ -449,7 +417,6 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
   draw q1 -- (q1 shifted (0, 0, -.5cm));
 
   label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
-  
 
   if do_dashed:
     draw q2 -- (q2 shifted (-.5cm, 0));
@@ -485,6 +452,8 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
     draw q7 -- (q7 shifted (0, 0, .5cm));
     draw q7 -- (q7 shifted (0, 0, -.5cm));
   fi;
+
+
   
 %% **** (4)
 
@@ -567,8 +536,51 @@ def draw_sphere_projection {numeric rradius, boolean do_labels, boolean do_dashe
   Q4 := P2 -- P5 -- P13 -- P11 -- cycle;
   Q5 := P12 -- P14 -- P18 -- P16 -- cycle;
   Q6 := P15 -- P17 -- P6 -- P3 -- cycle;
-  
 
+  if do_bands:
+    for i = 0 step 30 until 330:
+    %draw (Q0 rotated (0, i)) with_pen small_pen;
+      undrawdot P2 rotated (0, i) with_pen small_pen;
+      undrawdot P3 rotated (0, i) with_pen small_pen;
+
+      filldraw (Q1 rotated (0, i)) with_fill_color grey with_pen small_pen;
+      undrawdot P7 rotated (0, i) with_pen small_pen;
+      undrawdot P8 rotated (0, i) with_pen small_pen;
+
+      filldraw (Q4 rotated (0, i)) with_fill_color light_gray
+	with_pen small_pen;
+      filldraw (Q5 rotated (0, i)) with_fill_color light_gray
+	with_pen small_pen;
+      filldraw (Q6 rotated (0, i)) with_fill_color light_gray
+	with_pen small_pen;
+      
+    endfor;
+
+    for i = 0 upto 11:
+      for j = 0 upto 9:
+	draw a[i][j] with_pen large_pen;
+      endfor;
+    endfor;
+
+    for i = 0 upto 11:
+      for j = 0 upto 9:
+	undraw a[i][j] with_pen pencircle scaled (.5mm, .5mm, .5mm);
+      endfor;
+    endfor;
+  fi;
+
+
+
+  
+  drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
+  undrawdot origin with_pen small_pen;
+  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
+  draw (-.25cm, 0) -- (.25cm, 0) with_pen small_pen;
+  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen small_pen;
+  undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
+  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
+
+  
 enddef;
 
 
@@ -577,71 +589,16 @@ enddef;
 
 numeric radius;
 
-% color_vector cv;
-
-% cv += red;
-% cv += green;
-% cv += blue;
-% cv += cyan;
-% cv += magenta;
-% cv += yellow;
-% cv += orange;
-% cv += violet;
-% cv += brown;
-% cv += yellow_green;
-% cv += green_yellow;
-% cv += dark_green;
-% cv += blue_violet;
-% cv += gray;
-% cv += light_gray;
-% cv += dark_gray;
-% cv += violet_red;
-% cv += pink;
-
-picture v[];
-
 %% *** (3)
 
 beginfig(0);
   radius := 8;
-  draw_sphere_projection {radius, true, true};
-
-  for i = 0 step 30 until 330:
-    %draw (Q0 rotated (0, i)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    undrawdot P2 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    undrawdot P3 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-
-    filldraw (Q1 rotated (0, i)) with_fill_color grey with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    undrawdot P7 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    undrawdot P8 rotated (0, i) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-
-    filldraw (Q4 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    filldraw (Q5 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
-    filldraw (Q6 rotated (0, i)) with_fill_color light_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
-        
-  endfor;
-
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      draw a[i][j] with_pen pencircle scaled (1mm, 1mm, 1mm);
-    endfor;
-  endfor;
-
-  for i = 0 upto 11:
-    for j = 0 upto 9:
-      undraw a[i][j] with_pen pencircle scaled (.5mm, .5mm, .5mm);
-    endfor;
-  endfor;
-
-  drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
-  undrawdot origin with_pen pencircle scaled (.25cm, .25cm, .25cm);
-  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-  draw (-.25cm, 0) -- (.25cm, 0) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
-  drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-  
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, true, true, true, true};
 endfig with_projection parallel_x_z no_sort;
+
+verbatim_metapost "end;";
+
+end;
 
 %% *** (3)
 
@@ -671,7 +628,7 @@ beginfig(1);
 
   for i = 0 upto 11:
     for j = 0 upto 9:
-      undraw a[i][j] with_pen pencircle scaled (1mm, 1mm, 1mm);
+      undraw a[i][j] with_pen large_pen;
     endfor;
   endfor;
 
@@ -688,10 +645,10 @@ beginfig(1);
 
 
   drawdot origin with_pen pencircle scaled (.25cm + 2pt, .25cm + 2pt, .25cm + 2pt);
-  undrawdot origin with_pen pencircle scaled (.25cm, .25cm, .25cm);
+  undrawdot origin with_pen small_pen;
   drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
-  draw (-.25cm, 0) -- (.25cm, 0) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw (-.25cm, 0) -- (.25cm, 0) with_pen small_pen;
+  draw (0, 0,  -.25cm) -- (0, 0, .25cm) with_pen small_pen;
   undrawdot origin with_pen pencircle scaled (1.25mm, 1.25mm, 1.25mm);
   drawdot origin with_pen pencircle scaled (.75mm, .75mm, .75mm);
 
@@ -740,7 +697,7 @@ end;
 %%       accessed via the local variables list.                              
 %%       LDF 2004.02.12.
 
-%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80) (ignore '(  
+%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80) (ignore '(  
 %% )) (setq outline-regexp "%% [*\f]+"))
 
 %% * (1) Local variables for Emacs.
