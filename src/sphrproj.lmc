@@ -65,10 +65,12 @@ def draw_sphere_projection {numeric rradius,
 
   point p[];
   point temp_pt[];
+  path m[];
   
   transform t[];
-
   picture vv[];
+
+  string s;
 
   pen small_pen;
   pen medium_pen;
@@ -80,7 +82,7 @@ def draw_sphere_projection {numeric rradius,
   large_pen  := pencircle scaled (large_pen_size, large_pen_size, large_pen_size);
   dot_pen    := pencircle scaled (dot_pen_size, dot_pen_size, dot_pen_size);
   
-  string s;
+
 
   numeric ang;
   
@@ -89,15 +91,13 @@ def draw_sphere_projection {numeric rradius,
               %% into which the surface of the sphere is divided.
               %% LDF 2010.08.06.
 
-  path m[];
 
-  pickup small_pen;
-
-  if not do_bands:
+  if not do_bands: %% If there are no bands, we don't need dots.  LDF 2021.11.19.
     do_dots := false;
   fi;
 
-
+  pickup small_pen;
+  
 %% **** (4)
 
   p0 := origin;
@@ -117,21 +117,20 @@ def draw_sphere_projection {numeric rradius,
   rotate p5 (0, -ang);
   rotate p6 (0, -ang);
 
-% message "p2:";
-% show p2;
+  % message "p2:";
+  % show p2;
 
-% message "p3:";
-% show p3;
+  % message "p3:";
+  % show p3;
 
-% message "p4:";
-% show p4;
+  % message "p4:";
+  % show p4;
 
-% message "p5:";
-% show p5;
+  % message "p5:";
+  % show p5;
 
-% message "p6:";
-% show p6;
-
+  % message "p6:";
+  % show p6;
 
   m0 := p5 -- p3 -- p2 -- cycle;
   %draw m0;
@@ -142,7 +141,6 @@ def draw_sphere_projection {numeric rradius,
   m3 := p4 -- p3 -- p2 -- cycle;
   %draw m3;
 
-  
 %% **** (4)
 
   p7 := p2 rotated (0, 0,  3ang);
@@ -177,8 +175,7 @@ def draw_sphere_projection {numeric rradius,
   %draw m6;
   m7 := p3 -- p9 -- p7 -- cycle;
   %draw m7;
-
-  
+ 
 %% **** (4)
 
   p10 := p2 rotated (0, 0,  -3ang);
@@ -190,20 +187,20 @@ def draw_sphere_projection {numeric rradius,
 
   p12 := p2 rotated (0, 0, -2ang);
 
-% message "magnitude (p12 - p10):"; 
-% show magnitude (p12 - p10);
+  % message "magnitude (p12 - p10):"; 
+  % show magnitude (p12 - p10);
 
-% message "magnitude (p12 - p11):"; 
-% show magnitude (p12 - p11);
+  % message "magnitude (p12 - p11):"; 
+  % show magnitude (p12 - p11);
 
-% message "p10:";
-% show p10;
+  % message "p10:";
+  % show p10;
 
-% message "p11:";
-% show p11;
+  % message "p11:";
+  % show p11;
 
-% message "p12:";
-% show p12;
+  % message "p12:";
+  % show p12;
 
   m8 := p6 -- p12 -- p11  -- cycle;
   %draw m8;
@@ -224,20 +221,20 @@ def draw_sphere_projection {numeric rradius,
 
   p15 := p2 rotated (0, 0, 4ang);
 
-% message "magnitude (p15 - p13):"; 
-% show magnitude (p15 - p13);
+  % message "magnitude (p15 - p13):"; 
+  % show magnitude (p15 - p13);
 
-% message "magnitude (p15 - p14):"; 
-% show magnitude (p15 - p14);
+  % message "magnitude (p15 - p14):"; 
+  % show magnitude (p15 - p14);
 
-% message "p13:";
-% show p13;
+  % message "p13:";
+  % show p13;
 
-% message "p14:";
-% show p14;
+  % message "p14:";
+  % show p14;
 
-% message "p15:";
-% show p15;
+  % message "p15:";
+  % show p15;
 
   m12 := p14 -- p15 -- p8 -- cycle;
   %draw m12;
@@ -258,20 +255,20 @@ def draw_sphere_projection {numeric rradius,
 
   p18 := p2 rotated (0, 0, -4ang);
 
-% message "magnitude (p18 - p16):"; 
-% show magnitude (p18 - p16);
+  % message "magnitude (p18 - p16):"; 
+  % show magnitude (p18 - p16);
 
-% message "magnitude (p18 - p17):"; 
-% show magnitude (p18 - p17);
+  % message "magnitude (p18 - p17):"; 
+  % show magnitude (p18 - p17);
 
-% message "p16:";
-% show p16;
+  % message "p16:";
+  % show p16;
 
-% message "p17:";
-% show p17;
+  % message "p17:";
+  % show p17;
 
-% message "p18:";
-% show p18;
+  % message "p18:";
+  % show p18;
 
   m16 := p17 -- p18 -- p11 -- cycle;
   %draw m16;
@@ -381,73 +378,79 @@ def draw_sphere_projection {numeric rradius,
 
   point q[];
   
-  q0 := (-(radius+1), 0, radius+1);
-  q1 := (0, 0, (radius+1));
-  q2 := (radius+1, 0, radius+1);
-  q3 := (-(radius+1), 0);
-  q4 := (radius+1, 0);
-  q5 := (-(radius+1), 0, -(radius+1));
-  q6 := (0, 0, -(radius+1));
-  draw q3 -- q4 dashed evenly with_color dark_gray with_pen medium_pen;
-  draw q1 -- q6 dashed evenly with_color dark_gray with_pen medium_pen;
-
-
-  
-%% **** (4)
-  
-  drawdot origin with_color white with_pen small_pen;
-  drawdot origin with_color black with_pen large_pen;
-
-  draw q0 -- (q0 shifted (-.5cm, 0));
-  draw q0 -- (q0 shifted (.5cm, 0));
-  draw q0 -- (q0 shifted (0, 0, .5cm));
-  draw q0 -- (q0 shifted (0, 0, -.5cm));
-
-  draw q1 -- (q1 shifted (-.5cm, 0));
-  draw q1 -- (q1 shifted (.5cm, 0));
-  draw q1 -- (q1 shifted (0, 0, .5cm));
-  draw q1 -- (q1 shifted (0, 0, -.5cm));
+  q0 := (-(radius+1.5), 0, radius+1.5);
+  q1 := (0, 0, (radius+1.5));
+  q2 := (radius+1.5, 0, radius+1.5);
+  q3 := (-(radius+1.5), 0);
+  q4 := (radius+1.5, 0);
+  q5 := (-(radius+1.5), 0, -(radius+1.5));
+  q6 := (0, 0, -(radius+1.5));
+  draw q3 shifted (.5cm, 0)-- q4 shifted (-.5cm, 0)
+    dashed evenly with_color dark_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q1 shifted (0, 0, -.5cm) -- q6 shifted (0, 0, .5cm)
+    dashed evenly with_color dark_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
   label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
 
-  if do_dashed:
-    draw q2 -- (q2 shifted (-.5cm, 0));
-    draw q2 -- (q2 shifted (.5cm, 0));
-    draw q2 -- (q2 shifted (0, 0, .5cm));
-    draw q2 -- (q2 shifted (0, 0, -.5cm));
-
-
-    draw q3 -- (q3 shifted (-.5cm, 0));
-    draw q3 -- (q3 shifted (.5cm, 0));
-    draw q3 -- (q3 shifted (0, 0, .5cm));
-    draw q3 -- (q3 shifted (0, 0, -.5cm));
-
-
-    draw q4 -- (q4 shifted (-.5cm, 0));
-    draw q4 -- (q4 shifted (.5cm, 0));
-    draw q4 -- (q4 shifted (0, 0, .5cm));
-    draw q4 -- (q4 shifted (0, 0, -.5cm));
-
-    draw q5 -- (q5 shifted (-.5cm, 0));
-    draw q5 -- (q5 shifted (.5cm, 0));
-    draw q5 -- (q5 shifted (0, 0, .5cm));
-    draw q5 -- (q5 shifted (0, 0, -.5cm));
-
-    draw q6 -- (q6 shifted (-.5cm, 0));
-    draw q6 -- (q6 shifted (.5cm, 0));
-    draw q6 -- (q6 shifted (0, 0, .5cm));
-    draw q6 -- (q6 shifted (0, 0, -.5cm));
-
-    q7 := (radius+1, 0, -(radius+1));
-    draw q7 -- (q7 shifted (-.5cm, 0));
-    draw q7 -- (q7 shifted (.5cm, 0));
-    draw q7 -- (q7 shifted (0, 0, .5cm));
-    draw q7 -- (q7 shifted (0, 0, -.5cm));
-  fi;
-
+  % dotlabel.top("$q_1$", q1);
+  % dotlabel.top("$q_3$", q3);
+  % dotlabel.top("$q_4$", q4);
+  % dotlabel.top("$q_5$", q5);
+  % dotlabel.top("$q_6$", q6);
 
   
-%% **** (4)
+%% ***** (5) Tick marks
+  
+  draw q0 -- (q0 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q0 -- (q0 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q0 -- (q0 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q0 -- (q0 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+  draw q1 -- (q1 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q1 -- (q1 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q1 -- (q1 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  draw q1 -- (q1 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+
+%% ***** (5) Dashed lines (optional)
+  
+  if do_dashed:
+    draw q2 -- (q2 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q2 -- (q2 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q2 -- (q2 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q2 -- (q2 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+
+    draw q3 -- (q3 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q3 -- (q3 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q3 -- (q3 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q3 -- (q3 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+
+    draw q4 -- (q4 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q4 -- (q4 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q4 -- (q4 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q4 -- (q4 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+    draw q5 -- (q5 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q5 -- (q5 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q5 -- (q5 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q5 -- (q5 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+    draw q6 -- (q6 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q6 -- (q6 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q6 -- (q6 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q6 -- (q6 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+
+    q7 := (radius+1.5, 0, -(radius+1.5));
+    draw q7 -- (q7 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q7 -- (q7 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q7 -- (q7 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q7 -- (q7 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+  fi;
+  
+%% **** (4) Get end and mid-points of the lines making up the triangles and
+%%          the paths for the cut-outs along the perimeter.
 
   for i = 0 upto 11:
     for j = 0 upto 9:
@@ -529,31 +532,39 @@ def draw_sphere_projection {numeric rradius,
   Q5 := P12 -- P14 -- P18 -- P16 -- cycle;
   Q6 := P15 -- P17 -- P6 -- P3 -- cycle;
 
+%% **** (4) Draw bands (optional)
+  
   if do_bands:
     for i = 0 step 30 until 330:
-    %draw (Q0 rotated (0, i)) with_pen small_pen;
+      %draw (Q0 rotated (0, i)) with_pen small_pen;
       undrawdot P2 rotated (0, i) with_pen small_pen;
       undrawdot P3 rotated (0, i) with_pen small_pen;
 
-      filldraw (Q1 rotated (0, i)) with_fill_color grey with_pen small_pen;
+      filldraw (Q1 rotated (0, i)) with_fill_color grey
+	with_pen pencircle scaled (.25mm, .25mm, .25mm);
       undrawdot P7 rotated (0, i) with_pen small_pen;
       undrawdot P8 rotated (0, i) with_pen small_pen;
 
       filldraw (Q4 rotated (0, i)) with_fill_color light_gray
-	with_pen small_pen;
+	with_pen pencircle scaled (.25mm, .25mm, .25mm);
       filldraw (Q5 rotated (0, i)) with_fill_color light_gray
-	with_pen small_pen;
+	with_pen pencircle scaled (.25mm, .25mm, .25mm);
       filldraw (Q6 rotated (0, i)) with_fill_color light_gray
-	with_pen small_pen;
+	with_pen pencircle scaled (.25mm, .25mm, .25mm);
       
     endfor;
 
+%% **** (4) Redraw the triangles with large_pen the make the band
+    
     for i = 0 upto 11:
       for j = 0 upto 9:
 	draw a[i][j] with_pen large_pen;
       endfor;
     endfor;
 
+%% **** (4) Undraw the triangles with medium_pen in order to turn the
+%%          insides of the bands white.
+    
     for i = 0 upto 11:
       for j = 0 upto 9:
 	undraw a[i][j] with_pen medium_pen;
@@ -561,7 +572,7 @@ def draw_sphere_projection {numeric rradius,
     endfor;
   fi;
 
-%% **** (4)
+%% **** (4) Draw dots along the bands.
 
   if do_dots:
     for i = 0 upto 11:
