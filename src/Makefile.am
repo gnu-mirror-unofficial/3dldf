@@ -1422,6 +1422,7 @@ purge:
                clstsph_1_0.tex
 	-rm -f sphrprj1.[0-9]* sphrprj1.mp sphrprj1.dvi sphrprj1.log sphrprj1.ps
 	-rm -f sphrprj2.[0-9]* sphrprj2.mp sphrprj2.dvi sphrprj2.log sphrprj2.ps
+	-rm -f sphrprj3.[0-9]* sphrprj3.mp sphrprj3.dvi sphrprj3.log sphrprj3.ps
 	-rm -f cmyk_test.[0-9]* cmyk_test.mp cmyk_test.dvi cmyk_test.log cmyk_test.ps
 	-rm 3DLDFput.mp testfont.log ttemp.dvi ttemp.log mpout.log
 
@@ -1645,7 +1646,6 @@ sphrprj1.dvi: sphrprj1.txt sphrprj1.1
 sphrprj1.pdf: sphrprj1.dvi
 	dvipdfmx sphrprj1.dvi 
 
-
 sphrprj2.mp: sphrprj2.ldf sphrproj.lmc 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj2.ldf 
 
@@ -1661,8 +1661,17 @@ sphrprj2.pdf: sphrprj2.dvi
 sphrprj2_a3.dvi: sphrprj2_a3.txt sphrprj2.1
 	tex sphrprj2_a3.txt
 
-sphrprj2_a3.pdf: sphrprj2_a3.dvi
-	dvipdfmx sphrprj2_a3.dvi 
+sphrprj3.mp: sphrprj3.ldf sphrproj.lmc 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj3.ldf 
+
+sphrprj3.1: sphrprj3.mp
+	mpost -numbersystem "double" sphrprj3.mp
+
+sphrprj3.dvi: sphrprj3.txt sphrprj3.1
+	tex sphrprj3.txt
+
+sphrprj3.pdf: sphrprj3.dvi
+	dvipdfmx sphrprj3.dvi 
 
 color_samples.mp: color_samples.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf color_samples.ldf 

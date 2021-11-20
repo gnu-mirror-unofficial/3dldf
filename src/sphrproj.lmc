@@ -385,36 +385,36 @@ def draw_sphere_projection {numeric rradius,
   q4 := (radius+1.5, 0);
   q5 := (-(radius+1.5), 0, -(radius+1.5));
   q6 := (0, 0, -(radius+1.5));
-  draw q3 shifted (.5cm, 0)-- q4 shifted (-.5cm, 0)
-    dashed evenly with_color dark_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q1 shifted (0, 0, -.5cm) -- q6 shifted (0, 0, .5cm)
-    dashed evenly with_color dark_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
-  label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
+  if do_dashed:
+    draw q3 shifted (.5cm, 0)-- q4 shifted (-.5cm, 0)
+      dashed evenly with_color dark_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q1 shifted (0, 0, -.5cm) -- q6 shifted (0, 0, .5cm)
+      dashed evenly with_color dark_gray with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
-  % dotlabel.top("$q_1$", q1);
-  % dotlabel.top("$q_3$", q3);
-  % dotlabel.top("$q_4$", q4);
-  % dotlabel.top("$q_5$", q5);
-  % dotlabel.top("$q_6$", q6);
+    label.top("{\large Radius of Sphere:  " & decimal radius & "cm}", q1 shifted (0, 0, 1cm));
+ 
+    % dotlabel.top("$q_1$", q1);
+    % dotlabel.top("$q_3$", q3);
+    % dotlabel.top("$q_4$", q4);
+    % dotlabel.top("$q_5$", q5);
+    % dotlabel.top("$q_6$", q6);
 
-  
 %% ***** (5) Tick marks
-  
-  draw q0 -- (q0 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q0 -- (q0 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q0 -- (q0 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q0 -- (q0 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
-  draw q1 -- (q1 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q1 -- (q1 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q1 -- (q1 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
-  draw q1 -- (q1 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q0 -- (q0 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q0 -- (q0 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q0 -- (q0 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q0 -- (q0 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
+    draw q1 -- (q1 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q1 -- (q1 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q1 -- (q1 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
+    draw q1 -- (q1 shifted (0, 0, -.5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
 
+    
 %% ***** (5) Dashed lines (optional)
   
-  if do_dashed:
     draw q2 -- (q2 shifted (-.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
     draw q2 -- (q2 shifted (.5cm, 0)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
     draw q2 -- (q2 shifted (0, 0, .5cm)) with_pen pencircle scaled (.25mm, .25mm, .25mm);
