@@ -61,7 +61,13 @@ path r[][];
 point A[][][];
 point P[];
 path Q[];
+pen small_pen;
+pen medium_pen;
+pen large_pen;
 
+small_pen  := pencircle scaled (.25mm, .25mm, .25mm);
+medium_pen := pencircle scaled (.5mm,  .5mm,  .5mm);
+large_pen  := pencircle scaled (.75mm, .75mm, .75mm);
 
 input "sphrproj.lmc";
 
@@ -74,30 +80,58 @@ numeric radius;
 picture v[];
 
 beginfig(0);
+
+%% **** (4)
+  
   radius := 8;
   draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, false, false, true, true};
   v2 := current_picture;
   clear current_picture;
-  fill a[0][0] with_color blue;
-  fill a[6][0] with_color blue;
-  fill a[3][0] with_color red;
-  fill a[9][0] with_color red;
-  fill a[1][0] with_color yellow;
-  fill a[11][0] with_color yellow;
-  fill a[5][0] with_color yellow;
-  fill a[7][0] with_color yellow;
-  fill a[2][0] with_color orange;
-  fill a[4][0] with_color orange;
-  fill a[8][0] with_color orange;
-  fill a[10][0] with_color orange;
+
+  pickup small_pen;
+
+%% **** (4)
+  
+%% ***** (5) Inner dodecahedron
+  
+  filldraw a[0][0] with_fill_color blue;
+  filldraw a[6][0] with_fill_color blue;
+  filldraw a[3][0] with_fill_color red;
+  filldraw a[9][0] with_fill_color red;
+  filldraw a[1][0] with_fill_color yellow;
+  filldraw a[11][0] with_fill_color yellow;
+  filldraw a[5][0] with_fill_color yellow;
+  filldraw a[7][0] with_fill_color yellow;
+  filldraw a[2][0] with_fill_color orange;
+  filldraw a[4][0] with_fill_color orange;
+  filldraw a[8][0] with_fill_color orange;
+  filldraw a[10][0] with_fill_color orange;
   v3 := current_picture;
   clear current_picture;
+
+%% ***** (5) First strip
+  
+  filldraw a[0][1] with_fill_color blue;
+  filldraw a[6][1] with_fill_color blue;
+  filldraw a[3][1] with_fill_color red;
+  filldraw a[9][1] with_fill_color red;
+  v4 := current_picture;
+
+%% ***** (5)
+
+
+%% ***** (5)  
+  
+
+%% **** (4)  
+
   draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, false, false, false, false};
   current_picture += v3;
   v0 := current_picture;
   clear current_picture;
   current_picture := v2;
   current_picture += v3;
+  current_picture += v4;
 endfig with_projection parallel_x_z no_sort;
 
 for i = 1 upto 29:
