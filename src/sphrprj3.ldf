@@ -78,8 +78,6 @@ beginfig(0);
   draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, false, false, true, true};
   v2 := current_picture;
   clear current_picture;
-  draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, false, false, false, false};
-  clear current_picture;
   fill a[0][0] with_color blue;
   fill a[6][0] with_color blue;
   fill a[3][0] with_color red;
@@ -92,9 +90,14 @@ beginfig(0);
   fill a[4][0] with_color orange;
   fill a[8][0] with_color orange;
   fill a[10][0] with_color orange;
+  v3 := current_picture;
+  clear current_picture;
+  draw_sphere_projection {radius, .25mm, .5mm, 1mm, 0mm, false, false, false, false};
+  current_picture += v3;
   v0 := current_picture;
   clear current_picture;
   current_picture := v2;
+  current_picture += v3;
 endfig with_projection parallel_x_z no_sort;
 
 for i = 1 upto 29:
