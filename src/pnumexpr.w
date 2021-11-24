@@ -2840,6 +2840,43 @@ Added this rule.
   
 };
 
+@q ***** (5) numeric_primary --> ANGLE DIRECTION numeric_expression OF path_expression@>@/
+
+@ \§numeric primary> $\longrightarrow$ \.{ANGLE} \.{DIRECTION} \§numeric expression> \.{Of} \§path expression>.@>
+\initials{LDF 2021.11.24.}
+
+\LOG
+\initials{LDF 2021.11.24.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_primary: ANGLE DIRECTION numeric_expression OF path_expression@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: ANGLE DIRECTION numeric_expression OF path_expression.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = 0;
+  
+};
+
+
+
+
 @q ***** (5) numeric_primary --> DIRECTIONTIME picture_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ 
