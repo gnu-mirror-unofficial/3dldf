@@ -158,7 +158,7 @@ values correctly.
 Now setting |curr_loop_info_node->type| to |Loop_Info_Type::FOR_TYPE|.
 
 \initials{LDF 2004.10.28.}
-Removed code from this rule to |Scan_Parse::for_loop_func()|, 
+Removed code from this rule to |Scan_Parse::for_loop_func|, 
 which is defined in \filename{scanprsf.web}.
 \ENDLOG
 
@@ -170,9 +170,9 @@ which is defined in \filename{scanprsf.web}.
 @= STEP numeric_expression UNTIL numeric_expression COLON@>@/
 {
 
-@q ***** (5) Call |Scan_Parse::for_loop_func()|.@>
+@q ***** (5) Call |Scan_Parse::for_loop_func|.@>
 
-@ Call |Scan_Parse::for_loop_func()|.
+@ Call |Scan_Parse::for_loop_func|.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
@@ -233,9 +233,9 @@ Added this rule.
 
       }  /* |else| (|!(@=$5@> == UPTO || @=$5@> == DOWNTO)|)  */   
 
-@q ***** (5) Call |Scan_Parse::for_loop_func()|.@>
+@q ***** (5) Call |Scan_Parse::for_loop_func|.@>
 
-@ Call |Scan_Parse::for_loop_func()|.
+@ Call |Scan_Parse::for_loop_func|.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
@@ -318,9 +318,9 @@ Added |int prev_token|.
 @=for_loop: FOREVER COLON@>@/
 {
 
-@q ***** (5) Call |Scan_Parse::for_loop_func()|.@>
+@q ***** (5) Call |Scan_Parse::for_loop_func|.@>
 
-@ Call |Scan_Parse::for_loop_func()|.
+@ Call |Scan_Parse::for_loop_func|.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
@@ -372,7 +372,7 @@ initials{LDF 2005.01.19.}
 Started working on this rule.
 
 \initials{LDF 2005.01.19.}
-Now calling |Scan_Parse::for_suffixes_internal_func()| 
+Now calling |Scan_Parse::for_suffixes_internal_func| 
 in a |try| block and catching |bad_alloc|.
 \ENDLOG
 
@@ -400,7 +400,7 @@ in a |try| block and catching |bad_alloc|.
 Started working on this rule.
 
 \initials{LDF 2005.01.19.}
-Now calling |Scan_Parse::for_suffixes_internal_func()|, which
+Now calling |Scan_Parse::for_suffixes_internal_func|, which
 is defined in \filename{scanprsf.web}.
 \ENDLOG
 
@@ -437,7 +437,7 @@ Revised this rule.  It now handles nested loops
 and negative |step| values correctly. 
 
 \initials{LDF 2004.09.22.}
-Added error handling for the case that |Scanner_Type::pop_in()| fails.
+Added error handling for the case that |Scanner_Type::pop_in| fails.
 Added and edited debugging output.
 
 \initials{LDF 2004.09.22.}
@@ -678,9 +678,9 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
 
       int status = scanner_node->pop_in();
 
-@q ****** (6) Error handling:  |Scanner_Type::pop_in()| failed.@> 
+@q ****** (6) Error handling:  |Scanner_Type::pop_in| failed.@> 
 
-@ Error handling:  |Scanner_Type::pop_in()| failed.
+@ Error handling:  |Scanner_Type::pop_in| failed.
 \initials{LDF 2004.09.22.}
 
 @<Define rules@>=
@@ -692,9 +692,9 @@ Pop |scanner_node->in| and |scanner_node->loop_info_node|.
 
     } /* |if (status != 0)|  */
 
-@q ****** (6) |Scanner_Type::pop_in()| succeeded.@> 
+@q ****** (6) |Scanner_Type::pop_in| succeeded.@> 
 
-@ |Scanner_Type::pop_in()| succeeded.
+@ |Scanner_Type::pop_in| succeeded.
 \initials{LDF 2004.09.22.}
 
 \LOG
@@ -746,9 +746,9 @@ Added this section.
   
   int status = static_cast<Scanner_Node>(parameter)->pop_in();
 
-@q **** (4) Error handling:  |Scanner_Type::pop_in()| failed.@> 
+@q **** (4) Error handling:  |Scanner_Type::pop_in| failed.@> 
 
-@ Error handling:  |Scanner_Type::pop_in()| failed.
+@ Error handling:  |Scanner_Type::pop_in| failed.
 \initials{LDF 2004.09.22.}
 
 \LOG
@@ -765,9 +765,9 @@ Added this section.
 
     } /* |if (status != 0)|  */
 
-@q **** (4) |Scanner_Type::pop_in()| succeeded.@> 
+@q **** (4) |Scanner_Type::pop_in| succeeded.@> 
 
-@ |Scanner_Type::pop_in()| succeeded.
+@ |Scanner_Type::pop_in| succeeded.
 \initials{LDF 2004.09.22.}
 
 \LOG

@@ -142,7 +142,7 @@ Added this rule.
 \initials{LDF 2004.10.21.}
 Changed \.{INTEGER} to \§numeric expression>.  Now passing  
 |static_cast<unsigned short>(floor(fabs(@=$2@>) + .5))| 
-as the argument to |Cuboid::get_reg_polygon_ptr()|. 
+as the argument to |Cuboid::get_reg_polygon_ptr|. 
 \ENDLOG
 
 \TODO

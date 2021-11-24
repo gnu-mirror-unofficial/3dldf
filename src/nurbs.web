@@ -127,53 +127,53 @@ class Nurb : public Shape
 
 \LOG
 \initials{LDF 2005.02.01.}
-Changed the return value of |decompose()| from |Pointer_Vector<Shape>*|
+Changed the return value of |decompose| from |Pointer_Vector<Shape>*|
 to |Pointer_Vector<Path>*|.  Removed the |unsigned short level|
 argument and the default for the |const Path* p| argument.
 
 \initials{LDF 2005.02.01.}
-Made the |Path*| argument of |decompose()| non-|const| and
+Made the |Path*| argument of |decompose| non-|const| and
 added optional |Scanner_Node scanner_node| argument 
 with default 0.
 
 \initials{LDF 2005.03.23.}
-Added optional |Scanner_Node scanner_node| argument to |set_extremes()| 
+Added optional |Scanner_Node scanner_node| argument to |set_extremes| 
 with default 0.
 
 \initials{LDF 2005.03.23.}
-Changed the return value of |get_extremes()| 
+Changed the return value of |get_extremes| 
 from |const valarray <real>| to |const valarray <real>&|, 
 i.e., I've made it a reference.
 
 \initials{LDF 2005.04.04.}
-Changed the name of |set_extremes()| to 
-|set_projective_extremes()|.  Changed all references to it without comment.
+Changed the name of |set_extremes| to 
+|set_projective_extremes|.  Changed all references to it without comment.
 
 \initials{LDF 2005.04.04.}
-Changed the name of |get_extremes()| to 
-|get_projective_extremes()|.  Changed all references to it without comment.
+Changed the name of |get_extremes| to 
+|get_projective_extremes|.  Changed all references to it without comment.
 
 \initials{LDF 2005.04.04.}
-Added the functions |set_world_extremes()| and |get_world_extremes()|.
+Added the functions |set_world_extremes| and |get_world_extremes|.
 
 \initials{LDF 2005.04.04.}
 Removed the definition of |decompose(Path*, Scanner_Node)| to its own section.
 
 \initials{LDF 2005.04.19.}
 Added dummy definitions for 
-|get_minimum_x()|, |get_maximum_x()|, |get_mean_x()|, |get_minimum_y()|, 
-|get_maximum_y()|, and |get_mean_y()|.
+|get_minimum_x|, |get_maximum_x|, |get_mean_x|, |get_minimum_y|, 
+|get_maximum_y|, and |get_mean_y|.
 
 \initials{LDF 2005.06.30.}
-Added dummy definitions for |set_pre_projective_extremes()| 
-and |get_pre_projective_extremes()|.
+Added dummy definitions for |set_pre_projective_extremes| 
+and |get_pre_projective_extremes|.
 
 \initials{LDF 2005.06.30.}
 Added a |const unsigned short| argument to
-|get_minimum_x()|, |get_maximum_x()|,
-|get_mean_x()|, |get_minimum_y()|,
-|get_maximum_y()|, |get_mean_y()|,
-|get_minimum_z()|, |get_maximum_z()|, and |get_mean_z()|.
+|get_minimum_x|, |get_maximum_x|,
+|get_mean_x|, |get_minimum_y|,
+|get_maximum_y|, |get_mean_y|,
+|get_minimum_z|, |get_maximum_z|, and |get_mean_z|.
 The default is the |static const unsigned short|
 |Shape::PROJECTIVE_COORDINATES_VALUE|.
 This argument isn't used in these functions yet.
@@ -1553,7 +1553,7 @@ Nurb::append_knot_or_weight(real r,
 
    return 0;
 
-}  /* End of |Nurb::append_knot_or_weight()| definition.  */
+}  /* End of |Nurb::append_knot_or_weight| definition.  */
 
 @q *** (3) Generate.@> 
 @*2 Generate.
@@ -1637,7 +1637,7 @@ Nurb::push_draw_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Nurb::push_draw_color()|  */
+}  /* End of |Nurb::push_draw_color|  */
 
 @q *** (3) Push fill color.@>
 @*1 Push fill color.
@@ -1680,7 +1680,7 @@ Nurb::push_fill_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Nurb::push_fill_color()|  */
+}  /* End of |Nurb::push_fill_color|  */
 
 @q *** (3) Push color.@>
 @*1 Push color.
@@ -1729,7 +1729,7 @@ Nurb::push_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Nurb::push_color()|  */
+}  /* End of |Nurb::push_color|  */
 
 @q ** (2) Push pen.@>
 @*1 Push pen.
@@ -1773,7 +1773,7 @@ Nurb::push_pen(Pen*& p, bool copy)
 
    return 0;
 
-}  /* End of |Nurb::push_pen()| definition.  */
+}  /* End of |Nurb::push_pen| definition.  */
 
 @q ** (2) Push dash_pattern.@>
 @*1 Push {\bf Dash\_Pattern}.
@@ -1817,7 +1817,7 @@ Nurb::push_dash_pattern(Dash_Pattern*& d, bool copy)
 
    return 0;
 
-}  /* End of |Nurb::push_dash_pattern()| definition.  */
+}  /* End of |Nurb::push_dash_pattern| definition.  */
 
 @q ** (2) Blending function.@> 
 @*1 Blending function.
@@ -1999,7 +1999,7 @@ if (coefficient_1 != ZERO_REAL)
 
 @q **** (4).@>
 
-}  /* End of |Nurb::blending_func()| definition.  */
+}  /* End of |Nurb::blending_func| definition.  */
 
 @q ** (2) Show.@> 
 @*1 Show.
@@ -2084,7 +2084,7 @@ Nurb::show(string text,
 
 @q **** (4) @>   
 
-}  /* End of |Nurb::show()| definition.  */
+}  /* End of |Nurb::show| definition.  */
 
 @q ** (2) Enclosing Cuboids Intersect.@>
 @*1 Enclosing Cuboids Intersect.
@@ -2096,8 +2096,8 @@ Nurb::show(string text,
 Added this function.
 
 \initials{LDF 2005.03.31.}
-Changed the name of this function from |enclosing_prisms_intersect()|
-to |enclosing_cuboids_intersect()|.
+Changed the name of this function from |enclosing_prisms_intersect|
+to |enclosing_cuboids_intersect|.
 
 \initials{LDF 2005.04.01.}
 Changed the return type of this function from |unsigned short|

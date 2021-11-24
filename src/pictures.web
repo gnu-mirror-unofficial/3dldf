@@ -158,7 +158,7 @@ class Label
 
 |DO_LABELS| is used for globally enabling or suppressing putting
 |Labels| onto |Pictures|:  If
-|DO_LABELS| is |false|, then |label()| and |dotlabel()| have no
+|DO_LABELS| is |false|, then |label| and |dotlabel| have no
 effect, i.e., no |Label| is put onto the |Picture|.  Note that
 |Picture| has a |private| data member |do_labels|, which is for
 enabling or suppressing output of |Labels| for a single |Picture| (see below).
@@ -283,7 +283,7 @@ still on the |Picture|.  If |do_labels| is reset to |true| and the
 \LOG
 \initials{LDF 2002.04.25.}  Added |do_labels|.  It's set
 to |true| in the constructors and can be set to
-|false| using |suppress_labels()|. 
+|false| using |suppress_labels|. 
 
 \initials{LDF 2004.06.19.}
 Added |pthread_mutex_t mutex| and |pthread_cond_t cond_var|.
@@ -295,7 +295,7 @@ Added the |public static| data members
 |default_min_y_proj|, |default_max_y_proj|, |default_min_z_proj|, 
 and |default_max_z_proj|.  They are used in the parser rules for 
 ``{\bf output}'' and ``{\bf endfig}''
-for the default arguments to |Picture::output()|.
+for the default arguments to |Picture::output|.
 
 \initials{LDF 2004.06.29.}
 Removed |pthread_mutex_t mutex| and 
@@ -362,7 +362,7 @@ It currently initializes the
 |default_min_y_proj|, |default_max_y_proj|, |default_min_z_proj|, 
 and |default_max_z_proj|, which I've added today.  
 They are used in the parser rules for ``{\bf output}'' 
-and ``{\bf endfig}'' for the default arguments to |Picture::output()|.
+and ``{\bf endfig}'' for the default arguments to |Picture::output|.
 
 \initials{LDF 2005.08.25.}
 Changed the values of 
@@ -393,8 +393,8 @@ to $\pm 200$, as appropriate.
 
 \LOG
 \initials{LDF 2004.06.19.}
-Now calling |pthread_cond_init()| for |cond_var| and 
-|pthread_cond_mutex()| for |mutex|.
+Now calling |pthread_cond_init| for |cond_var| and 
+|pthread_cond_mutex| for |mutex|.
 
 \initials{LDF 2004.06.29.}
 Removed code for handling |pthread_mutex_t mutex| and 
@@ -423,7 +423,7 @@ Picture::Picture(void)
 !! PORTING.  
 \initials{LDF 2002.12.05.}  
 Moved to \filename{points.web} because I've moved
-|Picture::operator=()| to \filename{points.web}, so the latter is
+|Picture::operator=| to \filename{points.web}, so the latter is
 undefined in this file.  I've had to do these things because of
 differences between the DEC compiler and the GNU compiler.
 
@@ -469,7 +469,7 @@ Picture::~Picture(void)
 @:!! TO DO@> TO DO:  Add {\TeX} macro for ``PORTING''.
 !! PORTING.  
 \initials{LDF 2002.12.05.}  Moved to \filename{points.web} because
-|Picture::clear()| and |Label::get_copy()| are undefined in this 
+|Picture::clear| and |Label::get_copy| are undefined in this 
 file.  This didn't cause a problem with the DEC compiler, but it does
 with the GNU Compiler.
 
@@ -492,8 +492,8 @@ It seems to be most useful to have the argument |Picture p| be
 non-|const|, in order to be able to shift it and add it to |*this|
 multiple times.  For this to work, it must be possible to set
 |p.transform| to the identity matrix afterwards.  It is possible to do
-this explicitly by calling |reset_transform()| on the |Picture|
-following the call to |operator+=()|, but it's more convenient to have
+this explicitly by calling |reset_transform| on the |Picture|
+following the call to |operator+=|, but it's more convenient to have
 it done automatically.  If it turns out to be useful, I can add a
 |const| version of this function.
 
@@ -615,7 +615,7 @@ Picture::scale(real x, real y, real z)
 Transform 
 shift(real x, real y = 0, real z = 0);
     
-@ |shift()| returns a |Transform| representing the shift, {\it not\/}
+@ |shift| returns a |Transform| representing the shift, {\it not\/}
 |*this|. This makes it possible to apply the transformation to other
 objects. 
 
@@ -640,9 +640,9 @@ shift(const Point& p);
 @q *** (3) Rotation around the main axes.@>
 @*2 Rotation around the main axes.
 @^\cfunc{Picture}{rotate}@>
-|rotate()| will perform rotation about the x, y and z-axes in that
+|rotate| will perform rotation about the x, y and z-axes in that
 order if called with multiple, non-zero arguments. Rotation only about
-the y and/or z-axis requires one or two dummy 0 arguments so that |rotate()|
+the y and/or z-axis requires one or two dummy 0 arguments so that |rotate|
 ``knows'' about which axis (or axes) to rotate.
 @<Declare |Picture| functions@>=
 Transform 
@@ -664,8 +664,8 @@ is an incomplete type in this file.
 Added this declaration.  
 
 \initials{LDF 2003.05.02.}  
-Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 \ENDLOG 
 
@@ -723,8 +723,8 @@ Now locking and unlocking |mutex| before showing the |Picture|.
 
 \initials{LDF 2004.06.23.}
 Changed return value from |void| to |int|.  This function currently 
-returns 0 upon success, and 1 if |pthread_mutex_lock()| 
-or |pthread_mutex_unlock()| fails.
+returns 0 upon success, and 1 if |pthread_mutex_lock| 
+or |pthread_mutex_unlock| fails.
 
 \initials{LDF 2004.07.16.}
 Removed code for locking and unlocking |mutex|.  Code that calls this function
@@ -809,11 +809,11 @@ Added the optional |real| arguments |min_x_proj|,
 |Shapes| whose |projective_extremes| fall outside of these limits,
 whereby the ``z'' values are not currently checked.
 They are not set for a particular |Focus| or |Picture|, but for a
-particular invocation of |output()|.  I believe the default values are
+particular invocation of |output|.  I believe the default values are
 sufficiently generous, but they can always be changed if it turns out
 that they're not.  Alternatively, I could store them in the |Picture|
 or the |Focus|, if that turns out be more convenient.  They are
-checked in |Picture::check_projection_limits()|.  
+checked in |Picture::check_projection_limits|.  
 
 \initials{LDF 2004.05.25.}  
 Added |Scanner_Node| argument.
@@ -822,7 +822,7 @@ Added |Scanner_Node| argument.
 Got rid of the version of this function that didn't
 take a |Focus| argument, because I've gotten rid of |default_focus|.  
 I may replace |default_focus| with a predefined variable defined in 
-|Scanner_Type::create()|.  
+|Scanner_Type::create|.  
 
 \initials{LDF 2005.03.14.}
 Added the optional argument 
@@ -832,7 +832,7 @@ Added the optional argument
 Changed the default of the argument 
 |const unsigned short sort_value| from |Sorting::MAX_Z| to
 |Sorting::MIN_Z|.  This doesn't really have any effect, because
-the |sort_value| is set in |Scanner_Type::extract_picture_output_args()|
+the |sort_value| is set in |Scanner_Type::extract_picture_output_args|
 in \filename{sctpfncs.web}.  Therefore, any change to the defaults for
 optional arguments here should be reflected by changes in that function.
 

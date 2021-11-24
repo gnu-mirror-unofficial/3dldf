@@ -211,7 +211,7 @@ Added this rule.
 \LOG
 \initials{LDF 2005.11.03.}
 Changed |STRING| to |string_expression|.  
-Removed code.  Now calling |Scan_Parse::message_command_func()| instead.
+Removed code.  Now calling |Scan_Parse::message_command_func| instead.
 \ENDLOG 
 
 @<Define rules@>=
@@ -337,9 +337,9 @@ Added this rule.
       {
          int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
 
-@q ***** (5) Error handling:  |verbatim_metapost_func()| failed.@>   
+@q ***** (5) Error handling:  |verbatim_metapost_func| failed.@>   
 
-@ Error handling:  |verbatim_metapost_func()| failed.
+@ Error handling:  |verbatim_metapost_func| failed.
 \initials{LDF 2004.12.13.}
 
 @<Define rules@>=

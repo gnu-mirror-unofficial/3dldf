@@ -242,7 +242,7 @@ Fixed the way |center| is set.
 \initials{LDF 2005.03.10.}
 @:BUG FIX@> BUG FIX: 
 Now dereferencing |Point* C| and |Point* A| in the call to
-|Point::intersection_point()|.
+|Point::intersection_point|.
 
 \initials{LDF 2005.03.31.}
 Now setting |surface_hiding_ctr = 0|.
@@ -349,11 +349,11 @@ Triangle::set(Point* A, Point* B, Point* C,
 @ 
 \LOG
 \initials{LDF 2005.01.24.}
-@:BUG FIX@> BUG FIX:  Now calling |clear()|.
+@:BUG FIX@> BUG FIX:  Now calling |clear|.
 
 \initials{LDF 2005.04.13.}
 @:BUG FIX@> BUG FIX:  Now checking that |points.size() > 0| before 
-calling |clear()|.
+calling |clear|.
 \ENDLOG 
 
 @<Define |Triangle| functions@>=
@@ -400,7 +400,7 @@ Added this section.
 \initials{LDF 2005.03.10.}
 @:BUG FIX@> BUG FIX: 
 Now dereferencing |Point* C| and |Point* A| in the call to
-|Point::intersection_point()|.
+|Point::intersection_point|.
 \ENDLOG
 
 @<Define |Triangle| functions@>=
@@ -679,7 +679,7 @@ Triangle::is_equal(Triangle& t, real tolerance) const
 
    return false;
 
-}  /* End of |Triangle::is_equal()| definition.  */
+}  /* End of |Triangle::is_equal| definition.  */
 
 @q ** (2) Show.@>
 @*1 Show.
@@ -701,7 +701,7 @@ This function now outputs the values of |a|, |b|, |c|, |alpha|,
 Now showing |points|.
 
 \initials{LDF 2005.03.10.}
-No longer showing |points|.  Now calling |Path::show()| instead.
+No longer showing |points|.  Now calling |Path::show| instead.
 \ENDLOG
 
 @q *** (3) Declaration.@> 
@@ -742,7 +742,7 @@ Triangle::show(string text, char coords,
 
    return;
 
-}  /* End of |Triangle::show()| definition.  */
+}  /* End of |Triangle::show| definition.  */
 
 @q * (1) Putting Triangle together.@>
 @* Putting {\bf Triangle} together.

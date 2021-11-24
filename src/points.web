@@ -6919,7 +6919,7 @@ error: it must be the address of an object with external linkage''.
 
 @:??@> ??  
 I don't believe it's possible to add an argument 
-to |operator()|, which is passed to |sort|, so I'm using the 
+to |operator|, which is passed to |sort|, so I'm using the 
 template argument to indicate the set of coordinates from which the 
 minimum z-value should be taken.
 \initials{LDF 2005.07.07.}
@@ -6941,11 +6941,11 @@ Added this |class|.
 
 \initials{LDF 2005.07.07.}
 Made this class a template class, with an |unsigned short| 
-template argument.  Rewrote |Compare_Minimum_Z::operator()| so 
+template argument.  Rewrote |Compare_Minimum_Z::operator| so 
 that it tests the value of the template argument.
 
 \initials{LDF 2005.07.07.}
-In |Compare_Minimum_Z::operator()|:
+In |Compare_Minimum_Z::operator|:
 Now setting |unsigned short v = Shape::PROJECTIVE_COORDINATES_VALUE| if
 the template argument |u| is neither 0 nor 1.
 
@@ -6985,7 +6985,7 @@ Compare_Minimum_Z
 
 @:??@> ??  
 I don't believe it's possible to add an argument 
-to |operator()|, which is passed to |sort|, so I'm using the 
+to |operator|, which is passed to |sort|, so I'm using the 
 template argument to indicate the set of coordinates from which the 
 maximum z-value should be taken.
 \initials{LDF 2005.07.07.}
@@ -7011,11 +7011,11 @@ works for the more common cases.
 
 \initials{LDF 2005.07.07.}
 Made this class a template class, with an |unsigned short| 
-template argument.  Rewrote |Compare_Minimum_Z::operator()| so 
+template argument.  Rewrote |Compare_Minimum_Z::operator| so 
 that it tests the value of the template argument.
 
 \initials{LDF 2005.07.07.}
-In |Compare_Maximum_Z::operator()|:
+In |Compare_Maximum_Z::operator|:
 Now setting |unsigned short v = Shape::PROJECTIVE_COORDINATES_VALUE| if
 the template argument |u| is neither 0 nor 1.
 
@@ -7053,7 +7053,7 @@ Compare_Maximum_Z
 
 @:??@> ??  
 I don't believe it's possible to add an argument 
-to |operator()|, which is passed to |sort|, so I'm using the 
+to |operator|, which is passed to |sort|, so I'm using the 
 template argument to indicate the set of coordinates from which the 
 maximum z-value should be taken.
 \initials{LDF 2005.07.07.}
@@ -7075,11 +7075,11 @@ Added this |class|.
 
 \initials{LDF 2005.07.07.}
 Made this class a template class, with an |unsigned short| 
-template argument.  Rewrote |Compare_Minimum_Z::operator()| so 
+template argument.  Rewrote |Compare_Minimum_Z::operator| so 
 that it tests the value of the template argument.
 
 \initials{LDF 2005.07.07.}
-In |Compare_Mean_Z::operator()|:
+In |Compare_Mean_Z::operator|:
 Now setting |unsigned short v = Shape::PROJECTIVE_COORDINATES_VALUE| if
 the template argument |u| is neither 0 nor 1.
 
@@ -7144,7 +7144,7 @@ Added this function.
 @<Declare |Compare_Magnitude| functions@>=
 Compare_Magnitudes(const Point& p) : base_point(p) {};
 
-@q **** (4) |operator()|.@> 
+@q **** (4) |operator|.@> 
 @*3 {\bf operator()}.
 \initials{LDF 2005.11.04.}
 
@@ -7221,7 +7221,7 @@ Compare_Angles::Compare_Angles(const Point* org,
 
 }
 
-@q **** (4) Function call operator (|operator()|).@> 
+@q **** (4) Function call operator (|operator|).@> 
 @*3 Function call operator ({\bf operator()}).
 \initials{LDF Undated.}
 
@@ -11904,7 +11904,7 @@ value.
 @q } @> 
 @q !! TO DO:  @>
 @:??@> ?? Do I need to shift |transform| by |(0, 0, distance)| before 
-multiplying it by |t.inverse()| and then shift it back?  Check this.
+multiplying it by |t.inverse| and then shift it back?  Check this.
 \ENDTODO 
 
 @<Define |Focus| functions@>=

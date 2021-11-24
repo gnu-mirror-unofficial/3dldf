@@ -132,7 +132,7 @@ This condition occurs legitimately when one tries to show an
 \LOG
 \initials{LDF 2005.11.03.}
 Removed code from this rule.  Replaced it with a call to 
-|Scan_Parse::string_primary_rule_func()|.
+|Scan_Parse::string_primary_rule_func|.
 \ENDLOG 
 
 @<Define rules@>=

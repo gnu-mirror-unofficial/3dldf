@@ -250,7 +250,7 @@ Put the following code inside an |else| clause.
 Added this rule.
 
 \initials{LDF 2004.11.26.}
-Changed |Path::reverse()|, so that cyclical |Paths| can be 
+Changed |Path::reverse|, so that cyclical |Paths| can be 
 reversed. 
 
 \initials{LDF 2005.11.09.}
@@ -854,9 +854,9 @@ Replaced |solid_like_primary| with |cuboid_primary|.
 
   const Path* t = s->get_path_ptr(u); 
 
-@q **** (4) Error handling:  |Cuboid::get_path_ptr()| returned 0.@>   
+@q **** (4) Error handling:  |Cuboid::get_path_ptr| returned 0.@>   
 
-@ Error handling:  |Cuboid::get_path_ptr()| returned 0.
+@ Error handling:  |Cuboid::get_path_ptr| returned 0.
 \initials{LDF 2004.10.13.}
 
 @<Define rules@>=
@@ -896,9 +896,9 @@ Replaced |solid_like_primary| with |cuboid_primary|.
             p = create_new<Path>(t, scanner_node);
           }
 
-@q ***** (5) Error handling:  |create_new<Path>()| failed.@> 
+@q ***** (5) Error handling:  |create_new<Path>| failed.@> 
 
-@ Error handling:  |create_new<Path>()| failed.
+@ Error handling:  |create_new<Path>| failed.
 \initials{LDF 2004.10.13.}
 
 @<Define rules@>=
@@ -1244,7 +1244,7 @@ Added this rule.
 @
 \LOG
 \initials{LDF 2005.01.28.}
-No longer passing |@=$2@>| to |generate()|.  
+No longer passing |@=$2@>| to |generate|.  
 It simply duplicated |n|.
 \ENDLOG 
 
@@ -2250,7 +2250,7 @@ Added this rule.
 
 \initials{LDF 2004.11.01.}
 Changed the way |Path *p| is handled. 
-Now calling |p->adjust_connectors()|.
+Now calling |p->adjust_connectors|.
 \ENDLOG 
 
 @<Define rules@>= 

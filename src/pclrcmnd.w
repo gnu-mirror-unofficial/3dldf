@@ -64,7 +64,7 @@ Added this rule.  It must be cleaned up and put into a function in
 
 \initials{LDF 2005.01.03.}
 Removed code from this rule.  I'm about to start putting it in
-|Scan_Parse::clear_vector_func()| in \filename{scanprsf.web}.
+|Scan_Parse::clear_vector_func| in \filename{scanprsf.web}.
 \ENDLOG 
 
 @q *** (3) Definition.@> 

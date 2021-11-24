@@ -119,7 +119,7 @@ interface and can be set anywhere by anyone.
 Added |projective_extremes|.
 
 \initials{LDF 2003.01.15}  
-Added |arrow|.  It's needed for |drawarrow()|.
+Added |arrow|.  It's needed for |drawarrow|.
 
 \initials{LDF 2004.06.02.}  
 Made |draw_color| and |fill_color| non-|const|.
@@ -270,7 +270,7 @@ is performed.
 \initials{LDF 2002.10.23.}  
 Now all of the data members of |class Path| 
 are assigned to except for |on_free_store|.  This has become necessary
-because of changes in |Solid::output()|, where temporary |Paths| have
+because of changes in |Solid::output|, where temporary |Paths| have
 to be created in order to sort them. 
 
 \initials{LDF 2002.12.18.}  
@@ -947,7 +947,7 @@ Path::set(const Point& p0, const Point& p1)
 This constructor takes a variable number of |Point*| arguments,
 but only allows one type of connector. The argument list must end with
 0. If the order of the named arguments is reversed, the compiler
-can't resolve certain calls to |Path()|. It couldn't resolve between
+can't resolve certain calls to |Path|. It couldn't resolve between
 |Path(bool cycle, string connector ...)| and 
 |Path(Point* first_point_ptr ...)|. 
 I don't know why it should have
@@ -1524,8 +1524,8 @@ If |p != 0|, the new |Path| is assigned to using the values from |p|.
 
 \initials{LDF 2003.12.30.}  
 Replaced this version of
-|Path::create_new_path()| with
-a specialization of |template <class C> C* create_new()|.  
+|Path::create_new_path| with
+a specialization of |template <class C> C* create_new|.  
 
 \initials{LDF 2003.12.30.}  
 Changed the argument.  It's now a 
@@ -1557,8 +1557,8 @@ Added this function.
 
 \initials{LDF 2003.12.30.}  
 Replaced this version of
-|Path::create_new_path()| with
-a specialization of |template <class C> C* create_new()|.  
+|Path::create_new_path| with
+a specialization of |template <class C> C* create_new|.  
 
 \initials{LDF 2003.12.30.}  
 Changed argument from |Path| to |const Path&|.
@@ -1587,8 +1587,8 @@ Added code for handling
 |draw_color| and |fill_color|.
 
 \initials{LDF 2002.11.03.}  
-Now calling |points.clear()|.  This replaces a |while| loop
-in which |pop_back()| was used to empty |points|. 
+Now calling |points.clear|.  This replaces a |while| loop
+in which |pop_back| was used to empty |points|. 
 
 \initials{LDF 2002.11.03.}   
 Now clearing |connectors|.
@@ -1690,15 +1690,15 @@ Now deleting |dash_pattern_vector| and |pen_vector| and setting them to
 
 LDF Undated.
 This function is needed because it's a pure |virtual| function in
-|Shape|, and for getting rid of items in |Picture::clear()|. 
+|Shape|, and for getting rid of items in |Picture::clear|. 
 
 \initials{LDF 2002.10.07.}
-|clear()| is needed because
+|clear| is needed because
 it's called on the |Shapes| that are stored in |Pictures|, and I don't
 know of a way of overloading destructors.  That is, in
-|Picture::clear()|, the actual types of the |Shapes| are unknown, so I
-can't call |~Path()|, |~Circle()|, or other destructors directly.  But
-a named function such as |clear()| can serve the same purpose.  
+|Picture::clear|, the actual types of the |Shapes| are unknown, so I
+can't call |~Path|, |~Circle|, or other destructors directly.  But
+a named function such as |clear| can serve the same purpose.  
 
 \LOG
 
@@ -1724,7 +1724,7 @@ and |pen_vector|, and setting them 0, if they aren't already 0.
 @q !! TO DO:  @>
 \initials{LDF Undated.}
 @:??@> ??  
-I tried calling |~Path()| inside |Path:clear()|, but I got
+I tried calling |~Path| inside |Path:clear|, but I got
 a memory fault.  Don't know why.  Try to find out.  However, this isn't urgent.
 \ENDTODO 
 
@@ -1782,7 +1782,7 @@ Path::clear()
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-} /* End of |Path::clear()| definition.  */
+} /* End of |Path::clear| definition.  */
 
 @q * (1) Clear connectors.@>
 @* Clear connectors.  
@@ -1802,15 +1802,15 @@ clear_connectors(void)
 {
   connectors.clear();
   return;
-} /* End of |Path::clear_connectors()| definition.  */
+} /* End of |Path::clear_connectors| definition.  */
 
 @q * (1) Get copy.@>
 @* Get copy.
 @^\cfunc{Path}{get\_copy}@>
 \LOG
 \initials{LDF 2002.11.03.}  Made |virtual|.  
-Changed |dynamic_cast()| to
-|static_cast()|.  This may not work.
+Changed |dynamic_cast| to
+|static_cast|.  This may not work.
 
 \initials{LDF 2003.01.29.}  It seems to work.  At least, I haven't had any
 problems with it.
@@ -1925,7 +1925,7 @@ Path::copy_coords(const char from,
    
    return 0;
 
-}  /* End of |Path::copy_coords()| definition.  */
+}  /* End of |Path::copy_coords| definition.  */
 
 @q * (1) Setting and querying drawing and filling data.@>
 @* Setting and querying drawing and filling data.
@@ -2024,7 +2024,7 @@ Path::push_draw_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Path::push_draw_color()|  */
+}  /* End of |Path::push_draw_color|  */
 
 @q ** (2) Push fill color.@>
 @*1 Push fill color.
@@ -2071,7 +2071,7 @@ Path::push_fill_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Path::push_fill_color()|  */
+}  /* End of |Path::push_fill_color|  */
 
 @q ** (2) Push color.@>
 @*1 Push color.
@@ -2124,7 +2124,7 @@ Path::push_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Path::push_color()|  */
+}  /* End of |Path::push_color|  */
 
 @q ** (2) Push pen.@>
 @*1 Push {\bf Pen}.
@@ -2168,7 +2168,7 @@ Path::push_pen(Pen*& p, bool copy)
 
    return 0;
 
-}  /* End of |Path::push_pen()| definition.  */
+}  /* End of |Path::push_pen| definition.  */
 
 @q ** (2) Push dash_pattern.@>
 @*1 Push {\bf Dash\_Pattern}.
@@ -2212,7 +2212,7 @@ Path::push_dash_pattern(Dash_Pattern*& d, bool copy)
 
    return 0;
 
-}  /* End of |Path::push_dash_pattern()| definition.  */
+}  /* End of |Path::push_dash_pattern| definition.  */
 
 @q ** (2) Set connectors.@>
 @*1 Set connectors.
@@ -3022,12 +3022,12 @@ Declared in \filename{transfor.web}.  Must be defined here, because
 |Path| is an incomplete type there.
 @^\cfunc{Transform}{rotate}@>
 \LOG
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 
-\initials{LDF 2003.07.06.}  Changed, so that |is_linear()| is used, instead of
-|get_line_switch()|. 
+\initials{LDF 2003.07.06.}  Changed, so that |is_linear| is used, instead of
+|get_line_switch|. 
 \ENDLOG 
 
 @<Define |Transform| functions@>=
@@ -3051,8 +3051,8 @@ Transform::rotate(const Path& p, const real angle)
 Declared in \filename{points.web}.  Must be defined here, because
 |Path| is an incomplete type there.
 \LOG
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 \ENDLOG 
 @<Define |Point| functions@>=
@@ -3079,8 +3079,8 @@ Point::rotate(const Path& p,  const real angle)
 \LOG
 \initials{LDF 2002.4.7.}  Added default value for |angle| $\equiv 180$.
 
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 \ENDLOG 
 @<Declare |Path| functions@>=
@@ -3107,14 +3107,14 @@ Path::rotate(const Point& p0, const Point& p1, const real angle)
 
 \initials{LDF 2002.11.03.}  Got rid of local |Points p0| and |p1|.   
 
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 
-\initials{LDF 2003.07.13.}  Changed, so that |is_linear()| is used instead of
+\initials{LDF 2003.07.13.}  Changed, so that |is_linear| is used instead of
 checking the return value of\newline
-|get_line_switch()|.  Also,
-|get_last_point()| passed as the second argument to |rotate()|,
+|get_line_switch|.  Also,
+|get_last_point| passed as the second argument to |rotate|,
 instead of |get_point(1)|. 
 \ENDLOG 
 
@@ -3219,14 +3219,14 @@ Path::shift(const Point& p)
 @q *** Shift times. @>
 @ Shift times. 
 
-\initials{LDF 2003.01.19.}  |shift_times()| returns |void|, because |Path|
+\initials{LDF 2003.01.19.}  |shift_times| returns |void|, because |Path|
 doesn't have a |Transform| data member, and there's no guarantee that
 all of the |Points| on |points| will have identical |transforms|.
 
-\initials{LDF 2003.01.19.}  Note that |shift_times()| will only have an effect on
+\initials{LDF 2003.01.19.}  Note that |shift_times| will only have an effect on
 the |Points| on a |Path| if it's called {\it after\/} a call to
-|shift()| and {\it before\/} an operation is applied that causes
-|Point::apply_transform()| to be called.
+|shift| and {\it before\/} an operation is applied that causes
+|Point::apply_transform| to be called.
 
 \LOG
 \initials{LDF 2003.01.19.}  Added this section.
@@ -3446,9 +3446,9 @@ try
              path_reflection = create_new<Path>(0, scanner_node);
           }
 
-@q **** (4) Error handling:  |create_new<Path>()| failed.@>   
+@q **** (4) Error handling:  |create_new<Path>| failed.@>   
 
-@ Error handling:  |create_new<Path>()| failed.
+@ Error handling:  |create_new<Path>| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Path| functions@>=
@@ -3469,9 +3469,9 @@ try
 
           } /* |catch (bad_alloc)|  */
 
-@q **** (4) |create_new<Path>()| succeeded.@>           
+@q **** (4) |create_new<Path>| succeeded.@>           
 
-@ |create_new<Path>()| succeeded.
+@ |create_new<Path>| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Path| functions@>=
@@ -3518,8 +3518,8 @@ try
              point_reflection = create_new<Point>(0, scanner_node);
           }
 
-@q ***** (5) Error handling:  |create_new<Point>()| failed.@> 
-@ Error handling:  |create_new<Point>()| failed.
+@q ***** (5) Error handling:  |create_new<Point>| failed.@> 
+@ Error handling:  |create_new<Point>| failed.
 \initials{LDF 2004.10.11.}
 
 @<Define |Path| functions@>=
@@ -3550,9 +3550,9 @@ try
                                          static_cast<void*>(point_reflection), 
                                          scanner_node);
 
-@q ***** (5) Error handling:  |Point::reflect_in()| failed.@> 
+@q ***** (5) Error handling:  |Point::reflect_in| failed.@> 
 
-@ Error handling:  |Point::reflect_in()| failed.
+@ Error handling:  |Point::reflect_in| failed.
 
 \initials{LDF 2004.10.03.}
 
@@ -3576,9 +3576,9 @@ try
 
          } /* |if (status != 0)|  */
 
-@q ***** (5) |Point::reflect_in()| succeeded.@> 
+@q ***** (5) |Point::reflect_in| succeeded.@> 
 
-@ |Point::reflect_in()| succeeded.  Push |point_reflection| onto 
+@ |Point::reflect_in| succeeded.  Push |point_reflection| onto 
 |vector<Points*> points| and the next connector onto 
 |vector<string> connectors|.
 \initials{LDF 2004.10.03.}
@@ -3586,7 +3586,7 @@ try
 \LOG
 \initials{LDF 2004.10.05.}
 @:BUG FIX@> BUG FIX: Now only appending |*connector_iter| to
-|path_reflection->connectors| if |connector_iter != connectors.end()|.
+|path_reflection->connectors| if |connector_iter != connectors.end|.
 Also advancing |connector_iter| in this case.
 \ENDLOG 
 
@@ -3645,7 +3645,7 @@ exit function successfully with return value 0.
 
   return 0;
 
-} /* End of |Path::reflect_in()| definition */
+} /* End of |Path::reflect_in| definition */
 
 @q * (1) Reflection off of a |Plane|.@>
 @* Reflection off of a {\bf Plane}.
@@ -3859,9 +3859,9 @@ return 1;
                                        static_cast<void*>(point_ptr_vector),
                                        scanner_node);
 
-@q ***** (5) Error handling:  |Point::reflect_off()| failed.@> 
+@q ***** (5) Error handling:  |Point::reflect_off| failed.@> 
 
-@ Error handling:  |Point::reflect_off()| failed.
+@ Error handling:  |Point::reflect_off| failed.
 \initials{LDF 2004.12.10.}
 
 @<Define |Path| functions@>=
@@ -3889,9 +3889,9 @@ return 1;
 
            } /* |if (status != 0)|  */
 
-@q ***** (5) |Point::reflect_off()| succeeded.@> 
+@q ***** (5) |Point::reflect_off| succeeded.@> 
 
-@ |Point::reflect_off()| succeeded.
+@ |Point::reflect_off| succeeded.
 \initials{LDF 2004.12.10.}
 
 @<Define |Path| functions@>=
@@ -3945,7 +3945,7 @@ return 1;
 
   return 0;
 
-}  /* End of |Path::reflect_off()| definition.  */
+}  /* End of |Path::reflect_off| definition.  */
 
 @q * (1) Functions for lines.@>
 @* Functions for lines.
@@ -4042,8 +4042,8 @@ will just call the |const| version above.
 \LOG
 \initials{LDF 2002.11.03.}  Added this function.
 
-\initials{LDF 2003.07.18.}  Changed, so that |is_linear()| is used, rather than
-|get_line_switch()|.  Also, changed the way |Transform t| is set.  
+\initials{LDF 2003.07.18.}  Changed, so that |is_linear| is used, rather than
+|get_line_switch|.  Also, changed the way |Transform t| is set.  
 The latter change was necessary, because GCC 3.3 couldn't compile this
 file the way it was before.
 \ENDLOG 
@@ -4468,7 +4468,7 @@ Path::operator&(const Path& pa) const
 \initials{LDF 2002.4.7.} 
 
 It would not have been possible to specify a connector if I'd defined
-this function as a binary operator, e.g., |operator+=()|, so I've made
+this function as a binary operator, e.g., |operator+=|, so I've made
 it a named function.  It can be useful when, for instance, rotation
 causes two |Points|, which should be identical, to differ by a small
 amount, like $1/10,000$ in one coordinate.  This has actually
@@ -4563,7 +4563,7 @@ Now removing excess connectors.
 
   return r;
 
-} /* End of |Path::append()| definition.  */
+} /* End of |Path::append| definition.  */
 
 @q * (1) |Plane| functions.@> 
 @* {\bf Plane} functions.
@@ -4692,8 +4692,8 @@ Made |Picture& picture| the first argument
 and removed the default, which was formerly |current_picture|.
 
 \initials{LDF 2002.11.03.}  
-Changed |dynamic_cast()| to
-|static_cast()| in ``|picture += static_cast<Shape*>(p)|''.
+Changed |dynamic_cast| to
+|static_cast| in ``|picture += static_cast<Shape*>(p)|''.
 
 \initials{LDF 2004.06.02.}  
 Changed |const string ppen| to |const Pen* ppen| and
@@ -4833,8 +4833,8 @@ Added this error handling code.  If the
 @
 \LOG
 \initials{LDF 2005.03.10.}
-Now calling |create_new<Path>()|, |create_new<Color>()|,
-|create_new<Dash_Pattern>()|, and |create_new<Pen>()|
+Now calling |create_new<Path>|, |create_new<Color>|,
+|create_new<Dash_Pattern>|, and |create_new<Pen>|
 in a |try| block and catching |bad_alloc|.
 
 \initials{LDF 2005.03.10.}
@@ -5031,7 +5031,7 @@ a segmentation fault error.
 
   return 0;
 
-} /* End of |Path::draw()| definition.  */
+} /* End of |Path::draw| definition.  */
 
 @q *** (3) Point versions.@>
 @*2 {\bf Point} versions.  
@@ -5041,7 +5041,7 @@ Declared in \filename{points.web}, but must be
 defined here, because |Path| is an incomplete type here.
 \initials{LDF Undated.}
 
-Unlike the |Path| versions of |draw()|, this function
+Unlike the |Path| versions of |draw|, this function
 returns a |Path|.  This can be useful, if you want to use the |Path|
 that it creates again for something else. 
 \initials{LDF 2002.11.03.}  
@@ -5061,19 +5061,19 @@ Added the optional |Scanner_Node scanner_node| argument, with default 0.
 Added "preliminaries" for making debugging and error output
 thread-safe.  Now allocating memory for a |Pointer_Vector<Color>|, 
 appending a pointer to a copy of the |Color| pointed to by the 
-|ddraw_color| argument to it, passing a pointer to it to |Path::draw()|, 
+|ddraw_color| argument to it, passing a pointer to it to |Path::draw|, 
 and subsequently deleting the pointer.
 
 \initials{LDF 2005.03.18.}
 Now allocating memory for a |Pointer_Vector<Pen>|, 
 appending a pointer to a copy of the |Pen| pointed to by the 
-|ppen| argument to it, passing a pointer to it to |Path::draw()|, 
+|ppen| argument to it, passing a pointer to it to |Path::draw|, 
 and subsequently deleting the pointer.
 
 \initials{LDF 2005.03.18.}
 Now allocating memory for a |Pointer_Vector<Dash_Pattern>|, 
 appending a pointer to a copy of the |Dash_Pattern| pointed to by the 
-|ddash_pattern| argument to it, passing a pointer to it to |Path::draw()|, 
+|ddash_pattern| argument to it, passing a pointer to it to |Path::draw|, 
 and subsequently deleting the pointer.
 \ENDLOG 
 
@@ -5159,7 +5159,7 @@ Point::draw(Picture& picture,
 
    return q;
 
-}  /* End of |Point::draw()| definition.  */
+}  /* End of |Point::draw| definition.  */
 
 @q ** (2) Draw arrow.@>
 @*1 Draw arrow.
@@ -5188,7 +5188,7 @@ to |const Color* ddraw_color| and |const string ppen| to
 
 \initials{LDF 2004.06.24.}
 Changed return value from |void| to |int|.  
-Now returning the return value of |draw()|, whose return value 
+Now returning the return value of |draw|, whose return value 
 I've also changed to |int| today.
 
 \initials{LDF 2005.03.15.}
@@ -5234,7 +5234,7 @@ Path::drawarrow(Picture& picture,
 Added this function.
 
 \initials{LDF 2003.06.03.}  
-Made |drawarrow()| |const|.
+Made |drawarrow| |const|.
 
 \initials{LDF 2004.06.02.}  
 Changed |const Color& ddraw_color| 
@@ -5247,7 +5247,7 @@ Changed |string ddashed| to
 
 \initials{LDF 2005.03.15.}
 Added the optional |Scanner_Node scanner_node| argument, with default 0.
-Now simply calling |Point::draw()| with |Path::SINGLE_ARROW| as the 
+Now simply calling |Point::draw| with |Path::SINGLE_ARROW| as the 
 |unsigned short arrow| argument and returning its return value. 
 \ENDLOG 
 
@@ -5322,7 +5322,7 @@ Added this function.
 
 \initials{LDF 2005.03.15.}
 Added the optional |Scanner_Node scanner_node| argument, with default 0.
-Now simply calling |Point::draw()| with |Path::SINGLE_ARROW| or 
+Now simply calling |Point::draw| with |Path::SINGLE_ARROW| or 
 |Path::DOUBLE_ARROW| as the 
 |unsigned short arrow| argument and returning its return value. 
 \ENDLOG 
@@ -5385,7 +5385,7 @@ Now setting |p->fill_color| to |ffill_color| directly rather
 than allocating memory and copying it.
 
 \initials{LDF 2005.03.18.}
-Now calling |get_copy()| rather than |create_new<Path>()|.
+Now calling |get_copy| rather than |create_new<Path>|.
 This causes the copy to have the same type as |*this|, which 
 was not the case before.
 
@@ -5520,7 +5520,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
 @^\cfunc{Path}{filldraw}@>
 \initials{LDF Undated.}
 
-At the present time, |filldraw()| differs from the
+At the present time, |filldraw| differs from the
 {\bf filldraw} command in \MF/ and \MP/:
 In the default case, the outline is drawn
 in the default color (currently black) and the |Path| is filled with
@@ -5530,7 +5530,7 @@ possible to hide objects that are behind the
 |Path| to be filled with another color, you will have to use explicit
 arguments for |ddraw_color| and |ffill_color|.  Either or both of
 these can be |""|, which causes the default color (currently black) to
-be used.  Of course, plain |fill()| followed by plain |draw()| will
+be used.  Of course, plain |fill| followed by plain |draw| will
 produce the same result.
 \initials{LDF 2002.03.25 and 2002.11.03.}
 
@@ -5596,7 +5596,7 @@ Previously, it was simply set to |ddraw_color_vector|, which caused
 a segmentation fault error.
 
 \initials{LDF 2005.03.18.}
-Now calling |get_copy()| rather than |create_new<Path>()|.
+Now calling |get_copy| rather than |create_new<Path>|.
 This causes the copy to have the same type as |*this|, which 
 was not the case before.
 
@@ -5789,7 +5789,7 @@ Changed return value from |void| to |int|.  Now trying to lock and unlock
 |picture.mutex|, if |HAVE_PTHREAD_H| is defined.
 
 \initials{LDF 2005.03.18.}
-Now calling |get_copy()| rather than |create_new<Path>()|.
+Now calling |get_copy| rather than |create_new<Path>|.
 This causes the copy to have the same type as |*this|, which 
 was not the case before.
 
@@ -5932,7 +5932,7 @@ Path::undraw(Picture& picture,
 
   return 0;
 
-} /* End of |Path::undraw()| definition.  */
+} /* End of |Path::undraw| definition.  */
 
 @q *** (3) Point versions.@>
 @*2 {\bf Point} versions.
@@ -5966,13 +5966,13 @@ Added the optional |Scanner_Node scanner_node| argument, with default 0.
 \initials{LDF 2005.03.18.}
 Now allocating memory for a |Pointer_Vector<Pen>|, 
 appending a pointer to a copy of the |Pen| pointed to by the 
-|ppen| argument to it, passing a pointer to it to |Path::draw()|, 
+|ppen| argument to it, passing a pointer to it to |Path::draw|, 
 and subsequently deleting the pointer.
 
 \initials{LDF 2005.03.18.}
 Now allocating memory for a |Pointer_Vector<Dash_Pattern>|, 
 appending a pointer to a copy of the |Dash_Pattern| pointed to by the 
-|ddash_pattern| argument to it, passing a pointer to it to |Path::draw()|, 
+|ddash_pattern| argument to it, passing a pointer to it to |Path::draw|, 
 and subsequently deleting the pointer.
 \ENDLOG 
 
@@ -6029,7 +6029,7 @@ Changed return value from |void| to |int|.  Now trying to lock and unlock
 |picture.mutex|, if |HAVE_PTHREAD_H| is defined.
 
 \initials{LDF 2005.03.18.}
-Now calling |get_copy()| rather than |create_new<Path>()|.
+Now calling |get_copy| rather than |create_new<Path>|.
 This causes the copy to have the same type as |*this|, which 
 was not the case before.
 \ENDLOG 
@@ -6205,7 +6205,7 @@ Previously, it was simply set to |ddraw_color_vector|, which caused
 a segmentation fault error.
 
 \initials{LDF 2005.03.18.}
-Now calling |get_copy()| rather than |create_new<Path>()|.
+Now calling |get_copy| rather than |create_new<Path>|.
 This causes the copy to have the same type as |*this|, which 
 was not the case before.
 
@@ -6372,8 +6372,8 @@ Path::unfilldraw(Picture& picture,
 
 \LOG
 \initials{LDF 2002.03.25.}  
-Added argument |dot| and changed definition of |dotlabel()|
-below so that it just calls |label()|.  
+Added argument |dot| and changed definition of |dotlabel|
+below so that it just calls |label|.  
 
 \initials{LDF 2003.04.01.}  
 @:BUG FIX@> BUG FIX: 
@@ -6381,8 +6381,8 @@ Got rid of the first argument
 |unsigned int i|, and made the third argument |short text_short| the
 first argument.  Formerly, the |Points| in |Paths| were
 always numbered starting from 0, because the argument |text_short| was
-passed to |Point::label()|, not |i|.  Also changed the following
-versions of |label()| and |dotlabel()|, that call this function.
+passed to |Point::label|, not |i|.  Also changed the following
+versions of |label| and |dotlabel|, that call this function.
 
 \initials{LDF 2003.05.06.}  
 Changed the conditional, where |text_short| is
@@ -6413,7 +6413,7 @@ Replaced |const text_short| argument with |const string prefix| and
 
 \initials{LDF 2005.01.31.}
 Added the arguments |Color* ttext_color| and |Color* ddot_color|, 
-both with default 0.  Passing these arguments on to |Point::label()|.
+both with default 0.  Passing these arguments on to |Point::label|.
 \ENDLOG 
 
 @q *** (3) Declaration.@> 
@@ -6508,7 +6508,7 @@ Added this section.
 
 \LOG
 \initials{LDF 2005.08.14.}
-Now passing 0 as the |Transform*| argument to |Point::label()|.
+Now passing 0 as the |Transform*| argument to |Point::label|.
 \ENDLOG 
 
 @<Define |Path| functions@>=
@@ -6554,7 +6554,7 @@ Now passing 0 as the |Transform*| argument to |Point::label()|.
  
    return;
 
-} /* End of |Path::label()| definition.  */
+} /* End of |Path::label| definition.  */
 
 @q ** (2) Dotlabel.@>
 @*1 Dotlabel.
@@ -6579,7 +6579,7 @@ and |unsigned short counter|.  Added the argument
 \initials{LDF 2005.01.31.}
 Added the arguments |Color* ttext_color| and |Color* ddot_color|, 
 both with default 0.  Passing these arguments on to 
-|Point::label()|.
+|Point::label|.
 \ENDLOG 
 
 @q *** (3) Declaration.@> 
@@ -6611,8 +6611,8 @@ This function is needed for outputting a |Picture|.
 \initials{LDF Undated.}
 
 \initials{LDF 2003.01.31.} 
-?? @:??@> Do I need to call |Point::project()| on the
-|Points| here and in |Path::project()|?
+?? @:??@> Do I need to call |Point::project| on the
+|Points| here and in |Path::project|?
 
 \LOG
 \initials{LDF 2002.09.17.}  
@@ -6624,9 +6624,9 @@ consequently never reaches |Picture::output| and |Path::output|.
 
 \initials{LDF 2003.05.09.}  
 Rewrote this function.  It now calls
-|Point::extract()| instead of calling |apply_transform()| and
-|project()| on the |Points| directly.  This makes much more sense,
-since any changes to |Point::extract()| would otherwise not have been
+|Point::extract| instead of calling |apply_transform| and
+|project| on the |Points| directly.  This makes much more sense,
+since any changes to |Point::extract| would otherwise not have been
 applied to |Points| on |Paths|.  
 \ENDLOG 
 
@@ -6655,7 +6655,7 @@ Path::extract(const Focus& f, const unsigned short proj, real factor)
       if (DEBUG)
         cerr << endl;
 
-      if (v.size() == 0) /* |Point::extract()| failed. 
+      if (v.size() == 0) /* |Point::extract| failed. 
                              LDF 2003.05.09.  */
         return v;                   
     }
@@ -6824,7 +6824,7 @@ Path::set_world_extremes(Scanner_Node scanner_node)
  
   return true;
 
-}  /* End of |Path::set_world_extremes()| definition.  */
+}  /* End of |Path::set_world_extremes| definition.  */
 
 @q ** (2) Set pre-projective extremes.@>
 @*1 Set pre-projective extremes.
@@ -6987,7 +6987,7 @@ Path::set_pre_projective_extremes(Scanner_Node scanner_node)
  
   return true;
 
-}  /* End of |Path::set_pre_projective_extremes()| definition.  */
+}  /* End of |Path::set_pre_projective_extremes| definition.  */
 
 @q ** (2) Set projective extremes.@>
 @*1 Set projective extremes.
@@ -6995,16 +6995,16 @@ Path::set_pre_projective_extremes(Scanner_Node scanner_node)
 \initials{LDF 2002.09.17.}  
 
 \initials{LDF 2002.09.18.}  
-|set_projective_extremes()| doesn't check that the 
+|set_projective_extremes| doesn't check that the 
 |projective_coordinates|
 in all of the |Points| on the |Path| are valid.  This is
-done already in |project()| and |extract()|, 
+done already in |project| and |extract|, 
 so I don't think it's
-necessary to repeat it here, since |extract()| 
+necessary to repeat it here, since |extract| 
 (which invokes 
-|project()|), is called before |set_projective_extremes()| 
-in |Picture::output()|. 
-The latter is the only place where |set_projective_extremes()| is invoked. 
+|project|), is called before |set_projective_extremes| 
+in |Picture::output|. 
+The latter is the only place where |set_projective_extremes| is invoked. 
 \initials{LDF 2002.09.18.}  
 
 \LOG
@@ -7018,8 +7018,8 @@ Added optional |Scanner_Node scanner_node| argument with default 0.
 Made debugging and error output thread-safe.
 
 \initials{LDF 2005.04.04.}
-Changed the name of this function from |set_extremes()| to 
-|set_projective_extremes()|.  Changed all references to it without comment.
+Changed the name of this function from |set_extremes| to 
+|set_projective_extremes|.  Changed all references to it without comment.
 \ENDLOG 
 
 @q *** (3) Declaration.@> 
@@ -7101,7 +7101,7 @@ replace them on the first iteration of the |for| loop.
 \initials{LDF 2002.09.18.}
 I had some difficulty debugging this because 
 instead of using |-MAX_REAL|, I defined 
-and used |MIN_REAL = numeric_limits <real>::min()|.  
+and used |MIN_REAL = numeric_limits <real>::min|.  
 However, this isn't the 
 negative |real| with the largest magnitude, but the 
 smallest positive |real|.
@@ -7146,7 +7146,7 @@ valid |Point| could have a coordinate $\equiv$ |MAX_REAL| or
 it is virtually impossible that it would be projectable.  If it's 
 the x or y-coordinate,
 it would probably lie outside the limits defined for the invocation of 
-|Picture::output()|, and if it was the |z|, it would either be behind 
+|Picture::output|, and if it was the |z|, it would either be behind 
 the |Focus| or
 so far away as to be practically invisible.  I believe that this 
 is the case, even though 
@@ -7199,7 +7199,7 @@ $z_p = z/(z + p)$.
  
   return true;
 
-}  /* End of |Path::set_projective_extremes()| definition.  */
+}  /* End of |Path::set_projective_extremes| definition.  */
 
 @q ** (2) Enclosing Cuboids Intersect.@>
 @*1 Enclosing Cuboids Intersect.
@@ -7216,16 +7216,16 @@ and 2 if they merely touch.
 Added this function.
 
 \initials{LDF 2005.03.31.}
-Changed the name of this function from |enclosing_prisms_intersect()|
-to |enclosing_cuboids_intersect()|.
+Changed the name of this function from |enclosing_prisms_intersect|
+to |enclosing_cuboids_intersect|.
 
 \initials{LDF 2005.04.01.}
 Changed the return type of this function from |unsigned short|
 to |Unsigned_Byte|.
 
 \initials{LDF 2005.04.04.}
-Now calling |Path::set_world_extremes()| and |Path::get_world_extremes()| instead of 
-|Path::set_projective_extremes()| and |Path::get_projective_extremes()|.
+Now calling |Path::set_world_extremes| and |Path::get_world_extremes| instead of 
+|Path::set_projective_extremes| and |Path::get_projective_extremes|.
 Added error handling code.
 \ENDLOG
 
@@ -7340,7 +7340,7 @@ Path::enclosing_cuboids_intersect(Shape* s, Scanner_Node scanner_node)
    else
        return 2;       
 
-}  /* End of |Path::enclosing_cuboids_intersect()| definition.  */
+}  /* End of |Path::enclosing_cuboids_intersect| definition.  */
 
 @q ** (2) Intersection with |Shape|.@>
 @*1 Intersection with |Shape|.
@@ -7428,7 +7428,7 @@ get_world_extremes(void) const
 \initials{LDF 2005.06.30.}
 
 Any code that calls 
-|get_projective_extremes()| must ensure that |project()| has been 
+|get_projective_extremes| must ensure that |project| has been 
 invoked first.
 \initials{LDF 2005.06.30.}
 
@@ -7468,7 +7468,7 @@ Path::get_pre_projective_extremes() const
 
   return pre_projective_extremes;
 
-}  /* End of |Path::get_pre_projective_extremes()| definition.  */
+}  /* End of |Path::get_pre_projective_extremes| definition.  */
 
 @q ** (2) Get projective extremes.@>
 @*1 Get projective extremes.
@@ -7476,7 +7476,7 @@ Path::get_pre_projective_extremes() const
 \initials{LDF 2002.09.18.}  
 
 Any code that calls 
-|get_projective_extremes()| must ensure that |project()| has been 
+|get_projective_extremes| must ensure that |project| has been 
 invoked first.
 \initials{LDF 2002.09.18.}  
 
@@ -7492,8 +7492,8 @@ Changed the return value from |const valarray <real>| to
 |const valarray <real>&|, i.e., I've made it a reference.
 
 \initials{LDF 2005.04.04.}
-Changed the name of this function from |get_extremes()| to 
-|get_projective_extremes()|.  Changed all references to it without comment.
+Changed the name of this function from |get_extremes| to 
+|get_projective_extremes|.  Changed all references to it without comment.
 
 \initials{LDF 2005.04.04.}
 Added debugging code.
@@ -7871,7 +7871,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 
       }  /* |else|  */
 
-}  /* End of |Path::get_minimum_z()| definition.  */
+}  /* End of |Path::get_minimum_z| definition.  */
 
 @q ** (2) Get maximum z.@>
 @*1 Get maximum z.
@@ -7980,7 +7980,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 
       }  /* |else|  */
 
-}  /* End of |Path::get_maximum_z()| definition.  */
+}  /* End of |Path::get_maximum_z| definition.  */
 
 @q ** (2) Get mean z.@>
 @*1 Get mean z.
@@ -8090,7 +8090,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 
       }  /* |else|  */
 
-}  /* End of |Path::get_mean_z()| definition.  */
+}  /* End of |Path::get_mean_z| definition.  */
 
 @q ** (2) Suppress output.@>
 @*1 Suppress output.
@@ -8100,7 +8100,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 \LOG
 \initials{LDF 2002.09.18.}  
 Added this function.  It's needed because trying to erase 
-a |Shape*| from |elements| in |Picture::output()| causes a memory fault.
+a |Shape*| from |elements| in |Picture::output| causes a memory fault.
 \ENDLOG 
 
 @<Declare |Path| functions@>=
@@ -8125,7 +8125,7 @@ Path::suppress_output()
 \LOG
 \initials{LDF 2002.09.18.}  
 Added this function.  It's needed because trying to erase 
-a |Shape*| from |elements| in |Picture::output()| causes a memory fault.
+a |Shape*| from |elements| in |Picture::output| causes a memory fault.
 \ENDLOG 
 
 @<Declare |Path| functions@>=
@@ -8150,15 +8150,15 @@ Path::unsuppress_output()
 
 \LOG
 \initials{LDF 2002.09.17.}  
-Removed error checking code to |extract()|. 
-Now |output()| assumes that all of the |Points| in |points| can be 
-projected using |focus|.  If they can't be, |extract()| will
+Removed error checking code to |extract|. 
+Now |output| assumes that all of the |Points| in |points| can be 
+projected using |focus|.  If they can't be, |extract| will
 already have ensured that the |Path| is not on |vector <Shape*>
 elements| in the |Picture|. 
 
 \initials{LDF 2003.01.15.}  
 Added code for writing ``drawarrow'' to |out_stream|,
-if |arrow == true|.  This is for the |drawarrow()| functions for
+if |arrow == true|.  This is for the |drawarrow| functions for
 |Path| and |Point| that I've added today.
 
 \initials{LDF 2004.05.25.}  
@@ -8261,9 +8261,9 @@ Path::output(Scanner_Node scanner_node)
 Added this error handling code.  If the |Path|
 is empty, don't output it.  
 This code should never be reached, because the case of a |Path|
-containing no |Points| should be caught in |Path::draw()| and the
+containing no |Points| should be caught in |Path::draw| and the
 other drawing and filling commands. 
-If it should reach |set_projective_extremes()| and |Picture::output()|, which
+If it should reach |set_projective_extremes| and |Picture::output|, which
 also shouldn't be possible, they would  catch it, too.  
 \ENDLOG 
 
@@ -8611,7 +8611,7 @@ Changed |if (draw_color == Colors::background_color)| to
 @
 \LOG
 \initials{LDF 2005.03.14.}
-Now calling |Path::sub_output_draw()|.
+Now calling |Path::sub_output_draw|.
 \ENDLOG 
 
 @<Define |Path| functions@>=
@@ -8720,8 +8720,8 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
 \LOG
 \initials{LDF 2005.03.13.}
 Added this function.  
-Removed from |Path::output()| and put it here.  
-|Path::output()| now calls this function.
+Removed from |Path::output| and put it here.  
+|Path::output| now calls this function.
 \ENDLOG
 
 @q **** (4) Declaration.@>   
@@ -9119,7 +9119,7 @@ This requires special handling because |arrow| could be equal to
 \LOG
 \initials{LDF 2005.03.18.}
 @:BUG FIX@> BUG FIX:  Now setting 
-|connector_iter = connector_iter = connectors.begin()|.
+|connector_iter = connector_iter = connectors.begin|.
 
 \initials{LDF 2005.04.05.}
 Added code for suppressing output if the type of the current 
@@ -9216,7 +9216,7 @@ Added code for suppressing output if the type of the current
 
    return 0;
 
-}  /* End of |sub_output_draw()| definition.  */
+}  /* End of |sub_output_draw| definition.  */
 
 @q **** (4) Output |Path|.@>
 @*3 Output {\bf Path}.
@@ -9358,7 +9358,7 @@ Commented-out the line that prints |fill_draw_value|
 to |stdout|.
 
 \initials{LDF 2003.08.20.}  
-Now printing |points.size()| and |connectors.size()|
+Now printing |points.size| and |connectors.size|
 to |stdout|.  If the latter is 0, a message is printed, that |"--"| will
 be used as the connector. 
 
@@ -9557,7 +9557,7 @@ cerr << "fill_draw_value == ";
 
    return;
 
-} /* End of |Path::show()| definition.  */
+} /* End of |Path::show| definition.  */
 
 @q ** (2) Show Colors.@>
 @*1 Show {\bf Colors}.
@@ -9616,10 +9616,9 @@ get_shape_type(void) const
 @^\cfunc{Path}{is\_planar}@>
 \initials{LDF 2002.11.05.}
 
-|is_planar()| uses the return value of |get_normal()| to determine\newline
-whether |*this| lies in a plane or not.  If it does, |is_planar()|
-returns |true|, otherwise, it returns |false|.  If |*this| is linear, 
-|is_planar()| issues a warning and returns |true|.
+|is_planar| uses the return value of |get_normal| to determine whether |*this| lies in a plane or not.  
+If it does, |is_planar| returns |true|, otherwise, it returns |false|.  If |*this| is linear, 
+|is_planar| issues a warning and returns |true|.
 
 \LOG
 \initials{LDF 2002.11.03.}  
@@ -9627,8 +9626,7 @@ Rewrote this function.  It should now work for all
 |Paths|.
 
 \initials{LDF 2002.11.05.}  
-Rewrote this function again.  It now uses the new
-version of |get_normal()|.
+Rewrote this function again.  It now uses the new version of |get_normal|.
 
 \initials{LDF 2002.11.06.}  
 Added optional |const bool verbose| and |string text|
@@ -9642,7 +9640,7 @@ Added |VERBOSE_GLOBAL| to \filename{pspglb.web} today.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.02.11.}
 @:BUG FIX@> BUG FIX:  Now returning |false| immediately 
@@ -9751,10 +9749,10 @@ Commented-out the warning.
 @*1 Is linear.
 @^\cfunc{Path}{is\_linear}@>
 
-|is_linear()| first checks whether |line_switch| is |true|.  If it is,
+|is_linear| first checks whether |line_switch| is |true|.  If it is,
 it returns |true| right away.  Otherwise, it uses the return value of
-|get_normal()| to determine whether |*this| is linear or not.  If it
- is, |is_linear()| returns |true|, otherwise, it returns |false|.
+|get_normal| to determine whether |*this| is linear or not.  If it
+ is, |is_linear| returns |true|, otherwise, it returns |false|.
 \initials{LDF 2003.04.09.} 
 
 \LOG
@@ -9767,7 +9765,7 @@ arguments for writing a message to the standard output.
 
 \initials{LDF 2003.04.09.}  
 Now checking whether |line_switch| is |true| before
-calling |get_normal()|.  
+calling |get_normal|.  
 @:!!@> !!  If a |Path| whose |line_switch == true| is 
 modified such that it's no longer linear, the programmer must ensure 
 that |line_switch| is set to |false|!
@@ -9781,7 +9779,7 @@ Added |VERBOSE_GLOBAL| to \filename{pspglb.web} today.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.09.06.}
 Now returning |false| if |points.size() < 2| and |true| if 
@@ -9877,8 +9875,8 @@ arguments.
 
 \LOG
 \initials{LDF 2002.11.03.}  
-Renamed this function |get_line_switch()| from
-|is_line()|.  About to add |is_linear()|, which will test whether all
+Renamed this function |get_line_switch| from
+|is_line|.  About to add |is_linear|, which will test whether all
 the |Points| are colinear or not.
 \ENDLOG 
 
@@ -9992,7 +9990,7 @@ Path::is_triangular(void) const
 
    return !is_linear();
 
-} /* End of |Path::is_triangular()| definition.  */
+} /* End of |Path::is_triangular| definition.  */
 
 @q ** (2) Is polygonal.@>
 @*1 \.{is\_polygonal}.
@@ -10067,7 +10065,7 @@ Path::is_polygonal(Scanner_Node scanner_node) const
 
    return true;
 
-} /* End of |Path::is_polygonal()| definition.  */
+} /* End of |Path::is_polygonal| definition.  */
 
 @q ** (2) Is convex and_polygonal.@>
 @*1 \.{is\_convex\_polygonal}.
@@ -10278,18 +10276,18 @@ Got the code in this section to work.
 
    return true;
 
-} /* End of |Path::is_convex_polygonal()| definition.  */
+} /* End of |Path::is_convex_polygonal| definition.  */
 
 @q ** (2) Is rectangular.@>
 @*1 Is rectangular.
 @^\cfunc{Path}{is\_rectangular}@>
 
-|is_rectangular()| tests whether a |Path| is rectangular.  
+|is_rectangular| tests whether a |Path| is rectangular.  
 It first tests if it'splanar.  Then it
 creates vectors from the points on the |Path|, and checks their
-angles to one another.  If they are within |Point::epsilon()|
+angles to one another.  If they are within |Point::epsilon|
 (exclusive) of $180^\circ$ in one case, and  
-$90^\circ$ in the other two, |is_rectangular()| returns 1, 
+$90^\circ$ in the other two, |is_rectangular| returns 1, 
 otherwise 0. \initials{LDF 2003.12.02.} 
 
 Please note that this function will return |false| for some |Paths|
@@ -10307,14 +10305,14 @@ Added this function.
 Added test of planarity at beginning of function. 
 
 \initials{LDF 2003.12.09.}  
-Now using |cross_product()| to test for
+Now using |cross_product| to test for
 parallelity of the sides.  @:!! TO DO@> TO DO:  Add
-|Path::is_parallel()| and a version for |Points|. 
+|Path::is_parallel| and a version for |Points|. 
 
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.10.14.}
 Moved this function from \filename{rectangs.web} to this file
@@ -10362,7 +10360,7 @@ Path::is_rectangular() const
           && c.cross_product(d) == origin_pt 
           && fabs(fabs(a.angle(d)) - 90) < Point::epsilon());
 
-} /* End of |Path::is_rectangular()| definition.  */
+} /* End of |Path::is_rectangular| definition.  */
 
 @q ** (2) Is quadrilateral.@>
 @*1 Is quadrilateral.
@@ -10446,7 +10444,7 @@ real sum = 0;
 
 return (fabs(sum - 360) <= Point::epsilon());
 
-} /* End of |Path::is_quadrilateral()| definition.  */
+} /* End of |Path::is_quadrilateral| definition.  */
 
 @q ** (2) Is square.@>
 @*1 Is square.
@@ -10481,7 +10479,7 @@ Path::is_square() const
   return (   a.magnitude() == b.magnitude() 
           == c.magnitude() == d.magnitude());
 
-} /* End of |Path::is_square()| definition.  */
+} /* End of |Path::is_square| definition.  */
 
 @q ** (2) Is elliptical.@>
 @*1 Is elliptical.
@@ -10773,7 +10771,7 @@ in the following conditional.  This may still need some work.
 
       } /* |else|  */
 
-} /* End of |Path::is_coplanar()| definition.  */
+} /* End of |Path::is_coplanar| definition.  */
 
 @q ** (2) Is on segment.  |Point| function.@> 
 @*1 Is on segment.  |Point| function.
@@ -10802,7 +10800,7 @@ Point::is_on_segment(const Path& p) const
 @*1 Slope.
 @^\cfunc{Path}{slope}@>
 
-|slope()| can only be used for linear |Paths|. 
+|slope| can only be used for linear |Paths|. 
 It returns a |real| value representing the slope of the {\it trace\/}
 of a line on the major plane represented by the |char| arguments, or
 |INVALID_REAL|, if the |Path| is non-linear.  For
@@ -10815,8 +10813,8 @@ are the x and y-coordinates of points on $\overrightarrow{q_0q_1}$.
 
 \LOG
 \initials{LDF 2002.11.05.}  
-Changed this function so that |is_linear()| is used
-instead of |get_line_switch()| (formerly ``|is_line()|'').  Now, it
+Changed this function so that |is_linear| is used
+instead of |get_line_switch| (formerly ``|is_line|'').  Now, it
 can be used for all linear |Paths|, not just ones created using the
 constructor for lines.  Also, it was commented-out.  
 \ENDLOG 
@@ -10847,7 +10845,7 @@ Path::slope(char a, char b)
 @*1 Subpath.
 @^\cfunc{Path}{subpath}@>
 \initials{LDF 2002.11.05.}
-|subpath()| returns a new |Path| using |points[start]|
+|subpath| returns a new |Path| using |points[start]|
 through\newline
 |points[end - 1]| from |*this|.  If the optional |bool|
 argument |cycle| is used, then the new |Path| will be a cycle, whether
@@ -10860,7 +10858,7 @@ have |start| $>$ |end|, even if |*this| is a cycle.
 
 \LOG
 \initials{LDF 2002.11.05.}  Rewrote this function.  
-Made |subpath()| itself and its arguments |const|. 
+Made |subpath| itself and its arguments |const|. 
 Added error handling code.  
 
 \initials{LDF 2003.07.16.}  Please note that |start| and |end| cannot be made
@@ -10888,7 +10886,7 @@ Path::subpath(size_t start, size_t end,
   
 @  \initials{LDF 2002.11.05.}  
 There is no ``|INVALID_PATH|'', so I return an empty one, if 
-|start >= end|.  Since |operator==()| currently doesn't exist, there's
+|start >= end|.  Since |operator==| currently doesn't exist, there's
 not much point in defining |INVALID_PATH|, since there's no way to
 compare another |Path| to it.
 
@@ -11007,12 +11005,12 @@ Made non-|inline|.  Changed return value to
 |const Point&|. 
 
 \initials{LDF 2003.11.28.}  
-@:BUG FIX@> BUG FIX:  Changed, so that |apply_transform()| is 
+@:BUG FIX@> BUG FIX:  Changed, so that |apply_transform| is 
 called on the |Point|.  This entailed making this function
 non-|const|.  Added |const| version below.  
 This may actually be a bug, rather than a bug
 fix, depending on how this function is used elsewhere.  However, I
-really think |apply_transform()| should be called.
+really think |apply_transform| should be called.
 
 \initials{LDF 2007.07.09.}
 Made this function |virtual| because a separate version is needed 
@@ -11162,7 +11160,7 @@ Path::get_connector(const unsigned int i) const
    else 
       return connectors[s - 1];
 
-}  /* End of |Path::get_connector()| definition.  */
+}  /* End of |Path::get_connector| definition.  */
 
 @q ** (2) Get normal.@>
 @*1 Get normal.
@@ -11177,16 +11175,16 @@ Added this section.
 @*2 {\bf Path} version.
 @^\cfunc{Path}{get\_normal}@>
 \initials{LDF 2002.11.05.}  
-|get_normal()| returns a unit vector representing the normal to the
+|get_normal| returns a unit vector representing the normal to the
 plane of the |Path *this|, if |*this| is planar.  If the |Points| on
 |*this| are colinear and there are no connectors that could make the
 |Path| non-linear, then |origin| ($(0, 0, 0)$) is returned.
-If the |Path| is neither planar nor linear, |get_normal()| returns
+If the |Path| is neither planar nor linear, |get_normal| returns
 |INVALID_POINT|.
 
 \initials{LDF 2002.11.05.}  
-\item{$\bullet$} |get_normal()| first checks whether a |Path| contains
-no |Points| or only one |Point|.  If so, |get_normal()| returns
+\item{$\bullet$} |get_normal| first checks whether a |Path| contains
+no |Points| or only one |Point|.  If so, |get_normal| returns
 |INVALID_POINT|.   
 \smallskip
 %
@@ -11198,7 +11196,7 @@ non-planar.
 \smallskip
 %
 \item{$\bullet$} Then it checks whether the |Path| has only two
-|Points|.  If it does, |get_normal()| returns the |Point| $(0, 0, 0)$,  
+|Points|.  If it does, |get_normal| returns the |Point| $(0, 0, 0)$,  
 because the |Path| will be linear.
 \smallskip
 %
@@ -11208,7 +11206,7 @@ $p_1$ are the first and second |Points| on the |Path|, and $p_2$ is
 the next |Point| on the |Path| such that $b_0 \neq (0, 0, 0)$.
 If no |Points| on the |Path| 
 fulfill this condition, then all of the |Points| are colinear, so
-|get_normal()| returns |origin|.
+|get_normal| returns |origin|.
 \smallskip
 %
 \item{$\bullet$} 
@@ -11217,9 +11215,9 @@ products $b_x$ are calculated using $\overrightarrow{p_0p_1}$ and the
 direction vectors $\overrightarrow{p_0p_x}$ for the rest of the
 |Points| $p_x$ on the |Path|.  If and only if $b_x = b_0$, or $b_x =
 -b_0$, or $b_x = (0, 0, 0)$ for all $b_x$, then the |Path| is planar,
-and |get_normal()| returns $-b_0$ (see explanation of sign below).  
+and |get_normal| returns $-b_0$ (see explanation of sign below).  
 Otherwise, the |Path| is
-non-planar, and |get_normal()| returns |INVALID_POINT|.
+non-planar, and |get_normal| returns |INVALID_POINT|.
 \smallskip  
 
 \initials{LDF 2003.06.04.}
@@ -11247,7 +11245,7 @@ the cases where a proper normal is found
 
 \initials{LDF 2004.06.08.}  Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 \ENDLOG
 
 @q **** (4) Declaration.@> 
@@ -11401,7 +11399,7 @@ Commented-out warning.
 
       if (b1 != origin_pt)  /* \initials{LDF 2002.11.03.}  This |if| merely prevents
                             a warning from being issued 
-                            by |unit_vector()|.  */
+                            by |unit_vector|.  */
         b1.unit_vector(true);
 
       if (DEBUG) 
@@ -11438,8 +11436,8 @@ Commented-out warning.
 @q *** (3) |Point| version.@>
 @*2 {\bf Point} version.
 @^\cfunc{Point}{get\_normal}@>
-|Point::get_normal()| is declared \filename{points.web}, but it must
-be defined here, because it calls |Path::get_normal()|.  
+|Point::get_normal| is declared \filename{points.web}, but it must
+be defined here, because it calls |Path::get_normal|.  
 \initials{LDF 2003.07.11.}  
 
 \LOG
@@ -11476,12 +11474,12 @@ Point::get_normal(const Point& p, const Point& q) const
 \LOG
 \initials{LDF 2002.11.05.}  
 Rewrote this function to correspond to the new
-definition of |get_normal()|.
+definition of |get_normal|.
 
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 \ENDLOG 
 
 @<Declare |Path| functions@>=
@@ -11526,7 +11524,7 @@ is always tested.
 \initials{LDF 2003.06.24.}  @:BUG FIX@> BUG FIX:  When the |Points| all lay in
 the x-z plane, or a plane parallel to it,\newline
 |lambda_denominator| was 0.
-This caused |is_in_triangle()| to return |false|, even when |*this|
+This caused |is_in_triangle| to return |false|, even when |*this|
 did lie in the triangle.  Now, if |lambda_denominator| or 
 |mu_denominator| is equal to 0, the y and z-coordinates 
 are exchanged, and |lambda_denominator| and
@@ -11771,11 +11769,11 @@ Made |bool c| argument |const|.
 
 \initials{LDF 2004.11.01.}
 Now removing excess connectors, if 
-|c == false && connectors.size() >= points.size()|. 
+|c == false && connectors.size() >= points.size|. 
 
 \initials{LDF 2004.11.01.}
 @:BUG FIX@> BUG FIX:  Now making sure that |connectors.size() > 0| 
-before calling |connectors.pop_back()|.
+before calling |connectors.pop_back|.
 
 \initials{LDF 2005.11.18.}
 Made this function virtual.  Added optional |Scanner_Node scanner_node| 
@@ -11819,7 +11817,7 @@ Path::set_cycle(const bool c, Scanner_Node scanner_node)
 
     return 0;
 
-}  /* End of |Path::set_cycle()| definition.  */
+}  /* End of |Path::set_cycle| definition.  */
 
 @q ** (2) Adjust connectors. @>
 @*1 Adjust connectors.
@@ -11883,7 +11881,7 @@ the last connector, or |--|, if there are no connectors.
   
     } /* |if (connectors.size() < i)|  */
 
-} /* End of |Path::adjust_connectors()| definition.  */
+} /* End of |Path::adjust_connectors| definition.  */
 
 @q ** (2) Adjust |draw_color_vector|.@>
 @*1 Adjust {\bf draw\_color\_vector}.
@@ -11930,7 +11928,7 @@ Path::adjust_draw_color_vector(void)
 
    return 0;
 
-} /* End of |Path::adjust_draw_color_vector()| definition.  */
+} /* End of |Path::adjust_draw_color_vector| definition.  */
 
 @q ** (2) Adjust |pen_vector|.@>
 @*1 Adjust {\bf pen\_vector}.
@@ -11976,7 +11974,7 @@ Path::adjust_pen_vector(void)
 
    return 0;
 
-} /* End of |Path::adjust_pen_vector()| definition.  */
+} /* End of |Path::adjust_pen_vector| definition.  */
 
 @q ** (2) Adjust |dash_pattern_vector|.@>
 @*1 Adjust {\bf dash\_pattern\_vector}.
@@ -12023,7 +12021,7 @@ Path::adjust_dash_pattern_vector(void)
 
    return 0;
 
-} /* End of |Path::adjust_dash_pattern_vector()| definition.  */
+} /* End of |Path::adjust_dash_pattern_vector| definition.  */
 
 @q ** (2) Reverse.@>
 @*1 Reverse.
@@ -12187,7 +12185,7 @@ error at compile time.
 
   return *this;
 
-}  /* End of non-const |Path::reverse()| definition.  */
+}  /* End of non-const |Path::reverse| definition.  */
 
 @q *** (3) No assignment.@>
 @*2 No assignment.
@@ -12227,7 +12225,7 @@ Path::reverse(Scanner_Node scanner_node) const
 @^\cofunc{Path}{==}@>
 @:!! TO DO@> TO DO: 
 I'll need to make all connectors explicit in order to make
-this work.  See |operator&()| for an example of how to make this work.
+this work.  See |operator&| for an example of how to make this work.
 @<Declare |Path| functions@>=
 #if 0 
 virtual
@@ -12253,7 +12251,7 @@ Path::operator==(Path& p)
 @*1 Intersection of two linear {\bf Paths}.
 @^\cfunc{Path}{intersection\_point}@> 
 If |*this| is a line and the argument |pa| is a line,\newline 
-|intersection_point()| calls the version for
+|intersection_point| calls the version for
 |Points| in \filename{points.web}.
 
 Other kinds of |Paths| and other classes will need their own versions
@@ -12265,17 +12263,17 @@ just remove it.
 \LOG
 \initials{LDF 2002.04.15.}  Changed return value from |Bool_Real_Point| to
 |Bool_Point|, since I've had to comment-out the version of
-|Point::intersection_point()| that uses the |Line| version.
+|Point::intersection_point| that uses the |Line| version.
 
 \initials{LDF 2002.04.10.}  Changed return type to |Bool_Real_Point| to
-correspond with the same change to |Point::intersection_point()|. 
+correspond with the same change to |Point::intersection_point|. 
 
 \initials{LDF 2003.07.04.}  Added |trace| argument.  Added conditional using
-|trace| to choose which version of |Point::intersection_point()|
+|trace| to choose which version of |Point::intersection_point|
 should be called.  Changed so that
-|is_linear()| is used instead of\newline
-|get_line_switch()|.  Now using
-|get_last_point()| instead of |*points[1]|.
+|is_linear| is used instead of\newline
+|get_line_switch|.  Now using
+|get_last_point| instead of |*points[1]|.
 \ENDLOG 
 
 @q *** (3) Declaration.@>   
@@ -12315,13 +12313,13 @@ Path::intersection_point(const Path& pa, const bool trace) const
           return INVALID_BOOL_POINT;
       }
 
-}  /* End of |Path::intersection_point()| definition.  */
+}  /* End of |Path::intersection_point| definition.  */
 
 @q ** (2) Intersection points.@> 
 @*1 Intersection points.
 \initials{LDF 2005.10.27.}
-Dummy function.  It simply calls |intersection_point()|.  It's needed in 
-|Scan_Parse::intersection_points_func()|.
+Dummy function.  It simply calls |intersection_point|.  It's needed in 
+|Scan_Parse::intersection_points_func|.
 
 \LOG
 \initials{LDF 2005.10.27.}
@@ -12407,7 +12405,7 @@ affects the position of the three-dimensional |Point| within the
 |Label|, {\it not\/} the two-dimensional projected point.  Therefore,
 it's not possible to adjust the position of the |Label| precisely
 without changing the Metapost code.  @:!! TO DO@> TO DO:  Change
-|label()|, so that it's possible to adjust the position of the points
+|label|, so that it's possible to adjust the position of the points
 in the projection!  This may open a can of worms, though, especially
 if the same code is used to generate drawings using different
 projections and/or different |Focuses|.    
@@ -12450,12 +12448,12 @@ are set analogously.
 \initials{LDF 2004.06.08.}  
 These changes were necessary, because
 I've removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 \ENDLOG 
 
 @q *** Declaration.@>
 
-@<Declare |draw_axes()|@>=
+@<Declare |draw_axes|@>=
 void
 draw_axes(Picture& picture,
           real dist = 2.5,
@@ -12471,7 +12469,7 @@ draw_axes(Picture& picture,
 
 @q *** Definition.@>
 @
-@<Define |draw_axes()|@>=
+@<Define |draw_axes|@>=
 void
 draw_axes(Picture& picture,
           real dist, 
@@ -12492,7 +12490,7 @@ draw_axes(Picture& picture,
 \LOG
 \initials{LDF 2003.04.01.}  Added this section.
 \ENDLOG 
-@<Define |draw_axes()|@>=
+@<Define |draw_axes|@>=
 
   if (dist <= 0) 
     dist = 2.5;
@@ -12517,7 +12515,7 @@ x_pt = (shift_x != static_cast<const Point*>(0)) ? *shift_x : origin_pt;
 \LOG
 \initials{LDF 2003.04.01.}  Added this error handling code.  
 \ENDLOG 
-@<Define |draw_axes()|@>=
+@<Define |draw_axes|@>=
   if (pos_x == "" && pos_y == "" && pos_z == "") 
     {
       cerr << "WARNING! In draw_axes():" << endl 
@@ -12527,7 +12525,7 @@ x_pt = (shift_x != static_cast<const Point*>(0)) ? *shift_x : origin_pt;
     }
 
 @  
-@<Define |draw_axes()|@>=
+@<Define |draw_axes|@>=
 if (pos_x != "")
 {
   Point x0(-dist, 0, 0);
@@ -12576,14 +12574,14 @@ used.
 \initials{LDF 2004.06.08.}  
 These changes were necessary, because
 I've removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.06.08.}
 See the log entry of this date for the preceding version of this function for a 
 complete explanation.
 \ENDLOG 
 
-@<Declare |draw_axes()|@>=
+@<Declare |draw_axes|@>=
 void
 draw_axes(Picture& picture,
           const Color* ddraw_color,
@@ -12598,7 +12596,7 @@ draw_axes(Picture& picture,
           const Point* shift_z = 0); 
 
 @
-@<Define |draw_axes()|@>=
+@<Define |draw_axes|@>=
 void
 draw_axes(Picture& picture,
           const Color* ddraw_color,
@@ -12626,7 +12624,7 @@ draw_axes(Picture& picture,
 @ Get {\bf Line}.
 @^\cfunc{Path}{get\_line}@>
 Returns a |Line| corresponding to |*this|, if |*this| is linear.
-Otherwise, |get_line()| returns |INVALID_LINE|.
+Otherwise, |get_line| returns |INVALID_LINE|.
 \LOG
 \initials{LDF 2003.06.06.}  Added this function.
 \ENDLOG 
@@ -13273,6 +13271,12 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   
+
 
 @q **** (4) @>
 @
@@ -13335,7 +13339,7 @@ About to start using the weights so that it will
 generate a NURB.
 
 \initials{LDF 2005.01.28.}
-Now calling |Nurb::blending_func()| in a loop to set the value of 
+Now calling |Nurb::blending_func| in a loop to set the value of 
 |blend_value_denominator|, which causes this function to 
 generate a NURB.  I'm not sure it works right, though.  
 I don't understand why changing the weights has the 
@@ -13601,7 +13605,7 @@ try
  
    return 0;
 
-}  /* End of |Nurb::generate()| definition.  */
+}  /* End of |Nurb::generate| definition.  */
 
 @q * (1) |Focus| functions.@>
 @* {\bf Focus} functions.
@@ -14072,7 +14076,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Define |Plane| functions@>@;
 @<Define |Path| functions@>@;
 @<Define |Line| functions@>@;
-@<Define |draw_axes()|@>@;
+@<Define |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
 @<Define |Nurb| functions@>@;
 
@@ -14083,7 +14087,7 @@ Now including |@<Define |Focus| functions@>|.
 
 @(paths.h@>=
 @<Define |class Path|@>@;
-@<Declare |draw_axes()|@>@;
+@<Declare |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>

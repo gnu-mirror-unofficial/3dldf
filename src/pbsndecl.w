@@ -1880,7 +1880,7 @@ Added this section.
 
 \initials{LDF 2004.06.07.}  
 Removed the token declaration for |WITH_DOTS|.
-|with_dots| is now a predefined variable defined in |Scanner_Type::create()| in 
+|with_dots| is now a predefined variable defined in |Scanner_Type::create| in 
 \filename{scan.web}.
 
 \initials{LDF 2004.06.07.}  

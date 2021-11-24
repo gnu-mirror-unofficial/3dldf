@@ -175,9 +175,9 @@ Changed \§numeric expression> to \§numeric secondary> and
 
   const Rectangle* t = s->get_rectangle_ptr(u); 
 
-@q **** (4) Error handling:  |Solid::get_rectangle_ptr()| returned 0.@>   
+@q **** (4) Error handling:  |Solid::get_rectangle_ptr| returned 0.@>   
 
-@ Error handling:  |Solid::get_rectangle_ptr()| returned 0.
+@ Error handling:  |Solid::get_rectangle_ptr| returned 0.
 \initials{LDF 2004.10.13.}
 
 @<Define rules@>=
@@ -217,9 +217,9 @@ Changed \§numeric expression> to \§numeric secondary> and
             r = create_new<Rectangle>(t, scanner_node);
           }
 
-@q ***** (5) Error handling:  |create_new<Rectangle>()| failed.@> 
+@q ***** (5) Error handling:  |create_new<Rectangle>| failed.@> 
 
-@ Error handling:  |create_new<Rectangle>()| failed.
+@ Error handling:  |create_new<Rectangle>| failed.
 \initials{LDF 2004.10.13.}
 
 @<Define rules@>=

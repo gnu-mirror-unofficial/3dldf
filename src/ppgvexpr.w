@@ -614,7 +614,7 @@ to
 \§polygon-like primary>''.
   
 \initials{LDF 2005.02.24.}
-Removed code from this rule.  Now calling |Scan_Parse::decompose_func()|.
+Removed code from this rule.  Now calling |Scan_Parse::decompose_func|.
 
 \initials{LDF 2005.10.24.}
 Changed |polygon_like_secondary| and |polygon_like_primary| to 

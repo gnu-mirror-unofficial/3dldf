@@ -2636,7 +2636,7 @@ Added this rule.
 @*3 \§numeric declaration>.
 
 @:BUG FIX@> BUG FIX:  Now calling 
-|scanner_node->token_string_bool_vector.clear()| 
+|scanner_node->token_string_bool_vector.clear| 
 at the end of this rule.  Not doing this caused entries in 
 |scanner_node->id_map_node->id_map| to be overwritten.
 \initials{LDF 2004.04.30.}
@@ -2707,9 +2707,9 @@ dummy code.
 
 \LOG
 \initials{LDF 2004.07.22.}
-Now calling |shape_decl_func<Point>()| instead of including
+Now calling |shape_decl_func<Point>| instead of including
 |@<Common code for |Shape| declarations@>|.  About to change the other rules to
-use |shape_decl_func()|, too.
+use |shape_decl_func|, too.
 \ENDLOG 
 
 @<Define rules@>=
@@ -3460,11 +3460,11 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.08.24.}
-Changed the call to |Scan_Parse::vector_type_decl()|.
+Changed the call to |Scan_Parse::vector_type_decl|.
 It's no longer a template function and I've changed its arguments. 
 
 \initials{LDF 2004.08.254.}
-Changed the call to |Scan_Parse::vector_type_decl()|
+Changed the call to |Scan_Parse::vector_type_decl|
 to reflect the fact that I've made it a template function again.
 \ENDLOG 
 
@@ -3511,7 +3511,7 @@ Added this rule.
 
 \initials{LDF 2005.01.17.}
 @:BUG FIX@> BUG FIX:  Changed |Definition_Info_Type| to |Picture| in 
-the call to |Scan_Parse::vector_type_decl()|.  I don't know why this
+the call to |Scan_Parse::vector_type_decl|.  I don't know why this
 apparently caused no problems.
 \ENDLOG 
 

@@ -229,16 +229,16 @@ Changed |ellipse_like_secondary| to |ellipse_secondary|.
 Removed debugging code.
 
 \initials{LDF 2005.10.27.}
-Removed code.  Now calling |Scan_Parse::intersection_points_func()|.
+Removed code.  Now calling |Scan_Parse::intersection_points_func|.
 
 \initials{LDF 2005.10.27.}
 Removed more code.  Now calling 
-|Pointer_Vector<Bool_Point>::convert_pair_pointer()|.
+|Pointer_Vector<Bool_Point>::convert_pair_pointer|.
 |Ellipse::intersection_points(Path)| returns a |Bool_Point_Pair|.
-|Scan_Parse::intersection_points_func()| creates a new |Bool_Point_Pair|
+|Scan_Parse::intersection_points_func| creates a new |Bool_Point_Pair|
 on the free store, assigns to it from the first one, and returns a 
 |void*| that points to the new one.
-|Pointer_Vector<Bool_Point>::convert_pair_pointer()| creates two new
+|Pointer_Vector<Bool_Point>::convert_pair_pointer| creates two new
 |Bool_Points| on the free store, pushes pointers to them onto 
 the |Pointer_Vector<Bool_Point>|, and assigns to them from the 
 two |Bool_Points| in the |Bool_Point_Pair|.  Then it deletes
@@ -283,13 +283,13 @@ because the rule  \§ellipse-like tertiary> $\longrightarrow$
 \§ellipse tertiary> was never reduced because of conflicts.
 
 \initials{LDF 2005.10.27.}
-Removed code.  Now calling |Scan_Parse::intersection_points_func()|
-and |Pointer_Vector<Bool_Point>::convert_pair_pointer()|.
+Removed code.  Now calling |Scan_Parse::intersection_points_func|
+and |Pointer_Vector<Bool_Point>::convert_pair_pointer|.
 |Ellipse::intersection_points(Path)| returns a |Bool_Point_Pair|.
-|Scan_Parse::intersection_points_func()| creates a new |Bool_Point_Pair|
+|Scan_Parse::intersection_points_func| creates a new |Bool_Point_Pair|
 on the free store, assigns to it from the first one, and returns a 
 |void*| that points to the new one.
-|Pointer_Vector<Bool_Point>::convert_pair_pointer()| creates two new
+|Pointer_Vector<Bool_Point>::convert_pair_pointer| creates two new
 |Bool_Points| on the free store, pushes pointers to them onto 
 the |Pointer_Vector<Bool_Point>|, and assigns to them from the 
 two |Bool_Points| in the |Bool_Point_Pair|.  Then it deletes
@@ -429,14 +429,14 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2005.10.27.}
-Removed code.  Now calling |Scan_Parse::intersection_points_func()| and
-|Scan_Parse::convert()|.
+Removed code.  Now calling |Scan_Parse::intersection_points_func| and
+|Scan_Parse::convert|.
 
 \initials{LDF 2005.10.28.}
-Now calling |Scan_Parse::ellipse_intersection_func()|.
+Now calling |Scan_Parse::ellipse_intersection_func|.
 
 \initials{LDF 2005.10.28.}
-Now calling |Scan_Parse::ellipse_like_intersection_func()|.
+Now calling |Scan_Parse::ellipse_like_intersection_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 
@@ -466,7 +466,7 @@ Now calling |Scan_Parse::ellipse_like_intersection_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.28.}
-Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
+Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 
@@ -496,7 +496,7 @@ Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.28.}
-Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
+Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 
@@ -527,13 +527,13 @@ Added this rule.
 \initials{LDF 2004.11.08.}
 @:BUG FIX@> BUG FIX:  Changed |Bool_Point_Pair bpp| to 
 |Bool_Point_Quadruple bpq|.  Now calling 
-|c->Ellipse::intersection_points()| explicitly, since the 
-compiler didn't resolve the call to |c->intersection_points()| 
+|c->Ellipse::intersection_points| explicitly, since the 
+compiler didn't resolve the call to |c->intersection_points| 
 this way.  Now allocating memory for four |Bool_Points| rather than
 two and setting |bpv->ctr| accordingly.
 
 \initials{LDF 2005.10.28.}
-Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func()|.
+Removed code.  Now calling |Scan_Parse::ellipse_like_intersection_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 
@@ -569,8 +569,8 @@ Changed the left-hand side from \§point vector tertiary> to
 this file (\filename{pbpvexpr.w}.
 
 \initials{LDF 2005.11.21.}
-Changed the name of |conic_section_line_intersection_func()|
-to |conic_section_intersection_func()| and added a second 
+Changed the name of |conic_section_line_intersection_func|
+to |conic_section_intersection_func| and added a second 
 template parameter.  Changed the |Path*| argument to 
 a pointer to the type of the new template parameter.
 Made the corresponding changes here.
@@ -607,8 +607,8 @@ Changed the left-hand side from \§point vector tertiary> to
 this file (\filename{pbpvexpr.w}.
 
 \initials{LDF 2005.11.21.}
-Changed the name of |conic_section_line_intersection_func()|
-to |conic_section_intersection_func()| and added a second 
+Changed the name of |conic_section_line_intersection_func|
+to |conic_section_intersection_func| and added a second 
 template parameter.  Changed the |Path*| argument to 
 a pointer to the type of the new template parameter.
 Made the corresponding changes here.
@@ -800,7 +800,7 @@ Changed |polygon_like_secondary| to |polygon_secondary|.
 Removed debugging code.
 
 \initials{LDF 2005.10.28.}
-Removed code.  Now calling |Scan_Parse::intersection_points_func()|.
+Removed code.  Now calling |Scan_Parse::intersection_points_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 
@@ -839,7 +839,7 @@ Changed |polygon_like_tertiary| to |polygon_tertiary|.
 Removed debugging code.
 
 \initials{LDF 2005.10.28.}
-Removed code.  Now calling |Scan_Parse::intersection_points_func()|.
+Removed code.  Now calling |Scan_Parse::intersection_points_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 

@@ -243,9 +243,9 @@ try to allocate memory on the free store for it.
 
   } /* |if (reg_cl_plane_curve_reflection == static_cast<Reg_Cl_Plane_Curve*>(0))|  */
 
-@q *** (3) Call |Path::reflect_in()|.@> 
+@q *** (3) Call |Path::reflect_in|.@> 
 
-@ Call |Path::reflect_in()|.
+@ Call |Path::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
@@ -261,9 +261,9 @@ try to allocate memory on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Path::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Path::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Path::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Path::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
@@ -286,9 +286,9 @@ try to allocate memory on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Path::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Path::reflect_in| returned 1.@> 
 
-@ Error handling:  |Path::reflect_in()| returned 1.
+@ Error handling:  |Path::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
@@ -312,9 +312,9 @@ try to allocate memory on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Path::reflect_in()| succeeded.@> 
+@q **** (4) |Path::reflect_in| succeeded.@> 
 
-@ |Path::reflect_in()| succeeded.
+@ |Path::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
@@ -368,7 +368,7 @@ try to allocate memory on the free store for it.
 
   return 0;
 
-} /* End of |Reg_Cl_Plane_Curve::reflect_in()| definition.  */
+} /* End of |Reg_Cl_Plane_Curve::reflect_in| definition.  */
 
 @q * Returning elements and information.@>
 @* Returning elements and information.
@@ -378,7 +378,7 @@ functions of types derived from |Reg_Cl_Plane_Curve|.
 
 \LOG
 \initials{LDF 2002.11.03.}  Removed
-|Reg_Cl_Plane_Curve::is_planar()|.\newline   
+|Reg_Cl_Plane_Curve::is_planar|.\newline   
 A |Reg_Cl_Plane_Curve|
 can be manipulated into a non-planar state, so it's safer to use the |Path|
 version, which tests whether it's really planar or not.  
@@ -449,14 +449,14 @@ solve(char, real) const
 @q * (1) Location of a point.@>
 @* Location of a point.  
 @^\cfunc{Reg\_Cl\_Plane\_Curve}{location}@>
-|location()| returns a |signed short|
+|location| returns a |signed short|
 indicating the location of its |Point| argument with respect to the
 |Reg_Cl_Plane_Curve|.   
 
 \initials{LDF 2002.11.05.}  @:!! TO DO@> TO DO: 
 Currently, the programmer must ensure that a
 |Reg_Cl_Plane_Curve| is planar.  It might be worthwhile to check that it
-really is by using |Path::get_normal()|, since some manipulations may
+really is by using |Path::get_normal|, since some manipulations may
 cause a |Reg_Cl_Plane_Curve| to become non-planar.  
 
 \initials{LDF 2002.11.05.}  
@@ -524,18 +524,18 @@ paragraph.  I couldn't figure out a way of suppressing the space
 within the definition of \.{\char`\\RV} (which is currently 
 ``\.{\char`\\let}'' to \.{\char`\\ARG}).
 
-\initials{LDF 2003.06.03.}  Changed the line where |Plane::get_distance()| is
+\initials{LDF 2003.06.03.}  Changed the line where |Plane::get_distance| is
 called below.  It now returns a\newline
 |Real_Short|, so ``|.first|'' has to
 be added, in order to get the |real| value.
 
-\initials{LDF 2003.06.13.}  Changed |pt0.epsilon()| to |Point::epsilon()|.
+\initials{LDF 2003.06.13.}  Changed |pt0.epsilon| to |Point::epsilon|.
 
 \initials{LDF 2003.06.14.}  Added error handling code for the case that
-|get_plane()| fails.
+|get_plane| fails.
 
 \initials{LDF 2003.06.14.}  No longer taking absolute value of the |real| value
-|r0| returned by |Plane::get_distance()|, since it will always be
+|r0| returned by |Plane::get_distance|, since it will always be
 positive, anyway.  Comment at place below, where I made this change. 
 
 \initials{LDF 2003.07.01.}  Added argument |suppress_warnings|.
@@ -550,7 +550,7 @@ variable, and drawing requires a |Picture|.
 
 \initials{LDF 2004.06.08.}  Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2007.08.26.}
 Added optional |Scanner_Node| argument with default $0$.
@@ -830,7 +830,7 @@ Reg_Cl_Plane_Curve::angle_point(real angle)
 \initials{LDF 2002.11.05.}  
 
 Intersection with a line.
-|intersection_points()| returns a 
+|intersection_points| returns a 
 |Bool_Point_Pair|.  The |bool| in a |Bool_Point|
 indicates whether the |Point| is on the
 line segment in question.  
@@ -839,7 +839,7 @@ is not |== INVALID_POINT|, then the {\it line\/} (as opposed to the
 segment) does intersect the
 |Reg_Cl_Plane_Curve|, and the |Point| indicates
 one of the intersection points.
-So, |intersection_points()| can be
+So, |intersection_points| can be
 used whether you want to restrict the intersection points to ones that
 are actually on a particular line segment or not.  
 \initials{LDF 2002.11.05.}  
@@ -857,7 +857,7 @@ for whether the intersection points are on the segment, since there's
 no segment.
 \ENDTODO
 
-The versions of |intersection_points()| belonging to classes derived
+The versions of |intersection_points| belonging to classes derived
 from |Reg_Cl_Plane_Curve| will most likely call on the functions
 described in this section, passing
 |center| as the |ref_pt| argument.  However, this need not be the
@@ -874,7 +874,7 @@ at the origin by the transformation.  \initials{LDF 2003.07.16.}
 Rewrote this function.  The perpendicular and
 non-parallel, non-coplanar cases are handled in exactly the same way.
 In these cases, there can only be one intersection point.\newline
-|Plane::intersection_point()| and |Reg_Cl_Plane_Curve::location()| are
+|Plane::intersection_point| and |Reg_Cl_Plane_Curve::location| are
 now used to find it, if it exists.
 
 \initials{LDF 2003.06.20.}  
@@ -886,9 +886,9 @@ The disadvantage is, that additional rotations reduce the accuracy of
 the calculation of the intersection points.
 
 \initials{LDF 2003.06.20.}  
-|Transform::align_with_axis()| is no longer used for
+|Transform::align_with_axis| is no longer used for
 putting the copy of |*this| and the line into the x-z plane.  It might
-be possible to use it, but I used |Point::angle()| while debugging, in
+be possible to use it, but I used |Point::angle| while debugging, in
 order to see what was happening better.  It might be possible to
 go back to using |Transform::align_with_axis|, but I don't see any
 advantage to doing so.
@@ -899,8 +899,8 @@ planes with various orientations.  I hope that it works properly for
 all planes now!
 
 \initials{LDF 2003.07.01.}  
-Added |true| as |silent| argument to |unit_vector()|
-when I call it on |cross|.  This prevents |unit_vector()| from issuing
+Added |true| as |silent| argument to |unit_vector|
+when I call it on |cross|.  This prevents |unit_vector| from issuing
 a warning message, when |cross| has magnitude 0, which occurs when 
 |surface_vector| and |pt_vector| are colinear.  Since this case is
 handled correctly, the warning messages are unnecessary and distracting.
@@ -926,7 +926,7 @@ variable, and drawing requires a |Picture|.
 
 \initials{LDF 2004.06.08.}  Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 \ENDLOG
 
 @q *** (3) Declaration.@>
@@ -1475,8 +1475,8 @@ segments.  \initials{LDF 2003.07.16.}
 \LOG
 \initials{LDF 2003.07.16.}  
 Added this section and its subsections, including the
-declarations and definitions of |segment()|, |half()|, and
-|quarter()|.  They were formerly members of |Circle|.
+declarations and definitions of |segment|, |half|, and
+|quarter|.  They were formerly members of |Circle|.
 \ENDLOG 
 
 @q ** (2) Segment.@>
@@ -1484,7 +1484,7 @@ declarations and definitions of |segment()|, |half()|, and
 @^\cfunc{Reg\_Cl\_Plane\_Curve}{segment}@>
 \initials{LDF 2002.11.10.}  
 
-|segment()| returns a subpath of the
+|segment| returns a subpath of the
 |Reg_Cl_Plane_Curve| representing a segment of |*this|.  
 \initials{LDF 2002.11.10.}  
 
@@ -1585,8 +1585,8 @@ Reg_Cl_Plane_Curve::segment(unsigned int start,
 
    Path p;
 
-@q **** (4) |start >= points.size()|.@> 
-@ |start >= points.size()|.
+@q **** (4) |start >= points.size|.@> 
+@ |start >= points.size|.
 \initials{LDF 2004.11.25.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
@@ -1594,9 +1594,9 @@ Reg_Cl_Plane_Curve::segment(unsigned int start,
 if (start >= points.size())
        {
 
-@q ***** (5) |is_cycle()|.@> 
+@q ***** (5) |is_cycle|.@> 
 
-@ |is_cycle()|.  Normally, |Reg_Cl_Plane_Curves| will be cyclical, 
+@ |is_cycle|.  Normally, |Reg_Cl_Plane_Curves| will be cyclical, 
 but it is possible to make them non-cyclical.
 \initials{LDF 2004.11.25.}
 
@@ -1609,14 +1609,14 @@ but it is possible to make them non-cyclical.
 
               }  /* |if (is_cycle())|  */
 
-@q ***** (5) |!is_cycle()|.@> 
+@q ***** (5) |!is_cycle|.@> 
 
-@ |!is_cycle()|.
+@ |!is_cycle|.
 \initials{LDF 2004.11.25.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
 
-else /* |!is_cycle()|  */
+else /* |!is_cycle|  */
              {
 
 cerr_strm << thread_name 
@@ -1632,14 +1632,14 @@ cerr_strm << thread_name
 
                 start = 0;
 
-             }  /* |else| (|!is_cycle()|)  */             
+             }  /* |else| (|!is_cycle|)  */             
 
 @q ***** (5) .@> 
 
        }  /* |if (start >= points.size())|  */
 
-@q **** (4) |end >= points.size()|.@> 
-@ |end >= points.size()|.
+@q **** (4) |end >= points.size|.@> 
+@ |end >= points.size|.
 \initials{LDF 2004.11.25.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
@@ -1647,9 +1647,9 @@ cerr_strm << thread_name
     if (end >= points.size())
        {
 
-@q ***** (5) |is_cycle()|.@> 
+@q ***** (5) |is_cycle|.@> 
 
-@ |is_cycle()|.  Normally, |Reg_Cl_Plane_Curves| will be cyclical, 
+@ |is_cycle|.  Normally, |Reg_Cl_Plane_Curves| will be cyclical, 
 but it is possible to make them non-cyclical.
 \initials{LDF 2004.11.25.}
 
@@ -1662,14 +1662,14 @@ but it is possible to make them non-cyclical.
 
               }  /* |if (is_cycle())|  */
 
-@q ***** (5) |!is_cycle()|.@> 
+@q ***** (5) |!is_cycle|.@> 
 
-@ |!is_cycle()|.
+@ |!is_cycle|.
 \initials{LDF 2004.11.25.}
 
 @<Define |Reg_Cl_Plane_Curve| functions@>=
 
-else /* |!is_cycle()|  */
+else /* |!is_cycle|  */
              {
                 
                  end = points.size() - 1;
@@ -1686,7 +1686,7 @@ else /* |!is_cycle()|  */
                 cerr_message(cerr_strm, warning_stop_value);
                 cerr_strm.str();
 
-             }  /* |else| (|!is_cycle()|)  */             
+             }  /* |else| (|!is_cycle|)  */             
 
 @q ***** (5) .@> 
 
@@ -1797,24 +1797,24 @@ Changed ``\.{&}'' to ``\.{..}''.
       
     return p;
 
-} /* End of |Reg_Cl_Plane_Curve::segment()| definition.  */
+} /* End of |Reg_Cl_Plane_Curve::segment| definition.  */
 
 @q ** (2) Half.@>
 @*1 Half.
 @^\cfunc{Reg\_Cl\_Plane\_Curve}{half}@>
 \initials{LDF Undated.} 
 
-|half()| creates a curve using half of the points in |points|
+|half| creates a curve using half of the points in |points|
 starting from point 0.  If the argument |angle| is not zero, the
 resulting |Path| is rotated by that amount about a line from |center|
 in the direction of the normal to the |Reg_Cl_Plane_Curve|.
 If the argument |closed| is |true|, then the segment is closed and can
-be filled using |fill()| or |filldraw()|.
+be filled using |fill| or |filldraw|.
 \initials{LDF Undated.} 
 
 \LOG
 \initials{LDF 2004.11.26.}
-Changed the call to |Reg_Cl_Plane_Curve::segment()| to reflect
+Changed the call to |Reg_Cl_Plane_Curve::segment| to reflect
 its new calling convention.
 
 \initials{LDF 2004.11.26.}
@@ -1918,23 +1918,23 @@ Changed ``\.{&}'' to ``\.{..}''.
 
 @q **** (4) @>   
 
-} /* End of |Reg_Cl_Plane_Curve::half()| definition.  */
+} /* End of |Reg_Cl_Plane_Curve::half| definition.  */
 
 @q ** (2) Quarter.@>
 @*1 Quarter.
 @^\cfunc{Reg\_Cl\_Plane\_Curve}{quarter}@>
 
-|quarter()| creates a curve using a quarter of the points in
+|quarter| creates a curve using a quarter of the points in
 |points| starting from point 0.  If the argument |angle| is not zero, the
 resulting |Path| is rotated by that amount about a line from |center|
 in the direction of the normal to the |Reg_Cl_Plane_Curve|.
 If the argument |closed| is |true|, then the segment is closed and can
-be filled using |fill()| or |filldraw()|.
+be filled using |fill| or |filldraw|.
 \initials{LDF Undated.} 
 
 \LOG
 \initials{LDF 2004.11.26.}
-Changed the call to |Reg_Cl_Plane_Curve::segment()| to reflect
+Changed the call to |Reg_Cl_Plane_Curve::segment| to reflect
 its new calling convention.
 
 \initials{LDF 2004.11.26.}
@@ -2039,7 +2039,7 @@ Changed ``\.{&}'' to ``\.{..}''.
 
 @q **** (4) @>   
 
-} /* End of |Reg_Cl_Plane_Curve::quarter()| definition.  */
+} /* End of |Reg_Cl_Plane_Curve::quarter| definition.  */
 
 @q * Putting Reg_Cl_Plane_Curve together.@>
 @ Putting {\bf Reg\_Cl\_Plane\_Curve} together.

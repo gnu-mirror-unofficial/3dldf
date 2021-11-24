@@ -74,7 +74,7 @@ the |Id_Map_Entry_Node| referenced by |variable|.
 \initials{LDF 2004.05.03.}
 
 |yylex| returns the tokens passed to it via |scanner_node->rescan_stack| 
-without calling |sub_yylex()| for the next token, making it possible 
+without calling |sub_yylex| for the next token, making it possible 
 to insert a token in the input stream indicating what type of variable we've
 found.  This is necessary, because simply using |variable| with no further 
 qualification would cause reduce/reduce conflicts.
@@ -85,7 +85,7 @@ qualification would cause reduce/reduce conflicts.
 Worked on this rule.  
 
 \initials{LDF 2004.07.21.}
-Removed most of the code from this rule to |Scan_Parse::variable_func()|, 
+Removed most of the code from this rule to |Scan_Parse::variable_func|, 
 defined in \filename{scan.web}.
 \ENDLOG 
 
@@ -258,12 +258,12 @@ Added this section.
 Added this rule.
 
 \initials{LDF 2004.08.19} 
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -298,7 +298,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -330,12 +330,12 @@ Added this section.
 Added this rule.
 
 \initials{LDF 2004.08.19} 
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -360,7 +360,7 @@ Removed code from this rule.  Now calling
 Added this section.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 \ENDLOG 
 
@@ -373,7 +373,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -406,12 +406,12 @@ Added this section.
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -435,7 +435,7 @@ Removed code from this rule.  Now calling
 Added this section.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 \ENDLOG 
 
@@ -447,12 +447,12 @@ including |@<Common code for variable types@>|.
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -499,7 +499,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -533,7 +533,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -556,7 +556,7 @@ Added this type declaration.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -696,7 +696,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -731,7 +731,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -795,7 +795,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -828,7 +828,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -862,7 +862,7 @@ Added this rule.
 
 \initials{LDF 2005.06.08.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -891,7 +891,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -929,7 +929,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -959,7 +959,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -999,7 +999,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1033,7 +1033,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1067,7 +1067,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1102,7 +1102,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1138,7 +1138,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1298,7 +1298,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1333,7 +1333,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1368,7 +1368,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1402,7 +1402,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1437,7 +1437,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1472,7 +1472,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1507,7 +1507,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1541,7 +1541,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1577,7 +1577,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1612,7 +1612,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1647,7 +1647,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1682,7 +1682,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1717,7 +1717,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -1813,9 +1813,9 @@ Added this type declaration.
 Added this rule.
 
 \initials{LDF 2005.06.09.}
-Now calling |Scan_Parse::variable_decl_func()|
+Now calling |Scan_Parse::variable_decl_func|
 instead of 
-|Scan_Parse::glyph_vector_variable_rule_func_0()|.
+|Scan_Parse::glyph_vector_variable_rule_func_0|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -2010,7 +2010,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -2890,12 +2890,12 @@ it was before caused reduce/reduce conflicts when I tried to use |variable| in
 the rule for |point_primary|.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @
@@ -2921,16 +2921,16 @@ Debugged this rule.
 |true| for all variables.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2004.08.28.}
 Now passing |scanner_node| as an argument in the call to 
-|Scanner_Type::add_entry()|.
+|Scanner_Type::add_entry|.
 
 \initials{LDF 2004.08.29.}
 Removed the |Scanner_Node| argument in the call to 
-|Scanner_Type::add_entry()|.
+|Scanner_Type::add_entry|.
 \ENDLOG 
 
 @
@@ -3011,9 +3011,9 @@ Removed the |Scanner_Node| argument in the call to
       @=$$@> = static_cast<void*>(0); 
 
    } /* |if (ivp.i != 0)| 
-         (|Scan_Parse::variable_type()| failed.)  */
+         (|Scan_Parse::variable_type| failed.)  */
 
-   else /* (|ivp.i == 0|---|Scan_Parse::variable_type()| 
+   else /* (|ivp.i == 0|---|Scan_Parse::variable_type| 
             succeeded.)  */
      {
 
@@ -3034,11 +3034,11 @@ Removed the |Scanner_Node| argument in the call to
                           
        @=$$@> = ivp.v;
 
-     }  /* |else| (|ivp.i == 0|---|Scan_Parse::variable_type()| 
+     }  /* |else| (|ivp.i == 0|---|Scan_Parse::variable_type| 
                    succeeded.)  */
 
 @ The following conditional is just for insurance. 
-|scanner_node->token_real_vector| is cleared in |resolve_array_name()|,
+|scanner_node->token_real_vector| is cleared in |resolve_array_name|,
 which is called in |@<Common code for variable types@>|.  However, it doesn't do
 any harm to make sure that it's cleared here, and it might prevent problems
 that may result from future changes.
@@ -3148,12 +3148,12 @@ Added this rule.
 
 \LOG
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -3178,7 +3178,7 @@ Removed code from this rule.  Now calling
 Added this type declaration.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 \ENDLOG 
 
@@ -3195,7 +3195,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -3350,12 +3350,12 @@ Added this rule.
 
 \LOG
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Type declarations for non-terminal symbols@>=
@@ -3392,12 +3392,12 @@ Added this type declaration.
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -3431,7 +3431,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -3587,12 +3587,12 @@ Added this rule.
 
 \LOG
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -3619,12 +3619,12 @@ Removed code from this rule.  Now calling
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -3649,12 +3649,12 @@ Removed code from this rule.  Now calling
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -3773,7 +3773,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -3799,12 +3799,12 @@ Removed code from this rule.  Now calling
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -3840,7 +3840,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -3871,12 +3871,12 @@ Added this type declaration.
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -3910,7 +3910,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -3943,7 +3943,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -3975,7 +3975,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -4007,7 +4007,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -4038,12 +4038,12 @@ Added this type declaration.
 Added this rule.
 
 \initials{LDF 2004.08.20}
-Now using |Scan_Parse::variable_type()| instead of
+Now using |Scan_Parse::variable_type| instead of
 including |@<Common code for variable types@>|.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG 
 
 @<Define rules@>= 
@@ -4066,7 +4066,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
@@ -4105,7 +4105,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4140,7 +4140,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4175,7 +4175,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4207,7 +4207,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4239,7 +4239,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4327,7 +4327,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4359,7 +4359,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 
@@ -4506,7 +4506,7 @@ Added this rule.
 
 \initials{LDF 2005.06.09.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::variable_decl_func()|.
+|Scan_Parse::variable_decl_func|.
 \ENDLOG
 
 @<Define rules@>= 

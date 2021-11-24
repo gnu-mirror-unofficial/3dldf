@@ -376,7 +376,7 @@ to |path_tertiary| and |path_secondary|, respectively.
 Removed debugging code.
 
 \initials{LDF 2005.10.27.}
-Replaced the code with a call to |Scan_Parse::intersection_points_func()|.
+Replaced the code with a call to |Scan_Parse::intersection_points_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 

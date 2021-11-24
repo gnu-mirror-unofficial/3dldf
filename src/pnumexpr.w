@@ -3474,8 +3474,8 @@ Added this rule.
 
         r = p->dot_product(*q);  
 
-@q ******* (7) |Point::dot_product()| succeeded.@> 
-@ |Point::dot_product()| succeeded.
+@q ******* (7) |Point::dot_product| succeeded.@> 
+@ |Point::dot_product| succeeded.
 Set value of rule to |r|, delete |p| and |q|, and exit rule.
 \initials{LDF 2004.10.05.}
 

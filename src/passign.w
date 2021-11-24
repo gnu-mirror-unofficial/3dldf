@@ -1988,7 +1988,7 @@ Added this rule.
   {
       @=$$@> = ivp.v;
 
-  } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
+  } /* |else| (|ivp.i == 0|, |set_color| succeeded.)  */
 
 @q ****** (6) @>
 
@@ -2066,7 +2066,7 @@ Added this rule.
   {
       @=$$@> = ivp.v;
 
-  } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
+  } /* |else| (|ivp.i == 0|, |set_color| succeeded.)  */
 
 @q ****** (6) @>
 

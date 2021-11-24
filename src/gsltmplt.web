@@ -79,10 +79,10 @@ It should be called using |float| or |double| as a parameter, e.g.,
 |FLT_MAX| or |DBL_MAX| must be
 passed as an argument.  
 On systems with the |numeric_limits| template, 
-|real_limits.max()| could be used instead.
+|real_limits.max| could be used instead.
 \initials{LDF 2003.12.29.}
 
-|get_second_largest()| determines which
+|get_second_largest| determines which
 unsigned integral type has the same size as the template parameter
 |Real|.  The locally declared type |i_type| is defined to be a synonym
 for this type using |typedef|.  
@@ -454,7 +454,7 @@ get_second_largest (double MAX_VAL, bool verbose);
 
 @q ** This is what's compiled.@>
 @ This is what's compiled.
-I don't really need to compile the definition of |get_second_largest()| here,
+I don't really need to compile the definition of |get_second_largest| here,
 because it must be included in all of the files that instantiate it,
 anyway.  However, that may become unnecessary later, in which case it
 will have to be compiled here.  In addition, if there's something
@@ -468,7 +468,7 @@ wrong with the definition, it may be helpful to catch the error here.
 @q ** This is what's written to \filename{gsltmplt.h}.@>
 @ This is what's written to the \filename{gsltmplt.h}.
 The file \filename{gsltmplt.h} must be included by all files that
-define specializations of |get_second_largest()|.  
+define specializations of |get_second_largest|.  
 \initials{LDF 2003.12.29.}
 
 @(gsltmplt.h@>=

@@ -184,9 +184,9 @@ Added this rule.
    else /* |entry != 0|  */
       {
 
-@q ******* (7) Call |Scan_Parse::macro_definition_func()|.@> 
+@q ******* (7) Call |Scan_Parse::macro_definition_func|.@> 
 
-@ Call |Scan_Parse::macro_definition_func()|.
+@ Call |Scan_Parse::macro_definition_func|.
 \initials{LDF 2004.12.30.}
 
 @<Define rules@>=
@@ -197,10 +197,10 @@ Added this rule.
                                               entry); 
             }
 
-@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
+@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func| failed, @>
 @q ******* (7) throwing |bad_alloc|.                                          @>  
 
-@ Error handling:  |Scan_Parse::macro_definition_func()| failed, 
+@ Error handling:  |Scan_Parse::macro_definition_func| failed, 
 throwing |bad_alloc|.                                            
 \initials{LDF 2004.12.30.}
 
@@ -229,10 +229,10 @@ throwing |bad_alloc|.
 
             }  /* |catch (bad_alloc)|  */
 
-@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
+@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func| failed, @>
 @q ******* (7) returning a non-zero value.                                    @>  
 
-@ Error handling:  |Scan_Parse::macro_definition_func()| failed, 
+@ Error handling:  |Scan_Parse::macro_definition_func| failed, 
 returning a non-zero value.                                      
 \initials{LDF 2004.12.30.}
 
@@ -396,7 +396,7 @@ Rewrote this rule.
 
 @q ******* (7) Call |Scan_Parse::macro_definition_func|.@> 
 
-@ Call |Scan_Parse::macro_definition_func()|.
+@ Call |Scan_Parse::macro_definition_func|.
 \initials{LDF 2005.01.03.}
 
 @<Define rules@>=
@@ -407,10 +407,10 @@ Rewrote this rule.
                                            entry); 
          }
 
-@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
+@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func| failed, @>
 @q ******* (7) throwing |bad_alloc|.                                          @>  
 
-@ Error handling:  |Scan_Parse::macro_definition_func()| failed, 
+@ Error handling:  |Scan_Parse::macro_definition_func| failed, 
 throwing |bad_alloc|.                                            
 \initials{LDF 2005.01.03.}
 
@@ -440,10 +440,10 @@ throwing |bad_alloc|.
 
          }  /* |catch (bad_alloc)|  */
 
-@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func()| failed, @>
+@q ******* (7) Error handling:  |Scan_Parse::macro_definition_func| failed, @>
 @q ******* (7) returning a non-zero value.                                    @>  
 
-@ Error handling:  |Scan_Parse::macro_definition_func()| failed, 
+@ Error handling:  |Scan_Parse::macro_definition_func| failed, 
 returning a non-zero value.                                      
 \initials{LDF 2005.01.03.}
 

@@ -68,7 +68,7 @@ Created this file.
 
 \LOG
 \initials{LDF 2004.06.07.}  
-Now calling |create_new<Pen>()| rather than
+Now calling |create_new<Pen>| rather than
 |new Pen|.
 
 \initials{LDF 2004.11.22.}

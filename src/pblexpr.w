@@ -291,8 +291,8 @@ In {\MF/}, the operators corresponding to the ones used in the
 following two rules are called ``{\bf known}'' and ``{\bf unknown}''.  
 In 3DLDF, ``{\bf known}'' and ``{\bf unknown}'' are synonyms for 
 ``{\bf is\_known}'' and ``{\bf is\_unknown}'', set using 
-|Scanner_Type::add_synonym()|
-in |Scanner_Type::create()| in the file \filename{sctpcrt.web}.  
+|Scanner_Type::add_synonym|
+in |Scanner_Type::create| in the file \filename{sctpcrt.web}.  
 \initials{LDF 2004.05.17.}
 
 Another difference is that in {\MF/}, the operand to |IS_KNOWN| and
@@ -1718,7 +1718,7 @@ Added this rule.
 
 \initials{LDF 2005.10.24.}
 Changed |path_like_expression| to |path_expression|.
-Now calling |Scan_Parse::is_cycle_func()|.  Removed all 
+Now calling |Scan_Parse::is_cycle_func|.  Removed all 
 debugging code.
 \ENDLOG
 

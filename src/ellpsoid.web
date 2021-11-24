@@ -587,7 +587,7 @@ Ellipsoid::set(Ellipsoid_Set_Option_Struct* options, Scanner_Node scanner_node)
 
    return 0;
 
-}  /* End of |Ellipsoid::set()| definition.  */
+}  /* End of |Ellipsoid::set| definition.  */
 
 @q * (1) Destructor.@> 
 @* Destructor.
@@ -599,7 +599,7 @@ Added this function.
 
 \initials{LDF 2005.10.31.}
 Now deleting the |Ellipses*| on |vector<Ellipse*> main_ellipses| and
-calling |clear()| on the latter.
+calling |clear| on the latter.
 \ENDLOG
 
 @<Declare |Ellipsoid| functions@>=
@@ -697,7 +697,7 @@ Now setting |ellipse_point_count|.
 
 \initials{LDF 2005.10.31.}
 Now discarding the |Ellipses| on |main_ellipses|, if any, and
-copying |e.main_ellipses()|.
+copying |e.main_ellipses|.
 \ENDLOG
 
 @q *** (3) Declaration.@> 
@@ -813,7 +813,7 @@ Return values:\hfil\break
 %
 \item{-1}: |Point| lies outside the |Ellipsoid|.
 %
-\item{-2}: |Ellipsoid::standardize()| failed to put the |Ellipsoid| 
+\item{-2}: |Ellipsoid::standardize| failed to put the |Ellipsoid| 
 into standard position.\hfil\break 
 \initials{LDF 2005.12.09.}
 
@@ -916,7 +916,7 @@ Transform* t = 0;
         return 1;
      else return -1;
 
-}  /* End of |Ellipsoid::location()| definition.  */
+}  /* End of |Ellipsoid::location| definition.  */
 
 @q * (1) Predicates.@> 
 @* Predicates.
@@ -971,7 +971,7 @@ Solid::is_ellipsoidal(Scanner_Node scanner_node) const
   
    return false;
 
-} /* End of |Solid::is_ellipsoidal()| definition.  */
+} /* End of |Solid::is_ellipsoidal| definition.  */
 
 @q * (1) Transformations.@>
 @* Transformations. 
@@ -1170,7 +1170,7 @@ Ellipsoid::shift(const Point& p)
 \LOG
 \initials{LDF 2005.05.26.}
 Added this function.  It's commented-out, because 
-|Solid::shift_times()| currently doesn't exist.
+|Solid::shift_times| currently doesn't exist.
 \ENDLOG
 
 @<Declare |Ellipsoid| functions@>=
@@ -1207,7 +1207,7 @@ Ellipsoid::shift_times(real x, real y, real z)
 \LOG
 \initials{LDF 2005.05.26.}
 It's commented-out, because 
-|Solid::shift_times()| currently doesn't exist.
+|Solid::shift_times| currently doesn't exist.
 \ENDLOG
 
 @<Declare |Ellipsoid| functions@>=
@@ -1426,7 +1426,7 @@ Ellipsoid::standardize(Scanner_Node scanner_node) const
 
     return t;
 
-}  /* End of |Ellipsoid::standardize()| definition.  */
+}  /* End of |Ellipsoid::standardize| definition.  */
 
 @q * (1) Intersections.@> 
 @* Intersections.
@@ -2836,7 +2836,7 @@ Now showing |type|.
 
 \initials{LDF 2005.10.31.}
 Now outputting |text|.  
-No longer calling |Solid::show()|.  Added explicit code for showing the 
+No longer calling |Solid::show|.  Added explicit code for showing the 
 |Ellipses| on |ellipses|.
 
 \initials{LDF 2005.10.31.}
@@ -2911,7 +2911,7 @@ Ellipsoid::show(string text, char coords,
 
     return;
 
-} /* End of |Ellipsoid::show()| definition.  */
+} /* End of |Ellipsoid::show| definition.  */
 
 @q * (1) |Cuboids|.@> 
 @* {\bf Cuboids}.
@@ -2971,7 +2971,7 @@ Ellipsoid::in_cuboid(Scanner_Node scanner_node) const
 
    return 0;
 
-}  /* End of |Ellipsoid::in_cuboid()| definition.  */
+}  /* End of |Ellipsoid::in_cuboid| definition.  */
 
 @q ** (2) Enclosing |Cuboid|.@> 
 @*1 Enclosing {\bf Cuboid}.
@@ -3069,7 +3069,7 @@ Ellipsoid::out_cuboid(Scanner_Node scanner_node,
 
     return create_new<Cuboid>(c);
 
-}  /* End of |Ellipsoid::out_cuboid()| definition.  */
+}  /* End of |Ellipsoid::out_cuboid| definition.  */
 
 @q * (1) Ellipsoid_Set_Option_Struct.@> 
 @* {\bf Ellipsoid\_Set\_Option\_Struct}.
@@ -3259,7 +3259,7 @@ Ellipsoid_Set_Option_Struct::clear(void)
 
     return 0;
 
-}  /* End of |Ellipsoid_Set_Option_Struct::clear()| definition.  */
+}  /* End of |Ellipsoid_Set_Option_Struct::clear| definition.  */
 
 @q * (1) Putting Ellipsoid together. @>
 @* Putting {\bf Ellipsoid} together.

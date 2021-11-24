@@ -470,7 +470,7 @@ if (vertex_0 == INVALID_POINT)
 
     return 0;
 
-}  /* End of |Parabola::set()| definition.  */
+}  /* End of |Parabola::set| definition.  */
 
 @q * (1) Destructor.@> 
 @* Destructor.
@@ -557,7 +557,7 @@ Now setting |max_extent = p.max_extent|.
 
 \initials{LDF 2005.11.28.}
 No longer setting |max_extent = p.max_extent|.  This is now done in 
-|Conic_Section::operator=()|.
+|Conic_Section::operator=|.
 \ENDLOG
 
 @q *** (3) Declaration.@> 
@@ -632,17 +632,17 @@ argument with default 0.
 
 \initials{LDF 2005.11.18.}
 Removed the code for finding the transformation that puts
-|*this| into standard position.  Now calling |Parabola::standardize()| 
+|*this| into standard position.  Now calling |Parabola::standardize| 
 instead.
 
 \initials{LDF 2005.11.24.}
 @:BUG FIX@> BUG FIX:  Now passing 
 |pth.get_point(0)| and |pth.get_point(1)|
-to |Point::intersection_point()| instead of 
+to |Point::intersection_point| instead of 
 |p.get_point(0)| and |p.get_point(1)|.
 
 \initials{LDF 2005.11.27.}
-Changed to account for the fact that |Parabola::standardize()| now returns 
+Changed to account for the fact that |Parabola::standardize| now returns 
 a |Transform*| rather than a |Transform|.  Added error handling code to check
 for the case that this |Transform*| is null.
 \ENDLOG
@@ -776,7 +776,7 @@ return Real_Triple((half_parameter * (half_parameter - (2 * slope * z_int))),
                        slope,
                        z_int);
 
-}  /* End of |Parabola::get_discriminant()| definition. */
+}  /* End of |Parabola::get_discriminant| definition. */
 
 @q ** (2) Location.@> 
 @*1 Location.
@@ -822,7 +822,7 @@ The |Point| is invalid.
 \smallskip
 %
 \item{-5}
-|Parabola::location()| failed.
+|Parabola::location| failed.
 \smallskip
 %
 \item{-6}
@@ -837,7 +837,7 @@ Something has gone terribly wrong.
 Added this function.
 
 \initials{LDF 2005.11.27.}
-Changed to account for the fact that |Parabola::standardize()| now returns 
+Changed to account for the fact that |Parabola::standardize| now returns 
 a |Transform*| rather than a |Transform|.  Added error handling code to check
 for the case that this |Transform*| is null.
 \ENDLOG
@@ -949,7 +949,7 @@ Added this section.
 
     return -1;
 
-}  /* End of |Parabola::location()| definition.  */
+}  /* End of |Parabola::location| definition.  */
 
 @q * (1) Predicates.@> 
 @* Predicates.
@@ -1030,7 +1030,7 @@ Path::is_parabolic(Scanner_Node scanner_node) const
 {
    return false;
 
-} /* End of |Path::is_parabolic()| definition.  */
+} /* End of |Path::is_parabolic| definition.  */
 
 @q * (1) Transformations.@>
 @* Transformations. 
@@ -1397,7 +1397,7 @@ Parabola::standardize(Scanner_Node scanner_node) const
     
     return t;
 
-} /* End of |Parabola::standardize()| definition.  */
+} /* End of |Parabola::standardize| definition.  */
 
 @q * (1) Intersections.@> 
 @* Intersections.
@@ -1418,8 +1418,8 @@ Added this function.
 
 \initials{LDF 2005.11.30.}
 @:BUG FIX@> BUG FIX:  Now checking the return value of 
-|Plane::intersection_line()|.  If it's |INVALID_LINE|, this function returns 0.
-Now passing |Scanner_Node scanner_node| argument to |Plane::intersection_line()|.
+|Plane::intersection_line|.  If it's |INVALID_LINE|, this function returns 0.
+Now passing |Scanner_Node scanner_node| argument to |Plane::intersection_line|.
 \ENDLOG
 
 @q *** (3) Declaration.@> 
@@ -1509,7 +1509,7 @@ coplanar.  I haven't programmed the case that they're non-coplanar yet.
 
 \initials{LDF 2005.11.18.}
 Removed code for transforming the copies of |*p| and |*this|.  
-The transformations are now done in |Parabola::get_discriminant()|. 
+The transformations are now done in |Parabola::get_discriminant|. 
 It is not necessary to copy and transform |*this|.
 
 \initials{LDF 2005.11.21.}
@@ -1816,7 +1816,7 @@ Programmed this case.
 
 @q **** (4)@> 
 
-}  /* End of |Parabola::intersection_points()| definition.  */
+}  /* End of |Parabola::intersection_points| definition.  */
 
 @q ** (2) |Plane| reference argument.@> 
 @*1 {\bf Plane} reference argument.
@@ -1917,7 +1917,7 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
 
     return 0;      
 
-}  /* End of |Parabola::set_cycle()| definition.  */
+}  /* End of |Parabola::set_cycle| definition.  */
 
 @q * (1) Show.@> 
 @* Show.
@@ -1931,7 +1931,7 @@ Added this function.
 Added code for showing |focus0.|
 
 \initials{LDF 2005.11.09.}
-Removed code for showing |focus0.|  Now calling |Conic_Section::show()|.
+Removed code for showing |focus0.|  Now calling |Conic_Section::show|.
 \ENDLOG
 
 @q ** 23) Declaration.@> 
@@ -1969,7 +1969,7 @@ Parabola::show(string text, char coords,
 
     return;
 
-} /* End of |Parabola::show()| definition.  */
+} /* End of |Parabola::show| definition.  */
 
 @q * (1) Parabola_Set_Option_Struct.@> 
 @* {\bf Parabola\_Set\_Option\_Struct}.
@@ -2196,7 +2196,7 @@ Parabola_Set_Option_Struct::clear(void)
 
     return 0;
 
-}  /* End of |Parabola_Set_Option_Struct::clear()| definition.  */
+}  /* End of |Parabola_Set_Option_Struct::clear| definition.  */
 
 @q * (1) Putting Parabola together. @>
 @* Putting {\bf Parabola} together.

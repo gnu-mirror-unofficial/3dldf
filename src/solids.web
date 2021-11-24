@@ -58,7 +58,7 @@
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2002.11.12.}  
-Add |get_center()|.  Must set
+Add |get_center|.  Must set
 |center| in the |Polyhedra| before this is useful.
 \ENDTODO 
 
@@ -145,7 +145,7 @@ Added the data member |projective_extremes|.
 \initials{LDF 2003.04.11.}  
 Added the |static const| data members |PATH|,
 |CIRCLE|, |ELLIPSE|, |REG_POLYGON|, and |RECTANGLE|.  Currently, their
-only use is as arguments to |get_shape_ptr()| and |get_shape_center()|. 
+only use is as arguments to |get_shape_ptr| and |get_shape_center|. 
 
 \initials{LDF 2003.04.11.}  
 Renamed |polygons| to |reg_polygons|.
@@ -247,7 +247,7 @@ Now setting |PARABOLA_VALUE| and |HYPERBOLA_VALUE|.
 |Solid| will not normally be used in user code, since it is intended
 to be a base class only.  Therefore, objects of type |Solid| will not
 normally be declared as automatic variables and there will be no
-|static| global |Solids|.  However, |create_new<Solid>()| is
+|static| global |Solids|.  However, |create_new<Solid>| is
 used in the drawing and filling functions, in order to put |Solids|
 onto |Pictures|.  If we didn't have a constructor,
 |projective_extremes| wouldn't initially have the right size and
@@ -402,8 +402,8 @@ Solid::Solid(const Solid& s)
 @*1 Pointer argument.
 
 \LOG
-\initials{LDF 2003.12.30.}  Replaced |Solid::create_new_solid()|
-with a specialization of |template <class C> C* create_new()| for
+\initials{LDF 2003.12.30.}  Replaced |Solid::create_new_solid|
+with a specialization of |template <class C> C* create_new| for
 |Solid|.  The argument is now |const|.
 \ENDLOG 
 
@@ -466,11 +466,11 @@ Now setting |world_extremes| to 0.
 Now setting |pre_projective_extremes| to 0.
 
 \initials{LDF 2005.11.09.}
-Now calling |Path::clear()| and |Conic_Section::clear()| for the items 
+Now calling |Path::clear| and |Conic_Section::clear| for the items 
 on |ellipses| and |circles|.
 
 \initials{LDF 2006.01.25.}
-Now calling |Path::clear()| and |Conic_Section::clear()| for the items 
+Now calling |Path::clear| and |Conic_Section::clear| for the items 
 on |parabolae| and |hyperbolae|.
 \ENDLOG 
 
@@ -712,28 +712,28 @@ Solid::get_copy() const
 @* Returning elements and information.
 \initials{LDF Undated.}
 
-The functions |get_shape_ptr()|,\newline
-|get_circle_ptr()|,
-|get_ellipse_ptr()|, |get_path_ptr()|, |get_rectangle_ptr()|, and
-|get_reg_polygon_ptr()| all return |const| pointers to |Shape|, |Circle|,
+The functions |get_shape_ptr|,\newline
+|get_circle_ptr|,
+|get_ellipse_ptr|, |get_path_ptr|, |get_rectangle_ptr|, and
+|get_reg_polygon_ptr| all return |const| pointers to |Shape|, |Circle|,
 |Ellipse|, etc.  Therefore, they must be invoked in such a way, that
 the |const| qualifier is not discarded.  For example, following
 |Dodecahedron d(origin, 5);|, two ways of 
-invoking |get_reg_polygon_ptr()| are:
+invoking |get_reg_polygon_ptr| are:
 |const Reg_Polygon* ptr = d.get_reg_polygon_ptr(5);| and\newline
 |Reg_Polygon A = *d.get_reg_polygon_ptr(5);|.
 \initials{LDF 2003.04.11.}  
 
 \LOG
 \initials{LDF 2003.05.09.}  
-Changed the names of |get_shape()|, |get_circle()|,
-|get_ellipse()|, |get_path()|,\newline
-|get_rectangle()|, and
-|get_reg_polygon()| to 
-|get_shape_ptr()|, |get_circle_ptr()|,
-|get_ellipse_ptr()|, |get_path_ptr()|,\newline
-|get_rectangle_ptr()|, and
-|get_reg_polygon_ptr()|.  The names without ``|_ptr|'' were confusing,
+Changed the names of |get_shape|, |get_circle|,
+|get_ellipse|, |get_path|,\newline
+|get_rectangle|, and
+|get_reg_polygon| to 
+|get_shape_ptr|, |get_circle_ptr|,
+|get_ellipse_ptr|, |get_path_ptr|,\newline
+|get_rectangle_ptr|, and
+|get_reg_polygon_ptr|.  The names without ``|_ptr|'' were confusing,
 because they didn't make clear that the functions returned pointers. 
 \ENDLOG 
 
@@ -826,12 +826,12 @@ Solid::copy_coords(const char from,
 
 \LOG
 \initials{LDF 2003.04.30.}  
-Changed the functions |get_circle_ptr()|,
-|get_ellipse_ptr()|, 
-|get_path_ptr()|,\newline
-|get_rectangle_ptr()|, and |get_reg_polygon_ptr()|.  They no
-longer use |get_shape_ptr()|.  There's no good reason for casting pointers
-from one type to another.  I rather doubt that |get_shape_ptr()| is
+Changed the functions |get_circle_ptr|,
+|get_ellipse_ptr|, 
+|get_path_ptr|,\newline
+|get_rectangle_ptr|, and |get_reg_polygon_ptr|.  They no
+longer use |get_shape_ptr|.  There's no good reason for casting pointers
+from one type to another.  I rather doubt that |get_shape_ptr| is
 needed, anyway.   
 \ENDLOG
 
@@ -853,8 +853,8 @@ data members |CIRCLE_VALUE|, |ELLIPSE_VALUE|, |PATH_VALUE|, |RECTANGLE_VALUE|, o
 
 \initials{LDF 2003.04.30.}
 This function was mainly intended for use in the functions
-|get_circle_ptr()|,\newline
-|get_ellipse_ptr()|, etc., and was not intended for use in
+|get_circle_ptr|,\newline
+|get_ellipse_ptr|, etc., and was not intended for use in
 user code.  I now doubt whether this function is needed at all,
 especially since it is no longer used in the functions
 mentioned above.
@@ -863,8 +863,8 @@ mentioned above.
 \initials{LDF 2003.04.11.}  
 Added this function.
 
-\initials{LDF 2003.04.30.}  Now using |get_copy()| instead of
-|static_cast<const Shape*>()|.  The way it was caused compilation
+\initials{LDF 2003.04.30.}  Now using |get_copy| instead of
+|static_cast<const Shape*>|.  The way it was caused compilation
 errors under Tru64 (DEC ALPHA).
 
 \initials{LDF 2003.05.30.}  Changed return value to |Shape*| from 
@@ -1031,7 +1031,7 @@ Solid::get_shape_ptr(const unsigned short curr_shape_type,
         return static_cast<Shape*>(0);
       }
 
-}  /* End of |Solid::get_shape_ptr()| definition.  */
+}  /* End of |Solid::get_shape_ptr| definition.  */
 
 @q *** (3) Get Path pointer.@>
 @*2 Get {\bf Path} pointer.
@@ -1044,7 +1044,7 @@ Added this function.
 
 \initials{LDF 2003.04.30.}  
 Changed this function, so that it no longer uses
-|get_shape_ptr()|. 
+|get_shape_ptr|. 
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -1081,7 +1081,7 @@ Added this function.
 
 \initials{LDF 2003.04.30.}  
 Changed this function, so that it no longer uses
-|get_shape_ptr()|. 
+|get_shape_ptr|. 
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -1116,7 +1116,7 @@ Added this function.
 
 \initials{LDF 2003.04.30.}  
 Changed this function, so that it no longer uses
-|get_shape_ptr()|. 
+|get_shape_ptr|. 
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -1210,7 +1210,7 @@ Added this function.
 
 \initials{LDF 2003.04.30.}  
 Changed this function, so that it no longer uses
-|get_shape_ptr()|. 
+|get_shape_ptr|. 
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -1245,7 +1245,7 @@ Added this function.
 
 \initials{LDF 2003.04.30.}  
 Changed this function, so that it no longer uses
-|get_shape_ptr()|. 
+|get_shape_ptr|. 
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -1293,7 +1293,7 @@ Added this section.
 This function returns the center of the |Circle|, |Ellipse|,
 |Rectangle|, or |Reg_Polygon| number |s| in 
 |circles|, |ellipses|, |rectangles|, or |reg_polygons|, respectively.
-If |s| is larger than \<vector>|.size()|, an error message is issued and
+If |s| is larger than \<vector>|.size|, an error message is issued and
 |INVALID_POINT| is returned. 
 
 One of the following |public static const| data members of 
@@ -1311,8 +1311,8 @@ Added this function.
 Moved this function from |Polyhedron| to |Solid|. 
 
 \initials{LDF 2003.04.11.}  
-Changed this function from |get_polygon_center()| to
-|get_shape_center()|.  Added the |char| argument |shape_type| to indicate
+Changed this function from |get_polygon_center| to
+|get_shape_center|.  Added the |char| argument |shape_type| to indicate
 whether it should return the center of a |Circle|, |Ellipse|,
 |Rectangle|, or |Reg_Polygon|.
 
@@ -2492,7 +2492,7 @@ Solid::push_draw_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Solid::push_draw_color()|  */
+}  /* End of |Solid::push_draw_color|  */
 
 @q ** (2) Push fill color.@>
 @*1 Push fill color.
@@ -2535,7 +2535,7 @@ Solid::push_fill_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Solid::push_fill_color()|  */
+}  /* End of |Solid::push_fill_color|  */
 
 @q ** (2) Push color.@>
 @*1 Push color.
@@ -2584,7 +2584,7 @@ Solid::push_color(Color*& c, bool copy)
 
    return 0;
 
-}  /* End of |Solid::push_color()|  */
+}  /* End of |Solid::push_color|  */
 
 @q ** (2) Push pen.@>
 @*1 Push pen.
@@ -2628,7 +2628,7 @@ Solid::push_pen(Pen*& p, bool copy)
 
    return 0;
 
-}  /* End of |Solid::push_pen()| definition.  */
+}  /* End of |Solid::push_pen| definition.  */
 
 @q ** (2) Push dash_pattern.@>
 @*1 Push {\bf Dash\_Pattern}.
@@ -2672,7 +2672,7 @@ Solid::push_dash_pattern(Dash_Pattern*& d, bool copy)
 
    return 0;
 
-}  /* End of |Solid::push_dash_pattern()| definition.  */
+}  /* End of |Solid::push_dash_pattern| definition.  */
 
 @q * (1) Show.@>
 @* Show.
@@ -2819,7 +2819,7 @@ Solid::show(string text, char coords,
   cerr << endl;
   return;
 
-}  /* End of |Solid::show()| definition.  */
+}  /* End of |Solid::show| definition.  */
 
 @q * (1) Clear.@>
 @* Clear.
@@ -2828,7 +2828,7 @@ Solid::show(string text, char coords,
 \LOG
 \initials{LDF 2002.10.07.}  
 Replaced dummy definition with a real one.  Now,
-|clear()| is called for all of the objects in the |Solid|.
+|clear| is called for all of the objects in the |Solid|.
 
 \initials{LDF 2005.10.25.}
 Made debugging output thread-safe.  Now setting |center| to (0, 0, 0),
@@ -2836,11 +2836,11 @@ Made debugging output thread-safe.  Now setting |center| to (0, 0, 0),
 and |projective_extremes| to 0.    
 
 \initials{LDF 2005.11.09.}
-Now calling |Path::clear()| and |Conic_Section::clear()| for the items 
+Now calling |Path::clear| and |Conic_Section::clear| for the items 
 on |ellipses| and |circles|.
 
 \initials{LDF 2006.01.25.}
-Now calling |Path::clear()| and |Conic_Section::clear()| for the items 
+Now calling |Path::clear| and |Conic_Section::clear| for the items 
 on |parabolae| and |hyperbolae|.
 \ENDLOG 
 
@@ -2977,7 +2977,7 @@ Solid::clear(void)
 
   return;
 
-}  /* End of |Solid::clear()| definition.  */
+}  /* End of |Solid::clear| definition.  */
 
 @q * (1) Transformations.@>
 @* Transformations.
@@ -3043,14 +3043,14 @@ Solid::operator*=(const Transform& t)
 \LOG
 \initials{LDF 2003.01.05.}  
 Added this function.  It's now needed because I've
-made |apply_transform()| a pure |virtual| function in |class Shape|.
+made |apply_transform| a pure |virtual| function in |class Shape|.
 @: BUG FIX@>  BUG FIX: 
-I've done this in an attempt to fix a bug in |Picture::output()|,
+I've done this in an attempt to fix a bug in |Picture::output|,
 where the |Points| on a |Path| were not transformed when I used
 ``|Transform t; *current_picture *= t|''.
 
 \initials{LDF 2006.01.25.}
-Now calling |apply_transform()| on the |Parabolae| and |Hyperbolae| pointed to by the
+Now calling |apply_transform| on the |Parabolae| and |Hyperbolae| pointed to by the
 pointers on |vector<Parabola*> parabolae| and |vector<Hyperbola*> hyperbolae|.
 \ENDLOG 
 
@@ -3199,8 +3199,8 @@ Solid::rotate(const real xx, const real yy, const real zz)
 @*1 Rotatation around an arbitrary axis.
 @^\cfunc{Solid}{rotate}@>
 \LOG
-\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around()|
-to |rotate()|.  This function now overloads |rotate()| with three
+\initials{LDF 2003.05.02.}  Changed name of this function from |rotate_around|
+to |rotate|.  This function now overloads |rotate| with three
 |real| arguments.
 \ENDLOG 
 @<Declare |Solid| functions@>=
@@ -3319,9 +3319,9 @@ try
              solid_reflection = create_new<Solid>(0, scanner_node);
           }
 
-@q **** (4) Error handling:  |create_new<Solid>()| failed.@>   
+@q **** (4) Error handling:  |create_new<Solid>| failed.@>   
 
-@ Error handling:  |create_new<Solid>()| failed.
+@ Error handling:  |create_new<Solid>| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3342,9 +3342,9 @@ try
 
           } /* |catch (bad_alloc)|  */
 
-@q **** (4) |create_new<Solid>()| succeeded.@>           
+@q **** (4) |create_new<Solid>| succeeded.@>           
 
-@ |create_new<Solid>()| succeeded.
+@ |create_new<Solid>| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3392,18 +3392,18 @@ Circle* circle_reflection;
        iter++)
     {
 
-@q ***** (5) Call |create_new<Circle>()|.@> 
+@q ***** (5) Call |create_new<Circle>|.@> 
 
-@ Call |create_new<Circle>()|.
+@ Call |create_new<Circle>|.
 \initials{LDF 2004.10.11.}
 
 @<Define |Solid| functions@>=
 
             circle_reflection = create_new<Circle>(0, scanner_node);
 
-@q ***** (5) Call |Circle::reflect_in()|.@> 
+@q ***** (5) Call |Circle::reflect_in|.@> 
 
-@ Call |Circle::reflect_in()|.
+@ Call |Circle::reflect_in|.
 \initials{LDF 2004.10.11.}
 
 @<Define |Solid| functions@>=
@@ -3412,9 +3412,9 @@ Circle* circle_reflection;
                                      static_cast<void*>(circle_reflection),
                                      scanner_node);
 
-@q ****** (6) Error handling:  |Circle::reflect_in()| returned 1.@> 
+@q ****** (6) Error handling:  |Circle::reflect_in| returned 1.@> 
 
-@ Error handling:  |Circle::reflect_in()| returned 1.
+@ Error handling:  |Circle::reflect_in| returned 1.
 \initials{LDF 2004.10.11.}
 
 @<Define |Solid| functions@>=
@@ -3440,9 +3440,9 @@ Circle* circle_reflection;
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Circle::reflect_in()| succeeded.@> 
+@q ****** (6) |Circle::reflect_in| succeeded.@> 
 
-@ |Circle::reflect_in()| succeeded.
+@ |Circle::reflect_in| succeeded.
 \initials{LDF 2004.10.11.}
 
 @<Define |Solid| functions@>=
@@ -3491,9 +3491,9 @@ Circle* circle_reflection;
        iter++)
     {
 
-@q ***** (5) Call |create_new<Ellipse>()|.@> 
+@q ***** (5) Call |create_new<Ellipse>|.@> 
 
-@ Call |create_new<Ellipse>()|.
+@ Call |create_new<Ellipse>|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3503,9 +3503,9 @@ Circle* circle_reflection;
             ellipse_reflection = create_new<Ellipse>(0, scanner_node);
          }
 
-@q ****** (6) Error handling:  |create_new<Ellipse>()| failed.@> 
+@q ****** (6) Error handling:  |create_new<Ellipse>| failed.@> 
 
-@ Error handling:  |create_new<Ellipse>()| failed.
+@ Error handling:  |create_new<Ellipse>| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3529,9 +3529,9 @@ Circle* circle_reflection;
 
            }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) |create_new<Ellipse>()| succeeded.@> 
+@q ****** (6) |create_new<Ellipse>| succeeded.@> 
 
-@ |create_new<Ellipse>()| succeeded.
+@ |create_new<Ellipse>| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3549,9 +3549,9 @@ Circle* circle_reflection;
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Ellipse::reflect_in()|.@> 
+@q ***** (5) Call |Ellipse::reflect_in|.@> 
 
-@ Call |Ellipse::reflect_in()|.
+@ Call |Ellipse::reflect_in|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3563,9 +3563,9 @@ Circle* circle_reflection;
                                      scanner_node);
      }
 
-@q ****** (6) Error handling:  |Ellipse::reflect_in()| threw |bad_alloc|.@> 
+@q ****** (6) Error handling:  |Ellipse::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Ellipse::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Ellipse::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3590,9 +3590,9 @@ Circle* circle_reflection;
 
      }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) Error handling:  |Ellipse::reflect_in()| returned 1.@> 
+@q ****** (6) Error handling:  |Ellipse::reflect_in| returned 1.@> 
 
-@ Error handling:  |Ellipse::reflect_in()| returned 1.
+@ Error handling:  |Ellipse::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3618,9 +3618,9 @@ Circle* circle_reflection;
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Ellipse::reflect_in()| succeeded.@> 
+@q ****** (6) |Ellipse::reflect_in| succeeded.@> 
 
-@ |Ellipse::reflect_in()| succeeded.
+@ |Ellipse::reflect_in| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3669,9 +3669,9 @@ Circle* circle_reflection;
        iter++)
     {
 
-@q ***** (5) Call |create_new<Path>()|.@> 
+@q ***** (5) Call |create_new<Path>|.@> 
 
-@ Call |create_new<Path>()|.
+@ Call |create_new<Path>|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3681,9 +3681,9 @@ Circle* circle_reflection;
             path_reflection = create_new<Path>(0, scanner_node);
          }
 
-@q ****** (6) Error handling:  |create_new<Path>()| failed.@> 
+@q ****** (6) Error handling:  |create_new<Path>| failed.@> 
 
-@ Error handling:  |create_new<Path>()| failed.
+@ Error handling:  |create_new<Path>| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3707,9 +3707,9 @@ Circle* circle_reflection;
 
            }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) |create_new<Path>()| succeeded.@> 
+@q ****** (6) |create_new<Path>| succeeded.@> 
 
-@ |create_new<Path>()| succeeded.
+@ |create_new<Path>| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3727,9 +3727,9 @@ Circle* circle_reflection;
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Path::reflect_in()|.@> 
+@q ***** (5) Call |Path::reflect_in|.@> 
 
-@ Call |Path::reflect_in()|.
+@ Call |Path::reflect_in|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3741,9 +3741,9 @@ Circle* circle_reflection;
                                      scanner_node);
      }
 
-@q ****** (6) Error handling:  |Path::reflect_in()| threw |bad_alloc|.@> 
+@q ****** (6) Error handling:  |Path::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Path::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Path::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3768,9 +3768,9 @@ Circle* circle_reflection;
 
      }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) Error handling:  |Path::reflect_in()| returned 1.@> 
+@q ****** (6) Error handling:  |Path::reflect_in| returned 1.@> 
 
-@ Error handling:  |Path::reflect_in()| returned 1.
+@ Error handling:  |Path::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3796,9 +3796,9 @@ Circle* circle_reflection;
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Path::reflect_in()| succeeded.@> 
+@q ****** (6) |Path::reflect_in| succeeded.@> 
 
-@ |Path::reflect_in()| succeeded.
+@ |Path::reflect_in| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3847,9 +3847,9 @@ Circle* circle_reflection;
        iter++)
     {
 
-@q ***** (5) Call |create_new<Rectangle>()|.@> 
+@q ***** (5) Call |create_new<Rectangle>|.@> 
 
-@ Call |create_new<Rectangle>()|.
+@ Call |create_new<Rectangle>|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3859,9 +3859,9 @@ Circle* circle_reflection;
             rectangle_reflection = create_new<Rectangle>(0, scanner_node);
          }
 
-@q ****** (6) Error handling:  |create_new<Rectangle>()| failed.@> 
+@q ****** (6) Error handling:  |create_new<Rectangle>| failed.@> 
 
-@ Error handling:  |create_new<Rectangle>()| failed.
+@ Error handling:  |create_new<Rectangle>| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3885,9 +3885,9 @@ Circle* circle_reflection;
 
            }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) |create_new<Rectangle>()| succeeded.@> 
+@q ****** (6) |create_new<Rectangle>| succeeded.@> 
 
-@ |create_new<Rectangle>()| succeeded.
+@ |create_new<Rectangle>| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3905,9 +3905,9 @@ Circle* circle_reflection;
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Rectangle::reflect_in()|.@> 
+@q ***** (5) Call |Rectangle::reflect_in|.@> 
 
-@ Call |Rectangle::reflect_in()|.
+@ Call |Rectangle::reflect_in|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3919,9 +3919,9 @@ Circle* circle_reflection;
                                      scanner_node);
      }
 
-@q ****** (6) Error handling:  |Rectangle::reflect_in()| threw |bad_alloc|.@> 
+@q ****** (6) Error handling:  |Rectangle::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Rectangle::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Rectangle::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3946,9 +3946,9 @@ Circle* circle_reflection;
 
      }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) Error handling:  |Rectangle::reflect_in()| returned 1.@> 
+@q ****** (6) Error handling:  |Rectangle::reflect_in| returned 1.@> 
 
-@ Error handling:  |Rectangle::reflect_in()| returned 1.
+@ Error handling:  |Rectangle::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -3974,9 +3974,9 @@ Circle* circle_reflection;
               
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Rectangle::reflect_in()| succeeded.@> 
+@q ****** (6) |Rectangle::reflect_in| succeeded.@> 
 
-@ |Rectangle::reflect_in()| succeeded.
+@ |Rectangle::reflect_in| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4025,9 +4025,9 @@ Circle* circle_reflection;
        iter++)
     {
 
-@q ***** (5) Call |create_new<Reg_Polygon>()|.@> 
+@q ***** (5) Call |create_new<Reg_Polygon>|.@> 
 
-@ Call |create_new<Reg_Polygon>()|.
+@ Call |create_new<Reg_Polygon>|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4037,9 +4037,9 @@ Circle* circle_reflection;
             reg_polygon_reflection = create_new<Reg_Polygon>(0, scanner_node);
          }
 
-@q ****** (6) Error handling:  |create_new<Reg_Polygon>()| failed.@> 
+@q ****** (6) Error handling:  |create_new<Reg_Polygon>| failed.@> 
 
-@ Error handling:  |create_new<Reg_Polygon>()| failed.
+@ Error handling:  |create_new<Reg_Polygon>| failed.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4063,9 +4063,9 @@ Circle* circle_reflection;
 
            }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) |create_new<Reg_Polygon>()| succeeded.@> 
+@q ****** (6) |create_new<Reg_Polygon>| succeeded.@> 
 
-@ |create_new<Reg_Polygon>()| succeeded.
+@ |create_new<Reg_Polygon>| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4083,9 +4083,9 @@ Circle* circle_reflection;
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Reg_Polygon::reflect_in()|.@> 
+@q ***** (5) Call |Reg_Polygon::reflect_in|.@> 
 
-@ Call |Reg_Polygon::reflect_in()|.
+@ Call |Reg_Polygon::reflect_in|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4097,9 +4097,9 @@ Circle* circle_reflection;
                                      scanner_node);
      }
 
-@q ****** (6) Error handling:  |Reg_Polygon::reflect_in()| threw |bad_alloc|.@> 
+@q ****** (6) Error handling:  |Reg_Polygon::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Reg_Polygon::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Reg_Polygon::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4124,9 +4124,9 @@ Circle* circle_reflection;
 
      }  /* |catch (bad_alloc)|  */
 
-@q ****** (6) Error handling:  |Reg_Polygon::reflect_in()| returned 1.@> 
+@q ****** (6) Error handling:  |Reg_Polygon::reflect_in| returned 1.@> 
 
-@ Error handling:  |Reg_Polygon::reflect_in()| returned 1.
+@ Error handling:  |Reg_Polygon::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4152,9 +4152,9 @@ Circle* circle_reflection;
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Reg_Polygon::reflect_in()| succeeded.@> 
+@q ****** (6) |Reg_Polygon::reflect_in| succeeded.@> 
 
-@ |Reg_Polygon::reflect_in()| succeeded.
+@ |Reg_Polygon::reflect_in| succeeded.
 \initials{LDF 2004.10.12.}
 
 @<Define |Solid| functions@>=
@@ -4211,7 +4211,7 @@ Circle* circle_reflection;
 
   return 0;
 
-} /* End of |Solid::reflect_in()|  definition.  */
+} /* End of |Solid::reflect_in|  definition.  */
 
 @q ** (2) Reflection off of a |Plane|.@>
 @*1 Reflection off of a {\bf Plane}.
@@ -4411,9 +4411,9 @@ return 1;
          *center_pv += &(solid_ptr_vector->v[i]->center);
       }  /* |for|  */
 
-@q **** (4)  Call |Point::reflect_off()| on |center|.@> 
+@q **** (4)  Call |Point::reflect_off| on |center|.@> 
 
-@ Call |Point::reflect_off()| on |center|.
+@ Call |Point::reflect_off| on |center|.
 Return 1 upon error.
 \initials{LDF 2004.12.15.}
 
@@ -4502,7 +4502,7 @@ Return 1 upon error.
 
    return 0;
 
-};  /* End of |Solid::reflect_off()| definition.  */
+};  /* End of |Solid::reflect_off| definition.  */
 
 @q * (1) Outputting.@>
 @* Outputting.
@@ -4865,7 +4865,7 @@ for (vector <Path*>::iterator iter = paths.begin();
     cerr << "Exiting Solid::set_pre_projective_extremes()" << "\n";
   return true;
 
-}  /* End of |Solid::set_pre_projective_extremes()| definition.  */
+}  /* End of |Solid::set_pre_projective_extremes| definition.  */
 
 @q ** (2) Set projective extremes.@>
 @*1 Set projective extremes.
@@ -4877,8 +4877,8 @@ for (vector <Path*>::iterator iter = paths.begin();
 Added optional |Scanner_Node scanner_node| argument with default 0.
 
 \initials{LDF 2005.04.04.}
-Changed the name of this function from |set_extremes()| to 
-|set_projective_extremes()|.  Changed all references to it without comment.
+Changed the name of this function from |set_extremes| to 
+|set_projective_extremes|.  Changed all references to it without comment.
 
 \initials{LDF 2006.01.25.}
 Added code for handling |vector<Parabola*> parabolae| and 
@@ -5085,8 +5085,8 @@ for (vector <Path*>::iterator iter = paths.begin();
 Added this function.
 
 \initials{LDF 2005.03.31.}
-Changed the name of this function from |enclosing_prisms_intersect()|
-to |enclosing_cuboids_intersect()|.
+Changed the name of this function from |enclosing_prisms_intersect|
+to |enclosing_cuboids_intersect|.
 
 \initials{LDF 2005.04.01.}
 Changed the return type of this function from |unsigned short|
@@ -5222,8 +5222,8 @@ Changed the return value from |const valarray <real>| to
 |const valarray <real>&|, i.e., I've made it a reference.
 
 \initials{LDF 2005.04.04.}
-Changed the name of this function from |get_extremes()| to 
-|get_projective_extremes()|.  Changed all references to it without comment.
+Changed the name of this function from |get_extremes| to 
+|get_projective_extremes|.  Changed all references to it without comment.
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -5579,7 +5579,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 
       }  /* |else|  */
 
-}  /* End of |Solid::get_minimum_z()| definition.  */
+}  /* End of |Solid::get_minimum_z| definition.  */
 
 @q ** (2) Get maximum z.@>
 @*1 Get maximum z.
@@ -5687,7 +5687,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 
       }  /* |else|  */
 
-}  /* End of |Solid::get_maximum_z()| definition.  */
+}  /* End of |Solid::get_maximum_z| definition.  */
 
 @q ** (2) Get mean z.@>
 @ Get mean z.
@@ -5797,7 +5797,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 
       }  /* |else|  */
 
-}  /* End of |Solid::get_mean_z()| definition.  */
+}  /* End of |Solid::get_mean_z| definition.  */
 
 @q ** Suppress output.@>
 @ Suppress output.
@@ -5837,7 +5837,7 @@ Solid::unsuppress_output()
 @*1 Output.
 @^\cfunc{Solid}{output}@>
 \initials{LDF 2002.10.02.}  
-In |Picture::output()|, |shapes| is sorted according to the values 
+In |Picture::output|, |shapes| is sorted according to the values 
 in\newline
 |projective_extremes| for each |Shape|.  However, it's possible (and
 even likely) that the individual |Paths| in a |Solid| are not ordered
@@ -5845,14 +5845,14 @@ in such a way that they will be output in the correct order.
 Therefore, I declare a |vector <Shape*> s| and put the |Paths| from
 |paths|, |circles|, |ellipses|, |reg_polygons|, and |rectangles| onto it.
 Then I sort 
-|s| and call |output()| for each |Shape|.  Currently, |output()| will
-resolve to |Path::output()|, because |output()| hasn't been overloaded
+|s| and call |output| for each |Shape|.  Currently, |output| will
+resolve to |Path::output|, because |output| hasn't been overloaded
 for |Circle|, |Ellipse|, |Reg_Polygon|, or |Rectangle| (and probably 
 won't be).  
 
-The invocation of |push_back()| in each of the four loops depends on
-the fact that |Path::extract()| returns a |vector| 
-containing only one element.  That's why I use |front()|.  There is no
+The invocation of |push_back| in each of the four loops depends on
+the fact that |Path::extract| returns a |vector| 
+containing only one element.  That's why I use |front|.  There is no
 operator or function for concatenating |vectors|, at least I couldn't
 find one in Stroustrup.  @:!! TO DO@> TO DO: Get reference!
 
@@ -5862,11 +5862,11 @@ Added |Scanner_Node| argument.
 
 \initials{LDF 2005.07.07.}
 Now passing template argument 
-to |Compare_Maximum_Z::operator()()|.
+to |Compare_Maximum_Z::operator()|.
 
 \initials{LDF 2005.07.08.}
 Removed the explicit template argument from the call to 
-|Compare_Maximum_Z::operator()()|.
+|Compare_Maximum_Z::operator()|.
 \ENDLOG 
 
 @<Declare |Solid| functions@>=
@@ -5930,7 +5930,7 @@ Solid::output(Scanner_Node s)
 @* Drawing and filling.
 \initials{LDF Undated.}
 
-@q ** (2) Process vectors for |draw()|.@>
+@q ** (2) Process vectors for |draw|.@>
 @*1 Process vectors for {\it draw\/}().
 \initials{LDF 2002.10.09.}  Added this section.
 The same things are done to each of the |Shape*| vectors |paths|,
@@ -5954,15 +5954,15 @@ Changed the way |color_ptr| is set.  Now we cycle through the
 @:BUG FIX@> BUG FIX:  |color_ptr| is now set properly.
 
 \initials{LDF 2005.03.17.}
-Now calling |Path::push_draw_color()| instead of 
-|Path::set_draw_color()|.
+Now calling |Path::push_draw_color| instead of 
+|Path::set_draw_color|.
 
 \initials{LDF 2005.10.25.}
 @:BUG FIX@> BUG FIX:  Now only pushing |ddashed| and |ppen| onto the corresponding 
 vectors, if they're non-null.
 \ENDLOG 
 
-@<Process vectors for |draw()|@>=
+@<Process vectors for |draw|@>=
 
 {   /* Beginning of group.  */
 
@@ -6008,7 +6008,7 @@ vectors, if they're non-null.
       c_iter = v.begin();
     } 
 
-}   /* End of |@<Process vectors for |draw()|@>| group.  */
+}   /* End of |@<Process vectors for |draw|@>| group.  */
 
 @q ** (2) Draw.@>
 @*1 Draw.
@@ -6042,7 +6042,7 @@ Changed return value from |void| to |int|.  Now trying to lock and unlock
 Changed |const vector <const Color* > v| argument
 to |const vector <const Color* >& v|, i.e., it's 
 now a reference.  The way it was before caused 
-|Scan_Parse::drawing_command_solid()| to fail.
+|Scan_Parse::drawing_command_solid| to fail.
 
 \initials{LDF 2004.09.05.}
 Started to make debugging and error output thread-safe by making the
@@ -6167,7 +6167,7 @@ for (vector<Color*>::const_iterator iter = v.begin();
        iter != s->paths.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } 
 
   c_iter = v.begin();
@@ -6176,7 +6176,7 @@ for (vector<Color*>::const_iterator iter = v.begin();
        iter != s->ellipses.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } /* |for|  */@;
 
   c_iter = v.begin();
@@ -6185,7 +6185,7 @@ for (vector<Color*>::const_iterator iter = v.begin();
        iter != s->circles.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } 
 
   c_iter = v.begin();
@@ -6194,7 +6194,7 @@ for (vector<Color*>::const_iterator iter = v.begin();
        iter != s->parabolae.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } 
 
   c_iter = v.begin();
@@ -6203,7 +6203,7 @@ for (vector<Color*>::const_iterator iter = v.begin();
        iter != s->hyperbolae.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } 
 
   c_iter = v.begin();
@@ -6212,14 +6212,14 @@ for (vector<Color*>::const_iterator iter = v.begin();
        iter != s->reg_polygons.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } 
 
   for (vector<Rectangle*>::const_iterator iter = s->rectangles.begin();
        iter != s->rectangles.end();
        ++iter)
     {
-      @<Process vectors for |draw()|@>@;
+      @<Process vectors for |draw|@>@;
     } 
 
 @q **** (4) Try to lock |picture.mutex|.@>   
@@ -6329,9 +6329,9 @@ log_message(cerr_strm);
 
   return 0;
 
-} /* End of |Solid::draw()| definition.  */
+} /* End of |Solid::draw| definition.  */
 
-@q ** (2) Process vectors for |fill()|.@>
+@q ** (2) Process vectors for |fill|.@>
 @*1 Process vectors for {\it fill\/}().
 \initials{LDF 2002.10.09.}  Added this section.
 The same things are done to each of the |Shape*| vectors |paths|,
@@ -6345,7 +6345,7 @@ Added code for handling |draw_color| and |fill_color|.
 
 \initials{LDF 2003.08.10.}  
 Now setting pen to |""|, because I've removed the pen
-argument from |fill()|.
+argument from |fill|.
 
 \initials{LDF 2004.06.07.}  
 Changed the argument of |set_dash_pattern| from 
@@ -6359,10 +6359,10 @@ Changed the way |color_ptr| is set.  Now we cycle through the
 @:BUG FIX@> BUG FIX:  |color_ptr| is now set properly.
 
 \initials{LDF 2005.03.17.}
-Removed the call to |Path::set_draw_color()|.
+Removed the call to |Path::set_draw_color|.
 \ENDLOG 
 
-@<Process vectors for |fill()|@>=
+@<Process vectors for |fill|@>=
 {
 
   if (c_iter != v.end())
@@ -6424,7 +6424,7 @@ Changed return value from |void| to |int|.  Now trying to lock and unlock
 Changed |const vector <const Color* > v| argument
 to |const vector <const Color* >& v|, i.e., it's 
 now a reference.  The way it was before caused 
-|Scan_Parse::drawing_command_solid()| to fail.
+|Scan_Parse::drawing_command_solid| to fail.
 
 \initials{LDF 2006.01.25.}
 Added code for handling |vector<Parabola*> parabolae| and 
@@ -6463,7 +6463,7 @@ Solid::fill(Picture& picture,
        iter != s->paths.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     }
 
   c_iter = v.begin();
@@ -6472,7 +6472,7 @@ Solid::fill(Picture& picture,
        iter != s->ellipses.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     }
 
   c_iter = v.begin();
@@ -6481,7 +6481,7 @@ Solid::fill(Picture& picture,
        iter != s->circles.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     } 
 
   c_iter = v.begin();
@@ -6490,7 +6490,7 @@ Solid::fill(Picture& picture,
        iter != s->parabolae.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     } 
 
   c_iter = v.begin();
@@ -6499,7 +6499,7 @@ Solid::fill(Picture& picture,
        iter != s->hyperbolae.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     } 
 
   c_iter = v.begin();
@@ -6508,7 +6508,7 @@ Solid::fill(Picture& picture,
        iter != s->reg_polygons.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     } 
 
   c_iter = v.begin();
@@ -6517,7 +6517,7 @@ Solid::fill(Picture& picture,
        iter != s->rectangles.end();
        ++iter)
     {
-      @<Process vectors for |fill()|@>@;      
+      @<Process vectors for |fill|@>@;      
     } 
 
 @q **** (4) Try to lock |picture.mutex|.@>   
@@ -6604,7 +6604,7 @@ Solid::fill(Picture& picture,
 
 }
 
-@q ** (2) Process vectors for |filldraw()|.@>
+@q ** (2) Process vectors for |filldraw|.@>
 
 @*1 Process vectors for {\it filldraw\/}().
 
@@ -6628,15 +6628,15 @@ if we reach the end.
 set properly.
 
 \initials{LDF 2005.03.17.}
-Now calling |Path::push_draw_color()| instead of 
-|Path::set_draw_color()|.
+Now calling |Path::push_draw_color| instead of 
+|Path::set_draw_color|.
 
 \initials{LDF 2005.10.25.}
 @:BUG FIX@> BUG FIX:  Now only pushing |ddashed| and |ppen| onto the corresponding 
 vectors, if they're non-null.
 \ENDLOG 
 
-@<Process vectors for |filldraw()|@>=
+@<Process vectors for |filldraw|@>=
 {
   if (draw_color_iter != draw_colors.end())
      draw_color_ptr = *draw_color_iter++;
@@ -6722,7 +6722,7 @@ Changed return value from |void| to |int|.  Now trying to lock and unlock
 Changed |const vector <const Color* > v| argument
 to |const vector <const Color* >& v|, i.e., it's 
 now a reference.  The way it was before caused 
-|Scan_Parse::drawing_command_solid()| to fail.
+|Scan_Parse::drawing_command_solid| to fail.
 
 \initials{LDF 2005.03.18.}
 Made |Pen* ppen| argument non-|const|.
@@ -6780,7 +6780,7 @@ Solid::filldraw(Picture& picture,
        iter != s->paths.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     } 
 
   draw_color_iter = draw_colors.begin();
@@ -6790,7 +6790,7 @@ Solid::filldraw(Picture& picture,
        iter != s->ellipses.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     }
 
   draw_color_iter = draw_colors.begin();
@@ -6800,7 +6800,7 @@ Solid::filldraw(Picture& picture,
        iter != s->circles.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     }
 
   draw_color_iter = draw_colors.begin();
@@ -6810,7 +6810,7 @@ Solid::filldraw(Picture& picture,
        iter != s->parabolae.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     }
 
   draw_color_iter = draw_colors.begin();
@@ -6820,7 +6820,7 @@ Solid::filldraw(Picture& picture,
        iter != s->hyperbolae.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     }
 
   draw_color_iter = draw_colors.begin();
@@ -6830,14 +6830,14 @@ Solid::filldraw(Picture& picture,
        iter != s->reg_polygons.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     }
 
   for (vector<Rectangle*>::const_iterator iter = s->rectangles.begin();
        iter != s->rectangles.end();
        ++iter)
     {
-      @<Process vectors for |filldraw()|@>@;
+      @<Process vectors for |filldraw|@>@;
     }
 
 @q **** (4) Try to lock |picture.mutex|.@>   
@@ -6924,7 +6924,7 @@ Solid::filldraw(Picture& picture,
 
 }
 
-@q ** (2) Process vectors for |undraw()|.@>
+@q ** (2) Process vectors for |undraw|.@>
 @*1 Process vectors for {\it undraw\/}().
 \initials{LDF 2002.10.09.}  
 
@@ -6937,14 +6937,14 @@ the code in this named section.  Each time it it's used, |iter| is an
 iterator for a different vector.
 
 \initials{LDF 2005.03.17.}
-Removed the call to |Path::set_draw_color()|.
+Removed the call to |Path::set_draw_color|.
 
 \initials{LDF 2005.10.25.}
 @:BUG FIX@> BUG FIX:  Now only pushing |ddashed| and |ppen| onto the corresponding 
 vectors, if they're non-null.
 \ENDLOG 
 
-@<Process vectors for |undraw()|@>=
+@<Process vectors for |undraw|@>=
 {
   (**iter).set_fill_draw_value(UNDRAW_VALUE);
 
@@ -7011,49 +7011,49 @@ Solid::undraw(Picture& picture,
        iter != s->paths.end();
        ++iter)
     {
-      @<Process vectors for |undraw()|@>@;
+      @<Process vectors for |undraw|@>@;
     }
 
   for (vector<Ellipse*>::const_iterator iter = s->ellipses.begin();
        iter != s->ellipses.end();
        ++iter)
     {
-     @<Process vectors for |undraw()|@>@;
+     @<Process vectors for |undraw|@>@;
     }
 
   for (vector<Circle*>::const_iterator iter = s->circles.begin();
        iter != s->circles.end();
        ++iter)
     {
-      @<Process vectors for |undraw()|@>@;
+      @<Process vectors for |undraw|@>@;
     }
 
   for (vector<Parabola*>::const_iterator iter = s->parabolae.begin();
        iter != s->parabolae.end();
        ++iter)
     {
-      @<Process vectors for |undraw()|@>@;
+      @<Process vectors for |undraw|@>@;
     }
 
   for (vector<Hyperbola*>::const_iterator iter = s->hyperbolae.begin();
        iter != s->hyperbolae.end();
        ++iter)
     {
-      @<Process vectors for |undraw()|@>@;
+      @<Process vectors for |undraw|@>@;
     }
 
   for (vector<Reg_Polygon*>::const_iterator iter = s->reg_polygons.begin();
        iter != s->reg_polygons.end();
        ++iter)
     {
-      @<Process vectors for |undraw()|@>@;
+      @<Process vectors for |undraw|@>@;
     }
 
   for (vector<Rectangle*>::const_iterator iter = s->rectangles.begin();
        iter != s->rectangles.end();
        ++iter)
     {
-      @<Process vectors for |undraw()|@>@;
+      @<Process vectors for |undraw|@>@;
     }
 
 @q **** (4) Try to lock |picture.mutex|.@>   
@@ -7139,7 +7139,7 @@ Solid::undraw(Picture& picture,
   return 0;
 }
 
-@q ** (2) Process vectors for |unfill()|.@>
+@q ** (2) Process vectors for |unfill|.@>
 @*1 Process vectors for {\it unfill\/}().
 \initials{LDF 2002.10.09.}  
 
@@ -7153,17 +7153,17 @@ iterator for a different vector.
 
 \initials{LDF 2003.08.10.}  
 Now setting pen to |""|, since I've removed the pen
-argument to |unfill()|.
+argument to |unfill|.
 
 \initials{LDF 2004.06.07.}  
 Changed the argument of |set_dash_pattern| from 
 |""| to |static_cast<Dash_Pattern*>(0)|.
 
 \initials{LDF 2005.03.17.}
-Removed the call to |Path::set_draw_color()|.
+Removed the call to |Path::set_draw_color|.
 \ENDLOG 
 
-@<Process vectors for |unfill()|@>=
+@<Process vectors for |unfill|@>=
 {
   (**iter).set_fill_draw_value(UNFILL_VALUE);
 
@@ -7214,49 +7214,49 @@ Solid::unfill(Picture& picture) const
        iter != s->paths.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     } 
 
   for (vector<Ellipse*>::const_iterator iter = s->ellipses.begin();
        iter != s->ellipses.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     } 
 
   for (vector<Circle*>::const_iterator iter = s->circles.begin();
        iter != s->circles.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     } 
 
   for (vector<Parabola*>::const_iterator iter = s->parabolae.begin();
        iter != s->parabolae.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     } 
 
   for (vector<Hyperbola*>::const_iterator iter = s->hyperbolae.begin();
        iter != s->hyperbolae.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     } 
 
   for (vector<Reg_Polygon*>::const_iterator iter = s->reg_polygons.begin();
        iter != s->reg_polygons.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     }
 
   for (vector<Rectangle*>::const_iterator iter = s->rectangles.begin();
        iter != s->rectangles.end();
        ++iter)
     {
-      @<Process vectors for |unfill()|@>@;
+      @<Process vectors for |unfill|@>@;
     }
 
 @q **** (4) Try to lock |picture.mutex|.@>   
@@ -7343,7 +7343,7 @@ Solid::unfill(Picture& picture) const
 
 }
 
-@q ** (2) Process vectors for |unfilldraw()|.@>
+@q ** (2) Process vectors for |unfilldraw|.@>
 @*1 Process vectors for {\it unfilldraw\/}().
 The same things are done to each of the |Shape*| vectors |paths|,
 |ellipses|, |circles|, |reg_polygons|, and |rectangles|, so I've put
@@ -7356,14 +7356,14 @@ iterator for a different vector.
 Added this section.
 
 \initials{LDF 2005.03.17.}
-Removed the call to |Path::set_draw_color()|.
+Removed the call to |Path::set_draw_color|.
 
 \initials{LDF 2005.10.25.}
 @:BUG FIX@> BUG FIX:  Now only pushing |ddashed| and |ppen| onto the corresponding 
 vectors, if they're non-null.
 \ENDLOG 
 
-@<Process vectors for |unfilldraw()|@>=
+@<Process vectors for |unfilldraw|@>=
 {
    (**iter).set_fill_draw_value(UNFILLDRAW_VALUE);
 
@@ -7378,16 +7378,16 @@ vectors, if they're non-null.
 @*1 Unfilldraw.
 @^\cfunc{Solid}{unfilldraw}@>
 
-Unlike |Path::unfilldraw()|, |Solid::unfilldraw()|
+Unlike |Path::unfilldraw|, |Solid::unfilldraw|
 behaves like\newline
 \MP/'s {\it unfilldraw} command, i.e., it unfills and
-undraws.  I intend to change |Path::unfilldraw\/()| so that it also
+undraws.  I intend to change |Path::unfilldraw\/| so that it also
 behaves this way.    
 \initials{LDF 2002.10.09.}  
 
 \initials{LDF 2002.10.09.}  
 @:!!@> !!  Check this: the correct code is written
-to |out_stream|, but after |filldraw()| and |unfill_draw()|, the
+to |out_stream|, but after |filldraw| and |unfill_draw|, the
 outline is visible, but no lines inside the outline.  
 
 \TODO
@@ -7452,48 +7452,48 @@ Solid::unfilldraw(Picture& picture,
        iter != s->paths.end();
        ++iter)
     {
-      @<Process vectors for |unfilldraw()|@>@;
+      @<Process vectors for |unfilldraw|@>@;
     } /* |for|  */
 
   for (vector<Ellipse*>::const_iterator iter = s->ellipses.begin();
        iter != s->ellipses.end();
        ++iter)
     {
-     @<Process vectors for |unfilldraw()|@>@;
+     @<Process vectors for |unfilldraw|@>@;
     }
 
   for (vector<Circle*>::const_iterator iter = s->circles.begin();
        iter != s->circles.end();
        ++iter)
     {
-      @<Process vectors for |unfilldraw()|@>@;
+      @<Process vectors for |unfilldraw|@>@;
     }
 
   for (vector<Parabola*>::const_iterator iter = s->parabolae.begin();
        iter != s->parabolae.end();
        ++iter)
     {
-      @<Process vectors for |unfilldraw()|@>@;
+      @<Process vectors for |unfilldraw|@>@;
     }
   for (vector<Hyperbola*>::const_iterator iter = s->hyperbolae.begin();
        iter != s->hyperbolae.end();
        ++iter)
     {
-      @<Process vectors for |unfilldraw()|@>@;
+      @<Process vectors for |unfilldraw|@>@;
     }
 
   for (vector<Reg_Polygon*>::const_iterator iter = s->reg_polygons.begin();
        iter != s->reg_polygons.end();
        ++iter)
     {
-      @<Process vectors for |unfilldraw()|@>@;
+      @<Process vectors for |unfilldraw|@>@;
     }
 
   for (vector<Rectangle*>::const_iterator iter = s->rectangles.begin();
        iter != s->rectangles.end();
        ++iter)
     {
-      @<Process vectors for |unfilldraw()|@>@;
+      @<Process vectors for |unfilldraw|@>@;
     }
 
 @q **** (4) Try to lock |picture.mutex|.@>   

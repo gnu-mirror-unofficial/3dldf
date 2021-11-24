@@ -387,8 +387,8 @@ Rectangle::set(const Point& pt0, const Point& pt1,
 
 \LOG
 \initials{LDF 2003.12.30.}  
-Replaced |Rectangle::create_new_rectangle()|
-with a specialization of |template <class C> C* create_new()| for
+Replaced |Rectangle::create_new_rectangle|
+with a specialization of |template <class C> C* create_new| for
 |Rectangle|. 
 
 \initials{LDF 2004.10.11.}
@@ -405,8 +405,8 @@ create_new(const Rectangle* c, Scanner_Node scanner_node);
 
 \LOG
 \initials{LDF 2003.12.30.}  
-Replaced |Rectangle::create_new_rectangle()|
-with a specialization of |template <class C> C* create_new()| for
+Replaced |Rectangle::create_new_rectangle|
+with a specialization of |template <class C> C* create_new| for
 |Rectangle|. 
 
 \initials{LDF 2004.10.11.}
@@ -420,8 +420,8 @@ create_new(const Rectangle& c, Scanner_Node scanner_node);
 @q * (1) Destructor.@>
 @* Destructor. 
 @^\cfunc{Rectangle}{\~{}Rectangle}@>
-\initials{LDF 2002.10.09.}  Removed the destructor.  |Path::~Path()| or
-|Path::clear()|\newline
+\initials{LDF 2002.10.09.}  Removed the destructor.  |Path::~Path| or
+|Path::clear|\newline
 should be used instead, unless I add dynamically
 allocated data members to |Rectangle| (rather than |Reg_Polygon| 
 or |Path|).
@@ -608,9 +608,9 @@ on the free store for it.
 
   } /* |if (rectangle_reflection == 0)|  */
 
-@q *** (3) Call |Polygon::reflect_in()|.@> 
+@q *** (3) Call |Polygon::reflect_in|.@> 
 
-@ Call |Polygon::reflect_in()|.
+@ Call |Polygon::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Rectangle| functions@>=
@@ -626,9 +626,9 @@ on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Polygon::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Polygon::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Polygon::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Polygon::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Rectangle| functions@>=
@@ -651,9 +651,9 @@ on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Polygon::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Polygon::reflect_in| returned 1.@> 
 
-@ Error handling:  |Polygon::reflect_in()| returned 1.
+@ Error handling:  |Polygon::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Rectangle| functions@>=
@@ -677,9 +677,9 @@ on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Polygon::reflect_in()| succeeded.@> 
+@q **** (4) |Polygon::reflect_in| succeeded.@> 
 
-@ |Polygon::reflect_in()| succeeded.
+@ |Polygon::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Rectangle| functions@>=
@@ -734,7 +734,7 @@ on the free store for it.
 
   return 0;
 
-} /* End of |Rectangle::reflect_in()| definition.  */
+} /* End of |Rectangle::reflect_in| definition.  */
 
 @q * (1) Returning Elements and information.@>
 @* Returning Elements and information.
@@ -772,15 +772,15 @@ get_shape_type(void) const
 
 \LOG
 \initials{LDF 2002.11.06.}  
-Got rid of |get_center()|.  It's not needed, since
-|Reg_Polygon::get_center()| does the trick.
+Got rid of |get_center|.  It's not needed, since
+|Reg_Polygon::get_center| does the trick.
 
 \initials{LDF 2003.04.15.}  
-Added |get_center()| again, since I'm no longer
+Added |get_center| again, since I'm no longer
 deriving |Rectangle| from |Reg_Polygon|, but from |Path|.
 
 \initials{LDF 2003.07.18.}  
-Got rid of |get_center()| again, because |Rectangle|
+Got rid of |get_center| again, because |Rectangle|
 is now derived from |Polygon|, and I've moved the |Reg_Polygon|
 versions to |Polygon|.
 \ENDLOG 
@@ -823,11 +823,11 @@ The argument |c| should be in the range $0 <= c <= 3$.
 
 \LOG
 \initials{LDF 2002.11.06.}  
-Changed this function so that it uses |mediate()|.
+Changed this function so that it uses |mediate|.
 
 \initials{LDF 2003.05.09.}  
-Renamed this function |get_mid_point()|.  Formerly,
-it was called |mid_point()|.  
+Renamed this function |get_mid_point|.  Formerly,
+it was called |mid_point|.  
 
 \initials{LDF 2003.07.18.}  
 Made this function |const|.
@@ -1064,8 +1064,8 @@ After much difficulty, I've managed to get a single level of
 decomposition to work.
 
 \initials{LDF 2005.04.13.}
-Renamed this function |sub_decompose()|.  It was formerly called 
-|decompose()|.  Also removed the |const unsigned short| argument.
+Renamed this function |sub_decompose|.  It was formerly called 
+|decompose|.  Also removed the |const unsigned short| argument.
 This function only performs a single level of decomposition.
 
 \initials{LDF 2005.04.14.}
@@ -1123,7 +1123,7 @@ Polygon::sub_decompose(const bool use_rectangles,
 @
 \LOG
 \initials{LDF 2005.04.14.}
-Now allocating memory for new |Triangle|, calling |Triangle::set()|
+Now allocating memory for new |Triangle|, calling |Triangle::set|
 on it, and casting it to a |Polygon*| and pushing it onto 
 the |Pointer_Vector<Polygon>| |*pv|.  Previously, I used a 
 |Polygon*| and pushed the pointers to |Points| onto 
@@ -1226,7 +1226,7 @@ Added this section.
 
 \initials{LDF 2005.04.14.}
 No longer allocating memory for |Points|, since I'm calling
-|Rectangle::set()| with plain |Point| arguments.
+|Rectangle::set| with plain |Point| arguments.
 \ENDLOG
 
 @<Define |Polygon| functions@>=

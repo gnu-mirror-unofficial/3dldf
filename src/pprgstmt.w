@@ -52,13 +52,13 @@
 @q ** (2) Common declarations for rules.@>
 @*1 Common declarations for rules.
 It would be nice to declare the variables in this section as local variables
-within |yyparse()|, but I don't know of any way to do that.
+within |yyparse|, but I don't know of any way to do that.
 \initials{LDF 2004.04.16.}
 
 I also wanted |out_stream_metapost| to be a plain |ostream| rather than an
 |ostream*|, but I couldn't get this to work.  I believe it will only be needed
 for debugging purposes, because real output should be performed by
-|beginfig()|, |endfig()|, |Picture::output()|, and other functions.
+|beginfig|, |endfig|, |Picture::output|, and other functions.
 \initials{LDF 2004.04.16.}
 
 @q *** (3) LOG.@>
@@ -80,10 +80,10 @@ Added |Thread_Info_Type* thread_info|.
 Added |stringstream cerr_strm|.
 
 \initials{LDF 2004.07.19.}
-@:??@> ?? For some reason, |Thread_Info_Type::get_thread_info()| doesn't seem to
+@:??@> ?? For some reason, |Thread_Info_Type::get_thread_info| doesn't seem to
 work here.  I've now put a pointer to |Thread_Info_Type| onto |Scanner_Type|
 instead.  I think this is better anyway, but I would like to know why the other
-way didn't work.  It seems as if |yyparse()| is not in the scope of the
+way didn't work.  It seems as if |yyparse| is not in the scope of the
 thread-specific data, but this shouldn't be the case.
 
 \initials{LDF 2004.07.21.}
@@ -105,7 +105,7 @@ Added |stringstream location_strm|.
 @:KLUDGE@> KLUDGE: 
 Now setting |stop_value| to |false| if 
 |scanner_node->in->type == Io_Struct::STDIN_TYPE|.  The problem is that the 
-``\<RETURNS>'' typed by the user are read by |sub_yylex()|, which can cause
+``\<RETURNS>'' typed by the user are read by |sub_yylex|, which can cause
 old input characters that haven't been processed yet to be overwritten.
 
 \initials{LDF 2004.09.13.}
@@ -208,7 +208,7 @@ No longer closing the input and output streams.
 This wasn't thread-safe.  They are now closed in the destructors.
 
 \initials{LDF 2004.07.21.}
-Now using |Scan_Parse::log_message()|.
+Now using |Scan_Parse::log_message|.
 
 \initials{LDF 2004.09.13.}
 Added code for handling unmatched |begingroup| commands in the input.  The
@@ -313,9 +313,9 @@ Added this section.
 
    } /* |while (scanner_node->group_ctr > 0)|  */
 
-@q **** (4) Exit |yyparse()| with return value 0.@>
+@q **** (4) Exit |yyparse| with return value 0.@>
 
-@ Exit |yyparse()| with return value 0.
+@ Exit |yyparse| with return value 0.
 \initials{LDF 2004.09.13.}
 
 @<Define rules@>=
@@ -529,9 +529,9 @@ else /* |!(   scanner_node->run_state.multithread_input
     {
 
 @q ******* (7) |scanner_node->in->up != 0|.       @> 
-@q ******* (7) Will call |scanner_node->pop_in()|.@> 
+@q ******* (7) Will call |scanner_node->pop_in|.@> 
 
-@ |scanner_node->in->up != 0|.  Will call |scanner_node->pop_in()|. 
+@ |scanner_node->in->up != 0|.  Will call |scanner_node->pop_in|. 
 \initials{LDF 2004.10.01.}
 
 @<Define rules@>=
@@ -559,9 +559,9 @@ else /* |!(   scanner_node->run_state.multithread_input
 
       status = scanner_node->pop_in();
 
-@q ******** (8) Error handling:  |scanner_node->pop_in()| failed.@> 
+@q ******** (8) Error handling:  |scanner_node->pop_in| failed.@> 
 
-@ Error handling:  |scanner_node->pop_in()| failed.
+@ Error handling:  |scanner_node->pop_in| failed.
 \initials{LDF 2004.10.01.}
 
 @<Define rules@>=
@@ -585,8 +585,8 @@ else /* |!(   scanner_node->run_state.multithread_input
 
     }  /* |if (status != 0)|  */
 
-@q ******** (8) |scanner_node->pop_in()| succeeded.@> 
-@ |scanner_node->pop_in()| succeeded.
+@q ******** (8) |scanner_node->pop_in| succeeded.@> 
+@ |scanner_node->pop_in| succeeded.
 \initials{LDF 2004.10.01.}
 
 @<Define rules@>=
@@ -1008,11 +1008,11 @@ referenced by the \§string expression> to one referenced by the
 an |Id_Map_Entry_Node|, the latter must first be destroyed.
 
 \initials{LDF 2005.01.26.}
-Now calling |Scan_Parse::let_func()|.
+Now calling |Scan_Parse::let_func|.
 
 \initials{LDF 2005.01.26.}
 Removed \§string expression> from the rule.  The |string| is now collected
-in |Scan_Parse::let_func()|.
+in |Scan_Parse::let_func|.
 \ENDLOG
 
 @q *** (3) Definition.@> 
@@ -1044,9 +1044,9 @@ in |Scan_Parse::let_func()|.
          status = let_func(scanner_node, s);
       }   
 
-@q ***** (5) Error handling:  |Scan_Parse::let_func()| failed, @>   
+@q ***** (5) Error handling:  |Scan_Parse::let_func| failed, @>   
 @q ***** (5) throwing |bad_alloc|.                             @>   
-@ Error handling:  |Scan_Parse::let_func()| failed, 
+@ Error handling:  |Scan_Parse::let_func| failed, 
 throwing |bad_alloc|.                                
 \initials{LDF 2005.01.26.}
 
@@ -1073,10 +1073,10 @@ Added this section.
 
               }  /* |catch (bad_alloc)|  */
 
-@q ***** (5) Error handling:  |Scan_Parse::let_func()| failed, @>   
+@q ***** (5) Error handling:  |Scan_Parse::let_func| failed, @>   
 @q ***** (5) returning a non-zero value                        @>   
 
-@ Error handling:  |Scan_Parse::let_func()| failed, 
+@ Error handling:  |Scan_Parse::let_func| failed, 
 returning a non-zero value.
 \initials{LDF 2005.01.26.}
 

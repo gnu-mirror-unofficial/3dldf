@@ -163,10 +163,10 @@ types defined in \filename{scanprse.web}, i.e., the |maps| containing
 the objects that are created by the user code.  
 
 \initials{LDF 2004.03.09.}  
-|beginfig()| now allocates memory for a
+|beginfig| now allocates memory for a
 |Picture| and points |current_picture| at it.  This memory is freed by
-|endfig()|.  This is so that 3DLDF can perform
-|current_picture->output()| asynchronously.
+|endfig|.  This is so that 3DLDF can perform
+|current_picture->output| asynchronously.
 
 \initials{LDF 2004.05.25.}  
 Added |Scanner_Node| argument.  Changed 
@@ -245,11 +245,11 @@ This should help in finding where errors occur.
 \initials{LDF 2003.08.17.} Made |silent| non-|const|.   Setting it to |true|, if 
 |SILENT_GLOBAL| is |true|.   
 
-\initials{LDF 2004.03.09.}  Moved |endfig()| from
-\filename{io.web} and redefined it, so that |endfig()| calls 
-|current_picture->output()|.  There are now two versions, with
+\initials{LDF 2004.03.09.}  Moved |endfig| from
+\filename{io.web} and redefined it, so that |endfig| calls 
+|current_picture->output|.  There are now two versions, with
 argument lists that correspond to those of the two versions of
-|Picture::output()|.  I've added the constant |SUPPRESS| to |namespace
+|Picture::output|.  I've added the constant |SUPPRESS| to |namespace
 Projections|, in order to be able to suppress output.
 
 \initials{LDF 2004.05.25.}  Added |Scanner_Node| argument.  Changed 
@@ -259,7 +259,7 @@ using the |Scanner_Node| argument.
 \initials{LDF 2004.06.07.}  Got rid of the version of this function that didn't
 take a |Focus| argument, because I've gotten rid of |default_focus|.  I may
 replace |default_focus| with a predefined variable defined in 
-|Scanner_Type::create()|.  
+|Scanner_Type::create|.  
 \ENDLOG 
 
 @<Declare figure functions@>=

@@ -125,7 +125,7 @@ public:
 \LOG
 \initials{LDF 2003.07.18.}  
 Now passing ``2.0'' instead of ``2.0'' as the
-argument to |atan()|.  GCC 3.3 couldn't compile this file, the way it
+argument to |atan|.  GCC 3.3 couldn't compile this file, the way it
 was before.
 \ENDLOG 
 
@@ -204,7 +204,7 @@ Dodecahedron::Dodecahedron(void)
 \initials{LDF 2003.08.10.}  
 Check the way I specify the
 rotations.  If its not the way I think it should be, check
-|Transform::align_with_axis()| and any other functions that are
+|Transform::align_with_axis| and any other functions that are
 involved.  This may be a long-term project.
 \ENDTODO 
 
@@ -215,14 +215,14 @@ Added shift to |center| and rotation.
 \initials{LDF 2003.08.10.}  
 Rewrote this function.  It had suddenly stopped
 working properly, probably because of changes I made to
-|Transform::align_with_axis()|.  I'm still not entirely happy with the
+|Transform::align_with_axis|.  I'm still not entirely happy with the
 way I've had to specify the rotations,  see the ``TO DO'' note of this
 date, above.
 
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.01.24.}
 Now setting |shape_type = DODECAHEDRON_TYPE|.
@@ -464,7 +464,7 @@ is_dodecahedron(void) const
 \initials{LDF Undated.}
 |const Point& center_0| is only ever used when |do_half == false|,
 that is, when the net isn't just being generated for use by a
-constructor.  If |get_net()| {\it is\/} called by a constructor, the
+constructor.  If |get_net| {\it is\/} called by a constructor, the
 net is always made with the center of pentagon 0 at the origin.  Even
 if |center_0| is used, the net is always generated in a plane parallel
 to the x-z plane.
@@ -479,7 +479,7 @@ Removed |center_0| argument.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.12.20.}
 Added the optional |Scanner_Node scanner_node| argument with the default 0.
@@ -492,9 +492,9 @@ Added the optional |Scanner_Node scanner_node| argument with the default 0.
 @q !! TO DO:  @>
 \initials{LDF Undated.}
 I've removed
-|rotate()| and now rotate the pentagons in the x-z plane only
+|rotate| and now rotate the pentagons in the x-z plane only
 in order to avoid having the y-coordinates be off by small amounts.
-This might not happen with |rotate()| once I implement the
+This might not happen with |rotate| once I implement the
 routine in Salomon (@:!!@> !! Get reference!) for calculating sine and
 cosine using integers.  
 \ENDTODO 
@@ -1683,9 +1683,9 @@ try to allocate memory on the free store for it.
 
   } /* |if (dodecahedron_reflection == static_cast<Dodecahedron*>(0))|  */
 
-@q *** (3) Call |Polyhedron::reflect_in()|.@> 
+@q *** (3) Call |Polyhedron::reflect_in|.@> 
 
-@ Call |Polyhedron::reflect_in()|.
+@ Call |Polyhedron::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Dodecahedron| functions@>=
@@ -1701,9 +1701,9 @@ try to allocate memory on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Dodecahedron| functions@>=
@@ -1726,9 +1726,9 @@ try to allocate memory on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| returned 1.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| returned 1.
+@ Error handling:  |Polyhedron::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Dodecahedron| functions@>=
@@ -1752,9 +1752,9 @@ try to allocate memory on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
+@q **** (4) |Polyhedron::reflect_in| succeeded.@> 
 
-@ |Polyhedron::reflect_in()| succeeded.
+@ |Polyhedron::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Dodecahedron| functions@>=
@@ -1808,7 +1808,7 @@ try to allocate memory on the free store for it.
 
   return 0;
 
-} /* End of |Dodecahedron::reflect_in()| definition.  */
+} /* End of |Dodecahedron::reflect_in| definition.  */
 
 @q * (1) Putting |class Dodecahedron| together.@>
 @ Putting {\bf class Dodecahedron} together.

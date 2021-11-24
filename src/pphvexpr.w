@@ -286,13 +286,13 @@ debugging code.
 \LOG
 \initials{LDF 2004.12.10.}
 Added this rule.  It is not yet functional, because I haven't written 
-|Path::reflect_off()| yet.
+|Path::reflect_off| yet.
 
 \initials{LDF 2004.12.10.}
 Added ``\.{WITH\_DIRECTION} \§point expression>''.
 
 \initials{LDF 2004.12.10.}
-Working on |Path::reflect_off()|.
+Working on |Path::reflect_off|.
 
 \initials{LDF 2004.12.10.}
 Changed \§path secondary> on the left-hand side to 
@@ -322,9 +322,9 @@ Removed debugging code.
     *pv += create_new<Path>(0, scanner_node);
     *pv += create_new<Path>(0, scanner_node);
 
-@q ******* (7) Call |Scan_Parse::reflect_off_func<Path>()|.@> 
+@q ******* (7) Call |Scan_Parse::reflect_off_func<Path>|.@> 
 
-@ Call |Scan_Parse::reflect_off_func<Path>()|.
+@ Call |Scan_Parse::reflect_off_func<Path>|.
 \initials{LDF 2004.12.10.}
 
 @<Define rules@>=
@@ -336,10 +336,10 @@ Removed debugging code.
                                         pv);          
 
 @q ******** (8) Error handling:  |status != 0|.         @> 
-@q ******** (8) |Scan_Parse::reflect_off_func()| failed.@> 
+@q ******** (8) |Scan_Parse::reflect_off_func| failed.@> 
 
 @ Error handling:  |status != 0|.  
-|Scan_Parse::reflect_off_func()| failed.
+|Scan_Parse::reflect_off_func| failed.
 \initials{LDF 2004.12.10.}
 
 @<Define rules@>=                        
@@ -350,9 +350,9 @@ Removed debugging code.
 
      } /* |if (status != 0)|  */
       
-@q ******** (8) |Scan_Parse::reflect_off_func()| succeeded.@> 
+@q ******** (8) |Scan_Parse::reflect_off_func| succeeded.@> 
 
-@ |Scan_Parse::reflect_off_func()| succeeded.
+@ |Scan_Parse::reflect_off_func| succeeded.
 \initials{LDF 2004.10.05.}
 
 \LOG

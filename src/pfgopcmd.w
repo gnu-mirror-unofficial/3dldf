@@ -67,7 +67,7 @@ This rule now causes output to be written to the MetaPost output file.
 Added |Thread_Info_Type* t| and |pthread_t tid| for use in debugging output.
 
 \initials{LDF 2004.07.16.}
-Rewrote this rule.  It now calls |beginfig_func()|.
+Rewrote this rule.  It now calls |beginfig_func|.
 
 \initials{LDF 2004.11.12.}
 Changed \.{INTEGER} to \§numeric expression>.  This will make it
@@ -107,11 +107,11 @@ for outputting |current_picture|, though.
 
 \initials{LDF 2004.04.22.}
 Removed most of the code for this rule to the function 
-|Scan_Parse::endfig_func()|, which is defined in 
+|Scan_Parse::endfig_func|, which is defined in 
 \filename{scanprse.web}.
 
 \initials{LDF 2004.04.22.}
-Changed the way |endfig_func()| is called to reflect 
+Changed the way |endfig_func| is called to reflect 
 changes I've made to it in preparation for using it as the 
 start routine of a new thread.
 
@@ -121,7 +121,7 @@ start routine to output |current_picture|.
 
 \initials{LDF 2004.06.23.}
 Rewrote this rule and moved some code back from the function 
-|Scan_Parse::endfig_func()| in \filename{scanprse.web}.
+|Scan_Parse::endfig_func| in \filename{scanprse.web}.
 I did this in order to be able to lock and unlock the |mutexes| 
 and handle |current_picture| properly.
 
@@ -134,7 +134,7 @@ destructor.  |*(arg.return_value)| is only used when multithreading is
 
 \initials{LDF 2004.06.29.}
 Rewrote this rule.  It now handles all of the arguments 
-to |Picture::output()|.
+to |Picture::output|.
 
 \initials{LDF 2004.06.29.}
 Now using |@<Common declarations for |output| and |endfig| rules@>|.
@@ -143,7 +143,7 @@ Now using |@<Common declarations for |output| and |endfig| rules@>|.
 Put common code for this rule and |output_command| rule into sections.
 
 \initials{LDF 2004.07.15.}
-Rewrote this rule.  It now calls |output_command_func()|. 
+Rewrote this rule.  It now calls |output_command_func|. 
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -273,7 +273,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.06.24.}
-Now using a thread with |output_func()| as its start routine.
+Now using a thread with |output_func| as its start routine.
 
 \initials{LDF 2004.06.29.}
 Rewrote this rule.  It now handles all of the arguments to |Picture::output|.

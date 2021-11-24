@@ -360,7 +360,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |pen_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -392,7 +392,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |dash_pattern_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -424,7 +424,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |color_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -456,7 +456,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |transform_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -485,7 +485,7 @@ Added this rule.  The way things are set up now, I don't think it's
 possible that |pictures| will ever be unknown.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 
 \initials{2008.12.22.}
 @:BUG FIX@> BUG FIX:  Now casting |@=$2@>| to |Id_Map_Entry_Node|.
@@ -531,7 +531,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -2827,7 +2827,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -2856,7 +2856,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -2887,7 +2887,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |point_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -2916,7 +2916,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -2948,7 +2948,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |focus_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3044,7 +3044,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |path_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3074,7 +3074,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |ellipse_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3152,7 +3152,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |circle_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 \TODO
@@ -3161,7 +3161,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2004.11.22.}
-Add |Circle::show()|.
+Add |Circle::show|.
 \ENDTODO 
 
 @q ****** (6) Definition.@> 
@@ -3237,7 +3237,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3267,7 +3267,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |rectangle_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3294,7 +3294,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3321,7 +3321,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3348,7 +3348,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3378,7 +3378,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |reg_polygon_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3404,7 +3404,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3431,7 +3431,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3463,7 +3463,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |cuboid_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3493,7 +3493,7 @@ Added this rule.
 @:BUG FIX@> BUG FIX:  Now deleting |tetrahedron_expression|.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3520,7 +3520,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3547,7 +3547,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3622,7 +3622,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3649,7 +3649,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -3676,7 +3676,7 @@ Replaced code with a call to |Scan_Parse::show_func()|.
 Added this rule.
 
 \initials{LDF 2005.10.31.}
-Replaced code with a call to |Scan_Parse::show_func()|.
+Replaced code with a call to |Scan_Parse::show_func|.
 \ENDLOG
 
 @q ****** (6) Definition.@> 
@@ -5198,7 +5198,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2005.12.01.}
-Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
+Removed code from this rule.  Now calling |Scan_Parse::show_func| instead.
 \ENDLOG
 
 @q ******* (7) Definition.@> 
@@ -5229,7 +5229,7 @@ Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
 Added this rule.
 
 \initials{LDF 2005.12.01.}
-Removed code from this rule.  Now calling |Scan_Parse::show_func()| instead.
+Removed code from this rule.  Now calling |Scan_Parse::show_func| instead.
 \ENDLOG
 
 @q ******* (7) Definition.@> 

@@ -273,9 +273,9 @@ Removed debugging code.
     *pv += create_new<Rectangle>(0, scanner_node);
     *pv += create_new<Rectangle>(0, scanner_node);
 
-@q ******* (7) Call |Scan_Parse::reflect_off_func<Rectangle>()|.@> 
+@q ******* (7) Call |Scan_Parse::reflect_off_func<Rectangle>|.@> 
 
-@ Call |Scan_Parse::reflect_off_func<Rectangle>()|.
+@ Call |Scan_Parse::reflect_off_func<Rectangle>|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -293,9 +293,9 @@ Removed debugging code.
 
      } /* |if (status != 0)|  */
       
-@q ******** (8) |Scan_Parse::reflect_off_func()| succeeded.@> 
+@q ******** (8) |Scan_Parse::reflect_off_func| succeeded.@> 
 
-@ |Scan_Parse::reflect_off_func()| succeeded.
+@ |Scan_Parse::reflect_off_func| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=                        

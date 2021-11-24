@@ -135,18 +135,18 @@ string* s = static_cast<string*>(@=$2@>);
         }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::input_command()|.@> 
+@q ***** (5) Call |Scan_Parse::input_command|.@> 
 
-@ Call |Scan_Parse::input_command()|.
+@ Call |Scan_Parse::input_command|.
 \initials{LDF 2004.09.14.}
 
 @<Define rules@>=
 
   status = input_command(scanner_node, s);
 
-@q ****** (6) Error handling:  |Scan_Parse::input_command()| failed.@> 
+@q ****** (6) Error handling:  |Scan_Parse::input_command| failed.@> 
 
-@ Error handling:  |Scan_Parse::input_command()| failed.
+@ Error handling:  |Scan_Parse::input_command| failed.
 \initials{LDF 2004.09.14.}
 
 @<Define rules@>=
@@ -165,9 +165,9 @@ string* s = static_cast<string*>(@=$2@>);
 
     } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::input_command()| succeeded.@> 
+@q ****** (6) |Scan_Parse::input_command| succeeded.@> 
 
-@ Error handling:  |Scan_Parse::input_command()| succeeded.
+@ Error handling:  |Scan_Parse::input_command| succeeded.
 \initials{LDF 2004.09.14.}
 
 @<Define rules@>=

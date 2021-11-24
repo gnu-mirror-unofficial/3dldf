@@ -699,7 +699,7 @@ Now deleting |tolerance| and setting it to 0.
 
   return;
 
-}  /* End of |~Scanner_Type()| definition.  */
+}  /* End of |~Scanner_Type| definition.  */
 
 @q * (1) Assignment operator. @>
 @* Assignment operator.
@@ -771,7 +771,7 @@ Scanner_Type::operator=(const Scanner_Type& s)
 
 @ Initialize data members.
 There's no need to assign to |run_state|, because this is done in 
-|Scanner_Type::create()|.
+|Scanner_Type::create|.
 \initials{LDF 2004.09.15.}
 
 \LOG
@@ -996,7 +996,7 @@ throw;
 \initials{LDF 2004.04.20.}  Added this function.
 
 \initials{LDF 2004.04.22.}  Changed arguments.  They now correspond to
-those of |Id_Map_Entry_Type::set()|.
+those of |Id_Map_Entry_Type::set|.
 
 \initials{LDF 2004.04.28.}  Changed return value from |bool| to
 |Id_Map_Entry_Node|.  This is used in the rule
@@ -1027,7 +1027,7 @@ now testing whether multithreading is being used
 when setting |thread_info| and |thread_name|.
 
 \initials{LDF 2004.08.23.}
-Now calling |Id_Map_Entry_Type::destroy_array_subentries()|.
+Now calling |Id_Map_Entry_Type::destroy_array_subentries|.
 
 \initials{LDF 2004.08.23.}
 Made changes in debugging output.
@@ -1035,21 +1035,21 @@ Made changes in debugging output.
 \initials{LDF 2004.08.24.}
 Added |Id_Map_Entry_Node ssuperordinate_vector| argument.
 It will only be non-null when creating array entries by means 
-of vector-type declarations.  It's passed to |Id_Map_Entry_Node::set_entry()|.
+of vector-type declarations.  It's passed to |Id_Map_Entry_Node::set_entry|.
 
 \initials{LDF 2004.08.25.}
 Added |Id_Map_Entry_Node ssubordinate_array| argument.
 It will only be non-null when creating array entries by means 
-of vector-type declarations.  It's passed to |Id_Map_Entry_Node::set_entry()|.
+of vector-type declarations.  It's passed to |Id_Map_Entry_Node::set_entry|.
 
 \initials{LDF 2004.08.28.}
 Added |Scanner_Node sscanner_node| argument.  It's passed to 
-|Id_Map_Entry_Type::set_entry()|.
+|Id_Map_Entry_Type::set_entry|.
 
 \initials{LDF 2004.08.29.}
 Removed |Scanner_Node sscanner_node| argument.  Now passing
 |id_map_type| as an |Id_Map_Node| argument in calls to 
-|Id_Map_Entry_Node::set_entry()| rather than |sscanner_node| as a
+|Id_Map_Entry_Node::set_entry| rather than |sscanner_node| as a
 |Scanner_Type| argument.
 \ENDLOG 
 
@@ -1158,7 +1158,7 @@ Added code for handling this case.
 
 @<Define |Scanner_Type| functions@>=
 
-  else /* (|iter != id_map_node->id_map.end()|)  */
+  else /* (|iter != id_map_node->id_map.end|)  */
     {
 
 #if DEBUG_COMPILE
@@ -1212,8 +1212,8 @@ Added code for handling this case.
 
       status = iter->second->destroy_array_subentries(this);
 
-@q ***** (5) |destroy_array_subentries()| failed.@>
-@ |destroy_array_subentries()| failed.
+@q ***** (5) |destroy_array_subentries| failed.@>
+@ |destroy_array_subentries| failed.
 \initials{LDF 2004.08.22.}
 
 @<Define |Scanner_Type| functions@>=
@@ -1235,15 +1235,15 @@ Added code for handling this case.
           
           return static_cast<Id_Map_Entry_Node>(0); 
 
-        } /* |(if status != 0)|.  |destroy_array_subentries()| failed.  */
+        } /* |(if status != 0)|.  |destroy_array_subentries| failed.  */
 
-@q ***** (5) |destroy_array_subentries()| succeeded.@>
-@ |destroy_array_subentries()| succeeded.
+@q ***** (5) |destroy_array_subentries| succeeded.@>
+@ |destroy_array_subentries| succeeded.
 \initials{LDF 2004.08.22.}
 
 @<Define |Scanner_Type| functions@>=
 
-      else /* (|status == 0|).  |destroy_array_subentries()| succeeded.  */
+      else /* (|status == 0|).  |destroy_array_subentries| succeeded.  */
       
         {
 
@@ -1260,7 +1260,7 @@ Added code for handling this case.
             }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-        } /* |else| (|status == 0|).  |destroy_array_subentries()| succeeded.  */
+        } /* |else| (|status == 0|).  |destroy_array_subentries| succeeded.  */
 
 @q ***** (5).@>
 @ 
@@ -1314,7 +1314,7 @@ Now setting |iter->second| to 0 after deleting it.
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    } /* |else| (|iter != id_map_node->id_map.end()|) */
+    } /* |else| (|iter != id_map_node->id_map.end|) */
 
 @q *** (3) Create new |Id_Map_Entry_Node|.@>
 @ Create new |Id_Map_Entry_Node|.
@@ -1378,7 +1378,7 @@ from \filename{io.web} to \filename{scan.web}
 
 \initials{LDF 2004.08.28.}
 Now passing |this| as the |Scanner_Node| argument to 
-|Id_Map_Entry_Type::set_entry()|.
+|Id_Map_Entry_Type::set_entry|.
 \ENDLOG 
 
 @q ** Definition.  @>
@@ -1594,7 +1594,7 @@ Call this function recursively, incrementing |level| and using
           return lookup(s, true, level, local_id_map_node->up);
         }
 
-@ End of definition of |Scanner_Type::lookup()|.  
+@ End of definition of |Scanner_Type::lookup|.  
 @<Define |Scanner_Type| functions@>=
     } /* Not found.  */
 }
@@ -1841,7 +1841,7 @@ status = id_map_node->id_map.erase(s);
 
 return 0;
 
-} /* End of |Scanner_Type::erase_entry()| definition.  */
+} /* End of |Scanner_Type::erase_entry| definition.  */
 
 @q * Handle |numeric_list|.  @>
 @* Handle |numeric_list|.
@@ -1853,7 +1853,7 @@ Added this function.
 \initials{LDF 2004.05.13.}  
 Removed this code from the section 
 ``Common code for transformers using |numeric_list|'' and put it in the
-function |Scanner_Type::handle_numeric_list()|.
+function |Scanner_Type::handle_numeric_list|.
 
 \initials{LDF 2004.05.13.}  
 Moved this function definition from
@@ -2352,7 +2352,7 @@ invalid value.
 
   return bvp;
 
-} /* End of |Scanner_Type::handle_numeric_list()| definition.  */
+} /* End of |Scanner_Type::handle_numeric_list| definition.  */
 
 @q * (0) Extract |Picture| output arguments.@>
 @* Extract |Picture| output arguments.
@@ -2516,8 +2516,8 @@ cerr_mutex.lock();
 
       status = entry->lock();
     
-@q **** (4) Error handling:  |entry->lock()| failed.  @>
-@ Error handling:  |entry->lock()| failed.
+@q **** (4) Error handling:  |entry->lock| failed.  @>
+@ Error handling:  |entry->lock| failed.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scanner_Type| functions@>=
@@ -2616,8 +2616,8 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 
       status = entry_picture->lock();
     
-@q **** (4) Error handling:  |entry_picture->lock()| failed.  @>
-@ Error handling:  |entry_picture->lock()| failed.
+@q **** (4) Error handling:  |entry_picture->lock| failed.  @>
+@ Error handling:  |entry_picture->lock| failed.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scanner_Type| functions@>=
@@ -2829,8 +2829,8 @@ because it's annoying.
 
       status = entry_picture->unlock();
     
-@q ***** (5) Error handling:  |entry_picture->unlock()| failed.  @>
-@ Error handling:  |entry_picture->unlock()| failed.
+@q ***** (5) Error handling:  |entry_picture->unlock| failed.  @>
+@ Error handling:  |entry_picture->unlock| failed.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scanner_Type| functions@>=
@@ -2945,8 +2945,8 @@ entry->unlock();
 
       status = entry_picture->unlock();
     
-@q ***** (5) Error handling:  |entry_picture->unlock()| failed.  @>
-@ Error handling:  |entry_picture->unlock()| failed.
+@q ***** (5) Error handling:  |entry_picture->unlock| failed.  @>
+@ Error handling:  |entry_picture->unlock| failed.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scanner_Type| functions@>=
@@ -3045,8 +3045,8 @@ carefully than it had in the past.
 
       status = entry->unlock();
     
-@q **** (4) Error handling:  |entry->unlock()| failed.  @>
-@ Error handling:  |entry->unlock()| failed.
+@q **** (4) Error handling:  |entry->unlock| failed.  @>
+@ Error handling:  |entry->unlock| failed.
 \initials{LDF 2004.07.12.}
 
 @<Define |Scanner_Type| functions@>=
@@ -3901,7 +3901,7 @@ This prevents a compiler warning.
 \initials{LDF 2005.04.04.}
 Now setting |picture_arg->surface_hiding_value = 0| 
 if |surface_hiding_value_ptr == 0|.  This has the effect that 
-the default behavior of |Picture::output()| is to {\it not\/} perform 
+the default behavior of |Picture::output| is to {\it not\/} perform 
 surface hiding.
 \ENDLOG
 

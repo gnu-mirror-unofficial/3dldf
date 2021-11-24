@@ -119,7 +119,7 @@ Added real code to this rule.
 Added this rule.
 
 \initials{LDF 2005.12.07.}
-Now calling |Prime_Numbers::get_prime_vector()|.
+Now calling |Prime_Numbers::get_prime_vector|.
 \ENDLOG
 
 @<Define rules@>= 

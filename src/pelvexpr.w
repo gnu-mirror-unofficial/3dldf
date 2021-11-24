@@ -277,9 +277,9 @@ Removed debugging code.
     *pv += create_new<Ellipse>(0, scanner_node);
     *pv += create_new<Ellipse>(0, scanner_node);
 
-@q ******* (7) Call |Scan_Parse::reflect_off_func<Ellipse>()|.@> 
+@q ******* (7) Call |Scan_Parse::reflect_off_func<Ellipse>|.@> 
 
-@ Call |Scan_Parse::reflect_off_func<Ellipse>()|.
+@ Call |Scan_Parse::reflect_off_func<Ellipse>|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -291,10 +291,10 @@ Removed debugging code.
                                           pv);          
 
 @q ******** (8) Error handling:  |status != 0|.         @> 
-@q ******** (8) |Scan_Parse::reflect_off_func()| failed.@> 
+@q ******** (8) |Scan_Parse::reflect_off_func| failed.@> 
 
 @ Error handling:  |status != 0|.  
-|Scan_Parse::reflect_off_func()| failed.
+|Scan_Parse::reflect_off_func| failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=                        
@@ -305,9 +305,9 @@ Removed debugging code.
 
      } /* |if (status != 0)|  */
       
-@q ******** (8) |Scan_Parse::reflect_off_func()| succeeded.@> 
+@q ******** (8) |Scan_Parse::reflect_off_func| succeeded.@> 
 
-@ |Scan_Parse::reflect_off_func()| succeeded.
+@ |Scan_Parse::reflect_off_func| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=                        

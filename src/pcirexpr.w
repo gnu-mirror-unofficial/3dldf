@@ -149,9 +149,9 @@ Changed |@=$2@>| from \.{INTEGER} to \§numeric primary>.
 
   const Circle* t = s->get_circle_ptr(@=$2@>); 
 
-@q **** (4) Error handling:  |Sphere::get_circle_ptr()| returned 0.@>   
+@q **** (4) Error handling:  |Sphere::get_circle_ptr| returned 0.@>   
 
-@ Error handling:  |Sphere::get_circle_ptr()| returned 0.
+@ Error handling:  |Sphere::get_circle_ptr| returned 0.
 \initials{LDF 2004.10.13.}
 
 @<Define rules@>=
@@ -514,8 +514,8 @@ Added this rule.
 Changed |rectangle_secondary| to |plane_secondary|.
 
 \initials{LDF 2005.10.31.}
-Changed the call to |Scan_Parse::sphere_plane_intersection_func()| 
-to one to |Scan_Parse::ellipsoid_like_plane_intersection_func()|.
+Changed the call to |Scan_Parse::sphere_plane_intersection_func| 
+to one to |Scan_Parse::ellipsoid_like_plane_intersection_func|.
 \ENDLOG
  
 @q ***** (5) Definition.@> 

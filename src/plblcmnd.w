@@ -81,17 +81,17 @@ Added this rule.
 
 \initials{LDF 2004.06.30.}
 Now using |label_or_dotlabel| instead of |LABEL| as the first symbol 
-on the right-hand side.  Also, now calling |Point::label()|.  
+on the right-hand side.  Also, now calling |Point::label|.  
 Previously, this rule didn't actually do anything.
 
 \initials{LDF 2004.08.16.}
-Removed code from this rule to |Scan_Parse::label_command()|, 
+Removed code from this rule to |Scan_Parse::label_command|, 
 which is defined in \filename{scanprsf.web}.
 
 \initials{LDF 2005.01.31.}
 Added \§with text color optional> and \§with dot color optional>.
 Passing the pointers to |Color| that these non-terminal symbols
-reference, or 0, on to |Scan_Parse::label_point_command()|.
+reference, or 0, on to |Scan_Parse::label_point_command|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -198,7 +198,7 @@ Added \§with text color optional>
 and \§with dot color optional>.
 
 \initials{LDF 2005.12.01.}
-Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
+Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -247,7 +247,7 @@ Added \§with text color optional>
 and \§with dot color optional>.
 
 \initials{LDF 2005.12.01.}
-Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
+Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -295,7 +295,7 @@ Added \§with text color optional>
 and \§with dot color optional>.
 
 \initials{LDF 2005.12.01.}
-Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
+Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -343,7 +343,7 @@ Added \§with text color optional>
 and \§with dot color optional>.
 
 \initials{LDF 2005.12.01.}
-Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func()|.
+Removed code from this rule.  Now calling |Scan_Parse::label_bool_point_func|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -393,7 +393,7 @@ Changed \.{INTEGER} to \§numeric expression>.
 \initials{LDF 2005.01.31.}
 Added \§with text color optional> and \§with dot color optional>.
 Passing the pointers to |Color| that these non-terminal symbols 
-reference on to |Scan_Parse:::label_path_command()|.
+reference on to |Scan_Parse:::label_path_command|.
 
 \initials{LDF 2005.10.24.}
 Changed |path_like_expression| to |path_expression|.
@@ -441,7 +441,7 @@ Added this rule.
 
 \initials{LDF 2005.01.31.}
 Now passing two nulls, cast to |Color*|, to 
-|Scan_Parse::label_path_command()| for the |text_color| and 
+|Scan_Parse::label_path_command| for the |text_color| and 
 |dot_color| arguments.  I plan to add \§with text color optional>
 and \§with dot color optional> to this rule.
 
@@ -451,7 +451,7 @@ Changed \.{INTEGER} to \§numeric expression>.
 \initials{LDF 2005.01.31.}
 Added \§with text color optional> \§with dot color optional>
 Passing the pointers to |Color| that these non-terminal symbols 
-reference on to |Scan_Parse:::label_path_command()|.
+reference on to |Scan_Parse:::label_path_command|.
 
 \initials{LDF 2005.10.24.}
 Changed |path_like_expression| to |path_expression|.
@@ -1264,7 +1264,7 @@ Added this rule.
 \initials{LDF 2004.06.30.}  Added this section.
 
 \initials{LDF 2004.08.17.}
-Removed code from this rule to the function |on_picture_optional_0()|, which is
+Removed code from this rule to the function |on_picture_optional_0|, which is
 defined in \filename{scanprse.web}.
 \ENDLOG 
 
@@ -1285,19 +1285,19 @@ defined in \filename{scanprse.web}.
 
   void* v = on_picture_optional_0(static_cast<Scanner_Node>(parameter));
 
-  if (v == 0) /* (|on_picture_optional_0()| failed.)  */
+  if (v == 0) /* (|on_picture_optional_0| failed.)  */
     {
       
       @=$$@> = static_cast<void*>(0); 
 
-    } /* |if (entry == 0)| (|on_picture_optional_0()| failed.)  */
+    } /* |if (entry == 0)| (|on_picture_optional_0| failed.)  */
 
-  else  /* (|on_picture_optional_0()| succeeded.)  */
+  else  /* (|on_picture_optional_0| succeeded.)  */
     {
 
       @=$$@> = v;
 
-} /* |else| (|on_picture_optional_0()| succeeded.)  */
+} /* |else| (|on_picture_optional_0| succeeded.)  */
 
 };
 

@@ -171,7 +171,7 @@ using the |Scanner_Node| argument.
 Got rid of the version of this function that 
 didn't take a |Focus| argument, because I've gotten rid of |default_focus|.  
 I may replace |default_focus| with a predefined variable defined in
-|Scanner_Type::create()|.   
+|Scanner_Type::create|.   
 
 \initials{LDF 2004.06.29.}
 Changed |SORTING::NO_SORT| to |SORTING::SUPPRESS_SORT| because 
@@ -286,7 +286,7 @@ other |Shapes| reduce to |Paths| or |Solids|.
 \initials{LDF 2002.09.17.} 
 |extract| checks that all of the |Points| contained in the
 |Shape| can be projected with the |Focus| that is being used.  If any
-of them cannot be, then |extract()| returns an empty
+of them cannot be, then |extract| returns an empty
 |vector| of |Shapes|.  This means that any |Shape| must be entirely
 projectable; partial |Shapes| will not be output.  
 
@@ -362,8 +362,8 @@ it returns |false|.
 \LOG
 \initials{LDF 2002.09.18.}  
 Changed the error handling code below.
-Formerly, |get_minimum_z()| was invoked, but this is 
-unnecessary, since |set_projective_extremes()| returns |false| if
+Formerly, |get_minimum_z| was invoked, but this is 
+unnecessary, since |set_projective_extremes| returns |false| if
 something goes wrong with setting the extreme values for 
 the |Shape|.  
 
@@ -435,7 +435,7 @@ as an argument.
 Added this routine.  It checks for whether the values in 
 the |valarray <real> projective_extremes| in the |Shape| fall within the limits 
 given by the |min_x_proj|, |max_x_proj|, |min_y_proj|, and |max_x_proj| arguments 
-to this function (|Picture::output()|).  (Note that |min_z_proj| and
+to this function (|Picture::output|).  (Note that |min_z_proj| and
 |max_z_proj| are currently not checked.)  If they don't, the |Shape*| is removed 
 from |elements|.  Note that the projected z-coordinates are not currently 
 checked, but they are used for ordering the |Shapes| for output (furthest away
@@ -519,7 +519,7 @@ depending on the |sort_value| argument.  This is explained in
 It's necessary to make sure that sorting is only performed 
 if |elements| is non-empty.  It could be empty now, if the 
 error handling code above has removed all of the elements because 
-|set_projective_extremes()| returned |false| for all of them.  
+|set_projective_extremes| returned |false| for all of them.  
 We can't just return, because there might still be |Labels| on the 
 |Picture|.
 \initials{LDF 2002.09.18.}  
@@ -1153,7 +1153,7 @@ and then clearing |shape_list|.
 values for the projection, this |Shape| might
 be projectable, so we reset |do_output|
 to |true|.  If it can't be projected the
-next time, |suppress_output()| will be 
+next time, |suppress_output| will be 
 invoked again.
 \initials{LDF 2002.09.18.}
 
@@ -1174,7 +1174,7 @@ invoked again.
 @q **** (4) @>   
 @ Output the labels.  
 It is necessary to output the labels last because they might otherwise
-be drawn over by |fill()| or |filldraw()| commands. 
+be drawn over by |fill| or |filldraw| commands. 
 \initials{LDF Undated.} 
 
 I'm not bothering to sort the labels so that the ones
@@ -1208,9 +1208,9 @@ both the original and the transformed versions are output.
 \initials{LDF 2002.09.17.}  
 Simplified the following code.
 Formerly, there was a conditional here that 
-chose which version of |Label::output()| to call. 
+chose which version of |Label::output| to call. 
 I've removed the version without a |Transform| argument
-and invoke |Transform::is_identity()| in
+and invoke |Transform::is_identity| in
 |Label::output(const Focus&, const Transform&)|. 
 \ENDLOG 
 
@@ -1253,7 +1253,7 @@ each time I output a |Picture|, which is not what I want.
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-}  /* End of |Picture::output()| definition.  */
+}  /* End of |Picture::output| definition.  */
 
 @q * (1) Putting Picture functions together.@>
 @* Putting {\bf Picture} functions together.

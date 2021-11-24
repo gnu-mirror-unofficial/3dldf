@@ -188,7 +188,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.12.15.}
-Working on the function |Solid::reflect_off()|.
+Working on the function |Solid::reflect_off|.
 
 \initials{LDF 2005.10.24.}
 Changed |path_like_expression| to |path_expression|.
@@ -213,9 +213,9 @@ Removed debugging code.
     *pv += create_new<Cuboid>(0, scanner_node);
     *pv += create_new<Cuboid>(0, scanner_node);
 
-@q ******* (7) Call |Scan_Parse::reflect_off_func<Cuboid>()|.@> 
+@q ******* (7) Call |Scan_Parse::reflect_off_func<Cuboid>|.@> 
 
-@ Call |Scan_Parse::reflect_off_func<Cuboid>()|.
+@ Call |Scan_Parse::reflect_off_func<Cuboid>|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=

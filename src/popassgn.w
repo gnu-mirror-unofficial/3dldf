@@ -2990,8 +2990,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
@@ -3003,8 +3003,8 @@ Added this rule.
                                      BOOLEAN,
                                      static_cast<bool*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
@@ -3024,8 +3024,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.07.}
 
 @<Define rules@>=
@@ -3109,8 +3109,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.06.}
 
 @<Define rules@>=
@@ -3150,8 +3150,8 @@ real* r;
                                      NUMERIC,
                                      r);
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.06.}
 
 @<Define rules@>=
@@ -3171,8 +3171,8 @@ real* r;
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.06.}
 
 @<Define rules@>=
@@ -3255,8 +3255,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.09.}
 
 @<Define rules@>=
@@ -3268,8 +3268,8 @@ Added this rule.
                                       STRING,
                                       static_cast<string*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.09.}
 
 @<Define rules@>=
@@ -3289,8 +3289,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.09.}
 
 @<Define rules@>=
@@ -3377,8 +3377,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.11.}
 
 @<Define rules@>=
@@ -3390,8 +3390,8 @@ Added this rule.
                                    PEN,
                                    static_cast<Pen*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.11.}
 
 @<Define rules@>=
@@ -3411,8 +3411,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.11.}
 
 @<Define rules@>=
@@ -3496,8 +3496,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
@@ -3509,8 +3509,8 @@ Added this rule.
                                    DASH_PATTERN,
                                    static_cast<Dash_Pattern*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
@@ -3531,8 +3531,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
@@ -3595,7 +3595,7 @@ Got this rule to work.
 
 \initials{LDF 2004.09.01.}
 Removed most of the code from this rule to 
-|Scan_Parse::vector_type_plus_assign()|, which is now called in this
+|Scan_Parse::vector_type_plus_assign|, which is now called in this
 rule.  
 
 \initials{LDF 2004.11.05.}
@@ -3631,8 +3631,8 @@ Moved this rule from \filename{passign.w} to this file
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
@@ -3644,8 +3644,8 @@ Moved this rule from \filename{passign.w} to this file
                                      COLOR,
                                      static_cast<Color*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
@@ -3665,8 +3665,8 @@ Moved this rule from \filename{passign.w} to this file
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
@@ -3755,8 +3755,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
@@ -3768,8 +3768,8 @@ Added this rule.
                                    TRANSFORM,
                                    static_cast<Transform*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
@@ -3790,8 +3790,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.13.}
 
 @<Define rules@>=
@@ -4108,8 +4108,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4121,8 +4121,8 @@ Added this rule.
                                      STAR,
                                      static_cast<Star*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4142,8 +4142,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4220,8 +4220,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2021.07.05.}
 
 @<Define rules@>=
@@ -4242,8 +4242,8 @@ Added this rule.
                                      NEWWRITE,
                                      n);
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2021.07.05.}
 
 @<Define rules@>=
@@ -4263,8 +4263,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2021.07.05.}
 
 @<Define rules@>=
@@ -4347,8 +4347,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4360,8 +4360,8 @@ Added this rule.
                                      CONSTELLATION,
                                      static_cast<Constellation*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4381,8 +4381,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4469,8 +4469,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4482,8 +4482,8 @@ Added this rule.
                                      PLANET,
                                      static_cast<Planet*>(@=$3@>));
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4503,8 +4503,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ***** (5) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ***** (5) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2021.06.26.}
 
 @<Define rules@>=
@@ -4605,8 +4605,8 @@ Moved this rule from \filename{passign.w} to this file
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
@@ -4618,8 +4618,8 @@ Moved this rule from \filename{passign.w} to this file
                                      POINT,
                                      static_cast<Point*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
@@ -4639,8 +4639,8 @@ Moved this rule from \filename{passign.w} to this file
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.08.31.}
 
 @<Define rules@>=
@@ -4695,7 +4695,7 @@ Added this rule.
 
 \initials{LDF 2004.11.11.}
 Changed the code in this rule to account for changes
-I've made in |Scan_Parse::vector_type_assign()|, which is 
+I've made in |Scan_Parse::vector_type_assign|, which is 
 defined in \filename{scanprse.web}.
 
 \initials{LDF 2004.12.03.}
@@ -4801,9 +4801,9 @@ status = vector_type_assign<Point, Point>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2004.11.10.}
 
@@ -4833,9 +4833,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2004.11.10.}
 
 @<Define rules@>=
@@ -4921,8 +4921,8 @@ Moved this rule from \filename{passign.w} to this file
 
 Bool_Point* bp = static_cast<Bool_Point*>(@=$3@>);
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.09.01.}
 
 @<Define rules@>=
@@ -4934,8 +4934,8 @@ Bool_Point* bp = static_cast<Bool_Point*>(@=$3@>);
                              BOOL_POINT,
                              bp);   
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.09.01.}
 
 @<Define rules@>=
@@ -4957,8 +4957,8 @@ Bool_Point* bp = static_cast<Bool_Point*>(@=$3@>);
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.09.01.}
 
 @<Define rules@>=
@@ -5048,8 +5048,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.12.12.}
 
 @<Define rules@>=
@@ -5061,8 +5061,8 @@ Added this rule.
                                      PATH,
                                      static_cast<Path*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.12.12.}
 
 @<Define rules@>=
@@ -5082,8 +5082,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.12.12.}
 
 @<Define rules@>=
@@ -5230,9 +5230,9 @@ status = vector_type_assign<Path, Path>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2004.12.12.}
 
@@ -5262,9 +5262,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2004.12.12.}
 
 @<Define rules@>=
@@ -5311,8 +5311,8 @@ Added this rule.
 @=operation_assignment: ellipse_vector_variable PLUS_ASSIGN ellipse_expression@>
 {
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -5436,8 +5436,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -5449,8 +5449,8 @@ Added this rule.
                                         CIRCLE,
                                         static_cast<Circle*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -5470,8 +5470,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -5618,9 +5618,9 @@ status = vector_type_assign<Circle, Circle>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2004.12.14.}
 
@@ -5650,9 +5650,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -5699,8 +5699,8 @@ Added this rule.
 @=operation_assignment: parabola_vector_variable PLUS_ASSIGN parabola_expression@>
 {
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.12.01.}
 
 @<Define rules@>=
@@ -5805,8 +5805,8 @@ Added this rule.
 @=operation_assignment: hyperbola_vector_variable PLUS_ASSIGN hyperbola_expression@>
 {
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.12.01.}
 
 @<Define rules@>=
@@ -5912,8 +5912,8 @@ Added this rule.
 @=PLUS_ASSIGN conic_section_lattice_expression@>@/
 {
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2007.07.29.}
 
 @<Define rules@>=
@@ -6148,9 +6148,9 @@ status = vector_type_assign<Polygon, Polygon>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2005.03.01.}
 
@@ -6180,9 +6180,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2005.03.01.}
 
 @<Define rules@>=
@@ -6248,8 +6248,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
@@ -6261,8 +6261,8 @@ Added this rule.
                                          TRIANGLE,
                                          static_cast<Triangle*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
@@ -6282,8 +6282,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
@@ -6430,9 +6430,9 @@ status = vector_type_assign<Triangle, Triangle>(scanner_node,
                                                       pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2005.01.25.}
 
@@ -6462,9 +6462,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2005.01.25.}
 
 @<Define rules@>=
@@ -6530,8 +6530,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6543,8 +6543,8 @@ Added this rule.
                                         RECTANGLE,
                                         static_cast<Rectangle*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6564,8 +6564,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6712,9 +6712,9 @@ status = vector_type_assign<Rectangle, Rectangle>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2004.12.14.}
 
@@ -6744,9 +6744,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6812,8 +6812,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6825,8 +6825,8 @@ Added this rule.
                                         REG_POLYGON,
                                         static_cast<Reg_Polygon*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6846,8 +6846,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -6994,9 +6994,9 @@ status = vector_type_assign<Reg_Polygon, Reg_Polygon>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2004.12.14.}
 
@@ -7026,9 +7026,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -7075,8 +7075,8 @@ Added this rule.
 @=operation_assignment: ellipsoid_vector_variable PLUS_ASSIGN ellipsoid_expression@>
 {
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.12.01.}
 
 @<Define rules@>=
@@ -7181,8 +7181,8 @@ Added this rule.
 @=operation_assignment: sphere_vector_variable PLUS_ASSIGN sphere_expression@>
 {
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.12.01.}
 
 @<Define rules@>=
@@ -7306,8 +7306,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -7319,8 +7319,8 @@ Added this rule.
                                         CUBOID,
                                         static_cast<Cuboid*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -7340,8 +7340,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -7488,9 +7488,9 @@ status = vector_type_assign<Cuboid, Cuboid>(scanner_node,
                                                 pv);          
 
 @q ****** (6) Error handling:                                @> 
-@q ****** (6) |Scan_Parse::vector_type_assign()| failed.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| failed.@> 
 
-@ Error handling:  |Scan_Parse::vector_type_assign()| 
+@ Error handling:  |Scan_Parse::vector_type_assign| 
 failed. 
 \initials{LDF 2004.12.14.}
 
@@ -7520,9 +7520,9 @@ if (status != 0)
 
          } /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_assign()| succeeded.@> 
+@q ****** (6) |Scan_Parse::vector_type_assign| succeeded.@> 
 
-@ |Scan_Parse::vector_type_assign()| succeeded. 
+@ |Scan_Parse::vector_type_assign| succeeded. 
 \initials{LDF 2004.12.14.}
 
 @<Define rules@>=
@@ -7590,8 +7590,8 @@ Added this rule.
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
-@q ***** (5) Call |Scan_Parse::vector_type_plus_assign()|.@>   
-@ Call |Scan_Parse::vector_type_plus_assign()|.
+@q ***** (5) Call |Scan_Parse::vector_type_plus_assign|.@>   
+@ Call |Scan_Parse::vector_type_plus_assign|.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=
@@ -7603,8 +7603,8 @@ Added this rule.
                                         POLYHEDRON,
                                         static_cast<Polyhedron*>(@=$3@>));
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| failed.@> 
-@ |Scan_Parse::vector_type_plus_assign()| failed.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| failed.@> 
+@ |Scan_Parse::vector_type_plus_assign| failed.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=
@@ -7624,8 +7624,8 @@ Added this rule.
 
     }  /* |if (status != 0)|  */
 
-@q ****** (6) |Scan_Parse::vector_type_plus_assign()| succeeded.@> 
-@ |Scan_Parse::vector_type_plus_assign()| succeeded.
+@q ****** (6) |Scan_Parse::vector_type_plus_assign| succeeded.@> 
+@ |Scan_Parse::vector_type_plus_assign| succeeded.
 \initials{LDF 2005.01.14.}
 
 @<Define rules@>=

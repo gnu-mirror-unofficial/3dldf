@@ -65,7 +65,7 @@ and |Trunc_Octahedron|.  Find out how to set it for
 \initials{LDF 2002.11.12.} 
 Add assignment operators for |Polyhedra|!  The
 individual types will need there own, but they can call
-|Polyhedron::operator=()|. 
+|Polyhedron::operator=|. 
 \ENDTODO 
 
 \LOG
@@ -141,7 +141,7 @@ base classes.
 
 \LOG
 \initials{LDF 2002.11.08.}  Got rid of pure |virtual| function 
-|Polyhedron::get_net()|.  I've made it |static| in the classes derived
+|Polyhedron::get_net|.  I've made it |static| in the classes derived
 from |Polyhedron|, which makes more sense.  |virtual| functions must
 be non-|static|.
 \ENDLOG 
@@ -315,9 +315,9 @@ on the free store for it.
 
   } /* |if (polyhedron_reflection == 0)|  */
 
-@q *** (3) Call |Solid_Faced::reflect_in()|.@> 
+@q *** (3) Call |Solid_Faced::reflect_in|.@> 
 
-@ Call |Solid_Faced::reflect_in()|.
+@ Call |Solid_Faced::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Polyhedron| functions@>=
@@ -333,9 +333,9 @@ on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Solid_Faced::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Solid_Faced::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Solid_Faced::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Solid_Faced::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Polyhedron| functions@>=
@@ -358,9 +358,9 @@ on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Solid_Faced::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Solid_Faced::reflect_in| returned 1.@> 
 
-@ Error handling:  |Solid_Faced::reflect_in()| returned 1.
+@ Error handling:  |Solid_Faced::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Polyhedron| functions@>=
@@ -384,9 +384,9 @@ on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Solid_Faced::reflect_in()| succeeded.@> 
+@q **** (4) |Solid_Faced::reflect_in| succeeded.@> 
 
-@ |Solid_Faced::reflect_in()| succeeded.
+@ |Solid_Faced::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Polyhedron| functions@>=
@@ -443,7 +443,7 @@ on the free store for it.
 
   return 0;
 
-} /* End of |Polyhedron::reflect_in()| definition.  */
+} /* End of |Polyhedron::reflect_in| definition.  */
 
 @q * (1) Intersection.@>  
 @* Intersection.
@@ -785,7 +785,7 @@ Added this function.
 
 \initials{LDF 2003.04.15.}  
 Commented-out this function, since I need to get
-|Reg_Polygon::intersection_points()| working first.  
+|Reg_Polygon::intersection_points| working first.  
 \ENDLOG 
 
 @<Declare |Polyhedron| functions@>=
@@ -921,7 +921,7 @@ Rewrote this function.  It now works properly.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.01.24.}
 Now setting |shape_type = TETRAHEDRON_TYPE|.
@@ -1199,7 +1199,7 @@ is_tetrahedron(void) const
 @q * (1) Get net.@>
 @* Get net. 
 @^\cfunc{Tetrahedron}{get\_net}@>
-\initials{LDF 2002.11.12.}  Unlike the |get_net()| functions for some of the
+\initials{LDF 2002.11.12.}  Unlike the |get_net| functions for some of the
 other |Polyhedra|, this function has no ``|bool do_half|'' argument.
 It doesn't pay for a |Tetrahedron|.
 
@@ -1213,7 +1213,7 @@ Removed |center_0| argument.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.12.20.}
 Added the optional |bool do_half| argument with the default |false|
@@ -1269,7 +1269,7 @@ Tetrahedron::get_net(const real triangle_diameter,
 @* Draw net.
 @^\cfunc{Tetrahedron}{draw\_net}@>
 \initials{LDF 2002.11.12.}  As of this date it's necessary to rotate the
-triangles into the x-y plane, because |Point::intersection_point()|
+triangles into the x-y plane, because |Point::intersection_point|
 has a bug that I discovered when I tried to call it on |Points| in the
 x-z plane.  It's not so terrible, because as of this date it's
 necessary to put the |Picture| in the x-y plane in order to use the
@@ -1612,9 +1612,9 @@ on the free store for it.
 
   } /* |if (tetrahedron_reflection == 0)|  */
 
-@q *** (3) Call |Polyhedron::reflect_in()|.@> 
+@q *** (3) Call |Polyhedron::reflect_in|.@> 
 
-@ Call |Polyhedron::reflect_in()|.
+@ Call |Polyhedron::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Tetrahedron| functions@>=
@@ -1630,9 +1630,9 @@ on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Tetrahedron| functions@>=
@@ -1655,9 +1655,9 @@ on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| returned 1.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| returned 1.
+@ Error handling:  |Polyhedron::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Tetrahedron| functions@>=
@@ -1681,9 +1681,9 @@ on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
+@q **** (4) |Polyhedron::reflect_in| succeeded.@> 
 
-@ |Polyhedron::reflect_in()| succeeded.
+@ |Polyhedron::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Tetrahedron| functions@>=
@@ -1737,7 +1737,7 @@ on the free store for it.
 
   return 0;
 
-} /* End of |Tetrahedron::reflect_in()| definition.  */
+} /* End of |Tetrahedron::reflect_in| definition.  */
 
 @q * (0) Octahedron.@>
 @** {\bf Octahedron}.
@@ -2014,9 +2014,9 @@ Point q[9];
                q[i + 4] = q[i];
            } /* |try|  */
 
-@q ****** (6) Error handling:  |create_new<Reg_Polygon>()| failed.@> 
+@q ****** (6) Error handling:  |create_new<Reg_Polygon>| failed.@> 
 
-@ Error handling:  |create_new<Reg_Polygon>()| failed.
+@ Error handling:  |create_new<Reg_Polygon>| failed.
 \initials{LDF 2004.10.20.}
 
 @<Define |Octahedron| functions@>=
@@ -2037,9 +2037,9 @@ Point q[9];
 
            } /* |catch (bad_alloc)|  */
 
-@q ****** (6) |create_new<Reg_Polygon>()| succeeded.@> 
+@q ****** (6) |create_new<Reg_Polygon>| succeeded.@> 
 
-@ |create_new<Reg_Polygon>()| succeeded.
+@ |create_new<Reg_Polygon>| succeeded.
 \initials{LDF 2004.10.20.}
 
 @<Define |Octahedron| functions@>=
@@ -2271,7 +2271,7 @@ triangles[3]->shift(pts[1] - pts[2]);
 
 return triangles;
 
-}  /* End of |Octahedron::get_net()| definition.  */
+}  /* End of |Octahedron::get_net| definition.  */
 
 @q * (1) Reflection in a |Plane|.@> 
 @* Reflection in a |Plane|.
@@ -2378,9 +2378,9 @@ on the free store for it.
 
   } /* |if (octahedron_reflection == 0)|  */
 
-@q *** (3) Call |Polyhedron::reflect_in()|.@> 
+@q *** (3) Call |Polyhedron::reflect_in|.@> 
 
-@ Call |Polyhedron::reflect_in()|.
+@ Call |Polyhedron::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Octahedron| functions@>=
@@ -2396,9 +2396,9 @@ on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Octahedron| functions@>=
@@ -2421,9 +2421,9 @@ on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| returned 1.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| returned 1.
+@ Error handling:  |Polyhedron::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Octahedron| functions@>=
@@ -2447,9 +2447,9 @@ on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
+@q **** (4) |Polyhedron::reflect_in| succeeded.@> 
 
-@ |Polyhedron::reflect_in()| succeeded.
+@ |Polyhedron::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Octahedron| functions@>=
@@ -2503,7 +2503,7 @@ on the free store for it.
 
   return 0;
 
-} /* End of |Octahedron::reflect_in()| definition.  */
+} /* End of |Octahedron::reflect_in| definition.  */
 
 @q * (0) Icosahedron.@>
 
@@ -2596,7 +2596,7 @@ Defined this function.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.01.24.}
 Now setting |shape_type = ICOSAHEDRON_TYPE|.
@@ -2849,7 +2849,7 @@ debugging code.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2005.12.20.}
 Added the optional |Scanner_Node scanner_node| argument with the default 0.
@@ -3229,9 +3229,9 @@ on the free store for it.
 
   } /* |if (icosahedron_reflection == 0)|  */
 
-@q *** (3) Call |Polyhedron::reflect_in()|.@> 
+@q *** (3) Call |Polyhedron::reflect_in|.@> 
 
-@ Call |Polyhedron::reflect_in()|.
+@ Call |Polyhedron::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Icosahedron| functions@>=
@@ -3247,9 +3247,9 @@ on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Polyhedron::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Icosahedron| functions@>=
@@ -3272,9 +3272,9 @@ on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Polyhedron::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Polyhedron::reflect_in| returned 1.@> 
 
-@ Error handling:  |Polyhedron::reflect_in()| returned 1.
+@ Error handling:  |Polyhedron::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Icosahedron| functions@>=
@@ -3298,9 +3298,9 @@ on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Polyhedron::reflect_in()| succeeded.@> 
+@q **** (4) |Polyhedron::reflect_in| succeeded.@> 
 
-@ |Polyhedron::reflect_in()| succeeded.
+@ |Polyhedron::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Icosahedron| functions@>=
@@ -3354,7 +3354,7 @@ on the free store for it.
 
   return 0;
 
-} /* End of |Icosahedron::reflect_in()| definition.  */
+} /* End of |Icosahedron::reflect_in| definition.  */
 
 @q * (0) Semi-Regular Archimedean Polyhedra.@>
 @** Semi-Regular Archimedean Polyhedra.
@@ -3736,7 +3736,7 @@ Removed |center_0| argument.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.10.22.}
 Finished rewriting this function.
@@ -3811,7 +3811,7 @@ reg_polygons.push_back(create_new<Reg_Polygon>(0));
 
   return reg_polygons;
 
-} /* End of |Trunc_Octahedron::get_net()| definition.  */
+} /* End of |Trunc_Octahedron::get_net| definition.  */
 
 @q * (1) Great Rhombicosidodecahedron.@>
 @* {\bf Great Rhombicosidodecahedron}.
@@ -5116,7 +5116,7 @@ Great_Rhombicosidodecahedron::get_net(const real dodecagon_diameter,
 
     return reg_polygons;
 
-} /* End of |Great_Rhombicosidodecahedron::get_net()| definition.  */
+} /* End of |Great_Rhombicosidodecahedron::get_net| definition.  */
 
 @q * (1) |struct Polyhedron_Options|.@>
 @* {\bf struct Polyhedron\_Options}.

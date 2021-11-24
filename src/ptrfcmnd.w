@@ -1357,9 +1357,9 @@ never reduced.
                                         static_cast<Point*>(@=$6@>),
                                         @=$8@>);
 
-@q ***** (5) Error handling:  |Scan_Parse::rotate_around_func()| failed.@>
+@q ***** (5) Error handling:  |Scan_Parse::rotate_around_func| failed.@>
 
-@ Error handling:  |Scan_Parse::rotate_around_func()| failed.
+@ Error handling:  |Scan_Parse::rotate_around_func| failed.
 \initials{LDF 2004.09.29.}
 
 @<Define rules@>=
@@ -1389,9 +1389,9 @@ never reduced.
 
     } /* |if (t == 0)|  */
 
-@q ***** (5) |Scan_Parse::rotate_around_func()| succeeded.@>
+@q ***** (5) |Scan_Parse::rotate_around_func| succeeded.@>
 
-@ |Scan_Parse::rotate_around_func()| succeeded.
+@ |Scan_Parse::rotate_around_func| succeeded.
 \initials{LDF 2004.09.29.}
 
 @<Define rules@>=
@@ -1511,7 +1511,7 @@ Added this rule.
 
 \initials{LDF 2004.10.01.}
 Removed code from this rule to 
-|Scan_Parse::transformation_assignment_command_func()|, which is defined in
+|Scan_Parse::transformation_assignment_command_func|, which is defined in
 \filename{scanprsf.web}. 
 
 \initials{LDF 2005.10.25.}

@@ -139,7 +139,7 @@ struct Line
 The constructors and assignment operator take |Point| arguments for
 |position| and |direction|.  If you want to get the |Line| between 
 two |Points|,\newline
-use |Point::get_line()|.
+use |Point::get_line|.
 
 \LOG
 \initials{LDF 2002.04.12.}  
@@ -147,13 +147,13 @@ It took me a while to figure out why I was having
 problems with |Lines|.  The constructor was making the opposite
 assumption, namely, that it was supposed to calculate the |Line| from
 its arguments, rather than just taking them as they were.  This caused
-a problem in |Plane::intersection_line()|.
+a problem in |Plane::intersection_line|.
 
 \initials{LDF 2004.06.08.}  
 Removed the defaults for the arguments.  They were
 both formerly |origin|.  This was necessary, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 \ENDLOG 
 
 @q *** (3) Default constructor.@>
@@ -198,7 +198,7 @@ Line::Line(const Point& pos, const Point& dir)
 @q *** (3) Copy constructor.@>
 @*2 Copy constructor.
 @^\cfunc{Line}{Line}@>
-\initials{LDF 2002.10.29.}  Calling |apply_transform()| on |position| and
+\initials{LDF 2002.10.29.}  Calling |apply_transform| on |position| and
 |direction| is probably unnecessary, because it will already
 have been called on |l.position| and |l.direction| when |l| was
 declared or assigned to.  But maybe some function has affected 
@@ -399,7 +399,7 @@ Declared in \filename{points.web}.  Must be defined here, because
 |Line| is an incomplete type there.
 \initials{LDF Undated.}
 
-|get_line()| returns a |Line l| corresponding to the 
+|get_line| returns a |Line l| corresponding to the 
 line from |*this| to |p|, where |l.position| is a |Point| on the
 |Line|, and |l.direction| is a direction vector.  |l.position| will be
 |*this|, and |l.direction| will be |pt - *this|.
@@ -407,7 +407,7 @@ line from |*this| to |p|, where |l.position| is a |Point| on the
 
 \LOG
 \initials{LDF 2003.06.06.}  
-@:BUG FIX@> BUG FIX:  Changed the call to |Line()|, 
+@:BUG FIX@> BUG FIX:  Changed the call to |Line|, 
 so that the argument for |direction| is |pt - *this| instead 
 of |pt|.
 \ENDLOG 
@@ -426,9 +426,9 @@ Point::get_line(const Point& pt) const
 @^\cfunc{Line}{get\_distance}@>
 
 \initials{LDF 2002.04.22.}  
-Renamed this function |get_distance()| from
-|intersection_point()|.  The old version of
-|Point::intersection_point()|, which I am currently using again, since
+Renamed this function |get_distance| from
+|intersection_point|.  The old version of
+|Point::intersection_point|, which I am currently using again, since
 the new version wasn't working, returns a |Bool_Point|, which is
 sensible.  If I start using the commented-out version above again, I
 should have it return a |Bool_Point| too, instead of a
@@ -441,7 +441,7 @@ version, if I have problems again.
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2003.06.11.}  
-|get_distance()| may be working now, due to
+|get_distance| may be working now, due to
 changes I've made to |Line| elsewhere.
 Read this through and see how it works.  Then test.  Also, check where
 it's used. 
@@ -456,7 +456,7 @@ Added this function.
 \initials{LDF 2004.06.08.}  
 Changed |origin| to |origin_pt|, because I've
 removed the global variable |origin|.  I'm replacing it with a predefined
-variable defined in |Scanner_Type::create()|.
+variable defined in |Scanner_Type::create|.
 
 \initials{LDF 2004.10.23.}
 Added optional |Scanner_Node scanner_node| argument with default 0
@@ -827,7 +827,7 @@ return brp;
 \initials{LDF 2004.10.23.}
 
 @<Define |Line| functions@>=
-      else  /* |brp.r >= Point::epsilon()|  */
+      else  /* |brp.r >= Point::epsilon|  */
         {
 
 #if DEBUG_COMPILE
@@ -860,13 +860,13 @@ return brp;
  
           return brp;
 
-        } /* |else| (|brp.r >= Point::epsilon()|)  */
+        } /* |else| (|brp.r >= Point::epsilon|)  */
 
     } /* |else| (|normal_unit != origin_pt|)  */  
 
 @q **** (4) @>   
 
-} /* End of |Line::get_distance()| definition.  */
+} /* End of |Line::get_distance| definition.  */
 
 @q *** (3) Get |Path|.@>
 @*2 Get {\bf Path}.

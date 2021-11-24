@@ -76,7 +76,7 @@ Changed |with_clause| to |with_clause_draw| and |with_clause_list| to
 ``{\bf output}'' and ``{\bf endfig}'' rules.
 
 \initials{LDF 2004.08.17.}
-Removed code from this rule to the function |Scan_Parse::drawing_command()|,
+Removed code from this rule to the function |Scan_Parse::drawing_command|,
 which is defined in \filename{scanprsf.web}.
 
 \initials{LDF 2004.08.30.}
@@ -978,7 +978,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.08.17.}
-Removed code from this rule to the function |Scan_Parse::drawdot_command()|,
+Removed code from this rule to the function |Scan_Parse::drawdot_command|,
 which is defined in \filename{scanprsf.web}.
 
 \initials{LDF 2005.11.21.}
@@ -1128,14 +1128,14 @@ Added this rule.
                                    command,
                                    p);
 
-@q ******* (7) Error handling: |Scan_Parse::drawing_command()| failed.@> 
+@q ******* (7) Error handling: |Scan_Parse::drawing_command| failed.@> 
 
-@ Error handling: |Scan_Parse::drawing_command()| failed.
+@ Error handling: |Scan_Parse::drawing_command| failed.
 \initials{LDF 2004.11.05.}
 
 @<Define rules@>=
 
-      if (status != 0) /* |Scan_Parse::drawing_command()| failed.  */
+      if (status != 0) /* |Scan_Parse::drawing_command| failed.  */
         {
 #if 0 
           cerr_strm << thread_name 
@@ -1151,7 +1151,7 @@ Added this rule.
           cerr_strm.str(""); 
 #endif 
           
-        }  /* |if (status != 0)| (|Scan_Parse::drawing_command()| failed.)  */
+        }  /* |if (status != 0)| (|Scan_Parse::drawing_command| failed.)  */
 
    }   /* |if (condition)|  */
 
@@ -1713,7 +1713,7 @@ Added this section.
 Added this rule.
 
 \initials{LDF 2004.11.13.}
-Now calling |Scan_Parse::pickup_command()|.
+Now calling |Scan_Parse::pickup_command|.
 \ENDLOG
 
 @q *** (3) Definition.@> 
@@ -1758,7 +1758,7 @@ if (status != 0)
 Added this rule.
 
 \initials{LDF 2004.11.13.}
-Now calling |Scan_Parse::pickup_command()|.
+Now calling |Scan_Parse::pickup_command|.
 \ENDLOG
 
 @q *** (3) Definition.@> 
@@ -1845,7 +1845,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2004.11.13.}
-Removed code from this rule to |Scan_Parse::pickup_command()|,
+Removed code from this rule to |Scan_Parse::pickup_command|,
 which is defined in \filename{scanprse.web}.
 \ENDLOG
 
@@ -1896,7 +1896,7 @@ Now issuing a warning if |*(scanner_node->current_pen) == 0|.
 
 \initials{LDF 2004.11.14.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::drop_command()|.  It currently only ever 
+|Scan_Parse::drop_command|.  It currently only ever 
 returns 0, so there's no need to test its return value.
 \ENDLOG
 
@@ -1924,7 +1924,7 @@ Added this rule.
 
 \initials{LDF 2004.11.14.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::drop_command()|.  It currently only ever 
+|Scan_Parse::drop_command|.  It currently only ever 
 returns 0, so there's no need to test its return value.
 \ENDLOG
 
@@ -1954,7 +1954,7 @@ Added this rule.
 
 \initials{LDF 2004.11.14.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::drop_command()|.  It currently only ever 
+|Scan_Parse::drop_command|.  It currently only ever 
 returns 0, so there's no need to test its return value.
 \ENDLOG
 
@@ -1984,7 +1984,7 @@ Added this rule.
 
 \initials{LDF 2004.11.14.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::drop_command()|.  It currently only ever 
+|Scan_Parse::drop_command|.  It currently only ever 
 returns 0, so there's no need to test its return value.
 \ENDLOG
 
@@ -2015,7 +2015,7 @@ Added this rule.
 
 \initials{LDF 2004.11.14.}
 Removed code from this rule.  Now calling 
-|Scan_Parse::drop_command()|.  It currently only ever 
+|Scan_Parse::drop_command|.  It currently only ever 
 returns 0, so there's no need to test its return value.
 \ENDLOG
 

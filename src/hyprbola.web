@@ -359,7 +359,7 @@ y-axis, if |*this| is left untransformed.
 @q **** (4).@>
 
 @ DO NOT delete |options| here!  It's deleted in 
-|Scan_Parse::::set_hyperbola_rule_func_0()|.  This should be done in any other caller, 
+|Scan_Parse::::set_hyperbola_rule_func_0|.  This should be done in any other caller, 
 too.  Deleting it here causes a bug that's difficult to trace.
 \initials{LDF 2005.11.14.}
 
@@ -367,7 +367,7 @@ too.  Deleting it here causes a bug that's difficult to trace.
 
 return 0;
 
-}  /* End of |Hyperbola::set()| definition.  */
+}  /* End of |Hyperbola::set| definition.  */
 
 @q * (1) Destructor.@> 
 @* Destructor.
@@ -575,9 +575,9 @@ Hyperbola::get_discriminant(const Path& p,
 
     Transform* u = standardize(scanner_node);
 
-@q **** (4) Error handling:  |Hyperbola::standardize()| failed.@> 
+@q **** (4) Error handling:  |Hyperbola::standardize| failed.@> 
 
-@ Error handling:  |Hyperbola::standardize()| failed.
+@ Error handling:  |Hyperbola::standardize| failed.
 \initials{LDF 2005.11.27.}
 
 @<Define |Hyperbola| functions@>=
@@ -632,7 +632,7 @@ real slope = q.slope('x', 'z');
 
     return Real_Triple(discriminant, slope, z_int);
  
-}  /* End of |Hyperbola::get_discriminant()| definition. */
+}  /* End of |Hyperbola::get_discriminant| definition. */
 
 @q ** (2) Get Size.@> 
 @*1 Get Size.
@@ -716,7 +716,7 @@ The |Point| is invalid.
 \smallskip
 %
 \item{-5}
-|Hyperbola::location()| failed.
+|Hyperbola::location| failed.
 \smallskip
 %
 \item{-6}
@@ -923,7 +923,7 @@ Hyperbola::location(Point q,
          return 0;  // Added LDF Sun 21 Mar 2021 11:09:18 PM CET
                     // !!START HERE:  This value may not make sense.
 
-}  /* End of |Hyperbola::location()| definition.  */
+}  /* End of |Hyperbola::location| definition.  */
 
 @q ** (2) Getting points.@>
 @*1 Getting points. 
@@ -1147,7 +1147,7 @@ Path::is_hyperbolic(Scanner_Node scanner_node) const
 {
    return false;
 
-} /* End of |Path::is_hyperbolic()| definition.  */
+} /* End of |Path::is_hyperbolic| definition.  */
 
 @q *** (3) |Hyperbola| version.@> 
 @*2 {\bf Hyperbola} version.
@@ -1174,7 +1174,7 @@ Hyperbola::is_hyperbolic(Scanner_Node scanner_node) const
 {
    return true;
 
-} /* End of |Hyperbola::is_hyperbolic()| definition.  */
+} /* End of |Hyperbola::is_hyperbolic| definition.  */
 
 @q * (1) Transformations.@>
 @* Transformations. 
@@ -1596,7 +1596,7 @@ Hyperbola::standardize(Scanner_Node scanner_node) const
 
     return t;
 
-} /* End of |Hyperbola::standardize()| definition.  */
+} /* End of |Hyperbola::standardize| definition.  */
 
 @q * (1) Draw.@>
 @* Draw.
@@ -1648,7 +1648,7 @@ Hyperbola::draw(Picture& picture,
 
     return 0;
 
-} /* End of |Hyperbola::draw()| definition.  */
+} /* End of |Hyperbola::draw| definition.  */
 
 @q * (1) Intersections.@> 
 @* Intersections.
@@ -1665,7 +1665,7 @@ Added this section.
 
 \LOG
 \initials{LDF 2005.11.28.}
-Now setting |bp->b| (for |Bool_Point* bp|) to |!Hyperbola::location()|.
+Now setting |bp->b| (for |Bool_Point* bp|) to |!Hyperbola::location|.
 
 \initials{LDF 2005.11.28.}
 Finished this function.
@@ -1882,9 +1882,9 @@ Hyperbola::intersection_points(const Path* p, Scanner_Node scanner_node) const
 
               }  /* |if (!finite(slope) || slope == INVALID_REAL)|  */
 
-@q **** (4) Error handling:  |Hyperbola::get_discriminant()| failed.@> 
+@q **** (4) Error handling:  |Hyperbola::get_discriminant| failed.@> 
 
-@ Error handling:  |Hyperbola::get_discriminant()| failed.
+@ Error handling:  |Hyperbola::get_discriminant| failed.
 \initials{LDF 2005.11.27.}
 
 @<Define |Hyperbola| functions@>=
@@ -1907,7 +1907,7 @@ Hyperbola::intersection_points(const Path* p, Scanner_Node scanner_node) const
            t = 0;
            return 0;
 
-       }  /* |Hyperbola::get_discriminant()| failed.  */
+       }  /* |Hyperbola::get_discriminant| failed.  */
 
 @q **** (4)@> 
 
@@ -2070,8 +2070,8 @@ Added this function.
 
 \initials{LDF 2005.11.30.}
 @:BUG FIX@> BUG FIX:  Now checking the return value of 
-|Plane::intersection_line()|.  If it's |INVALID_LINE|, this function returns 0.
-Now passing |Scanner_Node scanner_node| argument to |Plane::intersection_line()|.
+|Plane::intersection_line|.  If it's |INVALID_LINE|, this function returns 0.
+Now passing |Scanner_Node scanner_node| argument to |Plane::intersection_line|.
 \ENDLOG
 
 @q *** (3) Declaration.@> 
@@ -2199,7 +2199,7 @@ Hyperbola::show(string text, char coords,
 
     return;
 
-} /* End of |Hyperbola::show()| definition.  */
+} /* End of |Hyperbola::show| definition.  */
 
 @q * (1) Hyperbola_Set_Option_Struct.@> 
 @* {\bf Hyperbola\_Set\_Option\_Struct}.
@@ -2471,7 +2471,7 @@ Hyperbola_Set_Option_Struct::clear(void)
 
     return 0;
 
-}  /* End of |Hyperbola_Set_Option_Struct::clear()| definition.  */
+}  /* End of |Hyperbola_Set_Option_Struct::clear| definition.  */
 
 @q * (1) Putting Hyperbola together. @>
 @* Putting {\bf Hyperbola} together.

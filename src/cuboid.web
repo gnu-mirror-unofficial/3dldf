@@ -258,7 +258,7 @@ Changed the order of the |const real| arguments |w| and |h|.
 
 \initials{LDF 2005.12.09.}
 @:BUG FIX@> BUG FIX:  Reversed the order of the |Point| arguments to 
-|Rectangle::set()| for |*(rectangles[1])| and |*(rectangles[5])|, so 
+|Rectangle::set| for |*(rectangles[1])| and |*(rectangles[5])|, so 
 that the normals of all of the |Rectangles| point outwards.
 \ENDLOG 
 
@@ -330,8 +330,8 @@ Cuboid::Cuboid(const Point& c, const real w, const real h, const real d,
 Added this function.
 
 \initials{LDF 2003.12.30.}  
-Replaced |Cuboid::create_new_cuboid()|
-with a specialization of |template <class C> C* create_new()| for
+Replaced |Cuboid::create_new_cuboid|
+with a specialization of |template <class C> C* create_new| for
 |Cuboid|.  The argument is now |const|.
 
 \initials{LDF 2004.10.11.}
@@ -491,7 +491,7 @@ Return values:\hfil\break
 %
 \item{-1} The |Point| lies outside the |Cuboid|.
 %
-\item{-2} Error:  |Rectangle::get_plane()| returned |INVALID_PLANE|.
+\item{-2} Error:  |Rectangle::get_plane| returned |INVALID_PLANE|.
 \hfil\break 
 \initials{LDF 2005.12.09.}
 
@@ -741,7 +741,7 @@ bool break_switch = false;
 Added this function.
 
 \initials{LDF 2006.01.20.}
-Removed code from this function to  |Polygon::disentangle()|.
+Removed code from this function to  |Polygon::disentangle|.
 \ENDLOG
 
 @q *** (3) Declaration.@> 
@@ -797,7 +797,7 @@ Cuboid::intersection(const Plane& q,
 \LOG
 \initials{LDF 2005.12.13.}
 Rearranged the code in this loop.
-Now calling |Plane::intersection_line()| with |true| as the latter's  
+Now calling |Plane::intersection_line| with |true| as the latter's  
 |bool suppress_warnings| argument.  Also continuing 
 if |Line L == INVALID_LINE|.
 \ENDLOG 
@@ -996,9 +996,9 @@ on the free store for it.
 
   } /* |if (cuboid_reflection == static_cast<Cuboid*>(0))|  */
 
-@q *** (3) Call |Solid_Faced::reflect_in()|.@> 
+@q *** (3) Call |Solid_Faced::reflect_in|.@> 
 
-@ Call |Solid_Faced::reflect_in()|.
+@ Call |Solid_Faced::reflect_in|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Cuboid| functions@>=
@@ -1014,9 +1014,9 @@ on the free store for it.
                             scanner_node);  
      }
 
-@q **** (4) Error handling:  |Solid_Faced::reflect_in()| threw |bad_alloc|.@> 
+@q **** (4) Error handling:  |Solid_Faced::reflect_in| threw |bad_alloc|.@> 
 
-@ Error handling:  |Solid_Faced::reflect_in()| threw |bad_alloc|.
+@ Error handling:  |Solid_Faced::reflect_in| threw |bad_alloc|.
 \initials{LDF 2004.10.05.}
 
 @<Define |Cuboid| functions@>=
@@ -1039,9 +1039,9 @@ on the free store for it.
 
      } /* |catch (bad_alloc)|  */
 
-@q **** (4) Error handling:  |Solid_Faced::reflect_in()| returned 1.@> 
+@q **** (4) Error handling:  |Solid_Faced::reflect_in| returned 1.@> 
 
-@ Error handling:  |Solid_Faced::reflect_in()| returned 1.
+@ Error handling:  |Solid_Faced::reflect_in| returned 1.
 \initials{LDF 2004.10.12.}
 
 @<Define |Cuboid| functions@>=
@@ -1065,9 +1065,9 @@ on the free store for it.
 
 }  /* |if (status == 1)|  */
 
-@q **** (4) |Solid_Faced::reflect_in()| succeeded.@> 
+@q **** (4) |Solid_Faced::reflect_in| succeeded.@> 
 
-@ |Solid_Faced::reflect_in()| succeeded.
+@ |Solid_Faced::reflect_in| succeeded.
 \initials{LDF 2004.10.05.}
 
 @<Define |Cuboid| functions@>=
@@ -1122,7 +1122,7 @@ on the free store for it.
 
   return 0;
 
-} /* End of |Cuboid::reflect_in()| definition.  */
+} /* End of |Cuboid::reflect_in| definition.  */
 
 @q * Putting Cuboid together.@>
 @ Putting {\bf Cuboid} together.

@@ -265,7 +265,7 @@ Removed code from this rule and put it into
   {
       @=$$@> = ivp.v;
 
-  } /* |else| (|ivp.i == 0|, |set_color()| succeeded.)  */
+  } /* |else| (|ivp.i == 0|, |set_color| succeeded.)  */
 
 @q ***** (5).@> 
 
@@ -412,12 +412,12 @@ side of assignments.
 
 \initials{LDF 2004.08.14.}
 Removed code from this rule and put it into 
-|Scan_Parse::set_focus()|, which is defined in 
+|Scan_Parse::set_focus|, which is defined in 
 \filename{scanprse.web}.
 
 \initials{LDF 2004.08.14.}
 Now passing |X_AXIS|, |Y_AXIS|, and |Z_AXIS| to
-|set_focus()|.  This makes it possible to leave
+|set_focus|.  This makes it possible to leave
 the definition of this function in \filename{scanprse.web}.  
 |X_AXIS|, |Y_AXIS|, and |Z_AXIS| are
 terminal symbols declared in \filename{pbsndecl.w} 
@@ -444,9 +444,9 @@ and therefore unknown when
                                X_AXIS,
                                Y_AXIS,
                                Z_AXIS);
-@q **** (4) Error handling:  |Scan_Parse::set_focus()| failed.@> 
+@q **** (4) Error handling:  |Scan_Parse::set_focus| failed.@> 
 
-@ Error handling:  |Scan_Parse::set_focus()| failed.
+@ Error handling:  |Scan_Parse::set_focus| failed.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
@@ -456,11 +456,11 @@ and therefore unknown when
       
       @=$$@> = static_cast<void*>(0); 
       
-    } /* |if (ivp.i != 0)| (|set_focus()| failed.)  */
+    } /* |if (ivp.i != 0)| (|set_focus| failed.)  */
 
-@q **** (4) |Scan_Parse::set_focus()| succeeded.@> 
+@q **** (4) |Scan_Parse::set_focus| succeeded.@> 
 
-@ |Scan_Parse::set_focus()| succeeded.
+@ |Scan_Parse::set_focus| succeeded.
 \initials{LDF 2004.10.28.}
 
 @<Define rules@>=
@@ -708,7 +708,7 @@ Added this rule.
 \LOG
 \initials{LDF 2004.11.02.}
 @:BUG FIX@> BUG FIX:  Now passing |Point origin| as the |center|
-argument to |Ellipse::set()| and shifting |e| later, 
+argument to |Ellipse::set| and shifting |e| later, 
 if |*center != origin|.
 \ENDLOG 
 
@@ -854,7 +854,7 @@ Added \§with radius optional>.
 \LOG
 \initials{LDF 2004.11.02.}
 @:BUG FIX@> BUG FIX:  Now passing |Point origin| as the |center|
-argument to |Circle::set()| and shifting |c| later, 
+argument to |Circle::set| and shifting |c| later, 
 if |*center != origin|.
 \ENDLOG 
 @<Define rules@>=
@@ -1704,11 +1704,11 @@ Added this rule.
 
 \initials{LDF 2005.05.20.}
 Now passing |scanner_node->helix_set_option_struct| to
-|Scan_Parse::set_helix_rule_func_0()|.
+|Scan_Parse::set_helix_rule_func_0|.
 
 \initials{LDF 2005.05.21.}
 No longer passing |scanner_node->helix_set_option_struct| to
-|Scan_Parse::set_helix_rule_func_0()|.  It's unnecessary, since it's already accessible via
+|Scan_Parse::set_helix_rule_func_0|.  It's unnecessary, since it's already accessible via
 |void* parameter|.
 
 \initials{LDF 2005.05.21.}
@@ -2240,7 +2240,7 @@ Added this rule.
 \LOG
 \initials{LDF 2004.11.02.}
 @:BUG FIX@> BUG FIX:  Now passing |Point origin| as the |center|
-argument to |Reg_Polygon::set()| and shifting |r| later, 
+argument to |Reg_Polygon::set| and shifting |r| later, 
 if |*center != origin|.
 \ENDLOG 
 @<Define rules@>=
@@ -2787,7 +2787,7 @@ Added this section.
 Added this rule.
 
 \initials{LDF 2005.05.25.}
-Commented-in the call to |Scan_Parse::set_cone_rule_func_0()|.
+Commented-in the call to |Scan_Parse::set_cone_rule_func_0|.
 \ENDLOG 
 
 @q *** (3) Definition.@>
@@ -3250,7 +3250,7 @@ Added this section.
 Added this rule.
 
 \initials{LDF 2005.05.25.}
-Commented-in the call to |Scan_Parse::set_cylinder_rule_func_0()|.
+Commented-in the call to |Scan_Parse::set_cylinder_rule_func_0|.
 \ENDLOG 
 
 @q *** (3) Definition.@>

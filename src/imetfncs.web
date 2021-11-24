@@ -394,7 +394,7 @@ new_superordinate_vector_entry->id_map_node = this;
  
   return i;
 
-} /* End of |Id_Map_Type::operator=()| definition.  */
+} /* End of |Id_Map_Type::operator=| definition.  */
 
 @q * (1) |Id_Map_Entry_Type| functions.  @>
 @* {\bf Id\_Map\_Entry\_Type} functions. 
@@ -454,9 +454,9 @@ Moved this definition from \filename{scan.web} to
 Made debugging and error output thread-safe.
 Removed code for looping downwards through |left| and |right|.  
 It was faulty anyway, and I'm now about to write 
-|Id_Map_Entry_Type::destroy_array_subentries()|, which will loop through the
+|Id_Map_Entry_Type::destroy_array_subentries|, which will loop through the
 tree of |Id_Map_Entry_Nodes|.  I don't want to use recursion in 
-|~Id_Map_Entry_Type()| (this function), because it might use up too much space
+|~Id_Map_Entry_Type| (this function), because it might use up too much space
 on the stack. The stacks used for threads may not be large enough, and this
 would put an artificial limit on the number of items in an 
 |Id_Map_Entry_Node| tree.
@@ -599,8 +599,8 @@ Added this section.
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2005.01.26.}
-Remove this once I've gotten |is_shape()| to return |true| for |Nurbs|
-and defined |Nurb::clear()|.
+Remove this once I've gotten |is_shape| to return |true| for |Nurbs|
+and defined |Nurb::clear|.
 \ENDTODO 
 
 @<Define |Id_Map_Entry_Type| functions@>=
@@ -725,7 +725,7 @@ Modified, so that |BOOL_POINT_VECTOR| are handled, too.
 Modified, so that |PATH_VECTOR| are handled, too. 
 
 \initials{LDF 2004.12.14.}
-Now calling |is_vector_type()| in the conditional and 
+Now calling |is_vector_type| in the conditional and 
 handling |ELLIPSE_VECTOR|.
 
 \initials{LDF 2004.12.14.}
@@ -1887,8 +1887,8 @@ where this isn't allowed.
 \LOG
 \initials{LDF 2004.08.21.}
 Started working on this function.
-It's called in |Id_Map_Type::~Id_Map_Type()| and 
-|Scanner_Type::add_entry()|.
+It's called in |Id_Map_Type::~Id_Map_Type| and 
+|Scanner_Type::add_entry|.
 
 \initials{LDF 2004.08.23.}
 Finished writing this function.
@@ -2122,7 +2122,7 @@ after comparing it to |curr_entry->left| and (possibly)
 
   return 0;
 
-}  /* End of |Id_Map_Entry_Type::destroy_array_subentries()| definition.  */
+}  /* End of |Id_Map_Entry_Type::destroy_array_subentries| definition.  */
 
 @q ** (2) Setting.  @>
 @*1 Setting.
@@ -2133,20 +2133,20 @@ Moved this definition from
 \filename{io.web} to \filename{scan.web}.
 
 \initials{LDF 2004.04.29.}  
-Changed the name of this function from |set()| to
-|set_entry()|.  It was too difficult to find the places where it's invoked
-before, since the classes derived from |Shape| also have |set()| functions.
+Changed the name of this function from |set| to
+|set_entry|.  It was too difficult to find the places where it's invoked
+before, since the classes derived from |Shape| also have |set| functions.
 
 \initials{LDF 2004.05.09.}  
 Added |cconst_flag| argument.  Changed
 |iis_array| argument to |aarray_flag| and |is_array| to |array_flag|.
 
 \initials{LDF 2004.06.22.}
-Now calling |pthread_cond_init()| for |cond_var|
-and |pthread_cond_mutex()| for |mutex|.
+Now calling |pthread_cond_init| for |cond_var|
+and |pthread_cond_mutex| for |mutex|.
 
 \initials{LDF 2004.06.29.}
-No longer calling |pthread_cond_init()|, because I've removed |cond_var|.
+No longer calling |pthread_cond_init|, because I've removed |cond_var|.
 
 \initials{LDF 2004.08.24.}
 Added |Id_Map_Entry_Node ssuperordinate_vector| argument.
@@ -2624,7 +2624,7 @@ Added code for handling the case that
 @q ***** (5) Vector-types.@>
 @ Vector-types.
 |object| is only created, not assigned to.  This is done in 
-|Id_Map_Entry_Type::set_subordinate_array()|.
+|Id_Map_Entry_Type::set_subordinate_array|.
 \initials{LDF 2004.09.17.}
 
 \LOG
@@ -3182,7 +3182,7 @@ and error output.
       status = left->set_superordinate_vector(s, set_vector, traverse, type);
 
 @q ****** (6) Error handling:  Recursive call to             @>   
-@q ****** (6) |set_superordinate_vector()| on |left| failed. @>   
+@q ****** (6) |set_superordinate_vector| on |left| failed. @>   
 @ Call this function recursively on |left|.
 \initials{LDF 2004.09.17.}
 
@@ -3206,9 +3206,9 @@ cerr_strm << thread_name
 
         } /* |if (status != 0)|  */
 
-@q ****** (6) Recursive call to |set_superordinate_vector()| @>
+@q ****** (6) Recursive call to |set_superordinate_vector| @>
 @q ****** (6) on |left| succeeded. @>   
-@ Recursive call to |set_superordinate_vector()| on |left| succeeded.
+@ Recursive call to |set_superordinate_vector| on |left| succeeded.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
@@ -3303,7 +3303,7 @@ cerr_strm << thread_name
         status = right->set_superordinate_vector(s, set_vector, traverse, type);
 
 @q ****** (6) Error handling:  Recursive call to             @>   
-@q ****** (6) |set_superordinate_vector()| on |right| failed. @>   
+@q ****** (6) |set_superordinate_vector| on |right| failed. @>   
 @ Call this function recursively on |right|.
 \initials{LDF 2004.09.17.}
 
@@ -3327,9 +3327,9 @@ cerr_strm << thread_name
 
         } /* |if (status != 0)|  */
 
-@q ****** (6) Recursive call to |set_superordinate_vector()| @>
+@q ****** (6) Recursive call to |set_superordinate_vector| @>
 @q ****** (6) on |right| succeeded. @>   
-@ Recursive call to |set_superordinate_vector()| on |right| succeeded.
+@ Recursive call to |set_superordinate_vector| on |right| succeeded.
 \initials{LDF 2004.09.17.}
 
 @<Define |Id_Map_Entry_Type| functions@>=
@@ -3344,7 +3344,7 @@ cerr_strm << thread_name
 
   return 0;
 
-} /* End of |Id_Map_Entry_Type::set_superordinate_vector()| definition.  */
+} /* End of |Id_Map_Entry_Type::set_superordinate_vector| definition.  */
 
 @q ** (2)  Set |id_map_node|.@>
 @*1 Set {\bf id\_map\_node}.
@@ -3510,7 +3510,7 @@ call this function recursively on |right|.
 
    return 0;
 
-} /* End of |Id_Map_Entry_Type::set_id_map_node()| definition.  */
+} /* End of |Id_Map_Entry_Type::set_id_map_node| definition.  */
 
 @q ** (2)  Set |subordinate_array|.@>
 @*1 Set {\bf subordinate\_array}.
@@ -3523,7 +3523,7 @@ that called this function and call it here.
 
 I am currently not using this function.  I intended it for use in 
 |Id_Map_Type::operator=(const Id_Map_Type& i)|, but I've now made it
-possible for |Id_Map_Entry_Type::set_superordinate_vector()| to 
+possible for |Id_Map_Entry_Type::set_superordinate_vector| to 
 push pointers onto the |Pointer_Vector| of the |superordinate_vector|
 while it's setting its own |superordinate_vector| member.  This way,
 the tree of |Id_Map_Entry_Nodes| is only traversed once.
@@ -3755,7 +3755,7 @@ if (s->right != static_cast<Id_Map_Entry_Node>(0))
 
    return 0;
 
-} /* End of |Id_Map_Entry_Type::set_subordinate_array()| definition.  */
+} /* End of |Id_Map_Entry_Type::set_subordinate_array| definition.  */
 
 @q ** (2) Transformations.  @>
 @*1 Transformations.
@@ -4004,7 +4004,7 @@ Id_Map_Entry_Type::is_shape(void) const
   else
     return false;
 
-}  /* End of |Id_Map_Entry_Type::is_shape()| definition.  */
+}  /* End of |Id_Map_Entry_Type::is_shape| definition.  */
 
 @q *** (3) Is |Shape|-vector-type.@>
 @*2 Is {\bf Shape}-vector-type.
@@ -4079,7 +4079,7 @@ Id_Map_Entry_Type::is_shape_vector_type(void) const
   else
     return false;
 
-}  /* End of |Id_Map_Entry_Type::is_shape_vector_type()| definition.  */
+}  /* End of |Id_Map_Entry_Type::is_shape_vector_type| definition.  */
 
 @q *** (3) Is Non-|Shape|-vector-type.@>
 @*2 Is Non-{\bf Shape}-vector-type.
@@ -4136,7 +4136,7 @@ Id_Map_Entry_Type::is_non_shape_vector_type(void) const
   else
     return false;
 
-}  /* End of |Id_Map_Entry_Type::is_non_shape_vector_type()| definition.  */
+}  /* End of |Id_Map_Entry_Type::is_non_shape_vector_type| definition.  */
 
 @q *** (3) Is Vector-type.@>
 @*2 Is Vector-type.
@@ -4153,12 +4153,12 @@ Id_Map_Entry_Type::is_vector_type(void) const
 {
   return (is_shape_vector_type() || is_non_shape_vector_type());
 
-}  /* End of |Id_Map_Entry_Type::is_vector_type()| definition.  */
+}  /* End of |Id_Map_Entry_Type::is_vector_type| definition.  */
 
 @q ** (2) Showing.@>
 @*1 Showing.
 
-DO NOT try to lock |cerr_mutex| or call |cerr_message()|
+DO NOT try to lock |cerr_mutex| or call |cerr_message|
 in this function!  Code that calls this function should lock 
 |cerr_mutex| before and unlock it after the call.
 \initials{LDF 2004.08.23.}
@@ -4167,8 +4167,8 @@ in this function!  Code that calls this function should lock
 \initials{LDF 2004.05.03.}  
 @:BUG FIX@> BUG FIX:  
 Now casting |object| to |Transform*| or |Point*| before calling 
-|show()| on it, if it's of one of these types.  
-Casting |object| to |Shape*| and calling |show()| on it caused 
+|show| on it, if it's of one of these types.  
+Casting |object| to |Shape*| and calling |show| on it caused 
 3DLDF to exit abruptly. 
 
 \initials{LDF 2004.05.09.}  
@@ -4253,10 +4253,10 @@ Removed |Scanner_Node scanner_node| argument.  Now declaring
 or 0, if |id_map_node| is 0.
 
 \initials{LDF 2004.09.19.}
-@:BUG FIX@> BUG FIX:  Replaced calls to |cerr_message()| with 
+@:BUG FIX@> BUG FIX:  Replaced calls to |cerr_message| with 
 commands for writing to |cerr| directly.  
 Code that calls this function usually locks |cerr_mutex|, 
-and |cerr_message()| also tries to lock it, so this function shouldn't
+and |cerr_message| also tries to lock it, so this function shouldn't
 call it.
 
 \initials{LDF 2004.10.26.}
@@ -4318,7 +4318,7 @@ Id_Map_Entry_Type::show(string s,
 
 {
 
-@q DO NOT try to lock |cerr_mutex| or call |cerr_message()|      @>
+@q DO NOT try to lock |cerr_mutex| or call |cerr_message|      @>
 @q in this function!  Code that calls this function should lock  @>
 @q |cerr_mutex| before and unlock it after the call.             @>
 @q \initials{LDF 2004.08.23.}                                    @>
@@ -5931,7 +5931,7 @@ else if (verbose) /* (|object == static_cast<void*>(0)|)  */
 
   return;
 
-} /* End of |Id_Map_Entry_Type::show()| definition.  */
+} /* End of |Id_Map_Entry_Type::show| definition.  */
 
 @q * Putting the |Id_Map_Entry_Type| functions together.@>
 @ Putting the {\bf Id\_Map\_Entry\_Type} functions together.

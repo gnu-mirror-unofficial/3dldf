@@ -495,20 +495,20 @@ Removed debugging code.
     *pv += create_new<Point>(0, scanner_node);
     *pv += create_new<Point>(0, scanner_node);
 
-@q ******* (7) Call |Scan_Parse::reflect_off_func()|.@> 
+@q ******* (7) Call |Scan_Parse::reflect_off_func|.@> 
 
-@ Call |Scan_Parse::reflect_off_func()|.
+@ Call |Scan_Parse::reflect_off_func|.
 \initials{LDF 2004.12.06.}
 
 \LOG
 \initials{LDF 2004.12.08.}
-No longer calling |Scan_Parse::reflect_off_func()| in a |try| 
+No longer calling |Scan_Parse::reflect_off_func| in a |try| 
 block and catching |bad_alloc|.  
-|Point::reflect_off()|, which |Scan_Parse::reflect_off_func<Point>()| 
+|Point::reflect_off|, which |Scan_Parse::reflect_off_func<Point>| 
 calls, no longer tries to allocate
 memory for |reflection| if it's null, 
 so it never throws |bad_alloc|, so 
-|Scan_Parse::reflect_off_func<Point>()| doesn't, either. 
+|Scan_Parse::reflect_off_func<Point>| doesn't, either. 
 \ENDLOG 
 
 @<Define rules@>=
@@ -519,10 +519,10 @@ so it never throws |bad_alloc|, so
                                         static_cast<Point*>(@=$5@>),
                                         pv);
 
-@q ******** (8) Error handling:  |Scan_Parse::reflect_off_func<Point>()|@> 
+@q ******** (8) Error handling:  |Scan_Parse::reflect_off_func<Point>|@> 
 @q ******** (8) failed, returning a non-zero value.@> 
 
-@ Error handling:  |Scan_Parse::reflect_off_func<Point>()|
+@ Error handling:  |Scan_Parse::reflect_off_func<Point>|
 failed, returning a non-zero value.
 \initials{LDF 2004.12.04.}
 
@@ -595,7 +595,7 @@ Added this rule.
 Added this rule.
 
 \initials{LDF 2005.11.03.}
-Changed code to use the version of |Ellipse::intersection_points()| that
+Changed code to use the version of |Ellipse::intersection_points| that
 takes a |Path| argument.
 
 \initials{LDF 2005.11.04.}
@@ -635,7 +635,7 @@ to |polygon_tertiary| and |polygon_secondary|, respectively.
 Removed debugging code.
 
 \initials{LDF 2005.10.28.}
-Removed code.  Now calling |Scan_Parse::polygon_like_intersection_func()|.
+Removed code.  Now calling |Scan_Parse::polygon_like_intersection_func|.
 \ENDLOG
  
 @q *** (3) Definition.@> 

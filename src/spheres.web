@@ -280,7 +280,7 @@ Added this function.
 Working on this function.
 
 \initials{LDF 2005.10.25.}
-Now calling |Solid::clear()|.
+Now calling |Solid::clear|.
 
 \initials{LDF 2005.10.25.}
 Now setting |sphere_type = options->sphere_type|.
@@ -1216,7 +1216,7 @@ Solid::is_spherical(Scanner_Node scanner_node,
 
    return false;
 
-} /* End of |Solid::is_spherical()| definition.  */
+} /* End of |Solid::is_spherical| definition.  */
 
 @q *** (3) |Sphere| version.@> 
 @*2 {\bf Sphere} version.
@@ -1248,7 +1248,7 @@ Sphere::is_spherical(Scanner_Node scanner_node,
 
    return true;
 
-} /* End of |Sphere::is_spherical()| definition.  */
+} /* End of |Sphere::is_spherical| definition.  */
 
 @q * (1) Transformations.@>
 @* Transformations. 
@@ -1449,7 +1449,7 @@ Sphere::shift(const Point& p)
 \LOG
 \initials{LDF 2005.05.26.}
 Added this function.  It's commented-out, because 
-|Solid::shift_times()| currently doesn't exist.
+|Solid::shift_times| currently doesn't exist.
 \ENDLOG
 
 @<Declare |Sphere| functions@>=
@@ -1489,7 +1489,7 @@ Sphere::shift_times(real x, real y, real z)
 \LOG
 \initials{LDF 2005.05.26.}
 It's commented-out, because 
-|Solid::shift_times()| currently doesn't exist.
+|Solid::shift_times| currently doesn't exist.
 \ENDLOG
 
 @<Declare |Sphere| functions@>=
@@ -1591,13 +1591,13 @@ Added this function.
 Now showing |divisions_vertical|, and |divisions_horizontal|.
 
 \initials{LDF 2005.10.20.}
-No longer calling |Solid::show()|.  Now using a loop to
-call |Circle::show()| on the |Circles| in |circles|.
+No longer calling |Solid::show|.  Now using a loop to
+call |Circle::show| on the |Circles| in |circles|.
 
 \initials{LDF 2005.10.20.}
 Now showing |real diameter|.
 @:BUG FIX@> BUG FIX:  Now passing all of the arguments except |text| to 
-|Point::show()| when calling |center->show()|.
+|Point::show| when calling |center->show|.
 
 \initials{LDF 2005.10.20.}
 Now showing |unsigned int circle_point_count|.
@@ -1678,7 +1678,7 @@ Sphere::show(string text, char coords,
 
    return;
 
-} /* End of |Sphere::show()| definition.  */
+} /* End of |Sphere::show| definition.  */
 
 @q *** (3) Intersections.@>
 @*1 Intersections.
@@ -2285,7 +2285,7 @@ Sphere_Set_Option_Struct::clear(void)
 
     return 0;
 
-}  /* End of |Sphere_Set_Option_Struct::clear()| definition.  */
+}  /* End of |Sphere_Set_Option_Struct::clear| definition.  */
 
 @q *** (3) Show.@> 
 @*2 Show.
@@ -2363,7 +2363,7 @@ Sphere_Set_Option_Struct::show(string text)
 
     return 0;
 
-}  /* End of |Sphere_Set_Option_Struct::show()| definition.  */
+}  /* End of |Sphere_Set_Option_Struct::show| definition.  */
 
 @q * (1) Putting Sphere together. @>
 @* Putting {\bf Sphere} together.

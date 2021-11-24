@@ -63,7 +63,7 @@ Add rules for \§transformer> $\longrightarrow$ \§rotated around> using
 
 \initials{LDF 2004.05.13.}
 Start adding rules for reflection once I've defined rules for |plane|.  I'll
-need to define |Path::reflect_in()|, etc., too.
+need to define |Path::reflect_in|, etc., too.
 \ENDTODO 
 
 @q ** (2) transform primary.  @>
@@ -494,7 +494,7 @@ Added this rule.
 \initials{LDF 2004.09.29.}
 Rewrote this rule.  It now puts the |numeric_primary| onto a
 |Pointer_Vector<real>| and passes the latter to 
-|Scanner_Type::handle_numeric_list()|.
+|Scanner_Type::handle_numeric_list|.
 
 \initials{LDF 2004.11.09.}
 Now pushing three copies of |numeric_primary| onto the
@@ -514,7 +514,7 @@ Please note that |(13)| is a |numeric_primary| and {\it not\/} a
 {
   
 @q ***** (5) @> @ Memory must be allocated for |Pointer_Vector<real>* p| and |real* r|
-here, because |Scanner_Type::handle_numeric_list()| deletes the
+here, because |Scanner_Type::handle_numeric_list| deletes the
 |Pointer_Vector<real>*| passed to it via its |void*| argument. 
 The |Pointer_Vector<real>| destructor, in turn, deletes the elements
 of the |vector<real*>|. 
@@ -554,9 +554,9 @@ of the |vector<real*>|.
     = static_cast<Scanner_Node>(parameter)->handle_numeric_list(transform_token,
                                                static_cast<void*>(p));
 
-@q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list()| failed.@>
+@q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list| failed.@>
 
-@ Error handling:  |Scanner_Type::handle_numeric_list()| failed.
+@ Error handling:  |Scanner_Type::handle_numeric_list| failed.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
@@ -572,9 +572,9 @@ of the |vector<real*>|.
 
 } /* |if (!bvp.first)|  */
 
-@q ***** (5) |Scanner_Type::handle_numeric_list()| succeeded.@>
+@q ***** (5) |Scanner_Type::handle_numeric_list| succeeded.@>
 
-@ |Scanner_Type::handle_numeric_list()| succeeded.
+@ |Scanner_Type::handle_numeric_list| succeeded.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
@@ -601,7 +601,7 @@ Rewrote this rule.
 
 \initials{LDF 2004.09.29.}
 Removed |Pointer_Vector<real>* r|.
-It was no longer needed, since |Scanner_Type::handle_numeric_list()|
+It was no longer needed, since |Scanner_Type::handle_numeric_list|
 now takes a |void*| argument.
 \ENDLOG
 
@@ -616,9 +616,9 @@ now takes a |void*| argument.
   Bool_Void_Pointer bvp
     = static_cast<Scanner_Node>(parameter)->handle_numeric_list(transform_token, @=$2@>);
 
-@q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list()| failed.@>
+@q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list| failed.@>
 
-@ Error handling:  |Scanner_Type::handle_numeric_list()| failed.
+@ Error handling:  |Scanner_Type::handle_numeric_list| failed.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
@@ -634,9 +634,9 @@ now takes a |void*| argument.
 
 } /* |if (!bvp.first)|  */
 
-@q ***** (5) |Scanner_Type::handle_numeric_list()| succeeded.@>
+@q ***** (5) |Scanner_Type::handle_numeric_list| succeeded.@>
 
-@ |Scanner_Type::handle_numeric_list()| succeeded.
+@ |Scanner_Type::handle_numeric_list| succeeded.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
@@ -668,7 +668,7 @@ Added this rule.
 Rewrote this rule.  It now puts the x, y, and z-coordinates of the 
 |Point| stored in the |point_variable| onto a
 |Pointer_Vector<real>| and passes the latter to 
-|Scanner_Type::handle_numeric_list()|.
+|Scanner_Type::handle_numeric_list|.
 \ENDLOG
 
 @q **** (4) Definition.@> 
@@ -680,7 +680,7 @@ Rewrote this rule.  It now puts the x, y, and z-coordinates of the
 @q ***** (5).@> 
 
 @ Memory must be allocated for |Pointer_Vector<real>* p| and |real* r[3]|
-here, because |Scanner_Type::handle_numeric_list()| deletes the
+here, because |Scanner_Type::handle_numeric_list| deletes the
 |Pointer_Vector<real>*| passed to it via its |void*| argument. 
 The |Pointer_Vector<real>| destructor, in turn, deletes the elements
 of the |vector<real*>|. 
@@ -738,9 +738,9 @@ of the |vector<real*>|.
          = static_cast<Scanner_Node>(parameter)->handle_numeric_list(transform_token,
                                              static_cast<void*>(p));
 
-@q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list()| failed.@>
+@q ***** (5) Error handling:  |Scanner_Type::handle_numeric_list| failed.@>
 
-@ Error handling:  |Scanner_Type::handle_numeric_list()| failed.
+@ Error handling:  |Scanner_Type::handle_numeric_list| failed.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
@@ -756,9 +756,9 @@ of the |vector<real*>|.
 
 } /* |if (!bvp.first)|  */
 
-@q ***** (5) |Scanner_Type::handle_numeric_list()| succeeded.@>
+@q ***** (5) |Scanner_Type::handle_numeric_list| succeeded.@>
 
-@ |Scanner_Type::handle_numeric_list()| succeeded.
+@ |Scanner_Type::handle_numeric_list| succeeded.
 \initials{LDF 2004.09.28.}
 
 @<Define rules@>=
@@ -838,9 +838,9 @@ Added this rule.
          = static_cast<Scanner_Node>(parameter)->handle_numeric_list(transform_token,
                                              static_cast<void*>(p));
 
-@q ****** (6) Error handling:  |Scanner_Type::handle_numeric_list()| failed.@>
+@q ****** (6) Error handling:  |Scanner_Type::handle_numeric_list| failed.@>
 
-@ Error handling:  |Scanner_Type::handle_numeric_list()| failed.
+@ Error handling:  |Scanner_Type::handle_numeric_list| failed.
 \initials{LDF 2007.10.19.}
 
 @<Define rules@>=
@@ -856,9 +856,9 @@ Added this rule.
 
 } /* |if (!bvp.first)|  */
 
-@q ****** (6) |Scanner_Type::handle_numeric_list()| succeeded.@>
+@q ****** (6) |Scanner_Type::handle_numeric_list| succeeded.@>
 
-@ |Scanner_Type::handle_numeric_list()| succeeded.
+@ |Scanner_Type::handle_numeric_list| succeeded.
 \initials{LDF 2007.10.19.}
 
 @<Define rules@>=
@@ -1043,9 +1043,9 @@ Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
                                     static_cast<Point*>(@=$5@>),
                                     180);
 
-@q ****** (6) Error handling:  |Scan_Parse::rotate_around_func()| failed.@>
+@q ****** (6) Error handling:  |Scan_Parse::rotate_around_func| failed.@>
 
-@ Error handling:  |Scan_Parse::rotate_around_func()| failed.
+@ Error handling:  |Scan_Parse::rotate_around_func| failed.
 \initials{LDF 2004.09.29.}
 
 @<Define rules@>=
@@ -1061,9 +1061,9 @@ Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
 
      } /* |if (t == 0)|  */
 
-@q ****** (6) |Scan_Parse::rotate_around_func()| succeeded.@>
+@q ****** (6) |Scan_Parse::rotate_around_func| succeeded.@>
 
-@ |Scan_Parse::rotate_around_func()| succeeded.
+@ |Scan_Parse::rotate_around_func| succeeded.
 \initials{LDF 2004.09.29.}
 
 @<Define rules@>=
@@ -1098,7 +1098,7 @@ none is specified.  If the latter, rotation is by $180^\circ$.
 
 \initials{LDF 2004.09.29.}
 Removed code from this rule to the function 
-|Scan_Parse::rotate_around_func()| in \filename{scanprsf.web}.
+|Scan_Parse::rotate_around_func| in \filename{scanprsf.web}.
 \ENDLOG 
 
 @q ***** (5) Definition.@> 
@@ -1113,9 +1113,9 @@ Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
                                     static_cast<Point*>(@=$5@>),
                                     @=$7@>);
 
-@q ****** (6) Error handling:  |Scan_Parse::rotate_around_func()| failed.@>
+@q ****** (6) Error handling:  |Scan_Parse::rotate_around_func| failed.@>
 
-@ Error handling:  |Scan_Parse::rotate_around_func()| failed.
+@ Error handling:  |Scan_Parse::rotate_around_func| failed.
 \initials{LDF 2004.09.29.}
 
 @<Define rules@>=
@@ -1131,9 +1131,9 @@ Transform* t = rotate_around_func(static_cast<Scanner_Node>(parameter),
 
      } /* |if (t == 0)|  */
 
-@q ****** (6) |Scan_Parse::rotate_around_func()| succeeded.@>
+@q ****** (6) |Scan_Parse::rotate_around_func| succeeded.@>
 
-@ |Scan_Parse::rotate_around_func()| succeeded.
+@ |Scan_Parse::rotate_around_func| succeeded.
 \initials{LDF 2004.09.29.}
 
 @<Define rules@>=

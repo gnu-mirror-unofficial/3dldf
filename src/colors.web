@@ -249,7 +249,7 @@ between |real| and |unsigned short| arguments, so the overloaded
 functions must differ in another way.  In this case, these versions
 have no |name| argument.  I believe that users are most likely to
 declare |Colors| using |real| arguments when they plan to modify them,
-in which case the |output()| function should write the red, green and
+in which case the |output| function should write the red, green and
 blue values to |out_stream| rather than |name|.  If it turns out to be
 necessary, more constructors can be added or the existing ones can be
 changed. 
@@ -542,8 +542,8 @@ Color::set(const real red, const real green, const real blue,
 
 \LOG
 \initials{LDF 2003.12.30.}  
-Replaced |Color::create_new_color()| with
-specializations of |template <class C> C* create_new()|.  
+Replaced |Color::create_new_color| with
+specializations of |template <class C> C* create_new|.  
 
 \initials{LDF 2004.10.11.}
 Added |Scanner_Node scanner_node| argument.
@@ -840,7 +840,7 @@ Added this function.
 
 \initials{LDF 2005.04.11.}
 Rewrote this function.  It now declares a local |Color|, sets it to |c|, 
-multiplies it by $-1$, and passes it to |operator+=()|.
+multiplies it by $-1$, and passes it to |operator+=|.
 \ENDLOG 
 
 @<Declare |Color| functions@>=
@@ -1264,7 +1264,7 @@ Color::set_red_part(const real r, Scanner_Node scanner_node)
 
   return;
 
-}  /* End of |Color::set_red_part()|  definition.  */
+}  /* End of |Color::set_red_part|  definition.  */
 
 @q ** (2) Set green part.@>
 @*1 Set green part.
@@ -1354,7 +1354,7 @@ Color::set_green_part(const real g, Scanner_Node scanner_node)
 
   return;
 
-}  /* End of |Color::set_green_part()|  definition.  */
+}  /* End of |Color::set_green_part|  definition.  */
 
 @q ** (2) Set blue part.@>
 @*1 Set blue part.
@@ -2171,7 +2171,7 @@ to find out that this was the cause.
 
 @:!!@> !!  If I add |Colors| here, remember to add them in the
 ``External'' section below, and in the definition of
-|Color::initialize_colors()| below. 
+|Color::initialize_colors| below. 
 \initials{LDF Undated.} 
 
 \LOG 
