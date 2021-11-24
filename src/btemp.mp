@@ -49,43 +49,41 @@
 
 %% ** (2) 
 
-verbatim_metapost    "verbatimtex \font\huge=cmr17 scaled 8000 etex;\n"
-                   & "prologues := 3;\noutputtemplate := \"%j%c.eps\";\n";
+verbatimtex \font\huge=cmr17 scaled 8000 etex;
+
+prologues := 3;
+outputtemplate := "%j%c.eps";
 
 
 beginfig(0);
-  point p[];
+  pair p[];
   path q[];
 
-  pickup pencircle scaled (.5pt, .5pt, .5pt);
+  pickup pencircle scaled .5pt;
 
-  p0 := origin;
-  p1 := (10cm, 0cm);
-  p2 := (10cm, 10cm);
-  p3 := (0cm, 10cm);
+  p0 = origin;
+  p1 = (10cm, 0cm);
+  p2 = (10cm, 10cm);
+  p3 = (0cm, 10cm);
 
-  dotlabel.bot("$p_0$", p0);
-  dotlabel.top("$p_1$", p1);
-  dotlabel.rt("$p_2$", p2);
-  dotlabel.top("$p_3$", p3);
+  dotlabel.bot(btex $p_0$ etex, p0);
+  dotlabel.top(btex $p_1$ etex, p1);
+  dotlabel.rt(btex $p_2$ etex, p2);
+  dotlabel.top(btex $p_3$ etex, p3);
 
-  q0 := p0 .. p1 .. p2 .. p3 .. cycle;
+  q0 = p0 .. p1 .. p2 .. p3 .. cycle;
 
   draw q0;
   
-  q1 := (-5cm, -5cm) -- (15cm, -5cm) -- (15cm, 15cm) -- (-5cm, 15cm) -- cycle;
+  q1 = (-5cm, -5cm) -- (15cm, -5cm) -- (15cm, 15cm) -- (-5cm, 15cm) -- cycle;
 
   draw q1;
 
-  message "is_planar q0:";
-  show is_planar q0;
-
-  p4 := direction q0;
+  p4 = direction q0;
 
   message "p4:";
   show p4;
   
-
   
 % message "angle direction 0 of q0:"; 
 % show angle direction 0 of q0;
@@ -102,11 +100,7 @@ beginfig(0);
 % message "angle direction 3 of q0:"; 
 % show angle direction 3 of q0;
 
-endfig with_projection parallel_x_y;
-
-%% *** (3) End of 3DLDF code
-
-verbatim_metapost "end;";
+endfig;
 
 end;
 
