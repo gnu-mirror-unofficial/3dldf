@@ -2799,7 +2799,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2857,11 +2857,6 @@ Added this rule.
 @q **** (4) @>
 
     *p = q->get_direction(@=$2@>, scanner_node);
-
-    p->show("*p:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
     @=$$@> = static_cast<void*>(p);
 

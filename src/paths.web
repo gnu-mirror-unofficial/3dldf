@@ -13256,7 +13256,7 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
 
 #if DEBUG_COMPILE
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    if (DEBUG)
    { 
@@ -13393,9 +13393,7 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
   errno = 0;
   status = unlink(temp_filename);
 
-#if 0 
   s << "echo \"\\path p; p = ";
-#endif 
 
   string connector;
   connector = "";
@@ -13418,9 +13416,10 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
     << temp_filename << "\\\"; write decimal ypart d to \\\"" << temp_filename << "\\\"; end;\" "
     << "| mpost -numbersystem \"double\" -interaction=\"batchmode\" >/dev/null; cat " << temp_filename;
 
-#if 0 
+#if 0
   cerr << "s.str() == " << s.str() << endl;
 #endif 
+
 
   FILE *fp = popen(s.str().c_str(), "r");
 

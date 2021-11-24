@@ -2874,9 +2874,6 @@ Added this rule.
   
 };
 
-
-
-
 @q ***** (5) numeric_primary --> DIRECTIONTIME picture_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ 
