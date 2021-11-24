@@ -2780,8 +2780,8 @@ Added this rule.
 };
 
 
-@q ** (2) point_primary --> DIRECTION path_expression@>
-@*1 \§point primary> $\longrightarrow$ \.{DIRECTION} \§path expression>.
+@q ** (2) point_primary --> DIRECTION numeric_expression OF path_expression@>
+@*1 \§point primary> $\longrightarrow$ \.{DIRECTION} \§numeric expression> \.{OF} \§path expression>.
 \initials{LDF 2021.11.24.}
 
 \LOG
@@ -2792,8 +2792,10 @@ Added this rule.
 @q *** (3) Definition.@> 
 
 @<Define rules@>=
-@=point_primary: DIRECTION path_expression@>@/
+@=point_primary: DIRECTION numeric_expression OF path_expression@>@/
 {
+@q **** (4) @>
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
@@ -2801,19 +2803,58 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: DIRECTION path_expression.";
+                << "*** Parser: DIRECTION numeric_expression OF path_expression.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q **** (4) @>
+
+    Path *q = static_cast<Path*>(@=$4@>);
     Point *p = new Point;
+
+    if (!q->is_planar())
+    {
+       cerr_strm << thread_name 
+                 << "*** Parser: DIRECTION numeric_expression OF path_expression:"
+                 << endl 
+                 << "WARNING!  Path is not planar.  Can't calculate direction."
+                 << endl 
+                 << "Setting `point_primary' to `INVALID_POINT' and continuing."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       *p = INVALID_POINT;
+    }
+
+@q **** (4) @>
+
+    else
+    {
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr_strm << thread_name 
+                   << "*** Parser: DIRECTION numeric_expression OF path_expression:"
+                   << endl 
+                   << "Path is planar.  Will calculate direction."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+      }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    }  /* |else|  */
+
+@q **** (4) @>
 
     @=$$@> = static_cast<void*>(p);
 

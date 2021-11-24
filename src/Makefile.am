@@ -364,13 +364,14 @@ f-run-bi:
 .PHONY: run-s
 
 run-s:
-	3dldf clstsph1 && 3dldf clstsph2 && mpost -numbersystem "double" clstsph1 && mpost -numbersystem "double" clstsph2 \
+	3dldf$(EXEEXT) clstsph1 && 3dldf$(EXEEXT) clstsph2 && mpost -numbersystem "double" clstsph1 && \
+           mpost -numbersystem "double" clstsph2 \
            && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi
 
 .PHONY: run-p
 
 run-p:
-	3dldf clstsph1 && mpost -numbersystem "double" clstsph1 && tex clstsph1 && dvipdfmx clstsph1.dvi
+	3dldf$(EXEEXT) clstsph1 && mpost -numbersystem "double" clstsph1 && tex clstsph1 && dvipdfmx clstsph1.dvi
 
 #### *** (3) parser2
 
@@ -1005,7 +1006,7 @@ run: 3dldf$(EXEEXT) clstsph1.ldf clstsph1_sub.ldf clstsph1.aux astronmy.lmc
 .PHONY : rrun
 
 rrun:
-	3dldf clstsph1 && mpost clstsph1 -numbersystem "double" && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi 
+	3dldf$(EXEEXT) clstsph1 && mpost clstsph1 -numbersystem "double" && tex clstsph1 && dvips -o clstsph1.ps clstsph1.dvi 
 
 # sample_3_labels_sorted.tex: sample3.mp
 # 	sort sample_3_labels.tex > sample_3_labels_sorted.tex	
@@ -1424,7 +1425,7 @@ purge:
 	-rm -f sphrprj2.[0-9]* sphrprj2.mp sphrprj2.dvi sphrprj2.log sphrprj2.ps
 	-rm -f sphrprj3.[0-9]* sphrprj3.mp sphrprj3.dvi sphrprj3.log sphrprj3.ps
 	-rm -f cmyk_test.[0-9]* cmyk_test.mp cmyk_test.dvi cmyk_test.log cmyk_test.ps
-	-rm 3DLDFput.mp testfont.log ttemp.dvi ttemp.log mpout.log
+	-rm -f 3DLDFput.mp testfont.log ttemp.dvi ttemp.log mpout.log
 
 
 #### *** (3)
@@ -1511,7 +1512,7 @@ zikhron.1: zikhron.mp
 	mpost -numbersystem "double" zikhron.mp
 
 zikhron.mp: zikhron.ldf sundl_03.lmc
-	3dldf zikhron.ldf
+	3dldf$(EXEEXT) zikhron.ldf
 
 sundl_04.mp:
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sundl_04.ldf
@@ -1635,7 +1636,7 @@ grrhm_06.pdf: grrhm_06.dvi
 	dvipdfmx grrhm_06.dvi
 
 sphrprj1.mp: sphrprj1.ldf 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj1.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrprj1.ldf 
 
 sphrprj1.1: sphrprj1.mp
 	mpost -numbersystem "double" sphrprj1.mp
@@ -1647,7 +1648,7 @@ sphrprj1.pdf: sphrprj1.dvi
 	dvipdfmx sphrprj1.dvi 
 
 sphrprj2.mp: sphrprj2.ldf sphrproj.lmc 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj2.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrprj2.ldf 
 
 sphrprj2.1: sphrprj2.mp
 	mpost -numbersystem "double" sphrprj2.mp
@@ -1662,7 +1663,7 @@ sphrprj2_a3.dvi: sphrprj2_a3.txt sphrprj2.1
 	tex sphrprj2_a3.txt
 
 sphrprj3.mp: sphrprj3.ldf sphrproj.lmc 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf sphrprj3.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) sphrprj3.ldf 
 
 sphrprj3.1: sphrprj3.mp
 	mpost -numbersystem "double" sphrprj3.mp
@@ -1674,7 +1675,7 @@ sphrprj3.pdf: sphrprj3.dvi
 	dvipdfmx sphrprj3.dvi 
 
 color_samples.mp: color_samples.ldf 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf color_samples.ldf 
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) color_samples.ldf 
 
 color_samples.0 color_samples.1: color_samples.mp
 	mpost -numbersystem "double" color_samples.mp
@@ -1691,9 +1692,11 @@ color_samples_a3.dvi: color_samples_a3.txt color_samples.1
 color_samples_a3.pdf: color_samples_a3.dvi
 	dvipdfmx color_samples_a3.dvi 
 
+atemp.mp: atemp.ldf
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
-
-
+atemp0.eps: atemp.mp
+	mpost -numbersystem "double" atemp.mp
 
 .PHONY: purge-s
 

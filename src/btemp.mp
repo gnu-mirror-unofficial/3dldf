@@ -79,8 +79,10 @@ beginfig(0);
 
   draw q1;
 
-  p4 = direction q0;
+  p4 = direction 0 of q0;
 
+  write "(" & decimal xpart p4 & ", " & decimal ypart p4 & ")" to "btemp.out";
+  
   message "p4:";
   show p4;
   

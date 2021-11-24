@@ -2020,11 +2020,18 @@ Added token declarations for |WITH_FOCUS_AXES| and |WITH_MAIN_AXES|.
 
 \initials{LDF 2007.09.24.}
 Added token declarations for |TILT| and |TILTED|.
+
+\initials{LDF 2021.11.24.}
+Added token declarations for |DIRECTION|, |DIRECTIONTIME| and |DIRECTIONPOINT|.
 \ENDLOG 
 
 @q **** (4) Declarations.  @>
 
 @<Token and precedence declarations@>=
+
+@=%token <int_value> DIRECTION@>@/
+@=%token <int_value> DIRECTIONTIME@>@/
+@=%token <int_value> DIRECTIONPOINT@>@/
 
 @=%token <int_value> WITH_POSITION@>@/
 @=%token <int_value> WITH_DIRECTION@>@/
