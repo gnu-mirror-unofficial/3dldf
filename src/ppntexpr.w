@@ -2779,6 +2779,46 @@ Added this rule.
 
 };
 
+
+@q ** (2) point_primary --> DIRECTION path_expression@>
+@*1 \§point primary> $\longrightarrow$ \.{DIRECTION} \§path expression>.
+\initials{LDF 2021.11.24.}
+
+\LOG
+\initials{LDF 2021.11.24.}
+Added this rule.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define rules@>=
+@=point_primary: DIRECTION path_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: DIRECTION path_expression.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Point *p = new Point;
+
+    @=$$@> = static_cast<void*>(p);
+
+};
+
 @q ** (2) point secondary.  @>
 @*1 \§point secondary>.
 \initials{LDF Undated.}
