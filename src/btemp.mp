@@ -63,15 +63,17 @@ beginfig(0);
 
   p0 = origin;
   p1 = (10cm, 0cm);
-  p2 = (10cm, 10cm);
+  p2 = (9cm, 9cm);
   p3 = (0cm, 10cm);
+  p4 = (1cm, 1cm);
 
   dotlabel.bot(btex $p_0$ etex, p0);
   dotlabel.top(btex $p_1$ etex, p1);
   dotlabel.rt(btex $p_2$ etex, p2);
   dotlabel.top(btex $p_3$ etex, p3);
+  dotlabel.rt(btex $p_4$ etex, p3);
 
-  q0 = p0 .. p1 .. p2 .. p3 .. cycle;
+  q0 = p0 .. p1 .. p2 .. p3 .. p4 .. cycle;
 
   draw q0;
   
@@ -79,12 +81,13 @@ beginfig(0);
 
   draw q1;
 
-  p4 = direction 0 of q0;
+  p5 = direction 0 of q0;
 
-  write "(" & decimal xpart p4 & ", " & decimal ypart p4 & ")" to "btemp.out";
   
-  message "p4:";
-  show p4;
+  write "(" & decimal xpart p5 & ", " & decimal ypart p5 & ")" to "btemp.out";
+  
+  message "p5:";
+  show p5;
   
   
 % message "angle direction 0 of q0:"; 

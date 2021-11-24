@@ -1698,6 +1698,9 @@ atemp.mp: atemp.ldf
 atemp0.eps: atemp.mp
 	mpost -numbersystem "double" atemp.mp
 
+btemp0.eps: btemp.mp
+	mpost -numbersystem "double" btemp.mp
+
 .PHONY: purge-s
 
 purge-s:
