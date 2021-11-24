@@ -2870,7 +2870,20 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  @=$$@> = 0;
+  Point p;
+  real r = 0.0;
+  Path *q = static_cast<Path*>(@=$5@>); 
+
+  p = q->get_direction(@=$2@>, &r, scanner_node);
+
+  cerr << "r == " << r << endl;
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar(); 
+
+  delete q;
+  q = 0;
+
+  @=$$@> = r;
   
 };
 

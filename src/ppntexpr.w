@@ -2856,7 +2856,10 @@ Added this rule.
 
 @q **** (4) @>
 
-    *p = q->get_direction(@=$2@>, scanner_node);
+    *p = q->get_direction(@=$2@>, 0, scanner_node);
+
+    delete q;
+    q = 0;
 
     @=$$@> = static_cast<void*>(p);
 
