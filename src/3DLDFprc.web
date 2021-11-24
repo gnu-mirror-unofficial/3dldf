@@ -56,30 +56,34 @@
 think it could be neater.  LDF 2003.08.18.
 
 \LOG
-LDF 2003.04.27.  Replaced |tmpnam()| with |mkstemp()|.  The latter
-returns a file descriptor, and opens a temporary file.  Since I want
+\initials{LDF 2003.04.27.}
+Replaced |tmpnam| with |mkstemp|.  The latter
+returns a file descriptor and opens a temporary file.  Since I want
 to use the file stream facilities of \CPLUSPLUS/, I have to close the
-temporary file that |mkstemp()| opens.  This is a bit awkward, but the
-GNU \CPLUSPLUS/ compiler says that |tmpnam()| is dangerous, so it
+temporary file that |mkstemp| opens.  This is a bit awkward, but the
+GNU \CPLUSPLUS/ compiler says that |tmpnam| is dangerous, so it
 seemed best to me to handle the problem this way.
 
-LDF 2003.04.27.  Now ``unlinking'' the temporary files.  Now that I'm
-using |mkstemp()|, they don't disappear automatically.  I must  use 
-|unlink()| to get rid of them.
+\initials{LDF 2003.04.27.}
+Now ``unlinking'' the temporary files.  Now that I'm
+using |mkstemp|, they don't disappear automatically.  I must  use 
+|unlink| to get rid of them.
 
-LDF 2003.04.30.  @: BUG FIX@> BUG FIX:  Now calling 
+\initials{LDF 2003.04.30.}
+@: BUG FIX@> BUG FIX:  Now calling 
 |unlink(return_value_file_name)| before |exit(1)| when I break off
 execution because ctangling or compilation failed.  Previously, the
 temporary file was not deleted in these cases.
 
-LDF 2003.08.18.  Combined \filename{procLIN.web} and
+\initials{LDF 2003.08.18.}
+Combined \filename{procLIN.web} and
 \filename{procDEC.web} into this file, and renamed it
 \filename{3DLDFprc.web}.  It contains conditionally compiled code, so
 that it can be used for compiling with the DEC \CPLUSPLUS/ compiler
 under Compaq Tru64, and with both GCC 2.95 and GCC 3.3 under Linux.
 \ENDLOG 
 @q ** Definition.@>
-@<Define |process_file()|@>=
+@<Define |process_file|@>=
 void 
 process_file(string name_string, size_t compile_and_link_position,
              bool writes_header, bool do_not_compile = false)
@@ -120,7 +124,7 @@ even if it doesn't, relinking should be suppressed if one does occur.
 @:!!@> !! If I add such a command line option, I must define a 
 |bool suppress_relinking|.
 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
 
 #ifdef __GNUC__
   int fd; 
@@ -152,7 +156,7 @@ even if it doesn't, relinking should be suppressed if one does occur.
   o_file_stream.open(o_string.c_str());
 
 @  Make sure the program is relinked. 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
   if (!o_file_stream)
     compile_and_link_flags.set(0); 
 
@@ -180,7 +184,7 @@ Run \ctangle/ in the following cases:
 
 @:!! TO DO@> TO DO:  Check why I need |const_cast|.
 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
 
   dependencies.set(compile_and_link_position); 
 
@@ -226,7 +230,7 @@ the old version to the new one that will be written when we run
 \ctangle/. NOTE: This is only done if the \CWEB/ file needs to be
 retangled. 
 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
 
   if (writes_header == true && h_file_stream) 
     {
@@ -250,7 +254,7 @@ LDF 2003.08.20.  No longer changing the extension of the
 \filename{.cxx} files to \filename{.c}, because GCC 2.95 does have a
 language option.
 \ENDLOG 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
  system_string = "ctangle " + web_string;
 
 if (SILENT == false)
@@ -334,7 +338,7 @@ run faster.  Did the same thing in \filename{cmplLIN.web}
 LDF 2002.08.30.  Changed ``-O5'' to ``-g'' in order to be 
 able to debug.  Did the same thing in \filename{cmplLIN.web}.
 \ENDLOG 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
   
 if (!o_file_stream && SILENT == false && DEBUG == true)
      cout << o_string << " is missing. Will recompile "
@@ -354,7 +358,7 @@ if (do_not_compile == false
 #endif 
     
 @
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
   if (SILENT == false)
     cout << "Running " << system_string << ".\n";
 
@@ -406,7 +410,7 @@ erroneously.
 \LOG
 LDF 2002.04.15.  Added code to remove the ``\filename{.hld}'' file.  
 \ENDLOG 
-@<Define |process_file()|@>+=
+@<Define |process_file|@>+=
 dependencies.reset(compile_and_link_position);  
 
 c_file_stream.close();
@@ -512,7 +516,7 @@ If it has, don't reset the bit.
 
 @q ** Check header file.@>
 @*1 Check header file.
-@<Define |check_header_file()|@>=
+@<Define |check_header_file|@>=
 unsigned short check_header_file(ifstream&  local_h_file_stream,
                                  ifstream& local_hld_file_stream)
 {
@@ -552,7 +556,7 @@ h_copy_stream.open(h_copy_name);
     h_copy_stream.open(h_copy_name);  
     hld_copy_stream.open(hld_copy_name); 
     /* I can't get the return value of a shell command executed by
-      |system()|, so I write the return value to a temporary file and
+      |system|, so I write the return value to a temporary file and
         read the value in through |val_stream|. */
     char* val_file_name = (char*) malloc(L_tmpnam);
     tmpnam(val_file_name);
@@ -564,7 +568,7 @@ removing the comments and |@[#line@]| commands.
 This assumes that no comments or |@[#line@]| commands extend over more
 than one line, which is a reasonable assumption, considering that
 \ctangle/ removes comments.
-@<Define |check_header_file()|@>+=
+@<Define |check_header_file|@>+=
 
 string curr_string;
 string::size_type position;
@@ -612,7 +616,7 @@ string::size_type position;
 comments and |@[#line@]| commands removed using \.{diff} and write the
 result to a temporary file. Write \.{diff}'s output to
 \.{/dev/null}, so it doesn't appear on the screen. 
-@<Define |check_header_file()|@>+=
+@<Define |check_header_file|@>+=
 
     system_string = "diff -h -w " + static_cast<string>(h_copy_name) 
                      + " " + static_cast<string>(hld_copy_name)

@@ -4039,14 +4039,17 @@ Path::align_with_axis(const char axis, Scanner_Node scanner_node) const
 \initials{LDF 2002.11.03.}  This function should never be called with the |bool|
 argument |assign == false|.  It won't cause any harm, though, since it
 will just call the |const| version above.
+
 \LOG
 \initials{LDF 2002.11.03.}  Added this function.
 
-\initials{LDF 2003.07.18.}  Changed, so that |is_linear| is used, rather than
+\initials{LDF 2003.07.18.}
+Changed, so that |is_linear| is used, rather than
 |get_line_switch|.  Also, changed the way |Transform t| is set.  
 The latter change was necessary, because GCC 3.3 couldn't compile this
 file the way it was before.
 \ENDLOG 
+
 @<Declare |Path| functions@>=
 
 Transform
@@ -4057,24 +4060,31 @@ align_with_axis(bool assign, const char axis = 'z');
 Transform
 Path::align_with_axis(bool assign, const char axis)
 {
-  if (!is_linear())
-    {
-      cerr << "ERROR! In Path::align_with_axis().\n"
-        << "Path is not linear.  Returning INVALID_TRANSFORM.\n\n";
-      return INVALID_TRANSFORM;
-    }
-  Transform t;
-  t.align_with_axis(get_point(0), get_last_point(), axis);
-  if (assign == false) 
-    {
-      cerr << "WARNING! In Path::align_with_axis():\n"
-           << "Don't call this function with the \"assign\" "
-           << "argument == false.\nIt won't cause any harm, though.\n"
-           << "Continuing.\n\n";
-      return t;
-    }
-  return (*this *= t);
-}
+   if (!is_linear())
+   {
+     cerr << "ERROR! In Path::align_with_axis." << endl 
+          << "Path is not linear.  Returning INVALID_TRANSFORM." 
+          << endl;
+
+     return INVALID_TRANSFORM;
+   }
+
+   Transform t;
+
+   t.align_with_axis(get_point(0), get_last_point(), axis);
+
+   if (assign == false) 
+   {
+     cerr << "WARNING! In Path::align_with_axis():\n"
+          << "Don't call this function with the \"assign\" "
+          << "argument == false.\nIt won't cause any harm, though.\n"
+          << "Continuing.\n\n";
+     return t;
+   }
+
+   return (*this *= t);
+
+} /* |Path::align_with_axis| */
 
 @q *** (3) For non-lines. ({\bf Point} and axis arguments).@>
 @*2 For non-lines.  ({\bf Point} and axis arguments).
@@ -9805,7 +9815,7 @@ Path::is_linear(bool verbose, string text) const
   bool DEBUG = false; /* |true| */@; 
   if (DEBUG)
     {
-      cerr << "Entering Path::is_linear()." << endl;
+      cerr << "Entering Path::is_linear." << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@; 
  
@@ -11288,21 +11298,22 @@ Path::get_normal(void) const
 below could cause the |Path| to be non-linear or non-planar, even if
 the |Points| lie on a line or in a plane.
 @<Define |Path| functions@>=
+
   for (vector<string>::const_iterator iter = connectors.begin();
        iter != connectors.end(); ++iter)
-    {
-      if (!(*iter == ".." || *iter == "--"
-          || *iter == "..." || *iter == "---"))
-        {
-          cerr_mutex.lock(); 
-          cerr << "WARNING! In Path::get_normal():\n"
-               << "Connector may make Path non-linear or non-planar: " 
-               << *iter << endl << "Returning INVALID_POINT.\n\n";
-          cerr_mutex.unlock();  
+  {
+    if (!(*iter == ".." || *iter == "--"
+        || *iter == "..." || *iter == "---"))
+      {
+        cerr_mutex.lock(); 
+        cerr << "WARNING! In Path::get_normal():\n"
+             << "Connector may make Path non-linear or non-planar: " 
+             << *iter << endl << "Returning INVALID_POINT.\n\n";
+        cerr_mutex.unlock();  
 
-          return INVALID_POINT;
-        }
-    }
+        return INVALID_POINT;
+      }
+  }
 
 @ \initials{LDF 2002.11.05.}  Two points determine a line.  
 
@@ -11313,17 +11324,19 @@ Commented-out warning.
 
 @<Define |Path| functions@>=
   if (points.size() == 2)  
-    {
+  {
 #if 0 
       cerr << "WARNING! In Path::get_normal():\n"
            << "Path has 2 Points.  Returning origin_pt.\n\n";
 #endif 
       return origin_pt;
-    }
+  }
 
 @
 @<Define |Path| functions@>=
- vector<Point*>::const_iterator iter = points.begin();
+
+  vector<Point*>::const_iterator iter = points.begin();
+
   Point p0(**iter++);
   Point p1(**iter++);
   Point p2;
@@ -11332,12 +11345,13 @@ Commented-out warning.
 
   Point a1;
   Point b0;
+
   while(b0 == origin_pt && iter != points.end())
-    {
-      p2 = **iter++;
-      a1 = p2 - p0;
-      b0 = a0.cross_product(a1);
-    }
+  {
+    p2 = **iter++;
+    a1 = p2 - p0;
+    b0 = a0.cross_product(a1);
+  }
   
   if (iter == points.end() && b0 == origin_pt)
   {
@@ -11352,6 +11366,7 @@ Commented-out warning.
 
     return origin_pt;
   }
+
 #if DEBUG_COMPILE
   else if (DEBUG)
   {
@@ -11516,12 +11531,15 @@ Path::get_plane(void) const
 here, because |Path| is an incompletely defined type there.  
 
 \LOG
-\initials{LDF 2003.06.11.}  Added this function.
+\initials{LDF 2003.06.11.}  
+Added this function.
 
-\initials{LDF 2003.06.24.}  Removed the argument |test_points|.  Now, planarity
+\initials{LDF 2003.06.24.}  
+Removed the argument |test_points|.  Now, planarity
 is always tested.
 
-\initials{LDF 2003.06.24.}  @:BUG FIX@> BUG FIX:  When the |Points| all lay in
+\initials{LDF 2003.06.24.}  
+@:BUG FIX@> BUG FIX:  When the |Points| all lay in
 the x-z plane, or a plane parallel to it,\newline
 |lambda_denominator| was 0.
 This caused |is_in_triangle| to return |false|, even when |*this|
@@ -13207,7 +13225,15 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
 {
 @q **** (4) @>
 
-   Point p;
+   Point p0;
+   Point p1;
+   Point normal;
+
+   Path q0;
+   Path q1;
+
+   Transform t0;
+   Transform t1;
 
    stringstream cerr_strm;
 
@@ -13240,14 +13266,38 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   normal = get_normal();   
+
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
 
-   if (!is_planar())
+@q ***** (5) @>
+
+   if (normal == ORIGIN)
    {
        cerr_strm << thread_name << "WARNING!  In `Path::get_direction':" << endl
-                 << "`*this' is not planar.  Exiting function unsuccessfully with "
+                 << "`*this' is not planar:  The points on the path are coplanar." << endl
+                 << "Exiting function unsuccessfully with "
+                 << "return value `ORIGIN'."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       return ORIGIN;
+
+   }
+
+@q ***** (5) @>
+
+   else if (normal == INVALID_POINT)
+   {
+       cerr_strm << thread_name << "WARNING!  In `Path::get_direction':" << endl
+                 << "`*this' is not planar.  The points on the path do not lie in a plane." 
+                 << endl 
+                 << "Exiting function unsuccessfully with "
                  << "return value `INVALID_POINT'."
                  << endl;
 
@@ -13258,6 +13308,26 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
        return INVALID_POINT;
 
    }
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr_strm << thread_name << "In `Path::get_direction':" << endl
+                 << "`*this' is planar." << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       normal.show("normal:");  
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
@@ -13275,7 +13345,39 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
 @
 @<Define |Path| functions@>=
 
-   
+  /* !!START HERE:  LDF 2021.11.24.  |align_with_axis| doesn't seem to work properly.  */ 
+
+  t0.align_with_axis(p0, normal, 'z');
+
+  q1 = *this;
+
+  q1 *= t0;
+
+  q1.show("q1 after transformation:");
+
+  for (vector<Point*>::iterator iter = q1.points.begin(); iter != q1.points.end(); ++iter)
+  {
+      (*iter)->shift(0, 0, -(*iter)->get_z());
+  }  
+
+  q1.show("q1 after loop: (*this on x-y plane)");
+
+  stringstream s;
+
+  int fd; 
+  char temp_filename[] = "XXXXXX.mp";
+  fd = mkstemp(temp_filename);
+  close(fd);
+
+#if 0
+/* !!START HERE:  LDF 2021.11.24.*/ 
+
+echo "\\write \"Here I am\" to \"xxx\";end;" | mpost -interaction="batchmode"
+  s << "mpost ";
+
+#endif 
+
+
 
 
 @q **** (4) @>
@@ -13295,7 +13397,7 @@ Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
    }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   return p;
+   return p1;
 
 
 }  /* End of |Path::get_direction| definition  */
