@@ -2856,6 +2856,13 @@ Added this rule.
 
 @q **** (4) @>
 
+    *p = q->get_direction(@=$2@>, scanner_node);
+
+    p->show("*p:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
     @=$$@> = static_cast<void*>(p);
 
 };

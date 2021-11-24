@@ -13205,11 +13205,25 @@ get_direction(real ttime, Scanner_Node scanner_node = 0, Point *pp = 0) const;
 @
 @<Define |Path| functions@>=
 Point
-Path::get_direction(real ttime, Scanner_Node scanner_node = 0, Point *pp = 0)
+Path::get_direction(real ttime, Scanner_Node scanner_node, Point *pp) const
 {
 @q **** (4) @>
 
-   point p;
+   Point p;
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+   using namespace Scan_Parse;
+
+@q **** (4).@>
 
 #if DEBUG_COMPILE
 
@@ -13217,18 +13231,64 @@ Path::get_direction(real ttime, Scanner_Node scanner_node = 0, Point *pp = 0)
 
    if (DEBUG)
    { 
-      cerr << "Entering `Path::get_direction'." << endl;
+      cerr_strm << thread_name << "Entering `Path::get_direction'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      show("In `Path::get_direction':  *this:");
+
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   if (!is_planar())
+   {
+       cerr_strm << thread_name << "WARNING!  In `Path::get_direction':" << endl
+                 << "`*this' is not planar.  Exiting function unsuccessfully with "
+                 << "return value `INVALID_POINT'."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+       return INVALID_POINT;
+
+   }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+       cerr_strm << thread_name << "In `Path::get_direction':" << endl
+                 << "`*this' is planar." << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      cerr << "Exiting `Path::get_direction' successfully with `Point' return value." 
+      cerr_strm << thread_name << "Exiting `Path::get_direction' successfully with `Point' return value." 
            << endl;
-   }  
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }
 #endif /* |DEBUG_COMPILE|  */@; 
 
    return p;

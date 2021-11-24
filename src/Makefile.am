@@ -1692,7 +1692,7 @@ color_samples_a3.dvi: color_samples_a3.txt color_samples.1
 color_samples_a3.pdf: color_samples_a3.dvi
 	dvipdfmx color_samples_a3.dvi 
 
-atemp.mp: atemp.ldf
+atemp.mp: atemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
 atemp0.eps: atemp.mp
