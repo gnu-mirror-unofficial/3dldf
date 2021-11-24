@@ -13182,6 +13182,60 @@ Path::decompose(const unsigned short limit,
                               Scanner_Node scanner_node)|
       definition.  */
 
+
+@q ** (2) Get direction.  @>
+@ Get direction.  
+\initials{LDF 2021.11.24.}
+
+\LOG
+\initials{LDF 2021.11.24.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration @>
+
+
+@<Declare |Path| functions@>=
+virtual
+Point
+get_direction(real ttime, Scanner_Node scanner_node = 0, Point *pp = 0) const;
+
+
+@q *** (3) Definition  @>
+@
+@<Define |Path| functions@>=
+Point
+Path::get_direction(real ttime, Scanner_Node scanner_node = 0, Point *pp = 0)
+{
+@q **** (4) @>
+
+   point p;
+
+#if DEBUG_COMPILE
+
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+   { 
+      cerr << "Entering `Path::get_direction'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Path::get_direction' successfully with `Point' return value." 
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return p;
+
+
+}  /* End of |Path::get_direction| definition  */
+
 @q * (1) |Nurb| functions.@> 
 @* {\bf Nurb} functions.
 \initials{LDF 2005.01.28.}
