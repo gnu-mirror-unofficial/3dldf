@@ -4039,11 +4039,16 @@ Transform::align_with_axis(Point p0, Point p1,
 {
 @q ***** (5) @>
 
-  bool DEBUG = true; /* |false| */@;
-  if (DEBUG)
-        cerr << "Entering Transform::align_with_axis." << endl;
+#if DEBUG_COMPILE
 
-  Point origin_pt(0, 0, 0);
+   bool DEBUG = false; /* |true| */@;
+
+   if (DEBUG)
+   { 
+      if (DEBUG)
+            cerr << "Entering Transform::align_with_axis." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   p0.apply_transform(); 
   p1.apply_transform();
@@ -4053,15 +4058,17 @@ Transform::align_with_axis(Point p0, Point p1,
 @ Upper- or lowercase is permitted for |axis|.
 \initials{LDF Undated.}
 @<Define |Transform| functions@>= 
+
   axis = tolower(axis);  
 
   if (axis != 'x' && axis != 'y' && axis != 'z')
-    {
-      cerr << "ERROR! In Transform::align_with_axis(). "
-           << "Invalid \"axis\" argument: "
-        << axis << endl << "Returning identity matrix." << endl;
-      return t;
-    }
+  {
+    cerr << "ERROR! In Transform::align_with_axis(). "
+         << "Invalid \"axis\" argument: "
+      << axis << endl << "Returning identity matrix." << endl;
+
+    return t;
+  }
 
   real angle;
   
@@ -4069,13 +4076,16 @@ Transform::align_with_axis(Point p0, Point p1,
 the same way, so that the relationship between them remains constant.
 @<Define |Transform| functions@>= 
 
-  if(p0 != origin_pt)
+  if(p0 != ORIGIN)
     {
-      if (DEBUG)
-        {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
           p0.show("p0");
           p1.show("p1");
-        }
+       }   
+#endif /* |DEBUG_COMPILE|  */@;
+
       t.shift(-p0);
       p1 *= t;
       p1.apply_transform();
@@ -4085,18 +4095,22 @@ the same way, so that the relationship between them remains constant.
    @<Normalize point@>  /* \initials{LDF 2002.10.23.}  Transform the |Point| so
                           that it's x, y, and z coordinates are all
                           positive.  See below for the explanation.  */
-
+#if DEBUG_COMPILE
   if (DEBUG)
     {
       t.show("t outside of  normalization");
     }
+#endif /* |DEBUG_COMPILE|  */@;
 
   Point proj_on_x_z_plane(p1); /* \initials{LDF 2002.10.23.}  Get the projection
                                   of |p1| on the x-z plane.  */
+
   proj_on_x_z_plane.shift(0, -p1.world_coordinates[1]);
 
+#if DEBUG_COMPILE
   if (DEBUG) 
     proj_on_x_z_plane.show("proj_on_x_z_plane");
+#endif /* |DEBUG_COMPILE|  */@;
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the x or y-axis, rotate
 |p1| onto the x-y plane and then to the x-axis.
@@ -4121,25 +4135,33 @@ will be reentrant.
 
       angle = proj_on_x_z_plane.angle(pt_on_x_axis);
 
+#if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "angle of projection: " << angle << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
       if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(0, -angle);
 
+#if DEBUG_COMPILE
       if (DEBUG) 
         p1.show("p1 after rotation to x-y plane");
+#endif /* |DEBUG_COMPILE|  */@;
 
       angle = p1.angle(pt_on_x_axis);
 
+#if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "angle to x-axis: " << angle << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
       if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(0, 0, -angle);
-
+#if DEBUG_COMPILE
       if (DEBUG) 
         p1.show("p1 after rotation to x-axis");
+#endif /* |DEBUG_COMPILE|  */@;
+
     }
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the z-axis, rotate |p1| onto  
@@ -4184,14 +4206,18 @@ porting to GNU/Linux.
 @
 @<Define |Transform| functions@>= 
 
+#if DEBUG_COMPILE
       if (DEBUG) 
         cerr << "angle of projection: " << angle << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
       if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(0, angle);
 
+#if DEBUG_COMPILE
       if (DEBUG) 
         p1.show("p1 after rotation to z-y plane");
+#endif /* |DEBUG_COMPILE|  */@;
 
       p1.apply_transform();
 
@@ -4216,14 +4242,18 @@ else
 @
 @<Define |Transform| functions@>= 
 
+#if DEBUG_COMPILE
  if (DEBUG) 
    cerr << "angle to z-axis: " << angle << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
       if(angle != ZERO_REAL && angle != INVALID_REAL)
         t *= p1.rotate(-angle);
-      
+
+#if DEBUG_COMPILE      
       if (DEBUG) 
         p1.show("p1 after rotation to z-axis");
+#endif /* |DEBUG_COMPILE|  */@;
     }
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the y-axis, |p1| must be
@@ -4235,22 +4265,28 @@ $90^\circ$.  Then it will be on the y-axis.
     {
       t *= p1.rotate(0, 0, 90);
 
+#if DEBUG_COMPILE
       if (DEBUG) 
         p1.show("p1 after rotation to y-axis");
     }
+#endif /* |DEBUG_COMPILE|  */@;
 
+#if DEBUG_COMPILE
   if (DEBUG)
     {
       cerr << "p1.magnitude() == " << p1.magnitude() << endl;
       t.show("t at end of align_with_axis()");
     }
+#endif /* |DEBUG_COMPILE|  */@;
 
   *this *= t;   
 
 @q ***** (5) @>
 
+#if DEBUG_COMPILE
   if (DEBUG)
     cerr << "Exiting Transform::align_with_axis." << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
   return t;
 
@@ -4270,8 +4306,10 @@ elegant construction, but I don't know one.
 @<Normalize point@>=
 {
  
+#if DEBUG_COMPILE
   if (DEBUG) 
     p1.show("p1 before normalization");
+#endif /* |DEBUG_COMPILE|  */@;
 
   if (p1.world_coordinates[0] < 0 && p1.world_coordinates[1] >= 0
       && p1.world_coordinates[2] >= 0)  /* x negative, y and z positive. */   
@@ -4307,13 +4345,17 @@ elegant construction, but I don't know one.
       t *= p1.shift(-a);
     }
   p1.apply_transform();
+
+#if DEBUG_COMPILE
   if (DEBUG)
     {
       p0.show("p0 after normalization");
       p1.show("p1 after normalization");
       t.show("t after normalization");
     }
-}
+#endif /* |DEBUG_COMPILE|  */@;
+
+}  /* End of |@<Normalize point@>| group */
 
 @q *** (3) Rotation around an arbitrary axis. @>
 @*2 Rotation around an arbitrary axis.
