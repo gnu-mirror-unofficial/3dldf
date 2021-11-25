@@ -13380,7 +13380,7 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
   cerr << "temp_filename == " << temp_filename << endl;
 #endif 
 
-/* !!START HERE:  LDF 2021.11.24.  Add error handling.  */ 
+/* !!START HERE:  LDF 2021.11.24.  Add error handling.  Make sure unlink works.  */ 
 
   errno = 0;
   status = unlink(temp_filename);
