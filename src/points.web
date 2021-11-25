@@ -197,7 +197,6 @@ class Point: protected Shape
 {
   friend Transform Transform::align_with_axis(Point, Point, char);
   friend Transform Picture::operator*=(const Transform& t);
-  friend Transform Transform::align_with_axis(Point, Point, char);
   friend int Scanner_Type::show_database(void);
   friend int yyparse(yyscan_t);
 
@@ -4004,22 +4003,22 @@ Point::shift_times(const Point& p)
 @^\cfunc{Transform}{align\_with\_axis}@>
 Declared in \filename{transfor.web}.  Defined here, because it needs
 |Points|. 
-\initials{LDF 2002.10.23.}  |align_with_axis| returns the
-|Transform| needed to align 
+
+|align_with_axis| returns the |Transform| needed to align 
 $\overrightarrow{p_0p_1}$ with one of the main axes.
+\initials{LDF 2002.10.23.}  
   
 \initials{LDF 2003.05.04.}  
 @:!! BUG@> BUG: @:!! TO DO@> TO DO:  Try to find out why I sometimes
-get erroneous results with\newline
-|rotate(Point, Point, real)| 
-(formerly |rotate_around|).  I think the problem may be here.
+get erroneous results with |rotate(Point, Point, real)| (formerly |rotate_around|).  
+I think the problem may be here.
 
 \LOG
 \initials{LDF 2002.12.10.}  
 Made this function a |friend| in |class Point|.  
 Now calling |p0.apply_transform| and |p1.apply_transform| at the beginning of
-this function and using |p0.world_coordinates| and\newline
-|p1.world_coordinates| directly instead of |get_x|, |get_y|, and |get_z|.  
+this function and using |p0.world_coordinates| and |p1.world_coordinates| directly 
+instead of |get_x|, |get_y|, and |get_z|.  
 
 \initials{LDF 2002.12.10.}  
 Now calling |p0.apply_transform| 
@@ -4038,7 +4037,9 @@ Transform
 Transform::align_with_axis(Point p0, Point p1,
                            char axis) /* Default is the z-axis. */
 {
-  bool DEBUG = false; /* |true| */@;
+@q ***** (5) @>
+
+  bool DEBUG = true; /* |false| */@;
   if (DEBUG)
         cerr << "Entering Transform::align_with_axis." << endl;
 
@@ -4246,11 +4247,14 @@ $90^\circ$.  Then it will be on the y-axis.
 
   *this *= t;   
 
+@q ***** (5) @>
+
   if (DEBUG)
     cerr << "Exiting Transform::align_with_axis." << endl;
 
   return t;
-}
+
+}  /* End of |Transform::align_with_axis| definition */
 
 @q **** (4) Normalize point. @>
 @*3 Normalize point.  
