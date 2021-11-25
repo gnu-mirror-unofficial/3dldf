@@ -47,7 +47,42 @@
 %%%% Laurence.Finston@gmx.de
 
 
-%% ** (2) 
+%% ** (2)
+
+prologues := 3;
+outputtemplate := "%j%c.eps";
+
+
+beginfig(0);
+  path q;
+  pair p[];
+  p0 = (0cm, 0cm);
+  p1 = (10cm, 0cm);
+  p2 = (9cm, -9cm);
+  p3 = (0cm, -10cm);
+  p4 = (1cm, -1cm);
+
+  q = p0 .. p1 .. p2 .. p3 .. p4 .. cycle;
+  draw q;
+  pair d;
+
+  for i = 0 upto 4:
+    d := direction i of q;
+    message decimal i & ": d == (" & decimal xpart d & ", " & decimal ypart d & ")";
+    a := angle direction i of q;
+    message decimal i & ": a == " & decimal a;
+  endfor;
+    
+  dotlabel.lft(btex $p_0$ etex, p0);
+  dotlabel.rt(btex $p_1$ etex, p1);
+  dotlabel.rt(btex $p_2$ etex, p2);
+  dotlabel.ulft(btex $p_3$ etex, p3);
+  dotlabel.ulft(btex $p_4$ etex, p4);
+
+endfig;
+
+end; 
+
 
 verbatimtex \font\huge=cmr17 scaled 8000 etex;
 

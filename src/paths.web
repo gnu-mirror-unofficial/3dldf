@@ -13415,10 +13415,9 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
   s << "end;\" "
     << "| mpost -numbersystem \"double\" -interaction=\"batchmode\" >/dev/null; cat " << temp_filename;
 
-#if 0
+#if 1 /* 0 */
   cerr << "s.str() == " << s.str() << endl;
 #endif 
-
 
   FILE *fp = popen(s.str().c_str(), "r");
 

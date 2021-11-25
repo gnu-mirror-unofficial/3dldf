@@ -2874,11 +2874,13 @@ Added this rule.
   real r = 0.0;
   Path *q = static_cast<Path*>(@=$5@>); 
 
-  p = q->get_direction(@=$2@>, &r, scanner_node);
+  p = q->get_direction(@=$3@>, &r, scanner_node);
 
+#if 0 
   cerr << "r == " << r << endl;
   cerr << "XXX Enter <RETURN> to continue: ";
   getchar(); 
+#endif 
 
   delete q;
   q = 0;
