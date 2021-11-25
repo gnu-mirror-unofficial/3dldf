@@ -13376,15 +13376,12 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
 
   close(fd);
 
-#if 0 
+#if 1 
   cerr << "temp_filename == " << temp_filename << endl;
 #endif 
 
 /* !!START HERE:  LDF 2021.11.24.  Add error handling.  Make sure unlink works.  
    Also, add a way of setting a point to put on the x-axis.  */ 
-
-  errno = 0;
-  status = unlink(temp_filename);
 
   s << "echo \"\\path p; p = ";
 
@@ -13443,6 +13440,17 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
   in_strm >> x_val >> y_val >> angle_val;
 
   in_strm.close();
+
+  cerr << "Unlinking " << temp_filename << endl;
+  errno = 0;
+  status = unlink(temp_filename);
+
+  cerr << "status == " << status << endl;
+  cerr << "strerror(errno) == " << strerror(errno) << endl;
+
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar(); 
+
 
 #if 1 /* 0 */
   cerr << "x_val == " << x_val << endl;
