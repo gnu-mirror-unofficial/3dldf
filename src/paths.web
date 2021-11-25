@@ -13230,7 +13230,7 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
 
    int status = 0;
 
-   Point p0;
+   Point p0 = get_point(0);
    Point p1;
    Point normal;
 
@@ -13256,7 +13256,7 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
 
 #if DEBUG_COMPILE
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    if (DEBUG)
    { 
@@ -13321,7 +13321,6 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
    { 
        cerr_strm << thread_name << "In `Path::get_direction':" << endl
                  << "`*this' is planar." << endl;
-
        log_message(cerr_strm);
        cerr_message(cerr_strm);
        cerr_strm.str("");
@@ -13352,23 +13351,16 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
 
   /* !!START HERE:  LDF 2021.11.24.  |align_with_axis| doesn't seem to work properly.  */ 
 
+  normal.shift(p0);
+
   t0.align_with_axis(p0, normal, 'z');
 
   q1 = *this;
 
   q1 *= t0;
 
-#if 0 
-  q1.show("q1 after transformation:");
-#endif 
-
-  for (vector<Point*>::iterator iter = q1.points.begin(); iter != q1.points.end(); ++iter)
-  {
-      (*iter)->shift(0, 0, -(*iter)->get_z());
-  }  
-
-#if 0
-  q1.show("q1 after loop: (*this on x-y plane)");
+#if 1 
+  q1.show("q1 after transformation (should lie in x-y plane):");
 #endif 
 
   stringstream s;
