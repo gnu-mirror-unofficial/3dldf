@@ -13380,7 +13380,8 @@ Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
   cerr << "temp_filename == " << temp_filename << endl;
 #endif 
 
-/* !!START HERE:  LDF 2021.11.24.  Add error handling.  Make sure unlink works.  */ 
+/* !!START HERE:  LDF 2021.11.24.  Add error handling.  Make sure unlink works.  
+   Also, add a way of setting a point to put on the x-axis.  */ 
 
   errno = 0;
   status = unlink(temp_filename);

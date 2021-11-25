@@ -2041,6 +2041,7 @@ Added token declarations for |DIRECTION|, |DIRECTIONTIME| and |DIRECTIONPOINT|.
 @=%token <int_value> X_AXIS@>@/
 @=%token <int_value> Y_AXIS@>@/
 @=%token <int_value> Z_AXIS@>@/
+@=%token <int_value> X_AXIS_POINT@>@/
 
 @=%token <int_value> WITH_FOCUS_AXES@>@/
 @=%token <int_value> WITH_MAIN_AXES@>@/

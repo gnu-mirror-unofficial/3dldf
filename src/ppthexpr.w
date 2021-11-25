@@ -2131,6 +2131,9 @@ Added this rule.
 @=basic_path_join: PERIOD_PAIR@>@/
 {
 
+
+/* !!START HERE:  LDF 2021.11.25.  Look up {up}, etc., in MFbook.  */ 
+
   strcpy(@=$$@>, "..");
 
 };

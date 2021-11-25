@@ -2248,6 +2248,9 @@ Added calls to |add_entry| for |get_perpendicular| and |get_perpendicular_base|.
      scanner_node->add_entry("+", PLUS, spark);
      scanner_node->add_entry("-", MINUS, spark);
 
+     scanner_node->add_synonym("plus", "+");
+     scanner_node->add_synonym("minus", "-");
+
      scanner_node->add_entry("sqrt", SQRT, spark); 
 
      scanner_node->add_entry("sind", SIND, spark); 
@@ -3064,6 +3067,7 @@ Added calls to |add_entry| for |tilt| and |tilted|.
   scanner_node->add_entry("x_axis", X_AXIS, spark); 
   scanner_node->add_entry("y_axis", Y_AXIS, spark); 
   scanner_node->add_entry("z_axis", Z_AXIS, spark); 
+  scanner_node->add_entry("x_axis_point", X_AXIS_POINT, spark); 
 
   scanner_node->add_entry("with_focus_axes", WITH_FOCUS_AXES, spark);
   scanner_node->add_entry("with_main_axes", WITH_MAIN_AXES, spark);
