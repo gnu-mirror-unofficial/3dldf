@@ -2780,10 +2780,10 @@ Added this rule.
 };
 
 
-@q ** (2) point_primary --> DIRECTION numeric_expression OF path_expression X_AXIS_POINT point_expression @>
-@q ** (2) minus_optional                                                                                  @>
+@q ** (2) point_primary --> DIRECTION numeric_expression OF path_expression x_axis_point_optional @>
+@q ** (2) minus_optional                                                                          @>
 @*1 \ypoint primary> $\longrightarrow$ \.{DIRECTION} \§numeric expression> \.{OF} \§path expression>
-\.{X\_AXIS\_POINT} \§point expression> \§minus optional>.
+\§x axis point optional> \§minus optional>.
 \initials{LDF 2021.11.24.}
 
 \LOG
@@ -2794,8 +2794,7 @@ Added this rule.
 @q *** (3) Definition.@> 
 
 @<Define rules@>=
-@=point_primary: DIRECTION numeric_expression OF path_expression X_AXIS_POINT point_expression @>
-@=minus_optional@>
+@=point_primary: DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional@>
 {
 @q **** (4) @>
 
@@ -2806,9 +2805,8 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: DIRECTION numeric_expression OF path_expression "
-                << endl 
-                << "X_AXIS_POINT point_expression minus_optional." << endl;
+                << "*** Parser: DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional."
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2824,8 +2822,7 @@ Added this rule.
     if (!q->is_planar())
     {
        cerr_strm << thread_name 
-                 << "*** Parser: DIRECTION numeric_expression OF path_expression "
-                 << "X_AXIS_POINT point_expression minus_optional:"
+                 << "*** Parser: DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional:"
                  << endl 
                  << "WARNING!  Path is not planar.  Can't calculate direction."
                  << endl 
@@ -2847,9 +2844,7 @@ Added this rule.
       if (DEBUG)
       { 
          cerr_strm << thread_name 
-                   << "*** Parser: DIRECTION numeric_expression OF path_expression"
-                   << endl
-                   << "X_AXIS_POINT point_expression minus_optional:"
+                   << "*** Parser: DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional:"
                    << endl 
                    << "Path is planar.  Will calculate direction."
                    << endl;
@@ -2864,7 +2859,7 @@ Added this rule.
 
 @q **** (4) @>
 
-    *p = q->get_direction(@=$2@>, 0, scanner_node);
+    *p = q->get_direction(@=$2@>, static_cast<Point*>(@=$5@>), @=$6@>, 0, scanner_node);
 
     delete q;
     q = 0;
@@ -2874,7 +2869,48 @@ Added this rule.
 };
 
 
-@q ** (2) minus_optional@>
+@q ** (2) x_axis_point_optional@>
+@ \§x axis point optional>.
+\initials{LDF 2021.11.26.}
+
+\LOG
+\initials{LDF 2021.11.26.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> x_axis_point_optional@>@/
+
+@q *** (3) x_axis_point_optional: /* Empty */@>
+
+@*2 \§x axis point optional> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2021.11.26.}
+
+\LOG
+\initials{LDF 2021.11.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=x_axis_point_optional: /* Empty */@>@/ 
+{
+   @=$$@> =  static_cast<void*>(0);
+}
+
+@*2 \§x axis point optional> $\longrightarrow$ \.{X\_AXIS\_POINT} \§point expression>.
+\initials{LDF 2021.11.26.}
+
+\LOG
+\initials{LDF 2021.11.26.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=x_axis_point_optional: X_AXIS_POINT point_expression@>@/ 
+{
+   @=$$@> =  static_cast<void*>(@=$2@>);
+}
+
 
 @*1 \§minus optional>.
 \initials{LDF 2021.11.25.}

@@ -2840,9 +2840,10 @@ Added this rule.
   
 };
 
-@q ***** (5) numeric_primary --> ANGLE DIRECTION numeric_expression OF path_expression@>@/
+@q ***** (5) numeric_primary --> ANGLE DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional@>@/
 
-@ \§numeric primary> $\longrightarrow$ \.{ANGLE} \.{DIRECTION} \§numeric expression> \.{Of} \§path expression>.@>
+@ \§numeric primary> $\longrightarrow$ \.{ANGLE} \.{DIRECTION} \§numeric expression> \.{Of} \§path expression>
+\§x axis point optional>  \§minus optional>.
 \initials{LDF 2021.11.24.}
 
 \LOG
@@ -2852,7 +2853,7 @@ Added this rule.
 
 @<Define rules@>= 
 
-@=numeric_primary: ANGLE DIRECTION numeric_expression OF path_expression@>@/
+@=numeric_primary: ANGLE DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -2862,7 +2863,7 @@ Added this rule.
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "*** Parser: ANGLE DIRECTION numeric_expression OF path_expression.";
+                << "*** Parser: ANGLE DIRECTION numeric_expression OF path_expression x_axis_point_optional minus_optional.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2874,7 +2875,7 @@ Added this rule.
   real r = 0.0;
   Path *q = static_cast<Path*>(@=$5@>); 
 
-  p = q->get_direction(@=$3@>, &r, scanner_node);
+  p = q->get_direction(@=$3@>, static_cast<Point*>(@=$6@>), @=$7@>, &r, scanner_node);
 
 #if 0 
   cerr << "r == " << r << endl;

@@ -13217,14 +13217,18 @@ Added this function.
 @<Declare |Path| functions@>=
 virtual
 Point
-get_direction(real ttime, real *aangle = 0, Scanner_Node scanner_node = 0) const;
+get_direction(real ttime, 
+              Point *x_axis_point = 0, 
+              int x_axis_direction = 1, 
+              real *aangle = 0, 
+              Scanner_Node scanner_node = 0) const;
 
 
 @q *** (3) Definition  @>
 @
 @<Define |Path| functions@>=
 Point
-Path::get_direction(real ttime, real *aangle, Scanner_Node scanner_node) const
+Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real *aangle, Scanner_Node scanner_node) const
 {
 @q **** (4) @>
 
