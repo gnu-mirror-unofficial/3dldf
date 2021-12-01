@@ -986,12 +986,19 @@ Defined in \filename{points.web}, because it uses |Points|, which
 haven't been defined yet. 
 \initials{LDF Undated.}
 
+\LOG
+\initials{LDF 2021.12.01.}
+Added optional arguments |Point *axis_pt_2| and |char axis_2|.
+\ENDLOG 
+
 @q *** (3) Declaration.@> 
 
 @<Declare |Transform| functions@>=
 
 Transform
-align_with_axis(Point p0, Point p1, char axis = 'z'); /* Default is the z-axis. */
+align_with_axis(Point p0, Point p1, char axis = 'z', /* Default is the z-axis. */
+                Point* axis_2_pt = 0, 
+                char axis_2 = 'x')                   /* Default of |char axis_2| is the x-axis. */
 
 @q ** (2) Matrix multiplication.@>
 @*1 Matrix multiplication.
