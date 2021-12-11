@@ -3736,8 +3736,8 @@ Added this rule.
    
    b = new bool;
 
-   color *c = static_cast<color*>(@=$1@>); 
-   color *d = static_cast<color*>(@=$3@>);    
+   Color *c = static_cast<Color*>(@=$1@>); 
+   Color *d = static_cast<Color*>(@=$3@>);    
 
    *b = (*c == *d) ? true : false;
 
@@ -3768,8 +3768,8 @@ Added this rule.
    
    b = new bool;
 
-   color *c = static_cast<color*>(@=$1@>); 
-   color *d = static_cast<color*>(@=$3@>);    
+   Color *c = static_cast<Color*>(@=$1@>); 
+   Color *d = static_cast<Color*>(@=$3@>);    
 
    *b = (*c == *d) ? false : true;
 
@@ -3782,8 +3782,6 @@ Added this rule.
    @=$$@> = static_cast<void*>(b);
 
 };
-
-
 
 @q * (1) relation.@>
 @* \§relation>.
@@ -4068,6 +4066,54 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
+
+
+@q ** (2) relation --> NOT EQUATE.@>
+@*1 \§relation> $\longrightarrow$ \.{NOT} \.{EQUATE}.
+
+\LOG
+\initials{LDF 2021.12.11.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=relation: NOT EQUATE@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: NOT EQUATE'."
+                << endl; 
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  @=$$@> = NOT_EQUAL;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `relation: NOT_EQUAL':"
+                << endl
+                << "$$ == " << @=$$@> << " == " << name_map[@=$$@>] << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
+
 
 @q * (1) logical_operator.@>
 @* \§logical operator>.
