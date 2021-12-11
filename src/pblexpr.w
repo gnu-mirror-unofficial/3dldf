@@ -3719,18 +3719,71 @@ Added this rule.
 
 };
 
-@q ** (2) boolean expression --> string_expression relation string_tertiary.@>
-@*1 \§boolean expression> $\longrightarrow$ \§string expression> 
-\§relation> \§string tertiary>.
+@q ** (2) boolean expression --> color_expression EQUAL color_tertiary.@>
+@*1 \§boolean expression> $\longrightarrow$ \§color expression> 
+\.{EQUAL} \§color tertiary>.
+\initials{LDF 2021.12.11.}
 
-\TODO
-@q { @>
-@:TO DO}{{\bf TO DO}@>
-@q } @> 
-@q !! TO DO:  @>
-\initials{LDF 2004.10.02.}
-Write this rule.
-\ENDTODO
+\LOG
+\initials{LDF 2021.12.11.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_expression: color_expression EQUAL color_tertiary@>@/
+{
+   bool* b;
+   
+   b = new bool;
+
+   color *c = static_cast<color*>(@=$1@>); 
+   color *d = static_cast<color*>(@=$3@>);    
+
+   *b = (*c == *d) ? true : false;
+
+   delete c;
+   delete d;
+ 
+   c = 0;
+   d = 0;
+
+   @=$$@> = static_cast<void*>(b);
+
+};
+
+@q ** (2) boolean expression --> color_expression NOT_EQUAL color_tertiary.@>
+@*1 \§boolean expression> $\longrightarrow$ \§color expression> 
+\.{NOT\_EQUAL} \§color tertiary>.
+\initials{LDF 2021.12.11.}
+
+\LOG
+\initials{LDF 2021.12.11.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>=
+@=boolean_expression: color_expression NOT_EQUAL color_tertiary@>@/
+{
+   bool* b;
+   
+   b = new bool;
+
+   color *c = static_cast<color*>(@=$1@>); 
+   color *d = static_cast<color*>(@=$3@>);    
+
+   *b = (*c == *d) ? false : true;
+
+   delete c;
+   delete d;
+ 
+   c = 0;
+   d = 0;
+
+   @=$$@> = static_cast<void*>(b);
+
+};
+
+
 
 @q * (1) relation.@>
 @* \§relation>.
