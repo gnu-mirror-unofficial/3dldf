@@ -131,6 +131,31 @@ Added this rule.
 
 };
 
+@q **** (4) command: ROTATE point_vector_variable numeric_list.@> 
+
+@*3 \§command> $\longrightarrow$ \.{ROTATE} \§point vector variable> 
+\§numeric list>.
+\initials{LDF 2021.12.12.}
+
+\LOG
+\initials{LDF 2021.12.12.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: ROTATE point_vector_variable numeric_list@>@/
+{
+
+    transformation_command_func(static_cast<Scanner_Node>(parameter),
+                                ROTATE,
+                                static_cast<Id_Map_Entry_Node>(@=$2@>),
+                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
+                                false);
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
 @q **** (4) command: ROTATE path_variable numeric_list.@> 
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE} \§path variable> 
@@ -1084,8 +1109,7 @@ Added this rule.
 
 @q ** (2) command --> basic_transformation_command @>
 @q ** (2) any_variable numeric_list.               @>
-@*1 \§command> $\longrightarrow$ 
-\§basic transformation command> \§any variable> 
+@*1 \§command> $\longrightarrow$ \§basic transformation command> \§any variable> 
 \§numeric list>.
 \initials{LDF 2004.09.24.}
 
@@ -1107,7 +1131,6 @@ Removed all unnecessary code.
   
 @=command: basic_transformation_command any_variable@>
 @= numeric_list@>@/
-
 {
 
     transformation_command_func(static_cast<Scanner_Node>(parameter),
@@ -1130,6 +1153,25 @@ Added this type declaration.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <int_value> basic_transformation_command@>
+
+
+@q @q ** (2) basic_transformation_command --> ROTATE@> @>
+@q @*3 \§basic transformation command> --> \.{ROTATE}. @>
+@q \initials{LDF 2021.12.12.} @>
+
+@q \LOG @>
+@q \initials{LDF 2021.12.12.} @>
+@q Added this rule. @>
+@q \ENDLOG @>
+
+@q @<Define rules@>= @>
+
+@q @=basic_transformation_command: ROTATE@> @>
+@q { @>
+
+@q   @=$$@> = ROTATE; @>
+
+@q }; @>
 
 @q ** (2) basic_transformation_command --> SCALE@>
 @*3 \§basic transformation command> --> \.{SCALE}.
@@ -1205,9 +1247,6 @@ Added this rule.
   @=$$@> = ZSCALE;
 
 };
-
-
-
 
 @q ** (2) basic_transformation_command --> SHEAR@>
 @*3 \§basic transformation command> --> \.{SHEAR}.
