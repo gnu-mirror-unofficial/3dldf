@@ -1532,6 +1532,30 @@ Added this rule.
                 parameter);
 };
 
+@q ** (2) bool_point_vector_tertiary: triangle_tertiary @> 
+@q ** (2) INTERSECTION_POINTS triangle_secondary.       @> 
+
+@*1 \§bool-point vector tertiary> $\longrightarrow$ \§ triangle tertiary> 
+\.{INTERSECTION\_POINTS} \§triangle secondary>.
+\initials{LDF 2021.12.12.}
+
+\LOG
+\initials{LDF 2021.12.12.}
+Added this rule.
+\ENDLOG
+ 
+@q *** (3) Definition.@> 
+
+@<Define rules@>= 
+@=bool_point_vector_tertiary: triangle_tertiary INTERSECTION_POINTS triangle_secondary@>@/
+{
+    @=$$@> = path_path_intersection_func(
+                static_cast<Path*>(@=$1@>),
+                static_cast<Path*>(@=$3@>),
+                parameter);
+};
+
+
 @q * (1) bool_point_vector expression.@>
 @* \§bool-point vector expression>.
 
