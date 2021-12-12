@@ -1,10 +1,176 @@
+%% ctemp.ldf
+
+verbatim_metapost "prologues := 3; verbatimtex \font\large=cmr12 etex;";
+
+focus f;
 point p[];
 path q;
 
+numeric side_length;
+
+side_length := 4;
+
+set f with_position (0, 10, -10) 
+   with_direction (0, 10, 10) with_distance 10; 
+
+pickup pencircle scaled (.5mm, .5mm, .5mm);
+
+p0 := (-side_length, 0, 0);
+p1 := (side_length, 0, 0);
+p2 := (side_length, 0, 2side_length);
+p3 := (-side_length, 0, 2side_length);
+
+q :=  p0 -- p1 -- p2 -- p3 -- cycle;
+
+p4 := mediate(p0, p1);
+p5 := mediate(p1, p2);
+p6 := mediate(p2, p3);
+p7 := mediate(p3, p0);
+
+p8  := mediate(p0, p4);
+p9  := mediate(p4, p1);
+p10 := mediate(p1, p5);
+p11 := mediate(p5, p2);
+
+p12 := mediate(p2, p6);
+p13 := mediate(p6, p3);
+p14 := mediate(p3, p7);
+p15 := mediate(p7, p0);
+p16 := mediate(p0, p10, .25);
+p17 := mediate(p1, p15, .25);
+p18 := mediate(p1, p12, .25);
+p19 := mediate(p2, p9, .25);
+p20 := mediate(p2, p14, .25);
+p21 := mediate(p3, p11, .25);
+p22 := mediate(p3, p8, .25);
+p23 := mediate(p0, p13, .25);
+
+picture v[];
+
+beginfig(0);
+  draw q;
+  dotlabel.lft("$p_0$", p0);
+  dotlabel.rt("$p_1$", p1);
+  dotlabel.rt("$p_2$", p2);
+  dotlabel.lft("$p_3$", p3);
+  dotlabel.bot("$p_4$", p4);
+  dotlabel.rt("$p_5$", p5);
+  dotlabel.top("$p_6$", p6);
+  dotlabel.lft("$p_7$", p7);
+  dotlabel.bot("$p_8$", p8);
+  dotlabel.bot("$p_9$", p9);
+  dotlabel.rt("$p_{10}$", p10);
+  dotlabel.lrt("$p_{11}$", p11);
+  dotlabel.top("$p_{12}$", p12);
+  dotlabel.top("$p_{13}$", p13);
+  dotlabel.lft("$p_{14}$", p14);
+  dotlabel.lft("$p_{15}$", p15);
+
+  pickup pencircle scaled (.25mm, .25mm, .25mm);
+  draw p15 -- p10;
+  draw p4 -- p6;
+  draw p7 -- p5;
+  draw p14 -- p11;
+  draw p8 -- p13;
+  draw p9 -- p12;
+  draw p0 -- p13;
+  draw p3 -- p8;
+  draw p0 -- p10;
+  draw p15 -- p1;
+  draw p9 -- p2;
+  draw p1 -- p12;
+  draw p14 -- p2;
+  draw p11 -- p3;
+
+  draw p7 .. p23 .. p16 .. p4 .. p17 .. p18 .. p5 .. p19 .. p20 .. p6 .. p21 .. p22 .. cycle
+    with_color red with_pen pencircle scaled (.25mm, .25mm, .25mm) on_picture v1;
+
+  circle c;
+
+  c := (unit_circle scaled (side_length, 0, side_length)) shifted (0, 0, side_length);
+
+  draw c with_color violet with_pen pencircle scaled (.5mm, .5mm, .5mm) on_picture v2;
+
+  pen dot_pen;
+  dot_pen := pencircle scaled (1.25mm, 1.25mm, 1.25mm);
+
+  drawdot p4 with_pen dot_pen with_color blue on_picture v3;
+  drawdot p5 with_pen dot_pen with_color blue on_picture v3;
+  drawdot p6 with_pen dot_pen with_color blue on_picture v3;
+  drawdot p7 with_pen dot_pen with_color blue on_picture v3;
+  
+  drawdot p16 with_pen dot_pen with_color blue on_picture v3;
+  label.urt("$p_{16}$", p16 shifted (0, 0, 2pt)) on_picture v3;
+
+  drawdot p17 with_pen dot_pen with_color blue on_picture v3;
+  label.rt("$p_{17}$", p17 shifted (4pt, 0, 2pt)) on_picture v3;
+
+  drawdot p18 with_pen dot_pen with_color blue on_picture v3;
+  label.ulft("$p_{18}$", p18 shifted (0pt, 0, 0pt)) on_picture v3;
+
+  drawdot p19 with_pen dot_pen with_color blue on_picture v3;
+  label.llft("$p_{19}$", p19 shifted (0pt, 0, 0pt)) on_picture v3;
+
+  drawdot p20 with_pen dot_pen with_color blue on_picture v3;
+  label.rt("$p_{20}$", p20 shifted (0pt, 0, 0pt)) on_picture v3;
+
+  drawdot p21 with_pen dot_pen with_color blue on_picture v3;
+  label.lft("$p_{21}$", p21 shifted (0pt, 0, 0pt)) on_picture v3;
+
+  drawdot p22 with_pen dot_pen with_color blue on_picture v3;
+  label.lrt("$p_{22}$", p22 shifted (0pt, 0, 0pt)) on_picture v3;
+
+  drawdot p23 with_pen dot_pen with_color blue on_picture v3;
+  label.urt("$p_{23}$", p23 shifted (0pt, 0, 0pt)) on_picture v3;
+
+  label.lft("(-" & decimal side_length & ", 0, 0)", p0 shifted (-.5cm, 0)) on_picture v4;
+  label.rt("(" & decimal side_length & ", 0, 0)", p1 shifted (.5cm, 0)) on_picture v4;
+  label.rt("(" & decimal side_length & ", 0, " & decimal 2side_length & ")",
+      p2 shifted (.5cm, 0)) on_picture v4;
+  label.lft("(-" & decimal side_length & ", 0, " & decimal 2side_length & ")",
+      p3 shifted (-.5cm, 0)) on_picture v4;
+ 
+  v0 := current_picture;
+
+  current_picture += v1;
+  current_picture += v3;
+  current_picture += v4;
+
+  label("\setbox0=\hbox{Parallel Projection onto X-Z Plane}" &
+        "\vtop{\hbox to \wd0{\hfil Fig.~1\hfil}\vskip.125cm\box0\hbox{Path Through Points}}",
+      p4 shifted (0, 0, -1.5cm));
+
+endfig with_projection parallel_x_z no_sort;
 
 beginfig(1);
-  draw (-3, 0, 0) -- (3, 0, 0) -- (3, 0, 6) -- (-3, 0, 6) -- cycle;
-endfig with_projection parallel_x_z;
+  current_picture += v0;
+  current_picture += v1;
+  current_picture += v3;
+  label("\setbox0=\hbox{Distance to Picture Plane:  10}" &
+        "\vtop{\hbox to \wd0{\hfil Fig.~2\hfil}\vskip.125cm\hbox{Perspective Projection}\hbox{Position of Focus:  (0, 10, -10)}" &
+        "\hbox{Direction of View:  (0, 10, 10)}\box0\hbox{Path Through Points}}",
+      p4 shifted (0, 0, -2cm));
+endfig with_focus f no_sort;
+
+beginfig(2);
+  current_picture += v0;
+  current_picture += v2;
+  current_picture += v3;
+  current_picture += v4;
+  label("\setbox0=\hbox{Parallel Projection onto X-Z Plane}" &
+        "\vtop{\hbox to \wd0{\hfil Fig.~3\hfil}\vskip.125cm\box0\hbox{Circle}}",
+      p4 shifted (0, 0, -1.5cm));
+endfig with_projection parallel_x_z no_sort;
+
+beginfig(3);
+  current_picture += v0;
+  current_picture += v2;
+  current_picture += v3;
+  label("\setbox0=\hbox{Distance to Picture Plane:  10}" &
+        "\vtop{\hbox to \wd0{\hfil Fig.~4\hfil}\vskip.125cm\hbox{Perspective Projection}\hbox{Position of Focus:  (0, 10, -10)}" &
+        "\hbox{Direction of View:  (0, 10, 10)}\box0\hbox{Circle}}",
+      p4 shifted (0, 0, -2cm));
+endfig with_focus f no_sort;
 
 verbatim_metapost "end;";
 end;

@@ -1,42 +1,20 @@
-beginfig(0);
+point_vector pv;
 
-  color cerulean_blue;
-  cerulean_blue := .4;
+pv += (1, 1, 1);
+pv += (2, 2, 2);
 
-  message "Before:  c0:";
-  show c0;
+rotate pv (10, 10, 10);
 
-  set_name cerulean_blue to "cerulean blue";
+message "pv:";
+show pv;
 
-  message "After:  cerulean_blue:";
-  show cerulean_blue;
-
-  show capitalize "cerulean blue";
-  
-endfig with_projection parallel_x_z;
-
-verbatim_metapost "end;";
 
 end;
 
+point p;
 
-%% ** (2) End of 3DLDF code.
+p := (1,1,1);
 
-%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
-%%       GNU Emacs editor.  The local variable list is not evaluated when an 
-%%       indirect buffer is visited, so it's necessary to evaluate the       
-%%       following s-expression in order to use the facilities normally      
-%%       accessed via the local variables list.                              
-%%       \initials{LDF 2004.02.12}.                                          
+%rotate p by (10, 10, 10);
 
-%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80))    
-
-%% * (1) Local variables for Emacs.
-
-%% Local Variables:
-%% mode:Metapost
-%% eval:(outline-minor-mode t)
-%% eval:(read-abbrev-file abbrev-file-name)
-%% abbrev-mode:t
-%% outline-regexp:"%% [*\f]+"
-%% End:
+end;

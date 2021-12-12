@@ -48,9 +48,9 @@
 #### Laurence.Finston@gmx.de 
 
 
-## * Top.
+## * (1) Top.
 
-# ** Variables.
+# ** (2) Variables.
 
 #### Automatic Variables.  For more, see Section 10.5.3, "Automatic Variables"
 #### of the Make info manual.
@@ -60,10 +60,6 @@
 #### $<:  First prerequisite
 #### $^:  The names of all the prerequisites, with spaces between them.
 #### $*:  The stem with which an implicit rule matches
-
-## * (1) Top.
-
-# ** (2) Variables.
 
 # dummy$(EXEEXT) 
 
@@ -1695,11 +1691,23 @@ color_samples_a3.pdf: color_samples_a3.dvi
 atemp.mp: atemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
-atemp0.eps: atemp.mp
+atemp0.eps atemp1.eps: atemp.mp
 	mpost -numbersystem "double" atemp.mp
 
-btemp0.eps: btemp.mp
-	mpost -numbersystem "double" btemp.mp
+ctemp.dvi: ctemp.0 ctemp.1 ctemp.txt
+	tex ctemp.txt
+
+ctemp.ps: ctemp.dvi
+	dvips -o ctemp.ps ctemp.dvi
+
+ctemp.pdf: ctemp.dvi
+	dvipdfmx ctemp.dvi
+
+ctemp.0 ctemp.1: ctemp.mp
+	mpost -numbersystem "double" ctemp.mp
+
+ctemp.mp: ctemp.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) ctemp.ldf
 
 .PHONY: purge-s
 

@@ -68,6 +68,8 @@ in functions caused compilation to fail on a user's system using GCC 3.4.3.
 #include "pspglb.h++"
 #include "io.h++"
 
+class Transform;
+
 @q * (1) Template |struct Pointer_Vector|.@>
 @*1 Template {\bf struct Pointer\_Vector}.  
 
@@ -1283,7 +1285,7 @@ Pointer_Vector<C, D>::show(string s, Scanner_Node scanner_node) const
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -1349,6 +1351,22 @@ Pointer_Vector<C, D>::show(string s, Scanner_Node scanner_node) const
    return 0;
 
 } /* End of |Pointer_Vector<C, D>::show| definition.  */
+
+@q *** (3) Multiplication with assignment operator (|operator*=(Transform &)|).@>
+
+@*2 Multiplication with assignment operator.
+\initials{LDF 2021.12.12.}
+
+\LOG
+\initials{LDF 2021.12.12.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Pointer_Vector| functions@>=
+Transform
+operator*=(Transform &t);
 
 @q *** (3) Specializations.@>
 @*2 Specializations.
@@ -1418,6 +1436,7 @@ get_conic_section_lattice(Scanner_Node scanner_node = 0,
                           bool do_test = false,
                           bool do_transform = false,
                           Transform* t = 0);
+
 
 @q ****** (6)@> 
 

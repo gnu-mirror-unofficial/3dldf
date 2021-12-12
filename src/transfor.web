@@ -998,7 +998,7 @@ Added optional arguments |Point *axis_pt_2| and |char axis_2|.
 Transform
 align_with_axis(Point p0, Point p1, char axis = 'z', /* Default is the z-axis. */
                 Point* axis_2_pt = 0, 
-                char axis_2 = 'x')                   /* Default of |char axis_2| is the x-axis. */
+                char axis_2 = 'x');                  /* Default of |char axis_2| is the x-axis. */
 
 @q ** (2) Matrix multiplication.@>
 @*1 Matrix multiplication.
@@ -1479,6 +1479,77 @@ Transform::transpose(void) const
 
 }  /* End of |Transform::transpose(void) const| definition.  */
 
+@q *** (3) Multiplication with assignment operator (|operator*=(Transform &)|).@>
+
+@*2 Multiplication with assignment operator.
+\initials{LDF 2021.12.12.}
+
+\LOG
+\initials{LDF 2021.12.12.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) Declaration.@> 
+
+@<Declare |Pointer_Vector| functions@>=
+Transform
+operator*=(Transform &t);
+
+@q **** (4) Definition.@> 
+@
+@<Define |Pointer_Vector| functions@>=
+template <class C, class D>
+Transform
+Pointer_Vector<C, D>::operator*=(Transform &t)
+{
+@q ***** (5) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   using namespace Scan_Parse;
+
+@q ***** (5) @>
+@
+@<Define |Pointer_Vector| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr_strm << "Entering `Pointer_Vector<C, D>::operator*=(Transform &)' (non-specialization)." 
+                 << endl;
+
+       log_message(cerr_strm); 
+       cerr << cerr_strm.str() << endl;
+       cerr_strm.str("");       
+
+       t.show("t:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5)@> 
+@
+@<Define |Pointer_Vector| functions@>=
+
+   for (typename vector<C*>::iterator iter = v.begin();
+        iter != v.end();
+        iter++)
+   {
+         if (*iter != static_cast<C*>(0))
+            **iter *= t;
+   }  /* |for|  */
+
+   return t;
+
+} /* End of |Pointer_Vector<C, D>::operator*=(Transform &)| definition.  */
+
 @q * (1) Global variables. @>
 @* Global variables.
 @<Global variables@>=
@@ -1510,6 +1581,7 @@ extern const Transform IDENTITY_TRANSFORM;
 @<Global variables@>@;
 @<Global constants@>@;
 @<Define |Transform| functions@>@;
+@<Define |Pointer_Vector| functions@>@;
 
 @ This is what's written to \filename{transfor.h}.
 @(transfor.h@>=
@@ -1518,7 +1590,9 @@ extern const Transform IDENTITY_TRANSFORM;
 @<Define |class Transform|@>@;
 @<Declare non-member template functions for |Transform|@>;
 @<Declarations for the header file@>@;
+@<Define |Pointer_Vector| functions@>@;
 #endif
+
 
 @q Local Variables: @>
 @q mode:CWEB @>

@@ -7444,27 +7444,27 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-if (entry->is_shape())
-        {
+   if (entry->is_shape())
+   {
 
           Shape* s = static_cast<Shape*>(entry->object);
           
           *s *= *t;
 
 #if DEBUG_COMPILE
-   if (DEBUG)
-     {
-          cerr_mutex.lock(); 
-          cerr << thread_name 
-               << "In `Scan_Parse::transformation_command_func':";
-          s->show("s:");
-          cerr << "Type <RETURN> to continue. ";
-          getchar(); 
-          cerr_mutex.unlock(); 
-     }
+          if (DEBUG)
+            {
+                 cerr_mutex.lock(); 
+                 cerr << thread_name 
+                      << "In `Scan_Parse::transformation_command_func':";
+                 s->show("s:");
+                 cerr << "Type <RETURN> to continue. ";
+                 getchar(); 
+                 cerr_mutex.unlock(); 
+            }    
 #endif /* |DEBUG_COMPILE|  */@;
 
-} /* |if (entry->is_shape())|  */
+   } /* |if (entry->is_shape())|  */
 
 @q **** (4) Handle other types.@> 
 @ Handle other types..
@@ -7529,6 +7529,25 @@ Added code for handling |Pictures|.
          status = p->rotate_label_positions(real_vector);
 
     } /* |else if (entry->type == TRANSFORM)|  */
+
+
+@q ***** (5)@>  
+@
+\LOG
+\initials{LDF 2021.12.12.}
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+  else if (entry->type == POINT_VECTOR)
+  {
+
+    Pointer_Vector<Point> *p = static_cast<Pointer_Vector<Point>*>(entry->object); 
+
+    *p *= *t;
+
+  } /* |else if (entry->type == POINT_VECTOR)|  */
 
 @q ***** (5)@>  
 @

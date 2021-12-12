@@ -195,7 +195,7 @@ surface hiding.
 
 class Point: protected Shape
 {
-  friend Transform Transform::align_with_axis(Point, Point, char);
+  friend Transform Transform::align_with_axis(Point, Point, char, Point*, char);
   friend Transform Picture::operator*=(const Transform& t);
   friend int Scanner_Type::show_database(void);
   friend int yyparse(yyscan_t);
@@ -4076,7 +4076,7 @@ the same way, so that the relationship between them remains constant.
 @<Define |Transform| functions@>= 
 
   if(p0 != ORIGIN)
-    {
+  {
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
@@ -4089,9 +4089,9 @@ the same way, so that the relationship between them remains constant.
       p1 *= t;
       p1.apply_transform();
       p0.apply_transform();
-    }
+  }
 
-   @<Normalize point@>  /* \initials{LDF 2002.10.23.}  Transform the |Point| so
+  @<Normalize point@>  /* \initials{LDF 2002.10.23.}  Transform the |Point| so
                           that it's x, y, and z coordinates are all
                           positive.  See below for the explanation.  */
 #if DEBUG_COMPILE
@@ -4127,7 +4127,7 @@ will be reentrant.
 @<Define |Transform| functions@>= 
 
   if (axis == 'x' || axis == 'y')
-    {
+  {
       Point pt_on_x_axis;
       
       pt_on_x_axis.set(1, 0, 0);
@@ -4161,14 +4161,14 @@ will be reentrant.
         p1.show("p1 after rotation to x-axis");
 #endif /* |DEBUG_COMPILE|  */@;
 
-    }
+  }  /* |if| */
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the z-axis, rotate |p1| onto  
 the y-z plane and then to the z-axis. 
 @<Define |Transform| functions@>= 
 
   else if (axis == 'z')
-    {
+  {
 
       Point pt_on_z_axis;
       
@@ -4253,7 +4253,8 @@ else
       if (DEBUG) 
         p1.show("p1 after rotation to z-axis");
 #endif /* |DEBUG_COMPILE|  */@;
-    }
+
+  }  /* |else if (axis == 'z')| */
 
 @ \initials{LDF 2002.10.23.}  If we're aligning with the y-axis, |p1| must be
 rotated from the x-axis (where it is now) around the z-axis by
@@ -4261,26 +4262,98 @@ $90^\circ$.  Then it will be on the y-axis.
 @<Define |Transform| functions@>= 
 
   if (axis == 'y')
-    {
+  {
       t *= p1.rotate(0, 0, 90);
 
 #if DEBUG_COMPILE
       if (DEBUG) 
         p1.show("p1 after rotation to y-axis");
-    }
+  }
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
   if (DEBUG)
-    {
+  {
       cerr << "p1.magnitude() == " << p1.magnitude() << endl;
       t.show("t at end of align_with_axis()");
-    }
+  }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  *this *= t;   
+@q ***** (5) Rotate |*axis_2_pt| onto the the axis designated by |char axis_2| (conditionally).  @>
+
+@ Rotate |*axis_2_pt| onto the the axis designated by |char axis_2| (conditionally).  
+\initials{LDF 2021.12.01.}
+
+@<Define |Transform| functions@>=
+
+#if 0 
+  DEBUG = true;
+#endif 
+
+  if (axis_2_pt != 0)
+  {
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+         cerr << "In `Transform::align_with_axis':  `axis_2_pt' is non-NULL." 
+              << endl;
+     }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+     *axis_2_pt *= t;
+
+     Transform u;
+
+     Point axis_2_unit_vector;
+
+     if (tolower(axis_2) == 'x')
+       axis_2_unit_vector.set(1, 0, 0);
+     else if (tolower(axis_2) == 'y')
+       axis_2_unit_vector.set(0, 1, 0);
+     else if (tolower(axis_2) == 'z')
+       axis_2_unit_vector.set(0, 0, 1);
+     else
+     {
+        cerr << "WARNING!  In `Transform::align_with_axis':  Invalid value for `char axis_2':"
+             << endl 
+             << "`axis_2' == " << axis_2 << endl
+             << "Not rotating `axis_2_pt' to axis.  Continuing."
+             << endl;
+
+        goto END_ALIGN_WITH_AXIS;
+     }
+
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+         axis_2_pt->show("*axis_2_pt:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+     }  
+#endif /* |DEBUG_COMPILE|  */@;      
+
+  }  /* |if (axis_2_pt != 0)| */
 
 @q ***** (5) @>
+@
+@<Define |Transform| functions@>=
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+         cerr << "In `Transform::align_with_axis':  `axis_2_pt' is NULL.  Not rotating point to main axis." 
+              << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Transform| functions@>=
+
+END_ALIGN_WITH_AXIS:
+
+  *this *= t;   
 
 #if DEBUG_COMPILE
   if (DEBUG)

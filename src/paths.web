@@ -13241,6 +13241,9 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
    Path q0;
    Path q1;
 
+   Point z_axis_pt_positive(0, 0, 1);
+   Point z_axis_pt_negative(0, 0, -1);
+
    Transform t0;
    Transform t1;
 
@@ -13276,6 +13279,21 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    normal = get_normal();   
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "normal == z_axis_pt_positive == " << (normal == z_axis_pt_positive) 
+           << endl
+           << "normal == z_axis_pt_negative == " << (normal == z_axis_pt_negative) 
+           << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 @
@@ -13353,19 +13371,50 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 @
 @<Define |Path| functions@>=
 
-  /* !!START HERE:  LDF 2021.11.24.  |align_with_axis| doesn't seem to work properly.  */ 
-
   normal.shift(p0);
 
-  t0.align_with_axis(p0, normal, 'z');
+  if (x_axis_point)
+  {
+     x_axis_point->show("*x_axis_point before transformation:");
+  }
+
+  t0.align_with_axis(p0, normal, 'z', x_axis_point, 'x');
+
+  if (x_axis_point)
+  {
+     x_axis_point->show("*x_axis_point after transformation:"); 
+
+cerr << "YYY Enter <RETURN> to continue: ";
+getchar(); 
+
+  }
+
+
+
 
   q1 = *this;
 
   q1 *= t0;
 
+  cerr << "In `Path::get_direction':  After call to `Transform::align_with_axis'." << endl;
+
+
+
 #if 1 
   q1.show("q1 after transformation (should lie in x-y plane):");
 #endif 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+
+
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
   stringstream s;
 
