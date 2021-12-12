@@ -2398,6 +2398,26 @@ Added this rule.
 
 };
 
+@q **** (4) path_expression --> LEFT_PARENTHESIS PATH_DECLARATOR RIGHT_PARENTHESIS triangle_expression @>   
+
+@*3 \§path expression> $\longrightarrow$ 
+
+\.{LEFT\_PARENTHESIS} \.{PATH\_DECLARATOR} \.{RIGHT\_PARENTHESIS} triangle_expression
+\§triangle expression>.
+
+\LOG
+\initials{LDF 2021.12.12.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+ 
+@=path_expression: LEFT_PARENTHESIS PATH_DECLARATOR RIGHT_PARENTHESIS triangle_expression@>
+{
+  Path *p = new Path;
+  @=$$@> = static_cast<void*>(p); 
+};
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
