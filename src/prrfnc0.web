@@ -6757,7 +6757,7 @@ Scan_Parse::path_path_intersection_func(Path* p,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -6765,6 +6765,10 @@ Scan_Parse::path_path_intersection_func(Path* p,
    bool error_stop_value   = true;
    bool warning_stop_value = true;
    string thread_name      = "";
+
+   Pointer_Vector<Bool_Point> *bpv = new Pointer_Vector<Bool_Point>;
+   
+   Bool_Point bp;
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
@@ -6779,15 +6783,15 @@ Scan_Parse::path_path_intersection_func(Path* p,
   
 #if DEBUG_COMPILE
    if (DEBUG)
-      {
-          cerr_strm << thread_name 
-                    << "Entering `Scan_Parse::path_path_intersection_func'.";
+   {
+       cerr_strm << thread_name 
+                 << "Entering `Scan_Parse::path_path_intersection_func'.";
 
-          log_message(cerr_strm);
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
 
-      }  /* |if (DEBUG)|  */
+   }  /* |if (DEBUG)|  */
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -6799,45 +6803,46 @@ Scan_Parse::path_path_intersection_func(Path* p,
 @<Define parser rule functions@>=
 
    if (!(p && q))
-      {
-          cerr_strm << thread_name << "ERROR!  "
-                    << "In `Scan_Parse::path_path_intersection_func':"
-                    << endl 
-                    << "`Path* p' and/or `Path* q' is null."
-                    << endl
-                    << "Exiting function unsuccessfully with return value 0.";
+   {
+       cerr_strm << thread_name << "ERROR!  "
+                 << "In `Scan_Parse::path_path_intersection_func':"
+                 << endl 
+                 << "`Path* p' and/or `Path* q' is null."
+                 << endl
+                 << "Exiting function unsuccessfully with return value 0.";
 
-          log_message(cerr_strm);
-          cerr_message(cerr_strm, error_stop_value);
-          cerr_strm.str("");
+       log_message(cerr_strm);
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
 
-          delete p;
-          delete q;
+       delete p;
+       delete q;
 
-          p = 0;
-          q = 0;
+       p = 0;
+       q = 0;
 
-          return 0;
+       bp   = INVALID_POINT;
+       bp.b = false;
+       *bpv += new Bool_Point(bp);
 
-      }  /* |if (!(p && q))|  */
+       return static_cast<void*>(bpv);
 
-@q **** (4) Error handling:  At least one of the |Paths| is non-planar and/or non-polygonal.@> 
 
-@ Error handling:  At least one of the |Paths| is non-planar and/or non-polygonal. 
+   }  /* |if (!(p && q))|  */
+
+@q **** (4) Error handling:  At least one of the |Paths| is non-linear or non-polygonal.@> 
+
+@ Error handling:  At least one of the |Paths| is non-linear or non-polygonal. 
 \initials{LDF 2021.12.12.}
 
 @<Define parser rule functions@>=
 
-#if 0 
-
-/* !!START HERE:  LDF 2021.12.12.  */ 
-
-   if (!q->is_linear())
-      {
+     if (!(p->is_linear() || p->is_polygonal()))
+     {
           cerr_strm << thread_name << "ERROR!  "
                     << "In `Scan_Parse::path_path_intersection_func':"
                     << endl 
-                    << "`Path' is non-linear.  Can't handle this case yet."
+                    << "`Path p' is not linear or polygonal.  Can't handle this case yet."
                     << endl
                     << "Exiting function unsuccessfully with return value 0.";
 
@@ -6851,19 +6856,151 @@ Scan_Parse::path_path_intersection_func(Path* p,
           p = 0; 
           q = 0;
 
-          return 0;
+          bp.pt = INVALID_POINT;
+          bp.b  = false;
+          *bpv += new Bool_Point(bp);
 
-      }  /* |if (!q->is_linear())|  */
-#endif 
+          return  static_cast<void*>(bpv);
+
+     }  /* |if (!(p->is_linear() || p->is_polygonal()))| */
+
+#if DEBUG_COMPILE
+     else if (DEBUG)
+     { 
+         cerr_strm << thread_name << "In `Scan_Parse::path_path_intersection_func':"
+                   << endl 
+                   << "`Path *p' is linear or polygonal."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4)@> 
 @
 @<Define parser rule functions@>=
 
-#if 0 
-   Pointer_Vector<Bool_Point>* bpv = p->intersection_points(q, scanner_node);
-#endif     
+     if (!(q->is_linear() || q->is_polygonal()))
+     {
+          cerr_strm << thread_name << "ERROR!  "
+                    << "In `Scan_Parse::path_path_intersection_func':"
+                    << endl 
+                    << "`Path q' is not linear or polygonal.  Can't handle this case yet."
+                    << endl
+                    << "Exiting function unsuccessfully with return value 0.";
 
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
+
+          delete p;
+          delete q;
+
+          p = 0; 
+          q = 0;
+
+          bp.pt = INVALID_POINT;
+          bp.b  = false;
+          *bpv += new Bool_Point(bp);
+
+          return  static_cast<void*>(bpv);
+
+     }  /* |if (!(q->is_linear() || q->is_polygonal()))| */
+
+#if DEBUG_COMPILE
+     else if (DEBUG)
+     { 
+         cerr_strm << thread_name << "In `Scan_Parse::path_path_intersection_func':"
+                   << endl 
+                   << "`Path *q' is linear or polygonal."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4)@> 
+@
+@<Define parser rule functions@>=
+
+/* !!START HERE:  LDF 2021.12.12.  Break paths into linear paths and find intersections.  */ 
+
+    vector<Path> p_sub;
+    vector<Path> q_sub;
+    Path P;
+    Path Q;
+
+#if 0 
+    cerr << "p->size() == " << p->size() << endl;
+    cerr << "q->size() == " << q->size() << endl;
+#endif 
+
+    int i = 0;
+    int j = 0;
+
+    for (i = 0; i < p->size(); ++i)
+    {
+       j = i + 1;
+
+       if (j == p->size())
+       {
+          if (p->is_linear())
+             break;
+          else
+             j = 0;
+       }
+
+       P.set(p->get_point(i), p->get_point(j));
+       p_sub.push_back(P);
+    }
+
+    j = 0;
+
+    for (i = 0; i < q->size(); ++i)
+    {
+       j = i + 1;
+
+       if (j == q->size())
+       {
+          if (q->is_linear())
+             break;
+          else
+             j = 0;
+       }
+
+       Q.set(q->get_point(i), q->get_point(j));
+       q_sub.push_back(Q);
+    }
+
+#if 0 
+    cerr << "p_sub.size() == " << p_sub.size() << endl;
+    cerr << "q_sub.size() == " << q_sub.size() << endl;
+#endif 
+
+    for (vector<Path>::iterator p_iter = p_sub.begin(); p_iter != p_sub.end(); ++p_iter)
+    {
+       for (vector<Path>::iterator q_iter = q_sub.begin(); q_iter != q_sub.end(); ++q_iter)
+       {
+           bp = p_iter->intersection_point(*q_iter);
+           *bpv += new Bool_Point(bp);
+       }
+    }
+
+#if 0
+    bpv->show("*bpv:");
+#endif 
+
+
+
+@q **** (4)@> 
+@
+@<Define parser rule functions@>=
 
    delete p;
    delete q;
@@ -6873,13 +7010,24 @@ Scan_Parse::path_path_intersection_func(Path* p,
 
 @q **** (4)@> 
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << thread_name 
+                 << "Exiting `Scan_Parse::path_path_intersection_func' successfully with return value "
+                 << "`static_cast<void*>(bpv)'." << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
    return static_cast<void*>(bpv);
 
 }  /* End of |Scan_Parse::path_path_intersection_func| definition.  */
-
-
-
-
 
 @q ** (2) Save to database function. @>
 @*1 Save to database function.
