@@ -2,18 +2,30 @@ verbatim_metapost "prologues := 3;outputtemplate := \"%j%c.eps\";";
 
 bool_point_vector bpv;
 
-path q[];
+triangle q[];
 
-q0 := (origin -- (10, 0) -- (5, 10) -- cycle) shifted (-5, -5);
+set q0 with_points (origin, (10, 0), (5, 10));
+shift q0 (-5, -5);
+
+
+
 q1 := q0 rotated (0, 0, 50);
+
+
 
 draw (-8, -8) -- (8, -8) -- (8, 8) -- (-8, 8) -- cycle;
 
 
-bpv := q0 intersection_points q1;
+
+%% This works.  LDF 2021.12.12.
+%%
+%% bpv := ((path) q0) intersection_points ((path) q1);
+
 
 message "size bpv:";
 show size bpv;
+
+end;
 
 beginfig(1);
   draw q0 with_color blue;
