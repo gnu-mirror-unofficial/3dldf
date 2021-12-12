@@ -6736,6 +6736,151 @@ Changed |Pointer_Vector<Point>* pv| to |Pointer_Vector<Point>* bpv|.
 
 }  /* End of |Scan_Parse::polyhedron_path_intersection_func| definition.  */
 
+@q ** (2) Intersection of a |Path| and a linear |Path|.@> 
+@*1 Intersection of a {\bf Path} and a linear {\bf Path}.
+\initials{LDF 2021.12.12.}
+
+\LOG
+\initials{LDF 2021.12.12.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Definition.@> 
+
+@<Define parser rule functions@>=
+
+void*
+Scan_Parse::path_path_intersection_func(Path* p,
+                                        Path* q,
+                                        void* parameter)
+{
+@q **** (4) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q **** (4).@>
+  
+#if DEBUG_COMPILE
+   if (DEBUG)
+      {
+          cerr_strm << thread_name 
+                    << "Entering `Scan_Parse::path_path_intersection_func'.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+      }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) Error handling:  |Path* p| and/or |Path* q| is null.@> 
+
+@ Error handling:  |Path* p| and/or |Path* q| is null.
+\initials{LDF 2021.12.12.}
+
+@<Define parser rule functions@>=
+
+   if (!(p && q))
+      {
+          cerr_strm << thread_name << "ERROR!  "
+                    << "In `Scan_Parse::path_path_intersection_func':"
+                    << endl 
+                    << "`Path* p' and/or `Path* q' is null."
+                    << endl
+                    << "Exiting function unsuccessfully with return value 0.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
+
+          delete p;
+          delete q;
+
+          p = 0;
+          q = 0;
+
+          return 0;
+
+      }  /* |if (!(p && q))|  */
+
+@q **** (4) Error handling:  At least one of the |Paths| is non-planar and/or non-polygonal.@> 
+
+@ Error handling:  At least one of the |Paths| is non-planar and/or non-polygonal. 
+\initials{LDF 2021.12.12.}
+
+@<Define parser rule functions@>=
+
+#if 0 
+
+/* !!START HERE:  LDF 2021.12.12.  */ 
+
+   if (!q->is_linear())
+      {
+          cerr_strm << thread_name << "ERROR!  "
+                    << "In `Scan_Parse::path_path_intersection_func':"
+                    << endl 
+                    << "`Path' is non-linear.  Can't handle this case yet."
+                    << endl
+                    << "Exiting function unsuccessfully with return value 0.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
+
+          delete p;
+          delete q;
+
+          p = 0; 
+          q = 0;
+
+          return 0;
+
+      }  /* |if (!q->is_linear())|  */
+#endif 
+
+@q **** (4)@> 
+@
+@<Define parser rule functions@>=
+
+#if 0 
+   Pointer_Vector<Bool_Point>* bpv = p->intersection_points(q, scanner_node);
+#endif     
+
+
+   delete p;
+   delete q;
+
+   p = 0;
+   q = 0;
+
+@q **** (4)@> 
+
+   return static_cast<void*>(bpv);
+
+}  /* End of |Scan_Parse::path_path_intersection_func| definition.  */
+
+
+
+
+
 @q ** (2) Save to database function. @>
 @*1 Save to database function.
 \initials{LDF 2021.03.25.}
