@@ -2414,8 +2414,7 @@ Added this rule.
  
 @=path_expression: LEFT_PARENTHESIS PATH_DECLARATOR RIGHT_PARENTHESIS triangle_expression@>
 {
-  Path *p = new Path;
-  @=$$@> = static_cast<void*>(p); 
+   @=$$@> = static_cast<Path*>(@=$4@>); 
 };
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
