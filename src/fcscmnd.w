@@ -255,7 +255,7 @@ Added this section.
 \ENDLOG
 
 @q **** (4) command --> ROTATE focus_variable numeric_expression  @> 
-@q **** (4) focus_option_list.                          @>
+@q **** (4) focus_option_list.                                    @>
 
 @*3 \§command> $\longrightarrow$ \.{ROTATE} \§focus variable> 
 \§numeric expression> \§focus option list>.

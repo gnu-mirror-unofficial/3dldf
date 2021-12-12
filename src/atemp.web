@@ -1,466 +1,140 @@
-@q **** (4) command: ROTATE transform_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§transform variable> 
-\§numeric list>.
-\initials{LDF 2007.09.24.}
-
-\LOG
-\initials{LDF 2007.09.24.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE transform_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<void*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE picture_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§picture variable> 
-\§numeric list>.
-\initials{LDF 2007.10.16.}
-
-\LOG
-\initials{LDF 2007.10.16.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE picture_variable numeric_list@>@/
-{
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>),
-                                true);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE point_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§point variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE point_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
-                                false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE point_vector_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§point vector variable> 
-\§numeric list>.
+@q ** (2) Intersection of a |Path| and a linear |Path|.@> 
+@*1 Intersection of a {\bf Path} and a linear {\bf Path}.
 \initials{LDF 2021.12.12.}
 
 \LOG
 \initials{LDF 2021.12.12.}
-Added this rule.
+Added this function.
 \ENDLOG
 
-@<Define rules@>=
-@=command: ROTATE point_vector_variable numeric_list@>@/
+@q *** (3) Definition.@> 
+
+@<Define parser rule functions@>=
+
+void*
+Scan_Parse::path_path_intersection_func(Path* p,
+                                        Path* q,
+                                        void* parameter)
 {
+@q **** (4) Preliminaries.@>   
 
-    @<Common declarations for rules@>@; 
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
 
-    entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+   stringstream cerr_strm;
 
-    Pointer_Vector<Point> *p = static_cast<Pointer_Vector<Point>*>(entry->object);
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
 
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
-                                false);
+   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-    @=$$@> = static_cast<void*>(0);
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
 
-};
+   using namespace Scan_Parse;
 
-@q **** (4) command: ROTATE path_variable numeric_list.@> 
+@q **** (4).@>
+  
+#if DEBUG_COMPILE
+   if (DEBUG)
+      {
+          cerr_strm << thread_name 
+                    << "Entering `Scan_Parse::path_path_intersection_func'.";
 
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§path variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
 
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
+      }  /* |if (DEBUG)|  */
 
-@<Define rules@>=
-@=command: ROTATE path_variable numeric_list@>@/
-{
+#endif /* |DEBUG_COMPILE|  */@; 
 
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
-                                false);
+@q **** (4) Error handling:  |Path* p| and/or |Path* q| is null.@> 
 
-    @=$$@> = static_cast<void*>(0);
+@ Error handling:  |Path* p| and/or |Path* q| is null.
+\initials{LDF 2021.12.12.}
 
-};
+@<Define parser rule functions@>=
 
-@q **** (4) command: ROTATE ellipse_variable numeric_list.@> 
+   if (!(p && q))
+      {
+          cerr_strm << thread_name << "ERROR!  "
+                    << "In `Scan_Parse::path_path_intersection_func':"
+                    << endl 
+                    << "`Path* p' and/or `Path* q' is null."
+                    << endl
+                    << "Exiting function unsuccessfully with return value 0.";
 
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§ellipse variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
 
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
+          delete p;
+          delete q;
 
-@<Define rules@>=
-@=command: ROTATE ellipse_variable numeric_list@>@/
-{
+          p = 0;
+          q = 0;
 
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), 
-                                false);
+          return 0;
 
-    @=$$@> = static_cast<void*>(0);
+      }  /* |if (!(p && q))|  */
 
-};
+@q **** (4) Error handling:  At least one of the |Paths| is non-planar and/or non-polygonal.@> 
 
-@q **** (4) command: ROTATE circle_variable numeric_list.@> 
+@ Error handling:  At least one of the |Paths| is non-planar and/or non-polygonal. 
+\initials{LDF 2021.12.12.}
 
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§circle variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
+@<Define parser rule functions@>=
 
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
+#if 0 
 
-@<Define rules@>=
-@=command: ROTATE circle_variable numeric_list@>@/
-{
+/* !!START HERE:  LDF 2021.12.12.  */ 
 
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
+   if (!q->is_linear())
+      {
+          cerr_strm << thread_name << "ERROR!  "
+                    << "In `Scan_Parse::path_path_intersection_func':"
+                    << endl 
+                    << "`Path' is non-linear.  Can't handle this case yet."
+                    << endl
+                    << "Exiting function unsuccessfully with return value 0.";
 
-    @=$$@> = static_cast<void*>(0);
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
 
-};
+          delete p;
+          delete q;
 
-@q **** (4) command: ROTATE parabola_variable numeric_list.@> 
+          p = 0; 
+          q = 0;
 
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§parabola variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
+          return 0;
 
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
+      }  /* |if (!q->is_linear())|  */
+#endif 
 
-@<Define rules@>=
-@=command: ROTATE parabola_variable numeric_list@>@/
-{
+@q **** (4)@> 
+@
+@<Define parser rule functions@>=
 
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
+#if 0 
+   Pointer_Vector<Bool_Point>* bpv = p->intersection_points(q, scanner_node);
+#endif     
 
-    @=$$@> = static_cast<void*>(0);
 
-};
+   delete p;
+   delete q;
 
-@q **** (4) command: ROTATE hyperbola_variable numeric_list.@> 
+   p = 0;
+   q = 0;
 
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§hyperbola variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
+@q **** (4)@> 
 
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
+   return static_cast<void*>(bpv);
 
-@<Define rules@>=
-@=command: ROTATE hyperbola_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE triangle_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§triangle variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE triangle_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE rectangle_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§rectangle variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE rectangle_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE polygon_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§polygon variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE polygon_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE reg_polygon_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§reg\_polygon variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE reg_polygon_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE cuboid_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§cuboid variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE cuboid_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE polyhedron_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§polyhedron variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE polyhedron_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE sphere_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§sphere variable> 
-\§numeric list>.
-\initials{LDF 2009.09.09.}
-
-\LOG
-\initials{LDF 2009.09.09.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE sphere_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE helix_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§helix variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE helix_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE cone_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§cone variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE cone_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
-@q **** (4) command: ROTATE cylinder_variable numeric_list.@> 
-
-@*3 \§command> $\longrightarrow$ \.{ROTATE} \§cylinder variable> 
-\§numeric list>.
-\initials{LDF 2007.09.26.}
-
-\LOG
-\initials{LDF 2007.09.26.}
-Added this rule.
-\ENDLOG
-
-@<Define rules@>=
-@=command: ROTATE cylinder_variable numeric_list@>@/
-{
-
-    transformation_command_func(static_cast<Scanner_Node>(parameter),
-                                ROTATE,
-                                static_cast<Id_Map_Entry_Node>(@=$2@>),
-                                static_cast<Pointer_Vector<real>*>(@=$3@>), false);
-
-    @=$$@> = static_cast<void*>(0);
-
-};
-
+}  /* End of |Scan_Parse::path_path_intersection_func| definition.  */

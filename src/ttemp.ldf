@@ -1,20 +1,32 @@
-point_vector pv;
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%c.eps\";";
 
-pv += (1, 1, 1);
-pv += (2, 2, 2);
+bool_point_vector bpv;
 
-rotate pv (10, 10, 10);
+path q[];
 
-message "pv:";
-show pv;
+q0 := (origin -- (10, 0) -- (5, 10) -- cycle) shifted (-5, -5);
+q1 := q0 rotated (0, 0, 50);
+
+draw (-8, -8) -- (8, -8) -- (8, 8) -- (-8, 8) -- cycle;
+
+
+bpv := q0 intersection_points q1;
+
+message "size bpv:";
+show size bpv;
+
+beginfig(1);
+  draw q0 with_color blue;
+  draw q1 with_color red;
+
+  for i = 0 upto (size bpv) - 1:
+    dotlabel_if.top(decimal i, bpv[i]);
+  endfor;
+  
+endfig with_projection parallel_x_y;
+
+verbatim_metapost "end;";
 
 
 end;
 
-point p;
-
-p := (1,1,1);
-
-%rotate p by (10, 10, 10);
-
-end;
