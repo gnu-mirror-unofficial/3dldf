@@ -695,23 +695,23 @@ Added this type declaration.
 @=%type <int_value> basic_transformation_command@>
 
 
-@q ** (2) basic_transformation_command --> ROTATE@> @>
-@q @@*3 \§basic transformation command> --> \.{ROTATE}. @>
-@q \initials{LDF 2021.12.12.} @>
+@q ** (2) basic_transformation_command --> ROTATE@> 
+@*3 \§basic transformation command> --> \.{ROTATE}. 
+\initials{LDF 2021.12.12.} 
 
-@q \LOG @>
-@q \initials{LDF 2021.12.12.} @>
-@q Added this rule. @>
-@q \ENDLOG @>
+\LOG 
+\initials{LDF 2021.12.12.} 
+Added this rule. 
+\ENDLOG 
 
-@q @@<Define rules@@>= @>
+@<Define rules@>= 
 
-@q @@=basic_transformation_command: ROTATE@@> @>
-@q { @>
+@=basic_transformation_command: ROTATE@> 
+{ 
 
-@q   @@=$$@@> = ROTATE; @>
+  @=$$@> = ROTATE; 
 
-@q }; @>
+};
 
 @q ** (2) basic_transformation_command --> SCALE@>
 @*3 \§basic transformation command> --> \.{SCALE}.
