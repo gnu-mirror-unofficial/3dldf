@@ -6181,6 +6181,13 @@ Scan_Parse::polyhedron_path_intersection_func(Polyhedron* p,
                                               Path* q,
                                               void* parameter);  
 
+
+friend
+void*
+Scan_Parse::path_path_intersection_func(Path* p,
+                                        Path* q,
+                                        void* parameter);  
+
 friend
 int
 Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug);
