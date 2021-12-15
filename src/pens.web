@@ -480,32 +480,31 @@ operator<<(ostream& o, Pen& p)
 \initials{LDF 2005.06.24.}
 @:BUG FIX@> BUG FIX:  Now appending |"cm"| to the numbers output 
 for the transformation. 
+
+\initials{LDF 2021.12.15.}
+@:BUG FIX@> BUG FIX:  Removed the conditional |if (!t.is_identity())|:
+This failed when the |Pen| was scaled by |(1cm, 1cm, 1cm)|.
 \ENDLOG 
 
 @<Define non-member non-template functions for |Pen|@>=
 
-     if (!t.is_identity())
-        {
-         
-          o << " transformed "
-            << "begingroup; save T; transform T;"
-            << endl  
-            << " xxpart T = " 
-            << t.get_element(0, 0) << "cm; "
-            << "xpart T = " 
-            << t.get_element(3, 0) << "cm; "
-            << "xypart T = " 
-            << t.get_element(1, 0) << "cm;"
-            << endl 
-            << " yypart T = " 
-            << t.get_element(1, 1) << "cm; "
-            << "ypart T = " 
-            << t.get_element(3, 1) << "cm; "
-            << "yxpart T = " 
-            << t.get_element(0, 1) << "cm; "
-            << "T endgroup ";
-
-        } /* |if (!p.get_transform().is_identity())|  */@;
+     o << " transformed "
+       << "begingroup; save T; transform T;"
+       << endl  
+       << " xxpart T = " 
+       << t.get_element(0, 0) << "cm; "
+       << "xpart T = " 
+       << t.get_element(3, 0) << "cm; "
+       << "xypart T = " 
+       << t.get_element(1, 0) << "cm;"
+       << endl 
+       << " yypart T = " 
+       << t.get_element(1, 1) << "cm; "
+       << "ypart T = " 
+       << t.get_element(3, 1) << "cm; "
+       << "yxpart T = " 
+       << t.get_element(0, 1) << "cm; "
+       << "T endgroup ";
 
     o << "\n";
 
