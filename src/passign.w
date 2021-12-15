@@ -1794,9 +1794,8 @@ Added this rule.
          
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
-
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -1809,8 +1808,6 @@ Added this rule.
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -1826,7 +1823,6 @@ Added this rule.
 
   if (w->v.size() == 4)
     ttype = Color::CMYK_COLOR;
-
 
   if (ttype == Color::CMYK_COLOR)
   {
