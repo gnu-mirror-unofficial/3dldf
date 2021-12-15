@@ -885,11 +885,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
   bool warning_stop_value = false;
   string thread_name      = "";
 
-  if (scanner_node)
-     scanner_node->get_thread_name_and_stop_values(&thread_name,
-                                                   &error_stop_value,
-                                                   &warning_stop_value);
-
   using namespace Scan_Parse;
 
   int status;
@@ -899,11 +894,37 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "Entering `Scan_Parse::beginfig_func()'.";
+      cerr_strm << "Entering `Scan_Parse::beginfig_func'.";
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4).@>
+@
+@<Define |Scan_Parse| functions@>=
+
+  if (scanner_node)
+     scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                   &error_stop_value,
+                                                   &warning_stop_value);
+  else
+  {
+    cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':" 
+              << endl
+              << "`Scanner_Node scanner_node' is NULL.  This function requires `scanner_node'."
+              << endl 
+              << "Exiting function unsuccessfully with return value 1."
+              << endl;
+
+    log_message(cerr_strm); 
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+
+    return 1;
+
+  } /* |else|  */
+
 
   Output_Struct* os = scanner_node->out[Run_State::METAPOST];
 
@@ -921,7 +942,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
    if (DEBUG)
      {
 
-      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
                 << endl
                 << "About to call `scanner_node->output_pending.lock()'.";
       cerr_message(cerr_strm);
@@ -933,7 +954,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
   if (status != 0)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
                 << "`scanner_node->output_pending.lock()' failed. "
                 << "Not writing to `out_stream'."
@@ -974,7 +995,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
            {
 
                 cerr_strm << thread_name 
-                          << "`Scan_Parse::beginfig_func()':"
+                          << "`Scan_Parse::beginfig_func':"
                           << endl << "Output pending.  Going to sleep.";
 
                 cerr_message(cerr_strm);
@@ -998,7 +1019,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
   if (status == ETIMEDOUT)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func()':" 
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':" 
                 << endl
                 << "`scanner_node->output_pending.timedwait(&timeout)' "
                 << "timed out "
@@ -1029,7 +1050,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::beginfig_func()':"
+                << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl 
                 << "`scanner_node->output_pending.timedwait()' failed. "
                 << "Not performing output." << endl << "Will try to unlock "
@@ -1053,7 +1074,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::beginfig_func()':"
+                 << "In `Scan_Parse::beginfig_func':"
                  << endl << "`scanner_node->output_pending.timedwait()' "
                  << "succeeded.";
 
@@ -1074,7 +1095,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
            {
 
                 cerr_strm << thread_name 
-                          << "`Scan_Parse::beginfig_func()':"
+                          << "`Scan_Parse::beginfig_func':"
                           << endl << "Output not pending.  Continuing.";
 
                 cerr_message(cerr_strm);
@@ -1098,7 +1119,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
    if (DEBUG)
      {
 
-      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
                 << endl
                 << "About to call `os->lock()'. ";
       cerr_message(cerr_strm);
@@ -1112,7 +1133,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 
   if (status != 0)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
                 << "`os->lock()' failed. "
                 << "Not writing to `out_stream'."
@@ -1149,6 +1170,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
       *out_stream << "beginfig(" << fig_num << ");" 
                   << endl;
 
+
 @q ******* (7) @> 
 @ 
 
@@ -1180,7 +1202,7 @@ Replaced the code in this section with a call to
 
   if (status != 0)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
                 << "`os->unlock()' failed. "
                 << "Not writing to `out_stream'."
@@ -1233,7 +1255,7 @@ and signal condition.
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::beginfig_func()':"
+                << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl << "`scanner_node->output_pending.signal()' failed. "
                 << endl << "Will try to unlock "
                 << "`scanner_node->output_pending' and "
@@ -1254,7 +1276,7 @@ and signal condition.
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::beginfig_func()':"
+                 << "In `Scan_Parse::beginfig_func':"
                  << endl << "`scanner_node->output_pending.signal()' "
                  << "succeeded.";
 
@@ -1275,7 +1297,7 @@ and signal condition.
 
   if (status != 0)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
                 << "`scanner_node->output_pending.unlock()' failed. "
                 << "Not writing to `out_stream'."
@@ -1303,6 +1325,38 @@ and signal condition.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+@q ***** (5) @>
+@ 
+\LOG
+\initials{LDF 2021.12.15.}
+Added this section.
+\ENDLOG 
+@<Define |Scan_Parse| functions@>=
+
+   Id_Map_Entry_Node entry = scanner_node->lookup("current_figure_number", true);
+
+   if (entry == 0)
+   {
+       cerr_strm << "`current_figure_number' not found.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }
+   else
+   { 
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       {
+          cerr_strm << "`current_figure_number' found.";
+          cerr_message(cerr_strm);
+          cerr_strm.str(""); 
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       *static_cast<real*>(entry->object) = fig_num;
+   }
+
 @q ***** (5) Exit function successfully.@>
 @ Exit function successfully.
 @<Define |Scan_Parse| functions@>=
@@ -1310,7 +1364,7 @@ and signal condition.
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-        cerr_strm << "Exiting `Scan_Parse::beginfig_func()'.";
+        cerr_strm << "Exiting `Scan_Parse::beginfig_func'.";
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
@@ -1368,7 +1422,7 @@ Scan_Parse::output_func(void* arg)
   int* return_value = new int;
   *return_value = 0;
 
-  cerr_strm << thread_name << "Entering `Scan_Parse::output_func()'.";
+  cerr_strm << thread_name << "Entering `Scan_Parse::output_func'.";
   log_message(cerr_strm); 
 
 #if DEBUG_COMPILE
@@ -1392,7 +1446,7 @@ If it's not, set |*return_value = 1| and exit with return value
 
   if (picture_ptr_arg == static_cast<Picture_Output_Arg_Type*>(0))
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                 << "`arg' == 0."
                 << endl << "Setting `*return_value = 1' and returning "
                 << "a void pointer to `return_value'.";
@@ -1428,7 +1482,7 @@ If it's not, set |*return_value = 1| and exit with return value
 
 #ifndef HAVE_PTHREAD_H  
   
-  cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+  cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
             << endl << "This function should only ever be called "
             << "when multithreaded output is supported."
             << endl << "Setting `*return_value' = 1 and returning "
@@ -1451,7 +1505,7 @@ If it's not, set |*return_value = 1| and exit with return value
 
   if (!picture_ptr_arg->scanner_node->run_state.multithread_output)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                 << endl << "This function should only ever be called "
                 << "when multithreaded output is enabled."
                 << endl << "Setting `*return_value' = 1 and returning "
@@ -1482,7 +1536,7 @@ If it's not, set |*return_value = 1| and exit with return value
   if (!scanner_node->output_pending.value_0)
     {
       
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                 << endl << "`scanner_node->output_pending.value_0' == `false'."
                 << endl << "This shouldn't ever happen. Exiting function "
                 << endl << "with `*return_value' == 1.";
@@ -1515,7 +1569,7 @@ without \.{--multithread-input}.
 
   if (out_stream == static_cast<Output_Struct*>(0))
      {
-         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                    << endl 
                    << "`out_stream == 0."
                    << endl << "Exiting function with `*return_value' == 1.";
@@ -1534,7 +1588,7 @@ without \.{--multithread-input}.
   if (status != 0)
     {
 
-        cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+        cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                   << endl 
                   << "`out_stream->lock() failed."
                   << endl << "Exiting function with `*return_value' == 1.";
@@ -1570,7 +1624,7 @@ to |Picture::output|.
 
 @<Define |Scan_Parse| functions@>=
 
-  cerr_strm << thread_name << "In `output_func()':"
+  cerr_strm << thread_name << "In `output_func':"
             << "About to output picture.";
   log_message(cerr_strm); 
 
@@ -1604,7 +1658,7 @@ cerr_mutex.lock();
                                    picture_ptr_arg->max_z_proj,
                                    picture_ptr_arg->surface_hiding_value);
 
-  cerr_strm << thread_name << "In `output_func()':"
+  cerr_strm << thread_name << "In `output_func':"
             << "Finished outputting picture.";
 
   log_message(cerr_strm); 
@@ -1628,7 +1682,7 @@ MetaPost code.
   if (picture_ptr_arg->endfig)
     {
 
-      cerr_strm << thread_name << "In `output_func()':"
+      cerr_strm << thread_name << "In `output_func':"
                 << endl << "`picture_arg->endfig' == `true'.";
       log_message(cerr_strm); 
 
@@ -1646,7 +1700,7 @@ MetaPost code.
   else  /* (!|picture_ptr_arg->endfig|)  */
     {
 
-      cerr_strm << thread_name << "In `output_func()':"
+      cerr_strm << thread_name << "In `output_func':"
                 << endl << "`picture_arg->endfig' == `false'.";
       log_message(cerr_strm); 
 
@@ -1671,7 +1725,7 @@ MetaPost code.
   if (status != 0)
     {
 
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                 << endl 
                 << "`out_stream->unlock()' failed."
                 << endl << "Exiting function with `*return_value' == 1.";
@@ -1726,7 +1780,7 @@ Added this section.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                 << endl 
                 << "`picture_ptr_arg->picture->trylock()' returned " 
                 << status << ".";
@@ -1755,7 +1809,7 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                     << endl
                     << "`*(picture_ptr_arg->picture)' wasn't locked. "
                     << "Will try to unlock it.";
@@ -1793,7 +1847,7 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                     << endl
                     << "`*(picture_ptr_arg->picture)' was locked. "
                     << "Will try to unlock it anyway."
@@ -1849,7 +1903,7 @@ Added this section.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                     << endl
                     << "`picture_ptr_arg->picture->unlock()' succeeded."
                     << endl
@@ -1888,7 +1942,7 @@ Added this section.
 
     {
 
-      cerr_strm << thread_name << "WARNING! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "WARNING! In `Scan_Parse::output_func':"
                 << endl
                 << "`picture_ptr_arg->picture->unlock()' failed."
                 << endl
@@ -1912,7 +1966,7 @@ Added this section.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                 << endl << "Before deleting `picture_ptr_arg'.";
 
       log_message(cerr_strm); 
@@ -1944,7 +1998,7 @@ Added this section.
 
   if (status != 0)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                 << endl
                 << "`scanner_node->output_pending.lock()' failed. "
                 << "Exiting function with `*return value' ==  1.";
@@ -1962,7 +2016,7 @@ Added this section.
   else /* |scanner_node->output_pending.lock| succeeded.  */
     {
 
-      cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                 << endl
                 << "`scanner_node->output_pending.lock()' succeeded!";
       
@@ -2003,7 +2057,7 @@ condition.
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::output_func()':"
+                << "ERROR! In `Scan_Parse::output_func':"
                 << endl << "`scanner_node->output_pending.signal()' failed. "
                 << endl << "Will try to unlock "
                 << "`scanner_node->output_pending' and "
@@ -2026,7 +2080,7 @@ condition.
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::output_func()':"
+                 << "In `Scan_Parse::output_func':"
                  << endl << "`scanner_node->output_pending.signal()' "
                  << "succeeded.";
 
@@ -2051,7 +2105,7 @@ condition.
 
   if (status != 0)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                 << endl
                 << "`scanner_node->output_pending.unlock()' failed. "
                 << "Exiting function with `*return value' ==  1.";
@@ -2069,7 +2123,7 @@ condition.
   else /* |scanner_node->output_pending.unlock| succeeded.  */
     {
 
-      cerr_strm << thread_name << "In `Scan_Parse::output_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::output_func':"
                 << endl
                 << "`scanner_node->output_pending.unlock()' succeeded!";
       
@@ -2094,7 +2148,7 @@ condition.
 @<Define |Scan_Parse| functions@>=
 
   cerr_strm << thread_info->name 
-            << ". Exiting `Scan_Parse::output_func()'."
+            << ". Exiting `Scan_Parse::output_func'."
             << endl;
 
   log_message(cerr_strm); 
@@ -2167,7 +2221,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::output_command_func()'."
+                << "Entering `Scan_Parse::output_command_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -2201,7 +2255,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
       if (!is_endfig) /* Error handling.  */
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::output_command_func()':"
+                    << "ERROR! In `Scan_Parse::output_command_func':"
                     << endl << "`scanner_node->endfig_ptr' != 0 but "
                     << "`*static_cast<bool*>(scanner_node->endfig_ptr)' "
                     << "!= `true'."
@@ -2228,7 +2282,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node)
       if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
         {
 
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':"
                     << endl << "`current_picture' not found. "
                     << "Exiting function with return value 1."; 
         
@@ -2263,7 +2317,7 @@ at this time.
 
         {
 
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':"
                     << endl << "`entry->lock()' failed. "
                     << "Exiting function with return value 1."; 
         
@@ -2288,7 +2342,7 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
      {
 
        cerr_mutex.lock();
-       cerr << thread_name << "In `Scan_Parse::output_command_func()':"
+       cerr << thread_name << "In `Scan_Parse::output_command_func':"
             << endl;
 
        static_cast<Picture*>(entry->object)->show("current_picture on entry:");
@@ -2326,7 +2380,7 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 
         {
 
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':"
                     << endl << "`entry->unlock()' failed. "
                     << "Exiting function with return value 1."; 
         
@@ -2359,7 +2413,7 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
   if (p == static_cast<Picture_Output_Arg_Type*>(0))
     {
         cerr_strm << "ERROR! " << thread_name
-                  << "In `Scan_Parse::output_command_func()':"
+                  << "In `Scan_Parse::output_command_func':"
                   << endl 
                   << "`Scanner_Type::extract_picture_output_args()' failed."
                   << endl << "Exiting function with return value 1.";
@@ -2385,7 +2439,7 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
      {
        cerr_mutex.lock();
       
-       cerr << "In `Scan_Parse::output_command_func()':"
+       cerr << "In `Scan_Parse::output_command_func':"
             << endl << "Showing `p->picture':"
             << endl;
 
@@ -2403,7 +2457,7 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << "In `Scan_Parse::output_command_func()':"
+          cerr_strm << "In `Scan_Parse::output_command_func':"
                     << endl << "scanner_node->thread_vector.size() == "
                     << scanner_node->thread_vector.size() << endl;
           cerr_message(cerr_strm);
@@ -2426,7 +2480,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (DEBUG)
     {
 
-      cerr_strm << thread_name << "In `Scan_Parse::output_command_func()':"
+      cerr_strm << thread_name << "In `Scan_Parse::output_command_func':"
                 << endl
                   << "About to call `scanner_node->output_pending.lock()'.";
       cerr_message(cerr_strm);
@@ -2445,10 +2499,10 @@ and increment |scanner_node->output_pending.value_1|.
 
       if (status != 0)
         {
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':"
                     << endl
                     << "`scanner_node->output_pending.lock()' failed. "
-                    << "Not calling `output_func()'."
+                    << "Not calling `output_func'."
                     << endl << "Exiting function with return value 1.";
 
           cerr_message(cerr_strm, error_stop_value);
@@ -2471,7 +2525,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << thread_name << "In `Scan_Parse::output_command_func()':"
+              cerr_strm << thread_name << "In `Scan_Parse::output_command_func':"
                         << endl << "`scanner_node->output_pending.lock()' succeeded!";
               cerr_message(cerr_strm);
               cerr_strm.str("");
@@ -2490,7 +2544,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (DEBUG)
         {
 
-          cerr_strm << thread_name << "In `Scan_Parse::output_command_func()':"
+          cerr_strm << thread_name << "In `Scan_Parse::output_command_func':"
                     << endl << "Output pending.  Going to sleep.";
 
           cerr_message(cerr_strm);
@@ -2514,7 +2568,7 @@ and increment |scanner_node->output_pending.value_1|.
 
   if (status == ETIMEDOUT)
     {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':" 
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':" 
                 << endl
                 << "`scanner_node->output_pending.timedwait(&timeout)' timed out "
                 << "after " << timeout.tv_sec << "seconds." << endl
@@ -2541,7 +2595,7 @@ and increment |scanner_node->output_pending.value_1|.
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::output_command_func()':"
+                << "ERROR! In `Scan_Parse::output_command_func':"
                 << endl << "`scanner_node->output_pending.timedwait()' failed. "
                 << "Not performing output." << endl << "Will try to unlock "
                 << "`scanner_node->output_pending' and "
@@ -2561,7 +2615,7 @@ and increment |scanner_node->output_pending.value_1|.
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::output_command_func()':"
+                 << "In `Scan_Parse::output_command_func':"
                  << endl << "`scanner_node->output_pending.timedwait()' "
                  << "succeeded.";
 
@@ -2578,7 +2632,7 @@ and increment |scanner_node->output_pending.value_1|.
             {
 
               cerr_strm << thread_name 
-                        << "`Scan_Parse::output_command_func()':"
+                        << "`Scan_Parse::output_command_func':"
                         << endl << "Output not pending. "
                         << "Setting `output_pending->value' to `true' "
                         << "and continuing.";
@@ -2611,7 +2665,7 @@ and increment |scanner_node->output_pending.value_1|.
 
       if (status != 0)
         {
-          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func()':"
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_command_func':"
                     << endl
                     << "`scanner_node->output_pending.unlock()' failed. "
                     << "Exiting function with return value 1.";
@@ -2634,7 +2688,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << thread_name << "In `Scan_Parse::output_command_func()':"
+              cerr_strm << thread_name << "In `Scan_Parse::output_command_func':"
                         << endl
                         << "`scanner_node->output_pending.unlock()' succeeded!";
               cerr_message(cerr_strm);
@@ -2666,7 +2720,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (status != 0)
     {
       
-      cerr_strm << "ERROR! In `Scan_Parse::output_command_func()':"
+      cerr_strm << "ERROR! In `Scan_Parse::output_command_func':"
                 << endl << "`pthread_create()' failed."
                 << endl << "Exiting function with return value 1."
                 << endl; 
@@ -2689,7 +2743,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
    else if (DEBUG)
      {
-       cerr_strm << thread_name << "In `Scan_Parse::output_command_func()':"
+       cerr_strm << thread_name << "In `Scan_Parse::output_command_func':"
                  << endl << "`pthread_create()' succeeded."
                  << endl; 
        cerr_message(cerr_strm);
@@ -2730,7 +2784,7 @@ to |Picture::output|.
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::output_command_func()':"
+                 << "In `Scan_Parse::output_command_func':"
                  << endl << "Non-multithreaded output. Calling "
                  << endl << "`Picture::output()'.";
        
@@ -2779,7 +2833,7 @@ if (is_endfig)
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << "Exiting `Scan_Parse::output_command_func()'."
+      cerr_strm << "Exiting `Scan_Parse::output_command_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -2864,7 +2918,7 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Entering `Scan_Parse::non_shape_decl_func()'.";
+                << "Entering `Scan_Parse::non_shape_decl_func'.";
 
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -2875,7 +2929,7 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func()':"
+      cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func':"
                 << endl 
                 << "   Showing `scanner_node->token_string_bool_vector':";
 
@@ -2897,14 +2951,14 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func()':"
+          cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func':"
                     << endl
                     << "   token_string_bool_vector[" << i << "] == "
                     << iter->first << ", " << iter->second << ".";
 
           if (iter->second)
             {
-              cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func()':"
+              cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func':"
                         << endl
                         << "   It's an array.";
 
@@ -2915,7 +2969,7 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
 
           else /* (|!iter->second|)  */
             {
-              cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func()':"
+              cerr_strm << thread_name << "`Scan_Parse::non_shape_decl_func':"
                        << endl
                        << "   It's not an array.";
               cerr_message(cerr_strm);
@@ -2944,7 +2998,7 @@ Scan_Parse::non_shape_decl_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Exiting `Scan_Parse::non_shape_decl_func()' "
+                << "Exiting `Scan_Parse::non_shape_decl_func' "
                 << "successfully with return value 0.";
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -3006,7 +3060,7 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
 
    if (DEBUG)
    {
-     cerr_strm << thread_name << "Entering `Scan_Parse::shape_decl_func()'.";
+     cerr_strm << thread_name << "Entering `Scan_Parse::shape_decl_func'.";
      cerr_message(cerr_strm); 
      log_message(cerr_strm); 
 
@@ -3051,7 +3105,7 @@ Scan_Parse::shape_decl_func(Scanner_Node scanner_node,
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-      cerr_strm << thread_name << "Exiting `Scan_Parse::shape_decl_func()' "
+      cerr_strm << thread_name << "Exiting `Scan_Parse::shape_decl_func' "
                 << "successfully with return value 0.";
       cerr_message(cerr_strm); 
       log_message(cerr_strm); 
