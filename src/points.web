@@ -7711,35 +7711,34 @@ two-dimensional one.
 \initials{LDF 2005.06.24.}
 @:BUG FIX@> BUG FIX:  Now appending |"cm"| to the numbers output 
 for the transformation. 
+
+\initials{LDF 2021.12.15.}
+@:BUG FIX@> BUG FIX:  Removed the conditional |if (!t.is_identity())|:
+This failed when the |Pen| was scaled by |(1cm, 1cm, 1cm)|.
 \ENDLOG 
 
 @<Define |Point| functions@>=
 
       Transform t = pen->get_transform();
 
-      if (!t.is_identity())
-        {
-         
-          *out_stream << " transformed"
-                      << endl << "begingroup; save T; transform T;" 
+      *out_stream << " transformed"
+                  << endl << "begingroup; save T; transform T;" 
 
-                      << endl << "xxpart T = " 
-                      << t.get_element(0, 0) << "cm;"
-                      << endl << "xpart T = " 
-                      << t.get_element(3, 0) << "cm;"
-                      << endl << "xypart T = " 
-                      << t.get_element(1, 0) << "cm;"
+                  << endl << "xxpart T = " 
+                  << t.get_element(0, 0) << "cm;"
+                  << endl << "xpart T = " 
+                  << t.get_element(3, 0) << "cm;"
+                  << endl << "xypart T = " 
+                  << t.get_element(1, 0) << "cm;"
 
-                      << endl << "yypart T = " 
-                      << t.get_element(1, 1) << "cm;"
-                      << endl << "ypart T = " 
-                      << t.get_element(3, 1) << "cm;"
-                      << endl << "yxpart T = " 
-                      << t.get_element(0, 1) << "cm;"
+                  << endl << "yypart T = " 
+                  << t.get_element(1, 1) << "cm;"
+                  << endl << "ypart T = " 
+                  << t.get_element(3, 1) << "cm;"
+                  << endl << "yxpart T = " 
+                  << t.get_element(0, 1) << "cm;"
 
-                      << endl << "T endgroup" << endl;
-
-        } /* |if (!pen->get_transform().is_identity())|  */@;
+                  << endl << "T endgroup" << endl;
 
     }  /* |if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)|  */
 
