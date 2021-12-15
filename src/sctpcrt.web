@@ -5008,14 +5008,16 @@ Added this section.
                                Id_Map_Entry_Type::KNOWN,
                                v);
 
+
+
 @q ****** (6).@> 
 @
 @<Define |Scanner_Type::create|@>=
 
     } /* End of group.  */
 
-@q ***** (5) |Strings|.  @>          
-@*4 |Strings|.
+@q ***** (5) |Strings| and related items.  @>          
+@*4 |Strings| and related items.
 \initials{LDF 2004.12.13.}
 
 \LOG
@@ -5344,7 +5346,7 @@ Added calls to |scanner_node->add_synonym| for |grey|, |dark_grey| and |light_gr
    scanner_node->add_entry("gray", COLOR, regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-c = create_new<Color>(0);  
+   c = create_new<Color>(0);  
    *c = Colors::light_gray;
 
    v = static_cast<void*>(c);
@@ -5553,6 +5555,35 @@ scanner_node->add_entry("null_pen", PEN, regular, is_constant,
     scanner_node->add_synonym("nullpen", "null_pen");
 
   }
+
+@q ****** (6) |current_figure_number|.@> 
+@ |current_figure_number|.
+
+\LOG
+\initials{LDF 2021.12.15.}
+Added this section.
+\ENDLOG
+
+@<Define |Scanner_Type::create|@>=
+{
+
+       r = new real;
+
+       *r = -1;
+
+       v = static_cast<void*>(r); 
+
+       scanner_node->add_entry("current_figure_number",
+                               NUMERIC,
+                               regular,
+                               not_constant,
+                               not_array,
+                               Id_Map_Entry_Type::KNOWN,
+                               v);
+
+
+
+}
 
 @q ***** (5) |Pictures|.  @>          
 @*4 |Pictures|.
