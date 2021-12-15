@@ -337,9 +337,9 @@ fp:
 	rm -f parser.o
 	$(MAKE) parser.o
 
-.PHONY: f-prog ## "force parser and prog"
+.PHONY: fprog f-prog ## "force parser and prog"
 
-f-prog:
+fprog f-prog:
 	rm -f parser.o
 	$(MAKE) prog
 
