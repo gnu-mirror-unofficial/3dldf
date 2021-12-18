@@ -1846,12 +1846,14 @@ Added this rule.
      rv.push_back(**iter);
   }
 
+#if 0 
   cerr << "rv == " << endl;
 
   for (vector<float>::iterator iter = rv.begin(); iter != rv.end(); ++iter)
   {
      cerr << "*iter == " << *iter << endl;
   }
+#endif 
 
   real red_part     = 0.0;
   real green_part   = 0.0;
@@ -2015,7 +2017,7 @@ Added this rule.
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 
