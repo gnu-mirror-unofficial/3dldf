@@ -726,7 +726,7 @@ Added this rule.
    string *s = static_cast<string*>(@=$4@>);
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> SET_NAME color_variable TO "
@@ -777,7 +777,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> UNSET_NAME color_variable'."

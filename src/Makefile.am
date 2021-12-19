@@ -1706,8 +1706,24 @@ ctemp.pdf: ctemp.dvi
 ctemp.0 ctemp.1: ctemp.mp
 	mpost -numbersystem "double" ctemp.mp
 
-ctemp.mp: ctemp.ldf 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) ctemp.ldf
+.PHONY: flp
+
+flp: flpld_3.pdf
+
+flpld_3.dvi: flpld_3.1 flpld_3.tex
+	tex flpld_3.tex
+
+flpld_3.ps: flpld_3.dvi
+	dvips -o flpld_3.ps flpld_3.dvi
+
+flpld_3.pdf: flpld_3.dvi
+	dvipdfmx flpld_3.dvi
+
+flpld_3.1: flpld_3.mp
+	mpost -numbersystem "double" flpld_3.mp
+
+flpld_3.mp: flpld_3.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) flpld_3.ldf
 
 .PHONY: purge-s
 
