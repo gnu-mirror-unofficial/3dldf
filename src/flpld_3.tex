@@ -1,0 +1,270 @@
+%%%% flpld_3.tex
+%%%% Created by Laurence D. Finston (LDF) Fr Aug 12 12:45:13 CEST 2005
+
+%%%% $Id: flpld_3.tex,v 1.1 2021/12/19 05:58:37 lfinsto1 Exp $
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+
+%% * (1) Flipbook Landscape 3.
+
+%% * (1) Code.
+
+%% ** (2) Set margins and spacing.
+
+\hsize=29.7cm
+\vsize=21.0cm
+
+\special{papersize=297mm, 210mm}
+
+\advance\voffset by -1in
+\advance\hoffset by -1in
+
+%\advance\hoffset by 1cm
+%\advance\voffset by 1cm
+
+\parskip=0pt
+\baselineskip=0pt
+\parindent=0pt
+
+%% ** (2) 
+
+\input epsf 
+\nopagenumbers
+\def\epsfsize#1#2{#1}
+
+
+%% *** (3) Recto.
+
+\newdimen\hrulewidth
+\newdimen\hruleheighttop
+\newdimen\hruleheightbot
+\newdimen\hruledepth
+
+\newdimen\vrulewidth
+\newdimen\vruleheight
+
+\vrulewidth=.25mm
+\vruleheight=4.5cm
+\hrulewidth=6.5cm
+
+\hruleheightbot=\vrulewidth
+\hruleheighttop=\vruleheight
+\hruledepth=-\hruleheighttop
+\advance\hruledepth by \vrulewidth
+
+\advance\voffset by -\hruleheightbot
+
+\setbox0=\hbox{\vrule width \vrulewidth height \vruleheight  %% left rule
+               \hskip-\vrulewidth
+               \vrule width \hrulewidth height \hruleheighttop 
+                      depth \hruledepth %% top rule
+               \hskip-\hrulewidth
+               \vrule width \hrulewidth height \hruleheightbot  %% bottom rule
+               \hskip-\vrulewidth
+               \vrule width \vrulewidth height \vruleheight  %% right rule
+}  %% \setbox0
+
+\vbox{}
+\vskip-3.7mm %% This should not be necessary!  I don't know why it
+             %% is.  If it's not needed on your system, get rid of it.
+             %% LDF 2005.08.11.
+
+\advance\voffset by 1cm
+\advance\hoffset by 1cm
+
+%% vertical border rule
+\setbox1=\hbox{\vrule width \vrulewidth height \vruleheight} 
+
+%% horizontal border rule
+
+\newdimen\topborderwidth
+\topborderwidth=4\hrulewidth
+\advance\topborderwidth by 2\vrulewidth
+
+\setbox3=\hbox{\copy1\copy0\copy0\copy0\copy0\copy1\hss}
+
+\setbox2=\hbox{\vrule width \topborderwidth height \hruleheightbot} 
+
+\hbox to 0pt{\copy2\hss}%  Top border
+%
+\vbox to 0pt{\vbox to 0pt{\copy3\vss}\vskip\ht3
+             \vbox to 0pt{\copy3\vss}\vskip\ht3
+             \vbox to 0pt{\copy3\vss}\vskip\ht3
+             \vbox to 0pt{\copy3\vss}\vskip\ht3
+\vss}
+
+\newdimen\stackheight
+\stackheight=4\vruleheight
+
+\vbox to 0pt{\vskip\stackheight
+             \hbox to 0pt{\copy2\hss}%  Bottom border
+             \vss}
+
+\vskip-2\hruleheightbot
+
+\hbox{\hskip\vrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.3}\hss}\vss}%
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.5}\hss}\vss}%
+   \hskip\vrulewidth\hss}
+
+\vskip-\hruleheightbot
+
+\hbox{\hskip\vrulewidth
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+         \epsffile{flpld_3.11}\hss}\vss}%
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.13}\hss}\vss}\hss}
+
+\vskip-1.5\hruleheightbot
+
+\hbox{\hskip\vrulewidth
+      \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+   \epsffile{flpld_3.15}\hss}\vss}%
+\hskip\hrulewidth
+\vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+   \epsffile{flpld_3.9}\hss}\vss}\hss}
+
+
+\vskip-2\hruleheightbot
+
+\hbox{\hskip\vrulewidth
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+         \epsffile{flpld_3.7}\hss}\vss}%
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.1}\hss}\vss}\hss}
+
+%% *** (3) Verso
+
+\vfil\eject
+
+
+\advance\hoffset by \hsize
+\advance\hoffset by -2cm
+\advance\hoffset by -4\hrulewidth
+\advance\hoffset by -2\vrulewidth
+
+\vbox{}
+\vskip-3.7mm %% This should not be necessary!  I don't know why it
+             %% is.  If it's not needed on your system, get rid of it.
+             %% LDF 2005.08.11.
+
+\hbox to 0pt{\copy2\hss}%  Top border
+%
+\vbox to 0pt{\vbox to 0pt{\copy3\vss}\vskip\ht3
+             \vbox to 0pt{\copy3\vss}\vskip\ht3
+             \vbox to 0pt{\copy3\vss}\vskip\ht3
+             \vbox to 0pt{\copy3\vss}\vskip\ht3
+\vss}
+
+\vbox to 0pt{\vskip\stackheight
+             \hbox to 0pt{\copy2\hss}%  Bottom border
+             \vss}
+
+\vskip-1.5\hruleheightbot
+
+\hbox{\hskip\vrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.4}\hss}\vss}%
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.6}\hss}\vss}%
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.18}\hss}\vss}\hss}
+
+\vskip-1.5\hruleheightbot
+
+\hbox{\hskip\vrulewidth\hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.12}\hss}\vss}%
+   \hskip\hrulewidth
+   \vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+      \epsffile{flpld_3.14}\hss}\vss}\hss}
+
+\vskip-1.5\hruleheightbot
+
+\hbox{\hskip\vrulewidth
+\vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+   \epsffile{flpld_3.16}\hss}\vss}%
+\hskip\hrulewidth
+\vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+   \epsffile{flpld_3.10}\hss}\vss}\hss}
+
+
+\vskip-1.25\hruleheightbot
+
+\hbox{\hskip\vrulewidth\hskip\hrulewidth
+\vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+   \epsffile{flpld_3.8}\hss}\vss}%
+\hskip\hrulewidth
+\vbox to \vruleheight{\vss\hbox to \hrulewidth{\hss
+   \epsffile{flpld_3.2}\hss}\vss}\hss}
+
+
+\bye
+
+
+
+
+\bye
+
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:tex
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% abbrev-mode:t
+%% outline-regexp:"%% [*\f]+"
+%% End:

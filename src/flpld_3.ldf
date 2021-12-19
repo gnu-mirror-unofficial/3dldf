@@ -1,0 +1,975 @@
+%%%% flpld_3.ldf
+
+%%%% $Id: flpld_3.ldf,v 1.1 2021/12/19 05:58:37 lfinsto1 Exp $
+
+%%%% Created by Laurence D. Finston (LDF) Fr Aug 12 12:45:27 CEST 2005
+
+%% * (1) Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
+%%%% Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 The Free Software Foundation  
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version.  
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details.  
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html.
+
+%%%% Please send bug reports to Laurence.Finston@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with ``subscribe <email-address>'' as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de
+
+
+%% * (1) Code.
+
+%% Run these commands:
+%% ../CWEB/3dldf flpld_3 && mpost flpld_3 && tex flpld_3 && dvips -o f.ps flpld_3
+
+%% **** (4) Set up frame.
+
+%%%
+
+verbatim_metapost "verbatimtex \font\Large=cmbx12 scaled 3000 etex";
+verbatim_metapost "verbatimtex \font\large=cmr17 etex";
+verbatim_metapost "verbatimtex \font\largebx=cmbx17 etex";
+verbatim_metapost "verbatimtex \font\bigit=cmti11 etex";
+verbatim_metapost "verbatimtex \font\\normal=cmr10 etex";
+verbatim_metapost "verbatimtex \font\small=cmr6 etex";
+
+pickup pencircle scaled (.75mm, .75mm, .75mm);
+%pickup pencircle scaled (1mm, 1mm, 1mm);
+
+% \vsize=(/ 27 4.0) 6.75
+% \hsize=(/ 19 4.0) 4.75
+
+
+w := 6.5;
+h := 4.5;
+text_shift_value := -1.5;
+
+offset := 1;
+
+frame_w := w - .5offset;
+frame_h := h - .5offset;
+
+path frame;
+
+frame := origin -- (frame_w, 0) -- (frame_w, frame_h)
+                -- (0, frame_h) -- cycle;
+
+point label_pos[];
+label_pos0 := label_pos1 := (.5frame_w, .5frame_h);
+
+transform t[];
+t0 := identity shifted (-.5frame_w, -.5frame_h);
+
+frame *= label_pos0 *= label_pos1 *= t0;
+
+shift label_pos0 (-3, 1.5);
+shift label_pos1 (3, -1.5);
+
+point c_center;
+
+c_center := (2.5, -2);
+inner_diameter := 2;
+outer_diameter := 4;
+
+circle c[];
+set c0 with_diameter inner_diameter with_point_count 64;
+c1 := c0;
+c2 := c0;
+c4 := c0;
+c5 := c0;
+c6 := c0;
+c7 := c0;
+
+
+rotate c0 by 90;
+rotate c2 (90,  30);
+rotate c4 (90, 60);
+rotate c5 (90, 90);
+rotate c6 (90, 120);
+rotate c7 (90, 150);
+
+color_vector cv;
+
+cv += black;
+cv += black;
+cv += black;
+cv += black;
+cv += black;
+cv += black;
+cv += black;
+cv += black;
+
+%% c0 == violet  Vertical
+
+%% c1 == red     Inner ring.
+
+%% c2 == blue    Vertical
+
+%% c3 == orange  Outer ring.
+
+%% c4 == green   Vertical
+
+%% c5 ==         Vertical
+
+%% c6 ==         Vertical
+
+%% c7 ==         Vertical
+
+set c3 with_diameter outer_diameter with_point_count 64;
+
+t1 := identity rotated (0, 0, 15);
+
+c1 *= c3 *= t1;
+
+point top_pt;
+
+t2 := identity rotated (0, 24);
+
+t3 := identity shifted c_center;
+
+%% *****************
+
+
+
+focus f;
+set f with_position (0, 0, -15) with_direction (0, 0, 10) 
+   with_distance 10;
+
+curr_value := 1.5;
+distance := .75;
+
+pickup pencircle scaled (.6mm, .6mm, .6mm);
+
+beginfig(1); 
+   undraw frame;
+   label("{\\normal 1}", (0, curr_value));
+   draw unit_circle scaled .3 rotated 90 shifted (0, curr_value);
+   curr_value -= distance;
+   label("{\largebx Joe Schmo}", (0, curr_value));
+   curr_value -= distance;
+   label("{\largebx Studios}", (0, curr_value));
+   curr_value -= 1distance;
+   label("{\bigit Fine Animations For All Occasions}", (0, curr_value));
+   curr_value -= .75distance;
+   label("Hollywood, New York City,", (0, curr_value));
+   curr_value -= .5distance;
+   label("London, Paris, and Berlin", (0, curr_value));
+endfig with_projection parallel_x_y;
+
+
+
+%% *****************
+
+rule_ht := .25mm;
+line_ht := h;
+
+
+
+beginfig(2); 
+undraw frame;
+label.rt("{\Large 2}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t3;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+top_pt := get_point 16 c12;
+
+%drawdot top_pt with_pen pencircle scaled (5mm, 5mm, 5mm) with_color cv4;
+
+endfig with_focus f;
+
+
+
+%% *****************
+
+beginfig(3); 
+undraw frame;
+%verbatim_metapost "begingroup; linecap := butt;";
+%draw (0, -.5line_ht) -- (0, .5line_ht) with_color cv2;
+label.rt("{\Large 3}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+%verbatim_metapost "endgroup;";
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+
+t4 *= t3;
+
+top_pt := get_point 16 c12;
+
+top_pt *= c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+
+%drawdot top_pt with_pen pencircle scaled (5mm, 5mm, 5mm) with_color cv4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+%% *****************
+
+
+beginfig(4); 
+undraw frame with_color cv2;
+label.rt("{\Large 4}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+
+%% *****************
+
+beginfig(5); 
+undraw frame with_color cv2;
+label.rt("{\Large 5}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+%% *****************
+
+beginfig(6); 
+undraw frame with_color cv2;
+label.rt("{\Large 6}", label_pos0);
+label.rt("{\large (six)}", label_pos0 shifted (1, 0));
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+%% *****************
+
+beginfig(7); 
+undraw frame with_color cv2;
+label.rt("{\Large 7}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+%% *****************
+
+beginfig(8); 
+undraw frame with_color cv2;
+label.rt("{\Large 8}", label_pos0);
+label.rt("{\large (eight)}", label_pos0 shifted (1, 0));
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+
+%% *****************
+
+beginfig(9); 
+undraw frame with_color cv2;
+label.rt("{\Large 9}", label_pos0);
+label.rt("{\large (nine)}", label_pos0 shifted (1, 0));
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+
+
+
+
+
+%% *****************
+
+beginfig(10); 
+undraw frame with_color cv2;
+label.rt("{\Large 10}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+%% *****************
+
+beginfig(11); 
+undraw frame with_color cv2;
+label.rt("{\Large 11}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+%% *****************
+
+beginfig(12); 
+undraw frame with_color cv2;
+label.rt("{\Large 12}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+
+%% *****************
+
+beginfig(13); 
+undraw frame with_color cv2;
+label.rt("{\Large 13}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+
+%% *****************
+
+beginfig(14); 
+undraw frame with_color cv2;
+label.rt("{\Large 14}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+
+
+%% *****************
+
+beginfig(15); 
+undraw frame with_color cv2;
+label.rt("{\Large 15}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+%% *****************
+
+beginfig(16); 
+undraw frame with_color cv2;
+label.rt("{\Large 16}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+output current_picture with_focus f;
+verbatim_metapost "currentpicture := currentpicture rotated 180;";
+
+clear current_picture;
+
+endfig;
+
+
+
+
+%% *****************
+
+beginfig(17); %% %%  This figure's planet is the same as the one in figure 2.
+
+undraw frame with_color cv2;
+label.rt("{\Large 17}", label_pos0);
+output current_picture with_projection parallel_x_y; 
+
+clear current_picture;
+
+c10 := c0;
+c11 := c1;
+c12 := c2;
+c13 := c3;
+c14 := c4;
+c15 := c5;
+c16 := c6;
+c17 := c7;
+
+t4 := t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+t4 *= t2;
+
+
+t4 *= t3;
+
+c10 *= c11 *= c12 *= c13 *= c14 *= c15 *= c16 *= c17 *= t4;
+
+draw c10 with_color cv0;
+draw c11 with_color cv1;
+draw c12 with_color cv2;
+draw c13 with_color cv3;
+draw c14 with_color cv4;
+draw c15 with_color cv5;
+draw c16 with_color cv6;
+draw c17 with_color cv7;
+
+endfig with_focus f;
+
+%% *** (3) 
+
+curr_value := 2;
+distance := .5;
+
+beginfig(18); 
+   label("{\largebx GNU 3DLDF}", (0, curr_value));
+   curr_value -= 2*distance;
+   label("{\\normal Copyright (C) 2021}", (0, curr_value));
+   curr_value -= distance;
+   label("{\\normal The Free Software Foundation}", (0, curr_value));
+endfig with_projection parallel_x_y;  
+
+%% *****************
+
+%% *** (3) 
+
+verbatim_metapost "end";
+
+end;
+
+%% ** (2) End of 3DLDF code.
+
+%% * Local variables for Emacs.
+
+%% Local Variables:
+%% mode:Metafont
+%% eval:(outline-minor-mode t)
+%% eval:(read-abbrev-file abbrev-file-name)
+%% outline-regexp:"%% [*\f]+"
+%% End:
