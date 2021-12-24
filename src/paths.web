@@ -8248,24 +8248,24 @@ Path::output(Scanner_Node scanner_node)
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    if (do_output == false)
-      {
+   {
 
 #if DEBUG_COMPILE
-          if (DEBUG)
-             {
-                 cerr_strm << thread_name 
-                           << "In `Path::output': "
-                           << "`do_output' == `false'. Returning.";
+      if (DEBUG)
+      {
+          cerr_strm << thread_name 
+                    << "In `Path::output': "
+                    << "`do_output' == `false'. Returning.";
 
-                 log_message(cerr_strm);
-                 cerr_message(cerr_strm);
-                 cerr_strm.str("");
-             }
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+      }
 #endif /* |DEBUG_COMPILE|  */@; 
   
-        return;
+      return;
 
-    } /* |if (do_output == false)|  */
+   } /* |if (do_output == false)|  */
 
 @q **** (4) @>   
 @  
@@ -8732,8 +8732,7 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
 
 \LOG
 \initials{LDF 2005.03.13.}
-Added this function.  
-Removed from |Path::output| and put it here.  
+Added this function.  Removed from |Path::output| and put here.  
 |Path::output| now calls this function.
 \ENDLOG
 
