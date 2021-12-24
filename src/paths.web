@@ -13761,6 +13761,53 @@ Added this function.
 Connector_Type* 
 create_new(const Connector_Type& c, Scanner_Node scanner_node);
 
+@q *** (3) Show. @>
+@*2 Show.
+\initials{LDF 2021.12.24.}
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this function.
+\ENDLOG
+
+@<|Connector_Type| function declarations@>=
+void
+show(string s = "Connector_Type:");
+
+@q **** (4) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+void
+Connector_Type::show(string s)
+{
+  cerr << s << endl;
+
+/* !!START HERE:  LDF 2021.12.24.  */ 
+
+  if (type == PLAIN_TYPE)
+  {
+  }
+  else if (type == DIR_TYPE)
+  {
+  }
+  else if (type == CURL_TYPE)       
+  {
+  }
+  else if (type == TENSION_TYPE)
+  {
+  }
+  else if (type == CONTROLS_TYPE)
+  {
+  }
+
+  return;
+
+} /* End of |Connector_Type::show| definition */
+
+
+@q *** (3) @>
+
+@q ** (2) @>
 
 @q * (1) |Nurb| functions.@> 
 @* {\bf Nurb} functions.
