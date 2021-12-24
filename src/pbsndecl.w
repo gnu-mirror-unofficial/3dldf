@@ -367,6 +367,10 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @=%token <int_value>    REVERSE@>@/
 @=%token <int_value>    SUBPATH@>@/
 @=%token <int_value>    OF@>@/
+@=%token <int_value>    CONTROLS@>@/
+@=%token <int_value>    TENSION@>@/
+@=%token <int_value>    DIR@>@/
+@=%token <int_value>    CURL@>@/
 
 @=%token <string_value>     COMMA@>@/
 @=%token <string_value>     COLON@>@/ 
