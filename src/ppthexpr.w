@@ -2071,6 +2071,9 @@ Added this rule.
 @=path_tertiary: path_secondary path_join path_expression@>@/
 {
 
+    @<Common declarations for rules@>@; 
+
+
     Path* p = static_cast<Path*>(@=$1@>);
     Path* q = static_cast<Path*>(@=$3@>);
     string s = @=$2@>;
@@ -2116,6 +2119,8 @@ Added this rule.
 @=path_join: basic_path_join@>@/
 {
 
+  @<Common declarations for rules@>@; 
+
   strcpy(@=$$@>, @=$1@>);
   
 };
@@ -2124,6 +2129,8 @@ Added this rule.
 @<Define rules@>=
 @=path_join: path_modifier basic_path_join@>@/
 {
+
+  @<Common declarations for rules@>@; 
 
   strcpy(@=$$@>, @=$2@>);
   
@@ -2134,6 +2141,8 @@ Added this rule.
 @=path_join: basic_path_join path_modifier@>@/
 {
 
+  @<Common declarations for rules@>@; 
+
   strcpy(@=$$@>, @=$1@>);
   
 };
@@ -2142,6 +2151,7 @@ Added this rule.
 @<Define rules@>=
 @=path_join: path_modifier basic_path_join path_modifier@>@/
 {
+  @<Common declarations for rules@>@; 
 
   strcpy(@=$$@>, @=$2@>);
   
@@ -2151,6 +2161,9 @@ Added this rule.
 @<Define rules@>=
 @=path_modifier: TENSION numeric_expression@>@/
 {
+
+   @<Common declarations for rules@>@;
+
    cerr << "path_modifier:  TENSION numeric_expression" << endl;
  
 };
@@ -2159,6 +2172,8 @@ Added this rule.
 @<Define rules@>=
 @=path_modifier: LEFT_BRACE point_expression RIGHT_BRACE@>@/
 {
+   @<Common declarations for rules@>@; 
+
    cerr << "path_modifier:  LEFT_BRACE point_expression RIGHT_BRACE" << endl;
  
 };
@@ -2167,7 +2182,19 @@ Added this rule.
 @<Define rules@>=
 @=path_modifier: LEFT_BRACE CURL numeric_expression RIGHT_BRACE@>@/
 {
+   @<Common declarations for rules@>@; 
+
    cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
+ 
+};
+
+@
+@<Define rules@>=
+@=path_modifier: LEFT_BRACE DIR numeric_expression RIGHT_BRACE@>@/
+{
+   @<Common declarations for rules@>@; 
+
+   cerr << "path_modifier:  LEFT_BRACE DIR numeric_expression RIGHT_BRACE" << endl;
  
 };
 
@@ -2175,6 +2202,8 @@ Added this rule.
 @<Define rules@>=
 @=path_modifier: CONTROLS point_expression AND point_expression@>@/
 {
+   @<Common declarations for rules@>@; 
+
    cerr << "path_modifier:  CONTROLS point_expression AND point_expression" << endl;
  
 };
@@ -2191,11 +2220,9 @@ Added this rule.
 @<Define rules@>=
 @=basic_path_join: PERIOD_PAIR@>@/
 {
+   @<Common declarations for rules@>@; 
 
-
-/* !!START HERE:  LDF 2021.11.25.  Look up {up}, etc., in MFbook.  */ 
-
-  strcpy(@=$$@>, "..");
+   strcpy(@=$$@>, "..");
 
 };
 
@@ -2205,6 +2232,8 @@ Added this rule.
 @<Define rules@>=
 @=basic_path_join: PERIOD_TRIPLE@>@/
 {
+
+  @<Common declarations for rules@>@; 
 
   strcpy(@=$$@>, "...");
 
@@ -2217,6 +2246,8 @@ Added this rule.
 @=basic_path_join: HYPHEN_PAIR@>@/
 {
 
+  @<Common declarations for rules@>@; 
+
   strcpy(@=$$@>, "--");
 
 };
@@ -2228,6 +2259,8 @@ Added this rule.
 @=basic_path_join: HYPHEN_TRIPLE@>@/
 {
 
+  @<Common declarations for rules@>@; 
+
   strcpy(@=$$@>, "---");
 
 };
@@ -2238,6 +2271,8 @@ Added this rule.
 @<Define rules@>=
 @=basic_path_join: AMPERSAND@>@/
 {
+
+  @<Common declarations for rules@>@; 
 
   strcpy(@=$$@>, "&");
 
