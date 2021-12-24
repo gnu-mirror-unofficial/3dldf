@@ -234,6 +234,7 @@ Added |valarray <real> pre_projective_extremes|.
 
   vector <Point*> points;
   vector <string> connectors;
+  vector <Connector_Type*> connector_type_vector;
 
  public:
 
@@ -13546,6 +13547,164 @@ getchar();
 
 }  /* End of |Path::get_direction| definition  */
 
+
+@q * (1) class |Connector_Type| declaration. @>
+@* class |Connector_Type| declaration.
+\initials{LDF 2021.12.24.}
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this section.
+\ENDLOG
+
+@<class |Connector_Type| declaration@>=
+class Connector_Type 
+{
+   friend class Path;
+
+   int type;     
+
+   string connector_string;
+   Point *pt0;
+   Point *pt1;
+   real  r0;
+   real  r1;
+   
+   public:
+      const static unsigned int PLAIN_TYPE;     
+      const static unsigned int DIR_TYPE;     
+      const static unsigned int CURL_TYPE;       
+      const static unsigned int TENSION_TYPE;
+      const static unsigned int CONTROLS_TYPE;
+
+      @<|Connector_Type| function declarations@>   
+
+};
+
+@q ** (2) @>
+@
+@<|Connector_Type| static constant initializations@>=
+
+const unsigned int Connector_Type::PLAIN_TYPE    = 0U;     
+const unsigned int Connector_Type::DIR_TYPE      = 1U;     
+const unsigned int Connector_Type::CURL_TYPE     = 2U;       
+const unsigned int Connector_Type::TENSION_TYPE  = 3U;
+const unsigned int Connector_Type::CONTROLS_TYPE = 4U;
+
+
+@q ** (2) |Connector_Type| functions.@>
+@*2 |Connector_Type| functions.
+\initials{LDF 2021.12.24.}
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this section.
+\ENDLOG
+
+@q *** (3) Constructors.  @>
+@ Constructor.
+\initials{LDF 2021.12.24.}
+
+@q **** (4) Default constructor.@>
+@ Default constructor.
+\initials{LDF 2021.12.24.}
+
+@q ***** (5) Declaration @>
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this function.
+\ENDLOG
+
+@<|Connector_Type| function declarations@>=
+Connector_Type(void);
+
+@q ***** (5) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+Connector_Type::Connector_Type(void)
+{
+   type = 0;     
+
+   connector_string = "";
+
+   pt0 = 0;
+   pt1 = 0;
+   r0  = 0;
+   r1  = 0;
+
+   return;
+           
+}  /* End of |Connector_Type| default constructor definition  */
+
+@q **** (4) Copy constructor.@>
+@ Copy constructor.
+\initials{LDF 2021.12.24.}
+
+@<|Connector_Type| function declarations@>=
+Connector_Type(const Connector_Type &c);
+
+@q ***** (5) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+Connector_Type::Connector_Type(const Connector_Type &c)
+{
+   *this = c;
+
+   return;
+           
+}  /* End of |Connector_Type| default constructor definition  */
+
+
+@q **** (4) @>
+
+@q *** (3) Assignment operator.@>
+@ Assignment operator.
+\initials{LDF 2021.12.24.}
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) Declaration @>
+@
+\LOG
+\initials{LDF 2021.12.24.}
+Added this function.
+\ENDLOG
+
+@<|Connector_Type| function declarations@>=
+void
+operator=(const Connector_Type &c);
+
+@q **** (4) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+void
+Connector_Type::operator=(const Connector_Type &c)
+{
+   type = c.type;     
+
+   connector_string = c.connector_string;
+
+   r0  = c.r0;
+   r1  = c.r1;      
+
+   if (c.pt0 != 0)
+   {
+      pt0 = create_new<Point>(c.pt0);        
+   }
+
+   if (c.pt1 != 0)
+   {
+      pt1 = create_new<Point>(c.pt1);        
+   }
+
+   return;
+           
+}  /* End of |Connector_Type| default constructor definition  */
+
 @q * (1) |Nurb| functions.@> 
 @* {\bf Nurb} functions.
 \initials{LDF 2005.01.28.}
@@ -14311,6 +14470,8 @@ Now including |@<Define |Focus| functions@>|.
 
 @c
 @<Include files@>@;
+@<class |Connector_Type| declaration@>@;
+@<|Connector_Type| static constant initializations@>@;
 @<Define |class Path|@>@;
 @<Define |static| |class Path| data members@>@;
 @<Define |Transform| functions@>@;
@@ -14322,6 +14483,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Define |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
 @<Define |Nurb| functions@>@;
+@<|Connector_Type| function definitions@>@;
 
 @q ** (2).@> 
 
@@ -14329,6 +14491,7 @@ Now including |@<Define |Focus| functions@>|.
 \initials{LDF Undated.}
 
 @(paths.h@>=
+@<class |Connector_Type| declaration@>@;
 @<Define |class Path|@>@;
 @<Declare |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
