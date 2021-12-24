@@ -595,7 +595,7 @@ and subsequently resizing it, if necessary.
   if (projective_extremes.size() == 0)  
     projective_extremes.resize(6, 0);
 
-for (vector <Point*>::const_iterator p_iter = p.points.begin();
+  for (vector <Point*>::const_iterator p_iter = p.points.begin();
        p_iter != p.points.end();
        p_iter++)
     points.push_back(create_new<Point>(*p_iter));      
@@ -13561,6 +13561,7 @@ Added this section.
 class Connector_Type 
 {
    friend class Path;
+   friend int yyparse(yyscan_t);
 
    int type;     
 
@@ -13704,6 +13705,40 @@ Connector_Type::operator=(const Connector_Type &c)
    return;
            
 }  /* End of |Connector_Type| default constructor definition  */
+
+@q * (1) Pseudo-constructor for dynamic allocation. @>
+@* Pseudo-constructor for dynamic allocation. 
+
+@q ** (2) Pointer argument.@>
+@ Pointer argument.@>
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration.  @>
+
+@<Declare non-member template functions for |Connector_Type|@>=
+
+Connector_Type* 
+create_new(const Connector_Type* c, Scanner_Node scanner_node);
+
+@q ** (2) Reference argument.@>
+@*1 Reference argument.@>
+
+\LOG
+\initials{LDF 2021.12.24.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) Declaration.  @>
+
+@<Declare non-member template functions for |Connector_Type|@>=
+
+Connector_Type* 
+create_new(const Connector_Type& c, Scanner_Node scanner_node);
+
 
 @q * (1) |Nurb| functions.@> 
 @* {\bf Nurb} functions.
@@ -14482,6 +14517,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Define |Line| functions@>@;
 @<Define |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
+@<Declare non-member template functions for |Connector_Type|@>@;
 @<Define |Nurb| functions@>@;
 @<|Connector_Type| function definitions@>@;
 
@@ -14495,6 +14531,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Define |class Path|@>@;
 @<Declare |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
+@<Declare non-member template functions for |Connector_Type|@>@;
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>

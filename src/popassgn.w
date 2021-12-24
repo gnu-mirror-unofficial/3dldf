@@ -1857,7 +1857,7 @@ Removed debugging code.
 @=operation_assignment: path_variable PLUS_ASSIGN path_join@>@/
 {
 
-  string s(@=$3@>); 
+  Connector_Type *c = static_cast<Connector_Type*>(@=$3@>);
 
   Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
@@ -1885,7 +1885,7 @@ Removed debugging code.
 
               Path* q = static_cast<Path*>(entry->object);           
 
-              *q += s;
+              *q += c->connector_string;
  
               entry->object = static_cast<void*>(q);
   
@@ -1903,6 +1903,9 @@ upon success and 0 upon failure.
 \ENDLOG 
 
 @<Define rules@>=
+
+  delete c;
+  c = 0;
 
   @=$$@> = static_cast<void*>(0);
 

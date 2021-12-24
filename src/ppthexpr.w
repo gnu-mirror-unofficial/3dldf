@@ -2074,14 +2074,17 @@ Added this rule.
     @<Common declarations for rules@>@; 
 
 
-    Path* p = static_cast<Path*>(@=$1@>);
-    Path* q = static_cast<Path*>(@=$3@>);
-    string s = @=$2@>;
+    Path* p           = static_cast<Path*>(@=$1@>);
+    Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+    Path* q           = static_cast<Path*>(@=$3@>);
 
-    p->append(*q, s, true);
+    p->append(*q, c->connector_string, true);
 
     delete q;
     q = 0;
+
+    delete c;
+    c = 0;
 
     @=$$@> = static_cast<void*>(p);
 
@@ -2109,7 +2112,7 @@ Added this rule.
 @*3 \§path join>.
 
 @<Type declarations for non-terminal symbols@>=
-@=%type <string_value> path_join@>
+@=%type <pointer_value> path_join@>
 @=%type <int_value> path_modifier@>
 
 @q ***** (5) path_join --> basic_path_join.@>
@@ -2121,7 +2124,10 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
-  strcpy(@=$$@>, @=$1@>);
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->connector_string = @=$1@>;
+
+  @=$$@> =  static_cast<void*>(c); 
   
 };
 
@@ -2132,7 +2138,11 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
-  strcpy(@=$$@>, @=$2@>);
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->connector_string = @=$2@>;
+
+  @=$$@> =  static_cast<void*>(c); 
+
   
 };
 
@@ -2143,7 +2153,11 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
-  strcpy(@=$$@>, @=$1@>);
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->connector_string = @=$1@>;
+
+  @=$$@> =  static_cast<void*>(c); 
+
   
 };
 
@@ -2153,8 +2167,11 @@ Added this rule.
 {
   @<Common declarations for rules@>@; 
 
-  strcpy(@=$$@>, @=$2@>);
-  
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->connector_string = @=$2@>;
+
+  @=$$@> =  static_cast<void*>(c); 
+
 };
 
 @
@@ -2329,9 +2346,13 @@ Added this rule.
 {
 
   Path* p = static_cast<Path*>(@=$1@>);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
   Path* q = static_cast<Path*>(@=$3@>);
 
-  p->append(*q, @=$2@>, true);  
+  p->append(*q, c->connector_string, true);  
+
+  delete c;
+  c = 0;
 
   @=$$@> = static_cast<void*>(p); 
 
@@ -2358,13 +2379,17 @@ Now calling |p->adjust_connectors|.
 {
 
   Path* p = static_cast<Path*>(@=$1@>);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
   p->set_cycle(false);
   p->adjust_connectors();
 
-  *p += @=$2@>;
+  *p += c->connector_string;
 
   p->set_cycle(true);
+
+  delete c;
+  c = 0;
 
   @=$$@> = static_cast<void*>(p); 
 
@@ -2434,16 +2459,19 @@ Added this rule.
 @=path_element_list: path_element_list path_join point_expression@>
 {
 
-  Point* p = static_cast<Point*>(@=$3@>); 
   Path* q = static_cast<Path*>(@=$1@>);
+  Point* p = static_cast<Point*>(@=$3@>); 
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
-  *q += @=$2@>;
+  *q += c->connector_string;
 
   *q += *p;
 
-  @=$$@> = static_cast<void*>(q);
-
   delete p;
+  delete c;
+  c = 0;
+
+  @=$$@> = static_cast<void*>(q);
 
 };
 
@@ -2463,13 +2491,17 @@ Added this rule.
 {
 
   Path* p = static_cast<Path*>(@=$1@>);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
   Path* q = static_cast<Path*>(@=$3@>); 
 
-  p->append(*q, @=$2@>, true);
+  p->append(*q, c->connector_string, true);
 
   @=$$@> = static_cast<void*>(p);
 
   delete q;
+  q = 0;
+  delete c;
+  c = 0;
 
 };
 
@@ -2487,10 +2519,14 @@ Added this rule.
 {
 
   Path* q = static_cast<Path*>(@=$1@>);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
-  *q += @=$2@>;
+  *q += c->connector_string;
 
   q->set_cycle();
+
+  delete c;
+  c = 0;
 
   @=$$@> = static_cast<void*>(q);
 
