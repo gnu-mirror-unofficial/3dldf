@@ -2138,6 +2138,14 @@ Added this rule.
   
 };
 
+@
+@<Define rules@>=
+@=path_join: path_modifier basic_path_join path_modifier@>@/
+{
+
+  strcpy(@=$$@>, @=$2@>);
+  
+};
 
 @
 @<Define rules@>=
