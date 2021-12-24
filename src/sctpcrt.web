@@ -5748,6 +5748,53 @@ Added this section.
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
+
+    p.set(0, 1, 0);    
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("up", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    p.set(0, -1, 0);    
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("down", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(-1, 0, 0);    
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("left", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(1, 0, 0);    
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("right", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(0, 0, 1);    
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("forwards", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(0, 0, -1);    
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("backwards", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
   }
 
 @q ***** (5) |Paths|.  @>

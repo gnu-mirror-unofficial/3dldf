@@ -2155,6 +2155,29 @@ Added this rule.
  
 };
 
+@
+@<Define rules@>=
+@=path_modifier: LEFT_BRACE point_expression RIGHT_BRACE@>@/
+{
+   cerr << "path_modifier:  LEFT_BRACE point_expression RIGHT_BRACE" << endl;
+ 
+};
+
+@
+@<Define rules@>=
+@=path_modifier: LEFT_BRACE CURL numeric_expression RIGHT_BRACE@>@/
+{
+   cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
+ 
+};
+
+@
+@<Define rules@>=
+@=path_modifier: CONTROLS point_expression AND point_expression@>@/
+{
+   cerr << "path_modifier:  CONTROLS point_expression AND point_expression" << endl;
+ 
+};
 
 @q *** (3) basic_path_join.@>
 @*2 \§basic path join>.
