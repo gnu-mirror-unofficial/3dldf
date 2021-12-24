@@ -1360,7 +1360,8 @@ Added this rule.
 @q *** (3) path_primary: box_or_circle_text LEFT_PARENTHESIS point_expression COMMA string_expression    @>
 @q                       RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional @>
 
-@*1 \§path primary> $\longrightarrow$ \§box or circle text> \.{BOX\_TEXT} \.{LEFT\_PARENTHESIS} \§point expression \.{COMMA} 
+@*1 \§path primary> $\longrightarrow$ \§box or circle text> \.{BOX\_TEXT} \.{LEFT\_PARENTHESIS} 
+\§point expression \.{COMMA} 
 \§string expression> \.{RIGHT_PARENTHESIS} \§box or circle text option list> \§transformer optional>.
 \initials{LDF 2021.07.26.}
 
@@ -2320,6 +2321,8 @@ Removed debugging code.
     @=$$@> = static_cast<void*>(q); 
 
 };
+
+@q !!START HERE:  LDF 2021.12.24.  Add rules for tension, controls, curl and dir.  @>
 
 @q ***** (5) path_element_list --> path_element_list @>   
 @q ***** (5) path_join point_expression.             @>   
