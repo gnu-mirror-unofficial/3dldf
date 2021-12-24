@@ -2107,6 +2107,7 @@ Added this rule.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <string_value> path_join@>
+@=%type <int_value> path_modifier@>
 
 @q ***** (5) path_join --> basic_path_join.@>
 @*4 \§path join> $\longrightarrow$ \§basic path join>.
@@ -2118,6 +2119,34 @@ Added this rule.
   strcpy(@=$$@>, @=$1@>);
   
 };
+
+@
+@<Define rules@>=
+@=path_join: path_modifier basic_path_join@>@/
+{
+
+  strcpy(@=$$@>, @=$2@>);
+  
+};
+
+@
+@<Define rules@>=
+@=path_join: basic_path_join path_modifier@>@/
+{
+
+  strcpy(@=$$@>, @=$1@>);
+  
+};
+
+
+@
+@<Define rules@>=
+@=path_modifier: TENSION numeric_expression@>@/
+{
+   cerr << "path_modifier:  TENSION numeric_expression" << endl;
+ 
+};
+
 
 @q *** (3) basic_path_join.@>
 @*2 \§basic path join>.
