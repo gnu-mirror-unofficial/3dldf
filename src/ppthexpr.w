@@ -2080,11 +2080,10 @@ Added this rule.
 
     p->append(*q, c->connector_string, true);
 
+    p->connector_type_vector.push_back(c);
+
     delete q;
     q = 0;
-
-    delete c;
-    c = 0;
 
     @=$$@> = static_cast<void*>(p);
 
@@ -2350,9 +2349,7 @@ Added this rule.
   Path* q = static_cast<Path*>(@=$3@>);
 
   p->append(*q, c->connector_string, true);  
-
-  delete c;
-  c = 0;
+  p->connector_type_vector.push_back(c);
 
   @=$$@> = static_cast<void*>(p); 
 
@@ -2385,11 +2382,9 @@ Now calling |p->adjust_connectors|.
   p->adjust_connectors();
 
   *p += c->connector_string;
+  p->connector_type_vector.push_back(c);
 
   p->set_cycle(true);
-
-  delete c;
-  c = 0;
 
   @=$$@> = static_cast<void*>(p); 
 
@@ -2467,9 +2462,9 @@ Added this rule.
 
   *q += *p;
 
+  q->connector_type_vector.push_back(c);
+
   delete p;
-  delete c;
-  c = 0;
 
   @=$$@> = static_cast<void*>(q);
 
@@ -2495,13 +2490,12 @@ Added this rule.
   Path* q = static_cast<Path*>(@=$3@>); 
 
   p->append(*q, c->connector_string, true);
+  p->connector_type_vector.push_back(c);
 
   @=$$@> = static_cast<void*>(p);
 
   delete q;
   q = 0;
-  delete c;
-  c = 0;
 
 };
 
@@ -2522,11 +2516,9 @@ Added this rule.
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
   *q += c->connector_string;
+  q->connector_type_vector.push_back(c);
 
   q->set_cycle();
-
-  delete c;
-  c = 0;
 
   @=$$@> = static_cast<void*>(q);
 

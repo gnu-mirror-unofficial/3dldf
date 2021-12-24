@@ -1867,11 +1867,11 @@ Removed debugging code.
 @<Define rules@>=
 
    if (entry == static_cast<Id_Map_Entry_Node>(0) || entry->object == static_cast<void*>(0))
-      {
+   {
+      delete c;
+      c = 0;
 
-          /* Do nothing.  */
-
-      } /* |if (entry == 0 || entry->object == 0)|  */
+   } /* |if (entry == 0 || entry->object == 0)|  */
 
 @q ****** (6).  |entry != 0 && entry->object != 0|.@> 
 
@@ -1886,6 +1886,8 @@ Removed debugging code.
               Path* q = static_cast<Path*>(entry->object);           
 
               *q += c->connector_string;
+
+              q->connector_type_vector.push_back(c);
  
               entry->object = static_cast<void*>(q);
   
@@ -1904,8 +1906,6 @@ upon success and 0 upon failure.
 
 @<Define rules@>=
 
-  delete c;
-  c = 0;
 
   @=$$@> = static_cast<void*>(0);
 
