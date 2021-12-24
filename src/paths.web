@@ -1680,13 +1680,34 @@ Now deleting |dash_pattern_vector| and |pen_vector| and setting them to
         pen_vector = static_cast<Pointer_Vector<Pen>*>(0);
     }
 
-@q *** (3).@> 
+@q *** (3) @>
+@
+\LOG
+\initials{LDF 2021.12.24.}
+Added this section.
+\ENDLOG
+
+@<Define |Path| functions@>=
+
+  for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       ++iter)
+  {
+     delete *iter;
+     *iter = 0;
+  }
+  connector_type_vector.clear();
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
 
     if (DEBUG)
       {
-          cerr << "Exiting ~Path().\n";
+          cerr << "Exiting Path destructor.\n";
       }
-}
+
+} /* End of |Path| destructor definition  */
 
 @q * (1) Clear.@>
 @* Clear.  
