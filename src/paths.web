@@ -13605,7 +13605,8 @@ class Connector_Type
    friend class Path;
    friend int yyparse(yyscan_t);
 
-   int type;     
+   int type0;
+   int type1;
 
    string connector_string;
    Point *pt0;
@@ -13614,6 +13615,7 @@ class Connector_Type
    real  r1;
    
    public:
+      const static unsigned int NULL_TYPE;
       const static unsigned int PLAIN_TYPE;     
       const static unsigned int DIR_TYPE;     
       const static unsigned int CURL_TYPE;       
@@ -13628,11 +13630,12 @@ class Connector_Type
 @
 @<|Connector_Type| static constant initializations@>=
 
-const unsigned int Connector_Type::PLAIN_TYPE    = 0U;     
-const unsigned int Connector_Type::DIR_TYPE      = 1U;     
-const unsigned int Connector_Type::CURL_TYPE     = 2U;       
-const unsigned int Connector_Type::TENSION_TYPE  = 3U;
-const unsigned int Connector_Type::CONTROLS_TYPE = 4U;
+const unsigned int Connector_Type::NULL_TYPE     = 0U;
+const unsigned int Connector_Type::PLAIN_TYPE    = 1U;     
+const unsigned int Connector_Type::DIR_TYPE      = 2U;     
+const unsigned int Connector_Type::CURL_TYPE     = 3U;       
+const unsigned int Connector_Type::TENSION_TYPE  = 4U;
+const unsigned int Connector_Type::CONTROLS_TYPE = 5U;
 
 
 @q ** (2) |Connector_Type| functions.@>
@@ -13667,7 +13670,8 @@ Connector_Type(void);
 @<|Connector_Type| function definitions@>=
 Connector_Type::Connector_Type(void)
 {
-   type = 0;     
+   type0 = PLAIN_TYPE;     
+   type1 = NULL_TYPE;     
 
    connector_string = "";
 
@@ -13727,7 +13731,8 @@ operator=(const Connector_Type &c);
 void
 Connector_Type::operator=(const Connector_Type &c)
 {
-   type = c.type;     
+   type0 = c.type0;     
+   type1 = c.type1;     
 
    connector_string = c.connector_string;
 
@@ -13800,28 +13805,63 @@ show(string s = "Connector_Type:") const;
 void
 Connector_Type::show(string s) const
 {
+@q **** (4) @>
+
   cerr << s << endl << "connector_string:  " << connector_string << endl;
 
-  if (type == PLAIN_TYPE)
+  if (type0 == NULL_TYPE)
   {
-      cerr << "type:  PLAIN_TYPE." << endl;
+      cerr << "type0:  NULL_TYPE." << endl;
   }
-  else if (type == DIR_TYPE)
+  else if (type0 == PLAIN_TYPE)
   {
-      cerr << "type:  DIR_TYPE." << endl;
+      cerr << "type0:  PLAIN_TYPE." << endl;
   }
-  else if (type == CURL_TYPE)       
+  else if (type0 == DIR_TYPE)
   {
-      cerr << "type:  CURL_TYPE." << endl;
+      cerr << "type0:  DIR_TYPE." << endl;
   }
-  else if (type == TENSION_TYPE)
+  else if (type0 == CURL_TYPE)       
   {
-      cerr << "type:  TENSION_TYPE." << endl;
+      cerr << "type0:  CURL_TYPE." << endl;
   }
-  else if (type == CONTROLS_TYPE)
+  else if (type0 == TENSION_TYPE)
   {
-      cerr << "type:  CONTROLS_TYPE." << endl;
+      cerr << "type0:  TENSION_TYPE." << endl;
   }
+  else if (type0 == CONTROLS_TYPE)
+  {
+      cerr << "type0:  CONTROLS_TYPE." << endl;
+  }
+
+@q **** (4) @>
+
+  if (type1 == NULL_TYPE)
+  {
+      cerr << "type1:  NULL_TYPE." << endl;
+  }
+  else if (type1 == PLAIN_TYPE)
+  {
+      cerr << "type1:  PLAIN_TYPE." << endl;
+  }
+  else if (type1 == DIR_TYPE)
+  {
+      cerr << "type1:  DIR_TYPE." << endl;
+  }
+  else if (type1 == CURL_TYPE)       
+  {
+      cerr << "type1:  CURL_TYPE." << endl;
+  }
+  else if (type1 == TENSION_TYPE)
+  {
+      cerr << "type1:  TENSION_TYPE." << endl;
+  }
+  else if (type1 == CONTROLS_TYPE)
+  {
+      cerr << "type1:  CONTROLS_TYPE." << endl;
+  }
+
+@q **** (4) @>
 
   return;
 

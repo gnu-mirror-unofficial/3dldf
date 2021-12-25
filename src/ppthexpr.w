@@ -2172,7 +2172,6 @@ Added this rule.
   c->connector_string = @=$1@>;
 
   @=$$@> =  static_cast<void*>(c); 
-
   
 };
 
