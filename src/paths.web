@@ -657,6 +657,18 @@ This is useful in the setting functions.
 
    if (connectors.size() > 0)
         connectors.clear();
+   
+   if (connector_type_vector.size() > 0)
+   {
+       for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+            iter != connector_type_vector.end();
+            ++iter)
+       {
+          delete *iter;
+          *iter = 0;
+       }
+       connector_type_vector.clear();
+   }
 
 @q ** (2) Default constructor. No arguments.@>
 @*1 Default constructor. No arguments.
@@ -847,6 +859,14 @@ Path::Path(const Point& p0, const Point& p1)
   points.push_back(create_new<Point>(p1));
 
   connectors.push_back("--");
+
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->type0 = Connector_Type::PLAIN_TYPE;
+  c->type1 = Connector_Type::NULL_TYPE;
+  c->connector_string = "--";
+
+  connector_type_vector.push_back(c);
+
   if (DEBUG)
     cerr << "Exiting Path() (line version).\n";
   return;
@@ -951,8 +971,17 @@ Path::set(const Point& p0, const Point& p1)
   points.push_back(create_new<Point>(p0));
   points.push_back(create_new<Point>(p1));
   connectors.push_back("--");
+
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->type0 = Connector_Type::PLAIN_TYPE;
+  c->type1 = Connector_Type::NULL_TYPE;
+  c->connector_string = "--";
+
+  connector_type_vector.push_back(c);
+
   line_switch = true;
-}
+
+} /* End of |Path::set(const Point& p0, const Point& p1)| definition  */
 
 @q ** (2) Points and one type of connector.@>
 @*1 {\bf Points} and one type of connector.
@@ -1044,7 +1073,15 @@ Path::Path(string connector, bool@,@, cycle ... )
   line_switch = false;
 
   cycle_switch = cycle;
+
   connectors.push_back(connector);
+
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->type0 = Connector_Type::PLAIN_TYPE;
+  c->type1 = Connector_Type::NULL_TYPE;
+  c->connector_string = connector;
+
+  connector_type_vector.push_back(c);
 
   do_output = true;  /* LDF 2002.09.18.  Added this line.  */
 
@@ -1189,6 +1226,13 @@ Path::set(string connector, bool cycle ... )
 
     connectors.push_back(connector);
 
+    Connector_Type *c = create_new<Connector_Type>(0);
+    c->type0 = Connector_Type::PLAIN_TYPE;
+    c->type1 = Connector_Type::NULL_TYPE;
+    c->connector_string = connector;
+
+    connector_type_vector.push_back(c);
+
     va_list ap;  /* For the variable length argument list. */
     va_start(ap, cycle);
 
@@ -1309,13 +1353,23 @@ Path::Path(Point* first_point_ptr ... )
   va_list ap;  /* For the variable length argument list. */
   va_start(ap, first_point_ptr);
 
-Point* point_ptr;
+  Point* point_ptr;
   char* connector_ptr;
   string connector_string;
+
+  Connector_Type *c = 0;
 
   while ((connector_ptr = va_arg(ap, char*)) != static_cast<char *>(0))
     {
       connectors.push_back((connector_string = connector_ptr));
+
+      c = create_new<Connector_Type>(0);
+      c->type0 = Connector_Type::PLAIN_TYPE;
+      c->type1 = Connector_Type::NULL_TYPE;
+      c->connector_string = connector_string;
+
+      connector_type_vector.push_back(c);
+
       if ((point_ptr = va_arg(ap, Point*)) ==  static_cast<Point*>(0))
         {
           cycle_switch = true;
@@ -1434,17 +1488,26 @@ Path::set(Point* first_point_ptr ... )
     char* connector_ptr;
     string connector_string;
 
-    while ((connector_ptr = va_arg(ap, char*)) != (char *) 0)
-      {
+    Connector_Type *c = 0;
 
-          connectors.push_back((connector_string = connector_ptr));
-          if ((point_ptr = va_arg(ap, Point*)) ==  static_cast<Point*>(0))
-            {
-                cycle_switch = true;
-                break;
-            }
-          points.push_back(create_new<Point>(point_ptr));
-      }
+    while ((connector_ptr = va_arg(ap, char*)) != (char *) 0)
+    {
+        connectors.push_back((connector_string = connector_ptr));
+
+        c = create_new<Connector_Type>(0);
+
+        c->type0 = Connector_Type::PLAIN_TYPE;
+        c->type1 = Connector_Type::NULL_TYPE;
+        c->connector_string = connector_string;
+        connector_type_vector.push_back(c);
+
+        if ((point_ptr = va_arg(ap, Point*)) ==  static_cast<Point*>(0))
+        {
+            cycle_switch = true;
+            break;
+        }
+        points.push_back(create_new<Point>(point_ptr));
+    }
     va_end(ap);
 }
 
@@ -1637,13 +1700,24 @@ Path::~Path(void)
    for(vector<Point*>::iterator iter = points.begin();
       iter != points.end();
       iter++)
-    {
+   {
       delete *iter;
-    }
+      *iter = 0;
+   }
 
    points.clear();  
 
    connectors.clear();  
+
+   for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+      iter != connector_type_vector.end();
+      iter++)
+   {
+      delete *iter;
+      *iter = 0;
+   }
+   
+   connector_type_vector.clear();
 
 @q *** (3).@> 
 
@@ -1834,8 +1908,20 @@ inline
 void 
 clear_connectors(void)
 {
-  connectors.clear();
-  return;
+   connectors.clear();
+
+   for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+      iter != connector_type_vector.end();
+      iter++)
+   {
+      delete *iter;
+      *iter = 0;
+   }
+   
+   connector_type_vector.clear();
+
+   return;
+
 } /* End of |Path::clear_connectors| definition.  */
 
 @q * (1) Get copy.@>
@@ -2259,8 +2345,7 @@ Path::push_dash_pattern(Dash_Pattern*& d, bool copy)
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2003.02.08.}
-Overload with a version taking a
-|vector<string>| as its argument.
+Overload with a version taking a |vector<string>| as its argument.
 arguments.  
 \ENDTODO 
 
@@ -2280,6 +2365,9 @@ set_connectors(const string s = "..");
 void
 Path::set_connectors(const string s)
 {
+
+/* !!START HERE:  LDF 2021.12.25. */ 
+
   connectors.clear();
   connectors.push_back(s);
 }
@@ -12188,10 +12276,8 @@ in the reversed |Path|, which isn't what we want.
 
 @q **** (4).@> 
 
-@ If I don't explicitly refer to the |std| namespace here, this
-function is called, and since the arguments are different 
-from the one used for this function, this causes an 
-error at compile time.  
+@ If I don't explicitly refer to the |std| namespace here, this function is called, and since the 
+arguments are different from the one used for this function, this causes an error at compile time.  
 \initials{LDF 2002.4.7.}
 
 @<Define |Path| functions@>=
