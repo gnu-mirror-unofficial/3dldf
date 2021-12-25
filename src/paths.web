@@ -597,16 +597,24 @@ and subsequently resizing it, if necessary.
     projective_extremes.resize(6, 0);
 
   for (vector <Point*>::const_iterator p_iter = p.points.begin();
-       p_iter != p.points.end();
-       p_iter++)
-    points.push_back(create_new<Point>(*p_iter));      
+     p_iter != p.points.end();
+     p_iter++)
+     points.push_back(create_new<Point>(*p_iter));      
     
   for (vector <string>::const_iterator c_iter = p.connectors.begin();
        c_iter != p.connectors.end();
        c_iter++)
-    {
-      connectors.push_back(*c_iter);
-    }
+  {
+    connectors.push_back(*c_iter);
+  }
+
+  for (vector <Connector_Type*>::const_iterator c_iter = p.connector_type_vector.begin();
+       c_iter != p.connector_type_vector.end();
+       c_iter++)
+  {
+    connector_type_vector.push_back(create_new<Connector_Type>(*c_iter));
+  }
+
   return *this;
 
 } /* End of |Path::operator=(const Path& p)| definition.  */
@@ -9534,7 +9542,7 @@ Path::show(string text, char coords,
    else
      cerr << ";\n";
 
-cerr << "fill_draw_value == ";
+   cerr << "fill_draw_value == ";
 
    if (fill_draw_value == DRAW_VALUE)
      cerr << "DRAW_VALUE";
@@ -9583,14 +9591,26 @@ cerr << "fill_draw_value == ";
      cerr << "`arrow' == `Path::SINGLE_ARROW'.";
 
    else if (arrow == DOUBLE_ARROW)
-     cerr << "`arrow' == `Path::DOUBLE_ARROW'.";
+     cerr << "`arrow' == `Path::DOUBLE_ARROW'." << endl;
 
    else
-     cerr << "`arrow' == `Path::NO_ARROW'.";
+     cerr << "`arrow' == `Path::NO_ARROW'." << endl;
+
+   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+
+   if (connector_type_vector.size() > 0)
+      cerr << "connector_type_vector:" << endl;
+
+   for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+        iter != connector_type_vector.end();
+        ++iter)
+   {
+       (*iter)->show();
+   }
 
    cerr << endl << endl;
 
-   return;
+  return;
 
 } /* End of |Path::show| definition.  */
 
@@ -13772,32 +13792,35 @@ Added this function.
 
 @<|Connector_Type| function declarations@>=
 void
-show(string s = "Connector_Type:");
+show(string s = "Connector_Type:") const;
 
 @q **** (4) Definition @>
 @
 @<|Connector_Type| function definitions@>=
 void
-Connector_Type::show(string s)
+Connector_Type::show(string s) const
 {
-  cerr << s << endl;
-
-/* !!START HERE:  LDF 2021.12.24.  */ 
+  cerr << s << endl << "connector_string:  " << connector_string << endl;
 
   if (type == PLAIN_TYPE)
   {
+      cerr << "type:  PLAIN_TYPE." << endl;
   }
   else if (type == DIR_TYPE)
   {
+      cerr << "type:  DIR_TYPE." << endl;
   }
   else if (type == CURL_TYPE)       
   {
+      cerr << "type:  CURL_TYPE." << endl;
   }
   else if (type == TENSION_TYPE)
   {
+      cerr << "type:  TENSION_TYPE." << endl;
   }
   else if (type == CONTROLS_TYPE)
   {
+      cerr << "type:  CONTROLS_TYPE." << endl;
   }
 
   return;

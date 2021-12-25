@@ -1857,9 +1857,27 @@ Removed debugging code.
 @=operation_assignment: path_variable PLUS_ASSIGN path_join@>@/
 {
 
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+  DEBUG = true; /* |false| */
+
+  if (DEBUG)
+  { 
+     cerr << "*** Parser:  Rule `operation_assignment: path_variable PLUS_ASSIGN path_join'."
+          << endl;
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   Connector_Type *c = static_cast<Connector_Type*>(@=$3@>);
 
-  Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
+  c->show("*c:");
+
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar();      
+
+  entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
 @q ***** (5) Error handling:  |entry == 0 || entry->object == 0|.@>   
 @ Error handling:  |entry == 0 || entry->object == 0|.

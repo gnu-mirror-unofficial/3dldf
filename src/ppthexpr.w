@@ -2071,21 +2071,37 @@ Added this rule.
 @=path_tertiary: path_secondary path_join path_expression@>@/
 {
 
-    @<Common declarations for rules@>@; 
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_tertiary: path_secondary path_join path_expression'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   Path* p           = static_cast<Path*>(@=$1@>);
+   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+   Path* q           = static_cast<Path*>(@=$3@>);
+
+   c->show("*c:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar();      
 
 
-    Path* p           = static_cast<Path*>(@=$1@>);
-    Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
-    Path* q           = static_cast<Path*>(@=$3@>);
+   p->append(*q, c->connector_string, true);
 
-    p->append(*q, c->connector_string, true);
+   p->connector_type_vector.push_back(c);
 
-    p->connector_type_vector.push_back(c);
+   delete q;
+   q = 0;
 
-    delete q;
-    q = 0;
-
-    @=$$@> = static_cast<void*>(p);
+   @=$$@> = static_cast<void*>(p);
 
 };
 
@@ -2343,15 +2359,33 @@ Added this rule.
  
 @=path_expression: path_expression path_join path_element_list@>
 {
+   @<Common declarations for rules@>@; 
 
-  Path* p = static_cast<Path*>(@=$1@>);
-  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
-  Path* q = static_cast<Path*>(@=$3@>);
+#if DEBUG_COMPILE
 
-  p->append(*q, c->connector_string, true);  
-  p->connector_type_vector.push_back(c);
+   DEBUG = true; /* |false| */
 
-  @=$$@> = static_cast<void*>(p); 
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_expression: path_expression path_join path_element_list'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   Path* p = static_cast<Path*>(@=$1@>);
+   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+   Path* q = static_cast<Path*>(@=$3@>);
+
+    c->show("*c:");
+
+    cerr << "XXX Enter <RETURN> to continue: ";
+    getchar();      
+
+
+    p->append(*q, c->connector_string, true);  
+    p->connector_type_vector.push_back(c);
+
+    @=$$@> = static_cast<void*>(p); 
 
 };
 
@@ -2375,8 +2409,26 @@ Now calling |p->adjust_connectors|.
 @=path_expression: path_expression path_join CYCLE@>@/
 {
 
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_expression: path_expression path_join CYCLE'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   Path* p = static_cast<Path*>(@=$1@>);
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+
+   c->show("*c:");
+
+   cerr << "XXX Enter <RETURN> to continue: ";
+   getchar();      
 
   p->set_cycle(false);
   p->adjust_connectors();
@@ -2453,10 +2505,27 @@ Added this rule.
 @<Define rules@>= 
 @=path_element_list: path_element_list path_join point_expression@>
 {
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+  DEBUG = true; /* |false| */
+
+  if (DEBUG)
+  { 
+     cerr << "*** Parser:  Rule `path_element_list: path_element_list path_join point_expression'."
+          << endl;
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   Path* q = static_cast<Path*>(@=$1@>);
   Point* p = static_cast<Point*>(@=$3@>); 
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+
+  c->show("*c:");
+
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar();      
 
   *q += c->connector_string;
 
@@ -2484,18 +2553,36 @@ Added this rule.
 @<Define rules@>= 
 @=path_element_list: path_element_list path_join path_tertiary@>
 {
+   @<Common declarations for rules@>@; 
 
-  Path* p = static_cast<Path*>(@=$1@>);
-  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
-  Path* q = static_cast<Path*>(@=$3@>); 
+#if DEBUG_COMPILE
 
-  p->append(*q, c->connector_string, true);
-  p->connector_type_vector.push_back(c);
+   DEBUG = true; /* |false| */
 
-  @=$$@> = static_cast<void*>(p);
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_element_list: path_element_list path_join path_tertiary'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-  delete q;
-  q = 0;
+   Path* p = static_cast<Path*>(@=$1@>);
+   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+   Path* q = static_cast<Path*>(@=$3@>); 
+
+   p->append(*q, c->connector_string, true);
+   p->connector_type_vector.push_back(c);
+
+   c->show("*c:");
+
+   cerr << "XXX Enter <RETURN> to continue: ";
+   getchar();      
+
+
+   @=$$@> = static_cast<void*>(p);
+
+   delete q;
+   q = 0;
 
 };
 
@@ -2511,9 +2598,26 @@ Added this rule.
 @<Define rules@>= 
 @=path_element_list: path_element_list path_join CYCLE@>
 {
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false| */
+
+   if (DEBUG)
+   { 
+      cerr << "*** Parser:  Rule `path_element_list: path_element_list path_join CYCLE'."
+           << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   Path* q = static_cast<Path*>(@=$1@>);
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
+
+  c->show("*c:");
+
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar();      
 
   *q += c->connector_string;
   q->connector_type_vector.push_back(c);
