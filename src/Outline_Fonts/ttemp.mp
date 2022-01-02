@@ -270,9 +270,17 @@ do_black := true;
 % A7 Portrait:  74 X 105
 % A8 Portrait:  52 X  74
 
-for i = 65 upto 90: %% Uppercase letters
-  outline (i, i, "eurb10", .1, 0, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black);
-endfor;
+%% LDF 2022.01.02.  Printed out using scaling_factor := .1 and scaling_factor := .13.
+%% Both of these sizes look good.
+
+outline (65, 65, "eurb10", .13, 0, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% A
+outline (66, 66, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% B
+outline (67, 67, "eurb10", .13, -.25cm, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% C
+outline (68, 68, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% D
+outline (69, 69, "eurb10", .13, 0, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% E
+outline (70, 70, "eurb10", .13, 0, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% F
+outline (71, 71, "eurb10", .13, -.25cm, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% G
+outline (72, 72, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black); %% H
 
 end;
 
