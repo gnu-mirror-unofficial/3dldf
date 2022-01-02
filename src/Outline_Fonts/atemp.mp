@@ -1,3 +1,53 @@
+%% * (1)
+
+% bboxmargin := 0;
+% %show bboxmargin;
+
+% path q[];
+% picture v[];
+
+% numeric dark_grey;
+% dark_grey = .5;
+% pen small_pen;
+% small_pen = pencircle scaled .25mm;
+
+% pickup small_pen;
+% beginfig(1);
+  
+%   v0 = thelabel(btex {\cmssbx A} etex, origin);
+%   q0 = bbox(v0);
+%   draw q0 withgreyscale dark_grey dashed evenly;
+%   draw v0;
+  
+% endfig;
+
+% end;
+
+% fontmapline "cmr10 CMR10 <cmr10.pfb";
+% picture g;
+% g := glyph 103 of "cmr10";
+
+
+%fontmapfile "=lm-ec.map";
+%fontmapline "cmr10 CMR10 <cmr10.pfb";
+
+fontmapline "cmssbx10 CMSSBX10 <cmssbx10.pfb";
+
+numeric fig_ctr;
+numeric char_ctr;
+picture v[];
+
+fig_ctr = 1;
+
+pen small_pen;
+small_pen = pencircle scaled .25mm;
+
+pen medium_pen;
+medium_pen = pencircle scaled .5mm;
+
+bboxmargin := 0;
+%bboxmargin := .5cm;
+
 %   %z0 = (((a[1][1] - a[1][0]) scaled 2) rotated 90) shifted a[1][0];
 
 %   z0 = ((a[1][1] - a[1][0]) rotated -90) shifted a[1][1];
