@@ -59,13 +59,13 @@
 %% \vsize=297mm
 %% \hsize=420mm
 
-\special{papersize=210mm, 297mm} %% DIN A4 Portrait
-\vsize=297mm
-\hsize=210mm
+%% \special{papersize=210mm, 297mm} %% DIN A4 Portrait
+%% \vsize=297mm
+%% \hsize=210mm
 
-%% \special{papersize=297mm, 210mm} %% DIN A4 Landscape
-%% \vsize=210mm
-%% \hsize=297mm
+\special{papersize=297mm, 210mm} %% DIN A4 Landscape
+\vsize=210mm
+\hsize=297mm
 
 %% (* 16 1.05)16.8
 %% (* 9 1.05)9.45
@@ -80,7 +80,12 @@
 %% \vsize=9.45cm
 %% \hsize=16.8cm
 
-%% DIN A5 Portrait:  148.5 X 210
+% A4 Portrait: 210 X 297   
+% A5 Portrait: 148 X 210   
+% A6 Portrait: 105 X 148
+% A7 Portrait:  74 X 105
+% A8 Portrait:  52 X  74
+
 
 \parindent=0pt
 \parskip=0pt
@@ -88,50 +93,44 @@
 \advance\voffset by -1in
 \advance\hoffset by -1in
 
-%\advance\hoffset by 1cm
+\advance\hoffset by 1cm
 \advance\voffset by 1cm
 
 \font\Large=cmr12
 
-\headline={\lower.25cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
-           Copyright {\copyright} 2021 Laurence D.~Finston.\hss\folio\hskip2cm{\tt \timestamp}\hss}}}
+\headline={\lower0cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
+           Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hss\folio\hskip2cm{\tt \timestamp}\hss}}}
 
 \def\epsfsize#1#2{#1}
+\epsfclipon
 
 \newcount\figcnt
 
 %% ** (2)
 
-\skip0=5pt plus 2pt minus 2pt
-\skip1=.125cm plus 2pt minus 2pt
-\skip2=.25cm plus 2pt minus 2pt   
-
 %% * (1)
 
-%% \vbox to \vsize{\vskip1cm
-%% \line{\hskip1cm\epsffile{ttemp065.eps}\hss}\vss}
-%% \eject
+\skip0=-3pt
+\skip1=-3pt
 
-%% \bye
-
-%% * (1)
-
-
-\def\A#1#2#3#4#5#6{\vbox to \vsize{\vskip-.75cm
-\line{\hskip\skip2\epsffile{ttemp#1.eps}\hskip\skip0\epsffile{ttemp#2.eps}\hss}
+\vbox{}
+\vskip2cm
+\leftline{\epsffile{ttemp065.eps}\hskip\skip0\epsffile{ttemp066.eps}\hskip\skip0
+\epsffile{ttemp067.eps}\hskip\skip0\epsffile{ttemp068.eps}}
 \vskip\skip1
-\line{\hskip\skip2\epsffile{ttemp#3.eps}\hskip\skip0\epsffile{ttemp#4.eps}\hss}
-\vskip\skip1
-\line{\hskip\skip2\epsffile{ttemp#5.eps}\hskip\skip0\epsffile{ttemp#6.eps}\hss}
-\vss}\eject}
+\leftline{\epsffile{ttemp069.eps}\hskip\skip0
+\epsffile{ttemp070.eps}\hskip\skip0
+\epsffile{ttemp071.eps}\hskip\skip0
+\epsffile{ttemp072.eps}}
+\vfil\eject
 
-\A{065}{066}{067}{068}{069}{070}
-\A{070}{071}{072}{073}{074}{075}
-\A{076}{077}{078}{079}{080}{081}
-\A{082}{083}{084}{085}{086}{087}
-\A{088}{089}{090}{048}{049}{050}
-\A{051}{052}{053}{054}{055}{056}
-\A{057}{097}{098}{099}{100}{101}
+\bye
+
+%% \A{088}{089}{090}{048}{049}{050}
+%% \A{051}{052}{053}{054}{055}{056}
+%% \A{057}{097}{098}{099}{100}{101}
+
+
 
 
 %% \def\A#1#2#3#4#5#6{\vbox to \vsize{\vskip-.75cm
@@ -145,7 +144,7 @@
 
 
 
-\bye
+
 
 
 

@@ -99,9 +99,6 @@ boolean do_black;
 
 do_black = true; % false;
 
-
-
-
 %% * (1)
 
 def fig_labels_A =
@@ -260,7 +257,26 @@ fontmapline "cmr7 CMR7 <cmr7.pfb";
 
 % end;
 
-%% ** (2) Euler Roman Bold
+
+%% ** (2) Euler Roman Bold, small.
+
+do_black := true;
+%% DIN A Series, Width X Height
+%%
+
+% A4 Portrait: 210 X 297   
+% A5 Portrait: 148 X 210   
+% A6 Portrait: 105 X 148
+% A7 Portrait:  74 X 105
+% A8 Portrait:  52 X  74
+
+for i = 65 upto 90: %% Uppercase letters
+  outline (i, i, "eurb10", .1, 0, 0, 0, 42mm, 64mm, 52mm, 74mm, 0, false, big_pen, do_black);
+endfor;
+
+end;
+
+%% ** (2) Euler Roman Bold, Large
 
 do_black := true;
 
@@ -275,6 +291,7 @@ for i = 65 upto 90: %% Uppercase letters
     outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);
   fi
 endfor;
+
 
 for i = 97 upto 122: %% Lowercase letters
   outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);

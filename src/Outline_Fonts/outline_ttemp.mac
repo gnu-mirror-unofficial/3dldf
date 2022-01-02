@@ -48,8 +48,8 @@
 
 
 def outline (expr char_ctr, fig_ctr, font, sscale_factor,
-    x_shift, y_shift, rotation_val,
-      inner_frame_wd, outer_frame_wd, box_margin, draw_border, ppen, ddo_black) =
+    x_shift, y_shift, rotation_val, inner_frame_wd, inner_frame_ht,
+      outer_frame_wd, outer_frame_ht, box_margin, draw_border, ppen, ddo_black) =
 
   message "Entering `outline'.";
   message "char_ctr == " & decimal char_ctr;
@@ -61,11 +61,11 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
     path outer_frame;
 
     if inner_frame_wd > 0:
-      inner_frame = unitsquare scaled inner_frame_wd;
+      inner_frame = unitsquare xscaled inner_frame_wd yscaled inner_frame_ht;
     fi
 
     if outer_frame_wd > 0:
-      outer_frame = unitsquare scaled outer_frame_wd;
+      outer_frame = unitsquare xscaled outer_frame_wd yscaled outer_frame_ht;
     fi
 
     path q;
@@ -89,7 +89,8 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
     center = .5[point 0 of u, point 2 of u];
     
     for item within w[fig_ctr]:
-      r[fig_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val)) shifted (x_shift, y_shift);
+      r[fig_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val))
+	shifted (x_shift, y_shift);
       if ddo_black:
        	draw r[fig_ctr][m] withpen ppen;
       else:
@@ -122,8 +123,9 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
       draw inner_frame transformed
 	begingroup
 	transform t;
-	t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u), .5(ypart point 2 of u - ypart point 1 of u)))
-	  shifted (-.5inner_frame_wd, -.5inner_frame_wd);
+	t = (identity shifted
+	    (.5(xpart point 1 of u - xpart point 0 of u), .5(ypart point 2 of u - ypart point 1 of u)))
+	  shifted (-.5inner_frame_wd, -.5inner_frame_ht);
 	t
       endgroup
       withpen medium_pen;
@@ -136,7 +138,7 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
 	transform t;
 	t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
 	      .5(ypart point 2 of u - ypart point 1 of u)))
-	  shifted (-.5outer_frame_wd, -.5outer_frame_wd);
+	  shifted (-.5outer_frame_wd, -.5outer_frame_ht);
 	t
       endgroup
       withpen medium_pen;
