@@ -47,11 +47,15 @@
 %%%% Laurence.Finston@gmx.de 
 
 
+%% * (1)
+
+pair b[][];
+
 %% * (1) outline
 
 def outline (expr char_ctr, picture_ctr, font, sscale_factor,
-    x_shift, y_shift, rotation_val, inner_frame_wd, inner_frame_ht,
-      outer_frame_wd, outer_frame_ht, box_margin, draw_border, ppen, ddo_black, ddo_reflect)
+    x_shift, y_shift, rotation_val, iinner_frame_wd, iinner_frame_ht,
+      oouter_frame_wd, oouter_frame_ht, box_margin, draw_border, ppen, ddo_black, ddo_reflect)
     =
 
 %% ** (2)
@@ -66,22 +70,21 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
 
     currentpicture := nullpicture;
     
-    path inner_frame;
-    path outer_frame;
+    path iinner_frame;
+    path oouter_frame;
 
-    if inner_frame_wd > 0:
-      inner_frame = unitsquare xscaled inner_frame_wd yscaled inner_frame_ht;
+    if iinner_frame_wd > 0:
+      iinner_frame = unitsquare xscaled iinner_frame_wd yscaled iinner_frame_ht;
     fi
 
-    if outer_frame_wd > 0:
-      outer_frame = unitsquare xscaled outer_frame_wd yscaled outer_frame_ht;
+    if oouter_frame_wd > 0:
+      oouter_frame = unitsquare xscaled oouter_frame_wd yscaled oouter_frame_ht;
     fi
 
     path q;
     path u;
 
     pair a[][];
-    pair b[][];
     
     numeric m;
 
@@ -128,45 +131,34 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
       draw u withpen medium_pen;
     fi
 
-    if inner_frame_wd > 0:
-      draw inner_frame transformed
-	begingroup
-	transform t;
-	t = (identity shifted
-	    (.5(xpart point 1 of u - xpart point 0 of u), .5(ypart point 2 of u - ypart point 1 of u)))
-	  shifted (-.5inner_frame_wd, -.5inner_frame_ht);
-	t
-      endgroup
-    withpen medium_pen;
-  fi
-  
-  if (outer_frame_wd > 0) and (outer_frame_wd <> inner_frame_wd):
-    message "Drawing outer frame.";
-    draw outer_frame transformed
-      begingroup
-      transform t;
-      t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
-	    .5(ypart point 2 of u - ypart point 1 of u)))
-	shifted (-.5outer_frame_wd, -.5outer_frame_ht);
-      t
-    endgroup
-    withpen medium_pen;
-    for i = 0 upto 3:
-      b[picture_ctr][i] = point i of outer_frame;
-    endfor;
-  else:
-    message "Not drawing outer frame.";
-    if inner_frame_wd > 0:
+    transform t[];
+
+    if iinner_frame_wd > 0:
+      t0 = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u), .5(ypart point 2 of u - ypart point 1 of u)))
+	shifted (-.5iinner_frame_wd, -.5iinner_frame_ht);
+
+      iinner_frame := iinner_frame transformed t0;
+      draw iinner_frame withpen medium_pen;
+    fi
+    
+    if (oouter_frame_wd > 0) and (oouter_frame_wd <> iinner_frame_wd):
+      message "Drawing outer frame.";
+      t1 = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
+	    .5(ypart point 2 of u - ypart point 1 of u))) shifted (-.5oouter_frame_wd, -.5oouter_frame_ht);
+      oouter_frame := oouter_frame transformed t1;
+      draw oouter_frame withpen medium_pen;
       for i = 0 upto 3:
-	b[picture_ctr][i] = point i of outer_frame;
-      fi;
-    endfor;
-  fi
+	b[picture_ctr][i] = point i of oouter_frame;
+      endfor;
+    else:
+      message "Not drawing outer frame.";
 
-
-  
-  % shifted (-5.5cm, -5.5cm) 
-  %draw unitsquare scaled 11cm withpen big_pen;
+      if iinner_frame_wd > 0:
+	for i = 0 upto 3:
+	  b[picture_ctr][i] = point i of iinner_frame;
+	endfor;
+      fi
+    fi
 
   if (picture_ctr = 65) and (font = "cmssbx10"):
     fig_labels_A;
@@ -175,20 +167,23 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
   z0 = center shifted (0, 1cm);
   z1 = center shifted (0, -1cm);
 
-    % label(btex $z_0$ etex, z0);
-    % label(btex $z_1$ etex, z1);
+  % label(btex $z_0$ etex, z0);
+  % label(btex $z_1$ etex, z1);
 
   if ddo_reflect:
     currentpicture := currentpicture reflectedabout(z0, z1);
 
-    dotlabel.urt(btex $p_0$ etex,  b[picture_ctr][0]);
-    dotlabel.ulft(btex $p_1$ etex, b[picture_ctr][1]);
-    dotlabel.llft(btex $p_2$ etex, b[picture_ctr][2]);
-    dotlabel.lrt(btex $p_3$ etex,  b[picture_ctr][3]);
+    for i = 0 upto 3:
+      a[picture_ctr][i] := a[picture_ctr][i] reflectedabout(z0, z1);
+    endfor;
 
   fi;
-  
 
+  label.urt(TEX("$b_{" & decimal(picture_ctr) & "}^0$"), b[picture_ctr][0]);
+  label.ulft(TEX("$b_{" & decimal(picture_ctr) & "}^1$"), b[picture_ctr][1]);
+  label.llft(TEX("$b_{" & decimal(picture_ctr) & "}^2$"), b[picture_ctr][2]);
+  label.lrt(TEX("$b_{" & decimal(picture_ctr) & "}^3$"),  b[picture_ctr][3]);
+  
   v[picture_ctr] = currentpicture;
   
   endgroup;
