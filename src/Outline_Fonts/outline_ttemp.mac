@@ -49,16 +49,23 @@
 
 %% * (1) outline
 
-def outline (expr char_ctr, fig_ctr, font, sscale_factor,
+def outline (expr char_ctr, picture_ctr, font, sscale_factor,
     x_shift, y_shift, rotation_val, inner_frame_wd, inner_frame_ht,
       outer_frame_wd, outer_frame_ht, box_margin, draw_border, ppen, ddo_black, ddo_reflect)
-    (suffix s)
     =
 
+%% ** (2)
+    
   message "Entering `outline'.";
   message "char_ctr == " & decimal char_ctr;
   message "";
 
+  begingroup;
+    
+    save x, y;
+
+    currentpicture := nullpicture;
+    
     path inner_frame;
     path outer_frame;
 
@@ -74,6 +81,7 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
     path u;
 
     pair a[][];
+    pair b[][];
     
     numeric m;
 
@@ -83,39 +91,38 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
     interim ahangle := 25;
     interim bboxmargin := box_margin;
     
-    w[fig_ctr] := glyph char_ctr of font;
+    w[picture_ctr] := glyph char_ctr of font;
     
-    u = bbox(w[fig_ctr] scaled sscale_factor);
+    u = bbox(w[picture_ctr] scaled sscale_factor);
 
     pair center;
     center = .5[point 0 of u, point 2 of u];
     
-    for item within w[fig_ctr]:
-      r[fig_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val))
+    for item within w[picture_ctr]:
+      r[picture_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val))
 	shifted (x_shift, y_shift);
       if ddo_black:
-       	draw r[fig_ctr][m] withpen ppen;
+	draw r[picture_ctr][m] withpen ppen;
       else:
-       	drawarrow r[fig_ctr][m] withcolor (.6,.9,.6) withpen medium_pen;
+	drawarrow r[picture_ctr][m] withcolor (.6,.9,.6) withpen medium_pen;
       fi
-      for j = 0 upto length r[fig_ctr][m]:
-      	a[m][j] = p[fig_ctr][m][j] = point j of r[fig_ctr][m];
-      	if not ddo_black:
-      	  pickup pencircle scaled .15;
-      	  draw (point j of r[fig_ctr][m] -- precontrol j of r[fig_ctr][m])
-      	    dashed evenly withcolor blue withpen medium_pen;
-      	  draw (point j of r[fig_ctr][m] -- postcontrol j of r[fig_ctr][m])
-      	    dashed evenly withcolor blue withpen medium_pen;
-      	  pickup pencircle scaled 1.5;
-      	  draw precontrol j of r[fig_ctr][m] withcolor red withpen medium_pen;
-      	  draw postcontrol j of r[fig_ctr][m] withcolor red withpen medium_pen;
-      	  pickup pencircle scaled 1.5;
-      	  draw point j of r[fig_ctr][m] withcolor black withpen medium_pen;
-      	fi
+      for j = 0 upto length r[picture_ctr][m]:
+	a[m][j] = p[picture_ctr][m][j] = point j of r[picture_ctr][m];
+	if not ddo_black:
+	  pickup pencircle scaled .15;
+	  draw (point j of r[picture_ctr][m] -- precontrol j of r[picture_ctr][m])
+	    dashed evenly withcolor blue withpen medium_pen;
+	  draw (point j of r[picture_ctr][m] -- postcontrol j of r[picture_ctr][m])
+	    dashed evenly withcolor blue withpen medium_pen;
+	  pickup pencircle scaled 1.5;
+	  draw precontrol j of r[picture_ctr][m] withcolor red withpen medium_pen;
+	  draw postcontrol j of r[picture_ctr][m] withcolor red withpen medium_pen;
+	  pickup pencircle scaled 1.5;
+	  draw point j of r[picture_ctr][m] withcolor black withpen medium_pen;
+	fi
       endfor;
       m := incr m;
     endfor;
-    v[fig_ctr] = currentpicture;
 
     if draw_border:
       draw u withpen medium_pen;
@@ -130,42 +137,66 @@ def outline (expr char_ctr, fig_ctr, font, sscale_factor,
 	  shifted (-.5inner_frame_wd, -.5inner_frame_ht);
 	t
       endgroup
-      withpen medium_pen;
-    fi
-    
-    if (outer_frame_wd > 0) and (outer_frame_wd <> inner_frame_wd):
-      message "Drawing outer frame.";
-      draw outer_frame transformed
-	begingroup
-	transform t;
-	t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
-	      .5(ypart point 2 of u - ypart point 1 of u)))
-	  shifted (-.5outer_frame_wd, -.5outer_frame_ht);
-	t
-      endgroup
-      withpen medium_pen;
-    else:
-      message "Not drawing outer frame.";
-    fi
+    withpen medium_pen;
+  fi
+  
+  if (outer_frame_wd > 0) and (outer_frame_wd <> inner_frame_wd):
+    message "Drawing outer frame.";
+    draw outer_frame transformed
+      begingroup
+      transform t;
+      t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
+	    .5(ypart point 2 of u - ypart point 1 of u)))
+	shifted (-.5outer_frame_wd, -.5outer_frame_ht);
+      t
+    endgroup
+    withpen medium_pen;
+    for i = 0 upto 3:
+      b[picture_ctr][i] = point i of outer_frame;
+    endfor;
+  else:
+    message "Not drawing outer frame.";
+    if inner_frame_wd > 0:
+      for i = 0 upto 3:
+	b[picture_ctr][i] = point i of outer_frame;
+      fi;
+    endfor;
+  fi
 
-    % shifted (-5.5cm, -5.5cm) 
-    %draw unitsquare scaled 11cm withpen big_pen;
 
-    if (fig_ctr = 65) and (font = "cmssbx10"):
-      fig_labels_A;
-    fi
+  
+  % shifted (-5.5cm, -5.5cm) 
+  %draw unitsquare scaled 11cm withpen big_pen;
 
-    z0 = center shifted (0, 1cm);
-    z1 = center shifted (0, -1cm);
+  if (picture_ctr = 65) and (font = "cmssbx10"):
+    fig_labels_A;
+  fi
+
+  z0 = center shifted (0, 1cm);
+  z1 = center shifted (0, -1cm);
 
     % label(btex $z_0$ etex, z0);
     % label(btex $z_1$ etex, z1);
 
-    if ddo_reflect:
-      currentpicture := currentpicture reflectedabout(z0, z1);
-    fi;
+  if ddo_reflect:
+    currentpicture := currentpicture reflectedabout(z0, z1);
+
+    dotlabel.urt(btex $p_0$ etex,  b[picture_ctr][0]);
+    dotlabel.ulft(btex $p_1$ etex, b[picture_ctr][1]);
+    dotlabel.llft(btex $p_2$ etex, b[picture_ctr][2]);
+    dotlabel.lrt(btex $p_3$ etex,  b[picture_ctr][3]);
+
+  fi;
+  
+
+  v[picture_ctr] = currentpicture;
+  
+  endgroup;
 
   message "Exiting `outline'.";
+
+%% ** (2)
+
 enddef;
 
 %% * (1) fig_labels_A
