@@ -1,0 +1,73 @@
+%% hollow_ssb.txt
+%% Created by Laurence D. Finston (LDF) Sat 01 Jan 2022 03:26:43 PM CET
+
+\input epsf
+\input eplain
+\nopagenumbers
+
+%% \special{papersize=297mm, 420mm} %% DIN A3 Portrait
+%% \vsize=420mm
+%% \hsize=297mm
+
+%% \special{papersize=420mm, 297mm} %% DIN A3 Landscape
+%% \vsize=297mm
+%% \hsize=420mm
+
+\special{papersize=210mm, 297mm} %% DIN A4 Portrait
+\vsize=297mm
+\hsize=210mm
+
+%% \special{papersize=297mm, 210mm} %% DIN A4 Landscape
+%% \vsize=210mm
+%% \hsize=297mm
+
+%% (* 16 1.05)16.8
+%% (* 9 1.05)9.45
+%% (/ 16.8 9.45)1.777777777777778
+%% (/ 16 9.0)1.7777777777777777
+
+%% Slightly larger than 16 X 9 cm but in same proportion
+%% This prevents overfull boxes.
+%% LDF 2021.12.22.
+
+%% \special{papersize=16.8cm, 9.45cm}
+%% \vsize=9.45cm
+%% \hsize=16.8cm
+
+%% DIN A5 Portrait:  148.5 X 210
+
+\parindent=0pt
+\parskip=0pt
+\baselineskip=0pt
+\advance\voffset by -1in
+\advance\hoffset by -1in
+
+%\advance\hoffset by 1cm
+\advance\voffset by 1cm
+
+\font\Large=cmr12
+
+\headline={\lower.25cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
+           Copyright {\copyright} 2021 Laurence D.~Finston.\quad\folio\hskip2cm{\tt \timestamp}\hss}}}
+
+\def\epsfsize#1#2{#1}
+
+\newcount\figcnt
+
+%% ** (2)
+
+\skip0=5pt plus 2pt minus 2pt
+\skip1=.125cm plus 2pt minus 2pt
+\skip2=.25cm plus 2pt minus 2pt   
+
+%% * (1)
+
+\vbox to \vsize{\vskip1cm
+\line{\hskip1cm\epsffile{hollow_ssb065.eps}\hss}\vss}
+\eject
+
+\bye
+
+%% Local Variables:
+%% mode:plain-TeX
+%% End:

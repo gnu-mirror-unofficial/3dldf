@@ -1,0 +1,117 @@
+%% outline.mac
+%% Created by Laurence D. Finston (LDF) Sun 02 Jan 2022 05:14:28 AM CET
+
+def outline (expr char_ctr, fig_ctr, font, sscale_factor,
+    x_shift, y_shift, rotation_val,
+      inner_frame_wd, outer_frame_wd, box_margin, draw_border, ppen, ddo_black) =
+
+  message "Entering `outline'.";
+  message "char_ctr == " & decimal char_ctr;
+  message "";
+
+  beginfig(fig_ctr);
+    
+    path inner_frame;
+    path outer_frame;
+
+    if inner_frame_wd > 0:
+      inner_frame = unitsquare scaled inner_frame_wd;
+    fi
+
+    if outer_frame_wd > 0:
+      outer_frame = unitsquare scaled outer_frame_wd;
+    fi
+
+    path q;
+    path u;
+
+    pair a[][];
+    
+    numeric m;
+
+    m = 0;
+
+    interim ahlength := 10bp;
+    interim ahangle := 25;
+    interim bboxmargin := box_margin;
+    
+    w[fig_ctr] := glyph char_ctr of font;
+    
+    u = bbox(w[fig_ctr] scaled sscale_factor);
+
+    pair center;
+    center = .5[point 0 of u, point 2 of u];
+    
+    for item within w[fig_ctr]:
+      r[fig_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val)) shifted (x_shift, y_shift);
+      if ddo_black:
+       	draw r[fig_ctr][m] withpen ppen;
+      else:
+       	drawarrow r[fig_ctr][m] withcolor (.6,.9,.6) withpen medium_pen;
+      fi
+      for j = 0 upto length r[fig_ctr][m]:
+      	a[m][j] = p[fig_ctr][m][j] = point j of r[fig_ctr][m];
+      	if not ddo_black:
+      	  pickup pencircle scaled .15;
+      	  draw (point j of r[fig_ctr][m] -- precontrol j of r[fig_ctr][m])
+      	    dashed evenly withcolor blue withpen medium_pen;
+      	  draw (point j of r[fig_ctr][m] -- postcontrol j of r[fig_ctr][m])
+      	    dashed evenly withcolor blue withpen medium_pen;
+      	  pickup pencircle scaled 1.5;
+      	  draw precontrol j of r[fig_ctr][m] withcolor red withpen medium_pen;
+      	  draw postcontrol j of r[fig_ctr][m] withcolor red withpen medium_pen;
+      	  pickup pencircle scaled 1.5;
+      	  draw point j of r[fig_ctr][m] withcolor black withpen medium_pen;
+      	fi
+      endfor;
+      m := incr m;
+    endfor;
+    v[fig_ctr] = currentpicture;
+
+    if draw_border:
+      draw u withpen medium_pen;
+    fi
+
+    if inner_frame_wd > 0:
+      draw inner_frame transformed
+	begingroup
+	transform t;
+	t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u), .5(ypart point 2 of u - ypart point 1 of u)))
+	  shifted (-.5inner_frame_wd, -.5inner_frame_wd);
+	t
+      endgroup
+      withpen medium_pen;
+    fi
+    
+    if (outer_frame_wd > 0) and (outer_frame_wd <> inner_frame_wd):
+      message "Drawing outer frame.";
+      draw outer_frame transformed
+	begingroup
+	transform t;
+	t = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
+	      .5(ypart point 2 of u - ypart point 1 of u)))
+	  shifted (-.5outer_frame_wd, -.5outer_frame_wd);
+	t
+      endgroup
+      withpen medium_pen;
+    else:
+      message "Not drawing outer frame.";
+    fi
+
+    % shifted (-5.5cm, -5.5cm) 
+    %draw unitsquare scaled 11cm withpen big_pen;
+
+    if (fig_ctr = 65) and (font = "cmssbx10"):
+      fig_labels_A;
+    fi
+    
+  endfig;
+
+  message "Exiting `outline'.";
+enddef;
+
+endinput;
+
+%% Local Variables:
+%% mode:MetaPost
+%% End:
