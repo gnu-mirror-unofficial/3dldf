@@ -69,6 +69,7 @@ numeric dark_grey;
 dark_grey = .5;
 pen small_pen;
 pen medium_pen;
+pen double_medium_pen;
 pen big_pen;
 
 small_pen = pencircle scaled .25mm;
@@ -76,6 +77,8 @@ small_pen = pencircle scaled .25mm;
 medium_pen = pencircle scaled .5mm;
 
 big_pen = pencircle scaled 1mm;
+
+double_medium_pen = pencircle scaled 1mm;
 
 pickup medium_pen;
 
@@ -87,6 +90,7 @@ do_labels = true; % false;
 bboxmargin := 0;
 
 input TEX.mp;
+input boxes.mp;
 
 input outline_ttemp.mac;
 
@@ -149,19 +153,19 @@ numeric outer_frame_wd;
 
 outer_frame_wd = 52mm;
 
-outline (65, 65, "eurb10", .13, 0,       0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect); %% A  
-outline (66, 66, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect); %% B
-outline (67, 67, "eurb10", .13, -.25cm,  0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect); %% C
+path inner_frame[];
+path outer_frame[];
+
+outline (65, 65, "eurb10", .13, 0,       0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% A  
+outline (66, 66, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% B
+outline (67, 67, "eurb10", .13, -.25cm,  0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% C
 
 %% !! START HERE: LDF 2022.01.02.  Get shifting to work.
 
 beginfig(0);
-  currentpicture := v[65];
-  addto currentpicture also v[66] shifted (outer_frame_wd + 5mm, 0);
-  %addto currentpicture also v[67] shifted (2*outer_frame_wd, 0);
-  draw b[65][0] -- b[65][0] shifted (outer_frame_wd, 0) withcolor red withpen pencircle scaled 2pt;
+  addto currentpicture also v[65];
+  addto currentpicture also v[66] shifted (xpart b[65][1] - xpart b[66][0] - .5mm, 0);
 endfig;
-
 
 
 % outline (68, 68, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect); %% D
