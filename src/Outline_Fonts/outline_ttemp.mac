@@ -54,8 +54,7 @@ pair b[][];
 %% * (1) outline
 
 def outline (expr char_ctr, picture_ctr, font, sscale_factor,
-    x_shift, y_shift, rotation_val, iinner_frame_wd, iinner_frame_ht,
-      oouter_frame_wd, oouter_frame_ht, box_margin, draw_border, ppen, ddo_black, ddo_reflect)
+    x_shift, y_shift, rotation_val, ppen, ddo_black, ddo_reflect)
     =
 
 %% ** (2)
@@ -70,17 +69,6 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
 
     currentpicture := nullpicture;
     
-    path iinner_frame;
-    path oouter_frame;
-
-    if iinner_frame_wd > 0:
-      iinner_frame = unitsquare xscaled iinner_frame_wd yscaled iinner_frame_ht;
-    fi
-
-    if oouter_frame_wd > 0:
-      oouter_frame = unitsquare xscaled oouter_frame_wd yscaled oouter_frame_ht;
-    fi
-
     path q;
     path u;
 
@@ -92,7 +80,7 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
 
     interim ahlength := 10bp;
     interim ahangle := 25;
-    interim bboxmargin := box_margin;
+    interim bboxmargin := 0;
     
     w[picture_ctr] := glyph char_ctr of font;
     
@@ -127,38 +115,7 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
       m := incr m;
     endfor;
 
-    if draw_border:
-      draw u withpen medium_pen;
-    fi
-
     transform t[];
-
-    if iinner_frame_wd > 0:
-      t0 = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u), .5(ypart point 2 of u - ypart point 1 of u)))
-	shifted (-.5iinner_frame_wd, -.5iinner_frame_ht);
-
-      iinner_frame := iinner_frame transformed t0;
-      draw iinner_frame withpen medium_pen;
-    fi
-    
-    if (oouter_frame_wd > 0) and (oouter_frame_wd <> iinner_frame_wd):
-      message "Drawing outer frame.";
-      t1 = (identity shifted (.5(xpart point 1 of u - xpart point 0 of u),
-	    .5(ypart point 2 of u - ypart point 1 of u))) shifted (-.5oouter_frame_wd, -.5oouter_frame_ht);
-      oouter_frame := oouter_frame transformed t1;
-      draw oouter_frame withpen medium_pen;
-      for i = 0 upto 3:
-	b[picture_ctr][i] = point i of oouter_frame;
-      endfor;
-    else:
-      message "Not drawing outer frame.";
-
-      if iinner_frame_wd > 0:
-	for i = 0 upto 3:
-	  b[picture_ctr][i] = point i of iinner_frame;
-	endfor;
-      fi
-    fi
 
   if (picture_ctr = 65) and (font = "cmssbx10"):
     fig_labels_A;
@@ -179,15 +136,15 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
 
   fi;
 
-  label.urt(TEX("$b_{" & decimal(picture_ctr) & "}^0$"), b[picture_ctr][0]);
-  label.ulft(TEX("$b_{" & decimal(picture_ctr) & "}^1$"), b[picture_ctr][1]);
-  label.llft(TEX("$b_{" & decimal(picture_ctr) & "}^2$"), b[picture_ctr][2]);
-  label.lrt(TEX("$b_{" & decimal(picture_ctr) & "}^3$"),  b[picture_ctr][3]);
+  % label.urt(TEX("$b_{" & decimal(picture_ctr) & "}^0$"), b[picture_ctr][0]);
+  % label.ulft(TEX("$b_{" & decimal(picture_ctr) & "}^1$"), b[picture_ctr][1]);
+  % label.llft(TEX("$b_{" & decimal(picture_ctr) & "}^2$"), b[picture_ctr][2]);
+  % label.lrt(TEX("$b_{" & decimal(picture_ctr) & "}^3$"),  b[picture_ctr][3]);
   
   v[picture_ctr] = currentpicture;
-  
-  endgroup;
 
+  endgroup;
+  
   message "Exiting `outline'.";
 
 %% ** (2)
