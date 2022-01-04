@@ -147,21 +147,32 @@ fontmapline "cmr7 CMR7 <cmr7.pfb";
 %% Both of these sizes look good.
 
 numeric outer_frame_wd;
+numeric outer_frame_ht;
 
-do_reflect := false; % true
-
-outline (65, 65, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% A  
-outline (66, 66, "eurb10", .13, -.125cm, 0, 0, big_pen, do_black, do_reflect); %% B
-outline (67, 67, "eurb10", .13, -.25cm,  0, 0, big_pen, do_black, do_reflect); %% C
-outline (68, 68, "eurb10", .13, -.125cm, 0, 0, big_pen, do_black, do_reflect); %% D
-outline (69, 69, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% E  
-outline (70, 70, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% F  
-outline (71, 71, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% G  
-outline (72, 72, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% H  
-
+numeric inner_frame_wd;
+numeric inner_frame_ht;
 
 path inner_frame;
 path outer_frame;
+
+%% *** (3)
+
+outline (65, 65, "eurb10", .13, 0, big_pen, do_black); %% A  
+outline (66, 66, "eurb10", .13, 0, big_pen, do_black); %% B
+outline (67, 67, "eurb10", .13, 0, big_pen, do_black); %% C
+outline (68, 68, "eurb10", .13, 0, big_pen, do_black); %% D
+outline (69, 69, "eurb10", .13, 0, big_pen, do_black); %% E  
+outline (70, 70, "eurb10", .13, 0, big_pen, do_black); %% F  
+outline (71, 71, "eurb10", .13, 0, big_pen, do_black); %% G  
+outline (72, 72, "eurb10", .13, 0, big_pen, do_black); %% H  
+
+%% *** (3)
+
+inner_frame_wd = 42mm;
+inner_frame_ht = 52mm;
+
+outer_frame_wd = inner_frame_wd + 10mm;
+outer_frame_ht = inner_frame_ht + 10mm;
 
 beginfig(0);
   pickup medium_pen;
@@ -170,23 +181,62 @@ beginfig(0);
   boxit.B(v[66]);
   boxit.C(v[67]);
   boxit.D(v[68]);
-  B.c = A.c shifted (52mm, 0);
-  C.c = B.c shifted (52mm, 0);
-  D.c = C.c shifted (52mm, 0);
-  drawunboxed(A, B, C, D);
+  B.c = A.c shifted (outer_frame_wd, 0);
+  C.c = B.c shifted (outer_frame_wd, 0);
+  D.c = C.c shifted (outer_frame_wd, 0);
+  fixsize(A, B, C, D);
+  fixpos(A, B, C, D);
+
+  draw pic(A);
+  draw pic(B);
+  draw pic(C);
+  draw pic(D);
   
-  inner_frame = (unitsquare xscaled 42mm yscaled 64mm) shifted (A.c - (21mm, 32mm));
-  outer_frame = (unitsquare xscaled 52mm yscaled 74mm) shifted (A.c - (26mm, 37mm)); 
+  inner_frame = (unitsquare xscaled inner_frame_wd yscaled inner_frame_ht)
+    shifted (A.c - (.5inner_frame_wd, .5inner_frame_ht));
+  outer_frame = (unitsquare xscaled outer_frame_wd yscaled outer_frame_ht)
+    shifted (A.c - (.5outer_frame_wd, .5outer_frame_ht)); 
   
   for j = 0 upto 3:
-    draw inner_frame shifted (j*52mm, 0);
-    draw outer_frame shifted (j*52mm, 0);
+    draw inner_frame shifted (j*outer_frame_wd, 0);
+    draw outer_frame shifted (j*outer_frame_wd, 0);
   endfor;
 
   currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
 
+%% *** (3)
+
+beginfig(1);
+  pickup medium_pen;
+  E.dx = E.dy = .5cm;
+  boxit.E(v[69]);
+  boxit.F(v[70]);
+  boxit.G(v[71]);
+  boxit.H(v[72]);
+  F.c = E.c shifted (outer_frame_wd, 0);
+  G.c = F.c shifted (outer_frame_wd, 0);
+  H.c = G.c shifted (outer_frame_wd, 0);
+
+  draw pic(E) shifted (.45cm, 0);
+  draw pic(F) shifted (.45cm, 0);
+  draw pic(G) shifted (.45cm, 0);
+  draw pic(H) shifted (.45cm, 0);
+
+  
+  for j = 0 upto 3:
+    draw inner_frame shifted (j*outer_frame_wd, 0);
+    draw outer_frame shifted (j*outer_frame_wd, 0);
+  endfor;
+
+  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  
+endfig;
+
+%% *** (3)
+
+%% ** (2)
 
 end;
 

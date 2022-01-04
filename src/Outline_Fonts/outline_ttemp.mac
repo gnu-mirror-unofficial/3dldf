@@ -53,9 +53,7 @@ pair b[][];
 
 %% * (1) outline
 
-def outline (expr char_ctr, picture_ctr, font, sscale_factor,
-    x_shift, y_shift, rotation_val, ppen, ddo_black, ddo_reflect)
-    =
+def outline (expr char_ctr, picture_ctr, font, sscale_factor, rotation_val, ppen, ddo_black) =
 
 %% ** (2)
     
@@ -90,8 +88,7 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
     center = .5[point 0 of u, point 2 of u];
     
     for item within w[picture_ctr]:
-      r[picture_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val))
-	shifted (x_shift, y_shift);
+      r[picture_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val));
       if ddo_black:
 	draw r[picture_ctr][m] withpen ppen;
       else:
@@ -126,15 +123,6 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor,
 
   % label(btex $z_0$ etex, z0);
   % label(btex $z_1$ etex, z1);
-
-  if ddo_reflect:
-    currentpicture := currentpicture reflectedabout(z0, z1);
-
-    for i = 0 upto 3:
-      a[picture_ctr][i] := a[picture_ctr][i] reflectedabout(z0, z1);
-    endfor;
-
-  fi;
 
   % label.urt(TEX("$b_{" & decimal(picture_ctr) & "}^0$"), b[picture_ctr][0]);
   % label.ulft(TEX("$b_{" & decimal(picture_ctr) & "}^1$"), b[picture_ctr][1]);
