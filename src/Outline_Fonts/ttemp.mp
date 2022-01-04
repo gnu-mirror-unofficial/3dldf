@@ -164,15 +164,45 @@ outline (68, 68, "eurb10", .13, 0, big_pen, do_black); %% D
 outline (69, 69, "eurb10", .13, 0, big_pen, do_black); %% E  
 outline (70, 70, "eurb10", .13, 0, big_pen, do_black); %% F  
 outline (71, 71, "eurb10", .13, 0, big_pen, do_black); %% G  
-outline (72, 72, "eurb10", .13, 0, big_pen, do_black); %% H  
+outline (72, 72, "eurb10", .13, 0, big_pen, do_black); %% H
+outline (73, 73, "eurb10", .13, 0, big_pen, do_black); %% I
+outline (74, 74, "eurb10", .13, 0, big_pen, do_black); %% J
+outline (75, 75, "eurb10", .13, 0, big_pen, do_black); %% K  
+outline (76, 76, "eurb10", .13, 0, big_pen, do_black); %% L
+outline (77, 77, "eurb10", .13, 0, big_pen, do_black); %% M
+outline (78, 78, "eurb10", .13, 0, big_pen, do_black); %% N
+outline (79, 79, "eurb10", .13, 0, big_pen, do_black); %% O
+outline (80, 80, "eurb10", .13, 0, big_pen, do_black); %% P
+outline (81, 81, "eurb10", .13, 0, big_pen, do_black); %% Q
+outline (82, 82, "eurb10", .13, 0, big_pen, do_black); %% R
+outline (83, 83, "eurb10", .13, 0, big_pen, do_black); %% S
+outline (84, 84, "eurb10", .13, 0, big_pen, do_black); %% T
+outline (85, 85, "eurb10", .13, 0, big_pen, do_black); %% U
+outline (86, 86, "eurb10", .13, 0, big_pen, do_black); %% V
+outline (87, 87, "eurb10", .13, 0, big_pen, do_black); %% W
+outline (88, 88, "eurb10", .13, 0, big_pen, do_black); %% X
+outline (89, 89, "eurb10", .13, 0, big_pen, do_black); %% Y
+outline (90, 90, "eurb10", .13, 0, big_pen, do_black); %% Z
 
-%% *** (3)
+outline (48, 48, "eurb10", .13, 0, big_pen, do_black); %% 0
+outline (49, 49, "eurb10", .13, 0, big_pen, do_black); %% 1
+outline (50, 50, "eurb10", .13, 0, big_pen, do_black); %% 2
+outline (51, 51, "eurb10", .13, 0, big_pen, do_black); %% 3
+outline (52, 52, "eurb10", .13, 0, big_pen, do_black); %% 4
+outline (53, 53, "eurb10", .13, 0, big_pen, do_black); %% 5
+outline (54, 54, "eurb10", .13, 0, big_pen, do_black); %% 6
+outline (55, 55, "eurb10", .13, 0, big_pen, do_black); %% 7
+outline (56, 56, "eurb10", .13, 0, big_pen, do_black); %% 8
+outline (57, 57, "eurb10", .13, 0, big_pen, do_black); %% 9
 
 inner_frame_wd = 42mm;
 inner_frame_ht = 52mm;
 
 outer_frame_wd = inner_frame_wd + 10mm;
 outer_frame_ht = inner_frame_ht + 10mm;
+
+
+%% *** (3) Fig. 0, A-D
 
 beginfig(0);
   pickup medium_pen;
@@ -206,7 +236,7 @@ beginfig(0);
   
 endfig;
 
-%% *** (3)
+%% *** (3) Fig. 1, E-H
 
 beginfig(1);
   pickup medium_pen;
@@ -233,6 +263,78 @@ beginfig(1);
   currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
+
+%% *** (3) Fig. 2, I-L
+
+beginfig(2);
+  pickup medium_pen;
+  I.dx = I.dy = .5cm;
+  boxit.I(v[73]);
+  boxit.J(v[74]);
+  boxit.K(v[75]);
+  boxit.L(v[76]);
+  J.c = I.c shifted (outer_frame_wd, 0);
+  K.c = J.c shifted (outer_frame_wd, 0);
+  L.c = K.c shifted (outer_frame_wd, 0);
+
+  draw pic(I) shifted (.45cm, 0);
+  draw pic(J) shifted (.45cm, 0);
+  draw pic(K) shifted (.45cm, 0);
+  draw pic(L) shifted (.45cm, 0);
+  
+  for j = 0 upto 3:
+    draw inner_frame shifted (j*outer_frame_wd, 0);
+    draw outer_frame shifted (j*outer_frame_wd, 0);
+  endfor;
+
+  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  
+endfig;
+
+%% *** (3) Fig. 3, M-P
+
+beginfig(3);
+  pickup medium_pen;
+  M.dx = M.dy = .5cm;
+  boxit.M(v[77]);
+  boxit.N(v[78]);
+  boxit.O(v[79]);
+  boxit.P(v[80]);
+  N.c = M.c shifted (outer_frame_wd, 0);
+  O.c = N.c shifted (outer_frame_wd, 0);
+  P.c = O.c shifted (outer_frame_wd, 0);
+
+  draw pic(M) shifted (.45cm, 0);
+  draw pic(N) shifted (.45cm, 0);
+  draw pic(O) shifted (.45cm, 0);
+  draw pic(P) shifted (.45cm, 0);
+  
+  for j = 0 upto 3:
+    draw inner_frame shifted (j*outer_frame_wd, 0);
+    draw outer_frame shifted (j*outer_frame_wd, 0);
+  endfor;
+
+  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  
+endfig;
+
+%% *** (3) Fig. 4, Q-T
+
+%% *** (3) Fig. 5, M-P
+
+%% *** (3) Fig. 6, Q-T
+
+%% *** (3) Fig. 7, U-X
+
+%% *** (3) Fig. 8, Y-Z, 0-1
+
+%% *** (3) Fig. 9, 2-5
+
+%% *** (3) Fig. 10, 6-9
+
+
+
+
 
 %% *** (3)
 
@@ -277,4 +379,5 @@ end;
 %% Local Variables:
 %% mode:MetaPost
 %% outline-minor-mode:t
+%% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
 %% End:
