@@ -160,11 +160,12 @@ outline (65, 65, "eurb10", .13, 0,       0, 0, 42mm, 64mm, outer_frame_wd, 74mm,
 outline (66, 66, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% B
 outline (67, 67, "eurb10", .13, -.25cm,  0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% C
 
-%% !! START HERE: LDF 2022.01.02.  Get shifting to work.
-
 beginfig(0);
-  addto currentpicture also v[65];
-  addto currentpicture also v[66] shifted (xpart b[65][1] - xpart b[66][0] - .5mm, 0);
+  pickup medium_pen;
+  %addto currentpicture also v[65];
+  A.dx = A.dy = .5cm;
+  boxit.A(v[65]);
+  drawboxed(A);
 endfig;
 
 
