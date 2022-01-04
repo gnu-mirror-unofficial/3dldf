@@ -69,7 +69,6 @@ numeric dark_grey;
 dark_grey = .5;
 pen small_pen;
 pen medium_pen;
-pen double_medium_pen;
 pen big_pen;
 
 small_pen = pencircle scaled .25mm;
@@ -77,8 +76,6 @@ small_pen = pencircle scaled .25mm;
 medium_pen = pencircle scaled .5mm;
 
 big_pen = pencircle scaled 1mm;
-
-double_medium_pen = pencircle scaled 1mm;
 
 pickup medium_pen;
 
@@ -136,44 +133,60 @@ fontmapline "cmr7 CMR7 <cmr7.pfb";
 %% ** (2) Euler Roman Bold, small.
 
 % do_black   := true; % false
-% do_reflect := true; % false
+
 %% DIN A Series, Width X Height
 %%
 
-% A4 Portrait: 210 X 297   
-% A5 Portrait: 148 X 210   
-% A6 Portrait: 105 X 148
-% A7 Portrait:  74 X 105
-% A8 Portrait:  52 X  74
+% DIN A4 Portrait: 210 X 297   
+% DIN A5 Portrait: 148 X 210   
+% DIN A6 Portrait: 105 X 148
+% DIN A7 Portrait:  74 X 105
+% DIN A8 Portrait:  52 X  74
 
 %% LDF 2022.01.02.  Printed out using scaling_factor := .1 and scaling_factor := .13.
 %% Both of these sizes look good.
 
 numeric outer_frame_wd;
 
-outer_frame_wd = 52mm;
+do_reflect := false; % true
 
-path inner_frame[];
-path outer_frame[];
+outline (65, 65, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% A  
+outline (66, 66, "eurb10", .13, -.125cm, 0, 0, big_pen, do_black, do_reflect); %% B
+outline (67, 67, "eurb10", .13, -.25cm,  0, 0, big_pen, do_black, do_reflect); %% C
+outline (68, 68, "eurb10", .13, -.125cm, 0, 0, big_pen, do_black, do_reflect); %% D
+outline (69, 69, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% E  
+outline (70, 70, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% F  
+outline (71, 71, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% G  
+outline (72, 72, "eurb10", .13, 0,       0, 0, big_pen, do_black, do_reflect); %% H  
 
-outline (65, 65, "eurb10", .13, 0,       0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% A  
-outline (66, 66, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% B
-outline (67, 67, "eurb10", .13, -.25cm,  0, 0, 42mm, 64mm, outer_frame_wd, 74mm, big_pen, do_black, do_reflect); %% C
+
+path inner_frame;
+path outer_frame;
 
 beginfig(0);
   pickup medium_pen;
-  %addto currentpicture also v[65];
   A.dx = A.dy = .5cm;
   boxit.A(v[65]);
-  drawboxed(A);
+  boxit.B(v[66]);
+  boxit.C(v[67]);
+  boxit.D(v[68]);
+  B.c = A.c shifted (52mm, 0);
+  C.c = B.c shifted (52mm, 0);
+  D.c = C.c shifted (52mm, 0);
+  drawunboxed(A, B, C, D);
+  
+  inner_frame = (unitsquare xscaled 42mm yscaled 64mm) shifted (A.c - (21mm, 32mm));
+  outer_frame = (unitsquare xscaled 52mm yscaled 74mm) shifted (A.c - (26mm, 37mm)); 
+  
+  for j = 0 upto 3:
+    draw inner_frame shifted (j*52mm, 0);
+    draw outer_frame shifted (j*52mm, 0);
+  endfor;
+
+  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  
 endfig;
 
-
-% outline (68, 68, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect); %% D
-% outline (69, 69, "eurb10", .13, 0, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect);       %% E
-% outline (70, 70, "eurb10", .13, 0, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect);       %% F
-% outline (71, 71, "eurb10", .13, -.25cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect);  %% G
-% outline (72, 72, "eurb10", .13, -.125cm, 0, 0, 42mm, 64mm, outer_frame_wd, 74mm, 0, false, big_pen, do_black, do_reflect); %% H
 
 end;
 
