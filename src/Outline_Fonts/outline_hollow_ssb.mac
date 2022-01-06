@@ -92,7 +92,7 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, ppen, ddo_black, d
       if ddo_black:
 	draw r[picture_ctr][m] withpen ppen;
       else:
-	drawarrow r[picture_ctr][m] withcolor (.6,.9,.6) withpen medium_pen;
+	drawarrow r[picture_ctr][m] withpen medium_pen;
       fi
       for j = 0 upto length r[picture_ctr][m]:
 	a[m][j] = p[picture_ctr][m][j] = point j of r[picture_ctr][m];
@@ -112,6 +112,10 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, ppen, ddo_black, d
       m := incr m;
     endfor;
 
+
+    if char_ctr = 65:
+      fig_labels_A;
+    fi
     
     v[picture_ctr] = currentpicture;
 
@@ -125,7 +129,51 @@ enddef;
 
 %% * (1)
 
+def fig_labels_A =
+%% ** (2)
+  message "Entering fig_labels_A";
+
+  dotlabel.rt(btex $a_0^0$ etex, a[0][0]);
+  dotlabel.top(btex $a_0^1$ etex, a[0][1]);
+  dotlabel.top(btex $a_0^2$ etex, a[0][2]);
+  dotlabel.lft(btex $a_0^3$ etex, a[0][3]);
+  dotlabel.ulft(btex $a_0^4$ etex, a[0][4]);
+  dotlabel.llft(btex $a_0^5$ etex, a[0][5]);
+  dotlabel.llft(btex $a_0^6$ etex, a[0][6]);
+  dotlabel.lrt(btex $a_0^7$ etex, a[0][7]);
+  dotlabel.rt(btex $a_0^8$ etex, a[0][8]);
+  dotlabel.lrt(btex $a_0^9$ etex, a[0][9]);
+  dotlabel.llft(btex $a_0^{10}$ etex, a[0][10]);
+  dotlabel.lft(btex $a_0^{11}$ etex, a[0][11]);
+  dotlabel.bot(btex $a_0^{12}$ etex, a[0][12]);
+  dotlabel.bot(btex $a_0^{13}$ etex, a[0][13]);
+  dotlabel.rt(btex $a_0^{14}$ etex, a[0][14]);
+  % dotlabel.ulft(btex $a_0^{15}$ etex, a[0][15]);
+  % dotlabel.llft(btex $a_0^{16}$ etex, a[0][16]);
+
+  dotlabel.lft(btex $a_1^0$ etex, a[1][0]);
+  dotlabel.lft(btex $a_1^1$ etex, a[1][1]);
+  dotlabel.rt(btex $a_1^2$ etex, a[1][2]);
+  dotlabel.rt(btex $a_1^3$ etex, a[1][3]);
+  dotlabel.ulft(btex $a_1^4$ etex, a[1][4]);
+  dotlabel.urt(btex $a_1^5$ etex, a[1][5]);
+  dotlabel.rt(btex $a_1^6$ etex, a[1][6]);
+  % dotlabel.urt(btex $a_1^7$ etex, a[1][7]);
+  % dotlabel.rt(btex $a_1^8$ etex, a[1][8]);
+
+  
+  
+  message "Exiting fig_labels_A";
+enddef;
+
+
+%% * (1)
+
 endinput;
+
+%% * (1)
+
+%% (progn (metapost-mode) (outline-minor-mode t) (setq outline-regexp "%% *\\*+\\|@\\*[0-9]*"))
 
 %% Local Variables:
 %% mode:MetaPost

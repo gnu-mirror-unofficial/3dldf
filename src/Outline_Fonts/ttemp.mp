@@ -126,13 +126,6 @@ fontmapline "cmr7 CMR7 <cmr7.pfb";
 %% eusb10, Euler script bold
 %% eusm10, Euler script medium
 
-%% ** (2) Sans Serif Bold Extended
-
-% outline (65, 65, "cmssbx10", .5, 0, 0, 0, 16cm, 16cm, 0, false, big_pen, false);
-
-% end;
-
-
 %% ** (2) Euler Roman Bold, small.
 
 % do_black   := true; % false
@@ -346,18 +339,18 @@ beginfig(3);
 
   draw pic(O) shifted (.3cm, 0);
 
-  path p[];
+  path q[];
 
-  p0 = outer_frame xscaled 1.125;
-  p1 = inner_frame xscaled 1.125;
+  q0 = outer_frame xscaled 1.125;
+  q1 = inner_frame xscaled 1.125;
 
-  z5 = point 0 of p0;
+  z5 = point 0 of q0;
 
-  p0 := (p0 shifted (z1 - z5)) shifted (z4 - z1);
-  p1 := (p1 shifted (z1 - z5)) shifted (z4 - z1);
+  q0 := (q0 shifted (z1 - z5)) shifted (z4 - z1);
+  q1 := (q1 shifted (z1 - z5)) shifted (z4 - z1);
     
-  draw p0;
-  draw p1;
+  draw q0;
+  draw q1;
 
   w3 = currentpicture;
 

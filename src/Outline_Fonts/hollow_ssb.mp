@@ -47,52 +47,75 @@ do_labels = true; % false;
 
 do_black = false; % true;
 
+input TEX.mp;
+input boxes.mp;
+
 input outline_hollow_ssb.mac;
 
+
+
 %% * (1)
 
+%% * (1)
 
+fontmapline "cmr10 CMR10 <cmr10.pfb";
+fontmapline "cmssbx10 CMSSBX10 <cmssbx10.pfb";
+fontmapline "eurm10 EURM10 <eurm10.pfb";
+fontmapline "eurb10 EURB10 <eurb10.pfb";
+fontmapline "eufm10 EUFM10 <eufm10.pfb"; %% Euler Fraktur medium
+fontmapline "eufb10 EUFB10 <eufb10.pfb"; %% Euler Fraktur bold
+fontmapline "cmmi10 CMMI10 <cmmi10.pfb"; 
+fontmapline "cmr7 CMR7 <cmr7.pfb"; 
 
 %% * (1)
 
-def fig_labels_A =
-%% ** (2)
-  message "Entering fig_labels_A";
+outline (65, 65, "cmssbx10", .45, big_pen, do_black, do_labels); %% A  
 
-  dotlabel.rt(btex $a_0^0$ etex, a[0][0]);
-  dotlabel.lft(btex $a_0^1$ etex, a[0][1]);
-  dotlabel.rt(btex $a_0^2$ etex, a[0][2]);
-  dotlabel.lft(btex $a_0^3$ etex, a[0][3]);
-  dotlabel.ulft(btex $a_0^4$ etex, a[0][4]);
-  dotlabel.llft(btex $a_0^5$ etex, a[0][5]);
-  dotlabel.llft(btex $a_0^6$ etex, a[0][6]);
-  dotlabel.lrt(btex $a_0^7$ etex, a[0][7]);
-  dotlabel.rt(btex $a_0^8$ etex, a[0][8]);
-  dotlabel.lrt(btex $a_0^9$ etex, a[0][9]);
-  dotlabel.llft(btex $a_0^{10}$ etex, a[0][10]);
-  dotlabel.lft(btex $a_0^{11}$ etex, a[0][11]);
-  dotlabel.urt(btex $a_0^{12}$ etex, a[0][12]);
-  dotlabel.llft(btex $a_0^{13}$ etex, a[0][13]);
-  dotlabel.rt(btex $a_0^{14}$ etex, a[0][14]);
-  % dotlabel.ulft(btex $a_0^{15}$ etex, a[0][15]);
-  % dotlabel.llft(btex $a_0^{16}$ etex, a[0][16]);
+beginfig(0);
+  pickup medium_pen;
+  A.dx = A.dy = .5cm;
+  boxit.A(v[65]);
 
-  dotlabel.lft(btex $a_1^0$ etex, a[1][0]);
-  dotlabel.lft(btex $a_1^1$ etex, a[1][1]);
-  dotlabel.rt(btex $a_1^2$ etex, a[1][2]);
-  dotlabel.rt(btex $a_1^3$ etex, a[1][3]);
-  dotlabel.ulft(btex $a_1^4$ etex, a[1][4]);
-  dotlabel.urt(btex $a_1^5$ etex, a[1][5]);
-  dotlabel.rt(btex $a_1^6$ etex, a[1][6]);
-  % dotlabel.urt(btex $a_1^7$ etex, a[1][7]);
-  % dotlabel.rt(btex $a_1^8$ etex, a[1][8]);
+  drawboxed(A);
+  
+  z0 = .5[a[0][6], a[0][7]];
+  dotlabel.bot(btex $z_0$ etex, z0);
 
+  z1 = (a[0][3] - a[0][4]) shifted z0;
+  dotlabel.rt(btex $z_1$ etex, z1);
+
+  z2 = 1.25[z0, z1];
+  %dotlabel.top(btex $z_2$ etex, z2);
   
   
-  message "Exiting fig_labels_A";
-enddef;
+  z3 = (z0 -- z2) intersectionpoint (a[0][2] -- a[0][1]);
+  dotlabel.top(btex $z_3$ etex, z3);
+  
+  draw z0 -- z3 withcolor dark_grey;
 
-      
+  z4 = .5[a[0][12], a[0][13]];
+  dotlabel.bot(btex $z_4$ etex, z4);
+
+  z5 = (a[0][10] - a[0][11]) shifted z4;
+  dotlabel.rt(btex $z_5$ etex, z5);
+
+  z6 = 7.5[z4, z5];
+  
+  z7 = (z5 -- z6) intersectionpoint (a[0][2] -- a[0][1]);
+  dotlabel.top(btex $z_7$ etex, z7);  
+
+  draw z4 -- z7 withcolor dark_grey;
+  
+  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  
+endfig;
+
+%% * (1)
+
+end;
+
+%% * (1)
+
 %% For use in indirect buffers:
 %% (metapost-mode)
 
