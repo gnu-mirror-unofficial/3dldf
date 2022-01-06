@@ -53,7 +53,7 @@ pair b[][];
 
 %% * (1) outline
 
-def outline (expr char_ctr, picture_ctr, font, sscale_factor, rotation_val, ppen, ddo_black) =
+def outline (expr char_ctr, picture_ctr, font, sscale_factor, ppen, ddo_black, ddo_labels) =
 
 %% ** (2)
     
@@ -88,7 +88,7 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, rotation_val, ppen
     center = .5[point 0 of u, point 2 of u];
     
     for item within w[picture_ctr]:
-      r[picture_ctr][m] := ((pathpart item scaled sscale_factor) rotatedaround(center, rotation_val));
+      r[picture_ctr][m] := pathpart item scaled sscale_factor;
       if ddo_black:
 	draw r[picture_ctr][m] withpen ppen;
       else:
@@ -112,24 +112,8 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, rotation_val, ppen
       m := incr m;
     endfor;
 
-    transform t[];
-
-  if (picture_ctr = 65) and (font = "cmssbx10"):
-    fig_labels_A;
-  fi
-
-  z0 = center shifted (0, 1cm);
-  z1 = center shifted (0, -1cm);
-
-  % label(btex $z_0$ etex, z0);
-  % label(btex $z_1$ etex, z1);
-
-  % label.urt(TEX("$b_{" & decimal(picture_ctr) & "}^0$"), b[picture_ctr][0]);
-  % label.ulft(TEX("$b_{" & decimal(picture_ctr) & "}^1$"), b[picture_ctr][1]);
-  % label.llft(TEX("$b_{" & decimal(picture_ctr) & "}^2$"), b[picture_ctr][2]);
-  % label.lrt(TEX("$b_{" & decimal(picture_ctr) & "}^3$"),  b[picture_ctr][3]);
-  
-  v[picture_ctr] = currentpicture;
+    
+    v[picture_ctr] = currentpicture;
 
   endgroup;
   
@@ -137,47 +121,6 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, rotation_val, ppen
 
 %% ** (2)
 
-enddef;
-
-%% * (1) fig_labels_A
-
-def fig_labels_A =
-
-%% ** (2)
-
-  message "Entering fig_labels_A";
-
-  dotlabel.rt(btex $a_0^0$ etex, a[0][0]);
-  dotlabel.lft(btex $a_0^1$ etex, a[0][1]);
-  dotlabel.rt(btex $a_0^2$ etex, a[0][2]);
-  dotlabel.lft(btex $a_0^3$ etex, a[0][3]);
-  dotlabel.ulft(btex $a_0^4$ etex, a[0][4]);
-  dotlabel.llft(btex $a_0^5$ etex, a[0][5]);
-  dotlabel.llft(btex $a_0^6$ etex, a[0][6]);
-  dotlabel.lrt(btex $a_0^7$ etex, a[0][7]);
-  dotlabel.rt(btex $a_0^8$ etex, a[0][8]);
-  dotlabel.lrt(btex $a_0^9$ etex, a[0][9]);
-  dotlabel.llft(btex $a_0^{10}$ etex, a[0][10]);
-  dotlabel.lft(btex $a_0^{11}$ etex, a[0][11]);
-  dotlabel.urt(btex $a_0^{12}$ etex, a[0][12]);
-  dotlabel.llft(btex $a_0^{13}$ etex, a[0][13]);
-  dotlabel.rt(btex $a_0^{14}$ etex, a[0][14]);
-  % dotlabel.ulft(btex $a_0^{15}$ etex, a[0][15]);
-  % dotlabel.llft(btex $a_0^{16}$ etex, a[0][16]);
-
-  dotlabel.lft(btex $a_1^0$ etex, a[1][0]);
-  dotlabel.bot(btex $a_1^1$ etex, a[1][1]);
-  dotlabel.lft(btex $a_1^2$ etex, a[1][2]);
-  dotlabel.ulft(btex $a_1^3$ etex, a[1][3]);
-  dotlabel.lft(btex $a_1^4$ etex, a[1][4]);
-  dotlabel.top(btex $a_1^5$ etex, a[1][5]);
-  dotlabel.rt(btex $a_1^6$ etex, a[1][6]);
-  % dotlabel.urt(btex $a_1^7$ etex, a[1][7]);
-  % dotlabel.rt(btex $a_1^8$ etex, a[1][8]);
-
-  
-  
-  message "Exiting fig_labels_A";
 enddef;
 
 %% * (1)

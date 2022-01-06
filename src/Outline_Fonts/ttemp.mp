@@ -101,6 +101,9 @@ S = "";
 boolean do_black;
 do_black = true; % false;
 
+boolean do_labels;
+do_labels = true; % false;
+
 boolean do_reflect;
 do_reflect = false; % true;
 
@@ -157,41 +160,41 @@ path outer_frame;
 
 %% *** (3)
 
-outline (65, 65, "eurb10", .13, 0, big_pen, do_black); %% A  
-outline (66, 66, "eurb10", .13, 0, big_pen, do_black); %% B
-outline (67, 67, "eurb10", .13, 0, big_pen, do_black); %% C
-outline (68, 68, "eurb10", .13, 0, big_pen, do_black); %% D
-outline (69, 69, "eurb10", .13, 0, big_pen, do_black); %% E  
-outline (70, 70, "eurb10", .13, 0, big_pen, do_black); %% F  
-outline (71, 71, "eurb10", .13, 0, big_pen, do_black); %% G  
-outline (72, 72, "eurb10", .13, 0, big_pen, do_black); %% H
-outline (73, 73, "eurb10", .13, 0, big_pen, do_black); %% I
-outline (74, 74, "eurb10", .13, 0, big_pen, do_black); %% J
-outline (75, 75, "eurb10", .13, 0, big_pen, do_black); %% K  
-outline (76, 76, "eurb10", .13, 0, big_pen, do_black); %% L
+outline (65, 65, "eurb10", .13, big_pen, do_black, do_labels); %% A  
+outline (66, 66, "eurb10", .13, big_pen, do_black, do_labels); %% B
+outline (67, 67, "eurb10", .13, big_pen, do_black, do_labels); %% C
+outline (68, 68, "eurb10", .13, big_pen, do_black, do_labels); %% D
+outline (69, 69, "eurb10", .13, big_pen, do_black, do_labels); %% E  
+outline (70, 70, "eurb10", .13, big_pen, do_black, do_labels); %% F  
+outline (71, 71, "eurb10", .13, big_pen, do_black, do_labels); %% G  
+outline (72, 72, "eurb10", .13, big_pen, do_black, do_labels); %% H
+outline (73, 73, "eurb10", .13, big_pen, do_black, do_labels); %% I
+outline (74, 74, "eurb10", .13, big_pen, do_black, do_labels); %% J
+outline (75, 75, "eurb10", .13, big_pen, do_black, do_labels); %% K  
+outline (76, 76, "eurb10", .13, big_pen, do_black, do_labels); %% L
 
-outline (80, 80, "eurb10", .13, 0, big_pen, do_black); %% P
-outline (81, 81, "eurb10", .13, 0, big_pen, do_black); %% Q
-outline (82, 82, "eurb10", .13, 0, big_pen, do_black); %% R
-outline (83, 83, "eurb10", .13, 0, big_pen, do_black); %% S
-outline (84, 84, "eurb10", .13, 0, big_pen, do_black); %% T
-outline (85, 85, "eurb10", .13, 0, big_pen, do_black); %% U
-outline (86, 86, "eurb10", .13, 0, big_pen, do_black); %% V
-outline (87, 87, "eurb10", .13, 0, big_pen, do_black); %% W
-outline (88, 88, "eurb10", .13, 0, big_pen, do_black); %% X
-outline (89, 89, "eurb10", .13, 0, big_pen, do_black); %% Y
-outline (90, 90, "eurb10", .13, 0, big_pen, do_black); %% Z
+outline (80, 80, "eurb10", .13, big_pen, do_black, do_labels); %% P
+outline (81, 81, "eurb10", .13, big_pen, do_black, do_labels); %% Q
+outline (82, 82, "eurb10", .13, big_pen, do_black, do_labels); %% R
+outline (83, 83, "eurb10", .13, big_pen, do_black, do_labels); %% S
+outline (84, 84, "eurb10", .13, big_pen, do_black, do_labels); %% T
+outline (85, 85, "eurb10", .13, big_pen, do_black, do_labels); %% U
+outline (86, 86, "eurb10", .13, big_pen, do_black, do_labels); %% V
+outline (87, 87, "eurb10", .13, big_pen, do_black, do_labels); %% W
+outline (88, 88, "eurb10", .13, big_pen, do_black, do_labels); %% X
+outline (89, 89, "eurb10", .13, big_pen, do_black, do_labels); %% Y
+outline (90, 90, "eurb10", .13, big_pen, do_black, do_labels); %% Z
 
-outline (48, 48, "eurb10", .13, 0, big_pen, do_black); %% 0
-outline (49, 49, "eurb10", .13, 0, big_pen, do_black); %% 1
-outline (50, 50, "eurb10", .13, 0, big_pen, do_black); %% 2
-outline (51, 51, "eurb10", .13, 0, big_pen, do_black); %% 3
-outline (52, 52, "eurb10", .13, 0, big_pen, do_black); %% 4
-outline (53, 53, "eurb10", .13, 0, big_pen, do_black); %% 5
-outline (54, 54, "eurb10", .13, 0, big_pen, do_black); %% 6
-outline (55, 55, "eurb10", .13, 0, big_pen, do_black); %% 7
-outline (56, 56, "eurb10", .13, 0, big_pen, do_black); %% 8
-outline (57, 57, "eurb10", .13, 0, big_pen, do_black); %% 9
+outline (48, 48, "eurb10", .13, big_pen, do_black, do_labels); %% 0
+outline (49, 49, "eurb10", .13, big_pen, do_black, do_labels); %% 1
+outline (50, 50, "eurb10", .13, big_pen, do_black, do_labels); %% 2
+outline (51, 51, "eurb10", .13, big_pen, do_black, do_labels); %% 3
+outline (52, 52, "eurb10", .13, big_pen, do_black, do_labels); %% 4
+outline (53, 53, "eurb10", .13, big_pen, do_black, do_labels); %% 5
+outline (54, 54, "eurb10", .13, big_pen, do_black, do_labels); %% 6
+outline (55, 55, "eurb10", .13, big_pen, do_black, do_labels); %% 7
+outline (56, 56, "eurb10", .13, big_pen, do_black, do_labels); %% 8
+outline (57, 57, "eurb10", .13, big_pen, do_black, do_labels); %% 9
 
 inner_frame_wd = 42mm;
 inner_frame_ht = 52mm;
@@ -281,10 +284,10 @@ beginfig(2);
   K.c = J.c shifted (outer_frame_wd, 0);
   L.c = K.c shifted (outer_frame_wd, 0);
 
-  draw pic(I) shifted (.45cm, 0);
-  draw pic(J) shifted (.45cm, 0);
-  draw pic(K) shifted (.45cm, 0);
-  draw pic(L) shifted (.45cm, 0);
+  draw pic(I) shifted (.9cm, 0);
+  draw pic(J) shifted (.9cm, 0);
+  draw pic(K) shifted (.9cm, 0);
+  draw pic(L) shifted (.9cm, 0);
   
   for j = 0 upto 3:
     draw inner_frame shifted (j*outer_frame_wd, 0);
@@ -299,9 +302,9 @@ endfig;
 
 %% *** (3) Fig. 3, M-O
 
-outline (77, 77, "eurb10", .13, 0, big_pen, do_black); %% M
-outline (78, 78, "eurb10", .13, 0, big_pen, do_black); %% N
-outline (79, 79, "eurb10", .13, 0, big_pen, do_black); %% O
+outline (77, 77, "eurb10", .13, big_pen, do_black, do_labels); %% M
+outline (78, 78, "eurb10", .13, big_pen, do_black, do_labels); %% N
+outline (79, 79, "eurb10", .13, big_pen, do_black, do_labels); %% O
 
 beginfig(3);
 
@@ -309,7 +312,7 @@ beginfig(3);
   M.dx = M.dy = .5cm;
   boxit.M(v[77]);
 
-  draw pic(M) shifted (.45cm, 0);
+  draw pic(M) shifted (1mm, 0);
   
   draw outer_frame xscaled 1.5;
   draw inner_frame xscaled 1.5;
@@ -341,7 +344,7 @@ beginfig(3);
   boxit.O(v[79]);
   O.c = z3 shifted (z4 - z0);
 
-  draw pic(O) shifted (.25cm, 0);
+  draw pic(O) shifted (.3cm, 0);
 
   path p[];
 
@@ -394,26 +397,26 @@ end;
 do_black := true;
 
 for i = 48 upto 57:  %% Numerals
-  outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);
+  outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
 endfor;
 
 for i = 65 upto 90: %% Uppercase letters
   if (i = ASCII "J") or (i = ASCII "Q"):
-    outline (i, i, "eurb10", .2125, 0, 1cm, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);
+    outline (i, i, "eurb10", .2125, 0, 1cm, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
   else:
-    outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);
+    outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
   fi
 endfor;
 
 
 for i = 97 upto 122: %% Lowercase letters
-  outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);
+  outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
 endfor;
 
 %% Fit multiple letters onto a figure
 
-outline (65, 165, "eurb10", .2125, -1.25cm, 2cm, 180, 9.5cm, 9.5cm, 0, false, big_pen, do_black); %% A
-outline (65, 265, "eurb10", .2125, 1.3cm, -1.5cm, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black);  %% A
+outline (65, 165, "eurb10", .2125, -1.25cm, 2cm, 180, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels); %% A
+outline (65, 265, "eurb10", .2125, 1.3cm, -1.5cm, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);  %% A
 
 end;
 
