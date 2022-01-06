@@ -169,9 +169,7 @@ outline (73, 73, "eurb10", .13, 0, big_pen, do_black); %% I
 outline (74, 74, "eurb10", .13, 0, big_pen, do_black); %% J
 outline (75, 75, "eurb10", .13, 0, big_pen, do_black); %% K  
 outline (76, 76, "eurb10", .13, 0, big_pen, do_black); %% L
-outline (77, 77, "eurb10", .13, 0, big_pen, do_black); %% M
-outline (78, 78, "eurb10", .13, 0, big_pen, do_black); %% N
-outline (79, 79, "eurb10", .13, 0, big_pen, do_black); %% O
+
 outline (80, 80, "eurb10", .13, 0, big_pen, do_black); %% P
 outline (81, 81, "eurb10", .13, 0, big_pen, do_black); %% Q
 outline (82, 82, "eurb10", .13, 0, big_pen, do_black); %% R
@@ -232,7 +230,11 @@ beginfig(0);
     draw outer_frame shifted (j*outer_frame_wd, 0);
   endfor;
 
-  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  w0 = currentpicture;
+  
+  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+
+
   
 endfig;
 
@@ -260,7 +262,9 @@ beginfig(1);
     draw outer_frame shifted (j*outer_frame_wd, 0);
   endfor;
 
-  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  w1 = currentpicture;
+  
+  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
 
@@ -287,50 +291,93 @@ beginfig(2);
     draw outer_frame shifted (j*outer_frame_wd, 0);
   endfor;
 
-  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  w2 = currentpicture;
+
+  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
 
-%% *** (3) Fig. 3, M-P
+%% *** (3) Fig. 3, M-O
+
+outline (77, 77, "eurb10", .13, 0, big_pen, do_black); %% M
+outline (78, 78, "eurb10", .13, 0, big_pen, do_black); %% N
+outline (79, 79, "eurb10", .13, 0, big_pen, do_black); %% O
 
 beginfig(3);
+
   pickup medium_pen;
   M.dx = M.dy = .5cm;
   boxit.M(v[77]);
-  boxit.N(v[78]);
-  boxit.O(v[79]);
-  boxit.P(v[80]);
-  N.c = M.c shifted (outer_frame_wd, 0);
-  O.c = N.c shifted (outer_frame_wd, 0);
-  P.c = O.c shifted (outer_frame_wd, 0);
 
   draw pic(M) shifted (.45cm, 0);
-  draw pic(N) shifted (.45cm, 0);
-  draw pic(O) shifted (.45cm, 0);
-  draw pic(P) shifted (.45cm, 0);
   
-  for j = 0 upto 3:
-    draw inner_frame shifted (j*outer_frame_wd, 0);
-    draw outer_frame shifted (j*outer_frame_wd, 0);
-  endfor;
+  draw outer_frame xscaled 1.5;
+  draw inner_frame xscaled 1.5;
 
-  currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  z0 = point 1 of (outer_frame xscaled 1.5);
+  z1 = point 0 of outer_frame;
+
+  
+  draw outer_frame shifted (z0 - z1);
+  draw inner_frame shifted (z0 - z1);
+
+  z2 = point 2 of outer_frame shifted (z0 - z1);
+  z3 = .5[z0, z2];
+
+    
+  % dotlabel.urt(btex $z_0$ etex, z0);
+  % dotlabel.llft(btex $z_2$ etex, z2);
+  % dotlabel.top(btex $z_3$ etex, z3);
+
+  boxit.N(v[78]);
+  N.c = z3;
+  
+  draw pic(N);
+
+  z4 = point 1 of outer_frame shifted (z0 - z1);
+
+  % dotlabel.ulft(btex $z_4$ etex, z4);
+  
+  boxit.O(v[79]);
+  O.c = z3 shifted (z4 - z0);
+
+  draw pic(O) shifted (.25cm, 0);
+
+  path p[];
+
+  p0 = outer_frame xscaled 1.125;
+  p1 = inner_frame xscaled 1.125;
+
+  z5 = point 0 of p0;
+
+  p0 := (p0 shifted (z1 - z5)) shifted (z4 - z1);
+  p1 := (p1 shifted (z1 - z5)) shifted (z4 - z1);
+    
+  draw p0;
+  draw p1;
+
+  w3 = currentpicture;
+
+  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  
   
 endfig;
 
-%% *** (3) Fig. 4, Q-T
+%% *** (3) Fig. 4, O-
 
-%% *** (3) Fig. 5, M-P
+%  boxit.P(v[80]);
 
-%% *** (3) Fig. 6, Q-T
+%% *** (3) Fig. 5, 
 
-%% *** (3) Fig. 7, U-X
+%% *** (3) Fig. 6, 
 
-%% *** (3) Fig. 8, Y-Z, 0-1
+%% *** (3) Fig. 7, 
 
-%% *** (3) Fig. 9, 2-5
+%% *** (3) Fig. 8, 
 
-%% *** (3) Fig. 10, 6-9
+%% *** (3) Fig. 9, 
+
+%% *** (3) Fig. 10, 
 
 
 
