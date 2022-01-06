@@ -14,8 +14,10 @@ verbatimtex \font\eurm=eurm10 scaled 16000
   \font\cmssbx=cmssbx10 scaled 8000
   etex;
 
+path p[];
 path q[];
 picture v[];
+picture w[];
 
 numeric dark_grey;
 dark_grey = .5;
@@ -24,17 +26,10 @@ pen medium_pen;
 pen big_pen;
 
 small_pen = pencircle scaled .25mm;
-
 medium_pen = pencircle scaled .5mm;
-
 big_pen = pencircle scaled 1mm;
 
 pickup medium_pen;
-
-picture w[];
-
-boolean do_labels;
-do_labels = true; % false;
 
 path r[][];
 
@@ -47,9 +42,16 @@ S = "";
 
 boolean do_black;
 
+boolean do_labels;
+do_labels = true; % false;
+
 do_black = false; % true;
 
 input outline_hollow_ssb.mac;
+
+%% * (1)
+
+
 
 %% * (1)
 
