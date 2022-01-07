@@ -167,6 +167,14 @@ beginfig(0);
 
   z25 = z24 rotatedaround (z14, 180);
   dotlabel.rt(btex $z_{25}$ etex, z25);
+
+  z26 = whatever[z0, z20];
+  y26 = ypart a[0][9];
+  dotlabel.rt(btex $z_{26}$ etex, z26);
+
+  z27 = whatever[z0, z20];
+  y27 = ypart a[1][5];
+  dotlabel.rt(btex $z_{27}$ etex, z27);
   
 %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
