@@ -86,8 +86,7 @@ beginfig(0);
 
   z2 = 1.25[z0, z1];
   %dotlabel.top(btex $z_2$ etex, z2);
-  
-  
+    
   z3 = (z0 -- z2) intersectionpoint (a[0][2] -- a[0][1]);
   dotlabel.top(btex $z_3$ etex, z3);
   
@@ -106,7 +105,70 @@ beginfig(0);
 
   draw z4 -- z7 withcolor dark_grey;
   
-  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+  x8 = .5[xpart a[0][9], xpart a[0][10]];
+  y8 = .5[ypart a[1][1], ypart a[0][2]];
+
+  dotlabel.rt(btex $z_8$ etex, z8);  
+
+  z9 = z8 shifted (1cm, 0);
+  z10 = 3[z8, z9];
+  z11 = z10 rotatedaround (z8, 180);
+
+  dotlabel.rt(btex $z_{10}$ etex, z10);
+  dotlabel.lft(btex $z_{11}$ etex, z11);  
+
+  z12 = (a[0][4] -- a[0][3]) intersectionpoint (z11 -- z10);
+  dotlabel.lft(btex $z_{12}$ etex, z12);
+
+  z13 = (a[0][14] -- a[0][0]) intersectionpoint (z11 -- z10);
+  dotlabel.rt(btex $z_{13}$ etex, z13);  
+
+  draw z12 -- z13 withcolor dark_grey;
+
+  x14 = .5[xpart a[1][5], xpart a[1][4]];
+  y14 = .5[ypart a[0][9], ypart a[1][5]];
+  dotlabel.top(btex $z_{14}$ etex, z14);
+
+  z15 = z14 shifted (5cm, 0);
+  dotlabel.rt(btex $z_{15}$ etex, z15);
+
+  z16 = z15 rotatedaround (z14, 180);
+
+  dotlabel.lft(btex $z_{16}$ etex, z16);
+
+  z17 = (a[0][4] -- a[0][3]) intersectionpoint (z16 -- z15);
+  dotlabel.lft(btex $z_{17}$ etex, z17);
+
+  z18 = (a[0][14] -- a[0][0]) intersectionpoint (z16 -- z15);
+  dotlabel.rt(btex $z_{18}$ etex, z18);
+
+  draw z17 -- z18 withcolor dark_grey;
+
+  z19 = whatever[a[0][9], a[1][5]];
+  y19 = y14;
+  dotlabel.rt(btex $z_{19}$ etex, z19);
+
+  z20 = (z17 -- z19) intersectionpoint (z0 -- z1);
+  dotlabel.lrt(btex $z_{20}$ etex, z20);
+
+  z21 = (z20 -- z18) intersectionpoint (z4 -- z7);
+  dotlabel.lrt(btex $z_{21}$ etex, z21);
+
+  x22 = x14;
+  y22 = ypart a[0][9];
+  dotlabel.bot(btex $z_{22}$ etex, z22);
+
+  x23 = x14;
+  y23 = ypart a[1][5];
+  dotlabel.top(btex $z_{23}$ etex, z23);
+
+  z24 = .6[z14, z23];
+  dotlabel.rt(btex $z_{24}$ etex, z24);
+
+  z25 = z24 rotatedaround (z14, 180);
+  dotlabel.rt(btex $z_{25}$ etex, z25);
+  
+%currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
 

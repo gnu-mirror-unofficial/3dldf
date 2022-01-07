@@ -92,7 +92,8 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, ppen, ddo_black, d
       if ddo_black:
 	draw r[picture_ctr][m] withpen ppen;
       else:
-	drawarrow r[picture_ctr][m] withpen medium_pen;
+	%drawarrow r[picture_ctr][m] withpen medium_pen;
+	draw r[picture_ctr][m] withpen medium_pen;
       fi
       for j = 0 upto length r[picture_ctr][m]:
 	a[m][j] = p[picture_ctr][m][j] = point j of r[picture_ctr][m];
