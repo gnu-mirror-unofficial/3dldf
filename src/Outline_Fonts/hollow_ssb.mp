@@ -29,6 +29,8 @@ small_pen = pencircle scaled .25mm;
 medium_pen = pencircle scaled .5mm;
 big_pen = pencircle scaled 1mm;
 
+let large_pen = big_pen;
+
 pickup medium_pen;
 
 path r[][];
@@ -52,8 +54,6 @@ input boxes.mp;
 
 input outline_hollow_ssb.mac;
 
-
-
 %% * (1)
 
 %% * (1)
@@ -72,6 +72,9 @@ fontmapline "cmr7 CMR7 <cmr7.pfb";
 outline (65, 65, "cmssbx10", .45, big_pen, do_black, do_labels); %% A  
 
 beginfig(0);
+
+  path q[];
+
   pickup medium_pen;
   A.dx = A.dy = .5cm;
   boxit.A(v[65]);
@@ -130,7 +133,7 @@ beginfig(0);
   dotlabel.top(btex $z_{14}$ etex, z14);
 
   z15 = z14 shifted (5cm, 0);
-  dotlabel.rt(btex $z_{15}$ etex, z15);
+  %dotlabel.rt(btex $z_{15}$ etex, z15);
 
   z16 = z15 rotatedaround (z14, 180);
 
@@ -162,7 +165,10 @@ beginfig(0);
   y23 = ypart a[1][5];
   dotlabel.top(btex $z_{23}$ etex, z23);
 
-  z24 = .6[z14, z23];
+  z24 = .5[z14, z23]; %% The coefficient for the mediation operation determines
+                      %% the width of the lower horizontal inside stripe.
+                      %% LDF 2022.01.08.
+
   dotlabel.rt(btex $z_{24}$ etex, z24);
 
   z25 = z24 rotatedaround (z14, 180);
@@ -175,6 +181,71 @@ beginfig(0);
   z27 = whatever[z0, z20];
   y27 = ypart a[1][5];
   dotlabel.rt(btex $z_{27}$ etex, z27);
+
+  z28 = whatever[a[0][4], z12];
+  y28 = y25;
+  dotlabel.lft(btex $z_{28}$ etex, z28);
+
+  z29 = whatever[a[0][4], z12];
+  y29 = y24;
+  dotlabel.lft(btex $z_{29}$ etex, z29);
+
+  z30 = whatever[a[0][10], a[1][4]];
+  y30 = y25;
+  dotlabel.rt(btex $z_{30}$ etex, z30);
+
+  z31 = whatever[a[0][10], a[1][4]];
+  y31 = y24;
+  dotlabel.rt(btex $z_{31}$ etex, z31);
+
+  z32 = whatever[z18, z13];
+  y32 = y25;
+  dotlabel.rt(btex $z_{32}$ etex, z32);
+
+  z33 = whatever[z18, z13];
+  y33 = y24;
+  dotlabel.rt(btex $z_{33}$ etex, z33);
+
+  draw z29 -- z33 withcolor dark_grey;
+  draw z28 -- z32 withcolor dark_grey;
+
+  x34 = .25[x0, xpart a[0][5]];  %% The coefficient for the mediation operation determines
+                                %% the width of the left diagonal inside stripe.
+                                %% LDF 2022.01.08.
+  y34 = ypart a[0][8];
+  dotlabel.rt(btex $z_{34}$ etex, z34);
+
+  z35 = (z26 - z0) shifted z34;
+  dotlabel.urt(btex $z_{35}$ etex, z35);
+
+  z36 = (z20 - z26) shifted z34;
+  dotlabel.lft(btex $z_{36}$ etex, z36);
+
+  z37 = 2.5[z36, z34];
+  dotlabel.lft(btex $z_{37}$ etex, z37);
+
+  z38 = whatever[z37, z36];
+  y38 = ypart z3 + .5cm;
+
+  dotlabel.lft(btex $z_{38}$ etex, z38);
+
+
+  
+  z39 = r[65][0] intersectionpoint (z34 -- z37);
+  dotlabel.urt(" ", z39);
+  label.urt(btex $z_{39}$ etex, z39 shifted (-.25cm, 0));
+  
+  z40 = r[65][0] intersectionpoint (z35 -- z38);
+  dotlabel.ulft(btex $z_{40}$ etex, z40);
+
+  draw z39 -- z40 withcolor dark_grey;
+  
+  q0 = (z39 -- z40) shifted (2(x0 - x39), 0);
+  dotlabel.rt(btex $q_0$ etex, point .5 of q0);
+  
+  
+  draw q0 withcolor dark_grey;
+  
   
 %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
