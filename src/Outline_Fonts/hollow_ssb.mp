@@ -53,6 +53,18 @@ do_rounded_corners = false; % true;
 input TEX.mp;
 input boxes.mp;
 
+numeric coeff_left_diag;
+numeric coeff_right_diag;
+numeric coeff_lower_horiz;
+numeric coeff_upper_horiz;
+
+coeff_left_diag   = .25;
+coeff_right_diag  = .25; 
+coeff_lower_horiz = .25;
+coeff_upper_horiz = .25;
+
+
+
 input outline_hollow_ssb.mac;
 
 %% * (1)
@@ -112,7 +124,7 @@ beginfig(0);
   x8 = .5[xpart a[0][9], xpart a[0][10]];
   y8 = .5[ypart a[1][1], ypart a[0][2]];
 
-  dotlabel.rt(btex $z_8$ etex, z8);  
+  dotlabel.urt(btex $z_8$ etex, z8);  
 
   z9 = z8 shifted (1cm, 0);
   z10 = 3[z8, z9];
@@ -166,14 +178,16 @@ beginfig(0);
   y23 = ypart a[1][5];
   dotlabel.top(btex $z_{23}$ etex, z23);
 
-  z24 = .5[z14, z23]; %% The coefficient for the mediation operation determines
-                      %% the width of the lower horizontal inside stripe.
-                      %% LDF 2022.01.08.
+%% *** (3) Inner stripe, lower horizontal
+  
+  z24 = coeff_lower_horiz[z22, z23]; %% The coefficient for the mediation operation determines
+                                     %% the width of the lower horizontal inside stripe.
+                                     %% LDF 2022.01.08.
 
-  dotlabel.rt(btex $z_{24}$ etex, z24);
+  dotlabel.urt(btex $z_{24}$ etex, z24);
 
   z25 = z24 rotatedaround (z14, 180);
-  dotlabel.rt(btex $z_{25}$ etex, z25);
+  dotlabel.urt(btex $z_{25}$ etex, z25);
 
   z26 = whatever[z0, z20];
   y26 = ypart a[0][9];
@@ -193,11 +207,11 @@ beginfig(0);
 
   z30 = whatever[a[0][10], a[1][4]];
   y30 = y25;
-  dotlabel.rt(btex $z_{30}$ etex, z30);
+  dotlabel.urt(btex $z_{30}$ etex, z30);
 
   z31 = whatever[a[0][10], a[1][4]];
   y31 = y24;
-  dotlabel.rt(btex $z_{31}$ etex, z31);
+  dotlabel.urt(btex $z_{31}$ etex, z31);
 
   z32 = whatever[z18, z13];
   y32 = y25;
@@ -210,9 +224,36 @@ beginfig(0);
   draw z29 -- z33 withcolor dark_grey;
   draw z28 -- z32 withcolor dark_grey;
 
-  x34 = .25[x0, xpart a[0][5]];  %% The coefficient for the mediation operation determines
-                                %% the width of the left diagonal inside stripe.
-                                %% LDF 2022.01.08.
+%% *** (3) Inner stripe, upper horizontal
+
+  x60 = x8;
+  y60 = y7;
+  dotlabel.top(btex $z_{60}$ etex, z60);
+  
+  x61 = x60;
+  y61 = ypart a[1][1];
+  dotlabel.urt(btex $z_{61}$ etex, z61);
+
+  z62 = coeff_upper_horiz[z61, z60]; %% The coefficient for the mediation operation determines
+  dotlabel.urt(btex $z_{62}$ etex, z62);
+
+  z63 = whatever[z12, z29];
+  y63 = y62;
+  dotlabel.lft(btex $z_{63}$ etex, z63);
+
+  z64 = whatever[z13, z32];
+  y64 = y62;
+  dotlabel.rt(btex $z_{64}$ etex, z64);
+
+  draw z63 -- z64 withcolor dark_grey;
+
+
+  
+%% *** (3) Inner stripe, left diagonal
+  
+  x34 = coeff_left_diag[x0, xpart a[0][5]];  %% The coefficient for the mediation operation determines
+                                             %% the width of the left diagonal inside stripe.
+                                             %% LDF 2022.01.08.
   y34 = ypart a[0][8];
   dotlabel.rt(btex $z_{34}$ etex, z34);
 
@@ -229,8 +270,6 @@ beginfig(0);
   y38 = ypart z3 + .5cm;
 
   %dotlabel.lft(btex $z_{38}$ etex, z38);
-
-
   
   z39 = r[65][0] intersectionpoint (z34 -- z37);
   dotlabel.urt(" ", z39);
@@ -246,6 +285,39 @@ beginfig(0);
   
   draw q0 withcolor dark_grey;
 
+
+%% *** (3) Inner stripe, right diagonal   
+
+  z50 = whatever[z30, z31];
+  y50 = y21;
+
+  dotlabel.ulft(btex $z_{50}$ etex, z50);
+
+  z51 = coeff_right_diag[z50, z18];
+  dotlabel.top(btex $z_{51}$ etex, z51);
+
+  z52 = z51 rotatedaround (z21, 180);
+  dotlabel.top(btex $z_{52}$ etex, z52);
+
+  z53 = (z7 - z21) shifted z51;
+  dotlabel.bot(btex $z_{53}$ etex, z53);
+
+  z54 = z53 rotatedaround (z7, 180);
+  dotlabel.bot(btex $z_{54}$ etex, z54);
+
+  z55 = whatever[z53, z51];
+  y55 = y4;
+  dotlabel.bot(btex $z_{55}$ etex, z55);
+  
+  draw z53 -- z55 withcolor dark_grey;
+
+  q1 = (z53 -- z55) shifted (z54 - z53);
+
+  draw q1 withcolor dark_grey;
+
+  dotlabel.rt(btex $q_1$ etex, point .5 of q1);
+
+  
 %% ** (2) Straighten out rounded corners (optionally)
 
   z41 = whatever[z28, z12];  %% Left diagonal, left side
@@ -280,15 +352,31 @@ beginfig(0);
     draw a[0][14] -- z44 -- a[0][13];
   fi
 
-  z45 = whatever[z12, z29];  %% Top left
-  y 45 = y7;
+%% *** (3) Top left
+  
+  z45 = whatever[z12, z29]; 
+  y45 = y7;
   dotlabel.ulft(btex $z_{45}$ etex, z45);
   
   if not do_rounded_corners:
     draw a[0][3] -- z45 -- a[0][2];
   fi
+
+%% *** (3) Top right
   
+  z46 = whatever[z13, z33]; 
+  y46 = y7;
+  dotlabel.ulft(btex $z_{46}$ etex, z46);
   
+  if not do_rounded_corners:
+    draw a[0][0] -- z46 -- z7;
+  fi
+
+%% ** (2)
+
+ 
+  
+%% ** (2)  
   
 %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
@@ -305,5 +393,6 @@ end;
 
 %% Local Variables:
 %% mode:MetaPost
-%% outline-minor-mode:t
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
 %% End:

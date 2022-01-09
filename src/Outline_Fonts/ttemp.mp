@@ -531,6 +531,6 @@ end;
 
 %% Local Variables:
 %% mode:MetaPost
-%% outline-minor-mode:t
+%% eval:(outline-minor-mode t)
 %% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
 %% End:
