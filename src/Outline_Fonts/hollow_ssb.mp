@@ -247,7 +247,15 @@ beginfig(0);
 
   draw z63 -- z64 withcolor dark_grey;
 
+  z65 = whatever[z12, z29];
+  y65 = 2y8 - y62;
+  dotlabel.ulft(btex $z_{65}$ etex, z65);
 
+  z66 = whatever[z64, z32];
+  y66 = y65;
+  dotlabel.urt(btex $z_{66}$ etex, z66);
+
+  draw z65 -- z66 withcolor dark_grey;
   
 %% *** (3) Inner stripe, left diagonal
   
