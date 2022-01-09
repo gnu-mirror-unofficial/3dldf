@@ -59,13 +59,13 @@
 %% \vsize=297mm
 %% \hsize=420mm
 
-\special{papersize=210mm, 297mm} %% DIN A4 Portrait
-\vsize=297mm
-\hsize=210mm
+%% \special{papersize=210mm, 297mm} %% DIN A4 Portrait
+%% \vsize=297mm
+%% \hsize=210mm
 
-%% \special{papersize=297mm, 210mm} %% DIN A4 Landscape
-%% \vsize=210mm
-%% \hsize=297mm
+\special{papersize=297mm, 210mm} %% DIN A4 Landscape
+\vsize=210mm
+\hsize=297mm
 
 %% (* 16 1.05)16.8
 %% (* 9 1.05)9.45
@@ -86,24 +86,23 @@
 % A7 Portrait:  74 X 105
 % A8 Portrait:  52 X  74
 
-
 \parindent=0pt
 \parskip=0pt
 \baselineskip=0pt
-
 
 \advance\voffset by -1in
 \advance\hoffset by -1in
 
 \advance\hoffset by .5mm
-\advance\voffset by 2cm
+\advance\voffset by 1.5cm
 
 \font\Large=cmr12
 
-\headline={}
+%\headline={}
 
-%% \headline={\lower0cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
-%%            Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hss\folio\hskip2cm{\tt \timestamp}\hss}}}
+\headline={\lower0cm\hbox to \hsize{\hskip 1cm{\rm Outline Letters --- Fraktur\quad %
+            Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hskip4em\folio
+            \hss{\tt \timestamp}}\hskip1cm}}
 
 \def\epsfsize#1#2{#1}
 %\epsfclipon
@@ -114,19 +113,22 @@
 
 %% * (1)
 
-\setbox0=\hbox{\epsffile{ttemp000.eps}}
+
 
 %% !! START HERE! LDF 2022.01.04. Read value for skip from file.
 %% Write to file from ttemp.mp.
 
 \baselineskip=0pt
 \parskip=0pt
-\vbox{\vbox to 0pt{\hbox{\epsffile{ttemp000.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\epsffile{ttemp001.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\epsffile{ttemp002.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\epsffile{ttemp003.eps}}\vss}\vskip62mm
-}
 
+
+\vbox{\vskip1cm\hbox to \hsize{\hss\epsffile{ttemp000.eps}\hss}\vss}
+
+
+%% \vbox{\vbox to 0pt{\hbox{\epsffile{ttemp000.eps}}\vss}\vskip62mm
+%%       \vbox to 0pt{\hbox{\epsffile{ttemp001.eps}}\vss}\vskip62mm
+%%       \vbox to 0pt{\hbox{\epsffile{ttemp002.eps}}\vss}\vskip62mm
+%%       \vbox to 0pt{\hbox{\epsffile{ttemp003.eps}}\vss}\vskip62mm}
 \vfil
 \eject
 
@@ -140,6 +142,8 @@
 \skip1=-3pt
 
 
+
+%% \setbox0=\hbox{\epsffile{ttemp000.eps}}
 
 %% Not reflected (for wax letters)
 %%
@@ -278,4 +282,5 @@
 
 %% Local Variables:
 %% mode:plain-TeX
+%% auto-fill-function:nil
 %% End:

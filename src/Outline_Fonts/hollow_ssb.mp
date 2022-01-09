@@ -43,11 +43,12 @@ S = "";
 %bboxmargin := 0;
 
 boolean do_black;
-
 boolean do_labels;
-do_labels = true; % false;
+boolean do_rounded_corners;
 
-do_black = false; % true;
+do_labels          = true;  % false;
+do_black           = false; % true;
+do_rounded_corners = false; % true;
 
 input TEX.mp;
 input boxes.mp;
@@ -222,12 +223,12 @@ beginfig(0);
   dotlabel.lft(btex $z_{36}$ etex, z36);
 
   z37 = 2.5[z36, z34];
-  dotlabel.lft(btex $z_{37}$ etex, z37);
+  %dotlabel.lft(btex $z_{37}$ etex, z37);
 
   z38 = whatever[z37, z36];
   y38 = ypart z3 + .5cm;
 
-  dotlabel.lft(btex $z_{38}$ etex, z38);
+  %dotlabel.lft(btex $z_{38}$ etex, z38);
 
 
   
@@ -243,8 +244,50 @@ beginfig(0);
   q0 = (z39 -- z40) shifted (2(x0 - x39), 0);
   dotlabel.rt(btex $q_0$ etex, point .5 of q0);
   
-  
   draw q0 withcolor dark_grey;
+
+%% ** (2) Straighten out rounded corners (optionally)
+
+  z41 = whatever[z28, z12];  %% Left diagonal, left side
+  y41 = y0;
+  dotlabel.bot(btex $z_{41}$ etex, z41);
+  
+  if not do_rounded_corners:
+    draw a[0][4] -- z41 -- a[0][6];
+  fi
+
+  z42 = whatever[a[0][8], a[0][9]];  %% Left diagonal, right side
+  y42 = y41;
+  dotlabel.rt(btex $z_{42}$ etex, z42);
+  
+  if not do_rounded_corners:
+    draw a[0][8] -- z42 -- a[0][7];
+  fi
+
+  z43 = whatever[a[0][10], a[0][11]];  %% Right diagonal, left side
+  y43 = y41;
+  dotlabel.lft(btex $z_{43}$ etex, z43);
+  
+  if not do_rounded_corners:
+    draw a[0][11] -- z43 -- a[0][12];
+  fi
+
+  z44 = whatever[z13, z33];  %% Right diagonal, right side
+  y44 = y41;
+  dotlabel.rt(btex $z_{44}$ etex, z44);
+  
+  if not do_rounded_corners:
+    draw a[0][14] -- z44 -- a[0][13];
+  fi
+
+  z45 = whatever[z12, z29];  %% Top left
+  y 45 = y7;
+  dotlabel.ulft(btex $z_{45}$ etex, z45);
+  
+  if not do_rounded_corners:
+    draw a[0][3] -- z45 -- a[0][2];
+  fi
+  
   
   
 %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
