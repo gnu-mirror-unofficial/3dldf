@@ -8,7 +8,14 @@
 % * Changed.  See above.  LDF 2022.01.10.
 
 % Computer Modern Sans Serif Bold Extended 10 pt
+
+
+
 if unknown cmbase: input cmbaseldf fi
+
+%% `font_size' is a macro.  It does nothing other than to set `designsize', 
+%% which is an internal quantity (primitive).
+%% LDF 2022.01.11.
 
 font_identifier:="CMSSBX"; font_size 10pt#;
 
@@ -31,11 +38,15 @@ message "factor:";
 show factor;
 
 
+
+
 u#:=22/36pt#;               % unit width
 width_adj#:=22/36pt#;       % width adjustment for certain characters
 serif_fit#:=-9/36pt#;       % extra sidebar near lowercase serifs
 cap_serif_fit#:=-11/36pt#;  % extra sidebar near uppercase serifs
 letter_fit#:=0pt#;          % extra space added to all sidebars
+
+
 
 
 body_height#:=270/36pt#; % height of tallest characters
@@ -136,5 +147,10 @@ math_fitting:=false;  % should math-mode spacing be used?
 % mode := proofing;
 % mode := dpdfezzz;
 %% End of added code.  LDF 2022.01.10.
+
+
+
+
+
 
 generate romanldf      % switch to the driver file

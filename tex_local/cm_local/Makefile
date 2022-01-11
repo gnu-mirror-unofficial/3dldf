@@ -14,6 +14,8 @@ ps: cmssbxldf.ps
 .PHONY: gray-pdf
 pdf: cmssbxldf.pdf 
 
+## cmssbx10ldf.* is the proofing output (with grayfont).  LDF 2022.01.11.
+
 cmssbx10ldf.ps: cmssbx10ldf.dvi
 	dvips -o cmssbx10ldf.ps cmssbx10ldf.dvi
 
@@ -26,11 +28,11 @@ cmssbx10ldf.dvi: cmssbx10ldf.2602gf
 cmssbx10ldf.2602gf cmssbx10ldf.tfm: cmssbx10ldf.mf romanldf.mf romanuldf.mf
 	mf cmssbx10ldf.mf
 
-cmssbx10ldf.8000gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf
-	mf '\mode:=dpdfezzz;' input cmssbx10ldf.mf
+# cmssbx10ldf.8000gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf
+# 	mf '\mode:=dpdfezzz;' input cmssbx10ldf.mf
 
-cmssbx10ldf.8000pk: cmssbx10ldf.8000gf
-	gftopk cmssbx10ldf.8000gf
+# cmssbx10ldf.8000pk: cmssbx10ldf.8000gf
+# 	gftopk cmssbx10ldf.8000gf
 
 cmssbx10ldf.2400gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf
 	mf '\mode:=supre;' input cmssbx10ldf.mf
@@ -67,13 +69,19 @@ pdf: cmssbxldf.pdf
 cmssbxldf.dvi: cmssbxldf.tex cmssbx10ldf.tfm
 	tex cmssbxldf.tex
 
-cmssbxldf.ps: cmssbxldf.dvi cmssbx10ldf.8000pk
-	dvips -Ppdf -o cmssbxldf.ps cmssbxldf.dvi
+cmssbxldf.ps: cmssbxldf.dvi cmssbx10ldf.2400pk
+	dvips -D 2400 -Z cmssbxldf.ps cmssbxldf.dvi
 
 cmssbxldf.pdf: cmssbxldf.ps
 	ps2pdf cmssbxldf.ps
 
 
+.PHONY: pl
+
+pl: cmssbx10ldf.pl
+
+cmssbx10ldf.pl: cmssbx10ldf.tfm
+	tftopl cmssbx10ldf.tfm
 
 ## * (1) End
 
