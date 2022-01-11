@@ -2366,10 +2366,28 @@ void
 Path::set_connectors(const string s)
 {
 
-/* !!START HERE:  LDF 2021.12.25. */ 
-
+  c->connector_string = s;
   connectors.clear();
   connectors.push_back(s);
+
+  Connector_Type *c = create_new<Connector_Type>(0); 
+
+  c->type0 = Connector_Type::PLAIN_TYPE;      
+  c->type0 = Connector_Type::NULL_TYPE;      
+
+  for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       ++iter)
+  {
+     delete *iter;
+     *iter = 0;
+  }
+
+  connector_type_vector.clear();
+  connector_type_vector.push_back(c);
+
+  return;
+
 }
 
 @q * (1) Functions for checking integrity of form.@> 
@@ -3487,15 +3505,15 @@ Path::project(const Focus& f,
 \initials{LDF 2004.10.03.}
 @^\cfunc{Path}{reflect\_in}@>
 
-Please note that this function tries to allocate memory on the free 
-store for the |Path| pointed to by the pointer to |Shape| which is 
-its return value.  Therefore, programmers who use this function must 
-ensure that this memory is freed.
+Please note that this function tries to allocate memory on the free
+store for the |Path| pointed to by the pointer to |Shape| which is its
+return value.  Therefore, programmers who use this function must
+ensure that this memory is
 \initials{LDF 2004.10.03.}
 
-If allocation fails, this function throws a |bad_alloc| exception.  
-If the reflection of |*this| cannot be found in the |Plane|, 
-this function returns 0.
+If allocation fails, this function throws a |bad_alloc| exception.  If
+the reflection of |*this| cannot be found in the |Plane|, this
+function returns 0.
 \initials{LDF 2004.10.03.}
 
 \LOG
@@ -3563,10 +3581,10 @@ Path::reflect_in(const Plane& p,
         cerr_message(cerr_strm, warning_stop_value);
         cerr_strm.str("");
 
-try
-          {
-             path_reflection = create_new<Path>(0, scanner_node);
-          }
+        try
+        {
+           path_reflection = create_new<Path>(0, scanner_node);
+        }
 
 @q **** (4) Error handling:  |create_new<Path>| failed.@>   
 
@@ -3575,9 +3593,8 @@ try
 
 @<Define |Path| functions@>=
 
-       catch (bad_alloc)
-          {
-             
+        catch (bad_alloc)
+        {
               cerr_strm << thread_name 
                         << "ERROR! In `Path::reflect_in':"
                         << endl << "`create_new<Path>' failed. "
@@ -3589,7 +3606,7 @@ try
 
               throw;
 
-          } /* |catch (bad_alloc)|  */
+        } /* |catch (bad_alloc)|  */
 
 @q **** (4) |create_new<Path>| succeeded.@>           
 
@@ -3628,14 +3645,17 @@ the |Points|.
 
   Point* point_reflection;
   
+  /* !!START HERE:  LDF 2022.01.11.  Adding code for |connector_type_vector|.  */ 
+
   vector<string>::const_iterator connector_iter = connectors.begin();
 
   for (vector<Point*>::const_iterator point_iter = points.begin();
        point_iter != points.end();
        point_iter++)
      {
+@q ***** (5) @>
 
-try 
+          try 
           {
              point_reflection = create_new<Point>(0, scanner_node);
           }
