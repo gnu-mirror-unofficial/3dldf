@@ -1,0 +1,68 @@
+%% cmssbxldf.tex
+%% Created by Laurence D. Finston (LDF) Tue 11 Jan 2022 06:05:43 AM CET
+
+\special{papersize=210mm, 297mm} %% DIN A4 Portrait
+\vsize=297mm
+\hsize=210mm
+
+\input epsf
+\input eplain
+
+\parindent=0pt
+\parskip=0pt
+\baselineskip=0pt
+
+\advance\voffset by -1in
+\advance\hoffset by -1in
+
+\advance\hoffset by .5mm
+\advance\voffset by 1.5cm
+
+\font\cmssbxldf=cmssbx10ldf
+\font\cminch=cminch
+
+\headline={\lower0cm\hbox to \hsize{\hskip 1cm{\rm Outline Letters --- Computer Modern Sans Serif Bold Extended\quad %
+            Copyright {\copyright} 2021 The Free Software Foundation, Inc.\hskip4em\folio
+            \hss{\tt \timestamp}}\hskip1cm}}
+
+
+
+\def\epsfsize#1#2{#1}
+%\epsfclipon
+
+\def\addbox#1{\setbox0=\hbox{#1}%
+\vbox to 0pt{\hbox to 0pt{\vrule width 1pt height \ht0\hss}\vss}%            Vertical left
+\vbox to 0pt{\hbox to 0pt{\hskip\wd0\vrule width 1pt height \ht0\hss}\vss}%  Vertical right
+\vbox to 0pt{\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%            Top
+\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%  Bottom
+\vbox to 0pt{\hbox to 0pt{#1\hss}\vss}%
+\ifdim\dp0>0pt
+\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule depth \dp0 width 1pt\hss}\vss}%   Vertical left
+\vbox to 0pt{\vskip\ht0\hbox to 0pt{\hskip\wd0\vrule depth \dp0 width 1pt\hss}\vss}%
+\vbox to 0pt{\vskip\ht0\vskip\dp0\hbox to 0pt{\vrule depth 1pt width \wd0\hss}\vss}\fi
+\hskip\wd0\hskip.25cm}
+
+
+\begingroup
+\advance\hoffset by 1cm
+\vbox{}
+\vskip1cm
+\leftline{{\cmssbxldf \addbox{A}}}
+\vskip5cm
+%\leftline{{\cmssbxldf A}\epsffile{/home/laurence/3DLDF-3.0/src/Outline_Fonts/hollow_ssb000.eps}}
+\leftline{{\cmssbxldf A}}
+\vskip1cm
+\leftline{\vrule width 1in height 1pt}
+\leftline{\hskip1cm 1in}
+\vfil\eject
+\endgroup
+
+\bye
+
+%% Local Variables:
+%% mode:plain-TeX
+%% auto-fill-function:nil
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
+%% End:
+
