@@ -65,6 +65,11 @@
 
 bin_PROGRAMS = prbsnflx$(EXEEXT) 3dldf$(EXEEXT) cnepspng$(EXEEXT) srtstrin$(EXEEXT)
 
+OUTLINEFONTDIR := Outline_Fonts
+export OUTLINEFONTDIR
+
+SUBDIRS = $(OUTLINEFONTDIR) 
+
 # lib3dldfsp.la
 
 lib_LTLIBRARIES = lib3dldflb.la 

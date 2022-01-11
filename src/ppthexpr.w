@@ -2088,11 +2088,9 @@ Added this rule.
    Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
    Path* q           = static_cast<Path*>(@=$3@>);
 
+#if 0 
    c->show("*c:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar();      
-
+#endif 
 
    p->append(*q, c->connector_string, true);
 
@@ -2375,11 +2373,9 @@ Added this rule.
    Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
    Path* q = static_cast<Path*>(@=$3@>);
 
+#if 0
     c->show("*c:");
-
-    cerr << "XXX Enter <RETURN> to continue: ";
-    getchar();      
-
+#endif 
 
     p->append(*q, c->connector_string, true);  
     p->connector_type_vector.push_back(c);
@@ -2424,10 +2420,10 @@ Now calling |p->adjust_connectors|.
   Path* p = static_cast<Path*>(@=$1@>);
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
+#if 0   
    c->show("*c:");
+#endif 
 
-   cerr << "XXX Enter <RETURN> to continue: ";
-   getchar();      
 
   p->set_cycle(false);
   p->adjust_connectors();
@@ -2521,10 +2517,9 @@ Added this rule.
   Point* p = static_cast<Point*>(@=$3@>); 
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
-  c->show("*c:");
-
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar();      
+#if 0   
+   c->show("*c:");
+#endif 
 
   *q += c->connector_string;
 
@@ -2572,11 +2567,9 @@ Added this rule.
    p->append(*q, c->connector_string, true);
    p->connector_type_vector.push_back(c);
 
+#if 0   
    c->show("*c:");
-
-   cerr << "XXX Enter <RETURN> to continue: ";
-   getchar();      
-
+#endif 
 
    @=$$@> = static_cast<void*>(p);
 
@@ -2613,10 +2606,9 @@ Added this rule.
   Path* q = static_cast<Path*>(@=$1@>);
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
 
-  c->show("*c:");
-
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar();      
+#if 0   
+   c->show("*c:");
+#endif 
 
   *q += c->connector_string;
   q->connector_type_vector.push_back(c);

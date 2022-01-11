@@ -92,14 +92,14 @@
 \advance\voffset by 1cm
 
 \font\Large=cmr12
-\font\cmssbx = cmssbx10 scaled 8000
+\font\cmssbx = cmssbx10 scaled 16000
 
 
 \headline={\lower.25cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
            Copyright {\copyright} 2021 The Free Software Foundation, Inc.\quad
            \folio\hskip2cm{\tt \timestamp}\hss}}}
 
-\def\epsfsize#1#2{#1}
+\def\epsfsize#1#2{1.5#1}
 
 \newcount\figcnt
 
@@ -111,51 +111,39 @@
 
 %% * (1)
 
-\def\boxit#1{\setbox0=\hbox{#1}%
+\def\addbox#1{\setbox0=\hbox{#1}%
 \vbox to 0pt{\hbox to 0pt{\vrule width 1pt height \ht0\hss}\vss}%            Vertical left
 \vbox to 0pt{\hbox to 0pt{\hskip\wd0\vrule width 1pt height \ht0\hss}\vss}%  Vertical right
 \vbox to 0pt{\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%            Top
 \vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%  Bottom
-\vbox to 0pt{\hbox to 0pt{#1\hss}\vss}}
-
-\begingroup
-\advance\hoffset by 1cm
-\cmssbx
-\vbox{}
-\vskip2cm
-A B C
-\vskip1cm
-\setbox0=\hbox{A}%
-\vbox to 0pt{\hbox to 0pt{\vrule width 1pt height \ht0\hss}\vss}%            Vertical left
-\vbox to 0pt{\hbox to 0pt{\hskip\wd0\vrule width 1pt height \ht0\hss}\vss}%  Vertical right
-\vbox to 0pt{\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%            Top
-\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%  Bottom
-\vbox to 0pt{\hbox to 0pt{A\hss}\vss}%
-%%
-\setbox0=\hbox{Q}%
-\hskip3cm
-\vbox to 0pt{\hbox to 0pt{\vrule width 1pt height \ht0\hss}\vss}%            Vertical left
-\vbox to 0pt{\hbox to 0pt{\hskip\wd0\vrule width 1pt height \ht0\hss}\vss}%  Vertical right
-\vbox to 0pt{\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%            Top
-\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%  Bottom
-\vbox to 0pt{\hbox to 0pt{Q\hss}\vss}%
+\vbox to 0pt{\hbox to 0pt{#1\hss}\vss}%
 \ifdim\dp0>0pt
 \vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule depth \dp0 width 1pt\hss}\vss}%   Vertical left
 \vbox to 0pt{\vskip\ht0\hbox to 0pt{\hskip\wd0\vrule depth \dp0 width 1pt\hss}\vss}%
-\vbox to 0pt{\vskip\ht0\vskip\dp0\hbox to 0pt{\vrule depth 1pt width \wd0\hss}\vss}%    
-\fi
-\vfil
-\eject
-\endgroup
+\vbox to 0pt{\vskip\ht0\vskip\dp0\hbox to 0pt{\vrule depth 1pt width \wd0\hss}\vss}\fi
+\hskip\wd0\hskip.25cm}
+
+%% \begingroup
+%% \advance\hoffset by 1cm
+%% \cmssbx
+%% \vbox{}
+%% \vskip2cm
+%% A B C
+%% \vskip1cm
+%% \addbox{A}
+%% \addbox{Q}
+%% \vfil
+%% \eject
+%% \endgroup
+%% \bye
 
 
-\bye
 
 
 %% * (1)
 
 \vbox to \vsize{\vskip1cm
-\line{\hskip1cm\epsffile{hollow_ssb000.eps}\hss}\vss}
+\line{\hskip-5.5cm\epsffile{hollow_ssb000.eps}\hss}\vss}
 \eject
 
 \bye
