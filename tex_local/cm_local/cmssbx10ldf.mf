@@ -17,11 +17,10 @@ if unknown cmbase: input cmbaseldf fi
 %% which is an internal quantity (primitive).
 %% LDF 2022.01.11.
 
-font_identifier:="CMSSBX"; font_size 10pt#;
+
 
 boolean do_large;
 do_large = true; % false
-
 
 numeric factor;
 %factor = 4.65; %% 4.65 works with 8000gf (dpdfezzz), 4.66 doesn't.  LDF 2022.01.11.
@@ -33,12 +32,15 @@ else:
    factor = 1;
 fi
 
+font_identifier:="CMSSBX"; font_size (factor * 10pt#);
+
 message "In cmssbx10ldf.mf:";
 message "factor:"; 
 show factor;
 
-
-
+message "designsize:"; 
+show designsize;
+%readstring;
 
 u#:=22/36pt#;               % unit width
 width_adj#:=22/36pt#;       % width adjustment for certain characters
