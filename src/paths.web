@@ -4602,21 +4602,38 @@ Path::operator&=(const Path& pa)
     }
 
   string last_connector;
+  Connector_Type *last_connector_type = 0;
 
 @ \initials{LDF 2002.4.6.}  If there isn't an explicit connector for every pair
 of |Points| in |this->points|, then we have to fill up
-|connectors| so that there are enough. Otherwise, the ``{\AM}'' 
+|connectors| so that there are enough. Otherwise, the ``{\AM}'' @q Ampersand @>
 will be at the wrong place.  We don't have to worry about the 
 connectors for |pa|. 
 @<Define |Path| functions@>=
 
-if (connectors.size() == 0)
-    last_connector = "--";
-  else
+  if (connectors.size() > 0)
     last_connector = connectors.back();
+  else
+    last_connector = "--";
   
+  if (connector_type_vector.size() > 0)
+  {
+      last_connector_type = connector_type_vector.back();
+  }   
+  else
+  {
+      last_connector_type = create_new<Connector_Type>(0);
+      last_connector_type->connector_string = "--";
+      last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
+      last_connector_type->type1 = Connector_Type::NULL_TYPE;
+  }
+
   while (connectors.size() < points.size() - 1)
     connectors.push_back(last_connector);
+
+  while (connector_type_vector.size() < points.size() - 1)
+    connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+
 
 @ \initials{LDF 2002.4.6.}   
 If the |Paths| don't touch, they are joined using ``..'' instead
@@ -4626,25 +4643,35 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
 \initials{LDF 2002.11.03.}  Now using |*(points.back())| instead of
 |get_point(points.size() - 1)|. 
 \ENDLOG 
+
 @<Define |Path| functions@>=
+
+  /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */ 
+
   if (*(points.back()) != pa.get_point(0))
-    {
+  {
       cerr << "ERROR! In Path::operator&(Path&)."
-        << "Paths don't touch.\n"
-          << "Using \"..\" to join them instead of \"&\".\n";
+           << "Paths don't touch.\n"
+           << "Using \"..\" to join them instead of \"&\".\n";
 
       connectors.push_back("..");
     }
   else
-    connectors.push_back("&");
+  {
+      connectors.push_back("&");
+  }
 
-  for(vector<Point*>::const_iterator iter
-      = pa.points.begin();  /* \initials{LDF 2002.4.6.} 
-                               Copy the |Points| in |pa| and put the
-                               copies onto |points|.  */
+@ Copy the |Points| in |pa| and put the copies onto |points|.
+\initials{LDF 2002.4.6.} 
+
+@<Define |Path| functions@>=
+
+  for(vector<Point*>::const_iterator iter = pa.points.begin();  
       iter != pa.points.end();
       iter++)
-    points.push_back(create_new<Point>(*iter));
+  {
+      points.push_back(create_new<Point>(*iter));
+  }
 
 @  \initials{LDF 2002.4.6.} 
 Put the connectors from |pa| onto the new |Path|.  Since they're
@@ -4653,8 +4680,7 @@ this to make sure it's true.  I don't know how |strings| are
 implemented, but they seem to be handled like string literals.  
 @<Define |Path| functions@>=
 
-  for(vector<string>::const_iterator iter
-      = pa.connectors.begin();
+  for(vector<string>::const_iterator iter = pa.connectors.begin();
       iter != pa.connectors.end();
       iter++)
     {
@@ -12048,20 +12074,20 @@ Path::set_cycle(const bool c, Scanner_Node scanner_node)
   cycle_switch = c;
 
   if (c == false)
+  {
+   
+   vector<string>::size_type i = connectors.size();
+   vector<Point*>::size_type j = points.size();
+
+   while (i > 0 && i >= j)
    {
-    
-    vector<string>::size_type i = connectors.size();
-    vector<Point*>::size_type j = points.size();
+      connectors.pop_back();
+      --i;
+   }
 
-    while (i > 0 && i >= j)
-       {
-          connectors.pop_back();
-          --i;
-       }
+  } /* |if (c == false)|  */
 
-   } /* |if (c == false)|  */
-
-    return 0;
+  return 0;
 
 }  /* End of |Path::set_cycle| definition.  */
 
