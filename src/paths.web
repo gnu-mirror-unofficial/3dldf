@@ -4384,6 +4384,9 @@ Path::operator+=(const string s)
    return;
 }
 
+
+@q ** (2) |Connector_Type&| version.  @>
+
 @ |Connector_Type&| version.
 \initials{LDF 2022.01.12.}
 
@@ -4409,7 +4412,13 @@ Path::operator+=(const Connector_Type &c)
    return;
 }
 
+@q ** (2) |Connector_Type*| version.  @>
+
 @ |Connector_Type*| version.
+\initials{LDF 2022.01.12.}
+
+Please note:  The |Connector_Type*| argument is pushed onto |Path::connector_type_vector| directly,
+i.e., not copied!
 \initials{LDF 2022.01.12.}
 
 \LOG
