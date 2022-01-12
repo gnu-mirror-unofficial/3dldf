@@ -2365,15 +2365,8 @@ set_connectors(const string s = "..");
 void
 Path::set_connectors(const string s)
 {
-
-  c->connector_string = s;
   connectors.clear();
   connectors.push_back(s);
-
-  Connector_Type *c = create_new<Connector_Type>(0); 
-
-  c->type0 = Connector_Type::PLAIN_TYPE;      
-  c->type0 = Connector_Type::NULL_TYPE;      
 
   for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
        iter != connector_type_vector.end();
@@ -2384,6 +2377,11 @@ Path::set_connectors(const string s)
   }
 
   connector_type_vector.clear();
+
+  Connector_Type *c = create_new<Connector_Type>(0); 
+  c->type0 = Connector_Type::PLAIN_TYPE;      
+  c->type0 = Connector_Type::NULL_TYPE;      
+  c->connector_string = s;
   connector_type_vector.push_back(c);
 
   return;
@@ -3645,9 +3643,8 @@ the |Points|.
 
   Point* point_reflection;
   
-  /* !!START HERE:  LDF 2022.01.11.  Adding code for |connector_type_vector|.  */ 
-
   vector<string>::const_iterator connector_iter = connectors.begin();
+  vector<Connector_Type*>::const_iterator connector_type_iter = connector_type_vector.begin();
 
   for (vector<Point*>::const_iterator point_iter = points.begin();
        point_iter != points.end();
@@ -3720,9 +3717,8 @@ the |Points|.
 
 @q ***** (5) |Point::reflect_in| succeeded.@> 
 
-@ |Point::reflect_in| succeeded.  Push |point_reflection| onto 
-|vector<Points*> points| and the next connector onto 
-|vector<string> connectors|.
+@ |Point::reflect_in| succeeded.  Push |point_reflection| onto |vector<Points*> points| 
+and the next connector onto |vector<string> connectors|.
 \initials{LDF 2004.10.03.}
 
 \LOG
@@ -3751,10 +3747,15 @@ Also advancing |connector_iter| in this case.
        *path_reflection += point_reflection;
 
        if (connector_iter != connectors.end())
-         {
-           *path_reflection += *connector_iter;
-           connector_iter++;
-         }
+       {
+         *path_reflection += *connector_iter;
+         connector_iter++;
+       }
+
+       if (connector_type_iter != connector_type_vector.end())
+       {
+         path_reflection->connector_type_vector.push_back(*connector_type_iter++);
+       }
 
 @q ***** (5).@> 
 
@@ -3991,15 +3992,16 @@ return 1;
 
    vector<Point*>::const_iterator iter = points.begin(); 
    vector<string>::const_iterator connector_iter = connectors.begin();
+   vector<Connector_Type*>::const_iterator connector_type_iter = connector_type_vector.begin();
 
    int status;
 
    for (; iter != points.end(); ++iter)
-      {
-         status = (**iter).reflect_off(p,
-                                       direction, 
-                                       static_cast<void*>(point_ptr_vector),
-                                       scanner_node);
+   {
+      status = (**iter).reflect_off(p,
+                                    direction, 
+                                    static_cast<void*>(point_ptr_vector),
+                                    scanner_node);
 
 @q ***** (5) Error handling:  |Point::reflect_off| failed.@> 
 
@@ -4009,27 +4011,27 @@ return 1;
 @<Define |Path| functions@>=
 
         if (status != 0)
-           {
+        {
 
-              cerr_strm << thread_name << "ERROR! In `Path::reflect_off':"
-                            << endl 
-                            << "`Point::reflect_off' failed, returning "
-                            << status << "." << endl
-                            << "Deleting `path_ptr_vector', setting it to 0,"
-                            << endl 
-                            << "and exiting function with return value 1.";
+           cerr_strm << thread_name << "ERROR! In `Path::reflect_off':"
+                     << endl 
+                     << "`Point::reflect_off' failed, returning "
+                     << status << "." << endl
+                     << "Deleting `path_ptr_vector', setting it to 0,"
+                     << endl 
+                     << "and exiting function with return value 1.";
                       
-              log_message(cerr_strm);
-              cerr_message(cerr_strm, error_stop_value);
-              cerr_strm.str("");
+           log_message(cerr_strm);
+           cerr_message(cerr_strm, error_stop_value);
+           cerr_strm.str("");
 
-              delete path_ptr_vector;
-              
-              path_ptr_vector = 0;
+           delete path_ptr_vector;
+           
+           path_ptr_vector = 0;
 
-              return 1;
+           return 1;
 
-           } /* |if (status != 0)|  */
+        } /* |if (status != 0)|  */
 
 @q ***** (5) |Point::reflect_off| succeeded.@> 
 
@@ -4039,41 +4041,45 @@ return 1;
 @<Define |Path| functions@>=
 
        else /* |status == 0|  */
-          {
+       { 
 
 #if DEBUG_COMPILE
-              if (DEBUG)
-                {
-                   cerr_strm << thread_name << "In `Path::reflect_off':"
-                                 << endl 
-                                 << "`Point::reflect_off' succeeded.";
-                           
-                   log_message(cerr_strm);
-                   cerr_message(cerr_strm);
-                   cerr_strm.str("");
+           if (DEBUG)
+           {
+              cerr_strm << thread_name << "In `Path::reflect_off':"
+                            << endl 
+                            << "`Point::reflect_off' succeeded.";
+                      
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
 
-                }       
+           }       
 #endif /* |DEBUG_COMPILE|  */@; 
 
-             for (int i = 0; i < 4; ++i)
-                {  
-                   *(path_ptr_vector->v[i]) += *(point_ptr_vector->v[i]);
+           for (int i = 0; i < 4; ++i)
+           {  
+              *(path_ptr_vector->v[i]) += *(point_ptr_vector->v[i]);
 
-                   if (connector_iter != connectors.end())
-                      *(path_ptr_vector->v[i]) += *connector_iter++;
+              if (connector_iter != connectors.end())
+                 *(path_ptr_vector->v[i]) += *connector_iter++;
 
-                }  /* |for|  */
 
-          }   /* |else| (|status == 0|)  */
+              if (connector_type_iter != connector_type_vector.end())
+                 (path_ptr_vector->v[i])->connector_type_vector.push_back(*connector_type_iter++);
+
+           }  /* |for|  */
+
+       }   /* |else| (|status == 0|)  */
 
 @q ***** (5).@> 
 
       } /* |for|  */
 
       for (int i = 0; i < 4; ++i)
-         {  
-            (path_ptr_vector->v[i])->set_cycle(cycle_switch);
-         }
+      {  
+         (path_ptr_vector->v[i])->set_cycle(cycle_switch);
+      }
 
       delete point_ptr_vector;
       point_ptr_vector = 0;
@@ -4344,6 +4350,11 @@ Path::operator+(const Point& pt) const
 @^\cofunc{Path}{+=}@>
 \initials{LDF 2003.02.09.}  
 
+@q ** (2) |string| version.  @>
+
+@ |string| version.
+\initials{LDF 2003.02.09.}  
+
 \LOG
 \initials{LDF 2003.02.09.}  
 Added this function.
@@ -4363,6 +4374,61 @@ void
 Path::operator+=(const string s)
 {
    connectors.push_back(s);
+
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::PLAIN_TYPE;
+   c->type1 = Connector_Type::NULL_TYPE;
+   c->connector_string = s;
+   connector_type_vector.push_back(c);
+
+   return;
+}
+
+@ |Connector_Type&| version.
+\initials{LDF 2022.01.12.}
+
+\LOG
+\initials{LDF 2022.01.12.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Path| functions@>=
+virtual
+void
+operator+=(const Connector_Type& c);
+
+@
+@<Define |Path| functions@>=
+void
+Path::operator+=(const Connector_Type &c)
+{
+
+   Connector_Type *cc = create_new<Connector_Type>(c);
+   connector_type_vector.push_back(cc);
+
+   return;
+}
+
+@ |Connector_Type*| version.
+\initials{LDF 2022.01.12.}
+
+\LOG
+\initials{LDF 2022.01.12.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Path| functions@>=
+virtual
+void
+operator+=(Connector_Type *c);
+
+@
+@<Define |Path| functions@>=
+void
+Path::operator+=(Connector_Type *c)
+{
+   connector_type_vector.push_back(c);
+
    return;
 }
 
@@ -13137,8 +13203,6 @@ whole |Path| on |pv|.
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-/* START HERE!!  LDF 2007.06.19.  */ 
-
         }   /* |else| (|!(br.second == 0 || br.second == 1)|)  */
 
 @q ******* (7)@> 
@@ -13173,8 +13237,6 @@ whole |Path| on |pv|.
 
    }  /* |if (is_linear())|  */
 
-   /* START HERE!!  LDF 2007.06.19.  */ 
-
 @q ***** (5) |Path| is none of the above.@>
 @ |Path| is none of the above.
 \initials{LDF 2007.06.19.}
@@ -13206,8 +13268,6 @@ whole |Path| on |pv|.
       return 1;
 
    }  /* |else| (Type of |Path| not accounted for)  */
-
-   /* START HERE!!  LDF 2007.06.19.  */ 
 
 @q ***** (5)@>
 @
@@ -14343,8 +14403,6 @@ Focus::set(real* pos_x, real* pos_y, real* pos_z,
            real tolerance,
            Scanner_Node scanner_node)
 {
-
-/* START HERE  */
 
 @q ***** (5) Preliminaries.@>   
 
