@@ -9299,23 +9299,19 @@ reflect_in(const Plane& p,
 @^\cfunc{Point}{reflect\_off}@>
 \initials{LDF 2004.10.08.}
 
-This function returns the reflection of |*this| off 
-of the |Plane a|.
+This function returns the reflection of |*this| off of the |Plane a|.
 \initials{LDF 2004.10.08.}
 
-|reflect_off| must be defined in \filename{planes.web}, because it
-has a |Plane| argument, and |Plane| is an incompletely defined type
-in this file.  
+|reflect_off| must be defined in \filename{planes.web}, because it has a |Plane| argument, 
+and |Plane| is an incompletely defined type in this file.  
 \initials{LDF 2004.10.08.}
 
 The argument |void* v| is used to reference the |Point| that 
 represents the reflection of |*this| in the |Plane p|.  A pointer 
 to |void| must be used because |reflect_off| is a pure virtual 
-function in |class Shape|.  If a |Point*| were used for 
-this purpose in this function, 
-a |Path*| in |Path::reflect_off|, etc., then these functions 
-would have different calling conventions and would therefore not
-overload |Shape::reflect_off|.
+function in |class Shape|.  If a |Point*| were used for this purpose in this function, 
+a |Path*| in |Path::reflect_off|, etc., then these functions would have different calling conventions 
+and would therefore not overload |Shape::reflect_off|.
 \initials{LDF 2004.12.04.}
 
 \LOG

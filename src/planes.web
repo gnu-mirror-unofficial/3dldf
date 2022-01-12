@@ -1038,29 +1038,28 @@ There was no reason to do this.
 
 @<Define |Point| functions@>=
 
-  if (   *this == INVALID_POINT || direction == INVALID_POINT)
-      
-      {
+  if (*this == INVALID_POINT || direction == INVALID_POINT)
+  {
 
-          cerr_strm << thread_name << "ERROR! In `Point::reflect_off()':"
-                    << endl 
-                    << "`*this' and/or `direction' is "
-                    << "equal to `INVALID_POINT'."
-                    << endl << "Deleting `reflection', setting it to 0,"
-                    << endl 
-                    << "and exiting function with return value 1.";
-              
-          log_message(cerr_strm);
-          cerr_message(cerr_strm, error_stop_value);
-          cerr_strm.str("");
+      cerr_strm << thread_name << "ERROR! In `Point::reflect_off()':"
+                << endl 
+                << "`*this' and/or `direction' is "
+                << "equal to `INVALID_POINT'."
+                << endl << "Deleting `reflection', setting it to 0,"
+                << endl 
+                << "and exiting function with return value 1.";
+          
+      log_message(cerr_strm);
+      cerr_message(cerr_strm, error_stop_value);
+      cerr_strm.str("");
 
-          delete reflection;
-         
-          reflection = 0;
+      delete reflection;
+     
+      reflection = 0;
 
-          return 1;
+      return 1;
 
-      } /* |if (   *this == INVALID_POINT || direction == INVALID_POINT)|  */
+  } /* |if (   *this == INVALID_POINT || direction == INVALID_POINT)|  */
 
 @q **** (4) Error handling:  |direction == origin|.@> 
 
@@ -1072,26 +1071,26 @@ There was no reason to do this.
   Point origin;
 
   if (direction == origin)
-    {
+  {
 
-      cerr_strm << thread_name << "ERROR! In `Point::reflect_off()':"
-                    << endl 
-                    << "`direction'  == (0, 0, 0)."
-                    << endl << "Deleting `reflection', setting it to 0,"
-                    << endl 
-                    << "and exiting function with return value 1.";
-              
-          log_message(cerr_strm);
-          cerr_message(cerr_strm, error_stop_value);
-          cerr_strm.str("");
+        cerr_strm << thread_name << "ERROR! In `Point::reflect_off()':"
+                  << endl 
+                  << "`direction'  == (0, 0, 0)."
+                  << endl << "Deleting `reflection', setting it to 0,"
+                  << endl 
+                  << "and exiting function with return value 1.";
+            
+        log_message(cerr_strm);
+        cerr_message(cerr_strm, error_stop_value);
+        cerr_strm.str("");
 
-          delete reflection;
-         
-          reflection = 0;
+        delete reflection;
+       
+        reflection = 0;
 
-          return 1;
+        return 1;
 
-    }  /* |if (direction == *this)|  */
+  }  /* |if (direction == *this)|  */
 
 @q **** (4) Determine which side of |p| |this| is on.@> 
 
