@@ -115,6 +115,7 @@ do_reflect = false; % true;
 %% * (1)
 
 fontmapline "cmr10 CMR10 <cmr10.pfb";
+fontmapline "cmbx12 CMBX12 <cmbx12.pfb";
 fontmapline "cmssbx10 CMSSBX10 <cmssbx10.pfb";
 fontmapline "eurm10 EURM10 <eurm10.pfb";
 fontmapline "eurb10 EURB10 <eurb10.pfb";
@@ -132,8 +133,6 @@ fontmapline "manfnt MANFNT <manfnt.pfb";
 %% eusm10, Euler script medium
 
 %% ** (2) Euler Roman Bold, small.
-
-% do_black   := true; % false
 
 %% DIN A Series, Width X Height
 %%
@@ -156,7 +155,60 @@ numeric inner_frame_ht;
 path inner_frame;
 path outer_frame;
 
-%% *** (3)
+%% *** (3) F, cmbx12
+
+do_black   := false; % true
+
+outline (70, 70, "cmbx12", .25, big_pen, do_black, do_labels); %% F, CM Bold Extended
+
+beginfig(0);
+
+  pickup small_pen;
+
+  outer_frame_wd = inner_frame_wd = 12cm;
+  outer_frame_ht = inner_frame_ht = 12cm;
+
+  F.dx = F.dy = .5cm;
+  boxit.F(v[70]);
+  draw pic(F) withpen big_pen;
+
+  inner_frame = (unitsquare xscaled inner_frame_wd yscaled inner_frame_ht)
+    shifted (F.c - (.5inner_frame_wd, .5inner_frame_ht));
+  outer_frame = (unitsquare xscaled outer_frame_wd yscaled outer_frame_ht)
+    shifted (F.c - (.5outer_frame_wd, .5outer_frame_ht));
+
+  draw inner_frame withpen medium_pen;
+
+  dotlabel.top(btex $a_0^0$ etex, a[0][0]);
+  dotlabel.top(btex $a_0^1$ etex, a[0][1]);
+  dotlabel.llft(btex $a_0^2$ etex, a[0][2]);
+  dotlabel.llft(btex $a_0^3$ etex, a[0][3]);
+  dotlabel.ulft(btex $a_0^4$ etex, a[0][4]);
+  dotlabel.top(btex $a_0^5$ etex, a[0][5]);
+  dotlabel.bot(btex $a_0^6$ etex, a[0][6]);
+  dotlabel.bot(btex $a_0^7$ etex, a[0][7]);
+  dotlabel.bot(btex $a_0^8$ etex, a[0][8]);
+  dotlabel.top(btex $a_0^9$ etex, a[0][9]);
+  dotlabel.urt(btex $a_0^{10}$ etex, a[0][10]);
+  dotlabel.llft(btex $a_0^{11}$ etex, a[0][11]);
+  dotlabel.bot(btex $a_0^{12}$ etex, a[0][12]);
+  dotlabel.lft(btex $a_0^{13}$ etex, a[0][13]);
+  dotlabel.rt(btex $a_0^{14}$ etex, a[0][14]);
+  dotlabel.rt(btex $a_0^{15}$ etex, a[0][15]);
+  dotlabel.top(btex $a_0^{16}$ etex, a[0][16]);
+  dotlabel.top(btex $a_0^{17}$ etex, a[0][17]);
+  dotlabel.lft(btex $a_0^{18}$ etex, a[0][18]);
+  dotlabel.lrt(btex $a_0^{19}$ etex, a[0][19]);
+  dotlabel.bot(btex $a_0^{20}$ etex, a[0][20]);
+  dotlabel.lft(btex $a_0^{21}$ etex, a[0][21]);
+  dotlabel.bot(btex $a_0^{22}$ etex, a[0][22]);
+  
+endfig;
+
+end;
+
+
+%% *** (3) "Dangerous bend" symbol.
 
 outline (127, 127, "manfnt", .15, big_pen, do_black, do_labels); %% "Dangerous Bend Sign"
 
