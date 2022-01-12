@@ -4646,20 +4646,27 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
 
 @<Define |Path| functions@>=
 
-  /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */ 
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->type0 = Connector_Type::PLAIN_TYPE;
+  c->type1 = Connector_Type::NULL_TYPE;
 
   if (*(points.back()) != pa.get_point(0))
   {
-      cerr << "ERROR! In Path::operator&(Path&)."
+      cerr << "WARNING! In Path::operator&(Path&)."
            << "Paths don't touch.\n"
            << "Using \"..\" to join them instead of \"&\".\n";
 
       connectors.push_back("..");
+
+      c->connector_string = "..";
     }
   else
   {
       connectors.push_back("&");
+      c->connector_string = "&";
   }
+
+  connector_type_vector.push_back(c);
 
 @ Copy the |Points| in |pa| and put the copies onto |points|.
 \initials{LDF 2002.4.6.} 
@@ -4673,12 +4680,15 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
       points.push_back(create_new<Point>(*iter));
   }
 
-@  \initials{LDF 2002.4.6.} 
-Put the connectors from |pa| onto the new |Path|.  Since they're
+@ Put the connectors from |pa| onto the new |Path|.  Since they're
 |strings|, and not pointers, we don't have to copy them.  I tested
 this to make sure it's true.  I don't know how |strings| are
 implemented, but they seem to be handled like string literals.  
+\initials{LDF 2002.4.6.} 
+
 @<Define |Path| functions@>=
+
+  /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */ 
 
   for(vector<string>::const_iterator iter = pa.connectors.begin();
       iter != pa.connectors.end();
@@ -4687,7 +4697,8 @@ implemented, but they seem to be handled like string literals.
       connectors.push_back(*iter);
     }
   return;
-}
+
+}  /* End of |Path::operator&=(const Path& pa)| definition  */
 
 @q *** (3) Without assignment.@>
 @*2 Without assignment.  
