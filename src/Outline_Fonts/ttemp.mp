@@ -58,6 +58,7 @@ outputtemplate := "%j%3c.eps";
 
 %% * (1)
 
+
 verbatimtex \font\eurm=eurm10 scaled 16000
   \font\cmssbx=cmssbx10 scaled 8000
   etex;
@@ -70,12 +71,15 @@ dark_grey = .5;
 pen small_pen;
 pen medium_pen;
 pen big_pen;
+pen huge_pen;
 
 small_pen = pencircle scaled .25mm;
 
 medium_pen = pencircle scaled .5mm;
 
 big_pen = pencircle scaled 1mm;
+
+huge_pen = pencircle scaled 2mm;
 
 pickup medium_pen;
 
@@ -118,6 +122,7 @@ fontmapline "eufm10 EUFM10 <eufm10.pfb"; %% Euler Fraktur medium
 fontmapline "eufb10 EUFB10 <eufb10.pfb"; %% Euler Fraktur bold
 fontmapline "cmmi10 CMMI10 <cmmi10.pfb"; 
 fontmapline "cmr7 CMR7 <cmr7.pfb"; 
+fontmapline "manfnt MANFNT <manfnt.pfb";
 
 %% * (1) AMS Euler
 
@@ -151,6 +156,47 @@ numeric inner_frame_ht;
 path inner_frame;
 path outer_frame;
 
+%% *** (3)
+
+outline (127, 127, "manfnt", .15, big_pen, do_black, do_labels); %% "Dangerous Bend Sign"
+
+beginfig(0);
+
+  pickup small_pen;
+
+  outer_frame_wd = inner_frame_wd = 12cm;
+  outer_frame_ht = inner_frame_ht = 12cm;
+
+  D.dx = D.dy = .5cm;
+  boxit.D(v[127]);
+  draw pic(D) withpen big_pen;
+
+  inner_frame = (unitsquare xscaled inner_frame_wd yscaled inner_frame_ht)
+    shifted (D.c - (.5inner_frame_wd, .5inner_frame_ht));
+  outer_frame = (unitsquare xscaled outer_frame_wd yscaled outer_frame_ht)
+    shifted (D.c - (.5outer_frame_wd, .5outer_frame_ht));
+
+  draw inner_frame withpen medium_pen;
+
+  dotlabel.top(btex $a_0^0$ etex, a[0][0]);
+  dotlabel.top(btex $a_0^1$ etex, a[0][1]);
+  dotlabel.llft(btex $a_0^2$ etex, a[0][2]);
+  dotlabel.top(btex $a_0^3$ etex, a[0][3]);
+  dotlabel.rt(btex $a_0^4$ etex, a[0][4]);
+
+  message "r[127][0]:";
+  show r[127][0];
+   
+  %draw r[127][0] withcolor blue withpen huge_pen;
+
+  %currentpicture := nullpicture;
+  
+  %draw r[127][0] withpen medium_pen;
+  
+
+endfig;
+
+end;
 
 %% *** (3) Fig. 0, Fraktur L
 
@@ -158,7 +204,7 @@ outline (67, 67, "eufm10", .175, big_pen, do_black, do_labels); %% C
 outline (76, 76, "eufm10", .175, big_pen, do_black, do_labels); %% L
 outline (80, 80, "eufm10", .175, big_pen, do_black, do_labels); %% P
 
-beginfig(000);
+beginfig(0);
 
 %% **** (4)
   
