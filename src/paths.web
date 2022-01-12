@@ -4688,14 +4688,22 @@ implemented, but they seem to be handled like string literals.
 
 @<Define |Path| functions@>=
 
-  /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */ 
+
 
   for(vector<string>::const_iterator iter = pa.connectors.begin();
       iter != pa.connectors.end();
       iter++)
-    {
-      connectors.push_back(*iter);
-    }
+  {
+     connectors.push_back(*iter);
+  }
+
+  for(vector<Connector_Type*>::const_iterator iter = pa.connector_type_vector.begin();
+      iter != pa.connector_type_vector.end();
+      iter++)
+  {
+      connector_type_vector.push_back(create_new<Connector_Type>(*iter));
+  }
+
   return;
 
 }  /* End of |Path::operator&=(const Path& pa)| definition  */
@@ -4762,9 +4770,12 @@ Path
 Path::append(const Path& p, string connector, bool assign)
 {
 
-Path r(*this);
+  Path r(*this);
 
   string last_connector;
+  Connector_Type *last_connector_type = 0;
+
+  /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */ 
 
   r.set_cycle(false);
 
