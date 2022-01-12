@@ -434,9 +434,11 @@ labels(1,1a,1b,2,2a,2b,3,3a,3b,4,4a,4b,10,11,12,13,14,15,16,17,20,21,
   31,32,33,34,35,36,37,38);
 picture dbend; dbend=currentpicture;
 endchar;
+
 beginchar(126,25u#,hheight#+border#,0); "Lefthanded ditto";
 currentpicture:=dbend reflectedabout((.5w,0),(.5w,h));
 endchar;
+
 beginchar(0,25u#,hheight#+border#,0); "Reverse video ditto";
 fill (0,-11pt)--(w,-11pt)--(w,h)--(0,h)--cycle;
 addto currentpicture also -dbend;
