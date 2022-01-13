@@ -25,26 +25,61 @@ cmssbx10ldf.pdf: cmssbx10ldf.dvi
 cmssbx10ldf.dvi: cmssbx10ldf.2602gf
 	gftodvi cmssbx10ldf.2602gf
 
-cmssbx10ldf.2602gf cmssbx10ldf.tfm: cmssbx10ldf.mf romanldf.mf romanuldf.mf
+cmssbx10ldf.2602gf cmssbx10ldf.tfm: cmssbx10ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
 	mf cmssbx10ldf.mf
 
-# cmssbx10ldf.8000gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf
+# cmssbx10ldf.8000gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
 # 	mf '\mode:=dpdfezzz;' input cmssbx10ldf.mf
 
 # cmssbx10ldf.8000pk: cmssbx10ldf.8000gf
 # 	gftopk cmssbx10ldf.8000gf
 
-cmssbx10ldf.2400gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf
+cmssbx10ldf.2400gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
 	mf '\mode:=supre;' input cmssbx10ldf.mf
 
 cmssbx10ldf.2400pk: cmssbx10ldf.2400gf
 	gftopk cmssbx10ldf.2400gf
 
-cmssbx10ldf.1200gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf
+cmssbx10ldf.1200gf: cmssbx10ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
 	mf '\mode:=ultre;' input cmssbx10ldf.mf
 
 cmssbx10ldf.1200pk: cmssbx10ldf.1200gf
 	gftopk cmssbx10ldf.1200gf
+
+
+#### ** (2)
+
+cmbx12ldf.ps: cmbx12ldf.dvi
+	dvips -o cmbx12ldf.ps cmbx12ldf.dvi
+
+cmbx12ldf.pdf: cmbx12ldf.dvi
+	dvipdfmx cmbx12ldf.dvi
+
+cmbx12ldf.dvi: cmbx12ldf.2602gf
+	gftodvi cmbx12ldf.2602gf
+
+cmbx12ldf.2602gf cmbx12ldf.tfm: cmbx12ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
+	mf cmbx12ldf.mf
+
+# cmbx12ldf.8000gf: cmbx12ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
+# 	mf '\mode:=dpdfezzz;' input cmbx12ldf.mf
+
+# cmbx12ldf.8000pk: cmbx12ldf.8000gf
+# 	gftopk cmbx12ldf.8000gf
+
+cmbx12ldf.2400gf: cmbx12ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
+	mf '\mode:=supre;' input cmbx12ldf.mf
+
+cmbx12ldf.2400pk: cmbx12ldf.2400gf
+	gftopk cmbx12ldf.2400gf
+
+cmbx12ldf.1200gf: cmbx12ldf.mf romanldf.mf romanuldf.mf cmbaseldf.mf
+	mf '\mode:=ultre;' input cmbx12ldf.mf
+
+cmbx12ldf.1200pk: cmbx12ldf.1200gf
+	gftopk cmbx12ldf.1200gf
+
+#### ** (2)
 
 cldf.dvi: cldf.tex cmssbx10ldf.tfm 
 	tex cldf.tex

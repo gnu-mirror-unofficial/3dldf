@@ -1,6 +1,8 @@
 %% cmbaseldf.mf
 %% Created by Laurence D. Finston (LDF) Tue 11 Jan 2022 06:58:27 PM CET
 
+%% * (1) Top
+
 % THIS WAS [IS] THE OFFICIAL COMPUTER MODERN SOURCE FILE cmbase.mf BY D E KNUTH.
 % IT MUST NOT BE MODIFIED IN ANY WAY UNLESS THE FILE NAME IS CHANGED!*
 % * Changed.  LDF 2022.01.11.
@@ -26,41 +28,113 @@ vardef Vround primary y = y_:=vround y;
  if y_<min_Vround: min_Vround else: y_ fi enddef;
 newinternal y_,min_Vround;
 
+%% ** (2) serif
+
 vardef serif(suffix $,$$,@)  % serif at |z$| for stroke from |z$$|
   (expr darkness,jut) suffix modifier =
- pickup crisp.nib; numeric bracket_height; pair downward;
+
+ pickup crisp.nib; 
+ numeric bracket_height;
+ pair downward;
  bracket_height=if dark.modifier: 1.5 fi\\ bracket;
- if y$<y$$: y@2=min(y$+bracket_height,y$$);
-  top y@1-slab=bot y@0+eps=tiny.bot y$; downward=z$-z$$;
-  if y@1>y@2: y@2:=y@1; fi
- else: y@2=max(y$-bracket_height,y$$);
-  bot y@1+slab=top y@0-eps=tiny.top y$; downward=z$$-z$;
-  if y@1<y@2: y@2:=y@1; fi fi
- y@3=y@2; z@3=whatever[z$,z$$];
- if jut<0: z@2+penoffset downward of currentpen =
-   z$l+penoffset downward of pen_[tiny.nib]+whatever*downward;
+
+ if y$<y$$: 
+   y@2=min(y$+bracket_height,y$$);
+   top y@1-slab=bot y@0+eps=tiny.bot y$;
+   downward=z$-z$$;
+
+   if y@1>y@2: 
+      y@2:=y@1;
+   fi
+   else: 
+      y@2=max(y$-bracket_height,y$$);
+      bot y@1+slab=top y@0-eps=tiny.top y$;
+      downward=z$$-z$;
+      if y@1<y@2: 
+         y@2:=y@1;
+      fi 
+ fi
+ 
+ y@3=y@2;
+ z@3=whatever[z$,z$$];
+
+ if jut<0: 
+   z@2+penoffset downward of currentpen 
+      = z$l+penoffset downward of pen_[tiny.nib]+whatever*downward;
   lft x@0=lft x@1=tiny.lft x$l+jut;
-  if x@3<x@2+eps: x@3:=x@2+eps; fi
- else: z@2-penoffset downward of currentpen =
-   z$r-penoffset downward of pen_[tiny.nib]+whatever*downward;
+  if x@3<x@2+eps: 
+     x@3:=x@2+eps;
+  fi
+  else: 
+   z@2-penoffset downward of currentpen 
+      = z$r-penoffset downward of pen_[tiny.nib]+whatever*downward;
    rt x@0=rt x@1=tiny.rt x$r+jut;
-   if x@3>x@2-eps: x@3:=x@2-eps; fi fi
- pair corner; ypart corner=y@1; corner=z@2+whatever*downward;
+   if x@3>x@2-eps: 
+      x@3:=x@2-eps;
+   fi 
+  fi
+
+ pair corner;
+ ypart corner=y@1;
+ corner=z@2+whatever*downward;
+
  filldraw z@2{z$-z$$}
   ...darkness[corner,.5[z@1,z@2] ]{z@1-z@2}
-  ...{jut,0}z@1--z@0--(x$,y@0)--z@3--cycle; % the serif
- labels (@1,@2); enddef;
+  ...{jut,0}z@1--z@0--(x$,y@0)--z@3--cycle;  % the serif
+
+
+ if known z.c1:
+    message "z.c1:";
+    show z.c1;
+ fi
+
+ if known z.c2:
+    message "z.c2:";
+    show z.c2;
+ fi
+
+ if known z.d1:
+    message "z.d1:";
+    show z.d1;
+ fi
+
+ if known z.d2:
+    message "z.d2:";
+    show z.d2;
+ fi
+
+
+
+ labels (@1,@2);
+
+ enddef;
+
+%% ** (2) dish_serif
 
 def dish_serif(suffix $,$$,@)(expr left_darkness,left_jut)
   (suffix @@)(expr right_darkness,right_jut) suffix modifier =
- serif($,$$,@,left_darkness,-left_jut) modifier;
- serif($,$$,@@,right_darkness,right_jut) modifier;
- if dish>0: pickup tiny.nib; numeric dish_out,dish_in;
-  if y$<y$$: dish_out=bot y$; dish_in=dish_out+dish; let rev_=reverse;
-  else: dish_out=top y$; dish_in=dish_out-dish; let rev_=relax; fi
-  erase fill rev_
-   ((x@1,dish_out)..(x$,dish_in){right}..(x@@1,dish_out)--cycle);
- fi enddef;
+
+  serif($,$$,@,left_darkness,-left_jut) modifier;
+
+  serif($,$$,@@,right_darkness,right_jut) modifier;
+
+  if dish>0: 
+     pickup tiny.nib; 
+     numeric dish_out,dish_in;
+ 
+     if y$<y$$: 
+        dish_out=bot y$; 
+        dish_in=dish_out+dish; 
+        let rev_=reverse;
+     else: 
+        dish_out=top y$; 
+        dish_in=dish_out-dish; 
+        let rev_=relax; 
+     fi
+
+     erase fill rev_ ((x@1,dish_out)..(x$,dish_in){right}..(x@@1,dish_out)--cycle);
+  fi 
+enddef;
 
 def nodish_serif(suffix $,$$,@)(expr left_darkness,left_jut)
   (suffix @@)(expr right_darkness,right_jut) suffix modifier =
