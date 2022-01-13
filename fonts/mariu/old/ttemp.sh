@@ -49,7 +49,7 @@
 #### Laurence.Finston@gmx.de
 
 
-#### !! START HERE:  LDF 2022.01.13.
+#### !! START HERE:  LDF 2022.01.13.  Also, update copyright notices everywhere!
 
 ## Local Variables:
 ## abbrev-mode:t
