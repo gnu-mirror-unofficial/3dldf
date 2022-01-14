@@ -608,15 +608,13 @@ and subsequently resizing it, if necessary.
     connectors.push_back(*c_iter);
   }
 
-  
-
   for (vector <Connector_Type*>::const_iterator c_iter = p.connector_type_vector.begin();
        c_iter != p.connector_type_vector.end();
        c_iter++)
   {
 
     if (DEBUG)
-       cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+       cerr << "In `Path::operator=':  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
     connector_type_vector.push_back(create_new<Connector_Type>(*c_iter));
   }
@@ -872,7 +870,7 @@ Path::Path(const Point& p0, const Point& p1)
   c->connector_string = "--";
 
   if (DEBUG)
-     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+     cerr << "In `Path' constructor:  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
   connector_type_vector.push_back(c);
 
@@ -993,7 +991,7 @@ Path::set(const Point& p0, const Point& p1)
   c->connector_string = "--";
 
   if (DEBUG)
-     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+     cerr << "In `Path::set':  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
   connector_type_vector.push_back(c);
 
@@ -1106,7 +1104,8 @@ Path::Path(string connector, bool@,@, cycle ... )
   c->connector_string = connector;
 
   if (DEBUG)
-     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+     cerr << "In `Path' constructor with connector argument:" << endl
+          << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
   connector_type_vector.push_back(c);
 
@@ -1259,7 +1258,8 @@ Path::set(string connector, bool cycle ... )
     c->connector_string = connector;
 
     if (DEBUG)
-       cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+       cerr << "In `Path::set' with connector argument:" << endl 
+            << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
     connector_type_vector.push_back(c);
 
@@ -1351,7 +1351,7 @@ Path::Path(Point* first_point_ptr ... )
 {
 @q ***** (5) @>
 
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
   if (DEBUG)
     cerr << "Entering Path() (Point* ...).\n";
 
@@ -1402,7 +1402,8 @@ Path::Path(Point* first_point_ptr ... )
       c->connector_string = connector_string;
 
       if (DEBUG)
-         cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+         cerr << "In `Path' constructor with `Point*' arguments:" << endl
+              << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
       connector_type_vector.push_back(c);
 
@@ -1546,7 +1547,9 @@ Path::set(Point* first_point_ptr ... )
         c->connector_string = connector_string;
 
         if (DEBUG)
-           cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+           cerr << "In `Path::set' with `Point*' arguments:"
+                << endl 
+                << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
         connector_type_vector.push_back(c);
 
@@ -2435,7 +2438,7 @@ Path::set_connectors(const string s)
   c->connector_string = s;
 
   if (DEBUG)
-     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+     cerr << "In `Path::set_connectors':  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
   connector_type_vector.push_back(c);
 
   return;
@@ -3594,7 +3597,7 @@ Path::reflect_in(const Plane& p,
                  const Scanner_Node scanner_node) const
 {
 
-  bool DEBUG = false; /* |true| */
+  bool DEBUG = true; /* |false| */
 
   using namespace Scan_Parse;
 
@@ -3806,10 +3809,11 @@ Also advancing |connector_iter| in this case.
          connector_iter++;
        }
 
-/* !!START HERE:  LDF 2022.01.14.  Adding debugging code where items are pushed onto connector_type_vector.  */ 
-
        if (connector_type_iter != connector_type_vector.end())
        {
+         if (DEBUG)
+            cerr << "In `Path::reflect_in':  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
          path_reflection->connector_type_vector.push_back(*connector_type_iter++);
        }
 
@@ -3882,7 +3886,7 @@ Path::reflect_off(const Plane& p,
 
 @q **** (4) Preliminaries.@> 
 
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 
   using namespace Scan_Parse;
 
@@ -4122,7 +4126,12 @@ return 1;
 
 
               if (connector_type_iter != connector_type_vector.end())
+              {
+                 if (DEBUG)
+                    cerr << "In `Path::reflect_off':  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
                  (path_ptr_vector->v[i])->connector_type_vector.push_back(*connector_type_iter++);
+              }
 
            }  /* |for|  */
 
@@ -4429,14 +4438,25 @@ operator+=(const string s);
 void
 Path::operator+=(const string s)
 {
+   bool DEBUG = true; /* |false| */ 
+
    connectors.push_back(s);
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::PLAIN_TYPE;
    c->type1 = Connector_Type::NULL_TYPE;
    c->connector_string = s;
-   connector_type_vector.push_back(c);
 
+#if 0 
+
+/* !!START HERE:  LDF 2022.01.14.  This code should be called.  push_back is being called somewhere else, erroneously.  */ 
+
+   if (DEBUG)
+      cerr << "In `Path::operator+=(const string)':" << endl 
+           << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
+   connector_type_vector.push_back(c);
+#endif 
    return;
 }
 
@@ -4462,7 +4482,20 @@ void
 Path::operator+=(const Connector_Type &c)
 {
 
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+      cerr << "In `Path::operator+=(const Connecter_Type&)':" << endl 
+           << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+ 
    Connector_Type *cc = create_new<Connector_Type>(c);
+
+
+   if (DEBUG)
+      cerr << "In `Path::operator+=(const Connecter_Type&)':"
+           << endl 
+           << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
    connector_type_vector.push_back(cc);
 
    return;
@@ -4492,6 +4525,12 @@ operator+=(Connector_Type *c);
 void
 Path::operator+=(Connector_Type *c)
 {
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+      cerr << "In `Path::operator+=(const Connecter_Type*)':" << endl 
+           << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
    connector_type_vector.push_back(c);
 
    return;
@@ -4648,6 +4687,9 @@ operator&=(const Path& pa);
 void
 Path::operator&=(const Path& pa)
 {
+
+  bool DEBUG = true; /* |false| */ 
+
   if (is_cycle() || pa.is_cycle())  /* Return  if either one of the
                                        |Paths| is a cycle.  */ 
     {
@@ -4688,7 +4730,14 @@ connectors for |pa|.
     connectors.push_back(last_connector);
 
   while (connector_type_vector.size() < points.size() - 1)
-    connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+  {
+
+     if (DEBUG)
+        cerr << "In `Path::operator&=(const Path&)':" << endl 
+             << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
+     connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+  }
 
 
 @ \initials{LDF 2002.4.6.}   
@@ -4721,6 +4770,10 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
       connectors.push_back("&");
       c->connector_string = "&";
   }
+
+  if (DEBUG)
+      cerr << "In `Path::operator&=(const Path&)':" << endl 
+           << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
   connector_type_vector.push_back(c);
 
@@ -4755,6 +4808,10 @@ implemented, but they seem to be handled like string literals.
       iter != pa.connector_type_vector.end();
       iter++)
   {
+      if (DEBUG)
+         cerr << "In `Path::operator&=(const Path&)':" << endl 
+              << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
       connector_type_vector.push_back(create_new<Connector_Type>(*iter));
   }
 
@@ -4824,6 +4881,8 @@ Path
 Path::append(const Path& p, string connector, bool assign)
 {
 
+  bool DEBUG = true; /* |false| */ 
+
   Path r(*this);
 
   string last_connector;
@@ -4866,7 +4925,13 @@ will be at the wrong place.
     last_connector_type = r.connector_type_vector.back();
     
   while (r.connector_type_vector.size() < r.points.size() - 1)
+  {
+     if (DEBUG)
+        cerr << "In `Path::append':" << endl 
+             << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
     r.connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+  }
 
   r.connector_type_vector.push_back(create_new<Connector_Type>(0));
   r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
@@ -4916,6 +4981,10 @@ Now removing excess connectors.
       iter != p.connector_type_vector.end();
       iter++)
     {
+     if (DEBUG)
+        cerr << "In `Path::append':" << endl 
+             << "Pushing Connector_Type* onto r.connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
       r.connector_type_vector.push_back(create_new<Connector_Type>(*iter));
     }
 
