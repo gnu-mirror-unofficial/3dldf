@@ -1479,6 +1479,9 @@ set(Point* first_point_ptr ...);
 void
 Path::set(Point* first_point_ptr ... )
 {
+@q ***** (5) @>
+
+    bool DEBUG = true; /* |false| */
 
     line_switch = false;
     cycle_switch = false;
@@ -1541,6 +1544,10 @@ Path::set(Point* first_point_ptr ... )
         c->type0 = Connector_Type::PLAIN_TYPE;
         c->type1 = Connector_Type::NULL_TYPE;
         c->connector_string = connector_string;
+
+        if (DEBUG)
+           cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
         connector_type_vector.push_back(c);
 
         if ((point_ptr = va_arg(ap, Point*)) ==  static_cast<Point*>(0))
@@ -1551,9 +1558,12 @@ Path::set(Point* first_point_ptr ... )
         points.push_back(create_new<Point>(point_ptr));
     }
     va_end(ap);
-}
 
-@q ** Copy constructor. @>
+    return;
+
+}  /* End of |Path::set(Point* first_point_ptr ... )| definition  */
+
+@q ** (2) Copy constructor. @>
 @ Copy constructor.
 @^\cfunc{Path}{Path}@>
 
@@ -1567,18 +1577,15 @@ version didn't account for changes I've made in other places, perhaps
 in the class definition.  
 
 \initials{LDF 2002.11.03.}  
-Rewrote this function.  
-Now just using the assignment operator. 
+Rewrote this function.  Now just using the assignment operator. 
 
 \initials{LDF 2003.04.06.}  
-Got a memory fault when I tried 
-to use this function.  Haven't tested it yet.  It worked to use the
-default constructor and then the assignment operator.  Maybe it's not
-kosher to use ``|*this = p|'' in a copy constructor.  
+Got a memory fault when I tried to use this function.  Haven't tested it yet.  
+It worked to use the default constructor and then the assignment operator.  
+Maybe it's not valid to use ``|*this = p|'' in a copy constructor.  
 
 \initials{LDF 2004.06.18.}  
-Now setting all of the data members that are
-pointers to 0.
+Now setting all of the data members that are pointers to 0.
 
 \initials{LDF 2005.01.24.}
 Now setting |shape_type = PATH_TYPE|.
@@ -2407,6 +2414,8 @@ set_connectors(const string s = "..");
 void
 Path::set_connectors(const string s)
 {
+  bool DEBUG = true; /* |false| */ 
+ 
   connectors.clear();
   connectors.push_back(s);
 
@@ -2424,6 +2433,9 @@ Path::set_connectors(const string s)
   c->type0 = Connector_Type::PLAIN_TYPE;      
   c->type0 = Connector_Type::NULL_TYPE;      
   c->connector_string = s;
+
+  if (DEBUG)
+     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
   connector_type_vector.push_back(c);
 
   return;
@@ -3793,6 +3805,8 @@ Also advancing |connector_iter| in this case.
          *path_reflection += *connector_iter;
          connector_iter++;
        }
+
+/* !!START HERE:  LDF 2022.01.14.  Adding debugging code where items are pushed onto connector_type_vector.  */ 
 
        if (connector_type_iter != connector_type_vector.end())
        {
