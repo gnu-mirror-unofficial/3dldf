@@ -1905,6 +1905,9 @@ Removed debugging code.
 
               *q += c->connector_string;
 
+/* !!START HERE:  LDF 2022.01.14.  Grep for occurrences of this.  Look for commented-out code
+   from this date in paths.web.  */ 
+
               q->connector_type_vector.push_back(c);
  
               entry->object = static_cast<void*>(q);
