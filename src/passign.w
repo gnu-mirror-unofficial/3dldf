@@ -291,7 +291,7 @@ Added this rule.
 @<Define rules@>= 
 @=assignment: path_assignment@>
 {
- @=$$@> = @=$1@>;
+   @=$$@> = @=$1@>;
 }; 
 
 @q **** (4) assignment --> ellipse_assignment.@>

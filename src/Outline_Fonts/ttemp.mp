@@ -157,7 +157,7 @@ path outer_frame;
 
 %% *** (3) F, cmbx12
 
-do_black   := false; % true
+do_black   := true; % false
 
 outline (70, 70, "cmbx12", .25, big_pen, do_black, do_labels); %% F, CM Bold Extended
 

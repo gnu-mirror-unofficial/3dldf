@@ -342,7 +342,7 @@ Path::operator=(const Path& p)
 @q *** (3) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -608,10 +608,16 @@ and subsequently resizing it, if necessary.
     connectors.push_back(*c_iter);
   }
 
+  
+
   for (vector <Connector_Type*>::const_iterator c_iter = p.connector_type_vector.begin();
        c_iter != p.connector_type_vector.end();
        c_iter++)
   {
+
+    if (DEBUG)
+       cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
     connector_type_vector.push_back(create_new<Connector_Type>(*c_iter));
   }
 
@@ -826,7 +832,7 @@ Path(const Point& p0, const Point& p1);
 @<Define |Path| functions@>=
 Path::Path(const Point& p0, const Point& p1)
 {
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
   if (DEBUG)
     cerr << "Entering Path() (line version).\n";
 
@@ -865,10 +871,14 @@ Path::Path(const Point& p0, const Point& p1)
   c->type1 = Connector_Type::NULL_TYPE;
   c->connector_string = "--";
 
+  if (DEBUG)
+     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
   connector_type_vector.push_back(c);
 
   if (DEBUG)
     cerr << "Exiting Path() (line version).\n";
+
   return;
 
 }  /* End of |Path::Path(const Point& p0, const Point& p1)| 
@@ -929,6 +939,11 @@ set(const Point& p0, const Point& p1);
 void
 Path::set(const Point& p0, const Point& p1)
 {
+  bool DEBUG = true; /* |false| */ 
+
+  if (DEBUG)
+    cerr << "Entering `Path::set' (two `Point' arguments).\n";
+
   line_switch = true;
   cycle_switch = false;
   do_output = true;  /* LDF 2002.09.18.  Added this line.  */
@@ -977,9 +992,17 @@ Path::set(const Point& p0, const Point& p1)
   c->type1 = Connector_Type::NULL_TYPE;
   c->connector_string = "--";
 
+  if (DEBUG)
+     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
   connector_type_vector.push_back(c);
 
   line_switch = true;
+
+  if (DEBUG)
+    cerr << "Exiting `Path::set'." (two `Point' arguments).\n";
+
+  return;
 
 } /* End of |Path::set(const Point& p0, const Point& p1)| definition  */
 
@@ -1063,7 +1086,8 @@ Path(string connector, bool@,@, cycle ...);
 @<Define |Path| functions@>=
 Path::Path(string connector, bool@,@, cycle ... )
 {
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
+
   if (DEBUG)
     cerr << "Entering Path() (connector, cycle, ...).\n";
 
@@ -1080,6 +1104,9 @@ Path::Path(string connector, bool@,@, cycle ... )
   c->type0 = Connector_Type::PLAIN_TYPE;
   c->type1 = Connector_Type::NULL_TYPE;
   c->connector_string = connector;
+
+  if (DEBUG)
+     cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
   connector_type_vector.push_back(c);
 
@@ -1171,7 +1198,7 @@ Path::set(string connector, bool cycle ... )
 {
 @q ***** (5) @>
 
-    volatile bool DEBUG = false; /* |true| */
+    bool DEBUG = false; /* |true| */
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -4688,8 +4715,6 @@ implemented, but they seem to be handled like string literals.
 
 @<Define |Path| functions@>=
 
-
-
   for(vector<string>::const_iterator iter = pa.connectors.begin();
       iter != pa.connectors.end();
       iter++)
@@ -4775,8 +4800,6 @@ Path::append(const Path& p, string connector, bool assign)
   string last_connector;
   Connector_Type *last_connector_type = 0;
 
-  /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */ 
-
   r.set_cycle(false);
 
 @q **** (4) @>   
@@ -4789,6 +4812,8 @@ will be at the wrong place.
 
 @<Define |Path| functions@>=
 
+@q ***** (5) @>
+
   if (r.connectors.size() == 0)
     last_connector = "--";
   else
@@ -4798,6 +4823,26 @@ will be at the wrong place.
     r.connectors.push_back(last_connector);
 
   r.connectors.push_back(connector);
+
+@q ***** (5) @>
+
+  if (r.connector_type_vector.size() == 0)
+  {
+    last_connector_type = create_new<Connector_Type>(0);
+    last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
+    last_connector_type->type1 = Connector_Type::NULL_TYPE;
+    last_connector_type->connector_string = "--";
+  }
+  else
+    last_connector_type = r.connector_type_vector.back();
+    
+  while (r.connector_type_vector.size() < r.points.size() - 1)
+    r.connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+
+  r.connector_type_vector.push_back(create_new<Connector_Type>(0));
+  r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+  r.connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+  r.connector_type_vector.back()->connector_string = connector;
 
 @q **** (4) @>   
 
@@ -4823,6 +4868,9 @@ Now removing excess connectors.
 \ENDLOG 
 
 @<Define |Path| functions@>= 
+
+@q ***** (5) @>
+
   for(vector<string>::const_iterator iter = p.connectors.begin();
       iter != p.connectors.end();
       iter++)
@@ -4832,6 +4880,24 @@ Now removing excess connectors.
 
    while (r.connectors.size() >= r.points.size())
      r.connectors.pop_back();
+
+@q ***** (5) @>
+
+  for(vector<Connector_Type*>::const_iterator iter = p.connector_type_vector.begin();
+      iter != p.connector_type_vector.end();
+      iter++)
+    {
+      r.connector_type_vector.push_back(create_new<Connector_Type>(*iter));
+    }
+
+   while (r.connector_type_vector.size() >= r.points.size())
+   {
+      delete r.connector_type_vector.back();
+      r.connector_type_vector.back() = 0;
+      r.connector_type_vector.pop_back();
+   }
+
+@q **** (4) @>
 
   if (assign == true)
     *this = r;
@@ -8564,9 +8630,11 @@ also shouldn't be possible, they would  catch it, too.
 @
 @<Define |Path| functions@>=
 
-    vector <Point*>::iterator point_iter = points.begin();
-    vector <string>::iterator connector_iter = connectors.begin();
-    string connector_string;
+     /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */
+
+  vector <Point*>::iterator point_iter = points.begin();
+  vector <string>::iterator connector_iter = connectors.begin();
+  string connector_string;
 
   if (connectors.size() > 0)
       connector_string = *connector_iter++;
@@ -11547,7 +11615,7 @@ get_normal(void) const;
 Point
 Path::get_normal(void) const
 {
-  volatile bool DEBUG = false; /* |true| */@; 
+  bool DEBUG = false; /* |true| */@; 
 
   if (DEBUG)
   {
@@ -13116,7 +13184,7 @@ Path::decompose(Point* p,
 
 @q ***** (5) Preliminaries.@>   
 
-   volatile bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 
    stringstream cerr_strm;
 
@@ -13528,7 +13596,7 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 
 #if DEBUG_COMPILE
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    if (DEBUG)
    { 
@@ -14463,7 +14531,7 @@ Focus::set(real* pos_x, real* pos_y, real* pos_z,
 
 @q ***** (5) Preliminaries.@>   
 
-   volatile bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 
    stringstream cerr_strm;
 
