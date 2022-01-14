@@ -1000,7 +1000,7 @@ Path::set(const Point& p0, const Point& p1)
   line_switch = true;
 
   if (DEBUG)
-    cerr << "Exiting `Path::set'." (two `Point' arguments).\n";
+    cerr << "Exiting `Path::set' (two `Point' arguments).\n";
 
   return;
 
@@ -1198,7 +1198,7 @@ Path::set(string connector, bool cycle ... )
 {
 @q ***** (5) @>
 
-    bool DEBUG = false; /* |true| */
+    bool DEBUG = true; /* |false| */
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -1257,6 +1257,9 @@ Path::set(string connector, bool cycle ... )
     c->type0 = Connector_Type::PLAIN_TYPE;
     c->type1 = Connector_Type::NULL_TYPE;
     c->connector_string = connector;
+
+    if (DEBUG)
+       cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
     connector_type_vector.push_back(c);
 
@@ -1341,10 +1344,13 @@ Now setting |decomposition_level = 0|.
 @<Declare |Path| functions@>=
 Path(Point* first_point_ptr ...);
 
+@q **** (4) @>
 @ 
 @<Define |Path| functions@>=
 Path::Path(Point* first_point_ptr ... )
 {
+@q ***** (5) @>
+
   bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Path() (Point* ...).\n";
@@ -1395,6 +1401,9 @@ Path::Path(Point* first_point_ptr ... )
       c->type1 = Connector_Type::NULL_TYPE;
       c->connector_string = connector_string;
 
+      if (DEBUG)
+         cerr << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
       connector_type_vector.push_back(c);
 
       if ((point_ptr = va_arg(ap, Point*)) ==  static_cast<Point*>(0))
@@ -1406,9 +1415,15 @@ Path::Path(Point* first_point_ptr ... )
     }
 
   va_end(ap);
+
+@q ***** (5) @>
+
   if (DEBUG)
     cerr << "Exiting Path() (Point* ...).\n";
-}
+
+  return;
+
+}  End of |Path::Path(Point* first_point_ptr ... )| definition  */
 
 @q *** (3) Setting function.@>
 @*2 Setting function.
