@@ -12491,7 +12491,14 @@ Path::adjust_connectors(void)
   while (connectors.size() > i)
      connectors.pop_back();
 
-/* !!START HERE:  LDF 2022.01.15.  Add code for connector_type_vector.  */ 
+  while (connector_type_vector.size() > i)
+  {
+     delete connector_type_vector.back();
+     connector_type_vector.back() = 0;
+     connector_type_vector.pop_back();
+  }
+
+   
 
 @q **** (4) If |connectors.size() < i|, fill it up with copies of   @>   
 @q **** (4) the last connector, or |--|, if there are no connectors.@>   
@@ -12502,19 +12509,49 @@ the last connector, or |--|, if there are no connectors.
 
 @<Define |Path| functions@>=
 
+@q ***** (5) @>
+
   if (connectors.size() < i)
-    {
-       string last_connector;
+  {
+     string last_connector;
 
-       if (connectors.size() == 0)
-          last_connector = "--";
-       else
-          last_connector = connectors.back();
+     if (connectors.size() == 0)
+        last_connector = "--";
+     else
+        last_connector = connectors.back();
 
-       while (connectors.size() < i)
-         connectors.push_back(last_connector);
+     while (connectors.size() < i)
+       connectors.push_back(last_connector);
   
-    } /* |if (connectors.size() < i)|  */
+  } /* |if (connectors.size() < i)|  */
+
+@q ***** (5) @>
+
+  if (connector_type_vector.size() < i)
+  {
+
+     Connector_Type *last_connector_type = 0;
+
+     if (connector_type_vector.size() == 0)
+     {
+        last_connector_type = create_new<Connector_Type>(0);
+        last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
+        last_connector_type->type1 = Connector_Type::NULL_TYPE;
+        last_connector_type->connector_string = "--";
+     }
+     else
+        last_connector_type = connector_type_vector.back();
+
+     while (connector_type_vector.size() < i)
+     {
+       connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+     }
+  
+  } /* |if (connector_type_vector.size() < i)|  */
+
+@q ***** (5) @>
+
+@q **** (4) @>
 
 } /* End of |Path::adjust_connectors| definition.  */
 
@@ -12747,6 +12784,8 @@ in the reversed |Path|, which isn't what we want.
 
 @<Define |Path| functions@>=
 
+@q ***** (5) @>
+
    if (connectors.size() == 0)
       connectors.push_back("--");   
 
@@ -12757,6 +12796,27 @@ in the reversed |Path|, which isn't what we want.
 
    while (connectors.size() > points.size() - 1)
         connectors.pop_back();
+
+   if (connector_type_vector.size() == 0)
+   {
+      connector_type_vector.push_back(create_new<Connector_Type>(0));   
+      connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+      connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+      connector_type_vector.back()->connector_string = "--";
+   }
+
+   Connector_Type *last_connector_type = connector_type_vector.back();
+
+   while (connector_type_vector.size() < points.size() - 1)
+      connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+
+   while (connector_type_vector.size() > points.size() - 1)
+   {
+        delete connector_type_vector.back();
+        delete connector_type_vector.back();
+        connector_type_vector.pop_back();
+   }
+
 
 @q **** (4).@> 
 
@@ -12770,8 +12830,7 @@ arguments are different from the one used for this function, this causes an erro
    if (DEBUG)
       {
          cerr_strm << thread_name 
-                   << "In `Path::reverse':  "
-                   << "Reversing connectors and points.";
+                   << "In `Path::reverse':  Reversing connectors and points.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -12784,7 +12843,10 @@ arguments are different from the one used for this function, this causes an erro
   std::reverse(points.begin(), points.end());
 
   if (is_cycle())
+  {
     connectors.push_back(last_connector);
+    connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+  }
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -12799,6 +12861,14 @@ arguments are different from the one used for this function, this causes an erro
               iter != connectors.end();
               iter++)
             cerr_strm << *iter << endl;
+
+
+          for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+              iter != connector_type_vector.end();
+              iter++)
+          {
+              (*iter)->show();
+          }
 
           cerr_strm << "Showing points:" << endl;
 
@@ -13828,7 +13898,6 @@ get_direction(real ttime,
               int x_axis_direction = 1, 
               real *aangle = 0, 
               Scanner_Node scanner_node = 0) const;
-
 
 @q *** (3) Definition  @>
 @
