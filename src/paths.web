@@ -1263,6 +1263,11 @@ Path::set(string connector, bool cycle ... )
 
     connector_type_vector.push_back(c);
 
+    if (DEBUG)
+       cerr << "connectors.size() == " << connectors.size() << endl
+            << "connector_type_vector.size() == " << connector_type_vector.size() 
+            << endl;
+
     va_list ap;  /* For the variable length argument list. */
     va_start(ap, cycle);
 
@@ -4447,18 +4452,19 @@ Path::operator+=(const string s)
    c->type1 = Connector_Type::NULL_TYPE;
    c->connector_string = s;
 
-#if 0 
-
-/* !!START HERE:  LDF 2022.01.14.  This code should be called.  push_back is being called somewhere else, erroneously.  */ 
-
    if (DEBUG)
       cerr << "In `Path::operator+=(const string)':" << endl 
            << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
    connector_type_vector.push_back(c);
-#endif 
+
+   cerr << "connectors.size() == " << connectors.size() << endl;
+   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+
+
    return;
-}
+
+}  /* End of |Path::operator+=(const string s)| definition  */
 
 
 @q ** (2) |Connector_Type&| version.  @>
@@ -8728,10 +8734,12 @@ also shouldn't be possible, they would  catch it, too.
 @
 @<Define |Path| functions@>=
 
-     /* !!START HERE:  Adding code for |connector_type_vector|.  LDF 2022.01.12.  */
+
 
   vector <Point*>::iterator point_iter = points.begin();
   vector <string>::iterator connector_iter = connectors.begin();
+  vector <Connector_Type*>::iterator connector_type_iter = connector_type_vector.begin();
+
   string connector_string;
 
   if (connectors.size() > 0)
@@ -9317,6 +9325,7 @@ if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0)
                adjust_connectors();
              
                connector_iter = connectors.begin();
+               connector_type_iter = connector_type_vector.begin();
 
 #if DEBUG_COMPILE
                if (DEBUG)
@@ -9558,8 +9567,7 @@ This requires special handling because |arrow| could be equal to
 @
 \LOG
 \initials{LDF 2005.03.18.}
-@:BUG FIX@> BUG FIX:  Now setting 
-|connector_iter = connector_iter = connectors.begin|.
+@:BUG FIX@> BUG FIX:  Now setting |connector_iter = connectors.begin|.
 
 \initials{LDF 2005.04.05.}
 Added code for suppressing output if the type of the current 
@@ -9593,6 +9601,7 @@ Added code for suppressing output if the type of the current
                vector<Point*>::const_iterator point_iter = points.begin();
 
                connector_iter = connectors.begin();
+               connector_type_iter = connector_type_vector.begin();
 
                if (connectors.size() > 0)
                   connector_string = *connector_iter;
@@ -9720,7 +9729,7 @@ Made debugging output thread-safe.
             {
               ++counter;
             }
-          if (connector_iter != connectors.end())
+          if (connector_iter != connectors.end() && connector_type_iter != connector_type_vector)
             connector_string = *connector_iter++;
       }
 
@@ -9883,6 +9892,7 @@ Path::show(string text, char coords,
    
    string connector_string;
    vector <string> ::const_iterator connectors_iter = connectors.begin();
+   vector <Connector_Type*> ::const_iterator connector_type_iter = connector_type_vector.begin();
 
    cerr << "type:  " << Shape::type_name_map[get_shape_type()] << endl;
    cerr << "surface_hiding_ctr:  " << surface_hiding_ctr << endl;
@@ -9893,9 +9903,11 @@ Path::show(string text, char coords,
         << points.size() << endl;  
 
    cerr << "connectors.size() == " 
-        << connectors.size() << endl;  
+        << connectors.size() << endl  
+        << "connector_type_vector.size() == " 
+        << connector_type_vector.size() << endl;  
 
-   if (connectors.size() == 0)
+   if (connectors.size() == 0 && connector_type_vector.size() == 0)
      {
        cerr << "Using \"--\" as connector.\n";
        connector_string  = "--";
@@ -9913,8 +9925,9 @@ Path::show(string text, char coords,
              cerr << " " << connector_string << " ";
            }
 
-         if (connectors_iter != connectors.end())
+         if (connectors_iter != connectors.end() && connector_type_iter != connector_type_vector.end())
            connector_string = *connectors_iter++;
+
 
          if (loop_ctr == 2) /* Break each line after 2 |Points|.  */
            {
@@ -9932,7 +9945,7 @@ Path::show(string text, char coords,
 
    if (cycle_switch)
      {
-       if (connectors_iter != connectors.end())
+       if (connectors_iter != connectors.end() && connector_type_iter != connector_type_vector.end())
          connector_string = *connectors_iter++;
        cerr << " " << connector_string << " cycle;" << endl;
      }
@@ -10422,23 +10435,34 @@ Path::is_triangular(void) const
    cerr << "points.size() == " << points.size() << endl
         << "points.size() == " << points.size() << endl
         << "is_linear() == " << is_linear() << endl
-        << "connectors.size() == " << connectors.size() << endl;
+        << "connectors.size() == " << connectors.size() << endl
+        << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
 #endif 
 
   if (points.size() != 3)
       return false;
 
-   if(connectors.size() > 0)
-      {
-          for (vector<string>::const_iterator iter = connectors.begin();
-               iter != connectors.end();
-               iter++)
+   if(connectors.size() > 0 && connector_type_vector.size() > 0)
+   {
+       for (vector<string>::const_iterator iter = connectors.begin();
+            iter != connectors.end();
+            iter++)
 
-             {
-                if (*iter != "--")
-                return false;
-             }
-      } /* |if|  */
+       {
+          if (*iter != "--")
+          return false;
+       }
+
+       for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+            iter != connector_type_vector.end();
+            iter++)
+
+       {
+          if ((*iter)->connector_string != "--")
+          return false;
+       }
+
+   } /* |if|  */
 
    return !is_linear();
 
@@ -10507,11 +10531,22 @@ Path::is_polygonal(Scanner_Node scanner_node) const
        iter != connectors.end();
        iter++)
 
-    {
-       if (*iter != "--")
-          return false;
+  {
+     if (*iter != "--")
+        return false;
 
-    } /* |for|  */
+  } /* |for|  */
+
+@q **** (4) @>
+
+  for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
+
+  {
+     if ((*iter)->connector_string != "--")
+     return false;
+  }
 
 @q **** (4) @>   
 
@@ -10588,11 +10623,20 @@ Path::is_convex_polygonal(Scanner_Node scanner_node) const
        iter != connectors.end();
        iter++)
 
-    {
-       if (*iter != "--")
-          return false;
+  {
+     if (*iter != "--")
+        return false;
 
-    } /* |for|  */
+  } /* |for|  */
+
+  for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
+
+  {
+     if ((*iter)->connector_string != "--")
+     return false;
+  }
 
 @q **** (4) Cull |Points| that lie on line segments.@>
 
@@ -10796,10 +10840,19 @@ Path::is_rectangular() const
        iter != connectors.end();
        iter++)
 
-    {
-       if (*iter != "--")
-         return false;
-    }
+  {
+     if (*iter != "--")
+       return false;
+  }
+
+  for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
+
+  {
+     if ((*iter)->connector_string != "--")
+     return false;
+  }
 
   Point origin_pt(0, 0, 0);
 
@@ -10866,19 +10919,28 @@ Path::is_quadrilateral(Scanner_Node scanner_node) const
        iter != connectors.end();
        iter++)
 
-    {
-       if (*iter != "--")
-         return false;
-    }
+  {
+     if (*iter != "--")
+       return false;
+  }
 
-real angle[4];
+  for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
 
-   angle[0] = (*points[1] - *points[0]).angle(*points[3] - *points[0]);
-   angle[1] = (*points[2] - *points[1]).angle(*points[0] - *points[1]);
-   angle[2] = (*points[3] - *points[2]).angle(*points[1] - *points[2]);
-   angle[3] = (*points[2] - *points[3]).angle(*points[0] - *points[3]);
+  {
+     if ((*iter)->connector_string != "--")
+     return false;
+  }
 
-real sum = 0;
+  real angle[4];
+
+  angle[0] = (*points[1] - *points[0]).angle(*points[3] - *points[0]);
+  angle[1] = (*points[2] - *points[1]).angle(*points[0] - *points[1]);
+  angle[2] = (*points[3] - *points[2]).angle(*points[1] - *points[2]);
+  angle[3] = (*points[2] - *points[3]).angle(*points[0] - *points[3]);
+
+  real sum = 0;
 
    for (int i = 0; i < 4; ++i)
       sum += angle[i];
@@ -11377,7 +11439,7 @@ to recover.
 to do is put the appropriate |Points| from |points| onto |p.points|,
 put |connector| onto |p.connectors|, and return |p|.
 @<Define |Path| functions@>=
-        @;
+
   if (connector != "")
     {
       for(size_t i = start; i < end; i++)
@@ -11392,6 +11454,12 @@ put |connector| onto |p.connectors|, and return |p|.
           p.points.push_back(create_new<Point>(points[i]));
         }
       p.connectors.push_back(connector);
+
+      p.connector_type_vector.push_back(create_new<Connector_Type>(0)); 
+      p.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+      p.connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+      p.connector_type_vector.back()->connector_string = connector;
+
       p.set_cycle(cycle);
       return p;
     }
@@ -11406,6 +11474,7 @@ fill up |p.connectors| so that we can tell which ones to use.
 will either be only one connector or a connector for each pair of |Points|
 that need to be joined.  However, it would be easy to write functions
 that add or remove connectors, so it's best to have this routine.
+
 @<Define |Path| functions@>=
 
   @;  
@@ -11418,24 +11487,50 @@ that add or remove connectors, so it's best to have this routine.
   int i;
   string s = connectors.back();
 
+#if 0 
+  string s = connector_type_vector.back()->connector_string;
+#endif  
+
   for (i = connectors.size(); i < a; i++)
-    {
+  {
       p.connectors.push_back(s);
-    }
+  }
+
   if (DEBUG)   
     cerr << "p.connectors.size() == " << p.connectors.size() << endl;
-  
+
+  for (i = connector_type_vector.size(); i < a; i++)
+  {
+      p.connector_type_vector.push_back(create_new<Connector_Type>(0));
+      p.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+      p.connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+      p.connector_type_vector.back()->connector_string = s;
+  }
+
+  if (DEBUG)   
+    cerr << "p.connector_type_vector.size() == " << p.connector_type_vector.size() << endl;
+
   Path q;
   
   for (size_t i = start; i < end; i++)
+  {
+    q.points.push_back(create_new<Point>(p.points[i]));
+
+    if (i < p.connectors.size())
+        q.connectors.push_back(p.connectors[i]);
+
+    if (i < p.connector_type_vector.size())
     {
-      q.points.push_back(create_new<Point>(p.points[i]));
-      if (i < p.connectors.size())
-          q.connectors.push_back(p.connectors[i]);
+        q.connector_type_vector.push_back(create_new<Connector_Type>(p.connector_type_vector[i]));
     }
+
+  }  /* |for| */
+
   q.set_cycle(cycle);
+
   return q;
-}
+
+}  End of |Path::subpath| definition  */
 
 @q ** (2) Getting points.@>
 @*1 Getting points. 
@@ -11607,10 +11702,55 @@ Path::get_connector(const unsigned int i) const
      return "--";
 
    else if (i < s)
+   {
       return connectors[i];
+   }
 
    else 
+   {
       return connectors[s - 1];
+   }
+
+}  /* End of |Path::get_connector| definition.  */
+
+@q ** (2) Get |Connector_Type|.@>
+@*1 Get |Connector_Type|. 
+@^\cfunc{Path}{get\_connector\_type}@>
+
+\LOG
+\initials{LDF 2022.01.15.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration.@> 
+
+@<Declare |Path| functions@>=
+virtual
+Connector_Type
+get_connector_type(const unsigned int i) const;
+
+@q *** (3) Definition.@> 
+
+@
+@<Define |Path| functions@>=
+Connector_Type
+Path::get_connector(const unsigned int i) const
+{
+
+   vector<Connector_Type*>::size_type s = connector_type_vector.size();
+
+   if (s == 0)
+     return "--";
+
+   else if (i < s)
+   {
+      return *(connector_type_vector[i]);
+   }
+
+   else 
+   {
+      return *(connector_type_vector[s - 1]);
+   }
 
 }  /* End of |Path::get_connector| definition.  */
 
@@ -11751,6 +11891,23 @@ the |Points| lie on a line or in a plane.
         cerr << "WARNING! In Path::get_normal():\n"
              << "Connector may make Path non-linear or non-planar: " 
              << *iter << endl << "Returning INVALID_POINT.\n\n";
+        cerr_mutex.unlock();  
+
+        return INVALID_POINT;
+      }
+  }
+
+  for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end(); ++iter)
+  {
+    if (!((*iter)->connector_string == ".." || (*iter)->connector_string == "--"
+        || (*iter)->connector_string == "..." || (*iter)->connector_string == "---"))
+      {
+        cerr_mutex.lock(); 
+        cerr << "WARNING! In Path::get_normal():\n"
+             << "`Connector_Type' may make Path non-linear or non-planar:" << endl;
+
+        (*iter)->show();
         cerr_mutex.unlock();  
 
         return INVALID_POINT;
@@ -12228,8 +12385,7 @@ default.
 Made |bool c| argument |const|.
 
 \initials{LDF 2004.11.01.}
-Now removing excess connectors, if 
-|c == false && connectors.size() >= points.size|. 
+Now removing excess connectors, if |c == false && connectors.size() >= points.size|. 
 
 \initials{LDF 2004.11.01.}
 @:BUG FIX@> BUG FIX:  Now making sure that |connectors.size() > 0| 
@@ -12266,11 +12422,18 @@ Path::set_cycle(const bool c, Scanner_Node scanner_node)
    
    vector<string>::size_type i = connectors.size();
    vector<Point*>::size_type j = points.size();
+   vector<Connector_Type*>::size_type k = connector_type_vector.size();
 
-   while (i > 0 && i >= j)
+   while (i > 0 && k > 0 && i >= j && k >= j)
    {
       connectors.pop_back();
+
+      delete connector_type_vector.back();       
+      connector_type_vector.back() = 0;       
+      connector_type_vector.pop_back();
+
       --i;
+      --k;
    }
 
   } /* |if (c == false)|  */
