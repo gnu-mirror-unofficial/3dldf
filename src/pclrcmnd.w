@@ -126,6 +126,14 @@ Removed debugging code.
 
    p->clear_connectors(); 
 
+   for (vector<Connector_Type*>::iterator iter = p->connector_type_vector.begin();
+        iter != p->connector_type_vector.end();
+        ++iter)
+   {
+      delete *iter;
+      *iter = 0;
+   }
+
    @=$$@> = static_cast<void*>(0);
 
 };

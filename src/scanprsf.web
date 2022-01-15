@@ -14082,8 +14082,7 @@ Added this function.
 
 @<Define |Scan_Parse| functions@>=
 void*
-Scan_Parse::clip_to_func(void* arg1,
-                         void* parameter)
+Scan_Parse::clip_to_func(void* arg1, void* parameter)
 {
 
 @q **** (4) Preliminaries.@>   
@@ -14179,17 +14178,21 @@ Scan_Parse::clip_to_func(void* arg1,
 
    p->apply_transform();  
   
-   /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+   
 
-   vector<Point*>::const_iterator point_iter = p->points.begin();
-   vector <string>::iterator connector_iter = p->connectors.begin();
+  vector<Point*>::const_iterator point_iter = p->points.begin();
+  vector <Connector_Type*>::iterator connector_iter = p->connector_type_vector.begin();
 
   string connector_string;
 
-  if (p->connectors.size() > 0)
-      connector_string = *connector_iter++;
-    else
-      connector_string = "--";
+  if (p->connector_type_vector.empty())
+  {
+      p->connector_type_vector.push_back(create_new<Connector_Type>(0));
+      p->connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+      p->connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;;
+      p->connector_type_vector.back()->connector_string = "--";
+
+  }
 
   *out_stream << "clip currentpicture to "
               << "(" << (*point_iter)->get_x('w', false, false)
@@ -14202,28 +14205,34 @@ Scan_Parse::clip_to_func(void* arg1,
   for (unsigned short counter = 2; 
        point_iter != p->points.end(); 
        ++point_iter)
-      {
+  {
 
-          *out_stream << " " << connector_string << " " 
-                      << "(" << (*point_iter)->get_x('w', false, false)
-                      << "cm, "
-                      << (*point_iter)->get_y('w', false, false)
-                      << "cm)";
+      *out_stream << " ";
+      
+      if (connector_iter == p->connector_type_vector.end())
+         *out_stream << *(p->connector_type_vector.back());
+      else 
+         *out_stream << **connector_iter;
 
-          /* This breaks the line and indents after two points */
-        
-          if  (counter == 2 && point_iter != p->points.end())
-            {
-              *out_stream << "\n  ";
-              counter = 1;
-            }
-          else
-            {
-              ++counter;
-            }
-          if (connector_iter != p->connectors.end())
-            connector_string = *connector_iter++;
-      }
+      *out_stream << " (" << (*point_iter)->get_x('w', false, false)
+                  << "cm, "
+                  << (*point_iter)->get_y('w', false, false)
+                  << "cm)";
+
+      /* This breaks the line and indents after two points */
+    
+      if  (counter == 2 && point_iter != p->points.end())
+        {
+          *out_stream << "\n  ";
+          counter = 1;
+        }
+      else
+        {
+          ++counter;
+        }
+      if (connector_iter != p->connector_type_vector.end())
+        connector_iter++;
+  }
 
 @q ***** (5)@>  
 
@@ -14233,8 +14242,15 @@ Scan_Parse::clip_to_func(void* arg1,
 @<Define |Scan_Parse| functions@>=
 
     if (p->is_cycle())
-      *out_stream << "   " << connector_string 
-                  << " cycle";
+    {
+      *out_stream << "   ";
+      if (connector_iter == p->connector_type_vector.end())
+         *out_stream << *(p->connector_type_vector.back());
+      else 
+         *out_stream << **connector_iter;
+
+      *out_stream << " cycle";
+    }
 
 @q ***** (5)@>  
 

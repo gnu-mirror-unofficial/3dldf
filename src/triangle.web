@@ -429,18 +429,15 @@ Now dereferencing |Point* C| and |Point* A| in the call to
           area = sqrt(b_plus_c_squared - aa) * sqrt(aa - b_minus_c_squared) / 4;
       }
    
-  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
- 
-   connectors.push_back("--");
+   
+   *this += string("--");
    set_cycle(true);
 
    center = Point::intersection_point(A->mediate(*B), *C, B->mediate(*C), *A).pt;
 
    return;
 
-}  /* End of the 
-|Triangle::set(Point* A, Point* B, Point* C,
-               Scanner_Node scanner_node)| definition.  */
+}  /* End of |Triangle::set(Point* A, Point* B, Point* C, Scanner_Node scanner_node)| definition.  */
 
 @q ** (2) Assignment.@>
 @*1 Assignment.

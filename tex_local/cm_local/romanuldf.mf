@@ -603,12 +603,40 @@ arm(0,7,g,beak_darkness,0);  % middle arm and serif
 
 if serifs: 
    nodish_serif(1,2,a,1/3,cap_jut,b,1/3,.5cap_jut);  % upper serif
-   dish_serif(2,1,c,1/3,cap_jut,d,1/3,1.25cap_jut);  % lower serif
+
+  message "Calling `dish_serif' for lower serif.";
+  
+  dish_serif(2,1,c,1/3,cap_jut,d,1/3,1.25cap_jut);  % lower serif
 fi  
+
+makelabel("origin", origin);
+
+message "x3r:";
+show x3r;
+
+message "x3r/pt:";
+show z3r/pt;
+
+message "y3r/pt:";
+show y3r/pt;
+
+message "designsize";
+show designsize;
+
+message "cap_height:";
+show cap_height;
+
+message "cap_height/pt:";
+show cap_height/pt;
 
 math_fit(0,ic#-2.5u#); 
 
-penlabels(0,1,2,3,4,5,6,7); 
+x10 = .5[x3r, x1r];
+y10 = cap_height;
+
+makelabel("cap_height", z10);
+
+penlabels(0, 1, 2, 3, 4, 5, 6, 7); 
 
 endchar;
 
@@ -1195,7 +1223,7 @@ math_fit(0,.5ic#); penlabels(1,2,3,4,5,6,7,8); endchar;
 %% (metafont-mode)
 
 %% Local Variables:
-%% mode:Metafont
-%% eval:(outline-minor-mode t)
+%% mode:Metapost
+%% outline-minor-mode:t
 %% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
 %% End:

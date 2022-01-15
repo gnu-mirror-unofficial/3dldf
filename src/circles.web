@@ -1023,16 +1023,22 @@ and test whether it's circular.
 
      } /* |for|  */
 
-  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
-
   for (vector<string>::const_iterator iter = connectors.begin();
        iter != connectors.end(); 
        iter++)
-    {
+  {
 
-       c += *iter;
+     c += *iter;
 
-    } /* |for|  */
+  } /* |for|  */
+
+  for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end(); 
+       iter++)
+  {
+     c += *iter;
+
+  } /* |for|  */
 
   Point p0 = get_point(0);
   Point p_half = get_point(points.size() / 2);

@@ -263,100 +263,100 @@ y-axis, if |*this| is left untransformed.
 @<Define |Hyperbola| functions@>=
 
    else /* |options != static_cast<Hyperbola_Set_Option_Struct*>(0)|  */
-      {
+   {
 
-          real a = 1.0;
-          real b = 1.0;
-          
-          max_extent = DEFAULT_MAX_EXTENT;
+       real a = 1.0;
+       real b = 1.0;
+       
+       max_extent = DEFAULT_MAX_EXTENT;
 
-          real increment_value = .05;
+       real increment_value = .05;
 
-          if (options->major_axis_length != INVALID_REAL)
-             a = options->major_axis_length / 2;             
+       if (options->major_axis_length != INVALID_REAL)
+          a = options->major_axis_length / 2;             
 
-          if (options->minor_axis_length != INVALID_REAL)
-             b = options->minor_axis_length / 2;             
+       if (options->minor_axis_length != INVALID_REAL)
+          b = options->minor_axis_length / 2;             
 
-          if (options->max_extent != INVALID_REAL)
-             max_extent = options->max_extent;
+       if (options->max_extent != INVALID_REAL)
+          max_extent = options->max_extent;
 
-          axis_h = 2 * a;
-          axis_v = 2 * b;
+       axis_h = 2 * a;
+       axis_v = 2 * b;
 
-          real x = a;
-          real z;
+       real x = a;
+       real z;
    
-          real b_over_a = b / a;
+       real b_over_a = b / a;
  
-          Point* p;
+       Point* p;
 
-          deque<Point*> d;
-          deque<Point*> e;
+       deque<Point*> d;
+       deque<Point*> e;
  
-          vertex_0.set(a, 0, 0);
-          vertex_1.set(-a, 0, 0);
+       vertex_0.set(a, 0, 0);
+       vertex_1.set(-a, 0, 0);
 
-          if (options->center)
-             center = *(options->center);
-          else 
-             center = ORIGIN;
+       if (options->center)
+          center = *(options->center);
+       else 
+          center = ORIGIN;
 
-          linear_eccentricity = sqrt((b * b) + (a * a));
+       linear_eccentricity = sqrt((b * b) + (a * a));
 
-          focus_0.set(linear_eccentricity, 0, 0);
-          focus_1.set(-linear_eccentricity, 0, 0);
+       focus_0.set(linear_eccentricity, 0, 0);
+       focus_1.set(-linear_eccentricity, 0, 0);
 
-          for (; x <= max_extent; x += increment_value)
-             {
-                 if (x > 3)
-                    increment_value = .25;
-                 else if (x > 1)
-                    increment_value = .1;
-                                  
-                 z = b_over_a * x * sqrt(1 - ((a * a) / (x * x)));
+       for (; x <= max_extent; x += increment_value)
+          {
+              if (x > 3)
+                 increment_value = .25;
+              else if (x > 1)
+                 increment_value = .1;
+                               
+              z = b_over_a * x * sqrt(1 - ((a * a) / (x * x)));
 
-                 p = create_new<Point>(0);
-                 p->set(x, 0, z);
-                 p->shift(center);
-                 d.push_back(p);
-                 
-                 p = create_new<Point>(0);
-                 p->set(x, 0, -z);
-                 p->shift(center);
-                 d.push_front(p);
+              p = create_new<Point>(0);
+              p->set(x, 0, z);
+              p->shift(center);
+              d.push_back(p);
+              
+              p = create_new<Point>(0);
+              p->set(x, 0, -z);
+              p->shift(center);
+              d.push_front(p);
 
-                 p = create_new<Point>(0);
-                 p->set(-x, 0, z);
-                 p->shift(center);
-                 e.push_back(p);
-                 
-                 p = create_new<Point>(0);
-                 p->set(-x, 0, -z);
-                 p->shift(center);
-                 e.push_front(p);
+              p = create_new<Point>(0);
+              p->set(-x, 0, z);
+              p->shift(center);
+              e.push_back(p);
+              
+              p = create_new<Point>(0);
+              p->set(-x, 0, -z);
+              p->shift(center);
+              e.push_front(p);
 
-             }
+          }
 
-          for (deque<Point*>::reverse_iterator iter = d.rbegin();
-               iter != d.rend();
-               ++iter)
-              points.push_back(*iter);
+       for (deque<Point*>::reverse_iterator iter = d.rbegin();
+            iter != d.rend();
+            ++iter)
+           points.push_back(*iter);
 
-          d.clear();  
+       d.clear();  
 
-          for (deque<Point*>::reverse_iterator iter = e.rbegin();
-               iter != e.rend();
-               ++iter)
-              branch_1 += *iter;
+       for (deque<Point*>::reverse_iterator iter = e.rbegin();
+            iter != e.rend();
+            ++iter)
+           branch_1 += *iter;
 
-          e.clear();  
+       e.clear();  
 
-          /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+       /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
 
-          connectors.push_back("..");
+       *this += string("..");
 
-      }     /* |else| (|options != static_cast<Hyperbola_Set_Option_Struct*>(0)|)  */
+   }     /* |else| (|options != static_cast<Hyperbola_Set_Option_Struct*>(0)|)  */
 
 @q **** (4).@>
 

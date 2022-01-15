@@ -462,7 +462,7 @@ if (vertex_0 == INVALID_POINT)
 
   /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
 
-    connectors.push_back("..");
+    *this += string("..");
 
 @q **** (4) Exit function successfully with return value 0.@>
 @ Exit function successfully with return value 0.
@@ -1881,20 +1881,18 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
 
 @q **** (4).@>
 
-  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
-
    if (b && !is_cycle())
-      {
-         adjust_connectors();
-         connectors.push_back("..");
-         Point* p = create_new<Point>(points[points.size() - 1]);
-         points.push_back(p);
-         connectors.push_back("--");
-         p = create_new<Point>(points[0]);
-         points.push_back(p);
-         connectors.push_back("..");
-         Path::set_cycle(true);
-      }
+   {
+      adjust_connectors();
+      *this += string("..");
+      Point* p = create_new<Point>(points[points.size() - 1]);
+      points.push_back(p);
+      *this += string("--");
+      p = create_new<Point>(points[0]);
+      points.push_back(p);
+      *this += string("..");
+      Path::set_cycle(true);
+   }
 
 @q **** (4)@> 
 
@@ -1907,6 +1905,16 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
 
           connectors.clear();
 
+          for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+               iter != connector_type_vector.end();
+               ++iter)
+          {
+             delete *iter;
+             *iter = 0;
+          }
+
+          connector_type_vector.clear();
+
           Path::set_cycle(false);  
 
           for (int i = 0; i < 2; ++i)
@@ -1916,7 +1924,7 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
              }
 
 
-          connectors.push_back("..");
+          *this += string("..");
 
       }  
 

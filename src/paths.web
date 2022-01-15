@@ -866,7 +866,7 @@ Path::Path(const Point& p0, const Point& p1)
 
   Connector_Type *c = create_new<Connector_Type>(0);
   c->type0 = Connector_Type::PLAIN_TYPE;
-  c->type1 = Connector_Type::NULL_TYPE;
+  c->type1 = Connector_Type::CT_NULL_TYPE;
   c->connector_string = "--";
 
   if (DEBUG)
@@ -987,7 +987,7 @@ Path::set(const Point& p0, const Point& p1)
 
   Connector_Type *c = create_new<Connector_Type>(0);
   c->type0 = Connector_Type::PLAIN_TYPE;
-  c->type1 = Connector_Type::NULL_TYPE;
+  c->type1 = Connector_Type::CT_NULL_TYPE;
   c->connector_string = "--";
 
   if (DEBUG)
@@ -1100,7 +1100,7 @@ Path::Path(string connector, bool@,@, cycle ... )
 
   Connector_Type *c = create_new<Connector_Type>(0);
   c->type0 = Connector_Type::PLAIN_TYPE;
-  c->type1 = Connector_Type::NULL_TYPE;
+  c->type1 = Connector_Type::CT_NULL_TYPE;
   c->connector_string = connector;
 
   if (DEBUG)
@@ -1254,7 +1254,7 @@ Path::set(string connector, bool cycle ... )
 
     Connector_Type *c = create_new<Connector_Type>(0);
     c->type0 = Connector_Type::PLAIN_TYPE;
-    c->type1 = Connector_Type::NULL_TYPE;
+    c->type1 = Connector_Type::CT_NULL_TYPE;
     c->connector_string = connector;
 
     if (DEBUG)
@@ -1403,7 +1403,7 @@ Path::Path(Point* first_point_ptr ... )
 
       c = create_new<Connector_Type>(0);
       c->type0 = Connector_Type::PLAIN_TYPE;
-      c->type1 = Connector_Type::NULL_TYPE;
+      c->type1 = Connector_Type::CT_NULL_TYPE;
       c->connector_string = connector_string;
 
       if (DEBUG)
@@ -1548,7 +1548,7 @@ Path::set(Point* first_point_ptr ... )
         c = create_new<Connector_Type>(0);
 
         c->type0 = Connector_Type::PLAIN_TYPE;
-        c->type1 = Connector_Type::NULL_TYPE;
+        c->type1 = Connector_Type::CT_NULL_TYPE;
         c->connector_string = connector_string;
 
         if (DEBUG)
@@ -2439,7 +2439,7 @@ Path::set_connectors(const string s)
 
   Connector_Type *c = create_new<Connector_Type>(0); 
   c->type0 = Connector_Type::PLAIN_TYPE;      
-  c->type0 = Connector_Type::NULL_TYPE;      
+  c->type0 = Connector_Type::CT_NULL_TYPE;      
   c->connector_string = s;
 
   if (DEBUG)
@@ -4449,7 +4449,7 @@ Path::operator+=(const string s)
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::PLAIN_TYPE;
-   c->type1 = Connector_Type::NULL_TYPE;
+   c->type1 = Connector_Type::CT_NULL_TYPE;
    c->connector_string = s;
 
    if (DEBUG)
@@ -4729,7 +4729,7 @@ connectors for |pa|.
       last_connector_type = create_new<Connector_Type>(0);
       last_connector_type->connector_string = "--";
       last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
-      last_connector_type->type1 = Connector_Type::NULL_TYPE;
+      last_connector_type->type1 = Connector_Type::CT_NULL_TYPE;
   }
 
   while (connectors.size() < points.size() - 1)
@@ -4759,7 +4759,7 @@ of ``{\AM}''.  This mimics the behavior of \MF/.
 
   Connector_Type *c = create_new<Connector_Type>(0);
   c->type0 = Connector_Type::PLAIN_TYPE;
-  c->type1 = Connector_Type::NULL_TYPE;
+  c->type1 = Connector_Type::CT_NULL_TYPE;
 
   if (*(points.back()) != pa.get_point(0))
   {
@@ -4924,7 +4924,7 @@ will be at the wrong place.
   {
     last_connector_type = create_new<Connector_Type>(0);
     last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
-    last_connector_type->type1 = Connector_Type::NULL_TYPE;
+    last_connector_type->type1 = Connector_Type::CT_NULL_TYPE;
     last_connector_type->connector_string = "--";
   }
   else
@@ -4941,7 +4941,7 @@ will be at the wrong place.
 
   r.connector_type_vector.push_back(create_new<Connector_Type>(0));
   r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
-  r.connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+  r.connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
   r.connector_type_vector.back()->connector_string = connector;
 
 @q **** (4) @>   
@@ -9647,7 +9647,7 @@ Added code for suppressing output if the type of the current
                {
                    connector_type_vector.push_back(create_new<Connector_Type>(0));
                    connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
-                   connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+                   connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
                    connector_type_vector.back()->connector_string = "--";
                }
                   
@@ -11520,7 +11520,7 @@ put |connector| onto |p.connectors|, and return |p|.
 
       p.connector_type_vector.push_back(create_new<Connector_Type>(0)); 
       p.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
-      p.connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+      p.connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
       p.connector_type_vector.back()->connector_string = connector;
 
       p.set_cycle(cycle);
@@ -11566,7 +11566,7 @@ that add or remove connectors, so it's best to have this routine.
   {
       p.connector_type_vector.push_back(create_new<Connector_Type>(0));
       p.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
-      p.connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+      p.connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
       p.connector_type_vector.back()->connector_string = s;
   }
 
@@ -11808,7 +11808,7 @@ Path::get_connector_type(const unsigned int i) const
    {
       Connector_Type c;
       c.type0 = Connector_Type::PLAIN_TYPE;
-      c.type1 = Connector_Type::NULL_TYPE;
+      c.type1 = Connector_Type::CT_NULL_TYPE;
       c.connector_string = "--";
 
       return c;
@@ -12598,7 +12598,7 @@ the last connector, or |--|, if there are no connectors.
      {
         last_connector_type = create_new<Connector_Type>(0);
         last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
-        last_connector_type->type1 = Connector_Type::NULL_TYPE;
+        last_connector_type->type1 = Connector_Type::CT_NULL_TYPE;
         last_connector_type->connector_string = "--";
      }
      else
@@ -12863,7 +12863,7 @@ in the reversed |Path|, which isn't what we want.
    {
       connector_type_vector.push_back(create_new<Connector_Type>(0));   
       connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
-      connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+      connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
       connector_type_vector.back()->connector_string = "--";
    }
 
@@ -14292,6 +14292,7 @@ class Connector_Type
    friend class Path;
    friend int yyparse(yyscan_t);
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
+   friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
 
    int type0;
    int type1;
@@ -14303,7 +14304,7 @@ class Connector_Type
    real  r1;
    
    public:
-      const static unsigned int NULL_TYPE;
+      const static unsigned int CT_NULL_TYPE;
       const static unsigned int PLAIN_TYPE;     
       const static unsigned int DIR_TYPE;     
       const static unsigned int CURL_TYPE;       
@@ -14318,7 +14319,7 @@ class Connector_Type
 @
 @<|Connector_Type| static constant initializations@>=
 
-const unsigned int Connector_Type::NULL_TYPE     = 0U;
+const unsigned int Connector_Type::CT_NULL_TYPE  = 0U;
 const unsigned int Connector_Type::PLAIN_TYPE    = 1U;     
 const unsigned int Connector_Type::DIR_TYPE      = 2U;     
 const unsigned int Connector_Type::CURL_TYPE     = 3U;       
@@ -14359,7 +14360,7 @@ Connector_Type(void);
 Connector_Type::Connector_Type(void)
 {
    type0 = PLAIN_TYPE;     
-   type1 = NULL_TYPE;     
+   type1 = CT_NULL_TYPE;     
 
    connector_string = "";
 
@@ -14492,9 +14493,9 @@ Connector_Type::show(string s) const
 
   cerr << s << endl << "connector_string:  " << connector_string << endl;
 
-  if (type0 == NULL_TYPE)
+  if (type0 == CT_NULL_TYPE)
   {
-      cerr << "type0:  NULL_TYPE." << endl;
+      cerr << "type0:  CT_NULL_TYPE." << endl;
   }
   else if (type0 == PLAIN_TYPE)
   {
@@ -14519,9 +14520,9 @@ Connector_Type::show(string s) const
 
 @q **** (4) @>
 
-  if (type1 == NULL_TYPE)
+  if (type1 == CT_NULL_TYPE)
   {
-      cerr << "type1:  NULL_TYPE." << endl;
+      cerr << "type1:  CT_NULL_TYPE." << endl;
   }
   else if (type1 == PLAIN_TYPE)
   {

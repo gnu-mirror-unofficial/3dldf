@@ -2435,8 +2435,6 @@ Now calling |p->adjust_connectors|.
    c->show("*c:");
 #endif 
 
-  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
-
   p->set_cycle(false);
   p->adjust_connectors();
 
@@ -2445,8 +2443,6 @@ Now calling |p->adjust_connectors|.
   if (DEBUG)
      cerr << "In rule path_expression: path_expression path_join CYCLE:" << endl  
           << "Calling connector_type_vector.push_back." << endl;
-
-  p->connector_type_vector.push_back(c);
 
   p->set_cycle(true);
 
@@ -2462,8 +2458,7 @@ Now calling |p->adjust_connectors|.
 Added this type declaration.
 
 \initials{LDF 2004.10.30.}
-Changed the name of |point_connector_list| to 
-|path_element_list|.  
+Changed the name of |point_connector_list| to |path_element_list|.  
 Changed everywhere else without comment.
 \ENDLOG 
  
@@ -2538,7 +2533,7 @@ Added this rule.
    c->show("*c:");
 #endif 
 
-  *q += c->connector_string;
+  *q += *c;
 
   *q += *p;
 
@@ -2585,8 +2580,6 @@ Added this rule.
       cerr << "In rule path_element_list: path_element_list path_join path_tertiary:" << endl  
            << "Calling connector_type_vector.push_back." << endl;
 
-   p->connector_type_vector.push_back(c);
-
 #if 0   
    c->show("*c:");
 #endif 
@@ -2630,13 +2623,7 @@ Added this rule.
    c->show("*c:");
 #endif 
 
-  *q += c->connector_string;
-
-  if (DEBUG)
-     cerr << "In rule path_element_list: path_element_list path_join CYCLE:" << endl  
-          << "Calling connector_type_vector.push_back." << endl;
-
-  q->connector_type_vector.push_back(c);
+  *q += *c;
 
   q->set_cycle();
 
