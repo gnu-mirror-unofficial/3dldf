@@ -2148,6 +2148,95 @@ Added this rule.
   
 };
 
+@q ***** (5) path_join --> PERIOD_PAIR CONTROLS numeric_list AND numeric_list PERIOD_PAIR.@>
+@*4 
+
+@<Define rules@>=
+@=path_join: PERIOD_PAIR CONTROLS numeric_list AND numeric_list PERIOD_PAIR@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_join: PERIOD_PAIR CONTROLS numeric_list AND numeric_list PERIOD_PAIR'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->type0 = Connector_Type::CONTROLS_TYPE;
+  c->type1 = Connector_Type::CT_NULL_TYPE;
+  c->pt0 = create_new<Point>(0);  
+  c->pt1 = create_new<Point>(0);  
+
+  Pointer_Vector<real>* a = static_cast<Pointer_Vector<real>*>(@=$3@>); 
+  Pointer_Vector<real>* b = static_cast<Pointer_Vector<real>*>(@=$5@>); 
+   
+  cerr << "`a->v':" << endl;
+
+  for (vector<real*>::iterator iter = a->v.begin();
+       iter != a->v.end();
+       ++iter)
+  {
+      cerr << "**iter == " << **iter << endl;
+  }
+
+  cerr << "`b->v':" << endl;
+
+  for (vector<real*>::iterator iter = b->v.begin();
+       iter != b->v.end();
+       ++iter)
+  {
+      cerr << "**iter == " << **iter << endl;
+  }
+
+  real x = 0;
+  real y = 0;
+  real z = 0;
+
+  x = *(a->v[0]);
+
+  if (a->v.size() > 1)
+     y = *(a->v[1]);
+
+  if (a->v.size() > 2)
+     z = *(a->v[2]);
+
+  c->pt0->set(x, y, z);
+
+  x = 0;
+  y = 0;
+  z = 0;
+
+  x = *(b->v[0]);
+
+  if (b->v.size() > 1)
+     y = *(b->v[1]);
+
+  if (b->v.size() > 2)
+     z = *(b->v[2]);
+
+  c->pt1->set(x, y, z);
+
+  c->pt0->show("*(c->pt0):");
+  c->pt1->show("*(c->pt1):");
+
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+  @=$$@> =  static_cast<void*>(c); 
+ 
+};
+
 @
 @<Define rules@>=
 @=path_join: path_modifier basic_path_join@>@/
@@ -2155,11 +2244,28 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_join: path_modifier basic_path_join':"
+                << endl 
+                << "$1 (`path_modifier') == " << @=$1@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
   Connector_Type *c = create_new<Connector_Type>(0);
   c->connector_string = @=$2@>;
 
   @=$$@> =  static_cast<void*>(c); 
 
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar(); 
   
 };
 
@@ -2170,11 +2276,29 @@ Added this rule.
 
   @<Common declarations for rules@>@; 
 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_join: basic_path_join path_modifier':"
+                << endl 
+                << "$2 (`path_modifier') == " << @=$2@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
   Connector_Type *c = create_new<Connector_Type>(0);
   c->connector_string = @=$1@>;
 
   @=$$@> =  static_cast<void*>(c); 
   
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar(); 
+
 };
 
 @
@@ -2183,10 +2307,29 @@ Added this rule.
 {
   @<Common declarations for rules@>@; 
 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_join: path_modifier basic_path_join path_modifier':"
+                << endl 
+                << "$1 (`path_modifier' 1) == " << @=$1@> << endl
+                << "$3 (`path_modifier' 2) == " << @=$3@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
   Connector_Type *c = create_new<Connector_Type>(0);
   c->connector_string = @=$2@>;
 
   @=$$@> =  static_cast<void*>(c); 
+
+  cerr << "XXX Enter <RETURN> to continue: ";
+  getchar(); 
 
 };
 
@@ -2198,7 +2341,9 @@ Added this rule.
    @<Common declarations for rules@>@;
 
    cerr << "path_modifier:  TENSION numeric_expression" << endl;
- 
+
+   @=$$@> = Connector_Type::TENSION_TYPE;
+
 };
 
 @
@@ -2208,6 +2353,8 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
    cerr << "path_modifier:  LEFT_BRACE point_expression RIGHT_BRACE" << endl;
+
+   @=$$@> = Connector_Type::DIR_TYPE;
  
 };
 
@@ -2218,6 +2365,8 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
    cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
+
+   @=$$@> = Connector_Type::CURL_TYPE;
  
 };
 
@@ -2228,16 +2377,8 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
    cerr << "path_modifier:  LEFT_BRACE DIR numeric_expression RIGHT_BRACE" << endl;
- 
-};
 
-@
-@<Define rules@>=
-@=path_modifier: CONTROLS point_expression AND point_expression@>@/
-{
-   @<Common declarations for rules@>@; 
-
-   cerr << "path_modifier:  CONTROLS point_expression AND point_expression" << endl;
+   @=$$@> = Connector_Type::CURL_TYPE;
  
 };
 
