@@ -2094,6 +2094,10 @@ Added this rule.
 
    p->append(*q, c->connector_string, true);
 
+   if (DEBUG)
+      cerr << "In rule path_tertiary: path_secondary path_join path_expression:" << endl  
+           << "Calling connector_type_vector.push_back." << endl;
+
    p->connector_type_vector.push_back(c);
 
    delete q;
@@ -2377,7 +2381,14 @@ Added this rule.
     c->show("*c:");
 #endif 
 
+
+
     p->append(*q, c->connector_string, true);  
+
+    if (DEBUG)
+       cerr << "In rule path_expression: path_expression path_join path_element_list:" << endl  
+            << "Calling connector_type_vector.push_back." << endl;
+
     p->connector_type_vector.push_back(c);
 
     @=$$@> = static_cast<void*>(p); 
@@ -2429,6 +2440,11 @@ Now calling |p->adjust_connectors|.
   p->adjust_connectors();
 
   *p += c->connector_string;
+
+  if (DEBUG)
+     cerr << "In rule path_expression: path_expression path_join CYCLE:" << endl  
+          << "Calling connector_type_vector.push_back." << endl;
+
   p->connector_type_vector.push_back(c);
 
   p->set_cycle(true);
@@ -2525,8 +2541,6 @@ Added this rule.
 
   *q += *p;
 
-  q->connector_type_vector.push_back(c);
-
   delete p;
 
   @=$$@> = static_cast<void*>(q);
@@ -2565,6 +2579,11 @@ Added this rule.
    Path* q = static_cast<Path*>(@=$3@>); 
 
    p->append(*q, c->connector_string, true);
+
+   if (DEBUG)
+      cerr << "In rule path_element_list: path_element_list path_join path_tertiary:" << endl  
+           << "Calling connector_type_vector.push_back." << endl;
+
    p->connector_type_vector.push_back(c);
 
 #if 0   
@@ -2611,6 +2630,11 @@ Added this rule.
 #endif 
 
   *q += c->connector_string;
+
+  if (DEBUG)
+     cerr << "In rule path_element_list: path_element_list path_join CYCLE:" << endl  
+          << "Calling connector_type_vector.push_back." << endl;
+
   q->connector_type_vector.push_back(c);
 
   q->set_cycle();
