@@ -9225,6 +9225,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 #endif /* |DEBUG_COMPILE|  */@; 
  
     vector<string>::const_iterator connector_iter;
+    vector<Connector_Type*>::const_iterator connector_type_iter;
 
     string connector_string;
 
@@ -9313,12 +9314,12 @@ Added code for suppressing output if the type of the current
 
                status = adjust_dash_pattern_vector();
 
-if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+               if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
                    && dash_pattern_vector->ctr > 0)
-                  {
-                      dash_pattern_iter = dash_pattern_vector->v.begin();
-                      do_dash_patterns = true;
-                  }
+               {
+                   dash_pattern_iter = dash_pattern_vector->v.begin();
+                   do_dash_patterns = true;
+               }
                else
                   do_dash_patterns = false;
 
@@ -9729,7 +9730,7 @@ Made debugging output thread-safe.
             {
               ++counter;
             }
-          if (connector_iter != connectors.end() && connector_type_iter != connector_type_vector)
+          if (connector_iter != connectors.end() && connector_type_iter != connector_type_vector.end())
             connector_string = *connector_iter++;
       }
 
@@ -11530,7 +11531,7 @@ that add or remove connectors, so it's best to have this routine.
 
   return q;
 
-}  End of |Path::subpath| definition  */
+}  /* End of |Path::subpath| definition  */
 
 @q ** (2) Getting points.@>
 @*1 Getting points. 
@@ -11734,13 +11735,22 @@ get_connector_type(const unsigned int i) const;
 @
 @<Define |Path| functions@>=
 Connector_Type
-Path::get_connector(const unsigned int i) const
+Path::get_connector_type(const unsigned int i) const
 {
+
+   
 
    vector<Connector_Type*>::size_type s = connector_type_vector.size();
 
    if (s == 0)
-     return "--";
+   {
+      Connector_Type c;
+      c.type0 = Connector_Type::PLAIN_TYPE;
+      c.type1 = Connector_Type::NULL_TYPE;
+      c.connector_string = "--";
+
+      return c;
+   }
 
    else if (i < s)
    {
@@ -12480,6 +12490,8 @@ Path::adjust_connectors(void)
 
   while (connectors.size() > i)
      connectors.pop_back();
+
+/* !!START HERE:  LDF 2022.01.15.  Add code for connector_type_vector.  */ 
 
 @q **** (4) If |connectors.size() < i|, fill it up with copies of   @>   
 @q **** (4) the last connector, or |--|, if there are no connectors.@>   

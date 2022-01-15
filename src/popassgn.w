@@ -1905,8 +1905,10 @@ Removed debugging code.
 
               *q += c->connector_string;
 
-/* !!START HERE:  LDF 2022.01.14.  Grep for occurrences of this.  Look for commented-out code
-   from this date in paths.web.  */ 
+
+              if (DEBUG)
+                 cerr << "In rule operation_assignment: path_variable PLUS_ASSIGN path_join:" << endl  
+                      << "Calling connector_type_vector.push_back." << endl;
 
               q->connector_type_vector.push_back(c);
  
