@@ -8645,7 +8645,7 @@ Path::output(Scanner_Node scanner_node)
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9190,7 +9190,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9391,22 +9391,30 @@ In addition, the first segment also requires special handling if
                         && (   !do_pens 
                             || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))
 
-                  {
-                      *out_stream << "drawarrow " << *points[1] 
-                                  << *connector_iter << *points[0]; 
+               {
+#if 0 
+                   /* !!START HERE:  LDF 2022.01.15.  Testing.  */
+ 
+                   *out_stream << "drawarrow " << *points[1] 
+                               << *connector_iter << *points[0]; 
+#else
 
-                      if (do_colors)
-                         *out_stream << endl << "withcolor " << **color_iter;
+                   *out_stream << "drawarrow " << *points[1] 
+                               << **connector_type_iter << *points[0]; 
+#endif 
 
-                      if (do_pens)
-                         *out_stream << endl << "withpen " << **pen_iter;
+                   if (do_colors)
+                      *out_stream << endl << "withcolor " << **color_iter;
 
-                      if (do_dash_patterns)
-                         *out_stream << endl << **dash_pattern_iter;
+                   if (do_pens)
+                      *out_stream << endl << "withpen " << **pen_iter;
 
-                       *out_stream << ";" << endl << flush;
+                   if (do_dash_patterns)
+                      *out_stream << endl << **dash_pattern_iter;
 
-                  }  
+                    *out_stream << ";" << endl << flush;
+
+               }  
 
 @q ******* (7).@>              
 
@@ -9438,8 +9446,16 @@ In addition, the first segment also requires special handling if
                         || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                   {
+#if 0 
                        *out_stream << "draw " << *points[0] 
                                    << *connector_iter << *points[1];
+#else
+                       /* !!START HERE:  LDF 2022.01.15.  Testing.  */
+ 
+                       *out_stream << "draw " << *points[0] 
+                                   << *connector_type_iter << *points[1];
+
+#endif 
 
                       if (do_colors)
                          *out_stream << endl << "withcolor " << **color_iter;
@@ -9479,6 +9495,7 @@ In addition, the first segment also requires special handling if
                   {
                      
                       ++connector_iter;
+                      ++connector_type_iter;
 
                       if (do_colors)
                          ++color_iter;
@@ -9493,8 +9510,15 @@ In addition, the first segment also requires special handling if
                           || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                          {
+#if 0 
                              *out_stream << "draw " << *points[i] 
                                          << *connector_iter << *points[i + 1];
+#else
+                             /* !!START HERE:  LDF 2022.01.15.  Testing.  */
+
+                             *out_stream << "draw " << *points[i]   
+                                         << *connector_type_iter << *points[i + 1];
+#endif 
 
                              if (do_colors)
                                 *out_stream << endl << "withcolor " << **color_iter;
@@ -9525,6 +9549,7 @@ This requires special handling because |arrow| could be equal to
 @<Define |Path| functions@>=
 
                ++connector_iter;
+               ++connector_type_iter;
 
                if (do_colors)
                   ++color_iter;
@@ -9545,8 +9570,17 @@ This requires special handling because |arrow| could be equal to
                       else
                          *out_stream << "drawarrow ";
 
+#if 0 
                          *out_stream << *points[j] 
                                      << *connector_iter << *points[k];
+#else
+
+                         /* !!START HERE:  LDF 2022.01.15.  Testing.  */
+
+                         *out_stream << *points[j] 
+                                     << *connector_type_iter << *points[k];
+
+#endif 
 
                        if (do_colors)
                           *out_stream << endl << "withcolor " << **color_iter;
@@ -9608,6 +9642,15 @@ Added code for suppressing output if the type of the current
                   connector_string = *connector_iter;
                else
                   connector_string = "--";
+
+               if (connector_type_vector.size() == 0)
+               {
+                   connector_type_vector.push_back(create_new<Connector_Type>(0));
+                   connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+                   connector_type_vector.back()->type1 = Connector_Type::NULL_TYPE;
+                   connector_type_vector.back()->connector_string = "--";
+               }
+                  
 
 #if DEBUG_COMPILE
                if (DEBUG)
@@ -9715,9 +9758,13 @@ Made debugging output thread-safe.
 #endif /* |DEBUG_COMPILE|  */@; 
  
    for (unsigned short counter = 2; point_iter != points.end();)
-     {
+   {
 
+#if 0 
         *out_stream << " " << connector_string << " " << **point_iter++;
+#else
+        *out_stream << " " << **connector_type_iter << " " << **point_iter++;
+#endif 
 
           /* This breaks the line and indents after two points */
         
@@ -9730,13 +9777,28 @@ Made debugging output thread-safe.
             {
               ++counter;
             }
-          if (connector_iter != connectors.end() && connector_type_iter != connector_type_vector.end())
+          if (connector_iter != connectors.end())
+          {
             connector_string = *connector_iter++;
-      }
+          }
+          if (connector_type_iter != connector_type_vector.end())
+          {
+              ++connector_type_iter;
+          }
+
+    }  /* |for| */
 
     if (is_cycle())
-      *out_stream << endl << "   " << connector_string 
-                  << " cycle";
+    {
+#if 0 
+       *out_stream << endl << "   " << connector_string << " cycle";
+#else
+       /* !!START HERE:  LDF 2022.01.15.  Testing.  */
+
+       *out_stream << endl << "   " << **connector_type_iter << " cycle";
+#endif 
+
+    }
     
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -9808,8 +9870,8 @@ Commented-out the line that prints |fill_draw_value|
 to |stdout|.
 
 \initials{LDF 2003.08.20.}  
-Now printing |points.size| and |connectors.size|
-to |stdout|.  If the latter is 0, a message is printed, that |"--"| will
+Now printing |points.size| and |connectors.size| to |stdout|.  
+If the latter is 0, a message is printed, that |"--"| will 
 be used as the connector. 
 
 \initials{LDF 2004.05.13.}  
@@ -9909,10 +9971,10 @@ Path::show(string text, char coords,
         << connector_type_vector.size() << endl;  
 
    if (connectors.size() == 0 && connector_type_vector.size() == 0)
-     {
-       cerr << "Using \"--\" as connector.\n";
-       connector_string  = "--";
-     }
+   {
+     cerr << "Using \"--\" as connector.\n";
+     connector_string  = "--";
+   }
 
      int loop_ctr = 0;
 
@@ -14083,14 +14145,6 @@ getchar();
 @
 @<Define |Path| functions@>=
 
-
-
-
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
   stringstream s;
 
   int fd; 
@@ -14237,6 +14291,7 @@ class Connector_Type
 {
    friend class Path;
    friend int yyparse(yyscan_t);
+   friend ostream& operator<<(ostream& o, Connector_Type& c); 
 
    int type0;
    int type1;
@@ -14348,11 +14403,6 @@ Added this function.
 \ENDLOG 
 
 @q **** (4) Declaration @>
-@
-\LOG
-\initials{LDF 2021.12.24.}
-Added this function.
-\ENDLOG
 
 @<|Connector_Type| function declarations@>=
 void
@@ -14500,6 +14550,36 @@ Connector_Type::show(string s) const
 
 } /* End of |Connector_Type::show| definition */
 
+
+@q *** (3) Output operator.@>
+@ Assignment operator.
+\initials{LDF 2022.01.15.}
+
+\LOG
+\initials{LDF 2022.01.15.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) Declaration @>
+
+@<Declare non-member non-template functions for |Connector_Type|@>=
+
+ostream& 
+operator<<(ostream& o, Connector_Type& c); 
+
+@q ***** (5) Definition  @>
+@ 
+@<Define non-member non-template functions for |Connector_Type|@>=
+ostream& 
+operator<<(ostream& o, Connector_Type& c)
+{
+   /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
+
+   o << c.connector_string;
+
+   return o;
+
+} /* End of |operator<<(ostream& o, Connector_Type& c)| definition */
 
 @q *** (3) @>
 
@@ -15270,6 +15350,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Include files@>@;
 @<class |Connector_Type| declaration@>@;
 @<|Connector_Type| static constant initializations@>@;
+@<Declare non-member non-template functions for |Connector_Type|@>@;
 @<Define |class Path|@>@;
 @<Define |static| |class Path| data members@>@;
 @<Define |Transform| functions@>@;
@@ -15283,6 +15364,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Declare non-member template functions for |Connector_Type|@>@;
 @<Define |Nurb| functions@>@;
 @<|Connector_Type| function definitions@>@;
+@<Define non-member non-template functions for |Connector_Type|@>@;
 
 @q ** (2).@> 
 
@@ -15295,6 +15377,7 @@ Now including |@<Define |Focus| functions@>|.
 @<Declare |draw_axes|@>@;
 @<Declare non-member template functions for |Path|@>@;
 @<Declare non-member template functions for |Connector_Type|@>@;
+@<Declare non-member non-template functions for |Connector_Type|@>@;
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
