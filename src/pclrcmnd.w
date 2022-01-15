@@ -122,10 +122,6 @@ Removed debugging code.
 
    Path* p = static_cast<Path*>(entry->object);
   
-  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
-
-   p->clear_connectors(); 
-
    for (vector<Connector_Type*>::iterator iter = p->connector_type_vector.begin();
         iter != p->connector_type_vector.end();
         ++iter)

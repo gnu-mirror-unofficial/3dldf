@@ -460,8 +460,6 @@ if (vertex_0 == INVALID_POINT)
            vertex_0 = shift_pt;
        }
 
-  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
-
     *this += string("..");
 
 @q **** (4) Exit function successfully with return value 0.@>
@@ -1900,10 +1898,6 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
       {
           
           int j = points.size() - 1;
-
-   /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
-
-          connectors.clear();
 
           for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
                iter != connector_type_vector.end();

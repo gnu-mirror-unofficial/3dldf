@@ -1771,7 +1771,7 @@ Changed ``\.{&}'' to ``\.{..}''.
     for (int i = start; i <= end; ++i)
         {
            p += ptr->get_point(i);
-           p += ptr->get_connector(i);
+           p += *(ptr->connector_type_vector[i]);
         }
  
     p.set_cycle(false);
@@ -1876,8 +1876,9 @@ Reg_Cl_Plane_Curve::half(vector<Point*>::size_type start,
                  j = 0;
                                 
               p += get_point(j);
+
               if (i != end)
-                 p += get_connector(j);
+                 p += *(connector_type_vector[j]);
 
            } /* |for|  */
 
@@ -1998,7 +1999,7 @@ Reg_Cl_Plane_Curve::quarter(vector<Point*>::size_type start,
                                 
               p += get_point(j);
               if (i != end)
-                 p += get_connector(j);
+                 p += *(connector_type_vector[j]);
 
            } /* |for|  */
 
