@@ -9832,6 +9832,12 @@ Path::show(string text, char coords,
          ++points_iter)
        {
 
+         if (points_iter != points.begin())
+           {
+             cerr << " " << connector_string << " ";
+           }
+
+
          if (connector_type_iter != connector_type_vector.end())
          {
              connector_string = (*connector_type_iter)->connector_string;
@@ -14228,6 +14234,16 @@ Connector_Type::show(string s) const
       cerr << "type1:  CONTROLS_TYPE." << endl;
   }
 
+  if (pt0 != 0)
+     pt0->show("*pt0:");    
+  else
+     cerr << "pt0 is NULL." << endl;
+
+  if (pt1 != 0)
+     pt1->show("*pt1:");    
+  else
+     cerr << "pt1 is NULL." << endl;
+
 @q **** (4) @>
 
   return;
@@ -14259,7 +14275,17 @@ operator<<(ostream& o, Connector_Type& c)
 {
    /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
 
-   o << c.connector_string;
+   if (c.type0 == Connector_Type::CONTROLS_TYPE)
+   {
+      /* !!START HERE:  LDF 2022.01.15.  Find out why pt0 and pt1 aren't correct.  
+         Remember to have transforms affect these points!
+
+     */ 
+
+      o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
+   }
+   else
+      o << c.connector_string;
 
    return o;
 
