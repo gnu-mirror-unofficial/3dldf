@@ -122,6 +122,8 @@ Removed debugging code.
 
    Path* p = static_cast<Path*>(entry->object);
   
+  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+
    p->clear_connectors(); 
 
    @=$$@> = static_cast<void*>(0);

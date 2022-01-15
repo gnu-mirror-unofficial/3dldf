@@ -2435,6 +2435,7 @@ Now calling |p->adjust_connectors|.
    c->show("*c:");
 #endif 
 
+  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
 
   p->set_cycle(false);
   p->adjust_connectors();

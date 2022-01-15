@@ -313,6 +313,8 @@ Ellipse::Ellipse(const Point& ccenter,
     line_switch = false;
     cycle_switch = true;
 
+  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+
     connectors.push_back("..");
 
     Transform t;
@@ -1375,6 +1377,8 @@ and test whether it's elliptical.
         e += **iter;
 
      } /* |for|  */
+
+  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
 
   for (vector<string>::const_iterator iter = connectors.begin();
        iter != connectors.end(); 

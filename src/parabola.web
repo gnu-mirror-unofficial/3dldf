@@ -460,6 +460,8 @@ if (vertex_0 == INVALID_POINT)
            vertex_0 = shift_pt;
        }
 
+  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+
     connectors.push_back("..");
 
 @q **** (4) Exit function successfully with return value 0.@>
@@ -1879,6 +1881,8 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
 
 @q **** (4).@>
 
+  /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+
    if (b && !is_cycle())
       {
          adjust_connectors();
@@ -1899,6 +1903,8 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
           
           int j = points.size() - 1;
 
+   /* !!START HERE:  LDF 2022.01.15.  Add code for |Path::connector_type_vector|.  */ 
+
           connectors.clear();
 
           Path::set_cycle(false);  
@@ -1908,6 +1914,7 @@ Parabola::set_cycle(const bool b, Scanner_Node scanner_node)
                  delete points[j--];
                  points.pop_back();
              }
+
 
           connectors.push_back("..");
 
