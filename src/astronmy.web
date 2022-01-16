@@ -4,7 +4,7 @@
 @q * (0) Copyright and License.@>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
-@q Copyright (C) 2021 The Free Software Foundation, Inc. @>
+@q Copyright (C) 2021, 2022 The Free Software Foundation, Inc. @>
 
 @q GNU 3DLDF is free software; you can redistribute it and/or modify @>
 @q it under the terms of the GNU General Public License as published by @>
