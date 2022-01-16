@@ -7007,6 +7007,7 @@ Path::extract(const Focus& f, const unsigned short proj, real factor)
   vector<Shape*> v;
 
   int i = 0;
+
   for(vector <Point*>::iterator iter = points.begin();
       iter != points.end();
       iter++)
@@ -7017,13 +7018,32 @@ Path::extract(const Focus& f, const unsigned short proj, real factor)
       if (DEBUG)
         cerr << endl;
 
+
       if (v.size() == 0) /* |Point::extract| failed. 
                              LDF 2003.05.09.  */
         return v;                   
     }
+
+  for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+      iter != connector_type_vector.end();
+      iter++)
+  {
+      if ((**iter).type0 == Connector_Type::CONTROLS_TYPE)
+      {
+         if ((**iter).pt0 != 0)
+            (**iter).pt0->extract(f, proj, factor);
+         if ((**iter).pt1 != 0)
+            (**iter).pt1->extract(f, proj, factor);
+      }
+  }
+
   vector<Shape*> r;
   r.push_back(this);
   return r;
+
+
+
+
 }
 
 @q ** (2) Set world extremes.@> 
@@ -8650,7 +8670,6 @@ also shouldn't be possible, they would  catch it, too.
 @q **** (4) @>   
 @
 @<Define |Path| functions@>=
-
 
 
   vector <Point*>::iterator point_iter = points.begin();
@@ -14281,6 +14300,14 @@ operator<<(ostream& o, Connector_Type& c)
          Remember to have transforms affect these points!
 
      */ 
+
+      cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
+
+      c.pt0->show("*cpt0:");
+      c.pt1->show("*cpt1:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
       o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
    }
