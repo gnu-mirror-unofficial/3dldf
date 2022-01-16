@@ -2325,11 +2325,13 @@ Added this rule.
   c->type1 = d->type0;
   c->r1    = d->r0;
 
-  if (c->pt1 == 0)
-     c->pt1 = create_new<Point>(0);
-
   if (d->pt0 != 0)
+  {
+     if (c->pt1 == 0)
+        c->pt1 = create_new<Point>(0);
+
      *(c->pt1) = *(d->pt0);
+  }
 
   delete d;
   d = 0;
@@ -2346,6 +2348,11 @@ Added this rule.
       cerr_strm.str("");
 
       c->show("*c:");
+
+/* !!START HERE:  LDF 2022.01.16.  */ 
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 
     }

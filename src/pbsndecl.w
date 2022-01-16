@@ -372,6 +372,9 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @=%token <int_value>    DIR@>@/
 @=%token <int_value>    CURL@>@/
 @=%token <int_value>    ATLEAST@>@/
+@=%token <int_value>    RESOLVE@>@/
+@=%token <int_value>    WITH_RESOLUTION@>@/
+@=%token <int_value>    RESOLVED_TO@>@/
 
 @=%token <string_value>     COMMA@>@/
 @=%token <string_value>     COLON@>@/ 
