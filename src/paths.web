@@ -7028,23 +7028,17 @@ Path::extract(const Focus& f, const unsigned short proj, real factor)
       iter != connector_type_vector.end();
       iter++)
   {
-      if ((**iter).type0 == Connector_Type::CONTROLS_TYPE)
-      {
-         if ((**iter).pt0 != 0)
-            (**iter).pt0->extract(f, proj, factor);
-         if ((**iter).pt1 != 0)
-            (**iter).pt1->extract(f, proj, factor);
-      }
-  }
+      if ((**iter).pt0 != 0)
+         (**iter).pt0->extract(f, proj, factor);
+      if ((**iter).pt1 != 0)
+         (**iter).pt1->extract(f, proj, factor);
+    }
 
   vector<Shape*> r;
   r.push_back(this);
   return r;
 
-
-
-
-}
+} /* End |Path::extract(const Focus& f, const unsigned short proj, real factor)| definition  */
 
 @q ** (2) Set world extremes.@> 
 @*1 Set world extremes.
@@ -14398,10 +14392,31 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
-   else if (c.type0 == Connector_Type::DIR_TYPE)
+   else if (c.type0 == Connector_Type::DIR_TYPE && (c.pt0 != 0 || c.r0 != 0))
    {
+      o << "{";
 
-   }
+      if (c.pt0 && c.r0 != 0)
+      {
+          cerr << "WARNING!  In `operator<<' for `Connector_Type':" << endl 
+               << "`Connector_Type::type0' == `Connector_Type::DIR_TYPE' and" << endl 
+               << "`Point *Connector_Type::pt0' is non-NULL and `Connector_Type::r0' is != 0."
+               << endl 
+               << "Using `*pt0' and ignoring `r0'.  Continuing." << endl;
+      }
+   
+      if (c.pt0)
+      {
+          o << *(c.pt0);
+      }
+      else if (c.r0 != 0)
+      {
+          o << "dir " << c.r0;
+      }
+      
+      o << "} " << c.connector_string;
+         
+   }  /* |else if (c.type0 == Connector_Type::DIR_TYPE && (c.pt0 != 0 || c.r0 != 0))| */
 
 
 @q ***** (5) Plain.  @>
@@ -14431,19 +14446,6 @@ operator<<(ostream& o, Connector_Type& c)
 
    }
 
-
-@q ***** (5) Tension.  @>
-
-@ Tension.
-\initials{LDF 2022.01.16.}
-
-@<Define non-member non-template functions for |Connector_Type|@>=
-
-   else if (c.type1 == Connector_Type::TENSION_TYPE)
-   {
-
-   }
-
 @q ***** (5) Direction.  @>
 
 @ Direction.
@@ -14451,11 +14453,31 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
-   else if (c.type1 == Connector_Type::DIR_TYPE)
+   else if (c.type1 == Connector_Type::DIR_TYPE && (c.pt1 != 0 || c.r1 != 0))
    {
+      o << "{";
 
-   }
-
+      if (c.pt1 && c.r1 != 0)
+      {
+          cerr << "WARNING!  In `operator<<' for `Connector_Type':" << endl 
+               << "`Connector_Type::type1' == `Connector_Type::DIR_TYPE' and" << endl 
+               << "`Point *Connector_Type::pt1' is non-NULL and `Connector_Type::r1' is != 0."
+               << endl 
+               << "Using `*pt1' and ignoring `r1'.  Continuing." << endl;
+      }
+   
+      if (c.pt1)
+      {
+          o << *(c.pt1);
+      }
+      else if (c.r1 != 0)
+      {
+          o << "dir " << c.r1;
+      }
+      
+      o << "} " << c.connector_string;
+         
+   }  /* |else if (c.type1 == Connector_Type::DIR_TYPE && (c.pt1 != 0 || c.r1 != 0))| */
 
 @q **** (4) @>
 
