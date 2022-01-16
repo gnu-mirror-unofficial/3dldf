@@ -14,6 +14,7 @@
 
 @SET_MAKE@
 
+#### 3DLDF-3.0/doc/Makefile.am
 #### Created by Laurence D. Finston (LDF)
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
@@ -631,6 +632,15 @@ examples.mp: examples.ldf ../src/3dldf$(EXEEXT)
 show:
 	@echo "3dldf_PNG: $(3dldf_PNG)"
 	@echo "3dldf_EPS: $(3dldf_EPS)"
+
+.PHONY: tags
+
+tags:
+	etags $(3dldf_TEXINFOS) complex.texi dashptrn.texi \
+	      dttypes.texi dttypidx.texi examples.ldf examples.tex figure.texi \
+	      getstart.texi install.texi invoking.texi Makefile.am matrix.texi \
+	      numerics.texi paths.texi pen.texi rename_examples.sh string.texi \
+	      trnsfrms.texi 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

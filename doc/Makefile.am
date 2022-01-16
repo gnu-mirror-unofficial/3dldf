@@ -1,9 +1,9 @@
-## 3DLDF-2.0/doc/old_doc/Makefile.am
+#### 3DLDF-3.0/doc/Makefile.am
 #### Created by Laurence D. Finston (LDF)
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
 #### Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012,
-#### 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 The Free Software Foundation, Inc.
+#### 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022 The Free Software Foundation, Inc.
 
 #### GNU 3DLDF is free software; you can redistribute it and/or modify 
 #### it under the terms of the GNU General Public License as published by 
@@ -194,6 +194,18 @@ examples.mp: examples.ldf ../src/3dldf$(EXEEXT)
 show:
 	@echo "3dldf_PNG: $(3dldf_PNG)"
 	@echo "3dldf_EPS: $(3dldf_EPS)"
+
+
+.PHONY: tags
+
+tags:
+	etags $(3dldf_TEXINFOS) complex.texi dashptrn.texi \
+	      dttypes.texi dttypidx.texi examples.ldf examples.tex figure.texi \
+	      getstart.texi install.texi invoking.texi Makefile.am matrix.texi \
+	      numerics.texi paths.texi pen.texi rename_examples.sh string.texi \
+	      trnsfrms.texi 
+
+
 
 ## Local Variables:
 ## mode:Makefile

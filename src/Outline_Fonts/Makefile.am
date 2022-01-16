@@ -4,7 +4,7 @@
 #### * Copyright and License.
 
 #### This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-#### Copyright (C) 2021 The Free Software Foundation, Inc.
+#### Copyright (C) 2021, 2022 The Free Software Foundation, Inc.
 
 #### GNU 3DLDF is free software; you can redistribute it and/or modify 
 #### it under the terms of the GNU General Public License as published by 
@@ -93,3 +93,8 @@ hollow_ssb.ps: hollow_ssb.dvi
 
 hollow_ssb.pdf: hollow_ssb.ps
 	ps2pdf hollow_ssb.ps
+
+.PHONY: tags
+
+tags:
+	etags *.ldf *.lmc *.sh *.tex *.txt *.mp *.mac Makefile.am 
