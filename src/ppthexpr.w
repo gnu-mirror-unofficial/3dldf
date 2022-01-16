@@ -2243,11 +2243,11 @@ Added this rule.
  
 };
 
-@q ***** (5) path_join --> PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR.@>
+@q ***** (5) path_join --> PERIOD_PAIR TENSION atleast_optional numeric_expression tension_and_optional PERIOD_PAIR.@>
 @*4 
 
 @<Define rules@>=
-@=path_join: PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR@>@/
+@=path_join: PERIOD_PAIR TENSION atleast_optional numeric_expression tension_and_optional PERIOD_PAIR@>@/
 {
 
   @<Common declarations for rules@>@; 
@@ -2269,8 +2269,10 @@ Added this rule.
   Connector_Type *c = create_new<Connector_Type>(0);
   c->type0 = Connector_Type::TENSION_TYPE;
   c->type1 = Connector_Type::CT_NULL_TYPE;
-  c->r0 = @=$3@>;
-  c->r1 = @=$4@>;
+  c->r0 = @=$4@>;
+  c->r1 = @=$5@>;
+  c->atleast_flag0 = @=$3@>;
+  c->atleast_flag1 = scanner_node->atleast_flag1;
 
   @=$$@> =  static_cast<void*>(c); 
  
@@ -2281,6 +2283,7 @@ Added this rule.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <real_value> tension_and_optional@>@/
+@=%type <real_value> atleast_optional@>@/
 
 @q **** (4) @>
 @
@@ -2307,11 +2310,60 @@ Added this rule.
 
 };
 
+@q **** (4) @>
+@
+@<Define rules@>=
+@=atleast_optional: /* Empty  */@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `atleast_optional: EMPTY'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = 0;
+
+};
 
 @q **** (4) @>
 @
 @<Define rules@>=
-@=tension_and_optional: AND numeric_expression@>@/
+@=atleast_optional: ATLEAST@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `atleast_optional: ATLEAST'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = 1;
+
+};
+
+@q **** (4) @>
+@
+@<Define rules@>=
+@=tension_and_optional: AND atleast_optional numeric_expression@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -2329,10 +2381,11 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    @=$$@> = @=$2@>;
+    @=$$@> = @=$3@>;
+
+    scanner_node->atleast_flag1 = @=$2@>;
 
 };
-
 
 @
 @<Define rules@>=

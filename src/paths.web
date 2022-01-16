@@ -14005,6 +14005,8 @@ class Connector_Type
    Point *pt1;
    real  r0;
    real  r1;
+   bool atleast_flag0;
+   bool atleast_flag1;
    
    public:
       const static unsigned int CT_NULL_TYPE;
@@ -14065,6 +14067,9 @@ Connector_Type::Connector_Type(void)
    type0 = PLAIN_TYPE;     
    type1 = CT_NULL_TYPE;     
 
+   atleast_flag0 = false;
+   atleast_flag1 = false;
+
    connector_string = "";
 
    pt0 = 0;
@@ -14120,6 +14125,8 @@ Connector_Type::operator=(const Connector_Type &c)
 {
    type0 = c.type0;     
    type1 = c.type1;     
+   atleast_flag0 = c.atleast_flag0;
+   atleast_flag1 = c.atleast_flag1;
 
    connector_string = c.connector_string;
 
@@ -14248,8 +14255,10 @@ Connector_Type::show(string s) const
       cerr << "type1:  CONTROLS_TYPE." << endl;
   }
 
-  cerr << "r0 == " << r0 << endl 
-       << "r1 == " << r1 << endl;
+  cerr << "r0            == " << r0 << endl 
+       << "r1            == " << r1 << endl
+       << "atleast_flag0 == " << atleast_flag0 << endl 
+       << "atleast_flag1 == " << atleast_flag1 << endl;
 
   if (pt0 != 0)
      pt0->show("*pt0:");    
