@@ -281,10 +281,6 @@ option processing code separately for each version.  \initials{LDF 2003.08.14.}
 @<Process command line options@>=
 #ifdef __GNUC__
 @<GCC command line option processing@>@;
-#else
-#ifdef __DECCXX
-@<DEC command line option processing@>@;
-#endif 
 #endif 
 
 @q ** (2) GCC version of command line processing.@>
@@ -356,6 +352,7 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short DATABASE_INDEX             =  9;
   const unsigned short ASTRONOMY_INDEX            = 10;
   const unsigned short STARS_LIMIT_INDEX          = 11;
+  const unsigned short OUTPUT_FILENAME_INDEX      = 12;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -380,6 +377,7 @@ Added the ``\.{--quiet}'' option.
     {"database", 0, 0, 0},
     {"astronomy", 0, 0, 0},
     {"stars-limit", 1, 0, 0},
+    {"output-filename", 1, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -507,6 +505,8 @@ Edited the output.
                  << "--astronomy:             Enables the features of GNU 3DLDF pertaining to astronomy."
                  << endl << endl 
                  << "--stars-limit:           Sets the limit for the number of stars to be read from the database."
+                 << endl << endl 
+                 << "--output-filename:       Sets the output filename."
                  << endl << endl; 
 
 #if DEBUG_COMPILE
@@ -758,6 +758,33 @@ Added the ``\.{stars_limit}'' option.
            stars_limit = atoi(optarg);
         }
 
+@q **** (4) output_filename.@>
+@ output_filename.
+
+\LOG
+\initials{LDF 2021.06.03.}
+Added the ``\.{output_filename}'' option.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == OUTPUT_FILENAME_INDEX)
+        {
+
+/* !!START HERE:  LDF 2022.01.16.  Add --output-format and verbatimmetafont. */ 
+
+          cerr << "Setting output filename." << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+#if 0 
+           output_filename = atoi(optarg);
+#endif 
+        }
+
+
+
+
 @q **** (4) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
 
@@ -873,15 +900,6 @@ Added the ``\.{stars_limit}'' option.
     }
 #endif 
 } /* End of group.  */
-
-@q ** DEC version.@>
-@ DEC version.
-@ This section doesn't contain any code yet.  
-\LOG
-\initials{LDF 2003.08.14.}  Added this section. 
-\ENDLOG 
-@<DEC command line option processing@>=
-/* Do nothing. */
 
 @q * Print version, copyright, and license information.@>
 @ Print version, copyright, and license information.
