@@ -13731,11 +13731,6 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
            << endl
            << "normal == z_axis_pt_negative == " << (normal == z_axis_pt_negative) 
            << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14286,13 +14281,22 @@ Added this function.
 ostream& 
 operator<<(ostream& o, Connector_Type& c); 
 
-@q ***** (5) Definition  @>
+@q **** (4) Definition  @>
 @ 
 @<Define non-member non-template functions for |Connector_Type|@>=
 ostream& 
 operator<<(ostream& o, Connector_Type& c)
 {
-   /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
+@q ***** (5) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+@q ***** (5) Controls.  @>
+
+@ Controls.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
 
    if (c.type0 == Connector_Type::CONTROLS_TYPE)
    {
@@ -14301,16 +14305,54 @@ operator<<(ostream& o, Connector_Type& c)
 
      */ 
 
-      cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         cerr << "In `operator<<(ostream&, Connector_Type&)':" << endl;
 
-      c.pt0->show("*cpt0:");
-      c.pt1->show("*cpt1:");
+         c.pt0->show("*cpt0:");
+         c.pt1->show("*cpt1:");
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
       o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
    }
+
+   /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
+
+@q ***** (5) Curl.  @>
+
+@ Curl.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+
+@q ***** (5) Tension.  @>
+
+@ Tension.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+@q ***** (5) Direction.  @>
+
+@ Direction.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+
+
+
+@q ***** (5) Plain.  @>
+
+@ Plain.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
    else
       o << c.connector_string;
 

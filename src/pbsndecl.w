@@ -371,6 +371,7 @@ Added token declaration for |ULONG_LONG_TYPE|.
 @=%token <int_value>    TENSION@>@/
 @=%token <int_value>    DIR@>@/
 @=%token <int_value>    CURL@>@/
+@=%token <int_value>    ATLEAST@>@/
 
 @=%token <string_value>     COMMA@>@/
 @=%token <string_value>     COLON@>@/ 

@@ -2180,23 +2180,28 @@ Added this rule.
   Pointer_Vector<real>* a = static_cast<Pointer_Vector<real>*>(@=$3@>); 
   Pointer_Vector<real>* b = static_cast<Pointer_Vector<real>*>(@=$5@>); 
    
-  cerr << "`a->v':" << endl;
-
-  for (vector<real*>::iterator iter = a->v.begin();
-       iter != a->v.end();
-       ++iter)
+#if DEBUG_COMPILE
+  if (DEBUG)
   {
-      cerr << "**iter == " << **iter << endl;
-  }
+      cerr << "`a->v':" << endl;
+ 
+      for (vector<real*>::iterator iter = a->v.begin();
+           iter != a->v.end();
+           ++iter)
+      {
+         cerr << "**iter == " << **iter << endl;
+      }   
 
-  cerr << "`b->v':" << endl;
+      cerr << "`b->v':" << endl;
 
-  for (vector<real*>::iterator iter = b->v.begin();
-       iter != b->v.end();
-       ++iter)
-  {
-      cerr << "**iter == " << **iter << endl;
+      for (vector<real*>::iterator iter = b->v.begin();
+           iter != b->v.end();
+           ++iter)
+      {
+          cerr << "**iter == " << **iter << endl;
+      }   
   }
+#endif /* |DEBUG_COMPILE|  */@;
 
   real x = 0;
   real y = 0;
@@ -2226,12 +2231,13 @@ Added this rule.
 
   c->pt1->set(x, y, z);
 
-  c->pt0->show("*(c->pt0):");
-  c->pt1->show("*(c->pt1):");
-
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+#if DEBUG_COMPILE
+  if (DEBUG)
+  {
+      c->pt0->show("*(c->pt0):");
+      c->pt1->show("*(c->pt1):");
+  }
+#endif /* |DEBUG_COMPILE|  */@;
 
   @=$$@> =  static_cast<void*>(c); 
  
@@ -2251,7 +2257,7 @@ getchar();
       cerr_strm << thread_name 
                 << "*** Parser: `path_join: path_modifier basic_path_join':"
                 << endl 
-                << "$1 (`path_modifier') == " << @=$1@> << endl;
+                << "$1 (`path_modifier') == " << @=$1@> << " (" << name_map[$1] << ")" << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2264,9 +2270,6 @@ getchar();
 
   @=$$@> =  static_cast<void*>(c); 
 
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar(); 
-  
 };
 
 @
@@ -2283,7 +2286,7 @@ getchar();
       cerr_strm << thread_name 
                 << "*** Parser: `path_join: basic_path_join path_modifier':"
                 << endl 
-                << "$2 (`path_modifier') == " << @=$2@> << endl;
+                << "$2 (`path_modifier') == " << @=$2@> << " (" << name_map[$2] << ")" << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2296,9 +2299,6 @@ getchar();
 
   @=$$@> =  static_cast<void*>(c); 
   
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar(); 
-
 };
 
 @
@@ -2314,8 +2314,8 @@ getchar();
       cerr_strm << thread_name 
                 << "*** Parser: `path_join: path_modifier basic_path_join path_modifier':"
                 << endl 
-                << "$1 (`path_modifier' 1) == " << @=$1@> << endl
-                << "$3 (`path_modifier' 2) == " << @=$3@> << endl;
+                << "$1 (`path_modifier' 1) == " << @=$1@> << " (" << name_map[$1] << ")" << endl
+                << "$3 (`path_modifier' 2) == " << @=$3@> << " (" << name_map[$3] << ")" << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2327,9 +2327,6 @@ getchar();
   c->connector_string = @=$2@>;
 
   @=$$@> =  static_cast<void*>(c); 
-
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar(); 
 
 };
 
