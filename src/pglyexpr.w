@@ -192,6 +192,37 @@ Added this rule.
 
 };
 
+@q ***** (5) glyph_primary --> GET_GLYPH string_expression. @>
+
+@*4 \§glyph primary> $\longrightarrow$ \.{GET\_GLYPH} \§string expression>.
+\initials{LDF 2022.01.16.}
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=glyph_primary: GET_GLYPH string_expression@>@/
+{ 
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false|  */
+
+   if (DEBUG)
+   { 
+       cerr << "*** Parser: `glyph_primary: GET_GLYPH string_expression'."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+};
+
+
 @q * (1) glyph_secondary.  @>
 @* \§glyph secondary>.
 \initials{LDF 2005.06.08.}
