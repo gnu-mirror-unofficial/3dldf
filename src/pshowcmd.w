@@ -146,8 +146,10 @@ Added \§fixed optional>.
 
    cerr_strm  << ">> ";
 
+   /* !!TODO:  LDF 2022.01.16.  Setting the precision doesn't work.  Find out why not!  */ 
+
    if (@=$3@>)
-      cerr_strm << fixed << r;
+      cerr_strm << setprecision(10) << r << setprecision(6); 
    else 
       cerr_strm << r;
  
