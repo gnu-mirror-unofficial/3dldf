@@ -3508,8 +3508,10 @@ Added this section.
 
   ivp.i = 0;
 
+#if 0 
   if (DEBUG)
      entry->show("entry:");
+#endif 
 
   if (DEBUG)
      cerr << "Exiting `Scan_Parse::assign_simple'." << endl;
@@ -3625,6 +3627,12 @@ assign_simple(Scanner_Node scanner_node,
               const string type_name,
               void* var,
               const Path* expr);
+
+Int_Void_Ptr
+assign_simple(Scanner_Node scanner_node,
+              const string type_name,
+              void* var,
+              const Glyph* expr);
 
 Int_Void_Ptr
 assign_simple(Scanner_Node scanner_node,

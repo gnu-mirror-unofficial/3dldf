@@ -194,8 +194,34 @@ virtual
 @<Define |Glyph| functions@>= 
 Glyph::~Glyph(void)
 {
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */    
+
+   if (DEBUG)
+   { 
+       cerr << "Entering `Glyph' destructor." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   for (vector<Path*>::iterator iter = path_vector.v.begin();
+        iter != path_vector.v.end();
+        ++iter)
+   {
+       delete *iter;
+       *iter = 0;
+   }
+   path_vector.v.clear();
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Glyph' destructor successfully." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
    return;
-}
+
+} /* End of |Glyph::~Glyph| definition */
 
 @q * (1) Pseudo-constructor for dynamic allocation.@>
 @* Pseudo-constructor for dynamic allocation.
@@ -255,7 +281,7 @@ Added this function.
 @<Declare |Glyph| functions@>=
 virtual
 Glyph&
-operator=(const Glyph& c);
+operator=(const Glyph& g);
 
 @q *** (3) Definition.@> 
 
@@ -263,10 +289,45 @@ operator=(const Glyph& c);
 @<Define |Glyph| functions@>=
 
 Glyph&
-Glyph::operator=(const Glyph& c)
+Glyph::operator=(const Glyph& g)
 {
-    if (this == &c) /* Make sure it's not self-assignment. */
+#if 0
+    cerr << "Entering `Glyph::operator='." << endl;
+#endif 
+
+    if (this == &g) /* Make sure it's not self-assignment. */
+    {
+       cerr << "Self-assignment.  Returning `*this'." << endl;
+        
        return *this;
+    }
+
+#if 0 
+    cerr << "g.path_vector.v.size() == " << g.path_vector.v.size() << endl;
+#endif 
+
+
+    for (vector<Path*>::iterator iter = path_vector.v.begin();
+         iter != path_vector.v.end();
+         ++iter)
+    {
+       delete *iter;
+       *iter = 0;
+    }
+
+    path_vector.v.clear();
+    
+    for (vector<Path*>::const_iterator iter = g.path_vector.v.begin();
+         iter != g.path_vector.v.end();
+         ++iter)
+    {
+       path_vector.v.push_back(create_new<Path>(*iter));
+    }
+
+#if 0 
+    cerr << "path_vector.v.size() == " << path_vector.v.size() << endl;
+    cerr << "Exiting `Glyph::operator='." << endl;
+#endif 
 
     return *this;
 
@@ -625,20 +686,46 @@ Glyph::show(string text, char coords,
        text = "Glyph:";
 
     cerr << text << endl
-         << "Size of path_vector:  " << path_vector.size()
+         << "Size of path_vector.v:  " << path_vector.v.size()
          << endl;
 
-    for (Pointer_Vector<Path>e::const_iterator iter = path_vector.begin();
-         iter != path_vector.end();
+    for (vector<Path*>::const_iterator iter = path_vector.v.begin();
+         iter != path_vector.v.end();
          ++iter)
     {
-        (**iter)->show();
+        (*iter)->show();
     }
 
 
     return;
 
 } /* End of |Glyph::show| definition.  */
+
+@q * (1) Plus assign.  @>
+@ Plus assign.
+\initials{LDF 2022.01.16.}
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this function.
+\ENDLOG 
+
+@q ** (2) Declaration.@> 
+
+@<Declare |Glyph| functions@>=
+void
+operator+=(const Path *p);
+
+@q ** (2) Definition.@> 
+
+@
+@<Define |Glyph| functions@>=
+void
+Glyph::operator+=(const Path *p)
+{
+   path_vector.v.push_back(create_new<Path>(p));
+   return;
+}
 
 @q * (1) Glyph_Set_Option_Struct.@> 
 @* {\bf Glyph\_Set\_Option\_Struct}.

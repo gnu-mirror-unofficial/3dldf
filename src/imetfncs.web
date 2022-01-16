@@ -4326,7 +4326,7 @@ Id_Map_Entry_Type::show(string s,
   using namespace Scan_Parse;
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif
  
    Scanner_Node scanner_node;
@@ -4357,7 +4357,7 @@ Id_Map_Entry_Type::show(string s,
 @<Define |Id_Map_Entry_Type| functions@>=
 
   if (scanner_node != static_cast<Scanner_Node>(0)) 
-    {
+  {
    
 @q ****** (6) Using multithreading.@>   
 
@@ -4393,7 +4393,7 @@ Id_Map_Entry_Type::show(string s,
         } /* |else| (|scanner_node != static_cast<Scanner_Node>(0)|, 
                      but not using multithreading.)  */
 
-    } /* |if (scanner_node)|  */
+  } /* |if (scanner_node)|  */
 
 @q ***** (5) |scanner_node == static_cast<Scanner_Node>(0)|.  Assume we're using multithreading.@>
 @ |scanner_node == static_cast<Scanner_Node>(0)|.  Assume we're using multithreading.
@@ -4770,11 +4770,10 @@ cerr_strm << ((*static_cast<bool*>(get_object()))
           static_cast<Path*>(object)->show("path:");
         }
 
-
       else if (type == GLYPH)
-        {
+      {
           static_cast<Glyph*>(object)->show("glyph:");
-        }
+      }
 
 @q ***** (5)@>
 

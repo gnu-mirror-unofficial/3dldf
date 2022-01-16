@@ -294,6 +294,20 @@ Added this rule.
    @=$$@> = @=$1@>;
 }; 
 
+@q **** (4) assignment --> glyph_assignment.@>
+@*3 \§assignment> $\longrightarrow$ \§glyph assignment>.
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+@=assignment: glyph_assignment@>
+{
+   @=$$@> = @=$1@>;
+}; 
+
 @q **** (4) assignment --> ellipse_assignment.@>
 @*3 \§assignment> $\longrightarrow$ \§ellipse assignment>.
 
@@ -3354,6 +3368,47 @@ Got this rule to work.
 
 };
 
+@q **** (4) glyph_assignment.  @>
+@*3 \§glyph assignment>. 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> glyph_assignment@>@/
+
+@q ***** (5) glyph_assignment --> glyph_variable += path_expression.@>   
+
+@*4 \§glyph assignment> $\longrightarrow$ \§glyph variable> 
+\.{ASSIGN} \§path expression>. 
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+ 
+@=glyph_assignment: glyph_variable PLUS_ASSIGN path_expression@>
+{
+   if (@=$1@> == 0)
+      cerr << "`glyph_variable' is NULL." << endl;
+   else 
+      cerr << "`glyph_variable' is non-NULL." << endl;
+
+   Glyph *g = create_new<Glyph>(0);
+
+   *g += static_cast<Path*>(@=$3@>);
+
+   g->show("In parser rule:  g:");    
+
+   Int_Void_Ptr ivp = assign_simple<Glyph>(static_cast<Scanner_Node>(parameter),
+                                           "Glyph",
+                                           @=$1@>,
+                                           g);
+
+  @=$$@> = ivp.v;
+
+};
+
+
 @q **** (4) ellipse_assignment.  @>
 @*2 \§ellipse assignment>. 
 
@@ -3404,7 +3459,7 @@ Removed all debugging code.
 };
 
 @q ***** (5) ellipse_assignment --> ellipse_variable @>
-@q ***** (5) := circle_expression.                  @>   
+@q ***** (5) := circle_expression.                   @>   
 
 @*3 \§ellipse assignment> $\longrightarrow$ \§ellipse variable> 
 \.{ASSIGN} \§circle expression>. 
