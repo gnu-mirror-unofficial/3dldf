@@ -2130,7 +2130,7 @@ Added this rule.
 
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> path_join@>
-@=%type <int_value> path_modifier@>
+@=%type <pointer_value> path_modifier@>
 
 @q ***** (5) path_join --> basic_path_join.@>
 @*4 \§path join> $\longrightarrow$ \§basic path join>.
@@ -2256,8 +2256,7 @@ Added this rule.
     {
       cerr_strm << thread_name 
                 << "*** Parser: `path_join: path_modifier basic_path_join':"
-                << endl 
-                << "$1 (`path_modifier') == " << @=$1@> << " (" << name_map[$1] << ")" << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2265,7 +2264,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  Connector_Type *c = create_new<Connector_Type>(0);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$1@>);
   c->connector_string = @=$2@>;
 
   @=$$@> =  static_cast<void*>(c); 
@@ -2285,8 +2284,7 @@ Added this rule.
     {
       cerr_strm << thread_name 
                 << "*** Parser: `path_join: basic_path_join path_modifier':"
-                << endl 
-                << "$2 (`path_modifier') == " << @=$2@> << " (" << name_map[$2] << ")" << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2294,7 +2292,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  Connector_Type *c = create_new<Connector_Type>(0);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
   c->connector_string = @=$1@>;
 
   @=$$@> =  static_cast<void*>(c); 
@@ -2313,9 +2311,7 @@ Added this rule.
     {
       cerr_strm << thread_name 
                 << "*** Parser: `path_join: path_modifier basic_path_join path_modifier':"
-                << endl 
-                << "$1 (`path_modifier' 1) == " << @=$1@> << " (" << name_map[$1] << ")" << endl
-                << "$3 (`path_modifier' 2) == " << @=$3@> << " (" << name_map[$3] << ")" << endl;
+                << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -2323,8 +2319,38 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  Connector_Type *c = create_new<Connector_Type>(0);
+  Connector_Type *c = static_cast<Connector_Type*>(@=$1@>);
+  Connector_Type *d = static_cast<Connector_Type*>(@=$3@>);
   c->connector_string = @=$2@>;
+  c->type1 = d->type0;
+  c->r1    = d->r0;
+
+  if (c->pt1 == 0)
+     c->pt1 = create_new<Point>(0);
+
+  if (d->pt0 != 0)
+     *(c->pt1) = *(d->pt0);
+
+  delete d;
+  d = 0;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_join: path_modifier basic_path_join path_modifier':"
+                << endl; 
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      c->show("*c:");
+
+
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
 
   @=$$@> =  static_cast<void*>(c); 
 
@@ -2339,7 +2365,12 @@ Added this rule.
 
    cerr << "path_modifier:  TENSION numeric_expression" << endl;
 
-   @=$$@> = Connector_Type::TENSION_TYPE;
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::TENSION_TYPE;
+   c->r0 = @=$2@>;
+
+   @=$$@> =  static_cast<void*>(c);
+
 
 };
 
@@ -2351,7 +2382,12 @@ Added this rule.
 
    cerr << "path_modifier:  LEFT_BRACE point_expression RIGHT_BRACE" << endl;
 
-   @=$$@> = Connector_Type::DIR_TYPE;
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::DIR_TYPE;
+   c->pt0 = static_cast<Point*>(@=$2@>);
+
+   @=$$@> =  static_cast<void*>(c);
+
  
 };
 
@@ -2363,7 +2399,11 @@ Added this rule.
 
    cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
 
-   @=$$@> = Connector_Type::CURL_TYPE;
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::CURL_TYPE;
+   c->r0 = @=$3@>;
+
+   @=$$@> =  static_cast<void*>(c);
  
 };
 
@@ -2375,7 +2415,11 @@ Added this rule.
 
    cerr << "path_modifier:  LEFT_BRACE DIR numeric_expression RIGHT_BRACE" << endl;
 
-   @=$$@> = Connector_Type::CURL_TYPE;
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::DIR_TYPE;
+   c->r0 = @=$3@>;
+
+   @=$$@> =  static_cast<void*>(c);
  
 };
 
