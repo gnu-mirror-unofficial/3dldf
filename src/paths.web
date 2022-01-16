@@ -345,7 +345,7 @@ Path::operator=(const Path& p)
 @q *** (3) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -823,7 +823,7 @@ Path(const Point& p0, const Point& p1);
 @<Define |Path| functions@>=
 Path::Path(const Point& p0, const Point& p1)
 {
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Path() (line version).\n";
 
@@ -928,7 +928,7 @@ set(const Point& p0, const Point& p1);
 void
 Path::set(const Point& p0, const Point& p1)
 {
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
 
   if (DEBUG)
     cerr << "Entering `Path::set' (two `Point' arguments).\n";
@@ -1074,7 +1074,7 @@ Path(string connector, bool@,@, cycle ...);
 @<Define |Path| functions@>=
 Path::Path(string connector, bool@,@, cycle ... )
 {
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
 
   if (DEBUG)
     cerr << "Entering Path() (connector, cycle, ...).\n";
@@ -1185,7 +1185,7 @@ Path::set(string connector, bool cycle ... )
 {
 @q ***** (5) @>
 
-    bool DEBUG = true; /* |false| */
+    bool DEBUG = false; /* |true| */
 
 #if DEBUG_COMPILE
     if (DEBUG)
@@ -1343,7 +1343,7 @@ Path::Path(Point* first_point_ptr ... )
 {
 @q ***** (5) @>
 
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
   if (DEBUG)
     cerr << "Entering Path() (Point* ...).\n";
 
@@ -1472,7 +1472,7 @@ Path::set(Point* first_point_ptr ... )
 {
 @q ***** (5) @>
 
-    bool DEBUG = true; /* |false| */
+    bool DEBUG = false; /* |true| */
 
     line_switch = false;
     cycle_switch = false;
@@ -2402,7 +2402,7 @@ set_connectors(const string s = "..");
 void
 Path::set_connectors(const string s)
 {
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
  
   for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
        iter != connector_type_vector.end();
@@ -3579,7 +3579,7 @@ Path::reflect_in(const Plane& p,
                  const Scanner_Node scanner_node) const
 {
 
-  bool DEBUG = true; /* |false| */
+  bool DEBUG = false; /* |true| */
 
   using namespace Scan_Parse;
 
@@ -3861,7 +3861,7 @@ Path::reflect_off(const Plane& p,
 
 @q **** (4) Preliminaries.@> 
 
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   using namespace Scan_Parse;
 
@@ -4408,7 +4408,7 @@ operator+=(const string s);
 void
 Path::operator+=(const string s)
 {
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    Connector_Type *c = create_new<Connector_Type>(0);
    c->type0 = Connector_Type::PLAIN_TYPE;
@@ -4421,7 +4421,8 @@ Path::operator+=(const string s)
 
    connector_type_vector.push_back(c);
 
-   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+   if (DEBUG)
+      cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
 
    return;
 
@@ -4449,7 +4450,7 @@ void
 Path::operator+=(const Connector_Type &c)
 {
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    if (DEBUG)
       cerr << "In `Path::operator+=(const Connecter_Type&)':" << endl 
@@ -4492,7 +4493,7 @@ operator+=(Connector_Type *c);
 void
 Path::operator+=(Connector_Type *c)
 {
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    if (DEBUG)
       cerr << "In `Path::operator+=(const Connecter_Type*)':" << endl 
@@ -4655,7 +4656,7 @@ void
 Path::operator&=(const Path& pa)
 {
 
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
 
   if (is_cycle() || pa.is_cycle())  /* Return  if either one of the
                                        |Paths| is a cycle.  */ 
@@ -4826,7 +4827,7 @@ Path
 Path::append(const Path& p, string connector, bool assign)
 {
 
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
 
   Path r(*this);
 
@@ -8576,7 +8577,7 @@ Path::output(Scanner_Node scanner_node)
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9113,7 +9114,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9833,43 +9834,44 @@ Path::show(string text, char coords,
    cerr << "points.size() == " 
         << points.size() << endl;  
 
+
    cerr << "connector_type_vector.size() == " 
         << connector_type_vector.size() << endl;  
 
-     int loop_ctr = 0;
+   int loop_ctr = 0;
 
-     string connector_string;
+   string connector_string;
 
-     for(vector <Point*>::const_iterator points_iter = points.begin();
-         points_iter != points.end();
-         ++points_iter)
+   for(vector <Point*>::const_iterator points_iter = points.begin();
+       points_iter != points.end();
+       ++points_iter)
+   {
+
+     if (points_iter != points.begin())
        {
-
-         if (points_iter != points.begin())
-           {
-             cerr << " " << connector_string << " ";
-           }
+         cerr << " " << connector_string << " ";
+       }
 
 
-         if (connector_type_iter != connector_type_vector.end())
-         {
-             connector_string = (*connector_type_iter)->connector_string;
-             ++connector_type_iter;
-         }
+     if (connector_type_iter != connector_type_vector.end())
+     {
+         connector_string = (*connector_type_iter)->connector_string;
+         ++connector_type_iter;
+     }
 
-         if (loop_ctr == 2) /* Break each line after 2 |Points|.  */
-           {
-             cerr << endl;
-             loop_ctr = 0;
-           }
-         ++loop_ctr;     
-         
-         v = (**points_iter).get_all_coords(coords, do_persp, do_apply,
-                                            f, proj, factor);
-         
-         cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
+     if (loop_ctr == 2) /* Break each line after 2 |Points|.  */
+       {
+         cerr << endl;
+         loop_ctr = 0;
+       }
+     ++loop_ctr;     
+     
+     v = (**points_iter).get_all_coords(coords, do_persp, do_apply,
+                                        f, proj, factor);
+     
+     cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
 
-       }  /* |for|  */
+   }  /* |for|  */
 
    if (cycle_switch)
    {
@@ -14295,7 +14297,7 @@ operator<<(ostream& o, Connector_Type& c)
 {
 @q ***** (5) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
 @q ***** (5) Controls.  @>
 
@@ -14333,11 +14335,9 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
-   /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
-
-   else if (c.type0 == Connector_Type::CURL_TYPE)
+   else if (c.type0 == Connector_Type::CURL_TYPE && c.r0 >= 0 && c.r0 <= 4095.99998)
    {
-
+      o << "{curl " << c.r0 << "} " << c.connector_string;
    }
 
 
@@ -14426,13 +14426,12 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
-   else
+   else if (!c.connector_string.empty())
       o << c.connector_string;
 
 @q **** (4) type1.  @>
 @ type1.  
-
-@<Define non-member non-template functions for |Connector_Type|@>=
+\initials{LDF 2022.01.16.}
 
 @q ***** (5) Curl.  @>
 
@@ -14441,9 +14440,10 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
-   if (c.type1 == Connector_Type::CURL_TYPE)
+   if (c.type1 == Connector_Type::CURL_TYPE && c.r1 >= 0 && c.r1 <= 4095.99998)
    {
-
+      real xxx;
+      o << " {curl " << c.r1 << "}";
    }
 
 @q ***** (5) Direction.  @>

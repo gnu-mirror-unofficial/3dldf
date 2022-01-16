@@ -2439,6 +2439,15 @@ Added this rule.
   Connector_Type *c = static_cast<Connector_Type*>(@=$2@>);
   c->connector_string = @=$1@>;
 
+  c->type1 = c->type0;
+  c->type0 = Connector_Type::CT_NULL_TYPE;
+
+  c->r1 = c->r0;
+  c->r0 = 0;
+
+  c->pt1 = c->pt0;
+  c->pt0 = 0;
+
   @=$$@> =  static_cast<void*>(c); 
   
 };
