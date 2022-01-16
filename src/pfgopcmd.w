@@ -187,6 +187,24 @@ Added this rule.
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
 @=RIGHT_PARENTHESIS character_comment_optional@>@/
 {
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
+                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                << "RIGHT_PARENTHESIS character_comment_optional'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   /* !!START HERE:  LDF 2022.01.16.  */ 
 
    string* s = static_cast<string*>(@=$11@>);
 
