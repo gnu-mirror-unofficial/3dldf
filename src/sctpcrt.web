@@ -5021,6 +5021,33 @@ Added this section.
 
 
 
+@q ****** (6) |infinity|.@> 
+@ |infinity|.
+\initials{LDF 2022.01.16.}
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this section.
+\ENDLOG
+
+@<Define |Scanner_Type::create|@>=
+
+       r = new real;
+
+       *r = 4095.95;  /* 4095.99998 is the value in the METAFONTbook.  If I use it here, 4096 is shown 
+                         when I show it with the `show' command.  
+                         LDF 2022.01.16.  */
+
+       v = static_cast<void*>(r); 
+
+       scanner_node->add_entry("infinity",
+                               NUMERIC,
+                               regular,
+                               is_constant,
+                               not_array,
+                               Id_Map_Entry_Type::KNOWN,
+                               v);
+
 @q ****** (6).@> 
 @
 @<Define |Scanner_Type::create|@>=
