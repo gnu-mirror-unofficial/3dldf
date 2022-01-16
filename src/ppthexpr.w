@@ -2243,6 +2243,97 @@ Added this rule.
  
 };
 
+@q ***** (5) path_join --> PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR.@>
+@*4 
+
+@<Define rules@>=
+@=path_join: PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_join: PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Connector_Type *c = create_new<Connector_Type>(0);
+  c->type0 = Connector_Type::TENSION_TYPE;
+  c->type1 = Connector_Type::CT_NULL_TYPE;
+  c->r0 = @=$3@>;
+  c->r1 = @=$4@>;
+
+  @=$$@> =  static_cast<void*>(c); 
+ 
+};
+
+@q **** (4) tension_and_optional.  @>
+@ \§tension and optional>.
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <real_value> tension_and_optional@>@/
+
+@q **** (4) @>
+@
+@<Define rules@>=
+@=tension_and_optional: /* Empty  */@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `tension_and_optional: EMPTY'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = 0;
+
+};
+
+
+@q **** (4) @>
+@
+@<Define rules@>=
+@=tension_and_optional: AND numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `tension_and_optional: AND numeric_expression'."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    @=$$@> = @=$2@>;
+
+};
+
+
 @
 @<Define rules@>=
 @=path_join: path_modifier basic_path_join@>@/
@@ -2363,24 +2454,7 @@ getchar();
 
 };
 
-@
-@<Define rules@>=
-@=path_modifier: TENSION numeric_expression@>@/
-{
-
-   @<Common declarations for rules@>@;
-
-   cerr << "path_modifier:  TENSION numeric_expression" << endl;
-
-   Connector_Type *c = create_new<Connector_Type>(0);
-   c->type0 = Connector_Type::TENSION_TYPE;
-   c->r0 = @=$2@>;
-
-   @=$$@> =  static_cast<void*>(c);
-
-
-};
-
+@q **** (4) @>
 @
 @<Define rules@>=
 @=path_modifier: LEFT_BRACE point_expression RIGHT_BRACE@>@/
@@ -2685,7 +2759,7 @@ Removed debugging code.
 
 };
 
-@q !!START HERE:  LDF 2021.12.24.  Add rules for tension, controls, curl and dir.  @>
+@q !!START HERE:  LDF 2021.12.24.  Add rules for curl and dir.  @>
 
 @q ***** (5) path_element_list --> path_element_list @>   
 @q ***** (5) path_join point_expression.             @>   
