@@ -14322,7 +14322,6 @@ operator<<(ostream& o, Connector_Type& c)
       o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
    }
 
-   /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
 
 @q ***** (5) Curl.  @>
 
@@ -14330,6 +14329,13 @@ operator<<(ostream& o, Connector_Type& c)
 \initials{LDF 2022.01.16.}
 
 @<Define non-member non-template functions for |Connector_Type|@>=
+
+   /* !!START HERE:  LDF 2022.01.15.  Add code for `dir', `curl', etc.  */    
+
+   else if (c.type0 == Connector_Type::CURL_TYPE)
+   {
+
+   }
 
 
 @q ***** (5) Tension.  @>
@@ -14339,6 +14345,11 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
+   else if (c.type0 == Connector_Type::TENSION_TYPE)
+   {
+
+   }
+
 @q ***** (5) Direction.  @>
 
 @ Direction.
@@ -14346,7 +14357,10 @@ operator<<(ostream& o, Connector_Type& c)
 
 @<Define non-member non-template functions for |Connector_Type|@>=
 
+   else if (c.type0 == Connector_Type::DIR_TYPE)
+   {
 
+   }
 
 
 @q ***** (5) Plain.  @>
@@ -14358,6 +14372,51 @@ operator<<(ostream& o, Connector_Type& c)
 
    else
       o << c.connector_string;
+
+@q **** (4) type1.  @>
+@ type1.  
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+@q ***** (5) Curl.  @>
+
+@ Curl.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+   if (c.type1 == Connector_Type::CURL_TYPE)
+   {
+
+   }
+
+
+@q ***** (5) Tension.  @>
+
+@ Tension.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+   else if (c.type1 == Connector_Type::TENSION_TYPE)
+   {
+
+   }
+
+@q ***** (5) Direction.  @>
+
+@ Direction.
+\initials{LDF 2022.01.16.}
+
+@<Define non-member non-template functions for |Connector_Type|@>=
+
+   else if (c.type1 == Connector_Type::DIR_TYPE)
+   {
+
+   }
+
+
+@q **** (4) @>
 
    return o;
 
