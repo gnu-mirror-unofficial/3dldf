@@ -219,9 +219,32 @@ Added this rule.
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+  
+   string s;
+
+   /* !!START HERE:  LDF 2022.01.16.  Add arguments to rule (character, font).  Use pathpart and item below.  */ 
+
+   s =  "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp ";
+   s += "'nonstopmode;tracingonline :=1;fontmapline \"eufb10 EUFB10 <eufb10.pfb\";";
+   s += "picture v; v = glyph 65 of \"eufb10\";show v;end;'";
+
+   cerr << "s == " << s << endl;
+
+   FILE *fp = popen(s.c_str(), "r");
+
+   char buffer[8192];
+   memset(buffer, '\0', 8192);
+  
+   errno = 0;
+   status = fread(buffer, 1, 8191, fp);
+
+   cerr << "buffer == " << buffer << endl;
+
+
+   pclose(fp);
+   fp = 0;
 
 };
-
 
 @q * (1) glyph_secondary.  @>
 @* \§glyph secondary>.

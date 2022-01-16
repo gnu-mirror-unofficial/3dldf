@@ -581,6 +581,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 @=%token <pointer_value> HYPERBOLOID@>@/
 
 @=%token <pointer_value> GLYPH@>@/
+@=%token <pointer_value> GET_GLYPH@>@/
 
 @=%token <pointer_value> STAR@>@/
 @=%token <int_value>     STARS@>@/

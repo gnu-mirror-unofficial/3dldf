@@ -3408,6 +3408,42 @@ Added this rule.
 
 };
 
+@q ***** (5) glyph_assignment --> glyph_variable ASSIGN glyph_expression.@>   
+
+@*4 \§glyph assignment> $\longrightarrow$ \§glyph variable> 
+\.{ASSIGN} \§glyph expression>. 
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+ 
+@=glyph_assignment: glyph_variable ASSIGN glyph_expression@>
+{
+#if 0
+   if (@=$1@> == 0)
+      cerr << "`glyph_variable' is NULL." << endl;
+   else 
+      cerr << "`glyph_variable' is non-NULL." << endl;
+
+   Glyph *g = create_new<Glyph>(0);
+
+   *g += static_cast<Path*>(@=$3@>);
+
+   g->show("In parser rule:  g:");    
+
+   Int_Void_Ptr ivp = assign_simple<Glyph>(static_cast<Scanner_Node>(parameter),
+                                           "Glyph",
+                                           @=$1@>,
+                                           g);
+
+
+  @=$$@> = ivp.v;
+#endif 
+
+};
 
 @q **** (4) ellipse_assignment.  @>
 @*2 \§ellipse assignment>. 

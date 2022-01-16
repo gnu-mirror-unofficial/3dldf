@@ -1,27 +1,19 @@
-@q ***** (5) path_join --> PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR.@>
-@*4 
+@q ***** (5) glyph_primary --> GET_GLYPH string_expression. @>
+
+
+@*4 \§glyph primary> $\longrightarrow$ \.{GET\_GLYPH} \§string expression>.
+\initials{LDF 2022.01.16.}
+
+\LOG
+\initials{LDF 2022.01.16.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
 
 @<Define rules@>=
-@=path_join: PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR@>@/
-{
+@=glyph_primary: GET_GLYPH string_expression@>@/
+{ 
+   
 
-  @<Common declarations for rules@>@; 
-
-#if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
-  if (DEBUG)
-    {
-      cerr_strm << thread_name 
-                << "*** Parser: `path_join: PERIOD_PAIR TENSION numeric_expression tension_and_optional PERIOD_PAIR'."
-                << endl;
-
-      log_message(cerr_strm);
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-    }
-#endif /* |DEBUG_COMPILE|  */@;
-
-  @=$$@> =  static_cast<void*>(0); 
- 
 };
-
