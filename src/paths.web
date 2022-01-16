@@ -14356,8 +14356,40 @@ operator<<(ostream& o, Connector_Type& c)
 
    else if (c.type0 == Connector_Type::TENSION_TYPE)
    {
+      if (c.r0 < .75 && c.r1 >= .75)
+      {
+          c.r0 = c.r1; 
+          c.atleast_flag0 = c.atleast_flag1; 
 
-   }
+          c.r1 = 0;
+          c.atleast_flag1 = false;
+      }
+      
+      if (c.r0 < .75 && c.r1 < .75)
+      {
+         o << " .. ";
+      }
+      else if (c.r0 >= .75)
+      {
+         o << " .. tension ";
+         if (c.atleast_flag0)
+            o << "atleast ";
+         o << c.r0;
+      }
+
+      if (c.r1 >= .75)
+      {
+         o << " and ";
+
+         if (c.atleast_flag1)
+            o << "atleast ";
+         o << c.r1;
+       }
+
+      if (c.r0 >= .75)
+         o << " .. ";
+
+   } /* |else if (c.type0 == Connector_Type::TENSION_TYPE)| */
 
 @q ***** (5) Direction.  @>
 

@@ -2493,18 +2493,28 @@ Added this rule.
 
       c->show("*c:");
 
-/* !!START HERE:  LDF 2022.01.16.  */ 
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
 
   @=$$@> =  static_cast<void*>(c); 
 
+};
+
+@
+@<Define rules@>=
+@=path_modifier: LEFT_BRACE CURL numeric_expression RIGHT_BRACE@>@/
+{
+   @<Common declarations for rules@>@; 
+
+   cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
+
+   Connector_Type *c = create_new<Connector_Type>(0);
+   c->type0 = Connector_Type::CURL_TYPE;
+   c->r0 = @=$3@>;
+
+   @=$$@> =  static_cast<void*>(c);
+ 
 };
 
 @q **** (4) @>
@@ -2522,22 +2532,6 @@ getchar();
 
    @=$$@> =  static_cast<void*>(c);
 
- 
-};
-
-@
-@<Define rules@>=
-@=path_modifier: LEFT_BRACE CURL numeric_expression RIGHT_BRACE@>@/
-{
-   @<Common declarations for rules@>@; 
-
-   cerr << "path_modifier:  LEFT_BRACE CURL numeric_expression RIGHT_BRACE" << endl;
-
-   Connector_Type *c = create_new<Connector_Type>(0);
-   c->type0 = Connector_Type::CURL_TYPE;
-   c->r0 = @=$3@>;
-
-   @=$$@> =  static_cast<void*>(c);
  
 };
 
