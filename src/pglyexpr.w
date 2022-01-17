@@ -192,7 +192,7 @@ Added this rule.
 
 };
 
-@q ***** (5) glyph_primary --> GET_GLYPH string_expression. @>
+@q ***** (5) glyph_primary --> GET_GLYPH numeric_expression FROM string_expression. @>
 
 @*4 \§glyph primary> $\longrightarrow$ \.{GET\_GLYPH} \§string expression>.
 \initials{LDF 2022.01.16.}
@@ -205,9 +205,11 @@ Added this rule.
 @q ****** (6) Definition.@> 
 
 @<Define rules@>=
-@=glyph_primary: GET_GLYPH string_expression@>@/
+@=glyph_primary: GET_GLYPH numeric_expression FROM string_expression @>@/
 { 
    @<Common declarations for rules@>@;
+
+   stringstream temp_strm;
 
 #if DEBUG_COMPILE
 
@@ -215,34 +217,20 @@ Added this rule.
 
    if (DEBUG)
    { 
-       cerr << "*** Parser: `glyph_primary: GET_GLYPH string_expression'."
-            << endl;
+       cerr << "*** Parser: `glyph_primary: GET_GLYPH numeric_expression FROM string_expression'."
+            << endl 
+            << "$2 == " << @=$2@> << endl
+            << "*static_cast<string*>($4) == " << *static_cast<string*>(@=$4@>) << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
   
-   string s;
+   Glyph *g = create_new<Glyph>(0);
 
-   /* !!START HERE:  LDF 2022.01.16.  Add arguments to rule (character, font).  Use pathpart and item below.  */ 
+   status = g->get_glyph_func(@=$2@>, static_cast<const string*>(@=$4@>), scanner_node);
 
-   s =  "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp ";
-   s += "'nonstopmode;tracingonline :=1;fontmapline \"eufb10 EUFB10 <eufb10.pfb\";";
-   s += "picture v; v = glyph 65 of \"eufb10\";show v;end;'";
+   delete static_cast<string*>(@=$4@>);
 
-   cerr << "s == " << s << endl;
-
-   FILE *fp = popen(s.c_str(), "r");
-
-   char buffer[8192];
-   memset(buffer, '\0', 8192);
-  
-   errno = 0;
-   status = fread(buffer, 1, 8191, fp);
-
-   cerr << "buffer == " << buffer << endl;
-
-
-   pclose(fp);
-   fp = 0;
+   @=$$@> = static_cast<void*>(g);    
 
 };
 

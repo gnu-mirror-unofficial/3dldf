@@ -65,6 +65,8 @@ It contains ``skeleton'' code.
 @<Include files@>=
 
 #include "loader.h++"
+#include <cstring>
+
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -726,6 +728,276 @@ Glyph::operator+=(const Path *p)
    path_vector.v.push_back(create_new<Path>(p));
    return;
 }
+
+
+@q * (1) Get |Glyph| function.  @>
+@ Get |Glyph| function.  
+\initials{LDF 2022.01.17.}
+
+\LOG
+\initials{LDF 2022.01.17.}
+Added this function.
+\ENDLOG 
+
+@q ** (2) Declaration.@> 
+
+@<Declare |Glyph| functions@>=
+int
+get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner_node = 0);
+
+@q ** (2) Definition.@> 
+@
+@<Define |Glyph| functions@>=
+int
+Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner_node)
+{
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+       cerr << "Entering `Glyph::get_glyph_func'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+
+   int status = 0;
+
+   stringstream temp_strm;   
+
+   string s0 = *s;
+   string s1 = s0;
+
+@q *** (3) @>
+@
+@<Define |Glyph| functions@>=
+
+   for (int i = 0; i < s1.size(); ++i)
+   {
+       s1[i] = toupper(s1[i]);
+   }
+ 
+   temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
+             << "'nonstopmode;tracingonline :=1;fontmapline \"" << s0
+             << " " << s1 << " <" << s0 << ".pfb\";"
+             << "picture v; v = glyph " << char_ctr << " of \"" << s0 << "\";"
+             << "for item within v: show pathpart item;endfor;end;'";
+
+
+   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+
+   FILE *fp = popen(temp_strm.str().c_str(), "r");
+
+   size_t n = 256;
+   char *buffer = (char *) malloc(n);
+   memset(buffer, '\0', n);
+
+   size_t pos;
+
+   Point p;
+   Path *q = 0;
+   char c;
+   real r;  
+   real x;  
+   real y;  
+
+@q *** (3) @>
+
+   bool skipping = true;
+
+@q *** (3) @>
+
+   while (status != -1)
+   {
+@q **** (4) @>
+      errno = 0;
+      status = getline(&buffer, &n, fp);
+
+      if (status == -1)
+      {
+         cerr << "`getline' returned `status' == " << status << endl;
+
+         if (feof(fp))
+         {
+            cerr << "Read EOF.  Finished reading from `fp'." << endl;
+            break;
+         }
+         else
+         {
+            cerr << "ERROR!  `getline' failed, returning -1." << endl
+                 << "`errno' == " << errno << " == " << strerror(errno) << endl
+                 << "Exiting function with return value 1." << endl;
+
+            pclose(fp);
+            free(buffer);
+            return 1;                
+                 
+         }
+      }  /* |if|  */      
+
+@q **** (4) @>
+@
+@<Define |Glyph| functions@>=
+
+      else  /* |status != -1| */
+      {
+@q ***** (5) @>
+         cerr << "status == " << status << endl
+              << "buffer == " << buffer << endl;
+
+         s0 = buffer;
+         pos = s0.find("Path at line");
+   
+@q ***** (5) @>
+
+         if (skipping && pos == string::npos)
+         {
+            cerr << "`skipping' is `true' and didn't find \"Path at line\"." << endl 
+                 << "Continuing." << endl;
+
+            continue;
+
+         }
+
+@q ***** (5) @>
+
+         else if (pos != string::npos)
+         {
+            cerr << "Found \"Path at line\".  Creating new `Path'." << endl;
+        
+            if (skipping)
+               skipping = false;
+ 
+            q = create_new<Path>(0);
+            continue;
+         }
+
+@q ***** (5) @>
+
+         else if (s0[0] == '(' /* ')' */ )
+         {
+            cerr << "Line begins with point." << endl;
+
+            temp_strm.str("");
+            temp_strm << s0;
+            temp_strm >> c;
+            temp_strm >> r;
+
+            cerr << "r == " << r << endl;
+
+            x = r;
+
+            temp_strm >> c;
+            temp_strm >> r;
+
+            cerr << "r == " << r << endl;
+
+            y = r;
+
+            p.set(x, y, 0);
+
+            p.show("p:");
+
+            *q += p;
+
+            q->show("*q:");
+
+            cerr << "ZZZ Enter <RETURN> to continue: ";
+            getchar(); 
+
+
+         }
+
+@q ***** (5) @>
+
+         else if (s0[1] == '.')
+         {
+            cerr << "Line begins with connector." << endl;
+
+            pos = s0.find("cycle");
+
+            if (pos != string::npos)
+            {
+                 cerr << "Read \"..cycle\".  Finished reading `Path'." << endl;
+                 q->set_cycle(true, scanner_node);
+                 path_vector.v.push_back(q);
+                 q = 0;
+
+                 cerr << "XXX Enter <RETURN> to continue: ";
+                 getchar(); 
+
+                 
+            }
+
+         }
+
+@q ***** (5) @>
+
+         else if (s0[0] == '\n')
+         { 
+            cerr << "Line begins with a newline.  Continuing." << endl;
+            continue;
+         }
+
+@q ***** (5) @>
+
+         else if (isspace(s0[0]) && isspace(s0[1]))
+         {
+            cerr << "Line begins with at least two whitespace characters.  Continuing." << endl;
+            continue;
+
+         }
+
+@q ***** (5) @>
+
+      }  /* |else| (|status != -1|) */
+@
+@<Define |Glyph| functions@>=
+
+      if (feof(fp))
+      {
+         cerr << "Read EOF.  Finished reading from `fp'." << endl;
+         break;
+      }
+
+@q **** (4) @>
+
+   }  /* |while| */
+  
+@q *** (3) @>
+
+   free(buffer);
+   buffer = 0;
+   pclose(fp);
+   fp = 0;
+
+@q *** (3) @>
+@
+@<Define |Glyph| functions@>=
+
+
+   cerr << "path_vector.v.size() == " << path_vector.v.size() << endl;
+
+
+cerr << "YYY Enter <RETURN> to continue: ";
+getchar(); 
+   
+   
+@q *** (3) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Glyph::get_glyph_func' successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |Glyph::get_glyph_func| definition  */
 
 @q * (1) Glyph_Set_Option_Struct.@> 
 @* {\bf Glyph\_Set\_Option\_Struct}.
