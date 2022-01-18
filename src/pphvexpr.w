@@ -225,6 +225,47 @@ Added this rule.
 
 };
 
+
+
+@q ** (2) path_vector_primary --> GET_PATHS FROM glyph_expression@>
+
+@*2 \§path vector primary> $\longrightarrow$ \.{GET\_PATHS} \.{FROM} \§glyph expression>.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>=
+@=path_vector_primary: GET_PATHS FROM glyph_expression@>
+{ 
+   @<Common declarations for rules@>@; 
+
+   if (DEBUG)
+   {
+      cerr_strm << thread_name 
+                << "*** Parser: `path_vector_primary: GET_PATHS FROM glyph_expression'."
+                << endl;
+     log_message(cerr_strm);
+     cerr_message(cerr_strm);
+     cerr_strm.str("");
+   }
+
+   entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
+
+   entry->show("entry:");
+   cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   @=$$@> static_cast<void*>(0);
+
+};
+
+
+
 @q * (1) path_vector secondary.@>
 
 @* \§path vector secondary>.
