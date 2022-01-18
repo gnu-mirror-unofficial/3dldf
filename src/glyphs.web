@@ -889,8 +889,12 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             {
                cerr << "Line begins with a point." << endl;
             }
+
+@q ****** (6) @>
+
             else 
             {
+@q ******* (7) @>
                 cerr << "Line begins with a connector." << endl;
 
                 pos = s0.find("cycle");
@@ -909,6 +913,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
                    temp_strm >> c;
                 }
 
+@q ******* (7) @>
+
             }  /* |else| */
 
 @q ****** (6) @>
@@ -922,6 +928,9 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             temp_strm >> y;
 
             cerr << "y == " << y << endl;
+
+            x = (x * 2.54) / 72.0;  /* Convert |bp| to |cm|  */
+            y = (y * 2.54) / 72.0;
 
             p.set(x, y, 0);
 
@@ -958,6 +967,9 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             temp_strm >> c;
             cerr << "Read c == " << c << endl;
 
+            x = (x * 2.54) / 72.0;  /* Convert |bp| to |cm|  */
+            y = (y * 2.54) / 72.0;
+
             p.set(x, y, 0);
             p.show("p:");
 
@@ -980,6 +992,9 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
             temp_strm >> y;
             cerr << "Read y == " << y << endl;            
+
+            x = (x * 2.54) / 72.0;  /* Convert |bp| to |cm|  */
+            y = (y * 2.54) / 72.0;
 
             p.set(x, y, 0);
             p.show("p:");

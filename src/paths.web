@@ -232,13 +232,13 @@ Added |valarray <real> pre_projective_extremes|.
 
 @<Define |class Path|@>=
 
-  valarray <real> world_extremes;   
-  valarray <real> pre_projective_extremes;   
-  valarray <real> projective_extremes;   
+  valarray<real> world_extremes;   
+  valarray<real> pre_projective_extremes;   
+  valarray<real> projective_extremes;   
 
-  vector <Point*> points;
+  vector<Point*> points;
 
-  vector <Connector_Type*> connector_type_vector;
+  vector<Connector_Type*> connector_type_vector;
 
  public:
 
@@ -3469,11 +3469,23 @@ operator*=(const Transform& t);
 Transform
 Path::operator*=(const Transform& t)
 {
-    for(vector<Point*>::iterator iter = points.begin();
-        iter != points.end();
-        iter++)
-      (**iter) *= t;
-    return t;
+   for(vector<Point*>::iterator iter = points.begin();
+       iter != points.end();
+       iter++)
+     (**iter) *= t;
+
+   for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
+   {
+       if ((*iter)->pt0 != 0)
+          *((*iter)->pt0) *= t;
+       if ((*iter)->pt1 != 0)
+          *((*iter)->pt1) *= t;
+   }
+
+   return t;
+
 }
 
 @q *** (3) Applying transform to points.@>
@@ -3493,6 +3505,17 @@ Path::apply_transform()
       iter != points.end();
       iter++)
     (**iter).apply_transform();
+
+   for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
+   {
+       if ((*iter)->pt0 != 0)
+          ((*iter)->pt0)->apply_transform();
+       if ((*iter)->pt1 != 0)
+          ((*iter)->pt1)->apply_transform();
+   }
+
   return;
 }
 
@@ -3534,8 +3557,31 @@ Path::project(const Focus& f,
           return false;
         }
     }
+
+   for(vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+       iter != connector_type_vector.end();
+       iter++)
+   {
+      if ((*iter)->pt0 != 0 && !(**iter).pt0->project(f, proj, factor))
+        {
+          cerr << "ERROR! In Path::project():\n"
+               << "Point::project() returned false for `Point' on connector.\n"
+               << "Returning false.\n\n";
+          return false;
+        }
+
+      if ((*iter)->pt1 != 0 && !(**iter).pt1->project(f, proj, factor))
+        {
+          cerr << "ERROR! In Path::project():\n"
+               << "Point::project() returned false for `Point' on connector.\n"
+               << "Returning false.\n\n";
+          return false;
+        }
+   }
+
   return true;
-}
+
+}  /* End of |Path::project| definition  */
 
 @q * (1) Reflection in a |Plane|.@>
 @* Reflection in a {\bf Plane}.
