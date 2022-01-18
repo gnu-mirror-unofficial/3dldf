@@ -228,6 +228,8 @@ Added this rule.
 
    status = g->get_glyph_func(@=$2@>, static_cast<const string*>(@=$4@>), scanner_node);
 
+   g->show("In parser rule: *g:");
+
    delete static_cast<string*>(@=$4@>);
 
    @=$$@> = static_cast<void*>(g);    

@@ -3422,26 +3422,28 @@ Added this rule.
  
 @=glyph_assignment: glyph_variable ASSIGN glyph_expression@>
 {
-#if 0
-   if (@=$1@> == 0)
-      cerr << "`glyph_variable' is NULL." << endl;
-   else 
-      cerr << "`glyph_variable' is non-NULL." << endl;
 
-   Glyph *g = create_new<Glyph>(0);
+   @<Common declarations for rules@>@;
 
-   *g += static_cast<Path*>(@=$3@>);
+#if DEBUG_COMPILE
 
-   g->show("In parser rule:  g:");    
+   DEBUG = true; /* |false|  */
 
-   Int_Void_Ptr ivp = assign_simple<Glyph>(static_cast<Scanner_Node>(parameter),
-                                           "Glyph",
+   if (DEBUG)
+   { 
+       cerr << "*** Parser: `glyph_assignment: glyph_variable ASSIGN glyph_expression'."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  Glyph* g = static_cast<Glyph*>(@=$3@>);
+
+  Int_Void_Ptr ivp = assign_simple<Glyph>(static_cast<Scanner_Node>(parameter),
+                                          "Glyph",
                                            @=$1@>,
                                            g);
 
-
   @=$$@> = ivp.v;
-#endif 
 
 };
 
