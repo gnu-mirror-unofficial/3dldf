@@ -106,8 +106,7 @@ Added this rule.
 };
 
 @q *** (3) command --> CLIP_TO path_expression.@> 
-@*2 \§command> $\longrightarrow$ \.{CLIP\_TO}
-\§path-like expression>.
+@*2 \§command> $\longrightarrow$ \.{CLIP\_TO} \§path expression>.
 \initials{LDF 2005.08.16.}
 
 \LOG
@@ -123,6 +122,36 @@ Removed debugging code.
 {
 
    clip_to_func(@=$2@>, parameter);
+
+   @=$$@> = static_cast<void*>(0);
+
+};
+
+@q *** (3) command --> RESOLVE path_variable TO numeric_expression.@> 
+@*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{TO} \§numeric expression>.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+\ENDLOG
+
+@<Define rules@>=
+@=command: RESOLVE path_variable TO numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+    }
+#endif /* |DEBUG_COMPILE|  */@;
 
    @=$$@> = static_cast<void*>(0);
 
