@@ -4472,8 +4472,43 @@ int
 Scan_Parse::drawing_command_glyph(Scanner_Node scanner_node,
                                   int basic_drawing_command,
                                   Glyph* g)
-
 {
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+  stringstream cerr_strm;
+
+  bool error_stop_value   = true;
+  bool warning_stop_value = true;
+  string thread_name      = "";
+
+  if (scanner_node)
+     scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                   &error_stop_value,
+                                                   &warning_stop_value);
+
+   if (DEBUG)
+   { 
+      cerr << "Entering `Scan_Parse::drawing_command_glyph'." << endl;
+      
+
+   }  
+
+@q **** (4) @>
+@
+@<Define |Scan_Parse| functions@>=
+
+@q **** (4) @>
+@
+@<Define |Scan_Parse| functions@>=
+
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Scan_Parse::drawing_command_glyph' successfully with return value 0." 
+           << endl;
+
+   }  
 
    return 0;
 
@@ -8115,6 +8150,39 @@ Added this section.
   *(static_cast<Conic_Section_Lattice*>(entry->object)) *= *t;
 
   }  /* |else if (entry->type == CONIC_SECTION_LATTICE)|  */ 
+
+
+@q ****** (6) |entry->type == GLYPH|.@> 
+@ |entry->type == GLYPH|.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+Added this section.
+\ENDLOG
+
+@<Define |Scan_Parse| functions@>=
+
+  else if (entry->type == GLYPH)
+  {
+
+#if DEBUG_COMPILE
+     if (DEBUG)
+     {
+       cerr_strm << thread_name 
+                 << "In `Scan_Parse::transformation_assignment_command_func':"
+                 << endl << "`entry->type' == `GLYPH'.";
+    
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+       
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+      
+  *(static_cast<Glyph*>(entry->object)) *= *t;
+
+  }  /* |else if (entry->type == GLYPH)|  */ 
 
 @q ****** (6) |entry->is_shape == true|.@> 
 

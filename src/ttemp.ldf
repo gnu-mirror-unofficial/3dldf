@@ -1,22 +1,69 @@
+%% ttemp.ldf
+
+verbatim_metapost  "prologues := 3; outputtemplate := \"%j%3c.eps\";";
+
 glyph g;
 glyph h;
 glyph t;
 
-string s;
-s := "a";
 
-g := get_glyph 65 from "cmssbx10";
+beginfig(0);
 
-message "In ttemp.ldf:  g:";
-show g;
 
-pause;
+  
+  draw (-10cm, -14.5cm) -- (10cm, -14.5cm) -- (10cm, 14.5cm) -- (-10cm, 14.5cm) -- cycle;
+
+  pickup pencircle scaled (1.75mm, 1.75mm, 1.75mm);
+  
+  g := get_glyph 65 from "cmssbx10";
+
+%draw g;
+
+  path_vector pv;
+
+  path p;
+  p := origin -- (1, 0);
+
+
+  transform t;
+  t := ((identity scaled (.75, .75, .75))rotated (45, 45, 0)) shifted (-9.5cm, -5cm);
+
+  g *= t;
+  
+  pv := get_paths from g;
+
+  message "size pv:";
+  show size pv;
+
+  n := size pv;
+  n -= 1;
+
+  message "n:";
+  show n;
+
+  for i = 0 upto n:
+    message "turningnumber pv" & decimal i & ":";
+    show (turningnumber pv[i]);
+
+    if (turningnumber pv[i]) < 0:
+      draw pv[i];
+    else:
+      draw pv[i];
+    fi
+  endfor;
+
+%endfig with_projection parallel_x_y;
+endfig;
+
+verbatim_metapost "end";
+
+end;
 
 %h := get_glyph 79 from "eufb10";
 
 %t := get_glyph 84 from "eufb10";
 
-end;
+
 
 
 path p;

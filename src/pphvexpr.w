@@ -242,7 +242,11 @@ Added this rule.
 @<Define rules@>=
 @=path_vector_primary: GET_PATHS FROM glyph_expression@>
 { 
+@q ******* (7) @>
+
    @<Common declarations for rules@>@; 
+
+   DEBUG = true; /* |false|  */
 
    if (DEBUG)
    {
@@ -252,19 +256,36 @@ Added this rule.
      log_message(cerr_strm);
      cerr_message(cerr_strm);
      cerr_strm.str("");
+
    }
 
-   entry = static_cast<Id_Map_Entry_Node>(@=$3@>);
+@q ******* (7) @>
 
-   entry->show("entry:");
-   cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+   Glyph *g = static_cast<Glyph*>(@=$3@>);
 
-   @=$$@> static_cast<void*>(0);
+#if 0 
+   g->show("*g:");
+#endif 
+
+   typedef Pointer_Vector<Path> PV;
+
+   PV* pv = new PV;
+
+   for (vector<Path*>::iterator iter = g->path_vector.v.begin();
+        iter != g->path_vector.v.end();
+        ++iter)
+   {
+      *pv += create_new<Path>(*iter, scanner_node);
+   }
+
+@q ******* (7) @>
+
+   delete g;
+   g = 0;
+
+   @=$$@> = static_cast<void*>(pv);
 
 };
-
-
 
 @q * (1) path_vector secondary.@>
 

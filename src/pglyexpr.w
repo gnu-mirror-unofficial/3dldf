@@ -120,8 +120,7 @@ Added this rule.
 
 };
 
-@q ***** (5) glyph_primary --> LAST @>
-@q ***** (5) glyph_vector_expression.@>
+@q ***** (5) glyph_primary --> LAST glyph_vector_expression.@>
 
 @*4 \§glyph primary> $\longrightarrow$ 
 \.{LAST} \§glyph vector expression>.

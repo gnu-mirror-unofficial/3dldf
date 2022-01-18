@@ -2890,6 +2890,46 @@ Added this rule.
   
 };
 
+
+@q ***** (5) numeric_primary --> TURNINGNUMBER path_expression@>@/
+
+@ \§numeric primary> $\longrightarrow$ \.{TURNINGNUMBER} \§path expression>.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+
+@=numeric_primary: TURNINGNUMBER path_expression@>@/
+{
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: TURNINGNUMBER path_expression.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Path *p = static_cast<Path*>(@=$2@>);
+
+    @=$$@> = p->turningnumber;
+
+    delete p;
+    p = 0; 
+
+};
+
 @q ***** (5) numeric_primary --> DIRECTIONTIME picture_primary.  @>
 
 @*4 \§numeric primary> $\longrightarrow$ 

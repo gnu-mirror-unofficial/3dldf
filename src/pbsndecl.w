@@ -582,6 +582,7 @@ Added token declarations for |SPHERE_DEVELOPMENT| and |SPHERE_DEVELOPMENT_VECTOR
 
 @=%token <pointer_value> GLYPH@>@/
 @=%token <pointer_value> GET_GLYPH@>@/
+@=%token <int_value>     TURNINGNUMBER@>@/
 
 @=%token <pointer_value> STAR@>@/
 @=%token <int_value>     STARS@>@/
@@ -2689,6 +2690,7 @@ and |DELETE_TRANSFORM|.
 @=%token <int_value> GET_CIRCLE@>@/
 @=%token <int_value> GET_ELLIPSE@>@/
 @=%token <int_value> GET_PATH@>@/
+@=%token <int_value> GET_PATHS@>@/
 @=%token <int_value> GET_RECTANGLE@>@/
 @=%token <int_value> GET_REG_POLYGON@>@/
 

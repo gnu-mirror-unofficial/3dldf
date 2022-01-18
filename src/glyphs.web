@@ -132,6 +132,7 @@ Added the protected data members of type |Point| |ref_pt|,
 
 class Glyph
 {
+   friend int yyparse(yyscan_t);
 
    protected:
 
@@ -368,6 +369,13 @@ operator*=(const Transform& t);
 Transform
 Glyph::operator*=(const Transform& t)
 {
+   for (vector<Path*>::iterator iter = path_vector.v.begin();
+        iter != path_vector.v.end();
+        ++iter)
+   {
+      **iter *= t;
+   }
+
    return t;
 }
 

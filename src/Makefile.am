@@ -1471,7 +1471,7 @@ ttemp.ps: ttemp.dvi
 ttemp.dvi: ttemp.txt ttemp.0
 	tex $<
 
-ttemp.0 ttemp.1: ttemp.mp
+ttemp000.eps: ttemp.mp
 	mpost -numbersystem "double" $<
 
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)

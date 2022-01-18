@@ -781,6 +781,20 @@ Added this rule.
   
 @=command: basic_drawing_command glyph_expression with_clause_draw_list@>
 {
+   @<Common declarations for rules@>@;
+
+   stringstream temp_strm;
+
+#if DEBUG_COMPILE
+
+   DEBUG = true; /* |false|  */
+
+   if (DEBUG)
+   { 
+       cerr << "*** Parser: `command: basic_drawing_command glyph_expression with_clause_draw_list'."
+            << endl; 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
     drawing_command_glyph(static_cast<Scanner_Node>(parameter),
                           @=$1@>,
