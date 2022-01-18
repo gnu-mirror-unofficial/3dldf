@@ -3696,7 +3696,7 @@ Added this section.
 
 @q ** (2) |drawing_command_sphere_development|.@>
 @*1 {\bf drawing\_command\_sphere\_development}.
-\initials{LDF 2004.08.17.}
+\initials{LDF 2009.11.16.}
 
 \LOG
 \initials{LDF 2009.11.16.}
@@ -4445,6 +4445,40 @@ delete ffill_color;
   return 0;
 
 } /* End of |Scan_Parse::drawing_command_sphere_development| definition.  */
+
+
+@q ** (2) |drawing_command_glyph|.@>
+@*1 {\bf drawing\_command\_sphere\_development}.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration.@>
+
+@<Declare |Scan_Parse| functions@>=
+int
+drawing_command_glyph(Scanner_Node scanner_node,
+                      int basic_drawing_command,
+                      Glyph* g);
+
+@q *** (3) Definition.@>
+@
+@<Define |Scan_Parse| functions@>=
+
+int
+Scan_Parse::drawing_command_glyph(Scanner_Node scanner_node,
+                                  int basic_drawing_command,
+                                  Glyph* g)
+
+{
+
+   return 0;
+
+} /* End of |Scan_Parse::drawing_command_glyph| definition  */
+
 
 @q ** (2) |drawing_command_path_vector|.@>
 @*1 {\bf drawing\_command\_path\_vector}.
