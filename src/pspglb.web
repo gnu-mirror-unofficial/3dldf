@@ -3874,6 +3874,9 @@ Added this section with the declaration of |Scan_Parse::normal_func|.
 
 \initials{LDF 2009.11.16.}
 Added declaration of |Scan_Parse::drawing_command_sphere_development|.
+
+\initials{LDF 2022.01.18.}
+Added declaration of |Scan_Parse::drawing_command_glyph|.
 \ENDLOG
 
 @<Declare |namespace Scan_Parse|@>=
@@ -3907,6 +3910,12 @@ int
 drawing_command_sphere_development(Scanner_Node scanner_node,
                                    int basic_drawing_command,
                                    Sphere_Development* sd);
+
+
+int
+drawing_command_glyph(Scanner_Node scanner_node,
+                      int basic_drawing_command,
+                      Glyph* sd);
 
 int
 drawdot_command(Scanner_Node scanner_node,
