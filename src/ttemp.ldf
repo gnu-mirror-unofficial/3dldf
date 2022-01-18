@@ -6,29 +6,38 @@ glyph g;
 glyph h;
 glyph t;
 
+%% * (1)
 
 beginfig(0);
 
+%% ** (2)
 
+  point p[];
+  point z[];
   
-  draw (-10cm, -14.5cm) -- (10cm, -14.5cm) -- (10cm, 14.5cm) -- (-10cm, 14.5cm) -- cycle;
+  draw ((-10cm, -14.5cm) -- (10cm, -14.5cm) -- (10cm, 14.5cm) -- (-10cm, 14.5cm) -- cycle) shifted (7cm, 0);
 
-  pickup pencircle scaled (1.75mm, 1.75mm, 1.75mm);
+  %pickup pencircle scaled (1.75mm, 1.75mm, 1.75mm);
+  pickup pencircle scaled (.5mm, .5mm, .5mm);
   
   g := get_glyph 65 from "cmssbx10";
 
-%draw g;
+  %draw g;
 
   path_vector pv;
 
-  path p;
-  p := origin -- (1, 0);
+  path q;
+  q := origin -- (1, 0);
 
 
   transform t;
-  t := ((identity scaled (.75, .75, .75))rotated (45, 45, 0)) shifted (-9.5cm, -5cm);
 
-  g *= t;
+  % t := ((identity scaled (.75, .75, .75))rotated (45, 45, 0)) shifted (-9.5cm, -5cm);
+
+  t := (identity scaled (.25, .25, .25)) shifted (-10cm, 0);
+
+  
+  %g *= t;
   
   pv := get_paths from g;
 
@@ -46,14 +55,70 @@ beginfig(0);
     show (turningnumber pv[i]);
 
     if (turningnumber pv[i]) < 0:
-      draw pv[i];
+      draw pv[i] scaled (.5, .5, .5);
     else:
-      draw pv[i];
+      draw pv[i] scaled (.5, .5, .5);
     fi
   endfor;
 
-%endfig with_projection parallel_x_y;
-endfig;
+  message "length pv0:";
+  show length pv0;
+
+%% ** (2)
+  
+  for i = 0 upto ((length pv0) - 1):
+    p[i] := get_point (i) pv0;
+    z[i] := get_point (i) (pv0 scaled (.5, .5, .5));
+  endfor;
+  
+  dotlabel.rt  ( "0",  z0);
+  dotlabel.top ( "1",  z1);
+  dotlabel.top ( "2",  z2);
+  dotlabel.lft ( "3",  z3);
+  dotlabel.lft ( "4",  z4);
+  dotlabel.llft( "5",  z5);
+  dotlabel.bot ( "6",  z6);
+  dotlabel.bot ( "7",  z7);
+  dotlabel.rt  ( "8",  z8);
+  dotlabel.lrt ( "9",  z9);
+  dotlabel.llft("10", z10);
+  dotlabel.lft ("11", z11);
+  dotlabel.bot ("12", z12);
+  dotlabel.bot ("13", z13);
+  dotlabel.lrt ("14", z14);
+  dotlabel.rt  ("15", z15);
+
+  message "length pv1:";
+  show length pv1;
+
+  for i = 0 upto ((length pv1) - 1):
+    p[20+i] := get_point (i) pv1;
+    z[20+i] := get_point (i) (pv1 scaled (.5, .5, .5));
+  endfor;
+  
+  dotlabel.lft("20", z20);
+  dotlabel.lft("21", z21);
+  dotlabel.rt ("22", z22);
+  dotlabel.rt ("23", z23);
+  dotlabel.rt ("24", z24);
+  dotlabel.lft("25", z25);
+
+  numeric a;
+  a := ((ypart p2) - (ypart p6));
+
+  message "a in cm:";
+  show a;
+  
+  a /= bp;
+  
+  message "a in bp:";
+  show a;
+  
+%% ** (2)
+  
+  
+endfig with_projection parallel_x_y;
+%endfig;
 
 verbatim_metapost "end";
 
@@ -66,11 +131,11 @@ end;
 
 
 
-path p;
+path q;
 
-p := origin .. (1, 1);
+q := origin .. (1, 1);
 
-g += p;
+g += q;
 
 show g;
 
