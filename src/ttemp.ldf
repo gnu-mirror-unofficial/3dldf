@@ -70,6 +70,8 @@ beginfig(0);
     p[i] := get_point (i) pv0;
     z[i] := get_point (i) (pv0 scaled (.5, .5, .5));
   endfor;
+
+  dotlabel.top("origin", origin);
   
   dotlabel.rt  ( "0",  z0);
   dotlabel.top ( "1",  z1);
@@ -113,6 +115,8 @@ beginfig(0);
   
   message "a in bp:";
   show a;
+
+  resolve pv0 to 100;
   
 %% ** (2)
   

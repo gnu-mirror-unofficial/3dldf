@@ -14043,6 +14043,76 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 }  /* End of |Path::get_direction| definition  */
 
 
+@q ** (2) Resolve.  @>
+@ Resolve.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+Added this function.
+\ENDLOG 
+
+@q *** (3) Declaration @>
+
+@<Declare |Path| functions@>=
+virtual
+int
+resolve(int res_val, Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition  @>
+@
+@<Define |Path| functions@>=
+int
+Path::resolve(int res_val, Scanner_Node scanner_node)
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+   {
+      cerr << "Entering `Path::resolve'." << endl;
+   }
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   if (!is_planar())
+   {
+       cerr << "ERROR!  `Path' is not planar.  Can't resolve it." << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+
+   }
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   Point normal = get_normal();
+
+   normal.show("normal before shift:");
+
+   normal.shift(*points[0]);
+
+   normal.show("normal after shift:");
+
+   /* !!START HERE:  LDF 2022.01.18.  Align with axis.  */ 
+
+   if (DEBUG)
+   {
+      cerr << "Exiting `Path::resolve' successfully with return value 0." 
+           << endl;
+   }
+
+
+   return 0;
+
+} /* End |Path::resolve| */
+
 @q * (1) class |Connector_Type| declaration. @>
 @* class |Connector_Type| declaration.
 \initials{LDF 2021.12.24.}
