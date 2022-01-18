@@ -783,7 +783,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
              << "'nonstopmode;tracingonline :=1;fontmapline \"" << s0
              << " " << s1 << " <" << s0 << ".pfb\";"
              << "picture v; v = glyph " << char_ctr << " of \"" << s0 << "\";"
-             << "for item within v: show pathpart item;endfor;end;'";
+             << "for item within v: show pathpart item;message \"turningnumber \" "
+             << "& decimal (turningnumber (pathpart item));endfor;end;'";
 
 
    cerr << "temp_strm.str() == " << temp_strm.str() << endl;
@@ -875,6 +876,31 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             q = create_new<Path>(0);
             continue;
          }
+@q ***** (5) @>
+
+         else if ((pos = s0.find("turningnumber")) != string::npos)
+         {
+             if (path_vector.v.back() == 0)
+             {
+                cerr << "`path_vector.v.back()' == 0.  This shouldn't happen.  Continuing." << endl;
+                continue;
+             }
+             else 
+             {
+                 temp_strm.str("");
+                 temp_strm << s0;
+                 temp_strm >> s1;
+                 temp_strm >> r;
+ 
+                 cerr << "`r' (turning number) == " << r << endl;
+
+                 path_vector.v.back()->turningnumber = r;
+
+                 cerr << "path_vector.v.back()->turningnumber == " << path_vector.v.back()->turningnumber << endl;
+                 cerr << "XXX Enter <RETURN> to continue: ";
+                 getchar(); 
+             }
+          }
 
 @q ***** (5) @>
 
