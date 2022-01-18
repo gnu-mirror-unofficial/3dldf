@@ -763,6 +763,33 @@ Added this rule.
 
 };
 
+@q *** (3) drawing_command --> basic_drawing_command             @>
+@q *** (3) glyph_expression with_clause_draw_list.  @>
+
+@*2 \§command> $\longrightarrow$ \§basic drawing command> 
+\§sphere development expression> \§with clause list>.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+Added this rule.
+\ENDLOG 
+
+@q ***** (5) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: basic_drawing_command glyph_expression with_clause_draw_list@>
+{
+
+    drawing_command_glyph(static_cast<Scanner_Node>(parameter),
+                          @=$1@>,
+                          static_cast<Glyph*>(@=$2@>));
+
+    @=$$@> = static_cast<void*>(0);
+
+};
+
 @q ** (2) command --> DRAW_LATTICE conic_section_lattice_expression @> 
 @q ** (2) COMMA numeric_expression                                  @> 
 @q ** (2) with_conic_section_lattice_option_list                    @>
