@@ -753,8 +753,10 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 {
 @q *** (3) @>
 
+   bool DEBUG = false; /* |true| */ 
+
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
+
    if (DEBUG)
    { 
        cerr << "Entering `Glyph::get_glyph_func'." << endl;
@@ -787,7 +789,12 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
              << "& decimal (turningnumber (pathpart item));endfor;end;'";
 
 
-   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    FILE *fp = popen(temp_strm.str().c_str(), "r");
 
@@ -820,16 +827,18 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
       if (status == -1)
       {
-         cerr << "`getline' returned `status' == " << status << endl;
+         if (DEBUG)
+            cerr << "`getline' returned `status' == " << status << endl;
 
          if (feof(fp))
          {
-            cerr << "Read EOF.  Finished reading from `fp'." << endl;
+            if (DEBUG)
+               cerr << "Read EOF.  Finished reading from `fp'." << endl;
             break;
          }
          else
          {
-            cerr << "ERROR!  `getline' failed, returning -1." << endl
+            cerr << "ERROR!  In `Glyph::get_glyph':  `getline' failed, returning -1." << endl
                  << "`errno' == " << errno << " == " << strerror(errno) << endl
                  << "Exiting function with return value 1." << endl;
 
@@ -847,8 +856,9 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
       else  /* |status != -1| */
       {
 @q ***** (5) @>
-         cerr << "status == " << status << endl
-              << "buffer == " << buffer << endl;
+         if (DEBUG)
+            cerr << "status == " << status << endl
+                 << "buffer == " << buffer << endl;
 
          s0 = buffer;
          pos = s0.find("Path at line");
@@ -857,8 +867,9 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
          if (skipping && pos == string::npos)
          {
-            cerr << "`skipping' is `true' and didn't find \"Path at line\"." << endl 
-                 << "Continuing." << endl;
+            if (DEBUG)
+               cerr << "`skipping' is `true' and didn't find \"Path at line\"." << endl 
+                    << "Continuing." << endl;
 
             continue;
 
@@ -868,7 +879,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
          else if (pos != string::npos)
          {
-            cerr << "Found \"Path at line\".  Creating new `Path'." << endl;
+            if (DEBUG)
+               cerr << "Found \"Path at line\".  Creating new `Path'." << endl;
         
             if (skipping)
                skipping = false;
@@ -882,7 +894,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
          {
              if (path_vector.v.back() == 0)
              {
-                cerr << "`path_vector.v.back()' == 0.  This shouldn't happen.  Continuing." << endl;
+                if (DEBUG)
+                   cerr << "`path_vector.v.back()' == 0.  This shouldn't happen.  Continuing." << endl;
                 continue;
              }
              else 
@@ -892,13 +905,14 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
                  temp_strm >> s1;
                  temp_strm >> r;
  
-                 cerr << "`r' (turning number) == " << r << endl;
+                 if (DEBUG)
+                    cerr << "`r' (turning number) == " << r << endl;
 
                  path_vector.v.back()->turningnumber = r;
 
-                 cerr << "path_vector.v.back()->turningnumber == " << path_vector.v.back()->turningnumber << endl;
-                 cerr << "XXX Enter <RETURN> to continue: ";
-                 getchar(); 
+                 if (DEBUG)
+                    cerr << "path_vector.v.back()->turningnumber == " << path_vector.v.back()->turningnumber << endl;
+
              }
           }
 
@@ -913,7 +927,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
             if (s0[0] == 40)
             {
-               cerr << "Line begins with a point." << endl;
+               if (DEBUG)
+                  cerr << "Line begins with a point." << endl;
             }
 
 @q ****** (6) @>
@@ -921,13 +936,15 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             else 
             {
 @q ******* (7) @>
-                cerr << "Line begins with a connector." << endl;
+                if (DEBUG)
+                   cerr << "Line begins with a connector." << endl;
 
                 pos = s0.find("cycle");
 
                 if (pos != string::npos)
                 {
-                    cerr << "Read \"..cycle\".  Finished reading `Path'." << endl;
+                    if (DEBUG)
+                       cerr << "Read \"..cycle\".  Finished reading `Path'." << endl;
                     q->set_cycle(true, scanner_node);
                     path_vector.v.push_back(q);
                     q = 0;
@@ -948,56 +965,73 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             temp_strm >> c;
             temp_strm >> x;
 
-            cerr << "x == " << x << endl;
+
+            if (DEBUG)
+               cerr << "x == " << x << endl;
 
             temp_strm >> c;
             temp_strm >> y;
 
-            cerr << "y == " << y << endl;
+            if (DEBUG)
+               cerr << "y == " << y << endl;
 
             x = (x * 2.54) / 72.0;  /* Convert |bp| to |cm|  */
             y = (y * 2.54) / 72.0;
 
             p.set(x, y, 0);
 
-            p.show("p:");
+            if (DEBUG)
+               p.show("p:");
 
             *q += p;
 
-            q->show("*q:");
+            if (DEBUG)              
+               q->show("*q:");
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;
+
+            if (DEBUG)              
+               cerr << "Read c == " << c << endl;
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;
+            if (DEBUG)              
+               cerr << "Read c == " << c << endl;
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;
+            if (DEBUG)             
+               cerr << "Read c == " << c << endl;
 
             temp_strm >> s1;
-            cerr << "Read s1 == " << s1 << endl;
+            if (DEBUG)             
+               cerr << "Read s1 == " << s1 << endl;
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;
+            if (DEBUG)             
+               cerr << "Read c == " << c << endl;
 
             temp_strm >> x;
-            cerr << "Read x == " << x << endl;
+            if (DEBUG)             
+               cerr << "Read x == " << x << endl;
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;
+            if (DEBUG)             
+               cerr << "Read c == " << c << endl;
 
             temp_strm >> y;
-            cerr << "Read y == " << y << endl;
+            if (DEBUG)             
+               cerr << "Read y == " << y << endl;
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;
+            if (DEBUG)             
+               cerr << "Read c == " << c << endl;
 
             x = (x * 2.54) / 72.0;  /* Convert |bp| to |cm|  */
             y = (y * 2.54) / 72.0;
 
             p.set(x, y, 0);
-            p.show("p:");
+
+            if (DEBUG)             
+               p.show("p:");
 
             ct.type0 = Connector_Type::CONTROLS_TYPE;
             ct.type1 = Connector_Type::CT_NULL_TYPE;
@@ -1005,33 +1039,43 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
             ct.pt0 = create_new<Point>(p);
  
             temp_strm >> s1;
-            cerr << "Read s1 == " << s1 << endl;
+            if (DEBUG)             
+               cerr << "Read s1 == " << s1 << endl;
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;            
+            if (DEBUG)             
+               cerr << "Read c == " << c << endl;            
 
             temp_strm >> x;
-            cerr << "Read x == " << x << endl;            
+            if (DEBUG)             
+               cerr << "Read x == " << x << endl;            
 
             temp_strm >> c;
-            cerr << "Read c == " << c << endl;            
+            if (DEBUG)             
+               cerr << "Read c == " << c << endl;            
 
             temp_strm >> y;
-            cerr << "Read y == " << y << endl;            
+            if (DEBUG)             
+               cerr << "Read y == " << y << endl;            
 
             x = (x * 2.54) / 72.0;  /* Convert |bp| to |cm|  */
             y = (y * 2.54) / 72.0;
 
             p.set(x, y, 0);
-            p.show("p:");
+
+
+            if (DEBUG)             
+               p.show("p:");
 
             ct.pt1 = create_new<Point>(p);
 
-            ct.show("ct:");
+            if (DEBUG)             
+               ct.show("ct:");
 
             *q += ct;
 
-            q->show("*q:");
+            if (DEBUG)             
+               q->show("*q:");
 
 @q ****** (6) @>
 
@@ -1041,7 +1085,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
          else if (s0[0] == '\n')
          { 
-            cerr << "Line begins with a newline.  Continuing." << endl;
+            if (DEBUG)             
+               cerr << "Line begins with a newline.  Continuing." << endl;
             continue;
          }
 
@@ -1049,7 +1094,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
          else if (isspace(s0[0]) && isspace(s0[1]))
          {
-            cerr << "Line begins with at least two whitespace characters.  Continuing." << endl;
+            if (DEBUG)             
+               cerr << "Line begins with at least two whitespace characters.  Continuing." << endl;
             continue;
 
          }
@@ -1062,7 +1108,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 
       if (feof(fp))
       {
-         cerr << "Read EOF.  Finished reading from `fp'." << endl;
+         if (DEBUG)             
+            cerr << "Read EOF.  Finished reading from `fp'." << endl;
          break;
       }
 
@@ -1081,8 +1128,8 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 @
 @<Define |Glyph| functions@>=
 
-
-   cerr << "path_vector.v.size() == " << path_vector.v.size() << endl;
+   if (DEBUG)             
+      cerr << "path_vector.v.size() == " << path_vector.v.size() << endl;
 
 @q *** (3) @>
 
