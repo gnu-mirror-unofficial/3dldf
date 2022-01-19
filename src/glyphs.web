@@ -790,7 +790,7 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
    }
  
    temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-             << "'nonstopmode;tracingonline :=1;fontmapline \"" << s0
+             << "'tracingonline :=1;fontmapline \"" << s0
              << " " << s1 << " <" << s0 << ".pfb\";"
              << "picture v; v = glyph " << char_ctr << " of \"" << s0 << "\";"
              << "for item within v: show pathpart item;message \"turningnumber \" "

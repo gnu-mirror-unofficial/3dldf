@@ -1,180 +1,49 @@
-%% btemp.mp
-%% Created by Laurence D. Finston (LDF) Wed 24 Nov 2021 09:21:59 AM CET
+tracingonline :=1;
+path q;
 
-%% * (1) Copyright and License.
+q = (0cm, 0cm) .. controls (-0.396881, -1.13771) and (-1.16417, -1.13771) ..
+(-1.69334cm, -1.13771cm) .. controls (-1.69334, -1.13771) and (-4.02167, -1.13771) ..
+(-4.02167cm, -1.13771cm) .. controls (-4.55084, -1.13771) and (-5.31813, -1.13771) ..
+(-5.71501cm, 0cm) .. controls (-5.71501, 0) and (-11.2977, 15.9808) ..
+(-11.2977cm, 15.9808cm) .. controls (-11.43, 16.3248) and (-11.43, 16.3777) ..
+(-11.43cm, 16.51cm) .. controls (-11.43, 17.2244) and (-10.7685, 17.2244) ..
+(-10.3981cm, 17.2244cm) .. controls (-10.3981, 17.2244) and (-9.44563, 17.2244) ..
+(-9.44563cm, 17.2244cm) .. controls (-8.96938, 17.2244) and (-8.14917, 17.2244) ..
+(-7.77876cm, 16.166cm) .. controls (-7.77876, 16.166) and (-6.74688, 13.2292) ..
+(-6.74688cm, 13.2292cm) .. controls (-6.74688, 13.2292) and (0.582077, 13.2292) ..
+(0.582077cm, 13.2292cm) .. controls (0.582077, 13.2292) and (1.48166, 15.7692) ..
+(1.48166cm, 15.7692cm) .. controls (1.79916, 16.6952) and (1.98437, 17.2244) ..
+(3.25437cm, 17.2244cm) .. controls (3.25437, 17.2244) and (4.68312, 17.2244) ..
+(4.68312cm, 17.2244cm) .. controls (5.05354, 17.2244) and (5.71499, 17.2244) ..
+(5.71499cm, 16.51cm) .. controls (5.71499, 16.3777) and (5.71499, 16.3248) ..
+(5.5827cm, 15.9808cm) .. controls (5.5827, 15.9808) and (0, 0) .. cycle;
 
-%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
-%%%% Copyright (C) 2021, 2022 The Free Software Foundation, Inc.  
+show q;
 
-%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
-%%%% it under the terms of the GNU General Public License as published by 
-%%%% the Free Software Foundation; either version 3 of the License, or 
-%%%% (at your option) any later version.  
+path r;
 
-%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
-%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
-%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-%%%% GNU General Public License for more details.  
+message "length q:"; 
+show length q;
 
-%%%% You should have received a copy of the GNU General Public License 
-%%%% along with GNU 3DLDF; if not, write to the Free Software 
-%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+n = (length q) / 50;
 
-%%%% GNU 3DLDF is a GNU package.  
-%%%% It is part of the GNU Project of the  
-%%%% Free Software Foundation 
-%%%% and is published under the GNU General Public License. 
-%%%% See the website http://www.gnu.org 
-%%%% for more information.   
-%%%% GNU 3DLDF is available for downloading from 
-%%%% http://www.gnu.org/software/3dldf/LDF.html.
+show n;
 
-%%%% Please send bug reports to Laurence.Finston@gmx.de
-%%%% The mailing list help-3dldf@gnu.org is available for people to 
-%%%% ask other users for help.  
-%%%% The mailing list info-3dldf@gnu.org is for sending 
-%%%% announcements to users. To subscribe to these mailing lists, send an 
-%%%% email with ``subscribe <email-address>'' as the subject.  
+r = point 0 of q;
 
-%%%% The author can be contacted at: 
+pair m;
 
-%%%% Laurence D. Finston 
-%%%% c/o Free Software Foundation, Inc. 
-%%%% 51 Franklin St, Fifth Floor 
-%%%% Boston, MA  02110-1301  
-%%%% USA
+for i = n step n until length q:
+  m := point i of q;
+  r := r .. m;
+endfor;
 
-%%%% Laurence.Finston@gmx.de
-
-
-%% ** (2)
-
-% 0: d == (-3.195, 4.61366)
-% 0: a == 124.70299
-% 1: d == (3.68996, -12.48972)
-% 1: a == -73.54077
-% 2: d == (-4.19212, -6.79445)
-% 2: a == -121.67427
-% 3: d == (-2.32741, 6.3128)
-% 3: a == 110.23795
-% 4: d == (-2.66943, 3.10098)
-% 4: a == 130.723 
+r := r .. cycle;
 
 
+show r;
 
-prologues := 3;
-outputtemplate := "%j%c.eps";
-
-
-beginfig(0);
-  path q;
-  pair p[];
-  p0 = (0cm, 0cm);
-  p1 = (10cm, 0cm);
-  p2 = (9cm, -9cm);
-  p3 = (0cm, -10cm);
-  p4 = (1cm, -1cm);
-
-  q = p0 .. p1 .. p2 .. p3 .. p4 .. cycle;
-  draw q;
-  pair d;
-
-  for i = 0 upto 4:
-    d := direction i of q;
-    message decimal i & ": d == (" & decimal xpart d & ", " & decimal ypart d & ")";
-    a := angle direction i of q;
-    message decimal i & ": a == " & decimal a;
-  endfor;
-    
-  dotlabel.lft(btex $p_0$ etex, p0);
-  dotlabel.rt(btex $p_1$ etex, p1);
-  dotlabel.rt(btex $p_2$ etex, p2);
-  dotlabel.ulft(btex $p_3$ etex, p3);
-  dotlabel.ulft(btex $p_4$ etex, p4);
-
-endfig;
-
-end; 
-
-
-verbatimtex \font\huge=cmr17 scaled 8000 etex;
-
-prologues := 3;
-outputtemplate := "%j%c.eps";
-
-
-beginfig(0);
-  pair p[];
-  path q[];
-
-  pickup pencircle scaled .5pt;
-
-  p0 = origin;
-  p1 = (10cm, 0cm);
-  p2 = (9cm, 9cm);
-  p3 = (0cm, 10cm);
-  p4 = (1cm, 1cm);
-
-  dotlabel.bot(btex $p_0$ etex, p0);
-  dotlabel.top(btex $p_1$ etex, p1);
-  dotlabel.rt(btex $p_2$ etex, p2);
-  dotlabel.top(btex $p_3$ etex, p3);
-  dotlabel.rt(btex $p_4$ etex, p3);
-
-  q0 = p0 .. p1 .. p2 .. p3 .. p4 .. cycle;
-
-  draw q0;
-  
-  q1 = (-5cm, -5cm) -- (15cm, -5cm) -- (15cm, 15cm) -- (-5cm, 15cm) -- cycle;
-
-  draw q1;
-
-  p5 = direction 0 of q0;
-
-  
-  write "(" & decimal xpart p5 & ", " & decimal ypart p5 & ")" to "btemp.out";
-  
-  message "p5:";
-  show p5;
-  
-  
-% message "angle direction 0 of q0:"; 
-% show angle direction 0 of q0;
-
-% message "angle direction 1 of q0:"; 
-% show angle direction 1 of q0;
-
-% message "angle direction 1.5 of q0:"; 
-% show angle direction 1.5 of q0;
-
-% message "angle direction 2 of q0:"; 
-% show angle direction 2 of q0;
-
-% message "angle direction 3 of q0:"; 
-% show angle direction 3 of q0;
-
-endfig;
+message "length r:"; 
+show length r;
 
 end;
-
-
-%% ** (2) 
-
-%% * (1) Emacs-Lisp code for use in indirect buffers when using the          
-%%       GNU Emacs editor.  The local variable list is not evaluated when an 
-%%       indirect buffer is visited, so it's necessary to evaluate the       
-%%       following s-expression in order to use the facilities normally      
-%%       accessed via the local variables list.                              
-%%       LDF 2004.02.12.
-
-%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80) (ignore '(  
-%% )) (setq outline-regexp "%% [*\f]+"))
-
-%% * (1) Local variables for Emacs.
-
-%% Local Variables:
-%% mode:Metapost
-%% eval:(outline-minor-mode t)
-%% eval:(read-abbrev-file abbrev-file-name)
-%% outline-regexp:"%% [*\f]+"
-%% End:

@@ -14126,7 +14126,8 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    stringstream connector_strm;
 
-   temp_strm << "path q;" << endl << "q = ";
+   temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
+             << "'tracingonline :=1;path q;"  << "q = ";
 
 @q **** (4) @>
 
@@ -14134,24 +14135,21 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    {
 @q ***** (5) @>
 
-      if (connector_strm.str().empty())
-         connector_strm << " .. ";
-
-      temp_strm << "(" << (*iter)->get_x() << "cm, " << (*iter)->get_y() << "cm) ";
+      temp_strm << "(" << (*iter)->get_x() << "cm, " << (*iter)->get_y() << "cm)";
 
       if (ct_iter != connector_type_vector.end())
       {
-         connector_strm << (*ct_iter)->connector_string;
-
          if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE)
          {
-            connector_strm << " controls ";
+            connector_strm << " .. controls";
+
+            if ((*ct_iter)->pt0 != 0)
+               connector_strm << " (" << (*ct_iter)->pt0->get_x() << ", " << (*ct_iter)->pt0->get_y() << ")";
 
             if ((*ct_iter)->pt1 != 0)
-               connector_strm << " and ";
+               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << ", " << (*ct_iter)->pt1->get_y() << ")";
 
-            connector_strm << " .. ";
-
+            connector_strm << " ..";
          }
 
       }
@@ -14171,7 +14169,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
           break;
       } 
       else
-         temp_strm << connector_strm.str() << endl << " ";
+         temp_strm << connector_strm.str()  << " ";
    
 @q ***** (5) @>
 
@@ -14185,6 +14183,10 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    }  /* |for| */
 
 @q **** (4) @>
+
+   temp_strm << "show q;path r;message \"length q:\";show length q;n = (length q) / 50;"
+             << "show n;r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
+             << "r := r .. m;endfor;r := r .. cycle;show r;message \"length r:\";show length r;end;'";
 
    cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
