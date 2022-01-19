@@ -14004,9 +14004,6 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
   cerr << "status == " << status << endl;
   cerr << "strerror(errno) == " << strerror(errno) << endl;
 
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar(); 
-
 
 #if 1 /* 0 */
   cerr << "x_val == " << x_val << endl;
@@ -14102,7 +14099,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
-
    normal.show("normal before shift:");
 
    normal.shift(*points[0]);
@@ -14120,14 +14116,85 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    show("*this after alignment:");
 
-   if (DEBUG)
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   stringstream temp_strm;
+   vector<Point*>::const_iterator iter = points.begin();
+   vector<Connector_Type*>::const_iterator ct_iter = connector_type_vector.begin();
+
+   stringstream connector_strm;
+
+   temp_strm << "path q;" << endl << "q = ";
+
+@q **** (4) @>
+
+   for (;iter != points.end(); ++iter)
    {
-      cerr << "Exiting `Path::resolve' successfully with return value 0." 
-           << endl;
-   }
+@q ***** (5) @>
+
+      if (connector_strm.str().empty())
+         connector_strm << " .. ";
+
+      temp_strm << "(" << (*iter)->get_x() << "cm, " << (*iter)->get_y() << "cm) ";
+
+      if (ct_iter != connector_type_vector.end())
+      {
+         connector_strm << (*ct_iter)->connector_string;
+
+         if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE)
+         {
+            connector_strm << " controls ";
+
+            if ((*ct_iter)->pt1 != 0)
+               connector_strm << " and ";
+
+            connector_strm << " .. ";
+
+         }
+
+      }
+
+@q ***** (5) @>
+
+      if (connector_strm.str().empty())
+         connector_strm << " .. ";
+
+      if (next(iter) == points.end())
+      {
+
+          if (cycle_switch == true)
+             temp_strm << connector_strm.str() << " cycle";
+
+          temp_strm << ";";
+          break;
+      } 
+      else
+         temp_strm << connector_strm.str() << endl << " ";
+   
+@q ***** (5) @>
+
+      if (next(ct_iter) != connector_type_vector.end())
+        ++ct_iter;
+
+      connector_strm.str("");
+
+@q ***** (5) @>
+
+   }  /* |for| */
+
+@q **** (4) @>
+
+   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
    cerr << "XXX Enter <RETURN> to continue: ";
    getchar(); 
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=    
 
 
    return 0;
