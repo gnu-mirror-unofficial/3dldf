@@ -10117,6 +10117,9 @@ variable defined in |Scanner_Type::create|.
 \initials{LDF 2005.02.11.}
 @:BUG FIX@> BUG FIX:  Now returning |false| immediately 
 if |points.size() < 3|.
+
+\initials{LDF 2022.01.19.}
+Added optional argument |Point *normal| for returning the normal to the |Path|.
 \ENDLOG 
 
 @q *** (3) Declaration.@> 
@@ -10124,14 +10127,14 @@ if |points.size() < 3|.
 @<Declare |Path| functions@>=
 virtual
 bool
-is_planar(bool verbose = false, string text = "") const;
+is_planar(Point *normal = 0, bool verbose = false, string text = "") const;
 
 @q *** (3) Definition.@> 
 
 @
 @<Define |Path| functions@>=
 bool
-Path::is_planar(bool verbose, string text) const
+Path::is_planar(Point *normal, bool verbose, string text) const
 {
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */@; 
@@ -10152,10 +10155,13 @@ if (VERBOSE_GLOBAL)
 
   Point p(get_normal());
 
+  if (normal != 0)
+     *normal = p;
+
   Point origin_pt(0, 0, 0);
 
   if (p == INVALID_POINT)
-    {
+  {   
 #if DEBUG_COMPILE
       if (DEBUG)
         {
@@ -10164,14 +10170,14 @@ if (VERBOSE_GLOBAL)
         }
 #endif /* |DEBUG_COMPILE|  */@;
 
-if (verbose)
-        {
+      if (verbose)
+      {
           if (text == "")
             text = "Path";
           cerr << text << " is non-planar.\n\n";
-        }
-    return false;
-    }
+      }
+      return false;
+  }
 
 @
 \LOG
@@ -10182,7 +10188,7 @@ Commented-out the warning.
 @<Define |Path| functions@>=
 
   else if( p == origin_pt)
-    {
+  {
 #if 0 
       cerr << "WARNING! In Path::is_planar():\n"
            << "Path is linear.  Returning true.\n\n";
@@ -10194,9 +10200,9 @@ Commented-out the warning.
           cerr << text << " is planar.\n\n";
         }
       return true;
-    }
+  }
   else
-    {
+  {
       if (verbose)
         {
           if (text == "")
@@ -10213,8 +10219,9 @@ Commented-out the warning.
 #endif /* |DEBUG_COMPILE|  */@; 
       
       return true;
-    }
-}
+  }
+
+}  /* End of |Path::is_planar| definition */
 
 @q ** (2) Is linear.@>
 @*1 Is linear.
@@ -14079,7 +14086,9 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
-   if (!is_planar())
+   Point normal;
+
+   if (!is_planar(&normal))
    {
        cerr << "ERROR!  `Path' is not planar.  Can't resolve it." << endl 
             << "Exiting function unsuccessfully with return value 1."
@@ -14093,7 +14102,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
-   Point normal = get_normal();
 
    normal.show("normal before shift:");
 
@@ -14117,6 +14125,9 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
       cerr << "Exiting `Path::resolve' successfully with return value 0." 
            << endl;
    }
+
+   cerr << "XXX Enter <RETURN> to continue: ";
+   getchar(); 
 
 
    return 0;
