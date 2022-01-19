@@ -208,6 +208,7 @@ class Path : public Shape
    friend void* Scan_Parse::clip_to_func(void*, void*);
    friend int Scanner_Type::show_database(void);
    friend int yyparse(yyscan_t);
+   friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
 
  protected:
   
@@ -14190,8 +14191,25 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
-   cerr << "XXX Enter <RETURN> to continue: ";
-   getchar(); 
+   FILE *fp = popen(temp_strm.str().c_str(), "r");
+
+   if (fp == 0)
+   {
+        cerr << "ERROR!  In `Path::resolve':  `popen' failed, returning NULL." << endl
+             << "Failed to execute `mpost' in pipe." << endl 
+             << "Exiting function unsuccessfully with return value 1."
+             << endl;
+
+        return 1;
+   }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+        cerr << "In `Path::resolve':  `popen' succeeded." << endl
+             << "Executed `mpost' in pipe successfully." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
 
 @q **** (4) @>
@@ -14221,7 +14239,7 @@ class Connector_Type
    friend int yyparse(yyscan_t);
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
-
+   friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
 
    int type0;
    int type1;
