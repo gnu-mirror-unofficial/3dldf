@@ -4286,7 +4286,8 @@ argument |assign == false|.  It won't cause any harm, though, since it
 will just call the |const| version above.
 
 \LOG
-\initials{LDF 2002.11.03.}  Added this function.
+\initials{LDF 2002.11.03.}  
+Added this function.
 
 \initials{LDF 2003.07.18.}
 Changed, so that |is_linear| is used, rather than
@@ -14100,7 +14101,16 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    normal.show("normal after shift:");
 
-   /* !!START HERE:  LDF 2022.01.18.  Align with axis.  */ 
+   Path q;
+   q += *points[0];
+   q += normal;
+  
+   Transform t;
+   t.align_with_axis(*points[0], normal);
+
+   *this *= t;
+
+   show("*this after alignment:");
 
    if (DEBUG)
    {
