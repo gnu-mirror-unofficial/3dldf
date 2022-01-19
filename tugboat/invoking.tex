@@ -1,0 +1,59 @@
+%% invoking.tex
+%% Created by Laurence D. Finston (LDF) Wed 19 Jan 2022 06:20:03 AM CET
+
+\input tugboat.sty
+
+\title * Invoking \MP\/ and \TeX\/ indirectly from GNU 3DLDF *
+\author * Laurence Finston *
+\address * Germany *
+\netaddress * Laurence.Finston@gmx.de *
+\article
+\head * Introduction *
+GNU 3DLDF is a package for three-dimen\-sion\-al draw\-ing with \MF\/ or \MP\/ output.
+It implements a language based on the \MF\/ language with many additional data types
+and operations.
+
+Even in 3D, many objects in a drawing are likely to be planar.  In this case, it can be useful to use
+\MF\/ or \MP\/ to apply operations that aren't implemented in 3DLDF to these objects.  Another
+application for this technique is to invoke \TeX\/, directly or via \MP\/, in order to obtain information
+about matters pertaining to typesetting, e.g., the size or bounding boxes of glyphs or the width, height
+and depth of boxes.
+
+\head * Paths in \MF\/ and 3DLDF*
+
+In \MF\/, {\bf paths} are represented as B{\'e}zier curves consisting of points ({\bf pairs})
+and {\it connectors}. The most basic connector is |..| and connectors may be modified in various ways
+using |curl|, |dir|, |tension| or a |pair| representing a direction vector.  Ultimately, all connectors
+are converted to the form ``|.. controls <pair> and <pair> ..|'', which the user may also specify directly.
+This is the form used when showing a {\bf path}:
+
+%% Make example.
+
+In 3DLDF, {\bf paths} are also represented as points (in this case,
+the data type is |point| rather than |pair|) and connectors, but not
+as B{\'e}zier curves.  In the past, 3DLDF only implemented the connectors ``|..|'', ``|...|''
+and ``|--.|'' and they were merely |strings| that were passed to the \MP\/ output and not processed
+internally within 3DLDF in any way.
+
+
+
+\head * Measuring text *
+
+\head * Directions and directiontimes of paths *
+
+
+\head * Obtaining paths for glyphs *
+
+\head * Resolving paths *
+
+
+\head * Conclusion *
+
+\makesignature
+
+\bye
+
+%% Local Variables:
+%% mode:plain-TeX
+%% auto-fill-function:nil
+%% End:
