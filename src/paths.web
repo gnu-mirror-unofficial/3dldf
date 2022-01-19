@@ -14074,7 +14074,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    int status = 0;
 
@@ -14103,11 +14103,21 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
-   normal.show("normal before shift:");
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      normal.show("normal before shift:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
 
    normal.shift(*points[0]);
 
-   normal.show("normal after shift:");
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      normal.show("normal after shift:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
 
    Path q;
    q += *points[0];
@@ -14118,7 +14128,12 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    *this *= t;
 
-   show("*this after alignment:");
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      show("*this after alignment:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>
 @
@@ -14192,7 +14207,12 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
              << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
              << "r := r .. m;endfor;r := r .. cycle;show r;end;'";
 
-   cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
 
    Pointer_Vector<Path> pv;
 
@@ -14211,14 +14231,9 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    else if (DEBUG)
    { 
         cerr << "In `Path::resolve':  `read_metapost_output_from_pipe' succeeded, returning 0." 
-             << endl;
-
-        cerr << "`pv.v.size()' == " << pv.v.size() << endl
+             << endl
+             << "`pv.v.size()' == " << pv.v.size() << endl
              << "`pv.v[0]->size()' == " << pv.v[0]->size() << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-       
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
