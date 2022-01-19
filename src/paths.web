@@ -100,6 +100,7 @@ Now including \filename{nurbs.h}.
 #include "lines.h++"
 #include "planes.h++"
 #include "nurbs.h++"
+#include "utility.h++"
 
 @q * (1) class Path definition.@>
 @* {\bf Path} class definition.
@@ -14075,6 +14076,8 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    bool DEBUG = true; /* |false| */ 
 
+   int status = 0;
+
    if (DEBUG)
    {
       cerr << "Entering `Path::resolve'." << endl;
@@ -14185,18 +14188,20 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
 @q **** (4) @>
 
-   temp_strm << "show q;path r;message \"length q:\";show length q;n = (length q) / 50;"
-             << "show n;r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;show r;message \"length r:\";show length r;end;'";
+   temp_strm << "path r;n = (length q) / 50;"
+             << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
+             << "r := r .. m;endfor;r := r .. cycle;show r;end;'";
 
    cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
-   FILE *fp = popen(temp_strm.str().c_str(), "r");
+   Pointer_Vector<Path> pv;
 
-   if (fp == 0)
+   status = read_metapost_output_from_pipe(temp_strm.str().c_str(), pv, scanner_node);
+
+   if (status != 0)
    {
-        cerr << "ERROR!  In `Path::resolve':  `popen' failed, returning NULL." << endl
-             << "Failed to execute `mpost' in pipe." << endl 
+        cerr << "ERROR!  In `Path::resolve':  `read_metapost_output_from_pipe' failed, returning " 
+             << status << "." << endl
              << "Exiting function unsuccessfully with return value 1."
              << endl;
 
@@ -14205,17 +14210,32 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 #if DEBUG_COMPILE
    else if (DEBUG)
    { 
-        cerr << "In `Path::resolve':  `popen' succeeded." << endl
-             << "Executed `mpost' in pipe successfully." << endl;
+        cerr << "In `Path::resolve':  `read_metapost_output_from_pipe' succeeded, returning 0." 
+             << endl;
+
+        cerr << "`pv.v.size()' == " << pv.v.size() << endl
+             << "`pv.v[0]->size()' == " << pv.v[0]->size() << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+       
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-
 
 @q **** (4) @>
 @
 @<Define |Path| functions@>=    
 
+   if (pv.v.size() > 0 && pv.v[0] != 0 && pv.v[0]->size() > 0)
+      *this = *(pv.v[0]);
+  
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+        cerr << "Exiting `Path::resolve' successfully with return value 0."
+             << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
    return 0;
 
