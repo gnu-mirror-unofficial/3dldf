@@ -101,6 +101,7 @@ Now including \filename{nurbs.h}.
 #include "planes.h++"
 #include "nurbs.h++"
 #include "utility.h++"
+#include "scnmptpt.h++"
 
 @q * (1) class Path definition.@>
 @* {\bf Path} class definition.
@@ -14035,7 +14036,8 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      cerr_strm << thread_name << "Exiting `Path::get_direction' successfully with `Point' return value." 
+      cerr_strm << thread_name 
+                << "Exiting `Path::get_direction' successfully with `Point' return value." 
            << endl;
 
       log_message(cerr_strm);
@@ -14074,13 +14076,22 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    int status = 0;
 
    if (DEBUG)
    {
       cerr << "Entering `Path::resolve'." << endl;
+
+      show("*this before alignment:");
+
+
+      cerr << "In Path::resolve:  *this before alignment (see above)" << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }
 
 @q **** (4) @>
@@ -14107,6 +14118,8 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    if (DEBUG)
    { 
       normal.show("normal before shift:");
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -14116,6 +14129,10 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    if (DEBUG)
    {
       normal.show("normal after shift:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -14132,6 +14149,10 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    if (DEBUG)
    { 
       show("*this after alignment:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -14163,10 +14184,12 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
             connector_strm << " .. controls";
 
             if ((*ct_iter)->pt0 != 0)
-               connector_strm << " (" << (*ct_iter)->pt0->get_x() << ", " << (*ct_iter)->pt0->get_y() << ")";
+               connector_strm << " (" << (*ct_iter)->pt0->get_x() 
+                              << ", " << (*ct_iter)->pt0->get_y() << ")";
 
             if ((*ct_iter)->pt1 != 0)
-               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << ", " << (*ct_iter)->pt1->get_y() << ")";
+               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << ", " 
+                              << (*ct_iter)->pt1->get_y() << ")";
 
             connector_strm << " ..";
          }
@@ -14203,25 +14226,53 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
 @q **** (4) @>
 
-   temp_strm << "path r;n = (length q) / 50;"
+   temp_strm << "path r;n = (length q) / " << res_val << ";"
              << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;show r;end;'";
+             << "r := r .. m;endfor;r := r .. cycle;show r;show \"§\";end;'";
 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
       cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
+
+   yyscan_t scanner;
+   FILE *in = 0;
+   
+   in = popen(temp_strm.str().c_str(), "r");
+   
+   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
+   zzset_in(in, scanner);
+   zzlex(scanner);
+   zzlex_destroy(scanner);
+   
+   pclose(in);
+
+   in = 0;
+
+cerr << "After calling zzlex." << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+#if 0 
    Pointer_Vector<Path> pv;
 
    status = read_metapost_output_from_pipe(temp_strm.str().c_str(), pv, scanner_node);
 
+cerr << "After read_metapost_output_from_pipe." << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    if (status != 0)
    {
-        cerr << "ERROR!  In `Path::resolve':  `read_metapost_output_from_pipe' failed, returning " 
-             << status << "." << endl
+        cerr << "ERROR!  In `Path::resolve':  `read_metapost_output_from_pipe' failed, "
+             << "returning " << status << "." << endl
              << "Exiting function unsuccessfully with return value 1."
              << endl;
 
@@ -14234,6 +14285,10 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
              << endl
              << "`pv.v.size()' == " << pv.v.size() << endl
              << "`pv.v[0]->size()' == " << pv.v[0]->size() << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14242,8 +14297,20 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @<Define |Path| functions@>=    
 
    if (pv.v.size() > 0 && pv.v[0] != 0 && pv.v[0]->size() > 0)
+   {
+      pv.v[0]->show("*(pv.v[0]):");
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
       *this = *(pv.v[0]);
+
+      this->show("*this:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+   }
   
+#endif 
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 

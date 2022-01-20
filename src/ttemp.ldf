@@ -29,15 +29,14 @@ beginfig(0);
   path q;
   q := origin -- (1, 0);
 
-
   transform t;
 
-  t := ((identity scaled (.75, .75, .75)) rotated (45, 45, 0)) shifted (-9.5cm, -5cm);
+  %t := ((identity scaled (.75, .75, .75)) rotated (45, 45, 0)) shifted (-9.5cm, -5cm);
 
   %t := (identity scaled (.25, .25, .25)) shifted (-10cm, 0);
-
   
-  g *= t;
+  
+  %g *= t;
   
   pv := get_paths from g;
 
@@ -50,19 +49,19 @@ beginfig(0);
   message "n:";
   show n;
 
-  for i = 0 upto n:
-    message "turningnumber pv" & decimal i & ":";
-    show (turningnumber pv[i]);
+  % for i = 0 upto n:
+  %   message "turningnumber pv" & decimal i & ":";
+  %   show (turningnumber pv[i]);
 
-    if (turningnumber pv[i]) < 0:
-      draw pv[i]; % scaled (.5, .5, .5);
-    else:
-      draw pv[i]; % scaled (.5, .5, .5);
-    fi
-  endfor;
+  %   if (turningnumber pv[i]) < 0:
+  %     draw pv[i]; % scaled (.5, .5, .5);
+  %   else:
+  %     draw pv[i]; % scaled (.5, .5, .5);
+  %   fi
+  % endfor;
 
-  message "length pv0:";
-  show length pv0;
+  % message "length pv0:";
+  % show length pv0;
 
 %% ** (2)
   
@@ -123,22 +122,39 @@ beginfig(0);
   % message "pv0 before resolve (see above)."; 
   % pause;
   
-  resolve pv0 to 100;
+  draw pv0 scaled (.5, .5, .5);
+  draw pv1 scaled (.5, .5, .5);
 
-  message "After resolve.";
-  pause;
+  
+  resolve pv0 to 50;
+  resolve pv1 to 50;
 
-  message "length pv0:";
+  message "After resolve:  length pv0:";
   show length pv0;
+
+  message "After resolve:  length pv1:";
+  show length pv1;
+
+  % for i = 0 upto n:
+  %   message "turningnumber pv" & decimal i & ":";
+  %   show (turningnumber pv[i]);
+
+  %   if (turningnumber pv[i]) < 0:
+  %     draw pv[i]; % scaled (.5, .5, .5);
+  %   else:
+  %     draw pv[i]; % scaled (.5, .5, .5);
+  %   fi
+  % endfor;
+
+  drawdot get_point 0 pv0 with_color blue with_pen pencircle scaled (2mm, 2mm, 2mm);
+  drawdot get_point 1 pv0 with_color red with_pen pencircle scaled (2mm, 2mm, 2mm);
   
   
 %% ** (2)
-  
-  
-endfig with_projection parallel_x_y;
-%endfig;
 
-verbatim_metapost "end";
+verbatim_metapost "end;";
+endfig with_projection parallel_x_y no_sort;
+%endfig;
 
 end;
 

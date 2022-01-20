@@ -211,9 +211,7 @@ Added this rule.
    stringstream temp_strm;
 
 #if DEBUG_COMPILE
-
-   DEBUG = true; /* |false|  */
-
+   DEBUG = false; /* |true|  */
    if (DEBUG)
    { 
        cerr << "*** Parser: `glyph_primary: GET_GLYPH numeric_expression FROM string_expression'."
@@ -227,7 +225,12 @@ Added this rule.
 
    status = g->get_glyph_func(@=$2@>, static_cast<const string*>(@=$4@>), scanner_node);
 
-   g->show("In parser rule: *g:");
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      g->show("In parser rule: *g:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
 
    delete static_cast<string*>(@=$4@>);
 

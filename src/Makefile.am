@@ -87,7 +87,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
                 rectangs.web rhtchdrn.web scan.web scanprse.web scanprsf.web \
-                sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
+                scnmptpt.web sctpcrt.web sctpfncs.web shapes.web solfaced.web solids.web \
                 spheres.web sphrdevl.web transfor.web triangle.web \
                 utility.web
 
@@ -186,7 +186,7 @@ CLEANFILES := $(3dldf_c_files) $(3dldf_cpp_files) $(3dldf_hpp_files) $(3dldf_h_f
               $(3dldflb_hpp_files) $(3dldflb_lo_files) \
               loader.c loader.c++ loader.h loader.h++ \
               parser.c parser.c++ parser_1.h++ parser.h++  parser.output parser.y++ \
-              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ \
+              prbsnflx.c++ examples.h layers.h layers.h++ parser.h++ parser.y++ scnmptpt.l++ \
               ldf_1.log 
  
 AM_CXXFLAGS = -fpermissive -fdiagnostics-show-option -Wno-return-type
@@ -433,6 +433,17 @@ prbsnflx.c++: prbsnflx.l++
 	@cat prbsnflx.c++ >> AAAtmp.txt
 	@mv AAAtmp.txt prbsnflx.c++
 
+scnmptpt.o: scnmptpt.c++ scnmptpt.h++
+	$(CXXCOMPILE) -c -o $@ $<
+
+scnmptpt.c++ scnmptpt.h++: scnmptpt.l++ 
+	$(LEX) -o scnmptpt.c++ $<
+
+scnmptpt.l++: scnmptpt.web 
+	ctangle scnmptpt.web
+	prbsnflx$(EXEEXT) scnmptpt.c scnmptpt.l++
+	rm scnmptpt.c
+	check_scan_parse_output.sh scnmptpt.lxx scnmptpt.l++
 
 #### *** (3) 
 
@@ -746,7 +757,7 @@ parahypr.o: parahypr.c++ parahypr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 paths.o: paths.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                    transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                   planes.h++ nurbs.h++ paths.h++ utility.h++
+                   planes.h++ nurbs.h++ paths.h++ scnmptpt.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 pctfncs0.o: pctfncs0.c++ pctfncs0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \

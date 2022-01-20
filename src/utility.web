@@ -1161,17 +1161,21 @@ Added this function.
 
 @<Declare utility functions@>=
 int
-read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scanner_Node scanner_node = 0);
+read_metapost_output_from_pipe(string s, 
+                               Pointer_Vector<Path> &path_vector, 
+                               Scanner_Node scanner_node = 0);
 
 @q ** (2) Definition @>
 @
 @<Define utility functions@>=
 int
-read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scanner_Node scanner_node)
+read_metapost_output_from_pipe(string s, 
+                               Pointer_Vector<Path> &path_vector, 
+                               Scanner_Node scanner_node)
 {
 @q *** (3) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    if (DEBUG)
    {
@@ -1187,7 +1191,7 @@ read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scan
 
    FILE *fp = popen(s.c_str(), "r");
 
-   size_t n = 256;
+   size_t n = 512;
    char *buffer = (char *) malloc(n);
    memset(buffer, '\0', n);
 
@@ -1210,18 +1214,28 @@ read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scan
 
    bool skipping = true;
 
+ 
 @q *** (3) @>
 
    while (status != -1)
    {
 @q **** (4) @>
       errno = 0;
+
       status = getline(&buffer, &n, fp);
+
+@q **** (4) @>
 
       if (status == -1)
       {
+
          if (DEBUG)
+         {
             cerr << "`getline' returned `status' == " << status << endl;
+            cerr << "XXX Enter <RETURN> to continue: ";
+            getchar(); 
+
+         }
 
          if (feof(fp))
          {
@@ -1231,7 +1245,8 @@ read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scan
          }
          else
          {
-            cerr << "ERROR!  In `read_metapost_output_from_pipe':  `getline' failed, returning -1." << endl
+            cerr << "ERROR!  In `read_metapost_output_from_pipe':  "
+                 << "`getline' failed, returning -1." << endl
                  << "`errno' == " << errno << " == " << strerror(errno) << endl
                  << "Exiting function with return value 1." << endl;
 
@@ -1252,6 +1267,9 @@ read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scan
          if (DEBUG)
             cerr << "status == " << status << endl
                  << "buffer == " << buffer << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
          s0 = buffer;
          pos = s0.find("Path at line");
@@ -1288,7 +1306,8 @@ read_metapost_output_from_pipe(string s, Pointer_Vector<Path> &path_vector, Scan
              if (path_vector.v.back() == 0)
              {
                 if (DEBUG)
-                   cerr << "`path_vector.v.back()' == 0.  This shouldn't happen.  Continuing." << endl;
+                   cerr << "`path_vector.v.back()' == 0.  This shouldn't happen.  "
+                        << "Continuing." << endl;
                 continue;
              }
              else 
