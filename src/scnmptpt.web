@@ -1,0 +1,610 @@
+@q scnmptpt.web
+@q Created by Laurence D. Finston Thu 20 Jan 2022 05:14:09 AM CET  @>
+
+@q * (1) Copyright and License.@>
+
+@q This file is part of GNU 3DLDF, a package for three-dimensional drawing.  @>
+@q Copyright (C) 2022 The Free Software Foundation, Inc. @>
+
+@q GNU 3DLDF is free software; you can redistribute it and/or modify @>
+@q it under the terms of the GNU General Public License as published by @>
+@q the Free Software Foundation; either version 3 of the License, or @>
+@q (at your option) any later version.  @>
+
+@q GNU 3DLDF is distributed in the hope that it will be useful, @>
+@q but WITHOUT ANY WARRANTY; without even the implied warranty of @>
+@q MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the @>
+@q GNU General Public License for more details.  @>
+
+@q You should have received a copy of the GNU General Public License @>
+@q along with GNU 3DLDF; if not, write to the Free Software @>
+@q Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA@>
+
+@q GNU 3DLDF is a GNU package.  @>
+@q It is part of the GNU Project of the  @>
+@q Free Software Foundation @>
+@q and is published under the GNU General Public License. @>
+@q See the website http://www.gnu.org @>
+@q for more information.   @>
+@q GNU 3DLDF is available for downloading from @>
+@q http://www.gnu.org/software/3dldf/LDF.html.@>
+
+@q ("@@" stands for a single at-sign in the following paragraph.) @>
+
+@q Please send bug reports to Laurence.Finston@@gmx.de@>
+@q The mailing list help-3dldf@@gnu.org is available for people to @>
+@q ask other users for help.  @>
+@q The mailing list info-3dldf@@gnu.org is for sending @>
+@q announcements to users. To subscribe to these mailing lists, send an @>
+@q email with ``subscribe <email-address>'' as the subject.  @>
+
+@q The author can be contacted at: @>
+
+@q Laurence D. Finston                 @>
+@q c/o Free Software Foundation, Inc.  @>
+@q 51 Franklin St, Fifth Floor         @>
+@q Boston, MA  02110-1301              @>
+@q USA                                 @>
+
+@q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
+
+
+
+
+@q  * (1) Scanner for MetaPost logging output.  @>
+@* Scanner for MetaPost logging output.
+\initials{LDF 2022.01.20.}
+
+@
+@<Include files@>=
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <fstream>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <map>
+#include <string>
+#include <time.h>
+#include <math.h>
+#include <limits.h>
+
+#include <sstream>   
+
+#include <vector>
+#include <deque>
+
+// #include <stack>
+// #include <set>
+
+#if 0
+#include <pthread.h>
+#endif 
+
+#include "loader.h++"
+
+#undef NAME_LEN
+#undef LOCAL_HOST
+
+
+@q  ** (2) Start conditions.  @>
+@ Start conditions.
+
+@<Start conditions@>=
+
+@q  ** (2) Options.  @>
+@ Options.
+
+@<Options@>=
+@=%option header-file="scnmptpt.h++"@>
+@=%option reentrant@>
+@=%option prefix="zz"@>
+@=%option noyywrap@>
+
+@q ** (2) Name definitions.  @>
+@ Name definitions.  
+@<Name definitions@>=
+
+@q * (1) Local variables for |zzlex|.  @>
+@ Local variables for {\bf zzlex}.
+\initials{LDF 2012.06.25.}
+
+@<Local variables for |zzlex|@>=
+
+bool DEBUG = true;  /* |false|  */
+
+@q ** (2) Code to be executed each time |zzlex| is entered.  @>
+
+@ Code to be executed each time {\bf zzlex} is entered.  This code must be
+indented or it causes an error when FLEX is run.  The start condition on entry
+to {\bf zzlex} can be set here.
+\initials{LDF 2012.06.27.}
+
+@<Execute on entry to |zzlex|@>=
+
+   cerr << "Entering `zzlex'." << endl;
+
+@q = Scan_Parse_Parameter_Type* param = static_cast<Scan_Parse_Parameter_Type*>(zzextra); @>
+@q = if (scanner_trace == true) SCANNER_DEBUG = true;                                     @>
+
+@q ** (2) Rules.  @>
+@ Rules.
+
+@q *** (3) Punctuation.  @>
+
+@ Punctuation.
+
+@q **** (4) Asterisk.  @>
+@ Asterisk (\.{\*}).
+
+@<Rules@>=
+@=\* {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << " (asterisk)" << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+
+@q **** (4) Semi-Colon.  @>
+@ Semi-colon.
+
+@<Rules@>=
+@=; {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << " (semi-colon)" << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+@q **** SELECT (4) @> 
+@ SELECT
+@<Rules@>=
+@=select|SELECT {@>
+
+
+@=}@>
+
+@q **** ALL (4) @> 
+@ ALL
+@<Rules@>=
+@=all|ALL {@>
+
+
+@=}@>
+
+@q **** FROM (4) @> 
+@ FROM
+@<Rules@>=
+@=from|FROM {@>
+
+
+@=}@>
+
+@q **** BY (4) @> 
+@ BY
+@<Rules@>=
+@=by|BY {@>
+
+
+@=}@>
+
+@q **** ASC (ASCENDING) (4) @> 
+@ ASC (ASCENDING)
+@<Rules@>=
+@=asc|ASC {@>
+
+
+@=}@>
+
+
+@q **** DES (DESCENDING) (4) @> 
+@ DES (DESCENDING)
+@<Rules@>=
+@=descending|DESCENDING {@>
+
+
+@=}@>
+
+@q **** UNIQUE (4) @> 
+@ UNIQUE
+@<Rules@>=
+@=unique|UNIQUE {@>
+
+
+@=}@>
+
+@q **** LIMIT (4) @> 
+@ LIMIT
+@<Rules@>=
+@=limit|LIMIT {@>
+
+
+@=}@>
+
+@q **** KINGDOM (4) @> 
+@ KINGDOM
+@<Rules@>=
+@=kingdom|KINGDOM {@>
+
+
+@=}@>
+
+@q **** KINGDOMS (4) @> 
+@ KINGDOMS
+@<Rules@>=
+@=kingdoms|KINGDOMS {@>
+
+
+@=}@>
+
+@q **** PHYLUM (4) @> 
+@ PHYLUM
+@<Rules@>=
+@=phylum|PHYLUM {@>
+
+
+@=}@>
+
+@q **** PHYLA (4) @> 
+@ PHYLA
+@<Rules@>=
+@=phyla|PHYLA {@>
+
+
+@=}@>
+
+@q **** CLASS (4) @> 
+@ CLASS
+@<Rules@>=
+@=class|CLASS {@>
+
+
+@=}@>
+
+@q **** CLASSES (4) @> 
+@ CLASSES
+@<Rules@>=
+@=classes|CLASSES {@>
+
+
+@=}@>
+
+@q **** ORDER (4) @> 
+@ ORDER
+@<Rules@>=
+@=order|ORDER {@>
+
+
+@=}@>
+
+@q **** ORDERS (4) @> 
+@ ORDERS
+@<Rules@>=
+@=orders|ORDERS {@>
+
+
+@=}@>
+
+@q **** FAMILY (4) @> 
+@ FAMILY
+@<Rules@>=
+@=family|FAMILY {@>
+
+
+@=}@>
+
+@q **** FAMILIES (4) @> 
+@ FAMILIES
+@<Rules@>=
+@=families|FAMILIES {@>
+
+
+@=}@>
+
+@q **** GENUS (4) @> 
+@ GENUS
+@<Rules@>=
+@=genus|GENUS {@>
+
+
+@=}@>
+
+@q **** GENERA (4) @> 
+@ GENERA
+@<Rules@>=
+@=genera|GENERA {@>
+
+
+@=}@>
+
+@q **** SPECIES (4) @> 
+@ SPECIES
+@<Rules@>=
+@=species|SPECIES {@>
+
+
+@=}@>
+
+@q **** SUBSPECIES (4) @> 
+@ SUBSPECIES
+@<Rules@>=
+@=subspecies|SUBSPECIES {@>
+
+
+@=}@>
+
+@q **** VARIETY (4) @> 
+@ VARIETY
+@<Rules@>=
+@=variety|VARIETY {@>
+
+
+@=}@>
+
+@q **** VARIETIES (4) @> 
+@ VARIETIES
+@<Rules@>=
+@=varieties|VARIETIES {@>
+
+
+@=}@>
+
+@q **** ID (4) @> 
+@ ID
+@<Rules@>=
+@=id|ID {@>
+
+
+@=}@>
+
+
+@q **** QUERY (4) @> 
+@ QUERY
+@<Rules@>=
+@=query|QUERY {@>
+
+
+@=}@>
+
+@q *** (3) INPUT.  @>
+@ \.{INPUT}.
+
+@<Rules@>=
+@=INPUT|input {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+
+
+
+@q *** (3) END.  @>
+@ END.
+
+@<Rules@>=
+@=END|end {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+@q *** (3) ENDINPUT.  @>
+@ \.{ENDINPUT}.
+
+@<Rules@>=
+@=ENDINPUT|endinput {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+@q *** (3) ditto.  @>
+@ ditto (double-quote character as string).
+
+@<Rules@>=
+@=ditto|DITTO|Ditto {@>
+
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  ditto == " << yytext
+            << endl
+            << endl;
+
+   }  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+@q *** (3) Comments.  @>
+@ Comments.  
+
+@<Rules@>=
+@=(%|#).*$ {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      cerr << "In `zzlex':  Comment: " << yytext << endl;
+     
+   }  /* |if (DEBUG)|  */
+
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   /* Ignore  */
+
+@=}@>
+
+
+@q *** (3) Whitespace.  @>
+@ Whitespace.
+
+@<Rules@>=
+@=[[:space:]\x0d]+ {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  Whitespace." << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) Undelimited string:  "...".  @>
+@ Undelimited string.
+
+@<Rules@>=
+@=[[:alnum:]./~@@()+\?$][[:alnum:]./\-_~+@@()\?$]* {@>
+
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  Undelimited string == " << yytext
+            << endl
+            << endl;
+
+   }  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@=}@>
+
+
+
+
+
+@q *** (3) Delimited string:  "...".  @>
+@ Delimited string:  \.{\char`\"}$\ldots$\.{\char`\"}.  
+
+@<Rules@>=
+@=\"[^\"]*\" {@>
+
+   string temp_str = yytext;
+
+   string::size_type s = temp_str.size();
+
+   temp_str.erase(0, 1);
+   temp_str.erase(s - 2, s - 1);
+
+   size_t pos = string::npos;
+
+#if DEBUG_COMPILE 
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  Delimited string == " << yytext
+            << endl
+            << endl;
+   }  
+#endif  /* |DEBUG_COMPILE|  */ 
+
+     
+
+@=}@>
+
+@q ** (2) Additional functions.  @>
+
+@ Additional functions.
+
+@<|zzwrap| definition@>=
+
+#if 0
+int
+zzwrap(yyscan_t parameter)
+{
+
+    cerr << "Entering `zzwrap'." << endl;
+
+}
+#endif
+
+@
+@<|zzerror| definition@>=
+
+int
+zzerror(void* v, char const* s)
+{
+    cerr << "Entering `zzerror'." << endl;
+
+}
+
+@ Putting scanner together.
+@c
+@=%{@>
+@<Include files@>@;@/
+using namespace std;
+@=%}@>
+@<Start conditions@>@;@/
+@<Options@>@;@/
+@<Name definitions@>@;@/
+@=%%@>
+@=%{@>
+@<Local variables for |zzlex|@>@;@/
+@=%}@>
+@<Execute on entry to |zzlex|@>@;@/
+@q Rules @>
+@<Rules@>@;@/
+@=%%@>
+@q User code@>
+@<|zzwrap| definition@>@;@/
+@<|zzerror| definition@>@;@/
+
+ 
+@q * (1) Emacs-Lisp code for use in indirect buffers  @>
+
+@q (progn (cweb-mode) (outline-minor-mode))           @>
+
+@q * (1) Local variables for Emacs @>
+
+@q * Local variables for Emacs.@>
+@q Local Variables: @>
+@q mode:CWEB @>
+@q eval:(display-time) @>
+@q abbrev-mode:t @>
+@q eval:(read-abbrev-file) @>
+@q indent-tabs-mode:nil @>
+@q eval:(outline-minor-mode) @>
+@q fill-column:80 @>
+@q End: @>
+
