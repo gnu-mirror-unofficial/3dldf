@@ -14216,7 +14216,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @q **** (4) @>
 
 
-    char temp_filename[] = "fifo.XXXXXX";
+    char temp_filename[] = "mp_output.XXXXXX";
     
     errno = 0;
     int fd = mkstemp(temp_filename);
@@ -14270,31 +14270,22 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    errno = 0;
    status = system(temp_strm.str().c_str());
+
+   FILE *fp = fopen(temp_filename, "r");
    
-/*    yyscan_t scanner; */
-/*    zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner); */
-/*    zzset_in(fp, scanner); */
-/*    zzlex(scanner); */
-/*    zzlex_destroy(scanner); */
+   yyscan_t scanner;
+   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
+   zzset_in(fp, scanner);
+   zzlex(scanner);
+   zzlex_destroy(scanner);
    
-/*    fclose(fp); */
- 
+   fclose(fp);
+   fp = 0;
 
+   cerr << "After calling zzlex." << endl;
 
-/*    fp = 0; */
-
-/* cerr << "After calling zzlex." << endl; */
-
-
-@q *** (3) @>
-@
-@<Define |Path| functions@>=
-
-
-@q *** (3) @>
-@
-@<Define |Path| functions@>=
-
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q **** (4) @>
 @

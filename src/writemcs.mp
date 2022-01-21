@@ -74,6 +74,8 @@ def write_path (expr ppath, filename, do_show) =
       show postcontrol 0 of ppath;
     fi
 
+    write "START PATH" to filename;
+    
     s =   "(" & decimal (xpart (point 0 of ppath)) & ", " &  decimal (ypart (point 0 of ppath)) & ") .. "
         & "controls (" & decimal (xpart (postcontrol 0 of ppath)) & ", " & decimal (ypart (postcontrol 0 of ppath)) & ") ";
 
@@ -126,6 +128,10 @@ def write_path (expr ppath, filename, do_show) =
 
     write s to filename;
     %show s;
+
+    write "END PATH" to filename;
+
+    
 
     if do_show:
       message "Exiting write_path.";
