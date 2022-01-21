@@ -1,4 +1,4 @@
-@q scnmptpt.web
+@q scnmptpt.web@>
 @q Created by Laurence D. Finston Thu 20 Jan 2022 05:14:09 AM CET  @>
 
 @q * (1) Copyright and License.@>
@@ -58,36 +58,82 @@
 @
 @<Include files@>=
 
-#include <stdlib.h>
-#include <stdio.h>
-
-#include <fstream>
-#include <iomanip>
-#include <ios>
-#include <iostream>
-#include <map>
-#include <string>
-#include <time.h>
-#include <math.h>
-#include <limits.h>
-
-#include <sstream>   
-
-#include <vector>
-#include <deque>
-
-// #include <stack>
-// #include <set>
-
-#if 0
-#include <pthread.h>
-#endif 
-
 #include "loader.h++"
 
-#undef NAME_LEN
-#undef LOCAL_HOST
+#include <string.h>
 
+#ifdef __GNUC__
+#include <getopt.h> 
+#endif 
+
+#include "pspglb.h++"
+#include "io.h++"
+#include "gsltmplt.h++"
+#include "creatnew.h++"
+#include "pntrvctr.h++"
+#include "primes.h++"
+#include "complex.h++"
+#include "matrices.h++"
+#include "colors.h++"
+#include "transfor.h++"
+#include "pens.h++"
+#include "dashptrn.h++"
+#include "shapes.h++" 
+#include "pictures.h++"
+#include "points.h++"
+#include "lines.h++"
+#include "planes.h++"
+#include "nurbs.h++"
+#include "paths.h++"
+#include "curves.h++"
+#include "polygons.h++"
+#include "triangle.h++"
+#include "rectangs.h++"
+#include "conicsct.h++"
+#include "ellipses.h++"
+#include "circles.h++"
+#include "ellpsslc.h++"
+#include "crclslc.h++"
+#include "parabola.h++"
+#include "hyprbola.h++"
+#include "cncsctlt.h++"
+#include "helices.h++"
+#include "origami.h++"
+#if 0
+   #include "patterns.h++"
+#endif 
+
+#include "solids.h++"
+#include "solfaced.h++"
+#include "cuboid.h++"
+#include "polyhed.h++"
+#include "ddchdrn.h++"
+#include "rhtchdrn.h++"
+#include "plyhdslc.h++"
+#include "cones.h++"
+#include "cylinder.h++" 
+#include "ellpsoid.h++"
+#include "spheres.h++" 
+#include "sphrdevl.h++" 
+#include "parabold.h++"
+#include "paraellp.h++"
+#include "parahypr.h++" 
+#include "glyphs.h++"
+#include "pctfncs0.h++"
+#include "utility.h++"
+#include "pntrvcf0.h++"
+#include "predctes.h++"
+#include "scanprse.h++"   
+#include "figures.h++"   
+#include "parser.h++"   
+#include "parser_1.h++"   
+#include "scan.h++"
+#include "scanprsf.h++"
+#include "imetfncs.h++"
+#include "deftfncs.h++"
+#include "sctpcrt.h++"  
+#include "sctpfncs.h++"  
+#include "prrfnc0.h++"
 
 @q  ** (2) Start conditions.  @>
 @ Start conditions.
@@ -125,449 +171,96 @@ to {\bf zzlex} can be set here.
 @<Execute on entry to |zzlex|@>=
 
    cerr << "Entering `zzlex'." << endl;
-
-@q = Scan_Parse_Parameter_Type* param = static_cast<Scan_Parse_Parameter_Type*>(zzextra); @>
-@q = if (scanner_trace == true) SCANNER_DEBUG = true;                                     @>
+   Scanner_Node *scanner_node = static_cast<Scanner_Node>(yyextra); 
 
 @q ** (2) Rules.  @>
 @ Rules.
 
-@q *** (3) Punctuation.  @>
 
-@ Punctuation.
-
-@q **** (4) Asterisk.  @>
-@ Asterisk (\.{\*}).
-
-@<Rules@>=
-@=\* {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << " (asterisk)" << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-
-@q **** (4) Semi-Colon.  @>
-@ Semi-colon.
-
-@<Rules@>=
-@=; {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << " (semi-colon)" << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-@q **** SELECT (4) @> 
-@ SELECT
-@<Rules@>=
-@=select|SELECT {@>
-
-
-@=}@>
-
-@q **** ALL (4) @> 
-@ ALL
-@<Rules@>=
-@=all|ALL {@>
-
-
-@=}@>
-
-@q **** FROM (4) @> 
-@ FROM
-@<Rules@>=
-@=from|FROM {@>
-
-
-@=}@>
-
-@q **** BY (4) @> 
-@ BY
-@<Rules@>=
-@=by|BY {@>
-
-
-@=}@>
-
-@q **** ASC (ASCENDING) (4) @> 
-@ ASC (ASCENDING)
-@<Rules@>=
-@=asc|ASC {@>
-
-
-@=}@>
-
-
-@q **** DES (DESCENDING) (4) @> 
-@ DES (DESCENDING)
-@<Rules@>=
-@=descending|DESCENDING {@>
-
-
-@=}@>
-
-@q **** UNIQUE (4) @> 
-@ UNIQUE
-@<Rules@>=
-@=unique|UNIQUE {@>
-
-
-@=}@>
-
-@q **** LIMIT (4) @> 
-@ LIMIT
-@<Rules@>=
-@=limit|LIMIT {@>
-
-
-@=}@>
-
-@q **** KINGDOM (4) @> 
-@ KINGDOM
-@<Rules@>=
-@=kingdom|KINGDOM {@>
-
-
-@=}@>
-
-@q **** KINGDOMS (4) @> 
-@ KINGDOMS
-@<Rules@>=
-@=kingdoms|KINGDOMS {@>
-
-
-@=}@>
-
-@q **** PHYLUM (4) @> 
-@ PHYLUM
-@<Rules@>=
-@=phylum|PHYLUM {@>
-
-
-@=}@>
-
-@q **** PHYLA (4) @> 
-@ PHYLA
-@<Rules@>=
-@=phyla|PHYLA {@>
-
-
-@=}@>
-
-@q **** CLASS (4) @> 
-@ CLASS
-@<Rules@>=
-@=class|CLASS {@>
-
-
-@=}@>
-
-@q **** CLASSES (4) @> 
-@ CLASSES
-@<Rules@>=
-@=classes|CLASSES {@>
-
-
-@=}@>
-
-@q **** ORDER (4) @> 
-@ ORDER
-@<Rules@>=
-@=order|ORDER {@>
-
-
-@=}@>
-
-@q **** ORDERS (4) @> 
-@ ORDERS
-@<Rules@>=
-@=orders|ORDERS {@>
-
-
-@=}@>
-
-@q **** FAMILY (4) @> 
-@ FAMILY
-@<Rules@>=
-@=family|FAMILY {@>
-
-
-@=}@>
-
-@q **** FAMILIES (4) @> 
-@ FAMILIES
-@<Rules@>=
-@=families|FAMILIES {@>
-
-
-@=}@>
-
-@q **** GENUS (4) @> 
-@ GENUS
-@<Rules@>=
-@=genus|GENUS {@>
-
-
-@=}@>
-
-@q **** GENERA (4) @> 
-@ GENERA
-@<Rules@>=
-@=genera|GENERA {@>
-
-
-@=}@>
-
-@q **** SPECIES (4) @> 
-@ SPECIES
-@<Rules@>=
-@=species|SPECIES {@>
-
-
-@=}@>
-
-@q **** SUBSPECIES (4) @> 
-@ SUBSPECIES
-@<Rules@>=
-@=subspecies|SUBSPECIES {@>
-
-
-@=}@>
-
-@q **** VARIETY (4) @> 
-@ VARIETY
-@<Rules@>=
-@=variety|VARIETY {@>
-
-
-@=}@>
-
-@q **** VARIETIES (4) @> 
-@ VARIETIES
-@<Rules@>=
-@=varieties|VARIETIES {@>
-
-
-@=}@>
-
-@q **** ID (4) @> 
-@ ID
-@<Rules@>=
-@=id|ID {@>
-
-
-@=}@>
-
-
-@q **** QUERY (4) @> 
-@ QUERY
-@<Rules@>=
-@=query|QUERY {@>
-
-
-@=}@>
-
-@q *** (3) INPUT.  @>
-@ \.{INPUT}.
-
-@<Rules@>=
-@=INPUT|input {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-
-
-
-@q *** (3) END.  @>
-@ END.
-
-@<Rules@>=
-@=END|end {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-@q *** (3) ENDINPUT.  @>
-@ \.{ENDINPUT}.
-
-@<Rules@>=
-@=ENDINPUT|endinput {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-@q *** (3) ditto.  @>
-@ ditto (double-quote character as string).
-
-@<Rules@>=
-@=ditto|DITTO|Ditto {@>
-
-
-#if DEBUG_COMPILE 
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  ditto == " << yytext
-            << endl
-            << endl;
-
-   }  
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-@q *** (3) Comments.  @>
-@ Comments.  
-
-@<Rules@>=
-@=(%|#).*$ {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-      cerr << "In `zzlex':  Comment: " << yytext << endl;
-     
-   }  /* |if (DEBUG)|  */
-
-#endif  /* |DEBUG_COMPILE|  */ 
-
-   /* Ignore  */
-
-@=}@>
-
-
-@q *** (3) Whitespace.  @>
-@ Whitespace.
-
-@<Rules@>=
-@=[[:space:]\x0d]+ {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  Whitespace." << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-@=}@>
-
-@q *** (3) Undelimited string:  "...".  @>
-@ Undelimited string.
-
-@<Rules@>=
-@=[[:alnum:]./~@@()+\?$][[:alnum:]./\-_~+@@()\?$]* {@>
-
-
-#if DEBUG_COMPILE 
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  Undelimited string == " << yytext
-            << endl
-            << endl;
-
-   }  
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@=}@>
-
-
-
-
-
-@q *** (3) Delimited string:  "...".  @>
-@ Delimited string:  \.{\char`\"}$\ldots$\.{\char`\"}.  
-
-@<Rules@>=
-@=\"[^\"]*\" {@>
-
-   string temp_str = yytext;
-
-   string::size_type s = temp_str.size();
-
-   temp_str.erase(0, 1);
-   temp_str.erase(s - 2, s - 1);
-
-   size_t pos = string::npos;
-
-#if DEBUG_COMPILE 
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  Delimited string == " << yytext
-            << endl
-            << endl;
-   }  
-#endif  /* |DEBUG_COMPILE|  */ 
-
-     
-
-@=}@>
-
-@q ** (2) Additional functions.  @>
-
-@ Additional functions.
-
-@<|zzwrap| definition@>=
-
-#if 0
-int
-zzwrap(yyscan_t parameter)
-{
-
-    cerr << "Entering `zzwrap'." << endl;
-
-}
-#endif
-
+@q *** (3) @>
 @
-@<|zzerror| definition@>=
+@<Rules@>=
+@="This is MetaPost, ".*$ {@>
 
-int
-zzerror(void* v, char const* s)
-{
-    cerr << "Entering `zzerror'." << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "Found \"This is MetaPost ...\" line." << endl;
 
-}
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) @>  
+@
+@<Rules@>=
+@=^[0-9]+(\.[0-9])? {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "One or more digits and an optional decimal point followed by more digits" << endl 
+            << "at the beginning of a line, belonging to a number, possibly continued from previous line." 
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=[-+]?[0-9]+(\.[0-9])?$ {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "A number at the end of a line, possibly continued on next line." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=^\.[0-9]+ {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "A decimal point at the beginning of a line, followed by at least one digit, continued from previous line." 
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+
+
+
+
 
 @ Putting scanner together.
 @c
@@ -587,8 +280,7 @@ using namespace std;
 @<Rules@>@;@/
 @=%%@>
 @q User code@>
-@<|zzwrap| definition@>@;@/
-@<|zzerror| definition@>@;@/
+
 
  
 @q * (1) Emacs-Lisp code for use in indirect buffers  @>
