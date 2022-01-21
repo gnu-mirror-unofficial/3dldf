@@ -258,6 +258,68 @@ getchar();
 @=}@>
 
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=\( {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "Open parenthesis." 
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=\) {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "Close parenthesis." 
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=, {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  " << yytext << endl
+            << "Comma." 
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+
 
 
 

@@ -1175,7 +1175,7 @@ read_metapost_output_from_pipe(string s,
 {
 @q *** (3) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    if (DEBUG)
    {
@@ -1232,8 +1232,6 @@ read_metapost_output_from_pipe(string s,
          if (DEBUG)
          {
             cerr << "`getline' returned `status' == " << status << endl;
-            cerr << "XXX Enter <RETURN> to continue: ";
-            getchar(); 
 
          }
 
@@ -1267,9 +1265,6 @@ read_metapost_output_from_pipe(string s,
          if (DEBUG)
             cerr << "status == " << status << endl
                  << "buffer == " << buffer << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
          s0 = buffer;
          pos = s0.find("Path at line");

@@ -12,6 +12,20 @@ beginfig(0);
 
 %% ** (2)
 
+  path q;
+
+  q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+
+  resolve q to 10;
+
+endfig;
+
+verbatim_metapost "end;";
+
+end;
+
+
+
   point p[];
   point z[];
   
@@ -104,6 +118,8 @@ beginfig(0);
   dotlabel.rt ("24", z24);
   dotlabel.lft("25", z25);
 
+
+  
   numeric a;
   a := ((ypart p2) - (ypart p6));
 
@@ -121,7 +137,7 @@ beginfig(0);
 
   % message "pv0 before resolve (see above)."; 
   % pause;
-  
+
   draw pv0 scaled (.5, .5, .5);
   draw pv1 scaled (.5, .5, .5);
 
@@ -152,9 +168,12 @@ beginfig(0);
   
 %% ** (2)
 
-verbatim_metapost "end;";
+
 endfig with_projection parallel_x_y no_sort;
+verbatim_metapost "end;";
+
 %endfig;
+
 
 end;
 

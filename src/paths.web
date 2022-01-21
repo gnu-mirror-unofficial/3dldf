@@ -158,10 +158,7 @@ Changed the type of |draw_color_vector| from |vector<Color*>| to
 
 \initials{LDF 2005.03.16.}
 Removed |Color* draw_color|. 
-Removed all references to it without comment.
-
-\initials{LDF 2005.03.16.}
-Added |Pointer_Vector<Dash_Pattern>* dash_pattern_vector|
+Removed all references to it withtrtr_Vector<Dash_Pattern>* dash_pattern_vector|
 and |Pointer_Vector<Pen>* pen_vector|.
 
 \initials{LDF 2005.03.16.}
@@ -14089,9 +14086,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
       cerr << "In Path::resolve:  *this before alignment (see above)" << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }
 
 @q **** (4) @>
@@ -14118,8 +14112,7 @@ getchar();
    if (DEBUG)
    { 
       normal.show("normal before shift:");
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -14129,9 +14122,6 @@ getchar();
    if (DEBUG)
    {
       normal.show("normal after shift:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
    }  
 #endif /* |DEBUG_COMPILE|  */@;
@@ -14149,9 +14139,6 @@ getchar();
    if (DEBUG)
    { 
       show("*this after alignment:");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
    }  
 #endif /* |DEBUG_COMPILE|  */@;
@@ -14185,11 +14172,11 @@ getchar();
 
             if ((*ct_iter)->pt0 != 0)
                connector_strm << " (" << (*ct_iter)->pt0->get_x() 
-                              << ", " << (*ct_iter)->pt0->get_y() << ")";
+                              << "cm, " << (*ct_iter)->pt0->get_y() << "cm)";
 
             if ((*ct_iter)->pt1 != 0)
-               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << ", " 
-                              << (*ct_iter)->pt1->get_y() << ")";
+               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, " 
+                              << (*ct_iter)->pt1->get_y() << "cm)";
 
             connector_strm << " ..";
          }
@@ -14228,88 +14215,53 @@ getchar();
 
    temp_strm << "path r;n = (length q) / " << res_val << ";"
              << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;show r;show \"§\";end;'";
+             << "r := r .. m;endfor;r := r .. cycle;show r;end;'";
 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
       cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
+   status = system(temp_strm.str().c_str());
+
+   char buffer[32768];
+   memset(buffer, '\0', 32768);
 
    yyscan_t scanner;
    FILE *in = 0;
    
-   in = popen(temp_strm.str().c_str(), "r");
+   in = fopen("null.log", "r");
    
    zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
    zzset_in(in, scanner);
    zzlex(scanner);
    zzlex_destroy(scanner);
    
-   pclose(in);
+   fclose(in);
 
    in = 0;
 
 cerr << "After calling zzlex." << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-#if 0 
-   Pointer_Vector<Path> pv;
-
-   status = read_metapost_output_from_pipe(temp_strm.str().c_str(), pv, scanner_node);
-
-cerr << "After read_metapost_output_from_pipe." << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-   if (status != 0)
-   {
-        cerr << "ERROR!  In `Path::resolve':  `read_metapost_output_from_pipe' failed, "
-             << "returning " << status << "." << endl
-             << "Exiting function unsuccessfully with return value 1."
-             << endl;
-
-        return 1;
-   }
-#if DEBUG_COMPILE
-   else if (DEBUG)
-   { 
-        cerr << "In `Path::resolve':  `read_metapost_output_from_pipe' succeeded, returning 0." 
-             << endl
-             << "`pv.v.size()' == " << pv.v.size() << endl
-             << "`pv.v[0]->size()' == " << pv.v[0]->size() << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 @
 @<Define |Path| functions@>=    
 
+  Pointer_Vector<Path> pv;
+
    if (pv.v.size() > 0 && pv.v[0] != 0 && pv.v[0]->size() > 0)
    {
       pv.v[0]->show("*(pv.v[0]):");
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+
       *this = *(pv.v[0]);
 
       this->show("*this:");
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
    }
   
-#endif 
 
 #if DEBUG_COMPILE
    if (DEBUG)

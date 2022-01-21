@@ -1874,8 +1874,6 @@ Removed debugging code.
 
   c->show("*c:");
 
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar();      
 
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
