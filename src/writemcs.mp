@@ -22,7 +22,7 @@
 
 %%%% GNU 3DLDF is a GNU package.  
 %%%% It is part of the GNU Project of the  
-%%%% Free Software Foundation 
+%%%% Free Software Foundation  
 %%%% and is published under the GNU General Public License. 
 %%%% See the website http://www.gnu.org 
 %%%% for more information.   
@@ -46,7 +46,6 @@
 
 %%%% Laurence.Finston@gmx.de
 
-
 
 tracingonline := 1;
 
@@ -76,6 +75,7 @@ def write_path (expr ppath, filename, do_show) =
         & "controls (" & decimal (xpart (postcontrol 0 of ppath)) & ", " & decimal (ypart (postcontrol 0 of ppath)) & ") ";
 
     write s to filename;
+    show s;
 
     for i = 1 upto length ppath:
 
@@ -87,6 +87,7 @@ def write_path (expr ppath, filename, do_show) =
 	if i < length ppath: & ".. " fi ;
       
       write s to filename;
+      show s;
       
       if i < length ppath:
 	if do_show:
@@ -100,6 +101,7 @@ def write_path (expr ppath, filename, do_show) =
 	  & "controls (" & decimal (xpart (postcontrol i of ppath)) & ", " & decimal (ypart (postcontrol i of ppath)) & ") ";
 
 	write s to filename;
+	show s;
 	
       fi
 
@@ -118,6 +120,7 @@ def write_path (expr ppath, filename, do_show) =
     fi
 
     write s to filename;
+    show s;
 
     if do_show:
       message "Exiting write_path.";
@@ -129,7 +132,7 @@ enddef;
 
 path q;
 
-q = origin .. controls (32.12345678910111213, 31.098765) .. (1cm, 1cm) .. (2cm, 2cm) .. (1cm, 2cm) .. (0cm, 2cm) .. cycle;
+q = origin .. (1cm, 1cm) .. (2cm, 2cm) .. (1cm, 2cm) .. (0cm, 2cm) .. cycle;
 
 string s;
 
