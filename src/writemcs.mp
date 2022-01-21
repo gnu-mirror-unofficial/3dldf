@@ -47,10 +47,13 @@
 %%%% Laurence.Finston@gmx.de
 
 
-tracingonline := 1;
+%% * (1) Top
+
+
+%% * (1) write_path
 
 def write_path (expr ppath, filename, do_show) =
-
+  
   begingroup;
     save s;
 
@@ -75,7 +78,9 @@ def write_path (expr ppath, filename, do_show) =
         & "controls (" & decimal (xpart (postcontrol 0 of ppath)) & ", " & decimal (ypart (postcontrol 0 of ppath)) & ") ";
 
     write s to filename;
-    show s;
+
+
+    %show s;    
 
     for i = 1 upto length ppath:
 
@@ -87,7 +92,7 @@ def write_path (expr ppath, filename, do_show) =
 	if i < length ppath: & ".. " fi ;
       
       write s to filename;
-      show s;
+      %show s;
       
       if i < length ppath:
 	if do_show:
@@ -101,7 +106,7 @@ def write_path (expr ppath, filename, do_show) =
 	  & "controls (" & decimal (xpart (postcontrol i of ppath)) & ", " & decimal (ypart (postcontrol i of ppath)) & ") ";
 
 	write s to filename;
-	show s;
+	%show s;
 	
       fi
 
@@ -120,7 +125,7 @@ def write_path (expr ppath, filename, do_show) =
     fi
 
     write s to filename;
-    show s;
+    %show s;
 
     if do_show:
       message "Exiting write_path.";
@@ -130,21 +135,27 @@ def write_path (expr ppath, filename, do_show) =
     
 enddef;
 
-path q;
-
-q = origin .. (1cm, 1cm) .. (2cm, 2cm) .. (1cm, 2cm) .. (0cm, 2cm) .. cycle;
-
-string s;
-
-s := "ttemp.out";
-
-%write_path(q, s, true);
-write_path(q, s, false);
-
-end;
-
 endinput;
+
+% %% * (1)
+
+% path q;
+
+% q = origin .. (1cm, 1cm) .. (2cm, 2cm) .. (1cm, 2cm) .. (0cm, 2cm) .. cycle;
+
+% string s;
+
+% s := "ttemp.out";
+
+% %write_path(q, s, true);
+% write_path(q, s, false);
+
+% %end;
+
+% endinput;
 
 %% Local Variables:
 %% mode:MetaPost
+%% outline-minor-mode:t
+%% outline-regexp:"%% [*\f]+"  
 %% End:

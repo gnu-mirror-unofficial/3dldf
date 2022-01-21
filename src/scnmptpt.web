@@ -319,9 +319,23 @@ getchar();
 
 @=}@>
 
+@q *** (3) End-of-file (EOF).  @>
+@ End-of-file (EOF).
 
+@<Rules@>=
+@=<<EOF>> {@>
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  Read EOF.  Returning." << endl;
 
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+   
+   return 0;
+
+@=}@>
 
 
 @ Putting scanner together.

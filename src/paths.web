@@ -81,6 +81,9 @@ Now including \filename{nurbs.h}.
 @<Include files@>=
 #include "loader.h++"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
 #include <string.h>
 
 #include "pspglb.h++"
@@ -14048,7 +14051,6 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 
 }  /* End of |Path::get_direction| definition  */
 
-
 @q ** (2) Resolve.  @>
 @ Resolve.
 \initials{LDF 2022.01.18.}
@@ -14154,7 +14156,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    stringstream connector_strm;
 
    temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-             << "'tracingonline :=1;path q;"  << "q = ";
+             << "'tracingonline :=1; input writemcs.mp; path q;"  << "q = ";
 
 @q **** (4) @>
 
@@ -14213,9 +14215,50 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
 @q **** (4) @>
 
+
+    char temp_filename[] = "fifo.XXXXXX";
+    
+    errno = 0;
+    int fd = mkstemp(temp_filename);
+
+    if (fd == -1)
+    {
+            cerr << "ERROR!  In `Path::resolve':"
+                 << endl 
+                 << "`mkstemp' failed, returning -1:"
+                 << endl
+                 << strerror(errno)
+                 << endl 
+                 << "Failed to create temporary file."
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 1."
+                 << endl;
+
+            return 1;
+
+    }  /* |if (fd == -1)|  */
+
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    {
+        cerr << "In `Path::resolve':"
+             << endl 
+             << "`mkstemp' succeeded:  `temp_filename' == " << temp_filename 
+             << endl;
+
+    }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   close(fd);
+
    temp_strm << "path r;n = (length q) / " << res_val << ";"
              << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;show r;end;'";
+             << "r := r .. m;endfor;r := r .. cycle;write_path(r, \"" << temp_filename << "\", false);end;'";
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14225,26 +14268,33 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
+   errno = 0;
    status = system(temp_strm.str().c_str());
-
-   char buffer[32768];
-   memset(buffer, '\0', 32768);
-
-   yyscan_t scanner;
-   FILE *in = 0;
    
-   in = fopen("null.log", "r");
+/*    yyscan_t scanner; */
+/*    zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner); */
+/*    zzset_in(fp, scanner); */
+/*    zzlex(scanner); */
+/*    zzlex_destroy(scanner); */
    
-   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
-   zzset_in(in, scanner);
-   zzlex(scanner);
-   zzlex_destroy(scanner);
-   
-   fclose(in);
+/*    fclose(fp); */
+ 
 
-   in = 0;
 
-cerr << "After calling zzlex." << endl;
+/*    fp = 0; */
+
+/* cerr << "After calling zzlex." << endl; */
+
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
 
 @q **** (4) @>
 @
@@ -15598,14 +15648,6 @@ class Glyph;
 @q Local Variables: @>
 @q mode:CWEB @>
 @q eval:(display-time) @>
-@q run-gxx-on-file:"main.c" @>
-@q run-cweb-on-file:"main.web" @>
-@q run-cweave-on-file:"3DLDF.web" @>
-@q makefile:"makefile" @>
-@q executable-name:"pp" @>
-@q use-g++:t @>
-@q eval:(read-abbrev-file) @>
 @q indent-tabs-mode:nil @>
 @q eval:(outline-minor-mode) @>
-@q run-cweave-on-file:"3DLDF.web" @>
 @q End: @>

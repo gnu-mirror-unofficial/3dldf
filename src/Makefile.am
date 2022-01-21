@@ -1482,7 +1482,7 @@ ttemp.ps: ttemp.dvi
 ttemp.dvi: ttemp.txt ttemp.0
 	tex $<
 
-ttemp000.eps: ttemp.mp
+ttemp000.eps: ttemp.mp writemcs.mp
 	mpost -numbersystem "double" $<
 
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
