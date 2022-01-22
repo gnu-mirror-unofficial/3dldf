@@ -1772,25 +1772,23 @@ Point::is_whatever(Scanner_Node scanner_node,
 
 \LOG
 \initials{LDF 2004.1.2.}  
-Now returning different values, depending on
-whether |real| is |float| or |double|.
-@:!! TO DO@> TO DO:  Try to find out what values would be best.  It
-will be necessary to check how good the value for |double| is.
+Now returning different values, depending on whether |real| is |float| or |double|.
+@:!! TO DO@> TO DO:  Try to find out what values would be best.  It will be necessary 
+to check how good the value for |double| is.
 
 \initials{LDF 2004.1.2.} 
 Made |epsilon| non-inline.
 \ENDLOG 
 
 @<Declare |Point| functions@>=
-
 static
 real
-epsilon();
+epsilon(void);
 
 @
 @<Define |Point| functions@>=
 real
-Point::epsilon()
+Point::epsilon(void)
 {
 #if LDF_REAL_DOUBLE
   return .000000001;
@@ -4364,10 +4362,9 @@ END_ALIGN_WITH_AXIS:
 @q **** (4) Normalize point. @>
 @*3 Normalize point.  
 
-It makes it easier to determine the correct
-direction of rotation toward the x-y or y-z plane if |p1|'s coordinates
-are all $>= 0$, so we rotate it in order to make them so.  The only
-case that requires more than a rotation around a single axis is the
+It makes it easier to determine the correct direction of rotation toward the x-y 
+or y-z plane if |p1|'s coordinates are all $>= 0$, so we rotate it in order to make them so.  
+The only case that requires more than a rotation around a single axis is the
 case that $x_{p1}$, $y_{p1}$, and $z_{p1}$ are all $<0$. 
 It would be nice if I could replace this long conditional with a more
 elegant construction, but I don't know one.

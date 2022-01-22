@@ -434,7 +434,19 @@ prbsnflx.c++: prbsnflx.l++
 	@cat prbsnflx.c++ >> AAAtmp.txt
 	@mv AAAtmp.txt prbsnflx.c++
 
-scnmptpt.o: scnmptpt.c++ scnmptpt.h++
+scnmptpt.o: scnmptpt.c++ scnmptpt.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ pntrvctr.h++ \
+	    primes.h++ complex.h++ matrices.h++ colors.h++ transfor.h++ pens.h++ dashptrn.h++ \
+	    shapes.h++ pictures.h++ points.h++ lines.h++ planes.h++ nurbs.h++ \
+	    paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+	    conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ \
+	    parabola.h++ hyprbola.h++ cncsctlt.h++ helices.h++ origami.h++ \
+	    solids.h++ solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ \
+	    rhtchdrn.h++ plyhdslc.h++ cones.h++ cylinder.h++ ellpsoid.h++ \
+	    spheres.h++ sphrdevl.h++ parabold.h++ paraellp.h++ parahypr.h++ \
+	    glyphs.h++ pctfncs0.h++ utility.h++ pntrvcf0.h++ predctes.h++ \
+	    scanprse.h++ figures.h++ parser.h++ parser_1.h++ scan.h++ scanprsf.h++ \
+	    imetfncs.h++ deftfncs.h++ sctpcrt.h++ sctpfncs.h++ prrfnc0.h++ \
+	    mpoutput.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 scnmptpt.c++ scnmptpt.h++: scnmptpt.l++ 

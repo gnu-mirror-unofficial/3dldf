@@ -134,6 +134,7 @@
 #include "sctpcrt.h++"  
 #include "sctpfncs.h++"  
 #include "prrfnc0.h++"
+#include "mpoutput.h++"
 
 @q  ** (2) Start conditions.  @>
 @ Start conditions.
@@ -154,7 +155,7 @@
 @<Name definitions@>=
 
 NUMBER [-]?[0-9]+(\.[0-9]+)?
-POINT \([-]?[0-9]+(\.[0-9]+)?,[[:space:]]*[-]?[0-9]+(\.[0-9]+)?\) /* [-]?[0-9]+(\.[0-9]+)?\) */
+POINT \({NUMBER},[[:space:]]*{NUMBER}\) 
 
 @q * (1) Local variables for |zzlex|.  @>
 @ Local variables for {\bf zzlex}.
@@ -163,6 +164,9 @@ POINT \([-]?[0-9]+(\.[0-9]+)?,[[:space:]]*[-]?[0-9]+(\.[0-9]+)?\) /* [-]?[0-9]+(
 @<Local variables for |zzlex|@>=
 
 bool DEBUG = true;  /* |false|  */
+
+Scanner_Node scanner_node = static_cast<Scanner_Node>(yyextra); 
+
 
 @q ** (2) Code to be executed each time |zzlex| is entered.  @>
 
@@ -174,7 +178,6 @@ to {\bf zzlex} can be set here.
 @<Execute on entry to |zzlex|@>=
 
    cerr << "Entering `zzlex'." << endl;
-   Scanner_Node *scanner_node = static_cast<Scanner_Node>(yyextra); 
 
 @q ** (2) Rules.  @>
 @ Rules.
@@ -190,11 +193,13 @@ to {\bf zzlex} can be set here.
    { 
        cerr << "In `zzlex':  START PATH" << endl; 
 
-cerr << "XXX Enter <RETURN> to continue: "; 
-getchar();  
-
    }  /* |if (DEBUG)|  */ 
 #endif  /* |DEBUG_COMPILE|  */  
+
+   if (scanner_node->metapost_output_struct == 0)
+      scanner_node->metapost_output_struct = new Metapost_Output_Struct;
+
+   scanner_node->metapost_output_struct->path_vector.push_back(create_new<Path>(0));
 
 @=}@> 
 
@@ -206,64 +211,46 @@ getchar();
 #if DEBUG_COMPILE 
    if (DEBUG) 
    { 
-       cerr << "In `zzlex':  END PATH" << endl; 
+       cerr << "In `zzlex':  END PATH" << endl;
+       scanner_node->metapost_output_struct->path_vector.back()->show();
 
-cerr << "XXX Enter <RETURN> to continue: "; 
-getchar();  
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    }  /* |if (DEBUG)|  */ 
 #endif  /* |DEBUG_COMPILE|  */  
 
+
+
 @=}@> 
 
+
 @q *** (3) @>
 @
 @<Rules@>=
-@=controls {@>
+@=controls[[:space:]]*{POINT}[[:space:]]*and[[:space:]]*{POINT} {@>
 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-       cerr << "In `zzlex':  controls" << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+       cerr << "In `zzlex':  `controls .. and point':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
+
+   
 
 @=}@>
 
 @q *** (3) @>
 @
 @<Rules@>=
-@=and {@>
+@=controls[[:space:]]*{POINT} {@>
 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-       cerr << "In `zzlex':  and" << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-@=}@>
-
-@q *** (3) @>
-@
-@<Rules@>=
-@=cycle {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  cycle" << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+       cerr << "In `zzlex':  `controls point':  " << yytext << endl;
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
@@ -280,9 +267,6 @@ getchar();
    {
        cerr << "In `zzlex':  A point:  " << yytext << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
@@ -298,14 +282,56 @@ getchar();
    {
        cerr << "In `zzlex':  A number:  " << yytext << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=cycle {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  `cycle'." << endl;
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
 @=}@>
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=\.\. {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  `connector':  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=[[:space:]] {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  whitespace, ignoring:  \"" << yytext << "\"" << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
 
 @q *** (3) End-of-file (EOF).  @>
 @ End-of-file (EOF).
@@ -320,7 +346,7 @@ getchar();
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
-   
+
    return 0;
 
 @=}@>
