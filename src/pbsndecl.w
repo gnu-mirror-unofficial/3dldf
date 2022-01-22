@@ -104,6 +104,7 @@ when I tried to build 3DLDF from scratch.
 #include "planes.h++"
 #include "nurbs.h++"
 #include "paths.h++"
+#include "mpoutput.h++"
 #include "curves.h++"
 #include "polygons.h++"
 #include "triangle.h++"

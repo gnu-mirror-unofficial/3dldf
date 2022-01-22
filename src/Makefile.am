@@ -82,7 +82,8 @@ lib_LTLIBRARIES = lib3dldflb.la
                 ellpsoid.web ellpsslc.web figures.web glyphs.web gsltmplt.web \
                 helices.web hyprbola.web \
                 imetfncs.web io.web lines.web loader.web \
-                matrices.web newwrite.web nurbs.web origami.web parabola.web parabold.web paraellp.web \
+                matrices.web mpoutput.web newwrite.web nurbs.web origami.web \
+                parabola.web parabold.web paraellp.web \
                 parahypr.web paths.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
@@ -324,7 +325,7 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ astronmy.h++ circles.h++ cn
                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
                      ellpsslc.h++ glyphs.h++ gsltmplt.h++ helices.h++ \
-                     hyprbola.h++ io.h++ lines.h++ loader.h++ matrices.h++ \
+                     hyprbola.h++ io.h++ lines.h++ loader.h++ matrices.h++ mpoutput.h++ \
                      newwrite.h++ nurbs.h++ \
                      origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
                      parahypr.h++ paths.h++ pctfncs0.h++ pens.h++ pictures.h++ \
@@ -394,7 +395,7 @@ run-p:
 #                      creatnew.h++ cuboid.h++ curves.h++ cylinder.h++ \
 #                      dashptrn.h++ ddchdrn.h++ ellipses.h++ ellpsoid.h++ \
 #                      ellpsslc.h++ glyphs.h++ gsltmplt.h++ helices.h++ \
-#                      hyprbola.h++ io.h++ lines.h++ matrices.h++ newwrite.h++ nurbs.h++ \
+#                      hyprbola.h++ io.h++ lines.h++ matrices.h++ mpoutput.h++ newwrite.h++ nurbs.h++ \
 #                      origami.h++ parabola.h++ parabold.h++ paraellp.h++ \
 #                      parahypr.h++ paths.h++ pctfncs0.h++ pens.h++ pictures.h++ \
 #                      planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
@@ -557,7 +558,8 @@ curves.o: curves.c++ curves.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 cylinder.o: cylinder.c++ cylinder.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ \
+                         triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -572,7 +574,8 @@ dashptrn.o: dashptrn.c++ dashptrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 ddchdrn.o: ddchdrn.c++ ddchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ \
+                       triangle.h++ rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++
@@ -600,13 +603,15 @@ deftfncs.o: deftfncs.c++ deftfncs.h++ arc.h++ circles.h++ cncsctlt.h++ \
 ellipses.o: ellipses.c++ ellipses.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ \
+                         triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
 
 ellpsoid.o: ellpsoid.c++ ellpsoid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
-                         transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
+                         transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ \
+                         lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
@@ -617,14 +622,16 @@ ellpsoid.o: ellpsoid.c++ ellpsoid.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 ellpsslc.o: ellpsslc.c++ ellpsslc.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                         rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 figures.o: figures.c++ figures.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                       rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ newwrite.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -636,7 +643,8 @@ figures.o: figures.c++ figures.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 glyphs.o: glyphs.c++ glyphs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                     rectangs.h++ \
                      conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                      hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                      solfaced.h++ cuboid.h++ newwrite.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -647,7 +655,8 @@ glyphs.o: glyphs.c++ glyphs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 newwrite.o: newwrite.c++ newwrite.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                     rectangs.h++ \
                      conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                      hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                      solfaced.h++ cuboid.h++ newwrite.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -663,7 +672,8 @@ gsltmplt.o: gsltmplt.c++ gsltmplt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++
 helices.o: helices.c++ helices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                       rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++
 	$(CXXCOMPILE) -c -o $@ $<
@@ -699,6 +709,13 @@ lines.o: lines.c++ lines.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 
 matrices.o: matrices.c++ matrices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++
+	$(CXXCOMPILE) -c -o $@ $<
+
+
+mpoutput.o: paths.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
+            creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
+            transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
+            planes.h++ nurbs.h++ paths.h++ mpoutput.h++ scnmptpt.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 nurbs.o: nurbs.c++ nurbs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
@@ -850,7 +867,7 @@ primes.o: primes.c++ primes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 prrfnc0.o: prrfnc0.c++ prrfnc0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ mpoutput.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -883,7 +900,7 @@ rhtchdrn.o: rhtchdrn.c++ rhtchdrn.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ \
                  pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ transfor.h++ \
                  pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ planes.h++ \
-                 nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                 nurbs.h++ paths.h++ mpoutput.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                  conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                  hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                  solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -895,7 +912,8 @@ scan.o: scan.c++ scan.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++
 scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ mpoutput.h++ curves.h++ polygons.h++ triangle.h++ \
+                         rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -907,7 +925,8 @@ scanprse.o: scanprse.c++ scanprse.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ mpoutput.h++ curves.h++ polygons.h++ triangle.h++ \
+                         rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ astronmy.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -919,7 +938,8 @@ scanprsf.o: scanprsf.c++ scanprsf.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ mpoutput.h++ curves.h++ polygons.h++ triangle.h++ \
+                       rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -932,7 +952,8 @@ sctpcrt.o: sctpcrt.c++ sctpcrt.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 sctpfncs.o: sctpfncs.c++ sctpfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ mpoutput.h++ curves.h++ polygons.h++ triangle.h++ \
+                         rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -950,7 +971,8 @@ shapes.o: shapes.c++ shapes.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 solfaced.o: solfaced.c++ solfaced.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                         rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++             
@@ -959,7 +981,8 @@ solfaced.o: solfaced.c++ solfaced.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 solids.o: solids.c++ solids.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                      creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                      transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                     planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                     rectangs.h++ \
                      conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                      hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
@@ -967,7 +990,8 @@ solids.o: solids.c++ solids.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 spheres.o: spheres.c++ spheres.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                       rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -977,7 +1001,8 @@ spheres.o: spheres.c++ spheres.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
 sphrdevl.o: sphrdevl.c++ sphrdevl.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                          creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                         planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                         rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -998,7 +1023,8 @@ triangle.o: triangle.c++ triangle.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 utility.o: utility.c++ utility.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                        creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                        transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
-                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
+                       planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ \
+                       rectangs.h++ \
                        conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
                        hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                        solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
@@ -1353,7 +1379,7 @@ headers:
              ddchdrn.h++ deftfncs.h++ ellipses.h++ ellpsoid.h++ \
              ellpsslc.h++ figures.h++ glyphs.h++ newwrite.h++ gsltmplt.h++ \
              helices.h++ hyprbola.h++ imetfncs.h++ io.h++ lines.h++ \
-             loader.h++ main.h++ matrices.h++ nurbs.h++ origami.h++ \
+             loader.h++ main.h++ matrices.h++ mpoutput.h++ nurbs.h++ origami.h++ \
              parabola.h++ parabold.h++ paraellp.h++ parahypr.h++ \
              paths.h++ patterns.h++ pctfncs0.h++ pens.h++ \
              pictures.h++ planes.h++ plyhdslc.h++ pntrvcf0.h++ \
