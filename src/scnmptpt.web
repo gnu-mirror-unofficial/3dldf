@@ -177,57 +177,51 @@ to {\bf zzlex} can be set here.
 @ Rules.
 
 
-@q *** (3) @>
-@
-@<Rules@>=
-@="This is MetaPost, ".*$ {@>
+@q *** (3) @> 
+@ 
+@<Rules@>= 
+@="START PATH" {@> 
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << endl
-            << "Found \"This is MetaPost ...\" line." << endl;
+#if DEBUG_COMPILE 
+   if (DEBUG) 
+   { 
+       cerr << "In `zzlex':  START PATH" << endl; 
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+cerr << "XXX Enter <RETURN> to continue: "; 
+getchar();  
 
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+   }  /* |if (DEBUG)|  */ 
+#endif  /* |DEBUG_COMPILE|  */  
 
-@=}@>
+@=}@> 
 
-@q *** (3) @>  
-@
-@<Rules@>=
-@=^[0-9]+(\.[0-9])? {@>
+@q *** (3) @> 
+@ 
+@<Rules@>= 
+@="END PATH" {@> 
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  " << yytext << endl
-            << "One or more digits and an optional decimal point followed by more digits" << endl 
-            << "at the beginning of a line, belonging to a number, possibly continued from previous line." 
-            << endl;
+#if DEBUG_COMPILE 
+   if (DEBUG) 
+   { 
+       cerr << "In `zzlex':  END PATH" << endl; 
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+cerr << "XXX Enter <RETURN> to continue: "; 
+getchar();  
 
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
+   }  /* |if (DEBUG)|  */ 
+#endif  /* |DEBUG_COMPILE|  */  
 
-@=}@>
-
+@=}@> 
 
 @q *** (3) @>
 @
 @<Rules@>=
-@=[-+]?[0-9]+(\.[0-9])?$ {@>
+@=controls {@>
 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-       cerr << "In `zzlex':  " << yytext << endl
-            << "A number at the end of a line, possibly continued on next line." << endl;
+       cerr << "In `zzlex':  controls" << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
@@ -240,14 +234,12 @@ getchar();
 @q *** (3) @>
 @
 @<Rules@>=
-@=^\.[0-9]+ {@>
+@=and {@>
 
 #if DEBUG_COMPILE
    if (DEBUG)
    {
-       cerr << "In `zzlex':  " << yytext << endl
-            << "A decimal point at the beginning of a line, followed by at least one digit, continued from previous line." 
-            << endl;
+       cerr << "In `zzlex':  and" << endl;
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
@@ -257,6 +249,41 @@ getchar();
 
 @=}@>
 
+@q *** (3) @>
+@
+@<Rules@>=
+@=cycle {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  cycle" << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=[-]?[0-9]+(\.[0-9]+)? {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  A number:  " << yytext << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+@=}@>
 
 @q *** (3) @>
 @
