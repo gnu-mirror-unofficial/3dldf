@@ -166,6 +166,8 @@ POINT \({NUMBER},[[:space:]]*{NUMBER}\)
 bool DEBUG = true;  /* |false|  */
 
 Scanner_Node scanner_node = static_cast<Scanner_Node>(yyextra); 
+stringstream temp_strm;
+bool collecting_path = false;
 
 
 @q ** (2) Code to be executed each time |zzlex| is entered.  @>
@@ -181,7 +183,6 @@ to {\bf zzlex} can be set here.
 
 @q ** (2) Rules.  @>
 @ Rules.
-
 
 @q *** (3) @> 
 @ 
@@ -201,6 +202,8 @@ to {\bf zzlex} can be set here.
 
    scanner_node->metapost_output_struct->path_vector.push_back(create_new<Path>(0));
 
+   collecting_path = true;
+
 @=}@> 
 
 @q *** (3) @> 
@@ -214,16 +217,13 @@ to {\bf zzlex} can be set here.
        cerr << "In `zzlex':  END PATH" << endl;
        scanner_node->metapost_output_struct->path_vector.back()->show();
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  /* |if (DEBUG)|  */ 
 #endif  /* |DEBUG_COMPILE|  */  
 
 
+   collecting_path = false;
 
 @=}@> 
-
 
 @q *** (3) @>
 @
@@ -238,7 +238,59 @@ getchar();
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
+   Connector_Type *ct = create_new<Connector_Type>(0);
+   ct->type1 = ct->type0 = Connector_Type::CONTROLS_TYPE;
+
+   temp_strm.str("");
+   temp_strm << yytext;
+
+   string s;
+   char c;
+   real x;
+   real y;
+
+   temp_strm >> s;
+   cerr << "s == " << s << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> x;
+   cerr << "x == " << x << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> y;
+   cerr << "y == " << y << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   ct->pt0 = create_new<Point>(0);
+   (ct->pt0)->set(x, y, 0);
+
+   temp_strm >> s;
+   cerr << "s == " << s << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> x;
+   cerr << "x == " << x << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> y;
+   cerr << "y == " << y << endl;
+
+   ct->pt1 = create_new<Point>(0);
    
+   (ct->pt1)->set(x, y, 0);
+   ct->show("*ct:");
+
+   *(scanner_node->metapost_output_struct->path_vector.back()) += ct;
 
 @=}@>
 
@@ -255,6 +307,44 @@ getchar();
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
+   Connector_Type *ct = create_new<Connector_Type>(0);
+   ct->type0 = Connector_Type::CONTROLS_TYPE;
+   ct->type1 = Connector_Type::CT_NULL_TYPE;
+   ct->pt1   = 0;
+
+   temp_strm.str("");
+   temp_strm << yytext;
+
+   string s;
+   char c;
+   real x;
+   real y;
+
+   temp_strm >> s;
+   cerr << "s == " << s << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> x;
+   cerr << "x == " << x << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> y;
+   cerr << "y == " << y << endl;
+
+   ct->pt0 = create_new<Point>(0);
+   (ct->pt0)->set(x, y, 0);
+
+   ct->pt1 = create_new<Point>(0);
+   
+   (ct->pt0)->set(x, y, 0);
+   ct->show("*ct:");
+
+   *(scanner_node->metapost_output_struct->path_vector.back()) += ct;
+
 @=}@>
 
 @q *** (3) @>
@@ -269,6 +359,34 @@ getchar();
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
+
+   temp_strm.str("");
+   temp_strm << yytext;
+
+   string s;
+   char c;
+   real x;
+   real y;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> x;
+   cerr << "x == " << x << endl;
+
+   temp_strm >> c;
+   cerr << "c == " << c << endl;
+
+   temp_strm >> y;
+   cerr << "y == " << y << endl;
+
+   Point *p = create_new<Point>(0);
+   p->set(x, y, 0);
+
+   if (collecting_path)
+      *(scanner_node->metapost_output_struct->path_vector.back()) += p;
+   else
+      scanner_node->metapost_output_struct->point_vector.push_back(p);
 
 @=}@>
 
@@ -287,6 +405,34 @@ getchar();
 
 @=}@>
 
+
+@q *** (3) @>
+@
+@<Rules@>=
+@=REAL[[:space:]]+{NUMBER} {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  A number:  " << yytext << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+  
+   real r;
+   string s;
+   temp_strm.str("");
+   temp_strm << yytext;
+   temp_strm >> s;
+   temp_strm >> r;
+
+   cerr << "r == " << r << endl;
+
+   scanner_node->metapost_output_struct->real_vector.push_back(r);
+
+@=}@>
+
+
 @q *** (3) @>
 @
 @<Rules@>=
@@ -299,6 +445,8 @@ getchar();
 
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
+
+   scanner_node->metapost_output_struct->path_vector.back()->set_cycle(true, scanner_node);
 
 @=}@>
 
@@ -316,7 +464,6 @@ getchar();
 #endif  /* |DEBUG_COMPILE|  */ 
 
 @=}@>
-
 
 @q *** (3) @>
 @

@@ -785,7 +785,8 @@ parahypr.o: parahypr.c++ parahypr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 
 paths.o: paths.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
-                   transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
+                   transfor.h++ pens.h++ dashptrn.h++ mpoutput.h++ shapes.h++ pictures.h++ \
+                   points.h++ lines.h++ \
                    planes.h++ nurbs.h++ paths.h++ scnmptpt.h++ utility.h++
 	$(CXXCOMPILE) -c -o $@ $<
 

@@ -105,6 +105,7 @@ Now including \filename{nurbs.h}.
 #include "nurbs.h++"
 #include "utility.h++"
 #include "scnmptpt.h++"
+#include "mpoutput.h++"
 
 @q * (1) class Path definition.@>
 @* {\bf Path} class definition.
@@ -210,6 +211,7 @@ class Path : public Shape
    friend void* Scan_Parse::clip_to_func(void*, void*);
    friend int Scanner_Type::show_database(void);
    friend int yyparse(yyscan_t);
+   friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
 
  protected:
@@ -10021,12 +10023,14 @@ Path::show(string text, char coords,
    if (connector_type_vector.size() > 0)
       cerr << "connector_type_vector:" << endl;
 
+#if 0
    for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
         iter != connector_type_vector.end();
         ++iter)
    {
        (*iter)->show();
    }
+#endif 
 
    cerr << endl << endl;
 
@@ -14075,7 +14079,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    int status = 0;
 
@@ -14084,7 +14088,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
       cerr << "Entering `Path::resolve'." << endl;
 
       show("*this before alignment:");
-
 
       cerr << "In Path::resolve:  *this before alignment (see above)" << endl;
 
@@ -14215,7 +14218,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
 @q **** (4) @>
 
-
     char temp_filename[] = "mp_output.XXXXXX";
     
     errno = 0;
@@ -14258,7 +14260,8 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 
    temp_strm << "path r;n = (length q) / " << res_val << ";"
              << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;write_path(r, \"" << temp_filename << "\", false);end;'";
+             << "r := r .. m;endfor;r := r .. cycle;"
+             << "write_path(r, \"" << temp_filename << "\", false);end;'";
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14282,27 +14285,32 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    fclose(fp);
    fp = 0;
 
-   cerr << "After calling zzlex." << endl;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "After calling zzlex." << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
+           << scanner_node->metapost_output_struct->path_vector.size() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   *this = *(scanner_node->metapost_output_struct->path_vector.back());
+
+   *this *= t.inverse();
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      this->show("*this:");
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
 @q **** (4) @>
 @
 @<Define |Path| functions@>=    
 
-  Pointer_Vector<Path> pv;
-
-   if (pv.v.size() > 0 && pv.v[0] != 0 && pv.v[0]->size() > 0)
-   {
-      pv.v[0]->show("*(pv.v[0]):");
-
-      *this = *(pv.v[0]);
-
-      this->show("*this:");
-
-   }
-  
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14332,6 +14340,7 @@ class Connector_Type
    friend class Glyph;
    friend class Reg_Cl_Plane_Curve;
    friend int yyparse(yyscan_t);
+   friend int zzlex(yyscan_t);
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);

@@ -8,17 +8,29 @@ glyph t;
 
 %% * (1)
 
+path q;
+
 beginfig(0);
 
 %% ** (2)
 
-  path q;
-
   q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+
+  rotate q (30, 0); 
 
   resolve q to 10;
 
-endfig;
+  message "q:";
+  show q;
+
+  draw q;
+  
+endfig with_projection parallel_x_y;
+
+beginfig(1);
+  draw q;
+endfig with_projection parallel_x_y;
+
 
 verbatim_metapost "end;";
 
