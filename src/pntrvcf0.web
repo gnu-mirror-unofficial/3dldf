@@ -672,7 +672,7 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
    if (DEBUG)
    {
        cerr_strm << thread_name 
-                 << "Entering `Pointer_Vector::resolve'.";
+                 << "Entering `Pointer_Vector<Path, Path>::resolve'.";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
@@ -685,6 +685,90 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
 @q *** (3)@> 
 
     int status;
+    Point normal;
+    stringstream temp_strm;
+    vector<Point*>::iterator pt_iter;
+    vector<Connector_Type*>::const_iterator ct_iter;
+    stringstream connector_strm;
+    Path q;
+    Transform t;
+
+    temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
+              << "'input writemcs.mp; path q[];"  << "q = ";
+
+
+    int i = 0;
+
+    cerr << "v.size() == " << v.size() << endl;
+
+    for (vector<Path*>::iterator iter = v.begin(); iter != v.end(); ++iter)
+    {
+@q **** (4) @>       
+
+      cerr << "Entering loop." << endl;
+
+      q.clear();
+      t.reset();
+
+      if (!(*iter)->is_planar(&normal))
+      {
+          cerr << "ERROR!  In `Pointer_Vector<Path, Path>::resolve':"
+               << endl 
+               << "`Path' is not planar.  Can't resolve it." << endl 
+               << "Continuing."
+               << endl;
+
+          continue;
+      }  
+      else if (DEBUG)
+      {
+          cerr << "Path is planar." << endl;
+      }
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         normal.show("normal before shift:");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+      normal.shift(*((**iter).points[0]));
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      {
+         normal.show("normal after shift:");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
+@
+@<Define |Pointer_Vector| specializations@>=
+
+
+
+
+@q **** (4) @>
+@
+@<Define |Pointer_Vector| specializations@>=
+
+      cerr << "End of loop." << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+  
+      
+
+    }  /* |for| */
+
+cerr << "After loop." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q *** (3)@> 
 
@@ -692,8 +776,8 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
    if (DEBUG)
    {
        cerr_strm << thread_name 
-                 << "Exiting `Pointer_Vector::resolve' "
-                 << "successfully with return value 0.";
+                 << "Exiting `Pointer_Vector<Path, Path>::resolve' successfully with return value 0."
+                 << endl;
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);

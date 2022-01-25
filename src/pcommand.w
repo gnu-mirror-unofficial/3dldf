@@ -205,7 +205,7 @@ Removed debugging code.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-  status = static_cast<Pointer_Vector<Path> >(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node);
+  status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node);
 
 #if DEBUG_COMPILE
 

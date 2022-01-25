@@ -14,16 +14,20 @@ beginfig(0);
 
 %% ** (2)
 
-  q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+  path_vector pv;
 
+  q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+  
   rotate q (30, 0); 
 
-  resolve q to 10;
+  pv +=  q;
 
-  message "q:";
-  show q;
+  resolve pv to 10;
 
-  draw q;
+  message "pv0:";
+  show pv0;
+
+  draw pv0;
   
 endfig with_projection parallel_x_y;
 

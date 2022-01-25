@@ -213,6 +213,8 @@ class Path : public Shape
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
+   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node);
+
 
  protected:
   
@@ -14284,6 +14286,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
    
    fclose(fp);
    fp = 0;
+   unlink(temp_filename);
 
 #if DEBUG_COMPILE
    if (DEBUG)

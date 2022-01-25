@@ -82,15 +82,13 @@ defines a member function |show(string)|.
 Added this |struct| definition.
 
 \initials{LDF 2005.02.28.}
-Added the optional template parameter |class D| 
-with default |class C|.
+Added the optional template parameter |class D| with default |class C|.
 \ENDLOG 
 
 @<Utility classes@>=
 
-template<class C, class D>
-struct
-Pointer_Vector
+template<class C, class D> 
+struct Pointer_Vector
 {
     vector<C*> v;
 
@@ -274,7 +272,7 @@ Pointer_Vector<C, D>::operator=(const Pointer_Vector<C, D>& p)
 
            cerr_mutex.lock(); 
            cerr << thread_name 
-                << "ERROR! In `Pointer_Vector<C, D>::operator=()':"
+                << "ERROR! In `Pointer_Vector<C, D>::operator=':"
                 << endl << "`new C' failed. "
                 << "Rethrowing `bad_alloc'."
                 << endl << "Type <RETURN> to continue: ";
@@ -365,8 +363,7 @@ Added this function.
 
 \initials{LDF 2005.04.13.}
 Added optional |Pointer_Vector<C, C>*| argument with default 0.
-If it's passed to this function, the pointers are 
-cast and pushed onto it.
+If it's passed to this function, the pointers are cast and pushed onto it.
 \ENDLOG
 
 @q ****** (6) Declaration.@> 
@@ -1414,6 +1411,33 @@ rectify(Scanner_Node scanner_node = 0,
         real tolerance = -1,
         Transform* transform = 0,
         Point* p = 0);
+
+
+@q **** (4) |Pointer_Vector<Path, Path>| specializations.@> 
+@*3 {\bf Pointer\_Vector\<Path, Path>} specializations.
+\initials{LDF 2022.01.23.}
+
+\LOG
+\initials{LDF 2022.01.23.}
+Added this section.
+\ENDLOG
+
+@q ***** (5) Resolve.@>
+@*4 Resolve.
+\initials{LDF 2022.01.23.}
+
+\LOG
+\initials{LDF 2022.01.23.}
+Added this function declaration.  
+The function must be defined in \filename{pntrvcf0.web}, because
+it requires types which are not fully defined when this file is compiled.
+\ENDLOG
+
+@q ****** (6) Declaration.@> 
+
+@<Declare |Pointer_Vector| functions@>=
+int
+resolve(int res_val, Scanner_Node scanner_node = 0);
 
 @q ***** (5) Get |Conic_Section_Lattice|.@> 
 @ Get {\bf Conic\_Section\_Lattice}.
