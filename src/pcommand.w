@@ -176,6 +176,58 @@ Removed debugging code.
 
 };
 
+
+@q *** (3) command --> RESOLVE path_vector_variable TO numeric_expression.@> 
+@*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path vector variable> \.{TO} \§numeric expression>.
+\initials{LDF 2022.01.25.}
+
+\LOG
+\initials{LDF 2022.01.25.}
+\ENDLOG
+
+@<Define rules@>=
+@=command: RESOLVE path_vector_variable TO numeric_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO numeric_expression'.";
+
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
+
+  status = static_cast<Pointer_Vector<Path> >(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node);
+
+#if DEBUG_COMPILE
+
+  if (DEBUG)
+  {
+    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO numeric_expression':"
+              << endl 
+              << "`Pointer_Vector<Path>::resolve' returned " << status << "." << endl;
+
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+    
+  @=$$@> =  static_cast<void*>(0);
+
+};
+
+
+
 @q ** (2) command --> group_command.  @>
 @*1 \§command> $\longrightarrow$ \§group command>.
 
