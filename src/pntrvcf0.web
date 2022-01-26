@@ -890,16 +890,15 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
 
 @q *** (3) @>
 
-cerr << "After outer loop." << endl;
-
-/* !!START HERE:  LDF 2022.01.26.  Check whether last point is on new path and add if necessary.
-   Check whether path is cycle or not.
-*/ 
+   cerr << "After outer loop." << endl;
 
    temp_strm << "numeric n;pair m;path r[];for i = 0 upto " << (v.size() - 1) << ":"
              << "n := (length q[i]) / " << res_val << ";"
              << "r[i] = point 0 of q[i];for j = n step n until length q[i]: m := point j of q[i];"
-             << "r[i] := r[i] .. m;endfor;r[i] := r[i] .. cycle;"
+             << "r[i] := r[i] .. m;endfor;"
+             << "if point (length r[i] - 1) of r[i] <> point (length q[i] - 1) of q[i]:"
+             << "r[i] := r[i] .. point (length q[i] - 1) of q[i];fi;"
+             << "if cycle q[i]:r[i] := r[i] .. cycle;fi;"
              << "write_path(r[i], \"" << temp_filename << "\", false);endfor;end;'";
 
 #if DEBUG_COMPILE
