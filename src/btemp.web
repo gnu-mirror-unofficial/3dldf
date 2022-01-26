@@ -1,99 +1,54 @@
-@q ***** (5) string_primary --> LAST string_vector_expression.@>
+      if (ct_iter != q.connector_type_vector.end()) 
+      { 
 
-@*4 \§string primary> $\longrightarrow$ 
-\.{LAST} \§string vector expression>.
-\initials{LDF 2021.07.01.}
 
-\LOG
-\initials{LDF 2021.07.01.}
-Added this rule.
-\ENDLOG
+         if ((*ct_iter) != 0 && (*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE) 
+         { 
 
-@q ****** (6) Definition.@> 
 
-@<Define rules@>=
-@=string_primary: COMMON_NAME star_expression@>@/
-{ 
-   @<Common declarations for rules@>@; 
+            connector_strm << " .. controls"; 
 
-#if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
-   if (DEBUG) 
-     {
-         cerr_strm << thread_name << "*** Parser:  `string_primary --> "
-	           << "COMMON_NAME star_expression'.";
+            }
 
-         log_message(cerr_strm);
-         cerr_message(cerr_strm);
-         cerr_strm.str("");
-     }
-#endif /* |DEBUG_COMPILE|  */
+            if ((*ct_iter)->pt1 != 0) 
+            {
 
-@q ******* (7) @> 
 
-   string* s;
+               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, "  
+                              << (*ct_iter)->pt1->get_y() << "cm)"; 
+            }
 
-   try 
+            connector_strm << " .."; 
+         } 
+
+         cerr << "Error after here 2." << endl;  
+
+
+      }  /* |if|  */ 
+
+@q ***** (5) @>
+
+      if (connector_strm.str().empty())
+         connector_strm << " .. ";
+
+      if (next(pt_iter) == q.points.end())
       {
-         s = new string;
-      }
-   catch (bad_alloc)
-      {
-         cerr_strm << thread_name << "ERROR!  In `yyparse()', rule `string_primary "
-                   << "--> COMMON_NAME star_expression':"
-                   << endl
-		   << "`new string' failed.  Rethrowing `bad_alloc'.";
 
-         log_message(cerr_strm);
-         cerr_message(cerr_strm, error_stop_value);
-         cerr_strm.str("");
+          if (q.cycle_switch == true)
+             temp_strm << connector_strm.str() << " cycle";
 
-         throw;
+          temp_strm << ";";
+          break;
+      } 
+      else
+         temp_strm << connector_strm.str()  << " ";
+   
 
-      }  /* |catch (bad_alloc)|  */
+@q ***** (5) @>
 
-@q ******* (7) @> 
+      if (next(ct_iter) != q.connector_type_vector.end())
+        ++ct_iter;
 
-   Star *star = static_cast<Star*>(@=$2@>);
+      connector_strm.str("");
 
-@q ******* (7) Error handling:  |star == 0|.@> 
-
-@ Error handling:  |star == 0|.
-\initials{LDF 2021.07.01.}
-
-@<Define rules@>=
-
-   if (star == static_cast<Star*>(0))
-   {
-       cerr_strm << thread_name 
-                 << "ERROR!  In `yyparse()', rule `string_primary "
-                 << "--> COMMON_NAME star_expression':"
-                 << endl
-   		    << "Invalid `star_expression'.  "
-                 << "Setting `string_primary' to 0 and will try to continue.";
-
-       log_message(cerr_strm);
-       cerr_message(cerr_strm, error_stop_value);
-       cerr_strm.str("");
-
-       delete s;
-
-       @=$$@> = static_cast<void*>(0);
-
-   }  /* |if (star == 0)|  */
-
-@q ******* (7) |star != 0|.@> 
-
-@ |star != 0 && star->ctr > 0|.  Set |@=$$@>| to |star->common_name|.
-\initials{LDF 2021.07.01.}
-
-@<Define rules@>=
-
-   else 
-   {
-      *s = star->common_name;
-      @=$$@> = static_cast<void*>(s); 
-   }
-@q ******* (7) @> 
-
-};
+     cerr << "Error after here 5." << endl; 

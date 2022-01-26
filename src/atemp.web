@@ -1,102 +1,4 @@
 
-@q **** (4) @>
-@
-@<Define |Pointer_Vector| specializations@>=
-
-
-
-@q **** (4) @>
-@
-@<Define |Pointer_Vector| specializations@>=
-
-
-   Path q;
-   q += *points[0];
-   q += normal;
-  
-
-   t.align_with_axis(*points[0], normal);
-
-   *this *= t;
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      show("*this after alignment:");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-@q **** (4) @>
-@
-@<Define |Pointer_Vector| specializations@>=
-
-
-   vector<Point*>::const_iterator iter = points.begin();
-   vector<Connector_Type*>::const_iterator ct_iter = connector_type_vector.begin();
-
-   stringstream connector_strm;
-
-   temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-             << "'tracingonline :=1; input writemcs.mp; path q;"  << "q = ";
-
-@q **** (4) @>
-
-   for (;pt_iter != points.end(); ++pt_iter)
-   {
-@q ***** (5) @>
-
-      temp_strm << "(" << (*pt_iter)->get_x() << "cm, " << (*pt_iter)->get_y() << "cm)";
-
-      if (ct_iter != connector_type_vector.end())
-      {
-         if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE)
-         {
-            connector_strm << " .. controls";
-
-            if ((*ct_iter)->pt0 != 0)
-               connector_strm << " (" << (*ct_iter)->pt0->get_x() 
-                              << "cm, " << (*ct_iter)->pt0->get_y() << "cm)";
-
-            if ((*ct_iter)->pt1 != 0)
-               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, " 
-                              << (*ct_iter)->pt1->get_y() << "cm)";
-
-            connector_strm << " ..";
-         }
-
-      }
-
-@q ***** (5) @>
-
-      if (connector_strm.str().empty())
-         connector_strm << " .. ";
-
-      if (next(pt_iter) == points.end())
-      {
-
-          if (cycle_switch == true)
-             temp_strm << connector_strm.str() << " cycle";
-
-          temp_strm << ";";
-          break;
-      } 
-      else
-         temp_strm << connector_strm.str()  << " ";
-   
-@q ***** (5) @>
-
-      if (next(ct_iter) != connector_type_vector.end())
-        ++ct_iter;
-
-      connector_strm.str("");
-
-@q ***** (5) @>
-
-   }  /* |for| */
-
-@q **** (4) @>
-
     char temp_filename[] = "mp_output.XXXXXX";
     
     errno = 0;
@@ -175,14 +77,14 @@
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   *this = *(scanner_node->metapost_output_struct->path_vector.back());
+   q = *(scanner_node->metapost_output_struct->path_vector.back());
 
-   *this *= t.inverse();
+   q *= t.inverse();
 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      this->show("*this:");
+      q.show("q:");
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 

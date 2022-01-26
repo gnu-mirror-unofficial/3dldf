@@ -690,12 +690,12 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
     Point normal;
     stringstream temp_strm;
     stringstream connector_strm;
-    Path q;
+    Path R;
     Transform t;
     Point p0;
 
     temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-              << "'input writemcs.mp; path q[];"  << "q = ";
+              << "'input writemcs.mp; path q[];";
 
 
     int i = 0;
@@ -708,7 +708,7 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
 
       cerr << "Entering loop." << endl;
 
-      q.clear();
+      R.clear();
       t.reset();
       p0 = *((**iter).points[0]);
 
@@ -751,18 +751,18 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
 @
 @<Define |Pointer_Vector| specializations@>=
 
-   q += p0;
-   q += normal;
+   R += p0;
+   R += normal;
 
    t.align_with_axis(p0, normal);
 
-   q *= t;
+   R *= t;
 
 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-      show("q after alignment:");
+      show("R after alignment:");
 
 
 cerr << "XXX Enter <RETURN> to continue: ";
@@ -780,8 +780,6 @@ getchar();
 
    vector<Connector_Type*>::iterator ct_iter;
 
-/* !!START HERE:  LDF 2022.01.26.  Confusion regarding what I'm using |q| for.  Fix!  */ 
-
    pt_iter = (*iter)->points.begin();
    ct_iter = (*iter)->connector_type_vector.begin();
 
@@ -794,16 +792,10 @@ getchar();
    for (;pt_iter != (*iter)->points.end(); ++pt_iter)
    {
 @q ***** (5) @>
-
-      cerr << "Error after here 0." << endl; 
-
       temp_strm << "(" << (*pt_iter)->get_x() << "cm, " << (*pt_iter)->get_y() << "cm)";
 
-      if (ct_iter != q.connector_type_vector.end())
+      if (ct_iter != (*iter)->connector_type_vector.end())
       {
-
-         cerr << "ZZZ:  ct_iter != q.connector_type_vector.end()" << endl;
-
          if (*ct_iter != 0)
          {
             cerr << "In inner loop:" << endl 
@@ -811,26 +803,34 @@ getchar();
                  << "(*ct_iter)->type1 == " << (*ct_iter)->type1 << endl;
 
 
-            temp_strm << (*ct_iter)->connector_string;
+            if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE && (*ct_iter)->pt0 != 0)
+            {
+               connector_strm << " .. controls" << " (" << (*ct_iter)->pt0->get_x()  
+                              << "cm, " << (*ct_iter)->pt0->get_y() << "cm)"; 
+               if ((*ct_iter)->pt1 != 0) 
+               {
+                  connector_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, "  
+                                 << (*ct_iter)->pt1->get_y() << "cm)"; 
+               }  
+               temp_strm << " .. ";
+            }
+
+            /* !!START HERE:  LDF 2022.01.26.  Add code for `dir', `curl' and `tension'.  */ 
+
+            else
+              temp_strm << (*ct_iter)->connector_string;
          }
 
          ++ct_iter;
       }
-      else
-         cerr << "ZZZ:  ct_iter == q.connector_type_vector.end()" << endl;
 
-cerr << "YYY Enter <RETURN> to continue: ";
-getchar(); 
-
-
-      
 @q ***** (5) @>
 
    }  /* |for| */
 
-@q **** (4) @>
-
-     cerr << "Error after here 6." << endl; 
+   if ((*iter)->is_cycle())
+      temp_strm << "cycle";
+   temp_strm << ";";
 
 @q **** (4) @>
 @
@@ -843,12 +843,10 @@ cerr << "temp_strm.str() == " << temp_strm.str() << endl;
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
-  
-     
 
-    }  /* |for| */
+    }  /* |for| (Outer loop)  */
 
-     cerr << "Error after here 7." << endl; 
+@q *** (3) @>
 
 cerr << "After outer loop." << endl;
 
@@ -856,6 +854,8 @@ cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
 @q *** (3)@> 
+@
+@<Define |Pointer_Vector| specializations@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
