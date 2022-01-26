@@ -128,11 +128,46 @@ struct Metapost_Output_Struct
 Added this section.
 \ENDLOG 
 
-@<Declare |Metapost_Output_Struct| functions@>=
 
+@q ** (2) Destructor  @>
+
+@ Destructor.
+\initials{LDF 2022.01.26.}
+
+\LOG
+\initials{LDF 2022.01.26.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration  @>
+
+@<Declare |Metapost_Output_Struct| functions@>=
+~Metapost_Output_Struct(void);
+
+@q *** (3) Definition  @>
 @
 @<Define |Metapost_Output_Struct| functions@>=
+Metapost_Output_Struct::~Metapost_Output_Struct(void)
+{
 
+   for (vector<Path*>::iterator iter = path_vector.begin();
+        iter != path_vector.end();
+        ++iter)
+   {
+      delete *iter;
+      *iter = 0;
+   }
+
+   for (vector<Point*>::iterator iter = point_vector.begin();
+        iter != point_vector.end();
+        ++iter)
+   {
+      delete *iter;
+      *iter = 0;
+   }
+
+   return;
+}
 
 @q ** (2) @>
 @
