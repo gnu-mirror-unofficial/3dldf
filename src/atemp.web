@@ -1,82 +1,5 @@
 
-    char temp_filename[] = "mp_output.XXXXXX";
-    
-    errno = 0;
-    int fd = mkstemp(temp_filename);
-
-    if (fd == -1)
-    {
-            cerr << "ERROR!  In `Pointer_Vector<Path, Path>::resolve':"
-                 << endl 
-                 << "`mkstemp' failed, returning -1:"
-                 << endl
-                 << strerror(errno)
-                 << endl 
-                 << "Failed to create temporary file."
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 1."
-                 << endl;
-
-            return 1;
-
-    }  /* |if (fd == -1)|  */
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    {
-        cerr << "In `Pointer_Vector<Path, Path>::resolve':"
-             << endl 
-             << "`mkstemp' succeeded:  `temp_filename' == " << temp_filename 
-             << endl;
-
-    }  /* |else if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@q **** (4) @>
-@
-@<Define |Pointer_Vector| specializations@>=
-
-   close(fd);
-
-   temp_strm << "path r;n = (length q) / " << res_val << ";"
-             << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;"
-             << "write_path(r, \"" << temp_filename << "\", false);end;'";
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-      cerr << "temp_strm.str() == " << temp_strm.str() << endl;
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   errno = 0;
-   status = system(temp_strm.str().c_str());
-
-   FILE *fp = fopen(temp_filename, "r");
-   
-   yyscan_t scanner;
-   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
-   zzset_in(fp, scanner);
-   zzlex(scanner);
-   zzlex_destroy(scanner);
-   
-   fclose(fp);
-   fp = 0;
-   unlink(temp_filename);
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "After calling zzlex." << endl;
-
-      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
-           << scanner_node->metapost_output_struct->path_vector.size() << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
+#if 0 
    q = *(scanner_node->metapost_output_struct->path_vector.back());
 
    q *= t.inverse();
@@ -87,7 +10,7 @@
       q.show("q:");
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
+ei
 
 @q **** (4) @>
 @

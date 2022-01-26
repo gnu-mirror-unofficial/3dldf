@@ -831,10 +831,10 @@ pntrvcf0.o: pntrvcf0.c++ pntrvcf0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
                          planes.h++ nurbs.h++ paths.h++ curves.h++ polygons.h++ triangle.h++ rectangs.h++ \
                          conicsct.h++ ellipses.h++ circles.h++ ellpsslc.h++ crclslc.h++ parabola.h++ \
-                         hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
+                         hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ mpoutput.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ astronmy.h++ pctfncs0.h++ newwrite.h++ utility.h++ pntrvcf0.h++ 
+                         paraellp.h++ parahypr.h++ glyphs.h++ astronmy.h++ pctfncs0.h++ newwrite.h++ utility.h++ scnmptpt.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 pntrvctr.o: pntrvctr.c++ pntrvctr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \

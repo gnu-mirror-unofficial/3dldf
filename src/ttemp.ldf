@@ -18,11 +18,15 @@ beginfig(0);
 
   q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
   
-  rotate q (30, 0); 
+  rotate q (20, 20, 20); 
 
   pv +=  q;
 
-  resolve pv to 10;
+  rotate q (0, 30);
+
+  pv +=  q;
+  
+  resolve pv to 20;
 
   message "pv0:";
   show pv0;
