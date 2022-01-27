@@ -31,11 +31,30 @@ beginfig(0);
   %draw ((g scaled (.5, .5)) rotated (0, 0, 0)) rotated (0, 30);
   %draw (g scaled (.5, .5) rotated (0, 30)) shifted (0, 0, 6);
 
-  fill g scaled (.5, .5);
-  
-  
-  % path_vector pv;
+  draw g scaled (.5, .5);
 
+  path_vector pv;
+
+  pv := get_paths from g;
+
+  message "pv:";
+  show pv;
+
+  message "length pv0:";
+  show length pv0;
+
+  n := (length pv0) - 1;
+
+  point p[][]; 
+  
+  for i = 0 upto n:
+    p[0][i] := get_point (i) pv0;
+    message "p[0][" & decimal i & "]:";
+    show p[0][i];
+  endfor;
+  
+  pause;
+  
   % q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
   
   % rotate q (20, 20, 20); 
