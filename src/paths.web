@@ -3499,14 +3499,14 @@ Path::operator*=(const real r)
          iter != points.end();
          ++iter)
     {
-       *iter *= r;
+       **iter *= r;
     }
 
     for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
          iter != connector_type_vector.end();
          ++iter)
     {
-       *iter *= r;
+       **iter *= r;
     }
 
     return r;
@@ -14554,16 +14554,16 @@ operator*=(const real r);
 @
 @<|Connector_Type| function definitions@>=
 real
-Connector_Type::operator=(real r)
+Connector_Type::operator*=(const real r)
 {
-   if (c.pt0 != 0)
+   if (pt0 != 0)
    {
-      pt0 *= r; 
+      *pt0 *= r; 
    }
 
-   if (c.pt1 != 0)
+   if (pt1 != 0)
    {
-      pt1 *= r;
+      *pt1 *= r;
    }
 
    return r;

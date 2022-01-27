@@ -115,6 +115,8 @@ It contains ``skeleton'' code.
 #include "paraellp.h++"
 #include "parahypr.h++"
 #include "utility.h++"
+#include "mpoutput.h++"
+#include "scnmptpt.h++"
 
 @q * (1) Glyph class definition.@>
 @* {\bf Glyph} class definition.
@@ -761,7 +763,7 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
 {
 @q *** (3) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
 #if DEBUG_COMPILE
 
@@ -780,6 +782,21 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
    string s0 = *s;
    string s1 = s0;
 
+   int fd; 
+   char temp_filename[] = "mp_output.XXXXXX";
+
+   fd = mkstemp(temp_filename);
+
+#if 0 
+  cerr << "fd == " << fd << endl;
+#endif 
+
+  close(fd);
+
+#if 1 
+  cerr << "temp_filename == " << temp_filename << endl;
+#endif 
+
 @q *** (3) @>
 @
 @<Define |Glyph| functions@>=
@@ -790,11 +807,12 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
    }
  
    temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-             << "'tracingonline :=1;fontmapline \"" << s0
+             << "'input writemcs.mp;fontmapline \"" << s0
              << " " << s1 << " <" << s0 << ".pfb\";"
-             << "picture v; v = glyph " << char_ctr << " of \"" << s0 << "\";"
-             << "for item within v: show pathpart item;message \"turningnumber \" "
-             << "& decimal (turningnumber (pathpart item));endfor;end;'";
+             << "path q[];numeric i;i=0;picture v; v = glyph " << char_ctr << " of \"" << s0 << "\";"
+             << "for item within v: q[i] = pathpart item;write_path(q[i], \"" << temp_filename << "\", false);"
+             << "write \"REAL \" & decimal (turningnumber q[i]) to \"" << temp_filename << "\";" 
+             << "i := incr i;endfor;end;'";
 
 
 #if DEBUG_COMPILE
@@ -804,14 +822,67 @@ Glyph::get_glyph_func(const int &char_ctr, const string *s, Scanner_Node scanner
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   status = read_metapost_output_from_pipe(temp_strm.str(), path_vector, scanner_node);
+   /* !!START HERE:  LDF 2022.01.26.  Use zzlex for this.  */ 
+
+   errno = 0;
+   status = system(temp_strm.str().c_str());
+
+   FILE *fp = fopen(temp_filename, "r");
+   
+   yyscan_t scanner;
+   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
+   zzset_in(fp, scanner);
+   zzlex(scanner);
+   zzlex_destroy(scanner);
+   
+   fclose(fp);
+   fp = 0;
+   unlink(temp_filename);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "After calling zzlex." << endl;
+
+      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
+           << scanner_node->metapost_output_struct->path_vector.size() 
+           << endl
+           << "scanner_node->metapost_output_struct->real_vector.size() == " 
+           << scanner_node->metapost_output_struct->real_vector.size() << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q *** (3) @>
 @
 @<Define |Glyph| functions@>=
 
-   if (DEBUG)             
-      cerr << "path_vector.v.size() == " << path_vector.v.size() << endl;
+   if (path_vector.ctr > 0)
+      path_vector.clear(true);
+   
+   vector<real>::iterator r_iter = scanner_node->metapost_output_struct->real_vector.begin();
+
+   Path *q = 0;
+   real factor = 2.54 / 72.0; /* Conversion factor for PostScript points ({\bf bp} $=72$ per inch) to {\bf cm}  */
+
+   for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
+        iter != scanner_node->metapost_output_struct->path_vector.end();
+        ++iter)
+   {
+
+      q = create_new<Path>(*iter);
+
+      *q *= factor;  
+
+      q->turningnumber = *r_iter++;
+      path_vector += q;
+ 
+      q = 0;
+
+   }
+
+   delete scanner_node->metapost_output_struct;
+   scanner_node->metapost_output_struct = 0;
 
 @q *** (3) @>
 

@@ -164,7 +164,6 @@ POINT \({NUMBER},[[:space:]]*{NUMBER}\)
 bool DEBUG = true;  /* |false|  */
 
 Scanner_Node scanner_node = static_cast<Scanner_Node>(yyextra); 
-stringstream temp_strm;
 bool collecting_path = false;
 
 
@@ -239,7 +238,8 @@ to {\bf zzlex} can be set here.
    Connector_Type *ct = create_new<Connector_Type>(0);
    ct->type1 = ct->type0 = Connector_Type::CONTROLS_TYPE;
 
-   temp_strm.str("");
+   stringstream temp_strm;
+
    temp_strm << yytext;
 
    string s;
@@ -310,7 +310,7 @@ to {\bf zzlex} can be set here.
    ct->type1 = Connector_Type::CT_NULL_TYPE;
    ct->pt1   = 0;
 
-   temp_strm.str("");
+   stringstream temp_strm;
    temp_strm << yytext;
 
    string s;
@@ -358,7 +358,7 @@ to {\bf zzlex} can be set here.
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
-   temp_strm.str("");
+   stringstream temp_strm;
    temp_strm << yytext;
 
    string s;
@@ -407,33 +407,6 @@ to {\bf zzlex} can be set here.
 @q *** (3) @>
 @
 @<Rules@>=
-@=REAL[[:space:]]+{NUMBER} {@>
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-       cerr << "In `zzlex':  A number:  " << yytext << endl;
-
-   }  /* |if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-  
-   real r;
-   string s;
-   temp_strm.str("");
-   temp_strm << yytext;
-   temp_strm >> s;
-   temp_strm >> r;
-
-   cerr << "r == " << r << endl;
-
-   scanner_node->metapost_output_struct->real_vector.push_back(r);
-
-@=}@>
-
-
-@q *** (3) @>
-@
-@<Rules@>=
 @=cycle {@>
 
 #if DEBUG_COMPILE
@@ -463,7 +436,6 @@ to {\bf zzlex} can be set here.
 
 @=}@>
 
-
 @q *** (3) REAL.  @>
 @ REAL.
 @<Rules@>=
@@ -477,7 +449,7 @@ to {\bf zzlex} can be set here.
    }  /* |if (DEBUG)|  */
 #endif  /* |DEBUG_COMPILE|  */ 
 
-   temp_strm.str("");
+   stringstream temp_strm;
    string s;
    real r;
 

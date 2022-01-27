@@ -14,29 +14,39 @@ beginfig(0);
 
 %% ** (2)
 
-  path_vector pv;
+  g := get_glyph 65 from "cmssbx10";
 
-  q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+  message "g:";
+  show g;
+  %pause;
+
+  %% !! START HERE:  LDF 2022.01.27.  Add a way of showing path connectors.
   
-  rotate q (20, 20, 20); 
-
-  pv +=  q;
-
-  rotate q (0, 30);
-
-  pv +=  q;
+  draw g;
   
-  resolve pv to 20;
+  % path_vector pv;
 
-  message "pv0:";
-  show pv0;
+  % q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+  
+  % rotate q (20, 20, 20); 
 
-  draw pv0;
+  % pv +=  q;
+
+  % rotate q (0, 30);
+
+  % pv +=  q;
+  
+  % resolve pv to 20;
+
+  % message "pv0:";
+  % show pv0;
+
+  % draw pv0;
   
 endfig with_projection parallel_x_y;
 
 beginfig(1);
-  draw q;
+  %draw q;
 endfig with_projection parallel_x_y;
 
 
