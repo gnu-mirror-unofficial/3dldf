@@ -147,6 +147,7 @@ when I tried to build 3DLDF from scratch.
 #include "pntrvcf0.h++"
 #include "predctes.h++"
 #include "scanprse.h++"
+#include "scanprsf.h++"
 #include "astronmy.h++"
 
 @q * (1) Using declarations.  @>

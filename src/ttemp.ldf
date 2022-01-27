@@ -14,6 +14,12 @@ beginfig(0);
 
 %% ** (2)
 
+   focus f;
+   set f with_position (0, 5, -10) with_direction (0, 5, 10) with_distance 5; 
+
+  
+  dotlabel.bot("origin", origin);
+  
   g := get_glyph 65 from "cmssbx10";
 
   message "g:";
@@ -22,7 +28,9 @@ beginfig(0);
 
   %% !! START HERE:  LDF 2022.01.27.  Add a way of showing path connectors.
   
-  draw g;
+  draw ((g scaled (.5, .5)) rotated (0, 0, 0)) rotated (0, 30);
+  draw (g scaled (.5, .5) rotated (0, 30)) shifted (0, 0, 6);
+  
   
   % path_vector pv;
 
@@ -43,7 +51,7 @@ beginfig(0);
 
   % draw pv0;
   
-endfig with_projection parallel_x_y;
+endfig with_focus f;
 
 beginfig(1);
   %draw q;

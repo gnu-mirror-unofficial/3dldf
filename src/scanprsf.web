@@ -1447,6 +1447,9 @@ to |Scan_Parse::drawing_command_path|.
 
 \initials{LDF 2004.11.08.}
 Now calling |Scanner_Type::get_thread_name_and_stop_values|.
+
+\initials{LDF 2022.01.27.}
+Added optional argument |bool reset_pointers|.
 \ENDLOG 
 
 @q *** (3) Declaration.@>
@@ -1455,7 +1458,8 @@ Now calling |Scanner_Type::get_thread_name_and_stop_values|.
 int
 drawing_command_path(Scanner_Node scanner_node,
                      int basic_drawing_command,
-                     Path* ppath);
+                     Path* ppath,
+                     bool reset_pointers = true);
 
 @q *** (3) Definition.@>
 @
@@ -1464,7 +1468,8 @@ drawing_command_path(Scanner_Node scanner_node,
 int
 Scan_Parse::drawing_command_path(Scanner_Node scanner_node,
                                  int basic_drawing_command,
-                                 Path* ppath)
+                                 Path* ppath,
+                                 bool reset_pointers)
 
 {
 
@@ -1631,8 +1636,12 @@ if (scanner_node->picture_entry_ptr == static_cast<void*>(0))
         cerr_message(cerr_strm, error_stop_value); 
         cerr_strm.str(""); 
 
-        ppath->clear();
-        delete ppath;
+        if (reset_pointers)
+        {
+           ppath->clear();
+           delete ppath;
+           ppath = 0;
+        }
 
         @<Reset pointers on |scanner_node|@>@;
 
@@ -1658,7 +1667,7 @@ return 1;
 
 @<Define |Scan_Parse| functions@>=
 
-else /* |scanner_node->picture_entry_ptr != 0|  */
+  else /* |scanner_node->picture_entry_ptr != 0|  */
   {
 
 #if DEBUG_COMPILE
@@ -2237,10 +2246,24 @@ instead of |ddraw_color|.
 
 @<Define |Scan_Parse| functions@>= 
   
-  ppath->clear();
-  delete ppath;
-
-  @<Reset pointers on |scanner_node|@>@;
+  if (reset_pointers)
+  {
+     ppath->clear();
+     delete ppath;
+     ppath = 0;
+     @<Reset pointers on |scanner_node|@>@;
+  }
+#if DEBUG_COMPILE
+  else if (DEBUG)
+  { 
+      cerr_strm << thread_name << "In `Scan_Parse::drawing_command_path':" << endl 
+                << "Not deleting `ppath' or resetting pointers on `scanner_node'." << endl;
+ 
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm); 
+      cerr_strm.str(""); 
+  }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -4482,6 +4505,8 @@ Scan_Parse::drawing_command_glyph(Scanner_Node scanner_node,
   bool error_stop_value   = true;
   bool warning_stop_value = true;
   string thread_name      = "";
+  int status              = 0; 
+  int curr_command        = 0;
 
   if (scanner_node)
      scanner_node->get_thread_name_and_stop_values(&thread_name,
@@ -4499,18 +4524,64 @@ Scan_Parse::drawing_command_glyph(Scanner_Node scanner_node,
 @
 @<Define |Scan_Parse| functions@>=
 
-   cerr << "DRAW == " << DRAW << endl;
-   cerr << "DRAWARROW == " << DRAWARROW << endl;
-cerr << "FILL == " << FILL << endl;
-cerr << "UNFILL == " << UNFILL << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+   for (vector<Path*>::iterator iter = g->path_vector.v.begin();
+        iter != g->path_vector.v.end();
+        ++iter)
+   {
+@q ***** (5) @>
 
+      if (basic_drawing_command == FILL && (*iter)->turningnumber < 0)
+         curr_command = UNFILL;
+      else
+         curr_command = basic_drawing_command;
 
+      status = drawing_command_path(scanner_node,
+                                    curr_command,
+                                    *iter,
+                                    false);
+
+@q ***** (5) @>
+
+      if (status != 0)
+      {
+         cerr << "ERROR!  In `Scan_Parse::drawing_command_glyph':" << endl
+              << "`drawing_command_path' failed, returning " << status << "."
+              << endl
+              << "Exiting function unsuccessfully with return value 1."
+              << endl;
+
+         delete g;
+         g = 0;
+
+         @<Reset pointers on |scanner_node|@>@;
+ 
+         return 1;
+      }
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+      else if (DEBUG)
+      { 
+         cerr << "In `Scan_Parse::drawing_command_glyph':" << endl
+              << "`drawing_command_path' succeeded, returning 0."
+              << endl;
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@;       
+
+@q ***** (5) @>
+
+   }  /* |for|  */
 
 @q **** (4) @>
 @
 @<Define |Scan_Parse| functions@>=
+
+   
+   delete g;
+   g = 0;
+   @<Reset pointers on |scanner_node|@>@;
 
    if (DEBUG)
    { 
@@ -4586,7 +4657,7 @@ Scan_Parse::drawing_command_path_vector(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name 
-                << "Entering `Scan_Parse::drawing_command_path_vector()'.";
+                << "Entering `Scan_Parse::drawing_command_path_vector'.";
  
       log_message(cerr_strm); 
       cerr_message(cerr_strm); 
@@ -4638,7 +4709,7 @@ rules for the \§with clause list>.
     if (DEBUG)
       {
         cerr_strm << thread_name 
-                  << "In `Scan_Parse::drawing_command_path_vector()':"
+                  << "In `Scan_Parse::drawing_command_path_vector':"
                   << endl
                   << "`scanner_node->picture_entry_ptr' == 0";
 
@@ -4662,7 +4733,7 @@ rules for the \§with clause list>.
       {
 
         cerr_strm << thread_name 
-                  << "ERROR! `Scan_Parse::drawing_command_path_vector()':"
+                  << "ERROR! `Scan_Parse::drawing_command_path_vector':"
                   << endl << "`current_picture' doesn't seem to exist."
                   << endl << "Not executing drawing command. "
                   << endl << "Will clear and delete `pv' and reset "
@@ -4708,7 +4779,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
     if (DEBUG)
       {
         cerr_strm << thread_name 
-                  << "In `Scan_Parse::drawing_command_path_vector()':"
+                  << "In `Scan_Parse::drawing_command_path_vector':"
                   << endl 
                   << "`scanner_node->picture_entry_ptr' != 0.";
 
@@ -4768,7 +4839,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
                  catch (bad_alloc)
                     {
                         cerr_strm << thread_name 
-                                  << "ERROR!  In `Scan_Parse::drawing_command_path_vector()':"
+                                  << "ERROR!  In `Scan_Parse::drawing_command_path_vector':"
                                   << endl << "`new Pointer_Vector<Color>' failed, "
                                   << "throwing `bad_alloc'."
                                   << endl 
@@ -4854,7 +4925,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              catch (bad_alloc)
                 {
                     cerr_strm << thread_name 
-                              << "ERROR!  In `Scan_Parse::drawing_command_path_vector()':"
+                              << "ERROR!  In `Scan_Parse::drawing_command_path_vector':"
                               << endl << "`new Pointer_Vector<Color>' failed, "
                               << "throwing `bad_alloc'."
                               << endl 
@@ -4936,7 +5007,7 @@ else /* |scanner_node->picture_entry_ptr != 0|  */
              catch (bad_alloc)
                 {
                     cerr_strm << thread_name 
-                              << "ERROR!  In `Scan_Parse::drawing_command_path_vector()':"
+                              << "ERROR!  In `Scan_Parse::drawing_command_path_vector':"
                               << endl << "`new Pointer_Vector<Color>' failed, "
                               << "throwing `bad_alloc'."
                               << endl 
@@ -5442,7 +5513,7 @@ temp_draw_color_vector = new Pointer_Vector<Color> ;
   else /* Invalid |basic_drawing_command|.  */
     {
 
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::drawing_command_path_vector()':"
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::drawing_command_path_vector':"
                 << endl << "Invalid `basic_drawing_command': " 
                 << basic_drawing_command
                 << endl << "Will clear and delete `pv' and reset "
@@ -17492,7 +17563,7 @@ plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node = 0);
 @
 @<Define |Scan_Parse| functions@>=
 int
-plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node)
+Scan_Parse::plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
@@ -17588,7 +17659,7 @@ box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, 
 @
 @<Define |Scan_Parse| functions@>=
 int
-box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t)
+Scan_Parse::box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t)
 {
 @q **** (4) @>
 
@@ -17807,7 +17878,7 @@ box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, 
 @q   following s-expression in order to use the facilities normally      @>
 @q   accessed via the local variables list.                              @>
 @q   \initials{LDF 2004.02.12}.                                          @>
-@q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
+@q   (progn (cweb-mode) (outline-minor-mode t))                          @>
 
 @q * Local variables for Emacs.@>
 @q Local Variables: @>

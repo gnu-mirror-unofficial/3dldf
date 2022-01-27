@@ -214,7 +214,7 @@ class Path : public Shape
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
    friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node);
-
+   friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
  protected:
   
@@ -5867,8 +5867,7 @@ Now setting |pen_vector| and |dash_pattern_vector| to 0.  Formerly, I set
 
 @<Declare |Path| functions@>=
 int
-fill(Picture& picture,
-     Color* ffill_color = 0) const;
+fill(Picture& picture, Color* ffill_color = 0) const;
 
 @q *** (3) Definition.@>
 @
@@ -10070,7 +10069,7 @@ Path::show(string text, char coords,
    }
 #endif 
 
-   cerr << endl << endl;
+   cerr << endl;
 
   return;
 

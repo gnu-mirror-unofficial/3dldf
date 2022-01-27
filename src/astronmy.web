@@ -134,6 +134,7 @@ Created this file.
 #include "sctpfncs.h++"  
 #include "prrfnc0.h++"
 
+
 @q * (1) Star class definition.@>
 @* {\bf Star} class definition.
 \initials{LDF 2021.05.28.}
@@ -176,7 +177,7 @@ class Star
    friend bool compare_declination_seconds(Star *s, Star *t);
    friend bool compare_declination_decimal_degrees(Star *s, Star *t);
    friend bool compare_is_binary(Star *s, Star *t);
-   friend int plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node);
+   friend int Scan_Parse::plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node);
 
    friend int yyparse(yyscan_t);
 

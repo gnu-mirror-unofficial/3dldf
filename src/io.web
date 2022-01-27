@@ -2553,7 +2553,7 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
 
   friend class Point;
 
-  friend int box_or_circle_text_func(int, Scanner_Node, Path *, Point *, Pointer_Vector<real> *, Transform *);
+  friend int Scan_Parse::box_or_circle_text_func(int, Scanner_Node, Path *, Point *, Pointer_Vector<real> *, Transform *);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
@@ -4929,7 +4929,7 @@ Scan_Parse::end_group_func(void* parameter);
 
 friend 
 int 
-box_or_circle_text_func(int, Scanner_Node, Path *, Point *, Pointer_Vector<real> *, Transform *);
+Scan_Parse::box_or_circle_text_func(int, Scanner_Node, Path *, Point *, Pointer_Vector<real> *, Transform *);
 
 @q **** (4) Function for numerics.@>   
 @*3 Function for numerics.
@@ -5304,9 +5304,7 @@ Added |friend| declaration for |Scan_Parse::drawing_command_sphere_development|.
 
      friend
      int
-     Scan_Parse::drawing_command_path(Scanner_Node scanner_node,
-                                      int basic_drawing_command,
-                                      Path* ppath);
+     Scan_Parse::drawing_command_path(Scanner_Node, int, Path*, bool b);
 
      friend 
      int

@@ -332,7 +332,7 @@ parser.o: parser.c++ parser.h++ parser_1.h++ arc.h++ astronmy.h++ circles.h++ cn
                      planes.h++ plyhdslc.h++ pntrvcf0.h++ pntrvctr.h++ \
                      points.h++ polygons.h++ polyhed.h++ predctes.h++ \
                      primes.h++ pspglb.h++ rectangs.h++ rhtchdrn.h++ \
-                     scanprse.h++ shapes.h++ solfaced.h++ solids.h++ \
+                     scanprse.h++ scanprsf.h++ shapes.h++ solfaced.h++ solids.h++ \
                      spheres.h++ sphrdevl.h++ transfor.h++ triangle.h++ \
                      utility.h++ compile_parser.sh
 	./compile_parser.sh "$(CXXCOMPILE)"

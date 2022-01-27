@@ -2731,7 +2731,7 @@ Added this rule.
 
     Star *s = static_cast<Star*>(@=$2@>);
 
-    status = plot_star_func(s, p, @=$4@>, scanner_node);
+    status = Scan_Parse::plot_star_func(s, p, @=$4@>, scanner_node);
 
     if (status != 0)
     {

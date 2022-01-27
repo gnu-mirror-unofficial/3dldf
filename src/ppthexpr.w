@@ -1437,7 +1437,7 @@ Added this rule.
    }
    else
    {
-      status = box_or_circle_text_func(@=$1@>, scanner_node, q, p, pv, t);
+      status = Scan_Parse::box_or_circle_text_func(@=$1@>, scanner_node, q, p, pv, t);
 
       if (status != 0)
       {
@@ -1445,7 +1445,7 @@ Added this rule.
                    << "ERROR!  In parser, rule `path_primary --> box_or_circle_text LEFT_PARENTHESIS point_expression COMMA "
                    << "string_expression RIGHT_PARENTHESIS box_or_circle_text_option_list transformer_optional':"
                    << endl
-                   << "`box_or_circle_text_func' failed, returning " << status << "." 
+                   << "`Scan_Parse::box_or_circle_text_func' failed, returning " << status << "." 
                    << endl 
                    << "Will try to continue."
                    << endl;

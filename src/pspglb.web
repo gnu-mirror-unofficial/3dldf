@@ -3646,6 +3646,13 @@ Added this section with the declaration of |end_group_func|.
 void
 end_group_func(void* parameter);
 
+int
+box_or_circle_text_func(int flag, Scanner_Node scanner_node, Path *q, Point *p, Pointer_Vector<real> *pv, Transform *t);
+
+int
+plot_star_func(Star *s, Point* p, real radius, Scanner_Node scanner_node);
+
+
 @q **** (4) Functions for numerics.@>   
 @*3 Functions for numerics.
 \initials{LDF 2005.08.29.}
@@ -3898,7 +3905,7 @@ on_picture_optional_0(Scanner_Node scanner_node);
 int
 drawing_command_path(Scanner_Node scanner_node,
                      int basic_drawing_command,
-                     Path* ppath);
+                     Path* ppath, bool);
 int
 drawing_command_path_vector(Scanner_Node scanner_node,
                             int basic_drawing_command,
