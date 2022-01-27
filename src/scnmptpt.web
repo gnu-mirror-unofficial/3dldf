@@ -49,8 +49,6 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single "at" sign.)@>
 
 
-
-
 @q  * (1) Scanner for MetaPost logging output.  @>
 @* Scanner for MetaPost logging output.
 \initials{LDF 2022.01.20.}
@@ -465,8 +463,43 @@ to {\bf zzlex} can be set here.
 
 @=}@>
 
-@q *** (3) @>
-@
+
+@q *** (3) REAL.  @>
+@ REAL.
+@<Rules@>=
+@=REAL[[:space:]]+{NUMBER} {@>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  `REAL[[:space:]]+{NUMBER}'." << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   temp_strm.str("");
+   string s;
+   real r;
+
+   temp_strm << yytext;
+   temp_strm >> s;
+   temp_strm >> r;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr << "In `zzlex':  `REAL[[:space:]]+{NUMBER}':" << endl
+            << "`r' == " << r << endl;
+
+   }  /* |if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+   scanner_node->metapost_output_struct->real_vector.push_back(r);
+
+@=}@>
+
+@q *** (3) Whitespace.  @>
+@ Whitespace.
 @<Rules@>=
 @=[[:space:]] {@>
 
