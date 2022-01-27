@@ -3476,6 +3476,42 @@ Path::shift_times(const Point& p)
   return shift_times(p.get_x(), p.get_y(), p.get_z());
 }
 
+
+@q * (1) Multiplication by a |real|.  @>
+@ Multiplication by a |real|.  
+\initials{LDF 2022.01.27.}
+
+\LOG
+\initials{LDF 2022.01.27.}
+Added this function.
+\ENDLOG 
+
+@<Declare |Path| functions@>=
+real
+operator*=(const real r);
+
+@
+@<Define |Path| functions@>=
+real
+Path::operator*=(const real r)
+{
+    for (vector<Point*>::iterator iter = points.begin();
+         iter != points.end();
+         ++iter)
+    {
+       *iter *= r;
+    }
+
+    for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+         iter != connector_type_vector.end();
+         ++iter)
+    {
+       *iter *= r;
+    }
+
+    return r;
+}
+
 @q ** Applying transformations. @>
 @ Applying transformations.
 
@@ -14497,7 +14533,43 @@ Connector_Type::operator=(const Connector_Type &c)
 
    return;
            
-}  /* End of |Connector_Type| default constructor definition  */
+}  /* End of |Connector_Type::operator=| definition  */
+
+@q *** (3) Multiplication with assignment operator.@>
+@ Multiplication with assignment operator.
+\initials{LDF 2022.01.27.}
+
+\LOG
+\initials{LDF 2022.01.27.}
+Added this function.
+\ENDLOG 
+
+@q **** (4) Declaration @>
+
+@<|Connector_Type| function declarations@>=
+real
+operator*=(const real r);
+
+@q **** (4) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+real
+Connector_Type::operator=(real r)
+{
+   if (c.pt0 != 0)
+   {
+      pt0 *= r; 
+   }
+
+   if (c.pt1 != 0)
+   {
+      pt1 *= r;
+   }
+
+   return r;
+           
+}  /* End of |Connector_Type::operator*=(real)| definition  */
+
 
 @q * (1) Pseudo-constructor for dynamic allocation. @>
 @* Pseudo-constructor for dynamic allocation. 
