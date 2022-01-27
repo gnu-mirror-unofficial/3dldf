@@ -213,7 +213,7 @@ class Path : public Shape
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node);
+   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
  protected:
@@ -11845,9 +11845,11 @@ the |Points| lie on a line or in a plane.
   for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
        iter != connector_type_vector.end(); ++iter)
   {
+#if 0 
     if (!((*iter)->connector_string == ".." || (*iter)->connector_string == "--"
         || (*iter)->connector_string == "..." || (*iter)->connector_string == "---"))
       {
+
         cerr_mutex.lock(); 
         cerr << "WARNING! In Path::get_normal():\n"
              << "`Connector_Type' may make Path non-linear or non-planar:" << endl;
@@ -11855,8 +11857,10 @@ the |Points| lie on a line or in a plane.
         (*iter)->show();
         cerr_mutex.unlock();  
 
+
         return INVALID_POINT;
       }
+#endif 
   }
 
 @ \initials{LDF 2002.11.05.}  Two points determine a line.  
@@ -14106,17 +14110,17 @@ Added this function.
 @<Declare |Path| functions@>=
 virtual
 int
-resolve(int res_val, Scanner_Node scanner_node = 0);
+resolve(int res_val, Scanner_Node scanner_node = 0, bool do_unlink = true);
 
 @q *** (3) Definition  @>
 @
 @<Define |Path| functions@>=
 int
-Path::resolve(int res_val, Scanner_Node scanner_node)
+Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink)
 {
 @q **** (4) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    int status = 0;
 
@@ -14134,222 +14138,12 @@ Path::resolve(int res_val, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
-   Point normal;
+   Pointer_Vector<Path> pv;
 
-   if (!is_planar(&normal))
-   {
-       cerr << "ERROR!  `Path' is not planar.  Can't resolve it." << endl 
-            << "Exiting function unsuccessfully with return value 1."
-            << endl;
-
-       return 1;
-
-   }
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      normal.show("normal before shift:");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   normal.shift(*points[0]);
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-      normal.show("normal after shift:");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   Path q;
-   q += *points[0];
-   q += normal;
-  
-   Transform t;
-   t.align_with_axis(*points[0], normal);
-
-   *this *= t;
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      show("*this after alignment:");
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-   stringstream temp_strm;
-   vector<Point*>::const_iterator iter = points.begin();
-   vector<Connector_Type*>::const_iterator ct_iter = connector_type_vector.begin();
-
-   stringstream connector_strm;
-
-   temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-             << "'tracingonline :=1; input writemcs.mp; path q;"  << "q = ";
-
-@q **** (4) @>
-
-   for (;iter != points.end(); ++iter)
-   {
-@q ***** (5) @>
-
-      temp_strm << "(" << (*iter)->get_x() << "cm, " << (*iter)->get_y() << "cm)";
-
-      if (ct_iter != connector_type_vector.end())
-      {
-         if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE)
-         {
-            connector_strm << " .. controls";
-
-            if ((*ct_iter)->pt0 != 0)
-               connector_strm << " (" << (*ct_iter)->pt0->get_x() 
-                              << "cm, " << (*ct_iter)->pt0->get_y() << "cm)";
-
-            if ((*ct_iter)->pt1 != 0)
-               connector_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, " 
-                              << (*ct_iter)->pt1->get_y() << "cm)";
-
-            connector_strm << " ..";
-         }
-
-      }
-
-@q ***** (5) @>
-
-      if (connector_strm.str().empty())
-         connector_strm << " .. ";
-
-      if (next(iter) == points.end())
-      {
-
-          if (cycle_switch == true)
-             temp_strm << connector_strm.str() << " cycle";
-
-          temp_strm << ";";
-          break;
-      } 
-      else
-         temp_strm << connector_strm.str()  << " ";
-   
-@q ***** (5) @>
-
-      if (next(ct_iter) != connector_type_vector.end())
-        ++ct_iter;
-
-      connector_strm.str("");
-
-@q ***** (5) @>
-
-   }  /* |for| */
-
-@q **** (4) @>
-
-    char temp_filename[] = "mp_output.XXXXXX";
-    
-    errno = 0;
-    int fd = mkstemp(temp_filename);
-
-    if (fd == -1)
-    {
-            cerr << "ERROR!  In `Path::resolve':"
-                 << endl 
-                 << "`mkstemp' failed, returning -1:"
-                 << endl
-                 << strerror(errno)
-                 << endl 
-                 << "Failed to create temporary file."
-                 << endl 
-                 << "Exiting function unsuccessfully with return value 1."
-                 << endl;
-
-            return 1;
-
-    }  /* |if (fd == -1)|  */
-
-#if DEBUG_COMPILE
-    else if (DEBUG)
-    {
-        cerr << "In `Path::resolve':"
-             << endl 
-             << "`mkstemp' succeeded:  `temp_filename' == " << temp_filename 
-             << endl;
-
-    }  /* |else if (DEBUG)|  */
-#endif  /* |DEBUG_COMPILE|  */ 
-
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-   close(fd);
-
-   temp_strm << "path r;n = (length q) / " << res_val << ";"
-             << "r = point 0 of q;pair m;for i = n step n until length q: m := point i of q;"
-             << "r := r .. m;endfor;r := r .. cycle;"
-             << "write_path(r, \"" << temp_filename << "\", false);end;'";
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   {
-      cerr << "temp_strm.str() == " << temp_strm.str() << endl;
-
-   }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-   errno = 0;
-   status = system(temp_strm.str().c_str());
-
-   FILE *fp = fopen(temp_filename, "r");
-   
-   yyscan_t scanner;
-   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
-   zzset_in(fp, scanner);
-   zzlex(scanner);
-   zzlex_destroy(scanner);
-   
-   fclose(fp);
-   fp = 0;
-   unlink(temp_filename);
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "After calling zzlex." << endl;
-
-      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
-           << scanner_node->metapost_output_struct->path_vector.size() << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   *this = *(scanner_node->metapost_output_struct->path_vector.back());
-
-   *this *= t.inverse();
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      this->show("*this:");
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=    
-
-
+   pv += create_new<Path>(this);
+ 
+   return pv.resolve(res_val, scanner_node, do_unlink);
+ 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
@@ -14382,7 +14176,7 @@ class Connector_Type
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node);
+   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool);
 
    int type0;
    int type1;

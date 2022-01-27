@@ -136,7 +136,7 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_variable TO numeric_expression@>@/
+@=command: RESOLVE path_variable TO numeric_expression save_temp_file_optional@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -155,7 +155,7 @@ Removed debugging code.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-  status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node);
+  status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node, @=$5@>);
 
 #if DEBUG_COMPILE
 
@@ -176,9 +176,32 @@ Removed debugging code.
 
 };
 
+@q *** (3) save_temp_file_optional.  @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> save_temp_file_optional@>
 
-@q *** (3) command --> RESOLVE path_vector_variable TO numeric_expression.@> 
-@*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path vector variable> \.{TO} \§numeric expression>.
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=save_temp_file_optional: /* Empty  */@>
+{
+
+   @=$$@> = 0;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=save_temp_file_optional: SAVE@>
+{
+
+   @=$$@> = 1;
+};
+
+@q *** (3) command --> RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional.@> 
+@*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path vector variable> \.{TO} \§numeric expression>
+\§save temp file optional>.
 \initials{LDF 2022.01.25.}
 
 \LOG
@@ -186,7 +209,7 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_vector_variable TO numeric_expression@>@/
+@=command: RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -194,7 +217,8 @@ Removed debugging code.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO numeric_expression'.";
+    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO "
+              << "numeric_expression save_temp_file_optional'.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -205,13 +229,17 @@ Removed debugging code.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-  status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node);
+  status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(
+                                                                 static_cast<int>(@=$4@>), 
+                                                                 scanner_node,
+                                                                 !static_cast<bool>(@=$5@>));
 
 #if DEBUG_COMPILE
 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO numeric_expression':"
+    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable "
+              << "TO numeric_expression save_temp_file_optional':"
               << endl 
               << "`Pointer_Vector<Path>::resolve' returned " << status << "." << endl;
 
@@ -225,8 +253,6 @@ Removed debugging code.
   @=$$@> =  static_cast<void*>(0);
 
 };
-
-
 
 @q ** (2) command --> group_command.  @>
 @*1 \§command> $\longrightarrow$ \§group command>.

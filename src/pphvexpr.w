@@ -166,8 +166,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=path_vector_primary: LEFT_PARENTHESIS@>@/ 
-@=path_vector_expression RIGHT_PARENTHESIS@>@/ 
+@=path_vector_primary: LEFT_PARENTHESIS path_vector_expression RIGHT_PARENTHESIS@>@/ 
 {
    
    @<Common declarations for rules@>@;

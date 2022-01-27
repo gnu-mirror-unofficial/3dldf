@@ -574,8 +574,7 @@ Removed debugging output and error-handling code.
 @
 @<Define rules@>=
   
-@=command: basic_transformation_command any_variable @>
-@=BY numeric_primary@>@/
+@=command: basic_transformation_command any_variable BY numeric_primary@>@/
 {
 
    Pointer_Vector<real>* pv = new Pointer_Vector<real>;

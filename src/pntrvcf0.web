@@ -648,7 +648,7 @@ Added this function.
 @<Define |Pointer_Vector| specializations@>=
 template<>
 int
-Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
+Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink)
 {
  
 @q *** (3) Preliminaries.@>   
@@ -924,7 +924,9 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
    
    fclose(fp);
    fp = 0;
-   unlink(temp_filename);
+   
+   if (do_unlink)
+      unlink(temp_filename);
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -963,11 +965,20 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
 
    t.inverse(true);
 
-   for (int i = 0; i < v.size() - 1;++i)
+cerr << "v.size() == " << v.size() << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   for (int i = 0; i < v.size();++i)
    {
       *(v[i]) = *(scanner_node->metapost_output_struct->path_vector[i]);
       *(v[i]) *= t;
+
+      cerr << "v[" << i << "]->points.size() == " << v[i]->points.size() << endl;
    }
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    delete scanner_node->metapost_output_struct;
    scanner_node->metapost_output_struct = 0;
@@ -993,7 +1004,7 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node)
 
     return 0;
 
-}  /* End of |Pointer_Vector<Point, Point>::resolve| definition.  */
+}  /* End of |Pointer_Vector<Path, Path>::resolve| definition.  */
 
 @q * (1) Get |Conic_Section_Lattice|.@> 
 @* Get |Conic_Section_Lattice|.

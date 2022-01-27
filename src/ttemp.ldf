@@ -8,30 +8,52 @@ glyph t;
 
 %% * (1)
 
-path q;
+
+
+numeric frame_wd;
+numeric frame_ht;
+frame_wd := 10cm;
+frame_ht := 10cm;
+
+
+path frame;
+
+frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_wd, .5frame_ht)
+         -- (-.5frame_wd, .5frame_ht) -- cycle;
 
 beginfig(0);
-
+  
 %% ** (2)
 
-   focus f;
-   set f with_position (0, 5, -10) with_direction (0, 5, 10) with_distance 5; 
-
+  path q;
   
-  dotlabel.bot("origin", origin);
+  verbatim_metapost "verbatimtex \font\cmssbx=cmssbx10 scaled 25000 etex;";
+  
+  draw frame shifted (.5frame_wd, .5frame_ht);
+
+  %label.urt("{\cmssbx A}", (6cm, -2pt));
+
+  output current_picture with_projection parallel_x_y;
+  clear current_picture;
+
+  focus f;
+  set f with_position (0, 5, -10) with_direction (0, 5, 10) with_distance 5; 
+
+  dotlabel.llft("$(0, 0)$", origin);
   
   g := get_glyph 65 from "cmssbx10";
 
-  message "g:";
-  show g;
-  %pause;
+  scale g by .25; 
+  
+  % message "g:";
+  % show g;
 
   %% !! START HERE:  LDF 2022.01.27.  Add a way of showing path connectors.
   
   %draw ((g scaled (.5, .5)) rotated (0, 0, 0)) rotated (0, 30);
   %draw (g scaled (.5, .5) rotated (0, 30)) shifted (0, 0, 6);
 
-  draw g scaled (.5, .5);
+  draw g;
 
   path_vector pv;
 
@@ -43,36 +65,69 @@ beginfig(0);
   message "length pv0:";
   show length pv0;
 
+  point p[][]; 
+
   n := (length pv0) - 1;
 
-  point p[][]; 
-  
   for i = 0 upto n:
     p[0][i] := get_point (i) pv0;
-    message "p[0][" & decimal i & "]:";
-    show p[0][i];
+    % message "p[0][" & decimal i & "]:";
+    % show p[0][i];
   endfor;
+
+  n := (length pv1) - 1;
   
+  for i = 0 upto n:
+    p[1][i] := get_point (i) pv1;
+    % message "p[1][" & decimal i & "]:";
+    % show p[1][i];
+  endfor;
+
+  %draw p[0][1] -- p[0][1] shifted (7cm, 0);
+
+  
+  dotlabel.rt("$p_0^0$", p[0][0]);
+  dotlabel.top("$p_0^1$", p[0][1]);
+  dotlabel.top("$p_0^2$", p[0][2]);
+  dotlabel.lft("$p_0^3$", p[0][3]);
+  dotlabel.ulft("$p_0^4$", p[0][4]);
+  dotlabel.lft("$p_0^5$", p[0][5]);
+  dotlabel.bot("$p_0^6$", p[0][6]);
+  dotlabel.bot("$p_0^7$", p[0][7]);
+  dotlabel.bot("$p_0^8$", p[0][8]);
+  dotlabel.lrt("$p_0^9$", p[0][9]);
+  dotlabel.llft("$p_0^{10}$", p[0][10]);
+  dotlabel.lft("$p_0^{11}$", p[0][11]);
+  dotlabel.bot("$p_0^{12}$", p[0][12]);
+  dotlabel.bot("$p_0^{13}$", p[0][13]);
+  dotlabel.rt("$p_0^{14}$", p[0][14]);
+  dotlabel.urt("$p_0^{15}$", p[0][15]);
+  
+  
+  dotlabel.lft("$p_1^0$", p[1][0]);
+  dotlabel.lft("$p_1^1$", p[1][1]);
+  dotlabel.rt("$p_1^2$", p[1][2]);
+  dotlabel.rt("$p_1^3$", p[1][3]);
+  dotlabel.rt("$p_1^4$", p[1][4]);
+  dotlabel.lft("$p_1^5$", p[1][5]);
+
+  path_vector qv;
+  qv += pv0;
+
+  resolve qv to 50 save;
+
+  message "length qv0:";
+  show length qv0;
   pause;
+
+  pen large_pen;
+  large_pen := pencircle scaled (.75mm, .75mm, .75mm);
   
-  % q := origin .. (1, 1) .. (2, 2) .. (1, 2) .. (0, 2) .. cycle;
+  %draw qv0 with_color blue with_pen large_pen;
   
-  % rotate q (20, 20, 20); 
 
-  % pv +=  q;
-
-  % rotate q (0, 30);
-
-  % pv +=  q;
-  
-  % resolve pv to 20;
-
-  % message "pv0:";
-  % show pv0;
-
-  % draw pv0;
-  
-endfig with_focus f;
+endfig with_projection parallel_x_y;
+%endfig with_focus f;
 
 beginfig(1);
   %draw q;
