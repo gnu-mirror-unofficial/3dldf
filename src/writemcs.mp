@@ -49,7 +49,6 @@
 
 %% * (1) Top
 
-
 %% * (1) write_path
 
 def write_path (expr ppath, filename, do_show) =
