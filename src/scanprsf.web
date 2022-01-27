@@ -7708,31 +7708,49 @@ Added this section.
 @<Define |Scan_Parse| functions@>=
 
   else if (entry->type == CONIC_SECTION_LATTICE)
-    {
-           
-      Conic_Section_Lattice* c 
-         = static_cast<Conic_Section_Lattice*>(entry->object); 
-      
-      *c *= *t;
+  {
+         
+    Conic_Section_Lattice* c 
+       = static_cast<Conic_Section_Lattice*>(entry->object); 
+    
+    *c *= *t;
 
-    } /* |else if (entry->type == CONIC_SECTION_LATTICE)|  */
+  } /* |else if (entry->type == CONIC_SECTION_LATTICE)|  */
+
+@q ***** (5)@>  
+@
+\LOG
+\initials{LDF 2022.01.27.}
+Added this section.
+\ENDLOG
+
+@<Define |Scan_Parse| functions@>=
+
+  else if (entry->type == GLYPH)
+  {
+         
+    Glyph *g = static_cast<Glyph*>(entry->object); 
+    
+    *g *= *t;
+
+  } /* |else if (entry->type == GLYPH)|  */
 
 @q ***** (5)@>
 @
 @<Define |Scan_Parse| functions@>=
 
   else
-    {
-      cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::transformation_command_func':"
-                << endl << "`entry->type' == `" << name_map[entry->type]
-                << "'. Haven't programmed this case yet.";
+  {
+    cerr_strm << thread_name 
+              << "ERROR! In `Scan_Parse::transformation_command_func':"
+              << endl << "`entry->type' == `" << name_map[entry->type]
+              << "'. Haven't programmed this case yet.";
 
-      log_message(cerr_strm);
-      cerr_message(cerr_strm, error_stop_value);
-      cerr_strm.str("");
-      
-    } /* |else|  */
+    log_message(cerr_strm);
+    cerr_message(cerr_strm, error_stop_value);
+    cerr_strm.str("");
+    
+  } /* |else|  */
 
 @q ***** (5)@>
 
