@@ -130,7 +130,7 @@ in the call to |Scan_Parse::drawing_command_path|.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Ellipse*>(@=$2@>));
+                         static_cast<Ellipse*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -162,7 +162,7 @@ in the call to |Scan_Parse::drawing_command_path|.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Circle*>(@=$2@>));
+                         static_cast<Circle*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -190,7 +190,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Parabola*>(@=$2@>));
+                         static_cast<Parabola*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -218,7 +218,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Hyperbola*>(@=$2@>));
+                         static_cast<Hyperbola*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -246,7 +246,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Helix*>(@=$2@>));
+                         static_cast<Helix*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -273,7 +273,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Path*>(@=$2@>));
+                         static_cast<Path*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -300,7 +300,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Path*>(@=$2@>));
+                         static_cast<Path*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -327,7 +327,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Path*>(@=$2@>));
+                         static_cast<Path*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -354,7 +354,7 @@ Added this rule.
 
     drawing_command_path(static_cast<Scanner_Node>(parameter),
                          @=$1@>,
-                         static_cast<Path*>(@=$2@>));
+                         static_cast<Path*>(@=$2@>), true);
 
     @=$$@> = static_cast<void*>(0);
 
@@ -763,8 +763,8 @@ Added this rule.
 
 };
 
-@q *** (3) drawing_command --> basic_drawing_command             @>
-@q *** (3) glyph_expression with_clause_draw_list.  @>
+@q *** (3) drawing_command --> basic_drawing_command @>
+@q *** (3) glyph_expression with_clause_draw_list.   @>
 
 @*2 \§command> $\longrightarrow$ \§basic drawing command> 
 \§sphere development expression> \§with clause list>.
