@@ -870,9 +870,14 @@ is non-null.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
+Scan_Parse::beginfig_func(Scanner_Node scanner_node, 
+                          int fig_num, 
+                          bool do_metafont, 
+                          string s, 
+                          int wd, 
+                          int ht, 
+                          int dp)
 {
-
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
@@ -1167,8 +1172,17 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node, int fig_num)
 @ Write to |*out_stream|.
 @<Define |Scan_Parse| functions@>= 
 
-      *out_stream << "beginfig(" << fig_num << ");" 
-                  << endl;
+    if (do_metafont)
+    {
+       *out_stream << "beginchar(\"" << s << "\", " << wd 
+                   << "pt#, " << ht << "pt#, " << dp << "pt#);" 
+                   << endl;
+    }
+    else
+    {
+       *out_stream << "beginfig(" << fig_num << ");" 
+                   << endl;
+    }
 
 
 @q ******* (7) @> 

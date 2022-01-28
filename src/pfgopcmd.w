@@ -170,8 +170,7 @@ Rewrote this rule.  It now calls |output_command_func|.
  
 };
 
-@*3 \§command> $\longrightarrow$ 
-\.{BEGINCHAR} $\ldots$.
+@*3 \§command> $\longrightarrow$ \.{BEGINCHAR} $\ldots$.
 \initials{LDF 2005.06.11.}
 
 \LOG
@@ -206,9 +205,12 @@ Added this rule.
 
    /* !!START HERE:  LDF 2022.01.16.  */ 
 
-   string* s = static_cast<string*>(@=$11@>);
+   string *s = static_cast<string*>(@=$3@>);
+
+   Scan_Parse::beginfig_func(scanner_node, 0, true, *s, @=$5@>, @=$7@>, @=$9@>);
 
    delete s;
+   s = 0;
 
    @=$$@> = static_cast<void*>(0);
 

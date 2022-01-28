@@ -2503,6 +2503,7 @@ Run_State
   static const unsigned short METAPOST;
   static const unsigned short PNG;
   static const unsigned short LIBPLOT;
+  static const unsigned short METAFONT;
 
   static const unsigned short QUIET; 
   static const unsigned short SILENT; 
@@ -2512,7 +2513,7 @@ Run_State
   static const unsigned short STOPPING;   
   static const unsigned short NON_STOP;
 
-  bool do_output[3];
+  bool do_output[4];
   bool single_output_file;
 
   unsigned short message_mode;
@@ -2544,13 +2545,14 @@ I've added today.
 const unsigned short Run_State::METAPOST = 0;
 const unsigned short Run_State::PNG      = 1;
 const unsigned short Run_State::LIBPLOT  = 2;
+const unsigned short Run_State::METAFONT = 3;
 
-const unsigned short Run_State::MAX_OUTPUT_FORMATS = 3;
+const unsigned short Run_State::MAX_OUTPUT_FORMATS = 4;
 
-const unsigned short Run_State::QUIET   = 0;
-const unsigned short Run_State::SILENT  = 1;
+const unsigned short Run_State::QUIET     = 0;
+const unsigned short Run_State::SILENT    = 1;
 const unsigned short Run_State::STANDARD  = 2;
-const unsigned short Run_State::VERBOSE = 3;
+const unsigned short Run_State::VERBOSE   = 3;
 
 const unsigned short Run_State::STOPPING  = 0;
 const unsigned short Run_State::NON_STOP  = 1;
@@ -2620,6 +2622,7 @@ Run_State::Run_State(void)
   do_output[METAPOST] = true;
   do_output[PNG]      = false;
   do_output[LIBPLOT]  = false;
+  do_output[METAFONT] = false;
   single_output_file  = false;
 
   message_mode      = STANDARD;
@@ -2658,7 +2661,7 @@ Run_State::operator=(const Run_State& r)
   multithread_output  = r.multithread_output;  
   multithread_include = r.multithread_include;  
 
-  for (int i = 0; i < MAX_OUTPUT_FORMATS; ++i)
+  for (int i = 0; i < Run_State::MAX_OUTPUT_FORMATS; ++i)
      do_output[i] = r.do_output[i]; 
 
   single_output_file =  r.single_output_file;
@@ -3756,7 +3759,7 @@ int
 output_command_func(Scanner_Node);
 
 int
-beginfig_func(Scanner_Node, int);
+beginfig_func(Scanner_Node, int, bool do_metafont = false, string s = "", int wd = 0, int ht = 0, int dp = 0);
 
 String_Bool variable_func(Scanner_Node,
                           char*,
