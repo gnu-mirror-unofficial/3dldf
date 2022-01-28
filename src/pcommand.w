@@ -183,6 +183,70 @@ Removed debugging code.
 
 };
 
+@q *** (3) command --> RESOLVE path_variable TO numeric_expression.@> 
+@*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{TO} \§numeric expression>.
+\§save temp file optional> \§with no transform optional>.
+\initials{LDF 2022.01.18.}
+
+\LOG
+\initials{LDF 2022.01.18.}
+\ENDLOG
+
+@<Define rules@>=
+@=command: RESOLVE path_variable OPEN_PARENTHESIS numeric_expression COMMA @>
+@=numeric_expression CLOSE_PARENTHESIS TO numeric_expression               @>
+@=save_temp_file_optional with_no_transform_optional                       @>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+    cerr_strm << "*** Parser: `command: RESOLVE path_variable"
+              << endl "OPEN_PARENTHESIS numeric_expression COMMA "
+              << "numeric_expression CLOSE_PARENTHESIS"
+              << endl 
+              <<"TO numeric_expression save_temp_file_optional with_no_transform_optional'."
+              << endl;
+
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
+
+#if 0 
+
+  status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
+                              scanner_node, 
+                              !static_cast<bool>(@=$5@>),
+                              !static_cast<bool>(@=$6@>));
+
+#if DEBUG_COMPILE
+
+  if (DEBUG)
+  {
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
+              << "save_temp_file_optional with_no_transform_optional':"
+              << endl 
+              << "`Path::resolve' returned " << status << "." << endl;
+
+    log_message(cerr_strm);
+    cerr_message(cerr_strm);
+    cerr_strm.str("");
+    
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+#endif     
+
+  @=$$@> =  static_cast<void*>(0);
+
+};
+
 @q *** (3) save_temp_file_optional.  @>
 @
 @<Type declarations for non-terminal symbols@>=
