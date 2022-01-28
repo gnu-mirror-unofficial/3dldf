@@ -204,7 +204,8 @@ Removed debugging code.
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable"
-              << endl "LEFT_PARENTHESIS numeric_expression COMMA "
+              << endl 
+              << "LEFT_PARENTHESIS numeric_expression COMMA "
               << "numeric_expression RIGHT_PARENTHESIS"
               << endl 
               <<"TO numeric_expression save_temp_file_optional with_no_transform_optional'."
