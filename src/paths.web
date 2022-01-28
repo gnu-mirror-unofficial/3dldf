@@ -2425,6 +2425,11 @@ set_connectors(const string s = "..");
 void
 Path::set_connectors(const string s)
 {
+  /* !!START HERE:  LDF 2022.01.28.  Try to get rid of this function.  It's only 
+     called in one place.
+  */ 
+
+
   bool DEBUG = false; /* |true| */ 
  
   for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
@@ -2442,13 +2447,16 @@ Path::set_connectors(const string s)
   c->type0 = Connector_Type::CT_NULL_TYPE;      
   c->connector_string = s;
 
-  if (DEBUG)
-     cerr << "In `Path::set_connectors':  Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+  if (DEBUG) /* LDF 2022.01.14.  */
+  {
+     cerr << "In `Path::set_connectors':  "
+          << "Pushing `Connector_Type*' onto connector_type_vector." << endl;  
+  }
   connector_type_vector.push_back(c);
 
   return;
 
-}
+}  /* End of |Path::set_connectors(const string s)| definition  */
 
 @q ** (2) Set |Connector_Type|.@>
 @*1 Set |Connector_Type|.
@@ -2482,16 +2490,13 @@ Path::set_connector_type(int position,
 		   	 real *r1,
 		   	 Point *pt0,
 		   	 Point *pt1,
-		   	 string connector_string);
+		   	 string connector_string)
 {
   bool DEBUG = true; /* |false| */ 
 
   return 0;
 
 }
-
-
-
 
 @q * (1) Functions for checking integrity of form.@> 
 @* Functions for checking integrity of form.
@@ -14137,8 +14142,8 @@ Path::get_direction(real ttime, Point *x_axis_point, int x_axis_direction, real 
 
 }  /* End of |Path::get_direction| definition  */
 
-@q ** (2) Resolve.  @>
-@ Resolve.
+@q ** (2) Resolve (1st version---for entire |Path|).  @>
+@ Resolve (1st version---for entire |Path|).
 \initials{LDF 2022.01.18.}
 
 \LOG
@@ -14167,7 +14172,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
    if (DEBUG)
    {
-      cerr << "Entering `Path::resolve'." << endl;
+      cerr << "Entering `Path::resolve' (1st version)." << endl;
 
       show("*this before alignment:");
 
@@ -14188,7 +14193,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-        cerr << "Exiting `Path::resolve' successfully with return value 0."
+        cerr << "Exiting `Path::resolve' (1st version) successfully with return value 0."
              << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -14197,8 +14202,13 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
 } /* End of |Path::resolve| definition  */
 
-@q ** (2) Resolve (2nd version).  @>
-@ Resolve (2nd version).
+@q ** (2) Resolve (2nd version---for subpath.  @>
+@ Resolve (2nd version---for subpath).
+\initials{LDF 2022.01.28.}
+
+The subpath from |points[begin]| to |points[end]| (inclusive) is resolved.
+|points[begin]| and |points[end]| will both remain on |*this|, so that the
+number of |Points| added may be greater than |res_val|.
 \initials{LDF 2022.01.28.}
 
 \LOG
@@ -14232,6 +14242,12 @@ Path::resolve(int begin,
 
    bool DEBUG = true; /* |false| */ 
 
+   Point *p_begin = 0;
+   Point *p_end   = 0;
+
+   Connector_Type *c = 0;
+
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
@@ -14247,7 +14263,42 @@ Path::resolve(int begin,
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
+
         
+   if (begin >= points.size())
+   {
+      cerr << "ERROR!  In `Path::resolve':  Argument `int begin' >= `points.size()'."
+           << endl
+           << "Can't resolve subpath.  Exiting unsuccessfully with return value 1."
+           << endl;
+
+      return 1;
+   }
+   
+   if (begin < 0)
+   {
+      if (DEBUG)
+         cerr << "In `Path::resolve':  Argument `int begin' == " << begin << " is < 0."
+              << endl
+              << "Setting `begin' to 0 and continuing."
+              << endl;
+
+      begin = 0;
+   }
+   
+
+
+   if (end >= points.size())
+   {
+      if (DEBUG)
+         cerr << "In `Path::resolve':  Argument `int end' == " << end << " is >= `points.size()'."
+              << endl
+              << "Reducing `end' to `points.size() - 1' and continuing."
+              << endl;
+
+       end = points.size() - 1;
+
+   }
 
 @q **** (4) @>
 @
