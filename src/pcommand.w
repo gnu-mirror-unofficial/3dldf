@@ -193,8 +193,8 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_variable OPEN_PARENTHESIS numeric_expression COMMA @>
-@=numeric_expression CLOSE_PARENTHESIS TO numeric_expression               @>
+@=command: RESOLVE path_variable LEFT_PARENTHESIS numeric_expression COMMA @>
+@=numeric_expression RIGHT_PARENTHESIS TO numeric_expression               @>
 @=save_temp_file_optional with_no_transform_optional                       @>@/
 {
   @<Common declarations for rules@>@; 
@@ -203,9 +203,9 @@ Removed debugging code.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command: RESOLVE path_variable"
-              << endl "OPEN_PARENTHESIS numeric_expression COMMA "
-              << "numeric_expression CLOSE_PARENTHESIS"
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable"
+              << endl "LEFT_PARENTHESIS numeric_expression COMMA "
+              << "numeric_expression RIGHT_PARENTHESIS"
               << endl 
               <<"TO numeric_expression save_temp_file_optional with_no_transform_optional'."
               << endl;
