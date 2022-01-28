@@ -648,7 +648,10 @@ Added this function.
 @<Define |Pointer_Vector| specializations@>=
 template<>
 int
-Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink)
+Pointer_Vector<Path, Path>::resolve(int res_val, 
+                                    Scanner_Node scanner_node, 
+                                    bool do_unlink, 
+                                    bool do_transform)
 {
  
 @q *** (3) Preliminaries.@>   
@@ -693,7 +696,6 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
     int status;
     Point normal;
     stringstream temp_strm;
-    stringstream connector_strm;
     Path R;
     Transform t;
     Point p0;
@@ -713,7 +715,8 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
       cerr << "Entering loop." << endl;
 
       R.clear();
-      t.reset();
+      if (do_transform)
+         t.reset();
       p0 = *((**iter).points[0]);
 
       if (!(*iter)->is_planar(&normal))
@@ -758,9 +761,11 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
       R += p0;
       R += normal;
 
-      t.align_with_axis(p0, normal);
-
-      R *= t;
+      if (do_transform)
+      {
+         t.align_with_axis(p0, normal);
+         R *= t;
+      }
 
 
 #if DEBUG_COMPILE
@@ -780,8 +785,6 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
 
       pt_iter = (*iter)->points.begin();
       ct_iter = (*iter)->connector_type_vector.begin();
-
-      connector_strm.str("");
 
       temp_strm << "q[" << i << "] = ";
 
@@ -805,20 +808,17 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
                      << "(*ct_iter)->type0 == " << (*ct_iter)->type0 << endl
                      << "(*ct_iter)->type1 == " << (*ct_iter)->type1 << endl;
 
-
                 if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE && (*ct_iter)->pt0 != 0)
                 {
-                   connector_strm << " .. controls" << " (" << (*ct_iter)->pt0->get_x()  
+                   temp_strm << " .. controls" << " (" << (*ct_iter)->pt0->get_x()  
                                   << "cm, " << (*ct_iter)->pt0->get_y() << "cm)"; 
                    if ((*ct_iter)->pt1 != 0) 
                    {
-                      connector_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, "  
+                      temp_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, "  
                                      << (*ct_iter)->pt1->get_y() << "cm)"; 
                    }  
                    temp_strm << " .. ";
                 }
-
-                /* !!START HERE:  LDF 2022.01.26.  Add code for `dir', `curl' and `tension'.  */ 
 
                 else
                   temp_strm << (*ct_iter)->connector_string;
@@ -894,6 +894,13 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
 
    cerr << "After outer loop." << endl;
 
+   /* !!START HERE:  LDF 2022.01.28.  Change the way this works.
+      Use |res_val| to add that number of points between each pair
+      of contiguous points on the path.  Maybe make a way of refining
+      this.
+   */ 
+
+
    temp_strm << "numeric n;pair m;path r[];for i = 0 upto " << (v.size() - 1) << ":"
              << "n := (length q[i]) / " << res_val << ";"
              << "r[i] = point 0 of q[i];for j = n step n until length q[i]: m := point j of q[i];"
@@ -963,22 +970,22 @@ Pointer_Vector<Path, Path>::resolve(int res_val, Scanner_Node scanner_node, bool
 @
 @<Define |Pointer_Vector| specializations@>=
 
-   t.inverse(true);
+   if (do_transform)
+      t.inverse(true);
 
-cerr << "v.size() == " << v.size() << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+   real factor = 2.54 / 72.0; /* Conversion factor for PostScript points ({\bf bp} $=72$ per inch) to {\bf cm}  */
 
    for (int i = 0; i < v.size();++i)
    {
       *(v[i]) = *(scanner_node->metapost_output_struct->path_vector[i]);
-      *(v[i]) *= t;
 
-      cerr << "v[" << i << "]->points.size() == " << v[i]->points.size() << endl;
+      *(v[i]) *= factor;
+
+      if (do_transform)
+         *(v[i]) *= t;
+
+      // cerr << "v[" << i << "]->points.size() == " << v[i]->points.size() << endl;
    }
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
    delete scanner_node->metapost_output_struct;
    scanner_node->metapost_output_struct = 0;

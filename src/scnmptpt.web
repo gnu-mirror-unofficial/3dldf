@@ -161,7 +161,7 @@ POINT \({NUMBER},[[:space:]]*{NUMBER}\)
 
 @<Local variables for |zzlex|@>=
 
-bool DEBUG = true;  /* |false|  */
+bool DEBUG = false;  /* |true|  */
 
 Scanner_Node scanner_node = static_cast<Scanner_Node>(yyextra); 
 bool collecting_path = false;
@@ -176,7 +176,8 @@ to {\bf zzlex} can be set here.
 
 @<Execute on entry to |zzlex|@>=
 
-   cerr << "Entering `zzlex'." << endl;
+   if (DEBUG)
+      cerr << "Entering `zzlex'." << endl;
 
 @q ** (2) Rules.  @>
 @ Rules.
@@ -248,45 +249,69 @@ to {\bf zzlex} can be set here.
    real y;
 
    temp_strm >> s;
-   cerr << "s == " << s << endl;
+
+   if (DEBUG)
+      cerr << "s == " << s << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> x;
-   cerr << "x == " << x << endl;
+   
+   if (DEBUG)
+      cerr << "x == " << x << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> y;
-   cerr << "y == " << y << endl;
+   
+   if (DEBUG)
+      cerr << "y == " << y << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    ct->pt0 = create_new<Point>(0);
    (ct->pt0)->set(x, y, 0);
 
    temp_strm >> s;
-   cerr << "s == " << s << endl;
+   
+   if (DEBUG)
+      cerr << "s == " << s << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> x;
-   cerr << "x == " << x << endl;
+   
+   if (DEBUG)
+      cerr << "x == " << x << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> y;
-   cerr << "y == " << y << endl;
+   
+   if (DEBUG)
+      cerr << "y == " << y << endl;
 
    ct->pt1 = create_new<Point>(0);
    
    (ct->pt1)->set(x, y, 0);
-   ct->show("*ct:");
+
+   if (DEBUG)
+     ct->show("*ct:");
 
    *(scanner_node->metapost_output_struct->path_vector.back()) += ct;
 
@@ -319,19 +344,29 @@ to {\bf zzlex} can be set here.
    real y;
 
    temp_strm >> s;
-   cerr << "s == " << s << endl;
+
+   if (DEBUG)
+      cerr << "s == " << s << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> x;
-   cerr << "x == " << x << endl;
+   
+   if (DEBUG)
+      cerr << "x == " << x << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> y;
-   cerr << "y == " << y << endl;
+   
+   if (DEBUG)
+      cerr << "y == " << y << endl;
 
    ct->pt0 = create_new<Point>(0);
    (ct->pt0)->set(x, y, 0);
@@ -339,7 +374,9 @@ to {\bf zzlex} can be set here.
    ct->pt1 = create_new<Point>(0);
    
    (ct->pt0)->set(x, y, 0);
-   ct->show("*ct:");
+   
+   if (DEBUG)
+      ct->show("*ct:");
 
    *(scanner_node->metapost_output_struct->path_vector.back()) += ct;
 
@@ -367,16 +404,24 @@ to {\bf zzlex} can be set here.
    real y;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> x;
-   cerr << "x == " << x << endl;
+   
+   if (DEBUG)
+      cerr << "x == " << x << endl;
 
    temp_strm >> c;
-   cerr << "c == " << c << endl;
+   
+   if (DEBUG)
+      cerr << "c == " << c << endl;
 
    temp_strm >> y;
-   cerr << "y == " << y << endl;
+   
+   if (DEBUG)
+      cerr << "y == " << y << endl;
 
    Point *p = create_new<Point>(0);
    p->set(x, y, 0);

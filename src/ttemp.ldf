@@ -114,16 +114,20 @@ beginfig(0);
   path_vector qv;
   qv += pv0;
 
-  resolve qv to 50 save;
+  resolve qv to 1000 save with_no_transform;
 
   message "length qv0:";
   show length qv0;
+
+  message "qv0:";
+  show qv0;
+
   pause;
 
   pen large_pen;
   large_pen := pencircle scaled (.75mm, .75mm, .75mm);
   
-  %draw qv0 with_color blue with_pen large_pen;
+  draw qv0 with_color blue with_pen large_pen;
   
 
 endfig with_projection parallel_x_y;

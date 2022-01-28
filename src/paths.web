@@ -213,7 +213,7 @@ class Path : public Shape
    friend int yyparse(yyscan_t);
    friend int zzlex(yyscan_t);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool);
+   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool, bool);
    friend int Scan_Parse::drawing_command_glyph(Scanner_Node, int, Glyph*);
 
  protected:
@@ -14110,13 +14110,13 @@ Added this function.
 @<Declare |Path| functions@>=
 virtual
 int
-resolve(int res_val, Scanner_Node scanner_node = 0, bool do_unlink = true);
+resolve(int res_val, Scanner_Node scanner_node = 0, bool do_unlink = true, bool do_transform = true);
 
 @q *** (3) Definition  @>
 @
 @<Define |Path| functions@>=
 int
-Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink)
+Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_transform)
 {
 @q **** (4) @>
 
@@ -14142,7 +14142,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink)
 
    pv += create_new<Path>(this);
  
-   return pv.resolve(res_val, scanner_node, do_unlink);
+   return pv.resolve(res_val, scanner_node, do_unlink, do_transform);
  
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14154,7 +14154,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink)
 
    return 0;
 
-} /* End |Path::resolve| */
+} /* End of |Path::resolve| definition  */
 
 @q * (1) class |Connector_Type| declaration. @>
 @* class |Connector_Type| declaration.
@@ -14176,7 +14176,7 @@ class Connector_Type
    friend ostream& operator<<(ostream& o, Connector_Type& c); 
    friend void* Scan_Parse::clip_to_func(void* arg1, void* parameter);
    friend int read_metapost_output_from_pipe(string, Pointer_Vector<Path>&, Scanner_Node);
-   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool);
+   friend int Pointer_Vector<Path, Path>::resolve(int, Scanner_Node, bool, bool);
 
    int type0;
    int type1;

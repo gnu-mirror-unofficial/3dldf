@@ -129,6 +129,7 @@ Removed debugging code.
 
 @q *** (3) command --> RESOLVE path_variable TO numeric_expression.@> 
 @*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{TO} \§numeric expression>.
+\§save temp file optional> \§with no transform optional>.
 \initials{LDF 2022.01.18.}
 
 \LOG
@@ -136,7 +137,7 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_variable TO numeric_expression save_temp_file_optional@>@/
+@=command: RESOLVE path_variable TO numeric_expression save_temp_file_optional with_no_transform_optional@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -144,7 +145,9 @@ Removed debugging code.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression'.";
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
+              << endl 
+              << "save_temp_file_optional with_no_transform_optional'.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -155,13 +158,17 @@ Removed debugging code.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-  status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), scanner_node, @=$5@>);
+  status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
+                              scanner_node, 
+                              !static_cast<bool>(@=$5@>),
+                              !static_cast<bool>(@=$6@>));
 
 #if DEBUG_COMPILE
 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression':"
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
+              << "save_temp_file_optional with_no_transform_optional':"
               << endl 
               << "`Path::resolve' returned " << status << "." << endl;
 
@@ -199,9 +206,32 @@ Removed debugging code.
    @=$$@> = 1;
 };
 
+@q *** (3) with_no_transform_optional.  @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> with_no_transform_optional@>
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=with_no_transform_optional: /* Empty  */@>
+{
+
+   @=$$@> = 0;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=with_no_transform_optional: WITH_NO_TRANSFORM@>
+{
+
+   @=$$@> = 1;
+};
+
 @q *** (3) command --> RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional.@> 
 @*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path vector variable> \.{TO} \§numeric expression>
-\§save temp file optional>.
+\§save temp file optional> \§with no transform optional>.
 \initials{LDF 2022.01.25.}
 
 \LOG
@@ -209,7 +239,7 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional@>@/
+@=command: RESOLVE path_vector_variable TO numeric_expression save_temp_file_optional with_no_transform_optional@>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -218,7 +248,7 @@ Removed debugging code.
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO "
-              << "numeric_expression save_temp_file_optional'.";
+              << "numeric_expression save_temp_file_optional with_no_transform_optional'.";
 
     log_message(cerr_strm);
     cerr_message(cerr_strm);
@@ -232,14 +262,16 @@ Removed debugging code.
   status = static_cast<Pointer_Vector<Path>*>(entry->object)->resolve(
                                                                  static_cast<int>(@=$4@>), 
                                                                  scanner_node,
-                                                                 !static_cast<bool>(@=$5@>));
+                                                                 !static_cast<bool>(@=$5@>),
+                                                                 !static_cast<bool>(@=$6@>));
 
 #if DEBUG_COMPILE
 
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable "
-              << "TO numeric_expression save_temp_file_optional':"
+    cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable"
+              << endl 
+              << "TO numeric_expression save_temp_file_optional with_no_transform_optional':"
               << endl 
               << "`Pointer_Vector<Path>::resolve' returned " << status << "." << endl;
 
