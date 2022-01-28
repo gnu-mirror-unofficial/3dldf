@@ -14156,6 +14156,187 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
 } /* End of |Path::resolve| definition  */
 
+@q ** (2) Resolve (2nd version).  @>
+@ Resolve (2nd version).
+\initials{LDF 2022.01.28.}
+
+\LOG
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration @>
+
+@<Declare |Path| functions@>=
+virtual
+int
+resolve(int begin, 
+        int end,
+        int res_val,
+        Scanner_Node scanner_node = 0,
+        bool do_unlink = true, 
+        bool do_transform = true);
+
+@q *** (3) Definition @>
+@
+@<Define |Path| functions@>=
+int
+Path::resolve(int begin, 
+              int end,
+              int res_val,
+              Scanner_Node scanner_node,
+              bool do_unlink, 
+              bool do_transform) 
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::resolve' (second version)." << endl
+            << "`begin'        == " << begin << endl 
+            << "`end'          == " << end << endl 
+            << "`res_val'      == " << res_val << endl 
+            << "`do_unlink'    == " << do_unlink << endl 
+            << "`do_transform' == " << do_transform << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+        
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::resolve' (second version) successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |Path::resolve| (2nd version) definition  */
+
+@q ** (2) Show connector.  @>
+@ Show connector.
+\initials{LDF 2022.01.28.}
+
+\LOG
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration @>
+
+@<Declare |Path| functions@>=
+virtual
+int
+show_connector(int position, string s = "", Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition @>
+@
+@<Define |Path| functions@>=
+int
+Path::show_connector(int position, string s, Scanner_Node scanner_node)
+
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::show_connector'." << endl
+            << "`position'        == " << position << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+        
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::show_connector' successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |Path::show_connector| definition  */
+
+@q ** (2) Show connectors.  @>
+@ Show connectors.
+\initials{LDF 2022.01.28.}
+
+\LOG
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration @>
+
+@<Declare |Path| functions@>=
+virtual
+int
+show_connectors(int first, int last = 0, string s = "", Scanner_Node scanner_node = 0);
+
+@q *** (3) Definition @>
+@
+@<Define |Path| functions@>=
+int
+Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node)
+{
+@q **** (4) @>
+
+   bool DEBUG = true; /* |false| */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::show_connectors'." << endl
+            << "`first' == " << position << endl
+            << "`last'  == " << last << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+       
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::show_connectors' successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |Path::show_connectors| definition  */
+
+
+
+
 @q * (1) class |Connector_Type| declaration. @>
 @* class |Connector_Type| declaration.
 \initials{LDF 2021.12.24.}
