@@ -220,15 +220,14 @@ Removed debugging code.
 
   entry = static_cast<Id_Map_Entry_Node>(@=$2@>); 
 
-#if 0 
-
   status = static_cast<Path*>(entry->object)->resolve(static_cast<int>(@=$4@>), 
+                              static_cast<int>(@=$6@>), 
+                              static_cast<int>(@=$9@>), 
                               scanner_node, 
-                              !static_cast<bool>(@=$5@>),
-                              !static_cast<bool>(@=$6@>));
+                              !static_cast<bool>(@=$10@>),
+                              !static_cast<bool>(@=$11@>));
 
 #if DEBUG_COMPILE
-
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
@@ -242,7 +241,6 @@ Removed debugging code.
     
   }
 #endif /* |DEBUG_COMPILE|  */@;
-#endif     
 
   @=$$@> =  static_cast<void*>(0);
 
