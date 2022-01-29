@@ -755,26 +755,21 @@ initialize_io(string in_stream_name, string out_stream_name,
 #endif 
 
   out_stream.open(out_stream_name.c_str());
-
-#ifdef __DECCXX
-  out_stream.setf(ios_base::fixed, ios_base::floatfield);
-#else
-#ifdef __GNUC__ 
   out_stream.setf(ios::fixed, ios::floatfield);
-#endif 
-#endif 
 
   tex_stream.open(tex_stream_name.c_str());
 
   /* Write datestamp to |out_stream|. */
+
   out_stream << "%%%% This is " << out_stream_name << "." << endl
-    << "%%%% Generated on " << datestamp << " from " << program_name
-      << ".\n\n";
+             << "%%%% Generated on " << datestamp << " from " << program_name
+             << ".\n\n";
 
   /* Write datestamp to |tex_stream|. */
+
   tex_stream << "%%%% This is " << tex_stream_name << "." << endl
-    << "%%%% Generated on " << datestamp << " from " << program_name
-      << ".\n\n";
+             << "%%%% Generated on " << datestamp << " from " << program_name
+             << ".\n\n";
 }    
 
 #endif 
@@ -811,24 +806,25 @@ void
 write_footers()
 {
   out_stream << endl << endl << "%% L" << "ocal Variables:" << endl
-    << "%% mode:Metafont" << endl 
-    << "%% eval:(if metapost-keymap nil (load \"metapost-keymap\"))"
-    << endl << "%% eval:(use-local-map metapost-mode-map)" << endl
-    << "%% eval:(local-set-key [f9] 'mp-file)" << endl
-    << "%% run-mp-on-file:\"persp.mp\"" << endl
-    << "%% run-cweb-on-file:\"main.web\"" << endl
-    << "%% run-tex-on-file:\"persp.tex\"" << endl
-    << "%% run-dvips-on-file:\"persp.ps\"" << endl
-    << "%% End:" << endl << endl;
+             << "%% mode:Metafont" << endl 
+             << "%% eval:(if metapost-keymap nil (load \"metapost-keymap\"))"
+             << endl 
+             << "%% eval:(use-local-map metapost-mode-map)" << endl
+             << "%% eval:(local-set-key [f9] 'mp-file)" << endl
+             << "%% run-mp-on-file:\"persp.mp\"" << endl
+             << "%% run-cweb-on-file:\"main.web\"" << endl
+             << "%% run-tex-on-file:\"persp.tex\"" << endl
+             << "%% run-dvips-on-file:\"persp.ps\"" << endl
+             << "%% End:" << endl << endl;
 
   tex_stream << "\n\n%% L" << "ocal Variables:\n"
-    << "%% mode:tex\n"
-    << "%% eval:(local-set-key [f9] 'mp-file)\n"
-    << "%% run-mp-on-file:\"persp.mp\"\n"
-    << "%% run-cweb-on-file:\"main.web\"\n"
-    << "%% run-tex-on-file:\"persp.tex\"\n"
-    << "%% run-dvips-on-file:\"persp.ps\"\n"
-    << "%% End:\n";
+             << "%% mode:tex\n"
+             << "%% eval:(local-set-key [f9] 'mp-file)\n"
+             << "%% run-mp-on-file:\"persp.mp\"\n"
+             << "%% run-cweb-on-file:\"main.web\"\n"
+             << "%% run-tex-on-file:\"persp.tex\"\n"
+             << "%% run-dvips-on-file:\"persp.ps\"\n"
+             << "%% End:\n";
   return;
 }
 #endif 
@@ -852,21 +848,19 @@ typedef Id_Map_Entry_Type* Id_Map_Entry_Node;
 @*1 {\bf class Id\_Map\_Entry\_Type}.
 No |Id_Map_Entry_Type| objects should ever be declared.  They should
 only ever be accessed via |Id_Map_Entry_Nodes|, which should be
-created by dynamically on the free store by using
-|new Id_Map_Entry_Type|.  
+created by dynamically on the free store by using |new
+Id_Map_Entry_Type|.
 \initials{LDF 2004.04.20.}
 
 @q *** (3) Beginning of LOG.@>
 
 \LOG
 \initials{LDF 2004.04.16.}  
-Moved to this file from
-\filename{scanprse.web}. 
+Moved to this file from \filename{scanprse.web}. 
 
 \initials{LDF 2004.04.20.}  
-Changed |Id_Map_Entry_Node| 
-to |Id_Map_Entry_Type|.  Added |string name|, removed |bool b|, changed
-|void* ptr| to |void* object|.
+Changed |Id_Map_Entry_Node| to |Id_Map_Entry_Type|.  Added |string name|, removed |bool b|, 
+changed |void* ptr| to |void* object|.
 
 \initials{LDF 2004.04.20.}  
 Changed |Id_Map_Entry_Type| from a
@@ -2955,7 +2949,8 @@ Added |bool ulong_long_switch|.
 
   stack<Int_Void_Ptr_Bool> rescan_stack;
 
-  Output_Struct* out[3];
+  Output_Struct* out[4];  /* |Run_State::MAX_OUTPUT_FORMATS| $=4$  */
+
   @<Declare |Scanner_Type| functions@>@;  
 
 };
@@ -3106,6 +3101,9 @@ open_default_out_file(const unsigned short format, Run_State& r);
 bool
 Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 {
+
+  /* !!START HERE:  LDF 2022.01.29.  Check where this is called.  */ 
+
   bool DEBUG = false; /* |true| */ @; 
 
   if (DEBUG)

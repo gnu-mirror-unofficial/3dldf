@@ -76,8 +76,7 @@ into the release versions, because I've put them in their own RCS repository.
 @q * (1) Include files.@>
 @ Include files.
 
-\filename{getopt.h} is included for 
-processing the command line options.
+\filename{getopt.h} is included for processing the command line options.
 \initials{LDF 2003.08.14.}
 
 \LOG
@@ -263,28 +262,8 @@ v.push_back(&violet_red);
 #endif 
 #endif 
 
-@q * Process command line options.@>
-@* Process command line options.
-This section includes one of (currently) two other sections, one for
-the GCC/Linux version and one for the DEC version.  The section to be
-included is chosen by testing whether preprocessor macros are defined
-or not.  Put another way, the command line option processing code is
-conditionally compiled.  \initials{LDF 2003.08.14.}  
-
-The problem is that, unlike GCC, the DEC \CPLUSPLUS/ compiler doesn't support
-long command line options,  So I have to implement the command line
-option processing code separately for each version.  \initials{LDF 2003.08.14.}
-
-\LOG
-\initials{LDF 2003.08.14.}  Added this section.
-\ENDLOG 
-@<Process command line options@>=
-#ifdef __GNUC__
-@<GCC command line option processing@>@;
-#endif 
-
-@q ** (2) GCC version of command line processing.@>
-@*1 GCC version of command line processing.
+@q ** (2) Command line processing.@>
+@*1 Command line processing.
 
 \LOG
 \initials{LDF 2003.08.14.}  
@@ -916,48 +895,17 @@ Added test for whether |QUIET_GLOBAL == true|.
 @<Print version, copyright, and license information@>=
 if (!(SILENT_GLOBAL || QUIET_GLOBAL))
 {
-#ifdef LDF_GCC_2_95
-  @<GCC 2.95 print version, copyright, and license information@>@;
-#else
-  @<GCC 3.3 and DEC print version, copyright, and license information@>@;
-#endif 
+    cerr_mutex.lock(); 
+    cerr.precision(1); 
+    cerr << "GNU 3DLDF Version " << VERSION_3DLDF 
+         << endl << COPYRIGHT_3DLDF << endl
+         << "Author:  Laurence D. Finston" 
+         << endl      << endl
+         << DISCLAIMER_3DLDF << endl 
+         << endl;
+    cerr.precision(6);
+    cerr_mutex.unlock(); 
 } 
-
-@q ** GCC 2.95 version.@>
-@ GCC 2.95 version.
-\LOG
-\initials{LDF 2003.08.14.}  Added this section.
-\ENDLOG 
-
-@<GCC 2.95 print version, copyright, and license information@>=
-
-cerr.setf(ios::fixed, ios::floatfield);
-cerr.precision(1); 
-cerr << "3DLDF Version " << VERSION_3DLDF << "."
-<< endl << COPYRIGHT_3DLDF << endl << DISCLAIMER_3DLDF << endl << endl;
-
-cerr.setf(ios::fmtflags(0), ios::floatfield); /* Reset to defaults.
-                                                 \initials{LDF 2003.08.14.}  */
-cerr.precision(6);
-
-@q ** GCC 3.3 and DEC version.@>
-@ GCC 3.3 and DEC version.
-\LOG
-\initials{LDF 2003.08.14.}  Added this section.
-\ENDLOG 
-
-@<GCC 3.3 and DEC print version, copyright, and license information@>=
-
-cerr_mutex.lock(); 
-cerr.precision(1); 
-cerr << "GNU 3DLDF Version " << VERSION_3DLDF 
-     << endl << COPYRIGHT_3DLDF << endl
-     << "Author:  Laurence D. Finston" 
-     << endl      << endl
-     << DISCLAIMER_3DLDF << endl 
-     << endl;
-cerr.precision(6);
-cerr_mutex.unlock(); 
 
 @q * Main itself.@>
 @ Main itself.
@@ -1084,12 +1032,9 @@ main(int argc, char *argv[])
 
 #endif 
 
-  /* !! START HERE.  LDF 2004.09.22.  Try to figure out how to work
-     non-interactively.  */@; 
-
   bool bison_trace = false;
 
-  @<Process command line options@>;
+  @<GCC command line option processing@>@;
 
 #ifdef MYSQL_AVAILABLE
   if (!database_enabled)
@@ -1265,19 +1210,19 @@ main(int argc, char *argv[])
 @ Handle filename arguments.
 @<Main@>=
 
-vector<Scanner_Node> scanner_node_vector;
+   vector<Scanner_Node> scanner_node_vector;
 
-string curr_filename;
+   string curr_filename;
 
-Scanner_Node curr_scanner_node = 0;
+   Scanner_Node curr_scanner_node = 0;
 
-ifstream* in_file;
-ofstream* out_file; 
+   ifstream* in_file;
+   ofstream* out_file; 
 
-string in_filename;
-string s;  
-
-for ( unsigned short i = 0; i < filename_array_ctr; ++i)
+   string in_filename;
+   string s;  
+ 
+   for ( unsigned short i = 0; i < filename_array_ctr; ++i)
    {
 
       s = filename_array[i];
@@ -1285,15 +1230,17 @@ for ( unsigned short i = 0; i < filename_array_ctr; ++i)
       curr_scanner_node = Scanner_Type::create(s, run_state_initial, true);
 
       if (curr_scanner_node == static_cast<Scanner_Node>(0))
-         {
-            cerr << "ERROR! In main(): "
-                 << "Failed to open input and/or output files for "
-                 << filename_array[i] 
-                 << ".\nWill try to continue.\n\n" ;
-             continue;
-         }
+      {
+         cerr << "ERROR! In main(): "
+              << "Failed to open input and/or output files for "
+              << filename_array[i] << "."
+              << endl 
+              << ".Will try to continue."
+              << endl << endl;
+          continue;
+      }
       else
-         {
+      {
             scanner_node_vector.push_back(curr_scanner_node);
 #if DEBUG_COMPILE
             if (DEBUG)
@@ -1308,7 +1255,7 @@ for ( unsigned short i = 0; i < filename_array_ctr; ++i)
               } /* |if (DEBUG)|  */@;
 #endif /* |DEBUG_COMPILE|  */@;
 
-} /* |else|  */@;
+     } /* |else|  */@;
 
     } /* |for|  */@;
 
@@ -1338,8 +1285,7 @@ original output files.  However, if |run_state_initial.single_output_file| is
 |false|, then output caused by input from standard input is written to the
 default output files.
 
-If there was more than one valid filename argument, 
-we never read from standard input.  
+If there was more than one valid filename argument, we never read from standard input.  
 \initials{LDF 2004.03.28.}
 
 \TODO
@@ -1394,8 +1340,7 @@ Now calling |Shape::initialize_type_name_map|.
 
   Shape::initialize_type_name_map();
 
-  vector<Scanner_Node>::size_type vector_size
-    = scanner_node_vector.size();
+  vector<Scanner_Node>::size_type vector_size = scanner_node_vector.size();
 
   Scanner_Node scanner_node_stdin = 0;
 
@@ -1464,23 +1409,14 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
               << "Run_State::METAFONT == " << Run_State::METAFONT << endl
               << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
       }
+
       for (int i = 0; i < 1; ++i)
       {
         scanner_node_stdin->open_default_out_file(i, run_state_initial);
       }
 
-#ifdef __DECCXX
-
-      scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
-                                   ios_base::fixed, ios_base::floatfield);
-#else
-#ifdef __GNUC__ 
-
       scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
                                               ios::fixed, ios::floatfield);
-#endif 
-#endif 
-
       time_t tt;
       tm *lt;
       tt = time(0);
