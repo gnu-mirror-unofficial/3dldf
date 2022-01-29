@@ -203,8 +203,6 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   /* !!START HERE:  LDF 2022.01.16.  */ 
-
    string *s = static_cast<string*>(@=$3@>);
 
    Scan_Parse::beginfig_func(scanner_node, 0, true, *s, @=$5@>, @=$7@>, @=$9@>);
@@ -269,6 +267,8 @@ Added this rule.
 @q **** (4) command --> ENDCHAR with_clause_output_list.@>
 @*3 \§command> $\longrightarrow$ 
 \.{ENDCHAR} \§with clause output list>.
+\initials{LDF 2022.01.29.}
+
 
 @q ***** (5) Definition.@>
  
@@ -277,7 +277,34 @@ Added this rule.
 @=command: ENDCHAR with_clause_output_list@>@/
 {
 
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `command: ENDCHAR with_clause_output_list'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  bool* c = new bool;
+  *c = true;
+
+  bool* e = new bool;
+  *e = true;
+ 
+  scanner_node->clear_ptr   = static_cast<void*>(c); 
+  scanner_node->endfig_ptr  = static_cast<void*>(e); 
+
+  Scan_Parse::output_command_func(scanner_node, true);
+
   @=$$@> = static_cast<void*>(0);
+
  
 };
 

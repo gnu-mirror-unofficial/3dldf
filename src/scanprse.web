@@ -2200,7 +2200,7 @@ Programmed the single-threaded case.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::output_command_func(Scanner_Node scanner_node)
+Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
 {
 
 @q ***** (5) Get thread information and set |thread_name|.@>
@@ -2827,9 +2827,14 @@ to |Picture::output|.
                       p->max_z_proj,
                       p->surface_hiding_value);
 
-if (is_endfig)
+   if (is_endfig)
+   {
+
+     string s = (do_metafont) ? "endchar;" : "endfig;";
+
      *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
-           << "endfig;" << endl << endl << flush;
+           << s << endl << endl << flush;
+   }
 
 #ifdef HAVE_PTHREAD_H  
    p->scanner_node->out[Run_State::METAPOST]->unlock();
