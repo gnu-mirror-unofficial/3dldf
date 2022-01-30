@@ -462,6 +462,43 @@ beginfig(104);
     currentpicture := w4 reflectedabout((0, -1), (0, 1));
 endfig;
 
+%% *** (3) Fig. 0, T-W
+
+beginfig(5);
+  pickup medium_pen;
+  T.dx = T.dy = .5cm;
+  boxit.T(v[84]);
+  boxit.U(v[85]);
+  boxit.V(v[86]);
+  boxit.W(v[87]);
+  U.c = T.c shifted (outer_frame_wd, 0);
+  V.c = U.c shifted (outer_frame_wd, 0);
+  W.c = V.c shifted (outer_frame_wd, 0);
+  fixsize(T, U, V, W);
+  fixpos(T, U, V, W);
+
+  draw pic(T);
+  draw pic(U);
+  draw pic(V);
+  draw pic(W);
+  
+  for j = 0 upto 3:
+    draw inner_frame shifted (j*outer_frame_wd, 0);
+    draw outer_frame shifted (j*outer_frame_wd, 0);
+  endfor;
+
+  w5 = currentpicture;
+  
+  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+
+  
+endfig;
+
+%% **** (4)
+
+beginfig(105);
+    currentpicture := w5 reflectedabout((0, -1), (0, 1));
+endfig;
 
 
 
