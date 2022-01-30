@@ -94,6 +94,25 @@ hollow_ssb.ps: hollow_ssb.dvi
 hollow_ssb.pdf: hollow_ssb.ps
 	ps2pdf hollow_ssb.ps
 
+.PHONY: ef
+
+ef: euler_fraktur.pdf
+
+euler_fraktur000.eps: euler_fraktur.mp outline_euler_fraktur.mac
+	mpost -tex=etex -numbersystem "double" euler_fraktur.mp
+
+euler_fraktur.dvi: euler_fraktur.txt euler_fraktur000.eps
+	tex euler_fraktur.txt
+
+euler_fraktur.ps: euler_fraktur.dvi
+	dvips -o euler_fraktur.ps euler_fraktur.dvi
+
+euler_fraktur.pdf: euler_fraktur.ps
+	ps2pdf euler_fraktur.ps
+
+
+
+
 .PHONY: tags
 
 tags:
