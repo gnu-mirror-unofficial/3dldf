@@ -1,39 +1,314 @@
-@q ** (2) Set |Connector_Type|.@>
-@*1 Set |Connector_Type|.
-@^\cfunc{Path}{set\_connector\_type}@>
-\initials{LDF 2022.01.28.}
+@q *** (3)@> 
 
-\LOG
-\initials{LDF 2022.01.28.}
-Added this function.
-\ENDLOG 
+    int status;
+    Point normal;
+    stringstream temp_strm;
+    Path R;
+    Transform t;
+    Point p0;
 
-@<Declare |Path| functions@>=
-virtual
-int
-set_connector_type(int position = -1,
-                   Connector_Type *ct = 0,
-                   int type = Connector_Type::PLAIN_TYPE,
-                   real *r0 = 0,
-		   real *r1 = 0,
-		   Point *pt0 = 0,
-		   Point *pt1 = 0,
-		   string connector_string = "..");
+    temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
+              << "'input writemcs.mp; path q[];";
 
+
+    int i = 0;
+
+    cerr << "v.size() == " << v.size() << endl;
+
+
+
+      if (do_transform)
+         t.reset();
+      p0 = *((**iter).points[0]);
+
+      if (!(*iter)->is_planar(&normal))
+      {
+          cerr << "ERROR!  In `Path::resolve' (2nd version):"
+               << endl 
+               << "`Path' is not planar.  Can't resolve it." << endl 
+               << "Continuing."
+               << endl;
+
+          continue;
+      }  
+      else if (DEBUG)
+      {
+          cerr << "Path is planar." << endl;
+      }
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         normal.show("normal before shift:");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+      normal.shift(*((**iter).points[0]));
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      {
+         normal.show("normal after shift:");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
 @
 @<Define |Path| functions@>=
-int
-Path::set_connector_type(int position,
-                         Connector_Type *ct,
-		         int type,
-                   	 real *r0,
-		   	 real *r1,
-		   	 Point *pt0,
-		   	 Point *pt1,
-		   	 string connector_string);
-{
-  bool DEBUG = true; /* |false| */ 
 
-  return 0;
+      R += p0;
+      R += normal;
 
-}
+      if (do_transform)
+      {
+         t.align_with_axis(p0, normal);
+         R *= t;
+      }
+
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+         show("R after alignment:");
+      }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+      vector<Point*>::iterator pt_iter;
+
+      vector<Connector_Type*>::iterator ct_iter;
+
+      pt_iter = (*iter)->points.begin();
+      ct_iter = (*iter)->connector_type_vector.begin();
+
+      temp_strm << "q[" << i << "] = ";
+
+@q **** (4) Inner loop @>
+
+@ Inner loop.
+\initials{LDF 2022.01.26.}
+
+@<Define |Path| functions@>=
+
+      for (;pt_iter != (*iter)->points.end(); ++pt_iter) 
+      {
+@q ***** (5) @>
+          temp_strm << "(" << (*pt_iter)->get_x() << "cm, " << (*pt_iter)->get_y() << "cm)";
+
+          if (ct_iter != (*iter)->connector_type_vector.end())
+          {
+             if (*ct_iter != 0)
+             {
+                cerr << "In inner loop:" << endl 
+                     << "(*ct_iter)->type0 == " << (*ct_iter)->type0 << endl
+                     << "(*ct_iter)->type1 == " << (*ct_iter)->type1 << endl;
+
+                if ((*ct_iter)->type0 == Connector_Type::CONTROLS_TYPE && (*ct_iter)->pt0 != 0)
+                {
+                   temp_strm << " .. controls" << " (" << (*ct_iter)->pt0->get_x()  
+                                  << "cm, " << (*ct_iter)->pt0->get_y() << "cm)"; 
+                   if ((*ct_iter)->pt1 != 0) 
+                   {
+                      temp_strm << " and (" << (*ct_iter)->pt1->get_x() << "cm, "  
+                                     << (*ct_iter)->pt1->get_y() << "cm)"; 
+                   }  
+                   temp_strm << " .. ";
+                }
+
+                else
+                  temp_strm << (*ct_iter)->connector_string;
+             }
+
+                ++ct_iter;
+
+             } /* |if| */
+
+@q ***** (5) @>
+
+      }  /* Inner |for| */
+
+      if ((*iter)->is_cycle())
+         temp_strm << "cycle";
+      temp_strm << ";";
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+      cerr << "After inner loop." << endl;
+
+      ++i;
+
+
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
+    char temp_filename[] = "mp_output.XXXXXX";
+    
+    errno = 0;
+    int fd = mkstemp(temp_filename);
+
+    if (fd == -1)
+    {
+            cerr << "ERROR!  In `Path::resolve' (2nd version):"
+                 << endl 
+                 << "`mkstemp' failed, returning -1:"
+                 << endl
+                 << strerror(errno)
+                 << endl 
+                 << "Failed to create temporary file."
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 1."
+                 << endl;
+
+            return 1;
+
+    }  /* |if (fd == -1)|  */
+
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    {
+        cerr << "In `Path::resolve' (2nd version):"
+             << endl 
+             << "`mkstemp' succeeded:  `temp_filename' == " << temp_filename 
+             << endl;
+
+    }  /* |else if (DEBUG)|  */
+#endif  /* |DEBUG_COMPILE|  */ 
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   close(fd);
+
+@q *** (3) @>
+
+   cerr << "After outer loop." << endl;
+
+   /* !!START HERE:  LDF 2022.01.28.  Change the way this works.
+      Use |res_val| to add that number of points between each pair
+      of contiguous points on the path.  Maybe make a way of refining
+      this.
+   */ 
+
+
+   temp_strm << "numeric n;pair m;path r[];for i = 0 upto " << (v.size() - 1) << ":"
+             << "n := (length q[i]) / " << res_val << ";"
+             << "r[i] = point 0 of q[i];for j = n step n until length q[i]: m := point j of q[i];"
+             << "r[i] := r[i] .. m;endfor;"
+             << "if point (length r[i] - 1) of r[i] <> point (length q[i] - 1) of q[i]:"
+             << "r[i] := r[i] .. point (length q[i] - 1) of q[i];fi;"
+             << "if cycle q[i]:r[i] := r[i] .. cycle;fi;"
+             << "write_path(r[i], \"" << temp_filename << "\", false);endfor;end;'";
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+      cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+   errno = 0;
+   status = system(temp_strm.str().c_str());
+
+   FILE *fp = fopen(temp_filename, "r");
+   
+   yyscan_t scanner;
+   zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
+   zzset_in(fp, scanner);
+   zzlex(scanner);
+   zzlex_destroy(scanner);
+   
+   fclose(fp);
+   fp = 0;
+   
+   if (do_unlink)
+      unlink(temp_filename);
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "After calling zzlex." << endl;
+
+      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
+           << scanner_node->metapost_output_struct->path_vector.size() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   if (scanner_node->metapost_output_struct->path_vector.size() != v.size())
+   {
+       cerr << "ERROR!  In `Path::resolve' (2nd version):"
+            << endl 
+            << "`scanner_node->metapost_output_struct->path_vector.size()' != `v.size()'."
+            << endl
+            << "This shouldn't be possible."
+            << endl 
+            << "Deleting `scanner_node->metapost_output_struct' and"
+            << endl 
+            << "exiting function unsuccessfully with return value 1."
+            << endl;
+
+       delete scanner_node->metapost_output_struct;
+       scanner_node->metapost_output_struct = 0;
+
+       return 1;
+
+   } /* |if| */
+
+
+@q *** (3)@> 
+@
+@<Define |Path| functions@>=
+
+   if (do_transform)
+      t.inverse(true);
+
+   real factor = 2.54 / 72.0; /* Conversion factor for PostScript points ({\bf bp} $=72$ per inch) to {\bf cm}  */
+
+   for (int i = 0; i < v.size();++i)
+   {
+      *(v[i]) = *(scanner_node->metapost_output_struct->path_vector[i]);
+
+      *(v[i]) *= factor;
+
+      if (do_transform)
+         *(v[i]) *= t;
+
+      // cerr << "v[" << i << "]->points.size() == " << v[i]->points.size() << endl;
+   }
+
+   delete scanner_node->metapost_output_struct;
+   scanner_node->metapost_output_struct = 0;
+
+@q *** (3)@> 
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    {
+        cerr_strm << thread_name 
+                  << "Exiting `Path::resolve' (2nd version) successfully with return value 0."
+                  << endl;
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+    }  /* |if (DEBUG)|  */
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    return 0;

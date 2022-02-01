@@ -90,7 +90,7 @@ bboxmargin := 0;
 input TEX.mp;
 input boxes.mp;
 
-input outline_ttemp.mac;
+input outline_euler_fraktur.mac
 
 path r[][];
 
@@ -293,10 +293,10 @@ beginfig(2);
   K.c = J.c shifted (outer_frame_wd, 0);
   L.c = K.c shifted (outer_frame_wd, 0);
 
-  draw pic(I) shifted (.9cm, 0);
-  draw pic(J) shifted (.9cm, 0);
-  draw pic(K) shifted (.9cm, 0);
-  draw pic(L) shifted (.9cm, 0);
+  draw pic(I) shifted (.4cm, 0);
+  draw pic(J) shifted (.4cm, 0);
+  draw pic(K) shifted (.4cm, 0);
+  draw pic(L) shifted (.4cm, 0);
   
   for j = 0 upto 3:
     draw inner_frame shifted (j*outer_frame_wd, 0);
@@ -386,7 +386,6 @@ endfig;
 
 
 %% *** (3) Fig. 4, P-S
-
 
 beginfig(4);
 
