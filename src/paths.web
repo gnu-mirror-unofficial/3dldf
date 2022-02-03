@@ -14181,11 +14181,14 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
    {
       cerr << "Entering `Path::resolve' (1st version)." << endl;
 
-      show("*this before alignment:");
+      show("*this before call to `Pointer_Vector<Path>::resolve':");
 
-      cerr << "In Path::resolve:  *this before alignment (see above)" << endl;
+      cerr << "In `Path::resolve' (first version):"
+           << endl 
+           << "`*this' before call to `Pointer_Vector<Path>::resolve' (see above)." 
+           << endl;
 
-   }
+   } /* |if (DEBUG)| */
 
 @q **** (4) @>
 @
@@ -14251,6 +14254,11 @@ Path::resolve(int begin,
 
    Point *p_begin = 0;
    Point *p_end   = 0;
+   Point *p0      = 0;
+   Point normal;
+   // int i = 0;
+   Transform t;
+   Path R;
 
    Connector_Type *c = 0;
 
@@ -14313,9 +14321,50 @@ Path::resolve(int begin,
 @
 @<Define |Path| functions@>=
 
+    temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
+              << "'input writemcs.mp; path q[];";
 
-   
+    p0 = points[0];
 
+    if (!is_planar(&normal))
+    {
+        cerr << "ERROR!  In `Path::resolve' (2nd version):"
+             << endl 
+             << "`Path' is not planar.  Can't resolve it." << endl 
+             << "Exiting function unsuccessfully with return value 1."
+             << endl;
+
+        return 1;
+    }  
+    else if (DEBUG)
+    {
+        cerr << "Path is planar." << endl;
+    }
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+    if (do_transform)
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          normal.show("normal before shift:");
+
+       }    
+#endif /* |DEBUG_COMPILE|  */@;
+
+       normal.shift(-(*p0));
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       {
+            normal.show("normal after shift:");
+       }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+    } /* |if (do_transform)| */
 
 @q **** (4) @>
 @
@@ -15852,7 +15901,7 @@ class Glyph;
 @q   following s-expression in order to use the facilities normally      @>
 @q   accessed via the local variables list.                              @>
 @q   \initials{LDF 2004.02.12}.                                          @>
-@q   (progn (cweb-mode) (outline-minor-mode t) (setq fill-column 80))    @>
+@q   (progn (cweb-mode) (outline-minor-mode t))                          @>
 
 @q Local Variables: @>
 @q mode:CWEB @>
