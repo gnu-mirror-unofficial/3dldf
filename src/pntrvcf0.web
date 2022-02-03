@@ -736,23 +736,28 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 
 @q **** (4) @>
 
-#if DEBUG_COMPILE
-      if (DEBUG)
-      { 
-         normal.show("normal before shift:");
 
-      }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-      normal.shift(*((**iter).points[0]));
-
-#if DEBUG_COMPILE
-      if (DEBUG)
+      if (do_transform)
       {
-         normal.show("normal after shift:");
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+            normal.show("normal before shift:");
 
-      }  
+         }  
 #endif /* |DEBUG_COMPILE|  */@;
+
+         normal.shift(*((**iter).points[0]));
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         {
+            normal.show("normal after shift:");
+
+         }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+      }
 
 @q **** (4) @>
 @
