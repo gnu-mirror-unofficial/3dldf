@@ -14254,7 +14254,7 @@ Path::resolve(int begin,
 
    Point *p_begin = 0;
    Point *p_end   = 0;
-   Point *p0      = 0;
+   Point p0;
    Point normal;
    // int i = 0;
    Transform t;
@@ -14322,9 +14322,9 @@ Path::resolve(int begin,
 @<Define |Path| functions@>=
 
     temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
-              << "'input writemcs.mp; path q[];";
+              << "'input writemcs.mp; path q;";
 
-    p0 = points[0];
+    p0 = *points[0];
 
     if (!is_planar(&normal))
     {
@@ -14355,7 +14355,7 @@ Path::resolve(int begin,
        }    
 #endif /* |DEBUG_COMPILE|  */@;
 
-       normal.shift(-(*p0));
+       normal.shift(-p0);
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -14387,6 +14387,19 @@ Path::resolve(int begin,
 
 
       }
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+      vector<Point*>::iterator pt_iter;
+
+      vector<Connector_Type*>::iterator ct_iter;
+
+      pt_iter = points.begin();
+      ct_iter = connector_type_vector.begin();
+
+      temp_strm << "q = ";
 
 
 
