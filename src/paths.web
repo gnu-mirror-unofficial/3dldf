@@ -14370,6 +14370,31 @@ Path::resolve(int begin,
 @
 @<Define |Path| functions@>=
 
+      R += p0;
+      R += normal;
+
+      if (do_transform)
+      {
+         t.align_with_axis(p0, normal);
+         R *= t;
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+            show("R after alignment:");
+         }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+      }
+
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
