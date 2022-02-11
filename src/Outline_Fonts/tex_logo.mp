@@ -88,79 +88,57 @@ do_labels          = true;  % false;
 do_black           = false; % true;
 do_rounded_corners = false; % true;
 
-input TEX.mp;
-input boxes.mp;
+%input boxes.mp;
 
 
-numeric coeff_left_diag;
-numeric coeff_right_diag;
-numeric coeff_lower_horiz;
-numeric coeff_upper_horiz;
-
-coeff_left_diag   = .25;
-coeff_right_diag  = .25; 
-coeff_lower_horiz = .25;
-coeff_upper_horiz = .25;
-
-input outline_tex_logo.mac;
+%input outline_tex_logo.mac;
 
 %% * (1)
 
 %% * (1)
 
-fontmapline "cmr10 CMR10 <cmr10.pfb";
-fontmapline "cmssbx10 CMSSBX10 <cmssbx10.pfb";
+% fontmapline "cmr10 CMR10 <cmr10.pfb";
+% fontmapline "cmbx12 CMBX12 <cmbx12.pfb";
 
 
 %% * (1)
 
-outline (65, 65, "cmssbx10", .25, big_pen, do_black, do_labels); %% A
+% outline (65, 65, "cmbx12", .25, big_pen, do_black, do_labels); %% A
+% outline (69, 69, "cmbx12", .25, big_pen, do_black, do_labels); %% E
+% outline (84, 84, "cmbx12", .25, big_pen, do_black, do_labels); %% T
+% outline (88, 88, "cmbx12", .25, big_pen, do_black, do_labels); %% X
+
+% ?T 84
+% ?X 88
 
 %% \def\TeX{T\kern -.1667em\lower .5ex\hbox {E}\kern -.125em X}
 % beginfig(0);
-%   draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
-%   draw fullcircle scaled 11cm;
-%   draw fullcircle scaled 10cm; 
-%   dotlabel.top("", origin);
-% endfig; 
-
 
 beginfig(0);
 
-  do_labels := true; % false
+  pickup medium_pen;
+  
+  %do_labels := false; % true
   
   path q[];
 
+  draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
+  draw fullcircle scaled 11cm;
+  % draw fullcircle scaled 10cm; 
+  dotlabel.top("", origin);
+
+  % T.dx = T.dy = 1cm;
+  % boxit.T(v[84]);
+  
+  %drawunboxed(T);
+  
   % bboxmargin := 2cm;
   % message "bboxmargin:";
   % show bboxmargin;
   
-  pickup medium_pen;
-  A.dx = A.dy = 1cm;
-  boxit.A(v[65]);
-
-  drawboxed(A);
-  
   %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
-
-%% * (1) Q
-
-do_labels := true; % false
-
-outline (81, 81, "cmssbx10", 1, big_pen, do_black, do_labels); %% Q 
-
-beginfig(1);
-  path q[];
-
-  pickup medium_pen;
-  Q.dx = Q.dy = 0cm;
-  boxit.Q(v[81]);
-  drawboxed(Q);
-endfig;
-
-%% * (1)
 
 end;
 
