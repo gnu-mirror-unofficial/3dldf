@@ -49,94 +49,14 @@
 
 prologues := 3;
 outputtemplate := "%j%3c.eps";
-
-verbatimtex \font\cmssbx=cmssbx10 scaled 8000 etex;
-
-path p[];
-path q[];
-picture v[];
-picture w[];
-
-numeric dark_grey;
-dark_grey = .5;
-pen small_pen;
 pen medium_pen;
-pen big_pen;
-
-small_pen = pencircle scaled .25mm;
 medium_pen = pencircle scaled .5mm;
-big_pen = pencircle scaled 1mm;
-
-let large_pen = big_pen;
-
-pickup medium_pen;
-
-path r[][];
-
-pair p[][][];
-
-string S;
-S = "";
-
-%bboxmargin := 0;
-
-boolean do_black;
-boolean do_labels;
-boolean do_rounded_corners;
-
-do_labels          = true;  % false;
-do_black           = false; % true;
-do_rounded_corners = false; % true;
-
-%input boxes.mp;
-
-
-%input outline_tex_logo.mac;
-
-%% * (1)
-
-%% * (1)
-
-% fontmapline "cmr10 CMR10 <cmr10.pfb";
-% fontmapline "cmbx12 CMBX12 <cmbx12.pfb";
-
-
-%% * (1)
-
-% outline (65, 65, "cmbx12", .25, big_pen, do_black, do_labels); %% A
-% outline (69, 69, "cmbx12", .25, big_pen, do_black, do_labels); %% E
-% outline (84, 84, "cmbx12", .25, big_pen, do_black, do_labels); %% T
-% outline (88, 88, "cmbx12", .25, big_pen, do_black, do_labels); %% X
-
-% ?T 84
-% ?X 88
-
-%% \def\TeX{T\kern -.1667em\lower .5ex\hbox {E}\kern -.125em X}
-% beginfig(0);
 
 beginfig(0);
-
   pickup medium_pen;
   
-  %do_labels := false; % true
-  
-  path q[];
-
   draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
   draw fullcircle scaled 11cm;
-  % draw fullcircle scaled 10cm; 
-  dotlabel.top("", origin);
-
-  % T.dx = T.dy = 1cm;
-  % boxit.T(v[84]);
-  
-  %drawunboxed(T);
-  
-  % bboxmargin := 2cm;
-  % message "bboxmargin:";
-  % show bboxmargin;
-  
-  %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
   
 endfig;
 
