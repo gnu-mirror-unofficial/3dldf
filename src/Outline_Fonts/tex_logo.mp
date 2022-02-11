@@ -49,8 +49,37 @@
 
 prologues := 3;
 outputtemplate := "%j%3c.eps";
+
+
+
 pen medium_pen;
 medium_pen = pencircle scaled .5mm;
+
+fontmapline "cmbx12 CMBX12 <cmbx12.pfb";
+
+path p[];
+path q[];
+picture v[];
+picture w[];
+path r[][];
+pair p[][][];
+string S;
+S = "";
+boolean do_black;
+boolean do_labels;
+boolean do_rounded_corners;
+
+do_labels          = true;  % false;
+do_black           = false; % true;
+do_rounded_corners = false; % true;
+
+input outline_tex_logo.mac;
+
+outline (65, 65, "cmbx12", .25, big_pen, do_black, do_labels); %% A
+outline (69, 69, "cmbx12", .25, big_pen, do_black, do_labels); %% E
+outline (84, 84, "cmbx12", .25, big_pen, do_black, do_labels); %% T
+outline (88, 88, "cmbx12", .25, big_pen, do_black, do_labels); %% X
+
 
 beginfig(0);
   pickup medium_pen;
