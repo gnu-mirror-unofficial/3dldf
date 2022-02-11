@@ -75,10 +75,10 @@ do_rounded_corners = false; % true;
 
 input outline_tex_logo.mac;
 
-outline (65, 65, "cmbx12", .25, big_pen, do_black, do_labels); %% A
-outline (69, 69, "cmbx12", .25, big_pen, do_black, do_labels); %% E
-outline (84, 84, "cmbx12", .25, big_pen, do_black, do_labels); %% T
-outline (88, 88, "cmbx12", .25, big_pen, do_black, do_labels); %% X
+outline (65, 65, "cmbx12", .1, big_pen, do_black, do_labels); %% A
+outline (69, 69, "cmbx12", .1, big_pen, do_black, do_labels); %% E
+outline (84, 84, "cmbx12", .1, big_pen, do_black, do_labels); %% T
+outline (88, 88, "cmbx12", .1, big_pen, do_black, do_labels); %% X
 
 
 beginfig(0);
@@ -86,6 +86,12 @@ beginfig(0);
   
   draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
   draw fullcircle scaled 11cm;
+  draw fullcircle scaled 10cm;
+  dotlabel(" ", origin); 
+
+  draw v[84] shifted (-4cm, -1cm);
+  draw v[69] shifted (-1cm, -2.5cm);
+  draw v[88] shifted (1.5cm, -1cm);
   
 endfig;
 
