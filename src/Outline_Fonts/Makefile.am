@@ -65,10 +65,10 @@
 .PHONY: ps
 .PHONY: pdf
 
-eps: hollow_ssb000.eps # ttemp065.eps # 
-dvi: hollow_ssb.dvi    # ttemp.dvi    # 
-ps:  hollow_ssb.ps     # ttemp.ps     #  
-pdf: hollow_ssb.pdf    # ttemp.pdf    # 
+eps: tex_logo000.eps # hollow_ssb000.eps # ttemp065.eps # 
+dvi: tex_logo.dvi    # hollow_ssb.dvi    # ttemp.dvi    # 
+ps:  tex_logo.ps     # hollow_ssb.ps     # ttemp.ps     #  
+pdf: tex_logo.pdf    # hollow_ssb.pdf    # ttemp.pdf    # 
 
 ttemp065.eps ttemp165.eps: ttemp.mp outline_ttemp.mac
 	mpost -tex=etex -numbersystem "double" ttemp.mp
@@ -93,6 +93,18 @@ hollow_ssb.ps: hollow_ssb.dvi
 
 hollow_ssb.pdf: hollow_ssb.ps
 	ps2pdf hollow_ssb.ps
+
+tex_logo000.eps tex_logo100.eps: tex_logo.mp outline_tex_logo.mac
+	mpost -tex=etex -numbersystem "double" tex_logo.mp
+
+tex_logo.dvi: tex_logo.txt tex_logo000.eps tex_logo100.eps
+	tex tex_logo.txt
+
+tex_logo.ps: tex_logo.dvi
+	dvips -o tex_logo.ps tex_logo.dvi
+
+tex_logo.pdf: tex_logo.ps
+	ps2pdf tex_logo.ps
 
 .PHONY: ef
 
