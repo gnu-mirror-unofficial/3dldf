@@ -47,7 +47,10 @@
 %%%% Laurence.Finston@gmx.de 
 
 
+prologues := 3;
+outputtemplate := "%j%3c.eps";
 
+verbatimtex \font\cmssbx=cmssbx10 scaled 8000 etex;
 
 path p[];
 path q[];
@@ -99,7 +102,7 @@ coeff_right_diag  = .25;
 coeff_lower_horiz = .25;
 coeff_upper_horiz = .25;
 
-input outline_hollow_ssb.mac;
+input outline_tex_logo.mac;
 
 %% * (1)
 
