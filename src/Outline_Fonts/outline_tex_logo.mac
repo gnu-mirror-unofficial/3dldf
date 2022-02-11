@@ -1,0 +1,183 @@
+%% outline_hollow_ssb.mac
+%% Created by Laurence D. Finston (LDF) Sun 02 Jan 2022 05:14:28 AM CET
+
+%%%% * Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
+%%%% Copyright (C) 2021, 2022 The Free Software Foundation, Inc.
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version. 
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details. 
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html. 
+
+%%%% Please send bug reports to Laurence.Finston@@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with "subscribe <email-address>" as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de 
+
+
+%% * (1)
+
+pair b[][];
+
+%% * (1) outline
+
+def outline (expr char_ctr, picture_ctr, font, sscale_factor, ppen, ddo_black, ddo_labels) =
+
+%% ** (2)
+    
+  message "Entering `outline'.";
+  message "char_ctr == " & decimal char_ctr;
+  message "";
+
+  begingroup;
+    
+    save x, y;
+
+    currentpicture := nullpicture;
+    
+    path q;
+    path u;
+
+    pair a[][];
+    
+    numeric m;
+
+    m = 0;
+
+    interim ahlength := 10bp;
+    interim ahangle := 25;
+    interim bboxmargin := 0;
+    
+    w[picture_ctr] := glyph char_ctr of font;
+    
+    u = bbox(w[picture_ctr] scaled sscale_factor);
+
+    pair center;
+    center = .5[point 0 of u, point 2 of u];
+    
+    for item within w[picture_ctr]:
+      r[picture_ctr][m] := pathpart item scaled sscale_factor;
+      if ddo_black:
+	draw r[picture_ctr][m] withpen ppen;
+      else:
+	%drawarrow r[picture_ctr][m] withpen medium_pen;
+	draw r[picture_ctr][m] withpen medium_pen;
+      fi
+      for j = 0 upto length r[picture_ctr][m]:
+	a[m][j] = p[picture_ctr][m][j] = point j of r[picture_ctr][m];
+	if not ddo_black:
+	  pickup pencircle scaled .15;
+	  draw (point j of r[picture_ctr][m] -- precontrol j of r[picture_ctr][m])
+	    dashed evenly withcolor blue withpen medium_pen;
+	  draw (point j of r[picture_ctr][m] -- postcontrol j of r[picture_ctr][m])
+	    dashed evenly withcolor blue withpen medium_pen;
+	  pickup pencircle scaled 1.5;
+	  draw precontrol j of r[picture_ctr][m] withcolor red withpen medium_pen;
+	  draw postcontrol j of r[picture_ctr][m] withcolor red withpen medium_pen;
+	  pickup pencircle scaled 1.5;
+	  draw point j of r[picture_ctr][m] withcolor black withpen medium_pen;
+	fi
+      endfor;
+      m := incr m;
+    endfor;
+
+
+    if char_ctr = 65:
+      fig_labels_A;
+    fi
+    
+    v[picture_ctr] = currentpicture;
+
+  endgroup;
+  
+  message "Exiting `outline'.";
+
+%% ** (2)
+
+enddef;
+
+%% * (1)
+
+def fig_labels_A =
+%% ** (2)
+  message "Entering fig_labels_A";
+
+  dotlabel.rt(btex $a_0^0$ etex, a[0][0]);
+  dotlabel.top(btex $a_0^1$ etex, a[0][1]);
+  dotlabel.top(btex $a_0^2$ etex, a[0][2]);
+  dotlabel.lft(btex $a_0^3$ etex, a[0][3]);
+  dotlabel.ulft(btex $a_0^4$ etex, a[0][4]);
+  dotlabel.lft(btex $a_0^5$ etex, a[0][5]);
+  dotlabel.bot(btex $a_0^6$ etex, a[0][6]);
+  dotlabel.lrt(btex $a_0^7$ etex, a[0][7]);
+  dotlabel.rt(btex $a_0^8$ etex, a[0][8]);
+  dotlabel.lrt(btex $a_0^9$ etex, a[0][9]);
+  dotlabel.llft(btex $a_0^{10}$ etex, a[0][10]);
+  dotlabel.lft(btex $a_0^{11}$ etex, a[0][11]);
+  dotlabel.bot(btex $a_0^{12}$ etex, a[0][12]);
+  dotlabel.bot(btex $a_0^{13}$ etex, a[0][13]);
+  dotlabel.rt(btex $a_0^{14}$ etex, a[0][14]);
+  % dotlabel.ulft(btex $a_0^{15}$ etex, a[0][15]);
+  % dotlabel.llft(btex $a_0^{16}$ etex, a[0][16]);
+
+  dotlabel.lft(btex $a_1^0$ etex, a[1][0]);
+  dotlabel.lft(btex $a_1^1$ etex, a[1][1]);
+  dotlabel.rt(btex $a_1^2$ etex, a[1][2]);
+  dotlabel.rt(btex $a_1^3$ etex, a[1][3]);
+  dotlabel.ulft(btex $a_1^4$ etex, a[1][4]);
+  dotlabel.urt(btex $a_1^5$ etex, a[1][5]);
+  dotlabel.rt(btex $a_1^6$ etex, a[1][6]);
+  % dotlabel.urt(btex $a_1^7$ etex, a[1][7]);
+  % dotlabel.rt(btex $a_1^8$ etex, a[1][8]);
+
+  
+  
+  message "Exiting fig_labels_A";
+enddef;
+
+
+%% * (1)
+
+endinput;
+
+%% * (1)
+
+%% (progn (metapost-mode) (outline-minor-mode t) (setq outline-regexp "%% *\\*+\\|@\\*[0-9]*"))
+
+%% Local Variables:
+%% mode:MetaPost
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
+%% End:
