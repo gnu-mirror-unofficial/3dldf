@@ -1,0 +1,156 @@
+%% tex_logo.txt
+%% Created by Laurence D. Finston (LDF) Fri 11 Feb 2022 05:11:09 AM CET
+
+%%%% * Copyright and License.
+
+%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
+%%%% Copyright (C) 2022 The Free Software Foundation, Inc.
+
+%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
+%%%% it under the terms of the GNU General Public License as published by 
+%%%% the Free Software Foundation; either version 3 of the License, or 
+%%%% (at your option) any later version. 
+
+%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
+%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
+%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+%%%% GNU General Public License for more details. 
+
+%%%% You should have received a copy of the GNU General Public License 
+%%%% along with GNU 3DLDF; if not, write to the Free Software 
+%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
+
+%%%% GNU 3DLDF is a GNU package.  
+%%%% It is part of the GNU Project of the  
+%%%% Free Software Foundation 
+%%%% and is published under the GNU General Public License. 
+%%%% See the website http://www.gnu.org 
+%%%% for more information.   
+%%%% GNU 3DLDF is available for downloading from 
+%%%% http://www.gnu.org/software/3dldf/LDF.html. 
+
+%%%% Please send bug reports to Laurence.Finston@@gmx.de
+%%%% The mailing list help-3dldf@gnu.org is available for people to 
+%%%% ask other users for help.  
+%%%% The mailing list info-3dldf@gnu.org is for sending 
+%%%% announcements to users. To subscribe to these mailing lists, send an 
+%%%% email with "subscribe <email-address>" as the subject.  
+
+%%%% The author can be contacted at: 
+
+%%%% Laurence D. Finston 
+%%%% c/o Free Software Foundation, Inc. 
+%%%% 51 Franklin St, Fifth Floor 
+%%%% Boston, MA  02110-1301  
+%%%% USA
+
+%%%% Laurence.Finston@gmx.de 
+
+
+\input epsf
+\input eplain
+\nopagenumbers
+
+%% \special{papersize=297mm, 420mm} %% DIN A3 Portrait
+%% \vsize=420mm
+%% \hsize=297mm
+
+%% \special{papersize=420mm, 297mm} %% DIN A3 Landscape
+%% \vsize=297mm
+%% \hsize=420mm
+
+\special{papersize=210mm, 297mm} %% DIN A4 Portrait
+\vsize=297mm
+\hsize=210mm
+
+%% \special{papersize=297mm, 210mm} %% DIN A4 Landscape
+%% \vsize=210mm
+%% \hsize=297mm
+
+%% (* 16 1.05)16.8
+%% (* 9 1.05)9.45
+%% (/ 16.8 9.45)1.777777777777778
+%% (/ 16 9.0)1.7777777777777777
+
+%% Slightly larger than 16 X 9 cm but in same proportion
+%% This prevents overfull boxes.
+%% LDF 2021.12.22.
+
+%% \special{papersize=16.8cm, 9.45cm}
+%% \vsize=9.45cm
+%% \hsize=16.8cm
+
+%% DIN A5 Portrait:  148.5 X 210
+
+\parindent=0pt
+\parskip=0pt
+\baselineskip=0pt
+\advance\voffset by -1in
+\advance\hoffset by -1in
+
+%\advance\hoffset by 1cm
+\advance\voffset by 1cm
+
+\font\Large=cmr12
+\font\cmssbx = cmssbx10 scaled 16000
+
+
+\headline={\lower.25cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
+           Copyright {\copyright} 2021, 2022 The Free Software Foundation, Inc.\quad
+           \folio\hskip2cm{\tt \timestamp}\hss}}}
+
+\def\epsfsize#1#2{1.5#1}
+
+\newcount\figcnt
+
+%% ** (2)
+
+\skip0=5pt plus 2pt minus 2pt
+\skip1=.125cm plus 2pt minus 2pt
+\skip2=.25cm plus 2pt minus 2pt   
+
+%% * (1)
+
+\def\addbox#1{\setbox0=\hbox{#1}%
+\vbox to 0pt{\hbox to 0pt{\vrule width 1pt height \ht0\hss}\vss}%            Vertical left
+\vbox to 0pt{\hbox to 0pt{\hskip\wd0\vrule width 1pt height \ht0\hss}\vss}%  Vertical right
+\vbox to 0pt{\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%            Top
+\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%  Bottom
+\vbox to 0pt{\hbox to 0pt{#1\hss}\vss}%
+\ifdim\dp0>0pt
+\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule depth \dp0 width 1pt\hss}\vss}%   Vertical left
+\vbox to 0pt{\vskip\ht0\hbox to 0pt{\hskip\wd0\vrule depth \dp0 width 1pt\hss}\vss}%
+\vbox to 0pt{\vskip\ht0\vskip\dp0\hbox to 0pt{\vrule depth 1pt width \wd0\hss}\vss}\fi
+\hskip\wd0\hskip.25cm}
+
+%% \begingroup
+%% \advance\hoffset by 1cm
+%% \cmssbx
+%% \vbox{}
+%% \vskip2cm
+%% A B C
+%% \vskip1cm
+%% \addbox{A}
+%% \addbox{Q}
+%% \vfil
+%% \eject
+%% \endgroup
+%% \bye
+
+
+
+
+%% * (1)
+
+\vbox to \vsize{\vskip1cm
+\line{\hskip-5.5cm\epsffile{tex_logo000.eps}\hss}\vss}
+\eject
+
+\bye
+
+%% Local Variables:
+%% mode:plain-TeX
+%% auto-fill-function:nil
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
+%% End:
