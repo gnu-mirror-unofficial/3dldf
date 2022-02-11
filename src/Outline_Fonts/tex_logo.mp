@@ -55,6 +55,7 @@ outputtemplate := "%j%3c.eps";
 pen medium_pen;
 medium_pen = pencircle scaled .5mm;
 
+fontmapline "cmr10 CMR10 <cmr10.pfb";
 fontmapline "cmbx12 CMBX12 <cmbx12.pfb";
 
 path p[];
@@ -75,25 +76,125 @@ do_rounded_corners = false; % true;
 
 input outline_tex_logo.mac;
 
-outline (65, 65, "cmbx12", .1, big_pen, do_black, do_labels); %% A
-outline (69, 69, "cmbx12", .1, big_pen, do_black, do_labels); %% E
-outline (84, 84, "cmbx12", .1, big_pen, do_black, do_labels); %% T
-outline (88, 88, "cmbx12", .1, big_pen, do_black, do_labels); %% X
+outline (65, 65, "cmbx12", .11, big_pen, do_black, do_labels); %% A
+outline (69, 69, "cmbx12", .11, big_pen, do_black, do_labels); %% E
+outline (84, 84, "cmbx12", .11, big_pen, do_black, do_labels); %% T
+outline (88, 88, "cmbx12", .11, big_pen, do_black, do_labels); %% X
 
+%% * (1)
 
 beginfig(0);
+
+%% ** (2)
+  
+  transform t[];
+  
   pickup medium_pen;
   
   draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
   draw fullcircle scaled 11cm;
   draw fullcircle scaled 10cm;
-  dotlabel(" ", origin); 
+  drawdot origin withpen pencircle scaled 5pt withcolor red; 
 
-  draw v[84] shifted (-4cm, -1cm);
-  draw v[69] shifted (-1cm, -2.5cm);
-  draw v[88] shifted (1.5cm, -1cm);
+  t84 = identity shifted (-4.5cm, -1cm);
+  t69 = identity shifted (-1.75cm + 1pt, -2.5cm);
+  t88 = identity shifted (1.25cm, -1cm);
+  
+  draw v[84] transformed t84;
+  draw v[69] transformed t69;
+  draw v[88] transformed t88;
+
+  z0 = (5cm, 0);
+  dotlabel.rt("0", z0);
+
+  z1 = z0 rotated 30;
+  dotlabel.rt("1", z1);
+
+  z2 = z1 reflectedabout ((0, -1cm), (0, 1cm));
+  dotlabel.lft("2", z2);
+
+  z3 = z0 reflectedabout ((0, -1cm), (0, 1cm));
+  dotlabel.lft("3", z3);
+
+%% ** (2)
+
+%% *** (3) T
+  
+  dotlabel.top("0", p[84][0][0] transformed t84);
+  dotlabel.top("1", p[84][0][1] transformed t84);
+  dotlabel.lft("2", p[84][0][2] transformed t84);
+  dotlabel.rt("3", p[84][0][3] transformed t84);
+  dotlabel.bot("4", p[84][0][4] transformed t84);
+  dotlabel.rt("5", p[84][0][5] transformed t84);
+  dotlabel.ulft("6", p[84][0][6] transformed t84);
+  dotlabel.ulft("7", p[84][0][7] transformed t84);
+  dotlabel.llft("8", p[84][0][8] transformed t84);
+  dotlabel.bot("9", p[84][0][9] transformed t84);
+  dotlabel.lrt("10", p[84][0][10] transformed t84);
+  dotlabel.urt("11", p[84][0][11] transformed t84);
+  dotlabel.urt("12", p[84][0][12] transformed t84);
+  dotlabel.bot("13", p[84][0][13] transformed t84);
+  dotlabel.urt("14", p[84][0][14] transformed t84);
+  dotlabel.lft("15", p[84][0][15] transformed t84);
+  dotlabel.rt("16", p[84][0][16] transformed t84);
+  dotlabel.rt("17", p[84][0][17] transformed t84);
+
+%% *** (3) E
+  
+  dotlabel.urt("0", p[69][0][0] transformed t69);
+  dotlabel.lft("1", p[69][0][1] transformed t69);
+  dotlabel.top("2", p[69][0][2] transformed t69);
+  dotlabel.urt("3", p[69][0][3] transformed t69);
+  dotlabel.lft("4", p[69][0][4] transformed t69);
+  dotlabel.bot("5", p[69][0][5] transformed t69);
+  dotlabel.llft("6", p[69][0][6] transformed t69);
+  dotlabel.rt("7", p[69][0][7] transformed t69);
+  dotlabel.rt("8", p[69][0][8] transformed t69);
+  dotlabel.lft("9", p[69][0][9] transformed t69);
+  dotlabel.top("10", p[69][0][10] transformed t69);
+  dotlabel.ulft("11", p[69][0][11] transformed t69);
+  dotlabel.llft("12", p[69][0][12] transformed t69);
+  dotlabel.bot("13", p[69][0][13] transformed t69);
+  dotlabel.lft("14", p[69][0][14] transformed t69);
+  dotlabel.rt("15", p[69][0][15] transformed t69);
+  dotlabel.rt("16", p[69][0][16] transformed t69);
+  dotlabel.top("17", p[69][0][17] transformed t69);
+  dotlabel.lft("18", p[69][0][18] transformed t69);
+  dotlabel.llft("19", p[69][0][19] transformed t69);
+  dotlabel.ulft("20", p[69][0][20] transformed t69);
+  dotlabel.ulft("21", p[69][0][21] transformed t69);
+  dotlabel.bot("22", p[69][0][22] transformed t69);
+  dotlabel.bot("23", p[69][0][23] transformed t69);
+  dotlabel.lrt("24", p[69][0][24] transformed t69);
+
+
+
+%% *** (3) X
+  
+  dotlabel.top("0", p[88][0][0] transformed t88);
+  dotlabel.top("1", p[88][0][1] transformed t88);
+  dotlabel.lft("2", p[88][0][2] transformed t88);
+  dotlabel.rt("3", p[88][0][3] transformed t88);
+  dotlabel.bot("4", p[88][0][4] transformed t88);
+  dotlabel.rt("5", p[88][0][5] transformed t88);
+  dotlabel.ulft("6", p[88][0][6] transformed t88);
+  dotlabel.ulft("7", p[88][0][7] transformed t88);
+  dotlabel.llft("8", p[88][0][8] transformed t88);
+  dotlabel.bot("9", p[88][0][9] transformed t88);
+  dotlabel.lrt("10", p[88][0][10] transformed t88);
+  dotlabel.urt("11", p[88][0][11] transformed t88);
+  dotlabel.urt("12", p[88][0][12] transformed t88);
+  dotlabel.bot("13", p[88][0][13] transformed t88);
+  dotlabel.urt("14", p[88][0][14] transformed t88);
+  dotlabel.lft("15", p[88][0][15] transformed t88);
+  dotlabel.rt("16", p[88][0][16] transformed t88);
+
+%% ** (2)
+  
   
 endfig;
+
+%% * (1)
 
 end;
 

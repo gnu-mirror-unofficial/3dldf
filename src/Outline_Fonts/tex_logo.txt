@@ -99,44 +99,7 @@
            Copyright {\copyright} 2021, 2022 The Free Software Foundation, Inc.\quad
            \folio\hskip2cm{\tt \timestamp}\hss}}}
 
-\def\epsfsize#1#2{1.5#1}
-
-\newcount\figcnt
-
-%% ** (2)
-
-\skip0=5pt plus 2pt minus 2pt
-\skip1=.125cm plus 2pt minus 2pt
-\skip2=.25cm plus 2pt minus 2pt   
-
-%% * (1)
-
-\def\addbox#1{\setbox0=\hbox{#1}%
-\vbox to 0pt{\hbox to 0pt{\vrule width 1pt height \ht0\hss}\vss}%            Vertical left
-\vbox to 0pt{\hbox to 0pt{\hskip\wd0\vrule width 1pt height \ht0\hss}\vss}%  Vertical right
-\vbox to 0pt{\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%            Top
-\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule width \wd0 height 1pt\hss}\vss}%  Bottom
-\vbox to 0pt{\hbox to 0pt{#1\hss}\vss}%
-\ifdim\dp0>0pt
-\vbox to 0pt{\vskip\ht0\hbox to 0pt{\vrule depth \dp0 width 1pt\hss}\vss}%   Vertical left
-\vbox to 0pt{\vskip\ht0\hbox to 0pt{\hskip\wd0\vrule depth \dp0 width 1pt\hss}\vss}%
-\vbox to 0pt{\vskip\ht0\vskip\dp0\hbox to 0pt{\vrule depth 1pt width \wd0\hss}\vss}\fi
-\hskip\wd0\hskip.25cm}
-
-%% \begingroup
-%% \advance\hoffset by 1cm
-%% \cmssbx
-%% \vbox{}
-%% \vskip2cm
-%% A B C
-%% \vskip1cm
-%% \addbox{A}
-%% \addbox{Q}
-%% \vfil
-%% \eject
-%% \endgroup
-%% \bye
-
+\def\epsfsize#1#2{#1}
 
 
 
