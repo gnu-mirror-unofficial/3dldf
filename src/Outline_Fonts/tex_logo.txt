@@ -140,13 +140,31 @@
 
 %% ** (2) Page 2
 
+\vbox{}\vskip1cm
+\verbatim \def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125em X\spacefactor1000}|endverbatim
+\vskip1cm
+
 \setbox0=\hbox{\epsffile{tex_logo001.eps}}
 
-\vbox{}\vskip1cm
 \hbox{\box1\hskip.75cm\box2\hskip.75cm\box3\hskip.75cm\box4\hss}
 \vskip1cm
 \line{\box0\hss}
+\vfil
 \eject
+
+
+%% ** (2) Page 3.  Just the logo.
+
+\headline={}
+
+\setbox0=\hbox{\epsffile{tex_logo001.eps}}
+
+\vbox{}
+\vskip1cm
+\line{\box0\hss}
+\vfil
+\eject
+
 
 
 \bye

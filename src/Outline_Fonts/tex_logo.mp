@@ -96,7 +96,8 @@ beginfig(0);
   
   draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
   draw fullcircle scaled 11cm;
-  draw fullcircle scaled 10cm;
+  draw fullcircle scaled 10cm withpen pencircle scaled 2mm;
+  undraw fullcircle scaled 10cm withpen pencircle scaled 1mm;
 
   t84 = (identity shifted (p[69][0][17] - p[84][0][15]))
                shifted (6pt, 0);
