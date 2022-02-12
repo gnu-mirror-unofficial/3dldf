@@ -88,25 +88,51 @@
 \advance\voffset by -1in
 \advance\hoffset by -1in
 
-%\advance\hoffset by 1cm
+\advance\hoffset by 1cm
+\advance\hsize by -1cm
+
 \advance\voffset by 1cm
+\advance\vsize by -1cm
 
-\font\Large=cmr12
-\font\cmssbx = cmssbx10 scaled 16000
+\font\large=cmr12
+\font\Huge=cmr10 scaled 6000
+\font\Hugess=cmss10 scaled 6000
+\font\Hugebx=cmbx10 scaled 6000
+\font\Hugessbx=cmssbx10 scaled 6000
 
+\font\HUGEBX=cmssbx10 scaled 16000
 
-\headline={\lower.25cm\hbox{{\rm \hskip 2cm Outline Letters\quad %
-           Copyright {\copyright} 2021, 2022 The Free Software Foundation, Inc.\quad
+\headline={\lower.25cm\hbox{{\rm \hskip 2cm {\TeX} Logo\quad %
+           Copyright {\copyright} 2022 The Free Software Foundation, Inc.\quad
            \folio\hskip2cm{\tt \timestamp}\hss}}}
 
 \def\epsfsize#1#2{#1}
 
 
-
 %% * (1)
 
+\setbox0=\hbox{\epsffile{tex_logo000.eps}}
+
+\begingroup
+\dimen0=8pt
+\setbox11=\hbox{{\Huge\TeX}}
+\setbox12=\hbox{{\Hugebx\TeX}}
+\setbox13=\hbox{{\Hugess\TeX}}
+\setbox14=\hbox{{\Hugessbx\TeX}}
+\global\setbox1=\vbox{\copy11\vskip\dimen0\hbox to \wd11{\hss cmr10\hss}}
+\global\setbox2=\vbox{\copy12\vskip\dimen0\hbox to \wd12{\hss cmbx10\hss}}
+\global\setbox3=\vbox{\copy13\vskip\dimen0\hbox to \wd13{\hss cmss10\hss}}
+\global\setbox4=\vbox{\copy14\vskip\dimen0\hbox to \wd14{\hss cmssbx10\hss}}
+\endgroup
+
+%% \show\TeX
+%% > \TeX=macro:
+%% ->T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor 1000 .
+
 \vbox to \vsize{\vskip1cm
-\line{\hskip-5.5cm\epsffile{tex_logo000.eps}\hss}\vss}
+\hbox{\box1\hskip.75cm\box2\hskip.75cm\box3\hskip.75cm\box4\hss}
+\vskip1cm
+\line{\box0\hss}\vss}
 \eject
 
 \bye
