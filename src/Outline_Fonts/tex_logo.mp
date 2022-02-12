@@ -96,12 +96,10 @@ beginfig(0);
   draw fullcircle scaled 11cm;
   draw fullcircle scaled 10cm;
 
-
-  t69 = identity shifted -(.5[p[69][0][17], p[69][0][16]]);
-  t84 = (identity shifted
-           ((p[69][0][17] transformed t69) - (p[84][0][10])))
-               shifted (-.5cm, -.5cm);
-  t88 = identity shifted (1.25cm, -1cm);
+  t69 = identity shifted -p[69][0][10];
+  t84 = (identity shifted ((p[69][0][17] transformed t69) - (p[84][0][15])))
+               shifted (5pt, 0);
+  t88 = identity shifted (2cm, -1cm);
 
   % E.dx = E.dy = 0;
   % boxit.E(v[69] transformed t69);
