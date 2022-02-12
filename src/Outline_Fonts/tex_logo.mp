@@ -96,11 +96,42 @@ beginfig(0);
   draw fullcircle scaled 11cm;
   draw fullcircle scaled 10cm;
 
-  t69 = identity shifted -p[69][0][10];
+  t69 = identity;
   t84 = (identity shifted ((p[69][0][17] transformed t69) - (p[84][0][15])))
                shifted (5pt, 0);
-  t88 = identity shifted (2cm, -1cm);
+  t88 = (identity shifted ((p[69][0][1] transformed t69) - (p[88][0][23])))
+               shifted (-3pt, (ypart p[88][0][3] - ypart p[88][0][5]));
 
+
+  pair T[];
+  pair E[];
+  pair X[];
+
+  pen large_pen;
+  large_pen = pencircle scaled 6pt;
+
+  T1 = p[84][0][1] transformed t84;
+  T2 = p[84][0][2] transformed t84;
+
+  z0 = (xpart T2, ypart T1);
+  dotlabel.ulft(btex $z_0$ etex, z0);
+
+  E22 = p[69][0][22] transformed t69;
+
+  z1 = (xpart z0, ypart E22);
+  dotlabel.llft(btex $z_1$ etex, z1);
+
+  X33 = p[88][0][33] transformed t88;
+
+  z2 = (xpart X33, ypart z1);
+  dotlabel.lrt(btex $z_2$ etex, z2);
+
+
+  z3 = (xpart z2, ypart z0);
+  dotlabel.urt(btex $z_3$ etex, z3);
+
+  draw z0 -- z1 -- z2 -- z3 -- cycle; 
+  
   % E.dx = E.dy = 0;
   % boxit.E(v[69] transformed t69);
   % drawboxed(E);
@@ -109,11 +140,13 @@ beginfig(0);
   draw v[69] transformed t69;
   draw v[88] transformed t88;
 
-  z0 = (5cm, 0);
-  z1 = z0 rotated 30;
-  z2 = z1 reflectedabout ((0, -1cm), (0, 1cm));
-  z3 = z0 reflectedabout ((0, -1cm), (0, 1cm));
-  z4 = .5[p[69][0][17] transformed t69, p[69][0][16] transformed t69];
+
+%drawdot T2 withcolor blue withpen large_pen;
+
+  % z1 = z0 rotated 30;
+  % z2 = z1 reflectedabout ((0, -1cm), (0, 1cm));
+  % z3 = z0 reflectedabout ((0, -1cm), (0, 1cm));
+  % z4 = .5[p[69][0][17] transformed t69, p[69][0][16] transformed t69];
 
   w0 = currentpicture;
 
@@ -123,11 +156,11 @@ beginfig(0);
 
 %% *** (3) T
 
-  dotlabel.rt(btex $z_0$ etex, z0);
-  dotlabel.rt(btex $z_1$ etex, z1);
-  dotlabel.lft(btex $z_2$ etex, z2);
-  dotlabel.lft(btex $z_3$ etex, z3);
-  dotlabel.top(btex $z_4$ etex, z4);
+  % dotlabel.rt(btex $z_0$ etex, z0);
+  % dotlabel.rt(btex $z_1$ etex, z1);
+  % dotlabel.lft(btex $z_2$ etex, z2);
+  % dotlabel.lft(btex $z_3$ etex, z3);
+  % dotlabel.top(btex $z_4$ etex, z4);
   
   dotlabel.top("0", p[84][0][0] transformed t84);
   dotlabel.top("1", p[84][0][1] transformed t84);
@@ -180,7 +213,7 @@ beginfig(0);
 
 %% *** (3) X
   
-  dotlabel.rt("0", p[88][0][0] transformed t88);
+  dotlabel.urt("0", p[88][0][0] transformed t88);
   dotlabel.bot("1", p[88][0][1] transformed t88);
   dotlabel.bot("2", p[88][0][2] transformed t88);
   dotlabel.bot("3", p[88][0][3] transformed t88);
@@ -199,9 +232,25 @@ beginfig(0);
   dotlabel.lft("16", p[88][0][16] transformed t88);
   dotlabel.bot("17", p[88][0][17] transformed t88);
   dotlabel.lft("18", p[88][0][18] transformed t88);
-  dotlabel.top("19", p[88][0][19] transformed t88);
-  dotlabel.ulft("20", p[88][0][20] transformed t88);
-
+  dotlabel.rt("19", p[88][0][19] transformed t88);
+  dotlabel.top("20", p[88][0][20] transformed t88);
+  dotlabel.top("21", p[88][0][21] transformed t88) withcolor red;
+  dotlabel.lft("22", p[88][0][22] transformed t88);
+  dotlabel.bot("23", p[88][0][23] transformed t88) withcolor red;
+  dotlabel.bot("24", p[88][0][24] transformed t88);
+  dotlabel.bot("25", p[88][0][25] transformed t88);
+  dotlabel.rt("26", p[88][0][26] transformed t88);
+  dotlabel.urt("27", p[88][0][27] transformed t88) withcolor red;
+  dotlabel.bot("28", p[88][0][28] transformed t88);
+  dotlabel.ulft("29", p[88][0][29] transformed t88);
+  dotlabel.ulft("30", p[88][0][30] transformed t88) withcolor red;
+  dotlabel.bot("31", p[88][0][31] transformed t88);
+  dotlabel.bot("32", p[88][0][32] transformed t88);
+  dotlabel.bot("33", p[88][0][33] transformed t88);
+  dotlabel.rt("34", p[88][0][34] transformed t88);
+  dotlabel.urt("35", p[88][0][35] transformed t88);
+  dotlabel.lrt("36", p[88][0][36] transformed t88);
+  
 %% ** (2)
   
 endfig;
