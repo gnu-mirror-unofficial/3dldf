@@ -111,8 +111,16 @@
 
 %% * (1)
 
-\setbox0=\hbox{\epsffile{tex_logo000.eps}}
 
+
+%% \show\TeX
+%% > \TeX=macro:
+
+\vbox{}\vskip1cm
+\verbatim \def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125em X\spacefactor1000}|endverbatim
+\vskip1cm
+
+\setbox0=\hbox{\epsffile{tex_logo000.eps}}
 \begingroup
 \dimen0=8pt
 \setbox11=\hbox{{\Huge\TeX}}
@@ -125,15 +133,21 @@
 \global\setbox4=\vbox{\copy14\vskip\dimen0\hbox to \wd14{\hss cmssbx10\hss}}
 \endgroup
 
-%% \show\TeX
-%% > \TeX=macro:
-%% ->T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor 1000 .
+\hbox{\copy1\hskip.75cm\copy2\hskip.75cm\copy3\hskip.75cm\copy4\hss}
+\vskip1cm
+\line{\box0\hss}
+\vfil\eject
 
-\vbox to \vsize{\vskip1cm
+%% ** (2) Page 2
+
+\setbox0=\hbox{\epsffile{tex_logo001.eps}}
+
+\vbox{}\vskip1cm
 \hbox{\box1\hskip.75cm\box2\hskip.75cm\box3\hskip.75cm\box4\hss}
 \vskip1cm
-\line{\box0\hss}\vss}
+\line{\box0\hss}
 \eject
+
 
 \bye
 
