@@ -85,6 +85,7 @@ Now including \filename{nurbs.h}.
 #include <sys/stat.h>
 
 #include <string.h>
+#include <math.h>
 
 #include "pspglb.h++"
 #include "io.h++"
@@ -14401,8 +14402,6 @@ Path::resolve(int begin,
 
       temp_strm << "q = ";
 
-
-
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
@@ -14536,6 +14535,12 @@ Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) 
 @ Reset connectors.
 \initials{LDF 2022.01.29.}
 
+Connectors are reset from |begin| to |end| {\it inclusive}.  |begin| is
+set to |max(begin, 0)|.  If |end| is specified, it is incremented.  Otherwise, 
+it is set to |connector_type_vector.size()|.  Then, it is set to 
+|min(end, connector_type_vector.size()|.
+\initials{LDF 2022.02.13.}
+
 \LOG
 \initials{LDF 2022.01.29.}
 Added this function.
@@ -14545,13 +14550,13 @@ Added this function.
 
 @<Declare |Path| functions@>=
 virtual
-void
-reset_connectors(string s = "..", int begin = 0, int end = 0, Scanner_Node scanner_node = 0);
+int
+reset_connectors(string s = "..", int begin = 0, int end = -1, Scanner_Node scanner_node = 0);
 
 @q *** (3) Definition @>
 @
 @<Define |Path| functions@>=
-void
+int
 Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 {
 @q **** (4) @>
@@ -14569,6 +14574,86 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
+   if (!(s == "." || s == "..." || s == "--" || s == "---" || s == "&"))
+   {
+       cerr << "ERROR!  In `Path::reset_connectors':  Invalid connector string specified:"
+            << endl 
+            << "`s' == " << s
+            << endl 
+            << "Not resetting connectors." 
+            << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+   } 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   begin = max(begin, 0);
+
+   if (begin >= connector_type_vector.size())
+   {
+       cerr << "ERROR!  In `Path::reset_connectors':  (`begin' == " << begin << ") >= "
+            << "(`connector_type_vector.size()' == " << connector_type_vector.size() << ")"
+            << endl 
+            << "Not resetting connectors." 
+            << endl 
+            << "Exiting function unsuccessfully with return value 1."
+            << endl;
+
+       return 1;
+   } 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   if (end == -1)
+      end = connector_type_vector.size();
+   else
+      ++end;
+
+   end = min(end, static_cast<int>(connector_type_vector.size()));
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   for (int i = begin; i < end; ++i)
+   {
+
+      connector_type_vector[i]->type0 = Connector_Type::PLAIN_TYPE;
+      connector_type_vector[i]->type1 = Connector_Type::CT_NULL_TYPE;
+
+      connector_type_vector[i]->r0 = 0;
+      connector_type_vector[i]->r1 = 0;
+
+      connector_type_vector[i]->atleast_flag0 = false;
+      connector_type_vector[i]->atleast_flag1 = false;
+
+      connector_type_vector[i]->connector_string = s;
+      
+      if (connector_type_vector[i]->pt0 != 0)
+      {
+          delete connector_type_vector[i]->pt0;
+          connector_type_vector[i]->pt0 = 0;
+      }
+
+      if (connector_type_vector[i]->pt1 != 0)
+      {
+          delete connector_type_vector[i]->pt1;
+          connector_type_vector[i]->pt1 = 0;
+      }  
+
+   }  /* |for|  */
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
@@ -14577,11 +14662,9 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   return;
+   return 0;
 
 }  /* End of |Path::reset_connectors| definition  */
-
-
 
 @q * (1) class |Connector_Type| declaration. @>
 @* class |Connector_Type| declaration.
