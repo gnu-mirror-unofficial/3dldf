@@ -14340,7 +14340,6 @@ Path::resolve(int begin,
 
     p0 = *points[0];
 
-
     if (do_transform)
     {
 #if DEBUG_COMPILE
@@ -14387,6 +14386,7 @@ Path::resolve(int begin,
 @
 @<Define |Path| functions@>=
 
+
      vector<Point*>::iterator pt_iter;
 
      vector<Connector_Type*>::iterator ct_iter;
@@ -14400,7 +14400,7 @@ Path::resolve(int begin,
      Path q_middle;
      Path q_end;
 
-     for(;pt_iter != points.end();++pt_iter)
+     for(;pt_iter != points.end(); ++pt_iter)
      {
 
         if (i < begin)
@@ -14408,7 +14408,7 @@ Path::resolve(int begin,
             q_begin += **pt_iter;          
             q_begin += **ct_iter;          
         }
-        else if (i <= begin && i <= end)
+        else if (i >= begin && i <= end)
         {
             q_middle += **pt_iter;          
             q_middle += **ct_iter;          
@@ -14421,6 +14421,9 @@ Path::resolve(int begin,
 
         if (ct_iter != connector_type_vector.end())
            ++ct_iter;
+
+        if (ct_iter == connector_type_vector.end())
+           --ct_iter;
 
         ++i;
 
