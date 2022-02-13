@@ -168,6 +168,7 @@ Removed debugging code.
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
+              << endl 
               << "save_temp_file_optional with_no_transform_optional':"
               << endl 
               << "`Path::resolve' returned " << status << "." << endl;
@@ -231,6 +232,7 @@ Removed debugging code.
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
+              << endl 
               << "save_temp_file_optional with_no_transform_optional':"
               << endl 
               << "`Path::resolve' returned " << status << "." << endl;
