@@ -36,6 +36,22 @@ beginfig(0);
   output current_picture with_projection parallel_x_y;
   clear current_picture;
 
+%% ** (2)
+
+  q := unit_circle scaled (8cm, 0, 8cm) rotated (90, 0);
+
+  message "q:";
+  show q;
+
+  resolve q (2, 5) to 15 with_no_transform;
+  
+  endfig with_projection parallel_x_y;
+
+  end;
+
+
+%% ** (2)  
+  
   focus f;
   set f with_position (0, 5, -10) with_direction (0, 5, 10) with_distance 5; 
 
