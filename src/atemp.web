@@ -1,20 +1,20 @@
-@q **** (4) Inner loop @>
+@q **** (4) Loop @>
 
-@ Inner loop.
-\initials{LDF 2022.01.26.}
+@ Loop.
+\initials{LDF 2022.02.06.}
 
 @<Define |Path| functions@>=
 
-      for (;pt_iter != (*iter)->points.end(); ++pt_iter) 
+      for (;pt_iter != points.end(); ++pt_iter) 
       {
 @q ***** (5) @>
           temp_strm << "(" << (*pt_iter)->get_x() << "cm, " << (*pt_iter)->get_y() << "cm)";
 
-          if (ct_iter != (*iter)->connector_type_vector.end())
+          if (ct_iter != connector_type_vector.end())
           {
              if (*ct_iter != 0)
              {
-                cerr << "In inner loop:" << endl 
+                cerr << "In loop:" << endl 
                      << "(*ct_iter)->type0 == " << (*ct_iter)->type0 << endl
                      << "(*ct_iter)->type1 == " << (*ct_iter)->type1 << endl;
 
@@ -30,6 +30,9 @@
                    temp_strm << " .. ";
                 }
 
+                /* !!START HERE:  LDF 2022.02.06.  Add code for other connector types. */ 
+
+
                 else
                   temp_strm << (*ct_iter)->connector_string;
              }
@@ -40,9 +43,9 @@
 
 @q ***** (5) @>
 
-      }  /* Inner |for| */
+      }  /* |for| */
 
-      if ((*iter)->is_cycle())
+      if (is_cycle())
          temp_strm << "cycle";
       temp_strm << ";";
 
@@ -50,10 +53,9 @@
 @
 @<Define |Path| functions@>=
 
-      cerr << "After inner loop." << endl;
+      cerr << "After loop." << endl;
 
       ++i;
-
 
 
 @q *** (3) @>
