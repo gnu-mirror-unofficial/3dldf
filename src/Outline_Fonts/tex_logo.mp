@@ -94,7 +94,7 @@ beginfig(0);
   
   pickup medium_pen;
   
-  draw (-7cm, -7cm) -- (7cm, -7cm) -- (7cm, 7cm) -- (-7cm, 7cm) -- cycle;
+  draw (-6cm, -6cm) -- (6cm, -6cm) -- (6cm, 6cm) -- (-6cm, 6cm) -- cycle;
   draw fullcircle scaled 11cm;
   draw fullcircle scaled 10cm withpen pencircle scaled 2mm;
   undraw fullcircle scaled 10cm withpen pencircle scaled 1mm;
@@ -137,14 +137,54 @@ beginfig(0);
   draw v[69] transformed t69;
   draw (v[88] transformed t88) transformed t69;
 
-%drawdot T2 withcolor blue withpen large_pen;
+  %drawdot T2 withcolor blue withpen large_pen;
 
-  % z1 = z0 rotated 30;
-  % z2 = z1 reflectedabout ((0, -1cm), (0, 1cm));
-  % z3 = z0 reflectedabout ((0, -1cm), (0, 1cm));
-  % z4 = .5[p[69][0][17] transformed t69, p[69][0][16] transformed t69];
+%% ** (2) Cross-hairs
+  
+  pen small_pen;
+  small_pen = pencircle scaled .25mm;
 
+  pickup small_pen;
+  
+  draw (0, -.25cm) -- (0, .25cm);
+  draw (-.25cm, 0) -- (.25cm, 0);
 
+  draw (-5.75cm, -.25cm) -- (-5.75cm, .25cm);
+  draw (-6cm, 0) -- (-5.5cm, 0cm);
+
+  draw (5.75cm, -.25cm) -- (5.75cm, .25cm);
+  draw (5.5cm, 0cm) -- (6cm, 0);
+  
+  draw (0cm, -6cm) -- (0cm, -5.5cm);
+  draw (0cm, 6cm) -- (0cm, 5.5cm);
+
+  draw (-.25cm, -5.75cm) -- (.25cm, -5.75cm);
+  draw (-.25cm, 5.75cm) -- (.25cm, 5.75cm);
+
+  draw (-6cm, -5.75cm) -- (-5.5cm, -5.75cm);
+  draw (-5.75cm, -6cm) -- (-5.75cm, -5.5cm);
+
+  draw (6cm, -5.75cm) -- (5.5cm, -5.75cm);
+  draw (5.75cm, -6cm) -- (5.75cm, -5.5cm);
+  
+  draw (6cm, -5.75cm) -- (5.5cm, -5.75cm);
+  draw (5.75cm, -6cm) -- (5.75cm, -5.5cm);
+
+  draw (6cm, 5.75cm) -- (5.5cm, 5.75cm);
+  draw (5.75cm, 6cm) -- (5.75cm, 5.5cm);
+
+  draw (-6cm, 5.75cm) -- (-5.5cm, 5.75cm);
+  draw (-5.75cm, 6cm) -- (-5.75cm, 5.5cm);
+
+  numeric dark_grey;
+  dark_grey = .5;
+ 
+  draw (0, -5.5cm) -- (0, 5.5cm) withcolor dark_grey dashed evenly;
+  draw (-5.5cm, 0) -- (5.5cm, 0) withcolor dark_grey dashed evenly;
+  
+  pickup medium_pen;
+  
+%% ** (2)
   
   w0 = currentpicture;
 
