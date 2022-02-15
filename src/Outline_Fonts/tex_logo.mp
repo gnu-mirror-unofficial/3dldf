@@ -101,8 +101,8 @@ beginfig(0);
 
   t84 = (identity shifted (p[69][0][17] - p[84][0][15]))
                shifted (6pt, 0);
-  t88 = (identity shifted (p[69][0][1] - p[88][0][23]))
-               shifted (-4pt, (ypart p[88][0][3] - ypart p[88][0][5]));
+  t88 = ((identity shifted (p[69][0][1] - p[88][0][23]))
+               shifted (-4pt, (ypart p[88][0][3] - ypart p[88][0][5]))) shifted (0, 1.5pt);
 
 
   pair T[];
@@ -177,19 +177,51 @@ beginfig(0);
   draw (-5.75cm, 6cm) -- (-5.75cm, 5.5cm);
 
   numeric dark_grey;
-  dark_grey = .5;
+  dark_grey = .2;
  
   draw (0, -5.5cm) -- (0, 5.5cm) withcolor dark_grey dashed evenly;
   draw (-5.5cm, 0) -- (5.5cm, 0) withcolor dark_grey dashed evenly;
   
   pickup medium_pen;
   
-%% ** (2)
+%% ** (2) Dashed lines and center dots
+
+  z6 = (-6cm, ypart (z0 transformed t69));
+  draw (z6 -- z0 transformed t69) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z7 = (6cm, ypart (z3 transformed t69));
+  draw (z3 transformed t69 -- z7) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z8 = (-6cm, ypart (z1 transformed t69));
+  draw (z8 -- z1 transformed t69) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z9 = (6cm, ypart (z2 transformed t69));
+  draw (z2 transformed t69 -- z9) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z10 = (xpart (z0 transformed t69), 6cm);
+  draw (z0 transformed t69 -- z10 ) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z11 = (xpart (z1 transformed t69), -6cm);
+  draw (z1 transformed t69 -- z11) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z12 = (xpart (z3 transformed t69), 6cm);
+  draw (z3 transformed t69 -- z12) dashed evenly withcolor dark_grey withpen small_pen;
+
+  z13 = (xpart (z2 transformed t69), -6cm);
+  draw (z2 transformed t69 -- z13) dashed evenly withcolor dark_grey withpen small_pen;
   
-  w0 = currentpicture;
+  z14 = (-6cm, ypart ((p[84][0][8] transformed t84) transformed t69));
+  z15 = (6cm, ypart z14);
+
+  draw z14 -- z15 dashed evenly withcolor dark_grey withpen small_pen;
+  
 
   draw z0 -- z1 -- z2 -- z3 -- cycle transformed t69;
-  drawdot origin withpen pencircle scaled 5pt withcolor red; 
+  drawdot origin withpen pencircle scaled 6pt;
+  undrawdot origin withpen pencircle scaled 4pt;
+  drawdot origin withpen pencircle scaled 2pt;
+  
+  w0 = currentpicture;
   
 %% ** (2)
 
