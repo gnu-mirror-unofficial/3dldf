@@ -463,7 +463,7 @@ I must have removed it at some time in the past.
 {
 
     cerr_mutex.lock(); 
-    cerr << "Type <RETURN> to continue: ";  /* Don't delete this!  */
+    cerr << "In parser, rule `command: PAUSE':  Type <RETURN> to continue: ";  /* Don't delete this!  */
     getchar(); 
     cerr_mutex.unlock();  
 

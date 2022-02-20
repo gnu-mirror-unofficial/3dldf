@@ -176,15 +176,55 @@ beginfig(0);
   draw (-6cm, 5.75cm) -- (-5.5cm, 5.75cm);
   draw (-5.75cm, 6cm) -- (-5.75cm, 5.5cm);
 
+  z20 = .2[(-6cm, -6cm), origin];
+
+  draw z20 -- z20 shifted (0, .25cm);
+  draw z20 -- z20 shifted (0, -.25cm);
+  draw z20 -- z20 shifted (-.25cm, 0);
+  draw z20 -- z20 shifted (.25cm, 0);
+
+  z21 = .2[(6cm, -6cm), origin];
+  draw z21 -- z21 shifted (0, .25cm);
+  draw z21 -- z21 shifted (0, -.25cm);
+  draw z21 -- z21 shifted (-.25cm, 0);
+  draw z21 -- z21 shifted (.25cm, 0);
+
+  z22 = .2[(-6cm, 6cm), origin];
+
+  draw z22 -- z22 shifted (0, .25cm);
+  draw z22 -- z22 shifted (0, -.25cm);
+  draw z22 -- z22 shifted (-.25cm, 0);
+  draw z22 -- z22 shifted (.25cm, 0);
+
+  z23 = .2[(6cm, 6cm), origin];
+
+  draw z23 -- z23 shifted (0, .25cm);
+  draw z23 -- z23 shifted (0, -.25cm);
+  draw z23 -- z23 shifted (-.25cm, 0);
+  draw z23 -- z23 shifted (.25cm, 0);
+
+  
+  
   numeric dark_grey;
   dark_grey = .2;
  
+%% ** (2) Center dots
+  
+  drawdot origin withpen pencircle scaled 6pt;
+  undrawdot origin withpen pencircle scaled 4pt;
+  drawdot origin withpen pencircle scaled 2pt;
+  
+  w0 = currentpicture;
+
+%% ** (2) Frame around letters
+  
+  draw (z0 -- z1 -- z2 -- z3 -- cycle) transformed t69 withpen medium_pen;
+
+%% ** (2) Dashed lines 
+
+    
   draw (0, -5.5cm) -- (0, 5.5cm) withcolor dark_grey dashed evenly;
   draw (-5.5cm, 0) -- (5.5cm, 0) withcolor dark_grey dashed evenly;
-  
-  pickup medium_pen;
-  
-%% ** (2) Dashed lines and center dots
 
   z6 = (-6cm, ypart (z0 transformed t69));
   draw (z6 -- z0 transformed t69) dashed evenly withcolor dark_grey withpen small_pen;
@@ -216,15 +256,12 @@ beginfig(0);
   draw z14 -- z15 dashed evenly withcolor dark_grey withpen small_pen;
   
 
-  draw z0 -- z1 -- z2 -- z3 -- cycle transformed t69;
-  drawdot origin withpen pencircle scaled 6pt;
-  undrawdot origin withpen pencircle scaled 4pt;
-  drawdot origin withpen pencircle scaled 2pt;
-  
-  w0 = currentpicture;
-  
+  w1 = currentpicture;
+    
 %% ** (2)
 
+  pickup medium_pen;
+  
   t84 := t84 transformed t69;
   t88 := t88 transformed t69;
 
@@ -344,6 +381,11 @@ endfig;
 
 %% * (1)
 
+beginfig(2);
+  currentpicture := w1;
+endfig;
+
+%% * (1)
 
 end;
 

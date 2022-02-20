@@ -336,7 +336,12 @@ of the points on the path is the same.
 
       if (scanner_node->run_state.error_stop_mode == Run_State::STOPPING)
         {
-          cerr << "Type <RETURN> to continue.\n";  
+
+      cerr << "In `yyparse()':" << endl 
+           << "Rule `path_primary --> SUBPATH numeric_list OF path_primary', "
+           << "(path_primary 5):"
+           << endl 
+           << "Type <RETURN> to continue.\n";  
 
           getchar();  /* Don't delete this!  */@;  
         }  

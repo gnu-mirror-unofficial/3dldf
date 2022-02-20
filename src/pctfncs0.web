@@ -209,8 +209,7 @@ Picture::output(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
-   bool OLD_DEBUG;
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -415,9 +414,9 @@ as an argument.
 
         if (!(**iter).set_projective_extremes())
           {
-              cerr_strm << thread_name << "ERROR!  In `Picture::output()':"
+              cerr_strm << thread_name << "ERROR!  In `Picture::output':"
                         << endl 
-                        << "set_projective_extremes() returned `false'. "
+                        << "set_projective_extremes returned `false'. "
                         << "Suppressing output for this `Shape*'.";
 
               log_message(cerr_strm);
@@ -460,7 +459,7 @@ instead.
       {
           if (do_warnings == true)
              {
-                 cerr_strm << thread_name << "WARNING!  `In Picture::output()':"
+                 cerr_strm << thread_name << "WARNING!  `In Picture::output':"
                            << endl 
                            << "`Shape' lies outside the limits for this "
                            << "invocation of output."
@@ -492,7 +491,7 @@ instead.
                            << "`max_y_proj' == " << max_y_proj;
 
                   log_message(cerr_strm);
-                  cerr_message(cerr_strm, warning_stop_value);
+                  cerr_message(cerr_strm);
                   cerr_strm.str("");
 
              }
@@ -590,15 +589,15 @@ Eliminated unused variables.
 
 @<Define |Picture| functions@>=
 
-   if (surface_hiding_value > 0)
+   cerr << "Error after here 20." << endl; 
 
+   if (surface_hiding_value > 0)
    {  
 
 /* !! START HERE.  LDF 2005.04.20.  Try to get surface hiding to work for
       more than two objects.  */@; 
 
 #if DEBUG_COMPILE
-   OLD_DEBUG = DEBUG;
    DEBUG = false; /* |true| */
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -707,8 +706,6 @@ It will be needed if this function is called on |*this| again.
                             << endl
                             << "`next_shape->surface_hiding_ctr' == "
                             << next_shape->get_surface_hiding_ctr() << endl;
-                       cerr << "Type <RETURN> to continue. ";
-                       getchar(); 
                     }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -744,7 +741,7 @@ It will be needed if this function is called on |*this| again.
 #if DEBUG_COMPILE
                          if (DEBUG)
                             {
-                                cerr << "`status' != 0.  Calling `intersection()'."
+                                cerr << "`status' != 0.  Calling `intersection'."
                                      << endl;
                             }
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -910,13 +907,10 @@ to determine whether |next_shape| should be deleted.
 @<Define |Picture| functions@>=
 
 #if DEBUG_COMPILE
-   OLD_DEBUG = DEBUG;
-   DEBUG = false; /* |true| */
    if (DEBUG)
      {
-        cerr << "`shape_list.size()' == " << shape_list.size() << endl;
+        cerr << "`shape_list.size' == " << shape_list.size() << endl;
      }
-   DEBUG = OLD_DEBUG;
 #endif /* |DEBUG_COMPILE|  */@; 
 
    for (list<Shape*>::iterator iter = shape_list.begin();
@@ -974,12 +968,9 @@ Added this section.
 @<Define |Picture| functions@>=
 
 #if DEBUG_COMPILE
-   OLD_DEBUG = DEBUG;
-   DEBUG = false; /* |true| */
-
    if (DEBUG)
      {
-        cerr_strm << thread_name << "In `Picture::output()':"
+        cerr_strm << thread_name << "In `Picture::output':"
                   << endl 
                   << "Testing whether projections intersect.";
 
@@ -987,7 +978,6 @@ Added this section.
         cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-   DEBUG = OLD_DEBUG;
 #endif /* |DEBUG_COMPILE|  */@; 
  
    curr_position = shape_list.begin();
@@ -1008,12 +998,12 @@ while (next_position != shape_list.end())
 #if DEBUG_COMPILE
                  if (DEBUG)
                    {
-                      cerr_strm << thread_name << "In `Picture::output()':"
-                                << endl << "`projections_intersect()' "
+                      cerr_strm << thread_name << "In `Picture::output':"
+                                << endl << "`projections_intersect' "
                                 << "returned " << status << ".";
 
                       log_message(cerr_strm);
-                      cerr_message(cerr_strm, true);
+                      cerr_message(cerr_strm);
                       cerr_strm.str("");    
                    }           
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -1031,17 +1021,12 @@ while (next_position != shape_list.end())
              {
                 
 #if DEBUG_COMPILE
-                 OLD_DEBUG = DEBUG;
-                 DEBUG = false; /* |true| */
                  if (DEBUG)
                    {
                       curr_shape->show("curr_shape:", 'p', false, false);
                       next_shape->show("next_shape:", 'p', false, false);
-                      cerr << "Type <RETURN> to continue. ";
-                      getchar(); 
                    }
 
-                 DEBUG = OLD_DEBUG;
 #endif /* |DEBUG_COMPILE|  */@; 
  
              }  /* |if (status == 1)| */
@@ -1057,10 +1042,6 @@ while (next_position != shape_list.end())
          ++next_position;
 
       }  /* |while|  */
-
-#if DEBUG_COMPILE
-   DEBUG = OLD_DEBUG;
-#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) Output |shape_list|.@> 
 
@@ -1126,11 +1107,11 @@ and then clearing |shape_list|.
 
 @q ****** (6)@> 
 
-#if DEBUG_COMPILE
-   DEBUG = OLD_DEBUG;
-#endif /* |DEBUG_COMPILE|  */@; 
+   cerr << "Error after here 21." << endl; 
 
    }  /* |if (surface_hiding_value > 0)|  */
+
+
 
 @q ***** (5) |surface_hiding_value == 0|.  Output.@> 
 @ |surface_hiding_value == 0|.  Output.
@@ -1140,6 +1121,7 @@ and then clearing |shape_list|.
 
    else  /* |surface_hiding_value == 0|  */
       {
+          cerr << "Error after here 22." << endl; 
 
           for(vector<Shape*>::iterator iter = elements.begin();
               iter != elements.end();
@@ -1167,9 +1149,16 @@ invoked again.
 
 @q ***** (5).@> 
 
+   cerr << "Error after here 23." << endl; 
+
    }  /* |else|  */
 
+
+   cerr << "Error after here 24." << endl; 
+
   } /* |if (elements.size() > 0)|  */
+
+   cerr << "Error after here 25." << endl; 
 
 @q **** (4) @>   
 @ Output the labels.  
@@ -1245,7 +1234,7 @@ each time I output a |Picture|, which is not what I want.
   if (DEBUG)
      {
          cerr_strm << thread_name 
-                   << "Exiting `Picture::output()'.";
+                   << "Exiting `Picture::output'.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);

@@ -287,10 +287,10 @@ endfig (Scanner_Node s,
         const real min_y_proj, const real max_y_proj,
         const real min_z_proj, const real max_z_proj)
 {
-  bool DEBUG = false; /* |true| */ @;
+  bool DEBUG = true; /* |false| */ @;
 
   if (DEBUG) 
-    cerr << "Entering endfig().\n";
+    cerr << "Entering endfig.\n";
 
   Output_Struct* os = s->out[Run_State::METAPOST];
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
@@ -320,10 +320,11 @@ current_picture->clear();
   *out_stream << "endfig" << ";\n";
 
   if (DEBUG) 
-    cerr << "Exiting endfig().\n";
+    cerr << "Exiting endfig.\n";
 
   return;
-}
+
+}  /* End of |endfig| definition */
 
 @q * Putting figures together.@>
 @ Putting figures together.

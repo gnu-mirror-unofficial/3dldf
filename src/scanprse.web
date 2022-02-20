@@ -2231,7 +2231,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
 @<Define |Scan_Parse| functions@>=
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name
@@ -2355,7 +2355,6 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
    if (DEBUG)
      {
 
-       cerr_mutex.lock();
        cerr << thread_name << "In `Scan_Parse::output_command_func':"
             << endl;
 
@@ -2364,7 +2363,6 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
           static_cast<Id_Map_Entry_Node>(
              scanner_node->picture_entry_ptr)->object)->show(
                 "current_picture on arg:");  
-    cerr_mutex.unlock();
 #if 0 
     cerr_message(cerr_strm, true);
 #endif 
@@ -2451,15 +2449,12 @@ scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_mutex.lock();
-      
        cerr << "In `Scan_Parse::output_command_func':"
             << endl << "Showing `p->picture':"
             << endl;
 
        p->picture->show("p->picture");
 
-       cerr_mutex.unlock();
      }
 #endif /* |DEBUG_COMPILE|  */@;    
 
@@ -2800,10 +2795,10 @@ to |Picture::output|.
        cerr_strm << thread_name 
                  << "In `Scan_Parse::output_command_func':"
                  << endl << "Non-multithreaded output. Calling "
-                 << endl << "`Picture::output()'.";
+                 << "`Picture::output'.";
        
        log_message(cerr_strm);
-       cerr_message(cerr_strm, true);
+       cerr_message(cerr_strm);
        cerr_strm.str("");
 
      }
@@ -6950,16 +6945,12 @@ failed.
                      << endl
                      << "Showing `array_entry':" << endl;
            array_entry->show();
-           cerr << "Type <RETURN> to continue: ";
-           getchar(); 
 
            cerr << thread_name 
                      << "In `Scan_Parse::vector_type_decl':"
                      << endl
                      << "Showing `vector_entry':" << endl;
            vector_entry->show();
-           cerr << "Type <RETURN> to continue: ";
-           getchar(); 
            cerr_mutex.unlock();
       }
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -11495,8 +11486,6 @@ Scan_Parse::show_func(C* c, string text, void* parameter)
            cerr_strm << thread_name << "Entering `Scan_Parse::show_func().'";
            cerr_message(cerr_strm);
            cerr_strm.str("");
-           cerr << "Type <RETURN> to continue." << endl;
-           getchar(); 
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 

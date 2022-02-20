@@ -2785,8 +2785,6 @@ else /* |scanner_node->draw_color_vector_ptr != 0|  */
               (**iter).show(i_strm.str());
               i_strm.str("");
             }
-          cerr << "Type <RETURN> to continue. ";
-          getchar(); 
           cerr_mutex.unlock(); 
         
       }
@@ -7486,8 +7484,6 @@ Scan_Parse::transformation_command_func(Scanner_Node scanner_node,
        
        entry->show("entry:");
 
-       cerr << "Type <RETURN> to continue. ";
-       getchar(); 
        cerr_mutex.unlock(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -7607,8 +7603,6 @@ Added this section.
                  cerr << thread_name 
                       << "In `Scan_Parse::transformation_command_func':";
                  s->show("s:");
-                 cerr << "Type <RETURN> to continue. ";
-                 getchar(); 
                  cerr_mutex.unlock(); 
             }    
 #endif /* |DEBUG_COMPILE|  */@;
@@ -9374,9 +9368,6 @@ Changed |Loop_Info_Type::vector<string> suffix_vector| to
      {
          cerr << "`curr_loop_info_node->loop_strm_ptr->str()' == "
               << curr_loop_info_node->loop_strm_ptr->str() << endl;
-
-         cerr << "Type <RETURN> to continue. ";
-         getchar(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -9596,10 +9587,6 @@ log_message(cerr_strm);
          cerr << "`placeholder_strm.str()' == " << placeholder_strm.str()
               << endl
               << "`replacement' == " << replacement << endl;
-
-         cerr << "Type <RETURN> to continue. ";
-         getchar(); 
-
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -9631,9 +9618,6 @@ log_message(cerr_strm);
              << " == " 
              << static_cast<stringstream*>(scanner_node->in->stream_ptr)->str()
              << endl;
-
-        cerr << "Type <RETURN> to continue. ";
-        getchar(); 
      }
 #endif /* |DEBUG_COMPILE|  */@; 
  
@@ -11312,8 +11296,6 @@ parameters with arguments if the macro has untyped parameters, i.e.,
                 if (DEBUG)
                    {
                       cerr << "replacement_1 == " << replacement_1 << endl;
-                      cerr << "Type <RETURN> to continue. ";
-                      getchar(); 
                    }       
 #endif /* |DEBUG_COMPILE|  */@;
 
