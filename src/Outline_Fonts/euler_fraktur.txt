@@ -51,13 +51,13 @@
 \input eplain
 \nopagenumbers
 
-\special{papersize=210mm, 297mm} %% DIN A4 Portrait
-\vsize=297mm
-\hsize=210mm
+%% \special{papersize=210mm, 297mm} %% DIN A4 Portrait
+%% \vsize=297mm
+%% \hsize=210mm 
 
-%% \special{papersize=297mm, 210mm} %% DIN A4 Landscape
-%% \vsize=210mm
-%% \hsize=297mm
+\special{papersize=297mm, 210mm} %% DIN A4 Landscape
+\vsize=210mm 
+\hsize=297mm 
 
 %% \special{papersize=297mm, 420mm} %% DIN A3 Portrait
 %% \vsize=420mm
@@ -97,7 +97,8 @@
 \advance\hoffset by .5mm
 \advance\voffset by 1.5cm
 
-\font\Large=cmr12
+\font\large=cmr12
+\font\largebx=cmbx12
 
 %\headline={}
 
@@ -114,83 +115,99 @@
 
 %% * (1)
 
-%% ** (2)
+%% ** (2) Page 1
 
 \begingroup
+
+
 \headline={\lower0cm\hbox to \hsize{\hskip 1cm{\rm Euler Fraktur {\tt eufm10} Scale Factor .13\quad %
             Copyright {\copyright} 2022 The Free Software Foundation, Inc.\hskip4em\folio
             \hss{\tt \timestamp}}\hskip1cm}}
+
 \dimen0=-.5mm
 
+%% This page only works for portrait (DIN A4).  LDF 2022.02.20.
+
+\iffalse % \iftrue
 \vbox to \vsize{\vskip0cm\vbox to 0pt{\hbox{\hskip\dimen0\epsffile{euler_fraktur000.eps}}\vss}\vskip62mm
       \vbox to 0pt{\hbox{\hskip2\dimen0\epsffile{euler_fraktur100.eps}}\vss}\vskip62mm
       \vbox to 0pt{\hbox{\hskip\dimen0\epsffile{euler_fraktur001.eps}}\vss}\vskip62mm
             \vbox to 0pt{\hbox{\hskip2\dimen0\epsffile{euler_fraktur101.eps}}\vss}%
 \vfil}
+\else
+\vbox{\vskip2cm\leftline{\hskip2cm{\largebx THIS PAGE REQUIRES DIN A4 PORTRAIT FORMAT.}}}
+\vfil
+\fi
 
 \eject
+
+%% ** (2) Page 2
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur000.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur001.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+%% ** (2) Page 3
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur100.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur101.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+%% ** (2) Page 4
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur002.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur003.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+%% ** (2) Page 5
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur102.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur103.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+
+%% ** (2) Page 6
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur004.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur104.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+%% ** (2) Page 7
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur005.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur105.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+
+%% ** (2) Page 8
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur005.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur105.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+%% ** (2) Page 9
+
+\vbox to \vsize{\vskip1cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur003.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur004.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+%% ** (2) Page 10
+
+\headline={}
+
+\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur103.eps}}\vss}\vskip62mm
+      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur104.eps}}\vss}\vskip62mm\vfil}
+\eject
+
+
+%% ** (2)
+
 \endgroup
 \bye
 
 %% ** (2)
 
-\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur000.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur001.eps}}\vss}\vskip62mm\vfil}
-\vfil
-\eject
-
-%% ** (2)
-
-\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur100.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur101.eps}}\vss}\vskip62mm\vfil}
-\vfil
-\eject
-
-%% ** (2)
-
-\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur002.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur003.eps}}\vss}\vskip62mm\vfil}
-\vfil
-\eject
-
-%% ** (2)
-
-\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur102.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur103.eps}}\vss}\vskip62mm\vfil}
-\vfil
-\eject
-
-
-%% ** (2)
-
-\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur004.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur104.eps}}\vss}\vskip62mm\vfil}
-\vfil
-\eject
-
-%% ** (2)
-
-\vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur005.eps}}\vss}\vskip62mm
-      \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur105.eps}}\vss}\vskip62mm\vfil}
-\vfil
-\eject
-
-
-
-%% ** (2)
-
-%% \vbox to \vsize{\vskip2cm\vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur003.eps}}\vss}\vskip62mm
-%%       \vbox to 0pt{\hbox{\hskip2cm\epsffile{euler_fraktur103.eps}}\vss}\vskip62mm\vfil}
-%% \vfil
-%% \eject
-
-
-
-\bye
-
 %% * (1)
-
-
 
 \font\eurm=eurm10
 
