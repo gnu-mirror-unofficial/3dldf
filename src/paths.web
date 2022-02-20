@@ -1,4 +1,4 @@
-@q paths.Edtd
+@q paths.web @>
    
 @q * (0) Copyright and License.@>
 
@@ -8731,7 +8731,7 @@ Path::output(Scanner_Node scanner_node)
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -8841,8 +8841,7 @@ Revised the code that checks the value of |arrow|.
         if (DEBUG)
            {
                cerr_strm << thread_name 
-                         << "In `Path::output':  "
-                         << "Drawing.";
+                         << "In `Path::output':  Drawing.";
 
                log_message(cerr_strm);
                cerr_message(cerr_strm);
@@ -8850,7 +8849,11 @@ Revised the code that checks the value of |arrow|.
            }
 #endif /* |DEBUG_COMPILE|  */@; 
 
+         cerr << "Error after here 30." << endl; 
+
          status = sub_output_draw(scanner_node, out_stream);
+
+         cerr << "Error after here 31." << endl; 
 
          if (status != 0)
             {
@@ -9268,7 +9271,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9796,10 +9799,28 @@ Made debugging output thread-safe.
       }
 #endif /* |DEBUG_COMPILE|  */@; 
  
+   cerr << "Error after here 32." << endl; 
+
    for (unsigned short counter = 2; point_iter != points.end();)
    {
 
-         *out_stream << " " << **connector_type_iter << " " << **point_iter++;
+         cerr << "Error after here 33." << endl; 
+
+         *out_stream << " ";
+
+#if 1
+
+         /* !!START HERE:  LDF 2022.02.20.  This fails for dodec_02.ldf.  Check the paths and connectors.  */  
+
+         if (connector_type_iter != connector_type_vector.end() && *connector_type_iter != 0)
+            *out_stream << **connector_type_iter;
+         else
+            *out_stream << "..";
+#endif 
+ 
+         *out_stream << " " << **point_iter++;
+
+         cerr << "Error after here 34." << endl; 
 
           /* This breaks the line and indents after two points */
         
@@ -9813,18 +9834,29 @@ Made debugging output thread-safe.
               ++counter;
             }
 
-          if (connector_type_iter != connector_type_vector.end())
-          {
-              ++connector_type_iter;
-          }
+         cerr << "Error after here 35." << endl; 
+
+         if (connector_type_iter != connector_type_vector.end())
+            ++connector_type_iter;
+
+         cerr << "Error after here 36." << endl; 
+
+         if (connector_type_iter == connector_type_vector.end() && connector_type_vector.size() > 0)
+            --connector_type_iter;
+
+         cerr << "Error after here 37." << endl; 
 
     }  /* |for| */
+
+    cerr << "Error after here 38." << endl; 
 
     if (is_cycle())
     {
        *out_stream << endl << "   " << **connector_type_iter << " cycle";
     }
     
+    cerr << "Error after here 36." << endl; 
+
 #if DEBUG_COMPILE
    if (DEBUG)
       {
@@ -14385,7 +14417,6 @@ Path::resolve(int begin,
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
-
 
      vector<Point*>::iterator pt_iter;
 
