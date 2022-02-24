@@ -209,7 +209,7 @@ Picture::output(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -588,8 +588,6 @@ Eliminated unused variables.
 \ENDLOG
 
 @<Define |Picture| functions@>=
-
-   cerr << "Error after here 20." << endl; 
 
    if (surface_hiding_value > 0)
    {  
@@ -1107,11 +1105,7 @@ and then clearing |shape_list|.
 
 @q ****** (6)@> 
 
-   cerr << "Error after here 21." << endl; 
-
    }  /* |if (surface_hiding_value > 0)|  */
-
-
 
 @q ***** (5) |surface_hiding_value == 0|.  Output.@> 
 @ |surface_hiding_value == 0|.  Output.
@@ -1121,7 +1115,6 @@ and then clearing |shape_list|.
 
    else  /* |surface_hiding_value == 0|  */
       {
-          cerr << "Error after here 22." << endl; 
 
           for(vector<Shape*>::iterator iter = elements.begin();
               iter != elements.end();
@@ -1149,16 +1142,9 @@ invoked again.
 
 @q ***** (5).@> 
 
-   cerr << "Error after here 23." << endl; 
-
    }  /* |else|  */
 
-
-   cerr << "Error after here 24." << endl; 
-
   } /* |if (elements.size() > 0)|  */
-
-   cerr << "Error after here 25." << endl; 
 
 @q **** (4) @>   
 @ Output the labels.  

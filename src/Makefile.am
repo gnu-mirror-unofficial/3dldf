@@ -1746,6 +1746,9 @@ color_samples_a3.pdf: color_samples_a3.dvi
 atemp.mp: atemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
+alhambra_207.mp: alhambra_207.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) alhambra_207.ldf
+
 atemp0.eps atemp1.eps: atemp.mp
 	mpost -numbersystem "double" atemp.mp
 
@@ -1779,6 +1782,26 @@ flpld_3.1: flpld_3.mp
 
 flpld_3.mp: flpld_3.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) flpld_3.ldf
+
+
+.PHONY: dodec2
+
+dodec2: dodec_02.ps dodec_02.pdf
+
+dodec_02.mp: dodec_02.ldf dodec_02.lmc
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) dodec_02.ldf
+
+dodec_02.1: dodec_02.mp
+	mpost dodec_02.mp
+
+dodec_02.dvi: dodec_02.txt dodec_02.1
+	tex dodec_02.txt
+
+dodec_02.pdf: dodec_02.dvi
+	dvipdfmx dodec_02.dvi
+
+dodec_02.ps: dodec_02.dvi
+	dvips -o dodec_02.ps dodec_02.dvi
 
 .PHONY: purge-s
 

@@ -153,8 +153,6 @@ Rewrote this rule.  It now calls |output_command_func|.
 @=command: ENDFIG with_clause_output_list@>@/
 {
 
-cerr << "Error after here 10." << endl; 
-
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
   bool* c = new bool;
@@ -166,11 +164,7 @@ cerr << "Error after here 10." << endl;
   scanner_node->clear_ptr = static_cast<void*>(c); 
   scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  cerr << "Error after here 11." << endl; 
-
   Scan_Parse::output_command_func(scanner_node);
-
-  cerr << "Error after here 12." << endl; 
 
   @=$$@> = static_cast<void*>(0);
  
@@ -195,7 +189,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -286,7 +280,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 

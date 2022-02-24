@@ -114,8 +114,6 @@ for i = 0 upto size rpv - 1:
    label(s, c[i]) transformed label_transform;
 endfor;
 
-message "Error after here 0."; 
-
 %% **** (4) Label net
 
 if false: 
@@ -139,8 +137,6 @@ fi;
 
 %% **** (4) Get tabs
 
-message "Error after here 1."; 
-
 if do_stitch_lines:
    pv := get_tabs dodecahedron with_diameter diameter 
                   with_stitch_divisions stitch_divisions;
@@ -151,23 +147,17 @@ else:
    temp_size := size pv - 1;
 fi;
 
-message "Error after here 2."; 
-
 for i = 0 upto temp_size:
    for j = 0 upto 3:
       k[i][j] := get_point (j) pv[i];
    endfor;
 endfor;
 
-message "Error after here 3."; 
-
 %% **** (4) Draw tabs
 
 for i = 0 upto size pv / 2:
    draw pv[i];
 endfor;
-
-message "Error after here 4."; 
 
 %% **** (4) Draw stitch lines.
 
@@ -179,8 +169,6 @@ for i = size pv / 2 upto size pv - 1:
    endfor;
 endfor;
 fi;
-
-message "Error after here 5."; 
 
 %% **** (4) Draw outline.
 %%          Lines to be cut are solid, lines to be scored are dashed evenly.
@@ -209,11 +197,7 @@ draw k[0][2] -- p[1][1];
 
 %% **** (4) End of draw_dodecahedron_net definition.
 
-message "Error after here 6."; 
-
 drop_pen;
-
-message "Error after here 7."; 
 
 enddef;
 

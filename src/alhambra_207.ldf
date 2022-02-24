@@ -53,12 +53,19 @@ verbatim_metapost    "verbatimtex \font\huge=cmr17 scaled 8000 etex;\n"
                    & "prologues := 3;\noutputtemplate := \"%j%c.eps\";\n";
 
 
+pen medium_pen;
+medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
+
+
 beginfig(0);
+  pickup medium_pen;
 
-  
+  reg_polygon h[];
 
+  h0 := unit_hexagon scaled (2cm, 0, 2cm);
+  draw h0;
 
-endfig with_projection parallel_x_y;
+endfig with_projection parallel_x_z;
 
 
 

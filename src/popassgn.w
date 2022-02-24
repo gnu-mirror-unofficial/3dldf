@@ -1861,7 +1861,7 @@ Removed debugging code.
 
 #if DEBUG_COMPILE
 
-  DEBUG = true; /* |false| */
+  DEBUG = false; /* |true| */
 
   if (DEBUG)
   { 
@@ -1872,8 +1872,9 @@ Removed debugging code.
 
   Connector_Type *c = static_cast<Connector_Type*>(@=$3@>);
 
+#if 0 
   c->show("*c:");
-
+#endif 
 
   entry = static_cast<Id_Map_Entry_Node>(@=$1@>);
 
@@ -4357,7 +4358,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {
@@ -4479,7 +4480,7 @@ Added this rule.
    @<Common declarations for rules@>@;
   
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
    
    if (DEBUG)
       {

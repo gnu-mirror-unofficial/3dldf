@@ -7555,7 +7555,7 @@ output(Scanner_Node s);
 void 
 Point::output(Scanner_Node scanner_node) 
 {
-  bool DEBUG = true; /* |false| */
+  bool DEBUG = false; /* |true| */
 
   if (DEBUG)
     cerr << "Entering Point::output().\n";
@@ -9828,7 +9828,8 @@ occurs.
 which involved coplanar lines which had been rotated about the z-axis
 or the y and z-axes.  I suspect it has to do with the routines for
 sine and cosine, since I've had trouble with rotation in the
-constructors for |Polyhedra|.  \initials{LDF 2003.06.29.}  
+constructors for |Polyhedra|.  
+\initials{LDF 2003.06.29.}  
 
 \LOG
 \initials{LDF 2002.04.10.}  
@@ -10515,10 +10516,10 @@ Point::save_points_to_database(vector<Id_Map_Entry_Node> &vvector,
                                bool debug)
 {
 #if DEBUG_COMPILE
-  bool DEBUG = true;
+  bool DEBUG = false; /* |true|  */;
 
   if (debug == false)
-     DEBUG = true; /* |false|  */
+     DEBUG = false; /* |true|  */
 
   if (DEBUG)
     cerr << "Entering `Point::save_points_to_database'."
@@ -10685,10 +10686,10 @@ Point::restore_points_from_database(Scanner_Node scanner_node,
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
-  bool DEBUG = true;
+  bool DEBUG = false; /* |true| */
 
   if (debug == false)
-     DEBUG = true; /* |false|  */
+     DEBUG = false; /* |true|  */
 
   if (DEBUG)
     cerr << "Entering `Point::restore_points_from_database'."

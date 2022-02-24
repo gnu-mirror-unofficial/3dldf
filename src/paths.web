@@ -9798,8 +9798,12 @@ Made debugging output thread-safe.
    {
 
          *out_stream << " ";
-
-         cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+               cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+         }     
+#endif /* |DEBUG_COMPILE|  */@; 
 
          if (   connector_type_vector.size() > 0 
              && connector_type_iter != connector_type_vector.end() 
@@ -10006,7 +10010,6 @@ Path::show(string text, char coords,
 
    cerr << "points.size() == " 
         << points.size() << endl;  
-
 
    cerr << "connector_type_vector.size() == " 
         << connector_type_vector.size() << endl;  

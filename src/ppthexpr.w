@@ -2080,7 +2080,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
    { 
@@ -2163,7 +2163,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2258,7 +2258,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2298,7 +2298,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2323,7 +2323,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2348,7 +2348,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2373,7 +2373,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2400,7 +2400,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2428,7 +2428,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2464,7 +2464,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @;
+  DEBUG = false; /* |true| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -2706,7 +2706,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
    { 
@@ -2761,7 +2761,7 @@ Now calling |p->adjust_connectors|.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
    { 
@@ -2858,7 +2858,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-  DEBUG = true; /* |false| */
+  DEBUG = false; /* |true| */
 
   if (DEBUG)
   { 
@@ -2903,7 +2903,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
    { 
@@ -2949,7 +2949,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false| */
+   DEBUG = false; /* |true| */
 
    if (DEBUG)
    { 
