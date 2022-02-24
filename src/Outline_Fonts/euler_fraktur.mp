@@ -70,6 +70,18 @@ pen medium_pen;
 pen big_pen;
 pen huge_pen;
 
+cmykcolor cyan;
+cmykcolor magenta;
+cmykcolor yellow;
+color orange;
+color violet;
+
+cyan    = (1, 0, 0, 0);
+magenta = (0, 1, 0, 0);
+yellow  = (0, 0, 1, 0);
+
+
+
 small_pen = pencircle scaled .25mm;
 
 medium_pen = pencircle scaled .5mm;
@@ -325,13 +337,14 @@ beginfig(3);
   boxit.M(v[77]);
 
   draw pic(M) shifted (1mm, 0);
-  
-  draw outer_frame xscaled 1.5;
-  draw inner_frame xscaled 1.5;
+
+  draw (outer_frame xscaled 1.5) withcolor green;
+  draw (inner_frame xscaled 1.5) withcolor magenta;
 
   z0 = point 1 of (outer_frame xscaled 1.5);
   z1 = point 0 of outer_frame;
 
+  
   
   draw outer_frame shifted (z0 - z1);
   draw inner_frame shifted (z0 - z1);
@@ -340,9 +353,9 @@ beginfig(3);
   z3 = .5[z0, z2];
 
     
-  % dotlabel.urt(btex $z_0$ etex, z0);
-  % dotlabel.llft(btex $z_2$ etex, z2);
-  % dotlabel.top(btex $z_3$ etex, z3);
+  dotlabel.urt(btex $z_0$ etex, z0);
+  dotlabel.llft(btex $z_2$ etex, z2);
+  dotlabel.top(btex $z_3$ etex, z3);
 
   boxit.N(v[78]);
   N.c = z3;
@@ -351,7 +364,7 @@ beginfig(3);
 
   z4 = point 1 of outer_frame shifted (z0 - z1);
 
-  % dotlabel.ulft(btex $z_4$ etex, z4);
+  dotlabel.ulft(btex $z_4$ etex, z4);
   
   boxit.O(v[79]);
   O.c = z3 shifted (z4 - z0);
@@ -368,8 +381,8 @@ beginfig(3);
   q0 := (q0 shifted (z1 - z5)) shifted (z4 - z1);
   q1 := (q1 shifted (z1 - z5)) shifted (z4 - z1);
     
-  draw q0;
-  draw q1;
+  draw q0 withcolor red;
+  draw q1 withcolor blue;
 
   w3 = currentpicture;
 
