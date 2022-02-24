@@ -9683,7 +9683,6 @@ Added code for suppressing output if the type of the current
 #endif /* |DEBUG_COMPILE|  */@; 
  
                vector<Point*>::const_iterator point_iter = points.begin();
-               connector_type_iter = connector_type_vector.begin();
 
                if (connector_type_vector.size() == 0)
                {
@@ -9691,8 +9690,11 @@ Added code for suppressing output if the type of the current
                    connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
                    connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
                    connector_type_vector.back()->connector_string = "--";
+                   connector_type_vector.back()->pt0 = 0;
+                   connector_type_vector.back()->pt1 = 0;
                }
                   
+               connector_type_iter = connector_type_vector.begin();
 
 #if DEBUG_COMPILE
                if (DEBUG)
@@ -9808,19 +9810,38 @@ Made debugging output thread-safe.
 
          *out_stream << " ";
 
+         cerr << "Error after here 33a." << endl; 
+
+
+         cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+
+
 #if 1
 
-         /* !!START HERE:  LDF 2022.02.20.  This fails for dodec_02.ldf.  Check the paths and connectors.  */  
+         /* !!START HERE:  LDF 2022.02.20.  This fails for dodec_02.ldf.  
+            Check the paths and connectors.  */  
 
-         if (connector_type_iter != connector_type_vector.end() && *connector_type_iter != 0)
+         if (   connector_type_vector.size() > 0 
+             && connector_type_iter != connector_type_vector.end() 
+             && *connector_type_iter != 0)
+         {
+            cerr << "Error after here 34." << endl; 
             *out_stream << **connector_type_iter;
+         }
          else
+         {
+            cerr << "Error after here 35." << endl; 
             *out_stream << "..";
+         }
 #endif 
+
+            cerr << "Error after here 36." << endl; 
  
          *out_stream << " " << **point_iter++;
 
-         cerr << "Error after here 34." << endl; 
+         cerr << "Error after here 37." << endl; 
+
+
 
           /* This breaks the line and indents after two points */
         
@@ -9834,28 +9855,33 @@ Made debugging output thread-safe.
               ++counter;
             }
 
-         cerr << "Error after here 35." << endl; 
+         cerr << "Error after here 38." << endl; 
 
          if (connector_type_iter != connector_type_vector.end())
             ++connector_type_iter;
 
-         cerr << "Error after here 36." << endl; 
+         cerr << "Error after here 39." << endl; 
 
          if (connector_type_iter == connector_type_vector.end() && connector_type_vector.size() > 0)
             --connector_type_iter;
 
-         cerr << "Error after here 37." << endl; 
+         cerr << "Error after here 40." << endl; 
 
     }  /* |for| */
 
-    cerr << "Error after here 38." << endl; 
+    cerr << "Error after here 41." << endl; 
 
     if (is_cycle())
     {
-       *out_stream << endl << "   " << **connector_type_iter << " cycle";
+       *out_stream << endl << " ";
+       if (connector_type_vector.size() > 0 && connector_type_iter != connector_type_vector.end())
+         *out_stream << **connector_type_iter;
+       else
+         *out_stream << "..";
+       *out_stream << " cycle";
     }
     
-    cerr << "Error after here 36." << endl; 
+    cerr << "Error after here 42." << endl; 
 
 #if DEBUG_COMPILE
    if (DEBUG)
