@@ -2493,10 +2493,7 @@ Path::set_connector_type(int position,
 		   	 Point *pt1,
 		   	 string connector_string)
 {
-  bool DEBUG = true; /* |false| */ 
-
   return 0;
-
 }
 
 @q * (1) Functions for checking integrity of form.@> 
@@ -8731,7 +8728,7 @@ Path::output(Scanner_Node scanner_node)
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -8849,11 +8846,7 @@ Revised the code that checks the value of |arrow|.
            }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-         cerr << "Error after here 30." << endl; 
-
          status = sub_output_draw(scanner_node, out_stream);
-
-         cerr << "Error after here 31." << endl; 
 
          if (status != 0)
             {
@@ -9271,7 +9264,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9801,49 +9794,27 @@ Made debugging output thread-safe.
       }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-   cerr << "Error after here 32." << endl; 
-
    for (unsigned short counter = 2; point_iter != points.end();)
    {
 
-         cerr << "Error after here 33." << endl; 
-
          *out_stream << " ";
 
-         cerr << "Error after here 33a." << endl; 
-
-
          cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
-
-
-#if 1
-
-         /* !!START HERE:  LDF 2022.02.20.  This fails for dodec_02.ldf.  
-            Check the paths and connectors.  */  
 
          if (   connector_type_vector.size() > 0 
              && connector_type_iter != connector_type_vector.end() 
              && *connector_type_iter != 0)
          {
-            cerr << "Error after here 34." << endl; 
             *out_stream << **connector_type_iter;
          }
          else
          {
-            cerr << "Error after here 35." << endl; 
             *out_stream << "..";
          }
-#endif 
 
-            cerr << "Error after here 36." << endl; 
- 
          *out_stream << " " << **point_iter++;
 
-         cerr << "Error after here 37." << endl; 
-
-
-
-          /* This breaks the line and indents after two points */
+         /* This breaks the line and indents after two points */
         
           if  (counter == 2 && point_iter != points.end())
             {
@@ -9855,21 +9826,13 @@ Made debugging output thread-safe.
               ++counter;
             }
 
-         cerr << "Error after here 38." << endl; 
-
          if (connector_type_iter != connector_type_vector.end())
             ++connector_type_iter;
-
-         cerr << "Error after here 39." << endl; 
 
          if (connector_type_iter == connector_type_vector.end() && connector_type_vector.size() > 0)
             --connector_type_iter;
 
-         cerr << "Error after here 40." << endl; 
-
     }  /* |for| */
-
-    cerr << "Error after here 41." << endl; 
 
     if (is_cycle())
     {
@@ -9881,8 +9844,6 @@ Made debugging output thread-safe.
        *out_stream << " cycle";
     }
     
-    cerr << "Error after here 42." << endl; 
-
 #if DEBUG_COMPILE
    if (DEBUG)
       {
@@ -14583,7 +14544,7 @@ Path::show_connector(int position, string s, Scanner_Node scanner_node) const
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14639,7 +14600,7 @@ Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) 
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14701,7 +14662,7 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
