@@ -66,7 +66,13 @@ frame_ht = 6cm;
 
 frame =    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_wd, .5frame_ht)
         -- (-.5frame_wd, .5frame_ht) -- cycle;
- 
+
+numeric gray;
+gray = .5;
+
+boolean do_gray;
+
+do_gray = true; % false
 
 
 beginfig(0);
@@ -79,7 +85,9 @@ beginfig(0);
   
   for i = 0 upto 5:
     z[i] = (2cm, 0) rotated (i*60);
-    draw origin -- z[i] withcolor .5;
+    if do_gray:
+      draw origin -- z[i] withcolor gray;
+    fi;
   endfor;
 
 
@@ -92,7 +100,9 @@ beginfig(0);
   dotlabel.llft(btex $z_4$ etex, z4);
   dotlabel.lrt(btex $z_5$ etex, z5);
 
-  draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor .5;
+  if do_gray:
+    draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor gray;
+  fi;
 
   j = 0;
   m = 1;
@@ -118,14 +128,65 @@ beginfig(0);
   endfor;
 
   p2 = origin -- z7;
-  draw p2 withcolor .5;
 
-  p3 = z2 -- .5[origin, z1];
+  if do_gray:
+    draw p2 withcolor gray;
+  fi;
 
-  draw p3 withcolor .5;
+  z9 = .5[origin, z1];
+  dotlabel.lrt(btex $z_9$ etex, z9);
   
-  z9 = p2 intersectionpoint p3;
-  dotlabel.bot(btex $z_9$ etex, z9);
+  p3 = z2 -- z9;
+
+  if do_gray:
+    %draw p3 withcolor gray;
+  fi;
+  
+  z10 = p2 intersectionpoint p3;
+  dotlabel.bot(btex $z_{10}$ etex, z10);
+
+  z11 = z9 reflectedabout (z7, z10);
+  dotlabel.lft(btex $z_{11}$ etex, z11);
+
+  p4 = fullcircle scaled (2*(y7 - y10)) shifted z10;
+
+  if do_gray:
+    draw p4 withcolor gray;
+  fi;
+  
+  p5 = z7 -- z9 -- z11 -- cycle;
+
+  if do_gray:
+    draw p5 withcolor gray;
+  fi;
+
+  z12 = z7 rotatedaround (z10, 180);
+  dotlabel.bot(btex $z_{12}$ etex, z12);
+
+  z13 = z11 rotatedaround (z10, 180);
+  dotlabel.urt(btex $z_{13}$ etex, z13);
+
+  z14 = z9 rotatedaround (z10, 180);
+  dotlabel.ulft(btex $z_{14}$ etex, z14);
+
+  p6 = (z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) rotatedaround (z10, 30);
+
+  draw p6 withcolor red;
+
+
+  z21 = z10 rotated 60;
+  dotlabel.bot(btex $z_{21}$ etex, z21);
+
+
+  p7 = fullcircle scaled (2*(y7 - y10)) shifted z21;
+
+  if do_gray:
+    draw p7 withcolor gray;
+  fi;
+
+  p8 = (p6 rotated 60) rotatedaround (z21, 15);
+
+  draw p8 withcolor blue;
 
   
   
