@@ -160,7 +160,7 @@ beginfig(0);
   dotlabel.bot(btex $z_{10}$ etex, z10);
 
   z11 = z9 reflectedabout (z7, z10);
-  dotlabel.lft(btex $z_{11}$ etex, z11);
+  %dotlabel.lft(btex $z_{11}$ etex, z11);
 
   p4 = fullcircle scaled (2*(y7 - y10)) shifted z10;
 
@@ -175,7 +175,7 @@ beginfig(0);
   fi;
 
   z12 = z7 rotatedaround (z10, 180);
-  dotlabel.bot(btex $z_{12}$ etex, z12);
+  %dotlabel.bot(btex $z_{12}$ etex, z12);
 
   z13 = z11 rotatedaround (z10, 180);
   dotlabel.urt(btex $z_{13}$ etex, z13);
@@ -190,7 +190,7 @@ beginfig(0);
 
   
   z21 = z10 rotated 60;
-  dotlabel.bot(btex $z_{21}$ etex, z21);
+  %dotlabel.bot(btex $z_{21}$ etex, z21);
 
 
   p7 = fullcircle scaled (2*(y7 - y10)) shifted z21;
@@ -199,7 +199,7 @@ beginfig(0);
     draw p7 withcolor gray;
   fi;
 
-  p8 = (p6 rotated 60) rotatedaround (z21, 15);
+  p8 = (p6 rotated 60) rotatedaround (z21, 0);
 
   %draw p8 withcolor blue;
 
@@ -209,8 +209,8 @@ beginfig(0);
   
   dotlabel.lft(btex $z_{15}$ etex, z15);
   dotlabel.bot(btex $z_{16}$ etex, z16);
-  dotlabel.bot(btex $z_{17}$ etex, z17);
-  dotlabel.lrt(btex $z_{18}$ etex, z18);
+  dotlabel.rt(btex $z_{17}$ etex, z17);
+  dotlabel.rt(btex $z_{18}$ etex, z18);
   dotlabel.top(btex $z_{19}$ etex, z19);
   dotlabel.ulft(btex $z_{20}$ etex, z20);
 
@@ -225,9 +225,25 @@ beginfig(0);
 
   z23 = (z20 -- z16) intersectionpoint (z15 -- z17);
   dotlabel.llft(btex $z_{23}$ etex, z23);
+
+  z24 = (z18 -- z16) intersectionpoint (z15 -- z17);
+  dotlabel.bot(btex $z_{24}$ etex, z24);
+
+  z25 = (z18 -- z16) intersectionpoint (z19 -- z17);
+  dotlabel.rt(btex $z_{25}$ etex, z25);
+
+  z26 = (z18 -- z20) intersectionpoint (z19 -- z17);
+  dotlabel.urt(btex $z_{26}$ etex, z26);
+ 
+  z27 = (z18 -- z20) intersectionpoint (z19 -- z15);
+  dotlabel.top(btex $z_{27}$ etex, z27);
   
+  cmykcolor orange;
+  orange = (0, .5, 1, 0);
   
-  
+  p11 = z15 -- z22 -- z20 -- z27 -- z19 -- z26 -- z18 -- z25 -- z17 -- z24 -- z16 -- z23 -- cycle;
+
+  draw p11 withcolor orange;
   
 endfig;
 
