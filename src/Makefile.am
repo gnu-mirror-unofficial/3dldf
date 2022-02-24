@@ -1784,24 +1784,24 @@ flpld_3.mp: flpld_3.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) flpld_3.ldf
 
 
-.PHONY: dodec2
+.PHONY: dodec4
 
-dodec2: dodec_02.ps dodec_02.pdf
+dodec4: dodec_04.ps dodec_04.pdf
 
-dodec_02.mp: dodec_02.ldf dodec_02.lmc
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) dodec_02.ldf
+dodec_04.mp: dodec_04.ldf dodec_04.lmc
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) dodec_04.ldf
 
-dodec_02.1: dodec_02.mp
-	mpost dodec_02.mp
+dodec_04.1: dodec_04.mp
+	mpost dodec_04.mp
 
-dodec_02.dvi: dodec_02.txt dodec_02.1
-	tex dodec_02.txt
+dodec_04.dvi: dodec_04.txt dodec_04.1
+	tex dodec_04.txt
 
-dodec_02.pdf: dodec_02.dvi
-	dvipdfmx dodec_02.dvi
+dodec_04.pdf: dodec_04.dvi
+	dvipdfmx dodec_04.dvi
 
-dodec_02.ps: dodec_02.dvi
-	dvips -o dodec_02.ps dodec_02.dvi
+dodec_04.ps: dodec_04.dvi
+	dvips -o dodec_04.ps dodec_04.dvi
 
 .PHONY: purge-s
 
