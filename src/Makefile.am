@@ -1477,6 +1477,7 @@ purge:
 	-rm -f sphrprj3.[0-9]* sphrprj3.mp sphrprj3.dvi sphrprj3.log sphrprj3.ps
 	-rm -f cmyk_test.[0-9]* cmyk_test.mp cmyk_test.dvi cmyk_test.log cmyk_test.ps
 	-rm -f 3DLDFput.mp testfont.log ttemp.dvi ttemp.log mpout.log mp_output.*
+	-rm -f dodec_04.[0-9]* dodec_04.dvi dodec_04.ps dodec_04.pdf dodec_04.log
 
 
 #### *** (3)
