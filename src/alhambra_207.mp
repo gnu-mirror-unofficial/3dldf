@@ -121,12 +121,26 @@ beginfig(0);
 
   p0 = z2 .. {dir 0}z6{dir 0} .. z7 .. {dir 0}z8{dir 0} .. z1;
   p1 = p0 rotatedaround (z1, 60);
-  
-  for i = 0 upto 5:
+
+  drawarrow p0 withcolor blue;
+  drawarrow p1 withcolor green;
+
+  for i = 1 upto 5:
     draw p0 rotated 60i;
     draw p1 rotated 60i;
   endfor;
 
+  p20 = p1 rotated 60;
+
+  drawarrow p20 withcolor (1, 0, 0, 0);
+
+  p21 = p1 & reverse p0 .. reverse p20 & cycle;
+
+  draw p21 withcolor (0, 1, 0, 0);
+  
+  %fill p21 withcolor blue;
+
+  
   p2 = origin -- z7;
 
   if do_gray:
@@ -171,9 +185,10 @@ beginfig(0);
 
   p6 = (z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) rotatedaround (z10, 30);
 
+  unfill p6;
   draw p6 withcolor red;
 
-
+  
   z21 = z10 rotated 60;
   dotlabel.bot(btex $z_{21}$ etex, z21);
 
@@ -186,8 +201,32 @@ beginfig(0);
 
   p8 = (p6 rotated 60) rotatedaround (z21, 15);
 
-  draw p8 withcolor blue;
+  %draw p8 withcolor blue;
 
+  for i = 0 upto 5:
+    z[15+i] = point i of p8;
+  endfor;
+  
+  dotlabel.lft(btex $z_{15}$ etex, z15);
+  dotlabel.bot(btex $z_{16}$ etex, z16);
+  dotlabel.bot(btex $z_{17}$ etex, z17);
+  dotlabel.lrt(btex $z_{18}$ etex, z18);
+  dotlabel.top(btex $z_{19}$ etex, z19);
+  dotlabel.ulft(btex $z_{20}$ etex, z20);
+
+  p9 = z20 -- z16 -- z18 -- cycle;
+  draw p9 withcolor blue;
+
+  p10 = z15 -- z17 -- z19 -- cycle;
+  draw p10 withcolor green;
+
+  z22 = (z20 -- z16) intersectionpoint (z15 -- z19);
+  dotlabel.lft(btex $z_{22}$ etex, z22);
+
+  z23 = (z20 -- z16) intersectionpoint (z15 -- z17);
+  dotlabel.llft(btex $z_{23}$ etex, z23);
+  
+  
   
   
 endfig;
