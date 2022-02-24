@@ -1747,8 +1747,10 @@ color_samples_a3.pdf: color_samples_a3.dvi
 atemp.mp: atemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
-alhambra_207.mp: alhambra_207.ldf 3dldf$(EXEEXT)
-	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) alhambra_207.ldf
+
+
+alhambra_207_000.eps: alhambra_207.mp
+	mpost alhambra_207.mp
 
 atemp0.eps atemp1.eps: atemp.mp
 	mpost -numbersystem "double" atemp.mp

@@ -1,10 +1,10 @@
-%% alhambra_207.ldf
+%% alhambra_207.mp
 %% Created by Laurence D. Finston (LDF) Thu 24 Feb 2022 01:28:50 PM CET
 
 %% * (1) Copyright and License.
 
 %%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing.  
-%%%% Copyright (C) 2021, 2022 The Free Software Foundation, Inc.  
+%%%% Copyright (C) 2022 The Free Software Foundation, Inc.  
 
 %%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
 %%%% it under the terms of the GNU General Public License as published by 
@@ -49,31 +49,87 @@
 
 %% ** (2) 
 
-verbatim_metapost    "verbatimtex \font\huge=cmr17 scaled 8000 etex;\n"
-                   & "prologues := 3;\noutputtemplate := \"%j%c.eps\";\n";
-
+verbatimtex \font\huge=cmr17 scaled 8000 etex;
+prologues := 3;
+outputtemplate := "%j_%3c.eps";
 
 pen medium_pen;
-medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
+medium_pen := pencircle scaled .25mm;
+
+path frame;
+
+numeric frame_wd;
+numeric frame_ht;
+
+frame_wd = 8cm;
+frame_ht = 6cm;
+
+frame =    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_wd, .5frame_ht)
+        -- (-.5frame_wd, .5frame_ht) -- cycle;
+ 
 
 
 beginfig(0);
   pickup medium_pen;
+  path hex[];
 
-  reg_polygon h[];
+  draw frame;
+  
+  %draw fullcircle scaled 4cm;
+  
+  for i = 0 upto 5:
+    z[i] = (2cm, 0) rotated (i*60);
+    draw origin -- z[i] withcolor .5;
+  endfor;
 
-  h0 := unit_hexagon scaled (2cm, 0, 2cm);
-  draw h0;
 
-endfig with_projection parallel_x_z;
+  %dotlabel.bot("origin", origin);
 
+  dotlabel.rt(btex $z_0$ etex, z0);
+  dotlabel.urt(btex $z_1$ etex, z1);
+  dotlabel.ulft(btex $z_2$ etex, z2);
+  dotlabel.lft(btex $z_3$ etex, z3);
+  dotlabel.llft(btex $z_4$ etex, z4);
+  dotlabel.lrt(btex $z_5$ etex, z5);
 
+  draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor .5;
 
+  j = 0;
+  m = 1;
+  k = .125cm;
+  for i = .25 step .25 until .75:
+    z[6+j] = i[z2, z1] shifted (0, k*m);
+    j := incr j;
+    m := decr m;
+  endfor;
 
+  dotlabel.top(btex $z_6$ etex, z6);
+  dotlabel.bot(btex $z_7$ etex, z7);
+  dotlabel.bot(btex $z_8$ etex, z8);
 
-%% *** (3) End of 3DLDF code
+  path p[];
 
-verbatim_metapost "end;";
+  p0 = z2 .. {dir 0}z6{dir 0} .. z7 .. {dir 0}z8{dir 0} .. z1;
+  p1 = p0 rotatedaround (z1, 60);
+  
+  for i = 0 upto 5:
+    draw p0 rotated 60i;
+    draw p1 rotated 60i;
+  endfor;
+
+  p2 = origin -- z7;
+  draw p2 withcolor .5;
+
+  p3 = z2 -- .5[origin, z1];
+
+  draw p3 withcolor .5;
+  
+  z9 = p2 intersectionpoint p3;
+  dotlabel.bot(btex $z_9$ etex, z9);
+
+  
+  
+endfig;
 
 end;
 
