@@ -1747,6 +1747,18 @@ color_samples_a3.pdf: color_samples_a3.dvi
 atemp.mp: atemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
 
+alhambra_195.pdf: alhambra_195.dvi
+	dvipdfmx alhambra_195.dvi
+
+alhambra_195.ps: alhambra_195.dvi
+	dvips -o alhambra_195.ps alhambra_195.dvi
+
+alhambra_195.dvi: alhambra_195.txt alhambra_195_000.eps
+	tex alhambra_195.txt
+
+alhambra_195_000.eps: alhambra_195.mp
+	mpost alhambra_195.mp
+
 alhambra_207.pdf: alhambra_207.dvi
 	dvipdfmx alhambra_207.dvi
 
