@@ -185,9 +185,10 @@ beginfig(0);
 
   p6 = (z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) rotatedaround (z10, 30);
 
-  unfill p6;
+  %unfill p6;
   draw p6 withcolor red;
 
+  label.top(btex $p_6$ etex, z10);
   
   z21 = z10 rotated 60;
   %dotlabel.bot(btex $z_{21}$ etex, z21);
@@ -207,12 +208,12 @@ beginfig(0);
     z[15+i] = point i of p8;
   endfor;
   
-  dotlabel.lft(btex $z_{15}$ etex, z15);
-  dotlabel.bot(btex $z_{16}$ etex, z16);
-  dotlabel.rt(btex $z_{17}$ etex, z17);
-  dotlabel.rt(btex $z_{18}$ etex, z18);
-  dotlabel.top(btex $z_{19}$ etex, z19);
-  dotlabel.ulft(btex $z_{20}$ etex, z20);
+  % dotlabel.lft(btex $z_{15}$ etex, z15);
+  % dotlabel.bot(btex $z_{16}$ etex, z16);
+  % dotlabel.rt(btex $z_{17}$ etex, z17);
+  % dotlabel.rt(btex $z_{18}$ etex, z18);
+  % dotlabel.top(btex $z_{19}$ etex, z19);
+  % dotlabel.ulft(btex $z_{20}$ etex, z20);
 
   p9 = z20 -- z16 -- z18 -- cycle;
   draw p9 withcolor blue;
@@ -221,22 +222,22 @@ beginfig(0);
   draw p10 withcolor green;
 
   z22 = (z20 -- z16) intersectionpoint (z15 -- z19);
-  dotlabel.lft(btex $z_{22}$ etex, z22);
+  %dotlabel.lft(btex $z_{22}$ etex, z22);
 
   z23 = (z20 -- z16) intersectionpoint (z15 -- z17);
-  dotlabel.llft(btex $z_{23}$ etex, z23);
+  %dotlabel.llft(btex $z_{23}$ etex, z23);
 
   z24 = (z18 -- z16) intersectionpoint (z15 -- z17);
-  dotlabel.bot(btex $z_{24}$ etex, z24);
+  %dotlabel.bot(btex $z_{24}$ etex, z24);
 
   z25 = (z18 -- z16) intersectionpoint (z19 -- z17);
-  dotlabel.rt(btex $z_{25}$ etex, z25);
+  %dotlabel.rt(btex $z_{25}$ etex, z25);
 
   z26 = (z18 -- z20) intersectionpoint (z19 -- z17);
-  dotlabel.urt(btex $z_{26}$ etex, z26);
+  %dotlabel.urt(btex $z_{26}$ etex, z26);
  
   z27 = (z18 -- z20) intersectionpoint (z19 -- z15);
-  dotlabel.top(btex $z_{27}$ etex, z27);
+  %dotlabel.top(btex $z_{27}$ etex, z27);
   
   cmykcolor orange;
   orange = (0, .5, 1, 0);
@@ -244,7 +245,39 @@ beginfig(0);
   p11 = z15 -- z22 -- z20 -- z27 -- z19 -- z26 -- z18 -- z25 -- z17 -- z24 -- z16 -- z23 -- cycle;
 
   draw p11 withcolor orange;
+
+  z28 = z10 rotated 60;
+  dotlabel.bot(btex $z_{28}$ etex, z28);
   
+  label.top(btex $p_{11}$ etex, z28);
+
+  j := 1;
+  for i = 0 step 2 until 4:
+    p[12+i]   = p6  rotated 120j;
+    p[12+i+1] = p11 rotated 120j;
+    z[29+i]   = z10 rotated 120j;
+    z[29+i+1] = z28 rotated 120j;
+    j := incr j;  
+  endfor;
+
+  dotlabel.bot(btex $z_{29}$ etex, z29);
+  label.top(btex $p_{12}$ etex, z29);
+  draw p12 withcolor red;
+
+  dotlabel.bot(btex $z_{30}$ etex, z30);
+  label.top(btex $p_{13}$ etex, z30);
+  draw p13 withcolor orange;
+
+  dotlabel.bot(btex $z_{31}$ etex, z31);
+  label.top(btex $p_{14}$ etex, z31);
+  draw p14 withcolor red;
+
+  dotlabel.bot(btex $z_{32}$ etex, z32);
+  label.top(btex $p_{15}$ etex, z32);
+  draw p15 withcolor orange;
+  
+  
+
 endfig;
 
 end;
