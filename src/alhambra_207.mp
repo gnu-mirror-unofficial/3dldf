@@ -110,10 +110,8 @@ beginfig(0);
   endfor;
 
 
+  draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor gray;
 
-  if do_gray:
-    draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor gray;
-  fi;
 
   j = 0;
   m = 1;
@@ -150,16 +148,15 @@ beginfig(0);
     p[21+i]  = p21 rotated 60i;
     z[39+i]  = z7  rotated 60i;
   endfor;
-
   
   %fill p21 withcolor blue;
 
   
   p2 = origin -- z7;
 
-  if do_gray:
-    draw p2 withcolor gray;
-  fi;
+  % if do_gray:
+  %   draw p2 withcolor gray;
+  % fi;
 
   z9 = .5[origin, z1];
   
@@ -183,9 +180,9 @@ beginfig(0);
   
   p5 = z7 -- z9 -- z11 -- cycle;
 
-  if do_gray:
-    draw p5 withcolor gray;
-  fi;
+  % if do_gray:
+  %   draw p5 withcolor gray;
+  % fi;
 
   z12 = z7 rotatedaround (z10, 180);
 
@@ -196,11 +193,13 @@ beginfig(0);
   z14 = z9 rotatedaround (z10, 180);
 
 
-  p6 = ((z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) scaled 1) rotatedaround (z10, 30);
+  p6 = ((((z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) shifted -z10) scaled .9) rotated 30) shifted z10;
+ 
 
   %unfill p6;
-  draw p6 withcolor red;
 
+
+  draw p6 withcolor red;
 
   
   z21 = z10 rotated 60;
@@ -213,18 +212,18 @@ beginfig(0);
   fi;
 
   p8 = (p6 rotated 60) rotatedaround (z21, 0);
-
+  
   %draw p8 withcolor blue;
 
   for i = 0 upto 5:
     z[15+i] = point i of p8;
   endfor;
-  
+
   p9 = z20 -- z16 -- z18 -- cycle;
-  draw p9 withcolor blue;
+  %draw p9 withcolor blue;
 
   p10 = z15 -- z17 -- z19 -- cycle;
-  draw p10 withcolor green;
+  %draw p10 withcolor green;
 
   z22 = (z20 -- z16) intersectionpoint (z15 -- z19);
 
@@ -239,19 +238,18 @@ beginfig(0);
 
   z26 = (z18 -- z20) intersectionpoint (z19 -- z17);
 
- 
+
   z27 = (z18 -- z20) intersectionpoint (z19 -- z15);
-  
-  
 
   
-  p11 = z15 -- z22 -- z20 -- z27 -- z19 -- z26 -- z18 -- z25 -- z17 -- z24 -- z16 -- z23 -- cycle;
+  p11 = (((z15 -- z22 -- z20 -- z27 -- z19 -- z26 -- z18 -- z25 -- z17 -- z24 -- z16 -- z23 -- cycle) shifted -z21)
+           scaled 1) shifted z21;
 
   draw p11 withcolor orange;
 
   z28 = z10 rotated 60;
 
-  
+
   j := 1;
   for i = 0 step 2 until 4:
     p[12+i]   = p6  rotated 120j;
@@ -269,7 +267,7 @@ beginfig(0);
 
   draw p15 withcolor orange;
 
-%% ** (2) Labels
+% %% ** (2) Labels
   
   if do_labels:
     %dotlabel.bot("origin", origin);
@@ -288,23 +286,24 @@ beginfig(0);
     dotlabel.bot(btex $z_{10}$ etex, z10);
     %dotlabel.lft(btex $z_{11}$ etex, z11);
     %dotlabel.bot(btex $z_{12}$ etex, z12);
+
     dotlabel.urt(btex $z_{13}$ etex, z13);
     dotlabel.ulft(btex $z_{14}$ etex, z14);
 
-    %dotlabel.bot(btex $z_{21}$ etex, z21);
+    dotlabel.bot(btex $z_{21}$ etex, z21);
     % dotlabel.lft(btex $z_{15}$ etex, z15);
     % dotlabel.bot(btex $z_{16}$ etex, z16);
     % dotlabel.rt(btex $z_{17}$ etex, z17);
     % dotlabel.rt(btex $z_{18}$ etex, z18);
     % dotlabel.top(btex $z_{19}$ etex, z19);
     % dotlabel.ulft(btex $z_{20}$ etex, z20);
-    %dotlabel.lft(btex $z_{22}$ etex, z22);
-    %dotlabel.llft(btex $z_{23}$ etex, z23);
-    %dotlabel.bot(btex $z_{24}$ etex, z24);
-    %dotlabel.rt(btex $z_{25}$ etex, z25);
-    %dotlabel.urt(btex $z_{26}$ etex, z26);
-    %dotlabel.top(btex $z_{27}$ etex, z27);
-    dotlabel.bot(btex $z_{28}$ etex, z28);
+    % dotlabel.lft(btex $z_{22}$ etex, z22);
+    % dotlabel.llft(btex $z_{23}$ etex, z23);
+    % dotlabel.bot(btex $z_{24}$ etex, z24);
+    % dotlabel.rt(btex $z_{25}$ etex, z25);
+    % dotlabel.urt(btex $z_{26}$ etex, z26);
+    % dotlabel.top(btex $z_{27}$ etex, z27);
+    %dotlabel.bot(btex $z_{28}$ etex, z28);
     dotlabel.bot(btex $z_{29}$ etex, z29);
     dotlabel.bot(btex $z_{30}$ etex, z30);
     dotlabel.bot(btex $z_{31}$ etex, z31);
@@ -315,8 +314,8 @@ beginfig(0);
     dotlabel.urt(btex $z_{43}$ etex, z43);
     dotlabel.urt(btex $z_{44}$ etex, z44);
     
-    label.top(btex $p_6$ etex, z10);
-    label.top(btex $p_{11}$ etex, z28);
+    label.top(btex $p_6$ etex, z10) withcolor red;
+    label.top(btex $p_{11}$ etex, z28) withcolor orange;
     label.top(btex $p_{12}$ etex, z29);
     label.top(btex $p_{13}$ etex, z30);
     label.top(btex $p_{14}$ etex, z31);
@@ -328,7 +327,7 @@ beginfig(0);
     label.lrt(btex  $p_{25}$ etex, z43);
     label.lrt(btex  $p_{26}$ etex, z44);
 
-  fi;
+%   fi;
     
 %% ** (2) End of Fig. 0
 
@@ -340,20 +339,20 @@ beginfig(1);
 
 %% ** (2)
 
-  pickup medium_pen;
+  % pickup medium_pen;
 
-  draw frame;
+  % draw frame;
   
-  for i = 21 upto 26:
-    draw p[i];
-  endfor;
+  % for i = 21 upto 26:
+  %   draw p[i];
+  % endfor;
 
-  draw p6;
-  draw p11;
-  draw p12;
-  draw p13;
-  draw p14;
-  draw p15;
+  % draw p6;
+  % draw p11;
+  % draw p12;
+  % draw p13;
+  % draw p14;
+  % draw p15;
   
 %% ** (2) End of Fig. 1
 
