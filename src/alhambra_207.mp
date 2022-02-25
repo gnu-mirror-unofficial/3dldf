@@ -149,11 +149,8 @@ beginfig(0);
 
   p21 = p1 & reverse p0 .. reverse p20 & cycle;
 
-  
   draw p21 withcolor magenta;
-  
 
-  
   for i = 1 upto 5:
     p[21+i]  = p21 rotated 60i;
     z[39+i]  = z7  rotated 60i;
