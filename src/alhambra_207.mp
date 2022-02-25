@@ -49,6 +49,8 @@
 
 %% * (1) Top
 
+input TEX.mp;
+
 verbatimtex \font\huge=cmr17 scaled 8000 etex;
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
@@ -86,8 +88,16 @@ magenta = (0, 1, 0, 0);
 cmykcolor orange;
 orange = (0, .5, 1, 0);
 
+
+
+cmykcolor dark_blue;
+dark_blue = (1, 1, 0.5, 0);
+
 path p[];
 
+transform t[];
+
+pair d[];
 
 %% * (1)
 
@@ -98,7 +108,7 @@ beginfig(0);
   pickup medium_pen;
   path hex[];
 
-  draw frame;
+  undraw frame;
   
   %draw fullcircle scaled 4cm;
   
@@ -141,7 +151,7 @@ beginfig(0);
 
   
   draw p21 withcolor magenta;
-
+  
 
   
   for i = 1 upto 5:
@@ -267,6 +277,10 @@ beginfig(0);
 
   draw p15 withcolor orange;
 
+  d2 = z2;
+  d4 = z4;
+  d10 = z10;
+  
 % %% ** (2) Labels
   
   if do_labels:
@@ -320,17 +334,19 @@ beginfig(0);
     label.top(btex $p_{13}$ etex, z30);
     label.top(btex $p_{14}$ etex, z31);
     label.top(btex $p_{15}$ etex, z32);
-    label.top(btex $p_{21}$ etex, z7);
+    label.top(btex $p_{21}$ etex, z7) withcolor magenta;
     label.ulft(btex $p_{22}$ etex, z40);
     label.ulft(btex $p_{23}$ etex, z41);
     label.llft(btex $p_{24}$ etex, z42);
     label.lrt(btex  $p_{25}$ etex, z43);
     label.lrt(btex  $p_{26}$ etex, z44);
 
-%   fi;
+  fi;
     
 %% ** (2) End of Fig. 0
 
+    
+    
 endfig;
 
 %% * (1) Fig. 1
@@ -338,15 +354,69 @@ endfig;
 beginfig(1); 
 
 %% ** (2)
-
-  % pickup medium_pen;
-
-  % draw frame;
   
-  % for i = 21 upto 26:
-  %   draw p[i];
-  % endfor;
+  pickup medium_pen;
 
+  undraw frame;
+
+  t0 = identity shifted (d4 - d2);
+
+  j := 0;
+  
+  for i = 21 upto 26:
+    draw p[i];
+    p[30+j] = p[i] transformed t0;
+    draw p[30+j];
+    d[30+j] = ((d10 shifted (0, .6cm))rotated 60j) transformed t0;
+    d[40+j] = ((d10 shifted (0, 0cm))rotated 60j) transformed t0;
+    if odd j:
+      p[40+j] = (p11 rotated 60(j-1)) transformed t0;
+    else:
+      p[40+j] = (p6 rotated 60j) transformed t0;
+    fi;
+    draw p[40+j];
+    j := incr j;
+  endfor;
+  
+  fill p21 withcolor dark_blue;
+  unfill p6;
+
+  fill p11 withcolor dark_blue;
+
+  fill p23 withcolor dark_blue;
+  unfill p12;
+
+  fill p25 withcolor dark_blue;
+  unfill p14;
+
+  fill p13 withcolor orange;
+
+  fill p15 withcolor dark_blue;
+
+  fill p30 withcolor dark_blue;
+  unfill p40;
+
+  fill p32 withcolor dark_blue;
+  unfill p42;
+
+  fill p34 withcolor dark_blue;
+  unfill p44;
+  
+  fill p41 withcolor orange;
+  fill p43 withcolor dark_blue;
+  fill p45 withcolor orange;
+
+  do_labels := false; % true
+  
+  if do_labels:
+    for i = 0 upto 5:
+      label(TEX("$p_{" & decimal(30+i) & "}$"), d[30+i]);
+      label(TEX("$p_{" & decimal(40+i) & "}$"), d[40+i]);
+    endfor;
+  fi;
+
+
+  
   % draw p6;
   % draw p11;
   % draw p12;

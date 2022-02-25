@@ -338,14 +338,13 @@ beginfig(3);
 
   draw pic(M) shifted (1mm, 0);
 
-  draw (outer_frame xscaled 1.5) withcolor green;
-  draw (inner_frame xscaled 1.5) withcolor magenta;
+  draw (outer_frame xscaled 1.5); % withcolor green;
+  draw (inner_frame xscaled 1.5); % withcolor magenta;
 
   z0 = point 1 of (outer_frame xscaled 1.5);
   z1 = point 0 of outer_frame;
 
-  
-  
+    
   draw outer_frame shifted (z0 - z1);
   draw inner_frame shifted (z0 - z1);
 
@@ -381,8 +380,8 @@ beginfig(3);
   q0 := (q0 shifted (z1 - z5)) shifted (z4 - z1);
   q1 := (q1 shifted (z1 - z5)) shifted (z4 - z1);
     
-  draw q0 withcolor red;
-  draw q1 withcolor blue;
+  draw q0; %  withcolor red;
+  draw q1; % withcolor blue;
 
   w3 = currentpicture;
 
