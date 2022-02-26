@@ -91,16 +91,16 @@ orange = (0, .5, 1, 0);
 cmykcolor dark_blue;
 dark_blue = (1, 1, 0.5, 0);
 
-path p[];
-
-transform t[];
-
 pair d[];
+path p[];
+transform t[];
 
 %% * (1)
 
-numeric side_length;
-side_length = 3cm; 
+numeric radius;
+radius = 2cm; 
+
+numeric 
 
 beginfig(0);
 
@@ -110,114 +110,79 @@ beginfig(0);
 
   undraw frame;
 
-  
-  
-  p0 = (unitsquare scaled side_length shifted (-.5side_length, -.5side_length)) rotated 15;
+  d0 = (0, radius);
 
-  j = -1;
-  for i = 0 upto 2:
-    if i > 0:
-      p[i] = p0 rotated 30i;
-    fi;
-    draw p[i] withcolor gray;
-    for k = 0 upto 3:
-      d[incr j] = point k of p[i];
-    endfor;
+  for i = 1 upto 11:
+    d[i] = d0 rotated 30i;
   endfor;
 
-  draw p1 withcolor red;
-  draw p2 withcolor blue;
+  p100 = d0 .. d1 .. d2 .. d3 .. d4 .. d5 .. d6 .. d7 .. d8 .. d9 .. d10 .. d11 .. cycle;
+
+  draw p100 withcolor gray;
+
+  p0 = d4 -- d8 -- d0 -- cycle;
+
+  draw p0 withcolor gray;
+
+  for i = 1 upto 3:
+    p[i] = p0 rotated 30i;
+    draw p[i] withcolor gray;
+  endfor;
+
+  d20 = whatever[d8, d0];
+  d20 = whatever[d5, d1];
   
-  d12 = (d0 -- d1) intersectionpoint (d7 -- d4);
-
-
-  d13 = (d4 -- d5) intersectionpoint (d8 -- d11);
-
-
-  d14 = (d0 -- d1) intersectionpoint (d8 -- d9);
-
-
-  d15 = (d4 -- d5) intersectionpoint (d1 -- d2);
-
-
-  d16 = (d5 -- d6) intersectionpoint (d8 -- d9);
-
-
-  d17 = (d1 -- d2) intersectionpoint (d9 -- d10);
-
-
-  d18 = (d6 -- d5) intersectionpoint (d2 -- d3);
-
-
-  d19 = (d9 -- d10) intersectionpoint (d6 -- d7);
-
-
-  d20 = (d11 -- d10) intersectionpoint (d2 -- d3);
-
-
-  d21 = (d6 -- d7) intersectionpoint (d0 -- d3);
-
-
-  d22 = (d4 -- d7) intersectionpoint (d10 -- d11);
-
-
-  d23 = (d0 -- d3) intersectionpoint (d8 -- d11);
-
+  draw d0 -- d20 withcolor gray;
+  draw d1 -- d20 withcolor gray;
   
-  p3 = d0 -- d12 -- d4 -- d13 -- d8 -- d14 -- d1 -- d15 -- d5 -- d16
-          -- d9 -- d17 -- d2 -- d18 -- d6 -- d19 -- d10 -- d20 -- d3 -- d21 -- d7 -- d22
-          -- d11 -- d23 -- cycle;
-
-  unfill p3;
-  draw p3;
-
-%% ** (2)
-
-  d24 = whatever[d18, d6];
-  d24 = whatever[d20, d10];
-
-  draw d6 -- d24 -- d10 -- d19 -- cycle;
-
-  
-  % draw p1 withcolor red;
-  % draw p2 withcolor blue;
-  % draw p3 withcolor green;
-
-
-  % d24 = whatever[d0, d1];
-  % %d24 = whatever[]
+  for i = 1 upto 11:
+    d[i+20] = d[20] rotated 30i;
+    draw d[i] -- d[i+20] withcolor gray;
+    if i = 11:
+      draw d0 -- d[i+20] withcolor gray;
+    else:
+      draw d[i+1] -- d[i+20] withcolor gray;
+    fi;
+  endfor;
+      
   
 %% ** (2) Labels
   
   if do_labels:
     %dotlabel.bot("origin", origin);
-    label.bot(btex $d_0$ etex, d0) withcolor gray;
-    label.rt(btex $d_1$ etex, d1) withcolor gray;
-    label.top(btex $d_2$ etex, d2) withcolor gray;
-    label.lft(btex $d_3$ etex, d3) withcolor gray;
+    label.top(btex $d_0$ etex, d0);
+    label.lft(btex $d_1$ etex, d1);
+    label.lft(btex $d_2$ etex, d2);
 
-    label.bot(btex $d_4$ etex, d4) withcolor red;
-    label.rt(btex $d_5$ etex, d5) withcolor red;
-    label.top(btex $d_6$ etex, d6) withcolor red;
-    label.lft(btex $d_7$ etex, d7) withcolor red;
 
-    label.rt(btex $d_8$ etex, d8) withcolor blue;
-    label.rt(btex $d_9$ etex, d9) withcolor blue;
-    label.top(btex $d_{10}$ etex, d10) withcolor blue;
-    label.lft(btex $d_{11}$ etex, d11) withcolor blue;
+    label(btex $p_0$ etex, d0 shifted (0, .5cm));
+    label(btex $p_1$ etex, d[1] shifted (-.25cm, .25cm));
+    
+    
+    label.lft(btex $d_3$ etex, d3);
 
-    dotlabel.bot(btex $d_{12}$ etex, d12);
-    dotlabel.bot(btex $d_{13}$ etex, d13);
-    dotlabel.lrt(btex $d_{14}$ etex, d14);
-    dotlabel.rt(btex $d_{15}$ etex, d15);
-    dotlabel.rt(btex $d_{16}$ etex, d16);
-    dotlabel.urt(btex $d_{17}$ etex, d17);
-    dotlabel.top(btex $d_{18}$ etex, d18);
-    dotlabel.top(btex $d_{19}$ etex, d19);
-    dotlabel.ulft(btex $d_{20}$ etex, d20);
-    dotlabel.lft(btex $d_{21}$ etex, d21);
-    dotlabel.lft(btex $d_{22}$ etex, d22);
-    dotlabel.llft(btex $d_{23}$ etex, d23);
+    label.lft(btex $d_4$ etex, d4);
+    label.llft(btex $d_5$ etex, d5) ;
+    label.bot(btex $d_6$ etex, d6);
+    label.lrt(btex $d_7$ etex, d7);
+
+    label.rt(btex $d_8$ etex, d8);
+    label.rt(btex $d_9$ etex, d9);
+    label.rt(btex $d_{10}$ etex, d10);
+    label.urt(btex $d_{11}$ etex, d11);
+
+    label.top(btex $d_{20}$ etex, d20);
+    label.top(btex $d_{21}$ etex, d21);
+    label.lft(btex $d_{22}$ etex, d22);
+    label.lft(btex $d_{23}$ etex, d23);
+    label.lft(btex $d_{24}$ etex, d24);
+    label.llft(btex $d_{25}$ etex, d25);
+    label.bot(btex $d_{26}$ etex, d26);
+    label.lrt(btex $d_{27}$ etex, d27);
+    label.rt(btex $d_{28}$ etex, d28);
+    label.rt(btex $d_{29}$ etex, d29);
+    label.urt(btex $d_{30}$ etex, d30);
+    label.top(btex $d_{31}$ etex, d31);
 
   fi;
     
