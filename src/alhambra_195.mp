@@ -100,7 +100,6 @@ transform t[];
 numeric radius;
 radius = 2cm; 
 
-numeric 
 
 beginfig(0);
 
@@ -144,8 +143,86 @@ beginfig(0);
       draw d[i+1] -- d[i+20] withcolor gray;
     fi;
   endfor;
-      
+
+%% ** (2)
+
+%   t0 = identity shifted (0, -6(xpart d26 - xpart d25));
+
+
+%   d39 = origin transformed t0;
+%   dotlabel.top(btex $d_{39}$ etex, d39);
+
+
+%   d38 = (d39 shifted (-10cm, 0)) rotatedaround(d39, -45);
+%   d40 = whatever[d39, d38];
+
+%   xpart d40 = xpart d25;
   
+%   label(btex $d_{40}$ etex, d40);
+
+  
+%   for i = 1 upto 7:
+%     d[40+i] = d40 rotatedaround (d39, 45i);
+%   endfor;
+  
+%   label(btex $d_{41}$ etex, d41);
+%   label(btex $d_{42}$ etex, d42);
+%   label(btex $d_{43}$ etex, d43);
+%   label(btex $d_{44}$ etex, d44);
+%   label(btex $d_{45}$ etex, d45);
+%   label(btex $d_{46}$ etex, d46);
+%   label(btex $d_{47}$ etex, d47);
+  
+%   draw d43 -- d41 withcolor gray;
+%   draw d45 -- d47 withcolor gray;
+%   draw d41 -- d47 withcolor gray;
+%   draw d43 -- d45 withcolor gray;
+%   draw d42 -- d44 withcolor gray;
+%   draw d40 -- d46 withcolor gray;
+%   draw d42 -- d40 withcolor gray;
+%   draw d44 -- d46 withcolor gray;
+
+  
+%   d50 = whatever[d46, d40];
+%   d50 = whatever[d43, d41];
+
+%   p50 = d41 -- d50 -- d40 -- cycle;
+  
+%   draw p50 withcolor gray;
+
+%   for i = 1 upto 7:
+%     d[50+i] = d50 rotatedaround (d39, 45i);
+%     p[50+i] = p50 rotatedaround (d39, 45i);
+%     draw p[50+i] withcolor gray;
+%   endfor;
+  
+%   label.lft(btex $d_{50}$ etex, d50);
+%   label.bot(btex $d_{51}$ etex, d51);
+%   label.bot(btex $d_{52}$ etex, d52);
+%   label.rt(btex $d_{53}$ etex, d53);
+%   label.rt(btex $d_{54}$ etex, d54);
+%   label.top(btex $d_{55}$ etex, d55);
+%   label.top(btex $d_{56}$ etex, d56);
+%   label.lft(btex $d_{57}$ etex, d57);
+  
+% %% ** (2)
+
+%   d60 = whatever[d6, d26];
+%   y60 =
+
+%   label.rt(btex $d_{60}$ etex, d60);
+
+%   draw d26 -- d60 -- d55;
+%   draw d56 -- d26;
+%   draw d55 -- d26 withcolor gray;
+
+%   draw d25 -- d57;
+
+%   % d61 = d60 reflectedabout (origin, d39);
+%   % label.lft(btex $d_{61}$ etex, d61);
+
+%   % draw d50 -- d61 -- d25;
+ 
 %% ** (2) Labels
   
   if do_labels:
@@ -183,6 +260,8 @@ beginfig(0);
     label.rt(btex $d_{29}$ etex, d29);
     label.urt(btex $d_{30}$ etex, d30);
     label.top(btex $d_{31}$ etex, d31);
+
+    
 
   fi;
     

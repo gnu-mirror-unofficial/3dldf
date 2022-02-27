@@ -156,35 +156,55 @@
 \eject
 
 
-%% ** (2) Page 3 and 4.  Just the logo with guidelines.
+%% ** (2) Page 3.  Just the logo, with and without guidelines.
 
 \headline={}
 
-\setbox0=\hbox{\epsffile{tex_logo002.eps}}
+\setbox1=\hbox{\epsffile{tex_logo001.eps}}
+\setbox2=\hbox{\epsffile{tex_logo002.eps}}
 
-\line{\copy0\hss}
+\line{\copy2\hss}
 \vskip2cm
-\line{\copy0\hss}
+\line{\copy1\hss}
 \vfil
 \eject
 
-\line{\copy0\hss}
-\vskip2cm
-\line{\copy0\hss}
-\vfil
-\eject
-
-%% ** (2) Page 5.  Just the logo without guidelines.
+%% ** (2) Page 4.  Just the logo, with and without guidelines, reversed.
 
 \headline={}
 
-\setbox0=\hbox{\epsffile{tex_logo001.eps}}
+\setbox3=\hbox{\epsffile{tex_logo003.eps}}
+\setbox4=\hbox{\epsffile{tex_logo004.eps}}
 
-\vbox{}
-\vskip1cm
-\line{\box0\hss}
+\line{\copy4\hss}
+\vskip2cm
+\line{\copy3\hss}
 \vfil
 \eject
+
+%% ** (2) Page 5.  Just the logo, with guidelines, reversed, twice.
+
+\headline={}
+
+\setbox3=\hbox{\epsffile{tex_logo003.eps}}
+\setbox4=\hbox{\epsffile{tex_logo004.eps}}
+
+\line{\copy4\hss}
+\vskip2cm
+\line{\copy4\hss}
+\vfil
+\eject
+
+%% ** (2) Page 6.  Just the logo, with and without guidelines, reversed, twice.
+
+\headline={}
+
+\line{\epsffile{tex_logo001.eps}}
+\vskip2cm
+\line{\epsffile{tex_logo003.eps}}
+\vfil
+\eject
+
 
 
 

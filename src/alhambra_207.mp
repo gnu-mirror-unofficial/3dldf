@@ -114,14 +114,7 @@ beginfig(0);
   
   for i = 0 upto 5:
     z[i] = (2cm, 0) rotated (i*60);
-    if do_gray:
-      draw origin -- z[i] withcolor gray;
-    fi;
   endfor;
-
-
-  draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor gray;
-
 
   j = 0;
   m = 1;
@@ -135,8 +128,8 @@ beginfig(0);
   p0 = z2 .. {dir 0}z6{dir 0} .. z7 .. {dir 0}z8{dir 0} .. z1;
   p1 = p0 rotatedaround (z1, 60);
 
-  drawarrow p0 withcolor blue;
-  drawarrow p1 withcolor green;
+  % drawarrow p0 withcolor blue;
+  % drawarrow p1 withcolor green;
 
   for i = 1 upto 5:
     draw p0 rotated 60i;
@@ -161,18 +154,11 @@ beginfig(0);
   
   p2 = origin -- z7;
 
-  % if do_gray:
-  %   draw p2 withcolor gray;
-  % fi;
 
   z9 = .5[origin, z1];
   
   p3 = z2 -- z9;
 
-  if do_gray:
-    %draw p3 withcolor gray;
-  fi;
-  
   z10 = p2 intersectionpoint p3;
 
 
@@ -181,26 +167,16 @@ beginfig(0);
 
   p4 = (fullcircle scaled (2*(y7 - y10)) scaled 1) shifted z10;
 
-  if do_gray:
-    draw p4 withcolor gray;
-  fi;
-  
   p5 = z7 -- z9 -- z11 -- cycle;
-
-  % if do_gray:
-  %   draw p5 withcolor gray;
-  % fi;
 
   z12 = z7 rotatedaround (z10, 180);
 
-
   z13 = z11 rotatedaround (z10, 180);
-
 
   z14 = z9 rotatedaround (z10, 180);
 
-
-  p6 = ((((z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) shifted -z10) scaled .9) rotated 30) shifted z10;
+  p6 = ((((z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) shifted -z10) scaled .9)
+      rotated 30) shifted z10;
  
 
   %unfill p6;
@@ -213,10 +189,6 @@ beginfig(0);
 
 
   p7 = fullcircle scaled (2*(y7 - y10)) shifted z21;
-
-  if do_gray:
-    draw p7 withcolor gray;
-  fi;
 
   p8 = (p6 rotated 60) rotatedaround (z21, 0);
   
@@ -277,8 +249,28 @@ beginfig(0);
   d2 = z2;
   d4 = z4;
   d10 = z10;
+
+  v0 = currentpicture;
+  currentpicture := nullpicture;
   
-% %% ** (2) Labels
+  
+%% ** (2) Auxiliary lines
+
+  if do_gray:
+    %draw p2 withcolor gray;
+    %draw p3 withcolor gray;
+    draw p4 withcolor gray;
+    draw p5 withcolor gray;
+    draw p7 withcolor gray;
+    draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor gray;
+    for i = 0 upto 5:
+      draw origin -- z[i] withcolor gray;
+    endfor;
+  fi;
+
+%% ** (2) Labels
+  
+  
   
   if do_labels:
     %dotlabel.bot("origin", origin);
@@ -321,7 +313,7 @@ beginfig(0);
     dotlabel.bot(btex $z_{32}$ etex, z32);
     dotlabel.llft(btex $z_{40}$ etex, z40);
     dotlabel.llft(btex $z_{41}$ etex, z41);
-    dotlabel.lrt(btex $z_{42}$ etex, z42);
+    dotlabel.rt(btex $z_{42}$ etex, z42 shifted (4pt, 2pt));
     dotlabel.urt(btex $z_{43}$ etex, z43);
     dotlabel.urt(btex $z_{44}$ etex, z44);
     
@@ -334,32 +326,23 @@ beginfig(0);
     label.top(btex $p_{21}$ etex, z7) withcolor magenta;
     label.ulft(btex $p_{22}$ etex, z40);
     label.ulft(btex $p_{23}$ etex, z41);
-    label.llft(btex $p_{24}$ etex, z42);
+    label.ulft(btex $p_{24}$ etex, z42 shifted (-.25cm, .125cm));
     label.lrt(btex  $p_{25}$ etex, z43);
     label.lrt(btex  $p_{26}$ etex, z44);
 
   fi;
-    
-%% ** (2) End of Fig. 0
 
-    
-    
-endfig;
+  v100 = currentpicture;
+  currentpicture := nullpicture;
 
-%% * (1) Fig. 1
-
-beginfig(1); 
-
-%% ** (2)
+%% *** (3)
   
-  pickup medium_pen;
-
-  undraw frame;
-
+%% ** (2) Hexagon 2
+  
   t0 = identity shifted (d4 - d2);
 
   j := 0;
-  
+
   for i = 21 upto 26:
     draw p[i];
     p[30+j] = p[i] transformed t0;
@@ -374,7 +357,45 @@ beginfig(1);
     draw p[40+j];
     j := incr j;
   endfor;
+
+  v1 = currentpicture;
+  currentpicture := nullpicture;
   
+%% *** (3) Labels
+  
+  if do_labels:
+
+    label(btex $p_{30}$ etex, z21 transformed t0);
+    
+  fi;
+
+  v101 = currentpicture;
+  currentpicture := nullpicture;
+  
+%% *** (3)
+
+%% ** (2)
+
+  currentpicture := v0;
+  addto currentpicture also v100;
+  addto currentpicture also v1;
+  addto currentpicture also v101;
+    
+%% ** (2) End of Fig. 0
+    
+endfig;
+
+%% * (1) Fig. 1
+
+beginfig(1); 
+
+%% ** (2)
+
+  currentpicture := v0;
+  addto currentpicture also v1;
+  
+  pickup medium_pen;
+
   fill p21 withcolor dark_blue;
   unfill p6;
 

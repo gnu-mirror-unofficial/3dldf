@@ -385,6 +385,20 @@ beginfig(2);
   currentpicture := w1;
 endfig;
 
+
+%% * (1)
+
+beginfig(3);
+  currentpicture := w0 reflectedabout ((0, -1cm), (0, 1cm));
+endfig;
+
+%% * (1)
+
+beginfig(4);
+  currentpicture := w1 reflectedabout ((0, -1cm), (0, 1cm));
+endfig;
+
+
 %% * (1)
 
 end;
