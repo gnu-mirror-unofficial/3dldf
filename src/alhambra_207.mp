@@ -58,6 +58,9 @@ outputtemplate := "%j_%3c.eps";
 pen medium_pen;
 medium_pen := pencircle scaled .25mm;
 
+pen dot_pen;
+dot_pen = pencircle scaled 3pt;
+
 path frame;
 
 numeric frame_wd;
@@ -358,17 +361,36 @@ beginfig(0);
     j := incr j;
   endfor;
 
+  d50 = origin transformed t0;
+
   v1 = currentpicture;
   currentpicture := nullpicture;
   
-%% *** (3) Labels
-  
+%% ** (2) Labels
+
+  drawdot d50 withpen dot_pen;
+  label.top(btex $d_{50}$ etex, d50 shifted (2.5pt, 1pt));
+
+
   if do_labels:
 
-    label(btex $p_{30}$ etex, z21 transformed t0);
+    label(btex $p_{30}$ etex, (z21 transformed t0) shifted (-.625cm, -.25cm));
+    
+    % j := 0;
+    % for i = 21 upto 26:
+    %   label(TEX("$d_{" & decimal (30+j) & "}$"), d[30+j]);
+    %   label(TEX("$d_{" & decimal (40+j) & "}$"), d[40+j]);
+    %   j := incr j;
+    % endfor;
+
+    for i = 40 upto 45:
+      dotlabel.top(TEX("$d_{" & decimal i & "}$"), d[i]);
+    endfor;
     
   fi;
 
+  
+ 
   v101 = currentpicture;
   currentpicture := nullpicture;
   
