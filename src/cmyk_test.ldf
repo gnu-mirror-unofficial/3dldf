@@ -133,6 +133,12 @@ teal_blue := (1, .5, .5, 0);
 set_name teal_blue to "teal blue";
 show teal_blue;
 
+color mauve;
+mauve := (.5, 1, .5, 0);
+
+set_name mauve to "mauve";
+show mauve;
+
 color turquoise;
 turquoise := (1, 0, .5, 0);
 
@@ -184,8 +190,8 @@ endfig with_projection parallel_x_y;
 %% **** (4) Combinations of 1 (Once) and 0.5 (Twice) Without Black
 
 beginfig(3);
-   draw_sample[0] {teal_blue, 0, 0};
-   draw_sample[1] {.5, 1, .5, 0, 3, 0}; %% Mauve
+   draw_sample[0] {teal_blue, 0, 0};    %% Teal Blue
+   draw_sample[0] {mauve, 0, 0};        %% Mauve
    draw_sample[1] {.5, .5, 1, 0, 6, 0}; %% Olive Green
 endfig with_projection parallel_x_y;
 

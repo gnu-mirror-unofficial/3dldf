@@ -1,4 +1,4 @@
-%% alhambra_207.mp
+%% alhambra_207
 %% Created by Laurence D. Finston (LDF) Thu 24 Feb 2022 01:28:50 PM CET
 
 %% * (1) Copyright and License.
@@ -98,6 +98,9 @@ teal_blue = (1, .5, .5, 0);
 
 cmykcolor dark_blue;
 dark_blue = (1, 1, 0.5, 0);
+
+cmykcolor mauve;
+mauve = (.5, 1, .5, 0);
 
 path p[];
 
@@ -345,28 +348,28 @@ beginfig(0);
   
 %% ** (2) Hexagon 2
   
-  t0 = identity shifted (d4 - d2);
+  t2 = identity shifted (d4 - d2);
 
   j := 0;
 
   for i = 21 upto 26:
     draw p[i];
-    p[30+j] = p[i] transformed t0;
+    p[30+j] = p[i] transformed t2;
     draw p[30+j];
-    d[30+j] = ((d10 shifted (0, .6cm))rotated 60j) transformed t0;
-    d[40+j] = ((d10 shifted (0, 0cm))rotated 60j) transformed t0;
+    d[30+j] = ((d10 shifted (0, .6cm))rotated 60j) transformed t2;
+    d[40+j] = ((d10 shifted (0, 0cm))rotated 60j) transformed t2;
     if odd j:
-      p[40+j] = (p11 rotated 60(j-1)) transformed t0;
+      p[40+j] = (p11 rotated 60(j-1)) transformed t2;
     else:
-      p[40+j] = (p6 rotated 60j) transformed t0;
+      p[40+j] = (p6 rotated 60j) transformed t2;
     fi;
     draw p[40+j];
     j := incr j;
   endfor;
 
-  d50 = origin transformed t0;
+  d50 = origin transformed t2;
 
-  v1 = currentpicture;
+  v2 = currentpicture;
   currentpicture := nullpicture;
   
 %% ** (2) Labels
@@ -377,7 +380,7 @@ beginfig(0);
 
   if do_labels:
 
-    label(btex $p_{30}$ etex, (z21 transformed t0) shifted (-.625cm, -.25cm));
+    label(btex $p_{30}$ etex, (z21 transformed t2) shifted (-.625cm, -.25cm));
     
     % j := 0;
     % for i = 21 upto 26:
@@ -398,51 +401,48 @@ beginfig(0);
 
   fi;
  
-  v101 = currentpicture;
+  v102 = currentpicture;
   currentpicture := nullpicture;
   
 %% *** (3)
 
 %% ** (2) Hexagon 3
 
-  t1 = identity shifted (z5 - z3);
+  t3 = identity shifted (z5 - z3);
   
 
-  d60 = z10 transformed t1;
-  p60 = p21 transformed t1;
-  p66 = p6 transformed t1;
-
-
-  
-  d61 = z21 transformed t1;
-  p61 = p22 transformed t1;
-  p67 = p11 transformed t1;
+  d60 = z10 transformed t3;
+  p60 = p21 transformed t3;
+  p66 = p6 transformed t3;
 
 
   
+  d61 = z21 transformed t3;
+  p61 = p22 transformed t3;
+  p67 = p11 transformed t3;
 
-  d62 = z29 transformed t1;
-  p62 = p23 transformed t1;
-  p68 = p12 transformed t1;
+  d62 = z29 transformed t3;
+  p62 = p23 transformed t3;
+  p68 = p12 transformed t3;
 
-  d63 = z30 transformed t1;
-  p63 = p24 transformed t1;
-  p69 = p13 transformed t1;
+  d63 = z30 transformed t3;
+  p63 = p24 transformed t3;
+  p69 = p13 transformed t3;
 
-  d64 = z31 transformed t1;
-  p64 = p25 transformed t1;
-  p70 = p14 transformed t1;
+  d64 = z31 transformed t3;
+  p64 = p25 transformed t3;
+  p70 = p14 transformed t3;
   
-  d65 = z32 transformed t1;
-  p65 = p26 transformed t1;
-  p71 = p15 transformed t1;
+  d65 = z32 transformed t3;
+  p65 = p26 transformed t3;
+  p71 = p15 transformed t3;
 
  
   for i = 60 upto 71:
     draw p[i];
   endfor;
     
-  v2 = currentpicture;
+  v3 = currentpicture;
   currentpicture := nullpicture;
   
 %% *** (3) Labels for hexagon 3
@@ -452,11 +452,13 @@ beginfig(0);
     label.bot(TEX("$p_{" & decimal (i + 6) & "}$"), d[i]);
   endfor;
   
-  v102 = currentpicture;
+  v103 = currentpicture;
   currentpicture := nullpicture;
 
 %% ** (2) Hexagon 4
 
+%% *** (3)
+  
   t4 = identity shifted (z0 - z4);
 
   p80 = p21 transformed t4;
@@ -472,6 +474,42 @@ beginfig(0);
 
   draw p82;
   draw p83;
+
+  p84 = p23 transformed t4;
+  p85 = p12 transformed t4;
+  d84 = z29 transformed t4;
+
+  draw p84;
+  draw p85;
+
+  p86 = p24 transformed t4;
+  p87 = p13 transformed t4;
+  d86 = z30 transformed t4;
+
+  draw p86;
+  draw p87;
+
+  p88 = p25 transformed t4;
+  p89 = p14 transformed t4;
+  d88 = z31 transformed t4;
+
+  draw p88;
+  draw p89;
+
+  p90 = p26 transformed t4;
+  p91 = p15 transformed t4;
+  d90 = z32 transformed t4;
+
+  draw p90;
+  draw p91;
+
+  
+  
+%% *** (3)
+
+
+  
+%% *** (3)
   
   v4 = currentpicture;
   currentpicture := nullpicture;
@@ -481,6 +519,10 @@ beginfig(0);
   if do_labels:
     dotlabel.top(btex $d_{80}$ etex, d80);
     dotlabel.top(btex $d_{82}$ etex, d82);
+    dotlabel.top(btex $d_{84}$ etex, d84);
+    dotlabel.top(btex $d_{86}$ etex, d86);
+    dotlabel.top(btex $d_{88}$ etex, d88);
+    dotlabel.top(btex $d_{90}$ etex, d90);
   fi;
 
   v104 = currentpicture;
@@ -490,21 +532,22 @@ beginfig(0);
 %% ** (2) Combine path pictures
 
   currentpicture := v0;
-  addto currentpicture also v1;
-  addto currentpicture also v2;
 
+  addto currentpicture also v2;
+  addto currentpicture also v3;
   addto currentpicture also v4;
 
 %% *** (3) Combine pictures with auxiliary lines and labels
 
   addto currentpicture also v100;
-  addto currentpicture also v101;
+
   addto currentpicture also v102;
+  addto currentpicture also v103;
   addto currentpicture also v104;
 
   label(btex {\Largebx 1} etex, origin);
-  label(btex {\Largebx 2} etex, origin transformed t0);
-  label(btex {\Largebx 3} etex, origin transformed t1);
+  label(btex {\Largebx 2} etex, origin transformed t2);
+  label(btex {\Largebx 3} etex, origin transformed t3);
   label(btex {\Largebx 4} etex, origin transformed t4);
 
   
@@ -519,8 +562,9 @@ beginfig(1);
 %% ** (2)
 
   currentpicture := v0;
-  addto currentpicture also v1;
   addto currentpicture also v2;
+  addto currentpicture also v3;
+  addto currentpicture also v4;
   
   pickup medium_pen;
   
@@ -566,6 +610,23 @@ beginfig(1);
   filldraw p67 withcolor dark_blue;
   filldraw p69 withcolor dark_blue;
   filldraw p71 withcolor dark_blue;
+
+
+%% *** (3) Hexagon 4
+
+  filldraw p81 withcolor mauve;
+
+  filldraw p83 withcolor dark_blue;
+
+  filldraw p84 withcolor dark_blue;
+  unfilldraw p85;
+
+  filldraw p87 withcolor orange;
+
+  filldraw p88 withcolor dark_blue;
+  unfilldraw p89;
+
+  filldraw p91 withcolor dark_blue;
   
   % draw p6;
   % draw p11;
