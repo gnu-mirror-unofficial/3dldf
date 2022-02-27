@@ -51,7 +51,9 @@
 
 input TEX.mp;
 
-verbatimtex \font\huge=cmr17 scaled 8000 etex;
+%% \font\huge=cmr17 scaled 8000
+
+verbatimtex \font\Largebx=cmbx17 scaled 1250 etex;
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
@@ -91,7 +93,8 @@ magenta = (0, 1, 0, 0);
 cmykcolor orange;
 orange = (0, .5, 1, 0);
 
-
+cmykcolor teal_blue;
+teal_blue = (1, .5, .5, 0);
 
 cmykcolor dark_blue;
 dark_blue = (1, 1, 0.5, 0);
@@ -330,7 +333,7 @@ beginfig(0);
     label.ulft(btex $p_{22}$ etex, z40);
     label.ulft(btex $p_{23}$ etex, z41);
     label.ulft(btex $p_{24}$ etex, z42 shifted (-.25cm, .125cm));
-    label.lrt(btex  $p_{25}$ etex, z43);
+    label.lrt(btex  $p_{25}$ etex, z43 shifted (-4pt, -2pt));
     label.lrt(btex  $p_{26}$ etex, z44);
 
   fi;
@@ -385,24 +388,90 @@ beginfig(0);
 
     for i = 40 upto 45:
       dotlabel.top(TEX("$d_{" & decimal i & "}$"), d[i]);
+      %label(TEX("$p_{" & decimal(30+i) & "}$"), d[30+i]);
+      label.bot(TEX("$p_{" & decimal i & "}$"), d[i]);
     endfor;
     
-  fi;
+    for i = 0 upto 5:
 
-  
+    endfor;
+
+  fi;
  
   v101 = currentpicture;
   currentpicture := nullpicture;
   
 %% *** (3)
 
+%% ** (2) Hexagon 3
+
+  t1 = identity shifted (z5 - z3);
+  
+
+  d60 = z10 transformed t1;
+  p60 = p21 transformed t1;
+  p66 = p6 transformed t1;
+
+
+  
+  d61 = z21 transformed t1;
+  p61 = p22 transformed t1;
+  p67 = p11 transformed t1;
+
+
+  
+
+  d62 = z29 transformed t1;
+  p62 = p23 transformed t1;
+  p68 = p12 transformed t1;
+
+  d63 = z30 transformed t1;
+  p63 = p24 transformed t1;
+  p69 = p13 transformed t1;
+
+  d64 = z31 transformed t1;
+  p64 = p25 transformed t1;
+  p70 = p14 transformed t1;
+  
+  d65 = z32 transformed t1;
+  p65 = p26 transformed t1;
+  p71 = p15 transformed t1;
+
+ 
+  for i = 60 upto 71:
+    draw p[i];
+  endfor;
+    
+  v2 = currentpicture;
+  currentpicture := nullpicture;
+  
+%% *** (3) Labels
+
+  for i = 60 upto 65:
+    dotlabel.top(TEX("$d_{" & decimal i & "}$"), d[i]);
+    label.bot(TEX("$p_{" & decimal (i + 6) & "}$"), d[i]);
+  endfor;
+  
+  v102 = currentpicture;
+  currentpicture := nullpicture;
+  
 %% ** (2)
 
   currentpicture := v0;
-  addto currentpicture also v100;
   addto currentpicture also v1;
+  addto currentpicture also v2;
+
+%% *** (3) Pictures with auxiliary lines and labels
+
+  addto currentpicture also v100;
   addto currentpicture also v101;
-    
+  addto currentpicture also v102;
+
+  label(btex {\Largebx 1} etex, origin);
+  label(btex {\Largebx 2} etex, origin transformed t0);
+  label(btex {\Largebx 3} etex, origin transformed t1);
+
+  
 %% ** (2) End of Fig. 0
     
 endfig;
@@ -415,9 +484,11 @@ beginfig(1);
 
   currentpicture := v0;
   addto currentpicture also v1;
+  addto currentpicture also v2;
   
   pickup medium_pen;
 
+  
   fill p21 withcolor dark_blue;
   unfill p6;
 
@@ -446,16 +517,20 @@ beginfig(1);
   fill p43 withcolor dark_blue;
   fill p45 withcolor orange;
 
-  do_labels := false; % true
-  
-  if do_labels:
-    for i = 0 upto 5:
-      label(TEX("$p_{" & decimal(30+i) & "}$"), d[30+i]);
-      label(TEX("$p_{" & decimal(40+i) & "}$"), d[40+i]);
-    endfor;
-  fi;
+%% ** (2) Hexagon 3
 
+  fill p60 withcolor teal_blue;
+  unfill p66;
 
+  fill p62 withcolor dark_blue;
+  unfill p68;
+
+  fill p64 withcolor dark_blue;
+  unfill p70;
+
+  fill p67 withcolor dark_blue;
+  fill p69 withcolor dark_blue;
+  fill p71 withcolor dark_blue;
   
   % draw p6;
   % draw p11;
