@@ -144,7 +144,7 @@ beginfig(0);
 
   p20 = p1 rotated 60;
 
-  drawarrow p20 withcolor (1, 0, 0, 0);
+  %drawarrow p20 withcolor (1, 0, 0, 0);
 
   p21 = p1 & reverse p0 .. reverse p20 & cycle;
 
@@ -445,7 +445,7 @@ beginfig(0);
   v2 = currentpicture;
   currentpicture := nullpicture;
   
-%% *** (3) Labels
+%% *** (3) Labels for hexagon 3
 
   for i = 60 upto 65:
     dotlabel.top(TEX("$d_{" & decimal i & "}$"), d[i]);
@@ -454,22 +454,58 @@ beginfig(0);
   
   v102 = currentpicture;
   currentpicture := nullpicture;
+
+%% ** (2) Hexagon 4
+
+  t4 = identity shifted (z0 - z4);
+
+  p80 = p21 transformed t4;
+  p81 = p6  transformed t4;
+  d80 = z10 transformed t4;
+
+  draw p80;
+  draw p81;
+
+  p82 = p22 transformed t4;
+  p83 = p11 transformed t4;
+  d82 = z21 transformed t4;
+
+  draw p82;
+  draw p83;
   
-%% ** (2)
+  v4 = currentpicture;
+  currentpicture := nullpicture;
+
+%% *** (3) Labels for hexagon 4
+
+  if do_labels:
+    dotlabel.top(btex $d_{80}$ etex, d80);
+    dotlabel.top(btex $d_{82}$ etex, d82);
+  fi;
+
+  v104 = currentpicture;
+  currentpicture := nullpicture;
+  
+  
+%% ** (2) Combine path pictures
 
   currentpicture := v0;
   addto currentpicture also v1;
   addto currentpicture also v2;
 
-%% *** (3) Pictures with auxiliary lines and labels
+  addto currentpicture also v4;
+
+%% *** (3) Combine pictures with auxiliary lines and labels
 
   addto currentpicture also v100;
   addto currentpicture also v101;
   addto currentpicture also v102;
+  addto currentpicture also v104;
 
   label(btex {\Largebx 1} etex, origin);
   label(btex {\Largebx 2} etex, origin transformed t0);
   label(btex {\Largebx 3} etex, origin transformed t1);
+  label(btex {\Largebx 4} etex, origin transformed t4);
 
   
 %% ** (2) End of Fig. 0
@@ -487,50 +523,49 @@ beginfig(1);
   addto currentpicture also v2;
   
   pickup medium_pen;
-
   
-  fill p21 withcolor dark_blue;
-  unfill p6;
+  filldraw p21 withcolor dark_blue;
+  unfilldraw p6;
 
-  fill p11 withcolor dark_blue;
+  filldraw p11 withcolor dark_blue;
 
-  fill p23 withcolor dark_blue;
-  unfill p12;
+  filldraw p23 withcolor dark_blue;
+  unfilldraw p12;
 
-  fill p25 withcolor dark_blue;
-  unfill p14;
+  filldraw p25 withcolor dark_blue;
+  unfilldraw p14;
 
-  fill p13 withcolor orange;
+  filldraw p13 withcolor orange;
 
-  fill p15 withcolor dark_blue;
+  filldraw p15 withcolor dark_blue;
 
-  fill p30 withcolor dark_blue;
-  unfill p40;
+  filldraw p30 withcolor dark_blue;
+  unfilldraw p40;
 
-  fill p32 withcolor dark_blue;
-  unfill p42;
+  filldraw p32 withcolor dark_blue;
+  unfilldraw p42;
 
-  fill p34 withcolor dark_blue;
-  unfill p44;
+  filldraw p34 withcolor dark_blue;
+  unfilldraw p44;
   
-  fill p41 withcolor orange;
-  fill p43 withcolor dark_blue;
-  fill p45 withcolor orange;
+  filldraw p41 withcolor orange;
+  filldraw p43 withcolor dark_blue;
+  filldraw p45 withcolor orange;
 
 %% ** (2) Hexagon 3
 
-  fill p60 withcolor teal_blue;
-  unfill p66;
+  filldraw p60 withcolor teal_blue;
+  unfilldraw p66;
 
-  fill p62 withcolor dark_blue;
-  unfill p68;
+  filldraw p62 withcolor dark_blue;
+  unfilldraw p68;
 
-  fill p64 withcolor dark_blue;
-  unfill p70;
+  filldraw p64 withcolor dark_blue;
+  unfilldraw p70;
 
-  fill p67 withcolor dark_blue;
-  fill p69 withcolor dark_blue;
-  fill p71 withcolor dark_blue;
+  filldraw p67 withcolor dark_blue;
+  filldraw p69 withcolor dark_blue;
+  filldraw p71 withcolor dark_blue;
   
   % draw p6;
   % draw p11;
