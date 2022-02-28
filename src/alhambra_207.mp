@@ -57,8 +57,11 @@ verbatimtex \font\Largebx=cmbx17 scaled 1250 etex;
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
+pen small_pen;
+small_pen = pencircle scaled .25mm;
+
 pen medium_pen;
-medium_pen = pencircle scaled .25mm;
+medium_pen = pencircle scaled .5mm;
 
 pen big_pen;
 big_pen = pencircle scaled .75mm;
@@ -718,76 +721,122 @@ beginfig(1);
 
 endfig;
 
+%% * (1) Macro generate_pattern
+
+def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single,
+                      ddo_labels)
+  (suffix top_left, bot_left, top_right, bot_right) =
+
+%% ** (2)
+
+  begingroup;
+
+  save A, W, T, j;
+  
+  pair A[];
+  picture W[];
+  transform T[];
+
+  for i = 21 upto 26:
+    draw p[i] scaled scale_val withpen pencircle scaled pen_wd_outer;
+  endfor;
+
+  for i = 21 upto 26:
+    undraw p[i] scaled scale_val withpen pencircle scaled pen_wd_inner;
+  endfor;
+
+  draw p6 scaled scale_val withpen pencircle scaled pen_wd_single;
+
+  for i = 11 upto 15:
+    draw p[i] scaled scale_val withpen pencircle scaled pen_wd_single;
+  endfor;
+  
+  W0 = currentpicture;
+  
+  for i = 0 upto 5:
+    A[i] = Z[i] scaled scale_val;
+  endfor;
+
+  T0 = identity shifted (A0 - A2);
+  
+  for i = 6 upto 11:
+    A[i] = (Z[i-6] scaled scale_val) transformed T0;
+  endfor;
+  
+  W1 = W0 transformed T0;
+
+  addto currentpicture also W1;
+
+  W2 = currentpicture;
+
+  T1 = identity shifted (A7 - A3);
+  
+  numeric j;
+  j = horiz_ctr - 1;
+
+  W3 = W2;
+
+  for i = 1 upto j:
+    W3 := W3 transformed T1;
+    draw W3;
+  endfor;
+
+  W4 = currentpicture;
+
+  T2 = identity shifted (A4 - A2);
+
+  j := vert_ctr - 1;
+
+  W5 = W4;
+
+  for i = 1 upto j:
+    W4 := W4 transformed T2;
+    draw W4;
+    %% 
+    % if odd i:
+    %   draw W4 withcolor blue;
+    % else:
+    %   draw W4 withcolor red;
+    % fi;
+    %%
+  endfor;
+
+%% ** (2)
+
+
+%% ** (2)
+  
+  if ddo_labels:
+    dotlabel.top(btex $A_0$ etex, A0);
+    dotlabel.top(btex $A_1$ etex, A1);
+    dotlabel.top(btex $A_2$ etex, A2);
+    dotlabel.lft(btex $A_3$ etex, A3);
+    dotlabel.lft(btex $A_4$ etex, A4);
+    dotlabel.rt(btex $A_5$ etex, A5);
+    dotlabel.top(btex $A_6$ etex, A6);
+    dotlabel.top(btex $A_7$ etex, A7);
+    %dotlabel.top(btex $A_8$ etex, A8);
+    %dotlabel.top(btex $A_9$ etex, A9);
+    dotlabel.lft(btex $A_{10}$ etex, A10);
+    dotlabel.rt(btex $A_{11}$ etex, A11);
+  fi;
+  
+endgroup;
+
+%% ** (2)
+
+enddef;
+
+
 %% * (1) Fig. 2
 
 beginfig(2);
 
-  draw v1;
-  draw v2;
+%% Arguments to generate_pattern:
+%% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, ddo_labels)
+%% (suffix top_left, bot_left, top_right, bot_right)
 
-  draw v1 transformed t3;
-  draw v2 transformed t3;
-
-
-  w0 = currentpicture;
-  w1 = currentpicture;
-  
-  for i = 0 upto 1:
-    w1 := w1 shifted (d96 - Z3);
-    draw w1;
-  endfor;
-
-  w2 = currentpicture;
-  w3 = currentpicture;
-
-  transform u[];
-
-  u0 = (identity shifted (Z4 - Z2)) transformed t2;
-  
-  for i = 0 upto 1:
-    w3 := w3 transformed u0;
-    draw w3;
-  endfor;
-  
-  draw Z29 -- d88 withpen big_pen;
-  draw (Z29 -- d88) transformed t4 withpen big_pen;
-
-  draw Z29 -- Z29 shifted (0, -10cm)  withpen big_pen;
-  
-%% ** (2) End of Fig. 2
-
-endfig;
-
-
-%% * (1) Fig. 3
-
-def generate_pattern (expr scale_val) =
-
-  begingroup;
-
-    pair A[];
-
-    picture w[];
-    
-    w10 = v1 scaled scale_val;
-    draw w10;
-  
-    for i = 0 upto 5:
-      A[i] = Z[i] scaled scale_val;
-      dotlabel.top(TEX("$A_{" & decimal i & "}$"), A[i]);
-    endfor;
-
-    draw w10 shifted (A0 - A2);
-
-  endgroup;
-  
-enddef;
-
-
-beginfig(3);
-
-  generate_pattern (1.25);
-  
+  generate_pattern (1, 3, 4, 1.5, .5, .5, true, 0, 0, 0, 0)  
 endfig;
 
 %% ** (2) End of Fig. 3
