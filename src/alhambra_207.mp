@@ -724,16 +724,17 @@ endfig;
 %% * (1) Macro generate_pattern
 
 def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single,
-                      ddo_labels)
+                      pen_wd_rectangle, ddo_clip, ddo_labels)
   (suffix top_left, bot_left, top_right, bot_right) =
 
 %% ** (2)
 
   begingroup;
 
-  save A, W, T, j;
+  save A, P, W, T, j;
   
   pair A[];
+  path P[];
   picture W[];
   transform T[];
 
@@ -776,9 +777,19 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
 
   W3 = W2;
 
+  A20 = Z21 scaled scale_val;
+  A21 = Z32 scaled scale_val;
+  A22 = Z29 scaled scale_val;
+  A23 = Z31 scaled scale_val;
+
+  A24 = A23;
+  A25 = A4;
+
+
   for i = 1 upto j:
     W3 := W3 transformed T1;
     draw W3;
+    A24 := A24 transformed T1;
   endfor;
 
   W4 = currentpicture;
@@ -792,6 +803,7 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
   for i = 1 upto j:
     W4 := W4 transformed T2;
     draw W4;
+    A25 := A25 transformed T2;
     %% 
     % if odd i:
     %   draw W4 withcolor blue;
@@ -801,9 +813,24 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
     %%
   endfor;
 
-%% ** (2)
+  A26 = 1.5[A24, A24 shifted (A23 - A22)];
+  
+  A27 = (xpart A26, ypart A25);
+
+  A28 = (xpart A22, ypart A0);
+  A29 = (xpart A26, ypart A0);
+  
+  P0 =A28 -- A29 -- A27 -- A25 -- cycle;
 
 
+  
+
+  if ddo_clip:
+    clip currentpicture to P0;
+  fi;
+
+  draw P0 withpen pencircle scaled pen_wd_rectangle;
+      
 %% ** (2)
   
   if ddo_labels:
@@ -819,7 +846,20 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
     %dotlabel.top(btex $A_9$ etex, A9);
     dotlabel.lft(btex $A_{10}$ etex, A10);
     dotlabel.rt(btex $A_{11}$ etex, A11);
+
+    dotlabel.top(btex $A_{20}$ etex, A20);
+    dotlabel.top(btex $A_{21}$ etex, A21);
+    dotlabel.top(btex $A_{22}$ etex, A22);
+    dotlabel.top(btex $A_{23}$ etex, A23);
+    dotlabel.top(btex $A_{24}$ etex, A24);
+    dotlabel.top(btex $A_{25}$ etex, A25);
+    dotlabel.top(btex $A_{26}$ etex, A26);
+    dotlabel.top(btex $A_{27}$ etex, A27);
+    dotlabel.top(btex $A_{28}$ etex, A28);
+    dotlabel.top(btex $A_{29}$ etex, A29);
   fi;
+
+  
   
 endgroup;
 
@@ -833,10 +873,11 @@ enddef;
 beginfig(2);
 
 %% Arguments to generate_pattern:
-%% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, ddo_labels)
+%% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
+%%       ddo_clip, ddo_labels)
 %% (suffix top_left, bot_left, top_right, bot_right)
 
-  generate_pattern (1, 3, 4, 1.5, .5, .5, true, 0, 0, 0, 0)  
+  generate_pattern (2.25, 2, 3, 1.5mm, .5mm, .5mm, 1mm, false, false, 0, 0, 0, 0)  
 endfig;
 
 %% ** (2) End of Fig. 3
