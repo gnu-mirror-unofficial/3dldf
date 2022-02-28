@@ -239,7 +239,8 @@ beginfig(0);
   Z27 = (Z18 -- Z20) intersectionpoint (Z19 -- Z15);
 
   
-  p11 = (((Z15 -- Z22 -- Z20 -- Z27 -- Z19 -- Z26 -- Z18 -- Z25 -- Z17 -- Z24 -- Z16 -- Z23 -- cycle) shifted -Z21)
+  p11 = (((Z15 -- Z22 -- Z20 -- Z27 -- Z19 -- Z26 -- Z18 -- Z25 -- Z17
+	  -- Z24 -- Z16 -- Z23 -- cycle) shifted -Z21)
            scaled 1) shifted Z21;
 
   draw p11; % withcolor orange;
@@ -754,6 +755,29 @@ beginfig(2);
 %% ** (2) End of Fig. 2
 
 endfig;
+
+
+%% * (1) Fig. 3
+
+beginfig(3);
+
+  pair A[];
+  
+  w10 = v1 scaled 1.5;
+  draw w10;
+  
+  for i = 0 upto 5:
+    A[i] = Z[i] scaled 1.5;
+    dotlabel.top(TEX("$A_{" & decimal i & "}$"), A[i]);
+  endfor;
+
+  draw w10 shifted (A0 - A2);
+  
+  
+endfig;
+
+%% ** (2) End of Fig. 3
+
 
 
 %% * (1)
