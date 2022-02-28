@@ -1825,6 +1825,19 @@ dodec_04.pdf: dodec_04.dvi
 dodec_04.ps: dodec_04.dvi
 	dvips -o dodec_04.ps dodec_04.dvi
 
+.PHONY: alho
+
+alho: alhambra_207_original.pdf
+
+alhambra_207_original.pdf: alhambra_207_original.ps
+	ps2pdf alhambra_207_original.ps
+
+alhambra_207_original.ps: alhambra_207_original.dvi
+	dvips -o alhambra_207_original.ps alhambra_207_original.dvi
+
+alhambra_207_original.dvi: alhambra_207_original.tex alhambra_207_original.eps
+	tex alhambra_207_original.tex
+
 .PHONY: purge-s
 
 purge-s:

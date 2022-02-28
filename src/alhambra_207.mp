@@ -286,7 +286,7 @@ beginfig(0);
     
     dotlabel.rt(btex $z_0$ etex, z0);
     dotlabel.urt(btex $z_1$ etex, z1);
-    dotlabel.ulft(btex $z_2$ etex, z2);
+    dotlabel.ulft(btex $z_2$ et<ex, z2);
     dotlabel.lft(btex $z_3$ etex, z3);
     dotlabel.llft(btex $z_4$ etex, z4);
     dotlabel.lrt(btex $z_5$ etex, z5);
@@ -457,7 +457,6 @@ beginfig(0);
 
 %% ** (2) Hexagon 4
 
-%% REDO
   
 %% *** (3)
   
