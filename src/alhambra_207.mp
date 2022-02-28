@@ -58,7 +58,10 @@ prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
 pen medium_pen;
-medium_pen := pencircle scaled .25mm;
+medium_pen = pencircle scaled .25mm;
+
+pen big_pen;
+big_pen = pencircle scaled .75mm;
 
 pen dot_pen;
 dot_pen = pencircle scaled 3pt;
@@ -101,6 +104,9 @@ dark_blue = (1, 1, 0.5, 0);
 
 cmykcolor mauve;
 mauve = (.5, 1, .5, 0);
+
+cmykcolor dark_olive_green;
+dark_olive_green = (0, 0, 1, .75);
 
 path p[];
 
@@ -279,14 +285,12 @@ beginfig(0);
 
 %% ** (2) Labels
   
-  
-  
   if do_labels:
     %dotlabel.bot("origin", origin);
     
     dotlabel.rt(btex $z_0$ etex, z0);
     dotlabel.urt(btex $z_1$ etex, z1);
-    dotlabel.ulft(btex $z_2$ et<ex, z2);
+    dotlabel.ulft(btex $z_2$ etex, z2);
     dotlabel.lft(btex $z_3$ etex, z3);
     dotlabel.llft(btex $z_4$ etex, z4);
     dotlabel.lrt(btex $z_5$ etex, z5);
@@ -456,75 +460,71 @@ beginfig(0);
   currentpicture := nullpicture;
 
 %% ** (2) Hexagon 4
-
-  
-%% *** (3)
-  
-  % t4 = identity shifted (z0 - z4);
-
-  % p80 = p21 transformed t4;
-  % p81 = p6  transformed t4;
-  % d80 = z10 transformed t4;
-
-  % draw p80;
-  % draw p81;
-
-  % p82 = p22 transformed t4;
-  % p83 = p11 transformed t4;
-  % d82 = z21 transformed t4;
-
-  % draw p82;
-  % draw p83;
-
-  % p84 = p23 transformed t4;
-  % p85 = p12 transformed t4;
-  % d84 = z29 transformed t4;
-
-  % draw p84;
-  % draw p85;
-
-  % p86 = p24 transformed t4;
-  % p87 = p13 transformed t4;
-  % d86 = z30 transformed t4;
-
-  % draw p86;
-  % draw p87;
-
-  % p88 = p25 transformed t4;
-  % p89 = p14 transformed t4;
-  % d88 = z31 transformed t4;
-
-  % draw p88;
-  % draw p89;
-
-  % p90 = p26 transformed t4;
-  % p91 = p15 transformed t4;
-  % d90 = z32 transformed t4;
-
-  % draw p90;
-  % draw p91;
-
-  
   
 %% *** (3)
 
+  d96 = point 4 of p60;
 
-  
+  t4 = identity shifted (d96 - z3);
+
+  p80 = p21 transformed t4;
+  p81 = p6  transformed t4;
+  d80 = z10 transformed t4;
+
+  draw p80;
+  draw p81;
+
+  p82 = p22 transformed t4;
+  p83 = p11 transformed t4;
+  d82 = z21 transformed t4;
+
+  draw p82;
+  draw p83;
+
+  p84 = p23 transformed t4;
+  p85 = p12 transformed t4;
+  d84 = z29 transformed t4;
+
+  draw p84;
+  draw p85;
+
+  p86 = p24 transformed t4;
+  p87 = p13 transformed t4;
+  d86 = z30 transformed t4;
+
+  draw p86;
+  draw p87;
+
+  p88 = p25 transformed t4;
+  p89 = p14 transformed t4;
+  d88 = z31 transformed t4;
+
+  draw p88;
+  draw p89;
+
+  p90 = p26 transformed t4;
+  p91 = p15 transformed t4;
+  d90 = z32 transformed t4;
+
+  draw p90;
+  draw p91;
+
 %% *** (3)
-  
+
   v4 = currentpicture;
   currentpicture := nullpicture;
 
 %% *** (3) Labels for hexagon 4
 
-  % if do_labels:
-  %   dotlabel.top(btex $d_{80}$ etex, d80);
-  %   dotlabel.top(btex $d_{82}$ etex, d82);
-  %   dotlabel.top(btex $d_{84}$ etex, d84);
-  %   dotlabel.top(btex $d_{86}$ etex, d86);
-  %   dotlabel.top(btex $d_{88}$ etex, d88);
-  %   dotlabel.top(btex $d_{90}$ etex, d90);
-  % fi;
+  if do_labels:
+    dotlabel.bot(btex $d_{96}$ etex, d96);
+    dotlabel.top(btex $d_{80}$ etex, d80);
+    dotlabel.top(btex $d_{82}$ etex, d82);
+    dotlabel.top(btex $d_{84}$ etex, d84);
+    dotlabel.top(btex $d_{86}$ etex, d86);
+    dotlabel.top(btex $d_{88}$ etex, d88);
+    dotlabel.top(btex $d_{90}$ etex, d90);
+  fi;
 
   v104 = currentpicture;
   currentpicture := nullpicture;
@@ -533,8 +533,6 @@ beginfig(0);
 %% ** (2) Hexagon 5
 
   d95 = point 4 of p63;
-
-
   
   t5 = identity shifted (d95 - z2);
 
@@ -551,8 +549,6 @@ beginfig(0);
 
   draw p102;
   draw p103;
-
-
   
   v5 = currentpicture;
   currentpicture := nullpicture;
@@ -592,13 +588,32 @@ beginfig(0);
   label(btex {\Largebx 1} etex, origin);
   label(btex {\Largebx 2} etex, origin transformed t2);
   label(btex {\Largebx 3} etex, origin transformed t3);
+  label(btex {\Largebx 4} etex, origin transformed t4);
+  label(btex {\Largebx 5} etex, origin transformed t5);
+  
+%% ** (2) Heavy border lines
 
-  %% REDO!
+  pickup big_pen;
 
+  path q[];
 
-  %label(btex {\Largebx 4} etex, origin transformed t4);
+  q0 = p0;
+  draw q0;
+  q0 := q0 rotatedaround (z1, 120);
+  draw q0;
+  q0 := q0 rotatedaround (z0, -120);
+  draw q0;
+
+  q1 := q0 rotatedaround (d96, 120);
+  q0 := q0 rotatedaround (d96, -120);
+
+  draw q0;
+  
 
   
+  draw q1 withcolor blue;
+
+
 %% ** (2) End of Fig. 0
     
 endfig;
@@ -620,7 +635,7 @@ beginfig(1);
   filldraw p21 withcolor dark_blue;
   unfilldraw p6;
 
-  filldraw p11 withcolor dark_blue;
+  filldraw p11 withcolor dark_olive_green;
 
   filldraw p23 withcolor dark_blue;
   unfilldraw p12;
@@ -630,7 +645,7 @@ beginfig(1);
 
   filldraw p13 withcolor orange;
 
-  filldraw p15 withcolor dark_blue;
+  filldraw p15 withcolor dark_olive_green;
 
   filldraw p30 withcolor dark_blue;
   unfilldraw p40;
@@ -656,38 +671,28 @@ beginfig(1);
   filldraw p64 withcolor dark_blue;
   unfilldraw p70;
 
-  filldraw p67 withcolor dark_blue;
-  filldraw p69 withcolor dark_blue;
-  filldraw p71 withcolor dark_blue;
+  filldraw p67 withcolor dark_olive_green;
+  filldraw p69 withcolor dark_olive_green;
+  filldraw p71 withcolor dark_olive_green;
 
 
 % %% *** (3) Hexagon 4
 
-%% REDO!
+  filldraw p80 withcolor dark_blue;
+  unfilldraw p81;
+
+  filldraw p83 withcolor dark_olive_green;
+
+  filldraw p84 withcolor dark_blue;
+  unfilldraw p85;
+
+  filldraw p87 withcolor orange;
+
+  filldraw p88 withcolor dark_blue;
+  unfilldraw p89;
+
+  filldraw p91 withcolor dark_olive_green;
   
-%   filldraw p80 withcolor dark_blue;
-%   unfilldraw p81;
-
-%   filldraw p83 withcolor dark_blue;
-
-%   filldraw p84 withcolor dark_blue;
-%   unfilldraw p85;
-
-%   filldraw p87 withcolor orange;
-
-%   filldraw p88 withcolor dark_blue;
-%   unfilldraw p89;
-
-%   filldraw p91 withcolor dark_blue;
-  
-  % draw p6;
-  % draw p11;
-  % draw p12;
-  % draw p13;
-  % draw p14;
-  % draw p15;
-
-
 %% ** (2) Hexagon 5
 
   filldraw p100 withcolor dark_blue;

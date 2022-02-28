@@ -1771,6 +1771,21 @@ alhambra_207.dvi: alhambra_207.txt alhambra_207_000.eps
 alhambra_207_000.eps: alhambra_207.mp
 	mpost alhambra_207.mp
 
+cmyk_test.mp: cmyk_test.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) cmyk_test.ldf
+
+cmyk_test.0: cmyk_test.mp
+	mpost cmyk_test.mp
+
+cmyk_test.dvi: cmyk_test.txt cmyk_test.0
+	tex cmyk_test.txt
+
+cmyk_test.pdf: cmyk_test.ps
+	ps2pdf cmyk_test.ps
+
+cmyk_test.ps: cmyk_test.dvi
+	dvips -o cmyk_test.ps cmyk_test.dvi
+
 atemp0.eps atemp1.eps: atemp.mp
 	mpost -numbersystem "double" atemp.mp
 
