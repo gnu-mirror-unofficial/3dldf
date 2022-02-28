@@ -109,6 +109,7 @@ cmykcolor dark_olive_green;
 dark_olive_green = (0, 0, 1, .75);
 
 path p[];
+path q[];
 
 transform t[];
 
@@ -123,7 +124,7 @@ beginfig(0);
   pickup medium_pen;
   path hex[];
 
-  undraw frame;
+  %undraw frame;
   
   %draw fullcircle scaled 4cm;
   
@@ -413,7 +414,6 @@ beginfig(0);
 %% ** (2) Hexagon 3
 
   t3 = identity shifted (z5 - z3);
-  
 
   d60 = z10 transformed t3;
   p60 = p21 transformed t3;
@@ -533,9 +533,8 @@ beginfig(0);
 %% ** (2) Hexagon 5
 
   d95 = point 4 of p63;
-  
   t5 = identity shifted (d95 - z2);
-
+  
   d100 = z10 transformed t5;
   p100 = p21 transformed t5;
   p101 = p6 transformed t5;
@@ -549,6 +548,14 @@ beginfig(0);
 
   draw p102;
   draw p103;
+
+  d104 = z29 transformed t5;
+  p104 = p23 transformed t5;
+  p105 = p12 transformed t5;
+
+  draw p104;
+  draw p105;
+
   
   v5 = currentpicture;
   currentpicture := nullpicture;
@@ -559,6 +566,7 @@ beginfig(0);
     label.top(btex $d_{95}$ etex, d95 shifted (2pt, 0pt));
     dotlabel.bot(btex $d_{100}$ etex, d100);
     dotlabel.bot(btex $d_{102}$ etex, d102);
+    dotlabel.bot(btex $d_{104}$ etex, d104);
   fi;
 
   v105 = currentpicture;
@@ -595,23 +603,16 @@ beginfig(0);
 
   pickup big_pen;
 
-  path q[];
+  t1 = identity;
 
-  q0 = p0;
-  draw q0;
-  q0 := q0 rotatedaround (z1, 120);
-  draw q0;
-  q0 := q0 rotatedaround (z0, -120);
-  draw q0;
-
-  q1 := q0 rotatedaround (d96, 120);
-  q0 := q0 rotatedaround (d96, -120);
-
-  draw q0;
-  
-
-  
-  draw q1 withcolor blue;
+  i = 1;
+  forever:
+    exitunless known t[i];
+    for j = 0 upto 5:
+      draw (p0 transformed t[i]) rotatedaround (origin transformed t[i], 60j);
+    endfor;
+    i := incr i;
+  endfor;
 
 
 %% ** (2) End of Fig. 0
@@ -624,13 +625,15 @@ beginfig(1);
 
 %% ** (2)
 
+  pickup medium_pen;
+  
   currentpicture := v0;
   addto currentpicture also v2;
   addto currentpicture also v3;
   addto currentpicture also v4;
   addto currentpicture also v5;
   
-  pickup medium_pen;
+
   
   filldraw p21 withcolor dark_blue;
   unfilldraw p6;
@@ -700,6 +703,9 @@ beginfig(1);
 
   fill p103 withcolor orange;
 
+  filldraw p104 withcolor dark_blue;
+  unfilldraw p105;
+  
 %% *** (3)
   
 %% ** (2) End of Fig. 1
