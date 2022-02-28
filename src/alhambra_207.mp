@@ -328,9 +328,11 @@ beginfig(0);
     dotlabel.bot(btex $Z_{30}$ etex, Z30);
     dotlabel.bot(btex $Z_{31}$ etex, Z31);
     dotlabel.bot(btex $Z_{32}$ etex, Z32);
-    dotlabel.llft(btex $Z_{40}$ etex, Z40);
+    label.llft(btex $Z_{40}$ etex, Z40 shifted (-.5cm, 0)) withcolor red;
+    drawdot Z40 withpen dot_pen scaled 1.5 withcolor red;
     dotlabel.llft(btex $Z_{41}$ etex, Z41);
-    dotlabel.rt(btex $Z_{42}$ etex, Z42 shifted (4pt, 2pt));
+    label.rt(btex $Z_{42}$ etex, Z42 shifted (4pt, 2pt));
+    drawdot Z42 withpen dot_pen;
     dotlabel.urt(btex $Z_{43}$ etex, Z43);
     dotlabel.urt(btex $Z_{44}$ etex, Z44);
     
@@ -759,20 +761,32 @@ endfig;
 
 %% * (1) Fig. 3
 
+def generate_pattern (expr scale_val) =
+
+  begingroup;
+
+    pair A[];
+
+    picture w[];
+    
+    w10 = v1 scaled scale_val;
+    draw w10;
+  
+    for i = 0 upto 5:
+      A[i] = Z[i] scaled scale_val;
+      dotlabel.top(TEX("$A_{" & decimal i & "}$"), A[i]);
+    endfor;
+
+    draw w10 shifted (A0 - A2);
+
+  endgroup;
+  
+enddef;
+
+
 beginfig(3);
 
-  pair A[];
-  
-  w10 = v1 scaled 1.5;
-  draw w10;
-  
-  for i = 0 upto 5:
-    A[i] = Z[i] scaled 1.5;
-    dotlabel.top(TEX("$A_{" & decimal i & "}$"), A[i]);
-  endfor;
-
-  draw w10 shifted (A0 - A2);
-  
+  generate_pattern (1.25);
   
 endfig;
 
