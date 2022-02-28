@@ -89,6 +89,7 @@ boolean do_labels;
 do_labels = true; % false
 
 picture v[];
+picture w[];
 
 cmykcolor magenta;
 magenta = (0, 1, 0, 0);
@@ -114,6 +115,7 @@ path q[];
 transform t[];
 
 pair d[];
+pair Z[];
 
 %% * (1)
 
@@ -129,20 +131,20 @@ beginfig(0);
   %draw fullcircle scaled 4cm;
   
   for i = 0 upto 5:
-    z[i] = (2cm, 0) rotated (i*60);
+    Z[i] = (2cm, 0) rotated (i*60);
   endfor;
 
   j = 0;
   m = 1;
   k = .125cm;
   for i = .25 step .25 until .75:
-    z[6+j] = i[z2, z1] shifted (0, k*m);
+    Z[6+j] = i[Z2, Z1] shifted (0, k*m);
     j := incr j;
     m := decr m;
   endfor;
 
-  p0 = z2 .. {dir 0}z6{dir 0} .. z7 .. {dir 0}z8{dir 0} .. z1;
-  p1 = p0 rotatedaround (z1, 60);
+  p0 = Z2 .. {dir 0}Z6{dir 0} .. Z7 .. {dir 0}Z8{dir 0} .. Z1;
+  p1 = p0 rotatedaround (Z1, 60);
 
   % drawarrow p0 withcolor blue;
   % drawarrow p1 withcolor green;
@@ -158,115 +160,115 @@ beginfig(0);
 
   p21 = p1 & reverse p0 .. reverse p20 & cycle;
 
-  draw p21 withcolor magenta;
+  draw p21; % withcolor magenta;
 
   for i = 1 upto 5:
     p[21+i]  = p21 rotated 60i;
-    z[39+i]  = z7  rotated 60i;
+    Z[39+i]  = Z7  rotated 60i;
   endfor;
   
   %fill p21 withcolor blue;
 
   
-  p2 = origin -- z7;
+  p2 = origin -- Z7;
 
 
-  z9 = .5[origin, z1];
+  Z9 = .5[origin, Z1];
   
-  p3 = z2 -- z9;
+  p3 = Z2 -- Z9;
 
-  z10 = p2 intersectionpoint p3;
-
-
-  z11 = z9 reflectedabout (z7, z10);
+  Z10 = p2 intersectionpoint p3;
 
 
-  p4 = (fullcircle scaled (2*(y7 - y10)) scaled 1) shifted z10;
+  Z11 = Z9 reflectedabout (Z7, Z10);
 
-  p5 = z7 -- z9 -- z11 -- cycle;
 
-  z12 = z7 rotatedaround (z10, 180);
+  p4 = (fullcircle scaled (2*(ypart Z7 - ypart Z10)) scaled 1) shifted Z10;
 
-  z13 = z11 rotatedaround (z10, 180);
+  p5 = Z7 -- Z9 -- Z11 -- cycle;
 
-  z14 = z9 rotatedaround (z10, 180);
+  Z12 = Z7 rotatedaround (Z10, 180);
 
-  p6 = ((((z7 -- z14 -- z11 -- z12 -- z9 -- z13 -- cycle) shifted -z10) scaled .9)
-      rotated 30) shifted z10;
+  Z13 = Z11 rotatedaround (Z10, 180);
+
+  Z14 = Z9 rotatedaround (Z10, 180);
+
+  p6 = ((((Z7 -- Z14 -- Z11 -- Z12 -- Z9 -- Z13 -- cycle) shifted -Z10) scaled .9)
+      rotated 30) shifted Z10;
  
 
   %unfill p6;
 
 
-  draw p6 withcolor red;
+  draw p6; % withcolor red;
 
   
-  z21 = z10 rotated 60;
+  Z21 = Z10 rotated 60;
 
 
-  p7 = fullcircle scaled (2*(y7 - y10)) shifted z21;
+  p7 = fullcircle scaled (2*(ypart Z7 - ypart Z10)) shifted Z21;
 
-  p8 = (p6 rotated 60) rotatedaround (z21, 0);
+  p8 = (p6 rotated 60) rotatedaround (Z21, 0);
   
   %draw p8 withcolor blue;
 
   for i = 0 upto 5:
-    z[15+i] = point i of p8;
+    Z[15+i] = point i of p8;
   endfor;
 
-  p9 = z20 -- z16 -- z18 -- cycle;
+  p9 = Z20 -- Z16 -- Z18 -- cycle;
   %draw p9 withcolor blue;
 
-  p10 = z15 -- z17 -- z19 -- cycle;
+  p10 = Z15 -- Z17 -- Z19 -- cycle;
   %draw p10 withcolor green;
 
-  z22 = (z20 -- z16) intersectionpoint (z15 -- z19);
+  Z22 = (Z20 -- Z16) intersectionpoint (Z15 -- Z19);
 
-  z23 = (z20 -- z16) intersectionpoint (z15 -- z17);
-
-
-  z24 = (z18 -- z16) intersectionpoint (z15 -- z17);
+  Z23 = (Z20 -- Z16) intersectionpoint (Z15 -- Z17);
 
 
-  z25 = (z18 -- z16) intersectionpoint (z19 -- z17);
+  Z24 = (Z18 -- Z16) intersectionpoint (Z15 -- Z17);
 
 
-  z26 = (z18 -- z20) intersectionpoint (z19 -- z17);
+  Z25 = (Z18 -- Z16) intersectionpoint (Z19 -- Z17);
 
 
-  z27 = (z18 -- z20) intersectionpoint (z19 -- z15);
+  Z26 = (Z18 -- Z20) intersectionpoint (Z19 -- Z17);
+
+
+  Z27 = (Z18 -- Z20) intersectionpoint (Z19 -- Z15);
 
   
-  p11 = (((z15 -- z22 -- z20 -- z27 -- z19 -- z26 -- z18 -- z25 -- z17 -- z24 -- z16 -- z23 -- cycle) shifted -z21)
-           scaled 1) shifted z21;
+  p11 = (((Z15 -- Z22 -- Z20 -- Z27 -- Z19 -- Z26 -- Z18 -- Z25 -- Z17 -- Z24 -- Z16 -- Z23 -- cycle) shifted -Z21)
+           scaled 1) shifted Z21;
 
-  draw p11 withcolor orange;
+  draw p11; % withcolor orange;
 
-  z28 = z10 rotated 60;
+  Z28 = Z10 rotated 60;
 
 
   j := 1;
   for i = 0 step 2 until 4:
     p[12+i]   = p6  rotated 120j;
     p[12+i+1] = p11 rotated 120j;
-    z[29+i]   = z10 rotated 120j;
-    z[29+i+1] = z28 rotated 120j;
+    Z[29+i]   = Z10 rotated 120j;
+    Z[29+i+1] = Z28 rotated 120j;
     j := incr j;  
   endfor;
 
-  draw p12 withcolor red;
+  draw p12; % withcolor red;
 
-  draw p13 withcolor orange;
+  draw p13; % withcolor orange;
 
-  draw p14 withcolor red;
+  draw p14; % withcolor red;
 
-  draw p15 withcolor orange;
+  draw p15; %  withcolor orange;
 
-  d2 = z2;
-  d4 = z4;
-  d10 = z10;
+  d2 = Z2;
+  d4 = Z4;
+  d10 = Z10;
 
-  v0 = currentpicture;
+  v1 = currentpicture;
   currentpicture := nullpicture;
   
   
@@ -278,9 +280,9 @@ beginfig(0);
     draw p4 withcolor gray;
     draw p5 withcolor gray;
     draw p7 withcolor gray;
-    draw z0 -- z1 -- z2 -- z3 -- z4 -- z5 -- cycle withcolor gray;
+    draw Z0 -- Z1 -- Z2 -- Z3 -- Z4 -- Z5 -- cycle withcolor gray;
     for i = 0 upto 5:
-      draw origin -- z[i] withcolor gray;
+      draw origin -- Z[i] withcolor gray;
     endfor;
   fi;
 
@@ -289,60 +291,60 @@ beginfig(0);
   if do_labels:
     %dotlabel.bot("origin", origin);
     
-    dotlabel.rt(btex $z_0$ etex, z0);
-    dotlabel.urt(btex $z_1$ etex, z1);
-    dotlabel.ulft(btex $z_2$ etex, z2);
-    dotlabel.lft(btex $z_3$ etex, z3);
-    dotlabel.llft(btex $z_4$ etex, z4);
-    dotlabel.lrt(btex $z_5$ etex, z5);
+    dotlabel.rt(btex $Z_0$ etex, Z0);
+    dotlabel.urt(btex $Z_1$ etex, Z1);
+    dotlabel.ulft(btex $Z_2$ etex, Z2);
+    dotlabel.lft(btex $Z_3$ etex, Z3);
+    dotlabel.llft(btex $Z_4$ etex, Z4);
+    dotlabel.lrt(btex $Z_5$ etex, Z5);
 
-    dotlabel.top(btex $z_6$ etex, z6);
-    dotlabel.bot(btex $z_7$ etex, z7);
-    dotlabel.bot(btex $z_8$ etex, z8);
-    dotlabel.lrt(btex $z_9$ etex, z9);
-    dotlabel.bot(btex $z_{10}$ etex, z10);
-    %dotlabel.lft(btex $z_{11}$ etex, z11);
-    %dotlabel.bot(btex $z_{12}$ etex, z12);
+    dotlabel.top(btex $Z_6$ etex, Z6);
+    dotlabel.bot(btex $Z_7$ etex, Z7);
+    dotlabel.bot(btex $Z_8$ etex, Z8);
+    dotlabel.lrt(btex $Z_9$ etex, Z9);
+    dotlabel.bot(btex $Z_{10}$ etex, Z10);
+    %dotlabel.lft(btex $Z_{11}$ etex, Z11);
+    %dotlabel.bot(btex $Z_{12}$ etex, Z12);
 
-    dotlabel.urt(btex $z_{13}$ etex, z13);
-    dotlabel.ulft(btex $z_{14}$ etex, z14);
+    dotlabel.urt(btex $Z_{13}$ etex, Z13);
+    dotlabel.ulft(btex $Z_{14}$ etex, Z14);
 
-    dotlabel.bot(btex $z_{21}$ etex, z21);
-    % dotlabel.lft(btex $z_{15}$ etex, z15);
-    % dotlabel.bot(btex $z_{16}$ etex, z16);
-    % dotlabel.rt(btex $z_{17}$ etex, z17);
-    % dotlabel.rt(btex $z_{18}$ etex, z18);
-    % dotlabel.top(btex $z_{19}$ etex, z19);
-    % dotlabel.ulft(btex $z_{20}$ etex, z20);
-    % dotlabel.lft(btex $z_{22}$ etex, z22);
-    % dotlabel.llft(btex $z_{23}$ etex, z23);
-    % dotlabel.bot(btex $z_{24}$ etex, z24);
-    % dotlabel.rt(btex $z_{25}$ etex, z25);
-    % dotlabel.urt(btex $z_{26}$ etex, z26);
-    % dotlabel.top(btex $z_{27}$ etex, z27);
-    %dotlabel.bot(btex $z_{28}$ etex, z28);
-    dotlabel.bot(btex $z_{29}$ etex, z29);
-    dotlabel.bot(btex $z_{30}$ etex, z30);
-    dotlabel.bot(btex $z_{31}$ etex, z31);
-    dotlabel.bot(btex $z_{32}$ etex, z32);
-    dotlabel.llft(btex $z_{40}$ etex, z40);
-    dotlabel.llft(btex $z_{41}$ etex, z41);
-    dotlabel.rt(btex $z_{42}$ etex, z42 shifted (4pt, 2pt));
-    dotlabel.urt(btex $z_{43}$ etex, z43);
-    dotlabel.urt(btex $z_{44}$ etex, z44);
+    dotlabel.bot(btex $Z_{21}$ etex, Z21);
+    % dotlabel.lft(btex $Z_{15}$ etex, Z15);
+    % dotlabel.bot(btex $Z_{16}$ etex, Z16);
+    % dotlabel.rt(btex $Z_{17}$ etex, Z17);
+    % dotlabel.rt(btex $Z_{18}$ etex, Z18);
+    % dotlabel.top(btex $Z_{19}$ etex, Z19);
+    % dotlabel.ulft(btex $Z_{20}$ etex, Z20);
+    % dotlabel.lft(btex $Z_{22}$ etex, Z22);
+    % dotlabel.llft(btex $Z_{23}$ etex, Z23);
+    % dotlabel.bot(btex $Z_{24}$ etex, Z24);
+    % dotlabel.rt(btex $Z_{25}$ etex, Z25);
+    % dotlabel.urt(btex $Z_{26}$ etex, Z26);
+    % dotlabel.top(btex $Z_{27}$ etex, Z27);
+    %dotlabel.bot(btex $Z_{28}$ etex, Z28);
+    dotlabel.bot(btex $Z_{29}$ etex, Z29);
+    dotlabel.bot(btex $Z_{30}$ etex, Z30);
+    dotlabel.bot(btex $Z_{31}$ etex, Z31);
+    dotlabel.bot(btex $Z_{32}$ etex, Z32);
+    dotlabel.llft(btex $Z_{40}$ etex, Z40);
+    dotlabel.llft(btex $Z_{41}$ etex, Z41);
+    dotlabel.rt(btex $Z_{42}$ etex, Z42 shifted (4pt, 2pt));
+    dotlabel.urt(btex $Z_{43}$ etex, Z43);
+    dotlabel.urt(btex $Z_{44}$ etex, Z44);
     
-    label.top(btex $p_6$ etex, z10) withcolor red;
-    label.top(btex $p_{11}$ etex, z28) withcolor orange;
-    label.top(btex $p_{12}$ etex, z29);
-    label.top(btex $p_{13}$ etex, z30);
-    label.top(btex $p_{14}$ etex, z31);
-    label.top(btex $p_{15}$ etex, z32);
-    label.top(btex $p_{21}$ etex, z7) withcolor magenta;
-    label.ulft(btex $p_{22}$ etex, z40);
-    label.ulft(btex $p_{23}$ etex, z41);
-    label.ulft(btex $p_{24}$ etex, z42 shifted (-.25cm, .125cm));
-    label.lrt(btex  $p_{25}$ etex, z43 shifted (-4pt, -2pt));
-    label.lrt(btex  $p_{26}$ etex, z44);
+    label.top(btex $p_6$ etex, Z10) withcolor red;
+    label.top(btex $p_{11}$ etex, Z28) withcolor orange;
+    label.top(btex $p_{12}$ etex, Z29);
+    label.top(btex $p_{13}$ etex, Z30);
+    label.top(btex $p_{14}$ etex, Z31);
+    label.top(btex $p_{15}$ etex, Z32);
+    label.top(btex $p_{21}$ etex, Z7) withcolor magenta;
+    label.ulft(btex $p_{22}$ etex, Z40);
+    label.ulft(btex $p_{23}$ etex, Z41);
+    label.ulft(btex $p_{24}$ etex, Z42 shifted (-.25cm, .125cm));
+    label.lrt(btex  $p_{25}$ etex, Z43 shifted (-4pt, -2pt));
+    label.lrt(btex  $p_{26}$ etex, Z44);
 
   fi;
 
@@ -385,7 +387,7 @@ beginfig(0);
 
   if do_labels:
 
-    label(btex $p_{30}$ etex, (z21 transformed t2) shifted (-.625cm, -.25cm));
+    label(btex $p_{30}$ etex, (Z21 transformed t2) shifted (-.625cm, -.25cm));
     
     % j := 0;
     % for i = 21 upto 26:
@@ -413,31 +415,31 @@ beginfig(0);
 
 %% ** (2) Hexagon 3
 
-  t3 = identity shifted (z5 - z3);
+  t3 = identity shifted (Z5 - Z3);
 
-  d60 = z10 transformed t3;
+  d60 = Z10 transformed t3;
   p60 = p21 transformed t3;
   p66 = p6 transformed t3;
 
 
   
-  d61 = z21 transformed t3;
+  d61 = Z21 transformed t3;
   p61 = p22 transformed t3;
   p67 = p11 transformed t3;
 
-  d62 = z29 transformed t3;
+  d62 = Z29 transformed t3;
   p62 = p23 transformed t3;
   p68 = p12 transformed t3;
 
-  d63 = z30 transformed t3;
+  d63 = Z30 transformed t3;
   p63 = p24 transformed t3;
   p69 = p13 transformed t3;
 
-  d64 = z31 transformed t3;
+  d64 = Z31 transformed t3;
   p64 = p25 transformed t3;
   p70 = p14 transformed t3;
   
-  d65 = z32 transformed t3;
+  d65 = Z32 transformed t3;
   p65 = p26 transformed t3;
   p71 = p15 transformed t3;
 
@@ -465,46 +467,46 @@ beginfig(0);
 
   d96 = point 4 of p60;
 
-  t4 = identity shifted (d96 - z3);
+  t4 = identity shifted (d96 - Z3);
 
   p80 = p21 transformed t4;
   p81 = p6  transformed t4;
-  d80 = z10 transformed t4;
+  d80 = Z10 transformed t4;
 
   draw p80;
   draw p81;
 
   p82 = p22 transformed t4;
   p83 = p11 transformed t4;
-  d82 = z21 transformed t4;
+  d82 = Z21 transformed t4;
 
   draw p82;
   draw p83;
 
   p84 = p23 transformed t4;
   p85 = p12 transformed t4;
-  d84 = z29 transformed t4;
+  d84 = Z29 transformed t4;
 
   draw p84;
   draw p85;
 
   p86 = p24 transformed t4;
   p87 = p13 transformed t4;
-  d86 = z30 transformed t4;
+  d86 = Z30 transformed t4;
 
   draw p86;
   draw p87;
 
   p88 = p25 transformed t4;
   p89 = p14 transformed t4;
-  d88 = z31 transformed t4;
+  d88 = Z31 transformed t4;
 
   draw p88;
   draw p89;
 
   p90 = p26 transformed t4;
   p91 = p15 transformed t4;
-  d90 = z32 transformed t4;
+  d90 = Z32 transformed t4;
 
   draw p90;
   draw p91;
@@ -533,23 +535,23 @@ beginfig(0);
 %% ** (2) Hexagon 5
 
   d95 = point 4 of p63;
-  t5 = identity shifted (d95 - z2);
+  t5 = identity shifted (d95 - Z2);
   
-  d100 = z10 transformed t5;
+  d100 = Z10 transformed t5;
   p100 = p21 transformed t5;
   p101 = p6 transformed t5;
 
   draw p100;
   draw p101;
 
-  d102 = z21 transformed t5;
+  d102 = Z21 transformed t5;
   p102 = p22 transformed t5;
   p103 = p11 transformed t5;
 
   draw p102;
   draw p103;
 
-  d104 = z29 transformed t5;
+  d104 = Z29 transformed t5;
   p104 = p23 transformed t5;
   p105 = p12 transformed t5;
 
@@ -577,7 +579,7 @@ beginfig(0);
 
 %% ** (2) Combine path pictures
 
-  currentpicture := v0;
+  currentpicture := v1;
 
   addto currentpicture also v2;
   addto currentpicture also v3;
@@ -627,13 +629,12 @@ beginfig(1);
 
   pickup medium_pen;
   
-  currentpicture := v0;
+  currentpicture := v1;
   addto currentpicture also v2;
   addto currentpicture also v3;
   addto currentpicture also v4;
   addto currentpicture also v5;
   
-
   
   filldraw p21 withcolor dark_blue;
   unfilldraw p6;
@@ -705,12 +706,55 @@ beginfig(1);
 
   filldraw p104 withcolor dark_blue;
   unfilldraw p105;
+
+
   
 %% *** (3)
   
 %% ** (2) End of Fig. 1
 
 endfig;
+
+%% * (1) Fig. 2
+
+beginfig(2);
+
+  draw v1;
+  draw v2;
+
+  draw v1 transformed t3;
+  draw v2 transformed t3;
+
+
+  w0 = currentpicture;
+  w1 = currentpicture;
+  
+  for i = 0 upto 1:
+    w1 := w1 shifted (d96 - Z3);
+    draw w1;
+  endfor;
+
+  w2 = currentpicture;
+  w3 = currentpicture;
+
+  transform u[];
+
+  u0 = (identity shifted (Z4 - Z2)) transformed t2;
+  
+  for i = 0 upto 1:
+    w3 := w3 transformed u0;
+    draw w3;
+  endfor;
+  
+  draw Z29 -- d88 withpen big_pen;
+  draw (Z29 -- d88) transformed t4 withpen big_pen;
+
+  draw Z29 -- Z29 shifted (0, -10cm)  withpen big_pen;
+  
+%% ** (2) End of Fig. 2
+
+endfig;
+
 
 %% * (1)
 
