@@ -724,8 +724,7 @@ endfig;
 %% * (1) Macro generate_pattern
 
 def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single,
-                      pen_wd_rectangle, ddo_clip, ddo_labels)
-  (suffix top_left, bot_left, top_right, bot_right) =
+                      pen_wd_rectangle, ddo_clip, ddo_labels) =
 
 %% ** (2)
 
@@ -875,9 +874,9 @@ beginfig(2);
 %% Arguments to generate_pattern:
 %% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
 %%       ddo_clip, ddo_labels)
-%% (suffix top_left, bot_left, top_right, bot_right)
 
-  generate_pattern (2.25, 2, 3, 1.5mm, .5mm, .5mm, 1mm, false, false, 0, 0, 0, 0)  
+
+  generate_pattern (2, 2, 3, 2mm, .75mm, .5mm, .75mm, false, false);
 endfig;
 
 %% ** (2) End of Fig. 3
