@@ -915,7 +915,8 @@ def crosshair (expr pt_pos, ooffset_h, ooffset_v, line_len, ppen_wd,
 enddef;
 
 
-%% * (1) Fig. 2
+%% * (1) Fig. 2:  Pattern clipped to rectangle.  Fits within 24cm circle.
+%%                Non-reversed version.
 
 pair center_top;
 pair center_bot;
@@ -1025,13 +1026,14 @@ endfig;
 
 %% ** (2) End of Fig. 2
 
-%% * (1) Fig. 3
+%% * (1) Fig. 3:  Pattern clipped to rectangle.  Fits within 24cm circle.
+%%                Reversed version.
 
 beginfig(3);
   currentpicture := w0 reflectedabout (center_top, center_bot);
 endfig;
 
-%% * (1)
+%% * (1) End
 
 end;
 
