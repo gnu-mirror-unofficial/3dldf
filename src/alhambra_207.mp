@@ -938,12 +938,14 @@ beginfig(2);
   pair lower_right;
   lower_right = origin;
 
-  generate_pattern (1.975, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, true, false);
+  generate_pattern (1.825, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, true, false);
 
   %dotlabel.top("Center", pattern_center);
+
+%% ** (2)
   
   pickup medium_pen;
-  draw fullcircle scaled 26cm shifted pattern_center;
+  draw fullcircle scaled 24cm shifted pattern_center;
 
   % label.top(btex {\large 26} etex, (26cm, 0));
   % label.ulft(btex {\large UL} etex, upper_left);
@@ -951,23 +953,15 @@ beginfig(2);
   % label.urt(btex {\large UR} etex, upper_right);
   % label.lrt(btex {\large LR} etex, lower_right);
 
-  crosshair(upper_left, 2cm, 2cm, 1cm, .5mm, true, .5);
-  crosshair(upper_right, -2cm, 2cm, 1cm, .5mm, true, .5);
-  crosshair(lower_left, 2cm, -2cm, 1cm, .5mm, true, .5);
-  crosshair(lower_right, -2cm, -2cm, 1cm, .5mm, true, .5);
 
-  crosshair(.5[upper_left, upper_right], 0, 2cm, 1cm, .5mm, true, .5);
-  crosshair(.5[lower_left, lower_right], 0, -2cm, 1cm, .5mm, true, .5);
-
-  crosshair(.5[upper_left, lower_left] shifted (-.125cm, 0), -1cm, 0, 1cm, .5mm, true, .5);
-  crosshair(.5[upper_right, lower_right] shifted (.125cm, 0), 1cm, 0, 1cm, .5mm, true, .5);
-
+%% ** (2) Guidelines
+  
   pair B[];
 
-  B0 = upper_left shifted (-6cm, 2cm);
-  B1 = upper_right shifted (6cm, 2cm);
-  B2 = lower_left shifted (-6cm, -2cm);
-  B3 = lower_right shifted (6cm, -2cm);
+  B0 = upper_left shifted (-6cm, 1.5cm);
+  B1 = upper_right shifted (6cm, 1.5cm);
+  B2 = lower_left shifted (-6cm, -1.5cm);
+  B3 = lower_right shifted (6cm, -1.5cm);
 
   draw B0 -- B1 withcolor gray withpen medium_pen dashed evenly;
   draw B2 -- B3 withcolor gray withpen medium_pen dashed evenly;
@@ -1002,6 +996,18 @@ beginfig(2);
 
   draw B14 -- B15 withcolor gray withpen medium_pen dashed evenly;  
 
+%% ** (2) Crosshairs
+  
+  crosshair(upper_left, 1.5cm, 1.5cm, 1cm, .5mm, true, .5);
+  crosshair(upper_right, -1.5cm, 1.5cm, 1cm, .5mm, true, .5);
+  crosshair(lower_left, 1.5cm, -1.5cm, 1cm, .5mm, true, .5);
+  crosshair(lower_right, -1.5cm, -1.5cm, 1cm, .5mm, true, .5);
+
+  crosshair(.5[upper_left, upper_right], 0, 1.5cm, 1cm, .5mm, true, .5);
+  crosshair(.5[lower_left, lower_right], 0, -1.5cm, 1cm, .5mm, true, .5);
+
+  crosshair(.5[upper_left, lower_left] shifted (.1cm-3pt, 0), -1cm, 0, 1cm, .5mm, true, .5);
+  crosshair(.5[upper_right, lower_right] shifted (-.1cm+3pt, 0), 1cm, 0, 1cm, .5mm, true, .5);
 
   
 endfig;
