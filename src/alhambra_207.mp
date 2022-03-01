@@ -53,7 +53,8 @@ input TEX.mp;
 
 %% \font\huge=cmr17 scaled 8000
 
-verbatimtex \font\large=cmr12 scaled 1250\font\Largebx=cmbx17 scaled 1250 etex;
+verbatimtex \font\large=cmr12 scaled 1250\font\largebx=cmbx12 scaled 1250
+            \font\Largebx=cmbx17 scaled 1250 etex;
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
@@ -818,14 +819,35 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
   A28 = (xpart A22, ypart A0);
   A29 = (xpart A26, ypart A0);
   
-  P0 =A28 -- A29 -- A27 -- A25 -- cycle;
+  P0 = A28 -- A29 -- A27 -- A25 -- cycle;
 
   if ddo_clip:
     clip currentpicture to P0;
   fi;
 
   draw P0 withpen pencircle scaled pen_wd_rectangle;
-      
+
+  if known pattern_center:
+    pattern_center := .5[A28, A27];
+  fi;
+
+  if known upper_left:
+    upper_left := A28;
+  fi;
+
+  if known upper_right:
+    upper_right := A29;
+  fi;
+
+  if known lower_left:
+      lower_left := A25;
+  fi;
+  
+  if known lower_right:
+    lower_right := A27;
+  fi;
+
+  
 %% ** (2)
   
   if ddo_labels:
@@ -854,12 +876,42 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
     dotlabel.top(btex $A_{29}$ etex, A29);
   fi;
 
-  
+
   
 endgroup;
 
 %% ** (2)
 
+enddef;
+
+%% * (1) Macro crosshair
+
+def crosshair (expr pt_pos, ooffset_h, ooffset_v, line_len, ppen_wd,
+                    ddo_square, ssquare_proportion) =
+
+  begingroup;
+
+    save A;
+    pair A[];
+
+    A0 = pt_pos shifted (ooffset_h, ooffset_v);
+    A1 = A0 shifted (line_len, 0);
+    A2 = A0 shifted (-line_len, 0);
+    A3 = A0 shifted (0, line_len);
+    A4 = A0 shifted (0, -line_len);
+
+    for i = 1 upto 4:
+      draw A0 -- A[i] withpen pencircle scaled ppen_wd;
+    endfor;
+
+    if ddo_square:
+      draw (unitsquare scaled (2line_len * ssquare_proportion) shifted A0)
+	  shifted (-.5line_len, -.5line_len);
+    fi;
+
+    
+  endgroup;
+  
 enddef;
 
 
@@ -871,12 +923,86 @@ beginfig(2);
 %% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
 %%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
 
-  generate_pattern (1.975, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
+  pair pattern_center;
+  pattern_center = origin;
 
+  pair upper_left;
+  upper_left = origin;
+
+  pair upper_right;
+  upper_right = origin;
+
+  pair lower_left;
+  lower_left = origin;
+
+  pair lower_right;
+  lower_right = origin;
+
+  generate_pattern (1.975, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, true, false);
+
+  %dotlabel.top("Center", pattern_center);
+  
   pickup medium_pen;
-  draw fullcircle scaled 26cm shifted (8.75cm, -5cm);
+  draw fullcircle scaled 26cm shifted pattern_center;
 
-  label.top(btex {\large 26} etex, (26cm, 0));
+  % label.top(btex {\large 26} etex, (26cm, 0));
+  % label.ulft(btex {\large UL} etex, upper_left);
+  % label.llft(btex {\large LL} etex, lower_left);
+  % label.urt(btex {\large UR} etex, upper_right);
+  % label.lrt(btex {\large LR} etex, lower_right);
+
+  crosshair(upper_left, 2cm, 2cm, 1cm, .5mm, true, .5);
+  crosshair(upper_right, -2cm, 2cm, 1cm, .5mm, true, .5);
+  crosshair(lower_left, 2cm, -2cm, 1cm, .5mm, true, .5);
+  crosshair(lower_right, -2cm, -2cm, 1cm, .5mm, true, .5);
+
+  crosshair(.5[upper_left, upper_right], 0, 2cm, 1cm, .5mm, true, .5);
+  crosshair(.5[lower_left, lower_right], 0, -2cm, 1cm, .5mm, true, .5);
+
+  crosshair(.5[upper_left, lower_left] shifted (-.125cm, 0), -1cm, 0, 1cm, .5mm, true, .5);
+  crosshair(.5[upper_right, lower_right] shifted (.125cm, 0), 1cm, 0, 1cm, .5mm, true, .5);
+
+  pair B[];
+
+  B0 = upper_left shifted (-6cm, 2cm);
+  B1 = upper_right shifted (6cm, 2cm);
+  B2 = lower_left shifted (-6cm, -2cm);
+  B3 = lower_right shifted (6cm, -2cm);
+
+  draw B0 -- B1 withcolor gray withpen medium_pen dashed evenly;
+  draw B2 -- B3 withcolor gray withpen medium_pen dashed evenly;
+
+  B4 = upper_left shifted (0, 6cm);
+  B5 = upper_right shifted (0, 6cm);
+  B6 = lower_left shifted (0, -6cm);
+  B7 = lower_right shifted (0, -6cm);
+
+  draw upper_left  -- B4 withcolor gray withpen medium_pen dashed evenly;
+  draw upper_right -- B5 withcolor gray withpen medium_pen dashed evenly;
+  draw lower_left  -- B6 withcolor gray withpen medium_pen dashed evenly;
+  draw lower_right -- B7 withcolor gray withpen medium_pen dashed evenly;
+  
+  B8 = .5[upper_left, upper_right];
+  B9 = B8 shifted (0, 6cm);
+
+  draw B8 -- B9 withcolor gray withpen medium_pen dashed evenly;  
+  
+  B10 = .5[lower_left, lower_right];
+  B11 = B10 shifted (0, -6cm);
+
+  draw B10 -- B11 withcolor gray withpen medium_pen dashed evenly;  
+  
+  B12 = .5[upper_left, lower_left];
+  B13 = B12 shifted (-6cm, 0);
+
+  draw B12 -- B13 withcolor gray withpen medium_pen dashed evenly;  
+
+  B14 = .5[upper_right, lower_right];
+  B15 = B14 shifted (6cm, 0);
+
+  draw B14 -- B15 withcolor gray withpen medium_pen dashed evenly;  
+
+
   
 endfig;
 
