@@ -72,7 +72,7 @@
 \font\largeit=cmti12
 \font\largett=cmtt12
 \font\largesy=cmsy10 scaled 1200
-\font\Largebx=cmbx12 scaled \magstephalf
+\font\Largebx=cmbx12 scaled \magstep1
 \font\huge=cmr12 scaled \magstep2
 \font\hugebx=cmbx12 scaled \magstep2
 \font\mediumsy=cmsy10 scaled \magstephalf
@@ -129,7 +129,10 @@
 
 \begingroup
 \advance\hsize by -1in
+\advance\hsize by -2cm
 \parskip=.5\baselineskip
+\vbox{}
+\vskip1cm
 \centerline{{\largebx Alhambra Pattern, Owen Jones, Page 207}}
 \vskip\baselineskip
 
@@ -192,7 +195,7 @@ Boston, MA  02110-1301 USA\hfil\break
 \headline={\hfil {\tt \timestamp}\hskip2cm}
 
 \vbox{}
-\vskip-2cm
+\vskip2cm
 \line{\hskip0cm\epsffile{alhambra_207_000.eps}\hss}
 \vskip-1cm
 \line{\hskip0cm\epsffile{alhambra_207_001.eps}\hss}
@@ -207,8 +210,15 @@ Boston, MA  02110-1301 USA\hfil\break
 \parskip=0pt
 \noindent
 
-\vbox to \vsize{\vss\line{\hskip-4.5cm\epsffile{alhambra_207_002.eps}\hss}\vss}
+\vbox to \vsize{\vbox to 0pt{\vskip2cm\line{\hskip6cm{\Largebx Non-Reversed}\hss}\vss}%
+\vss
+\line{\hskip-4.5cm\epsffile{alhambra_207_002.eps}\hss}\vss}
+\vfil\eject
 
+%% ** (2)
+
+\vbox to \vsize{\vbox to 0pt{\vskip2cm\line{\hskip6cm{\Largebx Reversed}\hss}\vss}%
+\vss\line{\hskip-4.5cm\epsffile{alhambra_207_003.eps}\hss}\vss}
 \vfil\eject
 
 %% ** (2) Empty page at end

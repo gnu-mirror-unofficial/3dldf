@@ -917,6 +917,11 @@ enddef;
 
 %% * (1) Fig. 2
 
+pair center_top;
+pair center_bot;
+pair center_lft;
+pair center_rt;
+
 beginfig(2);
 
 %% Arguments to generate_pattern:
@@ -1009,12 +1014,22 @@ beginfig(2);
   crosshair(.5[upper_left, lower_left] shifted (.1cm-3pt, 0), -1cm, 0, 1cm, .5mm, true, .5);
   crosshair(.5[upper_right, lower_right] shifted (-.1cm+3pt, 0), 1cm, 0, 1cm, .5mm, true, .5);
 
+  center_top = .5[upper_left, upper_right];
+  center_bot = .5[lower_left, lower_right];
+  center_lft = .5[upper_left, lower_left];
+  center_rt  = .5[upper_right, lower_right];
+
+  w0 = currentpicture;
   
 endfig;
 
 %% ** (2) End of Fig. 2
 
+%% * (1) Fig. 3
 
+beginfig(3);
+  currentpicture := w0 reflectedabout (center_top, center_bot);
+endfig;
 
 %% * (1)
 
