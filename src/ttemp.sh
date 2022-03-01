@@ -3,10 +3,22 @@
 #### ttemp.sh
 #### Created by Laurence D. Finston (LDF) Mon 06 Sep 2021 10:32:01 PM CEST
 
+cp -f alhambra_207.mp alhambra_207.txt /home/laurence/3DLDF-3.0_web/3dldf/SRC_CODE
+cp -f alhambra_207.pdf /home/laurence/3DLDF-3.0_web/3dldf/graphics
+
+cd ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+cvs commit -m "Edited." alhambra_207.mp alhambra_207.txt
+
+cd ~/3DLDF-3.0_web/3dldf/graphics/
+cvs commit -m "Edited." alhambra_207.pdf
+
+exit 0
+
 #### The "files" clstsph1.txt and clstsph1_a4.txt in this directory are symbolic links to the 
 #### corresponding .tex files (in this directory).  The latter therefore do not need to be copied 
 #### explicitly to the *.txt files in the web pages directory.
 #### LDF 2021.09.06.
+
 
 cp -f clstsph3.pdf ~/3DLDF-3.0_web/3dldf/graphics/
 
