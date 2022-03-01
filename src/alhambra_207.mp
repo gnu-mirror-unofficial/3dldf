@@ -53,7 +53,7 @@ input TEX.mp;
 
 %% \font\huge=cmr17 scaled 8000
 
-verbatimtex \font\Largebx=cmbx17 scaled 1250 etex;
+verbatimtex \font\large=cmr12 scaled 1250\font\Largebx=cmbx17 scaled 1250 etex;
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
@@ -274,8 +274,7 @@ beginfig(0);
 
   v1 = currentpicture;
   currentpicture := nullpicture;
-  
-  
+    
 %% ** (2) Auxiliary lines
 
   if do_gray:
@@ -724,7 +723,7 @@ endfig;
 %% * (1) Macro generate_pattern
 
 def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single,
-                      pen_wd_rectangle, ddo_clip, ddo_labels) =
+                      pen_wd_rectangle, cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels) =
 
 %% ** (2)
 
@@ -821,9 +820,6 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
   
   P0 =A28 -- A29 -- A27 -- A25 -- cycle;
 
-
-  
-
   if ddo_clip:
     clip currentpicture to P0;
   fi;
@@ -873,13 +869,18 @@ beginfig(2);
 
 %% Arguments to generate_pattern:
 %% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
-%%       ddo_clip, ddo_labels)
+%%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
 
+  generate_pattern (1.975, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
 
-  generate_pattern (2, 2, 3, 2mm, .75mm, .5mm, .75mm, false, false);
+  pickup medium_pen;
+  draw fullcircle scaled 26cm shifted (8.75cm, -5cm);
+
+  label.top(btex {\large 26} etex, (26cm, 0));
+  
 endfig;
 
-%% ** (2) End of Fig. 3
+%% ** (2) End of Fig. 2
 
 
 
