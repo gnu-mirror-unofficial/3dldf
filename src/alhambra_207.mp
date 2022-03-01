@@ -121,12 +121,14 @@ beginfig(0);
   pickup medium_pen;
   path hex[];
 
-  %draw fullcircle scaled 4cm;
-  
   for i = 0 upto 5:
     Z[i] = (2cm, 0) rotated (i*60);
   endfor;
 
+  %draw fullcircle scaled 4cm;
+
+%% ** (2)  Create wavy edges for the triangles.
+  
   j = 0;
   m = 1;
   k = .125cm;
@@ -139,6 +141,8 @@ beginfig(0);
   p0 = Z2 .. {dir 0}Z6{dir 0} .. Z7 .. {dir 0}Z8{dir 0} .. Z1;
   p1 = p0 rotatedaround (Z1, 60);
 
+%% ** (2)
+  
   % drawarrow p0 withcolor blue;
   % drawarrow p1 withcolor green;
 
@@ -162,10 +166,8 @@ beginfig(0);
   
   %fill p21 withcolor blue;
 
-  
   p2 = origin -- Z7;
-
-
+  
   Z9 = .5[origin, Z1];
   
   p3 = Z2 -- Z9;
@@ -189,15 +191,11 @@ beginfig(0);
   p6 = ((((Z7 -- Z14 -- Z11 -- Z12 -- Z9 -- Z13 -- cycle) shifted -Z10) scaled .9)
       rotated 30) shifted Z10;
  
-
   %unfill p6;
-
 
   draw p6; % withcolor red;
 
-  
   Z21 = Z10 rotated 60;
-
 
   p7 = fullcircle scaled (2*(ypart Z7 - ypart Z10)) shifted Z21;
 
@@ -702,8 +700,6 @@ beginfig(1);
   filldraw p104 withcolor dark_blue;
   unfilldraw p105;
 
-
-  
 %% *** (3)
   
 %% ** (2) End of Fig. 1
@@ -711,6 +707,14 @@ beginfig(1);
 endfig;
 
 %% * (1) Macro generate_pattern
+
+%% generate_pattern generates the pattern in black and white.
+%% A pattern unit consists of two hexagons, like 1 and 3 in figure 0.
+%% This unit is repeated `horiz_ctr' times horizontally.  Then, the resulting
+%% units are repeated `vert_ctr' times vertically.
+
+%% The meanings of the other parameters should be obvious.
+%% LDF 2022.03.01.
 
 def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single,
                       pen_wd_rectangle, cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels) =
