@@ -55,6 +55,7 @@ input TEX.mp;
 
 verbatimtex \font\large=cmr12 scaled 1250\font\largebx=cmbx12 scaled 1250
             \font\Largebx=cmbx17 scaled 1250 etex;
+
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
@@ -70,16 +71,6 @@ big_pen = pencircle scaled .75mm;
 pen dot_pen;
 dot_pen = pencircle scaled 3pt;
 
-path frame;
-
-numeric frame_wd;
-numeric frame_ht;
-
-frame_wd = 8cm;
-frame_ht = 6cm;
-
-frame =    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_wd, .5frame_ht)
-        -- (-.5frame_wd, .5frame_ht) -- cycle;
 
 numeric gray;
 gray = .5;
@@ -130,8 +121,6 @@ beginfig(0);
   pickup medium_pen;
   path hex[];
 
-  %undraw frame;
-  
   %draw fullcircle scaled 4cm;
   
   for i = 0 upto 5:
