@@ -890,6 +890,11 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
     center_bot := .5[lower_left, lower_right];
   fi;
 
+  if known center_rectangle:
+    center_rectangle := .5[center_top, center_bot];
+  fi;
+
+  
 %% ** (2)
   
   if ddo_labels:
@@ -1064,9 +1069,16 @@ beginfig(2);
   % dotlabel.llft(btex {\large 3} etex, z3);
   % dotlabel.lrt(btex {\large 4} etex, z4);
 
+
   draw z1 -- z2 -- z4 -- z3 -- cycle withpen medium_pen;
 
+  draw center_rectangle shifted (-.5cm, 0) -- center_rectangle shifted (.5cm, 0) withpen small_pen;
+  draw center_rectangle shifted (0, -.5cm) -- center_rectangle shifted (0, .5cm) withpen small_pen;
 
+  draw fullcircle scaled .5cm shifted center_rectangle withpen small_pen;
+
+  drawdot center_rectangle withpen pencircle scaled 1.5mm;
+  undrawdot center_rectangle withpen pencircle scaled .5mm;
   
   w0 = currentpicture;
   
