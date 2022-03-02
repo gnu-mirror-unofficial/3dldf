@@ -51,6 +51,8 @@
 
 prologues := 3;
 outputtemplate := "%j_%c.eps";
+input TEX;
+verbatimtex \font\largebx=cmbx17 etex;
 
 
 %% * (1) Global variables
@@ -76,7 +78,8 @@ do_gray = true; % false
 
 boolean do_labels;
 
-do_labels = true; % false
+
+do_labels = false; % true
 
 picture v[];
 picture w[];
@@ -131,20 +134,20 @@ beginfig(0);
   
   draw p0;
 
-  draw fullcircle scaled 1cm;
+  draw unitsquare scaled 1cm shifted (-.5cm, -.5cm);
 
-  draw (-1.5cm, 0) -- (-.5cm, 0);
-  draw (1.5cm, 0) -- (.5cm, 0);
-  draw (0, .5cm) -- (0, 1.5cm);
-  draw (0, -.5cm) -- (0, -1.5cm);
+  draw (-12cm, 0) -- (12cm, 0);
+  draw (0, -12cm) -- (0, 12cm);
 
-  for i = 0 upto 3:
-    draw ((1.5cm, 0) -- (10cm, 0)) rotated 90i dashed evenly withcolor gray;
-    draw ((10cm, 0) -- (12cm, 0)) rotated 90i ;
-  endfor;
   
-  dotlabel.top("origin", origin);
-  dotlabel.rt(btex $(12\rm{cm}, 0)$ etex, (12cm, 0));
+  if do_labels:
+    dotlabel.top("origin", origin);
+  fi;
+  
+  if do_labels:
+    dotlabel.rt(btex $(12\rm{cm}, 0)$ etex, (12cm, 0));
+  fi;
+  
 
   numeric side_len;
   side_len = 14cm;
@@ -152,7 +155,100 @@ beginfig(0);
   p1 = unitsquare scaled side_len shifted (-.5side_len, -.5side_len);
   draw p1;
 
-  clip currentpicture to p0;
+  numeric j;
+  j = 0;
+  for i = 0 step .5 until 3.5:
+    z[j] = point i of p1;
+    j := incr j;
+  endfor;
+  if do_labels:
+    label.llft("0", z0);
+    label.lrt("1", z1);
+    label.lrt("2", z2);
+    label.rt("3", z3);
+    label.urt("4", z4);
+    label.top("5", z5);
+    label.ulft("6", z6);
+    label.lft("7", z7);
+  fi;
+
+  z8 = (z4 -- 2[z5, z4]) intersectionpoint p0;
+  if do_labels:
+    dotlabel.top("8", z8);
+  fi;
+  
+
+  z9 = z8 reflectedabout ((0, -10), (0, 10));
+  z10 = z8 reflectedabout ((-10, 0), (10, 0));
+  z11 = z9 reflectedabout ((-10, 0), (10, 0));
+
+
+  if do_labels:
+    dotlabel.top("9", z9);
+  fi;
+  
+  if do_labels:
+    dotlabel.top("10", z10);
+  fi;
+  
+  if do_labels:
+    dotlabel.top("11", z11);
+  fi;
+  
+
+  z12 = (z6 -- 2[z7, z6]) intersectionpoint p0;
+  if do_labels:
+    dotlabel.top("12", z12);
+  fi;
+  
+
+  z13 = z12 reflectedabout ((0, -10), (0, 10));
+  if do_labels:
+    dotlabel.top("13", z13);
+  fi;
+  
+
+  z14 = z12 reflectedabout ((-10, 0), (10, 0));
+  z15 = z13 reflectedabout ((-10, 0), (10, 0));
+  if do_labels:
+    dotlabel.top("14", z14);
+  fi;
+  
+  if do_labels:
+    dotlabel.top("15", z15);
+  fi;
+  
+
+  draw z9 -- z6;
+  draw z6 -- z12;
+  draw z4 -- z13;
+  draw z4 -- z8;
+  draw z11 -- z0;
+  draw z14 -- z0;
+  draw z2 -- z15;
+  draw z2 -- z10;
+
+  for i = 0 upto 7:
+    draw unitsquare scaled 1cm shifted (z[i] shifted (-.5cm, -.5cm));
+  endfor;
+
+  z16 = .5[origin, z3] shifted (0, .25cm);
+
+  label.top(btex {\largebx 24cm} etex, z16);
+
+  z17 = z16 shifted (0, 1.25cm);
+  
+  draw fullcircle scaled .75cm shifted z17;
+  draw z17 -- (z17 shifted (.55cm, 0) rotatedaround (z17, 45));
+  draw z17 -- (z17 shifted (.55cm, 0) rotatedaround (z17, 225));
+
+  drawdot origin withpen pencircle scaled 3mm;
+  undrawdot origin withpen pencircle scaled 1.5mm;
+  drawdot origin withpen pencircle scaled .5mm;
+
+  draw (-17cm, -13cm) -- (17cm, -13cm);
+  
+  %clip currentpicture to p0;
   
 %% ** (2) End of Fig. 0
     
