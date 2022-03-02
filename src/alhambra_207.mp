@@ -993,7 +993,10 @@ beginfig(2);
   % label.urt(btex {\large UR} etex, upper_right);
   % label.lrt(btex {\large LR} etex, lower_right);
 
+  
 
+
+  
 %% ** (2) Guidelines
   
   pair B[];
@@ -1036,6 +1039,9 @@ beginfig(2);
 
   draw B14 -- B15 withcolor gray withpen medium_pen dashed evenly;  
 
+  w1 = currentpicture;
+  currentpicture := nullpicture;
+  
 %% ** (2) Crosshairs
   
   crosshair(upper_left, 1.5cm, 1.5cm, 1cm, .5mm, true, .5);
@@ -1079,8 +1085,14 @@ beginfig(2);
 
   drawdot center_rectangle withpen pencircle scaled 1.5mm;
   undrawdot center_rectangle withpen pencircle scaled .5mm;
+
+  w2 = currentpicture;
+  currentpicture := nullpicture;
   
-  w0 = currentpicture;
+  w0 = w1;
+  addto w0 also w2;
+
+  currentpicture := w0;
   
 endfig;
 
@@ -1092,6 +1104,16 @@ endfig;
 beginfig(3);
   currentpicture := w0 reflectedabout (center_top, center_bot);
 endfig;
+
+%% * (1) Fig. 4:  Guidelines without pattern for cutting out the surrounding rectangle.
+
+beginfig(4);
+  currentpicture := w0 reflectedabout (center_top, center_bot);
+  unfill upper_left -- upper_right -- lower_right -- lower_left -- cycle;
+  draw upper_left -- upper_right -- lower_right -- lower_left -- cycle withpen medium_pen;
+endfig;
+
+
 
 %% * (1) End
 
