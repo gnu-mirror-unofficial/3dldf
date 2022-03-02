@@ -260,13 +260,47 @@ beginfig(0);
     label.rt(btex $d_{29}$ etex, d29);
     label.urt(btex $d_{30}$ etex, d30);
     label.top(btex $d_{31}$ etex, d31);
-
-    
-
   fi;
     
-%% ** (2) End of Fig. 0
+%% ** (2)
 
+  numeric distance;
+  distance = 12cm;
+
+  for i = 0 upto 11:
+    d[32+i] = d[i] shifted (0, -distance);
+    d[44+i] = d[20+i] shifted (0, -distance);
+  endfor;
+
+  draw d32 -- d36 -- d40 -- cycle;
+
+  draw d38 -- d34 -- d42 -- cycle;
+
+  label.top(btex $d_{32}$ etex, d32);
+  label.lft(btex $d_{36}$ etex, d36);
+  label.rt(btex $d_{40}$ etex, d40);
+  
+  
+  label.bot(btex $d_{38}$ etex, d38);
+  label.lft(btex $d_{34}$ etex, d34);
+  label.rt(btex $d_{42}$ etex, d42);
+
+  label.lft(btex $d_{55}$ etex, d55);
+  label.rt(btex $d_{44}$ etex, d44);
+
+  draw d44 -- d25 withcolor gray;
+  draw d55 -- d26 withcolor gray;
+
+  d56 = .5[d25, d44];
+  d57 = .5[d26, d55];
+
+  label.lft(btex $d_{56}$ etex, d56);
+  label.rt(btex $d_{57}$ etex, d57);
+
+  
+  
+%% ** (2) End of Fig. 0
+  
 endfig;
 
 %% * (1)
