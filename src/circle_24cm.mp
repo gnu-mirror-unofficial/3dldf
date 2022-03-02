@@ -127,10 +127,33 @@ beginfig(0);
 
   pickup medium_pen;
 
-  draw fullcircle scaled 24cm;% shifted (6cm, 0);
+  p0 = fullcircle scaled 24cm;
+  
+  draw p0;
+
+  draw fullcircle scaled 1cm;
+
+  draw (-1.5cm, 0) -- (-.5cm, 0);
+  draw (1.5cm, 0) -- (.5cm, 0);
+  draw (0, .5cm) -- (0, 1.5cm);
+  draw (0, -.5cm) -- (0, -1.5cm);
+
+  for i = 0 upto 3:
+    draw ((1.5cm, 0) -- (10cm, 0)) rotated 90i dashed evenly withcolor gray;
+    draw ((10cm, 0) -- (12cm, 0)) rotated 90i ;
+  endfor;
+  
   dotlabel.top("origin", origin);
   dotlabel.rt(btex $(12\rm{cm}, 0)$ etex, (12cm, 0));
 
+  numeric side_len;
+  side_len = 14cm;
+  
+  p1 = unitsquare scaled side_len shifted (-.5side_len, -.5side_len);
+  draw p1;
+
+  clip currentpicture to p0;
+  
 %% ** (2) End of Fig. 0
     
 endfig;
