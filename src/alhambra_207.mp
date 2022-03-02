@@ -59,6 +59,9 @@ verbatimtex \font\large=cmr12 scaled 1250\font\largebx=cmbx12 scaled 1250
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 
+
+%% * (1) Global variables
+
 pen small_pen;
 small_pen = pencircle scaled .25mm;
 
@@ -111,6 +114,37 @@ transform t[];
 
 pair d[];
 pair Z[];
+
+pair pattern_center;
+pattern_center = origin;
+
+pair upper_left;
+upper_left = origin;
+
+pair upper_right;
+upper_right = origin;
+
+pair lower_left;
+lower_left = origin;
+
+pair lower_right;
+lower_right = origin;
+
+pair center_left;
+center_left = origin;
+
+pair center_right;
+center_right = origin;
+
+pair center_top;
+center_top = origin;
+
+pair center_bot;
+center_bot = origin;
+
+pair center_rectangle;
+center_rectangle = origin;
+
 
 %% * (1)
 
@@ -840,7 +874,22 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
     lower_right := A27;
   fi;
 
-  
+  if known center_left:
+    center_left := .5[upper_left, lower_left];
+  fi;
+
+  if known center_right:
+    center_right := .5[upper_right, lower_right];
+  fi;
+
+  if known center_top:
+    center_top := .5[upper_left, upper_right];
+  fi;
+
+  if known center_bot:
+    center_bot := .5[lower_left, lower_right];
+  fi;
+
 %% ** (2)
   
   if ddo_labels:
@@ -922,20 +971,7 @@ beginfig(2);
 %% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
 %%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
 
-  pair pattern_center;
-  pattern_center = origin;
 
-  pair upper_left;
-  upper_left = origin;
-
-  pair upper_right;
-  upper_right = origin;
-
-  pair lower_left;
-  lower_left = origin;
-
-  pair lower_right;
-  lower_right = origin;
 
   generate_pattern (1.825, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, true, false);
 
@@ -1012,7 +1048,26 @@ beginfig(2);
   center_bot = .5[lower_left, lower_right];
   center_lft = .5[upper_left, lower_left];
   center_rt  = .5[upper_right, lower_right];
+  
 
+%% ** (2) Lines for cutting out stencil
+
+  z1 = upper_left shifted (-3cm, 5cm);
+  z2 = upper_right shifted (3cm, 5cm);
+
+  z3 = z1 reflectedabout (center_left, center_right);
+  z4 = z3 reflectedabout (center_top, center_bot);
+  
+  % dotlabel.top(btex {\large 0} etex, z0);
+  % dotlabel.ulft(btex {\large 1} etex, z1);
+  % dotlabel.llft(btex {\large 2} etex, z2);
+  % dotlabel.llft(btex {\large 3} etex, z3);
+  % dotlabel.lrt(btex {\large 4} etex, z4);
+
+  draw z1 -- z2 -- z4 -- z3 -- cycle withpen medium_pen;
+
+
+  
   w0 = currentpicture;
   
 endfig;
