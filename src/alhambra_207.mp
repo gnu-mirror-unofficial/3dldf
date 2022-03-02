@@ -1093,10 +1093,12 @@ beginfig(2);
   addto w0 also w2;
 
   currentpicture := w0;
+
+%% ** (2) End of Fig. 2
   
 endfig;
 
-%% ** (2) End of Fig. 2
+
 
 %% * (1) Fig. 3:  Pattern clipped to rectangle.  Fits within 24cm circle.
 %%                Reversed version.
@@ -1111,7 +1113,146 @@ beginfig(4);
   currentpicture := w0 reflectedabout (center_top, center_bot);
   unfill upper_left -- upper_right -- lower_right -- lower_left -- cycle;
   draw upper_left -- upper_right -- lower_right -- lower_left -- cycle withpen medium_pen;
+
+%% ** (2) End of Fig. 4.
+
 endfig;
+
+
+
+%% * (1) Fig. 5:  Pattern not clipped to rectangle.  Fits within 24cm circle.
+%%                Non-reversed version.
+
+pair center_top;
+pair center_bot;
+pair center_lft;
+pair center_rt;
+
+beginfig(5);
+
+%% Arguments to generate_pattern:
+%% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
+%%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
+
+
+
+  generate_pattern (1.825, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
+
+  %dotlabel.top("Center", pattern_center);
+
+%% ** (2)
+  
+  pickup medium_pen;
+  draw fullcircle scaled 24cm shifted pattern_center;
+
+  % label.top(btex {\large 26} etex, (26cm, 0));
+  % label.ulft(btex {\large UL} etex, upper_left);
+  % label.llft(btex {\large LL} etex, lower_left);
+  % label.urt(btex {\large UR} etex, upper_right);
+  % label.lrt(btex {\large LR} etex, lower_right);
+
+  
+  
+%% ** (2) Guidelines
+  
+  pair B[];
+
+  B0 = upper_left shifted (-6cm, 1.5cm);
+  B1 = upper_right shifted (6cm, 1.5cm);
+  B2 = lower_left shifted (-6cm, -1.5cm);
+  B3 = lower_right shifted (6cm, -1.5cm);
+
+  draw B0 -- B1 withcolor gray withpen medium_pen dashed evenly;
+  draw B2 -- B3 withcolor gray withpen medium_pen dashed evenly;
+
+  B4 = upper_left shifted (0, 6cm);
+  B5 = upper_right shifted (0, 6cm);
+  B6 = lower_left shifted (0, -6cm);
+  B7 = lower_right shifted (0, -6cm);
+
+  draw upper_left  -- B4 withcolor gray withpen medium_pen dashed evenly;
+  draw upper_right -- B5 withcolor gray withpen medium_pen dashed evenly;
+  draw lower_left  -- B6 withcolor gray withpen medium_pen dashed evenly;
+  draw lower_right -- B7 withcolor gray withpen medium_pen dashed evenly;
+  
+  B8 = .5[upper_left, upper_right];
+  B9 = B8 shifted (0, 6cm);
+
+  draw B8 -- B9 withcolor gray withpen medium_pen dashed evenly;  
+  
+  B10 = .5[lower_left, lower_right];
+  B11 = B10 shifted (0, -6cm);
+
+  draw B10 -- B11 withcolor gray withpen medium_pen dashed evenly;  
+  
+  B12 = .5[upper_left, lower_left];
+  B13 = B12 shifted (-6cm, 0);
+
+  draw B12 -- B13 withcolor gray withpen medium_pen dashed evenly;  
+
+  B14 = .5[upper_right, lower_right];
+  B15 = B14 shifted (6cm, 0);
+
+  draw B14 -- B15 withcolor gray withpen medium_pen dashed evenly;  
+
+  w3 = currentpicture;
+  currentpicture := nullpicture;
+  
+%% ** (2) Crosshairs
+  
+  crosshair(upper_left, 1.5cm, 1.5cm, 1cm, .5mm, true, .5);
+  crosshair(upper_right, -1.5cm, 1.5cm, 1cm, .5mm, true, .5);
+  crosshair(lower_left, 1.5cm, -1.5cm, 1cm, .5mm, true, .5);
+  crosshair(lower_right, -1.5cm, -1.5cm, 1cm, .5mm, true, .5);
+
+  crosshair(.5[upper_left, upper_right], 0, 1.5cm, 1cm, .5mm, true, .5);
+  crosshair(.5[lower_left, lower_right], 0, -1.5cm, 1cm, .5mm, true, .5);
+
+  crosshair(.5[upper_left, lower_left] shifted (.1cm-3pt, 0), -1cm, 0, 1cm, .5mm, true, .5);
+  crosshair(.5[upper_right, lower_right] shifted (-.1cm+3pt, 0), 1cm, 0, 1cm, .5mm, true, .5);
+
+  center_top = .5[upper_left, upper_right];
+  center_bot = .5[lower_left, lower_right];
+  center_lft = .5[upper_left, lower_left];
+  center_rt  = .5[upper_right, lower_right];
+  
+
+%% ** (2) Lines for cutting out stencil
+
+  z1 = upper_left shifted (-3cm, 5cm);
+  z2 = upper_right shifted (3cm, 5cm);
+
+  z3 = z1 reflectedabout (center_left, center_right);
+  z4 = z3 reflectedabout (center_top, center_bot);
+  
+  % dotlabel.top(btex {\large 0} etex, z0);
+  % dotlabel.ulft(btex {\large 1} etex, z1);
+  % dotlabel.llft(btex {\large 2} etex, z2);
+  % dotlabel.llft(btex {\large 3} etex, z3);
+  % dotlabel.lrt(btex {\large 4} etex, z4);
+
+
+  draw z1 -- z2 -- z4 -- z3 -- cycle withpen medium_pen;
+
+  draw center_rectangle shifted (-.5cm, 0) -- center_rectangle shifted (.5cm, 0) withpen small_pen;
+  draw center_rectangle shifted (0, -.5cm) -- center_rectangle shifted (0, .5cm) withpen small_pen;
+
+  draw fullcircle scaled .5cm shifted center_rectangle withpen small_pen;
+
+  drawdot center_rectangle withpen pencircle scaled 1.5mm;
+  undrawdot center_rectangle withpen pencircle scaled .5mm;
+
+  w4 = currentpicture;
+  currentpicture := nullpicture;
+  
+  w5 = w3;
+  addto w5 also w4;
+
+  currentpicture := w5;
+
+%% ** (2) End of Fig. 5
+  
+endfig;  
 
 
 
