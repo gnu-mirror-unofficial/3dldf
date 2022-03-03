@@ -246,7 +246,21 @@ beginfig(0);
   undrawdot origin withpen pencircle scaled 1.5mm;
   drawdot origin withpen pencircle scaled .5mm;
 
-  draw (-17cm, -13cm) -- (17cm, -13cm);
+  %draw (-17cm, -13cm) -- (17cm, -13cm);
+
+  draw unitsquare scaled 26cm shifted (-13cm, -13cm);
+  draw unitsquare scaled 28cm shifted (-14cm, -14cm);
+
+  z[18] = point 0 of (unitsquare scaled 26cm shifted (-13cm, -13cm));
+
+  if do_labels:
+    label(btex {\largebx 18} etex, z[18]);
+  fi;
+
+  for i = 0 upto 3:
+    draw (z18 shifted (-1cm, 0) -- z18 -- z18 shifted (0, -1cm)) rotated 90i;
+  endfor;
+  
   
   %clip currentpicture to p0;
   
