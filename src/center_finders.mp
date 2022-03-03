@@ -60,6 +60,31 @@ verbatimtex \font\largebx=cmbx12 scaled \magstep1 etex;
 pen medium_pen;
 medium_pen = pencircle scaled .5mm;
 
+
+%% ** (2) Fig. 100
+
+path p[];
+
+beginfig(100);
+  drawdot origin withpen pencircle scaled 4mm;
+  undrawdot origin withpen pencircle scaled 2mm;
+  drawdot origin withpen pencircle scaled 1mm;
+
+  numeric j;
+  j = 0;
+  for i = 10 step .5 until 20:
+    p[j] = fullcircle scaled (i*cm);
+    draw p[j];
+    j := incr j;
+  endfor;
+
+endfig;
+
+%% * (1) End
+
+end;
+
+
 %% * (1) Macro generate_center_finder
 
 def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
@@ -238,9 +263,6 @@ for i = 10 upto 29:
 endfor;
 
 
-%% * (1) End
-
-end;
 
 
 %% ** (2) 
