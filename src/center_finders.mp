@@ -85,7 +85,7 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
     
     draw p0;
 
-    draw unitsquare scaled ccut_out_wd shifted (-.5ccut_out_wd, -.5ccut_out_wd);
+    draw unitsquare scaled cut_out_wd shifted (-.5cut_out_wd, -.5cut_out_wd);
 
     draw (-.5diameter, 0) -- (.5diameter, 0);
     draw (0, -.5diameter) -- (0, .5diameter);
@@ -178,7 +178,7 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
     draw z2 -- z10;
 
     for i = 0 upto 7:
-      draw unitsquare scaled ccut_out_wd shifted (z[i] shifted (-.5ccut_out_wd, -.5ccut_out_wd));
+      draw unitsquare scaled cut_out_wd shifted (z[i] shifted (-.5cut_out_wd, -.5cut_out_wd));
     endfor;
 
     z16 = .5[origin, z3] shifted (0, .25cm);
@@ -230,7 +230,7 @@ beginfig(0); %% 24cm
 
 %% ** (2)
 
-  generate_center_finder (24, 14, 1cm, true);
+  generate_center_finder (24, 14, 1, true);
 
 endfig;
 
@@ -238,7 +238,7 @@ endfig;
 
 beginfig(1);  
 
-  generate_center_finder (18, 10, 1cm, true);
+  generate_center_finder (18, 10, 1, true);
 
   %show p0;
 
@@ -249,7 +249,7 @@ endfig;
 
 beginfig(2); 
 
-  generate_center_finder (10, 6, .75cm, true);
+  generate_center_finder (10, 6, .75, true);
 
   %show p0;
   
