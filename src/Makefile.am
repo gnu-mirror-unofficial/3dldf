@@ -1777,10 +1777,10 @@ center_finders.pdf: center_finders.dvi
 center_finders.ps: center_finders.dvi
 	dvips -o center_finders.ps center_finders.dvi
 
-center_finders.dvi: center_finders.txt center_finders_0.eps
+center_finders.dvi: center_finders.txt center_finders_000.eps
 	tex center_finders.txt
 
-center_finders_0.eps: center_finders.mp
+center_finders_000.eps: center_finders.mp
 	mpost center_finders.mp
 
 cmyk_test.mp: cmyk_test.ldf 3dldf$(EXEEXT)
