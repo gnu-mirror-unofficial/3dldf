@@ -1771,17 +1771,17 @@ alhambra_207.dvi: alhambra_207.txt alhambra_207_000.eps
 alhambra_207_000.eps: alhambra_207.mp
 	mpost alhambra_207.mp
 
-circle_24cm.pdf: circle_24cm.dvi
-	dvipdfmx circle_24cm.dvi
+center_finders.pdf: center_finders.dvi
+	dvipdfmx center_finders.dvi
 
-circle_24cm.ps: circle_24cm.dvi
-	dvips -o circle_24cm.ps circle_24cm.dvi
+center_finders.ps: center_finders.dvi
+	dvips -o center_finders.ps center_finders.dvi
 
-circle_24cm.dvi: circle_24cm.txt circle_24cm_0.eps
-	tex circle_24cm.txt
+center_finders.dvi: center_finders.txt center_finders_0.eps
+	tex center_finders.txt
 
-circle_24cm_0.eps: circle_24cm.mp
-	mpost circle_24cm.mp
+center_finders_0.eps: center_finders.mp
+	mpost center_finders.mp
 
 cmyk_test.mp: cmyk_test.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) cmyk_test.ldf
