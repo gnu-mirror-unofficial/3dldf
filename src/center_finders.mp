@@ -66,18 +66,62 @@ medium_pen = pencircle scaled .5mm;
 path p[];
 
 beginfig(100);
+
+
+  p0 = fullcircle scaled 10cm;
+  p1 = fullcircle scaled 11cm;
+  p2 = fullcircle scaled 12cm;
+  p3 = fullcircle scaled 13cm;
+  p4 = fullcircle scaled 14cm;
+
+  draw p0;
+  draw p1;
+  draw p2;
+  draw p3;
+  draw p4;
+
+
+  for i = 0 upto 11:
+    draw origin -- ((7cm, 0) rotated 30i);
+  endfor;
+  
+  p5 = fullcircle scaled 9.5cm;
+
+  draw p5 withcolor blue;
+
+  z0 = (4.75cm, 0);
+  dotlabel.llft(btex $z_0$ etex, z0);
+
+  z1 = z0 rotated 30;
+  dotlabel.lft(btex $z_1$ etex, z1);
+
+  z2 = (5cm, 0);
+  dotlabel.lrt(btex $z_2$ etex, z2);
+
+  z3 = z2 rotated 30;
+  dotlabel.lrt(btex $z_3$ etex, z3);
+
+  
   drawdot origin withpen pencircle scaled 4mm;
-  undrawdot origin withpen pencircle scaled 2mm;
+  undrawdot origin withpen pencircle scaled 3mm;
   drawdot origin withpen pencircle scaled 1mm;
 
-  numeric j;
-  j = 0;
-  for i = 10 step .5 until 20:
-    p[j] = fullcircle scaled (i*cm);
-    draw p[j];
-    j := incr j;
-  endfor;
+  p6 = subpath(0, 2/3) of p0;
+  p7 = subpath(0, 2/3) of p5;
 
+  draw p6 withcolor red;
+  draw p7 withcolor green;
+
+  p8 = p6 .. (z3 --  z1) .. reverse p7 & z0 -- z2 .. cycle;
+
+  pen big_pen;
+  big_pen = pencircle scaled 1mm;
+  
+  %draw p8 withcolor (0, 1, 0, 0) withpen big_pen;
+
+  fill p8;
+  
+  
 endfig;
 
 %% * (1) End
