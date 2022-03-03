@@ -139,6 +139,9 @@ beginfig(0);
 
 %% ** (2)
 
+  generate_center_finder (24cm, 14cm);
+
+  
   pickup medium_pen;
 
   p0 = fullcircle scaled 24cm;
