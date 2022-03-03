@@ -122,6 +122,17 @@ pair center_rectangle;
 center_rectangle = origin;
 
 
+%% * (1) Macro generate_center_finder
+
+def generate_center_finder (expr diam, side_len) =
+
+
+  
+enddef;
+
+
+
+
 %% * (1)
 
 beginfig(0);
