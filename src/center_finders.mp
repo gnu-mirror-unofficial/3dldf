@@ -1,4 +1,4 @@
-%% circle_24cm.mp
+%% center_finders.mp
 %% Created by Laurence D. Finston (LDF) Wed 02 Mar 2022 03:41:36 PM CET
 
 %% * (1) Copyright and License.
@@ -66,7 +66,7 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
   
   begingroup;
 
-    save p, diameter, side_length, j, k, cut_out_wd;
+    save p, diameter, side_length, j, k;
     
     path p[];
 
@@ -77,10 +77,7 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
 
     numeric side_length;
     side_length = sside_len * cm;
-
-    numeric cut_out_wd;
-    cut_out_wd = ccut_out_wd * cm;
-    
+  
     p0 = fullcircle scaled diameter;
     
     draw p0;
