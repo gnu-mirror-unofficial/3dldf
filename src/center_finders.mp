@@ -62,7 +62,7 @@ medium_pen = pencircle scaled .5mm;
 
 %% * (1) Macro generate_center_finder
 
-def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
+def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
   
   begingroup;
 
@@ -82,7 +82,7 @@ def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
     
     draw p0;
 
-    draw unitsquare scaled 1cm shifted (-.5cm, -.5cm);
+    draw unitsquare scaled ccut_out_wd shifted (-.5ccut_out_wd, -.5ccut_out_wd);
 
     draw (-.5diameter, 0) -- (.5diameter, 0);
     draw (0, -.5diameter) -- (0, .5diameter);
@@ -115,8 +115,6 @@ def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
       label.lft("7", z7);
     fi;
 
-    if true: % false:
-    
     z8 = (z4 -- 4[z5, z4]) intersectionpoint p0;
 
     if ddo_labels:
@@ -125,7 +123,7 @@ def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
 
 
     
-      z9 = z8 reflectedabout ((0, -10), (0, 10));
+    z9 = z8 reflectedabout ((0, -10), (0, 10));
     z10 = z8 reflectedabout ((-10, 0), (10, 0));
     z11 = z9 reflectedabout ((-10, 0), (10, 0));
 
@@ -177,7 +175,7 @@ def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
     draw z2 -- z10;
 
     for i = 0 upto 7:
-      draw unitsquare scaled 1cm shifted (z[i] shifted (-.5cm, -.5cm));
+      draw unitsquare scaled ccut_out_wd shifted (z[i] shifted (-.5ccut_out_wd, -.5ccut_out_wd));
     endfor;
 
     z16 = .5[origin, z3] shifted (0, .25cm);
@@ -186,7 +184,7 @@ def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
     
     label.top(TEX("{\largebx " & decimal ddiam & "cm}"), z16);
 
-    z17 = z16 shifted (-1.10cm, .25cm);
+    z17 = z16 shifted (0, 1cm);
     
     draw fullcircle scaled .625cm shifted z17;
     draw z17 -- (z17 shifted (.55cm, 0) rotatedaround (z17, 45));
@@ -216,8 +214,6 @@ def generate_center_finder (expr ddiam, sside_len, ddo_labels) =
       draw (z18 shifted (-1cm, 0) -- z18 -- z18 shifted (0, -1cm)) rotated 90i;
     endfor;
 
-fi;
-    
   endgroup;
     
 enddef;
@@ -227,25 +223,35 @@ enddef;
 
 tracingonline := 1;
 
-beginfig(0);
+beginfig(0); %% 24cm
 
 %% ** (2)
 
-  generate_center_finder (24, 14, true);
+  generate_center_finder (24, 14, 1cm, true);
 
-  
-%% ** (2) End of Fig. 0
-    
 endfig;
 
-beginfig(1);
+%% ** (2) 18cm
 
-  generate_center_finder (10, 6, true);
+beginfig(1);  
+
+  generate_center_finder (18, 10, 1cm, true);
 
   %show p0;
 
   
 endfig;
+
+%% ** (2) 10cm
+
+beginfig(2); 
+
+  generate_center_finder (10, 6, .75cm, true);
+
+  %show p0;
+  
+endfig;
+
 
 
 
