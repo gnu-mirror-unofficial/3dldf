@@ -66,7 +66,7 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
   
   begingroup;
 
-    save p, diameter, side_length, j, k;
+    save p, diameter, side_length, j, k, cut_out_wd;
     
     path p[];
 
@@ -77,7 +77,10 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
 
     numeric side_length;
     side_length = sside_len * cm;
-  
+
+    numeric cut_out_wd;
+    cut_out_wd = ccut_out_wd * cm;
+    
     p0 = fullcircle scaled diameter;
     
     draw p0;
