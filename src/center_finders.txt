@@ -178,23 +178,21 @@ Boston, MA  02110-1301 USA\hfil\break
 
 %% *** (3) Page 1
 
+
+\newcount\figcnt
+\figcnt=10
+
+\dimen0=-2.5cm
+\loop
+\message{\the\figcnt}
 \vbox to \vsize{\vskip1cm
-\centerline{\Largebx Diameter 24cm}
+\centerline{\Largebx Diameter \the\figcnt cm}
 \vskip1cm
-\line{\hskip-1.75cm\epsffile{center_finders_000.eps}\hss}\vss}
-\vfil\eject
-
-
-%% *** (3) Page 2
-
-\vbox to \vsize{\vskip1cm
-\centerline{\Largebx Diameter 10cm}
-\vskip1cm
-\line{\hskip-1.75cm\epsffile{center_finders_001.eps}\hss}\vss}
-\vfil\eject
-
-
-
+\line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}\vss}
+\advance\figcnt by 1
+\ifnum\figcnt=25\advance\dimen0 by -1cm\fi
+\ifnum\figcnt=28\advance\dimen0 by -.75cm\fi     
+\ifnum\figcnt<30\repeat
 
 %% ** (2)
 

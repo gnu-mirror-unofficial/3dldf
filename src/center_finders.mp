@@ -226,36 +226,16 @@ enddef;
 
 tracingonline := 1;
 
-beginfig(0); %% 24cm
+j = .75;
 
-%% ** (2)
-
-  generate_center_finder (24, 14, 1, true);
-
-endfig;
-
-%% ** (2) 18cm
-
-beginfig(1);  
-
-  generate_center_finder (18, 10, 1, true);
-
-  %show p0;
-
-  
-endfig;
-
-%% ** (2) 10cm
-
-beginfig(2); 
-
-  generate_center_finder (10, 6, .75, true);
-
-  %show p0;
-  
-endfig;
-
-
+for i = 10 upto 29:
+  if i > 12:
+    j := 1;
+  fi;
+  beginfig(i); 
+    generate_center_finder (i, (.5i + .5), j, false);
+  endfig;
+endfor;
 
 
 %% * (1) End
