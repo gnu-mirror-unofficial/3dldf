@@ -750,16 +750,20 @@ endfig;
 %% The meanings of the other parameters should be obvious.
 %% LDF 2022.03.01.
 
+
+
 def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single,
                       pen_wd_rectangle, cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels) =
 
 %% ** (2)
 
+  pair A[];
+    
   begingroup;
 
-  save A, P, W, T, j;
+  save P, W, T, j;
   
-  pair A[];
+
   path P[];
   picture W[];
   transform T[];
@@ -916,9 +920,9 @@ def generate_pattern (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_
     dotlabel.top(btex $A_{22}$ etex, A22);
     dotlabel.top(btex $A_{23}$ etex, A23);
     dotlabel.top(btex $A_{24}$ etex, A24);
-    dotlabel.top(btex $A_{25}$ etex, A25);
+    dotlabel.bot(btex $A_{25}$ etex, A25);
     dotlabel.top(btex $A_{26}$ etex, A26);
-    dotlabel.top(btex $A_{27}$ etex, A27);
+    dotlabel.bot(btex $A_{27}$ etex, A27);
     dotlabel.top(btex $A_{28}$ etex, A28);
     dotlabel.top(btex $A_{29}$ etex, A29);
   fi;
@@ -938,21 +942,21 @@ def crosshair (expr pt_pos, ooffset_h, ooffset_v, line_len, ppen_wd,
 
   begingroup;
 
-    save A;
-    pair A[];
+    save BB;
+    pair BB[];
 
-    A0 = pt_pos shifted (ooffset_h, ooffset_v);
-    A1 = A0 shifted (line_len, 0);
-    A2 = A0 shifted (-line_len, 0);
-    A3 = A0 shifted (0, line_len);
-    A4 = A0 shifted (0, -line_len);
+    BB0 = pt_pos shifted (ooffset_h, ooffset_v);
+    BB1 = BB0 shifted (line_len, 0);
+    BB2 = BB0 shifted (-line_len, 0);
+    BB3 = BB0 shifted (0, line_len);
+    BB4 = BB0 shifted (0, -line_len);
 
     for i = 1 upto 4:
-      draw A0 -- A[i] withpen pencircle scaled ppen_wd;
+      draw BB0 -- BB[i] withpen pencircle scaled ppen_wd;
     endfor;
 
     if ddo_square:
-      draw (unitsquare scaled (2line_len * ssquare_proportion) shifted A0)
+      draw (unitsquare scaled (2line_len * ssquare_proportion) shifted BB0)
 	  shifted (-.5line_len, -.5line_len);
     fi;
 
@@ -1134,8 +1138,6 @@ beginfig(5);
 %% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
 %%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
 
-
-
   generate_pattern (1.825, 2, 2, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
 
   %dotlabel.top("Center", pattern_center);
@@ -1253,6 +1255,36 @@ beginfig(5);
 %% ** (2) End of Fig. 5
   
 endfig;  
+
+%% * (1) Fig. 6:  Pattern clipped to rectangle.  For woodcut, DIN A4.
+%%                Reversed version.
+
+beginfig(6);
+
+%% Arguments to generate_pattern:
+%% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
+%%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
+
+  pickup medium_pen;
+  
+  generate_pattern (1.825, 3, 4, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
+  
+  %draw A25 -- A27 withcolor blue;
+
+  z0 = A25;
+  z1 = z0 shifted (27cm, 0);
+  z2 = z1 shifted (0, (17cm-3pt));
+  z3 = (x0, y2);
+
+  path p[];
+
+  p0 = z0 -- z1 -- z2 -- z3 -- cycle;
+
+  clip currentpicture to p0;
+
+  draw p0; % withcolor blue;
+  
+endfig;
 
 
 
