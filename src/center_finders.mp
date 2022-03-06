@@ -61,74 +61,6 @@ pen medium_pen;
 medium_pen = pencircle scaled .5mm;
 
 
-%% ** (2) Fig. 100
-
-path p[];
-
-beginfig(100);
-
-
-  p0 = fullcircle scaled 10cm;
-  p1 = fullcircle scaled 11cm;
-  p2 = fullcircle scaled 12cm;
-  p3 = fullcircle scaled 13cm;
-  p4 = fullcircle scaled 14cm;
-
-  draw p0;
-  draw p1;
-  draw p2;
-  draw p3;
-  draw p4;
-
-
-  for i = 0 upto 11:
-    draw origin -- ((7cm, 0) rotated 30i);
-  endfor;
-  
-  p5 = fullcircle scaled 9.5cm;
-
-  draw p5 withcolor blue;
-
-  z0 = (4.75cm, 0);
-  dotlabel.llft(btex $z_0$ etex, z0);
-
-  z1 = z0 rotated 30;
-  dotlabel.lft(btex $z_1$ etex, z1);
-
-  z2 = (5cm, 0);
-  dotlabel.lrt(btex $z_2$ etex, z2);
-
-  z3 = z2 rotated 30;
-  dotlabel.lrt(btex $z_3$ etex, z3);
-
-  
-  drawdot origin withpen pencircle scaled 4mm;
-  undrawdot origin withpen pencircle scaled 3mm;
-  drawdot origin withpen pencircle scaled 1mm;
-
-  p6 = subpath(0, 2/3) of p0;
-  p7 = subpath(0, 2/3) of p5;
-
-  draw p6 withcolor red;
-  draw p7 withcolor green;
-
-  p8 = p6 .. (z3 --  z1) .. reverse p7 & z0 -- z2 .. cycle;
-
-  pen big_pen;
-  big_pen = pencircle scaled 1mm;
-  
-  %draw p8 withcolor (0, 1, 0, 0) withpen big_pen;
-
-  fill p8;
-  
-  
-endfig;
-
-%% * (1) End
-
-end;
-
-
 %% * (1) Macro generate_center_finder
 
 def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
@@ -296,17 +228,89 @@ enddef;
 tracingonline := 1;
 
 j = .75;
+k = 0;
 
-for i = 10 upto 29:
+for i = 10 step .25 until 29:
   if i > 12:
     j := 1;
   fi;
-  beginfig(i); 
+  beginfig(k); 
     generate_center_finder (i, (.5i + .5), j, false);
   endfig;
+  k := incr k;
 endfor;
 
+%% * (1) End
 
+end;
+
+
+%% ** (2) Fig. 100.  Multi-center finder
+
+path p[];
+
+beginfig(100);
+
+
+  p0 = fullcircle scaled 10cm;
+  p1 = fullcircle scaled 11cm;
+  p2 = fullcircle scaled 12cm;
+  p3 = fullcircle scaled 13cm;
+  p4 = fullcircle scaled 14cm;
+
+  draw p0;
+  draw p1;
+  draw p2;
+  draw p3;
+  draw p4;
+
+
+  for i = 0 upto 11:
+    draw origin -- ((7cm, 0) rotated 30i);
+  endfor;
+  
+  p5 = fullcircle scaled 9.5cm;
+
+  draw p5 withcolor blue;
+
+  z0 = (4.75cm, 0);
+  dotlabel.llft(btex $z_0$ etex, z0);
+
+  z1 = z0 rotated 30;
+  dotlabel.lft(btex $z_1$ etex, z1);
+
+  z2 = (5cm, 0);
+  dotlabel.lrt(btex $z_2$ etex, z2);
+
+  z3 = z2 rotated 30;
+  dotlabel.lrt(btex $z_3$ etex, z3);
+
+  
+  drawdot origin withpen pencircle scaled 4mm;
+  undrawdot origin withpen pencircle scaled 3mm;
+  drawdot origin withpen pencircle scaled 1mm;
+
+  p6 = subpath(0, 2/3) of p0;
+  p7 = subpath(0, 2/3) of p5;
+
+  draw p6 withcolor red;
+  draw p7 withcolor green;
+
+  p8 = p6 .. (z3 --  z1) .. reverse p7 & z0 -- z2 .. cycle;
+
+  pen big_pen;
+  big_pen = pencircle scaled 1mm;
+  
+  %draw p8 withcolor (0, 1, 0, 0) withpen big_pen;
+
+  fill p8;
+  
+  
+endfig;
+
+%% * (1) End
+
+end;
 
 
 %% ** (2) 

@@ -124,7 +124,7 @@ Copyright (C) 2022 The Free Software Foundation
 
 \leavevmode\hbox to \wd0{Created:\hfil}March 2, 2022
 
-\leavevmode\box0 March 3, 2022 %% Updated
+\leavevmode\box0 March 6, 2022 %% Updated
 
 GNU 3DLDF is free software; you can redistribute it and/or modify 
 it under the terms of the GNU General Public License as published by 
@@ -176,7 +176,41 @@ Boston, MA  02110-1301 USA\hfil\break
 
 
 
-%% *** (3) Page 100
+%% *** (3) Page 1
+
+
+\pageno=1
+
+\newcount\figcnt
+\figcnt=0
+
+\newdimen\diameter
+\diameter=10cm
+
+\dimen0=-2cm
+
+\diameter=10cm
+\loop
+\message{\the\figcnt}
+\vbox to \vsize{\vskip1cm
+\ifnum\figcnt<10
+\line{\hskip\dimen0\epsffile{center_finders_00\the\figcnt .eps}\hss}
+\else
+\line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
+\fi
+\vss}
+\advance\figcnt by 1
+\advance\diameter by .25cm
+\ifnum\figcnt=58\advance\dimen0 by -.25cm\fi
+\ifnum\figcnt=61\advance\dimen0 by -.25cm\fi
+\ifnum\figcnt=68\advance\dimen0 by -1.5cm\fi
+\ifnum\figcnt<76\repeat
+
+%% ** (2)
+
+\bye
+
+%% *** (3) Page 100.  Multi-center finder.
 
 \pageno=100
 
@@ -186,33 +220,11 @@ Boston, MA  02110-1301 USA\hfil\break
 \line{\hskip\dimen0\epsffile{center_finders_100.eps}\hss}
 \vss}
 
-
-\bye
-
-
-%% *** (3) Page 1
-
-
-\pageno=1
-
-\newcount\figcnt
-\figcnt=10
-
-\dimen0=-2.5cm
-\loop
-\message{\the\figcnt}
-\vbox to \vsize{\vskip1cm
-\centerline{\Largebx Diameter \the\figcnt cm}
-\vskip1cm
-\line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}\vss}
-\advance\figcnt by 1
-\ifnum\figcnt=25\advance\dimen0 by -1cm\fi
-\ifnum\figcnt=28\advance\dimen0 by -.75cm\fi     
-\ifnum\figcnt<30\repeat
-
 %% ** (2)
 
 \bye
+
+
 
 %% ** (2) 
 
