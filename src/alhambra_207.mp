@@ -1267,7 +1267,7 @@ beginfig(6);
 
   pickup medium_pen;
   
-  generate_pattern (1.825, 3, 4, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
+  generate_pattern (1.825, 3, 5, 2mm, .75mm, .5mm, .75mm, 0, 0, false, true);
   
   %draw A25 -- A27 withcolor blue;
 
@@ -1276,15 +1276,49 @@ beginfig(6);
   z2 = z1 shifted (0, (17cm-3pt));
   z3 = (x0, y2);
 
-  path p[];
+  path q[];
 
-  p0 = z0 -- z1 -- z2 -- z3 -- cycle;
+  q0 = fullcircle scaled 23cm shifted .5[A27, A28];
+  q1 = fullcircle scaled 21cm shifted .5[A27, A28];
 
-  clip currentpicture to p0;
+  clip currentpicture to q1;
 
-  draw p0; % withcolor blue;
+  draw q0;
+  draw q1;
   
 endfig;
+
+
+%% * (1) Fig. 7:  Pattern clipped to rectangle.  For woodcut, DIN A4.
+%%                Reversed version.
+
+beginfig(7);
+
+%% Arguments to generate_pattern:
+%% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
+%%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
+
+  pickup medium_pen;
+  
+  generate_pattern (1.825, 4, 4, 2mm, .75mm, .5mm, .75mm, 0, 0, false, false);
+  
+  %draw A25 -- A27 withcolor blue;
+
+  z0 = A25;
+  z1 = z0 shifted (27cm, 0);
+  z2 = z1 shifted (0, (17cm-3pt));
+  z3 = (x0, y2);
+
+  path q[];
+
+  q0 = z0 -- z1 -- z2 -- z3 -- cycle;
+
+  clip currentpicture to q0;
+
+  draw q0; % withcolor blue;
+  
+endfig;
+
 
 
 

@@ -88,7 +88,7 @@
 \fi
 
 %% Uncomment for A4 landscape.
-\iftrue % \iffalse
+\iffalse % \iftrue
 \special{papersize=297mm, 210mm}
 \hsize=297mm
 \vsize=210mm
@@ -102,7 +102,7 @@
 \fi
 
 %% Uncomment for A3 landscape.
-\iffalse % \iftrue
+\iftrue % \iffalse
 \special{papersize=420mm, 297mm} %% DIN A3 Landscape
 \vsize=297mm
 \hsize=420mm
@@ -203,6 +203,9 @@ Boston, MA  02110-1301 USA\hfil\break
 \vbox to \vsize{\vss\line{\hskip-1.25cm\epsffile{alhambra_207_006.eps}\hss}\vskip1.25cm}
 \vfil\eject
 
+
+
+
 %% ** (2) Empty page at end
 
 \vbox{}
@@ -215,8 +218,19 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \bye
 
-%% * (1) Version for plaster slab
 
+%% ** (2) Version for plaster slab, fits within 24cm circle, but goes to boundary.
+%%        This figure requires DIN A3.
+%%        LDF 2022.03.06.
+
+
+\vbox to \vsize{\vss\line{\hskip-1.25cm\epsffile{alhambra_207_007.eps}\hss}\vskip1.25cm}
+\vfil\eject
+
+\bye
+
+
+%% * (1) Version for plaster slab, fits within rectangle that fits within a 24cm circle.
 
 %% ** (2)
 
