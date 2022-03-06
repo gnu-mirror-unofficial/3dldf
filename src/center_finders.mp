@@ -231,7 +231,7 @@ j = .75;
 k = 0;
 m = 100;
 
-for i = 10 step .1 until 29:
+for i = 10 step .1 until 29.1:
   if i > 12:
     j := 1;
   fi;

@@ -201,41 +201,45 @@ Boston, MA  02110-1301 USA\hfil\break
 \vss}
 \advance\figcnt by 2
 \advance\nextfigcnt by 2
-\advance\diameter by 1
+\advance\diameter by 2
 \ifnum\figcnt<9\repeat
-
-\bye
 
 
 \loop
 \message{\the\figcnt}
+\ifnum\figcnt<100
 \vbox to \vsize{\vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\nextfigcnt .eps}\hss}
 \vss}
+\else
+\vbox to \vsize{\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_\the\figcnt .eps}\hss}
+\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_\the\nextfigcnt .eps}\hss}
+\vss}
+\fi
 \advance\figcnt by 2
 \advance\nextfigcnt by 2
-\advance\diameter by .25cm
-\ifnum\figcnt<23\repeat
+\advance\diameter by 2
+\ifnum\diameter<160\repeat
 
 \loop
-\message{\the\figcnt}
+%% \message{Fig count:  \the\figcnt}
+%% \message{Diameter:  \the\diameter}
+\ifnum\figcnt<100
 \vbox to \vsize{\vskip1cm
-\ifnum\figcnt<10
-\line{\hskip\dimen0\epsffile{center_finders_00\the\figcnt .eps}\hss}
-\else
 \line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
-\fi
 \vss}
+\else
+\vbox to \vsize{\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_\the\figcnt .eps}\hss}
+\vss}
+\fi
 \advance\figcnt by 1
-\advance\diameter by .25cm
-\ifnum\figcnt=58\advance\dimen0 by -.25cm\fi
-\ifnum\figcnt=61\advance\dimen0 by -.25cm\fi
-\ifnum\figcnt=68\advance\dimen0 by -1.5cm\fi
-\ifnum\figcnt<76\repeat
-
-
+\advance\diameter by 1
+\ifnum\diameter<291\repeat
 
 
 %% ** (2)
