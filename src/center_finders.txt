@@ -101,7 +101,10 @@
 %% *** (3) 
 
 
-\headline={\hfil {\tt \timestamp}}
+\headline={\lower1.5cm\hbox to 0pt{\hskip.5\hsize\hskip-3.5cm\folio\hss}%
+           \lower1.5cm\hbox{\hskip-1cm Center Finders\quad Author:  Laurence D.~Finston%
+           \hskip7.5cm\quad Copyright {\copyright} 2022 The Free Software Association, Inc.\quad
+           {\tt \timestamp}}}
 
 \pageno=-1
 \footline={\hfil \folio\hfil}
@@ -172,9 +175,6 @@ Boston, MA  02110-1301 USA\hfil\break
 
 %% ** (2)
 
-\headline={\hfil {\tt \timestamp}\hskip2cm}
-
-
 
 %% *** (3) Page 1
 
@@ -194,7 +194,7 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \loop
 \message{\the\figcnt}
-\vbox to \vsize{\vskip1cm
+\vbox to \vsize{\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_00\the\figcnt .eps}\hss}
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_00\the\nextfigcnt .eps}\hss}
@@ -208,13 +208,13 @@ Boston, MA  02110-1301 USA\hfil\break
 \loop
 \message{\the\figcnt}
 \ifnum\figcnt<100
-\vbox to \vsize{\vskip1cm
+\vbox to \vsize{\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\nextfigcnt .eps}\hss}
 \vss}
 \else
-\vbox to \vsize{\vskip1cm
+\vbox to \vsize{\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_\the\figcnt .eps}\hss}
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_\the\nextfigcnt .eps}\hss}
@@ -228,12 +228,27 @@ Boston, MA  02110-1301 USA\hfil\break
 \loop
 %% \message{Fig count:  \the\figcnt}
 %% \message{Diameter:  \the\diameter}
+\ifnum\diameter=245
+\advance\dimen0 by -.5cm
+\fi
+\ifnum\diameter=256
+\advance\dimen0 by -.5cm
+\fi
+\ifnum\diameter=270
+\advance\dimen0 by -.5cm
+\fi
+\ifnum\diameter=280
+\advance\dimen0 by -.5cm
+\fi
+\ifnum\diameter=285
+\advance\dimen0 by -.25cm
+\fi
 \ifnum\figcnt<100
-\vbox to \vsize{\vskip1cm
+\vbox to \vsize{\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
 \vss}
 \else
-\vbox to \vsize{\vskip1cm
+\vbox to \vsize{\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_\the\figcnt .eps}\hss}
 \vss}
 \fi
@@ -250,7 +265,7 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \pageno=100
 
-\vbox to \vsize{\vskip1cm
+\vbox to \vsize{\vskip3cm
 %\centerline{\Largebx Diameter \the\figcnt cm}
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_100.eps}\hss}
