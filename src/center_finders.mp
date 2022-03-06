@@ -63,7 +63,7 @@ medium_pen = pencircle scaled .5mm;
 
 %% * (1) Macro generate_center_finder
 
-def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
+def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_labels) =
   
   begingroup;
 
@@ -186,7 +186,7 @@ def generate_center_finder (expr ddiam, sside_len, ccut_out_wd, ddo_labels) =
 
     TEXPRE("\font\largebx=cmbx12");
     
-    label.top(TEX("{\largebx " & decimal ddiam & "cm}"), z16);
+    label.top(TEX("{\largebx " & decimal ddiam_ctr & "mm}"), z16);
 
     z17 = z16 shifted (0, 1cm);
     
@@ -229,15 +229,17 @@ tracingonline := 1;
 
 j = .75;
 k = 0;
+m = 100;
 
-for i = 10 step .25 until 29:
+for i = 10 step .1 until 29:
   if i > 12:
     j := 1;
   fi;
   beginfig(k); 
-    generate_center_finder (i, (.5i + .5), j, false);
+    generate_center_finder (i, m, (.5i + .5), j, false);
   endfig;
   k := incr k;
+  m := incr m;
 endfor;
 
 %% * (1) End

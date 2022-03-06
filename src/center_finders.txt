@@ -187,12 +187,11 @@ Boston, MA  02110-1301 USA\hfil\break
 \newcount\nextfigcnt
 \nextfigcnt=1
 
-\newdimen\diameter
-\diameter=10cm
+\newcount\diameter
+\diameter=100
 
 \dimen0=-2cm
 
-\diameter=10cm
 \loop
 \message{\the\figcnt}
 \vbox to \vsize{\vskip1cm
@@ -202,8 +201,10 @@ Boston, MA  02110-1301 USA\hfil\break
 \vss}
 \advance\figcnt by 2
 \advance\nextfigcnt by 2
-\advance\diameter by .25cm
+\advance\diameter by 1
 \ifnum\figcnt<9\repeat
+
+\bye
 
 
 \loop
