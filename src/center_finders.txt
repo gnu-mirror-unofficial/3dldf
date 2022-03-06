@@ -184,12 +184,40 @@ Boston, MA  02110-1301 USA\hfil\break
 \newcount\figcnt
 \figcnt=0
 
+\newcount\nextfigcnt
+\nextfigcnt=1
+
 \newdimen\diameter
 \diameter=10cm
 
 \dimen0=-2cm
 
 \diameter=10cm
+\loop
+\message{\the\figcnt}
+\vbox to \vsize{\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_00\the\figcnt .eps}\hss}
+\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_00\the\nextfigcnt .eps}\hss}
+\vss}
+\advance\figcnt by 2
+\advance\nextfigcnt by 2
+\advance\diameter by .25cm
+\ifnum\figcnt<9\repeat
+
+
+\loop
+\message{\the\figcnt}
+\vbox to \vsize{\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
+\vskip1cm
+\line{\hskip\dimen0\epsffile{center_finders_0\the\nextfigcnt .eps}\hss}
+\vss}
+\advance\figcnt by 2
+\advance\nextfigcnt by 2
+\advance\diameter by .25cm
+\ifnum\figcnt<23\repeat
+
 \loop
 \message{\the\figcnt}
 \vbox to \vsize{\vskip1cm
@@ -205,6 +233,9 @@ Boston, MA  02110-1301 USA\hfil\break
 \ifnum\figcnt=61\advance\dimen0 by -.25cm\fi
 \ifnum\figcnt=68\advance\dimen0 by -1.5cm\fi
 \ifnum\figcnt<76\repeat
+
+
+
 
 %% ** (2)
 
