@@ -231,6 +231,12 @@ j = .75;
 k = 0;
 m = 100;
 
+%% It doesn't work to have the loop increment until 29 (i.e., without the .1):
+%% Floating point numbers in MP (at least by default) are not very precise
+%% and this imprecision causes this loop to exit too early, not creating the
+%% figure for the 290mm diameter circle, as of this date.
+%% LDF 2022.03.06.
+
 for i = 10 step .1 until 29.1:
   if i > 12:
     j := 1;
