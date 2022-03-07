@@ -53,7 +53,7 @@ input TEX.mp;
 
 %% \font\huge=cmr17 scaled 8000
 
-verbatimtex \font\large=cmr12 scaled 1250\font\largebx=cmbx12 scaled 1250
+verbatimtex \font\mediumrm=cmr12\font\large=cmr12 scaled 1250\font\largebx=cmbx12 scaled 1250
             \font\Largebx=cmbx17 scaled 1250 etex;
 
 prologues := 3;
@@ -1256,8 +1256,7 @@ beginfig(5);
   
 endfig;  
 
-%% * (1) Fig. 6:  Pattern clipped to rectangle.  For woodcut, DIN A4.
-%%                Reversed version.
+%% * (1) Fig. 6:  Pattern clipped to circle.  Reversed.  For plaster block.
 
 beginfig(6);
 
@@ -1276,15 +1275,72 @@ beginfig(6);
   z2 = z1 shifted (0, (17cm-3pt));
   z3 = (x0, y2);
 
+  z4 = .5[A27, A28];
+  
   path q[];
 
-  q0 = fullcircle scaled 23cm shifted .5[A27, A28];
-  q1 = fullcircle scaled 21cm shifted .5[A27, A28];
+  q0 = fullcircle scaled 23cm shifted z4;
+  q1 = fullcircle scaled 21cm shifted z4;
 
+  draw z4 -- z4 shifted (-.5cm, 0);
+  draw z4 -- z4 shifted (.5cm, 0);
+  draw z4 -- z4 shifted (0, -.5cm);
+  draw z4 -- z4 shifted (0, .5cm);
+  
+  drawdot   z4 withpen pencircle scaled 3mm;
+  undrawdot z4 withpen pencircle scaled 1.5mm;
+  drawdot   z4 withpen pencircle scaled .5mm;
+
+
+  
+%% crosshair arguments:  (expr pt_pos, ooffset_h, ooffset_v, line_len, ppen_wd,
+%%                             ddo_square, ssquare_proportion)
+
+
+
+  
   clip currentpicture to q1;
 
+  draw fullcircle scaled 22cm shifted z4 withcolor gray dashed evenly;
+
+  crosshair(z4, 11cm, 0, .75cm, .5mm, true, .5);
+  crosshair(z4, -11cm, 0, .75cm, .5mm, true, .5);
+  crosshair(z4, 0, 11cm, .75cm, .5mm, true, .5);
+  crosshair(z4, 0, -11cm, .75cm, .5mm, true, .5);
+
+  z5 = z4 shifted (11cm, 0);
+
+  %dotlabel.top(btex $z_5$ etex, z5);
+
+  z6 = z5 rotatedaround (z4, 45);
+  crosshair(z6, 0, 0, .75cm, .5mm, true, .5);
+  %dotlabel.top(btex $z_6$ etex, z6);
+  
+  for i = 1 upto 3:
+    z[6+i] = z6 rotatedaround(z4, 90i);
+    crosshair(z[6+i], 0, 0, .75cm, .5mm, true, .5);
+  endfor;
+
+  % dotlabel.top(btex $z_7$ etex, z7);
+  % dotlabel.top(btex $z_8$ etex, z8);
+  % dotlabel.top(btex $z_9$ etex, z9);
+
+
+  
   draw q0;
   draw q1;
+
+  q2 = (unitsquare scaled 25cm shifted z4) shifted (-12.5cm, -12.5cm);
+  
+  draw q2;
+
+  z10 = point 1 of q2;
+
+  % dotlabel.rt(btex $z_{10}$ etex, z10);
+
+  label.ulft(btex \setbox0=\hbox{{\mediumrm Diameter outer circle:  23cm}}%
+      \vbox{\copy0\vskip3pt\hbox to \wd0{{\mediumrm Diameter inner circle:\hfil 21cm}}} etex,
+      z10 shifted (-.5cm, .5cm));
   
 endfig;
 

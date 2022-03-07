@@ -1768,6 +1768,15 @@ alhambra_207.ps: alhambra_207.dvi
 alhambra_207.dvi: alhambra_207.txt alhambra_207_000.eps
 	tex alhambra_207.txt
 
+alhambra_207_a3_l.pdf: alhambra_207_a3_l.dvi
+	dvipdfmx alhambra_207_a3_l.dvi
+
+alhambra_207_a3_l.ps: alhambra_207_a3_l.dvi
+	dvips -o alhambra_207_a3_l.ps alhambra_207_a3_l.dvi
+
+alhambra_207_a3_l.dvi: alhambra_207_a3_l.txt alhambra_207_000.eps
+	tex alhambra_207_a3_l.txt
+
 alhambra_207_000.eps: alhambra_207.mp
 	mpost alhambra_207.mp
 
