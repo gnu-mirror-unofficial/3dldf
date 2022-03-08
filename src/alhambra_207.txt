@@ -109,7 +109,7 @@
 \fi
 
 \advance\voffset by -1in
-%\advance\voffset by 2cm
+\advance\voffset by .25cm
 %\advance\hoffset by -1in
 %\advance\hoffset by 1.5cm
 %\advance\vsize by -3.5cm
@@ -124,7 +124,7 @@
 
 \headline={\hfil {\tt \timestamp}}
 
-\pageno=1
+\pageno=-1
 \footline={\hfil \folio\hfil}
 
 \begingroup
@@ -192,7 +192,14 @@ Boston, MA  02110-1301 USA\hfil\break
 
 %% *** (3)
 
-\headline={\hfil {\tt \timestamp}\hskip2cm}
+\pageno=1
+
+\headline={\lower1.125cm\hbox to 0pt{\hskip.5\hsize\hskip-3.5cm\folio\hss}%
+   \lower1.125cm\hbox{\hskip-1cm Alhambra 207 DIN A4\quad Author:  Laurence D.~Finston%
+           \hskip6cm\quad Copyright {\copyright} 2022 The Free Software Association, Inc.\quad
+           {\tt \timestamp}}}
+
+
 
 \nopagenumbers
 \parskip=0pt
@@ -204,8 +211,6 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \vbox to \vsize{\vss\line{\hskip-1.25cm\epsffile{alhambra_207_007.eps}\hss}\vskip1.25cm}
 \vfil\eject
-
-\bye
 
 %% * (1) Version for plaster slab, fits within rectangle that fits within a 24cm circle.
 
@@ -270,15 +275,9 @@ Boston, MA  02110-1301 USA\hfil\break
 %%        This code is only included here for reference!
 %%        LDF 2022.03.07.
 
-\vbox to \vsize{\vss\line{\hskip-1.25cm\epsffile{alhambra_207_006.eps}\hss}\vskip1.25cm}
-\vfil\eject
 
-%% ** (2) Empty page at end
-
-\vbox{}
-\vskip 2cm
-\leftline{\hskip2cm{\largebx Blank page.  Needed to improve scrolling in PDF viewer.}}
-\vfil\eject
+%% \vbox to \vsize{\vss\line{\hskip-1.25cm\epsffile{alhambra_207_006.eps}\hss}\vskip1.25cm}
+%% \vfil\eject
 
 
 %% ** (2)
