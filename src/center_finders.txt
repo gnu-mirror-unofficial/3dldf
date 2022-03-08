@@ -175,11 +175,14 @@ Boston, MA  02110-1301 USA\hfil\break
 
 %% ** (2)
 
+%% Up to 160mm, there are two circles per page.  The page numbers correspond to the
+%% first circle on the page, i.e., the even-numbered one.
+%% Above 160mm, there is one circle per page and the page numbers correspond to the
+%% circle on the page.
+%% LDF 2022.03.08.
 
-%% *** (3) Page 1
+%% *** (3) 
 
-
-\pageno=1
 
 \newcount\figcnt
 \figcnt=0
@@ -189,8 +192,20 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \newcount\diameter
 \diameter=100
-
 \dimen0=-2cm
+
+%% * (1)
+
+\pageno=1
+
+\vbox to \vsize{\vskip3cm
+\line{\hskip\dimen0\epsffile{center_finders_300.eps}\hss}
+\vss}
+\vfil\eject
+
+\bye
+
+%% * (1)
 
 \loop
 \message{\the\figcnt}
@@ -203,7 +218,6 @@ Boston, MA  02110-1301 USA\hfil\break
 \advance\nextfigcnt by 2
 \advance\diameter by 2
 \ifnum\figcnt<9\repeat
-
 
 \loop
 \message{\the\figcnt}
@@ -224,6 +238,8 @@ Boston, MA  02110-1301 USA\hfil\break
 \advance\nextfigcnt by 2
 \advance\diameter by 2
 \ifnum\diameter<160\repeat
+
+
 
 \loop
 %% \message{Fig count:  \the\figcnt}
@@ -261,9 +277,9 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \bye
 
-%% *** (3) Page 100.  Multi-center finder.
+%% *** (3) Page X.  Multi-center finder.
 
-\pageno=100
+%\pageno=100
 
 \vbox to \vsize{\vskip3cm
 %\centerline{\Largebx Diameter \the\figcnt cm}

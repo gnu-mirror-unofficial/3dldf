@@ -223,6 +223,19 @@ def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_l
 enddef;
 
 
+
+%% * (1)
+
+%% ** (2)
+
+beginfig(300);
+  generate_center_finder (23.25, 232.5, (23.25/2 + .5), 1, false);
+endfig;
+
+%% * (1) End
+
+end;
+
 %% * (1)
 
 tracingonline := 1;
@@ -253,11 +266,17 @@ endfor;
 end;
 
 
-%% ** (2) Fig. 100.  Multi-center finder
+%% ** (2)
+
+beginfig(300);
+  generate_center_finder (232.5, "232.5", (232.5/2 + .5), 1, false);
+endfig;
+
+%% ** (2) Fig. 400.  Multi-center finder
 
 path p[];
 
-beginfig(100);
+beginfig(400);
 
 
   p0 = fullcircle scaled 10cm;
