@@ -1350,6 +1350,9 @@ endfig;
 
 beginfig(7);
 
+%% !! START HERE: LDF 2022.03.08.  Add crosshairs corresponding to pattern repeats.
+%% Make pattern bigger (extend upward).  Put on 3DLDF webpage.
+  
 %% Arguments to generate_pattern:
 %% (expr scale_val, horiz_ctr, vert_ctr, pen_wd_outer, pen_wd_inner, pen_wd_single, pen_wd_rectangle,
 %%       cross_hair_horiz, cross_hair_vert, ddo_clip, ddo_labels)
