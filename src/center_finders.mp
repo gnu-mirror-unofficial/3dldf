@@ -61,7 +61,21 @@ pen medium_pen;
 medium_pen = pencircle scaled .5mm;
 
 
+
 %% * (1) Macro generate_center_finder
+
+%% ** (2) Arguments
+
+%% Arguments to generate_center_finder.  All arguments are without units!
+%% 
+%% ddiam:         Diameter of circle in cm.
+%% ddiam_ctr:     Diameter of circle in mm.  Used for string.
+%% sside_len:     Width of inner square (p1) in cm.  Crosshairs are 
+%%                located at the corners of p1. 
+%% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
+%% ddo_labels:    boolean
+
+%% ** (2) Definition
 
 def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_labels) =
   
@@ -99,8 +113,10 @@ def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_l
       dotlabel.rt(btex $(12\rm{cm}, 0)$ etex, (.5diameter, 0));
     fi;
 
+    %% Inner square.  Used for crosshairs.
+    %%
     p1 = unitsquare scaled side_length shifted (-.5side_length, -.5side_length);
-    draw p1;
+    draw p1;  % withcolor blue;
     
     numeric j;
     j = 0;
@@ -222,7 +238,45 @@ def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_l
     
 enddef;
 
+%% ** (2) End of definition of generate_center_finder.
 
+%% * (1)
+
+tracingonline := 1;
+
+j = .75; %% Cut-out width for center finders with diameter <= 10cm.
+k = 0;   %% Figure counter.
+m = 100; %% Diameter counter in mm.
+
+%% It doesn't work to have the loop increment until 29 (i.e., without the .1):
+%% Floating point numbers in MP (at least by default) are not very precise
+%% and this imprecision causes this loop to exit too early, not creating the
+%% figure for the 290mm diameter circle, as of this date.
+%% LDF 2022.03.06.
+
+%% Arguments to generate_center_finder.  All arguments are without units!
+%% 
+%% ddiam:         Diameter of circle in cm.
+%% ddiam_ctr:     Diameter of circle in mm.  Used for string.
+%% sside_len:     Width of inner square (p1) in cm.  Crosshairs are 
+%%                located at the corners of p1. 
+%% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
+%% ddo_labels:    boolean
+
+for i = 10 step .1 until 29.1: % 10.1
+  if i > 12:
+    j := 1;
+  fi;
+  beginfig(k); 
+    generate_center_finder (i, m, (.5i + .5), j, true);
+  endfig;
+  k := incr k;
+  m := incr m;
+endfor;
+
+%% * (1) End
+
+end;
 
 %% * (1)
 
@@ -235,42 +289,6 @@ endfig;
 %% * (1) End
 
 end;
-
-%% * (1)
-
-tracingonline := 1;
-
-j = .75;
-k = 0;
-m = 100;
-
-%% It doesn't work to have the loop increment until 29 (i.e., without the .1):
-%% Floating point numbers in MP (at least by default) are not very precise
-%% and this imprecision causes this loop to exit too early, not creating the
-%% figure for the 290mm diameter circle, as of this date.
-%% LDF 2022.03.06.
-
-for i = 10 step .1 until 29.1:
-  if i > 12:
-    j := 1;
-  fi;
-  beginfig(k); 
-    generate_center_finder (i, m, (.5i + .5), j, false);
-  endfig;
-  k := incr k;
-  m := incr m;
-endfor;
-
-%% * (1) End
-
-end;
-
-
-%% ** (2)
-
-beginfig(300);
-  generate_center_finder (232.5, "232.5", (232.5/2 + .5), 1, false);
-endfig;
 
 %% ** (2) Fig. 400.  Multi-center finder
 
@@ -349,7 +367,7 @@ end;
 %%       accessed via the local variables list.                              
 %%       LDF 2004.02.12.
 
-%% (progn (metafont-mode) (outline-minor-mode t) (setq fill-column 80) (ignore '(  
+%% (progn (metapost-mode) (outline-minor-mode t) (setq fill-column 80) (ignore '(  
 %% )) (setq outline-regexp "%% [*\f]+"))
 
 %% * (1) Local variables for Emacs.
