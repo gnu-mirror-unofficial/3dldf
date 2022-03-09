@@ -261,12 +261,12 @@ m = 100; %% Diameter counter in mm.
 %% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
 %% ddo_labels:    boolean
 
-for i = 10 step .025 until 10.1: % 29.1
-  if i > 12.0:
+for i = 100 step .25 until 100.25: % 29.1
+  if i > 120: %% Make cut-outs larger for diameter > 120mm.
     j := 1;
   fi;
   beginfig(k); 
-    generate_center_finder (m, (.5i + .5), j, false);
+    generate_center_finder (m, (.05i + .5), j, false);
   endfig;
   k := incr k;
   m := m + .25;
