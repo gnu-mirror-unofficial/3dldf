@@ -263,15 +263,15 @@ m = 100; %% Diameter counter in mm.
 %% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
 %% ddo_labels:    boolean
 
-for i = 10 step .1 until 29.1: % 10.1
-  if i > 12:
+for i = 10 step .025 until 29.1: % 11.025
+  if i > 12.0:
     j := 1;
   fi;
   beginfig(k); 
     generate_center_finder (i, m, (.5i + .5), j, false);
   endfig;
   k := incr k;
-  m := incr m;
+  m := m + .25;
 endfor;
 
 %% * (1) End
