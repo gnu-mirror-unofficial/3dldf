@@ -243,15 +243,8 @@ enddef;
 
 tracingonline := 1;
 
-j = .75; %% Cut-out width for center finders with diameter <= 10cm.
+cut_out_width = .75; %% Cut-out width for center finders with diameter <= 10cm.
 k = 0;   %% Figure counter.
-m = 100; %% Diameter counter in mm.
-
-%% It doesn't work to have the loop increment until 29 (i.e., without the .1):
-%% Floating point numbers in MP (at least by default) are not very precise
-%% and this imprecision causes this loop to exit too early, not creating the
-%% figure for the 290mm diameter circle, as of this date.
-%% LDF 2022.03.06.
 
 %% Arguments to generate_center_finder.  All arguments are without units!
 %% 
@@ -261,15 +254,17 @@ m = 100; %% Diameter counter in mm.
 %% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
 %% ddo_labels:    boolean
 
-for m = 100 step .25 until 100.25: % 29.1
-  if m > 120: %% Make cut-outs larger for diameter > 120mm.
-    j := 1;
+m = 100;
+forever:
+  if m = 120: %% Make cut-outs larger for diameter > 120mm.
+    cut_out_width := 1;
   fi;
   beginfig(k); 
-    generate_center_finder (m, (.5m + 5), j, false);
+    generate_center_finder (m, (.5m + 5), cut_out_width, false);
   endfig;
+  exitif k = 760; %% Fig. 760 (290mm) is the last one.  LDF 2022.03.09.
   k := incr k;
-  exitif k = 761; %% Fig. 760 (290mm) is the last one.  LDF 2022.03.09.
+  m := m + .25;
 endfor;
 
 %% * (1) End
@@ -281,7 +276,7 @@ end;
 %% ** (2)
 
 beginfig(300);
-  generate_center_finder (23.25, 232.5, (23.25/2 + .5), 1, false);
+  generate_center_finder (232.5, (23.25/2 + .5), 1, false);
 endfig;
 
 %% * (1) End
