@@ -90,7 +90,7 @@ def generate_center_finder (expr ddiam_ctr, sside_len, ccut_out_wd, ddo_labels) 
     diameter = ddiam_ctr * mm;
 
     numeric side_length;
-    side_length = sside_len * cm;
+    side_length = sside_len * mm;
 
     numeric cut_out_wd;
     cut_out_wd = ccut_out_wd * cm;
@@ -256,20 +256,19 @@ m = 100; %% Diameter counter in mm.
 %% Arguments to generate_center_finder.  All arguments are without units!
 %% 
 %% ddiam_ctr:     Diameter of circle in mm.
-%% sside_len:     Width of inner square (p1) in cm.  Crosshairs are 
+%% sside_len:     Width of inner square (p1) in mm.  Crosshairs are 
 %%                located at the corners of p1. 
 %% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
 %% ddo_labels:    boolean
 
-for i = 100 step .25 until 100.25: % 29.1
-  if i > 120: %% Make cut-outs larger for diameter > 120mm.
+for m = 100 step .25 until 100.25: % 29.1
+  if m > 120: %% Make cut-outs larger for diameter > 120mm.
     j := 1;
   fi;
   beginfig(k); 
-    generate_center_finder (m, (.05i + .5), j, false);
+    generate_center_finder (m, (.5m + 5), j, false);
   endfig;
   k := incr k;
-  m := m + .25;
   exitif k = 761; %% Fig. 760 (290mm) is the last one.  LDF 2022.03.09.
 endfor;
 
