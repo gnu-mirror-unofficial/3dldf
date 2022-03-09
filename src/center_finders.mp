@@ -272,6 +272,7 @@ for i = 10 step .025 until 29.1: % 11.025
   endfig;
   k := incr k;
   m := m + .25;
+  exitif k = 761; %% Fig. 760 (290mm) is the last one.  LDF 2022.03.09.
 endfor;
 
 %% * (1) End
