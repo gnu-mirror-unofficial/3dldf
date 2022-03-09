@@ -215,8 +215,6 @@ Boston, MA  02110-1301 USA\hfil\break
 \advance\nextfigcnt by 2
 \ifnum\figcnt<9\repeat
 
-\bye
-
 
 \loop
 \message{\the\figcnt}
@@ -236,41 +234,41 @@ Boston, MA  02110-1301 USA\hfil\break
 \advance\figcnt by 2
 \advance\nextfigcnt by 2
 \advance\diameter by 2
-\ifnum\diameter<160\repeat
-
+\ifnum\figcnt<240\repeat
 
 
 \loop
-%% \message{Fig count:  \the\figcnt}
-%% \message{Diameter:  \the\diameter}
-\ifnum\diameter=245
+\message{Fig count:  \the\figcnt}
+\ifnum\figcnt=590
 \advance\dimen0 by -.5cm
 \fi
-\ifnum\diameter=256
+\ifnum\figcnt=622
 \advance\dimen0 by -.5cm
 \fi
-\ifnum\diameter=270
-\advance\dimen0 by -.5cm
-\fi
-\ifnum\diameter=280
-\advance\dimen0 by -.5cm
-\fi
-\ifnum\diameter=285
+\ifnum\figcnt=670
 \advance\dimen0 by -.25cm
 \fi
-\ifnum\figcnt<100
-\vbox to \vsize{\vskip3cm
-\line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
-\vss}
-\else
-\vbox to \vsize{\vskip3cm
+\ifnum\figcnt=670
+\advance\dimen0 by -.25cm
+\fi
+\ifnum\figcnt=720
+\advance\dimen0 by -.25cm
+\fi
+\ifnum\figcnt=728
+\advance\dimen0 by -.25cm
+\fi
+\ifnum\figcnt=744
+\advance\dimen0 by -.125cm
+\fi
+\ifnum\figcnt=744
+\advance\dimen0 by -.0625cm 
+\fi
+\vbox to \vsize{\vbox to 0pt{\hbox{\lower2cm\hbox{\hskip-1cm{\Largebx Fig.~\the\figcnt}}}\vss}%
+\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_\the\figcnt .eps}\hss}
 \vss}
-\fi
 \advance\figcnt by 1
-\advance\diameter by 1
-\ifnum\diameter<291\repeat
-
+\ifnum\figcnt<761\repeat
 
 %% ** (2)
 
