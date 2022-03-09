@@ -68,8 +68,7 @@ medium_pen = pencircle scaled .5mm;
 
 %% Arguments to generate_center_finder.  All arguments are without units!
 %% 
-%% ddiam:         Diameter of circle in cm.
-%% ddiam_ctr:     Diameter of circle in mm.  Used for string.
+%% ddiam_ctr:     Diameter of circle in mm.  
 %% sside_len:     Width of inner square (p1) in cm.  Crosshairs are 
 %%                located at the corners of p1. 
 %% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
@@ -77,7 +76,7 @@ medium_pen = pencircle scaled .5mm;
 
 %% ** (2) Definition
 
-def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_labels) =
+def generate_center_finder (expr ddiam_ctr, sside_len, ccut_out_wd, ddo_labels) =
   
   begingroup;
 
@@ -88,7 +87,7 @@ def generate_center_finder (expr ddiam, ddiam_ctr, sside_len, ccut_out_wd, ddo_l
     pickup medium_pen;
 
     numeric diameter;
-    diameter = ddiam * cm;
+    diameter = ddiam_ctr * mm;
 
     numeric side_length;
     side_length = sside_len * cm;
@@ -256,19 +255,18 @@ m = 100; %% Diameter counter in mm.
 
 %% Arguments to generate_center_finder.  All arguments are without units!
 %% 
-%% ddiam:         Diameter of circle in cm.
-%% ddiam_ctr:     Diameter of circle in mm.  Used for string.
+%% ddiam_ctr:     Diameter of circle in mm.
 %% sside_len:     Width of inner square (p1) in cm.  Crosshairs are 
 %%                located at the corners of p1. 
 %% ccut_out_wd:   Width of cut-outs surrounding the crosshairs.  In cm.
 %% ddo_labels:    boolean
 
-for i = 10 step .025 until 29.1: % 11.025
+for i = 10 step .025 until 10.1: % 29.1
   if i > 12.0:
     j := 1;
   fi;
   beginfig(k); 
-    generate_center_finder (i, m, (.5i + .5), j, false);
+    generate_center_finder (m, (.5i + .5), j, false);
   endfig;
   k := incr k;
   m := m + .25;
