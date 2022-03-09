@@ -268,7 +268,7 @@ for i = 10 step .1 until 29.1: % 10.1
     j := 1;
   fi;
   beginfig(k); 
-    generate_center_finder (i, m, (.5i + .5), j, true);
+    generate_center_finder (i, m, (.5i + .5), j, false);
   endfig;
   k := incr k;
   m := incr m;
