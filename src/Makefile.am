@@ -1781,7 +1781,7 @@ alhambra_207_000.eps: alhambra_207.mp
 	mpost alhambra_207.mp
 
 center_finders.pdf: center_finders.dvi
-	dvipdfmx center_finders.dvi
+	dvipdfmx -q center_finders.dvi
 
 center_finders.ps: center_finders.dvi
 	dvips -o center_finders.ps center_finders.dvi

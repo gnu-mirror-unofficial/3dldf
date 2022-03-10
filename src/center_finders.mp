@@ -49,10 +49,14 @@
 
 %% * (1) Top
 
+batchmode;
+
 prologues := 3;
 outputtemplate := "%j_%3c.eps";
 input TEX;
 verbatimtex \font\largebx=cmbx12 scaled \magstep1 etex;
+
+
 
 
 %% * (1) Global variables
@@ -197,9 +201,11 @@ def generate_center_finder (expr ddiam_ctr, sside_len, ccut_out_wd, ddo_labels) 
       draw unitsquare scaled cut_out_wd shifted (z[i] shifted (-.5cut_out_wd, -.5cut_out_wd));
     endfor;
 
-    z16 = .5[origin, z3] shifted (0, .25cm);
+    z16 = .5[origin, z3] shifted (0, 1cm);
 
     TEXPRE("\font\largebx=cmbx12");
+
+    %% Diameter label.
     
     label.top(TEX("{\largebx " & decimal ddiam_ctr & "mm}"), z16);
 
