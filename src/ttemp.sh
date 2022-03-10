@@ -3,6 +3,18 @@
 #### ttemp.sh
 #### Created by Laurence D. Finston (LDF) Mon 06 Sep 2021 10:32:01 PM CEST
 
+cp -f center_finders.mp center_finders.txt /home/laurence/3DLDF-3.0_web/3dldf/SRC_CODE
+cp -f center_finders.pdf /home/laurence/3DLDF-3.0_web/3dldf/graphics
+
+cd ~/3DLDF-3.0_web/3dldf/SRC_CODE/
+cvs commit -m "Edited." center_finders.mp center_finders.txt
+
+cd ~/3DLDF-3.0_web/3dldf/graphics/
+cvs commit -m "Edited." center_finders.pdf
+
+exit 0
+
+
 for i in center_finders_7*.eps 
 do
     echo "$i"
