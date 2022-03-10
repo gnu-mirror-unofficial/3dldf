@@ -49,6 +49,9 @@
 
 %% * (1) Top
 
+%% Created:       2022.03.02.
+%% Last updated:  2022.03.10.
+
 batchmode;
 
 prologues := 3;
@@ -56,15 +59,10 @@ outputtemplate := "%j_%3c.eps";
 input TEX;
 verbatimtex \font\largebx=cmbx12 scaled \magstep1 etex;
 
-
-
-
 %% * (1) Global variables
 
 pen medium_pen;
 medium_pen = pencircle scaled .5mm;
-
-
 
 %% * (1) Macro generate_center_finder
 
