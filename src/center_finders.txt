@@ -202,8 +202,11 @@ Boston, MA  02110-1301 USA\hfil\break
 
 \loop
 \message{\the\figcnt}
-\vbox to \vsize{\vskip3cm
-\line{\hskip\dimen0\epsffile{center_finders_00\the\figcnt .eps}\hss}
+\vbox to \vsize{%
+\vbox to 0pt{\vskip2.25cm\hbox{\hskip-1cm{\large Fig.~\the\figcnt}}\vss}%
+\vskip3cm
+\line{\hskip\dimen0\epsffile{center_finders_00\the\figcnt .eps}\hss}%
+\vbox to 0pt{\vskip.25cm\hbox{\hskip-1cm{\large Fig.~\the\nextfigcnt}}\vss}%
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_00\the\nextfigcnt .eps}\hss}
 \vss}
@@ -215,14 +218,20 @@ Boston, MA  02110-1301 USA\hfil\break
 \loop
 \message{\the\figcnt}
 \ifnum\figcnt<100
-\vbox to \vsize{\vskip3cm
+\vbox to \vsize{%
+\vbox to 0pt{\vskip2.25cm\hbox{\hskip-1cm{\large Fig.~\the\figcnt}}\vss}%
+\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\figcnt .eps}\hss}
+\vbox to 0pt{\vskip.25cm\hbox{\hskip-1cm{\large Fig.~\the\nextfigcnt}}\vss}%
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_0\the\nextfigcnt .eps}\hss}
 \vss}
 \else
-\vbox to \vsize{\vskip3cm
+\vbox to \vsize{%
+\vbox to 0pt{\vskip2.25cm\hbox{\hskip-1cm{\large Fig.~\the\figcnt}}\vss}%
+\vskip3cm
 \line{\hskip\dimen0\epsffile{center_finders_\the\figcnt .eps}\hss}
+\vbox to 0pt{\vskip.25cm\hbox{\hskip-1cm{\large Fig.~\the\nextfigcnt}}\vss}%
 \vskip1cm
 \line{\hskip\dimen0\epsffile{center_finders_\the\nextfigcnt .eps}\hss}
 \vss}
