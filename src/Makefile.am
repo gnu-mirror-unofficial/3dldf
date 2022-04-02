@@ -1627,9 +1627,9 @@ disdyakis.pdf: disdyakis.dvi
 disdyakis.ps: disdyakis.dvi
 	dvips -o disdyakis.ps disdyakis.dvi
 
-disdyakis.dvi: disdyakis.tex disdyakis.1
-	$(TEX) disdyakis.tex
-	$(TEX) disdyakis.tex
+disdyakis.dvi: disdyakis.txt disdyakis.1
+	$(TEX) disdyakis.txt
+	$(TEX) disdyakis.txt
 
 disdyakis.1: disdyakis.mp
 	mpost -numbersystem "double" disdyakis.mp
