@@ -14345,6 +14345,13 @@ Path::resolve(int begin,
 
    bool DEBUG = true; /* |false| */ 
 
+   /* !!START HERE:  LDF 2022.04.03.  Start in etemp.txt.  
+      Check whether points are missing.  Check where `--' is put 
+      onto the combined path and change.
+
+   */ 
+
+
    Point p0;
    Point normal;
    Transform t;
@@ -14592,8 +14599,27 @@ getchar();
         cycle_switch = true;
      }
 
-/* !!START HERE:  LDF 2022.04.03.  */     
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+        cerr << "In ``Path::resolve' (second version):  Showing `*this'." 
+             << endl;
+
+        show("*this:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
