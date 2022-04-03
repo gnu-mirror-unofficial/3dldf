@@ -42,13 +42,11 @@ beginfig(0);
   message "Before resolve:  q:";
   show q;
 
-  draw q;
-
   string s;
 
-  for i = 0 upto length q:
+  for i = 0 upto (length q - 1):
     s := decimal i;
-    label(s, get_point (i) q);
+    label.top(s, get_point (i) q) with_text_color blue;
   endfor;
 
   resolve q (2, 5) to 15 with_no_transform; %% save 
@@ -56,13 +54,11 @@ beginfig(0);
   message "After resolve:  q:";
   show q;
 
-  shift q (0, -5cm);
-  
-  draw q with_color red;
+  draw q with_pen pencircle scaled (.5mm, .5mm, .5mm);
 
-  for i = 0 upto length q:
+  for i = 0 upto (length q - 1):
     s := decimal i;
-    label(s, get_point (i) q);
+    label.bot(s, get_point (i) q) with_text_color red;
   endfor;
 
   
