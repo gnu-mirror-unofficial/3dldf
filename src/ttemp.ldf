@@ -41,16 +41,16 @@ set f with_position (0, 50, -50)
 
 %% ** (2)
 
-  q := unit_circle scaled (8cm, 0, 8cm) rotated (45, 0);
+  q := unit_circle scaled (8cm, 0, 8cm) rotated (-45, 10);
 
-  rotate q (0, 45);
+  draw q with_color blue;
   
-  shift q (0, 0, 20);
+  % rotate q (0, 45);
+  
+  % shift q (0, 0, 20);
 
-  
-  %rotate q (0, 0, -45);
-
-  
+   %rotate q (0, 0, -45);
+ 
   message "Before resolve:  q:";
   show q;
 
@@ -64,7 +64,7 @@ set f with_position (0, 50, -50)
     label.top(s, get_point (i) q) with_text_color blue;
   endfor;
 
-  resolve q (2, 5) to 15 save; % with_no_transform;
+  resolve q (2, 5) to 15 save; % with_no_transform
 
   message "After resolve:  q:";
   show q;
@@ -81,8 +81,8 @@ set f with_position (0, 50, -50)
 
 
 
-endfig with_focus f;
-%endfig with_projection parallel_x_y;
+%endfig with_focus f;
+endfig with_projection parallel_x_y;
 
 verbatim_metapost "end;";
   

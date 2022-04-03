@@ -14550,6 +14550,23 @@ Path::resolve(int begin,
 
 @q **** (4) @>
 
+/* !!START HERE:  LDF 2022.04.03.  This doesn't put q_middle in the x-z plane.  */ 
+
+     if (do_transform)
+     {
+        q_middle *= t;
+
+        cerr << "`q_middle' after transform:" << endl;
+        q_middle.show("q_middle:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+     }
+
+
+
      status = q_middle.resolve(res_val, scanner_node, do_unlink, false);
 
      if (status != 0)
@@ -14591,15 +14608,13 @@ getchar();
      }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-#if 0
-     if (do_transform)
-        q_middle *= t;
-#endif 
-
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
     
+     if (do_transform)
+        q_middle *= t.inverse();
+
      bool ccycle = is_cycle();
  
      *this = q_begin;
