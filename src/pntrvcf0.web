@@ -689,8 +689,6 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
-
-
 @q *** (3)@> 
 
     int status;
@@ -703,15 +701,18 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
     temp_strm << "mpost -interaction=nonstopmode -numbersystem \"double\" null.mp "
               << "'input writemcs.mp; path q[];";
 
-
     int i = 0;
 
-    cerr << "v.size() == " << v.size() << endl;
-
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "v.size() == " << v.size() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q *** (3) Outer loop.  @> 
 
-@ Outer loop.
+@ Outer loop.  Loop over the |Path| pointers on |v|.
 \initials{LDF 2022.04.03.}
 
 @<Define |Pointer_Vector| specializations@>=
@@ -720,9 +721,12 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
     {
 @q **** (4) @>       
 
-      cerr << "Entering loop." << endl;
-
-
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering outer loop." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
       R.clear();
       if (do_transform)
@@ -745,7 +749,6 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
       }
 
 @q **** (4) @>
-
 
       if (do_transform)
       {
@@ -808,7 +811,7 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 
 @q **** (4) Inner loop @>
 
-@ Inner loop.
+@ Inner loop.  Looping over |Point| pointers on the current |Path|.
 \initials{LDF 2022.01.26.}
 
 @<Define |Pointer_Vector| specializations@>=

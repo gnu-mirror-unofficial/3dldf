@@ -14508,12 +14508,19 @@ Path::resolve(int begin,
             q_begin += **pt_iter;          
             q_begin += **ct_iter;          
         }
-        else if (i >= begin && i <= end)
+        else if (i >= begin && i < end)
         {
             q_middle += **pt_iter;          
             q_middle += **ct_iter;          
         }
-        else 
+        else if (i == end)
+        {
+            q_middle += **pt_iter;          
+            q_middle += **ct_iter;
+            q_end += **pt_iter;          
+            q_end += **ct_iter;          
+        }
+        else
         {
             q_end += **pt_iter;          
             q_end += **ct_iter;          
@@ -14593,9 +14600,9 @@ getchar();
  
      *this = q_begin;
      *this += "..";
-     this->append(q_middle);
+     this->append(q_middle, "..");
      *this += "..";
-     this->append(q_end);
+     this->append(q_end, "..");
 
      if (ccycle)
      {
