@@ -708,11 +708,21 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 
     cerr << "v.size() == " << v.size() << endl;
 
+
+@q *** (3) Outer loop.  @> 
+
+@ Outer loop.
+\initials{LDF 2022.04.03.}
+
+@<Define |Pointer_Vector| specializations@>=
+
     for (vector<Path*>::iterator iter = v.begin(); iter != v.end(); ++iter)
     {
 @q **** (4) @>       
 
       cerr << "Entering loop." << endl;
+
+
 
       R.clear();
       if (do_transform)
@@ -785,10 +795,13 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 @<Define |Pointer_Vector| specializations@>=
 
       vector<Point*>::iterator pt_iter;
+      vector<Point*>::iterator next_pt_iter;
 
       vector<Connector_Type*>::iterator ct_iter;
 
       pt_iter = (*iter)->points.begin();
+      next_pt_iter = pt_iter;
+      ++next_pt_iter;
       ct_iter = (*iter)->connector_type_vector.begin();
 
       temp_strm << "q[" << i << "] = ";
@@ -803,9 +816,11 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
       for (;pt_iter != (*iter)->points.end(); ++pt_iter) 
       {
 @q ***** (5) @>
+
           temp_strm << "(" << (*pt_iter)->get_x() << "cm, " << (*pt_iter)->get_y() << "cm)";
 
-          if (ct_iter != (*iter)->connector_type_vector.end())
+          if (   ct_iter != (*iter)->connector_type_vector.end() 
+              && (next_pt_iter != (*iter)->points.end() || (*iter)->is_cycle()))
           {
              if (*ct_iter != 0)
              {
@@ -825,15 +840,18 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
                    temp_strm << " .. ";
                 }
 
-                else
+                else 
                   temp_strm << (*ct_iter)->connector_string;
              }
 
-                ++ct_iter;
+             ++ct_iter;
 
-             } /* |if| */
+          } /* |if| */
 
 @q ***** (5) @>
+          
+          if (next_pt_iter != (*iter)->points.end())
+             ++next_pt_iter;
 
       }  /* Inner |for| */
 
@@ -846,6 +864,11 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 @<Define |Pointer_Vector| specializations@>=
 
       cerr << "After inner loop." << endl;
+  
+      cerr << "temp_strm.str() == " << temp_strm.str() << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
 
       ++i;
 
@@ -923,6 +946,9 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
    }  
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q **** (4) @>
+
+
    errno = 0;
    status = system(temp_strm.str().c_str());
 
@@ -931,7 +957,41 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
    yyscan_t scanner;
    zzlex_init_extra(static_cast<void*>(scanner_node),  &scanner);
    zzset_in(fp, scanner);
+
+@q **** (4) @>
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Pointer_Vector<Path, Path>::resolve':  Before calling zzlex." 
+           << endl;
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
    zzlex(scanner);
+
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Pointer_Vector<Path, Path>::resolve':  After calling zzlex." 
+           << endl;
+
+      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
+           << scanner_node->metapost_output_struct->path_vector.size() << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+@q **** (4) @>
+
    zzlex_destroy(scanner);
    
    fclose(fp);
@@ -940,15 +1000,6 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
    if (do_unlink)
       unlink(temp_filename);
 
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-      cerr << "After calling zzlex." << endl;
-
-      cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
-           << scanner_node->metapost_output_struct->path_vector.size() << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
 
    if (scanner_node->metapost_output_struct->path_vector.size() != v.size())
    {
