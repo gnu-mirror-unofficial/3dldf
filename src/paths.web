@@ -14253,8 +14253,10 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
       pv.show("pv:");  
 
+#if 0 
       cerr << "XXX Enter <RETURN> to continue: ";
       getchar(); 
+#endif 
 
 
    } /* |if (DEBUG)| */
@@ -14346,8 +14348,8 @@ Path::resolve(int begin,
    bool DEBUG = true; /* |false| */ 
 
    /* !!START HERE:  LDF 2022.04.03.  Start in etemp.txt.  
-      Check whether points are missing.  Check where `--' is put 
-      onto the combined path and change.
+      One point is missing:  The first one after the q_middle.  
+      Check where `--' is put onto the combined path and change.
 
    */ 
 
@@ -14574,8 +14576,10 @@ Path::resolve(int begin,
           q_middle.show("q_middle:"); 
           q_end.show("q_end:"); 
 
+#if 0
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
+#endif 
 
      }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -14611,8 +14615,10 @@ getchar();
 
         show("*this:");
 
+#if 0
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
+#endif 
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
