@@ -1398,7 +1398,7 @@ headers:
              pictures.h++ planes.h++ plyhdslc.h++ pntrvcf0.h++ \
              pntrvctr.h++ points.h++ polygons.h++ polyhed.h++ \
              predctes.h++ primes.h++ prrfnc0.h++ pspglb.h++ \
-             rectangs.h++ rhtchdrn.h++ scanner2.h++ scanprse.h++ \
+             rectangs.h++ rhtchdrn.h++ scanprse.h++ \
              scanprsf.h++ scan.h++ sctpcrt.h++ sctpfncs.h++ shapes.h++ \
              solfaced.h++ solids.h++ spheres.h++ sphrdevl.h++ \
              transfor.h++ triangle.h++ 
