@@ -14508,7 +14508,7 @@ getchar();
 @
 @<Define |Path| functions@>=
 
-    
+/* !!START HERE:  LDF 2022.04.03.  */     
 
 
 #if DEBUG_COMPILE
@@ -15132,7 +15132,7 @@ operator<<(ostream& o, Connector_Type& c)
 {
 @q ***** (5) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
 @q ***** (5) Controls.  @>
 
@@ -15161,7 +15161,6 @@ operator<<(ostream& o, Connector_Type& c)
 
       o << ".. controls " << *(c.pt0) << " and " << *(c.pt1) << " ..";
    }
-
 
 @q ***** (5) Curl.  @>
 
