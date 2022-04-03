@@ -37,15 +37,24 @@ beginfig(0);
 
 %% ** (2)
 
-  q := unit_circle scaled (8cm, 0, 8cm) rotated (90, 0);
+  q := unit_circle scaled (4cm, 0, 4cm) rotated (90, 0);
 
-  message "q:";
+  message "Before resolve:  q:";
   show q;
 
-  resolve q (2, 5) to 15 save with_no_transform;
-  
-  endfig with_projection parallel_x_y;
+  draw q;
 
+  resolve q (2, 5) to 15 save with_no_transform;
+
+  message "After resolve:  q:";
+  show q;
+  
+  draw q shifted (0, -5cm) with_color red;
+  
+endfig with_projection parallel_x_y;
+
+verbatim_metapost "end;";
+  
 end;
 
 

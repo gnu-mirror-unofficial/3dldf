@@ -985,6 +985,24 @@ getchar();
 
       cerr << "scanner_node->metapost_output_struct->path_vector.size() == " 
            << scanner_node->metapost_output_struct->path_vector.size() << endl;
+
+      int i = 0;
+    
+
+      for (vector<Path*>::iterator iter = scanner_node->metapost_output_struct->path_vector.begin();
+           iter != scanner_node->metapost_output_struct->path_vector.end();
+           ++iter)
+      {
+
+          temp_strm.str("");
+          temp_strm << "Path " << i++ << ":";
+         
+          (*iter)->show(temp_strm.str());
+      }
+
+      cerr << "XXX Enter <RETURN> to continue: ";
+      getchar();   
+
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -1031,7 +1049,7 @@ getchar();
 
    real factor = 2.54 / 72.0; /* Conversion factor for PostScript points ({\bf bp} $=72$ per inch) to {\bf cm}  */
 
-   for (int i = 0; i < v.size();++i)
+   for (int i = 0; i < v.size(); ++i)
    {
       *(v[i]) = *(scanner_node->metapost_output_struct->path_vector[i]);
 

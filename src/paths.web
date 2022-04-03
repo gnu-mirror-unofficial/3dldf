@@ -14237,8 +14237,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
       return status;
    }
 
-
-
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
@@ -14268,8 +14266,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
 #if DEBUG_COMPILE
 
-   /* !!START HERE:  LDF 2022.04.03.  Put points from |pv| onto |*this| in the appropriate spot.  */ 
-
    if (DEBUG)
    {
    
@@ -14287,7 +14283,15 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
    } /* |if (DEBUG)| */
 #endif /* |DEBUG_COMPILE|  */@; 
    
- 
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   *this = **(pv.v.begin());
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>= 
  
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -14573,6 +14577,20 @@ getchar();
 @q **** (4) @>
 @
 @<Define |Path| functions@>=
+    
+     bool ccycle = is_cycle();
+ 
+     *this = q_begin;
+     *this += "..";
+     this->append(q_middle);
+     *this += "..";
+     this->append(q_end);
+
+     if (ccycle)
+     {
+        *this += "..";
+        cycle_switch = true;
+     }
 
 /* !!START HERE:  LDF 2022.04.03.  */     
 
@@ -15198,7 +15216,9 @@ operator<<(ostream& o, Connector_Type& c)
 {
 @q ***** (5) @>
 
-   bool DEBUG = true; /* |false| */ 
+/* !!START HERE:  LDF 2022.04.03.  Why was debugging on here?  */ 
+
+   bool DEBUG = false; /* |true| */ 
 
 @q ***** (5) Controls.  @>
 
