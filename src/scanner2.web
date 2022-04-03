@@ -161,6 +161,29 @@ Scanner_Type* scanner_node = static_cast<Scanner_Type*>(yyextra);
 
 @=}@>
 
+@q *** (3) Semi-Colon.  @>
+@*4 Semi-Colon
+
+\LOG
+\initials{LDF 2022.04.03.}
+Added this rule.
+\ENDLOG
+
+@<Rules@>=
+@=; {@>
+
+#if 0 
+   if (DEBUG_SCANNER)
+   {
+      
+      cerr << endl << "In `zzlex':  Semi-colon." << endl;
+      
+   }
+#endif 
+
+@=}@>
+
+
 @q *** (3) Comments.  @>
 @*4 Comments.  
 
