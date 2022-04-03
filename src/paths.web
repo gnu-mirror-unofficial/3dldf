@@ -14200,11 +14200,13 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
    int status = 0;
 
+#if DEBUG_COMPILE
+
    if (DEBUG)
    {
       cerr << "Entering `Path::resolve' (version 1, for entire path)." << endl;
 
-      show("*this before call to `Pointer_Vector<Path>::resolve':");
+      show("`*this' before call to `Pointer_Vector<Path>::resolve':");
 
       cerr << "In `Path::resolve' (first version):"
            << endl 
@@ -14212,6 +14214,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
            << endl;
 
    } /* |if (DEBUG)| */
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) @>
 @
@@ -14221,7 +14224,70 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
    pv += create_new<Path>(this);
  
-   return pv.resolve(res_val, scanner_node, do_unlink, do_transform);
+   status = pv.resolve(res_val, scanner_node, do_unlink, do_transform);
+        
+   if (status != 0)
+   {
+      cerr << "ERROR!  In `Path::resolve' (version 1, for entire path):" << endl
+           << "`Pointer_Vector<Path, Path>::resolve' failed, returning " << status << "." 
+           << endl
+           << "Exiting function with return value " << status << "." 
+           << endl;
+
+      return status;
+   }
+
+
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+
+   if (DEBUG)
+   {
+      cerr << "In `Path::resolve' (version 1, for entire path):" << endl
+           << "`Pointer_Vector<Path, Path>::resolve' succeeded, returning 0."  
+           << endl 
+           << "Showing `pv':"
+           << endl;
+
+      pv.show("pv:");  
+
+      cerr << "XXX Enter <RETURN> to continue: ";
+      getchar(); 
+
+
+   } /* |if (DEBUG)| */
+#endif /* |DEBUG_COMPILE|  */@; 
+   
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+
+   /* !!START HERE:  LDF 2022.04.03.  Put points from |pv| onto |*this| in the appropriate spot.  */ 
+
+   if (DEBUG)
+   {
+   
+#if 0 
+      cerr << "In `Path::resolve' (version 1, for entire path):" << endl
+           << "Showing `*this':"
+           << endl;
+
+      show("*this:");  
+
+      cerr << "XXX Enter <RETURN> to continue: ";
+      getchar(); 
+#endif 
+
+   } /* |if (DEBUG)| */
+#endif /* |DEBUG_COMPILE|  */@; 
+   
+ 
  
 #if DEBUG_COMPILE
    if (DEBUG)
