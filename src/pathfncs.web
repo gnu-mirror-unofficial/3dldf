@@ -158,8 +158,6 @@ Path::show(string text, char coords,
    v.resize(4, 0);  /* LDF 2002.12.13.  Added this line.  Needed 
                        for porting to Intel Linux (i686).  */
    
-   vector <Connector_Type*> ::const_iterator connector_type_iter = connector_type_vector.begin();
-
    cerr << "type:  " << Shape::type_name_map[get_shape_type()] << endl;
    cerr << "surface_hiding_ctr:  " << surface_hiding_ctr << endl;
 
@@ -199,12 +197,6 @@ getchar();
    {
 @q *** (3) @>
 
-     if (connector_type_iter != connector_type_vector.end())
-     {
-         connector_string = (*connector_type_iter)->connector_string;
-         ++connector_type_iter;
-     }
-
      if (loop_ctr == 2) /* Break each line after 2 |Points|.  */
      {
        cerr << endl;
@@ -215,9 +207,34 @@ getchar();
      v = (**points_iter).get_all_coords(coords, do_persp, do_apply,
                                         f, proj, factor);
      
-     cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
+     cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ") ";
 
-     ++c_iter;
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
+     if (c_iter != connector_type_vector.end())
+     {
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << endl << "Connector " << i << ":" << endl;
+
+             (*c_iter)->show();
+
+cerr << "YYY Enter <RETURN> to continue: ";
+getchar(); 
+
+         }    
+#endif /* |DEBUG_COMPILE|  */@; 
+
+         ++c_iter;
+     }
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
      ++i;
 
 @q *** (3) @>
@@ -232,8 +249,8 @@ getchar();
    {
       cerr << " ";
 
-      if (connector_type_iter != connector_type_vector.end())
-        cerr << (*connector_type_iter)->connector_string;
+      if (c_iter != connector_type_vector.end())
+        cerr << (*c_iter)->connector_string;
       else if (connector_type_vector.size() > 0)
         cerr << connector_type_vector.back()->connector_string;
       else 
