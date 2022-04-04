@@ -194,9 +194,9 @@ Removed debugging code.
 \ENDLOG
 
 @<Define rules@>=
-@=command: RESOLVE path_variable LEFT_PARENTHESIS numeric_expression COMMA @>
-@=numeric_expression RIGHT_PARENTHESIS TO numeric_expression               @>
-@=save_temp_file_optional with_no_transform_optional                       @>@/
+@=command: RESOLVE path_variable LEFT_PARENTHESIS numeric_expression COMMA   @>
+@=numeric_expression RIGHT_PARENTHESIS TO numeric_expression                 @>
+@=save_temp_file_optional with_no_transform_optional with_ampersand_optional @>@/
 {
   @<Common declarations for rules@>@; 
 
@@ -289,6 +289,39 @@ Removed debugging code.
 @
 @<Define rules@>= 
 @=with_no_transform_optional: WITH_NO_TRANSFORM@>
+{
+
+   @=$$@> = 1;
+};
+
+
+@q *** (3) with_ampersand_optional.  @>
+@
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> with_ampersand_optional@>
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=with_ampersand_optional: /* Empty  */@>
+{
+
+   @=$$@> = 0;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=with_ampersand_optional: WITH_NO_AMPERSAND@>
+{
+
+   @=$$@> = 0;
+};
+
+@q **** (4) @>
+@
+@<Define rules@>= 
+@=with_ampersand_optional: WITH_AMPERSAND@>
 {
 
    @=$$@> = 1;
