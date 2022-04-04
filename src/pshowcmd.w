@@ -3032,7 +3032,79 @@ Added this rule.
 
 };
 
-@q **** (4) command --> SHOW path_expression@>
+@q ** (2) with_connectors_optional.@>
+@*1 \§with connectors optional>.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> with_connectors_optional@>
+
+@q *** (3) with_connectors_optional: /* Empty  */@>
+@*2 \§with connectors optional> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_connectors_optional: /*  Empty  */@>@/
+{
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `with_connectors_optional: EMPTY'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0; 
+};
+
+@q *** (3) with_connectors_optional: WITH_CONNECTORS @>
+@*2 \§with connectors optional> $\longrightarrow$ \.{WITH\_CONNECTORS}.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=with_connectors_optional: WITH_CONNECTORS@>@/
+{
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `with_connectors_optional: WITH_CONNECTORS'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0; 
+};
+
+
+
+
+
+@q **** (4) command --> SHOW path_expression with_connectors_optional@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
 \§path expression>.
@@ -3053,11 +3125,11 @@ Replaced code with a call to |Scan_Parse::show_func|.
 
 @<Define rules@>= 
   
-@=command: SHOW path_expression@>@/
+@=command: SHOW path_expression with_connectors_optional@>@/
 {
     Scan_Parse::show_func<Path>(static_cast<Path*>(@=$2@>),
-                                      "path",
-                                      parameter);
+                                "path",
+                                parameter);
 
     @=$$@> = static_cast<void*>(0);
 };
