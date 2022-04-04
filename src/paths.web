@@ -14503,7 +14503,7 @@ Path::resolve(int begin,
 
        p0 = q_middle.get_point(0);
 
-       status = q_middle.is_planar(&normal);
+       normal = q_middle.get_normal();
 
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -14535,9 +14535,6 @@ Path::resolve(int begin,
 
              R.show("R after alignment:");
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
           }  
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -14545,17 +14542,19 @@ getchar();
 
 @q ***** (5) @>
 
-       cerr << "`q_middle' before transform:" << endl;
-       q_middle.show("q_middle:");
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
 
-       q_middle *= t;
+           cerr << "`q_middle' before transform:" << endl;
+           q_middle.show("q_middle:");
 
-       cerr << "`q_middle' after transform:" << endl;
-       q_middle.show("q_middle:");
+           q_middle *= t;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
+           cerr << "`q_middle' after transform:" << endl;
+           q_middle.show("q_middle:");
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
      }  /* |if (do_transform)|  */
 
@@ -14594,11 +14593,6 @@ getchar();
           q_middle.show("q_middle:"); 
           q_end.show("q_end:"); 
 
-#if 0
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-#endif 
-
      }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14634,11 +14628,6 @@ getchar();
              << endl;
 
         show("*this:");
-
-#if 0
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-#endif 
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
