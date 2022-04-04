@@ -14552,8 +14552,14 @@ Path::resolve(int begin,
            cerr << "`q_middle' before transform:" << endl;
            q_middle.show("q_middle:");
 
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
            q_middle *= t;
 
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
            cerr << "`q_middle' after transform:" << endl;
            q_middle.show("q_middle:");
        }  
@@ -14623,6 +14629,8 @@ Added this section.
 
      if (do_ampersand)
      {
+@q ***** (5) @>
+
 #if DEBUG_COMPILE
         if (DEBUG)
         { 
@@ -14631,6 +14639,8 @@ Added this section.
                << "`do_ampersand' is `true'." << endl;
         }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
 
         *this = q_begin;
         
@@ -14650,7 +14660,9 @@ Added this section.
 
         this->append(q_end, "&");
 
-     }
+@q ***** (5) @>
+
+     } /* |if (do_ampersand)| */
 
 @q **** (4) @>
 @
