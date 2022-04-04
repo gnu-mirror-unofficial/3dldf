@@ -14347,13 +14347,6 @@ Path::resolve(int begin,
 
    bool DEBUG = true; /* |false| */ 
 
-   /* !!START HERE:  LDF 2022.04.03.  Start in etemp.txt.  
-      One point is missing:  The first one after the q_middle.  
-      Check where `--' is put onto the combined path and change.
-
-   */ 
-
-
    Point p0;
    Point normal;
    Transform t;
@@ -14439,54 +14432,6 @@ Path::resolve(int begin,
 @
 @<Define |Path| functions@>=
 
-    p0 = *points[0];
-
-    if (do_transform)
-    {
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-          normal.show("normal before shift:");
-
-       }    
-#endif /* |DEBUG_COMPILE|  */@;
-
-       normal.shift(-p0);
-
-#if DEBUG_COMPILE
-       if (DEBUG)
-       {
-            normal.show("normal after shift:");
-       }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-    } /* |if (do_transform)| */
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-      R += p0;
-      R += normal;
-
-      if (do_transform)
-      {
-         t.align_with_axis(p0, normal);
-         R *= t;
-
-#if DEBUG_COMPILE
-         if (DEBUG)
-         { 
-            show("R after alignment:");
-         }  
-#endif /* |DEBUG_COMPILE|  */@;
-
-      }
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
      vector<Point*>::iterator pt_iter;
 
      vector<Connector_Type*>::iterator ct_iter;
@@ -14549,23 +14494,72 @@ Path::resolve(int begin,
      } 
 
 @q **** (4) @>
+@
+@<Define |Path| functions@>=
 
-/* !!START HERE:  LDF 2022.04.03.  This doesn't put q_middle in the x-z plane.  */ 
+    if (do_transform)
+    {
+@q ***** (5) @>
 
-     if (do_transform)
-     {
-        q_middle *= t;
+       p0 = q_middle.get_point(0);
 
-        cerr << "`q_middle' after transform:" << endl;
-        q_middle.show("q_middle:");
+       status = q_middle.is_planar(&normal);
+
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          normal.show("normal:");
+
+          cerr << "`q_middle.is_planar' returned status == " << status << endl;
+
+       }    
+#endif /* |DEBUG_COMPILE|  */@;
+
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+       normal.shift(p0);
+
+       R.set(p0, normal);
+
+       if (do_transform)
+       {
+          t.align_with_axis(p0, normal);
+          R *= t;
+
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+
+             R.show("R after alignment:");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+          }  
+#endif /* |DEBUG_COMPILE|  */@;
+
+       }
+
+@q ***** (5) @>
+
+       cerr << "`q_middle' before transform:" << endl;
+       q_middle.show("q_middle:");
+
+       q_middle *= t;
+
+       cerr << "`q_middle' after transform:" << endl;
+       q_middle.show("q_middle:");
 
 cerr << "XXX Enter <RETURN> to continue: ";
 getchar(); 
 
 
-     }
+     }  /* |if (do_transform)|  */
 
-
+@q **** (4) @>
 
      status = q_middle.resolve(res_val, scanner_node, do_unlink, false);
 
@@ -14616,7 +14610,7 @@ getchar();
         q_middle *= t.inverse();
 
      bool ccycle = is_cycle();
- 
+
      *this = q_begin;
      *this += "..";
      this->append(q_middle, "..");
