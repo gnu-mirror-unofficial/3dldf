@@ -209,7 +209,8 @@ Removed debugging code.
               << "LEFT_PARENTHESIS numeric_expression COMMA "
               << "numeric_expression RIGHT_PARENTHESIS"
               << endl 
-              <<"TO numeric_expression save_temp_file_optional with_no_transform_optional'."
+              << "TO numeric_expression save_temp_file_optional "
+              << "with_no_transform_optional with_ampersand_optional'."
               << endl;
 
     log_message(cerr_strm);
@@ -226,14 +227,19 @@ Removed debugging code.
                               static_cast<int>(@=$9@>), 
                               scanner_node, 
                               !static_cast<bool>(@=$10@>),
-                              !static_cast<bool>(@=$11@>));
+                              !static_cast<bool>(@=$11@>),
+                              static_cast<bool>(@=$12@>));
 
 #if DEBUG_COMPILE
   if (DEBUG)
   {
-    cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
+    cerr_strm << "*** Parser: `command --> RESOLVE path_variable "
+              << "LEFT_PARENTHESIS numeric_expression COMMA"
               << endl 
-              << "save_temp_file_optional with_no_transform_optional':"
+              << "numeric_expression RIGHT_PARENTHESIS "
+              << "TO numeric_expression save_temp_file_optional"
+              << endl 
+              << "with_no_transform_optional with_ampersand_optional':"
               << endl 
               << "`Path::resolve' returned " << status << "." << endl;
 
