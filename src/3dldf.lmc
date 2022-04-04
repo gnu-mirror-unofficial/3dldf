@@ -1,0 +1,14 @@
+%% plain.lmc
+%% Created by Laurence D. Finston (LDF) Mon 04 Apr 2022 07:08:02 PM CEST
+
+def end_mp =
+  verbatim_metapost "end;";
+enddef;
+
+def verbatim_tex (s) =
+  verbatim_metapost "verbatimtex " & s & " etex;";
+enddef;
+
+let verbatimtex = verbatim_tex;
+
+endinput;
