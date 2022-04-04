@@ -735,22 +735,30 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
 
       p0 = *((**iter).points[0]);
 
-      if (!(*iter)->is_planar(&normal))
+      if (do_transform && !(*iter)->is_planar(&normal))
       {
           cerr << "ERROR!  In `Pointer_Vector<Path, Path>::resolve':"
                << endl 
-               << "`Path' is not planar.  Can't resolve it." << endl 
+               << "`do_transform' is `true' and `Path' is not planar.  Can't resolve it." << endl 
                << "Continuing."
                << endl;
 
           continue;
       }  
-      else if (DEBUG)
+      else if (do_transform)
       {
-          cerr << "Path is planar." << endl;
+           
+#if DEBUG_COMPILE
+          if (DEBUG)
+          { 
+              cerr << "Path is planar." << endl;
+          }      
+#endif /* |DEBUG_COMPILE|  */@; 
       }
 
 @q **** (4) @>
+@
+@<Define |Pointer_Vector| specializations@>=
 
       if (do_transform)
       {
@@ -772,17 +780,17 @@ Pointer_Vector<Path, Path>::resolve(int res_val,
          }  
 #endif /* |DEBUG_COMPILE|  */@;
 
-      }
+      } /* |if (do_transform)| */
 
 @q **** (4) @>
 @
 @<Define |Pointer_Vector| specializations@>=
 
-      R += p0;
-      R += normal;
-
       if (do_transform)
       {
+         R += p0;
+         R += normal;
+
          t.align_with_axis(p0, normal);
          R *= t;
 

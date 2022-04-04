@@ -4971,115 +4971,6 @@ Added this function.
 Path
 append(const Path& pa, string connector = "--", bool assign = true);
 
-@q *** (3) Definition.@> 
-
-@
-@<Define |Path| functions@>=
-Path
-Path::append(const Path& p, string connector, bool assign)
-{
-
-  bool DEBUG = false; /* |true| */ 
-
-  Path r(*this);
-
-  string last_connector;
-  Connector_Type *last_connector_type = 0;
-
-  r.set_cycle(false);
-
-@q **** (4) @>   
-
-@ If there isn't an explicit connector for every pair
-of |Points| in |points|, then we have to fill up
-|connectors| so that there are enough. Otherwise, the ``{\AM}'' 
-will be at the wrong place.  
-\initials{LDF 2002.4.6.}  
-
-@<Define |Path| functions@>=
-
-@q ***** (5) @>
-
-  if (r.connector_type_vector.size() == 0)
-  {
-    last_connector_type = create_new<Connector_Type>(0);
-    last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
-    last_connector_type->type1 = Connector_Type::CT_NULL_TYPE;
-    last_connector_type->connector_string = "--";
-  }
-  else
-    last_connector_type = r.connector_type_vector.back();
-    
-  while (r.connector_type_vector.size() < r.points.size() - 1)
-  {
-     if (DEBUG)
-        cerr << "In `Path::append':" << endl 
-             << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
-
-    r.connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
-  }
-
-  r.connector_type_vector.push_back(create_new<Connector_Type>(0));
-  r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
-  r.connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
-  r.connector_type_vector.back()->connector_string = connector;
-
-@q **** (4) @>   
-
-@ Copy the |Points| in |p| and put the copies onto |points|.
-\initials{LDF 2002.4.6.} 
-
-@<Define |Path| functions@>=
-
-  for(vector<Point*>::const_iterator iter = p.points.begin();
-      iter != p.points.end();
-      iter++)
-    r.points.push_back(create_new<Point>(*iter));
-
-@q **** (4) @>   
-   
-@ Put the connectors from |p| onto the new |Path|.  Since they're
-|strings|, and not pointers, we don't have to copy them.  
-\initials{LDF 2002.4.6.}
-
-\LOG
-\initials{LDF 2004.11.01.}
-Now removing excess connectors.
-\ENDLOG 
-
-@<Define |Path| functions@>= 
-
-@q ***** (5) @>
-
-@q ***** (5) @>
-
-  for(vector<Connector_Type*>::const_iterator iter = p.connector_type_vector.begin();
-      iter != p.connector_type_vector.end();
-      iter++)
-    {
-     if (DEBUG)
-        cerr << "In `Path::append':" << endl 
-             << "Pushing Connector_Type* onto r.connector_type_vector." << endl;  /* LDF 2022.01.14.  */
-
-      r.connector_type_vector.push_back(create_new<Connector_Type>(*iter));
-    }
-
-   while (r.connector_type_vector.size() >= r.points.size())
-   {
-      delete r.connector_type_vector.back();
-      r.connector_type_vector.back() = 0;
-      r.connector_type_vector.pop_back();
-   }
-
-@q **** (4) @>
-
-  if (assign == true)
-    *this = r;
-
-  return r;
-
-} /* End of |Path::append| definition.  */
-
 @q * (1) |Plane| functions.@> 
 @* {\bf Plane} functions.
 \initials{LDF 2005.11.01.}
@@ -14347,7 +14238,7 @@ Path::resolve(int begin,
 {
 @q **** (4) @>
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = true; /* |false| */ 
 
    Point p0;
    Point normal;
@@ -14684,9 +14575,20 @@ Added this section.
         }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+cerr << "Error after here 0." << endl; 
+
         *this = q_begin;
+
+cerr << "Error after here 1." << endl; 
+
         this->append(q_middle, "..");
+
+cerr << "Error after here 2." << endl; 
+
         this->append(q_end, "..");
+
+cerr << "Error after here 3." << endl; 
+
      }
 
 @q **** (4) @>

@@ -59,6 +59,16 @@ Created this file.
 @q * Include files. @>
 @ Include files.
 
+@<Include files@>=
+
+#include "loader.h++"
+
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#include <string.h>
+#include <math.h>
+
 #include "pspglb.h++"
 #include "io.h++"
 #include "creatnew.h++"
@@ -78,7 +88,254 @@ Created this file.
 #include "nurbs.h++"
 #include "utility.h++"
 #include "scnmptpt.h++"
+#include "paths.h++"
 #include "mpoutput.h++"
+
+@q * (1) @>
+@
+@<Define |Path| functions@>=
+Path
+Path::append(const Path& p, string connector, bool assign)
+{
+
+  bool DEBUG = true; /* |false| */ 
+
+  int i = 0;
+  int j = 0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Path::append'." << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  Path r(*this);
+
+  string last_connector;
+  Connector_Type *last_connector_type = 0;
+
+  r.set_cycle(false);
+
+@q **** (4) @>   
+
+@ If there isn't an explicit connector for every pair
+of |Points| in |points|, then we have to fill up
+|connectors| so that there are enough. Otherwise, the ``{\AM}'' 
+will be at the wrong place.  
+\initials{LDF 2002.4.6.}  
+
+@<Define |Path| functions@>=
+
+@q **** (4) @>
+
+  if (r.connector_type_vector.size() == 0)
+  {
+    last_connector_type = create_new<Connector_Type>(0);
+    last_connector_type->type0 = Connector_Type::PLAIN_TYPE;
+    last_connector_type->type1 = Connector_Type::CT_NULL_TYPE;
+    last_connector_type->connector_string = "--";
+  }
+  else
+    last_connector_type = r.connector_type_vector.back();
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+  if (r.points.size() > 0)
+  {
+@q ***** (5) @>
+
+     i = r.points.size() - 1;
+     j = r.connector_type_vector.size();
+
+     cerr << "i == " << i << endl;
+     cerr << "j == " << j << endl;
+
+@q ***** (5) @>
+
+      while (r.connector_type_vector.size() < i)
+      {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         {
+            cerr << "In `Path::append':" << endl 
+                 << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+         }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        r.connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+
+        if (j >= i)
+        {
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+               cerr << "In `Path::append':" << endl 
+                    << "j >= i.  Breaking." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           break;
+
+        }
+
+        ++j;
+
+@q ****** (6) @>
+
+      }  /* |while| */   
+
+@q ***** (5) @>
+
+  }  /* |if (r.points.size() > 0)| */
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+@q **** (4) @>
+
+  r.connector_type_vector.push_back(create_new<Connector_Type>(0));
+  r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+  r.connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
+  r.connector_type_vector.back()->connector_string = connector;
+
+@q **** (4) @>   
+
+@ Copy the |Points| in |p| and put the copies onto |points|.
+\initials{LDF 2002.4.6.} 
+
+@<Define |Path| functions@>=
+
+
+  for(vector<Point*>::const_iterator iter = p.points.begin();
+      iter != p.points.end();
+      iter++)
+    r.points.push_back(create_new<Point>(*iter));
+
+@q **** (4) @>   
+   
+@ Put the connectors from |p| onto the new |Path|.  Since they're
+|strings|, and not pointers, we don't have to copy them.  
+\initials{LDF 2002.4.6.}
+
+\LOG
+\initials{LDF 2004.11.01.}
+Now removing excess connectors.
+\ENDLOG 
+
+@<Define |Path| functions@>= 
+
+ cerr << "p.connector_type_vector.size() == " << p.connector_type_vector.size() << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+  i = 0;
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+  for(vector<Connector_Type*>::const_iterator iter = p.connector_type_vector.begin();
+      iter != p.connector_type_vector.end();
+      iter++)
+    {
+@q ***** (5) @>
+
+
+#if DEBUG_COMPILE
+        if (DEBUG)
+        {
+           cerr << "In `Path::YYY append':" << endl 
+                << "`i' == " << i << endl 
+                << "Pushing Connector_Type* onto r.connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+        }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+        r.connector_type_vector.push_back(create_new<Connector_Type>(*iter));
+
+@q ***** (5) @>
+
+        if (i > 20)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           {
+              cerr << "In `Path::append':" << endl 
+                   << "`i' == " << i << " > 20.  Breaking" << endl;
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           break;
+
+        }
+
+@q ***** (5) @>
+
+        else
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           {
+              cerr << "In `Path::append':" << endl 
+                   << "`i' == " << i << " <= 20.  Not breaking" << endl;
+
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        }
+
+@q ***** (5) @>
+ 
+        ++i;
+
+@q ***** (5) @>
+
+   } /* |for| */
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+   while (r.connector_type_vector.size() >= r.points.size())
+   {
+      delete r.connector_type_vector.back();
+      r.connector_type_vector.back() = 0;
+      r.connector_type_vector.pop_back();
+   }
+
+@q **** (4) @>
+
+  if (assign == true)
+    *this = r;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Path::append' with return value `Path r'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  return r;
+
+} /* End of |Path::append| definition.  */
+
+
+
+
 
 @q * (1) Putting Path functions together.@>
 @ Putting {\bf Path} functions together.
