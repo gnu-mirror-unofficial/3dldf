@@ -4230,7 +4230,8 @@ show(string text = "",
      const bool do_apply = true,
      Focus* f = 0, 
      const unsigned short proj = 0,
-     const real factor = 1) const;
+     const real factor = 1,
+     int show_connectors = 0) const;
 
 @
 @<Define |Ellipse| functions@>=
@@ -4238,7 +4239,8 @@ void
 Ellipse::show(string text, char coords,
               const bool do_persp, const bool do_apply,
               Focus* f, const unsigned short proj,
-              const real factor) const
+              const real factor,
+              int show_connectors) const
 
 {
    if (text == "")

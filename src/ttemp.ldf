@@ -68,6 +68,10 @@ beginfig(0);
   message "length pv0:";
   show length pv0;
 
+  message "pv0:";
+  show pv0;
+  pause;
+
   n := (length pv0) - 1;
 
   for i = 0 upto n:
@@ -81,8 +85,8 @@ beginfig(0);
     p[1][i] := get_point (i) pv1;
   endfor;
 
-  dotlabel.rt("$p_0^0$", p[0][0]);
-  dotlabel.top("$p_0^1$", p[0][1]);
+  dotlabel.lrt("$p_0^0$", p[0][0]);
+  dotlabel.urt("$p_0^1$", p[0][1]);
   dotlabel.top("$p_0^2$", p[0][2]);
   dotlabel.lft("$p_0^3$", p[0][3]);
   dotlabel.ulft("$p_0^4$", p[0][4]);
@@ -112,6 +116,9 @@ beginfig(0);
   dotlabel.rt("$p_1^4$", p[1][4]);
   dotlabel.lft("$p_1^5$", p[1][5]);
 
+
+  draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
+    with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
   
 
 endfig with_projection parallel_x_y;
