@@ -48,6 +48,8 @@ beginfig(0);
 
   pv := get_paths from g;
 
+  %% LDF 2022.04.04.  Add `with_connectors' to Pointer_Vector<Path>::show.
+  
   message "pv:";
   show pv;
 
@@ -55,8 +57,6 @@ beginfig(0);
   show length pv0;
 
   point p[][]; 
-
-
 
   message "Before resolve.";
   message "length pv0:";
@@ -68,8 +68,19 @@ beginfig(0);
   message "length pv0:";
   show length pv0;
 
-  message "pv0:";
+  message "pv0 without full connectors:";
   show pv0;
+
+  pause;
+
+  message "pv0 with full connectors at the bottom:";
+  show pv0 with_connectors;
+
+  pause;
+
+  message "pv0 with full connectors between the points:";
+  show pv0 with_connectors 2;
+
   pause;
 
   n := (length pv0) - 1;

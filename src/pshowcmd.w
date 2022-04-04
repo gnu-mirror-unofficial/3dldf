@@ -3069,7 +3069,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = 0; 
+   @=$$@> = -1; 
 };
 
 @q *** (3) with_connectors_optional: WITH_CONNECTORS @>
@@ -3100,9 +3100,33 @@ Added this rule.
    @=$$@> = 0; 
 };
 
+@q *** (3) with_connectors_optional: WITH_CONNECTORS numeric_expression@>
+@*2 \§with connectors optional> $\longrightarrow$ \.{WITH\_CONNECTORS} \§numeric expression>.
+\initials{LDF 2022.04.04.}
 
+\LOG
+\initials{LDF 2022.04.04.}
+Added this rule.
+\ENDLOG
 
+@<Define rules@>=
+@=with_connectors_optional: WITH_CONNECTORS numeric_expression@>@/
+{
+  @<Common declarations for rules@>@;
 
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `with_connectors_optional: WITH_CONNECTORS numeric_expression'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = roundf(static_cast<float>(@=$1@>));
+};
 
 @q **** (4) command --> SHOW path_expression with_connectors_optional@>
 
