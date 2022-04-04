@@ -84,7 +84,7 @@ lib_LTLIBRARIES = lib3dldflb.la
                 imetfncs.web io.web lines.web loader.web \
                 matrices.web mpoutput.web newwrite.web nurbs.web origami.web \
                 parabola.web parabold.web paraellp.web \
-                parahypr.web paths.web pctfncs0.web pens.web \
+                parahypr.web paths.web pathfncs.web pctfncs0.web pens.web \
                 pictures.web planes.web plyhdslc.web pntrvcf0.web pntrvctr.web points.web \
                 polygons.web polyhed.web predctes.web primes.web prrfnc0.web \
                 rectangs.web rhtchdrn.web scan.web scanprse.web scanprsf.web \
@@ -724,7 +724,7 @@ matrices.o: matrices.c++ matrices.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
 
 
-mpoutput.o: paths.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
+mpoutput.o: paths.c++ pathfncs.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
             creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
             transfor.h++ pens.h++ dashptrn.h++ shapes.h++ pictures.h++ points.h++ lines.h++ \
             planes.h++ nurbs.h++ paths.h++ mpoutput.h++ scnmptpt.h++ utility.h++
@@ -784,6 +784,13 @@ parahypr.o: parahypr.c++ parahypr.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
 	$(CXXCOMPILE) -c -o $@ $<
 
 paths.o: paths.c++ paths.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
+                   creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
+                   transfor.h++ pens.h++ dashptrn.h++ mpoutput.h++ shapes.h++ pictures.h++ \
+                   points.h++ lines.h++ \
+                   planes.h++ nurbs.h++ paths.h++ scnmptpt.h++ utility.h++
+	$(CXXCOMPILE) -c -o $@ $<
+
+pathfncs.o: pathfncs.c++ paths.h++ pathfncs.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ \
                    creatnew.h++ pntrvctr.h++ primes.h++ complex.h++ matrices.h++ colors.h++ \
                    transfor.h++ pens.h++ dashptrn.h++ mpoutput.h++ shapes.h++ pictures.h++ \
                    points.h++ lines.h++ \
