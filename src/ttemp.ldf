@@ -39,8 +39,8 @@ beginfig(0);
 
   scale g by .25; 
   
-  message "g:";
-  show g;
+  % message "g:";
+  % show g;
 
   draw g;
 
@@ -50,11 +50,11 @@ beginfig(0);
 
   %% LDF 2022.04.04.  Add `with_connectors' to Pointer_Vector<Path>::show.
   
-  message "pv:";
-  show pv;
+  % message "pv:";
+  % show pv;
 
-  message "length pv0:";
-  show length pv0;
+  % message "length pv0:";
+  % show length pv0;
 
   point p[][]; 
 
@@ -69,18 +69,19 @@ beginfig(0);
   show length pv0;
 
   message "pv0 without full connectors:";
+  pause;
   show pv0;
-
   pause;
 
-  message "pv0 with full connectors at the bottom:";
-  show pv0 with_connectors;
 
+  message "pv0 with full connectors at the bottom:";
+  pause;
+  show pv0 with_connectors;
   pause;
 
   message "pv0 with full connectors between the points:";
+  pause;
   show pv0 with_connectors 2;
-
   pause;
 
   n := (length pv0) - 1;

@@ -3125,7 +3125,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = roundf(static_cast<float>(@=$1@>));
+   @=$$@> = roundf(static_cast<float>(@=$2@>));
 };
 
 @q **** (4) command --> SHOW path_expression with_connectors_optional@>
@@ -3151,10 +3151,29 @@ Replaced code with a call to |Scan_Parse::show_func|.
   
 @=command: SHOW path_expression with_connectors_optional@>@/
 {
-    Scan_Parse::show_func<Path>(static_cast<Path*>(@=$2@>),
-                                "path",
-                                parameter,
-                                @=$3@>);
+
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `command: SHOW path_expression with_connectors_optional.'";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      cerr << "$3 == " << @=$3@> << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+    }
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Path *p = static_cast<Path*>(@=$2@>);
+    p->show("path", 'w', true, true, 0, Projections::persp, 1, @=$3@>);
 
     @=$$@> = static_cast<void*>(0);
 };

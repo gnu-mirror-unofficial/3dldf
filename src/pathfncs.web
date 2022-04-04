@@ -117,10 +117,10 @@ Path::show(string text, char coords,
    { 
        cerr << "Entering `Path::show'." << endl;
 
-cerr << "show_connectors == " << show_connectors << endl;
+       cerr << "show_connectors == " << show_connectors << endl;
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+       cerr << "XXX Enter <RETURN> to continue: ";
+       getchar(); 
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -171,6 +171,9 @@ getchar();
    cerr << "connector_type_vector.size() == " 
         << connector_type_vector.size() << endl;  
 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
    int loop_ctr = 0;
 
    string connector_string;
@@ -180,24 +183,21 @@ getchar();
    else 
       cerr << "points is empty.  Not showing." << endl;
 
-   vector<Connector_Type*>::const_iterator c_iter = connector_type_vector.begin();
-
 @q ** (2) @>
 @
 @<Define |Path| functions@>=
 
    /* !!START HERE:  LDF 2022.04.04.  */ 
 
+   vector<Connector_Type*>::const_iterator c_iter = connector_type_vector.begin();
+
+   int i = 0;
+
    for(vector <Point*>::const_iterator points_iter = points.begin();
        points_iter != points.end();
        ++points_iter)
    {
-
-     if (points_iter != points.begin())
-       {
-         cerr << " " << connector_string << " ";
-       }
-
+@q *** (3) @>
 
      if (connector_type_iter != connector_type_vector.end())
      {
@@ -217,7 +217,16 @@ getchar();
      
      cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
 
+     ++c_iter;
+     ++i;
+
+@q *** (3) @>
+
    }  /* |for|  */
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
 
    if (cycle_switch)
    {

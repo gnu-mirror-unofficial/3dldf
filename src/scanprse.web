@@ -11455,12 +11455,20 @@ template <class C>
 int
 Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors)
 {
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+
+   if (DEBUG)
+   { 
+       cerr << "Entering `Scan_Parse::show_func'." << endl;
+   }  
+
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q **** (4) Preliminaries.@>   
 
-#if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
-#endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
 
