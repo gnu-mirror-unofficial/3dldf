@@ -2785,6 +2785,8 @@ Added token declarations for |WITH_AMPERSAND| and |WITH_NO_AMPERSAND|.
 @=%token <int_value> WITH_AMPERSAND@>@/
 @=%token <int_value> WITH_NO_AMPERSAND@>@/
 
+@=%token <int_value> WITH_CONNECTORS@>@/
+
 @q *** (3) Types for enclosed and enclosing figures.@>
 @*2 Types for enclosed and enclosing figures.
 \initials{LDF 2004.11.16.}
