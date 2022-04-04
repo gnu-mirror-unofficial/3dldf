@@ -197,6 +197,12 @@ AM_CXXFLAGS = -fpermissive -fdiagnostics-show-option -Wno-return-type
 
 #### ** (2) Rules
 
+.PHONY : ch
+
+ch:
+	./create_headers.sh
+
+
 .PHONY : touch
 
 # $(3dldfsp_obj_files) 
