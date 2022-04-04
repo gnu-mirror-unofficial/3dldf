@@ -1,5 +1,7 @@
 %% ttemp.ldf
 
+input "plain.lmc";
+
 verbatim_metapost "prologues := 3; outputtemplate := \"%j%3c.eps\";";
 
 glyph g;
@@ -22,10 +24,6 @@ frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_
 
 %% ** (2)  
   
-def end_mp =
-  verbatim_metapost "end;";
-enddef;
-
 beginfig(0);
 
   draw frame shifted (5cm, 5cm);
@@ -64,14 +62,27 @@ beginfig(0);
 
   resolve pv0 (0, 1) to 6 with_no_transform;
 
-  message "After resolve.";
-  message "length pv0:";
-  show length pv0;
+  % message "After resolve.";
+  % message "length pv0:";
+  % show length pv0;
 
   message "pv0 without full connectors:";
   pause;
+
   show pv0;
   pause;
+
+
+endfig with_projection parallel_x_y;
+%endfig with_focus f;
+
+end_mp;
+  
+end;
+
+
+
+
 
 
   message "pv0 with full connectors at the bottom:";
