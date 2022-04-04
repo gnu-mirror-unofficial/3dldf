@@ -107,8 +107,6 @@ Path::append(const Path& p, string connector, bool assign)
    if (DEBUG)
    { 
       cerr << "Entering `Path::append'." << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -196,9 +194,6 @@ will be at the wrong place.
 
   }  /* |if (r.points.size() > 0)| */
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
 @q **** (4) @>
 
   r.connector_type_vector.push_back(create_new<Connector_Type>(0));
@@ -232,10 +227,9 @@ Now removing excess connectors.
 
 @<Define |Path| functions@>= 
 
+#if 0
  cerr << "p.connector_type_vector.size() == " << p.connector_type_vector.size() << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
+#endif 
 
   i = 0;
 
@@ -256,10 +250,6 @@ getchar();
            cerr << "In `Path::YYY append':" << endl 
                 << "`i' == " << i << endl 
                 << "Pushing Connector_Type* onto r.connector_type_vector." << endl;  /* LDF 2022.01.14.  */
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
         }  
 #endif /* |DEBUG_COMPILE|  */@; 
 

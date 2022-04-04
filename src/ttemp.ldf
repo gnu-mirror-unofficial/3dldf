@@ -95,9 +95,18 @@ beginfig(0);
   dotlabel.rt("$p_1^4$", p[1][4]);
   dotlabel.lft("$p_1^5$", p[1][5]);
 
+  message "Before resolve.";
+  message "length pv0:";
+  show length pv0;
+
+  pause;
+  
   resolve pv0 (0, 1) to 3 with_no_transform;
 
   message "After resolve.";
+  message "length pv0:";
+  show length pv0;
+
   pause;
   
 
