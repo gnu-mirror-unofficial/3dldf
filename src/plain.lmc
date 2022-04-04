@@ -1,9 +1,19 @@
 %% plain.lmc
 %% Created by Laurence D. Finston (LDF) Mon 04 Apr 2022 07:08:02 PM CEST
 
+%% * (1) Top
+
+%% ** (2) end_mp
+
 def end_mp =
   verbatim_metapost "end;";
 enddef;
+
+
+%% ** (2) verbatim_tex and verbatimtex
+
+%% !!TODO:  Rewrite `verbatim_tex' as a parser rule.  Then I can pass a `string_expression' to it.
+%% LDF 2022.04.04.
 
 def verbatim_tex (s) =
   verbatim_metapost "verbatimtex " & s & " etex;";
@@ -11,4 +21,13 @@ enddef;
 
 let verbatimtex = verbatim_tex;
 
+%% ** (2)
+
 endinput;
+
+%% * (1) Local variables for Emacs
+
+%% Local Variables:
+%% mode: MetaPost
+%% End:
+
