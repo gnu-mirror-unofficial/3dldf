@@ -4837,7 +4837,7 @@ message_command_func(int message_type, void* v, void* parameter = 0);
 
 template <class C>
 int
-show_func(C* c, string text = "", void* parameter = 0);
+show_func(C* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 @q ***** (5) Functions for intersections.@>   
 @ Functions for intersections.
@@ -4971,7 +4971,7 @@ plot_stars_func(Sphere *, Scanner_Node);
 
 template <class C>
 int
-show_func(C* c, string text, void* parameter);
+show_func(C* c, string text, void* parameter, int with_connectors);
 
 void*
 plane_intersection_func(void* v, void* w, void* parameter = 0);

@@ -3153,7 +3153,8 @@ Replaced code with a call to |Scan_Parse::show_func|.
 {
     Scan_Parse::show_func<Path>(static_cast<Path*>(@=$2@>),
                                 "path",
-                                parameter);
+                                parameter,
+                                @=$3@>);
 
     @=$$@> = static_cast<void*>(0);
 };

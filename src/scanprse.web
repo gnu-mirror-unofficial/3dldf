@@ -11453,13 +11453,13 @@ plane_assignment_func(void* entry, Triangle* c, void* parameter = 0);
 
 template <class C>
 int
-Scan_Parse::show_func(C* c, string text, void* parameter)
+Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors)
 {
 
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -11564,148 +11564,148 @@ Added declarations for versions with
 @<Declare |Scan_Parse| functions@>=
 
 int
-show_func(Matrix* m, string text = "", void* parameter = 0);
+show_func(Matrix* m, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Transform* c, string text = "", void* parameter = 0);
+show_func(Transform* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Color* c, string text = "", void* parameter = 0);
+show_func(Color* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Dash_Pattern* c, string text = "", void* parameter = 0);
+show_func(Dash_Pattern* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Pen* c, string text = "", void* parameter = 0);
+show_func(Pen* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Picture* c, string text = "", void* parameter = 0);
+show_func(Picture* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Glyph* c, string text = "glyph", void* parameter = 0);
+show_func(Glyph* c, string text = "glyph", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Plane* c, string text = "", void* parameter = 0);
+show_func(Plane* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Origami_Figure* c, string text = "origami_figure", void* parameter = 0);
+show_func(Origami_Figure* c, string text = "origami_figure", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Focus* c, string text = "focus", void* parameter = 0);
+show_func(Focus* c, string text = "focus", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Point* c, string text = "point", void* parameter = 0);
+show_func(Point* c, string text = "point", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Bool_Point* c, string text = "bool_point", void* parameter = 0);
+show_func(Bool_Point* c, string text = "bool_point", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Path* c, string text = "", void* parameter = 0);
+show_func(Path* c, string text = "", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Ellipse* c, string text = "ellipse", void* parameter = 0);
+show_func(Ellipse* c, string text = "ellipse", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Parabola* c, string text = "parabola", void* parameter = 0);
+show_func(Parabola* c, string text = "parabola", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Hyperbola* c, string text = "hyperbola", void* parameter = 0);
+show_func(Hyperbola* c, string text = "hyperbola", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Circle* c, string text = "circle", void* parameter = 0);
+show_func(Circle* c, string text = "circle", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Arc* a, string text = "arc", void* parameter = 0);
+show_func(Arc* a, string text = "arc", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Polygon* c, string text = "polygon", void* parameter = 0);
+show_func(Polygon* c, string text = "polygon", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Reg_Polygon* c, string text = "reg_polygon", void* parameter = 0);
+show_func(Reg_Polygon* c, string text = "reg_polygon", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Rectangle* c, string text = "rectangle", void* parameter = 0);
+show_func(Rectangle* c, string text = "rectangle", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Triangle* c, string text = "triangle", void* parameter = 0);
+show_func(Triangle* c, string text = "triangle", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Cuboid* c, string text = "cuboid", void* parameter = 0);
+show_func(Cuboid* c, string text = "cuboid", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Cylinder* c, string text = "cylinder", void* parameter = 0);
+show_func(Cylinder* c, string text = "cylinder", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Sphere* s, string text = "sphere", void* parameter = 0);
+show_func(Sphere* s, string text = "sphere", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Sphere_Development* s, string text = "sphere", void* parameter = 0);
+show_func(Sphere_Development* s, string text = "sphere", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Polyhedron* c, string text = "polyhedron", void* parameter = 0);
+show_func(Polyhedron* c, string text = "polyhedron", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Ellipsoid* c, string text = "ellipsoid", void* parameter = 0);
+show_func(Ellipsoid* c, string text = "ellipsoid", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Cone* c, string text = "cone", void* parameter = 0);
+show_func(Cone* c, string text = "cone", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Helix* c, string text = "helix", void* parameter = 0);
+show_func(Helix* c, string text = "helix", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Nurb* c, string text = "nurb", void* parameter = 0);
+show_func(Nurb* c, string text = "nurb", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Ellipse_Slice* c, string text = "ellipse_slice", void* parameter = 0);
+show_func(Ellipse_Slice* c, string text = "ellipse_slice", void* parameter = 0, int with_connectors = 0);
 
 int
-show_func(Circle_Slice* c, string text = "circle_slice", void* parameter = 0);
+show_func(Circle_Slice* c, string text = "circle_slice", void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Polyhedron_Slice* c, 
                       string text = "polyhedron_slice", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Matrix>* c, 
           string text = "matrix_vector", 
-          void* parameter = 0);
+          void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Ellipse>* c, 
                       string text = "ellipse_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Parabola>* c, 
                       string text = "parabola_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Hyperbola>* c, 
                       string text = "hyperbola_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Ellipsoid>* c, 
                       string text = "ellipsoid_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Sphere>* s, 
                       string text = "sphere_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Sphere_Development>* s, 
                       string text = "sphere_development_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 int
 show_func(Pointer_Vector<Cuboid>* c, 
                       string text = "Cuboid_vector", 
-                      void* parameter = 0);
+                      void* parameter = 0, int with_connectors = 0);
 
 @q *** (3) |ellipsoid_like_plane_intersection_func|.@> 
 @*2  {\bf ellipsoid\_like\_plane\_intersection\_func}.
