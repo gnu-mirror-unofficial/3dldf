@@ -2766,6 +2766,9 @@ Added token declarations for |WITH_TRANSFORM| and |WITH_NO_TRANSFORM|.
 
 \initials{LDF 2022.04.04.}
 Added token declarations for |WITH_AMPERSAND| and |WITH_NO_AMPERSAND|.
+
+\initials{LDF 2022.04.04.}
+Added token declarations for |QUIET| and |VERBOSE|.
 \ENDLOG
 
 @q **** (4) Code.@> 
@@ -2787,6 +2790,9 @@ Added token declarations for |WITH_AMPERSAND| and |WITH_NO_AMPERSAND|.
 @=%token <int_value> WITH_NO_AMPERSAND@>@/
 
 @=%token <int_value> WITH_CONNECTORS@>@/
+
+@=%token <int_value> QUIET@>@/
+@=%token <int_value> VERBOSE@>@/
 
 @q *** (3) Types for enclosed and enclosing figures.@>
 @*2 Types for enclosed and enclosing figures.
