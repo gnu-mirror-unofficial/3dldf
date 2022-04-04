@@ -1,14 +1,12 @@
 %% plain.lmc
 %% Created by Laurence D. Finston (LDF) Mon 04 Apr 2022 07:08:02 PM CEST
 
+%% This file is intended for 3dldf macros that are generally useful.  I
+%% plan to use it as the basis for a preloaded format, analogous to the
+%% `plain' formats of TeX, METAFONT and MetaPost.
+%% LDF 2022.04.04.
+
 %% * (1) Top
-
-%% ** (2) end_mp
-
-def end_mp =
-  verbatim_metapost "end;";
-enddef;
-
 
 %% ** (2) verbatim_tex and verbatimtex
 
@@ -20,6 +18,12 @@ def verbatim_tex (s) =
 enddef;
 
 let verbatimtex = verbatim_tex;
+
+%% ** (2) end_mp
+
+def end_mp =
+  verbatim_metapost "end;";
+enddef;
 
 %% ** (2)
 
