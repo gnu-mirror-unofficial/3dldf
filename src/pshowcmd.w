@@ -3032,6 +3032,102 @@ Added this rule.
 
 };
 
+@q ** (2) show_path_option_list.@>
+@*1 \§show path option list>.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> show_path_option_list@>
+
+@q *** (3) show_path_option_list: /* Empty  */@>
+@*2 \§show path option list> $\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=show_path_option_list: /*  Empty  */@>@/
+{
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `show_path_option_list: EMPTY'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0; 
+};
+
+@q *** (3) show_path_option_list: show_path_option_list QUIET @>
+@*2 \§show path option list> $\longrightarrow$ \§show path option list> \.{QUIET}.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=show_path_option_list: show_path_option_list QUIET @>@/
+{
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list QUIET'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0; 
+};
+
+@q *** (3) show_path_option_list: show_path_option_list VERBOSE @>
+@*2 \§show path option list> $\longrightarrow$ \§show path option list> \.{VERBOSE}.
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=show_path_option_list: show_path_option_list VERBOSE @>@/
+{
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list VERBOSE'.";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 0; 
+};
+
 @q ** (2) with_connectors_optional.@>
 @*1 \§with connectors optional>.
 \initials{LDF 2022.04.04.}
@@ -3128,7 +3224,7 @@ Added this rule.
    @=$$@> = roundf(static_cast<float>(@=$2@>));
 };
 
-@q **** (4) command --> SHOW path_expression with_connectors_optional@>
+@q **** (4) command --> SHOW path_expression with_connectors_optional show_path_option_list@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
 \§path expression>.
@@ -3149,7 +3245,7 @@ Replaced code with a call to |Scan_Parse::show_func|.
 
 @<Define rules@>= 
   
-@=command: SHOW path_expression with_connectors_optional@>@/
+@=command: SHOW path_expression with_connectors_optional show_path_option_list@>@/
 {
 
   @<Common declarations for rules@>@;
@@ -3158,7 +3254,7 @@ Replaced code with a call to |Scan_Parse::show_func|.
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: Rule `command: SHOW path_expression with_connectors_optional.'";
+      cerr_strm << "*** Parser: Rule `command: SHOW path_expression with_connectors_optional show_path_option_list.'";
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
