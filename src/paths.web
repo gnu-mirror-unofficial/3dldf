@@ -14347,7 +14347,7 @@ Path::resolve(int begin,
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    Point p0;
    Point normal;
@@ -14369,7 +14369,8 @@ Path::resolve(int begin,
             << "`end'          == " << end << endl 
             << "`res_val'      == " << res_val << endl 
             << "`do_unlink'    == " << do_unlink << endl 
-            << "`do_transform' == " << do_transform << endl;
+            << "`do_transform' == " << do_transform << endl
+            << "`do_ampersand' == " << do_ampersand << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -14607,11 +14608,78 @@ Path::resolve(int begin,
 
      bool ccycle = is_cycle();
 
-     *this = q_begin;
-     *this += "..";
-     this->append(q_middle, "..");
-     *this += "..";
-     this->append(q_end, "..");
+@q **** (4) @>
+
+@ This code may not be completely bullet-proof.  It may fail for complicated |Paths| with different kinds of 
+connectors.  !! TODO:  Test this!
+\initials{LDF 2022.04.04.}
+
+\LOG
+\initials{LDF 2022.04.04.}
+Added this section.
+\ENDLOG 
+
+@<Define |Path| functions@>=
+
+     if (do_ampersand)
+     {
+#if DEBUG_COMPILE
+        if (DEBUG)
+        { 
+          cerr << "In `Path::resolve' (version 2, for subpath):"
+               << endl 
+               << "`do_ampersand' is `true'." << endl;
+        }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        *this = q_begin;
+        
+        if (q_begin.get_last_point() != q_middle.get_point(0))
+        {
+           *this += q_middle.get_point(0);
+           *this += "..";
+        }
+
+        this->append(q_middle, "&");
+
+        if (q_middle.get_last_point() != q_end.get_point(0))
+        {
+           *this += q_end.get_point(0);
+           *this += "..";
+        }
+
+        this->append(q_end, "&");
+
+     }
+
+@q **** (4) @>
+@
+\LOG
+\initials{LDF 2022.04.04.}
+Added this section.
+\ENDLOG 
+
+@<Define |Path| functions@>=
+
+     else
+     {
+#if DEBUG_COMPILE
+        if (DEBUG)
+        { 
+          cerr << "In `Path::resolve' (version 2, for subpath):"
+               << endl 
+               << "`do_ampersand' is `false'." << endl;
+        }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        *this = q_begin;
+        this->append(q_middle, "..");
+        this->append(q_end, "..");
+     }
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
      if (ccycle)
      {
