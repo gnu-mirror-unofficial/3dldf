@@ -1092,7 +1092,7 @@ Added this rule.
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "string_expression'."
+                   << "WITH string_expression'."
                    << endl;
 
          log_message(cerr_strm);
@@ -1134,7 +1134,7 @@ Added this rule.
      if (status != 0)
      {
          cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "string_expression':"
+                   << "WITH string_expression':"
                    << endl
                    << "`Path::replace_connectors' failed, returning " << status << "."
                    << endl
@@ -1154,7 +1154,7 @@ Added this rule.
      else if (DEBUG)
      { 
          cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "string_expression':"
+                   << "WITH string_expression':"
                    << endl
                    << "`Path::replace_connectors' succeeded, returning 0."
                    << endl
