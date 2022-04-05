@@ -14679,6 +14679,19 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 
 }  /* End of |Path::reset_connectors| definition  */
 
+@q ** (2) Replace connectors.  @>
+@ Replace connectors.  
+\initials{LDF 2022.04.05.}
+
+\LOG
+\initials{LDF 2022.04.05.}
+Added this function declaration.  The definition is in \filename{pathfncs.web}.
+\ENDLOG
+
+@<Declare |Path| functions@>=
+int
+replace_connectors(string s = "..");
+
 @q * (1) class |Connector_Type| declaration. @>
 @* class |Connector_Type| declaration.
 \initials{LDF 2021.12.24.}
@@ -14805,6 +14818,38 @@ Connector_Type::Connector_Type(const Connector_Type &c)
 
 
 @q **** (4) @>
+
+@q *** (3) Destructor.  @>
+@ Destructor.
+\initials{LDF 2022.04.05.}
+
+\LOG
+\initials{LDF 2022.04.05.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Declaration @>
+@<|Connector_Type| function declarations@>=
+~Connector_Type(void);
+
+@q **** (4) Definition @>
+@
+@<|Connector_Type| function definitions@>=
+Connector_Type::~Connector_Type(void)
+{
+   if (pt0 != 0)
+   {
+      delete pt0;
+      pt0 = 0;
+   }
+
+   if (pt1 != 0)
+   {
+      delete pt1;
+      pt1 = 0;
+   }
+
+}  /* End of |Connector_Type| destructor definition  */
 
 @q *** (3) Assignment operator.@>
 @ Assignment operator.
