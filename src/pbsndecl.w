@@ -2377,10 +2377,16 @@ Added token declarations for |WITH_DIVISIONS_LATITUDE|
 \initials{LDF 2004.11.01.}
 Added this section with a token declaration 
 for |CLEAR_CONNECTORS|.
+
+\initials{LDF 2022.04.05.}
+Added token declarations for |REPLACE|, |CONNECTOR| and |CONNECTORS|.
 \ENDLOG
 
 @<Token and precedence declarations@>=
 
+@=%token <int_value> REPLACE@>@/
+@=%token <int_value> CONNECTOR@>@/
+@=%token <int_value> CONNECTORS@>@/
 @=%token <int_value> CLEAR_CONNECTORS@>@/
 
 @q *** (3) Types for outputting |Pictures|.  @>
