@@ -14849,6 +14849,8 @@ Connector_Type::~Connector_Type(void)
       pt1 = 0;
    }
 
+   return;
+
 }  /* End of |Connector_Type| destructor definition  */
 
 @q *** (3) Assignment operator.@>
@@ -14882,14 +14884,32 @@ Connector_Type::operator=(const Connector_Type &c)
    r0  = c.r0;
    r1  = c.r1;      
 
-   if (c.pt0 != 0)
+   if (pt0 != 0 && c.pt0 == 0)
+   {
+      delete pt0;
+      pt0 = 0;
+   }
+   else if (pt0 == 0 && c.pt0 != 0)
    {
       pt0 = create_new<Point>(c.pt0);        
    }
+   else if (pt0 != 0 && c.pt0 != 0)
+   {
+      *pt0 = *(c.pt0)
+   }
 
-   if (c.pt1 != 0)
+   if (pt1 != 0 && c.pt1 == 0)
+   {
+      delete pt1;
+      pt1 = 0;
+   }
+   else if (pt1 == 0 && c.pt1 != 0)
    {
       pt1 = create_new<Point>(c.pt1);        
+   }
+   else if (pt1 != 0 && c.pt1 != 0)
+   {
+      *pt1 = *(c.pt1)
    }
 
    return;
