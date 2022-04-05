@@ -119,9 +119,6 @@ Path::show(string text, char coords,
 
        cerr << "show_connectors_option == " << show_connectors_option << endl;
 
-       cerr << "XXX Enter <RETURN> to continue: ";
-       getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -169,9 +166,6 @@ Path::show(string text, char coords,
    cerr << "connector_type_vector.size() == " 
         << connector_type_vector.size() << endl;  
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    int loop_ctr = 0;
 
    string connector_string;
@@ -184,8 +178,6 @@ getchar();
 @q ** (2) @>
 @
 @<Define |Path| functions@>=
-
-   /* !!START HERE:  LDF 2022.04.04.  */ 
 
    vector<Connector_Type*>::const_iterator c_iter = connector_type_vector.begin();
 
@@ -591,7 +583,86 @@ Now removing excess connectors.
 
 } /* End of |Path::append| definition.  */
 
+@q * (1) Replace connectors.  @>
+@ Replace connectors.
+\initials{LDF 2022.04.05.}
 
+\LOG
+\initials{LDF 2022.04.05.}
+Added this function.
+\ENDLOG 
+
+@<Define |Path| functions@>=
+int
+Path::replace_connectors(string s)
+{
+#if DEBUG_COMPILE
+ 
+   bool DEBUG = true; /* |false| */ 
+
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::replace_connectors'.  `string s' == " << s << "."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   Connector_Type c;
+
+   if (!(s == ".." || s == "..." || s == "--" || s == "---"))
+   {
+      cerr << "ERROR!  In `Path::replace_connectors':  `string s' is invalid:"
+           << endl 
+           << "`s' == " << s << "." << endl
+           << "Not replacing connectors.  Exiting function unsuccessfully with return value 1."
+           << endl;
+
+      return 1;
+   }
+
+   c.connector_string = s;
+
+   for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+        iter != connector_type_vector.end();
+        ++iter)
+   {
+      **iter = c;
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "In `Path::replace_connectors':  After replacement:" << endl;
+          (**iter).show();
+
+cerr << "BBB Enter <RETURN> to continue: ";
+getchar(); 
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   } /* |for|  */
+
+@q ** (2) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::replace_connectors' successfully with return value 0."
+            << endl;
+
+cerr << "AAA Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+} /* End of |Path::replace_connectors| definition  */
 
 
 
@@ -616,6 +687,8 @@ Now removing excess connectors.
 @(pathfncs.h@>=
 /* Empty */
 
+@q * (1) @>
+
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
 @q   GNU Emacs editor.  The local variable list is not evaluated when an @>
 @q   indirect buffer is visited, so it's necessary to evaluate the       @>
@@ -623,6 +696,8 @@ Now removing excess connectors.
 @q   accessed via the local variables list.                              @>
 @q   \initials{LDF 2004.02.12}.                                          @>
 @q   (progn (cweb-mode) (outline-minor-mode t))                          @>
+
+@q * (1) Local Variables for Emacs @> 
 
 @q Local Variables: @>
 @q mode:CWEB @>
