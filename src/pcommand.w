@@ -105,7 +105,7 @@ Added this rule.
 
 };
 
-@q *** (3) command --> CLIP_TO path_expression.@> 
+@q ** (2) command --> CLIP_TO path_expression.@> 
 @*2 \§command> $\longrightarrow$ \.{CLIP\_TO} \§path expression>.
 \initials{LDF 2005.08.16.}
 
@@ -1070,7 +1070,114 @@ Added this rule.
 
 @q *** (3) @>
 
-@q ** (2) @>
+@q ** (2) command:  REPLACE CONNECTORS path_variable WITH string_expression.  @>
+@ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTORS} \§path variable> \.{WITH} 
+\§string expression>.
+\initials{LDF 2022.04.05.}
+
+\LOG
+\initials{LDF 2022.04.05.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: REPLACE CONNECTORS path_variable WITH string_expression@>@/
+{ 
+@q *** (3) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS path_variable "
+                   << "string_expression'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     entry = static_cast<Id_Map_Entry_Node>(@=$3@>);  
+
+     Path *p = static_cast<Path*>(entry->object);
+
+     string *s = static_cast<string*>(@=$5@>);
+
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+
+        cerr << "*s == " << *s << endl;
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     status = p->replace_connectors(*s);
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     if (status != 0)
+     {
+         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS path_variable "
+                   << "string_expression':"
+                   << endl
+                   << "`Path::replace_connectors' failed, returning " << status << "."
+                   << endl
+                   << "Failed to replace connectors on `path'.  Continuing."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+     else if (DEBUG)
+     { 
+         cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS path_variable "
+                   << "string_expression':"
+                   << endl
+                   << "`Path::replace_connectors' succeeded, returning 0."
+                   << endl
+                   << "Replaced connectors on `path'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+        
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     delete s;
+     s = 0;
+
+     @=$$@> = 0;
+
+};
 
 @q * (1) @>
 
