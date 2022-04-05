@@ -3128,9 +3128,16 @@ Added calls to |add_entry| for |tilt| and |tilted|.
 \initials{LDF 2004.11.01.}
 Added this section with a 
 call to |scanner_node->add_entry| for |clear_connectors|.
+
+\initials{LDF 2022.04.05.}
+Added calls to |scanner_node->add_entry| for |replace|, |connector| and |connectors|.
 \ENDLOG
 
 @<Define |Scanner_Type::create|@>=
+
+   scanner_node->add_entry("replace", REPLACE, spark);
+   scanner_node->add_entry("connector", CONNECTOR, spark);
+   scanner_node->add_entry("connectors", CONNECTORS, spark);
 
    scanner_node->add_entry("clear_connectors", CLEAR_CONNECTORS, spark);
 
