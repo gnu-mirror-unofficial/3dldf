@@ -124,6 +124,35 @@ Path::show(string text, char coords,
 
 @q ** (2) @>
 
+   bool quiet              = show_connectors_option & 1U;
+   bool verbose            = show_connectors_option & 2U;
+   int with_connectors_val = 0;
+
+   if (show_connectors_option & 16U)
+      with_connectors_val = 3;
+   else if (show_connectors_option & 8U)
+      with_connectors_val = 2;
+   else if (show_connectors_option & 4U)
+      with_connectors_val = 1;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Path::show':" << endl
+           << "`quiet'               == " << quiet << endl 
+           << "`verbose'             == " << verbose << endl 
+           << "`with_connectors_val' == " << with_connectors_val << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar();
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
    if (text == "")
      text = "Path:";
 
@@ -207,6 +236,61 @@ Path::show(string text, char coords,
 
      if (c_iter != connector_type_vector.end())
      {
+@q **** (4) @>
+
+         if (with_connectors_val < 3)
+         {
+@q ***** (5) @>
+
+            if ((*c_iter)->type0 == Connector_Type::CONTROLS_TYPE)
+            {
+@q ****** (6) @>
+
+               if ((*c_iter)->pt0 != 0 && (*c_iter)->pt1 != 0)
+                  cerr << "..CC.. ";
+
+@q ****** (6) @>
+
+               else if ((*c_iter)->pt0 != 0 && (*c_iter)->pt1 == 0)
+                  cerr << "..C.. ";
+@q ****** (6) @>
+
+               else
+               {
+                  cerr << "WARNING!  In `Path::show':" << endl
+                       << "`Connector_Type' " << i << " is of type `CONTROLS_TYPE' but "
+                       << "`Point *pt0' and `Point *pt1' are both NULL."
+                       << endl
+                       << "This shouldn't be possible.  Continuing."
+                       << endl;
+ 
+                  cerr << "..CC.. ";
+               }
+@q ****** (6) @>
+              
+            }  /* |if|  */
+
+@q ***** (5) @>
+
+         } /* |if (with_connectors_val < 3)|  */    
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+         else if (with_connectors_val == 3)
+         {
+@q ***** (5) @>
+
+
+@q ***** (5) @>
+
+         } /* |else if (with_connectors_val == 3)| */
+
+
+@q **** (4) @>
+
+#if 0
 #if DEBUG_COMPILE
          if (DEBUG)
          { 
@@ -219,9 +303,10 @@ getchar();
 
          }    
 #endif /* |DEBUG_COMPILE|  */@; 
-
+#endif 
          ++c_iter;
-     }
+
+     } /* |if (c_iter != connector_type_vector.end())| */
 
 @q *** (3) @>
 @

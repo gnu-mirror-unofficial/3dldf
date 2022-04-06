@@ -46,11 +46,12 @@ beginfig(0);
 
   pv := get_paths from g;
 
+  message "Showing pv0 with_connectors 1 quiet";
+  show pv0 with_connectors 1 quiet;
+  pause;
   
-  replace connectors pv0 with "..";
+  %% replace connectors pv0 with "..";
 
-endfig;
-end;
   
   %% LDF 2022.04.04.  Add `with_connectors' to Pointer_Vector<Path>::show.
   
@@ -75,8 +76,7 @@ end;
   % message "pv0 without full connectors:";
   % pause;
 
-  % show pv0 with_connectors 1 quiet;
-  % pause;
+
 
 % endfig with_projection parallel_x_y;
 % %endfig with_focus f;
