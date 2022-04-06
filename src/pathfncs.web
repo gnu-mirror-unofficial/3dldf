@@ -742,11 +742,14 @@ Now removing excess connectors.
 \LOG
 \initials{LDF 2022.04.05.}
 Added this function.
+
+\initials{LDF 2022.04.06.}
+Added the optional arguments |int start|, |int end| and |Scanner_Node scanner_node|.
 \ENDLOG 
 
 @<Define |Path| functions@>=
 int
-Path::replace_connectors(string s)
+Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node)
 {
 #if DEBUG_COMPILE
  
@@ -762,6 +765,12 @@ Path::replace_connectors(string s)
 @q ** (2) @>
 @
 @<Define |Path| functions@>=
+
+   if (end < 0)
+   {
+      end = points.size() - 1;  /* Replace connectors from |start| to |end| {\it inclusive}.
+                                   \initials{LDF 2022.04.06.}  */ 
+   }
 
    Connector_Type c;
 
