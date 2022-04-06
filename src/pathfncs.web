@@ -865,6 +865,47 @@ getchar();
 
 } /* End of |Path::replace_connectors| definition  */
 
+@q * (1) Show connectors. @>
+@
+@<Define |Path| functions@>=
+void
+Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) const
+{
+@q ** (2) @>
+
+   bool DEBUG = false; /* |true| */ 
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::show_connectors'." << endl
+            << "`first' == " << first << endl
+            << "`last'  == " << last << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+       
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::show_connectors' successfully with return value 0." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return;
+
+@q ** (2) @>
+
+}  /* End of |Path::show_connectors| definition  */
 
 
 @q * (1) Putting Path functions together.@>
