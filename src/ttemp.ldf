@@ -10,7 +10,6 @@ glyph t;
 
 %% * (1)
 
-
 numeric frame_wd;
 numeric frame_ht;
 frame_wd := 20cm;
@@ -22,16 +21,20 @@ frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_
          -- (-.5frame_wd, .5frame_ht) -- cycle;
 
 
-%% ** (2)  
+%% * (1) Fig. 0.
   
 beginfig(0);
 
+%% ** (2)
+  
   focus f;
   set f with_position (0, 15, -10) with_direction (0, 15, 10) with_distance 5;
 
   path_vector pv;
   point p[][];
-
+  path q[];
+  transform t[];
+  
   draw frame shifted (5cm, 5cm);
   
   dotlabel.bot("origin", origin);
@@ -66,7 +69,7 @@ beginfig(0);
   replace connector 31 pv0 with "--";
   replace connector 40 pv0 with "--";
   replace connector 49 pv0 with "--";
-  
+
   %label("47", get_point (47) pv0) with_text_color blue; 
   
   
@@ -83,26 +86,55 @@ beginfig(0);
 
   rotate pv0 (-90, 0);
   rotate pv1 (-90, 0);  
-  
+
   n := (length pv0) - 1;
 
   string s;
   
   for i = 0 upto n:
     p[0][i] := get_point (i) pv0;
-    s := decimal i;
-    dotlabel.top(s, p[0][i]);
+    %s := decimal i;
+    %dotlabel.top(s, p[0][i]);
   endfor;
    
   n := (length pv1) - 1;
   
   for i = 0 upto n:
     p[1][i] := get_point (i) pv1;
-    s := decimal i;
-    dotlabel.top(s, p[1][i]);
+    %s := decimal i;
+    %dotlabel.top(s, p[1][i]);
   endfor;
 
-  % dotlabel.lrt("$p_0^0$", p[0][0]);
+
+  dotlabel.top("7", p[0][7]);
+  dotlabel.top("8", p[0][8]);
+
+  dotlabel.lft("15", p[0][15]);
+  dotlabel.lft("16", p[0][16]);
+
+  dotlabel.bot("23", p[0][23]);
+  dotlabel.lrt("24", p[0][24]);
+
+  dotlabel.rt("31", p[0][31]);
+  dotlabel.lrt("32", p[0][32]);
+  dotlabel.llft("33", p[0][33]);
+  %dotlabel.lft("34", p[0][34]);
+  %dotlabel.lft("35", p[0][35]);
+  dotlabel.lft("36", p[0][36]);
+  %dotlabel.lft("37", p[0][37]);
+
+  dotlabel.bot("40", p[0][40]);
+  dotlabel.bot("41", p[0][41]); 
+
+  dotlabel.rt("49", p[0][49]); 
+  dotlabel.top("0", p[0][0]);
+
+  %dotlabel.lrt("$p_0^{20}$", p[0][20]);
+  % dotlabel.lrt("$p_0^{30}$", p[0][30]);
+  % dotlabel.lrt("$p_0^{40}$", p[0][40]);
+  % dotlabel.lrt("$p_0^{45}$", p[0][45]);
+  % dotlabel.rt("$p_0^{49}$", p[0][49]);
+
   % dotlabel.urt("$p_0^1$", p[0][1]);
   % dotlabel.top("$p_0^2$", p[0][2]);
   % dotlabel.lft("$p_0^3$", p[0][3]);
@@ -122,7 +154,7 @@ beginfig(0);
   % dotlabel.urt("$p_0^{17}$", p[0][17]);
   % dotlabel.urt("$p_0^{18}$", p[0][18]);
   % dotlabel.urt("$p_0^{19}$", p[0][19]);
-  % dotlabel.top("$p_0^{20}$", p[0][20]);
+  %dotlabel.top("$p_0^{20}$", p[0][20]);
   % dotlabel.top("$p_0^{21}$", p[0][21]);
   
   
@@ -133,23 +165,90 @@ beginfig(0);
   % dotlabel.rt("$p_1^4$", p[1][4]);
   % dotlabel.lft("$p_1^5$", p[1][5]);
 
+  %% !! START HERE: LDF 2022.04.06.  Make this work.  The function
+  %% exists, I just need the parser rule.
+  
+  %message "connectors (34, 40) pv0:";
+  %show connectors (34, 40) pv0;
+  %pause;
 
   %replace connectors pv0 with "..";
 
   draw pv0;
   draw pv1;
+
+  t0 := identity shifted (0, 2cm);
+
+  q0 := pv0 transformed t0;
+  q1 := pv1 transformed t0;
+  
+  draw q0;
+  draw q1;
+
+  n := (length q0) - 1;
+  
+  for i = 0 upto n:
+    p[2][i] := get_point (i) q0;
+    %s := decimal i;
+    %dotlabel.top(s, p[1][i]);
+  endfor;
+
+  n := (length q1) - 1;
+  
+  for i = 0 upto n:
+    p[3][i] := get_point (i) q1;
+    %s := decimal i;
+    %dotlabel.top(s, p[1][i]);
+  endfor;
+
+  draw p[0][0] -- p[2][0];
+  draw p[0][7] -- p[2][7];
+  draw p[0][8] -- p[2][8];
+  draw p[0][15] -- p[2][15];
+  draw p[0][16] -- p[2][16];
+  draw p[0][23] -- p[2][23];
+  draw p[0][24] -- p[2][24];
+  draw p[0][31] -- p[2][31];
+  draw p[0][32] -- p[2][32];
+  draw p[0][33] -- p[2][33];
+  draw p[0][40] -- p[2][40];
+  draw p[0][41] -- p[2][41];
+  draw p[0][49] -- p[2][49];
+
+  % draw get_point (32) pv0 -- get_point (32) q0;
+  % draw get_point (33) pv0 -- get_point (33) q0;
+  % draw get_point (40) pv0 -- get_point (40) q0;
+  
+  unfilldraw p[0][32] -- p[0][33] -- p[2][33] -- p[2][32] -- cycle;
+  unfill q0;
+
+  draw pv1;
+
+  
+  pen big_pen;
+  big_pen := pencircle scaled (2mm, 2mm, 2mm);
+
+  draw q0;
+  draw q1; %withcolor blue withpen big_pen;
   
   % draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
   %   with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
   
-
+%% *** (3)
 
 %endfig with_projection parallel_x_y;
-endfig with_focus f;
+endfig with_focus f no_sort;
+
+%% ** (2)
 
 end_mp;
-  
+
+%% * (1)
+
 end;
+
+
+%% * (1)
 
 beginfig(1);
   %draw q;
@@ -491,4 +590,5 @@ end;
 
 %% Local Variables:
 %% mode: MetaPost
+%% outline-regexp:"%% [*\f]+"
 %% End:
