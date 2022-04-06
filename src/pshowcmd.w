@@ -3241,6 +3241,9 @@ getchar();
     Path *p = static_cast<Path*>(@=$2@>);
     p->show("path", 'w', true, true, 0, Projections::persp, 1, @=$3@>);
 
+    delete p;
+    p = 0;
+
     @=$$@> = static_cast<void*>(0);
 };
 
@@ -3273,8 +3276,11 @@ Added this rule.
 
 #endif /* |DEBUG_COMPILE|  */@;
 
-    Path *p = static_cast<Path*>(@=$2@>);
+    Path *p = static_cast<Path*>(@=$3@>);
     p->show_connectors(0, -1, "Connectors:", scanner_node);
+
+    delete p;
+    p = 0;
 
     @=$$@> = static_cast<void*>(0);
 };
@@ -3303,8 +3309,8 @@ Replaced code with a call to |Scan_Parse::show_func|.
 @=command: SHOW ellipse_expression@>@/
 {
     Scan_Parse::show_func<Ellipse>(static_cast<Ellipse*>(@=$2@>),
-                                      "ellipse",
-                                      parameter);
+                                   "ellipse",
+                                   parameter);
 
     @=$$@> = static_cast<void*>(0);
 };
