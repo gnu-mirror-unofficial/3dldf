@@ -14496,6 +14496,9 @@ Path::show_connector(int position, string s, Scanner_Node scanner_node) const
 \LOG
 \initials{LDF 2022.01.28.}
 Added this function.
+
+\initials{LDF 2022.04.06.}
+Moved the definition of this function to \filename{pathfncs.web}.
 \ENDLOG
 
 @q *** (3) Declaration @>
@@ -14504,46 +14507,6 @@ Added this function.
 virtual
 void
 show_connectors(int first, int last = 0, string s = "", Scanner_Node scanner_node = 0) const;
-
-@q *** (3) Definition @>
-@
-@<Define |Path| functions@>=
-void
-Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) const
-{
-@q **** (4) @>
-
-   bool DEBUG = false; /* |true| */ 
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Entering `Path::show_connectors'." << endl
-            << "`first' == " << first << endl
-            << "`last'  == " << last << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-       
-
-@q **** (4) @>
-@
-@<Define |Path| functions@>=
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-   { 
-       cerr << "Exiting `Path::show_connectors' successfully with return value 0." 
-            << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-   return;
-
-}  /* End of |Path::show_connectors| definition  */
 
 @q ** (2) Reset connectors.  @>
 @ Reset connectors.
