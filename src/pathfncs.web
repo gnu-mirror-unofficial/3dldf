@@ -888,7 +888,7 @@ Path::show_connectors(int start, int end, string s, Scanner_Node scanner_node) c
 @
 @<Define |Path| functions@>=
  
-   if (connector_vector.size() == 0)
+   if (connector_type_vector.size() == 0)
    {
        cerr << "No connectors." << endl;
        return;
@@ -980,7 +980,7 @@ to |end| {\it inclusive}.
 
    int i = 0;
 
-   vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+   vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
 
    while (i < start)
    {
@@ -990,7 +990,7 @@ to |end| {\it inclusive}.
 
    for (; (i <= end && iter != connector_type_vector.end());++iter)
    {
-      **iter.show();
+      (*iter)->show();
       ++i;
    }
    
