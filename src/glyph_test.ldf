@@ -77,6 +77,12 @@ path_vector pv;
 point p[][];
 path q[];
 transform t[];
+string s;
+pen big_pen;
+big_pen := pencircle scaled (2mm, 2mm, 2mm);
+
+pen medium_pen;
+medium_pen := pencircle scaled (1mm, 1mm, 1mm);
 
 %% * (1) Fig. 0.
   
@@ -99,45 +105,45 @@ beginfig(0);
   
   pv := get_paths from g;
 
-  % message "Before resolve.";
-  % message "length pv0:";
-  % show length pv0;
+  n := (length pv0) - 1;
 
-  %resolve pv0 to 500 with_no_transform;
-  
-  resolve pv0 (0, 1) to 6 with_no_transform;
-  resolve pv0 (8, 9) to 6 with_no_transform;
-  resolve pv0 (17, 18) to 6 with_no_transform;
-  resolve pv0 (24, 25) to 6 with_no_transform;
-  resolve pv0 (34, 35) to 6 with_no_transform;
-  resolve pv0 (41, 42) to 6 with_no_transform;
-
-  replace connector 7 pv0 with "--";
-  replace connector 15 pv0 with "--";
-  replace connector 23 pv0 with "--";
-  replace connector 31 pv0 with "--";
-  replace connector 40 pv0 with "--";
-  replace connector 49 pv0 with "--";
-
-  %label("47", get_point (47) pv0) with_text_color blue; 
-  
-  
-  
-  % resolve pv0 (2, 3) to 6 with_no_transform;
-  % resolve pv0 (4, 6) to 6 with_no_transform;
-  % resolve pv0 (7, 8) to 6 with_no_transform;
-  % resolve pv0 (11, 12) to 6 with_no_transform;
-  % resolve pv0 (13, 15) to 6 with_no_transform;
-
-  message "pv0:";
-  show pv0 with_connectors 3;
-  %pause;
-  
   draw pv0;
   draw pv1;
+  
+  for i = 0 upto n:
+    p[0][i] := get_point (i) pv0;
+    s := decimal i;
+    dotlabel.top(s, p[0][i]);
+  endfor;
+  
+  for i = 0 upto n:
+    p[1][i] := get_point (i) pv1;
+    s := decimal i;
+    %dotlabel.top(s, p[1][i]);
+  endfor;
 
+  q0 := pv0;
+  q1 := pv1;
+
+%% !! START HERE:  LDF 2022.04.07.  Add "resolved" and put the result of it in a path.
+%% Make it an assignment.
+
+  
+  resolve q0 (0, 1) to 10;
+
+  n :=   := (length pv0) - 1;
+  
+  for i = 0 upto n:
+    p[1][i] := get_point (i) pv1;
+    s := decimal i;
+    %dotlabel.top(s, p[1][i]);
+  endfor;
+  
+
+  
 endfig with_projection parallel_x_y;
 
+bye;
 
 %% * (1) Fig. 1.
 
@@ -149,6 +155,8 @@ beginfig(1);
 
   output current_picture with_projection parallel_x_y;
   clear current_picture;
+  
+  dotlabel.bot("origin", origin);
   
   q0 := pv0 rotated (-90, 0);
   q1 := pv1 rotated (-90, 0);
@@ -291,8 +299,7 @@ beginfig(1);
   draw q3;
 
   
-  pen big_pen;
-  big_pen := pencircle scaled (2mm, 2mm, 2mm);
+
 
   draw q2;
   draw q3; %withcolor blue withpen big_pen;
