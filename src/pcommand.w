@@ -503,7 +503,7 @@ I must have removed it at some time in the past.
 
     cerr_mutex.lock(); 
     cerr << "In parser, rule `command: PAUSE':  Type <RETURN> to continue: ";  /* Don't delete this!  */
-    getchar(); 
+    getchar();  /* Don't delete this!  */
     cerr_mutex.unlock();  
 
     @=$$@> = static_cast<void*>(0);

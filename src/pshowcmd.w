@@ -3231,9 +3231,6 @@ Added \§show path option list>.
 
       cerr << "Option list:  $3 (hex) == " << hex << @=$3@> << dec << endl;
 
-cerr << "ZZZ Enter <RETURN> to continue: ";
-getchar(); 
-
     }
 
 #endif /* |DEBUG_COMPILE|  */@;

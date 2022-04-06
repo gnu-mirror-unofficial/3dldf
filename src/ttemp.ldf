@@ -26,26 +26,14 @@ frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_
   
 beginfig(0);
 
-  circle c;
-  c := unit_circle;
+  focus f;
+  set f with_position (0, 15, -10) with_direction (0, 15, 10) with_distance 5;
 
-  path p;
-  p := c;
+  path_vector pv;
+  point p[][];
 
-  replace connectors p with ".." expand;
-  pause;
-  
-  show connectors p;
-
-endfig;
-end;
-
-  
   draw frame shifted (5cm, 5cm);
   
-  focus f;
-  set f with_position (0, 15, -10) with_direction (0, 15, 10) with_distance 5; 
-
   dotlabel.bot("origin", origin);
   
   g := get_glyph 65 from "cmssbx10";
@@ -56,39 +44,8 @@ end;
   % show g;
 
   draw g;
-
-  path_vector pv;
-
+  
   pv := get_paths from g;
-
-  show connectors pv0;
-
-endfig;
-end;
-  
-  
-  % message "Showing pv0 with_connectors 1 quiet";
-  % show pv0 with_connectors 3 quiet;
-  % pause;
-  
-  %% replace connectors pv0 with "..";
-
-  %replace connectors frame with "..";
-
-  % replace connectors (1, 2) frame with "..";
-  % pause;  
-  
-  % message "Showing frame with_connectors 1 quiet";
-  % show frame with_connectors 1 quiet;
-  % pause;
-  
-  % message "pv:";
-  % show pv;
-
-  % message "length pv0:";
-  % show length pv0;
-
-  point p[][]; 
 
   % message "Before resolve.";
   % message "length pv0:";
@@ -96,43 +53,17 @@ end;
 
   resolve pv0 (0, 1) to 6 with_no_transform;
 
-  % message "After resolve.";
-  % message "length pv0:";
-  % show length pv0;
+  message "pv0:";
+  show pv0 with_connectors 3;
+  pause;
 
-  % message "pv0 without full connectors:";
-  % pause;
-
-
-
-% endfig with_projection parallel_x_y;
-% %endfig with_focus f;
-
-% end_mp;
-  
-% end;
-
-
-
-
-
-  % message "pv0 with full connectors at the bottom:";
-  % pause;
-  % show pv0 with_connectors;
-  % pause;
-
-  % message "pv0 with full connectors between the points:";
-  % pause;
-  % show pv0 with_connectors 2;
-  % pause;
-
+ 
   n := (length pv0) - 1;
 
   for i = 0 upto n:
     p[0][i] := get_point (i) pv0;
   endfor;
-
-    
+   
   n := (length pv1) - 1;
   
   for i = 0 upto n:
@@ -171,9 +102,12 @@ end;
   dotlabel.lft("$p_1^5$", p[1][5]);
 
 
+  replace connectors pv0 with "..";
+  
   draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
     with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
   
+
 
 endfig with_projection parallel_x_y;
 %endfig with_focus f;
@@ -181,7 +115,6 @@ endfig with_projection parallel_x_y;
 end_mp;
   
 end;
-
 
 beginfig(1);
   %draw q;
