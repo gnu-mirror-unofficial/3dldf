@@ -869,7 +869,7 @@ getchar();
 @
 @<Define |Path| functions@>=
 void
-Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) const
+Path::show_connectors(int start, int end, string s, Scanner_Node scanner_node) const
 {
 @q ** (2) @>
 
@@ -879,8 +879,8 @@ Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) 
    if (DEBUG)
    { 
        cerr << "Entering `Path::show_connectors'." << endl
-            << "`first' == " << first << endl
-            << "`last'  == " << last << endl;
+            << "`start' == " << start << endl
+            << "`end'   == " << end << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -888,7 +888,112 @@ Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) 
 @
 @<Define |Path| functions@>=
  
-         
+   if (connector_vector.size() == 0)
+   {
+       cerr << "No connectors." << endl;
+       return;
+   }
+
+@q ** (2) @>
+
+   if (start < 0)
+   {
+       cerr << "WARNING!  In `Path::show_connectors':  `int start' == " << start << " (< 0)"
+            << endl 
+            << "Invalid value.  Setting `start' to 0 and continuing." << endl;
+
+       start = 0;
+   }         
+
+@q ** (2) @>
+
+@ Reset the values for |start| and |end|, if necessary.  The connectors are shown from |start| 
+to |end| {\it inclusive}. 
+\initials{LDF 2022.04.06.}
+
+@<Define |Path| functions@>=
+
+@q *** (3) @>
+
+   if (end >= connector_type_vector.size())
+   { 
+#if DEBUG_COMPILE
+       if (DEBUG)
+       {
+          cerr << "In `Path::show_connectors':  `int end' >= `connector_type_vector.size()':" << endl 
+               << "`end' == " << end << ", `connector_type_vector.size()' == " << connector_type_vector.size()
+               << endl 
+               << "Setting `end' to `connector_type_vector.size()' - 1." << endl;
+       }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       end = connector_type_vector.size() - 1;
+   }  
+
+@q *** (3) @>
+
+   else if (end == -1)
+      end = connector_type_vector.size() - 1;  
+
+@q *** (3) @>
+
+   else if (end < 0)
+   {
+       cerr << "WARNING!  In `Path::show_connectors':  `int end' == " << end << " (< 0)"
+            << endl 
+            << "Invalid value." << endl 
+            << "Setting `end' to `connector_type_vector.size() - 1' == "
+            << (connector_type_vector.size() - 1) << " and continuing." << endl;
+
+       end = connector_type_vector.size() - 1;
+   }
+
+@q *** (3) @>
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   if (start > end)
+   {
+       int i = start;
+
+       cerr << "WARNING!  In `Path::show_connectors':  `int start' is greater than `int end':"
+            << endl 
+            << "`start' == " << start << ", `end' == " << end << endl 
+            << "Exchanging values and continuing." << endl;
+
+       start = end;
+       end = i;
+   }
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "In `Path::show_connectors':  `start' == " << start << ", `end' == " << end << endl; 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   int i = 0;
+
+   vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+
+   while (i < start)
+   {
+      ++iter;
+      ++i;
+   }
+
+   for (; (i <= end && iter != connector_type_vector.end());++iter)
+   {
+      **iter.show();
+      ++i;
+   }
+   
 
 @q ** (2) @>
 @
