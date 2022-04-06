@@ -1291,6 +1291,254 @@ Added this rule.
 
 };
 
+@q ** (2) command:  REPLACE CONNECTORS numeric_list path_variable WITH string_expression.  @>
+@ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTORS} \§numeric list> \§path variable> \.{WITH} 
+\§string expression>.
+\initials{LDF 2022.04.06.}
+
+\LOG
+\initials{LDF 2022.04.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: REPLACE CONNECTORS numeric_list path_variable WITH string_expression@>@/
+{ 
+@q *** (3) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                   << "WITH string_expression'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     Pointer_Vector<real>* pv = static_cast<Pointer_Vector<real>*>(@=$3@>);
+
+     entry = static_cast<Id_Map_Entry_Node>(@=$4@>);  
+
+     Path *p = static_cast<Path*>(entry->object);
+
+     string *s = static_cast<string*>(@=$6@>);
+ 
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+
+         cerr << "pv->v.size() == " << pv->v.size() << endl;
+
+         cerr << "pv->v:" << endl;
+
+         vector<real*>::iterator iter = pv->v.begin();
+
+         cerr << "(";
+         
+         for (; iter != pv->v.end();)
+         {
+             cerr << **iter;
+
+             ++iter;
+
+             if (iter != pv->v.end())
+                cerr << ", ";
+         }
+
+         cerr << ")" << endl;
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     int start;
+     int end;
+
+     if (pv->v.size() == 0)
+     {
+        cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                  << "WITH string_expression':"
+                  << endl
+                  << "`numeric_list' is empty.  Can't replace connectors.  Continuing."
+                  << endl;
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+        goto END_REPLACE_CONNECTORS;
+
+     }
+     else if (pv->v.size() == 1)
+     {
+        start = end = round_real(*(pv->v[0]));
+     }
+     else if (pv->v.size() >= 2)
+     {
+        if (pv->v.size() > 2)
+        {
+            cerr_strm << thread_name << "WARNING!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                      << "WITH string_expression':"
+                      << endl 
+                      << "`numeric_list' contains more than 2 elements."
+                      << endl 
+                      << "Using the first and second and ignoring the rest.  Values:" 
+                      << endl   
+                      << "1:  " << *(pv->v[0]) << ", 2:  " << *(pv->v[1]) << endl
+                      << "Continuing."
+                      << endl;
+
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+
+        }
+
+        start = round_real(*(pv->v[0]));
+        end   = round_real(*(pv->v[1]));
+
+     }  /* |else if| */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     if (start < 0 || end < 0)
+     {
+        cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                  << "WITH string_expression':"
+                  << endl
+                  << "`int start' and/or `int end' is negative:" << endl 
+                  << "`start' == " << start << ", `end' == " << end << endl
+                  << "Can't replace connectors.  Continuing."
+                  << endl;
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+        goto END_REPLACE_CONNECTORS;
+
+     }  /* |if (start < 0 || end < 0)| */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     if (start > end)
+     {
+@q **** (4) @>
+
+         cerr_strm << thread_name << "WARNING!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                   << "WITH string_expression':"
+                   << endl 
+                   << "`int start' == " << start << " > `int end' == " << end << endl
+                   << "Exchanging the values and continuing."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+         int i = start;
+         start = end;
+         end = i;
+
+@q **** (4) @>
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+            cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                      << "WITH string_expression':"
+                      << endl 
+                      << "After exchange:  `int start' == " << start << " > `int end' == " << end
+                      << endl;
+
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+
+         }     
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q **** (4) @>
+
+     } /* |if (start > end)| */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     status = p->replace_connectors(*s, start, end, scanner_node);
+
+     if (status != 0)
+     {
+         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                   << "WITH string_expression':"
+                   << endl
+                   << "`Path::replace_connectors' failed, returning " << status << "."
+                   << endl
+                   << "Failed to replace connectors on `path'.  Continuing."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+     else if (DEBUG)
+     { 
+         cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
+                   << "WITH string_expression':"
+                   << endl
+                   << "`Path::replace_connectors' succeeded, returning 0."
+                   << endl
+                   << "Replaced connectors on `path'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+  
+@q *** (3) @>
+@
+@<Define rules@>=
+
+END_REPLACE_CONNECTORS:
+
+     delete s;
+     s = 0;
+
+     delete pv;
+     pv = 0;
+
+@=$$@> = 0;
+
+};
 
 @q * (1) @>
 
