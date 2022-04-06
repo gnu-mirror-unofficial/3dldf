@@ -757,7 +757,9 @@ Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node
 
    if (DEBUG)
    { 
-       cerr << "Entering `Path::replace_connectors'.  `string s' == " << s << "."
+       cerr << "Entering `Path::replace_connectors'."
+            << endl 
+            << "`string s' == " << s 
             << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -772,9 +774,25 @@ Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node
                                    \initials{LDF 2022.04.06.}  */ 
    }
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "In `Path::replace_connectors':"
+            << endl 
+            << "`int start' == " << start << "."
+            << endl 
+            << "`int end'   == " << end << "."
+            << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
    Connector_Type c;
 
-   if (!(s == ".." || s == "..." || s == "--" || s == "---"))
+   if (!(s == ".." || s == "..." || s == "--" || s == "---" || s == "&"))
    {
       cerr << "ERROR!  In `Path::replace_connectors':  `string s' is invalid:"
            << endl 
@@ -787,10 +805,30 @@ Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node
 
    c.connector_string = s;
 
-   for (vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
-        iter != connector_type_vector.end();
-        ++iter)
+   vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+
+   int i = 0;
+
+   while (i < start)
    {
+      ++iter;
+      ++i;
+   }
+
+   cerr << "i == " << i << endl;
+   cerr << "(iter != connector_type_vector.end()) == " << (iter != connector_type_vector.end()) << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
+   for (; i <= end && iter != connector_type_vector.end(); ++i)
+   {
+
+      cerr << "Replacing connector " << i << "." << endl;
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
       **iter = c;
 
 #if DEBUG_COMPILE
@@ -804,6 +842,8 @@ getchar();
 
       }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+      ++iter;
 
    } /* |for|  */
 
