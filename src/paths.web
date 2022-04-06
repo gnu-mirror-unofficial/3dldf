@@ -14560,6 +14560,14 @@ it is set to |connector_type_vector.size()|.  Then, it is set to
 Added this function.
 \ENDLOG
 
+@q !! TODO: @> TODO:
+\initials{LDF 2022.04.06.} 
+I could replace the contents of this function with 
+a call to |Path::replace_connectors|.  Currently, the latter function also only
+uses |Connector_Type::PLAIN_TYPE| and a simple connector string.  However, I plan
+to write versions that take other others for ''dir'', ``controls'', etc.
+
+
 @q *** (3) Declaration @>
 
 @<Declare |Path| functions@>=
