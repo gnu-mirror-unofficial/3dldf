@@ -14687,11 +14687,14 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 \LOG
 \initials{LDF 2022.04.05.}
 Added this function declaration.  The definition is in \filename{pathfncs.web}.
+
+\initials{LDF 2022.04.06.}
+Added the optional arguments |int start|, |int end| and |Scanner_Node scanner_node|.
 \ENDLOG
 
 @<Declare |Path| functions@>=
 int
-replace_connectors(string s = "..");
+replace_connectors(string s = "..", int start = 0, int end = -1, Scanner_Node scanner_node = 0);
 
 @q * (1) class |Connector_Type| declaration. @>
 @* class |Connector_Type| declaration.
