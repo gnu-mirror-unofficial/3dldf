@@ -873,12 +873,14 @@ Path::show_connectors(int start, int end, string s, Scanner_Node scanner_node) c
 {
 @q ** (2) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
        cerr << "Entering `Path::show_connectors'." << endl
+            << "`connector_type_vector.size()' == " << connector_type_vector.size()
+            << endl 
             << "`start' == " << start << endl
             << "`end'   == " << end << endl;
    }  
@@ -915,6 +917,33 @@ to |end| {\it inclusive}.
 
 @q *** (3) @>
 
+@ This check has to be done first because when comparing with |connector_type_vector.size()|, 
+$-1$ is interpreted as a large positive number.  I could prevent this by using a cast but it's 
+easier just to put this comparison first.
+\initials{LDF 2022.04.06.}
+
+@<Define |Path| functions@>=
+
+   if (end == -1)
+      end = connector_type_vector.size() - 1;  
+
+@q *** (3) @>
+
+   else if (end < 0)
+   {
+       cerr << "WARNING!  In `Path::show_connectors':  `int end' == " << end << " (< 0)"
+            << endl 
+            << "Invalid value." << endl 
+            << "Setting `end' to `connector_type_vector.size() - 1' == "
+            << (connector_type_vector.size() - 1) << " and continuing." << endl;
+
+       end = connector_type_vector.size() - 1;
+   }
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
    if (end >= connector_type_vector.size())
    { 
 #if DEBUG_COMPILE
@@ -932,21 +961,8 @@ to |end| {\it inclusive}.
 
 @q *** (3) @>
 
-   else if (end == -1)
-      end = connector_type_vector.size() - 1;  
 
-@q *** (3) @>
 
-   else if (end < 0)
-   {
-       cerr << "WARNING!  In `Path::show_connectors':  `int end' == " << end << " (< 0)"
-            << endl 
-            << "Invalid value." << endl 
-            << "Setting `end' to `connector_type_vector.size() - 1' == "
-            << (connector_type_vector.size() - 1) << " and continuing." << endl;
-
-       end = connector_type_vector.size() - 1;
-   }
 
 @q *** (3) @>
 
