@@ -1,0 +1,65 @@
+%% glyph_test.tex
+%% Created by Laurence D. Finston (LDF) Wed 06 Apr 2022 11:00:31 PM CEST
+
+%% * (1) Top
+
+\special{papersize=210mm, 297mm} %% DIN A4 Portrait
+\vsize=297mm
+\hsize=210mm
+
+\input epsf
+\input eplain
+\nopagenumbers
+
+\pageno=-1
+
+\parindent=0pt
+
+\def\epsfsize#1#2{#1}
+
+\font\small=cmr8
+\font\smalltt=cmtt8
+\font\medium=cmr10
+\font\largemed=cmr11
+\font\large=cmr12
+\font\largebx=cmbx12
+\font\Large=cmr17
+\font\huge=cmr17 scaled \magstep1
+
+%% *** (3) 
+
+\headline={\hfil}
+
+\advance\voffset by -1in
+\advance\voffset by 2cm
+
+\advance\hoffset by -1in
+\advance\hoffset by 1cm
+
+\vskip2cm
+
+\def\epsfsize#1#2{#1}
+
+\vbox to \vsize{\vskip2cm\line{\hskip2cm\epsffile{glyph_test000.eps}\hss}\vss}
+\vfil\eject
+
+\vbox to \vsize{\vskip2cm\line{\hskip2cm\epsffile{glyph_test001.eps}\hss}\vss}
+\vfil\eject
+
+\bye
+
+%% *** (3) End here
+
+\bye
+
+%% * (1) Local variables for Emacs.
+
+%% Local Variables:
+%% mode:TeX
+%% eval:(local-set-key "\"" 'self-insert-command)
+%% eval:(outline-minor-mode t)
+%% auto-fill-function:nil
+%% outline-regexp:"%% [*\f]+"
+%% End:
+
+
