@@ -1179,6 +1179,119 @@ Added this rule.
 
 };
 
+@q ** (2) command:  REPLACE CONNECTOR INTEGER path_variable WITH string_expression.  @>
+@ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTOR} \.{INTEGER} \§path variable> \.{WITH} 
+\§string expression>.
+\initials{LDF 2022.04.06.}
+
+\LOG
+\initials{LDF 2022.04.06.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>=
+@=command: REPLACE CONNECTOR INTEGER path_variable WITH string_expression@>@/
+{ 
+@q *** (3) @>
+
+   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ @; 
+   if (DEBUG) 
+     {
+         cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
+                   << "WITH string_expression'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+     }
+#endif /* |DEBUG_COMPILE|  */
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     entry = static_cast<Id_Map_Entry_Node>(@=$4@>);  
+
+     Path *p = static_cast<Path*>(entry->object);
+
+     string *s = static_cast<string*>(@=$6@>);
+
+     int i = @=$3@>;
+
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+
+        cerr << "i == " << i << endl << "*s == " << *s << endl;
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     status = p->replace_connectors(*s, i, i, scanner_node);
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     if (status != 0)
+     {
+         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
+                   << "WITH string_expression':"
+                   << endl
+                   << "`Path::replace_connectors' failed, returning " << status << "."
+                   << endl
+                   << "Failed to replace connectors on `path'.  Continuing."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+
+@q *** (3) @>
+@
+@<Define rules@>=
+
+#if DEBUG_COMPILE
+     else if (DEBUG)
+     { 
+         cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
+                   << "WITH string_expression':"
+                   << endl
+                   << "`Path::replace_connectors' succeeded, returning 0."
+                   << endl
+                   << "Replaced connector on `path'."
+                   << endl;
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+      
+  
+@q *** (3) @>
+@
+@<Define rules@>=
+
+     delete s;
+     s = 0;
+
+     @=$$@> = 0;
+
+};
+
+
 @q * (1) @>
 
 @q * Emacs-Lisp code for use in indirect buffers when using the          @>
