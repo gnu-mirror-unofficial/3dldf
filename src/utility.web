@@ -1546,6 +1546,33 @@ read_metapost_output_from_pipe(string s,
 
 }  /* End of |read_metapost_output_from_pipe| definition  */
 
+
+@q * (1) Round function for |real| values.  @>
+@ Round function for |real| values.
+\initials{LDF 2022.04.06.}
+
+@<Declare utility functions@>=
+int
+round_real(real r);
+
+@q ** (2) Definition @>
+@
+@<Define utility functions@>=
+int
+round_real(real r)
+{
+   int i;
+
+#if LDF_REAL_DOUBLE
+   i = round(r);
+#else
+   i = roundf(r);
+#endif 
+
+   return i;
+
+}  /* End of |round_real| definition  */
+
 @q * (1) Putting utilities together.@>
 @* Putting utilities together.
 \initials{LDF Undated.}
