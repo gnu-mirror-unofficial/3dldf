@@ -26,6 +26,21 @@ frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_
   
 beginfig(0);
 
+  circle c;
+  c := unit_circle;
+
+  path p;
+  p := c;
+
+  replace connectors p with ".." expand;
+  pause;
+  
+  show connectors p;
+
+endfig;
+end;
+
+  
   draw frame shifted (5cm, 5cm);
   
   focus f;

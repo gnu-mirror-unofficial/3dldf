@@ -3131,6 +3131,9 @@ call to |scanner_node->add_entry| for |clear_connectors|.
 
 \initials{LDF 2022.04.05.}
 Added calls to |scanner_node->add_entry| for |replace|, |connector| and |connectors|.
+
+\initials{LDF 2022.04.06.}
+Added calls to |scanner_node->add_entry| for |expand|.
 \ENDLOG
 
 @<Define |Scanner_Type::create|@>=
@@ -3138,8 +3141,8 @@ Added calls to |scanner_node->add_entry| for |replace|, |connector| and |connect
    scanner_node->add_entry("replace", REPLACE, spark);
    scanner_node->add_entry("connector", CONNECTOR, spark);
    scanner_node->add_entry("connectors", CONNECTORS, spark);
-
    scanner_node->add_entry("clear_connectors", CLEAR_CONNECTORS, spark);
+   scanner_node->add_entry("expand", EXPAND, spark);
 
 @q **** (4) Types for outputting |Pictures|.  @>
 @*3 Types for outputting |Pictures|.

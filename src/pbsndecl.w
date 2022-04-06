@@ -2380,6 +2380,9 @@ for |CLEAR_CONNECTORS|.
 
 \initials{LDF 2022.04.05.}
 Added token declarations for |REPLACE|, |CONNECTOR| and |CONNECTORS|.
+
+\initials{LDF 2022.04.06.}
+Added token declaration for |EXPAND|.
 \ENDLOG
 
 @<Token and precedence declarations@>=
@@ -2388,6 +2391,7 @@ Added token declarations for |REPLACE|, |CONNECTOR| and |CONNECTORS|.
 @=%token <int_value> CONNECTOR@>@/
 @=%token <int_value> CONNECTORS@>@/
 @=%token <int_value> CLEAR_CONNECTORS@>@/
+@=%token <int_value> EXPAND@>@/
 
 @q *** (3) Types for outputting |Pictures|.  @>
 @*2 Types for outputting |Pictures|.

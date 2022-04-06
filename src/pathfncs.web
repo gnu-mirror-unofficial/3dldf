@@ -749,11 +749,11 @@ Added the optional arguments |int start|, |int end| and |Scanner_Node scanner_no
 
 @<Define |Path| functions@>=
 int
-Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node)
+Path::replace_connectors(string s, int start, int end, bool expand, Scanner_Node scanner_node)
 {
 #if DEBUG_COMPILE
  
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    if (DEBUG)
    { 
@@ -768,11 +768,38 @@ Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node
 @
 @<Define |Path| functions@>=
 
+   if (start < 0)
+   {
+      start = 0;
+   }
+
    if (end < 0)
    {
       end = points.size() - 1;  /* Replace connectors from |start| to |end| {\it inclusive}.
                                    \initials{LDF 2022.04.06.}  */ 
    }
+
+   if (start > end)
+   {
+       cerr << "WARNING!  In `Path::replace_connectors':"
+            << endl 
+            << "`int start' > `int end':"
+            << endl 
+            << "`int start' == " << start << "."
+            << endl 
+            << "`int end'   == " << end << "."
+            << endl
+            << "Exchanging values."
+            << endl;
+
+       int i = start;
+       start = end;
+       end = i;
+   }
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -783,10 +810,6 @@ Path::replace_connectors(string s, int start, int end, Scanner_Node scanner_node
             << endl 
             << "`int end'   == " << end << "."
             << endl;
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -805,6 +828,38 @@ getchar();
 
    c.connector_string = s;
 
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if 0 
+   cerr << "expand == " << expand << endl;
+   cerr << "Before loop:";
+   cerr << "points.size() == " << points.size() << endl;
+   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+#endif 
+
+   if (expand)
+   {
+
+      for (int i = connector_type_vector.size(); i < points.size(); ++i)
+      {
+          
+          connector_type_vector.push_back(create_new<Connector_Type>(0)); 
+      }      
+
+   }  /* if (expand) */
+ 
+#if 0
+   cerr << "After loop:";
+   cerr << "points.size() == " << points.size() << endl;
+   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+#endif
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
    vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
 
    int i = 0;
@@ -815,19 +870,21 @@ getchar();
       ++i;
    }
 
+#if 0 
    cerr << "i == " << i << endl;
    cerr << "(iter != connector_type_vector.end()) == " << (iter != connector_type_vector.end()) << endl;
+#endif 
 
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
 
    for (; i <= end && iter != connector_type_vector.end(); ++i)
    {
 
+#if 0
       cerr << "Replacing connector " << i << "." << endl;
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
+#endif 
 
       **iter = c;
 
@@ -836,10 +893,6 @@ getchar();
       { 
           cerr << "In `Path::replace_connectors':  After replacement:" << endl;
           (**iter).show();
-
-cerr << "BBB Enter <RETURN> to continue: ";
-getchar(); 
-
       }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -854,10 +907,6 @@ getchar();
    { 
        cerr << "Exiting `Path::replace_connectors' successfully with return value 0."
             << endl;
-
-cerr << "AAA Enter <RETURN> to continue: ";
-getchar(); 
-
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 

@@ -1070,9 +1070,51 @@ Added this rule.
 
 @q *** (3) @>
 
-@q ** (2) command:  REPLACE CONNECTORS path_variable WITH string_expression.  @>
+@q ** (2) expand_optional.  @>
+@ \§expand optional>.  
+\initials{LDF 2022.04.06.}
+
+\LOG
+\initials{LDF 2022.04.06.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> expand_optional@>
+
+@q ** (2) expand_optional: EMPTY @>
+@ \§expand optional> $\longrightarrow$ \.{EMPTY}.  
+\initials{LDF 2022.04.06.}
+
+\LOG
+\initials{LDF 2022.04.06.}
+Added this rule
+\ENDLOG 
+
+@<Define rules@>=
+@=expand_optional: /* EMPTY */ @>@/
+{
+   @=$$@> = 0;
+};
+
+@q ** (2) expand_optional: EXPAND @>
+@ \§expand optional> $\longrightarrow$ \.{EXPAND}.  
+\initials{LDF 2022.04.06.}
+
+\LOG
+\initials{LDF 2022.04.06.}
+Added this rule
+\ENDLOG 
+
+@<Define rules@>=
+@=expand_optional: EXPAND @>@/
+{
+   @=$$@> = 1;
+};
+
+@q ** (2) command:  REPLACE CONNECTORS path_variable WITH string_expression expand_optional.  @>
 @ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTORS} \§path variable> \.{WITH} 
-\§string expression>.
+\§string expression> \§expand optional> .
 \initials{LDF 2022.04.05.}
 
 \LOG
@@ -1081,7 +1123,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=command: REPLACE CONNECTORS path_variable WITH string_expression@>@/
+@=command: REPLACE CONNECTORS path_variable WITH string_expression expand_optional@>@/
 { 
 @q *** (3) @>
 
@@ -1092,7 +1134,7 @@ Added this rule.
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "WITH string_expression'."
+                   << "WITH string_expression expand_optional'."
                    << endl;
 
          log_message(cerr_strm);
@@ -1125,7 +1167,7 @@ Added this rule.
 @
 @<Define rules@>=
 
-     status = p->replace_connectors(*s);
+     status = p->replace_connectors(*s, 0, -1, static_cast<bool>(@=$6@>), scanner_node);
 
 @q *** (3) @>
 @
@@ -1134,7 +1176,7 @@ Added this rule.
      if (status != 0)
      {
          cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl
                    << "`Path::replace_connectors' failed, returning " << status << "."
                    << endl
@@ -1154,7 +1196,7 @@ Added this rule.
      else if (DEBUG)
      { 
          cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl
                    << "`Path::replace_connectors' succeeded, returning 0."
                    << endl
@@ -1179,9 +1221,9 @@ Added this rule.
 
 };
 
-@q ** (2) command:  REPLACE CONNECTOR INTEGER path_variable WITH string_expression.  @>
+@q ** (2) command:  REPLACE CONNECTOR INTEGER path_variable WITH string_expression expand_optional.  @>
 @ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTOR} \.{INTEGER} \§path variable> \.{WITH} 
-\§string expression>.
+\§string expression> \§expand optional>.
 \initials{LDF 2022.04.06.}
 
 \LOG
@@ -1190,7 +1232,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=command: REPLACE CONNECTOR INTEGER path_variable WITH string_expression@>@/
+@=command: REPLACE CONNECTOR INTEGER path_variable WITH string_expression expand_optional@>@/
 { 
 @q *** (3) @>
 
@@ -1201,7 +1243,7 @@ Added this rule.
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
-                   << "WITH string_expression'."
+                   << "WITH string_expression expand_optional'."
                    << endl;
 
          log_message(cerr_strm);
@@ -1236,7 +1278,7 @@ Added this rule.
 @
 @<Define rules@>=
 
-     status = p->replace_connectors(*s, i, i, scanner_node);
+     status = p->replace_connectors(*s, i, i, static_cast<bool>(@=$7@>), scanner_node);
 
 @q *** (3) @>
 @
@@ -1245,7 +1287,7 @@ Added this rule.
      if (status != 0)
      {
          cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl
                    << "`Path::replace_connectors' failed, returning " << status << "."
                    << endl
@@ -1265,7 +1307,7 @@ Added this rule.
      else if (DEBUG)
      { 
          cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl
                    << "`Path::replace_connectors' succeeded, returning 0."
                    << endl
@@ -1291,9 +1333,10 @@ Added this rule.
 
 };
 
-@q ** (2) command:  REPLACE CONNECTORS numeric_list path_variable WITH string_expression.  @>
+@q ** (2) command:  REPLACE CONNECTORS numeric_list path_variable WITH string_expression expand_optional.  @>
+
 @ \§command> $\longrightarrow$ \.{REPLACE} \.{CONNECTORS} \§numeric list> \§path variable> \.{WITH} 
-\§string expression>.
+\§string expression> \§expand optional>.
 \initials{LDF 2022.04.06.}
 
 \LOG
@@ -1302,7 +1345,7 @@ Added this rule.
 \ENDLOG
 
 @<Define rules@>=
-@=command: REPLACE CONNECTORS numeric_list path_variable WITH string_expression@>@/
+@=command: REPLACE CONNECTORS numeric_list path_variable WITH string_expression expand_optional@>@/
 { 
 @q *** (3) @>
 
@@ -1313,7 +1356,7 @@ Added this rule.
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression'."
+                   << "WITH string_expression expand_optional'."
                    << endl;
 
          log_message(cerr_strm);
@@ -1372,7 +1415,7 @@ Added this rule.
      if (pv->v.size() == 0)
      {
         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                  << "WITH string_expression':"
+                  << "WITH string_expression expand_optional':"
                   << endl
                   << "`numeric_list' is empty.  Can't replace connectors.  Continuing."
                   << endl;
@@ -1393,7 +1436,7 @@ Added this rule.
         if (pv->v.size() > 2)
         {
             cerr_strm << thread_name << "WARNING!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                      << "WITH string_expression':"
+                      << "WITH string_expression expand_optional':"
                       << endl 
                       << "`numeric_list' contains more than 2 elements."
                       << endl 
@@ -1421,7 +1464,7 @@ Added this rule.
      if (start < 0 || end < 0)
      {
         cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                  << "WITH string_expression':"
+                  << "WITH string_expression expand_optional':"
                   << endl
                   << "`int start' and/or `int end' is negative:" << endl 
                   << "`start' == " << start << ", `end' == " << end << endl
@@ -1445,7 +1488,7 @@ Added this rule.
 @q **** (4) @>
 
          cerr_strm << thread_name << "WARNING!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl 
                    << "`int start' == " << start << " > `int end' == " << end << endl
                    << "Exchanging the values and continuing."
@@ -1465,7 +1508,7 @@ Added this rule.
          if (DEBUG)
          { 
             cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                      << "WITH string_expression':"
+                      << "WITH string_expression expand_optional':"
                       << endl 
                       << "After exchange:  `int start' == " << start << " > `int end' == " << end
                       << endl;
@@ -1485,12 +1528,12 @@ Added this rule.
 @
 @<Define rules@>=
 
-     status = p->replace_connectors(*s, start, end, scanner_node);
+     status = p->replace_connectors(*s, start, end, static_cast<bool>(@=$7@>), scanner_node);
 
      if (status != 0)
      {
          cerr_strm << thread_name << "ERROR!  In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl
                    << "`Path::replace_connectors' failed, returning " << status << "."
                    << endl
@@ -1510,7 +1553,7 @@ Added this rule.
      else if (DEBUG)
      { 
          cerr_strm << thread_name << "In parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "
-                   << "WITH string_expression':"
+                   << "WITH string_expression expand_optional':"
                    << endl
                    << "`Path::replace_connectors' succeeded, returning 0."
                    << endl
