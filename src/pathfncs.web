@@ -236,7 +236,12 @@ getchar();
 
      if (c_iter != connector_type_vector.end())
      {
-@q **** (4) @>
+@q **** (4) Controls Type.  @>
+
+@ Controls Type.  
+\initials{LDF 2022.04.06.}
+
+@<Define |Path| functions@>=
 
          if ((*c_iter)->type0 == Connector_Type::CONTROLS_TYPE)
          {
@@ -331,6 +336,24 @@ getchar();
 @q ***** (5) @>
 
          }  /* |if ((*c_iter)->type0 == Connector_Type::CONTROLS_TYPE)|  */
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+         else if ((*c_iter)->type0 == Connector_Type::PLAIN_TYPE)
+         {
+@q ***** (5) @>
+
+             if ((*c_iter)->connector_string != "")
+                cerr << (*c_iter)->connector_string << " ";
+             else
+                cerr << ".. ";
+
+@q ***** (5) @>
+
+         }  /* |else if ((*c_iter)->type0 == Connector_Type::PLAIN_TYPE)| */
+
 
 @q **** (4) @>
 
