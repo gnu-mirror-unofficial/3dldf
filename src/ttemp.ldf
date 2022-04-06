@@ -13,8 +13,8 @@ glyph t;
 
 numeric frame_wd;
 numeric frame_ht;
-frame_wd := 10cm;
-frame_ht := 10cm;
+frame_wd := 20cm;
+frame_ht := 20cm;
 
 path frame;
 
@@ -38,12 +38,12 @@ beginfig(0);
   
   g := get_glyph 65 from "cmssbx10";
 
-  scale g by .25; 
+  scale g by .5; 
   
   % message "g:";
   % show g;
 
-  draw g;
+  %draw g;
   
   pv := get_paths from g;
 
@@ -51,66 +51,101 @@ beginfig(0);
   % message "length pv0:";
   % show length pv0;
 
+  %resolve pv0 to 500 with_no_transform;
+  
   resolve pv0 (0, 1) to 6 with_no_transform;
+  resolve pv0 (8, 9) to 6 with_no_transform;
+  resolve pv0 (17, 18) to 6 with_no_transform;
+  resolve pv0 (24, 25) to 6 with_no_transform;
+  resolve pv0 (34, 35) to 6 with_no_transform;
+  resolve pv0 (41, 42) to 6 with_no_transform;
+
+  replace connector 7 pv0 with "--";
+  replace connector 15 pv0 with "--";
+  replace connector 23 pv0 with "--";
+  replace connector 31 pv0 with "--";
+  replace connector 40 pv0 with "--";
+  replace connector 49 pv0 with "--";
+  
+  %label("47", get_point (47) pv0) with_text_color blue; 
+  
+  
+  
+  % resolve pv0 (2, 3) to 6 with_no_transform;
+  % resolve pv0 (4, 6) to 6 with_no_transform;
+  % resolve pv0 (7, 8) to 6 with_no_transform;
+  % resolve pv0 (11, 12) to 6 with_no_transform;
+  % resolve pv0 (13, 15) to 6 with_no_transform;
 
   message "pv0:";
   show pv0 with_connectors 3;
-  pause;
+  %pause;
 
- 
+  rotate pv0 (-90, 0);
+  rotate pv1 (-90, 0);  
+  
   n := (length pv0) - 1;
 
+  string s;
+  
   for i = 0 upto n:
     p[0][i] := get_point (i) pv0;
+    s := decimal i;
+    dotlabel.top(s, p[0][i]);
   endfor;
    
   n := (length pv1) - 1;
   
   for i = 0 upto n:
     p[1][i] := get_point (i) pv1;
+    s := decimal i;
+    dotlabel.top(s, p[1][i]);
   endfor;
 
-  dotlabel.lrt("$p_0^0$", p[0][0]);
-  dotlabel.urt("$p_0^1$", p[0][1]);
-  dotlabel.top("$p_0^2$", p[0][2]);
-  dotlabel.lft("$p_0^3$", p[0][3]);
-  dotlabel.ulft("$p_0^4$", p[0][4]);
-  dotlabel.lft("$p_0^5$", p[0][5]);
-  dotlabel.bot("$p_0^6$", p[0][6]);
-  dotlabel.bot("$p_0^7$", p[0][7]);
-  dotlabel.bot("$p_0^8$", p[0][8]);
-  dotlabel.lrt("$p_0^9$", p[0][9]);
-  dotlabel.llft("$p_0^{10}$", p[0][10]);
-  dotlabel.lft("$p_0^{11}$", p[0][11]);
-  dotlabel.bot("$p_0^{12}$", p[0][12]);
-  dotlabel.bot("$p_0^{13}$", p[0][13]);
-  dotlabel.rt("$p_0^{14}$", p[0][14]);
-  dotlabel.urt("$p_0^{15}$", p[0][15]);
-  dotlabel.urt("$p_0^{16}$", p[0][16]);
-  dotlabel.urt("$p_0^{17}$", p[0][17]);
-  dotlabel.urt("$p_0^{18}$", p[0][18]);
-  dotlabel.urt("$p_0^{19}$", p[0][19]);
-  dotlabel.top("$p_0^{20}$", p[0][20]);
-  dotlabel.top("$p_0^{21}$", p[0][21]);
+  % dotlabel.lrt("$p_0^0$", p[0][0]);
+  % dotlabel.urt("$p_0^1$", p[0][1]);
+  % dotlabel.top("$p_0^2$", p[0][2]);
+  % dotlabel.lft("$p_0^3$", p[0][3]);
+  % dotlabel.ulft("$p_0^4$", p[0][4]);
+  % dotlabel.lft("$p_0^5$", p[0][5]);
+  % dotlabel.bot("$p_0^6$", p[0][6]);
+  % dotlabel.bot("$p_0^7$", p[0][7]);
+  % dotlabel.bot("$p_0^8$", p[0][8]);
+  % dotlabel.lrt("$p_0^9$", p[0][9]);
+  % dotlabel.llft("$p_0^{10}$", p[0][10]);
+  % dotlabel.lft("$p_0^{11}$", p[0][11]);
+  % dotlabel.bot("$p_0^{12}$", p[0][12]);
+  % dotlabel.bot("$p_0^{13}$", p[0][13]);
+  % dotlabel.rt("$p_0^{14}$", p[0][14]);
+  % dotlabel.urt("$p_0^{15}$", p[0][15]);
+  % dotlabel.urt("$p_0^{16}$", p[0][16]);
+  % dotlabel.urt("$p_0^{17}$", p[0][17]);
+  % dotlabel.urt("$p_0^{18}$", p[0][18]);
+  % dotlabel.urt("$p_0^{19}$", p[0][19]);
+  % dotlabel.top("$p_0^{20}$", p[0][20]);
+  % dotlabel.top("$p_0^{21}$", p[0][21]);
   
   
-  dotlabel.lft("$p_1^0$", p[1][0]);
-  dotlabel.lft("$p_1^1$", p[1][1]);
-  dotlabel.rt("$p_1^2$", p[1][2]);
-  dotlabel.rt("$p_1^3$", p[1][3]);
-  dotlabel.rt("$p_1^4$", p[1][4]);
-  dotlabel.lft("$p_1^5$", p[1][5]);
+  % dotlabel.lft("$p_1^0$", p[1][0]);
+  % dotlabel.lft("$p_1^1$", p[1][1]);
+  % dotlabel.rt("$p_1^2$", p[1][2]);
+  % dotlabel.rt("$p_1^3$", p[1][3]);
+  % dotlabel.rt("$p_1^4$", p[1][4]);
+  % dotlabel.lft("$p_1^5$", p[1][5]);
 
 
-  replace connectors pv0 with "..";
+  %replace connectors pv0 with "..";
+
+  draw pv0;
+  draw pv1;
   
-  draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
-    with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
+  % draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
+  %   with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
   
 
 
-endfig with_projection parallel_x_y;
-%endfig with_focus f;
+%endfig with_projection parallel_x_y;
+endfig with_focus f;
 
 end_mp;
   
