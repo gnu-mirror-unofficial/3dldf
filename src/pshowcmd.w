@@ -3244,6 +3244,41 @@ getchar();
     @=$$@> = static_cast<void*>(0);
 };
 
+@*3 \§command> $\longrightarrow$ \.{SHOW} \.{CONNECTORS} \§path expression>.
+\initials{LDF 2022.04.06.}
+
+\LOG
+\initials{LDF 2022.04.06.}
+Added this rule.
+\ENDLOG
+
+@q ****** (6) Definition.@> 
+
+@<Define rules@>= 
+  
+@=command: SHOW CONNECTORS path_expression@>@/
+{
+
+  @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: Rule `command: SHOW CONNECTORS path_expression.'";
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+
+#endif /* |DEBUG_COMPILE|  */@;
+
+    Path *p = static_cast<Path*>(@=$2@>);
+    p->show_connectors(0, -1, "Connectors:", scanner_node);
+
+    @=$$@> = static_cast<void*>(0);
+};
+
 @q **** (4) command --> SHOW ellipse_expression@>
 
 @*3 \§command> $\longrightarrow$ \.{SHOW}
