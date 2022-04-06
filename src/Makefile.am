@@ -1541,6 +1541,21 @@ ttemp000.eps: ttemp.mp writemcs.mp
 ttemp.mp: ttemp.ldf 3dldf$(EXEEXT)
 	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) ttemp.ldf
 
+glyph_test.pdf: glyph_test.dvi
+	dvipdfmx $<
+
+glyph_test.ps: glyph_test.dvi
+	dvips -o $@ $<
+
+glyph_test.dvi: glyph_test.txt glyph_test000.eps glyph_test001.eps
+	tex $<
+
+glyph_test000.eps glyph_test001.eps: glyph_test.mp writemcs.mp
+	mpost -numbersystem "double" $<
+
+glyph_test.mp: glyph_test.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) glyph_test.ldf
+
 ttemp$(EXEEXT): ttemp.cxx
 	g++ -o ttemp$(EXEEXT) ttemp.cxx
 
