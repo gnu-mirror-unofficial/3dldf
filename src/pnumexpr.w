@@ -4543,9 +4543,7 @@ Added this type declaration.
   
 @q **** (4) @>   
 
-@*5 \§numeric list> $\longrightarrow$ 
-\.{LEFT\_PARENTHESIS} \§numeric sublist> 
-\.{RIGHT\_PARENTHESIS}.
+@*5 \§numeric list> $\longrightarrow$ \.{LEFT\_PARENTHESIS} \§numeric sublist> \.{RIGHT\_PARENTHESIS}.
 \initials{LDF 2005.01.26.}
 
 \LOG
