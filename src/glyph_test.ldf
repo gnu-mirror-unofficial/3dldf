@@ -125,25 +125,57 @@ beginfig(0);
   q0 := pv0;
   q1 := pv1;
 
-%% !! START HERE:  LDF 2022.04.07.  Add "resolved" and put the result of it in a path.
-%% Make it an assignment.
+  resolve q0 (0, 1) to 10 with_no_transform;
 
+  resolve q0 (11, 12) to 6 with_no_transform;
+
+  resolve q0 (18, 19) to 10 with_no_transform;
+
+  resolve q0 (29, 30) to 30 with_no_transform;
+
+  resolve q0 (61, 64) to 15 with_no_transform;
+
+  resolve q0 (76, 77) to 5 with_no_transform;
+
+  resolve q0 (82, 83) to 10 with_no_transform;
+
+  resolve q0 (93, 94) to 5 with_no_transform;
+
+  resolve q0 (99, 100) to 10 with_no_transform;
+
+  resolve q0 (109, 110) to 3 with_no_transform;
+
+  resolve q0 (113, 115) to 10 with_no_transform;
+
+  q0 += get_point 0 q0;
+
+  %dotlabel.rt("125", get_point 125 q0) with_text_color red;  
+
+
+  resolve q0 (124, 125) to 20 with_no_transform;
+
+  replace connectors q0 with "..";
   
-  resolve q0 (0, 1) to 10;
+  draw q0 with_color blue with_pen medium_pen;
 
-  n :=   := (length pv0) - 1;
+  %draw subpath (96, 98) of q0 with_color green with_pen medium_pen;
+
+  message "length q0:";
+  show length q0;
+  %pause;
+  
+  n := length q0;
   
   for i = 0 upto n:
-    p[1][i] := get_point (i) pv1;
+    p[2][i] := get_point (i) q0;
     s := decimal i;
-    %dotlabel.top(s, p[1][i]);
+    %dotlabel.bot(s, p[2][i]) with_text_color blue;
   endfor;
-  
+
 
   
 endfig with_projection parallel_x_y;
 
-bye;
 
 %% * (1) Fig. 1.
 
@@ -157,155 +189,68 @@ beginfig(1);
   clear current_picture;
   
   dotlabel.bot("origin", origin);
-  
-  q0 := pv0 rotated (-90, 0);
-  q1 := pv1 rotated (-90, 0);
 
-  n := (length q0) - 1;
+  q2 := q0 rotated (-90, 0);
+  q3 := q1 rotated (-90, 0);
 
-  string s;
-  
-  for i = 0 upto n:
-    p[0][i] := get_point (i) q0;
-    %s := decimal i;
-    %dotlabel.top(s, p[0][i]);
-  endfor;
-  
-  n := (length pv1) - 1;
-  
-  for i = 0 upto n:
-    p[1][i] := get_point (i) pv1;
-    %s := decimal i;
-    %dotlabel.top(s, p[1][i]);
-  endfor;
-
-
-  dotlabel.top("7", p[0][7]);
-  dotlabel.top("8", p[0][8]);
-
-  dotlabel.lft("15", p[0][15]);
-  dotlabel.lft("16", p[0][16]);
-
-  dotlabel.bot("23", p[0][23]);
-  dotlabel.lrt("24", p[0][24]);
-
-  dotlabel.rt("31", p[0][31]);
-  dotlabel.lrt("32", p[0][32]);
-  dotlabel.llft("33", p[0][33]);
-  %dotlabel.lft("34", p[0][34]);
-  %dotlabel.lft("35", p[0][35]);
-  dotlabel.lft("36", p[0][36]);
-  %dotlabel.lft("37", p[0][37]);
-
-  dotlabel.bot("40", p[0][40]);
-  dotlabel.bot("41", p[0][41]); 
-
-  dotlabel.rt("49", p[0][49]); 
-  dotlabel.top("0", p[0][0]);
-
-  % dotlabel.lrt("$p_0^{20}$", p[0][20]);
-  % dotlabel.lrt("$p_0^{30}$", p[0][30]);
-  % dotlabel.lrt("$p_0^{40}$", p[0][40]);
-  % dotlabel.lrt("$p_0^{45}$", p[0][45]);
-  % dotlabel.rt("$p_0^{49}$", p[0][49]);
-
-  % dotlabel.urt("$p_0^1$", p[0][1]);
-  % dotlabel.top("$p_0^2$", p[0][2]);
-  % dotlabel.lft("$p_0^3$", p[0][3]);
-  % dotlabel.ulft("$p_0^4$", p[0][4]);
-  % dotlabel.lft("$p_0^5$", p[0][5]);
-  % dotlabel.bot("$p_0^6$", p[0][6]);
-  % dotlabel.bot("$p_0^7$", p[0][7]);
-  % dotlabel.bot("$p_0^8$", p[0][8]);
-  % dotlabel.lrt("$p_0^9$", p[0][9]);
-  % dotlabel.llft("$p_0^{10}$", p[0][10]);
-  % dotlabel.lft("$p_0^{11}$", p[0][11]);
-  % dotlabel.bot("$p_0^{12}$", p[0][12]);
-  % dotlabel.bot("$p_0^{13}$", p[0][13]);
-  % dotlabel.rt("$p_0^{14}$", p[0][14]);
-  % dotlabel.urt("$p_0^{15}$", p[0][15]);
-  % dotlabel.urt("$p_0^{16}$", p[0][16]);
-  % dotlabel.urt("$p_0^{17}$", p[0][17]);
-  % dotlabel.urt("$p_0^{18}$", p[0][18]);
-  % dotlabel.urt("$p_0^{19}$", p[0][19]);
-  %dotlabel.top("$p_0^{20}$", p[0][20]);
-  % dotlabel.top("$p_0^{21}$", p[0][21]);
-  
-  
-  % dotlabel.lft("$p_1^0$", p[1][0]);
-  % dotlabel.lft("$p_1^1$", p[1][1]);
-  % dotlabel.rt("$p_1^2$", p[1][2]);
-  % dotlabel.rt("$p_1^3$", p[1][3]);
-  % dotlabel.rt("$p_1^4$", p[1][4]);
-  % dotlabel.lft("$p_1^5$", p[1][5]);
-
-  %% !! START HERE: LDF 2022.04.06.  Make this work.  The function
-  %% exists, I just need the parser rule.
-  
-  %message "connectors (34, 40) q0:";
-  %show connectors (34, 40) q0;
-  %pause;
-
-  %replace connectors q0 with "..";
-
-  draw q0;
-  draw q1;
+  draw q2;
+  draw q3;
 
   t0 := identity shifted (0, 2cm);
 
-  q2 := q0 transformed t0;
-  q3 := q1 transformed t0;
+  q4 := q2 transformed t0;
+  q5 := q3 transformed t0;
   
-  draw q2;
-  draw q3;
+  draw q4;
+  draw q5;
 
-  n := (length q2) - 1;
+  % n := (length q2) - 1;
   
-  for i = 0 upto n:
-    p[2][i] := get_point (i) q2;
-    %s := decimal i;
-    %dotlabel.top(s, p[1][i]);
-  endfor;
+  % for i = 0 upto n:
+  %   p[2][i] := get_point (i) q2;
+  %   %s := decimal i;
+  %   %dotlabel.top(s, p[1][i]);
+  % endfor;
 
-  n := (length q3) - 1;
+  % n := (length q3) - 1;
   
-  for i = 0 upto n:
-    p[3][i] := get_point (i) q3;
-    %s := decimal i;
-    %dotlabel.top(s, p[1][i]);
-  endfor;
+  % for i = 0 upto n:
+  %   p[3][i] := get_point (i) q3;
+  %   %s := decimal i;
+  %   %dotlabel.top(s, p[1][i]);
+  % endfor;
 
-  draw p[0][0] -- p[2][0];
-  draw p[0][7] -- p[2][7];
-  draw p[0][8] -- p[2][8];
-  draw p[0][15] -- p[2][15];
-  draw p[0][16] -- p[2][16];
-  draw p[0][23] -- p[2][23];
-  draw p[0][24] -- p[2][24];
-  draw p[0][31] -- p[2][31];
-  draw p[0][32] -- p[2][32];
-  draw p[0][33] -- p[2][33];
-  draw p[0][40] -- p[2][40];
-  draw p[0][41] -- p[2][41];
-  draw p[0][49] -- p[2][49];
+  % draw p[0][0] -- p[2][0];
+  % draw p[0][7] -- p[2][7];
+  % draw p[0][8] -- p[2][8];
+  % draw p[0][15] -- p[2][15];
+  % draw p[0][16] -- p[2][16];
+  % draw p[0][23] -- p[2][23];
+  % draw p[0][24] -- p[2][24];
+  % draw p[0][31] -- p[2][31];
+  % draw p[0][32] -- p[2][32];
+  % draw p[0][33] -- p[2][33];
+  % draw p[0][40] -- p[2][40];
+  % draw p[0][41] -- p[2][41];
+  % draw p[0][49] -- p[2][49];
 
-  % draw get_point (32) pv0 -- get_point (32) q2;
-  % draw get_point (33) pv0 -- get_point (33) q2;
-  % draw get_point (40) pv0 -- get_point (40) q2;
+  % % draw get_point (32) pv0 -- get_point (32) q2;
+  % % draw get_point (33) pv0 -- get_point (33) q2;
+  % % draw get_point (40) pv0 -- get_point (40) q2;
   
-  unfilldraw p[0][32] -- p[0][33] -- p[2][33] -- p[2][32] -- cycle;
-  unfill q2;
+  % unfilldraw p[0][32] -- p[0][33] -- p[2][33] -- p[2][32] -- cycle;
+  % unfill q2;
 
-  draw q3;
+  % draw q3;
 
   
 
 
-  draw q2;
-  draw q3; %withcolor blue withpen big_pen;
+  % draw q2;
+  % draw q3; %withcolor blue withpen big_pen;
   
-  % draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
-  %   with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
+  % % draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
+  % %   with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
   
 %% ** (2) End of fig. 1
 
@@ -314,8 +259,8 @@ endfig with_focus f no_sort;
 
 %% * (1)
 
-end_mp;
-end;
+bye;
+
 
 
 %% Local Variables:
