@@ -69,7 +69,6 @@ path frame;
 frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_wd, .5frame_ht)
          -- (-.5frame_wd, .5frame_ht) -- cycle;
 
-
 focus f;
 set f with_position (0, 15, -10) with_direction (0, 15, 10) with_distance 10;
 
@@ -190,6 +189,14 @@ beginfig(1);
   
   dotlabel.bot("origin", origin);
 
+  s :=   "\setbox0=\hbox{Focus:  }\setbox1=\hbox{Direction:  }"
+       & "\setbox2=\hbox{-10cm}"
+       & "\vbox{\hbox{\copy0\hbox to \wd1{Position:\hfil}(0cm, 15cm, -10cm)}"
+       & "\hbox{\hskip\wd0\copy1 (0cm, 15cm, \hbox to \wd2{\hfil 10cm})}"
+       & "\hbox{\hskip\wd0 Distance from picture plane: 10cm}}";
+  
+  label(s, origin shifted (0, -2cm));
+  
   q2 := q0 rotated (-90, 0);
   q3 := q1 rotated (-90, 0);
 
@@ -204,64 +211,46 @@ beginfig(1);
   draw q4;
   draw q5;
 
-  % n := (length q2) - 1;
+  q6 := pv0 rotated (-90, 0);
+  q7 := pv1 rotated (-90, 0);
+
+  q8 := q6 transformed t0;
+  q9 := q7 transformed t0;
+    
+  n := (length q6) - 1;
   
-  % for i = 0 upto n:
-  %   p[2][i] := get_point (i) q2;
-  %   %s := decimal i;
-  %   %dotlabel.top(s, p[1][i]);
-  % endfor;
+  for i = 0 upto n:
+    p[6][i] := get_point (i) q6;
+    s := decimal i;
+    dotlabel.bot(s, p[6][i]);
+    p[8][i] := get_point (i) q8;
+    s := decimal i;
+    dotlabel.top(s, p[8][i]);
+    draw p[6][i] -- p[8][i];
+  endfor;
 
-  % n := (length q3) - 1;
+  n := (length q7) - 1;
   
-  % for i = 0 upto n:
-  %   p[3][i] := get_point (i) q3;
-  %   %s := decimal i;
-  %   %dotlabel.top(s, p[1][i]);
-  % endfor;
+  for i = 0 upto n:
+    p[7][i] := get_point (i) q7;
+    s := decimal i;
+    dotlabel.bot(s, p[7][i]);
+    p[9][i] := get_point (i) q9;
+    s := decimal i;
+    dotlabel.top(s, p[9][i]);
+    draw p[7][i] -- p[9][i];
+  endfor;
 
-  % draw p[0][0] -- p[2][0];
-  % draw p[0][7] -- p[2][7];
-  % draw p[0][8] -- p[2][8];
-  % draw p[0][15] -- p[2][15];
-  % draw p[0][16] -- p[2][16];
-  % draw p[0][23] -- p[2][23];
-  % draw p[0][24] -- p[2][24];
-  % draw p[0][31] -- p[2][31];
-  % draw p[0][32] -- p[2][32];
-  % draw p[0][33] -- p[2][33];
-  % draw p[0][40] -- p[2][40];
-  % draw p[0][41] -- p[2][41];
-  % draw p[0][49] -- p[2][49];
-
-  % % draw get_point (32) pv0 -- get_point (32) q2;
-  % % draw get_point (33) pv0 -- get_point (33) q2;
-  % % draw get_point (40) pv0 -- get_point (40) q2;
-  
-  % unfilldraw p[0][32] -- p[0][33] -- p[2][33] -- p[2][32] -- cycle;
-  % unfill q2;
-
-  % draw q3;
-
-  
-
-
-  % draw q2;
-  % draw q3; %withcolor blue withpen big_pen;
-  
-  % % draw get_point (0) pv0 .. get_point (1) pv0 .. get_point (2) pv0 .. get_point (3) pv0
-  % %   with_color blue with_pen pencircle scaled (1mm, 1mm); %  rotated (-45, 0)
-  
 %% ** (2) End of fig. 1
 
 %endfig with_projection parallel_x_y;
 endfig with_focus f no_sort;
 
-%% * (1)
+%% * (1) End
 
 bye;
 
-
+%% * (1) Local variables for Emacs
 
 %% Local Variables:
 %% mode: MetaPost
