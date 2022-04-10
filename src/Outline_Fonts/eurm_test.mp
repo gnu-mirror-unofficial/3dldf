@@ -155,33 +155,43 @@ numeric inner_frame_ht;
 path inner_frame;
 path outer_frame;
 
-
-
-
 %% ** (2) Euler Roman Bold, Large
 
 do_black := true;
 
 for i = 48 upto 57:  %% Numerals
-  outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
+  outline (i, i, "eurb10", .25, big_pen, do_black, do_labels); 
 endfor;
 
 for i = 65 upto 90: %% Uppercase letters
-  if (i = ASCII "J") or (i = ASCII "Q"):
-    outline (i, i, "eurb10", .2125, 0, 1cm, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
-  else:
-    outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
-  fi
+  outline (i, i, "eurb10", .25, big_pen, do_black, do_labels); 
 endfor;
-
 
 for i = 97 upto 122: %% Lowercase letters
-  outline (i, i, "eurb10", .2125, 0, 0, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);
+  outline (i, i, "eurb10", .25, big_pen, do_black, do_labels); 
 endfor;
 
-%% Fit multiple letters onto a figure
+%% ** (2) Fig. 65 ("A")
 
-outline (65, 165, "eurb10", .2125, -1.25cm, 2cm, 180, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels); %% A
-outline (65, 265, "eurb10", .2125, 1.3cm, -1.5cm, 0, 9.5cm, 9.5cm, 0, false, big_pen, do_black, do_labels);  %% A
+beginfig(65) 
+  A.dx = A.dy = .5cm;
+  boxit.A(v[65]);
+  draw pic(A) withpen big_pen;
+endfig; 
+
+
+%% *** (3)
+
+%% ** (2)
 
 end;
+
+      
+%% For use in indirect buffers:
+%% (metapost-mode)
+
+%% Local Variables:
+%% mode:MetaPost
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% *\\*+\\|@\\*[0-9]*"
+%% End:

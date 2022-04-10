@@ -80,8 +80,6 @@ cyan    = (1, 0, 0, 0);
 magenta = (0, 1, 0, 0);
 yellow  = (0, 0, 1, 0);
 
-
-
 small_pen = pencircle scaled .25mm;
 
 medium_pen = pencircle scaled .5mm;
@@ -119,7 +117,6 @@ do_labels = true; % false;
 
 boolean do_reflect;
 do_reflect = false; % true;
-
 
 %% * (1)
 
@@ -245,7 +242,6 @@ beginfig(0);
   
   %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
 
-  
 endfig;
 
 %% **** (4)
@@ -253,8 +249,6 @@ endfig;
 beginfig(100);
     currentpicture := w0 reflectedabout((0, -1), (0, 1));
 endfig;
-
-
 
 %% *** (3) Fig. 1, E-H
 
@@ -274,7 +268,6 @@ beginfig(1);
   draw pic(G) shifted (0cm, 0);
   draw pic(H) shifted (-.125cm, 0);
 
-  
   for j = 0 upto 3:
     draw inner_frame shifted (j*outer_frame_wd, 0);
     draw outer_frame shifted (j*outer_frame_wd, 0);
@@ -329,7 +322,6 @@ endfig;
 
 %% *** (3) Fig. 3, M-O
 
-
 beginfig(3);
 
   pickup medium_pen;
@@ -344,14 +336,12 @@ beginfig(3);
   z0 = point 1 of (outer_frame xscaled 1.5);
   z1 = point 0 of outer_frame;
 
-    
   draw outer_frame shifted (z0 - z1);
   draw inner_frame shifted (z0 - z1);
 
   z2 = point 2 of outer_frame shifted (z0 - z1);
   z3 = .5[z0, z2];
 
-    
   dotlabel.urt(btex $z_0$ etex, z0);
   dotlabel.llft(btex $z_2$ etex, z2);
   dotlabel.top(btex $z_3$ etex, z3);
@@ -386,8 +376,7 @@ beginfig(3);
   w3 = currentpicture;
 
   %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
-  
-  
+
 endfig;
 
 %% **** (4)
@@ -395,7 +384,6 @@ endfig;
 beginfig(103);
     currentpicture := w3 reflectedabout((0, -1), (0, 1));
 endfig;
-
 
 %% *** (3) Fig. 4, P-S
 
@@ -463,8 +451,7 @@ beginfig(4);
   w4 = currentpicture;
 
   %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
-  
-  
+
 endfig;
 
 %% **** (4)
@@ -473,7 +460,7 @@ beginfig(104);
     currentpicture := w4 reflectedabout((0, -1), (0, 1));
 endfig;
 
-%% *** (3) Fig. 0, T-W
+%% *** (3) Fig. 5, T-W
 
 beginfig(5);
   pickup medium_pen;
@@ -482,27 +469,88 @@ beginfig(5);
   boxit.U(v[85]);
   boxit.V(v[86]);
   boxit.W(v[87]);
-  U.c = T.c shifted (outer_frame_wd, 0);
-  V.c = U.c shifted (outer_frame_wd, 0);
-  W.c = V.c shifted (outer_frame_wd, 0);
-  fixsize(T, U, V, W);
-  fixpos(T, U, V, W);
 
-  draw pic(T);
+  pickup medium_pen;
+
+  draw pic(T) shifted (1mm, 0);
+
+  draw outer_frame;   % withcolor green;
+  draw inner_frame;   % withcolor magenta;
+
+  U.c = T.c shifted (outer_frame_wd, 0);
   draw pic(U);
-  draw pic(V);
-  draw pic(W);
+
+  draw outer_frame shifted (outer_frame_wd, 0);
+  draw inner_frame shifted (outer_frame_wd, 0);
+    
+  % z0 = point 1 of (outer_frame xscaled 1.5);
+  % z1 = point 0 of outer_frame;
+
+  % draw outer_frame shifted (z0 - z1);
+  % draw inner_frame shifted (z0 - z1);
+
+  % z2 = point 2 of outer_frame shifted (z0 - z1);
+  % z3 = .5[z0, z2];
+
+  % dotlabel.urt(btex $z_0$ etex, z0);
+  % dotlabel.llft(btex $z_2$ etex, z2);
+  % dotlabel.top(btex $z_3$ etex, z3);
+
+  % boxit.N(v[78]);
+  % N.c = z3;
   
-  for j = 0 upto 3:
-    draw inner_frame shifted (j*outer_frame_wd, 0);
-    draw outer_frame shifted (j*outer_frame_wd, 0);
-  endfor;
+  % draw pic(N);
+
+  % z4 = point 1 of outer_frame shifted (z0 - z1);
+
+  % dotlabel.ulft(btex $z_4$ etex, z4);
+  
+  % boxit.O(v[79]);
+  % O.c = z3 shifted (z4 - z0);
+
+  % draw pic(O) shifted (.3cm, 0);
+
+  % path q[];
+
+  % q0 = outer_frame xscaled 1.125;
+  % q1 = inner_frame xscaled 1.125;
+
+  % z5 = point 0 of q0;
+
+  % q0 := (q0 shifted (z1 - z5)) shifted (z4 - z1);
+  % q1 := (q1 shifted (z1 - z5)) shifted (z4 - z1);
+    
+  % draw q0; %  withcolor red;
+  % draw q1; % withcolor blue;
+
+  % w3 = currentpicture;
+
+  % %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
+
+
+
+
+
+
+  % V.c = U.c shifted (outer_frame_wd, 0);
+  % W.c = V.c shifted (outer_frame_wd, 0);
+  % fixsize(T, U, V, W);
+  % fixpos(T, U, V, W);
+
+  % draw pic(T);
+
+  % draw pic(V);
+  % draw pic(W);
+  
+  % for j = 0 upto 3:
+  %   draw inner_frame shifted (j*outer_frame_wd, 0);
+  %   draw outer_frame shifted (j*outer_frame_wd, 0);
+  % endfor;
 
   w5 = currentpicture;
   
   %currentpicture := currentpicture reflectedabout((0, -1), (0, 1));
 
-  
 endfig;
 
 %% **** (4)
@@ -510,8 +558,6 @@ endfig;
 beginfig(105);
     currentpicture := w5 reflectedabout((0, -1), (0, 1));
 endfig;
-
-
 
 end;
 
