@@ -118,12 +118,22 @@ euler_fraktur.dvi: euler_fraktur.txt euler_fraktur000.eps
 
 euler_fraktur.ps: euler_fraktur.dvi
 	dvips -o euler_fraktur.ps euler_fraktur.dvi
-
 euler_fraktur.pdf: euler_fraktur.ps
 	ps2pdf euler_fraktur.ps
 
+#### ** (2) eurm_test
 
+eurm_test065.eps: eurm_test.mp
+	mpost -tex=etex -numbersystem "double" eurm_test.mp
 
+eurm_test.dvi: eurm_test.txt eurm_test065.eps
+	tex eurm_test.txt
+
+eurm_test.ps: eurm_test.dvi
+	dvips -o eurm_test.ps eurm_test.dvi
+
+eurm_test.pdf: eurm_test.dvi
+	dvipdfmx eurm_test.dvi
 
 .PHONY: tags
 
