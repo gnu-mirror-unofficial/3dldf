@@ -93,7 +93,7 @@ bboxmargin := 0;
 input TEX.mp;
 input boxes.mp;
 
-input outline_ttemp.mac;
+input outline_eurm_test.mac;
 
 path r[][];
 

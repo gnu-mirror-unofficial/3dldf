@@ -123,7 +123,7 @@ euler_fraktur.pdf: euler_fraktur.ps
 
 #### ** (2) eurm_test
 
-eurm_test065.eps: eurm_test.mp
+eurm_test065.eps: eurm_test.mp outline_eurm_test.mac
 	mpost -tex=etex -numbersystem "double" eurm_test.mp
 
 eurm_test.dvi: eurm_test.txt eurm_test065.eps
