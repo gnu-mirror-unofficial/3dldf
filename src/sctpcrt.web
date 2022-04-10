@@ -5801,7 +5801,8 @@ Added this section.
 |origin|.
 
 \LOG
-\initials{LDF 2004.06.08.}  Added this section.
+\initials{LDF 2004.06.08.}  
+Added this section.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=          
@@ -5861,7 +5862,51 @@ Added this section.
                             regular, is_constant,
                             not_array, Id_Map_Entry_Type::KNOWN, v);
 
-  }
+
+    p.set(.70710677, .70710677, 0);
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("northeast", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(1, 0, 0);
+    p.rotate(0, 0, 45);
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("northeast", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(0, 1, 0);
+    p.rotate(0, 0, 45);
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("northwest", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+    p.set(-1, 0, 0);
+    p.rotate(0, 0, 45);
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("southwest", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+    p.set(1, 0, 0);
+    p.rotate(0, 0, -45);
+    q = create_new<Point>(p);
+    v = static_cast<void*>(q); 
+    scanner_node->add_entry("southeast", POINT, 
+                            regular, is_constant,
+                            not_array, Id_Map_Entry_Type::KNOWN, v);
+
+
+  } /* End of group */
 
 @q ***** (5) |Paths|.  @>
 @*4 |Paths|.
