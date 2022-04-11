@@ -575,6 +575,13 @@ Added this rule.
 
    string* s = static_cast<string*>(@=$2@>); 
 
+   if (metafont_output)
+   {
+      delete s;
+      s = 0;
+      goto END_VERBATIM_METAPOST_RULE;
+   }
+
 @q **** (4) Error handling:  |s == 0|.@>   
 
 @ Error handling:  |s == 0|.
@@ -582,11 +589,11 @@ Added this rule.
 
 @<Define rules@>=
 
-   if (s == static_cast<string*>(0))
-      {
+    if (s == static_cast<string*>(0))
+    {
           @=$$@> = static_cast<void*>(0);
 
-      } /* |s == 0|  */
+    } /* |s == 0|  */
 
 @q **** (4) |s != 0|.@>   
 
@@ -595,8 +602,8 @@ Added this rule.
 
 @<Define rules@>=
 
-   else /* |s != 0|  */
-      {
+    else /* |s != 0|  */
+    {
          int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
 
 @q ***** (5) Error handling:  |verbatim_metapost_func| failed.@>   
@@ -628,14 +635,104 @@ Added this rule.
 
          delete s;
 
-         @=$$@> = static_cast<void*>(0);
+@q ***** (5).@> 
+
+   }   /* |else| (|s != 0|)  */  
+
+END_VERBATIM_METAPOST_RULE:
+
+   @=$$@> = static_cast<void*>(0);   
+
+};
+
+
+@q ** (2) command --> VERBATIM_METAFONT.@> 
+@*1 \§command> $\longrightarrow$ \.{VERBATIM\_METAFONT}.
+\§string expression>.
+\initials{LDF 2022.04.11.}
+
+\LOG
+\initials{LDF 2022.04.11.}
+Added this rule.
+\ENDLOG
+
+@q *** (3).@> 
+
+@<Define rules@>=
+@=command: VERBATIM_METAFONT string_expression@>@/
+{
+
+   string* s = static_cast<string*>(@=$2@>); 
+
+   if (!metafont_output)
+   {
+      delete s;
+      s = 0;
+      goto END_VERBATIM_METAFONT_RULE;
+   }
+
+@q **** (4) Error handling:  |s == 0|.@>   
+
+@ Error handling:  |s == 0|.
+\initials{LDF 2004.12.13.}
+
+@<Define rules@>=
+
+    if (s == static_cast<string*>(0))
+    {
+          @=$$@> = static_cast<void*>(0);
+
+    } /* |s == 0|  */
+
+@q **** (4) |s != 0|.@>   
+
+@ |s != 0|.
+\initials{LDF 2004.12.13.}
+
+@<Define rules@>=
+
+    else /* |s != 0|  */
+    {
+         int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
+
+@q ***** (5) Error handling:  |verbatim_metafont_func| failed.@>   
+
+@ Error handling:  |verbatim_metafont_func| failed.
+\initials{LDF 2004.12.13.}
+
+@<Define rules@>=
+ 
+         if (status != 0)
+         {
+
+#if 0 
+                cerr_strm << thread_name 
+                          << "ERROR!  In `yyparse()', rule "
+                          << "`verbatim_metafont_command "
+                          << "--> VERBATIM_METAFONT string_expression':"
+                          << endl << "`verbatim_metapost_func()' failed.  "
+                          << "Will try to continue.";
+
+                log_message(cerr_strm); 
+                cerr_message(cerr_strm, error_stop_value); 
+                cerr_strm.str("");
+#endif 
+
+         } /* |if (status != 0)|  */
+
+@q ***** (5) @>   
+
+         delete s;
 
 @q ***** (5).@> 
 
    }   /* |else| (|s != 0|)  */  
 
-};
+END_VERBATIM_METAFONT_RULE:
 
+   @=$$@> = static_cast<void*>(0);   
+
+};
 
 @q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 
