@@ -696,7 +696,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> SHOW STARS stars_field_list stars_option_list'.";
@@ -782,7 +782,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list:  EMPTY'.";
@@ -821,7 +821,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier'.";
@@ -834,7 +834,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list stars_field_specifier':"
@@ -868,7 +868,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier'.";
@@ -881,7 +881,7 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_list: stars_field_list COMMA stars_field_specifier':"
@@ -930,7 +930,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list:  EMPTY'.";
@@ -966,7 +966,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_option_list: stars_option_list order_by stars_order_by_list'.";
@@ -1011,7 +1011,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `order_by: ORDER BY'."
@@ -1043,7 +1043,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `order_by: ORDER_BY'."
@@ -1088,7 +1088,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element'."
@@ -1104,7 +1104,7 @@ Added this rule.
    scanner_node->stars_get_option_struct->order_by_options.push_back(@=$1@>);
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_element':"
@@ -1136,7 +1136,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'.";
@@ -1151,7 +1151,7 @@ Added this rule.
   scanner_node->stars_get_option_struct->order_by_options.push_back(@=$3@>);
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `stars_order_by_list: stars_order_by_list COMMA stars_order_by_element'."
@@ -1185,7 +1185,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier'.";
@@ -1200,7 +1200,7 @@ Added this rule.
    @=$$@> = @=$1@>;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_order_by_element: stars_field_specifier':"
@@ -1245,7 +1245,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: STAR_CONSTANT_NAME'.";
@@ -1260,7 +1260,7 @@ Added this rule.
    @=$$@> = STARS_STAR_CONSTANT_NAME;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `stars_field_specifier: STAR_CONSTANT_NAME':"
@@ -3059,7 +3059,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_path_option_list: EMPTY'.";
@@ -3087,7 +3087,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list QUIET'.";
@@ -3117,7 +3117,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list VERBOSE'.";
@@ -3148,7 +3148,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list WITH_CONNECTORS'.";
@@ -3177,7 +3177,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `show_path_option_list: show_path_option_list "
@@ -3221,7 +3221,7 @@ Added \§show path option list>.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `command: SHOW path_expression show_path_option_list.'";
@@ -3262,7 +3262,7 @@ Added this rule.
   @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: Rule `command: SHOW CONNECTORS path_expression.'";
@@ -6730,7 +6730,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    { 

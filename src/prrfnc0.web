@@ -7059,10 +7059,10 @@ int
 Scan_Parse::save_to_database_func(Scanner_Node scanner_node, string prefix, bool debug)
 {
 #if DEBUG_COMPILE
-   bool DEBUG = true;
+   bool DEBUG = false; /* |true|  */
 
    if (debug == false)
-      DEBUG = true; /* |false| */ @; 
+      DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -7414,10 +7414,10 @@ Scan_Parse::restore_from_database_func(Scanner_Node scanner_node,
                                        bool debug)
 {
 #if DEBUG_COMPILE
-   bool DEBUG = true;
+   bool DEBUG = false; /* |true|  */
 
    if (debug == false)
-      DEBUG = true; /* |false| */ @; 
+      DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -7496,7 +7496,7 @@ Scan_Parse::show_stars_func(Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-  bool DEBUG = true; /* |false| */@;  
+  bool DEBUG = false; /* |true| */@;  
 
   int status;
 
@@ -7660,7 +7660,7 @@ Scan_Parse::plot_stars_func(Sphere *sphere, Scanner_Node scanner_node)
 {
 @q **** (4) @>
 
-  bool DEBUG = true; /* |false| */@;  
+  bool DEBUG = false; /* |true| */@;  
 
   int status;
 

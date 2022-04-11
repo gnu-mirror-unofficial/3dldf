@@ -787,7 +787,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    { 

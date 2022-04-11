@@ -142,7 +142,7 @@ Removed debugging code.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable TO numeric_expression"
@@ -201,7 +201,7 @@ Removed debugging code.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_variable"
@@ -348,7 +348,7 @@ Removed debugging code.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
     cerr_strm << "*** Parser: `command --> RESOLVE path_vector_variable TO "
@@ -1130,7 +1130,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS path_variable "
@@ -1239,7 +1239,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTOR INTEGER path_variable "
@@ -1352,7 +1352,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ @; 
+   DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
          cerr_strm << thread_name << "*** Parser:  `command --> REPLACE CONNECTORS numeric_list path_variable "

@@ -73,7 +73,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
  
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
        cerr_strm << "*** Parser: Rule `command --> SIDEREAL TIME'."

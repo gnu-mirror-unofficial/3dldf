@@ -107,7 +107,7 @@ Removed code from this rule and put it into
   cerr << "entry->name == " << entry->name << endl;
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name 

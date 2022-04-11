@@ -245,7 +245,7 @@ Added this rule.
 
    @<Common declarations for rules@>@; 
 
-   DEBUG = true; /* |false|  */
+   DEBUG = false; /* |true|  */
 
    if (DEBUG)
    {
