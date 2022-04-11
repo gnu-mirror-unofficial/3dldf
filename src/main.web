@@ -333,6 +333,8 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short OUTPUT_FILENAME_INDEX      = 12;
   const unsigned short METAFONT_OUTPUT_INDEX      = 13;
   const unsigned short MF_OUTPUT_INDEX            = 14;
+  const unsigned short METAPOST_OUTPUT_INDEX      = 15;
+  const unsigned short MP_OUTPUT_INDEX            = 16;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -360,6 +362,8 @@ Added the ``\.{--quiet}'' option.
     {"output-filename", 1, 0, 0},
     {"metafont-output", 0, 0, 0},
     {"mf-output", 0, 0, 0},
+    {"metapost-output", 0, 0, 0},
+    {"mp-output", 0, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -778,8 +782,31 @@ Added the ``\.{metafont-output}'' and ``\.{mf-output}'' options.
             cerr << "Setting global variable `bool metafont_output' to `true'." << endl;
 
             metafont_output = true;
+            metapost_output = false;
             run_state_initial.do_output[Run_State::METAPOST] = false;
             run_state_initial.do_output[Run_State::METAFONT] = true;
+        }
+
+@q **** (4) metapost-output and mp-output.@>
+@ metapost-output and mp-output.
+\initials{LDF 2022.04.11.}
+
+\LOG
+\initials{LDF 2022.04.11.}
+Added the ``\.{metapost-output}'' and ``\.{mp-output}'' options.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == METAPOST_OUTPUT_INDEX || option_index == MP_OUTPUT_INDEX)
+        {
+
+            cerr << "Setting global variable `bool metapost_output' to `true'." << endl;
+
+            metapost_output = true;
+            metafont_output = false;
+            run_state_initial.do_output[Run_State::METAFONT] = false;
+            run_state_initial.do_output[Run_State::METAPOST] = true;
         }
 
 @q **** (4) Invalid option_index value.@>
