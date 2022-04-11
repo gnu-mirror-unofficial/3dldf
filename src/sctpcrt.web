@@ -4632,7 +4632,7 @@ a call to |add_synonym| for |defaultpen|.
 
     scanner_node->add_synonym("currentpen", "current_pen");
 
-v = &(entry->object);
+    v = &(entry->object);
 
     scanner_node->current_pen = static_cast<Pen**>(v);
 
@@ -4811,6 +4811,71 @@ Commented-out this section.
   }  /* End of group (|Predicates|)  */
 #endif 
 
+@q ***** (5) |Booleans|.  @>          
+@*4 |Booleans|.
+\initials{LDF 2022.04.11.}
+
+!! TODO:  Add code for other forms of output, PNG, SVG, etc.  Currently,
+|is_metafont| is set to |true| if the global variable |metafont_output| 
+is |true|.  Otherwise, it's set to |false| and |is_metapost| is set to 
+|true|.  That is, the latter is the default.
+\initials{LDF 2022.04.11.}
+
+\LOG
+\initials{LDF 2022.04.11.}
+Added this section with a calls to |add_entry| for |is_metafont| and |is_metapost|.
+\ENDLOG
+
+@<Define |Scanner_Type::create|@>=
+
+    {  /* Beginning of group for booleans  */
+
+       bool* b;
+   
+@q ****** (6) |is_metafont|.@> 
+@ |is_metafont|.
+\initials{LDF 2022.04.11.}
+
+@<Define |Scanner_Type::create|@>=
+
+       b = new bool;
+
+       *b = (metafont_output) ? true : false;
+       
+       v = static_cast<void*>(b); 
+
+       scanner_node->add_entry("is_metafont",
+                               BOOLEAN,
+                               regular,
+                               is_constant,
+                               not_array,
+                               Id_Map_Entry_Type::KNOWN,
+                               v);
+
+
+@q ****** (6) |is_metapost|.@> 
+@ |is_metapost|.
+\initials{LDF 2022.04.11.}
+
+@<Define |Scanner_Type::create|@>=
+
+       b = new bool;
+
+       *b = (metafont_output) ? false : true;
+
+       v = static_cast<void*>(b); 
+
+       scanner_node->add_entry("is_metapost",
+                               BOOLEAN,
+                               regular,
+                               is_constant,
+                               not_array,
+                               Id_Map_Entry_Type::KNOWN,
+                               v);
+
+
+   }  /* End of group for booleans  */
+
 @q ***** (5) |Reals|.  @>          
 @*4 |Reals|.
 \initials{LDF 2004.10.23.}
@@ -4873,6 +4938,7 @@ Added call to |add_entry| for |register_width|.
                                not_array,
                                Id_Map_Entry_Type::KNOWN,
                                v);
+
 
 @q ****** (6) |register_width|.@> 
 

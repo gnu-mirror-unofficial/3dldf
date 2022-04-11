@@ -8464,12 +8464,20 @@ Label::output(Scanner_Node s,
        return;
      }  
 
-   *out_stream << "label";
+   if (metafont_output)
+      *out_stream << "makelabel";
+   else
+      *out_stream << "label";
    
    if (position != "")
      *out_stream << "." << position;
    
-   *out_stream << "(btex " << text << " etex ";
+   if (metafont_output)
+   {
+      *out_stream << "(\"" << text << "\"";
+   }
+   else
+      *out_stream << "(btex " << text << " etex ";
 
      if (transform && !transform->is_identity())
         {
@@ -8507,9 +8515,12 @@ if (text_color)
 
    if (dot == true)
        {
-          *out_stream << "begingroup" << endl 
-                      << "interim linecap := rounded;" 
-                      << endl
+          *out_stream << "begingroup" << endl; 
+
+          if (!metafont_output)
+             *out_stream << "interim linecap := rounded;";
+
+          *out_stream << endl
                       << "drawdot (" 
                       << pt->get_x('p', false)
                       << Point::measurement_units << ", "
@@ -8518,10 +8529,12 @@ if (text_color)
 
             if (pen)
                *out_stream << " withpen " << *pen;
-            else 
+            else if (!metafont_output)
                *out_stream << " withpen pencircle scaled dotlabeldiam";
+            else if (metafont_output)
+               *out_stream << " withpen pencircle scaled 3pt";
           
-          if (dot_color)
+          if (!metafont_output && dot_color)
              *out_stream << " withcolor " << *dot_color;
 
           *out_stream << ";" << "endgroup;" << endl;
