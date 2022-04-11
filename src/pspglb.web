@@ -826,6 +826,9 @@ Added this section, with |cerr_mutex_struct|.
 
 \initials{LDF 2004.07.15.} 
 Changed |Mutex_Type cerr_mutex_struct| to |cerr_mutex|.
+
+\initials{LDF 2022.04.11.}
+Added |bool metafont_output|.
 \ENDLOG 
 
 @<Global variables@>=
@@ -833,6 +836,9 @@ Mutex_Type cerr_mutex;
 
 bool database_enabled = false;
 bool astronomy_enabled = false;
+
+bool metafont_output = false;
+
 
 @
 @<|extern| declarations for global |Mutex_Type| variables@>=
@@ -3759,7 +3765,7 @@ int
 output_command_func(Scanner_Node, bool do_metafont = false);
 
 int
-beginfig_func(Scanner_Node, int, bool do_metafont = false, string s = "", int wd = 0, int ht = 0, int dp = 0);
+beginfig_func(Scanner_Node, int, bool do_metafont = false, string s = "", real wd = 0.0, real ht = 0.0, real dp = 0.0);
 
 String_Bool variable_func(Scanner_Node,
                           char*,
