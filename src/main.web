@@ -1,5 +1,4 @@
 @q main.web @>
-                           
 @q * Copyright and License.@>
 
 @q This file is part of GNU 3DLDF, a package for three-dimensional drawing. @>
@@ -332,6 +331,7 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short ASTRONOMY_INDEX            = 10;
   const unsigned short STARS_LIMIT_INDEX          = 11;
   const unsigned short OUTPUT_FILENAME_INDEX      = 12;
+  const unsigned short METAFONT_OUTPUT_INDEX      = 13;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -357,6 +357,7 @@ Added the ``\.{--quiet}'' option.
     {"astronomy", 0, 0, 0},
     {"stars-limit", 1, 0, 0},
     {"output-filename", 1, 0, 0},
+    {"metafont-output", 0, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -738,12 +739,16 @@ Added the ``\.{stars_limit}'' option.
         }
 
 @q **** (4) output_filename.@>
-@ output_filename.
+@ |output_filename|.
+
+!! TODO:  LDF 2022.04.11.  Make this work!
 
 \LOG
 \initials{LDF 2021.06.03.}
-Added the ``\.{output_filename}'' option.
+Added the ``\.{output\_filename}'' option.
 \ENDLOG 
+
+
 
 @<GCC command line option processing@>=
 
@@ -752,7 +757,25 @@ Added the ``\.{output_filename}'' option.
 
             cerr << "Setting output filename." << endl;
 
-            output_filename = argv[optind];
+            output_filename = optarg;
+        }
+
+@q **** (4) metafont_output.@>
+@ |metafont_output|.
+
+\LOG
+\initials{LDF 2022.04.11.}
+Added the ``\.{metafont\_output}'' option.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == METAFONT_OUTPUT_INDEX)
+        {
+
+            cerr << "Setting global variable `bool metafont_output' to `true'." << endl;
+
+            metafont_output = true;
         }
 
 @q **** (4) Invalid option_index value.@>
