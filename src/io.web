@@ -3119,32 +3119,27 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
     {
       do_output = run_state.do_output[Run_State::METAPOST];
       filename = default_out_filename_metapost;
-      if (DEBUG) 
-        conditional_string = "do_output[Run_State::METAPOST]";
+      conditional_string = "do_output[Run_State::METAPOST]";
     }
   
   else if (format == Run_State::METAFONT)
     {
       do_output = run_state.do_output[Run_State::METAFONT];
       filename = default_out_filename_metafont;
-
-      if (DEBUG) 
-        conditional_string = "do_output[Run_State::METAFONT]";
+      conditional_string = "do_output[Run_State::METAFONT]";
     }
   
   else if (format == Run_State::PNG)
     {
       do_output = run_state.do_output[Run_State::PNG];
       filename = default_out_filename_png;
-      if (DEBUG) 
-        conditional_string = "do_output[Run_State::PNG]";
+      conditional_string = "do_output[Run_State::PNG]";
     }
   else if (format == Run_State::LIBPLOT)
     {
       do_output = run_state.do_output[Run_State::LIBPLOT];
       filename = default_out_filename_libplot;
-      if (DEBUG) 
-        conditional_string = "do_output[Run_State::LIBPLOT]";
+      conditional_string = "do_output[Run_State::LIBPLOT]";
     }
   else
     {
@@ -3153,6 +3148,7 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
            << "Returning `false\'." << endl << endl;
       return false;
     }
+
 
   if (do_output)
     {
@@ -3187,14 +3183,14 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 
     } /* |if (do_output)|  */@;
 
-  else if (DEBUG)
-    {
-      cerr << conditional_string << " == false.  Returning `false\'.\n"
-        << "Exiting Scanner_Type::open_default_out_file()" << endl;
+  else 
+  {
+    if (DEBUG)
+       cerr << conditional_string << " == false.  Returning `false\'.\n"
+            << "Exiting Scanner_Type::open_default_out_file()" << endl;
 
-
-      return false;
-    }
+    return false;
+  }
 
 } /* |Scanner_Type::open_default_out_file| */@;
 

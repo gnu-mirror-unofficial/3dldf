@@ -332,6 +332,7 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short STARS_LIMIT_INDEX          = 11;
   const unsigned short OUTPUT_FILENAME_INDEX      = 12;
   const unsigned short METAFONT_OUTPUT_INDEX      = 13;
+  const unsigned short MF_OUTPUT_INDEX            = 14;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -358,6 +359,7 @@ Added the ``\.{--quiet}'' option.
     {"stars-limit", 1, 0, 0},
     {"output-filename", 1, 0, 0},
     {"metafont-output", 0, 0, 0},
+    {"mf-output", 0, 0, 0},
     {0, 0, 0, 0}
   };
   
@@ -759,17 +761,18 @@ Added the ``\.{output\_filename}'' option.
             output_filename = optarg;
         }
 
-@q **** (4) metafont_output.@>
-@ |metafont_output|.
+@q **** (4) metafont-output and mf-output.@>
+@ metafont-output and mf-output.
+\initials{LDF 2022.04.11.}
 
 \LOG
 \initials{LDF 2022.04.11.}
-Added the ``\.{metafont\_output}'' option.
+Added the ``\.{metafont-output}'' and ``\.{mf-output}'' options.
 \ENDLOG 
 
 @<GCC command line option processing@>=
 
-        else if (option_index == METAFONT_OUTPUT_INDEX)
+        else if (option_index == METAFONT_OUTPUT_INDEX || option_index == MF_OUTPUT_INDEX)
         {
 
             cerr << "Setting global variable `bool metafont_output' to `true'." << endl;
@@ -1440,18 +1443,26 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
               << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
       }
 
-      for (int i = 0; i < Run_State::MAX_OUTPUT_FORMATS; ++i)
-      {
-        scanner_node_stdin->open_default_out_file(i, run_state_initial);
-      }
+          
+
+
 
       if (metafont_output)
+      {
+         scanner_node_stdin->open_default_out_file(Run_State::METAFONT, run_state_initial);
          scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr->setf(
                                                  ios::fixed, ios::floatfield);
-      else    
+      }
+      else
+      {
+
+         /* !! TODO:  Add code for other output formats, PNG, SVG, etc.
+            \initials{LDF 2022.04.11.} */
+
+         scanner_node_stdin->open_default_out_file(Run_State::METAPOST, run_state_initial);
          scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
                                                  ios::fixed, ios::floatfield);
-
+      }
 
       time_t tt;
       tm *lt;

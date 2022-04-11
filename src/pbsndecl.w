@@ -2208,6 +2208,9 @@ Added token declaration for |SCANTOKENS|.
 
 \initials{LDF 2004.12.13.}
 Added token declaration for |VERBATIM_METAPOST|. 
+
+\initials{LDF 2022.04.11.}
+Added token declaration for |VERBATIM_METAFONT|. 
 \ENDLOG 
 
 @q **** (4) Declarations.@>   
@@ -2256,6 +2259,7 @@ Added token declaration for |LET|.
 @=%token <int_value> SCANTOKENS@>@/
 
 @=%token <int_value> VERBATIM_METAPOST@>@/
+@=%token <int_value> VERBATIM_METAFONT@>@/
 
 @=%token <int_value> LET@>@/
 
