@@ -9921,14 +9921,22 @@ and increment |scanner_node->output_pending.value_1|.
 @<Define |Scan_Parse| functions@>= 
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST]->lock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT]->lock();
+   else
+      scanner_node->out[Run_State::METAPOST]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
-  
-     *(scanner_node->out[Run_State::METAPOST]->stream_ptr) 
-           << *s << endl << flush;
+
+   if (metafont_output)    
+      *(scanner_node->out[Run_State::METAFONT]->stream_ptr) << *s << endl << flush;
+   else
+      *(scanner_node->out[Run_State::METAPOST]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST]->unlock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT]->unlock();
+   else
+      scanner_node->out[Run_State::METAPOST]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    scanner_node->output_pending.value_0 = false;
@@ -10018,15 +10026,24 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST]->lock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT]->lock();
+   else
+      scanner_node->out[Run_State::METAPOST]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
-  
-     *(scanner_node->out[Run_State::METAPOST]->stream_ptr) 
-           << *s << endl << flush;
+       
+   if (metafont_output)
+      *(scanner_node->out[Run_State::METAFONT]->stream_ptr) << *s << endl << flush;
+   else
+      *(scanner_node->out[Run_State::METAPOST]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
-   scanner_node->out[Run_State::METAPOST]->unlock();
+   if (metafont_output)
+      scanner_node->out[Run_State::METAFONT]->unlock();
+   else
+      scanner_node->out[Run_State::METAPOST]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
+
 
     }     /* |else | (|!multithread_output|)  */
 
@@ -14306,8 +14323,19 @@ Scan_Parse::clip_to_func(void* arg1, void* parameter)
 
 @q **** (4) @>   
 
-   Output_Struct* os = scanner_node->out[Run_State::METAPOST];
-   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+   Output_Struct* os;
+   ofstream* out_stream;
+
+   if (metafont_output)
+   {
+      os = scanner_node->out[Run_State::METAFONT];
+      out_stream  = static_cast<ofstream*>(os->stream_ptr);
+   }
+   else
+   {
+      os = scanner_node->out[Run_State::METAPOST];
+      out_stream  = static_cast<ofstream*>(os->stream_ptr);
+   }
 
    Path* p = static_cast<Path*>(arg1); 
 

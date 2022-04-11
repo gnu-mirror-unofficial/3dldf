@@ -3102,9 +3102,7 @@ bool
 Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 {
 
-  /* !!START HERE:  LDF 2022.01.29.  Check where this is called.  */ 
-
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 
   if (DEBUG)
     cerr << "Entering Scanner_Type::open_default_out_file()" << endl
@@ -3129,6 +3127,7 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
     {
       do_output = run_state.do_output[Run_State::METAFONT];
       filename = default_out_filename_metafont;
+
       if (DEBUG) 
         conditional_string = "do_output[Run_State::METAFONT]";
     }
@@ -3192,6 +3191,7 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
     {
       cerr << conditional_string << " == false.  Returning `false\'.\n"
         << "Exiting Scanner_Type::open_default_out_file()" << endl;
+
 
       return false;
     }
@@ -5155,7 +5155,7 @@ the default |false|.  This required making
   
   friend void* Scan_Parse::output_func(void*);
   friend int Scan_Parse::output_command_func(Scanner_Node, bool);
-  friend int Scan_Parse::beginfig_func(Scanner_Node, int, bool, string s, int wd, int ht, int dp);
+  friend int Scan_Parse::beginfig_func(Scanner_Node, int, bool, string s, real wd, real ht, real dp);
   friend String_Bool Scan_Parse::variable_func(Scanner_Node,
                                                char*,
                                                char*,

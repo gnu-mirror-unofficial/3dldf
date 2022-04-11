@@ -930,8 +930,12 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
   } /* |else|  */
 
+  Output_Struct* os;
 
-  Output_Struct* os = scanner_node->out[Run_State::METAPOST];
+  if (metafont_output)
+     os = scanner_node->out[Run_State::METAFONT];
+  else
+     os = scanner_node->out[Run_State::METAPOST];
 
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
@@ -1590,7 +1594,13 @@ without \.{--multithread-input}.
 
 @<Define |Scan_Parse| functions@>=
 
-  Output_Struct* out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAPOST];
+
+  Output_Struct* out_stream;
+
+  if (metafont_output)
+     out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAFONT];
+  else
+     out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAPOST];
 
   if (out_stream == static_cast<Output_Struct*>(0))
      {
@@ -2816,7 +2826,12 @@ to |Picture::output|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   p->scanner_node->out[Run_State::METAPOST]->lock();
+
+   if (metafont_output)
+      p->scanner_node->out[Run_State::METAFONT]->lock();
+   else
+      p->scanner_node->out[Run_State::METAPOST]->lock();
+
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    p->picture->output(p->scanner_node,
@@ -2838,12 +2853,19 @@ to |Picture::output|.
 
      string s = (do_metafont) ? "endchar;" : "endfig;";
 
-     *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
-           << s << endl << endl << flush;
+     if (metafont_output)
+        *(p->scanner_node->out[Run_State::METAFONT]->stream_ptr) 
+              << s << endl << endl << flush;
+     else
+        *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
+              << s << endl << endl << flush;
    }
 
 #ifdef HAVE_PTHREAD_H  
-   p->scanner_node->out[Run_State::METAPOST]->unlock();
+   if (metafont_output)
+      p->scanner_node->out[Run_State::METAFONT]->unlock();
+   else
+      p->scanner_node->out[Run_State::METAPOST]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
     }     /* |else | (|!multithread_output|)  */

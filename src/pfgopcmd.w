@@ -200,6 +200,10 @@ Added this rule.
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
+
+      cerr << "$5 == " << @=$5@> << endl
+           << "$7 == " << @=$7@> << endl
+           << "$9 == " << @=$9@> << endl;
     }
 #endif /* |DEBUG_COMPILE|  */@;
 

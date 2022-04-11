@@ -201,8 +201,19 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
     cerr << "Beginning figure " << i << "." 
          << endl;
 
-  Output_Struct* os = s->out[Run_State::METAPOST];
-  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  ofstream* out_stream;
+  Output_Struct* os;
+
+  if (metafont_output)
+  {
+     os = s->out[Run_State::METAFONT];
+     out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  }
+  else
+  {
+     os = s->out[Run_State::METAPOST];
+     out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  }
 
 @ !! START HERE.  Change the way |current_picture| is handled.
 \initials{LDF 2004.05.25.}
@@ -225,7 +236,7 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
   current_picture = new Picture;
   current_picture->clear();
 
-*out_stream << "beginfig(" << i << ");\n";
+  *out_stream << "beginfig(" << i << ");\n";
 
   if (DEBUG) 
     cerr << "Exiting beginfig(" << i << ")" << endl;
@@ -292,8 +303,19 @@ endfig (Scanner_Node s,
   if (DEBUG) 
     cerr << "Entering endfig.\n";
 
-  Output_Struct* os = s->out[Run_State::METAPOST];
-  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  Output_Struct* os;
+  ofstream* out_stream;
+
+  if (metafont_output)
+  {
+     os = s->out[Run_State::METAFONT];
+     out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  }
+  else
+  {
+     os = s->out[Run_State::METAPOST];
+     out_stream  = static_cast<ofstream*>(os->stream_ptr);
+  }
 
   if (projection != Projections::suppress)
     {

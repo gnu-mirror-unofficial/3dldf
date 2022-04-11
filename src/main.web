@@ -749,7 +749,6 @@ Added the ``\.{output\_filename}'' option.
 \ENDLOG 
 
 
-
 @<GCC command line option processing@>=
 
         else if (option_index == OUTPUT_FILENAME_INDEX)
@@ -776,6 +775,8 @@ Added the ``\.{metafont\_output}'' option.
             cerr << "Setting global variable `bool metafont_output' to `true'." << endl;
 
             metafont_output = true;
+            run_state_initial.do_output[Run_State::METAPOST] = false;
+            run_state_initial.do_output[Run_State::METAFONT] = true;
         }
 
 @q **** (4) Invalid option_index value.@>
@@ -1245,6 +1246,8 @@ main(int argc, char *argv[])
    string in_filename;
    string s;  
  
+   
+
    for ( unsigned short i = 0; i < filename_array_ctr; ++i)
    {
 
@@ -1274,6 +1277,10 @@ main(int argc, char *argv[])
                        << "scanner_node_vector[" << i << "]->"
                        << "out[Run_State::METAPOST]->filename == " 
                        << scanner_node_vector[i]->out[Run_State::METAPOST]->filename 
+                       << endl 
+                       << "scanner_node_vector[" << i << "]->"
+                       << "out[Run_State::METAFONT]->filename == " 
+                       << scanner_node_vector[i]->out[Run_State::METAFONT]->filename 
                        << endl;
               } /* |if (DEBUG)|  */@;
 #endif /* |DEBUG_COMPILE|  */@;
@@ -1412,7 +1419,7 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
 
 #if DEBUG_COMPILE
       bool DEBUG_SAVE = DEBUG;
-      DEBUG = false; /* |true| */
+      DEBUG = true; /* |false| */
 
       if (DEBUG)
         {
@@ -1433,13 +1440,19 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
               << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
       }
 
-      for (int i = 0; i < 1; ++i)
+      for (int i = 0; i < Run_State::MAX_OUTPUT_FORMATS; ++i)
       {
         scanner_node_stdin->open_default_out_file(i, run_state_initial);
       }
 
-      scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
-                                              ios::fixed, ios::floatfield);
+      if (metafont_output)
+         scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr->setf(
+                                                 ios::fixed, ios::floatfield);
+      else    
+         scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
+                                                 ios::fixed, ios::floatfield);
+
+
       time_t tt;
       tm *lt;
       tt = time(0);
@@ -1448,16 +1461,24 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
       string datestamp(asctime(lt));
       datestamp.erase(datestamp.size() - 1); /*  Remove terminal line-feed.  */
 
-      *(scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr) 
-                         << "%%%% " << default_out_filename_metapost 
-                         << "." << endl
-                         << "%%%% Generated on " << datestamp << endl 
-                         << "%%%% from standard input by GNU 3DLDF "
-                         << VERSION_3DLDF << "."
-                         << endl << endl << flush; 
+      if (metafont_output)
+         *(scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr) 
+                            << "%%%% " << default_out_filename_metafont 
+                            << "." << endl
+                            << "%%%% Generated on " << datestamp << endl 
+                            << "%%%% from standard input by GNU 3DLDF "
+                            << VERSION_3DLDF << "."
+                            << endl << endl << flush; 
+      else
+         *(scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr) 
+                            << "%%%% " << default_out_filename_metapost 
+                            << "." << endl
+                            << "%%%% Generated on " << datestamp << endl 
+                            << "%%%% from standard input by GNU 3DLDF "
+                            << VERSION_3DLDF << "."
+                            << endl << endl << flush; 
 
-         yyparse_return_value
-            = yyparse(static_cast<void*>(scanner_node_stdin));
+      yyparse_return_value = yyparse(static_cast<void*>(scanner_node_stdin));
 
 #if 0 
      do 

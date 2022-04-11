@@ -8650,7 +8650,13 @@ Path::output(Scanner_Node scanner_node)
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   Output_Struct* os = scanner_node->out[Run_State::METAPOST];
+   Output_Struct* os;
+
+   if (metafont_output)
+      os = scanner_node->out[Run_State::METAFONT];
+   else
+      os = scanner_node->out[Run_State::METAPOST];
+
    ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
    if (do_output == false)
@@ -8795,7 +8801,7 @@ Revised the code that checks the value of |arrow|.
 
           @<Output |Path|@>@;
 
-          if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+          if (   !metafont_output && fill_color_vector != static_cast<Pointer_Vector<Color>*>(0)
               && fill_color_vector->ctr > 0)
             *out_stream << " withcolor " << *(fill_color_vector->v[0]);
 
@@ -8848,37 +8854,50 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
               Id_Map_Entry_Node entry;
               void* v = 0;
 
-              Color* temp_color;
+@q ***** (5) @>
 
-              if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
-                  && fill_color_vector->ctr > 0)
+              if (!metafont_output)
               {
-                temp_color = fill_color_vector->v[0];
-              }
-              else 
-                 temp_color = 0;
-            
-              if (temp_color == static_cast<Color*>(0))
+@q ****** (6) @>
+                  Color* temp_color;
+
+                  if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                      && fill_color_vector->ctr > 0)
                   {
-                      entry = scanner_node->lookup("background_color");
-              
-                      if (entry != static_cast<Id_Map_Entry_Node>(0))
-                         v = entry->get_object();         
-
-                      if (   entry != static_cast<Id_Map_Entry_Node>(0) 
-                          && v != static_cast<void*>(0))
+                    temp_color = fill_color_vector->v[0];
+                  }
+                  else 
+                     temp_color = 0;
+            
+                  if (temp_color == static_cast<Color*>(0))
                       {
-                         temp_color = static_cast<Color*>(v);
-                      }
-                      else 
-                         temp_color = const_cast<Color*>(&Colors::white);
+                          entry = scanner_node->lookup("background_color");
+              
+                          if (entry != static_cast<Id_Map_Entry_Node>(0))
+                             v = entry->get_object();         
 
-                  }  /* |if (temp_color == 0)|  */
+                          if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                              && v != static_cast<void*>(0))
+                          {
+                             temp_color = static_cast<Color*>(v);
+                          }
+                          else 
+                             temp_color = const_cast<Color*>(&Colors::white);
 
-              *out_stream << " withcolor " << *temp_color;
+                      }  /* |if (temp_color == 0)|  */
 
-              *out_stream << ";" << endl << flush;
+                  *out_stream << " withcolor " << *temp_color;
+
+                  *out_stream << ";" << endl << flush;
                 
+@q ****** (6) @>
+
+              } /* |if (!metafont_output)|  */
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
               status = sub_output_draw(scanner_node, out_stream);
 
               if (status != 0)
@@ -9255,15 +9274,20 @@ Added code for suppressing output if the type of the current
 
 @q ****** (6).@> 
 
-               status = adjust_draw_color_vector();
+              if (metafont_output)
+                 do_colors = false;
+              else
+              {             
+                  status = adjust_draw_color_vector();
 
-               if (status == 0)
+                  if (status == 0)
                   {
                       color_iter = draw_color_vector->v.begin();
                       do_colors = true;
                   }
-               else
-                  do_colors = false;
+                  else
+                     do_colors = false;
+              }
 
 @q ****** (6).@> 
 
@@ -9334,7 +9358,7 @@ In addition, the first segment also requires special handling if
 
                       *out_stream << "drawarrow " << *points[0];
 
-                      if (do_colors)
+                      if (!metafont_output && do_colors)
                          *out_stream << "withcolor " << **color_iter;
 
                       if (do_pens)
@@ -9360,7 +9384,7 @@ In addition, the first segment also requires special handling if
                    *out_stream << "drawarrow " << *points[1] 
                                << **connector_type_iter << *points[0]; 
 
-                   if (do_colors)
+                   if (!metafont_output && do_colors)
                       *out_stream << endl << "withcolor " << **color_iter;
 
                    if (do_pens)
@@ -9382,7 +9406,7 @@ In addition, the first segment also requires special handling if
                       *out_stream << "draw " 
                                   << *points[0];
 
-                      if (do_colors)
+                      if (!metafont_output && do_colors)
                          *out_stream << " withcolor " << **color_iter;
 
                       if (do_pens)
@@ -9406,7 +9430,7 @@ In addition, the first segment also requires special handling if
                        *out_stream << "draw " << *points[0] 
                                    << *connector_type_iter << *points[1];
 
-                      if (do_colors)
+                      if (!metafont_output && do_colors)
                          *out_stream << endl << "withcolor " << **color_iter;
 
                       if (do_pens)
@@ -9462,7 +9486,7 @@ In addition, the first segment also requires special handling if
                              *out_stream << "draw " << *points[i]   
                                          << *connector_type_iter << *points[i + 1];
 
-                             if (do_colors)
+                             if (!metafont_output && do_colors)
                                 *out_stream << endl << "withcolor " << **color_iter;
 
                              if (do_pens)
@@ -9515,7 +9539,7 @@ This requires special handling because |arrow| could be equal to
                          *out_stream << *points[j] 
                                      << *connector_type_iter << *points[k];
 
-                       if (do_colors)
+                       if (!metafont_output && do_colors)
                           *out_stream << endl << "withcolor " << **color_iter;
 
                        if (do_pens)
@@ -9602,7 +9626,7 @@ Added code for suppressing output if the type of the current
 
                @<Output |Path|@>@;
 
-               if (   draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+               if (   !metafont_output && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                    && draw_color_vector->ctr > 0)
                   *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
 
