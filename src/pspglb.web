@@ -828,7 +828,8 @@ Added this section, with |cerr_mutex_struct|.
 Changed |Mutex_Type cerr_mutex_struct| to |cerr_mutex|.
 
 \initials{LDF 2022.04.11.}
-Added |bool metafont_output|.
+Added |bool metafont_output|, |bool metapost_output|, |bool png_output|, 
+|bool libplot_output| and |bool svg_output|.
 \ENDLOG 
 
 @<Global variables@>=
@@ -837,7 +838,11 @@ Mutex_Type cerr_mutex;
 bool database_enabled = false;
 bool astronomy_enabled = false;
 
+bool metapost_output = true;
 bool metafont_output = false;
+bool png_output = false;
+bool libplot_output = false;
+bool svg_output = false;
 
 @
 @<|extern| declarations for global |Mutex_Type| variables@>=
@@ -851,7 +856,11 @@ bool database_enabled;
 extern 
 bool astronomy_enabled;
 
+extern bool metapost_output;
 extern bool metafont_output;
+extern bool png_output;
+extern bool libplot_output;
+extern bool svg_output;
 
 @q ** (2) |struct Cond_Var_Type|.@>
 @*1 {\bf struct Cond\_Var\_Type}.
@@ -2498,8 +2507,7 @@ I've added today.
 \ENDLOG 
 
 @<Declare |struct Run_State|@>=
-struct
-Run_State
+struct Run_State
 {
 
   bool multithread_input;
