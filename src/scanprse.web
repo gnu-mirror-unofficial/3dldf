@@ -874,9 +874,9 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
                           int fig_num, 
                           bool do_metafont, 
                           string s, 
-                          int wd, 
-                          int ht, 
-                          int dp)
+                          real wd, 
+                          real ht, 
+                          real dp)
 {
 @q **** (4) Preliminaries.@>   
 
@@ -935,7 +935,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
 
-@q ****** (6) Try to lock |scanner_node->output_pending|.@>  
+@q **** (4) Try to lock |scanner_node->output_pending|.@>  
 @ Try to lock |scanner_node->output_pending|.
 \initials{LDF 2004.07.15.}
 
@@ -987,13 +987,15 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-@q ****** (6) Check whether an output operation is pending.@>
+@q **** (4) Check whether an output operation is pending.@>
 @ Check whether an output operation is pending.
 \initials{LDF 2004.07.15.}
 @<Define |Scan_Parse| functions@>=
 
   while (scanner_node->output_pending.value_0)
     {
+
+@q ***** (5) @>
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -1016,7 +1018,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
         
         status = scanner_node->output_pending.timedwait(&timeout);
 
-@q ******* (7) Error handling:  Timout.@>
+@q ***** (5) Error handling:  Timout.@>
 @ Error handling:  Timout.
 \initials{LDF 2004.07.16.}
 
@@ -1043,8 +1045,8 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
     } /* |if (status == ETIMEDOUT)|  */
 
-@q ******* (7) Error handling:  @>
-@q ******* (7) |scanner_node->output_pending.timedwait| failed.@> 
+@q ***** (5) Error handling:  @>
+@q ***** (5) |scanner_node->output_pending.timedwait| failed.@> 
 
 @ Error handling:  |scanner_node->output_pending.timedwait| failed.
 \initials{LDF 2004.07.15.}
@@ -1072,7 +1074,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
     } /* |else if (status != 0)|  */
 
-@q ******* (7) @> 
+@q ***** (5) @>
 
 #if DEBUG_COMPILE
    else if (DEBUG) /* (|status == 0|)  */
@@ -1089,11 +1091,11 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
      } /* |else if (DEBUG)| (|status == 0|)  */
 #endif /* |DEBUG_COMPILE|  */@; 
        
-@q ******* (7) @> 
+@q ***** (5) @>
 
   } /* |while (scanner_node->output_pending.value)|  */
 
-@q ****** (6).@> 
+@q **** (4) @>
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -1112,7 +1114,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
    scanner_node->output_pending.value_0 = true;
    scanner_node->output_pending.value_1++;
 
-@q ****** (6) Try to lock |os->mutex|.@>  
+@q **** (4) Try to lock |os->mutex|.@>  
 @ Try to lock |os->mutex|.
 \initials{LDF 2004.07.15.}
 
@@ -1134,7 +1136,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
   status = os->lock();
 
-@q ******* (7) @> 
+@q **** (4) @>
 
   if (status != 0)
     {
@@ -1150,7 +1152,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
     } /* |if (status != 0)|  */
 
-@q ******* (7) @> 
+@q **** (4) @>
 
   else /* |os->lock| succeeded.  */
     {
@@ -1168,12 +1170,21 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-@q ****** (6) Write to |*out_stream|.@>
+@q **** (4) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
 @<Define |Scan_Parse| functions@>= 
 
     if (do_metafont)
     {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+           cerr << "wd == " << wd << endl
+                << "ht == " << ht << endl
+                << "dp == " << dp << endl;
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
        *out_stream << "beginchar(\"" << s << "\", " << wd 
                    << "pt#, " << ht << "pt#, " << dp << "pt#);" 
                    << endl;
@@ -1185,9 +1196,8 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
     }
 
 
-@q ******* (7) @> 
+@q **** (4) @>
 @ 
-
 \LOG
 \initials{LDF 2004.11.12.}
 Added this section.
@@ -1205,7 +1215,7 @@ Replaced the code in this section with a call to
                    
         }  /* |if (*(scanner_node->default_pen) != 0)|  */
 
-@q ****** (6) Try to unlock |os->mutex|.@>  
+@q **** (4) Try to unlock |os->mutex|.@>  
 @ Try to unlock |os->mutex|.
 \initials{LDF 2004.07.15.}
 
@@ -1243,9 +1253,9 @@ Replaced the code in this section with a call to
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-@q ****** (6) Set |scanner_node->output_pending.value_0| to |false|, @>  
-@q ****** (6) decrement |scanner_node->output_pending.value_1|, and  @>  
-@q ****** (6) and signal condition.                                  @>  
+@q **** (4) Set |scanner_node->output_pending.value_0| to |false|, @>  
+@q **** (4) decrement |scanner_node->output_pending.value_1|, and  @>  
+@q **** (4) and signal condition.                                  @>  
 @ Set |scanner_node->output_pending.value_0| to |false|,  
 decrement |scanner_node->output_pending.value_1|, and   
 and signal condition.                                   
@@ -1259,7 +1269,7 @@ and signal condition.
   
   status = scanner_node->output_pending.signal();
 
-@q ******* (7) Error handling:  |scanner_node->output_pending.signal| failed.@>
+@q **** (4) Error handling:  |scanner_node->output_pending.signal| failed.@>
 @ Error handling:  |scanner_node->output_pending.signal| failed.
 \initials{LDF 2004.07.15.}
 
@@ -1300,7 +1310,7 @@ and signal condition.
      } /* |else if (DEBUG)| (|status == 0|)  */
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q ****** (6) Try to unlock |scanner_node->output_pending|.@>  
+@q **** (4) Try to unlock |scanner_node->output_pending|.@>  
 @ Try to unlock |scanner_node->output_pending|.
 \initials{LDF 2004.07.15.}
 
@@ -1339,7 +1349,7 @@ and signal condition.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-@q ***** (5) @>
+@q **** (4) @>
 @ 
 \LOG
 \initials{LDF 2021.12.15.}
@@ -1371,7 +1381,7 @@ Added this section.
        *static_cast<real*>(entry->object) = fig_num;
    }
 
-@q ***** (5) Exit function successfully.@>
+@q **** (4) Exit function successfully.@>
 @ Exit function successfully.
 @<Define |Scan_Parse| functions@>=
 
@@ -1385,7 +1395,8 @@ Added this section.
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return 0;
-}
+
+} /* End of |Scan_Parse::beginfig_func| definition  */
 
 @q *** (3) |output_func|.@>
 @*3 {\bf output\_func}.
