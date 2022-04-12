@@ -3204,7 +3204,7 @@ Added this rule.
 
   Pointer_Vector<Point> *pv = static_cast<Pointer_Vector<Point>*>(@=$3@>);
 
-  if (pv->size() >= 2 && pv->v[0] != 0 && pv->v[1] != 0)
+  if (pv->v.size() >= 2 && pv->v[0] != 0 && pv->v[1] != 0)
   {
       Point p0 = *(pv->v[0]);
       Point p1 = *(pv->v[1]);
