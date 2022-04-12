@@ -52,6 +52,49 @@
 
 %% * (1) New sample code.
 
+%% ** (2) Assignment to path from point_pair.
+%%        Rules for intersectionpoint with point_pair and path.
+%%        The order doesn't matter, there's a parser rule for each.
+%%        The path made from a point pair has "--" as the connector.
+%%        LDF 2022.04.12.
+
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%c.eps\";";
+
+point p[];
+
+beginfig(0); 
+  p0 := (2cm, 0cm);
+  p1 := (2cm, 2cm);
+  p2 := (1cm, 1cm);
+  p3 := (3cm, 1cm);
+
+  draw p0 -- p1;
+  draw p2 -- p3;
+
+  p4 := (p0, p1) intersectionpoint (p2, p3);
+
+  dotlabel.urt("$p_4$", p4);
+  
+  message "p4:";
+  show p4;
+
+  path q;
+  q := (p2, p3);
+
+  p5 := (p0, p1) intersectionpoint q;
+
+  message "p5:";
+  show p5;
+
+  p6 := q intersectionpoint (p0, p1);
+
+  message "p6:";
+  show p6;
+  
+endfig with_projection parallel_x_y;
+verbatim_metapost "end;";
+end;
+
 %% ** (2)
 
 %% bool_point_tertiary: point_pair INTERSECTION_POINT point_pair:
