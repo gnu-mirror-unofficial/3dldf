@@ -412,10 +412,12 @@ Added this rule.
 @<Define rules@>= 
 @=bool_point_tertiary: point_pair INTERSECTION_POINT point_pair@>@/
 {
+%% ****** (6)
+
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
       cerr << "*** Parser: Rule `bool_point_tertiary: point_pair INTERSECTION_POINT point_pair'."
@@ -423,8 +425,12 @@ Added this rule.
   }
 #endif /* |DEBUG_COMPILE|  */@;
 
+%% ****** (6)
+
   Pointer_Vector<Point> *pv0 = static_cast<Pointer_Vector<Point>*>(@=$1@>); 
   Pointer_Vector<Point> *pv1 = static_cast<Pointer_Vector<Point>*>(@=$3@>);     
+
+%% ****** (6)
 
   if (   pv0 == 0 || pv1 == 0 || pv0->v.size() < 2 || pv1->v.size() < 2 
       || pv0->v[0] == 0 || pv0->v[1] == 0 || pv1->v[0] == 0 || pv1->v[1] == 0)
@@ -435,8 +441,13 @@ Added this rule.
      Bool_Point *bp = create_new<Bool_Point>(INVALID_BOOL_POINT);
      @=$$@> =  static_cast<void*>(bp);  
   }
+
+%% ****** (6)
+
   else
   {
+%% ******* (7)
+
 #if DEBUG_COMPILE
      if (DEBUG)
      { 
@@ -449,6 +460,15 @@ Added this rule.
 
      }  
 #endif /* |DEBUG_COMPILE|  */@;         
+
+%% ******* (7)
+
+@ I could just push the pointers onto |p0| and |p1| but then I couldn't delete
+|pv0| and |pv1|.  This way isn't better, I just think it looks neater.
+!! TODO:  Change this?
+\initials{LDF 2022.04.12.}
+
+@<Define rules@>= 
 
      Path *p0 = create_new<Path>(0);
      Path *p1 = create_new<Path>(0);
@@ -469,6 +489,8 @@ Added this rule.
                    p0, p1, parameter);
 
   }  /* |else|  */
+
+%% ****** (6)
 
 };
 
