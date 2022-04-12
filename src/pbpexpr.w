@@ -69,6 +69,7 @@ Added this type declaration.
 @<Type declarations for non-terminal symbols@>=
 @=%type <pointer_value> bool_point_primary@>@/
 
+
 @q ***** (5) bool_point_primary --> bool_point_variable.@>
 @*4 \§bool-point primary> $\longrightarrow$ \§bool-point variable>.  
 
@@ -352,6 +353,122 @@ Added this rule.
 #endif /* |DEBUG_COMPILE|  */@;
 
   @=$$@> = @=$1@>;
+
+};
+
+@q **** (4) @>
+@*3 \§point pair>.
+\initials{LDF 2022.04.12.}
+
+\LOG
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> point_pair@>@/
+
+@q ***** (5) point_pair: LEFT_PARENTHESIS point_primary COMMA point_primary RIGHT_PARENTHESIS@>
+@
+@<Define rules@>=
+@=point_pair: LEFT_PARENTHESIS point_primary COMMA point_primary RIGHT_PARENTHESIS@>
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+      cerr << "*** Parser, Rule `point_pair: LEFT_PARENTHESIS point_primary COMMA "
+           << "point_primary RIGHT_PARENTHESIS'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Pointer_Vector<Point> *pv = create_new<Pointer_Vector<Point>>(0);
+  Point *p0 = static_cast<Point*>(@=$2@>);
+  Point *p1 = static_cast<Point*>(@=$4@>);
+
+  *pv += p0;
+  *pv += p1;
+
+  @=$$@> =  static_cast<void*>(pv);  
+
+};
+
+@q **** (4) bool_point_tertiary: point_pair INTERSECTION_POINT @> 
+@q **** (4) point_pair                                         @> 
+
+@*3 \§bool-point tertiary> $\longrightarrow$ \§point pair>
+\.{INTERSECTION\_POINT} \§point pair>.
+\initials{LDF 2022.04.12.}
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG
+ 
+@q ***** (5) Definition.@> 
+
+@<Define rules@>= 
+@=bool_point_tertiary: point_pair INTERSECTION_POINT point_pair@>@/
+{
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+      cerr << "*** Parser: Rule `bool_point_tertiary: point_pair INTERSECTION_POINT point_pair'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+  Pointer_Vector<Point> *pv0 = static_cast<Pointer_Vector<Point>*>(@=$1@>); 
+  Pointer_Vector<Point> *pv1 = static_cast<Pointer_Vector<Point>*>(@=$3@>);     
+
+  if (   pv0 == 0 || pv1 == 0 || pv0->v.size() < 2 || pv1->v.size() < 2 
+      || pv0->v[0] == 0 || pv0->v[1] == 0 || pv1->v[0] == 0 || pv1->v[1] == 0)
+  {
+     delete pv0;
+     delete pv1;
+     pv0 = pv1 = 0;
+     Bool_Point *bp = create_new<Bool_Point>(INVALID_BOOL_POINT);
+     @=$$@> =  static_cast<void*>(bp);  
+  }
+  else
+  {
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+         cerr << "In parser: rule `bool_point_tertiary: point_pair "
+              << "INTERSECTION_POINT point_pair':"
+              << endl;
+
+         pv0->show("*pv0:");
+         pv1->show("*pv1:");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+     Path *p0 = create_new<Path>(0);
+     Path *p1 = create_new<Path>(0);
+
+     *p0 += *(pv0->v[0]);
+     *p0 += *(pv0->v[1]);
+     *p0 += "--";
+
+     *p1 += *(pv1->v[0]);
+     *p1 += *(pv1->v[1]);
+     *p1 += "--";
+
+     delete pv0;
+     delete pv1;
+     pv0 = pv1 = 0;
+
+     @=$$@> = Scan_Parse::intersection_points_func<Path, Path, Bool_Point>(
+                   p0, p1, parameter);
+
+  }  /* |else|  */
 
 };
 
