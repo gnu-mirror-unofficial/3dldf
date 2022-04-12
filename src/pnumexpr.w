@@ -4529,7 +4529,7 @@ Added this rule.
 #if DEBUG_COMPILE
       if (DEBUG)
       { 
-          cerr << "ERROR!  In parser, rule `numeric_primary: MEDIATE "
+          cerr << "In parser, rule `numeric_primary: MEDIATE "
                << "LEFT_PARENTHESIS numeric_expression"
                << endl 
                << "COMMA numeric_expression RIGHT_PARENTHESIS':"
@@ -4641,7 +4641,7 @@ Added this rule.
 #if DEBUG_COMPILE
       if (DEBUG)
       { 
-          cerr << "ERROR!  In parser, rule `numeric_primary: MEDIATE "
+          cerr << "In parser, rule `numeric_primary: MEDIATE "
                << "LEFT_PARENTHESIS numeric_expression"
                << endl 
                << "COMMA numeric_expression COMMA numeric_expression "
