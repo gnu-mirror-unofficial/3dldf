@@ -52,6 +52,39 @@
 
 %% * (1) New sample code.
 
+%% ** (2)
+
+%% bool_point_tertiary: point_pair INTERSECTION_POINT point_pair:
+%% Example:  p4 := (p0, p1) intersectionpoint (p2, p3);
+%% (p0, p1) are essentially converted within the parser rule to
+%% (p0 -- p1) and (p2 -- p3), respectively.
+%% LDF 2022.04.12.
+
+point p[];
+
+beginfig(0); 
+  p0 := (2cm, 0cm);
+  p1 := (2cm, 2cm);
+  p2 := (1cm, 1cm);
+  p3 := (3cm, 1cm);
+
+  draw p0 -- p1;
+  draw p2 -- p3;
+
+  p4 := (p0, p1) intersectionpoint (p2, p3);
+
+  dotlabel.urt("$p_4$", p4);
+  
+  message "p4:";
+  show p4;
+  
+endfig with_projection parallel_x_y;
+verbatim_metapost "end;";
+end;
+
+
+%% ** (2)
+
 numeric a[];
 point p[];
 path  q[];
