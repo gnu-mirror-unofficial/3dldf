@@ -3184,6 +3184,47 @@ Removed all debugging code.
 
 };
 
+
+@q ***** (5) path_assignment --> path_variable ASSIGN point_pair.@>   
+
+@*4 \§path assignment> $\longrightarrow$ \§path variable> 
+\.{ASSIGN} \§point pair>. 
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+ 
+@=path_assignment: path_variable ASSIGN point_pair@>
+{
+  
+  Path* q = create_new<Path>(0);
+
+  Pointer_Vector<Point> *pv = static_cast<Pointer_Vector<Point>*>(@=$3@>);
+
+  if (pv->size() >= 2 && pv->v[0] != 0 && pv->v[1] != 0)
+  {
+      Point p0 = *(pv->v[0]);
+      Point p1 = *(pv->v[1]);
+
+      *q += p0;
+      *q += p1;
+      *q += "--";
+  } 
+
+  delete pv;
+  pv = 0;
+
+  Int_Void_Ptr ivp = assign_simple<Path>(static_cast<Scanner_Node>(parameter),
+                                         "Path",
+                                         @=$1@>,
+                                         q);
+  @=$$@> = ivp.v;
+
+};
+
 @q ***** (5) path_assignment --> path_variable := circle_expression.@>   
 
 @*4 \§path assignment> $\longrightarrow$ \§path variable> 
