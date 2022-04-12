@@ -218,6 +218,55 @@ Added this rule.
 
 };
 
+@*3 \§command> $\longrightarrow$ \.{BEGINCHAR} $\ldots$.
+\initials{LDF 2022.04.12.}
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG
+
+@q ***** (5) Definition.@> 
+ 
+@<Define rules@>= 
+  
+@=command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA@>@/
+@=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
+@=RIGHT_PARENTHESIS character_comment_optional@>@/
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
+                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                << "RIGHT_PARENTHESIS character_comment_optional'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      cerr << "$5 == " << @=$5@> << endl
+           << "$7 == " << @=$7@> << endl
+           << "$9 == " << @=$9@> << endl;
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   int i = @=$3@>;
+
+   stringstream temp_strm;
+
+   temp_strm << i;
+
+   Scan_Parse::beginfig_func(scanner_node, 0, true, temp_strm.str(), @=$5@>, @=$7@>, @=$9@>);
+
+   @=$$@> = static_cast<void*>(0);
+
+};
+
 @q *** (3) character_comment_optional.@>   
 @*2 \§character comment optional>.
 \initials{LDF 2005.06.11.}
