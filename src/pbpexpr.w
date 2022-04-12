@@ -496,6 +496,206 @@ Added this rule.
 
 };
 
+@q **** (4) bool_point_tertiary: point_pair INTERSECTION_POINT @> 
+@q **** (4) path_secondary                                     @> 
+
+@*3 \§bool-point tertiary> $\longrightarrow$ \§point pair> \.{INTERSECTION\_POINT} 
+\§path secondary>.
+\initials{LDF 2022.04.12.}
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG
+ 
+@q ***** (5) Definition.@> 
+
+@<Define rules@>= 
+@=bool_point_tertiary: point_pair INTERSECTION_POINT path_secondary@>@/
+{
+@q ****** (6) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+  {
+      cerr << "*** Parser: Rule `bool_point_tertiary: point_pair INTERSECTION_POINT "
+           << "path_secondary'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ****** (6) @>
+
+  Pointer_Vector<Point> *pv = static_cast<Pointer_Vector<Point>*>(@=$1@>); 
+  Path *q = static_cast<Path*>(@=$3@>);     
+
+@q ****** (6) @>
+
+  if (   pv == 0 || q == 0 || pv->v.size() < 2 || q->points.size() < 2 
+      || pv->v[0] == 0 || pv->v[1] == 0 || q->points[0] == 0 || q->points[1] == 0)
+  {
+     delete pv;
+     delete q;
+     pv = 0;
+     q = 0;
+     Bool_Point *bp = create_new<Bool_Point>(INVALID_BOOL_POINT);
+     @=$$@> =  static_cast<void*>(bp);  
+  }
+
+@q ****** (6) @>
+
+  else
+  {
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+         cerr << "In parser: rule `bool_point_tertiary: point_pair "
+              << "INTERSECTION_POINT path_secondary':"
+              << endl;
+
+         pv->show("*pv:");
+         q->show("*q:");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+@q ******* (7) @>
+
+@ I could just push the pointers onto |p| but then I couldn't delete
+|pv|.  This way isn't better, I just think it looks neater.
+!! TODO:  Change this?
+\initials{LDF 2022.04.12.}
+
+@<Define rules@>= 
+
+     Path *p = create_new<Path>(0);
+
+     *p += *(pv->v[0]);
+     *p += *(pv->v[1]);
+     *p += "--";
+
+     delete pv;
+
+     pv = 0;
+
+     @=$$@> = Scan_Parse::intersection_points_func<Path, Path, Bool_Point>(p, 
+                                                                           q, 
+                                                                           parameter);
+
+@q ******* (7) @>
+
+  }  /* |else|  */
+
+@q ****** (6) @>
+
+};
+
+@q **** (4) bool_point_tertiary: path_tertiary INTERSECTION_POINT @> 
+@q **** (4) point_pair                                            @> 
+
+@*3 \§bool-point tertiary> $\longrightarrow$ \§path tertiary> \.{INTERSECTION\_POINT} 
+\§point pair>.
+\initials{LDF 2022.04.12.}
+
+\LOG
+\initials{LDF 2022.04.12.}
+Added this rule.
+\ENDLOG
+ 
+@q ***** (5) Definition.@> 
+
+@<Define rules@>= 
+@=bool_point_tertiary: path_tertiary INTERSECTION_POINT point_pair@>@/
+{
+@q ****** (6) @>
+
+  @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = false; /* |true| */ @; 
+  if (DEBUG)
+  {
+      cerr << "*** Parser: Rule `bool_point_tertiary: path_tertiary INTERSECTION_POINT "
+           << "point_pair'."
+           << endl;
+  }
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ****** (6) @>
+
+  Pointer_Vector<Point> *pv = static_cast<Pointer_Vector<Point>*>(@=$3@>); 
+  Path *q = static_cast<Path*>(@=$1@>);     
+
+@q ****** (6) @>
+
+  if (   pv == 0 || q == 0 || pv->v.size() < 2 || q->points.size() < 2 
+      || pv->v[0] == 0 || pv->v[1] == 0 || q->points[0] == 0 || q->points[1] == 0)
+  {
+     delete pv;
+     delete q;
+     pv = 0;
+     q = 0;
+     Bool_Point *bp = create_new<Bool_Point>(INVALID_BOOL_POINT);
+     @=$$@> =  static_cast<void*>(bp);  
+  }
+
+@q ****** (6) @>
+
+  else
+  {
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+     if (DEBUG)
+     { 
+         cerr << "In parser: rule `bool_point_tertiary: path_tertiary "
+              << "INTERSECTION_POINT point_pair':"
+              << endl;
+
+         pv->show("*pv:");
+         q->show("*q:");
+
+     }  
+#endif /* |DEBUG_COMPILE|  */@;         
+
+@q ******* (7) @>
+
+@ I could just push the pointers onto |p| but then I couldn't delete
+|pv|.  This way isn't better, I just think it looks neater.
+!! TODO:  Change this?
+\initials{LDF 2022.04.12.}
+
+@<Define rules@>= 
+
+     Path *p = create_new<Path>(0);
+
+     *p += *(pv->v[0]);
+     *p += *(pv->v[1]);
+     *p += "--";
+
+     delete pv;
+
+     pv = 0;
+
+     @=$$@> = Scan_Parse::intersection_points_func<Path, Path, Bool_Point>(p, 
+                                                                           q, 
+                                                                           parameter);
+
+@q ******* (7) @>
+
+  }  /* |else|  */
+
+@q ****** (6) @>
+
+};
+
+
+
 @q **** (4) bool_point_tertiary: path_tertiary INTERSECTION_POINT @> 
 @q **** (4) path_secondary                                        @> 
 
