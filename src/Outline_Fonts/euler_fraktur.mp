@@ -460,7 +460,7 @@ beginfig(104);
     currentpicture := w4 reflectedabout((0, -1), (0, 1));
 endfig;
 
-%% *** (3) Fig. 5, T-W
+%% *** (3) Fig. 5, T--W
 
 beginfig(5);
   pickup medium_pen;
