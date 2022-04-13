@@ -898,7 +898,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -923,6 +923,56 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+@q **** (4) Handle the case that the form of output corresponding @>
+@q **** (4) to |begin_command| isn't enabled. @>
+
+@ Handle the case that the form of output corresponding to |begin_command| isn't enabled.
+\initials{LDF 2022.04.13.}
+
+\LOG
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+   if (   (begin_command == Scan_Parse::BEGINCHAR_COMMAND && !metafont_output)
+       || (begin_command == Scan_Parse::BEGINFIG_COMMAND && !metapost_output)) 
+   {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr_strm << thread_name
+                    << "In `Scan_Parse::beginfig_func':"
+                    << endl 
+                    << "Called `beginchar' and not performing METAPOST output or"
+                    << endl 
+                    << "called `beginfig' and not performing MetaPost output."
+                    << endl
+                    << "`begin_command' == ";
+
+          if (begin_command == Scan_Parse::BEGINCHAR_COMMAND)
+             cerr_strm << "Scan_Parse::BEGINCHAR_COMMAND" << endl;
+          else if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
+             cerr_strm << "Scan_Parse::BEGINFIG_COMMAND" << endl;
+
+          cerr_strm << "`metafont_output' == " << metafont_output << endl 
+                    << "`metapost_output' == " << metapost_output << endl;
+
+          cerr_strm << "This is normal behavior:  these commands are ignored "
+                    << "when not performing the corresponding form of output."
+                    << endl 
+                    << "Exiting function successfully with return value 2."
+                    << endl;
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+     
+       return 2;
+
+   }  /* |if|  */
 
 @q **** (4).@>
 @
@@ -1266,6 +1316,10 @@ Added this section.
 \ENDLOG 
 @<Define |Scan_Parse| functions@>=
 
+
+cerr << "scanner_node->beginfig_flag == " << scanner_node->beginfig_flag << endl;
+cerr << "scanner_node->beginchar_flag == " << scanner_node->beginchar_flag << endl;
+
     if (scanner_node->beginfig_flag || scanner_node->beginchar_flag)
     {
 #if DEBUG_COMPILE
@@ -1285,8 +1339,6 @@ Added this section.
 
         goto AFTER_CLEAR;
     }
-
-
 
     current_picture_entry = scanner_node->lookup("current_picture");
 
@@ -1385,9 +1437,7 @@ This is just for insurance.  No other threads should be able to access |current_
        return 1;
    }
 
-
 AFTER_CLEAR:
-
 
 @q **** (4) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
@@ -1617,6 +1667,174 @@ Added this section.
   return 0;
 
 } /* End of |Scan_Parse::beginfig_func| definition  */
+
+@q *** (3) Clear |current_picture|.  @>
+@ Clear |current_picture|.  
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Definition @>
+@
+@<Define |Scan_Parse| functions@>=
+int
+Scan_Parse::clear_current_picture(void)
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+
+   bool DEBUG = true; /* |false| */ 
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
+   string thread_name      = "";
+
+   using namespace Scan_Parse;
+
+   int status;
+
+
+
+   using namespace Scan_Parse;
+ 
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "Entering `Scan_Parse::clear_current_picture'.";
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+       Id_Map_Entry_Node current_picture_entry = scanner_node->lookup("current_picture"); 
+
+@q ***** (5) Error handling:  |current_picture| not found.@>
+
+@ Error handling:  |current_picture| not found.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+    if (   current_picture_entry == static_cast<Id_Map_Entry_Node>(0) 
+        || current_picture_entry->object == static_cast<void*>(0))
+    {
+
+        cerr_strm << thread_name << "ERROR! In `Scan_Parse::clear_current_picture':"
+                  << endl << "`current_picture' not found. "
+                  << "Exiting function with return value 1."; 
+      
+        cerr_message(cerr_strm, error_stop_value);
+        cerr_strm.str("");
+
+        return 1;
+
+    } /* |if (current_picture_entry == 0 && current_picture_entry->object == 0)|  */
+
+@q ***** (5) Lock |current_picture_entry|. Exit on error.@>
+
+@ Lock |current_picture_entry|. Exit on error.
+This is just for insurance.  No other threads should be able to access |current_picture_entry| at this time.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << "Trying to lock `current_picture_entry'.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = current_picture_entry->lock();
+
+   if (status != 0)
+   {
+
+       cerr_strm << thread_name << "ERROR! In `Scan_Parse::clear_current_picture':"
+                 << endl << "`current_picture_entry->lock()' failed. "
+                 << "Exiting function with return value 1."; 
+     
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       return 1;
+       
+   }
+
+@q ****** (6) Success!  Clearing |current_picture|.@>
+
+@ Success!  Clearing |current_picture|.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+   static_cast<Picture*>(current_picture_entry->object)->clear();
+
+@q ****** (6) Unlock |current_picture_entry|. Exit on error.@>
+
+@ Unlock |current_picture_entry->mutex|. Exit on error.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << "Trying to unlock `current_picture_entry'.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = current_picture_entry->unlock();
+
+   if (status != 0)
+   {
+
+       cerr_strm << thread_name << "ERROR! In `Scan_Parse::clear_current_picture':"
+                 << endl << "`current_picture_entry->unlock()' failed. "
+                 << "Exiting function with return value 1."; 
+       
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       return 1;
+   }
+
+@q ***** (5) @>
+@
+@<Define |Scan_Parse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "Exiting `Scan_Parse::clear_current_picture' "
+                 << "successfully with return value 0."; 
+       
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+    
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+   return 0;
+
+}  /* End of |Scan_Parse::clear_current_picture| definition  */  
+
+
+
 
 @q *** (3) |output_func|.@>
 @*3 {\bf output\_func}.
@@ -2440,12 +2658,6 @@ int
 Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg)
 {
 
-/* !!START HERE:  LDF 2022.04.13.  Get rid of |do_metafont| arg.
-   Keep track of whether endchar or endfig was called.
-   Enable output to both MF and MP files.
-*/ 
-
-
 @q ***** (5) Get thread information and set |thread_name|.@>
 
 @ Get thread information and set |thread_name|.
@@ -2474,7 +2686,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
 @<Define |Scan_Parse| functions@>=
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << thread_name
@@ -2484,6 +2696,62 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@; 
+
+
+@q ***** (5) Handle the case that the form of output corresponding @>
+@q ***** (5) to |output_command_arg| isn't enabled. @>
+
+@ Handle the case that the form of output corresponding to |output_command_arg| isn't enabled.
+\initials{LDF 2022.04.13.}
+
+\LOG
+Added this section.
+\ENDLOG 
+
+@<Define |Scan_Parse| functions@>=
+
+   if (   (output_command_arg == Scan_Parse::ENDCHAR_COMMAND && !metafont_output)
+       || (output_command_arg == Scan_Parse::ENDFIG_COMMAND && !metapost_output)) 
+   {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+          cerr_strm << thread_name
+                    << "In `Scan_Parse::output_command_func':"
+                    << endl 
+                    << "Called `endchar' and not performing METAPOST output or"
+                    << endl 
+                    << "called `endfig' and not performing MetaPost output."
+                    << endl
+                    << "`output_command_arg' == ";
+
+          if (output_command_arg == Scan_Parse::ENDCHAR_COMMAND)
+             cerr_strm << "Scan_Parse::ENDCHAR_COMMAND" << endl;
+          else if (output_command_arg == Scan_Parse::ENDFIG_COMMAND)
+             cerr_strm << "Scan_Parse::ENDFIG_COMMAND" << endl;
+
+          cerr_strm << "`metafont_output' == " << metafont_output << endl 
+                    << "`metapost_output' == " << metapost_output << endl;
+
+          cerr_strm << "This is normal behavior:  these commands are ignored "
+                    << "when not performing the corresponding form of output."
+                    << endl 
+                    << "Exiting function successfully with return value 2."
+                    << endl;
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+       }  
+#endif /* |DEBUG_COMPILE|  */@; 
+     
+       return 2;
+
+   }  /* |if|  */
+
+@q ***** (5) @>
+@
+@<Define |Scan_Parse| functions@>=
+
 
    int status;
    bool multithread_output  = scanner_node->run_state.multithread_output;
