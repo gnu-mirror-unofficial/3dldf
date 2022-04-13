@@ -5644,7 +5644,7 @@ Scanner_Type::clear_current_picture(void)
 
 #if DEBUG_COMPILE
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -5681,8 +5681,9 @@ Scanner_Type::clear_current_picture(void)
     {
 
         cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
-                  << endl << "`current_picture' not found. "
-                  << "Exiting function with return value 1."; 
+                  << endl 
+                  << "`current_picture' not found. "
+                  << "Exiting function unsuccessfully with return value 1."; 
       
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
@@ -5690,6 +5691,31 @@ Scanner_Type::clear_current_picture(void)
         return 1;
 
     } /* |if (current_picture_entry == 0 && current_picture_entry->object == 0)|  */
+
+
+@q ***** (5) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+    if (static_cast<Picture*>(current_picture_entry->object)->is_empty())
+    {
+#if DEBUG_COMPILE
+       if (DEBUG)
+       { 
+            cerr_strm << thread_name << "In `Scanner_Type::clear_current_picture':"
+                      << endl 
+                      << "`current_picture' is empty.  Not clearing."
+                      << endl 
+                      << "Exiting function successfully with return value 0."; 
+      
+            cerr_message(cerr_strm, error_stop_value);
+            cerr_strm.str("");
+
+       }   
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       return 0;
+    }
 
 @q ***** (5) Lock |current_picture_entry|. Exit on error.@>
 

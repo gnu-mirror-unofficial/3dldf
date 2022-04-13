@@ -301,7 +301,7 @@ option.
 
 @<GCC command line option processing@>=
 {
-  bool DEBUG = true; /* |false| */ 
+  bool DEBUG = false; /* |true| */ 
   int option_ctr;
   int digit_optind = 0;
  
@@ -1621,6 +1621,8 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
       }
       else
       {
+
+/* !!START HERE:  LDF 2022.04.13.  Make it possible to have MF and MP output simultaneously.  */ 
 
          /* !! TODO:  Add code for other output formats, PNG, SVG, etc.
             \initials{LDF 2022.04.11.} */
