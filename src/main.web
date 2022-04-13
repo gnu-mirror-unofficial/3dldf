@@ -1585,6 +1585,7 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
 \ENDLOG 
 
 @<Main@>=
+
   if ( vector_size  == 0)
     {
 
@@ -1824,7 +1825,7 @@ annoying error messages from glibc.
 @<Main@>=
 
           for (int i = 0; i < vector_size; ++i)
-            {
+          {
 #if DEBUG_COMPILE
                 if (DEBUG)
                   {   
@@ -1833,59 +1834,31 @@ annoying error messages from glibc.
                   }
 #endif /* |DEBUG_COMPILE|  */@;
 
-yyparse_return_value
-                  = yyparse(static_cast<void*>(scanner_node_vector[i]));
+                  yyparse_return_value = yyparse(
+                                            static_cast<void*>(
+                                               scanner_node_vector[i]));
 
-           if (yyparse_return_value != 0)
-              {
-                 cerr_strm << thread_name << "ERROR! In `main()':"
-                           << endl << "`yyparse()' returned " 
-                           << yyparse_return_value << ".";
-
-                 log_message(cerr_strm);
-                 cerr_message(cerr_strm);
-                 cerr_strm.str("");
-
-#ifdef HAVE_PTHREAD_H  
-
-                 pthread_exit(0);
-
-#else
-
-                 return (1);
-
-#endif /* |HAVE_PTHREAD_H|  */@; 
-
-              } /* |if (yyparse_return_value != 0)|  */
-
-#if 0 
-           do 
-             {
-                yyparse_return_value
-                  = yyparse(static_cast<void*>(scanner_node_vector[i]));
-
-if (yyparse_return_value != 0)
+                  if (yyparse_return_value != 0)
                   {
                      cerr_strm << thread_name << "ERROR! In `main()':"
                                << endl << "`yyparse()' returned " 
-                               << yyparse_return_value << ". "
-                               << "Calling `yyparse()' again.";
+                               << yyparse_return_value << ".";
 
-                      log_message(cerr_strm);
-                      cerr_message(cerr_strm);
-                      cerr_strm.str("");
+                     log_message(cerr_strm);
+                     cerr_message(cerr_strm);
+                     cerr_strm.str("");
 
-} /* |if (yyparse_return_value != 0)|  */
+#ifdef HAVE_PTHREAD_H  
+                     pthread_exit(0);
+#else
+                     return (1);
+#endif /* |HAVE_PTHREAD_H|  */@; 
 
-            } /* |do|  */
+                  } /* |if (yyparse_return_value != 0)|  */
 
-           while (yyparse_return_value != 0);
+                  delete scanner_node_vector[i];
 
-#endif 
-             
-           delete scanner_node_vector[i];
-
-         } /* |for|  */@;
+          } /* |for|  */@;
 
       } /* |else| (|!run_state_initial.multithread_input|)  */
 
