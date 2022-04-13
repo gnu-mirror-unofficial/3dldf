@@ -2548,7 +2548,12 @@ Added |friend| declaration for |class Rhombic_Triacontahedron|.
 
   friend class Point;
 
-  friend int Scan_Parse::box_or_circle_text_func(int, Scanner_Node, Path *, Point *, Pointer_Vector<real> *, Transform *);
+  friend int Scan_Parse::box_or_circle_text_func(int, 
+                                                 Scanner_Node,  
+                                                 Path *, 
+                                                 Point *, 
+                                                 Pointer_Vector<real> *, 
+                                                 Transform *);
 
   @<|friend| declarations for functions in |namespace Scan_Parse|@>@;
 
@@ -2593,6 +2598,9 @@ Added |vector <real> numeric_list_real_vector|.
   Run_State run_state;
 
   bool in_macro_call_flag;
+
+  bool beginfig_flag;
+  bool beginchar_flag;
 
 #ifdef HAVE_PTHREAD_H  
 

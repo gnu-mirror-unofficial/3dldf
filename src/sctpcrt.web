@@ -251,6 +251,7 @@ Scanner_Type::create(string str,
 #endif
 
 
+
 @q ** (2) Set up input and output streams.@>      
 
 @*1  Set up input and output streams.
@@ -580,6 +581,9 @@ Now setting |scanner_node->ulong_long_switch| to |false|.
 @<Define |Scanner_Type::create|@>=
 
   Scanner_Node scanner_node = new Scanner_Type;
+
+  scanner_node->beginfig_flag  = false;
+  scanner_node->beginchar_flag = false;
 
   scanner_node->run_state = r;
   scanner_node->thread_info = 0;
