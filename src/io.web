@@ -1612,12 +1612,12 @@ typedef Id_Map_Type* Id_Map_Node;
 @*1 Declare {\bf Id\_Map\_Type}.
 
 \LOG
-\initials{LDF 2004.04.16.}  Moved to this file from
-\filename{scanprse.web}. 
+\initials{LDF 2004.04.16.}  
+Moved to this file from \filename{scanprse.web}. 
 
-\initials{LDF 2004.04.20.}  Changed |Id_Map_Node| to |Id_Map_Type| and made 
-|Id_Map_Node| a pointer type that points to |Id_Map_Type| using
-|typedef| (see above).
+\initials{LDF 2004.04.20.}  
+Changed |Id_Map_Node| to |Id_Map_Type| and made |Id_Map_Node| a pointer type 
+that points to |Id_Map_Type| using |typedef| (see above).
 
 \initials{LDF Undated.  Probably 2004.07.03.}
 Declared |Scanner_Type| to be a |friend|.
@@ -1625,8 +1625,8 @@ Declared |Scanner_Type| to be a |friend|.
 \initials{LDF 2004.04.16.}  Moved to this file from
 \filename{scanprse.web}. 
 
-\initials{LDF 2004.04.20.}  Changed |Id_Map_Type| from a
-|struct| to a |class|.
+\initials{LDF 2004.04.20.}  
+Changed |Id_Map_Type| from a |struct| to a |class|.
 
 \initials{LDF 2004.07.22.} 
 Added |friend| declaration for |Scan_Parse::shape_decl_func|.
@@ -1952,8 +1952,7 @@ Added |vector<string> suffix_vector|.
 Added |size_t skip_value|.
 
 \initials{LDF 2005.01.19.}
-Changed |vector<string> suffix_vector| to 
-|list<string> suffix_list|.
+Changed |vector<string> suffix_vector| to |list<string> suffix_list|.
 
 \initials{LDF 2005.01.19.}
 Added |string suffix_parameter|.
@@ -2073,8 +2072,7 @@ No longer setting |real start_value| to 0, because I've removed it.
 Now clearing |suffix_vector|.  Not that it's really necessary.
 
 \initials{LDF 2005.01.19.}
-Changed |vector<string> suffix_vector| to 
-|list<string> suffix_list|.
+Changed |vector<string> suffix_vector| to |list<string> suffix_list|.
 \ENDLOG
 
 @q ***** (5) Declaration.@>
@@ -2991,14 +2989,14 @@ Added this function declaration.
 \initials{LDF 2004.04.16.}  Moved to this file from
 \filename{scanprse.web}. 
 
-\initials{LDF 2004.04.16.}  Changed |metafont_output|, |png_output|, and
-|libplot_output| to |do_output[Run_State::METAFONT]|,
-|do_output[Run_State::PNG]|, and |do_output[Run_State::LIBPLOT]|,
-respectively.  
+\initials{LDF 2004.04.16.}  
+Changed |metafont_output|, |png_output|, and |libplot_output| to 
+|do_output[Run_State::METAFONT]|, |do_output[Run_State::PNG]|, and 
+|do_output[Run_State::LIBPLOT]|, respectively.  
 
-\initials{LDF 2004.04.16.}  Moved definition to
-\filename{colors.web}.  This was necessary because it now calls
-|Color::initialize_colors| to write the |Color| definitions to the
+\initials{LDF 2004.04.16.}  
+Moved definition to \filename{colors.web}.  This was necessary because it 
+now calls |Color::initialize_colors| to write the |Color| definitions to the
 MetaPost output file.
 
 \initials{LDF 2004.04.20.}  Added |bool top_level| argument.  If it's
@@ -3093,10 +3091,10 @@ operator=(const Scanner_Type& s);
 \initials{LDF 2004.04.16.}  Moved to this file from
 \filename{scanprse.web}. 
 
-\initials{LDF 2004.04.16.}  Changed |metafont_output|, |png_output|, and
-|libplot_output| to |do_output[Run_State::METAFONT]|,
-|do_output[Run_State::PNG]|, and |do_output[Run_State::LIBPLOT]|,
-respectively.  
+\initials{LDF 2004.04.16.}  
+Changed |metafont_output|, |png_output|, and |libplot_output| to 
+|do_output[Run_State::METAFONT]|, |do_output[Run_State::PNG]|, and 
+|do_output[Run_State::LIBPLOT]|, respectively.  
 \ENDLOG 
 
 @<Declare |Scanner_Type| functions@>=
@@ -3381,10 +3379,12 @@ Scanner_Type::is_open_in() const
 @*4 Get input filename.
 
 \LOG
-\initials{LDF 2004.04.20.}  Added this function.
+\initials{LDF 2004.04.20.}  
+Added this function.
 
-\initials{LDF 2004.04.20.}  Added error handling and debugging code.
-Added |silent| argument.  Changed return type from |const string&| to
+\initials{LDF 2004.04.20.}  
+Added error handling and debugging code. Added |silent| argument.  
+Changed return type from |const string&| to
 |const string|.   This was necessary in order to be able to return the
 empty |string| if |in| is a null pointer.
 \ENDLOG 
