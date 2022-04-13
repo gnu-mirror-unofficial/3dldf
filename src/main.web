@@ -301,7 +301,7 @@ option.
 
 @<GCC command line option processing@>=
 {
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
   int option_ctr;
   int digit_optind = 0;
  
@@ -331,10 +331,20 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short ASTRONOMY_INDEX            = 10;
   const unsigned short STARS_LIMIT_INDEX          = 11;
   const unsigned short OUTPUT_FILENAME_INDEX      = 12;
-  const unsigned short METAFONT_OUTPUT_INDEX      = 13;
-  const unsigned short MF_OUTPUT_INDEX            = 14;
-  const unsigned short METAPOST_OUTPUT_INDEX      = 15;
-  const unsigned short MP_OUTPUT_INDEX            = 16;
+  const unsigned short METAFONT_INDEX             = 13;
+  const unsigned short MF_INDEX                   = 14;
+  const unsigned short METAFONT_ONLY_INDEX        = 15;
+  const unsigned short MF_ONLY_INDEX              = 16;
+  const unsigned short MFONLY_INDEX               = 17;
+  const unsigned short NO_METAFONT_INDEX          = 18;
+  const unsigned short NO_MF_INDEX                = 19;
+  const unsigned short METAPOST_INDEX             = 20;
+  const unsigned short MP_INDEX                   = 21;
+  const unsigned short METAPOST_ONLY_INDEX        = 22;
+  const unsigned short MP_ONLY_INDEX              = 23;
+  const unsigned short MPONLY_INDEX               = 24;
+  const unsigned short NO_METAPOST_INDEX          = 25;
+  const unsigned short NO_MP_INDEX                = 26;
 
 @q *** Option struct.@>
 @ Option struct.
@@ -360,10 +370,20 @@ Added the ``\.{--quiet}'' option.
     {"astronomy", 0, 0, 0},
     {"stars-limit", 1, 0, 0},
     {"output-filename", 1, 0, 0},
-    {"metafont-output", 0, 0, 0},
-    {"mf-output", 0, 0, 0},
-    {"metapost-output", 0, 0, 0},
-    {"mp-output", 0, 0, 0},
+    {"metafont", 0, 0, 0},      
+    {"mf", 0, 0, 0},            
+    {"metafont-only", 0, 0, 0},        
+    {"mf-only", 0, 0, 0},
+    {"mfonly", 0, 0, 0},              
+    {"no-metafont", 0, 0, 0},          
+    {"no-mf", 0, 0, 0},                
+    {"metapost", 0, 0, 0},      
+    {"mp", 0, 0, 0},            
+    {"metapost-only", 0, 0, 0},        
+    {"mp-only", 0, 0, 0},              
+    {"mponly", 0, 0, 0},              
+    {"no-metapost", 0, 0, 0},          
+    {"no-mp", 0, 0, 0},                
     {0, 0, 0, 0}
   };
   
@@ -478,14 +498,14 @@ Edited the output.
                  << "                         and standard error when "
                  << "`3dldf' is run."
                  << endl << endl
-                 << "--verbose:               Causes status information to be "
-                 << "printed to standard output" << endl 
+                 << "--verbose:               Causes status information to be printed to standard output" 
+                 << endl 
                  << "                         when `3dldf' is run."
                  << endl << endl 
-                 << "--version:               Prints the version number of "
-                 << "GNU 3DLDF" << endl 
-                 << "                         to standard output and exits with "
-                 << "return value 0." << endl << endl 
+                 << "--version:               Prints the version number of GNU 3DLDF to standard output"
+                 << endl 
+                 << "                         and exits with return value 0." 
+                 << endl << endl 
                  << "--database:              Enables the use of the MySQL databases."
                  << endl << endl 
                  << "--astronomy:             Enables the features of GNU 3DLDF pertaining to astronomy."
@@ -493,6 +513,30 @@ Edited the output.
                  << "--stars-limit:           Sets the limit for the number of stars to be read from the database."
                  << endl << endl 
                  << "--output-filename:       Sets the output filename."
+                 << endl << endl 
+                 << "--metafont and --mf:     Enable METAFONT output."
+                 << endl << endl 
+                 << "--metafont-only and"
+                 << endl 
+                 << "--mf-only and"
+                 << endl 
+                 << "--mfonly:                 Enable METAFONT output and disable MetaPost output."
+                 << endl << endl 
+                 << "--no-metafont and"
+                 << endl 
+                 << "--no-mf:                 Disable METAFONT output."
+                 << endl << endl 
+                 << "--metapost and --mp:     Enable METAPOST output."
+                 << endl << endl 
+                 << "--metapost-only and"
+                 << endl 
+                 << "--mp-only and"
+                 << endl 
+                 << "--mponly:                Enable MetaPost output and disable METAFONT output."
+                 << endl << endl 
+                 << "--no-metapost and"
+                 << endl 
+                 << "--no-mp:                 Disable MetaPost output."
                  << endl << endl; 
 
 #if DEBUG_COMPILE
@@ -765,49 +809,140 @@ Added the ``\.{output\_filename}'' option.
             output_filename = optarg;
         }
 
-@q **** (4) metafont-output and mf-output.@>
-@ metafont-output and mf-output.
+@q **** (4) metafont and mf.@>
+@ metafont and mf.
 \initials{LDF 2022.04.11.}
 
 \LOG
 \initials{LDF 2022.04.11.}
-Added the ``\.{metafont-output}'' and ``\.{mf-output}'' options.
+Added the ``\.{metafont}'' and ``\.{mf}'' options.
 \ENDLOG 
 
 @<GCC command line option processing@>=
 
-        else if (option_index == METAFONT_OUTPUT_INDEX || option_index == MF_OUTPUT_INDEX)
+        else if (option_index == METAFONT_INDEX || option_index == MF_INDEX)
         {
 
             cerr << "Setting global variable `bool metafont_output' to `true'." << endl;
 
             metafont_output = true;
-            metapost_output = false;
-            run_state_initial.do_output[Run_State::METAPOST] = false;
             run_state_initial.do_output[Run_State::METAFONT] = true;
         }
 
-@q **** (4) metapost-output and mp-output.@>
-@ metapost-output and mp-output.
-\initials{LDF 2022.04.11.}
+@q **** (4) metafont-only and mf-only.@>
+@ metafont-only and mf-only.
+\initials{LDF 2022.04.13.}
 
 \LOG
-\initials{LDF 2022.04.11.}
-Added the ``\.{metapost-output}'' and ``\.{mp-output}'' options.
+\initials{LDF 2022.04.13.}
+Added this section.
 \ENDLOG 
 
 @<GCC command line option processing@>=
 
-        else if (option_index == METAPOST_OUTPUT_INDEX || option_index == MP_OUTPUT_INDEX)
+        else if (   option_index == METAFONT_ONLY_INDEX || option_index == MF_ONLY_INDEX 
+                 || option_index == MFONLY_INDEX)
+        {
+
+            cerr << "Setting global variable `bool metafont_output' to `true' "
+                 << "and `bool metapost_output' to `false'." 
+                 << endl;
+
+            metafont_output = true;
+            metapost_output = false;
+            run_state_initial.do_output[Run_State::METAFONT] = true;
+            run_state_initial.do_output[Run_State::METAPOST] = false;
+
+        }
+
+@q **** (4) no-metafont and no-mf.@>
+@ no-metafont and no-mf.
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this section.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == NO_METAFONT_INDEX || option_index == NO_MF_INDEX)
+        {
+
+            cerr << "Setting global variable `bool metafont_output' to `false'."
+                 << endl;
+
+            metafont_output = false;
+            run_state_initial.do_output[Run_State::METAFONT] = false;
+        }
+
+@q **** (4) metapost and mp.@>
+@ metapost and mp.
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added the ``\.{metapost}'' and ``\.{mp}'' options.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == METAPOST_INDEX || option_index == MP_INDEX)
         {
 
             cerr << "Setting global variable `bool metapost_output' to `true'." << endl;
 
             metapost_output = true;
-            metafont_output = false;
-            run_state_initial.do_output[Run_State::METAFONT] = false;
             run_state_initial.do_output[Run_State::METAPOST] = true;
         }
+
+@q **** (4) metapost-only and mp-only.@>
+@ metapost-only and mp-only.
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this section.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (   option_index == METAPOST_ONLY_INDEX || option_index == MP_ONLY_INDEX
+                 || option_index == MPONLY_INDEX)
+        {
+
+            cerr << "Setting global variable `bool metapost_output' to `true' "
+                 << "and `bool metapost_output' to `false'." 
+                 << endl;
+
+            metapost_output = true;
+            metapost_output = false;
+            run_state_initial.do_output[Run_State::METAPOST] = true;
+            run_state_initial.do_output[Run_State::METAFONT] = false;
+
+        }
+
+@q **** (4) no-metapost and no-mp.@>
+@ no-metapost and no-mp.
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this section.
+\ENDLOG 
+
+@<GCC command line option processing@>=
+
+        else if (option_index == NO_METAPOST_INDEX || option_index == NO_MP_INDEX)
+        {
+
+            cerr << "Setting global variable `bool metapost_output' to `false'."
+                 << endl;
+
+            metapost_output = false;
+            run_state_initial.do_output[Run_State::METAPOST] = false;
+        }
+
 
 @q **** (4) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
