@@ -1179,6 +1179,27 @@ Picture::rotate_label_positions(vector<real> &v)
 
 } /* End of |Picture::rotate_label_positions| definition  */
 
+
+@q * Is empty.@>
+@ Is empty.
+@^\cfunc{Picture}{is_empty}@>
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this function.
+\ENDLOG
+
+@q *** (3) Declaration @>
+
+@<Declare |Picture| functions@>=
+inline
+bool
+is_empty(void)
+{
+   return (shapes.empty() && labels.empty());
+}
+
+
 @q * Global variables@>
 @ Global variables.
 @<Global variables@>= 
