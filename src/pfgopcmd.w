@@ -83,11 +83,11 @@ possible to use |beginfig| in loops.
 
    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-   scanner_node->beginfig_flag  = true;
-
    int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
 
    Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
+
+   scanner_node->beginfig_flag  = true;
 
    @=$$@> = static_cast<void*>(0);
 
@@ -259,8 +259,6 @@ Added this rule.
 
    string *s = static_cast<string*>(@=$3@>);
 
-   scanner_node->beginchar_flag  = true;
-
    Scan_Parse::beginfig_func(scanner_node, 
                              0, 
                              Scan_Parse::BEGINCHAR_COMMAND, 
@@ -271,6 +269,8 @@ Added this rule.
 
    delete s;
    s = 0;
+
+   scanner_node->beginchar_flag  = true;
 
    @=$$@> = static_cast<void*>(0);
 
@@ -319,8 +319,6 @@ Added this rule.
 
    temp_strm << i;
 
-   scanner_node->beginchar_flag  = true;
-
    Scan_Parse::beginfig_func(scanner_node, 
                              0, 
                              Scan_Parse::BEGINCHAR_COMMAND, 
@@ -328,6 +326,8 @@ Added this rule.
                              @=$5@>, 
                              @=$7@>, 
                              @=$9@>);
+
+   scanner_node->beginchar_flag  = true;
 
    @=$$@> = static_cast<void*>(0);
 
@@ -425,7 +425,6 @@ Added this rule.
   scanner_node->beginchar_flag  = false;
  
   @=$$@> = static_cast<void*>(0);
-
  
 };
 
