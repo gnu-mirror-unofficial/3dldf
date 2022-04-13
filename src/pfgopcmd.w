@@ -77,17 +77,39 @@ possible to use |beginfig| in loops.
 @ 
 @<Define rules@>= 
   
-@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression@>@/
-@= RIGHT_PARENTHESIS@>@/
+@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS@>@/
 {
+   @<Common declarations for rules@>@;
 
-   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+   if (scanner_node->beginfig_flag)
+   {
+       cerr_strm << thread_name 
+          << "WARNING! In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
+          << "numeric_expression RIGHT_PARENTHESIS':" 
+          << endl 
+          << "`scanner_node->beginfig_flag' == `true'."
+          << endl 
+          << "Already collecting a figure.  Continuing."
+          << endl;
 
-   int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+   else
+   {
+      int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
 
-   Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
+      if (!scanner_node->beginchar_flag)
+      {
+         scanner_node->clear_current_picture();      
+      }
 
-   scanner_node->beginfig_flag  = true;
+      status = Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
+
+      scanner_node->beginfig_flag  = true;
+
+   }
 
    @=$$@> = static_cast<void*>(0);
 
@@ -209,7 +231,7 @@ Rewrote this rule.  It now calls |output_command_func|.
      scanner_node->clear_ptr = static_cast<void*>(c); 
      scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-     Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
+     status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
 
      scanner_node->beginfig_flag  = false;
   }
@@ -239,7 +261,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -257,20 +279,43 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   string *s = static_cast<string*>(@=$3@>);
+   if (scanner_node->beginchar_flag)
+   {
+       cerr_strm << thread_name 
+          << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
+                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                << "RIGHT_PARENTHESIS character_comment_optional':"
+          << endl 
+          << "`scanner_node->beginchar_flag' == `true'."
+          << endl 
+          << "Already collecting a character.  Continuing.";
 
-   Scan_Parse::beginfig_func(scanner_node, 
-                             0, 
-                             Scan_Parse::BEGINCHAR_COMMAND, 
-                             *s, 
-                             @=$5@>, 
-                             @=$7@>, 
-                             @=$9@>);
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+   else
+   {
+       string *s = static_cast<string*>(@=$3@>);
 
-   delete s;
-   s = 0;
+       if (!scanner_node->beginfig_flag)
+       {
+           scanner_node->clear_current_picture();      
+       }
 
-   scanner_node->beginchar_flag  = true;
+       status = Scan_Parse::beginfig_func(scanner_node, 
+                                          0, 
+                                          Scan_Parse::BEGINCHAR_COMMAND, 
+                                          *s, 
+                                          @=$5@>, 
+                                          @=$7@>, 
+                                          @=$9@>); 
+
+       delete s;
+       s = 0;
+
+       scanner_node->beginchar_flag  = true;
+   }
 
    @=$$@> = static_cast<void*>(0);
 
@@ -313,24 +358,47 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   int i = @=$3@>;
+   if (scanner_node->beginchar_flag)
+   {
+       cerr_strm << thread_name 
+          << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
+                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                << "RIGHT_PARENTHESIS character_comment_optional':"
+          << endl 
+          << "`scanner_node->beginchar_flag' == `true'."
+          << endl 
+          << "Already collecting a character.  Continuing.";
 
-   stringstream temp_strm;
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+   else
+   {
 
-   temp_strm << i;
+       int i = @=$3@>;
 
-   Scan_Parse::beginfig_func(scanner_node, 
-                             0, 
-                             Scan_Parse::BEGINCHAR_COMMAND, 
-                             temp_strm.str(), 
-                             @=$5@>, 
-                             @=$7@>, 
-                             @=$9@>);
+       stringstream temp_strm;
 
-   scanner_node->beginchar_flag  = true;
+       temp_strm << i;
+
+       if (!scanner_node->beginfig_flag)
+       {
+           scanner_node->clear_current_picture();      
+       }
+
+       status = Scan_Parse::beginfig_func(scanner_node, 
+                                          0, 
+                                          Scan_Parse::BEGINCHAR_COMMAND, 
+                                          temp_strm.str(), 
+                                          @=$5@>, 
+                                          @=$7@>, 
+                                          @=$9@>); 
+
+       scanner_node->beginchar_flag  = true;
+   }
 
    @=$$@> = static_cast<void*>(0);
-
 };
 
 @q *** (3) character_comment_optional.@>   
@@ -395,7 +463,6 @@ Added this rule.
   
 @=command: ENDCHAR with_clause_output_list@>@/
 {
-
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -420,7 +487,7 @@ Added this rule.
   scanner_node->clear_ptr   = static_cast<void*>(c); 
   scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+  status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
 
   scanner_node->beginchar_flag  = false;
  
@@ -470,11 +537,13 @@ and unnecessary.
   
     scanner_node->picture_entry_ptr = @=$2@>; 
 
+    int status = 0;
+
     if (metafont_output)
-       Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+       status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
 
     if (metapost_output)
-       Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
+       status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
 
     @=$$@> = static_cast<void*>(0);
 

@@ -827,6 +827,12 @@ Added the ``\.{metafont}'' and ``\.{mf}'' options.
 
             metafont_output = true;
             run_state_initial.do_output[Run_State::METAFONT] = true;
+
+/* !!START HERE:  LDF 2022.04.13.  Change this, when I've made it possible.  */ 
+
+            metapost_output = false;
+            run_state_initial.do_output[Run_State::METAPOST] = false;
+
         }
 
 @q **** (4) metafont-only and mf-only.@>
@@ -1604,8 +1610,6 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
               << "Run_State::METAFONT == " << Run_State::METAFONT << endl
               << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
       }
-
-          
 
 
 

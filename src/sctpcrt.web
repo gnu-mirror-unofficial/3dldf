@@ -227,7 +227,7 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 
   stringstream cerr_strm;
 
@@ -416,9 +416,15 @@ or more of the formats supported by the GNU plotutils package.
 
 #if DEBUG_COMPILE
   if (DEBUG)   
-    cerr << "out_filename_base after erase == "
-         << out_filename_base << endl;
-#endif
+  {
+      cerr << "out_filename_base after erase == "
+           << out_filename_base << endl;
+ 
+     cerr << "r.do_output[Run_State::METAPOST] == " << r.do_output[Run_State::METAPOST] << endl;
+     cerr << "r.do_output[Run_State::METAFONT] == " << r.do_output[Run_State::METAFONT] << endl;
+
+  }
+#endif 
 
   if (r.do_output[Run_State::METAPOST])
     {
@@ -432,9 +438,15 @@ or more of the formats supported by the GNU plotutils package.
 
   else if (r.do_output[Run_State::METAFONT])
     {
+
       out_file = 0;
       out_filename_metafont = out_filename_base + ".mf";
       out_filename = out_filename_metafont;
+
+#if 0 
+      cerr << "out_filename == " << out_filename << endl;
+#endif 
+
       @<Check |out_filename|, return 0 upon failure@>@;
       out_file_metafont = out_file;
       out_file = 0;

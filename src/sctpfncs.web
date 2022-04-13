@@ -5625,6 +5625,170 @@ Scanner_Type::get_astronomy(void)
 
 @q ** (2) @>
 
+@q *** (3) Clear |current_picture|.  @>
+@ Clear |current_picture|.  
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this function.
+\ENDLOG
+
+@q **** (4) Definition @>
+@
+@<Define |Scanner_Type| functions@>=
+int
+Scanner_Type::clear_current_picture(void)
+{
+@q ***** (5) @>
+
+#if DEBUG_COMPILE
+
+   bool DEBUG = true; /* |false| */ 
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = false;
+   bool warning_stop_value = false;
+   string thread_name      = "";
+
+   using namespace Scan_Parse;
+
+   int status;
+
+#if DEBUG_COMPILE
+  if (DEBUG)
+    {
+      cerr_strm << "Entering `Scanner_Type::clear_current_picture'.";
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+       Id_Map_Entry_Node current_picture_entry = lookup("current_picture"); 
+
+@q ***** (5) Error handling:  |current_picture| not found.@>
+
+@ Error handling:  |current_picture| not found.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scanner_Type| functions@>=
+
+    if (   current_picture_entry == static_cast<Id_Map_Entry_Node>(0) 
+        || current_picture_entry->object == static_cast<void*>(0))
+    {
+
+        cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
+                  << endl << "`current_picture' not found. "
+                  << "Exiting function with return value 1."; 
+      
+        cerr_message(cerr_strm, error_stop_value);
+        cerr_strm.str("");
+
+        return 1;
+
+    } /* |if (current_picture_entry == 0 && current_picture_entry->object == 0)|  */
+
+@q ***** (5) Lock |current_picture_entry|. Exit on error.@>
+
+@ Lock |current_picture_entry|. Exit on error.
+This is just for insurance.  No other threads should be able to access |current_picture_entry| at this time.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scanner_Type| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << "Trying to lock `current_picture_entry'.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = current_picture_entry->lock();
+
+   if (status != 0)
+   {
+
+       cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
+                 << endl << "`current_picture_entry->lock()' failed. "
+                 << "Exiting function with return value 1."; 
+     
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       return 1;
+       
+   }
+
+@q ****** (6) Success!  Clearing |current_picture|.@>
+
+@ Success!  Clearing |current_picture|.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scanner_Type| functions@>=
+
+   static_cast<Picture*>(current_picture_entry->object)->clear();
+
+@q ****** (6) Unlock |current_picture_entry|. Exit on error.@>
+
+@ Unlock |current_picture_entry->mutex|. Exit on error.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scanner_Type| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << "Trying to unlock `current_picture_entry'.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = current_picture_entry->unlock();
+
+   if (status != 0)
+   {
+
+       cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
+                 << endl << "`current_picture_entry->unlock()' failed. "
+                 << "Exiting function with return value 1."; 
+       
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       return 1;
+   }
+
+@q ***** (5) @>
+@
+@<Define |Scanner_Type| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "Exiting `Scanner_Type::clear_current_picture' "
+                 << "successfully with return value 0."; 
+       
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+    
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+   return 0;
+
+}  /* End of |Scanner_Type::clear_current_picture| definition  */  
+
+
+@q ** (2) @>
+
 @q * Putting |Scanner_Type| functions together.@>
 @* Putting {\bf Scanner\_Type} functions together.
   
