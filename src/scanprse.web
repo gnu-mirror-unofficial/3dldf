@@ -878,6 +878,9 @@ Added this function.
 Added code for writing a |pickup| command to |*out_stream|, if
 the |Pen| stored in the |Id_Map_Entry_Node default_pen| 
 is non-null.
+
+\initials{LDF 2022.04.13.}
+Added code for clearing |current_picture|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -1188,11 +1191,120 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+
+@q **** (4) Clear |current_picture|.  @>
+
+@ Clear |current_picture|.  
+\initials{LDF 2022.04.13.}
+
+\LOG
+\initials{LDF 2022.04.13.}
+Added this section.
+\ENDLOG 
+@<Define |Scan_Parse| functions@>=
+
+    Id_Map_Entry_Node current_picture_entry = scanner_node->lookup("current_picture");
+
+@q ***** (5) Error handling:  |current_picture| not found.@>
+
+@ Error handling:  |current_picture| not found.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+    if (current_picture_entry == static_cast<Id_Map_Entry_Node>(0) || current_picture_entry->object == static_cast<void*>(0))
+    {
+
+        cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                  << endl << "`current_picture' not found. "
+                  << "Exiting function with return value 1."; 
+      
+        cerr_message(cerr_strm, error_stop_value);
+        cerr_strm.str("");
+
+        return 1;
+
+    } /* |if (current_picture_entry == 0 && current_picture_entry->object == 0)|  */
+
+@q ***** (5) Lock |current_picture_entry|. Exit on error.@>
+
+@ Lock |current_picture_entry|. Exit on error.
+This is just for insurance.  No other threads should be able to access |current_picture_entry| at this time.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << "Trying to lock `current_picture_entry'.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = current_picture_entry->lock();
+
+   if (status != 0)
+   {
+
+       cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                 << endl << "`current_picture_entry->lock()' failed. "
+                 << "Exiting function with return value 1."; 
+     
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       return 1;
+       
+   }
+
+@q ****** (6) Success!  Clearing |current_picture|.@>
+
+@ Success!  Clearing |current_picture|.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+   static_cast<Picture*>(current_picture_entry->object)->clear();
+
+@q ****** (6) Unlock |current_picture_entry|. Exit on error.@>
+
+@ Unlock |current_picture_entry->mutex|. Exit on error.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   {
+       cerr_strm << "Trying to unlock `current_picture_entry'.";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+   }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   status = current_picture_entry->unlock();
+
+   if (status != 0)
+   {
+
+       cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                 << endl << "`current_picture_entry->unlock()' failed. "
+                 << "Exiting function with return value 1."; 
+       
+       cerr_message(cerr_strm, error_stop_value);
+       cerr_strm.str("");
+
+       return 1;
+   }
+
+
 @q **** (4) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
 @<Define |Scan_Parse| functions@>= 
 
-    if (output_command == Scan_Parse::ENDCHAR_COMMAND)
+    if (output_command == Scan_Parse::BEGINCHAR_COMMAND)
     {
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -1208,7 +1320,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
                    << endl;
     }
 
-    if (output_command == Scan_Parse::ENDFIG_COMMAND)
+    if (output_command == Scan_Parse::BEGINFIG_COMMAND)
     {
        *out_stream << "beginfig(" << fig_num << ");" 
                    << endl;
