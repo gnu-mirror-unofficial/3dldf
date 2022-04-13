@@ -5150,8 +5150,8 @@ the default |false|.  This required making
   friend void* Scan_Parse::parse_func(void*);
   
   friend void* Scan_Parse::output_func(void*);
-  friend int Scan_Parse::output_command_func(Scanner_Node, bool);
-  friend int Scan_Parse::beginfig_func(Scanner_Node, int, bool, string s, real wd, real ht, real dp);
+  friend int Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg);
+  friend int Scan_Parse::beginfig_func(Scanner_Node, int, unsigned int, string s, real wd, real ht, real dp);
   friend String_Bool Scan_Parse::variable_func(Scanner_Node,
                                                char*,
                                                char*,

@@ -207,6 +207,13 @@ Scan_Parse
   extern const unsigned short MAX_FILENAME          = 64;
 #endif 
 
+
+  extern const int BEGINFIG_COMMAND                 = 1;
+  extern const int BEGINCHAR_COMMAND                = 2;
+
+  extern const int ENDFIG_COMMAND                   = 1;
+  extern const int ENDCHAR_COMMAND                  = 2;
+
   char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
   unsigned short filename_array_ctr                 = 0;
 
@@ -234,6 +241,13 @@ Scan_Parse
    extern const unsigned short MAX_FILE_ARGS;
    extern const unsigned short MAX_FILENAME;
 #endif 
+
+   extern const int BEGINFIG_COMMAND;
+   extern const int BEGINCHAR_COMMAND;
+
+   extern const int ENDFIG_COMMAND;
+   extern const int ENDCHAR_COMMAND;
+
    extern char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
    extern unsigned short filename_array_ctr;
 
@@ -872,7 +886,7 @@ is non-null.
 int
 Scan_Parse::beginfig_func(Scanner_Node scanner_node, 
                           int fig_num, 
-                          bool do_metafont, 
+                          unsigned int output_command,
                           string s, 
                           real wd, 
                           real ht, 
@@ -1178,7 +1192,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 @ Write to |*out_stream|.
 @<Define |Scan_Parse| functions@>= 
 
-    if (do_metafont)
+    if (output_command == Scan_Parse::ENDCHAR_COMMAND)
     {
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -1193,7 +1207,8 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
                    << "cm#, " << ht << "cm#, " << dp << "cm#);" 
                    << endl;
     }
-    else
+
+    if (output_command == Scan_Parse::ENDFIG_COMMAND)
     {
        *out_stream << "beginfig(" << fig_num << ");" 
                    << endl;
@@ -2221,8 +2236,14 @@ Programmed the single-threaded case.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::output_command_func(Scanner_Node scanner_node, bool do_metafont)
+Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg)
 {
+
+/* !!START HERE:  LDF 2022.04.13.  Get rid of |do_metafont| arg.
+   Keep track of whether endchar or endfig was called.
+   Enable output to both MF and MP files.
+*/ 
+
 
 @q ***** (5) Get thread information and set |thread_name|.@>
 
@@ -2848,10 +2869,15 @@ to |Picture::output|.
                       p->max_z_proj,
                       p->surface_hiding_value);
 
+
+@ !! TODO:  Add code to account for other output formats.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>=
+
    if (is_endfig)
    {
-
-     string s = (do_metafont) ? "endchar;" : "endfig;";
+     string s = (output_command_arg == ENDCHAR_COMMAND) ? "endchar;" : "endfig;";
 
      if (metafont_output)
         *(p->scanner_node->out[Run_State::METAFONT]->stream_ptr) 
@@ -2860,6 +2886,9 @@ to |Picture::output|.
         *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
               << s << endl << endl << flush;
    }
+
+@
+@<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
    if (metafont_output)

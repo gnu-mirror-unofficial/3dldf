@@ -86,7 +86,7 @@ possible to use |beginfig| in loops.
 
    int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
 
-   Scan_Parse::beginfig_func(scanner_node, i);
+   Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
 
    @=$$@> = static_cast<void*>(0);
 
@@ -164,7 +164,7 @@ Rewrote this rule.  It now calls |output_command_func|.
   scanner_node->clear_ptr = static_cast<void*>(c); 
   scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  Scan_Parse::output_command_func(scanner_node);
+  Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
 
   @=$$@> = static_cast<void*>(0);
  
@@ -209,7 +209,13 @@ Added this rule.
 
    string *s = static_cast<string*>(@=$3@>);
 
-   Scan_Parse::beginfig_func(scanner_node, 0, true, *s, @=$5@>, @=$7@>, @=$9@>);
+   Scan_Parse::beginfig_func(scanner_node, 
+                             0, 
+                             Scan_Parse::BEGINCHAR_COMMAND, 
+                             *s, 
+                             @=$5@>, 
+                             @=$7@>, 
+                             @=$9@>);
 
    delete s;
    s = 0;
@@ -261,7 +267,13 @@ Added this rule.
 
    temp_strm << i;
 
-   Scan_Parse::beginfig_func(scanner_node, 0, true, temp_strm.str(), @=$5@>, @=$7@>, @=$9@>);
+   Scan_Parse::beginfig_func(scanner_node, 
+                             0, 
+                             Scan_Parse::BEGINCHAR_COMMAND, 
+                             temp_strm.str(), 
+                             @=$5@>, 
+                             @=$7@>, 
+                             @=$9@>);
 
    @=$$@> = static_cast<void*>(0);
 
@@ -354,7 +366,7 @@ Added this rule.
   scanner_node->clear_ptr   = static_cast<void*>(c); 
   scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  Scan_Parse::output_command_func(scanner_node, true);
+  Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
 
   @=$$@> = static_cast<void*>(0);
 
@@ -403,7 +415,11 @@ and unnecessary.
   
     scanner_node->picture_entry_ptr = @=$2@>; 
 
-    Scan_Parse::output_command_func(scanner_node);
+    if (metafont_output)
+       Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+
+    if (metapost_output)
+       Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
 
     @=$$@> = static_cast<void*>(0);
 

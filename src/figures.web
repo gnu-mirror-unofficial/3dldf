@@ -215,9 +215,7 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
      out_stream  = static_cast<ofstream*>(os->stream_ptr);
   }
 
-@ !! START HERE.  Change the way |current_picture| is handled.
-\initials{LDF 2004.05.25.}
-
+@ 
 @<Define figure functions@>=
   if (current_picture != static_cast<Picture*>(0))
     {
@@ -242,32 +240,39 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
     cerr << "Exiting beginfig(" << i << ")" << endl;
 
   return;
-}
+
+}  /* End of |beginfig| definition  */
 
 @q * End figure.@>
 @* End figure.
+
 \LOG
-\initials{LDF 2003.07.16.}  Added |silent| argument, and a message printed
+\initials{LDF 2003.07.16.}  
+Added |silent| argument, and a message printed
 conditionally to |stdout|, saying which figure is being ended.  
 This should help in finding where errors occur.
 
-\initials{LDF 2003.07.16.}  Made non-inline.
+\initials{LDF 2003.07.16.}  
+Made non-inline.
 
-\initials{LDF 2003.08.17.} Made |silent| non-|const|.   Setting it to |true|, if 
+\initials{LDF 2003.08.17.} 
+Made |silent| non-|const|.   Setting it to |true|, if 
 |SILENT_GLOBAL| is |true|.   
 
-\initials{LDF 2004.03.09.}  Moved |endfig| from
+\initials{LDF 2004.03.09.}  
+Moved |endfig| from
 \filename{io.web} and redefined it, so that |endfig| calls 
 |current_picture->output|.  There are now two versions, with
 argument lists that correspond to those of the two versions of
 |Picture::output|.  I've added the constant |SUPPRESS| to |namespace
 Projections|, in order to be able to suppress output.
 
-\initials{LDF 2004.05.25.}  Added |Scanner_Node| argument.  Changed 
-|out_stream| from a global |ofstream| to an |ofstream*|.  It's now set
-using the |Scanner_Node| argument.
+\initials{LDF 2004.05.25.}  
+Added |Scanner_Node| argument.  Changed |out_stream| from a global |ofstream| to an |ofstream*|.  
+It's now set using the |Scanner_Node| argument.
 
-\initials{LDF 2004.06.07.}  Got rid of the version of this function that didn't
+\initials{LDF 2004.06.07.}  
+Got rid of the version of this function that didn't
 take a |Focus| argument, because I've gotten rid of |default_focus|.  I may
 replace |default_focus| with a predefined variable defined in 
 |Scanner_Type::create|.  
@@ -288,15 +293,15 @@ endfig (Scanner_Node s,
 @
 @<Define figure functions@>=
 void 
-endfig (Scanner_Node s,
-        const Focus& f,
-        const unsigned short projection,
-        real factor,
-        const unsigned short sort_value,
-        const bool do_warnings,
-        const real min_x_proj, const real max_x_proj,
-        const real min_y_proj, const real max_y_proj,
-        const real min_z_proj, const real max_z_proj)
+endfig(Scanner_Node s,
+       const Focus& f,
+       const unsigned short projection,
+       real factor,
+       const unsigned short sort_value,
+       const bool do_warnings,
+       const real min_x_proj, const real max_x_proj,
+       const real min_y_proj, const real max_y_proj,
+       const real min_z_proj, const real max_z_proj)
 {
   bool DEBUG = false; /* |true| */ @;
 
@@ -335,7 +340,7 @@ endfig (Scanner_Node s,
              << "Not calling current_picture->output." << "\n";
     }
 
-current_picture->clear();
+  current_picture->clear();
   delete current_picture;
   current_picture = 0;
 

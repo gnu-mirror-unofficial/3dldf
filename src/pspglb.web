@@ -3775,10 +3775,16 @@ void*
 output_func(void*);
 
 int
-output_command_func(Scanner_Node, bool do_metafont = false);
+output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg = 1U);
 
 int
-beginfig_func(Scanner_Node, int, bool do_metafont = false, string s = "", real wd = 0.0, real ht = 0.0, real dp = 0.0);
+beginfig_func(Scanner_Node, 
+              int fig_num, 
+              unsigned int output_command, 
+              string s = "", 
+              real wd = 0.0, 
+              real ht = 0.0, 
+              real dp = 0.0);
 
 String_Bool variable_func(Scanner_Node,
                           char*,
