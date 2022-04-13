@@ -227,7 +227,7 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 
   stringstream cerr_strm;
 
@@ -739,6 +739,8 @@ needed, because this function predefines variables for these |Colors|.
 
 @<Define |Scanner_Type::create|@>=
 
+@q ****** (6) @>
+
   time_t tt;
   tm *lt;
   tt = time(0);
@@ -747,10 +749,12 @@ needed, because this function predefines variables for these |Colors|.
   string datestamp(asctime(lt));
   datestamp.erase(datestamp.size() - 1); // Remove terminal line-feed.
 
-  if (      scanner_node->in->type 
-         == Io_Struct::FILE_TYPE 
-      && r.do_output[Run_State::METAPOST])
+@q ****** (6) @>
+
+  if (scanner_node->in->type == Io_Struct::FILE_TYPE && r.do_output[Run_State::METAPOST])
     {
+cerr << "Error after here 0." << endl; 
+
       scanner_node->out[Run_State::METAPOST] = new Output_Struct;
       scanner_node->out[Run_State::METAPOST]->filename = out_filename_metapost;
       scanner_node->out[Run_State::METAPOST]->stream_ptr
@@ -775,9 +779,14 @@ needed, because this function predefines variables for these |Colors|.
   else
     scanner_node->out[Run_State::METAPOST] = 0;
 
+@q ****** (6) @>
+
   if (   scanner_node->in->type == Io_Struct::FILE_TYPE 
       && r.do_output[Run_State::METAFONT])
     {
+
+      cerr << "Error after here 1." << endl; 
+
       scanner_node->out[Run_State::METAFONT] = new Output_Struct;
       scanner_node->out[Run_State::METAFONT]->filename = out_filename_metafont;
       scanner_node->out[Run_State::METAFONT]->stream_ptr
@@ -801,6 +810,8 @@ needed, because this function predefines variables for these |Colors|.
     }
   else
     scanner_node->out[Run_State::METAFONT] = 0;
+
+@q ****** (6) @>
 
   if (   scanner_node->in->type 
       == Io_Struct::FILE_TYPE && r.do_output[Run_State::PNG])
@@ -4879,7 +4890,7 @@ Added this section with a calls to |add_entry| for |is_metafont| and |is_metapos
 
        b = new bool;
 
-       *b = (metafont_output) ? false : true;
+       *b = (metapost_output) ? true : false;
 
        v = static_cast<void*>(b); 
 

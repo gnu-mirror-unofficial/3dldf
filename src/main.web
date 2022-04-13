@@ -828,11 +828,6 @@ Added the ``\.{metafont}'' and ``\.{mf}'' options.
             metafont_output = true;
             run_state_initial.do_output[Run_State::METAFONT] = true;
 
-/* !!START HERE:  LDF 2022.04.13.  Change this, when I've made it possible.  */ 
-
-            metapost_output = false;
-            run_state_initial.do_output[Run_State::METAPOST] = false;
-
         }
 
 @q **** (4) metafont-only and mf-only.@>
@@ -1418,6 +1413,9 @@ main(int argc, char *argv[])
    string s;  
  
    
+/* !!START HERE:  LDF 2022.04.13.  Must pass more than one value in run_state_initial.  */ 
+
+
 
    for ( unsigned short i = 0; i < filename_array_ctr; ++i)
    {
@@ -1565,6 +1563,9 @@ Make this case work with |multiprocess_input| and |multiprocess_output|.  Turn i
 from |stdin|, turn it back on if we scan an {\bf input} command.  
 \ENDTODO 
 
+
+!! TODO:  \initials{LDF 2022.04.13.} Add code for other output formats.
+
 \LOG
 \initials{LDF 2004.07.02.}
 Now deleting |scanner_node_stdin|.
@@ -1585,6 +1586,8 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
 \initials{LDF 2022.04.13.}
 Removed the |do|---|while| loop, which was commented-out.
 \ENDLOG 
+
+
 
 @<Main@>=
 
@@ -1620,14 +1623,9 @@ Removed the |do|---|while| loop, which was commented-out.
          scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr->setf(
                                                  ios::fixed, ios::floatfield);
       }
-      else
+
+      if (metapost_output)
       {
-
-/* !!START HERE:  LDF 2022.04.13.  Make it possible to have MF and MP output simultaneously.  */ 
-
-         /* !! TODO:  Add code for other output formats, PNG, SVG, etc.
-            \initials{LDF 2022.04.11.} */
-
          scanner_node_stdin->open_default_out_file(Run_State::METAPOST, run_state_initial);
          scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
                                                  ios::fixed, ios::floatfield);
@@ -1642,6 +1640,7 @@ Removed the |do|---|while| loop, which was commented-out.
       datestamp.erase(datestamp.size() - 1); /*  Remove terminal line-feed.  */
 
       if (metafont_output)
+      {
          *(scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr) 
                             << "%%%% " << default_out_filename_metafont 
                             << "." << endl
@@ -1649,7 +1648,9 @@ Removed the |do|---|while| loop, which was commented-out.
                             << "%%%% from standard input by GNU 3DLDF "
                             << VERSION_3DLDF << "."
                             << endl << endl << flush; 
-      else
+      }
+      if (metapost_output)
+      {
          *(scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr) 
                             << "%%%% " << default_out_filename_metapost 
                             << "." << endl
@@ -1657,6 +1658,7 @@ Removed the |do|---|while| loop, which was commented-out.
                             << "%%%% from standard input by GNU 3DLDF "
                             << VERSION_3DLDF << "."
                             << endl << endl << flush; 
+      }
 
       yyparse_return_value = yyparse(static_cast<void*>(scanner_node_stdin));
 

@@ -1060,14 +1060,24 @@ Added this section.
 @<Define |Scan_Parse| functions@>=
 
 
-  Output_Struct* os;
+  Output_Struct* os_mf = 0;
+  Output_Struct* os_mp = 0;
+  ofstream* out_stream_mf = 0;
+  ofstream* out_stream_mp = 0;
 
   if (metafont_output)
-     os = scanner_node->out[Run_State::METAFONT];
-  else
-     os = scanner_node->out[Run_State::METAPOST];
+  {
+     os_mf = scanner_node->out[Run_State::METAFONT];
 
-  ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+/* !!START HERE:  LDF 2022.04.13.  Where is os_mf->stream_ptr allocated?  */ 
+
+     out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
+  }
+  if (metapost_output)
+  {
+     os_mp = scanner_node->out[Run_State::METAPOST];
+     out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
+  }
 
 @q **** (4) Try to lock |scanner_node->output_pending|.@>  
 @ Try to lock |scanner_node->output_pending|.
@@ -1248,8 +1258,8 @@ Added this section.
    scanner_node->output_pending.value_0 = true;
    scanner_node->output_pending.value_1++;
 
-@q **** (4) Try to lock |os->mutex|.@>  
-@ Try to lock |os->mutex|.
+@q **** (4) Try to lock |os_mf->mutex|.@>  
+@ Try to lock |os_mf->mutex|.
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>= 
@@ -1262,13 +1272,13 @@ Added this section.
 
       cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
                 << endl
-                << "About to call `os->lock()'. ";
+                << "About to call `os_mf->lock()'. ";
       cerr_message(cerr_strm);
       cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  status = os->lock();
+  status = os_mf->lock();
 
 @q **** (4) @>
 
@@ -1276,7 +1286,7 @@ Added this section.
     {
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
-                << "`os->lock()' failed. "
+                << "`os_mf->lock()' failed. "
                 << "Not writing to `out_stream'."
                 << endl << "Will try to continue.";
 
@@ -1288,22 +1298,77 @@ Added this section.
 
 @q **** (4) @>
 
-  else /* |os->lock| succeeded.  */
+  else /* |os_mf->lock| succeeded.  */
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << "`os->lock()' succeeded!";
+          cerr_strm << "`os_mf->lock()' succeeded!";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    } /* |else| (|os->lock| succeeded.)  */
+    } /* |else| (|os_mf->lock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+@q **** (4) Try to lock |os_mp->mutex|.@>  
+@ Try to lock |os_mp->mutex|.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>= 
+
+#ifdef HAVE_PTHREAD_H  
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+
+      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
+                << endl
+                << "About to call `os_mp->lock()'. ";
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+  status = os_mp->lock();
+
+@q **** (4) @>
+
+  if (status != 0)
+    {
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                << endl
+                << "`os_mp->lock()' failed. "
+                << "Not writing to `out_stream'."
+                << endl << "Will try to continue.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, error_stop_value); 
+      cerr_strm.str("");
+
+    } /* |if (status != 0)|  */
+
+@q **** (4) @>
+
+  else /* |os_mp->lock| succeeded.  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << "`os_mp->lock()' succeeded!";
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    } /* |else| (|os_mp->lock| succeeded.)  */
+
+#endif /* |HAVE_PTHREAD_H|  */@; 
 
 @q **** (4) Clear |current_picture|, unless a figure or character has been started already.  @>
 
@@ -1353,15 +1418,27 @@ Added this section.
        }   
 #endif /* |DEBUG_COMPILE|  */@; 
 
-       *out_stream << "beginchar(\"" << s << "\", " << wd 
-                   << "cm#, " << ht << "cm#, " << dp << "cm#);" 
-                   << endl;
+       if (metafont_output)
+          *out_stream_mf << "beginchar(\"" << s << "\", " << wd 
+                         << "cm#, " << ht << "cm#, " << dp << "cm#);" 
+                         << endl;
+       if (metapost_output)
+          *out_stream_mp << "beginchar(\"" << s << "\", " << wd 
+                         << "cm#, " << ht << "cm#, " << dp << "cm#);" 
+                         << endl;
+
+
     }
 
     if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
     {
-       *out_stream << "beginfig(" << fig_num << ");" 
-                   << endl;
+       if (metafont_output)
+          *out_stream_mf << "beginfig(" << fig_num << ");" 
+                         << endl;
+       if (metapost_output)
+          *out_stream_mp << "beginfig(" << fig_num << ");" 
+                         << endl;
+
     }
 
 
@@ -1380,25 +1457,29 @@ Replaced the code in this section with a call to
 
       if (*(scanner_node->default_pen) != static_cast<Pen*>(0))
         {
-           *out_stream << "pickup " << **(scanner_node->default_pen);
+           if (metafont_output)
+              *out_stream_mf << "pickup " << **(scanner_node->default_pen);
+
+           if (metapost_output)
+              *out_stream_mp << "pickup " << **(scanner_node->default_pen);
                    
         }  /* |if (*(scanner_node->default_pen) != 0)|  */
 
-@q **** (4) Try to unlock |os->mutex|.@>  
-@ Try to unlock |os->mutex|.
+@q **** (4) Try to unlock |os_mf->mutex|.@>  
+@ Try to unlock |os_mf->mutex|.
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>= 
 
 #ifdef HAVE_PTHREAD_H  
-  status = os->unlock();
+  status = os_mf->unlock();
 
   if (status != 0)
     {
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
-                << "`os->unlock()' failed. "
-                << "Not writing to `out_stream'."
+                << "`os_mf->unlock()' failed. "
+                << "Not writing to `out_stream_mf'."
                 << endl << "Will try to continue.";
 
       cerr_message(cerr_strm);
@@ -1406,19 +1487,57 @@ Replaced the code in this section with a call to
 
     } /* |if (status != 0)|  */
 
-  else /* |os->unlock| succeeded.  */
+  else /* |os_mf->unlock| succeeded.  */
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << "`os->unlock()' succeeded!";
+          cerr_strm << "`os_mf->unlock()' succeeded!";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    } /* |else| (|os->unlock| succeeded.)  */
+    } /* |else| (|os_mf->unlock| succeeded.)  */
+
+#endif /* |HAVE_PTHREAD_H|  */@; 
+
+@q **** (4) Try to unlock |os_mp->mutex|.@>  
+@ Try to unlock |os_mp->mutex|.
+\initials{LDF 2022.04.13.}
+
+@<Define |Scan_Parse| functions@>= 
+
+#ifdef HAVE_PTHREAD_H  
+  status = os_mp->unlock();
+
+  if (status != 0)
+    {
+      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                << endl
+                << "`os_mp->unlock()' failed. "
+                << "Not writing to `out_stream_mp'."
+                << endl << "Will try to continue.";
+
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+    } /* |if (status != 0)|  */
+
+  else /* |os_mp->unlock| succeeded.  */
+    {
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+        {
+          cerr_strm << "`os_mp->unlock()' succeeded!";
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+        }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    } /* |else| (|os_mp->unlock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
@@ -1493,7 +1612,7 @@ and signal condition.
       cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
                 << endl
                 << "`scanner_node->output_pending.unlock()' failed. "
-                << "Not writing to `out_stream'."
+                << "Not writing to `out_stream_mf' or `out_stream_mp'."
                 << endl << "Will try to continue.";
 
       log_message(cerr_strm); 
@@ -1759,38 +1878,18 @@ without \.{--multithread-input}.
 
 @<Define |Scan_Parse| functions@>=
 
-
-  Output_Struct* out_stream;
+  Output_Struct* out_stream_mf = 0;
+  Output_Struct* out_stream_mp = 0;
 
   if (metafont_output)
-     out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAFONT];
-  else
-     out_stream = picture_ptr_arg->scanner_node->out[Run_State::METAPOST];
+  {
+     out_stream_mf = picture_ptr_arg->scanner_node->out[Run_State::METAFONT];
 
-  if (out_stream == static_cast<Output_Struct*>(0))
+     if (out_stream_mf == static_cast<Output_Struct*>(0))
      {
-         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                   << endl 
-                   << "`out_stream == 0."
-                   << endl << "Exiting function with `*return_value' == 1.";
-
-         log_message(cerr_strm); 
-         cerr_message(cerr_strm, error_stop_value);
-         cerr_strm.str("");
-
-         *return_value = 1;
-         return static_cast<void*>(return_value); 
-
-      }
-
-  status = out_stream->lock();
-
-  if (status != 0)
-    {
-
         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
                   << endl 
-                  << "`out_stream->lock() failed."
+                  << "`out_stream_mf == 0."
                   << endl << "Exiting function with `*return_value' == 1.";
 
         log_message(cerr_strm); 
@@ -1799,7 +1898,72 @@ without \.{--multithread-input}.
 
         *return_value = 1;
         return static_cast<void*>(return_value); 
-    }
+
+     }
+  }
+
+  if (metapost_output)
+  {
+     out_stream_mp = picture_ptr_arg->scanner_node->out[Run_State::METAPOST];
+     
+     if (out_stream_mp == static_cast<Output_Struct*>(0))
+     {
+        cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                  << endl 
+                  << "`out_stream_mp == 0."
+                  << endl << "Exiting function with `*return_value' == 1.";
+
+        log_message(cerr_strm); 
+        cerr_message(cerr_strm, error_stop_value);
+        cerr_strm.str("");
+
+        *return_value = 1;
+        return static_cast<void*>(return_value); 
+
+     }
+  }
+
+  if (metafont_output)
+  {
+     status = out_stream_mf->lock();
+
+     if (status != 0)
+       {
+
+           cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                     << endl 
+                     << "`out_stream_mf->lock() failed."
+                     << endl << "Exiting function with `*return_value' == 1.";
+
+           log_message(cerr_strm); 
+           cerr_message(cerr_strm, error_stop_value);
+           cerr_strm.str("");
+
+           *return_value = 1;
+           return static_cast<void*>(return_value); 
+       }
+  }
+
+  if (metapost_output)
+  {
+     status = out_stream_mp->lock();
+
+     if (status != 0)
+       {
+
+           cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                     << endl 
+                     << "`out_stream_mp->lock() failed."
+                     << endl << "Exiting function with `*return_value' == 1.";
+
+           log_message(cerr_strm); 
+           cerr_message(cerr_strm, error_stop_value);
+           cerr_strm.str("");
+
+           *return_value = 1;
+           return static_cast<void*>(return_value); 
+       }
+  }
 
 @q ***** (5) Call |Picture::output|.@>
 
@@ -1893,7 +2057,10 @@ MetaPost code.
 
       cerr_strm.str("");
 
-      *(out_stream->stream_ptr) << "endfig;" << endl << endl << flush;
+      if (metafont_output)
+         *(out_stream_mf->stream_ptr) << "endfig;" << endl << endl << flush;
+      if (metapost_output)
+         *(out_stream_mp->stream_ptr) << "endfig;" << endl << endl << flush;
 
     } /* |if (picture_ptr_arg->endfig)|  */
 
@@ -1915,246 +2082,56 @@ MetaPost code.
 
 @q ***** (5) Unlock output stream mutex.  Exit on error.@>
 
-@ Unlock output stream mutex.  Exit on error.
+@ Unlock output stream mutexes.  Exit on error.
 \initials{LDF 2004.07.14.}
 
 @<Define |Scan_Parse| functions@>=
 
-  status = out_stream->unlock();
+  if (metafont_output)
+  {
 
-  if (status != 0)
-    {
+     status = out_stream_mf->unlock();
 
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
-                << endl 
-                << "`out_stream->unlock()' failed."
-                << endl << "Exiting function with `*return_value' == 1.";
+     if (status != 0)
+       {
 
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, error_stop_value);
-      cerr_strm.str("");
+         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                   << endl 
+                   << "`out_stream_mf->unlock()' failed."
+                   << endl << "Exiting function with `*return_value' == 1.";
 
-      *return_value = 1;
-      return static_cast<void*>(return_value); 
+         log_message(cerr_strm); 
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
 
-    } /* |if (status != 0)|  */
+         *return_value = 1;
+         return static_cast<void*>(return_value); 
 
-@q ***** (5) Try to lock |*(picture_ptr_arg->picture)| and then unlock it.@>
+       } /* |if (status != 0)|  */
+  }
 
-@ Try to lock |*(picture_ptr_arg->picture)| and then unlock it.
-\initials{LDF 2004.08.25.}
+  if (metapost_output)
+  {
 
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
+     status = out_stream_mp->unlock();
 
-@:BUG@> BUG: 
-\initials{LDF 2004.08.25.}
-Now calling |picture_ptr_arg->picture->trylock| and 
-|picture_ptr_arg->picture->unlock|.  This is an attempt to fix a bug
-that occurs on Glen Ritchie's (GCR's) system.  I think |*(picture_ptr_arg->picture)| 
-might be locked on his system.  It's not on mine, and no error occurs on my system. 
+     if (status != 0)
+       {
 
-\initials{LDF 2004.08.25.}
-If |*(picture_ptr_arg->picture)| isn't locked, or if it's locked by the 
-thread of which this function is the start function,
-then this should work.
-Otherwise, i.e., if it's locked by another thread, it should fail.  
-In this case, this function issues a warning, but continues.
-\ENDLOG 
+         cerr_strm << thread_name << "ERROR! In `Scan_Parse::output_func':"
+                   << endl 
+                   << "`out_stream_mp->unlock()' failed."
+                   << endl << "Exiting function with `*return_value' == 1.";
 
-@q ****** (6) Try to lock |*(picture_ptr_arg->picture)|.@>
+         log_message(cerr_strm); 
+         cerr_message(cerr_strm, error_stop_value);
+         cerr_strm.str("");
 
-@ Try to lock |*(picture_ptr_arg->picture)|.
-\initials{LDF 2004.08.25.}
+         *return_value = 1;
+         return static_cast<void*>(return_value); 
 
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
-\ENDLOG
-
-@<Define |Scan_Parse| functions@>=
-
-  status = picture_ptr_arg->picture->trylock();
-
-#if DEBUG_COMPILE
-  if (DEBUG)
-    {
-      cerr_strm << thread_name << "In `Scan_Parse::output_func':"
-                << endl 
-                << "`picture_ptr_arg->picture->trylock()' returned " 
-                << status << ".";
-      
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, DEBUG); 
-      cerr_strm.str(""); 
-    }
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) |picture_ptr_arg->picture->trylock| succeeded.@>
-
-@ |picture_ptr_arg->picture->trylock| succeeded.
-\initials{LDF 2004.08.25.}
-
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-  if (status == 0) /* |picture_ptr_arg->picture->trylock| succeeded.  */
-    {
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-        {
-          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
-                    << endl
-                    << "`*(picture_ptr_arg->picture)' wasn't locked. "
-                    << "Will try to unlock it.";
-
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, DEBUG); 
-          cerr_strm.str("");
-        }
-
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-    } /* |if (status == 0)| 
-         (|picture_ptr_arg->picture->trylock| succeeded.)  */
-
-@q ******* (7) |picture_ptr_arg->picture->trylock| failed.@>
-
-@ |picture_ptr_arg->picture->trylock| failed.
-Will try to unlock |*(picture_ptr_arg->picture)| anyway.  If it was
-locked by this thread, it should succeed, otherwise it will fail.
-\initials{LDF 2004.08.25.}
-
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-  else 
-
-@q /* (|status == 0|---|picture_ptr_arg->picture->trylock| failed.)  */ @>
-
-    {
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-        {
-          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
-                    << endl
-                    << "`*(picture_ptr_arg->picture)' was locked. "
-                    << "Will try to unlock it anyway."
-                    << endl
-                    << "If it was locked by this thread, this should "
-                    << "succeed, otherwise it should fail.";
-
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, DEBUG); 
-          cerr_strm.str("");
-        }
-#endif 
-
-@q /* |DEBUG_COMPILE|  */ @>
- 
-    }
-
-@q   /* |else| (|status == 0|---|picture_ptr_arg->picture->trylock| @>
-@q          failed.)  */ @>
-
-@q ****** (6) Try to unlock |*(picture_ptr_arg->picture)|.@>
-
-@ Try to unlock |*(picture_ptr_arg->picture)|.
-If it was locked by the call to |trylock| above, or if was locked 
-by this thread previously, this should succeed, otherwise it should 
-fail.
-\initials{LDF 2004.08.25.}
-
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-       status = picture_ptr_arg->picture->unlock();
-
-@q ******* (7) |picture_ptr_arg->picture->unlock| succeeded.@>
-
-@ |picture_ptr_arg->picture->unlock| succeeded.
-\initials{LDF 2004.08.25.}
-
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-  if (status == 0) /* |picture_ptr_arg->picture->unlock| succeeded.  */
-    {
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-        {
-          cerr_strm << thread_name << "In `Scan_Parse::output_func':"
-                    << endl
-                    << "`picture_ptr_arg->picture->unlock()' succeeded."
-                    << endl
-                    << "This means that `*(picture_ptr_arg->picture)' was either "
-                    << "locked by the previous call to `trylock()',"
-                    << endl 
-                    << "or that it was locked somewhere else in this thread (this is good).";
-
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, DEBUG); 
-          cerr_strm.str("");
-        }
-#endif /* |DEBUG_COMPILE|  */@; 
- 
-    } /* |if (status == 0)| 
-         (|picture_ptr_arg->picture->unlock| succeeded.)  */
-
-@q ******* (7) |picture_ptr_arg->picture->unlock| failed.@>
-
-@ |picture_ptr_arg->picture->unlock| failed.
-This probably means that |*(picture_ptr_arg->picture)| was
-locked by another thread.  Will try to continue anyway.
-\initials{LDF 2004.08.25.}
-
-\LOG
-\initials{LDF 2004.08.25.}
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-  else 
-
-@q /* (|status == 0|---|picture_ptr_arg->picture->unlock| @>
-@q   failed.)  */                                         @>
-
-    {
-
-      cerr_strm << thread_name << "WARNING! In `Scan_Parse::output_func':"
-                << endl
-                << "`picture_ptr_arg->picture->unlock()' failed."
-                << endl
-                << "This probably means that `*(picture_ptr_arg->picture)' "
-                << "was locked by another thread." << endl
-                << "Will try to continue.";
-
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, error_stop_value); 
-      cerr_strm.str("");
-        
-    }   /* |else| (|status == 0| (|picture_ptr_arg->picture->unlock| failed.)  */
+       } /* |if (status != 0)|  */
+  }
 
 @q ***** (5) Delete |picture_ptr_arg|.@>
 
