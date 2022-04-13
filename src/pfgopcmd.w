@@ -153,21 +153,69 @@ Rewrote this rule.  It now calls |output_command_func|.
   
 @=command: ENDFIG with_clause_output_list@>@/
 {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+   bool DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << thread_name 
+                << "*** Parser, rule `command: ENDFIG with_clause_output_list'." 
+                << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
 
   Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
-  bool* c = new bool;
-  *c = true;
+  if (!scanner_node->beginfig_flag)
+  {
+      cerr_strm << thread_name 
+                << "WARNING! In parser, rule `command: ENDFIG with_clause_output_list':" 
+                << endl 
+                << "`scanner_node->beginfig_flag' == `false'.  Not collecting a figure."
+                << endl 
+                << "Not performing output.  Continuing."
+                << endl;
 
-  bool* e = new bool;
-  *e = true;
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+  }
+
+@q ****** (6) @>
+
+  else
+  {
+#if DEBUG_COMPILE
+
+     if (DEBUG)
+     { 
+        cerr_strm << thread_name 
+                  << "In parser, rule `command: ENDFIG with_clause_output_list':" 
+                  << endl 
+                  "`scanner_node->beginfig_flag' == `true'.  Will perform output."
+                  << endl;
+     }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+     bool* c = new bool;
+     *c = true;
+
+     bool* e = new bool;
+     *e = true;
  
-  scanner_node->clear_ptr = static_cast<void*>(c); 
-  scanner_node->endfig_ptr  = static_cast<void*>(e); 
+     scanner_node->clear_ptr = static_cast<void*>(c); 
+     scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
+     Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
 
-  scanner_node->beginfig_flag  = false;
+     scanner_node->beginfig_flag  = false;
+  }
+
+@q ****** (6) @>
 
   @=$$@> = static_cast<void*>(0);
  
