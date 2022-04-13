@@ -155,8 +155,9 @@ Rewrote this rule.  It now calls |output_command_func|.
 {
 @q ****** (6) @>
 
+   @<Common declarations for rules@>@;
+
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ 
    if (DEBUG)
    { 
       cerr_strm << thread_name 
@@ -166,8 +167,6 @@ Rewrote this rule.  It now calls |output_command_func|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 @q ****** (6) @>
-
-  Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
 
   if (!scanner_node->beginfig_flag)
   {
@@ -196,7 +195,7 @@ Rewrote this rule.  It now calls |output_command_func|.
         cerr_strm << thread_name 
                   << "In parser, rule `command: ENDFIG with_clause_output_list':" 
                   << endl 
-                  "`scanner_node->beginfig_flag' == `true'.  Will perform output."
+                  << "`scanner_node->beginfig_flag' == `true'.  Will perform output."
                   << endl;
      }  
 #endif /* |DEBUG_COMPILE|  */@; 
