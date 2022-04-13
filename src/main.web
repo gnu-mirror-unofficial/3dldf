@@ -1561,9 +1561,8 @@ Now calling |Shape::initialize_type_name_map|.
 @q } @> 
 @q !! TO DO:  @>
 \initials{LDF 2004.04.20.}
-Make this case work with |multiprocess_input| and
-|multiprocess_output|.  Turn it off when reading from |stdin|, turn it back on
-if we scan an {\bf input} command.  
+Make this case work with |multiprocess_input| and |multiprocess_output|.  Turn it off when reading 
+from |stdin|, turn it back on if we scan an {\bf input} command.  
 \ENDTODO 
 
 \LOG
@@ -1582,12 +1581,15 @@ Currently not using other output formats.
 
 \initials{LDF 2004.10.13.}
 Added |do|---|while| loop that wraps the call to |yyparse|.
+
+\initials{LDF 2022.04.13.}
+Removed the |do|---|while| loop, which was commented-out.
 \ENDLOG 
 
 @<Main@>=
 
   if ( vector_size  == 0)
-    {
+  {
 
 #if DEBUG_COMPILE
       bool DEBUG_SAVE = DEBUG;
@@ -1611,8 +1613,6 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
               << "Run_State::METAFONT == " << Run_State::METAFONT << endl
               << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
       }
-
-
 
       if (metafont_output)
       {
@@ -1660,33 +1660,6 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
 
       yyparse_return_value = yyparse(static_cast<void*>(scanner_node_stdin));
 
-#if 0 
-     do 
-       {
-         yyparse_return_value
-            = yyparse(static_cast<void*>(scanner_node_stdin));
-
-         /* !! START HERE.  LDF 2004.10.12.  
-            Test this and add error handling.  */ 
-
-         if (yyparse_return_value != 0)
-            {
-               cerr_strm << thread_name << "ERROR! In `main()':"
-                         << endl << "`yyparse()' returned " 
-                         << yyparse_return_value << ". "
-                         << "Calling `yyparse()' again.";
-
-               log_message(cerr_strm);
-               cerr_message(cerr_strm);
-               cerr_strm.str("");
-
-} /* |if (yyparse_return_value != 0)|  */
-
-       } /* |do|  */
-
-      while (yyparse_return_value != 0);  
-#endif 
-
       delete scanner_node_stdin;
 
 #if DEBUG_COMPILE
@@ -1701,7 +1674,7 @@ Added |do|---|while| loop that wraps the call to |yyparse|.
       DEBUG = DEBUG_SAVE;
 #endif
 
-} /* |if ( vector_size  == 0)| */ @;
+  } /* |if ( vector_size  == 0)| */ @;
 
 @q *** (3) At least one filename argument.  @>
 @ At least one filename argument.
@@ -1804,16 +1777,19 @@ Added this section.
 
 \initials{LDF 2004.10.13.}
 Added |do|---|while| loop that wraps the calls to |yyparse|.
+
+\initials{LDF 2022.04.13.}
+Removed the |do|---|while| loop, which was commented-out.
 \ENDLOG
 
 @<Main@>=
 
   if (vector_size == 1)
-    {
+  {
       scanner_node_vector[0]->in->up = new Input_Struct;
       scanner_node_vector[0]->in->up->stream_ptr = &cin;
       scanner_node_vector[0]->in->up->type = Io_Struct::STDIN_TYPE;
-    } /* |if (vector_size == 1)|  */
+  } /* |if (vector_size == 1)|  */
 
 @q ***** (5).@> 
 @
