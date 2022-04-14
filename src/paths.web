@@ -8846,18 +8846,26 @@ Revised the code that checks the value of |arrow|.
           }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-          *out_stream_mf << "fill " << **point_iter++;
-          output_path(*out_stream_mf);
+          if (metafont_output)
+          {
+             *out_stream_mf << "fill " << **point_iter++;
+             output_path(*out_stream_mf);
+          }
 
-          *out_stream_mp << "fill " << **point_iter++;
-          output_path(*out_stream_mp);
+          if (metapost_output)
+          {
+             *out_stream_mp << "fill " << **point_iter++;
+             output_path(*out_stream_mp);
+          }
 
           if (   metapost_output && fill_color_vector != static_cast<Pointer_Vector<Color>*>(0)
               && fill_color_vector->ctr > 0)
             *out_stream_mp << " withcolor " << *(fill_color_vector->v[0]);
 
-        *out_stream_mf << ";" << endl << flush;
-        *out_stream_mp << ";" << endl << flush;
+        if (metafont_output)
+           *out_stream_mf << ";" << endl << flush;
+        if (metapost_output)
+           *out_stream_mp << ";" << endl << flush;
 
     }  /* |else if (fill_draw_value == FILL_VALUE) |  */
 
@@ -8876,8 +8884,6 @@ Modified this code to handle the case that
 
     else if (fill_draw_value == FILLDRAW_VALUE) 
     {
-
-/* !!START HERE:  LDF 2022.04.14.  Check how this was before.  I think I need to draw as well as fill.  */ 
 
 #if DEBUG_COMPILE
         if (DEBUG)
@@ -8901,11 +8907,17 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
 @<Define |Path| functions@>=
 
-              *out_stream_mf << "fill " << **point_iter++;
-              *out_stream_mp << "fill " << **point_iter++;
+              if (metafont_output)
+              {
+                 *out_stream_mf << "fill " << **point_iter++;
+                 output_path(*out_stream_mf);
+              }
 
-              output_path(*out_stream_mf);
-              output_path(*out_stream_mp);
+              if (metapost_output)
+              {
+                 *out_stream_mp << "fill " << **point_iter++;
+                 output_path(*out_stream_mp);
+              }
 
               Id_Map_Entry_Node entry;
               void* v = 0;
@@ -8915,6 +8927,9 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
               if (metapost_output)
               {
 @q ****** (6) @>
+
+/* !!START HERE:  LDF 2022.04.14.  Test this!  Is |temp_color| ever used?  */ 
+
                   Color* temp_color;
 
                   if (   fill_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
@@ -8942,9 +8957,6 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
                   }  /* |if (temp_color == 0)|  */
 
-                  output_path(*out_stream_mf);
-                  output_path(*out_stream_mp);
-
                   void* v = 0;
 
               }  /* |if (metapost_output)| */
@@ -8953,8 +8965,10 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 @
 @<Define |Path| functions@>=
 
-              output_path(*out_stream_mf);
-              output_path(*out_stream_mp);
+              if (metafont_output)
+                 output_path(*out_stream_mf);
+              if (metapost_output)
+                 output_path(*out_stream_mp);
 
               v = 0;
 
@@ -9060,23 +9074,41 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
            } 
 #endif /* |DEBUG_COMPILE| */@;
 
-#if 0 
-          *out_stream << "undraw " << **point_iter++;
+          if (metafont_output)
+             *out_stream_mf << "undraw " << **point_iter++;
+          if (metapost_output)
+             *out_stream_mp << "undraw " << **point_iter++;
 
 
+             output_path(*out_stream_mf);
+          if (metapost_output)
+             output_path(*out_stream_mp);
 
-/* !!START HERE:  LDF 2022.04.14.  */ 
+          if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
+          {
 
-          @<Output |Path|@>@;
+             if (metafont_output)
+                *out_stream_mf << endl << "withpen " << *(pen_vector->v[0]);
+             if (metapost_output)
+                *out_stream_mp << endl << "withpen " << *(pen_vector->v[0]);
 
-          @<Handle |pen|@>@;
+          } /* |if (pen_vector != 0 && pen_vector->ctr > 0)|  */
 
-          @<Handle |dash_pattern|@>@;
- #endif 
-      
+          if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+              && dash_pattern_vector->ctr > 0)
+            {
+                if (metafont_output)
+                   *out_stream_mf << endl << *(dash_pattern_vector->v[0]);
+                if (metapost_output)
+                   *out_stream_mp << endl << *(dash_pattern_vector->v[0]);
 
-         *out_stream_mf << ";\n" << flush;
-         *out_stream_mp << ";\n" << flush;
+            } /* |if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)|  */
+
+
+         if (metafont_output)
+            *out_stream_mf << ";\n" << flush;
+         if (metapost_output)
+            *out_stream_mp << ";\n" << flush;
 
   } /* |else if (fill_draw_value == UNDRAW_VALUE)|  */
 
@@ -9099,16 +9131,19 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
                cerr_strm.str("");
           }
 #endif /* |DEBUG_COMPILE|  */@; 
-        
-          *out_stream_mf << "unfill " << **point_iter++;
-          *out_stream_mp << "unfill " << **point_iter++;
-
-#if 0 
-          @<Output |Path|@>@;
-#endif 
-
-          *out_stream_mf << ";\n" << flush;
-          *out_stream_mp << ";\n" << flush;
+   
+          if (metafont_output)     
+          {
+             *out_stream_mf << "unfill " << **point_iter++;
+             output_path(*out_stream_mf);
+             *out_stream_mf << ";\n" << flush;
+          }
+          if (metapost_output)
+          {
+             *out_stream_mp << "unfill " << **point_iter++;
+             output_path(*out_stream_mp);
+             *out_stream_mp << ";\n" << flush;
+          }
 
       }  /* |else if (fill_draw_value == UNFILL_VALUE)|  */
 
@@ -9154,13 +9189,34 @@ Changed |if (draw_color == Colors::background_color)| to
 #if 0 
                 @<Output |Path|@>@;
 
-                @<Handle |pen|@>@;
 
-                @<Handle |dash_pattern|@>@;
+                if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
+                {
+
+                   if (metafont_output)
+                      *out_stream_mf << endl << "withpen " << *(pen_vector->v[0]);
+                   if (metapost_output)
+                      *out_stream_mp << endl << "withpen " << *(pen_vector->v[0]);
+
+                } /* |if (pen_vector != 0 && pen_vector->ctr > 0)|  */
+
+                
+                if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                    && dash_pattern_vector->ctr > 0)
+                  {
+                      if (metafont_output)
+                         *out_stream_mf << endl << *(dash_pattern_vector->v[0]);
+                      if (metapost_output)
+                         *out_stream_mp << endl << *(dash_pattern_vector->v[0]);
+
+                  } /* |if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)|  */
+
 #endif 
 
-                *out_stream_mf << ";\n" << flush;
-                *out_stream_mp << ";\n" << flush;
+                if (metafont_output)                
+                   *out_stream_mf << ";\n" << flush;
+                if (metapost_output)
+                   *out_stream_mp << ";\n" << flush;
             }
 
 @q ***** (5).@> 
@@ -9933,51 +9989,6 @@ Path::output_path(ofstream &curr_out_stream)
 
 
 }  /* End of |Path::output_path| definition */
-
-@q **** (4) Handle |pen|.@>
-@ Handle |pen|.  
-\initials{LDF 2004.06.02.}
-
-\LOG
-\initials{LDF 2004.06.02.}  
-Added this section.
-
-\initials{LDF 2004.11.12.}
-Replaced the code in this section with a call to 
-|operator<<(ostream& o, Pen& p)|.
-\ENDLOG 
-
-@<Handle |pen|@>=
-
-  if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
-    {
-
-        *out_stream << endl << "withpen " << *(pen_vector->v[0]);
-
-    } /* |if (pen_vector != 0 && pen_vector->ctr > 0)|  */
-
-@q **** (4) Handle |dash_pattern|.@>
-@ Handle |dash_pattern|.  
-\initials{LDF 2004.06.07.}
-
-\LOG
-\initials{LDF 2004.06.07.}  
-Added this section.
-
-\initials{LDF 2004.11.12.}
-Removed the code in this section to 
-the output operator for |Dash_Pattern|.
-\ENDLOG 
-
-@<Handle |dash_pattern|@>=
-
-  if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
-      && dash_pattern_vector->ctr > 0)
-    {
-
-        *out_stream << endl << *(dash_pattern_vector->v[0]);
-
-    } /* |if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)|  */
 
 @q * (1) Showing.@>
 @  Showing.
