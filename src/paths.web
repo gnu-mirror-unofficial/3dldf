@@ -8736,8 +8736,6 @@ Revised the code that checks the value of |arrow|.
 
 #if DEBUG_COMPILE
 
-       DEBUG = true;
-
         if (DEBUG)
         {
             cerr_strm << thread_name 
@@ -9420,7 +9418,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9938,7 +9936,7 @@ Path::output_path(ofstream *curr_out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;

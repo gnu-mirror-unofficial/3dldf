@@ -2374,6 +2374,10 @@ int
 Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg)
 {
 
+/* !!START HERE:  LDF 2022.04.14.  Don't output to MP if output_command_arg is endchar
+   or to MF if it's endfig!
+*/ 
+
 @q ***** (5) Get thread information and set |thread_name|.@>
 
 @ Get thread information and set |thread_name|.
