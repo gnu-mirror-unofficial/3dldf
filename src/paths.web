@@ -8735,6 +8735,9 @@ Revised the code that checks the value of |arrow|.
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
+
+       DEBUG = true;
+
         if (DEBUG)
         {
             cerr_strm << thread_name 
@@ -8849,13 +8852,13 @@ Revised the code that checks the value of |arrow|.
           if (metafont_output)
           {
              *out_stream_mf << "fill " << **point_iter++;
-             output_path(*out_stream_mf);
+             output_path(out_stream_mf);
           }
 
           if (metapost_output)
           {
              *out_stream_mp << "fill " << **point_iter++;
-             output_path(*out_stream_mp);
+             output_path(out_stream_mp);
           }
 
           if (   metapost_output && fill_color_vector != static_cast<Pointer_Vector<Color>*>(0)
@@ -8910,13 +8913,13 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
               if (metafont_output)
               {
                  *out_stream_mf << "fill " << **point_iter++;
-                 output_path(*out_stream_mf);
+                 output_path(out_stream_mf);
               }
 
               if (metapost_output)
               {
                  *out_stream_mp << "fill " << **point_iter++;
-                 output_path(*out_stream_mp);
+                 output_path(out_stream_mp);
               }
 
               Id_Map_Entry_Node entry;
@@ -8927,8 +8930,6 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
               if (metapost_output)
               {
 @q ****** (6) @>
-
-/* !!START HERE:  LDF 2022.04.14.  Test this!  Is |temp_color| ever used?  */ 
 
                   Color* temp_color;
 
@@ -8966,9 +8967,9 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 @<Define |Path| functions@>=
 
               if (metafont_output)
-                 output_path(*out_stream_mf);
+                 output_path(out_stream_mf);
               if (metapost_output)
-                 output_path(*out_stream_mp);
+                 output_path(out_stream_mp);
 
               v = 0;
 
@@ -9075,14 +9076,16 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 #endif /* |DEBUG_COMPILE| */@;
 
           if (metafont_output)
+          {
              *out_stream_mf << "undraw " << **point_iter++;
+             output_path(out_stream_mf);
+          }
+
           if (metapost_output)
+          {
              *out_stream_mp << "undraw " << **point_iter++;
-
-
-             output_path(*out_stream_mf);
-          if (metapost_output)
-             output_path(*out_stream_mp);
+             output_path(out_stream_mp);
+          }
 
           if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
           {
@@ -9135,13 +9138,13 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
           if (metafont_output)     
           {
              *out_stream_mf << "unfill " << **point_iter++;
-             output_path(*out_stream_mf);
+             output_path(out_stream_mf);
              *out_stream_mf << ";\n" << flush;
           }
           if (metapost_output)
           {
              *out_stream_mp << "unfill " << **point_iter++;
-             output_path(*out_stream_mp);
+             output_path(out_stream_mp);
              *out_stream_mp << ";\n" << flush;
           }
 
@@ -9183,12 +9186,19 @@ Changed |if (draw_color == Colors::background_color)| to
           if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
               || draw_color_vector->v.size() == 0)
             {
+
                 *out_stream_mf << "unfilldraw " << **point_iter++;
-                *out_stream_mp << "unfilldraw " << **point_iter++;
 
-#if 0 
-                @<Output |Path|@>@;
-
+                if (metafont_output)
+                {
+                   *out_stream_mf << "unfilldraw " << **point_iter++;
+                   output_path(out_stream_mf);
+                }
+                if (metapost_output)
+                {
+                   *out_stream_mp << "unfilldraw " << **point_iter++;
+                   output_path(out_stream_mp);
+                }
 
                 if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
                 {
@@ -9211,8 +9221,6 @@ Changed |if (draw_color == Colors::background_color)| to
 
                   } /* |if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)|  */
 
-#endif 
-
                 if (metafont_output)                
                    *out_stream_mf << ";\n" << flush;
                 if (metapost_output)
@@ -9231,22 +9239,18 @@ Now calling |Path::sub_output_draw|.
           else  /* |   draw_color_vector != 0 
                     && draw_color_vector->v.size() != 0|  */
             {
-                *out_stream_mf << "unfill " << **point_iter++;
-                *out_stream_mp << "unfill " << **point_iter++;
+@q ****** (6) @>
+                if (metafont_output)
+                {
+@q ******* (7) @>
+                   *out_stream_mf << "unfill " << **point_iter++;
+                   output_path(out_stream_mf);
+                   *out_stream_mf << ";" << endl << flush;
+                   status = sub_output_draw(scanner_node, out_stream_mf);
 
-#if 0 
-                @<Output |Path|@>@;
-#endif 
+@q ******* (7) @>
 
-                *out_stream_mf << ";" << endl << flush;
-                *out_stream_mp << ";" << endl << flush;
-
-#if 0                 
-                status = sub_output_draw(scanner_node, out_stream);
-#endif 
-
-
-                if (status != 0)
+                   if (status != 0)
                    {
                          cerr_strm << thread_name 
                                    << "ERROR!  In `Path::output':  "
@@ -9262,18 +9266,73 @@ Now calling |Path::sub_output_draw|.
 
                    }  /* |if (status != 0)|  */
 
+@q ******* (7) @>
+
 #if DEBUG_COMPILE
-              else if (DEBUG)
-                  {
-                      cerr_strm << thread_name 
-                                << "In `Path::output':  "
-                                << "`sub_output_draw' succeeded.";
+                   else if (DEBUG)
+                   {
+                       cerr_strm << thread_name 
+                                 << "In `Path::output':  "
+                                 << "`sub_output_draw' succeeded.";
   
-                      log_message(cerr_strm);
-                      cerr_message(cerr_strm);
-                      cerr_strm.str("");
-                  }        
+                       log_message(cerr_strm);
+                       cerr_message(cerr_strm);
+                       cerr_strm.str("");
+                   }        
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+                } /* |if (metafont_output)| */
+
+@q ****** (6) @>
+
+                if (metapost_output)
+                {
+@q ******* (7) @>
+
+                   *out_stream_mp << "unfill " << **point_iter++;
+                   output_path(out_stream_mp);
+                   *out_stream_mp << ";" << endl << flush;
+
+                   status = sub_output_draw(scanner_node, out_stream_mp);
+
+                   if (status != 0)
+                   {
+                         cerr_strm << thread_name 
+                                   << "ERROR!  In `Path::output':  "
+                                   << "`sub_output_draw' failed, returning "
+                                   << status << "."
+                                   << "Exiting function.";
+  
+                         log_message(cerr_strm);
+                         cerr_message(cerr_strm, error_stop_value);
+                         cerr_strm.str("");
+                      
+                         return;
+
+                   }  /* |if (status != 0)|  */
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+                   else if (DEBUG)
+                   {
+                       cerr_strm << thread_name 
+                                 << "In `Path::output':  "
+                                 << "`sub_output_draw' succeeded.";
+  
+                       log_message(cerr_strm);
+                       cerr_message(cerr_strm);
+                       cerr_strm.str("");
+                   }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ******* (7) @>
+
+                } /* |if (metapost_output)| */
+
+@q ****** (6) @>
 
             }    /* |else| (|   draw_color_vector != 0 
                              && draw_color_vector->v.size() != 0|)  */
@@ -9361,7 +9420,7 @@ Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9436,7 +9495,7 @@ Added code for suppressing output if the type of the current
                      && dash_pattern_vector->ctr > 1))
            )
 
-           {
+        {
 #if DEBUG_COMPILE
                if (DEBUG)
                  {
@@ -9541,24 +9600,24 @@ In addition, the first segment also requires special handling if
                if (   (arrow == DOUBLE_ARROW && points.size() == 1)
                    && (   !do_pens 
                        || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
-                   {
+               {
 
-                      *out_stream << "drawarrow " << *points[0];
+                  *out_stream << "drawarrow " << *points[0];
 
-                      if (metapost_output && do_colors)
-                         *out_stream << "withcolor " << **color_iter;
+                  if (metapost_output && do_colors)
+                     *out_stream << "withcolor " << **color_iter;
 
-                      if (do_pens)
-                         *out_stream << " withpen " << **pen_iter;
+                  if (do_pens)
+                     *out_stream << " withpen " << **pen_iter;
 
-                      if (do_dash_patterns)
-                         *out_stream << **dash_pattern_iter;                          
+                  if (do_dash_patterns)
+                     *out_stream << **dash_pattern_iter;                          
 
-                       *out_stream << ";" << endl << flush;
+                   *out_stream << ";" << endl << flush;
 
-                       return 0; 
+                   return 0; 
 
-                      }
+                  }
 
 @q ******* (7).@> 
 
@@ -9613,22 +9672,22 @@ In addition, the first segment also requires special handling if
                else if (   !do_pens 
                         || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
-                  {
-                       *out_stream << "draw " << *points[0] 
-                                   << *connector_type_iter << *points[1];
+               {
+                    *out_stream << "draw " << *points[0] 
+                                << *connector_type_iter << *points[1];
 
-                      if (metapost_output && do_colors)
-                         *out_stream << endl << "withcolor " << **color_iter;
+                   if (metapost_output && do_colors)
+                      *out_stream << endl << "withcolor " << **color_iter;
 
-                      if (do_pens)
-                         *out_stream << endl << "withpen " << **pen_iter;
+                   if (do_pens)
+                      *out_stream << endl << "withpen " << **pen_iter;
 
-                      if (do_dash_patterns)
-                         *out_stream << endl << **dash_pattern_iter;
+                   if (do_dash_patterns)
+                      *out_stream << endl << **dash_pattern_iter;
 
-                       *out_stream << ";" << endl << flush;
+                    *out_stream << ";" << endl << flush;
 
-                  }  
+               }  
 
 @q ****** (6) Draw the middle segments.@> 
 
@@ -9652,7 +9711,7 @@ In addition, the first segment also requires special handling if
 @q ******* (7) @> 
 
                for (; i < j; ++i)
-                  {
+               {
                      
                       ++connector_iter;
                       ++connector_type_iter;
@@ -9688,7 +9747,7 @@ In addition, the first segment also requires special handling if
 
 @q ******** (8) @> 
 
-                  }  /* |for|  */
+               }  /* |for|  */
 
 @q ******* (7) @> 
 
@@ -9740,7 +9799,7 @@ This requires special handling because |arrow| could be equal to
 
 @q ****** (6).@> 
                
-           }  /*  |if|  */
+        }  /*  |if|  */
 
 @q ***** (5).@>   
 @
@@ -9810,8 +9869,10 @@ Added code for suppressing output if the type of the current
                  *out_stream << "drawdblarrow " << **point_iter++;
                else
                  *out_stream << "draw " << **point_iter++;
-
-               @<Output |Path|@>@;
+              
+#if 1                 
+               output_path(out_stream);
+#endif 
 
                if (   metapost_output && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                    && draw_color_vector->ctr > 0)
@@ -9866,18 +9927,18 @@ depending on what forms of output are enabled.
 
 @<Declare |Path| functions@>=
 int
-output_path(ofstream &curr_out_stream);
+output_path(ofstream *curr_out_stream);
 
 @q **** (4) Definition @>
 @
 @<Define |Path| functions@>=
 int
-Path::output_path(ofstream &curr_out_stream)
+Path::output_path(ofstream *curr_out_stream)
 {
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9918,12 +9979,19 @@ Path::output_path(ofstream &curr_out_stream)
 #endif /* |DEBUG_COMPILE|  */@; 
 
    vector<Point*>::iterator point_iter = points.begin();
+   if (points.size() > 1)
+   {
+      *curr_out_stream << *points[0];
+      point_iter++;
+   }
+
    vector<Connector_Type*>::iterator connector_type_iter = connector_type_vector.begin();
 
    for (int counter = 2; point_iter != points.end();)
    {
 
-         curr_out_stream << " ";
+         *curr_out_stream << " ";
+
 #if DEBUG_COMPILE
          if (DEBUG)
          { 
@@ -9935,20 +10003,20 @@ Path::output_path(ofstream &curr_out_stream)
              && connector_type_iter != connector_type_vector.end() 
              && *connector_type_iter != 0)
          {
-            curr_out_stream << **connector_type_iter;
+            *curr_out_stream << **connector_type_iter;
          }
          else
          {
-            curr_out_stream << "..";
+            *curr_out_stream << "..";
          }
 
-         curr_out_stream << " " << **point_iter++;
+         *curr_out_stream << " " << **point_iter++;
 
          /* This breaks the line and indents after two points */
         
           if  (counter == 2 && point_iter != points.end())
             {
-              curr_out_stream << "\n  ";
+              *curr_out_stream << "\n  ";
               counter = 1;
             }
           else
@@ -9966,14 +10034,15 @@ Path::output_path(ofstream &curr_out_stream)
 
     if (is_cycle())
     {
-       curr_out_stream << endl << " ";
+
+       *curr_out_stream << endl << " ";
        if (connector_type_vector.size() > 0 && connector_type_iter != connector_type_vector.end())
-         curr_out_stream << **connector_type_iter;
+         *curr_out_stream << **connector_type_iter;
        else
-         curr_out_stream << "..";
-       curr_out_stream << " cycle";
+         *curr_out_stream << "..";
+       *curr_out_stream << " cycle";
     }
-    
+
 @q ***** (5) @>
 
 #if DEBUG_COMPILE
@@ -9987,6 +10056,7 @@ Path::output_path(ofstream &curr_out_stream)
       }
 #endif /* |DEBUG_COMPILE|  */@;
 
+      return 0;
 
 }  /* End of |Path::output_path| definition */
 
@@ -16243,9 +16313,6 @@ class Glyph;
 @<Define |Nurb| functions@>@;
 @<|Connector_Type| function definitions@>@;
 @<Define non-member non-template functions for |Connector_Type|@>@;
-
-@
-@<Output |Path|@>=
 
 @q ** (2).@> 
 
