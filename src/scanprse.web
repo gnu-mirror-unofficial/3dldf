@@ -1068,9 +1068,6 @@ Added this section.
   if (metafont_output)
   {
      os_mf = scanner_node->out[Run_State::METAFONT];
-
-/* !!START HERE:  LDF 2022.04.13.  Where is os_mf->stream_ptr allocated?  */ 
-
      out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
   }
   if (metapost_output)
@@ -1260,115 +1257,125 @@ Added this section.
 
 @q **** (4) Try to lock |os_mf->mutex|.@>  
 @ Try to lock |os_mf->mutex|.
+\initials{LDF 2022.04.14.}
+
+@<Define |Scan_Parse| functions@>= 
+
+   if (metafont_output)
+   {
+
+#ifdef HAVE_PTHREAD_H  
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      {
+
+       cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
+                 << endl
+                 << "About to call `os_mf->lock()'. ";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+      }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      status = os_mf->lock();
+
+@q **** (4) @>
+
+      if (status != 0)
+      {
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                    << endl
+                    << "`os_mf->lock()' failed. "
+                    << "Not writing to `out_stream'."
+                    << endl << "Will try to continue.";
+
+          log_message(cerr_strm); 
+          cerr_message(cerr_strm, error_stop_value); 
+          cerr_strm.str("");
+
+      } /* |if (status != 0)|  */
+
+@q **** (4) @>
+
+      else /* |os_mf->lock| succeeded.  */
+      {
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           {
+              cerr_strm << "`os_mf->lock()' succeeded!";
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      } /* |else| (|os_mf->lock| succeeded.)  */
+
+#endif /* |HAVE_PTHREAD_H|  */@; 
+
+   }  /* |if (metafont_output)| */
+
+@q **** (4) Try to lock |os_mp->mutex|.@>  
+@ Try to lock |os_mp->mutex|.
 \initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>= 
 
-#ifdef HAVE_PTHREAD_H  
-
-#if DEBUG_COMPILE
-   if (DEBUG)
-     {
-
-      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
-                << endl
-                << "About to call `os_mf->lock()'. ";
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-     }
-#endif /* |DEBUG_COMPILE|  */@; 
-
-  status = os_mf->lock();
-
-@q **** (4) @>
-
-  if (status != 0)
-    {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                << endl
-                << "`os_mf->lock()' failed. "
-                << "Not writing to `out_stream'."
-                << endl << "Will try to continue.";
-
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, error_stop_value); 
-      cerr_strm.str("");
-
-    } /* |if (status != 0)|  */
-
-@q **** (4) @>
-
-  else /* |os_mf->lock| succeeded.  */
-    {
-
-#if DEBUG_COMPILE
-      if (DEBUG)
-        {
-          cerr_strm << "`os_mf->lock()' succeeded!";
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-        }
-#endif /* |DEBUG_COMPILE|  */@; 
-
-    } /* |else| (|os_mf->lock| succeeded.)  */
-
-#endif /* |HAVE_PTHREAD_H|  */@; 
-
-@q **** (4) Try to lock |os_mp->mutex|.@>  
-@ Try to lock |os_mp->mutex|.
-\initials{LDF 2022.04.13.}
-
-@<Define |Scan_Parse| functions@>= 
+   if (metapost_output)
+   {
 
 #ifdef HAVE_PTHREAD_H  
 
 #if DEBUG_COMPILE
-   if (DEBUG)
-     {
+      if (DEBUG)
+      {
 
-      cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
-                << endl
-                << "About to call `os_mp->lock()'. ";
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
-     }
+       cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
+                 << endl
+                 << "About to call `os_mp->lock()'. ";
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  status = os_mp->lock();
+      status = os_mp->lock();
 
 @q **** (4) @>
 
-  if (status != 0)
-    {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                << endl
-                << "`os_mp->lock()' failed. "
-                << "Not writing to `out_stream'."
-                << endl << "Will try to continue.";
+      if (status != 0)
+      {
+          cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                    << endl
+                    << "`os_mp->lock()' failed. "
+                    << "Not writing to `out_stream'."
+                    << endl << "Will try to continue.";
 
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm, error_stop_value); 
-      cerr_strm.str("");
+          log_message(cerr_strm); 
+          cerr_message(cerr_strm, error_stop_value); 
+          cerr_strm.str("");
 
-    } /* |if (status != 0)|  */
+      } /* |if (status != 0)|  */
 
 @q **** (4) @>
 
-  else /* |os_mp->lock| succeeded.  */
-    {
+      else /* |os_mp->lock| succeeded.  */
+      {
 
 #if DEBUG_COMPILE
-      if (DEBUG)
-        {
-          cerr_strm << "`os_mp->lock()' succeeded!";
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-        }
+           if (DEBUG)
+           {
+              cerr_strm << "`os_mp->lock()' succeeded!";
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
+           }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    } /* |else| (|os_mp->lock| succeeded.)  */
+      } /* |else| (|os_mp->lock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
+
+   }  /* |if (metapost_output)| */
 
 @q **** (4) Clear |current_picture|, unless a figure or character has been started already.  @>
 
@@ -1458,31 +1465,34 @@ Replaced the code in this section with a call to
 
 @q **** (4) Try to unlock |os_mf->mutex|.@>  
 @ Try to unlock |os_mf->mutex|.
-\initials{LDF 2004.07.15.}
+\initials{LDF 2022.04.14.}
 
 @<Define |Scan_Parse| functions@>= 
 
+   if (metafont_output)
+   {
+
 #ifdef HAVE_PTHREAD_H  
-  status = os_mf->unlock();
+      status = os_mf->unlock();
 
-  if (status != 0)
-    {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                << endl
-                << "`os_mf->unlock()' failed. "
-                << "Not writing to `out_stream_mf'."
-                << endl << "Will try to continue.";
+      if (status != 0)
+      {
+         cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                   << endl
+                   << "`os_mf->unlock()' failed. "
+                   << "Not writing to `out_stream_mf'."
+                   << endl << "Will try to continue.";
 
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
 
-    } /* |if (status != 0)|  */
+     } /* |if (status != 0)|  */
 
-  else /* |os_mf->unlock| succeeded.  */
-    {
+     else /* |os_mf->unlock| succeeded.  */
+     {
 
 #if DEBUG_COMPILE
-      if (DEBUG)
+        if (DEBUG)
         {
           cerr_strm << "`os_mf->unlock()' succeeded!";
           cerr_message(cerr_strm);
@@ -1490,37 +1500,42 @@ Replaced the code in this section with a call to
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    } /* |else| (|os_mf->unlock| succeeded.)  */
+     } /* |else| (|os_mf->unlock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
+   }  /* |if (metafont_output)| */
+
 @q **** (4) Try to unlock |os_mp->mutex|.@>  
 @ Try to unlock |os_mp->mutex|.
-\initials{LDF 2022.04.13.}
+\initials{LDF 2004.07.15.}
 
 @<Define |Scan_Parse| functions@>= 
 
+   if (metapost_output)
+   {
+
 #ifdef HAVE_PTHREAD_H  
-  status = os_mp->unlock();
+      status = os_mp->unlock();
 
-  if (status != 0)
-    {
-      cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
-                << endl
-                << "`os_mp->unlock()' failed. "
-                << "Not writing to `out_stream_mp'."
-                << endl << "Will try to continue.";
+      if (status != 0)
+      {
+         cerr_strm << thread_name << "ERROR! In `Scan_Parse::beginfig_func':"
+                   << endl
+                   << "`os_mp->unlock()' failed. "
+                   << "Not writing to `out_stream_mp'."
+                   << endl << "Will try to continue.";
 
-      cerr_message(cerr_strm);
-      cerr_strm.str("");
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
 
-    } /* |if (status != 0)|  */
+     } /* |if (status != 0)|  */
 
-  else /* |os_mp->unlock| succeeded.  */
-    {
+     else /* |os_mp->unlock| succeeded.  */
+     {
 
 #if DEBUG_COMPILE
-      if (DEBUG)
+        if (DEBUG)
         {
           cerr_strm << "`os_mp->unlock()' succeeded!";
           cerr_message(cerr_strm);
@@ -1528,9 +1543,11 @@ Replaced the code in this section with a call to
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-    } /* |else| (|os_mp->unlock| succeeded.)  */
+     } /* |else| (|os_mp->unlock| succeeded.)  */
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
+
+   }  /* |if (metapost_output)| */
 
 @q **** (4) Set |scanner_node->output_pending.value_0| to |false|, @>  
 @q **** (4) decrement |scanner_node->output_pending.value_1|, and  @>  
