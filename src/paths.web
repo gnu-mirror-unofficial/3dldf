@@ -49,7 +49,7 @@
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
 @q * (0) Path.@>       
-@** Path\quad ({\tt paths\PERIOD web}).\hfil
+@ Path\quad ({\tt paths\PERIOD web}).\hfil
 \initials{LDF Undated.}
 
 \LOG
@@ -109,7 +109,7 @@ Now including \filename{nurbs.h}.
 #include "mpoutput.h++"
 
 @q * (1) class Path definition.@>
-@* {\bf Path} class definition.
+@  {\bf Path} class definition.
 
 \LOG
 \initials{LDF 2002.09.18.}  
@@ -262,7 +262,7 @@ Added |valarray <real> pre_projective_extremes|.
 };
 
 @q ** (2) Static member variable definitions.  @>
-@*1 Static member variable definitions.
+@  Static member variable definitions.
 
 \LOG
 \initials{LDF 2004.11.07.}
@@ -278,7 +278,7 @@ Added the |static const unsigned shorts NO_ARROW|,
    const unsigned short Path::DOUBLE_ARROW  = 2;
 
 @q * (1) Assignment. @>
-@* Assignment. 
+@  Assignment. 
 @^\cofunc{Path}{=}@>
 
 \LOG 
@@ -634,7 +634,7 @@ and subsequently resizing it, if necessary.
 
 @q * (1) Constructors and setting functions.@>
 
-@* Constructors and setting functions.
+@  Constructors and setting functions.
 Each constructor taking an argument has a corresponding function for
 setting an already existing |Path|.
 
@@ -652,7 +652,7 @@ it's now a |Pen*| rather than a |string|.
 
 @q ** (2) Discard points and connectors.@>
 
-@*1 Discard points and connectors.
+@  Discard points and connectors.
 This is useful in the setting functions.
 
 @<Discard |points| and |connectors|@>=
@@ -681,7 +681,7 @@ This is useful in the setting functions.
    }
 
 @q ** (2) Default constructor. No arguments.@>
-@*1 Default constructor. No arguments.
+@  Default constructor. No arguments.
 @^\cfunc{Path}{Path}@>
 
 \LOG
@@ -778,7 +778,7 @@ arrow = NO_ARROW;
 }
 
 @q ** (2) Lines.@>
-@*1 Lines.  
+@  Lines.  
 \initials{LDF 2002.10.15.}
 Lines in this sense are |Paths| containing two |Points|
 and the connector ``|--|'' They should not be confused with the
@@ -787,7 +787,7 @@ and the connector ``|--|'' They should not be confused with the
 
 @q *** (3) Constructor.@>
 
-@*2 Constructor.
+@  Constructor.
 @^\cfunc{Path}{Path}@>
 
 \LOG
@@ -890,7 +890,7 @@ Path::Path(const Point& p0, const Point& p1)
 
 @q *** (3) Setting function.@>
 
-@*2 Setting function.
+@  Setting function.
 @^\cfunc{Path}{set}@>
 
 \LOG
@@ -1012,7 +1012,7 @@ Path::set(const Point& p0, const Point& p1)
 } /* End of |Path::set(const Point& p0, const Point& p1)| definition  */
 
 @q ** (2) Points and one type of connector.@>
-@*1 {\bf Points} and one type of connector.
+@  {\bf Points} and one type of connector.
 
 This constructor takes a variable number of |Point*| arguments,
 but only allows one type of connector. The argument list must end with
@@ -1054,7 +1054,7 @@ Now setting |arrow| to |NO_ARROW| rather than |false|.
 \ENDLOG 
 
 @q *** (3) Constructor.@>
-@*2 Constructor.
+@  Constructor.
 @^\cfunc{Path}{Path}@>
 
 \LOG
@@ -1150,7 +1150,7 @@ Path::Path(string connector, bool@,@, cycle ... )
 
 @q *** (3) Setting function.@>
 
-@*2 Setting function.
+@  Setting function.
 @^\cfunc{Path}{set}@>
 
 \LOG
@@ -1292,7 +1292,7 @@ Path::set(string connector, bool cycle ... )
 }  /* End of |Path::set(string connector, bool cycle ... )| definition  */
 
 @q ** (2) Variable number of Points and connectors.@>
-@*1 Variable number of {\bf Points} and connectors.
+@  Variable number of {\bf Points} and connectors.
 These functions takes a variable number of alternating |Point*| and connector
 arguments, starting with a |Point*|.  The argument list must end with
 0. We don't need an argument for whether it's a cycle or not, because
@@ -1323,7 +1323,7 @@ Now resizing |pre_projective_extremes|.
 \ENDLOG 
 
 @q *** (3) Constructor.@>
-@*2 Constructor.
+@  Constructor.
 @^\cfunc{Path}{Path}@>
 
 \LOG
@@ -1438,7 +1438,7 @@ Path::Path(Point* first_point_ptr ... )
 }  /* End of |Path::Path(Point* first_point_ptr ... )| definition  */
 
 @q *** (3) Setting function.@>
-@*2 Setting function.
+@  Setting function.
 @^\cfunc{Path}{set}@>
 
 \LOG
@@ -1650,7 +1650,7 @@ Path::Path(const Path& p)
 }
 
 @q * (1) Pseudo-constructor for dynamic allocation. @>
-@* Pseudo-constructor for dynamic allocation. 
+@  Pseudo-constructor for dynamic allocation. 
 
 @q ** (2) Pointer argument.@>
 @ Pointer argument.@>
@@ -1687,7 +1687,7 @@ Path*
 create_new(const Path* p, Scanner_Node scanner_node);
 
 @q ** (2) Reference argument.@>
-@*1 Reference argument.@>
+@  Reference argument.@>
 
 \LOG
 \initials{LDF 2002.10.29.}  
@@ -1713,7 +1713,7 @@ Path*
 create_new(const Path& p, Scanner_Node scanner_node);
 
 @q * (1) Destructor. @>
-@* Destructor.
+@  Destructor.
 @^\cfunc{Path}{\~{}Path}@>
 
 Make sure to delete anything else that I allocate
@@ -1853,7 +1853,7 @@ Added this section.
 } /* End of |Path| destructor definition  */
 
 @q * (1) Clear.@>
-@* Clear.  
+@  Clear.  
 @^\cfunc{Path}{clear}@>
 
 LDF Undated.
@@ -1955,7 +1955,7 @@ Path::clear()
 } /* End of |Path::clear| definition.  */
 
 @q * (1) Clear connectors.@>
-@* Clear connectors.  
+@  Clear connectors.  
 @^\cfunc{Path}{clear\_connectors}@>
 
 \LOG
@@ -1986,7 +1986,7 @@ clear_connectors(void)
 
 
 @q * (1) Get copy.@>
-@* Get copy.
+@  Get copy.
 @^\cfunc{Path}{get\_copy}@>
 \LOG
 \initials{LDF 2002.11.03.}  Made |virtual|.  
@@ -2012,7 +2012,7 @@ Path::get_copy() const
 }
 
 @q * (1) Copy coordinates.@> 
-@* Copy coordinates.
+@  Copy coordinates.
 \initials{LDF 2005.04.09.}
 
 \LOG
@@ -2109,11 +2109,11 @@ Path::copy_coords(const char from,
 }  /* End of |Path::copy_coords| definition.  */
 
 @q * (1) Setting and querying drawing and filling data.@>
-@* Setting and querying drawing and filling data.
+@  Setting and querying drawing and filling data.
 \initials{LDF Undated.}
 
 @q ** (2) Set fill_draw_value.@>
-@*1 Set {\bf fill\_draw\_value}.
+@  Set {\bf fill\_draw\_value}.
 @^\cfunc{Path}{set\_fill\_draw\_value}@>
 \initials{LDF Undated.}
 
@@ -2133,7 +2133,7 @@ Path::set_fill_draw_value(const signed short s)
 }
 
 @q ** (2) Get fill_draw_value.@>
-@*1 Set {\bf fill\_draw\_value}.
+@  Set {\bf fill\_draw\_value}.
 @^\cfunc{Path}{get\_fill\_draw\_value}@>
 \initials{LDF 2005.08.16.}
 
@@ -2161,7 +2161,7 @@ Path::get_fill_draw_value(void)
 }
 
 @q ** (2) Push draw color.@>
-@*1 Push draw color.
+@  Push draw color.
 \initials{LDF 2005.03.17.}
 
 \LOG
@@ -2208,7 +2208,7 @@ Path::push_draw_color(Color*& c, bool copy)
 }  /* End of |Path::push_draw_color|  */
 
 @q ** (2) Push fill color.@>
-@*1 Push fill color.
+@  Push fill color.
 \initials{LDF 2005.03.17.}
 
 \LOG
@@ -2255,7 +2255,7 @@ Path::push_fill_color(Color*& c, bool copy)
 }  /* End of |Path::push_fill_color|  */
 
 @q ** (2) Push color.@>
-@*1 Push color.
+@  Push color.
 \initials{LDF 2005.03.17.}
 
 \LOG
@@ -2308,7 +2308,7 @@ Path::push_color(Color*& c, bool copy)
 }  /* End of |Path::push_color|  */
 
 @q ** (2) Push pen.@>
-@*1 Push {\bf Pen}.
+@  Push {\bf Pen}.
 @^\cfunc{Path}{push\_pen}@>
 \initials{LDF 2005.03.18.}
 
@@ -2352,7 +2352,7 @@ Path::push_pen(Pen*& p, bool copy)
 }  /* End of |Path::push_pen| definition.  */
 
 @q ** (2) Push dash_pattern.@>
-@*1 Push {\bf Dash\_Pattern}.
+@  Push {\bf Dash\_Pattern}.
 @^\cfunc{Path}{push\_dash\_pattern}@>
 \initials{LDF 2005.03.18.}
 
@@ -2396,7 +2396,7 @@ Path::push_dash_pattern(Dash_Pattern*& d, bool copy)
 }  /* End of |Path::push_dash_pattern| definition.  */
 
 @q ** (2) Set connectors.@>
-@*1 Set connectors.
+@  Set connectors.
 @^\cfunc{Path}{set\_connectors}@>
 \initials{LDF 2003.02.08.}  
 
@@ -2460,7 +2460,7 @@ Path::set_connectors(const string s)
 }  /* End of |Path::set_connectors(const string s)| definition  */
 
 @q ** (2) Set |Connector_Type|.@>
-@*1 Set |Connector_Type|.
+@  Set |Connector_Type|.
 @^\cfunc{Path}{set\_connector\_type}@>
 \initials{LDF 2022.01.28.}
 
@@ -2497,7 +2497,7 @@ Path::set_connector_type(int position,
 }
 
 @q * (1) Functions for checking integrity of form.@> 
-@* Functions for checking integrity of form.
+@  Functions for checking integrity of form.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2506,7 +2506,7 @@ Added this section.
 \ENDLOG
 
 @q ** (2) Is whatever.@>
-@*1 Is whatever. 
+@  Is whatever. 
 @^\cfunc{Path}{is\_whatever}@>
 \initials{LDF 2005.10.26.}
 
@@ -2532,7 +2532,7 @@ Path::is_whatever(Scanner_Node scanner_node,
 }
 
 @q * (1) Functions for checking types.@> 
-@* Functions for checking types.
+@  Functions for checking types.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2541,7 +2541,7 @@ Added this section.
 \ENDLOG
 
 @q ** (2) Is |Point|.@> 
-@*1 Is {\bf Point}.
+@  Is {\bf Point}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2559,7 +2559,7 @@ is_point(void) const
 }
 
 @q ** (2) Is |Nurb|.@> 
-@*1 Is {\bf Nurb}.
+@  Is {\bf Nurb}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2577,7 +2577,7 @@ is_nurb(void) const
 }
 
 @q ** (2) Is |Path|.@> 
-@*1 Is {\bf Path}.
+@  Is {\bf Path}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2595,7 +2595,7 @@ is_path(void) const
 }
 
 @q ** (2) Is |Polygon|.@> 
-@*1 Is {\bf Polygon}.
+@  Is {\bf Polygon}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2613,7 +2613,7 @@ is_polygon(void) const
 }
 
 @q ** (2) Is |Triangle|.@> 
-@*1 Is {\bf Triangle}.
+@  Is {\bf Triangle}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2631,7 +2631,7 @@ is_triangle(void) const
 }
 
 @q ** (2) Is |Rectangle|.@> 
-@*1 Is {\bf Rectangle}.
+@  Is {\bf Rectangle}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2649,7 +2649,7 @@ is_rectangle(void) const
 }
 
 @q ** (2) Is |Reg_Polygon|.@> 
-@*1 Is {\bf Reg\_Polygon}.
+@  Is {\bf Reg\_Polygon}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2667,7 +2667,7 @@ is_reg_polygon(void) const
 }
 
 @q ** (2) Is |Ellipse|.@> 
-@*1 Is {\bf Ellipse}.
+@  Is {\bf Ellipse}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2685,7 +2685,7 @@ is_ellipse(void) const
 }
 
 @q ** (2) Is |Ellipse_Slice|.@> 
-@*1 Is {\bf Ellipse\_Slice}.
+@  Is {\bf Ellipse\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -2703,7 +2703,7 @@ is_ellipse_slice(void) const
 }
 
 @q ** (2) Is |Circle|.@> 
-@*1 Is {\bf Circle}.
+@  Is {\bf Circle}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2721,7 +2721,7 @@ is_circle(void) const
 }
 
 @q ** (2) Is |Circle_Slice|.@> 
-@*1 Is {\bf Circle\_Slice}.
+@  Is {\bf Circle\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -2739,7 +2739,7 @@ is_circle_slice(void) const
 }
 
 @q ** (2) Is |Parabola|.@> 
-@*1 Is {\bf Parabola}.
+@  Is {\bf Parabola}.
 \initials{LDF 2005.11.07.}
 
 \LOG
@@ -2757,7 +2757,7 @@ is_parabola(void) const
 }
 
 @q ** (2) Is |Hyperbola|.@> 
-@*1 Is {\bf Hyperbola}.
+@  Is {\bf Hyperbola}.
 \initials{LDF 2005.11.07.}
 
 \LOG
@@ -2775,7 +2775,7 @@ is_hyperbola(void) const
 }
 
 @q ** (2) Is |Arc|-type.@> 
-@*1 Is {\bf Arc}-type.
+@  Is {\bf Arc}-type.
 \initials{LDF 2007.10.13.}
 
 \LOG
@@ -2793,7 +2793,7 @@ is_arc_type(void) const
 }
 
 @q ** (2) Is |Helix|.@> 
-@*1 Is {\bf Helix}.
+@  Is {\bf Helix}.
 \initials{LDF 2005.05.18.}
 
 \LOG
@@ -2811,7 +2811,7 @@ is_helix(void) const
 }
 
 @q ** (2) Is |Helix_Slice|.@> 
-@*1 Is {\bf Helix\_Slice}.
+@  Is {\bf Helix\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -2829,7 +2829,7 @@ is_helix_slice(void) const
 }
 
 @q ** (2) Is |Solid|.@> 
-@*1 Is {\bf Solid}.
+@  Is {\bf Solid}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2847,7 +2847,7 @@ is_solid(void) const
 }
 
 @q ** (2) Is |Solid_Faced|.@> 
-@*1 Is {\bf Solid\_Faced}.
+@  Is {\bf Solid\_Faced}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2865,7 +2865,7 @@ is_solid_faced(void) const
 }
 
 @q ** (2) Is |Polyhedron|.@> 
-@*1 Is {\bf Polyhedron}.
+@  Is {\bf Polyhedron}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2883,7 +2883,7 @@ is_polyhedron(void) const
 }
 
 @q ** (2) Is |Polyhedron_Slice|.@> 
-@*1 Is {\bf Polyhedron\_Slice}.
+@  Is {\bf Polyhedron\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -2901,7 +2901,7 @@ is_polyhedron_slice(void) const
 }
 
 @q ** (2) Is |Cuboid|.@> 
-@*1 Is {\bf Cuboid}.
+@  Is {\bf Cuboid}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2919,7 +2919,7 @@ is_cuboid(void) const
 }
 
 @q ** (2) Is |Cuboid_Slice|.@> 
-@*1 Is {\bf Cuboid\_Slice}.
+@  Is {\bf Cuboid\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -2937,7 +2937,7 @@ is_cuboid_slice(void) const
 }
 
 @q ** (2) Is |Tetrahedron|.@> 
-@*1 Is {\bf Tetrahedron}.
+@  Is {\bf Tetrahedron}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2955,7 +2955,7 @@ is_tetrahedron(void) const
 }
 
 @q ** (2) Is |Octahedron|.@> 
-@*1 Is {\bf Octahedron}.
+@  Is {\bf Octahedron}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2973,7 +2973,7 @@ is_octahedron(void) const
 }
 
 @q ** (2) Is |Dodecahedron|.@> 
-@*1 Is {\bf Dodecahedron}.
+@  Is {\bf Dodecahedron}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -2991,7 +2991,7 @@ is_dodecahedron(void) const
 }
 
 @q ** (2) Is |Icosahedron|.@> 
-@*1 Is {\bf Icosahedron}.
+@  Is {\bf Icosahedron}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -3009,7 +3009,7 @@ is_icosahedron(void) const
 }
 
 @q ** (2) Is |Trunc_Octahedron|.@> 
-@*1 Is {\bf Trunc\_Octahedron}.
+@  Is {\bf Trunc\_Octahedron}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -3027,7 +3027,7 @@ is_trunc_octahedron(void) const
 }
 
 @q ** (2) Is |Great_Rhombicosidodecahedron|.@> 
-@*1 Is {\bf Great\_Rhombicosidodecahedron}.
+@  Is {\bf Great\_Rhombicosidodecahedron}.
 \initials{LDF 2005.12.14.}
 
 \LOG
@@ -3045,7 +3045,7 @@ is_great_rhombicosidodecahedron(void) const
 }
 
 @q ** (2) Is |Cone|.@> 
-@*1 Is {\bf Cone}.
+@  Is {\bf Cone}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3063,7 +3063,7 @@ is_cone(void) const
 }
 
 @q ** (2) Is |Cone_Slice|.@> 
-@*1 Is {\bf Cone\_Slice}.
+@  Is {\bf Cone\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3081,7 +3081,7 @@ is_cone_slice(void) const
 }
 
 @q ** (2) Is |Cylinder|.@> 
-@*1 Is {\bf Cylinder}.
+@  Is {\bf Cylinder}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3099,7 +3099,7 @@ is_cylinder(void) const
 }
 
 @q ** (2) Is |Cylinder_Slice|.@> 
-@*1 Is {\bf Cylinder\_Slice}.
+@  Is {\bf Cylinder\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3117,7 +3117,7 @@ is_cylinder_slice(void) const
 }
 
 @q ** (2) Is |Ellipsoid|.@> 
-@*1 Is {\bf Ellipsoid}.
+@  Is {\bf Ellipsoid}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3135,7 +3135,7 @@ is_ellipsoid(void) const
 }
 
 @q ** (2) Is |Ellipsoid_Slice|.@> 
-@*1 Is {\bf Ellipsoid\_Slice}.
+@  Is {\bf Ellipsoid\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3153,7 +3153,7 @@ is_ellipsoid_slice(void) const
 }
 
 @q ** (2) Is |Sphere|.@> 
-@*1 Is {\bf Sphere}.
+@  Is {\bf Sphere}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3171,7 +3171,7 @@ is_sphere(void) const
 }
 
 @q ** (2) Is |Sphere_Slice|.@> 
-@*1 Is {\bf Sphere\_Slice}.
+@  Is {\bf Sphere\_Slice}.
 \initials{LDF 2005.05.24.}
 
 \LOG
@@ -3189,7 +3189,7 @@ is_sphere_slice(void) const
 }
 
 @q ** (2) Is |Paraboloid|.@> 
-@*1 Is {\bf Paraboloid}.
+@  Is {\bf Paraboloid}.
 \initials{LDF 2005.11.07.}
 
 \LOG
@@ -3207,7 +3207,7 @@ is_paraboloid(void) const
 }
 
 @q ** (2) Is |Hyperboloid|.@> 
-@*1 Is {\bf Hyperboloid}.
+@  Is {\bf Hyperboloid}.
 \initials{LDF 2005.11.07.}
 
 \LOG
@@ -3225,22 +3225,22 @@ is_hyperboloid(void) const
 }
 
 @q * (1) Transformations. @>
-@* Transformations.
+@  Transformations.
 \initials{LDF 2002.11.03.}
 All of the transformations return a |Transform|, so that the same
 |Transform| can be applied to multiple objects by chaining
 expressions.
 
 @q ** (2) Affine transformations.@>
-@*1 Affine transformations.
+@  Affine transformations.
 \initials{LDF Undated.}
 
 @q *** (3) Rotation.@>
-@*2 Rotation. 
+@  Rotation. 
 \initials{LDF Undated.}
 
 @q **** (4) Rotatation around the main axes.@>
-@*3 Rotation  around the main axes. 
+@  Rotation  around the main axes. 
 @^\cfunc{Path}{rotate}@>
 \initials{LDF Undated.}
 
@@ -3594,7 +3594,7 @@ Path::operator*=(const Transform& t)
 }
 
 @q *** (3) Applying transform to points.@>
-@*2 Applying {\bf transform} to {\bf points}.
+@  Applying {\bf transform} to {\bf points}.
 @^\cfunc{Path}{apply\_transform}@>
 @<Declare |Path| functions@>=
 virtual
@@ -3625,7 +3625,7 @@ Path::apply_transform()
 }
 
 @q ** (2) Projection.@>
-@*1 Projection.
+@  Projection.
 @^\cfunc{Path}{project}@>
 \initials{LDF Undated.}
 
@@ -3689,7 +3689,7 @@ Path::project(const Focus& f,
 }  /* End of |Path::project| definition  */
 
 @q * (1) Reflection in a |Plane|.@>
-@* Reflection in a {\bf Plane}.
+@  Reflection in a {\bf Plane}.
 \initials{LDF 2004.10.03.}
 @^\cfunc{Path}{reflect\_in}@>
 
@@ -3977,7 +3977,7 @@ exit function successfully with return value 0.
 } /* End of |Path::reflect_in| definition */
 
 @q * (1) Reflection off of a |Plane|.@>
-@* Reflection off of a {\bf Plane}.
+@  Reflection off of a {\bf Plane}.
 \initials{LDF 2004.12.10.}
 
 \LOG
@@ -4282,16 +4282,16 @@ return 1;
 }  /* End of |Path::reflect_off| definition.  */
 
 @q * (1) Functions for lines.@>
-@* Functions for lines.
+@  Functions for lines.
 
 @q ** (2) Alignment with an axis. @>
-@*1 Alignment with an axis.
+@  Alignment with an axis.
 
 @q *** (3) For linear |Paths|. @>
-@*2 For linear {\bf Paths}.
+@  For linear {\bf Paths}.
 
 @q **** (4) No assignment.  (No |Point| arguments.)@>
-@*3 No assignment.  (No {\bf Point} arguments.)
+@  No assignment.  (No {\bf Point} arguments.)
 @^\cfunc{Path}{align\_with\_axis}@>
 \initials{LDF Undated.}
 
@@ -4368,7 +4368,7 @@ Path::align_with_axis(const char axis, Scanner_Node scanner_node) const
 }  /* End of |Path::align_with_axis| definition.  */
 
 @q **** (4) With assignment.@>
-@*3 With assignment.
+@  With assignment.
 @^\cfunc{Path}{align\_with\_axis}@>
 \initials{LDF 2002.11.03.}  This function should never be called with the |bool|
 argument |assign == false|.  It won't cause any harm, though, since it
@@ -4422,7 +4422,7 @@ Path::align_with_axis(bool assign, const char axis)
 } /* |Path::align_with_axis| */
 
 @q *** (3) For non-lines. ({\bf Point} and axis arguments).@>
-@*2 For non-lines.  ({\bf Point} and axis arguments).
+@  For non-lines.  ({\bf Point} and axis arguments).
 @^\cfunc{Path}{align\_with\_axis}@>
 \initials{LDF 2002.11.03.}  
 This function finds the transformation that would
@@ -4452,14 +4452,14 @@ Path::align_with_axis(const Point& p0, const Point& p1, const char axis = 'z')
 }
 
 @q * (1) Adding Points to Paths.@>
-@* Adding {\bf Points} to {\bf Paths}.
+@  Adding {\bf Points} to {\bf Paths}.
 
 @q ** (2) With assignment.@>
-@*1 With assignment.  
+@  With assignment.  
 @^\cofunc{Path}{+=}@>
 
 @q *** (3) |const Point&| argument.@>
-@*2 {\bf const Point} reference argument.  
+@  {\bf const Point} reference argument.  
 @^\cofunc{Path}{+=}@>
 
 \LOG
@@ -4483,7 +4483,7 @@ Path::operator+=(const Point& p)
 }
 
 @q *** (3) |Point*| argument.@>
-@*2 Pointer to {\bf Point} argument.  
+@  Pointer to {\bf Point} argument.  
 @^\cofunc{Path}{+=}@>
 
 This function pushes the |Point*| argument itself onto 
@@ -4511,7 +4511,7 @@ Path::operator+=(Point* p)
 }
 
 @q ** (2) Without assignment.@>
-@*1 Without assignment.  
+@  Without assignment.  
 @^\cofunc{Path}{+}@>
 
 \LOG
@@ -4533,7 +4533,7 @@ Path::operator+(const Point& pt) const
 }
 
 @q * (1) Adding connectors to Paths.@>
-@* Adding connectors to {\bf Paths}.
+@  Adding connectors to {\bf Paths}.
 @^\cofunc{Path}{+=}@>
 \initials{LDF 2003.02.09.}  
 
@@ -4657,7 +4657,7 @@ Path::operator+=(Connector_Type *c)
 }
 
 @q * (1) Adding |Colors| to Paths.@>
-@* Adding {\bf Colors} to {\bf Paths}.
+@  Adding {\bf Colors} to {\bf Paths}.
 @^\cofunc{Path}{+=}@>
 \initials{LDF 2005.03.10.}
 
@@ -4780,13 +4780,13 @@ Path::operator+=(Color* c)
 } /* End of |Path::operator+=(Color* c)| definition.  */
 
 @q * (1) Concatenating Paths.@>
-@* Concatenating {\bf Paths}.
+@  Concatenating {\bf Paths}.
 
 @q ** (2) Versions using ``{\AM}''.@>
-@*1 Versions using ``{\AM}''.
+@  Versions using ``{\AM}''.
 
 @q *** (3) With assignment.@>
-@*2 With assignment. 
+@  With assignment. 
 @^\cofunc{Path}{\AM=}@>
 This function appends the |Path| argument |pa| to |*this|.
 
@@ -4918,7 +4918,7 @@ implemented, but they seem to be handled like string literals.
 }  /* End of |Path::operator&=(const Path& pa)| definition  */
 
 @q *** (3) Without assignment.@>
-@*2 Without assignment.  
+@  Without assignment.  
 @^\cofunc{Path}{\AM}@>
 \initials{LDF 2002.4.6.}  
 
@@ -4944,7 +4944,7 @@ Path::operator&(const Path& pa) const
 }
 
 @q ** (2) Appending with a connector argument.@>
-@*1 Appending with a connector argument.
+@  Appending with a connector argument.
 @^\cfunc{Path}{append}@>
 \initials{LDF 2002.4.7.} 
 
@@ -4972,7 +4972,7 @@ Path
 append(const Path& pa, string connector = "--", bool assign = true);
 
 @q * (1) |Plane| functions.@> 
-@* {\bf Plane} functions.
+@  {\bf Plane} functions.
 \initials{LDF 2005.11.01.}
 
 \LOG
@@ -4981,7 +4981,7 @@ Added this section.
 \ENDLOG
 
 @q ** (2) Get |Path|.@> 
-@*1 Get {\bf Path}.
+@  Get {\bf Path}.
 \initials{LDF 2005.11.01.}
 
 \LOG
@@ -5080,13 +5080,13 @@ Plane::get_path(Scanner_Node scanner_node) const
 }  /* |Plane::get_path(void)| */
 
 @q * (1) Drawing and filling. @>
-@* Drawing and filling.
+@  Drawing and filling.
 
 @q ** (2) Draw.@>
-@*1 Draw.
+@  Draw.
 
 @q *** (3) Path versions.@>
-@*2 {\bf Path} versions.
+@  {\bf Path} versions.
 @^\cfunc{Path}{draw}@>
 
 \LOG
@@ -5440,7 +5440,7 @@ a segmentation fault error.
 } /* End of |Path::draw| definition.  */
 
 @q *** (3) Point versions.@>
-@*2 {\bf Point} versions.  
+@  {\bf Point} versions.  
 @^\cfunc{Point}{draw}@>
 
 Declared in \filename{points.web}, but must be
@@ -5568,10 +5568,10 @@ Point::draw(Picture& picture,
 }  /* End of |Point::draw| definition.  */
 
 @q ** (2) Draw arrow.@>
-@*1 Draw arrow.
+@  Draw arrow.
 
 @q *** (3) Path versions.@>
-@*2 {\bf Path} versions.
+@  {\bf Path} versions.
 @^\cfunc{Path}{drawarrow}@>
 
 \LOG
@@ -5632,7 +5632,7 @@ Path::drawarrow(Picture& picture,
 }
 
 @q *** (3) Point versions.@>
-@*2 {\bf Point} versions.
+@  {\bf Point} versions.
 @^\cfunc{Point}{drawarrow}@>
 
 \LOG
@@ -5671,11 +5671,11 @@ Point::drawarrow(Picture& picture,
 }
 
 @q ** (2) Draw double arrow.@>
-@*1 Draw double arrow.
+@  Draw double arrow.
 \initials{LDF Undated.}
 
 @q *** (3) Path versions.@>
-@*2 {\bf Path} versions.
+@  {\bf Path} versions.
 @^\cfunc{Path}{drawdblarrow}@>
 \initials{LDF 2004.11.07.}
 
@@ -5718,7 +5718,7 @@ Path::drawdblarrow(Picture& picture,
 }
 
 @q *** (3) Point versions.@>
-@*2 {\bf Point} versions.
+@  {\bf Point} versions.
 @^\cfunc{Point}{drawdblarrow}@>
 \initials{LDF 2004.11.07.}
 
@@ -5747,7 +5747,7 @@ Point::drawdblarrow(Picture& picture,
 }
 
 @q ** (2) Fill.@>
-@*1 Fill.
+@  Fill.
 @^\cfunc{Path}{fill}@>
 \initials{LDF Undated.}
 
@@ -5921,7 +5921,7 @@ Path::fill(Picture& picture, Color* ffill_color) const
 }
 
 @q ** (2) Filldraw.@>
-@*1 Filldraw.
+@  Filldraw.
 @^\cfunc{Path}{filldraw}@>
 \initials{LDF Undated.}
 
@@ -6164,11 +6164,11 @@ Path::filldraw(Picture& picture,
 }
 
 @q ** (2) Undraw.@>
-@*1 Undraw.
+@  Undraw.
 \initials{LDF Undated.}
 
 @q *** (3) Path versions.@>
-@*2 {\bf Path} versions.
+@  {\bf Path} versions.
 @^\cfunc{Path}{undraw}@>
 \initials{LDF Undated.}
 
@@ -6340,7 +6340,7 @@ Path::undraw(Picture& picture,
 } /* End of |Path::undraw| definition.  */
 
 @q *** (3) Point versions.@>
-@*2 {\bf Point} versions.
+@  {\bf Point} versions.
 @^\cfunc{Point}{undraw}@>
 \initials{LDF Undated.}
 
@@ -6416,7 +6416,7 @@ pa.undraw(picture, ddash_pattern_vector, ppen_vector);
 }
 
 @q ** (2) Unfill.@>
-@*1 Unfill.
+@  Unfill.
 @^\cfunc{Path}{unfill}@>
 \initials{LDF Undated.}
 
@@ -6556,7 +6556,7 @@ Path::unfill(Picture& picture)
 }
 
 @q ** (2) Unfilldraw.@>
-@*1 Unfilldraw.
+@  Unfilldraw.
 @^\cfunc{Path}{unfilldraw}@>
 \initials{LDF Undated.}
 
@@ -6769,10 +6769,10 @@ Path::unfilldraw(Picture& picture,
 }
 
 @q * (1) Labelling.@>
-@* Labelling.
+@  Labelling.
 
 @q ** (2) Label.@>
-@*1 Label.
+@  Label.
 @^\cfunc{Path}{label}@>
 
 \LOG
@@ -6962,7 +6962,7 @@ Now passing 0 as the |Transform*| argument to |Point::label|.
 } /* End of |Path::label| definition.  */
 
 @q ** (2) Dotlabel.@>
-@*1 Dotlabel.
+@  Dotlabel.
 @^\cfunc{Path}{dotlabel}@>
 \initials{LDF Undated.}
 
@@ -7005,10 +7005,10 @@ dotlabel(Picture& picture,
 }
 
 @q * (1) Outputting.@>
-@* Outputting.
+@  Outputting.
 
 @q ** (2) Extract.@>
-@*1 Extract.  
+@  Extract.  
 @^\cfunc{Path}{extract}@>
 \initials{LDF Undated.}
 
@@ -7084,7 +7084,7 @@ Path::extract(const Focus& f, const unsigned short proj, real factor)
 } /* End |Path::extract(const Focus& f, const unsigned short proj, real factor)| definition  */
 
 @q ** (2) Set world extremes.@> 
-@*1 Set world extremes.
+@  Set world extremes.
 \initials{LDF 2005.04.04.}
 
 \LOG
@@ -7246,7 +7246,7 @@ Path::set_world_extremes(Scanner_Node scanner_node)
 }  /* End of |Path::set_world_extremes| definition.  */
 
 @q ** (2) Set pre-projective extremes.@>
-@*1 Set pre-projective extremes.
+@  Set pre-projective extremes.
 @^\cfunc{Path}{set\_pre\_projective\_extremes}@>
 \initials{LDF 2005.06.30.}
 
@@ -7409,7 +7409,7 @@ Path::set_pre_projective_extremes(Scanner_Node scanner_node)
 }  /* End of |Path::set_pre_projective_extremes| definition.  */
 
 @q ** (2) Set projective extremes.@>
-@*1 Set projective extremes.
+@  Set projective extremes.
 @^\cfunc{Path}{set\_projective\_extremes}@>
 \initials{LDF 2002.09.17.}  
 
@@ -7621,7 +7621,7 @@ $z_p = z/(z + p)$.
 }  /* End of |Path::set_projective_extremes| definition.  */
 
 @q ** (2) Enclosing Cuboids Intersect.@>
-@*1 Enclosing Cuboids Intersect.
+@  Enclosing Cuboids Intersect.
 @^\cfunc{Path}{enclosing\_cuboids\_intersect}@>
 \initials{LDF 2005.03.23.}
 
@@ -7762,7 +7762,7 @@ Path::enclosing_cuboids_intersect(Shape* s, Scanner_Node scanner_node)
 }  /* End of |Path::enclosing_cuboids_intersect| definition.  */
 
 @q ** (2) Intersection with |Shape|.@>
-@*1 Intersection with |Shape|.
+@  Intersection with |Shape|.
 @^\cfunc{Path}{intersection}@>
 \initials{LDF 2005.03.23.}
 
@@ -7794,7 +7794,7 @@ Path::intersection(Shape* s, Scanner_Node scanner_node)
 }
 
 @q * (1) Projections intersect.@>  
-@* Projections intersect.
+@  Projections intersect.
 @^\cfunc{Path}{projections\_intersect}@>
 \initials{LDF 2005.04.11.}
 
@@ -7823,7 +7823,7 @@ Path::projections_intersect(Shape* s,
 }
 
 @q ** (2) Get world extremes.@> 
-@*1 Get world extremes.
+@  Get world extremes.
 \initials{LDF 2005.04.04.}
 
 \LOG
@@ -7842,7 +7842,7 @@ get_world_extremes(void) const
 }
 
 @q ** (2) Get pre-projective extremes.@>
-@*1 Get pre-projective extremes.
+@  Get pre-projective extremes.
 @^\cfunc{Path}{get\_pre\_projective\_extremes}@>
 \initials{LDF 2005.06.30.}
 
@@ -7890,7 +7890,7 @@ Path::get_pre_projective_extremes() const
 }  /* End of |Path::get_pre_projective_extremes| definition.  */
 
 @q ** (2) Get projective extremes.@>
-@*1 Get projective extremes.
+@  Get projective extremes.
 @^\cfunc{Path}{get\_projective\_extremes}@>
 \initials{LDF 2002.09.18.}  
 
@@ -7951,7 +7951,7 @@ Path::get_projective_extremes() const
 }
 
 @q ** (2) Get minimum x.@>
-@*1 Get minimum x.
+@  Get minimum x.
 @^\cfunc{Path}{get\_minimum\_x}@>
 \initials{LDF 2005.04.19.}
 
@@ -7993,7 +7993,7 @@ Path::get_minimum_x(const unsigned short s) const
 }
 
 @q ** (2) Get maximum x.@>
-@*1 Get maximum x.
+@  Get maximum x.
 @^\cfunc{Path}{get\_maximum\_x}@>
 \initials{LDF 2005.04.19.}
 
@@ -8036,7 +8036,7 @@ Path::get_maximum_x(const unsigned short s) const
 }
 
 @q ** (2) Get mean x.@>
-@*1 Get mean x.
+@  Get mean x.
 @^\cfunc{Path}{get\_mean\_x}@>
 \initials{LDF 2005.04.19.}
 
@@ -8068,7 +8068,7 @@ Path::get_mean_x(const unsigned short s) const
 }
 
 @q ** (2) Get minimum y.@>
-@*1 Get minimum y.
+@  Get minimum y.
 @^\cfunc{Path}{get\_minimum\_y}@>
 \initials{LDF 2005.04.19.}
 
@@ -8110,7 +8110,7 @@ Path::get_minimum_y(const unsigned short s) const
 }
 
 @q ** (2) Get maximum y.@>
-@*1 Get maximum y.
+@  Get maximum y.
 @^\cfunc{Path}{get\_maximum\_y}@>
 \initials{LDF 2005.04.19.}
 
@@ -8153,7 +8153,7 @@ Path::get_maximum_y(const unsigned short s) const
 }
 
 @q ** (2) Get mean y.@>
-@*1 Get mean y.
+@  Get mean y.
 @^\cfunc{Path}{get\_mean\_y}@>
 \initials{LDF 2005.04.19.}
 
@@ -8185,7 +8185,7 @@ Path::get_mean_y(const unsigned short s) const
 }
 
 @q ** (2) Get minimum z.@>
-@*1 Get minimum z.
+@  Get minimum z.
 @^\cfunc{Path}{get\_minimum\_z}@>
 \initials{LDF 2003.05.16.}  
 
@@ -8293,7 +8293,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 }  /* End of |Path::get_minimum_z| definition.  */
 
 @q ** (2) Get maximum z.@>
-@*1 Get maximum z.
+@  Get maximum z.
 @^\cfunc{Path}{get\_maximum\_z}@>
 \initials{LDF 2002.09.17.}  
 
@@ -8402,7 +8402,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 }  /* End of |Path::get_maximum_z| definition.  */
 
 @q ** (2) Get mean z.@>
-@*1 Get mean z.
+@  Get mean z.
 @^\cfunc{Path}{get\_mean\_z}@>
 
 \LOG
@@ -8512,7 +8512,7 @@ if (s == Shape::PROJECTIVE_COORDINATES_VALUE)
 }  /* End of |Path::get_mean_z| definition.  */
 
 @q ** (2) Suppress output.@>
-@*1 Suppress output.
+@  Suppress output.
 @^\cfunc{Path}{suppress\_output}@>
 \initials{LDF 2002.09.18.}  
 
@@ -8537,7 +8537,7 @@ Path::suppress_output()
 }
 
 @q ** (2) Unsuppress output.@>
-@*1 Unsuppress output.
+@  Unsuppress output.
 @^\cfunc{Path}{unsuppress\_output}@>
 \initials{LDF 2002.09.18.}  
 
@@ -8563,7 +8563,7 @@ Path::unsuppress_output()
 
 @q ** (2) Output.@>
 
-@*1 Output.
+@  Output.
 @^\cfunc{Path}{output}@>
 \initials{LDF Undated.}
 
@@ -8609,7 +8609,6 @@ void
 output(Scanner_Node scanner_node);
 
 @q *** (3) Definition.@>
-
 @
 @<Define |Path| functions@>=
 void
@@ -8650,14 +8649,16 @@ Path::output(Scanner_Node scanner_node)
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   Output_Struct* os;
+   Output_Struct* os_mf;
+   Output_Struct* os_mp;
 
    if (metafont_output)
-      os = scanner_node->out[Run_State::METAFONT];
-   else
-      os = scanner_node->out[Run_State::METAPOST];
+      os_mf = scanner_node->out[Run_State::METAFONT];
+   if (metapost_output)
+      os_mp = scanner_node->out[Run_State::METAPOST];
 
-   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+   ofstream* out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
+   ofstream* out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
 
    if (do_output == false)
    {
@@ -8730,22 +8731,28 @@ Revised the code that checks the value of |arrow|.
 @<Define |Path| functions@>=
 
     if (fill_draw_value == DRAW_VALUE) 
-      {
+    {
+@q ***** (5) @>
+
 #if DEBUG_COMPILE
         if (DEBUG)
-           {
-               cerr_strm << thread_name 
-                         << "In `Path::output':  Drawing.";
+        {
+            cerr_strm << thread_name 
+                      << "In `Path::output':  Drawing.";
 
-               log_message(cerr_strm);
-               cerr_message(cerr_strm);
-               cerr_strm.str("");
-           }
+            log_message(cerr_strm);
+            cerr_message(cerr_strm);
+            cerr_strm.str("");
+        }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-         status = sub_output_draw(scanner_node, out_stream);
+@q ***** (5) @>
 
-         if (status != 0)
+        if (metafont_output)
+        {
+            status = sub_output_draw(scanner_node, out_stream_mf);
+
+            if (status != 0)
             {
                   cerr_strm << thread_name 
                             << "ERROR!  In `Path::output':  "
@@ -8762,8 +8769,8 @@ Revised the code that checks the value of |arrow|.
             }  /* |if (status != 0)|  */
 
 #if DEBUG_COMPILE
-          else if (DEBUG)
-              {
+             else if (DEBUG)
+            {
                   cerr_strm << thread_name 
                             << "In `Path::output':  "
                             << "`sub_output_draw' succeeded.";
@@ -8771,14 +8778,56 @@ Revised the code that checks the value of |arrow|.
                   log_message(cerr_strm);
                   cerr_message(cerr_strm);
                   cerr_strm.str("");
-              }        
+            }        
 #endif /* |DEBUG_COMPILE|  */@; 
 
-      } /* |if (fill_draw_value == DRAW_VALUE)|  */
+        }  /* |if (metafont_output)| */
+
+@q ***** (5) @>
+
+        if (metapost_output)
+        {
+            status = sub_output_draw(scanner_node, out_stream_mp);
+
+            if (status != 0)
+            {
+                  cerr_strm << thread_name 
+                            << "ERROR!  In `Path::output':  "
+                            << "`sub_output_draw' failed, returning "
+                            << status << "."
+                            << "Exiting function.";
+  
+                  log_message(cerr_strm);
+                  cerr_message(cerr_strm, error_stop_value);
+                  cerr_strm.str("");
+               
+                  return;
+
+            }  /* |if (status != 0)|  */
+
+#if DEBUG_COMPILE
+             else if (DEBUG)
+            {
+                  cerr_strm << thread_name 
+                            << "In `Path::output':  "
+                            << "`sub_output_draw' succeeded.";
+  
+                  log_message(cerr_strm);
+                  cerr_message(cerr_strm);
+                  cerr_strm.str("");
+            }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        }  /* |if (metapost_output)| */
+
+@q ***** (5) @>
+
+
+    } /* |if (fill_draw_value == DRAW_VALUE)|  */
 
 @q **** (4) Fill.@>
 
-@*3 Fill.
+@ Fill.
 
 @<Define |Path| functions@>=
 
@@ -8796,16 +8845,19 @@ Revised the code that checks the value of |arrow|.
               cerr_strm.str("");
           }
 #endif /* |DEBUG_COMPILE|  */@; 
- 
-          *out_stream << "fill " << **point_iter++;
 
-          @<Output |Path|@>@;
+          *out_stream_mf << "fill " << **point_iter++;
+          output_path(*out_stream_mf);
 
-          if (   !metafont_output && fill_color_vector != static_cast<Pointer_Vector<Color>*>(0)
+          *out_stream_mp << "fill " << **point_iter++;
+          output_path(*out_stream_mp);
+
+          if (   metapost_output && fill_color_vector != static_cast<Pointer_Vector<Color>*>(0)
               && fill_color_vector->ctr > 0)
-            *out_stream << " withcolor " << *(fill_color_vector->v[0]);
+            *out_stream_mp << " withcolor " << *(fill_color_vector->v[0]);
 
-        *out_stream << ";" << endl << flush;
+        *out_stream_mf << ";" << endl << flush;
+        *out_stream_mp << ";" << endl << flush;
 
     }  /* |else if (fill_draw_value == FILL_VALUE) |  */
 
@@ -8823,8 +8875,10 @@ Modified this code to handle the case that
 @<Define |Path| functions@>=
 
     else if (fill_draw_value == FILLDRAW_VALUE) 
-      {
-        
+    {
+
+/* !!START HERE:  LDF 2022.04.14.  Check how this was before.  I think I need to draw as well as fill.  */ 
+
 #if DEBUG_COMPILE
         if (DEBUG)
            {
@@ -8847,16 +8901,18 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
 @<Define |Path| functions@>=
 
-              *out_stream << "fill " << **point_iter++;
+              *out_stream_mf << "fill " << **point_iter++;
+              *out_stream_mp << "fill " << **point_iter++;
 
-              @<Output |Path|@>@;
+              output_path(*out_stream_mf);
+              output_path(*out_stream_mp);
 
               Id_Map_Entry_Node entry;
               void* v = 0;
 
 @q ***** (5) @>
 
-              if (!metafont_output)
+              if (metapost_output)
               {
 @q ****** (6) @>
                   Color* temp_color;
@@ -8870,71 +8926,122 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
                      temp_color = 0;
             
                   if (temp_color == static_cast<Color*>(0))
-                      {
-                          entry = scanner_node->lookup("background_color");
+                  {
+                      entry = scanner_node->lookup("background_color");
               
-                          if (entry != static_cast<Id_Map_Entry_Node>(0))
-                             v = entry->get_object();         
+                      if (entry != static_cast<Id_Map_Entry_Node>(0))
+                         v = entry->get_object();         
 
-                          if (   entry != static_cast<Id_Map_Entry_Node>(0) 
-                              && v != static_cast<void*>(0))
-                          {
-                             temp_color = static_cast<Color*>(v);
-                          }
-                          else 
-                             temp_color = const_cast<Color*>(&Colors::white);
+                      if (   entry != static_cast<Id_Map_Entry_Node>(0) 
+                          && v != static_cast<void*>(0))
+                      {
+                         temp_color = static_cast<Color*>(v);
+                      }
+                      else 
+                         temp_color = const_cast<Color*>(&Colors::white);
 
-                      }  /* |if (temp_color == 0)|  */
+                  }  /* |if (temp_color == 0)|  */
 
-                  *out_stream << " withcolor " << *temp_color;
+                  output_path(*out_stream_mf);
+                  output_path(*out_stream_mp);
 
-                  *out_stream << ";" << endl << flush;
-                
-@q ****** (6) @>
+                  void* v = 0;
 
-              } /* |if (!metafont_output)|  */
+              }  /* |if (metapost_output)| */
 
 @q ***** (5) @>
 @
 @<Define |Path| functions@>=
 
-              status = sub_output_draw(scanner_node, out_stream);
+              output_path(*out_stream_mf);
+              output_path(*out_stream_mp);
 
-              if (status != 0)
-                 {
-                       cerr_strm << thread_name 
-                                 << "ERROR!  In `Path::output':  "
-                                 << "`sub_output_draw' failed, returning "
-                                 << status << "."
-                                 << "Exiting function.";
+              v = 0;
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+              if (metafont_output)
+              {
+                  status = sub_output_draw(scanner_node, out_stream_mf);
+
+                  if (status != 0)
+                     {
+                           cerr_strm << thread_name 
+                                     << "ERROR!  In `Path::output':  "
+                                     << "`sub_output_draw' failed, returning "
+                                     << status << "."
+                                     << "Exiting function.";
   
-                       log_message(cerr_strm);
-                       cerr_message(cerr_strm, error_stop_value);
-                       cerr_strm.str("");
-                    
-                       return;
+                           log_message(cerr_strm);
+                           cerr_message(cerr_strm, error_stop_value);
+                           cerr_strm.str("");
+                        
+                           return;
 
-                 }  /* |if (status != 0)|  */
+                     }  /* |if (status != 0)|  */
 
 #if DEBUG_COMPILE
-              else if (DEBUG)
-                  {
-                      cerr_strm << thread_name 
-                                << "In `Path::output':  "
-                                << "`sub_output_draw' succeeded.";
+                     else if (DEBUG)
+                         {
+                             cerr_strm << thread_name 
+                                       << "In `Path::output':  "
+                                       << "`sub_output_draw' succeeded.";
   
-                      log_message(cerr_strm);
-                      cerr_message(cerr_strm);
-                      cerr_strm.str("");
-                  }        
+                             log_message(cerr_strm);
+                             cerr_message(cerr_strm);
+                             cerr_strm.str("");
+                         }        
 #endif /* |DEBUG_COMPILE|  */@; 
+
+              }  /* |if (metafont_output)| */
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+              if (metapost_output)
+              {
+                  status = sub_output_draw(scanner_node, out_stream_mp);
+
+                  if (status != 0)
+                     {
+                           cerr_strm << thread_name 
+                                     << "ERROR!  In `Path::output':  "
+                                     << "`sub_output_draw' failed, returning "
+                                     << status << "."
+                                     << "Exiting function.";
+  
+                           log_message(cerr_strm);
+                           cerr_message(cerr_strm, error_stop_value);
+                           cerr_strm.str("");
+                        
+                           return;
+
+                     }  /* |if (status != 0)|  */
+
+#if DEBUG_COMPILE
+                     else if (DEBUG)
+                         {
+                             cerr_strm << thread_name 
+                                       << "In `Path::output':  "
+                                       << "`sub_output_draw' succeeded.";
+  
+                             log_message(cerr_strm);
+                             cerr_message(cerr_strm);
+                             cerr_strm.str("");
+                         }        
+#endif /* |DEBUG_COMPILE|  */@; 
+
+              }  /* |if (metapost_output)| */
 
 @q ***** (5).@> 
 
- } /* |else if (fill_draw_value == FILLDRAW_VALUE)|  */
+    } /* |else if (fill_draw_value == FILLDRAW_VALUE)|  */
 
 @q **** (4) Undraw.@>
-@*3 Undraw.
+@ Undraw.
 @<Define |Path| functions@>=
 
     else if (fill_draw_value == UNDRAW_VALUE) 
@@ -8953,15 +9060,23 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
            } 
 #endif /* |DEBUG_COMPILE| */@;
 
+#if 0 
           *out_stream << "undraw " << **point_iter++;
+
+
+
+/* !!START HERE:  LDF 2022.04.14.  */ 
 
           @<Output |Path|@>@;
 
           @<Handle |pen|@>@;
 
           @<Handle |dash_pattern|@>@;
- 
-          *out_stream << ";\n" << flush;
+ #endif 
+      
+
+         *out_stream_mf << ";\n" << flush;
+         *out_stream_mp << ";\n" << flush;
 
   } /* |else if (fill_draw_value == UNDRAW_VALUE)|  */
 
@@ -8985,11 +9100,15 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
           }
 #endif /* |DEBUG_COMPILE|  */@; 
         
-          *out_stream << "unfill " << **point_iter++;
+          *out_stream_mf << "unfill " << **point_iter++;
+          *out_stream_mp << "unfill " << **point_iter++;
 
+#if 0 
           @<Output |Path|@>@;
+#endif 
 
-          *out_stream << ";\n" << flush;
+          *out_stream_mf << ";\n" << flush;
+          *out_stream_mp << ";\n" << flush;
 
       }  /* |else if (fill_draw_value == UNFILL_VALUE)|  */
 
@@ -9029,15 +9148,19 @@ Changed |if (draw_color == Colors::background_color)| to
           if (   draw_color_vector == static_cast<Pointer_Vector<Color>*>(0) 
               || draw_color_vector->v.size() == 0)
             {
-                *out_stream << "unfilldraw " << **point_iter++;
+                *out_stream_mf << "unfilldraw " << **point_iter++;
+                *out_stream_mp << "unfilldraw " << **point_iter++;
 
+#if 0 
                 @<Output |Path|@>@;
 
                 @<Handle |pen|@>@;
 
                 @<Handle |dash_pattern|@>@;
+#endif 
 
-                *out_stream << ";\n" << flush;
+                *out_stream_mf << ";\n" << flush;
+                *out_stream_mp << ";\n" << flush;
             }
 
 @q ***** (5).@> 
@@ -9052,13 +9175,20 @@ Now calling |Path::sub_output_draw|.
           else  /* |   draw_color_vector != 0 
                     && draw_color_vector->v.size() != 0|  */
             {
-                *out_stream << "unfill " << **point_iter++;
+                *out_stream_mf << "unfill " << **point_iter++;
+                *out_stream_mp << "unfill " << **point_iter++;
 
+#if 0 
                 @<Output |Path|@>@;
+#endif 
 
-                *out_stream << ";" << endl << flush;
-                
+                *out_stream_mf << ";" << endl << flush;
+                *out_stream_mp << ";" << endl << flush;
+
+#if 0                 
                 status = sub_output_draw(scanner_node, out_stream);
+#endif 
+
 
                 if (status != 0)
                    {
@@ -9126,15 +9256,17 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
 
       }  /* |else| (Invalid |fill_draw_value|)  */
 
+
+
 @q **** (4) Return.@>
 @ Return.
+
 @<Define |Path| functions@>=
 
 #if DEBUG_COMPILE
    if (DEBUG) 
       {
-          cerr_strm << thread_name 
-                    << "Exiting `Path::output'.";
+          cerr_strm << thread_name << "Exiting `Path::output'.";
  
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -9147,7 +9279,7 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
 } /* End of |Path::output(Scanner_Node scanner_node)| definition.  */
 
 @q *** (3) Sub-Output:  Draw.@>
-@*2 Sub-Output:  Draw.
+@  Sub-Output:  Draw.
 \initials{LDF 2005.03.13.}
 
 \LOG
@@ -9166,7 +9298,6 @@ sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream);
 
 @
 @<Define |Path| functions@>=
-
 int
 Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream)
 {
@@ -9358,7 +9489,7 @@ In addition, the first segment also requires special handling if
 
                       *out_stream << "drawarrow " << *points[0];
 
-                      if (!metafont_output && do_colors)
+                      if (metapost_output && do_colors)
                          *out_stream << "withcolor " << **color_iter;
 
                       if (do_pens)
@@ -9384,7 +9515,7 @@ In addition, the first segment also requires special handling if
                    *out_stream << "drawarrow " << *points[1] 
                                << **connector_type_iter << *points[0]; 
 
-                   if (!metafont_output && do_colors)
+                   if (metapost_output && do_colors)
                       *out_stream << endl << "withcolor " << **color_iter;
 
                    if (do_pens)
@@ -9406,7 +9537,7 @@ In addition, the first segment also requires special handling if
                       *out_stream << "draw " 
                                   << *points[0];
 
-                      if (!metafont_output && do_colors)
+                      if (metapost_output && do_colors)
                          *out_stream << " withcolor " << **color_iter;
 
                       if (do_pens)
@@ -9430,7 +9561,7 @@ In addition, the first segment also requires special handling if
                        *out_stream << "draw " << *points[0] 
                                    << *connector_type_iter << *points[1];
 
-                      if (!metafont_output && do_colors)
+                      if (metapost_output && do_colors)
                          *out_stream << endl << "withcolor " << **color_iter;
 
                       if (do_pens)
@@ -9486,7 +9617,7 @@ In addition, the first segment also requires special handling if
                              *out_stream << "draw " << *points[i]   
                                          << *connector_type_iter << *points[i + 1];
 
-                             if (!metafont_output && do_colors)
+                             if (metapost_output && do_colors)
                                 *out_stream << endl << "withcolor " << **color_iter;
 
                              if (do_pens)
@@ -9539,7 +9670,7 @@ This requires special handling because |arrow| could be equal to
                          *out_stream << *points[j] 
                                      << *connector_type_iter << *points[k];
 
-                       if (!metafont_output && do_colors)
+                       if (metapost_output && do_colors)
                           *out_stream << endl << "withcolor " << **color_iter;
 
                        if (do_pens)
@@ -9626,7 +9757,7 @@ Added code for suppressing output if the type of the current
 
                @<Output |Path|@>@;
 
-               if (   !metafont_output && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+               if (   metapost_output && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                    && draw_color_vector->ctr > 0)
                   *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
 
@@ -9663,56 +9794,80 @@ Added code for suppressing output if the type of the current
 
 }  /* End of |sub_output_draw| definition.  */
 
-@q **** (4) Output |Path|.@>
-@*3 Output {\bf Path}.
-When |fill_color| and |draw_color| are different, this will have to
-be performed twice, so I've made it a named section.
-\initials{LDF Undated.}
+
+@q *** (3) Output Path (|output_path|).  @>
+
+@ Output Path (|output_path|).
+\initials{LDF 2022.04.14.}
 
 \LOG
-\initials{LDF 2002.11.03.}  
-|counter| is now initially set to 2 instead of 1.  This
-makes each line have at most two |Points|.  Previously, the first line
-had 3 |Points| (if the |Path| had at least three |Points| on it).
+Added this function.  It replaces the named section |@<Output |Path|@>|.
+It was necessary to do this because the |Path| can be output more than once,
+depending on what forms of output are enabled.
+\ENDLOG
 
-\initials{LDF 2002.12.20.}  
-Using the manipulator ``|fixed|'' below.  It solves
-the problem of |Points| being output in scientific format, which
-Metapost doesn't understand.  
- 
-\initials{LDF 2002.12.20.}  
-@^Porting@>
-I had to add preprocessor code for conditional compilation, because 
-``|fixed|'' is unknown to the GNU \CPLUSPLUS/ Compiler.  However, it doesn't
-need it in this case, since the problem only occurred when using the DEC
-\CPLUSPLUS/ compiler on a DEC Alpha computer under Compaq Tru64.
+@q **** (4) Declaration @>
 
-\initials{LDF 2004.06.18.}
-Now inserting a line break before ``\.{cycle}''.
+@<Declare |Path| functions@>=
+int
+output_path(ofstream &curr_out_stream);
 
-\initials{LDF 2005.02.08.}
-Made debugging output thread-safe.
-\ENDLOG 
+@q **** (4) Definition @>
+@
+@<Define |Path| functions@>=
+int
+Path::output_path(ofstream &curr_out_stream)
+{
+@q ***** (5) Preliminaries.@>   
 
-@q ***** (5) Code.@> 
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
 
-@<Output |Path|@>=
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   Scanner_Node scanner_node = 0;
+
+#ifdef HAVE_PTHREAD_H
+
+   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
+
+   if (thread_info != static_cast<Thread_Info_Type*>(0))
+      scanner_node = thread_info->scanner_node;
+
+#endif /* |HAVE_PTHREAD_H|  */@; 
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+@q ***** (5) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)
       {
-         cerr_strm << thread_name << "Entering `@@<Output |Path|@@>'.";
+         cerr_strm << thread_name << "Entering ``Path::output_path''.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
          cerr_strm.str("");
       }
 #endif /* |DEBUG_COMPILE|  */@; 
- 
-   for (unsigned short counter = 2; point_iter != points.end();)
+
+   vector<Point*>::iterator point_iter = points.begin();
+   vector<Connector_Type*>::iterator connector_type_iter = connector_type_vector.begin();
+
+   for (int counter = 2; point_iter != points.end();)
    {
 
-         *out_stream << " ";
+         curr_out_stream << " ";
 #if DEBUG_COMPILE
          if (DEBUG)
          { 
@@ -9724,20 +9879,20 @@ Made debugging output thread-safe.
              && connector_type_iter != connector_type_vector.end() 
              && *connector_type_iter != 0)
          {
-            *out_stream << **connector_type_iter;
+            curr_out_stream << **connector_type_iter;
          }
          else
          {
-            *out_stream << "..";
+            curr_out_stream << "..";
          }
 
-         *out_stream << " " << **point_iter++;
+         curr_out_stream << " " << **point_iter++;
 
          /* This breaks the line and indents after two points */
         
           if  (counter == 2 && point_iter != points.end())
             {
-              *out_stream << "\n  ";
+              curr_out_stream << "\n  ";
               counter = 1;
             }
           else
@@ -9755,24 +9910,29 @@ Made debugging output thread-safe.
 
     if (is_cycle())
     {
-       *out_stream << endl << " ";
+       curr_out_stream << endl << " ";
        if (connector_type_vector.size() > 0 && connector_type_iter != connector_type_vector.end())
-         *out_stream << **connector_type_iter;
+         curr_out_stream << **connector_type_iter;
        else
-         *out_stream << "..";
-       *out_stream << " cycle";
+         curr_out_stream << "..";
+       curr_out_stream << " cycle";
     }
     
+@q ***** (5) @>
+
 #if DEBUG_COMPILE
    if (DEBUG)
       {
-          cerr_strm << thread_name << "Exiting `@@<Output |Path|@@>'.";
+          cerr_strm << thread_name << "Exiting ``Path::output_path''.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
       }
 #endif /* |DEBUG_COMPILE|  */@;
+
+
+}  /* End of |Path::output_path| definition */
 
 @q **** (4) Handle |pen|.@>
 @ Handle |pen|.  
@@ -9820,7 +9980,7 @@ the output operator for |Dash_Pattern|.
     } /* |if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)|  */
 
 @q * (1) Showing.@>
-@* Showing.
+@  Showing.
 
 @q ** Show.@>
 @ Show.
@@ -9880,7 +10040,7 @@ show(string text = "", char coords = 'w',
      int show_connectors = 0) const;
 
 @q ** (2) Show Colors.@>
-@*1 Show {\bf Colors}.
+@  Show {\bf Colors}.
 @^\cfunc{Path}{show\_colors}@>
 \initials{LDF Undated.}
 
@@ -9908,11 +10068,11 @@ Path::show_colors(bool stop)
 }
 
 @q * (1) Returning elements and information.@>
-@* Returning elements and information.
+@  Returning elements and information.
 \initials{LDF Undated.}
 
 @q ** (2) Get |Shape| type.@> 
-@*1 Get {\bf Shape} type.
+@  Get {\bf Shape} type.
 \initials{LDF 2005.03.18.}
 
 \LOG
@@ -9932,7 +10092,7 @@ get_shape_type(void) const
 }
 
 @q ** (2) Is planar.@>
-@*1 Is planar.
+@  Is planar.
 @^\cfunc{Path}{is\_planar}@>
 \initials{LDF 2002.11.05.}
 
@@ -10072,7 +10232,7 @@ Commented-out the warning.
 }  /* End of |Path::is_planar| definition */
 
 @q ** (2) Is linear.@>
-@*1 Is linear.
+@  Is linear.
 @^\cfunc{Path}{is\_linear}@>
 
 |is_linear| first checks whether |line_switch| is |true|.  If it is,
@@ -10193,7 +10353,7 @@ return false;
 }  
 
 @q ** (2) Get line switch.@>
-@*1 Get line switch.
+@  Get line switch.
 @^\cfunc{Path}{get\_line\_switch}@>
 \initials{LDF 2002.11.03.}  This function returns |true| for |Paths| that are
 created or set using two |Points| only, and no connectors, as
@@ -10217,7 +10377,7 @@ get_line_switch() const
 }
 
 @q ** (2) Test for cycles.@>
-@*1 Test for cycles. 
+@  Test for cycles. 
 @^\cfunc{Path}{is\_cycle}@>
 
 @<Declare |Path| functions@>=
@@ -10229,7 +10389,7 @@ is_cycle() const
 }
 
 @q ** (2) Size (number of points).@>
-@*1 Size (number of points).
+@  Size (number of points).
 @^\cfunc{Path}{size}@>
 \initials{LDF Undated.}
 
@@ -10260,7 +10420,7 @@ Path::size(void) const
 }
 
 @q ** (2) Is triangular.@>
-@*1 Is triangular.
+@  Is triangular.
 @^\cfunc{Path}{is\_triangular}@>
 \initials{LDF 2005.01.23.}
 
@@ -10320,7 +10480,7 @@ Path::is_triangular(void) const
 } /* End of |Path::is_triangular| definition.  */
 
 @q ** (2) Is polygonal.@>
-@*1 \.{is\_polygonal}.
+@  \.{is\_polygonal}.
 @^\cfunc{Path}{is\_polygonal}@>
 \initials{LDF 2005.02.11.}
 
@@ -10394,7 +10554,7 @@ Path::is_polygonal(Scanner_Node scanner_node) const
 } /* End of |Path::is_polygonal| definition.  */
 
 @q ** (2) Is convex and_polygonal.@>
-@*1 \.{is\_convex\_polygonal}.
+@  \.{is\_convex\_polygonal}.
 @^\cfunc{Path}{is\_convex\_polygonal}@>
 \initials{LDF 2005.02.07.}
 
@@ -10604,7 +10764,7 @@ Got the code in this section to work.
 } /* End of |Path::is_convex_polygonal| definition.  */
 
 @q ** (2) Is rectangular.@>
-@*1 Is rectangular.
+@  Is rectangular.
 @^\cfunc{Path}{is\_rectangular}@>
 
 |is_rectangular| tests whether a |Path| is rectangular.  
@@ -10688,7 +10848,7 @@ Path::is_rectangular() const
 } /* End of |Path::is_rectangular| definition.  */
 
 @q ** (2) Is quadrilateral.@>
-@*1 Is quadrilateral.
+@  Is quadrilateral.
 @^\cfunc{Path}{is\_quadrilateral}@>
 \initials{LDF 2005.01.25.}
 
@@ -10772,7 +10932,7 @@ return (fabs(sum - 360) <= Point::epsilon());
 } /* End of |Path::is_quadrilateral| definition.  */
 
 @q ** (2) Is square.@>
-@*1 Is square.
+@  Is square.
 @^\cfunc{Path}{is\_square}@>
 
 \LOG
@@ -10807,7 +10967,7 @@ Path::is_square() const
 } /* End of |Path::is_square| definition.  */
 
 @q ** (2) Is elliptical.@>
-@*1 Is elliptical.
+@  Is elliptical.
 @^\cfunc{Path}{is\_elliptical}@>
 
 \LOG
@@ -10825,7 +10985,7 @@ bool
 is_elliptical(Scanner_Node scanner_node = 0) const;
 
 @q ** (2) Is circular.@>
-@*1 Is circular.
+@  Is circular.
 
 \LOG
 \initials{LDF 2004.10.16.}
@@ -10842,7 +11002,7 @@ bool
 is_circular(Scanner_Node scanner_node = 0) const;
 
 @q ** (2) Is parabolic.@>
-@*1 Is parabolic.
+@  Is parabolic.
 
 \LOG
 \initials{LDF 2005.11.07.}
@@ -10859,7 +11019,7 @@ bool
 is_parabolic(Scanner_Node scanner_node = 0) const;
 
 @q ** (2) Is hyperbolic.@>
-@*1 Is hyperbolic.
+@  Is hyperbolic.
 
 \LOG
 \initials{LDF 2005.11.07.}
@@ -10876,7 +11036,7 @@ bool
 is_hyperbolic(Scanner_Node scanner_node = 0) const;
 
 @q ** (2) Is helical.@>
-@*1 Is helical.
+@  Is helical.
 
 \LOG
 \initials{LDF 2005.05.18.}
@@ -10891,7 +11051,7 @@ bool
 is_helical(Scanner_Node scanner_node = 0) const;
 
 @q ** (2) Is coplanar.@> 
-@*1 Is coplanar.
+@  Is coplanar.
 \initials{LDF 2004.10.25.}
 
 \LOG
@@ -11099,7 +11259,7 @@ in the following conditional.  This may still need some work.
 } /* End of |Path::is_coplanar| definition.  */
 
 @q ** (2) Is on segment.  |Point| function.@> 
-@*1 Is on segment.  |Point| function.
+@  Is on segment.  |Point| function.
 \initials{LDF 2005.10.30.}
 
 \LOG
@@ -11122,7 +11282,7 @@ Point::is_on_segment(const Path& p) const
 }
 
 @q ** (2) Slope.@>
-@*1 Slope.
+@  Slope.
 @^\cfunc{Path}{slope}@>
 
 |slope| can only be used for linear |Paths|. 
@@ -11167,7 +11327,7 @@ Path::slope(char a, char b)
 }
 
 @q ** Subpath.@>
-@*1 Subpath.
+@  Subpath.
 @^\cfunc{Path}{subpath}@>
 |subpath| returns a new |Path| using |points[start]|through points[end- 1]| from |*this|.  
 If the optional |bool| argument |cycle| is used,
@@ -11337,7 +11497,7 @@ that add or remove connectors, so it's best to have this routine.
 }  /* End of |Path::subpath| definition  */
 
 @q ** (2) Getting points.@>
-@*1 Getting points. 
+@  Getting points. 
 \initials{LDF 2007.07.09.}
 
 \LOG
@@ -11346,7 +11506,7 @@ Added this section.
 \ENDLOG
 
 @q *** (3) Get point---non-const version.@>
-@*2 Get point---non-{\bf const} version. 
+@  Get point---non-{\bf const} version. 
 @^\cfunc{Path}{get\_point}@>
 \initials{LDF Undated.}
 
@@ -11396,7 +11556,7 @@ Path::get_point(const unsigned short a)
 }
 
 @q *** (3) Get point---const version.@>
-@*2 Get point---{\bf const} version. 
+@  Get point---{\bf const} version. 
 @^\cfunc{Path}{get\_point}@>
 \LOG
 \initials{LDF 2003.11.28.}  
@@ -11436,7 +11596,7 @@ Path::get_point(const unsigned short a) const
 }
 
 @q *** (3) Get last point.@>
-@*2 Get last point. 
+@  Get last point. 
 @^\cfunc{Path}{get\_last\_point}@>
 
 \LOG
@@ -11477,7 +11637,7 @@ Path::get_last_point() const
 }
 
 @q ** (2) Get |Connector_Type|.@>
-@*1 Get |Connector_Type|. 
+@  Get |Connector_Type|. 
 @^\cfunc{Path}{get\_connector\_type}@>
 
 \LOG
@@ -11525,7 +11685,7 @@ Path::get_connector_type(const unsigned int i) const
 }  /* End of |Path::get_connector| definition.  */
 
 @q ** (2) Get normal.@>
-@*1 Get normal.
+@  Get normal.
 \initials{LDF Undated.}
 
 \LOG
@@ -11534,7 +11694,7 @@ Added this section.
 \ENDLOG
 
 @q *** (3) |Path| version.@>
-@*2 {\bf Path} version.
+@  {\bf Path} version.
 @^\cfunc{Path}{get\_normal}@>
 \initials{LDF 2002.11.05.}  
 |get_normal| returns a unit vector representing the normal to the
@@ -11806,7 +11966,7 @@ Commented-out warning.
 }  /* End of |Path::get_normal(void) const|  */
 
 @q *** (3) |Point| version.@>
-@*2 {\bf Point} version.
+@  {\bf Point} version.
 @^\cfunc{Point}{get\_normal}@>
 |Point::get_normal| is declared \filename{points.web}, but it must
 be defined here, because it calls |Path::get_normal|.  
@@ -11840,7 +12000,7 @@ Point::get_normal(const Point& p, const Point& q) const
 }
 
 @q ** (2) Get plane.@>
-@*1 Get plane.
+@  Get plane.
 @^\cfunc{Path}{get\_plane}@>
 
 \LOG
@@ -12128,10 +12288,10 @@ It's wasteful, but less confusing.  \initials{LDF 2003.06.24.}
 }
 
 @q * (1) Manipulating {\bf Paths}.@>
-@* Manipulating {\bf Paths}.
+@  Manipulating {\bf Paths}.
 
 @q ** (2) Set cycle. @>
-@*1 Set cycle.
+@  Set cycle.
 @^\cfunc{Path}{set\_cycle}@>
 
 \LOG
@@ -12198,7 +12358,7 @@ Path::set_cycle(const bool c, Scanner_Node scanner_node)
 }  /* End of |Path::set_cycle| definition.  */
 
 @q ** (2) Adjust connectors. @>
-@*1 Adjust connectors.
+@  Adjust connectors.
 @^\cfunc{Path}{adjust\_connectors}@>
 \initials{LDF 2004.11.01.}
 
@@ -12280,7 +12440,7 @@ are no |Connector_Types|.
 } /* End of |Path::adjust_connectors| definition.  */
 
 @q ** (2) Adjust |draw_color_vector|.@>
-@*1 Adjust {\bf draw\_color\_vector}.
+@  Adjust {\bf draw\_color\_vector}.
 @^\cfunc{Path}{adjust\_draw\_color\_vector}@>
 \initials{LDF 2005.03.18.}
 
@@ -12327,7 +12487,7 @@ Path::adjust_draw_color_vector(void)
 } /* End of |Path::adjust_draw_color_vector| definition.  */
 
 @q ** (2) Adjust |pen_vector|.@>
-@*1 Adjust {\bf pen\_vector}.
+@  Adjust {\bf pen\_vector}.
 @^\cfunc{Path}{adjust\_pen\_vector}@>
 \initials{LDF 2005.03.18.}
 
@@ -12373,7 +12533,7 @@ Path::adjust_pen_vector(void)
 } /* End of |Path::adjust_pen_vector| definition.  */
 
 @q ** (2) Adjust |dash_pattern_vector|.@>
-@*1 Adjust {\bf dash\_pattern\_vector}.
+@  Adjust {\bf dash\_pattern\_vector}.
 @^\cfunc{Path}{adjust\_dash\_pattern\_vector}@>
 \initials{LDF 2005.03.18.}
 
@@ -12420,10 +12580,10 @@ Path::adjust_dash_pattern_vector(void)
 } /* End of |Path::adjust_dash_pattern_vector| definition.  */
 
 @q ** (2) Reverse.@>
-@*1 Reverse.
+@  Reverse.
 
 @q *** (3) With assignment.@>
-@*2 With assignment.
+@  With assignment.
 @^\cfunc{Path}{reverse}@>
 
 \LOG
@@ -12597,7 +12757,7 @@ arguments are different from the one used for this function, this causes an erro
 }  /* End of non-const |Path::reverse| definition.  */
 
 @q *** (3) No assignment.@>
-@*2 No assignment.
+@  No assignment.
 @^\cfunc{Path}{reverse}@>
 
 This version merely copies |*this| and calls |reverse(true)| on the
@@ -12630,7 +12790,7 @@ Path::reverse(Scanner_Node scanner_node) const
 }
 
 @q * (1) Equality.@>
-@* Equality.
+@  Equality.
 @^\cofunc{Path}{==}@>
 @:!! TO DO@> TO DO: 
 I'll need to make all connectors explicit in order to make
@@ -12654,10 +12814,10 @@ Path::operator==(Path& p)
 #endif 
 
 @q * (1) Intersection.@>
-@* Intersection. 
+@  Intersection. 
 
 @q ** (2) Intersection of two linear |Paths|.@>
-@*1 Intersection of two linear {\bf Paths}.
+@  Intersection of two linear {\bf Paths}.
 @^\cfunc{Path}{intersection\_point}@> 
 If |*this| is a line and the argument |pa| is a line,\newline 
 |intersection_point| calls the version for
@@ -12725,7 +12885,7 @@ Path::intersection_point(const Path& pa, const bool trace) const
 }  /* End of |Path::intersection_point| definition.  */
 
 @q ** (2) Intersection points.@> 
-@*1 Intersection points.
+@  Intersection points.
 \initials{LDF 2005.10.27.}
 Dummy function.  It simply calls |intersection_point|.  It's needed in 
 |Scan_Parse::intersection_points_func|.
@@ -12752,7 +12912,7 @@ Path::intersection_points(const Path& p, Scanner_Node scanner_node) const
 }
 
 @q ** (2) Intersection of a linear |Path| with a |Plane|.@>
-@*1 Intersection of a linear {\bf Path} with a {\bf Plane}.
+@  Intersection of a linear {\bf Path} with a {\bf Plane}.
 @^\cfunc{Plane}{intersection\_point}@> 
 \initials{LDF 2003.06.03.}  
 
@@ -12781,7 +12941,7 @@ Plane::intersection_point(const Path& p) const
 }
 
 @q * (1) Drawing axes.@>
-@* Drawing axes.
+@  Drawing axes.
 This function draws and labels arrows for the main axes at the
 origin.  It can be helpful for determining whether the ``|up|''
 direction is correct for a |Focus|.
@@ -13073,7 +13233,7 @@ Line::get_path(void) const
 }
 
 @q * (1) Surface Hiding.@>
-@* Surface Hiding.
+@  Surface Hiding.
 \initials{LDF 2005.01.24.}
 
 \LOG
@@ -13082,7 +13242,7 @@ Added this section.
 \ENDLOG
 
 @q ** (2) Set |surface_hiding_ctr|.@> 
-@*1 Set {\it surface\_hiding\_ctr}.
+@  Set {\it surface\_hiding\_ctr}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -13100,7 +13260,7 @@ set_surface_hiding_ctr(unsigned long u)
 }
 
 @q ** (2) Reset |surface_hiding_ctr|.@> 
-@*1 Reset {\it surface\_hiding\_ctr}.
+@  Reset {\it surface\_hiding\_ctr}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -13120,7 +13280,7 @@ reset_surface_hiding_ctr(unsigned long u = 0)
 }
 
 @q ** (2) Get |surface_hiding_ctr|.@> 
-@*1 Get {\it surface\_hiding\_ctr}.
+@  Get {\it surface\_hiding\_ctr}.
 \initials{LDF 2005.03.31.}
 
 \LOG
@@ -13138,7 +13298,7 @@ get_surface_hiding_ctr(void)
 }
 
 @q ** (2) Set |decomposition_level|.@> 
-@*1 Set {\it decomposition\_level}.
+@  Set {\it decomposition\_level}.
 \initials{LDF 2005.04.18.}
 
 \LOG
@@ -13156,7 +13316,7 @@ set_decomposition_level(unsigned long u)
 }
 
 @q ** (2) Reset |decomposition_level|.@> 
-@*1 Reset {\it decomposition\_level}.
+@  Reset {\it decomposition\_level}.
 \initials{LDF 2005.04.18.}
 
 \LOG
@@ -13176,7 +13336,7 @@ reset_decomposition_level(unsigned long u = 0)
 }
 
 @q ** (2) Get |decomposition_level|.@> 
-@*1 Get {\it decomposition\_level}.
+@  Get {\it decomposition\_level}.
 \initials{LDF 2005.04.18.}
 
 \LOG
@@ -13195,7 +13355,7 @@ get_decomposition_level(void)
 
 @q ** (2) Decompose.@> 
 
-@*1 Decompose.
+@  Decompose.
 \initials{LDF 2005.01.24.}
 
 \LOG
@@ -13204,7 +13364,7 @@ Added this section.
 \ENDLOG
 
 @q *** (3) |Point*| argument.@> 
-@*2 {\bf Point*} argument.
+@  {\bf Point*} argument.
 \initials{LDF 2007.06.19.}
 
 \LOG
@@ -13468,7 +13628,7 @@ whole |Path| on |pv|.
 }  /* |Path::decompose| with |Point*| argument.  */
 
 @q *** (3) |Path*| argument.@> 
-@*2 {\bf Path*} argument.
+@  {\bf Path*} argument.
 \initials{LDF 2005.01.24.}
 
 \LOG
@@ -13511,7 +13671,7 @@ Path::decompose(Path* p, Scanner_Node scanner_node)
 }
 
 @q *** (3) |Shape*| argument.@> 
-@*2 {\bf Shape*} argument.
+@  {\bf Shape*} argument.
 \initials{LDF 2005.04.01.}
 
 \LOG
@@ -13540,7 +13700,7 @@ Path::decompose(Shape* s, Scanner_Node scanner_node)
 }
 
 @q *** (3) Self-decomposition.@> 
-@*2 Self-decomposition.
+@  Self-decomposition.
 \initials{LDF 2005.04.13.}
 
 \LOG
@@ -13549,7 +13709,7 @@ Added this section.
 \ENDLOG
 
 @q **** (4) Decompose.@> 
-@*3 Decompose.
+@  Decompose.
 
 \LOG
 \initials{LDF 2005.04.14.}
@@ -14692,7 +14852,7 @@ int
 replace_connectors(string s = "..", int start = 0, int end = -1, bool expand = 0, Scanner_Node scanner_node = 0);
 
 @q * (1) class |Connector_Type| declaration. @>
-@* class |Connector_Type| declaration.
+@  class |Connector_Type| declaration.
 \initials{LDF 2021.12.24.}
 
 \LOG
@@ -14749,7 +14909,7 @@ const unsigned int Connector_Type::CONTROLS_TYPE = 5U;
 
 
 @q ** (2) |Connector_Type| functions.@>
-@*2 |Connector_Type| functions.
+@  |Connector_Type| functions.
 \initials{LDF 2021.12.24.}
 
 \LOG
@@ -14952,7 +15112,7 @@ Connector_Type::operator*=(const real r)
 
 
 @q * (1) Pseudo-constructor for dynamic allocation. @>
-@* Pseudo-constructor for dynamic allocation. 
+@  Pseudo-constructor for dynamic allocation. 
 
 @q ** (2) Pointer argument.@>
 @ Pointer argument.@>
@@ -14970,7 +15130,7 @@ Connector_Type*
 create_new(const Connector_Type* c, Scanner_Node scanner_node);
 
 @q ** (2) Reference argument.@>
-@*1 Reference argument.@>
+@  Reference argument.@>
 
 \LOG
 \initials{LDF 2021.12.24.}
@@ -14985,7 +15145,7 @@ Connector_Type*
 create_new(const Connector_Type& c, Scanner_Node scanner_node);
 
 @q *** (3) Show. @>
-@*2 Show.
+@  Show.
 \initials{LDF 2021.12.24.}
 
 \LOG
@@ -15292,7 +15452,7 @@ operator<<(ostream& o, Connector_Type& c)
 @q ** (2) @>
 
 @q * (1) |Nurb| functions.@> 
-@* {\bf Nurb} functions.
+@  {\bf Nurb} functions.
 \initials{LDF 2005.01.28.}
 
 \LOG
@@ -15301,7 +15461,7 @@ Added this section.
 \ENDLOG
 
 @q ** (2) Generate.@> 
-@*1 Generate.
+@  Generate.
 \initials{LDF 2005.01.28.}
 
 \LOG
@@ -15596,7 +15756,7 @@ try
 }  /* End of |Nurb::generate| definition.  */
 
 @q * (1) |Focus| functions.@>
-@* {\bf Focus} functions.
+@  {\bf Focus} functions.
 \initials{LDF 2007.09.17.}
 
 \LOG
@@ -15605,7 +15765,7 @@ Added this section.
 \ENDLOG
 
 @q ** (2) Setting functions.@> 
-@*1 Setting functions.
+@  Setting functions.
 \initials{LDF 2007.09.17.}
 
 \LOG
@@ -15614,7 +15774,7 @@ Added this section.
 \ENDLOG
 
 @q *** (3) Setting function with |real*| arguments.@>
-@*2 Setting function with {\bf real*} arguments.
+@  Setting function with {\bf real*} arguments.
 \initials{LDF 2007.09.19.}
 
 This is how |Point Focus::up| is set:
@@ -16072,6 +16232,9 @@ class Glyph;
 @<Define |Nurb| functions@>@;
 @<|Connector_Type| function definitions@>@;
 @<Define non-member non-template functions for |Connector_Type|@>@;
+
+@
+@<Output |Path|@>=
 
 @q ** (2).@> 
 
