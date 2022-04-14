@@ -2578,6 +2578,7 @@ const unsigned short Run_State::NON_STOP  = 1;
 
 @q ** Global |Run_State| variables. @>
 @ Global {\bf Run\_State} variables.
+
 \LOG
 \initials{LDF 2004.04.16.}  Moved the declaration of
 |run_state_initial| to here from \filename{scanprse.web}.  This is so
@@ -2588,7 +2589,12 @@ may be renamed or eliminated.
 \ENDLOG 
 
 @<Declare global |Run_State| variables@>=
-Run_State run_state_initial;
+
+/* |run_state_initial| is not explicitly initialized!
+   It gets its initial values from the default |Run_State| constructor.
+   \initials{LDF 2022.04.14.}  */
+
+Run_State run_state_initial;  
 
 @
 @<|extern| declarations for global |Run_State| variables@>=
@@ -2641,7 +2647,7 @@ Run_State::Run_State(void)
   do_output[METAPOST] = true;
   do_output[PNG]      = false;
   do_output[LIBPLOT]  = false;
-  do_output[METAFONT] = false;
+  do_output[METAFONT] = true;
   single_output_file  = false;
 
   message_mode      = STANDARD;

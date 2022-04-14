@@ -179,6 +179,40 @@ beginfig(65)
   draw pic(A) withpen big_pen;
 endfig; 
 
+%% ** (2) Fig. 97 ("a")
+
+beginfig(97) 
+  a.dx = a.dy = .5cm;
+  boxit.a(v[97]);
+  draw pic(a) withpen big_pen;
+endfig; 
+
+%% ** (2) Fig. 103 ("g")
+
+beginfig(103) 
+  g.dx = g.dy = 0cm;
+  boxit.g(v[103]);
+  draw pic(g) withpen medium_pen;
+  draw bpath g withpen medium_pen;
+
+  n = length r[103][0] - 1;
+  
+
+  for i = 0 upto n:
+    dotlabel.top(decimal i, point i of r[103][0]);
+  endfor;
+  
+  %tracingonline := 1;
+  
+  show r[103][0];
+  show r[103][1];
+
+endfig; 
+
+
+
+
+
 
 %% *** (3)
 

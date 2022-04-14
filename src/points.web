@@ -8538,16 +8538,17 @@ Label::output(Scanner_Node s,
               const Transform& t)
 {
 
-/* !!START HERE:  LDF 2022.04.13. Add code for MF and MP output*/ 
 
-   Output_Struct* os;
+   Output_Struct* os_mf;
+   Output_Struct* os_mp;
 
    if (metafont_output)
-      os = s->out[Run_State::METAFONT];
-   else
-      os = s->out[Run_State::METAPOST];
+      os_mf = s->out[Run_State::METAFONT];
+   if (metapost_output)
+      os_mp = s->out[Run_State::METAPOST];
 
-   ofstream* out_stream  = static_cast<ofstream*>(os->stream_ptr);
+   ofstream* out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
+   ofstream* out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
 
    if (!t.is_identity())
      *pt *= t;
@@ -8562,81 +8563,130 @@ Label::output(Scanner_Node s,
      }  
 
    if (metafont_output)
-      *out_stream << "makelabel";
-   else
-      *out_stream << "label";
+      *out_stream_mf << "makelabel";
+   
+   if (metapost_output)
+      *out_stream_mp << "label";
    
    if (position != "")
-     *out_stream << "." << position;
+   {
+     *out_stream_mf << "." << position;
+     *out_stream_mp << "." << position;
+   }
    
    if (metafont_output)
    {
-      *out_stream << "(\"" << text << "\"";
+      *out_stream_mf << "(\"" << text << "\"";
    }
-   else
-      *out_stream << "(btex " << text << " etex ";
+   if (metapost_output)
+      *out_stream_mp << "(btex " << text << " etex ";
 
      if (transform && !transform->is_identity())
-        {
+     {
 
-          *out_stream << " transformed "
-                      << "begingroup; save T; transform T;"
-                      << endl  
-                      << " xxpart T = " 
-                      << transform->get_element(0, 0) << "; "
-                      << "xpart T = "                                   
-                      << transform->get_element(3, 0) << "; "
-                      << "xypart T = "                                 
-                      << transform->get_element(1, 0) << "; " 
-                      << endl                                                   
-                      << " yypart T = "                               
-                      << transform->get_element(1, 1) << "; "
-                      << "ypart T = "                                   
-                      << transform->get_element(3, 1) << "; "
-                      << "yxpart T = "                                 
-                      << transform->get_element(0, 1) << "; "
-                      << "T endgroup ";
+        if (metafont_output)
+           *out_stream_mf << " transformed "
+                          << "begingroup; save T; transform T;"
+                          << endl  
+                          << " xxpart T = " 
+                          << transform->get_element(0, 0) << "; "
+                          << "xpart T = "                                   
+                          << transform->get_element(3, 0) << "; "
+                          << "xypart T = "                                 
+                          << transform->get_element(1, 0) << "; " 
+                          << endl                                                   
+                          << " yypart T = "                               
+                          << transform->get_element(1, 1) << "; "
+                          << "ypart T = "                                   
+                          << transform->get_element(3, 1) << "; "
+                          << "yxpart T = "                                 
+                          << transform->get_element(0, 1) << "; "
+                          << "T endgroup ";
 
-        } /* |if (transform && !transform->is_identity())|  */@;
+        if (metapost_output)
+           *out_stream_mp << " transformed "
+                          << "begingroup; save T; transform T;"
+                          << endl  
+                          << " xxpart T = " 
+                          << transform->get_element(0, 0) << "; "
+                          << "xpart T = "                                   
+                          << transform->get_element(3, 0) << "; "
+                          << "xypart T = "                                 
+                          << transform->get_element(1, 0) << "; " 
+                          << endl                                                   
+                          << " yypart T = "                               
+                          << transform->get_element(1, 1) << "; "
+                          << "ypart T = "                                   
+                          << transform->get_element(3, 1) << "; "
+                          << "yxpart T = "                                 
+                          << transform->get_element(0, 1) << "; "
+                          << "T endgroup ";
 
-   *out_stream << ", ("
+     } /* |if (transform && !transform->is_identity())|  */@;
+
+   *out_stream_mf << ", ("
                << pt->get_x('p', false)
                << Point::measurement_units << ", "
                << pt->get_y('p', false)
                << Point::measurement_units << "))";
 
-if (text_color)
-      *out_stream << endl << " withcolor " << *text_color;
+   *out_stream_mp << ", ("
+               << pt->get_x('p', false)
+               << Point::measurement_units << ", "
+               << pt->get_y('p', false)
+               << Point::measurement_units << "))";
 
-   *out_stream << ";" << endl;
+   if (text_color && metapost_output)
+      *out_stream_mp << endl << " withcolor " << *text_color;
+
+   *out_stream_mf << ";" << endl;
+   *out_stream_mp << ";" << endl;
 
    if (dot == true)
-       {
-          *out_stream << "begingroup" << endl; 
+   {
+      *out_stream_mf << "begingroup" << endl; 
+      *out_stream_mp << "begingroup" << endl; 
 
-          if (!metafont_output)
-             *out_stream << "interim linecap := rounded;";
+      if (metapost_output)
+         *out_stream_mp << "interim linecap := rounded;";
 
-          *out_stream << endl
-                      << "drawdot (" 
-                      << pt->get_x('p', false)
-                      << Point::measurement_units << ", "
-                      << pt->get_y('p', false)
-                      << Point::measurement_units << ")";
+      *out_stream_mf << endl
+                     << "drawdot (" 
+                     << pt->get_x('p', false)
+                     << Point::measurement_units << ", "
+                     << pt->get_y('p', false)
+                     << Point::measurement_units << ")";
 
-            if (pen)
-               *out_stream << " withpen " << *pen;
-            else if (!metafont_output)
-               *out_stream << " withpen pencircle scaled dotlabeldiam";
-            else if (metafont_output)
-               *out_stream << " withpen pencircle scaled 3pt";
-          
-          if (!metafont_output && dot_color)
-             *out_stream << " withcolor " << *dot_color;
+      *out_stream_mp << endl
+                     << "drawdot (" 
+                     << pt->get_x('p', false)
+                     << Point::measurement_units << ", "
+                     << pt->get_y('p', false)
+                     << Point::measurement_units << ")";
 
-          *out_stream << ";" << "endgroup;" << endl;
-         
-      } /* |if (dot == true)|  */
+        if (pen)
+        {
+           *out_stream_mf << " withpen " << *pen;
+           *out_stream_mp << " withpen " << *pen;
+        }
+        else if (!metafont_output)
+        {
+           *out_stream_mf << " withpen pencircle scaled dotlabeldiam";
+           *out_stream_mp << " withpen pencircle scaled dotlabeldiam";
+        }
+        else if (metafont_output)
+        {
+           *out_stream_mf << " withpen pencircle scaled 3pt";
+           *out_stream_mp << " withpen pencircle scaled 3pt";
+        }
+      
+      if (metapost_output && dot_color)
+         *out_stream_mp << " withcolor " << *dot_color;
+
+      *out_stream_mf << ";" << "endgroup;" << endl;
+      *out_stream_mp << ";" << "endgroup;" << endl;
+     
+   } /* |if (dot == true)|  */
 
    return;
 
@@ -9109,9 +9159,8 @@ Point::magnitude() const
       cerr << "In magnitude().\n";
       cerr << "Point has too great a magnitude!\n";
       @:!!@> 
-        /* !! This |show| outputs to |stdout|. It would be nice to
-          output it to |stderr| instead. Must write function for
-            this. */
+        /* !! This |show| outputs to |stdout|. It would be nice to output it 
+              to |stderr| instead. Must write function for this. */
         cerr << "Returning INVALID_REAL.\n";
       return INVALID_REAL;
     }

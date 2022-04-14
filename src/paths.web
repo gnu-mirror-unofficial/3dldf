@@ -14631,13 +14631,6 @@ Path::reset_connectors(string s, int begin, int end, Scanner_Node scanner_node)
 @
 @<Define |Path| functions@>=
 
-   /* !!START HERE:  LDF 2022.04.06.  Fill up connectors if there are less than the number of points plus
-      cycle, if present.  Maybe make this an option.  Maybe make an option for calling this in the rule
-      and function for showing connectors.  Add a rule for showing connectors for circles, ellipses, etc.
-      LDF 2022.04.06.
-   */ 
-
-
    for (int i = begin; i < end; ++i)
    {
 
@@ -15112,8 +15105,6 @@ operator<<(ostream& o, Connector_Type& c)
 {
 @q ***** (5) @>
 
-/* !!START HERE:  LDF 2022.04.03.  Why was debugging on here?  */ 
-
    bool DEBUG = false; /* |true| */ 
 
 @q ***** (5) Controls.  @>
@@ -15125,11 +15116,6 @@ operator<<(ostream& o, Connector_Type& c)
 
    if (c.type0 == Connector_Type::CONTROLS_TYPE)
    {
-      /* !!START HERE:  LDF 2022.01.15.  Find out why pt0 and pt1 aren't correct.  
-         Remember to have transforms affect these points!
-
-     */ 
-
 #if DEBUG_COMPILE
       if (DEBUG)
       { 

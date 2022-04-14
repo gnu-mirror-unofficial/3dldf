@@ -227,7 +227,7 @@ Scanner_Type::create(string str,
                      const bool top_level)
 {
 
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
   stringstream cerr_strm;
 
@@ -282,7 +282,7 @@ Scanner_Type::create(string str,
 
 @<Define |Scanner_Type::create|@>=
 
- if (str != "")
+  if (str != "")
   {
 
     in_file = new ifstream;
@@ -394,6 +394,7 @@ Added this section.
       @<Check |in_filename|, return 0 upon failure@>@;
 
 @q **** (4)    @>          
+
 @ Now set the output file names.  There might be multiple output
 files, if more than one output format is desired.  Currently, only
 MetaPost output is supported, but I plan to support PNG output and one
@@ -427,50 +428,50 @@ or more of the formats supported by the GNU plotutils package.
 #endif 
 
   if (r.do_output[Run_State::METAPOST])
-    {
-      out_file = 0;
-      out_filename_metapost = out_filename_base + ".mp";
-      out_filename = out_filename_metapost;
-      @<Check |out_filename|, return 0 upon failure@>@;
-      out_file_metapost = out_file;
-      out_file = 0;
-    }  
+  {
+    out_file = 0;
+    out_filename_metapost = out_filename_base + ".mp";
+    out_filename = out_filename_metapost;
+    @<Check |out_filename|, return 0 upon failure@>@;
+    out_file_metapost = out_file;
+    out_file = 0;
+  }  
 
-  else if (r.do_output[Run_State::METAFONT])
-    {
+  if (r.do_output[Run_State::METAFONT])
+  {
 
-      out_file = 0;
-      out_filename_metafont = out_filename_base + ".mf";
-      out_filename = out_filename_metafont;
+    out_file = 0;
+    out_filename_metafont = out_filename_base + ".mf";
+    out_filename = out_filename_metafont;
 
 #if 0 
       cerr << "out_filename == " << out_filename << endl;
 #endif 
 
-      @<Check |out_filename|, return 0 upon failure@>@;
-      out_file_metafont = out_file;
-      out_file = 0;
-    }  
+    @<Check |out_filename|, return 0 upon failure@>@;
+    out_file_metafont = out_file;
+    out_file = 0;
+  }  
 
-  else if (r.do_output[Run_State::PNG])
-    {
-      out_file = 0;
-      out_filename_png = out_filename_base + ".png";
-      out_filename = out_filename_png;
-      @<Check |out_filename|, return 0 upon failure@>@;
-      out_file_png = out_file;
-      out_file = 0;
-    }
+  if (r.do_output[Run_State::PNG])
+  {
+    out_file = 0;
+    out_filename_png = out_filename_base + ".png";
+    out_filename = out_filename_png;
+    @<Check |out_filename|, return 0 upon failure@>@;
+    out_file_png = out_file;
+    out_file = 0;
+  }
 
-  else if (r.do_output[Run_State::LIBPLOT])
-    {
-      out_file = 0;
-      out_filename_libplot = out_filename_base + ".lpt";
-      out_filename = out_filename_libplot;
-      @<Check |out_filename|, return 0 upon failure@>@;
-      out_file_libplot = out_file;
-      out_file = 0;
-    }
+  if (r.do_output[Run_State::LIBPLOT])
+  {
+    out_file = 0;
+    out_filename_libplot = out_filename_base + ".lpt";
+    out_filename = out_filename_libplot;
+    @<Check |out_filename|, return 0 upon failure@>@;
+    out_file_libplot = out_file;
+    out_file = 0;
+  }
 
   } /* if (str != "")  */
 
@@ -486,66 +487,19 @@ This code works, but when I try to use it a memory fault error occurs in
 |yyparse|.  Currently, it's too hard to debug because it takes so long for
 \filename{parser.c++} to compile.  I'll try to debug it once I've removed more
 code from the parser rules and put it into functions.
+
+\initials{LDF 2022.04.14.}
+Removed commented-out code.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
 
-/* LDF 2004.09.18.   Working on this.  */
-
   else /* (|str == ""|)  */
-    {
+  {
 
       in_stream = &cin;
 
-#if 0 /* LDF 2004.09.18.  Commented-out.  */
-
-      if (r.do_output[Run_State::METAPOST])
-        {
-          out_file = 0;
-
-          out_filename_metapost = "3dldfput.mp";
-          out_filename = out_filename_metapost;
-
-          @<Check |out_filename|, return 0 upon failure@>@;
-          out_file_metapost = out_file;
-          out_file = 0;
-        }  
-
-      else if (r.do_output[Run_State::METAFONT])
-        {
-          out_file = 0;
-
-          out_filename_metapost = "3dldfput.mf";
-          out_filename = out_filename_metafont;
-
-          @<Check |out_filename|, return 0 upon failure@>@;
-          out_file_metapost = out_file;
-          out_file = 0;
-        }  
-
-      else if (r.do_output[Run_State::PNG])
-        {
-          out_file = 0;
-          out_filename_png = "3dldfput.png";
-          out_filename = out_filename_png;
-          @<Check |out_filename|, return 0 upon failure@>@;
-          out_file_png = out_file;
-          out_file = 0;
-        }
-
-      else if (r.do_output[Run_State::LIBPLOT])
-        {
-          out_file = 0;
-          out_filename_libplot = "3dldfput.lpt";
-          out_filename = out_filename_libplot;
-          @<Check |out_filename|, return 0 upon failure@>@;
-          out_file_libplot = out_file;
-          out_file = 0;
-        }
-
-#endif /* LDF 2004.09.18.  Commented-out.  */
-
-    } /* |else | (|str == ""|)  */
+  } /* |else | (|str == ""|)  */
 
 @q **** (4) Success!  Allocate memory.  @>          
 
@@ -753,7 +707,8 @@ needed, because this function predefines variables for these |Colors|.
 
   if (scanner_node->in->type == Io_Struct::FILE_TYPE && r.do_output[Run_State::METAPOST])
     {
-cerr << "Error after here 0." << endl; 
+
+      cerr << "Error after here 0." << endl; 
 
       scanner_node->out[Run_State::METAPOST] = new Output_Struct;
       scanner_node->out[Run_State::METAPOST]->filename = out_filename_metapost;

@@ -1422,23 +1422,14 @@ Added this section.
           *out_stream_mf << "beginchar(\"" << s << "\", " << wd 
                          << "cm#, " << ht << "cm#, " << dp << "cm#);" 
                          << endl;
-       if (metapost_output)
-          *out_stream_mp << "beginchar(\"" << s << "\", " << wd 
-                         << "cm#, " << ht << "cm#, " << dp << "cm#);" 
-                         << endl;
-
 
     }
 
     if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
     {
-       if (metafont_output)
-          *out_stream_mf << "beginfig(" << fig_num << ");" 
-                         << endl;
        if (metapost_output)
           *out_stream_mp << "beginfig(" << fig_num << ");" 
                          << endl;
-
     }
 
 
@@ -2471,7 +2462,7 @@ Added this section.
 
    bool error_stop_value = false;
 
-   bool is_endfig = false; 
+   bool is_endfig_or_endchar = false; 
 
 @q ***** (5) Get |current_picture|, if this is for |endfig|.@>
 
@@ -2483,9 +2474,9 @@ Added this section.
   if (scanner_node->endfig_ptr != static_cast<void*>(0))
     {
       
-      is_endfig = *static_cast<bool*>(scanner_node->endfig_ptr);
+      is_endfig_or_endchar = *static_cast<bool*>(scanner_node->endfig_ptr);
       
-      if (!is_endfig) /* Error handling.  */
+      if (!is_endfig_or_endchar) /* Error handling.  */
         {
           cerr_strm << thread_name 
                     << "ERROR! In `Scan_Parse::output_command_func':"
@@ -2501,7 +2492,7 @@ Added this section.
 
           return 1;
 
-        } /* |if (!is_endfig)|  */
+        } /* |if (!is_endfig_or_endchar)|  */
 
       Id_Map_Entry_Node entry = scanner_node->lookup("current_picture");
 
@@ -3052,16 +3043,15 @@ to |Picture::output|.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (is_endfig)
+   if (is_endfig_or_endchar)
    {
-     string s = (output_command_arg == ENDCHAR_COMMAND) ? "endchar;" : "endfig;";
-
-     if (metafont_output)
+     if (metafont_output && output_command_arg == ENDCHAR_COMMAND)
         *(p->scanner_node->out[Run_State::METAFONT]->stream_ptr) 
-              << s << endl << endl << flush;
-     else
+              << "endchar;" << endl << endl << flush;
+
+     if (metapost_output && output_command_arg == ENDFIG_COMMAND)
         *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
-              << s << endl << endl << flush;
+              << "endfig;" << endl << endl << flush;
    }
 
 @
