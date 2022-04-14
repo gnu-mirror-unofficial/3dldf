@@ -708,8 +708,6 @@ needed, because this function predefines variables for these |Colors|.
   if (scanner_node->in->type == Io_Struct::FILE_TYPE && r.do_output[Run_State::METAPOST])
     {
 
-      cerr << "Error after here 0." << endl; 
-
       scanner_node->out[Run_State::METAPOST] = new Output_Struct;
       scanner_node->out[Run_State::METAPOST]->filename = out_filename_metapost;
       scanner_node->out[Run_State::METAPOST]->stream_ptr
@@ -739,8 +737,6 @@ needed, because this function predefines variables for these |Colors|.
   if (   scanner_node->in->type == Io_Struct::FILE_TYPE 
       && r.do_output[Run_State::METAFONT])
     {
-
-      cerr << "Error after here 1." << endl; 
 
       scanner_node->out[Run_State::METAFONT] = new Output_Struct;
       scanner_node->out[Run_State::METAFONT]->filename = out_filename_metafont;
