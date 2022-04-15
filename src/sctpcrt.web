@@ -3189,7 +3189,10 @@ Added calls to |add_entry| for |WITH_SURFACE_HIDING| and
 @<Define |Scanner_Type::create|@>=
 
   scanner_node->add_entry("output", OUTPUT, spark);
+
   scanner_node->add_entry("clear", CLEAR, spark);
+  scanner_node->add_entry("no_clear", NO_CLEAR, spark);
+  scanner_node->add_synonym("noclear", "no_clear");
 
   scanner_node->add_entry("with_surface_hiding", WITH_SURFACE_HIDING, spark);
   scanner_node->add_entry("without_surface_hiding", WITHOUT_SURFACE_HIDING, spark);
@@ -3523,6 +3526,10 @@ Added calls to |scanner_node->add_entry| for |set_transform|,
    scanner_node->add_entry("set_transform", SET_TRANSFORM, spark);
    scanner_node->add_entry("reset_transform", RESET_TRANSFORM, spark);
    scanner_node->add_entry("delete_transform", DELETE_TRANSFORM, spark);
+
+   scanner_node->add_entry("delete", DELETE, spark);
+   scanner_node->add_entry("no_delete", NO_DELETE, spark);
+   scanner_node->add_synonym("nodelete", "no_delete");
 
    scanner_node->add_entry("get_point", GET_POINT, spark);
    scanner_node->add_entry("get_last_point", GET_LAST_POINT, spark);
