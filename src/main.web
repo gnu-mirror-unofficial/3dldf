@@ -318,33 +318,41 @@ Added |const unsigned short BISON_TRACE_INDEX|.
 
 @<GCC command line option processing@>=
 
-  const unsigned short BISON_TRACE_INDEX          =  0;
-  const unsigned short HELP_INDEX                 =  1;
-  const unsigned short MULTITHREAD_INPUT_INDEX    =  2;
-  const unsigned short MULTITHREAD_OUTPUT_INDEX   =  3;
-  const unsigned short MULTITHREAD_INCLUDE_INDEX  =  4;
-  const unsigned short SILENT_INDEX               =  5;
-  const unsigned short QUIET_INDEX                =  6;
-  const unsigned short VERBOSE_INDEX              =  7;
-  const unsigned short VERSION_INDEX              =  8;
-  const unsigned short DATABASE_INDEX             =  9;
-  const unsigned short ASTRONOMY_INDEX            = 10;
-  const unsigned short STARS_LIMIT_INDEX          = 11;
-  const unsigned short OUTPUT_FILENAME_INDEX      = 12;
-  const unsigned short METAFONT_INDEX             = 13;
-  const unsigned short MF_INDEX                   = 14;
-  const unsigned short METAFONT_ONLY_INDEX        = 15;
-  const unsigned short MF_ONLY_INDEX              = 16;
-  const unsigned short MFONLY_INDEX               = 17;
-  const unsigned short NO_METAFONT_INDEX          = 18;
-  const unsigned short NO_MF_INDEX                = 19;
-  const unsigned short METAPOST_INDEX             = 20;
-  const unsigned short MP_INDEX                   = 21;
-  const unsigned short METAPOST_ONLY_INDEX        = 22;
-  const unsigned short MP_ONLY_INDEX              = 23;
-  const unsigned short MPONLY_INDEX               = 24;
-  const unsigned short NO_METAPOST_INDEX          = 25;
-  const unsigned short NO_MP_INDEX                = 26;
+  const unsigned short BISON_TRACE_INDEX               =  0;
+  const unsigned short HELP_INDEX                      =  1;
+  const unsigned short MULTITHREAD_INPUT_INDEX         =  2;
+  const unsigned short MULTITHREAD_OUTPUT_INDEX        =  3;
+  const unsigned short MULTITHREAD_INCLUDE_INDEX       =  4;
+  const unsigned short SILENT_INDEX                    =  5;
+  const unsigned short QUIET_INDEX                     =  6;
+  const unsigned short VERBOSE_INDEX                   =  7;
+  const unsigned short VERSION_INDEX                   =  8;
+  const unsigned short DATABASE_INDEX                  =  9;
+  const unsigned short ASTRONOMY_INDEX                 = 10;
+  const unsigned short STARS_LIMIT_INDEX               = 11;
+  const unsigned short OUTPUT_FILENAME_INDEX           = 12;
+  const unsigned short METAFONT_INDEX                  = 13;
+  const unsigned short MF_INDEX                        = 14;
+  const unsigned short METAFONT_ONLY_INDEX             = 15;
+  const unsigned short MF_ONLY_INDEX                   = 16;
+  const unsigned short MFONLY_INDEX                    = 17;
+  const unsigned short NO_METAFONT_INDEX               = 18;
+  const unsigned short NO_MF_INDEX                     = 19;
+  const unsigned short METAPOST_INDEX                  = 20;
+  const unsigned short MP_INDEX                        = 21;
+  const unsigned short METAPOST_ONLY_INDEX             = 22;
+  const unsigned short MP_ONLY_INDEX                   = 23;
+  const unsigned short MPONLY_INDEX                    = 24;
+  const unsigned short NO_METAPOST_INDEX               = 25;
+  const unsigned short NO_MP_INDEX                     = 26;
+  const unsigned short DELETE_CURRENT_PICTURE_INDEX    = 27;
+  const unsigned short DELETE_CP_INDEX                 = 28;
+  const unsigned short DCP_INDEX                       = 29;
+  const unsigned short NO_DELETE_CURRENTPICTURE_INDEX  = 30;
+  const unsigned short NO_DELETE_CP_INDEX              = 31;
+  const unsigned short NO_DCP_INDEX                    = 32;
+  const unsigned short NDCP_INDEX                      = 33;
+
 
 @q *** Option struct.@>
 @ Option struct.
@@ -370,23 +378,30 @@ Added the ``\.{--quiet}'' option.
     {"astronomy", 0, 0, 0},
     {"stars-limit", 1, 0, 0},
     {"output-filename", 1, 0, 0},
-    {"metafont", 0, 0, 0},      
-    {"mf", 0, 0, 0},            
-    {"metafont-only", 0, 0, 0},        
+    {"metafont", 0, 0, 0},
+    {"mf", 0, 0, 0},
+    {"metafont-only", 0, 0, 0},
     {"mf-only", 0, 0, 0},
-    {"mfonly", 0, 0, 0},              
-    {"no-metafont", 0, 0, 0},          
-    {"no-mf", 0, 0, 0},                
-    {"metapost", 0, 0, 0},      
-    {"mp", 0, 0, 0},            
-    {"metapost-only", 0, 0, 0},        
-    {"mp-only", 0, 0, 0},              
-    {"mponly", 0, 0, 0},              
-    {"no-metapost", 0, 0, 0},          
-    {"no-mp", 0, 0, 0},                
+    {"mfonly", 0, 0, 0},
+    {"no-metafont", 0, 0, 0},
+    {"no-mf", 0, 0, 0},
+    {"metapost", 0, 0, 0},
+    {"mp", 0, 0, 0},
+    {"metapost-only", 0, 0, 0},
+    {"mp-only", 0, 0, 0},
+    {"mponly", 0, 0, 0},
+    {"no-metapost", 0, 0, 0},
+    {"no-mp", 0, 0, 0},
+    {"delete-current-picture", 0, 0, 0},
+    {"delete-cp", 0, 0, 0},
+    {"dcp", 0, 0, 0},
+    {"no-delete-currentpicture", 0, 0, 0},
+    {"no-delete-cp", 0, 0, 0},
+    {"no-dcp", 0, 0, 0},
+    {"ndcp", 0, 0, 0},
     {0, 0, 0, 0}
   };
-  
+
   int option_index = 0;
   int this_option_optind = optind ? optind : 1;  
 
@@ -464,79 +479,92 @@ Edited the output.
             cerr << "GNU 3DLDF Version " << VERSION_3DLDF << ". "
                  << COPYRIGHT_3DLDF << endl 
                  << endl
-                 << "Valid options for GNU 3DLDF are:" << endl
+                 << "Valid options for GNU 3DLDF are:" 
+                 << endl << endl
+                 << "--bison-trace:               Prints information generated by Bison "
+                 << endl 
+                 << "                             for tracing which parser rules are reduced "
+                 << endl 
+                 << "                             and the state of the Bison stack." << endl
                  << endl
-                 << "--bison-trace:           Prints information generated by Bison "
-                 << endl << "                         "
-                 << "for tracing which parser rules are reduced "
-                 << endl << "                         "
-                 << "and the state of the Bison stack." << endl
+                 << "--help:                      Prints this message and exits with return value 0." 
                  << endl
-                 << "--help:                  Prints this message and exits "
-                 << "with return value 0." << endl
                  << endl
-                 << "--multithread-input:     Enables the use of multiple "
+                 << "--multithread-input:         Enables the use of multiple "
                  << "threads for input."
                  << endl
                  << endl
-                 << "--multithread-output:    Enables the use of multiple "
+                 << "--multithread-output:        Enables the use of multiple "
                  << "threads for output."
                  << endl
                  << endl
-                 << "--multithread-include:   Enables the use of multiple "
-                 << "threads for input" << endl 
-                 << "                         files included in other input files."
+                 << "--multithread-include:       Enables the use of multiple threads for input" 
+                 << endl 
+                 << "                             files included in other input files."
                  << endl
                  << endl
-                 << "--quiet:                 Suppresses some output to standard "
+                 << "--quiet:                     Suppresses some output to standard "
                  << "output"
                  << endl 
-                 << "                         and standard error when `3dldf' is run." 
+                 << "                             and standard error when `3dldf' is run." 
                  << endl << endl
-                 << "--silent:                Suppresses almost all output "
-                 << "to standard output" << endl
-                 << "                         and standard error when "
+                 << "--silent:                    Suppresses almost all output "
+                 << "to standard output" 
+                 << endl
+                 << "                             and standard error when "
                  << "`3dldf' is run."
                  << endl << endl
-                 << "--verbose:               Causes status information to be printed to standard output" 
+                 << "--verbose:                   Causes status information to be printed to standard output" 
                  << endl 
-                 << "                         when `3dldf' is run."
+                 << "                             when `3dldf' is run."
                  << endl << endl 
-                 << "--version:               Prints the version number of GNU 3DLDF to standard output"
+                 << "--version:                   Prints the version number of GNU 3DLDF to standard output"
                  << endl 
-                 << "                         and exits with return value 0." 
+                 << "                             and exits with return value 0." 
                  << endl << endl 
-                 << "--database:              Enables the use of the MySQL databases."
+                 << "--database:                  Enables the use of the MySQL databases."
                  << endl << endl 
-                 << "--astronomy:             Enables the features of GNU 3DLDF pertaining to astronomy."
+                 << "--astronomy:                 Enables the features of GNU 3DLDF pertaining to astronomy."
                  << endl << endl 
-                 << "--stars-limit:           Sets the limit for the number of stars to be read from the database."
+                 << "--stars-limit:               Sets the limit for the number of stars to be read from the database."
                  << endl << endl 
-                 << "--output-filename:       Sets the output filename."
+                 << "--output-filename:           Sets the output filename."
                  << endl << endl 
-                 << "--metafont and --mf:     Enable METAFONT output."
+                 << "--metafont and --mf:         Enable METAFONT output."
                  << endl << endl 
                  << "--metafont-only and"
                  << endl 
                  << "--mf-only and"
                  << endl 
-                 << "--mfonly:                 Enable METAFONT output and disable MetaPost output."
+                 << "--mfonly:                     Enable METAFONT output and disable MetaPost output."
                  << endl << endl 
                  << "--no-metafont and"
                  << endl 
-                 << "--no-mf:                 Disable METAFONT output."
+                 << "--no-mf:                      Disable METAFONT output."
                  << endl << endl 
-                 << "--metapost and --mp:     Enable METAPOST output."
+                 << "--metapost and --mp:          Enable METAPOST output."
                  << endl << endl 
                  << "--metapost-only and"
                  << endl 
                  << "--mp-only and"
                  << endl 
-                 << "--mponly:                Enable MetaPost output and disable METAFONT output."
+                 << "--mponly:                     Enable MetaPost output and disable METAFONT output."
                  << endl << endl 
                  << "--no-metapost and"
                  << endl 
-                 << "--no-mp:                 Disable MetaPost output."
+                 << "--no-mp:                      Disable MetaPost output."
+                 << endl 
+                 << "--delete-current-picture,"
+                 << endl 
+                 << "--delete-cp and --dcp:        `beginfig' and `beginchar' delete `current_picture' (`currentpicture')."
+                 << endl 
+                 << "                               This is the default behavior."
+                 << endl 
+                 << "--no-delete-currentpicture,"
+                 << endl 
+                 << "--no-delete-cp, --no-dcp"
+                 << endl 
+                 << "and --ndcp:                    `beginfig' and `beginchar' do not delete `current_picture' (`currentpicture')."
                  << endl << endl; 
 
 #if DEBUG_COMPILE
