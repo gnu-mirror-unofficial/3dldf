@@ -1,85 +1,28 @@
 %% cmrm_test.mp
 %% Created by Laurence D. Finston (LDF) Thu 14 Apr 2022 12:49:30 AM CEST
 
-%%%% * Copyright and License.
-
-%%%% This file is part of GNU 3DLDF, a package for three-dimensional drawing. 
-%%%% Copyright (C) 2022 The Free Software Foundation, Inc.
-
-%%%% GNU 3DLDF is free software; you can redistribute it and/or modify 
-%%%% it under the terms of the GNU General Public License as published by 
-%%%% the Free Software Foundation; either version 3 of the License, or 
-%%%% (at your option) any later version. 
-
-%%%% GNU 3DLDF is distributed in the hope that it will be useful, 
-%%%% but WITHOUT ANY WARRANTY; without even the implied warranty of 
-%%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-%%%% GNU General Public License for more details. 
-
-%%%% You should have received a copy of the GNU General Public License 
-%%%% along with GNU 3DLDF; if not, write to the Free Software 
-%%%% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA 
-
-%%%% GNU 3DLDF is a GNU package.  
-%%%% It is part of the GNU Project of the  
-%%%% Free Software Foundation 
-%%%% and is published under the GNU General Public License. 
-%%%% See the website http://www.gnu.org 
-%%%% for more information.   
-%%%% GNU 3DLDF is available for downloading from 
-%%%% http://www.gnu.org/software/3dldf/LDF.html. 
-
-%%%% Please send bug reports to Laurence.Finston@@gmx.de
-%%%% The mailing list help-3dldf@gnu.org is available for people to 
-%%%% ask other users for help.  
-%%%% The mailing list info-3dldf@gnu.org is for sending 
-%%%% announcements to users. To subscribe to these mailing lists, send an 
-%%%% email with "subscribe <email-address>" as the subject.  
-
-%%%% The author can be contacted at: 
-
-%%%% Laurence D. Finston 
-%%%% c/o Free Software Foundation, Inc. 
-%%%% 51 Franklin St, Fifth Floor 
-%%%% Boston, MA  02110-1301  
-%%%% USA
-
-%%%% Laurence.Finston@gmx.de 
-
-
 %% * (1) Top.
 
 %tracingonline := 1;
 prologues := 3;
 outputtemplate := "%j%3c.eps";
 
-% This is how labels are rotated:
-% label  (btex $q_2^0$ etex rotated 30,    point  0 of p2);
-
 %% * (1)
-
-
-verbatimtex \font\eurm=eurm10 scaled 16000
-  \font\cmssbx=cmssbx10 scaled 8000
-  etex;
 
 path q[];
 picture v[];
 
+path r[][];
+
+pair p[][][];
+
 numeric dark_grey;
 dark_grey = .5;
-pen small_pen;
 pen medium_pen;
 pen big_pen;
-pen huge_pen;
-
-small_pen = pencircle scaled .25mm;
 
 medium_pen = pencircle scaled .5mm;
-
 big_pen = pencircle scaled 1.5mm;
-
-huge_pen = pencircle scaled 2mm;
 
 pickup medium_pen;
 
@@ -90,7 +33,6 @@ do_labels = true; % false;
 
 bboxmargin := 0;
 
-%input TEX.mp;
 input boxes.mp;
 
 %% * (1) outline
@@ -154,7 +96,6 @@ def outline (expr char_ctr, picture_ctr, font, sscale_factor, ppen, ddo_black, d
       m := incr m;
     endfor;
 
-    
     v[picture_ctr] = currentpicture;
 
   endgroup;
@@ -167,56 +108,17 @@ enddef;
 
 %% * (1)
 
-path r[][];
-
-pair p[][][];
-
-string S;
-S = "";
-
 boolean do_black;
 do_black = true; % false;
 
 boolean do_labels;
 do_labels = true; % false;
 
-boolean do_reflect;
-do_reflect = false; % true;
-
-
 %% * (1)
 
 fontmapline "cmr10 CMR10 <cmr10.pfb";
-fontmapline "cmbx12 CMBX12 <cmbx12.pfb";
-fontmapline "cmssbx10 CMSSBX10 <cmssbx10.pfb";
-fontmapline "eurm10 EURM10 <eurm10.pfb";
-fontmapline "eurb10 EURB10 <eurb10.pfb";
-fontmapline "eufm10 EUFM10 <eufm10.pfb"; %% Euler Fraktur medium
-fontmapline "eufb10 EUFB10 <eufb10.pfb"; %% Euler Fraktur bold
-fontmapline "cmmi10 CMMI10 <cmmi10.pfb"; 
+fontmapline "cmmi10 CMMI10 <cmmi10.pfb";
 fontmapline "cmr7 CMR7 <cmr7.pfb"; 
-fontmapline "manfnt MANFNT <manfnt.pfb";
-
-%% DIN A Series, Width X Height
-%%
-
-% DIN A4 Portrait: 210 X 297   
-% DIN A5 Portrait: 148 X 210   
-% DIN A6 Portrait: 105 X 148
-% DIN A7 Portrait:  74 X 105
-% DIN A8 Portrait:  52 X  74
-
-%% LDF 2022.01.02.  Printed out using scaling_factor := .1 and scaling_factor := .13.
-%% Both of these sizes look good.
-
-numeric outer_frame_wd;
-numeric outer_frame_ht;
-
-numeric inner_frame_wd;
-numeric inner_frame_ht;
-
-path inner_frame;
-path outer_frame;
 
 %% ** (2) Computer Moder Roman Bold, 10pt
 
@@ -268,10 +170,6 @@ beginfig(103)
   
   n = length r[103][1] - 1;
   
-  % for i = 1 upto n:
-  %   dotlabel.top(decimal i, point i of r[103][1]);
-  % endfor;
-
   dotlabel.rt(   "0",  point  0 of r[103][0]);
   dotlabel.rt(   "1",  point  1 of r[103][0]);
   dotlabel.bot(  "2",  point  2 of r[103][0]);
@@ -297,9 +195,6 @@ beginfig(103)
   dotlabel.top(	"22",  point 22 of r[103][0]);
    
   
-  %show r[103][0];
-  %show r[103][1];
-
   dotlabel.lft(btex (0, 0) etex, origin);
 
   z4 = whatever[z0, z3];
@@ -308,9 +203,6 @@ beginfig(103)
   y4 = y5 = 0;
 
   draw z4 -- z5 withgreyscale light_grey;  
-
-  %dotlabel.top(btex $z_4$ etex, z4);
-  %dotlabel.rt(btex $z_5$ etex, z5);
 
   verbatimtex "\font\huge=cmr10 scaled 25750" etex;
 
