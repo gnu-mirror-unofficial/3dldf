@@ -4608,6 +4608,7 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 @<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
+
   status = t->lock();
 
   if (status != 0)
@@ -4705,6 +4706,20 @@ If any attempt fails, try to unlock the mutexes that are still locked.
 
     } /* |if (status != 0)| */
 
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr_strm << thread_name 
+                << "In `Scan_Parse::assign_picture_simple()':"
+                << endl << "`t->unlock()' succeeded.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, error_stop_value); 
+      cerr_strm.str("");
+      
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 #endif 
 
 @q ****** (6) |s->unlock|.@>
@@ -4741,6 +4756,20 @@ If any attempt fails, try to unlock the mutexes that are still locked.
       return ivp;
 
     } /* |if (status != 0)| */
+
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr_strm << thread_name 
+                << "In `Scan_Parse::assign_picture_simple()':"
+                << endl << "`s->unlock()' succeeded.";
+
+      log_message(cerr_strm); 
+      cerr_message(cerr_strm, error_stop_value); 
+      cerr_strm.str("");
+      
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 #endif 
  
@@ -5113,6 +5142,7 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 @<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
+
   status = s->lock();
 
   if (status != 0)
@@ -5163,6 +5193,7 @@ If either attempt fails, try to unlock the mutexes we've already locked.
 @<Define |Scan_Parse| functions@>=
 
 #ifdef HAVE_PTHREAD_H  
+
   status = t->lock();
 
   if (status != 0)
@@ -11708,12 +11739,12 @@ plane_assignment_func(void* entry, Triangle* c, void* parameter = 0);
 
 template <class C>
 int
-Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors)
+Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors, bool delete_object)
 {
 @q **** (4) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
 
    if (DEBUG)
    { 
@@ -11747,29 +11778,67 @@ Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors)
   if (DEBUG)
         {
            cerr_strm << thread_name << "Entering `Scan_Parse::show_func'.";
+
+           cerr_strm << endl << "text == " << text;
+
            cerr_message(cerr_strm);
            cerr_strm.str("");
         }
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4).@>
 
    string s;
 
    cerr_strm << thread_name << ">> ";
 
-   if (c)
-      {
-          text += ":";
-          c->show(text);
-          cerr_message(cerr_strm);
-          log_message(cerr_strm);
-          cerr_strm.str("");
+@q **** (4) BUG FIX.  @>
 
-      }  /* |if (p)|  */
+@ BUG FIX:  Now handling |Pictures| specially.  Without the code in the
+conditional in this section, the program either blocks or crashes at the end
+of the run or both.
+\par
+It might be neater to pass the type of the template argument |C *c| as another argument
+or to make a specialization of this function for |Pictures|.  However, this solution works.
+\initials{LDF 2022.04.15.}
+
+\LOG
+\initials{LDF 2022.04.15.}
+Added this section.  
+\ENDLOG 
+@<Define |Scan_Parse| template functions@>=
+
+   if (text == "picture" || text == "Picture" || text == "PICTURE")
+   {
+
+       C* p = create_new<C>(*c);
+       *p = *c;
+       p->show(text);
+
+       delete p;
+       p = 0;
+
+       return 0;
+   }
+
+@q **** (4).@>
+@
+@<Define |Scan_Parse| template functions@>=
+
+   if (c)
+   {
+
+       text += ":";
+       c->show(text);
+
+       cerr_message(cerr_strm);
+       log_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  /* |if (p)|  */
 
 else  /* |!c|  */
      {
+
         cerr_strm << "(unknown " << text << ")";
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -11777,8 +11846,12 @@ else  /* |!c|  */
 
      }  /* |else| (|!c|)  */
 
-     delete c;
-     c = 0;
+     if (text != "picture")
+     {
+        delete c;
+        c = 0;
+
+     }
 
 #if DEBUG_COMPILE
 
@@ -11789,8 +11862,6 @@ else  /* |!c|  */
    }  
 
 #endif /* |DEBUG_COMPILE|  */@; 
-
-
 
      return 0;
 
@@ -11842,148 +11913,148 @@ Added declarations for versions with
 @<Declare |Scan_Parse| functions@>=
 
 int
-show_func(Matrix* m, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Matrix* m, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Transform* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Transform* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Color* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Color* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Dash_Pattern* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Dash_Pattern* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Pen* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Pen* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Picture* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Picture* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Glyph* c, string text = "glyph", void* parameter = 0, int with_connectors = 0);
+show_func(Glyph* c, string text = "glyph", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Plane* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Plane* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Origami_Figure* c, string text = "origami_figure", void* parameter = 0, int with_connectors = 0);
+show_func(Origami_Figure* c, string text = "origami_figure", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Focus* c, string text = "focus", void* parameter = 0, int with_connectors = 0);
+show_func(Focus* c, string text = "focus", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Point* c, string text = "point", void* parameter = 0, int with_connectors = 0);
+show_func(Point* c, string text = "point", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Bool_Point* c, string text = "bool_point", void* parameter = 0, int with_connectors = 0);
+show_func(Bool_Point* c, string text = "bool_point", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Path* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(Path* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Ellipse* c, string text = "ellipse", void* parameter = 0, int with_connectors = 0);
+show_func(Ellipse* c, string text = "ellipse", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Parabola* c, string text = "parabola", void* parameter = 0, int with_connectors = 0);
+show_func(Parabola* c, string text = "parabola", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Hyperbola* c, string text = "hyperbola", void* parameter = 0, int with_connectors = 0);
+show_func(Hyperbola* c, string text = "hyperbola", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Circle* c, string text = "circle", void* parameter = 0, int with_connectors = 0);
+show_func(Circle* c, string text = "circle", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Arc* a, string text = "arc", void* parameter = 0, int with_connectors = 0);
+show_func(Arc* a, string text = "arc", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Polygon* c, string text = "polygon", void* parameter = 0, int with_connectors = 0);
+show_func(Polygon* c, string text = "polygon", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Reg_Polygon* c, string text = "reg_polygon", void* parameter = 0, int with_connectors = 0);
+show_func(Reg_Polygon* c, string text = "reg_polygon", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Rectangle* c, string text = "rectangle", void* parameter = 0, int with_connectors = 0);
+show_func(Rectangle* c, string text = "rectangle", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Triangle* c, string text = "triangle", void* parameter = 0, int with_connectors = 0);
+show_func(Triangle* c, string text = "triangle", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Cuboid* c, string text = "cuboid", void* parameter = 0, int with_connectors = 0);
+show_func(Cuboid* c, string text = "cuboid", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Cylinder* c, string text = "cylinder", void* parameter = 0, int with_connectors = 0);
+show_func(Cylinder* c, string text = "cylinder", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Sphere* s, string text = "sphere", void* parameter = 0, int with_connectors = 0);
+show_func(Sphere* s, string text = "sphere", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Sphere_Development* s, string text = "sphere", void* parameter = 0, int with_connectors = 0);
+show_func(Sphere_Development* s, string text = "sphere", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Polyhedron* c, string text = "polyhedron", void* parameter = 0, int with_connectors = 0);
+show_func(Polyhedron* c, string text = "polyhedron", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Ellipsoid* c, string text = "ellipsoid", void* parameter = 0, int with_connectors = 0);
+show_func(Ellipsoid* c, string text = "ellipsoid", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Cone* c, string text = "cone", void* parameter = 0, int with_connectors = 0);
+show_func(Cone* c, string text = "cone", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Helix* c, string text = "helix", void* parameter = 0, int with_connectors = 0);
+show_func(Helix* c, string text = "helix", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Nurb* c, string text = "nurb", void* parameter = 0, int with_connectors = 0);
+show_func(Nurb* c, string text = "nurb", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Ellipse_Slice* c, string text = "ellipse_slice", void* parameter = 0, int with_connectors = 0);
+show_func(Ellipse_Slice* c, string text = "ellipse_slice", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
-show_func(Circle_Slice* c, string text = "circle_slice", void* parameter = 0, int with_connectors = 0);
+show_func(Circle_Slice* c, string text = "circle_slice", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Polyhedron_Slice* c, 
                       string text = "polyhedron_slice", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Matrix>* c, 
           string text = "matrix_vector", 
-          void* parameter = 0, int with_connectors = 0);
+          void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Ellipse>* c, 
                       string text = "ellipse_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Parabola>* c, 
                       string text = "parabola_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Hyperbola>* c, 
                       string text = "hyperbola_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Ellipsoid>* c, 
                       string text = "ellipsoid_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Sphere>* s, 
                       string text = "sphere_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Sphere_Development>* s, 
                       string text = "sphere_development_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 int
 show_func(Pointer_Vector<Cuboid>* c, 
                       string text = "Cuboid_vector", 
-                      void* parameter = 0, int with_connectors = 0);
+                      void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 @q *** (3) |ellipsoid_like_plane_intersection_func|.@> 
 @*2  {\bf ellipsoid\_like\_plane\_intersection\_func}.
