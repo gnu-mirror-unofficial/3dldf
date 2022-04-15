@@ -514,11 +514,17 @@ Replaced code with a call to |Scan_Parse::show_func|.
     Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
     if (entry && entry->object)
+    {
+       /* Testing LDF 2022.04.15. */
        Scan_Parse::show_func<Picture>(static_cast<Picture*>(entry->object),
                                      "picture",
-                                     parameter); 
+                                     parameter,
+                                     0,          
+                                     false); 
+    }
 
     @=$$@> = static_cast<void*>(0);
+
 
 };
 

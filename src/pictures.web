@@ -460,11 +460,8 @@ Picture::~Picture(void)
          << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  if (shapes.size() > 0)
-     shapes.clear();
-  if (labels.size() > 0)
-     labels.clear();
-  
+  clear();
+
   return;
 
 }
@@ -750,7 +747,7 @@ Picture::show(string text, bool stop)
   int status = 0;
 
 #if DEBUG_COMPILE
-  bool DEBUG = true; /* |false| */ @; 
+  bool DEBUG = false; /* |true| */ @; 
 
    if (DEBUG)
    { 
@@ -776,6 +773,7 @@ Picture::show(string text, bool stop)
           cerr << "In `Picture::show':  Type <RETURN> to continue.\n";
           getchar(); /* Don't delete this!  */ 
       }
+
     cerr << "Done showing picture.\n";
 
 @q *** Exit function successfully.@>

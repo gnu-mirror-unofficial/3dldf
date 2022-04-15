@@ -538,8 +538,6 @@ but I would like to know why it fails.
 Mutex_Type::~Mutex_Type(void)
 {
 
-   return;  /* LDF 2022.04.15. */
-
    stringstream cerr_strm;
 
 #if DEBUG_COMPILE
@@ -816,8 +814,6 @@ inline
 int 
 trylock(void)
 {
-  return 0; /* LDF 2022.04.15. */
-
   return pthread_mutex_trylock(&inner_mutex);
 }
 
@@ -4885,7 +4881,7 @@ message_command_func(int message_type, void* v, void* parameter = 0);
 
 template <class C>
 int
-show_func(C* c, string text = "", void* parameter = 0, int with_connectors = 0);
+show_func(C* c, string text = "", void* parameter = 0, int with_connectors = 0, bool delete_object = true);
 
 @q ***** (5) Functions for intersections.@>   
 @ Functions for intersections.
@@ -5019,7 +5015,7 @@ plot_stars_func(Sphere *, Scanner_Node);
 
 template <class C>
 int
-show_func(C* c, string text, void* parameter, int with_connectors);
+show_func(C* c, string text, void* parameter, int with_connectors, bool delete_object);
 
 void*
 plane_intersection_func(void* v, void* w, void* parameter = 0);

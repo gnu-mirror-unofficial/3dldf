@@ -1252,10 +1252,9 @@ This was needed because it now refers to |namespace Scan_Parse|.
 void 
 Point::output(Scanner_Node scanner_node, unsigned int output_command_arg) 
 {
-  bool DEBUG = true; /* |false| */
+  bool DEBUG = false; /* |true| */
 
   bool local_do_metafont = (metafont_output && output_command_arg & Scan_Parse::ENDCHAR_COMMAND) ? true : false;
-
   bool local_do_metapost = (metapost_output && output_command_arg & Scan_Parse::ENDFIG_COMMAND) ? true : false;
 
   if (DEBUG)

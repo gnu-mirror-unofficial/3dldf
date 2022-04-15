@@ -549,7 +549,7 @@ Id_Map_Entry_Type::~Id_Map_Entry_Type(void)
 #endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
 
 #if DEBUG_COMPILE
-   bool DEBUG = true; /* |false| */ @; 
+   bool DEBUG = false; /* |true| */ @; 
    if (DEBUG) 
      {
        cerr_strm << thread_name 
@@ -1580,27 +1580,13 @@ else if (type == NUMERIC)
 
    else if (type == PICTURE)
      {
-
-cerr << "Error after here 12." << endl; 
-
+       
        Picture* c = static_cast<Picture*>(object);
-       c->clear();
-       c->shapes.clear();
-       c->labels.clear();
        
        if (c != static_cast<Picture*>(0))
          {
-cerr << "Error after here 13." << endl; 
-
-
            delete c;
-
-cerr << "Error after here 14." << endl; 
-
            c = static_cast<Picture*>(0);
-
-cerr << "Error after here 15." << endl; 
-
          }  
      }
 
