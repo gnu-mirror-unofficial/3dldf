@@ -102,7 +102,7 @@ possible to use |beginfig| in loops.
 
       if (!scanner_node->beginchar_flag)
       {
-         scanner_node->clear_current_picture();      
+         scanner_node->clear_current_picture_func();      
       }
 
       status = Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
@@ -300,7 +300,7 @@ Added this rule.
 
        if (!scanner_node->beginfig_flag)
        {
-           scanner_node->clear_current_picture();      
+           scanner_node->clear_current_picture_func();      
        }
 
        status = Scan_Parse::beginfig_func(scanner_node, 
@@ -384,7 +384,7 @@ Added this rule.
 
        if (!scanner_node->beginfig_flag)
        {
-           scanner_node->clear_current_picture();      
+           scanner_node->clear_current_picture_func();      
        }
 
        status = Scan_Parse::beginfig_func(scanner_node, 

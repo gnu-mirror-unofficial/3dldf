@@ -5638,7 +5638,7 @@ Added this function.
 @
 @<Define |Scanner_Type| functions@>=
 int
-Scanner_Type::clear_current_picture(void)
+Scanner_Type::clear_current_picture_func(void)
 {
 @q ***** (5) @>
 
@@ -5661,7 +5661,7 @@ Scanner_Type::clear_current_picture(void)
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << "Entering `Scanner_Type::clear_current_picture'.";
+      cerr_strm << "Entering `Scanner_Type::clear_current_picture_func'.";
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
@@ -5680,7 +5680,7 @@ Scanner_Type::clear_current_picture(void)
         || current_picture_entry->object == static_cast<void*>(0))
     {
 
-        cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
+        cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture_func':"
                   << endl 
                   << "`current_picture' not found. "
                   << "Exiting function unsuccessfully with return value 1."; 
@@ -5702,7 +5702,7 @@ Scanner_Type::clear_current_picture(void)
 #if DEBUG_COMPILE
        if (DEBUG)
        { 
-            cerr_strm << thread_name << "In `Scanner_Type::clear_current_picture':"
+            cerr_strm << thread_name << "In `Scanner_Type::clear_current_picture_func':"
                       << endl 
                       << "`current_picture' is empty.  Not clearing."
                       << endl 
@@ -5739,7 +5739,7 @@ This is just for insurance.  No other threads should be able to access |current_
    if (status != 0)
    {
 
-       cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
+       cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture_func':"
                  << endl << "`current_picture_entry->lock()' failed. "
                  << "Exiting function with return value 1."; 
      
@@ -5780,7 +5780,7 @@ This is just for insurance.  No other threads should be able to access |current_
    if (status != 0)
    {
 
-       cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture':"
+       cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture_func':"
                  << endl << "`current_picture_entry->unlock()' failed. "
                  << "Exiting function with return value 1."; 
        
@@ -5797,7 +5797,7 @@ This is just for insurance.  No other threads should be able to access |current_
 #if DEBUG_COMPILE
    if (DEBUG)
    { 
-       cerr_strm << thread_name << "Exiting `Scanner_Type::clear_current_picture' "
+       cerr_strm << thread_name << "Exiting `Scanner_Type::clear_current_picture_func' "
                  << "successfully with return value 0."; 
        
        cerr_message(cerr_strm);
@@ -5810,7 +5810,7 @@ This is just for insurance.  No other threads should be able to access |current_
 
    return 0;
 
-}  /* End of |Scanner_Type::clear_current_picture| definition  */  
+}  /* End of |Scanner_Type::clear_current_picture_func| definition  */  
 
 
 @q ** (2) @>
