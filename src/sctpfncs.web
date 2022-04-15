@@ -1,5 +1,5 @@
 @q sctpfncs.web @>
-      
+
 @q * Copyright and License.@>
 
 @q * (0) Copyright and License.@>
@@ -42,9 +42,9 @@
 
 @q The author can be contacted at: @>
 
-@q Laurence D. Finston                 @> 
+@q Laurence D. Finston                 @>
 @q c/o Free Software Foundation, Inc.  @>
-@q 51 Franklin St, Fifth Floor         @> 
+@q 51 Franklin St, Fifth Floor         @>
 @q Boston, MA  02110-1301              @>
 @q USA                                 @>
 
@@ -56,23 +56,23 @@
 
 \LOG
 \initials{LDF 2004.04.20.}
-Changed |Scanner_Node| to |Scanner_Type|.  
+Changed |Scanner_Node| to |Scanner_Type|.
 
 \initials{LDF 2004.07.18.}
-Created this file.  Moved the function definitions in it 
+Created this file.  Moved the function definitions in it
 from \filename{scan.web}.
 
 \initials{LDF 2006.10.08.}
 @:BUG FIX@> BUG FIX:  Now setting pointers to 0 after deleting them.  This is
 unnecessary in some places.  I'm currently trying to find and fix a bug.
-\ENDLOG 
+\ENDLOG
 
 @q * (1) Include files.@>
 @ Include files.
 
 \LOG
 \initials{LDF 2004.12.21.}
-Now including \filename{deftfncs.h}.  It contains function definitions for 
+Now including \filename{deftfncs.h}.  It contains function definitions for
 |Definition_Info_Node|.
 \ENDLOG
 
@@ -91,7 +91,7 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 #include "transfor.h++"
 #include "pens.h++"
 #include "dashptrn.h++"
-#include "shapes.h++" 
+#include "shapes.h++"
 #include "pictures.h++"
 #include "points.h++"
 #include "lines.h++"
@@ -116,9 +116,9 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 #include "origami.h++"
 #include "astronmy.h++"
 
-#if 0 
+#if 0
    #include "patterns.h++"
-#endif 
+#endif
 
 #include "solids.h++"
 #include "solfaced.h++"
@@ -128,27 +128,27 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 #include "rhtchdrn.h++"
 #include "plyhdslc.h++"
 #include "cones.h++"
-#include "cylinder.h++" 
+#include "cylinder.h++"
 #include "ellpsoid.h++"
 #include "spheres.h++"
 #include "sphrdevl.h++"
 #include "parabold.h++"
 #include "paraellp.h++"
-#include "parahypr.h++" 
+#include "parahypr.h++"
 #include "glyphs.h++"
 #include "pctfncs0.h++"
 #include "utility.h++"
 #include "pntrvcf0.h++"
 #include "predctes.h++"
-#include "scanprse.h++"   
-#include "figures.h++"   
-#include "parser.h++"   
-#include "parser_1.h++"   
+#include "scanprse.h++"
+#include "figures.h++"
+#include "parser.h++"
+#include "parser_1.h++"
 #include "scan.h++"
 #include "scanprsf.h++"
 #include "imetfncs.h++"
 #include "deftfncs.h++"
-#include "sctpcrt.h++"  
+#include "sctpcrt.h++"
 
 @q *  (1) Destructor.  @>
 @* Destructor.
@@ -158,10 +158,10 @@ Now including \filename{deftfncs.h}.  It contains function definitions for
 Added this function definition.
 
 \initials{LDF 2004.07.02.}
-Moved some code from this function 
+Moved some code from this function
 to the |Input_Struct| and |Output_Struct| destructors.  Now just
-calling |delete| on |in| and |out[0] @t$\ldots$@> out[2]|. 
-\ENDLOG 
+calling |delete| on |in| and |out[0] @t$\ldots$@> out[2]|.
+\ENDLOG
 
 @q ** Definition.    @>
 
@@ -170,27 +170,27 @@ Scanner_Type::~Scanner_Type(void)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = false; /* |true| */ @;
   if (DEBUG)
     cerr << "Entering `Scanner_Type' destructor."
-         << endl; 
-#endif /* |DEBUG_COMPILE|  */@; 
+         << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q *** (3) Delete |pthread_t| pointers on |thread_vector| @>
 @q *** (3) and clear the latter.                                 @>
 
-@ Delete |pthread_t| pointers on |thread_vector| 
-and clear the latter.                                 
+@ Delete |pthread_t| pointers on |thread_vector|
+and clear the latter.
 \initials{LDF 2004.07.02.}
 
 \LOG
 \initials{LDF 2004.07.02.}
 Added this section.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
 
   for (vector<pthread_t*>::iterator iter = thread_vector.begin();
        iter != thread_vector.end();
@@ -202,9 +202,9 @@ Added this section.
           *iter = 0;
         }
     }
-  
+
   thread_vector.clear();
-#endif /* |HAVE_PTHREAD_H|  */@; 
+#endif /* |HAVE_PTHREAD_H|  */@;
 
 @q *** (3) Delete |in|. @>
 @ Delete |in|.
@@ -213,25 +213,25 @@ Added this section.
 \initials{LDF 2004.09.14.}
 Added |while| loop for traversing the linked list of |Input_Struct|
 pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
   if (in == 0)
     {
 #if DEBUG_COMPILE
-        if (DEBUG) 
+        if (DEBUG)
           cerr << "in == 0.\n";
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
       }
 
   else /* (|in != 0|)  */
     {
 
 #if DEBUG_COMPILE
-        if (DEBUG) 
+        if (DEBUG)
           cerr << "in != 0.\n";
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
         Input_Struct* temp_input_struct = 0;
 
@@ -241,7 +241,7 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
               {
                 temp_input_struct = in->up;
               }
-            
+
             delete in;
             in = temp_input_struct;
 
@@ -260,27 +260,27 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
         {
 
 #if DEBUG_COMPILE
-          if (DEBUG) 
+          if (DEBUG)
             cerr << "out[" << i << "] == 0.\n";
-#endif /* |DEBUG_COMPILE|  */@; 
-              
+#endif /* |DEBUG_COMPILE|  */@;
+
         }
 
       else /* |(out[i] != 0)| */
         {
 
 #if DEBUG_COMPILE
-          if (DEBUG) 
-            cerr << "out[" << i << "] != 0.\n";            
-#endif /* |DEBUG_COMPILE|  */@; 
+          if (DEBUG)
+            cerr << "out[" << i << "] != 0.\n";
+#endif /* |DEBUG_COMPILE|  */@;
 
-          delete out[i]; 
+          delete out[i];
           out[i] = 0;
 
         } /* |else| (|out[i] != 0|)  */@;
 
     } /* |for|  */@;
-  
+
 @q *** (3) Delete |id_map_node|. @>
 @ Delete |id_map_node|.
 
@@ -289,14 +289,14 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
   if (id_map_node != 0)
     {
 #if DEBUG_COMPILE
-      if (DEBUG) 
+      if (DEBUG)
         cerr << "Calling `delete id_map_node'."
              << endl;
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       delete id_map_node;
       id_map_node = 0;
-      
+
     } /* |if (id_map_node != 0)|  */
 
 #if DEBUG_COMPILE
@@ -305,7 +305,7 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
        cerr << "After call to `delete id_map_node'."
             << endl;
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
   if (up != 0)
     {
@@ -315,9 +315,9 @@ pointers and deleting all of them, i.e., |in|, |in->up|, |in->up->up|, etc.
      {
          cerr << "In `Scanner_Type' destructor: Calling `delete' on `up'."
               << endl << "This will cause this function to be called recursively."
-              << endl; 
+              << endl;
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       delete up;
       up = 0;
@@ -340,12 +340,12 @@ Replaced |vector<string> definition_parameter_vector| with
 |vector<Int_String> macro_typed_parameter_vector|.
 
 \initials{LDF 2005.01.19.}
-No longer clearing |vector<string> suffix_vector|, 
+No longer clearing |vector<string> suffix_vector|,
 because I've gotten rid of it.
 
 \initials{LDF 2007.11.25.}
 Now clearing |numeric_list_real_vector|.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -368,24 +368,24 @@ Now clearing |numeric_list_real_vector|.
 Now deleting |helix_set_option_struct| and setting it to 0.
 
 \initials{LDF 2005.11.07.}
-Now deleting 
-|Parabola_Set_Option_Struct* parabola_set_option_struct|, 
+Now deleting
+|Parabola_Set_Option_Struct* parabola_set_option_struct|,
 |Ellipsoid_Set_Option_Struct* ellipsoid_set_option_struct|,
 and
 |Sphere_Set_Option_Struct* sphere_set_option_struct|,
 and setting them to 0.
 
 \initials{LDF 2005.11.14.}
-Now deleting |Hyperbola_Set_Option_Struct* hyperbola_set_option_struct| and 
+Now deleting |Hyperbola_Set_Option_Struct* hyperbola_set_option_struct| and
 setting it to 0.
 
 \initials{LDF 2006.01.25.}
-Now deleting 
+Now deleting
 |Paraboloid_Set_Option_Struct* paraboloid_set_option_struct|
 and setting it to 0.
 
 \initials{LDF 2007.07.29.}
-Now deleting 
+Now deleting
 |Conic_Section_Lattice_Options* conic_section_lattice_options|
 and setting it to 0.
 
@@ -394,16 +394,16 @@ Now deleting |Focus_Options* focus_options|
 and setting it to 0. 
 
 \initials{LDF 2007.10.12.}
-Now deleting 
+Now deleting
 |Polyhedron_Options* polyhedron_options| and setting it to 0.
 
-\initials{LDF 2007.11.25.} 
+\initials{LDF 2007.11.25.}
 Now deleting |Arc_Options* arc_options| and setting it to 0.
 
 \initials{LDF 2007.11.28.}
 Now deleting |Matrix_Options* matrix_options|
 and setting it to 0.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -431,7 +431,7 @@ and setting it to 0.
 
   delete sphere_set_option_struct;
   sphere_set_option_struct = 0;
- 
+
   delete paraboloid_set_option_struct;
 
   paraboloid_set_option_struct = 0;
@@ -444,34 +444,34 @@ and setting it to 0.
 
   if (color_ptr != 0)
     {
-      Color* c = static_cast<Color*>(color_ptr); 
+      Color* c = static_cast<Color*>(color_ptr);
       delete c;
       c = 0;
     }
 
   if (draw_color_ptr != 0)
     {
-      Color* c = static_cast<Color*>(draw_color_ptr); 
+      Color* c = static_cast<Color*>(draw_color_ptr);
       delete c;
       c = 0;
     }
 
   if (fill_color_ptr != 0)
     {
-      Color* c = static_cast<Color*>(fill_color_ptr); 
+      Color* c = static_cast<Color*>(fill_color_ptr);
       delete c;
       c = 0;
     }
 
   if (pen_ptr != 0)
     {
-      Pen* p = static_cast<Pen*>(pen_ptr); 
+      Pen* p = static_cast<Pen*>(pen_ptr);
       delete p;
       p = 0;
     }
 
 @q **** (4) . @>
-@ 
+@
 \LOG
 \initials{LDF 2005.03.18.}
 Added this section.
@@ -481,12 +481,12 @@ Added this section.
 
   if (pen_vector_ptr != 0)
     {
-      delete static_cast<Pointer_Vector<Pen>*>(pen_vector_ptr); 
+      delete static_cast<Pointer_Vector<Pen>*>(pen_vector_ptr);
       pen_vector_ptr = 0;
     }
 
 @q **** (4) |color_vector_ptr|.@>
-@ |color_vector_ptr|.  
+@ |color_vector_ptr|.
 \initials{LDF 2004.08.29.}
 
 \LOG
@@ -495,7 +495,7 @@ Added this section.
 
 \initials{LDF 2005.03.18.}
 Now deleting |color_vector_ptr|, if it's non-null.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -506,7 +506,7 @@ Now deleting |color_vector_ptr|, if it's non-null.
     }
 
 @q **** (4) |draw_color_vector_ptr|.@>
-@ |draw_color_vector_ptr|.  
+@ |draw_color_vector_ptr|.
 \initials{LDF 2004.08.29.}
 
 \LOG
@@ -515,7 +515,7 @@ Added this section.
 
 \initials{LDF 2005.03.18.}
 Now deleting |draw_color_vector_ptr|, if it's non-null.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -535,7 +535,7 @@ Added this section.
 
 \initials{LDF 2005.03.18.}
 Now deleting |fill_color_vector_ptr|, if it's non-null.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -546,25 +546,25 @@ Now deleting |fill_color_vector_ptr|, if it's non-null.
     }
 
 @q **** (4) . @>
-@ 
+@
 
 \LOG
 \initials{LDF 2005.03.13.}
 Now deleting |surface_hiding_value_ptr| and setting it to 0, if it's
 not already 0.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
   if (dash_pattern_ptr != 0)
     {
-      Dash_Pattern* d = static_cast<Dash_Pattern*>(dash_pattern_ptr); 
+      Dash_Pattern* d = static_cast<Dash_Pattern*>(dash_pattern_ptr);
       delete d;
       d = 0;
     }
 
 @q **** (4) . @>
-@ 
+@
 \LOG
 \initials{LDF 2005.03.18.}
 Added this section.
@@ -577,11 +577,11 @@ Now deleting |tolerance| and setting it to 0.
 
   if (dash_pattern_vector_ptr != 0)
     {
-      delete static_cast<Pointer_Vector<Dash_Pattern>*>(dash_pattern_vector_ptr); 
+      delete static_cast<Pointer_Vector<Dash_Pattern>*>(dash_pattern_vector_ptr);
       dash_pattern_vector_ptr = 0;
     }
 
-@q **** (4) @>   
+@q **** (4) @>
 
   if (picture_entry_ptr != 0)
     {
@@ -592,84 +592,84 @@ Now deleting |tolerance| and setting it to 0.
 
   if (focus_ptr != 0)
     {
-      Focus* p = static_cast<Focus*>(focus_ptr); 
+      Focus* p = static_cast<Focus*>(focus_ptr);
       delete p;
       p = 0;
     }
 
   if (projection_ptr != 0)
     {
-      int* p = static_cast<int*>(projection_ptr); 
+      int* p = static_cast<int*>(projection_ptr);
       delete p;
       p = 0;
     }
 
   if (factor_ptr != 0)
     {
-      real* p = static_cast<real*>(factor_ptr); 
+      real* p = static_cast<real*>(factor_ptr);
       delete p;
       p = 0;
     }
 
   if (sort_value_ptr != 0)
     {
-      int* p = static_cast<int*>(sort_value_ptr); 
+      int* p = static_cast<int*>(sort_value_ptr);
       delete p;
       p = 0;
     }
- 
+
   if (min_x_proj_ptr != 0)
     {
-      real* p = static_cast<real*>(min_x_proj_ptr); 
+      real* p = static_cast<real*>(min_x_proj_ptr);
       delete p;
       p = 0;
     }
 
   if (max_x_proj_ptr != 0)
     {
-      real* p = static_cast<real*>(max_x_proj_ptr); 
+      real* p = static_cast<real*>(max_x_proj_ptr);
       delete p;
       p = 0;
     }
 
   if (min_y_proj_ptr != 0)
     {
-      real* p = static_cast<real*>(min_y_proj_ptr); 
+      real* p = static_cast<real*>(min_y_proj_ptr);
       delete p;
       p = 0;
     }
 
   if (max_y_proj_ptr != 0)
     {
-      real* p = static_cast<real*>(max_y_proj_ptr); 
+      real* p = static_cast<real*>(max_y_proj_ptr);
       delete p;
       p = 0;
     }
 
   if (min_z_proj_ptr != 0)
     {
-      real* p = static_cast<real*>(min_z_proj_ptr); 
+      real* p = static_cast<real*>(min_z_proj_ptr);
       delete p;
       p = 0;
     }
 
   if (max_z_proj_ptr != 0)
     {
-      real* p = static_cast<real*>(max_z_proj_ptr); 
+      real* p = static_cast<real*>(max_z_proj_ptr);
       delete p;
       p = 0;
     }
 
   if (surface_hiding_value_ptr != 0)
     {
-      real* p = static_cast<real*>(surface_hiding_value_ptr); 
+      real* p = static_cast<real*>(surface_hiding_value_ptr);
       delete p;
       p = 0;
     }
 
   if (surface_hiding_value_ptr != 0)
     {
-      real* p = static_cast<real*>(surface_hiding_value_ptr); 
+      real* p = static_cast<real*>(surface_hiding_value_ptr);
       delete p;
       p = 0;
     }
@@ -687,16 +687,16 @@ Now deleting |tolerance| and setting it to 0.
    mysql_close(mysql);
    mysql_library_end();
 #endif
-#endif 
+#endif
 
-/* !! TO DO.  LDF 2004.07.02.  Figure out how to take care of 
-   |rescan_stack|.  It should be empty.  */@; 
+/* !! TO DO.  LDF 2004.07.02.  Figure out how to take care of
+   |rescan_stack|.  It should be empty.  */@;
 
 #if DEBUG_COMPILE
   if (DEBUG)
     cerr << "Exiting `Scanner_Type' destructor."
-         << endl; 
-#endif /* |DEBUG_COMPILE|  */@; 
+         << endl;
+#endif /* |DEBUG_COMPILE|  */@;
 
   return;
 
@@ -707,11 +707,11 @@ Now deleting |tolerance| and setting it to 0.
 
 \LOG
 \initials{LDF 2004.09.15.}
-Added this function definition.  The declaration is in  
+Added this function definition.  The declaration is in
 \filename{io.web}.
-\ENDLOG 
+\ENDLOG
 
-@q ** (2) Definition.@> 
+@q ** (2) Definition.@>
 
 @<Define |Scanner_Type| functions@>=
 const Scanner_Type&
@@ -719,22 +719,22 @@ Scanner_Type::operator=(const Scanner_Type& s)
 {
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @;
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
+
   using namespace Scan_Parse;
 
   stringstream cerr_strm;
- 
+
   bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
                      ? true : false;
 
   string thread_name;
 
-#ifdef HAVE_PTHREAD_H  
-  
+#ifdef HAVE_PTHREAD_H
+
   Thread_Info_Type* thread_info;
-  
-  if (   run_state.multithread_input 
+
+  if (   run_state.multithread_input
       || run_state.multithread_output
       || run_state.multithread_include)
     {
@@ -748,11 +748,11 @@ Scanner_Type::operator=(const Scanner_Type& s)
       thread_name = "";
     }
 
-#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;
 
   thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@;
 
 @q *** (3).@>
 
@@ -761,9 +761,9 @@ Scanner_Type::operator=(const Scanner_Type& s)
      {
         cerr_strm << thread_name
                   << "Entering `Scanner_Type::operator=(const Scanner_Type&)'.";
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
-        cerr_strm.str(""); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
      }
 
 #endif
@@ -771,7 +771,7 @@ Scanner_Type::operator=(const Scanner_Type& s)
 @q *** (3) Initialize data members.@>
 
 @ Initialize data members.
-There's no need to assign to |run_state|, because this is done in 
+There's no need to assign to |run_state|, because this is done in
 |Scanner_Type::create|.
 \initials{LDF 2004.09.15.}
 
@@ -783,35 +783,35 @@ Now setting |surface_hiding_value_ptr| to 0.
 Now setting |pen_vector_ptr| and |dash_pattern_vector_ptr| to 0.
 
 \initials{LDF 2005.05.20.}
-Now setting |Helix_Set_Option_Struct* helix_set_option_struct| to 0. 
+Now setting |Helix_Set_Option_Struct* helix_set_option_struct| to 0.
 
 \initials{LDF 2005.10.26.}
 Now setting |tolerance = 0|.
 
 \initials{LDF 2005.11.07.}
-Now deleting |Helix_Set_Option_Struct* helix_set_option_struct| 
-before setting it to 0. 
+Now deleting |Helix_Set_Option_Struct* helix_set_option_struct|
+before setting it to 0.
 
 \initials{LDF 2005.11.07.}
-Now deleting 
+Now deleting
 |Parabola_Set_Option_Struct* parabola_set_option_struct|,
 |Ellipsoid_Set_Option_Struct* ellipsoid_set_option_struct|,
-and 
+and
 |Sphere_Set_Option_Struct* sphere_set_option_struct|.
 and setting them to 0.
 
 \initials{LDF 2005.11.14.}
-Now deleting 
+Now deleting
 |Hyperbola_Set_Option_Struct* hyperbola_set_option_struct|
 and setting it to 0.
 
 \initials{LDF 2006.01.25.}
-Now deleting 
+Now deleting
 |Paraboloid_Set_Option_Struct* paraboloid_set_option_struct|
 and setting it to 0.
 
 \initials{LDF 2007.07.29.}
-Now deleting 
+Now deleting
 |Conic_Section_Lattice_Options* conic_section_lattice_options|
 and setting it to 0.
 
@@ -826,16 +826,15 @@ and setting it to 0.
 \initials{LDF 2007.11.28.}
 Now deleting |Matrix_Options* matrix_options|
 and setting it to 0.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
    thread_info = 0;
-#endif /* |HAVE_PTHREAD_H|  */@; 
+#endif /* |HAVE_PTHREAD_H|  */@;
 
   up = 0;
-
 
   array_switch = false;
   known_switch = false;
@@ -847,7 +846,7 @@ and setting it to 0.
 
   token_string = "";
 
-  loop_info_node = 0;  
+  loop_info_node = 0;
 
   delete focus_options;
   focus_options = 0;
@@ -865,7 +864,7 @@ and setting it to 0.
   conic_section_lattice_options = 0;
 
   delete helix_set_option_struct;
-  helix_set_option_struct = 0; 
+  helix_set_option_struct = 0;
 
   delete polyhedron_options;
   polyhedron_options = 0;
@@ -892,11 +891,11 @@ and setting it to 0.
   color_vector_ptr = 0;
   draw_color_vector_ptr = 0;
   fill_color_vector_ptr = 0;
-  
+
   picture_entry_ptr = 0;
 
   clear_ptr = 0;
-  endfig_ptr = 0;  
+  endfig_ptr = 0;
 
   focus_ptr = 0;
   projection_ptr = 0;
@@ -924,12 +923,12 @@ and setting it to 0.
 
 \LOG
 \initials{LDF 2004.09.18.}
-@:BUG FIX@> BUG FIX: 
+@:BUG FIX@> BUG FIX:
 Now setting |id_map_node->scanner_node| to |this|.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
- 
+
   id_map_node = new Id_Map_Type;
 
   id_map_node->scanner_node = this;
@@ -942,16 +941,16 @@ Now setting |id_map_node->scanner_node| to |this|.
     }
   catch (Bad_Assignment_Type)
     {
-      cerr_strm << thread_name 
+      cerr_strm << thread_name
                 << "ERROR! "
                 << "In `Scanner_Type::operator=entry(const Scanner_Type&)':"
-                << endl 
+                << endl
                 << "`Id_Map_Type::operator=(const Id_Map_Type&)' failed."
                 << endl << "Failed to assign to `id_map_node'."
-                << endl 
+                << endl
                 << "Deleting `id_map_node' and "
                 << "throwing `Bad_Assignment_Type'.";
-      
+
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
@@ -960,7 +959,7 @@ Now setting |id_map_node->scanner_node| to |this|.
          {
             delete id_map_node;
             id_map_node = 0;
-            
+
          }  /* |if (id_map_node != 0)|  */
 
 throw;
@@ -979,9 +978,9 @@ throw;
      {
         cerr_strm << thread_name
                   << "Exiting `Scanner_Type::operator=(const Scanner_Type&)'.";
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm, true); 
-        cerr_strm.str(""); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm, true);
+        cerr_strm.str("");
      }
 
 #endif
@@ -1001,30 +1000,30 @@ those of |Id_Map_Entry_Type::set|.
 
 \initials{LDF 2004.04.28.}  Changed return value from |bool| to
 |Id_Map_Entry_Node|.  This is used in the rule
-``\§numeric assignment> $\longrightarrow$ \§variable> \.{ASSIGN} 
+``\§numeric assignment> $\longrightarrow$ \§variable> \.{ASSIGN}
 \§numeric expression>'' in \filename{parser.w}.
 
-\initials{LDF 2004.04.29.}  Changed |bool sspark_flag| argument to 
-|unsigned short ccategory|. 
+\initials{LDF 2004.04.29.}  Changed |bool sspark_flag| argument to
+|unsigned short ccategory|.
 
 \initials{LDF 2004.05.09.}  Added |cconst_flag| argument.  Changed |iis_array|
-argument to |aarray_flag|. 
+argument to |aarray_flag|.
 
 \initials{LDF 2004.08.20.}
 Made debugging output thread-safe.
 
 \initials{LDF 2004.08.20.}
-Moved this definition from \filename{io.web} to 
+Moved this definition from \filename{io.web} to
 this file (\filename{sctpfncs.web}).
 
 \initials{LDF 2004.08.20.}
-Now deleting an existing non-array entry before creating a new one.  
+Now deleting an existing non-array entry before creating a new one.
 About to do the same thing for array entries.
 
 \initials{LDF 2004.08.23.}
 Now conditionally compiling the code that uses |Thread_Info_Type|.
-If |HAVE_PTHREAD_H| is defined, 
-now testing whether multithreading is being used 
+If |HAVE_PTHREAD_H| is defined,
+now testing whether multithreading is being used
 when setting |thread_info| and |thread_name|.
 
 \initials{LDF 2004.08.23.}
@@ -1035,24 +1034,24 @@ Made changes in debugging output.
 
 \initials{LDF 2004.08.24.}
 Added |Id_Map_Entry_Node ssuperordinate_vector| argument.
-It will only be non-null when creating array entries by means 
+It will only be non-null when creating array entries by means
 of vector-type declarations.  It's passed to |Id_Map_Entry_Node::set_entry|.
 
 \initials{LDF 2004.08.25.}
 Added |Id_Map_Entry_Node ssubordinate_array| argument.
-It will only be non-null when creating array entries by means 
+It will only be non-null when creating array entries by means
 of vector-type declarations.  It's passed to |Id_Map_Entry_Node::set_entry|.
 
 \initials{LDF 2004.08.28.}
-Added |Scanner_Node sscanner_node| argument.  It's passed to 
+Added |Scanner_Node sscanner_node| argument.  It's passed to
 |Id_Map_Entry_Type::set_entry|.
 
 \initials{LDF 2004.08.29.}
 Removed |Scanner_Node sscanner_node| argument.  Now passing
-|id_map_type| as an |Id_Map_Node| argument in calls to 
+|id_map_type| as an |Id_Map_Node| argument in calls to
 |Id_Map_Entry_Node::set_entry| rather than |sscanner_node| as a
 |Scanner_Type| argument.
-\ENDLOG 
+\ENDLOG
 
 @q ** (2) Definition.  @>
 @
@@ -1074,8 +1073,8 @@ Scanner_Type::add_entry(string nname,
 {
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @;
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
+
   using namespace Scan_Parse;
 
   stringstream cerr_strm;
@@ -1085,11 +1084,11 @@ Scanner_Type::add_entry(string nname,
 
   string thread_name;
 
-#ifdef HAVE_PTHREAD_H  
-  
+#ifdef HAVE_PTHREAD_H
+
   Thread_Info_Type* thread_info;
-  
-  if (   run_state.multithread_input 
+
+  if (   run_state.multithread_input
       || run_state.multithread_output
       || run_state.multithread_include)
     {
@@ -1103,11 +1102,11 @@ Scanner_Type::add_entry(string nname,
       thread_name = "";
     }
 
-#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;
 
   thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@;
 
 #if DEBUG_COMPILE
 
@@ -1115,16 +1114,16 @@ Scanner_Type::add_entry(string nname,
      {
         cerr_strm << thread_name
                   << "Entering `Scanner_Type::add_entry()'.";
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
-        cerr_strm.str(""); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
      }
 
 #endif
 
   int status;
 
-  Id_Map_Iterator iter = 
+  Id_Map_Iterator iter =
     id_map_node->id_map.find(nname);
 
 @q *** (3) No existing entry.  @>
@@ -1140,11 +1139,11 @@ Scanner_Type::add_entry(string nname,
               cerr_strm << thread_name << "In `Scanner_Type::add_entry()':"
                         << endl
                         << "No existing entry for " << nname << ".";
-              log_message(cerr_strm); 
-              cerr_message(cerr_strm); 
-              cerr_strm.str(""); 
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
+              cerr_strm.str("");
           }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
     } /* |if (iter == id_map_node->id_map.end())|  */
 
@@ -1155,7 +1154,7 @@ Scanner_Type::add_entry(string nname,
 \LOG
 \initials{LDF 2004.08.20.}
 Added code for handling this case.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -1165,21 +1164,21 @@ Added code for handling this case.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-            cerr_strm << thread_name 
+            cerr_strm << thread_name
                       << "In `Scanner_Type::add_entry()':"
                       << endl
                       << "Entry exists for " << nname
                       << ". Will destroy it.";
 
-            log_message(cerr_strm); 
-            cerr_message(cerr_strm, error_stop_value); 
+            log_message(cerr_strm);
+            cerr_message(cerr_strm, error_stop_value);
             cerr_strm.str("");
 
             cerr_mutex.lock();
-            cerr      << thread_name 
+            cerr      << thread_name
                       << "In `Scanner_Type::add_entry()':"
                       << endl
-                      << "Showing " << iter->first << ": " 
+                      << "Showing " << iter->first << ": "
                       << endl;
             iter->second->show("*iter->second:");
             cerr_mutex.unlock();
@@ -1193,7 +1192,7 @@ Added code for handling this case.
 @q **** (4) and erase the entry on |id_map_node->id_map|.  @>
 
 @ Destroy array subentries, if any, delete the |Id_Map_Entry_Node|
-|iter->second|, and erase the entry on |id_map_node->id_map|. 
+|iter->second|, and erase the entry on |id_map_node->id_map|.
 \initials{LDF 2004.08.20.}
 
 @<Define |Scanner_Type| functions@>=
@@ -1201,15 +1200,15 @@ Added code for handling this case.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::add_entry()':"
                     << "About to call "
                     << "`iter->second->destroy_array_subentries()'.";
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm); 
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       status = iter->second->destroy_array_subentries(this);
 
@@ -1221,8 +1220,8 @@ Added code for handling this case.
 
       if (status != 0)
         {
-          
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "ERROR! In `Scanner_Type::add_entry()':"
                     << "`iter->second->destroy_array_subentries()' "
                     << "failed."
@@ -1230,11 +1229,11 @@ Added code for handling this case.
                     << "Exiting function with return value "
                     << "`static_cast<Id_Map_Entry_Node>(0)'.";
 
-              log_message(cerr_strm); 
-              cerr_message(cerr_strm, error_stop_value); 
+              log_message(cerr_strm);
+              cerr_message(cerr_strm, error_stop_value);
               cerr_strm.str("");
-          
-          return static_cast<Id_Map_Entry_Node>(0); 
+
+          return static_cast<Id_Map_Entry_Node>(0);
 
         } /* |(if status != 0)|.  |destroy_array_subentries| failed.  */
 
@@ -1245,44 +1244,44 @@ Added code for handling this case.
 @<Define |Scanner_Type| functions@>=
 
       else /* (|status == 0|).  |destroy_array_subentries| succeeded.  */
-      
+
         {
 
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << thread_name 
+              cerr_strm << thread_name
                         << "In `Scanner_Type::add_entry()':"
                         << "`iter->second->destroy_array_subentries()' "
                         << "succeeded.";
-              log_message(cerr_strm); 
-              cerr_message(cerr_strm); 
+              log_message(cerr_strm);
+              cerr_message(cerr_strm);
               cerr_strm.str("");
             }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
         } /* |else| (|status == 0|).  |destroy_array_subentries| succeeded.  */
 
 @q ***** (5).@>
-@ 
+@
 \LOG
 \initials{LDF 2006.10.08.}
 Now setting |iter->second| to 0 after deleting it.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::add_entry()':"
                     << "About to call  `delete iter->second'.";
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm); 
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       delete iter->second;
       iter->second = 0;
@@ -1290,30 +1289,30 @@ Now setting |iter->second| to 0 after deleting it.
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::add_entry()':"
                     << "`delete iter->second' succeeded."
                     << endl
                     << "About to call `id_map_node->id_map.erase(iter)'.";
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm); 
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       id_map_node->id_map.erase(iter);
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::add_entry()':"
                     << "`id_map_node->id_map.erase(iter)' succeeded.";
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, true); 
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, true);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
     } /* |else| (|iter != id_map_node->id_map.end|) */
 
@@ -1325,13 +1324,13 @@ Now setting |iter->second| to 0 after deleting it.
   Id_Map_Entry_Node entry = new Id_Map_Entry_Type;
 
 #if DEBUG_COMPILE
-  if (DEBUG) 
+  if (DEBUG)
      {
         cerr_strm << thread_name << "In `Scanner_Type::add_entry()':"
                   << endl
                    << "`nname' == " << nname << ".";
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
         cerr_strm.str("");
      }
 #endif
@@ -1348,8 +1347,8 @@ Now setting |iter->second| to 0 after deleting it.
                    lleft,
                    rright,
                    ssuperordinate_vector,
-                   ssubordinate_array); 
-                                        
+                   ssubordinate_array);
+
   id_map_node->id_map[nname] = entry;
 
 #if DEBUG_COMPILE
@@ -1359,11 +1358,11 @@ Now setting |iter->second| to 0 after deleting it.
                   << endl
                   << "Exiting Scanner_Type::add_entry() and returning `entry'.";
 
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
         cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
   return entry;
 }
@@ -1373,14 +1372,14 @@ Now setting |iter->second| to 0 after deleting it.
 
 \LOG
 \initials{LDF 2004.07.01.}
-Rewrote this function and moved this definition 
-from \filename{io.web} to \filename{scan.web} 
-(this file). 
+Rewrote this function and moved this definition
+from \filename{io.web} to \filename{scan.web}
+(this file).
 
 \initials{LDF 2004.08.28.}
-Now passing |this| as the |Scanner_Node| argument to 
+Now passing |this| as the |Scanner_Node| argument to
 |Id_Map_Entry_Type::set_entry|.
-\ENDLOG 
+\ENDLOG
 
 @q ** Definition.  @>
 
@@ -1402,14 +1401,14 @@ Scanner_Type::add_synonym(string synonym, string base_name)
 
   if (iter != id_map_node->id_map.end())
     {
-      cerr << "ERROR! In Scanner_Type::add_synonym():" << endl 
-           << "Entry already exists for " << synonym << "." << endl 
-           << "`base_name' == " << base_name << endl 
+      cerr << "ERROR! In Scanner_Type::add_synonym():" << endl
+           << "Entry already exists for " << synonym << "." << endl
+           << "`base_name' == " << base_name << endl
            << "Returning 0.\n"
            << "Type <RETURN> to continue.\n";
 
-      getchar();  /* Don't delete this!  */@;  
-      
+      getchar();  /* Don't delete this!  */@;
+
       return static_cast<Id_Map_Entry_Node>(0);
 
     }
@@ -1424,8 +1423,8 @@ Scanner_Type::add_synonym(string synonym, string base_name)
            << "Returning 0.\n"
            << "Type <RETURN> to continue.\n";
 
-      getchar();  /* Don't delete this!  */@;  
-      
+      getchar();  /* Don't delete this!  */@;
+
       return static_cast<Id_Map_Entry_Node>(0);
 
     }
@@ -1435,10 +1434,10 @@ Scanner_Type::add_synonym(string synonym, string base_name)
         {
           iter->second->show("*iter:");
         }
-#endif  
+#endif
 
   Id_Map_Entry_Node entry = new(Id_Map_Entry_Type);
-  
+
   string* s = new string;
   *s = base_name;
 
@@ -1453,7 +1452,7 @@ Scanner_Type::add_synonym(string synonym, string base_name)
   id_map_node->id_map[synonym] = entry;
 
 #if DEBUG_COMPILE
-  if (DEBUG)  
+  if (DEBUG)
     {
       cerr << "Exiting Scanner_Type::add_synonym() and returning `entry'."
          << "\n";
@@ -1469,14 +1468,14 @@ Scanner_Type::add_synonym(string synonym, string base_name)
 \initials{LDF Undated.}
 
 \LOG
-\initials{LDF 2004.04.24.}  
-Moved this definition from \filename{io.web} to \filename{scan.web} because I'm now using 
+\initials{LDF 2004.04.24.}
+Moved this definition from \filename{io.web} to \filename{scan.web} because I'm now using
 |name_map| in it.
 
 \initials{LDF 2004.07.01.}
 Modified this function to handle synonyms.  Synonyms are now different from the
 way they were before.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 Id_Map_Entry_Node
@@ -1486,7 +1485,7 @@ Scanner_Type::lookup(string s,
                      Id_Map_Node local_id_map_node)
 {
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = false; /* |true| */ @;
   if (DEBUG)
     cerr << "Entering Scanner_Type::lookup(). level == " << level
          << ".\n";
@@ -1502,29 +1501,29 @@ Scanner_Type::lookup(string s,
       if (iter->second->type == SYNONYM)
         {
 
-          string* base_name = static_cast<string*>(iter->second->object); 
+          string* base_name = static_cast<string*>(iter->second->object);
 
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr << "In lookup(): Found " << s 
+              cerr << "In lookup(): Found " << s
                    << ". It's a synonym for " << *base_name << "."
                    << endl << "Calling `lookup(" << *base_name
-                   << ", ...)'." << endl;  
+                   << ", ...)'." << endl;
             }
 #endif
-      
+
           return lookup(*base_name, traverse, level, local_id_map_node);
-          
+
         } /* |(iter->second->type == SYNONYM)|  */
 
       else /* |(iter->second->type != SYNONYM)|  */
         {
 
 #if DEBUG_COMPILE
-          if (DEBUG) 
-            cerr << "In lookup(): Found " << s 
-                 << ". Returning Id_Map_Entry_Node with `type' == " 
+          if (DEBUG)
+            cerr << "In lookup(): Found " << s
+                 << ". Returning Id_Map_Entry_Node with `type' == "
                 << name_map[iter->second->type] << ".\n";
 #endif
 
@@ -1540,61 +1539,61 @@ recursively, using |local_id_map_node->up| as the |local_id_map_node| argument.
 @<Define |Scanner_Type| functions@>=
   else /* Not found.  */
     {
-      
+
 #if DEBUG_COMPILE
-      if (DEBUG) 
+      if (DEBUG)
         cerr << "In lookup(): Didn't find " << s << ". " << endl;
 #endif
-      
+
 @ |traverse == false|.  Return 0.
 \initials{LDF 2004.04.22.}
 @<Define |Scanner_Type| functions@>=
       if (!traverse)
         {
-          
+
 #if DEBUG_COMPILE
-          if (DEBUG) 
+          if (DEBUG)
             cerr << "traverse == false.  Returning 0." << endl;
 #endif
-          
+
           return static_cast<Id_Map_Entry_Node>(0);
         }
 
-@  |traverse == true| and |local_id_map_node->up| is a null pointer.  
+@  |traverse == true| and |local_id_map_node->up| is a null pointer.
 Return 0.  This case is only separated from the case above for the
 sake of the debugging output.
 \initials{LDF 2004.04.22.}
 @<Define |Scanner_Type| functions@>=
-      else if (local_id_map_node->up == 0) 
+      else if (local_id_map_node->up == 0)
         {
 
 #if DEBUG_COMPILE
-          if (DEBUG) 
+          if (DEBUG)
             cerr << "traverse == true, but local_id_map_node->up  == 0. "
                  << "Returning 0." << endl;
-#endif        
-          
+#endif
+
           return static_cast<Id_Map_Entry_Node>(0);
-        }    
-@  |traverse == true| and |local_id_map_node->up| is not a null pointer.  
+        }
+@  |traverse == true| and |local_id_map_node->up| is not a null pointer.
 Call this function recursively, incrementing |level| and using
-|local_id_map_node->up| as the |local_id_map_node| argument.  
+|local_id_map_node->up| as the |local_id_map_node| argument.
 \initials{LDF 2004.04.22.}
 @<Define |Scanner_Type| functions@>=
-      else 
+      else
         {
           ++level;
 #if DEBUG_COMPILE
-          if (DEBUG) 
+          if (DEBUG)
             cerr << "traverse == true and local_id_map_node->up  != 0. "
-                 << "Calling this function recursively:" << endl 
+                 << "Calling this function recursively:" << endl
                  << "`lookup(" << s << ", true, " << level
                  << ", local_id_map_node->up)'" << endl;
-#endif        
+#endif
           return lookup(s, true, level, local_id_map_node->up);
         }
 
-@ End of definition of |Scanner_Type::lookup|.  
+@ End of definition of |Scanner_Type::lookup|.
 @<Define |Scanner_Type| functions@>=
 
     } /* Not found.  */
@@ -1605,8 +1604,8 @@ Call this function recursively, incrementing |level| and using
 @
 @<Define |Scanner_Type| functions@>=
 int
-Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node, 
-                                     vector<Id_Map_Entry_Node> &vvector, 
+Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
+                                     vector<Id_Map_Entry_Node> &vvector,
                                      bool debug)
 {
 #if DEBUG_COMPILE
@@ -1615,7 +1614,7 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
   if (DEBUG == false)
      DEBUG = false; /* |true| */ @;
 
-#endif /* |DEBUG_COMPILE| */ @; 
+#endif /* |DEBUG_COMPILE| */ @;
 
   using namespace Scan_Parse;
 
@@ -1625,11 +1624,11 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
 
   string thread_name;
 
-#ifdef HAVE_PTHREAD_H  
-  
+#ifdef HAVE_PTHREAD_H
+
   Thread_Info_Type* thread_info;
-  
-  if (   run_state.multithread_input 
+
+  if (   run_state.multithread_input
       || run_state.multithread_output
       || run_state.multithread_include)
     {
@@ -1643,11 +1642,11 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
       thread_name = "";
     }
 
-#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;
 
   thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@;
 
 #if DEBUG_COMPILE
 
@@ -1655,9 +1654,9 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
      {
         cerr_strm << thread_name
                   << "Entering `Scanner_Type::collect_array_elements'." << endl;
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
-        cerr_strm.str(""); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
      }
 
 #endif
@@ -1686,12 +1685,12 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
       cerr_strm << thread_name << "In:  `Scanner_Type::collect_array_elements'"
                 << endl
                 << "`vvector.size()' == " << vvector.size() << endl;
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm); 
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
       cerr_strm.str("");
-     }       
+     }
 
-#endif 
+#endif
 
 @q *** @>
 @
@@ -1704,15 +1703,15 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
                 << endl
                 << "Exiting `Scanner_Type::collect_array_elements' successfully, returning 0.";
 
-      log_message(cerr_strm); 
-      cerr_message(cerr_strm); 
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
       cerr_strm.str("");
-     }       
+     }
 
-#endif 
+#endif
 
   return 0;
-   
+
 }  /* |Scanner_Type::collect_array_elements| */
 
 @q * (1) Erase entry. @>
@@ -1721,12 +1720,12 @@ Scanner_Type::collect_array_elements(Id_Map_Entry_Node curr_node,
 \LOG
 \initials{LDF 2004.08.25.}
 Added this definition.  This function is declared in \filename{io.web}.
-\ENDLOG 
+\ENDLOG
 
 @q ** (2) Definition. @>
 @
 @<Define |Scanner_Type| functions@>=
-int 
+int
 Scanner_Type::erase_entry(string s)
 {
 
@@ -1735,23 +1734,23 @@ Scanner_Type::erase_entry(string s)
 stringstream cerr_strm;
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = false; /* |true| */ @;
   if (DEBUG)
      {
        cerr_strm << "Entering `Scanner_Type::erase_entry()'.";
-       
-       log_message(cerr_strm); 
-       cerr_message(cerr_strm); 
-       cerr_strm.str(""); 
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
   bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
                      ? true : false;
- 
+
   int status;
 
-@q *** (3) Try to erase |Id_Map_Entry_Node|.@>  
+@q *** (3) Try to erase |Id_Map_Entry_Node|.@>
 @ Try to erase |Id_Map_Entry_Node|.
 \initials{LDF 2004.08.25.}
 
@@ -1761,18 +1760,18 @@ stringstream cerr_strm;
    if (DEBUG)
      {
        cerr_strm << "In `Scanner_Type::erase_entry()':"
-                 << endl << "Trying to erase `Id_Map_Entry_Node' for `"  
+                 << endl << "Trying to erase `Id_Map_Entry_Node' for `"
                  << s << "'.";
-       
-       log_message(cerr_strm); 
-       cerr_message(cerr_strm); 
-       cerr_strm.str(""); 
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
 status = id_map_node->id_map.erase(s);
 
-@q **** (4) Failed to erase |Id_Map_Entry_Node|.  Will return 1.@>  
+@q **** (4) Failed to erase |Id_Map_Entry_Node|.  Will return 1.@>
 
 @ Failed to erase |Id_Map_Entry_Node|.  Will return 1.
 \initials{LDF 2004.08.25.}
@@ -1784,18 +1783,18 @@ status = id_map_node->id_map.erase(s);
 
       cerr_strm << "ERROR! In `Scanner_Type::erase_entry()':"
                 << "Failed to erase `Id_Map_Entry_Node' for "
-                << "`" << s << "'." << endl 
+                << "`" << s << "'." << endl
                 << "Exiting function with return value 1.";
-       
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, error_stop_value); 
-          cerr_strm.str(""); 
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
 
       return 1;
-          
+
     }
 
-@q **** (4) |status != 0|.  This shouldn't be possible.  Will return 1.@>  
+@q **** (4) |status != 0|.  This shouldn't be possible.  Will return 1.@>
 
 @ |status != 0|.  This shouldn't be possible.  Will return 1.
 \initials{LDF 2004.08.25.}
@@ -1810,15 +1809,15 @@ status = id_map_node->id_map.erase(s);
                 << status << "." << endl
                 << "This shouldn't be possible. "
                 << "Exiting function with return value 1.";
-       
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm, error_stop_value); 
-          cerr_strm.str(""); 
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm, error_stop_value);
+          cerr_strm.str("");
 
       return 1;
     }
 
-@q **** (4) Success! |status == 1|.@>  
+@q **** (4) Success! |status == 1|.@>
 
 @ Success! |status == 1|.
 \initials{LDF 2004.08.25.}
@@ -1829,15 +1828,15 @@ status = id_map_node->id_map.erase(s);
    if (DEBUG)
      {
        cerr_strm << "In `Scanner_Type::erase_entry()':"
-                 << endl 
+                 << endl
                  << "`id_map_node->id_map.erase()' succeeded "
                  << "in erasing `Id_Map_Entry_Node' for "
-                 << "`" << s << "'." << endl 
+                 << "`" << s << "'." << endl
                  << "Exiting function successfully with return value 0.";
-       
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm); 
-          cerr_strm.str(""); 
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
      }
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -1849,19 +1848,19 @@ return 0;
 @* Handle |numeric_list|.
 
 \LOG
-\initials{LDF 2005.05.12.}  
+\initials{LDF 2005.05.12.}
 Added this function.
 
-\initials{LDF 2004.05.13.}  
-Removed this code from the section 
+\initials{LDF 2004.05.13.}
+Removed this code from the section
 ``Common code for transformers using |numeric_list|'' and put it in the
 function |Scanner_Type::handle_numeric_list|.
 
-\initials{LDF 2004.05.13.}  
+\initials{LDF 2004.05.13.}
 Moved this function definition from
 \filename{ptrnexpr.w} to \filename{scan.web}.
 
-\initials{LDF 2004.05.13.}  
+\initials{LDF 2004.05.13.}
 Debugged this function and added debugging output.
 
 \initials{LDF 2004.09.24.}
@@ -1870,7 +1869,7 @@ Now calling |delete w| rather than including the section
 |@<Clear |Real_Pointer_Vector|@>|, which I've removed.
 
 \initials{LDF 2004.09.25.}
-Added code for handling the tokens |ROTATE|, |SCALE|, |SHEAR|, 
+Added code for handling the tokens |ROTATE|, |SCALE|, |SHEAR|,
 and |SHIFT| for the transformation commands.
 
 \initials{LDF 2004.09.25.}
@@ -1884,26 +1883,26 @@ Bool_Void_Pointer
 Scanner_Type::handle_numeric_list(int transform_token, void* r)
 {
 
-@q *** (3) Preliminaries.@> 
+@q *** (3) Preliminaries.@>
 
 #if DEBUG_COMPILE
   bool DEBUG = false; /* |true| */ @;
-#endif /* |DEBUG_COMPILE|  */@; 
- 
+#endif /* |DEBUG_COMPILE|  */@;
+
   using namespace Scan_Parse;
 
   stringstream cerr_strm;
- 
+
   bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
                           ? true : false;
 
   string thread_name;
 
-#ifdef HAVE_PTHREAD_H  
-  
+#ifdef HAVE_PTHREAD_H
+
   Thread_Info_Type* thread_info;
-  
-  if (   run_state.multithread_input 
+
+  if (   run_state.multithread_input
       || run_state.multithread_output
       || run_state.multithread_include)
     {
@@ -1917,11 +1916,11 @@ Scanner_Type::handle_numeric_list(int transform_token, void* r)
       thread_name = "";
     }
 
-#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;
 
   thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@;
 
 @q *** (3).@>
 @
@@ -1930,14 +1929,14 @@ Scanner_Type::handle_numeric_list(int transform_token, void* r)
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-       cerr_strm << thread_name 
-                 << "Entering `Scanner_Type::handle_numeric_list()'."; 
+       cerr_strm << thread_name
+                 << "Entering `Scanner_Type::handle_numeric_list()'.";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
        cerr_strm.str("");
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
   Bool_Void_Pointer bvp;
 
@@ -1950,17 +1949,17 @@ Scanner_Type::handle_numeric_list(int transform_token, void* r)
 Added this section.
 
 \initials{LDF 2004.09.28.}
-@:BUG FIX@> BUG FIX:  Now returning in this case.  
+@:BUG FIX@> BUG FIX:  Now returning in this case.
 \ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
   if (r == 0)
     {
-      cerr_strm << thread_name 
+      cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::handle_numeric_list()': "
                 << "`void* r' argument is a null pointer."
-                << endl 
+                << endl
                 << "Exiting function, returning `false' and a "
                 << "pointer to `INVALID_TRANSFORM'.";
 
@@ -1969,41 +1968,41 @@ Added this section.
       cerr_strm.str("");
 
       bvp.first = false;
- 
+
       Transform* t = new Transform;
       *t = INVALID_TRANSFORM;
-      bvp.second = static_cast<void*>(t); 
+      bvp.second = static_cast<void*>(t);
 
       return bvp;
 
     } /* |if (r == 0)|  */
 
-@q *** (3).@> 
+@q *** (3).@>
 @
 
 \LOG
 \initials{LDF 2004.10.25.}
-@:BUG FIX@> BUG FIXES:  
-Now testing for |transform_token == SHEAR| as well as 
-|transform_token == SHEARED| when setting 
+@:BUG FIX@> BUG FIXES:
+Now testing for |transform_token == SHEAR| as well as
+|transform_token == SHEARED| when setting
 |MAX_TRANSFORMATION_ARGS| and for |transform_token == SCALE| as well
-as |transform_token == SCALED| when setting 
+as |transform_token == SCALED| when setting
 |DEFAULT_TRANSFORMATION_ARG|.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
-  Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(r); 
+  Pointer_Vector<real>* w = static_cast<Pointer_Vector<real>*>(r);
 
   int MAX_TRANSFORMATION_ARGS;
   int DEFAULT_TRANSFORMATION_ARG;
-  
-  MAX_TRANSFORMATION_ARGS = (   transform_token == SHEAR 
-                             || transform_token == SHEARED) 
+
+  MAX_TRANSFORMATION_ARGS = (   transform_token == SHEAR
+                             || transform_token == SHEARED)
            ? 6 : 3;
 
   DEFAULT_TRANSFORMATION_ARG = (   transform_token == SCALE
-                                || transform_token == SCALED) 
+                                || transform_token == SCALED)
 
                      ? 1 : 0;
 
@@ -2025,14 +2024,14 @@ as |transform_token == SCALED| when setting
 \LOG
 \initials{LDF 2006.10.08.}
 @:BUG FIX@> BUG FIX:  Now setting |w| to 0 after deleting it.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
   if (s <= 0)
     {
-      cerr_strm << thread_name 
+      cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::handle_numeric_list()':"
-                << endl 
+                << endl
                 << "`w->v.size()' <= 0. "
                 << "No `real' values for specifying the transformation."
                 << endl
@@ -2047,7 +2046,7 @@ log_message(cerr_strm);
 
       bvp.first = false;
       bvp.second = static_cast<void*>(t);
-      
+
       delete w;
       w = 0;
 
@@ -2061,14 +2060,14 @@ log_message(cerr_strm);
 @<Define |Scanner_Type| functions@>=
   if (s > MAX_TRANSFORMATION_ARGS)
     {
-      cerr_strm << thread_name 
+      cerr_strm << thread_name
                 << "WARNING! In `Scanner_Type::handle_numeric_list()':"
-                << endl 
+                << endl
                 << "`w->v.size()' > `MAX_TRANSFORMATION_ARGS'. "
                 << "Too many `real' values specified. "
                 << endl
                 << "Ignoring the extra ones and will continue.";
-        
+
       log_message(cerr_strm);
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
@@ -2092,14 +2091,14 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
         if (DEBUG)
           {
-            cerr_strm << thread_name << "`args[" << i << "]' == " 
+            cerr_strm << thread_name << "`args[" << i << "]' == "
                       << args[i] << ".";
 
             log_message(cerr_strm);
             cerr_message(cerr_strm);
             cerr_strm.str("");
           }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
         ++i;
 
@@ -2112,24 +2111,24 @@ log_message(cerr_strm);
 \initials{LDF 2004.05.13.}
 
 \LOG
-\initials{LDF 2004.05.13.}  Added the case for 
-|transform_token == SHEARED|. 
-\ENDLOG 
+\initials{LDF 2004.05.13.}  Added the case for
+|transform_token == SHEARED|.
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << thread_name << "name_map[transform_token] == " 
+       cerr_strm << thread_name << "name_map[transform_token] == "
                  << name_map[transform_token] << ".";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
        cerr_strm.str("");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
-@q **** (4) @>   
+@q **** (4) @>
 
   if (transform_token == ROTATE || transform_token == ROTATED)
     {
@@ -2137,20 +2136,20 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Rotating.";
-          
+
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->rotate(args[0], args[1], args[2]);
 
     } /* |if (transform_token == ROTATE || transform_token == ROTATED)|  */
 
-@q **** (4) @>   
+@q **** (4) @>
 
   else if (transform_token == SCALE || transform_token == SCALED)
     {
@@ -2158,24 +2157,24 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Scaling.";
-          
+
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->scale(args[0], args[1], args[2]);
-   
+
     } /* |else if (transform_token == SCALE || transform_token == SCALED)|  */
 
-@q **** (4) @>   
+@q **** (4) @>
 
 @ |XSCALE| and |XSCALED|.
 \LOG
-\initials{LDF 2021.05.17.}  
+\initials{LDF 2021.05.17.}
 @:BUG FIX@> BUG FIX:  Added this section.
 @<Define |Scanner_Type| functions@>=
 
@@ -2185,24 +2184,24 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Xscaling.";
-          
+
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->scale(args[0], 1, 1);
-   
+
     } /* |else if (transform_token == XSCALE || transform_token == XSCALED)|  */
 
-@q **** (4) @>   
+@q **** (4) @>
 
 @ |YSCALE| and |YSCALED|.
 \LOG
-\initials{LDF 2021.05.17.}  
+\initials{LDF 2021.05.17.}
 @:BUG FIX@> BUG FIX:  Added this section.
 @<Define |Scanner_Type| functions@>=
 
@@ -2212,24 +2211,24 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Yscaling.";
-          
+
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->scale(1, args[0], 1);
-   
+
     } /* |else if (transform_token == YSCALE || transform_token == YSCALED)|  */
 
-@q **** (4) @>   
+@q **** (4) @>
 
 @ |ZSCALE| and |ZSCALED|.
 \LOG
-\initials{LDF 2021.05.17.}  
+\initials{LDF 2021.05.17.}
 @:BUG FIX@> BUG FIX:  Added this section.
 @<Define |Scanner_Type| functions@>=
 
@@ -2239,20 +2238,20 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Zscaling.";
-          
+
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->scale(1, 1, args[0]);
-   
+
     } /* |else if (transform_token == ZSCALE || transform_token == ZSCALED)|  */
 
-@q **** (4) @>   
+@q **** (4) @>
 
   else if (transform_token == SHEAR || transform_token == SHEARED)
     {
@@ -2260,19 +2259,19 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Shearing.";
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->shear(args[0], args[1], args[2], args[3], args[4], args[5]);
 
     } /* |else if (transform_token == SHEAR || transform_token == SHEARED)|  */
 
-@q **** (4) @>   
+@q **** (4) @>
 
   else if (transform_token == SHIFT || transform_token == SHIFTED)
     {
@@ -2280,34 +2279,34 @@ log_message(cerr_strm);
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::handle_numeric_list()': Shifting.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       t->shift(args[0], args[1], args[2]);
-   
+
     } /* |else if (transform_token == SHIFT || transform_token == SHIFTED)|  */
 
 @q **** (4) Error handling:  |transform_token| has an invalid value. @>
 
-@ Error handling for the case that |transform_token| has an 
-invalid value. 
+@ Error handling for the case that |transform_token| has an
+invalid value.
 \initials{LDF 2004.05.13.}
 
 @<Define |Scanner_Type| functions@>=
 
   else  /* Invalid value for |transform_token|.  */
     {
-      cerr_strm << thread_name 
+      cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::handle_numeric_list()'."
-                << endl 
+                << endl
                 << "Invalid value for `transform_token': "
-                << transform_token << "." << endl 
+                << transform_token << "." << endl
                 << "Exiting function, returning `false' and a "
                 << "pointer to `INVALID_TRANSFORM'.";
 
@@ -2317,11 +2316,11 @@ invalid value.
 
       bvp.first = false;
       *t = INVALID_TRANSFORM;
-      bvp.second = static_cast<void*>(t); 
+      bvp.second = static_cast<void*>(t);
 
       delete w;
       w = 0;
-      
+
       return bvp;
 
     } /* |else| (invalid value for |transform_token|).  */
@@ -2334,7 +2333,7 @@ invalid value.
 @<Define |Scanner_Type| functions@>=
 
   bvp.first = true;
-  bvp.second = static_cast<void*>(t); 
+  bvp.second = static_cast<void*>(t);
 
   delete w;
   w = 0;
@@ -2342,15 +2341,15 @@ invalid value.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << thread_name 
+      cerr_strm << thread_name
                 << "Exiting `Scanner_Type::handle_numeric_list()' "
-                << "successfully.";  
+                << "successfully.";
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
   return bvp;
 
@@ -2361,7 +2360,7 @@ invalid value.
 \initials{LDF 2004.07.12.}
 
 \LOG
-\initials{LDF 2004.07.12.}  
+\initials{LDF 2004.07.12.}
 Added this function.
 
 \initials{LDF 2004.07.13.}
@@ -2373,7 +2372,7 @@ Changed |Run_State* Picture_Output_Arg_Type::run_state| to
 
 \initials{LDF 2004.07.16.}
 Debugged this function.
-\ENDLOG 
+\ENDLOG
 
 @q ** (2) Definition.  @>
 
@@ -2384,7 +2383,7 @@ Scanner_Type::extract_picture_output_args(void)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = false; /* |true| */ @;
 #endif /* |DEBUG_COMPILE|  */
 
    using namespace Scan_Parse;
@@ -2393,10 +2392,10 @@ Scanner_Type::extract_picture_output_args(void)
 
    string thread_name;
    bool multithread_output = run_state.multithread_output;
-   
+
    bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
      ? true : false;
-   
+
    int status;
 
 @q *** (3) Set |thread_name|.  @>
@@ -2405,16 +2404,16 @@ Scanner_Type::extract_picture_output_args(void)
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
    Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info();
-  
+
    thread_name = Thread_Info_Type::get_thread_name(thread_info);
 
 #else /* |HAVE_PTHREAD_H| is undefined.  */
 
    thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined. */@; 
+#endif /* |HAVE_PTHREAD_H| is undefined. */@;
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -2429,7 +2428,7 @@ Scanner_Type::extract_picture_output_args(void)
         cerr_message(cerr_strm);
         cerr_strm.str("");
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q *** (3) Error handling:  |picture_entry_ptr == 0|.  @>
 @ Error handling:  |picture_entry_ptr == 0|.
@@ -2442,7 +2441,7 @@ Scanner_Type::extract_picture_output_args(void)
 
         cerr_strm << thread_name << "ERROR! "
                   << "In `Scanner_Type::extract_picture_output_args()':"
-                  << endl << "`picture_entry_ptr' == 0. " 
+                  << endl << "`picture_entry_ptr' == 0. "
                   << "Exiting function with return value 0."
                   << endl;
 
@@ -2450,12 +2449,12 @@ Scanner_Type::extract_picture_output_args(void)
         cerr_message(cerr_strm);
         cerr_strm.str("");
 
-        return 0;       
+        return 0;
 
      } /* |if (picture_entry_ptr == 0)|  */
-   
+
    Id_Map_Entry_Node entry
-     = static_cast<Id_Map_Entry_Node>(picture_entry_ptr); 
+     = static_cast<Id_Map_Entry_Node>(picture_entry_ptr);
 
 #if DEBUG_COMPILE
   if (DEBUG)
@@ -2464,8 +2463,8 @@ Scanner_Type::extract_picture_output_args(void)
         {
           cerr_mutex.lock();
 
-          cerr << thread_name 
-               << "In `Scanner_Type::extract_picture_output_args()':" 
+          cerr << thread_name
+               << "In `Scanner_Type::extract_picture_output_args()':"
                << endl;
 
           static_cast<Picture*>(entry->object)->show("entry->object:");
@@ -2480,8 +2479,8 @@ Scanner_Type::extract_picture_output_args(void)
 
 cerr_mutex.lock();
 
-          cerr << thread_name 
-               << "In `Scanner_Type::extract_picture_output_args()':" 
+          cerr << thread_name
+               << "In `Scanner_Type::extract_picture_output_args()':"
                << endl
                << "`entry' == 0." << endl;
 
@@ -2491,7 +2490,7 @@ cerr_mutex.lock();
 
     } /* |if (DEBUG)|  */
 
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q *** (3) Try to lock |entry->mutex|.  @>
 @ Try to lock |entry->mutex|.
@@ -2499,25 +2498,25 @@ cerr_mutex.lock();
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
   if (multithread_output)
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "Trying to lock `entry->mutex'."
                     << endl;
           cerr_message(cerr_strm);
           cerr_strm.str("");
-          
+
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       status = entry->lock();
-    
+
 @q **** (4) Error handling:  |entry->lock| failed.  @>
 @ Error handling:  |entry->lock| failed.
 \initials{LDF 2004.07.12.}
@@ -2526,8 +2525,8 @@ cerr_mutex.lock();
 
   if (status != 0)
     {
-  
-      cerr_strm << thread_name 
+
+      cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::extract_picture_output_args':"
                 << endl << "`entry->lock()' failed."
                 << "Exiting function with return value 0."
@@ -2542,19 +2541,19 @@ return 0;
 #if DEBUG_COMPILE
       else if (DEBUG)
         {
-          
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "`entry->lock()' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
-          
+
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
+
   } /* |  if (multithread_output)|  */
 
-#endif /* |HAVE_PTHREAD_H|  */@; 
+#endif /* |HAVE_PTHREAD_H|  */@;
 
 @q **** (4) Error handling:  |entry_object == 0|.  @>
 @ Error handling:  |entry_object == 0|.
@@ -2567,7 +2566,7 @@ return 0;
 
       cerr_strm << thread_name << "ERROR! "
                 << "In `Scanner_Type::extract_picture_output_args()':"
-                << endl << "`entry_object' == 0. " 
+                << endl << "`entry_object' == 0. "
                 << "Will try to unlock `entry->mutex' "
                 << "and exit function with return value 0."
                 << endl;
@@ -2577,22 +2576,22 @@ return 0;
 
       status = entry->unlock();
 
-       return 0;       
+       return 0;
     } /* |if (entry->object == 0)|  */
 
-Picture* entry_picture = static_cast<Picture*>(entry->object); 
+Picture* entry_picture = static_cast<Picture*>(entry->object);
 
 #if DEBUG_COMPILE
   if (DEBUG)
     {
       cerr_mutex.lock();
-      
+
       entry_picture->show("entry_picture first:");
-      
+
       cerr_mutex.unlock();
-      
+
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q *** (3) Try to lock |entry_picture->mutex|.  @>
 @ Try to lock |entry_picture->mutex|.
@@ -2600,24 +2599,24 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
   if (multithread_output)
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "Trying to lock `entry_picture->mutex'."
                     << endl;
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       status = entry_picture->lock();
-    
+
 @q **** (4) Error handling:  |entry_picture->lock| failed.  @>
 @ Error handling:  |entry_picture->lock| failed.
 \initials{LDF 2004.07.12.}
@@ -2626,8 +2625,8 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 
   if (status != 0)
     {
-  
-      cerr_strm << thread_name 
+
+      cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::extract_picture_output_args':"
                 << endl << "`entry_picture->lock()' failed."
                 << "Will try to unlock `entry->mutex' "
@@ -2644,18 +2643,18 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 #if DEBUG_COMPILE
       else if (DEBUG)
         {
-          
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "`entry_picture->lock()' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
+
   } /* |  if (multithread_output)|  */
 
-#endif /* |HAVE_PTHREAD_H|  */@; 
+#endif /* |HAVE_PTHREAD_H|  */@;
 
 @q *** (3) Allocate |Picture_Output_Arg_Type| and copy |entry_picture|.@>
 @ Allocate |Picture_Output_Arg_Type| and copy |entry_picture|.
@@ -2672,7 +2671,7 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 \LOG
 \initials{LDF 2004.07.14.}
 Added this section.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -2696,7 +2695,7 @@ Added this section.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        clear_bool_ptr = new bool;
        *clear_bool_ptr = false;
@@ -2713,7 +2712,7 @@ Added this section.
 
    else /* (|clear_ptr != 0|)  */
    {
-       clear_bool_ptr = static_cast<bool*>(clear_ptr); 
+       clear_bool_ptr = static_cast<bool*>(clear_ptr);
 
 @q ***** (5) Error handling:  |clear_ptr != 0 && *clear_bool_ptr != true|.@>
 @ Error handling:  |clear_ptr != 0 && *clear_bool_ptr != true|.
@@ -2722,30 +2721,30 @@ Added this section.
 \TODO
 @q { @>
 @:TO DO}{{\bf TO DO}@>
-@q } @> 
+@q } @>
 @q !! TO DO:  @>
 \initials{LDF 2006.11.06.}
-Find out why I'm getting this warning!  I've turned it off, 
+Find out why I'm getting this warning!  I've turned it off,
 because it's annoying.
-\ENDTODO 
+\ENDTODO
 
 @<Define |Scanner_Type| functions@>=
 
        if (*clear_bool_ptr != true)
          {
 
-#if 0 
+#if 0
 
-           cerr_strm << thread_name 
+           cerr_strm << thread_name
                      << "WARNING! In `Scanner_Type::extract_picture_output_args':"
-                     << endl 
+                     << endl
                      << "`clear_ptr' != 0 and "
                      << "`*clear_bool_ptr' == `*static_cast<bool*>(clear_ptr)' == `false'."
-                     << endl 
-                     << "This should never happen. Will try to continue, though.";   
+                     << endl
+                     << "This should never happen. Will try to continue, though.";
            cerr_message(cerr_strm, error_stop_value);
            cerr_strm.str("");
-#endif 
+#endif
 
          } /* |if (*clear_bool_ptr != true)|  */
 
@@ -2766,7 +2765,7 @@ because it's annoying.
            cerr_strm.str("");
 
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
      }         /* |else| (|*clear_bool_ptr == true|) */
 
@@ -2789,9 +2788,9 @@ because it's annoying.
        cerr_strm << thread_name << "Detaching `Picture' from `entry'.";
        cerr_message(cerr_strm);
        cerr_strm.str("");
-         
+
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->picture = entry_picture;
 
@@ -2803,9 +2802,9 @@ because it's annoying.
        entry_picture->show("entry_picture second:");
        picture_arg->picture->show("picture_arg->picture:");
        cerr_mutex.unlock();
-       
+
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) Try to unlock |entry_picture->mutex|.  @>
 @ Try to unlock |entry_picture->mutex|.
@@ -2813,24 +2812,24 @@ because it's annoying.
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
   if (multithread_output)
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "Trying to unlock `entry_picture->mutex'."
                     << endl;
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       status = entry_picture->unlock();
-    
+
 @q ***** (5) Error handling:  |entry_picture->unlock| failed.  @>
 @ Error handling:  |entry_picture->unlock| failed.
 \initials{LDF 2004.07.12.}
@@ -2839,7 +2838,7 @@ because it's annoying.
 
   if (status != 0)
     {
-  
+
       cerr_strm << thread_name << "ERROR! "
                 << "In `Scanner_Type::extract_picture_output_args':"
                 << endl << "`entry_picture->unlock()' failed."
@@ -2861,18 +2860,18 @@ entry->unlock();
 #if DEBUG_COMPILE
       else if (DEBUG)
         {
-          
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "`entry_picture->unlock()' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
+
   } /* |  if (multithread_output)|  */
 
-#endif /* |HAVE_PTHREAD_H|  */@; 
+#endif /* |HAVE_PTHREAD_H|  */@;
 
 @q **** (4) Allocate new |Picture| for |entry_picture|.@>
 @ Allocate new |Picture| for |entry_picture|.
@@ -2889,10 +2888,10 @@ entry->unlock();
        picture_arg->picture->show("picture_arg->picture second:");
        cerr_mutex.unlock();
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       entry->object = static_cast<void*>(new Picture);
- 
+
 #if DEBUG_COMPILE
    if (DEBUG)
      {
@@ -2902,7 +2901,7 @@ entry->unlock();
         picture_arg->picture->show("picture_arg->picture third:");
         cerr_mutex.unlock();
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
      } /* |if (*clear_bool_ptr)|  */
 
@@ -2915,9 +2914,9 @@ entry->unlock();
            cerr_strm << thread_name << "Copying `Picture'.";
            cerr_message(cerr_strm);
            cerr_strm.str("");
-         
+
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->picture = new Picture;
 
@@ -2929,24 +2928,24 @@ entry->unlock();
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
   if (multithread_output)
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "Trying to unlock `entry_picture->mutex'."
                     << endl;
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       status = entry_picture->unlock();
-    
+
 @q ***** (5) Error handling:  |entry_picture->unlock| failed.  @>
 @ Error handling:  |entry_picture->unlock| failed.
 \initials{LDF 2004.07.12.}
@@ -2955,7 +2954,7 @@ entry->unlock();
 
   if (status != 0)
     {
-  
+
       cerr_strm << thread_name << "ERROR! "
                 << "In `Scanner_Type::extract_picture_output_args':"
                 << endl << "`entry_picture->unlock()' failed."
@@ -2977,19 +2976,19 @@ entry->unlock();
 #if DEBUG_COMPILE
       else if (DEBUG)
         {
-          
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "`entry_picture->unlock()' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
+
   } /* |  if (multithread_output)|  */
 
-#endif /* |HAVE_PTHREAD_H|  */@; 
-  
+#endif /* |HAVE_PTHREAD_H|  */@;
+
   }     /* |else| (|!*clear_bool_ptr|)  */
 
 @q *** (3) Delete |clear_bool_ptr| set it to 0.@>
@@ -3007,18 +3006,18 @@ Now checking if |clear_bool_ptr| is non-null before deleting.  Of course, if it'
 but doesn't point to a valid object, this will cause a segmentation fault.
 
 \initials{LDF 2013.11.05.}
-@:BUG FIX@> BUG FIX:  Now only deleting |clear_bool_ptr| if memory has been allocated 
+@:BUG FIX@> BUG FIX:  Now only deleting |clear_bool_ptr| if memory has been allocated
 for it above.  @:TODO@> !! TODO:  This isn't ideal.  The problem can probably be solved
-in a better way.  However, I will have to review this function.  
-The call to |delete| caused the following error:\hfil\break 
-\.{*** glibc detected *** 3dldf: free(): invalid pointer: 0x0000000000c991a0 ***}\hfil\break 
-Previously, it worked, so apparently it's a matter of the run-time system checking more 
+in a better way.  However, I will have to review this function.
+The call to |delete| caused the following error:\hfil\break
+\.{*** glibc detected *** 3dldf: free(): invalid pointer: 0x0000000000c991a0 ***}\hfil\break
+Previously, it worked, so apparently it's a matter of the run-time system checking more
 carefully than it had in the past.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
-   if (clear_bool_ptr && clear_bool_ptr_new)   
+   if (clear_bool_ptr && clear_bool_ptr_new)
       delete clear_bool_ptr;
 
    clear_bool_ptr = 0;
@@ -3029,24 +3028,24 @@ carefully than it had in the past.
 
 @<Define |Scanner_Type| functions@>=
 
-#ifdef HAVE_PTHREAD_H  
+#ifdef HAVE_PTHREAD_H
   if (multithread_output)
     {
 
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-          cerr_strm << thread_name 
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "Trying to unlock `entry->mutex'."
                     << endl;
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       status = entry->unlock();
-    
+
 @q **** (4) Error handling:  |entry->unlock| failed.  @>
 @ Error handling:  |entry->unlock| failed.
 \initials{LDF 2004.07.12.}
@@ -3055,8 +3054,8 @@ carefully than it had in the past.
 
   if (status != 0)
     {
-  
-      cerr_strm << thread_name 
+
+      cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::extract_picture_output_args':"
                 << endl << "`entry->unlock()' failed."
                 << "Will try to delete `picture_arg' and exit "
@@ -3075,18 +3074,18 @@ carefully than it had in the past.
 #if DEBUG_COMPILE
       else if (DEBUG)
         {
-          
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "`entry->unlock()' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
-#endif /* |DEBUG_COMPILE|  */@; 
-      
+#endif /* |DEBUG_COMPILE|  */@;
+
   } /* |  if (multithread_output)|  */
 
-#endif /* |HAVE_PTHREAD_H|  */@; 
+#endif /* |HAVE_PTHREAD_H|  */@;
 
    picture_entry_ptr = 0;
 
@@ -3111,15 +3110,15 @@ if (endfig_ptr == 0)
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`endfig_ptr' == 0.";
            cerr_message(cerr_strm);
            cerr_strm.str("");
 
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->endfig = false;
 
@@ -3132,7 +3131,7 @@ if (endfig_ptr == 0)
 \LOG
 \initials{LDF 2004.07.16.}
 @:BUG FIX@> BUG FIX:  Now setting |endfig_ptr| to 0 after deleting it.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
@@ -3142,21 +3141,21 @@ if (endfig_ptr == 0)
 #if DEBUG_COMPILE
       if (DEBUG)
         {
-           
-          cerr_strm << thread_name 
+
+          cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
                     << endl << "`endfig_ptr' != 0.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
 
         }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
       picture_arg->endfig = *static_cast<bool*>(endfig_ptr);
 
       delete static_cast<bool*>(endfig_ptr);
       endfig_ptr = 0;
-       
+
 @q ****** (6) WARNING:  |endfig_ptr != true|.@>
 @ WARNING:  |endfig_ptr != true|.
 \initials{LDF 2004.07.14.}
@@ -3172,7 +3171,7 @@ if (endfig_ptr == 0)
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
     }
-       
+
     } /* |else| (|picture_arg->endfig != 0|)  */
 
 @q **** (4) |focus_ptr|.  @>
@@ -3191,22 +3190,22 @@ if (endfig_ptr == 0)
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`focus_ptr' == 0.";
            cerr_message(cerr_strm);
            cerr_strm.str("");
 
          }
-#endif /* |DEBUG_COMPILE|  */@; 
-       
+#endif /* |DEBUG_COMPILE|  */@;
+
        Id_Map_Entry_Node focus_entry = lookup("default_focus");
 
 if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "ERROR! In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`default_focus()' not found."
                      << "Will try to delete `picture_arg' and exit "
@@ -3225,7 +3224,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 #if DEBUG_COMPILE
          else if (DEBUG)
            {
-             cerr_strm << thread_name 
+             cerr_strm << thread_name
                        << "In `Scanner_Type::extract_picture_output_args':"
                        << endl << "`default_focus()' found."
                        << endl;
@@ -3243,8 +3242,8 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
        if (status != 0)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "ERROR! In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`focus_entry->lock()' failed."
                      << "Will try to delete `picture_arg' and exit "
@@ -3263,7 +3262,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
        else if (DEBUG) /* (|status != 0|)  */
          {
-           cerr_strm << thread_name 
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`focus_entry->lock()' succeeded."
                      << endl;
@@ -3272,7 +3271,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
          }  /* |else| (|status != 0|)  */
 
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) Set |picture_arg->focus|.  @>
 @ Set |picture_arg->focus|.
@@ -3281,14 +3280,14 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 @<Define |Scanner_Type| functions@>=
 
   picture_arg->focus = new Focus;
-  *(picture_arg->focus) = *static_cast<Focus*>(focus_entry->object);  
+  *(picture_arg->focus) = *static_cast<Focus*>(focus_entry->object);
 
 #if DEBUG_COMPILE
    if (DEBUG)
      {
        picture_arg->focus->show("picture_arg_focus:");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) Try to unlock |focus_entry|.  Exit on error.  @>
 @ Try to unlock |focus_entry|.  Exit on error.
@@ -3300,8 +3299,8 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
        if (status != 0)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "ERROR! In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`focus_entry->unlock()' failed."
                      << "Will try to delete `picture_arg' and exit "
@@ -3320,7 +3319,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
        else if (DEBUG) /* (|status != 0|)  */
          {
-           cerr_strm << thread_name 
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`focus_entry->unlock()' succeeded."
                      << endl;
@@ -3329,7 +3328,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
          }  /* |else| (|status != 0|)  */
 
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
      } /* |if (focus_ptr == 0)|  */
 
@@ -3342,18 +3341,18 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
    else /* (|focus_ptr != 0|)  */
 
      {
-       
+
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`focus_ptr' != 0.";
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->focus = static_cast<Focus*>(focus_ptr);
        focus_ptr = 0;
@@ -3362,8 +3361,8 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
      {
        picture_arg->focus->show("*(picture_arg->focus):");
      }
-#endif /* |DEBUG_COMPILE|  */@; 
-       
+#endif /* |DEBUG_COMPILE|  */@;
+
      } /* |else| (|focus_ptr != 0|)  */
 
 @q **** (4) |projection_ptr|.  @>
@@ -3378,8 +3377,8 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`projection_ptr' == 0. "
                      << "Using `Projections::persp'.";
@@ -3389,7 +3388,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 #endif /* |DEBUG_COMPILE|  */@;
 
 picture_arg->projection = Projections::persp;
-       
+
      } /* |if (projection_ptr == 0)|  */
 
    else /* (|projection_ptr != 0|)  */
@@ -3400,17 +3399,17 @@ picture_arg->projection = Projections::persp;
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`projection_ptr' != 0. "
-                     << "`*static_cast<int*>(projection_ptr)' == " 
+                     << "`*static_cast<int*>(projection_ptr)' == "
                      << *i << ".";
 
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
            picture_arg->projection = *i;
            delete i;
@@ -3427,12 +3426,12 @@ picture_arg->projection = Projections::persp;
 
    if (factor_ptr == 0)
      {
-       
+
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`factor_ptr' == 0. "
                      << "Using 1.";
@@ -3442,34 +3441,34 @@ picture_arg->projection = Projections::persp;
 #endif /* |DEBUG_COMPILE|  */@;
 
 picture_arg->factor = 1;
-       
+
      } /* |if (factor_ptr == 0)|  */
 
    else /* (|factor_ptr != 0|)  */
      {
-       real* r = static_cast<real*>(factor_ptr); 
+       real* r = static_cast<real*>(factor_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`factor_ptr' != 0. "
-                     << "`*static_cast<real*>(factor_ptr)' == " 
+                     << "`*static_cast<real*>(factor_ptr)' == "
                      << *r << ".";
 
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->factor = *r;
-       
+
        delete r;
        r = 0;
        factor_ptr = 0;
-       
+
      } /* |else| (|factor_ptr != 0|)  */
 
 @q **** (4) |sort_value__ptr|.  @>
@@ -3479,25 +3478,25 @@ picture_arg->factor = 1;
 \LOG
 \initials{LDF 2005.04.18.}
 Now setting |picture_arg->sort_value = Sorting::MIN_Z|.
-\ENDLOG 
+\ENDLOG
 
 @<Define |Scanner_Type| functions@>=
 
    if (sort_value_ptr == 0)
      {
-       
+
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`sort_value_ptr' == 0. "
                      << "Using `Sorting::MAX_Z'.";
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->sort_value = Sorting::MIN_Z;
 
@@ -3506,13 +3505,13 @@ Now setting |picture_arg->sort_value = Sorting::MIN_Z|.
    else /* (|sort_value_ptr != 0|)  */
      {
 
-       int* i = static_cast<int*>(sort_value_ptr); 
-      
+       int* i = static_cast<int*>(sort_value_ptr);
+
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`sort_value_ptr' != 0. "
                      << "`*static_cast<int*>(sort_value_ptr)' == "
@@ -3520,7 +3519,7 @@ Now setting |picture_arg->sort_value = Sorting::MIN_Z|.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->sort_value = *i;
 
@@ -3550,12 +3549,12 @@ Now setting |picture_arg->sort_value = Sorting::MIN_Z|.
            cerr_strm << "`true'";
        else
            cerr_strm << "`false'";
-       
+
        cerr_message(cerr_strm);
        cerr_strm.str("");
 
      }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) Projection limits.  @>
 @ Projection limits.
@@ -3565,7 +3564,7 @@ Now setting |picture_arg->sort_value = Sorting::MIN_Z|.
 \initials{LDF 2004.07.15.}
 @:BUG FIX@> BUG FIX:  If the pointers are 0, now setting the appropriate values
 on |*picture_arg| to the defaults.
-\ENDLOG 
+\ENDLOG
 
 @q ***** (5) |min_x_ptr|.  @>
 @ |min_x_ptr|.
@@ -3579,8 +3578,8 @@ on |*picture_arg| to the defaults.
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`min_x_proj_ptr' == 0. "
                      << "Using `Picture::default_min_x_proj' == "
@@ -3588,7 +3587,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->min_x_proj = Picture::default_min_x_proj;
 
@@ -3596,14 +3595,14 @@ on |*picture_arg| to the defaults.
 
    else /* (|min_x_proj_ptr != 0|)  */
      {
-       
-       real* r = static_cast<real*>(min_x_proj_ptr); 
+
+       real* r = static_cast<real*>(min_x_proj_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`min_x_proj_ptr' != 0. "
                      << "`*static_cast<real*>(min_x_proj_ptr)' "
@@ -3611,7 +3610,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->min_x_proj = *r;
        delete r;
@@ -3632,8 +3631,8 @@ on |*picture_arg| to the defaults.
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`max_x_proj_ptr' == 0. "
                      << "Using `Picture::default_max_x_proj' == "
@@ -3641,7 +3640,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->max_x_proj = Picture::default_max_x_proj;
 
@@ -3649,14 +3648,14 @@ on |*picture_arg| to the defaults.
 
    else /* (|max_x_proj_ptr != 0|)  */
      {
-       
-       real* r = static_cast<real*>(max_x_proj_ptr); 
+
+       real* r = static_cast<real*>(max_x_proj_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`max_x_proj_ptr' != 0. "
                      << "`*static_cast<real*>(max_x_proj_ptr)' "
@@ -3664,7 +3663,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->max_x_proj = *r;
        delete r;
@@ -3685,8 +3684,8 @@ on |*picture_arg| to the defaults.
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`min_y_proj_ptr' == 0. "
                      << "Using `Picture::default_min_y_proj' == "
@@ -3694,7 +3693,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->min_y_proj = Picture::default_min_y_proj;
 
@@ -3702,14 +3701,14 @@ on |*picture_arg| to the defaults.
 
    else /* (|min_y_proj_ptr != 0|)  */
      {
-       
-       real* r = static_cast<real*>(min_y_proj_ptr); 
+
+       real* r = static_cast<real*>(min_y_proj_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`min_y_proj_ptr' != 0. "
                      << "`*static_cast<real*>(min_y_proj_ptr)' "
@@ -3717,7 +3716,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->min_y_proj = *r;
        delete r;
@@ -3738,8 +3737,8 @@ on |*picture_arg| to the defaults.
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`max_y_proj_ptr' == 0. "
                      << "Using `Picture::default_max_y_proj' == "
@@ -3747,7 +3746,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->max_y_proj = Picture::default_max_y_proj;
 
@@ -3755,14 +3754,14 @@ on |*picture_arg| to the defaults.
 
    else /* (|max_y_proj_ptr != 0|)  */
      {
-       
-       real* r = static_cast<real*>(max_y_proj_ptr); 
+
+       real* r = static_cast<real*>(max_y_proj_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`max_y_proj_ptr' != 0. "
                      << "`*static_cast<real*>(max_y_proj_ptr)' "
@@ -3770,7 +3769,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->max_y_proj = *r;
        delete r;
@@ -3791,8 +3790,8 @@ on |*picture_arg| to the defaults.
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`min_z_proj_ptr' == 0. "
                      << "Using `Picture::default_min_z_proj' == "
@@ -3800,7 +3799,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->min_z_proj = Picture::default_min_z_proj;
 
@@ -3808,14 +3807,14 @@ on |*picture_arg| to the defaults.
 
    else /* (|min_z_proj_ptr != 0|)  */
      {
-       
-       real* r = static_cast<real*>(min_z_proj_ptr); 
+
+       real* r = static_cast<real*>(min_z_proj_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`min_z_proj_ptr' != 0. "
                      << "`*static_cast<real*>(min_z_proj_ptr)' "
@@ -3823,7 +3822,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->min_z_proj = *r;
        delete r;
@@ -3844,8 +3843,8 @@ on |*picture_arg| to the defaults.
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`max_z_proj_ptr' == 0. "
                      << "Using `Picture::default_max_z_proj' == "
@@ -3853,7 +3852,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->max_z_proj = Picture::default_max_z_proj;
 
@@ -3861,14 +3860,14 @@ on |*picture_arg| to the defaults.
 
    else /* (|max_z_proj_ptr != 0|)  */
      {
-       
-       real* r = static_cast<real*>(max_z_proj_ptr); 
+
+       real* r = static_cast<real*>(max_z_proj_ptr);
 
 #if DEBUG_COMPILE
        if (DEBUG)
          {
-           
-           cerr_strm << thread_name 
+
+           cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
                      << endl << "`max_z_proj_ptr' != 0. "
                      << "`*static_cast<real*>(max_z_proj_ptr)' "
@@ -3876,7 +3875,7 @@ on |*picture_arg| to the defaults.
            cerr_message(cerr_strm);
            cerr_strm.str("");
          }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
        picture_arg->max_z_proj = *r;
        delete r;
@@ -3885,7 +3884,7 @@ on |*picture_arg| to the defaults.
 
      } /* |else | (|max_z_proj_ptr != 0|)  */
 
-@q **** (4) |surface_hiding_value_ptr|.@>   
+@q **** (4) |surface_hiding_value_ptr|.@>
 @ |surface_hiding_value_ptr|.
 \initials{LDF 2005.03.14.}
 
@@ -3894,16 +3893,16 @@ on |*picture_arg| to the defaults.
 Added this section.
 
 \initials{LDF 2005.03.15.}
-Now assigning 
+Now assigning
 |picture_arg->surface_hiding_value = static_cast<unsigned short>(floor(*r))|
-instead of 
+instead of
 |picture_arg->surface_hiding_value = *r|, if |surface_hiding_value_ptr != 0)|.
 This prevents a compiler warning.
 
 \initials{LDF 2005.04.04.}
-Now setting |picture_arg->surface_hiding_value = 0| 
-if |surface_hiding_value_ptr == 0|.  This has the effect that 
-the default behavior of |Picture::output| is to {\it not\/} perform 
+Now setting |picture_arg->surface_hiding_value = 0|
+if |surface_hiding_value_ptr == 0|.  This has the effect that
+the default behavior of |Picture::output| is to {\it not\/} perform
 surface hiding.
 \ENDLOG
 
@@ -3911,9 +3910,9 @@ surface hiding.
 
    if (surface_hiding_value_ptr == 0)
       picture_arg->surface_hiding_value = 0;
-   else 
+   else
       {
-         real* r = static_cast<real*>(surface_hiding_value_ptr); 
+         real* r = static_cast<real*>(surface_hiding_value_ptr);
          picture_arg->surface_hiding_value = static_cast<unsigned short>(floor(*r));
          delete r;
          r = 0;
@@ -3934,8 +3933,8 @@ surface hiding.
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
-#endif /* |DEBUG_COMPILE|  */@; 
-  
+#endif /* |DEBUG_COMPILE|  */@;
+
    return picture_arg;
 
 }  /* |Scanner_Type::extract_picture_output_args|  */
@@ -3964,7 +3963,7 @@ Scanner_Type::load_database(bool force)
    using namespace Scan_Parse;
 
    stringstream cerr_strm;
-   
+
    bool error_stop_value = (run_state.error_stop_mode == Run_State::STOPPING)
                            ? true : false;
 
@@ -3972,11 +3971,11 @@ Scanner_Type::load_database(bool force)
 
    string thread_name;
 
-#ifdef HAVE_PTHREAD_H  
-  
+#ifdef HAVE_PTHREAD_H
+
   Thread_Info_Type* thread_info;
-  
-  if (   run_state.multithread_input 
+
+  if (   run_state.multithread_input
       || run_state.multithread_output
       || run_state.multithread_include)
     {
@@ -3990,21 +3989,21 @@ Scanner_Type::load_database(bool force)
       thread_name = "";
     }
 
-#else  /* |HAVE_PTHREAD_H| is undefined.  */@;  
+#else  /* |HAVE_PTHREAD_H| is undefined.  */@;
 
   thread_name = "";
 
-#endif /* |HAVE_PTHREAD_H| is undefined.  */@; 
+#endif /* |HAVE_PTHREAD_H| is undefined.  */@;
 
 @q **** (4) @>
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
        cerr << "Entering `Scanner_Type::load_database'."
             << endl;
 
-   }  
+   }
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>
@@ -4013,13 +4012,13 @@ Scanner_Type::load_database(bool force)
 
     if (force == false && database_enabled)
     {
-        cerr_strm << "In `Scanner_Type::load_database':" 
+        cerr_strm << "In `Scanner_Type::load_database':"
                   << endl
                   << "`database_enabled' is `true' and and `force' is `false':"
                   << endl
-                  << "Database is already loaded and not forcing load." 
+                  << "Database is already loaded and not forcing load."
                   << endl
-                  << "Exiting function successfully with return value 2." 
+                  << "Exiting function successfully with return value 2."
                   << endl;
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -4041,7 +4040,7 @@ Scanner_Type::load_database(bool force)
         << endl;
 
    return 1;
-#endif 
+#endif
 
 @q **** (4) @>
 @
@@ -4049,19 +4048,19 @@ Scanner_Type::load_database(bool force)
 
     mysql = mysql_init(0);
 
-    if (mysql != 0) 
+    if (mysql != 0)
     {
 #if DEBUG_COMPILE
        if (DEBUG)
        {
           cerr_strm << thread_name << "In `Scanner_Type::load_database':"
                     << endl
-                    << "mysql_init succeeded." << endl; 
-          log_message(cerr_strm); 
-          cerr_message(cerr_strm); 
+                    << "mysql_init succeeded." << endl;
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
           cerr_strm.str("");
        }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
     }
 
 @q **** (4) @>
@@ -4072,12 +4071,12 @@ Scanner_Type::load_database(bool force)
     {
        cerr_strm << thread_name << "ERROR!  In `Scanner_Type::load_database':"
                  << endl
-                 << "`mysql_init failed'.  Failed to load database." 
+                 << "`mysql_init failed'.  Failed to load database."
                  << endl
                  << "Exiting function unsuccessfully with return value 1."
                  << endl;
-       log_message(cerr_strm); 
-       cerr_message(cerr_strm, error_stop_value); 
+       log_message(cerr_strm);
+       cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");
 
        return 1;
@@ -4092,34 +4091,34 @@ Scanner_Type::load_database(bool force)
     // \initials{LDF 2021.03.23.}
     // mysql_options(mysql, MYSQL_OPT_RECONNECT, 0);
 
-    mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout); 
+    mysql_options(mysql, MYSQL_OPT_CONNECT_TIMEOUT, &mysql_timeout);
 
     if (!mysql_real_connect(this->mysql, "localhost", "3dldf", 0, "3dldf", 0, NULL, 0))
     {
-        cerr_strm << thread_name << "ERROR!  In `Scanner_Type::load_database':: `mysql_real_connect' failed, returning NULL." 
-                  << endl 
-                  << "Failed to connect to database: Error: " << mysql_error(mysql) 
+        cerr_strm << thread_name << "ERROR!  In `Scanner_Type::load_database':: `mysql_real_connect' failed, returning NULL."
+                  << endl
+                  << "Failed to connect to database: Error: " << mysql_error(mysql)
                   << endl
                   << "Exiting function unsuccessfully with return value 1."
                   << endl;
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm, error_stop_value); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
 
         return 1;
     }
 #if DEBUG_COMPILE
    else if (DEBUG)
-   { 
+   {
         cerr_strm << thread_name << "In `Scanner_Type::load_database':"
-                  << endl 
+                  << endl
                   << "`mysql_real_connect' succeeded." << endl;
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
         cerr_strm.str("");
 
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+   }
+#endif /* |DEBUG_COMPILE|  */@;
 
     database_enabled = true;
 
@@ -4129,14 +4128,14 @@ Scanner_Type::load_database(bool force)
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
         cerr_strm << thread_name << "Exiting `Scanner_Type::load_database' successfully with return value 0."
                   << endl;
-        log_message(cerr_strm); 
-        cerr_message(cerr_strm); 
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
         cerr_strm.str("");
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+   }
+#endif /* |DEBUG_COMPILE|  */@;
 
    return 0;
 
@@ -4175,7 +4174,7 @@ Scanner_Type::show_database(void)
 
     if (DEBUG)
     {
-      cerr_strm << "Entering `Scanner_Type::show_database'." 
+      cerr_strm << "Entering `Scanner_Type::show_database'."
                 << endl;
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -4189,14 +4188,14 @@ Scanner_Type::show_database(void)
 #ifndef MYSQL_AVAILABLE
     cerr_strm << "WARNING!  In `Scanner_Type::show_database':" << endl
               << "MySQL not available.  No database to show." << endl
-              << "Exiting function unsuccessfully with return value 1." 
+              << "Exiting function unsuccessfully with return value 1."
               << endl;
     log_message(cerr_strm);
     cerr_message(cerr_strm);
     cerr_strm.str("");
 
     return 1;
-#endif 
+#endif
 
 @q **** (4) @>
 @
@@ -4206,7 +4205,7 @@ Scanner_Type::show_database(void)
     {
         cerr_strm << "WARNING!  In `Scanner_Type::show_database':" << endl
                   << "`database_enabled' == `false'.  Database not enabled." << endl
-                  << "Exiting function with return value 2." 
+                  << "Exiting function with return value 2."
                   << endl;
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -4225,13 +4224,13 @@ Scanner_Type::show_database(void)
     {
       cerr_strm << "In `Scanner_Type::show_database':" << endl
                 << "MySQL available and `database_enabled' == `true'."
-                << endl 
+                << endl
                 << "Showing database." << endl;
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>
 @
@@ -4241,8 +4240,8 @@ Scanner_Type::show_database(void)
 
     iter = find(database_options.begin(), database_options.end(), ALL);
 
-    cerr << "database_options.empty()       == " << database_options.empty() << endl 
-         << "iter != database_options.end() == " << (iter != database_options.end()) 
+    cerr << "database_options.empty()       == " << database_options.empty() << endl
+         << "iter != database_options.end() == " << (iter != database_options.end())
          << endl;
 
     if (database_options.empty() || iter != database_options.end())
@@ -4251,7 +4250,7 @@ Scanner_Type::show_database(void)
         do_paths = true;
         do_transforms = true;
     }
-    
+
     else
     {
        iter = find(database_options.begin(), database_options.end(), POINTS);
@@ -4259,29 +4258,29 @@ Scanner_Type::show_database(void)
        if (iter != database_options.end())
        {
            do_points = true;
-       }  
+       }
 
        iter = find(database_options.begin(), database_options.end(), PATHS);
 
        if (iter != database_options.end())
        {
            do_paths = true;
-       }  
+       }
 
        iter = find(database_options.begin(), database_options.end(), TRANSFORMS);
 
        if (iter != database_options.end())
        {
            do_transforms = true;
-       }  
+       }
 
     }  /* |else|  */
-   
+
     if (DEBUG)
     {
-      cerr_strm << "In`Scanner_Type::show_database':" 
+      cerr_strm << "In`Scanner_Type::show_database':"
                 << endl
-                << "`do_points' == " << do_points << endl 
+                << "`do_points' == " << do_points << endl
                 << "`do_paths' == " << do_paths << endl
                 << "`do_transforms' == " << do_transforms << endl;
 
@@ -4290,8 +4289,8 @@ Scanner_Type::show_database(void)
       cerr_strm.str("");
     }
 
-@q **** (4) Points.  @> 
-@ Points.  
+@q **** (4) Points.  @>
+@ Points.
 @<Define |Scanner_Type| functions@>=
 
     if (do_points)
@@ -4310,7 +4309,7 @@ Scanner_Type::show_database(void)
                  << "drawdot_value, do_output, measurement_units "
                  << "from points order by name asc;";
 
-        if (DEBUG) 
+        if (DEBUG)
         {
            cerr_strm << "sql_strm.str() == " << sql_strm.str() << endl;
            log_message(cerr_strm);
@@ -4329,11 +4328,11 @@ Scanner_Type::show_database(void)
         if (status != 0)
         {
            cerr_strm << "`Scanner_Type::submit_mysql_query' failed, returning " << status << ":"
-                     << endl 
+                     << endl
                      << "MySQL error:  " << mysql_error(mysql)
-                     << endl 
+                     << endl
                      << "MySQL error number:  " << mysql_errno(mysql)
-                     << endl 
+                     << endl
                      << "Can't show database.  Exiting function with return value 1."
                      << endl;
            log_message(cerr_strm);
@@ -4344,7 +4343,7 @@ Scanner_Type::show_database(void)
            {
               mysql_free_result(result);
               result = 0;
-           }   
+           }
 
            row_ctr       = 0;
            field_ctr     = 0;
@@ -4355,14 +4354,14 @@ Scanner_Type::show_database(void)
         else if (DEBUG)
         {
           cerr_strm << "In `Scanner_Type::show_database:" << endl
-                    << "`Scanner_Type::submit_mysql_query' succeeded, returning 0." 
+                    << "`Scanner_Type::submit_mysql_query' succeeded, returning 0."
                     << endl
-                    << "`row_ctr'   == " << row_ctr << endl 
+                    << "`row_ctr'   == " << row_ctr << endl
                     << "`field_ctr' == " << field_ctr << endl;
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
-        } 
+        }
 
         sql_strm.str("");
 
@@ -4385,7 +4384,7 @@ Scanner_Type::show_database(void)
            {
               mysql_free_result(result);
               result = 0;
-           }   
+           }
 
            row_ctr       = 0;
            field_ctr     = 0;
@@ -4402,9 +4401,9 @@ Scanner_Type::show_database(void)
        /*  Process the contents of |curr_row|  */
 
        curr_row = 0;
-   
-       int i = 0;   
-  
+
+       int i = 0;
+
        Point curr_point;
 
        vector<string> point_prefix_vector;
@@ -4413,7 +4412,7 @@ Scanner_Type::show_database(void)
        vector<Point> point_vector;
 
 @q ***** (5) @>
- 
+
        do
        {
 @q ****** (6) @>
@@ -4440,15 +4439,15 @@ Scanner_Type::show_database(void)
                 {
                   mysql_free_result(result);
                   result = 0;
-                }       
+                }
 
                 return 1;
 
               }
               else if (DEBUG)
               {
-                
-                cerr_strm << "In `Scanner_Type::show_database:" << endl 
+
+                cerr_strm << "In `Scanner_Type::show_database:" << endl
                           << "No more rows." << endl;
 
                 log_message(cerr_strm);
@@ -4460,7 +4459,7 @@ Scanner_Type::show_database(void)
 
            }  /* |if (curr_row == 0)|  */
 
-           cerr_strm << "Iteration " << (i + 1) << ":" << endl 
+           cerr_strm << "Iteration " << (i + 1) << ":" << endl
                      << "`curr_row[0]' == `prefix' == " << curr_row[0] << endl
                      << "`curr_row[1]' == `name'   == " << curr_row[1] << endl;
            log_message(cerr_strm);
@@ -4491,27 +4490,27 @@ Scanner_Type::show_database(void)
            curr_point.pre_projective_coordinates[1] = static_cast<real>(atof(curr_row[15]));
            curr_point.pre_projective_coordinates[2] = static_cast<real>(atof(curr_row[16]));
            curr_point.pre_projective_coordinates[3] = static_cast<real>(atof(curr_row[17]));
- 
+
            curr_point.projective_coordinates[0] = static_cast<real>(atof(curr_row[18]));
            curr_point.projective_coordinates[1] = static_cast<real>(atof(curr_row[19]));
            curr_point.projective_coordinates[2] = static_cast<real>(atof(curr_row[20]));
            curr_point.projective_coordinates[3] = static_cast<real>(atof(curr_row[21]));
- 
+
            curr_point.drawdot_value = static_cast<signed short>(atoi(curr_row[22]));
            curr_point.do_output = static_cast<bool>(atoi(curr_row[23]));
            curr_point.measurement_units = static_cast<string>(curr_row[24]);
 
-           cerr_strm << "`curr_point.world_coordinates[0]' == " << curr_point.world_coordinates[0] 
+           cerr_strm << "`curr_point.world_coordinates[0]' == " << curr_point.world_coordinates[0]
                      << endl
-                     << "`curr_point.world_coordinates[1]' == " << curr_point.world_coordinates[1] 
+                     << "`curr_point.world_coordinates[1]' == " << curr_point.world_coordinates[1]
                      << endl
-                     << "`curr_point.world_coordinates[2]' == " << curr_point.world_coordinates[2] 
+                     << "`curr_point.world_coordinates[2]' == " << curr_point.world_coordinates[2]
                      << endl
-                     << "`curr_point.world_coordinates[3]' == " << curr_point.world_coordinates[3] 
+                     << "`curr_point.world_coordinates[3]' == " << curr_point.world_coordinates[3]
                      << endl
-                     << "`currenldrawdot_value'        == " << curr_point.drawdot_value << endl 
-                     << "`curr_point.do_output'            == " << curr_point.do_output << endl         
-                     << "`curr_point.measurement_units'    == " << curr_point.measurement_units 
+                     << "`currenldrawdot_value'        == " << curr_point.drawdot_value << endl
+                     << "`curr_point.do_output'            == " << curr_point.do_output << endl
+                     << "`curr_point.measurement_units'    == " << curr_point.measurement_units
                      << endl;
 
            log_message(cerr_strm);
@@ -4532,7 +4531,7 @@ Scanner_Type::show_database(void)
       affected_rows = 0;
 
      /* Free |result|  */
-     
+
      if (result)
      {
 	 mysql_free_result(result);
@@ -4543,7 +4542,7 @@ Scanner_Type::show_database(void)
 
      if (point_vector.size() == 0)
      {
-         cerr_strm << "`point_vector.size()' == 0.  No points to show.  Continuing." 
+         cerr_strm << "`point_vector.size()' == 0.  No points to show.  Continuing."
                    << endl;
          log_message(cerr_strm);
          cerr_message(cerr_strm);
@@ -4562,8 +4561,8 @@ Scanner_Type::show_database(void)
               iter != point_vector.end();
               ++iter)
          {
-             cerr_strm << "Point " << j << ":" << endl 
-                       << "`prefix' == " << point_prefix_vector[j] << endl 
+             cerr_strm << "Point " << j << ":" << endl
+                       << "`prefix' == " << point_prefix_vector[j] << endl
                        << "`name'   == " << point_name_vector[j];
              log_message(cerr_strm);
              cerr_message(cerr_strm);
@@ -4584,7 +4583,7 @@ Scanner_Type::show_database(void)
    }  /* |if (do_points)|  */
 
 @q **** (4) Paths.  @>
-@ Paths.  
+@ Paths.
 
 @<Define |Scanner_Type| functions@>=
 
@@ -4593,7 +4592,7 @@ Scanner_Type::show_database(void)
 
     }  /* |if (do_paths)|  */
 
-@q *** @> 
+@q *** @>
 @
 @<Define |Scanner_Type| functions@>=
 
@@ -4602,13 +4601,13 @@ Scanner_Type::show_database(void)
 
     }  /* |if (do_transforms)|  */
 
-@q *** @> 
+@q *** @>
 @
 @<Define |Scanner_Type| functions@>=
 
     if (DEBUG)
     {
-      cerr_strm << "Exiting `Scanner_Type::show_database' successfully with return value 0." 
+      cerr_strm << "Exiting `Scanner_Type::show_database' successfully with return value 0."
                 << endl;
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -4617,8 +4616,6 @@ Scanner_Type::show_database(void)
 
    return 0;
 
-
-
 @q **** (4) @>
 
 }  /* End of |Scanner_Type::show_database| definition  */
@@ -4626,7 +4623,7 @@ Scanner_Type::show_database(void)
 @q *** (3) @>
 
 @q ** (2) Get astronomy.  @>
-@ Get astronomy.  Query database and store data in ``astronomical'' variables.  
+@ Get astronomy.  Query database and store data in ``astronomical'' variables.
 \initials{LDF 2021.06.06.}
 
 \LOG
@@ -4652,12 +4649,11 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
        cerr << "Entering `Scanner_Type::get_astronomy'."
             << endl;
-   }  
+   }
 #endif /* |DEBUG_COMPILE|  */@;
-
 
 #ifndef MYSQL_AVAILABLE
    cerr << "ERROR!  In `Scanner_Type::get_astronomy':  `MYSQL_AVAILABLE' isn't defined."
@@ -4668,8 +4664,7 @@ Scanner_Type::get_astronomy(void)
         << endl;
 
    return 1;
-#endif 
-
+#endif
 
 @q **** (4) @>
 @
@@ -4729,11 +4724,11 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
       cerr << "stars_limit == " << stars_limit << endl
            << "`sql_strm.str()' == " << sql_strm.str() << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+   }
+#endif /* |DEBUG_COMPILE|  */@;
 
    row_ctr       = 0;
    field_ctr     = 0;
@@ -4751,12 +4746,12 @@ Scanner_Type::get_astronomy(void)
    {
       cerr << "ERROR!  In `Scanner_Type::get_astronomy':"
            << endl
-           << "`Scanner_Type::submit_mysql_query' failed, returning " 
-           << status << "." << endl 
+           << "`Scanner_Type::submit_mysql_query' failed, returning "
+           << status << "." << endl
            << "MySQL error:  " << mysql_error(mysql)
-           << endl 
+           << endl
            << "MySQL error number:  " << mysql_errno(mysql)
-           << endl    
+           << endl
            << "Exiting function unsuccessfully with return value 1." << endl;
 
       row_ctr       = 0;
@@ -4781,16 +4776,15 @@ Scanner_Type::get_astronomy(void)
       cerr << "In `Scanner_Type::::get_astronomy':"
            << endl
            << "`Scanner_Type::submit_mysql_query' succeeded, returning 0."
-           << endl 
+           << endl
            << "`affected_rows' == " << affected_rows
-           << endl 
+           << endl
            << "`row_ctr' == " << row_ctr
-           << endl 
+           << endl
            << "`field_ctr' == " << field_ctr
            << endl;
    }
-#endif /* |DEBUG_COMPILE|  */@; 
-
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q **** (4) @>
 @
@@ -4798,7 +4792,7 @@ Scanner_Type::get_astronomy(void)
 
    /*  Process the contents of |curr_row|  */
 
-   do 
+   do
    {
 @q ***** (5) @>
 
@@ -4806,8 +4800,8 @@ Scanner_Type::get_astronomy(void)
 
        if (curr_row == 0)
        {
-         if (DEBUG) 
-           cerr << "`mysql_fetch_row' returned NULL." 
+         if (DEBUG)
+           cerr << "`mysql_fetch_row' returned NULL."
                 << endl;
 
          if (*mysql_error(mysql))
@@ -4833,7 +4827,7 @@ Scanner_Type::get_astronomy(void)
          else if (DEBUG)
          {
            cerr << "No more rows." << endl;
-          
+
            break;
          }
 
@@ -4845,19 +4839,19 @@ Scanner_Type::get_astronomy(void)
 @
 @<Define |Scanner_Type| functions@>=
 
-       else 
+       else
        {
 @q ****** (6) @>
 
 #if DEBUG_COMPILE
           if (DEBUG)
-          { 
+          {
               cerr << "In `Scanner_Type::get_astronomy':"
-                   << endl 
+                   << endl
                    << "`mysql_fetch_row' succeeded, `curr_row' is non-NULL."
                    << endl;
-          }      
-#endif /* |DEBUG_COMPILE|  */@; 
+          }
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) @>
 
@@ -4869,7 +4863,7 @@ Scanner_Type::get_astronomy(void)
          catch(bad_alloc)
          {
              cerr << "ERROR! In `Scanner_Type::get_astronomy':"
-                  << endl 
+                  << endl
                   << "`create_new<Star>' failed.  Rethrowing `bad_alloc'."
                   << endl;
 
@@ -4880,13 +4874,13 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
          if (DEBUG)
-         { 
+         {
             cerr << "In `Scanner_Type::get_astronomy':"
-                 << endl 
+                 << endl
                  << "`create_new<Star>' succeeded."
                  << endl;
 
-         }       
+         }
 #endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) @>
@@ -4898,7 +4892,7 @@ Scanner_Type::get_astronomy(void)
          if (status != 0)
          {
              cerr << "ERROR! In `Scanner_Type::get_astronomy':"
-                  << endl 
+                  << endl
                   << "`Star::set' failed, returning " << status << "." << endl
                   << "Exiting function unsuccessfully with return value 1."
                   << endl;
@@ -4907,30 +4901,30 @@ Scanner_Type::get_astronomy(void)
              {
                  mysql_free_result(result);
                  result = 0;
-             }         
+             }
 
              return 1;
 
          }  /* |if (status != 0)|  */
 
 @q ****** (6) @>
- 
+
  #if DEBUG_COMPILE
          else if (DEBUG)
-         { 
+         {
              cerr << "In `Scanner_Type::get_astronomy':"
-                  << endl 
+                  << endl
                   << "`Star::set' succeeded, returning 0."
                   << endl;
 #if 0 /* 1 */
               star->show("*star:");
-#endif 
-   
-         }     
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif
+
+         }
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) @>
-  
+
          star_ptr_vector.push_back(star);
 
           if (star->right_ascension_decimal_hours == 0.0 || star->right_ascension_decimal_degrees == 0.0)
@@ -4940,10 +4934,10 @@ Scanner_Type::get_astronomy(void)
                  && star->right_ascension_seconds == 0.0)
              {
                  cerr << "WARNING!  In `Scanner_Type::get_astronomy':"
-                      << endl 
+                      << endl
                       << "star->right_ascension_hours, star->right_ascension_minutes and "
                       << "star->right_ascension_seconds are all 0."
-                      << endl 
+                      << endl
                       << "Not setting star->right_ascension_decimal_hours or star->right_ascension_decimal_degrees."
                       << endl;
              }
@@ -4952,38 +4946,36 @@ Scanner_Type::get_astronomy(void)
                 star->right_ascension_decimal_hours =    star->right_ascension_hours + (star->right_ascension_minutes / 60.0)
                                                        + (star->right_ascension_seconds / 3600.0);
 
-             }         
+             }
 
              if (star->right_ascension_decimal_hours != 0.0 && star->right_ascension_decimal_degrees == 0.0)
              {
-                  star->right_ascension_decimal_degrees = (star->right_ascension_decimal_hours * 360.0) / 24.0;                     
+                  star->right_ascension_decimal_degrees = (star->right_ascension_decimal_hours * 360.0) / 24.0;
              }
- 
 
              if (star->right_ascension_decimal_degrees != 0.0)
-             { 
+             {
                 sql_strm << "update Stars set right_ascension_decimal_hours = "
                          << star->right_ascension_decimal_hours << ", right_ascension_decimal_degrees "
                          << "= " << star->right_ascension_decimal_degrees << " ";
 
                 if (star->bs_hr_number > 0)
                    sql_strm << "where bs_hr_number = " << star->bs_hr_number << ";";
-                else 
+                else
                 {
                    sql_strm << "where bayer_designation_greek_letter = \"" << star->bayer_designation_greek_letter
                             << "\" and constellation_name_genitive = \"" << star->constellation_name_genitive
                             << "\";";
 
-
                 }
 
-                sql_string_vector.push_back(sql_strm.str());               
+                sql_string_vector.push_back(sql_strm.str());
                 sql_strm.str("");
 
              }
-   
+
           }  /* |if (star->right_ascension_decimal_hours == 0.0 || star->right_ascension_decimal_degrees == 0)| */
-       
+
 @q ****** (6) @>
 
           if (star->declination_decimal_degrees == 0.0)
@@ -4993,14 +4985,14 @@ Scanner_Type::get_astronomy(void)
                  && star->declination_seconds == 0.0)
              {
                  cerr << "WARNING!  In `Scanner_Type::get_astronomy':"
-                      << endl 
+                      << endl
                       << "star->declination_degrees, star->declination_minutes and "
                       << "star->declination_seconds are all 0."
-                      << endl 
+                      << endl
                       << "Not setting star->declination_decimal_degrees."
                       << endl;
              }
-             else 
+             else
              {
 
                 real decl_deg;
@@ -5017,31 +5009,30 @@ Scanner_Type::get_astronomy(void)
 
                 star->declination_decimal_degrees = factor * (decl_deg + (star->declination_minutes / 60.0)
                                                     + (star->declination_seconds / 3600.0));
-             }         
+             }
 
              if (star->declination_decimal_degrees != 0.0)
-             { 
+             {
                 sql_strm << "update Stars set declination_decimal_degrees = "
                          << star->declination_decimal_degrees << " ";
 
                 if (star->bs_hr_number > 0)
                    sql_strm << "where bs_hr_number = " << star->bs_hr_number << ";";
-                else 
+                else
                 {
                    sql_strm << "where bayer_designation_greek_letter = \"" << star->bayer_designation_greek_letter
                             << "\" and constellation_name_genitive = \"" << star->constellation_name_genitive
                             << "\";";
 
-
                 }
 
-                sql_string_vector.push_back(sql_strm.str());               
+                sql_string_vector.push_back(sql_strm.str());
                 sql_strm.str("");
 
              }
-   
+
           }  /* |if (star->declination_decimal_degrees == 0)| */
-       
+
 @q ****** (6) @>
 
        }  /* |else| */
@@ -5070,7 +5061,7 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
        cerr << "sql_string_vector:" << endl;
 
        for (vector<string>::iterator iter = sql_string_vector.begin();
@@ -5080,8 +5071,8 @@ Scanner_Type::get_astronomy(void)
            cerr << "*iter == " << *iter << endl;
 
        }
-   }  
-#endif /* |DEBUG_COMPILE|  */@;    
+   }
+#endif /* |DEBUG_COMPILE|  */@;
 
    for (vector<string>::iterator iter = sql_string_vector.begin();
         iter != sql_string_vector.end();
@@ -5093,12 +5084,12 @@ Scanner_Type::get_astronomy(void)
        {
           cerr << "ERROR!  In `Scanner_Type::get_astronomy':"
                << endl
-               << "`Scanner_Type::submit_mysql_query' failed, returning " 
-               << status << "." << endl 
+               << "`Scanner_Type::submit_mysql_query' failed, returning "
+               << status << "." << endl
                << "MySQL error:  " << mysql_error(mysql)
-               << endl 
+               << endl
                << "MySQL error number:  " << mysql_errno(mysql)
-               << endl    
+               << endl
                << "Exiting function unsuccessfully with return value 1." << endl;
 
           row_ctr       = 0;
@@ -5114,14 +5105,14 @@ Scanner_Type::get_astronomy(void)
        }
 #if DEBUG_COMPILE
        else if (DEBUG)
-       { 
+       {
           cerr << "In `Scanner_Type::get_astronomy':"
                << endl
-               << "`Scanner_Type::submit_mysql_query' succeeded, returning 0." 
+               << "`Scanner_Type::submit_mysql_query' succeeded, returning 0."
                << endl;
 
-       }   
-#endif /* |DEBUG_COMPILE|  */@; 
+       }
+#endif /* |DEBUG_COMPILE|  */@;
 
        if (result)
        {
@@ -5138,21 +5129,21 @@ Scanner_Type::get_astronomy(void)
    if (star_ptr_vector.size() > 0)
    {
 @q ***** (5) @>
-   
+
 #if DEBUG_COMPILE
       if (DEBUG)
-      { 
+      {
          cerr << "In `Scanner_Type::get_astronomy':  `star_ptr_vector.size()' == "
               << star_ptr_vector.size() << endl;
 
          if (star_ptr_vector.size() == 0)
            cerr << "`star_ptr_vector.size()' == 0.  Not showing `star_ptr_vector'." << endl;
          else
-           cerr << "`star_ptr_vector.size()' == " << star_ptr_vector.size() << " (> 0).  Showing `star_ptr_vector':" 
+           cerr << "`star_ptr_vector.size()' == " << star_ptr_vector.size() << " (> 0).  Showing `star_ptr_vector':"
                 << endl;
 
       }  /* |if (DEBUG)| */
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) @>
 
@@ -5164,12 +5155,12 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
          if (DEBUG)
-         { 
-#if 0 
+         {
+#if 0
              (*iter)->show();
-#endif 
+#endif
          }  /* |if (DEBUG)| */
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) @>
 @
@@ -5180,16 +5171,16 @@ Scanner_Type::get_astronomy(void)
             s = (*iter)->bayer_designation_greek_letter;
             t = (*iter)->constellation_name_genitive;
 
-/* !!START HERE  LDF 2021.06.22.  Create variable.  Move this above.  The common names should be synonyms.  */ 
+/* !!START HERE  LDF 2021.06.22.  Create variable.  Move this above.  The common names should be synonyms.  */
 
 #if DEBUG_COMPILE
             if (DEBUG)
-            { 
-               cerr << "Before replacing:" << endl 
+            {
+               cerr << "Before replacing:" << endl
                     << "`s' == " << s << endl
                     << "`t' == " << t << endl;
-            }            
-#endif /* |DEBUG_COMPILE|  */@; 
+            }
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ******* (7) @>
 
@@ -5200,7 +5191,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "_");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5209,7 +5200,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "zero");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5218,7 +5209,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "one");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5227,7 +5218,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "two");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5236,7 +5227,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "three");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5245,7 +5236,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "four");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5254,7 +5245,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "five");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5263,7 +5254,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "six");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5272,7 +5263,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "seven");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5281,7 +5272,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "eight");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5290,7 +5281,7 @@ Scanner_Type::get_astronomy(void)
                   s.replace(pos, 1, "nine");
                else
                   break;
-            } 
+            }
 
             while (true)
             {
@@ -5299,7 +5290,7 @@ Scanner_Type::get_astronomy(void)
                   t.replace(pos, 1, "_");
                else
                   break;
-            } 
+            }
 
 @q ******* (7) @>
 @
@@ -5307,64 +5298,64 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
             if (DEBUG)
-            { 
-               cerr << "After replacing:" << endl 
+            {
+               cerr << "After replacing:" << endl
                     << "`s' == " << s << endl
                     << "`t' == " << t << endl;
-            }            
-#endif /* |DEBUG_COMPILE|  */@; 
+            }
+#endif /* |DEBUG_COMPILE|  */@;
 
             u  = s;
-            u += "_"; 
+            u += "_";
             u += t;
 
 #if DEBUG_COMPILE
             if (DEBUG)
-            { 
+            {
                cerr << "`u' == " << u << " (name of `star' constant)" << endl;
 
-            }            
-#endif /* |DEBUG_COMPILE|  */@; 
+            }
+#endif /* |DEBUG_COMPILE|  */@;
 
-            (*iter)->star_constant_name = u; 
+            (*iter)->star_constant_name = u;
 
-            add_entry(u, STAR, regular, is_constant, not_array, 
+            add_entry(u, STAR, regular, is_constant, not_array,
                       Id_Map_Entry_Type::KNOWN, *iter);
 
             for (int i = 0; i < t.size(); ++i)
                t[i] = tolower(t[i]);
 
             w  = s;
-            w += "_"; 
+            w += "_";
             w += t;
 
 #if DEBUG_COMPILE
             if (DEBUG)
-            { 
+            {
                cerr << "After calls to `tolower':";
-            }            
-#endif /* |DEBUG_COMPILE|  */@; 
+            }
+#endif /* |DEBUG_COMPILE|  */@;
 
             if (w != u)
             {
 
 #if DEBUG_COMPILE
                if (DEBUG)
-               { 
+               {
                   cerr << "`w' == " << w << " (!= `u' == " << u << ")" << endl
                        << "Calling `Scanner_Type::add_synonym'." << endl;
-               }            
-#endif /* |DEBUG_COMPILE|  */@; 
+               }
+#endif /* |DEBUG_COMPILE|  */@;
 
                add_synonym(w, u);
-            } 
+            }
 #if DEBUG_COMPILE
             else if (DEBUG)
-            { 
+            {
                   cerr << "`w' == " << w << " (== `u' == " << u << ")" << endl
                        << "Not calling `Scanner_Type::add_synonym'." << endl;
-            }          
-#endif /* |DEBUG_COMPILE|  */@; 
+            }
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ******* (7) @>
 @
@@ -5390,7 +5381,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "zero");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5399,7 +5390,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "one");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5408,7 +5399,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "two");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5417,7 +5408,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "three");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5426,7 +5417,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "four");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5435,7 +5426,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "five");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5444,7 +5435,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "six");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5453,7 +5444,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "seven");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5462,7 +5453,7 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "eight");
                  else
                     break;
-              } 
+              }
 
               while (true)
               {
@@ -5471,66 +5462,66 @@ Scanner_Type::get_astronomy(void)
                     s.replace(pos, 1, "nine");
                  else
                     break;
-              } 
+              }
 
 #if DEBUG_COMPILE
               if (DEBUG)
-              { 
+              {
                   cerr << "`(*iter)->common_name' == " << (*iter)->common_name << " (!= \"\")"
-                       << endl 
-                       << "`s' == " << s << endl 
+                       << endl
+                       << "`s' == " << s << endl
                        << "Calling `Scanner_Type::add_synonym'."
                        << endl;
-              }  
-#endif /* |DEBUG_COMPILE|  */@; 
+              }
+#endif /* |DEBUG_COMPILE|  */@;
 
               if (s != u)
-                 add_synonym(s, u);   
+                 add_synonym(s, u);
 
               t = s;
 
               for (int i = 0; i < t.size(); ++i)
-                 t[i] = tolower(t[i]); 
+                 t[i] = tolower(t[i]);
 
               if (t != s)
               {
 #if DEBUG_COMPILE
                   if (DEBUG)
-                  { 
+                  {
                      cerr << "`t' == " << t << " (!= `s' == " << s << ")"
-                          << endl 
+                          << endl
                           << "Calling `Scanner_Type::add_synonym'."
                           << endl;
-                  }  
-#endif /* |DEBUG_COMPILE|  */@; 
+                  }
+#endif /* |DEBUG_COMPILE|  */@;
 
                   if (t != u)
-                     add_synonym(t, u);   
+                     add_synonym(t, u);
               }
 #if DEBUG_COMPILE
               else if (DEBUG)
-              { 
+              {
                    cerr << "`t' == " << t << " == `s' == " << s << endl
-                        << endl 
+                        << endl
                         << "Not calling `Scanner_Type::add_synonym'."
                         << endl;
 
-              }             
-#endif /* |DEBUG_COMPILE|  */@; 
-         
+              }
+#endif /* |DEBUG_COMPILE|  */@;
+
             }  /* |if ((*iter)->common_name != "")| */
 
 @q ******* (7) @>
 
 #if DEBUG_COMPILE
             else if (DEBUG)
-            { 
+            {
                 cerr << "`(*iter)->common_name' is empty."
-                     << endl 
+                     << endl
                      << "Not calling `Scanner_Type::add_synonym'."
                      << endl;
-            }  
-#endif /* |DEBUG_COMPILE|  */@; 
+            }
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ******* (7) @>
 
@@ -5540,11 +5531,11 @@ Scanner_Type::get_astronomy(void)
 @
 @<Define |Scanner_Type| functions@>=
 
-         else 
+         else
          {
 @q ******* (7) @>
 
-#if 0 
+#if 0
             cerr << "In `Scanner_Type::get_astronomy':  "
                  << "`(*iter)->bayer_designation_greek_letter' and/or (*iter)->constellation_name_genitive are/is empty."
                  << endl
@@ -5553,13 +5544,13 @@ Scanner_Type::get_astronomy(void)
                  << "Not creating `star' constant."
                  << endl
                  << "`(*iter)->flamsteed_designation_number'   == " << (*iter)->flamsteed_designation_number
-                 << endl 
+                 << endl
                  << "`(*iter)->constellation_full_name'        == " << (*iter)->constellation_full_name
-                 << endl 
+                 << endl
                  << "`(*iter)->bs_hr_number'                   == " << (*iter)->bs_hr_number
-                 << endl 
+                 << endl
                  << "`(*iter)->approx_rank_apparent_magnitude' == " << (*iter)->approx_rank_apparent_magnitude
-                 << endl 
+                 << endl
                  << "`(*iter)->apparent_magnitude'             == " << (*iter)->apparent_magnitude
                  << endl
                  << "`(*iter)->absolute_magnitude'             == " << (*iter)->absolute_magnitude
@@ -5568,7 +5559,7 @@ Scanner_Type::get_astronomy(void)
                  << endl
                  << "`(*iter)->absolute_magnitude_varies'      == " << (*iter)->absolute_magnitude_varies
                  << endl;
-#endif 
+#endif
 
 @q ******* (7) @>
 
@@ -5580,24 +5571,24 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
          if (DEBUG)
-         { 
+         {
             cerr << endl;
 
          }  /* |if (DEBUG)| */
 
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ****** (6) @>
 
-      }  /* |for|  */   
+      }  /* |for|  */
 
 #if DEBUG_COMPILE
       if (DEBUG)
-      { 
+      {
          cerr << endl;
 
       }  /* |if (DEBUG)| */
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
    }  /* |if (star_ptr_vector.size() > 0)|  */
 
@@ -5609,11 +5600,11 @@ Scanner_Type::get_astronomy(void)
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
        cerr << "Exiting `Scanner_Type::get_astronomy' successfully with return value 0."
             << endl;
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+   }
+#endif /* |DEBUG_COMPILE|  */@;
 
    return 0;
 
@@ -5626,7 +5617,7 @@ Scanner_Type::get_astronomy(void)
 @q ** (2) @>
 
 @q *** (3) Clear |current_picture|.  @>
-@ Clear |current_picture|.  
+@ Clear |current_picture|.
 \initials{LDF 2022.04.13.}
 
 \LOG
@@ -5644,9 +5635,9 @@ Scanner_Type::clear_current_picture_func(void)
 
 #if DEBUG_COMPILE
 
-   bool DEBUG = false; /* |true| */ 
+   bool DEBUG = false; /* |true| */
 
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
    stringstream cerr_strm;
 
@@ -5667,7 +5658,7 @@ Scanner_Type::clear_current_picture_func(void)
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-       Id_Map_Entry_Node current_picture_entry = lookup("current_picture"); 
+       Id_Map_Entry_Node current_picture_entry = lookup("current_picture");
 
 @q ***** (5) Error handling:  |current_picture| not found.@>
 
@@ -5676,22 +5667,21 @@ Scanner_Type::clear_current_picture_func(void)
 
 @<Define |Scanner_Type| functions@>=
 
-    if (   current_picture_entry == static_cast<Id_Map_Entry_Node>(0) 
+    if (   current_picture_entry == static_cast<Id_Map_Entry_Node>(0)
         || current_picture_entry->object == static_cast<void*>(0))
     {
 
         cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture_func':"
-                  << endl 
+                  << endl
                   << "`current_picture' not found. "
-                  << "Exiting function unsuccessfully with return value 1."; 
-      
+                  << "Exiting function unsuccessfully with return value 1.";
+
         cerr_message(cerr_strm, error_stop_value);
         cerr_strm.str("");
 
         return 1;
 
     } /* |if (current_picture_entry == 0 && current_picture_entry->object == 0)|  */
-
 
 @q ***** (5) @>
 @
@@ -5701,18 +5691,18 @@ Scanner_Type::clear_current_picture_func(void)
     {
 #if DEBUG_COMPILE
        if (DEBUG)
-       { 
+       {
             cerr_strm << thread_name << "In `Scanner_Type::clear_current_picture_func':"
-                      << endl 
+                      << endl
                       << "`current_picture' is empty.  Not clearing."
-                      << endl 
-                      << "Exiting function successfully with return value 0."; 
-      
+                      << endl
+                      << "Exiting function successfully with return value 0.";
+
             cerr_message(cerr_strm, error_stop_value);
             cerr_strm.str("");
 
-       }   
-#endif /* |DEBUG_COMPILE|  */@; 
+       }
+#endif /* |DEBUG_COMPILE|  */@;
 
        return 0;
     }
@@ -5732,7 +5722,7 @@ This is just for insurance.  No other threads should be able to access |current_
        cerr_message(cerr_strm);
        cerr_strm.str("");
    }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
    status = current_picture_entry->lock();
 
@@ -5741,13 +5731,13 @@ This is just for insurance.  No other threads should be able to access |current_
 
        cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture_func':"
                  << endl << "`current_picture_entry->lock()' failed. "
-                 << "Exiting function with return value 1."; 
-     
+                 << "Exiting function with return value 1.";
+
        cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");
 
        return 1;
-       
+
    }
 
 @q ****** (6) Success!  Clearing |current_picture|.@>
@@ -5773,7 +5763,7 @@ This is just for insurance.  No other threads should be able to access |current_
        cerr_message(cerr_strm);
        cerr_strm.str("");
    }
-#endif /* |DEBUG_COMPILE|  */@; 
+#endif /* |DEBUG_COMPILE|  */@;
 
    status = current_picture_entry->unlock();
 
@@ -5782,8 +5772,8 @@ This is just for insurance.  No other threads should be able to access |current_
 
        cerr_strm << thread_name << "ERROR! In `Scanner_Type::clear_current_picture_func':"
                  << endl << "`current_picture_entry->unlock()' failed. "
-                 << "Exiting function with return value 1."; 
-       
+                 << "Exiting function with return value 1.";
+
        cerr_message(cerr_strm, error_stop_value);
        cerr_strm.str("");
 
@@ -5796,28 +5786,27 @@ This is just for insurance.  No other threads should be able to access |current_
 
 #if DEBUG_COMPILE
    if (DEBUG)
-   { 
+   {
        cerr_strm << thread_name << "Exiting `Scanner_Type::clear_current_picture_func' "
-                 << "successfully with return value 0."; 
-       
+                 << "successfully with return value 0.";
+
        cerr_message(cerr_strm);
        cerr_strm.str("");
-    
-   }  
-#endif /* |DEBUG_COMPILE|  */@; 
+
+   }
+#endif /* |DEBUG_COMPILE|  */@;
 
 @q ***** (5) @>
 
    return 0;
 
-}  /* End of |Scanner_Type::clear_current_picture_func| definition  */  
-
+}  /* End of |Scanner_Type::clear_current_picture_func| definition  */
 
 @q ** (2) @>
 
 @q * Putting |Scanner_Type| functions together.@>
 @* Putting {\bf Scanner\_Type} functions together.
-  
+
 @ This is what's compiled.
 @c
 @<Include files@>@;
@@ -5842,4 +5831,4 @@ This is just for insurance.  No other threads should be able to access |current_
 @q indent-tabs-mode:nil @>
 @q eval:(outline-minor-mode) @>
 @q End: @>
- 
+
