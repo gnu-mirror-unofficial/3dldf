@@ -79,6 +79,8 @@ possible to use |beginfig| in loops.
   
 @=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional@>@/
 {
+@q ****** (6) @>
+
    @<Common declarations for rules@>@;
 
    if (scanner_node->beginfig_flag)
@@ -96,20 +98,53 @@ possible to use |beginfig| in loops.
        cerr_message(cerr_strm);
        cerr_strm.str("");
    }
+
+@q ****** (6) @>
+
    else
    {
       int i = static_cast<int>(floor(fabs(@=$3@>) + .5)); 
 
-      if (!scanner_node->beginchar_flag)
-      {
-         scanner_node->clear_current_picture_func();      
-      }
+@q ******* (7) @>
+
+       if (!scanner_node->beginchar_flag && ((clear_current_picture == true && @=$5@> >= 0) || @=$5@> > 0))
+       {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+                 cerr_strm << thread_name 
+                           << "In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
+                           << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                           << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
+                           << endl 
+                           << "`scanner_node->beginchar_flag'           == " << scanner_node->beginchar_flag
+                           << endl 
+                           << "Global variable `clear_current_picture' == " << clear_current_picture
+                           << endl 
+                           << "`clear_current_picture_optional'        == " << @=$5@> 
+                           << endl 
+                           << "Clearing `current_picture'.";
+
+               log_message(cerr_strm);
+               cerr_message(cerr_strm);
+               cerr_strm.str("");
+
+           }       
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           scanner_node->clear_current_picture_func();      
+
+       } /* |if| */
+
+@q ******* (7) @>
 
       status = Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
 
       scanner_node->beginfig_flag  = true;
 
-   }
+   }  /* |else| */
+
+@q ****** (6) @>
 
    @=$$@> = static_cast<void*>(0);
 
@@ -258,10 +293,13 @@ Added this rule.
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
 @=RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional@>@/
 {
+@q ****** (6) @>
+
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -279,6 +317,8 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q ****** (6) @>
+
    if (scanner_node->beginchar_flag)
    {
        cerr_strm << thread_name 
@@ -294,14 +334,47 @@ Added this rule.
        cerr_message(cerr_strm);
        cerr_strm.str("");
    }
+
+@q ****** (6) @>
+
    else
    {
+@q ******* (7) @>
+
        string *s = static_cast<string*>(@=$3@>);
 
-       if (!scanner_node->beginfig_flag)
+@q ******* (7) @>
+
+       if (!scanner_node->beginfig_flag && ((clear_current_picture == true && @=$12@> >= 0) || @=$12@> > 0))
        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+                 cerr_strm << thread_name 
+                           << "In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
+                           << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                           << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
+                           << endl 
+                           << "`scanner_node->beginfig_flag'           == " << scanner_node->beginfig_flag
+                           << endl 
+                           << "Global variable `clear_current_picture' == " << clear_current_picture
+                           << endl 
+                           << "`clear_current_picture_optional'        == " << @=$12@> 
+                           << endl 
+                           << "Clearing `current_picture'.";
+
+               log_message(cerr_strm);
+               cerr_message(cerr_strm);
+               cerr_strm.str("");
+
+           }       
+#endif /* |DEBUG_COMPILE|  */@; 
+
            scanner_node->clear_current_picture_func();      
-       }
+
+       } /* |if| */
+
+@q ******* (7) @>
 
        status = Scan_Parse::beginfig_func(scanner_node, 
                                           0, 
@@ -315,7 +388,12 @@ Added this rule.
        s = 0;
 
        scanner_node->beginchar_flag  = true;
-   }
+
+@q ******* (7) @>
+
+   } /* |else| */
+
+@q ****** (6) @>
 
    @=$$@> = static_cast<void*>(0);
 
@@ -337,10 +415,12 @@ Added this rule.
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
 @=RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional@>@/
 {
+@q ****** (6) @>
+
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -358,21 +438,30 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
+@q ****** (6) @>
+@
+@<Define rules@>= 
+
    if (scanner_node->beginchar_flag)
    {
        cerr_strm << thread_name 
-          << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
-                << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
-          << endl 
-          << "`scanner_node->beginchar_flag' == `true'."
-          << endl 
-          << "Already collecting a character.  Continuing.";
+                 << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
+                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                 << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
+                 << endl 
+                 << "`scanner_node->beginchar_flag' == `true'."
+                 << endl 
+                 << "Already collecting a character.  Continuing.";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
        cerr_strm.str("");
    }
+
+@q ****** (6) @>
+@
+@<Define rules@>= 
+
    else
    {
 
@@ -382,10 +471,40 @@ Added this rule.
 
        temp_strm << i;
 
-       if (!scanner_node->beginfig_flag)
+@q ******* (7) @>
+
+       if (!scanner_node->beginfig_flag && ((clear_current_picture == true && @=$12@> >= 0) || @=$12@> > 0))
        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+                 cerr_strm << thread_name 
+                           << "In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
+                           << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
+                           << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
+                           << endl 
+                           << "`scanner_node->beginfig_flag'           == " << scanner_node->beginfig_flag
+                           << endl 
+                           << "Global variable `clear_current_picture' == " << clear_current_picture
+                           << endl 
+                           << "`clear_current_picture_optional'        == " << @=$12@> 
+                           << endl 
+                           << "Clearing `current_picture'.";
+
+               log_message(cerr_strm);
+               cerr_message(cerr_strm);
+               cerr_strm.str("");
+
+           }       
+#endif /* |DEBUG_COMPILE|  */@; 
+
            scanner_node->clear_current_picture_func();      
-       }
+
+       } /* |if| */
+
+@q ******* (7) @>
+@
+@<Define rules@>= 
 
        status = Scan_Parse::beginfig_func(scanner_node, 
                                           0, 
@@ -396,7 +515,10 @@ Added this rule.
                                           @=$9@>); 
 
        scanner_node->beginchar_flag  = true;
-   }
+
+   }  /* |else| */
+
+@q ****** (6) @>
 
    @=$$@> = static_cast<void*>(0);
 };
