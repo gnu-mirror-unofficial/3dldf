@@ -1768,6 +1768,9 @@ Moved this function definition from \filename{paths.web} to this file (\filename
 This was needed because it now refers to |namespace Scan_Parse|.
 \ENDLOG 
 
+@q ** (2) @>
+
+
 @<Define |Path| functions@>=
 void
 Path::output(Scanner_Node scanner_node, unsigned int output_command_arg)
@@ -1778,15 +1781,6 @@ Path::output(Scanner_Node scanner_node, unsigned int output_command_arg)
 #if DEBUG_COMPILE
    bool DEBUG = false; /* |true| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
-
-   bool local_do_metafont = (metafont_output && output_command_arg & Scan_Parse::ENDCHAR_COMMAND) ? true : false;
-
-   bool local_do_metapost = (metapost_output && output_command_arg & Scan_Parse::ENDFIG_COMMAND) ? true : false;
-
-   if (!(local_do_metafont || local_do_metapost))
-   {
-       return;
-   }
 
    stringstream cerr_strm;
 
@@ -1816,16 +1810,37 @@ Path::output(Scanner_Node scanner_node, unsigned int output_command_arg)
       }
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   bool local_do_metafont = (metafont_output && output_command_arg & Scan_Parse::ENDCHAR_COMMAND) ? true : false;
+   bool local_do_metapost = (metapost_output && output_command_arg & Scan_Parse::ENDFIG_COMMAND) ? true : false;
+
+   if (!(local_do_metafont || local_do_metapost))
+   {
+       cerr << "In `Path::output':  `local_do_metafont' and `local_do_metapost' are both `false'."
+            << endl 
+            << "Not outputting.  Exiting function with void return value."
+            << endl;
+      
+       return;
+   }
+
+@q **** (4) @>
+
    Output_Struct* os_mf;
    Output_Struct* os_mp;
 
-   if (local_do_metafont)
-      os_mf = scanner_node->out[Run_State::METAFONT];
-   if (local_do_metapost)
-      os_mp = scanner_node->out[Run_State::METAPOST];
+   ofstream* out_stream_mf  = 0;
+   ofstream* out_stream_mp  = 0;
 
-   ofstream* out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
-   ofstream* out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
+   if (local_do_metafont)
+   {
+      os_mf = scanner_node->out[Run_State::METAFONT];
+      out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
+   }
+   if (local_do_metapost)
+   {
+      os_mp = scanner_node->out[Run_State::METAPOST];
+      out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
+   }
 
    if (do_output == false)
    {
@@ -1917,7 +1932,7 @@ Revised the code that checks the value of |arrow|.
 
         if (local_do_metafont)
         {
-            status = sub_output_draw(scanner_node, out_stream_mf);
+            status = sub_output_draw(scanner_node, out_stream_mf, output_command_arg);
 
             if (status != 0)
             {
@@ -1954,7 +1969,7 @@ Revised the code that checks the value of |arrow|.
 
         if (local_do_metapost)
         {
-            status = sub_output_draw(scanner_node, out_stream_mp);
+            status = sub_output_draw(scanner_node, out_stream_mp, output_command_arg);
 
             if (status != 0)
             {
@@ -2142,7 +2157,7 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
               if (local_do_metafont)
               {
-                  status = sub_output_draw(scanner_node, out_stream_mf);
+                  status = sub_output_draw(scanner_node, out_stream_mf, output_command_arg);
 
                   if (status != 0)
                      {
@@ -2181,7 +2196,7 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
               if (local_do_metapost)
               {
-                  status = sub_output_draw(scanner_node, out_stream_mp);
+                  status = sub_output_draw(scanner_node, out_stream_mp, output_command_arg);
 
                   if (status != 0)
                      {
@@ -2408,7 +2423,7 @@ Now calling |Path::sub_output_draw|.
                    *out_stream_mf << "unfill " << **point_iter++;
                    output_path(out_stream_mf);
                    *out_stream_mf << ";" << endl << flush;
-                   status = sub_output_draw(scanner_node, out_stream_mf);
+                   status = sub_output_draw(scanner_node, out_stream_mf, output_command_arg);
 
 @q ******* (7) @>
 
@@ -2457,7 +2472,7 @@ Now calling |Path::sub_output_draw|.
                    output_path(out_stream_mp);
                    *out_stream_mp << ";" << endl << flush;
 
-                   status = sub_output_draw(scanner_node, out_stream_mp);
+                   status = sub_output_draw(scanner_node, out_stream_mp, output_command_arg);
 
                    if (status != 0)
                    {
@@ -2552,6 +2567,525 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
     return;
 
 }/* End of |Path::output(Scanner_Node scanner_node)| definition.  */
+
+@q * (1) |Path::sub_output_draw|.  @>
+@ |Path::sub_output_draw|.  
+
+\LOG
+\initials{LDF 2022.04.15.}
+Moved this function definition from \filename{paths.web} to this file (\filename{pctfncs0.web}).
+This was necessary because it now refers to |Scan_Parse::ENDCHAR_COMMAND| and 
+|Scan_Parse::ENDFIG_COMMAND|.
+\ENDLOG 
+
+@<Define |Path| functions@>=
+int
+Path::sub_output_draw(Scanner_Node scanner_node, ofstream* out_stream, unsigned int output_command_arg)
+{
+
+@q ***** (5) Preliminaries.@>   
+
+#if DEBUG_COMPILE
+   bool DEBUG = false; /* |true| */ @; 
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   bool local_do_metafont = (metafont_output && output_command_arg == Scan_Parse::ENDCHAR_COMMAND) ? true : false;
+   bool local_do_metapost = (metapost_output && output_command_arg == Scan_Parse::ENDFIG_COMMAND) ? true : false;
+
+   if (!(local_do_metafont || local_do_metapost))
+   {
+      return 0;
+   }
+
+   stringstream cerr_strm;
+
+   bool error_stop_value   = true;
+   bool warning_stop_value = true;
+   string thread_name      = "";
+
+   if (scanner_node)
+      scanner_node->get_thread_name_and_stop_values(&thread_name,
+                                                    &error_stop_value,
+                                                    &warning_stop_value);
+
+   using namespace Scan_Parse;
+
+   int status;
+
+@q ***** (5).@> 
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         cerr_strm << thread_name 
+                   << "Entering `Path::sub_output_draw'.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+    vector<string>::const_iterator connector_iter;
+    vector<Connector_Type*>::const_iterator connector_type_iter;
+
+    string connector_string;
+
+@q ***** (5).@>
+
+@
+\LOG
+\initials{LDF 2005.03.18.}
+Now testing that |*this| is of a type consisting of straight lines,
+i.e., |POLYGON|, |TRIANGLE|, |RECTANGLE|, or |REG_POLYGON|.
+This code won't work for curved |Paths| yet.
+
+\initials{LDF 2005.03.18.}
+Added code for handling |pen_vector| and |dash_pattern_vector|.
+
+\initials{LDF 2005.03.19.}
+Changed this conditional, so that |draw_color_vector->ctr|, 
+|pen_vector->ctr|, or |dash_pattern_vector->ctr| must 
+be greater than 1.  Previously, they had to be greater than 0.
+
+\initials{LDF 2005.04.05.}
+Added code for suppressing output if the type of the current 
+|Pen| is |Pen::NULL_PEN|.
+\ENDLOG 
+
+@<Define |Path| functions@>=
+
+        if (    (   shape_type == POLYGON_TYPE 
+                 || shape_type == TRIANGLE_TYPE 
+                 || shape_type == RECTANGLE_TYPE 
+                 || shape_type == REG_POLYGON_TYPE)
+             && (  (    draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                    && draw_color_vector->ctr > 1)
+                 || (   pen_vector != static_cast<Pointer_Vector<Pen>*>(0) 
+                     && pen_vector->ctr > 1)
+                 || (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                     && dash_pattern_vector->ctr > 1))
+           )
+
+        {
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     cerr_strm << thread_name 
+                               << "In `Path::sub_output_draw':"
+                               << endl 
+                               << "`At least one vector is non-empty.";
+
+                     log_message(cerr_strm);
+                     cerr_message(cerr_strm);
+                     cerr_strm.str("");   
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+  
+               vector<Color*>::const_iterator color_iter;
+               vector<Pen*>::const_iterator pen_iter;
+               vector<Dash_Pattern*>::const_iterator dash_pattern_iter;
+
+               bool do_colors;
+               bool do_pens;
+               bool do_dash_patterns;
+
+@q ****** (6).@> 
+
+              if (local_do_metafont)
+                 do_colors = false;
+              else
+              {             
+                  status = adjust_draw_color_vector();
+
+                  if (status == 0)
+                  {
+                      color_iter = draw_color_vector->v.begin();
+                      do_colors = true;
+                  }
+                  else
+                     do_colors = false;
+              }
+
+@q ****** (6).@> 
+
+               status = adjust_pen_vector();
+
+               if (status == 0)
+                  {
+                     pen_iter = pen_vector->v.begin();
+                     do_pens = true;
+                  }
+               else
+                  do_pens = false;
+
+               status = adjust_dash_pattern_vector();
+
+               if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                   && dash_pattern_vector->ctr > 0)
+               {
+                   dash_pattern_iter = dash_pattern_vector->v.begin();
+                   do_dash_patterns = true;
+               }
+               else
+                  do_dash_patterns = false;
+
+               adjust_connectors();
+             
+               connector_type_iter = connector_type_vector.begin();
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                  {
+                      cerr << "`do_pens' == " << do_pens
+                           << endl;
+
+                      if (do_pens && pen_vector != static_cast<Pointer_Vector<Pen>*>(0))
+                         cerr << "`pen_vector->v.size' == " 
+                              << pen_vector->v.size()
+                              << endl;
+
+                      cerr << "`do_dash_patterns' == " << do_dash_patterns
+                           << endl;
+
+                      if (do_dash_patterns && dash_pattern_vector 
+                             != static_cast<Pointer_Vector<Dash_Pattern>*>(0))
+                         cerr << "`dash_pattern_vector->v.size' == " 
+                              << dash_pattern_vector->v.size()
+                              << endl;
+                  }            
+#endif /* |DEBUG_COMPILE|  */@;
+
+@q ****** (6) Draw the first segment.@> 
+
+@ Draw the first segment.  
+If |points.size() == 1| no connector is used in the {\bf draw} command, 
+and this functions returns after writing it to |*out_stream|.
+In addition, the first segment also requires special handling if 
+|arrow == DOUBLE_ARROW|. 
+\initials{LDF 2005.03.13.}
+
+@<Define |Path| functions@>=
+
+@q ******* (7) @> 
+
+               if (   (arrow == DOUBLE_ARROW && points.size() == 1)
+                   && (   !do_pens 
+                       || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
+               {
+
+                  *out_stream << "drawarrow " << *points[0];
+
+                  if (local_do_metapost && do_colors)
+                     *out_stream << "withcolor " << **color_iter;
+
+                  if (do_pens)
+                     *out_stream << " withpen " << **pen_iter;
+
+                  if (do_dash_patterns)
+                     *out_stream << **dash_pattern_iter;                          
+
+                   *out_stream << ";" << endl << flush;
+
+                   return 0; 
+
+                  }
+
+@q ******* (7).@> 
+
+               else if (   (arrow == DOUBLE_ARROW && points.size() > 1)
+                        && (   !do_pens 
+                            || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))
+
+               {
+
+                   *out_stream << "drawarrow " << *points[1] 
+                               << **connector_type_iter << *points[0]; 
+
+                   if (local_do_metapost && do_colors)
+                      *out_stream << endl << "withcolor " << **color_iter;
+
+                   if (do_pens)
+                      *out_stream << endl << "withpen " << **pen_iter;
+
+                   if (do_dash_patterns)
+                      *out_stream << endl << **dash_pattern_iter;
+
+                    *out_stream << ";" << endl << flush;
+
+               }  
+
+@q ******* (7).@>              
+
+               else if (   (arrow != DOUBLE_ARROW && points.size() == 1)
+                        && (   !do_pens 
+                            || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
+                  {
+                      *out_stream << "draw " 
+                                  << *points[0];
+
+                      if (local_do_metapost && do_colors)
+                         *out_stream << " withcolor " << **color_iter;
+
+                      if (do_pens)
+                         *out_stream << " withpen " << **pen_iter;
+
+                      if (do_dash_patterns)
+                         *out_stream << **dash_pattern_iter;                          
+
+                       *out_stream << ";" << endl << flush;
+
+                       return 0;
+
+                  }  
+
+@q ******* (7) @> 
+
+               else if (   !do_pens 
+                        || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
+
+               {
+                    *out_stream << "draw " << *points[0] 
+                                << *connector_type_iter << *points[1];
+
+                   if (local_do_metapost && do_colors)
+                      *out_stream << endl << "withcolor " << **color_iter;
+
+                   if (do_pens)
+                      *out_stream << endl << "withpen " << **pen_iter;
+
+                   if (do_dash_patterns)
+                      *out_stream << endl << **dash_pattern_iter;
+
+                    *out_stream << ";" << endl << flush;
+
+               }  
+
+@q ****** (6) Draw the middle segments.@> 
+
+@ Draw the middle segments.
+\initials{LDF 2005.03.13.}
+
+@<Define |Path| functions@>=
+
+               int i = 1;
+               int j = points.size() - 2;
+               int k;
+
+               if (cycle_switch)
+                  {
+                     ++j;
+                     k = 0;
+                  }
+               else
+                  k = j + 1;
+
+@q ******* (7) @> 
+
+               for (; i < j; ++i)
+               {
+                     
+                      ++connector_iter;
+                      ++connector_type_iter;
+
+                      if (do_colors)
+                         ++color_iter;
+
+                      if (do_pens)
+                         ++pen_iter;
+   
+                      if (do_dash_patterns) 
+                        ++dash_pattern_iter;
+                     
+                      if (   !do_pens 
+                          || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
+
+                         {
+                             *out_stream << "draw " << *points[i]   
+                                         << *connector_type_iter << *points[i + 1];
+
+                             if (local_do_metapost && do_colors)
+                                *out_stream << endl << "withcolor " << **color_iter;
+
+                             if (do_pens)
+                                *out_stream << endl << " withpen " << **pen_iter;
+
+                             if (do_dash_patterns)
+                                *out_stream << endl << **dash_pattern_iter;
+
+                              *out_stream << ";" << endl << flush;
+
+                         }
+
+@q ******** (8) @> 
+
+               }  /* |for|  */
+
+@q ******* (7) @> 
+
+@q ****** (6) Draw the last segment.@> 
+
+@ Draw the last segment.  
+This requires special handling because |arrow| could be equal to 
+|SINGLE_ARROW| or |DOUBLE_ARROW|. 
+\initials{LDF 2005.03.13.}
+
+@<Define |Path| functions@>=
+
+               ++connector_iter;
+               ++connector_type_iter;
+
+               if (do_colors)
+                  ++color_iter;
+
+               if (do_pens)
+                  ++pen_iter;
+   
+               if (do_dash_patterns) 
+                 ++dash_pattern_iter;
+
+               if (   !do_pens 
+                   || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
+
+                  {
+       
+                      if (arrow == NO_ARROW)
+                         *out_stream << "draw ";
+                      else
+                         *out_stream << "drawarrow ";
+
+                         *out_stream << *points[j] 
+                                     << *connector_type_iter << *points[k];
+
+                       if (local_do_metapost && do_colors)
+                          *out_stream << endl << "withcolor " << **color_iter;
+
+                       if (do_pens)
+                          *out_stream << endl << "withpen " << **pen_iter;
+
+                       if (do_dash_patterns)
+                          *out_stream << endl << **dash_pattern_iter;
+
+                       *out_stream << ";" << endl << flush;
+                  }
+
+@q ****** (6).@> 
+               
+        }  /*  |if|  */
+
+@q ***** (5).@>   
+@
+\LOG
+\initials{LDF 2005.03.18.}
+@:BUG FIX@> BUG FIX:  Now setting |connector_iter = connectors.begin|.
+
+\initials{LDF 2005.04.05.}
+Added code for suppressing output if the type of the current 
+|Pen| is |Pen::NULL_PEN|.
+\ENDLOG 
+
+@<Define |Path| functions@>=
+
+        else if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+                 || pen_vector->ctr == 0 
+                 || pen_vector->v[0]->get_type() != Pen::NULL_PEN)  
+                
+                 /*  Not dividing |Path|.  */
+           {
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                  {
+                      if (pen_vector == static_cast<Pointer_Vector<Pen>*>(0))
+                         cerr << "`pen_vector' == 0." << endl;
+
+                      else 
+                         cerr << "`pen_vector->ctr' == " << pen_vector->ctr
+                              << endl 
+                              << "`pen_vector->v[0]->get_type' == "
+                              << pen_vector->v[0]->get_type() << endl;
+
+                  }
+#endif /* |DEBUG_COMPILE|  */@; 
+ 
+               vector<Point*>::const_iterator point_iter = points.begin();
+
+               if (connector_type_vector.size() == 0)
+               {
+                   connector_type_vector.push_back(create_new<Connector_Type>(0));
+                   connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
+                   connector_type_vector.back()->type1 = Connector_Type::CT_NULL_TYPE;
+                   connector_type_vector.back()->connector_string = "--";
+                   connector_type_vector.back()->pt0 = 0;
+                   connector_type_vector.back()->pt1 = 0;
+               }
+                  
+               connector_type_iter = connector_type_vector.begin();
+
+#if DEBUG_COMPILE
+               if (DEBUG)
+                 {
+                     cerr_strm << thread_name << "In `Path::sub_output_draw':"
+                               << endl 
+                               << "Not drawing segments individually.";
+
+                     log_message(cerr_strm);
+                     cerr_message(cerr_strm);
+                     cerr_strm.str("");   
+                 }         
+#endif /* |DEBUG_COMPILE|  */@; 
+
+               if (arrow == SINGLE_ARROW)
+                 *out_stream << "drawarrow " << **point_iter++;
+               else if (arrow == DOUBLE_ARROW)
+                 *out_stream << "drawdblarrow " << **point_iter++;
+               else
+                 *out_stream << "draw " << **point_iter++;
+              
+#if 1                 
+               output_path(out_stream);
+#endif 
+
+               if (   local_do_metapost && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
+                   && draw_color_vector->ctr > 0)
+                  *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
+
+               if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
+                  *out_stream << endl << "withpen " << *(pen_vector->v[0]) << " ";
+
+               if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+                   && dash_pattern_vector->ctr > 0)
+                  *out_stream << endl << *(dash_pattern_vector->v[0]);
+
+               *out_stream << ";\n" << flush;
+
+           }  /*  |else if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
+                            || pen_vector->ctr == 0 
+                            || pen_vector->v[0]->get_type() != Pen::NULL_PEN)| 
+                  (Not dividing |Path|.)  */
+
+@q ***** (5).@>   
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+     {
+         cerr_strm << thread_name 
+                   << "Exiting `Path::sub_output_draw' successfully "
+                   << "with return value 0.";
+
+         log_message(cerr_strm);
+         cerr_message(cerr_strm);
+         cerr_strm.str("");
+     }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+}  /* End of |sub_output_draw| definition.  */
+
+
 
 @q * (1) Putting Picture functions together.@>
 @* Putting {\bf Picture} functions together.

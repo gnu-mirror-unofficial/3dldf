@@ -1,15 +1,15 @@
-picture v;
+
 
 beginfig(1);
   drawdot origin;
-  message "currentpicture:";
-  show currentpicture;
-  message "v:";
-  v := currentpicture;
-  show v;
-endfig;
+  draw origin -- (1, 1);
+endfig with_projection parallel_x_y;
 
-show currentpicture;
+beginchar("A", 1cm, 1cm, 0);
+  drawdot origin;
+  draw (2, 2) -- (3, 3);
+endchar with_projection parallel_x_y;
+
 
 end;
 
@@ -20,7 +20,7 @@ endfig;
 
 end;
 
-beginchar("A", 1cm, 1cm, 0);
+
 drawdot origin;
 circle c;
 c := unit_circle scaled (1cm, 0, 1cm);
