@@ -1274,8 +1274,6 @@ Point::output(Scanner_Node scanner_node, unsigned int output_command_arg)
   ofstream* out_stream_mf  = 0;
   ofstream* out_stream_mp  = 0;
 
-
-
   if (local_do_metafont) 
   {
      os_mf = scanner_node->out[Run_State::METAFONT];
@@ -1357,7 +1355,6 @@ Now writing ``{\bf undrawdot}'' to |*out_stream| when
                     << measurement_units
                     << ", " << projective_coordinates[1]
                     << measurement_units << ")";
-
 
 @q **** (4) Handle |Color|.  @>
 @ Handle |Color|.
@@ -1527,8 +1524,6 @@ This failed when the |Pen| was scaled by |(1cm, 1cm, 1cm)|.
 
                         << endl << "T endgroup" << endl;
 
-
-
     }  /* |if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)|  */
 
 @q **** (4) Finish and exit function.  @>
@@ -1552,7 +1547,6 @@ This failed when the |Pen| was scaled by |(1cm, 1cm, 1cm)|.
   return;
 
 } /* End of |Point::output| definition  */
-
 
 @q * (1) |Path::output| definition.  @>
 @ |Path::output| definition.
@@ -1678,7 +1672,6 @@ also shouldn't be possible, they would  catch it, too.
 @
 @<Define |Path| functions@>=
 
-
   vector <Point*>::iterator point_iter = points.begin();
 
   vector <Connector_Type*>::iterator connector_type_iter = connector_type_vector.begin();
@@ -1785,7 +1778,6 @@ Revised the code that checks the value of |arrow|.
         }  /* |if (local_do_metapost)| */
 
 @q ***** (5) @>
-
 
     } /* |if (fill_draw_value == DRAW_VALUE)|  */
 
@@ -2068,7 +2060,6 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 
             } /* |if (dash_pattern_vector != 0 && dash_pattern_vector->ctr > 0)|  */
 
-
          if (local_do_metafont)
             *out_stream_mf << ";\n" << flush;
          if (local_do_metapost)
@@ -2331,8 +2322,6 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
           return;
 
       }  /* |else| (Invalid |fill_draw_value|)  */
-
-
 
 @q **** (4) Return.@>
 @ Return.
