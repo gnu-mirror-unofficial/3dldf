@@ -11713,7 +11713,7 @@ Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors)
 @q **** (4) @>
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 
    if (DEBUG)
    { 
@@ -11746,7 +11746,7 @@ Scan_Parse::show_func(C* c, string text, void* parameter, int with_connectors)
 #if DEBUG_COMPILE
   if (DEBUG)
         {
-           cerr_strm << thread_name << "Entering `Scan_Parse::show_func().'";
+           cerr_strm << thread_name << "Entering `Scan_Parse::show_func'.";
            cerr_message(cerr_strm);
            cerr_strm.str("");
         }
@@ -11779,6 +11779,18 @@ else  /* |!c|  */
 
      delete c;
      c = 0;
+
+#if DEBUG_COMPILE
+
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Scan_Parse::show_func' successfully with return value 0." 
+            << endl;
+   }  
+
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
 
      return 0;
 

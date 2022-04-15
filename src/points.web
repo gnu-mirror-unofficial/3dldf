@@ -5684,14 +5684,16 @@ Point::show(string text,
             const real factor,
             int show_connectors) const
 {
-    bool DEBUG = false; /* |true| */@; 
-
-    vector<char> coords_vector;
-
-    cerr_mutex.lock();
+#if DEBUG_COMPILE
+    bool DEBUG = true; /* |false| */@; 
 
     if (DEBUG)
+    { 
        cerr << "Entering `Point::show'." << endl;
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    vector<char> coords_vector;
 
     if (text != "")
       cerr  << text << endl;
@@ -5736,16 +5738,12 @@ Point::show(string text,
                << "Exiting function with void return value."
                << endl;
 
-          cerr_mutex.unlock();
-
           return;
       }
 
   if (DEBUG) 
   {
-    cerr_mutex.unlock();
     transform.show("In `Point.:show': Transform before apply_transform");
-    cerr_mutex.lock();
   }
 
   valarray<real> v;
@@ -5772,18 +5770,19 @@ Point::show(string text,
 
   if (DEBUG)
   {
-      cerr_mutex.unlock();
       transform.show("In `Point.:show': Transform after apply_transform");
-      cerr_mutex.lock();
   }  
 
   cerr << endl;
 
-  if (DEBUG)
-     cerr << "Exiting `Point::show' successfully with void return value." 
-          << endl;
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+        cerr << "Exiting `Point::show' successfully with void return value." 
+             << endl;    
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-  cerr_mutex.unlock();
 
   return;
 
@@ -10921,7 +10920,7 @@ Picture::clear(void)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #if DEBUG_COMPILE
@@ -10929,19 +10928,35 @@ Picture::clear(void)
     cerr << "Entering Picture::clear().\n";
 #endif /* |DEBUG_COMPILE|  */@; 
 
+cerr << "Error after here 1." << endl; 
+
   transform.reset();
 
+cerr << "Error after here 2." << endl; 
+
   if (shapes.size() <= 0 && labels.size() <= 0)
-    return;
+  {
+     cerr << "In `Picture::clear':  Returning." << endl;
+     return;
+  }
+
+
+cerr << "Error after here 3." << endl; 
 
   for (vector<Shape*>::iterator iter = shapes.begin();
        iter != shapes.end();
        iter++)
     {
+cerr << "Error after here 4." << endl; 
       (*iter)->clear();
       delete (*iter);
       *iter = 0;  
+
+cerr << "Error after here 5." << endl; 
+
     }
+
+cerr << "Error after here 6." << endl; 
 
 @ 
 \LOG
@@ -10956,23 +10971,33 @@ Removed call to |delete (*iter)->pt|.  |Label::pt| is now deleted in
        iter != labels.end();
        iter++)
     {
-
+cerr << "Error after here 7." << endl; 
       delete *iter;
       *iter = 0;
+cerr << "Error after here 8." << endl; 
+
     }
+
+cerr << "Error after here 9." << endl; 
 
 @
 @<Define |Picture| functions@>= 
 
   shapes.clear();
+
+cerr << "Error after here 10." << endl; 
+
+
   labels.clear();
+
+cerr << "Error after here 11." << endl;
 
 #if DEBUG_COMPILE
    if (DEBUG) 
       cerr << "Exiting Picture::clear().\n";
 #endif /* |DEBUG_COMPILE|  */@;   
 
-}
+}  /* End of |Picture::clear| definition  */
 
 @q ** (2) Output.@> 
 @*1 Output.

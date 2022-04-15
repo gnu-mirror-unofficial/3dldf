@@ -316,6 +316,8 @@ class Picture
 
 {
 
+   friend Id_Map_Entry_Type;
+
 @q *** Private data members.@>
 
 @ Private data members.
@@ -327,7 +329,7 @@ class Picture
     vector<Label*> labels;
     bool do_labels;
 
-@q *** Public data and function members.@>
+@q *** (3) Public data and function members.@>
 @ Public data and function members.
 \initials{LDF 2004.06.28.}
 
@@ -458,8 +460,11 @@ Picture::~Picture(void)
          << endl;
 #endif /* |DEBUG_COMPILE|  */@; 
 
-  clear();
-
+  if (shapes.size() > 0)
+     shapes.clear();
+  if (labels.size() > 0)
+     labels.clear();
+  
   return;
 
 }
@@ -711,8 +716,8 @@ Picture::set_transform(const Transform& t)
 Transform
 operator*=(const Transform& t);
 
-@q * Show.@>
-@* Show.
+@q * (1) Show.  @>
+@ Show.
 @^\cfunc{Picture}{show}@>
 
 \LOG
@@ -729,7 +734,7 @@ Removed code for locking and unlocking |mutex|.  Code that calls this function
 should ensure that this is done.
 \ENDLOG 
 
-@q ** Declaration.@>
+@q ** (2) Declaration.@>
 
 @<Declare |Picture| functions@>=
 int
@@ -745,7 +750,13 @@ Picture::show(string text, bool stop)
   int status = 0;
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
+
+   if (DEBUG)
+   { 
+       cerr << "Entering `Picture::show'." << endl;
+   }  
+
 #endif /* |DEBUG_COMPILE|  */@; 
 
     cerr << "Showing picture: " << text << "\n" ;
@@ -757,7 +768,9 @@ Picture::show(string text, bool stop)
 
     for (vector<Shape*>::iterator iter = shapes.begin();
          iter != shapes.end(); ++iter)
+    {
       (**iter).show();
+    }
     if (stop)
       {
           cerr << "In `Picture::show':  Type <RETURN> to continue.\n";
@@ -773,8 +786,7 @@ Picture::show(string text, bool stop)
 
 #if DEBUG_COMPILE
    if (DEBUG)
-     cerr << "Exiting `Picture::show' with return value 0 "
-          << "(success)." << endl ; 
+      cerr << "Exiting `Picture::show' with return value 0 (success)." << endl; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   return 0;

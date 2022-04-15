@@ -538,6 +538,8 @@ but I would like to know why it fails.
 Mutex_Type::~Mutex_Type(void)
 {
 
+   return;  /* LDF 2022.04.15. */
+
    stringstream cerr_strm;
 
 #if DEBUG_COMPILE
@@ -814,6 +816,8 @@ inline
 int 
 trylock(void)
 {
+  return 0; /* LDF 2022.04.15. */
+
   return pthread_mutex_trylock(&inner_mutex);
 }
 
