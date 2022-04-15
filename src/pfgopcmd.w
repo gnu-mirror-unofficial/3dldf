@@ -411,7 +411,7 @@ Added this type declaration.
 \ENDLOG
 
 @<Type declarations for non-terminal symbols@>=
-@=%type <pointer_value> clear_current_picture_optional@>
+@=%type <int_value> clear_current_picture_optional@>
 
 @q **** (4) clear_current_picture_optional --> /* EMPTY  */@>   
 @*3 \§clear currentpicture optional>$\longrightarrow$ \.{EMPTY}.
@@ -441,7 +441,7 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-   @=$$@> = static_cast<void*>(0);
+   @=$$@> = 0;
 };
 
 
