@@ -49,11 +49,11 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-@q *** (3) command --> BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS. @> 
+@q *** (3) command --> BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional. @> 
 
 @*2 \§command> $\longrightarrow$ 
 \.{BEGINFIG} \.{LEFT\_PARENTHESIS}' \§numeric expression> 
-\.{RIGHT\_PARENTHESIS}.
+\.{RIGHT\_PARENTHESIS} \§clear currentpicture optional>.
 
 \LOG
 \initials{LDF 2004.06.19.}  
@@ -77,7 +77,7 @@ possible to use |beginfig| in loops.
 @ 
 @<Define rules@>= 
   
-@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS@>@/
+@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional@>@/
 {
    @<Common declarations for rules@>@;
 
@@ -256,7 +256,7 @@ Added this rule.
   
 @=command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA@>@/
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
-@=RIGHT_PARENTHESIS character_comment_optional@>@/
+@=RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional@>@/
 {
    @<Common declarations for rules@>@;
 
@@ -267,7 +267,7 @@ Added this rule.
       cerr_strm << thread_name 
                 << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional'." << endl;
+                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional'." << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -284,7 +284,7 @@ Added this rule.
        cerr_strm << thread_name 
           << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS STRING COMMA" << endl 
                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional':"
+                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
           << endl 
           << "`scanner_node->beginchar_flag' == `true'."
           << endl 
@@ -335,7 +335,7 @@ Added this rule.
   
 @=command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA@>@/
 @=numeric_expression COMMA numeric_expression COMMA numeric_expression@>@/ 
-@=RIGHT_PARENTHESIS character_comment_optional@>@/
+@=RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional@>@/
 {
    @<Common declarations for rules@>@;
 
@@ -346,7 +346,7 @@ Added this rule.
       cerr_strm << thread_name 
                 << "*** Parser: `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional'." << endl;
+                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional'." << endl;
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
@@ -363,7 +363,7 @@ Added this rule.
        cerr_strm << thread_name 
           << "WARNING! In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
                 << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                << "RIGHT_PARENTHESIS character_comment_optional':"
+                << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
           << endl 
           << "`scanner_node->beginchar_flag' == `true'."
           << endl 
@@ -400,6 +400,50 @@ Added this rule.
 
    @=$$@> = static_cast<void*>(0);
 };
+
+@q *** (3) clear_current_picture_optional.@>   
+@*2 \§clear currentpicture optional>.
+\initials{LDF 2022.04.15.}
+
+\LOG
+\initials{LDF 2022.04.15.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <pointer_value> clear_current_picture_optional@>
+
+@q **** (4) clear_current_picture_optional --> /* EMPTY  */@>   
+@*3 \§clear currentpicture optional>$\longrightarrow$ \.{EMPTY}.
+\initials{LDF 2022.04.15.}
+
+\LOG
+\initials{LDF 2022.04.15.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+  
+@=clear_current_picture_optional: /* Empty  */@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `clear_current_picture_optional: EMPTY'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = static_cast<void*>(0);
+};
+
 
 @q *** (3) character_comment_optional.@>   
 @*2 \§character comment optional>.
