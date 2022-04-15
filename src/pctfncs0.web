@@ -1238,12 +1238,16 @@ each time I output a |Picture|, which is not what I want.
 
 }  /* End of |Picture::output| definition.  */
 
+@q * (1) |Point::output| definition.  @>
+@ |Point::output| definition.
+\initials{LDF 2022.04.15.}
 
-@q * (1) @>
+\LOG
+\initials{LDF 2022.04.15.}
+Moved this function definition from \filename{points.web} to this file (\filename{pctfncs0.web}).
+This was needed because it now refers to |namespace Scan_Parse|.
+\ENDLOG 
 
-@q *** (3) Definition.@>
-
-@ 
 @<Define |Point| functions@>=
 void 
 Point::output(Scanner_Node scanner_node, unsigned int output_command_arg) 
@@ -1550,10 +1554,16 @@ This failed when the |Pen| was scaled by |(1cm, 1cm, 1cm)|.
 } /* End of |Point::output| definition  */
 
 
-@q * (1) @>
+@q * (1) |Path::output| definition.  @>
+@ |Path::output| definition.
+\initials{LDF 2022.04.15.}
 
-@q *** (3) Definition.@>
-@
+\LOG
+\initials{LDF 2022.04.15.}
+Moved this function definition from \filename{paths.web} to this file (\filename{pctfncs0.web}).
+This was needed because it now refers to |namespace Scan_Parse|.
+\ENDLOG 
+
 @<Define |Path| functions@>=
 void
 Path::output(Scanner_Node scanner_node, unsigned int output_command_arg)
