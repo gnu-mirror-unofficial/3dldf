@@ -83,11 +83,31 @@ possible to use |beginfig| in loops.
 
    @<Common declarations for rules@>@;
 
+#if DEBUG_COMPILE
+   DEBUG = true;
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name 
+          << "*** Parser, rule  `command: BEGINFIG LEFT_PARENTHESIS numeric_expression"
+          << endl 
+          << "RIGHT_PARENTHESIS clear_current_picture_optional'." 
+          << endl
+          << "$5 == " << @=$5@> << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
+
    if (scanner_node->beginfig_flag)
    {
        cerr_strm << thread_name 
           << "WARNING! In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
-          << "numeric_expression RIGHT_PARENTHESIS':" 
+          << "numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional':" 
           << endl 
           << "`scanner_node->beginfig_flag' == `true'."
           << endl 
@@ -113,9 +133,8 @@ possible to use |beginfig| in loops.
            if (DEBUG)
            { 
                  cerr_strm << thread_name 
-                           << "In parser, rule `command: BEGINCHAR LEFT_PARENTHESIS INTEGER COMMA" << endl 
-                           << "numeric_expression COMMA numeric_expression COMMA numeric_expression" << endl 
-                           << "RIGHT_PARENTHESIS character_comment_optional clear_current_picture_optional':"
+                           << "In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
+                           << "numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional':" 
                            << endl 
                            << "`scanner_node->beginchar_flag'           == " << scanner_node->beginchar_flag
                            << endl 
@@ -135,6 +154,30 @@ possible to use |beginfig| in loops.
            scanner_node->clear_current_picture_func();      
 
        } /* |if| */
+
+@q ******* (7) @>
+
+#if DEBUG_COMPILE
+      else if (DEBUG)
+      { 
+          cerr_strm << thread_name 
+                    << "In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
+                    << "numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional':" 
+                    << endl 
+                    << "`scanner_node->beginchar_flag'           == " << scanner_node->beginchar_flag
+                    << endl 
+                    << "Global variable `clear_current_picture' == " << clear_current_picture
+                    << endl 
+                    << "`clear_current_picture_optional'        == " << @=$5@> 
+                    << endl 
+                    << "Not clearing `current_picture'.";
+
+          log_message(cerr_strm);
+          cerr_message(cerr_strm);
+          cerr_strm.str("");
+
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
 @q ******* (7) @>
 

@@ -880,9 +880,6 @@ Added this function.
 Added code for writing a |pickup| command to |*out_stream|, if
 the |Pen| stored in the |Id_Map_Entry_Node default_pen| 
 is non-null.
-
-\initials{LDF 2022.04.13.}
-Added code for clearing |current_picture|.
 \ENDLOG 
 
 @q ***** (5) Definition.@>
@@ -1378,39 +1375,6 @@ Added this section.
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    }  /* |if (metapost_output)| */
-
-@q **** (4) Clear |current_picture|, unless a figure or character has been started already.  @>
-
-@ Clear |current_picture, unless a figure or character has been started already.
-\initials{LDF 2022.04.13.}
-
-\LOG
-\initials{LDF 2022.04.13.}
-Added this section.
-\ENDLOG 
-
-@<Define |Scan_Parse| functions@>=
-
-    if (scanner_node->beginfig_flag || scanner_node->beginchar_flag)
-    {
-#if DEBUG_COMPILE
-        if (DEBUG)
-        { 
-           cerr_strm << thread_name << "In `Scan_Parse::beginfig_func':"
-                     << endl << "`scanner_node->beginfig_flag' and/or "
-                     << "`scanner_node->beginchar_flag' is `true'."
-                     << endl 
-                     << "Not clearing `current_picture'.";
-      
-           cerr_message(cerr_strm);
-           cerr_strm.str("");
-
-        }      
-#endif /* |DEBUG_COMPILE|  */@; 
-
-    }
-    else
-      status = scanner_node->clear_current_picture_func();
 
 @q **** (4) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
