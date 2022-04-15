@@ -3,17 +3,13 @@ drawdot origin;
 show current_picture;
 
 %no_clear
+% beginfig(1) no_clear;
+%   message "In fig.:";
+%   show current_picture;
+% endfig with_projection parallel_x_y;
+% end;
 
-beginfig(1) no_clear;
-
-  message "In fig.:";
-  show current_picture;
- 
-endfig with_projection parallel_x_y;
-
-end;
-
-beginchar("A", 1cm, 1cm, 0);
+beginchar("A", 1cm, 1cm, 0) no_clear;
   drawdot origin;
   draw (2, 2) -- (3, 3);
 endchar with_projection parallel_x_y;
