@@ -444,6 +444,67 @@ Added this rule.
    @=$$@> = 0;
 };
 
+@q **** (4) clear_current_picture_optional --> CLEAR @>   
+@*3 \§clear currentpicture optional>$\longrightarrow$ \.{CLEAR}.
+\initials{LDF 2022.04.15.}
+
+\LOG
+\initials{LDF 2022.04.15.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+  
+@=clear_current_picture_optional: CLEAR@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `clear_current_picture_optional: CLEAR'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = 1;
+};
+
+@q **** (4) clear_current_picture_optional --> NO_CLEAR @>   
+@*3 \§clear currentpicture optional>$\longrightarrow$ \.{NO\_CLEAR}.
+\initials{LDF 2022.04.15.}
+
+\LOG
+\initials{LDF 2022.04.15.}
+Added this rule.
+\ENDLOG
+
+@<Define rules@>= 
+  
+@=clear_current_picture_optional: NO_CLEAR@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @;
+  if (DEBUG)
+    {
+      cerr_strm << thread_name 
+                << "*** Parser: `clear_current_picture_optional: NO_CLEAR'." << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+   @=$$@> = -1;
+};
 
 @q *** (3) character_comment_optional.@>   
 @*2 \§character comment optional>.
