@@ -2424,12 +2424,16 @@ Added token declarations for |BEGINCHAR| and
 
 \initials{LDF 2005.09.13.}
 Added token declaration for |FIXED|.
+
+\initials{LDF 2022.04.15.}
+Added token declaration for |NO_CLEAR|.
 \ENDLOG 
 
 @<Token and precedence declarations@>=
 
 @=%token <int_value> OUTPUT@>@/
 @=%token <int_value> CLEAR@>@/
+@=%token <int_value> NO_CLEAR@>@/
 @=%token <int_value> BEGINFIG@>@/
 @=%token <int_value> ENDFIG@>@/
 @=%token <int_value> BEGINCHAR@>@/
