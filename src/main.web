@@ -345,11 +345,11 @@ Added |const unsigned short BISON_TRACE_INDEX|.
   const unsigned short MPONLY_INDEX                    = 24;
   const unsigned short NO_METAPOST_INDEX               = 25;
   const unsigned short NO_MP_INDEX                     = 26;
-  const unsigned short DELETE_CURRENT_PICTURE_INDEX    = 27;
-  const unsigned short DELETE_CP_INDEX                 = 28;
+  const unsigned short CLEAR_CURRENT_PICTURE_INDEX     = 27;
+  const unsigned short CLEAR_CP_INDEX                  = 28;
   const unsigned short DCP_INDEX                       = 29;
-  const unsigned short NO_DELETE_CURRENTPICTURE_INDEX  = 30;
-  const unsigned short NO_DELETE_CP_INDEX              = 31;
+  const unsigned short NO_CLEAR_CURRENTPICTURE_INDEX   = 30;
+  const unsigned short NO_CLEAR_CP_INDEX               = 31;
   const unsigned short NO_DCP_INDEX                    = 32;
   const unsigned short NDCP_INDEX                      = 33;
 
@@ -392,11 +392,11 @@ Added the ``\.{--quiet}'' option.
     {"mponly", 0, 0, 0},
     {"no-metapost", 0, 0, 0},
     {"no-mp", 0, 0, 0},
-    {"delete-current-picture", 0, 0, 0},
-    {"delete-cp", 0, 0, 0},
+    {"clear-current-picture", 0, 0, 0},
+    {"clear-cp", 0, 0, 0},
     {"dcp", 0, 0, 0},
-    {"no-delete-currentpicture", 0, 0, 0},
-    {"no-delete-cp", 0, 0, 0},
+    {"no-clear-currentpicture", 0, 0, 0},
+    {"no-clear-cp", 0, 0, 0},
     {"no-dcp", 0, 0, 0},
     {"ndcp", 0, 0, 0},
     {0, 0, 0, 0}
@@ -536,35 +536,35 @@ Edited the output.
                  << endl 
                  << "--mf-only and"
                  << endl 
-                 << "--mfonly:                     Enable METAFONT output and disable MetaPost output."
+                 << "--mfonly:                    Enable METAFONT output and disable MetaPost output."
                  << endl << endl 
                  << "--no-metafont and"
                  << endl 
-                 << "--no-mf:                      Disable METAFONT output."
+                 << "--no-mf:                     Disable METAFONT output."
                  << endl << endl 
-                 << "--metapost and --mp:          Enable METAPOST output."
+                 << "--metapost and --mp:         Enable METAPOST output."
                  << endl << endl 
                  << "--metapost-only and"
                  << endl 
                  << "--mp-only and"
                  << endl 
-                 << "--mponly:                     Enable MetaPost output and disable METAFONT output."
+                 << "--mponly:                    Enable MetaPost output and disable METAFONT output."
                  << endl << endl 
                  << "--no-metapost and"
                  << endl 
-                 << "--no-mp:                      Disable MetaPost output."
+                 << "--no-mp:                     Disable MetaPost output."
                  << endl 
-                 << "--delete-current-picture,"
+                 << "--clear-current-picture,"
                  << endl 
-                 << "--delete-cp and --dcp:        `beginfig' and `beginchar' delete `current_picture' (`currentpicture')."
+                 << "--clear-cp and --dcp:        `beginfig' and `beginchar' clear `current_picture' (`currentpicture')."
                  << endl 
-                 << "                               This is the default behavior."
+                 << "                             This is the default behavior."
                  << endl 
-                 << "--no-delete-currentpicture,"
+                 << "--no-clear-currentpicture,"  
                  << endl 
-                 << "--no-delete-cp, --no-dcp"
+                 << "--no-clear-cp, --no-dcp"
                  << endl 
-                 << "and --ndcp:                    `beginfig' and `beginchar' do not delete `current_picture' (`currentpicture')."
+                 << "and --ndcp:                  `beginfig' and `beginchar' do not clear `current_picture' (`currentpicture')."
                  << endl << endl; 
 
 #if DEBUG_COMPILE
@@ -972,6 +972,46 @@ Added this section.
             run_state_initial.do_output[Run_State::METAPOST] = false;
         }
 
+@q **** (4) @>
+
+@<GCC command line option processing@>=
+
+        else if (   option_index == CLEAR_CURRENT_PICTURE_INDEX  || option_index == CLEAR_CP_INDEX
+                 || option_index == DCP_INDEX)
+        {
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+               cerr << "Setting global variable `bool clear_current_picture' to `true'."
+                    << endl;
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+            clear_current_picture = true;
+
+        }
+
+@q **** (4) @>
+
+@<GCC command line option processing@>=
+
+        else if (   option_index == NO_CLEAR_CURRENTPICTURE_INDEX || option_index == NO_CLEAR_CP_INDEX
+                 || option_index == NO_DCP_INDEX || option_index == NDCP_INDEX)
+        {
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+               cerr << "Setting global variable `bool clear_current_picture' to `false'."
+                    << endl;
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+
+            clear_current_picture = false;
+
+        }
 
 @q **** (4) Invalid option_index value.@>
 @ Invalid {\tt option\_index} value.
