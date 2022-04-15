@@ -2683,6 +2683,9 @@ and |DELETE_TRANSFORM|.
 @=%token <int_value> RESET_TRANSFORM@>@/
 @=%token <int_value> DELETE_TRANSFORM@>@/
 
+@=%token <int_value> DELETE@>@/
+@=%token <int_value> NO_DELETE@>@/
+
 @=%token <int_value> GET_POINT@>@/
 @=%token <int_value> GET_PATH_POINT@>@/
 @=%token <int_value> GET_LAST_POINT@>@/
