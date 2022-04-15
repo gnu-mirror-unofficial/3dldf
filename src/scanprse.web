@@ -307,6 +307,8 @@ Picture_Output_Arg_Type
   Picture* picture;
   Scanner_Node scanner_node;
 
+  unsigned int output_command_arg;
+
   Focus* focus;  
 
   bool endfig;
@@ -2017,6 +2019,7 @@ cerr_mutex.lock();
   cerr_strm.str("");
 
   picture_ptr_arg->picture->output(picture_ptr_arg->scanner_node,
+                                   picture_ptr_arg->output_command_arg,
                                    *(picture_ptr_arg->focus),
                                    picture_ptr_arg->projection,
                                    picture_ptr_arg->factor,
@@ -2374,10 +2377,6 @@ int
 Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg)
 {
 
-/* !!START HERE:  LDF 2022.04.14.  Don't output to MP if output_command_arg is endchar
-   or to MF if it's endfig!
-*/ 
-
 @q ***** (5) Get thread information and set |thread_name|.@>
 
 @ Get thread information and set |thread_name|.
@@ -2416,7 +2415,6 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@; 
-
 
 @q ***** (5) Handle the case that the form of output corresponding @>
 @q ***** (5) to |output_command_arg| isn't enabled. @>
@@ -2945,6 +2943,8 @@ and increment |scanner_node->output_pending.value_1|.
 
 @<Define |Scan_Parse| functions@>=
 
+      p->output_command_arg = output_command_arg;
+
       status = pthread_create(scanner_node->thread_vector.back(),
                               0,
                               output_func,
@@ -3044,19 +3044,24 @@ to |Picture::output|.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   p->picture->output(p->scanner_node,
-                      *(p->focus),
-                      p->projection,
-                      p->factor,
-                      p->sort_value,
-                      p->do_warnings,
-                      p->min_x_proj,
-                      p->max_x_proj,
-                      p->min_y_proj,
-                      p->max_y_proj,
-                      p->min_z_proj,
-                      p->max_z_proj,
-                      p->surface_hiding_value);
+   if (   metafont_output && output_command_arg == Scan_Parse::ENDCHAR_COMMAND
+       || metapost_output && output_command_arg == Scan_Parse::ENDFIG_COMMAND)
+   {
+      p->picture->output(p->scanner_node,
+                         output_command_arg,
+                         *(p->focus),
+                         p->projection,
+                         p->factor,
+                         p->sort_value,
+                         p->do_warnings,
+                         p->min_x_proj,
+                         p->max_x_proj,
+                         p->min_y_proj,
+                         p->max_y_proj,
+                         p->min_z_proj,
+                         p->max_z_proj,
+                         p->surface_hiding_value);
+  }
 
 
 @ !! TODO:  Add code to account for other output formats.

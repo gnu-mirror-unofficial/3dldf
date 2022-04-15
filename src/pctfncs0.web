@@ -117,6 +117,7 @@ Added this file.
 #include "paraellp.h++"
 #include "parahypr.h++"
 #include "glyphs.h++"
+#include "scanprse.h++"   
 
 @q * (1) Picture functions.@>
 @* Picture functions.
@@ -192,6 +193,7 @@ Moved this definition from \filename{points.web} to this file
 @<Define |Picture| functions@>=
 void
 Picture::output(Scanner_Node scanner_node,
+                unsigned int output_command_arg,
                 const Focus& f,
                 const unsigned short projection,
                 real factor,
@@ -228,6 +230,11 @@ Picture::output(Scanner_Node scanner_node,
 @q **** (4).@>
 
   using namespace Sorting;
+
+/* !!START HERE:  LDF 2022.04.15.  Must pass output_command_arg to the output func.s that are called below.  */ 
+
+  bool local_do_metafont = (metafont_output && output_command_arg == Scan_Parse::ENDCHAR_COMMAND) ? true : false;
+  bool local_do_metapost = (metapost_output && output_command_arg == Scan_Parse::ENDFIG_COMMAND) ? true : false;
 
 #if DEBUG_COMPILE
    if (DEBUG)
@@ -1074,7 +1081,7 @@ for (list<Shape*>::iterator iter = shape_list.begin();
             }
 #endif /* |DEBUG_COMPILE|  */@; 
  
-         (**iter).output(scanner_node);
+         (**iter).output(scanner_node, output_command_arg);
          (**iter).unsuppress_output(); 
 
       }  /* |for|  */
@@ -1120,7 +1127,7 @@ and then clearing |shape_list|.
               iter != elements.end();
               ++iter)
              {
-                 (**iter).output(scanner_node);
+                 (**iter).output(scanner_node, output_command_arg);
 
 @q ****** (6).@> 
 
@@ -1192,7 +1199,7 @@ and invoke |Transform::is_identity| in
 
 @<Define |Picture| functions@>= 
 
-          (**i).output(scanner_node, f, projection, factor, transform); 
+          (**i).output(scanner_node, output_command_arg, f, projection, factor, transform); 
 
 @q ****** (6).@> 
 

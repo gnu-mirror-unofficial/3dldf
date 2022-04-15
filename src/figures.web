@@ -327,7 +327,9 @@ endfig(Scanner_Node s,
       if (DEBUG)
         cerr << "projection != Projections::suppress. "
              << "Calling current_picture->output." << "\n";
-      current_picture->output(s, f, projection, factor, sort_value,
+      current_picture->output(s, 
+                              Scan_Parse::ENDFIG_COMMAND,
+                              f, projection, factor, sort_value,
                               do_warnings, 
                               min_x_proj, max_x_proj,
                               min_y_proj, max_y_proj,

@@ -811,7 +811,7 @@ pctfncs0.o: pctfncs0.c++ pctfncs0.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ 
                          hyprbola.h++ cncsctlt.h++ arc.h++ helices.h++ origami.h++ solids.h++ \
                          solfaced.h++ cuboid.h++ polyhed.h++ ddchdrn.h++ rhtchdrn.h++ plyhdslc.h++ \
                          cones.h++ cylinder.h++ ellpsoid.h++ spheres.h++ sphrdevl.h++ parabold.h++ \
-                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++
+                         paraellp.h++ parahypr.h++ glyphs.h++ newwrite.h++ pctfncs0.h++ scanprse.h++
 	$(CXXCOMPILE) -c -o $@ $<
 
 pens.o: pens.c++ pens.h++ loader.h++ pspglb.h++ io.h++ gsltmplt.h++ creatnew.h++ \

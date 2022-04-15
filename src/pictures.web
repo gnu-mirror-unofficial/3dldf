@@ -258,7 +258,7 @@ Added |Scanner_Node| argument.
 
 @<Declare |Label| functions@>=
 
-void output(Scanner_Node s, const Focus& f, const unsigned short proj,
+void output(Scanner_Node s, unsigned int output_command_arg, const Focus& f, const unsigned short proj,
             real factor, const Transform& t);
 
 Label* get_copy() const;
@@ -855,6 +855,7 @@ Change return value so I can test whether the function succeeds.
 @<Declare |Picture| functions@>=   
 void  
 output(Scanner_Node s,
+       unsigned int output_command_arg,
        const Focus& f,
        const unsigned short projection = Projections::persp,
        real factor = 1,

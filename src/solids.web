@@ -5874,12 +5874,12 @@ Removed the explicit template argument from the call to
 @<Declare |Solid| functions@>=
 virtual
 void   
-output(Scanner_Node s);
+output(Scanner_Node s, unsigned int output_command_arg = 0);
 
 @  
 @<Define |Solid| functions@>=
 void
-Solid::output(Scanner_Node s)
+Solid::output(Scanner_Node s, unsigned int output_command_arg)
 {
   bool DEBUG = false; /* |true| */ 
   if (DEBUG)

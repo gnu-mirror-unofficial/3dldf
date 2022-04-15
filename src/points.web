@@ -7548,14 +7548,14 @@ Now breaking line and indenting in output file before |withcolor| and
 
 @<Declare |Point| functions@>=
 void 
-output(Scanner_Node s);
+output(Scanner_Node s, unsigned int output_command_arg = 0);
 
 @q *** (3) Definition.@>
 
 @ 
 @<Define |Point| functions@>=
 void 
-Point::output(Scanner_Node scanner_node) 
+Point::output(Scanner_Node scanner_node, unsigned int output_command_arg) 
 {
   bool DEBUG = false; /* |true| */
 
@@ -8532,6 +8532,7 @@ Added code for outputting |*pen|, if |dot == true| and |Pen* pen| is non-null.
 @<Define |Label| functions@>=
 void
 Label::output(Scanner_Node s,
+              unsigned int output_command_arg,
               const Focus& f,
               const unsigned short proj,
               real factor,
