@@ -1980,77 +1980,39 @@ Revised the code that checks the value of |arrow|.
 
 @q ***** (5) @>
 
-        if (local_do_metafont)
+         
+        status = sub_output_draw(scanner_node, 
+                                 out_stream_mf, 
+                                 out_stream_mp, 
+                                 output_command_arg);
+        if (status != 0)
         {
-            status = sub_output_draw(scanner_node, out_stream_mf, output_command_arg);
-
-            if (status != 0)
-            {
-                  cerr_strm << thread_name 
-                            << "ERROR!  In `Path::output':  "
-                            << "`sub_output_draw' failed, returning "
-                            << status << "."
-                            << "Exiting function.";
+              cerr_strm << thread_name 
+                        << "ERROR!  In `Path::output':  "
+                        << "`sub_output_draw' failed, returning "
+                        << status << "."
+                        << "Exiting function.";
   
-                  log_message(cerr_strm);
-                  cerr_message(cerr_strm, error_stop_value);
-                  cerr_strm.str("");
-               
-                  return;
+              log_message(cerr_strm);
+              cerr_message(cerr_strm, error_stop_value);
+              cerr_strm.str("");
+           
+              return;
 
-            }  /* |if (status != 0)|  */
+        }  /* |if (status != 0)|  */
 
 #if DEBUG_COMPILE
-             else if (DEBUG)
-            {
-                  cerr_strm << thread_name 
-                            << "In `Path::output':  "
-                            << "`sub_output_draw' succeeded.";
-  
-                  log_message(cerr_strm);
-                  cerr_message(cerr_strm);
-                  cerr_strm.str("");
-            }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-        }  /* |if (local_do_metafont)| */
-
-@q ***** (5) @>
-
-        if (local_do_metapost)
+        else if (DEBUG)
         {
-            status = sub_output_draw(scanner_node, out_stream_mp, output_command_arg);
-
-            if (status != 0)
-            {
-                  cerr_strm << thread_name 
-                            << "ERROR!  In `Path::output':  "
-                            << "`sub_output_draw' failed, returning "
-                            << status << "."
-                            << "Exiting function.";
+             cerr_strm << thread_name 
+                       << "In `Path::output':  "
+                       << "`sub_output_draw' succeeded.";
   
-                  log_message(cerr_strm);
-                  cerr_message(cerr_strm, error_stop_value);
-                  cerr_strm.str("");
-               
-                  return;
-
-            }  /* |if (status != 0)|  */
-
-#if DEBUG_COMPILE
-             else if (DEBUG)
-            {
-                  cerr_strm << thread_name 
-                            << "In `Path::output':  "
-                            << "`sub_output_draw' succeeded.";
-  
-                  log_message(cerr_strm);
-                  cerr_message(cerr_strm);
-                  cerr_strm.str("");
-            }        
+             log_message(cerr_strm);
+             cerr_message(cerr_strm);
+             cerr_strm.str("");
+        }        
 #endif /* |DEBUG_COMPILE|  */@; 
-
-        }  /* |if (local_do_metapost)| */
 
 @q ***** (5) @>
 
@@ -2205,79 +2167,40 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
 @
 @<Define |Path| functions@>=
 
-              if (local_do_metafont)
+
+              status = sub_output_draw(scanner_node, 
+                                       out_stream_mf, 
+                                       out_stream_mp, 
+                                       output_command_arg);
+
+              if (status != 0)
               {
-                  status = sub_output_draw(scanner_node, out_stream_mf, output_command_arg);
-
-                  if (status != 0)
-                     {
-                           cerr_strm << thread_name 
-                                     << "ERROR!  In `Path::output':  "
-                                     << "`sub_output_draw' failed, returning "
-                                     << status << "."
-                                     << "Exiting function.";
+                    cerr_strm << thread_name 
+                              << "ERROR!  In `Path::output':  "
+                              << "`sub_output_draw' failed, returning "
+                              << status << "."
+                              << "Exiting function.";
   
-                           log_message(cerr_strm);
-                           cerr_message(cerr_strm, error_stop_value);
-                           cerr_strm.str("");
-                        
-                           return;
+                    log_message(cerr_strm);
+                    cerr_message(cerr_strm, error_stop_value);
+                    cerr_strm.str("");
+                 
+                    return;
 
-                     }  /* |if (status != 0)|  */
+              }  /* |if (status != 0)|  */
 
 #if DEBUG_COMPILE
-                     else if (DEBUG)
-                         {
-                             cerr_strm << thread_name 
-                                       << "In `Path::output':  "
-                                       << "`sub_output_draw' succeeded.";
-  
-                             log_message(cerr_strm);
-                             cerr_message(cerr_strm);
-                             cerr_strm.str("");
-                         }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-              }  /* |if (local_do_metafont)| */
-
-@q ***** (5) @>
-@
-@<Define |Path| functions@>=
-
-              if (local_do_metapost)
+              else if (DEBUG)
               {
-                  status = sub_output_draw(scanner_node, out_stream_mp, output_command_arg);
-
-                  if (status != 0)
-                     {
-                           cerr_strm << thread_name 
-                                     << "ERROR!  In `Path::output':  "
-                                     << "`sub_output_draw' failed, returning "
-                                     << status << "."
-                                     << "Exiting function.";
+                  cerr_strm << thread_name 
+                            << "In `Path::output':  "
+                            << "`sub_output_draw' succeeded.";
   
-                           log_message(cerr_strm);
-                           cerr_message(cerr_strm, error_stop_value);
-                           cerr_strm.str("");
-                        
-                           return;
-
-                     }  /* |if (status != 0)|  */
-
-#if DEBUG_COMPILE
-                     else if (DEBUG)
-                         {
-                             cerr_strm << thread_name 
-                                       << "In `Path::output':  "
-                                       << "`sub_output_draw' succeeded.";
-  
-                             log_message(cerr_strm);
-                             cerr_message(cerr_strm);
-                             cerr_strm.str("");
-                         }        
+                  log_message(cerr_strm);
+                  cerr_message(cerr_strm);
+                  cerr_strm.str("");
+              }        
 #endif /* |DEBUG_COMPILE|  */@; 
-
-              }  /* |if (local_do_metapost)| */
 
 @q ***** (5).@> 
 
@@ -2468,96 +2391,60 @@ Now calling |Path::sub_output_draw|.
             {
 @q ****** (6) @>
                 if (local_do_metafont)
+                   *out_stream_mf << "unfill " << **point_iter;
+                if (local_do_metapost)
+                   *out_stream_mp << "unfill " << **point_iter;
+
+                   **point_iter++;
+
+                if (local_do_metafont)
                 {
-@q ******* (7) @>
-                   *out_stream_mf << "unfill " << **point_iter++;
                    output_path(out_stream_mf);
                    *out_stream_mf << ";" << endl << flush;
-                   status = sub_output_draw(scanner_node, out_stream_mf, output_command_arg);
-
-@q ******* (7) @>
-
-                   if (status != 0)
-                   {
-                         cerr_strm << thread_name 
-                                   << "ERROR!  In `Path::output':  "
-                                   << "`sub_output_draw' failed, returning "
-                                   << status << "."
-                                   << "Exiting function.";
-  
-                         log_message(cerr_strm);
-                         cerr_message(cerr_strm, error_stop_value);
-                         cerr_strm.str("");
-                      
-                         return;
-
-                   }  /* |if (status != 0)|  */
-
-@q ******* (7) @>
-
-#if DEBUG_COMPILE
-                   else if (DEBUG)
-                   {
-                       cerr_strm << thread_name 
-                                 << "In `Path::output':  "
-                                 << "`sub_output_draw' succeeded.";
-  
-                       log_message(cerr_strm);
-                       cerr_message(cerr_strm);
-                       cerr_strm.str("");
-                   }        
-#endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) @>
-
-                } /* |if (local_do_metafont)| */
-
-@q ****** (6) @>
-
+                }
                 if (local_do_metapost)
                 {
-@q ******* (7) @>
-
-                   *out_stream_mp << "unfill " << **point_iter++;
                    output_path(out_stream_mp);
                    *out_stream_mp << ";" << endl << flush;
+                }
 
-                   status = sub_output_draw(scanner_node, out_stream_mp, output_command_arg);
+                status = sub_output_draw(scanner_node, 
+                                         out_stream_mf, 
+                                         out_stream_mp, 
+                                         output_command_arg);
 
-                   if (status != 0)
-                   {
-                         cerr_strm << thread_name 
-                                   << "ERROR!  In `Path::output':  "
-                                   << "`sub_output_draw' failed, returning "
-                                   << status << "."
-                                   << "Exiting function.";
+@q ******* (7) @>
+
+                if (status != 0)
+                {
+                      cerr_strm << thread_name 
+                                << "ERROR!  In `Path::output':  "
+                                << "`sub_output_draw' failed, returning "
+                                << status << "."
+                                << "Exiting function.";
   
-                         log_message(cerr_strm);
-                         cerr_message(cerr_strm, error_stop_value);
-                         cerr_strm.str("");
-                      
-                         return;
+                      log_message(cerr_strm);
+                      cerr_message(cerr_strm, error_stop_value);
+                      cerr_strm.str("");
+                   
+                      return;
 
-                   }  /* |if (status != 0)|  */
+                }  /* |if (status != 0)|  */
 
 @q ******* (7) @>
 
 #if DEBUG_COMPILE
-                   else if (DEBUG)
-                   {
-                       cerr_strm << thread_name 
-                                 << "In `Path::output':  "
-                                 << "`sub_output_draw' succeeded.";
+                else if (DEBUG)
+                {
+                    cerr_strm << thread_name 
+                              << "In `Path::output':  "
+                              << "`sub_output_draw' succeeded.";
   
-                       log_message(cerr_strm);
-                       cerr_message(cerr_strm);
-                       cerr_strm.str("");
-                   }        
+                    log_message(cerr_strm);
+                    cerr_message(cerr_strm);
+                    cerr_strm.str("");
+                }        
 #endif /* |DEBUG_COMPILE|  */@; 
-
-@q ******* (7) @>
-
-                } /* |if (local_do_metapost)| */
 
 @q ****** (6) @>
 
@@ -2616,7 +2503,7 @@ Now signalling an error and returning.  Previously, |*this| was drawn.
 
     return;
 
-}/* End of |Path::output(Scanner_Node scanner_node)| definition.  */
+} /* End of |Path::output(Scanner_Node scanner_node)| definition.  */
 
 @q * (1) |Path::sub_output_draw|.  @>
 @ |Path::sub_output_draw|.  
@@ -2631,7 +2518,8 @@ This was necessary because it now refers to |Scan_Parse::ENDCHAR_COMMAND| and
 @<Define |Path| functions@>=
 int
 Path::sub_output_draw(Scanner_Node scanner_node, 
-                      ofstream* out_stream, 
+                      ofstream* out_stream_mf, 
+                      ofstream* out_stream_mp, 
                       unsigned int output_command_arg)
 {
 
@@ -2642,13 +2530,15 @@ Path::sub_output_draw(Scanner_Node scanner_node,
 #endif /* |DEBUG_COMPILE|  */@; 
 
   bool local_do_metafont = 
-     (metafont_output && (   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
-                          || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND))
+     (  metafont_output && out_stream_mf != 0 
+      && (   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
+          || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND))
      ? true : false;
 
   bool local_do_metapost = 
-     (metapost_output && (   output_command_arg & Scan_Parse::ENDFIG_COMMAND
-                          || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
+     (   metapost_output && out_stream_mp != 0 
+      && (   output_command_arg & Scan_Parse::ENDFIG_COMMAND
+          || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
      ? true : false;
 
    if (!(local_do_metafont || local_do_metapost))
@@ -2821,9 +2711,8 @@ Added code for suppressing output if the type of the current
 
 @ Draw the first segment.  
 If |points.size() == 1| no connector is used in the {\bf draw} command, 
-and this functions returns after writing it to |*out_stream|.
-In addition, the first segment also requires special handling if 
-|arrow == DOUBLE_ARROW|. 
+and this functions returns after writing it to |*out_stream_mf| and/or |*out_stream_mp|.
+In addition, the first segment also requires special handling if |arrow == DOUBLE_ARROW|. 
 \initials{LDF 2005.03.13.}
 
 @<Define |Path| functions@>=
@@ -2835,18 +2724,36 @@ In addition, the first segment also requires special handling if
                        || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
                {
 
-                  *out_stream << "drawarrow " << *points[0];
+                  if (local_do_metafont)
+                     *out_stream_mf << "drawarrow " << *points[0];
+                  if (local_do_metapost)
+                     *out_stream_mp << "drawarrow " << *points[0];
 
                   if (local_do_metapost && do_colors)
-                     *out_stream << "withcolor " << **color_iter;
+                     *out_stream_mp << "withcolor " << **color_iter;
 
                   if (do_pens)
-                     *out_stream << " withpen " << **pen_iter;
+                  {
+                     if (local_do_metafont)
+                        *out_stream_mf << " withpen " << **pen_iter;
+                     if (local_do_metapost)
+                        *out_stream_mp << " withpen " << **pen_iter;
+                  }
+
 
                   if (do_dash_patterns)
-                     *out_stream << **dash_pattern_iter;                          
+                  {
+                     if (local_do_metafont)
+                        *out_stream_mf << **dash_pattern_iter;
+                     if (local_do_metapost)
+                        *out_stream_mp << **dash_pattern_iter;
 
-                   *out_stream << ";" << endl << flush;
+                  }
+
+                   if (local_do_metafont)
+                      *out_stream_mf << ";" << endl << flush;
+                   if (local_do_metapost)
+                      *out_stream_mp << ";" << endl << flush;
 
                    return 0; 
 
@@ -2859,20 +2766,38 @@ In addition, the first segment also requires special handling if
                             || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))
 
                {
-
-                   *out_stream << "drawarrow " << *points[1] 
-                               << **connector_type_iter << *points[0]; 
+                   if (local_do_metafont)
+                      *out_stream_mf << "drawarrow " << *points[1] 
+                                  << **connector_type_iter << *points[0]; 
+                                     
+                   if (local_do_metapost)
+                      *out_stream_mp << "drawarrow " << *points[1] 
+                                     << **connector_type_iter << *points[0]; 
 
                    if (local_do_metapost && do_colors)
-                      *out_stream << endl << "withcolor " << **color_iter;
+                      *out_stream_mp << endl << "withcolor " << **color_iter;
 
                    if (do_pens)
-                      *out_stream << endl << "withpen " << **pen_iter;
+                   {
+                      if (local_do_metafont)
+                         *out_stream_mf << endl << "withpen " << **pen_iter;
+                      if (local_do_metapost)
+                         *out_stream_mp << endl << "withpen " << **pen_iter;
+                   }
+
 
                    if (do_dash_patterns)
-                      *out_stream << endl << **dash_pattern_iter;
+                   {
+                      if (local_do_metafont)
+                         *out_stream_mf << endl << **dash_pattern_iter;
+                      if (local_do_metapost)
+                         *out_stream_mp << endl << **dash_pattern_iter;
+                   }
 
-                    *out_stream << ";" << endl << flush;
+                   if (local_do_metafont)
+                      *out_stream_mf << ";" << endl << flush;
+                   if (local_do_metapost)
+                      *out_stream_mp << ";" << endl << flush;
 
                }  
 
@@ -2882,22 +2807,39 @@ In addition, the first segment also requires special handling if
                         && (   !do_pens 
                             || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN)))  
                   {
-                      *out_stream << "draw " 
-                                  << *points[0];
+                      if (local_do_metafont)
+                         *out_stream_mf << "draw " 
+                                        << *points[0];
+                      if (local_do_metapost)
+                         *out_stream_mp << "draw " 
+                                        << *points[0];
 
                       if (local_do_metapost && do_colors)
-                         *out_stream << " withcolor " << **color_iter;
+                         *out_stream_mp << " withcolor " << **color_iter;
 
                       if (do_pens)
-                         *out_stream << " withpen " << **pen_iter;
+                      {
+                         if (local_do_metafont)
+                            *out_stream_mf << " withpen " << **pen_iter;
+                         if (local_do_metapost)
+                            *out_stream_mp << " withpen " << **pen_iter;
+                      }
+
 
                       if (do_dash_patterns)
-                         *out_stream << **dash_pattern_iter;                          
+                      {
+                         if (local_do_metafont)
+                            *out_stream_mf << **dash_pattern_iter;
+                         if (local_do_metapost)
+                            *out_stream_mp << **dash_pattern_iter;
+                      }
 
-                       *out_stream << ";" << endl << flush;
+                       if (local_do_metafont)
+                          *out_stream_mf << ";" << endl << flush;
+                       if (local_do_metapost)
+                          *out_stream_mp << ";" << endl << flush;
 
                        return 0;
-
                   }  
 
 @q ******* (7) @> 
@@ -2906,19 +2848,33 @@ In addition, the first segment also requires special handling if
                         || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                {
-                    *out_stream << "draw " << *points[0] 
-                                << *connector_type_iter << *points[1];
+                    if (local_do_metafont)
+                       *out_stream_mf << "draw " << *points[0] 
+                                      << *connector_type_iter << *points[1];
+                    if (local_do_metapost)
+                       *out_stream_mp << "draw " << *points[0] 
+                                      << *connector_type_iter << *points[1];
 
                    if (local_do_metapost && do_colors)
-                      *out_stream << endl << "withcolor " << **color_iter;
+                      *out_stream_mp << endl << "withcolor " << **color_iter;
 
                    if (do_pens)
-                      *out_stream << endl << "withpen " << **pen_iter;
+                   {
+                      if (local_do_metafont)
+                         *out_stream_mf << endl << "withpen " << **pen_iter;
+                      if (local_do_metapost)
+                         *out_stream_mp << endl << "withpen " << **pen_iter;
+                   }
 
-                   if (do_dash_patterns)
-                      *out_stream << endl << **dash_pattern_iter;
+                   if (do_dash_patterns && local_do_metapost)
+                   {
+                      *out_stream_mp << endl << **dash_pattern_iter;
+                   }
 
-                    *out_stream << ";" << endl << flush;
+                   if (local_do_metafont)
+                       *out_stream_mf << ";" << endl << flush;
+                   if (local_do_metapost)
+                       *out_stream_mp << ";" << endl << flush;
 
                }  
 
@@ -2962,22 +2918,33 @@ In addition, the first segment also requires special handling if
                           || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                          {
-                             *out_stream << "draw " << *points[i]   
-                                         << *connector_type_iter << *points[i + 1];
+                             if (local_do_metafont)
+                                *out_stream_mf << "draw " << *points[i]   
+                                               << *connector_type_iter << *points[i + 1];
+                             if (local_do_metapost)
+                                *out_stream_mp << "draw " << *points[i]   
+                                               << *connector_type_iter << *points[i + 1];
 
                              if (local_do_metapost && do_colors)
-                                *out_stream << endl << "withcolor " << **color_iter;
+                                *out_stream_mp << endl << "withcolor " << **color_iter;
 
                              if (do_pens)
-                                *out_stream << endl << " withpen " << **pen_iter;
+                             {
+                                if (local_do_metafont)
+                                   *out_stream_mf << endl << " withpen " << **pen_iter;
+                                if (local_do_metapost)
+                                   *out_stream_mp << endl << " withpen " << **pen_iter;
+                             }
 
-                             if (do_dash_patterns)
-                                *out_stream << endl << **dash_pattern_iter;
 
-                              *out_stream << ";" << endl << flush;
+                             if (local_do_metapost && do_dash_patterns)
+                                *out_stream_mp << endl << **dash_pattern_iter;
 
+                             if (local_do_metafont)
+                                 *out_stream_mf << ";" << endl << flush;
+                             if (local_do_metapost)
+                                 *out_stream_mp << ";" << endl << flush;
                          }
-
 @q ******** (8) @> 
 
                }  /* |for|  */
@@ -3009,25 +2976,51 @@ This requires special handling because |arrow| could be equal to
                    || (do_pens && (**pen_iter).get_type() != Pen::NULL_PEN))
 
                   {
-       
-                      if (arrow == NO_ARROW)
-                         *out_stream << "draw ";
-                      else
-                         *out_stream << "drawarrow ";
 
-                         *out_stream << *points[j] 
-                                     << *connector_type_iter << *points[k];
+                      if (arrow == NO_ARROW)
+                      {
+                         if (local_do_metafont)
+                            *out_stream_mf << "draw ";
+                         if (local_do_metapost)
+                            *out_stream_mp << "draw ";
+                      }
+                      else
+                      {
+                         if (local_do_metafont)
+                            *out_stream_mf << "draw ";  /* {\MF} doesn't have arrows!  
+                                                        \initials{LDF 2022.04.16.}  */
+
+                         if (local_do_metapost)
+                            *out_stream_mp << "drawarrow ";                         
+                      }
+                       
+                      if (local_do_metafont)
+                         *out_stream_mf << *points[j] 
+                                        << *connector_type_iter << *points[k];
+                      if (local_do_metapost)
+                         *out_stream_mp << *points[j] 
+                                        << *connector_type_iter << *points[k];
+
 
                        if (local_do_metapost && do_colors)
-                          *out_stream << endl << "withcolor " << **color_iter;
+                          *out_stream_mp << endl << "withcolor " << **color_iter;
 
                        if (do_pens)
-                          *out_stream << endl << "withpen " << **pen_iter;
+                       {
+                          if (local_do_metafont)
+                             *out_stream_mf << endl << "withpen " << **pen_iter;
+                          if (local_do_metapost)
+                             *out_stream_mp << endl << "withpen " << **pen_iter;
+                       }
 
-                       if (do_dash_patterns)
-                          *out_stream << endl << **dash_pattern_iter;
 
-                       *out_stream << ";" << endl << flush;
+                       if (local_do_metapost && do_dash_patterns)
+                          *out_stream_mp << endl << **dash_pattern_iter;
+ 
+                       if (local_do_metafont)
+                          *out_stream_mf << ";" << endl << flush;
+                       if (local_do_metapost)
+                          *out_stream_mp << ";" << endl << flush;
                   }
 
 @q ****** (6).@> 
@@ -3096,29 +3089,60 @@ Added code for suppressing output if the type of the current
                  }         
 #endif /* |DEBUG_COMPILE|  */@; 
 
-               if (arrow == SINGLE_ARROW)
-                 *out_stream << "drawarrow " << **point_iter++;
-               else if (arrow == DOUBLE_ARROW)
-                 *out_stream << "drawdblarrow " << **point_iter++;
-               else
-                 *out_stream << "draw " << **point_iter++;
-              
-#if 1                 
-               output_path(out_stream);
-#endif 
+               if (local_do_metafont)
+               {
+                   *out_stream_mf << "draw " << **point_iter;
+               }
+
+               if (local_do_metapost)
+               {
+                   if (arrow == SINGLE_ARROW)
+                   {
+                     *out_stream_mp << "drawarrow " << **point_iter;
+                   }
+                   else if (arrow == DOUBLE_ARROW)
+                   {
+                     *out_stream_mp << "drawdblarrow " << **point_iter;
+                   }
+                   else
+                   {
+                     *out_stream_mp << "draw " << **point_iter;
+                   }
+              }
+
+              **point_iter++; 
+
+               if (local_do_metafont)
+                  output_path(out_stream_mf);
+               if (local_do_metapost)
+                  output_path(out_stream_mp);
 
                if (   local_do_metapost && draw_color_vector != static_cast<Pointer_Vector<Color>*>(0) 
                    && draw_color_vector->ctr > 0)
-                  *out_stream << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
+                  *out_stream_mp << endl << "withcolor " << *(draw_color_vector->v[0]) << " ";
 
                if (pen_vector != static_cast<Pointer_Vector<Pen>*>(0) && pen_vector->ctr > 0)
-                  *out_stream << endl << "withpen " << *(pen_vector->v[0]) << " ";
+               {
+                  if (local_do_metafont)
+                     *out_stream_mf << endl << "withpen " << *(pen_vector->v[0]) << " ";
+                  if (local_do_metapost)
+                    *out_stream_mp << endl << "withpen " << *(pen_vector->v[0]) << " ";
+ 
+               }
 
-               if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
+               if (   local_do_metapost 
+                   && dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
                    && dash_pattern_vector->ctr > 0)
-                  *out_stream << endl << *(dash_pattern_vector->v[0]);
+               {
+                  *out_stream_mp << endl << *(dash_pattern_vector->v[0]);
+               }
 
-               *out_stream << ";\n" << flush;
+
+               if (local_do_metafont)
+                  *out_stream_mf << ";" << endl << flush;
+               if (local_do_metapost)
+                  *out_stream_mp << ";" << endl << flush;
+
 
            }  /*  |else if (   pen_vector == static_cast<Pointer_Vector<Pen>*>(0) 
                             || pen_vector->ctr == 0 
@@ -3131,8 +3155,7 @@ Added code for suppressing output if the type of the current
    if (DEBUG)
      {
          cerr_strm << thread_name 
-                   << "Exiting `Path::sub_output_draw' successfully "
-                   << "with return value 0.";
+                   << "Exiting `Path::sub_output_draw' successfully with return value 0.";
 
          log_message(cerr_strm);
          cerr_message(cerr_strm);
