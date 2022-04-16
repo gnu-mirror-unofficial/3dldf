@@ -948,6 +948,9 @@ section, except for |focus_ptr|, which already had it.
 
 \initials{LDF 2005.03.13.}
 Now setting |scanner_node->surface_hiding_value_ptr| to 0.
+
+\initials{LDF 2022.04.16.}
+Now setting |unsigned int output_format_val| to |0U|.
 \ENDLOG 
 
 @<Define |Scanner_Type::create|@>=
@@ -964,6 +967,7 @@ Now setting |scanner_node->surface_hiding_value_ptr| to 0.
    scanner_node->max_z_proj_ptr  = 0;
 
    scanner_node->surface_hiding_value_ptr = 0;
+   scanner_node->output_format_val        = 0U;
 
 @q *** (3) Pointers for |predicate_clause|. @>
 @*2 Pointers for |predicate_clause|.
