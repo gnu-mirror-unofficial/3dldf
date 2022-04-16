@@ -694,9 +694,9 @@ Added this rule.
     {
          int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
 
-@q ***** (5) Error handling:  |verbatim_metafont_func| failed.@>   
+@q ***** (5) Error handling:  |verbatim_func| failed.@>   
 
-@ Error handling:  |verbatim_metafont_func| failed.
+@ Error handling:  |verbatim_func| failed.
 \initials{LDF 2004.12.13.}
 
 @<Define rules@>=
@@ -731,6 +731,42 @@ END_VERBATIM_METAFONT_RULE:
    @=$$@> = static_cast<void*>(0);   
 
 };
+
+@q ** (2) command --> VERBATIM_TEX string_primary.@> 
+@*1 \§command> $\longrightarrow$ \.{VERBATIM\_TEX} \§{string primary}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG
+
+@q *** (3).@> 
+
+@<Define rules@>=
+@=command: VERBATIM_TEX string_expression@>@/
+{
+  @<Common declarations for rules@>@; 
+
+/* !!START HERE:  LDF 2022.04.16.  Rewrite |verbatim_func|.  */ 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+    {
+      cerr_strm << "*** Parser: `command --> VERBATIM_TEX string_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+      cerr << "*static_cast<string*>($2) == " << *static_cast<string*>(@=$2@>) << endl;
+
+    }
+#endif /* |DEBUG_COMPILE|  */@;
+
+};
+
 
 @q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 
