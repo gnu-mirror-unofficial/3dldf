@@ -2251,8 +2251,6 @@ Now setting defaults for |*fill_color|, if |fill_color == 0|.
           if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
               && dash_pattern_vector->ctr > 0)
             {
-                if (local_do_metafont)
-                   *out_stream_mf << endl << *(dash_pattern_vector->v[0]);
                 if (local_do_metapost)
                    *out_stream_mp << endl << *(dash_pattern_vector->v[0]);
 
@@ -2364,8 +2362,6 @@ Changed |if (draw_color == Colors::background_color)| to
                 if (   dash_pattern_vector != static_cast<Pointer_Vector<Dash_Pattern>*>(0) 
                     && dash_pattern_vector->ctr > 0)
                   {
-                      if (local_do_metafont)
-                         *out_stream_mf << endl << *(dash_pattern_vector->v[0]);
                       if (local_do_metapost)
                          *out_stream_mp << endl << *(dash_pattern_vector->v[0]);
 
@@ -2743,8 +2739,6 @@ In addition, the first segment also requires special handling if |arrow == DOUBL
 
                   if (do_dash_patterns)
                   {
-                     if (local_do_metafont)
-                        *out_stream_mf << **dash_pattern_iter;
                      if (local_do_metapost)
                         *out_stream_mp << **dash_pattern_iter;
 
@@ -2788,8 +2782,6 @@ In addition, the first segment also requires special handling if |arrow == DOUBL
 
                    if (do_dash_patterns)
                    {
-                      if (local_do_metafont)
-                         *out_stream_mf << endl << **dash_pattern_iter;
                       if (local_do_metapost)
                          *out_stream_mp << endl << **dash_pattern_iter;
                    }
@@ -2828,8 +2820,6 @@ In addition, the first segment also requires special handling if |arrow == DOUBL
 
                       if (do_dash_patterns)
                       {
-                         if (local_do_metafont)
-                            *out_stream_mf << **dash_pattern_iter;
                          if (local_do_metapost)
                             *out_stream_mp << **dash_pattern_iter;
                       }
