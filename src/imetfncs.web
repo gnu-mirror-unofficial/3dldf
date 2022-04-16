@@ -4460,8 +4460,7 @@ Id_Map_Entry_Type::show(string s,
          if (s == "")
            s = "Id_Map_Entry_Type:";
 
-         cerr_strm << s << endl
-                   << "name == " << name << endl
+         cerr_strm << s << "  " << name << " == " << name << endl
                    << "type == " << name_map[type];
 
          log_message(cerr_strm); 
@@ -4473,7 +4472,7 @@ Id_Map_Entry_Type::show(string s,
   else /* |!verbose| */
      {
 
-        cerr_strm << name << ": " << endl;
+        cerr_strm << s << "  " << name << ": " << endl;
 
         log_message(cerr_strm); 
         cerr << cerr_strm.str();

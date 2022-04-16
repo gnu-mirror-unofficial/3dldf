@@ -793,8 +793,7 @@ Added this rule.
  
 };
 
-@q **** (4) command --> OUTPUT picture_expression @>
-@q **** (4) with_clause_output_list.                   @>
+@q **** (4) command --> OUTPUT picture_expression with_clause_output_list. @>
 
 @*3 \§command> $\longrightarrow$ `\.{OUTPUT}'
 \§picture expression> \§with clause output list>.
@@ -833,16 +832,29 @@ and unnecessary.
 
     Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
   
-    scanner_node->picture_entry_ptr = @=$2@>; 
+    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+    entry->show("entry:");
+
+    scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 
     int status = 0;
 
     if (metafont_output)
+    {
+       cerr << "Here I am 3." << endl;
+
        status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+    }
 
     if (metapost_output)
-       status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
+    {
+       cerr << "Here I am 4." << endl;
 
+       status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
+    }
+
+    scanner_node->picture_entry_ptr = 0;
     @=$$@> = static_cast<void*>(0);
 
 };
@@ -871,7 +883,15 @@ Added this rule.
 @=with_clause_output_list: /* Empty.  */@>
 {
 
+  @<Common declarations for rules@>@;
+
+  if (metafont_output)  
+     scanner_node->output_format_val |= Scan_Parse::ENDCHAR_COMMAND;
+  if (metapost_output)  
+     scanner_node->output_format_val |= Scan_Parse::ENDFIG_COMMAND;
+
   @=$$@> = static_cast<void*>(0);
+
 
 };
 
@@ -1588,6 +1608,260 @@ Added this rule.
      *r = 0;
 
      @=$$@> = scanner_node->surface_hiding_value_ptr = static_cast<void*>(r); 
+
+};
+
+@q ***** (5) with_clause_output --> metafont_metapost_output_option.@>
+@*4 \§with clause output> $\longrightarrow$ \§metafont metapost output option>.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=with_clause_output: metafont_metapost_output_option@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `with_clause_output: metafont_metapost_output_option'."
+                 << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
+
+};
+
+@q ***** (5) metafont_metapost_output_option.  @>
+@
+\LOG
+\initials{LDF 2022.04.16.}
+Added this type declaration.
+\ENDLOG 
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> metafont_metapost_output_option@>
+
+
+@q ****** (6) metafont_metapost_output_option: METAFONT @>
+
+@ \§metafont metapost output option> $\longrightarrow$ \.{METAFONT}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=metafont_metapost_output_option: METAFONT@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAFONT'."
+                 << endl 
+                 << "$1 == " << name_map[@=$1@>] << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) metafont_metapost_output_option: METAPOST @>
+
+@ \§metafont metapost output option> $\longrightarrow$ \.{METAPOST}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=metafont_metapost_output_option: METAPOST@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAPOST'."
+                 << endl 
+                 << "$1 == " << name_map[@=$1@>] << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) metafont_metapost_output_option: NO_METAFONT @>
+
+@ \§metafont metapost output option> $\longrightarrow$ \.{NO\_METAFONT}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=metafont_metapost_output_option: NO_METAFONT@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: NO_METAFONT'."
+                 << endl 
+                 << "$1 == " << name_map[@=$1@>] << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) metafont_metapost_output_option: NO_METAPOST @>
+
+@ \§metafont metapost output option> $\longrightarrow$ \.{NO\_METAPOST}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=metafont_metapost_output_option: NO_METAPOST@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: NO_METAPOST'."
+                 << endl 
+                 << "$1 == " << name_map[@=$1@>] << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) metafont_metapost_output_option: METAFONT_ONLY @>
+
+@ \§metafont metapost output option> $\longrightarrow$ \.{METAFONT\_ONLY}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=metafont_metapost_output_option: METAFONT_ONLY@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAFONT_ONLY'."
+                 << endl 
+                 << "$1 == " << name_map[@=$1@>] << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
+
+};
+
+@q ****** (6) metafont_metapost_output_option: METAPOST_ONLY @>
+
+@ \§metafont metapost output option> $\longrightarrow$ \.{METAPOST\_ONLY}.
+\initials{LDF 2022.04.16.}
+
+\LOG
+\initials{LDF 2022.04.16.}
+Added this rule.
+\ENDLOG 
+
+@<Define rules@>= 
+  
+@=metafont_metapost_output_option: METAPOST_ONLY@>
+{
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAPOST_ONLY'."
+                 << endl 
+                 << "$1 == " << name_map[@=$1@>] << endl;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   @=$$@> = 0;
 
 };
 
