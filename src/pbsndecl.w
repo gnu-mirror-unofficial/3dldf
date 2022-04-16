@@ -2220,8 +2220,8 @@ Added token declaration for |VERBATIM_METAFONT|.
 Added token declaration for |LET|.
 
 \initials{LDF 2022.04.16.}
-Added token declarations for |METAPOST|, METAFONT|, NO_METAPOST|, 
-NO_METAFONT|, METAPOST_ONLY| and ||METAFONT_ONLY|.
+Added token declarations for |METAPOST|, METAFONT|, |NO_METAPOST|, 
+|NO_METAFONT|, |METAPOST_ONLY| and |METAFONT_ONLY|.
 \ENDLOG 
 
 @<Token and precedence declarations@>=
