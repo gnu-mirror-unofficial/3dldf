@@ -604,11 +604,11 @@ Added this rule.
 
     else /* |s != 0|  */
     {
-         int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
+         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
 
-@q ***** (5) Error handling:  |verbatim_metapost_func| failed.@>   
+@q ***** (5) Error handling:  |verbatim_func| failed.@>   
 
-@ Error handling:  |verbatim_metapost_func| failed.
+@ Error handling:  |verbatim_func| failed.
 \initials{LDF 2004.12.13.}
 
 @<Define rules@>=
@@ -618,10 +618,9 @@ Added this rule.
 
 #if 0 
                 cerr_strm << thread_name 
-                          << "ERROR!  In `yyparse()', rule "
-                          << "`verbatim_metapost_command "
+                          << "ERROR!  In `yyparse()', rule `command "
                           << "--> VERBATIM_METAPOST string_expression':"
-                          << endl << "`verbatim_metapost_func()' failed.  "
+                          << endl << "`verbatim_func()' failed.  "
                           << "Will try to continue.";
 
                 log_message(cerr_strm); 
@@ -693,7 +692,7 @@ Added this rule.
 
     else /* |s != 0|  */
     {
-         int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
+         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
 
 @q ***** (5) Error handling:  |verbatim_metafont_func| failed.@>   
 
@@ -707,10 +706,9 @@ Added this rule.
 
 #if 0 
                 cerr_strm << thread_name 
-                          << "ERROR!  In `yyparse()', rule "
-                          << "`verbatim_metafont_command "
+                          << "ERROR!  In `yyparse()', rule `command "
                           << "--> VERBATIM_METAFONT string_expression':"
-                          << endl << "`verbatim_metapost_func()' failed.  "
+                          << endl << "`verbatim_func()' failed.  "
                           << "Will try to continue.";
 
                 log_message(cerr_strm); 

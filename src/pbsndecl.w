@@ -2211,6 +2211,9 @@ Added token declaration for |VERBATIM_METAPOST|.
 
 \initials{LDF 2022.04.11.}
 Added token declaration for |VERBATIM_METAFONT|. 
+
+\initials{LDF 2022.04.16.}
+Added token declaration for |VERBATIM_TEX|. 
 \ENDLOG 
 
 @q **** (4) Declarations.@>   
@@ -2264,6 +2267,7 @@ Added token declarations for |METAPOST|, METAFONT|, |NO_METAPOST|,
 
 @=%token <int_value> VERBATIM_METAPOST@>@/
 @=%token <int_value> VERBATIM_METAFONT@>@/
+@=%token <int_value> VERBATIM_TEX@>@/
 
 @=%token <int_value> METAPOST@>@/
 @=%token <int_value> METAFONT@>@/
