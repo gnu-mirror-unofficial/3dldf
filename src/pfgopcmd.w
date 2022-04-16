@@ -733,6 +733,8 @@ Added this rule.
   
 @=command: ENDCHAR with_clause_output_list@>@/
 {
+@q ****** (6) @>
+
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
@@ -748,18 +750,44 @@ Added this rule.
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-  bool* c = new bool;
-  *c = true;
+@q ****** (6) @>
 
-  bool* e = new bool;
-  *e = true;
+  if (!scanner_node->beginchar_flag)
+  {
+      cerr_strm << thread_name 
+                << "WARNING! In parser, rule `command: ENDCHAR with_clause_output_list':" 
+                << endl 
+                << "`scanner_node->beginchar_flag' == `false'.  Not collecting a character."
+                << endl 
+                << "Not performing output.  Continuing."
+                << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+      
+  } /* |if| */
+
+@q ****** (6) @>
+
+  else
+  {
+     bool* c = new bool;
+     *c = true;
+
+     bool* e = new bool;
+     *e = true;
  
-  scanner_node->clear_ptr   = static_cast<void*>(c); 
-  scanner_node->endfig_ptr  = static_cast<void*>(e); 
+     scanner_node->clear_ptr   = static_cast<void*>(c); 
+     scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-  status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+     status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
 
-  scanner_node->beginchar_flag  = false;
+     scanner_node->beginchar_flag  = false;
+
+  } /* |else| */
+
+@q ****** (6) @>
  
   @=$$@> = static_cast<void*>(0);
  
