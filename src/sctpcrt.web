@@ -421,13 +421,13 @@ or more of the formats supported by the GNU plotutils package.
       cerr << "out_filename_base after erase == "
            << out_filename_base << endl;
  
-     cerr << "r.do_output[Run_State::METAPOST] == " << r.do_output[Run_State::METAPOST] << endl;
-     cerr << "r.do_output[Run_State::METAFONT] == " << r.do_output[Run_State::METAFONT] << endl;
+     cerr << "r.do_output[Run_State::METAPOST_RS] == " << r.do_output[Run_State::METAPOST_RS] << endl;
+     cerr << "r.do_output[Run_State::METAFONT_RS] == " << r.do_output[Run_State::METAFONT_RS] << endl;
 
   }
 #endif 
 
-  if (r.do_output[Run_State::METAPOST])
+  if (r.do_output[Run_State::METAPOST_RS])
   {
     out_file = 0;
     out_filename_metapost = out_filename_base + ".mp";
@@ -437,7 +437,7 @@ or more of the formats supported by the GNU plotutils package.
     out_file = 0;
   }  
 
-  if (r.do_output[Run_State::METAFONT])
+  if (r.do_output[Run_State::METAFONT_RS])
   {
 
     out_file = 0;
@@ -705,15 +705,15 @@ needed, because this function predefines variables for these |Colors|.
 
 @q ****** (6) @>
 
-  if (scanner_node->in->type == Io_Struct::FILE_TYPE && r.do_output[Run_State::METAPOST])
+  if (scanner_node->in->type == Io_Struct::FILE_TYPE && r.do_output[Run_State::METAPOST_RS])
     {
 
-      scanner_node->out[Run_State::METAPOST] = new Output_Struct;
-      scanner_node->out[Run_State::METAPOST]->filename = out_filename_metapost;
-      scanner_node->out[Run_State::METAPOST]->stream_ptr
+      scanner_node->out[Run_State::METAPOST_RS] = new Output_Struct;
+      scanner_node->out[Run_State::METAPOST_RS]->filename = out_filename_metapost;
+      scanner_node->out[Run_State::METAPOST_RS]->stream_ptr
         = static_cast<ostream*>(out_file_metapost);
 
-      scanner_node->out[Run_State::METAPOST]->type = Io_Struct::FILE_TYPE;
+      scanner_node->out[Run_State::METAPOST_RS]->type = Io_Struct::FILE_TYPE;
 
       out_file_metapost->setf(ios::fixed, ios::floatfield);
   
@@ -730,20 +730,20 @@ needed, because this function predefines variables for these |Colors|.
       out_file_metapost = 0;
     }
   else
-    scanner_node->out[Run_State::METAPOST] = 0;
+    scanner_node->out[Run_State::METAPOST_RS] = 0;
 
 @q ****** (6) @>
 
   if (   scanner_node->in->type == Io_Struct::FILE_TYPE 
-      && r.do_output[Run_State::METAFONT])
+      && r.do_output[Run_State::METAFONT_RS])
     {
 
-      scanner_node->out[Run_State::METAFONT] = new Output_Struct;
-      scanner_node->out[Run_State::METAFONT]->filename = out_filename_metafont;
-      scanner_node->out[Run_State::METAFONT]->stream_ptr
+      scanner_node->out[Run_State::METAFONT_RS] = new Output_Struct;
+      scanner_node->out[Run_State::METAFONT_RS]->filename = out_filename_metafont;
+      scanner_node->out[Run_State::METAFONT_RS]->stream_ptr
         = static_cast<ostream*>(out_file_metafont);
 
-      scanner_node->out[Run_State::METAFONT]->type = Io_Struct::FILE_TYPE;
+      scanner_node->out[Run_State::METAFONT_RS]->type = Io_Struct::FILE_TYPE;
 
       out_file_metafont->setf(ios::fixed, ios::floatfield);
   
@@ -760,7 +760,7 @@ needed, because this function predefines variables for these |Colors|.
       out_file_metafont = 0;
     }
   else
-    scanner_node->out[Run_State::METAFONT] = 0;
+    scanner_node->out[Run_State::METAFONT_RS] = 0;
 
 @q ****** (6) @>
 
@@ -3058,10 +3058,6 @@ and also several calls to |scanner_node->add_synonym| for these tokens.
 
   scanner_node->add_synonym("nomp", "no_metapost");
   scanner_node->add_synonym("nomf", "no_metafont");
-
-@<Token and precedence declarations@>=
-
-
 
   scanner_node->add_entry("let", LET, spark);
 

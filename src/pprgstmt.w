@@ -131,7 +131,7 @@ Added |bool warning_stop_value|.
 #if 0 
    /* This doesn't appear to be used anywhere.  \initials{LDF 2022.04.11.}  */
    ostream* out_stream_metapost
-        = scanner_node->out[Run_State::METAPOST]->stream_ptr;
+        = scanner_node->out[Run_State::METAPOST_RS]->stream_ptr;
 #endif 
 
    bool error_stop_value = (      scanner_node->run_state.error_stop_mode

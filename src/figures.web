@@ -206,12 +206,12 @@ beginfig(Scanner_Node s, unsigned short i, bool silent)
 
   if (metafont_output)
   {
-     os = s->out[Run_State::METAFONT];
+     os = s->out[Run_State::METAFONT_RS];
      out_stream  = static_cast<ofstream*>(os->stream_ptr);
   }
   else
   {
-     os = s->out[Run_State::METAPOST];
+     os = s->out[Run_State::METAPOST_RS];
      out_stream  = static_cast<ofstream*>(os->stream_ptr);
   }
 
@@ -313,12 +313,12 @@ endfig(Scanner_Node s,
 
   if (metafont_output)
   {
-     os = s->out[Run_State::METAFONT];
+     os = s->out[Run_State::METAFONT_RS];
      out_stream  = static_cast<ofstream*>(os->stream_ptr);
   }
   else
   {
-     os = s->out[Run_State::METAPOST];
+     os = s->out[Run_State::METAPOST_RS];
      out_stream  = static_cast<ofstream*>(os->stream_ptr);
   }
 

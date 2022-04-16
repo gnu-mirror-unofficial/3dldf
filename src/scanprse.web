@@ -1066,12 +1066,12 @@ Added this section.
 
   if (metafont_output)
   {
-     os_mf = scanner_node->out[Run_State::METAFONT];
+     os_mf = scanner_node->out[Run_State::METAFONT_RS];
      out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
   }
   if (metapost_output)
   {
-     os_mp = scanner_node->out[Run_State::METAPOST];
+     os_mp = scanner_node->out[Run_State::METAPOST_RS];
      out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
   }
 
@@ -1857,7 +1857,7 @@ without \.{--multithread-input}.
 
   if (metafont_output)
   {
-     out_stream_mf = picture_ptr_arg->scanner_node->out[Run_State::METAFONT];
+     out_stream_mf = picture_ptr_arg->scanner_node->out[Run_State::METAFONT_RS];
 
      if (out_stream_mf == static_cast<Output_Struct*>(0))
      {
@@ -1878,7 +1878,7 @@ without \.{--multithread-input}.
 
   if (metapost_output)
   {
-     out_stream_mp = picture_ptr_arg->scanner_node->out[Run_State::METAPOST];
+     out_stream_mp = picture_ptr_arg->scanner_node->out[Run_State::METAPOST_RS];
      
      if (out_stream_mp == static_cast<Output_Struct*>(0))
      {
@@ -3002,9 +3002,9 @@ to |Picture::output|.
 #ifdef HAVE_PTHREAD_H  
 
    if (metafont_output)
-      p->scanner_node->out[Run_State::METAFONT]->lock();
+      p->scanner_node->out[Run_State::METAFONT_RS]->lock();
    else
-      p->scanner_node->out[Run_State::METAPOST]->lock();
+      p->scanner_node->out[Run_State::METAPOST_RS]->lock();
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
@@ -3036,11 +3036,11 @@ to |Picture::output|.
    if (is_endfig_or_endchar)
    {
      if (metafont_output && output_command_arg == ENDCHAR_COMMAND)
-        *(p->scanner_node->out[Run_State::METAFONT]->stream_ptr) 
+        *(p->scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) 
               << "endchar;" << endl << endl << flush;
 
      if (metapost_output && output_command_arg == ENDFIG_COMMAND)
-        *(p->scanner_node->out[Run_State::METAPOST]->stream_ptr) 
+        *(p->scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
               << "endfig;" << endl << endl << flush;
    }
 
@@ -3049,9 +3049,9 @@ to |Picture::output|.
 
 #ifdef HAVE_PTHREAD_H  
    if (metafont_output)
-      p->scanner_node->out[Run_State::METAFONT]->unlock();
+      p->scanner_node->out[Run_State::METAFONT_RS]->unlock();
    else
-      p->scanner_node->out[Run_State::METAPOST]->unlock();
+      p->scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
     }     /* |else | (|!multithread_output|)  */

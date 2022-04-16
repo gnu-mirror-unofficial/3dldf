@@ -2524,10 +2524,10 @@ struct Run_State
   bool multithread_include;
 
   static const unsigned short MAX_OUTPUT_FORMATS;
-  static const unsigned short METAPOST;
+  static const unsigned short METAPOST_RS;
   static const unsigned short PNG;
   static const unsigned short LIBPLOT;
-  static const unsigned short METAFONT;
+  static const unsigned short METAFONT_RS;
 
   static const unsigned short QUIET; 
   static const unsigned short SILENT; 
@@ -2566,10 +2566,10 @@ I've added today.
 
 @<Define |static| |Run_State| member variables@>=
 
-const unsigned short Run_State::METAPOST = 0;
+const unsigned short Run_State::METAPOST_RS = 0;
 const unsigned short Run_State::PNG      = 1;
 const unsigned short Run_State::LIBPLOT  = 2;
-const unsigned short Run_State::METAFONT = 3;
+const unsigned short Run_State::METAFONT_RS = 3;
 
 const unsigned short Run_State::MAX_OUTPUT_FORMATS = 4;
 
@@ -2649,10 +2649,10 @@ Run_State::Run_State(void)
   multithread_input   = false;
   multithread_output  = false;
   multithread_include = false;
-  do_output[METAPOST] = true;
+  do_output[METAPOST_RS] = true;
   do_output[PNG]      = false;
   do_output[LIBPLOT]  = false;
-  do_output[METAFONT] = true;
+  do_output[METAFONT_RS] = true;
   single_output_file  = false;
 
   message_mode      = STANDARD;

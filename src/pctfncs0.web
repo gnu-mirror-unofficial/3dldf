@@ -1275,12 +1275,12 @@ Point::output(Scanner_Node scanner_node, unsigned int output_command_arg)
 
   if (local_do_metafont) 
   {
-     os_mf = scanner_node->out[Run_State::METAFONT];
+     os_mf = scanner_node->out[Run_State::METAFONT_RS];
      out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
   }
   if (local_do_metapost) 
   {
-     os_mp = scanner_node->out[Run_State::METAPOST];
+     os_mp = scanner_node->out[Run_State::METAPOST_RS];
      out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
   }
   
@@ -1605,12 +1605,12 @@ Label::output(Scanner_Node s,
 
    if (local_do_metafont)
    {
-      os_mf = s->out[Run_State::METAFONT];
+      os_mf = s->out[Run_State::METAFONT_RS];
       out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
    }
    if (metapost_output)
    {
-      os_mp = s->out[Run_State::METAPOST];
+      os_mp = s->out[Run_State::METAPOST_RS];
       out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
    }
    
@@ -1833,12 +1833,12 @@ Path::output(Scanner_Node scanner_node, unsigned int output_command_arg)
 
    if (local_do_metafont)
    {
-      os_mf = scanner_node->out[Run_State::METAFONT];
+      os_mf = scanner_node->out[Run_State::METAFONT_RS];
       out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
    }
    if (local_do_metapost)
    {
-      os_mp = scanner_node->out[Run_State::METAPOST];
+      os_mp = scanner_node->out[Run_State::METAPOST_RS];
       out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
    }
 

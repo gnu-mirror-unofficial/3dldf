@@ -839,7 +839,7 @@ Added the ``\.{metafont}'' and ``\.{mf}'' options.
             cerr << "Setting global variable `bool metafont_output' to `true'." << endl;
 
             metafont_output = true;
-            run_state_initial.do_output[Run_State::METAFONT] = true;
+            run_state_initial.do_output[Run_State::METAFONT_RS] = true;
 
         }
 
@@ -864,8 +864,8 @@ Added this section.
 
             metafont_output = true;
             metapost_output = false;
-            run_state_initial.do_output[Run_State::METAFONT] = true;
-            run_state_initial.do_output[Run_State::METAPOST] = false;
+            run_state_initial.do_output[Run_State::METAFONT_RS] = true;
+            run_state_initial.do_output[Run_State::METAPOST_RS] = false;
 
         }
 
@@ -887,7 +887,7 @@ Added this section.
                  << endl;
 
             metafont_output = false;
-            run_state_initial.do_output[Run_State::METAFONT] = false;
+            run_state_initial.do_output[Run_State::METAFONT_RS] = false;
         }
 
 @q **** (4) metapost and mp.@>
@@ -907,7 +907,7 @@ Added the ``\.{metapost}'' and ``\.{mp}'' options.
             cerr << "Setting global variable `bool metapost_output' to `true'." << endl;
 
             metapost_output = true;
-            run_state_initial.do_output[Run_State::METAPOST] = true;
+            run_state_initial.do_output[Run_State::METAPOST_RS] = true;
         }
 
 @q **** (4) metapost-only and mp-only.@>
@@ -931,8 +931,8 @@ Added this section.
 
             metapost_output = true;
             metafont_output = false;
-            run_state_initial.do_output[Run_State::METAPOST] = true;
-            run_state_initial.do_output[Run_State::METAFONT] = false;
+            run_state_initial.do_output[Run_State::METAPOST_RS] = true;
+            run_state_initial.do_output[Run_State::METAFONT_RS] = false;
 
         }
 
@@ -954,7 +954,7 @@ Added this section.
                  << endl;
 
             metapost_output = false;
-            run_state_initial.do_output[Run_State::METAPOST] = false;
+            run_state_initial.do_output[Run_State::METAPOST_RS] = false;
         }
 
 @q **** (4) @>
@@ -1492,12 +1492,12 @@ main(int argc, char *argv[])
                        << "]->get_in_filename() == " 
                        << scanner_node_vector[i]->get_in_filename() << endl 
                        << "scanner_node_vector[" << i << "]->"
-                       << "out[Run_State::METAPOST]->filename == " 
-                       << scanner_node_vector[i]->out[Run_State::METAPOST]->filename 
+                       << "out[Run_State::METAPOST_RS]->filename == " 
+                       << scanner_node_vector[i]->out[Run_State::METAPOST_RS]->filename 
                        << endl 
                        << "scanner_node_vector[" << i << "]->"
-                       << "out[Run_State::METAFONT]->filename == " 
-                       << scanner_node_vector[i]->out[Run_State::METAFONT]->filename 
+                       << "out[Run_State::METAFONT_RS]->filename == " 
+                       << scanner_node_vector[i]->out[Run_State::METAFONT_RS]->filename 
                        << endl;
               } /* |if (DEBUG)|  */@;
 #endif /* |DEBUG_COMPILE|  */@;
@@ -1660,22 +1660,22 @@ Removed the |do|---|while| loop, which was commented-out.
 
       if (DEBUG)
       { 
-         cerr << "Run_State::METAPOST == " << Run_State::METAPOST << endl
-              << "Run_State::METAFONT == " << Run_State::METAFONT << endl
+         cerr << "Run_State::METAPOST_RS == " << Run_State::METAPOST_RS << endl
+              << "Run_State::METAFONT_RS == " << Run_State::METAFONT_RS << endl
               << "Run_State::LIBPLOT  == " << Run_State::LIBPLOT << endl;
       }
 
       if (metafont_output)
       {
-         scanner_node_stdin->open_default_out_file(Run_State::METAFONT, run_state_initial);
-         scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr->setf(
+         scanner_node_stdin->open_default_out_file(Run_State::METAFONT_RS, run_state_initial);
+         scanner_node_stdin->out[Run_State::METAFONT_RS]->stream_ptr->setf(
                                                  ios::fixed, ios::floatfield);
       }
 
       if (metapost_output)
       {
-         scanner_node_stdin->open_default_out_file(Run_State::METAPOST, run_state_initial);
-         scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr->setf(
+         scanner_node_stdin->open_default_out_file(Run_State::METAPOST_RS, run_state_initial);
+         scanner_node_stdin->out[Run_State::METAPOST_RS]->stream_ptr->setf(
                                                  ios::fixed, ios::floatfield);
       }
 
@@ -1689,7 +1689,7 @@ Removed the |do|---|while| loop, which was commented-out.
 
       if (metafont_output)
       {
-         *(scanner_node_stdin->out[Run_State::METAFONT]->stream_ptr) 
+         *(scanner_node_stdin->out[Run_State::METAFONT_RS]->stream_ptr) 
                             << "%%%% " << default_out_filename_metafont 
                             << "." << endl
                             << "%%%% Generated on " << datestamp << endl 
@@ -1699,7 +1699,7 @@ Removed the |do|---|while| loop, which was commented-out.
       }
       if (metapost_output)
       {
-         *(scanner_node_stdin->out[Run_State::METAPOST]->stream_ptr) 
+         *(scanner_node_stdin->out[Run_State::METAPOST_RS]->stream_ptr) 
                             << "%%%% " << default_out_filename_metapost 
                             << "." << endl
                             << "%%%% Generated on " << datestamp << endl 

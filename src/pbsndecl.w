@@ -2267,8 +2267,8 @@ Added token declarations for |METAPOST|, METAFONT|, |NO_METAPOST|,
 
 @=%token <int_value> METAPOST@>@/
 @=%token <int_value> METAFONT@>@/
-@=%token <int_value> NO_METAPOST_ONLY@>@/
-@=%token <int_value> NO_METAFONT_ONLY@>@/
+@=%token <int_value> NO_METAPOST@>@/
+@=%token <int_value> NO_METAFONT@>@/
 @=%token <int_value> METAPOST_ONLY@>@/
 @=%token <int_value> METAFONT_ONLY@>@/
 

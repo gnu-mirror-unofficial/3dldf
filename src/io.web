@@ -2991,7 +2991,7 @@ Added this function declaration.
 
 \initials{LDF 2004.04.16.}  
 Changed |metafont_output|, |png_output|, and |libplot_output| to 
-|do_output[Run_State::METAFONT]|, |do_output[Run_State::PNG]|, and 
+|do_output[Run_State::METAFONT_RS]|, |do_output[Run_State::PNG]|, and 
 |do_output[Run_State::LIBPLOT]|, respectively.  
 
 \initials{LDF 2004.04.16.}  
@@ -3093,7 +3093,7 @@ operator=(const Scanner_Type& s);
 
 \initials{LDF 2004.04.16.}  
 Changed |metafont_output|, |png_output|, and |libplot_output| to 
-|do_output[Run_State::METAFONT]|, |do_output[Run_State::PNG]|, and 
+|do_output[Run_State::METAFONT_RS]|, |do_output[Run_State::PNG]|, and 
 |do_output[Run_State::LIBPLOT]|, respectively.  
 \ENDLOG 
 
@@ -3121,18 +3121,18 @@ Scanner_Type::open_default_out_file(const unsigned short format, Run_State& r)
 
   string conditional_string;
 
-  if (format == Run_State::METAPOST)
+  if (format == Run_State::METAPOST_RS)
     {
-      do_output = run_state.do_output[Run_State::METAPOST];
+      do_output = run_state.do_output[Run_State::METAPOST_RS];
       filename = default_out_filename_metapost;
-      conditional_string = "do_output[Run_State::METAPOST]";
+      conditional_string = "do_output[Run_State::METAPOST_RS]";
     }
   
-  else if (format == Run_State::METAFONT)
+  else if (format == Run_State::METAFONT_RS)
     {
-      do_output = run_state.do_output[Run_State::METAFONT];
+      do_output = run_state.do_output[Run_State::METAFONT_RS];
       filename = default_out_filename_metafont;
-      conditional_string = "do_output[Run_State::METAFONT]";
+      conditional_string = "do_output[Run_State::METAFONT_RS]";
     }
   
   else if (format == Run_State::PNG)
@@ -4340,7 +4340,7 @@ Scanner_Type::show(string s, bool show_all) const
   else
     cerr << "in->filename == " << in->filename << endl;    
       
-  for (int i = 0; i < Run_State::MAX_OUTPUT_FORMATS; ++i)  /* |Run_State::METAPOST == 0|  */
+  for (int i = 0; i < Run_State::MAX_OUTPUT_FORMATS; ++i)  /* |Run_State::METAPOST_RS == 0|  */
     {
       if (out[i] == static_cast<Output_Struct*>(0))
         cerr << "out[" << i << "] == 0" << endl;

@@ -9922,21 +9922,21 @@ and increment |scanner_node->output_pending.value_1|.
 
 #ifdef HAVE_PTHREAD_H  
    if (metafont_output)
-      scanner_node->out[Run_State::METAFONT]->lock();
+      scanner_node->out[Run_State::METAFONT_RS]->lock();
    else
-      scanner_node->out[Run_State::METAPOST]->lock();
+      scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    if (metafont_output)    
-      *(scanner_node->out[Run_State::METAFONT]->stream_ptr) << *s << endl << flush;
+      *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
    else
-      *(scanner_node->out[Run_State::METAPOST]->stream_ptr) << *s << endl << flush;
+      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
    if (metafont_output)
-      scanner_node->out[Run_State::METAFONT]->unlock();
+      scanner_node->out[Run_State::METAFONT_RS]->unlock();
    else
-      scanner_node->out[Run_State::METAPOST]->unlock();
+      scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
    scanner_node->output_pending.value_0 = false;
@@ -10027,21 +10027,21 @@ and increment |scanner_node->output_pending.value_1|.
 
 #ifdef HAVE_PTHREAD_H  
    if (metafont_output)
-      scanner_node->out[Run_State::METAFONT]->lock();
+      scanner_node->out[Run_State::METAFONT_RS]->lock();
    else
-      scanner_node->out[Run_State::METAPOST]->lock();
+      scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
        
    if (metafont_output)
-      *(scanner_node->out[Run_State::METAFONT]->stream_ptr) << *s << endl << flush;
+      *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
    else
-      *(scanner_node->out[Run_State::METAPOST]->stream_ptr) << *s << endl << flush;
+      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
    if (metafont_output)
-      scanner_node->out[Run_State::METAFONT]->unlock();
+      scanner_node->out[Run_State::METAFONT_RS]->unlock();
    else
-      scanner_node->out[Run_State::METAPOST]->unlock();
+      scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
 
@@ -14328,12 +14328,12 @@ Scan_Parse::clip_to_func(void* arg1, void* parameter)
 
    if (metafont_output)
    {
-      os = scanner_node->out[Run_State::METAFONT];
+      os = scanner_node->out[Run_State::METAFONT_RS];
       out_stream  = static_cast<ofstream*>(os->stream_ptr);
    }
    else
    {
-      os = scanner_node->out[Run_State::METAPOST];
+      os = scanner_node->out[Run_State::METAPOST_RS];
       out_stream  = static_cast<ofstream*>(os->stream_ptr);
    }
 
