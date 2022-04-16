@@ -840,19 +840,10 @@ and unnecessary.
 
     int status = 0;
 
-    if (metafont_output)
-    {
-       cerr << "Here I am 3." << endl;
+    unsigned int i = scanner_node->output_format_val;
+    scanner_node->output_format_val = 0U;        
 
-       status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
-    }
-
-    if (metapost_output)
-    {
-       cerr << "Here I am 4." << endl;
-
-       status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
-    }
+    status = Scan_Parse::output_command_func(scanner_node, i);
 
     scanner_node->picture_entry_ptr = 0;
     @=$$@> = static_cast<void*>(0);
@@ -1686,6 +1677,8 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   scanner_node->output_format_val |= Run_State::ENDCHAR_COMMAND;
+
    @=$$@> = 0;
 
 };
@@ -1720,6 +1713,8 @@ Added this rule.
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   scanner_node->output_format_val |= Run_State::ENDFIG_COMMAND;
 
    @=$$@> = 0;
 
