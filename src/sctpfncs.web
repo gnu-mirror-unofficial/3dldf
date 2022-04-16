@@ -1113,7 +1113,7 @@ Scanner_Type::add_entry(string nname,
   if (DEBUG)
      {
         cerr_strm << thread_name
-                  << "Entering `Scanner_Type::add_entry()'.";
+                  << "Entering `Scanner_Type::add_entry'.";
         log_message(cerr_strm);
         cerr_message(cerr_strm);
         cerr_strm.str("");
@@ -1136,7 +1136,7 @@ Scanner_Type::add_entry(string nname,
 #if DEBUG_COMPILE
        if (DEBUG)
           {
-              cerr_strm << thread_name << "In `Scanner_Type::add_entry()':"
+              cerr_strm << thread_name << "In `Scanner_Type::add_entry':"
                         << endl
                         << "No existing entry for " << nname << ".";
               log_message(cerr_strm);
@@ -1165,7 +1165,7 @@ Added code for handling this case.
       if (DEBUG)
         {
             cerr_strm << thread_name
-                      << "In `Scanner_Type::add_entry()':"
+                      << "In `Scanner_Type::add_entry':"
                       << endl
                       << "Entry exists for " << nname
                       << ". Will destroy it.";
@@ -1176,7 +1176,7 @@ Added code for handling this case.
 
             cerr_mutex.lock();
             cerr      << thread_name
-                      << "In `Scanner_Type::add_entry()':"
+                      << "In `Scanner_Type::add_entry':"
                       << endl
                       << "Showing " << iter->first << ": "
                       << endl;
@@ -1201,9 +1201,9 @@ Added code for handling this case.
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::add_entry()':"
+                    << "In `Scanner_Type::add_entry':"
                     << "About to call "
-                    << "`iter->second->destroy_array_subentries()'.";
+                    << "`iter->second->destroy_array_subentries'.";
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
@@ -1222,8 +1222,8 @@ Added code for handling this case.
         {
 
           cerr_strm << thread_name
-                    << "ERROR! In `Scanner_Type::add_entry()':"
-                    << "`iter->second->destroy_array_subentries()' "
+                    << "ERROR! In `Scanner_Type::add_entry':"
+                    << "`iter->second->destroy_array_subentries' "
                     << "failed."
                     << endl << "Not adding entry. "
                     << "Exiting function with return value "
@@ -1251,8 +1251,8 @@ Added code for handling this case.
           if (DEBUG)
             {
               cerr_strm << thread_name
-                        << "In `Scanner_Type::add_entry()':"
-                        << "`iter->second->destroy_array_subentries()' "
+                        << "In `Scanner_Type::add_entry':"
+                        << "`iter->second->destroy_array_subentries' "
                         << "succeeded.";
               log_message(cerr_strm);
               cerr_message(cerr_strm);
@@ -1275,7 +1275,7 @@ Now setting |iter->second| to 0 after deleting it.
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::add_entry()':"
+                    << "In `Scanner_Type::add_entry':"
                     << "About to call  `delete iter->second'.";
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -1290,7 +1290,7 @@ Now setting |iter->second| to 0 after deleting it.
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::add_entry()':"
+                    << "In `Scanner_Type::add_entry':"
                     << "`delete iter->second' succeeded."
                     << endl
                     << "About to call `id_map_node->id_map.erase(iter)'.";
@@ -1306,7 +1306,7 @@ Now setting |iter->second| to 0 after deleting it.
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::add_entry()':"
+                    << "In `Scanner_Type::add_entry':"
                     << "`id_map_node->id_map.erase(iter)' succeeded.";
           log_message(cerr_strm);
           cerr_message(cerr_strm, true);
@@ -1326,7 +1326,7 @@ Now setting |iter->second| to 0 after deleting it.
 #if DEBUG_COMPILE
   if (DEBUG)
      {
-        cerr_strm << thread_name << "In `Scanner_Type::add_entry()':"
+        cerr_strm << thread_name << "In `Scanner_Type::add_entry':"
                   << endl
                    << "`nname' == " << nname << ".";
         log_message(cerr_strm);
@@ -1354,7 +1354,7 @@ Now setting |iter->second| to 0 after deleting it.
 #if DEBUG_COMPILE
   if (DEBUG)
      {
-        cerr_strm << thread_name << "In `Scanner_Type::add_entry()':"
+        cerr_strm << thread_name << "In `Scanner_Type::add_entry':"
                   << endl
                   << "Exiting Scanner_Type::add_entry() and returning `entry'.";
 
@@ -1737,7 +1737,7 @@ stringstream cerr_strm;
   bool DEBUG = false; /* |true| */ @;
   if (DEBUG)
      {
-       cerr_strm << "Entering `Scanner_Type::erase_entry()'.";
+       cerr_strm << "Entering `Scanner_Type::erase_entry'.";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
@@ -1759,7 +1759,7 @@ stringstream cerr_strm;
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << "In `Scanner_Type::erase_entry()':"
+       cerr_strm << "In `Scanner_Type::erase_entry':"
                  << endl << "Trying to erase `Id_Map_Entry_Node' for `"
                  << s << "'.";
 
@@ -1781,7 +1781,7 @@ status = id_map_node->id_map.erase(s);
   if (status == 0)
     {
 
-      cerr_strm << "ERROR! In `Scanner_Type::erase_entry()':"
+      cerr_strm << "ERROR! In `Scanner_Type::erase_entry':"
                 << "Failed to erase `Id_Map_Entry_Node' for "
                 << "`" << s << "'." << endl
                 << "Exiting function with return value 1.";
@@ -1804,7 +1804,7 @@ status = id_map_node->id_map.erase(s);
   else if (status != 1)
     {
 
-      cerr_strm << "ERROR! In `Scanner_Type::erase_entry()':"
+      cerr_strm << "ERROR! In `Scanner_Type::erase_entry':"
                 << "`id_map_node->id_map.erase(iter)' returned "
                 << status << "." << endl
                 << "This shouldn't be possible. "
@@ -1827,9 +1827,9 @@ status = id_map_node->id_map.erase(s);
 #if DEBUG_COMPILE
    if (DEBUG)
      {
-       cerr_strm << "In `Scanner_Type::erase_entry()':"
+       cerr_strm << "In `Scanner_Type::erase_entry':"
                  << endl
-                 << "`id_map_node->id_map.erase()' succeeded "
+                 << "`id_map_node->id_map.erase' succeeded "
                  << "in erasing `Id_Map_Entry_Node' for "
                  << "`" << s << "'." << endl
                  << "Exiting function successfully with return value 0.";
@@ -1930,7 +1930,7 @@ Scanner_Type::handle_numeric_list(int transform_token, void* r)
   if (DEBUG)
     {
        cerr_strm << thread_name
-                 << "Entering `Scanner_Type::handle_numeric_list()'.";
+                 << "Entering `Scanner_Type::handle_numeric_list'.";
 
        log_message(cerr_strm);
        cerr_message(cerr_strm);
@@ -1957,7 +1957,7 @@ Added this section.
   if (r == 0)
     {
       cerr_strm << thread_name
-                << "ERROR! In `Scanner_Type::handle_numeric_list()': "
+                << "ERROR! In `Scanner_Type::handle_numeric_list': "
                 << "`void* r' argument is a null pointer."
                 << endl
                 << "Exiting function, returning `false' and a "
@@ -2030,7 +2030,7 @@ as |transform_token == SCALED| when setting
   if (s <= 0)
     {
       cerr_strm << thread_name
-                << "ERROR! In `Scanner_Type::handle_numeric_list()':"
+                << "ERROR! In `Scanner_Type::handle_numeric_list':"
                 << endl
                 << "`w->v.size()' <= 0. "
                 << "No `real' values for specifying the transformation."
@@ -2061,7 +2061,7 @@ log_message(cerr_strm);
   if (s > MAX_TRANSFORMATION_ARGS)
     {
       cerr_strm << thread_name
-                << "WARNING! In `Scanner_Type::handle_numeric_list()':"
+                << "WARNING! In `Scanner_Type::handle_numeric_list':"
                 << endl
                 << "`w->v.size()' > `MAX_TRANSFORMATION_ARGS'. "
                 << "Too many `real' values specified. "
@@ -2137,7 +2137,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Rotating.";
+                    << "In `Scanner_Type::handle_numeric_list': Rotating.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -2158,7 +2158,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Scaling.";
+                    << "In `Scanner_Type::handle_numeric_list': Scaling.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -2185,7 +2185,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Xscaling.";
+                    << "In `Scanner_Type::handle_numeric_list': Xscaling.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -2212,7 +2212,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Yscaling.";
+                    << "In `Scanner_Type::handle_numeric_list': Yscaling.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -2239,7 +2239,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Zscaling.";
+                    << "In `Scanner_Type::handle_numeric_list': Zscaling.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -2260,7 +2260,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Shearing.";
+                    << "In `Scanner_Type::handle_numeric_list': Shearing.";
           log_message(cerr_strm);
           cerr_message(cerr_strm);
           cerr_strm.str("");
@@ -2280,7 +2280,7 @@ log_message(cerr_strm);
       if (DEBUG)
         {
           cerr_strm << thread_name
-                    << "In `Scanner_Type::handle_numeric_list()': Shifting.";
+                    << "In `Scanner_Type::handle_numeric_list': Shifting.";
 
           log_message(cerr_strm);
           cerr_message(cerr_strm);
@@ -2303,7 +2303,7 @@ invalid value.
   else  /* Invalid value for |transform_token|.  */
     {
       cerr_strm << thread_name
-                << "ERROR! In `Scanner_Type::handle_numeric_list()'."
+                << "ERROR! In `Scanner_Type::handle_numeric_list'."
                 << endl
                 << "Invalid value for `transform_token': "
                 << transform_token << "." << endl
@@ -2342,7 +2342,7 @@ invalid value.
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Exiting `Scanner_Type::handle_numeric_list()' "
+                << "Exiting `Scanner_Type::handle_numeric_list' "
                 << "successfully.";
 
       log_message(cerr_strm);
@@ -2419,7 +2419,7 @@ Scanner_Type::extract_picture_output_args(void)
   if (DEBUG)
     {
         cerr_strm << thread_name << "Entering "
-                  << "`Scanner_Type::extract_picture_output_args()'.";
+                  << "`Scanner_Type::extract_picture_output_args'.";
 
         log_message(cerr_strm);
         cerr_message(cerr_strm);
@@ -2440,7 +2440,7 @@ Scanner_Type::extract_picture_output_args(void)
      {
 
         cerr_strm << thread_name << "ERROR! "
-                  << "In `Scanner_Type::extract_picture_output_args()':"
+                  << "In `Scanner_Type::extract_picture_output_args':"
                   << endl << "`picture_entry_ptr' == 0. "
                   << "Exiting function with return value 0."
                   << endl;
@@ -2464,7 +2464,7 @@ Scanner_Type::extract_picture_output_args(void)
           cerr_mutex.lock();
 
           cerr << thread_name
-               << "In `Scanner_Type::extract_picture_output_args()':"
+               << "In `Scanner_Type::extract_picture_output_args':"
                << endl;
 
           static_cast<Picture*>(entry->object)->show("entry->object:");
@@ -2477,10 +2477,10 @@ Scanner_Type::extract_picture_output_args(void)
 
         {
 
-cerr_mutex.lock();
+          cerr_mutex.lock();
 
           cerr << thread_name
-               << "In `Scanner_Type::extract_picture_output_args()':"
+               << "In `Scanner_Type::extract_picture_output_args':"
                << endl
                << "`entry' == 0." << endl;
 
@@ -2528,7 +2528,7 @@ cerr_mutex.lock();
 
       cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::extract_picture_output_args':"
-                << endl << "`entry->lock()' failed."
+                << endl << "`entry->lock' failed."
                 << "Exiting function with return value 0."
                 << endl;
       cerr_message(cerr_strm, error_stop_value);
@@ -2544,7 +2544,7 @@ return 0;
 
           cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
-                    << endl << "`entry->lock()' succeeded.";
+                    << endl << "`entry->lock' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
 
@@ -2565,7 +2565,7 @@ return 0;
      {
 
       cerr_strm << thread_name << "ERROR! "
-                << "In `Scanner_Type::extract_picture_output_args()':"
+                << "In `Scanner_Type::extract_picture_output_args':"
                 << endl << "`entry_object' == 0. "
                 << "Will try to unlock `entry->mutex' "
                 << "and exit function with return value 0."
@@ -2628,7 +2628,7 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 
       cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::extract_picture_output_args':"
-                << endl << "`entry_picture->lock()' failed."
+                << endl << "`entry_picture->lock' failed."
                 << "Will try to unlock `entry->mutex' "
                 << "and exit function with return value 0."
                 << endl;
@@ -2646,7 +2646,7 @@ Picture* entry_picture = static_cast<Picture*>(entry->object);
 
           cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
-                    << endl << "`entry_picture->lock()' succeeded.";
+                    << endl << "`entry_picture->lock' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
@@ -2841,14 +2841,14 @@ because it's annoying.
 
       cerr_strm << thread_name << "ERROR! "
                 << "In `Scanner_Type::extract_picture_output_args':"
-                << endl << "`entry_picture->unlock()' failed."
+                << endl << "`entry_picture->unlock' failed."
                 << "Will try to unlock `entry->mutex', delete `picture_arg', "
                 << "and exit function with return value 0."
                 << endl;
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-entry->unlock();
+      entry->unlock();
 
       delete picture_arg;
       picture_arg = 0;
@@ -2863,7 +2863,7 @@ entry->unlock();
 
           cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
-                    << endl << "`entry_picture->unlock()' succeeded.";
+                    << endl << "`entry_picture->unlock' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
@@ -2957,14 +2957,14 @@ entry->unlock();
 
       cerr_strm << thread_name << "ERROR! "
                 << "In `Scanner_Type::extract_picture_output_args':"
-                << endl << "`entry_picture->unlock()' failed."
+                << endl << "`entry_picture->unlock' failed."
                 << "Will try to unlock `entry->mutex', delete `picture_arg', "
                 << "and exit function with return value 0."
                 << endl;
       cerr_message(cerr_strm, error_stop_value);
       cerr_strm.str("");
 
-entry->unlock();
+      entry->unlock();
       delete picture_arg;
 
       picture_arg = 0;
@@ -2979,7 +2979,7 @@ entry->unlock();
 
           cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
-                    << endl << "`entry_picture->unlock()' succeeded.";
+                    << endl << "`entry_picture->unlock' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
@@ -3057,7 +3057,7 @@ carefully than it had in the past.
 
       cerr_strm << thread_name
                 << "ERROR! In `Scanner_Type::extract_picture_output_args':"
-                << endl << "`entry->unlock()' failed."
+                << endl << "`entry->unlock' failed."
                 << "Will try to delete `picture_arg' and exit "
                 << "function with return value 0."
                 << endl;
@@ -3077,7 +3077,7 @@ carefully than it had in the past.
 
           cerr_strm << thread_name
                     << "In `Scanner_Type::extract_picture_output_args':"
-                    << endl << "`entry->unlock()' succeeded.";
+                    << endl << "`entry->unlock' succeeded.";
           cerr_message(cerr_strm);
           cerr_strm.str("");
         }
@@ -3207,7 +3207,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
            cerr_strm << thread_name
                      << "ERROR! In `Scanner_Type::extract_picture_output_args':"
-                     << endl << "`default_focus()' not found."
+                     << endl << "`default_focus' not found."
                      << "Will try to delete `picture_arg' and exit "
                      << "function with return value 0."
                      << endl;
@@ -3226,7 +3226,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
            {
              cerr_strm << thread_name
                        << "In `Scanner_Type::extract_picture_output_args':"
-                       << endl << "`default_focus()' found."
+                       << endl << "`default_focus' found."
                        << endl;
              cerr_message(cerr_strm);
              cerr_strm.str("");
@@ -3245,7 +3245,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
            cerr_strm << thread_name
                      << "ERROR! In `Scanner_Type::extract_picture_output_args':"
-                     << endl << "`focus_entry->lock()' failed."
+                     << endl << "`focus_entry->lock' failed."
                      << "Will try to delete `picture_arg' and exit "
                      << "function with return value 0."
                      << endl;
@@ -3264,7 +3264,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
          {
            cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
-                     << endl << "`focus_entry->lock()' succeeded."
+                     << endl << "`focus_entry->lock' succeeded."
                      << endl;
            cerr_message(cerr_strm);
            cerr_strm.str("");
@@ -3302,7 +3302,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
 
            cerr_strm << thread_name
                      << "ERROR! In `Scanner_Type::extract_picture_output_args':"
-                     << endl << "`focus_entry->unlock()' failed."
+                     << endl << "`focus_entry->unlock' failed."
                      << "Will try to delete `picture_arg' and exit "
                      << "function with return value 0."
                      << endl;
@@ -3321,7 +3321,7 @@ if (focus_entry == static_cast<Id_Map_Entry_Node>(0) || focus_entry->object == 0
          {
            cerr_strm << thread_name
                      << "In `Scanner_Type::extract_picture_output_args':"
-                     << endl << "`focus_entry->unlock()' succeeded."
+                     << endl << "`focus_entry->unlock' succeeded."
                      << endl;
            cerr_message(cerr_strm);
            cerr_strm.str("");
@@ -3929,7 +3929,7 @@ surface hiding.
   if (DEBUG)
     {
       cerr_strm << thread_name << "Exiting "
-                << "`Scanner_Type::extract_picture_output_args()'.";
+                << "`Scanner_Type::extract_picture_output_args'.";
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
