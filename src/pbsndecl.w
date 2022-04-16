@@ -2218,6 +2218,10 @@ Added token declaration for |VERBATIM_METAFONT|.
 \LOG
 \initials{LDF 2005.01.25.}
 Added token declaration for |LET|.
+
+\initials{LDF 2022.04.16.}
+Added token declarations for |METAPOST|, METAFONT|, NO_METAPOST|, 
+NO_METAFONT|, METAPOST_ONLY| and ||METAFONT_ONLY|.
 \ENDLOG 
 
 @<Token and precedence declarations@>=
@@ -2260,6 +2264,13 @@ Added token declaration for |LET|.
 
 @=%token <int_value> VERBATIM_METAPOST@>@/
 @=%token <int_value> VERBATIM_METAFONT@>@/
+
+@=%token <int_value> METAPOST@>@/
+@=%token <int_value> METAFONT@>@/
+@=%token <int_value> NO_METAPOST_ONLY@>@/
+@=%token <int_value> NO_METAFONT_ONLY@>@/
+@=%token <int_value> METAPOST_ONLY@>@/
+@=%token <int_value> METAFONT_ONLY@>@/
 
 @=%token <int_value> LET@>@/
 
