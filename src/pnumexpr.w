@@ -2879,8 +2879,6 @@ Added this rule.
 
 #if 0 
   cerr << "r == " << r << endl;
-  cerr << "XXX Enter <RETURN> to continue: ";
-  getchar(); 
 #endif 
 
   delete q;

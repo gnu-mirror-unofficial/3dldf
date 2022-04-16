@@ -77,7 +77,8 @@ possible to use |beginfig| in loops.
 @ 
 @<Define rules@>= 
   
-@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional@>@/
+@=command: BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS @>
+@=clear_current_picture_optional@>@/
 {
 @q ****** (6) @>
 
@@ -829,16 +830,47 @@ and unnecessary.
   
 @=command: OUTPUT picture_expression with_clause_output_list@>@/
 {
+@q ****** (6) @>
 
-    Scanner_Node scanner_node = static_cast<Scanner_Node>(parameter);
+   @<Common declarations for rules@>@;
+
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false|  */
+   if (DEBUG)
+   { 
+       cerr_strm << thread_name 
+          << "*** Parser, rule  `command: OUTPUT picture_expression with_clause_output_list'."
+          << endl
+          << "`scanner_node->output_format_val' == " << scanner_node->output_format_val
+          << " == 0" << oct << scanner_node->output_format_val << " (oct)"
+          << " == 0x" << hex << scanner_node->output_format_val
+          << " (hex)" << dec;
+
+       log_message(cerr_strm);
+       cerr_message(cerr_strm);
+       cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
   
-    Id_Map_Entry_Node entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
+
+@q ****** (6) @>
+
+    entry = static_cast<Id_Map_Entry_Node>(@=$2@>);
 
     entry->show("entry:");
 
     scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 
-    int status = 0;
+    status = 0;
+
+#if DEBUG_COMPILE
+    if (DEBUG)
+    { 
+       
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
 
     unsigned int i = scanner_node->output_format_val;
     scanner_node->output_format_val = 0U;        
@@ -876,13 +908,10 @@ Added this rule.
 
   @<Common declarations for rules@>@;
 
-  if (metafont_output)  
-     scanner_node->output_format_val |= Scan_Parse::ENDCHAR_COMMAND;
-  if (metapost_output)  
-     scanner_node->output_format_val |= Scan_Parse::ENDFIG_COMMAND;
+   scanner_node->output_format_val  = Scan_Parse::METAFONT_OUTPUT_COMMAND;
+   scanner_node->output_format_val |=  Scan_Parse::METAPOST_OUTPUT_COMMAND;
 
-  @=$$@> = static_cast<void*>(0);
-
+   @=$$@> = static_cast<void*>(0);
 
 };
 
@@ -1621,7 +1650,8 @@ Added this rule.
    DEBUG = true; /* |false|  */
    if (DEBUG)
    { 
-       cerr_strm << thread_name << "*** Parser, rule  `with_clause_output: metafont_metapost_output_option'."
+       cerr_strm << thread_name << "*** Parser, rule  `with_clause_output:  "
+                 << "metafont_metapost_output_option'."
                  << endl;
 
        log_message(cerr_strm);
@@ -1677,7 +1707,7 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   scanner_node->output_format_val |= Run_State::ENDCHAR_COMMAND;
+   scanner_node->output_format_val |= Scan_Parse::METAFONT_OUTPUT_COMMAND;
 
    @=$$@> = 0;
 
@@ -1714,7 +1744,8 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-   scanner_node->output_format_val |= Run_State::ENDFIG_COMMAND;
+   scanner_node->output_format_val |= Scan_Parse::METAPOST_OUTPUT_COMMAND;
+
 
    @=$$@> = 0;
 
@@ -1751,6 +1782,8 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   scanner_node->output_format_val &= ~Scan_Parse::METAFONT_OUTPUT_COMMAND;
+
    @=$$@> = 0;
 
 };
@@ -1786,6 +1819,8 @@ Added this rule.
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+   scanner_node->output_format_val &= ~Scan_Parse::METAPOST_OUTPUT_COMMAND;
+
    @=$$@> = 0;
 
 };
@@ -1810,7 +1845,8 @@ Added this rule.
    DEBUG = true; /* |false|  */
    if (DEBUG)
    { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAFONT_ONLY'."
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: "
+                 << "METAFONT_ONLY'."
                  << endl 
                  << "$1 == " << name_map[@=$1@>] << endl;
 
@@ -1820,6 +1856,9 @@ Added this rule.
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   scanner_node->output_format_val &= ~Scan_Parse::METAPOST_OUTPUT_COMMAND;
+   scanner_node->output_format_val |=  Scan_Parse::METAFONT_OUTPUT_COMMAND;
 
    @=$$@> = 0;
 
@@ -1845,7 +1884,8 @@ Added this rule.
    DEBUG = true; /* |false|  */
    if (DEBUG)
    { 
-       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option: METAPOST_ONLY'."
+       cerr_strm << thread_name << "*** Parser, rule  `metafont_metapost_output_option:  "
+                 << "METAPOST_ONLY'."
                  << endl 
                  << "$1 == " << name_map[@=$1@>] << endl;
 
@@ -1855,6 +1895,9 @@ Added this rule.
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+   scanner_node->output_format_val &= ~Scan_Parse::METAFONT_OUTPUT_COMMAND;
+   scanner_node->output_format_val |=  Scan_Parse::METAPOST_OUTPUT_COMMAND;
 
    @=$$@> = 0;
 

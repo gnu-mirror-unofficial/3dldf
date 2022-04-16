@@ -5881,7 +5881,8 @@ output(Scanner_Node s, unsigned int output_command_arg = 0);
 void
 Solid::output(Scanner_Node s, unsigned int output_command_arg)
 {
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
+
   if (DEBUG)
     cerr << "Entering Solid::output().\n";
 
@@ -5920,7 +5921,7 @@ Solid::output(Scanner_Node s, unsigned int output_command_arg)
   for (vector <Shape*>::iterator iter = v.begin();
        iter != v.end(); ++iter)
     {
-      (**iter).output(s);
+      (**iter).output(s, output_command_arg);
       delete (*iter);
     }
 

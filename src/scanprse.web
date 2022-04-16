@@ -213,8 +213,8 @@ Scan_Parse
 
   extern const unsigned int ENDFIG_COMMAND                   = 1;
   extern const unsigned int ENDCHAR_COMMAND                  = 2;
-  extern const unsigned int METAFONT_OUPTUT_COMMAND          = 4;
-  extern const unsigned int METAPOST_OUPTUT_COMMAND          = 8;
+  extern const unsigned int METAFONT_OUTPUT_COMMAND          = 4;
+  extern const unsigned int METAPOST_OUTPUT_COMMAND          = 8;
 
   char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
   unsigned short filename_array_ctr                 = 0;
@@ -249,8 +249,8 @@ Scan_Parse
 
    extern const unsigned int ENDFIG_COMMAND;
    extern const unsigned int ENDCHAR_COMMAND;
-   extern const unsigned int METAFONT_OUPTUT_COMMAND;
-   extern const unsigned int METAPOST_OUPTUT_COMMAND;
+   extern const unsigned int METAFONT_OUTPUT_COMMAND;
+   extern const unsigned int METAPOST_OUTPUT_COMMAND;
 
    extern char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
    extern unsigned short filename_array_ctr;
@@ -2379,13 +2379,13 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
       cerr_strm << thread_name
                 << "Entering `Scan_Parse::output_command_func'.";
 
-      cerr_strm << endl << "`output_command_arg' == " << output_command_arg;
+      cerr_strm << endl << "`output_command_arg' == " << output_command_arg
+                << " == 0" << oct << output_command_arg << " (oct)"
+                << " == 0x" << hex << output_command_arg
+                << " (hex)" << dec;
 
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
     }
 #endif /* |DEBUG_COMPILE|  */@; 
@@ -2393,7 +2393,6 @@ getchar();
 @q ***** (5) @>
 @
 @<Define |Scan_Parse| functions@>=
-
 
    int status;
    bool multithread_output  = scanner_node->run_state.multithread_output;
@@ -2406,6 +2405,20 @@ getchar();
    bool error_stop_value = false;
 
    bool is_endfig_or_endchar = false; 
+
+@q ***** (5) @>   
+@
+@<Define |Scan_Parse| functions@>=
+
+  bool local_do_metafont = 
+     (metafont_output && (   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
+                          || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND))
+     ? true : false;
+
+  bool local_do_metapost = 
+     (metapost_output && (   output_command_arg & Scan_Parse::ENDFIG_COMMAND
+                          || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
+     ? true : false;
 
 @q ***** (5) @>
 @
@@ -2562,14 +2575,11 @@ Added this section.
                  << endl 
                  << "`metapost_output' == " << metapost_output
                  << endl;
-       cerr_message(cerr_strm, true);
+       cerr_message(cerr_strm);
        cerr_strm.str("");
 
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
 
 @q ***** (5) Get |current_picture|, if this is for |endfig|.@>
 
@@ -3076,7 +3086,6 @@ to |Picture::output|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-
    if (metafont_output)
       p->scanner_node->out[Run_State::METAFONT_RS]->lock();
    else
@@ -3084,8 +3093,7 @@ to |Picture::output|.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   if (   metafont_output && output_command_arg == Scan_Parse::ENDCHAR_COMMAND
-       || metapost_output && output_command_arg == Scan_Parse::ENDFIG_COMMAND)
+   if (local_do_metafont || local_do_metapost)
    {
 
      cerr << "Here I am 5." << endl; 
@@ -3108,8 +3116,19 @@ to |Picture::output|.
   else
   {
      cerr << "Here I am 6." << endl; 
-  }
 
+     cerr_strm << thread_name 
+               << "WARNING!  In `Scan_Parse::output_command_func':"
+               << endl 
+               << "`local_do_metafont' and `local_do_metapost' are both `false'."
+               << endl
+               << "Not calling `Picture::output'.  Continuing.";
+       
+     log_message(cerr_strm);
+     cerr_message(cerr_strm);
+     cerr_strm.str("");
+
+  } /* |else| */
 
 @ !! TODO:  Add code to account for other output formats.
 \initials{LDF 2022.04.13.}
