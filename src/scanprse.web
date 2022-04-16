@@ -213,6 +213,8 @@ Scan_Parse
 
   extern const unsigned int ENDFIG_COMMAND                   = 1;
   extern const unsigned int ENDCHAR_COMMAND                  = 2;
+  extern const unsigned int METAFONT_OUPTUT_COMMAND          = 4;
+  extern const unsigned int METAPOST_OUPTUT_COMMAND          = 8;
 
   char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
   unsigned short filename_array_ctr                 = 0;
@@ -247,6 +249,8 @@ Scan_Parse
 
    extern const unsigned int ENDFIG_COMMAND;
    extern const unsigned int ENDCHAR_COMMAND;
+   extern const unsigned int METAFONT_OUPTUT_COMMAND;
+   extern const unsigned int METAPOST_OUPTUT_COMMAND;
 
    extern char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
    extern unsigned short filename_array_ctr;
@@ -2374,10 +2378,34 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
     {
       cerr_strm << thread_name
                 << "Entering `Scan_Parse::output_command_func'.";
+
+      cerr_strm << endl << "`output_command_arg' == " << output_command_arg;
+
       cerr_message(cerr_strm);
       cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
     }
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+@
+@<Define |Scan_Parse| functions@>=
+
+
+   int status;
+   bool multithread_output  = scanner_node->run_state.multithread_output;
+   unsigned short error_stop_mode = scanner_node->run_state.error_stop_mode;
+
+#if 0 
+   bool error_stop_value = (error_stop_mode == Run_State::STOPPING) ? true : false;
+#endif 
+
+   bool error_stop_value = false;
+
+   bool is_endfig_or_endchar = false; 
 
 @q ***** (5) @>
 @
@@ -2422,10 +2450,11 @@ Added this section.
     }  /* |if (entry == 0)| */
    
 
-@q ***** (5) Handle the case that the form of output corresponding @>
-@q ***** (5) to |output_command_arg| isn't enabled. @>
+@q ***** (5) Handle the case that the form or forms of output corresponding @>
+@q ***** (5) to |output_command_arg| aren't enabled. @>
 
-@ Handle the case that the form of output corresponding to |output_command_arg| isn't enabled.
+@ Handle the case that the form or forms of output corresponding to |output_command_arg| 
+aren't enabled.
 \initials{LDF 2022.04.13.}
 
 \LOG
@@ -2434,62 +2463,113 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-/* !!START HERE:  LDF 2022.04.16.  Change this so that both kinds of output can be performed.  */ 
-
-   if (   ((output_command_arg & Scan_Parse::ENDCHAR_COMMAND) && !metafont_output)
-       && ((output_command_arg & Scan_Parse::ENDFIG_COMMAND) && !metapost_output)) 
+   if (!(metafont_output || metapost_output))
    {
-#if DEBUG_COMPILE
-       if (DEBUG)
-       { 
-          cerr_strm << thread_name
-                    << "In `Scan_Parse::output_command_func':"
-                    << endl 
-                    << "Called `endchar' and not performing METAPOST output or"
-                    << endl 
-                    << "called `endfig' and not performing MetaPost output."
-                    << endl
-                    << "`output_command_arg' == ";
+       cerr_strm << thread_name
+                 << "WARNING!  In `Scan_Parse::output_command_func':"
+                 << endl
+                 << "`metafont_output' and `metapost_output' are both `false'."
+                 << endl                 
+                 << "Not performing either form of output."
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 2."
+                 << endl;
+       cerr_message(cerr_strm, true);
+       cerr_strm.str("");
 
-          if (output_command_arg == Scan_Parse::ENDCHAR_COMMAND)
-             cerr_strm << "Scan_Parse::ENDCHAR_COMMAND" << endl;
-          else if (output_command_arg == Scan_Parse::ENDFIG_COMMAND)
-             cerr_strm << "Scan_Parse::ENDFIG_COMMAND" << endl;
+      return 2;
+   }   
+   else if (metafont_output && metapost_output &&
+            !(   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
+              || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND
+              || output_command_arg & Scan_Parse::ENDFIG_COMMAND
+              || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
+   {
 
-          cerr_strm << "`metafont_output' == " << metafont_output << endl 
-                    << "`metapost_output' == " << metapost_output << endl;
+       cerr_strm << thread_name
+                 << "WARNING!  In `Scan_Parse::output_command_func':"
+                 << endl
+                 << "`metafont_output' and `metapost_output' are both `true', "
+                 << "but `output_command_arg' doesn't contain"
+                 << endl
+                 << "a command for performing either form of output."
+                 << endl 
+                 << "`output_command_arg' == 0x" << hex << output_command_arg << dec
+                 << " (hex)"
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 2."
+                 << endl;
+       cerr_message(cerr_strm, true);
+       cerr_strm.str("");
 
-          cerr_strm << "This is normal behavior:  these commands are ignored "
-                    << "when not performing the corresponding form of output."
-                    << endl 
-                    << "Exiting function successfully with return value 2."
-                    << endl;
-          cerr_message(cerr_strm);
-          cerr_strm.str("");
-
-       }  
-#endif /* |DEBUG_COMPILE|  */@; 
-     
        return 2;
+   }
+   else if (metafont_output && !metapost_output &&
+            !(   output_command_arg & Scan_Parse::ENDCHAR_COMMAND
+              || output_command_arg & Scan_Parse::METAFONT_OUTPUT_COMMAND))
+   {
+      cerr_strm << thread_name
+                 << "WARNING!  In `Scan_Parse::output_command_func':"
+                 << endl
+                 << "`metafont_output' is `true',  but `metapost_output' is `false' and "
+                 << "`output_command_arg' doesn't contain"
+                 << endl
+                 << "a command for performing METAFONT output."
+                 << endl 
+                 << "`output_command_arg' == 0x" << hex << output_command_arg << dec
+                 << " (hex)"
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 2."
+                 << endl;
+       cerr_message(cerr_strm, true);
+       cerr_strm.str("");
 
-   }  /* |if|  */
+       return 2;
+ 
+   }
+   else if (metapost_output && !metafont_output &&
+            !(   output_command_arg & Scan_Parse::ENDFIG_COMMAND
+              || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
+   {
+      cerr_strm << thread_name
+                 << "WARNING!  In `Scan_Parse::output_command_func':"
+                 << endl
+                 << "`metapost_output' is `true',  but `metafont_output' is `false' and "
+                 << "`output_command_arg' doesn't contain"
+                 << endl
+                 << "a command for performing MetaPost output."
+                 << endl 
+                 << "`output_command_arg' == 0x" << hex << output_command_arg << dec
+                 << " (hex)"
+                 << endl 
+                 << "Exiting function unsuccessfully with return value 2."
+                 << endl;
+       cerr_message(cerr_strm, true);
+       cerr_strm.str("");
 
-@q ***** (5) @>
-@
-@<Define |Scan_Parse| functions@>=
+       return 2;
+ 
+   }
+#if DEBUG_COMPILE
+   else if (DEBUG)
+   { 
+      cerr_strm << thread_name
+                 << "In `Scan_Parse::output_command_func':"
+                 << endl
+                 << "Performing MetaPost output:"
+                 << endl 
+                 << "`metafont_output' == " << metafont_output
+                 << endl 
+                 << "`metapost_output' == " << metapost_output
+                 << endl;
+       cerr_message(cerr_strm, true);
+       cerr_strm.str("");
 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
-   int status;
-   bool multithread_output  = scanner_node->run_state.multithread_output;
-   unsigned short error_stop_mode = scanner_node->run_state.error_stop_mode;
-
-#if 0 
-   bool error_stop_value = (error_stop_mode == Run_State::STOPPING) ? true : false;
-#endif 
-
-   bool error_stop_value = false;
-
-   bool is_endfig_or_endchar = false; 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q ***** (5) Get |current_picture|, if this is for |endfig|.@>
 
