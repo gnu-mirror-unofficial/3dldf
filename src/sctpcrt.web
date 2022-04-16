@@ -2990,8 +2990,7 @@ Added a call to |scanner_node->add_entry| for
 |scan_tokens|.
 
 \initials{LDF 2004.12.13.}
-Added a call to |scanner_node->add_entry| for 
-|verbatim_metapost|.
+Added a call to |scanner_node->add_entry| for |verbatim_metapost|.
 
 \initials{LDF 2005.01.25.}
 Added a call to |scanner_node->add_entry| for |let|.
@@ -3000,6 +2999,11 @@ Added a call to |scanner_node->add_entry| for |let|.
 Added calls to |scanner_node->add_entry| for |METAPOST|, |METAFONT|,
 |NO_METAPOST|, |NO_METAFONT|, |METAPOST_ONLY| and |METAFONT_ONLY| 
 and also several calls to |scanner_node->add_synonym| for these tokens.
+
+\initials{LDF 2022.04.16.}
+Added a call to |scanner_node->add_entry| for |"verbatim_tex"| 
+(|VERBATIM_TEX|) and a call to |scanner_node->add_synonym| for 
+|"verbatimtex"|.
 \ENDLOG 
 
 @q ***** (5) Code.@> 
@@ -3040,6 +3044,9 @@ and also several calls to |scanner_node->add_synonym| for these tokens.
 
   scanner_node->add_entry("verbatim_metafont", VERBATIM_METAFONT, spark);
   scanner_node->add_synonym("verbatimmetafont", "verbatim_metafont");
+
+  scanner_node->add_entry("verbatim_tex", VERBATIM_TEX, spark);
+  scanner_node->add_synonym("verbatimtex", "verbatim_tex");
 
   scanner_node->add_entry("metapost", METAPOST, spark);  
   scanner_node->add_entry("metafont", METAFONT, spark);  
