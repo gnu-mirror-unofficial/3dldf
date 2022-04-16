@@ -2991,6 +2991,11 @@ Added a call to |scanner_node->add_entry| for
 
 \initials{LDF 2005.01.25.}
 Added a call to |scanner_node->add_entry| for |let|.
+
+\initials{LDF 2022.04.16.}
+Added calls to |scanner_node->add_entry| for |METAPOST|, |METAFONT|,
+|NO_METAPOST|, |NO_METAFONT|, |METAPOST_ONLY| and |METAFONT_ONLY| 
+and also several calls to |scanner_node->add_synonym| for these tokens.
 \ENDLOG 
 
 @q ***** (5) Code.@> 
@@ -3031,6 +3036,32 @@ Added a call to |scanner_node->add_entry| for |let|.
 
   scanner_node->add_entry("verbatim_metafont", VERBATIM_METAFONT, spark);
   scanner_node->add_synonym("verbatimmetafont", "verbatim_metafont");
+
+  scanner_node->add_entry("metapost", METAPOST, spark);  
+  scanner_node->add_entry("metafont", METAFONT, spark);  
+  scanner_node->add_entry("no_metapost", NO_METAPOST, spark);  
+  scanner_node->add_entry("no_metafont", NO_METAFONT, spark);  
+  scanner_node->add_entry("metapost_only", METAPOST_ONLY, spark);  
+  scanner_node->add_entry("metafont_only", METAFONT_ONLY, spark);
+
+  scanner_node->add_synonym("metapostonly", "metapost_only");
+  scanner_node->add_synonym("metafontonly", "metafont_only");
+
+  scanner_node->add_synonym("mp_only", "metapost_only");
+  scanner_node->add_synonym("mf_only", "metafont_only");
+
+  scanner_node->add_synonym("mponly", "metapost_only");
+  scanner_node->add_synonym("mfonly", "metafont_only");
+
+  scanner_node->add_synonym("no_mp", "no_metapost");
+  scanner_node->add_synonym("no_mf", "no_metafont");
+
+  scanner_node->add_synonym("nomp", "no_metapost");
+  scanner_node->add_synonym("nomf", "no_metafont");
+
+@<Token and precedence declarations@>=
+
+
 
   scanner_node->add_entry("let", LET, spark);
 
