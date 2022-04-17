@@ -60,6 +60,12 @@
 #### $^:  The names of all the prerequisites, with spaces between them.
 #### $*:  The stem with which an implicit rule matches
 
+THREEDFONTDIR := Cmssbxldf_3D
+export THREEDFONTDIR
+
+SUBDIRS = $(THREEDFONTDIR)
+
+
 .PHONY: eps
 .PHONY: dvi
 .PHONY: ps
@@ -139,3 +145,11 @@ eurm_test.pdf: eurm_test.dvi
 
 tags:
 	etags *.ldf *.lmc *.sh *.tex *.txt *.mp *.mac Makefile.am 
+
+
+## Local Variables:
+## mode:Makefile
+## outline-minor-mode:t
+## outline-regexp:"## *\\*+"
+## abbrev-mode:t
+## End:

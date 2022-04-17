@@ -110,7 +110,8 @@ AC_CHECK_TYPES([unsigned long long, unsigned long, unsigned int])
 AC_SEARCH_LIBS(trunc, m)
 AC_CHECK_FUNCS([floor sqrt trunc])
 
-AC_CONFIG_FILES([Makefile src/Makefile src/Outline_Fonts/Makefile doc/Makefile doc/old_doc/Makefile examples/Makefile accsdtbs/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile src/Outline_Fonts/Makefile src/Outline_Fonts/Cmssbxldf_3D/Makefile \
+   doc/Makefile doc/old_doc/Makefile examples/Makefile accsdtbs/Makefile])
 
 # Checks for endianness.
 AC_C_BIGENDIAN
