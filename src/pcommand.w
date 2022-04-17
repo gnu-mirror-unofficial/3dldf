@@ -582,7 +582,7 @@ Added this rule.
 @<Define rules@>=
 @=verbatim_command: VERBATIM_METAFONT@>@/
 {
-   @=$$@> = VERBATIM_METAFONT;
+   @=$$@> = VERBATIM_METAFONT_COMMAND;
 };
 
 @q ***** (5) verbatim_command: VERBATIM_METAPOST @>
@@ -597,7 +597,7 @@ Added this rule.
 @<Define rules@>=
 @=verbatim_command: VERBATIM_METAPOST@>@/
 {
-   @=$$@> = VERBATIM_METAPOST;
+   @=$$@> = VERBATIM_METAPOST_COMMAND;
 };
 
 @q ***** (5) verbatim_command: VERBATIM_TEX @>
@@ -612,7 +612,7 @@ Added this rule.
 @<Define rules@>=
 @=verbatim_command: VERBATIM_TEX@>@/
 {
-   @=$$@> = VERBATIM_TEX;
+   @=$$@> = VERBATIM_TEX_COMMAND;
 };
 
 @q ***** (5) command: verbatim_command string_expression @>
@@ -627,23 +627,64 @@ Added this rule.
 @<Define rules@>=
 @=command: verbatim_command string_expression@>@/
 {
+@q ****** (6) @>
+
   @<Common declarations for rules@>@; 
+
+#if DEBUG_COMPILE
+  DEBUG = true; /* |false| */ @; 
+  if (DEBUG)
+  {
+      cerr_strm << "*** Parser: `command --> verbatim_command string_expression'.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+  } 
+#endif /* |DEBUG_COMPILE|  */@;
+
+  string *s = static_cast<string*>(@=$2@>);
+
+  if (s == 0 || s->size() < 1)
+  {
+      cerr_strm << "WARNING!  In parser, `command --> verbatim_command string_expression':"
+                << endl 
+                << "`string_expression' is NULL or empty.  Not outputting.  Continuing.";
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+ 
+      goto END_VERBATIM_RULE;
+
+  }
+
+@q ****** (6) @>
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> verbatim_command string_expression'." << endl 
-                << "`verbatim_command' == " << name_map[@=$1@>] << endl 
-                << "`string_expression' == " << *static_cast<string*>(@=$2@>);
+                << "`verbatim_command' == " << @=$1@> << endl
+                << "`*static_cast<string*>($2)' == " << *static_cast<string*>(@=$2@>) << endl;
 
+      if (@=$1@> == VERBATIM_METAFONT_COMMAND)
+         cerr_strm << " == `VERBATIM_METAFONT_COMMAND'." << endl; 
+      else if (@=$1@> == VERBATIM_METAPOST_COMMAND)
+         cerr_strm << " == `VERBATIM_METAPOST_COMMAND'." << endl; 
+      else if (@=$1@> == VERBATIM_TEX_COMMAND)
+         cerr_strm << " == `VERBATIM_TEX_COMMAND'." << endl; 
+           
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    status = verbatim_func(scanner_node, static_cast<string*>(@=$2@>), @=$1@>);
+@q ****** (6) @>
+
+    status = verbatim_func(scanner_node, s, @=$1@>);
 
     if (status != 0)
     {
@@ -652,8 +693,7 @@ Added this rule.
                   << "`Scan_Parse::verbatim_func' failed, returning " << status << "."
                   << endl 
                   << "Failed to write verbatim " << ((@=$1@> == VERBATIM_TEX) ? "TeX " : "")
-                  << "code `string_expression' == " 
-                  << *static_cast<string*>(@=$2@>) << " to " << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
+                  << "code to " << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
                   << "file.  Continuing.";
 
         log_message(cerr_strm);
@@ -661,6 +701,9 @@ Added this rule.
         cerr_strm.str("");
 
     }
+
+@q ****** (6) @>
+
 #if DEBUG_COMPILE
     else if (DEBUG)
     { 
@@ -669,8 +712,7 @@ Added this rule.
                   << "`Scan_Parse::verbatim_func' succeeded, returning 0."
                   << endl 
                   << "Wrote verbatim " << ((@=$1@> == VERBATIM_TEX) ? "TeX " : "")
-                  << "code `string_expression' == " 
-                  << *static_cast<string*>(@=$2@>) << " to " 
+                  << "code to " 
                   << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
                   << "file successfully.";
 
@@ -680,6 +722,16 @@ Added this rule.
  
     }  
 #endif /* |DEBUG_COMPILE|  */@; 
+
+@q ****** (6) @>
+
+END_VERBATIM_RULE:
+
+    if (s)
+    {
+       delete s;
+       s = 0;
+    }
 
     @=$$@> = 0;
 

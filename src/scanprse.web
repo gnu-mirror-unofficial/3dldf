@@ -211,10 +211,13 @@ Scan_Parse
   extern const unsigned int BEGINFIG_COMMAND                 = 1;
   extern const unsigned int BEGINCHAR_COMMAND                = 2;
 
-  extern const unsigned int ENDFIG_COMMAND                   = 1;
-  extern const unsigned int ENDCHAR_COMMAND                  = 2;
-  extern const unsigned int METAFONT_OUTPUT_COMMAND          = 4;
-  extern const unsigned int METAPOST_OUTPUT_COMMAND          = 8;
+  extern const unsigned int ENDFIG_COMMAND                   =  1;
+  extern const unsigned int ENDCHAR_COMMAND                  =  2;
+  extern const unsigned int METAFONT_OUTPUT_COMMAND          =  4;
+  extern const unsigned int METAPOST_OUTPUT_COMMAND          =  8;
+  extern const unsigned int VERBATIM_METAFONT_COMMAND        = 16;
+  extern const unsigned int VERBATIM_METAPOST_COMMAND        = 32;
+  extern const unsigned int VERBATIM_TEX_COMMAND             = 64;
 
   char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
   unsigned short filename_array_ctr                 = 0;
@@ -251,6 +254,10 @@ Scan_Parse
    extern const unsigned int ENDCHAR_COMMAND;
    extern const unsigned int METAFONT_OUTPUT_COMMAND;
    extern const unsigned int METAPOST_OUTPUT_COMMAND;
+
+   extern const unsigned int VERBATIM_METAFONT_COMMAND;
+   extern const unsigned int VERBATIM_METAPOST_COMMAND;
+   extern const unsigned int VERBATIM_TEX_COMMAND;
 
    extern char filename_array[MAX_FILE_ARGS][MAX_FILENAME];
    extern unsigned short filename_array_ctr;
