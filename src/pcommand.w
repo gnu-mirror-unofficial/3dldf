@@ -640,13 +640,48 @@ Added this rule.
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
-
-
-cerr << "XXX Enter <RETURN> to continue: ";
-getchar(); 
-      
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+    status = verbatim_func(scanner_node, static_cast<string*>(@=$2@>), @=$1@>);
+
+    if (status != 0)
+    {
+        cerr_strm << "ERROR!  In parser, `command --> verbatim_command string_expression':" 
+                  << endl 
+                  << "`Scan_Parse::verbatim_func' failed, returning " << status << "."
+                  << endl 
+                  << "Failed to write verbatim " << ((@=$1@> == VERBATIM_TEX) ? "TeX " : "")
+                  << "code `string_expression' == " 
+                  << *static_cast<string*>(@=$2@>) << " to " << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
+                  << "file.  Continuing.";
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+
+    }
+#if DEBUG_COMPILE
+    else if (DEBUG)
+    { 
+        cerr_strm << "In parser, `command --> verbatim_command string_expression':" 
+                  << endl 
+                  << "`Scan_Parse::verbatim_func' succeeded, returning 0."
+                  << endl 
+                  << "Wrote verbatim " << ((@=$1@> == VERBATIM_TEX) ? "TeX " : "")
+                  << "code `string_expression' == " 
+                  << *static_cast<string*>(@=$2@>) << " to " 
+                  << ((@=$1@> == VERBATIM_METAFONT) ? "METAFONT " : "MetaPost ")
+                  << "file successfully.";
+
+        log_message(cerr_strm);
+        cerr_message(cerr_strm);
+        cerr_strm.str("");
+ 
+    }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+    @=$$@> = 0;
 
 };
 
