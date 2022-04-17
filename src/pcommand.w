@@ -557,216 +557,98 @@ Added this rule.
       }   /* |else| (|str_ptr != 0|)  */
 };
 
-@q ** (2) command --> VERBATIM_METAPOST.@> 
-@*1 \§command> $\longrightarrow$ \.{VERBATIM\_METAPOST}.
-\§string expression>.
-\initials{LDF 2004.12.13.}
+@q **** (4) verbatim_command @>
+
+@ \§verbatim command>.
+\initials{LDF 2022.04.17.}
 
 \LOG
-\initials{LDF 2004.12.13.}
+\initials{LDF 2022.04.17.}
+Added this type declaration.
+\ENDLOG
+
+@<Type declarations for non-terminal symbols@>=
+@=%type <int_value> verbatim_command@>
+
+@q ***** (5) verbatim_command: VERBATIM_METAFONT @>
+@ \§verbatim command> $\longrightarrow$ \.{VERBATIM\_METAFONT}.
+\initials{LDF 2022.04.17.}
+
+\LOG
+\initials{LDF 2022.04.17.}
 Added this rule.
 \ENDLOG
 
-@q *** (3).@> 
-
 @<Define rules@>=
-@=command: VERBATIM_METAPOST string_expression@>@/
+@=verbatim_command: VERBATIM_METAFONT@>@/
 {
-
-   string* s = static_cast<string*>(@=$2@>); 
-
-   if (metafont_output)
-   {
-      delete s;
-      s = 0;
-      goto END_VERBATIM_METAPOST_RULE;
-   }
-
-@q **** (4) Error handling:  |s == 0|.@>   
-
-@ Error handling:  |s == 0|.
-\initials{LDF 2004.12.13.}
-
-@<Define rules@>=
-
-    if (s == static_cast<string*>(0))
-    {
-          @=$$@> = static_cast<void*>(0);
-
-    } /* |s == 0|  */
-
-@q **** (4) |s != 0|.@>   
-
-@ |s != 0|.
-\initials{LDF 2004.12.13.}
-
-@<Define rules@>=
-
-    else /* |s != 0|  */
-    {
-         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
-
-@q ***** (5) Error handling:  |verbatim_func| failed.@>   
-
-@ Error handling:  |verbatim_func| failed.
-\initials{LDF 2004.12.13.}
-
-@<Define rules@>=
- 
-         if (status != 0)
-         {
-
-#if 0 
-                cerr_strm << thread_name 
-                          << "ERROR!  In `yyparse()', rule `command "
-                          << "--> VERBATIM_METAPOST string_expression':"
-                          << endl << "`verbatim_func()' failed.  "
-                          << "Will try to continue.";
-
-                log_message(cerr_strm); 
-                cerr_message(cerr_strm, error_stop_value); 
-                cerr_strm.str("");
-#endif 
-
-         } /* |if (status != 0)|  */
-
-@q ***** (5) @>   
-
-         delete s;
-
-@q ***** (5).@> 
-
-   }   /* |else| (|s != 0|)  */  
-
-END_VERBATIM_METAPOST_RULE:
-
-   @=$$@> = static_cast<void*>(0);   
-
+   @=$$@> = VERBATIM_METAFONT;
 };
 
-
-@q ** (2) command --> VERBATIM_METAFONT.@> 
-@*1 \§command> $\longrightarrow$ \.{VERBATIM\_METAFONT}.
-\§string expression>.
-\initials{LDF 2022.04.11.}
+@q ***** (5) verbatim_command: VERBATIM_METAPOST @>
+@ \§verbatim command> $\longrightarrow$ \.{VERBATIM\_METAPOST}.
+\initials{LDF 2022.04.17.}
 
 \LOG
-\initials{LDF 2022.04.11.}
+\initials{LDF 2022.04.17.}
 Added this rule.
 \ENDLOG
 
-@q *** (3).@> 
-
 @<Define rules@>=
-@=command: VERBATIM_METAFONT string_expression@>@/
+@=verbatim_command: VERBATIM_METAPOST@>@/
 {
-
-   string* s = static_cast<string*>(@=$2@>); 
-
-   if (!metafont_output)
-   {
-      delete s;
-      s = 0;
-      goto END_VERBATIM_METAFONT_RULE;
-   }
-
-@q **** (4) Error handling:  |s == 0|.@>   
-
-@ Error handling:  |s == 0|.
-\initials{LDF 2004.12.13.}
-
-@<Define rules@>=
-
-    if (s == static_cast<string*>(0))
-    {
-          @=$$@> = static_cast<void*>(0);
-
-    } /* |s == 0|  */
-
-@q **** (4) |s != 0|.@>   
-
-@ |s != 0|.
-\initials{LDF 2004.12.13.}
-
-@<Define rules@>=
-
-    else /* |s != 0|  */
-    {
-         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
-
-@q ***** (5) Error handling:  |verbatim_func| failed.@>   
-
-@ Error handling:  |verbatim_func| failed.
-\initials{LDF 2004.12.13.}
-
-@<Define rules@>=
- 
-         if (status != 0)
-         {
-
-#if 0 
-                cerr_strm << thread_name 
-                          << "ERROR!  In `yyparse()', rule `command "
-                          << "--> VERBATIM_METAFONT string_expression':"
-                          << endl << "`verbatim_func()' failed.  "
-                          << "Will try to continue.";
-
-                log_message(cerr_strm); 
-                cerr_message(cerr_strm, error_stop_value); 
-                cerr_strm.str("");
-#endif 
-
-         } /* |if (status != 0)|  */
-
-@q ***** (5) @>   
-
-         delete s;
-
-@q ***** (5).@> 
-
-   }   /* |else| (|s != 0|)  */  
-
-END_VERBATIM_METAFONT_RULE:
-
-   @=$$@> = static_cast<void*>(0);   
-
+   @=$$@> = VERBATIM_METAPOST;
 };
 
-@q ** (2) command --> VERBATIM_TEX string_primary.@> 
-@*1 \§command> $\longrightarrow$ \.{VERBATIM\_TEX} \§{string primary}.
-\initials{LDF 2022.04.16.}
+@q ***** (5) verbatim_command: VERBATIM_TEX @>
+@ \§verbatim command> $\longrightarrow$ \.{VERBATIM\_TEX}.
+\initials{LDF 2022.04.17.}
 
 \LOG
-\initials{LDF 2022.04.16.}
+\initials{LDF 2022.04.17.}
 Added this rule.
 \ENDLOG
 
-@q *** (3).@> 
+@<Define rules@>=
+@=verbatim_command: VERBATIM_TEX@>@/
+{
+   @=$$@> = VERBATIM_TEX;
+};
+
+@q ***** (5) command: verbatim_command string_expression @>
+@ \§command> $\longrightarrow$ \§verbatim command> \§string expression}.
+\initials{LDF 2022.04.17.}
+
+\LOG
+\initials{LDF 2022.04.17.}
+Added this rule.
+\ENDLOG
 
 @<Define rules@>=
-@=command: VERBATIM_TEX string_expression@>@/
+@=command: verbatim_command string_expression@>@/
 {
   @<Common declarations for rules@>@; 
-
-/* !!START HERE:  LDF 2022.04.16.  Rewrite |verbatim_func|.  */ 
 
 #if DEBUG_COMPILE
   DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
-      cerr_strm << "*** Parser: `command --> VERBATIM_TEX string_expression'.";
+      cerr_strm << "*** Parser: `command --> verbatim_command string_expression'." << endl 
+                << "`verbatim_command' == " << name_map[@=$1@>] << endl 
+                << "`string_expression' == " << *static_cast<string*>(@=$2@>);
 
       log_message(cerr_strm);
       cerr_message(cerr_strm);
       cerr_strm.str("");
 
-      cerr << "*static_cast<string*>($2) == " << *static_cast<string*>(@=$2@>) << endl;
 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+      
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
 };
-
 
 @q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 

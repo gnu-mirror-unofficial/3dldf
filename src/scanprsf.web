@@ -9664,14 +9664,15 @@ Added this function.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::verbatim_func(Scanner_Node scanner_node, 
-                                   const string* s)
+Scan_Parse::verbatim_func(Scanner_Node scanner_node,  
+                          const string* s, 
+                          unsigned int verbatim_command_arg)
 {
 
 @q ***** (5) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-   bool DEBUG = false; /* |true| */ @; 
+   bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
    stringstream cerr_strm;
@@ -9697,11 +9698,34 @@ Scan_Parse::verbatim_func(Scanner_Node scanner_node,
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
+
+
+      cerr << "name_map[verbatim_command_arg] == " << name_map[verbatim_command_arg] 
+           << endl;
+
+      cerr << "XXX Enter <RETURN> to continue: ";
+      getchar(); 
+
+
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
    int status;
    bool multithread_output  = scanner_node->run_state.multithread_output;
+
+   bool local_do_metafont = (metafont_output && verbatim_command_arg & VERBATIM_METAFONT)
+      ? true : false;
+
+   bool local_do_metapost = 
+      (metapost_output && (verbatim_command_arg & VERBATIM_METAPOST
+                           || verbatim_command_arg & VERBATIM_TEX))
+      ? true : false;
+
+cerr << "local_do_metafont == " << local_do_metafont << endl;
+cerr << "local_do_metapost == " << local_do_metapost << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
 @q ***** (5) If we're using multithreaded output,       @>
 @q ***** (5) @>
