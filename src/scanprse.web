@@ -370,9 +370,12 @@ Scan_Parse::Picture_Output_Arg_Type::~Picture_Output_Arg_Type(void)
 {
   if (picture != static_cast<Picture*>(0))
     {
+#if 0 
+/* !!START HERE:  LDF 2022.04.17.  */ 
       picture->clear();
       delete picture;
       picture = 0;
+#endif 
     }
 
   if (focus != static_cast<Focus*>(0))
@@ -908,7 +911,7 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 @q **** (4) Preliminaries.@>   
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@; 
 
   stringstream cerr_strm;
@@ -1693,9 +1696,9 @@ and |real max_z_proj|.
 Revised this function.
 
 \initials{LDF 2004.07.22.}
-Added calls to |log_message| and rearranged the code for debugging and error
-output.  Now calling |cerr_strm.str("")| to clear 
-|cerr_strm|, since |cerr_message| no longer does this.  
+Added calls to |log_message| and rearranged the code for debugging and error output.  
+Now calling |cerr_strm.str("")| to clear |cerr_strm|, since |cerr_message| no longer 
+does this.  
 \ENDLOG 
 
 @q **** (4) Definition.@>
@@ -1706,7 +1709,7 @@ Scan_Parse::output_func(void* arg)
 {
 
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ @; 
+  bool DEBUG = true; /* |false| */ @; 
 #endif /* |DEBUG_COMPILE|  */@;
 
   Thread_Info_Type* thread_info = Thread_Info_Type::get_thread_info(true);
@@ -2397,6 +2400,7 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
     }
 #endif /* |DEBUG_COMPILE|  */@; 
 
+
 @q ***** (5) @>
 @
 @<Define |Scan_Parse| functions@>=
@@ -2436,39 +2440,66 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   Id_Map_Entry_Node entry = 0;
+    Id_Map_Entry_Node entry = 0;
+
 
     if (scanner_node->picture_entry_ptr)
     {
-       cerr << "Here I am 1." << endl;
+       cerr << "`scanner_node->picture_entry_ptr' is non-NULL." << endl;
+
+       cerr << "Error after here 5." << endl; 
 
        entry = static_cast<Id_Map_Entry_Node>(scanner_node->picture_entry_ptr);
+
+       cerr << "Error after here 6." << endl; 
+
     }
     else
     {
-       cerr << "Here I am 2." << endl;
+       cerr << "`scanner_node->picture_entry_ptr' is NULL." << endl;
+
+       cerr << "Error after here 7." << endl; 
 
        entry = scanner_node->lookup("current_picture");
+
+       cerr << "Error after here 8." << endl; 
+
        scanner_node->picture_entry_ptr = static_cast<void*>(entry);
+
+       cerr << "Error after here 9." << endl; 
+
     }
 
-    if (entry == 0)
+    cerr << "Error after here 10." << endl; 
+
+    if (entry == 0 || entry->object == 0)
     {
+       cerr << "Error after here 11." << endl; 
+
        cerr_strm << thread_name
                  << "ERROR!  In `Scan_Parse::output_command_func':"
                  << endl
-                 << "`Id_Map_Entry_Node' is NULL.  Can't output picture."
-                 << endl                 
+                 << "`Id_Map_Entry_Node entry' is NULL or `entry->object' is NULL."
+                 << endl 
+                 << "Can't output picture." 
+                 << endl 
                  << "Exiting function unsuccessfully with return value 1."
                  << endl;
 
        cerr_message(cerr_strm, true);
        cerr_strm.str("");
 
+       cerr << "Error after here 12." << endl;      
+
        return 1;
 
     }  /* |if (entry == 0)| */
    
+
+    cerr << "Error after here 13." << endl; 
+
+    return 0; /* /* !!START HERE:  LDF 2022.04.17.  */ 
+
 
 @q ***** (5) Handle the case that the form or forms of output corresponding @>
 @q ***** (5) to |output_command_arg| aren't enabled. @>
@@ -2594,6 +2625,10 @@ Added this section.
 \initials{LDF 2004.07.14.}
 
 @<Define |Scan_Parse| functions@>=
+
+return 0;
+
+
 
   if (scanner_node->endfig_ptr != static_cast<void*>(0))
     {
@@ -3103,8 +3138,6 @@ to |Picture::output|.
    if (local_do_metafont || local_do_metapost)
    {
 
-     cerr << "Here I am 5." << endl; 
-
       p->picture->output(p->scanner_node,
                          output_command_arg,
                          *(p->focus),
@@ -3122,7 +3155,7 @@ to |Picture::output|.
   }
   else
   {
-     cerr << "Here I am 6." << endl; 
+ 
 
      cerr_strm << thread_name 
                << "WARNING!  In `Scan_Parse::output_command_func':"
@@ -3182,6 +3215,8 @@ to |Picture::output|.
     
   }
 #endif /* |DEBUG_COMPILE|  */@; 
+
+cerr << "Error after here 3." << endl; 
 
   return 0;
 

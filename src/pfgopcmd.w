@@ -85,7 +85,7 @@ possible to use |beginfig| in loops.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-   DEBUG = false; /* |true|  */
+   DEBUG = true; /* |false|  */
    if (DEBUG)
    { 
        cerr_strm << thread_name 
@@ -259,6 +259,8 @@ Rewrote this rule.  It now calls |output_command_func|.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+
    if (DEBUG)
    { 
       cerr_strm << thread_name 
@@ -310,7 +312,18 @@ Rewrote this rule.  It now calls |output_command_func|.
      scanner_node->clear_ptr = static_cast<void*>(c); 
      scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
+#if 1 
+/* !!START HERE:  LDF 2022.04.17.  */ 
+
+     cerr << "Error after here 0." << endl; 
+
      status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDFIG_COMMAND);
+
+     cerr << "Error after here 1." << endl; 
+
+#endif 
+
+
 
      scanner_node->beginfig_flag  = false;
   }
@@ -343,7 +356,7 @@ Added this rule.
 
 #if DEBUG_COMPILE
 
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -464,7 +477,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -595,7 +608,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -626,7 +639,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -657,7 +670,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -739,7 +752,7 @@ Added this rule.
    @<Common declarations for rules@>@;
 
 #if DEBUG_COMPILE
-  DEBUG = false; /* |true| */ @;
+  DEBUG = true; /* |false| */ @;
   if (DEBUG)
     {
       cerr_strm << thread_name 
@@ -783,6 +796,8 @@ Added this rule.
      scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
      status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
+
+     cerr << "Error after here 1." << endl; 
 
      scanner_node->beginchar_flag  = false;
 
@@ -864,18 +879,12 @@ and unnecessary.
 
     status = 0;
 
-#if DEBUG_COMPILE
-    if (DEBUG)
-    { 
-       
-    }  
-#endif /* |DEBUG_COMPILE|  */@; 
-
-
     unsigned int i = scanner_node->output_format_val;
     scanner_node->output_format_val = 0U;        
 
     status = Scan_Parse::output_command_func(scanner_node, i);
+
+    cerr << "Error after here 2." << endl; 
 
     scanner_node->picture_entry_ptr = 0;
     @=$$@> = static_cast<void*>(0);

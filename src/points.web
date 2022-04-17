@@ -10928,13 +10928,16 @@ void
 Picture::clear(void)
 {
 
+return;  /* /* !!START HERE:  LDF 2022.04.17.  */ 
+
 #if DEBUG_COMPILE
-  bool DEBUG = false; /* |true| */ 
+  bool DEBUG = true; /* |false| */ 
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #if DEBUG_COMPILE
   if (DEBUG) 
     cerr << "Entering Picture::clear().\n";
+
 #endif /* |DEBUG_COMPILE|  */@; 
 
   transform.reset();

@@ -2494,7 +2494,9 @@ else if (type == PREDICATE && i.object != static_cast<void*>(0))
   else if (type == PICTURE && i.object != static_cast<void*>(0))
     {
       Picture* o = new Picture;
+#if 0 
       o->clear();
+#endif 
       *o = *static_cast<Picture*>(i.object);
       object = static_cast<void*>(o); 
     }

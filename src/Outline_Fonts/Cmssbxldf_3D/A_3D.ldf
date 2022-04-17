@@ -99,8 +99,6 @@ boolean do_black;
 boolean do_labels;
 boolean do_rounded_corners;
 
-
-
 do_labels          := true;  % false;
 do_black           := false; % true;
 do_rounded_corners := false; % true;
@@ -120,15 +118,9 @@ point z[];
 picture v[];
 picture dot_picture[];
 
-if is_metafont:
-  beginchar(165, 3cm, 3cm, 0cm);
-else:
-  beginfig(165);
-fi;
-  
-  do_labels := true; % false
 
-  path q[];
+beginfig(165);
+  do_labels := true; % false
 
   numeric frame_wd;
   numeric frame_ht;
@@ -142,17 +134,20 @@ fi;
             -- (.5frame_wd, .5frame_ht) -- (-.5frame_wd, .5frame_ht)
             -- cycle) shifted (.475frame_wd, .5frame_ht-.825cm);
 
-  if is_metapost:
-    draw frame;
-  fi;  
+  draw frame;
 
-  %drawdot (1cm, 1cm) withpen pencircle scaled (1cm, 1cm, 1cm);
+
+
+%drawdot (1cm, 1cm) withpen pencircle scaled (1cm, 1cm, 1cm);
   
   g65 := get_glyph 65 from "cmssbx10";
 
   scale g65 by .333; 
   
-  % message "g65:";
+
+
+
+% message "g65:";
   % show g65;
 
   pv := get_paths from g65;
@@ -321,6 +316,7 @@ fi;
   draw z29 -- z33 withcolor dark_grey;
   draw z28 -- z32 withcolor dark_grey;
 
+  
 %% ** (2) Inner stripe, upper horizontal
 
 
@@ -557,20 +553,10 @@ fi;
   draw q3;
 
   v1 := current_picture;
-  
-%% ** (2) If MF, scale current_picture
-  
-  
-  if is_metafont:
-    clear current_picture;
-    endchar with_projection parallel_x_y no_sort;
-  fi;
 
 %% ** (2) Labels
 
 %% *** (3)
-
-  if do_metapost and do_labels:
    
     dotlabel.lft("$a_0^0$", a[0][0]) with_color blue on_picture dot_picture1;
     dotlabel.top("$a_0^2$", a[0][2]) on_picture dot_picture1;
@@ -610,50 +596,54 @@ fi;
     current_picture += dot_picture0;
     current_picture += dot_picture1;
 
-  fi;
+endfig with_projection parallel_x_y no_sort;
+
 
 %% ** (2)
   
-if is_metapost:
-   endfig with_projection parallel_x_y no_sort;
-fi
-
 %% * (1) Fig. 65
 
-if is_metafont:
-  beginchar("A", 3cm, 3cm, 0);
-else:
-  beginfig(65);
-fi;
+beginfig(65);
 
-   transform t;
+  transform t;
 
-   if is_metafont:
-      t := identity scaled (.2, .2, .2);
+   t := identity scaled (.2, .2, .2);
 
-      q0 *= q1 *= q2 *= q3 *= t;
-   fi;
+  
+   %q0 *= q1 *= q2 *= q3 *= t;
 
-   fill q2;
-   unfill q0;
-   unfill q1;
+  message "q0:";
+  show q0;
+
+  %pause;
+
+  q4 := q0;
+  
+  draw q4;
+  
+  %fill q2;
+
+
+
+  
+   %unfill q0;
+
+endfig with_projection parallel_x_y no_sort;
+end;
+
+
+  unfill q1;
    unfill q3;
 
-if is_metafont:
-   endchar;
-else:
-   endfig with_projection parallel_x_y no_sort;
-fi;
+
+
+
 
 %% * (1)
 
-if is_metafont:
-  verbatim_metafont "end;";
-else:
-  end_mp;
-  end;
-fi;
+verbatim_metafont "end;";
 
+end_mp;
 end;
 
 
