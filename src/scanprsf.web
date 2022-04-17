@@ -9944,21 +9944,21 @@ and increment |scanner_node->output_pending.value_1|.
 @<Define |Scan_Parse| functions@>= 
 
 #ifdef HAVE_PTHREAD_H  
-   if (metafont_output)
+   if (local_do_metafont)
       scanner_node->out[Run_State::METAFONT_RS]->lock();
-   else
+   if (local_do_metapost)
       scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   if (metafont_output)    
+   if (local_do_metafont)    
       *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
-   else
+   if (local_do_metapost)
       *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
-   if (metafont_output)
+   if (local_do_metafont)
       scanner_node->out[Run_State::METAFONT_RS]->unlock();
-   else
+   if (local_do_metapost)
       scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
@@ -10031,7 +10031,6 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
   else  /* (|!multithread_output|)  */
-
     {
 
 #if DEBUG_COMPILE
@@ -10049,24 +10048,39 @@ and increment |scanner_node->output_pending.value_1|.
 #endif /* |DEBUG_COMPILE|  */@; 
 
 #ifdef HAVE_PTHREAD_H  
-   if (metafont_output)
+   if (local_do_metafont)
       scanner_node->out[Run_State::METAFONT_RS]->lock();
-   else
+   if (local_do_metapost)
       scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
        
-   if (metafont_output)
+   if (local_do_metafont)
+   {
       *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
-   else
-      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+   }
+   if (local_do_metapost)
+   {
+      if (verbatim_command_arg == VERBATIM_TEX)
+      {
+         *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << "verbatimtex ";
+          if (s->size() > 0 && s->back() == ';')
+           s->erase(s->size() - 1);
+      }
+       
+      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s;
+
+      if (verbatim_command_arg == VERBATIM_TEX)
+         *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << " etex;";
+
+      *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << endl << flush;
+   }
 
 #ifdef HAVE_PTHREAD_H  
-   if (metafont_output)
+   if (local_do_metafont)
       scanner_node->out[Run_State::METAFONT_RS]->unlock();
-   else
+   if (local_do_metapost)
       scanner_node->out[Run_State::METAPOST_RS]->unlock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
-
 
     }     /* |else | (|!multithread_output|)  */
 
@@ -10090,8 +10104,7 @@ and increment |scanner_node->output_pending.value_1|.
 
   return 0;
 
-}  /* End of |Scan_Parse::verbatim_func|
-     definition.  */
+}  /* End of |Scan_Parse::verbatim_func| definition.  */
 
 @q ** (2) |end_group_func|.@>
 @*1 {\bf end\_group\_func}.
