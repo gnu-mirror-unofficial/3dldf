@@ -9721,10 +9721,6 @@ Scan_Parse::verbatim_func(Scanner_Node scanner_node,
                            || verbatim_command_arg & VERBATIM_TEX_COMMAND))
       ? true : false;
 
-cerr << "verbatim_command_arg == " << verbatim_command_arg << endl;
-cerr << "local_do_metafont == " << local_do_metafont << endl;
-cerr << "local_do_metapost == " << local_do_metapost << endl;
-
 @q ***** (5) If we're using multithreaded output,       @>
 @q ***** (5) @>
 
@@ -10053,9 +10049,6 @@ and increment |scanner_node->output_pending.value_1|.
       scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
        
-cerr << "local_do_metafont == " << local_do_metafont << endl;
-cerr << "local_do_metapost == " << local_do_metapost << endl;
-
    if (local_do_metafont)
    {
       *(scanner_node->out[Run_State::METAFONT_RS]->stream_ptr) << *s << endl << flush;
