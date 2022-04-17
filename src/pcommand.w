@@ -632,7 +632,7 @@ Added this rule.
   @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
+  DEBUG = false; /* |true| */ @; 
   if (DEBUG)
   {
       cerr_strm << "*** Parser: `command --> verbatim_command string_expression'.";
@@ -662,7 +662,6 @@ Added this rule.
 @q ****** (6) @>
 
 #if DEBUG_COMPILE
-  DEBUG = true; /* |false| */ @; 
   if (DEBUG)
     {
       cerr_strm << "*** Parser: `command --> verbatim_command string_expression'." << endl 
