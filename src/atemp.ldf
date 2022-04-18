@@ -1,3 +1,70 @@
+input "plain.lmc";
+
+verbatim_metapost "prologues := 3;outputtemplate := \"%j%3c.eps\";";
+
+path frame;
+numeric frame_wd;
+numeric frame_ht;
+
+frame_wd := 14cm;
+frame_ht := 14cm;
+
+frame :=    (-.5frame_wd, -.5frame_ht) -- (.5frame_wd, -.5frame_ht) -- (.5frame_wd, .5frame_ht)
+         -- (-.5frame_wd, .5frame_ht) -- cycle;
+
+pen medium_pen;
+medium_pen := pencircle scaled (.5mm, .5mm, .5mm);
+
+pickup medium_pen;
+
+beginfig(1);
+  draw frame;
+  circle c;
+  set c with_radius 4cm with_point_count 8;
+  rotate c (90, 0);
+  
+  numeric n;
+  point p[];
+  
+  n := size c - 1;
+
+  for i = 0 upto n:
+    p[i] := get_point (i) c;
+  endfor;
+
+  dotlabel.rt("$p_0$", p0);
+  dotlabel.urt("$p_1$", p1);
+  dotlabel.top("$p_2$", p2);
+  dotlabel.ulft("$p_3$", p3);
+  dotlabel.lft("$p_4$", p4);
+  dotlabel.llft("$p_5$", p5);
+  dotlabel.bot("$p_6$", p6);
+  dotlabel.lrt("$p_7$", p7);
+
+  path q[];
+  q0 := c;
+
+  draw q0;
+  
+  resolve q0 (0, 1) to 5 with_no_transform;
+
+  n := size q0;
+  message "n == " & decimal n;
+  pause;
+
+
+  for i = 0 upto 5:
+    p[10] := get_point (i) q0;
+  endfor;
+
+  dotlabel.rt("$p_{10}$", p10) with_color red;
+  dotlabel.rt("$p_{10}$", p10) with_color red;
+  
+endfig with_projection parallel_x_y;
+
+end_mp;
+end;
+
 beginchar("A", 10, 20, 30); %% Don't use units for `wd', `ht' and `dp'!
                             %% LDF 2022.04.18.
 endchar;

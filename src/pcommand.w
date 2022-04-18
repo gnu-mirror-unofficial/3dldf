@@ -184,9 +184,15 @@ Removed debugging code.
 
 };
 
-@q *** (3) command --> RESOLVE path_variable TO numeric_expression.@> 
-@*2 \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{TO} \§numeric expression>.
-\§save temp file optional> \§with no transform optional>.
+
+
+@q *** (3) command: RESOLVE path_variable LEFT_PARENTHESIS numeric_expression COMMA   @>
+@q         numeric_expression RIGHT_PARENTHESIS TO numeric_expression                 @>
+@q         save_temp_file_optional with_no_transform_optional with_ampersand_optional @>
+
+@ \§command> $\longrightarrow$ \.{RESOLVE} \§path variable> \.{LEFT\_PARENTHESIS} \§numeric expression> 
+\.{COMMA} \§numeric expression> \.{RIGHT\_PARENTHESIS} \.{TO} \§numeric expression>                 
+\§save temp file optional> \§with no transform optional> \§with ampersand optional>.
 \initials{LDF 2022.01.18.}
 
 \LOG
@@ -642,7 +648,7 @@ Added this rule.
    @<Common declarations for rules@>@; 
 
 #if DEBUG_COMPILE
-   DEBUG = true; /* |false| */ 
+   DEBUG = false; /* |true| */ 
    if (DEBUG)
    { 
       cerr_strm << "*** Parser: `command: verbatim_command string_expression."

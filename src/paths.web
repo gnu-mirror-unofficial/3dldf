@@ -4982,6 +4982,16 @@ Path::append(const Path& p, string connector, bool assign)
 
   bool DEBUG = false; /* |true| */ 
 
+  int i = 0;
+  int j = 0;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Entering `Path::append'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   Path r(*this);
 
   string last_connector;
@@ -4999,7 +5009,7 @@ will be at the wrong place.
 
 @<Define |Path| functions@>=
 
-@q ***** (5) @>
+@q **** (4) @>
 
   if (r.connector_type_vector.size() == 0)
   {
@@ -5010,15 +5020,63 @@ will be at the wrong place.
   }
   else
     last_connector_type = r.connector_type_vector.back();
-    
-  while (r.connector_type_vector.size() < r.points.size() - 1)
-  {
-     if (DEBUG)
-        cerr << "In `Path::append':" << endl 
-             << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
 
-    r.connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
-  }
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+  if (r.points.size() > 0)
+  {
+@q ***** (5) @>
+
+     i = r.points.size() - 1;
+     j = r.connector_type_vector.size();
+
+     cerr << "i == " << i << endl;
+     cerr << "j == " << j << endl;
+
+@q ***** (5) @>
+
+      while (r.connector_type_vector.size() < i)
+      {
+@q ****** (6) @>
+
+#if DEBUG_COMPILE
+         if (DEBUG)
+         {
+            cerr << "In `Path::append':" << endl 
+                 << "Pushing Connector_Type* onto connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+         }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        r.connector_type_vector.push_back(create_new<Connector_Type>(last_connector_type));
+
+        if (j >= i)
+        {
+
+#if DEBUG_COMPILE
+           if (DEBUG)
+           { 
+               cerr << "In `Path::append':" << endl 
+                    << "j >= i.  Breaking." << endl;
+           }     
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           break;
+
+        }
+
+        ++j;
+
+@q ****** (6) @>
+
+      }  /* |while| */   
+
+@q ***** (5) @>
+
+  }  /* |if (r.points.size() > 0)| */
+
+@q **** (4) @>
 
   r.connector_type_vector.push_back(create_new<Connector_Type>(0));
   r.connector_type_vector.back()->type0 = Connector_Type::PLAIN_TYPE;
@@ -5031,6 +5089,7 @@ will be at the wrong place.
 \initials{LDF 2002.4.6.} 
 
 @<Define |Path| functions@>=
+
 
   for(vector<Point*>::const_iterator iter = p.points.begin();
       iter != p.points.end();
@@ -5050,20 +5109,78 @@ Now removing excess connectors.
 
 @<Define |Path| functions@>= 
 
-@q ***** (5) @>
+#if 0
+ cerr << "p.connector_type_vector.size() == " << p.connector_type_vector.size() << endl;
+#endif 
 
-@q ***** (5) @>
+  i = 0;
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
   for(vector<Connector_Type*>::const_iterator iter = p.connector_type_vector.begin();
       iter != p.connector_type_vector.end();
       iter++)
     {
-     if (DEBUG)
-        cerr << "In `Path::append':" << endl 
-             << "Pushing Connector_Type* onto r.connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+@q ***** (5) @>
 
-      r.connector_type_vector.push_back(create_new<Connector_Type>(*iter));
-    }
+
+#if DEBUG_COMPILE
+        if (DEBUG)
+        {
+           cerr << "In `Path::append':" << endl 
+                << "`i' == " << i << endl 
+                << "Pushing Connector_Type* onto r.connector_type_vector." << endl;  /* LDF 2022.01.14.  */
+        }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ***** (5) @>
+
+        r.connector_type_vector.push_back(create_new<Connector_Type>(*iter));
+
+@q ***** (5) @>
+
+        if (i > 20)
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           {
+              cerr << "In `Path::append':" << endl 
+                   << "`i' == " << i << " > 20.  Breaking" << endl;
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+           break;
+
+        }
+
+@q ***** (5) @>
+
+        else
+        {
+#if DEBUG_COMPILE
+           if (DEBUG)
+           {
+              cerr << "In `Path::append':" << endl 
+                   << "`i' == " << i << " <= 20.  Not breaking" << endl;
+
+           }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+        }
+
+@q ***** (5) @>
+ 
+        ++i;
+
+@q ***** (5) @>
+
+   } /* |for| */
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
 
    while (r.connector_type_vector.size() >= r.points.size())
    {
@@ -5077,9 +5194,215 @@ Now removing excess connectors.
   if (assign == true)
     *this = r;
 
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "Exiting `Path::append' with return value `Path r'." << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
   return r;
 
 } /* End of |Path::append| definition.  */
+
+@q * (1) Replace connectors.  @>
+@ Replace connectors.
+\initials{LDF 2022.04.05.}
+
+\LOG
+\initials{LDF 2022.04.05.}
+Added this function.
+
+\initials{LDF 2022.04.06.}
+Added the optional arguments |int start|, |int end| and |Scanner_Node scanner_node|.
+\ENDLOG 
+
+@<Declare |Path| functions@>=
+int
+replace_connectors(string s = "..", int start = 0, int end = -1, bool expand = 0, Scanner_Node scanner_node = 0);
+
+@q ** (2) Definition  @>
+@
+@<Define |Path| functions@>=
+int
+Path::replace_connectors(string s, int start, int end, bool expand, Scanner_Node scanner_node)
+{
+
+/* !!START HERE:  !! TODO:  Add error handling for the case that |start| and |end| are
+   outside the range of |connector_type_vector|!  
+   LDF 2022.04.06.
+  
+   Try using |subpath|. See if it works using |controls| and/or using MP to
+   generate it.
+
+ */ 
+
+#if DEBUG_COMPILE
+ 
+   bool DEBUG = false; /* |true| */ 
+
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::replace_connectors'."
+            << endl 
+            << "`string s' == " << s 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   if (start < 0)
+   {
+      start = 0;
+   }
+
+   if (end < 0)
+   {
+      end = points.size() - 1;  /* Replace connectors from |start| to |end| {\it inclusive}.
+                                   \initials{LDF 2022.04.06.}  */ 
+   }
+
+   if (start > end)
+   {
+       cerr << "WARNING!  In `Path::replace_connectors':"
+            << endl 
+            << "`int start' > `int end':"
+            << endl 
+            << "`int start' == " << start << "."
+            << endl 
+            << "`int end'   == " << end << "."
+            << endl
+            << "Exchanging values."
+            << endl;
+
+       int i = start;
+       start = end;
+       end = i;
+   }
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "In `Path::replace_connectors':"
+            << endl 
+            << "`int start' == " << start << "."
+            << endl 
+            << "`int end'   == " << end << "."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   Connector_Type c;
+
+   if (!(s == ".." || s == "..." || s == "--" || s == "---" || s == "&"))
+   {
+      cerr << "ERROR!  In `Path::replace_connectors':  `string s' is invalid:"
+           << endl 
+           << "`s' == " << s << "." << endl
+           << "Not replacing connectors.  Exiting function unsuccessfully with return value 1."
+           << endl;
+
+      return 1;
+   }
+
+   c.connector_string = s;
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if 0 
+   cerr << "expand == " << expand << endl;
+   cerr << "Before loop:";
+   cerr << "points.size() == " << points.size() << endl;
+   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+#endif 
+
+   if (expand)
+   {
+
+      for (int i = connector_type_vector.size(); i < points.size(); ++i)
+      {
+          
+          connector_type_vector.push_back(create_new<Connector_Type>(0)); 
+      }      
+
+   }  /* if (expand) */
+ 
+#if 0
+   cerr << "After loop:";
+   cerr << "points.size() == " << points.size() << endl;
+   cerr << "connector_type_vector.size() == " << connector_type_vector.size() << endl;
+#endif
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   vector<Connector_Type*>::iterator iter = connector_type_vector.begin();
+
+   int i = 0;
+
+   while (i < start)
+   {
+      ++iter;
+      ++i;
+   }
+
+#if 0 
+   cerr << "i == " << i << endl;
+   cerr << "(iter != connector_type_vector.end()) == " << (iter != connector_type_vector.end()) << endl;
+#endif 
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   for (; i <= end && iter != connector_type_vector.end(); ++i)
+   {
+
+#if 0
+      cerr << "Replacing connector " << i << "." << endl;
+#endif 
+
+      **iter = c;
+
+#if DEBUG_COMPILE
+      if (DEBUG)
+      { 
+          cerr << "In `Path::replace_connectors':  After replacement:" << endl;
+          (**iter).show();
+      }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+      ++iter;
+
+   } /* |for|  */
+
+@q ** (2) @>
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::replace_connectors' successfully with return value 0."
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   return 0;
+
+} /* End of |Path::replace_connectors| definition  */
+
+
+
+
 
 @q * (1) |Plane| functions.@> 
 @ {\bf Plane} functions.
@@ -9971,6 +10294,59 @@ Path::show(string text, char coords,
            Focus* f, const unsigned short proj,
            const real factor) const
 {
+@q ** (2) @>
+
+
+
+#if DEBUG_COMPILE
+
+   bool DEBUG = false; /* |true| */ 
+
+   if (DEBUG)
+   { 
+       cerr << "Entering `Path::show'." << endl;
+
+
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+@q ** (2) @>
+
+   int show_connectors_option = false;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+        cerr << "show_connectors_option == " << show_connectors_option << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   bool quiet              = show_connectors_option & 1U;
+   bool verbose            = show_connectors_option & 2U;
+   int with_connectors_val = 0;
+
+   if (show_connectors_option & 16U)
+      with_connectors_val = 3;
+   else if (show_connectors_option & 8U)
+      with_connectors_val = 2;
+   else if (show_connectors_option & 4U)
+      with_connectors_val = 1;
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "In `Path::show':" << endl
+           << "`quiet'               == " << quiet << endl 
+           << "`verbose'             == " << verbose << endl 
+           << "`with_connectors_val' == " << with_connectors_val << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@;    
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
    if (text == "")
      text = "Path:";
 
@@ -10002,8 +10378,6 @@ Path::show(string text, char coords,
    v.resize(4, 0);  /* LDF 2002.12.13.  Added this line.  Needed 
                        for porting to Intel Linux (i686).  */
    
-   vector <Connector_Type*> ::const_iterator connector_type_iter = connector_type_vector.begin();
-
    cerr << "type:  " << Shape::type_name_map[get_shape_type()] << endl;
    cerr << "surface_hiding_ctr:  " << surface_hiding_ctr << endl;
 
@@ -10024,22 +10398,19 @@ Path::show(string text, char coords,
    else 
       cerr << "points is empty.  Not showing." << endl;
 
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   vector<Connector_Type*>::const_iterator c_iter = connector_type_vector.begin();
+
+   int i = 0;
+
    for(vector <Point*>::const_iterator points_iter = points.begin();
        points_iter != points.end();
        ++points_iter)
    {
-
-     if (points_iter != points.begin())
-       {
-         cerr << " " << connector_string << " ";
-       }
-
-
-     if (connector_type_iter != connector_type_vector.end())
-     {
-         connector_string = (*connector_type_iter)->connector_string;
-         ++connector_type_iter;
-     }
+@q *** (3) @>
 
      if (loop_ctr == 2) /* Break each line after 2 |Points|.  */
      {
@@ -10051,25 +10422,183 @@ Path::show(string text, char coords,
      v = (**points_iter).get_all_coords(coords, do_persp, do_apply,
                                         f, proj, factor);
      
-     cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
+     cerr << "(" << v[0] << ", " << v[1] << ", " << v[2] << ") ";
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
+     if (c_iter != connector_type_vector.end())
+     {
+@q **** (4) Controls Type.  @>
+
+@ Controls Type.  
+\initials{LDF 2022.04.06.}
+
+@<Define |Path| functions@>=
+
+         if ((*c_iter)->type0 == Connector_Type::CONTROLS_TYPE)
+         {
+@q ***** (5) @>
+
+            if (with_connectors_val < 3)
+            {
+@q ****** (6) @>
+
+               if ((*c_iter)->pt0 != 0 && (*c_iter)->pt1 != 0)
+                  cerr << "..CC.. ";
+
+@q ****** (6) @>
+
+               else if ((*c_iter)->pt0 != 0 && (*c_iter)->pt1 == 0)
+                  cerr << "..C.. ";
+@q ****** (6) @>
+
+               else
+               {
+                  cerr << "WARNING!  In `Path::show':" << endl
+                       << "`Connector_Type' " << i << " is of type `CONTROLS_TYPE' but "
+                       << "`Point *pt0' and `Point *pt1' are both NULL."
+                       << endl
+                       << "This shouldn't be possible.  Continuing."
+                       << endl;
+ 
+                  cerr << "..CC.. ";
+               }
+@q ****** (6) @>
+              
+            }  /* |if (with_connectors_val < 3)|  */
+
+@q ***** (5) @>
+@
+@<Define |Path| functions@>=
+
+            else if (with_connectors_val >= 3)
+            {
+@q ****** (6) @>
+
+               if ((*c_iter)->pt0 != 0 && (*c_iter)->pt1 != 0)
+                  cerr << ".. controls (" << (*c_iter)->pt0->get_x() << ", "
+                       << (*c_iter)->pt0->get_y() << ", " << (*c_iter)->pt0->get_z()
+                       << ") and (" << (*c_iter)->pt1->get_x() << ", "
+                       << (*c_iter)->pt1->get_y() << ", " << (*c_iter)->pt1->get_z()
+                       << ") .. ";
+
+@q ****** (6) @>
+
+               else if ((*c_iter)->pt0 != 0 && (*c_iter)->pt1 == 0)
+                  cerr << ".. controls (" << (*c_iter)->pt0->get_x() << ", "
+                       << (*c_iter)->pt0->get_y() << ", " << (*c_iter)->pt0->get_z()
+                       << ") .. ";
+
+@q ****** (6) @>
+
+               else if ((*c_iter)->pt0 == 0 && (*c_iter)->pt1 != 0)
+               {
+                  cerr << "WARNING!  In `Path::show':" << endl
+                       << "`Connector_Type' " << i << " is of type `CONTROLS_TYPE' but "
+                       << "`Point *pt0' is NULL and `Point *pt1' is non-NULL."
+                       << endl
+                       << "This shouldn't be possible.  Continuing."
+                       << endl;
+
+                  cerr << ".. controls (" << (*c_iter)->pt1->get_x() << ", "
+                       << (*c_iter)->pt1->get_y() << ", " << (*c_iter)->pt1->get_z()
+                       << ") .. ";
+               }
+
+
+@q ****** (6) @>
+
+               else if ((*c_iter)->pt0 == 0 && (*c_iter)->pt1 == 0)
+               {
+                  cerr << "WARNING!  In `Path::show':" << endl
+                       << "`Connector_Type' " << i << " is of type `CONTROLS_TYPE' but "
+                       << "`Point *pt0' and `Point *pt1' are both NULL."
+                       << endl
+                       << "This shouldn't be possible.  Continuing."
+                       << endl;
+
+                  cerr << ".. controls NULL and NULL .. ";
+
+               }
+
+@q ****** (6) @>
+
+            } /* |else if (with_connectors_val >= 3)| */
+
+@q ***** (5) @>
+
+         }  /* |if ((*c_iter)->type0 == Connector_Type::CONTROLS_TYPE)|  */
+
+@q **** (4) @>
+@
+@<Define |Path| functions@>=
+
+         else if ((*c_iter)->type0 == Connector_Type::PLAIN_TYPE)
+         {
+@q ***** (5) @>
+
+             if ((*c_iter)->connector_string != "")
+                cerr << (*c_iter)->connector_string << " ";
+             else
+                cerr << ".. ";
+
+@q ***** (5) @>
+
+         }  /* |else if ((*c_iter)->type0 == Connector_Type::PLAIN_TYPE)| */
+
+
+@q **** (4) @>
+
+#if 0
+#if DEBUG_COMPILE
+         if (DEBUG)
+         { 
+             cerr << endl << "Connector " << i << ":" << endl;
+
+             (*c_iter)->show();
+
+         }    
+#endif /* |DEBUG_COMPILE|  */@; 
+#endif 
+         ++c_iter;
+
+     } /* |if (c_iter != connector_type_vector.end())| */
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
+     ++i;
+
+@q *** (3) @>
 
    }  /* |for|  */
 
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
    if (cycle_switch)
    {
-      cerr << " ";
-
-      if (connector_type_iter != connector_type_vector.end())
-        cerr << (*connector_type_iter)->connector_string;
+#if 0 
+      if (c_iter != connector_type_vector.end())
+        cerr << (*c_iter)->connector_string;
       else if (connector_type_vector.size() > 0)
         cerr << connector_type_vector.back()->connector_string;
       else 
         cerr << "--";
+#endif
 
-      cerr << " cycle";
+      cerr << "cycle";
    }
 
    cerr << ";" << endl;
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
 
    cerr << "fill_draw_value == ";
 
@@ -10132,6 +10661,10 @@ Path::show(string text, char coords,
    if (connector_type_vector.size() > 0)
       cerr << "connector_type_vector:" << endl;
 
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
 #if 0
    for (vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
         iter != connector_type_vector.end();
@@ -10142,6 +10675,18 @@ Path::show(string text, char coords,
 #endif 
 
    cerr << endl;
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "Exiting `Path::show' successfully with a void return value." 
+            << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
 
   return;
 
@@ -14643,7 +15188,7 @@ Added this section.
            *this += "..";
         }
 
-        this->append(q_middle, "&");
+        append(q_middle, "&");
 
         if (q_middle.get_last_point() != q_end.get_point(0))
         {
@@ -14651,7 +15196,7 @@ Added this section.
            *this += "..";
         }
 
-        this->append(q_end, "&");
+        append(q_end, "&");
 
 @q ***** (5) @>
 
@@ -14677,13 +15222,23 @@ Added this section.
         }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
+cerr << "Error after here 0." << endl; 
+
         *this = q_begin;
 
-        this->append(q_middle, "..");
+cerr << "Error after here 1." << endl; 
 
-        this->append(q_end, "..");
+        append(q_middle, "..");
+
+cerr << "Error after here 2." << endl; 
+
+        append(q_end, "..");
+
+cerr << "Error after here 3." << endl; 
 
      } /* |else| */
+
+cerr << "Error after here 4." << endl; 
 
 @q **** (4) @>
 @
@@ -14803,10 +15358,13 @@ show_connectors(int first, int last = 0, string s = "", Scanner_Node scanner_nod
 @q *** (3) Definition @>
 @
 @<Define |Path| functions@>=
+@q * (1) Show connectors. @>
+@
+@<Define |Path| functions@>=
 void
-Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) const
+Path::show_connectors(int start, int end, string s, Scanner_Node scanner_node) const
 {
-@q **** (4) @>
+@q ** (2) @>
 
    bool DEBUG = false; /* |true| */ 
 
@@ -14814,17 +15372,139 @@ Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) 
    if (DEBUG)
    { 
        cerr << "Entering `Path::show_connectors'." << endl
-            << "`first' == " << first << endl
-            << "`last'  == " << last << endl;
+            << "`connector_type_vector.size()' == " << connector_type_vector.size()
+            << endl 
+            << "`start' == " << start << endl
+            << "`end'   == " << end << endl;
    }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-@q **** (4) @>
+@q ** (2) @>
 @
 @<Define |Path| functions@>=
-       
+ 
+   if (connector_type_vector.size() == 0)
+   {
+       cerr << "No connectors." << endl;
+       return;
+   }
 
-@q **** (4) @>
+@q ** (2) @>
+
+   if (start < 0)
+   {
+       cerr << "WARNING!  In `Path::show_connectors':  `int start' == " << start << " (< 0)"
+            << endl 
+            << "Invalid value.  Setting `start' to 0 and continuing." << endl;
+
+       start = 0;
+   }         
+
+@q ** (2) @>
+
+@ Reset the values for |start| and |end|, if necessary.  The connectors are shown from |start| 
+to |end| {\it inclusive}. 
+\initials{LDF 2022.04.06.}
+
+@<Define |Path| functions@>=
+
+@q *** (3) @>
+
+@ This check has to be done first because when comparing with |connector_type_vector.size()|, 
+$-1$ is interpreted as a large positive number.  I could prevent this by using a cast but it's 
+easier just to put this comparison first.
+\initials{LDF 2022.04.06.}
+
+@<Define |Path| functions@>=
+
+   if (end == -1)
+      end = connector_type_vector.size() - 1;  
+
+@q *** (3) @>
+
+   else if (end < 0)
+   {
+       cerr << "WARNING!  In `Path::show_connectors':  `int end' == " << end << " (< 0)"
+            << endl 
+            << "Invalid value." << endl 
+            << "Setting `end' to `connector_type_vector.size() - 1' == "
+            << (connector_type_vector.size() - 1) << " and continuing." << endl;
+
+       end = connector_type_vector.size() - 1;
+   }
+
+@q *** (3) @>
+@
+@<Define |Path| functions@>=
+
+   if (end >= connector_type_vector.size())
+   { 
+#if DEBUG_COMPILE
+       if (DEBUG)
+       {
+          cerr << "In `Path::show_connectors':  `int end' >= `connector_type_vector.size()':" << endl 
+               << "`end' == " << end << ", `connector_type_vector.size()' == " << connector_type_vector.size()
+               << endl 
+               << "Setting `end' to `connector_type_vector.size()' - 1." << endl;
+       }
+#endif /* |DEBUG_COMPILE|  */@; 
+
+       end = connector_type_vector.size() - 1;
+   }  
+
+@q *** (3) @>
+
+
+
+
+@q *** (3) @>
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+   if (start > end)
+   {
+       int i = start;
+
+       cerr << "WARNING!  In `Path::show_connectors':  `int start' is greater than `int end':"
+            << endl 
+            << "`start' == " << start << ", `end' == " << end << endl 
+            << "Exchanging values and continuing." << endl;
+
+       start = end;
+       end = i;
+   }
+
+@q ** (2) @>
+@
+@<Define |Path| functions@>=
+
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+       cerr << "In `Path::show_connectors':  `start' == " << start << ", `end' == " << end << endl; 
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+   int i = 0;
+
+   vector<Connector_Type*>::const_iterator iter = connector_type_vector.begin();
+
+   while (i < start)
+   {
+      ++iter;
+      ++i;
+   }
+
+   for (; (i <= end && iter != connector_type_vector.end());++iter)
+   {
+      (*iter)->show();
+      ++i;
+   }
+   
+
+@q ** (2) @>
 @
 @<Define |Path| functions@>=
 
@@ -14838,7 +15518,12 @@ Path::show_connectors(int first, int last, string s, Scanner_Node scanner_node) 
 
    return;
 
+@q ** (2) @>
+
 }  /* End of |Path::show_connectors| definition  */
+
+
+
 
 @q ** (2) Reset connectors.  @>
 @ Reset connectors.
