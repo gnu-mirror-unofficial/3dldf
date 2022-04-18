@@ -15105,7 +15105,12 @@ Path::resolve(int begin,
 
 @q **** (4) @>
 
-     /* !!START HERE:  LDF 2022.04.18.  This doesn't work.  */
+     /* !!START HERE:  LDF 2022.04.18.  This doesn't work.  
+        It seems to work when the numbers for the subpath are 
+        far enough apart, but it doesn't really work.
+
+        I have to output the whole path and use MP to find the subpath.
+     */
 
      status = q_middle.resolve(res_val, scanner_node, do_unlink, false);
 
