@@ -1,0 +1,94 @@
+beginchar("A", 10, 20, 30); %% Don't use units for `wd', `ht' and `dp'!
+                            %% LDF 2022.04.18.
+endchar;
+end;
+
+verbatim_metapost "abc;";
+verbatim_tex "def";  %% PLEASE NOTE!  3dldf inserts a ';' after 'etex', so don't include one
+                     %% in the string, unless it's desired.
+                     %% LDF 2022.04.18.
+
+verbatim_metafont "ghi;";
+
+end;
+
+
+path q[];
+
+beginfig(1);
+  q0 := (1, 1) -- (2, 2);
+  draw q0;
+  show current_picture;
+endfig with_projection parallel_x_y;
+
+show current_picture;
+
+beginfig(2);
+  show q0;
+  draw q0;
+  show current_picture;
+  end;
+
+endfig;  
+
+end;
+
+
+show current_picture;
+message "After fig. 1:  current_picture (above).";
+%pause;
+
+%show q0;
+
+%show q0;
+%message "q0 (above)";
+%pause;
+
+
+
+beginfig(2);
+  message "After beginfig 2.";
+
+  
+  q1 := (10, 10) -- (20, 20);
+
+  show current_picture;
+
+
+
+  message "In fig. 2, before draw:  current_picture (above).";
+  %pause;
+
+
+  message "Before draw in fig. 2.";
+  
+  draw q1;
+
+  message "After draw in fig. 2.";
+
+
+  show current_picture;
+  message "In fig. 2, after draw:  current_picture (above).";
+
+
+%pause;
+  
+endfig with_projection parallel_x_y;
+
+end;
+
+%show current_picture;
+%message "After fig. 2:  current_picture (above).";
+%pause;
+
+end;
+
+%% * (1) End of 3DLDF code
+
+%% * (1) Local variables for Emacs
+
+%% Local Variables:
+%% mode: MetaPost
+%% eval:(outline-minor-mode t)
+%% outline-regexp:"%% [*\f]+"
+%% End:
