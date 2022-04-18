@@ -5660,12 +5660,14 @@ Scanner_Type::clear_current_picture_func(void)
       cerr_strm << "Entering `Scanner_Type::clear_current_picture_func'.";
       cerr_message(cerr_strm);
       cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
     }
 #endif /* |DEBUG_COMPILE|  */@;
 
-    return 0; /* !!START HERE:  LDF 2022.04.18.   Testing */
-
-       Id_Map_Entry_Node current_picture_entry = lookup("current_picture");
+    Id_Map_Entry_Node current_picture_entry = lookup("current_picture");
 
 @q ***** (5) Error handling:  |current_picture| not found.@>
 
@@ -5754,7 +5756,7 @@ This is just for insurance.  No other threads should be able to access |current_
 
 @<Define |Scanner_Type| functions@>=
 
-#if 0 /* !!START HERE:  LDF 2022.04.18.  Testing.  */ 
+#if 1 /* !!START HERE:  LDF 2022.04.18.  Testing.  */ 
 
 
    static_cast<Picture*>(current_picture_entry->object)->clear();
@@ -5803,6 +5805,9 @@ This is just for insurance.  No other threads should be able to access |current_
 
        cerr_message(cerr_strm);
        cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    }
 #endif /* |DEBUG_COMPILE|  */@;
