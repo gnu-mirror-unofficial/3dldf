@@ -46,19 +46,23 @@ beginfig(1);
 
   draw q0;
   
-  resolve q0 (0, 1) to 5 with_no_transform;
+  resolve q0 to 20 save with_no_transform;
 
   n := size q0;
   message "n == " & decimal n;
   pause;
 
 
-  for i = 0 upto 5:
-    p[10] := get_point (i) q0;
+  for i = 0 upto 10:
+    p[i+10] := get_point (i) q0;
   endfor;
 
   dotlabel.rt("$p_{10}$", p10) with_color red;
-  dotlabel.rt("$p_{10}$", p10) with_color red;
+  dotlabel.rt("$p_{11}$", p11) with_color red;
+  dotlabel.rt("$p_{12}$", p12) with_color red;
+  dotlabel.rt("$p_{13}$", p13) with_color red;
+  dotlabel.rt("$p_{14}$", p14) with_color red;
+  dotlabel.rt("$p_{15}$", p15) with_color red;
   
 endfig with_projection parallel_x_y;
 

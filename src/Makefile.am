@@ -1895,6 +1895,16 @@ alhambra_207_original.ps: alhambra_207_original.dvi
 alhambra_207_original.dvi: alhambra_207_original.tex alhambra_207_original.eps
 	tex alhambra_207_original.tex
 
+.PHONY: atemp
+
+atemp: atemp001.eps
+
+atemp.mp: atemp.ldf 3dldf$(EXEEXT)
+	LDF_ASTRONOMY=0 LDF_DATABASE=0 3dldf$(EXEEXT) atemp.ldf
+
+atemp001.eps: atemp.mp
+	mpost -numbersystem "double" atemp.mp
+
 .PHONY: purge-s
 
 purge-s:
