@@ -9651,8 +9651,8 @@ log_message(cerr_strm);
 
 }  /* |Scan_Parse::for_suffixes_internal_func|  */
 
-@q ** (2) |verbatim_metapost_func|.@>
-@*1 {\bf verbatim\_metapost\_func}.
+@q ** (2) |verbatim_func|.@>
+@*1 {\bf verbatim\_func}.
 
 \LOG
 \initials{LDF 2004.12.13.}
@@ -9664,8 +9664,7 @@ Added this function.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node, 
-                                   const string* s)
+Scan_Parse::verbatim_func(Scanner_Node scanner_node, const string* s)
 {
 
 @q ***** (5) Preliminaries.@>   
@@ -9693,7 +9692,7 @@ Scan_Parse::verbatim_metapost_func(Scanner_Node scanner_node,
   if (DEBUG)
     {
       cerr_strm << thread_name
-                << "Entering `Scan_Parse::verbatim_metapost_func'."
+                << "Entering `Scan_Parse::verbatim_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -9731,7 +9730,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (DEBUG)
     {
 
-      cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func':"
+      cerr_strm << thread_name << "In `Scan_Parse::verbatim_func':"
                 << endl
                   << "About to call `scanner_node->output_pending.lock()'.";
       cerr_message(cerr_strm);
@@ -9751,7 +9750,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (status != 0)
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
+                    << "ERROR! In `Scan_Parse::verbatim_func':"
                     << endl
                     << "`scanner_node->output_pending.lock()' failed. "
                     << "Not writing to output file."
@@ -9778,7 +9777,7 @@ and increment |scanner_node->output_pending.value_1|.
           if (DEBUG)
             {
               cerr_strm << thread_name 
-                        << "In `Scan_Parse::verbatim_metapost_func':"
+                        << "In `Scan_Parse::verbatim_func':"
                         << endl 
                         << "`scanner_node->output_pending.lock()' succeeded!";
 
@@ -9802,7 +9801,7 @@ and increment |scanner_node->output_pending.value_1|.
         {
 
           cerr_strm << thread_name 
-                    << "In `Scan_Parse::verbatim_metapost_func':"
+                    << "In `Scan_Parse::verbatim_func':"
                     << endl << "Output pending.  Going to sleep.";
 
           log_message(cerr_strm); 
@@ -9828,7 +9827,7 @@ and increment |scanner_node->output_pending.value_1|.
   if (status == ETIMEDOUT)
     {
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::verbatim_metapost_func':" 
+                << "ERROR! In `Scan_Parse::verbatim_func':" 
                 << endl
                 << "`scanner_node->output_pending.timedwait(&timeout)' "
                 << "timed out after " << timeout.tv_sec << "seconds." 
@@ -9859,7 +9858,7 @@ and increment |scanner_node->output_pending.value_1|.
     {
 
       cerr_strm << thread_name 
-                << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
+                << "ERROR! In `Scan_Parse::verbatim_func':"
                 << endl << "`scanner_node->output_pending.timedwait()' failed. "
                 << "Not performing output." << endl << "Will try to unlock "
                 << "`scanner_node->output_pending' and "
@@ -9880,7 +9879,7 @@ and increment |scanner_node->output_pending.value_1|.
      {
 
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::verbatim_metapost_func':"
+                 << "In `Scan_Parse::verbatim_func':"
                  << endl << "`scanner_node->output_pending.timedwait()' "
                  << "succeeded.";
 
@@ -9897,7 +9896,7 @@ and increment |scanner_node->output_pending.value_1|.
             {
 
               cerr_strm << thread_name 
-                        << "`Scan_Parse::verbatim_metapost_func':"
+                        << "`Scan_Parse::verbatim_func':"
                         << endl << "Output not pending. "
                         << "Setting `output_pending->value' to `true' "
                         << "and continuing.";
@@ -9952,7 +9951,7 @@ and increment |scanner_node->output_pending.value_1|.
       if (status != 0)
         {
           cerr_strm << thread_name 
-                    << "ERROR! In `Scan_Parse::verbatim_metapost_func':"
+                    << "ERROR! In `Scan_Parse::verbatim_func':"
                     << endl
                     << "`scanner_node->output_pending.unlock()' failed. "
                     << "Exiting function with return value 1.";
@@ -9976,7 +9975,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
           if (DEBUG)
             {
-              cerr_strm << thread_name << "In `Scan_Parse::verbatim_metapost_func':"
+              cerr_strm << thread_name << "In `Scan_Parse::verbatim_func':"
                         << endl
                         << "`scanner_node->output_pending.unlock()' succeeded!";
               cerr_message(cerr_strm);
@@ -10007,7 +10006,7 @@ and increment |scanner_node->output_pending.value_1|.
    if (DEBUG)
      {
        cerr_strm << thread_name 
-                 << "In `Scan_Parse::verbatim_metapost_func':"
+                 << "In `Scan_Parse::verbatim_func':"
                  << endl << "Non-multithreaded output.";
        
        log_message(cerr_strm);
@@ -10040,7 +10039,7 @@ and increment |scanner_node->output_pending.value_1|.
 #if DEBUG_COMPILE
   if (DEBUG)
     {
-      cerr_strm << "Exiting `Scan_Parse::verbatim_metapost_func'."
+      cerr_strm << "Exiting `Scan_Parse::verbatim_func'."
                 << endl;
       cerr_message(cerr_strm);
       cerr_strm.str("");
@@ -10050,8 +10049,7 @@ and increment |scanner_node->output_pending.value_1|.
 
   return 0;
 
-}  /* End of |Scan_Parse::verbatim_metapost_func|
-     definition.  */
+}  /* End of |Scan_Parse::verbatim_func| definition.  */
 
 @q ** (2) |end_group_func|.@>
 @*1 {\bf end\_group\_func}.

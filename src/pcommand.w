@@ -573,6 +573,8 @@ Added this rule.
 @=command: VERBATIM_METAPOST string_expression@>@/
 {
 
+   @<Common declarations for rules@>@; 
+
    string* s = static_cast<string*>(@=$2@>); 
 
 @q **** (4) Error handling:  |s == 0|.@>   
@@ -583,10 +585,10 @@ Added this rule.
 @<Define rules@>=
 
    if (s == static_cast<string*>(0))
-      {
-          @=$$@> = static_cast<void*>(0);
+   {
+       @=$$@> = static_cast<void*>(0);
 
-      } /* |s == 0|  */
+   } /* |s == 0|  */
 
 @q **** (4) |s != 0|.@>   
 
@@ -596,31 +598,28 @@ Added this rule.
 @<Define rules@>=
 
    else /* |s != 0|  */
-      {
-         int status = verbatim_metapost_func(static_cast<Scanner_Node>(parameter), s);
+   {
+         int status = verbatim_func(static_cast<Scanner_Node>(parameter), s);
 
-@q ***** (5) Error handling:  |verbatim_metapost_func| failed.@>   
+@q ***** (5) Error handling:  |verbatim_func| failed.@>   
 
-@ Error handling:  |verbatim_metapost_func| failed.
+@ Error handling:  |verbatim_func| failed.
 \initials{LDF 2004.12.13.}
 
 @<Define rules@>=
  
          if (status != 0)
          {
-
-#if 0 
                 cerr_strm << thread_name 
                           << "ERROR!  In `yyparse()', rule "
                           << "`verbatim_metapost_command "
                           << "--> VERBATIM_METAPOST string_expression':"
-                          << endl << "`verbatim_metapost_func()' failed.  "
+                          << endl << "`verbatim_func' failed.  "
                           << "Will try to continue.";
 
                 log_message(cerr_strm); 
                 cerr_message(cerr_strm, error_stop_value); 
                 cerr_strm.str("");
-#endif 
 
          } /* |if (status != 0)|  */
 
@@ -635,7 +634,6 @@ Added this rule.
    }   /* |else| (|s != 0|)  */  
 
 };
-
 
 @q **** (4) command --> PLOT STARS sphere_expression stars_option_list @>
 
