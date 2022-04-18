@@ -641,6 +641,21 @@ Added this rule.
 
    @<Common declarations for rules@>@; 
 
+#if DEBUG_COMPILE
+   DEBUG = true; /* |false| */ 
+   if (DEBUG)
+   { 
+      cerr_strm << "*** Parser: `command: verbatim_command string_expression."
+                << endl 
+                << "`verbatim_command' == $1 == " << @=$1@> << endl;
+
+      log_message(cerr_strm);
+      cerr_message(cerr_strm);
+      cerr_strm.str("");
+
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
    string* s = static_cast<string*>(@=$2@>); 
 
 @q **** (4) Error handling:  |s == 0|.@>   

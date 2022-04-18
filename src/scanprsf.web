@@ -9664,7 +9664,7 @@ Added this function.
 @
 @<Define |Scan_Parse| functions@>=
 int
-Scan_Parse::verbatim_func(Scanner_Node scanner_node, const string* s)
+Scan_Parse::verbatim_func(Scanner_Node scanner_node, const string* s, int verbatim_command_arg)
 {
 
 @q ***** (5) Preliminaries.@>   
@@ -9693,7 +9693,9 @@ Scan_Parse::verbatim_func(Scanner_Node scanner_node, const string* s)
     {
       cerr_strm << thread_name
                 << "Entering `Scan_Parse::verbatim_func'."
-                << endl;
+                << endl
+                << "`verbatim_command_arg' == " << verbatim_command_arg;
+
       cerr_message(cerr_strm);
       cerr_strm.str("");
     }
@@ -9923,8 +9925,25 @@ and increment |scanner_node->output_pending.value_1|.
    scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
   
-     *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
-           << *s << endl << flush;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "(verbatim_command_arg == VERBATIM_METAPOST_COMMAND) == " 
+           << (verbatim_command_arg == VERBATIM_METAPOST_COMMAND) << endl
+           << "(verbatim_command_arg == VERBATIM_TEX_COMMAND) == " 
+           << (verbatim_command_arg == VERBATIM_TEX_COMMAND) << endl
+           << "(verbatim_command_arg == VERBATIM_METAFONT_COMMAND) == " 
+           << (verbatim_command_arg == VERBATIM_METAFONT_COMMAND) << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+     if (verbatim_command_arg == VERBATIM_METAPOST_COMMAND)
+        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+     else if (verbatim_command_arg == VERBATIM_TEX_COMMAND)
+        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << "verbatimtex " << *s << " etex;" 
+                                                                 << endl << flush;
+     else if (verbatim_command_arg == VERBATIM_METAFONT_COMMAND)
+        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
 
 #ifdef HAVE_PTHREAD_H  
    scanner_node->out[Run_State::METAPOST_RS]->unlock();
@@ -10020,8 +10039,26 @@ and increment |scanner_node->output_pending.value_1|.
    scanner_node->out[Run_State::METAPOST_RS]->lock();
 #endif /* |HAVE_PTHREAD_H|  */@; 
   
-     *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) 
-           << *s << endl << flush;
+#if DEBUG_COMPILE
+   if (DEBUG)
+   { 
+      cerr << "(verbatim_command_arg == VERBATIM_METAPOST_COMMAND) == " 
+           << (verbatim_command_arg == VERBATIM_METAPOST_COMMAND) << endl
+           << "(verbatim_command_arg == VERBATIM_TEX_COMMAND) == " 
+           << (verbatim_command_arg == VERBATIM_TEX_COMMAND) << endl
+           << "(verbatim_command_arg == VERBATIM_METAFONT_COMMAND) == " 
+           << (verbatim_command_arg == VERBATIM_METAFONT_COMMAND) << endl;
+   }  
+#endif /* |DEBUG_COMPILE|  */@; 
+
+     if (verbatim_command_arg == VERBATIM_METAPOST_COMMAND)
+        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+     else if (verbatim_command_arg == VERBATIM_TEX_COMMAND)
+        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << "verbatimtex " << *s << " etex;" 
+                                                                 << endl << flush;
+     else if (verbatim_command_arg == VERBATIM_METAFONT_COMMAND)
+        *(scanner_node->out[Run_State::METAPOST_RS]->stream_ptr) << *s << endl << flush;
+
 
 #ifdef HAVE_PTHREAD_H  
    scanner_node->out[Run_State::METAPOST_RS]->unlock();
