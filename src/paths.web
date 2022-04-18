@@ -14742,7 +14742,7 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    int status = 0;
 
@@ -14844,7 +14844,6 @@ Path::resolve(int res_val, Scanner_Node scanner_node, bool do_unlink, bool do_tr
 
 } /* End of |Path::resolve| (version 1, for entire path) definition  */
 
-
 @q ** (2) Resolve (2nd version---for subpath).  @>
 @ Resolve (2nd version---for subpath).
 \initials{LDF 2022.01.28.}
@@ -14885,7 +14884,7 @@ Path::resolve(int begin,
 {
 @q **** (4) @>
 
-   bool DEBUG = true; /* |false| */ 
+   bool DEBUG = false; /* |true| */ 
 
    Point p0;
    Point normal;
@@ -15106,6 +15105,8 @@ Path::resolve(int begin,
 
 @q **** (4) @>
 
+     /* !!START HERE:  LDF 2022.04.18.  This doesn't work.  */
+
      status = q_middle.resolve(res_val, scanner_node, do_unlink, false);
 
      if (status != 0)
@@ -15188,7 +15189,7 @@ Added this section.
            *this += "..";
         }
 
-        append(q_middle, "&");
+        this->append(q_middle, "&");
 
         if (q_middle.get_last_point() != q_end.get_point(0))
         {
@@ -15196,7 +15197,7 @@ Added this section.
            *this += "..";
         }
 
-        append(q_end, "&");
+        this->append(q_end, "&");
 
 @q ***** (5) @>
 
@@ -15222,23 +15223,13 @@ Added this section.
         }  
 #endif /* |DEBUG_COMPILE|  */@; 
 
-cerr << "Error after here 0." << endl; 
-
         *this = q_begin;
 
-cerr << "Error after here 1." << endl; 
+        this->append(q_middle, "..");
 
-        append(q_middle, "..");
-
-cerr << "Error after here 2." << endl; 
-
-        append(q_end, "..");
-
-cerr << "Error after here 3." << endl; 
+        this->append(q_end, "..");
 
      } /* |else| */
-
-cerr << "Error after here 4." << endl; 
 
 @q **** (4) @>
 @
@@ -15280,8 +15271,6 @@ cerr << "Error after here 4." << endl;
    return 0;
 
 }  /* End of |Path::resolve| (2nd version) definition  */
-
-
 
 @q ** (2) Show connector.  @>
 @ Show connector.
