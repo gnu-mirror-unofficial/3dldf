@@ -5640,7 +5640,7 @@ Scanner_Type::clear_current_picture_func(void)
 
 #if DEBUG_COMPILE
 
-   bool DEBUG = false; /* |true| */
+   bool DEBUG = true; /* |false| */
 
 #endif /* |DEBUG_COMPILE|  */@;
 
@@ -5662,6 +5662,8 @@ Scanner_Type::clear_current_picture_func(void)
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+    return 0; /* !!START HERE:  LDF 2022.04.18.   Testing */
 
        Id_Map_Entry_Node current_picture_entry = lookup("current_picture");
 
@@ -5752,7 +5754,11 @@ This is just for insurance.  No other threads should be able to access |current_
 
 @<Define |Scanner_Type| functions@>=
 
+#if 0 /* !!START HERE:  LDF 2022.04.18.  Testing.  */ 
+
+
    static_cast<Picture*>(current_picture_entry->object)->clear();
+#endif 
 
 @q ****** (6) Unlock |current_picture_entry|. Exit on error.@>
 

@@ -924,8 +924,6 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
 
   int status;
 
-  Id_Map_Entry_Node current_picture_entry = 0;
-
 @q **** (4).@>
 
 #if DEBUG_COMPILE
@@ -936,6 +934,12 @@ Scan_Parse::beginfig_func(Scanner_Node scanner_node,
       cerr_strm.str("");
     }
 #endif /* |DEBUG_COMPILE|  */@;
+
+  bool local_do_metafont = (metafont_output && (begin_command & Scan_Parse::BEGINCHAR_COMMAND))
+     ? true : false;
+
+  bool local_do_metapost = (metapost_output && (begin_command & Scan_Parse::BEGINFIG_COMMAND))
+     ? true : false;
 
 @q **** (4) Handle the case that the form of output corresponding @>
 @q **** (4) to |begin_command| isn't enabled. @>
@@ -949,8 +953,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>=
 
-   if (   (begin_command == Scan_Parse::BEGINCHAR_COMMAND && !metafont_output)
-       || (begin_command == Scan_Parse::BEGINFIG_COMMAND && !metapost_output)) 
+   if (!(local_do_metafont || local_do_metapost))
    {
 #if DEBUG_COMPILE
        if (DEBUG)
@@ -969,8 +972,8 @@ Added this section.
           else if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
              cerr_strm << "Scan_Parse::BEGINFIG_COMMAND" << endl;
 
-          cerr_strm << "`metafont_output' == " << metafont_output << endl 
-                    << "`metapost_output' == " << metapost_output << endl;
+          cerr_strm << "`local_do_metafont' == " << local_do_metafont << endl 
+                    << "`local_do_metapost' == " << local_do_metapost << endl;
 
           cerr_strm << "This is normal behavior:  these commands are ignored "
                     << "when not performing the corresponding form of output."
@@ -1078,12 +1081,12 @@ Added this section.
   ofstream* out_stream_mf = 0;
   ofstream* out_stream_mp = 0;
 
-  if (metafont_output)
+  if (local_do_metafont)
   {
      os_mf = scanner_node->out[Run_State::METAFONT_RS];
      out_stream_mf  = static_cast<ofstream*>(os_mf->stream_ptr);
   }
-  if (metapost_output)
+  if (local_do_metapost)
   {
      os_mp = scanner_node->out[Run_State::METAPOST_RS];
      out_stream_mp  = static_cast<ofstream*>(os_mp->stream_ptr);
@@ -1274,7 +1277,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>= 
 
-   if (metafont_output)
+   if (local_do_metafont)
    {
 
 #ifdef HAVE_PTHREAD_H  
@@ -1327,7 +1330,7 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   }  /* |if (metafont_output)| */
+   }  /* |if (local_do_metafont)| */
 
 @q **** (4) Try to lock |os_mp->mutex|.@>  
 @ Try to lock |os_mp->mutex|.
@@ -1335,7 +1338,7 @@ Added this section.
 
 @<Define |Scan_Parse| functions@>= 
 
-   if (metapost_output)
+   if (local_do_metapost)
    {
 
 #ifdef HAVE_PTHREAD_H  
@@ -1388,7 +1391,7 @@ Added this section.
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   }  /* |if (metapost_output)| */
+   }  /* |if (local_do_metapost)| */
 
 @q **** (4) Write to |*out_stream|.@>
 @ Write to |*out_stream|.
@@ -1405,7 +1408,7 @@ Added this section.
        }   
 #endif /* |DEBUG_COMPILE|  */@; 
 
-       if (metafont_output)
+       if (local_do_metafont)
           *out_stream_mf << "beginchar(\"" << s << "\", " << wd 
                          << "cm#, " << ht << "cm#, " << dp << "cm#);" 
                          << endl;
@@ -1414,7 +1417,7 @@ Added this section.
 
     if (begin_command == Scan_Parse::BEGINFIG_COMMAND)
     {
-       if (metapost_output)
+       if (local_do_metapost)
           *out_stream_mp << "beginfig(" << fig_num << ");" 
                          << endl;
     }
@@ -1435,10 +1438,10 @@ Replaced the code in this section with a call to
 
       if (*(scanner_node->default_pen) != static_cast<Pen*>(0))
         {
-           if (metafont_output)
+           if (local_do_metafont)
               *out_stream_mf << "pickup " << **(scanner_node->default_pen);
 
-           if (metapost_output)
+           if (local_do_metapost)
               *out_stream_mp << "pickup " << **(scanner_node->default_pen);
                    
         }  /* |if (*(scanner_node->default_pen) != 0)|  */
@@ -1449,7 +1452,7 @@ Replaced the code in this section with a call to
 
 @<Define |Scan_Parse| functions@>= 
 
-   if (metafont_output)
+   if (local_do_metafont)
    {
 
 #ifdef HAVE_PTHREAD_H  
@@ -1484,7 +1487,7 @@ Replaced the code in this section with a call to
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   }  /* |if (metafont_output)| */
+   }  /* |if (local_do_metafont)| */
 
 @q **** (4) Try to unlock |os_mp->mutex|.@>  
 @ Try to unlock |os_mp->mutex|.
@@ -1492,7 +1495,7 @@ Replaced the code in this section with a call to
 
 @<Define |Scan_Parse| functions@>= 
 
-   if (metapost_output)
+   if (local_do_metapost)
    {
 
 #ifdef HAVE_PTHREAD_H  
@@ -1527,7 +1530,7 @@ Replaced the code in this section with a call to
 
 #endif /* |HAVE_PTHREAD_H|  */@; 
 
-   }  /* |if (metapost_output)| */
+   }  /* |if (local_do_metapost)| */
 
 @q **** (4) Set |scanner_node->output_pending.value_0| to |false|, @>  
 @q **** (4) decrement |scanner_node->output_pending.value_1|, and  @>  
@@ -1633,6 +1636,9 @@ Added this section.
 \ENDLOG 
 @<Define |Scan_Parse| functions@>=
 
+#if 0 /* !!START HERE: LDF 2022.04.18.  Testing */ 
+
+
    Id_Map_Entry_Node entry = scanner_node->lookup("current_figure_number", true);
 
    if (entry == 0)
@@ -1657,6 +1663,8 @@ Added this section.
        *static_cast<real*>(entry->object) = fig_num;
    }
 
+#endif 
+
 @q **** (4) Exit function successfully.@>
 @ Exit function successfully.
 @<Define |Scan_Parse| functions@>=
@@ -1667,6 +1675,10 @@ Added this section.
         cerr_strm << "Exiting `Scan_Parse::beginfig_func'.";
         cerr_message(cerr_strm);
         cerr_strm.str("");
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
      }
 #endif /* |DEBUG_COMPILE|  */@; 
 
@@ -2355,6 +2367,8 @@ int
 Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_command_arg)
 {
 
+return 0;  /* !!START HERE:  LDF 2022.04.18.   Testing */ 
+
 @q ***** (5) Get thread information and set |thread_name|.@>
 
 @ Get thread information and set |thread_name|.
@@ -2431,6 +2445,8 @@ Scan_Parse::output_command_func(Scanner_Node scanner_node, unsigned int output_c
                           || output_command_arg & Scan_Parse::METAPOST_OUTPUT_COMMAND))
      ? true : false;
 
+
+
 @q ***** (5) @>
 @
 \LOG
@@ -2453,6 +2469,10 @@ Added this section.
 
        cerr << "Error after here 6." << endl; 
 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
     }
     else
     {
@@ -2464,13 +2484,28 @@ Added this section.
 
        cerr << "Error after here 8." << endl; 
 
+       if (entry == 0)
+          cerr << "entry is NULL." << endl;
+       else if (entry->object == 0)
+          cerr << "entry is non-NULL but entry->object is NULL." << endl;
+       else
+          cerr << "entry and entry->object are both non-NULL." << endl;
+         
        scanner_node->picture_entry_ptr = static_cast<void*>(entry);
 
        cerr << "Error after here 9." << endl; 
 
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
+
+
     }
 
+    return 0; /* /* !!START HERE:  LDF 2022.04.17.  */ 
+
     cerr << "Error after here 10." << endl; 
+
+
 
     if (entry == 0 || entry->object == 0)
     {
@@ -2498,7 +2533,7 @@ Added this section.
 
     cerr << "Error after here 13." << endl; 
 
-    return 0; /* /* !!START HERE:  LDF 2022.04.17.  */ 
+
 
 
 @q ***** (5) Handle the case that the form or forms of output corresponding @>

@@ -49,7 +49,8 @@
 
 @q Laurence.Finston@@gmx.de (@@ stands for a single ``at'' sign.)@>
 
-@q *** (3) command --> BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional. @> 
+@q *** (3) command --> BEGINFIG LEFT_PARENTHESIS numeric_expression RIGHT_PARENTHESIS @>
+@q *** clear_current_picture_optional.                                                @> 
 
 @*2 \§command> $\longrightarrow$ 
 \.{BEGINFIG} \.{LEFT\_PARENTHESIS}' \§numeric expression> 
@@ -107,8 +108,9 @@ possible to use |beginfig| in loops.
    if (scanner_node->beginfig_flag)
    {
        cerr_strm << thread_name 
-          << "WARNING! In parser, rule `command: BEGINFIG LEFT_PARENTHESIS"
-          << "numeric_expression RIGHT_PARENTHESIS clear_current_picture_optional':" 
+          << "WARNING! In parser, rule `command: BEGINFIG LEFT_PARENTHESIS numeric_expression"
+          << endl 
+          << "RIGHT_PARENTHESIS clear_current_picture_optional':" 
           << endl 
           << "`scanner_node->beginfig_flag' == `true'."
           << endl 
@@ -152,7 +154,10 @@ possible to use |beginfig| in loops.
            }       
 #endif /* |DEBUG_COMPILE|  */@; 
 
+#if 1 /* !!START HERE:  LDF 2022.04.18.  Testing.  */ 
+
            scanner_node->clear_current_picture_func();      
+#endif 
 
        } /* |if| */
 
@@ -182,13 +187,26 @@ possible to use |beginfig| in loops.
 
 @q ******* (7) @>
 
+cerr << "Error after here 20." << endl; 
+
       status = Scan_Parse::beginfig_func(scanner_node, i, Scan_Parse::BEGINFIG_COMMAND);
 
+cerr << "Error after here 21." << endl; 
+
       scanner_node->beginfig_flag  = true;
+
+cerr << "Error after here 22." << endl; 
 
    }  /* |else| */
 
 @q ****** (6) @>
+
+cerr << "Error after here 23." << endl; 
+
+cerr << "Exiting beginfig rule." << endl;
+
+cerr << "XXX Enter <RETURN> to continue: ";
+getchar(); 
 
    @=$$@> = static_cast<void*>(0);
 
@@ -254,6 +272,9 @@ Rewrote this rule.  It now calls |output_command_func|.
   
 @=command: ENDFIG with_clause_output_list@>@/
 {
+
+#if 0 /* !!START HERE:  LDF 2022.04.18.   Testing */ 
+
 @q ****** (6) @>
 
    @<Common declarations for rules@>@;
@@ -312,7 +333,6 @@ Rewrote this rule.  It now calls |output_command_func|.
      scanner_node->clear_ptr = static_cast<void*>(c); 
      scanner_node->endfig_ptr  = static_cast<void*>(e); 
 
-#if 1 
 /* !!START HERE:  LDF 2022.04.17.  */ 
 
      cerr << "Error after here 0." << endl; 
@@ -321,17 +341,24 @@ Rewrote this rule.  It now calls |output_command_func|.
 
      cerr << "Error after here 1." << endl; 
 
-#endif 
-
-
-
      scanner_node->beginfig_flag  = false;
+
+     cerr << "Error after here 14." << endl; 
+
   }
+
+     cerr << "Error after here 15." << endl; 
 
 @q ****** (6) @>
 
   @=$$@> = static_cast<void*>(0);
  
+  cerr << "Error after here 16." << endl; 
+
+#endif /* !!START HERE:  LDF 2022.04.18.   Testing */ 
+
+ @=$$@> = static_cast<void*>(0);
+
 };
 
 @*3 \§command> $\longrightarrow$ \.{BEGINCHAR} $\ldots$.
@@ -797,7 +824,7 @@ Added this rule.
 
      status = Scan_Parse::output_command_func(scanner_node, Scan_Parse::ENDCHAR_COMMAND);
 
-     cerr << "Error after here 1." << endl; 
+     cerr << "Error after here 14." << endl; 
 
      scanner_node->beginchar_flag  = false;
 
